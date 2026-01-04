@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+/**
+ * Copyright (c) The Magic , Distributed under the software license
+ */
+
+namespace Dtyq\ApiResponse\Response;
+
+interface ResponseInterface
+{
+    /**
+     * Success response.
+     */
+    public function success(mixed $data): static;
+
+    /**
+     * Error response.
+     */
+    public function error(int $code, string $message, mixed $data = null): static;
+
+    /**
+     * Return structure definition.
+     */
+    public function body(): array;
+}

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 
 namespace Dtyq\FlowExprEngine\Structure\Form;
@@ -17,7 +17,7 @@ use Dtyq\FlowExprEngine\Structure\Structure;
 use Dtyq\FlowExprEngine\Structure\StructureType;
 
 /**
- * 表单组件，采用json-schema规范
+ * Form component, follows JSON-Schema specification
  * https://json-schema.apifox.cn/
  * https://hellosean1025.github.io/json-schema-visual-editor/.
  */
@@ -216,10 +216,10 @@ class Form extends Structure
         if ($this->getType()->isBasic()) {
             $this->value = $value;
         }
-        // 如果是数组要设置value，那么应该检测一下value是否满足条件: 将只允许填写expression并且只有一个fields字段
+        // If setting value for an array, check if value meets the condition: only allow expression with a single fields field
         if ($this->getType()->isComplex()) {
             if (! $value->expressionIsOnlyFields() && ! $value->expressionIsOnlyMethod()) {
-                throw new FlowExprEngineException("[{$this->key}] 使用表达式来作为数组或对象的值，必须以表达式或函数开头");
+                throw new FlowExprEngineException("[{$this->key}] When using an expression as the value of an array or object, it must start with an expression or function");
             }
             $this->value = $value;
         }
@@ -228,7 +228,7 @@ class Form extends Structure
     }
 
     /**
-     * 实际运算的value.
+     * The actual computed value.
      */
     public function getExecuteValue(): ?Value
     {
@@ -264,7 +264,7 @@ class Form extends Structure
     public function setEncryption(?bool $encryption, ?string $encryptionValue): void
     {
         if ($this->type->isBasic()) {
-            // 仅基础类型支持加密
+            // Only basic types support encryption
             $this->encryption = $encryption;
             $this->encryptionValue = $encryptionValue;
         }
@@ -322,10 +322,10 @@ class Form extends Structure
         if ($this->getType()->isArray()) {
             $items = $this->getItems();
             if (! $items) {
-                // 尝试从 properties 中获取
+                // Try to get from properties
                 $items = $this->getProperties()[0] ?? null;
             }
-            // 如果 items 有值，但是是空的对象，那么尝试从 properties 中获取
+            // If items has a value but is an empty object, try to get from properties
             if ($items && $items->getType()->isObject() && empty($items->getProperties())) {
                 $items = $this->getProperties()[0] ?? null;
             }
@@ -374,10 +374,10 @@ class Form extends Structure
                             $array[$key] = $property->getKeyValue($expressionSourceData, $check, $expressionSourceKey, $execExpression);
                         }
                     } else {
-                        // 基础类型
+                        // Basic type
                         if (! empty($property->getExecuteValue())) {
                             $array[$key] = $property->getExecuteValue()->getResult(sourceData: $expressionSourceData, execExpression: $execExpression, label: $this->getKey());
-                            // 前置参数也放入表达式数据源
+                            // Put prefix parameters into expression data source as well
                             $newExpressionSourceData[$expressionSourceKey] = $array[$key];
                             $newExpressionSourceData = Functions::unFlattenArray($newExpressionSourceData);
                             $expressionSourceData = array_replace_recursive($expressionSourceData, $newExpressionSourceData);
@@ -388,7 +388,7 @@ class Form extends Structure
                                 $exists = isset($array[$key]);
                             }
                             if (! $exists) {
-                                throw new FlowExprEngineException("[{$key}]{$property->getTitle()} 不能为空");
+                                throw new FlowExprEngineException("[{$key}]{$property->getTitle()} cannot be empty");
                             }
                         }
                         if (! isset($array[$key])) {
@@ -403,7 +403,7 @@ class Form extends Structure
             $expressionSourceKey = $expressionSourceDataPrefix . '.' . $this->getKey();
 
             $data = [];
-            // 如果value有值，那么直接取value的值，没有再去properties里面取
+            // If value has a value, take the value directly; otherwise get it from properties
             if ($this->getExecuteValue()) {
                 $data = $this->getExecuteValue()->getResult(sourceData: $expressionSourceData, execExpression: $execExpression, label: $this->getKey());
             } else {
@@ -489,7 +489,7 @@ class Form extends Structure
         }
 
         if ($this->getType()->isArray()) {
-            // 如果items是空，默认加上一个string的items
+            // If items is empty, add a default string items
             $this->setItems($this->getItems() ?? new Form(FormType::String, 'items', 0, 'items'));
 
             if ($this->getItems()->getType()->isComplex()) {
@@ -525,7 +525,7 @@ class Form extends Structure
     }
 
     /**
-     * 检测数据是否符合.
+     * Check if data matches.
      */
     public function isMatch(array $input, bool $check = false): bool
     {
@@ -563,7 +563,7 @@ class Form extends Structure
                     $item = $item ?? [];
                     if (! is_array($item)) {
                         if ($check) {
-                            throw new FlowExprEngineException("[{$this->getKey()}]的item[{$i}] type only array, but " . gettype($item) . ' given');
+                            throw new FlowExprEngineException("[{$this->getKey()}] item[{$i}] type only array, but " . gettype($item) . ' given');
                         }
                         return false;
                     }
@@ -587,7 +587,7 @@ class Form extends Structure
     }
 
     /**
-     * 获取平铺的数据，主要用于数据源的生成.
+     * Get flattened data, mainly used for data source generation.
      */
     public function getTileList(string $keyPrefix = '', string $titlePrefix = ''): array
     {
@@ -631,7 +631,7 @@ class Form extends Structure
             $this->encryptionValue = null;
             return;
         }
-        // 如果 value 没有值，但是 encryptionValue 有值，那么说明已经加密过了
+        // If value is empty but encryptionValue has a value, it means it has already been encrypted
         if (! $this->value && $this->encryptionValue) {
             return;
         }

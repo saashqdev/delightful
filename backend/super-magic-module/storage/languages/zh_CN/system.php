@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 return [
     'upload_token_failed' => '获取上传令牌失败',

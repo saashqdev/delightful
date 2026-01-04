@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 return [
     'general_error' => '长期记忆操作失败',

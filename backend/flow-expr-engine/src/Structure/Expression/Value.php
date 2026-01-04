@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 
 namespace Dtyq\FlowExprEngine\Structure\Expression;
@@ -182,15 +182,15 @@ class Value extends Structure implements JsonSerializable
             return false;
         }
         if (! $this->getExpressionValue()) {
-            // 没有值相当于 null
+            // No value is equivalent to null
             return false;
         }
-        // 只要保证第一个是Method类型即可
+        // Just ensure the first item is of Method type
         $firstItem = $this->getExpressionValue()->getItems()[0];
         if ($firstItem->getType() !== ExpressionType::Method) {
             return false;
         }
-        // 这个函数需要是返回的 array
+        // This function needs to return an array
         return true;
     }
 
@@ -237,7 +237,7 @@ class Value extends Structure implements JsonSerializable
                 }
                 break;
             case ValueType::Expression:
-                // 如果只有一个 input，那么当做 const 返回
+                // If there is only one input, return it as const
                 if ($this->getExpressionValue()?->isOldConstValue()) {
                     $result = $this->getExpressionValue()?->getResultByConstValue();
                 } else {
@@ -280,27 +280,27 @@ class Value extends Structure implements JsonSerializable
         $valueType = gettype($value);
         switch ($this->dataType) {
             case DataType::String:
-                // 仅允许数字和字符串
+                // Only allow numbers and strings
                 if (is_numeric($value) || is_string($value)) {
                     $value = (string) $value;
                 } else {
                     if ($check) {
-                        throw new FlowExprEngineException("{$label} 结果为 {$valueType}，无法被转换为 string");
+                        throw new FlowExprEngineException("{$label} result is {$valueType}, cannot be converted to string");
                     }
                     $value = null;
                 }
                 break;
             case DataType::Number:
-                // 仅允许string、int、float
+                // Only allow string, int, float
                 if (is_numeric($value) || is_string($value)) {
                     if (is_string($value) && ! is_numeric($value)) {
                         $value = (int) $value;
                     }
-                    // 统一使用字符串来表示数字
+                    // Uniformly use strings to represent numbers
                     $value = (string) $value;
                 } else {
                     if ($check) {
-                        throw new FlowExprEngineException("{$label} 结果为 {$valueType}，无法被转换为 number");
+                        throw new FlowExprEngineException("{$label} result is {$valueType}, cannot be converted to number");
                     }
                     $value = null;
                 }
@@ -308,7 +308,7 @@ class Value extends Structure implements JsonSerializable
             case DataType::Array:
                 if (! is_array($value)) {
                     if ($check) {
-                        throw new FlowExprEngineException("{$label} 结果为 {$valueType}，无法被转换为 array");
+                        throw new FlowExprEngineException("{$label} result is {$valueType}, cannot be converted to array");
                     }
                     $value = null;
                 }
@@ -316,7 +316,7 @@ class Value extends Structure implements JsonSerializable
             case DataType::Object:
                 if (! is_array($value)) {
                     if ($check) {
-                        throw new FlowExprEngineException("{$label} 结果为 {$valueType}，无法被转换为 object");
+                        throw new FlowExprEngineException("{$label} result is {$valueType}, cannot be converted to object");
                     }
                     $value = null;
                 }
@@ -330,11 +330,11 @@ class Value extends Structure implements JsonSerializable
                         $value = false;
                     }
                 }
-                // 强制转换为bool
+                // Force cast to bool
                 $value = (bool) $value;
                 break;
             case DataType::Null:
-                // 强制转换为null
+                // Force cast to null
                 $value = null;
                 break;
             case DataType::Expression:

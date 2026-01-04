@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 return [
     // 这里暂时指定 magic-mind-search 的 AI Code。 它使用硬编码的方式给出搜索结果，而不是走 flow 的逻辑。

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 use Hyperf\Doctrine\Cache\CacheItemPool;
 use Hyperf\Doctrine\DBAL\Driver\PDO\MySQL\HyperfDatabaseDriver;
 use Hyperf\Doctrine\DBAL\HyperfDatabaseConnection;
 
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 return [
     'default' => [

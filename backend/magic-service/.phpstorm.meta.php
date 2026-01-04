@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 
 namespace PHPSTORM_META {

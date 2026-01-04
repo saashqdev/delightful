@@ -27,7 +27,7 @@ demo
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
  
 namespace App\Controller;

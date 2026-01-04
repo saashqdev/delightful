@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 
 namespace Dtyq\FlowExprEngine\Structure\Expression\ExpressionDataSource;
@@ -28,9 +28,9 @@ class ExpressionDataSourceMethods
 
     public static function simpleMakeSystem(): ExpressionDataSourceMethods
     {
-        // 第一层 类型
+        // First layer: type
         $dataSource = new self();
-        $dataSource->setLabel('函数');
+        $dataSource->setLabel('Function');
         $dataSource->setValue(uniqid('methods_'));
         $dataSource->setDesc('');
         $groupDataSources = [];
@@ -40,7 +40,7 @@ class ExpressionDataSourceMethods
             }
             $groupName = $method->getGroup();
             if (! $groupDataSource = $groupDataSources[$groupName] ?? null) {
-                // 第二层 分组
+                // Second layer: grouping
                 $groupDataSource = new self();
                 $groupDataSource->setLabel($groupName);
                 $groupDataSource->setValue(md5($groupName));
@@ -48,7 +48,7 @@ class ExpressionDataSourceMethods
                 $groupDataSources[$groupName] = $groupDataSource;
             }
 
-            // 第三层 函数
+            // Third layer: function
             $methodDataSource = new self();
             $methodDataSource->setLabel($method->getName());
             $methodDataSource->setValue($method->getCode());

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 
 namespace Dtyq\FlowExprEngine\Structure\Widget\DisplayConfigExtra;
@@ -30,8 +30,8 @@ class SwitchExtra extends AbstractExtra
     public static function create(array $config, array $options = []): AbstractExtra
     {
         return new self(
-            (string) ($config['extra']['checked_text'] ?? '是'),
-            (string) ($config['extra']['unchecked_text'] ?? '否')
+            (string) ($config['extra']['checked_text'] ?? 'Yes'),
+            (string) ($config['extra']['unchecked_text'] ?? 'No')
         );
     }
 }

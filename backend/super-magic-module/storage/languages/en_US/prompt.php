@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 return [
     'disable_web_search_constraint' => ' (Search based on workspace content, do not use internet search tools)',

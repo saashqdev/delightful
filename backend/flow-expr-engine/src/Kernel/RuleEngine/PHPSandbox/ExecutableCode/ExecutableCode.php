@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 
 namespace Dtyq\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode;
@@ -167,7 +167,7 @@ class ExecutableCode
                     $methods[] = $method;
                 }
             }
-            // 独立函数配置
+            // Standalone function configuration
             if (is_string($function) && is_array($options)) {
                 /** @var AbstractMethod $method */
                 $method = self::createMethodByArrayOptions($function, $options);

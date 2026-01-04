@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 use PHPSandbox\Cache\MemoryCacheItemPool;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  * @internal
  * @coversNothing
  */

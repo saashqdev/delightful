@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 
 namespace Dtyq\FlowExprEngine\Structure\Widget;
@@ -14,7 +14,7 @@ use Dtyq\FlowExprEngine\Structure\Form\FormType;
 use Dtyq\FlowExprEngine\Structure\StructureType;
 
 /**
- * 采用form格式，所以直接继承.
+ * Adopts form format, so it inherits directly.
  */
 class Widget extends Form
 {
@@ -43,7 +43,7 @@ class Widget extends Form
 
     public function getExecuteValue(): ?Value
     {
-        // 如果value为空，返回初始值
+        // If value is empty, return initial value
         return $this->value ?? $this->getInitialValue();
     }
 

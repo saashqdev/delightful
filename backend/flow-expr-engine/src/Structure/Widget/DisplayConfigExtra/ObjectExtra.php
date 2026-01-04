@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 
 namespace Dtyq\FlowExprEngine\Structure\Widget\DisplayConfigExtra;
@@ -17,7 +17,7 @@ class ObjectExtra extends AbstractExtra
     private ?array $dataSource;
 
     /**
-     * 动态字段 api 组件.
+     * Dynamic fields API component.
      */
     private ?Component $dataSourceApi;
 

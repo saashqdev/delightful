@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) The Magic , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the software license
  */
 
 namespace Dtyq\FlowExprEngine\Structure\Expression\ExpressionDataSource;
@@ -17,10 +17,10 @@ enum ExpressionDataSourceSystemFields: string
     public function getName(): string
     {
         return match ($this) {
-            self::GuzzleResponseHttpCode => 'http状态码',
-            self::GuzzleResponseHeader => '响应头',
-            self::GuzzleResponseBody => '响应体',
-            self::LoopValue => '循环值',
+            self::GuzzleResponseHttpCode => 'HTTP Status Code',
+            self::GuzzleResponseHeader => 'Response Header',
+            self::GuzzleResponseBody => 'Response Body',
+            self::LoopValue => 'Loop Value',
         };
     }
 

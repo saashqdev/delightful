@@ -1,7 +1,7 @@
 """
-上下文管理模块
+Context Management Module
 
-提供上下文类，用于代理与工具间的参数传递和环境管理
+Provides context classes for parameter passing and environment management between agents and tools
 """
 
 from app.core.context.agent_context import AgentContext

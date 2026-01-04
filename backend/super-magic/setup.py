@@ -11,7 +11,7 @@ setup(
     version="1.0.0",
     author="SuperMagic Team",
     author_email="dev@letsmagic.ai",
-    description="SuperMagic 通用 AI 系统",
+    description="SuperMagic General AI System",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/dtyq/super-magic",

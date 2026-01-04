@@ -1,7 +1,7 @@
 """
-基础上下文类
+Base context class
 
-定义所有上下文类型的共同接口和基本功能
+Defines the common interface and basic functionality for all context types
 """
 
 import time
@@ -10,24 +10,24 @@ from typing import Any, Dict
 
 class BaseContext:
     """
-    基础上下文类，提供上下文数据的管理功能
+    Base context class providing context data management functionality
     """
 
     def __init__(self):
         """
-        初始化基础上下文
+        Initialize base context
         """
         self._metadata = {}
-        self._created_at = int(time.time() * 1000)  # 创建时间戳（毫秒）
+        self._created_at = int(time.time() * 1000)  # Creation timestamp (milliseconds)
 
     def to_dict(self) -> Dict[str, Any]:
         """
-        将上下文转换为字典格式
+        Convert context to dictionary format
 
         Returns:
-            Dict[str, Any]: 上下文的字典表示
+            Dict[str, Any]: Dictionary representation of the context
         """
-        # 基类只返回元数据和创建时间
+        # Base class only returns metadata and creation time
         result = {"_created_at": self._created_at, **self._metadata}
         return result
 

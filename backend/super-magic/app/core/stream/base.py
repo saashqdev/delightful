@@ -1,7 +1,7 @@
 """
-流接口基类
+Stream interface base class
 
-定义流操作的统一接口，用于读写数据
+Define unified interface for stream operations for reading and writing data
 """
 
 from abc import ABC, abstractmethod
@@ -22,29 +22,29 @@ class Stream(ABC):
     """
 
     def __init__(self):
-        """初始化Stream基类
+        """Initialize Stream base class
         
-        初始化事件过滤列表
+        Initialize event filter list
         """
-        # 默认处理所有事件
+        # Process all events by default
         self._ignored_events: List[EventType] = []
 
     def ignore_events(self, event_types: List[EventType]) -> None:
-        """配置此流应该忽略的事件类型
+        """Configure event types that this stream should ignore
         
         Args:
-            event_types: 要忽略的事件类型列表
+            event_types: List of event types to ignore
         """
         self._ignored_events.extend(event_types)
 
     def should_ignore_event(self, event_type: EventType) -> bool:
-        """检查此流是否应该处理特定事件类型
+        """Check if this stream should handle a specific event type
         
         Args:
-            event_type: 要检查的事件类型
+            event_type: Event type to check
             
         Returns:
-            bool: 如果应该处理返回True，否则返回False
+            bool: Returns True if should handle, False otherwise
         """
         return event_type in self._ignored_events
 

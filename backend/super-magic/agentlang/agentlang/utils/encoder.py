@@ -1,7 +1,7 @@
 """
-JSON 编码器
+JSON Encoder
 
-提供自定义的 JSON 编码器，用于处理特殊对象类型的序列化
+Provides custom JSON encoder for serialization of special object types
 """
 
 import json
@@ -11,19 +11,19 @@ from openai.types.chat import ChatCompletionMessageToolCall
 
 
 class CustomJSONEncoder(json.JSONEncoder):
-    """自定义 JSON 编码器，处理特殊类型的序列化"""
+    """Custom JSON encoder for special type serialization"""
 
     def default(self, obj: Any) -> Any:
         """
-        处理特殊类型的序列化
+        Handle serialization of special types
 
         Args:
-            obj: 要序列化的对象
+            obj: Object to serialize
 
         Returns:
-            可以被标准 JSON 编码器处理的对象
+            Object that can be processed by standard JSON encoder
         """
-        # 处理 ChatCompletionMessageToolCall 对象
+        # Handle ChatCompletionMessageToolCall objects
         if isinstance(obj, ChatCompletionMessageToolCall):
             return {
                 "id": obj.id,
@@ -34,30 +34,30 @@ class CustomJSONEncoder(json.JSONEncoder):
                 }
             }
 
-        # 尝试使用 model_dump 方法（Pydantic 模型）
+        # Try model_dump method (Pydantic models)
         if hasattr(obj, "model_dump"):
             return obj.model_dump()
 
-        # 尝试使用 __dict__ 属性
+        # Try __dict__ attribute
         if hasattr(obj, "__dict__"):
             return obj.__dict__
 
-        # 默认处理方式
+        # Default handling
         return super().default(obj)
 
 
 def json_dumps(obj: Any, **kwargs) -> str:
     """
-    使用自定义编码器的 JSON 序列化函数
+    JSON serialization function using custom encoder
 
     Args:
-        obj: 要序列化的对象
-        **kwargs: 传递给 json.dumps 的其他参数
+        obj: Object to serialize
+        **kwargs: Additional arguments to pass to json.dumps
 
     Returns:
-        序列化后的 JSON 字符串
+        Serialized JSON string
     """
-    # 设置默认值
+    # Set defaults
     kwargs.setdefault("ensure_ascii", False)
     kwargs.setdefault("cls", CustomJSONEncoder)
 

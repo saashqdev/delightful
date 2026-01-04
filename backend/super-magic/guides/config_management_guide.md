@@ -1,37 +1,37 @@
-# SuperMagic 配置管理指南
+# SuperMagic Configuration Management Guide
 
-## 概述
+## Overview
 
-SuperMagic 使用灵活的配置管理系统，基于 YAML 文件和环境变量，支持分层配置和类型验证。系统提供统一的配置访问接口，并支持配置的热加载和动态更新。
+SuperMagic uses a flexible configuration system based on YAML files and environment variables. It supports layered config, type validation, a unified access interface, and hot reloading with dynamic updates.
 
-## 配置系统组件
+## Components
 
-- **配置管理器**: 负责加载、解析和管理配置数据，支持多种配置源
-- **配置模型**: 使用 Pydantic 模型定义配置结构和默认值
-- **配置文件**: 存储在 `config/config.yaml` 的主配置文件
-- **环境变量**: 通过占位符引用系统环境变量，支持默认值
+- **Config manager**: Loads, parses, and manages config data from multiple sources
+- **Config models**: Pydantic models define schema and defaults
+- **Config file**: Primary file stored at `config/config.yaml`
+- **Environment variables**: Referenced via placeholders with optional defaults
 
-## 配置文件结构
+## Config File Structure
 
-主配置文件位于 `config/config.yaml`，采用 YAML 格式，包含以下主要部分：
+The main YAML config file at `config/config.yaml` typically includes:
 
-- **browser**: 浏览器相关配置
-- **llm**: LLM API 通用配置
-- **agent**: 代理系统配置
-- **image_generator**: 图片生成服务配置
-- **models**: 多种模型配置，包括各种 LLM 模型
-  - 每个模型包含 api_key, api_base_url, name, type, supports_tool_use 等配置项
-- **服务配置**: 各种服务的专用配置
-- **系统配置**: 核心系统配置
+- **browser**: Browser-related settings
+- **llm**: Shared LLM API settings
+- **agent**: Agent system settings
+- **image_generator**: Image generation service settings
+- **models**: LLM model definitions
+  - Each model includes api_key, api_base_url, name, type, supports_tool_use, etc.
+- **service configs**: Service-specific settings
+- **system configs**: Core system settings
 
-## 环境变量占位符
+## Environment Variable Placeholders
 
-配置文件支持两种环境变量引用格式：
+Two placeholder formats are supported:
 
-1. `${ENV_VAR}` - 引用环境变量，无默认值
-2. `${ENV_VAR:-default}` - 引用环境变量，如果不存在则使用默认值
+1. `${ENV_VAR}` – Reference an env var with no default
+2. `${ENV_VAR:-default}` – Reference an env var with a fallback default
 
-示例：
+Example:
 ```yaml
 browser:
   headless: ${BROWSER_HEADLESS:-false}
@@ -44,108 +44,108 @@ models:
     name: "${OPENAI_MODEL:-gpt-4o}"
 ```
 
-## 数据类型转换
+## Type Conversion
 
-配置系统会自动进行数据类型转换：
+The config system converts types automatically:
 
-- `"true"` 和 `"false"` 转换为布尔值
-- 数字字符串转换为整数或浮点数
-- 列表和字典会保留其结构
+- "true" and "false" become booleans
+- Numeric strings become integers or floats
+- Lists and dicts keep their structure
 
-## 使用方法
+## Usage
 
-### 获取配置
+### Read config
 
 ```python
 from agentlang.config import config
 
-# 获取特定配置项
+# Read specific keys
 headless = config.get("browser.headless")
 api_key = config.get("models.gpt-4o.api_key")
 
-# 使用默认值
+# With defaults
 timeout = config.get("llm.api_timeout", 60)
 ```
 
-### 配置管理器
+### Config manager
 
 ```python
 from agentlang.config.config import Config
 
-# 创建配置管理器实例
+# Create a manager
 config_manager = Config()
 
-# 加载配置
+# Load config
 config_manager.load_config("/path/to/config.yaml")
 
-# 使用点号路径获取配置
+# Access with dotted paths
 api_key = config_manager.get("models.gpt-4o.api_key")
 model_name = config_manager.get("models.gpt-4o.name", "default-model")
 ```
 
-### 设置和重新加载配置
+### Set and reload config
 
 ```python
 from agentlang.config import config
 
-# 设置配置值
+# Set a value
 config.set("models.gpt-4o.temperature", 0.8)
 
-# 重新加载配置（用于运行时更新环境变量配置）
+# Reload (e.g., after env var changes at runtime)
 config.reload_config()
 ```
 
-## 配置搜索路径
+## Config Search Order
 
-系统会按以下顺序查找配置文件：
+Files are located in this order:
 
-1. 环境变量 `CONFIG_PATH` 指定的路径
-2. 项目根目录下的 `config/config.yaml`
+1. Path specified by `CONFIG_PATH`
+2. `config/config.yaml` under the project root
 
-## 配置优先级
+## Precedence
 
-配置加载优先级从高到低为：
+Load priority from highest to lowest:
 
-1. 通过 `config.set()` 设置的运行时配置
-2. 环境变量
-3. 配置文件中的值
-4. Pydantic 模型中的默认值
+1. Runtime overrides via `config.set()`
+2. Environment variables
+3. Values in the config file
+4. Defaults in Pydantic models
 
-## 安全性注意事项
+## Security Notes
 
-- 敏感信息（如 API 密钥）应通过环境变量或 `.env` 文件提供，不要直接写入配置文件
-- 配置文件中应使用环境变量占位符引用敏感信息
-- `.env` 文件不应提交到版本控制系统
-- 遵循配置文件开头的安全提示，不要在配置文件中暴露敏感信息
+- Keep secrets (API keys) in env vars or `.env`; do not hardcode them in the config file
+- Use env placeholders for sensitive values
+- Do not commit `.env` to version control
+- Follow the security hints at the top of the config file to avoid leaking secrets
 
-## 与 .env 文件的集成
+## Using .env Files
 
-SuperMagic 支持通过 `.env` 文件加载环境变量。详情请参考 [dotenv_configuration.md](dotenv_configuration.md)。
+SuperMagic can load env vars from a `.env` file. See [dotenv_configuration.md](dotenv_configuration.md) for details.
 
-## 常见问题
+## FAQ
 
-### 配置未正确加载
+### Config not loading
 
-确保：
-- 配置文件存在于正确位置
-- 环境变量已正确设置
-- 配置文件格式正确（有效的 YAML）
+Check that:
+- The file is in the expected location
+- Env vars are set correctly
+- The YAML is valid
 
-### 环境变量不生效
+### Env vars not applied
 
-- 检查占位符格式是否正确
-- 确认环境变量已设置
-- 检查环境变量名称大小写
+- Verify placeholder syntax
+- Confirm the env var exists
+- Check env var casing
 
-### 自定义配置位置
+### Custom config path
 
-可以通过环境变量指定自定义配置文件路径：
+You can point to a custom path via env var:
 
 ```python
 import os
 os.environ["CONFIG_PATH"] = "/path/to/custom/config.yaml"
 
-# 然后加载配置
+# Then load
 from agentlang.config.config import Config
 config_manager = Config()
 config_manager.load_config()

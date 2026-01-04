@@ -1,5 +1,5 @@
 """
-异步工具函数，提供异步操作的辅助函数
+Async utility functions for async operation helpers
 """
 
 import asyncio
@@ -12,27 +12,27 @@ T = TypeVar("T")
 
 def run_async(func: Callable[..., Coroutine[Any, Any, T]]) -> Callable[..., T]:
     """
-    装饰器，将异步函数包装为同步函数
+    Decorator to wrap an async function as a sync function
 
     Args:
-        func: 要包装的异步函数
+        func: Async function to wrap
 
     Returns:
-        同步函数包装器
+        Sync function wrapper
     """
 
     @wraps(func)
     def wrapper(*args: Any, **kwargs: Any) -> T:
-        """同步函数包装器"""
-        # 获取当前事件循环或创建新的
+        """Sync function wrapper"""
+        # Get current event loop or create a new one
         loop = asyncio.get_event_loop()
 
-        # 如果事件循环已关闭，创建新的
+        # If loop is closed, create a new one
         if loop.is_closed():
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
 
-        # 在事件循环中运行异步函数
+        # Run async function in the loop
         return loop.run_until_complete(func(*args, **kwargs))
 
     return wrapper
@@ -40,49 +40,49 @@ def run_async(func: Callable[..., Coroutine[Any, Any, T]]) -> Callable[..., T]:
 
 async def run_in_executor(func: Callable[..., T], *args: Any, **kwargs: Any) -> T:
     """
-    在线程池中运行阻塞函数
+    Run a blocking function in a thread pool
 
     Args:
-        func: 要运行的阻塞函数
-        args: 位置参数
-        kwargs: 关键字参数
+        func: Blocking function to run
+        args: Positional arguments
+        kwargs: Keyword arguments
 
     Returns:
-        函数结果
+        Function result
     """
     loop = asyncio.get_event_loop()
 
-    # 将函数包装到同一个调用中
+    # Wrap function in a single call
     def wrapped_func():
         return func(*args, **kwargs)
 
-    # 在线程池中运行阻塞函数
+    # Run blocking function in thread pool
     return await loop.run_in_executor(None, wrapped_func)
 
 
 def is_async_function(func: Callable) -> bool:
     """
-    检查函数是否为异步函数
+    Check if a function is asynchronous
 
     Args:
-        func: 要检查的函数
+        func: Function to check
 
     Returns:
-        是否为异步函数
+        Whether it's an async function
     """
     return inspect.iscoroutinefunction(func)
 
 
 async def gather_with_concurrency(n: int, *tasks):
     """
-    限制并发任务数量的gather函数
+    Gather function with concurrency limit
 
     Args:
-        n: 最大并发数
-        tasks: 任务列表
+        n: Max concurrent tasks
+        tasks: Task list
 
     Returns:
-        任务结果列表
+        Task result list
     """
     semaphore = asyncio.Semaphore(n)
 

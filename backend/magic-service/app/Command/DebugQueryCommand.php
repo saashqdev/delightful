@@ -21,8 +21,8 @@ class DebugQueryCommand extends HyperfCommand
     public function configure()
     {
         parent::configure();
-        $this->setDescription('查询数据库记录数量');
-        $this->addArgument('table', InputArgument::REQUIRED, '表名');
+        $this->setDescription('Query the record count for a table');
+        $this->addArgument('table', InputArgument::REQUIRED, 'Table name');
     }
 
     public function handle()
@@ -31,15 +31,15 @@ class DebugQueryCommand extends HyperfCommand
 
         try {
             $count = Db::table($table)->count();
-            $this->line("表 {$table} 中的记录数量: {$count}");
+            $this->line("Record count in table {$table}: {$count}");
 
-            // 输出表中的部分记录
+            // Output a few rows from the table
             if ($count > 0) {
                 $records = Db::table($table)->limit(5)->get();
-                $this->table(['字段', '值'], $this->formatRecords($records));
+                $this->table(['Field', 'Value'], $this->formatRecords($records));
             }
         } catch (Throwable $e) {
-            $this->error('查询失败: ' . $e->getMessage());
+            $this->error('Query failed: ' . $e->getMessage());
         }
     }
 

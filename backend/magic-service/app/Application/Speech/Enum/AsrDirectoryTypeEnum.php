@@ -8,12 +8,12 @@ declare(strict_types=1);
 namespace App\Application\Speech\Enum;
 
 /**
- * ASR 目录类型枚举.
+ * ASR directory type enum.
  */
 enum AsrDirectoryTypeEnum: string
 {
-    case ASR_HIDDEN_DIR = 'asr_hidden_dir';       // 隐藏目录（存放分片文件，实际目录名称在 ASR_RECORDINGS_DIR/task_key 下）
-    case ASR_DISPLAY_DIR = 'asr_display_dir';     // 显示目录（存放流式文本和笔记）
-    case ASR_STATES_DIR = 'asr_states_dir';       // 状态目录（存放前端录音状态）
-    case ASR_RECORDINGS_DIR = 'asr_recordings_dir'; // 录音目录（.asr_recordings）
+    case ASR_HIDDEN_DIR = 'asr_hidden_dir';       // Hidden directory (stores shards; actual path under ASR_RECORDINGS_DIR/task_key)
+    case ASR_DISPLAY_DIR = 'asr_display_dir';     // Display directory (stores streaming text and notes)
+    case ASR_STATES_DIR = 'asr_states_dir';       // State directory (stores frontend recording states)
+    case ASR_RECORDINGS_DIR = 'asr_recordings_dir'; // Recording directory (.asr_recordings)
 }

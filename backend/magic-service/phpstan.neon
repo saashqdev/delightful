@@ -14,7 +14,7 @@ parameters:
     - app
   excludePaths:
   reportUnmatchedIgnoredErrors: false
-  # 信任PHPDoc中声明的类型，并根据类型做静态分析
+  # Trust types declared in PHPDoc for static analysis
   treatPhpDocTypesAsCertain: false
   ignoreErrors:
     - '#Static call to instance method Hyperf\\HttpServer\\Router\\Router::[a-zA-Z0-9\\_]+\(\)#'

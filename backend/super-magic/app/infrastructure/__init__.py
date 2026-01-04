@@ -1,6 +1,6 @@
 """
-基础设施包初始化文件
+Infrastructure package initialization file
 """
 
-# 添加语音识别模块
+# Add speech recognition module
 from . import asr

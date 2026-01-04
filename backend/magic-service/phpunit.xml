@@ -10,48 +10,48 @@
          backupStaticProperties="false" 
          failOnWarning="false">
 
-  <!-- 环境变量配置 -->
+  <!-- Environment variables -->
   <php>
     <env name="APP_ENV" value="testing"/>
   </php>
 
-  <!-- 测试套件定义 -->
+  <!-- Test suite definitions -->
   <testsuites>
-    <testsuite name="大模型网关测试">
+    <testsuite name="Model gateway tests">
       <directory suffix="Test.php">test/Cases/Api/ModelGateway</directory>
     </testsuite>
-    <testsuite name="登录测试">
+    <testsuite name="Login tests">
       <directory suffix="Test.php">test/Cases/Api/Login</directory>
       <directory suffix="Test.php">test/Cases/Api/Contact</directory>
     </testsuite>
-    <testsuite name="聊天用户API测试">
+    <testsuite name="Chat user API tests">
       <directory suffix="Test.php">test/Cases/Api/Chat</directory>
     </testsuite>
-    <testsuite name="组件测试">
+    <testsuite name="Component tests">
       <directory suffix="Test.php">test/Cases/Api/Kernel</directory>
       <directory suffix="Test.php">test/Cases/Application/Kernel</directory>
     </testsuite>
-    <testsuite name="权限测试">
+    <testsuite name="Permission tests">
       <directory suffix="Test.php">test/Cases/Application/Permission</directory>
       <directory suffix="Test.php">test/Cases/Permission</directory>
       <directory suffix="Test.php">test/Cases/Api/Permission</directory>
     </testsuite>
-    <testsuite name="组织测试">
+    <testsuite name="Organization tests">
       <directory suffix="Test.php">test/Cases/Domain/Organization</directory>
     </testsuite>
-    <testsuite name="管理后台测试">
+    <testsuite name="Admin console tests">
       <directory suffix="Test.php">test/Cases/Api/Admin</directory>
     </testsuite>
   </testsuites>
 
-  <!-- 覆盖率统计的目录配置，不是执行单测的目录 -->
+  <!-- Coverage include paths (not the test directories) -->
   <source>
     <include>
       <directory suffix=".php">app</directory>
     </include>
   </source>
 
-  <!-- 覆盖率配置（PHPUnit 10.x 新结构）
+  <!-- Coverage configuration (PHPUnit 10.x structure)
 
   <coverage enabled="false" includeUncoveredFiles="false"
             pathCoverage="false"
@@ -65,7 +65,7 @@
     </report>
   </coverage> -->
 
-  <!-- 日志配置 -->
+  <!-- Logging configuration -->
   <logging>
     <junit outputFile="coverage/junit.xml"/>
     <teamcity outputFile="coverage/teamcity.txt"/>
@@ -73,11 +73,11 @@
     <testdoxText outputFile="coverage/testdox.txt"/>
   </logging>
 
-  <!-- 扩展配置（需要兼容 PHPUnit 10） -->
+  <!-- Extensions (compatible with PHPUnit 10) -->
   <extensions>
     <bootstrap class="HyperfTest\Extensions\Runners\SlowestTests\Extension">
-      <parameter name="maxTests" value="100"/>  <!-- 最大收集数量 -->
-      <parameter name="minDuration" value="1000"/> <!-- 最小耗时（毫秒） -->
+      <parameter name="maxTests" value="100"/>  <!-- Maximum collected tests -->
+      <parameter name="minDuration" value="1000"/> <!-- Minimum duration (ms) -->
     </bootstrap>
   </extensions>
 </phpunit>

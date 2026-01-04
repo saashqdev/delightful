@@ -1,7 +1,7 @@
 """
-向用户提问工具，用于向用户提出问题并等待用户回复
+Tool for asking the user questions and awaiting replies.
 
-此工具使Assistant能够向用户请求更多信息或确认
+Enables the assistant to request additional information or confirmations from the user.
 """
 
 
@@ -18,12 +18,12 @@ from app.tools.core import BaseTool, BaseToolParams, tool
 
 logger = get_logger(__name__)
 
-_ASK_USER_DESCRIPTION = """当需要向用户请求额外信息、确认或进一步指示时使用此工具。
-它允许你提出问题并等待用户的回复，然后再继续，仅在必要时使用，通常情况下你应该自主决定流程的走向以解决用户的问题和目标。"""
+_ASK_USER_DESCRIPTION = """Use this tool when you need extra information, confirmation, or further instruction from the user.
+It lets you pose a question and wait for a reply before continuing. Use only when necessary; typically you should steer the flow yourself to solve the user's problem and goal."""
 
 
 class AskUserParams(BaseToolParams):
-    """向用户提问参数"""
+    """Parameters for asking the user a question."""
     question: str = Field(
         ...,
         description="要向用户提出的问题或请求"
@@ -41,34 +41,33 @@ class AskUserParams(BaseToolParams):
 @tool()
 class AskUser(BaseTool[AskUserParams]):
     """
-    向用户提问工具
+    Tool for asking the user questions.
 
-    当需要向用户请求额外信息、确认或进一步指示时使用此工具。
-    它允许你提出问题并等待用户的回复，然后再继续，仅在必要时使用，通常情况下你应该自主决定流程的走向以解决用户的问题和目标。
+    Use when you need extra information, confirmation, or further instruction. It allows asking and waiting for a reply before continuing. Use only when necessary; generally you should guide the flow yourself to achieve the user's goals.
     """
 
     async def execute(self, tool_context: ToolContext, params: AskUserParams) -> AskUserToolResult:
         """
-        向用户提出问题并等待回复
+        Ask the user a question and wait for a response.
 
         Args:
-            tool_context: 工具上下文
-            params: 参数对象，包含问题内容和可选的类型及内容
+            tool_context: Tool context
+            params: Parameter object containing the question and optional type/content
 
         Returns:
-            AskUserToolResult: 包含提问信息的工具结果
+            AskUserToolResult: Tool result with the question details
         """
-        logger.info(f"向用户提问: {params.question}")
+        logger.info(f"Ask user: {params.question}")
         if params.type:
-            logger.info(f"内容类型: {params.type}")
+            logger.info(f"Content type: {params.type}")
         if params.content:
-            logger.info(f"相关内容: {params.content}")
+            logger.info(f"Related content: {params.content}")
 
-        # 创建AskUserToolResult实例，直接设置各个字段
+        # Create AskUserToolResult and set fields directly
         result = AskUserToolResult(
             question=params.question,
-            content=params.question,  # 使用问题内容作为 ToolResult 的 content 字段的默认值
-            system="ASK_USER",  # 系统指令，标记这是一个用户问询
+            content=params.question,  # Default ToolResult content to the question text
+            system="ASK_USER",  # System directive marking this as a user inquiry
         )
 
         # 设置可选字段
@@ -81,69 +80,69 @@ class AskUser(BaseTool[AskUserParams]):
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
         """
-        获取工具调用后的友好动作和备注
+        Get user-friendly action and remark after tool call.
 
         Args:
-            tool_name: 工具名称
-            tool_context: 工具上下文
-            result: 工具执行结果
-            execution_time: 执行耗时
-            arguments: 执行参数
+            tool_name: Tool name
+            tool_context: Tool context
+            result: Tool execution result
+            execution_time: Execution duration
+            arguments: Execution arguments
 
         Returns:
-            Dict: 包含action和remark的字典
+            Dict: Dictionary containing action and remark
         """
         question = ""
         if arguments and "question" in arguments:
             question = arguments["question"]
 
         return {
-            "action": "",  # 按照模板要求设为空字符串
-            "remark": ""  # 使用工具的question内容作为备注
+            "action": "",  # Per template, leave empty
+            "remark": ""  # Use the tool's question content as remark
         }
 
     async def get_after_tool_call_friendly_content(self, tool_context: ToolContext, result: AskUserToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> str:
         """
-        获取工具调用后的友好内容
+        Get user-friendly message after tool call.
 
         Args:
-            tool_context: 工具上下文
-            result: 工具执行结果 (实际上是 AskUserToolResult 类型)
-            execution_time: 执行耗时
-            arguments: 执行参数
+            tool_context: Tool context
+            result: Tool execution result (AskUserToolResult)
+            execution_time: Execution duration
+            arguments: Execution arguments
 
         Returns:
-            str: 友好的执行结果消息
+            str: Friendly execution result message
         """
-        # 直接使用 result 的 question 属性，无需类型检查
+        # Use result.question directly without type checking
         ask_result = result  # type: AskUserToolResult
-        return f"正在等待用户回复问题: {ask_result.question}"
+        return f"Waiting for user to answer: {ask_result.question}"
 
     async def get_tool_detail(self, tool_context: ToolContext, result: AskUserToolResult, arguments: Dict[str, Any] = None) -> Optional[ToolDetail]:
         """
-        根据工具执行结果获取对应的ToolDetail
+        Build ToolDetail based on tool execution result.
 
         Args:
-            tool_context: 工具上下文
-            result: 工具执行的结果 (实际上是 AskUserToolResult 类型)
-            arguments: 工具执行的参数字典
+            tool_context: Tool context
+            result: Tool execution result (AskUserToolResult)
+            arguments: Execution arguments
 
         Returns:
-            Optional[ToolDetail]: 工具详情对象
+            Optional[ToolDetail]: Tool detail object
         """
         if not result.ok:
             return None
 
-        # 直接使用 AskUserToolResult 的属性
+        # Use AskUserToolResult properties directly
         ask_result = result  # type: AskUserToolResult
 
-        # 优先使用 result.content，如果为空则使用 question
+        # Prefer result.content, fallback to question
         content = ask_result.content or ask_result.question
 
-        # 获取问题类型（如果有）
+        # Retrieve question type if present
         question_type = getattr(ask_result, 'type', None)
 
-        # 创建自定义的工具详情
+        # Build custom tool detail
         return ToolDetail(
             type=DisplayType.ASK_USER,
             data=AskUserContent(

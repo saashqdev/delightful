@@ -24,7 +24,7 @@ class AiAbilityApi extends AbstractApi
     protected AiAbilityAppService $aiAbilityAppService;
 
     /**
-     * 获取所有AI能力列表.
+     * Get all AI abilities.
      */
     #[CheckPermission([MagicResourceEnum::ADMIN_AI_ABILITY], MagicOperationEnum::QUERY)]
     public function queries(): array
@@ -38,7 +38,7 @@ class AiAbilityApi extends AbstractApi
     }
 
     /**
-     * 获取AI能力详情.
+     * Get AI ability details.
      */
     #[CheckPermission([MagicResourceEnum::ADMIN_AI_ABILITY], MagicOperationEnum::QUERY)]
     public function detail(string $code): array
@@ -52,7 +52,7 @@ class AiAbilityApi extends AbstractApi
     }
 
     /**
-     * 更新AI能力.
+     * Update an AI ability.
      */
     #[CheckPermission([MagicResourceEnum::ADMIN_AI_ABILITY], MagicOperationEnum::EDIT)]
     public function update(string $code): array

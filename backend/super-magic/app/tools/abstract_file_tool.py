@@ -12,27 +12,27 @@ from app.tools.core.base_tool_params import BaseToolParams
 
 logger = get_logger(__name__)
 
-# 定义参数类型变量
+# Define parameter type variable
 T = TypeVar('T', bound=BaseToolParams)
 
 
 class AbstractFileTool(BaseTool[T], Generic[T]):
     """
-    抽象文件工具基类
+    Abstract file tool base class
 
-    为文件操作工具提供通用的文件事件分发功能
+    Provides common file event dispatch functionality for file operation tools
     """
 
     async def _dispatch_file_event(self, tool_context: ToolContext, filepath: str, event_type: EventType, is_screenshot: bool = False) -> None:
         """
-        分发文件事件
+        Dispatch file event
 
         Args:
-            tool_context: 工具上下文
-            filepath: 文件路径
-            event_type: 事件类型（FILE_CREATED, FILE_UPDATED 或 FILE_DELETED）
+            tool_context: Tool context
+            filepath: File path
+            event_type: Event type (FILE_CREATED, FILE_UPDATED or FILE_DELETED)
         """
-        # 创建事件数据，包含 tool_context
+        # Create event data, including tool_context
         event_data = FileEventData(
             filepath=filepath,
             event_type=event_type,
@@ -44,24 +44,24 @@ class AbstractFileTool(BaseTool[T], Generic[T]):
             agent_context = tool_context.get_extension_typed("agent_context", AgentContext)
             if agent_context:
                 await agent_context.dispatch_event(event_type, event_data)
-                logger.info(f"已分发文件事件: {event_type} - {filepath}")
+                logger.info(f"File event dispatched: {event_type} - {filepath}")
             else:
-                logger.error("未从 ToolContext 中找到 AgentContext 扩展")
+                logger.error("AgentContext extension not found in ToolContext")
         except Exception as e:
-            # 打印调用栈信息以便于调试
+            # Print stack trace for debugging
             import traceback
             stack_trace = traceback.format_exc()
-            logger.error(f"分发文件事件失败: {e}，调用栈信息:\n{stack_trace}")
+            logger.error(f"Failed to dispatch file event: {e}, stack trace:\n{stack_trace}")
 
     def get_display_type_by_extension(self, file_path: str) -> DisplayType:
         """
-        根据文件扩展名获取适当的 DisplayType
+        Get appropriate DisplayType based on file extension
 
         Args:
-            file_path: 文件路径
+            file_path: File path
 
         Returns:
-            DisplayType: 展示类型
+            DisplayType: Display type
         """
         file_name = os.path.basename(file_path)
         file_extension = os.path.splitext(file_name)[1].lower()

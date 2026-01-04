@@ -9,7 +9,7 @@ namespace Dtyq\RuleEngineCore\PhpScript\Admin;
 
 class ParserConfig
 {
-    // 是否允许用户声明类
+    // Whether to allow users to declare classes
     public bool $allowDeclareClasses = false;
 
     public function isAllowDeclareClasses(): bool

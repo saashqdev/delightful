@@ -1,10 +1,10 @@
 """
-agent 模块，提供Agent基类
+agent module, provides Agent base class
 
-本模块包含:
-- BaseAgent: Agent基类，定义Agent接口
-- AgentState: Agent状态类
-- AgentLoader: Agent加载器类，用于加载和解析agent文件
+This module contains:
+- BaseAgent: Agent base class, defines Agent interface
+- AgentState: Agent state class
+- AgentLoader: Agent loader class, used to load and parse agent files
 """
 
 from agentlang.agent.loader import AgentLoader

@@ -1,5 +1,5 @@
 """
-语音识别服务模块初始化文件
+Automatic Speech Recognition (ASR) service module initialization file
 """
 
 from .types import ASRConfig, ASRResult

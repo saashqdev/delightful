@@ -5,7 +5,7 @@ import os
 
 from setuptools import find_packages, setup
 
-# 读取 README.md 文件
+# Read README.md file
 with open(os.path.join(os.path.dirname(__file__), "README.md"), "r", encoding="utf-8") as f:
     long_description = f.read()
 
@@ -14,7 +14,7 @@ setup(
     version="0.1.4",
     author="SuperMagic Team",
     author_email="dev@letsmagic.ai",
-    description="简单、高效的 AI 代理框架",
+    description="Simple and efficient AI agent framework",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/dtyq/agentlang",
@@ -49,5 +49,5 @@ setup(
         "Bug Reports": "https://github.com/dtyq/agentlang/issues",
         "Source": "https://github.com/dtyq/agentlang",
     },
-    include_package_data=True,  # 包含 MANIFEST.in 中指定的数据文件
+    include_package_data=True,  # Include data files specified in MANIFEST.in
 )

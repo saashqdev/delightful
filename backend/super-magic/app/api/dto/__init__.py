@@ -1,5 +1,5 @@
 """
-数据传输对象(DTO)包，用于定义WebSocket消息格式
+Data Transfer Object (DTO) package, used to define WebSocket message formats
 """
 
 from .base import (
@@ -7,14 +7,14 @@ from .base import (
 )
 
 __all__ = [
-    # WebSocket消息验证模型
+    # WebSocket message validation model
     "WebSocketMessage",
-    # 代理相关消息
+    # Agent related messages
     "StartDTO",
     "FinishDTO",
     "ErrorDTO",
     "ThinkingDTO",
-    # 工具相关消息
+    # Tool related messages
     "ToolUsedDTO",
     "FileToolDTO",
     "SearchToolDTO",

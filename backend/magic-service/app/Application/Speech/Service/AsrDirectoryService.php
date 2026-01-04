@@ -1,19 +1,19 @@
-<?php
-
-declare(strict_types=1);
-/**
- * Copyright (c) Be Delightful , Distributed under the software license
- */
-
-namespace App\Application\Speech\Service;
-
-use App\Application\Speech\Assembler\AsrAssembler;
-use App\Application\Speech\DTO\AsrRecordingDirectoryDTO;
-use App\Application\Speech\DTO\AsrTaskStatusDTO;
-use App\Application\Speech\Enum\AsrDirectoryTypeEnum;
-use App\Domain\Asr\Constants\AsrPaths;
-use App\ErrorCode\AsrErrorCode;
-use App\Infrastructure\Core\Exception\ExceptionBuilder;
+    /**
+     * Internal helper to create directories (shared logic).
+     *
+     * @param string $organizationCode Organization code
+     * @param string $projectId Project ID
+     * @param string $userId User ID
+     * @param string $relativePath Relative path
+     * @param AsrDirectoryTypeEnum $directoryType Directory type
+     * @param bool $isHidden Whether the directory is hidden
+     * @param null|string $taskKey Task key
+     * @param array $errorContext Error log context
+     * @param string $logMessage Error log message
+     * @param AsrErrorCode $failedProjectError Project-level error code
+     * @param AsrErrorCode $failedError Generic error code
+     * @return AsrRecordingDirectoryDTO Directory DTO
+     */
 use Dtyq\SuperMagic\Domain\SuperAgent\Service\ProjectDomainService;
 use Dtyq\SuperMagic\Domain\SuperAgent\Service\TaskFileDomainService;
 use Hyperf\Contract\TranslatorInterface;
@@ -21,8 +21,8 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * ASR 目录管理服务
- * 负责目录创建、查询、重命名和路径转换.
+ * ASR directory management service
+ * Handles directory creation, lookup, rename, and path conversion.
  */
 readonly class AsrDirectoryService
 {
@@ -35,14 +35,14 @@ readonly class AsrDirectoryService
     }
 
     /**
-     * 创建隐藏的临时录音目录（用于存放分片文件）.
-     * 目录格式：.asr_recordings/{task_key}.
+     * Create a hidden temporary recording directory (stores chunk files).
+     * Directory format: .asr_recordings/{task_key}.
      *
-     * @param string $organizationCode 组织编码
-     * @param string $projectId 项目ID
-     * @param string $userId 用户ID
-     * @param string $taskKey 任务键
-     * @return AsrRecordingDirectoryDTO 目录DTO
+     * @param string $organizationCode Organization code
+     * @param string $projectId Project ID
+     * @param string $userId User ID
+     * @param string $taskKey Task key
+     * @return AsrRecordingDirectoryDTO Directory DTO
      */
     public function createHiddenDirectory(
         string $organizationCode,
@@ -61,20 +61,20 @@ readonly class AsrDirectoryService
             isHidden: true,
             taskKey: $taskKey,
             errorContext: ['project_id' => $projectId, 'task_key' => $taskKey],
-            logMessage: '创建隐藏录音目录失败',
+            logMessage: 'Failed to create hidden recording directory',
             failedProjectError: AsrErrorCode::CreateHiddenDirectoryFailedProject,
             failedError: AsrErrorCode::CreateHiddenDirectoryFailedError
         );
     }
 
     /**
-     * 创建 .asr_states 隐藏目录（用于存放前端录音的状态信息）.
-     * 目录格式：.asr_states.
+     * Create the hidden .asr_states directory (stores front-end recording status).
+     * Directory format: .asr_states.
      *
-     * @param string $organizationCode 组织编码
-     * @param string $projectId 项目ID
-     * @param string $userId 用户ID
-     * @return AsrRecordingDirectoryDTO 目录DTO
+     * @param string $organizationCode Organization code
+     * @param string $projectId Project ID
+     * @param string $userId User ID
+     * @return AsrRecordingDirectoryDTO Directory DTO
      */
     public function createStatesDirectory(
         string $organizationCode,
@@ -92,20 +92,20 @@ readonly class AsrDirectoryService
             isHidden: true,
             taskKey: null,
             errorContext: ['project_id' => $projectId],
-            logMessage: '创建 .asr_states 目录失败',
+            logMessage: 'Failed to create .asr_states directory',
             failedProjectError: AsrErrorCode::CreateStatesDirectoryFailedProject,
             failedError: AsrErrorCode::CreateStatesDirectoryFailedError
         );
     }
 
     /**
-     * 创建 .asr_recordings 隐藏目录（录音父目录，用于存放所有录音任务的子目录）.
-     * 目录格式：.asr_recordings.
+     * Create the hidden .asr_recordings parent directory (stores all recording task subdirectories).
+     * Directory format: .asr_recordings.
      *
-     * @param string $organizationCode 组织编码
-     * @param string $projectId 项目ID
-     * @param string $userId 用户ID
-     * @return AsrRecordingDirectoryDTO 目录DTO
+     * @param string $organizationCode Organization code
+     * @param string $projectId Project ID
+     * @param string $userId User ID
+     * @return AsrRecordingDirectoryDTO Directory DTO
      */
     public function createRecordingsDirectory(
         string $organizationCode,
@@ -123,30 +123,21 @@ readonly class AsrDirectoryService
             isHidden: true,
             taskKey: null,
             errorContext: ['project_id' => $projectId],
-            logMessage: '创建 .asr_recordings 目录失败',
+            logMessage: 'Failed to create .asr_recordings directory',
             failedProjectError: AsrErrorCode::CreateStatesDirectoryFailedProject,
             failedError: AsrErrorCode::CreateStatesDirectoryFailedError
         );
     }
 
     /**
-     * 创建显示的录音纪要目录（用于存放流式文本和笔记）.
-     * 目录格式：录音纪要_Ymd_His（国际化）.
+     * Create a visible recording summary directory (stores streaming text and notes).
+     * Directory format: Recording_Summary_Ymd_His (localized).
      *
-     * @param string $organizationCode 组织编码
-     * @param string $projectId 项目ID
-     * @param string $userId 用户ID
-     * @return AsrRecordingDirectoryDTO 目录DTO
-     */
-    /**
-     * 创建显示的录音纪要目录（用于存放流式文本和笔记）.
-     * 目录格式：录音纪要_Ymd_His（国际化）.
-     *
-     * @param string $organizationCode 组织编码
-     * @param string $projectId 项目ID
-     * @param string $userId 用户ID
-     * @param null|string $generatedTitle 预设标题
-     * @return AsrRecordingDirectoryDTO 目录DTO
+     * @param string $organizationCode Organization code
+     * @param string $projectId Project ID
+     * @param string $userId User ID
+     * @param null|string $generatedTitle Preset title
+     * @return AsrRecordingDirectoryDTO Directory DTO
      */
     public function createDisplayDirectory(
         string $organizationCode,
@@ -162,47 +153,47 @@ readonly class AsrDirectoryService
             userId: $userId,
             relativePath: $relativePath,
             directoryType: AsrDirectoryTypeEnum::ASR_DISPLAY_DIR,
-            isHidden: false, // 设置为隐藏，避免ASR操作期间前端显示目录变动导致的错误
+            isHidden: false, // Keep hidden to avoid front-end errors caused by directory changes during ASR operations
             taskKey: null,
             errorContext: ['project_id' => $projectId],
-            logMessage: '创建显示录音目录失败',
+            logMessage: 'Failed to create display recording directory',
             failedProjectError: AsrErrorCode::CreateDisplayDirectoryFailedProject,
             failedError: AsrErrorCode::CreateDisplayDirectoryFailedError
         );
     }
 
     /**
-     * 生成新的显示目录名（基于智能标题）.
-     * 此方法只负责生成新的相对路径，不执行实际的重命名操作。
+     * Generate a new display directory name based on the intelligent title.
+     * Only produces the new relative path; no rename happens here.
      *
-     * @param AsrTaskStatusDTO $taskStatus 任务状态
-     * @param string $intelligentTitle 智能生成的标题
-     * @param AsrTitleGeneratorService $titleGenerator 标题生成器（用于清洗标题）
-     * @return string 新的相对路径（如果无需重命名则返回原路径）
+     * @param AsrTaskStatusDTO $taskStatus Task status
+     * @param string $intelligentTitle AI-generated title
+     * @param AsrTitleGeneratorService $titleGenerator Title sanitizer
+     * @return string New relative path (or the original if no rename is needed)
      */
     public function getNewDisplayDirectory(
         mixed $taskStatus,
         string $intelligentTitle,
         AsrTitleGeneratorService $titleGenerator
     ): string {
-        // 1. 获取原显示目录信息
+        // 1. Get the original display directory
         $relativeOldPath = $taskStatus->displayDirectory;
 
         if (empty($relativeOldPath)) {
-            $this->logger->warning('显示目录路径为空，跳过生成新路径', [
+            $this->logger->warning('Display directory path is empty; skip generating a new path', [
                 'task_key' => $taskStatus->taskKey,
             ]);
             return $relativeOldPath;
         }
 
-        // 2. 提取时间戳
+        // 2. Extract the timestamp
         $oldDirectoryName = basename($relativeOldPath);
         $timestamp = $this->extractTimestamp($oldDirectoryName, $taskStatus->taskKey);
 
-        // 3. 清洗并构建新目录名
+        // 3. Sanitize and build the new directory name
         $safeTitle = $titleGenerator->sanitizeTitle($intelligentTitle);
         if (empty($safeTitle)) {
-            $this->logger->warning('智能标题为空，跳过生成新路径', [
+            $this->logger->warning('Intelligent title is empty; skip generating a new path', [
                 'task_key' => $taskStatus->taskKey,
                 'intelligent_title' => $intelligentTitle,
             ]);
@@ -211,19 +202,19 @@ readonly class AsrDirectoryService
 
         $newDirectoryName = $safeTitle . $timestamp;
 
-        // 新的工作区相对路径 (如: 被讨厌的勇气笔记_20251027_230949)
+        // New workspace-relative path (e.g., Courage_to_be_Disliked_20251027_230949)
         $newRelativePath = $newDirectoryName;
 
-        // 如果新旧路径相同，无需重命名
+        // If paths are identical, skip renaming
         if ($newRelativePath === $relativeOldPath) {
-            $this->logger->info('新旧目录路径相同，无需重命名', [
+            $this->logger->info('Old and new directory paths are identical; skip renaming', [
                 'task_key' => $taskStatus->taskKey,
                 'directory_path' => $newRelativePath,
             ]);
             return $relativeOldPath;
         }
 
-        $this->logger->info('获取新的显示目录路径', [
+        $this->logger->info('Generated new display directory path', [
             'task_key' => $taskStatus->taskKey,
             'old_relative_path' => $relativeOldPath,
             'new_relative_path' => $newRelativePath,
@@ -234,11 +225,11 @@ readonly class AsrDirectoryService
     }
 
     /**
-     * 获取项目的 workspace 路径.
+     * Get the workspace path for the project.
      *
-     * @param string $projectId 项目ID
-     * @param string $userId 用户ID
-     * @return string workspace 路径
+     * @param string $projectId Project ID
+     * @param string $userId User ID
+     * @return string Workspace path
      */
     public function getWorkspacePath(string $projectId, string $userId): string
     {
@@ -247,10 +238,10 @@ readonly class AsrDirectoryService
     }
 
     /**
-     * 生成 ASR 目录名.
+     * Generate an ASR directory name.
      *
-     * @param null|string $generatedTitle 预设标题
-     * @return string 目录名
+     * @param null|string $generatedTitle Preset title
+     * @return string Directory name
      */
     private function generateDirectoryName(?string $generatedTitle = null): string
     {
@@ -259,11 +250,11 @@ readonly class AsrDirectoryService
     }
 
     /**
-     * 从目录名提取时间戳.
+     * Extract the timestamp from a directory name.
      *
-     * @param string $directoryName 目录名
-     * @param string $taskKey 任务键（用于日志）
-     * @return string 时间戳（格式：_20251026_210626）
+     * @param string $directoryName Directory name
+     * @param string $taskKey Task key (for logging)
+     * @return string Timestamp suffix (format: _20251026_210626)
      */
     private function extractTimestamp(string $directoryName, string $taskKey): string
     {
@@ -271,8 +262,8 @@ readonly class AsrDirectoryService
             return '_' . $matches[1];
         }
 
-        // 如果没有匹配到时间戳，使用当前时间
-        $this->logger->info('未找到原时间戳，使用当前时间', [
+        // If no timestamp is found, use the current time
+        $this->logger->info('Original timestamp missing; use current time', [
             'task_key' => $taskKey,
             'old_directory_name' => $directoryName,
         ]);
@@ -280,20 +271,20 @@ readonly class AsrDirectoryService
     }
 
     /**
-     * 创建目录的内部实现（提取公共逻辑）.
+     * Internal helper to create directories (shared logic).
      *
-     * @param string $organizationCode 组织编码
-     * @param string $projectId 项目ID
-     * @param string $userId 用户ID
-     * @param string $relativePath 相对路径
-     * @param AsrDirectoryTypeEnum $directoryType 目录类型
-     * @param bool $isHidden 是否隐藏
-     * @param null|string $taskKey 任务键
-     * @param array $errorContext 错误日志上下文
-     * @param string $logMessage 错误日志消息
-     * @param AsrErrorCode $failedProjectError 项目失败错误码
-     * @param AsrErrorCode $failedError 通用失败错误码
-     * @return AsrRecordingDirectoryDTO 目录DTO
+     * @param string $organizationCode Organization code
+     * @param string $projectId Project ID
+     * @param string $userId User ID
+     * @param string $relativePath Relative path
+     * @param AsrDirectoryTypeEnum $directoryType Directory type
+     * @param bool $isHidden Whether the directory is hidden
+     * @param null|string $taskKey Task key
+     * @param array $errorContext Error log context
+     * @param string $logMessage Error log message
+     * @param AsrErrorCode $failedProjectError Project-level error code
+     * @param AsrErrorCode $failedError Generic error code
+     * @return AsrRecordingDirectoryDTO Directory DTO
      */
     private function createDirectoryInternal(
         string $organizationCode,
@@ -309,15 +300,15 @@ readonly class AsrDirectoryService
         AsrErrorCode $failedError
     ): AsrRecordingDirectoryDTO {
         try {
-            // 1. 确保项目工作区根目录存在
+            // 1. Ensure the project workspace root directory exists
             $rootDirectoryId = $this->ensureWorkspaceRootDirectoryExists($organizationCode, $projectId, $userId);
 
-            // 2. 获取项目信息
+            // 2. Fetch project details
             $projectEntity = $this->projectDomainService->getProject((int) $projectId, $userId);
             $workDir = $projectEntity->getWorkDir();
             $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
 
-            // 3. 检查目录是否已存在
+            // 3. Check whether the directory already exists
             $fileKey = AsrAssembler::buildFileKey($fullPrefix, $workDir, $relativePath);
             $fileKey = rtrim($fileKey, '/') . '/';
             $existingDir = $this->taskFileDomainService->getByProjectIdAndFileKey((int) $projectId, $fileKey);
@@ -330,7 +321,7 @@ readonly class AsrDirectoryService
                 );
             }
 
-            // 4. 创建目录实体
+            // 4. Create the directory entity
             $taskFileEntity = AsrAssembler::createDirectoryEntity(
                 $userId,
                 $organizationCode,
@@ -343,7 +334,7 @@ readonly class AsrDirectoryService
                 taskKey: $taskKey
             );
 
-            // 5. 插入或忽略
+            // 5. Insert or ignore
             $result = $this->taskFileDomainService->insertOrIgnore($taskFileEntity);
             if ($result !== null) {
                 return new AsrRecordingDirectoryDTO(
@@ -354,7 +345,7 @@ readonly class AsrDirectoryService
                 );
             }
 
-            // 6. 如果插入被忽略，查询现有目录
+            // 6. If insert was ignored, fetch the existing directory
             $existingDir = $this->taskFileDomainService->getByProjectIdAndFileKey((int) $projectId, $fileKey);
             if ($existingDir !== null) {
                 return new AsrRecordingDirectoryDTO(
@@ -373,12 +364,12 @@ readonly class AsrDirectoryService
     }
 
     /**
-     * 确保工作区根目录存在.
+     * Ensure the workspace root directory exists.
      *
-     * @param string $organizationCode 组织代码
-     * @param string $projectId 项目ID
-     * @param string $userId 用户ID
-     * @return int 项目工作区根目录的 file_id
+     * @param string $organizationCode Organization code
+     * @param string $projectId Project ID
+     * @param string $userId User ID
+     * @return int File ID of the project workspace root directory
      */
     private function ensureWorkspaceRootDirectoryExists(string $organizationCode, string $projectId, string $userId): int
     {

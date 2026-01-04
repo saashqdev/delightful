@@ -1,5 +1,5 @@
 """
-火山引擎语音识别服务实现
+Volcano Engine Automatic Speech Recognition service implementation
 """
 
 import json
@@ -14,7 +14,7 @@ from app.infrastructure.asr.types import ASRConfig, ASRResult, Utterance
 
 
 class ASRException(Exception):
-    """语音识别服务异常"""
+    """Automatic Speech Recognition service exception"""
     def __init__(self, message: str, code: Optional[str] = None):
         self.message = message
         self.code = code
@@ -22,14 +22,14 @@ class ASRException(Exception):
 
 
 class VEASRService:
-    """火山引擎语音识别服务"""
+    """Volcano Engine Automatic Speech Recognition service"""
 
     def __init__(self, config: ASRConfig):
         """
-        初始化火山引擎语音识别服务
+        Initialize Volcano Engine ASR service
 
         Args:
-            config: 语音识别配置
+            config: ASR configuration
         """
         self.config = config
         self.submit_url = "https://openspeech.bytedance.com/api/v3/auc/bigmodel/submit"
@@ -44,35 +44,35 @@ class VEASRService:
         retry_interval: int = 1
     ) -> ASRResult:
         """
-        转写音频文件
+        Transcribe audio file
 
         Args:
-            audio_url: 音频文件URL
-            audio_format: 音频格式
-            sample_rate: 采样率
-            max_retries: 最大重试次数
-            retry_interval: 重试间隔(秒)
+            audio_url: Audio file URL
+            audio_format: Audio format
+            sample_rate: Sample rate
+            max_retries: Maximum number of retries
+            retry_interval: Retry interval (seconds)
 
         Returns:
-            ASRResult: 语音识别结果
+            ASRResult: Speech recognition result
 
         Raises:
-            ASRException: 转写失败时抛出
+            ASRException: Raised when transcription fails
         """
         try:
-            # 提交转写任务
+            # Submit transcription task
             task_id, x_tt_logid = self._submit_task(audio_url, audio_format, sample_rate)
 
-            # 查询转写结果
+            # Query transcription result
             attempts = 0
             while attempts < max_retries:
                 query_response = self._query_task(task_id, x_tt_logid)
                 code = query_response.headers.get('X-Api-Status-Code', "")
 
-                if code == '20000000':  # 任务完成
-                    # 解析结果
+                if code == '20000000':  # Task completed
+                    # Parse result
                     return self._parse_response(task_id, query_response.json())
-                elif code != '20000001' and code != '20000002':  # 任务失败
+                elif code != '20000001' and code != '20000002':  # Task failed
                     raise ASRException(
                         f"ASR task failed with code: {code}",
                         code
@@ -97,18 +97,18 @@ class VEASRService:
         sample_rate: int = 16000
     ) -> Tuple[str, str]:
         """
-        提交语音转写任务
+        Submit speech transcription task
 
         Args:
-            audio_url: 音频文件URL
-            audio_format: 音频格式
-            sample_rate: 采样率
+            audio_url: Audio file URL
+            audio_format: Audio format
+            sample_rate: Sample rate
 
         Returns:
-            Tuple[str, str]: 任务ID和日志ID
+            Tuple[str, str]: Task ID and log ID
 
         Raises:
-            ASRException: 提交失败时抛出
+            ASRException: Raised when submission fails
         """
         task_id = str(uuid.uuid4())
 
@@ -162,14 +162,14 @@ class VEASRService:
 
     def _query_task(self, task_id: str, x_tt_logid: str) -> requests.Response:
         """
-        查询语音转写任务
+        Query speech transcription task
 
         Args:
-            task_id: 任务ID
-            x_tt_logid: 日志ID
+            task_id: Task ID
+            x_tt_logid: Log ID
 
         Returns:
-            requests.Response: HTTP响应对象
+            requests.Response: HTTP response object
         """
         headers = {
             "X-Api-App-Key": self.config.app_id,
@@ -187,23 +187,23 @@ class VEASRService:
 
     def _parse_response(self, task_id: str, response_data: Dict[str, Any]) -> ASRResult:
         """
-        解析语音识别结果
+        Parse speech recognition result
 
         Args:
-            task_id: 任务ID
-            response_data: 响应数据
+            task_id: Task ID
+            response_data: Response data
 
         Returns:
-            ASRResult: 解析后的语音识别结果
+            ASRResult: Parsed speech recognition result
         """
         try:
-            # 提取原始结果
+            # Extract raw result
             result = response_data.get("result", {})
 
-            # 构建完整的识别文本
+            # Build complete recognition text
             full_text = result.get("text", "")
 
-            # 提取分段结果
+            # Extract segmented results
             utterances = []
             for item in result.get("utterances", []):
                 utterances.append(
@@ -214,7 +214,7 @@ class VEASRService:
                     )
                 )
 
-            # 构建结果
+            # Build result
             return ASRResult(
                 status="success",
                 message="Transcription completed successfully",
@@ -226,7 +226,7 @@ class VEASRService:
 
         except Exception as e:
             logger.error(f"Error parsing ASR response: {e}")
-            # 返回错误结果
+            # Return error result
             return ASRResult(
                 status="error",
                 message=f"Failed to parse response: {e!s}",

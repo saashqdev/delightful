@@ -7,7 +7,7 @@ declare(strict_types=1);
 use App\Infrastructure\Core\Router\RouteLoader;
 use Hyperf\HttpServer\Router\Router;
 
-// 基础路由
+// Basic routes
 Router::get('/', function () {
     return 'hello, magic-service!';
 });
@@ -22,8 +22,8 @@ Router::addRoute(
     }
 );
 
-// 加载 Mock 路由（用于测试）
+// Load mock routes (for testing)
 require BASE_PATH . '/config/routes-mock.php';
 
-// 加载 v1 路由
+// Load v1 routes
 RouteLoader::loadDir(BASE_PATH . '/config/routes-v1');

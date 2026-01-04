@@ -1,4 +1,4 @@
-import io  # 导入 io 模块
+import io  # Import io module
 from pathlib import Path
 
 import aiofiles
@@ -15,28 +15,28 @@ md.register_converter(PDFConverter()) # Register only PDF for this util
 
 async def convert_pdf_locally(pdf_path: Path) -> str | None:
     """
-    使用 MarkItDown 将本地 PDF 文件转换为 Markdown 文本。
+    Convert local PDF files to Markdown text using MarkItDown.
 
-    不再负责文件写入。
+    No longer responsible for file writing.
 
     Args:
-        pdf_path: 指向源 PDF 文件的 Path 对象。
+        pdf_path: Path object pointing to the source PDF file.
 
     Returns:
-        转换后的 Markdown 文本字符串，如果转换失败则返回 None。
+        Converted Markdown text string, returns None if conversion fails.
     """
-    logger.info(f"开始本地 PDF 到文本转换: {pdf_path}")
+    logger.info(f"Starting local PDF to text conversion: {pdf_path}")
 
     try:
-        # 1. 异步读取整个 PDF 文件内容到内存
+        # 1. Asynchronously read the entire PDF file content into memory
         async with aiofiles.open(pdf_path, "rb") as f:
             pdf_content_bytes = await f.read()
 
-        # 2. 将内存中的 bytes 包装成 BytesIO 对象
+        # 2. Wrap the bytes in memory into a BytesIO object
         pdf_stream = io.BytesIO(pdf_content_bytes)
 
-        # 3. 将 BytesIO 对象传递给 MarkItDown 进行转换
-        # MarkItDown/Magika 需要同步的 BinaryIO
+        # 3. Pass the BytesIO object to MarkItDown for conversion
+        # MarkItDown/Magika requires synchronous BinaryIO
         result = md.convert(
             pdf_stream,
             stream_info=StreamInfo(extension='.pdf', mimetype='application/pdf'),
@@ -45,17 +45,17 @@ async def convert_pdf_locally(pdf_path: Path) -> str | None:
         )
 
         if not result or not result.markdown:
-            logger.error(f"本地 PDF 转换失败（MarkItDown 未返回内容）: {pdf_path}")
+            logger.error(f"Local PDF conversion failed (MarkItDown did not return content): {pdf_path}")
             return None
 
-        logger.info(f"本地 PDF 到文本转换成功: {pdf_path}")
-        return result.markdown # 直接返回文本内容
+        logger.info(f"Local PDF to text conversion succeeded: {pdf_path}")
+        return result.markdown # Return text content directly
 
     except FileNotFoundError:
-        logger.error(f"本地 PDF 到文本转换失败：源文件未找到 {pdf_path}")
+        logger.error(f"Local PDF to text conversion failed: source file not found {pdf_path}")
         return None
     except Exception as e:
-        logger.exception(f"本地 PDF 到文本转换过程中发生意外错误 ({pdf_path}): {e!s}")
+        logger.exception(f"Unexpected error occurred during local PDF to text conversion ({pdf_path}): {e!s}")
         return None
 
 # Ensure the directory exists for the module if needed

@@ -1,7 +1,7 @@
 """
-客户端消息结构定义
+Client Message Structure Definition
 
-定义客户端发送给服务端的WebSocket消息结构
+Defines the WebSocket message structure sent by clients to the server
 """
 from enum import Enum
 from typing import Any, Dict, List, Optional, Union
@@ -14,7 +14,7 @@ from app.core.entity.message.message import MessageType
 
 
 class ClientMessage(BaseModel):
-    """任务消息模型"""
+    """Task message model"""
     message_id: str
     type: Union[MessageType, str]
 
@@ -23,15 +23,15 @@ class ClientMessage(BaseModel):
 
 
 class ContextType(str, Enum):
-    """消息上下文类型枚举"""
-    NORMAL = "normal"      # 正常消息
-    FOLLOW_UP = "follow_up"  # 追问消息
-    INTERRUPT = "interrupt"  # 中断消息
+    """Message context type enumeration"""
+    NORMAL = "normal"      # Normal message
+    FOLLOW_UP = "follow_up"  # Follow-up message
+    INTERRUPT = "interrupt"  # Interrupt message
 
 class TaskMode(str, Enum):
-    """任务模式类型枚举"""
-    CHAT = "chat"      # 聊天模式，使用magic.agent
-    PLAN = "plan"      # 规划模式，使用super-magic.agent
+    """Task mode type enumeration"""
+    CHAT = "chat"      # Chat mode, uses magic.agent
+    PLAN = "plan"      # Planning mode, uses super-magic.agent
 
 class ChatClientMessage(ClientMessage):
     """

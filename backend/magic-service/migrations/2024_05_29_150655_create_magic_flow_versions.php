@@ -17,17 +17,17 @@ class CreateMagicFlowVersions extends Migration
     {
         Schema::create('magic_flow_versions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('flow_code')->default('')->comment('所属流程编码');
-            $table->string('code')->default('')->comment('版本编码');
-            $table->string('name')->default('')->comment('版本名称');
-            $table->string('description')->default('')->comment('版本描述');
-            $table->json('magic_flow')->nullable(false)->comment('流程信息');
-            $table->string('organization_code')->default('')->comment('组织代码');
-            $table->string('created_uid')->default('')->comment('创建者用户ID');
-            $table->timestamp('created_at')->nullable()->comment('创建时间');
-            $table->string('updated_uid')->default('')->comment('更新者用户ID');
-            $table->timestamp('updated_at')->nullable()->comment('更新时间');
-            $table->timestamp('deleted_at')->nullable()->comment('删除时间');
+            $table->string('flow_code')->default('')->comment('Belonging flow code');
+            $table->string('code')->default('')->comment('Version code');
+            $table->string('name')->default('')->comment('Version name');
+            $table->string('description')->default('')->comment('Version description');
+            $table->json('magic_flow')->nullable(false)->comment('Flow payload');
+            $table->string('organization_code')->default('')->comment('Organization code');
+            $table->string('created_uid')->default('')->comment('Creator user ID');
+            $table->timestamp('created_at')->nullable()->comment('Created at');
+            $table->string('updated_uid')->default('')->comment('Updater user ID');
+            $table->timestamp('updated_at')->nullable()->comment('Updated at');
+            $table->timestamp('deleted_at')->nullable()->comment('Deleted at');
 
             $table->index(['flow_code', 'code']);
         });

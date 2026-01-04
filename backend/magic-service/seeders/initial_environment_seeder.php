@@ -15,15 +15,15 @@ class InitialEnvironmentSeeder extends Seeder
     {
         $envId = 10000;
 
-        // 检查是否已有环境数据
+        // Check if environment data already exists
         $existingEnvironment = Db::table('magic_environments')->where('id', $envId)->first();
 
         if ($existingEnvironment) {
-            echo "已存在ID为{$envId}的环境配置数据，无需重复创建" . PHP_EOL;
+            echo "Environment config with ID {$envId} already exists; skipping creation" . PHP_EOL;
             return;
         }
 
-        // 生产环境配置
+        // Production environment config
         $productionConfig = [
             'id' => $envId,
             'environment_code' => '',
@@ -34,7 +34,7 @@ class InitialEnvironmentSeeder extends Seeder
                 'name' => '麦吉开源',
                 'domain' => [
                     [
-                        'type' => PlatformType::Magic, // token 由麦吉下发，麦吉自己校验即可
+                        'type' => PlatformType::Magic, // token is issued by Magic and validated internally
                     ],
                 ],
             ], JSON_THROW_ON_ERROR),
@@ -43,9 +43,9 @@ class InitialEnvironmentSeeder extends Seeder
             'updated_at' => date('Y-m-d H:i:s'),
         ];
 
-        // 插入环境配置数据
+        // Insert environment config
         Db::table('magic_environments')->insert($productionConfig);
 
-        echo "已创建环境配置: 生产环境 ID {$envId}" . PHP_EOL;
+        echo "Created environment config: production ID {$envId}" . PHP_EOL;
     }
 }

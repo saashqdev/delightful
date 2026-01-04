@@ -1,38 +1,38 @@
-# 使用 Playwright 基础镜像
+# Use Playwright base image
 FROM ghcr.io/dtyq/super-magic-python-base-image:latest
 
-# 设置工作目录
+# Set working directory
 WORKDIR /app
 
-# 复制并安装项目依赖
+# Copy and install project dependencies
 COPY requirements.txt .
 
-# 安装依赖，使用缓存挂载优化
+# Install dependencies, use cache mount optimization
 RUN pip install -r requirements.txt
 
-# 安装沙箱环境依赖
+# Install sandbox environment dependencies
 COPY requirements_sandbox.txt .
 RUN pip install -r requirements_sandbox.txt
 
-# 创建matplotlib配置目录
+# Create matplotlib configuration directory
 RUN mkdir -p /root/.config/matplotlib
 
-# 复制字体检查脚本
+# Copy font check script
 COPY deploy/ /app/deploy/
 
-# 检查matplotlib字体（如果字体不是WenQuanYi，则构建失败）
+# Check matplotlib font (if font is not WenQuanYi, build will fail)
 RUN python /app/deploy/configure_font.py
 RUN python /app/deploy/check_font.py
 
-# 更新环境变量路径
+# Update environment variable path
 ENV PATH="/usr/local/bin:${PATH}"
 
 COPY . .
 
 RUN pip install -e agentlang
 
-# 获取Git commit ID并保存到环境变量
-ARG GIT_COMMIT_ID="未知"
+# Get Git commit ID and save to environment variable
+ARG GIT_COMMIT_ID="unknown"
 ENV GIT_COMMIT_ID=${GIT_COMMIT_ID}
 
 EXPOSE 8000

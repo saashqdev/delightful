@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\LongTermMemory\Enum;
 
 /**
- * 应用代码枚举.
+ * Application code enum.
  */
 enum AppCodeEnum: string
 {

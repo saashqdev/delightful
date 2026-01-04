@@ -1,8 +1,7 @@
 """
-异常定义模块
+Exception definitions module.
 
-本模块包含所有 agentlang 包使用的异常类定义，
-提供了统一的异常处理接口和用户友好的消息展示机制。
+Contains all exception classes used by the agentlang package, providing a unified exception interface and user-friendly messaging mechanism.
 """
 
 from abc import ABC, abstractmethod
@@ -10,19 +9,18 @@ from typing import Any, Dict
 
 
 class UserFriendlyException(BaseException, ABC):
-    """用户友好异常接口类
-    
-    定义了可以向用户展示友好错误消息的异常接口。
-    继承此类的异常应实现 get_user_friendly_message 方法，
-    以提供适合直接展示给最终用户的错误消息。
+    """Interface for user-friendly exceptions.
+
+    Defines an interface for exceptions that can present friendly error messages to users.
+    Subclasses should implement ``get_user_friendly_message`` to provide text suitable for end users.
     """
 
     def __init__(self, message: str = "", **kwargs: Any):
-        """初始化异常
-        
+        """Initialize the exception.
+
         Args:
-            message: 异常消息
-            **kwargs: 其他异常相关参数
+            message: Exception message
+            **kwargs: Additional exception metadata
         """
         self.message = message
         self.extra_data: Dict[str, Any] = kwargs
@@ -30,12 +28,11 @@ class UserFriendlyException(BaseException, ABC):
 
     @abstractmethod
     def get_user_friendly_message(self) -> str:
-        """获取适合向用户展示的友好错误消息
-        
-        返回一个经过格式化、便于理解的错误消息，
-        该消息可以直接展示给最终用户，无需技术背景也能理解。
-        
+        """Return a user-friendly error message.
+
+        Should provide a formatted, easy-to-understand string suitable for display to end users without technical background.
+
         Returns:
-            str: 格式化后的用户友好消息
+            str: Formatted user-facing message
         """
         pass 

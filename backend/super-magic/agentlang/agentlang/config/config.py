@@ -12,7 +12,7 @@ T = TypeVar("T", bound=BaseModel)
 
 
 class Config(Generic[T]):
-    """配置管理器，支持 YAML 配置文件、Pydantic 模型验证和 Agent 模式切换"""
+    """Configuration manager supporting YAML config files, Pydantic model validation, and Agent mode switching"""
 
     _instance = None
     _config: Dict[str, Any] = {}
@@ -21,7 +21,7 @@ class Config(Generic[T]):
     _logger = get_logger("agentlang.config.config_manager")
     _config_loaded = False
     _config_path = None
-    _raw_config: Dict[str, Any] = {} # 保存原始加载的配置，用于 reload
+    _raw_config: Dict[str, Any] = {} # Save original loaded config for reload
 
     def __new__(cls):
         if cls._instance is None:
@@ -32,60 +32,60 @@ class Config(Generic[T]):
         self.load_config()
 
     def set(self, key_path: str, value: Any) -> None:
-        """设置配置值，支持使用点号(.)表示层级关系
+        """Set configuration value, supports using dot notation (.) for hierarchy
 
         Args:
-            key_path: 配置键路径，例如 'openai.api_key'
-            value: 要设置的值
+            key_path: Configuration key path, e.g. 'openai.api_key'
+            value: Value to set
         """
         if not key_path:
             return
 
-        # 将点号分隔的路径转换为键列表
+        # Convert dot-separated path to key list
         keys = key_path.split(".")
 
-        # 从配置字典中逐层设置值
+        # Set value layer by layer in config dictionary
         current = self._config
         for key in keys[:-1]:
             current = current.setdefault(key, {})
         current[keys[-1]] = value
 
-        # 重新加载模型别名，因为相关配置可能已更改
+        # Reload model aliases as related config may have changed
         self._load_model_aliases()
 
-        # 如果有模型类，重新验证
+        # If there's a model class, revalidate
         if self._model is not None:
             self._model = self._model.__class__(**self._config)
 
     def _ensure_config_loaded(self) -> None:
-        """确保配置已加载，如果未加载则进行加载"""
+        """Ensure configuration is loaded; load it if not"""
         if not self._config_loaded:
             self.load_config()
             self._config_loaded = True
 
     def load_config(self, config_path: Optional[str] = None, model: Optional[Type[T]] = None) -> None:
-        """加载配置文件并处理模式
+        """Load the config file and apply modes
 
         Args:
-            config_path: 配置文件路径，如果为 None 则自动寻找
-            model: Pydantic 模型类，用于配置验证
+            config_path: Path to the config file; if None, it will be auto-discovered
+            model: Pydantic model class used for validation
         """
-        # 尝试确定配置文件路径
+        # Try to determine the config file path
         if config_path is None:
-            # 尝试从环境变量获取配置路径
+            # First check environment variable
             config_path = os.getenv("CONFIG_PATH")
 
-            # 如果环境变量中没有配置路径，尝试从项目根目录确定
+            # If not set, try to resolve from project root
             if not config_path:
                 try:
-                    # 优先使用 ApplicationContext 获取路径管理器
+                    # Prefer ApplicationContext to get the path manager
                     path_manager = ApplicationContext.get_path_manager()
                     config_path = str(path_manager.get_project_root() / "config/config.yaml")
-                    self._logger.info(f"通过 ApplicationContext 确定配置路径: {config_path}")
+                    self._logger.info(f"Config path resolved via ApplicationContext: {config_path}")
                 except (ImportError, AttributeError, RuntimeError) as e:
-                    self._logger.debug(f"无法通过 ApplicationContext 获取路径: {e}")
+                    self._logger.debug(f"Could not get path via ApplicationContext: {e}")
 
-                # 如果仍然无法确定配置路径，使用空配置
+                # If still not found, fall back to empty config
                 if not config_path or not os.path.exists(config_path):
                     config_file_found = False
                 else:
@@ -95,12 +95,12 @@ class Config(Generic[T]):
         else:
             config_file_found = os.path.exists(config_path)
 
-        # 处理配置文件不存在的情况
+        # Handle missing config file
         if not config_file_found:
             if config_path:
-                self._logger.warning(f"配置文件不存在: {config_path}，将使用空配置")
+                self._logger.warning(f"Config file not found: {config_path}; using empty config")
             else:
-                self._logger.warning("无法确定配置文件路径，将使用空配置")
+                self._logger.warning("Config path not determined; using empty config")
             self._config = {}
             self._raw_config = {}
             self._model_aliases = {}
@@ -108,79 +108,79 @@ class Config(Generic[T]):
             return
 
         try:
-            # 加载 YAML 配置
+            # Load YAML config
             with open(config_path, "r", encoding="utf-8") as f:
                 self._raw_config = yaml.safe_load(f) or {}
         except Exception as e:
-            self._logger.error(f"加载或解析配置文件失败 {config_path}: {e}")
+            self._logger.error(f"Failed to load or parse config file {config_path}: {e}")
             self._config = {}
             self._raw_config = {}
             self._model_aliases = {}
             self._config_loaded = True
             return
 
-        # 处理配置中的环境变量占位符
+        # Expand environment variable placeholders
         self._config = self._process_env_placeholders(self._raw_config)
         self._config_loaded = True
 
-        # 加载模型别名（基于处理后的配置，特别是 active_agent_mode）
+        # Load model aliases (based on processed config, especially active_agent_mode)
         self._load_model_aliases()
 
-        # 如果提供了模型类，进行验证
+        # Validate with provided model class if supplied
         if model is not None:
             try:
                 self._model = model(**self._config)
-                # 更新配置字典，确保所有默认值都被包含
+                # Refresh config dict to include defaults
                 self._config = self._model.model_dump()
-                # 重新加载别名以防 Pydantic 模型有影响
+                # Reload aliases in case Pydantic model affects them
                 self._load_model_aliases()
             except Exception as e:
-                self._logger.error(f"使用 Pydantic 模型验证配置失败: {e}")
+                self._logger.error(f"Config validation with Pydantic model failed: {e}")
                 self._model = None
 
     def _load_model_aliases(self) -> None:
-        """根据当前激活的模式加载和解析模型别名"""
+        """Load and resolve model aliases based on the active mode"""
         if not self._config:
-            self._logger.debug("配置尚未加载，无法加载模型别名。")
+            self._logger.debug("Config not loaded yet; cannot load model aliases.")
             self._model_aliases = {}
             return
 
-        # 获取激活模式名称，默认为 'apex'
+        # Get active mode name, defaulting to 'apex'
         active_mode_name = self.get('active_agent_mode', 'apex')
-        self._logger.info(f"当前活动的 Agent 模式: {active_mode_name}")
+        self._logger.info(f"Current active Agent mode: {active_mode_name}")
 
         agent_modes_config = self.get('agent_modes', {})
         if not isinstance(agent_modes_config, dict):
-            self._logger.warning("'agent_modes' 配置不是字典格式，将忽略模式配置。")
+            self._logger.warning("'agent_modes' config is not a dict; mode config will be ignored.")
             agent_modes_config = {}
 
         active_mode_data = agent_modes_config.get(active_mode_name, {})
         if not isinstance(active_mode_data, dict):
-             self._logger.warning(f"模式 '{active_mode_name}' 的配置不是字典格式，将忽略。")
+             self._logger.warning(f"Config for mode '{active_mode_name}' is not a dict; ignoring it.")
              active_mode_data = {}
 
-        if not active_mode_data and active_mode_name != 'apex': # 如果指定模式不存在且不是默认的apex
-            self._logger.warning(f"未找到名为 '{active_mode_name}' 的 Agent 模式配置。将检查是否存在全局默认别名。")
+        if not active_mode_data and active_mode_name != 'apex':  # If the specified mode is missing and not the default
+            self._logger.warning(f"No Agent mode named '{active_mode_name}' found. Will check for global default aliases.")
 
-        # 从激活的模式中获取别名配置
+        # Pull aliases from the active mode
         mode_aliases = active_mode_data.get('model_aliases', {})
         if not isinstance(mode_aliases, dict):
-            self._logger.warning(f"模式 '{active_mode_name}' 中的 'model_aliases' 不是字典格式，将忽略。")
+            self._logger.warning(f"'model_aliases' in mode '{active_mode_name}' is not a dict; ignoring.")
             mode_aliases = {}
 
-        # (可选) 获取全局默认别名作为基础
+        # Optionally take global defaults as a base
         fallback_aliases = self.get('model_aliases', {})
         if not isinstance(fallback_aliases, dict):
-             self._logger.warning("全局 'model_aliases' 配置不是字典格式，将忽略。")
+             self._logger.warning("Global 'model_aliases' config is not a dict; ignoring.")
              fallback_aliases = {}
 
-        # 合并：模式别名优先于全局别名
+        # Merge: mode aliases override global aliases
         combined_aliases = {**fallback_aliases, **mode_aliases}
 
         final_aliases = {}
-        # 处理环境变量覆盖
+        # Handle environment variable overrides
         for alias_key, model_in_config in combined_aliases.items():
-            # 构造对应的环境变量名 (e.g., main_llm -> MAIN_LLM)
+            # Build env var name (e.g., main_llm -> MAIN_LLM)
             env_var_name = alias_key.upper()
             env_value = os.getenv(env_var_name)
 
@@ -188,40 +188,40 @@ class Config(Generic[T]):
                 resolved_model = self._convert_value_type(env_value)
                 final_aliases[alias_key] = resolved_model
                 if resolved_model != model_in_config:
-                     self._logger.debug(f"模型别名 '{alias_key}' (模式 '{active_mode_name}') 被环境变量 '{env_var_name}' 覆盖为 '{resolved_model}' (原为 '{model_in_config}')")
+                     self._logger.debug(f"Model alias '{alias_key}' (mode '{active_mode_name}') overridden by env '{env_var_name}' -> '{resolved_model}' (was '{model_in_config}')")
                 else:
-                     self._logger.debug(f"模型别名 '{alias_key}' (模式 '{active_mode_name}') 由环境变量 '{env_var_name}' 确认为 '{resolved_model}'")
+                     self._logger.debug(f"Model alias '{alias_key}' (mode '{active_mode_name}') confirmed by env '{env_var_name}' as '{resolved_model}'")
             else:
-                final_aliases[alias_key] = model_in_config # 使用配置文件中的值
-                self._logger.debug(f"模型别名 '{alias_key}' 使用模式 '{active_mode_name}' (或默认) 配置为 '{model_in_config}'")
+                final_aliases[alias_key] = model_in_config  # Use config value
+                self._logger.debug(f"Model alias '{alias_key}' set by mode '{active_mode_name}' (or default) to '{model_in_config}'")
 
-        # 检查是否有仅通过环境变量定义的别名 (例如，如果设置了 FOO_LLM 但配置文件没有 foo_llm)
+        # Also consider aliases defined solely via env vars (e.g., FOO_LLM when config lacks foo_llm)
         for env_key, env_val in os.environ.items():
-            # 简单的启发式检查，可能需要根据实际命名调整
+            # Simple heuristic; adjust if naming differs
             if env_key.endswith("_LLM") and not env_key.startswith("_"):
                 potential_alias_key = env_key.lower()
                 if potential_alias_key not in final_aliases:
                     resolved_model = self._convert_value_type(env_val)
                     final_aliases[potential_alias_key] = resolved_model
-                    self._logger.debug(f"模型别名 '{potential_alias_key}' 直接从环境变量 '{env_key}' 添加，值为 '{resolved_model}'")
+                    self._logger.debug(f"Model alias '{potential_alias_key}' added directly from env '{env_key}' with value '{resolved_model}'")
 
         self._model_aliases = final_aliases
-        self._logger.info(f"最终加载的模型别名 ({active_mode_name} 模式): {self._model_aliases}")
+        self._logger.info(f"Loaded model aliases for mode {active_mode_name}: {self._model_aliases}")
 
     def get_model(self) -> Optional[T]:
-        """获取验证后的 Pydantic 模型实例"""
+        """Return the validated Pydantic model instance"""
         self._ensure_config_loaded()
         return self._model
 
     def get(self, key_path: str, default: Any = None) -> Any:
-        """获取配置值，支持点号路径，并考虑模式覆盖
+        """Get a config value using dot notation, honoring mode overrides
 
         Args:
-            key_path: 配置键路径，例如 'openai.api_key'
-            default: 默认值，当配置项不存在时返回
+            key_path: Config key path, e.g., 'openai.api_key'
+            default: Fallback value when the key is missing
 
         Returns:
-            配置值或默认值
+            The config value or the default
         """
         self._ensure_config_loaded()
 
@@ -230,7 +230,7 @@ class Config(Generic[T]):
 
         keys = key_path.split(".")
 
-        # 优先尝试从当前激活模式获取值
+        # First try to read from the active mode
         active_mode_name = self._config.get('active_agent_mode', 'apex')
         mode_config = self._config.get('agent_modes', {}).get(active_mode_name, {})
 
@@ -256,7 +256,7 @@ class Config(Generic[T]):
         if found_in_mode:
              return current_mode
 
-        # 如果模式中没找到，再从全局配置查找
+        # If not found in the mode, fall back to global config
         current_global = self._config
         found_in_global = True
         try:
@@ -282,36 +282,36 @@ class Config(Generic[T]):
         return default
 
     def resolve_model_alias(self, alias_or_model_name: str) -> str:
-        """解析模型别名或返回原始名称
+        """Resolve a model alias or return the original name
 
         Args:
-            alias_or_model_name: 模型别名或实际模型名称
+            alias_or_model_name: Alias or actual model name
 
         Returns:
-            解析后的实际模型名称
+            The resolved model name
         """
-        self._ensure_config_loaded() # 确保别名已加载
+        self._ensure_config_loaded()  # Ensure aliases are loaded
         resolved_name = self._model_aliases.get(alias_or_model_name, alias_or_model_name)
 
         if resolved_name != alias_or_model_name:
-            self._logger.debug(f"模型别名 '{alias_or_model_name}' 解析为 '{resolved_name}'")
+            self._logger.debug(f"Model alias '{alias_or_model_name}' resolved to '{resolved_name}'")
 
-        # 直接检查模型定义是否存在于 self._config['models']
-        models_dict = self._config.get('models', {}) # 直接获取 models 字典
+        # Check that the model is defined in self._config['models']
+        models_dict = self._config.get('models', {})  # Directly fetch models dict
         if not isinstance(models_dict, dict):
-             self._logger.error("配置结构错误: 'models' 键丢失或不是字典格式。")
-             # 返回一个明确的错误标识，方便下游处理
+             self._logger.error("Config structure error: 'models' key missing or not a dict.")
+             # Return explicit marker for downstream handling
              return "error-config-models-missing"
         if resolved_name not in models_dict:
-             self._logger.error(f"致命错误：解析或直接使用的模型名称 '{resolved_name}' (来自别名 '{alias_or_model_name}') 在 config.models 中没有定义！请检查配置文件。")
-             # 返回一个明确的错误标识
+             self._logger.error(f"Fatal: model '{resolved_name}' (from alias '{alias_or_model_name}') is not defined in config.models. Please check the config file.")
+             # Return explicit marker
              return "error-model-not-defined"
 
         return resolved_name
 
     def reload_config(self) -> None:
-        """重新加载配置，会重新处理环境变量和模式"""
-        self._logger.info("正在重新加载配置...")
+        """Reload configuration, reprocessing env vars and modes"""
+        self._logger.info("Reloading configuration...")
 
         if self._config_path and os.path.exists(self._config_path):
             self.load_config(config_path=self._config_path)
@@ -319,24 +319,24 @@ class Config(Generic[T]):
             self._config_loaded = False
             self.load_config()
 
-        self._logger.info("配置重新加载完成")
+        self._logger.info("Configuration reload finished")
 
     def _process_env_placeholders(self, config_dict: Dict[str, Any]) -> Dict[str, Any]:
-        """处理配置中的环境变量占位符
+        """Process environment variable placeholders within the config
 
-        支持两种格式:
-        1. ${ENV_VAR} - 从环境变量获取值，无默认值
-        2. ${ENV_VAR:-default} - 从环境变量获取值，如果不存在则使用默认值
+        Supported formats:
+        1. ${ENV_VAR} - use env value, no default
+        2. ${ENV_VAR:-default} - use env value, fallback to default if missing
 
-        同时会进行数据类型转换:
-        - 如果值为 "true" 或 "false"，会转换为对应的布尔值
-        - 如果值看起来像数字，会转换为对应的数字类型
+        Performs type conversion:
+        - "true" / "false" -> booleans
+        - Numeric-looking strings -> numbers
 
         Args:
-            config_dict: 原始配置字典
+            config_dict: Raw configuration dictionary
 
         Returns:
-            处理后的配置字典
+            Processed configuration dictionary
         """
         if not isinstance(config_dict, dict):
             return config_dict
@@ -344,80 +344,80 @@ class Config(Generic[T]):
         result = {}
         for key, value in config_dict.items():
             if isinstance(value, dict):
-                # 递归处理嵌套字典
+                # Recursively process nested dicts
                 result[key] = self._process_env_placeholders(value)
             elif isinstance(value, list):
-                # 递归处理列表中的字典或字符串
+                # Recursively handle dicts or strings inside lists
                 result[key] = [self._process_env_placeholders(item) if isinstance(item, dict) else self._process_string_placeholder(item) if isinstance(item, str) else item for item in value]
             elif isinstance(value, str):
-                # 处理字符串中的环境变量占位符
+                # Process string placeholders
                 result[key] = self._process_string_placeholder(value)
             else:
-                # 非字符串/字典/列表值直接保留
+                # Preserve non-str/dict/list values as-is
                 result[key] = value
 
         return result
 
     def _process_string_placeholder(self, value: str) -> Any:
-        """处理字符串中的环境变量占位符并转换类型"""
+        """Process env placeholders in a string and convert types"""
         pattern = r"\${([A-Za-z0-9_]+)(?::-([^}]*))?\}"
         match = re.fullmatch(pattern, value)
         if match:
             env_var = match.group(1)
             default_value = match.group(2) if match.group(2) is not None else ""
 
-            # 从环境变量获取值，如果不存在则使用默认值
+            # Pull from env, otherwise use default
             env_value = os.getenv(env_var)
             if env_value is not None:
                 return self._convert_value_type(env_value)
             else:
                 return self._convert_value_type(default_value)
         else:
-            # 如果字符串不是 ${ENV_VAR:-default} 格式，仍然尝试类型转换
+            # If not in ${ENV_VAR:-default} form, still attempt type conversion
             return self._convert_value_type(value)
 
     def _convert_value_type(self, value: Any) -> Any:
-        """转换值的数据类型
+        """Convert value types
 
-        - 将 "true"/"false" 转换为布尔值
-        - 将数字字符串转换为整数或浮点数
+        - "true"/"false" -> booleans
+        - Numeric strings -> ints or floats
 
         Args:
-            value: 要转换的字符串值
+            value: String value to convert
 
         Returns:
-            转换后的值
+            Converted value
         """
-        if not isinstance(value, str): # 如果已经是其他类型，直接返回
+        if not isinstance(value, str):  # Already typed; return as-is
             return value
 
-        # 处理布尔值
+        # Handle booleans
         val_lower = value.lower()
         if val_lower == "true":
             return True
         elif val_lower == "false":
             return False
-        elif val_lower == "none" or value == "": # 处理 "none" 和空字符串
-            return None # 或者根据需要返回 ""
+        elif val_lower == "none" or value == "":  # Handle "none" and empty string
+            return None  # Or return "" if needed
 
-        # 处理数字
+        # Handle numbers
         try:
-            # 尝试转换为整数
+            # Try converting to int
             if value.isdigit() or (value.startswith("-") and value[1:].isdigit()):
                 return int(value)
 
-            # 尝试转换为浮点数
+            # Try converting to float
             if "." in value:
                 float_val = float(value)
-                # 检查是否是整数值的浮点数（如 5.0）
+                # If the float is effectively an int (e.g., 5.0), return int
                 if float_val.is_integer():
                     return int(float_val)
                 return float_val
         except (ValueError, TypeError):
             pass
 
-        # 无法转换，返回原始值
+        # If conversion fails, return original value
         return value
 
-# 创建全局配置管理器实例
+# Create global config manager instance
 config = Config()

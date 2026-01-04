@@ -4,34 +4,34 @@ from pydantic import BaseModel
 
 
 class WorkspaceInfo(BaseModel):
-    """工作区信息模型"""
+    """Workspace information model."""
 
-    id: Any  # 可以是数字或字符串
+    id: Any  # Can be a number or string
     workspace_name: str
     sort: int
 
 
-# 请求模型
+# Request models
 class GetWorkspacesRequest(BaseModel):
-    """获取工作区列表请求模型"""
+    """Request model for fetching workspace list."""
     pass
 
 
 class SaveWorkspaceRequest(BaseModel):
-    """保存工作区请求模型"""
+    """Request model for creating or updating a workspace."""
 
-    id: Optional[Any] = None  # 可选，编辑时提供
-    name: str  # 工作区名称
+    id: Optional[Any] = None  # Optional, provide when editing
+    name: str  # Workspace name
 
 
 class DeleteWorkspaceRequest(BaseModel):
-    """删除工作区请求模型"""
+    """Request model for deleting a workspace."""
 
-    id: Any  # 工作区ID
+    id: Any  # Workspace ID
 
 
-# 响应模型
+# Response models
 class WorkspaceResponse(BaseModel):
-    """工作区响应模型"""
+    """Workspace response model."""
 
     id: Any

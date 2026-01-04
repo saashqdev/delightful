@@ -15,58 +15,58 @@ logger = get_logger(__name__)
 
 
 class FileSearchParams(BaseToolParams):
-    """文件搜索参数"""
+    """File search parameters"""
     query: str = Field(
         ...,
-        description="要搜索的模糊文件名"
+        description="Fuzzy filename to search for"
     )
 
 
 @tool()
 class FileSearch(WorkspaceGuardTool[FileSearchParams]):
     """
-    基于对文件路径的模糊匹配的快速文件搜索。
-    如果你知道文件路径的一部分但不确切知道它的位置，请使用此工具。响应将限制为10个结果。如果需要进一步过滤结果，请使查询更具体。
+    Fast file search based on fuzzy matching of file paths.
+    Use this tool if you know part of a file path but don't know exactly where it is. Results will be limited to 10. Make your query more specific if you need to filter results further.
     """
 
     async def execute(self, tool_context: ToolContext, params: FileSearchParams) -> ToolResult:
-        """执行工具并返回结果
+        """Execute the tool and return results
 
         Args:
-            tool_context: 工具上下文
-            params: 文件搜索参数
+            tool_context: Tool context
+            params: File search parameters
 
         Returns:
-            ToolResult: 包含搜索结果
+            ToolResult: Contains search results
         """
-        # 调用_run方法获取结果
+        # Call _run method to get results
         result = self._run(params.query)
 
-        # 返回ToolResult
+        # Return ToolResult
         return ToolResult(content=result)
 
     def _run(self, query: str) -> str:
-        """运行工具并返回搜索结果"""
+        """Run the tool and return search results"""
         try:
-            # 获取所有文件路径
+            # Get all file paths
             all_files = self._get_all_files(self.base_dir)
 
-            # 使用模糊匹配过滤文件
+            # Filter files using fuzzy matching
             matches = self._fuzzy_match(all_files, query)
 
-            # 限制结果数量
+            # Limit number of results
             matches = matches[:10]
 
             if not matches:
-                return "未找到匹配的文件"
+                return "No matching files found"
 
-            # 格式化输出
-            output = ["找到以下匹配的文件：\n"]
+            # Format output
+            output = ["Found the following matching files:\n"]
             for file_path in matches:
                 stat = file_path.stat()
                 rel_path = str(file_path.relative_to(self.base_dir))
 
-                # 创建 FileInfo 对象
+                # Create FileInfo object
                 file_info = FileInfo(
                     name=file_path.name,
                     path=rel_path,
@@ -78,7 +78,7 @@ class FileSearch(WorkspaceGuardTool[FileSearchParams]):
                     else None,
                 )
 
-                # 格式化输出
+                # Format output
                 size_str = self._format_size(file_info.size)
                 line_str = f", {file_info.line_count} lines" if file_info.line_count is not None else ""
                 output.append(f"{file_info.path} ({size_str}{line_str}) - {file_info.format_time()}")
@@ -86,22 +86,22 @@ class FileSearch(WorkspaceGuardTool[FileSearchParams]):
             return "\n".join(output)
 
         except Exception as e:
-            logger.error(f"执行文件搜索时出错: {e}", exc_info=True)
-            return f"执行文件搜索时出错: {e!s}"
+            logger.error(f"Error executing file search: {e}", exc_info=True)
+            return f"Error executing file search: {e!s}"
 
     def _get_all_files(self, directory: Path) -> List[Path]:
-        """递归获取目录下的所有文件"""
+        """Recursively get all files in directory"""
         files = []
         try:
             for item in directory.rglob("*"):
                 if item.is_file():
                     files.append(item)
         except Exception as e:
-            logger.warning(f"获取文件列表时出错: {e}")
+            logger.warning(f"Error getting file list: {e}")
         return files
 
     def _fuzzy_match(self, files: List[Path], pattern: str) -> List[Path]:
-        """使用模糊匹配过滤文件"""
+        """Filter files using fuzzy matching"""
         # 将模式转换为通配符模式
         wildcard_pattern = f"*{pattern}*"
 
@@ -123,7 +123,7 @@ class FileSearch(WorkspaceGuardTool[FileSearchParams]):
         return matches
 
     def _format_size(self, size: int) -> str:
-        """格式化文件大小"""
+        """Format file size"""
         for unit in ["B", "KB", "MB", "GB"]:
             if size < 1024:
                 return f"{size:.1f}{unit}"
@@ -131,7 +131,7 @@ class FileSearch(WorkspaceGuardTool[FileSearchParams]):
         return f"{size:.1f}TB"
 
     def _count_lines(self, file_path: Path) -> int:
-        """计算文件行数"""
+        """Count lines in file"""
         try:
             with file_path.open("r", encoding="utf-8") as f:
                 return sum(1 for _ in f)
@@ -140,10 +140,10 @@ class FileSearch(WorkspaceGuardTool[FileSearchParams]):
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
         """
-        获取工具调用后的友好动作和备注
+        Get friendly action and remark after tool call
         """
         query = arguments.get("query", "") if arguments else ""
         return {
-            "action": "本地搜索文件",
+            "action": "Search files locally",
             "remark": query
         }

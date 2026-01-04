@@ -41,27 +41,27 @@ class OrganizationDomainServiceTest extends HttpTestCase
         $this->organizationAdminDomainService = $this->getContainer()->get(OrganizationAdminDomainService::class);
         $this->userDomainService = $this->getContainer()->get(MagicUserDomainService::class);
 
-        // 为每个测试生成唯一的组织编码，避免测试之间的数据冲突
+        // Generate unique organization codes for each test to avoid data conflicts
         $this->testOrganizationCodes = [
             'TEST_ORG_' . uniqid(),
             'TEST_ORG_' . uniqid(),
             'TEST_ORG_' . uniqid(),
         ];
 
-        // 为每个测试生成唯一的用户ID
+        // Generate unique user IDs for each test
         $this->testUserIds = [
             'test_user_' . uniqid(),
             'test_user_' . uniqid(),
             'test_user_' . uniqid(),
         ];
 
-        // 清理可能存在的测试数据
+        // Clean up any existing test data
         $this->cleanUpTestData();
     }
 
     protected function tearDown(): void
     {
-        // 清理测试数据
+        // Clean up test data
         $this->cleanUpTestData();
 
         parent::tearDown();
@@ -80,19 +80,19 @@ class OrganizationDomainServiceTest extends HttpTestCase
         $this->assertEquals(1, $savedOrganization->getStatus());
         $this->assertNotNull($savedOrganization->getCreatedAt());
 
-        // 记录 ID 用于清理
+        // Record the ID for later cleanup
         $this->testOrganizationIds[] = $savedOrganization->getId();
     }
 
     public function testCreateOrganizationWithDuplicateCodeThrowsException(): void
     {
-        // 创建第一个组织
+        // Create the first organization
         $organization1 = $this->createTestOrganizationEntity(0);
         $savedOrganization1 = $this->organizationDomainService->create($organization1);
         $this->testOrganizationIds[] = $savedOrganization1->getId();
 
-        // 尝试创建具有相同编码的组织
-        $organization2 = $this->createTestOrganizationEntity(0); // 使用相同的编码
+        // Try creating an organization with the same code
+        $organization2 = $this->createTestOrganizationEntity(0); // Use the same code
 
         $this->expectException(Exception::class);
         $this->organizationDomainService->create($organization2);
@@ -116,7 +116,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
     public function testCreateOrganizationWithMissingRequiredFieldsThrowsException(): void
     {
         $organization = new OrganizationEntity();
-        // 不设置必填字段
+        // Do not set required fields
 
         $this->expectException(Exception::class);
         $this->organizationDomainService->create($organization);
@@ -124,12 +124,12 @@ class OrganizationDomainServiceTest extends HttpTestCase
 
     public function testUpdateOrganizationSuccessfully(): void
     {
-        // 创建组织
+        // Create organization
         $organization = $this->createTestOrganizationEntity(0);
         $savedOrganization = $this->organizationDomainService->create($organization);
         $this->testOrganizationIds[] = $savedOrganization->getId();
 
-        // 更新组织
+        // Update organization
         $savedOrganization->setName('Updated Organization Name');
         $savedOrganization->setContactUser('Updated Contact');
 
@@ -143,7 +143,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
     public function testUpdateNonExistentOrganizationThrowsException(): void
     {
         $organization = $this->createTestOrganizationEntity(0);
-        // 不设置 ID，使其认为是新实体
+        // Do not set the ID so it is treated as a new entity
 
         $this->expectException(Exception::class);
         $this->organizationDomainService->update($organization);
@@ -198,7 +198,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
 
     public function testQueriesReturnsCorrectResults(): void
     {
-        // 创建多个组织
+        // Create multiple organizations
         for ($i = 0; $i < 3; ++$i) {
             $organization = $this->createTestOrganizationEntity($i);
             $savedOrganization = $this->organizationDomainService->create($organization);
@@ -216,7 +216,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
 
     public function testQueriesWithFilters(): void
     {
-        // 创建组织
+        // Create organization
         $organization = $this->createTestOrganizationEntity(0);
         $savedOrganization = $this->organizationDomainService->create($organization);
         $this->testOrganizationIds[] = $savedOrganization->getId();
@@ -233,7 +233,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
         $this->assertArrayHasKey('list', $result);
         $this->assertGreaterThanOrEqual(1, $result['total']);
 
-        // 验证过滤结果
+        // Validate filtered results
         foreach ($result['list'] as $org) {
             $this->assertInstanceOf(OrganizationEntity::class, $org);
             $this->assertStringContainsString('Test Organization', $org->getName());
@@ -263,7 +263,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
     public function testEnableOrganization(): void
     {
         $organization = $this->createTestOrganizationEntity(0);
-        $organization->setStatus(2); // 设置为禁用状态
+        $organization->setStatus(2); // Set to disabled status
         $savedOrganization = $this->organizationDomainService->create($organization);
         $this->testOrganizationIds[] = $savedOrganization->getId();
 
@@ -287,20 +287,20 @@ class OrganizationDomainServiceTest extends HttpTestCase
 
     public function testIsCodeAvailable(): void
     {
-        // 测试不存在的编码
+        // Test a non-existent code
         $isAvailable = $this->organizationDomainService->isCodeAvailable('NON_EXISTENT_CODE');
         $this->assertTrue($isAvailable);
 
-        // 创建组织
+        // Create organization
         $organization = $this->createTestOrganizationEntity(0);
         $savedOrganization = $this->organizationDomainService->create($organization);
         $this->testOrganizationIds[] = $savedOrganization->getId();
 
-        // 测试已存在的编码
+        // Test an existing code
         $isAvailable = $this->organizationDomainService->isCodeAvailable($this->testOrganizationCodes[0]);
         $this->assertFalse($isAvailable);
 
-        // 测试排除当前组织的情况
+        // Test excluding the current organization
         $isAvailable = $this->organizationDomainService->isCodeAvailable(
             $this->testOrganizationCodes[0],
             $savedOrganization->getId()
@@ -309,36 +309,36 @@ class OrganizationDomainServiceTest extends HttpTestCase
     }
 
     /**
-     * 测试创建组织时自动为创建者授予管理员权限.
-     * 注意：此测试在实际环境中可能需要真实的用户数据或Mock框架支持
+     * Test automatically granting admin permission to the creator when creating an organization.
+     * Note: In a real environment this may require real user data or mocking support.
      */
     public function testCreateOrganizationAutomaticallyGrantsAdminPermissionToCreator(): void
     {
-        // 使用简单的数字ID作为创建者ID，避免用户创建的复杂性
+        // Use a simple numeric ID for the creator to avoid user-creation complexity
         $organization = $this->createTestOrganizationEntity(0);
-        $creatorId = '1'; // 使用简单的数字ID
+        $creatorId = '1'; // Use a simple numeric ID
         $organization->setCreatorId($creatorId);
 
         try {
-            // 创建组织
+            // Create organization
             $savedOrganization = $this->organizationDomainService->create($organization);
 
-            // 记录 ID 用于清理
+            // Record the ID for cleanup
             $this->testOrganizationIds[] = $savedOrganization->getId();
 
-            // 验证组织创建成功
+            // Verify organization created successfully
             $this->assertNotNull($savedOrganization->getId());
             $this->assertEquals($creatorId, $savedOrganization->getCreatorId());
 
-            // 验证创建者被授予了管理员权限（如果用户存在的话）
+            // Verify the creator is granted admin permission (if the user exists)
             $isAdmin = $this->organizationAdminDomainService->isOrganizationAdmin(
                 $savedOrganization->getMagicOrganizationCode(),
                 (string) $creatorId
             );
 
-            // 如果用户存在，则应该被授予管理员权限
+            // If the user exists, they should receive admin permission
             if ($isAdmin) {
-                // 验证创建者被标记为组织创建人
+                // Verify the creator is marked as the organization creator
                 $admin = $this->organizationAdminDomainService->getByUserId(
                     $savedOrganization->getMagicOrganizationCode(),
                     (string) $creatorId
@@ -348,22 +348,22 @@ class OrganizationDomainServiceTest extends HttpTestCase
                 $this->assertEquals('组织创建者自动获得管理员权限', $admin->getRemarks());
             }
 
-            // 至少验证组织创建成功
+            // At minimum verify organization creation succeeded
             $this->assertTrue(true, '组织创建成功');
         } catch (Exception $e) {
-            // 如果用户不存在，应该抛出异常，这也是我们期望的行为
+            // If the user does not exist, an exception should be thrown (expected)
             $this->assertInstanceOf(Exception::class, $e);
         }
     }
 
     /**
-     * 测试创建组织时创建者不存在会抛出异常.
+     * Test that creating an organization with a nonexistent creator throws an exception.
      */
     public function testCreateOrganizationWithNonExistentCreatorThrowsException(): void
     {
-        // 创建组织实体（带有不存在的创建者ID）
+        // Create an organization entity with a nonexistent creator ID
         $organization = $this->createTestOrganizationEntity(0);
-        $nonExistentCreatorId = '999999'; // 使用一个不太可能存在的数字ID
+        $nonExistentCreatorId = '999999'; // Use an unlikely numeric ID
         $organization->setCreatorId($nonExistentCreatorId);
 
         $this->expectException(Exception::class);
@@ -371,25 +371,25 @@ class OrganizationDomainServiceTest extends HttpTestCase
     }
 
     /**
-     * 测试创建组织时没有创建者ID也能正常创建.
+     * Test that creating an organization without a creator ID still succeeds.
      */
     public function testCreateOrganizationWithoutCreatorIdSucceeds(): void
     {
-        // 创建组织实体（不设置创建者ID）
+        // Create an organization entity without setting a creator ID
         $organization = $this->createTestOrganizationEntity(0);
         $organization->setCreatorId(null);
 
-        // 创建组织
+        // Create organization
         $savedOrganization = $this->organizationDomainService->create($organization);
 
-        // 记录 ID 用于清理
+        // Record the ID for cleanup
         $this->testOrganizationIds[] = $savedOrganization->getId();
 
-        // 验证组织创建成功
+        // Verify organization created successfully
         $this->assertNotNull($savedOrganization->getId());
         $this->assertNull($savedOrganization->getCreatorId());
 
-        // 验证没有创建管理员记录
+        // Verify no admin records were created
         $allAdmins = $this->organizationAdminDomainService->getAllOrganizationAdmins(
             $savedOrganization->getMagicOrganizationCode()
         );
@@ -397,60 +397,60 @@ class OrganizationDomainServiceTest extends HttpTestCase
     }
 
     /**
-     * 测试组织创建者获得的管理员权限不可被删除.
-     * 注意：由于用户系统的复杂性，这个测试目前被标记为跳过.
+     * Test that an organization creator's admin permission cannot be revoked.
+     * Note: Skipped because the user system is complex.
      */
     public function testOrganizationCreatorAdminPermissionCannotBeRevoked(): void
     {
         $this->markTestSkipped(
-            '此测试需要真实的用户数据支持。在实际项目中，应该使用Mock框架或测试数据fixture来模拟用户存在的情况。'
-            . '测试逻辑：创建一个组织创建人，然后尝试撤销其管理员权限，应该抛出异常。'
+            'This test requires real user data. In practice, use a mock framework or test fixtures to simulate user presence. '
+            . 'Test logic: create an organization creator, then attempt to revoke admin permission; an exception should be thrown.'
         );
     }
 
     /**
-     * 测试组织创建者不可被禁用.
-     * 注意：由于用户系统的复杂性，这个测试目前被标记为跳过.
+     * Test that an organization creator cannot be disabled.
+     * Note: Skipped because the user system is complex.
      */
     public function testOrganizationCreatorCannotBeDisabled(): void
     {
         $this->markTestSkipped(
-            '此测试需要真实的用户数据支持。在实际项目中，应该使用Mock框架或测试数据fixture来模拟用户存在的情况。'
-            . '测试逻辑：创建一个组织创建人，然后尝试禁用其管理员权限，应该抛出异常。'
+            'This test requires real user data. In practice, use a mock framework or test fixtures to simulate user presence. '
+            . 'Test logic: create an organization creator, then attempt to disable admin permission; an exception should be thrown.'
         );
     }
 
     /**
-     * 模拟用户存在.
-     * 注意：这是一个简化的实现，在实际项目中应该使用Mock框架.
+     * Simulate a user existing.
+     * Note: This is simplified; a mock framework should be used in real projects.
      */
     private function mockUserExists(string $userId): void
     {
-        // 由于用户系统较为复杂，这里我们使用简化的处理方式
-        // 在真实项目中，应该使用数据库fixture或专门的测试数据创建方法
-        // 这里我们先跳过用户创建，让测试专注于组织创建人功能的验证
+        // Simplified handling because the user system is complex
+        // In real projects, use database fixtures or dedicated test-data builders
+        // Skip user creation here so tests focus on organization-creator behavior
     }
 
     /**
-     * 模拟用户不存在.
+     * Simulate a user not existing.
      */
     private function mockUserNotExists(string $userId): void
     {
-        // 确保用户不存在的逻辑
-        // 在真实项目中，这里应该删除测试用户或使用Mock来模拟用户不存在的情况
+        // Ensure the user is treated as non-existent
+        // In real projects, delete the test user or use mocking to simulate absence
     }
 
     /**
-     * 清理测试用户.
+     * Clean up test users.
      */
     private function cleanUpTestUser(string $userId): void
     {
-        // 清理用户相关的测试数据
-        // 在真实项目中，这里应该删除创建的测试用户
+        // Clean up user-related test data
+        // In real projects, delete any created test users
     }
 
     /**
-     * 创建测试用的组织实体.
+     * Create a test organization entity.
      */
     private function createTestOrganizationEntity(int $index): OrganizationEntity
     {
@@ -460,7 +460,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
         $organization->setIndustryType('Technology');
         $organization->setContactUser("Contact User {$index}");
         $organization->setContactMobile('13800138000');
-        $organization->setCreatorId(null); // 默认不设置创建者，由具体测试方法设置
+        $organization->setCreatorId(null); // Default: do not set creator; each test sets it as needed
         $organization->setStatus(1);
         $organization->setType(0);
 
@@ -468,56 +468,56 @@ class OrganizationDomainServiceTest extends HttpTestCase
     }
 
     /**
-     * 清理测试数据.
+     * Clean up test data.
      */
     private function cleanUpTestData(): void
     {
         try {
-            // 删除组织管理员测试数据
+            // Delete organization admin test data
             foreach ($this->testOrganizationCodes as $code) {
                 OrganizationAdminModel::query()
                     ->where('organization_code', $code)
                     ->forceDelete();
             }
 
-            // 删除可能残留的组织管理员数据
+            // Remove any remaining organization admin data
             OrganizationAdminModel::query()
                 ->where('organization_code', 'like', 'TEST_ORG_%')
                 ->forceDelete();
 
-            // 删除通过用户ID关联的组织管理员数据
+            // Remove organization admin data associated via user IDs
             foreach ($this->testUserIds as $userId) {
                 OrganizationAdminModel::query()
                     ->where('user_id', $userId)
                     ->forceDelete();
             }
 
-            // 删除通过 ID 记录的组织
+            // Delete organizations recorded by ID
             foreach ($this->testOrganizationIds as $id) {
                 OrganizationModel::query()->where('id', $id)->forceDelete();
             }
 
-            // 删除通过编码记录的组织
+            // Delete organizations recorded by code
             foreach ($this->testOrganizationCodes as $code) {
                 OrganizationModel::query()->where('magic_organization_code', $code)->forceDelete();
             }
 
-            // 删除可能残留的测试数据
+            // Remove any remaining test data
             OrganizationModel::query()
                 ->where('magic_organization_code', 'like', 'TEST_ORG_%')
                 ->orWhere('name', 'like', 'Test Organization%')
                 ->orWhere('name', 'like', 'Updated Organization%')
                 ->forceDelete();
 
-            // 清理测试用户
+            // Clean up test users
             foreach ($this->testUserIds as $userId) {
                 $this->cleanUpTestUser($userId);
             }
         } catch (Exception $e) {
-            // 静默处理清理错误
+            // Swallow cleanup errors
         }
 
-        // 重置 ID 数组
+        // Reset ID array
         $this->testOrganizationIds = [];
     }
 }

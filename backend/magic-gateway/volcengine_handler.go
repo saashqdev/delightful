@@ -21,13 +21,13 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-// VolcengineAPMHandler 处理火山全栈可观测平台的请求转换
+// VolcengineAPMHandler handles request conversion for Volcengine Full-Stack Observability Platform
 type VolcengineAPMHandler struct {
 	endpoint string
 	appKey   string
 }
 
-// NewVolcengineAPMHandler 创建新的火山可观测平台处理器
+// NewVolcengineAPMHandler creates a new Volcengine observability platform handler
 func NewVolcengineAPMHandler(endpoint, appKey string) *VolcengineAPMHandler {
 	return &VolcengineAPMHandler{
 		endpoint: endpoint,
@@ -35,43 +35,43 @@ func NewVolcengineAPMHandler(endpoint, appKey string) *VolcengineAPMHandler {
 	}
 }
 
-// decompressIfNeeded 检查并解压缩请求体（如果需要）
+// decompressIfNeeded checks and decompresses request body if needed
 func decompressIfNeeded(r *http.Request, bodyBytes []byte) ([]byte, error) {
-	// 检查 Content-Encoding 头
+	// Check Content-Encoding header
 	encoding := r.Header.Get("Content-Encoding")
 
 	if encoding == "gzip" {
 		if debugMode {
-			logger.Printf("检测到 gzip 压缩，开始解压缩...")
+			logger.Printf("Detected gzip compression, starting decompression...")
 		}
 		reader, err := gzip.NewReader(bytes.NewReader(bodyBytes))
 		if err != nil {
-			return nil, fmt.Errorf("创建 gzip reader 失败: %w", err)
+			return nil, fmt.Errorf("Failed to create gzip reader: %w", err)
 		}
 		defer reader.Close()
 
 		decompressed, err := io.ReadAll(reader)
 		if err != nil {
-			return nil, fmt.Errorf("解压缩失败: %w", err)
+			return nil, fmt.Errorf("Decompression failed: %w", err)
 		}
 
 		if debugMode {
-			logger.Printf("解压缩成功: %d bytes -> %d bytes", len(bodyBytes), len(decompressed))
+			logger.Printf("Decompression successful: %d bytes -> %d bytes", len(bodyBytes), len(decompressed))
 		}
 		return decompressed, nil
 	}
 
-	// 尝试自动检测 gzip 格式（即使没有 Content-Encoding 头）
-	// gzip 文件魔数是 0x1f 0x8b
+	// Try to auto-detect gzip format (even without Content-Encoding header)
+	// gzip file magic number is 0x1f 0x8b
 	if len(bodyBytes) >= 2 && bodyBytes[0] == 0x1f && bodyBytes[1] == 0x8b {
 		if debugMode {
-			logger.Printf("检测到 gzip 魔数，尝试解压缩...")
+			logger.Printf("Detected gzip magic number, attempting decompression...")
 		}
 		reader, err := gzip.NewReader(bytes.NewReader(bodyBytes))
 		if err != nil {
-			// 如果解压失败，返回原始数据
+			// If decompression fails, return original data
 			if debugMode {
-				logger.Printf("gzip 解压失败，使用原始数据: %v", err)
+				logger.Printf("gzip decompression failed, using original data: %v", err)
 			}
 			return bodyBytes, nil
 		}
@@ -79,76 +79,76 @@ func decompressIfNeeded(r *http.Request, bodyBytes []byte) ([]byte, error) {
 
 		decompressed, err := io.ReadAll(reader)
 		if err != nil {
-			// 如果解压失败，返回原始数据
+			// If decompression fails, return original data
 			if debugMode {
-				logger.Printf("gzip 解压失败，使用原始数据: %v", err)
+				logger.Printf("gzip decompression failed, using original data: %v", err)
 			}
 			return bodyBytes, nil
 		}
 
 		if debugMode {
-			logger.Printf("自动解压缩成功: %d bytes -> %d bytes", len(bodyBytes), len(decompressed))
+			logger.Printf("Auto-decompression successful: %d bytes -> %d bytes", len(bodyBytes), len(decompressed))
 		}
 		return decompressed, nil
 	}
 
-	// 不需要解压缩
+	// No decompression needed
 	return bodyBytes, nil
 }
 
-// isVolcengineAPMDomain 检查域名是否是火山全栈可观测平台
+// isVolcengineAPMDomain checks if domain is Volcengine Full-Stack Observability Platform
 func isVolcengineAPMDomain(domain string) bool {
-	// 提取域名部分（去除协议和路径）
+	// Extract domain part (remove protocol and path)
 	domain = strings.TrimPrefix(domain, "http://")
 	domain = strings.TrimPrefix(domain, "https://")
 	if idx := strings.Index(domain, "/"); idx > 0 {
 		domain = domain[:idx]
 	}
 
-	// 检查是否匹配火山可观测平台域名
+	// Check if matches Volcengine observability platform domain
 	return strings.Contains(domain, "apmplus-cn-beijing.volces.com")
 }
 
-// HandleVolcengineAPMRequest 处理火山可观测平台的请求
-// 将 HTTP 请求转换为 gRPC 请求
+// HandleVolcengineAPMRequest handles Volcengine observability platform requests
+// Converts HTTP requests to gRPC requests
 func (h *VolcengineAPMHandler) HandleVolcengineAPMRequest(
 	w http.ResponseWriter,
 	r *http.Request,
 	targetURL string,
 	bodyBytes []byte,
 ) error {
-	// 先检查并解压缩请求体
+	// First check and decompress request body
 	decompressed, err := decompressIfNeeded(r, bodyBytes)
 	if err != nil {
-		logger.Printf("解压缩请求失败: %v", err)
-		return fmt.Errorf("解压缩请求失败: %w", err)
+		logger.Printf("Request decompression failed: %v", err)
+		return fmt.Errorf("Request decompression failed: %w", err)
 	}
 	bodyBytes = decompressed
 
-	// 判断请求类型（先从 URL 路径判断）
+	// Determine request type (first from URL path)
 	requestType := h.detectRequestType(r.URL.Path)
 
 	if debugMode {
-		logger.Printf("从URL检测到类型: %s，准备智能检测实际类型...", requestType)
+		logger.Printf("Detected type from URL: %s, preparing intelligent detection of actual type...", requestType)
 	}
 
-	// 如果 URL 无法判断类型，尝试智能检测
+	// If type cannot be determined from URL, try intelligent detection
 	if requestType == "trace" && !strings.Contains(strings.ToLower(r.URL.Path), "trace") {
-		// 尝试通过解析请求体来判断类型
+		// Try to determine type by parsing request body
 		detectedType := h.detectRequestTypeFromBody(bodyBytes, r.Header.Get("Content-Type"))
 		if detectedType != "" {
 			requestType = detectedType
 			if debugMode {
-				logger.Printf("通过请求体智能检测到类型: %s", requestType)
+				logger.Printf("Intelligently detected type through request body: %s", requestType)
 			}
 		}
 	}
 
 	if debugMode {
-		logger.Printf("最终确定请求类型: %s", requestType)
+		logger.Printf("Final determined request type: %s", requestType)
 	}
 
-	// 根据请求类型进行不同的处理
+	// Different processing based on request type
 	switch requestType {
 	case "trace":
 		return h.handleTraceRequest(w, r, bodyBytes)
@@ -157,11 +157,11 @@ func (h *VolcengineAPMHandler) HandleVolcengineAPMRequest(
 	case "logs":
 		return h.handleLogsRequest(w, r, bodyBytes)
 	default:
-		return fmt.Errorf("不支持的请求类型: %s", requestType)
+		return fmt.Errorf("Unsupported request type: %s", requestType)
 	}
 }
 
-// detectRequestType 从URL路径中检测请求类型
+// detectRequestType detects request type from URL path
 func (h *VolcengineAPMHandler) detectRequestType(path string) string {
 	path = strings.ToLower(path)
 
@@ -175,24 +175,24 @@ func (h *VolcengineAPMHandler) detectRequestType(path string) string {
 		return "logs"
 	}
 
-	// 默认返回trace
+	// Default return trace
 	return "trace"
 }
 
-// detectRequestTypeFromBody 通过尝试解析请求体来智能检测类型
+// detectRequestTypeFromBody intelligently detects type by attempting to parse request body
 func (h *VolcengineAPMHandler) detectRequestTypeFromBody(bodyBytes []byte, contentType string) string {
 	if len(bodyBytes) == 0 {
 		return ""
 	}
 
-	// 根据 Content-Type 决定使用哪种解析方式
+	// Decide which parsing method to use based on Content-Type
 	isJSON := strings.Contains(contentType, "application/json")
 
-	// 尝试解析为 Metrics（最常见）
+	// Try to parse as Metrics (most common)
 	if isJSON {
 		var metricsRequest colmetricspb.ExportMetricsServiceRequest
 		if err := protojson.Unmarshal(bodyBytes, &metricsRequest); err == nil {
-			// 检查是否有有效的 metrics 数据
+			// Check if there is valid metrics data
 			if len(metricsRequest.ResourceMetrics) > 0 {
 				return "metrics"
 			}
@@ -200,18 +200,18 @@ func (h *VolcengineAPMHandler) detectRequestTypeFromBody(bodyBytes []byte, conte
 	} else {
 		var metricsRequest colmetricspb.ExportMetricsServiceRequest
 		if err := proto.Unmarshal(bodyBytes, &metricsRequest); err == nil {
-			// 检查是否有有效的 metrics 数据
+			// Check if there is valid metrics data
 			if len(metricsRequest.ResourceMetrics) > 0 {
 				return "metrics"
 			}
 		}
 	}
 
-	// 尝试解析为 Trace
+	// Try to parse as Trace
 	if isJSON {
 		var traceRequest coltracepb.ExportTraceServiceRequest
 		if err := protojson.Unmarshal(bodyBytes, &traceRequest); err == nil {
-			// 检查是否有有效的 trace 数据
+			// Check if there is valid trace data
 			if len(traceRequest.ResourceSpans) > 0 {
 				return "trace"
 			}
@@ -219,18 +219,18 @@ func (h *VolcengineAPMHandler) detectRequestTypeFromBody(bodyBytes []byte, conte
 	} else {
 		var traceRequest coltracepb.ExportTraceServiceRequest
 		if err := proto.Unmarshal(bodyBytes, &traceRequest); err == nil {
-			// 检查是否有有效的 trace 数据
+			// Check if there is valid trace data
 			if len(traceRequest.ResourceSpans) > 0 {
 				return "trace"
 			}
 		}
 	}
 
-	// 尝试解析为 Logs
+	// Try to parse as Logs
 	if isJSON {
 		var logsRequest collogspb.ExportLogsServiceRequest
 		if err := protojson.Unmarshal(bodyBytes, &logsRequest); err == nil {
-			// 检查是否有有效的 logs 数据
+			// Check if there is valid logs data
 			if len(logsRequest.ResourceLogs) > 0 {
 				return "logs"
 			}
@@ -238,18 +238,18 @@ func (h *VolcengineAPMHandler) detectRequestTypeFromBody(bodyBytes []byte, conte
 	} else {
 		var logsRequest collogspb.ExportLogsServiceRequest
 		if err := proto.Unmarshal(bodyBytes, &logsRequest); err == nil {
-			// 检查是否有有效的 logs 数据
+			// Check if there is valid logs data
 			if len(logsRequest.ResourceLogs) > 0 {
 				return "logs"
 			}
 		}
 	}
 
-	// 无法检测
+	// Unable to detect
 	return ""
 }
 
-// handleTraceRequest 处理trace请求
+// handleTraceRequest handles trace requests
 func (h *VolcengineAPMHandler) handleTraceRequest(
 	w http.ResponseWriter,
 	r *http.Request,
@@ -258,32 +258,32 @@ func (h *VolcengineAPMHandler) handleTraceRequest(
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	// 解析HTTP请求体（支持 JSON 和 Protobuf 两种格式）
-	// 注意：bodyBytes 已经在调用前解压缩过了
+	// Parse HTTP request body (supports both JSON and Protobuf formats)
+	// Note: bodyBytes has been decompressed before calling
 	var traceRequest coltracepb.ExportTraceServiceRequest
 	contentType := r.Header.Get("Content-Type")
 
 	if strings.Contains(contentType, "application/json") {
-		// JSON 格式
+		// JSON format
 		if err := protojson.Unmarshal(bodyBytes, &traceRequest); err != nil {
-			logger.Printf("解析trace请求失败(JSON): %v", err)
-			return fmt.Errorf("解析trace请求失败(JSON): %w", err)
+			logger.Printf("Failed to parse trace request (JSON): %v", err)
+			return fmt.Errorf("Failed to parse trace request (JSON): %w", err)
 		}
 		if debugMode {
-			logger.Printf("使用JSON格式解析trace请求")
+			logger.Printf("Parsing trace request using JSON format")
 		}
 	} else {
-		// Protobuf 二进制格式（默认）
+		// Protobuf binary format (default)
 		if err := proto.Unmarshal(bodyBytes, &traceRequest); err != nil {
-			logger.Printf("解析trace请求失败(Protobuf): %v", err)
-			return fmt.Errorf("解析trace请求失败(Protobuf): %w", err)
+			logger.Printf("Failed to parse trace request (Protobuf): %v", err)
+			return fmt.Errorf("Failed to parse trace request (Protobuf): %w", err)
 		}
 		if debugMode {
-			logger.Printf("使用Protobuf格式解析trace请求")
+			logger.Printf("Parsing trace request using Protobuf format")
 		}
 	}
 
-	// 创建gRPC连接，并设置header
+	// Create gRPC connection and set headers
 	md := metadata.New(map[string]string{
 		"x-byteapm-appkey": h.appKey,
 	})
@@ -294,26 +294,26 @@ func (h *VolcengineAPMHandler) handleTraceRequest(
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {
-		logger.Printf("创建gRPC连接失败: %v", err)
-		return fmt.Errorf("创建gRPC连接失败: %w", err)
+		logger.Printf("Failed to create gRPC connection: %v", err)
+		return fmt.Errorf("Failed to create gRPC connection: %w", err)
 	}
 	defer conn.Close()
 
-	// 创建trace服务客户端
+	// Create trace service client
 	client := coltracepb.NewTraceServiceClient(conn)
 
-	// 发送gRPC请求
+	// Send gRPC request
 	resp, err := client.Export(ctx, &traceRequest)
 	if err != nil {
-		logger.Printf("发送trace gRPC请求失败: %v", err)
-		return fmt.Errorf("发送trace gRPC请求失败: %w", err)
+		logger.Printf("Failed to send trace gRPC request: %v", err)
+		return fmt.Errorf("Failed to send trace gRPC request: %w", err)
 	}
 
-	// 将gRPC响应转换为HTTP响应
+	// Convert gRPC response to HTTP response
 	return h.writeJSONResponse(w, resp)
 }
 
-// handleMetricsRequest 处理metrics请求
+// handleMetricsRequest handles metrics requests
 func (h *VolcengineAPMHandler) handleMetricsRequest(
 	w http.ResponseWriter,
 	r *http.Request,
@@ -322,32 +322,32 @@ func (h *VolcengineAPMHandler) handleMetricsRequest(
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	// 解析HTTP请求体（支持 JSON 和 Protobuf 两种格式）
-	// 注意：bodyBytes 已经在调用前解压缩过了
+	// Parse HTTP request body (supports both JSON and Protobuf formats)
+	// Note: bodyBytes has been decompressed before calling
 	var metricsRequest colmetricspb.ExportMetricsServiceRequest
 	contentType := r.Header.Get("Content-Type")
 
 	if strings.Contains(contentType, "application/json") {
-		// JSON 格式
+		// JSON format
 		if err := protojson.Unmarshal(bodyBytes, &metricsRequest); err != nil {
-			logger.Printf("解析metrics请求失败(JSON): %v", err)
-			return fmt.Errorf("解析metrics请求失败(JSON): %w", err)
+			logger.Printf("Failed to parse metrics request (JSON): %v", err)
+			return fmt.Errorf("Failed to parse metrics request (JSON): %w", err)
 		}
 		if debugMode {
-			logger.Printf("使用JSON格式解析metrics请求")
+			logger.Printf("Parsing metrics request using JSON format")
 		}
 	} else {
-		// Protobuf 二进制格式（默认）
+		// Protobuf binary format (default)
 		if err := proto.Unmarshal(bodyBytes, &metricsRequest); err != nil {
-			logger.Printf("解析metrics请求失败(Protobuf): %v", err)
-			return fmt.Errorf("解析metrics请求失败(Protobuf): %w", err)
+			logger.Printf("Failed to parse metrics request (Protobuf): %v", err)
+			return fmt.Errorf("Failed to parse metrics request (Protobuf): %w", err)
 		}
 		if debugMode {
-			logger.Printf("使用Protobuf格式解析metrics请求")
+			logger.Printf("Parsing metrics request using Protobuf format")
 		}
 	}
 
-	// 创建gRPC连接，并设置header
+	// Create gRPC connection and set headers
 	md := metadata.New(map[string]string{
 		"x-byteapm-appkey": h.appKey,
 	})
@@ -358,26 +358,26 @@ func (h *VolcengineAPMHandler) handleMetricsRequest(
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {
-		logger.Printf("创建gRPC连接失败: %v", err)
-		return fmt.Errorf("创建gRPC连接失败: %w", err)
+		logger.Printf("Failed to create gRPC connection: %v", err)
+		return fmt.Errorf("Failed to create gRPC connection: %w", err)
 	}
 	defer conn.Close()
 
-	// 创建metrics服务客户端
+	// Create metrics service client
 	client := colmetricspb.NewMetricsServiceClient(conn)
 
-	// 发送gRPC请求
+	// Send gRPC request
 	resp, err := client.Export(ctx, &metricsRequest)
 	if err != nil {
-		logger.Printf("发送metrics gRPC请求失败: %v", err)
-		return fmt.Errorf("发送metrics gRPC请求失败: %w", err)
+		logger.Printf("Failed to send metrics gRPC request: %v", err)
+		return fmt.Errorf("Failed to send metrics gRPC request: %w", err)
 	}
 
-	// 将gRPC响应转换为HTTP响应
+	// Convert gRPC response to HTTP response
 	return h.writeJSONResponse(w, resp)
 }
 
-// handleLogsRequest 处理logs请求
+// handleLogsRequest handles logs requests
 func (h *VolcengineAPMHandler) handleLogsRequest(
 	w http.ResponseWriter,
 	r *http.Request,
@@ -386,32 +386,32 @@ func (h *VolcengineAPMHandler) handleLogsRequest(
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 
-	// 解析HTTP请求体（支持 JSON 和 Protobuf 两种格式）
-	// 注意：bodyBytes 已经在调用前解压缩过了
+	// Parse HTTP request body (supports both JSON and Protobuf formats)
+	// Note: bodyBytes has been decompressed before calling
 	var logsRequest collogspb.ExportLogsServiceRequest
 	contentType := r.Header.Get("Content-Type")
 
 	if strings.Contains(contentType, "application/json") {
-		// JSON 格式
+		// JSON format
 		if err := protojson.Unmarshal(bodyBytes, &logsRequest); err != nil {
-			logger.Printf("解析logs请求失败(JSON): %v", err)
-			return fmt.Errorf("解析logs请求失败(JSON): %w", err)
+			logger.Printf("Failed to parse logs request (JSON): %v", err)
+			return fmt.Errorf("Failed to parse logs request (JSON): %w", err)
 		}
 		if debugMode {
-			logger.Printf("使用JSON格式解析logs请求")
+			logger.Printf("Parsing logs request using JSON format")
 		}
 	} else {
-		// Protobuf 二进制格式（默认）
+		// Protobuf binary format (default)
 		if err := proto.Unmarshal(bodyBytes, &logsRequest); err != nil {
-			logger.Printf("解析logs请求失败(Protobuf): %v", err)
-			return fmt.Errorf("解析logs请求失败(Protobuf): %w", err)
+			logger.Printf("Failed to parse logs request (Protobuf): %v", err)
+			return fmt.Errorf("Failed to parse logs request (Protobuf): %w", err)
 		}
 		if debugMode {
-			logger.Printf("使用Protobuf格式解析logs请求")
+			logger.Printf("Parsing logs request using Protobuf format")
 		}
 	}
 
-	// 创建gRPC连接，并设置header
+	// Create gRPC connection and set headers
 	md := metadata.New(map[string]string{
 		"x-byteapm-appkey": h.appKey,
 	})
@@ -422,60 +422,60 @@ func (h *VolcengineAPMHandler) handleLogsRequest(
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {
-		logger.Printf("创建gRPC连接失败: %v", err)
-		return fmt.Errorf("创建gRPC连接失败: %w", err)
+		logger.Printf("Failed to create gRPC connection: %v", err)
+		return fmt.Errorf("Failed to create gRPC connection: %w", err)
 	}
 	defer conn.Close()
 
-	// 创建logs服务客户端
+	// Create logs service client
 	client := collogspb.NewLogsServiceClient(conn)
 
-	// 发送gRPC请求
+	// Send gRPC request
 	resp, err := client.Export(ctx, &logsRequest)
 	if err != nil {
-		logger.Printf("发送logs gRPC请求失败: %v", err)
-		return fmt.Errorf("发送logs gRPC请求失败: %w", err)
+		logger.Printf("Failed to send logs gRPC request: %v", err)
+		return fmt.Errorf("Failed to send logs gRPC request: %w", err)
 	}
 
-	// 将gRPC响应转换为HTTP响应
+	// Convert gRPC response to HTTP response
 	return h.writeJSONResponse(w, resp)
 }
 
-// writeJSONResponse 将响应写入HTTP ResponseWriter
+// writeJSONResponse writes response to HTTP ResponseWriter
 func (h *VolcengineAPMHandler) writeJSONResponse(w http.ResponseWriter, resp interface{}) error {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 
 	respBytes, err := json.Marshal(resp)
 	if err != nil {
-		logger.Printf("序列化响应失败: %v", err)
-		return fmt.Errorf("序列化响应失败: %w", err)
+		logger.Printf("Failed to serialize response: %v", err)
+		return fmt.Errorf("Failed to serialize response: %w", err)
 	}
 
 	if _, err := w.Write(respBytes); err != nil {
-		logger.Printf("写入响应失败: %v", err)
-		return fmt.Errorf("写入响应失败: %w", err)
+		logger.Printf("Failed to write response: %v", err)
+		return fmt.Errorf("Failed to write response: %w", err)
 	}
 
 	return nil
 }
 
-// GetVolcengineAPMConfig 从环境变量获取火山可观测平台配置
+// GetVolcengineAPMConfig gets Volcengine observability platform configuration from environment variables
 func GetVolcengineAPMConfig() (endpoint string, appKey string, ok bool) {
-	// 从环境变量获取配置
+	// Get configuration from environment variables
 	endpoint = getEnvWithDefault("VOLCENGINE_APM_ENDPOINT", "apmplus-cn-beijing.ivolces.com:4317")
 	appKey = getEnvWithDefault("VOLCENGINE_APM_APPKEY", "")
 
-	// 如果没有配置AppKey，则返回false
+	// If AppKey is not configured, return false
 	if appKey == "" {
-		// 尝试从OTEL配置中获取
+		// Try to get from OTEL configuration
 		if otelHeaders := getEnvWithDefault("OTEL_EXPORTER_OTLP_HEADERS", ""); otelHeaders != "" {
-			// 解析OTEL_EXPORTER_OTLP_HEADERS获取X-ByteAPM-AppKey
+			// Parse OTEL_EXPORTER_OTLP_HEADERS to get X-ByteAPM-AppKey
 			if strings.Contains(otelHeaders, "X-ByteAPM-AppKey=") {
 				parts := strings.Split(otelHeaders, "=")
 				if len(parts) >= 2 {
 					appKey = strings.TrimSpace(parts[1])
-					// 去除可能的逗号、分号等分隔符
+					// Remove possible comma, semicolon and other delimiters
 					if idx := strings.IndexAny(appKey, ",;"); idx > 0 {
 						appKey = appKey[:idx]
 					}
@@ -488,7 +488,7 @@ func GetVolcengineAPMConfig() (endpoint string, appKey string, ok bool) {
 	return
 }
 
-// ShouldUseVolcengineAPMHandler 检查是否应该使用火山可观测平台处理器
+// ShouldUseVolcengineAPMHandler checks if Volcengine observability platform handler should be used
 func ShouldUseVolcengineAPMHandler(targetURL string) bool {
 	return isVolcengineAPMDomain(targetURL)
 }

@@ -27,24 +27,24 @@ class AliyunOSSUploader(AbstractStorage, BaseFileProcessor):
     """Aliyun OSS uploader implementation."""
 
     def set_credentials(self, credentials: BaseStorageCredentials):
-        """设置存储凭证"""
+        """Set storage credentials"""
         if not isinstance(credentials, AliyunCredentials):
             if isinstance(credentials, dict):
                 try:
-                    # 现在可以直接实例化，Pydantic模型内部的验证器会处理结构转换
+                    # Now can directly instantiate, Pydantic model internal validators will handle structure conversion
                     parsed_credentials = AliyunCredentials(**credentials)
                 except Exception as e:
-                    # 捕获Pydantic验证错误或任何其他初始化错误
+                    # Catch Pydantic validation errors or any other initialization errors
                     logger.error(f"Error parsing Aliyun credentials: {e}\nInput data: {credentials}") # Log input data for debugging
-                    raise ValueError(f"无效的凭证格式或转换失败: {e}")
-                self.credentials = parsed_credentials # 使用成功解析和转换后的凭证
+                    raise ValueError(f"Invalid credential format or conversion failed: {e}")
+                self.credentials = parsed_credentials # Use successfully parsed and converted credentials
             else:
-                raise ValueError(f"期望AliyunCredentials或dict类型，得到{type(credentials)}")
+                raise ValueError(f"Expected AliyunCredentials or dict type, got {type(credentials)}")
         else:
             self.credentials = credentials # It's already an AliyunCredentials instance
 
     def _should_refresh_credentials_impl(self) -> bool:
-        """检查是否应该刷新凭证的特定逻辑"""
+        """Check specific logic for whether to refresh credentials"""
         if not self.credentials:
             return True
 
@@ -52,14 +52,14 @@ class AliyunOSSUploader(AbstractStorage, BaseFileProcessor):
         if credentials.expire is None:
             return False
 
-        # 提前180秒刷新
+        # Refresh 180 seconds in advance
         return time.time() > credentials.expire - 180
 
     async def _refresh_credentials_impl(self):
-        """执行刷新凭证操作"""
-        logger.info("开始获取阿里云OSS STS Token")
+        """Execute credential refresh operation"""
+        logger.info("Starting to retrieve Aliyun OSS STS Token")
 
-        # 前提条件检查已经在 _should_refresh_credentials 中完成
+        # Precondition check already completed in _should_refresh_credentials
         json_data = {}
         if self.metadata:
             json_data["metadata"] = self.metadata
@@ -81,12 +81,12 @@ class AliyunOSSUploader(AbstractStorage, BaseFileProcessor):
                     return 
 
                 try:
-                    # 直接使用 actual_credential_data_wrapper，Pydantic模型内部的验证器会处理
+                    # Use actual_credential_data_wrapper directly, Pydantic model's internal validator will handle it
                     self.credentials = AliyunCredentials(**actual_credential_data_wrapper)
-                    logger.info("阿里云OSS STS Token获取成功 (通过Pydantic模型转换)")
+                    logger.info("Aliyun OSS STS Token retrieved successfully (via Pydantic model conversion)")
                 except Exception as e:
-                    logger.error(f"解析刷新后的STS凭证失败: {e}\nInput data from STS: {actual_credential_data_wrapper}") # Log input for debugging
-                    # 根据需要进行错误处理，例如 raise e
+                    logger.error(f"Failed to parse refreshed STS credentials: {e}\nInput data from STS: {actual_credential_data_wrapper}") # Log input for debugging
+                    # Handle errors as needed, e.g., raise e
                     return
 
     @with_refreshed_credentials
@@ -97,22 +97,22 @@ class AliyunOSSUploader(AbstractStorage, BaseFileProcessor):
         options: Optional[Options] = None
     ) -> StorageResponse:
         """
-        异步使用OSS SDK上传文件到阿里云对象存储。
+        Asynchronously upload file to Aliyun Object Storage using OSS SDK.
         
         Args:
-            file: 文件对象，文件路径或文件内容
-            key: 文件名/路径
-            options: 可选配置，包括headers和progress回调
+            file: File object, file path or file content
+            key: File name/path
+            options: Optional configuration including headers and progress callback
         
         Returns:
-            StorageResponse: 标准化的响应对象
+            StorageResponse: Standardized response object
         
         Raises:
-            InitException: 如果必要参数缺失或文件过大
-            UploadException: 如果上传失败（凭证过期或网络问题）
-            ValueError: 如果文件类型不支持或凭证类型错误或未设置元数据
+            InitException: If required parameters are missing or file is too large
+            UploadException: If upload fails (credential expired or network issues)
+            ValueError: If file type is not supported or credential type is incorrect or metadata is not set
         """
-        # 此时凭证已经由装饰器刷新过，直接使用self.credentials
+        # At this point credentials have been refreshed by the decorator, use self.credentials directly
         if options is None:
             options = {}
 

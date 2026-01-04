@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 
 def create_font_config():
-    """创建系统默认字体配置文件，设置WenQuanYi为首选字体"""
+    """Create system default font configuration file, set WenQuanYi as preferred font"""
 
     font_config = """<?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
@@ -33,85 +33,85 @@ def create_font_config():
 </fontconfig>
 """
 
-    # 检查目录是否存在，不存在则创建
+    # Check if directory exists, create if not
     os.makedirs("/etc/fonts", exist_ok=True)
 
     try:
         with open("/etc/fonts/local.conf", "w") as f:
             f.write(font_config)
-        print("✓ 成功创建字体配置文件: /etc/fonts/local.conf")
+        print("✓ Successfully created font configuration file: /etc/fonts/local.conf")
 
-        # 更新字体缓存
+        # Update font cache
         subprocess.run(["fc-cache", "-fv"], check=True)
-        print("✓ 成功更新字体缓存")
+        print("✓ Successfully updated font cache")
 
-        # 打印系统字体配置信息
-        print("\n========== 系统字体配置信息 ==========")
+        # Print system font configuration information
+        print("\n========== System Font Configuration Information ==========")
         subprocess.run(["fc-match", "sans-serif"])
         subprocess.run(["fc-match", "serif"])
         subprocess.run(["fc-match", "monospace"])
 
-        print("\n========== 系统安装的字体列表 ==========")
+        print("\n========== System Installed Fonts List ==========")
         result = subprocess.run(["fc-list"], capture_output=True, text=True)
         for line in result.stdout.splitlines():
             if "wenquanyi" in line.lower() or "wqy" in line.lower():
                 print(line)
     except Exception as e:
-        print(f"创建字体配置文件失败: {str(e)}")
+        print(f"Failed to create font configuration file: {str(e)}")
         return False
 
     return True
 
 def configure_matplotlib():
-    """创建并配置 matplotlib，设置 WenQuanYi 为默认字体"""
-    # 创建配置目录
+    """Create and configure matplotlib, set WenQuanYi as default font"""
+    # Create configuration directory
     os.makedirs("/root/.config/matplotlib", exist_ok=True)
 
-    # 配置内容
+    # Configuration content
     config_content = """backend: Agg
 font.family: sans-serif
 font.sans-serif: WenQuanYi Zen Hei, DejaVu Sans, Arial, sans-serif
 axes.unicode_minus: False
 """
 
-    # 写入配置文件
+    # Write configuration file
     try:
         with open("/root/.config/matplotlib/matplotlibrc", "w") as f:
             f.write(config_content)
-        print("✓ 成功创建 matplotlib 配置文件")
+        print("✓ Successfully created matplotlib configuration file")
     except Exception as e:
-        print(f"创建 matplotlib 配置文件失败: {str(e)}")
+        print(f"Failed to create matplotlib configuration file: {str(e)}")
         return False
 
     return True
 
 def check_matplotlib_font():
-    """检查matplotlib当前使用的字体是否为WenQuanYi，如果不是则退出镜像构建"""
+    """Check if matplotlib is currently using WenQuanYi font, if not exit image build"""
 
-    # 创建一个测试文本，确认当前使用的字体
+    # Create a test text to confirm the current font in use
     fig, ax = plt.subplots()
-    test_text = ax.text(0.5, 0.5, '测试文本', ha='center', va='center')
+    test_text = ax.text(0.5, 0.5, 'Test text', ha='center', va='center')
 
-    # 获取文本对象的字体属性
+    # Get font properties of text object
     font_properties = test_text.get_fontproperties()
     font_name = font_properties.get_name()
 
-    # 关闭测试图形
+    # Close test figure
     plt.close(fig)
 
-    print(f"matplotlib当前使用的字体: {font_name}")
+    print(f"Font currently used by matplotlib: {font_name}")
 
-    # 检查是否为WenQuanYi字体
+    # Check if it is WenQuanYi font
     if "wqy" in font_name.lower() or "wenquanyi" in font_name.lower():
-        print("✓ 当前使用的字体是WenQuanYi，符合要求")
+        print("✓ Current font in use is WenQuanYi, meets requirements")
         return True
     else:
-        print("✗ 当前使用的字体不是WenQuanYi，退出镜像构建")
-        sys.exit(1)  # 非零退出码会导致Docker构建失败
+        print("✗ Current font in use is not WenQuanYi, exiting image build")
+        sys.exit(1)  # Non-zero exit code will cause Docker build to fail
 
 if __name__ == "__main__":
-    print("配置系统字体...")
+    print("Configuring system fonts...")
     create_font_config()
 
-    print("\n配置 matplotlib...")
+    print("\nConfiguring matplotlib...")
     configure_matplotlib()

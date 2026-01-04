@@ -48,15 +48,15 @@ class LLMFactory:
     _clients = {}
     _configs = {}
 
-    # 初始化 token 使用跟踪器和相关服务
+    # Initialize token usage tracker and related services
     token_tracker = TokenUsageTracker()
 
-    # 从配置中加载价格配置
+    # Load pricing configuration from config
     models_config = config.get("models", {})
     pricing = ModelPricing(models_config=models_config)
     sandbox_id = os.environ.get("SANDBOX_ID", "default")
 
-    # 初始化 TokenUsageReport
+    # Initialize TokenUsageReport
     _ = TokenUsageReport.get_instance(
         sandbox_id=sandbox_id,
         token_tracker=token_tracker,
@@ -89,11 +89,11 @@ class LLMFactory:
             return cls._clients[model_id]
 
         if model_id not in cls._configs:
-            # 从配置文件中读取模型配置
+            # Read model configuration from config file
             model_config = config.get("models", {}).get(model_id)
             if not model_config:
                 raise ValueError(f"Unsupported model ID: {model_id}")
-            # 过滤 type 不是 llm 的配置
+            # Filter configurations where type is not llm
             if model_config.get("type") != "llm":
                 raise ValueError(f"Model {model_id} is not a LLM model")
 
@@ -130,46 +130,46 @@ class LLMFactory:
         stop: Optional[List[str]] = None,
         agent_context: Optional[AgentContextInterface] = None
     ) -> ChatCompletion:
-        """使用工具支持调用 LLM。
+        """Call LLM with tool support.
 
-        根据模型配置使用工具调用。
-        对于支持工具调用的模型，直接使用 OpenAI API 的工具调用功能。
+        Uses tool calling based on model configuration.
+        For models that support tool calling, directly use OpenAI API's tool calling feature.
 
         Args:
-            model_id: 要使用的模型 ID。
-            messages: 聊天消息历史。
-            tools: 可用工具的列表，可选。
-            stop: 终止序列列表，可选。
-            agent_context: Agent 上下文接口，可选。
+            model_id: The model ID to use.
+            messages: Chat message history.
+            tools: List of available tools, optional.
+            stop: List of stop sequences, optional.
+            agent_context: Agent context interface, optional.
 
         Returns:
-            LLM 响应。
+            LLM response.
 
         Raises:
-            ValueError: 如果模型 ID 不支持。
+            ValueError: If model ID is not supported.
         """
-        # 注意：不再在这里检查 cost limit，而是通过事件机制处理
+        # Note: No longer check cost limit here, handled through event mechanism
 
         client = cls.get(model_id)
         if not client:
-            raise ValueError(f"无法获取模型 ID 为 {model_id} 的客户端")
+            raise ValueError(f"Unable to get client for model ID {model_id}")
 
-        # 获取模型配置
+        # Get model configuration
         llm_config = cls._configs.get(model_id)
         if not llm_config:
-            raise ValueError(f"找不到模型 ID 为 {model_id} 的配置")
+            raise ValueError(f"Configuration not found for model ID {model_id}")
 
-        # 使用原生工具调用
-        # 构建请求参数
+        # Use native tool calling
+        # Build request parameters
         request_params = {
             "model": llm_config.name,
             "messages": messages,
             "temperature": llm_config.temperature,
-            #"max_output_tokens": llm_config.max_output_tokens,  # 先去掉这个传参，暂时还搞不太明白怎么算
+            #"max_output_tokens": llm_config.max_output_tokens,  # Remove this param for now, not sure how to calculate
             "top_p": llm_config.top_p,
         }
 
-        # --- 开始: 添加 AWS AutoCache 配置 ---
+        # --- Start: Add AWS AutoCache configuration ---
         aws_autocache_config = config.get("llm.aws_autocache", {})
         aws_autocache_enabled_str = str(aws_autocache_config.get("enabled", "true")).lower()
         aws_autocache_enabled = aws_autocache_enabled_str == "true"
@@ -177,16 +177,16 @@ class LLMFactory:
         if aws_autocache_enabled:
             try:
                 max_cache_points = int(aws_autocache_config.get("max_cache_points", 4))
-                max_cache_points = max(min(max_cache_points, 4), 1) # 约束在 [1, 4]
+                max_cache_points = max(min(max_cache_points, 4), 1) # Constrain to [1, 4]
 
                 min_cache_tokens = int(aws_autocache_config.get("min_cache_tokens", 2048))
-                min_cache_tokens = max(min_cache_tokens, 2048) # 最小 2048
+                min_cache_tokens = max(min_cache_tokens, 2048) # Minimum 2048
 
                 refresh_point_min_tokens = int(aws_autocache_config.get("refresh_point_min_tokens", 5000))
-                refresh_point_min_tokens = max(refresh_point_min_tokens, 2048) # 最小 2048
+                refresh_point_min_tokens = max(refresh_point_min_tokens, 2048) # Minimum 2048
 
                 autocache_params = {
-                    'auto_cache': True, # 因为 enabled=True 才进入此分支
+                    'auto_cache': True, # Enter this branch because enabled=True
                     'auto_cache_config': {
                         'max_cache_points': max_cache_points,
                         'min_cache_tokens': min_cache_tokens,
@@ -194,10 +194,10 @@ class LLMFactory:
                     }
                 }
             except ValueError as e:
-                logger.warning(f"解析 AWS AutoCache 配置时出错: {e}. 将不应用 AutoCache 配置。", exc_info=True)
-        # --- 结束: 添加 AWS AutoCache 配置 ---
+                logger.warning(f"Error parsing AWS AutoCache configuration: {e}. Will not apply AutoCache configuration.", exc_info=True)
+        # --- End: Add AWS AutoCache configuration ---
 
-        # 添加终止序列（如果提供）
+        # Add stop sequences (if provided)
         if stop:
             request_params["stop"] = stop
 
@@ -226,7 +226,7 @@ class LLMFactory:
 
             return response
         except Exception as e:
-            logger.critical(f"调用 LLM {model_id} 时出错: {e!r}", exc_info=True)
+            logger.critical(f"Error calling LLM {model_id}: {e!r}", exc_info=True)
             raise
 
     @classmethod
@@ -243,11 +243,11 @@ class LLMFactory:
             return cls._clients[model_id]
 
         if model_id not in cls._configs:
-            # 从配置文件中读取模型配置
+            # Read model configuration from config file
             model_config = config.get("models", {}).get(model_id)
             if not model_config:
                 raise ValueError(f"Unsupported model ID: {model_id}")
-            # 过滤 type 不是 embedding 的配置
+            # Filter configurations where type is not embedding
             if model_config.get("type") != "embedding":
                 raise ValueError(f"Model {model_id} is not an Embedding model")
 
@@ -263,7 +263,7 @@ class LLMFactory:
                 temperature=model_config.get("temperature", 0.7),
                 top_p=model_config.get("top_p", 1.0),
             )
-            logger.info(f"创建embedding客户端 - llm_config: {llm_config}")
+            logger.info(f"Creating embedding client - llm_config: {llm_config}")
             cls._configs[model_id] = llm_config
 
         llm_config = cls._configs[model_id]
@@ -310,24 +310,24 @@ class LLMFactory:
         Returns:
             An AsyncOpenAI client.
         """
-        # 获取自定义请求头配置
+        # Get custom request header configuration
         default_headers = {}
 
-        # 添加Magic-Authorization认证头
+        # Add Magic-Authorization authentication header
         magic_authorization = config.get("sandbox.magic_authorization")
         if magic_authorization:
             default_headers["Magic-Authorization"] = magic_authorization
 
-        # 添加配置文件中定义的自定义请求头（从环境变量读取）
+        # Add custom request headers defined in config file (read from environment variables)
         try:
             custom_headers = config.get("llm.custom_api_headers", {})
             if custom_headers and isinstance(custom_headers, dict):
-                # 合并自定义请求头到默认请求头
+                # Merge custom headers into default headers
                 default_headers.update(custom_headers)
             else:
-                logger.debug("未找到有效的自定义API请求头配置或格式不正确")
+                logger.debug("No valid custom API request header configuration found or format is incorrect")
         except Exception as e:
-            logger.warning(f"处理自定义API请求头配置时出错: {e}", exc_info=True)
+            logger.warning(f"Error processing custom API request header configuration: {e}", exc_info=True)
 
         return AsyncOpenAI(
             api_key=llm_config.api_key,
@@ -348,7 +348,7 @@ class LLMFactory:
             The embedding dimension for the given model ID.
         """
         if model_id not in cls._configs:
-            # 从配置文件中读取模型配置
+            # Read model configuration from config file
             model_config = config.get("models", {}).get(model_id)
             if not model_config:
                 raise ValueError(f"Unsupported model ID: {model_id}")
@@ -366,7 +366,7 @@ class LLMFactory:
         llm_config = cls._configs[model_id]
         model_name = llm_config.name.lower()
 
-        # 根据模型名称返回对应的向量维度
+        # Return corresponding vector dimension based on model name
         if "text-embedding-3-large" in model_name:
             return 3072
         elif "text-embedding-3-small" in model_name:
@@ -374,5 +374,5 @@ class LLMFactory:
         elif "text-embedding-ada-002" in model_name:
             return 1536
         else:
-            # 默认维度为1536
+            # Default dimension is 1536
             return 1536

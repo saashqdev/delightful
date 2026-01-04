@@ -24,7 +24,7 @@ class ClientRequest implements ClientInterface
     }
 
     /**
-     * 仅适合使用了 GuzzleHttp 的客户端.
+     * Only suitable for clients using GuzzleHttp.
      */
     public function request(RequestMethod $method, string $uri = '', array $options = []): ResponseInterface
     {
@@ -65,7 +65,7 @@ class ClientRequest implements ClientInterface
     }
 
     /**
-     * 标准请求
+     * Standard request
      */
     public function sendRequest(RequestInterface $request): ResponseInterface
     {

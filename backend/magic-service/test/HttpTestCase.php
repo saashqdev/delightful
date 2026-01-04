@@ -53,35 +53,35 @@ abstract class HttpTestCase extends TestCase
     {
         return [
             'organization-code' => env('TEST_ORGANIZATION_CODE'),
-            // 换成自己的
+            // Replace with your own token
             'Authorization' => env('TEST_TOKEN'),
         ];
     }
 
     /**
-     * 断言两个数组具有相同的值类型
-     * 用于验证数组结构和类型是否匹配.
+     * Assert that two arrays have matching value types.
+     * Verifies array structure and types are aligned.
      *
-     * @param array $expected 预期的数组
-     * @param array $actual 实际的数组
-     * @param string $message 断言失败时的错误消息
-     * @param bool $checkKeys 是否检查键值
+     * @param array $expected Expected array
+     * @param array $actual Actual array
+     * @param string $message Error message when assertion fails
+     * @param bool $checkKeys Whether to check keys
      */
     protected function assertArrayValueTypesEquals(array $expected, array $actual, string $message = '', bool $checkKeys = true): void
     {
-        // 先检查实际数组中是否有所有预期的键
+        // First ensure the actual array has all expected keys
         if ($checkKeys) {
             foreach (array_keys($expected) as $key) {
-                $this->assertArrayHasKey($key, $actual, $message . sprintf(' - 键 "%s" 不存在', $key));
+                $this->assertArrayHasKey($key, $actual, $message . sprintf(' - key "%s" is missing', $key));
             }
         }
 
-        // 递归检查每个值的类型
+        // Recursively check each value type
         foreach ($expected as $key => $expectedValue) {
-            // 确保键存在
+            // Ensure the key exists
             if (! array_key_exists($key, $actual)) {
                 if ($checkKeys) {
-                    $this->fail($message . sprintf(' - 键 "%s" 不存在', $key));
+                    $this->fail($message . sprintf(' - key "%s" is missing', $key));
                 }
                 continue;
             }
@@ -90,47 +90,47 @@ abstract class HttpTestCase extends TestCase
             $expectedType = gettype($expectedValue);
             $actualType = gettype($actualValue);
 
-            // 如果预期值为 null，则实际值可以是任意类型
+            // If the expected value is null, allow any actual type
             if ($expectedValue === null) {
                 continue;
             }
 
-            // 检查类型匹配
+            // Check for type match
             if ($expectedType !== $actualType && ! ($expectedType === 'double' && $actualType === 'integer')) {
                 $this->assertEquals(
                     $expectedType,
                     $actualType,
-                    $message . sprintf(' - 键 "%s" 的类型应为 %s，实际为 %s', $key, $expectedType, $actualType)
+                    $message . sprintf(' - key "%s" expected type %s, got %s', $key, $expectedType, $actualType)
                 );
                 continue;
             }
 
-            // 特殊处理字符串类型
+            // Handle string types specially
             if (is_string($expectedValue) && $expectedValue === 'NOT_EMPTY') {
-                $this->assertNotEmpty($actualValue, $message . sprintf(' - 键 "%s" 不应为空字符串', $key));
+                $this->assertNotEmpty($actualValue, $message . sprintf(' - key "%s" should not be empty', $key));
             }
 
-            // 递归处理数组类型
+            // Recursively handle array types
             if (is_array($expectedValue)) {
-                // 如果是空数组，仅检查类型
+                // If the expected array is empty, only check type
                 if (empty($expectedValue)) {
                     continue;
                 }
 
-                // 检查数组是否为索引数组（列表）
+                // Check whether the array is an indexed list
                 $isIndexedArray = array_keys($expectedValue) === range(0, count($expectedValue) - 1);
 
                 if ($isIndexedArray && ! empty($actualValue)) {
-                    // 如果是索引数组，检查第一个元素的类型
+                    // For indexed arrays, check the first element type
                     $firstExpectedItem = reset($expectedValue);
                     $firstActualItem = reset($actualValue);
 
                     if (is_array($firstExpectedItem)) {
-                        $this->assertIsArray($firstActualItem, $message . sprintf(' - 键 "%s" 的数组元素应为数组类型', $key));
+                        $this->assertIsArray($firstActualItem, $message . sprintf(' - key "%s" array elements should be arrays', $key));
                         $this->assertArrayValueTypesEquals(
                             $firstExpectedItem,
                             $firstActualItem,
-                            $message . sprintf(' - 键 "%s" 的数组元素', $key),
+                            $message . sprintf(' - key "%s" array element', $key),
                             $checkKeys
                         );
                     } else {
@@ -139,15 +139,15 @@ abstract class HttpTestCase extends TestCase
                         $this->assertEquals(
                             $expectedItemType,
                             $actualItemType,
-                            $message . sprintf(' - 键 "%s" 的数组元素类型应为 %s，实际为 %s', $key, $expectedItemType, $actualItemType)
+                            $message . sprintf(' - key "%s" array element type expected %s, got %s', $key, $expectedItemType, $actualItemType)
                         );
                     }
                 } elseif (! $isIndexedArray) {
-                    // 如果是关联数组，递归验证
+                    // For associative arrays, validate recursively
                     $this->assertArrayValueTypesEquals(
                         $expectedValue,
                         $actualValue,
-                        $message . sprintf(' - 键 "%s" 的子数组', $key),
+                        $message . sprintf(' - key "%s" sub-array', $key),
                         $checkKeys
                     );
                 }
@@ -156,62 +156,62 @@ abstract class HttpTestCase extends TestCase
     }
 
     /**
-     * 断言两个数组具有相同的值
-     * 用于精确验证数组中的具体值是否相等.
+     * Assert that two arrays have identical values.
+     * Verifies the exact values match.
      *
-     * @param array $expected 预期的数组
-     * @param array $actual 实际的数组
-     * @param string $message 断言失败时的错误消息
-     * @param bool $strict 是否使用严格比较（===）
-     * @param bool $checkKeys 是否检查键值
+     * @param array $expected Expected array
+     * @param array $actual Actual array
+     * @param string $message Error message when assertion fails
+     * @param bool $strict Whether to use strict comparison (===)
+     * @param bool $checkKeys Whether to check keys
      */
     protected function assertArrayEquals(array $expected, array $actual, string $message = '', bool $strict = true, bool $checkKeys = true): void
     {
-        // 先检查实际数组中是否有所有预期的键
+        // First ensure the actual array has all expected keys
         if ($checkKeys) {
             $expectedKeys = array_keys($expected);
             $actualKeys = array_keys($actual);
             $missingKeys = array_diff($expectedKeys, $actualKeys);
 
             if (! empty($missingKeys)) {
-                $this->fail($message . sprintf(' - 缺少键: "%s"', implode('", "', $missingKeys)));
+                $this->fail($message . sprintf(' - missing keys: "%s"', implode('", "', $missingKeys)));
             }
         }
 
-        // 递归检查每个值
+        // Recursively check each value
         foreach ($expected as $key => $expectedValue) {
-            // 确保键存在
+            // Ensure the key exists
             if (! array_key_exists($key, $actual)) {
                 if ($checkKeys) {
-                    $this->fail($message . sprintf(' - 键 "%s" 不存在', $key));
+                    $this->fail($message . sprintf(' - key "%s" is missing', $key));
                 }
                 continue;
             }
 
             $actualValue = $actual[$key];
 
-            // 处理数组递归
+            // Handle arrays recursively
             if (is_array($expectedValue) && is_array($actualValue)) {
                 $this->assertArrayEquals(
                     $expectedValue,
                     $actualValue,
-                    $message . sprintf(' - 键 "%s" 的子数组', $key),
+                    $message . sprintf(' - key "%s" sub-array', $key),
                     $strict,
                     $checkKeys
                 );
             } else {
-                // 对于非数组值，直接比较
+                // For non-array values, compare directly
                 if ($strict) {
                     $this->assertSame(
                         $expectedValue,
                         $actualValue,
-                        $message . sprintf(' - 键 "%s" 的值不匹配', $key)
+                        $message . sprintf(' - key "%s" value mismatch', $key)
                     );
                 } else {
                     $this->assertEquals(
                         $expectedValue,
                         $actualValue,
-                        $message . sprintf(' - 键 "%s" 的值不匹配', $key)
+                        $message . sprintf(' - key "%s" value mismatch', $key)
                     );
                 }
             }

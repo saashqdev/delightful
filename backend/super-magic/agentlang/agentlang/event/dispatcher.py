@@ -7,108 +7,108 @@ from agentlang.logger import get_logger
 
 logger = get_logger(__name__)
 
-T = TypeVar('T')  # 暂时解除与 BaseEventData 的绑定，以避免循环导入
+T = TypeVar('T')  # Temporarily unbind from BaseEventData to avoid circular import
 
 class ListenerProvider:
-    """监听器提供者，负责管理和提供事件监听器"""
+    """Listener provider, manages and provides event listeners"""
 
     def __init__(self):
-        """初始化监听器提供者"""
+        """Initialize listener provider"""
         self._listeners: Dict[EventType, List[Callable[[Event[Any]], None]]] = {}
 
     def add_listener(self, event_type: EventType, listener: Callable[[Event[Any]], None]) -> None:
-        """添加事件监听器
+        """Add an event listener
 
         Args:
-            event_type: 事件类型
-            listener: 监听器函数，接收一个事件参数
+            event_type: Event type
+            listener: Listener function taking one event parameter
         """
         if event_type not in self._listeners:
             self._listeners[event_type] = []
         self._listeners[event_type].append(listener)
-        logger.info(f"已添加事件监听器: {event_type}, 监听器: {listener.__name__}")
+        logger.info(f"Added event listener: {event_type}, listener: {listener.__name__}")
 
     def get_listeners_for_event(self, event: Event[Any]) -> Iterable[Callable[[Event[Any]], None]]:
-        """获取指定事件的所有监听器
+        """Get all listeners for a given event
 
         Args:
-            event: 事件实例
+            event: Event instance
 
         Returns:
-            Iterable[Callable]: 监听器函数列表
+            Iterable[Callable]: List of listener functions
         """
         return self._listeners.get(event.event_type, [])
 
 
 class EventDispatcher(EventDispatcherInterface):
-    """事件分发器，负责分发事件到对应的监听器"""
+    """Event dispatcher, dispatches events to corresponding listeners"""
 
     def __init__(self, provider: Optional[ListenerProvider] = None):
-        """初始化事件分发器
+        """Initialize event dispatcher
 
         Args:
-            provider: 监听器提供者实例，如果不提供则创建一个新的
+            provider: Listener provider instance; creates new one if not provided
         """
         self._provider = provider or ListenerProvider()
 
     def add_listener(self, event_type: EventType, listener: Callable[[Event[Any]], None]) -> None:
-        """添加事件监听器
+        """Add an event listener
 
         Args:
-            event_type: 事件类型
-            listener: 监听器函数
+            event_type: Event type
+            listener: Listener function
         """
         self._provider.add_listener(event_type, listener)
 
     async def dispatch(self, event: Event[T]) -> Event[T]:
-        """分发事件到所有相关的监听器
+        """Dispatch event to all relevant listeners
 
-        按照顺序同步调用所有监听器，如果是可停止事件，会在每个监听器调用前检查是否需要停止传播。
-        如果事件数据中包含工具上下文引用，可以通过工具上下文访问到共享的事件上下文。
+        Calls listeners in order synchronously; for stoppable events, checks before each call whether propagation should stop.
+        If event data contains a tool context reference, the shared event context can be accessed via the tool context.
 
         Args:
-            event: 要分发的事件
+            event: Event to dispatch
 
         Returns:
-            Event: 处理后的事件对象
+            Event: Processed event object
         """
         listeners = self._provider.get_listeners_for_event(event)
 
         for listener in listeners:
-            # 如果是可停止事件且已停止传播，则立即返回
+            # If stoppable event and propagation stopped, return immediately
             if isinstance(event, StoppableEvent) and event.is_propagation_stopped():
-                logger.info(f"事件 {event.event_type} 传播已停止")
+                logger.info(f"Event {event.event_type} propagation stopped")
                 break
 
             try:
-                # 获取监听器的名称
+                # Get listener name
                 listener_name = self._get_listener_name(listener)
 
-                # 调用监听器
+                # Call listener
                 await listener(event)
 
-                # 记录处理成功信息
-                logger.debug(f"监听器 {listener_name} 成功处理事件 {event.event_type}")
+                # Log success
+                logger.debug(f"Listener {listener_name} successfully handled event {event.event_type}")
             except Exception as e:
-                # 打印调用栈
+                # Print traceback
                 traceback.print_exc()
                 listener_name = self._get_listener_name(listener)
-                logger.error(f"执行事件监听器时出错: {listener_name}, 错误: {e}")
-                # 继续执行其他监听器，但记录错误
+                logger.error(f"Error executing event listener: {listener_name}, error: {e}")
+                # Continue with other listeners but log error
                 continue
 
         return event
 
     def _get_listener_name(self, listener: Callable) -> str:
-        """获取监听器的名称，用于日志记录
+        """Get listener name for logging
         
-        尝试获取函数名，如果是方法则包含类名
+        Attempts to get function name; includes class name if it's a method
         
         Args:
-            listener: 监听器函数或方法
+            listener: Listener function or method
             
         Returns:
-            str: 监听器的名称
+            str: Listener name
         """
         if hasattr(listener, "__qualname__"):
             return listener.__qualname__

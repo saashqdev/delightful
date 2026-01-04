@@ -1,3 +1,2 @@
 """
-命令模块，用于存放CLI命令相关功能
-""" 
+Command module for storing CLI command related functions

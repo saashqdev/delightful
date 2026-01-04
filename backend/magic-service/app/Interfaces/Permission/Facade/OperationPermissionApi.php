@@ -67,7 +67,7 @@ class OperationPermissionApi extends AbstractPermissionApi
     }
 
     /**
-     * 获取用户拥有管理员权限的组织编码列表.
+     * Get the organization codes where the user is an admin.
      */
     public function getUserOrganizationAdminList(): array
     {

@@ -1,25 +1,25 @@
-# .env 文件优先级配置
+# .env Priority Configuration
 
-## 概述
+## Overview
 
-项目中使用了 `python-dotenv` 库来加载环境变量，默认情况下，该库不会覆盖已存在的系统环境变量。本次修改使得项目能够优先从 `.env` 文件读取配置，即使同名的环境变量已经存在于系统中。
+The project uses `python-dotenv` to load environment variables. By default, the library does not override existing system environment variables. This change allows the project to prioritize values from the `.env` file even when the same variables already exist in the system.
 
-## 技术实现
+## Technical Implementation
 
-通过为所有 `load_dotenv()` 调用添加 `override=True` 参数，实现了让 `.env` 文件中的配置优先级高于系统环境变量。
+Added `override=True` to all `load_dotenv()` calls so that values in `.env` take precedence over system environment variables.
 
-修改了以下文件中的 `load_dotenv()` 调用：
+Updated `load_dotenv()` in the following files:
 
 1. `main.py`
 2. `bin/v6.py`
 3. `app/vector_store/example.py`
 4. `app/vector_store/examples/collection_prefix_example.py`
 
-## 使用方法
+## Usage
 
-无需改变现有的使用方式，只需确保将需要覆盖的环境变量配置写入 `.env` 文件即可。这些配置将会覆盖系统中已存在的同名环境变量。
+No changes to how you use the project: just write the variables you want to override into `.env`. Those entries will override existing system environment variables.
 
-## 备注
+## Notes
 
-- 如果需要在特定场景下恢复原来的行为（不覆盖系统环境变量），可以临时将对应 `load_dotenv()` 调用的 `override` 参数设置为 `False`。
-- 该修改尤其适用于开发和测试环境，可以轻松切换不同的配置而无需修改系统环境变量。
+- If you need the original behavior (not overriding system environment variables) for a specific scenario, temporarily set `override=False` on that `load_dotenv()` call.
+- This is especially helpful in development and testing to switch configurations without touching system environment variables.

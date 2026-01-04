@@ -1,108 +1,108 @@
 """
-代理上下文接口
+Agent context interface.
 
-定义获取用户信息和基础功能的抽象接口，用于解耦框架与具体实现
+Defines abstract interfaces for obtaining user info and core utilities, decoupling the framework from concrete implementations.
 """
 
 from abc import ABC, abstractmethod
 from typing import Any, Callable, Dict, Optional, TypeVar
 
-T = TypeVar('T')  # 用于泛型类型
+T = TypeVar('T')  # For generic types
 
 class AgentContextInterface(ABC):
     """
-    代理上下文基础接口
-    
-    定义框架层必要的核心功能，包括用户信息、工作空间、事件系统和资源管理
+    Base interface for agent context.
+
+    Defines core framework capabilities such as user info, workspace, event system, and resource management.
     """
 
     @abstractmethod
     def get_user_id(self) -> Optional[str]:
-        """获取用户ID
-        
+        """Get user ID.
+
         Returns:
-            Optional[str]: 用户ID，如果不存在则返回None
+            Optional[str]: User ID, or None if absent
         """
         pass
 
     @abstractmethod
     def get_metadata(self) -> Dict[str, Any]:
-        """获取元数据
-        
+        """Get metadata.
+
         Returns:
-            Dict[str, Any]: 上下文元数据
+            Dict[str, Any]: Context metadata
         """
         pass
 
     @abstractmethod
     def get_workspace_dir(self) -> str:
-        """获取工作空间目录
-        
+        """Get workspace directory.
+
         Returns:
-            str: 工作空间目录的绝对路径
+            str: Absolute path to workspace directory
         """
         pass
 
     @abstractmethod
     def ensure_workspace_dir(self) -> str:
-        """确保工作空间目录存在，并返回路径
-        
+        """Ensure workspace directory exists and return its path.
+
         Returns:
-            str: 工作空间目录的绝对路径
+            str: Absolute path to workspace directory
         """
         pass
 
     @abstractmethod
     async def dispatch_event(self, event_type: str, data: Any) -> Any:
-        """分发事件
-        
+        """Dispatch an event.
+
         Args:
-            event_type: 事件类型
-            data: 事件数据
-            
+            event_type: Event type
+            data: Event payload
+
         Returns:
-            Any: 事件处理结果
+            Any: Event handling result
         """
         pass
 
     @abstractmethod
     def add_event_listener(self, event_type: str, listener: Callable[[Any], None]) -> None:
-        """添加事件监听器
-        
+        """Add an event listener.
+
         Args:
-            event_type: 事件类型
-            listener: 事件监听函数，接收一个事件参数
+            event_type: Event type
+            listener: Listener callable receiving an event payload
         """
         pass
 
     @abstractmethod
     async def get_resource(self, name: str, factory=None) -> Any:
-        """获取资源，如不存在则使用工厂创建
-        
+        """Get a resource, creating via factory if missing.
+
         Args:
-            name: 资源名称
-            factory: 资源创建工厂函数，仅在资源不存在时调用
-            
+            name: Resource name
+            factory: Factory callable to create resource when absent
+
         Returns:
-            Any: 请求的资源实例
+            Any: Requested resource instance
         """
         pass
 
     @abstractmethod
     def add_resource(self, name: str, resource: Any) -> None:
-        """添加资源
-        
+        """Add a resource.
+
         Args:
-            name: 资源名称
-            resource: 资源实例
+            name: Resource name
+            resource: Resource instance
         """
         pass
 
     @abstractmethod
     async def close_resource(self, name: str) -> None:
-        """关闭并移除资源
-        
+        """Close and remove a resource.
+
         Args:
-            name: 资源名称
+            name: Resource name
         """
         pass 

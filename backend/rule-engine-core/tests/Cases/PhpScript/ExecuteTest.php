@@ -88,7 +88,7 @@ class ExecuteTest extends AbstractTestCase
                 (function () {
                     $properties = new RuleExecutionSetProperties();
                     $properties->setName('add-rule');
-                    $properties->setRuleType(RuleType::Expression); // 规则类型，支持脚本或表达式类型。未进行定义时，默认为脚本类型。
+                    $properties->setRuleType(RuleType::Expression); // Rule type, supports script or expression types. Defaults to script type when not defined.
                     $properties->setRuleGroup($this->ruleGroup);
                     return $properties;
                 })(),
@@ -102,7 +102,7 @@ class ExecuteTest extends AbstractTestCase
                 (function () {
                     $properties = new RuleExecutionSetProperties();
                     $properties->setName('testClass-rule');
-                    $properties->setRuleType(RuleType::Expression); // 规则类型，支持脚本或表达式类型。未进行定义时，默认为脚本类型。
+                    $properties->setRuleType(RuleType::Expression); // Rule type, supports script or expression types. Defaults to script type when not defined.
                     $properties->setRuleGroup($this->ruleGroup);
                     return $properties;
                 })(),
@@ -116,7 +116,7 @@ class ExecuteTest extends AbstractTestCase
                 (function () {
                     $properties = new RuleExecutionSetProperties();
                     $properties->setName('testPlaceholder-rule');
-                    $properties->setRuleType(RuleType::Script); // 规则类型，支持脚本或表达式类型。未进行定义时，默认为脚本类型。
+                    $properties->setRuleType(RuleType::Script); // Rule type, supports script or expression types. Defaults to script type when not defined.
                     $properties->setResolvePlaceholders(true);
                     $properties->setRuleGroup($this->ruleGroup);
                     return $properties;

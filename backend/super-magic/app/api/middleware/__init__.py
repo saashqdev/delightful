@@ -1,7 +1,7 @@
 """
-API 中间件包
+API Middleware Package
 
-该包包含所有自定义的中间件，用于请求和响应的处理
+This package contains all custom middleware for request and response handling
 """
 
 from app.api.middleware.debug_middleware import DebugMiddleware

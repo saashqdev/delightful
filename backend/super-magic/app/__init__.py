@@ -1,3 +1,3 @@
 """
-应用入口模块
+Application entry module
 """

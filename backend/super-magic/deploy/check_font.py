@@ -7,29 +7,29 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 
 def check_matplotlib_font():
-    """检查matplotlib当前使用的字体是否为WenQuanYi，如果不是则退出镜像构建"""
+    """Check if matplotlib is currently using WenQuanYi font. If not, exit the image build"""
 
-    # 创建一个测试文本，确认当前使用的字体
+    # Create test text to confirm current font in use
     fig, ax = plt.subplots()
-    test_text = ax.text(0.5, 0.5, '测试文本', ha='center', va='center')
+    test_text = ax.text(0.5, 0.5, 'test text', ha='center', va='center')
 
-    # 获取文本对象的字体属性
+    # Get text object font properties
     font_properties = test_text.get_fontproperties()
     font_name = font_properties.get_name()
 
-    # 关闭测试图形
+    # Close test figure
     plt.close(fig)
 
-    print(f"matplotlib当前使用的字体: {font_name}")
+    print(f"Current font used by matplotlib: {font_name}")
 
-    # 检查是否为WenQuanYi字体
+    # Check if it is WenQuanYi font
     if "wqy" in font_name.lower() or "wenquanyi" in font_name.lower():
-        print("✓ 当前使用的字体是WenQuanYi，符合要求")
+        print("✓ The font currently in use is WenQuanYi, which meets requirements")
         return True
     else:
-        print("✗ 当前使用的字体不是WenQuanYi，退出镜像构建")
-        sys.exit(1)  # 非零退出码会导致Docker构建失败
+        print("✗ The font currently in use is not WenQuanYi, exiting image build")
+        sys.exit(1)  # Non-zero exit code will cause Docker build to fail
 
 if __name__ == "__main__":
-    print("\n检查matplotlib字体配置...")
+    print("\nChecking matplotlib font configuration...")
     check_matplotlib_font()

@@ -1,19 +1,19 @@
-# 使用 Playwright 基础镜像
+# Use Playwright base image
 FROM mcr.microsoft.com/playwright:v1.49.1-noble
 
-# 设置工作目录
+# Set working directory
 WORKDIR /app
 
-# 设置Python环境
+# Set Python environment
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV TZ=Asia/Shanghai
 
-# 替换为中国的镜像源
+# Replace with China mirror source
 # RUN sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list && \
 #     sed -i 's/security.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
 
-# 安装必要的软件包，使用 --no-install-recommends 减小体积
+# Install required packages, use --no-install-recommends to reduce image size
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip \
     python3-venv \
@@ -31,48 +31,48 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# 更新字体缓存
+# Update font cache
 RUN fc-cache -fv
 
-# 直接安装指定版本的Node.js和TypeScript
+# Directly install specified versions of Node.js and TypeScript
 RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
     apt-get install -y nodejs && \
     npm config set registry https://registry.npmmirror.com && \
     npm install -g typescript@5.8.3 && \
-    # 将Node.js版本固定到22.14.0
+    # Pin Node.js version to 22.14.0
     npm install -g n && \
     n 22.14.0 && \
-    # 打印版本信息
-    echo "========== Node.js 版本信息 ==========" && \
+    # Print version information
+    echo "========== Node.js Version Info ==========" && \
     node -v && \
-    echo "========== TypeScript 版本信息 ==========" && \
+    echo "========== TypeScript Version Info ==========" && \
     tsc -v
 
-# 设置 pip 镜像源
+# Set pip mirror source
 # RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
-# 创建并激活虚拟环境
+# Create and activate virtual environment
 RUN python3 -m venv /venv
 ENV PATH="/venv/bin:$PATH"
 
-# 安装 tiktoken
+# Install tiktoken
 RUN pip install tiktoken
 
-# 预加载 tiktoken 编码器，因为要下载令牌表文件 cl100k_base.tiktoken
+# Preload tiktoken encoder, need to download token encoding file cl100k_base.tiktoken
 RUN echo "import tiktoken; tiktoken.get_encoding('cl100k_base'); print('Tiktoken cl100k_base encoding preloaded successfully')" > preload_tiktoken.py && \
     python preload_tiktoken.py && \
     rm preload_tiktoken.py
 
-# 复制并安装项目依赖
+# Copy and install project dependencies
 COPY requirements.txt .
 
 
-# 安装依赖
+# Install dependencies
 RUN pip install -r requirements.txt
 
-# 安装沙箱环境依赖
+# Install sandbox environment dependencies
 COPY requirements_sandbox.txt .
 RUN pip install -r requirements_sandbox.txt
 
-# 更新环境变量路径
+# Update environment variable path
 ENV PATH="/usr/local/bin:${PATH}"

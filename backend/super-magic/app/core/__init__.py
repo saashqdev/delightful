@@ -1,3 +1,3 @@
-# Core 模块初始化文件
+# Core module initialization file
 
 __all__ = ["Task"]

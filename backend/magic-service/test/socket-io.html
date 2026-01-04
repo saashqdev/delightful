@@ -10,10 +10,10 @@
     var socket = io('ws://127.0.0.1:9502', { transports: ["websocket"], query: { token: '123456'} });
     socket.on('connect', data => {
         console.log(data)
-        //登录
+        // Login
         socket.emit("login", '{"context":{"request_id":"777","timestamp":1712560525,"signature":""},"data":[]}', console.log);
-        // 聊天
-        socket.emit("chat", '{"context":{"request_id":"666","timestamp":1712560525,"signature":""},"data":{"message":{"type":"text","content":"你好世界"},"receive_type":"user","receive_id":"66"}}', console.log);
+        // Chat
+        socket.emit("chat", '{"context":{"request_id":"666","timestamp":1712560525,"signature":""},"data":{"message":{"type":"text","content":"Hello world"},"receive_type":"user","receive_id":"66"}}', console.log);
         setInterval(function () {
             const start = Date.now();
             socket.emit("ping", () => {

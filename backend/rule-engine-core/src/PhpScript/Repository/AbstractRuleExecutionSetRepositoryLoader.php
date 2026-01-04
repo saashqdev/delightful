@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Dtyq\RuleEngineCore\PhpScript\Repository;
 
 /**
- * @TODO:未实现.
+ * @TODO: Not implemented yet.
  */
 class AbstractRuleExecutionSetRepositoryLoader
 {

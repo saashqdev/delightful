@@ -13,7 +13,7 @@ ENV TIMEZONE=${timezone:-"Asia/Shanghai"} \
     COMPOSER_MEMORY_LIMIT=-1 \
     PHP_INI_MEMORY_LIMIT=-1
 
-# 设置 PHP 配置
+# Configure PHP settings
 RUN mkdir -p /etc/php/conf.d && \
     echo "memory_limit = -1" > /etc/php/conf.d/memory-limit.ini && \
     echo "max_execution_time = 0" > /etc/php/conf.d/max-execution-time.ini
@@ -24,14 +24,14 @@ COPY . /opt/www
 WORKDIR /opt/www
 
 
-# composer 改成阿里云镜像
+# Optional: switch composer to the Aliyun mirror
 # RUN composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 
 
-# 关闭swow扩展 再安装, 因为安装swow扩展后 再执行composer update 时，curl会陷入循环
+# Disable the swow extension before installing, because after enabling swow a composer update causes curl to loop
 RUN  php -d swow.enable=0  $(which composer) update 
 
-# 可选的：标记expose端口
+# Optional: mark exposed ports
 EXPOSE 9501
 EXPOSE 9502
 

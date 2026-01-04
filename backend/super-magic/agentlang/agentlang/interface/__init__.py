@@ -1,4 +1,4 @@
 """
-接口定义包
-用于定义跨模块交互的接口
+Interface definition package.
+Used to define cross-module interaction interfaces.
 """ 

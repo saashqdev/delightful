@@ -9,20 +9,20 @@ use App\Interfaces\Authentication\Facade\LoginApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/api/v1', static function () {
-    // 认证相关路由 - RESTful风格
+    // Authentication routes (RESTful style)
     Router::addGroup('/auth', static function () {
-        // 登录校验 - GET方法用于检查认证状态
+        // Login check - GET to verify authentication status
         Router::get('/status', [AuthenticationApi::class, 'authCheck']);
 
-        // 环境信息 - GET方法获取资源
+        // Environment info - GET to fetch resource
         Router::get('/environment', [AuthenticationApi::class, 'authEnvironment']);
     });
 
-    // 会话管理 - RESTful风格
+    // Session management (RESTful style)
     Router::addGroup('/sessions', static function () {
-        // 创建会话（登录）
+        // Create session (login)
         Router::post('', [LoginApi::class, 'login']);
-        // 销毁会话（登出）- 如果需要可以添加
+        // Destroy session (logout) - add if needed
         // Router::delete('', [LoginApi::class, 'logout']);
     });
 });

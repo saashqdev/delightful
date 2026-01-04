@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-简单的 AgentLang 使用示例
+Simple AgentLang usage example
 """
 
 import asyncio
@@ -12,19 +12,19 @@ from agentlang.llms import LLMClientConfig, LLMFactory
 
 
 async def main():
-    # 初始化 LLM 客户端
+    # Initialize LLM client
     llm_config = LLMClientConfig(
         model="gpt-4.1",
         api_key="your-api-key-here",
     )
     llm_client = LLMFactory.create_llm_client(llm_config)
 
-    # 初始化事件调度器
+    # Initialize event dispatcher
     event_dispatcher = EventDispatcher()
 
-    # 这里可以添加更多示例代码
+    # More example code can be added here
 
-    print("AgentLang 示例已初始化")
+    print("AgentLang example has been initialized")
 
 if __name__ == "__main__":
     asyncio.run(main()) 

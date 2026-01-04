@@ -8,13 +8,13 @@ use Hyperf\Amqp\IO\IOFactory;
 
 use function Hyperf\Support\env;
 
-// ！！！注意，开了定时任务的 pod 就不开 mq！避免定时任务阻塞 mq 消费!
+// Important: if cron jobs are enabled on a pod, disable MQ there to avoid cron blocking MQ consumption.
 $enableCrontab = (bool) env('CRONTAB_ENABLE', true);
 return [
-    // 架构分层,可能会把message和seq分别投递与消费,因此需要单独配置开关
+    // Architecture layering may publish/consume message and seq separately, so switches are separate
     'enable_chat_message' => ! $enableCrontab,
     'enable_chat_seq' => ! $enableCrontab,
-    // mq的总开关
+    // Global MQ toggle
     'enable' => ! $enableCrontab,
     'default' => [
         'host' => env('AMQP_HOST', 'localhost'),

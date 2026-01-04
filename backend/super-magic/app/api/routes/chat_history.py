@@ -1,7 +1,7 @@
 """
-聊天历史管理API模块
+Chat history management API module.
 
-提供聊天历史相关功能，如打包下载历史记录等
+Provides chat history utilities such as packaging and downloading history records.
 """
 import os
 import shutil
@@ -18,30 +18,30 @@ logger = get_logger(__name__)
 router = APIRouter(prefix="/chat-history", tags=["chat_history"])
 
 def remove_file(path: str):
-    """删除指定路径的文件"""
+    """Delete a file at the given path."""
     try:
         os.unlink(path)
-        logger.info(f"临时文件已删除: {path}")
+        logger.info(f"Temporary file removed: {path}")
     except Exception as e:
-        logger.error(f"删除文件失败: {e}")
+        logger.error(f"Failed to delete file: {e}")
 
 @router.get("/download")
 async def download_chat_history(background_tasks: BackgroundTasks):
-    """打包并下载.chat_history目录"""
+    """Package and download the .chat_history directory."""
     try:
-        # 检查目录是否存在
+        # Check if directory exists
         chat_history_dir = PathManager.get_chat_history_dir()
         if not chat_history_dir.exists() or not chat_history_dir.is_dir():
-            logger.error("聊天历史目录不存在")
-            raise HTTPException(status_code=404, detail="聊天历史目录不存在")
+            logger.error("Chat history directory does not exist")
+            raise HTTPException(status_code=404, detail="Chat history directory not found")
 
-        # 创建临时文件
+        # Create temporary file
         with tempfile.NamedTemporaryFile(delete=False, suffix='.zip') as tmp:
             tmp_path = tmp.name
 
-        logger.info(f"创建临时文件: {tmp_path}")
+        logger.info(f"Created temporary file: {tmp_path}")
 
-        # 创建zip文件
+        # Create zip archive
         archive_path = shutil.make_archive(
             tmp_path.replace('.zip', ''), 
             'zip', 
@@ -49,9 +49,9 @@ async def download_chat_history(background_tasks: BackgroundTasks):
             base_dir=PathManager.get_chat_history_dir_name()
         )
 
-        logger.info(f"创建聊天历史压缩包: {archive_path}")
+        logger.info(f"Created chat history archive: {archive_path}")
 
-        # 添加后台任务，在响应完成后删除临时文件
+        # Add background task to delete the temp file after response completes
         background_tasks.add_task(remove_file, archive_path)
 
         return FileResponse(
@@ -60,5 +60,5 @@ async def download_chat_history(background_tasks: BackgroundTasks):
             filename="chat_history.zip"
         )
     except Exception as e:
-        logger.error(f"打包聊天历史失败: {e!s}")
-        raise HTTPException(status_code=500, detail=f"打包失败: {e!s}") 
+        logger.error(f"Failed to package chat history: {e!s}")
+        raise HTTPException(status_code=500, detail=f"Packaging failed: {e!s}")

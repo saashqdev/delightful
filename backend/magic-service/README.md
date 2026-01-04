@@ -1,136 +1,107 @@
 # Magic Service
 
-## 项目概述
+## Project Overview
+Magic Service is a high-performance PHP microservice built on the Hyperf framework and powered by the Swow coroutine engine for high concurrency. It integrates AI search, chat, file handling, access control, and other modules to provide a comprehensive service solution.
 
-Magic Service 是一个基于 Hyperf 框架的高性能 PHP 微服务应用，使用 Swow 协程驱动实现高并发处理能力。该项目集成了多种功能模块，包括 AI 搜索、聊天功能、文件处理、权限管理等，旨在提供一个全面的服务解决方案。
+## Features
+- **AI search**: Integrates Google and other search-engine APIs for intelligent search capabilities.
+- **Chat system**: Supports real-time communication and session management.
+- **File handling**: Upload, download, and manage files.
+- **Workflow management**: Configure and run workflows.
+- **Assistant features**: Extensible assistant functionality.
 
-## 功能特性
-
-- **AI 搜索功能**：集成 Google 等搜索引擎的 API，提供智能搜索能力
-- **聊天系统**：支持实时通讯和会话管理
-- **文件处理**：文件上传、下载和管理功能
-- **流程管理**：支持工作流配置和执行
-- **助理功能**：可扩展的助理功能支持
-
-## 环境要求
-
+## Requirements
 - PHP >= 8.3
-- Swow 扩展
-- Redis 扩展
-- PDO 扩展
-- 其他扩展：bcmath, curl, fileinfo, openssl, xlswriter, zlib 等
+- Swow extension
+- Redis extension
+- PDO extension
+- Other extensions: bcmath, curl, fileinfo, openssl, xlswriter, zlib, etc.
 - Composer
 
-## 安装部署
-
-### 1. 克隆项目
-
+## Installation & Setup
+### 1. Clone the project
 ```bash
 git clone https://github.com/dtyq/magic.git
 cd magic-service
 ```
 
-### 2. 安装依赖
-
+### 2. Install dependencies
 ```bash
 composer install
 ```
 
-
-
-
-### 3. 环境配置
-
-复制环境配置文件并根据需要修改：
-
+### 3. Environment configuration
+Copy the sample env file and adjust as needed:
 ```bash
 cp .env.example .env
 ```
 
-### 数据库迁移
-
+### Database migrations
 ```bash
 php bin/hyperf.php migrate
 ```
 
-## 运行应用
-
-### 启动前端服务
-
+## Running the Application
+### Start the frontend
 ```bash
 cd static/web && npm install && npm run dev
 ```
 
-### 启动后端服务
-
+### Start the backend
 ```bash
 php bin/hyperf.php start
 ```
 
-也可以使用脚本启动：
-
+Or use the helper script:
 ```bash
 sh start.sh
 ```
 
-## 开发指南
+## Development Guide
+### Project structure
+- app/  application code
+  - Application/  application layer
+  - Domain/  domain layer
+  - Infrastructure/  infrastructure layer
+  - Interfaces/  interface layer
+  - ErrorCode/  error code definitions
+  - Listener/  event listeners
+- config/  configuration files
+- migrations/  database migrations
+- test/  tests
+- bin/  executable scripts
+- static/  static assets
 
-### 项目结构
-
-- `app/` - 应用代码
-  - `Application/` - 应用层代码
-  - `Domain/` - 领域层代码
-  - `Infrastructure/` - 基础设施层代码
-  - `Interfaces/` - 接口层代码
-  - `ErrorCode/` - 错误码定义
-  - `Listener/` - 事件监听器
-- `config/` - 配置文件
-- `migrations/` - 数据库迁移文件
-- `test/` - 单元测试
-- `bin/` - 可执行脚本
-- `static/` - 静态资源文件
-
-### 代码规范
-
-项目使用 PHP-CS-Fixer 进行代码风格检查与修复：
-
+### Code quality
+Code style (PHP-CS-Fixer):
 ```bash
 composer fix
 ```
 
-使用 PHPStan 进行静态代码分析：
-
+Static analysis (PHPStan):
 ```bash
 composer analyse
 ```
 
-### 单元测试
-
-使用以下命令运行单元测试：
-
+### Unit tests
 ```bash
 vendor/bin/phpunit
-# 或使用
+# or
 composer test
 ```
 
-## Docker 部署
-
-项目提供了 Dockerfile，可以使用以下命令构建镜像：
-
+## Docker
+Build the image with the provided Dockerfile:
 ```bash
 docker build -t magic-service .
 ```
 
-## 贡献指南
+## Contributing
+1. Fork the repo.
+2. Create a feature branch (`git checkout -b feature/amazing-feature`).
+3. Commit your changes (`git commit -m 'Add some amazing feature'`).
+4. Push the branch (`git push origin feature/amazing-feature`).
+5. Open a Pull Request.
 
-1. Fork 项目
-2. 创建功能分支 (`git checkout -b feature/amazing-feature`)
-3. 提交更改 (`git commit -m 'Add some amazing feature'`)
-4. 推送到分支 (`git push origin feature/amazing-feature`)
-5. 提交 Pull Request
-
-## 许可证
-
-该项目采用 MIT 许可证 - 详情请查看 LICENSE 文件
-
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.

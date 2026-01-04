@@ -1,7 +1,7 @@
 """
-工具模块
+Tool module
 
-提供各种工具相关的接口、基类和工具实现
+Provides various tool-related interfaces, base classes, and tool implementations
 """
 
 __all__ = [

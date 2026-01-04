@@ -1,7 +1,7 @@
 """
-调试中间件
+Debug middleware
 
-记录每个传入请求和输出响应的详细信息，用于调试
+Logs detailed information for each incoming request and outgoing response for debugging
 """
 
 
@@ -14,29 +14,29 @@ logger = get_logger(__name__)
 
 
 class DebugMiddleware(BaseHTTPMiddleware):
-    """记录详细调试信息的中间件"""
+    """Middleware for logging detailed debugging information"""
 
     async def dispatch(self, request: Request, call_next):
         """
-        处理请求并记录调试日志
+        Process request and log debug information
 
         Args:
-            request: HTTP请求对象
-            call_next: 下一个中间件或路由处理函数
+            request: HTTP request object
+            call_next: Next middleware or route handler function
 
         Returns:
-            Response: HTTP响应对象
+            Response: HTTP response object
         """
-        # 记录请求信息
-        logger.info(f"[DEBUG] 传入请求: {request.method} {request.url}")
-        logger.info(f"[DEBUG] 请求头: {dict(request.headers)}")
-        logger.info(f"[DEBUG] 客户端: {request.client}")
+        # Log request information
+        logger.info(f"[DEBUG] Incoming request: {request.method} {request.url}")
+        logger.info(f"[DEBUG] Request headers: {dict(request.headers)}")
+        logger.info(f"[DEBUG] Client: {request.client}")
 
-        # 处理请求
+        # Process request
         response = await call_next(request)
 
-        # 记录响应信息
-        logger.info(f"[DEBUG] 响应状态: {response.status_code}")
-        logger.info(f"[DEBUG] 响应头: {dict(response.headers)}")
+        # Log response information
+        logger.info(f"[DEBUG] Response status: {response.status_code}")
+        logger.info(f"[DEBUG] Response headers: {dict(response.headers)}")
 
         return response

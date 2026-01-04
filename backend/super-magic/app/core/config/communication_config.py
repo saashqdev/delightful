@@ -1,7 +1,7 @@
 """
-通信配置模块
+Communication configuration module
 
-定义与外部服务通信相关的配置类
+Defines configuration classes related to external service communication
 """
 from typing import Dict
 
@@ -10,21 +10,21 @@ from pydantic import BaseModel
 
 class MessageSubscriptionConfig(BaseModel):
     """
-    消息订阅配置
+    Message subscription configuration
 
-    用于配置消息的订阅方式和回调接口
+    Used to configure message subscription methods and callback interfaces
     """
-    method: str  # HTTP 方法，例如 "POST"
-    url: str  # API 端点
-    headers: Dict[str, str]  # HTTP 请求头
+    method: str  # HTTP method, e.g. "POST"
+    url: str  # API endpoint
+    headers: Dict[str, str]  # HTTP request headers
 
 
 class STSTokenRefreshConfig(BaseModel):
     """
-    STS Token刷新配置
+    STS Token refresh configuration
     
-    用于配置刷新STS Token的方式和接口
+    Used to configure the method and interface for refreshing STS Tokens
     """
-    method: str  # HTTP方法，例如"POST"
-    url: str  # API端点
-    headers: Dict[str, str]  # HTTP请求头 
+    method: str  # HTTP method, e.g. "POST"
+    url: str  # API endpoint
+    headers: Dict[str, str]  # HTTP request headers 

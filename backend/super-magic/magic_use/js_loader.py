@@ -1,8 +1,7 @@
 """
-JavaScript 加载管理模块
+JavaScript loading management module.
 
-负责 JavaScript 代码的加载、依赖解析和执行，
-为浏览器页面提供 JS 功能支持。
+Handles loading, dependency parsing, and execution of JavaScript code to provide JS functionality for browser pages.
 """
 
 import glob
@@ -14,45 +13,45 @@ from typing import Dict, List, Optional, Set
 
 from playwright.async_api import Page
 
-# 设置日志
+# Configure logger
 logger = logging.getLogger(__name__)
 
 
 class JSLoader:
-    """JavaScript加载器，负责加载和管理JS代码"""
+    """JavaScript loader responsible for loading and managing JS code."""
 
     def __init__(self, page: Page):
-        """初始化JS加载器
+        """Initialize the JS loader.
 
         Args:
-            page: Playwright页面对象
+            page: Playwright page object
         """
         self.page = page
-        self._js_code = {}    # 存储各模块代码
-        self._js_dir = Path(__file__).parent / "js"  # JS文件目录路径
-        self._loading_modules = set()  # 正在加载中的模块，用于检测循环依赖
+        self._js_code = {}    # Store code for each module
+        self._js_dir = Path(__file__).parent / "js"  # JS file directory
+        self._loading_modules = set()  # Modules currently loading, used to detect circular dependencies
 
-        # 确保JS目录存在
+        # Ensure JS directory exists
         os.makedirs(self._js_dir, exist_ok=True)
 
     async def _parse_dependencies(self, js_code: str) -> List[str]:
-        """从JS代码中解析依赖声明
+        """Parse dependency declarations from JS code.
 
-        查找类似 // @depends: module1, module2 的注释
+        Looks for comments like // @depends: module1, module2
 
         Args:
-            js_code: JavaScript代码
+            js_code: JavaScript code
 
         Returns:
-            依赖模块名列表
+            List of dependency module names
         """
         dependencies = []
-        # 正则表达式匹配依赖声明注释
+        # Regex to match dependency declaration comment
         pattern = r'//\s*@depends:\s*([\w\s,]+)'
         matches = re.search(pattern, js_code)
 
         if matches:
-            # 解析并清理依赖名称
+            # Parse and trim dependency names
             deps_str = matches.group(1)
             for dep in deps_str.split(','):
                 dep_name = dep.strip()
@@ -62,23 +61,23 @@ class JSLoader:
         return dependencies
 
     async def load_module(self, module_name: str, force_reload: bool = False) -> bool:
-        """加载JavaScript模块，默认情况下仅在模块不存在时加载
-        支持自动加载依赖模块
+        """Load a JavaScript module; by default load only if missing.
+        Supports automatically loading dependency modules.
 
         Args:
-            module_name: 模块名称，对应js/目录下的文件名（不含.js扩展名）
-            force_reload: 是否强制重新加载，即使模块已存在，默认为False
+            module_name: Module name, matching filename under js/ (without .js extension)
+            force_reload: Force reload even if already loaded; defaults to False
 
         Returns:
-            bool: 模块是否成功加载
+            bool: Whether the module loaded successfully
         """
         try:
-            # 检测循环依赖
+            # Detect circular dependency
             if module_name in self._loading_modules:
-                logger.error(f"检测到循环依赖: {module_name}")
+                logger.error(f"Circular dependency detected: {module_name}")
                 return False
 
-            # 首先检查模块是否已经加载，除非要求强制重新加载
+            # Check if module already loaded unless forcing reload
             if not force_reload:
                 check_exists_script = f"""() => {{
                     return window.MagicUse && window.MagicUse['{module_name}'];
@@ -87,38 +86,38 @@ class JSLoader:
                 module_exists = await self.page.evaluate(check_exists_script)
 
                 if module_exists:
-                    logger.debug(f"JavaScript模块 {module_name} 已存在，跳过加载")
+                    logger.debug(f"JavaScript module {module_name} already exists, skipping load")
                     return True
 
-            # 从文件加载JavaScript代码
+            # Load JavaScript code from file
             js_path = self._js_dir / f"{module_name}.js"
             if not js_path.exists():
-                logger.error(f"JavaScript模块文件不存在: {js_path}")
-                raise FileNotFoundError(f"JavaScript模块文件不存在: {js_path}")
+                logger.error(f"JavaScript module file not found: {js_path}")
+                raise FileNotFoundError(f"JavaScript module file not found: {js_path}")
 
             js_code = js_path.read_text(encoding="utf-8")
             self._js_code[module_name] = js_code
 
-            # 解析依赖
+            # Parse dependencies
             dependencies = await self._parse_dependencies(js_code)
             if dependencies:
-                logger.debug(f"模块 {module_name} 依赖: {dependencies}")
+                logger.debug(f"Module {module_name} depends on: {dependencies}")
 
-                # 标记当前模块为正在加载
+                # Mark module as loading
                 self._loading_modules.add(module_name)
 
-                # 先加载依赖模块
+                # Load dependencies first
                 for dep in dependencies:
                     dep_loaded = await self.load_module(dep)
                     if not dep_loaded:
-                        logger.error(f"加载依赖模块 {dep} 失败，无法继续加载 {module_name}")
+                        logger.error(f"Failed to load dependency {dep}; cannot load {module_name}")
                         self._loading_modules.remove(module_name)
                         return False
 
-                # 依赖加载完成，移除正在加载标记
+                # Dependencies done, remove loading flag
                 self._loading_modules.remove(module_name)
 
-            # 使用evaluate方法直接在页面中执行代码，绕过CSP限制
+            # Execute code directly in page via evaluate to bypass CSP
             load_script = f"""
             () => {{
                 try {{
@@ -126,14 +125,14 @@ class JSLoader:
                         'version': '0.0.1',
                     }};
                     window.MagicUse = window.MagicUse || {{}};
-                    // 执行模块代码
+                    // Execute module code
                     (function() {{
                         {js_code}
                     }})();
                     window.MagicUse['{module_name}'] = true;
                     return true;
                 }} catch (error) {{
-                    console.error('执行模块代码出错:', error);
+                    console.error('Error executing module code:', error);
                     return {{
                         error: error.toString(),
                         stack: error.stack
@@ -144,45 +143,45 @@ class JSLoader:
 
             eval_result = await self.page.evaluate(load_script)
 
-            # 检查结果
+            # Check result
             if eval_result == True:
-                logger.debug(f"JavaScript模块 {module_name} 已加载")
+                logger.debug(f"JavaScript module {module_name} loaded")
                 return True
             else:
-                logger.error(f"JavaScript模块 {module_name} 加载失败: {eval_result.get('error')}")
-                raise Exception(f"加载失败: {eval_result.get('error')}")
+                logger.error(f"JavaScript module {module_name} failed to load: {eval_result.get('error')}")
+                raise Exception(f"Load failed: {eval_result.get('error')}")
 
         except Exception as e:
-            logger.error(f"加载JavaScript模块 {module_name} 失败: {e}")
+            logger.error(f"Failed to load JavaScript module {module_name}: {e}")
             if module_name in self._loading_modules:
                 self._loading_modules.remove(module_name)
             raise
 
     async def scan_and_load_all_modules(self) -> Dict[str, bool]:
-        """扫描js目录下的所有JS文件并加载它们
+        """Scan all JS files under the js directory and load them.
 
         Returns:
-            加载结果字典，键为模块名，值为是否加载成功
+            Dict of load results keyed by module name with success status
         """
         results = {}
 
         try:
-            # 扫描目录下的所有JS文件
+            # Scan all JS files under directory
             js_files = glob.glob(str(self._js_dir / "*.js"))
 
             for js_file in js_files:
-                # 提取模块名（文件名去掉.js扩展名）
+                # Extract module name (filename without .js extension)
                 module_name = Path(js_file).stem
 
                 try:
-                    # 加载模块
+                    # Load module
                     await self.load_module(module_name)
                     results[module_name] = True
                 except Exception as e:
-                    logger.error(f"自动加载模块 {module_name} 失败: {e}")
+                    logger.error(f"Failed to auto-load module {module_name}: {e}")
                     results[module_name] = False
 
             return results
         except Exception as e:
-            logger.error(f"扫描和加载JS模块失败: {e}")
+            logger.error(f"Scanning and loading JS modules failed: {e}")
             return results

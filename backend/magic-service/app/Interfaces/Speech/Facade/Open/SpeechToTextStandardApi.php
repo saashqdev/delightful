@@ -23,7 +23,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class SpeechToTextStandardApi extends AbstractOpenApi
 {
-    # 定义type 常量
+    // Define type constants
     public const VOLCENGINE_TYPE = 'volcengine';
 
     #[Inject]

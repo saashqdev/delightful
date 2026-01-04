@@ -50,7 +50,7 @@ jobs:
       - name: Build and push service image
         if: ${{ inputs.task == 'build' || github.event_name == 'push' }}
         run: |
-          # 构建并推送服务镜像
+          # Build and push service image
           TAG_VERSION=${{ inputs.tag || github.ref_name }}
           docker buildx build \
             --platform linux/amd64,linux/arm64 \

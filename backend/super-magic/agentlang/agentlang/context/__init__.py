@@ -1,7 +1,7 @@
 """
-上下文模块
+Context module
 
-包含各种上下文类实现
+Contains various context class implementations
 """
 
 from agentlang.context.base_context import BaseContext

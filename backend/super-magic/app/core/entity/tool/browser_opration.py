@@ -1,6 +1,6 @@
-"""浏览器操作映射模块
+"""Browser operation mapping module.
 
-该模块定义了浏览器操作的中文名称和对应的图标
+Defines friendly names (previously Chinese labels) for browser operations and related icons.
 
 """
 
@@ -11,36 +11,33 @@ from agentlang.logger import get_logger
 logger = get_logger(__name__)
 
 
-# 映射字典，方便直接使用字典方式查询
+# Mapping dictionary for quick lookups
 OPERATION_NAME_MAPPING = {
-    "goto": "打开网页",
-    "read_as_markdown": "阅读网页内容",
-    "get_interactive_elements": "查找可交互元素",
-    "find_interactive_element_visually": "精确查找可交互元素",
-    "visual_query": "检索网页内容",
-    "click": "点击元素",
-    "input_text": "输入内容",
-    "scroll_to": "滚动屏幕",
+    "goto": "Open webpage",
+    "read_as_markdown": "Read page content",
+    "get_interactive_elements": "Find interactive elements",
+    "find_interactive_element_visually": "Locate interactive element precisely",
+    "visual_query": "Query page content",
+    "click": "Click element",
+    "input_text": "Enter text",
+    "scroll_to": "Scroll page",
 }
 
 class BrowserOperationNames(Enum):
-    """浏览器操作对应的中文名称
-
-    各个操作的中文名称
-    """
+    """Friendly names for browser operations."""
 
     @classmethod
     def get_operation_info(cls, operation_name: str) -> str:
-        """获取操作的中文名称和图标
+        """Get the friendly name (and icon when available) for an operation.
 
         Args:
-            operation_name: 操作名称，如 goto, scroll_page 等
+            operation_name: Operation name, e.g., goto, scroll_page
 
         Returns:
-            包含中文名称和图标的字典，如果找不到对应操作则返回 None
+            Friendly name string; returns the original name if not found.
         """
         if operation_name not in OPERATION_NAME_MAPPING:
-            logger.warning(f"未知操作: {operation_name}，使用原操作名称")
+            logger.warning(f"Unknown operation: {operation_name}, using original name")
             return operation_name
         else:
             return OPERATION_NAME_MAPPING[operation_name]

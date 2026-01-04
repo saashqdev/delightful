@@ -9,13 +9,13 @@ from agentlang.tools.tool_result import ToolResult
 
 
 class BeforeInitEventData(BaseEventData):
-    """初始化前事件的数据结构"""
+    """Event data structure before initialization"""
 
     tool_context: ToolContext
 
 
 class AfterInitEventData(BaseEventData):
-    """初始化后事件的数据结构"""
+    """Event data structure after initialization"""
 
     tool_context: ToolContext
     agent_context: Optional[AgentContextInterface] = None
@@ -24,7 +24,7 @@ class AfterInitEventData(BaseEventData):
 
 
 class BeforeLlmRequestEventData(BaseEventData):
-    """请求大模型前的事件数据结构"""
+    """Event data structure before requesting the LLM"""
 
     model_name: str
     chat_history: List[Dict[str, object]]
@@ -33,48 +33,48 @@ class BeforeLlmRequestEventData(BaseEventData):
 
 
 class AfterLlmResponseEventData(BaseEventData):
-    """请求大模型后的事件数据结构"""
+    """Event data structure after receiving LLM response"""
 
     model_name: str
-    request_time: float  # 请求耗时（秒）
+    request_time: float  # Request duration (seconds)
     success: bool
     error: Optional[str] = None
     tool_context: ToolContext
-    llm_response_message: ChatCompletionMessage  # 大模型返回的消息内容
-    show_in_ui: bool = True  # 是否在UI中显示
+    llm_response_message: ChatCompletionMessage  # LLM response message content
+    show_in_ui: bool = True  # Whether to display in UI
 
 
 class BeforeToolCallEventData(BaseEventData):
-    """工具调用前的事件数据结构"""
+    """Event data structure before tool call"""
 
     tool_call: ChatCompletionMessageToolCall
     tool_context: ToolContext
     tool_name: str
     arguments: Dict[str, object]
-    tool_instance: Any  # 工具实例，可以是任何支持执行的工具类型
-    llm_response_message: ChatCompletionMessage  # 大模型返回的消息内容
+    tool_instance: Any  # Tool instance, any executable tool type
+    llm_response_message: ChatCompletionMessage  # LLM response message content
 
 
 class AfterToolCallEventData(BaseEventData):
-    """工具调用后的事件数据结构"""
+    """Event data structure after tool call"""
 
     tool_call: ChatCompletionMessageToolCall
     tool_context: ToolContext
     tool_name: str
     arguments: Dict[str, object]
     result: ToolResult
-    execution_time: float  # 执行耗时（秒）
-    tool_instance: Any  # 工具实例，可以是任何支持执行的工具类型
+    execution_time: float  # Execution duration (seconds)
+    tool_instance: Any  # Tool instance, any executable tool type
 
 
 class AgentSuspendedEventData(BaseEventData):
-    """agent终止事件的数据结构"""
+    """Agent suspension event data structure"""
 
     agent_context: AgentContextInterface
 
 
 class BeforeMainAgentRunEventData(BaseEventData):
-    """主 agent 运行前的事件数据结构"""
+    """Event data structure before main agent run"""
 
     agent_context: AgentContextInterface
     agent_name: str
@@ -82,7 +82,7 @@ class BeforeMainAgentRunEventData(BaseEventData):
 
 
 class AfterMainAgentRunEventData(BaseEventData):
-    """主 agent 运行后的事件数据结构"""
+    """Event data structure after main agent run"""
 
     agent_context: AgentContextInterface
     agent_name: str
@@ -91,7 +91,7 @@ class AfterMainAgentRunEventData(BaseEventData):
 
 
 class ErrorEventData(BaseEventData):
-    """错误事件的数据结构"""
+    """Error event data structure"""
     exception: Exception
     agent_context: AgentContextInterface
     error_message: str

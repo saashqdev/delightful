@@ -1,7 +1,7 @@
 """
-请求日志中间件
+Request logging middleware.
 
-记录HTTP请求和响应的详细信息
+Records detailed HTTP request and response information.
 """
 
 import time
@@ -15,49 +15,49 @@ logger = get_logger(__name__)
 
 
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
-    """记录请求和响应信息的中间件"""
+    """Middleware that logs request and response details."""
 
     async def dispatch(self, request: Request, call_next):
         """
-        处理请求并记录日志
+        Handle request and log details.
 
         Args:
-            request: HTTP请求对象
-            call_next: 下一个中间件或路由处理函数
+            request: HTTP request object
+            call_next: Next middleware or route handler
 
         Returns:
-            Response: HTTP响应对象
+            Response: HTTP response object
         """
         start_time = time.time()
 
-        # 记录请求信息
-        logger.info(f"请求开始: {request.method} {request.url.path}")
+        # Log request info
+        logger.info(f"Request started: {request.method} {request.url.path}")
 
-        # 记录更详细的头信息，特别是连接相关的
+        # Log detailed headers, especially connection-related
         headers = dict(request.headers)
-        connection_type = headers.get("connection", "未指定")
-        user_agent = headers.get("user-agent", "未指定")
+        connection_type = headers.get("connection", "unspecified")
+        user_agent = headers.get("user-agent", "unspecified")
 
-        logger.info(f"连接类型: {connection_type}, User-Agent: {user_agent}")
-        logger.info(f"请求头详情: {headers}")
+        logger.info(f"Connection: {connection_type}, User-Agent: {user_agent}")
+        logger.info(f"Request headers: {headers}")
 
         try:
-            # 调用下一个中间件或路由处理函数
+            # Call the next middleware or route handler
             response = await call_next(request)
 
-            # 计算处理时间
+            # Compute processing time
             process_time = time.time() - start_time
             logger.info(
-                f"请求完成: {request.method} {request.url.path} - 状态码: {response.status_code}, 耗时: {process_time:.4f}秒"
+                f"Request finished: {request.method} {request.url.path} - status {response.status_code}, duration: {process_time:.4f}s"
             )
 
-            # 记录响应头
-            logger.info(f"响应头: {dict(response.headers)}")
+            # Log response headers
+            logger.info(f"Response headers: {dict(response.headers)}")
 
             return response
         except Exception as e:
-            # 记录异常信息
+            # Log exception details
             process_time = time.time() - start_time
-            logger.error(f"请求异常: {request.method} {request.url.path} - 异常: {e!s}, 耗时: {process_time:.4f}秒")
-            logger.exception("请求处理异常详情:")
+            logger.error(f"Request error: {request.method} {request.url.path} - error: {e!s}, duration: {process_time:.4f}s")
+            logger.exception("Request handling exception details:")
             raise

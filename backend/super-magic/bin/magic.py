@@ -1,21 +1,21 @@
 #!/usr/bin/env python
 """
-命令行界面，用于调用 Agent 类
+Command-line interface for invoking Agent classes
 
-使用方法:
-    python -m bin.magic [--agent-name AGENT_NAME] [--clean] [--clean-chat] [--clean-workspace] [--mount DIRECTORY_PATH] [--mode MODE] [查询文本]
-    或者直接执行: ./bin/magic.py [--agent-name AGENT_NAME] [--clean] [--clean-chat] [--clean-workspace] [--mount DIRECTORY_PATH] [--mode MODE] [查询文本]
+Usage:
+    python -m bin.magic [--agent-name AGENT_NAME] [--clean] [--clean-chat] [--clean-workspace] [--mount DIRECTORY_PATH] [--mode MODE] [query text]
+    or directly execute: ./bin/magic.py [--agent-name AGENT_NAME] [--clean] [--clean-chat] [--clean-workspace] [--mount DIRECTORY_PATH] [--mode MODE] [query text]
 
-参数:
-    --agent-name: 指定要使用的 agent 名称，默认根据 mode 确定 (normal 模式为 "magic"，super 模式为 "super-magic")
-    --clean, -c: 清理历史对话记录和工作空间文件
-    --clean-chat, -cc: 仅清理历史对话记录文件
-    --clean-workspace, -cw: 仅清理工作空间文件
-    --mount, -m: 挂载指定目录中的内容到.workspace目录
-    --mode: 运行模式，可选值为 "normal" 或 "super"，默认为 "super"。normal 模式使用 magic.agent，super 模式使用 super-magic.agent
-    查询文本: 可选，直接向代理发送的消息。如果提供，将执行单次查询并退出；否则进入交互模式。
+Arguments:
+    --agent-name: Specify the agent name to use. Default is determined by mode ("magic" for normal mode, "super-magic" for super mode)
+    --clean, -c: Clear chat history and workspace files
+    --clean-chat, -cc: Clear only chat history files
+    --clean-workspace, -cw: Clear only workspace files
+    --mount, -m: Mount contents from specified directory to .workspace directory
+    --mode: Execution mode, can be "normal" or "super", default is "super". Normal mode uses magic.agent, super mode uses super-magic.agent
+    query text: Optional, message to send directly to agent. If provided, executes single query and exits; otherwise enters interactive mode.
 """
-# 先导入基础Python库
+# Import base Python libraries first
 import os
 import sys
 import traceback
@@ -25,18 +25,18 @@ import asyncio
 import argparse
 import shutil
 
-# 设置正确的工作目录
-# 获取项目根目录，使用文件所在位置的父目录
+# Set correct working directory
+# Get project root directory using parent of file location
 project_root = Path(__file__).resolve().parent.parent
 
-# 添加项目根目录到 Python 路径
+# Add project root to Python path
 sys.path.append(str(project_root))
 
-# 加载环境变量 - 在设置Python路径后导入
+# Load environment variables - import after setting Python path
 from dotenv import load_dotenv
 load_dotenv(override=True)
 
-# 初始化步骤 - 所有项目内模块导入都放到sys.path设置后
+# Initialization steps - all project module imports after sys.path setup
 from app.paths import PathManager
 PathManager.set_project_root(project_root)
 from agentlang.context.application_context import ApplicationContext
@@ -45,55 +45,55 @@ ApplicationContext.set_path_manager(PathManager)
 from agentlang.logger import setup_logger, get_logger, configure_logging_intercept
 from agentlang.utils.file import clear_directory_contents
 
-# 导入其他项目模块
-import aiofiles # 导入 aiofiles
-import aiofiles.os # 导入 aiofiles.os
+# Import other project modules
+import aiofiles # Import aiofiles
+import aiofiles.os # Import aiofiles.os
 from app.core.context.agent_context import AgentContext
 
-# 使用agentlang.logger模块的配置函数，从环境变量获取日志级别，默认为INFO
+# Use agentlang.logger configuration function, get log level from environment, default is INFO
 log_level = os.getenv("LOG_LEVEL", "INFO")
-# 设置logger并自动保存到ApplicationContext中
+# Setup logger and automatically save to ApplicationContext
 logger = setup_logger(log_name="app", console_level=log_level)
 configure_logging_intercept()
 
-# 获取为当前模块命名的日志记录器
+# Get logger named for current module
 logger = get_logger(__name__)
 
 async def clean_chat_history():
     """
-    异步清理.chat_history目录中的文件
-    但保留目录本身
+    Asynchronously clean files in .chat_history directory
+    but keep the directory itself
 
     Returns:
-        bool: 操作是否成功
+        bool: Whether operation was successful
     """
     result = await clear_directory_contents(PathManager.get_chat_history_dir())
     if not result:
-        logger.error("清理 chat history 失败")
+        logger.error("Failed to clean chat history")
     return result
 
 async def clean_workspace():
     """
-    异步清理.workspace目录中的文件
-    但保留目录本身
+    Asynchronously clean files in .workspace directory
+    but keep the directory itself
 
     Returns:
-        bool: 操作是否成功
+        bool: Whether the operation was successful
     """
     result = await clear_directory_contents(PathManager.get_workspace_dir())
     if not result:
-        logger.error("清理 workspace 失败")
+        logger.error("Failed to clean workspace")
     return result
 
 async def clean_directories():
     """
-    异步清理.chat_history和.workspace目录中的文件
-    但保留目录本身
+    Asynchronously clean files in .chat_history and .workspace directories
+    but keep the directories themselves
 
     Returns:
-        bool: 操作是否成功
+        bool: Whether the operation was successful
     """
-    # 并发执行两个清理任务
+    # Execute two cleanup tasks concurrently
     chat_result, workspace_result = await asyncio.gather(
         clean_chat_history(),
         clean_workspace()
@@ -103,14 +103,14 @@ async def clean_directories():
 
 
 def print_banner(mode='super'):
-    """打印欢迎横幅"""
+    """Print welcome banner"""
     mode_display = "NORMAL" if mode == 'normal' else "SUPER"
     banner = f"""
     ========================================================
                 MAGIC CLI - v6 [{mode_display} MODE]
     ========================================================
-    使用此命令行工具与 AI 代理进行交互
-    输入您的问题，或输入 'exit' 退出
+    Use this command-line tool to interact with AI agents
+    Enter your question, or type 'exit' to quit
     ========================================================
     """
     logger.info(banner)
@@ -118,20 +118,20 @@ def print_banner(mode='super'):
 
 def create_agent(agent_name, agent_context=None):
     """
-    创建并初始化Agent实例
+    Create and initialize an Agent instance
 
-    Agent类的__init__现在是同步方法，可以直接实例化
+    The Agent class's __init__ is now a synchronous method and can be directly instantiated
 
     Args:
-        agent_name: agent名称
-        agent_context: 可选的agent上下文，如果不提供则由Agent类内部创建
+        agent_name: Agent name
+        agent_context: Optional agent context, if not provided it will be created internally by the Agent class
 
     Returns:
-        Agent: 初始化好的Agent实例
+        Agent: Initialized Agent instance
     """
     from app.magic.agent import Agent
 
-    # 直接实例化Agent类
+    # Directly instantiate Agent class
     agent = Agent(agent_name, agent_context, "main")
 
     return agent
@@ -139,112 +139,112 @@ def create_agent(agent_name, agent_context=None):
 
 async def mount_directory(source_dir: str):
     """
-    异步将指定目录中的内容复制到 .workspace 目录。
+    Asynchronously copy the contents of the given directory into the .workspace directory.
 
     Args:
-        source_dir: 源目录路径，可以是相对路径或绝对路径
+        source_dir: Source directory path, relative or absolute
 
     Returns:
-        bool: 操作是否成功
+        bool: Whether the operation succeeded
     """
     copied_count = 0
     try:
-        # 确保源目录存在且是目录 (使用 aiofiles.os)
-        # 注意：Path.resolve() 本身是同步的，但通常非常快
+        # Ensure the source directory exists and is a directory (using aiofiles.os)
+        # Note: Path.resolve() is synchronous but typically fast
         source_path = Path(source_dir).resolve()
         if not await aiofiles.os.path.exists(source_path):
-            logger.error(f"源目录不存在: {source_path}")
+            logger.error(f"Source directory does not exist: {source_path}")
             return False
 
         if not await aiofiles.os.path.isdir(source_path):
-            logger.error(f"指定的路径不是目录: {source_path}")
+            logger.error(f"Specified path is not a directory: {source_path}")
             return False
 
-        # 确保 workspace 目录存在 (使用 aiofiles.os)
+        # Ensure workspace directory exists (using aiofiles.os)
         await aiofiles.os.makedirs(PathManager.get_workspace_dir(), exist_ok=True)
 
-        # 异步复制目录内容
+        # Copy directory contents asynchronously
         copy_tasks = []
-        # 遍历目录结构 (glob 是同步的，但在循环内处理 IO)
+        # Walk directory structure (glob is synchronous but IO happens inside loop)
         for item in source_path.glob('**/*'):
             relative_path = item.relative_to(source_path)
             target_path = PathManager.get_workspace_dir() / relative_path
 
-            if item.is_dir(): # is_dir 是同步的，但很快
-                # 异步创建目标目录
+            if item.is_dir(): # is_dir is synchronous but quick
+                # Create target directory asynchronously
                 await aiofiles.os.makedirs(target_path, exist_ok=True)
             else:
-                # 异步确保父目录存在
+                # Ensure parent directory exists asynchronously
                 await aiofiles.os.makedirs(target_path.parent, exist_ok=True)
-                # 使用 asyncio.to_thread 异步执行 shutil.copy2
+                # Use asyncio.to_thread to run shutil.copy2 asynchronously
                 copy_tasks.append(
                     asyncio.create_task(asyncio.to_thread(shutil.copy2, item, target_path))
                 )
-                # copied_count 可以在 gather 后统计成功的文件数
+                # copied_count can be tallied after gather for successful files
 
-        # 等待所有复制任务完成
+        # Wait for all copy tasks to complete
         results = await asyncio.gather(*copy_tasks, return_exceptions=True)
 
-        # 统计成功和失败的复制
+        # Count successful and failed copies
         successful_copies = 0
         failed_copies = 0
         for i, result in enumerate(results):
-            # 注意：需要一种方式将 result 映射回原始 item/target_path 以便记录详细错误
-            # 为了简化，我们暂时只计数
+            # Note: would ideally map result back to item/target_path for detailed errors
+            # Simplified to counting for now
             if isinstance(result, Exception):
-                logger.error(f"异步复制文件时出错: {result}", exc_info=result)
+                logger.error(f"Error copying file asynchronously: {result}", exc_info=result)
                 failed_copies += 1
             else:
                 successful_copies += 1
 
         if failed_copies == 0:
-            logger.info(f"成功将 {source_path} 中的 {successful_copies} 个文件异步挂载到 {PathManager.get_workspace_dir()}")
+            logger.info(f"Successfully mounted {successful_copies} files from {source_path} to {PathManager.get_workspace_dir()} asynchronously")
             return True
         else:
-            logger.error(f"异步挂载 {source_path} 目录时出错：成功 {successful_copies} 个文件，失败 {failed_copies} 个文件")
+            logger.error(f"Errors during async mount of {source_path}: success {successful_copies} files, failed {failed_copies} files")
             return False
 
     except Exception as e:
-        logger.error(f"挂载目录时发生意外错误: {e}", exc_info=True)
+        logger.error(f"Unexpected error while mounting directory: {e}", exc_info=True)
         return False
 
 
 async def main():
-    """主函数，解析命令行参数并调用 Agent 类"""
-    # 创建参数解析器
-    parser = argparse.ArgumentParser(description='命令行界面，用于调用 Agent 类')
+    """Main entry: parse CLI arguments and call Agent."""
+    # Create argument parser
+    parser = argparse.ArgumentParser(description='CLI for invoking the Agent class')
 
-    # 添加参数
+    # Add arguments
     parser.add_argument('--agent-name', type=str, default=None,
-                        help='agent 名称，默认根据 mode 参数确定')
+                        help='Agent name; defaults depend on mode')
     parser.add_argument('--clean', '-c', action='store_true',
-                        help='清理历史对话记录和工作空间文件')
+                        help='Clean conversation history and workspace files')
     parser.add_argument('--clean-chat', '-cc', action='store_true',
-                        help='仅清理历史对话记录文件')
+                        help='Clean conversation history files only')
     parser.add_argument('--clean-workspace', '-cw', action='store_true',
-                        help='仅清理工作空间文件')
+                        help='Clean workspace files only')
     parser.add_argument('--mount', '-m', type=str,
-                        help='挂载指定目录中的内容到.workspace目录')
+                        help='Mount contents of specified directory to .workspace directory')
     parser.add_argument('--mode', type=str, choices=['normal', 'super'], default='super',
-                        help='运行模式：normal 使用 magic.agent，super 使用 super-magic.agent，默认为 super')
+                        help='Run mode: normal uses magic.agent, super uses super-magic.agent, defaults to super')
     parser.add_argument('query', nargs='?', type=str, default=None,
-                        help='要发送给 agent 的查询文本。如果提供，则执行单次查询并退出')
+                        help='Query text to send to the agent. If provided, executes a single query and exits')
 
-    # 解析参数
+    # Parse arguments
     args = parser.parse_args()
 
-    # 处理清理选项
+    # Handle cleanup options
     cleaned = False
 
-    # 如果指定了清理选项，先异步清理目录
+    # If cleanup option specified, clean directories asynchronously
     if args.clean:
         if await clean_directories():
-            logger.info("目录清理完成")
+            logger.info("Directory cleanup completed")
             cleaned = True
         else:
-            logger.error("目录清理失败")
+            logger.error("Directory cleanup failed")
 
-    # 如果指定了仅清理历史对话记录选项
+    # If clean chat history only option specified
     elif args.clean_chat:
         if await clean_chat_history():
             logger.info("历史对话记录清理完成")
@@ -264,65 +264,65 @@ async def main():
     if cleaned and not args.query and not args.mount:
         return
 
-    # 如果指定了挂载选项，异步挂载目录
+    # If mount option specified, mount directory asynchronously
     if args.mount:
         if not await mount_directory(args.mount):
-            logger.error("挂载目录失败，程序退出")
+            logger.error("Mount directory failed, exiting program")
             return
 
     try:
-        # 根据 mode 确定默认的 agent_name
+        # Determine default agent_name based on mode
         agent_name = args.agent_name
         if agent_name is None:
             if args.mode == 'normal':
                 agent_name = 'magic'
-                logger.info(f"使用 normal 模式，agent_name 设置为 {agent_name}")
+                logger.info(f"Using normal mode, agent_name set to {agent_name}")
             else:  # args.mode == 'super'
                 agent_name = 'super-magic'
-                logger.info(f"使用 super 模式，agent_name 设置为 {agent_name}")
+                logger.info(f"Using super mode, agent_name set to {agent_name}")
         else:
-            logger.info(f"使用指定的 agent_name: {agent_name}")
+            logger.info(f"Using specified agent_name: {agent_name}")
 
         agent_context = AgentContext()
         if agent_name == 'magic' or agent_name == 'super-magic':
             agent_context.is_main_agent = True
         agent_context.set_sandbox_id("default_sandbox")
         agent = create_agent(agent_name, agent_context=agent_context)
-        # 检查 run 方法是否已实现
+        # Check if run method is implemented
         run_method = getattr(agent, 'run')
         run_source = inspect.getsource(run_method)
 
         if "pass" in run_source and len(run_source.strip().splitlines()) <= 2:
-            logger.warning("\n警告: Agent 类的 run 方法尚未实现，无法处理查询。")
+            logger.warning("\nWarning: Agent class's run method is not yet implemented, cannot handle query.")
             return
 
-        # 如果提供了查询文本，则执行单次查询并退出
+        # If query text provided, execute single query and exit
         if args.query:
             response = await agent.run(args.query)
             logger.info(f"\n{response}")
             return
 
-        # 否则进入交互模式并打印欢迎横幅
+        # Otherwise enter interactive mode and print welcome banner
         print_banner(args.mode)
 
-        # 提供交互界面
+        # Provide interactive interface
         while True:
             try:
-                query = input("\n请输入问题 (输入 'exit' 退出): ")
+                query = input("\nEnter your question (type 'exit' to quit): ")
                 if query.lower() in ('exit', 'quit', 'q'):
                     break
 
                 response = await agent.run(query)
                 logger.info(f"\n{response}")
             except KeyboardInterrupt:
-                logger.info("\n程序已终止")
+                logger.info("\nProgram terminated")
                 break
             except Exception as e:
-                logger.error(f"处理查询时出错: {e}", exc_info=True)
+                logger.error(f"Error processing query: {e}", exc_info=True)
                 logger.error(f"Traceback: {traceback.format_exc()}")
     except Exception as e:
-        # 打印堆栈
-        logger.error(f"初始化时出错: {e}")
+        # Print stack trace
+        logger.error(f"Error during initialization: {e}")
         logger.error(f"Traceback: {traceback.format_exc()}")
         return
 

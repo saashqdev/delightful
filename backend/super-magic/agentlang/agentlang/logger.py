@@ -10,18 +10,18 @@ from agentlang.context.application_context import ApplicationContext
 
 class Logger:
     """
-    SuperMagic日志记录器，基于loguru实现
-    提供统一的日志格式和级别控制
+    SuperMagic logger built on loguru.
+    Provides unified log formatting and level control.
     """
-    # 类变量，保存实例
+    # Class variable to store instance
     _instance: ClassVar['Logger'] = None
 
     def __init__(self, name: str = "agentlang"):
         """
-        初始化日志记录器
+        Initialize the logger.
 
         Args:
-            name: 日志记录器名称
+            name: Logger name
         """
         self.name = name
         self.logger = _logger.bind(name=name)
@@ -33,27 +33,27 @@ class Logger:
               logfile_level: Optional[str] = "DEBUG",
               log_file: Optional[str] = None) -> 'Logger':
         """
-        设置并返回日志记录器实例
+        Configure and return a logger instance.
 
         Args:
-            log_name: 日志文件名
-            console_level: 控制台日志级别
-            logfile_level: 文件日志级别，如果为 None 则不记录到文件
-            log_file: 日志文件路径，如果为 None，则使用默认路径
+            log_name: Log file name
+            console_level: Console log level
+            logfile_level: File log level; if None, skip file logging
+            log_file: Log file path; if None, use default path
 
         Returns:
-            配置好的 LoguruLogger 实例
+            Configured Loguru logger instance
         """
-        # 创建或获取实例
+        # Create or reuse a singleton instance
         if cls._instance is None:
             cls._instance = cls(log_name)
 
         logger_instance = cls._instance
 
-        # 移除所有默认处理器
+        # Remove all default handlers
         _logger.remove()
 
-        # 添加控制台处理器，并配置 DEBUG 级别为灰色
+        # Add console handler; render DEBUG level in dim gray
         _logger.configure(
             handlers=[
                 {
@@ -67,11 +67,11 @@ class Logger:
                 }
             ],
             levels=[
-                {"name": "DEBUG", "color": "<dim>"}  # 使用 dim 样式（灰色）代替默认的蓝色
+                {"name": "DEBUG", "color": "<dim>"}  # Use dim (gray) instead of default blue
             ],
         )
 
-        # 如果指定了文件日志级别，添加文件处理器
+        # Add file handler if requested
         if logfile_level:
             if log_file:
                 file_path = Path(log_file)
@@ -80,7 +80,7 @@ class Logger:
                 log_dir = path_manager.get_logs_dir() if path_manager else Path("logs")
                 file_path = log_dir / f"{log_name}.log"
 
-            # 确保日志目录存在
+            # Ensure log directory exists
             file_path.parent.mkdir(parents=True, exist_ok=True)
 
             _logger.add(
@@ -89,20 +89,20 @@ class Logger:
                 format="{time:HH:mm:ss.SSS} | {level: <8} | {file.path}:{line} - {message}",
             )
 
-        # 设置到ApplicationContext
+        # Register with ApplicationContext
         ApplicationContext.set_logger(logger_instance)
 
         return logger_instance
 
     def bind(self, **kwargs) -> 'Logger':
         """
-        创建一个带有绑定上下文的日志记录器
+        Create a logger bound with context.
 
         Args:
-            **kwargs: 要绑定的关键字参数，如name=模块名
+            **kwargs: Keyword args to bind, e.g., name=module name
 
         Returns:
-            一个新的日志记录器实例，具有相同的处理器但携带不同的上下文
+            A new logger instance sharing handlers but with different context
         """
         new_logger = Logger()
         new_logger.logger = self.logger.bind(**kwargs)
@@ -110,7 +110,8 @@ class Logger:
             new_logger.name = kwargs['name']
         return new_logger
 
-    # 转发所有日志方法到内部的loguru实例
+    # Forward all logging methods to the underlying loguru instance
+    # Forward all log methods to the underlying loguru logger
     def debug(self, message, *args, **kwargs):
         return self.logger.opt(depth=1).debug(message, *args, **kwargs)
 
@@ -129,80 +130,80 @@ class Logger:
     def exception(self, message, *args, **kwargs):
         return self.logger.opt(depth=1).exception(message, *args, **kwargs)
 
-    # 允许像loguru一样使用opt
+    # Allow use of opt like loguru
     def opt(self, *args, **kwargs):
         return self.logger.opt(*args, **kwargs)
 
 
-# 导出默认实例
+# Export default instance
 logger = Logger.setup()
 
 
 def setup_logger(log_name: str = "agentlang", console_level: str = "INFO",
                 logfile_level: Optional[str] = "DEBUG", log_file: Optional[str] = None) -> Logger:
     """
-    设置日志记录器
+    Configure the logger.
 
     Args:
-        log_name: 日志文件名
-        console_level: 控制台日志级别
-        logfile_level: 文件日志级别，如果为 None 则不记录到文件
-        log_file: 日志文件路径，如果为 None，则使用默认路径
+        log_name: Log file name
+        console_level: Console log level
+        logfile_level: File log level; if None, skip file logging
+        log_file: Log file path; if None, use default path
     """
     return Logger.setup(log_name, console_level, logfile_level, log_file)
 
 
 def get_logger(name: str = None) -> Logger:
     """
-    获取命名的日志记录器
+    Get a named logger.
 
     Args:
-        name: 日志记录器名称，通常是模块名
+        name: Logger name, usually module name
 
     Returns:
-        日志记录器实例
+        Logger instance
     """
     if name:
         return logger.bind(name=name)
     return logger
 
 
-# 添加 logging 到 LoguruLogger 的拦截器
+# Intercept logging from stdlib into LoguruLogger
 class InterceptHandler(logging.Handler):
     """
-    将标准库 logging 消息拦截并重定向到 LoguruLogger 的处理器
+    Handler that redirects stdlib logging messages to LoguruLogger.
 
-    这确保使用标准 logging 模块的代码最终也使用统一的输出格式
+    Ensures code using the stdlib logging module still uses unified output formatting.
     """
 
     def emit(self, record):
-        # 获取对应的 loguru 级别
+        # Resolve the corresponding loguru level
+        # Resolve loguru level
         try:
             level = logger.logger.level(record.levelname).name
         except ValueError:
             level = record.levelno
 
-        # 查找调用者帧记录
+        # Find caller frame
         frame, depth = logging.currentframe(), 2
         while frame.f_code.co_filename == logging.__file__:
             frame = frame.f_back
             depth += 1
 
-        # 使用 loguru 记录消息
+        # Log with loguru
         logger.logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
 
 
 def configure_logging_intercept():
     """
-    配置标准库 logging 拦截
+    Configure interception of stdlib logging.
 
-    这应该在项目启动时调用一次，以确保所有使用标准库 logging 的代码
-    都会被正确地重定向到 LoguruLogger
+    Should be invoked once at startup so all stdlib logging is redirected to LoguruLogger.
     """
-    # 删除所有其他处理器
+    # Remove all other handlers
     logging.basicConfig(handlers=[InterceptHandler()], level=0)
 
-    # 替换所有已存在的处理器
+    # Replace existing handlers
     for name in logging.root.manager.loggerDict.keys():
         logging.getLogger(name).handlers = []
         logging.getLogger(name).propagate = True

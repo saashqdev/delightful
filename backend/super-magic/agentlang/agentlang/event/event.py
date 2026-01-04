@@ -5,77 +5,77 @@ from agentlang.event.common import BaseEventData
 
 
 class EventType(str, Enum):
-    """事件类型枚举"""
+    """Enumeration of event types."""
 
     BEFORE_INIT = "before_init"
     AFTER_INIT = "after_init"
     BEFORE_SAFETY_CHECK = "before_safety_check"
     AFTER_SAFETY_CHECK = "after_safety_check"
     AFTER_CLIENT_CHAT = "after_client_chat"
-    BEFORE_LLM_REQUEST = "before_llm_request"  # 请求大模型前的事件
-    AFTER_LLM_REQUEST = "after_llm_request"  # 请求大模型后的事件
-    BEFORE_TOOL_CALL = "before_tool_call"  # 工具调用前的事件
-    AFTER_TOOL_CALL = "after_tool_call"  # 工具调用后的事件
-    AGENT_SUSPENDED = "agent_suspended"  # agent终止事件
-    BEFORE_MAIN_AGENT_RUN = "before_main_agent_run"  # 主 agent 运行前的事件
-    AFTER_MAIN_AGENT_RUN = "after_main_agent_run"  # 主 agent 运行后的事件
+    BEFORE_LLM_REQUEST = "before_llm_request"  # Event before calling LLM
+    AFTER_LLM_REQUEST = "after_llm_request"  # Event after calling LLM
+    BEFORE_TOOL_CALL = "before_tool_call"  # Event before tool invocation
+    AFTER_TOOL_CALL = "after_tool_call"  # Event after tool invocation
+    AGENT_SUSPENDED = "agent_suspended"  # Agent termination event
+    BEFORE_MAIN_AGENT_RUN = "before_main_agent_run"  # Event before main agent run
+    AFTER_MAIN_AGENT_RUN = "after_main_agent_run"  # Event after main agent run
 
-    # 工具调用子事件
-    FILE_CREATED = "file_created"  # 文件创建事件
-    FILE_UPDATED = "file_updated"  # 文件更新事件
-    FILE_DELETED = "file_deleted"  # 文件删除事件
+    # Tool-call sub-events
+    FILE_CREATED = "file_created"  # File creation event
+    FILE_UPDATED = "file_updated"  # File update event
+    FILE_DELETED = "file_deleted"  # File deletion event
 
-    ERROR = "error"  # 错误事件
+    ERROR = "error"  # Error event
 
 
 T = TypeVar("T", bound=BaseEventData)
 
 
 class Event(Generic[T]):
-    """事件基类，所有事件都应该继承这个类"""
+    """Base event class; all events should inherit from this."""
 
     def __init__(self, event_type: EventType, data: BaseEventData):
-        """初始化事件
+        """Initialize an event.
 
         Args:
-            event_type: 事件类型
-            data: 事件携带的数据，可以是字典或BaseEventData的子类实例
+            event_type: Event type
+            data: Event payload, either dict or subclass of BaseEventData
         """
         self._event_type = event_type
         self._data = data
 
     @property
     def event_type(self) -> EventType:
-        """获取事件类型"""
+        """Get event type."""
         return self._event_type
 
     @property
     def data(self) -> T:
-        """获取事件数据"""
+        """Get event data."""
         return self._data
 
 
 class StoppableEvent(Event[T]):
-    """可停止的事件，实现了停止传播的功能"""
+    """Stoppable event with propagation control."""
 
     def __init__(self, event_type: EventType, data: BaseEventData):
-        """初始化可停止事件
+        """Initialize a stoppable event.
 
         Args:
-            event_type: 事件类型
-            data: 事件携带的数据
+            event_type: Event type
+            data: Event payload
         """
         super().__init__(event_type, data)
         self._propagation_stopped = False
 
     def stop_propagation(self) -> None:
-        """停止事件传播"""
+        """Stop event propagation."""
         self._propagation_stopped = True
 
     def is_propagation_stopped(self) -> bool:
-        """检查事件是否已停止传播
+        """Check whether propagation has been stopped.
 
         Returns:
-            bool: 如果事件已停止传播返回True，否则返回False
+            bool: True if propagation is stopped, else False
         """
         return self._propagation_stopped 

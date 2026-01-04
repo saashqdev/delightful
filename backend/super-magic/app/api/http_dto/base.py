@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 
 class MessageResponse(BaseModel):
-    """消息响应模型"""
+    """Message response model."""
 
     success: bool
     message: str

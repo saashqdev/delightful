@@ -94,7 +94,7 @@ class SdkBaseTest extends TestCase
 
     public function testClientRequest()
     {
-        $this->markTestSkipped('真实请求');
+        $this->markTestSkipped('Real request');
         $sdkBase = $this->createSdkBase();
         $response = $sdkBase->getClientRequest()->request(RequestMethod::Get, 'https://www.baidu.com');
         $this->assertEquals(200, $response->getStatusCode());

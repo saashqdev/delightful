@@ -1,7 +1,7 @@
 """
-标准输出流实现
+Standard output stream implementation.
 
-提供基于标准输出的流实现，用于数据的读写
+Provides a stream backed by stdout for writing data.
 """
 
 import json
@@ -52,7 +52,7 @@ class StdoutStream(Stream):
         """
         try:
             if data_type == "json":
-                # 格式化一下打印
+                # Pretty-print JSON payload
                 obj = json.loads(data)
                 logger.info(f"StdoutStream: {json_dumps(obj, indent=2)}")
             else:

@@ -28,41 +28,41 @@ logger = get_logger(__name__)
 
 class AgentDispatcher:
     """
-    Agent调度器，负责Agent的创建、初始化和运行
+    Agent Dispatcher, responsible for Agent creation, initialization and execution
 
-    主要职责：
-    1. 创建和初始化Agent及其上下文
-    2. 注册Agent事件监听器
-    3. 处理工作区初始化
-    4. 运行Agent处理任务
+    Main responsibilities:
+    1. Create and initialize Agent and its context
+    2. Register Agent event listeners
+    3. Handle workspace initialization
+    4. Run Agent to process tasks
     """
 
-    # 单例实例
+    # Singleton instance
     _instance = None
 
     @classmethod
     def get_instance(cls):
-        """获取AgentDispatcher单例实例"""
+        """Get AgentDispatcher singleton instance"""
         if cls._instance is None:
             cls._instance = AgentDispatcher()
         return cls._instance
 
     def __init__(self):
-        """初始化Agent调度器"""
+        """Initialize Agent dispatcher"""
         if self.__class__._instance is not None:
             return
 
         self.agent_context: Optional[AgentContext] = None
         self.http_stream: Optional[HTTPSubscriptionStream] = None
-        self.is_workspace_initialized: bool = False  # 工作区初始化状态标志
-        self.agent_service = AgentService()  # 创建AgentService实例
-        self.agents = {}  # 用于存储不同类型的agent
+        self.is_workspace_initialized: bool = False  # Workspace initialization status flag
+        self.agent_service = AgentService()  # Create AgentService instance
+        self.agents = {}  # Store different types of agents
 
-        # 设置为单例实例
+        # Set as singleton instance
         self.__class__._instance = self
 
     async def setup(self):
-        """设置Agent上下文和注册监听器"""
+        """Set up Agent context and register listeners"""
         self.agent_context = self.agent_service.create_agent_context(
             stream_mode=False,
             task_id="",
@@ -73,7 +73,7 @@ class AgentDispatcher:
 
         self.agent_context.update_activity_time()
 
-        # 注册各种监听器
+        # Register various listeners
         FileStorageListenerService.register_standard_listeners(self.agent_context)
         TodoListenerService.register_standard_listeners(self.agent_context)
         FinishTaskListenerService.register_standard_listeners(self.agent_context)
@@ -81,12 +81,12 @@ class AgentDispatcher:
         RagListenerService.register_standard_listeners(self.agent_context)
         FileListenerService.register_standard_listeners(self.agent_context)
 
-        # 从 entry points 中获取注册的监听器，group=supermagic.listeners.register
+        # Get registered listeners from entry points, group=supermagic.listeners.register
         group = 'supermagic.agent_dispatcher.listeners.register'
         listeners_entry_points = list(importlib.metadata.entry_points(group=group))
         for entry_point in listeners_entry_points:
             try:
-                logger.info(f"发现 agent_dispatcher 监听器: {entry_point.name}")
+                logger.info(f"Found agent_dispatcher listener: {entry_point.name}")
                 module_name = entry_point.value.split(':')[0]
                 method_name = entry_point.value.split(':')[1]
                 module = importlib.import_module(module_name)
@@ -95,19 +95,19 @@ class AgentDispatcher:
                 for name, obj in inspect.getmembers(module):
                     if inspect.isclass(obj) and hasattr(obj, method_name):
                         class_method = getattr(obj, method_name)
-                        # 调用类的静态方法
+                        # Call class static method
                         class_method(self.agent_context)
                         found_method = True
-                        logger.info(f"已注册 agent_dispatcher 监听器: {entry_point.name}")
+                        logger.info(f"Registered agent_dispatcher listener: {entry_point.name}")
                         break
                 
                 if not found_method:
-                    logger.warning(f"模块 {module_name} 中没有找到类提供的静态方法 {method_name}，跳过")
+                    logger.warning(f"Static method {method_name} not found in module {module_name}, skipping")
             except Exception as e:
-                logger.error(f"注册监听器 {entry_point.name} 时出错: {e!s}")
-                # 继续处理其他监听器，不中断流程
+                logger.error(f"Error registering listener {entry_point.name}: {e!s}")
+                # Continue processing other listeners, don't interrupt flow
 
-        logger.info("AgentDispatcher 初始化完成")
+        logger.info("AgentDispatcher initialization completed")
         return self
 
     async def load_init_client_message(self) -> bool:

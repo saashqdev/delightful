@@ -10,7 +10,7 @@ use Psr\Log\LogLevel;
 use function Hyperf\Support\env;
 
 /*
- * app_env: dev(开发环境), test(测试环境), pre(预发布环境), production(生产环境)
+ * app_env: dev (development), test (testing), pre (pre-release), production (production)
  */
 return [
     'app_name' => env('APP_NAME', 'skeleton'),

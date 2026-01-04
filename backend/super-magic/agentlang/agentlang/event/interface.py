@@ -1,7 +1,7 @@
 """
-事件系统接口定义
+Event System Interface Definitions
 
-定义事件系统的基本接口，解决循环依赖问题
+Defines the basic interfaces for the event system to avoid circular dependencies
 """
 
 from abc import ABC, abstractmethod
@@ -12,26 +12,26 @@ from agentlang.event.event import Event, EventType
 T = TypeVar('T')
 
 class EventDispatcherInterface(ABC):
-    """事件分发器接口，定义事件分发器的基本方法"""
+    """Event dispatcher interface, defines basic methods for event dispatching"""
 
     @abstractmethod
     def add_listener(self, event_type: EventType, listener: Callable[[Event[Any]], None]) -> None:
-        """添加事件监听器
+        """Add an event listener
 
         Args:
-            event_type: 事件类型
-            listener: 监听器函数
+            event_type: Event type
+            listener: Listener function
         """
         pass
 
     @abstractmethod
     async def dispatch(self, event: Event[T]) -> Event[T]:
-        """分发事件到所有相关的监听器
+        """Dispatch event to all relevant listeners
 
         Args:
-            event: 要分发的事件
+            event: Event to dispatch
 
         Returns:
-            Event: 处理后的事件对象
+            Event: Processed event object
         """
         pass 

@@ -1,13 +1,13 @@
 # rule engine core
 
-## 已实现功能
+## Implemented Features
 
-1. JSR-94规范翻译
-2. PHP脚本类型规则服务
+1. JSR-94 standard implementation
+2. PHP script type rule service
 
-## 示例
+## Examples
 
-### 注册规则服务
+### Register rule service
 
 ```php
 use Dtyq\RuleEngineCore\PhpScript\RuleServiceProvider;
@@ -18,7 +18,7 @@ $container = ApplicationContext::getContainer();
 RuleServiceProviderManager::registerRuleServiceProvider($uri, RuleServiceProvider::class, $container);
 ```
 
-默认PHP脚本规则的仓储为进程（函数仓储）及协程（规则组）级别生效。若需自定义仓储（如改用缓存或DB进行储存），可使用以下方式进行替换。
+By default, the PHP script rule repository is effective at the process (function repository) and coroutine (rule group) levels. If you need to customize the repository (such as using cache or database storage), you can replace it as follows.
 
 ```php
 use Dtyq\RuleEngineCore\PhpScript\RuleServiceProvider;
@@ -26,15 +26,15 @@ use Dtyq\RuleEngineCore\Standards\RuleServiceProviderManager;
 
 $provider = new RuleServiceProvider();
 $provider
-    ->setExecutionSetRepository(new CustomExecutionSetRepository())  //使用自定义的规则组仓储
-    ->setFunctionRepository(new CustomFunctionRepository());  	//使用自定义的函数仓储
+    ->setExecutionSetRepository(new CustomExecutionSetRepository())  // Use custom rule group repository
+    ->setFunctionRepository(new CustomFunctionRepository());  // Use custom function repository
 $container = ApplicationContext::getContainer();
 RuleServiceProviderManager::registerRuleServiceProvider(RuleServiceProvider::RULE_SERVICE_PROVIDER, $provider, $container);
 ```
 
-函数及规则组仓储需要实现`\Dtyq\RuleEngineCore\PhpScript\Repository\ExpressionFunctionRepositoryInterface`及`\Dtyq\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface`。
+Function and rule group repositories need to implement `\Dtyq\RuleEngineCore\PhpScript\Repository\ExpressionFunctionRepositoryInterface` and `\Dtyq\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface`.
 
-另外，建议在框架启动时进行规则服务注册。以下例子通过监听框架事件完成规则服务注册。
+Additionally, it is recommended to register rule services when the framework starts. The following example completes rule service registration by listening to framework events.
 
 ```php
 use Hyperf\Event\Contract\ListenerInterface;
@@ -62,11 +62,9 @@ RuleServiceProviderManager::registerRuleServiceProvider($uri, RuleServiceProvide
 }
 ```
 
+### Register functions
 
-
-### 注册函数
-
-脚本及表达式内默认禁止运行任何函数，用户可通过以下方式进行注册。
+By default, any function execution is prohibited in scripts and expressions. Users can register functions as follows.
 
 ```php
 $uri = RuleServiceProvider::RULE_SERVICE_PROVIDER;
@@ -78,20 +76,20 @@ $executableCode = new ExecutableFunction('add', function ($arg1, $arg2) {
 $admin->registerExecutableCode($executableCode);
 ```
 
-基于php原生函数的快捷注册方式：
+Shortcut registration method based on native PHP functions:
 
 ```php
 $uri = RuleServiceProvider::RULE_SERVICE_PROVIDER;
 $ruleProvider = RuleServiceProviderManager::getRuleServiceProvider($uri);
 $admin = $ruleProvider->getRuleAdministrator();
-$executableCode = ExecutableFunction::fromPhp('is_array', 'is_array2'); //在脚本中需使用is_array2进行调用
+$executableCode = ExecutableFunction::fromPhp('is_array', 'is_array2'); //In scripts, use is_array2 to call
 $admin->registerExecutableCode($executableCode);
 ```
 
-需注意，请勿在函数内编写可能导致协程切换的代码。
+Note: Do not write code in functions that may cause coroutine switching.
 
 
-### 注册规则执行组
+### Register rule execution group
 
 ```php
 use Dtyq\RuleEngineCore\PhpScript\RuleServiceProvider;
@@ -103,17 +101,17 @@ $uri = RuleServiceProvider::RULE_SERVICE_PROVIDER;
 $ruleProvider = RuleServiceProviderManager::getRuleServiceProvider($uri);
 $admin = $ruleProvider->getRuleAdministrator();
 $ruleExecutionSetProvider = $admin->getRuleExecutionSetProvider(InputType::from(InputType::String));
-$input = ['$a + $b'];  //脚本或表达式内容
+$input = ['$a + $b'];  // Script or expression content
 $properties = new RuleExecutionSetProperties();
 $properties->setName('add-rule');
-$properties->setRuleType(RuleType::Expression); // 规则类型，支持脚本或表达式类型。未进行定义时，默认为脚本类型。
+$properties->setRuleType(RuleType::Expression); // Rule type, supports script or expression types. Defaults to script type when not defined.
 $set = $ruleExecutionSetProvider->createRuleExecutionSet($input, $properties);
 $admin->registerRuleExecutionSet('mysample', $set, $properties);
 ```
 
 
 
-### 执行规则组
+### Execute rule group
 
 ```php
 use Dtyq\RuleEngineCore\Standards\RuleSessionType;
@@ -130,9 +128,9 @@ $ruleSession->release();
 
 
 
-### AST语法树
+### AST syntax tree
 
-当规则中不存在占位符时，将在创建规则组时进行语法解析，此时将可获得AST语法树。
+When there are no placeholders in the rule, syntax parsing will be performed when creating the rule group, at which time the AST syntax tree can be obtained.
 
 ```php
 use Dtyq\RuleEngineCore\PhpScript\RuleServiceProvider;
@@ -147,12 +145,12 @@ $uri = RuleServiceProvider::RULE_SERVICE_PROVIDER;
 $ruleProvider = RuleServiceProviderManager::getRuleServiceProvider($uri);
 $admin = $ruleProvider->getRuleAdministrator();
 $ruleExecutionSetProvider = $admin->getRuleExecutionSetProvider(InputType::from(InputType::String));
-$input = ['$a + $b'];  //未包含占位符
+$input = ['$a + $b'];  // Does not contain placeholders
 $properties = new RuleExecutionSetProperties();
 $properties->setName('add-rule');
-$properties->setRuleType(RuleType::Expression); // 规则类型，支持脚本或表达式类型。未进行定义时，默认为脚本类型。
+$properties->setRuleType(RuleType::Expression); // Rule type, supports script or expression types. Defaults to script type when not defined.
 $set = $ruleExecutionSetProvider->createRuleExecutionSet($input, $properties);
-//进行自定义解析验证动作
+// Perform custom parsing and validation actions
 $ast = $set->getAsts();
 $traverser = new NodeTraverser();
 $visitor = new class() extends NodeVisitorAbstract {
@@ -168,7 +166,7 @@ foreach ($ast as $stmts) {
 
 ```
 
-若规则存在占位符时，需要在规则执行阶段才可获取AST语法树。
+If the rule contains placeholders, the AST syntax tree can only be obtained during the rule execution phase.
 
 ```php
 use Dtyq\RuleEngineCore\PhpScript\RuleServiceProvider;
@@ -183,14 +181,14 @@ $uri = RuleServiceProvider::RULE_SERVICE_PROVIDER;
 $ruleProvider = RuleServiceProviderManager::getRuleServiceProvider($uri);
 $admin = $ruleProvider->getRuleAdministrator();
 $ruleExecutionSetProvider = $admin->getRuleExecutionSetProvider(InputType::from(InputType::String));
-$input = ['if( {{ruleEnableCondition}} ) return $so;'];  //包含占位符
+$input = ['if( {{ruleEnableCondition}} ) return $so;'];  // Contains placeholders
 $properties = new RuleExecutionSetProperties();
 $properties->setName('testPlaceholder-rule');
-$properties->setRuleType(RuleType::Script); // 规则类型，支持脚本或表达式类型。未进行定义时，默认为脚本类型。
+$properties->setRuleType(RuleType::Script); // Rule type, supports script or expression types. Defaults to script type when not defined.
 $properties->setResolvePlaceholders(true);
 $set = $ruleExecutionSetProvider->createRuleExecutionSet($input, $properties);
 $admin->registerRuleExecutionSet('mysample', $set, $properties);
-//注册完毕后，传入占位信息及事实准备执行规则
+//After registration, pass in placeholder information and facts to prepare for rule execution
 $runtime = $ruleProvider->getRuleRuntime();
 $properties = new RuleExecutionSetProperties();
 $properties->setPlaceholders(['ruleEnableCondition' => '1 == 1']);

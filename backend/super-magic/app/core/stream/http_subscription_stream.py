@@ -1,7 +1,7 @@
 """
-HTTP订阅流实现
+HTTP subscription stream implementation
 
-提供基于HTTP的流实现，用于将消息发送到订阅的HTTP端点
+Provides HTTP-based stream implementation for sending messages to subscribed HTTP endpoints
 """
 
 import asyncio
@@ -34,23 +34,23 @@ class HTTPSubscriptionStream(Stream):
         self._config = config
         self._session = None
         self._max_retries = 3
-        self._base_retry_delay = 1.0  # 基础延迟(秒)
-        self._max_retry_delay = 10.0  # 最大延迟(秒)
+        self._base_retry_delay = 1.0  # Base delay (seconds)
+        self._max_retry_delay = 10.0  # Max delay (seconds)
 
         self.ignore_events([EventType.AFTER_CLIENT_CHAT])
-        logger.info("已配置HTTPSubscriptionStream忽略AFTER_CLIENT_CHAT事件")
+        logger.info("Configured HTTPSubscriptionStream to ignore AFTER_CLIENT_CHAT events")
 
     async def _ensure_session(self):
         """Ensure an HTTP session exists."""
         if self._session is None:
-            # 创建带有追踪功能的会话
+            # Create session with tracing functionality
             trace_config = aiohttp.TraceConfig()
 
             async def on_request_start(session, trace_config_ctx, params):
-                logger.debug(f"开始请求: {params.url}")
+                logger.debug(f"Starting request: {params.url}")
 
             async def on_request_end(session, trace_config_ctx, params):
-                logger.debug(f"完成请求, 状态: {params.response.status}")
+                logger.debug(f"Request completed, status: {params.response.status}")
 
             trace_config.on_request_start.append(on_request_start)
             trace_config.on_request_end.append(on_request_end)
@@ -70,25 +70,25 @@ class HTTPSubscriptionStream(Stream):
 
     async def _should_retry(self, response) -> bool:
         """
-        基于响应状态码和响应体内容判断是否需要重试
+        Determine if retry is needed based on response status code and body content
         
         Args:
-            response: HTTP响应对象
+            response: HTTP response object
             
         Returns:
-            bool: 是否应该重试请求
+            bool: Whether to retry the request
         """
-        retry_decision = False  # 默认不重试
+        retry_decision = False  # Don't retry by default
 
-        # 记录请求信息
-        logger.debug(f"检查是否需要重试: URL={response.url}, 状态码={response.status}")
+        # Log request information
+        logger.debug(f"Checking if retry needed: URL={response.url}, status code={response.status}")
 
         if response.status != 200:
             retry_decision = True
-            logger.warning(f"服务器错误状态码: {response.status}，将进行重试: {retry_decision}")
+            logger.warning(f"Server error status code: {response.status}, will retry: {retry_decision}")
             return retry_decision
 
-        # 检查响应体内容
+        # Check response body content
         try:
             content = await response.text()
 
@@ -99,28 +99,28 @@ class HTTPSubscriptionStream(Stream):
                     code = response_json.get('code')
                     if code != 1000:
                         retry_decision = True
-                        logger.warning(f"响应code不等于1000 (code={code})，将进行重试: {retry_decision}")
+                        logger.warning(f"Response code not equal to 1000 (code={code}), will retry: {retry_decision}")
                 else:
                     retry_decision = True
-                    logger.warning(f"响应中没有code字段，将进行重试: {retry_decision}")
+                    logger.warning(f"Response missing code field, will retry: {retry_decision}")
 
             except json.JSONDecodeError:
                 retry_decision = True
-                logger.warning(f"响应不是有效的JSON格式，将进行重试: {retry_decision}")
+                logger.warning(f"Response is not valid JSON, will retry: {retry_decision}")
         except Exception as e:
             retry_decision = True
-            logger.warning(f"检查响应内容时出错: {e!s}，将进行重试: {retry_decision}")
+            logger.warning(f"Error checking response content: {e!s}, will retry: {retry_decision}")
 
-        # 最终决策日志
-        logger.debug(f"should_retry 最终返回: {retry_decision}")
+        # Final decision log
+        logger.debug(f"should_retry final return: {retry_decision}")
         return retry_decision
 
     async def _send_request_with_retry(self, method: str, url: str, headers: Dict, data: str) -> Tuple[bool, Optional[aiohttp.ClientResponse]]:
         """
-        发送HTTP请求，支持自定义重试逻辑
+        Send HTTP request with custom retry logic
         
         Returns:
-            元组 (success, response)
+            Tuple (success, response)
         """
         retry_count = 0
         last_exception = None
@@ -129,47 +129,47 @@ class HTTPSubscriptionStream(Stream):
         while retry_count <= self._max_retries:
             current_attempt = retry_count + 1
             try:
-                # 发送请求
-                logger.debug(f"正在进行第 {current_attempt} 次请求尝试...")
+                # Send the request
+                logger.debug(f"Attempt {current_attempt} in progress...")
                 async with self._session.request(
                     method=method,
                     url=url,
                     headers=headers,
                     data=data
                 ) as response:
-                    # 记录一份响应数据的副本，用于判断是否重试
+                    # Keep a copy of the response to evaluate retry
                     response_copy = response
 
-                    # 判断是否需要重试
+                    # Decide whether to retry
                     if await self._should_retry(response):
                         if retry_count < self._max_retries:
                             retry_count += 1
                             delay = min(self._base_retry_delay * (2 ** (retry_count - 1)), self._max_retry_delay)
-                            logger.info(f"第 {current_attempt} 次尝试失败，将在 {delay:.2f} 秒后重试...")
+                            logger.info(f"Attempt {current_attempt} failed; retrying in {delay:.2f} seconds...")
                             await asyncio.sleep(delay)
                             continue
                         else:
-                            # 已达到最大重试次数
-                            logger.warning(f"已达到最大重试次数 ({self._max_retries})，不再重试")
+                            # Max retries reached
+                            logger.warning(f"Max retries reached ({self._max_retries}); will not retry")
                             return True, response
                     else:
-                        # 不需要重试，返回成功
+                        # No retry needed, return success
                         return True, response
             except Exception as e:
                 last_exception = e
-                logger.error(f"请求发生异常 (尝试 {current_attempt}/{self._max_retries + 1}): {e!s}")
+                logger.error(f"Request raised an exception (attempt {current_attempt}/{self._max_retries + 1}): {e!s}")
 
                 if retry_count < self._max_retries:
                     retry_count += 1
                     delay = min(self._base_retry_delay * (2 ** (retry_count - 1)), self._max_retry_delay)
-                    logger.info(f"将在 {delay:.2f} 秒后重试...")
+                    logger.info(f"Retrying in {delay:.2f} seconds...")
                     await asyncio.sleep(delay)
                 else:
-                    # 已达到最大重试次数
-                    logger.warning(f"已达到最大重试次数 ({self._max_retries})，不再重试")
+                    # Max retries reached
+                    logger.warning(f"Max retries reached ({self._max_retries}); will not retry")
                     return False, None
 
-        # 如果执行到这里，表示重试后仍然失败
+        # If we reach here, all retries failed
         return False, last_response
 
     async def write(self, data: str, data_type: str = "json") -> int:
@@ -188,15 +188,15 @@ class HTTPSubscriptionStream(Stream):
         try:
             await self._ensure_session()
 
-            # 准备请求头和内容
+            # Prepare headers and payload
             headers = dict(self._config.headers)
 
             if data_type == "json":
-                # 确保Content-Type是application/json
+                # Ensure Content-Type is application/json
                 if "Content-Type" not in headers:
                     headers["Content-Type"] = "application/json"
 
-            # 发送请求，使用自定义重试逻辑
+            # Send request with custom retry logic
             success, response = await self._send_request_with_retry(
                 method=self._config.method,
                 url=self._config.url,

@@ -23,7 +23,7 @@ class AdminOriginModelAppService
     }
 
     /**
-     * 获取原始模型列表.
+     * Get the list of original models.
      *
      * @return array<ProviderOriginalModelDTO>
      */
@@ -38,7 +38,7 @@ class AdminOriginModelAppService
     }
 
     /**
-     * 添加模型标识.
+     * Add an original model identifier.
      */
     public function create(MagicUserAuthorization $authorization, string $modelId): ProviderOriginalModelDTO
     {
@@ -58,7 +58,7 @@ class AdminOriginModelAppService
     }
 
     /**
-     * 删除模型标识.
+     * Delete an original model identifier.
      */
     public function delete(MagicUserAuthorization $authorization, string $id): void
     {

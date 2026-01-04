@@ -79,7 +79,7 @@ class VolcengineStandardClient
     }
 
     /**
-     * 提交大模型语音识别任务
+     * Submit a large-model speech recognition task.
      */
     public function submitBigModelTask(LargeModelSpeechSubmitDTO $submitDTO): array
     {
@@ -143,7 +143,7 @@ class VolcengineStandardClient
                 'volcengine_message' => $responseHeaders['volcengine_message'] ?? null,
             ]);
 
-            // 验证API状态码
+            // Validate the API status code
             $this->logger->info('Validating Volcengine API status code', [
                 'request_id' => $requestId,
             ]);
@@ -180,7 +180,7 @@ class VolcengineStandardClient
     }
 
     /**
-     * 查询大模型语音识别结果.
+     * Query a large-model speech recognition result.
      */
     public function queryBigModelResult(string $requestId): SpeechRecognitionResultDTO
     {
@@ -306,13 +306,13 @@ class VolcengineStandardClient
 
     /**
      * Execute standard ASR request (non-BigModel).
+    /**
+     * Validate Volcengine API response status code.
+     * Only used during task submission to confirm success (20000000).
+     *
+     * @param array $responseHeaders Response headers array
+     * @param string $requestId Request ID for logging
      */
-    private function executeStandardRequest(
-        string $url,
-        array $requestData,
-        string $exceptionMessage,
-        string $successMessage,
-        array $contextData = []
     ): array {
         try {
             $response = $this->httpClient->post($url, [

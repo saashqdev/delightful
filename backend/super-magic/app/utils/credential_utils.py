@@ -1,5 +1,5 @@
 """
-凭证管理工具模块，处理凭证的导出和加载
+Credential management utility module for exporting and loading credentials
 """
 
 import json
@@ -13,109 +13,109 @@ logger = get_logger(__name__)
 
 async def export_credentials(agent_context: AgentContext, file_path: str = "config/upload_credentials.json") -> bool:
     """
-    将AgentContext中的上传凭证导出到文件
+    Export upload credentials from AgentContext to file
 
     Args:
-        agent_context: 代理上下文对象
-        file_path: 导出文件路径，默认为config/upload_credentials.json
+        agent_context: Agent context object
+        file_path: Export file path, defaults to config/upload_credentials.json
 
     Returns:
-        bool: 导出是否成功
+        bool: Whether export was successful
     """
     try:
-        # 检查是否有凭证
+        # Check if credentials exist
         credentials = agent_context.storage_credentials
         if not credentials:
-            logger.warning("AgentContext中没有存储凭证，无法导出")
+            logger.warning("No storage credentials in AgentContext, cannot export")
             return False
 
-        # 获取沙盒ID
+        # Get sandbox ID
         sandbox_id = agent_context.get_sandbox_id()
         if not sandbox_id:
-            logger.warning("AgentContext中没有设置沙盒ID")
+            logger.warning("Sandbox ID not set in AgentContext")
 
-        # 确保目录存在
+        # Ensure directory exists
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
-        # 将凭证转换为字典
+        # Convert credentials to dictionary
         if hasattr(credentials, "model_dump"):
-            # 使用Pydantic的model_dump方法
+            # Use Pydantic's model_dump method
             creds_dict = credentials.model_dump()
         else:
-            # 尝试使用__dict__属性
+            # Try using __dict__ attribute
             creds_dict = {k: v for k, v in credentials.__dict__.items()
                         if not k.startswith('_') and not callable(v)}
 
-        # 创建输出结构
+        # Create output structure
         output_data = {
             "upload_config": creds_dict
         }
 
-        # 添加沙盒ID（如果有）
+        # Add sandbox ID (if exists)
         if sandbox_id:
             output_data["sandbox_id"] = sandbox_id
 
-        # 添加组织编码（如果有）
+        # Add organization code (if exists)
         organization_code = agent_context.get_organization_code()
         if organization_code:
             output_data["organization_code"] = organization_code
 
-        # 写入文件
+        # Write to file
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(output_data, f, ensure_ascii=False, indent=2)
 
-        sandbox_info = f"沙盒ID: {sandbox_id}" if sandbox_id else "未设置沙盒ID"
-        logger.info(f"已将上传凭证导出到文件: {file_path} ({sandbox_info})")
+        sandbox_info = f"Sandbox ID: {sandbox_id}" if sandbox_id else "Sandbox ID not set"
+        logger.info(f"Upload credentials exported to file: {file_path} ({sandbox_info})")
         return True
 
     except Exception as e:
-        logger.error(f"导出上传凭证失败: {e}")
+        logger.error(f"Failed to export upload credentials: {e}")
         import traceback
         logger.error(traceback.format_exc())
         return False
 
 async def load_credentials(file_path: str = "config/upload_credentials.json") -> Optional[Dict[str, Any]]:
     """
-    从文件加载上传凭证
+    Load upload credentials from file
 
     Args:
-        file_path: 凭证文件路径
+        file_path: Credential file path
 
     Returns:
-        Optional[Dict[str, Any]]: 凭证数据，加载失败则返回None
+        Optional[Dict[str, Any]]: Credential data, returns None if loading fails
     """
     try:
         if not os.path.exists(file_path):
-            logger.warning(f"凭证文件不存在: {file_path}")
+            logger.warning(f"Credential file does not exist: {file_path}")
             return None
 
         with open(file_path, "r", encoding="utf-8") as f:
             credentials_data = json.load(f)
 
         if not credentials_data.get("upload_config"):
-            logger.error(f"凭证文件格式不正确，缺少upload_config字段: {file_path}")
+            logger.error(f"Credential file format is incorrect, missing upload_config field: {file_path}")
             return None
 
-        # 检查是否有沙盒ID
+        # Check if sandbox ID exists
         if not credentials_data.get("sandbox_id"):
-            logger.error(f"凭证文件缺少必需的sandbox_id字段: {file_path}")
+            logger.error(f"Credential file missing required sandbox_id field: {file_path}")
             return None
 
-        logger.info(f"已从文件加载上传凭证: {file_path}, 沙盒ID: {credentials_data.get('sandbox_id')}")
+        logger.info(f"Upload credentials loaded from file: {file_path}, Sandbox ID: {credentials_data.get('sandbox_id')}")
 
         result = credentials_data["upload_config"]
 
-        # 添加sandbox_id到结果中
+        # Add sandbox_id to result
         result["sandbox_id"] = credentials_data["sandbox_id"]
 
-        # 添加organization_code（如果存在）
+        # Add organization_code (if exists)
         if "organization_code" in credentials_data:
             result["organization_code"] = credentials_data["organization_code"]
 
         return result
 
     except Exception as e:
-        logger.error(f"加载上传凭证失败: {e}")
+        logger.error(f"Failed to load upload credentials: {e}")
         import traceback
         logger.error(traceback.format_exc())
         return None

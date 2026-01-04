@@ -1,7 +1,7 @@
 """
-基础代理上下文类
+Base agent context class
 
-提供代理上下文基本功能的实现，不包含业务逻辑
+Provides basic agent context functionality implementation without business logic
 """
 
 import asyncio
@@ -18,9 +18,9 @@ from agentlang.logger import get_logger
 logger = get_logger(__name__)
 
 class BaseAgentContext(BaseContext, AgentContextInterface):
-    """基础代理上下文实现
+    """Base agent context implementation
     
-    提供核心接口的基本实现，不包含业务逻辑
+    Provides core interface basic implementation without business logic
     """
 
     _workspace_dir: str
@@ -28,16 +28,16 @@ class BaseAgentContext(BaseContext, AgentContextInterface):
     _user_id: Optional[str]
 
     def __init__(self):
-        """初始化基础代理上下文"""
+        """Initialize base agent context"""
         super().__init__()
-        # 使用已存在的单例实例而非尝试创建新实例
+        # Use existing singleton instance instead of trying to create a new one
         self.shared_context = AgentSharedContext
 
         self._workspace_dir = ""
         self._resources: Dict[str, Any] = {}
         self._user_id = None
 
-        # 框架层基础属性
+        # Framework layer base attributes
         self.agent_name = "base_agent"  # 默认代理名称
         self.is_main_agent = False  # 是否为主代理
         self.stream_mode = False  # 流模式开关

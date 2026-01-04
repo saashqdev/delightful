@@ -1,4 +1,4 @@
-# AI警告: 环境变量加载必须放在所有导入之前
+# AI Warning: Environment variable loading must be placed before all imports
 from dotenv import load_dotenv
 load_dotenv(override=True)
 
@@ -9,13 +9,13 @@ import multiprocessing
 import asyncio
 from typing import Optional
 
-# 获取项目根目录，使用文件所在位置的父目录
+# Get project root directory, using parent directory of file location
 project_root = Path(__file__).resolve().parent
 
-# 添加项目根目录到 Python 路径
+# Add project root directory to Python path
 sys.path.append(str(project_root))
 
-# 初始化 PathManager
+# Initialize PathManager
 from app.paths import PathManager
 PathManager.set_project_root(project_root)
 from agentlang.context.application_context import ApplicationContext
@@ -30,51 +30,51 @@ from app.command.ws_server import start_ws_server
 from app.command.storage_uploader_tool import start_storage_uploader_watcher
 from agentlang.utils.file import clear_directory_contents
 
-# 初始化日志配置
+# Initialize logging configuration
 os.makedirs("logs", exist_ok=True)
-# 使用agentlang.logger模块的配置函数，从环境变量获取日志级别，默认为INFO
+# Use the configuration function from agentlang.logger module, get log level from environment variable, default to INFO
 log_level = os.getenv("LOG_LEVEL", "INFO")
-# 设置logger并自动保存到ApplicationContext中
+# Set up logger and automatically save to ApplicationContext
 logger = setup_logger(log_name="app", console_level=log_level)
 configure_logging_intercept()
 
 
-# 获取为当前模块命名的日志记录器
+# Get the logger named for the current module
 logger = get_logger(__name__)
 
 cli = typer.Typer(help="SuperMagic CLI", no_args_is_help=True)
 
-app_cmds = typer.Typer(help="启动相关命令")
+app_cmds = typer.Typer(help="Startup related commands")
 cli.add_typer(app_cmds, name="start")
 
-storage_uploader_cmds = typer.Typer(help="通用存储上传工具命令") 
+storage_uploader_cmds = typer.Typer(help="Generic storage uploader tool commands") 
 cli.add_typer(storage_uploader_cmds, name="storage-uploader")
 
-# 清理相关函数 (from HEAD)
+# Clean related functions (from HEAD)
 async def clean_chat_history():
     """
-    异步清理.chat_history目录中的文件
-    但保留目录本身
+    Asynchronously clean files in .chat_history directory
+    but preserve the directory itself
     """
     result = await clear_directory_contents(PathManager.get_chat_history_dir())
     if not result:
-        logger.error("清理 chat history 失败")
+        logger.error("Failed to clean chat history")
     return result
 
 async def clean_workspace():
     """
-    异步清理.workspace目录中的文件
-    但保留目录本身
+    Asynchronously clean files in .workspace directory
+    but preserve the directory itself
     """
     result = await clear_directory_contents(PathManager.get_workspace_dir())
     if not result:
-        logger.error("清理 workspace 失败")
+        logger.error("Failed to clean workspace")
     return result
 
 async def clean_directories():
     """
-    异步清理.chat_history和.workspace目录中的文件
-    但保留目录本身
+    Asynchronously clean files in .chat_history and .workspace directories
+    but preserve the directories themselves
     """
     chat_result, workspace_result = await asyncio.gather(
         clean_chat_history(),
@@ -82,13 +82,13 @@ async def clean_directories():
     )
     return chat_result and workspace_result
 
-@cli.command("clean", help="清理历史对话记录和工作空间文件") # from HEAD
+@cli.command("clean", help="Clean history chat records and workspace files") # from HEAD
 def clean_command(
-    clean_all: bool = typer.Option(False, "--all", "-a", help="清理历史对话记录和工作空间文件"), # Changed -c to -a to avoid conflict
-    clean_chat: bool = typer.Option(False, "--chat", "-cc", help="仅清理历史对话记录文件"),
-    clean_workspace: bool = typer.Option(False, "--workspace", "-cw", help="仅清理工作空间文件")
+    clean_all: bool = typer.Option(False, "--all", "-a", help="Clean history chat records and workspace files"), # Changed -c to -a to avoid conflict
+    clean_chat: bool = typer.Option(False, "--chat", "-cc", help="Only clean history chat record files"),
+    clean_workspace: bool = typer.Option(False, "--workspace", "-cw", help="Only clean workspace files")
 ):
-    """清理项目相关目录的命令封装"""
+    """Command wrapper for cleaning related directories"""
     try:
         cleaned = False
         if not (clean_all or clean_chat or clean_workspace):
@@ -97,68 +97,68 @@ def clean_command(
         if clean_all:
             result = asyncio.run(clean_directories())
             if result:
-                logger.info("历史对话记录和工作空间文件清理完成")
+                logger.info("History chat records and workspace files cleaned successfully")
                 cleaned = True
             else:
-                logger.error("历史对话记录和工作空间文件清理失败")
+                logger.error("Failed to clean history chat records and workspace files")
         elif clean_chat:
             result = asyncio.run(clean_chat_history())
             if result:
-                logger.info("历史对话记录清理完成")
+                logger.info("History chat records cleaned successfully")
                 cleaned = True
             else:
-                logger.error("历史对话记录清理失败")
+                logger.error("Failed to clean history chat records")
         elif clean_workspace:
             result = asyncio.run(clean_workspace())
             if result:
-                logger.info("工作空间文件清理完成")
+                logger.info("Workspace files cleaned successfully")
                 cleaned = True
             else:
-                logger.error("工作空间文件清理失败")
+                logger.error("Failed to clean workspace files")
                 
         return cleaned
     except Exception as e:
-        logger.error(f"清理过程中发生错误: {e}")
-        logger.error(f"堆栈信息: {traceback.format_exc()}")
+        logger.error(f"Error occurred during cleanup: {e}")
+        logger.error(f"Stack trace: {traceback.format_exc()}")
         return False
 
-@app_cmds.command("ws-server", help="启动WebSocket服务器")
+@app_cmds.command("ws-server", help="Start WebSocket server")
 def ws_server_command(
-    clean_all: bool = typer.Option(False, "--clean", "-c", help="启动前清理历史对话记录和工作空间文件"),
-    clean_chat: bool = typer.Option(False, "--clean-chat", "-cc", help="启动前仅清理历史对话记录文件"),
-    clean_workspace: bool = typer.Option(False, "--clean-workspace", "-cw", help="启动前仅清理工作空间文件")
+    clean_all: bool = typer.Option(False, "--clean", "-c", help="Clean history chat records and workspace files before startup"),
+    clean_chat: bool = typer.Option(False, "--clean-chat", "-cc", help="Only clean history chat records before startup"),
+    clean_workspace: bool = typer.Option(False, "--clean-workspace", "-cw", help="Only clean workspace files before startup")
 ):
-    """启动WebSocket服务器命令封装"""
+    """Command wrapper for starting WebSocket server"""
     try:
         if clean_all or clean_chat or clean_workspace:
             clean_command(clean_all=clean_all, clean_chat=clean_chat, clean_workspace=clean_workspace)
             
         if not os.getenv("SANDBOX_ID"):
             os.environ["SANDBOX_ID"] = "default"
-        # 启动WebSocket服务器
+        # Start WebSocket server
         start_ws_server()
     except Exception as e:
-        logger.error(f"启动WebSocket服务器时发生错误: {e}")
-        logger.error(f"堆栈信息: {traceback.format_exc()}")
+        logger.error(f"Error occurred when starting WebSocket server: {e}")
+        logger.error(f"Stack trace: {traceback.format_exc()}")
 
-@storage_uploader_cmds.command("watch", help="监控目录变化并自动上传到由环境变量 STORAGE_PLATFORM 配置的存储后端")
+@storage_uploader_cmds.command("watch", help="Monitor directory changes and automatically upload to storage backend configured by environment variable STORAGE_PLATFORM")
 def storage_uploader_watch_command(
     # Parameters from feature/support-aliyun-oss
-    sandbox: Optional[str] = typer.Option(None, "--sandbox", help="沙盒ID，默认为None"),
-    dir: str = typer.Option(".workspace", "--dir", help="要监控的目录路径，默认为.workspace"),
-    once: bool = typer.Option(False, "--once", help="只扫描一次已有文件后退出，不持续监控"),
-    refresh: bool = typer.Option(False, "--refresh", help="强制刷新所有文件"),
-    credentials: Optional[str] = typer.Option(None, "--credentials", "-c", help="指定凭证文件路径。如果提供，将覆盖 --use-context。"), # -c was for clean in HEAD, ensure no conflict or choose different short opts
-    use_context: bool = typer.Option(False, "--use-context", help="尝试使用 'config/upload_credentials.json' 作为凭证文件，除非提供了 --credentials。"),
-    task_id: Optional[str] = typer.Option(None, "--task-id", help="任务ID (用于文件注册)"),
-    organization_code: Optional[str] = typer.Option(None, "--organization-code", help="组织编码"),
-    log_level: str = typer.Option("INFO", "--log-level", help="设置日志级别 (DEBUG, INFO, WARNING, ERROR)"),
+    sandbox: Optional[str] = typer.Option(None, "--sandbox", help="Sandbox ID, default is None"),
+    dir: str = typer.Option(".workspace", "--dir", help="Directory path to monitor, default is .workspace"),
+    once: bool = typer.Option(False, "--once", help="Only scan existing files once then exit, do not continuously monitor"),
+    refresh: bool = typer.Option(False, "--refresh", help="Force refresh all files"),
+    credentials: Optional[str] = typer.Option(None, "--credentials", "-c", help="Specify credentials file path. If provided, will override --use-context."), # -c was for clean in HEAD, ensure no conflict or choose different short opts
+    use_context: bool = typer.Option(False, "--use-context", help="Try to use 'config/upload_credentials.json' as credentials file, unless --credentials is provided."),
+    task_id: Optional[str] = typer.Option(None, "--task-id", help="Task ID (for file registration)"),
+    organization_code: Optional[str] = typer.Option(None, "--organization-code", help="Organization code"),
+    log_level: str = typer.Option("INFO", "--log-level", help="Set log level (DEBUG, INFO, WARNING, ERROR)"),
     # Clean parameters from HEAD
-    clean_all_storage: bool = typer.Option(False, "--clean-storage-all", "-csa", help="启动监控前清理历史对话记录和工作空间文件"), # Renamed to avoid conflict with -c for credentials
-    clean_chat_storage: bool = typer.Option(False, "--clean-storage-chat", "-csc", help="启动监控前仅清理历史对话记录文件"),
-    clean_workspace_storage: bool = typer.Option(False, "--clean-storage-workspace", "-csw", help="启动监控前仅清理工作空间文件")
+    clean_all_storage: bool = typer.Option(False, "--clean-storage-all", "-csa", help="Clean history chat records and workspace files before starting monitor"), # Renamed to avoid conflict with -c for credentials
+    clean_chat_storage: bool = typer.Option(False, "--clean-storage-chat", "-csc", help="Only clean history chat records before starting monitor"),
+    clean_workspace_storage: bool = typer.Option(False, "--clean-storage-workspace", "-csw", help="Only clean workspace files before starting monitor")
 ):
-    """监控目录变化并自动上传到由环境变量 STORAGE_PLATFORM 配置的存储后端的命令封装"""
+    """Command wrapper for monitoring directory changes and automatically uploading to storage backend configured by environment variable STORAGE_PLATFORM"""
     try:
         # Handle clean options first (from HEAD)
         if clean_all_storage or clean_chat_storage or clean_workspace_storage:
@@ -183,18 +183,18 @@ def storage_uploader_watch_command(
             log_level=log_level
         )
     except Exception as e:
-        logger.error(f"监控目录并上传时发生错误: {e}") # Generic error message
-        logger.error(f"堆栈信息: {traceback.format_exc()}")
+        logger.error(f"Error occurred while monitoring directory and uploading: {e}") # Generic error message
+        logger.error(f"Stack trace: {traceback.format_exc()}")
 
 if __name__ == "__main__":
     multiprocessing.freeze_support()
     try:
         cli()
     except KeyboardInterrupt:
-        logger.info("程序通过 KeyboardInterrupt 退出")
+        logger.info("Program exited via KeyboardInterrupt")
     except Exception as e:
         # traceback import is already at the top
         traceback.print_exc()
-        logger.error(f"程序异常退出: {e}")
+        logger.error(f"Program abnormal exit: {e}")
     finally:
-        logger.info("程序已完全退出")
+        logger.info("Program has completely exited")

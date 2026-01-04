@@ -39,7 +39,7 @@ class RuleAdministrator extends AbstractRuleAdministrator implements RuleAdminis
 
     public function deregisterRuleExecutionSet(string $bindUri, ?Properties $properties = null): void
     {
-        // 不再检查规则是否已被注册
+        // No longer check if the rule has been registered
         //        if ($this->repository->getRuleExecutionSet($bindUri, $properties) == null) {
         //            throw new RuleExecutionSetDeregistrationException('Error while retrieving rule execution set bound to: ' . $bindUri, 1009);
         //        }

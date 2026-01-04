@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Token\Repository\Facade;
 
-// 可以自由指定 extra 数据
+// Allows specifying arbitrary extra data
 interface MagicTokenExtraInterface
 {
     public function getMagicEnvId(): ?int;

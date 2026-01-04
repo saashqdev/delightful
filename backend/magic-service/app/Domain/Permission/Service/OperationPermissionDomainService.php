@@ -46,7 +46,7 @@ readonly class OperationPermissionDomainService
     }
 
     /**
-     * 授权拥有者.
+     * Grant ownership.
      */
     public function accessOwner(PermissionDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, string $userId): OperationPermissionEntity
     {
@@ -63,7 +63,7 @@ readonly class OperationPermissionDomainService
     }
 
     /**
-     * 转让资源拥有者.
+     * Transfer resource ownership.
      */
     #[Transactional]
     public function transferOwner(PermissionDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, string $ownerUserId, bool $reserveManager = true): void
@@ -73,13 +73,13 @@ readonly class OperationPermissionDomainService
             return;
         }
         if ($ownerOperationPermission->getTargetId() === $ownerUserId) {
-            // 没有任何变更
+            // No changes
             return;
         }
-        // 赋予新的 owner
+        // Assign the new owner
         $this->accessOwner($dataIsolation, $resourceType, $resourceId, $ownerUserId);
         if ($reserveManager) {
-            // 保留管理权限
+            // Keep admin permission
             $ownerOperationPermission->setOperation(Operation::Admin);
             $this->operationPermissionRepository->save($dataIsolation, $ownerOperationPermission);
         } else {
@@ -88,17 +88,17 @@ readonly class OperationPermissionDomainService
     }
 
     /**
-     * 对资源进行授权.
+     * Authorize operations on a resource.
      * @param array<OperationPermissionEntity> $operationPermissions
      */
     #[Transactional]
     public function resourceAccess(PermissionDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, array $operationPermissions): void
     {
-        // 查找当前资源所有的权限，区分 新增、修改、删除 todo 这里或许可以改成 delete 全量后 insert
+        // Load all current permissions for this resource; split into add/edit/delete (could switch to delete+insert)
         $add = $edit = [];
 
         $historyOperationPermissions = $this->operationPermissionRepository->listByResource($dataIsolation, $resourceType, $resourceId);
-        // owner 不能被操作，得先去除
+        // Remove owner entries since they cannot be changed
         foreach ($historyOperationPermissions as $index => $historyOperationPermission) {
             if ($historyOperationPermission->getOperation()->isOwner()) {
                 unset($historyOperationPermissions[$index]);
@@ -116,13 +116,13 @@ readonly class OperationPermissionDomainService
             $historyOperationPermission = $historyOperationPermissions[$key] ?? null;
             unset($historyOperationPermissions[$key]);
 
-            // 根据 key 去重
+            // De-duplicate by key
             if ($handleKey[$key] ?? false) {
                 continue;
             }
             $handleKey[$key] = true;
 
-            // 如果 owner，不能操作
+            // Skip if current or new operation is owner
             if ($historyOperationPermission && $historyOperationPermission->getOperation()->isOwner()) {
                 continue;
             }
@@ -151,7 +151,7 @@ readonly class OperationPermissionDomainService
     }
 
     /**
-     * 获取用户对某一类资源的最高操作权限.
+     * Get the highest operation per user for a resource type.
      */
     #[ArrayShape([
         // userId => [resourceId => Operation]
@@ -162,7 +162,7 @@ readonly class OperationPermissionDomainService
     public function getResourceOperationByUserIds(PermissionDataIsolation $dataIsolation, ResourceType $resourceType, array $userIds, array $resourceIds = []): array
     {
         $contactDataIsolation = ContactDataIsolation::simpleMake($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
-        // 获取用户所在部门、群组添加到 target 中查找
+        // Add departments and groups of the users into targets
         $userDepartmentList = $this->departmentUserRepository->getDepartmentIdsByUserIds($contactDataIsolation, $userIds, true);
         $userGroupIds = $this->magicGroupRepository->getGroupIdsByUserIds($userIds);
         $targetIds = [];

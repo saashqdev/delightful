@@ -26,7 +26,7 @@ class EnsureSystemInstructsCommand extends HyperfCommand
     public function configure()
     {
         parent::configure();
-        $this->setDescription('确保所有助理都有完整的系统交互指令');
+        $this->setDescription('Ensure every assistant has complete system interaction prompts');
     }
 
     public function handle()
@@ -36,10 +36,10 @@ class EnsureSystemInstructsCommand extends HyperfCommand
         $total = 0;
         $updated = 0;
 
-        $this->output->writeln('开始处理助理系统交互指令...');
+        $this->output->writeln('Starting assistant system interaction prompts...');
 
         while (true) {
-            // 分批获取助理
+            // Fetch assistants in batches
             $agents = $this->agentRepository->getAgentsByBatch($offset, $batchSize);
             if (empty($agents)) {
                 break;
@@ -48,13 +48,13 @@ class EnsureSystemInstructsCommand extends HyperfCommand
             foreach ($agents as $agent) {
                 ++$total;
 
-                // 获取当前指令
+                // Get the current prompts
                 $instructs = $agent['instructs'] ?? [];
 
-                // 检查并补充系统指令
+                // Validate and supplement system prompts
                 $newInstructs = SystemInstructType::ensureSystemInstructs($instructs);
 
-                // 如果指令有变化，保存更新
+                // Persist changes when prompts differ
                 if ($newInstructs !== $instructs) {
                     $this->agentRepository->updateInstruct(
                         $agent['organization_code'],
@@ -62,16 +62,16 @@ class EnsureSystemInstructsCommand extends HyperfCommand
                         $newInstructs
                     );
                     ++$updated;
-                    $this->output->writeln(sprintf('已更新助理 [%s] 的系统交互指令', $agent['id']));
+                    $this->output->writeln(sprintf('Updated assistant [%s] system interaction prompts', $agent['id']));
                 }
             }
 
             $offset += $batchSize;
-            $this->output->writeln(sprintf('已处理 %d 个助理...', $total));
+            $this->output->writeln(sprintf('Processed %d assistants so far...', $total));
         }
 
         $this->output->writeln(sprintf(
-            '处理完成！共处理 %d 个助理，更新了 %d 个助理的系统交互指令',
+            'Done. Processed %d assistants and updated %d assistant system prompts',
             $total,
             $updated
         ));
@@ -81,10 +81,10 @@ class EnsureSystemInstructsCommand extends HyperfCommand
         $versionTotal = 0;
         $versionUpdated = 0;
 
-        $this->output->writeln('\n开始处理助理版本系统交互指令...');
+        $this->output->writeln('Starting assistant version system interaction prompts...');
 
         while (true) {
-            // 分批获取助理版本
+            // Fetch assistant versions in batches
             $versions = $this->agentVersionRepository->getAgentVersionsByBatch($offset, $batchSize);
             if (empty($versions)) {
                 break;
@@ -93,28 +93,28 @@ class EnsureSystemInstructsCommand extends HyperfCommand
             foreach ($versions as $version) {
                 ++$versionTotal;
 
-                // 获取当前指令
+                // Get the current prompts
                 $instructs = $version['instructs'] ?? [];
 
-                // 检查并补充系统指令
+                // Validate and supplement system prompts
                 $newInstructs = SystemInstructType::ensureSystemInstructs($instructs);
 
-                // 如果指令有变化，保存更新
+                // Persist changes when prompts differ
                 if ($newInstructs !== $instructs) {
                     $this->agentVersionRepository->updateById(
                         new MagicAgentVersionEntity(array_merge($version, ['instructs' => $newInstructs]))
                     );
                     ++$versionUpdated;
-                    $this->output->writeln(sprintf('已更新助理版本 [%s] 的系统交互指令', $version['id']));
+                    $this->output->writeln(sprintf('Updated assistant version [%s] system interaction prompts', $version['id']));
                 }
             }
 
             $offset += $batchSize;
-            $this->output->writeln(sprintf('已处理 %d 个助理版本...', $versionTotal));
+            $this->output->writeln(sprintf('Processed %d assistant versions so far...', $versionTotal));
         }
 
         $this->output->writeln(sprintf(
-            '处理完成！共处理 %d 个助理版本，更新了 %d 个助理版本的系统交互指令',
+            'Done. Processed %d assistant versions and updated %d assistant version system prompts',
             $versionTotal,
             $versionUpdated
         ));

@@ -22,7 +22,7 @@ wheels/
 *.egg
 MANIFEST
 
-# 虚拟环境
+# Virtual environments
 .env
 .venv
 env/
@@ -32,7 +32,7 @@ ENV/
 env.bak/
 venv.bak/
 
-# 单元测试 / 覆盖率报告
+# Unit tests / coverage reports
 htmlcov/
 .tox/
 .nox/
@@ -45,7 +45,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
-# 日志
+# Logs
 *.log
 local_settings.py
 db.sqlite3
@@ -53,7 +53,7 @@ db.sqlite3-journal
 .chat_history/
 .workspace/
 
-# IDE 相关
+# IDE related
 .idea/
 .vscode/
 *.swp
@@ -61,7 +61,7 @@ db.sqlite3-journal
 *~
 .DS_Store
 
-# 项目特定
+# Project specific
 *.db
 *.sqlite
 .env.local
@@ -78,7 +78,7 @@ db.sqlite3-journal
 .project_schemas/
 .dev/
 
-# 临时文件
+# Temporary files
 tmp/
 temp/
 output/
@@ -94,7 +94,7 @@ qdrant_data/
 *.backup
 
 
-# 迁移开源版本期间过滤文件
+# Filter files during open source version migration
 scripts/splitsh-lite
 tests
 docs

@@ -38,7 +38,7 @@ class HTMLReader
             $content = $response->getBody()->getContents();
             $crawler = new Crawler($content);
 
-            // 移除无关的标签
+            // Remove irrelevant tags
             $crawler->filter('style, script, iframe, noscript, head, meta, link, svg, path')->each(function (Crawler $node) {
                 if ($node->getNode(0)?->parentNode) {
                     $node->getNode(0)->parentNode->removeChild($node->getNode(0));

@@ -175,11 +175,11 @@ class RuleExecutionSet implements RuleExecutionSetInterface
         if (RuleType::isExpression($properties->getRuleType())) {
             $this->buildRuleToExpression();
         }
-        // 占位符解析
+        // Placeholder parsing
         if ($this->resolvePlaceholders) {
             $this->buildPlaceholders();
         }
-        // 若不存在占位符则可以预先进行规则解析
+        // If there are no placeholders, the rules can be parsed in advance
         if (empty($this->placeholders)) {
             $this->parse();
         }
@@ -208,7 +208,7 @@ class RuleExecutionSet implements RuleExecutionSetInterface
             //            $this->phpSandBox->defineFunc($func->getName(), $func->getFunction());
         }
 
-        // 定义常量 目前仅支持白名单
+        // Define constants: Currently only supports whitelist
         foreach ($properties->getExecutableConstants() as $const) {
             if ($const->isSystemConstant()) {
                 $this->sandboxOptions->accessControl()->whitelistConst($const->getConstantName());

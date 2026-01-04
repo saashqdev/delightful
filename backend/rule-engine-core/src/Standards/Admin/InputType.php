@@ -10,8 +10,8 @@ namespace Dtyq\RuleEngineCore\Standards\Admin;
 use Dtyq\RuleEngineCore\Standards\Exception\ConfigurationException;
 
 /**
- * @TODO:未完成所有枚举定义
- * String为额外定义的类型
+ * @TODO: Not all enum definitions are complete yet
+ * String is an additional custom type
  */
 class InputType
 {

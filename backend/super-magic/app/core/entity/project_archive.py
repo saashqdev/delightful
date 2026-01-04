@@ -4,9 +4,9 @@ from pydantic import BaseModel, Field
 
 
 class ProjectArchiveInfo(BaseModel):
-    """项目压缩包信息模型"""
-    file_key: str  # 文件存储键
-    file_size: int  # 文件大小（字节）
-    file_md5: str  # 文件的MD5值
-    upload_timestamp: int = Field(default_factory=lambda: int(time.time()))  # 上传时间戳 
+    """Project archive information model"""
+    file_key: str  # File storage key
+    file_size: int  # File size (bytes)
+    file_md5: str  # File MD5 hash
+    upload_timestamp: int = Field(default_factory=lambda: int(time.time()))  # Upload timestamp 
     version: int = 0

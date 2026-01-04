@@ -24,7 +24,7 @@ class FetchModeListener implements ListenerInterface
 
     public function process(object $event): void
     {
-        // 询出来的结果内采用 数组(Array) 而不是 stdClass 对象结构
+        // Fetch results as arrays instead of stdClass objects
         if ($event instanceof StatementPrepared) {
             $event->statement->setFetchMode(PDO::FETCH_ASSOC);
         }

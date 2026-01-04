@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "agentlang"
 version = "0.1.4"
-description = "Language-first AI Agent Framework - 以自然语言为核心构建 AI 智能体的框架"
+description = "Language-first AI Agent Framework - An AI agent framework built around natural language"
 readme = "README.md"
 authors = [
     {name = "SuperMagic Team", email = "dev@letsmagic.ai"}

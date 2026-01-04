@@ -48,7 +48,7 @@ class AdapterCommand extends Command
                 }
             }
 
-            $this->io->block('执行命令: ' . $adapterConfig['testCommand'], null, 'fg=green');
+            $this->io->block('Execute command: ' . $adapterConfig['testCommand'], null, 'fg=green');
             passthru($adapterConfig['testCommand']);
             break;
         }
@@ -91,8 +91,8 @@ class AdapterCommand extends Command
     private function reinstall(string $package, array $steps): bool
     {
         $question = new ChoiceQuestion(
-            '检测到你已开启Swoole/Swow扩展,但未安装对应的' . $package . '组件,是否重新为你生成composr类库?',
-            ['N' => '否', 'Y' => '是'],
+            'Detected that you have enabled Swoole/Swow extension, but the corresponding ' . $package . ' component is not installed. Would you like to regenerate the composer library?',
+            ['N' => 'No', 'Y' => 'Yes'],
             'N'
         );
         $answer = $this->io->askQuestion($question);
@@ -114,9 +114,9 @@ class AdapterCommand extends Command
         try {
             $removeFiles = [PHPUNIT_ADAPTOR_BASE_PATH . '/composer.lock', PHPUNIT_ADAPTOR_BASE_PATH . '/vendor'];
             $this->filesystem->remove($removeFiles);
-            $this->io->block('移除文件及目录: ' . implode(',', $removeFiles), null, 'fg=green');
+            $this->io->block('Remove files and directories: ' . implode(',', $removeFiles), null, 'fg=green');
         } catch (IOException $e) {
-            $this->io->error('移除文件及目录失败: ' . implode(',', $removeFiles));
+            $this->io->error('Failed to remove files and directories: ' . implode(',', $removeFiles));
             throw $e;
         }
 
@@ -127,14 +127,14 @@ class AdapterCommand extends Command
     {
         $this->filesystem->copy(PHPUNIT_ADAPTOR_BASE_PATH . '/composer.json', PHPUNIT_ADAPTOR_BASE_PATH . '/composer.json.bak');
         $command = 'cd ' . PHPUNIT_ADAPTOR_BASE_PATH . ' && composer require ' . $package;
-        $this->io->block('执行命令: ' . $command, null, 'fg=green');
+        $this->io->block('Execute command: ' . $command, null, 'fg=green');
         passthru($command, $resultCode);
 
         $this->filesystem->remove(PHPUNIT_ADAPTOR_BASE_PATH . '/composer.json');
         $this->filesystem->rename(PHPUNIT_ADAPTOR_BASE_PATH . '/composer.json.bak', PHPUNIT_ADAPTOR_BASE_PATH . '/composer.json');
 
         if ($resultCode !== 0) {
-            $this->io->error('命令执行失败');
+            $this->io->error('Command execution failed');
             return false;
         }
 
@@ -144,10 +144,10 @@ class AdapterCommand extends Command
     private function composerInstall(): bool
     {
         $command = 'cd ' . PHPUNIT_ADAPTOR_BASE_PATH . ' && composer install';
-        $this->io->block('执行命令: ' . $command, null, 'fg=green');
+        $this->io->block('Execute command: ' . $command, null, 'fg=green');
         passthru($command, $resultCode);
         if ($resultCode !== 0) {
-            $this->io->error('命令执行失败');
+            $this->io->error('Command execution failed');
             return false;
         }
 

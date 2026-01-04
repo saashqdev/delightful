@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the software license
  */
 return [
-    // 这里暂时指定 magic-mind-search 的 AI Code。 它使用硬编码的方式给出搜索结果，而不是走 flow 的逻辑。
+    // Temporarily pin the magic-mind-search AI code; it returns hardcoded search results instead of running through flow logic.
     'deep_search' => [
         'ai_code' => env('AGGREGATE_SEARCH_AI_CODE', 'MAGIC-FLOW-672c6375371f51-29426462'),
     ],

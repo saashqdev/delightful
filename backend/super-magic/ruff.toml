@@ -1,34 +1,34 @@
-# 行长度设置
+# Line length setting
 line-length = 120
 
-# 目标 Python 版本
+# Target Python version
 target-version = "py39"
 
 [lint]
-# 选择要启用的规则
+# Select rules to enable
 select = [
-    "E",   # pycodestyle 错误
+    "E",   # pycodestyle errors
     "F",   # pyflakes
     "I",   # isort
     "N",   # pep8-naming
-    "W",   # pycodestyle 警告
-    "RUF", # ruff 特定规则
+    "W",   # pycodestyle warnings
+    "RUF", # ruff-specific rules
 ]
 
-# 忽略一些规则
+# Ignore certain rules
 ignore = [
-    "RUF001",  # 允许使用中文逗号
-    "RUF002",  # 允许使用中文括号
-    "RUF003",  # 允许在注释中使用中文标点
-    "RUF012",  # 允许不使用 ClassVar 注解
-    "RUF013",  # 允许隐式 Optional
-    "RUF005",  # 允许使用 + 进行列表连接
-    "RUF006",  # 允许不存储 asyncio.create_task 的返回值
-    "E501",    # 允许长行
-    "F841",    # 允许未使用的变量
-    "N818",    # 允许异常类名不以 Error 结尾
-    "N805",    # 允许方法的第一个参数不命名为 self
-    "F811",    # 允许重复定义
+    "RUF001",  # Allow Chinese commas
+    "RUF002",  # Allow Chinese parentheses
+    "RUF003",  # Allow Chinese punctuation in comments
+    "RUF012",  # Allow missing ClassVar annotations
+    "RUF013",  # Allow implicit Optional
+    "RUF005",  # Allow list concatenation with +
+    "RUF006",  # Allow not storing asyncio.create_task return values
+    "E501",    # Allow long lines
+    "F841",    # Allow unused variables
+    "N818",    # Allow exception class names not ending in Error
+    "N805",    # Allow methods without self as first param
+    "F811",    # Allow duplicate definitions
     "D100",    # Missing docstring in public module
     "D101",    # Missing docstring in public class
     "D102",    # Missing docstring in public method
@@ -68,18 +68,18 @@ ignore = [
     "D415",    # First line should end with a period, question mark, or exclamation point
     "D416",    # Section name should end with a colon
     "D417",    # Missing argument descriptions in the docstring
-    "W291",    # 允许行尾空格
+    "W291",    # Allow trailing whitespace
 ]
 
 [format]
-# 引号风格
+# Quote style
 quote-style = "double"
 
-# 在行尾添加逗号
+# Trailing commas
 skip-magic-trailing-comma = false
 
-# 缩进风格
+# Indentation style
 indent-style = "space"
 
-# 行尾风格
+# Line-ending style
 line-ending = "auto"

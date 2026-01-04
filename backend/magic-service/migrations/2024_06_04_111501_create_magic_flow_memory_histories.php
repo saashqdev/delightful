@@ -17,13 +17,13 @@ class CreateMagicFlowMemoryHistories extends Migration
     {
         Schema::create('magic_flow_memory_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('conversation_id')->default('')->comment('对话ID');
-            $table->string('request_id')->default('')->comment('request_id');
-            $table->tinyInteger('type')->default(0)->comment('类型 1 LLM');
-            $table->string('role', 80)->default('')->comment('角色');
-            $table->json('content')->nullable()->comment('内容');
-            $table->string('created_uid')->default('')->comment('创建者用户ID');
-            $table->timestamp('created_at')->nullable()->comment('创建时间');
+            $table->string('conversation_id')->default('')->comment('Conversation ID');
+            $table->string('request_id')->default('')->comment('Request ID');
+            $table->tinyInteger('type')->default(0)->comment('Type (1 = LLM)');
+            $table->string('role', 80)->default('')->comment('Role');
+            $table->json('content')->nullable()->comment('Content');
+            $table->string('created_uid')->default('')->comment('Creator user ID');
+            $table->timestamp('created_at')->nullable()->comment('Created at');
 
             $table->index('conversation_id');
         });

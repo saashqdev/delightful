@@ -10,7 +10,7 @@ namespace App\ErrorCode;
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
 /**
- * 错误码范围:33000-33999.
+ * Error code range: 33000-33999.
  */
 enum AgentErrorCode: int
 {

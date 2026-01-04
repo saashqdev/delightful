@@ -1,7 +1,7 @@
 """
-Magic Browser 模块
+Magic Browser module
 
-提供浏览器自动化功能，用于网页内容抓取和交互。
+Provides browser automation functionality for web content scraping and interaction.
 """
 
 from magic_use.magic_browser import MagicBrowser

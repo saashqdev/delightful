@@ -1,7 +1,7 @@
 """
-环境配置类
+Environment Configuration Class
 
-管理与环境相关的参数设置
+Manages environment-related parameter settings
 """
 import os
 from typing import Any, Optional, Type, TypeVar, Union, cast
@@ -9,32 +9,32 @@ from typing import Any, Optional, Type, TypeVar, Union, cast
 T = TypeVar('T')
 
 class Environment:
-    """环境配置类"""
+    """Environment Configuration Class"""
 
-    DEFAULT_AGENT_IDLE_TIMEOUT = 3600  # 默认超时时间：1小时
-    DEFAULT_IDLE_MONITOR_INTERVAL = 60  # 默认监控间隔：60秒
+    DEFAULT_AGENT_IDLE_TIMEOUT = 3600  # Default timeout: 1 hour
+    DEFAULT_IDLE_MONITOR_INTERVAL = 60  # Default monitoring interval: 60 seconds
 
     @staticmethod
     def get_env(key: str, default: Optional[Any] = None, value_type: Optional[Type[T]] = None) -> Union[Optional[str], T]:
-        """获取环境变量
+        """Get environment variable
         
         Args:
-            key: 环境变量名
-            default: 默认值
-            value_type: 返回值类型，如 int, bool 等
+            key: Environment variable name
+            default: Default value
+            value_type: Return value type, such as int, bool, etc.
             
         Returns:
-            环境变量值，根据 value_type 转换类型
+            Environment variable value, converted based on value_type
         """
         value = os.environ.get(key)
         if value is None:
             return default
 
-        # 如果未指定类型，则返回字符串
+        # If type is not specified, return string
         if value_type is None:
             return value
 
-        # 根据指定类型转换
+        # Convert based on specified type
         if value_type is bool:
             return cast(T, value.lower() in ('true', '1', 'yes', 'y', 'on'))
         elif value_type is int:
@@ -43,7 +43,7 @@ class Environment:
             except ValueError:
                 return default
         else:
-            # 尝试使用类型构造函数进行转换
+            # Try to use type constructor for conversion
             try:
                 return cast(T, value_type(value))
             except (ValueError, TypeError):
@@ -51,43 +51,43 @@ class Environment:
 
     @staticmethod
     def get_int_env(key: str, default: int) -> int:
-        """获取整数类型的环境变量
+        """Get integer type environment variable
         
         Args:
-            key: 环境变量名
-            default: 默认值
+            key: Environment variable name
+            default: Default value
             
         Returns:
-            环境变量值
+            Environment variable value
         """
         return Environment.get_env(key, default, int)
 
     @staticmethod
     def get_bool_env(key: str, default: bool) -> bool:
-        """获取布尔类型的环境变量
+        """Get boolean type environment variable
         
         Args:
-            key: 环境变量名
-            default: 默认值
+            key: Environment variable name
+            default: Default value
             
         Returns:
-            环境变量值
+            Environment variable value
         """
         return Environment.get_env(key, default, bool)
 
     @staticmethod
     def get_agent_idle_timeout() -> int:
-        """获取代理空闲超时时间（秒）
+        """Get agent idle timeout time (seconds)
         
         Returns:
-            int: 代理空闲超时时间
+            int: Agent idle timeout time
         """
-        # 优先从环境变量获取，如果不存在则从配置文件获取，最后使用默认值
+        # First get from environment variable, if not found get from config file, finally use default value
         env_value = Environment.get_int_env("AGENT_IDLE_TIMEOUT", -1)
         if env_value > 0:
             return env_value
 
-        # 从配置文件获取
+        # Get from config file
         try:
             from agentlang.config.config import config
             config_value = config.get("sandbox.agent_idle_timeout", -1)
@@ -100,17 +100,17 @@ class Environment:
 
     @staticmethod
     def get_idle_monitor_interval() -> int:
-        """获取空闲监控间隔时间（秒）
+        """Get idle monitoring interval time (seconds)
         
         Returns:
-            int: 空闲监控间隔时间
+            int: Idle monitoring interval time
         """
-        # 优先从环境变量获取，如果不存在则从配置文件获取，最后使用默认值
+        # First get from environment variable, if not found get from config file, finally use default value
         env_value = Environment.get_int_env("IDLE_MONITOR_INTERVAL", -1)
         if env_value > 0:
             return env_value
 
-        # 从配置文件获取
+        # Get from config file
         try:
             from agentlang.config.config import config
             config_value = config.get("sandbox.idle_monitor_interval", -1)
@@ -123,17 +123,17 @@ class Environment:
 
     @staticmethod
     def is_dev() -> bool:
-        """是否为开发环境
+        """Check if it is a development environment
         
         Returns:
-            bool: 是否为开发环境
+            bool: Whether it is a development environment
         """
-        # 优先从环境变量获取，如果不存在则从配置文件获取
+        # First get from environment variable, if not found get from config file
         env_value = Environment.get_env("APP_ENV", "").lower()
         if env_value in ("dev", "development"):
             return True
 
-        # 从配置文件获取
+        # Get from config file
         try:
             from agentlang.config.config import config
             config_value = config.get("sandbox.app_env", "prod").lower()

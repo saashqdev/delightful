@@ -1,5 +1,5 @@
 """
-文件工具模块，提供异步文件操作的功能
+File utility module providing async file operations
 """
 
 import asyncio
@@ -18,28 +18,28 @@ from agentlang.utils.token_estimator import num_tokens_from_string
 
 logger = get_logger(__name__)
 
-# 缓存 trash 命令检查结果
+# Cache trash command availability check
 _has_trash_command = shutil.which("trash") is not None
 if _has_trash_command:
-    logger.debug("检测到系统已安装 trash 命令，将优先使用 trash 删除")
+    logger.debug("Detected installed trash command; will prefer trash for deletion")
 else:
-    logger.debug("未检测到 trash 命令，将使用标准库删除")
+    logger.debug("No trash command detected; will use standard library deletion")
 
 async def safe_delete(path: Path):
     """
-    安全地异步删除文件或目录。
+    Safely delete file or directory asynchronously.
 
-    优先尝试使用 trash 命令（如果可用）。
-    如果 trash 不可用或失败，则使用 aiofiles 进行删除。
-    对于递归删除目录，回退到 asyncio.to_thread(shutil.rmtree)。
+    Tries using the trash command first (if available).
+    If trash is unavailable or fails, uses aiofiles for deletion.
+    For recursive directory removal, falls back to asyncio.to_thread(shutil.rmtree).
 
     Args:
-        path: 要删除的文件或目录的 Path 对象。
+        path: Path object to the file or directory to delete.
 
     Raises:
-        OSError: 如果删除过程中发生 OS 相关的错误。
-        RuntimeError: 如果 trash 命令执行失败但未成功回退。
-        Exception: 其他未预料的错误。
+        OSError: If an OS-related error occurs during deletion.
+        RuntimeError: If trash command fails and fallback is unsuccessful.
+        Exception: Other unexpected errors.
     """
     # 使用 aiofiles.os.path.exists 检查路径是否存在
     if not await aiofiles.os.path.exists(path):

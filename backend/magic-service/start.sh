@@ -2,36 +2,36 @@
 
 set -eo pipefail
 
-# 获取脚本所在目录名称
+# Get the directory where the script lives
 base_dirname=$(
   cd "$(dirname "$0")"
   pwd
 )
-# 执行脚本文件位置
+# Path to the Hyperf entrypoint
 bin="${base_dirname}/bin/hyperf.php"
 # ........................
-# 执行迁移 (使用分布式锁保护，防止并发执行)
+# Run migrations (guarded by a distributed lock to avoid concurrent runs)
 php "${bin}" shell:locker migrate
 
-# 检查是否已经初始化过
+# Run one-time initialization if needed
 if [ ! -f "${base_dirname}/.initialized" ]; then
     echo "Initializing magic-service for the first time..."
     
-    # 执行 composer update
+  # Run composer update
     cd ${base_dirname}
     
-    # 执行数据库种子
+  # Seed the database
     php "${bin}" db:seed
     
-    # 创建标记文件，表示已经初始化过
+  # Create a marker file to indicate initialization is done
     touch ${base_dirname}/.initialized
     echo "Initialization completed!"
 else
     echo "magic-service has already been initialized, skipping..."
 fi 
 
-# 执行seeders
+# Run additional seeders
 #php "${bin}" db:seed
 
-# 开启服务
+# Start the service
 USE_ZEND_ALLOC=0 php -dopcache.enable_cli=1 -dopcache.jit_buffer_size=128M -dopcache.jit=1255 -dopcache.validate_timestamps=0 "${bin}" start

@@ -16,7 +16,7 @@ class Config extends Dot
     {
         parent::__construct($items);
 
-        // 检查一些必填项
+        // Check some required fields
         if (empty($this->getSdkName())) {
             throw new InvalidArgumentException('Missing Config: sdk_name');
         }

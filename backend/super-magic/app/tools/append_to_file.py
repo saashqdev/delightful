@@ -19,118 +19,118 @@ logger = get_logger(__name__)
 
 
 class AppendToFileParams(BaseToolParams):
-    """追加文件参数"""
+    """Append to file parameters"""
     file_path: str = Field(
         ...,
-        description="要追加内容的文件路径，相对于工作目录或绝对路径，不要包含工作目录，比如希望追加内容到 .workspace/todo.md 文件，只需要传入 todo.md 即可"
+        description="File path to append content to, relative to workspace or absolute path. Do not include workspace directory, e.g., to append to .workspace/todo.md, just pass todo.md"
     )
     content: str = Field(
         ...,
-        description="要追加到文件的内容"
+        description="Content to append to the file"
     )
 
     @classmethod
     def get_custom_error_message(cls, field_name: str, error_type: str) -> Optional[str]:
-        """获取自定义参数错误信息"""
+        """Get custom parameter error message"""
         if field_name == "content":
             error_message = (
-                "缺少必要参数'content'。这可能是因为您提供的内容过长，超出了token限制。\n"
-                "建议：\n"
-                "1. 减少输出内容的量，分批次追加文件内容\n"
-                "2. 将大内容拆分为多次追加操作\n"
-                "3. 确保在调用时明确提供content参数"
+                "Missing required parameter 'content'. This may be because the content provided is too long and exceeds the token limit.\n"
+                "Suggestions:\n"
+                "1. Reduce the output content amount, append file content in batches\n"
+                "2. Split large content into multiple append operations\n"
+                "3. Ensure the content parameter is explicitly provided when calling"
             )
             return error_message
         return None
 
 
 class AppendResult(NamedTuple):
-    """追加结果详情"""
-    content: str  # 追加的内容
-    is_new_file: bool  # 是否是新文件
-    added_lines: int  # 新增行数
-    original_size: int  # 原始文件大小（字节）
-    new_size: int  # 新文件大小（字节）
-    size_change: int  # 文件大小变化（字节）
-    original_lines: int  # 原始文件行数
-    new_lines: int  # 新文件行数
+    """Append result details"""
+    content: str  # Appended content
+    is_new_file: bool  # Whether it's a new file
+    added_lines: int  # Number of added lines
+    original_size: int  # Original file size (bytes)
+    new_size: int  # New file size (bytes)
+    size_change: int  # File size change (bytes)
+    original_lines: int  # Original file line count
+    new_lines: int  # New file line count
 
 
 @tool()
 class AppendToFile(AbstractFileTool[AppendToFileParams], WorkspaceGuardTool[AppendToFileParams]):
     """
-    追加文件工具，可以将内容追加到指定路径的文件中，如果文件不存在会创建文件。
+    Append to file tool, can append content to a file at the specified path. Creates the file if it doesn't exist.
 
-    - 减少单次输出内容的量，建议分批次追加文件内容
-    - 如果文件不存在，将自动创建文件和必要的目录
-    - 如果文件已存在，将在文件末尾追加内容
+    - Reduce the amount of content output at one time, recommend appending file content in batches
+    - If the file doesn't exist, will automatically create the file and necessary directories
+    - If the file already exists, will append content at the end of the file
     """
 
     async def execute(self, tool_context: ToolContext, params: AppendToFileParams) -> ToolResult:
         """
-        执行文件追加操作
+        Perform the file append operation.
 
         Args:
-            tool_context: 工具上下文
-            params: 参数对象，包含文件路径和内容
+            tool_context: Tool context
+            params: Parameter object containing the file path and content
 
         Returns:
-            ToolResult: 包含操作结果
+            ToolResult: Contains the operation result
         """
         try:
-            # 使用父类方法获取安全的文件路径
+            # Use parent helper to resolve a safe file path
             file_path, error = self.get_safe_path(params.file_path)
             if error:
                 return ToolResult(error=error)
 
-            # 检查文件是否存在
+            # Check whether the file exists
             file_exists = file_path.exists()
 
-            # 保存原始文件内容（用于可能的回滚）
+            # Save original content for potential rollback
             original_content = ""
             if file_exists:
                 async with aiofiles.open(file_path, "r", encoding="utf-8") as f:
                     original_content = await f.read()
 
-            # 创建目录（如果需要）
+            # Create directories if needed
             await self._create_directories(file_path)
 
-            # 追加文件内容
+            # Append content to the file
             await self._append_file(file_path, params.content)
 
-            # 在写入成功后读取文件的完整内容
+            # Read the full content after writing
             final_content = ""
             async with aiofiles.open(file_path, "r", encoding="utf-8") as f:
                 final_content = await f.read()
 
-            # 执行语法检查（对最新的完整内容进行检查）
+            # Run syntax check on the latest content
             valid, errors = SyntaxChecker.check_syntax(str(file_path), final_content)
 
-            # 如果语法检查失败，回滚修改
+            # Roll back changes if syntax check fails
             if not valid:
-                # 回滚到原始内容
+                # Restore original content
                 if file_exists:
                     async with aiofiles.open(file_path, "w", encoding="utf-8") as f:
                         await f.write(original_content)
-                    logger.warning(f"检测到语法错误，已回滚文件 {file_path} 的修改")
+                    logger.warning(f"Syntax error detected, rolled back changes to {file_path}")
                 else:
-                    # 如果是新文件，则删除它
+                    # Delete the new file if it was just created
                     os.remove(file_path)
-                    logger.warning(f"检测到语法错误，已删除新创建的文件 {file_path}")
+                    logger.warning(f"Syntax error detected, removed newly created file {file_path}")
 
-                # 构建错误消息
+                # Build error message
                 errors_str = "\n".join(errors)
-                error_message = f"操作已回滚：文件存在语法问题：\n{errors_str}"
+                error_message = f"Operation rolled back: syntax issues found in the file:\n{errors_str}"
 
                 return ToolResult(error=error_message)
 
-            # 触发文件事件（只有在语法检查通过后才触发）
+            # Fire file events only after passing syntax check
             if file_exists:
                 await self._dispatch_file_event(tool_context, str(file_path), EventType.FILE_UPDATED)
             else:
                 await self._dispatch_file_event(tool_context, str(file_path), EventType.FILE_CREATED)
 
-            # 计算文件变化统计信息
+            # Calculate file change statistics
             append_result = self._calculate_append_stats(
                 params.content,
                 original_content,
@@ -138,58 +138,58 @@ class AppendToFile(AbstractFileTool[AppendToFileParams], WorkspaceGuardTool[Appe
                 file_exists
             )
 
-            # 生成格式化的输出
+            # Build formatted output message
             file_name = os.path.basename(file_path)
-            action = "追加内容到" if file_exists else "创建并写入"
+            action = "Appended to" if file_exists else "Created"
 
             output = (
-                f"文件{action.replace('追加内容到', '更新').replace('创建并写入', '创建')}: {file_path} | "
-                f"+{append_result.added_lines}新增行 | "
-                f"大小:{'+' if append_result.size_change > 0 else ''}{append_result.size_change}字节"
-                f"({append_result.original_size}→{append_result.new_size}) | "
-                f"行数:{append_result.original_lines}→{append_result.new_lines}"
+                f"File {action if action == 'Created' else 'updated'}: {file_path} | "
+                f"+{append_result.added_lines} lines | "
+                f"Size:{'+' if append_result.size_change > 0 else ''}{append_result.size_change} bytes"
+                f"({append_result.original_size}\u2192{append_result.new_size}) | "
+                f"Lines:{append_result.original_lines}\u2192{append_result.new_lines}"
             )
 
-            # 返回操作结果
+            # Return the operation result
             return ToolResult(content=output)
 
         except Exception as e:
-            logger.exception(f"追加文件失败: {e!s}")
-            return ToolResult(error=f"追加文件失败: {e!s}")
+            logger.exception(f"Append to file failed: {e!s}")
+            return ToolResult(error=f"Append to file failed: {e!s}")
 
     async def _create_directories(self, file_path: Path) -> None:
-        """创建文件所需的目录结构"""
+        """Create directories required for the file."""
         directory = file_path.parent
 
         if not directory.exists():
             os.makedirs(directory, exist_ok=True)
-            logger.info(f"创建目录: {directory}")
+            logger.info(f"Created directory: {directory}")
 
     async def _append_file(self, file_path: Path, content: str) -> None:
-        """追加文件内容"""
-        # 处理内容末尾可能的空行
+        """Append content to the file."""
+        # Ensure trailing newline
         if not content.endswith("\n"):
             content += "\n"
 
         async with aiofiles.open(file_path, "a", encoding="utf-8") as f:
             await f.write(content)
 
-        logger.info(f"文件追加完成: {file_path}")
+        logger.info(f"Append complete: {file_path}")
 
     def _calculate_append_stats(self, append_content: str, original_content: str, final_content: str, file_exists: bool) -> AppendResult:
         """
-        计算追加操作的统计信息
+        Calculate statistics for the append operation.
 
         Args:
-            append_content: 追加的内容
-            original_content: 原始文件内容
-            final_content: 最终文件内容
-            file_exists: 文件是否原本存在
+            append_content: Content appended
+            original_content: Original file content
+            final_content: Final file content
+            file_exists: Whether the file existed beforehand
 
         Returns:
-            AppendResult: 包含追加统计信息的结果对象
+            AppendResult: Result object containing append statistics
         """
-        # 确保内容以换行符结束
+        # Ensure content ends with newline
         normalized_append = append_content
         if not normalized_append.endswith("\n"):
             normalized_append += "\n"
@@ -217,28 +217,28 @@ class AppendToFile(AbstractFileTool[AppendToFileParams], WorkspaceGuardTool[Appe
 
     async def get_tool_detail(self, tool_context: ToolContext, result: ToolResult, arguments: Dict[str, Any] = None) -> Optional[ToolDetail]:
         """
-        根据工具执行结果获取对应的ToolDetail
+        Build the corresponding ToolDetail from the tool result.
 
         Args:
-            tool_context: 工具上下文
-            result: 工具执行的结果
-            arguments: 工具执行的参数字典
+            tool_context: Tool context
+            result: Tool execution result
+            arguments: Argument dictionary for the execution
 
         Returns:
-            Optional[ToolDetail]: 工具详情对象，可能为None
+            Optional[ToolDetail]: Tool detail object, possibly None
         """
         if not result.ok:
             return None
 
         if not arguments or "file_path" not in arguments or "content" not in arguments:
-            logger.warning("没有提供file_path或content参数")
+            logger.warning("Missing file_path or content arguments")
             return None
 
         file_path = arguments["file_path"]
         content = arguments["content"]
         file_name = os.path.basename(file_path)
 
-        # 使用 AbstractFileTool 的方法获取显示类型
+        # Use AbstractFileTool helper to get display type
         display_type = self.get_display_type_by_extension(file_path)
 
         return ToolDetail(
@@ -251,11 +251,11 @@ class AppendToFile(AbstractFileTool[AppendToFileParams], WorkspaceGuardTool[Appe
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
         """
-        获取工具调用后的友好动作和备注
+        Provide a friendly action and remark after tool execution.
         """
         file_path = arguments["file_path"]
         file_name = os.path.basename(file_path)
         return {
-            "action": "追加内容到文件",
+            "action": "Appended content to file",
             "remark": file_name
         }

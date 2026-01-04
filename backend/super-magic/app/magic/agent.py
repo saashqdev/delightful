@@ -2,7 +2,7 @@ import asyncio
 import json
 import os
 import random
-import re  # 添加 re 模块引入
+import re  # Add re module import
 import string
 import time
 import traceback
@@ -47,116 +47,116 @@ logger = get_logger(__name__)
 
 class Agent(BaseAgent):
 
-    context_prompt = None  # 新增 context_prompt 属性，拆分 prompt 里的动态内容，确保不影响第一条 system prompt 命中缓存
+    context_prompt = None  # New context_prompt attribute, splits dynamic content from prompt to ensure first system prompt hits cache
 
     def _setup_agent_context(self, agent_context: Optional[AgentContext] = None) -> AgentContext:
         """
-        设置和初始化Agent上下文
+        Set up and initialize Agent context
 
         Args:
-            agent_context: 可选的Agent上下文实例，如果为None则创建新实例
+            agent_context: Optional Agent context instance, creates new instance if None
 
         Returns:
-            AgentContext: 设置好的Agent上下文实例
+            AgentContext: Configured Agent context instance
         """
-        # 如果没有传入agent_context，则创建一个新的实例
+        # If no agent_context is passed, create a new instance
         if agent_context is None:
             agent_context = AgentContext()
-            logger.info("未提供agent_context，自动创建新的AgentContext实例")
+            logger.info("No agent_context provided, automatically creating new AgentContext instance")
 
-        # 更新 agent 上下文的基本设置
-        agent_context.agent_name = self.agent_name  # 设置agent_name
+        # Update basic settings in agent context
+        agent_context.agent_name = self.agent_name  # Set agent_name
         agent_context.stream_mode = self.stream_mode
         agent_context.use_dynamic_prompt = False
         agent_context._workspace_dir = PathManager.get_workspace_dir()
 
-        # 确保 context 中有 chat_history_dir
+        # Ensure context has chat_history_dir
         if not hasattr(agent_context, 'chat_history_dir') or not agent_context.chat_history_dir:
             agent_context.chat_history_dir = PathManager.get_chat_history_dir()
-            logger.warning(f"AgentContext 中未设置 chat_history_dir，使用默认值: {PathManager.get_chat_history_dir()}")
+            logger.warning(f"chat_history_dir not set in AgentContext, using default: {PathManager.get_chat_history_dir()}")
 
         return agent_context
 
     def __init__(self, agent_name: str, agent_context: AgentContext = None, agent_id: str = None):
         self.agent_name = agent_name
 
-        # 设置Agent上下文
+        # Set Agent context
         self.agent_context = self._setup_agent_context(agent_context)
         agents_dir = Path(PathManager.get_project_root() / "agents")
         self._agent_loader = AgentLoader(agents_dir=agents_dir)
 
-        # 是否启用多工具调用，默认禁用
+        # Whether to enable multi-tool calls, disabled by default
         self.enable_multi_tool_calls = config.get("agent.enable_multi_tool_calls", False)
-        # 是否启用并行工具调用，默认禁用
+        # Whether to enable parallel tool calls, disabled by default
         self.enable_parallel_tool_calls = config.get("agent.enable_parallel_tool_calls", False)
-        # 并行工具调用超时时间（秒），默认无超时
+        # Parallel tool call timeout (seconds), default is no timeout
         self.parallel_tool_calls_timeout = config.get("agent.parallel_tool_calls_timeout", None)
 
-        logger.info(f"初始化 agent: {self.agent_name}")
+        logger.info(f"Initialize agent: {self.agent_name}")
         self._initialize_agent()
 
-        # 初始化完成后，更新context中的llm
+        # After initialization, update llm in context
         self.agent_context.llm = self.llm_name
 
-        # agent id 处理
+        # Agent ID handling
         if self.has_attribute("main"):
             if agent_id and agent_id != "main":
-                logger.warning("禁止对主 Agent 使用 agent_id 参数")
-                raise ValueError("禁止对主 Agent 使用 agent_id 参数")
+                logger.warning("agent_id parameter is not allowed for main Agent")
+                raise ValueError("agent_id parameter is not allowed for main Agent")
             agent_id = "main"
-            logger.info(f"使用默认 Agent ID: {agent_id}")
+            logger.info(f"Using default Agent ID: {agent_id}")
 
         if agent_id:
-            # 不校验，大模型容易出错
+            # Do not validate; LLMs are prone to mistakes
             self.id = agent_id
-            logger.info(f"使用提供的 Agent ID: {self.id}")
+            logger.info(f"Using provided Agent ID: {self.id}")
         else:
-            # 如果未提供 agent_id，则生成一个新的
+            # If agent_id not provided, generate a new one
             self.id = self._generate_agent_id()
 
-        # 检查 Agent 是否已存在，使用基类的 ACTIVE_AGENTS
+        # Check if Agent already exists using base class ACTIVE_AGENTS
         agent_key = (self.agent_name, self.id)
         if agent_key in self.ACTIVE_AGENTS:
-            error_message = f"Agent (name='{self.agent_name}', id='{self.id}') 已经存在并且正在活动中。"
+            error_message = f"Agent (name='{self.agent_name}', id='{self.id}') already exists and is active."
             logger.error(error_message)
             raise ValueError(error_message)
         self.ACTIVE_AGENTS.add(agent_key)
-        logger.info(f"Agent (name='{self.agent_name}', id='{self.id}') 已添加到活动注册表。")
+        logger.info(f"Agent (name='{self.agent_name}', id='{self.id}') added to active registry.")
 
-        # 初始化 ChatHistory 实例，配置压缩参数
+        # Initialize ChatHistory instance with compression settings
         compression_config = CompressionConfig(
-            enable_compression=True,  # 启用压缩功能
-            preserve_recent_turns=5,  # 保留最近的5条消息
-            llm_for_compression=self.llm_id, # 传入agent模型ID用于压缩，压缩模型的 max_context_tokens 需要大于等于 agent 模型的 max_context_tokens，否则可能会存在压缩失败的风险
-            agent_name=self.agent_name,  # 传入agent名称
-            agent_id=self.id,  # 传入agent ID
-            agent_model_id=self.llm_id  # 传入agent模型ID
+            enable_compression=True,  # Enable compression
+            preserve_recent_turns=5,  # Keep the latest 5 messages
+            llm_for_compression=self.llm_id, # Pass agent model ID for compression; compression model max_context_tokens must be >= agent model max_context_tokens to avoid failures
+            agent_name=self.agent_name,  # Pass agent name
+            agent_id=self.id,  # Pass agent ID
+            agent_model_id=self.llm_id  # Pass agent model ID
         )
         self.chat_history = ChatHistory(
             self.agent_name,
             self.id,
             self.agent_context.chat_history_dir,
-            compression_config=compression_config  # 传递压缩配置
+            compression_config=compression_config  # Pass compression config
         )
 
-        # 将 chat_history 设置到 agent_context 中，确保工具可以访问
+        # Set chat_history on agent_context so tools can access it
         self.agent_context.chat_history = self.chat_history
-        logger.debug("已将 chat_history 设置到 agent_context 中，以便工具访问")
+        logger.debug("chat_history set on agent_context for tool access")
 
     def _initialize_agent(self):
-        """初始化 agent"""
-        # 从 .agent 文件中加载 agent 配置
+        """Initialize agent"""
+        # Load agent config from .agent file
         self.load_agent_config(self.agent_name)
 
-        # 提取 <context> 块内容
+        # Extract <context> block content
         context_match = re.search(r"<context>(.*?)</context>", self.system_prompt, re.DOTALL)
         if context_match:
-            # 提取并暂存 context 内容
+            # Extract and temporarily store context content
             context_content = "Current Context:\n" + context_match.group(1).strip()
-            # 从 system prompt 中移除 context 块，保留一行空行
+            # Remove context block from system prompt, keep a blank line
             self.system_prompt = re.sub(r"\s*<context>.*?</context>\s*", "\n\n", self.system_prompt, count=1, flags=re.DOTALL)
             self.system_prompt = self.system_prompt.strip()
-            logger.debug("已从 system prompt 中提取 <context> 块")
+            logger.debug("Extracted <context> block from system prompt")
         else:
             context_content = None
             logger.debug("system prompt 中未找到 <context> 块")

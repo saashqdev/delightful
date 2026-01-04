@@ -1,5 +1,5 @@
 """
-此模块提供了聊天历史管理相关的功能和类。
+This module provides chat history management related functionality and classes.
 """
 
 from agentlang.chat_history.chat_history_models import (

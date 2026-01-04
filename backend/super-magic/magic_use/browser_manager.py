@@ -1,8 +1,8 @@
 """
-浏览器管理模块
+Browser Management Module
 
-管理全局唯一的 Playwright 浏览器实例和上下文，
-提供浏览器初始化、上下文创建和生命周期管理功能。
+Manages the global unique Playwright browser instance and context,
+provides browser initialization, context creation and lifecycle management functionality.
 """
 
 import asyncio
@@ -14,67 +14,67 @@ from playwright.async_api import Browser, BrowserContext, async_playwright
 
 from magic_use.magic_browser_config import MagicBrowserConfig
 
-# 设置日志
+# Set up logging
 logger = logging.getLogger(__name__)
 
 
 class BrowserManager:
-    """浏览器管理器，负责全局浏览器实例和上下文的生命周期管理"""
+    """Browser manager, responsible for global browser instance and context lifecycle management"""
 
     _instance = None
     _initialized = False
 
     def __new__(cls):
-        """单例模式实现"""
+        """Singleton pattern implementation"""
         if cls._instance is None:
             cls._instance = super(BrowserManager, cls).__new__(cls)
         return cls._instance
 
     def __init__(self):
-        """初始化浏览器管理器"""
-        # 如果已经初始化过，则跳过
+        """Initialize browser manager"""
+        # Skip if already initialized
         if BrowserManager._initialized:
             return
 
         self._playwright = None
         self._browser = None
         self._initialized = False
-        self._contexts: Dict[str, BrowserContext] = {}  # 上下文ID到对象的映射
-        self._context_counter = 0  # 上下文ID计数器
-        self._lock = asyncio.Lock()  # 用于保护并发初始化
-        self._storage_save_tasks = {}  # 存储状态定期保存任务
-        self._client_refs = 0  # 客户端引用计数
+        self._contexts: Dict[str, BrowserContext] = {}  # Context ID to object mapping
+        self._context_counter = 0  # Context ID counter
+        self._lock = asyncio.Lock()  # Lock for protecting concurrent initialization
+        self._storage_save_tasks = {}  # Storage state periodic save tasks
+        self._client_refs = 0  # Client reference count
 
         BrowserManager._initialized = True
 
     async def register_client(self) -> None:
-        """注册浏览器客户端，增加引用计数"""
+        """Register browser client, increment reference count"""
         async with self._lock:
             self._client_refs += 1
-            logger.debug(f"注册浏览器客户端，当前引用数: {self._client_refs}")
+            logger.debug(f"Browser client registered, current reference count: {self._client_refs}")
 
     async def unregister_client(self) -> None:
-        """注销浏览器客户端，减少引用计数
+        """Unregister browser client, decrement reference count
 
-        当引用计数归零时，自动关闭浏览器实例
+        When reference count reaches zero, automatically close the browser instance
         """
         async with self._lock:
             if self._client_refs > 0:
                 self._client_refs -= 1
 
-            logger.debug(f"注销浏览器客户端，当前引用数: {self._client_refs}")
+            logger.debug(f"Browser client unregistered, current reference count: {self._client_refs}")
 
-            # 如果没有活跃客户端，则自动关闭浏览器
+            # Auto close browser if no active clients
             if self._client_refs == 0 and self._initialized:
                 await self.close()
 
     async def initialize(self, config: MagicBrowserConfig = None) -> None:
-        """初始化浏览器实例
+        """Initialize browser instance
 
         Args:
-            config: 浏览器配置，如果为None则使用默认爬虫配置
+            config: Browser configuration, if None use default scraping configuration
         """
-        # 使用锁防止并发初始化
+        # Use lock to prevent concurrent initialization
         async with self._lock:
             if self._initialized:
                 return
@@ -82,10 +82,10 @@ class BrowserManager:
             self.config = config or MagicBrowserConfig.create_for_scraping()
 
             try:
-                # 启动 Playwright
+                # Start Playwright
                 self._playwright = await async_playwright().start()
 
-                # 获取浏览器类型
+                # Get browser type
                 browser_type_mapping = {
                     "chromium": self._playwright.chromium,
                     "firefox": self._playwright.firefox,
@@ -94,61 +94,61 @@ class BrowserManager:
 
                 browser_type = browser_type_mapping.get(self.config.browser_type.lower())
                 if not browser_type:
-                    logger.warning(f"未知的浏览器类型: {self.config.browser_type}，使用 chromium")
+                    logger.warning(f"Unknown browser type: {self.config.browser_type}, using chromium")
                     browser_type = self._playwright.chromium
 
-                # 移除user_data_dir相关配置，避免冲突
+                # Remove user_data_dir related config to avoid conflicts
                 browser_args = self.config.browser_args.copy()
                 user_data_dir_args = [arg for arg in browser_args if '--user-data-dir' in arg]
                 for arg in user_data_dir_args:
                     browser_args.remove(arg)
-                    logger.warning(f"移除user_data_dir参数: {arg}")
+                    logger.warning(f"Removed user_data_dir parameter: {arg}")
 
-                # 启动浏览器，并使用配置生成的启动选项
+                # Launch browser using generated launch options from config
                 launch_options = self.config.to_launch_options()
                 launch_options["args"] = browser_args
                 self._browser = await browser_type.launch(**launch_options)
 
-                logger.info(f"已启动浏览器: {self.config.browser_type}")
+                logger.info(f"Browser started: {self.config.browser_type}")
                 self._initialized = True
             except Exception as e:
-                logger.error(f"启动浏览器失败: {e}")
+                logger.error(f"Failed to start browser: {e}")
                 if self._playwright:
                     await self._playwright.stop()
                     self._playwright = None
                 raise
 
     async def get_context(self, config: Optional[MagicBrowserConfig] = None) -> tuple[str, BrowserContext]:
-        """获取或创建浏览器上下文
+        """Get or create browser context
 
-        如果浏览器尚未初始化，则先初始化浏览器
+        If browser is not initialized yet, initialize it first
 
         Args:
-            config: 浏览器配置，如果为None则使用管理器的默认配置
+            config: Browser configuration, if None use manager's default configuration
 
         Returns:
-            tuple: (上下文ID, 上下文对象)
+            tuple: (context ID, context object)
         """
         if not self._initialized:
             await self.initialize(config)
 
-        # 创建新的上下文
+        # Create a new context
         context_id = self._generate_context_id()
         context_config = config or self.config
         context_options = await context_config.to_context_options()
 
-        # 创建上下文
+        # Create context
         context = await self._browser.new_context(**context_options)
 
-        # 注入反指纹脚本
+        # Inject anti-fingerprinting script
         try:
-            # 获取语言设置，从 context_config 中提取
+            # Pull language setting from context_config
             language_setting = context_config.language or "zh-CN"
-            # 提取主要语言，例如从 "zh-CN,zh;q=0.9,en;q=0.8" 中提取 "zh-CN"
+            # Extract primary language, e.g., "zh-CN" from "zh-CN,zh;q=0.9,en;q=0.8"
             primary_language = language_setting.split(',')[0]
-            # 构造语言数组，将主要语言放在首位
+            # Build language array with primary language first
             languages_array = f"['{primary_language}'"
-            # 如果有其它语言偏好，也添加进来（按优先级排序）
+            # Append other preferred languages in priority order
             secondary_languages = []
             for lang_pref in language_setting.split(',')[1:]:
                 if ';' in lang_pref:
@@ -163,25 +163,25 @@ class BrowserManager:
             languages_array += "]"
 
             anti_fingerprint_script = f"""
-            // Webdriver属性隐藏
+            // Hide webdriver property
             Object.defineProperty(navigator, 'webdriver', {{
                 get: () => undefined
             }});
 
-            // 根据配置统一语言设置
+            // Unify language settings per configuration
             Object.defineProperty(navigator, 'languages', {{
                 get: () => {languages_array}
             }});
 
-            // 模拟插件
+            // Simulate plugins
             Object.defineProperty(navigator, 'plugins', {{
                 get: () => [1, 2, 3, 4, 5]
             }});
 
-            // Chrome运行时环境
+            // Chrome runtime environment
             window.chrome = {{ runtime: {{}} }};
 
-            // 权限查询
+            // Permissions query
             const originalQuery = window.navigator.permissions.query;
             window.navigator.permissions.query = (parameters) => (
                 parameters.name === 'notifications' ?
@@ -189,7 +189,7 @@ class BrowserManager:
                     originalQuery(parameters)
             );
 
-            // Shadow DOM处理
+            // Shadow DOM handling
             (function () {{
                 const originalAttachShadow = Element.prototype.attachShadow;
                 Element.prototype.attachShadow = function attachShadow(options) {{
@@ -198,147 +198,147 @@ class BrowserManager:
             }})();
             """
             await context.add_init_script(anti_fingerprint_script)
-            logger.debug(f"已为上下文 {context_id} 注入反指纹JS脚本，语言设置: {languages_array}")
+            logger.debug(f"Injected anti-fingerprint JS for context {context_id}, language settings: {languages_array}")
         except Exception as e:
-            logger.error(f"注入反指纹JS脚本失败: {e}")
+            logger.error(f"Failed to inject anti-fingerprint JS: {e}")
 
-        # 注册上下文
+        # Register context
         self._contexts[context_id] = context
 
-        # 设置定期保存存储状态的任务
+        # Schedule periodic storage state saving
         if context_config.storage_state_file:
             save_task = asyncio.create_task(self._periodic_save_storage_state(context_id))
             self._storage_save_tasks[context_id] = save_task
 
-        logger.info(f"已创建浏览器上下文: {context_id}")
+        logger.info(f"Created browser context: {context_id}")
         return context_id, context
 
     def _generate_context_id(self) -> str:
-        """生成唯一的上下文ID"""
+        """Generate unique context ID"""
         self._context_counter += 1
         return f"ctx_{self._context_counter}"
 
     async def get_context_by_id(self, context_id: str) -> Optional[BrowserContext]:
-        """根据ID获取浏览器上下文
+        """Get browser context by ID
 
         Args:
-            context_id: 上下文ID
+            context_id: Context ID
 
         Returns:
-            Optional[BrowserContext]: 上下文对象，如果不存在则返回None
+            Optional[BrowserContext]: Context object, None if not found
         """
         return self._contexts.get(context_id)
 
     async def _save_context_storage_state(self, context_id: str) -> None:
-        """保存上下文存储状态
+        """Save context storage state
 
         Args:
-            context_id: 上下文ID
+            context_id: Context ID
         """
         context = self._contexts.get(context_id)
         if not context or not self.config.storage_state_file:
             if not context:
-                logger.warning(f"无法保存存储状态：上下文 {context_id} 不存在")
+                logger.warning(f"Failed to save storage state: context {context_id} does not exist")
             elif not self.config.storage_state_file:
-                logger.warning(f"无法保存存储状态：未配置存储状态文件路径，上下文 {context_id}")
+                logger.warning(f"Failed to save storage state: storage state file path not configured, context {context_id}")
             return
 
         try:
             await self.config.save_storage_state(context)
         except Exception as e:
-            logger.error(f"保存上下文存储状态失败: {context_id}, {e}")
+            logger.error(f"Failed to save context storage state: {context_id}, {e}")
 
     async def _periodic_save_storage_state(self, context_id: str) -> None:
-        """定期保存上下文存储状态的任务
+        """Periodically save context storage state task
 
         Args:
-            context_id: 上下文ID
+            context_id: Context ID
         """
         try:
             while context_id in self._contexts:
-                # 每15分钟保存一次存储状态
+                # Save storage state every 15 minutes
                 await asyncio.sleep(15 * 60)
                 await self._save_context_storage_state(context_id)
         except asyncio.CancelledError:
-            # 任务被取消时不再尝试保存状态，由 close_context 统一处理
+            # When task is cancelled, no need to save state again, handled by close_context
             # await self._save_context_storage_state(context_id)
             pass
         except Exception as e:
-            logger.error(f"定期保存存储状态任务失败: {context_id}, {e}")
+            logger.error(f"Periodic storage state save task failed: {context_id}, {e}")
 
     async def close_context(self, context_id: str) -> None:
-        """关闭并移除上下文
+        """Close and remove a context
 
         Args:
-            context_id: 上下文ID
+            context_id: Context ID
         """
-        # 先获取上下文对象，而不是直接 pop
+        # Retrieve context first instead of popping immediately
         context = self._contexts.get(context_id)
 
         if context:
-            # 取消定期保存任务
+            # Cancel periodic save task
             save_task = self._storage_save_tasks.pop(context_id, None)
             if save_task:
                 save_task.cancel()
                 try:
-                    # 等待任务结束，忽略 CancelledError
+                    # Await completion and ignore CancelledError
                     await save_task
                 except asyncio.CancelledError:
-                    logger.debug(f"上下文 {context_id} 的保存任务已取消。")
+                    logger.debug(f"Save task for context {context_id} was cancelled.")
                 except Exception as e:
-                    logger.error(f"等待上下文 {context_id} 的保存任务结束时出错: {e}")
+                    logger.error(f"Error while waiting for save task of context {context_id}: {e}")
 
-            # 在移除上下文之前，保存最终状态
+            # Save final storage state before removal
             if self.config and self.config.storage_state_file:
                 try:
-                    logger.debug(f"尝试保存上下文 {context_id} 的最终存储状态...")
-                    # 直接使用 context 对象进行保存
+                    logger.debug(f"Attempting to save final storage state for context {context_id}...")
+                    # Save using the context object directly
                     await self.config.save_storage_state(context)
-                    logger.info(f"已成功保存上下文 {context_id} 的最终存储状态。")
+                    logger.info(f"Successfully saved final storage state for context {context_id}.")
                 except Exception as e:
-                    logger.error(f"保存上下文 {context_id} 的最终存储状态失败: {e}")
+                    logger.error(f"Failed to save final storage state for context {context_id}: {e}")
             else:
-                logger.debug(f"未配置存储状态文件路径或无配置，跳过上下文 {context_id} 的最终状态保存。")
+                logger.debug(f"No storage state path configured; skipping final state save for context {context_id}.")
 
-            # 从字典中移除上下文ID
+            # Remove context ID from dictionary
             self._contexts.pop(context_id, None)
 
-            # 关闭上下文
+            # Close context
             try:
                 await context.close()
-                logger.info(f"已关闭浏览器上下文: {context_id}")
+                logger.info(f"Closed browser context: {context_id}")
             except Exception as e:
-                logger.error(f"关闭 Playwright 上下文 {context_id} 时出错: {e}")
+                logger.error(f"Error closing Playwright context {context_id}: {e}")
         else:
-            logger.warning(f"尝试关闭一个不存在或已被关闭的上下文: {context_id}")
+            logger.warning(f"Attempted to close a non-existent or already closed context: {context_id}")
 
     async def close(self) -> None:
-        """关闭浏览器和Playwright
+        """Close the browser and Playwright
 
-        关闭所有上下文和浏览器实例
+        Closes all contexts and the browser instance
         """
         if not self._initialized:
             return
 
         try:
-            # 关闭所有上下文
+            # Close all contexts
             context_ids = list(self._contexts.keys())
             for context_id in context_ids:
                 await self.close_context(context_id)
 
-            # 关闭浏览器
+            # Close the browser
             if self._browser:
                 await self._browser.close()
                 self._browser = None
-                logger.info("已关闭浏览器")
+                logger.info("Browser closed")
 
-            # 停止Playwright
+            # Stop Playwright
             if self._playwright:
                 await self._playwright.stop()
                 self._playwright = None
-                logger.info("已停止Playwright")
+                logger.info("Playwright stopped")
 
             self._initialized = False
         except Exception as e:
-            logger.error(f"关闭浏览器失败: {e}")
+            logger.error(f"Failed to close browser: {e}")
             raise

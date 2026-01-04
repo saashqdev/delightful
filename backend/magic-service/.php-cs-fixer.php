@@ -13,7 +13,7 @@ Copyright (c) Be Delightful , Distributed under the software license
 EOF;
 
 return (new Config())
-    // 并发 cs-fix
+    // Run cs-fix in parallel
     ->setParallelConfig(new ParallelConfig(8))
     ->setRiskyAllowed(true)
     ->setRules([
@@ -91,7 +91,7 @@ return (new Config())
         'standardize_not_equals' => true,
         'multiline_comment_opening_closing' => true,
         'single_line_empty_body' => false,
-        'php_unit_test_class_requires_covers' => false, // 避免自动加`@coversNothing`注释
+        'php_unit_test_class_requires_covers' => false, // Avoid auto-adding `@coversNothing` comments
     ])
     ->setFinder(
         Finder::create()
@@ -99,7 +99,7 @@ return (new Config())
             ->exclude('runtime')
             ->exclude('vendor')
             ->in(__DIR__)
-            # cs-fix 企业包,同时排除包的 vendor 目录
+            # cs-fix enterprise package while excluding the package vendor directory
             ->append(Finder::create()->in(__DIR__.'/vendor/dtyq/super-magic-module')->exclude('vendor'))
     )
     ->setUsingCache(false);

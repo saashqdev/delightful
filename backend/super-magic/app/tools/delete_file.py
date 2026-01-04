@@ -15,23 +15,23 @@ logger = get_logger(__name__)
 
 
 class DeleteFileParams(BaseToolParams):
-    """删除文件参数"""
+    """Delete file parameters"""
     file_path: str = Field(
         ...,
-        description="要删除的文件路径"
+        description="File path to delete"
     )
 
 
 @tool()
 class DeleteFile(AbstractFileTool[DeleteFileParams], WorkspaceGuardTool[DeleteFileParams]):
     """
-    删除文件工具，用于删除指定的文件。
+    Delete file tool, used to delete specified files.
 
-    注意：
-    - 删除前请确认文件路径正确。
-    - 如果文件不存在将返回错误。
-    - 建议在删除重要文件前先备份。
-    - 只能删除工作目录中的文件
+    Notes:
+    - Confirm file path is correct before deleting.
+    - Will return error if file does not exist.
+    - Recommend backing up important files before deletion.
+    - Can only delete files in working directory
     """
 
     def __init__(self, **data):
@@ -39,48 +39,48 @@ class DeleteFile(AbstractFileTool[DeleteFileParams], WorkspaceGuardTool[DeleteFi
 
     async def execute(self, tool_context: ToolContext, params: DeleteFileParams) -> ToolResult:
         """
-        执行文件删除操作
+        Execute file deletion operation
 
         Args:
-            tool_context: 工具上下文
-            params: 参数对象，包含文件路径
+            tool_context: Tool context
+            params: Parameter object containing file path
 
         Returns:
-            ToolResult: 包含操作结果
+            ToolResult: Contains operation result
         """
         try:
-            # 使用基类方法获取安全文件路径
+            # Use base class method to get safe file path
             file_path, error = self.get_safe_path(params.file_path)
             if error:
                 return ToolResult(error=error)
 
-            # 检查文件是否存在
+            # Check if file exists
             if not file_path.exists():
-                return ToolResult(error=f"文件不存在: {file_path}")
+                return ToolResult(error=f"File does not exist: {file_path}")
 
-            # 记录文件路径用于后续触发事件
+            # Record file path for subsequent event triggering
             file_path_str = str(file_path)
 
-            # 使用 safe_delete 函数处理删除逻辑
+            # Use safe_delete function to handle deletion logic
             await safe_delete(file_path)
-            logger.info(f"已成功请求删除路径: {file_path}") # safe_delete 内部会记录具体方式
+            logger.info(f"Successfully requested deletion of path: {file_path}") # safe_delete will log specific method internally
 
-            # 触发文件删除事件
+            # Trigger file deleted event
             await self._dispatch_file_event(tool_context, file_path_str, EventType.FILE_DELETED)
 
-            # 返回成功结果
-            return ToolResult(content=f"文件已成功删除\nfile_path: {file_path!s}")
+            # Return success result
+            return ToolResult(content=f"File successfully deleted\nfile_path: {file_path!s}")
 
         except Exception as e:
-            logger.exception(f"删除文件失败: {e!s}")
-            return ToolResult(error=f"删除文件失败: {e!s}")
+            logger.exception(f"Failed to delete file: {e!s}")
+            return ToolResult(error=f"Failed to delete file: {e!s}")
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
         """
-        获取工具调用后的友好动作和备注
+        Get friendly action and remark after tool call
         """
         file_path = arguments.get("file_path", "") if arguments else ""
         return {
-            "action": "删除文件",
+            "action": "Delete file",
             "remark": file_path
         }

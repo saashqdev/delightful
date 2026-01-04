@@ -10,35 +10,35 @@ from app.tools.core import BaseTool, BaseToolParams, tool
 
 
 class GetJsCdnAddressParams(BaseToolParams):
-    """获取JS CDN地址参数"""
+    """Get JS CDN address parameters"""
     library_name: str = Field(
         ...,
-        description="要查询的 JavaScript 库名称，如 react、vue、echarts 等"
+        description="JavaScript library name to query, such as react, vue, echarts, etc."
     )
 
 
 @tool()
 class GetJsCdnAddress(BaseTool[GetJsCdnAddressParams]):
     """
-    获取指定 JavaScript 库的 CDN 地址，从 CDNJS 获取
+    Get the CDN address of the specified JavaScript library from CDNJS
     """
 
     async def execute(self, tool_context: ToolContext, params: GetJsCdnAddressParams) -> ToolResult:
-        """执行 JS CDN 工具
+        """Execute JS CDN tool
 
         Args:
-            tool_context: 工具上下文
-            params: 工具参数，包含 library_name
+            tool_context: Tool context
+            params: Tool parameters containing library_name
 
         Returns:
-            ToolResult: 工具执行结果
+            ToolResult: Tool execution result
         """
         start_time = time.time()
 
         library_name = params.library_name
         if not library_name:
             return ToolResult(
-                error="未提供 JavaScript 库名称",
+                error="JavaScript library name not provided",
                 execution_time=time.time() - start_time,
             )
 
@@ -50,34 +50,34 @@ class GetJsCdnAddress(BaseTool[GetJsCdnAddressParams]):
             )
         except Exception as e:
             return ToolResult(
-                error=f"获取 {library_name} 库 CDN 地址失败: {e!s}",
+                error=f"Failed to get CDN address for {library_name} library: {e!s}",
                 execution_time=time.time() - start_time,
             )
 
     async def _fetch_cdn_info(self, library_name: str) -> str:
-        """从 CDNJS 获取 JavaScript 库的 CDN 信息
+        """Get JavaScript library CDN information from CDNJS
 
         Args:
-            library_name: JavaScript 库名称
+            library_name: JavaScript library name
 
         Returns:
-            str: 包含 CDN 地址的信息文本
+            str: Information text containing CDN address
         """
-        # 从 API 获取数据
+        # Fetch data from API
         api_url = f"https://api.cdnjs.com/libraries?search={library_name}&limit=3"
 
         async with aiohttp.ClientSession() as session:
             async with session.get(api_url) as response:
                 if response.status != 200:
-                    raise Exception(f"API 请求失败，状态码: {response.status}")
+                    raise Exception(f"API request failed, status code: {response.status}")
 
                 data = await response.text()
                 api_data = json.loads(data)
 
-        # 处理搜索结果
+        # Process search results
         results = api_data.get("results", [])
 
-        # 尝试精确匹配库名
+        # Attempt exact library name match
         exact_matches = [lib for lib in results if lib.get("name") == library_name]
         if exact_matches:
             lib_info = exact_matches[0]
@@ -85,19 +85,19 @@ class GetJsCdnAddress(BaseTool[GetJsCdnAddressParams]):
             cdn_url = lib_info.get("latest", "")
 
             return (
-                f"找到 '{library_name}' 库的 CDN: {cdn_url}"
+                f"Found CDN for '{library_name}' library: {cdn_url}"
             )
 
-        # 如果没有精确匹配，显示部分匹配
+        # If no exact match, show partial matches
         if results:
-            result_text = f"未找到精确匹配的 '{library_name}'，但找到了以下相关 JavaScript 库:\n\n"
+            result_text = f"No exact match found for '{library_name}', but found the following related JavaScript libraries:\n\n"
 
             for lib in results:
                 lib_name = lib.get("name", "")
                 cdn_url = lib.get("latest", "")
 
-                result_text += f"名称: {lib_name}\nCDN 地址: {cdn_url}\n\n"
+                result_text += f"Name: {lib_name}\nCDN Address: {cdn_url}\n\n"
 
             return result_text
 
-        return f"未找到与 '{library_name}' 相关的库 CDN 信息"
+        return f"No CDN information found related to '{library_name}'"

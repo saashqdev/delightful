@@ -1,5 +1,5 @@
 """
-JSON 工具函数，提供JSON处理相关的辅助函数
+JSON utility functions providing JSON processing helper functions
 """
 
 import json
@@ -8,14 +8,14 @@ from typing import Any
 
 def json_dumps(obj: Any, **kwargs) -> str:
     """
-    对 json.dumps 的包装，默认设置 ensure_ascii=False
+    Wrapper for json.dumps with default ensure_ascii=False
     
     Args:
-        obj: 要转换为JSON的Python对象
-        **kwargs: 传递给json.dumps的额外关键字参数
+        obj: Python object to convert to JSON
+        **kwargs: Additional keyword arguments passed to json.dumps
         
     Returns:
-        str: 保留非ASCII字符的JSON字符串表示
+        str: JSON string representation preserving non-ASCII characters
     """
     kwargs.setdefault('ensure_ascii', False)
-    return json.dumps(obj, **kwargs) 
+    return json.dumps(obj, **kwargs)

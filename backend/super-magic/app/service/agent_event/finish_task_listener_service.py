@@ -1,7 +1,7 @@
 """
-FinishTask 工具监听器服务
+FinishTask tool listener service
 
-用于监听 FinishTask 工具的调用事件，当 FinishTask 工具被成功调用后，执行相应的处理逻辑
+Monitor FinishTask tool call events and execute corresponding logic after FinishTask tool is successfully called
 """
 
 from agentlang.event.data import AfterToolCallEventData
@@ -16,55 +16,55 @@ logger = get_logger(__name__)
 
 class FinishTaskListenerService:
     """
-    FinishTask 工具监听器服务
+    FinishTask tool listener service
 
-    监听 FinishTask 工具的调用事件，在 FinishTask 工具成功调用后执行相应处理逻辑
+    Monitor FinishTask tool call events and execute corresponding logic after FinishTask tool is successfully called
     """
 
     @staticmethod
     def register_standard_listeners(agent_context: AgentContext) -> None:
         """
-        为代理上下文注册 FinishTask 工具事件监听器
+        Register FinishTask tool event listener for agent context
 
         Args:
-            agent_context: 代理上下文对象
+            agent_context: Agent context object
         """
-        # 创建事件类型到处理函数的映射
+        # Create mapping from event type to handler function
         event_listeners = {
             EventType.AFTER_TOOL_CALL: FinishTaskListenerService._handle_after_tool_call
         }
 
-        # 使用基类方法批量注册监听器
+        # Use base class method to register listeners in batch
         BaseListenerService.register_listeners(agent_context, event_listeners)
 
-        logger.info("已为代理上下文注册 FinishTask 工具事件监听器")
+        logger.info("Registered FinishTask tool event listener for agent context")
 
     @staticmethod
     async def _handle_after_tool_call(event: Event[AfterToolCallEventData]) -> None:
         """
-        处理工具调用后事件，特别关注 FinishTask 工具的调用
+        Handle after tool call event, focusing on FinishTask tool calls
 
         Args:
-            event: 工具调用后事件对象，包含 AfterToolCallEventData 数据
+            event: After tool call event object containing AfterToolCallEventData
         """
-        # 检查是否为 FinishTask 工具调用
+        # Check if it is a FinishTask tool call
         if event.data.tool_name != "finish_task":
             return
 
-        # 获取工具调用的输出消息
+        # Get output message of tool call
         message = event.data.result.content
 
-        # 检查工具调用是否成功（没有错误）
+        # Check if tool call succeeded (no error)
         if not event.data.result.ok:
-            logger.warning(f"FinishTask 工具调用失败: {message}")
+            logger.warning(f"FinishTask tool call failed: {message}")
             return
 
-        logger.info("监测到 FinishTask 工具成功调用")
+        logger.info("Detected successful FinishTask tool call")
 
-        # 在事件上下文中设置finish_task_called标记为True
+        # Set finish_task_called flag to True in event context
         event_context = event.data.tool_context.get_extension_typed("event_context", EventContext)
         if event_context:
             event_context.finish_task_called = True
-            logger.info(f"任务已完成，最终消息: {message}")
+            logger.info(f"Task completed, final message: {message}")
         else:
-            logger.warning("无法设置finish_task_called标记：EventContext未注册")
+            logger.warning("Unable to set finish_task_called flag: EventContext not registered")

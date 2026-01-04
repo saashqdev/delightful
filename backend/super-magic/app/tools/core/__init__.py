@@ -1,7 +1,4 @@
-"""工具核心模块
-
-提供工具架构的核心组件
-"""
+"""Core components for the tool framework."""
 
 from app.tools.core.base_tool import BaseTool
 from app.tools.core.base_tool_params import BaseToolParams

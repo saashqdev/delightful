@@ -14,37 +14,37 @@ from app.tools.core import BaseTool, BaseToolParams, tool
 
 logger = get_logger(__name__)
 
-# 参考 summarize.py，设置默认最大 Token 数
+# Reference summarize.py, set default max token count
 DEFAULT_MAX_TOKENS = 24_000
-# 默认使用的模型
+# Default model to use
 DEFAULT_MODEL_ID = "deepseek-chat"
 
 class PurifyParams(BaseToolParams):
-    """净化工具参数"""
+    """Purify tool parameters"""
     file_path: str = Field(
         ...,
-        description="需要净化的文件路径"
+        description="File path to be purified"
     )
     criteria: Optional[str] = Field(
         default=None,
-        description="""可选的用户自定义净化标准描述，例如 "移除所有包含'广告'的行" 或 "只保留正文内容" """
+        description="""Optional user-defined purification criteria, e.g., 'remove all lines containing advertisements' or 'keep only main content' """
     )
 
 
 @tool()
 class Purify(BaseTool[PurifyParams]):
     """
-    净化工具，用于清理文本文件，移除无关行（如广告、导航、页眉/页脚、版权声明、非必要的注释、过多空行等）。
-    用户可以提供可选的自定义净化标准。
+    Purification tool for cleaning text files, removing irrelevant lines (such as ads, navigation, headers/footers, copyright notices, unnecessary comments, excessive blank lines, etc.).
+    Users can provide optional custom purification criteria.
 
-    调用示例：
+    Example usage:
     ```
     {
         "file_path": "./path/to/your/document.txt",
-        "criteria": "只保留主要段落，移除所有列表项和代码块"
+        "criteria": "Keep only main paragraphs, remove all list items and code blocks"
     }
     ```
-    或者，不提供 criteria 则使用通用标准：
+    Or, without providing criteria to use general standards:
     ```
     {
         "file_path": "./path/to/another/document.md"
@@ -57,60 +57,60 @@ class Purify(BaseTool[PurifyParams]):
         tool_context: ToolContext,
         params: PurifyParams
     ) -> ToolResult:
-        """工具执行入口"""
+        """Tool execution entry point"""
         return await self.execute_purely(params)
 
     async def execute_purely(
         self,
         params: PurifyParams
     ) -> ToolResult:
-        """执行净化核心逻辑"""
+        """Execute purification core logic"""
         file_path = params.file_path
         criteria = params.criteria
         file_name = file_path.split('/')[-1]
 
         try:
-            logger.info(f"开始净化文件: {file_path}, 自定义标准: {'有' if criteria else '无'}")
+            logger.info(f"Starting file purification: {file_path}, custom criteria: {'Yes' if criteria else 'No'}")
 
-            # 1. 读取文件内容
+            # 1. Read file content
             original_content: str
             try:
                 async with aiofiles.open(file_path, mode='r', encoding='utf-8') as f:
                     original_content = await f.read()
             except FileNotFoundError:
-                logger.error(f"净化失败: 文件未找到 {file_path}")
-                return ToolResult(error=f"文件未找到: {file_path}")
+                logger.error(f"Purification failed: File not found {file_path}")
+                return ToolResult(error=f"File not found: {file_path}")
             except Exception as e:
-                logger.exception(f"净化失败: 读取文件 {file_path} 时出错")
-                return ToolResult(error=f"读取文件时出错: {e!s}")
+                logger.exception(f"Purification failed: Error reading file {file_path}")
+                return ToolResult(error=f"Error reading file: {e!s}")
 
             if not original_content.strip():
-                logger.warning(f"文件 {file_path} 为空或只包含空白字符，无需净化。")
+                logger.warning(f"File {file_path} is empty or contains only whitespace, no purification needed.")
                 return ToolResult(
-                    content=f"文件 '{file_name}' 为空或只包含空白，无需净化。",
+                    content=f"File '{file_name}' is empty or contains only whitespace, no purification needed.",
                     extra_info={"file_path": file_path, "file_name": file_name, "purified": False}
                 )
 
-            # 2. 调用内部方法获取净化后的内容
+            # 2. Call internal method to get purified content
             purified_content = await self._get_purified_content(
                 original_content=original_content,
                 criteria=criteria,
             )
 
             if purified_content is None:
-                # _get_purified_content 内部已记录错误
-                return ToolResult(error="净化处理失败，请检查日志获取详情")
+                # _get_purified_content has already logged the error internally
+                return ToolResult(error="Purification processing failed, please check logs for details")
 
-            # 3. 返回结果
-            logger.info(f"文件 {file_path} 净化完成")
+            # 3. Return result
+            logger.info(f"File {file_path} purification completed")
             return ToolResult(
                 content=purified_content,
                 extra_info={"file_path": file_path, "file_name": file_name, "purified": True}
             )
 
         except Exception as e:
-            logger.exception(f"执行净化操作时发生未预料的错误: {e!s}")
-            return ToolResult(error=f"净化操作失败: {e!s}")
+            logger.exception(f"Unexpected error during purification operation: {e!s}")
+            return ToolResult(error=f"Purification operation failed: {e!s}")
 
 
     async def _get_purified_content(

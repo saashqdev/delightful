@@ -368,81 +368,81 @@ class MagicBrowser:
             return MagicBrowserError(error=error_msg, operation=operation_name, details={"selector": selector, "page_id": page_id})
 
     async def input_text(self, page_id: str, selector: str, text: str, clear_first: bool = True, press_enter: bool = False) -> MagicBrowserResult:
-        """在输入框中输入文本"""
+        """Input text into input field"""
         operation_name = "input_text"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"页面不存在或已关闭: {page_id}", operation=operation_name)
+            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         details = {"selector": selector, "text_preview": text[:50] + '...', "clear_first": clear_first, "press_enter": press_enter, "page_id": page_id}
 
         try:
             self._active_page_id = page_id
-            logger.info(f"{operation_name}: 页面 {page_id} 向 '{selector}' 输入文本 (Clear: {clear_first}, Enter: {press_enter})")
+            logger.info(f"{operation_name}: Page {page_id} inputting text to '{selector}' (Clear: {clear_first}, Enter: {press_enter})")
 
-            # 使用 fill 方法输入，它会自动等待元素出现并清空
+            # Use fill method to input, it automatically waits for element and clears
             if clear_first:
                 await page.fill(selector, text, timeout=15000)
             else:
-                # 如果不清空，使用 type 方法追加
+                # If not clearing, use type method to append
                 await page.type(selector, text, timeout=15000)
 
-            final_url = page.url # 记录按回车前的 URL
+            final_url = page.url # Record URL before pressing Enter
             title_after = None
 
             if press_enter:
-                logger.info(f"{operation_name}: 页面 {page_id} 在 '{selector}' 后按下 Enter")
+                logger.info(f"{operation_name}: Page {page_id} pressing Enter after '{selector}'")
                 await page.press(selector, "Enter")
                 await self._wait_for_stable_network(page)
-                # 获取按回车后的 URL 和标题
+                # Get URL and title after pressing Enter
                 final_url = page.url
                 try:
                     if page.is_closed():
-                        logger.warning(f"{operation_name}: 页面 {page_id} 在输入并按 Enter 后关闭。")
-                        title_after = "页面已关闭"
+                        logger.warning(f"{operation_name}: Page {page_id} closed after input and pressing Enter.")
+                        title_after = "Page closed"
                     else:
-                        title_after = await page.title() or "无标题"
+                        title_after = await page.title() or "No title"
                 except PlaywrightError as title_e:
-                    logger.warning(f"获取页面 {page_id} 输入后标题失败: {title_e}")
-                    title_after = "获取标题失败"
+                    logger.warning(f"Failed to get page {page_id} title after input: {title_e}")
+                    title_after = "Failed to get title"
                 except Exception as title_e_general:
-                    logger.warning(f"获取页面 {page_id} 输入后标题时发生意外错误: {title_e_general}")
-                    title_after = "获取标题失败"
+                    logger.warning(f"Unexpected error getting page {page_id} title after input: {title_e_general}")
+                    title_after = "Failed to get title"
 
 
-            logger.info(f"{operation_name}: 页面 {page_id} 向 '{selector}' 输入文本成功。")
+            logger.info(f"{operation_name}: Page {page_id} successfully input text to '{selector}'.")
             return InputSuccess(final_url=final_url, title_after=title_after)
 
         except PlaywrightError as e:
-            error_msg = f"输入文本到 '{selector}' 失败 (Playwright Error): {e}"
+            error_msg = f"Failed to input text to '{selector}' (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
             if "selector resolved to no elements" in str(e):
-                error_msg = f"输入失败: 找不到元素 '{selector}' 或元素不可见/不可交互。"
+                error_msg = f"Input failed: cannot find element '{selector}' or element is not visible/interactive."
             elif "element is not an input element" in str(e):
-                error_msg = f"输入失败: 选择器 '{selector}' 对应的元素不是一个可输入的元素 (如 input, textarea)。"
+                error_msg = f"Input failed: element corresponding to selector '{selector}' is not an input element (e.g., input, textarea)."
             elif "timeout" in str(e).lower():
-                error_msg = f"输入文本到 '{selector}' 超时。"
+                error_msg = f"Input text to '{selector}' timed out."
             return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
         except Exception as e:
-            error_msg = f"输入文本到 '{selector}' 失败 (Unexpected Error): {e}"
+            error_msg = f"Failed to input text to '{selector}' (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
             return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
 
     async def scroll_page(self, page_id: str, direction: str, full_page: bool = False) -> MagicBrowserResult:
-        """滚动页面"""
+        """Scroll page"""
         operation_name = "scroll_page"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"页面不存在或已关闭: {page_id}", operation=operation_name)
+            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         details = {"direction": direction, "full_page": full_page, "page_id": page_id}
 
         try:
             self._active_page_id = page_id
-            logger.info(f"{operation_name}: 页面 {page_id} 滚动方向 '{direction}', 整页: {full_page}")
+            logger.info(f"{operation_name}: Page {page_id} scroll direction '{direction}', full page: {full_page}")
 
-            # 获取页面滚动信息
-            # _get_page_scroll_info 内部也应该处理 Playwright 错误
+            # Get page scroll information
+            # _get_page_scroll_info should also handle Playwright errors internally
             scroll_info = await self._page_registry._get_page_scroll_info(page)
             viewport_height = scroll_info.get("viewport_height", 0)
             document_height = scroll_info.get("document_height", 0)
@@ -453,14 +453,14 @@ class MagicBrowser:
             target_y = current_y
             target_x = current_x
 
-            # 计算滚动目标和脚本
+            # Calculate scroll target and script
             if direction == "up":
-                scroll_amount = viewport_height * 0.8 if not full_page else document_height # 滚动视口80%
+                scroll_amount = viewport_height * 0.8 if not full_page else document_height # Scroll 80% of viewport
                 target_y = max(0, current_y - scroll_amount)
             elif direction == "down":
                 scroll_amount = viewport_height * 0.8 if not full_page else document_height
-                target_y = min(document_height - viewport_height, current_y + scroll_amount) # 确保底部可见
-                # 如果目标位置没有向下移动多少，尝试直接到底部
+                target_y = min(document_height - viewport_height, current_y + scroll_amount) # Ensure bottom is visible
+                # If target position didn't move down much, try to go directly to bottom
                 if abs(target_y - current_y) < 10 and direction == "down":
                     target_y = document_height - viewport_height
             elif direction == "left":
@@ -475,27 +475,27 @@ class MagicBrowser:
             elif direction == "top":
                 target_x, target_y = 0, 0
             elif direction == "bottom":
-                target_x = current_x # 通常垂直滚动时 x 不变
-                target_y = max(0, document_height - viewport_height) # 滚动到底部使底部可见
+                target_x = current_x # Usually x doesn't change during vertical scroll
+                target_y = max(0, document_height - viewport_height) # Scroll to bottom to make bottom visible
             else:
-                # 不应该发生，因为有 Literal 类型检查，但作为保险
-                return MagicBrowserError(error=f"无效的滚动方向: {direction}", operation=operation_name, details=details)
+                # Should not happen due to Literal type checking, but as a safeguard
+                return MagicBrowserError(error=f"Invalid scroll direction: {direction}", operation=operation_name, details=details)
 
-            # 确保目标坐标是数字
+            # Ensure target coordinates are numbers
             target_x = float(target_x)
             target_y = float(target_y)
 
             scroll_script = f"window.scrollTo({target_x}, {target_y});"
             await page.evaluate(scroll_script)
-            await asyncio.sleep(0.5) # 等待滚动动画（如果存在）
+            await asyncio.sleep(0.5) # Wait for scroll animation (if exists)
 
-            # 获取新的滚动位置
+            # Get new scroll position
             new_scroll_info = await self._page_registry._get_page_scroll_info(page)
             new_x = new_scroll_info.get("x", 0)
             new_y = new_scroll_info.get("y", 0)
             actual_distance = new_y - current_y if direction in ["up", "down", "top", "bottom"] else new_x - current_x
 
-            logger.info(f"{operation_name}: 页面 {page_id} 滚动成功, 新位置 (x={new_x}, y={new_y})")
+            logger.info(f"{operation_name}: Page {page_id} scrolled successfully, new position (x={new_x}, y={new_y})")
             return ScrollSuccess(
                 direction=direction,
                 full_page=full_page,
@@ -505,40 +505,40 @@ class MagicBrowser:
             )
 
         except PlaywrightError as e:
-            error_msg = f"滚动页面失败 (Playwright Error): {e}"
+            error_msg = f"Scroll page failed (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
             return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
         except Exception as e:
-            error_msg = f"滚动页面失败 (Unexpected Error): {e}"
+            error_msg = f"Scroll page failed (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
             return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
 
     async def scroll_to(self, page_id: str, screen_number: int) -> MagicBrowserResult:
-        """将页面滚动到指定屏幕编号的位置 (>=1)。"""
+        """Scroll page to the position of the specified screen number (>=1)."""
         operation_name = "scroll_to"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"页面不存在或已关闭: {page_id}", operation=operation_name)
+            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         if screen_number < 1:
-            return MagicBrowserError(error="屏幕编号必须大于或等于 1", operation=operation_name, details={"screen_number": screen_number})
+            return MagicBrowserError(error="Screen number must be greater than or equal to 1", operation=operation_name, details={"screen_number": screen_number})
 
         details = {"screen_number": screen_number, "page_id": page_id}
 
         try:
             self._active_page_id = page_id
-            logger.info(f"{operation_name}: 页面 {page_id} 滚动到屏幕 {screen_number}")
+            logger.info(f"{operation_name}: Page {page_id} scroll to screen {screen_number}")
 
             js_get_info = """
             () => ({ x: window.scrollX, y: window.scrollY, viewportHeight: window.innerHeight })
             """
             scroll_info_before = await page.evaluate(js_get_info)
-            viewport_height = scroll_info_before.get("viewportHeight", 0) or 600 # 提供默认值
+            viewport_height = scroll_info_before.get("viewportHeight", 0) or 600 # Provide default value
             current_x = scroll_info_before.get("x", 0)
             current_y = scroll_info_before.get("y", 0)
 
             target_y = (screen_number - 1) * viewport_height
-            target_y = float(target_y) # 确保是浮点数
+            target_y = float(target_y) # Ensure is float
 
             scroll_script = f"window.scrollTo({float(current_x)}, {target_y});"
             await page.evaluate(scroll_script)
@@ -548,7 +548,7 @@ class MagicBrowser:
             new_x = scroll_info_after.get("x", 0)
             new_y = scroll_info_after.get("y", 0)
 
-            logger.info(f"{operation_name}: 页面 {page_id} 滚动到屏幕 {screen_number} 成功, 新位置 (x={new_x}, y={new_y})")
+            logger.info(f"{operation_name}: Page {page_id} scroll to screen {screen_number} successfully, new position (x={new_x}, y={new_y})")
             return ScrollToSuccess(
                 screen_number=screen_number,
                 target_y=target_y,
@@ -556,50 +556,50 @@ class MagicBrowser:
                 after=ScrollPositionData(x=new_x, y=new_y)
             )
         except PlaywrightError as e:
-            error_msg = f"滚动到屏幕 {screen_number} 失败 (Playwright Error): {e}"
+            error_msg = f"Scroll to screen {screen_number} failed (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
             return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
         except Exception as e:
-            error_msg = f"滚动到屏幕 {screen_number} 失败 (Unexpected Error): {e}"
+            error_msg = f"Scroll to screen {screen_number} failed (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
             return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
 
     async def get_page_state(self, page_id: str) -> MagicBrowserResult:
-        """获取页面状态信息"""
+        """Get page state information"""
         operation_name = "get_page_state"
-        # PageRegistry.get_page_state 内部已处理页面不存在的情况并返回 PageState(error=...)
+        # PageRegistry.get_page_state internally handles page not found case and returns PageState(error=...)
         try:
             page_state: PageState = await self._page_registry.get_page_state(page_id)
             if page_state.error:
-                # 将 PageState 的错误转换为 MagicBrowserError
+                # Convert PageState error to MagicBrowserError
                 return MagicBrowserError(error=page_state.error, operation=operation_name, details={"page_id": page_id})
             else:
                 return PageStateSuccess(state=page_state)
-        except Exception as e: # 捕获 PageRegistry 可能抛出的其他异常
-            error_msg = f"获取页面 {page_id} 状态时发生意外错误: {e}"
+        except Exception as e: # Catch other exceptions that PageRegistry might throw
+            error_msg = f"Unexpected error getting page state for {page_id}: {e}"
             logger.error(error_msg, exc_info=True)
             return MagicBrowserError(error=error_msg, operation=operation_name, details={"page_id": page_id})
 
     async def read_as_markdown(self, page_id: str, scope: str = "viewport") -> MagicBrowserResult:
-        """获取页面内容的Markdown表示"""
+        """Get Markdown representation of page content"""
         operation_name = "read_as_markdown"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"页面不存在或已关闭: {page_id}", operation=operation_name)
+            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         details = {"scope": scope, "page_id": page_id}
 
         try:
             self._active_page_id = page_id
-            logger.info(f"{operation_name}: 页面 {page_id} 读取范围 '{scope}'")
+            logger.info(f"{operation_name}: Page {page_id} read scope '{scope}'")
 
-            # 内部处理 JS 加载
+            # Internal JS module loading
             load_result = await self._page_registry.ensure_js_module_loaded(page_id, ["lens"])
             if not load_result.get("lens"):
-                return MagicBrowserError(error="加载JS模块 'lens' 失败", operation=operation_name, details=details)
+                return MagicBrowserError(error="Failed to load JS module 'lens'", operation=operation_name, details=details)
 
             if scope not in ["viewport", "all"]:
-                return MagicBrowserError(error=f"无效的范围: {scope}，支持 'viewport' 或 'all'", operation=operation_name, details=details)
+                return MagicBrowserError(error=f"Invalid scope: {scope}, supports 'viewport' or 'all'", operation=operation_name, details=details)
 
             script = f"""
             async () => {{
@@ -613,44 +613,44 @@ class MagicBrowser:
             result = await page.evaluate(script)
 
             if isinstance(result, dict) and "error" in result:
-                js_error = f"JS执行获取Markdown失败 ({scope}): {result['error']}"
+                js_error = f"JS execution to get Markdown failed ({scope}): {result['error']}"
                 logger.error(js_error)
                 return MagicBrowserError(error=js_error, operation=operation_name, details=details)
 
             url = page.url
-            title = await page.title() or "无标题" # 同样需要处理 title 获取错误
+            title = await page.title() or "No title" # Also need to handle title retrieval error
 
-            logger.info(f"{operation_name}: 页面 {page_id} 读取成功。")
+            logger.info(f"{operation_name}: Page {page_id} read successfully.")
             return MarkdownSuccess(markdown=result, url=url, title=title, scope=scope)
 
         except PlaywrightError as e:
-            error_msg = f"读取Markdown失败 (Playwright Error): {e}"
+            error_msg = f"Read Markdown failed (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
             return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
         except Exception as e:
-            error_msg = f"读取Markdown失败 (Unexpected Error): {e}"
+            error_msg = f"Read Markdown failed (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
             return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
 
     async def get_interactive_elements(self, page_id: str, scope: str = "viewport") -> MagicBrowserResult:
-        """获取页面中的交互元素"""
+        """Get interactive elements in page"""
         operation_name = "get_interactive_elements"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"页面不存在或已关闭: {page_id}", operation=operation_name)
+            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         details = {"scope": scope, "page_id": page_id}
         if scope not in ["viewport", "all"]:
-            return MagicBrowserError(error=f"无效的范围: {scope}", operation=operation_name, details=details)
+            return MagicBrowserError(error=f"Invalid scope: {scope}", operation=operation_name, details=details)
 
         try:
             self._active_page_id = page_id
-            logger.info(f"{operation_name}: 页面 {page_id} 获取元素, 范围 '{scope}'")
+            logger.info(f"{operation_name}: Page {page_id} get elements, scope '{scope}'")
 
-            # 内部处理 JS 加载
+            # Internal JS module loading
             load_result = await self._page_registry.ensure_js_module_loaded(page_id, ["touch"])
             if not load_result.get("touch"):
-                return MagicBrowserError(error="加载JS模块 'touch' 失败", operation=operation_name, details=details)
+                return MagicBrowserError(error="Failed to load JS module 'touch'", operation=operation_name, details=details)
 
             scope_value = "viewport" if scope == "viewport" else "all"
             script = f"""
@@ -665,32 +665,32 @@ class MagicBrowser:
             result = await page.evaluate(script)
 
             if isinstance(result, dict) and "error" in result:
-                js_error = f"JS执行获取交互元素失败: {result['error']}"
+                js_error = f"JS execution to get interactive elements failed: {result['error']}"
                 logger.error(js_error)
                 return MagicBrowserError(error=js_error, operation=operation_name, details=details)
 
-            # result 应该是分类的元素字典
+            # result should be a categorized elements dictionary
             elements_by_category = result if isinstance(result, dict) else {}
             total_count = sum(len(v) for v in elements_by_category.values() if isinstance(v, list))
 
-            logger.info(f"{operation_name}: 页面 {page_id} 获取到 {total_count} 个元素。")
+            logger.info(f"{operation_name}: Page {page_id} got {total_count} elements.")
             return InteractiveElementsSuccess(elements_by_category=elements_by_category, total_count=total_count)
 
         except PlaywrightError as e:
-            error_msg = f"获取交互元素失败 (Playwright Error): {e}"
+            error_msg = f"Get interactive elements failed (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
             return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
         except Exception as e:
-            error_msg = f"获取交互元素失败 (Unexpected Error): {e}"
+            error_msg = f"Get interactive elements failed (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
             return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
 
     async def take_screenshot(self, page_id: str, path: Optional[str] = None, full_page: bool = False) -> MagicBrowserResult:
-        """截取指定页面的屏幕截图"""
+        """Take screenshot of specified page"""
         operation_name = "take_screenshot"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"页面不存在或已关闭: {page_id}", operation=operation_name)
+            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         target_path_obj: Optional[Path] = None
         is_temp: bool = False
@@ -704,153 +704,153 @@ class MagicBrowser:
                 try:
                     target_path_obj.parent.mkdir(parents=True, exist_ok=True)
                 except Exception as mkdir_e:
-                    return MagicBrowserError(error=f"无法创建截图目录: {mkdir_e}", operation=operation_name, details={"path": path})
+                    return MagicBrowserError(error=f"Unable to create screenshot directory: {mkdir_e}", operation=operation_name, details={"path": path})
             else:
                 if not self._TEMP_SCREENSHOT_DIR:
-                    return MagicBrowserError(error="临时截图目录不可用", operation=operation_name)
+                    return MagicBrowserError(error="Temporary screenshot directory not available", operation=operation_name)
                 temp_filename = f"screenshot_{uuid.uuid4()}.png"
                 target_path_obj = self._TEMP_SCREENSHOT_DIR / temp_filename
                 is_temp = True
                 final_path_str = str(target_path_obj)
 
-            logger.info(f"{operation_name}: 页面 {page_id} 截图至 '{final_path_str}' (Full: {full_page}, Temp: {is_temp})")
-            await page.screenshot(path=final_path_str, full_page=full_page, timeout=30000) # 增加超时
+            logger.info(f"{operation_name}: Page {page_id} screenshot to '{final_path_str}' (Full: {full_page}, Temp: {is_temp})")
+            await page.screenshot(path=final_path_str, full_page=full_page, timeout=30000) # Increased timeout
 
-            # 如果是临时文件，添加到管理列表
+            # If temp file, add to management list
             if is_temp and target_path_obj:
                 self._temp_files.append(target_path_obj)
-                logger.debug(f"临时截图文件 {target_path_obj} 已添加到待清理列表。")
+                logger.debug(f"Temp screenshot file {target_path_obj} added to cleanup list.")
 
-            logger.info(f"{operation_name}: 页面 {page_id} 截图成功。")
-            # 确保返回 Path 对象
+            logger.info(f"{operation_name}: Page {page_id} screenshot successful.")
+            # Ensure return Path object
             return ScreenshotSuccess(path=target_path_obj if target_path_obj else Path(final_path_str), is_temp=is_temp)
 
         except PlaywrightError as e:
-            error_msg = f"截图失败 (Playwright Error): {e}"
+            error_msg = f"Screenshot failed (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
             return MagicBrowserError(error=error_msg, operation=operation_name, details={"path": final_path_str, "full_page": full_page, "page_id": page_id})
         except Exception as e:
-            error_msg = f"截图失败 (Unexpected Error): {e}"
+            error_msg = f"Screenshot failed (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
             return MagicBrowserError(error=error_msg, operation=operation_name, details={"path": final_path_str, "full_page": full_page, "page_id": page_id})
 
     async def evaluate_js(self, page_id: str, js_code: str) -> MagicBrowserResult:
-        """在指定页面上执行 JavaScript 代码"""
+        """Execute JavaScript code on specified page"""
         operation_name = "evaluate_js"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"页面不存在或已关闭: {page_id}", operation=operation_name)
+            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         details = {"js_code_preview": js_code[:100] + '...', "page_id": page_id}
 
         try:
-            logger.debug(f"{operation_name}: 页面 {page_id} 执行 JS: '{details['js_code_preview']}'")
+            logger.debug(f"{operation_name}: Page {page_id} execute JS: '{details['js_code_preview']}'")
             result = await page.evaluate(js_code)
-            logger.debug(f"{operation_name}: 页面 {page_id} 执行 JS 成功, 返回类型: {type(result)}")
+            logger.debug(f"{operation_name}: Page {page_id} executed JS successfully, return type: {type(result)}")
             return JSEvalSuccess(result=result)
 
         except PlaywrightError as e:
-            error_msg = f"执行 JS 失败 (Playwright Error): {e}"
+            error_msg = f"Execute JS failed (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
             return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
         except Exception as e:
-            error_msg = f"执行 JS 失败 (Unexpected Error): {e}"
+            error_msg = f"Execute JS failed (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
             return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
 
     # --- Cleanup ---
     async def cleanup_temp_files(self):
-        """清理所有由该浏览器实例创建的临时文件"""
+        """Clean up all temporary files created by this browser instance"""
         if not self._temp_files:
             return
-        logger.info(f"开始清理 {len(self._temp_files)} 个浏览器临时文件...")
-        # 使用 safe_delete 进行并发清理
+        logger.info(f"Start cleaning up {len(self._temp_files)} browser temp files...")
+        # Use safe_delete for concurrent cleanup
         tasks = [safe_delete(f) for f in self._temp_files]
         await asyncio.gather(*tasks)
-        cleared_count = len(self._temp_files) # 记录清理的数量
+        cleared_count = len(self._temp_files) # Record count of cleaned files
         self._temp_files.clear()
-        logger.info(f"浏览器临时文件清理完成 ({cleared_count} 个)。")
+        logger.info(f"Browser temp file cleanup completed ({cleared_count} files).")
 
     async def close(self) -> None:
-        """关闭浏览器, 关闭所有管理的页面, 注销客户端并清理临时文件"""
+        """Close browser, close all managed pages, unregister client and clean up temp files"""
         if not self._initialized:
             return
-        logger.info("开始关闭 MagicBrowser...")
+        logger.info("Start closing MagicBrowser...")
         try:
-            # 关闭所有管理的页面
+            # Close all managed pages
             page_close_tasks = []
-            managed_ids = list(self._managed_page_ids) # 迭代副本
+            managed_ids = list(self._managed_page_ids) # Iterate over copy
             for page_id in managed_ids:
-                page = await self.get_page_by_id(page_id) # 使用已包含检查的方法
+                page = await self.get_page_by_id(page_id) # Use method with built-in checks
                 if page:
-                    logger.debug(f"请求关闭页面: {page_id}")
-                    page_close_tasks.append(page.close()) # 添加关闭任务
-                # 主动从注册表注销，即使 page.close() 失败或页面已关闭
+                    logger.debug(f"Request to close page: {page_id}")
+                    page_close_tasks.append(page.close()) # Add close task
+                # Actively unregister from registry even if page.close() fails or page already closed
                 await self._page_registry.unregister_page(page_id)
 
             if page_close_tasks:
-                # 并发关闭页面，忽略个别错误
+                # Concurrently close pages, ignore individual errors
                 results = await asyncio.gather(*page_close_tasks, return_exceptions=True)
                 for i, result in enumerate(results):
                     if isinstance(result, Exception):
-                        logger.warning(f"关闭页面 {managed_ids[i]} 时出现错误: {result}")
+                        logger.warning(f"Error closing page {managed_ids[i]}: {result}")
 
             self._managed_page_ids.clear()
             self._active_page_id = None
-            logger.info("所有管理的页面已请求关闭并注销。")
+            logger.info("All managed pages requested to close and unregistered.")
 
-            # 注销浏览器客户端引用
+            # Unregister browser client reference
             await self._browser_manager.unregister_client()
             self._active_context_id = None
 
 
-            # 清理临时文件
+            # Clean up temp files
             await self.cleanup_temp_files()
 
             self._initialized = False
-            logger.info("MagicBrowser 关闭完成。")
+            logger.info("MagicBrowser close completed.")
 
         except Exception as e:
-            logger.error(f"关闭 MagicBrowser 时发生异常: {e}", exc_info=True)
+            logger.error(f"Exception occurred closing MagicBrowser: {e}", exc_info=True)
         finally:
-            # 确保状态被重置
+            # Ensure state is reset
             self._initialized = False
             self._active_page_id = None
             self._active_context_id = None
             self._managed_page_ids.clear()
-            self._temp_files.clear() # 再次清空以防万一
+            self._temp_files.clear() # Clear again just to be safe
 
     async def _wait_for_stable_network(self, page: Page, wait_time: float = 0.5, max_wait_time: float = 5.0):
-        """等待网络活动稳定 (内部辅助方法)"""
-        # 记录活动请求和最后活动时间
+        """Wait for network activity to stabilize (internal helper method)"""
+        # Track pending requests and last activity time
         pending_requests = set()
         last_activity = asyncio.get_event_loop().time()
 
-        # 定义关键资源类型
+        # Define relevant resource types
         RELEVANT_RESOURCE_TYPES = {
             'document', 'xhr', 'fetch', 'script',
             'stylesheet', 'image', 'font'
         }
 
-        # 需要忽略的URL模式
+        # URL patterns to ignore
         IGNORED_URL_PATTERNS = {
             'analytics', 'tracking', 'beacon', 'telemetry',
             'adserver', 'advertising', 'facebook.com/plugins',
             'platform.twitter', 'heartbeat', 'ping', 'wss://'
         }
 
-        # 网络请求处理函数
+        # Network request handler function
         async def on_request(request):
-            # 过滤资源类型
+            # Filter resource types
             if request.resource_type not in RELEVANT_RESOURCE_TYPES:
                 return
 
-            # 过滤忽略的URL模式
+            # Filter ignored URL patterns
             url = request.url.lower()
             if any(pattern in url for pattern in IGNORED_URL_PATTERNS):
                 return
 
-            # 过滤数据URL和二进制对象URL
+            # Filter data URLs and blob object URLs
             if url.startswith(('data:', 'blob:')):
                 return
 
@@ -858,13 +858,13 @@ class MagicBrowser:
             pending_requests.add(request)
             last_activity = asyncio.get_event_loop().time()
 
-        # 网络响应处理函数
+        # Network response handler function
         async def on_response(response):
             request = response.request
             if request not in pending_requests:
                 return
 
-            # 过滤不需要等待的内容类型
+            # Filter content types that don't need to be waited
             content_type = response.headers.get('content-type', '').lower()
             if any(t in content_type for t in ['streaming', 'video', 'audio', 'event-stream']):
                 pending_requests.remove(request)
@@ -874,33 +874,33 @@ class MagicBrowser:
             pending_requests.remove(request)
             last_activity = asyncio.get_event_loop().time()
 
-        # 设置请求和响应监听器
+        # Set request and response listeners
         page.on("request", on_request)
         page.on("response", on_response)
 
         try:
-            # 等待网络稳定
+            # Wait for network to stabilize
             start_time = asyncio.get_event_loop().time()
             while asyncio.get_event_loop().time() - start_time < max_wait_time:
                 await asyncio.sleep(0.1)
                 now = asyncio.get_event_loop().time()
 
-                # 如果没有待处理请求且已稳定一段时间，则认为网络已稳定
+                # If no pending requests and has been stable for wait_time, network is stable
                 if len(pending_requests) == 0 and (now - last_activity) >= wait_time:
                     break
 
-            # 如果超时但仍有请求
+            # If timed out but still have requests
             if len(pending_requests) > 0:
-                logger.debug(f"等待网络稳定超时 (>{max_wait_time}s)，仍有 {len(pending_requests)} 个活动请求")
+                logger.debug(f"Wait for stable network timed out (>{max_wait_time}s), still have {len(pending_requests)} active requests")
 
         finally:
-            # 移除监听器
+            # Remove listeners
             try:
                 page.remove_listener("request", on_request)
                 page.remove_listener("response", on_response)
             except Exception as remove_e:
-                # 在页面关闭等情况下移除监听器可能失败，忽略错误
-                logger.debug(f"移除网络监听器时出错 (可能页面已关闭): {remove_e}")
+                # Removing listeners may fail when page is closed, ignore error
+                logger.debug(f"Error removing network listeners (page may be closed): {remove_e}")
 
-# JSLoader 移至 js_loader.py
-# 其他依赖类 (BrowserManager, MagicBrowserConfig, PageRegistry) 从各自文件导入
+# JSLoader moved to js_loader.py
+# Other dependent classes (BrowserManager, MagicBrowserConfig, PageRegistry) imported from respective files

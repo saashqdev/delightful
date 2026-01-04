@@ -1,5 +1,5 @@
 """
-模型token价格配置模块
+Model token pricing configuration module
 """
 
 from enum import Enum
@@ -12,13 +12,13 @@ logger = get_logger(__name__)
 
 
 class CurrencyType(Enum):
-    """货币类型枚举"""
-    USD = "USD"  # 美元
-    RMB = "CNY"  # 人民币
+    """Currency type enumeration"""
+    USD = "USD"  # US Dollar
+    RMB = "CNY"  # Chinese Yuan (Renminbi)
 
 
 class PricingInfo(TypedDict, total=False):
-    """模型价格信息字典类型"""
+    """Model pricing information dictionary type"""
     input_price: float
     output_price: float
     cache_write_price: float
@@ -26,20 +26,20 @@ class PricingInfo(TypedDict, total=False):
     currency: str
 
 
-# 添加泛型类型变量，用于类型转换
+# Add generic type variable for type conversion
 T = TypeVar('T')
 
 
 def safe_cast(value: Any, to_type: Type[T], default: T) -> T:
-    """安全类型转换
+    """Safe type conversion
 
     Args:
-        value: 要转换的值
-        to_type: 目标类型
-        default: 转换失败时的默认值
+        value: Value to convert
+        to_type: Target type
+        default: Default value when conversion fails
 
     Returns:
-        T: 转换后的值
+        T: Converted value
     """
     try:
         return to_type(value)
@@ -48,35 +48,35 @@ def safe_cast(value: Any, to_type: Type[T], default: T) -> T:
 
 
 class ModelPricing:
-    """LLM模型价格配置和成本计算
+    """LLM model pricing configuration and cost calculation
 
-    用于配置各模型的token价格，并基于使用情况计算成本
+    Used to configure token pricing for each model and calculate cost based on usage
     """
 
-    # 默认汇率 (USD -> RMB)
+    # Default exchange rate (USD -> RMB)
     DEFAULT_EXCHANGE_RATE = 7.2
 
     def __init__(self,
                  models_config: Optional[Dict[str, Dict[str, Any]]] = None,
                  exchange_rate: float = DEFAULT_EXCHANGE_RATE,
                  display_currency: str = CurrencyType.RMB.value):
-        """初始化
+        """Initialize
 
         Args:
-            models_config: 从主配置加载的模型配置字典
-            exchange_rate: 汇率，用于USD到RMB的转换，默认为7.2
-            display_currency: 显示货币，用于报告显示，默认为人民币
+            models_config: Model configuration dictionary loaded from main config
+            exchange_rate: Exchange rate for USD to RMB conversion, defaults to 7.2
+            display_currency: Display currency for reports, defaults to Chinese Yuan
         """
         self.pricing: Dict[str, PricingInfo] = {}
         self.exchange_rate = exchange_rate
         self.display_currency = display_currency
 
-        # 从models_config中加载价格信息，如果提供了配置
+        # Load pricing information from models_config if provided
         if models_config:
             self._load_pricing_from_config(models_config)
         else:
-            logger.warning("没有提供模型配置，将使用默认价格")
-            # 设置默认价格
+            logger.warning("No model configuration provided, will use default pricing")
+            # Set default pricing
             self.pricing["default"] = {
                 "input_price": 0.001,
                 "output_price": 0.002,
@@ -84,92 +84,92 @@ class ModelPricing:
             }
 
     def _load_pricing_from_config(self, models_config: Dict[str, Dict[str, Any]]) -> None:
-        """从配置中加载价格信息
+        """Load pricing information from configuration
 
         Args:
-            models_config: 模型配置字典
+            models_config: Model configuration dictionary
         """
         for model_name, config in models_config.items():
             if "pricing" in config and isinstance(config["pricing"], dict):
                 pricing_data = config["pricing"]
 
-                # 创建价格信息对象
+                # Create price information object
                 price_info: PricingInfo = {}
 
-                # 添加基本价格（必须）
+                # Add basic pricing (required)
                 if "input_price" in pricing_data:
                     price_info["input_price"] = safe_cast(pricing_data["input_price"], float, 0.0)
 
                 if "output_price" in pricing_data:
                     price_info["output_price"] = safe_cast(pricing_data["output_price"], float, 0.0)
 
-                # 添加可选价格
+                # Add optional pricing
                 if "cache_write_price" in pricing_data:
                     price_info["cache_write_price"] = safe_cast(pricing_data["cache_write_price"], float, 0.0)
 
                 if "cache_hit_price" in pricing_data:
                     price_info["cache_hit_price"] = safe_cast(pricing_data["cache_hit_price"], float, 0.0)
 
-                # 添加货币
+                # Add currency
                 if "currency" in pricing_data:
                     price_info["currency"] = str(pricing_data["currency"])
                 else:
                     price_info["currency"] = CurrencyType.USD.value
 
-                # 保存价格信息
+                # Save pricing information
                 self.pricing[model_name] = price_info
-            elif model_name != "default":  # 非默认模型缺少价格
-                logger.warning(f"模型 '{model_name}' 配置中缺少价格信息")
+            elif model_name != "default":  # Non-default model missing pricing
+                logger.warning(f"Model '{model_name}' configuration is missing pricing information")
 
-        # 确保有默认价格配置
+        # Ensure there is default pricing configuration
         if "default" not in self.pricing:
-            # 创建默认价格配置
+            # Create default pricing configuration
             self.pricing["default"] = {
                 "input_price": 0.001,
                 "output_price": 0.002,
                 "currency": CurrencyType.USD.value
             }
-            logger.info("已创建默认价格配置")
+            logger.info("Created default pricing configuration")
 
     def add_model_pricing(self, model_name: str, price_info: PricingInfo) -> None:
-        """添加或更新模型价格配置
+        """Add or update model pricing configuration
 
         Args:
-            model_name: 模型名称
-            price_info: 价格信息字典，包含input_price和output_price
+            model_name: Model name
+            price_info: Pricing information dictionary containing input_price and output_price
         """
         self.pricing[model_name] = price_info
 
     def get_model_pricing(self, model_name: str) -> PricingInfo:
-        """获取模型的价格配置
+        """Get model pricing configuration
 
         Args:
-            model_name: 模型名称
+            model_name: Model name
 
         Returns:
-            PricingInfo: 包含价格信息的字典
+            PricingInfo: Dictionary containing pricing information
         """
-        # 尝试获取确切匹配的模型价格
+        # Try to get exact matching model pricing
         if model_name in self.pricing:
             return self.pricing[model_name]
 
-        # 尝试前缀匹配
+        # Try prefix matching
         for key in self.pricing:
             if model_name.startswith(key):
                 return self.pricing[key]
 
-        # 返回默认价格
-        logger.info(f"未找到模型 '{model_name}' 的价格配置，使用默认价格")
+        # Return default pricing
+        logger.info(f"Pricing configuration not found for model '{model_name}', using default pricing")
         return self.pricing["default"]
 
     def get_currency_symbol(self, currency: Optional[str] = None) -> str:
-        """获取货币符号
+        """Get currency symbol
 
         Args:
-            currency: 货币代码，默认为显示货币
+            currency: Currency code, defaults to display currency
 
         Returns:
-            str: 货币符号
+            str: Currency symbol
         """
         if currency is None:
             currency = self.display_currency
@@ -182,15 +182,15 @@ class ModelPricing:
             return currency
 
     def convert_currency(self, amount: float, from_currency: str, to_currency: str) -> float:
-        """转换货币
+        """Convert currency
 
         Args:
-            amount: 金额
-            from_currency: 原始货币
-            to_currency: 目标货币
+            amount: Amount
+            from_currency: Source currency
+            to_currency: Target currency
 
         Returns:
-            float: 转换后的金额
+            float: Converted amount
         """
         if from_currency == to_currency:
             return amount
@@ -200,29 +200,29 @@ class ModelPricing:
         elif from_currency == CurrencyType.RMB.value and to_currency == CurrencyType.USD.value:
             return amount / self.exchange_rate
         else:
-            # 不支持的货币转换
+            # Unsupported currency conversion
             return amount
 
     def calculate_cost(self, model_name: str, token_usage: TokenUsage) -> Tuple[float, str]:
-        """计算token使用成本
+        """Calculate token usage cost
 
         Args:
-            model_name: A模型名称
-            token_usage: TokenUsage对象
+            model_name: Model name
+            token_usage: TokenUsage object
 
         Returns:
-            Tuple[float, str]: (成本, 货币类型)
+            Tuple[float, str]: (cost, currency type)
         """
         pricing = self.get_model_pricing(model_name)
         input_price = pricing.get("input_price", 0.0)
         output_price = pricing.get("output_price", 0.0)
         currency = pricing.get("currency", CurrencyType.USD.value)
 
-        # 使用TokenUsage对象
+        # Use TokenUsage object
         input_tokens = token_usage.input_tokens
         output_tokens = token_usage.output_tokens
 
-        # 从input_tokens_details中获取缓存信息
+        # Get cache information from input_tokens_details
         cache_write_tokens = 0
         cache_hit_tokens = 0
 
@@ -230,17 +230,17 @@ class ModelPricing:
             cache_write_tokens = token_usage.input_tokens_details.cache_write_tokens or 0
             cache_hit_tokens = token_usage.input_tokens_details.cached_tokens or 0
 
-        # 基础成本计算（按千token）
+        # Basic cost calculation (per thousand tokens)
         cost = (input_tokens * input_price + output_tokens * output_price) / 1000
 
-        # 计算缓存成本
+        # Calculate cache costs
         if cache_write_tokens > 0 and "cache_write_price" in pricing:
             cost += (cache_write_tokens * cast(float, pricing["cache_write_price"])) / 1000
 
         if cache_hit_tokens > 0 and "cache_hit_price" in pricing:
             cost += (cache_hit_tokens * cast(float, pricing["cache_hit_price"])) / 1000
 
-        # 确保结果为有效数字
+        # Ensure result is a valid number
         cost = max(0.0, cost)
 
         return cost, currency

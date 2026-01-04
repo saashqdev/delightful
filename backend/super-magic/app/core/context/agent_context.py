@@ -432,64 +432,64 @@ class AgentContext(BaseAgentContext):
         return metadata.get("user_id")
 
     def get_metadata(self) -> Dict[str, Any]:
-        """获取元数据
+        """Get metadata
 
         Returns:
-            Dict[str, Any]: 上下文元数据
+            Dict[str, Any]: Context metadata
         """
         return self.get_init_client_message_metadata()
 
     def _serialize_value(self, value: Any) -> Any:
-        """将值转换为可序列化的格式
+        """Convert value to serializable format
         
         Args:
-            value: 需要序列化的值
+            value: Value to serialize
             
         Returns:
-            Any: 转换后可序列化的值
+            Any: Serialized value
         """
         if value is None:
             return None
 
-        # 处理 pathlib.Path 对象
+        # Handle pathlib.Path objects
         if hasattr(value, "absolute") and callable(getattr(value, "absolute")):
             return str(value)
 
-        # 处理具有 to_dict 方法的对象
+        # Handle objects with to_dict method
         if hasattr(value, "to_dict") and callable(getattr(value, "to_dict")):
             return value.to_dict()
 
-        # 处理日期时间对象
+        # Handle datetime objects
         if isinstance(value, (datetime, timedelta)):
             return str(value)
 
-        # 处理异步队列
+        # Handle async queue
         if isinstance(value, asyncio.Queue):
             return f"<Queue:{id(value)}>"
 
-        # 处理字典
+        # Handle dictionary
         if isinstance(value, dict):
             return {k: self._serialize_value(v) for k, v in value.items()}
 
-        # 处理列表或元组
+        # Handle list or tuple
         if isinstance(value, (list, tuple)):
             return [self._serialize_value(item) for item in value]
 
-        # 尝试直接转换为 str
+        # Try direct conversion to str
         try:
             json.dumps(value)
             return value
         except (TypeError, OverflowError, ValueError):
-            # 如果无法序列化，则返回类型和ID信息
+            # If cannot serialize, return type and ID info
             return f"<{type(value).__name__}:{id(value)}>"
 
     def to_dict(self) -> Dict[str, Any]:
-        """将代理上下文转换为字典
+        """Convert agent context to dictionary
         
         Returns:
-            Dict[str, Any]: 包含代理上下文信息的字典
+            Dict[str, Any]: Dictionary containing agent context information
         """
-        # 基本信息
+        # Basic information
         result = {
             "agent_name": self.get_agent_name(),
             "workspace_dir": self._serialize_value(self.get_workspace_dir()),
@@ -500,15 +500,15 @@ class AgentContext(BaseAgentContext):
             "organization_code": self.get_organization_code(),
         }
 
-        # 集合信息
+        # Collection information
         try:
             result["todo_items_count"] = len(self.get_todo_items())
-            # 添加部分 todo_items 信息
+            # Add partial todo_items information
             todo_items = self.get_todo_items()
             if todo_items:
                 result["todo_items"] = self._serialize_value({k: v for i, (k, v) in enumerate(todo_items.items()) if i < 5})
                 if len(todo_items) > 5:
-                    result["todo_items"]["..."] = f"还有 {len(todo_items) - 5} 项未显示"
+                    result["todo_items"]["..."] = f"... {len(todo_items) - 5} more items not shown"
         except Exception as e:
             result["todo_items_error"] = str(e)
 
@@ -518,7 +518,7 @@ class AgentContext(BaseAgentContext):
             if attachments:
                 result["attachments"] = [att.filename for att in attachments[:5]]
                 if len(attachments) > 5:
-                    result["attachments"].append(f"... 还有 {len(attachments) - 5} 个附件未显示")
+                    result["attachments"].append(f"... {len(attachments) - 5} more attachments not shown")
         except Exception as e:
             result["attachments_error"] = str(e)
 
@@ -527,16 +527,16 @@ class AgentContext(BaseAgentContext):
         except Exception as e:
             result["streams_error"] = str(e)
 
-        # 添加共享上下文信息
-        result["shared_context"] = "<使用 shared_context.to_dict() 查看详细信息>"
+        # Add shared context information
+        result["shared_context"] = "<Use shared_context.to_dict() to view detailed information>"
 
         return result
 
     def __str__(self) -> str:
-        """自定义字符串表示
+        """Custom string representation
         
         Returns:
-            str: 字典形式的字符串表示
+            str: String representation in dictionary form
         """
         try:
             return json.dumps(self.to_dict(), ensure_ascii=False, indent=2)
@@ -544,9 +544,9 @@ class AgentContext(BaseAgentContext):
             return f"<AgentContext object at {hex(id(self))}: {e!s}>"
 
     def __repr__(self) -> str:
-        """自定义对象表示
+        """Custom object representation
         
         Returns:
-            str: 字典形式的对象表示
+            str: Dictionary form object representation
         """
         return self.__str__()

@@ -1,11 +1,11 @@
-# 定义代理状态枚举
+# Define agent state enum
 import enum
 
 
 class AgentState(enum.Enum):
-    """Agent状态枚举"""
+    """Agent state enum"""
 
-    IDLE = "idle"  # 空闲状态
-    RUNNING = "running"  # 运行中
-    FINISHED = "finished"  # 顺利完成状态
-    ERROR = "error"  # 错误状态 
+    IDLE = "idle"  # Idle state
+    RUNNING = "running"  # Running
+    FINISHED = "finished"  # Successfully completed state
+    ERROR = "error"  # Error state

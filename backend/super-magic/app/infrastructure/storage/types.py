@@ -13,8 +13,8 @@ class PlatformType(str, Enum):
     """Storage platform types."""
 
     tos = "tos"
-    aliyun = "aliyun"  # 阿里云 OSS
-    local = "local"    # 本地存储
+    aliyun = "aliyun"  # Aliyun OSS
+    local = "local"    # Local storage
 
 
 class BaseStorageCredentials(BaseModel):
@@ -26,38 +26,38 @@ class BaseStorageCredentials(BaseModel):
 
     @abstractmethod
     def get_dir(self) -> str:
-        """上传目录路径"""
+        """Upload directory path"""
         pass
 
     @abstractmethod
     def get_public_access_base_url(self) -> Optional[str]:
-        """获取用于构建公共访问URL的基础部分 (例如 https://bucket.endpoint 或 https://host)
-        如果平台不支持或无法生成公共URL，则返回 None。
+        """Get base URL for public access (e.g., https://bucket.endpoint or https://host).
+        Return None if the platform cannot provide a public URL.
         """
         pass
 
 
 class TemporaryCredentialData(BaseModel):
-    """STS临时凭证中的credentials字段结构"""
-    AccessKeyId: str = Field(..., description="临时访问密钥ID")
-    SecretAccessKey: str = Field(..., description="临时访问密钥")
-    SessionToken: str = Field(..., description="安全令牌")
-    ExpiredTime: str = Field(..., description="过期时间")
-    CurrentTime: str = Field(..., description="当前时间")
+    """STS temporary credential fields."""
+    AccessKeyId: str = Field(..., description="Temporary access key ID")
+    SecretAccessKey: str = Field(..., description="Temporary access key")
+    SessionToken: str = Field(..., description="Security token")
+    ExpiredTime: str = Field(..., description="Expiration time")
+    CurrentTime: str = Field(..., description="Current time")
 
     model_config = ConfigDict(populate_by_name=True)
 
 
 class TemporaryCredentials(BaseModel):
-    """STS临时凭证结构"""
-    host: str = Field(..., description="存储服务主机URL")
-    region: str = Field(..., description="TOS区域")
-    endpoint: str = Field(..., description="TOS终端节点URL")
-    credentials: TemporaryCredentialData = Field(..., description="STS凭证详情")
-    bucket: str = Field(..., description="TOS存储桶名称")
-    dir: str = Field(..., description="上传目录路径")
-    expires: int = Field(..., description="过期时间(秒)")
-    callback: str = Field("", description="回调URL")
+    """STS temporary credential payload."""
+    host: str = Field(..., description="Storage service host URL")
+    region: str = Field(..., description="TOS region")
+    endpoint: str = Field(..., description="TOS endpoint URL")
+    credentials: TemporaryCredentialData = Field(..., description="STS credential details")
+    bucket: str = Field(..., description="TOS bucket name")
+    dir: str = Field(..., description="Upload directory path")
+    expires: int = Field(..., description="Expiration time (seconds)")
+    callback: str = Field("", description="Callback URL")
 
     model_config = ConfigDict(populate_by_name=True)
 
@@ -65,52 +65,52 @@ class TemporaryCredentials(BaseModel):
 class VolcEngineCredentials(BaseStorageCredentials):
     """VolcEngine TOS credentials model with STS support."""
 
-    platform: Literal[PlatformType.tos] = Field(PlatformType.tos, description="存储平台类型")
-    temporary_credential: TemporaryCredentials = Field(..., description="STS临时凭证")
-    expire: Optional[int] = Field(None, description="过期时间戳")
-    expires: Optional[int] = Field(None, description="过期时间戳别名")
+    platform: Literal[PlatformType.tos] = Field(PlatformType.tos, description="Storage platform type")
+    temporary_credential: TemporaryCredentials = Field(..., description="STS temporary credential")
+    expire: Optional[int] = Field(None, description="Expiration timestamp")
+    expires: Optional[int] = Field(None, description="Expiration timestamp alias")
 
     def get_dir(self) -> str:
-        """上传目录路径"""
+        """Upload directory path"""
         return self.temporary_credential.dir
 
     def get_public_access_base_url(self) -> Optional[str]:
-        """获取TOS公共访问基础URL (基于 temporary_credential.host)"""
+        """Get TOS public access base URL (from temporary_credential.host)."""
         host = self.temporary_credential.host
         if not host:
             return None
-        # 确保返回包含协议的完整基础URL
+        # Ensure returned base URL includes protocol
         if not host.startswith(("http://", "https://")):
-             # 默认使用 https，或根据实际情况调整
+             # Default to https; adjust if needed
              host = f"https://{host}"
-        # 移除末尾的斜杠，如果有的话
+        # Trim trailing slash
         if host.endswith('/'):
             host = host[:-1]
         return host
 
 
-# 阿里云OSS临时凭证数据
+# Aliyun OSS temporary credential data
 class AliyunTemporaryCredentialData(BaseModel):
-    """阿里云STS临时凭证中的credentials字段结构"""
-    AccessKeyId: str = Field(..., description="临时访问密钥ID")
-    AccessKeySecret: str = Field(..., description="临时访问密钥")
-    SecurityToken: str = Field(..., description="安全令牌")
-    Expiration: str = Field(..., description="过期时间")
+    """Aliyun STS temporary credential fields."""
+    AccessKeyId: str = Field(..., description="Temporary access key ID")
+    AccessKeySecret: str = Field(..., description="Temporary access key")
+    SecurityToken: str = Field(..., description="Security token")
+    Expiration: str = Field(..., description="Expiration time")
 
     model_config = ConfigDict(populate_by_name=True)
 
 
-# 阿里云OSS凭证
+# Aliyun OSS credentials
 class AliyunCredentials(BaseStorageCredentials):
-    """阿里云OSS凭证模型，支持STS"""
+    """Aliyun OSS credential model with STS support."""
 
-    platform: Literal[PlatformType.aliyun] = Field(PlatformType.aliyun, description="存储平台类型")
-    endpoint: str = Field(default=..., description="OSS终端节点URL")
-    region: str = Field(..., description="OSS区域")
-    bucket: str = Field(..., description="OSS存储桶名称")
-    dir: str = Field(..., description="上传目录路径")
-    credentials: AliyunTemporaryCredentialData = Field(..., description="STS临时凭证")
-    expire: Optional[int] = Field(None, description="过期时间戳")
+    platform: Literal[PlatformType.aliyun] = Field(PlatformType.aliyun, description="Storage platform type")
+    endpoint: str = Field(default=..., description="OSS endpoint URL")
+    region: str = Field(..., description="OSS region")
+    bucket: str = Field(..., description="OSS bucket name")
+    dir: str = Field(..., description="Upload directory path")
+    credentials: AliyunTemporaryCredentialData = Field(..., description="STS temporary credential")
+    expire: Optional[int] = Field(None, description="Expiration timestamp")
 
     @model_validator(mode='before')
     @classmethod
@@ -146,26 +146,26 @@ class AliyunCredentials(BaseStorageCredentials):
         return input_data
 
     def get_dir(self) -> str:
-        """上传目录路径"""
+        """Upload directory path"""
         return self.dir
 
     def get_public_access_base_url(self) -> Optional[str]:
-        """获取阿里云OSS公共访问基础URL (格式: https://bucket.endpoint)"""
+        """Get Aliyun OSS public base URL (format: https://bucket.endpoint)."""
         if not self.bucket or not self.endpoint:
             return None
 
-        # 清理 endpoint，移除可能存在的协议头
+        # Strip protocol if present
         endpoint = self.endpoint
         if endpoint.startswith("http://"):
             endpoint = endpoint[len("http://"):]
         if endpoint.startswith("https://"):
             endpoint = endpoint[len("https://"):]
 
-        # 移除末尾的斜杠 (尽管 endpoint 通常不带)
+        # Remove trailing slash if any
         if endpoint.endswith('/'):
             endpoint = endpoint[:-1]
 
-        # 总是使用 https 协议
+        # Always use https
         return f"https://{self.bucket}.{endpoint}"
 
 
@@ -195,39 +195,39 @@ class StorageUploader(Protocol):
         ...
 
 
-# 本地存储凭证
+# Local storage credentials
 class LocalTemporaryCredential(BaseModel):
-    """本地存储临时凭证模型"""
-    host: str = Field(..., description="上传接口URL")
-    dir: str = Field(..., description="上传目录路径")
-    read_host: str = Field(..., description="文件读取基础URL")
-    credential: str = Field("", description="凭证标识符")
+    """Local storage temporary credential model."""
+    host: str = Field(..., description="Upload endpoint URL")
+    dir: str = Field(..., description="Upload directory path")
+    read_host: str = Field(..., description="Base URL for file reads")
+    credential: str = Field("", description="Credential identifier")
 
     model_config = ConfigDict(populate_by_name=True)
 
 
 class LocalCredentials(BaseStorageCredentials):
-    """本地存储凭证模型"""
+    """Local storage credential model."""
 
-    platform: Literal[PlatformType.local] = Field(PlatformType.local, description="存储平台类型")
-    temporary_credential: LocalTemporaryCredential = Field(..., description="本地存储临时凭证")
-    expires: Optional[int] = Field(None, description="过期时间戳")
+    platform: Literal[PlatformType.local] = Field(PlatformType.local, description="Storage platform type")
+    temporary_credential: LocalTemporaryCredential = Field(..., description="Local storage temporary credential")
+    expires: Optional[int] = Field(None, description="Expiration timestamp")
 
     def get_dir(self) -> str:
-        """上传目录路径"""
+        """Upload directory path"""
         return self.temporary_credential.dir
 
     def get_public_access_base_url(self) -> Optional[str]:
-        """获取本地存储公共访问基础URL"""
+        """Get local storage public access base URL."""
         read_host = self.temporary_credential.read_host
         if not read_host:
             return None
 
-        # 确保返回包含协议的完整基础URL
+        # Ensure protocol is present
         if not read_host.startswith(("http://", "https://")):
             read_host = f"http://{read_host}"
 
-        # 移除末尾的斜杠，如果有的话
+        # Trim trailing slash
         if read_host.endswith('/'):
             read_host = read_host[:-1]
 

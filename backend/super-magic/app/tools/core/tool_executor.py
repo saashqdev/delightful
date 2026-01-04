@@ -1,12 +1,12 @@
-"""工具执行器模块
+"""Tool executor module.
 
-负责执行工具调用，管理工具实例集合。本模块是工具系统的核心组件之一，
-提供了统一的工具执行接口，简化了工具的获取和调用过程。
+Executes tool calls and manages tool instances as a core component of the tool
+system. Provides a unified execution interface to simplify lookup and calling.
 
-设计思路：
-1. 单例模式：全局提供一个tool_executor实例，所有代码使用相同实例
-2. 执行代理：对tool_factory的功能扩展，处理参数转换和错误捕获
-3. 参数适配：自动将传入参数适配为工具需要的格式
+Design notes:
+1. Singleton: global `tool_executor` instance reused across code
+2. Execution proxy: extends tool_factory to handle param conversion and errors
+3. Parameter adaptation: converts incoming args to the format tools expect
 """
 
 import time
@@ -24,87 +24,62 @@ logger = get_logger(__name__)
 
 
 class ToolExecutor:
-    """工具执行器
+    """Manage and execute tools.
 
-    管理工具集合并执行工具调用。工具执行器负责：
-    1. 获取和管理工具实例
-    2. 执行工具调用，包括参数处理和错误捕获
-    3. 提供统一的接口获取工具模式信息
+    Responsibilities:
+    1) Retrieve and manage tool instances
+    2) Execute calls with parameter handling and error capture
+    3) Provide a unified interface for tool schemas
 
-    使用方式：
+    Usage:
     ```python
-    # 使用全局实例
     from app.tools.core.tool_executor import tool_executor
 
-    # 执行工具
     result = await tool_executor.execute_tool_call(tool_context, arguments)
-
-    # 获取工具实例
     tool = tool_executor.get_tool("tool_name")
-
-    # 获取工具函数调用模式
     schemas = tool_executor.get_tool_schemas()
     ```
     """
 
     def __init__(self, tools=None):
-        """初始化工具执行器
-
-        Args:
-            tools: 要使用的工具列表，如果为None则使用所有注册的工具
-        """
-        # 确保工具工厂已初始化
+        """Initialize executor with optional tool list."""
+        # Ensure factory is ready
         if not tool_factory._tools:
             tool_factory.initialize()
         self._tools = tools or []
 
     def set_tools(self, tools: List):
-        """设置工具列表
-
-        Args:
-            tools: 工具列表
-        """
+        """Set active tool list."""
         self._tools = tools or []
 
     async def execute_tool_call(self, tool_context: ToolContext, arguments: Dict[str, Any] = None) -> ToolResult:
-        """执行工具调用
+        """Primary entry for executing a tool call.
 
-        此方法是工具调用的主要入口点，它处理：
-        1. 工具实例获取
-        2. 参数验证和转换
-        3. 错误捕获和处理
-        4. 结果格式化
-
-        Args:
-            tool_context: 工具上下文，包含工具名称等信息
-            arguments: 工具参数字典
-
-        Returns:
-            ToolResult: 工具执行结果
+        Handles instance lookup, parameter validation/conversion, error capture,
+        and result formatting.
         """
         tool_name = tool_context.tool_name
 
         try:
-            # 获取工具实例
+            # Get tool instance
             tool_instance = self.get_tool(tool_name)
             if not tool_instance:
-                friendly_error = f"工具 '{tool_name}' 不存在，请检查工具名称是否正确"
+                friendly_error = f"Tool '{tool_name}' does not exist; verify the tool name"
                 logger.error(friendly_error)
                 raise ValueError(friendly_error)
 
-            # 确保参数不为None
+            # Ensure arguments present
             if arguments is None:
                 arguments = {}
 
-            # 通过__call__方法调用工具，自动处理参数转换
-            # 注意：这里使用__call__而不是直接调用execute，以便触发参数模型转换
+            # Call __call__ to trigger param model conversion instead of execute
             start_time = time.time()
             result: ToolResult = await tool_instance(tool_context, **arguments)
 
             if not result.ok:
-                logger.error(f"工具 {tool_name} 执行失败: {result.content}")
+                logger.error(f"Tool {tool_name} execution failed: {result.content}")
 
-            # 设置执行时间和名称
+            # Set execution time and metadata
             if result:
                 result.execution_time = time.time() - start_time
                 result.name = tool_name
@@ -112,61 +87,51 @@ class ToolExecutor:
 
             return result
         except ValidationError as ve:
-            # 特别处理参数验证错误
-            logger.error(f"工具 {tool_name} 参数验证失败: {ve!s}")
+            # Parameter validation errors
+            logger.error(f"Tool {tool_name} parameter validation failed: {ve!s}")
 
-            # 尝试提取友好的错误消息
+            # Try to build a friendly error message
             error_msg = self._get_friendly_validation_error(tool_name, ve)
 
-            # 返回错误结果
+            # Return error result
             result = ToolResult(
                 error=error_msg,
                 name=tool_name
             )
 
-            # 设置工具调用ID
+            # Propagate tool_call_id
             if hasattr(tool_context, 'tool_call_id'):
                 result.tool_call_id = tool_context.tool_call_id
 
             return result
         except Exception as e:
-            # 打印错误信息和完整调用栈
+            # Log full stack
             error_stack = traceback.format_exc()
-            logger.error(f"执行工具 {tool_name} 时出错: {e}")
-            logger.error(f"错误调用栈:\n{error_stack}")
-            # 根据错误类型生成友好的错误消息
+            logger.error(f"Error executing tool {tool_name}: {e}")
+            logger.error(f"Stack trace:\n{error_stack}")
+            # Build friendly error message
             error_type = type(e).__name__
             error_msg = self._get_friendly_error_message(tool_name, error_type, str(e))
 
-            # 返回错误结果
+            # Return error result
             result = ToolResult(
                 error=error_msg,
                 name=tool_name
             )
 
-            # 设置工具调用ID
+            # Propagate tool_call_id
             if hasattr(tool_context, 'tool_call_id'):
                 result.tool_call_id = tool_context.tool_call_id
 
             return result
 
     def _get_friendly_validation_error(self, tool_name: str, validation_error: ValidationError) -> str:
-        """获取友好的验证错误消息
-
-        处理Pydantic验证错误，返回用户友好的错误消息
-
-        Args:
-            tool_name: 工具名称
-            validation_error: 验证错误
-
-        Returns:
-            str: 友好的错误消息
-        """
-        # 尝试从错误中提取错误详情
+        """Return a friendly message for Pydantic validation errors."""
+        # Extract details when possible
         try:
             error_details = validation_error.errors()
 
-            # 检查是否有缺失字段
+            # Categorize errors
             missing_fields = []
             type_errors = []
             other_errors = []
@@ -182,117 +147,74 @@ class ToolExecutor:
                 else:
                     other_errors.append(f"'{field_path}'")
 
-            # 构建友好错误消息
+            # Build friendly message
             if missing_fields:
-                return f"执行工具 '{tool_name}' 缺少必填参数：{', '.join(missing_fields)}"
+                return f"Tool '{tool_name}' is missing required parameters: {', '.join(missing_fields)}"
             elif type_errors:
-                return f"执行工具 '{tool_name}' 的参数类型错误，请检查以下参数：{', '.join(type_errors)}"
+                return f"Tool '{tool_name}' has parameter type errors, check: {', '.join(type_errors)}"
             elif other_errors:
-                return f"执行工具 '{tool_name}' 的参数验证失败，请检查以下参数：{', '.join(other_errors)}"
+                return f"Tool '{tool_name}' parameter validation failed, check: {', '.join(other_errors)}"
 
         except Exception as e:
-            # 如果提取详情失败，返回通用错误消息
-            logger.error(f"解析验证错误详情时出错: {e}")
+            # Fall back to generic messaging
+            logger.error(f"Failed to parse validation details: {e}")
 
-        # 默认友好错误消息
-        return f"执行工具 '{tool_name}' 的参数验证失败，请检查输入参数是否符合要求"
+        # Default friendly message
+        return f"Tool '{tool_name}' parameter validation failed; please verify input requirements"
 
     def _get_friendly_error_message(self, tool_name: str, error_type: str, error_message: str) -> str:
-        """获取友好的错误消息
-
-        根据错误类型和消息生成用户友好的错误提示
-
-        Args:
-            tool_name: 工具名称
-            error_type: 错误类型
-            error_message: 原始错误消息
-
-        Returns:
-            str: 友好的错误消息
-        """
-        # 检查是否已经是友好错误消息
-        if "不存在" in error_message or "检查" in error_message:
+        """Return a user-friendly error message based on type/content."""
+        # If already friendly, return as-is
+        if "does not exist" in error_message.lower() or "check" in error_message.lower():
             return error_message
 
-        # 根据错误类型返回友好消息
+        # Map common error types to friendly hints
         if "NotFound" in error_type or "not found" in error_message.lower():
-            return f"执行工具 '{tool_name}' 失败：找不到请求的资源"
+            return f"Tool '{tool_name}' failed: requested resource not found"
 
         if "Permission" in error_type or "Access" in error_type:
-            return f"执行工具 '{tool_name}' 失败：没有足够的权限"
+            return f"Tool '{tool_name}' failed: insufficient permissions"
 
         if "Timeout" in error_type or "timeout" in error_message.lower():
-            return f"执行工具 '{tool_name}' 失败：操作超时，请稍后重试"
+            return f"Tool '{tool_name}' failed: operation timed out, please retry"
 
         if "Connection" in error_type or "network" in error_message.lower():
-            return f"执行工具 '{tool_name}' 失败：网络连接问题"
+            return f"Tool '{tool_name}' failed: network connection issue"
 
         if "Value" in error_type:
-            return f"执行工具 '{tool_name}' 失败：参数值无效，请检查输入"
+            return f"Tool '{tool_name}' failed: invalid parameter value, check input"
 
-        # 默认友好错误消息
-        return f"执行工具 '{tool_name}' 失败：{error_message}"
+        # Default friendly message
+        return f"Tool '{tool_name}' failed: {error_message}"
 
     def get_tool(self, tool_name: str):
-        """获取工具实例
-
-        Args:
-            tool_name: 工具名称
-
-        Returns:
-            工具实例，如果不存在则返回None
-        """
+        """Fetch a tool instance by name; return None if unavailable."""
         try:
             return tool_factory.get_tool_instance(tool_name)
         except Exception as e:
-            logger.error(f"获取工具 {tool_name} 实例失败: {e}")
+            logger.error(f"Failed to get tool {tool_name} instance: {e}")
             return None
 
     def get_all_tools(self):
-        """获取所有工具实例
-
-        如果设置了特定工具列表，则返回该列表
-        否则返回所有已注册的工具实例
-
-        Returns:
-            所有工具实例列表
-        """
+        """Return configured tools or all registered instances."""
         if self._tools:
             return self._tools
         return tool_factory.get_all_tool_instances()
 
     def get_tool_schemas(self) -> List[Dict[str, Any]]:
-        """获取所有工具的函数调用架构
-
-        生成OpenAI兼容的Function Calling格式描述
-
-        Returns:
-            函数调用架构列表，格式为OpenAI规范
-        """
+        """Return OpenAI-compatible function-calling schemas for all tools."""
         tools = self.get_all_tools()
         return [tool.to_param() for tool in tools]
 
     async def run_tool(self, tool_context: ToolContext, tool_name: str = None, **args):
-        """运行工具
-
-        兼容旧代码的调用方式，如果提供了tool_name则用它更新tool_context
-
-        Args:
-            tool_context: 工具上下文
-            tool_name: 可选的工具名称，如果提供则更新tool_context
-            **args: 工具参数
-
-        Returns:
-            ToolResult: 工具执行结果
-        """
-        # 如果提供了tool_name，则更新tool_context
+        """Run a tool; keeps backward compatibility with optional tool_name."""
+        # Update tool_context when tool_name provided
         if tool_name:
             tool_context.tool_name = tool_name
 
-        # 执行工具
+        # Execute tool
         return await self.execute_tool_call(tool_context, args)
 
 
-# 创建全局工具执行器实例
-# 这是一个单例，整个应用程序应该使用此实例而不是创建新实例
+# Global singleton tool executor instance
 tool_executor = ToolExecutor()

@@ -1,7 +1,7 @@
 """
-Token使用统计系统的核心数据模型
+Core data models for the token usage statistics system
 
-定义强类型数据对象，用于在系统中传递token使用相关信息
+Defines strongly-typed data objects for passing token usage related information within the system
 """
 
 from dataclasses import dataclass, field
@@ -15,22 +15,22 @@ logger = get_logger(__name__)
 
 @dataclass
 class InputTokensDetails:
-    """输入tokens的详细信息"""
-    cached_tokens: Optional[int] = 0  # 从缓存中读取的token数
-    cache_write_tokens: Optional[int] = 0  # 写入缓存的token数
+    """Detailed information about input tokens"""
+    cached_tokens: Optional[int] = 0  # Number of tokens read from cache
+    cache_write_tokens: Optional[int] = 0  # Number of tokens written to cache
 
     def to_dict(self) -> Dict[str, Any]:
-        """转换为字典，只包含非零值"""
+        """Convert to dictionary, only including non-zero values"""
         data = {k: v for k, v in self.__dict__.items() if v is not None}
         return data if any(v != 0 for v in data.values() if isinstance(v, (int, float))) else None
 
     @classmethod
     def from_dict(cls, data: Optional[Dict[str, Any]]) -> Optional['InputTokensDetails']:
-        """从字典创建对象，如果全为0则返回None"""
+        """Create object from dictionary, returns None if all values are 0"""
         if not data:
             return None
 
-        # 检查是否所有值都是0或None
+        # Check if all values are 0 or None
         all_zero_or_none = True
         for value in data.values():
             if value is not None and value != 0:
@@ -48,21 +48,21 @@ class InputTokensDetails:
 
 @dataclass
 class OutputTokensDetails:
-    """输出tokens的详细信息"""
-    reasoning_tokens: Optional[int] = 0  # 推理使用的token数
+    """Detailed information about output tokens"""
+    reasoning_tokens: Optional[int] = 0  # Number of tokens used for reasoning
 
     def to_dict(self) -> Dict[str, Any]:
-        """转换为字典，只包含非零值"""
+        """Convert to dictionary, only including non-zero values"""
         data = {k: v for k, v in self.__dict__.items() if v is not None}
         return data if any(v != 0 for v in data.values() if isinstance(v, (int, float))) else None
 
     @classmethod
     def from_dict(cls, data: Optional[Dict[str, Any]]) -> Optional['OutputTokensDetails']:
-        """从字典创建对象，如果全为0则返回None"""
+        """Create object from dictionary, returns None if all values are 0"""
         if not data:
             return None
 
-        # 检查是否所有值都是0或None
+        # Check if all values are 0 or None
         all_zero_or_none = True
         for value in data.values():
             if value is not None and value != 0:
@@ -156,39 +156,39 @@ class TokenUsage:
     @classmethod
     def register_parser(cls, parser: Type[TokenUsageParser]) -> None:
         """
-        注册新的解析器
+        Register a new parser
 
         Args:
-            parser: 解析器类，必须实现TokenUsageParser协议
+            parser: Parser class, must implement TokenUsageParser protocol
         """
         if parser not in cls._parsers:
-            # 检查parser是否实现了必要的方法
+            # Check if parser implements necessary methods
             if not (hasattr(parser, 'can_parse') and hasattr(parser, 'parse')):
-                raise ValueError(f"解析器 {parser.__name__} 必须实现 can_parse 和 parse 方法")
+                raise ValueError(f"Parser {parser.__name__} must implement can_parse and parse methods")
             cls._parsers.append(parser)
-            logger.debug(f"已注册token使用解析器: {parser.__name__}")
+            logger.debug(f"Registered token usage parser: {parser.__name__}")
 
     @classmethod
     def from_response(cls, response_usage: Any) -> 'TokenUsage':
         """
-        从API响应中提取token使用数据并创建TokenUsage对象。
-        尝试所有注册的解析器，直到找到适合的解析器。
+        Extract token usage data from API response and create TokenUsage object.
+        Try all registered parsers until a suitable parser is found.
 
         Args:
-            response_usage: API响应中的usage部分
+            response_usage: usage part of API response
 
         Returns:
-            TokenUsage: 标准化的TokenUsage对象
+            TokenUsage: Standardized TokenUsage object
         """
         if not response_usage:
             return cls(input_tokens=0, output_tokens=0, total_tokens=0)
 
-        # 尝试已注册的所有解析器
+        # Try all registered parsers
         for parser in cls._parsers:
             try:
                 if parser.can_parse(response_usage):
                     input_tokens, output_tokens, total_tokens, input_details, output_details = parser.parse(response_usage)
-                    logger.debug(f"使用 {parser.__name__} 解析token信息: input={input_tokens}, output={output_tokens}, total={total_tokens}")
+                    logger.debug(f"Parsed token info using {parser.__name__}: input={input_tokens}, output={output_tokens}, total={total_tokens}")
                     return cls(
                         input_tokens=input_tokens,
                         output_tokens=output_tokens,
@@ -197,38 +197,38 @@ class TokenUsage:
                         output_tokens_details=output_details
                     )
             except Exception as e:
-                logger.warning(f"{parser.__name__} 解析失败: {e}")
+                logger.warning(f"{parser.__name__} parsing failed: {e}")
                 continue
 
-        # 如果没有合适的解析器，使用默认解析器
-        logger.warning("没有找到合适的解析器，使用默认解析器")
+        # If no suitable parser found, use default parser
+        logger.warning("No suitable parser found, using default parser")
         try:
             return DefaultParser.create_token_usage(response_usage)
         except Exception as e:
-            logger.error(f"默认解析器失败: {e}")
+            logger.error(f"Default parser failed: {e}")
             return cls(input_tokens=0, output_tokens=0, total_tokens=0)
 
 
-# 更新DefaultParser，使其可以处理所有主流格式
+# Update DefaultParser to handle all mainstream formats
 class DefaultParser:
-    """默认解析器，处理所有主流格式，包括OpenAI和Anthropic"""
+    """Default parser, handles all mainstream formats including OpenAI and Anthropic"""
 
     @classmethod
     def can_parse(cls, response: Any) -> bool:
         """
-        默认解析器尝试处理所有格式，优先检查常见格式
+        Default parser attempts to handle all formats, prioritizing common formats
 
-        - OpenAI格式: prompt_tokens/completion_tokens
-        - Anthropic格式: prompt_tokens/completion_tokens，带有特殊的details结构
-        - 其他格式: 任何包含token信息的响应
+        - OpenAI format: prompt_tokens/completion_tokens
+        - Anthropic format: prompt_tokens/completion_tokens with special details structure
+        - Other formats: any response containing token information
         """
-        # 检查是否有token相关字段
+        # Check for token-related fields
         if isinstance(response, dict):
             token_fields = ["prompt_tokens", "completion_tokens", "total_tokens",
                            "input_tokens", "output_tokens"]
             return any(field in response for field in token_fields)
         elif response:
-            # 对于对象，检查是否有任何token相关属性
+            # For objects, check if they have any token-related attributes
             return any(hasattr(response, field) for field in ["prompt_tokens", "completion_tokens",
                                                              "input_tokens", "output_tokens"])
         return False
@@ -310,43 +310,43 @@ class DefaultParser:
 
 
 class StandardParser:
-    """标准格式解析器，与TokenUsage.to_dict()兼容"""
+    """Standard format parser, compatible with TokenUsage.to_dict()"""
 
     @classmethod
     def can_parse(cls, response: Any) -> bool:
-        """检查是否为标准格式"""
+        """Check if it's standard format"""
         if isinstance(response, dict):
-            # 标准格式使用input_tokens和output_tokens
+            # Standard format uses input_tokens and output_tokens
             return "input_tokens" in response and "output_tokens" in response
         return hasattr(response, "input_tokens") and hasattr(response, "output_tokens")
 
     @classmethod
     def parse(cls, response: Any) -> tuple[int, int, int, Optional[InputTokensDetails], Optional[OutputTokensDetails]]:
-        """解析标准格式响应"""
+        """Parse standard format response"""
         get_value = DefaultParser.get_value
 
-        # 直接提取标准字段
+        # Directly extract standard fields
         input_tokens = get_value(response, "input_tokens", 0)
         output_tokens = get_value(response, "output_tokens", 0)
         total_tokens = get_value(response, "total_tokens", 0)
 
-        # 如果没有total_tokens，计算得出
+        # If no total_tokens, calculate it
         if total_tokens == 0:
             total_tokens = input_tokens + output_tokens
 
-        # 提取details
+        # Extract details
         input_details_data = get_value(response, "input_tokens_details", None)
         output_details_data = get_value(response, "output_tokens_details", None)
 
-        # 解析详情
+        # Parse details
         input_details = InputTokensDetails.from_dict(input_details_data) if input_details_data else None
         output_details = OutputTokensDetails.from_dict(output_details_data) if output_details_data else None
 
         return input_tokens, output_tokens, total_tokens, input_details, output_details
 
 
-# 简化注册部分，只注册两个解析器
-# 注册内置的解析器 - 先注册StandardParser优先使用标准格式
+# Simplified registration part, only register two parsers
+# Register built-in parsers - register StandardParser first to prioritize standard format
 TokenUsage.register_parser(StandardParser)
 TokenUsage.register_parser(DefaultParser)
 
@@ -425,38 +425,38 @@ def get_currency_symbol(currency_code: str) -> str:
     return currency_symbols.get(currency_code, currency_code)
 
 
-# 向后兼容函数，用于支持旧代码
+# Backward compatibility functions to support legacy code
 def is_prompt_tokens_details(data: Any) -> bool:
     """
-    判断对象是否为输入token详情数据结构（向后兼容）
+    Check if object is input token details data structure (backward compatible)
 
     Args:
-        data: 要检查的对象
+        data: Object to check
 
     Returns:
-        bool: 是否为输入token详情结构
+        bool: Whether it is input token details structure
     """
     if not isinstance(data, dict):
         return False
 
-    # 检查是否包含任何缓存相关字段
+    # Check for any cache-related fields
     cache_fields = ["cached_tokens", "cache_write_tokens", "cache_read_input_tokens", "cache_write_input_tokens"]
     return any(field in data for field in cache_fields)
 
 
 def is_llm_usage_info(data: Any) -> bool:
     """
-    判断对象是否为LLM使用信息数据结构（向后兼容）
+    Check if object is LLM usage information data structure (backward compatible)
 
     Args:
-        data: 要检查的对象
+        data: Object to check
 
     Returns:
-        bool: 是否为LLM使用信息结构
+        bool: Whether it is LLM usage information structure
     """
     if not isinstance(data, dict):
         return False
 
-    # 检查是否包含token相关字段
+    # Check for token-related fields
     token_fields = ["input_tokens", "output_tokens", "prompt_tokens", "completion_tokens", "total_tokens"]
     return any(field in data for field in token_fields)

@@ -369,18 +369,18 @@ class FileChangeEventHandler(FileSystemEventHandler):
         while True:
             file_path_to_upload = await self.upload_queue.get()
             try:
-                # 延迟1秒，等待文件操作完成（与原TOSUploader一致）
+                # Delay 1 second to wait for file operation to complete (consistent with original TOSUploader)
                 await asyncio.sleep(1)
-                logger.info(f"队列处理器: 开始处理文件 {file_path_to_upload}")
+                logger.info(f"Queue processor: Starting to process file {file_path_to_upload}")
                 success = await self.tool.upload_file(file_path_to_upload, self.workspace_dir)
 
-                # 更加精确的立即注册逻辑判断，与原TOSUploader保持一致
+                # More precise immediate registration logic judgment, consistent with original TOSUploader
                 if success and self.tool.uploaded_files_for_registration and self.tool.sandbox_id:
-                    logger.info(f"文件上传成功，尝试立即注册，已上传文件数: {len(self.tool.uploaded_files_for_registration)}")
+                    logger.info(f"File uploaded successfully, attempting immediate registration, uploaded files count: {len(self.tool.uploaded_files_for_registration)}")
                     await self.tool.register_uploaded_files()
 
             except Exception as e:
-                logger.error(f"处理上传队列中的文件 {file_path_to_upload} 失败: {e}", exc_info=True)
+                logger.error(f"Failed to process file {file_path_to_upload} in upload queue: {e}", exc_info=True)
                 logger.error(traceback.format_exc())
             finally:
                 self.upload_queue.task_done()
@@ -391,28 +391,28 @@ class FileChangeEventHandler(FileSystemEventHandler):
              file_path = self.workspace_dir / file_path
 
         asyncio.run_coroutine_threadsafe(self.upload_queue.put(file_path), self.loop)
-        logger.debug(f"已将文件 {file_path} 添加到上传队列。")
+        logger.debug(f"Added file {file_path} to upload queue.")
 
     def on_created(self, event):
         if not event.is_directory:
-            logger.info(f"检测到文件创建: {event.src_path}")
+            logger.info(f"Detected file creation: {event.src_path}")
             self._schedule_upload(event.src_path)
 
     def on_modified(self, event):
         if not event.is_directory:
-            logger.info(f"检测到文件修改: {event.src_path}")
+            logger.info(f"Detected file modification: {event.src_path}")
             self._schedule_upload(event.src_path)
 
     def on_deleted(self, event):
         if not event.is_directory:
-            logger.info(f"检测到文件删除: {event.src_path}")
-            # 目前仅记录删除事件，不执行操作
-            # TODO: 未来可能需要实现从存储中删除文件的功能
+            logger.info(f"Detected file deletion: {event.src_path}")
+            # Currently only records deletion event, no action performed
+            # TODO: May need to implement file deletion from storage in the future
 
     def on_moved(self, event):
         if not event.is_directory:
-            logger.info(f"检测到文件移动: {event.src_path} -> {event.dest_path}")
-            # 将移动视为删除原文件并创建新文件
+            logger.info(f"Detected file move: {event.src_path} -> {event.dest_path}")
+            # Treat move as deletion of original file and creation of new file
             self._schedule_upload(event.dest_path)
 
 
@@ -430,15 +430,15 @@ async def _run_storage_uploader_watch_async(
 
 @cli_app.command("watch")
 def start_storage_uploader_watcher(
-    sandbox_id: Optional[str] = typer.Option(None, "--sandbox", help="用于构建上传路径和文件注册的沙盒ID。", envvar="SUPER_MAGIC_SANDBOX_ID"),
-    workspace_dir: str = typer.Option(".workspace", "--dir", help="要监控文件变化的工作空间目录路径。", envvar="SUPER_MAGIC_WORKSPACE_DIR", show_default=True),
-    once: bool = typer.Option(False, "--once", help="执行一次文件扫描和上传后即退出，不持续监控目录变化。"),
-    refresh: bool = typer.Option(False, "--refresh", help="强制重新上传所有文件，忽略本地文件哈希缓存的记录。"),
-    credentials_file: Optional[str] = typer.Option(None, "--credentials", "-c", help="指定凭证文件的路径。若提供，则此选项优先于'--use-context'和默认查找逻辑。", envvar="SUPER_MAGIC_CREDENTIALS_FILE"),
-    use_context: bool = typer.Option(False, "--use-context", help="若未通过'--credentials'指定文件，则尝试使用项目下'config/upload_credentials.json'作为凭证文件。"),
-    task_id: Optional[str] = typer.Option(None, "--task-id", help="用于文件上传成功后在后端系统中注册的任务ID。"),
-    organization_code: Optional[str] = typer.Option(None, "--organization-code", help="组织编码，可用于多租户场景下的文件注册或路径构建。", envvar="SUPER_MAGIC_ORGANIZATION_CODE"),
-    log_level: str = typer.Option("INFO", "--log-level", help="设置工具的日志输出级别 (DEBUG, INFO, WARNING, ERROR)。")
+    sandbox_id: Optional[str] = typer.Option(None, "--sandbox", help="Sandbox ID for building upload path and file registration.", envvar="SUPER_MAGIC_SANDBOX_ID"),
+    workspace_dir: str = typer.Option(".workspace", "--dir", help="Path to workspace directory to monitor for file changes.", envvar="SUPER_MAGIC_WORKSPACE_DIR", show_default=True),
+    once: bool = typer.Option(False, "--once", help="Perform one-time file scan and upload, then exit without continuous directory monitoring."),
+    refresh: bool = typer.Option(False, "--refresh", help="Force re-upload all files, ignoring local file hash cache records."),
+    credentials_file: Optional[str] = typer.Option(None, "--credentials", "-c", help="Specify path to credentials file. If provided, this option takes precedence over '--use-context' and default lookup logic.", envvar="SUPER_MAGIC_CREDENTIALS_FILE"),
+    use_context: bool = typer.Option(False, "--use-context", help="If credentials file not specified via '--credentials', try to use 'config/upload_credentials.json' under project as credentials file."),
+    task_id: Optional[str] = typer.Option(None, "--task-id", help="Task ID for registration in backend system after successful file upload."),
+    organization_code: Optional[str] = typer.Option(None, "--organization-code", help="Organization code, can be used for file registration or path building in multi-tenant scenarios.", envvar="SUPER_MAGIC_ORGANIZATION_CODE"),
+    log_level: str = typer.Option("INFO", "--log-level", help="Set tool's logging output level (DEBUG, INFO, WARNING, ERROR).")
 ):
     setup_logger(log_name="app", console_level=log_level.upper())
     cmd_logger = get_logger("StorageUploaderToolCommand")

@@ -150,17 +150,17 @@ class ChatHistory:
                             tool_tokens += len(encoding.encode(tool_name)) + len(encoding.encode(tool_args)) + 10
                         content_tokens += tool_tokens
 
-                    # 处理工具结果消息
+                    # Handle tool result message
                     if isinstance(msg, ToolMessage):
-                        metadata_tokens += 4  # 工具结果消息额外token
+                        metadata_tokens += 4  # Extra token for tool result message
 
                     msg_tokens = content_tokens + metadata_tokens
 
-                    # 3. 将计算结果保存到消息的token_usage属性中
+                    # 3. Save calculation result to message's token_usage attribute
                     if isinstance(msg, AssistantMessage):
                         if msg.token_usage is None:
-                            # 使用新的 TokenUsage 类创建对象
-                            # 作为估算值，我们将 msg_tokens 全部分配给 output_tokens
+                            # Use new TokenUsage class to create object
+                            # As estimate, allocate all msg_tokens to output_tokens
                             msg.token_usage = TokenUsage(
                                 input_tokens=0,
                                 output_tokens=msg_tokens,
@@ -171,62 +171,62 @@ class ChatHistory:
                     total_tokens += msg_tokens
 
                 except Exception as e:
-                    logger.warning(f"使用tiktoken计算第{i+1}条消息token失败: {e!s}")
-                    # 计算失败时使用备选方案：根据消息内容长度估算
+                    logger.warning(f"Failed to calculate token for message {i+1} using tiktoken: {e!s}")
+                    # Use fallback plan when calculation fails: estimate based on content length
                     try:
                         content = getattr(msg, 'content', '') or ''
-                        # 粗略估计：1个token约等于4个字符
-                        estimated_tokens = len(content) // 4 + 5  # 5是基础开销
+                        # Rough estimate: 1 token ≈ 4 characters
+                        estimated_tokens = len(content) // 4 + 5  # 5 is base overhead
                         total_tokens += estimated_tokens
-                        logger.warning(f"使用长度估算方法计算token: {estimated_tokens}")
+                        logger.warning(f"Using length estimation method to calculate token: {estimated_tokens}")
                     except Exception as est_err:
-                        logger.error(f"备选token估算也失败: {est_err!s}")
-                        # 如果连估算都失败，加一个最小值
+                        logger.error(f"Fallback token estimation also failed: {est_err!s}")
+                        # If even estimation fails, add minimum value
                         total_tokens += 5
 
             else:
-                # 如果没有encoding，使用字符长度估算
+                # If no encoding available, use character length estimation
                 try:
                     content = getattr(msg, 'content', '') or ''
-                    # 粗略估计：1个token约等于4个字符
-                    estimated_tokens = len(content) // 4 + 5  # 5是基础开销
+                    # Rough estimate: 1 token ≈ 4 characters
+                    estimated_tokens = len(content) // 4 + 5  # 5 is base overhead
                     total_tokens += estimated_tokens
                 except Exception as est_err:
-                    logger.error(f"备选token估算失败: {est_err!s}")
+                    logger.error(f"Fallback token estimation failed: {est_err!s}")
                     total_tokens += 5
 
-        # 如果有更新token_usage，保存聊天历史
+        # If token_usage was updated, save chat history
         if history_updated:
             try:
                 self.save()
-                logger.debug("已更新消息的token_usage数据并保存聊天历史")
+                logger.debug("Updated message token_usage data and saved chat history")
             except Exception as e:
-                logger.warning(f"保存更新的token_usage数据失败: {e!s}")
+                logger.warning(f"Failed to save updated token_usage data: {e!s}")
 
         return total_tokens
 
     def _build_chat_history_filename(self) -> str:
-        """构建聊天记录文件的完整路径"""
+        """Build complete file path for chat history"""
         filename = f"{self.agent_name}<{self.agent_id}>.json"
         return os.path.join(self.chat_history_dir, filename)
 
     def _build_tools_list_filename(self) -> str:
-        """构建工具列表文件的完整路径"""
+        """Build complete file path for tools list file"""
         filename = f"{self.agent_name}<{self.agent_id}>.tools.json"
         return os.path.join(self.chat_history_dir, filename)
 
     def exists(self) -> bool:
-        """检查历史记录文件是否存在"""
+        """Check if history record file exists"""
         return os.path.exists(self._history_file_path)
 
     def load(self) -> None:
         """
-        从 JSON 文件加载聊天记录。
-        会查找 'duration' 字符串字段并尝试解析为 duration_ms (float)。
-        会查找 'show_in_ui' 字段，如果不存在则默认为 True。
+        Load chat history from JSON file.
+        Will look for 'duration' string field and try to parse as duration_ms (float).
+        Will look for 'show_in_ui' field, default to True if not present.
         """
         if not self.exists():
-            logger.info(f"聊天记录文件不存在: {self._history_file_path}，将初始化为空历史。")
+            logger.info(f"Chat history file does not exist: {self._history_file_path}, will initialize as empty history.")
             self.messages = []
             return
 
@@ -238,57 +238,57 @@ class ChatHistory:
             if isinstance(history_data, list):
                 for msg_dict in history_data:
                     if not isinstance(msg_dict, dict):
-                        logger.warning(f"加载历史时跳过无效的条目 (非字典): {msg_dict}")
+                        logger.warning(f"Skipping invalid entry (not a dict) when loading history: {msg_dict}")
                         continue
 
                     role = msg_dict.get("role")
-                    # 创建一个副本用于实例化，只包含 dataclass 定义的字段
-                    args_dict = {} # 从空字典开始，只添加需要的
-                    # 通用字段 (移除单独的 token 字段)
+                    # Create a copy for instantiation, only including dataclass-defined fields
+                    args_dict = {} # Start from empty dict, only add necessary fields
+                    # Common fields (removed separate token fields)
                     for key in [
                         "content", "role", "tool_calls", "tool_call_id",
                         # "created_at", "system", "prompt_tokens", "completion_tokens", "cached_tokens",
-                        #"cache_write_tokens", "cache_hit_tokens" #<-- 移除
+                        #"cache_write_tokens", "cache_hit_tokens" #<-- Removed
                     ]:
                          if key in msg_dict:
                               args_dict[key] = msg_dict[key]
-                              # # 对 token 字段做类型检查和转换，防止加载旧的错误数据 <-- 移除
+                              # # Type check and convert token fields to prevent loading old invalid data <-- Removed
                               # if key.endswith("_tokens"):
                               #     try:
                               #         args_dict[key] = int(msg_dict[key]) if msg_dict[key] is not None else None
                               #     except (ValueError, TypeError):
-                              #         logger.warning(f"加载历史时 token 字段 '{key}' 值无效: {msg_dict[key]}，将忽略。")
+                              #         logger.warning(f"Invalid value for token field '{key}' when loading history: {msg_dict[key]}, will ignore.")
                               #         args_dict[key] = None
                               # else:
                               #      args_dict[key] = msg_dict[key]
 
-                    # 处理 show_in_ui (替换 is_internal)
-                    # 默认为 True，除非显式指定为 False
+                    # Handle show_in_ui (replacing is_internal)
+                    # Default to True unless explicitly set to False
                     show_ui_value = msg_dict.get("show_in_ui", msg_dict.get("is_internal") == False if "is_internal" in msg_dict else True)
                     args_dict["show_in_ui"] = bool(show_ui_value)
 
-                    # 特殊处理 duration: 从 'duration' 字符串解析到 'duration_ms' float
+                    # Special handling for duration: parse from 'duration' string to 'duration_ms' float
                     parsed_duration_ms = None
                     duration_str = msg_dict.get("duration")
                     if duration_str is not None:
                         parsed_duration_ms = parse_duration_from_str(duration_str)
                         if parsed_duration_ms is None:
-                             logger.warning(f"加载历史时未能解析 'duration' 字段: {duration_str}，将忽略。消息: {msg_dict}")
+                             logger.warning(f"Failed to parse 'duration' field when loading history: {duration_str}, will ignore. Message: {msg_dict}")
 
-                    # 如果解析成功，添加到 args_dict (仅 assistant 和 tool)
+                    # If parsing succeeded, add to args_dict (only for assistant and tool)
                     if role in ["assistant", "tool"] and parsed_duration_ms is not None:
                         args_dict["duration_ms"] = parsed_duration_ms
-                    # 兼容旧的 duration_ms float 字段（如果存在且 duration 字符串不存在）
+                    # Compatibility with old duration_ms float field (if it exists and duration string does not)
                     elif role in ["assistant", "tool"] and "duration_ms" in msg_dict and duration_str is None:
                         try:
                              legacy_duration_ms = float(msg_dict["duration_ms"])
                              args_dict["duration_ms"] = legacy_duration_ms
-                             logger.debug(f"从旧的 duration_ms 字段加载了耗时: {legacy_duration_ms}")
+                             logger.debug(f"Loaded duration from old duration_ms field: {legacy_duration_ms}")
                         except (ValueError, TypeError):
-                             logger.warning(f"无法将旧的 duration_ms 字段 {msg_dict['duration_ms']} 转为 float，已忽略。")
+                             logger.warning(f"Cannot convert old duration_ms field {msg_dict['duration_ms']} to float, ignored.")
 
                     try:
-                        # 根据 role 转换回相应的 dataclass
+                        # Convert back to corresponding dataclass based on role
                         if role == "system":
                             message = SystemMessage(**args_dict)
                         elif role == "user":
@@ -298,240 +298,240 @@ class ChatHistory:
                         elif role == "tool":
                             message = ToolMessage.from_dict(msg_dict)
                         else:
-                            logger.warning(f"加载历史时发现未知的角色: {role}，跳过此消息: {msg_dict}")
+                            logger.warning(f"Unknown role found when loading history: {role}, skipping this message: {msg_dict}")
                             continue
                         loaded_messages.append(message)
                     except TypeError as e:
-                        logger.warning(f"加载历史时转换消息失败 (字段不匹配或类型错误): {args_dict} (原始: {msg_dict})，错误: {e}")
+                        logger.warning(f"Failed to convert message when loading history (field mismatch or type error): {args_dict} (original: {msg_dict}), error: {e}")
                     except Exception as e:
-                        logger.error(f"加载历史时处理消息出错: {msg_dict}，错误: {e}", exc_info=True)
+                        logger.error(f"Error processing message when loading history: {msg_dict}, error: {e}", exc_info=True)
 
                 self.messages = loaded_messages
-                logger.info(f"成功从 {self._history_file_path} 加载 {len(self.messages)} 条聊天记录。")
+                logger.info(f"Successfully loaded {len(self.messages)} chat messages from {self._history_file_path}.")
             else:
-                logger.warning(f"聊天记录文件格式无效 (不是列表): {self._history_file_path}")
+                logger.warning(f"Invalid chat history file format (not a list): {self._history_file_path}")
                 self.messages = []
 
         except json.JSONDecodeError as e:
-            logger.error(f"解析聊天记录文件 JSON 失败: {self._history_file_path}，错误: {e}")
-            self.messages = [] # 解析失败则清空
+            logger.error(f"Failed to parse chat history file JSON: {self._history_file_path}, error: {e}")
+            self.messages = [] # Clear on parse failure
         except Exception as e:
-            logger.error(f"加载聊天记录时发生未知错误: {self._history_file_path}，错误: {e}", exc_info=True)
-            self.messages = [] # 其他错误也清空
+            logger.error(f"Unknown error occurred when loading chat history: {self._history_file_path}, error: {e}", exc_info=True)
+            self.messages = [] # Clear on other errors
 
     def save(self) -> None:
         """
-        将当前聊天记录保存到 JSON 文件。
-        对于 Assistant 和 Tool 消息，会将 duration_ms (float) 转换为 'duration' (str) 存储。
-        会包含 show_in_ui 字段。
-        可选字段如果等于 None 或默认值，则会被省略以减少冗余。
+        Save current chat history to JSON file.
+        For Assistant and Tool messages, converts duration_ms (float) to 'duration' (str) for storage.
+        Includes show_in_ui field.
+        Optional fields equal to None or default values will be omitted to reduce redundancy.
         """
         try:
             history_to_save = []
             for message in self.messages:
-                # 将 dataclass 转为字典 (使用 to_dict 方法确保应用模型层的逻辑)
+                # Convert dataclass to dict (use to_dict method to ensure model-layer logic is applied)
                 if hasattr(message, 'to_dict') and callable(message.to_dict):
                     msg_dict = message.to_dict()
                 else:
-                    # 备选方案 (理论上不应执行，因为所有消息类型都有 to_dict)
+                    # Fallback (should not execute in theory, since all message types have to_dict)
                     msg_dict = asdict(message)
-                    logger.warning(f"消息对象缺少 to_dict 方法: {type(message)}")
+                    logger.warning(f"Message object missing to_dict method: {type(message)}")
 
-                # 1. 处理 duration (移除 duration_ms, 添加 duration str)
+                # 1. Handle duration (remove duration_ms, add duration str)
                 if isinstance(message, (AssistantMessage, ToolMessage)):
-                    duration_ms = msg_dict.pop('duration_ms', None) # 总是移除 ms 字段
+                    duration_ms = msg_dict.pop('duration_ms', None) # Always remove ms field
                     if duration_ms is not None:
                         duration_str = format_duration_to_str(duration_ms)
                         if duration_str:
                             msg_dict['duration'] = duration_str
-                # 确保其他类型也没有 duration_ms
+                # Ensure other types also don't have duration_ms
                 elif 'duration_ms' in msg_dict:
                      msg_dict.pop('duration_ms')
 
-                # 2. 移除值为默认值的可选字段 (已在 to_dict 中处理 show_in_ui, content, tool_calls, system)
-                # 这里我们额外检查 to_dict 可能仍保留的 None 值 (例如转换失败的 token_usage)
-                # 并确保 compression_info 为 None 时被移除
+                # 2. Remove optional fields with default values (show_in_ui, content, tool_calls, system already handled in to_dict)
+                # Here we additionally check for None values that to_dict may still retain (e.g., failed token_usage conversion)
+                # And ensure compression_info is removed when None
                 keys_to_remove = []
                 for key, value in msg_dict.items():
-                    # 移除值为 None 的字段 (除非是允许为 None 的 content 或 tool_calls)
+                    # Remove fields with None value (unless it's content or tool_calls which can be None)
                     if value is None and key not in ['content', 'tool_calls']:
                         keys_to_remove.append(key)
-                    # 特别处理 compression_info，如果它是 None，也移除
+                    # Special handling for compression_info, also remove if it's None
                     elif key == 'compression_info' and value is None:
                          keys_to_remove.append(key)
-                    # 检查 token_usage 是否为 None 或空字典
+                    # Check if token_usage is None or empty dict
                     elif key == 'token_usage' and (value is None or (isinstance(value, dict) and not value)):
                         keys_to_remove.append(key)
 
                 for key in keys_to_remove:
                     msg_dict.pop(key)
 
-                # 移除消息字典中的 ID 字段，因为它仅用于运行时
+                # Remove ID field from message dict, as it's only for runtime
                 msg_dict.pop('id', None)
 
                 history_to_save.append(msg_dict)
 
-            # 使用 indent 美化 JSON 输出
+            # Use indent for pretty JSON output
             history_json = json.dumps(history_to_save, indent=4, ensure_ascii=False)
             with open(self._history_file_path, "w", encoding='utf-8') as f:
                 f.write(history_json)
-            # logger.debug(f"聊天记录已保存到: {self._history_file_path}")
+            # logger.debug(f"Chat history saved to: {self._history_file_path}")
         except Exception as e:
-            logger.error(f"保存聊天记录到 {self._history_file_path} 时出错: {e}", exc_info=True)
+            logger.error(f"Error saving chat history to {self._history_file_path}: {e}", exc_info=True)
 
     def save_tools_list(self, tools_list: List[Dict[str, Any]]) -> None:
         """
-        将工具列表保存到与聊天记录文件同名的.tools.json文件中。
+        Save tools list to a .tools.json file with the same name as the chat history file.
 
         Args:
-            tools_list (List[Dict[str, Any]]): 要保存的工具列表。
+            tools_list (List[Dict[str, Any]]): The tools list to save.
         """
         try:
             tools_file_path = self._build_tools_list_filename()
-            # 使用indent美化JSON输出
+            # Use indent for pretty JSON output
             tools_json = json.dumps(tools_list, indent=4, ensure_ascii=False)
             with open(tools_file_path, "w", encoding="utf-8") as f:
                 f.write(tools_json)
-            logger.debug(f"工具列表已保存到: {tools_file_path}")
+            logger.debug(f"Tools list saved to: {tools_file_path}")
         except Exception as e:
-            logger.error(f"保存工具列表到 {tools_file_path} 时出错: {e}", exc_info=True)
+            logger.error(f"Error saving tools list to {tools_file_path}: {e}", exc_info=True)
 
     def _validate_and_standardize(self, message: ChatMessage) -> ChatMessage:
-        """内部方法：验证和标准化消息，返回处理后的消息或引发 ValueError"""
-        # ... (基础验证 role 不变) ...
+        """Internal method: validate and standardize message, return processed message or raise ValueError"""
+        # ... (basic validation for role unchanged) ...
         if not hasattr(message, 'role') or not message.role:
-            raise ValueError("消息缺少 'role' 字段")
+            raise ValueError("Message missing 'role' field")
 
         is_assistant_with_tools = isinstance(message, AssistantMessage) and message.tool_calls
         content_missing = not hasattr(message, 'content') or message.content is None
 
-        # 检查 content 是否缺失 (除非是带 tool_calls 的助手消息)
+        # Check if content is missing (unless it's an assistant message with tool_calls)
         if content_missing and not is_assistant_with_tools:
             if isinstance(message, ToolMessage):
-                 raise ValueError(f"ToolMessage content 不能为空: {message}")
+                 raise ValueError(f"ToolMessage content cannot be empty: {message}")
             else:
-                 logger.warning(f"消息 content 为 None 或缺失，角色: {message.role}。将使用占位符。原始消息: {message}")
-                 message.content = " " # 使用一个空格作为占位符
-                 message.show_in_ui = False # <--- 内容被修改的消息不应展示
+                 logger.warning(f"Message content is None or missing, role: {message.role}. Will use placeholder. Original message: {message}")
+                 message.content = " " # Use space as placeholder
+                 message.show_in_ui = False # <--- Messages with modified content should not be shown
 
-        # 检查 content 是否为空字符串 (对所有类型都标准化)
+        # Check if content is empty string (standardize for all types)
         if hasattr(message, 'content') and isinstance(message.content, str) and message.content.strip() == "":
-             logger.warning(f"消息 content 为空字符串，角色: {message.role}。将使用占位符。原始消息: {message}")
-             message.content = " " # 使用一个空格作为占位符
-             message.show_in_ui = False # <--- 内容被修改的消息不应展示
+             logger.warning(f"Message content is empty string, role: {message.role}. Will use placeholder. Original message: {message}")
+             message.content = " " # Use space as placeholder
+             message.show_in_ui = False # <--- Messages with modified content should not be shown
 
-        # ... (特定类型验证 tool_call_id, Assistant tool_calls 结构不变) ...
+        # ... (specific type validation for tool_call_id, Assistant tool_calls structure unchanged) ...
         if isinstance(message, ToolMessage):
             if not message.tool_call_id:
-                raise ValueError(f"ToolMessage 缺少 'tool_call_id': {message}")
+                raise ValueError(f"ToolMessage missing 'tool_call_id': {message}")
 
         if isinstance(message, AssistantMessage) and message.tool_calls:
              for tc in message.tool_calls:
                  if not isinstance(tc, ToolCall) or not tc.id or not tc.function or not tc.function.name:
-                     raise ValueError(f"AssistantMessage 包含无效的 ToolCall 结构: {tc}")
-                 # 确保 arguments 是字符串
+                     raise ValueError(f"AssistantMessage contains invalid ToolCall structure: {tc}")
+                 # Ensure arguments is a string
                  if not isinstance(tc.function.arguments, str):
                      try:
-                         # 尝试序列化，如果失败则报错
+                         # Try to serialize, raise error if it fails
                          tc.function.arguments = json.dumps(tc.function.arguments, ensure_ascii=False)
                      except Exception as e:
-                          raise ValueError(f"无法将 ToolCall arguments 转换为 JSON 字符串: {tc.function.arguments}, 错误: {e}")
+                          raise ValueError(f"Cannot convert ToolCall arguments to JSON string: {tc.function.arguments}, error: {e}")
 
-        # 如果 content 为空字符串但有 tool_calls，确保 content 是 Continue (API 不允许为空或者None)
+        # If content is empty string but has tool_calls, ensure content is "Continue" (API doesn't allow empty or None)
         if isinstance(message, AssistantMessage) and message.content == " " and message.tool_calls:
              message.content = "Continue"
 
-        # 确保 created_at 存在且格式正确
+        # Ensure created_at exists and format is correct
         if not hasattr(message, 'created_at') or not isinstance(message.created_at, str):
              message.created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        # 确保 show_in_ui 存在且是布尔值
+        # Ensure show_in_ui exists and is boolean
         if not hasattr(message, 'show_in_ui') or not isinstance(message.show_in_ui, bool):
-             logger.warning(f"消息缺少有效的 'show_in_ui' 字段，将设为 True。消息: {message}")
+             logger.warning(f"Message missing valid 'show_in_ui' field, will set to True. Message: {message}")
              message.show_in_ui = True
 
         return message
 
     def _should_skip_message(self, message: ChatMessage) -> bool:
         """
-        判断是否应该跳过添加此消息。
-        当消息的show_in_ui为false且与最近连续消息内容相同时，将跳过添加。
+        Determine if this message should be skipped from being added.
+        When a message's show_in_ui is false and content is identical to the most recent consecutive messages, it will be skipped.
 
         Args:
-            message (ChatMessage): 待添加的消息
+            message (ChatMessage): Message to be added
 
         Returns:
-            bool: 是否应该跳过添加此消息
+            bool: Whether this message should be skipped
         """
 
-        # 如果消息列表为空，不跳过
+        # If message list is empty, don't skip
         if not self.messages:
             return False
 
-        # 获取当前消息的内容
+        # Get current message content
         current_content = getattr(message, 'content', '')
 
-        # 从最后一条消息开始检查
+        # Check starting from the last message
         for prev_msg in reversed(self.messages):
-            # 如果前一条消息角色不同，则中断检查
+            # If previous message has different role, break check
             if prev_msg.role != message.role:
                 break
 
-            # 如果内容不同，则中断检查
+            # If content is different, break check
             prev_content = getattr(prev_msg, 'content', '')
             if prev_content != current_content:
                 break
 
-            # 找到了相同内容、相同角色的消息，应该跳过
+            # Found a message with same content and same role, should skip
             return True
 
-        # 没有找到匹配条件的消息，不跳过
+        # No matching condition found, don't skip
         return False
 
     async def add_message(self, message: ChatMessage) -> bool:
         """
-        向聊天记录中添加一条消息，并检查是否需要压缩。
+        Add a message to chat history and check if compression is needed.
 
         Args:
-            message (ChatMessage): 要添加的消息对象。
+            message (ChatMessage): Message object to add.
 
         Returns:
-            bool: 是否执行了压缩操作
+            bool: Whether compression was performed
 
         Raises:
-            ValueError: 如果消息无效。
+            ValueError: If message is invalid.
         """
         try:
             validated_message = self._validate_and_standardize(message)
 
-            # 检查是否应该跳过添加此消息
+            # Check if this message should be skipped
             if self._should_skip_message(validated_message):
                 return False
 
             self.messages.append(validated_message)
             self.save()
 
-            # 异步检查并执行压缩
+            # Asynchronously check and perform compression
             compressed = await self.check_and_compress_if_needed()
             return compressed
 
         except ValueError as e:
-            logger.error(f"异步添加无效消息失败: {e}")
-            raise # 重新抛出异常，让调用者知道添加失败
+            logger.error(f"Failed to add invalid message asynchronously: {e}")
+            raise # Re-raise exception to let caller know addition failed
         except Exception as e:
-            logger.error(f"异步添加消息时发生意外错误: {e}", exc_info=True)
-            # 根据策略决定是否抛出异常
+            logger.error(f"Unexpected error occurred while adding message asynchronously: {e}", exc_info=True)
+            # Decide whether to raise exception based on strategy
             return False
 
-    # --- 便捷的添加方法 --- (更新参数名为 show_in_ui)
+    # --- Convenient add methods --- (updated parameter name to show_in_ui)
 
     async def append_system_message(self, content: str, show_in_ui: bool = False) -> None:
-        """添加一条系统消息"""
+        """Add a system message"""
         message = SystemMessage(content=content, show_in_ui=show_in_ui)
         await self.add_message(message)
 
     async def append_user_message(self, content: str, show_in_ui: bool = True) -> None:
-        """添加一条用户消息"""
+        """Add a user message"""
         message = UserMessage(content=content, show_in_ui=show_in_ui)
         await self.add_message(message)
 
@@ -540,21 +540,21 @@ class ChatHistory:
                                  tool_calls_data: Optional[List[Union[ToolCall, Dict]]] = None,
                                  show_in_ui: bool = True,
                                  duration_ms: Optional[float] = None,
-                                 # --- 仅接受 TokenUsage 对象 ---
+                                 # --- Only accept TokenUsage object ---
                                  token_usage: Optional[TokenUsage] = None
                                  ) -> None:
         """
-        添加一条助手消息。
+        Add an assistant message.
 
         Args:
-            content (Optional[str]): 消息内容。
-            tool_calls_data (Optional[List[Union[ToolCall, Dict]]]): 工具调用列表。
-            show_in_ui (bool): 是否在 UI 中展示此消息。
-            duration_ms (Optional[float]): LLM 调用耗时 (毫秒)。
-            token_usage (Optional[TokenUsage]): token 使用信息对象。
+            content (Optional[str]): Message content.
+            tool_calls_data (Optional[List[Union[ToolCall, Dict]]]): List of tool calls.
+            show_in_ui (bool): Whether to display this message in UI.
+            duration_ms (Optional[float]): LLM call duration (milliseconds).
+            token_usage (Optional[TokenUsage]): Token usage information object.
         """
         processed_tool_calls: Optional[List[ToolCall]] = None
-        contains_finish_task = False # 在循环外初始化
+        contains_finish_task = False # Initialize outside loop
         if tool_calls_data:
             processed_tool_calls = []
             for tc_data in tool_calls_data:
@@ -562,57 +562,57 @@ class ChatHistory:
                 function_name = None
 
                 if isinstance(tc_data, ToolCall):
-                    # 已经是 ToolCall 对象，检查并标准化 arguments
+                    # Already a ToolCall object, check and standardize arguments
                     if not isinstance(tc_data.function.arguments, str):
                         try:
                             tc_data.function.arguments = json.dumps(tc_data.function.arguments, ensure_ascii=False)
                         except Exception as e:
-                            logger.warning(f"标准化 AssistantMessage ToolCall arguments 失败: {tc_data.function.arguments}, 错误: {e}. 跳过此 ToolCall。")
+                            logger.warning(f"Failed to standardize AssistantMessage ToolCall arguments: {tc_data.function.arguments}, error: {e}. Skipping this ToolCall.")
                             continue
                     tool_call_obj = tc_data
                     function_name = tc_data.function.name
 
                 elif isinstance(tc_data, dict):
-                    # 从字典创建 ToolCall 对象
+                    # Create ToolCall object from dictionary
                     try:
                         function_data = tc_data.get("function", {})
                         if not isinstance(function_data, dict):
-                             raise ValueError("Tool call 'function' 字段必须是字典")
+                             raise ValueError("Tool call 'function' field must be a dictionary")
 
                         arguments_raw = function_data.get("arguments")
                         arguments_str = None
-                        # 确保 arguments 是 JSON 字符串
+                        # Ensure arguments is JSON string
                         if isinstance(arguments_raw, str):
                             arguments_str = arguments_raw
                         else:
-                             arguments_str = json.dumps(arguments_raw or {}, ensure_ascii=False) # 如果是None或非字符串，则序列化
+                             arguments_str = json.dumps(arguments_raw or {}, ensure_ascii=False) # Serialize if None or non-string
 
-                        # 获取必要字段
+                        # Get required fields
                         func_name = function_data.get("name")
                         tool_id = tc_data.get("id")
-                        tool_type = tc_data.get("type", "function") # 默认为 function
+                        tool_type = tc_data.get("type", "function") # Default to function
 
                         if not func_name or not tool_id:
-                             raise ValueError("Tool call 缺少必需的 'id' 或 'function.name'")
+                             raise ValueError("Tool call missing required 'id' or 'function.name'")
 
                         function_call = FunctionCall(name=func_name, arguments=arguments_str)
                         tool_call_obj = ToolCall(id=tool_id, type=tool_type, function=function_call)
                         function_name = func_name
 
                     except Exception as e:
-                        logger.error(f"从字典创建 ToolCall 失败: {tc_data}, 错误: {e}", exc_info=True)
-                        continue # 跳过这个错误的 tool_call
+                        logger.error(f"Failed to create ToolCall from dictionary: {tc_data}, error: {e}", exc_info=True)
+                        continue # Skip this invalid tool_call
                 else:
-                     logger.warning(f"无法处理的 tool_call 数据类型: {type(tc_data)}, 已跳过: {tc_data}")
-                     continue # 跳过无法处理的类型
+                     logger.warning(f"Cannot handle tool_call data type: {type(tc_data)}, skipped: {tc_data}")
+                     continue # Skip unhandleable types
 
-                # 如果成功处理，添加到列表并检查 finish_task
+                # If successfully processed, add to list and check for finish_task
                 if tool_call_obj:
                     processed_tool_calls.append(tool_call_obj)
                     if function_name == "finish_task":
                          contains_finish_task = True
 
-        # 如果包含 finish_task，则强制不在 UI 显示
+        # If contains finish_task, force not show in UI
         if contains_finish_task:
              show_in_ui = False
 
@@ -632,17 +632,17 @@ class ChatHistory:
                             show_in_ui: bool = True,
                             duration_ms: Optional[float] = None) -> None:
         """
-        添加一条工具消息。
+        Add a tool message.
 
         Args:
-            content (str): 工具结果内容。
-            tool_call_id (str): 对应的 ToolCall ID。
-            system (Optional[str]): 内部系统标志。
-            show_in_ui (bool): 是否在 UI 中展示此消息。
-            duration_ms (Optional[float]): 工具执行耗时 (毫秒)。
+            content (str): Tool result content.
+            tool_call_id (str): Corresponding ToolCall ID.
+            system (Optional[str]): Internal system flag.
+            show_in_ui (bool): Whether to display this message in UI.
+            duration_ms (Optional[float]): Tool execution duration (milliseconds).
         """
         if not tool_call_id:
-             raise ValueError("添加 ToolMessage 时必须提供 tool_call_id")
+             raise ValueError("Must provide tool_call_id when adding ToolMessage")
         message = ToolMessage(
             content=content,
             tool_call_id=tool_call_id,
@@ -652,22 +652,22 @@ class ChatHistory:
         )
         await self.add_message(message)
 
-    # --- 查询方法 --- (修改 get_messages 过滤逻辑)
+    # --- Query methods --- (modified get_messages filtering logic)
 
     def get_messages(self, include_hidden_in_ui: bool = False) -> List[ChatMessage]:
         """
-        获取消息列表，可以选择是否包含不在 UI 中展示的消息。
+        Get message list, can optionally include messages not displayed in UI.
 
         Args:
-            include_hidden_in_ui (bool): 是否包含标记为 show_in_ui=False 的消息。默认为 False。
+            include_hidden_in_ui (bool): Whether to include messages marked as show_in_ui=False. Defaults to False.
 
         Returns:
-            List[ChatMessage]: 符合条件的消息对象列表。
+            List[ChatMessage]: List of message objects meeting the criteria.
         """
         if include_hidden_in_ui:
-            return list(self.messages) # 返回所有消息的副本
+            return list(self.messages) # Return a copy of all messages
         else:
-            # 只返回 show_in_ui 为 True 的消息
+            # Only return messages where show_in_ui is True
             return [msg for msg in self.messages if msg.show_in_ui]
 
     def get_messages_for_llm(self) -> List[Dict[str, Any]]:
@@ -690,15 +690,15 @@ class ChatHistory:
                 llm_msg["content"] = content if content and content.strip() else " "
 
             elif role == "user":
-                # User 消息只需要 role 和 content
+                # User message only needs role and content
                 content = getattr(message, 'content', ' ')
                 llm_msg["content"] = content if content and content.strip() else " "
 
             elif role == "assistant":
-                # Assistant 消息可以有 content, tool_calls, 或两者都有
+                # Assistant message can have content, tool_calls, or both
                 has_content = False
                 content = getattr(message, 'content', None)
-                # 只有当 content 存在且非空时才添加
+                # Only add content when it exists and is non-empty
                 if content and content.strip():
                     llm_msg["content"] = content
                     has_content = True
@@ -706,18 +706,18 @@ class ChatHistory:
                 tool_calls = getattr(message, 'tool_calls', None)
                 has_tool_calls = False
                 if tool_calls:
-                    # 格式化 tool_calls
+                    # Format tool_calls
                     formatted_tool_calls = []
                     for tc in tool_calls:
-                         # 确保 tc 是 ToolCall 对象且结构有效
+                         # Ensure tc is ToolCall object and structure is valid
                          if isinstance(tc, ToolCall) and isinstance(tc.function, FunctionCall) and tc.id and tc.function.name:
                              arguments_str = tc.function.arguments
-                             # 确保 arguments 是字符串
+                             # Ensure arguments is string
                              if not isinstance(arguments_str, str):
                                   try:
                                       arguments_str = json.dumps(arguments_str, ensure_ascii=False)
                                   except Exception:
-                                       logger.warning(f"无法在 get_messages_for_llm 中序列化 assistant tool_call arguments: {arguments_str}。将使用空JSON对象字符串。")
+                                       logger.warning(f"Cannot serialize assistant tool_call arguments in get_messages_for_llm: {arguments_str}. Will use empty JSON object string.")
                                        arguments_str = "{}"
 
                              formatted_tool_calls.append({
@@ -729,35 +729,35 @@ class ChatHistory:
                                 }
                              })
                          else:
-                              logger.warning(f"在 get_messages_for_llm 中跳过无效的 assistant tool_call 结构: {tc}")
+                              logger.warning(f"Skipping invalid assistant tool_call structure in get_messages_for_llm: {tc}")
 
                     if formatted_tool_calls:
                         llm_msg["tool_calls"] = formatted_tool_calls
                         has_tool_calls = True
 
-                # 健全性检查: Assistant 消息必须至少有 content 或 tool_calls
-                # 如果两者都没有，强制添加一个空格 content，以避免 API 错误
+                # Sanity check: Assistant message must have at least content or tool_calls
+                # If neither, force add space content to avoid API error
                 if not has_content and not has_tool_calls:
-                    logger.warning(f"为 LLM 准备的助手消息既无有效内容也无工具调用: {message}。强制添加空格 content。")
+                    logger.warning(f"Assistant message prepared for LLM has neither valid content nor tool calls: {message}. Forcing addition of space content.")
                     llm_msg["content"] = " "
 
             elif role == "tool":
-                # Tool 消息需要 role, content, 和 tool_call_id
+                # Tool message needs role, content, and tool_call_id
                 content = getattr(message, 'content', ' ')
                 llm_msg["content"] = content if content and content.strip() else " "
                 tool_call_id = getattr(message, 'tool_call_id', None)
                 if tool_call_id:
                     llm_msg["tool_call_id"] = tool_call_id
                 else:
-                    logger.error(f"为 LLM 准备的工具消息缺少 tool_call_id: {message}。这可能导致 API 错误。")
-                    # 即使缺少 id，也继续添加消息，让 API 层处理错误
+                    logger.error(f"Tool message prepared for LLM is missing tool_call_id: {message}. This may cause API error.")
+                    # Continue adding message even if id is missing, let API layer handle the error
 
-            # 其他 role 类型不应出现在这里，如果出现则忽略
+            # Other role types should not appear here, ignore if they do
             else:
-                logger.warning(f"在 get_messages_for_llm 中遇到未知角色: {role}，已跳过。")
-                continue # 跳过这条消息
+                logger.warning(f"Encountered unknown role in get_messages_for_llm: {role}, skipped.")
+                continue # Skip this message
 
-            # --- 白名单构建结束，不需要 pop 任何字段 --- #
+            # --- Whitelist construction complete, no need to pop any fields --- #
             llm_messages.append(llm_msg)
 
         return llm_messages

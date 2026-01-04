@@ -162,18 +162,16 @@ class ToolContext(BaseContext):
         """
         extension = self._extensions.get(name)
         if extension is not None and isinstance(extension, extension_type):
-            # 使用cast帮助IDE识别返回类型
+            # Use cast to help IDE recognize return type
             return cast(T, extension)
         return None
 
     def has_extension(self, name: str) -> bool:
         """
-        检查是否存在指定名称的扩展
-        
+        Check if extension with specified name exists
+
         Args:
-            name: 扩展名称
-            
+            name: Extension name
+
         Returns:
-            bool: 是否存在该扩展
-        """
-        return name in self._extensions 
+            bool: Whether extension exists

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-此模块定义了聊天记录相关的数据结构和模型。
-包含消息类型、压缩配置、Token使用信息等与聊天记录相关的类。
+This module defines data structures and models related to chat history.
+Contains message types, compression configuration, Token usage information and other classes related to chat history.
 """
 
 import json
@@ -18,103 +18,103 @@ from agentlang.logger import get_logger
 logger = get_logger(__name__)
 
 # ==============================================================================
-# 压缩配置数据类
+# Compression Configuration Data Class
 # ==============================================================================
 @dataclass
 class CompressionConfig:
-    """聊天历史压缩功能的配置类"""
-    # 基础开关配置
-    enable_compression: bool = True  # 是否启用压缩功能
+    """Configuration class for chat history compression functionality"""
+    # Basic switch configuration
+    enable_compression: bool = True  # Whether to enable compression functionality
 
-    # 基础 Agent 信息
+    # Basic Agent information
     agent_name: str = ""
     agent_id: str = ""
     agent_model_id: str = ""
-    # 触发阈值配置
-    token_threshold: int = 0  # 触发压缩的token数阈值，默认设置为0，将根据模型动态计算
-    message_threshold: int = 100  # 消息数量阈值
-    preserve_recent_turns: int = 20  # 保留不压缩的最近对话轮数
-    # 消息压缩配置
-    target_compression_ratio: float = 0.6  # 总体目标压缩率
+    # Trigger threshold configuration
+    token_threshold: int = 0  # Token count threshold for triggering compression, defaults to 0, will be calculated dynamically based on model
+    message_threshold: int = 100  # Message count threshold
+    preserve_recent_turns: int = 20  # Number of recent conversation turns to preserve without compression
+    # Message compression configuration
+    target_compression_ratio: float = 0.6  # Overall target compression ratio
 
-    # 高级配置
-    compression_cooldown: int = 6  # 两次压缩间隔的最小消息数
-    compression_batch_size: int = 10  # 每批压缩的最大消息数
-    llm_for_compression: str = "gpt-4.1-mini"  # 用于压缩的LLM模型
+    # Advanced configuration
+    compression_cooldown: int = 6  # Minimum message count between two compressions
+    compression_batch_size: int = 10  # Maximum message count per compression batch
+    llm_for_compression: str = "gpt-4.1-mini"  # LLM model used for compression
     def __post_init__(self):
-        """参数验证和规范化"""
-        # 验证压缩率范围
+        """Parameter validation and normalization"""
+        # Validate compression ratio range
         if not 0 <= self.target_compression_ratio <= 1:
-            raise ValueError("总体目标压缩率必须在 0-1 之间")
+            raise ValueError("Overall target compression ratio must be between 0 and 1")
 
-        # 验证阈值和保留轮数
+        # Validate threshold and preserve turn count
         if self.message_threshold < 0:
-            raise ValueError("消息数量阈值不能为负数")
+            raise ValueError("Message count threshold cannot be negative")
         if self.preserve_recent_turns < 0:
-            raise ValueError("保留的对话轮数不能为负数")
+            raise ValueError("Preserved conversation turn count cannot be negative")
 
-        # 如果token_threshold为0，根据当前使用的模型上下文长度设置默认值
+        # If token_threshold is 0, set default value based on current model's context length
         if self.token_threshold <= 0:
             self.token_threshold = self._calculate_model_based_threshold()
-            logger.info(f"根据当前 Agent 使用的 {self.agent_model_id} 模型的上下文长度设置压缩上下文的 token_threshold 为: {self.token_threshold}")
+            logger.info(f"Set compression context token_threshold to {self.token_threshold} based on the context length of the {self.agent_model_id} model used by current Agent")
 
     def _calculate_model_based_threshold(self) -> int:
         """
-        根据模型的上下文长度计算适当的token阈值
+        Calculate appropriate token threshold based on model's context length
 
         Returns:
-            int: 计算得到的token阈值
+            int: Calculated token threshold
         """
         try:
-            # 获取模型信息
-            threshold = 40000  # 默认阈值
+            # Get model information
+            threshold = 40000  # Default threshold
 
-            # 获取所有模型配置
+            # Get all model configurations
             model_configs = config.get("models", {})
 
             if self.agent_model_id:
-                # 从模型配置中获取max_context_tokens
+                # Get max_context_tokens from model configuration
                 model_config = model_configs.get(self.agent_model_id, {})
                 max_context_tokens = int(model_config.get("max_context_tokens", 0))
-                # 设置为上下文长度的70%作为阈值
+                # Set to 70% of context length as threshold
                 threshold = int(max_context_tokens * 0.7)
 
             return threshold
 
         except Exception as e:
-            logger.error(f"设置token阈值时出错: {e}")
-            return 160000  # 出错时返回默认值
+            logger.error(f"Error setting token threshold: {e}")
+            return 160000  # Return default value on error
 
 # ==============================================================================
-# 压缩信息元数据
+# Compression Information Metadata
 # ==============================================================================
 @dataclass
 class CompressionInfo:
-    """聊天消息压缩相关的元数据"""
-    is_compressed: bool = False  # 是否为压缩后的消息
-    original_message_count: int = 0  # 原始消息数量
-    compression_ratio: float = 0.0  # 实际压缩率
-    compressed_at: str = ""  # 压缩时间
-    message_spans: List[Dict[str, str]] = field(default_factory=list)  # 原始消息的时间跨度
+    """Metadata related to chat message compression"""
+    is_compressed: bool = False  # Whether it is a compressed message
+    original_message_count: int = 0  # Original message count
+    compression_ratio: float = 0.0  # Actual compression ratio
+    compressed_at: str = ""  # Compression time
+    message_spans: List[Dict[str, str]] = field(default_factory=list)  # Time spans of original messages
 
     @classmethod
     def create(cls, message_count: int, original_tokens: int, compressed_tokens: int) -> 'CompressionInfo':
         """
-        创建压缩信息实例
+        Create compression information instance
 
         Args:
-            message_count: 被压缩的原始消息数量
-            original_tokens: 压缩前的token数
-            compressed_tokens: 压缩后的token数
+            message_count: Number of original messages to be compressed
+            original_tokens: Token count before compression
+            compressed_tokens: Token count after compression
 
         Returns:
-            CompressionInfo: 压缩信息实例
+            CompressionInfo: Compression information instance
         """
         compression_ratio = 1.0
         if original_tokens > 0:
             compression_ratio = 1.0 - (compressed_tokens / original_tokens)
 
-        # 将压缩率限制在0-1之间
+        # Limit compression ratio between 0 and 1
         compression_ratio = max(0.0, min(1.0, compression_ratio))
 
         return cls(
@@ -125,7 +125,7 @@ class CompressionInfo:
         )
 
     def to_dict(self) -> Dict[str, Any]:
-        """将压缩信息转换为字典格式"""
+        """Convert compression information to dictionary format"""
         result = {
             "is_compressed": self.is_compressed,
             "original_message_count": self.original_message_count,
@@ -140,7 +140,7 @@ class CompressionInfo:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'CompressionInfo':
-        """从字典创建压缩信息对象"""
+        """Create compression information object from dictionary"""
         compression_info = cls(
             is_compressed=data.get("is_compressed", False),
             original_message_count=data.get("original_message_count", 0),
@@ -155,24 +155,24 @@ class CompressionInfo:
         return compression_info
 
 # ==============================================================================
-# 辅助函数：耗时格式化与解析
+# Helper Functions: Duration Formatting and Parsing
 # ==============================================================================
 
 def format_duration_to_str(duration_ms: Optional[float]) -> Optional[str]:
     """
-    将毫秒数 (float) 格式化为人类可读的字符串 (方案二: HhMmS.fffS)。
+    Format milliseconds (float) to human-readable string (Scheme 2: HhMmS.fffS).
 
     Args:
-        duration_ms (Optional[float]): 耗时，单位毫秒。
+        duration_ms (Optional[float]): Duration in milliseconds.
 
     Returns:
-        Optional[str]: 格式化后的字符串，或 None。
+        Optional[str]: Formatted string, or None.
     """
     if duration_ms is None or duration_ms < 0:
         return None
 
     try:
-        # 创建 timedelta 对象 (注意 timedelta 使用秒)
+        # Create timedelta object (note timedelta uses seconds)
         delta = timedelta(milliseconds=duration_ms)
 
         total_seconds = delta.total_seconds()
@@ -181,7 +181,7 @@ def format_duration_to_str(duration_ms: Optional[float]) -> Optional[str]:
 
         hours = int(hours)
         minutes = int(minutes)
-        # 秒数保留毫秒精度
+        # Preserve millisecond precision for seconds
         seconds_float = seconds
 
         parts = []
@@ -190,25 +190,25 @@ def format_duration_to_str(duration_ms: Optional[float]) -> Optional[str]:
         if minutes > 0:
             parts.append(f"{minutes}m")
 
-        # 秒数部分始终显示，并格式化为 xxx.fff
-        # 使用 Decimal 或精确计算避免浮点误差，但这里简单处理应该足够
+        # Seconds part is always displayed and formatted as xxx.fff
+        # Using Decimal or precise calculation to avoid floating point errors, but simple handling should be sufficient here
         parts.append(f"{seconds_float:.3f}s")
 
         return "".join(parts)
 
     except Exception as e:
-        logger.warning(f"格式化耗时 {duration_ms}ms 时出错: {e}")
+        logger.warning(f"Error formatting duration {duration_ms}ms: {e}")
         return None
 
 def parse_duration_from_str(duration_str: Optional[str]) -> Optional[float]:
     """
-    从人类可读的字符串 (方案二: HhMmS.fffS) 解析回毫秒数 (float)。
+    Parse human-readable string (Scheme 2: HhMmS.fffS) back to milliseconds (float).
 
     Args:
-        duration_str (Optional[str]): 格式化的耗时字符串。
+        duration_str (Optional[str]): Formatted duration string.
 
     Returns:
-        Optional[float]: 耗时，单位毫秒，或 None (如果解析失败)。
+        Optional[float]: Duration in milliseconds, or None (if parsing fails).
     """
     if not duration_str or not isinstance(duration_str, str):
         return None
@@ -218,7 +218,7 @@ def parse_duration_from_str(duration_str: Optional[str]) -> Optional[float]:
     match = pattern.fullmatch(duration_str)
 
     if not match:
-        logger.warning(f"无法解析耗时字符串格式: {duration_str}")
+        logger.warning(f"Unable to parse duration string format: {duration_str}")
         return None
 
     try:
@@ -232,28 +232,28 @@ def parse_duration_from_str(duration_str: Optional[str]) -> Optional[float]:
 
         return total_milliseconds
     except (ValueError, TypeError) as e:
-        logger.warning(f"解析耗时字符串 {duration_str} 时数值转换错误: {e}")
+        logger.warning(f"Value conversion error parsing duration string {duration_str}: {e}")
         return None
     except Exception as e:
-        logger.error(f"解析耗时字符串 {duration_str} 时未知错误: {e}", exc_info=True)
+        logger.error(f"Unknown error parsing duration string {duration_str}: {e}", exc_info=True)
         return None
 
 
 # ==============================================================================
-# 数据类定义 (参考 openai.types.chat)
+# Dataclass Definitions (referencing openai.types.chat)
 # ==============================================================================
 
 @dataclass
 class FunctionCall:
     """
-    表示模型请求的函数调用信息。
-    参考: openai.types.chat.ChatCompletionMessageToolCall.Function
+    Represents function call information requested by the model.
+    Reference: openai.types.chat.ChatCompletionMessageToolCall.Function
     """
-    name: str  # 要调用的函数名称
-    arguments: str  # 函数参数，JSON格式的字符串
+    name: str  # Name of the function to call
+    arguments: str  # Function arguments, JSON-formatted string
 
     def to_dict(self) -> Dict[str, Any]:
-        """将函数调用信息转换为字典格式"""
+        """Convert function call information to dictionary format"""
         return {
             "name": self.name,
             "arguments": self.arguments
@@ -263,15 +263,15 @@ class FunctionCall:
 @dataclass
 class ToolCall:
     """
-    表示模型生成的工具调用请求。
-    参考: openai.types.chat.ChatCompletionMessageToolCall
+    Represents a tool call request generated by the model.
+    Reference: openai.types.chat.ChatCompletionMessageToolCall
     """
-    id: str  # 工具调用的唯一标识符
-    type: Literal["function"] = "function"  # 工具类型，目前仅支持 'function'
-    function: FunctionCall = None # 函数调用详情
+    id: str  # Unique identifier for the tool call
+    type: Literal["function"] = "function"  # Tool type, currently only supports 'function'
+    function: FunctionCall = None # Function call details
 
     def to_dict(self) -> Dict[str, Any]:
-        """将工具调用信息转换为字典格式"""
+        """Convert tool call information to dictionary format"""
         return {
             "id": self.id,
             "type": self.type,
@@ -281,15 +281,15 @@ class ToolCall:
 
 @dataclass
 class SystemMessage:
-    """系统消息"""
-    content: str # 系统消息内容，不能为空
+    """System message"""
+    content: str # System message content, cannot be empty
     role: Literal["system"] = "system"
     created_at: str = field(default_factory=lambda: datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-    show_in_ui: bool = True # <--- 重命名并设置默认值
+    show_in_ui: bool = True # <--- Renamed and set default value
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "id": str(uuid.uuid4()), # 运行时 ID
+            "id": str(uuid.uuid4()), # Runtime ID
             "timestamp": self.created_at,
             "role": self.role,
             "content": self.content,
@@ -298,9 +298,9 @@ class SystemMessage:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "SystemMessage":
-        """从字典创建系统消息对象"""
+        """Create system message object from dictionary"""
         return cls(
-            content=data.get("content", " "), # 确保有内容
+            content=data.get("content", " "), # Ensure content exists
             role=data.get("role", "system"),
             show_in_ui=data.get("show_in_ui", True),
             created_at=data.get("timestamp", datetime.now().isoformat()),
@@ -309,15 +309,15 @@ class SystemMessage:
 
 @dataclass
 class UserMessage:
-    """用户消息"""
-    content: str # 用户消息内容，不能为空
+    """User message"""
+    content: str # User message content, cannot be empty
     role: Literal["user"] = "user"
     created_at: str = field(default_factory=lambda: datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-    show_in_ui: bool = True # <--- 重命名并设置默认值
+    show_in_ui: bool = True # <--- Renamed and set default value
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "id": str(uuid.uuid4()), # 运行时 ID
+            "id": str(uuid.uuid4()), # Runtime ID
             "timestamp": self.created_at,
             "role": self.role,
             "content": self.content,
@@ -326,9 +326,9 @@ class UserMessage:
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "UserMessage":
-        """从字典创建用户消息对象"""
+        """Create user message object from dictionary"""
         return cls(
-            content=data.get("content", " "), # 确保有内容
+            content=data.get("content", " "), # Ensure content exists
             role=data.get("role", "user"),
             show_in_ui=data.get("show_in_ui", True),
             created_at=data.get("timestamp", datetime.now().isoformat()),
@@ -337,16 +337,16 @@ class UserMessage:
 
 @dataclass
 class AssistantMessage:
-    """助手消息 (模型的回应)"""
-    content: Optional[str] = None # 助手消息内容。可以为 None 或空，当且仅当 tool_calls 存在。
+    """Assistant message (model's response)"""
+    content: Optional[str] = None # Assistant message content. Can be None or empty if and only if tool_calls exists.
     role: Literal["assistant"] = "assistant"
-    tool_calls: Optional[List[ToolCall]] = None # 模型请求的工具调用列表
+    tool_calls: Optional[List[ToolCall]] = None # List of tool calls requested by the model
     created_at: str = field(default_factory=lambda: datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-    show_in_ui: bool = True # <--- 重命名并设置默认值 (finish_task 会在 append 时设为 False)
-    duration_ms: Optional[float] = None # 内部存储为毫秒 float
-    # --- 使用统一的 TokenUsage 类型 ---
+    show_in_ui: bool = True # <--- Renamed and set default value (finish_task will be set to False on append)
+    duration_ms: Optional[float] = None # Internally stored as milliseconds float
+    # --- Use unified TokenUsage type ---
     token_usage: Optional[TokenUsage] = None
-    # --- 新增压缩相关字段 ---
+    # --- New compression-related fields ---
     compression_info: Optional[CompressionInfo] = None
 
     def to_dict(self) -> Dict[str, Any]:
@@ -378,37 +378,37 @@ class AssistantMessage:
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "AssistantMessage":
         msg = cls(
-            content=data.get("content"), # 允许为 None
+            content=data.get("content"), # Allow None
             role=data.get("role", "assistant"),
             show_in_ui=data.get("show_in_ui", True),
             duration_ms=data.get("duration_ms"),
             created_at=data.get("timestamp", datetime.now().isoformat()),
         )
 
-        # --- 解析 token_usage ---
+        # --- Parse token_usage ---
         token_usage_data = data.get("token_usage")
         if token_usage_data and isinstance(token_usage_data, dict):
             try:
-                # 直接使用 from_response 方法处理，由它自动适配各种格式
+                # Directly use from_response method to handle, it will automatically adapt to various formats
                 token_usage_obj = TokenUsage.from_response(token_usage_data)
                 msg.token_usage = token_usage_obj
             except Exception as e:
-                logger.warning(f"加载历史时解析 token_usage 失败: {token_usage_data}, 错误: {e}")
+                logger.warning(f"Failed to parse token_usage when loading history: {token_usage_data}, error: {e}")
 
-        # --- 解析 compression_info ---
+        # --- Parse compression_info ---
         compression_info_data = data.get("compression_info")
         if compression_info_data and isinstance(compression_info_data, dict):
             try:
                 compression_info_obj = CompressionInfo.from_dict(compression_info_data)
-                # 只有 is_compressed 为 True 的才保留
+                # Only keep those with is_compressed as True
                 if compression_info_obj and compression_info_obj.is_compressed:
                     msg.compression_info = compression_info_obj
                 else:
-                     logger.debug(f"加载时跳过空的或未压缩的 compression_info: {compression_info_data}")
+                     logger.debug(f"Skipping empty or uncompressed compression_info when loading: {compression_info_data}")
             except Exception as e:
-                logger.warning(f"加载历史时解析 compression_info 失败: {compression_info_data}, 错误: {e}")
+                logger.warning(f"Failed to parse compression_info when loading history: {compression_info_data}, error: {e}")
 
-        # --- 解析 tool_calls ---
+        # --- Parse tool_calls ---
         tool_calls_data = data.get("tool_calls")
         if tool_calls_data and isinstance(tool_calls_data, list):
             msg.tool_calls = []
@@ -416,7 +416,7 @@ class AssistantMessage:
                 if isinstance(tc_data, dict):
                     try:
                         function_data = tc_data.get("function", {})
-                        # 确保 arguments 是字符串
+                        # Ensure arguments is a string
                         arguments_raw = function_data.get("arguments")
                         arguments_str = arguments_raw if isinstance(arguments_raw, str) else json.dumps(arguments_raw or {})
 
@@ -429,55 +429,55 @@ class AssistantMessage:
                             type=tc_data.get("type", "function"),
                             function=function_call
                         )
-                        # 基本验证
+                        # Basic validation
                         if tool_call.id and tool_call.function and tool_call.function.name:
                             msg.tool_calls.append(tool_call)
                         else:
-                            logger.warning(f"加载时跳过无效的 tool_call 结构 (缺少 id 或 function.name): {tc_data}")
+                            logger.warning(f"Skipping invalid tool_call structure when loading (missing id or function.name): {tc_data}")
                     except Exception as e:
-                         logger.warning(f"加载时解析 tool_call 失败: {tc_data}, 错误: {e}")
+                         logger.warning(f"Failed to parse tool_call when loading: {tc_data}, error: {e}")
 
         return msg
 
 
 @dataclass
 class ToolMessage:
-    """工具执行结果消息"""
-    content: str # 工具执行结果内容，不能为空
-    tool_call_id: str # 对应的工具调用 ID
+    """Tool execution result message"""
+    content: str # Tool execution result content, cannot be empty
+    tool_call_id: str # Corresponding tool call ID
     role: Literal["tool"] = "tool"
-    system: Optional[str] = None # 内部使用的系统标志，例如标记中断
+    system: Optional[str] = None # Internal system flag, for example marking interruptions
     created_at: str = field(default_factory=lambda: datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-    show_in_ui: bool = True # <--- 重命名并设置默认值 (中断提示会在 append 时设为 False)
-    duration_ms: Optional[float] = None # 内部存储为毫秒 float
+    show_in_ui: bool = True # <--- Renamed and set default value (interrupt prompts will be set to False on append)
+    duration_ms: Optional[float] = None # Internally stored as milliseconds float
 
     def to_dict(self) -> Dict[str, Any]:
         result = {
-            "id": str(uuid.uuid4()), # 运行时 ID
+            "id": str(uuid.uuid4()), # Runtime ID
             "timestamp": self.created_at,
             "role": self.role,
             "content": self.content,
             "tool_call_id": self.tool_call_id,
             "system": self.system,
             "show_in_ui": self.show_in_ui,
-            "duration_ms": self.duration_ms, # 注意：这个字段在 save 时会被移除
+            "duration_ms": self.duration_ms, # Note: this field will be removed on save
         }
-        # 清理值为 None 的顶级键 (system, duration_ms 可能为 None)
+        # Clean top-level keys with None values (system, duration_ms may be None)
         return {k: v for k, v in result.items() if v is not None}
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "ToolMessage":
-        """从字典创建工具消息对象"""
+        """Create tool message object from dictionary"""
         return cls(
-            content=data.get("content", " "), # 确保有内容
-            tool_call_id=data.get("tool_call_id", ""), # ID 不能为空，后续 validate 会检查
+            content=data.get("content", " "), # Ensure content exists
+            tool_call_id=data.get("tool_call_id", ""), # ID cannot be empty, subsequent validate will check
             role=data.get("role", "tool"),
-            system=data.get("system"), # 可以为 None
+            system=data.get("system"), # Can be None
             show_in_ui=data.get("show_in_ui", True),
-            duration_ms=data.get("duration_ms"), # 可以为 None
+            duration_ms=data.get("duration_ms"), # Can be None
             created_at=data.get("timestamp", datetime.now().isoformat()),
         )
 
 
-# 所有可能的消息类型的联合类型
+# Union type for all possible message types
 ChatMessage = Union[SystemMessage, UserMessage, AssistantMessage, ToolMessage]

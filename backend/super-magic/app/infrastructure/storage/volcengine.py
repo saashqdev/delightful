@@ -27,19 +27,19 @@ class VolcEngineUploader(AbstractStorage, BaseFileProcessor):
     """VolcEngine TOS uploader implementation."""
 
     def set_credentials(self, credentials: BaseStorageCredentials):
-        """设置存储凭证"""
+        """Set storage credentials."""
         if not isinstance(credentials, VolcEngineCredentials):
             if isinstance(credentials, dict):
                 try:
                     credentials = VolcEngineCredentials(**credentials)
                 except Exception as e:
-                    raise ValueError(f"无效的凭证格式: {e}")
+                    raise ValueError(f"Invalid credential format: {e}")
             else:
-                raise ValueError(f"期望VolcEngineCredentials类型，得到{type(credentials)}")
+                raise ValueError(f"Expected VolcEngineCredentials, got {type(credentials)}")
         self.credentials = credentials
 
     def _should_refresh_credentials_impl(self) -> bool:
-        """检查是否应该刷新凭证的特定逻辑"""
+        """Determine whether credentials should be refreshed."""
         if not self.credentials:
             return True
 
@@ -47,14 +47,14 @@ class VolcEngineUploader(AbstractStorage, BaseFileProcessor):
         if credentials.expire is None:
             return False
 
-        # 提前180秒刷新
+        # Refresh 180 seconds before expiry
         return time.time() > credentials.expire - 180
 
     async def _refresh_credentials_impl(self):
-        """执行刷新凭证操作"""
-        logger.info("开始获取火山引擎STS Token")
+        """Refresh credentials via STS endpoint."""
+        logger.info("Fetching Volcengine STS token")
 
-        # 前提条件检查已经在 _should_refresh_credentials 中完成
+        # Preconditions are checked in _should_refresh_credentials
         json_data = {}
         if self.metadata:
             json_data["metadata"] = self.metadata
@@ -69,7 +69,7 @@ class VolcEngineUploader(AbstractStorage, BaseFileProcessor):
                 response.raise_for_status()
                 responseBody = await response.json()
                 self.credentials = VolcEngineCredentials(**responseBody["data"])
-                logger.info("火山引擎STS Token获取成功")
+                logger.info("Volcengine STS token acquired")
 
     @with_refreshed_credentials
     async def upload(
@@ -79,30 +79,30 @@ class VolcEngineUploader(AbstractStorage, BaseFileProcessor):
         options: Optional[Options] = None
     ) -> StorageResponse:
         """
-        异步使用TOS SDK上传文件到火山引擎对象存储。
+        Upload file to Volcengine TOS asynchronously via SDK.
         
         Args:
-            file: 文件对象，文件路径或文件内容
-            key: 文件名/路径
-            options: 可选配置，包括headers和progress回调
+            file: File object, path, or bytes
+            key: File name/path
+            options: Optional config including headers and progress callback
         
         Returns:
-            StorageResponse: 标准化的响应对象
+            StorageResponse: Standardized response
         
         Raises:
-            InitException: 如果必要参数缺失或文件过大
-            UploadException: 如果上传失败（凭证过期或网络问题）
-            ValueError: 如果文件类型不支持或凭证类型错误或未设置元数据
+            InitException: If required params missing or file too large
+            UploadException: If upload fails (expired creds or network)
+            ValueError: If file type unsupported, credential wrong, or metadata missing
         """
-        # 此时凭证已经由装饰器刷新过，直接使用self.credentials
+        # Credentials already refreshed by decorator; use self.credentials directly
         if options is None:
             options = {}
 
-        # 处理文件
+        # Handle file
         try:
             file_obj, file_size = self.process_file(file)
 
-            # 文件大小限制检查
+            # Enforce 5GB size cap
             if file_size > 5 * 1024 * 1024 * 1024:  # 5GB
                 if isinstance(file, str):
                     file_obj.close()
@@ -112,11 +112,11 @@ class VolcEngineUploader(AbstractStorage, BaseFileProcessor):
                     file_name=key
                 )
 
-            # 获取凭证信息
+            # Get credential info
             credentials: VolcEngineCredentials = self.credentials
             tc = credentials.temporary_credential
 
-            # 创建TOS客户端
+            # Create TOS client
             tos_client = TosClientV2(
                 endpoint=tc.endpoint,
                 region=tc.region,
@@ -126,7 +126,7 @@ class VolcEngineUploader(AbstractStorage, BaseFileProcessor):
             )
 
             try:
-                # 使用异步方式执行上传操作
+                # Run upload in executor
                 loop = asyncio.get_event_loop()
                 result = await loop.run_in_executor(
                     None,
@@ -137,18 +137,18 @@ class VolcEngineUploader(AbstractStorage, BaseFileProcessor):
                     )
                 )
 
-                # 关闭文件（如果是我们打开的）
+                # Close file we opened
                 if isinstance(file, str):
                     file_obj.close()
 
-                # 获取响应头
+                # Get response headers
                 headers = {}
                 if hasattr(result, 'headers'):
                     headers = dict(result.headers)
                 elif hasattr(result, 'request_info') and hasattr(result.request_info, 'headers'):
                     headers = dict(result.request_info.headers)
 
-                # 返回标准响应
+                # Return standardized response
                 return StorageResponse(
                     key=key,
                     platform=PlatformType.tos,
@@ -162,7 +162,7 @@ class VolcEngineUploader(AbstractStorage, BaseFileProcessor):
                 raise UploadException(UploadExceptionCode.NETWORK_ERROR, str(e))
 
         except Exception as e:
-            # 确保文件被关闭
+            # Ensure file is closed
             if 'file_obj' in locals() and isinstance(file, str):
                 try:
                     file_obj.close()
@@ -181,30 +181,31 @@ class VolcEngineUploader(AbstractStorage, BaseFileProcessor):
         options: Optional[Options] = None
     ) -> BinaryIO:
         """
-        异步从火山引擎对象存储下载文件。
+        Download file asynchronously from Volcengine TOS.
 
         Args:
-            key: 文件名/路径
-            options: 可选配置
+            key: File name/path
+            options: Optional config
 
         Returns:
-            BinaryIO: 文件内容的二进制流
+            BinaryIO: File content stream
 
         Raises:
-            DownloadException: 如果下载失败
-            ValueError: 如果凭证类型不正确或未设置元数据
+            DownloadException: If download fails
+            ValueError: If credential type is wrong or metadata missing
         """
-        # 此时凭证已经由装饰器刷新过，直接使用self.credentials
+        # Credentials already refreshed by decorator
 
         if options is None:
             options = {}
 
         try:
-            # 获取凭证信息
+            # Get credential info
+            # Get credential info
             credentials: VolcEngineCredentials = self.credentials
             tc = credentials.temporary_credential
 
-            # 创建TOS客户端
+            # Create TOS client
             tos_client = TosClientV2(
                 endpoint=tc.endpoint,
                 region=tc.region,
@@ -214,7 +215,7 @@ class VolcEngineUploader(AbstractStorage, BaseFileProcessor):
             )
 
             try:
-                # 异步获取对象
+                # Fetch object via executor
                 loop = asyncio.get_event_loop()
                 result = await loop.run_in_executor(
                     None,
@@ -224,9 +225,9 @@ class VolcEngineUploader(AbstractStorage, BaseFileProcessor):
                     )
                 )
 
-                # 读取内容到内存
+                # Read content into memory
                 content = result.read()
-                # 创建内存流
+                # Wrap into memory stream
                 file_stream = io.BytesIO(content)
                 return file_stream
 
@@ -247,31 +248,29 @@ class VolcEngineUploader(AbstractStorage, BaseFileProcessor):
         options: Optional[Options] = None
     ) -> bool:
         """
-        异步检查存储平台上是否存在指定的文件。
+        Check asynchronously whether a file exists on the storage platform.
 
         Args:
-            key: 文件名/路径
-            options: 可选配置
+            key: File name/path.
+            options: Optional configuration.
 
         Returns:
-            bool: 如果文件存在则为True，否则为False
+            True if the file exists, otherwise False.
 
         Raises:
-            InitException: 如果初始化参数缺失
-            ValueError: 如果凭证类型错误或未设置元数据
+            InitException: If initialization parameters are missing.
+            ValueError: If credentials are not set.
         """
         credentials: VolcEngineCredentials = self.credentials
         if credentials is None:
-            raise ValueError("未设置凭证")
+            raise ValueError("Credentials not set")
 
         if options is None:
             options = {}
 
         try:
-            # 获取凭证信息
             tc = credentials.temporary_credential
 
-            # 创建TOS客户端
             tos_client = TosClientV2(
                 endpoint=tc.endpoint,
                 region=tc.region,
@@ -280,21 +279,15 @@ class VolcEngineUploader(AbstractStorage, BaseFileProcessor):
                 security_token=tc.credentials.SessionToken
             )
 
-            try:
-                # 异步检查对象是否存在
-                loop = asyncio.get_event_loop()
-                await loop.run_in_executor(
-                    None,
-                    lambda: tos_client.head_object(
-                        bucket=tc.bucket,
-                        key=key
-                    )
+            loop = asyncio.get_event_loop()
+            await loop.run_in_executor(
+                None,
+                lambda: tos_client.head_object(
+                    bucket=tc.bucket,
+                    key=key
                 )
-                return True
-            except Exception as e:
-                # 对象不存在
-                return False
-
+            )
+            return True
         except Exception as e:
             logger.error(f"Error checking file existence: {e}")
-            return False 
+            return False

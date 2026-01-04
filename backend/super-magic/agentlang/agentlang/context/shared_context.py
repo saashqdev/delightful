@@ -127,12 +127,12 @@ class AgentSharedContext:
         logger.debug(f"Registered {len(fields)} fields in batch")
 
     def update_field(self, field_name: str, field_value: Any, field_type: Optional[Type[T]] = None) -> None:
-        """更新字段值，如果字段不存在则自动注册
+        """Update field value, auto-register if field does not exist
         
         Args:
-            field_name: 字段名称
-            field_value: 新的字段值
-            field_type: 字段类型，可选，仅当字段不存在时使用
+            field_name: Field name
+            field_value: New field value
+            field_type: Field type, optional, only used when field does not exist
         """
         if not self.has_field(field_name):
             logger.info(f"Field '{field_name}' does not exist, auto-registering")
@@ -143,94 +143,94 @@ class AgentSharedContext:
         logger.debug(f"Updated field '{field_name}' successfully")
 
     def get_field(self, field_name: str) -> Any:
-        """获取字段
+        """Get field
         
         Args:
-            field_name: 字段名称
+            field_name: Field name
             
         Returns:
-            字段值
+            Field value
             
         Raises:
-            KeyError: 如果字段不存在
+            KeyError: If field does not exist
         """
         if field_name not in self._fields:
             logger.error(f"Field '{field_name}' does not exist")
-            raise KeyError(f"字段 '{field_name}' 不存在")
+            raise KeyError(f"Field '{field_name}' does not exist")
 
         return self._fields[field_name]
 
     def has_field(self, field_name: str) -> bool:
-        """检查字段是否存在
+        """Check if field exists
         
         Args:
-            field_name: 字段名称
+            field_name: Field name
             
         Returns:
-            字段是否存在
+            Whether field exists
         """
         return field_name in self._fields
 
     def get_field_type(self, field_name: str) -> Optional[Type]:
-        """获取字段类型
+        """Get field type
         
         Args:
-            field_name: 字段名称
+            field_name: Field name
             
         Returns:
-            字段类型，如果未指定则返回None
+            Field type, returns None if not specified
         """
         return self._field_types.get(field_name)
 
     def _serialize_value(self, value: Any) -> Any:
-        """将值转换为可序列化的格式
+        """Convert value to serializable format
         
         Args:
-            value: 需要序列化的值
+            value: Value to serialize
             
         Returns:
-            Any: 转换后可序列化的值
+            Any: Converted serializable value
         """
         if value is None:
             return None
 
-        # 处理 pathlib.Path 对象
+        # Handle pathlib.Path objects
         if hasattr(value, "absolute") and callable(getattr(value, "absolute")):
             return str(value)
 
-        # 处理具有 to_dict 方法的对象
+        # Handle objects with to_dict method
         if hasattr(value, "to_dict") and callable(getattr(value, "to_dict")):
             return value.to_dict()
 
-        # 处理日期时间对象
+        # Handle datetime objects
         if isinstance(value, datetime) or isinstance(value, timedelta):
             return str(value)
 
-        # 处理字典
+        # Handle dictionaries
         if isinstance(value, dict):
             return {k: self._serialize_value(v) for k, v in value.items()}
 
-        # 处理列表或元组
+        # Handle lists or tuples
         if isinstance(value, (list, tuple)):
             return [self._serialize_value(item) for item in value]
 
-        # 处理类型对象，如 Type[T]
+        # Handle type objects like Type[T]
         if isinstance(value, type):
             return value.__name__
 
-        # 尝试直接转换为 str
+        # Try direct string conversion
         try:
             json.dumps(value)
             return value
         except (TypeError, OverflowError, ValueError):
-            # 如果无法序列化，则返回类型和ID信息
+            # If cannot serialize, return type and ID info
             return f"<{type(value).__name__}:{id(value)}>"
 
     def to_dict(self) -> Dict[str, Any]:
-        """将上下文转换为字典
+        """Convert context to dictionary
         
         Returns:
-            Dict[str, Any]: 包含上下文信息的字典
+            Dict[str, Any]: Dictionary containing context information
         """
         result = {
             "_initialized": self._initialized,
@@ -238,7 +238,7 @@ class AgentSharedContext:
             "idle_timeout": str(self.idle_timeout),
         }
 
-        # 添加所有字段和字段类型
+        # Add all fields and field types
         fields_info = {}
         for field_name, field_value in self._fields.items():
             fields_info[field_name] = {
@@ -251,10 +251,10 @@ class AgentSharedContext:
         return result
 
     def __str__(self) -> str:
-        """自定义字符串表示
+        """Custom string representation
         
         Returns:
-            str: 字典形式的字符串表示
+            str: Dictionary form string representation
         """
         try:
             return json.dumps(self.to_dict(), ensure_ascii=False, indent=2)
@@ -262,32 +262,32 @@ class AgentSharedContext:
             return f"<AgentSharedContext object at {hex(id(self))}: {e!s}>"
 
     def __repr__(self) -> str:
-        """自定义对象表示
+        """Custom object representation
         
         Returns:
-            str: 字典形式的对象表示
+            str: Dictionary form object representation
         """
         return self.__str__()
 
     @classmethod
     def reset(cls):
-        """重置共享上下文"""
+        """Reset shared context"""
         global AgentSharedContext
-        # 记录旧实例的id
+        # Record old instance id
         old_id = id(AgentSharedContext)
 
-        # 直接创建一个新的实例
+        # Create a new instance directly
         AgentSharedContext = cls()
 
-        # 确保不共享引用
+        # Ensure no shared references
         new_id = id(AgentSharedContext)
         if old_id == new_id:
             logger.error(f"Reset failed: new and old instances are the same object (id={old_id})")
         else:
             logger.info(f"Shared context reset successfully: old id={old_id}, new id={new_id}")
-            # 新实例的初始化状态已经是 False，这里记录一下日志
+            # New instance initialization state is already False, log here
             logger.debug("New shared context initialization state has been reset to False")
 
 
-# 创建单例实例
+# Create singleton instance
 AgentSharedContext = AgentSharedContext() 

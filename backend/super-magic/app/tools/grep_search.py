@@ -15,44 +15,44 @@ logger = get_logger(__name__)
 
 
 class GrepSearchParams(BaseToolParams):
-    """搜索参数"""
-    query: str = Field(..., description="要搜索的正则表达式模式")
+    """Search parameters"""
+    query: str = Field(..., description="Regular expression pattern to search for")
     case_sensitive: bool = Field(
         False,
-        description="搜索是否区分大小写"
+        description="Whether the search is case-sensitive"
     )
     include_pattern: str = Field(
         "",
-        description="要包含的文件的Glob模式（例如，TypeScript文件的'*.ts'）"
+        description="Glob pattern for files to include (e.g., '*.ts' for TypeScript files)"
     )
     exclude_pattern: str = Field(
         "",
-        description="要排除的文件的Glob模式"
+        description="Glob pattern for files to exclude"
     )
 
 
 @tool()
 class GrepSearch(WorkspaceGuardTool[GrepSearchParams]):
     """
-    基于文本的正则表达式搜索，可以在文件或目录中找到确切的模式匹配，利用ripgrep命令进行高效搜索。
-    结果将以ripgrep风格格式化，可配置为包含行号和内容。
-    为避免过多输出，结果上限为50个匹配项。
+    Text-based regular expression search that finds exact pattern matches in files or directories, using ripgrep for efficient searching.
+    Results are formatted in ripgrep style, configurable to include line numbers and content.
+    To avoid excessive output, results are limited to 50 matches.
 
-    这最适合查找确切的文本匹配或正则表达式模式。
-    比语义搜索更精确，用于查找特定字符串或模式。
+    Best suited for finding exact text matches or regular expression patterns.
+    More precise than semantic search, for finding specific strings or patterns.
     """
 
     async def execute(self, tool_context: ToolContext, params: GrepSearchParams) -> ToolResult:
-        """执行工具并返回结果
+        """Execute the tool and return results
 
         Args:
-            tool_context: 工具上下文
-            params: 搜索参数
+            tool_context: Tool context
+            params: Search parameters
 
         Returns:
-            ToolResult: 包含搜索结果或错误信息
+            ToolResult: Contains search results or error information
         """
-        # 调用内部方法获取结果
+        # Call internal method to get results
         result = self._run(
             query=params.query,
             case_sensitive=params.case_sensitive,
@@ -60,62 +60,62 @@ class GrepSearch(WorkspaceGuardTool[GrepSearchParams]):
             exclude_pattern=params.exclude_pattern
         )
 
-        # 返回ToolResult
+        # Return ToolResult
         return ToolResult(content=result)
 
     def _run(self, query: str, case_sensitive: Optional[bool] = None,
              include_pattern: Optional[str] = None,
              exclude_pattern: Optional[str] = None) -> str:
-        """运行工具并返回搜索结果"""
+        """Run the tool and return search results"""
         try:
-            # 构建 ripgrep 命令
+            # Build ripgrep command
             cmd = ["rg", "--line-number", "--max-count", "50", "--json"]
 
-            # 添加大小写敏感选项
+            # Add case sensitivity option
             if case_sensitive is not None:
                 if not case_sensitive:
                     cmd.append("--ignore-case")
 
-            # 添加包含模式
+            # Add include pattern
             if include_pattern:
                 cmd.extend(["--glob", include_pattern])
 
-            # 添加排除模式
+            # Add exclude pattern
             if exclude_pattern:
                 cmd.extend(["--glob", f"!{exclude_pattern}"])
 
-            # 添加搜索模式和目录
+            # Add search pattern and directory
             cmd.extend([query, str(self.base_dir)])
 
-            # 执行命令
+            # Execute command
             process = subprocess.run(cmd, capture_output=True, text=True, cwd=str(self.base_dir))
 
-            # 处理结果
-            if process.returncode == 0 or process.returncode == 1:  # 1 表示没有匹配
+            # Process results
+            if process.returncode == 0 or process.returncode == 1:  # 1 means no matches
                 output = process.stdout.strip()
                 if not output:
-                    return "未找到匹配项"
+                    return "No matches found"
 
-                # 解析 JSON 输出并按文件分组
+                # Parse JSON output and group by file
                 matches = self._parse_ripgrep_output(output)
                 if not matches:
-                    return "未找到匹配项"
+                    return "No matches found"
 
-                # 格式化输出
+                # Format output
                 return self._format_matches(matches)
             else:
                 error_msg = process.stderr.strip()
-                logger.error(f"ripgrep 搜索失败: {error_msg}")
-                return f"搜索执行失败: {error_msg}"
+                logger.error(f"ripgrep search failed: {error_msg}")
+                return f"Search execution failed: {error_msg}"
 
         except FileNotFoundError:
-            return "错误：未找到 ripgrep (rg) 命令。请确保已安装 ripgrep。"
+            return "Error: ripgrep (rg) command not found. Please ensure ripgrep is installed."
         except Exception as e:
-            logger.error(f"执行搜索时出错: {e}", exc_info=True)
-            return f"执行搜索时出错: {e!s}"
+            logger.error(f"Error executing search: {e}", exc_info=True)
+            return f"Error executing search: {e!s}"
 
     def _parse_ripgrep_output(self, output: str) -> Dict[Path, List[Tuple[int, str]]]:
-        """解析 ripgrep 的 JSON 输出"""
+        """Parse ripgrep's JSON output"""
         import json
 
         matches = {}
@@ -138,14 +138,14 @@ class GrepSearch(WorkspaceGuardTool[GrepSearchParams]):
         return matches
 
     def _format_matches(self, matches: Dict[Path, List[Tuple[int, str]]]) -> str:
-        """格式化匹配结果"""
+        """Format match results"""
         output = []
         for file_path, lines in matches.items():
-            # 获取文件信息
+            # Get file information
             stat = file_path.stat()
             rel_path = str(file_path.relative_to(self.base_dir))
 
-            # 创建 FileInfo 对象
+            # Create FileInfo object
             file_info = FileInfo(
                 name=file_path.name,
                 path=rel_path,
@@ -157,22 +157,22 @@ class GrepSearch(WorkspaceGuardTool[GrepSearchParams]):
                 else None,
             )
 
-            # 添加文件信息
+            # Add file information
             size_str = self._format_size(file_info.size)
             line_str = f", {file_info.line_count} lines" if file_info.line_count is not None else ""
             output.append(f"\n{file_info.path} ({size_str}{line_str}) - {file_info.format_time()}")
 
-            # 添加匹配行
+            # Add matching lines
             for line_number, content in lines:
                 output.append(f"  {line_number}: {content}")
 
         if not output:
-            return "未找到匹配项"
+            return "No matches found"
 
         return "\n".join(output)
 
     def _format_size(self, size: int) -> str:
-        """格式化文件大小"""
+        """Format file size"""
         for unit in ["B", "KB", "MB", "GB"]:
             if size < 1024:
                 return f"{size:.1f}{unit}"
@@ -180,7 +180,7 @@ class GrepSearch(WorkspaceGuardTool[GrepSearchParams]):
         return f"{size:.1f}TB"
 
     def _count_lines(self, file_path: Path) -> Optional[int]:
-        """计算文件行数"""
+        """Count file lines"""
         try:
             with file_path.open("r", encoding="utf-8") as f:
                 return sum(1 for _ in f)
@@ -189,23 +189,23 @@ class GrepSearch(WorkspaceGuardTool[GrepSearchParams]):
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
         """
-        获取工具调用后的友好动作和备注
+        Get friendly action and remark after tool call
 
         Args:
-            tool_name: 工具名称
-            tool_context: 工具上下文
-            result: 工具执行结果
-            execution_time: 执行耗时
-            arguments: 执行参数
+            tool_name: Tool name
+            tool_context: Tool context
+            result: Tool execution result
+            execution_time: Execution time
+            arguments: Execution arguments
 
         Returns:
-            Dict: 包含action和remark的字典
+            Dict: Dictionary containing action and remark
         """
         query = ""
         if arguments and "query" in arguments:
             query = arguments["query"]
 
         return {
-            "action": "本地搜索文件",
+            "action": "Local file search",
             "remark": query
         }

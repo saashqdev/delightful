@@ -223,19 +223,19 @@ class FileListenerService:
     # @staticmethod
     # async def _handle_after_init(event: Event) -> None:
     #     """
-    #     处理初始化后事件，记录相关信息
+    #     Handle initialization event, record related information
 
     #     Args:
-    #         event: 事件对象
+    #         event: Event object
     #     """
     #     try:
-    #         # 从事件数据中安全地获取agent_context
+    #         # Safely get agent_context from event data
     #         agent_context = None
     #         if hasattr(event.data, "agent_context") and event.data.agent_context:
     #             agent_context = event.data.agent_context
-    #             logger.info("已捕获初始化完成事件，agent_context已设置")
+    #             logger.info("Captured initialization completion event, agent_context set")
     #         else:
-    #             logger.info("初始化事件数据中未找到agent_context属性")
+    #             logger.info("agent_context attribute not found in initialization event data")
 
     #     except Exception as e:
-    #         logger.error(f"处理初始化完成事件出错: {e}") 
+    #         logger.error(f"Error processing initialization completion event: {e}")

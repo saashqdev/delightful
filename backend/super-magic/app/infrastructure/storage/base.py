@@ -118,18 +118,18 @@ class AbstractStorage(ABC):
         """
         Subclass specific credential refresh check logic, implemented by subclass
         """
-        raise NotImplementedError("子类必须实现此方法")
+        raise NotImplementedError("Subclass must implement this method")
 
     @abstractmethod
     async def _refresh_credentials_impl(self):
         """
-        实际执行刷新凭证的操作，由子类实现
+        Actually perform credential refresh operation, implemented by subclass
         """
-        raise NotImplementedError("子类必须实现此方法")
+        raise NotImplementedError("Subclass must implement this method")
 
     async def _save_credentials_to_file(self):
         """
-        将凭证保存到本地文件
+        Save credentials to local file
         """
         project_dir = PathManager.get_project_root()
         credentials_dir = Path(project_dir) / ".credentials"
@@ -137,16 +137,16 @@ class AbstractStorage(ABC):
         file_path = credentials_dir / "upload_credentials.json"
         credentials_data = self.credentials.model_dump()
 
-        # 创建带有批次ID的凭证数据
+        # Create credential data with batch ID
         wrapped_data = {
             "upload_config": credentials_data,
-            "batch_id": str(uuid.uuid4())  # 添加随机批次ID
+            "batch_id": str(uuid.uuid4())  # Add random batch ID
         }
 
         with open(file_path, "w") as f:
             json.dump(wrapped_data, f, indent=2)
 
-        logger.info(f"成功保存凭证到文件: {file_path}, 批次ID: {wrapped_data['batch_id']}")
+        logger.info(f"Successfully saved credentials to file: {file_path}, batch ID: {wrapped_data['batch_id']}")
 
     @abstractmethod
     async def upload(
@@ -156,22 +156,22 @@ class AbstractStorage(ABC):
         options: Optional[Options] = None
     ) -> StorageResponse:
         """
-        异步上传文件到存储平台。
+        Asynchronously upload file to storage platform.
 
         Args:
-            file: 文件内容（可以是文件路径、字节数据或文件对象）
-            key: 文件名/路径
-            options: 可选配置（如进度回调、HTTP头等）
+            file: File content (can be file path, bytes data, or file object)
+            key: File name/path
+            options: Optional configuration (such as progress callback, HTTP headers, etc.)
 
         Returns:
-            StorageResponse: 标准化的上传响应
+            StorageResponse: Standardized upload response
 
         Raises:
-            InitException: 如果初始化参数缺失或文件过大
-            UploadException: 如果上传失败（凭证过期或网络问题）
-            ValueError: 如果文件类型不支持或凭证类型错误或未设置元数据
+            InitException: If initialization parameters are missing or file is too large
+            UploadException: If upload fails (expired credentials or network issues)
+            ValueError: If file type is not supported or credential type is wrong or metadata is not set
         """
-        raise NotImplementedError("子类必须实现此方法")
+        raise NotImplementedError("Subclass must implement this method")
 
     @abstractmethod
     async def download(
@@ -180,21 +180,21 @@ class AbstractStorage(ABC):
         options: Optional[Options] = None
     ) -> BinaryIO:
         """
-        异步从存储平台下载文件。
+        Asynchronously download file from storage platform.
 
         Args:
-            key: 文件名/路径
-            options: 可选配置（如进度回调、HTTP头等）
+            key: File name/path
+            options: Optional configuration (such as progress callback, HTTP headers, etc.)
 
         Returns:
-            BinaryIO: 文件内容的二进制流
+            BinaryIO: Binary stream of file content
 
         Raises:
-            InitException: 如果初始化参数缺失
-            DownloadException: 如果下载失败（凭证过期或网络问题）
-            ValueError: 如果凭证类型错误或未设置元数据
+            InitException: If initialization parameters are missing
+            DownloadException: If download fails (expired credentials or network issues)
+            ValueError: If credential type is wrong or metadata is not set
         """
-        raise NotImplementedError("子类必须实现此方法")
+        raise NotImplementedError("Subclass must implement this method")
 
     @abstractmethod
     async def exists(
@@ -203,20 +203,20 @@ class AbstractStorage(ABC):
         options: Optional[Options] = None
     ) -> bool:
         """
-        异步检查存储平台上是否存在指定的文件。
+        Asynchronously check if specified file exists on storage platform.
 
         Args:
-            key: 文件名/路径
-            options: 可选配置
+            key: File name/path
+            options: Optional configuration
 
         Returns:
-            bool: 如果文件存在则为True，否则为False
+            bool: True if file exists, False otherwise
 
         Raises:
-            InitException: 如果初始化参数缺失
-            ValueError: 如果凭证类型错误或未设置元数据
+            InitException: If initialization parameters are missing
+            ValueError: If credential type is wrong or metadata is not set
         """
-        raise NotImplementedError("子类必须实现此方法")
+        raise NotImplementedError("Subclass must implement this method")
 
 class BaseFileProcessor:
     """Base class for file processing operations."""
@@ -275,8 +275,8 @@ class BaseFileProcessor:
         Returns:
             str: Combined path with a single separator
         """
-        clean_dir = dir_path.rstrip('/')  # 移除目录末尾的斜杠
-        clean_file = file_path.lstrip('/')  # 移除文件路径开头的斜杠
+        clean_dir = dir_path.rstrip('/')  # Remove trailing slashes from directory
+        clean_file = file_path.lstrip('/')  # Remove leading slashes from file path
         return f"{clean_dir}/{clean_file}"
 
 class ProgressTracker:

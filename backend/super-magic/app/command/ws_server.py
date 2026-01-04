@@ -147,7 +147,7 @@ def start_ws_server():
 
         logger.info(f"WebSocket service will listen on port: {ws_port}")
 
-        # 创建uvicorn配置
+        # Create uvicorn configuration
         uvicorn_config = Config(
             app,
             host="0.0.0.0",
@@ -156,42 +156,42 @@ def start_ws_server():
             ws_ping_interval=None,
         )
 
-        # 启动服务器
+        # Start server
         global ws_server
         ws_server = CustomServer(uvicorn_config)
 
-        # 同样需要处理信号
+        # Handle signals
         shutdown_event = asyncio.Event()
 
-        # 设置信号处理器
+        # Set signal handlers
         def handle_signal(sig, frame):
-            logger.info(f"收到信号 {sig}，准备关闭服务...")
+            logger.info(f"Signal {sig} received; preparing to shut down service...")
             shutdown_event.set()
 
-        # 注册信号处理器
+        # Register signal handlers
         original_sigint_handler = signal.getsignal(signal.SIGINT)
         original_sigterm_handler = signal.getsignal(signal.SIGTERM)
         signal.signal(signal.SIGINT, handle_signal)
         signal.signal(signal.SIGTERM, handle_signal)
 
         try:
-            # 启动WS服务
+            # Start WS service
             ws_task = asyncio.create_task(ws_server.serve(sockets=[ws_socket]))
 
-            # 等待关闭事件
+            # Wait for shutdown signal
             await shutdown_event.wait()
-            logger.info("正在停止WebSocket服务...")
+            logger.info("Stopping WebSocket service...")
         except Exception as e:
-            logger.error(f"WebSocket服务运行过程中出现错误: {e}")
+            logger.error(f"Error while running WebSocket service: {e}")
         finally:
-            # 优雅关闭服务器
+            # Gracefully shut down server
             if ws_server:
                 ws_server.should_exit = True
 
-            # 等待一小段时间让lifespan正常关闭
+            # Wait briefly so lifespan shutdown can complete
             await asyncio.sleep(0.5)
 
-            # 取消服务任务
+            # Cancel service task
             ws_task.cancel()
 
             await process_manager.stop_all()
@@ -199,18 +199,18 @@ def start_ws_server():
             IdleMonitorService.get_instance().stop()
 
             try:
-                # 等待任务完成
+                # Wait for task completion
                 await asyncio.gather(ws_task, return_exceptions=True)
             except Exception as e:
-                logger.error(f"关闭WebSocket服务时出现错误: {e}")
+                logger.error(f"Error while shutting down WebSocket service: {e}")
 
-            # 恢复原始信号处理器
+            # Restore original signal handlers
             signal.signal(signal.SIGINT, original_sigint_handler)
             signal.signal(signal.SIGTERM, original_sigterm_handler)
 
-            # 关闭socket
+            # Close socket
             ws_socket.close()
-            logger.info("WebSocket服务已完全关闭")
+            logger.info("WebSocket service fully shut down")
 
-    # 运行异步函数
+    # Run async function
     asyncio.run(run_ws_only())

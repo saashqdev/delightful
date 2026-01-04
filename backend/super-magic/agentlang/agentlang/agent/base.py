@@ -264,92 +264,90 @@ class BaseAgent(ABC):
         Called at end of session to print token usage statistics for entire session.
         """
         try:
-            # 获取格式化报告
+            # Get formatted report
             formatted_report = LLMFactory.token_tracker.get_formatted_report()
-            logger.info(f"===== Token 使用报告 ({self.agent_name}) =====")
+            logger.info(f"===== Token Usage Report ({self.agent_name}) =====")
             logger.info(formatted_report)
         except Exception as e:
-            logger.error(f"打印Token使用报告时出错: {e!s}")
+            logger.error(f"Error printing token usage report: {e!s}")
 
     def load_agent_config(self, agent_name: str) -> None:
         """
-        从 .agent 文件加载 agent 配置并设置相关属性
+        Load agent configuration from .agent file and set related attributes
 
-        从.agent文件中加载模型定义、工具定义、属性定义和提示词，并设置到实例属性中
+        Load model definition, tool definition, attribute definition and prompt from .agent file, and set to instance attributes
         """
-        logger.info(f"加载 agent 配置: {agent_name}")
+        logger.info(f"Load agent configuration: {agent_name}")
         model_id, tools_definition, attributes_definition, prompt = self._agent_loader.load_agent(agent_name)
         self.system_prompt = prompt
 
-        # 检查工具是否存在且可用，若不存在或不可用则忽略并抛出 warning
+        # Check if tools exist and are available, if not or unavailable ignore and throw warning
         valid_tools = {}
         for tool_name in tools_definition.keys():
             try:
-                # 获取工具实例（不是工具信息）
+                # Get tool instance (not tool info)
                 tool_instance = tool_factory.get_tool_instance(tool_name)
 
-                # 检查工具是否可用
+                # Check if tool is available
                 if not tool_instance.is_available():
-                    logger.warning(f"工具 '{tool_name}' 不可用（环境变量未配置或依赖缺失），将在 Agent 定义中被忽略")
+                    logger.warning(f"Tool '{tool_name}' not available (environment variables not configured or dependencies missing), will be ignored in Agent definition")
                     continue
 
                 valid_tools[tool_name] = tools_definition[tool_name]
             except ValueError as e:
-                # 工具不存在
-                logger.warning(f"工具 '{tool_name}' 不存在，将在 Agent 定义中被忽略: {e}")
+                # Tool doesn't exist
+                logger.warning(f"Tool '{tool_name}' doesn't exist, will be ignored in Agent definition: {e}")
                 continue
             except Exception as e:
-                # 其他错误
-                logger.warning(f"加载工具 '{tool_name}' 时发生错误，将在 Agent 定义中被忽略: {e}")
+                # Other errors
+                logger.warning(f"Error loading tool '{tool_name}', will be ignored in Agent definition: {e}")
                 continue
 
         self.tools = valid_tools
         self.attributes = attributes_definition
         self.llm_id = model_id
-        logger.info(f"加载完成: 模型={model_id}, 工具数量={len(valid_tools)}")
+        logger.info(f"Load completed: model={model_id}, tool count={len(valid_tools)}")
 
     def set_agent_state(self, state: AgentState) -> None:
         """
-        设置 Agent 状态
+        Set agent state
 
         Args:
-            state: 新的 Agent 状态
+            state: New agent state
         """
-        logger.info(f"Agent '{self.agent_name}' 状态变更: {self.agent_state.value} -> {state.value}")
+        logger.info(f"Agent '{self.agent_name}' state change: {self.agent_state.value} -> {state.value}")
         self.agent_state = state
 
     def is_agent_running(self) -> bool:
         """
-        检查 Agent 是否正在运行
+        Check if agent is running
 
         Returns:
-            bool: 如果 Agent 正在运行则返回 True，否则返回 False
+            bool: Returns True if agent is running, False otherwise
         """
         return self.agent_state == AgentState.RUNNING
 
     def is_agent_finished(self) -> bool:
         """
-        检查 Agent 是否已完成
+        Check if agent has completed
 
         Returns:
-            bool: 如果 Agent 已完成则返回 True，否则返回 False
+            bool: Returns True if agent has completed, False otherwise
         """
         return self.agent_state == AgentState.FINISHED
 
     def is_agent_error(self) -> bool:
         """
-        检查 Agent 是否发生错误
+        Check if agent encountered error
 
         Returns:
-            bool: 如果 Agent 发生错误则返回 True，否则返回 False
+            bool: Returns True if agent encountered error, False otherwise
         """
         return self.agent_state == AgentState.ERROR
 
     def is_agent_idle(self) -> bool:
         """
-        检查 Agent 是否处于空闲状态
+        Check if agent is in idle state
 
         Returns:
-            bool: 如果 Agent 处于空闲状态则返回 True，否则返回 False
-        """
-        return self.agent_state == AgentState.IDLE
+            bool: Returns True if agent is in idle state, False otherwise

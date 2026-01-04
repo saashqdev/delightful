@@ -44,26 +44,26 @@ def is_safe_path(base_path: Path, target_path_str: str) -> bool:
         return False
 
 class ConvertPdfParams(BaseToolParams):
-    """PDF 转换工具参数"""
+    """PDF conversion tool parameters"""
     input_path: str = Field(
         ...,
-        description="输入的 PDF 来源，可以是本地文件路径（相对于工作空间）或 HTTP/HTTPS URL。"
+        description="Source of input PDF, can be local file path (relative to workspace) or HTTP/HTTPS URL."
     )
     output_path: str = Field(
         "",
         description=(
-            "输出的 Markdown 文件保存路径（可选，相对于工作空间）。" +
-            "如果未提供：对于 URL 来源，将自动生成路径保存在 `webview_reports` 目录下；" +
-            "(未来计划)对于本地文件来源，将保存在源文件相同目录下，同名但扩展名为 .md。"
+            "Save path for output Markdown file (optional, relative to workspace). " +
+            "If not provided: for URL sources, will auto-generate path and save in `webview_reports` directory; " +
+            "(future plan) for local file sources, will save in same directory as source file, same name but with .md extension."
         )
     )
     mode: str = Field(
-        "smart", # 默认为智能模式
-        description="转换模式：'smart' (使用外部智能API处理URL，质量可能更高但较慢) 或 'normal' (使用本地库处理本地文件和URL，速度更快)。如果输入是本地文件，将强制使用 'normal' 模式。"
+        "smart", # Default is smart mode
+        description="Conversion mode: 'smart' (use external smart API to process URLs, may have higher quality but slower) or 'normal' (use local library to process local files and URLs, faster). If input is local file, will force 'normal' mode."
     )
     override: bool = Field(
         True,
-        description="当输出文件已存在时，是否覆盖。仅在指定了 `output_path` 时生效。"
+        description="Whether to overwrite when output file already exists. Only effective when `output_path` is specified."
     )
 
 @tool()
@@ -109,7 +109,7 @@ class ConvertPdf(AbstractFileTool[ConvertPdfParams], WorkspaceGuardTool[ConvertP
     ```
     ```
     {
-        "input_path": "local_files/mydoc.pdf" // 本地文件，自动使用 normal 模式
+        "input_path": "local_files/mydoc.pdf" // Local file; normal mode is enforced automatically
     }
     ```
     """
@@ -119,62 +119,62 @@ class ConvertPdf(AbstractFileTool[ConvertPdfParams], WorkspaceGuardTool[ConvertP
         tool_context: ToolContext,
         params: ConvertPdfParams
     ) -> ToolResult:
-        """执行 PDF 转换。"""
+        """Execute PDF conversion."""
         return await self.execute_purely(params)
 
     async def execute_purely(
         self,
         params: ConvertPdfParams
     ) -> ToolResult:
-        """执行 PDF 转换的核心逻辑，无需上下文。"""
+        """Execute core PDF conversion logic, no context required."""
         workspace_root = PathManager.get_workspace_dir()
         input_location = params.input_path
         target_output_path_str = params.output_path
         user_mode = params.mode.lower()
         override_output = params.override
 
-        # --- 1. 确定输入类型和有效模式 ---
+        # --- 1. Determine input type and valid mode ---
         is_url = bool(re.match(r'^https?://', input_location))
         effective_mode = user_mode
-        pdf_source_path: Optional[Path] = None # 将用于 normal 模式处理的源文件路径
-        temp_download_path: Optional[Path] = None # normal 模式下 URL 下载的临时路径
+        pdf_source_path: Optional[Path] = None # Source file path to be used for normal mode processing
+        temp_download_path: Optional[Path] = None # Temporary path for URL download in normal mode
 
         try:
             if not is_url:
-                logger.info(f"输入 '{input_location}' 被识别为本地路径，强制使用 'normal' 模式。")
+                logger.info(f"Input '{input_location}' recognized as local path, forcing 'normal' mode.")
                 effective_mode = "normal"
-                # 验证本地路径安全
+                # Validate local path safety
                 safe_path, error = self.get_safe_path(input_location)
                 if error:
                     return ToolResult(error=error)
                 if not await aiofiles.os.path.exists(safe_path) or await aiofiles.os.path.isdir(safe_path):
-                    return ToolResult(error=f"本地文件不存在或不是文件：'{input_location}'")
+                    return ToolResult(error=f"Local file does not exist or is not a file: '{input_location}'")
                 pdf_source_path = safe_path
             elif effective_mode == "normal":
-                # URL 输入，但指定了 normal 模式，需要先下载
-                logger.info(f"URL 输入 '{input_location}'，使用 'normal' 模式，将先下载文件。")
-                # 此处需要调用 DownloadFromUrl
-                pass # 下载逻辑将在后面实现
+                # URL input, but specified normal mode, need to download first
+                logger.info(f"URL input '{input_location}', using 'normal' mode, will download file first.")
+                # Need to call DownloadFromUrl here
+                pass # Download logic will be implemented later
             elif effective_mode != "smart":
-                 return ToolResult(error=f"无效的模式 '{params.mode}'。请选择 'smart' 或 'normal'。")
+                 return ToolResult(error=f"Invalid mode '{params.mode}'. Please choose 'smart' or 'normal'.")
 
-            logger.info(f"执行 PDF 转换: 输入='{input_location}', 模式='{effective_mode}', 输出到='{target_output_path_str or '自动处理'}'")
+            logger.info(f"Executing PDF conversion: input='{input_location}', mode='{effective_mode}', output to='{target_output_path_str or 'auto-handled'}'")
 
             markdown_content: Optional[str] = None
-            final_output_path: Optional[Path] = None # 最终保存 Markdown 的绝对路径
+            final_output_path: Optional[Path] = None # Absolute path to final Markdown
 
-            # --- 2. 执行转换 (根据模式分发) ---
+            # --- 2. Execute conversion (dispatch based on mode) ---
             if effective_mode == "smart":
-                # 智能模式：调用外部 API (仅支持 URL)
+                # Smart mode: call external API (supports URLs only)
                 if not is_url:
-                    # 理论上不会到这里，因为本地文件会强制 normal
-                    return ToolResult(error="内部错误：Smart 模式不应用于本地文件。")
+                    # Theoretically shouldn't reach here, as local files force normal mode
+                    return ToolResult(error="Internal error: Smart mode should not be used for local files.")
 
-                # 获取 API 配置
+                # Get API configuration
                 api_key = config.get("pdf_understanding.api_key")
                 api_url = config.get("pdf_understanding.api_url")
                 if not api_key or not api_url:
-                    return ToolResult(error="智能 PDF 转换服务未配置，请联系管理员。")
+                    return ToolResult(error="Smart PDF conversion service not configured, please contact administrator.")
 
                 headers = { "api-key": api_key, "Content-Type": "application/json" }
                 payload = { "message": input_location, "conversation_id": "" }
@@ -184,85 +184,85 @@ class ConvertPdf(AbstractFileTool[ConvertPdfParams], WorkspaceGuardTool[ConvertP
                         response.raise_for_status()
                     response_data = response.json()
                 except httpx.HTTPStatusError as e:
-                    logger.exception(f"智能 PDF 转换 API 请求失败: 状态码={e.response.status_code}, 响应={e.response.text}")
-                    return ToolResult(error="智能 PDF 转换失败，与处理服务通信时出错。")
+                    logger.exception(f"Smart PDF conversion API request failed: status_code={e.response.status_code}, response={e.response.text}")
+                    return ToolResult(error="Smart PDF conversion failed, error communicating with processing service.")
                 except httpx.RequestError as e:
-                    logger.exception(f"智能 PDF 转换 API 请求无法发送: {e}")
-                    return ToolResult(error="智能 PDF 转换失败，无法连接到处理服务。")
+                    logger.exception(f"Smart PDF conversion API request could not be sent: {e}")
+                    return ToolResult(error="Smart PDF conversion failed, unable to connect to processing service.")
 
-                # 解析 API 响应
+                # Parse API response
                 # --- API Response Parsing START ---
                 if response_data.get("code") == 1000:
                     try:
                         content = response_data["data"]["messages"][0]["message"]["content"]
-                        markdown_content = content if content else "<!-- PDF 已处理（智能模式），但未提取到有效内容 -->"
-                        logger.info("Smart 模式 API 调用成功并提取内容。")
+                        markdown_content = content if content else "<!-- PDF processed (smart mode), but no valid content extracted -->"
+                        logger.info("Smart mode API call succeeded and content extracted.")
                     except (KeyError, IndexError, TypeError) as e:
-                        logger.error(f"解析智能 PDF 转换 API 响应结构失败: {e}, 响应: {response_data}")
-                        return ToolResult(error="未能成功解析智能 PDF 处理服务的响应。")
+                        logger.error(f"Failed to parse smart PDF conversion API response structure: {e}, response: {response_data}")
+                        return ToolResult(error="Could not successfully parse smart PDF processing service response.")
                 else:
-                    error_message = response_data.get("message", "未知的 API 错误")
-                    logger.error(f"智能 PDF 转换 API 错误: code={response_data.get('code')}, message={error_message}, 响应: {response_data}")
-                    return ToolResult(error="智能 PDF 转换失败，处理服务返回错误。")
+                    error_message = response_data.get("message", "Unknown API error")
+                    logger.error(f"Smart PDF conversion API error: code={response_data.get('code')}, message={error_message}, response: {response_data}")
+                    return ToolResult(error="Smart PDF conversion failed, processing service returned error.")
                 # --- API Response Parsing END ---
 
             elif effective_mode == "normal":
-                # 普通模式：使用本地库 (支持本地文件和已下载的 URL)
+                # Normal mode: use local library (supports local files and downloaded URLs)
 
                 if is_url:
-                    # --- 下载 URL ---
+                    # --- Download URL ---
                     download_tool = DownloadFromUrl()
-                    # 创建临时下载目录
+                    # Create temporary download directory
                     temp_dir = workspace_root / ".cache" / "pdf_downloads"
                     temp_dir.mkdir(parents=True, exist_ok=True)
-                    # 生成临时文件名
+                    # Generate temporary filename
                     base_name = self._extract_source_name(input_location)
                     safe_base_name = generate_safe_filename(base_name) or "downloaded_pdf"
                     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
                     temp_pdf_filename = f"{safe_base_name}_{timestamp}.pdf"
                     temp_download_path = temp_dir / temp_pdf_filename
 
-                    logger.info(f"Normal 模式下载 URL '{input_location}' 到临时文件 '{temp_download_path}'")
+                    logger.info(f"Normal mode downloading URL '{input_location}' to temp file '{temp_download_path}'")
                     download_params = DownloadFromUrlParams(
                         url=input_location,
-                        # 提供相对于工作区的路径给下载工具
+                        # Provide workspace-relative path to download tool
                         file_path=str(temp_download_path.relative_to(workspace_root)),
-                        override=True # 覆盖同名临时文件
+                        override=True # Overwrite temp file with same name
                     )
                     download_result = await download_tool.execute_purely(download_params)
                     if not download_result.ok:
-                        logger.error(f"Normal 模式下载 PDF 失败: {download_result.error}")
-                        return ToolResult(error=f"下载 PDF 文件失败: {download_result.error}")
-                    pdf_source_path = temp_download_path # 更新源路径为下载的文件
-                    logger.info(f"PDF 已成功下载到: {pdf_source_path}")
-                    # --- 下载结束 ---
+                        logger.error(f"Normal mode PDF download failed: {download_result.error}")
+                        return ToolResult(error=f"Failed to download PDF file: {download_result.error}")
+                    pdf_source_path = temp_download_path # Update source path to downloaded file
+                    logger.info(f"PDF successfully downloaded to: {pdf_source_path}")
+                    # --- Download end ---
 
-                # --- 调用本地转换 ---
+                # --- Call local conversion ---
                 if not pdf_source_path or not await aiofiles.os.path.exists(pdf_source_path):
-                    return ToolResult(error="内部错误：无法找到用于本地转换的源 PDF 文件。")
+                    return ToolResult(error="Internal error: Cannot find source PDF file for local conversion.")
 
-                logger.info(f"Normal 模式调用本地转换获取文本: {pdf_source_path}")
-                # 直接获取 Markdown 文本内容
+                logger.info(f"Normal mode calling local conversion to get text: {pdf_source_path}")
+                # Directly get Markdown text content
                 markdown_content = await convert_pdf_locally(pdf_source_path)
 
                 if markdown_content is None:
-                    logger.error(f"Normal 模式本地转换失败: {pdf_source_path}")
-                    return ToolResult(error=f"使用本地库转换 PDF 文件 '{pdf_source_path.name}' 失败。")
+                    logger.error(f"Normal mode local conversion failed: {pdf_source_path}")
+                    return ToolResult(error=f"Failed to convert PDF file '{pdf_source_path.name}' using local library.")
 
-                logger.info("Normal 模式本地转换成功，已获取 Markdown 文本。")
-                # 在 normal 模式下，md_cache_path 是潜在的输出文件之一
-                # 如果用户未指定 output_path，我们就用它
+                logger.info("Normal mode local conversion successful, Markdown text obtained.")
+                # In normal mode, md_cache_path is one of the potential output files
+                # If user didn't specify output_path, we use it
 
-            # --- 3. 检查转换结果 ---
-            # 经过 smart 或 normal 模式处理后，检查 markdown_content 是否有值
+            # --- 3. Check conversion result ---
+            # After processing by smart or normal mode, check if markdown_content has value
             if markdown_content is None: # Sanity check, should have been caught above
-                logger.error(f"未能成功获取 Markdown 内容 (模式: {effective_mode})，输入: {input_location}")
-                #返回更具体的错误信息
-                return ToolResult(error=f"PDF 转换失败（模式: {effective_mode}），未能获取有效内容。")
+                logger.error(f"Failed to successfully get Markdown content (mode: {effective_mode}), input: {input_location}")
+                # Return more specific error message
+                return ToolResult(error=f"PDF conversion failed (mode: {effective_mode}), failed to get valid content.")
 
-            # --- 4. 生成摘要 ---
+            # --- 4. Generate summary ---
             pdf_source_name = self._extract_source_name(input_location)
-            summary = "无法生成摘要。"
+            summary = "Unable to generate summary."
             try:
                 summarizer = Summarize()
                 generated_summary = await summarizer.summarize_content(
@@ -273,47 +273,47 @@ class ConvertPdf(AbstractFileTool[ConvertPdfParams], WorkspaceGuardTool[ConvertP
                 if generated_summary:
                     summary = generated_summary
                 else:
-                     logger.warning(f"为 PDF '{pdf_source_name}' 生成摘要失败（返回空），将使用默认提示。")
+                     logger.warning(f"Failed to generate summary for PDF '{pdf_source_name}' (empty result); using default message.")
             except Exception as summary_e:
-                logger.error(f"为 PDF '{pdf_source_name}' 生成摘要时发生异常: {summary_e}", exc_info=True)
+                logger.error(f"Exception while generating summary for PDF '{pdf_source_name}': {summary_e}", exc_info=True)
 
-            # --- 5. 确定保存路径并保存文件 ---
+            # --- 5. Determine save path and save file ---
             workspace_root = PathManager.get_workspace_dir()
             saved_file_relative_path: Optional[str] = None
 
             try:
                 if target_output_path_str:
-                    # 用户指定了路径
+                    # User specified path
                     safe_output_path, error = self.get_safe_path(target_output_path_str)
                     if error:
-                         logger.error(f"指定的输出路径不安全或在工作空间之外: {target_output_path_str}")
-                         return ToolResult(error=f"指定的输出路径 '{target_output_path_str}' 不安全或无效: {error}")
+                         logger.error(f"Specified output path is unsafe or outside workspace: {target_output_path_str}")
+                         return ToolResult(error=f"Specified output path '{target_output_path_str}' is unsafe or invalid: {error}")
 
-                    # 检查文件是否存在以及是否允许覆盖
+                    # Check if file exists and if override is allowed
                     if await aiofiles.os.path.exists(safe_output_path) and not override_output:
-                         logger.warning(f"输出文件已存在且不允许覆盖: {safe_output_path}")
-                         return ToolResult(error=f"输出文件 '{target_output_path_str}' 已存在。如需覆盖请设置 override=True。")
+                         logger.warning(f"Output file already exists and override not allowed: {safe_output_path}")
+                         return ToolResult(error=f"Output file '{target_output_path_str}' already exists. Set override=True to overwrite.")
 
-                    # 确保父目录存在
+                    # Ensure parent directory exists
                     safe_output_path.parent.mkdir(parents=True, exist_ok=True)
                     final_output_path = safe_output_path
 
                 else:
-                    # 用户未指定输出路径，统一生成在 webview_reports
+                    # User did not specify output path, uniformly generate in webview_reports
                     # if effective_mode == "normal":
-                    #     # Normal 模式下，如果没有指定输出，结果就是 cache 文件
+                    #     # In Normal mode, if no output specified, result is cache file
                     #     if not md_cache_path: # Sanity check
-                    #          return ToolResult(error="内部错误：无法确定 normal 模式的默认输出路径。")
+                    #          return ToolResult(error="Internal error: Cannot determine default output path for normal mode.")
                     #     final_output_path = md_cache_path
-                    #     logger.info(f"Normal 模式未指定输出路径，将使用缓存文件: {final_output_path}")
+                    #     logger.info(f"Normal mode no output path specified, will use cache file: {final_output_path}")
                     #
                     # elif effective_mode == "smart":
-                    #     # Smart 模式 (必然是 URL 来源)，保存在 webview_reports
+                    #     # Smart mode (must be URL source), save in webview_reports
                     #     if not is_url: # Sanity check
-                    #         return ToolResult(error="内部错误：Smart 模式应只处理 URL。")
+                    #         return ToolResult(error="Internal error: Smart mode should only process URLs.")
                     #
-                        # 新逻辑：所有默认输出都放入 webview_reports
-                        logger.info("未指定输出路径，将在 webview_reports 中自动生成文件名。")
+                        # New logic: all default outputs go to webview_reports
+                        logger.info("No output path specified, will auto-generate filename in webview_reports.")
                         records_dir = get_or_create_records_dir()
                         safe_filename_base = generate_safe_filename(pdf_source_name) or "pdf_content"
                         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
@@ -321,19 +321,19 @@ class ConvertPdf(AbstractFileTool[ConvertPdfParams], WorkspaceGuardTool[ConvertP
                         saved_file_absolute_path = records_dir / filename
                         final_output_path = records_dir / filename
 
-                # 确定相对路径
+                # Determine relative path
                 saved_file_relative_path = str(final_output_path.relative_to(workspace_root))
 
-                # 执行唯一一次写入操作
+                # Execute single write operation
                 async with aiofiles.open(final_output_path, "w", encoding="utf-8") as f:
                     await f.write(markdown_content)
-                logger.info(f"转换结果已写入到最终目标文件: {saved_file_relative_path}")
+                logger.info(f"Conversion result written to final target file: {saved_file_relative_path}")
 
             except OSError as write_e:
-                output_path_display = final_output_path or target_output_path_str or "未知路径"
-                logger.error(f"保存 Markdown 文件失败: {output_path_display}, 错误: {write_e}", exc_info=True)
+                output_path_display = final_output_path or target_output_path_str or "unknown path"
+                logger.error(f"Failed to save Markdown file: {output_path_display}, error: {write_e}", exc_info=True)
                 return ToolResult(
-                    error=f"成功转换 PDF，但保存 Markdown 文件到 '{saved_file_absolute_path}' 时出错: {write_e}。转换后的内容在 extra_info 中。",
+                    error=f"Successfully converted PDF, but error occurred while saving Markdown file to '{saved_file_absolute_path}': {write_e}. Converted content in extra_info.",
                     extra_info={
                         "pdf_source_name": pdf_source_name,
                         "saved_file_path": None,
@@ -341,15 +341,15 @@ class ConvertPdf(AbstractFileTool[ConvertPdfParams], WorkspaceGuardTool[ConvertP
                     }
                 )
             except Exception as e:
-                logger.error(f"确定或创建保存路径时发生意外错误: {e}", exc_info=True)
-                return ToolResult(error="处理文件保存路径时发生内部错误。")
+                logger.error(f"Unexpected error occurred while determining or creating save path: {e}", exc_info=True)
+                return ToolResult(error="Internal error occurred while processing file save path.")
 
-            # --- 6. 构建返回结果 ---
-            ai_content = f"**PDF 内容摘要**:\n{summary}"
+            # --- 6. Build return result ---
+            ai_content = f"**PDF Content Summary**:\n{summary}"
             if saved_file_relative_path:
-                ai_content += f"\n\n**提示**: 完整的 PDF 内容已处理（模式: {effective_mode}）并保存至 `{saved_file_relative_path}`。如需详细信息，请使用 `read_file` 工具读取此文件。"
+                ai_content += f"\n\n**Note**: Complete PDF content has been processed (mode: {effective_mode}) and saved to `{saved_file_relative_path}`. For details, use `read_file` tool to read this file."
             else:
-                ai_content += "\n\n**警告**: 完整内容已转换但未能成功保存到文件，无法通过 `read_file` 访问。"
+                ai_content += "\n\n**Warning**: Complete content has been converted but failed to save to file, cannot be accessed via `read_file`."
 
             result = ToolResult(
                 content=ai_content,
@@ -362,36 +362,36 @@ class ConvertPdf(AbstractFileTool[ConvertPdfParams], WorkspaceGuardTool[ConvertP
             return result
 
         except Exception as e:
-            logger.exception(f"PDF 转换操作意外失败: {e!s}")
-            return ToolResult(error="执行 PDF 转换时发生未预料的内部错误。")
+            logger.exception(f"PDF conversion operation unexpectedly failed: {e!s}")
+            return ToolResult(error="Unexpected internal error occurred while executing PDF conversion.")
         finally:
-             # --- 清理下载的临时文件 ---
+             # --- Clean up downloaded temporary file ---
              if temp_download_path and await aiofiles.os.path.exists(temp_download_path):
                  try:
                      await aiofiles.os.remove(temp_download_path)
-                     logger.info(f"已清理临时下载文件: {temp_download_path}")
+                     logger.info(f"Cleaned up temporary download file: {temp_download_path}")
                  except OSError as remove_e:
-                     logger.warning(f"清理临时下载文件失败 {temp_download_path}: {remove_e}")
+                     logger.warning(f"Failed to clean up temporary download file {temp_download_path}: {remove_e}")
 
     async def get_tool_detail(self, tool_context: ToolContext, result: ToolResult, arguments: Dict[str, Any] = None) -> Optional[ToolDetail]:
-        """生成工具详情，用于前端展示"""
+        """Generate tool details for frontend display"""
         try:
             full_content = result.extra_info.get("full_content")
             saved_file_path = result.extra_info.get("saved_file_path")
-            pdf_source_name = result.extra_info.get("pdf_source_name", "未知来源")
+            pdf_source_name = result.extra_info.get("pdf_source_name", "unknown source")
 
             if not full_content:
-                logger.error("无法生成工具详情：extra_info 中 full_content 缺失或为空。")
-                return None # 核心内容缺失
+                logger.error("Cannot generate tool details: full_content missing or empty in extra_info.")
+                return None # Core content missing
 
-            # 确定显示的文件名
+            # Determine display filename
             if saved_file_path:
-                display_filename = Path(saved_file_path).name # 从相对路径获取文件名
+                display_filename = Path(saved_file_path).name # Get filename from relative path
             else:
-                 # 如果保存失败，生成一个临时的名字
+                 # If save failed, generate a temporary name
                  safe_filename_base = generate_safe_filename(pdf_source_name) or "converted_pdf"
-                 display_filename = f"转换结果_{safe_filename_base}.md"
-                 logger.warning(f"Tool detail: saved_file_path 为空，使用备用文件名: {display_filename}")
+                 display_filename = f"conversion_result_{safe_filename_base}.md"
+                 logger.warning(f"Tool detail: saved_file_path is empty, using fallback filename: {display_filename}")
 
 
             return ToolDetail(
@@ -402,37 +402,37 @@ class ConvertPdf(AbstractFileTool[ConvertPdfParams], WorkspaceGuardTool[ConvertP
                 )
             )
         except Exception as e:
-            logger.error(f"生成工具详情时发生意外错误: {e}", exc_info=True)
+            logger.error(f"Unexpected error occurred while generating tool details: {e}", exc_info=True)
             return None
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
-        """获取工具调用后的友好动作和备注"""
-        pdf_source_name = "PDF文档"
+        """Get friendly action and remark after tool call"""
+        pdf_source_name = "PDF document"
         if result.extra_info and "pdf_source_name" in result.extra_info:
             pdf_source_name = result.extra_info["pdf_source_name"]
-        elif arguments and "input_path" in arguments: # 使用 input_path
+        elif arguments and "input_path" in arguments: # Use input_path
              pdf_source_name = self._extract_source_name(arguments["input_path"])
 
-        remark = f"已转换 PDF: {pdf_source_name}"
+        remark = f"Converted PDF: {pdf_source_name}"
         if result.ok and result.extra_info and result.extra_info.get("saved_file_path"):
-            remark += f"，保存至 `{result.extra_info['saved_file_path']}`"
+            remark += f", saved to `{result.extra_info['saved_file_path']}`"
         elif result.error:
-             remark += " (但处理或保存中遇到问题)"
+             remark += " (but encountered issues during processing or saving)"
 
         return {
-            "action": "PDF转换",
+            "action": "PDF Conversion",
             "remark": remark
         }
 
     def _extract_source_name(self, source_location_url: str) -> str:
-        """从 PDF 来源 URL 提取用于显示的文件名"""
+        """Extract filename for display from PDF source URL"""
         try:
             parsed_url = urllib.parse.urlparse(source_location_url)
             path_part = parsed_url.path
             file_name = path_part.split('/')[-1]
             decoded_name = urllib.parse.unquote(file_name)
             base_name = decoded_name.split('?')[0]
-            return base_name if base_name and base_name != '/' else "网络PDF文档"
+            return base_name if base_name and base_name != '/' else "web PDF document"
         except Exception as e:
-            logger.warning(f"从 URL '{source_location_url}' 提取文件名失败: {e}", exc_info=False)
-            return "网络PDF文档"
+            logger.warning(f"Failed to extract filename from URL '{source_location_url}': {e}", exc_info=False)
+            return "web PDF document"

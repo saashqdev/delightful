@@ -27,41 +27,41 @@ from .types import BaseStorageCredentials, FileContent, LocalCredentials, Option
 class LocalStorage(AbstractStorage, BaseFileProcessor):
     """Local storage implementation for file operations."""
 
-    # 从环境变量读取配置，提供默认值
+    # Defaults from environment variables
     DEFAULT_HOST = os.environ.get('LOCAL_STORAGE_HOST', "")
     DEFAULT_DIR = os.environ.get('LOCAL_STORAGE_DIR', ".workspace")
     DEFAULT_READ_HOST = os.environ.get('LOCAL_STORAGE_READ_HOST', "")
-    DEFAULT_EXPIRY_DURATION = int(os.environ.get('LOCAL_STORAGE_EXPIRY', "3600"))  # 默认凭证有效期（秒）
-    DEFAULT_TIMEOUT = int(os.environ.get('LOCAL_STORAGE_TIMEOUT', "10"))  # 默认请求超时时间（秒）
-    MAX_FILE_SIZE = 5 * 1024 * 1024 * 1024  # 5GB 最大文件大小
+    DEFAULT_EXPIRY_DURATION = int(os.environ.get('LOCAL_STORAGE_EXPIRY', "3600"))  # Default credential TTL (s)
+    DEFAULT_TIMEOUT = int(os.environ.get('LOCAL_STORAGE_TIMEOUT', "10"))  # Default request timeout (s)
+    MAX_FILE_SIZE = 5 * 1024 * 1024 * 1024  # 5GB cap
 
     def set_credentials(self, credentials: BaseStorageCredentials) -> None:
         """
-        设置存储凭证
+        Set storage credentials.
         
         Args:
-            credentials: 存储凭证对象或字典
+            credentials: Credential object or dict
             
         Raises:
-            ValueError: 如果凭证格式无效或类型不正确
+            ValueError: If credential format/type is invalid
         """
         if not isinstance(credentials, LocalCredentials):
             if isinstance(credentials, dict):
                 try:
                     credentials = LocalCredentials(**credentials)
                 except Exception as e:
-                    logger.error(f"解析本地存储凭证失败: {e}")
-                    raise ValueError(f"无效的凭证格式: {e}")
+                    logger.error(f"Failed to parse local storage credentials: {e}")
+                    raise ValueError(f"Invalid credential format: {e}")
             else:
-                raise ValueError(f"期望LocalCredentials类型，得到{type(credentials)}")
+                raise ValueError(f"Expected LocalCredentials, got {type(credentials)}")
         self.credentials = credentials
 
     def _should_refresh_credentials_impl(self) -> bool:
         """
-        检查是否应该刷新凭证的特定逻辑
+        Determine whether credentials should be refreshed.
         
         Returns:
-            bool: 如果凭证需要刷新则为True，否则为False
+            bool: True if credentials need refresh, else False
         """
         if not self.credentials:
             return True
@@ -70,15 +70,15 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
         if credentials.expires is None:
             return False
 
-        # 提前180秒刷新
+        # Refresh 180s before expiry
         return time.time() > credentials.expires - 180
 
     def _create_default_credentials(self) -> LocalCredentials:
         """
-        创建默认的本地存储凭证
+        Create default local storage credentials.
         
         Returns:
-            LocalCredentials: 默认的本地存储凭证对象
+            LocalCredentials: Default credential object
         """
         default_credential_id = f"local_credential:default_{int(time.time())}"
         default_data = {
@@ -95,20 +95,20 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
 
     async def _refresh_credentials_impl(self) -> None:
         """
-        执行刷新凭证操作
+        Refresh credentials via configured STS endpoint.
         
         Raises:
-            InitException: 如果无法获取有效凭证
+            InitException: If credentials cannot be obtained
         """
-        logger.info("开始获取本地存储凭证")
+        logger.info("Fetching local storage credentials")
 
-        # 如果没有配置 STS 刷新，抛出异常
+        # Require STS refresh config
         if not self.sts_refresh_config:
-            error_msg = "未配置STS刷新，无法获取本地存储凭证"
+            error_msg = "STS refresh not configured; cannot obtain local storage credentials"
             logger.error(error_msg)
             raise InitException(InitExceptionCode.CREDENTIAL_ERROR, error_msg)
 
-        # 准备JSON数据
+        # Prepare JSON payload
         json_data = {"metadata": self.metadata} if self.metadata else {}
 
         try:
@@ -124,46 +124,46 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
                         response.raise_for_status()
                         response_body = await response.json()
 
-                        # 检查响应数据
+                        # Validate response data
                         credential_data = response_body.get("data")
                         if not credential_data:
-                            error_msg = "获取本地存储凭证响应中缺少data字段"
+                            error_msg = "Local storage credential response missing data field"
                             logger.error(error_msg)
                             raise InitException(InitExceptionCode.CREDENTIAL_ERROR, error_msg)
 
                         try:
                             self.credentials = LocalCredentials(**credential_data)
 
-                            # 验证必要字段
+                            # Validate required fields
                             if not self.credentials.temporary_credential or not self.credentials.temporary_credential.dir:
-                                error_msg = "凭证中缺少必要的dir字段"
+                                error_msg = "Credential missing required dir field"
                                 logger.error(error_msg)
                                 raise InitException(InitExceptionCode.CREDENTIAL_ERROR, error_msg)
 
-                            logger.info("本地存储凭证获取成功")
+                            logger.info("Local storage credentials fetched successfully")
                         except Exception as e:
-                            error_msg = f"解析凭证数据失败: {e}"
+                            error_msg = f"Failed to parse credential data: {e}"
                             logger.error(error_msg)
                             raise InitException(InitExceptionCode.CREDENTIAL_ERROR, error_msg)
                 except (aiohttp.ClientError, asyncio.TimeoutError) as e:
-                    error_msg = f"请求本地存储凭证API失败: {e}"
+                    error_msg = f"Request to local storage credential API failed: {e}"
                     logger.error(error_msg)
                     raise InitException(InitExceptionCode.CREDENTIAL_ERROR, error_msg)
         except InitException:
-            # 直接传递InitException
+            # Propagate InitException
             raise
         except Exception as e:
-            error_msg = f"获取本地存储凭证失败: {e}"
+            error_msg = f"Failed to obtain local storage credentials: {e}"
             logger.error(error_msg)
             raise InitException(InitExceptionCode.CREDENTIAL_ERROR, error_msg)
 
     @asynccontextmanager
     async def _create_client_session(self) -> AsyncGenerator[aiohttp.ClientSession, None]:
         """
-        创建HTTP客户端会话的上下文管理器
+        Context manager to create an HTTP client session.
         
         Yields:
-            aiohttp.ClientSession: HTTP客户端会话
+            aiohttp.ClientSession: HTTP client session
         """
         session = aiohttp.ClientSession()
         try:
@@ -179,79 +179,79 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
         options: Optional[Options] = None
     ) -> StorageResponse:
         """
-        异步使用HTTP POST上传文件到本地存储接口。
+        Upload a file via HTTP POST to the local storage endpoint.
         
         Args:
-            file: 文件对象，文件路径或文件内容
-            key: 文件名/路径
-            options: 可选配置，包括headers和progress回调
+            file: File object, file path, or bytes
+            key: File name/path
+            options: Optional config including headers and progress callback
         
         Returns:
-            StorageResponse: 标准化的响应对象
+            StorageResponse: Standardized response
         
         Raises:
-            InitException: 如果必要参数缺失或文件过大
-            UploadException: 如果上传失败（凭证过期或网络问题）
-            ValueError: 如果文件类型不支持或凭证类型错误或未设置元数据
+            InitException: When required params are missing or file too large
+            UploadException: When upload fails (expired creds or network)
+            ValueError: When file type unsupported, credential type wrong, or metadata unset
         """
-        # 处理文件并确保最终关闭
+        # Process file and ensure closure
         file_obj = None
         try:
-            # 验证凭证
+            # Validate credentials
             credentials = self._validate_credentials()
 
-            # 处理文件
+            # Prepare file
             file_obj, file_size = self.process_file(file)
             self._check_file_size(file_obj, file_size, key, is_path=isinstance(file, str))
 
-            # 获取上传URL和凭证
+            # Get upload URL and credential
             upload_url, credential = self._get_upload_details(credentials)
 
-            # 准备请求数据
+            # Build request data
             data, headers = self._prepare_upload_request(file_obj, key, credential, options or {})
 
-            # 发送上传请求并处理响应
+            # Send request and handle response
             return await self._send_upload_request(upload_url, data, headers, key, credentials)
 
         except Exception as e:
             self._handle_upload_exception(e)
         finally:
-            # 确保关闭文件（如果是我们打开的）
+            # Ensure we close file if we opened it
             if file_obj and isinstance(file, str):
                 try:
                     file_obj.close()
                 except Exception as e:
-                    logger.debug(f"关闭文件时出错 (可忽略): {e}")
+                    logger.debug(f"Error closing file (safe to ignore): {e}")
 
     def _validate_credentials(self) -> LocalCredentials:
         """
-        验证凭证是否有效
+        Validate credentials
         
         Returns:
-            LocalCredentials: 验证通过的凭证
+            LocalCredentials: Validated credentials
             
         Raises:
-            UploadException: 如果凭证无效
+            UploadException: If credentials are invalid
         """
         credentials: LocalCredentials = self.credentials
         if not credentials or not credentials.temporary_credential:
-            error_msg = "凭证无效或临时凭证缺失"
+            error_msg = "Credentials invalid or temporary credential missing"
             logger.error(error_msg)
             raise UploadException(UploadExceptionCode.CREDENTIALS_EXPIRED, error_msg)
         return credentials
 
     def _check_file_size(self, file_obj: BinaryIO, file_size: int, key: str, is_path: bool) -> None:
         """
-        检查文件大小是否超过限制
+        Check whether file size exceeds limit.
         
         Args:
-            file_obj: 文件对象
-            file_size: 文件大小
-            key: 文件键
-            is_path: 是否为文件路径
+            file_obj: File object
+            file_size: File size
+            key: File key
+            is_path: Whether the input is a file path
             
         Raises:
-            InitException: 如果文件过大
+            InitException: If file is too large
         """
         if file_size > self.MAX_FILE_SIZE:
             if is_path:
@@ -264,23 +264,23 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
 
     def _get_upload_details(self, credentials: LocalCredentials) -> Tuple[str, str]:
         """
-        获取上传URL和凭证
+        Get upload URL and credential.
         
         Args:
-            credentials: 凭证对象
+            credentials: Credential object
             
         Returns:
-            Tuple[str, str]: 上传URL和凭证ID
+            Tuple[str, str]: Upload URL and credential ID
             
         Raises:
-            UploadException: 如果上传URL无效
+            UploadException: If upload URL is invalid
         """
         tc = credentials.temporary_credential
         upload_url = tc.host
         credential = tc.credential
 
         if not upload_url:
-            error_msg = "上传URL不能为空"
+            error_msg = "Upload URL cannot be empty"
             logger.error(error_msg)
             raise UploadException(UploadExceptionCode.CREDENTIALS_EXPIRED, error_msg)
 
@@ -294,62 +294,62 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
         options: Dict[str, Any]
     ) -> Tuple[aiohttp.FormData, Dict[str, str]]:
         """
-        准备上传请求的FormData和headers
+    Prepare FormData and headers for upload.
         
         Args:
-            file_obj: 文件对象
-            key: 文件键
-            credential: 凭证ID
-            options: 可选配置
+            file_obj: File object
+            key: File key
+            credential: Credential ID
+            options: Optional config
             
         Returns:
-            Tuple[aiohttp.FormData, Dict[str, str]]: 表单数据和请求头
+            Tuple[aiohttp.FormData, Dict[str, str]]: Form data and headers
             
         Raises:
-            ValueError: 如果文件对象类型不支持
+            ValueError: If file object type unsupported
         """
-        # 准备headers
+        # Prepare headers
         headers = {
             'Accept': '*/*',
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache',
         }
 
-        # 添加可选headers
+        # Add optional headers
         if custom_headers := options.get('headers'):
             headers.update(custom_headers)
 
-        # 准备表单数据
+        # Build form data
         data = aiohttp.FormData()
 
-        # 添加key参数 - 文件路径/名称
+        # Add key param (file path/name)
         data.add_field('key', key)
 
-        # 添加credential参数
+        # Add credential param
         if credential:
             data.add_field('credential', credential)
         else:
             generated_credential = f"local_credential:default_{int(time.time())}"
             data.add_field('credential', generated_credential)
-            logger.warning(f"凭证中缺少credential字段，使用生成的默认值: {generated_credential}")
+            logger.warning(f"Credential missing 'credential' field; generated default used: {generated_credential}")
 
-        # 添加文件内容
+        # Add file content
         if hasattr(file_obj, 'read'):
-            # 保存当前位置
+            # Save current position
             current_pos = file_obj.tell()
-            # 重置到文件开始
+            # Seek to start
             file_obj.seek(0)
-            # 读取文件内容
+            # Read content
             file_content = file_obj.read()
-            # 重置到原始位置
+            # Restore original position
             file_obj.seek(current_pos)
 
-            # 添加到表单
+            # Add to form
             filename = os.path.basename(key)
             data.add_field('file', file_content, filename=filename)
         else:
-            # 这种情况不应该发生，因为process_file已经转换为文件对象
-            raise ValueError("无法处理的文件对象类型")
+            # Should not happen; process_file already returns a file object
+            raise ValueError("Unsupported file object type")
 
         return data, headers
 
@@ -362,20 +362,20 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
         credentials: LocalCredentials
     ) -> StorageResponse:
         """
-        发送上传请求并处理响应
+        Send upload request and handle response.
         
         Args:
-            upload_url: 上传URL
-            data: 表单数据
-            headers: 请求头
-            key: 文件键
-            credentials: 凭证对象
+            upload_url: Upload URL
+            data: Form data
+            headers: Request headers
+            key: File key
+            credentials: Credential object
             
         Returns:
-            StorageResponse: 上传响应
+            StorageResponse: Upload response
             
         Raises:
-            UploadException: 如果上传失败或响应无效
+            UploadException: If upload fails or response invalid
         """
         async with self._create_client_session() as session:
             async with session.post(
@@ -388,20 +388,20 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
                     error_text = await response.text()
                     raise UploadException(
                         UploadExceptionCode.NETWORK_ERROR, 
-                        f"上传失败，服务器返回状态码: {response.status}, 错误: {error_text}"
+                        f"Upload failed; status={response.status}, error={error_text}"
                     )
 
-                # 解析响应
+                # Parse response
                 response_data = await self._parse_response(response)
 
-                # 验证响应数据
+                # Validate response data
                 self._validate_response(response_data)
 
-                # 获取上传后的key和URL
+                # Extract uploaded key and URL
                 uploaded_key = response_data["data"]["key"]
                 url = self._build_file_url(credentials, uploaded_key)
 
-                # 返回标准响应
+                # Return standardized response
                 return StorageResponse(
                     key=uploaded_key,
                     platform=PlatformType.local,
@@ -411,80 +411,80 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
 
     async def _parse_response(self, response: aiohttp.ClientResponse) -> Dict[str, Any]:
         """
-        解析响应JSON数据
+        Parse response JSON data.
         
         Args:
-            response: 响应对象
+            response: Response object
             
         Returns:
-            Dict[str, Any]: 解析后的响应数据
+            Dict[str, Any]: Parsed response data
             
         Raises:
-            UploadException: 如果解析失败
+            UploadException: If parsing fails
         """
         try:
             response_data = await response.json()
-            logger.debug(f"本地存储上传响应: {response_data}")
+            logger.debug(f"Local storage upload response: {response_data}")
             return response_data
         except Exception as e:
-            logger.error(f"解析响应JSON失败: {e}")
+            logger.error(f"Failed to parse response JSON: {e}")
             raise UploadException(
                 UploadExceptionCode.INVALID_RESPONSE,
-                f"解析响应JSON失败: {e}"
+                f"Failed to parse response JSON: {e}"
             )
 
     def _validate_response(self, response_data: Dict[str, Any]) -> None:
         """
-        验证响应数据是否有效
+        Validate response data.
         
         Args:
-            response_data: 响应数据
+            response_data: Response data
             
         Raises:
-            UploadException: 如果响应数据无效
+            UploadException: If response data invalid
         """
         if not response_data or "data" not in response_data:
-            logger.error(f"响应中缺少data字段: {response_data}")
+            logger.error(f"Response missing data field: {response_data}")
             raise UploadException(
                 UploadExceptionCode.INVALID_RESPONSE,
-                f"响应中缺少data字段: {response_data}"
+                f"Response missing data field: {response_data}"
             )
 
         if "key" not in response_data.get("data", {}):
-            logger.error(f"响应data中缺少key字段: {response_data}")
+            logger.error(f"Response data missing key field: {response_data}")
             raise UploadException(
                 UploadExceptionCode.INVALID_RESPONSE,
-                f"响应data中缺少key字段: {response_data}"
+                f"Response data missing key field: {response_data}"
             )
 
     def _build_file_url(self, credentials: LocalCredentials, key: str) -> Optional[str]:
         """
-        构建文件URL
+        Build file URL.
         
         Args:
-            credentials: 凭证对象
-            key: 文件键
+            credentials: Credential object
+            key: File key
             
         Returns:
-            Optional[str]: 文件URL，如果无法构建则为None
+            Optional[str]: File URL, or None if cannot build
         """
         base_url = credentials.get_public_access_base_url()
         return f"{base_url}/{key}" if base_url else None
 
     def _handle_upload_exception(self, exception: Exception) -> None:
         """
-        处理上传过程中的异常
+        Handle exceptions during upload.
         
         Args:
-            exception: 异常对象
+            exception: Exception instance
             
         Raises:
-            UploadException: 转换后的上传异常
-            Exception: 原始异常（如果已经是特定异常类型）
+            UploadException: Converted upload exception
+            Exception: Original exception if already specialized
         """
         if isinstance(exception, (InitException, UploadException)):
             raise exception
-        logger.error(f"上传过程中发生意外错误: {exception}")
+        logger.error(f"Unexpected error during upload: {exception}")
         raise UploadException(UploadExceptionCode.NETWORK_ERROR, str(exception))
 
     @with_refreshed_credentials
@@ -494,26 +494,26 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
         options: Optional[Options] = None
     ) -> BinaryIO:
         """
-        异步从本地存储下载文件。
+        Download a file asynchronously from local storage.
 
         Args:
-            key: 文件名/路径
-            options: 可选配置
+            key: File name/path
+            options: Optional config
 
         Returns:
-            BinaryIO: 文件内容的二进制流
+            BinaryIO: File content stream
 
         Raises:
-            DownloadException: 如果下载失败
-            ValueError: 如果凭证类型不正确或未设置元数据
+            DownloadException: If download fails
+            ValueError: If credential type is wrong or metadata missing
         """
         options = options or {}
         credentials: LocalCredentials = self.credentials
 
-        # 构建下载URL
+        # Build download URL
         download_url = self._build_download_url(credentials, key)
 
-        # 准备请求头
+        # Prepare headers
         headers = options.get('headers', {})
 
         try:
@@ -524,37 +524,37 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
                     timeout=self.DEFAULT_TIMEOUT
                 ) as response:
                     await self._handle_download_response(response, key)
-                    # 读取文件内容
+                    # Read file content
                     content = await response.read()
                     return io.BytesIO(content)
         except aiohttp.ClientError as e:
-            logger.error(f"下载时发生网络错误: {e}")
+            logger.error(f"Network error during download: {e}")
             raise DownloadException(DownloadExceptionCode.NETWORK_ERROR, str(e))
         except Exception as e:
             if not isinstance(e, DownloadException):
-                logger.error(f"下载时发生意外错误: {e}")
+                logger.error(f"Unexpected error during download: {e}")
                 raise DownloadException(DownloadExceptionCode.NETWORK_ERROR, str(e))
             raise
 
     def _build_download_url(self, credentials: LocalCredentials, key: str) -> str:
         """
-        构建下载URL
+        Build download URL.
         
         Args:
-            credentials: 凭证对象
-            key: 文件键
+            credentials: Credential object
+            key: File key
             
         Returns:
-            str: 下载URL
+            str: Download URL
             
         Raises:
-            DownloadException: 如果无法构建URL
+            DownloadException: If URL cannot be built
         """
         base_url = credentials.get_public_access_base_url()
         if not base_url:
             raise DownloadException(
                 DownloadExceptionCode.INVALID_RESPONSE,
-                "无法构建下载URL，缺少 read_host"
+                "Cannot build download URL; missing read_host"
             )
         return f"{base_url}/{key}"
 
@@ -564,26 +564,26 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
         key: str
     ) -> None:
         """
-        处理下载响应
+        Handle download response
         
         Args:
-            response: 响应对象
-            key: 文件键
+            response: Response object
+            key: File key
             
         Raises:
-            DownloadException: 如果响应状态码不为200
+            DownloadException: If status is not 200
         """
         if response.status != 200:
             error_text = await response.text()
             if response.status == 404:
                 raise DownloadException(
                     DownloadExceptionCode.FILE_NOT_FOUND,
-                    f"文件不存在: {key}"
+                    f"File not found: {key}"
                 )
             else:
                 raise DownloadException(
                     DownloadExceptionCode.NETWORK_ERROR,
-                    f"下载失败，服务器返回状态码: {response.status}, 错误: {error_text}"
+                    f"Download failed; status={response.status}, error={error_text}"
                 )
 
     @with_refreshed_credentials
@@ -593,22 +593,22 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
         options: Optional[Options] = None
     ) -> bool:
         """
-        异步检查本地存储中是否存在指定的文件。
+        Check asynchronously whether a file exists in local storage.
 
         Args:
-            key: 文件名/路径
-            options: 可选配置
+            key: File name/path
+            options: Optional config
 
         Returns:
-            bool: 如果文件存在则为True，否则为False
+            bool: True if file exists, else False
         """
         options = options or {}
         credentials: LocalCredentials = self.credentials
 
-        # 构建URL
+        # Build URL
         base_url = credentials.get_public_access_base_url()
         if not base_url:
-            logger.warning("无法构建URL检查文件是否存在，缺少 read_host")
+            logger.warning("Cannot build URL to check existence; missing read_host")
             return False
 
         url = f"{base_url}/{key}"
@@ -623,5 +623,5 @@ class LocalStorage(AbstractStorage, BaseFileProcessor):
                 ) as response:
                     return response.status == 200
         except Exception as e:
-            logger.error(f"检查文件存在性时发生错误: {e}")
+            logger.error(f"Error while checking file existence: {e}")
             return False 

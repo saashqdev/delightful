@@ -102,21 +102,21 @@ class FileSearch(WorkspaceGuardTool[FileSearchParams]):
 
     def _fuzzy_match(self, files: List[Path], pattern: str) -> List[Path]:
         """Filter files using fuzzy matching"""
-        # 将模式转换为通配符模式
+        # Convert pattern to wildcard pattern
         wildcard_pattern = f"*{pattern}*"
 
-        # 过滤匹配的文件
+        # Filter matching files
         matches = []
         for file in files:
             if fnmatch.fnmatch(file.name.lower(), wildcard_pattern.lower()):
                 matches.append(file)
 
-        # 按相关性排序（完全匹配优先，然后是文件名长度）
+        # Sort by relevance (exact matches first, then by filename length)
         matches.sort(
             key=lambda x: (
-                x.name.lower() != pattern.lower(),  # 完全匹配优先
-                len(x.name),  # 较短的文件名优先
-                str(x),  # 按路径字母顺序
+                x.name.lower() != pattern.lower(),  # Exact matches first
+                len(x.name),  # Shorter filenames first
+                str(x),  # Alphabetically by path
             )
         )
 

@@ -1,8 +1,8 @@
-"""工具模块
+"""Tools module
 
-包含各种可供智能体使用的工具。
+Contains various tools for use by agents.
 """
-# 导出工具类
+# Export tool classes
 from app.tools.abstract_file_tool import AbstractFileTool
 from app.tools.append_to_file import AppendToFile
 from app.tools.ask_user import AskUser
@@ -22,7 +22,7 @@ from app.tools.list_dir import ListDir
 from app.tools.markitdown_plugins import excel_plugin, pdf_plugin
 from app.tools.python_execute import PythonExecute
 
-# 导出工具类
+# Export tool classes
 from app.tools.read_file import ReadFile
 from app.tools.read_files import ReadFiles
 from app.tools.replace_in_file import ReplaceInFile
@@ -35,13 +35,13 @@ from app.tools.write_to_file import WriteToFile
 from app.tools.yfinance_tool import YFinance
 
 __all__ = [
-    # 核心组件
+    # Core components
     "BaseTool",
     "BaseToolParams",
     "tool",
     "tool_factory",
 
-    # 工具类
+    # Tool classes
     "AbstractFileTool",
     "AppendToFile",
     "AskUser",

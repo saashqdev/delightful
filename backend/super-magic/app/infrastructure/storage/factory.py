@@ -15,14 +15,14 @@ from .volcengine import VolcEngineUploader
 
 
 class StorageFactory:
-    """存储工厂类，用于创建不同平台的存储实例。"""
+    """Storage factory for creating per-platform storage instances."""
 
     _instances: Dict[PlatformType, AbstractStorage] = {}
     _implementations: Dict[PlatformType, Type[AbstractStorage]] = {
         PlatformType.tos: VolcEngineUploader,
         PlatformType.aliyun: AliyunOSSUploader,
         PlatformType.local: LocalStorage,
-        # 在这里添加其他平台的实现
+        # Add other platform implementations here
     }
 
     @classmethod
@@ -32,30 +32,30 @@ class StorageFactory:
         metadata: Optional[Dict] = None
     ) -> AbstractStorage:
         """
-        获取指定平台的存储实例。
-        平台通过环境变量 STORAGE_PLATFORM 确定，默认为 'tos'。
-        使用单例模式，确保每个平台只创建一个实例。
+        Get a storage instance for the configured platform.
+        Platform is chosen via env STORAGE_PLATFORM (default 'tos').
+        Uses a singleton per platform.
         
         Args:
-            sts_token_refresh: STS Token刷新配置（可选）
-            metadata: 元数据，用于凭证刷新（可选）
+            sts_token_refresh: STS token refresh config (optional)
+            metadata: Metadata for credential refresh (optional)
 
         Returns:
-            AbstractStorage: 存储平台的实例
+            AbstractStorage: Storage implementation instance
 
         Raises:
-            ValueError: 如果环境变量中指定的平台类型不支持或无效
+            ValueError: If env platform type is unsupported/invalid
         """
         platform_str = os.environ.get('STORAGE_PLATFORM', 'tos').lower()
 
         try:
             platform = PlatformType(platform_str)
         except ValueError:
-            raise ValueError(f"环境变量 STORAGE_PLATFORM 中指定的平台名称 '{platform_str}' 无效或不支持。请检查配置。")
+            raise ValueError(f"Invalid or unsupported platform '{platform_str}' in STORAGE_PLATFORM; check configuration.")
 
         if platform not in cls._instances:
             if platform not in cls._implementations:
-                raise ValueError(f"不支持的存储平台: {platform.value} (来源于 STORAGE_PLATFORM='{platform_str}')")
+                raise ValueError(f"Unsupported storage platform: {platform.value} (from STORAGE_PLATFORM='{platform_str}')")
 
             implementation = cls._implementations[platform]
             cls._instances[platform] = implementation()
@@ -65,8 +65,8 @@ class StorageFactory:
         storage_service.set_sts_refresh_config(sts_token_refresh)
         storage_service.set_metadata(metadata)
 
-        # refresh_credentials() 确保在获取服务实例时，凭证是最新的 (尤其对于STS)
-        # 后续 StorageUploaderTool 会通过 set_credentials 设置从文件加载的具体凭证
+        # refresh_credentials() keeps credentials fresh when obtaining the service (esp. STS)
+        # StorageUploaderTool later calls set_credentials with file-loaded credentials
         await storage_service.refresh_credentials()
 
         return storage_service
@@ -78,14 +78,14 @@ class StorageFactory:
         implementation: Type[AbstractStorage]
     ) -> None:
         """
-        注册新的存储平台实现。
+        Register a new storage platform implementation.
 
         Args:
-            platform: 存储平台类型
-            implementation: 存储平台的实现类
+            platform: Storage platform type
+            implementation: Implementation class
 
         Raises:
-            ValueError: 如果实现类不是 AbstractStorage 的子类
+            ValueError: If implementation is not a subclass of AbstractStorage
         """
         if not issubclass(implementation, AbstractStorage):
             raise ValueError(
@@ -93,6 +93,6 @@ class StorageFactory:
             )
 
         cls._implementations[platform] = implementation
-        # 清除已存在的实例，以便使用新的实现
+        # Clear any existing instance to use the new implementation
         if platform in cls._instances:
             del cls._instances[platform] 

@@ -418,12 +418,12 @@ class Agent(BaseAgent):
             first_user_message = self.chat_history.get_first_user_message()
             if last_user_query_content == first_user_message:
                 logger.info("Detected last user input matches first user input, treating as user intent to continue")
-                last_user_query_content = "继续"
+                last_user_query_content = "continue"
                 # Update user message in history
-                self.chat_history.replace_last_user_message("继续")
+                self.chat_history.replace_last_user_message("continue")
 
             # Handle user's request to continue
-            if last_user_query_content.lower() in ["", " ", "继续", "continue"]:
+            if last_user_query_content.lower() in ["", " ", "continue"]:
                 return await self._handle_continue_request(second_last_message)
             else:
                 # User has made a new request
@@ -435,24 +435,24 @@ class Agent(BaseAgent):
 
     async def _handle_continue_request(self, second_last_message: AssistantMessage) -> tuple[bool, List[ToolCall], Optional[ChatCompletionMessage], Optional[AssistantMessage]]:
         """
-        处理用户请求继续的情况
+        Handle user request to continue execution
 
         Args:
-            second_last_message: 倒数第二条消息（带工具调用的助手消息）
+            second_last_message: Second-to-last message (assistant message with tool calls)
 
         Returns:
-            Tuple: (是否跳过LLM调用, 要执行的工具调用列表, LLM响应消息, 要恢复的助手消息)
+            Tuple: (whether to skip LLM call, tool calls to execute, LLM response message, assistant message to restore)
         """
         logger.info("Detected user request to continue, attempting to restore last tool call")
 
-        # 检查是否有不可恢复的工具调用
+        # Check if there are unrecoverable tool calls
         has_unrecoverable_tool_call = False
         has_tool_call_parse_error = False
 
         for tc in second_last_message.tool_calls:
             if tc.function.name == "call_agent":
                 try:
-                    # 解析参数和检查是否为stateful
+                    # Parse arguments and check if stateful
                     tc_args = json.loads(tc.function.arguments)
                     agent_name_to_call = tc_args.get("agent_name")
                     if agent_name_to_call:
@@ -494,13 +494,13 @@ class Agent(BaseAgent):
 
     async def _handle_new_request(self, second_last_message: AssistantMessage) -> tuple[bool, List[ToolCall], Optional[ChatCompletionMessage], Optional[AssistantMessage]]:
         """
-        处理用户提出新请求的情况
+        Handle case where user makes new request
 
         Args:
-            second_last_message: 倒数第二条消息（带工具调用的助手消息）
+            second_last_message: Second-to-last message (assistant message with tool calls)
 
         Returns:
-            Tuple: (是否跳过LLM调用, 要执行的工具调用列表, LLM响应消息, 要恢复的助手消息)
+            Tuple: (whether to skip LLM call, tool calls to execute, LLM response message, assistant message to restore)
         """
         logger.info("Detected new user request, will interrupt previous tool calls and let LLM handle new request")
 
@@ -589,17 +589,17 @@ class Agent(BaseAgent):
         if not messages_for_llm:
             logger.error("Cannot get message list for LLM call (history may be empty or contain only internal messages)")
             self.set_agent_state(AgentState.ERROR)
-            raise ValueError("无法准备与LLM的对话。")
+            raise ValueError("Unable to prepare conversation with LLM.")
 
-        # 记录调用开始时间并调用LLM
+        # Record LLM call start time and invoke LLM
         llm_start_time = time.time()
         chat_response = await self._call_llm(messages_for_llm)
         llm_duration_ms = (time.time() - llm_start_time) * 1000
 
-        # 获取token使用数据
+        # Extract token usage data
         token_usage = LLMFactory.token_tracker.extract_chat_history_usage_data(chat_response)
 
-        # 获取LLM响应消息
+        # Get LLM response message
         llm_response_message = chat_response.choices[0].message
 
         # Handle case where LLM response content is empty
@@ -664,7 +664,7 @@ class Agent(BaseAgent):
                 continue
 
             try:
-                # 解析属性
+                # Parse attributes
                 arguments_str = getattr(getattr(tc_openai, 'function', None), 'arguments', None)
                 func_name = getattr(getattr(tc_openai, 'function', None), 'name', None)
                 tool_id = getattr(tc_openai, 'id', None)
@@ -725,7 +725,7 @@ class Agent(BaseAgent):
         except ValueError as e:
             logger.error(f"Failed to add assistant message with tool calls: {e}")
             self.set_agent_state(AgentState.ERROR)
-            raise ValueError(f"无法记录助手响应 ({e})")
+            raise ValueError(f"Unable to record assistant response ({e})")
 
     async def _handle_no_tool_calls(self, llm_response_message: ChatCompletionMessage, no_tool_call_count: int, token_usage: Optional[TokenUsage], llm_duration_ms: float) -> tuple[int, bool, Optional[str]]:
         """
@@ -753,7 +753,7 @@ class Agent(BaseAgent):
         except ValueError as e:
             logger.error(f"Failed to add assistant response without tool calls: {e}")
             self.set_agent_state(AgentState.ERROR)
-            return no_tool_call_count, False, f"内部错误：无法记录助手响应 ({e})"
+            return no_tool_call_count, False, f"Internal error: Unable to record assistant response ({e})"
 
         # Check if exit condition is met
         if no_tool_call_count >= 3:
@@ -762,14 +762,14 @@ class Agent(BaseAgent):
             # Add final message to history
             try:
                 await self.chat_history.append_assistant_message(
-                    content="看起来我们的任务已经告一段落啦，有什么新的问题可以随时找我✨",
+                    content="It looks like our task is coming to an end. Feel free to reach out anytime you have new questions! ✨",
                     show_in_ui=False
                 )
             except Exception as e:
                 logger.error(f"Error adding no tool call exit message: {e}")
 
             self.set_agent_state(AgentState.ERROR)
-            return no_tool_call_count, False, "任务因连续未调用工具而终止。"
+            return no_tool_call_count, False, "Task terminated due to consecutive tool call failures."
 
         # Not exiting, append internal prompt message
         append_content = self._get_no_tool_call_prompt()
@@ -809,16 +809,16 @@ class Agent(BaseAgent):
         """
         # Ensure llm_response_message is not empty
         if not llm_response_message:
-            logger.error("llm_response_message在工具执行前未设置！")
+            logger.error("llm_response_message not set before tool execution!")
             llm_response_message = ChatCompletionMessage(
                 role="assistant",
                 content="[Internal Error: Missing LLM Response]"
             )
 
-        # 执行工具调用
+        # Execute tool calls
         tool_call_results = await self._execute_tool_calls(tool_calls, llm_response_message)
 
-        # 处理工具调用结果
+        # Process tool call results
         return await self._process_tool_call_results(tool_call_results)
 
     async def _process_tool_call_results(self, tool_call_results: List[ToolResult]) -> tuple[bool, Optional[str]]:
@@ -865,7 +865,7 @@ class Agent(BaseAgent):
                 elif result.system == "ASK_USER":
                     logger.info("Detected ASK_USER tool call, exiting loop")
                     final_response = result.content
-                    self.set_agent_state(AgentState.FINISHED)  # Ask user 也算完成当前轮次
+                    self.set_agent_state(AgentState.FINISHED)  # Ask user also counts as completing current round
                     finish_task_detected = True
                     raise asyncio.CancelledError()
                 elif result.name == "call_agent" and self.agent_name == "super-magic":
@@ -1004,98 +1004,98 @@ class Agent(BaseAgent):
 
     async def _finalize_agent_loop(self, final_response: Optional[str], last_llm_message: Optional[ChatCompletionMessage]) -> Optional[str]:
         """
-        完成Agent循环后的清理和结果处理
+        Clean up and process results after completing agent loop
 
         Args:
-            final_response: 最终响应内容
-            last_llm_message: 最后的LLM响应消息
+            final_response: Final response content
+            last_llm_message: Last LLM response message
 
         Returns:
-            str: 最终响应
+            str: Final response
         """
-        # 处理循环正常结束但最终响应未设置的情况
+        # Handle case where loop ends normally but final response is not set
         if not final_response and last_llm_message:
-            # 获取最后添加的消息
+            # Get the last added message
             last_added_msg = self.chat_history.get_last_message()
 
-            # 检查last_added_msg是否包含预期内容
+            # Check if last_added_msg contains expected content
             if last_added_msg and isinstance(last_added_msg, AssistantMessage) and last_added_msg.content == last_llm_message.content:
                 final_response = last_llm_message.content
             else:
-                # 如果最后消息不是预期的内容
+                # If last message is not expected content
                 if last_llm_message.content:
                     final_response = last_llm_message.content
-                    # 确保最终响应被记录（如果循环内没有添加）
+                    # Ensure final response is recorded (if not added in loop)
                     if not (last_added_msg and isinstance(last_added_msg, AssistantMessage) and last_added_msg.content == final_response):
                         await self.chat_history.append_assistant_message(final_response)
                 else:
-                    # 如果最后LLM响应内容为空（理论上不应发生，除非只有tool_calls）
-                    logger.info("循环结束，但最后的LLM响应内容为空。")
-                    final_response = None  # 明确设为None
+                    # If last LLM response content is empty (should not happen, unless only tool_calls)
+                    logger.info("Loop ended, but last LLM response content is empty.")
+                    final_response = None  # Explicitly set to None
 
-        # 记录最终响应
+        # Record final response
         if final_response:
-            logger.info(f"最终响应: {final_response}")
+            logger.info(f"Final response: {final_response}")
         else:
-            logger.info("最终响应为空")
+            logger.info("Final response is empty")
 
-        # 更新Agent状态 - 使用is_agent_running替代直接比较
+        # Update agent state - use is_agent_running instead of direct comparison
         if self.is_agent_running():
             self.set_agent_state(AgentState.FINISHED)
 
-        # 记录token使用情况 - 只在非流模式下打印
+        # Log token usage - only print in non-streaming mode
         if not self.stream_mode:
             self.print_token_usage()
 
         return final_response
 
     async def _handle_agent_loop_stream(self) -> None:
-        """处理 agent 循环流"""
-        # 目前未实现流式处理，返回空值
+        """Handle agent loop streaming"""
+        # Currently streaming is not implemented, return None
         return None
 
     async def _call_llm(self, messages: List[Dict[str, Any]]) -> ChatCompletion:
-        """调用 LLM"""
+        """Call LLM"""
 
-        # 将工具实例转换为LLM需要的格式
+        # Convert tool instances to format needed by LLM
         tools_list = []
         if self.tools:
             for tool_name in self.tools.keys():
                 tool_instance: BaseTool = tool_factory.get_tool_instance(tool_name)
-                # 确保工具实例有效
+                # Ensure tool instance is valid
                 if tool_instance:
                     tool_param = tool_instance.to_param()
                     tools_list.append(tool_param)
                 else:
-                    logger.warning(f"无法获取工具实例: {tool_name}")
+                    logger.warning(f"Unable to get tool instance: {tool_name}")
 
-        # 保存工具列表到与聊天记录同名的.tools.json文件
+        # Save tools list to .tools.json file with same name as chat history
         if self.chat_history and tools_list:
             self.chat_history.save_tools_list(tools_list)
 
-        # 创建 ToolContext 实例
+        # Create ToolContext instance
         tool_context = ToolContext(metadata=self.agent_context.get_metadata())
-        # 将 AgentContext 作为扩展注册
+        # Register AgentContext as extension
         tool_context.register_extension("agent_context", self.agent_context)
 
         await self.agent_context.dispatch_event(
             EventType.BEFORE_LLM_REQUEST,
             BeforeLlmRequestEventData(
                 model_name=self.llm_name,
-                chat_history=messages, # 传递格式化后的字典列表
+                chat_history=messages, # Pass formatted dict list
                 tools=tools_list,
                 tool_context=tool_context
             )
         )
 
-        # ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 调用 LLM ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ #
+        # ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ Call LLM ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ #
         start_time = time.time()
-        # logger.debug(f"发送给 LLM 的 messages: {messages}")
+        # logger.debug(f"Messages sent to LLM: {messages}")
 
-        # 使用 LLMFactory.call_with_tool_support 方法统一处理工具调用
+        # Use LLMFactory.call_with_tool_support method to handle tool calls uniformly
         llm_response: ChatCompletion = await LLMFactory.call_with_tool_support(
             self.llm_id,
-            messages, # 传递字典列表
+            messages, # Pass dict list
             tools=tools_list if tools_list else None,
             stop=self.agent_context.stop_sequences if hasattr(self.agent_context, 'stop_sequences') else None,
             agent_context=self.agent_context
@@ -1103,49 +1103,49 @@ class Agent(BaseAgent):
 
         llm_response_message = llm_response.choices[0].message
         request_time = time.time() - start_time
-        # ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ 调用 LLM 结束 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ #
+        # ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ End LLM Call ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ #
 
-        # --- 处理 LLM 响应内容为空的情况 ---
-        # ChatHistory 标准化应该已经处理了大部分情况，这里作为最后防线
-        # 特别是处理 API 返回的 content 为 None 但有 tool_calls 的情况
+        # --- Handle case where LLM response content is empty ---
+        # ChatHistory normalization should have handled most cases, this is final safeguard
+        # Especially handle case where API returns content as None but has tool_calls
         if llm_response_message.content is None or llm_response_message.content.strip() == "":
             if llm_response_message.tool_calls:
-                 # 如果有 tool_calls，content 为 None 是合法的，不需要修改
-                 # 但为了日志和后续处理，可以给一个内部标记或默认值
-                 logger.debug("LLM 响应 content 为空，但包含 tool_calls。")
-                 # 保持 llm_response_message.content 为 None 或空字符串
-                 # 如果后续逻辑需要非空 content，可以在那里处理
-                 # 这里我们尝试从 tool_call explanation 获取 (如果存在)
+                 # If tool_calls exist, content being None is legal, no modification needed
+                 # But for logging and subsequent processing, could give internal marker or default value
+                 logger.debug("LLM response content is empty, but contains tool_calls.")
+                 # Keep llm_response_message.content as None or empty string
+                 # If subsequent logic needs non-empty content, handle it there
+                 # Here we try to get explanation from tool_call (if it exists)
                  for tool_call in llm_response_message.tool_calls:
                       try:
                            arguments = json.loads(tool_call.function.arguments)
                            if "explanation" in arguments:
                                 llm_response_message.content = arguments["explanation"]
-                                # 从 arguments 里去掉 explanation (虽然这里修改的是响应对象，可能不影响历史记录)
+                                # Remove explanation from arguments (though modifying response object may not affect history)
                                 # del arguments["explanation"]
                                 # tool_call.function.arguments = json.dumps(arguments, ensure_ascii=False)
-                                logger.debug(f"使用 tool_call explanation 作为 LLM content: {llm_response_message.content}")
-                                break # 找到第一个就用
+                                logger.debug(f"Using tool_call explanation as LLM content: {llm_response_message.content}")
+                                break # Use first one found
                       except (json.JSONDecodeError, AttributeError, TypeError):
-                           continue # 忽略解析错误或无效结构
-                 # 如果仍为空，保持原样 (None 或空)
+                           continue # Ignore parse errors or invalid structure
+                 # If still empty, keep original (None or empty)
                  if llm_response_message.content is None:
-                     llm_response_message.content = "" # 设为空字符串而不是None，简化后续处理
+                     llm_response_message.content = "" # Set to empty string instead of None, simplify subsequent processing
 
             else:
-                 # 没有 tool_calls，内容不应为空
-                 logger.warning("LLM 响应消息内容为空且无 tool_calls，使用默认值 'Continue'")
-                 # 使用漂亮的 JSON 格式打印有问题的消息
+                 # No tool_calls, content should not be empty
+                 logger.warning("LLM response message content is empty and has no tool_calls, using default value 'Continue'")
+                 # Use pretty JSON format to print problematic message
                  try:
                      message_dict = llm_response_message.model_dump() # pydantic v2
                      formatted_json = json.dumps(message_dict, ensure_ascii=False, indent=2)
-                     logger.warning(f"详细信息:\n{formatted_json}")
+                     logger.warning(f"Details:\n{formatted_json}")
                  except Exception as e:
-                     logger.warning(f"尝试打印 LLM 响应消息失败: {e!s}")
-                 llm_response_message.content = "Continue" # 强制设为 Continue
+                     logger.warning(f"Failed to print LLM response message: {e!s}")
+                 llm_response_message.content = "Continue" # Force set to Continue
 
 
-        logger.info(f"LLM 响应: role={llm_response_message.role}, content='{llm_response_message.content[:100]}...', tool_calls={llm_response_message.tool_calls is not None}")
+        logger.info(f"LLM response: role={llm_response_message.role}, content='{llm_response_message.content[:100]}...', tool_calls={llm_response_message.tool_calls is not None}")
 
         await self.agent_context.dispatch_event(
             EventType.AFTER_LLM_REQUEST,
@@ -1154,25 +1154,25 @@ class Agent(BaseAgent):
                 request_time=request_time,
                 success=True,
                 tool_context=tool_context,
-                llm_response_message=llm_response_message # 传递原始响应消息
+                llm_response_message=llm_response_message # Pass original response message
             )
         )
 
         return llm_response
 
     async def _execute_tool_calls(self, tool_calls: List[ToolCall], llm_response_message: ChatCompletionMessage) -> List[ToolResult]:
-        """执行 Tools 调用，支持并行执行"""
+        """Execute tool calls with support for parallel execution"""
         if not self.enable_parallel_tool_calls or len(tool_calls) <= 1:
-            # 非并行模式或只有一个工具调用时，使用原来的逻辑
-            logger.debug("使用顺序执行模式处理工具调用")
+            # Non-parallel mode or single tool call, use original logic
+            logger.debug("Using sequential execution mode for tool calls")
             return await self._execute_tool_calls_sequential(tool_calls, llm_response_message)
         else:
-            # 并行模式
-            logger.info(f"使用并行执行模式处理 {len(tool_calls)} 个工具调用")
+            # Parallel mode
+            logger.info(f"Using parallel execution mode for {len(tool_calls)} tool calls")
             return await self._execute_tool_calls_parallel(tool_calls, llm_response_message)
 
     async def _execute_tool_calls_sequential(self, tool_calls: List[ToolCall], llm_response_message: ChatCompletionMessage) -> List[ToolResult]:
-        """使用顺序模式执行 Tools 调用（原始逻辑）"""
+        """Execute tool calls using sequential mode (original logic)"""
         results = []
         for tool_call in tool_calls:
             result = None
@@ -1181,41 +1181,41 @@ class Agent(BaseAgent):
                 tool_name = tool_call.function.name
                 tool_arguments_str = tool_call.function.arguments
 
-                # 尝试将参数字符串解析为字典，用于工具执行和事件传递
+                # Try to parse parameter string to dict for tool execution and event passing
                 try:
                     tool_arguments_dict = json.loads(tool_arguments_str)
                     if not isinstance(tool_arguments_dict, dict):
-                        logger.warning(f"工具 '{tool_name}' 的参数解析后不是字典，将传递空字典。")
-                        logger.warning(f"原始参数数据：{tool_arguments_str}")
-                        logger.warning(f"解析后结果：{tool_arguments_dict}")
+                        logger.warning(f"Tool '{tool_name}' parameters are not dict after parsing, will pass empty dict.")
+                        logger.warning(f"Original parameter data: {tool_arguments_str}")
+                        logger.warning(f"Parsed result: {tool_arguments_dict}")
                         tool_arguments_for_exec = {}
                     else:
                         tool_arguments_for_exec = tool_arguments_dict
                 except json.JSONDecodeError as e:
-                    logger.warning(f"工具 '{tool_name}' 的参数无法解析为 JSON，将传递空字典。")
-                    logger.warning(f"原始参数数据：{tool_arguments_str}")
-                    logger.warning(f"完整报错信息：{e}")
+                    logger.warning(f"Tool '{tool_name}' parameters cannot be parsed as JSON, will pass empty dict.")
+                    logger.warning(f"Original parameter data: {tool_arguments_str}")
+                    logger.warning(f"Full error message: {e}")
                     tool_arguments_for_exec = {}
 
                 try:
-                    # 创建工具上下文，确保传递 agent_context 的 metadata
+                    # Create tool context, ensure passing metadata from agent_context
                     tool_context = ToolContext(
                         tool_call_id=tool_call.id,
                         tool_name=tool_name,
                         arguments=tool_arguments_for_exec,
                         metadata=self.agent_context.get_metadata()
                     )
-                    # 添加 AgentContext 扩展
+                    # Add AgentContext extension
                     tool_context.register_extension("agent_context", self.agent_context)
-                    # 添加EventContext扩展
+                    # Add EventContext extension
                     from app.core.entity.event.event_context import EventContext
                     tool_context.register_extension("event_context", EventContext())
 
-                    logger.info(f"开始执行工具: {tool_name}, 参数: {tool_arguments_for_exec}")
+                    logger.info(f"Starting tool execution: {tool_name}, parameters: {tool_arguments_for_exec}")
 
-                    # --- 触发 before_tool_call 事件 ---
+                    # --- Trigger before_tool_call event ---
                     tool_instance = tool_factory.get_tool_instance(tool_name)
-                    # 需要将内部 ToolCall 转换回 OpenAI 类型用于事件
+                    # Need to convert internal ToolCall back to OpenAI type for event
                     openai_tool_call_for_event = ChatCompletionMessageToolCall(
                          id=tool_call.id, type=tool_call.type,
                          function={"name": tool_name, "arguments": tool_arguments_str}
@@ -1232,16 +1232,16 @@ class Agent(BaseAgent):
                         )
                     )
 
-                    # --- 执行工具 ---
+                    # --- Execute tool ---
                     result = await tool_executor.execute_tool_call(
                         tool_context=tool_context,
                         arguments=tool_arguments_for_exec
                     )
-                    # 确保 result.tool_call_id 已设置
+                    # Ensure result.tool_call_id is set
                     if not result.tool_call_id:
                          result.tool_call_id = tool_call.id
 
-                    # --- 触发 after_tool_call 事件 ---
+                    # --- Trigger after_tool_call event ---
                     await self.agent_context.dispatch_event(
                         EventType.AFTER_TOOL_CALL,
                         AfterToolCallEventData(
@@ -1255,105 +1255,105 @@ class Agent(BaseAgent):
                         )
                     )
                 except Exception as e:
-                    # 打印错误堆栈
+                    # Print error stack trace
                     print(traceback.format_exc())
-                    logger.error(f"执行工具 '{tool_name}' 时出错: {e}", exc_info=True)
-                    # 创建失败的 ToolResult，确保有 tool_call_id
+                    logger.error(f"Error executing tool '{tool_name}': {e}", exc_info=True)
+                    # Create failed ToolResult, ensure tool_call_id is set
                     result = ToolResult(
-                        content=f"执行工具 '{tool_name}' 失败: {e!s}",
+                        content=f"Failed to execute tool '{tool_name}': {e!s}",
                         tool_call_id=tool_call.id,
                         ok=False
                     )
 
                 results.append(result)
             except AttributeError as attr_err:
-                 logger.error(f"处理工具调用对象时访问属性出错: {tool_call}, 错误: {attr_err!r}", exc_info=True)
-                 # 如果在循环的早期阶段出错，尝试创建一个包含错误信息的 ToolResult
+                 logger.error(f"Error accessing attributes when processing tool call object: {tool_call}, error: {attr_err!r}", exc_info=True)
+                 # If error occurs early in loop, try to create ToolResult with error info
                  tool_call_id_fallback = getattr(tool_call, 'id', None)
                  tool_name_fallback = getattr(getattr(tool_call, 'function', None), 'name', '[unknown_early_error]')
                  if tool_call_id_fallback:
                      results.append(ToolResult(
-                         content=f"处理工具调用失败 (AttributeError): {attr_err!s}",
+                         content=f"Failed to process tool call (AttributeError): {attr_err!s}",
                          tool_call_id=tool_call_id_fallback,
                          name=tool_name_fallback,
                          ok=False
                      ))
                  else:
-                     # 如果连 id 都没有，无法创建 ToolResult，只能记录日志
-                     logger.error(f"无法创建工具失败结果：缺少 tool_call_id。错误: {attr_err!s}")
+                     # If no id available, cannot create ToolResult, only log
+                     logger.error(f"Cannot create tool failure result: missing tool_call_id. Error: {attr_err!s}")
 
             except Exception as outer_err:
-                # 捕获 tool_call 对象本身处理（如属性访问）或 result 添加过程中的其他异常
-                logger.error(f"处理工具调用对象或添加结果时发生严重错误: {tool_call}, 错误: {outer_err}", exc_info=True)
+                # Capture other exceptions during tool call object handling (such as attribute access) or result addition
+                logger.error(f"Serious error while processing tool call object or adding result: {tool_call}, error: {outer_err}", exc_info=True)
                 tool_call_id_fallback = getattr(tool_call, 'id', None)
                 tool_name_fallback = getattr(getattr(tool_call, 'function', None), 'name', '[unknown_outer_error]')
                 if tool_call_id_fallback:
                     results.append(ToolResult(
-                        content=f"处理工具调用或结果失败: {outer_err!s}",
+                        content=f"Failed to process tool call or result: {outer_err!s}",
                         tool_call_id=tool_call_id_fallback,
                         name=tool_name_fallback,
                         ok=False
                     ))
                 else:
-                    logger.error(f"无法创建工具失败结果：缺少 tool_call_id。错误: {outer_err!s}")
+                    logger.error(f"Cannot create tool failure result: missing tool_call_id. Error: {outer_err!s}")
 
         return results
 
     async def _execute_tool_calls_parallel(self, tool_calls: List[ToolCall], llm_response_message: ChatCompletionMessage) -> List[ToolResult]:
-        """使用并行模式执行 Tools 调用"""
-        # 创建一个包含所有工具调用信息的列表，用于并行处理
+        """Execute tool calls using parallel mode"""
+        # Create a list containing all tool call information for parallel processing
         tool_tasks = []
 
-        logger.info(f"准备并行执行 {len(tool_calls)} 个工具调用，超时设置：{self.parallel_tool_calls_timeout}秒")
+        logger.info(f"Preparing to execute {len(tool_calls)} tool calls in parallel, timeout setting: {self.parallel_tool_calls_timeout} seconds")
 
-        # 1. 预处理所有工具调用，生成执行任务
+        # 1. Preprocess all tool calls to generate execution tasks
         for tool_call in tool_calls:
             try:
                 tool_name = tool_call.function.name
                 tool_arguments_str = tool_call.function.arguments
                 tool_call_id = tool_call.id
 
-                # 尝试将参数字符串解析为字典
+                # Try to parse parameter string to dict
                 try:
                     tool_arguments_dict = json.loads(tool_arguments_str)
                     if not isinstance(tool_arguments_dict, dict):
-                        logger.warning(f"并行工具调用：'{tool_name}' 的参数解析后不是字典，将传递空字典")
-                        logger.warning(f"原始参数数据：{tool_arguments_str}")
-                        logger.warning(f"解析后结果：{tool_arguments_dict}")
+                        logger.warning(f"Parallel tool call: '{tool_name}' parameters are not dict after parsing, will pass empty dict")
+                        logger.warning(f"Original parameter data: {tool_arguments_str}")
+                        logger.warning(f"Parsed result: {tool_arguments_dict}")
                         tool_arguments_for_exec = {}
                     else:
                         tool_arguments_for_exec = tool_arguments_dict
                 except json.JSONDecodeError as e:
-                    logger.warning(f"并行工具调用：'{tool_name}' 的参数无法解析为 JSON，将传递空字典")
-                    logger.warning(f"原始参数数据：{tool_arguments_str}")
-                    logger.warning(f"完整报错信息：{e}")
+                    logger.warning(f"Parallel tool call: '{tool_name}' parameters cannot be parsed as JSON, will pass empty dict")
+                    logger.warning(f"Original parameter data: {tool_arguments_str}")
+                    logger.warning(f"Full error message: {e}")
                     tool_arguments_for_exec = {}
 
-                # 创建工具上下文
+                # Create tool context
                 tool_context = ToolContext(
                     tool_call_id=tool_call_id,
                     tool_name=tool_name,
                     arguments=tool_arguments_for_exec,
                     metadata=self.agent_context.get_metadata()
                 )
-                # 将 AgentContext 作为扩展注册
+                # Register AgentContext as extension
                 tool_context.register_extension("agent_context", self.agent_context)
 
-                # 添加 EventContext 扩展
+                # Add EventContext extension
                 from app.core.entity.event.event_context import EventContext
                 tool_context.register_extension("event_context", EventContext())
 
-                # 获取工具实例
+                # Get tool instance
                 tool_instance = tool_factory.get_tool_instance(tool_name)
 
-                # 需要将内部 ToolCall 转换回 OpenAI 类型用于事件
+                # Need to convert internal ToolCall back to OpenAI type for event
                 openai_tool_call = ChatCompletionMessageToolCall(
                     id=tool_call_id,
                     type=tool_call.type,
                     function={"name": tool_name, "arguments": tool_arguments_str}
                 )
 
-                # 将工具调用信息添加到任务列表
+                # Add tool call information to task list
                 tool_tasks.append({
                     "tool_call": tool_call,
                     "openai_tool_call": openai_tool_call,
@@ -1364,36 +1364,36 @@ class Agent(BaseAgent):
                 })
 
             except Exception as e:
-                logger.error(f"预处理工具调用时出错: {e}", exc_info=True)
-                # 对于预处理失败的工具调用，添加错误结果
+                logger.error(f"Error preprocessing tool call: {e}", exc_info=True)
+                # For failed preprocessing, add error result
                 try:
                     tool_call_id = getattr(tool_call, 'id', None)
                     tool_name = getattr(getattr(tool_call, 'function', None), 'name', '[unknown]')
                     if tool_call_id:
-                        # 创建错误结果
+                        # Create error result
                         error_result = ToolResult(
-                            content=f"预处理工具调用 '{tool_name}' 失败: {e!s}",
+                            content=f"Preprocessing tool call '{tool_name}' failed: {e!s}",
                             tool_call_id=tool_call_id,
                             name=tool_name,
                             ok=False
                         )
-                        # 单独处理这个错误结果
+                        # Handle this error result separately
                         error_task = {
                             "error_result": error_result,
                             "is_error": True
                         }
                         tool_tasks.append(error_task)
                 except Exception as err:
-                    logger.error(f"创建工具调用错误结果时出错: {err}", exc_info=True)
+                    logger.error(f"Error creating tool call error result: {err}", exc_info=True)
 
-        # 如果没有有效的工具调用任务，直接返回
+        # If no valid tool call tasks, return directly
         if not tool_tasks:
-            logger.warning("没有有效的工具调用任务可执行")
+            logger.warning("No valid tool call tasks to execute")
             return []
 
-        # 2. 定义单个工具执行的异步函数
+        # 2. Define async function for single tool execution
         async def execute_single_tool(task_info):
-            # 检查是否是预处理时的错误结果
+            # Check if it's a preprocessing error result
             if task_info.get("is_error", False):
                 return task_info.get("error_result")
 
@@ -1407,7 +1407,7 @@ class Agent(BaseAgent):
             start_time = time.time()
 
             try:
-                # 分发工具调用前事件
+                # Dispatch before tool call event
                 await self.agent_context.dispatch_event(
                     EventType.BEFORE_TOOL_CALL,
                     BeforeToolCallEventData(
@@ -1420,22 +1420,22 @@ class Agent(BaseAgent):
                     )
                 )
 
-                # 执行工具调用
-                logger.info(f"并行执行工具: {tool_name}, 参数: {arguments}")
+                # Execute tool call
+                logger.info(f"Executing tool in parallel: {tool_name}, arguments: {arguments}")
                 result = await tool_executor.execute_tool_call(
                     tool_context=tool_context,
                     arguments=arguments
                 )
 
-                # 确保结果包含tool_call_id
+                # Ensure result contains tool_call_id
                 if not result.tool_call_id:
                     result.tool_call_id = tool_call.id
 
-                # 计算执行时间
+                # Calculate execution time
                 execution_time = time.time() - start_time
                 result.execution_time = execution_time
 
-                # 分发工具调用后事件
+                # Dispatch after tool call event
                 await self.agent_context.dispatch_event(
                     EventType.AFTER_TOOL_CALL,
                     AfterToolCallEventData(
@@ -1452,12 +1452,12 @@ class Agent(BaseAgent):
                 return result
 
             except Exception as e:
-                logger.error(f"并行执行工具 '{tool_name}' 时出错: {e}", exc_info=True)
-                # 计算执行时间（即使出错）
+                logger.error(f"Error executing tool '{tool_name}' in parallel: {e}", exc_info=True)
+                # Calculate execution time (even on error)
                 execution_time = time.time() - start_time
-                # 创建失败的 ToolResult
+                # Create failed ToolResult
                 error_result = ToolResult(
-                    content=f"执行工具 '{tool_name}' 失败: {e!s}",
+                    content=f"Failed to execute tool '{tool_name}': {e!s}",
                     tool_call_id=tool_call.id,
                     name=tool_name,
                     ok=False,
@@ -1465,31 +1465,31 @@ class Agent(BaseAgent):
                 )
                 return error_result
 
-        # 3. 使用 Parallel 类并行执行所有工具调用
+        # 3. Use Parallel class to execute all tool calls in parallel
         parallel = Parallel(timeout=self.parallel_tool_calls_timeout)
 
-        # 为每个工具调用添加任务
+        # Add task for each tool call
         for task_info in tool_tasks:
             parallel.add(execute_single_tool, task_info)
 
-        # 并行执行所有工具调用并收集结果
+        # Execute all tool calls in parallel and collect results
         try:
             results = await parallel.run()
-            logger.info(f"完成并行执行 {len(results)} 个工具调用")
+            logger.info(f"Completed parallel execution of {len(results)} tool calls")
             return results
         except asyncio.TimeoutError as e:
-            logger.error(f"并行执行工具调用超时: {e}")
-            # 超时处理：为每个工具调用创建超时错误结果
+            logger.error(f"Parallel tool call execution timeout: {e}")
+            # Timeout handling: create timeout error result for each tool call
             timeout_results = []
             for task_info in tool_tasks:
                 if task_info.get("is_error", False):
-                    # 保留预处理错误
+                    # Preserve preprocessing errors
                     timeout_results.append(task_info.get("error_result"))
                 else:
                     tool_call = task_info["tool_call"]
                     tool_name = task_info["tool_name"]
                     timeout_result = ToolResult(
-                        content=f"执行工具 '{tool_name}' 超时，超过了 {self.parallel_tool_calls_timeout} 秒的限制",
+                        content=f"Tool '{tool_name}' execution timeout, exceeded {self.parallel_tool_calls_timeout} second limit",
                         tool_call_id=tool_call.id,
                         name=tool_name,
                         ok=False

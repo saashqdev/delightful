@@ -94,35 +94,35 @@ async def safe_delete(path: Path):
                     logger.info(f"Path (possibly symbolic link) deleted via aiofiles: {path}")
                 except OSError as e:
                     logger.error(f"Cannot determine path type or deletion via aiofiles failed: {path}, error: {e}")
-                    raise # 重新抛出异常
+                    raise # Re-raise exception
 
     except OSError as e:
-        # 捕获 aiofiles 或 shutil.rmtree 可能抛出的 OS 错误
-        logger.exception(f"异步删除路径 {path} 时发生 OS 错误: {e}")
+        # Catch OS errors that aiofiles or shutil.rmtree may throw
+        logger.exception(f"OS error occurred when async deleting path {path}: {e}")
         raise
     except Exception as e:
-        # 捕获 asyncio.create_subprocess_exec 或其他意外错误
-        logger.exception(f"异步删除路径 {path} 时发生意外错误: {e}")
+        # Catch errors that asyncio.create_subprocess_exec or other unexpected errors may throw
+        logger.exception(f"Unexpected error occurred when async deleting path {path}: {e}")
         raise
 
 
 async def clear_directory_contents(directory_path: Path) -> bool:
     """
-    异步清理指定目录中的所有内容（文件和子目录），但保留目录本身。
+    Async clear all contents (files and subdirectories) in specified directory but preserve the directory itself.
 
-    会并发删除目录下的项目以提高效率。
+    Concurrently deletes items under directory to improve efficiency.
 
     Args:
-        directory_path: 要清空内容的目录路径。
+        directory_path: Directory path to clear contents from.
 
     Returns:
-        bool: 操作是否成功完成
+        bool: Whether operation completed successfully
     """
     try:
-        # 异步检查目录是否存在
+        # Async check if directory exists
         if not await aiofiles.os.path.exists(directory_path):
-            logger.info(f"{directory_path} 目录不存在，无需清理")
-            return True  # 视为成功，因为目标状态（目录为空或不存在）已满足
+            logger.info(f"Directory {directory_path} does not exist, no cleaning needed")
+            return True  # Considered successful because target state (empty directory or non-existent) is satisfied
 
         if not await aiofiles.os.path.isdir(directory_path):
             logger.error(f"Provided path is not a directory: {directory_path}")
@@ -131,20 +131,20 @@ async def clear_directory_contents(directory_path: Path) -> bool:
         logger.info(f"Starting async clearing of directory contents: {directory_path}")
         items_deleted = 0
         items_failed = 0
-        # 使用 asyncio.gather 并发执行删除
+        # Use asyncio.gather to concurrently execute deletions
         tasks = []
-        item_paths = []  # 用于错误日志记录
+        item_paths = []  # For error logging purposes
 
-        # 注意：iterdir 是同步的，但在进入异步任务创建前执行是可接受的
-        # 对于非常大的目录，可以考虑异步迭代器，如 aiofiles.os.scandir
+        # Note: iterdir is synchronous, but executing before creating async tasks is acceptable
+        # For very large directories, consider async iterators like aiofiles.os.scandir
         for item in directory_path.iterdir():
             tasks.append(asyncio.create_task(safe_delete(item)))
-            item_paths.append(item)  # 在创建任务时记录路径
+            item_paths.append(item)  # Record path when creating task
 
-        # 等待所有删除任务完成
+        # Wait for all deletion tasks to complete
         results = await asyncio.gather(*tasks, return_exceptions=True)
 
-        # 统计结果
+        # Count results
         for i, result in enumerate(results):
             item_path = item_paths[i]  # Get path from previously saved list
             if isinstance(result, Exception):
@@ -170,13 +170,13 @@ async def clear_directory_contents(directory_path: Path) -> bool:
 
 async def ensure_directory(directory_path: Path) -> bool:
     """
-    确保目录存在，如果不存在则创建
+    Ensure directory exists, create if it does not
 
     Args:
-        directory_path: 要确保存在的目录路径
+        directory_path: Directory path to ensure exists
 
     Returns:
-        bool: 操作是否成功
+        bool: Whether operation succeeded
     """
     try:
         if await aiofiles.os.path.exists(directory_path):
@@ -184,7 +184,7 @@ async def ensure_directory(directory_path: Path) -> bool:
                 return True  # Directory already exists
             else:
                 logger.error(f"Path exists but is not a directory: {directory_path}")
-                return False  # 路径存在但不是目录
+                return False  # Path exists but is not a directory
 
         # Create directory (including any necessary intermediate directories)
         await asyncio.to_thread(os.makedirs, directory_path, exist_ok=True)
@@ -199,15 +199,15 @@ async def ensure_directory(directory_path: Path) -> bool:
 async def list_files(directory_path: Path, recursive: bool = False,
                     pattern: Optional[str] = None) -> List[Path]:
     """
-    异步列出目录中的文件
+    Asynchronously list files in directory
 
     Args:
-        directory_path: 要列出文件的目录路径
-        recursive: 是否递归列出子目录中的文件
-        pattern: 文件名匹配模式（支持glob语法）
+        directory_path: Directory path to list files from
+        recursive: Whether to recursively list files in subdirectories
+        pattern: File name matching pattern (supports glob syntax)
 
     Returns:
-        List[Path]: 文件路径列表
+        List[Path]: List of file paths
     """
     if not directory_path.exists() or not directory_path.is_dir():
         logger.warning(f"Directory does not exist or is not a directory: {directory_path}")
@@ -217,16 +217,16 @@ async def list_files(directory_path: Path, recursive: bool = False,
 
     try:
         if recursive:
-            # 递归查找所有文件
+            # Recursively find all files
             if pattern:
                 paths = list(directory_path.glob(f"**/{pattern}"))
-                # 只返回文件，不返回目录
+                # Only return files, not directories
                 result = [p for p in paths if p.is_file()]
             else:
-                # 使用rglob(*)递归查找所有文件
+                # Use rglob(*) to recursively find all files
                 result = [p for p in directory_path.rglob("*") if p.is_file()]
         else:
-            # 只在当前目录查找
+            # Only search in current directory
             if pattern:
                 paths = list(directory_path.glob(pattern))
                 result = [p for p in paths if p.is_file()]
@@ -241,41 +241,41 @@ async def list_files(directory_path: Path, recursive: bool = False,
 
 def generate_safe_filename(name: str) -> str:
     """
-    生成安全的文件名，处理各操作系统不支持的字符
-    注意，这个函数只处理文件名的名字，不包含文件扩展名后缀
+    Generate safe filename, handle characters not supported by various operating systems
+    Note: This function only handles filename name, not including file extension suffix
 
     Args:
-        name: 原始文本内容
+        name: Original text content
 
     Returns:
-        str: 处理后的安全文件名
+        str: Safe filename after processing
     """
     if not name:
         return "unnamed_file"
 
-    # 1. 清除常见不支持的字符 (Windows: \ / : * ? " < > |) (Unix: /)
-    # 替换为下划线
+    # 1. Remove common unsupported characters (Windows: \ / : * ? " < > |) (Unix: /)
+    # Replace with underscore
     safe_name = re.sub(r'[\\/:*?"<>|]', '_', name)
 
-    # 2. 替换连续的空白字符为单个下划线
+    # 2. Replace consecutive whitespace characters with single underscore
     safe_name = re.sub(r'\s+', '_', safe_name)
 
-    # 3. 删除控制字符和其他不可打印字符
+    # 3. Remove control characters and other non-printable characters
     safe_name = re.sub(r'[\x00-\x1f\x7f-\x9f]', '', safe_name)
 
-    # 4. 删除可能导致问题的前导和尾随字符
+    # 4. Remove problematic leading and trailing characters
     safe_name = safe_name.strip('._-')
 
-    # 5. 确保不是空字符串
+    # 5. Ensure not empty string
     if not safe_name:
         return "webpage"
 
-    # 6. 避免Windows保留文件名 (CON, PRN, AUX, NUL, COM1-9, LPT1-9)
+    # 6. Avoid Windows reserved filenames (CON, PRN, AUX, NUL, COM1-9, LPT1-9)
     reserved_names = ['CON', 'PRN', 'AUX', 'NUL'] + [f'COM{i}' for i in range(1, 10)] + [f'LPT{i}' for i in range(1, 10)]
     if safe_name.upper() in reserved_names:
         safe_name = f"{safe_name}_file"
 
-    # 7. 限制文件名长度，避免路径过长问题
+    # 7. Limit filename length to avoid path too long issues
     safe_name = safe_name[:32]
 
     return safe_name
@@ -283,28 +283,28 @@ def generate_safe_filename(name: str) -> str:
 
 def generate_safe_filename_with_timestamp(name: str) -> str:
     """
-    生成安全的文件名，处理各操作系统不支持的字符
-    使用短格式时间戳作为后缀，使文件名可以根据时间顺序排序
-    注意，这个函数只处理文件名的名字，不包含文件扩展名后缀
+    Generate safe filename, handle characters not supported by various operating systems
+    Use short format timestamp as suffix, making filename sortable by time order
+    Note: This function only handles filename name, not including file extension suffix
 
     Args:
-        name: 原始文本内容
+        name: Original text content
 
     Returns:
-        str: 处理后的安全文件名
+        str: Safe filename after processing
     """
-    # 先通过基础函数生成安全文件名
+    # First generate safe filename through base function
     safe_name = generate_safe_filename(name)
 
-    # 添加短格式时间戳，使文件名按时间顺序排序
+    # Add short format timestamp to make filename sortable by time order
     now = datetime.now()
-    # 使用年份后两位+月日时分秒+毫秒前两位，共12位
+    # Use last two digits of year + month/day/hour/minute/second + first two digits of milliseconds, total 12 characters
     timestamp = f"{now.year % 100:02d}{now.month:02d}{now.day:02d}{now.hour:02d}{now.minute:02d}{now.second:02d}{now.microsecond // 10000:02d}"
 
-    # 否则添加时间戳
+    # Otherwise add timestamp
     return f"{safe_name}_{timestamp}"
 
-# 定义文本/代码文件后缀集合
+# Define text/code file extensions set
 TEXT_FILE_EXTENSIONS: Set[str] = {
     # Programming Languages
     ".py", ".java", ".c", ".cpp", ".h", ".cs", ".go", ".rs", ".swift", ".kt",
@@ -319,7 +319,7 @@ TEXT_FILE_EXTENSIONS: Set[str] = {
     ".ipynb" # Jupyter notebooks are JSON but often line-counted
 }
 
-# 定义二进制文件后缀集合
+# Define binary file extensions set
 BINARY_FILE_EXTENSIONS: Set[str] = {
     # Images
     ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tiff", ".webp", ".ico", ".svg",
@@ -338,7 +338,7 @@ BINARY_FILE_EXTENSIONS: Set[str] = {
 }
 
 def is_text_file(file_path: Path) -> bool:
-    """判断文件是否为文本/代码文件"""
+    """Check if file is text/code file"""
     if file_path.name == "Dockerfile":
         return True
     ext = file_path.suffix.lower()
@@ -347,11 +347,11 @@ def is_text_file(file_path: Path) -> bool:
     )
 
 def format_file_size(size: int) -> str:
-    """格式化文件大小"""
-    if size < 0: return "无效大小"
+    """Format file size"""
+    if size < 0: return "Invalid size"
     for unit in ["B", "KB", "MB", "GB"]:
         if size < 1024:
-            # 对于 B 和 KB，保留整数；对于 MB 及以上，保留一位小数
+            # For B and KB, keep as integer; for MB and above, keep one decimal place
             if unit in ["B", "KB"]:
                 return f"{int(size)}{unit}"
             return f"{size:.1f}{unit}"
@@ -359,10 +359,10 @@ def format_file_size(size: int) -> str:
     return f"{size:.1f}TB"
 
 def count_file_lines(file_path: Path) -> Optional[int]:
-    """计算文件行数"""
+    """Count file lines"""
     try:
-        # 优化：对于大文件，不实际读取所有行
-        if file_path.stat().st_size > 10 * 1024 * 1024: # 超过 10MB 不计数
+        # Optimization: for large files, don't actually read all lines
+        if file_path.stat().st_size > 10 * 1024 * 1024: # Don't count if over 10MB
              return None
         with file_path.open("r", encoding="utf-8", errors='ignore') as f:
             return sum(1 for _ in f)
@@ -371,7 +371,7 @@ def count_file_lines(file_path: Path) -> Optional[int]:
         return None
 
 def count_file_tokens(file_path: Path) -> Optional[int]:
-    """计算文件token数量"""
+    """Count file token count"""
     try:
         with file_path.open("r", encoding="utf-8", errors='ignore') as f:
             content = f.read()
@@ -381,53 +381,53 @@ def count_file_tokens(file_path: Path) -> Optional[int]:
         return None
 
 def get_file_info(file_path: str) -> str:
-    """获取文件信息，包括大小、行数、token数和修改时间"""
+    """Get file information including size, line count, token count and modification time"""
     try:
         path = Path(file_path)
         if not path.exists():
-            return f"{file_path} (文件不存在)"
+            return f"{file_path} (file does not exist)"
 
         stat_result = path.stat()
         file_size = stat_result.st_size
         size_str = format_file_size(file_size)
 
-        # 获取修改时间
+        # Get modification time
         last_modified = stat_result.st_mtime
         modified_time = datetime.fromtimestamp(last_modified).strftime("%Y-%m-%d %H:%M:%S")
 
-        # 收集属性
+        # Collect attributes
         attributes = [size_str]
 
-        # 对于文本文件计算行数和token数量
+        # For text files calculate line count and token count
         if is_text_file(path):
             line_count = count_file_lines(path)
             if line_count is not None:
-                attributes.append(f"{line_count}行")
+                attributes.append(f"{line_count} lines")
 
             token_count = count_file_tokens(path)
             if token_count is not None:
-                attributes.append(f"{token_count}个token")
+                attributes.append(f"{token_count} tokens")
 
         attributes_str = ", ".join(attributes)
-        return f"{file_path} ({attributes_str}, 最后修改：{modified_time})"
+        return f"{file_path} ({attributes_str}, last modified: {modified_time})"
     except Exception as e:
         logger.debug(f"Failed to get file info: {file_path}, error: {e}")
         return file_path
 
 def get_file_metadata(file_path: str) -> dict:
     """
-    获取文件的元数据信息，以字典形式返回
+    Get file metadata information, return as dictionary
 
     Returns:
-        包含以下字段的字典：
-        - exists: 文件是否存在
-        - size: 文件大小（字节）
-        - size_formatted: 格式化的文件大小
-        - is_text: 是否为文本文件
-        - line_count: 行数（仅文本文件）
-        - token_count: token数量（仅文本文件）
-        - last_modified: 最后修改时间戳
-        - modified_time: 格式化的修改时间
+        Dictionary containing the following fields:
+        - exists: Whether file exists
+        - size: File size (bytes)
+        - size_formatted: Formatted file size
+        - is_text: Whether file is text file
+        - line_count: Line count (text files only)
+        - token_count: Token count (text files only)
+        - last_modified: Last modification timestamp
+        - modified_time: Formatted modification time
     """
     try:
         path = Path(file_path)

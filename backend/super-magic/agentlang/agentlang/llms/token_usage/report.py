@@ -1,14 +1,14 @@
 """
-Token使用报告模块
+Token usage report module
 
-负责将TokenUsageTracker中的数据生成报告
+Responsible for generating reports from data in TokenUsageTracker
 """
 
 import json
 import os
 from datetime import datetime
 
-# 为避免循环导入，使用字符串类型注解
+# To avoid circular imports, use string type annotations
 from typing import TYPE_CHECKING, Any, Dict, Optional
 
 from agentlang.config import config
@@ -30,48 +30,48 @@ logger = get_logger(__name__)
 
 
 class TokenUsageReport:
-    """Token使用统计报告生成器
+    """Token usage statistics report generator
 
-    负责将TokenUsageTracker中的数据生成各种格式的报告
-    支持按照sandbox_id维度汇总token使用情况
-    使用标准化的数据对象处理报告
+    Responsible for generating various format reports from data in TokenUsageTracker
+    Supports aggregating token usage by sandbox_id dimension
+    Uses standardized data objects for report processing
     """
 
-    # 保存全局的报告实例，按sandbox_id索引
+    # Save global report instances, indexed by sandbox_id
     _instances = {}
 
     @classmethod
     def get_instance(cls, sandbox_id: str = "default", token_tracker: Optional[Any] = None,
                      pricing: Optional[ModelPricing] = None,
                     report_dir: str = None) -> 'TokenUsageReport':
-        """获取或创建指定sandbox_id的TokenUsageReport实例
+        """Get or create TokenUsageReport instance for specified sandbox_id
 
         Args:
-            sandbox_id: 沙箱ID
-            token_tracker: token使用跟踪器
-            pricing: 模型价格配置
-            report_dir: 报告文件保存目录，默认为None表示使用默认目录
+            sandbox_id: Sandbox ID
+            token_tracker: Token usage tracker
+            pricing: Model pricing configuration
+            report_dir: Report file save directory, None by default to use default directory
 
         Returns:
-            TokenUsageReport: 对应sandbox_id的实例
+            TokenUsageReport: Instance corresponding to sandbox_id
         """
         if sandbox_id not in cls._instances:
-            # 没有提供pricing时创建默认实例
+            # Create default instance when pricing not provided
             if pricing is None:
                 try:
-                    # 尝试从配置中加载模型价格
+                    # Try loading model pricing from configuration
                     models_config = config.get("models", {})
                     pricing = ModelPricing(models_config=models_config)
-                    logger.info("已从配置加载模型价格信息")
+                    logger.info("Loaded model pricing information from configuration")
                 except Exception as e:
-                    # 配置获取失败时，使用默认价格
-                    logger.warning(f"无法从配置加载模型价格，使用默认价格: {e}")
+                    # Use default pricing when configuration loading fails
+                    logger.warning(f"Unable to load model pricing from configuration, using default pricing: {e}")
                     pricing = ModelPricing()
 
-            # 创建实例
+            # Create instance
             cls._instances[sandbox_id] = cls(token_tracker, pricing, sandbox_id, report_dir)
 
-            # 设置token_tracker的report_manager（如果提供了）
+            # Set token_tracker's report_manager (if provided)
             if token_tracker:
                 token_tracker.set_report_manager(cls._instances[sandbox_id])
 

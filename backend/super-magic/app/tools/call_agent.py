@@ -66,16 +66,16 @@ call_agent(
     <example>
       <![CDATA[
 call_agent(
-  agent_name: "data-analyst",  # 数据分析智能体
+  agent_name: "data-analyst",  # Data analyst agent
   agent_id: "market-research-analysis",
-  task_background: "用户是一家初创公司的市场部负责人，正在准备一个关于电动汽车市场趋势的演讲。他们已经收集了一些市场数据（存储在多个CSV和Excel文件中），你可以用 list_dir 在工作区看到它们，需要从这些数据中提取关键洞察，并生成一份详细的分析报告。用户原始需求是：「分析2020-2024年电动汽车市场的增长趋势、消费者购买行为变化、主要竞争对手市场份额，并生成一份包含数据可视化的详细报告」。我们已经初步处理了数据文件，现在需要深入分析并生成报告。",
-  task_description: "你负责其中最重要的一个环节，你需要使用提供的参考文件中的数据：1）分析2020-2024年电动汽车销量增长趋势；2）识别不同消费者群体的购买行为变化；3）计算并比较主要竞争对手的市场份额演变；4）生成一份名为'ev_market_analysis.md'的详细分析报告，包含关键发现、数据图表和预测建议。",
-  task_completion_standard: "成功生成一份名为'ev_market_analysis.md'的分析报告，报告必须包含：1）销量趋势分析（含至少2个图表）；2）消费者行为分析（含细分市场数据）；3）竞争对手分析（含市场份额对比）；4）未来12个月的市场预测；5）基于数据的3-5条具体营销建议。",
+  task_background: "The user is a market research manager at a startup preparing a presentation on electric vehicle market trends. They have collected some market data (stored in multiple CSV and Excel files), you can see them in the workspace using list_dir. They need to extract key insights from this data and generate a detailed analysis report. The original user requirement is: 'Analyze the growth trends in the EV market from 2020-2024, changes in consumer purchasing behavior, major competitors' market share, and generate a detailed report with data visualization'. We have done preliminary processing of the data files, now need to conduct in-depth analysis and generate the report.",
+  task_description: "You are responsible for the most important part of this. You need to use data from the provided reference files: 1) Analyze EV sales growth trends from 2020-2024; 2) Identify purchasing behavior changes across different consumer groups; 3) Calculate and compare major competitors' market share evolution; 4) Generate a detailed analysis report named 'ev_market_analysis.md' containing key findings, data charts and predictive recommendations.",
+  task_completion_standard: "Successfully generate an analysis report named 'ev_market_analysis.md' which must include: 1) Sales trend analysis (with at least 2 charts); 2) Consumer behavior analysis (with segmented market data); 3) Competitor analysis (with market share comparison); 4) Market forecast for the next 12 months; 5) 3-5 specific marketing recommendations based on the data.",
   reference_files: [
-    "./ev_sales_data_2020_2023.csv",  # 电动汽车销售数据
-    "./consumer_survey_results.xlsx",  # 消费者调查结果
-    "./competitor_analysis.xlsx",  # 竞争对手分析
-    "./industry_overview.md"  # 行业概述报告
+    "./ev_sales_data_2020_2023.csv",  # Electric vehicle sales data
+    "./consumer_survey_results.xlsx",  # Consumer survey results
+    "./competitor_analysis.xlsx",  # Competitor analysis
+    "./industry_overview.md"  # Industry overview report
   ]
 )
       ]]>
@@ -83,81 +83,81 @@ call_agent(
     <example>
       <![CDATA[
 call_agent(
-  agent_name: "web-browser",  # 首先调用网页浏览智能体
+  agent_name: "web-browser",  # First call web browser agent
   agent_id: "conference-info-collector",
-  task_background: "用户原始需求是：「打开 https://mp.weixin.qq.com/s/gYjV6gjFutI6afGcpNel6Q，帮我分析链接文章里的所有内容，形成结构清晰的文档，并进一步分析其中的每一个演讲主题与分享嘉宾的信息，并最终规划决定我应当如何更好地分配时间和在这些日程中做出选择，作为一个听众我该如何最大化我的参会价值，最终形成一个导航网站。」整个任务需要分两步完成：首先通过网页浏览收集信息，然后通过代码智能体构建导航网站。我们现在需要先完成第一步收集和分析信息。",
-  task_description: "你需要负责任务的第一阶段：1）使用浏览器打开并访问 https://mp.weixin.qq.com/s/gYjV6gjFutI6afGcpNel6Q 链接；2）提取并分析页面上的所有会议内容，包括演讲主题、分享嘉宾信息、时间安排等；3）整理所有信息生成一个结构清晰的文档，文件名为'conference_analysis.md'；4）对每个演讲主题和嘉宾进行价值分析，标注出潜在的重要性和参与价值；5）基于分析提出时间分配建议，帮助用户作为听众最大化参会价值。",
-  task_completion_standard: "成功生成一份名为'conference_analysis.md'的分析文档，文档必须包含：1）完整的会议概述；2）所有演讲主题和分享嘉宾的详细信息（至少包括姓名、职位、演讲主题、时间安排）；3）每个主题的价值分析；4）时间规划建议；5）听众参会价值最大化的策略。文档结构清晰，便于后续用于创建导航网站。",
-  reference_files: []  # 无需参考文件，但会生成一个reference_file用于第二阶段
+  task_background: "The original user requirement is: 'Open https://mp.weixin.qq.com/s/gYjV6gjFutI6afGcpNel6Q, analyze all content in the linked article and form a well-structured document, further analyze each presentation topic and guest speaker information, and finally plan how to better allocate time and make choices in these sessions, as an attendee how to maximize my conference value, and ultimately create a navigation website.' The entire task needs to be completed in two steps: first collect information through web browsing, then build the navigation website through a code agent. We now need to complete the first step of collecting and analyzing information.",
+  task_description: "You are responsible for the first phase of the task: 1) Use browser to open and access the https://mp.weixin.qq.com/s/gYjV6gjFutI6afGcpNel6Q link; 2) Extract and analyze all conference content on the page, including presentation topics, guest speaker information, time schedule, etc.; 3) Organize all information to generate a well-structured document with filename 'conference_analysis.md'; 4) Conduct value analysis for each presentation topic and speaker, annotate potential importance and participation value; 5) Propose time allocation recommendations based on analysis to help users as attendees maximize conference value.",
+  task_completion_standard: "Successfully generate an analysis document named 'conference_analysis.md' which must include: 1) Complete conference overview; 2) Detailed information of all presentation topics and guest speakers (at minimum including name, position, presentation topic, time schedule); 3) Value analysis for each topic; 4) Time planning recommendations; 5) Strategy for attendees to maximize conference value. Document structure is clear and easy to use for creating the navigation website in next phase.",
+  reference_files: []  # No reference files needed, but will generate a reference_file for phase two
 )
 
-# 然后在第一阶段完成后，调用coder智能体建立导航网站
+# After phase one completion, call coder agent to build navigation website
 call_agent(
-  agent_name: "coder",  # 代码开发智能体
+  agent_name: "coder",  # Code developer agent
   agent_id: "conference-navigator-builder",
-  task_background: "用户原始需求是「打开 https://mp.weixin.qq.com/s/gYjV6gjFutI6afGcpNel6Q，帮我分析链接文章里的所有内容，形成结构清晰的文档，并进一步分析其中的每一个演讲主题与分享嘉宾的信息，并最终规划决定我应当如何更好地分配时间和在这些日程中做出选择，作为一个听众我该如何最大化我的参会价值，最终形成一个导航网站。」。第一阶段我们已经通过完成了会议信息的收集和分析，生成了'conference_info.md'、'conference_schedule.md'、'speakers_info.md' 几份文档，你可以在工作区的 .webview_reports 目录下查看，现在需要基于这个文档创建一个导航网站，帮助用户更好地规划会议参与。",
-  task_description: "你需要负责任务的最终阶段，也是最重要的环节：1）阅读第一阶段生成的文档，理解会议的全部结构和内容；2）根据你丰富的开发设计经验与预设要求，开发一个导航网站；3）网站应帮助用户更好地规划会议参与，实现用户最大化参会价值的目标；4）包含会议总览、日程安排、嘉宾信息、主题分类、个人推荐路线等关键内容；5）提供合理的交互功能，帮助用户做出参会选择和时间分配决策。",
-  task_completion_standard: "成功生成一个入口文件为'index.html'的导航网站，网站需满足以下标准：1）设计美观，采用现代UI框架；2）完整展示会议所有信息；3）必须包含四个功能模块：会议总览、日程安排、嘉宾信息和个人推荐路线；4）实现时间冲突检测和个性化推荐功能；5）提供筛选和搜索功能，方便用户快速定位感兴趣的主题和嘉宾；6）响应式设计，支持移动设备访问；7）生成PDF导出功能，方便用户离线查看；8）包含简洁的操作指南，确保可在任何浏览器环境下直接打开使用。最后的重点是避免项目过于复杂，你需要用最简单高效的组合方式尽快完成这个任务。",
+  task_background: "The original user requirement is 'Open https://mp.weixin.qq.com/s/gYjV6gjFutI6afGcpNel6Q, analyze all content in the linked article and form a well-structured document, further analyze each presentation topic and guest speaker information, and finally plan how to better allocate time and make choices in these sessions, as an attendee how to maximize my conference value, and ultimately create a navigation website.' In phase one we have completed the collection and analysis of conference information, generated documents 'conference_info.md', 'conference_schedule.md', 'speakers_info.md', which you can view in the .webview_reports directory in the workspace. Now we need to create a navigation website based on these documents to help users better plan their conference participation.",
+  task_description: "You are responsible for the final and most important phase of the task: 1) Read documents generated in phase one, understand the full structure and content of the conference; 2) Based on your rich development and design experience and preset requirements, develop a navigation website; 3) The website should help users better plan their conference participation and achieve the goal of maximizing conference value; 4) Include key content such as conference overview, schedule, speaker information, topic categories, and personalized recommended itineraries; 5) Provide reasonable interactive functions to help users make conference participation choices and time allocation decisions.",
+  task_completion_standard: "Successfully generate a navigation website with 'index.html' as entry file, the website must meet the following standards: 1) Beautiful design using modern UI framework; 2) Complete display of all conference information; 3) Must include four functional modules: conference overview, schedule, speaker information and personalized recommended itineraries; 4) Implement time conflict detection and personalized recommendation functions; 5) Provide filtering and search functions to help users quickly locate interested topics and speakers; 6) Responsive design supporting mobile device access; 7) PDF export function for users to view offline; 8) Include concise operation guide ensuring it can be opened and used directly in any browser environment. The key point is to avoid overly complex projects, you need to use the simplest and most efficient combination to complete this task as quickly as possible.",
   reference_files: [
-    "./webview_reports/conference_info.md",  # 会议总体信息文档
-    "./webview_reports/conference_schedule.md",  # 会议日程安排文档
-    "./webview_reports/speakers_info.md"  # 演讲嘉宾信息文档
+    "./webview_reports/conference_info.md",  # Conference overall information document
+    "./webview_reports/conference_schedule.md",  # Conference schedule document
+    "./webview_reports/speakers_info.md"  # Presentation guest speaker information document
   ]
 )
       ]]>
     </example>
     <example>
       <![CDATA[
-# 第一步：使用web-browser智能体收集AI新闻热点，提取关键词
+# Step 1: Use web-browser agent to collect AI news hotspots and extract keywords
 call_agent(
   agent_name: "web-browser",
   agent_id: "ai-news-collector",
-  task_background: "用户原始需求是：「你可以通过 https://ai-bot.cn/daily-ai-news/ 看下近几天的热点 AI 新闻，但里面内容不详细，因此你可以从新闻标题里获取各个热点事件的搜索关键词（事件或新事物的名词提炼要精准），然后选几个你认为最有价值的事件，去微信公众号搜索与这个事件有关的文章，然后取其中你认为最有价值的几篇文章的链接，再通过浏览器去访问微信文章链接拿到文章完整 Markdown 内容，再去搜索引擎搜索这个事件有关的 36 氪、虎嗅等媒体的报道文章，然后深入理解这些文章内容，了解最近 AI 圈都在发生什么，最终回答一个终极问题「在 Cursor、Manus、Genspark、Devin 和其他各种 Agent 产品卷得要死的当下，创业团队做企业级 AI 产品，还有什么机会？」，最后将你独特的观点输出成一份报告，呈现形式为精美的网页。」这是一个复杂的多阶段任务，我们需要先收集信息，再分析观点，最后制作网页。现在需要先完成第一阶段的信息收集工作。",
-  task_description: "你需要完成第一阶段的核心任务：1）访问 https://ai-bot.cn/daily-ai-news/ 网站，查看最近几天的AI新闻热点；2）从新闻标题中提取1~3个最有价值、最有影响力的热点事件关键词，关键词应该准确代表事件或新技术名称；3）对每个关键词进行简要说明，解释为什么选择这个热点；4）将你的发现整理成一个名为'ai_news_hotspots.md'的文档，这将作为后续深入研究的基础；5）记录每个热点事件在哪些平台（如微信公众号、36氪、虎嗅等）上可能有详细报道。",
-  task_completion_standard: "成功生成一份名为'ai_news_hotspots.md'的热点事件分析文档，文档必须包含：1）5-8个最有价值的AI热点事件关键词；2）每个关键词的简要背景说明（为什么重要/有影响力）；3）每个关键词的推荐搜索平台（如特定的微信公众号、媒体网站等）；4）对每个热点的初步价值评估（对AI行业发展的意义）。关键词提炼必须精准，能够用于后续的深入搜索。",
-  reference_files: []  # 无需参考文件
+  task_background: "The original user requirement is: 'You can check the recent hot AI news through https://ai-bot.cn/daily-ai-news/, but the content inside is not detailed. Therefore, you can extract search keywords for various hot events from the news titles (noun extraction for events or new things should be accurate), then select a few events you think are most valuable, search for articles related to this event in WeChat official accounts, then take links to articles you think are most valuable, then access WeChat article links through browser to get complete Markdown content of articles, then search search engines for reports about this event from 36Kr, Huxiu and other media, then deeply understand the content of these articles, understand what's happening in the AI circle recently, finally answer an ultimate question 'In the context of Cursor, Manus, Genspark, Devin and other various Agent products competing fiercely, what opportunities are there for startup teams to do enterprise-level AI products?', finally output your unique perspective as a report in the form of a beautiful web page.' This is a complex multi-stage task, we need to first collect information, then analyze perspectives, and finally create a web page. Now we need to first complete the information collection work of the first stage.",
+  task_description: "You need to complete the core tasks of the first stage: 1) Visit https://ai-bot.cn/daily-ai-news/ website and check recent days' AI news hotspots; 2) Extract 1-3 most valuable and influential hot event keywords from news titles, keywords should accurately represent events or new technology names; 3) Provide brief explanation for each keyword, explaining why you selected this hotspot; 4) Organize your findings into a document named 'ai_news_hotspots.md', which will serve as the basis for subsequent in-depth research; 5) Record which platforms (such as WeChat official accounts, 36Kr, Huxiu, etc.) may have detailed reports on each hot event.",
+  task_completion_standard: "Successfully generate an analysis document named 'ai_news_hotspots.md' for hot events, the document must include: 1) 5-8 most valuable AI hot event keywords; 2) Brief background explanation for each keyword (why important/influential); 3) Recommended search platforms for each keyword (such as specific WeChat official accounts, media websites, etc.); 4) Preliminary value assessment for each hotspot (significance for AI industry development). Keyword extraction must be accurate, usable for subsequent in-depth searches.",
+  reference_files: []  # No reference files needed
 )
 
-# 第二步：使用web-browser智能体深入研究选定的热点事件（这步可能需要多次调用，每次针对不同的热点事件）
+# Step 2: Use web-browser agent to conduct in-depth research on selected hot events (this step may require multiple calls, each targeting different hot events)
 call_agent(
   agent_name: "web-browser",
   agent_id: "ai-news-researcher",
-  task_background: "用户原始需求是「你可以通过 https://ai-bot.cn/daily-ai-news/ 看下近几天的热点 AI 新闻，但里面内容不详细，因此你可以从新闻标题里获取各个热点事件的搜索关键词（事件或新事物的名词提炼要精准），然后选几个你认为最有价值的事件，去微信公众号搜索与这个事件有关的文章，然后取其中你认为最有价值的几篇文章的链接，再通过浏览器去访问微信文章链接拿到文章完整 Markdown 内容，再去搜索引擎搜索这个事件有关的 36 氪、虎嗅等媒体的报道文章，然后深入理解这些文章内容，了解最近 AI 圈都在发生什么，最终回答一个终极问题「在 Cursor、Manus、Genspark、Devin 和其他各种 Agent 产品卷得要死的当下，创业团队做企业级 AI 产品，还有什么机会？」，最后将你独特的观点输出成一份报告，呈现形式为精美的网页。」。我们已经在第一阶段识别了几个重要的AI热点事件和关键词，现在需要对这些热点进行深入研究，收集详细内容。",
-  task_description: "你需要针对上一阶段识别的热点事件进行深入研究：1）查看'ai_news_hotspots.md'文件，选择其中1个最有价值的热点事件；2）针对选定的热点，在微信公众号上搜索至少3篇高质量相关文章，访问并获取其完整Markdown内容；3）同时在36氪、虎嗅等科技媒体上搜索每个热点的相关报道，由于这是新热点，可能媒体上没有报道，如果没有可以跳过；4）将所有收集到的文章内容返回给用户。",
-  task_completion_standard: "成功为选定的热点事件收集详细的信息，文档必须包含：1）至少2篇微信公众号文章的完整内容；2）至少2篇来自36氪、虎嗅等媒体的报道内容（如有）；3）所有内容必须保持原始结构和格式；4）不需要进行价值分析，仅负责信息收集；5）所有收集到的文件路径都一并返回给我。",
+  task_background: "The original user requirement is: 'You can check the recent hot AI news through https://ai-bot.cn/daily-ai-news/, but the content inside is not detailed. Therefore, you can extract search keywords for various hot events from the news titles (noun extraction for events or new things should be accurate), then select a few events you think are most valuable, search for articles related to this event in WeChat official accounts, then take links to articles you think are most valuable, then access WeChat article links through browser to get complete Markdown content of articles, then search search engines for reports about this event from 36Kr, Huxiu and other media, then deeply understand the content of these articles, understand what's happening in the AI circle recently, finally answer an ultimate question \"In the context of Cursor, Manus, Genspark, Devin and other various Agent products competing fiercely, what opportunities are there for startup teams to do enterprise-level AI products?\", finally output your unique perspective as a report in the form of a beautiful web page.' We have already identified several important AI hot events and keywords in stage one, now we need to conduct in-depth research on these hotspots and collect detailed information.",
+  task_description: "You need to conduct in-depth research on the hot events identified in the previous stage: 1) Check the 'ai_news_hotspots.md' file and select 1 most valuable hot event from it; 2) For the selected hotspot, search for at least 3 high-quality related articles on WeChat official accounts, visit and obtain their complete Markdown content; 3) Simultaneously search for reports about each hotspot from tech media like 36Kr, Huxiu, etc. Since these are new hotspots, media reports may not be available, you can skip if none are found; 4) Return all collected article content to the user.",
+  task_completion_standard: "Successfully collect detailed information for the selected hot event, the documentation must include: 1) Complete content of at least 2 WeChat official account articles; 2) At least 2 reporting content from media like 36Kr, Huxiu, etc. (if available); 3) All content must maintain original structure and format; 4) No need for value analysis, only responsible for information collection; 5) Return all collected file paths together.",
   reference_files: [
-    "./ai_news_hotspots.md"  # 第一阶段生成的热点事件文档
+    "./ai_news_hotspots.md"  # Hot event documentation generated in stage one
   ]
 )
 
-# 第三步：使用writer智能体分析所有收集的信息，回答关于AI创业机会的核心问题
+# Step 3: Use writer agent to analyze all collected information and answer core questions about AI startup opportunities
 call_agent(
   agent_name: "writer",
   agent_id: "ai-industry-analyst",
-  task_background: "用户原始需求最终要回答「你可以通过 https://ai-bot.cn/daily-ai-news/ 看下近几天的热点 AI 新闻，但里面内容不详细，因此你可以从新闻标题里获取各个热点事件的搜索关键词（事件或新事物的名词提炼要精准），然后选几个你认为最有价值的事件，去微信公众号搜索与这个事件有关的文章，然后取其中你认为最有价值的几篇文章的链接，再通过浏览器去访问微信文章链接拿到文章完整 Markdown 内容，再去搜索引擎搜索这个事件有关的 36 氪、虎嗅等媒体的报道文章，然后深入理解这些文章内容，了解最近 AI 圈都在发生什么，最终回答一个终极问题「在 Cursor、Manus、Genspark、Devin 和其他各种 Agent 产品卷得要死的当下，创业团队做企业级 AI 产品，还有什么机会？」，最后将你独特的观点输出成一份报告，呈现形式为精美的网页。」。我们已经完成了两个阶段的工作：1）收集了最近的AI热点事件；2）收集了与热点有关的详细的行业报道和分析文章。现在需要基于这些信息，分析企业级AI产品的创业机会。",
-  task_description: "你需要扮演AI产业分析师的角色，完成最核心的分析文章编写工作，输出你独一无二的观点：1）阅读所有hotspot_*.md文件和ai_news_hotspots.md文件，全面了解最近AI领域的重要动态；2）特别关注与Cursor、Manus、Genspark、Devin等Agent产品相关的信息；3）分析当前企业级AI产品的市场格局、技术趋势、用户需求和竞争态势；4）找出尚未被充分满足的企业需求和市场空白；5）提出3-5个有潜力的企业级AI产品创业方向，论证其可行性和差异化优势；6）将你的分析和见解整理成一份名为'ai_enterprise_opportunities.md'的深度报告。",
-  task_completion_standard: "成功生成一份名为'ai_enterprise_opportunities.md'的高质量分析报告，报告必须包含：1）当前AI产业，特别是Agent类产品的发展现状概述；2）企业级AI市场的需求分析和痛点识别；3）至少3个具体的企业级AI产品创业机会方向，每个方向需包含：市场定位、核心价值主张、技术可行性分析、竞争优势分析、潜在风险评估；4）针对每个方向的具体落地建议；5）报告语言要专业、逻辑严密，观点要有独创性和前瞻性；6）报告结构清晰，便于后续转化为网页形式。确保报告既有行业洞察，又有实用价值，能够真正指导创业决策。",
+  task_background: "The user's original requirement ultimately seeks to answer: 'You can check the recent hot AI news through https://ai-bot.cn/daily-ai-news/, but the content inside is not detailed. Therefore, you can extract search keywords for various hot events from the news titles (noun extraction for events or new things should be accurate), then select a few events you think are most valuable, search for articles related to this event in WeChat official accounts, then take links to articles you think are most valuable, then access WeChat article links through browser to get complete Markdown content of articles, then search search engines for reports about this event from 36Kr, Huxiu and other media, then deeply understand the content of these articles, understand what's happening in the AI circle recently, finally answer an ultimate question \"In the context of Cursor, Manus, Genspark, Devin and other various Agent products competing fiercely, what opportunities are there for startup teams to do enterprise-level AI products?\", finally output your unique perspective as a report in the form of a beautiful web page.' We have completed two stages of work: 1) Collected recent AI hot events; 2) Collected detailed industry reports and analysis articles related to hotspots. Now we need to analyze startup opportunities in enterprise-level AI products based on this information.",
+  task_description: "You need to serve as an AI industry analyst and complete the core work of writing analysis articles, outputting your unique perspective: 1) Read all hotspot_*.md files and ai_news_hotspots.md files to fully understand recent important developments in the AI field; 2) Particularly focus on information related to Agent products like Cursor, Manus, Genspark, Devin; 3) Analyze the current market landscape, technology trends, user needs and competitive situation of enterprise-level AI products; 4) Find unmet enterprise needs and market gaps; 5) Propose 3-5 promising directions for enterprise-level AI product startups, demonstrating their feasibility and differentiated advantages; 6) Organize your analysis and insights into a comprehensive report named 'ai_enterprise_opportunities.md'.",
+  task_completion_standard: "Successfully generate a high-quality analysis report named 'ai_enterprise_opportunities.md' that must include: 1) Overview of current AI industry development, particularly Agent-class products; 2) Demand analysis and pain point identification for the enterprise-level AI market; 3) At least 3 specific directions for enterprise-level AI product startup opportunities, each direction must include: market positioning, core value proposition, technology feasibility analysis, competitive advantage analysis, potential risk assessment; 4) Specific implementation recommendations for each direction; 5) Report language must be professional, logic rigorous, perspectives must be original and forward-looking; 6) Report structure must be clear, convenient for subsequent conversion to web format. Ensure the report has both industry insights and practical value, capable of truly guiding startup decisions.",
   reference_files: [
-    "./ai_news_hotspots.md",  # 热点事件总览
-    "./hotspot_ai_agents.md",  # AI代理产品发展趋势分析
-    "./hotspot_llm_advances.md",  # 大语言模型最新技术突破
-    "./hotspot_enterprise_ai.md"   # 企业级AI应用市场动态
+    "./ai_news_hotspots.md",  # Hot events overview
+    "./hotspot_ai_agents.md",  # AI agent product development trend analysis
+    "./hotspot_llm_advances.md",  # Large language model latest technology breakthroughs
+    "./hotspot_enterprise_ai.md"   # Enterprise-level AI application market dynamics
   ]
 )
 
-# 第四步：使用coder智能体将分析报告转化为精美网页
+# Step 4: Use coder agent to convert analysis report to beautiful web page
 call_agent(
   agent_name: "coder",
   agent_id: "ai-report-visualizer",
-  task_background: "用户原始需求是「你可以通过 https://ai-bot.cn/daily-ai-news/ 看下近几天的热点 AI 新闻，但里面内容不详细，因此你可以从新闻标题里获取各个热点事件的搜索关键词（事件或新事物的名词提炼要精准），然后选几个你认为最有价值的事件，去微信公众号搜索与这个事件有关的文章，然后取其中你认为最有价值的几篇文章的链接，再通过浏览器去访问微信文章链接拿到文章完整 Markdown 内容，再去搜索引擎搜索这个事件有关的 36 氪、虎嗅等媒体的报道文章，然后深入理解这些文章内容，了解最近 AI 圈都在发生什么，最终回答一个终极问题「在 Cursor、Manus、Genspark、Devin 和其他各种 Agent 产品卷得要死的当下，创业团队做企业级 AI 产品，还有什么机会？」，最后将你独特的观点输出成一份报告，呈现形式为精美的网页。」。我们已经完成了前三个阶段的工作：1）收集AI热点事件；2）深入研究重要热点；3）分析企业级AI产品的创业机会并生成了深度报告。现在需要将报告转化为视觉吸引力强、信息展示清晰的网页。",
-  task_description: "你需要负责最终网页的交付阶段，是至关重要的最后一环，你需要：1）阅读'ai_enterprise_opportunities.md'分析报告(其余的 Markdown 参考文件是过程中收集到的信息，必要时可以查看)，理解其核心结构和内容；2）设计并开发一个现代、专业的单页网站，突出展示报告中的核心观点和创业机会；3）网站应包含吸引人的数据可视化元素，如趋势图表、市场机会热力图等；4）确保网站有良好的内容层级和导航结构，便于阅读长篇分析内容；5）为报告中提到的每个创业机会方向创建单独的展示区域，突出其核心价值主张和差异化优势；6）添加适当的交互元素，提升用户体验。",
-  task_completion_standard: "成功开发一个入口文件为'index.html'的精美网站，网站必须满足以下标准：1）设计专业、现代，符合科技行业分析报告的风格；2）完整准确地展示报告的所有核心内容；3）包含至少3个数据可视化图表，直观展示市场趋势或机会；4）结构清晰，有明确的导航和内容分区；5）在不同屏幕尺寸下都能良好展示（响应式设计）；6）加载速度快，不依赖复杂外部资源；7）视觉设计吸引人，色彩搭配专业；8）代码结构清晰，注释完善；9）能够在任何现代浏览器中正常运行。确保网站既美观又实用，能够有效传达报告的核心价值。不要虚构参考文件以外的内容，只有参考文件里的内容才是权威可信的信息。",
+  task_background: "The user's original requirement is 'You can check the recent hot AI news through https://ai-bot.cn/daily-ai-news/, but the content inside is not detailed. Therefore, you can extract search keywords for various hot events from the news titles (noun extraction for events or new things should be accurate), then select a few events you think are most valuable, search for articles related to this event in WeChat official accounts, then take links to articles you think are most valuable, then access WeChat article links through browser to get complete Markdown content of articles, then search search engines for reports about this event from 36Kr, Huxiu and other media, then deeply understand the content of these articles, understand what's happening in the AI circle recently, finally answer an ultimate question \"In the context of Cursor, Manus, Genspark, Devin and other various Agent products competing fiercely, what opportunities are there for startup teams to do enterprise-level AI products?\", finally output your unique perspective as a report in the form of a beautiful web page.' We have completed the first three stages of work: 1) Collected AI hot events; 2) Conducted in-depth research on important hotspots; 3) Analyzed startup opportunities in enterprise-level AI products and generated an in-depth report. Now we need to convert the report into a visually attractive web page with clear information display.",
+  task_description: "You are responsible for the final web page delivery stage, which is a crucial final link. You need to: 1) Read the 'ai_enterprise_opportunities.md' analysis report (other Markdown reference files are information collected during the process and can be consulted if necessary), understand its core structure and content; 2) Design and develop a modern, professional single-page website that prominently showcases the core viewpoints and startup opportunities in the report; 3) The website should include attractive data visualization elements, such as trend charts, market opportunity heat maps, etc.; 4) Ensure the website has good content hierarchy and navigation structure for easy reading of long analysis content; 5) Create separate display areas for each startup opportunity direction mentioned in the report, highlighting its core value proposition and differentiated advantages; 6) Add appropriate interactive elements to enhance user experience.",
+  task_completion_standard: "Successfully develop a beautiful website with 'index.html' as the entry file. The website must meet the following standards: 1) Professional and modern design, fitting the style of technology industry analysis reports; 2) Complete and accurate display of all core content of the report; 3) Include at least 3 data visualization charts that intuitively display market trends or opportunities; 4) Clear structure with explicit navigation and content sections; 5) Good display on different screen sizes (responsive design); 6) Fast loading speed, not dependent on complex external resources; 7) Attractive visual design with professional color schemes; 8) Clear code structure with comprehensive comments; 9) Can run normally in any modern browser. Ensure the website is both beautiful and practical, effectively conveying the core value of the report. Do not fabricate content beyond the reference files - only content in reference files is authoritative and trustworthy information.",
   reference_files: [
-    "./ai_enterprise_opportunities.md",  # 主要分析报告
-    "./ai_news_hotspots.md",  # 热点事件总览
-    "./hotspot_ai_agents.md",  # AI代理产品发展趋势分析
-    "./hotspot_llm_advances.md",  # 大语言模型最新技术突破
-    "./hotspot_enterprise_ai.md"   # 企业级AI应用市场动态
+    "./ai_enterprise_opportunities.md",  # Main analysis report
+    "./ai_news_hotspots.md",  # Hot events overview
+    "./hotspot_ai_agents.md",  # AI agent product development trend analysis
+    "./hotspot_llm_advances.md",  # Large language model latest technology breakthroughs
+    "./hotspot_enterprise_ai.md"   # Enterprise-level AI application market dynamics
   ]
 )
       ]]>

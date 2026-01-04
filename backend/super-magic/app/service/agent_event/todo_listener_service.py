@@ -1,7 +1,7 @@
 """
-待办事项文件监听器服务
+Todo list file listener service
 
-用于监听todo.md文件事件，并将待办事项添加到代理上下文中
+Used to listen for todo.md file events and add todo items to the agent context
 """
 
 import os
@@ -21,116 +21,116 @@ logger = get_logger(__name__)
 
 class TodoListenerService:
     """
-    待办事项文件监听器服务
+    Todo list file listener service
     
-    监听todo.md文件的创建和更新事件，解析待办事项，并为每个待办事项创建雪花ID
+    Listens for creation and update events of todo.md files, parses todo items, and creates snowflake IDs for each todo item
     """
 
-    # 单例模式的实例
+    # Singleton pattern instance
     _instance = None
 
-    # 雪花ID生成器
+    # Snowflake ID generator
     _snowflake_service = None
 
     @classmethod
     def get_instance(cls) -> 'TodoListenerService':
         """
-        获取单例实例
+        Get singleton instance
         
         Returns:
-            TodoListenerService: 单例实例
+            TodoListenerService: Singleton instance
         """
         if cls._instance is None:
             cls._instance = TodoListenerService()
         return cls._instance
 
     def __init__(self):
-        """初始化待办事项监听器服务"""
+        """Initialize todo list listener service"""
         if self._snowflake_service is None:
-            # 初始化雪花ID生成器
+            # Initialize snowflake ID generator
             TodoListenerService._snowflake_service = Snowflake.create_default()
-        logger.info("待办事项监听器服务初始化完成")
+        logger.info("Todo list listener service initialization complete")
 
     @staticmethod
     def register_standard_listeners(agent_context: AgentContext) -> None:
         """
-        为代理上下文注册待办事项文件事件监听器
+        Register todo list file event listeners for the agent context
         
         Args:
-            agent_context: 代理上下文对象
+            agent_context: Agent context object
         """
-        # 创建事件类型到处理函数的映射
+        # Create mapping from event types to handler functions
         event_listeners = {
             EventType.FILE_CREATED: TodoListenerService._handle_file_event,
             EventType.FILE_UPDATED: TodoListenerService._handle_file_event
         }
 
-        # 使用基类方法批量注册监听器
+        # Use base class method to batch register listeners
         BaseListenerService.register_listeners(agent_context, event_listeners)
 
-        logger.info("已为代理上下文注册待办事项文件事件监听器")
+        logger.info("Registered todo list file event listeners for agent context")
 
     @staticmethod
     async def _handle_file_event(event: Event[FileEventData]) -> None:
         """
-        处理文件事件（创建和更新）
+        Handle file events (creation and updates)
         
         Args:
-            event: 文件事件对象，包含FileEventData数据
+            event: File event object containing FileEventData
         """
-        # 获取文件路径和代理上下文
+        # Get file path and agent context
         filepath = event.data.filepath
         agent_context = event.data.tool_context.get_extension_typed("agent_context", AgentContext)
 
-        # 获取事件上下文
+        # Get event context
         event_context = event.data.tool_context.get_extension_typed("event_context", EventContext)
         if not event_context:
-            logger.warning("无法获取事件上下文：EventContext未注册")
+            logger.warning("Cannot get event context: EventContext not registered")
             return
 
-        # 检查文件是否为todo.md
+        # Check if file is todo.md
         filename = os.path.basename(filepath)
         if filename.lower() != "todo.md":
             return
 
-        # 记录处理文件事件
-        event_type_name = "创建" if event.event_type == EventType.FILE_CREATED else "更新"
-        logger.info(f"处理待办事项文件{event_type_name}事件: {filepath}")
+        # Log file event processing
+        event_type_name = "creation" if event.event_type == EventType.FILE_CREATED else "update"
+        logger.info(f"Processing todo list file {event_type_name} event: {filepath}")
 
-        # 解析待办事项
+        # Parse todo items
         try:
             todo_items = TodoListenerService._parse_todo_file(filepath)
 
             event_context.steps_changed = True
-            logger.info("检查到todo.md文件被更新，设置steps_changed标志为True")
+            logger.info("Detected todo.md file update, setting steps_changed flag to True")
 
-            # 处理待办事项
+            # Process todo items
             if todo_items:
                 TodoListenerService._process_todo_items(todo_items, agent_context)
         except Exception as e:
-            logger.error(f"解析待办事项文件出错: {e}")
+            logger.error(f"Error parsing todo list file: {e}")
 
     @staticmethod
     def _parse_todo_file(filepath: str) -> List[Dict[str, Any]]:
         """
-        解析待办事项文件，提取待办事项
+        Parse todo list file and extract todo items
         
         Args:
-            filepath: 文件路径
+            filepath: File path
             
         Returns:
-            List[Dict[str, Any]]: 待办事项列表，每个待办事项为一个字典，包含text和completed字段
+            List[Dict[str, Any]]: List of todo items, each item is a dictionary containing text and completed fields
         """
         if not os.path.exists(filepath):
-            logger.warning(f"待办事项文件不存在: {filepath}")
+            logger.warning(f"Todo list file does not exist: {filepath}")
             return []
 
         try:
             with open(filepath, 'r', encoding='utf-8') as file:
                 content = file.read()
 
-            # 使用正则表达式匹配待办事项
-            # 支持两种格式: "- [ ] 任务" 和 "- [x] 任务"
+            # Use regex to match todo items
+            # Support two formats: "- [ ] task" and "- [x] task"
             todo_pattern = r'- \[([ xX])\] (.*?)(?=\n- \[|\n\n|$)'
             matches = re.findall(todo_pattern, content, re.DOTALL)
 
@@ -144,40 +144,40 @@ class TodoListenerService:
                         'completed': completed
                     })
 
-            logger.info(f"从文件 {filepath} 中解析出 {len(todo_items)} 个待办事项")
+            logger.info(f"Parsed {len(todo_items)} todo items from file {filepath}")
             return todo_items
         except Exception as e:
-            logger.error(f"读取或解析待办事项文件出错: {e}")
+            logger.error(f"Error reading or parsing todo list file: {e}")
             return []
 
     @staticmethod
     def _process_todo_items(todo_items: List[Dict[str, Any]], agent_context: AgentContext) -> None:
         """
-        处理待办事项，直接用最新的todo_items完全替换代理上下文中的待办事项
+        Process todo items, directly replace todo items in agent context with the latest todo_items
         
         Args:
-            todo_items: 待办事项列表
-            agent_context: 代理上下文
+            todo_items: List of todo items
+            agent_context: Agent context
         """
         instance = TodoListenerService.get_instance()
         snowflake_service = TodoListenerService._snowflake_service
 
-        # 创建新的待办事项字典
+        # Create new todo items dictionary
         new_todo_dict = {}
 
-        # 为每个待办事项生成新记录，不检查是否已存在
+        # Generate new record for each todo item without checking if it already exists
         for item in todo_items:
             todo_text = item['text']
             completed = item['completed']
 
-            # 为每个待办事项生成新的雪花ID
+            # Generate new snowflake ID for each todo item
             snowflake_id = snowflake_service.get_id()
             new_todo_dict[todo_text] = {
                 'id': snowflake_id,
                 'completed': completed
             }
-            logger.info(f"添加待办事项: {todo_text}, ID: {snowflake_id}, completed: {completed}")
+            logger.info(f"Adding todo item: {todo_text}, ID: {snowflake_id}, completed: {completed}")
 
-        # 直接替换代理上下文中的待办事项字典
+        # Directly replace todo items dictionary in agent context
         agent_context.shared_context.update_field("todo_items", new_todo_dict)
-        logger.info(f"已完全替换待办事项，共 {len(new_todo_dict)} 项") 
+        logger.info(f"Completely replaced todo items, total {len(new_todo_dict)} items") 

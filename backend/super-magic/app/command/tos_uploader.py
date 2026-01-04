@@ -1,5 +1,5 @@
 """
-TOS上传工具命令模块 - 监控目录文件变化并自动上传到火山引擎TOS
+TOS uploader command module - monitors workspace changes and uploads to Volcengine TOS automatically.
 """
 import asyncio
 import hashlib
@@ -16,218 +16,218 @@ from app.infrastructure.storage.exceptions import InitException, UploadException
 from app.infrastructure.storage.factory import StorageFactory
 from app.infrastructure.storage.types import VolcEngineCredentials
 
-# 获取日志记录器
+# Get logger
 logger = get_logger(__name__)
 
 
 class TOSUploader:
-    """TOS上传工具"""
+    """TOS uploader utility"""
 
     def __init__(self, sandbox_id: str, workspace_dir: str, credentials_file: str = None,
                 task_id: str = None, organization_code: str = None):
         """
-        初始化TOS上传工具
+        Initialize TOS uploader.
         
         Args:
-            sandbox_id: 沙盒ID，用于生成上传路径
-            workspace_dir: 工作空间目录
-            credentials_file: TOS凭证文件路径
-            task_id: 任务ID，用于上传后注册文件（已弃用，保留参数兼容旧代码）
-            organization_code: 组织编码，用于上传后注册文件
+            sandbox_id: Sandbox ID used to build upload path
+            workspace_dir: Workspace directory to monitor
+            credentials_file: Path to TOS credential file
+            task_id: Task ID for registering files after upload (deprecated, kept for backward compatibility)
+            organization_code: Organization code for post-upload registration
         """
         self.sandbox_id = sandbox_id
         self.workspace_dir = Path(workspace_dir).resolve()
         self.credentials_file = credentials_file
         self.credentials = None
         self.storage_service = None
-        self.file_hashes = {}  # 用于存储文件哈希，避免重复上传相同内容
-        self.task_id = None  # 不再使用task_id
+        self.file_hashes = {}  # Cache file hashes to avoid duplicate uploads
+        self.task_id = None  # task_id no longer used
         self.organization_code = organization_code
-        self.uploaded_files = []  # 存储上传成功的文件信息，用于批量注册
+        self.uploaded_files = []  # Track uploaded files for batch registration
 
-        # 从环境变量获取API基础URL
+        # Get API base URL from environment
         self.api_base_url = os.getenv("MAGIC_API_SERVICE_BASE_URL")
 
         if not self.api_base_url:
-            logger.warning("未设置MAGIC_API_SERVICE_BASE_URL环境变量，将无法进行文件注册")
+            logger.warning("MAGIC_API_SERVICE_BASE_URL is not set; file registration will be unavailable")
         else:
-            # 检查是否包含http://或https://前缀，如果没有则添加https://
+            # Add https:// prefix if missing
             if not self.api_base_url.startswith(("http://", "https://")):
                 self.api_base_url = f"https://{self.api_base_url}"
-                logger.info("API URL未包含协议前缀，已自动添加https://")
+                logger.info("API URL lacked protocol prefix; https:// added automatically")
 
-            # 确保URL以/结尾
+            # Ensure URL ends with /
             if not self.api_base_url.endswith("/"):
                 self.api_base_url += "/"
 
         if self.api_base_url:
-            logger.info(f"使用API服务URL: {self.api_base_url}")
+            logger.info(f"Using API service URL: {self.api_base_url}")
 
     async def initialize(self) -> bool:
         """
-        初始化TOS上传工具
+        Initialize the TOS uploader
         
         Returns:
-            bool: 初始化是否成功
+            bool: Whether initialization succeeded
         """
-        # 从文件加载凭证
+        # Load credentials from file
         if not await self._load_credentials():
-            logger.error("无法加载TOS凭证")
+            logger.error("Unable to load TOS credentials")
             return False
 
-        # _load_credentials中已经包含了存储服务的初始化，这里不再需要重复初始化
+        # _load_credentials already initializes storage service
         return True
 
     async def _load_credentials(self) -> bool:
         """
-        加载TOS凭证
+        Load TOS credentials
         
         Returns:
-            bool: 加载是否成功
+            bool: Whether loading succeeded
         """
         try:
-            # 优先使用默认凭证文件
+            # Prefer default credential file
             default_file = Path(".credentials/upload_credentials.json")
 
-            # 如果指定了凭证文件，使用指定的文件
+            # Use provided credential file if present
             if self.credentials_file and os.path.exists(self.credentials_file):
                 credentials_path = self.credentials_file
-                logger.info(f"使用指定的凭证文件: {self.credentials_file}")
+                logger.info(f"Using specified credential file: {self.credentials_file}")
             elif default_file.exists():
                 credentials_path = default_file
-                logger.info(f"使用默认凭证文件: {default_file}")
+                logger.info(f"Using default credential file: {default_file}")
             else:
-                logger.error("未找到任何可用的TOS凭证文件")
+                logger.error("No usable TOS credential file found")
                 return False
 
-            # 读取凭证文件
+            # Read credential file
             with open(credentials_path, "r") as f:
                 credentials_data = json.load(f)
 
-            # 检查凭证格式
+            # Validate credential format
             if not credentials_data.get("upload_config"):
-                logger.error(f"凭证文件 {credentials_path} 中未找到 upload_config")
+                logger.error(f"upload_config missing in credential file {credentials_path}")
                 return False
 
-            # 检查sandbox_id是否存在（仅当未通过命令行指定时才检查）
+            # Ensure sandbox_id exists (unless provided via CLI)
             if not self.sandbox_id and not credentials_data.get("sandbox_id"):
-                logger.error(f"凭证文件 {credentials_path} 中缺少必需的 sandbox_id，且未通过命令行参数指定")
+                logger.error(f"Credential file {credentials_path} lacks required sandbox_id and none was provided via CLI")
                 return False
 
-            # 获取sandbox_id和organization_code
-            # 如果命令行中没有指定沙盒ID，则使用凭证文件中的沙盒ID
+            # Derive sandbox_id and organization_code
+            # Use sandbox_id from credentials if not provided via CLI
             if not self.sandbox_id:
                 self.sandbox_id = credentials_data.get("sandbox_id")
 
-            # 如果命令行未指定组织编码，从文件读取
+            # Use organization_code from credentials if not provided via CLI
             if not self.organization_code:
                 self.organization_code = credentials_data.get("organization_code")
 
-            # 创建新的凭证对象
+            # Build credential object
             self.credentials = VolcEngineCredentials(**credentials_data["upload_config"])
-            logger.debug(f"已从文件 {credentials_path} 加载最新TOS凭证")
+            logger.debug(f"Loaded latest TOS credentials from {credentials_path}")
 
-            # 每次重新加载凭证后也重新初始化存储服务
+            # Reinitialize storage service after each credential reload
             try:
                 self.storage_service = await StorageFactory.get_storage()
-                logger.debug("成功重新初始化TOS上传服务")
+                logger.debug("Successfully reinitialized TOS upload service")
             except Exception as e:
-                logger.error(f"重新初始化TOS上传服务失败: {e}")
+                logger.error(f"Failed to reinitialize TOS upload service: {e}")
                 return False
 
             return True
 
         except Exception as e:
-            logger.error(f"加载TOS凭证失败: {e}")
+            logger.error(f"Failed to load TOS credentials: {e}")
             import traceback
             logger.error(traceback.format_exc())
             return False
 
     def get_file_hash(self, file_path: str) -> str:
         """
-        计算文件MD5哈希
+        Calculate MD5 hash of a file
         
         Args:
-            file_path: 文件路径
+            file_path: Path to the file
             
         Returns:
-            str: 文件MD5哈希
+            str: File MD5 hash
         """
         try:
             md5_hash = hashlib.md5()
             with open(file_path, "rb") as f:
-                # 分块读取文件以处理大文件
+                # Read in chunks for large files
                 for chunk in iter(lambda: f.read(4096), b""):
                     md5_hash.update(chunk)
             return md5_hash.hexdigest()
         except Exception as e:
-            logger.error(f"计算文件哈希失败: {e}")
+            logger.error(f"Failed to calculate file hash: {e}")
             return ""
 
     async def upload_file(self, file_path: str) -> bool:
         """
-        上传文件到TOS
+        Upload a file to TOS
         
         Args:
-            file_path: 文件路径
+            file_path: Path to the file
             
         Returns:
-            bool: 上传是否成功
+            bool: Whether upload succeeded
         """
-        # 每次上传前重新加载凭证，确保使用最新的
+        # Reload credentials before each upload to ensure freshness
         if not await self._load_credentials():
-            logger.error("上传前重新加载TOS凭证失败")
+            logger.error("Failed to reload TOS credentials before upload")
             return False
 
         if not self.storage_service or not self.credentials:
-            logger.error("TOS上传服务未初始化")
+            logger.error("TOS upload service not initialized")
             return False
 
         try:
-            # 检查文件是否存在
+            # Ensure file exists
             file_path = str(file_path)
             if not os.path.exists(file_path):
-                logger.warning(f"文件不存在，无法上传: {file_path}")
+                logger.warning(f"File does not exist; cannot upload: {file_path}")
                 return False
 
-            # 计算文件哈希
+            # Calculate file hash
             file_hash = self.get_file_hash(file_path)
             if not file_hash:
                 return False                
-            # 获取相对路径
+            # Compute relative path
             try:
                 rel_path = os.path.relpath(file_path, str(self.workspace_dir))
             except ValueError:
-                # 如果文件不在工作空间内，使用文件名
+                # If file is outside workspace, fall back to file name
                 rel_path = os.path.basename(file_path)
 
-            # 构建存储键 - 使用凭证中的目录和相对路径，不添加沙盒ID
+            # Build storage key using credential dir and relative path (no sandbox prefix)
             base_dir = self.credentials.get_dir()
-            # 直接使用base_dir和rel_path构建key
+            # Directly combine base_dir and rel_path for key
             key = f"{base_dir}{rel_path}"
 
-            # 检查文件是否已上传且内容相同
+            # Skip upload if file content unchanged
             if key in self.file_hashes and self.file_hashes[key] == file_hash:
-                logger.info(f"文件内容未变化，跳过上传: {rel_path}")
+                logger.info(f"File unchanged; skipping upload: {rel_path}")
                 return True
             self.storage_service.set_credentials(self.credentials)
 
-            # 上传文件
-            logger.info(f"开始上传文件: {rel_path}, 存储键: {key}")
+            # Upload file
+            logger.info(f"Uploading file: {rel_path}, key: {key}")
             response = await self.storage_service.upload(
                 file=file_path,
                 key=key
             )            
-            # 保存文件哈希
+            # Cache file hash
             self.file_hashes[key] = file_hash
 
-            # 记录上传成功的文件信息，用于后续注册
+            # Record uploaded file info for later registration
             if self.sandbox_id:
                 file_ext = os.path.splitext(file_path)[1].lstrip('.')
-                # 从凭证中获取host，构建完整的访问URL
+                # Derive host from credentials to build full URL
                 host = self.credentials.temporary_credential.host if hasattr(self.credentials, 'temporary_credential') else None
                 if host:
-                    # 确保host不以/结尾，key不以/开头
+                    # Ensure host lacks trailing slash and key lacks leading slash
                     if host.endswith('/'):
                         host = host[:-1]
                     file_key = key if not key.startswith('/') else key[1:]
@@ -243,126 +243,128 @@ class TOSUploader:
                     "external_url": external_url,
                     "sandbox_id": self.sandbox_id
                 })
-                logger.info(f"文件已添加到待注册列表，当前列表大小: {len(self.uploaded_files)}")
+                logger.info(f"Added file to pending registration list; count={len(self.uploaded_files)}")
             else:
-                logger.warning("未设置沙盒ID，文件已上传但不会注册")
+                logger.warning("Sandbox ID not set; file uploaded but will not be registered")
 
-            logger.info(f"文件上传成功: {rel_path}, 存储键: {key}")
+            logger.info(f"File uploaded: {rel_path}, key: {key}")
             return True
 
         except (InitException, UploadException) as e:
-            logger.error(f"文件上传失败: {e}")
+            logger.error(f"File upload failed: {e}")
             return False
         except Exception as e:
-            logger.error(f"上传过程中发生未知错误: {e}")
+            logger.error(f"Unexpected error during upload: {e}")
             return False
 
     async def register_uploaded_files(self) -> bool:
         """
-        向API注册上传的文件
+        Register uploaded files with the API
         
         Returns:
-            bool: 注册是否成功
+            bool: Whether registration succeeded
         """
         if not self.sandbox_id:
-            logger.error("未设置沙盒ID，无法注册文件")
+            logger.error("Sandbox ID not set; cannot register files")
             return False
 
         if not self.uploaded_files:
-            logger.info("没有需要注册的文件，跳过注册")
+            logger.info("No files to register; skipping")
             return True
 
-        logger.info(f"准备注册文件到API，当前列表大小: {len(self.uploaded_files)}，沙盒ID: {self.sandbox_id}")
+        logger.info(f"Preparing to register files to API, count={len(self.uploaded_files)}, sandbox_id={self.sandbox_id}")
 
-        api_url_env = os.getenv("MAGIC_API_SERVICE_BASE_URL", "未设置")
+        api_url_env = os.getenv("MAGIC_API_SERVICE_BASE_URL", "unset")
 
         try:
             import aiohttp
 
-            # 检查API基础URL是否存在
+            # Ensure API base URL exists
             if not self.api_base_url:
-                logger.error("未设置MAGIC_API_SERVICE_BASE_URL环境变量，无法注册文件")
+                logger.error("MAGIC_API_SERVICE_BASE_URL is not set; cannot register files")
                 return False
 
-            # API地址
+            # API endpoint
             api_url = f"{self.api_base_url}api/v1/super-agent/file/process-attachments"
 
-            # 准备请求数据
+            # Build request payload
             request_data = {
                 "attachments": self.uploaded_files,
                 "sandbox_id": self.sandbox_id
             }
 
-            # 添加组织编码（如果有）
+            # Add organization code if present
             if self.organization_code:
                 request_data["organization_code"] = self.organization_code
 
-            # 准备请求头
+            # Prepare headers
             headers = {
                 "Content-Type": "application/json",
                 "User-Agent": "TOS-Uploader/1.0"
             }
 
-            # 打印请求详情
-            logger.info("========= 文件注册请求信息 =========")
-            logger.info(f"请求URL: {api_url}")
-            logger.info(f"请求头: {json.dumps(headers, ensure_ascii=False, indent=2)}")
-            logger.info(f"请求体: {json.dumps(request_data, ensure_ascii=False, indent=2)}")
-            logger.info("===================================")
+            # Log request details
+            logger.info("========= File registration request =========")
+            logger.info(f"Request URL: {api_url}")
+            logger.info(f"Headers: {json.dumps(headers, ensure_ascii=False, indent=2)}")
+            logger.info(f"Body: {json.dumps(request_data, ensure_ascii=False, indent=2)}")
+            logger.info("====================================")
 
-            # 发送请求
-            logger.info(f"开始向API注册上传的文件，沙盒ID: {self.sandbox_id}, 文件数量: {len(self.uploaded_files)}")
+            # Send request
+            logger.info(f"Registering uploaded files with API, sandbox_id={self.sandbox_id}, count={len(self.uploaded_files)}")
             async with aiohttp.ClientSession() as session:
                 async with session.post(api_url, json=request_data, headers=headers) as response:
                     response_text = await response.text()
-                    logger.info(f"响应状态码: {response.status}")
-                    logger.info(f"响应内容: {response_text}")
+                    logger.info(f"Response status: {response.status}")
+                    logger.info(f"Response body: {response_text}")
 
                     if response.status == 200:
                         try:
                             result = json.loads(response_text)
                             if result.get("code") == 1000:
-                                logger.info(f"文件注册API调用成功，总数: {result.get('data', {}).get('total', 0)}, "
-                                          f"成功: {result.get('data', {}).get('success', 0)}, "
-                                          f"跳过: {result.get('data', {}).get('skipped', 0)}")
-                                # 注册成功后清空列表
+                                logger.info(
+                                    f"File registration succeeded: total={result.get('data', {}).get('total', 0)}, "
+                                    f"success={result.get('data', {}).get('success', 0)}, "
+                                    f"skipped={result.get('data', {}).get('skipped', 0)}"
+                                )
+                                # Clear list after successful registration
                                 self.uploaded_files = []
                                 return True
                             else:
-                                logger.error(f"文件注册API返回错误: {result.get('message')}")
+                                logger.error(f"File registration API returned error: {result.get('message')}")
                         except json.JSONDecodeError:
-                            logger.error("响应不是有效的JSON格式")
+                            logger.error("Response is not valid JSON")
                     else:
-                        logger.error(f"文件注册请求失败，状态码: {response.status}")
+                        logger.error(f"File registration request failed, status: {response.status}")
 
             return False
         except Exception as e:
-            logger.error(f"注册上传文件时发生错误: {e}")
+            logger.error(f"Error while registering uploaded files: {e}")
             import traceback
             logger.error(traceback.format_exc())
             return False
 
     async def scan_existing_files(self, refresh: bool = False) -> None:
         """
-        扫描并上传已存在的文件
+        Scan and upload existing files
         
         Args:
-            refresh: 是否强制刷新所有文件
+            refresh: Whether to force refresh all files
         """
         if refresh:
             self.file_hashes.clear()
 
-        logger.info(f"开始扫描目录: {self.workspace_dir}")
+        logger.info(f"Scanning directory: {self.workspace_dir}")
 
-        # 递归扫描目录
+        # Recursively scan directory
         for root, _, files in os.walk(str(self.workspace_dir)):
             for file in files:
                 file_path = os.path.join(root, file)
                 await self.upload_file(file_path)
 
-        logger.info("目录扫描完成")
+        logger.info("Directory scan finished")
 
-        # 如果设置了沙盒ID，则注册上传的文件
+        # Register uploaded files when sandbox_id is set
         if self.sandbox_id and self.uploaded_files:
             await self.register_uploaded_files()
 
@@ -370,73 +372,73 @@ class TOSUploader:
                           refresh: bool = False, credentials_file: str = None,
                           task_id: str = None, organization_code: str = None) -> None:
         """
-        监控命令实现
+        Implementation of the watch command
         
         Args:
-            sandbox_id: 沙盒ID
-            workspace_dir: 工作空间目录
-            once: 是否只扫描一次已有文件
-            refresh: 是否强制刷新所有文件
-            credentials_file: TOS凭证文件路径
-            task_id: 任务ID（已弃用，保留参数兼容旧代码）
-            organization_code: 组织编码
+            sandbox_id: Sandbox ID
+            workspace_dir: Workspace directory
+            once: Whether to scan once only
+            refresh: Whether to force refresh all files
+            credentials_file: Path to TOS credential file
+            task_id: Task ID (deprecated, kept for backward compatibility)
+            organization_code: Organization code
         """
-        # 重新设置参数
+        # Reset parameters
         self.sandbox_id = sandbox_id
         self.workspace_dir = Path(workspace_dir).resolve()
         self.credentials_file = credentials_file
-        # self.task_id = task_id  # 不再使用task_id
+        # self.task_id = task_id  # task_id not used anymore
         self.organization_code = organization_code
 
-        # 初始化
+        # Initialize
         if not await self.initialize():
-            logger.error("初始化失败，退出命令")
+            logger.error("Initialization failed; exiting command")
             return
 
-        # 扫描现有文件
+        # Scan existing files
         await self.scan_existing_files(refresh)
 
-        # 如果只扫描一次，则结束
+        # If only scanning once, exit
         if once:
-            logger.info("已完成一次性扫描，退出")
+            logger.info("One-time scan completed; exiting")
             return
 
-        # 设置文件系统事件处理器
+        # Configure file system event handler
         event_handler = TOSFileEventHandler(self)
 
-        # 获取当前事件循环并传递给事件处理器
+        # Pass current loop to the handler
         loop = asyncio.get_running_loop()
         event_handler.set_loop(loop)
 
-        # 创建观察者
+        # Create observer
         observer = Observer()
         observer.schedule(event_handler, str(self.workspace_dir), recursive=True)
 
-        # 启动观察者
+        # Start observer
         observer.start()
-        logger.info(f"已开始监控目录: {self.workspace_dir}")
+        logger.info(f"Started watching directory: {self.workspace_dir}")
 
         try:
-            # 保持程序运行
+            # Keep process alive
             while True:
                 await asyncio.sleep(1)
         except KeyboardInterrupt:
-            logger.info("收到中断信号，停止监控")
+            logger.info("Interrupt received; stopping watcher")
         finally:
-            # 停止观察者
+            # Stop observer
             observer.stop()
             observer.join()
 
 
 class TOSFileEventHandler(FileSystemEventHandler):
-    """TOS文件事件处理器"""
+    """TOS file event handler"""
 
     def __init__(self, uploader: TOSUploader):
         """
-        初始化事件处理器
+        Initialize event handler
         
         Args:
-            uploader: TOS上传器实例
+            uploader: TOS uploader instance
         """
         super().__init__()
         self.uploader = uploader
@@ -447,121 +449,119 @@ class TOSFileEventHandler(FileSystemEventHandler):
         self._last_upload_time = time.time()
 
     def set_loop(self, loop):
-        """设置主事件循环"""
+        """Set main event loop"""
         self._main_loop = loop
-        # 启动消费者任务
+        # Start consumer task
         asyncio.run_coroutine_threadsafe(self._process_queue(), loop)
-        # 如果设置了任务ID，则启动定期注册任务
+        # Start periodic registration task if task_id is set
         if self.uploader.task_id:
             asyncio.run_coroutine_threadsafe(self._periodic_register(), loop)
 
     async def _process_queue(self):
-        """处理上传队列中的任务"""
+        """Process upload queue tasks"""
         while True:
             file_path = await self._upload_queue.get()
             try:
-                # 延迟1秒，等待文件操作完成
+                # Delay briefly to allow file operations to finish
                 await asyncio.sleep(1)
-                # 上传文件前已经会重新加载凭证，这里不需要额外调用
+                # Credentials are reloaded during upload; no extra call needed
                 uploaded = await self.uploader.upload_file(file_path)
-                # 更新最后上传时间
+                # Update last upload time
                 self._last_upload_time = time.time()
 
-                # 检查是否有上传成功的文件，并立即尝试注册
+                # If uploads succeeded, immediately attempt registration
                 if uploaded and self.uploader.uploaded_files and self.uploader.sandbox_id:
-                    logger.info(f"文件上传成功，尝试立即注册，已上传文件数: {len(self.uploader.uploaded_files)}")
+                    logger.info(f"Upload succeeded; attempting immediate registration, uploaded count: {len(self.uploader.uploaded_files)}")
                     asyncio.create_task(self.uploader.register_uploaded_files())
 
             except Exception as e:
-                logger.error(f"处理文件上传任务失败: {e}")
+                logger.error(f"Failed to process upload task: {e}")
             finally:
                 self._upload_queue.task_done()
 
     async def _periodic_register(self):
-        """定期注册上传的文件"""
+        """Periodically register uploaded files"""
         while True:
             try:
-                # 等待30秒后尝试注册
+                # Wait 30s before attempting registration
                 await asyncio.sleep(30)
 
-                # 如果有上传的文件且距上次上传超过20秒，则注册
+                # Register if files exist and no uploads in last 20s
                 current_time = time.time()
                 if (self.uploader.uploaded_files and 
                     self.uploader.sandbox_id and
                     current_time - self._last_upload_time > 20):
-                    logger.info("检测到30秒内无新上传，开始注册已上传文件")
+                    logger.info("No uploads in last 30s; registering uploaded files")
                     await self.uploader.register_uploaded_files()
             except Exception as e:
-                logger.error(f"定期注册任务异常: {e}")
-                # 继续循环，不因异常中断
+                logger.error(f"Periodic registration task failed: {e}")
+                # Continue loop despite errors
 
     def on_created(self, event: FileSystemEvent) -> None:
         """
-        处理文件创建事件
+        Handle file creation event
         
         Args:
-            event: 文件系统事件
+            event: File system event
         """
         if event.is_directory:
             return
 
-        logger.info(f"检测到文件创建: {event.src_path}")
+        logger.info(f"File created: {event.src_path}")
         self._schedule_upload(event.src_path)
 
     def on_modified(self, event: FileSystemEvent) -> None:
         """
-        处理文件修改事件
+        Handle file modification event
         
         Args:
-            event: 文件系统事件
+            event: File system event
         """
         if event.is_directory:
             return
 
-        logger.info(f"检测到文件修改: {event.src_path}")
+        logger.info(f"File modified: {event.src_path}")
         self._schedule_upload(event.src_path)
 
     def on_deleted(self, event: FileSystemEvent) -> None:
         """
-        处理文件删除事件
+        Handle file deletion event
         
         Args:
-            event: 文件系统事件
+            event: File system event
         """
         if event.is_directory:
             return
 
-        logger.info(f"检测到文件删除: {event.src_path}")
-        # 目前仅记录删除事件，不执行操作
-        # TODO: 未来可能需要实现从TOS中删除文件的功能
+        logger.info(f"File deleted: {event.src_path}")
+        # Currently only logs deletion; TOS deletion might be added later
 
     def on_moved(self, event: FileSystemEvent) -> None:
         """
-        处理文件移动事件
+        Handle file move event
         
         Args:
-            event: 文件系统事件
+            event: File system event
         """
         if event.is_directory:
             return
 
-        logger.info(f"检测到文件移动: {event.src_path} -> {event.dest_path}")
-        # 将移动视为删除原文件并创建新文件
-        # TODO: 未来可能需要实现从TOS中移动文件的功能
+        logger.info(f"File moved: {event.src_path} -> {event.dest_path}")
+        # Treat move as delete + create; future work may add move support
         self._schedule_upload(event.dest_path)
 
     def _schedule_upload(self, file_path: str) -> None:
         """
-        安排上传任务
+        Schedule an upload task
         
         Args:
-            file_path: 文件路径
+            file_path: File path
         """
         if not self._main_loop:
-            logger.error("主事件循环未设置，无法安排上传任务")
+            logger.error("Main event loop not set; cannot schedule upload task")
             return
 
-        # 使用线程安全的方式将任务添加到队列
+        # Push task to queue in a thread-safe way
         asyncio.run_coroutine_threadsafe(
             self._upload_queue.put(file_path), 
             self._main_loop
@@ -575,32 +575,32 @@ async def _run_tos_uploader_watch(sandbox_id: str = "default",
                             credentials_file: str = None,
                             task_id: str = None, 
                             organization_code: str = None):
-    """运行TOS上传工具的监控功能（内部异步函数）
+    """Run watcher for TOS uploader (internal async function)
     
     Args:
-        sandbox_id: 沙盒ID，用于生成上传路径
-        workspace_dir: 工作空间目录
-        once: 只扫描一次已有文件
-        refresh: 强制刷新所有文件
-        credentials_file: TOS凭证文件路径
-        task_id: 任务ID（已弃用，保留参数兼容旧代码）
-        organization_code: 组织编码
+        sandbox_id: Sandbox ID used to build upload path
+        workspace_dir: Workspace directory
+        once: Scan existing files only once
+        refresh: Force refresh all files
+        credentials_file: Path to TOS credential file
+        task_id: Task ID (deprecated, kept for compatibility)
+        organization_code: Organization code
     """
-    # 处理凭证文件路径
+    # Handle credential file path
     context_creds = "config/upload_credentials.json"
     if os.path.exists(context_creds) and not credentials_file:
         credentials_file = context_creds
-        logger.info(f"使用上下文凭证文件: {context_creds}")
+        logger.info(f"Using contextual credential file: {context_creds}")
 
-    # 打印实际使用的凭证文件路径
-    logger.info(f"凭证文件路径: {credentials_file or '未指定'}")
+    # Log actual credential file path
+    logger.info(f"Credential file path: {credentials_file or 'unspecified'}")
 
-    # 检查凭证文件是否存在
+    # Check credential file existence
     if credentials_file:
         if os.path.exists(credentials_file):
-            logger.info(f"凭证文件存在: {credentials_file}")
+            logger.info(f"Credential file exists: {credentials_file}")
         else:
-            logger.warning(f"指定的凭证文件不存在: {credentials_file}")
+            logger.warning(f"Specified credential file does not exist: {credentials_file}")
 
     tos_uploader = TOSUploader(
         sandbox_id, 
@@ -628,29 +628,29 @@ def start_tos_uploader_watcher(sandbox_id: str = "default",
                  use_context: bool = False,
                  task_id: str = None, 
                  organization_code: str = None):
-    """监控目录变化并自动上传到TOS的命令入口
+    """Entry point for watching directory changes and uploading to TOS
     
     Args:
-        sandbox_id: 沙盒ID，用于生成上传路径
-        workspace_dir: 工作空间目录
-        once: 只扫描一次已有文件
-        refresh: 强制刷新所有文件
-        credentials_file: TOS凭证文件路径
-        use_context: 是否使用上下文凭证
-        task_id: 任务ID
-        organization_code: 组织编码
+        sandbox_id: Sandbox ID used to build upload path
+        workspace_dir: Workspace directory
+        once: Scan existing files once
+        refresh: Force refresh all files
+        credentials_file: Path to TOS credential file
+        use_context: Whether to use contextual credentials
+        task_id: Task ID
+        organization_code: Organization code
     """
-    # 处理凭证文件路径
+    # Handle credential file path
     creds_file = credentials_file
 
-    # 如果指定了使用上下文，优先使用config中的凭证
+    # Prefer config credentials when use_context is enabled
     if use_context and not creds_file:
         context_creds = "config/upload_credentials.json"
         if os.path.exists(context_creds):
             creds_file = context_creds
-            logger.info(f"使用上下文凭证文件: {context_creds}")
+            logger.info(f"Using contextual credential file: {context_creds}")
 
-    # 运行异步任务
+    # Run async task
     asyncio.run(_run_tos_uploader_watch(
         sandbox_id=sandbox_id, 
         workspace_dir=workspace_dir, 

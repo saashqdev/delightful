@@ -3,7 +3,7 @@ Browser configuration module
 
 Provides browser configuration classes and related functionality for customizing browser behavior and features.
 Includes bypassing anti-scraping detection, performance optimization, user agent spoofing, and session persistence.
-"
+"""
 
 import logging
 import os

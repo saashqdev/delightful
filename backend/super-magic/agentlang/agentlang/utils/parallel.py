@@ -1,20 +1,20 @@
 """
-并行执行异步任务的工具类，提供类似 Golang 的并发模型
+Tool class for parallel execution of async tasks, providing a Golang-like concurrency model
 
-使用示例:
-    # 创建 Parallel 实例
+Usage example:
+    # Create Parallel instance
     parallel = Parallel()
     
-    # 添加异步任务
+    # Add async tasks
     parallel.add(async_function1, arg1, arg2, kwarg1=value1)
     parallel.add(async_function2)
     
-    # 运行所有任务并等待结果
+    # Run all tasks and wait for results
     results = await parallel.run()
     
-    # 也可以分开执行和等待
+    # Or execute and wait separately
     parallel.start()
-    # 做其他事情...
+    # Do other things...
     results = await parallel.wait()
 """
 
@@ -28,17 +28,17 @@ TaskResult = Tuple[int, Union[T, Exception]]
 
 class Parallel:
     """
-    并行执行异步任务的工具类，提供类似 Golang 的并发模型
+    Tool class for parallel execution of async tasks, providing a Golang-like concurrency model
     
-    支持添加多个异步任务，并发执行它们，然后等待所有任务完成并获取结果
+    Supports adding multiple async tasks, executing them concurrently, then waiting for all tasks to complete and getting results
     """
 
     def __init__(self, timeout: Optional[float] = None):
         """
-        初始化并行执行器
+        Initialize parallel executor
         
         Args:
-            timeout: 全局任务超时时间（秒），None 表示不设置超时
+            timeout: Global task timeout in seconds, None means no timeout
         """
         self._tasks: List[TaskItem] = []
         self._running_tasks: List[asyncio.Task] = []
@@ -47,18 +47,18 @@ class Parallel:
 
     def add(self, func: TaskFunc, *args: Any, **kwargs: Any) -> 'Parallel':
         """
-        添加一个异步任务
+        Add an async task
         
         Args:
-            func: 异步函数
-            args: 位置参数
-            kwargs: 关键字参数
+            func: Async function
+            args: Positional arguments
+            kwargs: Keyword arguments
             
         Returns:
-            self，支持链式调用
+            self, supports method chaining
         
         Raises:
-            RuntimeError: 如果尝试在已经启动后添加任务
+            RuntimeError: If trying to add tasks after starting
         """
         if self._started:
             raise RuntimeError("Cannot add tasks after starting")
@@ -69,16 +69,16 @@ class Parallel:
     async def _execute_task(self, index: int, func: TaskFunc, args: Tuple[Any, ...], 
                             kwargs: Dict[str, Any]) -> TaskResult:
         """
-        执行单个任务并捕获异常
+        Execute single task and capture exceptions
         
         Args:
-            index: 任务索引
-            func: 异步函数
-            args: 位置参数
-            kwargs: 关键字参数
+            index: Task index
+            func: Async function
+            args: Positional arguments
+            kwargs: Keyword arguments
             
         Returns:
-            (任务索引, 结果或异常)的元组
+            Tuple of (task index, result or exception)
         """
         try:
             result = await func(*args, **kwargs)
@@ -88,10 +88,10 @@ class Parallel:
 
     def start(self) -> None:
         """
-        启动所有任务的执行，但不等待结果
+        Start execution of all tasks without waiting for results
         
         Raises:
-            RuntimeError: 如果任务已经启动
+            RuntimeError: If tasks already started
         """
         if self._started:
             raise RuntimeError("Tasks already started")
@@ -104,15 +104,15 @@ class Parallel:
 
     async def wait(self) -> List[Union[Any, Exception]]:
         """
-        等待所有任务完成并返回结果
+        Wait for all tasks to complete and return results
         
-        如果任务还未启动，会自动启动任务
+        If tasks haven't started, will automatically start them
         
         Returns:
-            与添加任务相同顺序的结果列表，如果任务失败则对应位置为异常对象
+            List of results in same order as tasks were added, exception objects at position if task failed
             
         Raises:
-            asyncio.TimeoutError: 如果设置了超时且任务执行超时
+            asyncio.TimeoutError: If timeout is set and task execution exceeds it
         """
         if not self._started:
             self.start()
@@ -120,47 +120,47 @@ class Parallel:
         results_with_index: List[TaskResult] = []
 
         try:
-            # 等待所有任务完成或超时
+            # Wait for all tasks to complete or timeout
             done, pending = await asyncio.wait(
                 self._running_tasks, 
                 timeout=self._timeout,
                 return_when=asyncio.ALL_COMPLETED
             )
 
-            # 如果有未完成的任务，则超时
+            # If there are uncompleted tasks, timeout occurred
             if pending:
-                # 取消所有未完成的任务
+                # Cancel all uncompleted tasks
                 for task in pending:
                     task.cancel()
 
-                # 等待取消操作完成
+                # Wait for cancellation to complete
                 await asyncio.gather(*pending, return_exceptions=True)
                 raise asyncio.TimeoutError(f"{len(pending)} tasks did not complete within the timeout")
 
-            # 收集结果
+            # Collect results
             for task in done:
                 results_with_index.append(task.result())
 
         finally:
-            # 重置状态，允许再次运行
+            # Reset state to allow running again
             self._started = False
             self._running_tasks = []
 
-        # 按原始顺序整理结果
+        # Sort results by original order
         results_with_index.sort(key=lambda x: x[0])
         return [result for _, result in results_with_index]
 
     async def run(self) -> List[Union[Any, Exception]]:
         """
-        启动所有任务并等待它们完成，返回结果
+        Start all tasks and wait for them to complete, returning results
         
-        这是 start() 和 wait() 的组合快捷方法
+        This is a convenience method combining start() and wait()
         
         Returns:
-            与添加任务相同顺序的结果列表，如果任务失败则对应位置为异常对象
+            List of results in same order as tasks were added, exception objects at position if task failed
             
         Raises:
-            asyncio.TimeoutError: 如果设置了超时且任务执行超时
+            asyncio.TimeoutError: If timeout is set and task execution exceeds it
         """
         self.start()
         return await self.wait()
@@ -169,32 +169,32 @@ class Parallel:
     async def execute(funcs: List[TaskFunc], *args_list: List[Any], 
                      timeout: Optional[float] = None, **kwargs_list: Dict[str, Any]) -> List[Any]:
         """
-        静态便捷方法，执行多个相同参数的异步函数
+        Static convenience method to execute multiple async functions with same parameters
         
         Args:
-            funcs: 异步函数列表
-            args_list: 每个函数的位置参数列表的列表
-            timeout: 超时时间（秒）
-            kwargs_list: 每个函数的关键字参数字典的列表
+            funcs: List of async functions
+            args_list: List of positional argument lists for each function
+            timeout: Timeout in seconds
+            kwargs_list: List of keyword argument dictionaries for each function
             
         Returns:
-            结果列表
+            List of results
             
         Raises:
-            asyncio.TimeoutError: 如果设置了超时且任务执行超时
+            asyncio.TimeoutError: If timeout is set and task execution exceeds it
         """
         parallel = Parallel(timeout=timeout)
 
-        # 如果提供了多组参数
+        # If multiple argument sets are provided
         if args_list and isinstance(args_list[0], list):
-            # 检查参数数量是否匹配
+            # Check if number of arguments matches
             if len(args_list) != len(funcs):
                 raise ValueError("Number of argument lists must match number of functions")
 
             for i, func in enumerate(funcs):
                 parallel.add(func, *args_list[i])
         else:
-            # 对所有函数使用相同的参数
+            # Use same arguments for all functions
             common_args = args_list
             for func in funcs:
                 parallel.add(func, *common_args)

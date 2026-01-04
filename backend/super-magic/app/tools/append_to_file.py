@@ -194,12 +194,12 @@ class AppendToFile(AbstractFileTool[AppendToFileParams], WorkspaceGuardTool[Appe
         if not normalized_append.endswith("\n"):
             normalized_append += "\n"
 
-        # 计算行数
+        # Calculate line count
         original_lines = original_content.count('\n') + (0 if original_content.endswith('\n') or not original_content else 1)
         new_lines = final_content.count('\n') + (0 if final_content.endswith('\n') or not final_content else 1)
         added_lines = normalized_append.count('\n') + (0 if normalized_append.endswith('\n') or not normalized_append else 1)
 
-        # 计算文件大小
+        # Calculate file size
         original_size = len(original_content.encode('utf-8'))
         new_size = len(final_content.encode('utf-8'))
         size_change = new_size - original_size

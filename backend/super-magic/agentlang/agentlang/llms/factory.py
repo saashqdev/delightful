@@ -201,22 +201,22 @@ class LLMFactory:
         if stop:
             request_params["stop"] = stop
 
-        # 添加工具（如果提供且模型支持工具使用）
+        # Add tools (if provided and model supports tool use)
         if tools and llm_config.supports_tool_use:
             request_params["tools"] = tools
-            # 添加 tool_choice 参数，设置为 "auto" 以允许 LLM 返回多个工具调用
+            # Add tool_choice parameter, set to "auto" to allow LLM to return multiple tool calls
             request_params["tool_choice"] = "auto"
 
-        # 添加额外参数
+        # Add extra parameters
         for key, value in llm_config.extra_params.items():
             request_params[key] = value
 
-        # 发送请求并获取响应
-        # logger.debug(f"发送聊天完成请求到 {llm_config.name}: {request_params}")
+        # Send request and get response
+        # logger.debug(f"Sending chat completion request to {llm_config.name}: {request_params}")
         try:
             response = await client.chat.completions.create(**request_params)
 
-            # 使用 TokenUsageTracker 记录 token 使用情况
+            # Use TokenUsageTracker to record token usage
             cls.token_tracker.record_llm_usage(
                 response.usage,
                 model_id,

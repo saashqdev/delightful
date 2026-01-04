@@ -35,62 +35,62 @@ class TaskMode(str, Enum):
 
 class ChatClientMessage(ClientMessage):
     """
-    聊天消息类型
+    Chat message type
     
-    用于处理用户发送的聊天消息
+    For handling user-sent chat messages
     """
     type: str = MessageType.CHAT.value
     prompt: str
     attachments: List[Dict[str, Any]] = []
-    context_type: ContextType = ContextType.NORMAL  # 默认为普通消息
-    task_mode: TaskMode = TaskMode.PLAN  # 任务模式，默认为规划模式
+    context_type: ContextType = ContextType.NORMAL  # Default to normal message
+    task_mode: TaskMode = TaskMode.PLAN  # Task mode, defaults to planning mode
 
     @validator('attachments', each_item=True)
     def validate_attachment(cls, v):
         if not isinstance(v, dict):
-            raise ValueError("附件必须是对象")
+            raise ValueError("Attachment must be an object")
 
         required_fields = ["file_tag", "filename", "file_key", "file_size", "file_url"]
 
         for field in required_fields:
             if field not in v:
-                raise ValueError(f"附件必须包含 '{field}' 字段")
+                raise ValueError(f"Attachment must contain '{field}' field")
 
-        # 验证字符串类型字段
+        # Validate string type fields
         string_fields = ["file_tag", "filename", "file_key", "file_url"]
         for field in string_fields:
             if not isinstance(v[field], str):
-                raise ValueError(f"附件的 '{field}' 必须是字符串")
+                raise ValueError(f"Attachment's '{field}' must be a string")
 
-        # 验证文件大小必须是整数
+        # Validate file size must be a number
         if not isinstance(v["file_size"], (int, float)):
-            raise ValueError("附件的 'file_size' 必须是数字类型")
+            raise ValueError("Attachment's 'file_size' must be a number type")
 
         return v
 
 
 class InitClientMessage(ClientMessage):
     """
-    初始化消息类型
+    Initialization message type
     
-    用于工作区初始化
+    For workspace initialization
     """
     type: str = MessageType.INIT.value
-    message_subscription_config: Optional[MessageSubscriptionConfig] = None  # 消息订阅配置，可选字段
-    sts_token_refresh: Optional[STSTokenRefreshConfig] = None  # STS Token刷新配置，可选字段
+    message_subscription_config: Optional[MessageSubscriptionConfig] = None  # Message subscription config, optional field
+    sts_token_refresh: Optional[STSTokenRefreshConfig] = None  # STS Token refresh config, optional field
     metadata: Optional[Dict[str, Any]] = Field(default_factory=dict)
-    upload_config: Optional[Dict[str, Any]] = None  # 上传配置，可包含平台类型和临时凭证
+    upload_config: Optional[Dict[str, Any]] = None  # Upload config, may include platform type and temporary credentials
 
     @validator('message_subscription_config')
     def validate_message_subscription_config(cls, v):
         if Environment.is_dev():
             return v
         if v is None:
-            raise ValueError("消息订阅配置 'message_subscription_config' 不能为空")
+            raise ValueError("Message subscription config 'message_subscription_config' cannot be empty")
         return v
 
     @validator('metadata')
     def validate_metadata(cls, v):
         if v is None:
-            raise ValueError("元数据 'metadata' 不能为空")
+            raise ValueError("Metadata 'metadata' cannot be empty")
         return v

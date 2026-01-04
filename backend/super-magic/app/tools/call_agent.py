@@ -13,53 +13,53 @@ logger = get_logger(__name__)
 
 
 class CallAgentParams(BaseToolParams):
-    """调用智能体参数"""
+    """Call agent parameters"""
     agent_name: str = Field(
         ...,
-        description="要调用的智能体名称"
+        description="The name of the agent to call"
     )
     agent_id: str = Field(
         ...,
-        description="本次任务的唯一标识，人类可读且有辨识度，不允许重复，由单词或短语组成，例如 'letsmagic-ai-background-research'"
+        description="Unique identifier for this task, human-readable and distinctive, must not be repeated, composed of words or phrases, e.g. 'letsmagic-ai-background-research'"
     )
     task_background: str = Field(
         ...,
-        description="用户原始需求与背景信息（充足的无损的背景信息总结），提供用户或上文中最原始的情况以及当前全局情况描述，避免产生致命的信息差，导致子Agent做出了超出要求以外的事情。你需要不厌其烦地向每个智能体解释清楚这个背景信息，确保每个智能体都能充分理解背景信息，避免产生信息差。不得少于300字。"
+        description="User's original requirements and background information (comprehensive lossless background information summary), provide the most original situation from user or context and current global situation description, avoid fatal information gaps that cause sub-Agent to do things beyond requirements. You need to tirelessly explain this background information to each agent, ensure each agent fully understands background information, avoid information gaps. Must be at least 300 words."
     )
     task_description: str = Field(
         ...,
-        description="任务的描述（被调用的智能体只需要干这个事），重点是被调用的智能体所负责的高度拆解后的任务的具体描述，而非整体的任务描述，描述要足够简单精确，避免被调用的智能体做出超出要求以外的事情或耗费过多时间。不得少于 200 字。"
+        description="Task description (what the called agent needs to do), focus is on the specific description of the highly decomposed task that the called agent is responsible for, not the overall task description, description should be simple and precise enough, avoid the called agent doing things beyond requirements or spending too much time. Must be at least 200 words."
     )
     task_completion_standard: str = Field(
         ...,
-        description="任务完成与验收标准（怎么才算干完了），需要量化，如产出一份文件名为 XXX 的精美的 HTML 文件。不得少于 100 字。"
+        description="Task completion and acceptance criteria (how to determine it's done), needs to be quantified, such as producing a beautifully formatted HTML file named XXX. Must be at least 100 words."
     )
     reference_files: List[str] = Field(
         ...,
-        description="参考文件路径列表，包含对任务有参考价值的文件，如 ['./webview_reports/foo.md', './webview_reports/bar.md']。这些文件将作为任务的背景资料或参考依据，确保智能体充分地理解和更好地完成任务。"
+        description="List of reference file paths, containing files valuable for the task, such as ['./webview_reports/foo.md', './webview_reports/bar.md']. These files will serve as background materials or reference basis for the task, ensuring the agent fully understands and better completes the task."
     )
 
 @tool()
 class CallAgent(AbstractFileTool[CallAgentParams]):
     """
-    调用其它智能体来完成任务。
-    每一次调用的目标要足够小，且足够明确，让智能体能够以最高效的方式完成任务。
+    Call other agents to complete tasks.
+    Each call should have a small enough and clear enough goal to allow the agent to complete the task in the most efficient way.
     """
 
     def get_prompt_hint(self) -> str:
-        """生成包含工具详细使用说明的XML格式提示信息"""
+        """Generate XML-formatted prompt information with detailed tool usage instructions"""
         hint = """<tool name="call_agent">
   <examples>
-    <![CDATA[[以下是 call_agent 工具的使用示例，你需要严格参照示例来进行 call_agent 调用。]]>
+    <![CDATA[[The following are usage examples of the call_agent tool, you need to strictly follow the examples to make call_agent calls.]]>
     <example>
       <![CDATA[
 call_agent(
-  agent_name: "web-browser",  # 或其他适合执行网页浏览和文件下载任务的智能体
+  agent_name: "web-browser",  # Or other agent suitable for web browsing and file download tasks
   agent_id: "aiga-pdf-download",
-  task_background: "用户的原始需求是：「打开 https://educators.aiga.org/aiga-designer-2025/ 网站，找到并下载'AIGA Design 2025 Summary Document'中的PDF文件，然后将下载的PDF转换为Markdown格式」，已经较为明确，由于你是一名专业的网络浏览专家，擅长通过浏览器操作收集、整理和分析信息，因此我决定将这个任务全权交给你来执行，我会在你完成后检查你的完成情况，验收后交付给用户。",
-  task_description: "你将全权负责用户原始需求中的大部分工作，你需要：1）使用浏览器打开 https://educators.aiga.org/aiga-designer-2025/ 网页，找到网页中的'AIGA Design 2025 Summary Document' PDF 文件下载链接，并下载PDF文件；2）将下载的PDF文件转换为Markdown格式",
-  task_completion_standard: "成功下载PDF文件并转换为Markdown格式的文本文件，保留原文档的主要内容和结构",
-  reference_files: []  # 无需参考文件
+  task_background: "The user's original request is: 'Open the https://educators.aiga.org/aiga-designer-2025/ website, find and download the PDF file from 'AIGA Design 2025 Summary Document', then convert the downloaded PDF to Markdown format'. This is fairly clear. Since you are a professional web browsing expert, skilled at collecting, organizing and analyzing information through browser operations, I have decided to delegate this task entirely to you. I will check your completion afterwards and deliver to the user after acceptance.",
+  task_description: "You will be fully responsible for most of the user's original request. You need to: 1) Use the browser to open https://educators.aiga.org/aiga-designer-2025/ webpage, find the 'AIGA Design 2025 Summary Document' PDF file download link on the page, and download the PDF file; 2) Convert the downloaded PDF file to Markdown format",
+  task_completion_standard: "Successfully download the PDF file and convert it to Markdown format text file, preserving the main content and structure of the original document",
+  reference_files: []  # No reference files needed
 )
       ]]>
     </example>
@@ -169,48 +169,48 @@ call_agent(
 
     async def execute(self, tool_context: ToolContext, params: CallAgentParams) -> ToolResult:
         """
-        执行代理调用
+        Execute agent call
 
         Args:
-            tool_context: 工具上下文
-            params: 参数对象，包含代理名称和任务描述
+            tool_context: Tool context
+            params: Parameter object containing agent name and task description
 
         Returns:
-            ToolResult: 包含操作结果
+            ToolResult: Contains operation result
         """
         try:
-            # 根据 agent_name 实例化 Agent
+            # Instantiate Agent based on agent_name
             from app.core.context.agent_context import AgentContext
             from app.magic.agent import Agent
             new_agent_context = AgentContext()
             agent = Agent(params.agent_name, agent_id=params.agent_id, agent_context=new_agent_context)
 
-            # 调用 agent 的 run 方法
-            query_content = f"背景信息（充足的无损的背景信息总结）: {params.task_background}\n任务描述（你所负责的内容，你只需要干这个事）: {params.task_description}\n任务完成标准（怎么样才算干完了）: {params.task_completion_standard}"
+            # Call agent's run method
+            query_content = f"Background information (comprehensive lossless background information summary): {params.task_background}\nTask description (what you are responsible for, you only need to do this): {params.task_description}\nTask completion criteria (how to determine it's done): {params.task_completion_standard}"
 
-            # 添加参考文件列表及元信息
+            # Add reference file list and metadata
             if params.reference_files and len(params.reference_files) > 0:
-                query_content += "\n\n参考文件列表："
+                query_content += "\n\nReference file list:"
                 for file_path in params.reference_files:
                     file_info = get_file_info(file_path)
                     query_content += f"\n- {file_info}"
 
             result = await agent.run(query_content)
 
-            # 确保result是字符串类型
+            # Ensure result is string type
             if result is None:
-                result = f"智能体 {params.agent_name} 执行成功，但没有返回结果"
+                result = f"Agent {params.agent_name} executed successfully, but returned no result"
             elif not isinstance(result, str):
                 result = str(result)
 
             return ToolResult(content=result)
 
         except Exception as e:
-            logger.exception(f"调用智能体失败: {e!s}")
-            return ToolResult(error=f"调用智能体失败: {e!s}")
+            logger.exception(f"Failed to call agent: {e!s}")
+            return ToolResult(error=f"Failed to call agent: {e!s}")
 
     async def get_before_tool_call_friendly_content(self, tool_context: ToolContext, arguments: Dict[str, Any] = None) -> str:
         """
-        获取工具调用前的友好内容
+        Get friendly content before tool call
         """
         return ""

@@ -1,5 +1,5 @@
 """
-文件监听服务，启动上传文件进程
+File listener service, starts file upload process
 """
 
 import asyncio
@@ -16,11 +16,11 @@ from app.utils.executable_utils import get_executable_command
 logger = get_logger(__name__)
 
 def run_storage_uploader_process(cmd, project_root, log_level="INFO"):
-    """存储上传器子进程运行的函数"""
+    """Storage uploader subprocess running function"""
     try:
         setup_logger(log_name="storage_uploader_subprocess", console_level=log_level)
         logger_proc = get_logger("storage_uploader_subprocess_logger")
-        logger_proc.info(f"存储上传器子进程启动: {' '.join(cmd)}")
+        logger_proc.info(f"Storage uploader subprocess started: {' '.join(cmd)}")
         process = subprocess.Popen(
             cmd,
             stdout=subprocess.PIPE,
@@ -32,36 +32,36 @@ def run_storage_uploader_process(cmd, project_root, log_level="INFO"):
         )
         for line in iter(process.stdout.readline, ''):
             if line:
-                logger_proc.info(f"存储上传器: {line.rstrip()}")
+                logger_proc.info(f"Storage uploader: {line.rstrip()}")
         process.stdout.close()
         return_code = process.wait()
-        logger_proc.info(f"存储上传进程已退出，返回码: {return_code}")
+        logger_proc.info(f"Storage upload process exited, return code: {return_code}")
     except Exception as e:
-        logger.error(f"存储上传器子进程异常: {e}")
+        logger.error(f"Storage uploader subprocess exception: {e}")
         import traceback
         logger.error(traceback.format_exc())
 
 class FileListenerService:
-    """文件监听服务，启动上传文件的进程"""
+    """File listener service, starts file upload process"""
 
     @staticmethod
     def register_standard_listeners(agent_context: AgentContext) -> None:
         """
-        注册标准的文件相关事件监听器
+        Register standard file-related event listeners
 
         Args:
-            agent_context: 代理上下文对象
+            agent_context: Agent context object
         """
         agent_context.add_event_listener(
             EventType.AFTER_INIT,
             FileListenerService._handle_after_init
         )
-        logger.info("已注册文件监听服务，用于在初始化后启动存储上传器。")
+        logger.info("Registered file listener service for starting storage uploader after initialization.")
 
     @staticmethod
     async def _start_uploader_process(agent_context: AgentContext) -> None:
         """
-        启动存储上传程序（使用ProcessManager创建和管理子进程）
+        Start storage upload program (using ProcessManager to create and manage subprocess)
         """
         try:
             project_root = Path(__file__).resolve().parent.parent.parent.parent
@@ -82,14 +82,14 @@ class FileListenerService:
             if sandbox_id:
                 cmd.extend(["--sandbox", sandbox_id])
             else:
-                logger.warning("未在AgentContext中找到沙盒ID，上传程序可能无法正常注册文件。")
+                logger.warning("Sandbox ID not found in AgentContext, uploader may not be able to register files properly.")
 
             if organization_code:
                 cmd.extend(["--organization-code", organization_code])
 
-            logger.info(f"准备启动存储上传程序 (ProcessManager模式): {' '.join(cmd)}")
-            sandbox_info = f"沙盒ID: {sandbox_id}" if sandbox_id else "未设置沙盒ID"
-            logger.info(f"使用 {sandbox_info}")
+            logger.info(f"Preparing to start storage upload program (ProcessManager mode): {' '.join(cmd)}")
+            sandbox_info = f"Sandbox ID: {sandbox_id}" if sandbox_id else "Sandbox ID not set"
+            logger.info(f"Using {sandbox_info}")
 
             await FileListenerService._terminate_existing_uploader()
 
@@ -104,16 +104,16 @@ class FileListenerService:
                 log_level_to_pass
             )
 
-            logger.info(f"存储上传器子进程已启动，PID: {pid}")
+            logger.info(f"Storage uploader subprocess started, PID: {pid}")
 
         except Exception as e:
-            logger.error(f"启动存储上传程序失败: {e}")
+            logger.error(f"Failed to start storage upload program: {e}")
             import traceback
             logger.error(traceback.format_exc())
 
     @staticmethod
     async def _terminate_existing_uploader() -> None:
-        """终止现有的上传进程"""
+        """Terminate existing upload process"""
         try:
             process_manager = ProcessManager.get_instance()
             worker_name = "storage_uploader"
@@ -121,19 +121,19 @@ class FileListenerService:
             if worker_info and worker_name in worker_info:
                 success = await process_manager.stop_worker(worker_name)
                 if success:
-                    logger.info("已终止之前的存储上传子进程。")
+                    logger.info("Terminated previous storage upload subprocess.")
                 else:
-                    logger.warning("终止之前的存储上传子进程失败。")
+                    logger.warning("Failed to terminate previous storage upload subprocess.")
         except Exception as e:
-            logger.error(f"终止之前的上传进程失败: {e}")
+            logger.error(f"Failed to terminate previous upload process: {e}")
 
     @staticmethod
     async def _handle_after_init(event: Event) -> None:
         """
-        处理初始化完成事件，启动存储上传程序。
+        Handle initialization completion event, start storage upload program.
 
         Args:
-            event: 事件对象，应包含 agent_context 在 event.data 中。
+            event: Event object, should contain agent_context in event.data.
         """
         try:
             agent_context = event.data.agent_context
@@ -143,16 +143,16 @@ class FileListenerService:
                 if not credentials_dir.exists():
                     try:
                         credentials_dir.mkdir(parents=True, exist_ok=True)
-                        logger.info(f"已创建凭证目录: {credentials_dir}")
+                        logger.info(f"Created credentials directory: {credentials_dir}")
                     except Exception as e_mkdir:
-                        logger.error(f"创建凭证目录失败 ({credentials_dir}): {e_mkdir}")
+                        logger.error(f"Failed to create credentials directory ({credentials_dir}): {e_mkdir}")
 
                 asyncio.create_task(FileListenerService._start_uploader_process(agent_context))
-                logger.info("存储上传程序启动任务已创建 (ProcessManager模式)。")
+                logger.info("Storage upload program startup task created (ProcessManager mode).")
 
         except AttributeError:
-             logger.error("处理初始化事件失败：事件数据结构不符合预期 (缺少 agent_context)。")
+             logger.error("Failed to handle initialization event: Event data structure does not meet expectations (missing agent_context).")
         except Exception as e:
-            logger.error(f"处理初始化事件并启动上传程序时出错: {e}")
+            logger.error(f"Error handling initialization event and starting upload program: {e}")
             import traceback
             logger.error(traceback.format_exc())

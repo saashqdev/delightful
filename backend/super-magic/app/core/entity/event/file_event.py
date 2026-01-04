@@ -1,7 +1,7 @@
 """
-文件事件相关数据类定义
+File event related data class definitions
 
-用于定义与文件操作相关的事件数据结构
+Used to define event data structures related to file operations
 """
 from agentlang.context.tool_context import ToolContext
 from agentlang.event.common import BaseEventData
@@ -9,9 +9,9 @@ from agentlang.event.event import EventType
 
 
 class FileEventData(BaseEventData):
-    """文件事件数据类"""
+    """File event data class"""
 
-    filepath: str  # 文件路径
-    event_type: EventType  # 事件类型
-    tool_context: ToolContext  # 工具上下文 
-    is_screenshot: bool = False  # 是否是截图
+    filepath: str  # File path
+    event_type: EventType  # Event type
+    tool_context: ToolContext  # Tool context 
+    is_screenshot: bool = False  # Whether it's a screenshot

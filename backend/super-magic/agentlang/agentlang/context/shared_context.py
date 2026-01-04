@@ -1,7 +1,7 @@
 """
-共享上下文模块
+Shared context module
 
-提供全局统一的 AgentSharedContext，用于在多个代理实例间共享状态
+Provides global unified AgentSharedContext for sharing state among multiple agent instances
 """
 
 import json
@@ -15,100 +15,100 @@ logger = get_logger(__name__)
 T = TypeVar('T')
 
 class AgentSharedContext:
-    """共享上下文类
+    """Shared context class
     
-    提供全局统一的共享状态，支持字段扩展
+    Provides global unified shared state, supports field extensions
     """
 
     def __init__(self):
-        """初始化共享数据"""
-        logger.debug("初始化AgentSharedContext")
-        # 初始化字段
+        """Initialize shared data"""
+        logger.debug("Initializing AgentSharedContext")
+        # Initialize fields
         self._initialize_fields()
 
-        # 字段字典
+        # Field dictionary
         self._fields = {}
 
-        # 字段类型字典
+        # Field type dictionary
         self._field_types = {}
 
-        # 初始化状态标记
+        # Initialization status flag
         self._initialized = False
 
     def _initialize_fields(self):
-        """初始化字段"""
-        # 设置活动时间相关字段
+        """Initialize fields"""
+        # Set activity time related fields
         self.last_activity_time = datetime.now()
 
-        # 设置默认超时时间
-        default_timeout = 3600  # 默认1小时
+        # Set default timeout
+        default_timeout = 3600  # Default 1 hour
         timeout_seconds = default_timeout
 
         try:
             from agentlang.environment import Environment
             timeout_seconds = Environment.get_agent_idle_timeout()
         except (ImportError, AttributeError) as e:
-            logger.warning(f"获取超时设置失败: {e!s}，使用默认值 {default_timeout}秒")
+            logger.warning(f"Failed to get timeout setting: {e!s}, using default value {default_timeout} seconds")
 
         self.idle_timeout = timedelta(seconds=timeout_seconds)
 
     def is_initialized(self) -> bool:
-        """检查是否已完成初始化
+        """Check if initialization is complete
         
         Returns:
-            bool: 是否已初始化
+            bool: Whether initialized
         """
         return self._initialized
 
     def set_initialized(self, value: bool = True) -> None:
-        """设置初始化状态
+        """Set initialization status
         
         Args:
-            value: 初始化状态值，默认为True
+            value: Initialization status value, defaults to True
         """
         self._initialized = value
-        logger.debug(f"设置初始化状态为: {value}")
+        logger.debug(f"Set initialization status to: {value}")
 
     def update_activity_time(self) -> None:
-        """更新活动时间"""
+        """Update activity time"""
         self.last_activity_time = datetime.now()
-        logger.debug(f"更新活动时间: {self.last_activity_time}")
+        logger.debug(f"Updated activity time: {self.last_activity_time}")
 
     def is_idle_timeout(self) -> bool:
-        """检查是否超时"""
+        """Check if timeout occurred"""
         current_time = datetime.now()
         is_timeout = (current_time - self.last_activity_time) > self.idle_timeout
         if is_timeout:
-            logger.info(f"代理已超时: 上次活动时间 {self.last_activity_time}, 当前时间 {current_time}")
+            logger.info(f"Agent timed out: last activity time {self.last_activity_time}, current time {current_time}")
         return is_timeout
 
     def register_field(self, field_name: str, field_value: Any, field_type: Optional[Type[T]] = None) -> None:
-        """注册字段
+        """Register field
         
         Args:
-            field_name: 字段名称
-            field_value: 字段值
-            field_type: 字段类型，可选
+            field_name: Field name
+            field_value: Field value
+            field_type: Field type, optional
         """
         if field_name in self._fields:
-            logger.warning(f"字段 '{field_name}' 已存在，将被覆盖")
+            logger.warning(f"Field '{field_name}' already exists, will be overwritten")
 
         self._fields[field_name] = field_value
 
         if field_type is not None:
             self._field_types[field_name] = field_type
-            logger.debug(f"注册字段 '{field_name}' 类型为 {field_type.__name__}")
+            logger.debug(f"Registered field '{field_name}' with type {field_type.__name__}")
         elif field_value is not None:
             self._field_types[field_name] = type(field_value)
-            logger.debug(f"根据值自动推断字段 '{field_name}' 类型为 {type(field_value).__name__}")
+            logger.debug(f"Auto-inferred field '{field_name}' type as {type(field_value).__name__} from value")
 
-        logger.info(f"注册字段 '{field_name}' 成功")
+        logger.info(f"Successfully registered field '{field_name}'")
 
     def register_fields(self, fields: Dict[str, Union[Any, Tuple[Any, Type]]]) -> None:
-        """批量注册多个字段
+        """Register multiple fields in batch
         
         Args:
-            fields: 字段字典，键为字段名，值可以是字段值或者(字段值, 字段类型)元组
+            fields: Field dictionary, keys are field names, values can be field values or (field_value, field_type) tuples
         
         Examples:
             >>> shared_context.register_fields({
@@ -124,7 +124,7 @@ class AgentSharedContext:
             else:
                 self.register_field(field_name, field_data)
 
-        logger.debug(f"批量注册了 {len(fields)} 个字段")
+        logger.debug(f"Registered {len(fields)} fields in batch")
 
     def update_field(self, field_name: str, field_value: Any, field_type: Optional[Type[T]] = None) -> None:
         """更新字段值，如果字段不存在则自动注册
@@ -135,12 +135,12 @@ class AgentSharedContext:
             field_type: 字段类型，可选，仅当字段不存在时使用
         """
         if not self.has_field(field_name):
-            logger.info(f"字段 '{field_name}' 不存在，自动注册")
+            logger.info(f"Field '{field_name}' does not exist, auto-registering")
             self.register_field(field_name, field_value, field_type)
             return
 
         self._fields[field_name] = field_value
-        logger.debug(f"更新字段 '{field_name}' 成功")
+        logger.debug(f"Updated field '{field_name}' successfully")
 
     def get_field(self, field_name: str) -> Any:
         """获取字段
@@ -155,7 +155,7 @@ class AgentSharedContext:
             KeyError: 如果字段不存在
         """
         if field_name not in self._fields:
-            logger.error(f"字段 '{field_name}' 不存在")
+            logger.error(f"Field '{field_name}' does not exist")
             raise KeyError(f"字段 '{field_name}' 不存在")
 
         return self._fields[field_name]
@@ -282,11 +282,11 @@ class AgentSharedContext:
         # 确保不共享引用
         new_id = id(AgentSharedContext)
         if old_id == new_id:
-            logger.error(f"重置失败：新旧实例是同一个对象 (id={old_id})")
+            logger.error(f"Reset failed: new and old instances are the same object (id={old_id})")
         else:
-            logger.info(f"重置共享上下文成功：旧id={old_id}, 新id={new_id}")
+            logger.info(f"Shared context reset successfully: old id={old_id}, new id={new_id}")
             # 新实例的初始化状态已经是 False，这里记录一下日志
-            logger.debug("新的共享上下文初始化状态已重置为 False")
+            logger.debug("New shared context initialization state has been reset to False")
 
 
 # 创建单例实例

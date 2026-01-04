@@ -1,7 +1,7 @@
 """
-工具上下文类
+Tool context class
 
-为工具提供执行环境所需的上下文信息
+Provides context information required for tool execution environment
 """
 
 import uuid
@@ -9,63 +9,63 @@ from typing import Any, Dict, Optional, Type, TypeVar, cast
 
 from agentlang.context.base_context import BaseContext
 
-# 定义泛型类型变量，用于扩展类型
+# Define generic type variable for extension types
 T = TypeVar('T')
 
 class ToolContext(BaseContext):
     """
-    工具上下文类，提供工具执行所需的上下文信息
+    Tool context class, provides context information required for tool execution
     """
 
     def __init__(
         self, tool_call_id: str = "", tool_name: str = "", arguments: Dict[str, Any] = None, metadata: Dict[str, Any] = None
     ):
         """
-        初始化工具上下文
+        Initialize tool context
 
         Args:
-            tool_call_id: 工具调用ID
-            tool_name: 工具名称
-            arguments: 工具参数
-            metadata: 初始元数据，通常继承自 AgentContext 的 metadata
+            tool_call_id: Tool call ID
+            tool_name: Tool name
+            arguments: Tool parameters
+            metadata: Initial metadata, usually inherited from AgentContext's metadata
         """
         super().__init__()
 
         self.id = str(uuid.uuid4())
 
-        # 工具特定属性
+        # Tool-specific attributes
         self.tool_call_id = tool_call_id
         self.tool_name = tool_name
         self.arguments = arguments or {}
 
-        # 初始化元数据
+        # Initialize metadata
         self._metadata = metadata.copy() if metadata else {}
 
-        # 扩展上下文字典，用于存储各类扩展
+        # Extension context dictionary for storing various extensions
         self._extensions: Dict[str, Any] = {}
 
     def to_dict(self) -> Dict[str, Any]:
         """
-        将工具上下文转换为字典格式
+        Convert tool context to dictionary format
 
         Returns:
-            Dict[str, Any]: 上下文的字典表示
+            Dict[str, Any]: Dictionary representation of the context
         """
         result = super().to_dict()
 
-        # 添加基本工具信息
+        # Add basic tool information
         result.update({
             "tool_call_id": self.tool_call_id,
             "tool_name": self.tool_name,
         })
 
-        # 添加任务ID和工作目录（如果元数据中存在）
+        # Add task ID and working directory (if exists in metadata)
         if "task_id" in self._metadata:
             result["task_id"] = self._metadata["task_id"]
         if "workspace_dir" in self._metadata:
             result["workspace_dir"] = self._metadata["workspace_dir"]
 
-        # 添加扩展信息
+        # Add extension information
         extensions_dict = {}
         for ext_name, ext_obj in self._extensions.items():
             if hasattr(ext_obj, 'to_dict') and callable(ext_obj.to_dict):
@@ -80,83 +80,83 @@ class ToolContext(BaseContext):
 
     def get_argument(self, name: str, default: Any = None) -> Any:
         """
-        获取工具参数
+        Get tool parameter
 
         Args:
-            name: 参数名
-            default: 默认值
+            name: Parameter name
+            default: Default value
 
         Returns:
-            Any: 参数值或默认值
+            Any: Parameter value or default value
         """
         return self.arguments.get(name, default)
 
     def has_argument(self, name: str) -> bool:
         """
-        检查是否存在指定的参数
+        Check if specified parameter exists
 
         Args:
-            name: 参数名
+            name: Parameter name
 
         Returns:
-            bool: 是否存在参数
+            bool: Whether parameter exists
         """
         return name in self.arguments
 
     @property
     def task_id(self) -> str:
-        """获取任务ID"""
+        """Get task ID"""
         return self._metadata.get("task_id", "")
 
     @property
     def base_dir(self) -> str:
-        """获取基础目录"""
+        """Get base directory"""
         return self._metadata.get("workspace_dir", "")
 
-    # 扩展上下文相关方法
+    # Extension context related methods
 
     def register_extension(self, name: str, extension: Any) -> None:
         """
-        注册一个扩展上下文
+        Register an extension context
         
         Args:
-            name: 扩展名称
-            extension: 扩展上下文对象
+            name: Extension name
+            extension: Extension context object
         """
         self._extensions[name] = extension
 
     def get_extension(self, name: str) -> Optional[Any]:
         """
-        获取指定名称的扩展上下文
+        Get extension context by specified name
         
         Args:
-            name: 扩展名称
+            name: Extension name
             
         Returns:
-            Optional[Any]: 扩展上下文对象，如果不存在则返回None
+            Optional[Any]: Extension context object, returns None if not exists
         """
         return self._extensions.get(name)
 
     def get_extension_typed(self, name: str, extension_type: Type[T]) -> Optional[T]:
         """
-        获取指定名称和类型的扩展上下文
+        Get extension context by specified name and type
         
-        泛型版本的get_extension方法，可以自动推断返回类型，
-        在IDE中提供更好的代码补全支持
+        Generic version of get_extension method, can automatically infer return type,
+        provides better code completion support in IDE
         
         Args:
-            name: 扩展名称
-            extension_type: 扩展类型，例如：EventContext
+            name: Extension name
+            extension_type: Extension type, e.g.: EventContext
             
         Returns:
-            Optional[T]: 符合类型的扩展上下文对象，如果不存在或类型不匹配则返回None
+            Optional[T]: Extension context object matching type, returns None if not exists or type mismatch
             
         Examples:
             ```python
-            # IDE将能正确识别event_context的类型为EventContext
+            # IDE will correctly recognize event_context's type as EventContext
             event_context = tool_context.get_extension_typed("event_context", EventContext)
             if event_context:
-                # 这里能获得EventContext所有方法的自动补全
+                # Auto-completion for all EventContext methods available here
                 event_context.add_attachment(attachment)
             ```
         """

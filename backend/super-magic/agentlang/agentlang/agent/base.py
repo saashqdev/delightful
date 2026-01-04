@@ -1,7 +1,7 @@
 """
-BaseAgent 抽象类定义
+BaseAgent abstract class definition
 
-定义Agent的基本接口和抽象方法，所有Agent实现必须继承此类
+Defines basic Agent interface and abstract methods, all Agent implementations must inherit this class
 """
 
 import random
@@ -25,19 +25,19 @@ logger = get_logger(__name__)
 
 class BaseAgent(ABC):
     """
-    Agent 基类，定义了所有 Agent 实现必须遵循的接口。
+    Agent base class, defines interface that all Agent implementations must follow.
 
-    BaseAgent 负责处理：
-    1. 基本 Agent 属性管理
-    2. 生命周期管理
-    3. LLM 交互
-    4. 工具调用处理
+    BaseAgent handles:
+    1. Basic Agent attribute management
+    2. Lifecycle management
+    3. LLM interaction
+    4. Tool call processing
     """
 
-    # 全局活动 Agent 集合
+    # Global active Agent set
     ACTIVE_AGENTS = set()
 
-    # Agent基本属性
+    # Agent basic attributes
     agent_name = None
     agent_context = None
     stream_mode = False
@@ -53,12 +53,12 @@ class BaseAgent(ABC):
 
     @abstractmethod
     def __init__(self, agent_name: str, agent_context: Optional[AgentContext] = None, agent_id: Optional[str] = None) -> None:
-        """初始化 Agent 实例。
+        """Initialize Agent instance.
 
         Args:
-            agent_name: Agent 名称
-            agent_context: Agent 上下文，如果为 None 则会创建一个新的实例
-            agent_id: Agent 唯一标识，如果为 None 则会自动生成
+            agent_name: Agent name
+            agent_context: Agent context, if None will create a new instance
+            agent_id: Agent unique identifier, if None will be auto-generated
         """
         self.agent_name = agent_name
         self.agent_context = agent_context or AgentContext()
@@ -67,23 +67,23 @@ class BaseAgent(ABC):
 
     def _generate_agent_id(self) -> str:
         """
-        生成唯一的 Agent ID。
+        Generate unique Agent ID.
 
         Returns:
-            str: 生成的 Agent ID
+            str: Generated Agent ID
         """
         first_char = random.choice(string.ascii_letters)
         remaining_chars = ''.join(random.choices(string.ascii_letters + string.digits, k=5))
         new_id = first_char + remaining_chars
-        logger.info(f"自动生成新的 Agent ID: {new_id}")
+        logger.info(f"Auto-generated new Agent ID: {new_id}")
         return new_id
 
     def set_stream_mode(self, stream_mode: bool) -> None:
         """
-        设置是否使用流模式。
+        Set whether to use stream mode.
 
         Args:
-            stream_mode: 是否启用流模式
+            stream_mode: Whether to enable stream mode
         """
         self.stream_mode = stream_mode
         if self.agent_context:
@@ -91,98 +91,98 @@ class BaseAgent(ABC):
 
     def has_attribute(self, attribute_name: str) -> bool:
         """
-        检查是否存在某个属性。
+        Check if an attribute exists.
 
         Args:
-            attribute_name: 属性名称
+            attribute_name: Attribute name
 
         Returns:
-            bool: 是否存在该属性
+            bool: Whether the attribute exists
         """
         return attribute_name in self.attributes
 
     @abstractmethod
     def _initialize_agent(self) -> None:
-        """初始化 Agent 配置、工具和 LLM。
+        """Initialize Agent configuration, tools and LLM.
 
-        此方法应在构造函数中调用，负责：
-        1. 加载 Agent 配置文件
-        2. 初始化 LLM 客户端
-        3. 设置工具集合
-        4. 准备系统提示词
+        This method should be called in constructor, responsible for:
+        1. Loading Agent configuration file
+        2. Initializing LLM client
+        3. Setting up tool collection
+        4. Preparing system prompt
         """
         pass
 
     @abstractmethod
     def _prepare_prompt_variables(self) -> Dict[str, str]:
         """
-        准备用于替换prompt中变量的字典。
+        Prepare dictionary for replacing variables in prompt.
 
         Returns:
-            Dict[str, str]: 包含变量名和对应值的字典
+            Dict[str, str]: Dictionary containing variable names and corresponding values
         """
         pass
 
     @abstractmethod
     async def run(self, query: str):
         """
-        运行 Agent 处理查询。
+        Run Agent to process query.
 
         Args:
-            query: 用户查询/指令
+            query: User query/instruction
         """
         pass
 
     @abstractmethod
     async def run_main_agent(self, query: str):
         """
-        以主 Agent 身份运行，通常包含额外的事件处理和错误管理。
+        Run as main Agent, typically includes additional event handling and error management.
 
         Args:
-            query: 用户查询/指令
+            query: User query/instruction
         """
         pass
 
     @abstractmethod
     async def _handle_agent_loop(self) -> None:
         """
-        处理 Agent 的主循环逻辑，包括:
-        1. LLM 调用
-        2. 解析 LLM 响应
-        3. 执行工具调用
-        4. 处理工具结果
-        5. 添加历史记录
-        6. 循环终止条件检查
+        Handle Agent's main loop logic, including:
+        1. LLM calls
+        2. Parse LLM responses
+        3. Execute tool calls
+        4. Process tool results
+        5. Add history records
+        6. Check loop termination conditions
         """
         pass
 
     @abstractmethod
     async def _handle_agent_loop_stream(self) -> None:
-        """处理流模式下的 Agent 循环。"""
+        """Handle Agent loop in streaming mode."""
         pass
 
     @abstractmethod
     async def _call_llm(self, messages: List[Dict[str, Any]]) -> ChatCompletion:
         """
-        调用 LLM 获取响应。
+        Call LLM to get response.
 
         Args:
-            messages: 消息历史列表
+            messages: Message history list
 
         Returns:
-            ChatCompletion: LLM 响应
+            ChatCompletion: LLM response
         """
         pass
 
     def _parse_tool_calls(self, chat_response: ChatCompletion) -> List[ChatCompletionMessageToolCall]:
         """
-        从 LLM 响应中解析工具调用。
+        Parse tool calls from LLM response.
 
         Args:
-            chat_response: LLM 响应
+            chat_response: LLM response
 
         Returns:
-            List[ChatCompletionMessageToolCall]: 工具调用列表
+            List[ChatCompletionMessageToolCall]: Tool call list
         """
         tools = []
         for choice in chat_response.choices:
@@ -193,75 +193,75 @@ class BaseAgent(ABC):
     @abstractmethod
     async def _execute_tool_calls(self, tool_calls: List[ToolCall], llm_response_message: ChatCompletionMessage) -> List[ToolResult]:
         """
-        执行工具调用，可能是并行或串行。
+        Execute tool calls, may be parallel or sequential.
 
         Args:
-            tool_calls: 工具调用列表
-            llm_response_message: LLM 响应消息
+            tool_calls: Tool call list
+            llm_response_message: LLM response message
 
         Returns:
-            List[ToolResult]: 工具调用结果列表
+            List[ToolResult]: Tool call result list
         """
         pass
 
     @abstractmethod
     async def _execute_tool_calls_sequential(self, tool_calls: List[ToolCall], llm_response_message: ChatCompletionMessage) -> List[ToolResult]:
         """
-        串行执行工具调用。
+        Execute tool calls sequentially.
 
         Args:
-            tool_calls: 工具调用列表
-            llm_response_message: LLM 响应消息
+            tool_calls: Tool call list
+            llm_response_message: LLM response message
 
         Returns:
-            List[ToolResult]: 工具调用结果列表
+            List[ToolResult]: Tool call result list
         """
         pass
 
     @abstractmethod
     async def _execute_tool_calls_parallel(self, tool_calls: List[ToolCall], llm_response_message: ChatCompletionMessage) -> List[ToolResult]:
         """
-        并行执行工具调用。
+        Execute tool calls in parallel.
 
         Args:
-            tool_calls: 工具调用列表
-            llm_response_message: LLM 响应消息
+            tool_calls: Tool call list
+            llm_response_message: LLM response message
 
         Returns:
-            List[ToolResult]: 工具调用结果列表
+            List[ToolResult]: Tool call result list
         """
         pass
 
     def set_parallel_tool_calls(self, enable: bool, timeout: Optional[float] = None) -> None:
         """
-        设置是否启用并行工具调用。
+        Set whether to enable parallel tool calls.
 
         Args:
-            enable: 是否启用并行工具调用
-            timeout: 并行执行超时时间（秒），None表示不设置超时
+            enable: Whether to enable parallel tool calls
+            timeout: Parallel execution timeout (seconds), None means no timeout
         """
         self.enable_parallel_tool_calls = enable
         self.parallel_tool_calls_timeout = timeout
-        logger.info(f"设置并行工具调用: 启用={enable}, 超时={timeout}秒")
+        logger.info(f"Set parallel tool calls: enabled={enable}, timeout={timeout}s")
 
     def register_tools(self, tools_definition: Dict[str, Dict]) -> None:
         """
-        注册工具。
+        Register tools.
 
         Args:
-            tools_definition: 工具定义
+            tools_definition: Tool definitions
         """
-        # 注册工具
+        # Register tools
         for tool_name, tool_config in tools_definition.items():
-            # 注意：新工具系统使用@tool装饰器自动注册工具
-            # 这里只是为了兼容旧代码，不做实际注册操作
-            logger.debug(f"工具 {tool_name} 已通过装饰器注册，无需手动注册")
+            # Note: New tool system uses @tool decorator to automatically register tools
+            # This is just for backward compatibility, no actual registration operation
+            logger.debug(f"Tool {tool_name} already registered via decorator, no manual registration needed")
 
     def print_token_usage(self) -> None:
         """
-        打印token使用报告。
+        Print token usage report.
 
-        在会话结束时调用，打印整个会话的token使用统计报告。
+        Called at end of session to print token usage statistics for entire session.
         """
         try:
             # 获取格式化报告

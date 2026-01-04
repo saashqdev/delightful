@@ -41,15 +41,15 @@ async def safe_delete(path: Path):
         RuntimeError: If trash command fails and fallback is unsuccessful.
         Exception: Other unexpected errors.
     """
-    # 使用 aiofiles.os.path.exists 检查路径是否存在
+    # Use aiofiles.os.path.exists to check if path exists
     if not await aiofiles.os.path.exists(path):
-        logger.warning(f"尝试删除不存在的路径: {path}")
-        return # 路径不存在，无需操作
+        logger.warning(f"Attempting to delete non-existent path: {path}")
+        return # Path doesn't exist, no action needed
 
     trash_failed = False
     try:
         if _has_trash_command:
-            # 尝试异步使用 trash 命令
+            # Try to use trash command asynchronously
             process = await asyncio.create_subprocess_exec(
                 "trash", str(path),
                 stdout=asyncio.subprocess.PIPE,
@@ -58,42 +58,42 @@ async def safe_delete(path: Path):
             stdout, stderr = await process.communicate()
 
             if process.returncode == 0:
-                logger.info(f"路径已通过 trash 移动到回收站: {path}")
+                logger.info(f"Path moved to trash via trash command: {path}")
                 return
             else:
-                error_message = stderr.decode().strip() if stderr else "未知错误"
-                logger.warning(f"使用 trash 命令删除 {path} 失败 (返回码: {process.returncode}): {error_message}. 回退到 aiofiles/标准库删除。")
+                error_message = stderr.decode().strip() if stderr else "Unknown error"
+                logger.warning(f"Failed to delete {path} using trash command (return code: {process.returncode}): {error_message}. Falling back to aiofiles/stdlib deletion.")
                 trash_failed = True
 
-        # 如果没有 trash 命令 或 trash 命令失败，则使用 aiofiles 或标准库删除
+        # If no trash command or trash command failed, use aiofiles or stdlib deletion
         if trash_failed or not _has_trash_command:
-            # 使用 aiofiles.os.path.isfile 判断是否为文件
+            # Use aiofiles.os.path.isfile to check if it's a file
             if await aiofiles.os.path.isfile(path):
-                # 使用 aiofiles.os.remove 删除文件
+                # Use aiofiles.os.remove to delete file
                 await aiofiles.os.remove(path)
-                logger.info(f"文件已通过 aiofiles 删除: {path}")
-            # 使用 aiofiles.os.path.isdir 判断是否为目录
+                logger.info(f"File deleted via aiofiles: {path}")
+            # Use aiofiles.os.path.isdir to check if it's a directory
             elif await aiofiles.os.path.isdir(path):
-                # 对于目录，aiofiles 没有 rmtree，我们仍然使用 shutil.rmtree + asyncio.to_thread
+                # For directories, aiofiles doesn't have rmtree, we still use shutil.rmtree + asyncio.to_thread
                 try:
-                    # 尝试使用 aiofiles 删除空目录 (如果需要区分空/非空)
+                    # Try using aiofiles to delete empty directory (if need to distinguish empty/non-empty)
                     # await aiofiles.os.rmdir(path)
-                    # logger.info(f"空目录已通过 aiofiles 删除: {path}")
-                    # 但通常直接用 rmtree 更简单，它也能处理空目录
+                    # logger.info(f"Empty directory deleted via aiofiles: {path}")
+                    # But usually using rmtree directly is simpler, it can also handle empty directories
                     await asyncio.to_thread(shutil.rmtree, path)
-                    logger.info(f"目录已通过 shutil.rmtree (异步线程) 删除: {path}")
+                    logger.info(f"Directory deleted via shutil.rmtree (async thread): {path}")
                 except OSError as rmtree_error:
-                    # 如果 rmtree 失败 (例如权限问题)
-                    logger.error(f"使用 shutil.rmtree 删除目录 {path} 失败: {rmtree_error}")
-                    raise # 重新抛出异常
+                    # If rmtree fails (e.g. permission issues)
+                    logger.error(f"Failed to delete directory {path} using shutil.rmtree: {rmtree_error}")
+                    raise # Re-raise exception
             else:
-                # 处理符号链接或其他类型的文件系统对象
+                # Handle symbolic links or other types of filesystem objects
                 try:
-                    # 尝试使用 aiofiles.os.remove (通常对符号链接有效)
+                    # Try using aiofiles.os.remove (usually works for symbolic links)
                     await aiofiles.os.remove(path)
-                    logger.info(f"路径（可能是符号链接）已通过 aiofiles 删除: {path}")
+                    logger.info(f"Path (possibly symbolic link) deleted via aiofiles: {path}")
                 except OSError as e:
-                    logger.error(f"无法确定路径类型或使用 aiofiles 删除失败: {path}, 错误: {e}")
+                    logger.error(f"Cannot determine path type or deletion via aiofiles failed: {path}, error: {e}")
                     raise # 重新抛出异常
 
     except OSError as e:
@@ -125,10 +125,10 @@ async def clear_directory_contents(directory_path: Path) -> bool:
             return True  # 视为成功，因为目标状态（目录为空或不存在）已满足
 
         if not await aiofiles.os.path.isdir(directory_path):
-            logger.error(f"提供的路径不是目录: {directory_path}")
+            logger.error(f"Provided path is not a directory: {directory_path}")
             return False
 
-        logger.info(f"开始异步清理目录内容: {directory_path}")
+        logger.info(f"Starting async clearing of directory contents: {directory_path}")
         items_deleted = 0
         items_failed = 0
         # 使用 asyncio.gather 并发执行删除
@@ -146,25 +146,25 @@ async def clear_directory_contents(directory_path: Path) -> bool:
 
         # 统计结果
         for i, result in enumerate(results):
-            item_path = item_paths[i]  # 从之前保存的列表中获取路径
+            item_path = item_paths[i]  # Get path from previously saved list
             if isinstance(result, Exception):
-                logger.warning(f"清理 {item_path} 时遇到问题: {result}")
+                logger.warning(f"Encountered issue while clearing {item_path}: {result}")
                 items_failed += 1
             elif result is False:
-                logger.warning(f"清理 {item_path} 失败")
+                logger.warning(f"Failed to clear {item_path}")
                 items_failed += 1
             else:
                 items_deleted += 1
 
         if items_failed == 0:
-            logger.info(f"成功异步清理 {directory_path} 目录中的 {items_deleted} 个项目")
+            logger.info(f"Successfully cleared {items_deleted} items in {directory_path} directory asynchronously")
             return True
         else:
-            logger.warning(f"异步清理 {directory_path} 目录完成，成功 {items_deleted} 个，失败 {items_failed} 个")
-            return items_failed == 0  # 只有全部成功才返回True
+            logger.warning(f"Async clearing of {directory_path} directory complete, succeeded: {items_deleted}, failed: {items_failed}")
+            return items_failed == 0  # Only return True if all succeeded
 
     except Exception as e:
-        logger.error(f"异步清理 {directory_path} 目录内容时发生意外错误: {e}", exc_info=True)
+        logger.error(f"Unexpected error occurred while asynchronously clearing {directory_path} directory contents: {e}", exc_info=True)
         return False
 
 
@@ -181,18 +181,18 @@ async def ensure_directory(directory_path: Path) -> bool:
     try:
         if await aiofiles.os.path.exists(directory_path):
             if await aiofiles.os.path.isdir(directory_path):
-                return True  # 目录已存在
+                return True  # Directory already exists
             else:
-                logger.error(f"路径存在但不是目录: {directory_path}")
+                logger.error(f"Path exists but is not a directory: {directory_path}")
                 return False  # 路径存在但不是目录
 
-        # 创建目录（包括任何必要的中间目录）
+        # Create directory (including any necessary intermediate directories)
         await asyncio.to_thread(os.makedirs, directory_path, exist_ok=True)
-        logger.info(f"已创建目录: {directory_path}")
+        logger.info(f"Directory created: {directory_path}")
         return True
 
     except Exception as e:
-        logger.error(f"创建目录 {directory_path} 时出错: {e}")
+        logger.error(f"Error creating directory {directory_path}: {e}")
         return False
 
 
@@ -210,7 +210,7 @@ async def list_files(directory_path: Path, recursive: bool = False,
         List[Path]: 文件路径列表
     """
     if not directory_path.exists() or not directory_path.is_dir():
-        logger.warning(f"目录不存在或不是目录: {directory_path}")
+        logger.warning(f"Directory does not exist or is not a directory: {directory_path}")
         return []
 
     result = []
@@ -235,7 +235,7 @@ async def list_files(directory_path: Path, recursive: bool = False,
 
         return result
     except Exception as e:
-        logger.error(f"列出目录 {directory_path} 中的文件时出错: {e}")
+        logger.error(f"Error listing files in directory {directory_path}: {e}")
         return []
 
 
@@ -367,7 +367,7 @@ def count_file_lines(file_path: Path) -> Optional[int]:
         with file_path.open("r", encoding="utf-8", errors='ignore') as f:
             return sum(1 for _ in f)
     except Exception as e:
-        logger.debug(f"计算文件行数失败: {file_path}, 错误: {e}")
+        logger.debug(f"Failed to count file lines: {file_path}, error: {e}")
         return None
 
 def count_file_tokens(file_path: Path) -> Optional[int]:
@@ -377,7 +377,7 @@ def count_file_tokens(file_path: Path) -> Optional[int]:
             content = f.read()
             return num_tokens_from_string(content)
     except Exception as e:
-        logger.debug(f"计算文件token数量失败: {file_path}, 错误: {e}")
+        logger.debug(f"Failed to count file tokens: {file_path}, error: {e}")
         return None
 
 def get_file_info(file_path: str) -> str:
@@ -411,7 +411,7 @@ def get_file_info(file_path: str) -> str:
         attributes_str = ", ".join(attributes)
         return f"{file_path} ({attributes_str}, 最后修改：{modified_time})"
     except Exception as e:
-        logger.debug(f"获取文件信息失败: {file_path}, 错误: {e}")
+        logger.debug(f"Failed to get file info: {file_path}, error: {e}")
         return file_path
 
 def get_file_metadata(file_path: str) -> dict:
@@ -454,5 +454,5 @@ def get_file_metadata(file_path: str) -> dict:
 
         return result
     except Exception as e:
-        logger.debug(f"获取文件元数据失败: {file_path}, 错误: {e}")
+        logger.debug(f"Failed to get file metadata: {file_path}, error: {e}")
         return {"exists": False, "path": file_path, "error": str(e)}

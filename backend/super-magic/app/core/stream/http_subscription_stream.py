@@ -207,7 +207,7 @@ class HTTPSubscriptionStream(Stream):
             if not success:
                 raise IOError("Failed to write to HTTP endpoint after retries")
 
-            # 检查最终响应状态
+            # Check final response status
             if response.status >= 400:
                 error_text = await response.text()
                 logger.error(f"HTTP subscription failed with status {response.status}: {error_text}")

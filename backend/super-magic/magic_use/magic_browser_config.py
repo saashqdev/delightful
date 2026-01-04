@@ -1,9 +1,9 @@
 """
-浏览器配置模块
+Browser configuration module
 
-提供浏览器配置类和相关功能，用于自定义浏览器行为和特性。
-包含绕过反爬虫检测、性能优化、用户代理伪装和会话持久化等功能。
-"""
+Provides browser configuration classes and related functionality for customizing browser behavior and features.
+Includes bypassing anti-scraping detection, performance optimization, user agent spoofing, and session persistence.
+"
 
 import logging
 import os
@@ -14,10 +14,10 @@ from typing import Any, Dict, List, Optional
 from app.paths import PathManager
 from agentlang.config.config import config
 
-# 设置日志
+# Set up logging
 logger = logging.getLogger(__name__)
 
-# 默认浏览器头部配置
+# Default browser header configuration
 DEFAULT_HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36',
     'Sec-Ch-Ua': '"Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"',
@@ -27,22 +27,22 @@ DEFAULT_HEADERS = {
 
 @dataclass
 class MagicBrowserProxyConfig:
-    """代理服务器配置"""
+    """Proxy server configuration"""
 
-    # 代理服务器地址（例如 http://proxy.example.com:8080）
+    # Proxy server address (e.g., http://proxy.example.com:8080)
     server: Optional[str] = None
 
-    # 用户名（如果需要认证）
+    # Username (if authentication is required)
     username: Optional[str] = None
 
-    # 密码（如果需要认证）
+    # Password (if authentication is required)
     password: Optional[str] = None
 
-    # 不使用代理的地址列表（例如 ["localhost", "127.0.0.1"]）
+    # List of addresses to bypass proxy (e.g., ["localhost", "127.0.0.1"])
     bypass: Optional[List[str]] = None
 
     def to_dict(self) -> Optional[Dict[str, Any]]:
-        """转换为代理配置字典"""
+        """Convert to proxy configuration dictionary"""
         if not self.server:
             return None
 
@@ -60,83 +60,83 @@ class MagicBrowserProxyConfig:
 
 @dataclass
 class MagicBrowserConfig:
-    """浏览器配置类"""
+    """Browser configuration class"""
 
-    # 浏览器类型：chromium, firefox, webkit
+    # Browser type: chromium, firefox, webkit
     browser_type: str = "chromium"
 
-    # 是否无头模式（不显示浏览器窗口）
+    # Whether to run in headless mode (without displaying browser window)
     headless: bool = True
 
-    # 浏览器窗口尺寸
+    # Browser window dimensions
     viewport_width: int = 1280
     viewport_height: int = 1940
 
-    # 是否禁用安全特性（同源策略等）
+    # Whether to disable security features (same-origin policy, etc.)
     disable_security: bool = False
 
-    # 是否启用反反爬虫措施（绕过网站反爬虫检测）
+    # Whether to enable anti-scraping countermeasures (bypass website anti-scraping detection)
     bypass_anti_scraping: bool = True
 
-    # 是否启用浏览器指纹伪装
+    # Whether to enable browser fingerprint masking
     fingerprint_mask: bool = True
 
-    # 是否启用性能优化
+    # Whether to enable performance optimization
     performance_optimization: bool = True
 
-    # 是否禁用弹窗和通知
+    # Whether to disable popups and notifications
     disable_popups: bool = True
 
-    # 是否启用更多高级反反爬虫设置
+    # Whether to enable advanced anti-scraping bypass settings
     advanced_bypass_anti_scraping: bool = False
 
-    # 代理配置
+    # Proxy configuration
     proxy: Optional[MagicBrowserProxyConfig] = None
 
-    # 隐式等待超时时间（毫秒）
+    # Implicit wait timeout (milliseconds)
     default_timeout: int = 30000
 
-    # 截图和下载文件的保存路径
+    # Save path for screenshots and downloaded files
     download_path: Optional[str] = None
 
-    # 浏览器启动参数
+    # Browser launch arguments
     browser_args: List[str] = field(default_factory=list)
 
-    # 用户代理字符串和其他HTTP头部
+    # User agent string and other HTTP headers
     user_agent: Optional[str] = DEFAULT_HEADERS['User-Agent']
 
-    # 自定义HTTP头部
+    # Custom HTTP headers
     extra_headers: Dict[str, str] = field(default_factory=lambda: DEFAULT_HEADERS.copy())
 
-    # 浏览器语言设置
+    # Browser language setting
     language: str = "zh-CN,zh;q=0.9,en;q=0.8"
 
-    # 是否启用地理位置欺骗
+    # Whether to enable geolocation spoofing
     geolocation_spoofing: bool = False
 
-    # 地理位置（经纬度）
+    # Geolocation (latitude and longitude)
     geolocation: Optional[Dict[str, float]] = None
 
-    # 时区ID
+    # Timezone ID
     timezone_id: Optional[str] = None
 
-    # 浏览器存储状态保存路径
+    # Browser storage state save path
     storage_state_file: Optional[str] = None
 
-    # 浏览器权限列表
+    # Browser permissions list
     permissions: Optional[List[str]] = None
 
     def __post_init__(self):
-        """初始化后处理"""
-        # 设置默认下载路径
+        """Post-initialization processing"""
+        # Set default download path
         if not self.download_path:
             self.download_path = str(PathManager.get_workspace_dir() / "webview_reports")
 
-        # 确保浏览器参数是列表
+        # Ensure browser arguments is a list
         if not isinstance(self.browser_args, list):
             self.browser_args = []
 
-        # 如果需要禁用安全特性，添加相应参数
+        # If disabling security features, add corresponding arguments
         if self.disable_security:
             if self.browser_type == "chromium":
                 security_args = [
@@ -148,127 +148,127 @@ class MagicBrowserConfig:
                     if arg not in self.browser_args:
                         self.browser_args.append(arg)
 
-        # 如果启用反反爬虫措施，添加相应参数
+        # If enabling anti-scraping bypass, add corresponding arguments
         if self.bypass_anti_scraping:
             if self.browser_type == "chromium":
                 anti_scraping_args = [
-                    '--disable-blink-features=AutomationControlled',  # 隐藏自动化控制特征，防止网站检测到这是自动化浏览器
-                    '--disable-features=IsolateOrigins,site-per-process',  # 禁用站点隔离，允许跨域操作，避免一些安全限制
-                    '--disable-site-isolation-trials',  # 禁用站点隔离试验，提高对复杂网站的兼容性
-                    '--disable-web-security',  # 禁用同源策略等Web安全特性，允许跨域请求
-                    '--disable-sync',  # 禁用Google账户同步功能，减少特征暴露
-                    '--disable-background-networking',  # 禁用后台网络请求，避免不必要的连接
-                    '--disable-background-timer-throttling',  # 禁用后台计时器限制，提高性能
-                    '--disable-backgrounding-occluded-windows',  # 禁用对被遮挡窗口的资源限制
-                    '--disable-breakpad',  # 禁用崩溃报告，避免向Google发送数据
-                    '--disable-client-side-phishing-detection',  # 禁用客户端钓鱼检测，减少对Google的请求
-                    '--disable-component-update',  # 禁用组件更新，避免版本变化
-                    '--disable-default-apps',  # 禁用默认应用，减少浏览器特征
-                    '--disable-infobars',  # 禁用顶部信息栏，避免"Chrome正在被自动控制"提示
-                    '--disable-notifications',  # 禁用通知弹窗，避免干扰
-                    '--no-default-browser-check',  # 不检查是否为默认浏览器
-                    '--no-first-run',  # 跳过首次运行体验，避免欢迎页面
-                    '--password-store=basic',  # 使用基本密码存储而非系统密钥链，减少系统集成
-                    '--use-mock-keychain',  # 使用模拟密钥链，避免访问系统密钥链
-                    '--disable-cookie-encryption',  # 禁用Cookie加密，方便读取和修改Cookie
-                    '--allow-pre-commit-input',  # 允许在页面渲染完成前输入，提高响应速度
+                    '--disable-blink-features=AutomationControlled',  # Hide automation control features to prevent websites from detecting automated browsers
+                    '--disable-features=IsolateOrigins,site-per-process',  # Disable site isolation, allow cross-origin operations, avoid some security restrictions
+                    '--disable-site-isolation-trials',  # Disable site isolation trials, improve compatibility with complex websites
+                    '--disable-web-security',  # Disable web security features like same-origin policy, allow cross-origin requests
+                    '--disable-sync',  # Disable Google account sync, reduce feature exposure
+                    '--disable-background-networking',  # Disable background network requests, avoid unnecessary connections
+                    '--disable-background-timer-throttling',  # Disable background timer throttling, improve performance
+                    '--disable-backgrounding-occluded-windows',  # Disable resource throttling for occluded windows
+                    '--disable-breakpad',  # Disable crash reporting, avoid sending data to Google
+                    '--disable-client-side-phishing-detection',  # Disable client-side phishing detection, reduce requests to Google
+                    '--disable-component-update',  # Disable component updates, avoid version changes
+                    '--disable-default-apps',  # Disable default apps, reduce browser fingerprint
+                    '--disable-infobars',  # Disable top info bars, avoid "Chrome is being controlled by automated software" notification
+                    '--disable-notifications',  # Disable notification popups, avoid interference
+                    '--no-default-browser-check',  # Don't check if it's the default browser
+                    '--no-first-run',  # Skip first-run experience, avoid welcome pages
+                    '--password-store=basic',  # Use basic password storage instead of system keychain, reduce system integration
+                    '--use-mock-keychain',  # Use mock keychain, avoid accessing system keychain
+                    '--disable-cookie-encryption',  # Disable cookie encryption, easier to read and modify cookies
+                    '--allow-pre-commit-input',  # Allow input before page rendering is complete, improve responsiveness
                 ]
                 for arg in anti_scraping_args:
                     if arg not in self.browser_args:
                         self.browser_args.append(arg)
 
-        # 如果启用浏览器指纹伪装，添加相应参数
+        # If enabling browser fingerprint masking, add corresponding arguments
         if self.fingerprint_mask:
             if self.browser_type == "chromium":
                 fingerprint_args = [
-                    "--js-flags=--random-seed=1157259159",  # 使所有JS随机数具有确定性
-                    "--force-device-scale-factor=2",  # 标准化设备缩放比例
-                    "--hide-scrollbars",  # 隐藏滚动条
-                    "--force-color-profile=srgb",  # 使用一致的颜色配置文件
-                    "--font-render-hinting=none",  # 忽略操作系统字体提示
-                    "--disable-2d-canvas-clip-aa",  # 禁用2D画布裁剪抗锯齿
-                    "--disable-partial-raster"  # 禁用部分光栅化
+                    "--js-flags=--random-seed=1157259159",  # Make all JS random numbers deterministic
+                    "--force-device-scale-factor=2",  # Standardize device scale factor
+                    "--hide-scrollbars",  # Hide scrollbars
+                    "--force-color-profile=srgb",  # Use consistent color profile
+                    "--font-render-hinting=none",  # Ignore OS font hinting
+                    "--disable-2d-canvas-clip-aa",  # Disable 2D canvas clip anti-aliasing
+                    "--disable-partial-raster"  # Disable partial rasterization
                 ]
                 for arg in fingerprint_args:
                     if arg not in self.browser_args:
                         self.browser_args.append(arg)
 
-        # 如果启用性能优化，添加相应参数
+        # If enabling performance optimization, add corresponding arguments
         if self.performance_optimization:
             if self.browser_type == "chromium":
                 performance_args = [
-                    "--disable-renderer-backgrounding",  # 不根据焦点限制标签页渲染
-                    "--disable-background-networking",  # 不根据焦点限制网络请求
-                    "--disable-background-timer-throttling",  # 不限制计时器
-                    "--disable-backgrounding-occluded-windows",  # 不限制被遮挡窗口
-                    "--disable-ipc-flooding-protection",  # 不限制IPC通信流量
-                    "--disable-lazy-loading",  # 预先加载所有内容而不是按需加载
-                    "--disable-extensions-http-throttling",  # 不限制HTTP流量
-                    "--disable-back-forward-cache",  # 禁用浏览导航缓存
-                    "--remote-debugging-address=0.0.0.0",  # 允许远程调试
-                    "--enable-experimental-extension-apis"  # 启用实验性扩展API
+                    "--disable-renderer-backgrounding",  # Don't throttle tab rendering based on focus
+                    "--disable-background-networking",  # Don't throttle network requests based on focus
+                    "--disable-background-timer-throttling",  # Don't throttle timers
+                    "--disable-backgrounding-occluded-windows",  # Don't throttle occluded windows
+                    "--disable-ipc-flooding-protection",  # Don't throttle IPC communication
+                    "--disable-lazy-loading",  # Preload all content instead of loading on demand
+                    "--disable-extensions-http-throttling",  # Don't throttle HTTP traffic
+                    "--disable-back-forward-cache",  # Disable back-forward navigation cache
+                    "--remote-debugging-address=0.0.0.0",  # Allow remote debugging
+                    "--enable-experimental-extension-apis"  # Enable experimental extension APIs
                 ]
                 for arg in performance_args:
                     if arg not in self.browser_args:
                         self.browser_args.append(arg)
 
-        # 如果禁用弹窗和通知，添加相应参数
+        # If disabling popups and notifications, add corresponding arguments
         if self.disable_popups:
             if self.browser_type == "chromium":
                 popup_args = [
-                    "--no-first-run",  # 禁用首次运行体验
-                    "--no-default-browser-check",  # 禁用默认浏览器检查
-                    "--disable-infobars",  # 禁用信息栏
-                    "--disable-notifications",  # 禁用通知
-                    "--disable-desktop-notifications",  # 禁用桌面通知
-                    "--deny-permission-prompts",  # 拒绝权限提示
-                    "--disable-session-crashed-bubble",  # 禁用会话崩溃气泡
-                    "--disable-hang-monitor",  # 禁用挂起监视器
-                    "--disable-popup-blocking",  # 禁用弹窗拦截
-                    "--disable-component-update",  # 禁用组件更新
-                    "--suppress-message-center-popups",  # 禁止消息中心弹窗
-                    "--disable-client-side-phishing-detection",  # 禁用客户端钓鱼检测
-                    "--disable-print-preview",  # 禁用打印预览
-                    "--disable-speech-api",  # 禁用语音API
-                    "--disable-speech-synthesis-api",  # 禁用语音合成API
-                    "--no-pings",  # 禁用ping请求
-                    "--disable-default-apps",  # 禁用默认应用
-                    "--ash-no-nudges",  # 禁用提示
-                    "--disable-search-engine-choice-screen",  # 禁用搜索引擎选择屏幕
-                    "--disable-datasaver-prompt",  # 禁用数据保存提示
-                    "--block-new-web-contents",  # 阻止新的Web内容
-                    "--disable-breakpad",  # 禁用崩溃报告
-                    "--disable-domain-reliability"  # 禁用域名可靠性
+                    "--no-first-run",  # Disable first-run experience
+                    "--no-default-browser-check",  # Disable default browser check
+                    "--disable-infobars",  # Disable info bars
+                    "--disable-notifications",  # Disable notifications
+                    "--disable-desktop-notifications",  # Disable desktop notifications
+                    "--deny-permission-prompts",  # Deny permission prompts
+                    "--disable-session-crashed-bubble",  # Disable session crashed bubble
+                    "--disable-hang-monitor",  # Disable hang monitor
+                    "--disable-popup-blocking",  # Disable popup blocking
+                    "--disable-component-update",  # Disable component updates
+                    "--suppress-message-center-popups",  # Suppress message center popups
+                    "--disable-client-side-phishing-detection",  # Disable client-side phishing detection
+                    "--disable-print-preview",  # Disable print preview
+                    "--disable-speech-api",  # Disable speech API
+                    "--disable-speech-synthesis-api",  # Disable speech synthesis API
+                    "--no-pings",  # Disable ping requests
+                    "--disable-default-apps",  # Disable default apps
+                    "--ash-no-nudges",  # Disable nudges
+                    "--disable-search-engine-choice-screen",  # Disable search engine choice screen
+                    "--disable-datasaver-prompt",  # Disable data saver prompt
+                    "--block-new-web-contents",  # Block new web contents
+                    "--disable-breakpad",  # Disable crash reporting
+                    "--disable-domain-reliability"  # Disable domain reliability
                 ]
                 for arg in popup_args:
                     if arg not in self.browser_args:
                         self.browser_args.append(arg)
 
-        # 如果启用高级反反爬虫设置，添加相应参数
+        # If enabling advanced anti-scraping bypass settings, add corresponding arguments
         if self.advanced_bypass_anti_scraping:
             if self.browser_type == "chromium":
                 advanced_args = [
-                    "--disable-features=GlobalMediaControls,MediaRouter,DialMediaRouteProvider",  # 禁用媒体控制
-                    "--simulate-outdated-no-au=\"Tue, 31 Dec 2099 23:59:59 GMT\"",  # 模拟过期，禁用浏览器自动更新
-                    "--export-tagged-pdf",  # 导出带标签的PDF
-                    "--generate-pdf-document-outline",  # 生成PDF文档大纲
-                    "--metrics-recording-only",  # 仅记录指标
-                    "--silent-debugger-extension-api",  # 静默调试器扩展API
-                    "--noerrdialogs",  # 无错误对话框
-                    "--disable-prompt-on-repost"  # 禁用重新发布提示
+                    "--disable-features=GlobalMediaControls,MediaRouter,DialMediaRouteProvider",  # Disable media controls
+                    "--simulate-outdated-no-au=\"Tue, 31 Dec 2099 23:59:59 GMT\"",  # Simulate outdated, disable browser auto-update
+                    "--export-tagged-pdf",  # Export tagged PDF
+                    "--generate-pdf-document-outline",  # Generate PDF document outline
+                    "--metrics-recording-only",  # Metrics recording only
+                    "--silent-debugger-extension-api",  # Silent debugger extension API
+                    "--noerrdialogs",  # No error dialogs
+                    "--disable-prompt-on-repost"  # Disable prompt on repost
                 ]
                 for arg in advanced_args:
                     if arg not in self.browser_args:
                         self.browser_args.append(arg)
 
-        # 设置语言
+        # Set language
         if self.language:
             lang_arg = f"--lang={self.language}"
             if lang_arg not in self.browser_args:
                 self.browser_args.append(lang_arg)
 
     def to_launch_options(self) -> Dict[str, Any]:
-        """转换为 Playwright 浏览器启动选项"""
+        """Convert to Playwright browser launch options"""
         options = {
             "headless": self.headless,
             "args": self.browser_args,
@@ -276,11 +276,11 @@ class MagicBrowserConfig:
         }
 
         if self.download_path:
-            # 确保下载目录存在
+            # Ensure download directory exists
             os.makedirs(self.download_path, exist_ok=True)
             options["downloads_path"] = self.download_path
 
-        # 添加代理配置
+        # Add proxy configuration
         if self.proxy:
             proxy_dict = self.proxy.to_dict()
             if proxy_dict:
@@ -289,7 +289,7 @@ class MagicBrowserConfig:
         return options
 
     async def to_context_options(self) -> Dict[str, Any]:
-        """转换为 Playwright 浏览器上下文选项"""
+        """Convert to Playwright browser context options"""
         options = {
             "viewport": {
                 "width": self.viewport_width,
@@ -297,97 +297,97 @@ class MagicBrowserConfig:
             },
             "accept_downloads": True,
             "extra_http_headers": self.extra_headers,
-            "bypass_csp": self.disable_security,  # 绕过内容安全策略
-            "ignore_https_errors": self.disable_security  # 忽略HTTPS证书错误
+            "bypass_csp": self.disable_security,  # Bypass content security policy
+            "ignore_https_errors": self.disable_security  # Ignore HTTPS certificate errors
         }
 
         if self.user_agent:
             options["user_agent"] = self.user_agent
 
-        # 添加地理位置欺骗
+        # Add geolocation spoofing
         if self.geolocation_spoofing and self.geolocation:
             options["geolocation"] = self.geolocation
 
-        # 添加时区设置（默认使用中国上海）
+        # Add timezone setting (default to Shanghai, China)
         options["timezone_id"] = self.timezone_id or "Asia/Shanghai"
 
-        # 添加语言设置（默认使用中文）
+        # Add language setting (default to Chinese)
         locale = self.language.split(',')[0] if self.language else "zh-CN"
         options["locale"] = locale
 
-        # 加载存储状态（包括cookies和localStorage）
+        # Load storage state (including cookies and localStorage)
         if self.storage_state_file:
             if os.path.exists(self.storage_state_file):
                 try:
-                    # 直接提供文件路径给storage_state参数
+                    # Directly provide file path to storage_state parameter
                     options["storage_state"] = self.storage_state_file
-                    logger.info(f"将从 {self.storage_state_file} 加载存储状态")
+                    logger.info(f"Will load storage state from {self.storage_state_file}")
                 except Exception as e:
-                    logger.warning(f"加载存储状态失败: {e}")
+                    logger.warning(f"Failed to load storage state: {e}")
             else:
-                # 尝试从云端下载模板
+                # Try to download template from cloud
                 try:
-                    # 从配置中获取模板URL
+                    # Get template URL from configuration
                     template_url = config.get("browser.storage_state_template_url")
 
                     if not template_url:
-                        logger.info("未配置浏览器存储状态模板URL，跳过加载存储状态")
+                        logger.info("Browser storage state template URL not configured, skipping storage state loading")
                         return options
 
-                    logger.info(f"本地存储状态文件不存在，尝试从云端下载模板: {template_url}")
+                    logger.info(f"Local storage state file does not exist, attempting to download template from cloud: {template_url}")
 
-                    # 使用异步请求下载模板
+                    # Use async request to download template
                     async with aiohttp.ClientSession() as session:
                         async with session.get(template_url) as response:
                             if response.status == 200:
-                                # 确保目录存在
+                                # Ensure directory exists
                                 os.makedirs(os.path.dirname(self.storage_state_file), exist_ok=True)
-                                # 保存模板到本地
+                                # Save template to local file
                                 content = await response.read()
                                 with open(self.storage_state_file, 'wb') as f:
                                     f.write(content)
                                 options["storage_state"] = self.storage_state_file
-                                logger.info(f"已从云端下载模板并保存到 {self.storage_state_file}")
+                                logger.info(f"Downloaded template from cloud and saved to {self.storage_state_file}")
                             else:
-                                logger.warning(f"从云端下载模板失败，状态码: {response.status}")
+                                logger.warning(f"Failed to download template from cloud, status code: {response.status}")
                 except Exception as e:
-                    logger.warning(f"从云端下载模板失败: {e}")
+                    logger.warning(f"Failed to download template from cloud: {e}")
 
         return options
 
     async def save_storage_state(self, context) -> None:
         """
-        保存完整的浏览器存储状态到文件（包括cookies和localStorage）
+        Save complete browser storage state to file (including cookies and localStorage)
 
         Args:
-            context: Playwright浏览器上下文
+            context: Playwright browser context
         """
         if not self.storage_state_file:
             return
 
         try:
-            # 使用context的storage_state方法直接保存到文件
+            # Use context's storage_state method to save directly to file
             await context.storage_state(path=self.storage_state_file)
-            logger.info(f"已保存存储状态到 {self.storage_state_file}")
+            logger.info(f"Saved storage state to {self.storage_state_file}")
         except Exception as e:
-            logger.error(f"保存存储状态失败: {e}")
+            logger.error(f"Failed to save storage state: {e}")
 
     @classmethod
     def create_for_scraping(cls) -> 'MagicBrowserConfig':
-        """创建针对网页爬取优化的配置"""
+        """Create configuration optimized for web scraping"""
         return cls(
             headless=True,
-            disable_security=True,  # 启用安全限制解除，解决CSP限制问题
+            disable_security=True,  # Enable security restriction removal to solve CSP limitation issues
             bypass_anti_scraping=True,
             fingerprint_mask=True,
             performance_optimization=True,
             disable_popups=True,
             advanced_bypass_anti_scraping=True,
-            # 中国上海的经纬度
+            # Shanghai, China coordinates
             geolocation={"latitude": 31.230416, "longitude": 121.473701},
             geolocation_spoofing=True,
             timezone_id="Asia/Shanghai",
-            # cookie配置
+            # Cookie configuration
             storage_state_file=str(PathManager.get_browser_storage_state_file()),
             permissions=["geolocation", "notifications"]
         )

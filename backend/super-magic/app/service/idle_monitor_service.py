@@ -1,7 +1,7 @@
 """
-Agent空闲监控服务
+Agent idle monitoring service
 
-监控所有Agent的活动状态，当所有Agent超过指定时间未执行任何任务时自动退出服务
+Monitors activity status of all Agents, automatically exits service when all Agents exceed specified time without executing any tasks
 """
 import os
 import signal
@@ -15,19 +15,19 @@ logger = get_logger(__name__)
 
 class IdleMonitorService:
     """
-    空闲监控服务，负责监控Agent的活动状态并在长时间无活动时退出程序
+    Idle monitoring service, responsible for monitoring Agent activity status and exiting program after long inactivity
     """
     _instance = None
 
     @classmethod
     def get_instance(cls):
-        """获取IdleMonitorService单例实例"""
+        """Get IdleMonitorService singleton instance"""
         if cls._instance is None:
             cls._instance = IdleMonitorService()
         return cls._instance
 
     def __init__(self):
-        """初始化空闲监控服务"""
+        """Initialize idle monitoring service"""
         if IdleMonitorService._instance is not None:
             return
 
@@ -37,9 +37,9 @@ class IdleMonitorService:
         self._check_interval = Environment.get_idle_monitor_interval()
 
     def start(self):
-        """启动监控服务"""
+        """Start monitoring service"""
         if self._running:
-            logger.warning("监控服务已经在运行")
+            logger.warning("Monitoring service is already running")
             return
 
         self._running = True
@@ -47,28 +47,28 @@ class IdleMonitorService:
         self._monitor_thread.start()
 
         idle_timeout_seconds = Environment.get_agent_idle_timeout()
-        logger.info(f"空闲监控服务已启动，超时时间: {idle_timeout_seconds}秒，检查间隔: {self._check_interval}秒")
+        logger.info(f"Idle monitoring service started, timeout: {idle_timeout_seconds} seconds, check interval: {self._check_interval} seconds")
 
     def _monitor_task(self):
-        """监控任务主循环"""
+        """Monitor task main loop"""
         from app.service.agent_dispatcher import AgentDispatcher
 
         while self._running:
             try:
-                logger.info("正在进行Agent空闲状态检查...")
+                logger.info("Performing Agent idle status check...")
                 dispatcher = AgentDispatcher.get_instance()
                 if dispatcher.agent_context.is_idle_timeout():
                     idle_timeout_seconds = Environment.get_agent_idle_timeout()
-                    logger.info(f"Agent已超过{idle_timeout_seconds}秒未执行任何任务，发送退出信号")
+                    logger.info(f"Agent has not executed any task for more than {idle_timeout_seconds} seconds, sending exit signal")
                     os.kill(os.getpid(), signal.SIGTERM)
 
                 time.sleep(self._check_interval)
             except Exception as e:
-                logger.error(f"监控任务异常: {e}")
+                logger.error(f"Monitor task exception: {e}")
                 time.sleep(self._check_interval)
 
     def stop(self):
-        """停止监控服务"""
+        """Stop monitoring service"""
         self._running = False
         if self._monitor_thread and self._monitor_thread.is_alive():
-            logger.info("正在停止空闲监控服务")
+            logger.info("Stopping idle monitoring service")

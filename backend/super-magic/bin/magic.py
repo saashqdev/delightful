@@ -247,20 +247,20 @@ async def main():
     # If clean chat history only option specified
     elif args.clean_chat:
         if await clean_chat_history():
-            logger.info("历史对话记录清理完成")
+            logger.info("Conversation history cleanup completed")
             cleaned = True
         else:
-            logger.error("历史对话记录清理失败")
+            logger.error("Conversation history cleanup failed")
 
-    # 如果指定了仅清理工作空间选项
+    # If clean workspace only option specified
     elif args.clean_workspace:
         if await clean_workspace():
-            logger.info("工作空间清理完成")
+            logger.info("Workspace cleanup completed")
             cleaned = True
         else:
-            logger.error("工作空间清理失败")
+            logger.error("Workspace cleanup failed")
 
-    # 如果只是清理而没有查询，则直接退出
+    # If only cleanup without query, exit directly
     if cleaned and not args.query and not args.mount:
         return
 

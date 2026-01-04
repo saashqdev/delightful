@@ -55,7 +55,7 @@ class WorkerProcess:
         )
         self.process.start()
         self.start_time = time.time()
-        logger.info(f"工作进程已启动: PID={self.process.pid}")
+        logger.info(f"Worker process started: PID={self.process.pid}")
         return self.process.pid
 
     def terminate(self, timeout: int = 5) -> bool:
@@ -69,10 +69,10 @@ class WorkerProcess:
             bool: 终止是否成功
         """
         if not self.process or not self.process.is_alive():
-            logger.warning("尝试终止一个不存在或已终止的进程")
+            logger.warning("Attempting to terminate a non-existent or already terminated process")
             return True
 
-        logger.info(f"正在终止工作进程 PID={self.process.pid}")
+        logger.info(f"Terminating worker process PID={self.process.pid}")
 
         # 尝试正常终止
         self.process.terminate()
@@ -80,15 +80,15 @@ class WorkerProcess:
 
         # 如果进程仍在运行，强制终止
         if self.process.is_alive():
-            logger.warning(f"工作进程(PID={self.process.pid})未能在{timeout}秒内正常终止，强制终止")
+            logger.warning(f"Worker process (PID={self.process.pid}) failed to terminate normally within {timeout} seconds, forcing termination")
             try:
                 os.kill(self.process.pid, signal.SIGKILL)
                 self.process.join(timeout=1)  # 再等待一小段时间
             except Exception as e:
-                logger.error(f"强制终止工作进程时出错: {e}")
+                logger.error(f"Error during forced termination of worker process: {e}")
                 return False
 
-        logger.info(f"工作进程(PID={self.process.pid})已终止")
+        logger.info(f"Worker process (PID={self.process.pid}) terminated")
         return True
 
     def is_alive(self) -> bool:
@@ -135,7 +135,7 @@ class ProcessManager:
         try:
             # 设置子进程的日志
             logger = logging.getLogger("cmd_runner")
-            logger.info(f"命令行子进程启动: {' '.join(cmd if isinstance(cmd, list) else [cmd])}")
+            logger.info(f"Command-line subprocess started: {' '.join(cmd if isinstance(cmd, list) else [cmd])}")
 
             # 启动进程
             process = subprocess.Popen(
@@ -151,14 +151,14 @@ class ProcessManager:
             # 读取并记录输出
             for line in iter(process.stdout.readline, ''):
                 if line:
-                    logger.info(f"命令输出: {line.rstrip()}")
+                    logger.info(f"Command output: {line.rstrip()}")
 
             process.stdout.close()
             return_code = process.wait()
-            logger.info(f"命令行进程已退出，返回码: {return_code}")
+            logger.info(f"Command-line process exited with return code: {return_code}")
 
         except Exception as e:
-            logger.error(f"命令行子进程异常: {e}")
+            logger.error(f"Command-line subprocess exception: {e}")
             import traceback
             logger.error(traceback.format_exc())
 
@@ -179,7 +179,7 @@ class ProcessManager:
         self.workers: Dict[str, WorkerProcess] = {}
         self._shutdown_event = asyncio.Event()
         self._monitor_task = None
-        logger.info("进程管理器已初始化")
+        logger.info("Process manager initialized")
 
     async def start_worker(self, name: str, worker_function: Callable, *args: Any, **kwargs: Any) -> int:
         """

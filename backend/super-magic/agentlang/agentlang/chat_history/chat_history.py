@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-此模块定义了用于管理聊天记录的类。
+This module defines classes for managing chat history.
 """
 
 import json
@@ -13,7 +13,7 @@ import tiktoken
 
 from agentlang.chat_history.chat_history_compressor import ChatHistoryCompressor
 
-# 从新的模块导入类型和工具
+# Import types and tools from new module
 from agentlang.chat_history.chat_history_models import (
     AssistantMessage,
     ChatMessage,
@@ -32,80 +32,80 @@ from agentlang.logger import get_logger
 logger = get_logger(__name__)
 
 # ==============================================================================
-# ChatHistory 类
+# ChatHistory class
 # ==============================================================================
 
 class ChatHistory:
     """
-    管理 Agent 的聊天记录，提供加载、保存、添加和查询消息的功能。
-    使用强类型的 ChatMessage 对象列表存储消息。
+    Manages Agent chat history, provides loading, saving, adding and querying messages.
+    Stores messages using strongly-typed ChatMessage object list.
     """
 
     def __init__(self, agent_name: str, agent_id: str, chat_history_dir: str,
                  compression_config: Optional[CompressionConfig] = None):
         """
-        初始化 ChatHistory。
+        Initialize ChatHistory.
 
         Args:
-            agent_name (str): Agent 的名称，用于构建文件名。
-            agent_id (str): Agent 的唯一 ID，用于构建文件名。
-            chat_history_dir (str): 存储聊天记录文件的目录。
-            compression_config (Optional[CompressionConfig]): 压缩配置，如不提供则使用默认配置。
+            agent_name (str): Agent name, used to construct filename.
+            agent_id (str): Agent unique ID, used to construct filename.
+            chat_history_dir (str): Directory to store chat history files.
+            compression_config (Optional[CompressionConfig]): Compression config, uses default if not provided.
         """
         if not agent_name:
-            raise ValueError("agent_name 不能为空")
+            raise ValueError("agent_name cannot be empty")
         if not agent_id:
-            raise ValueError("agent_id 不能为空")
+            raise ValueError("agent_id cannot be empty")
         if not chat_history_dir:
-            raise ValueError("chat_history_dir 不能为空")
+            raise ValueError("chat_history_dir cannot be empty")
 
         self.agent_name = agent_name
         self.agent_id = agent_id
         self.chat_history_dir = chat_history_dir
         self.messages: List[ChatMessage] = []
 
-        # 设置压缩配置，如未提供则使用默认配置
+        # Set compression config, use default if not provided
         self.compression_config = compression_config or CompressionConfig()
         self.compression_config.agent_name = agent_name
         self.compression_config.agent_id = agent_id
 
-        # 压缩状态跟踪
+        # Compression state tracking
         self._last_compression_message_count = 0
         self._last_compression_token_count = 0
 
-        os.makedirs(self.chat_history_dir, exist_ok=True) # 确保目录存在
+        os.makedirs(self.chat_history_dir, exist_ok=True) # Ensure directory exists
         self._history_file_path = self._build_chat_history_filename()
-        self.load() # 初始化时尝试加载历史记录
+        self.load() # Try loading history on initialization
 
-        # 实例化压缩器
+        # Instantiate compressor
         self.compressor = ChatHistoryCompressor(self.compression_config)
 
     @property
     def count(self) -> int:
         """
-        获取聊天历史中的消息数量。
+        Get message count in chat history.
 
         Returns:
-            int: 消息数量
+            int: Message count
         """
         return len(self.messages)
 
     @property
     def tokens_count(self) -> int:
         """
-        统计聊天历史中消耗的token总数。
-        优先使用消息中已有的token_usage数据，对于没有token_usage的消息，
-        使用tiktoken计算token数并保存到消息的token_usage属性中。
+        Calculate total token count consumed in chat history.
+        Prioritizes using existing token_usage data in messages, for messages without token_usage,
+        uses tiktoken to calculate token count and saves to message's token_usage attribute.
 
         Returns:
-            int: token总数
+            int: Total token count
         """
         encoding = None
         try:
-            # 尝试加载编码器，如果失败则在后续步骤中处理
+            # Try to load encoder, if failed then handle in subsequent steps
             encoding = tiktoken.get_encoding("cl100k_base")
         except Exception as e:
-            logger.warning(f"加载tiktoken编码器失败: {e!s}，将在遇到无token_usage的消息时使用备选计算方法")
+            logger.warning(f"Failed to load tiktoken encoder: {e!s}, will use fallback calculation method for messages without token_usage")
 
         total_tokens = 0
         history_updated = False
@@ -113,10 +113,10 @@ class ChatHistory:
         for i, msg in enumerate(self.messages):
             msg_tokens = 0
 
-            # 1. 优先使用已有的token_usage数据
+            # 1. Prioritize using existing token_usage data
             if isinstance(msg, AssistantMessage) and msg.token_usage is not None:
-                # 对于 AssistantMessage 使用 token_usage 对象 (统一为 TokenUsage 类型)
-                # 如果有 total_tokens，使用它；否则使用 output_tokens 或 input_tokens
+                # For AssistantMessage use token_usage object (unified as TokenUsage type)
+                # If total_tokens exists, use it; otherwise use output_tokens or input_tokens
                 if hasattr(msg.token_usage, "total_tokens") and msg.token_usage.total_tokens > 0:
                     msg_tokens = msg.token_usage.total_tokens
                 elif hasattr(msg.token_usage, "output_tokens") and msg.token_usage.output_tokens > 0:
@@ -126,27 +126,27 @@ class ChatHistory:
 
                 if msg_tokens > 0:
                     total_tokens += msg_tokens
-                    continue  # 已有有效的token_usage数据，跳过tiktoken计算
+                    continue  # Valid token_usage data exists, skip tiktoken calculation
 
-            # 2. 无有效token_usage数据，使用tiktoken计算
+            # 2. No valid token_usage data, use tiktoken calculation
             if encoding:
                 try:
-                    # 计算消息内容的token数
+                    # Calculate tokens of message content
                     content = getattr(msg, 'content', '') or ''
                     content_tokens = len(encoding.encode(content))
 
-                    # 估算消息元数据的token数（角色等）
-                    metadata_tokens = 4  # 每条消息大约4个token用于角色等基本信息
+                    # Estimate message metadata tokens (role, etc.)
+                    metadata_tokens = 4  # Approximately 4 tokens per message for basic metadata like role
 
-                    # 处理工具调用消息
+                    # Handle tool call messages
                     if isinstance(msg, AssistantMessage) and msg.tool_calls:
                         tool_tokens = 0
                         for tc in msg.tool_calls:
-                            # 计算工具名称和参数的token
+                            # Calculate tokens of tool name and parameters
                             tool_name = tc.function.name
                             tool_args = tc.function.arguments
 
-                            # 计算工具调用的token
+                            # Calculate tokens for tool call
                             tool_tokens += len(encoding.encode(tool_name)) + len(encoding.encode(tool_args)) + 10
                         content_tokens += tool_tokens
 

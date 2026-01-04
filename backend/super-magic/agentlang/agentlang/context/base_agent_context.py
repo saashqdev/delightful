@@ -38,16 +38,16 @@ class BaseAgentContext(BaseContext, AgentContextInterface):
         self._user_id = None
 
         # Framework layer base attributes
-        self.agent_name = "base_agent"  # 默认代理名称
-        self.is_main_agent = False  # 是否为主代理
-        self.stream_mode = False  # 流模式开关
-        self.llm = None  # 当前使用的LLM模型
-        self.use_dynamic_prompt = True  # 动态提示词开关
-        self.chat_history_dir = ""  # 聊天历史目录
+        self.agent_name = "base_agent"  # Default agent name
+        self.is_main_agent = False  # Whether this is the main agent
+        self.stream_mode = False  # Stream mode switch
+        self.llm = None  # Currently used LLM model
+        self.use_dynamic_prompt = True  # Dynamic prompt switch
+        self.chat_history_dir = ""  # Chat history directory
 
     def _init_shared_fields(self):
-        """初始化共享字段并注册到 shared_context"""
-        # 检查是否已经初始化
+        """Initialize shared fields and register to shared_context"""
+        # Check if already initialized
         if self.shared_context.has_field("event_dispatcher"):
             return
 
@@ -56,188 +56,188 @@ class BaseAgentContext(BaseContext, AgentContextInterface):
         })
 
     def get_workspace_dir(self) -> str:
-        """获取工作空间目录"""
+        """Get workspace directory"""
         return self._workspace_dir
 
     def set_workspace_dir(self, workspace_dir: str) -> None:
-        """设置工作空间目录"""
+        """Set workspace directory"""
         self._workspace_dir = workspace_dir
-        logger.debug(f"设置工作空间目录: {workspace_dir}")
+        logger.debug(f"Set workspace directory: {workspace_dir}")
 
     def ensure_workspace_dir(self) -> str:
-        """确保工作空间目录存在"""
+        """Ensure workspace directory exists"""
         if not self._workspace_dir:
-            raise ValueError("工作空间目录未设置")
+            raise ValueError("Workspace directory not set")
 
         os.makedirs(self._workspace_dir, exist_ok=True)
         return self._workspace_dir
 
     def set_agent_name(self, agent_name: str) -> None:
-        """设置代理名称
+        """Set agent name
         
         Args:
-            agent_name: 代理名称
+            agent_name: Agent name
         """
         self.agent_name = agent_name
-        logger.debug(f"设置代理名称: {agent_name}")
+        logger.debug(f"Set agent name: {agent_name}")
 
     def get_agent_name(self) -> str:
-        """获取代理名称"""
+        """Get agent name"""
         return self.agent_name
 
     def set_main_agent(self, is_main: bool) -> None:
-        """设置是否为主代理
+        """Set whether this is the main agent
         
         Args:
-            is_main: 是否为主代理
+            is_main: Whether this is the main agent
         """
         self.is_main_agent = is_main
-        logger.debug(f"设置是否为主代理: {is_main}")
+        logger.debug(f"Set main agent: {is_main}")
 
     def is_main_agent(self) -> bool:
-        """获取是否为主代理"""
+        """Get whether this is the main agent"""
         return self.is_main_agent
 
     def set_stream_mode(self, enabled: bool) -> None:
-        """设置是否使用流式输出
+        """Set whether to use streaming output
         
         Args:
-            enabled: 是否启用
+            enabled: Whether to enable
         """
         self.stream_mode = enabled
-        logger.debug(f"设置流式输出模式: {enabled}")
+        logger.debug(f"Set streaming output mode: {enabled}")
 
     def is_stream_mode(self) -> bool:
-        """获取流式输出模式"""
+        """Get streaming output mode"""
         return self.stream_mode
 
     def set_llm(self, model: str) -> None:
-        """设置LLM模型
+        """Set LLM model
         
         Args:
-            model: 模型名称
+            model: Model name
         """
         self.llm = model
-        logger.debug(f"设置LLM模型: {model}")
+        logger.debug(f"Set LLM model: {model}")
 
     def get_llm(self) -> str:
-        """获取LLM模型"""
+        """Get LLM model"""
         return self.llm
 
     def set_use_dynamic_prompt(self, enabled: bool) -> None:
-        """设置是否使用动态提示词
+        """Set whether to use dynamic prompts
         
         Args:
-            enabled: 是否启用
+            enabled: Whether to enable
         """
         self.use_dynamic_prompt = enabled
-        logger.debug(f"设置动态提示词: {enabled}")
+        logger.debug(f"Set dynamic prompt: {enabled}")
 
     def is_use_dynamic_prompt(self) -> bool:
-        """获取是否使用动态提示词"""
+        """Get whether to use dynamic prompts"""
         return self.use_dynamic_prompt
 
     def set_chat_history_dir(self, directory: str) -> None:
-        """设置聊天历史目录
+        """Set chat history directory
         
         Args:
-            directory: 聊天历史目录路径
+            directory: Chat history directory path
         """
         self.chat_history_dir = directory
         os.makedirs(directory, exist_ok=True)
-        logger.debug(f"设置聊天历史目录: {directory}")
+        logger.debug(f"Set chat history directory: {directory}")
 
     def get_chat_history_dir(self) -> str:
-        """获取聊天历史目录"""
+        """Get chat history directory"""
         return self.chat_history_dir
 
     def get_event_dispatcher(self) -> EventDispatcherInterface:
-        """获取事件分发器
+        """Get event dispatcher
 
         Returns:
-            EventDispatcherInterface: 事件分发器
+            EventDispatcherInterface: Event dispatcher
         """
         return self.shared_context.get_field("event_dispatcher")
 
 
     async def dispatch_event(self, event_type: str, data: Any) -> Any:
-        """分发事件"""
+        """Dispatch event"""
         from agentlang.event.event import Event
         event = Event(event_type, data)
-        logger.debug(f"分发事件: {event_type}")
+        logger.debug(f"Dispatch event: {event_type}")
         return await self.get_event_dispatcher().dispatch(event)
 
     def add_event_listener(self, event_type: str, listener: Callable) -> None:
-        """添加事件监听器"""
+        """Add event listener"""
         self.get_event_dispatcher().add_listener(event_type, listener)
-        logger.debug(f"添加事件监听器: {event_type}")
+        logger.debug(f"Add event listener: {event_type}")
 
     async def get_resource(self, name: str, factory=None) -> Any:
-        """获取资源，如不存在则创建"""
-        # 资源不存在且提供了工厂函数，则创建
+        """Get resource, create if not exists"""
+        # If resource doesn't exist and factory is provided, create it
         if name not in self._resources and factory is not None:
             try:
-                # 如果工厂是异步函数，等待其完成
+                # If factory is async function, await its completion
                 if asyncio.iscoroutinefunction(factory):
                     self._resources[name] = await factory()
                 else:
                     self._resources[name] = factory()
-                logger.debug(f"创建资源: {name}")
+                logger.debug(f"Create resource: {name}")
             except Exception as e:
-                logger.error(f"创建资源 {name} 时出错: {e}")
-                raise RuntimeError(f"创建资源 {name} 时出错: {e}")
+                logger.error(f"Error creating resource {name}: {e}")
+                raise RuntimeError(f"Error creating resource {name}: {e}")
 
-        # 返回资源（可能为None）
+        # Return resource (may be None)
         return self._resources.get(name)
 
     def add_resource(self, name: str, resource: Any) -> None:
-        """添加资源"""
+        """Add resource"""
         self._resources[name] = resource
-        logger.debug(f"添加资源: {name}")
+        logger.debug(f"Add resource: {name}")
 
     async def close_resource(self, name: str) -> None:
-        """关闭并移除资源"""
+        """Close and remove resource"""
         if name not in self._resources:
             return
 
         resource = self._resources[name]
         try:
-            # 尝试关闭资源（如果它有close方法）
+            # Try to close resource (if it has a close method)
             if hasattr(resource, "close") and callable(getattr(resource, "close")):
                 if asyncio.iscoroutinefunction(resource.close):
                     await resource.close()
                 else:
                     resource.close()
-                logger.debug(f"关闭资源: {name}")
+                logger.debug(f"Close resource: {name}")
 
-            # 移除资源
+            # Remove resource
             del self._resources[name]
         except Exception as e:
-            logger.error(f"关闭资源 {name} 时出错: {e}")
-            # 尽管出错，仍然从字典中移除
+            logger.error(f"Error closing resource {name}: {e}")
+            # Even if error occurs, still remove from dictionary
             if name in self._resources:
                 del self._resources[name]
-            raise RuntimeError(f"关闭资源 {name} 时出错: {e}")
+            raise RuntimeError(f"Error closing resource {name}: {e}")
 
     async def close_all_resources(self) -> None:
-        """关闭并移除所有资源"""
-        # 复制键列表，因为在迭代过程中会修改字典
+        """Close and remove all resources"""
+        # Copy key list because dictionary will be modified during iteration
         resource_names = list(self._resources.keys())
         for name in resource_names:
             await self.close_resource(name)
-        logger.debug(f"关闭所有资源 ({len(resource_names)} 个)")
+        logger.debug(f"Closed all resources ({len(resource_names)} items)")
 
     def set_user_id(self, user_id: str) -> None:
-        """设置用户ID"""
+        """Set user ID"""
         self._user_id = user_id
 
     def get_user_id(self) -> Optional[str]:
-        """获取用户ID"""
+        """Get user ID"""
         return self._user_id
 
     def get_metadata(self) -> Dict[str, Any]:
-        """获取上下文元数据
+        """Get context metadata
         
-        继承自BaseContext，返回所有元数据
+        Inherits from BaseContext, returns all metadata
         """
         return {**self._metadata} 

@@ -1,7 +1,7 @@
 """
-代理上下文类
+Agent context class
 
-管理与代理相关的业务参数
+Manages business parameters related to agents
 """
 
 import asyncio
@@ -21,54 +21,54 @@ from app.core.entity.project_archive import ProjectArchiveInfo
 from app.core.stream import Stream
 from app.paths import PathManager
 
-# 获取日志记录器
+# Get logger
 logger = get_logger(__name__)
 
 class AgentContext(BaseAgentContext):
     """
-    代理上下文类，包含代理运行需要的上下文信息
-    实现 AgentContextInterface 接口，提供用户和代理相关信息
+    Agent context class, contains context information needed for agent execution
+    Implements AgentContextInterface interface, providing user and agent-related information
     """
 
     def __init__(self):
         """
-        初始化代理上下文
+        Initialize agent context
         """
         super().__init__()
 
-        # 初始化字段并注册到 shared_context
+        # Initialize fields and register to shared_context
         self._init_shared_fields()
 
-        # 设置工作空间目录
+        # Set workspace directory
         try:
             self.set_workspace_dir(str(PathManager.get_workspace_dir()))
         except Exception as e:
-            logger.warning(f"无法获取工作空间目录: {e}")
+            logger.warning(f"Unable to get workspace directory: {e}")
             self.set_workspace_dir(os.path.join(os.getcwd(), ".workspace"))
             self.ensure_workspace_dir()
 
-        # 设置聊天历史目录
+        # Set chat history directory
         try:
             chat_history_dir = str(PathManager.get_chat_history_dir())
             self.set_chat_history_dir(chat_history_dir)
         except Exception as e:
-            logger.warning(f"无法获取聊天历史目录: {e}")
+            logger.warning(f"Unable to get chat history directory: {e}")
             chat_history_dir = os.path.join(os.getcwd(), ".chat_history")
             self.set_chat_history_dir(chat_history_dir)
 
-        # 设置默认代理名称
+        # Set default agent name
         self.set_agent_name("magic")
 
     def _init_shared_fields(self):
-        """初始化共享字段并注册到 shared_context"""
-        # 检查是否已经初始化
+        """Initialize shared fields and register to shared_context"""
+        # Check if already initialized
         if hasattr(self.shared_context, 'is_initialized') and self.shared_context.is_initialized():
-            logger.warning("SharedContext 已经初始化，跳过重复初始化")
+            logger.warning("SharedContext already initialized, skipping duplicate initialization")
             return
 
         super()._init_shared_fields()
 
-        # 使用 register_fields 一次性注册所有字段
+        # Use register_fields to register all fields at once
         import asyncio
         from typing import Any, Dict, Optional
 
@@ -77,7 +77,7 @@ class AgentContext(BaseAgentContext):
         from app.core.entity.project_archive import ProjectArchiveInfo
         from app.core.stream import Stream
 
-        # 初始化并注册共享字段
+        # Initialize and register shared fields
         self.shared_context.register_fields({
             "streams": ({}, Dict[str, Stream]),
             "todo_items": ({}, Dict[str, Dict[str, Any]]),
@@ -91,99 +91,99 @@ class AgentContext(BaseAgentContext):
             "organization_code": (None, Optional[str])
         })
 
-        # 标记初始化完成
+        # Mark initialization completed
         if hasattr(self.shared_context, 'set_initialized'):
             self.shared_context.set_initialized(True)
 
-        logger.info("已初始化 SharedContext 共享字段")
+        logger.info("Initialized SharedContext shared fields")
 
     def set_task_id(self, task_id: str) -> None:
-        """设置任务ID
+        """Set task ID
 
         Args:
-            task_id: 任务ID
+            task_id: Task ID
         """
         self.shared_context.update_field("task_id", task_id)
-        logger.debug(f"已更新任务ID: {task_id}")
+        logger.debug(f"Updated task ID: {task_id}")
 
     def get_task_id(self) -> Optional[str]:
-        """获取任务ID
+        """Get task ID
 
         Returns:
-            Optional[str]: 任务ID
+            Optional[str]: Task ID
         """
         return self.shared_context.get_field("task_id")
 
     def set_interrupt_queue(self, interrupt_queue: asyncio.Queue) -> None:
-        """设置中断队列
+        """Set interrupt queue
 
         Args:
-            interrupt_queue: 中断队列
+            interrupt_queue: Interrupt queue
         """
         self.shared_context.update_field("interrupt_queue", interrupt_queue)
 
     def get_interrupt_queue(self) -> Optional[asyncio.Queue]:
-        """获取中断队列
+        """Get interrupt queue
 
         Returns:
-            Optional[asyncio.Queue]: 中断队列
+            Optional[asyncio.Queue]: Interrupt queue
         """
         return self.shared_context.get_field("interrupt_queue")
 
     def set_sandbox_id(self, sandbox_id: str) -> None:
-        """设置沙盒ID
+        """Set sandbox ID
 
         Args:
-            sandbox_id: 沙盒ID
+            sandbox_id: Sandbox ID
         """
         self.shared_context.update_field("sandbox_id", sandbox_id)
-        logger.debug(f"已更新沙盒ID: {sandbox_id}")
+        logger.debug(f"Updated sandbox ID: {sandbox_id}")
 
     def get_sandbox_id(self) -> str:
-        """获取沙盒ID
+        """Get sandbox ID
 
         Returns:
-            str: 沙盒ID
+            str: Sandbox ID
         """
         return self.shared_context.get_field("sandbox_id")
 
     def set_organization_code(self, organization_code: str) -> None:
-        """设置组织编码
+        """Set organization code
 
         Args:
-            organization_code: 组织编码
+            organization_code: Organization code
         """
         self.shared_context.update_field("organization_code", organization_code)
 
     def get_organization_code(self) -> Optional[str]:
-        """获取组织编码
+        """Get organization code
 
         Returns:
-            Optional[str]: 组织编码
+            Optional[str]: Organization code
         """
         return self.shared_context.get_field("organization_code")
 
     def set_init_client_message(self, init_client_message: InitClientMessage) -> None:
-        """设置初始化客户端消息
+        """Set initialization client message
 
         Args:
-            init_client_message: 初始化客户端消息
+            init_client_message: Initialization client message
         """
         self.shared_context.update_field("init_client_message", init_client_message)
 
     def get_init_client_message(self) -> Optional[InitClientMessage]:
-        """获取初始化客户端消息
+        """Get initialization client message
 
         Returns:
-            Optional[InitClientMessage]: 初始化客户端消息
+            Optional[InitClientMessage]: Initialization client message
         """
         return self.shared_context.get_field("init_client_message")
 
     def get_init_client_message_metadata(self) -> Dict[str, Any]:
-        """获取初始化客户端消息的元数据
+        """Get initialization client message metadata
 
         Returns:
-            Dict[str, Any]: 初始化客户端消息的元数据
+            Dict[str, Any]: Initialization client message metadata
         """
         init_client_message = self.get_init_client_message()
         if init_client_message is None:
@@ -195,10 +195,10 @@ class AgentContext(BaseAgentContext):
         return init_client_message.metadata
 
     def get_init_client_message_sts_token_refresh(self) -> Optional[STSTokenRefreshConfig]:
-        """获取初始化客户端消息的STS Token刷新配置
+        """Get initialization client message STS Token refresh configuration
 
         Returns:
-            Optional[STSTokenRefreshConfig]: STS Token刷新配置
+            Optional[STSTokenRefreshConfig]: STS Token refresh configuration
         """
         init_client_message = self.get_init_client_message()
         if init_client_message is None:
@@ -210,129 +210,129 @@ class AgentContext(BaseAgentContext):
         return init_client_message.sts_token_refresh
 
     def set_chat_client_message(self, chat_client_message: ChatClientMessage) -> None:
-        """设置聊天客户端消息
+        """Set chat client message
 
         Args:
-            chat_client_message: 聊天客户端消息
+            chat_client_message: Chat client message
         """
         self.shared_context.update_field("chat_client_message", chat_client_message)
 
     def get_chat_client_message(self) -> Optional[ChatClientMessage]:
-        """获取聊天客户端消息
+        """Get chat client message
 
         Returns:
-            Optional[ChatClientMessage]: 聊天客户端消息
+            Optional[ChatClientMessage]: Chat client message
         """
         return self.shared_context.get_field("chat_client_message")
 
     def has_stream(self, stream: Stream) -> bool:
-        """检查是否存在指定的通信流
+        """Check if specified stream exists
 
         Args:
-            stream: 要检查的通信流实例
+            stream: Stream instance to check
         """
         stream_id = str(id(stream))
         streams = self.shared_context.get_field("streams")
         return stream_id in streams
 
     def add_stream(self, stream: Stream) -> None:
-        """添加一个通信流到流字典中。
+        """Add a communication stream to the stream dictionary.
 
         Args:
-            stream: 要添加的通信流实例。
+            stream: Stream instance to add.
 
         Raises:
-            TypeError: 当传入的stream不是Stream接口的实现时抛出。
+            TypeError: Raised when the passed stream is not an implementation of the Stream interface.
         """
         if not isinstance(stream, Stream):
-            raise TypeError("stream必须是Stream接口的实现")
+            raise TypeError("stream must be an implementation of the Stream interface")
 
         streams = self.shared_context.get_field("streams")
-        stream_id = str(id(stream))  # 使用stream对象的id作为键
+        stream_id = str(id(stream))  # Use stream object's id as key
         streams[stream_id] = stream
-        logger.info(f"已添加新的Stream，当前Stream数量: {len(streams)}")
+        logger.info(f"Added new Stream, current Stream count: {len(streams)}")
 
     def remove_stream(self, stream: Stream) -> None:
-        """删除一个通信流。
+        """Remove a communication stream.
 
         Args:
-            stream: 要删除的通信流实例。
+            stream: Stream instance to remove.
         """
         streams = self.shared_context.get_field("streams")
         stream_id = str(id(stream))
         if stream_id in streams:
             del streams[stream_id]
-            logger.info(f"已删除Stream, type: {type(stream)}, 当前Stream数量: {len(streams)}")
+            logger.info(f"Removed Stream, type: {type(stream)}, current Stream count: {len(streams)}")
 
     @property
     def streams(self) -> Dict[str, Stream]:
-        """获取所有通信流的字典。
+        """Get dictionary of all communication streams.
 
         Returns:
-            Dict[str, Stream]: 通信流字典，键为stream ID，值为Stream对象。
+            Dict[str, Stream]: Stream dictionary, key is stream ID, value is Stream object.
         """
         return self.shared_context.get_field("streams")
 
     def set_project_archive_info(self, project_archive_info: ProjectArchiveInfo) -> None:
-        """设置项目压缩包信息
+        """Set project archive info
 
         Args:
-            project_archive_info: 项目压缩包信息
+            project_archive_info: Project archive info
         """
         self.shared_context.update_field("project_archive_info", project_archive_info)
 
     def get_project_archive_info(self) -> Optional[ProjectArchiveInfo]:
-        """获取项目压缩包信息
+        """Get project archive info
 
         Returns:
-            Optional[ProjectArchiveInfo]: 项目压缩包信息
+            Optional[ProjectArchiveInfo]: Project archive info
         """
         return self.shared_context.get_field("project_archive_info")
 
-    # 重写基类方法，实现特定的事件分发
+    # Override base class method to implement specific event dispatching
     async def dispatch_event(self, event_type: EventType, data: BaseEventData) -> Event[Any]:
         """
-        触发指定类型的事件
+        Trigger event of specified type
 
         Args:
-            event_type: 事件类型
-            data: 事件数据，BaseEventData的子类实例
+            event_type: Event type
+            data: Event data, instance of BaseEventData subclass
 
         Returns:
-            Event: 处理后的事件对象
+            Event: Processed event object
         """
         event = Event(event_type, data)
         return await self.get_event_dispatcher().dispatch(event)
 
     async def dispatch_stoppable_event(self, event_type: EventType, data: BaseEventData) -> StoppableEvent[Any]:
         """
-        触发可停止的事件
+        Trigger stoppable event
 
         Args:
-            event_type: 事件类型
-            data: 事件数据，BaseEventData的子类实例
+            event_type: Event type
+            data: Event data, instance of BaseEventData subclass
 
         Returns:
-            StoppableEvent: 处理后的事件对象
+            StoppableEvent: Processed event object
         """
         event = StoppableEvent(event_type, data)
         return await self.get_event_dispatcher().dispatch(event)
 
     def get_todo_items(self) -> Dict[str, Dict[str, Any]]:
         """
-        获取所有待办事项
+        Get all todo items
 
         Returns:
-            Dict[str, Dict[str, Any]]: 待办事项字典，键为待办事项内容，值为包含雪花ID等信息的字典
+            Dict[str, Dict[str, Any]]: Todo items dictionary, key is todo text, value is dict containing snowflake ID and other info
         """
         return self.shared_context.get_field("todo_items")
 
     def add_todo_item(self, todo_text: str, snowflake_id: int) -> None:
-        """添加新的待办事项
+        """Add new todo item
 
         Args:
-            todo_text: 待办事项文本内容
-            snowflake_id: 待办事项的雪花ID
+            todo_text: Todo item text content
+            snowflake_id: Snowflake ID of the todo item
         """
         todo_items = self.shared_context.get_field("todo_items")
         if todo_text not in todo_items:
@@ -340,93 +340,93 @@ class AgentContext(BaseAgentContext):
                 'id': snowflake_id,
                 'completed': False
             }
-            logger.info(f"添加待办事项: {todo_text}, ID: {snowflake_id}")
+            logger.info(f"Added todo item: {todo_text}, ID: {snowflake_id}")
 
     def update_todo_item(self, todo_text: str, completed: bool = None) -> None:
-        """更新待办事项状态
+        """Update todo item status
 
         Args:
-            todo_text: 待办事项文本内容
-            completed: 是否完成
+            todo_text: Todo item text content
+            completed: Whether completed
         """
         todo_items = self.shared_context.get_field("todo_items")
         if todo_text in todo_items:
             if completed is not None:
                 todo_items[todo_text]['completed'] = completed
-            logger.info(f"更新待办事项状态: {todo_text}, completed: {todo_items[todo_text]['completed']}")
+            logger.info(f"Updated todo item status: {todo_text}, completed: {todo_items[todo_text]['completed']}")
 
     def get_todo_item_id(self, todo_text: str) -> Optional[int]:
         """
-        获取待办事项的雪花ID
+        Get snowflake ID of todo item
 
         Args:
-            todo_text: 待办事项文本内容
+            todo_text: Todo item text content
 
         Returns:
-            Optional[int]: 待办事项的雪花ID，如果不存在则返回None
+            Optional[int]: Snowflake ID of todo item, returns None if not exists
         """
         todo_items = self.shared_context.get_field("todo_items")
         return todo_items.get(todo_text, {}).get('id')
 
     def has_todo_item(self, todo_text: str) -> bool:
         """
-        检查待办事项是否存在
+        Check if todo item exists
 
         Args:
-            todo_text: 待办事项文本内容
+            todo_text: Todo item text content
 
         Returns:
-            bool: 待办事项是否存在
+            bool: Whether todo item exists
         """
         todo_items = self.shared_context.get_field("todo_items")
         return todo_text in todo_items
 
     def update_activity_time(self) -> None:
-        """更新agent活动时间"""
+        """Update agent activity time"""
         self.shared_context.update_activity_time()
 
     def is_idle_timeout(self) -> bool:
-        """检查agent是否超时闲置
+        """Check if agent is idle timeout
 
         Returns:
-            bool: 如果超时则返回True，否则返回False
+            bool: Returns True if timeout, otherwise False
         """
         return self.shared_context.is_idle_timeout()
 
     def add_attachment(self, attachment: Attachment) -> None:
-        """添加附件到代理上下文
+        """Add attachment to agent context
 
-        所有工具产生的附件都将被添加到这里，以便在任务完成时一次性发送
-        如果文件名已存在，则更新对应的附件对象
+        All attachments generated by tools will be added here for batch sending when task completes
+        If filename already exists, update the corresponding attachment object
 
         Args:
-            attachment: 要添加的附件对象
+            attachment: Attachment object to add
         """
         attachments = self.shared_context.get_field("attachments")
         filename = attachment.filename
 
         if filename in attachments:
-            logger.debug(f"更新附件 {filename} 在代理上下文中")
+            logger.debug(f"Updating attachment {filename} in agent context")
         else:
-            logger.debug(f"添加新附件 {filename} 到代理上下文，当前附件总数: {len(attachments) + 1}")
+            logger.debug(f"Adding new attachment {filename} to agent context, total attachments: {len(attachments) + 1}")
 
         attachments[filename] = attachment
 
     def get_attachments(self) -> List[Attachment]:
-        """获取所有附件
+        """Get all attachments
 
         Returns:
-            List[Attachment]: 所有收集到的附件列表
+            List[Attachment]: List of all collected attachments
         """
         attachments = self.shared_context.get_field("attachments")
         return list(attachments.values())
 
-    # 重写用户相关方法
+    # Override user-related methods
     def get_user_id(self) -> Optional[str]:
-        """获取用户ID
+        """Get user ID
 
         Returns:
-            Optional[str]: 用户ID，如果不存在则返回None
+            Optional[str]: User ID, returns None if not exists
         """
         metadata = self.get_init_client_message_metadata()
         return metadata.get("user_id")

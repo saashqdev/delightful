@@ -1,5 +1,5 @@
 """
-WebSocket服务器命令模块
+WebSocket server command module
 """
 import asyncio
 import importlib
@@ -22,55 +22,55 @@ from app.api.routes.websocket import router as websocket_router
 from app.service.agent_dispatcher import AgentDispatcher
 from app.service.idle_monitor_service import IdleMonitorService
 
-# 获取日志记录器
+# Get logger
 logger = get_logger(__name__)
 
-# 存储服务器实例和全局变量
+# Store server instance and global variables
 ws_server = None
-_app = None  # 存储FastAPI应用实例的内部变量
+_app = None  # Internal variable to store FastAPI application instance
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """服务生命周期管理"""
-    # 启动时
-    logger.info("服务正在启动...")
+    """Service lifecycle management"""
+    # On startup
+    logger.info("Service is starting...")
 
-    # 打印Git commit ID
-    git_commit_id = os.getenv("GIT_COMMIT_ID", "未知")
-    logger.info(f"当前版本Git commit ID: {git_commit_id}")
+    # Print Git commit ID
+    git_commit_id = os.getenv("GIT_COMMIT_ID", "Unknown")
+    logger.info(f"Current version Git commit ID: {git_commit_id}")
 
-    logger.info("WebSocket服务将监听端口：8002")
+    logger.info("WebSocket service will listen on port: 8002")
     yield
-    # 关闭时
-    logger.info("服务正在关闭...")
+    # On shutdown
+    logger.info("Service is shutting down...")
 
 
 def create_app() -> FastAPI:
-    """创建并配置FastAPI应用实例"""
-    # 创建 FastAPI 应用
+    """Create and configure FastAPI application instance"""
+    # Create FastAPI application
     app = FastAPI(
         title="Super Magic API",
-        description="Super Magic API 和 WebSocket 服务",
+        description="Super Magic API and WebSocket service",
         version="0.1.0",
         lifespan=lifespan,
     )
 
-    # 添加请求日志中间件
+    # Add request logging middleware
     app.add_middleware(RequestLoggingMiddleware)
 
-    # 添加 CORS 中间件 - 修改配置以解决浏览器跨域问题
+    # Add CORS middleware - Modified config to solve browser cross-origin issues
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["*"],  # 允许所有源，也可以指定特定域名，如 ["http://localhost:3000"]
+        allow_origins=["*"],  # Allow all origins, can also specify specific domains like ["http://localhost:3000"]
         allow_credentials=True,
-        allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],  # 明确指定允许的方法
-        allow_headers=["*"],  # 允许所有头信息
-        expose_headers=["*"],  # 暴露所有头信息
-        max_age=600,  # 预检请求结果缓存时间，单位秒
+        allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],  # Explicitly specify allowed methods
+        allow_headers=["*"],  # Allow all headers
+        expose_headers=["*"],  # Expose all headers
+        max_age=600,  # Preflight request result cache time in seconds
     )
 
-    # 注册路由
+    # Register routes
     app.include_router(api_router)
     app.include_router(websocket_router)
 
@@ -78,10 +78,10 @@ def create_app() -> FastAPI:
 
 
 def get_app() -> FastAPI:
-    """获取FastAPI应用实例，避免循环导入
+    """Get FastAPI application instance, avoid circular imports
 
     Returns:
-        FastAPI: 应用实例
+        FastAPI: Application instance
     """
     global _app
     if _app is None:
@@ -90,62 +90,62 @@ def get_app() -> FastAPI:
 
 
 class CustomServer(uvicorn.Server):
-    """自定义 uvicorn Server 类，用于正确处理信号"""
+    """Custom uvicorn Server class for proper signal handling"""
 
     def install_signal_handlers(self) -> None:
-        """不安装信号处理器，使用我们自己的处理方式"""
+        """Do not install signal handlers, use our own handling method"""
         pass
 
     async def shutdown(self, sockets=None):
-        """尝试优雅地关闭服务器"""
-        logger.info("正在关闭 uvicorn 服务器...")
+        """Attempt to gracefully shutdown server"""
+        logger.info("Shutting down uvicorn server...")
         await super().shutdown(sockets=sockets)
 
 
 def start_ws_server():
-    """启动WebSocket服务器"""
-    # 获取环境变量中的日志级别
+    """Start WebSocket server"""
+    # Get log level from environment variable
     log_level = os.getenv("LOG_LEVEL", "INFO")
 
-    # 获取FastAPI应用实例
+    # Get FastAPI application instance
     app = get_app()
 
-    # 创建一个仅启动WS服务器的异步函数
+    # Create async function to start WS server only
     async def run_ws_only():
         process_manager = ProcessManager.get_instance()
-        # 获取并处理entry_points
+        # Get and process entry_points
         try:
-            # 使用pkg_resources处理entry_points
+            # Use pkg_resources to process entry_points
             process_entry_points = list(importlib.metadata.entry_points(group='command.ws_server.process'))
 
-            logger.info(f"找到 {len(process_entry_points)} 个 ws_server 进程 entry_points")
+            logger.info(f"Found {len(process_entry_points)} ws_server process entry_points")
 
-            # 加载所有找到的entry_points
+            # Load all found entry_points
             for entry_point in process_entry_points:
-                logger.info(f"正在加载进程: {entry_point.name}")
+                logger.info(f"Loading process: {entry_point.name}")
                 value = entry_point.value
                 value = value.split(":")
                 module_name = value[0]
                 function_name = value[1]
-                logger.info(f"加载模块: {module_name}, 函数: {function_name}")
+                logger.info(f"Loading module: {module_name}, function: {function_name}")
                 loader = importlib.import_module(module_name)
                 await loader.load(process_manager, log_level)
         except Exception as e:
-            logger.error(f"加载entry_points时出错: {e}")
+            logger.error(f"Error loading entry_points: {e}")
 
         dispatcher = AgentDispatcher.get_instance()
         await dispatcher.setup()
 
         IdleMonitorService.get_instance().start()
 
-        # 使用与原main()函数相似的代码，但只启动WebSocket服务
-        # 创建并配置WebSocket socket
+        # Use code similar to original main() function, but only start WebSocket service
+        # Create and configure WebSocket socket
         ws_port = 8002
         ws_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         ws_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         ws_socket.bind(("0.0.0.0", ws_port))
 
-        logger.info(f"WebSocket服务将监听端口：{ws_port}")
+        logger.info(f"WebSocket service will listen on port: {ws_port}")
 
         # 创建uvicorn配置
         uvicorn_config = Config(

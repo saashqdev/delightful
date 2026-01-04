@@ -116,11 +116,11 @@ class AliyunOSSUploader(AbstractStorage, BaseFileProcessor):
         if options is None:
             options = {}
 
-        # 处理文件
+        # Process file
         try:
             file_obj, file_size = self.process_file(file)
 
-            # 文件大小限制检查
+            # File size limit check
             if file_size > 5 * 1024 * 1024 * 1024:  # 5GB
                 if isinstance(file, str):
                     file_obj.close()
@@ -130,40 +130,40 @@ class AliyunOSSUploader(AbstractStorage, BaseFileProcessor):
                     file_name=key
                 )
 
-            # 获取凭证信息
+            # Get credential information
             credentials: AliyunCredentials = self.credentials
             oss_creds = credentials.credentials
 
-            # 创建OSS身份验证对象
+            # Create OSS authentication object
             auth = oss2.StsAuth(
                 oss_creds.AccessKeyId,
                 oss_creds.AccessKeySecret,
                 oss_creds.SecurityToken
             )
 
-            # 创建OSS Bucket对象
+            # Create OSS Bucket object
             bucket = oss2.Bucket(auth, credentials.endpoint, credentials.bucket)
 
             try:
-                # 使用异步方式执行上传操作
+                # Execute upload operation asynchronously
                 loop = asyncio.get_event_loop()
                 result = await loop.run_in_executor(
                     None,
                     lambda: bucket.put_object(key, file_obj)
                 )
 
-                # 关闭文件（如果是我们打开的）
+                # Close file (if we opened it)
                 if isinstance(file, str):
                     file_obj.close()
 
-                # 获取响应头
+                # Get response headers
                 headers = {}
                 if hasattr(result, 'headers'):
                     headers = dict(result.headers)
                 elif hasattr(result, 'request_info') and hasattr(result.request_info, 'headers'):
                     headers = dict(result.request_info.headers)
 
-                # 返回标准响应
+                # Return standard response
                 return StorageResponse(
                     key=key,
                     platform=PlatformType.aliyun,
@@ -177,7 +177,7 @@ class AliyunOSSUploader(AbstractStorage, BaseFileProcessor):
                 raise UploadException(UploadExceptionCode.NETWORK_ERROR, str(e))
 
         except Exception as e:
-            # 确保文件被关闭
+            # Ensure file is closed
             if 'file_obj' in locals() and isinstance(file, str):
                 try:
                     file_obj.close()
@@ -196,50 +196,50 @@ class AliyunOSSUploader(AbstractStorage, BaseFileProcessor):
         options: Optional[Options] = None
     ) -> BinaryIO:
         """
-        异步从阿里云对象存储下载文件。
+        Asynchronously download file from Aliyun Object Storage.
 
         Args:
-            key: 文件名/路径
-            options: 可选配置
+            key: File name/path
+            options: Optional configuration
 
         Returns:
-            BinaryIO: 文件内容的二进制流
+            BinaryIO: Binary stream of file content
 
         Raises:
-            DownloadException: 如果下载失败
-            ValueError: 如果凭证类型不正确或未设置元数据
+            DownloadException: If download fails
+            ValueError: If credential type is incorrect or metadata not set
         """
-        # 此时凭证已经由装饰器刷新过，直接使用self.credentials
+        # At this point credentials have been refreshed by decorator, use self.credentials directly
 
         if options is None:
             options = {}
 
         try:
-            # 获取凭证信息
+            # Get credential information
             credentials: AliyunCredentials = self.credentials
             oss_creds = credentials.credentials
 
-            # 创建OSS身份验证对象
+            # Create OSS authentication object
             auth = oss2.StsAuth(
                 oss_creds.AccessKeyId,
                 oss_creds.AccessKeySecret,
                 oss_creds.SecurityToken
             )
 
-            # 创建OSS Bucket对象
+            # Create OSS Bucket object
             bucket = oss2.Bucket(auth, credentials.endpoint, credentials.bucket)
 
             try:
-                # 异步获取对象
+                # Asynchronously get object
                 loop = asyncio.get_event_loop()
                 result = await loop.run_in_executor(
                     None,
                     lambda: bucket.get_object(key)
                 )
 
-                # 读取内容到内存
+                # Read content to memory
                 content = result.read()
-                # 创建内存流
+                # Create memory stream
                 file_stream = io.BytesIO(content)
                 return file_stream
 
@@ -260,42 +260,42 @@ class AliyunOSSUploader(AbstractStorage, BaseFileProcessor):
         options: Optional[Options] = None
     ) -> bool:
         """
-        异步检查存储平台上是否存在指定的文件。
+        Asynchronously check if specified file exists on storage platform.
 
         Args:
-            key: 文件名/路径
-            options: 可选配置
+            key: Filename/path
+            options: Optional configuration
 
         Returns:
-            bool: 如果文件存在则为True，否则为False
+            bool: True if file exists, otherwise False
 
         Raises:
-            InitException: 如果初始化参数缺失
-            ValueError: 如果凭证类型错误或未设置元数据
+            InitException: If initialization parameters are missing
+            ValueError: If credential type is incorrect or metadata not set
         """
         credentials: AliyunCredentials = self.credentials
         if credentials is None:
-            raise ValueError("未设置凭证")
+            raise ValueError("Credentials not set")
 
         if options is None:
             options = {}
 
         try:
-            # 获取凭证信息
+            # Get credential information
             oss_creds = credentials.credentials
 
-            # 创建OSS身份验证对象
+            # Create OSS authentication object
             auth = oss2.StsAuth(
                 oss_creds.AccessKeyId,
                 oss_creds.AccessKeySecret,
                 oss_creds.SecurityToken
             )
 
-            # 创建OSS Bucket对象
+            # Create OSS Bucket object
             bucket = oss2.Bucket(auth, credentials.endpoint, credentials.bucket)
 
             try:
-                # 异步检查对象是否存在
+                # Asynchronously check if object exists
                 loop = asyncio.get_event_loop()
                 await loop.run_in_executor(
                     None,
@@ -303,7 +303,7 @@ class AliyunOSSUploader(AbstractStorage, BaseFileProcessor):
                 )
                 return True
             except Exception as e:
-                # 对象不存在，或者发生了其他错误
+                # Object does not exist, or other error occurred
                 logger.error(f"Error during head_object for key '{key}': {type(e).__name__} - {e}")
                 return False
 

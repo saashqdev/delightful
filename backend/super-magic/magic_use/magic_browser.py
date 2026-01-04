@@ -1,8 +1,8 @@
 """
-浏览器控制核心模块
+Browser control core module
 
-提供浏览器实例的创建、配置和控制功能，
-包括页面操作、元素查找和内容获取等基础功能。
+Provides browser instance creation, configuration and control functionality,
+including page operations, element finding and content retrieval.
 """
 
 import asyncio
@@ -23,18 +23,18 @@ from magic_use.browser_manager import BrowserManager
 from magic_use.magic_browser_config import MagicBrowserConfig
 from magic_use.page_registry import PageRegistry, PageState
 
-# 设置日志
+# Setup logging
 logger = logging.getLogger(__name__)
 
 
 # --- DTO Definitions ---
 
 class MagicBrowserError(BaseModel):
-    """通用的 MagicBrowser 操作失败结果"""
+    """Generic MagicBrowser operation failure result"""
     success: Literal[False] = False
-    error: str = Field(..., description="错误信息描述")
-    operation: Optional[str] = Field(None, description="执行失败的操作名称")
-    details: Optional[Dict[str, Any]] = Field(None, description="可选的错误上下文细节")
+    error: str = Field(..., description="Error message description")
+    operation: Optional[str] = Field(None, description="Name of failed operation")
+    details: Optional[Dict[str, Any]] = Field(None, description="Optional error context details")
 
 class GotoSuccess(BaseModel):
     success: Literal[True] = True
@@ -43,12 +43,12 @@ class GotoSuccess(BaseModel):
 
 class ClickSuccess(BaseModel):
     success: Literal[True] = True
-    final_url: Optional[str] = None # 点击不一定导致导航
+    final_url: Optional[str] = None # Click doesn't necessarily cause navigation
     title_after: Optional[str] = None
 
 class InputSuccess(BaseModel):
     success: Literal[True] = True
-    final_url: Optional[str] = None # 输入后按回车可能导致导航
+    final_url: Optional[str] = None # Pressing enter after input may cause navigation
     title_after: Optional[str] = None
 
 class ScreenshotSuccess(BaseModel):
@@ -65,19 +65,19 @@ class MarkdownSuccess(BaseModel):
 
 class InteractiveElementsSuccess(BaseModel):
     success: Literal[True] = True
-    elements_by_category: Dict[str, List[Dict[str, Any]]] # JS 返回结构可能仍是 Dict
+    elements_by_category: Dict[str, List[Dict[str, Any]]] # JS return structure may still be Dict
     total_count: int
 
 class JSEvalSuccess(BaseModel):
     success: Literal[True] = True
-    result: Any # JS 返回结果类型未知
+    result: Any # JS return result type unknown
 
 class PageStateSuccess(BaseModel):
     success: Literal[True] = True
-    state: PageState # 直接封装 PageState
+    state: PageState # Directly encapsulate PageState
 
 class ScrollPositionData(BaseModel):
-    """用于 ScrollSuccess 的滚动位置数据"""
+    """Scroll position data for ScrollSuccess"""
     x: float
     y: float
 
@@ -96,7 +96,7 @@ class ScrollToSuccess(BaseModel):
     before: ScrollPositionData
     after: ScrollPositionData
 
-# 定义统一的返回类型别名
+# Define unified return type alias
 MagicBrowserResult = Union[
     GotoSuccess, ClickSuccess, InputSuccess, ScreenshotSuccess, MarkdownSuccess,
     InteractiveElementsSuccess, JSEvalSuccess, PageStateSuccess, ScrollSuccess, ScrollToSuccess,
@@ -107,18 +107,18 @@ MagicBrowserResult = Union[
 
 
 class MagicBrowser:
-    """浏览器控制类
+    """Browser control class
 
-    管理浏览器页面集合，提供页面操作和内容获取功能。
-    通过组合 BrowserManager 和 PageRegistry 实现功能。
-    统一处理底层 Playwright 错误并返回结构化结果对象。
+    Manages browser page collection, provides page operations and content retrieval functionality.
+    Implements functionality through composition of BrowserManager and PageRegistry.
+    Uniformly handles underlying Playwright errors and returns structured result objects.
     """
 
     def __init__(self, config: Optional[MagicBrowserConfig] = None):
-        """初始化浏览器控制类
+        """Initialize browser control class
 
         Args:
-            config: 浏览器配置，如果为None则使用默认爬虫配置
+            config: Browser configuration, if None use default scraping configuration
         """
         self.config = config or MagicBrowserConfig.create_for_scraping()
         self._browser_manager = BrowserManager()
@@ -128,149 +128,149 @@ class MagicBrowser:
         self._active_page_id: Optional[str] = None
         self._managed_page_ids: set[str] = set()
         self._initialized: bool = False
-        self._temp_files: List[Path] = [] # 用于管理临时截图文件
+        self._temp_files: List[Path] = [] # For managing temporary screenshot files
 
-        # --- 临时截图目录 ---
+        # --- Temporary screenshot directory ---
         self._TEMP_SCREENSHOT_DIR: Optional[Path] = None
         try:
-            # 在系统临时目录下为该浏览器实例创建唯一的截图子目录
+            # Create unique screenshot subdirectory for this browser instance in system temp directory
             temp_dir = Path(tempfile.gettempdir())
             unique_dir_name = f"super_magic_browser_screenshots_{uuid.uuid4()}"
             self._TEMP_SCREENSHOT_DIR = temp_dir / unique_dir_name
             self._TEMP_SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
-            logger.info(f"浏览器临时截图目录已创建: {self._TEMP_SCREENSHOT_DIR}")
+            logger.info(f"Browser temporary screenshot directory created: {self._TEMP_SCREENSHOT_DIR}")
         except Exception as e:
-            logger.error(f"创建临时截图目录失败: {self._TEMP_SCREENSHOT_DIR}, 错误: {e}", exc_info=True)
-            self._TEMP_SCREENSHOT_DIR = None # 标记为不可用
-        # --- 结束临时截图目录 ---
+            logger.error(f"Failed to create temporary screenshot directory: {self._TEMP_SCREENSHOT_DIR}, error: {e}", exc_info=True)
+            self._TEMP_SCREENSHOT_DIR = None # Mark as unavailable
+        # --- End temporary screenshot directory ---
 
     async def initialize(self) -> None:
-        """初始化浏览器实例
+        """Initialize browser instance
 
-        初始化底层浏览器管理器并创建首个上下文
+        Initialize underlying browser manager and create first context
         """
         if self._initialized:
             return
 
         try:
-            # 初始化浏览器管理器
+            # Initialize browser manager
             await self._browser_manager.initialize(self.config)
-            # 注册为浏览器客户端
+            # Register as browser client
             await self._browser_manager.register_client()
 
-            # 创建默认上下文
+            # Create default context
             context_id, _ = await self._browser_manager.get_context(self.config)
             self._active_context_id = context_id
 
             self._initialized = True
-            logger.info("MagicBrowser 初始化完成")
+            logger.info("MagicBrowser initialization completed")
         except Exception as e:
-            logger.error(f"初始化浏览器失败: {e}", exc_info=True)
+            logger.error(f"Failed to initialize browser: {e}", exc_info=True)
             raise
 
     async def _ensure_initialized(self):
-        """确保浏览器已初始化"""
+        """Ensure browser is initialized"""
         if not self._initialized:
             await self.initialize()
 
     async def new_context(self) -> str:
-        """创建新的浏览器上下文并设为活动"""
+        """Create new browser context and set as active"""
         await self._ensure_initialized()
         try:
             context_id, _ = await self._browser_manager.get_context(self.config)
             self._active_context_id = context_id
-            logger.info(f"创建新上下文并设为活动: {context_id}")
+            logger.info(f"Created new context and set as active: {context_id}")
             return context_id
         except Exception as e:
-            logger.error(f"创建浏览器上下文失败: {e}", exc_info=True)
-            raise # 上下文创建失败也视为严重错误
+            logger.error(f"Failed to create browser context: {e}", exc_info=True)
+            raise # Context creation failure also considered critical error
 
     async def new_page(self, context_id: Optional[str] = None) -> str:
-        """创建新页面并设为活动"""
+        """Create new page and set as active"""
         await self._ensure_initialized()
         try:
             use_context_id = context_id or self._active_context_id
             if not use_context_id:
-                logger.warning("未指定上下文ID且无活动上下文，创建新上下文")
+                logger.warning("No context ID specified and no active context, creating new context")
                 use_context_id = await self.new_context()
 
             context = await self._browser_manager.get_context_by_id(use_context_id)
             if not context:
-                raise ValueError(f"上下文不存在: {use_context_id}")
+                raise ValueError(f"Context does not exist: {use_context_id}")
 
             page = await context.new_page()
             page_id = await self._page_registry.register_page(page, use_context_id)
             self._managed_page_ids.add(page_id)
             self._active_page_id = page_id
-            self._active_context_id = use_context_id # 更新活动的 context ID
+            self._active_context_id = use_context_id # Update active context ID
 
-            # PageRegistry 内部的 handle_page_load_and_script_injection 会处理 JS 加载
+            # PageRegistry's internal handle_page_load_and_script_injection will handle JS loading
 
-            logger.info(f"创建新页面并设为活动: {page_id} (上下文: {use_context_id})")
+            logger.info(f"Created new page and set as active: {page_id} (context: {use_context_id})")
             return page_id
         except Exception as e:
-            logger.error(f"创建页面失败: {e}", exc_info=True)
-            raise # 页面创建失败视为严重错误
+            logger.error(f"Failed to create page: {e}", exc_info=True)
+            raise # Page creation failure is considered a critical error
 
     async def ensure_js_module_loaded(self, page_id: str, module_names: Union[str, List[str]]) -> Dict[str, bool]:
-        """确保指定页面加载了JS模块
+        """Ensure specified page has loaded JS modules
 
         Args:
-            page_id: 页面ID
-            module_names: 模块名称或名称列表
+            page_id: Page ID
+            module_names: Module name or list of module names
 
         Returns:
-            Dict[str, bool]: 加载结果
+            Dict[str, bool]: Loading result
         """
         return await self._page_registry.ensure_js_module_loaded(page_id, module_names)
 
     async def get_active_context_id(self) -> Optional[str]:
-        """获取当前活动上下文ID"""
+        """Get current active context ID"""
         return self._active_context_id
 
     async def has_active_context(self) -> bool:
-        """检查是否有活动上下文"""
-        await self._ensure_initialized() # 确保管理器已初始化
+        """Check if there is an active context"""
+        await self._ensure_initialized() # Ensure manager is initialized
         if not self._active_context_id:
             return False
         context = await self._browser_manager.get_context_by_id(self._active_context_id)
         return context is not None
 
     async def get_active_page_id(self) -> Optional[str]:
-        """获取当前活动页面ID (并验证页面是否仍有效)"""
+        """Get current active page ID (and verify page is still valid)"""
         if self._active_page_id:
             page = await self._page_registry.get_page_by_id(self._active_page_id)
-            if not page: # get_page_by_id 内部已检查 is_closed
-                logger.warning(f"活动页面 {self._active_page_id} 已不存在或关闭，清除活动页面ID。")
+            if not page: # get_page_by_id internally checks is_closed
+                logger.warning(f"Active page {self._active_page_id} no longer exists or is closed, clearing active page ID.")
                 self._managed_page_ids.discard(self._active_page_id)
                 self._active_page_id = None
         return self._active_page_id
 
     async def get_page_by_id(self, page_id: str) -> Optional[Page]:
-        """根据ID获取有效页面 (不存在或已关闭则返回None)"""
+        """Get valid page by ID (returns None if doesn't exist or is closed)"""
         return await self._page_registry.get_page_by_id(page_id)
 
-    async def get_active_context(self) -> Optional[Any]: # 返回类型应为 Context，但避免循环导入
-        """获取当前活动上下文对象"""
+    async def get_active_context(self) -> Optional[Any]: # Return type should be Context, but avoid circular import
+        """Get current active context object"""
         await self._ensure_initialized()
         if not self._active_context_id:
             return None
         return await self._browser_manager.get_context_by_id(self._active_context_id)
 
     async def get_active_page(self) -> Optional[Page]:
-        """获取当前活动页面对象"""
+        """Get current active page object"""
         page_id = await self.get_active_page_id()
         if not page_id:
             return None
         return await self.get_page_by_id(page_id)
 
     async def get_all_pages(self) -> Dict[str, Page]:
-        """获取所有当前打开的页面"""
-        # PageRegistry 的 get_all_pages 已优化为只返回打开的页面
+        """Get all currently open pages"""
+        # PageRegistry's get_all_pages is optimized to return only open pages
         return await self._page_registry.get_all_pages()
 
     async def goto(self, page_id: Optional[str], url: str, wait_until: str = "domcontentloaded") -> MagicBrowserResult:
-        """导航到指定URL，如果 page_id 为 None，则自动创建新页面。"""
+        """Navigate to specified URL, if page_id is None, automatically create new page."""
         operation_name = "goto"
         page: Optional[Page] = None
         actual_page_id: Optional[str] = page_id
@@ -278,92 +278,92 @@ class MagicBrowser:
         try:
             await self._ensure_initialized()
 
-            # 如果未提供 page_id，创建新页面
+            # If page_id not provided, create new page
             if not actual_page_id:
-                logger.info(f"{operation_name}: 未提供 page_id，创建新页面访问 {url}")
-                actual_page_id = await self.new_page() # new_page 会设为活动页面
+                logger.info(f"{operation_name}: page_id not provided, creating new page to visit {url}")
+                actual_page_id = await self.new_page() # new_page will set as active page
                 page = await self.get_page_by_id(actual_page_id)
-                if not page: # new_page 应该保证页面存在，但作为保险
-                    raise RuntimeError(f"未能创建或获取新页面用于 {operation_name}")
+                if not page: # new_page should guarantee page exists, but as insurance
+                    raise RuntimeError(f"Failed to create or get new page for {operation_name}")
             else:
                 page = await self.get_page_by_id(actual_page_id)
                 if not page:
-                    return MagicBrowserError(error=f"页面不存在或已关闭: {actual_page_id}", operation=operation_name)
+                    return MagicBrowserError(error=f"Page does not exist or is closed: {actual_page_id}", operation=operation_name)
 
-            # 设置活动页面（即使是已存在的页面，也更新为活动）
+            # Set active page (even for existing pages, update to active)
             self._active_page_id = actual_page_id
             context_id = await self._page_registry.get_context_id_for_page(actual_page_id)
             if context_id: self._active_context_id = context_id
 
-            logger.info(f"{operation_name}: 页面 {actual_page_id} 导航至 {url}")
-            await page.goto(url, wait_until=wait_until, timeout=60000) # 增加超时
+            logger.info(f"{operation_name}: Page {actual_page_id} navigating to {url}")
+            await page.goto(url, wait_until=wait_until, timeout=60000) # Increase timeout
             await self._wait_for_stable_network(page)
 
             final_url = page.url
-            title = "获取标题失败"
+            title = "Failed to get title"
             try:
-                title = await page.title() or "无标题"
-            except PlaywrightError as title_e: # 更精确地捕获 Playwright 错误
-                logger.warning(f"获取页面 {actual_page_id} 标题失败: {title_e}")
-            except Exception as title_e_general: # 捕获其他可能的异常
-                logger.warning(f"获取页面 {actual_page_id} 标题时发生意外错误: {title_e_general}")
+                title = await page.title() or "No title"
+            except PlaywrightError as title_e: # More precisely catch Playwright errors
+                logger.warning(f"Failed to get title for page {actual_page_id}: {title_e}")
+            except Exception as title_e_general: # Catch other possible exceptions
+                logger.warning(f"Unexpected error when getting title for page {actual_page_id}: {title_e_general}")
 
 
-            logger.info(f"{operation_name}: 页面 {actual_page_id} 导航成功, URL: {final_url}, Title: {title}")
+            logger.info(f"{operation_name}: Page {actual_page_id} navigation successful, URL: {final_url}, Title: {title}")
             return GotoSuccess(final_url=final_url, title=title)
 
-        except PlaywrightError as e: # 捕获特定的 Playwright 错误
-            error_msg = f"导航到 {url} 失败 (Playwright Error): {e}"
-            logger.error(error_msg, exc_info=False) # PlaywrightError 通常信息足够
+        except PlaywrightError as e: # Catch specific Playwright errors
+            error_msg = f"Failed to navigate to {url} (Playwright Error): {e}"
+            logger.error(error_msg, exc_info=False) # PlaywrightError typically has enough info
             return MagicBrowserError(error=error_msg, operation=operation_name, details={"url": url, "page_id": actual_page_id})
-        except Exception as e: # 捕获其他意外错误
-            error_msg = f"导航到 {url} 失败 (Unexpected Error): {e}"
+        except Exception as e: # Catch other unexpected errors
+            error_msg = f"Failed to navigate to {url} (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
             return MagicBrowserError(error=error_msg, operation=operation_name, details={"url": url, "page_id": actual_page_id})
 
     async def click(self, page_id: str, selector: str) -> MagicBrowserResult:
-        """点击指定元素"""
+        """Click specified element"""
         operation_name = "click"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"页面不存在或已关闭: {page_id}", operation=operation_name)
+            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         try:
-            self._active_page_id = page_id # 点击操作也设置活动页面
-            logger.info(f"{operation_name}: 页面 {page_id} 点击选择器 '{selector}'")
-            # 使用 click 方法，Playwright 会自动等待元素可见和可点击
-            await page.click(selector, timeout=15000) # 增加超时
+            self._active_page_id = page_id # Click operation also sets active page
+            logger.info(f"{operation_name}: Page {page_id} clicking selector '{selector}'")
+            # Use click method, Playwright automatically waits for element to be visible and clickable
+            await page.click(selector, timeout=15000) # Increase timeout
             await self._wait_for_stable_network(page)
 
-            # 获取点击后的 URL 和标题 (可能变化)
+            # Get URL and title after click (may change)
             final_url = page.url
-            title_after = "获取标题失败"
+            title_after = "Failed to get title"
             try:
-                # 检查页面是否在点击后关闭了
+                # Check if page closed after click
                 if page.is_closed():
-                    logger.warning(f"{operation_name}: 页面 {page_id} 在点击后关闭，无法获取后续标题。")
-                    title_after = "页面已关闭"
+                    logger.warning(f"{operation_name}: Page {page_id} closed after click, cannot get subsequent title.")
+                    title_after = "Page closed"
                 else:
-                    title_after = await page.title() or "无标题"
+                    title_after = await page.title() or "No title"
             except PlaywrightError as title_e:
-                logger.warning(f"获取页面 {page_id} 点击后标题失败: {title_e}")
+                logger.warning(f"Failed to get page {page_id} title after click: {title_e}")
             except Exception as title_e_general:
-                logger.warning(f"获取页面 {page_id} 点击后标题时发生意外错误: {title_e_general}")
+                logger.warning(f"Unexpected error occurred while getting page {page_id} title after click: {title_e_general}")
 
-            logger.info(f"{operation_name}: 页面 {page_id} 点击 '{selector}' 成功。")
+            logger.info(f"{operation_name}: Page {page_id} clicked '{selector}' successfully.")
             return ClickSuccess(final_url=final_url, title_after=title_after)
 
         except PlaywrightError as e:
-            error_msg = f"点击元素 '{selector}' 失败 (Playwright Error): {e}"
+            error_msg = f"Failed to click element '{selector}' (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
-            # 检查是否是元素找不到的错误
+            # Check if it's element not found error
             if "selector resolved to no elements" in str(e):
-                error_msg = f"点击失败: 找不到元素 '{selector}' 或元素不可见/不可交互。"
+                error_msg = f"Click failed: Element '{selector}' not found or element is not visible/not interactable."
             elif "timeout" in str(e).lower():
-                error_msg = f"点击元素 '{selector}' 超时，元素可能未在预期时间内出现或变为可点击状态。"
+                error_msg = f"Click on element '{selector}' timed out, element may not have appeared or become clickable within expected time."
             return MagicBrowserError(error=error_msg, operation=operation_name, details={"selector": selector, "page_id": page_id})
         except Exception as e:
-            error_msg = f"点击元素 '{selector}' 失败 (Unexpected Error): {e}"
+            error_msg = f"Failed to click element '{selector}' (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
             return MagicBrowserError(error=error_msg, operation=operation_name, details={"selector": selector, "page_id": page_id})
 

@@ -1,4 +1,4 @@
-"""工具详情工厂模块"""
+"""Tool detail factory module"""
 
 from typing import Dict, List
 
@@ -16,19 +16,19 @@ from app.core.entity.tool.tool_result import SearchResult
 
 
 class ToolDetailFactory:
-    """工具详情工厂类，用于创建不同类型的ToolDetail对象"""
+    """Tool detail factory class, used to create different types of ToolDetail objects"""
 
     @staticmethod
     def create_search_detail_from_search_results(search_results: Dict[str, List[SearchResult]]) -> ToolDetail:
-        """从SearchResult对象创建搜索类型的工具详情
+        """Create search type tool detail from SearchResult objects
 
         Args:
-            search_results: 搜索结果字典，键为查询词，值为SearchResult对象列表
+            search_results: Search results dictionary, key is query term, value is list of SearchResult objects
 
         Returns:
-            ToolDetail: 搜索类型的工具详情
+            ToolDetail: Search type tool detail
         """
-        # 创建多组搜索结果
+        # Create multiple groups of search results
         search_groups = []
 
         for query, results in search_results.items():
@@ -37,11 +37,11 @@ class ToolDetailFactory:
                     title=item.title,
                     url=item.url,
                     snippet=item.snippet or "",
-                    icon_url=item.icon_url  # 添加图标URL
+                    icon_url=item.icon_url  # Add icon URL
                 ) for item in results
             ]
 
-            # 将一个关键词及其对应的结果创建为一个SearchGroupItem
+            # Create one keyword and its corresponding results as a SearchGroupItem
             group = SearchGroupItem(keyword=query, results=result_items)
 
             search_groups.append(group)
@@ -50,15 +50,15 @@ class ToolDetailFactory:
 
     @staticmethod
     def create_terminal_detail(command: str, output: str, exit_code: int) -> ToolDetail:
-        """创建终端类型的工具详情
+        """Create terminal type tool detail
 
         Args:
-            command: 执行的终端命令
-            output: 终端输出内容
-            exit_code: 命令执行的退出码
+            command: Terminal command executed
+            output: Terminal output content
+            exit_code: Command execution exit code
 
         Returns:
-            ToolDetail: 终端类型的工具详情
+            ToolDetail: Terminal type tool detail
         """
         return ToolDetail(
             type=DisplayType.TERMINAL, data=TerminalContent(command=command, output=output, exit_code=exit_code)
@@ -66,32 +66,32 @@ class ToolDetailFactory:
 
     @staticmethod
     def create_use_browser_detail(oss_key: str, title: str, url: str = "") -> ToolDetail:
-        """创建浏览器截图类型的工具详情
+        """Create browser screenshot type tool detail
 
         Args:
-            oss_key: 图片在对象存储中的键值
-            title: 截图标题
-            url: 网页URL (可选)
+            oss_key: Image key in object storage
+            title: Screenshot title
+            url: Web URL (optional)
 
         Returns:
-            ToolDetail: 浏览器类型的工具详情，包含截图
+            ToolDetail: Browser type tool detail with screenshot
         """
         return ToolDetail(type=DisplayType.BROWSER, data=BrowserContent(url=url, title=title, file_key=oss_key))
 
     @staticmethod
     def create_deep_write_detail(title: str, reasoning_content: str, content: str) -> ToolDetail:
-        """创建深度写作类型的工具详情
+        """Create deep write type tool detail
 
         Args:
-            title: 深度写作标题
-            reasoning_content: 深度写作过程内容
-            content: 深度写作结论
+            title: Deep write title
+            reasoning_content: Deep write process content
+            content: Deep write conclusion
 
         Returns:
-            ToolDetail: 深度写作类型的工具详情
+            ToolDetail: Deep write type tool detail
         """
         return ToolDetail(
-            type=DisplayType.MD,  # 使用 Markdown 格式展示
+            type=DisplayType.MD,  # Use Markdown format for display
             data=DeepWriteContent(
                 title=title,
                 reasoning_content=reasoning_content,

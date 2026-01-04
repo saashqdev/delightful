@@ -159,23 +159,23 @@ class Agent(BaseAgent):
             logger.debug("Extracted <context> block from system prompt")
         else:
             context_content = None
-            logger.debug("system prompt 中未找到 <context> 块")
+            logger.debug("<context> block not found in system prompt")
 
-        # 收集工具提示
+        # Collect tool hints
         tool_hints = []
         for tool_name in self.tools.keys():
             tool_instance = tool_factory.get_tool_instance(tool_name)
             if tool_instance and (hint := tool_instance.get_prompt_hint()):
                 tool_hints.append((tool_name, hint))
-        # 将工具提示追加到 system prompt
+        # Append tool hints to system prompt
         if tool_hints:
             formatted_hints = [f"### {name}\n{hint}" for name, hint in tool_hints]
             for name, _ in tool_hints:
-                logger.info(f"已追加{name}工具的提示到 system prompt")
+                logger.info(f"Appended {name} tool hint to system prompt")
             self.system_prompt += "\n\n---\n\n## Advanced Tool Usage Instructions:\n> You should strictly follow the examples to use the tools.\n" + "\n\n".join(formatted_hints)
 
-            # 添加语言使用指导
-            # 只针对 gpt-4.1 系列这类总是说英语的模型
+            # Add language usage guidance
+            # Only for models like gpt-4.1 series that always speak English
             if self.llm_id in ["gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano"]:
                 self.system_prompt += "\n\n---\n\nYou are a Simplified Chinese expert, skilled at communicating with users in Chinese. Your user is a Chinese person who only speaks Simplified Chinese and doesn't understand English at all. Your thinking process, outputs, explanatory notes when calling tools, and any other content that will be directly shown to the user must all be in Simplified Chinese. When you retrieve English materials, you need to translate them into Simplified Chinese before returning them to the user."
 
@@ -187,45 +187,45 @@ class Agent(BaseAgent):
         model_config = LLMFactory.get_model_config(self.llm_id)
         self.llm_name = model_config.name
         self.model_config = model_config
-        # 去掉 self.model_config 中的 api_key 和 api_base_url 等敏感信息
+        # Remove sensitive information like api_key and api_base_url from self.model_config
         self.model_config.api_key = None
         self.model_config.api_base_url = None
 
-        # 准备变量并应用替换
+        # Prepare variables and apply replacement
         variables = self._prepare_prompt_variables()
         self.system_prompt = self._agent_loader.set_variables(self.system_prompt, variables)
 
-        # 如果存在 context_content，进行变量替换并保存
+        # If context_content exists, perform variable replacement and save
         if context_content:
             self.context_prompt = self._agent_loader.set_variables(context_content, variables)
-            logger.debug("已完成 context_prompt 的变量替换")
+            logger.debug("Completed context_prompt variable replacement")
 
     def _prepare_prompt_variables(self) -> Dict[str, str]:
         """
-        准备用于替换prompt中变量的字典
+        Prepare dictionary for replacing variables in prompt
 
         Returns:
-            Dict[str, str]: 包含变量名和对应值的字典
+            Dict[str, str]: Dictionary containing variable names and corresponding values
         """
-        # 使用 ListDir 工具生成目录结构
+        # Use ListDir tool to generate directory structure
         list_dir_tool = ListDir()
         workspace_dir = self.agent_context._workspace_dir
 
-        # 调用 _run 方法获取格式化后的目录内容
+        # Call _run method to get formatted directory content
         workspace_dir_files_list = list_dir_tool._run(
             relative_workspace_path=".",
-            level=5,  # 设置合理的递归深度
-            filter_binary=False,  # 不过滤二进制文件
-            calculate_tokens=True,  # 计算 token 数量
+            level=5,  # Set reasonable recursion depth
+            filter_binary=False,  # Don't filter binary files
+            calculate_tokens=True,  # Calculate token count
         )
 
-        # 如果目录为空，显示工作目录为空的信息
-        if "目录为空，没有文件" in workspace_dir_files_list:
-            workspace_dir_files_list = "当前工作目录为空，没有文件"
+        # If directory is empty, display empty workspace message
+        if "Directory is empty, no files" in workspace_dir_files_list:
+            workspace_dir_files_list = "Current working directory is empty, no files"
 
-        # 构建变量字典
+        # Build variables dictionary
         variables = {
-            "current_datetime": datetime.now().strftime("%Y年%m月%d日 %H:%M:%S 星期{}(第%W周)".format(["一", "二", "三", "四", "五", "六", "日"][datetime.now().weekday()])),
+            "current_datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S %A (Week %W)"),
             "workspace_dir": self.agent_context._workspace_dir,
             "workspace_dir_files_list": workspace_dir_files_list,
             "recommended_max_output_tokens": 4096,
@@ -234,18 +234,18 @@ class Agent(BaseAgent):
         return variables
 
     def _generate_agent_id(self) -> str:
-        """生成符合规范的 Agent ID"""
+        """Generate Agent ID conforming to specification"""
         first_char = random.choice(string.ascii_letters)
         remaining_chars = ''.join(random.choices(string.ascii_letters + string.digits, k=5))
         new_id = first_char + remaining_chars
-        # 移除不必要的校验逻辑，生成逻辑已保证格式正确
-        logger.info(f"自动生成新的 Agent ID: {new_id}")
+        # Remove unnecessary validation logic, generation logic already ensures correct format
+        logger.info(f"Auto-generated new Agent ID: {new_id}")
         return new_id
 
     async def run_main_agent(self, query: str):
-        """运行主 agent"""
+        """Run main agent"""
         try:
-            # 触发主 agent 运行前事件
+            # Trigger before main agent run event
             await self.agent_context.dispatch_event(EventType.BEFORE_MAIN_AGENT_RUN, BeforeMainAgentRunEventData(
                 agent_context=self.agent_context,
                 agent_name=self.agent_name,
@@ -254,7 +254,7 @@ class Agent(BaseAgent):
 
             await self.run(query)
 
-            # 触发主 agent 运行后事件
+            # Trigger after main agent run event
             await self.agent_context.dispatch_event(EventType.AFTER_MAIN_AGENT_RUN, AfterMainAgentRunEventData(
                 agent_context=self.agent_context,
                 agent_name=self.agent_name,
@@ -262,7 +262,7 @@ class Agent(BaseAgent):
                 query=query,
             ))
         except Exception as e:
-            logger.error(f"主 agent 运行异常: {e!s}")
+            logger.error(f"Main agent run exception: {e!s}")
             if isinstance(e, UserFriendlyException):
                 await self.agent_context.dispatch_event(EventType.ERROR, ErrorEventData(
                     exception=e,
@@ -270,88 +270,88 @@ class Agent(BaseAgent):
                     error_message=e.get_user_friendly_message()
                 ))
     async def run(self, query: str):
-        """运行 agent"""
+        """Run agent"""
         self.set_agent_state(AgentState.RUNNING)
 
-        logger.info(f"开始运行 agent: {self.agent_name}, query: {query}")
+        logger.info(f"Starting to run agent: {self.agent_name}, query: {query}")
 
-        # 切换到工作空间目录
+        # Switch to workspace directory
         try:
-            # 使用os.chdir()替代os.chroot()，避免需要root权限
+            # Use os.chdir() instead of os.chroot() to avoid requiring root permissions
             workspace_dir = self.agent_context._workspace_dir
             if os.path.exists(workspace_dir):
                 os.chdir(workspace_dir)
-                logger.info(f"已切换工作目录到: {workspace_dir}")
+                logger.info(f"Switched working directory to: {workspace_dir}")
             else:
-                logger.warning(f"工作空间目录不存在: {workspace_dir}")
+                logger.warning(f"Workspace directory does not exist: {workspace_dir}")
         except Exception as e:
-            logger.error(f"切换工作目录时出错: {e!s}")
+            logger.error(f"Error switching working directory: {e!s}")
 
-        # 构造 chat_history
-        # ChatHistory 初始化时已加载历史
-        # 检查是否需要添加 System Prompt (仅在历史为空时)
+        # Construct chat_history
+        # ChatHistory already loaded history during initialization
+        # Check if System Prompt needs to be added (only when history is empty)
         if not self.chat_history.messages:
-            logger.info("聊天记录为空，添加主 System Prompt")
+            logger.info("Chat history is empty, adding main System Prompt")
             await self.chat_history.append_system_message(self.system_prompt)
 
-            # 如果存在 context_prompt，添加为第二条 user message，确保不影响第一条 system prompt 命中缓存
+            # If context_prompt exists, add as second user message, ensuring it doesn't affect first system prompt cache hit
             if self.context_prompt:
-                logger.info("添加 Context System Prompt 作为第二条 user message")
+                logger.info("Adding Context System Prompt as second user message")
                 await self.chat_history.append_user_message(self.context_prompt)
 
-        # 添加当前用户查询
+        # Add current user query
         await self.chat_history.append_user_message(query)
 
-        # 根据 stream_mode 选择不同的 Agent Loop 方式
+        # Choose different Agent Loop method based on stream_mode
         try:
             if self.stream_mode:
                 return await self._handle_agent_loop_stream()
             else:
                 return await self._handle_agent_loop()
         finally:
-            # 从活动注册表中移除 Agent，使用基类的 ACTIVE_AGENTS
+            # Remove Agent from active registry, using base class ACTIVE_AGENTS
             agent_key = (self.agent_name, self.id)
             if agent_key in self.ACTIVE_AGENTS:
                 self.ACTIVE_AGENTS.remove(agent_key)
-                logger.info(f"Agent (name='{self.agent_name}', id='{self.id}') 已从活动注册表中移除。")
+                logger.info(f"Agent (name='{self.agent_name}', id='{self.id}') removed from active registry.")
             else:
-                # 理论上不应发生，但记录以防万一
-                logger.warning(f"尝试移除 Agent (name='{self.agent_name}', id='{self.id}') 但未在活动注册表中找到。")
-            # 任务被用户终止时，agent 协程会被 cancel 异常强制挂掉，需要在这里关闭所有资源
+                # Theoretically should not happen, but log just in case
+                logger.warning(f"Attempted to remove Agent (name='{self.agent_name}', id='{self.id}') but not found in active registry.")
+            # When task is terminated by user, agent coroutine is forcibly cancelled, need to close all resources here
             await self.agent_context.close_all_resources()
 
 
     async def _handle_agent_loop(self) -> None:
-        """处理 agent 循环"""
+        """Handle agent loop"""
         no_tool_call_count = 0
         final_response = None
         run_exception_count = 0
-        # last_llm_message 用于在循环结束时获取最后的消息内容
+        # last_llm_message is used to get the final message content at loop end
         last_llm_message: Optional[ChatCompletionMessage] = None
 
         while True:
-            # 更新活动时间，用于活动追踪
+            # Update activity time for activity tracking
             self.agent_context.update_activity_time()
 
             try:
-                # 检查是否需要恢复会话
+                # Check if session needs to be restored
                 skip_llm_call, tool_calls_to_execute, llm_response_message, assistant_message_to_restore = await self._check_and_restore_session()
 
-                # 判断是否跳过LLM调用
+                # Determine if LLM call should be skipped
                 if skip_llm_call:
-                    # 使用恢复的会话
+                    # Use restored session
                     tool_calls_to_execute, llm_response_message = await self._restore_session_state(
                         assistant_message_to_restore)
-                    last_llm_message = llm_response_message  # 也更新last_llm_message
+                    last_llm_message = llm_response_message  # Also update last_llm_message
                     if not tool_calls_to_execute or not llm_response_message:
-                        final_response = "恢复会话状态时发生内部错误。"
+                        final_response = "Internal error occurred while restoring session state."
                         break
                 else:
-                    # 调用LLM获取响应
+                    # Call LLM to get response
                     llm_response_message, tool_calls_to_execute, token_usage, llm_duration_ms = await self._prepare_and_call_llm()
-                    last_llm_message = llm_response_message  # 保存用于循环结束时的最终响应
+                    last_llm_message = llm_response_message  # Save for final response at loop end
 
-                    # 处理无工具调用的情况
+                    # Handle case with no tool calls
                     if not tool_calls_to_execute and llm_response_message.role == "assistant":
                         no_tool_call_count, should_continue, new_final_response = await self._handle_no_tool_calls(
                             llm_response_message, no_tool_call_count, token_usage, llm_duration_ms)
@@ -360,10 +360,10 @@ class Agent(BaseAgent):
                             break
                         continue
 
-                    # 添加工具调用响应到历史
+                    # Add tool call responses to history
                     await self._add_tool_calls_to_history(llm_response_message, tool_calls_to_execute, token_usage, llm_duration_ms)
 
-                # 执行工具调用并处理结果
+                # Execute tool calls and process results
                 try:
                     finish_task_detected, final_response_from_tools = await self._execute_and_process_tool_calls(
                         tool_calls_to_execute, llm_response_message)
@@ -372,12 +372,12 @@ class Agent(BaseAgent):
                         final_response = final_response_from_tools
                         break
                 except asyncio.CancelledError:
-                    # 捕获并处理来自ASK_USER的取消
-                    logger.info("ASK_USER请求导致循环取消")
-                    break  # 直接退出循环
+                    # Catch and handle cancellation from ASK_USER
+                    logger.info("Loop cancelled due to ASK_USER request")
+                    break  # Exit loop directly
 
             except Exception as e:
-                # 处理异常情况
+                # Handle exception cases
                 should_continue, new_final_response, new_exception_count = await self._handle_agent_loop_exception(
                     e, run_exception_count)
                 run_exception_count = new_exception_count
@@ -386,51 +386,51 @@ class Agent(BaseAgent):
                 if not should_continue:
                     break
 
-        # 8. 完成循环后的清理工作
+        # 8. Cleanup after completing loop
         return await self._finalize_agent_loop(final_response, last_llm_message)
 
     async def _check_and_restore_session(self) -> tuple[bool, List[ToolCall], Optional[ChatCompletionMessage], Optional[AssistantMessage]]:
         """
-        检查是否需要恢复上一次会话状态，并返回相应的执行配置
+        Check if previous session state needs restoration and return corresponding execution configuration
 
         Returns:
-            Tuple: (是否跳过LLM调用, 要执行的工具调用列表, LLM响应消息, 要恢复的助手消息)
+            Tuple: (whether to skip LLM call, list of tool calls to execute, LLM response message, assistant message to restore)
         """
-        # 初始化默认返回值
+        # Initialize default return values
         skip_llm_call = False
         tool_calls_to_execute = []
         llm_response_message = None
         assistant_message_to_restore = None
 
-        # 获取最后和倒数第二条非内部消息
+        # Get last and second-to-last non-internal messages
         last_message = self.chat_history.get_last_message()
         second_last_message = self.chat_history.get_second_last_message()
 
-        # 检查是否满足恢复的基本条件
+        # Check if basic conditions for restoration are met
         if last_message and last_message.role == "user" and \
            second_last_message and second_last_message.role == "assistant" and \
            isinstance(second_last_message, AssistantMessage) and second_last_message.tool_calls:
 
-            logger.info("进行恢复会话状态检查")
-            last_user_query_content = last_message.content  # 用户输入内容
+            logger.info("Performing session state restoration check")
+            last_user_query_content = last_message.content  # User input content
 
-            # 检查是否是与第一次输入相同的情况（在call_agent工具调用中可能出现）
+            # Check if same as first input (may occur in call_agent tool invocation)
             first_user_message = self.chat_history.get_first_user_message()
             if last_user_query_content == first_user_message:
-                logger.info("检测到最后一次用户输入与第一次用户输入相同，视为用户希望继续")
+                logger.info("Detected last user input matches first user input, treating as user intent to continue")
                 last_user_query_content = "继续"
-                # 更新历史中的用户消息
+                # Update user message in history
                 self.chat_history.replace_last_user_message("继续")
 
-            # 处理用户希望继续的情况
+            # Handle user's request to continue
             if last_user_query_content.lower() in ["", " ", "继续", "continue"]:
                 return await self._handle_continue_request(second_last_message)
             else:
-                # 用户提出了新请求
+                # User has made a new request
                 return await self._handle_new_request(second_last_message)
 
-        # 不满足恢复条件
-        logger.debug("最后消息非用户消息，或倒数第二条非带工具调用的助手消息，跳过恢复会话状态检查")
+        # Does not meet restoration conditions
+        logger.debug("Last message is not user message, or second-to-last is not assistant message with tool calls, skipping session state restoration check")
         return skip_llm_call, tool_calls_to_execute, llm_response_message, assistant_message_to_restore
 
     async def _handle_continue_request(self, second_last_message: AssistantMessage) -> tuple[bool, List[ToolCall], Optional[ChatCompletionMessage], Optional[AssistantMessage]]:
@@ -443,7 +443,7 @@ class Agent(BaseAgent):
         Returns:
             Tuple: (是否跳过LLM调用, 要执行的工具调用列表, LLM响应消息, 要恢复的助手消息)
         """
-        logger.info("检测到用户请求继续，尝试恢复上一次工具调用")
+        logger.info("Detected user request to continue, attempting to restore last tool call")
 
         # 检查是否有不可恢复的工具调用
         has_unrecoverable_tool_call = False
@@ -459,37 +459,37 @@ class Agent(BaseAgent):
                         agent_to_check = Agent(agent_name_to_call, self.agent_context)
                         if agent_to_check.has_attribute("stateful"):
                             has_unrecoverable_tool_call = True
-                            logger.warning(f"检测到不可恢复的 call_agent 调用 (agent: {agent_name_to_call})")
+                            logger.warning(f"Detected unrecoverable call_agent invocation (agent: {agent_name_to_call})")
                             break
                 except Exception as e:
-                    logger.warning(f"检查 call_agent 是否可恢复时出错: {e!s}")
-                    logger.warning(f"错误调用栈: {traceback.format_exc()}")
+                    logger.warning(f"Error checking if call_agent is recoverable: {e!s}")
+                    logger.warning(f"Error stack trace: {traceback.format_exc()}")
                     has_unrecoverable_tool_call = True
                     has_tool_call_parse_error = True
                     break
 
-        # 处理可恢复的情况
+        # Handle recoverable cases
         if not has_unrecoverable_tool_call:
-            logger.info("未检测到不可恢复的工具调用，准备恢复会话")
-            # 移除用户的"继续"消息
+            logger.info("No unrecoverable tool calls detected, preparing to restore session")
+            # Remove user's \"continue\" message
             self.chat_history.remove_last_message()
-            # 准备跳过LLM，直接执行工具调用
+            # Prepare to skip LLM and execute tool calls directly
             return True, [], None, second_last_message
         else:
-            # 处理不可恢复的情况
-            logger.warning("检测到不可恢复的工具调用，将放弃恢复，并继续执行 LLM 调用")
-            # 添加中断提示
+            # Handle unrecoverable cases
+            logger.warning("Detected unrecoverable tool call, will abandon restoration and continue with LLM call")
+            # Add interruption prompt
             if not has_tool_call_parse_error:
-                message_content = "当前工具调用被用户打断且不可恢复，请重新调用工具。"
+                message_content = "Current tool call was interrupted by user and is not recoverable, please call tool again."
             else:
-                message_content = "当前工具调用存在解析错误，请对工具参数格式进行检查，确保是语法正确的 JSON 对象，并重新调用工具。"
+                message_content = "Current tool call has parsing error, please check tool parameter format to ensure it is a syntactically correct JSON object, and call tool again."
 
-            # 为所有工具调用添加中断消息
+            # Add interruption messages for all tool calls
             await self._add_interruption_messages(second_last_message.tool_calls, message_content)
 
-            # 移除用户的"继续"消息
+            # Remove user's \"continue\" message
             self.chat_history.remove_last_message()
-            logger.info("继续执行 LLM 调用")
+            logger.info("Continue with LLM call")
             return False, [], None, None
 
     async def _handle_new_request(self, second_last_message: AssistantMessage) -> tuple[bool, List[ToolCall], Optional[ChatCompletionMessage], Optional[AssistantMessage]]:
@@ -502,26 +502,26 @@ class Agent(BaseAgent):
         Returns:
             Tuple: (是否跳过LLM调用, 要执行的工具调用列表, LLM响应消息, 要恢复的助手消息)
         """
-        logger.info("检测到用户有新的请求，将中断之前的工具调用，并让 LLM 处理新请求")
+        logger.info("Detected new user request, will interrupt previous tool calls and let LLM handle new request")
 
-        # 添加中断消息
-        message_content = "当前工具调用被用户打断，请结合用户的新请求判断是否要继续执行之前的工具调用，如果需要，则以相同的调用参数继续执行，否则请忽略之前的工具调用，并根据用户的新请求给出新的响应"
+        # Add interruption message
+        message_content = "Current tool call was interrupted by user, please determine whether to continue previous tool call based on user's new request. If needed, continue with same call parameters, otherwise ignore previous tool call and provide new response based on user's new request"
 
-        # 为所有工具调用添加中断消息
+        # Add interruption messages for all tool calls
         await self._add_interruption_messages(second_last_message.tool_calls, message_content)
 
-        # 继续 LLM 调用
+        # Continue with LLM call
         return False, [], None, None
 
     async def _add_interruption_messages(self, tool_calls: List[ToolCall], message_content: str) -> None:
         """
-        为被中断的工具调用添加提示消息
+        Add prompt messages for interrupted tool calls
 
         Args:
-            tool_calls: 工具调用列表
-            message_content: 提示消息内容
+            tool_calls: List of tool calls
+            message_content: Prompt message content
         """
-        for tc in reversed(tool_calls):  # 反向遍历以保证插入顺序正确
+        for tc in reversed(tool_calls):  # Reverse traversal to ensure correct insertion order
             interrupt_tool_msg = ToolMessage(
                 content=message_content,
                 tool_call_id=tc.id,
@@ -529,28 +529,28 @@ class Agent(BaseAgent):
             try:
                 self.chat_history.insert_message_before_last(interrupt_tool_msg)
             except ValueError as e:
-                logger.error(f"插入工具中断消息时出错 (ValueError): {e}")
+                logger.error(f"Error inserting tool interruption message (ValueError): {e}")
             except Exception as e:
-                logger.error(f"插入工具中断消息时发生未知错误: {e}", exc_info=True)
+                logger.error(f"Unknown error occurred while inserting tool interruption message: {e}", exc_info=True)
 
     async def _restore_session_state(self, assistant_message_to_restore: AssistantMessage) -> tuple[List[ToolCall], Optional[ChatCompletionMessage]]:
         """
-        从保存的助手消息中恢复会话状态
+        Restore session state from saved assistant message
 
         Args:
-            assistant_message_to_restore: 需要恢复的助手消息
+            assistant_message_to_restore: Assistant message to restore
 
         Returns:
-            Tuple: (要执行的工具调用列表, 模拟的LLM响应消息)
+            Tuple: (List of tool calls to execute, Simulated LLM response message)
         """
-        logger.info("跳过LLM调用，直接使用上次会话的工具调用")
+        logger.info("Skipping LLM call, using tool calls from last session directly")
 
-        # 确保消息和工具调用有效
+        # Ensure message and tool calls are valid
         if assistant_message_to_restore and assistant_message_to_restore.tool_calls:
             tool_calls_to_execute = assistant_message_to_restore.tool_calls
 
             try:
-                # 模拟LLM响应消息用于事件传递
+                # Simulate LLM response message for event passing
                 openai_tool_calls_for_sim = [
                     ChatCompletionMessageToolCall(
                         id=tc.id, type=tc.type,
@@ -566,28 +566,28 @@ class Agent(BaseAgent):
 
                 return tool_calls_to_execute, llm_response_message
             except Exception as e:
-                logger.error(f"模拟恢复会话的 llm_response_message 时出错: {e}", exc_info=True)
+                logger.error(f"Error simulating llm_response_message for session restoration: {e}", exc_info=True)
                 return [], None
         else:
-            logger.error("尝试恢复会话，但 assistant_message_to_restore 无效或无工具调用。")
+            logger.error("Attempting to restore session, but assistant_message_to_restore is invalid or has no tool calls.")
             return [], None
 
     async def _prepare_and_call_llm(self) -> tuple[ChatCompletionMessage, List[ToolCall], Optional[TokenUsage], float]:
         """
-        准备与LLM的对话，处理消息，调用LLM并解析响应
+        Prepare conversation with LLM, process messages, call LLM and parse response
 
         Returns:
             Tuple: (
-                LLM响应消息: ChatCompletionMessage对象
-                工具调用列表: 转换后的ToolCall对象列表
-                Token使用量: TokenUsage对象
-                LLM调用耗时: 毫秒值
+                LLM response message: ChatCompletionMessage object
+                Tool call list: Converted ToolCall object list
+                Token usage: TokenUsage object
+                LLM call duration: milliseconds
             )
         """
-        # 使用ChatHistory获取格式化后的消息列表
+        # Use ChatHistory to get formatted message list
         messages_for_llm = self.chat_history.get_messages_for_llm()
         if not messages_for_llm:
-            logger.error("无法获取用于LLM调用的消息列表(可能历史记录为空或只有内部消息)")
+            logger.error("Cannot get message list for LLM call (history may be empty or contain only internal messages)")
             self.set_agent_state(AgentState.ERROR)
             raise ValueError("无法准备与LLM的对话。")
 
@@ -602,65 +602,65 @@ class Agent(BaseAgent):
         # 获取LLM响应消息
         llm_response_message = chat_response.choices[0].message
 
-        # 处理LLM响应内容为空的情况
+        # Handle case where LLM response content is empty
         if llm_response_message.content is None or llm_response_message.content.strip() == "":
             if llm_response_message.tool_calls:
-                logger.debug("LLM响应content为空，但包含tool_calls。")
-                # 尝试从tool_call explanation获取
+                logger.debug("LLM response content is empty, but contains tool_calls.")
+                # Try to get explanation from tool_call
                 for tool_call in llm_response_message.tool_calls:
                     try:
                         arguments = json.loads(tool_call.function.arguments)
                         if "explanation" in arguments:
                             llm_response_message.content = arguments["explanation"]
-                            logger.debug(f"使用tool_call explanation作为LLM content: {llm_response_message.content}")
+                            logger.debug(f"Using tool_call explanation as LLM content: {llm_response_message.content}")
                             break
                     except (json.JSONDecodeError, AttributeError, TypeError):
                         continue
 
-                # 如果仍为空，设为空字符串
+                # If still empty, set to empty string
                 if llm_response_message.content is None:
                     llm_response_message.content = ""
             else:
-                # 没有tool_calls，内容不应为空
-                logger.warning("LLM响应消息内容为空且无tool_calls，使用默认值'Continue'")
+                # No tool_calls, content should not be empty
+                logger.warning("LLM response message content is empty and has no tool_calls, using default value 'Continue'")
                 try:
                     message_dict = llm_response_message.model_dump()
                     formatted_json = json.dumps(message_dict, ensure_ascii=False, indent=2)
-                    logger.warning(f"详细信息:\n{formatted_json}")
+                    logger.warning(f"Details:\n{formatted_json}")
                 except Exception as e:
-                    logger.warning(f"尝试打印LLM响应消息失败: {e!s}")
+                    logger.warning(f"Failed to print LLM response message: {e!s}")
                 llm_response_message.content = "Continue"
 
-        # 解析OpenAI的ToolCalls
+        # Parse OpenAI's ToolCalls
         openai_tool_calls = self._parse_tool_calls(chat_response)
-        logger.debug(f"来自chat_response的OpenAI tool_calls: {openai_tool_calls}")
+        logger.debug(f"OpenAI tool_calls from chat_response: {openai_tool_calls}")
 
-        # 标准化并转换为内部ToolCall类型
+        # Normalize and convert to internal ToolCall type
         tool_calls_to_execute = await self._parse_and_convert_tool_calls(openai_tool_calls)
 
-        # 检查多工具调用
+        # Check for multiple tool calls
         if not self.enable_multi_tool_calls and len(tool_calls_to_execute) > 1:
-            logger.debug("检测到多个工具调用，但多工具调用处理已禁用，只保留第一个")
+            logger.debug("Detected multiple tool calls, but multi-tool call processing is disabled, keeping only the first one")
             tool_calls_to_execute = [tool_calls_to_execute[0]]
 
         return llm_response_message, tool_calls_to_execute, token_usage, llm_duration_ms
 
     async def _parse_and_convert_tool_calls(self, openai_tool_calls: List[ChatCompletionMessageToolCall]) -> List[ToolCall]:
         """
-        将OpenAI工具调用转换为内部ToolCall格式
+        Convert OpenAI tool calls to internal ToolCall format
 
         Args:
-            openai_tool_calls: OpenAI返回的工具调用列表
+            openai_tool_calls: List of tool calls returned by OpenAI
 
         Returns:
-            List[ToolCall]: 内部格式的工具调用列表
+            List[ToolCall]: List of tool calls in internal format
         """
         tool_calls_to_execute = []
 
         for tc_openai in openai_tool_calls:
-            # 确保类型正确
+            # Ensure correct type
             if not isinstance(tc_openai, ChatCompletionMessageToolCall):
-                logger.warning(f"跳过无效的tool_call类型: {type(tc_openai)}")
+                logger.warning(f"Skipping invalid tool_call type: {type(tc_openai)}")
                 continue
 
             try:
@@ -668,29 +668,29 @@ class Agent(BaseAgent):
                 arguments_str = getattr(getattr(tc_openai, 'function', None), 'arguments', None)
                 func_name = getattr(getattr(tc_openai, 'function', None), 'name', None)
                 tool_id = getattr(tc_openai, 'id', None)
-                tool_type = getattr(tc_openai, 'type', 'function')  # 默认为function
+                tool_type = getattr(tc_openai, 'type', 'function')  # Default to function
 
-                # 验证必要属性
+                # Validate required attributes
                 if not all([tool_id, func_name, arguments_str is not None]):
-                    logger.warning(f"跳过结构不完整的OpenAI ToolCall: {tc_openai}")
+                    logger.warning(f"Skipping incomplete OpenAI ToolCall: {tc_openai}")
                     continue
 
-                # 处理非字符串参数
+                # Handle non-string arguments
                 if not isinstance(arguments_str, str):
-                    logger.warning(f"OpenAI ToolCall arguments非字符串: {arguments_str}，尝试转为JSON字符串")
+                    logger.warning(f"OpenAI ToolCall arguments is not a string: {arguments_str}, attempting to convert to JSON string")
                     try:
                         arguments_str = json.dumps(arguments_str, ensure_ascii=False)
                     except Exception:
-                        logger.error(f"无法将OpenAI ToolCall arguments转为JSON字符串: {arguments_str}，使用空对象字符串")
+                        logger.error(f"Cannot convert OpenAI ToolCall arguments to JSON string: {arguments_str}, using empty object string")
                         arguments_str = "{}"
 
-                # 创建内部FunctionCall
+                # Create internal FunctionCall
                 internal_func = FunctionCall(
                     name=func_name,
                     arguments=arguments_str
                 )
 
-                # 创建内部ToolCall
+                # Create internal ToolCall
                 internal_tc = ToolCall(
                     id=tool_id,
                     type=tool_type,
@@ -699,21 +699,21 @@ class Agent(BaseAgent):
 
                 tool_calls_to_execute.append(internal_tc)
             except AttributeError as ae:
-                logger.error(f"访问OpenAI ToolCall属性时出错: {tc_openai}, 错误: {ae}", exc_info=True)
+                logger.error(f"Error accessing OpenAI ToolCall attributes: {tc_openai}, error: {ae}", exc_info=True)
             except Exception as e:
-                logger.error(f"转换OpenAI ToolCall到内部类型时出错: {tc_openai}, 错误: {e}", exc_info=True)
+                logger.error(f"Error converting OpenAI ToolCall to internal type: {tc_openai}, error: {e}", exc_info=True)
 
         return tool_calls_to_execute
 
     async def _add_tool_calls_to_history(self, llm_response_message: ChatCompletionMessage, tool_calls_to_execute: List[ToolCall], token_usage: Optional[TokenUsage], llm_duration_ms: float) -> None:
         """
-        将工具调用响应添加到聊天历史
+        Add tool call response to chat history
 
         Args:
-            llm_response_message: LLM响应消息
-            tool_calls_to_execute: 工具调用列表
-            token_usage: token使用数据
-            llm_duration_ms: LLM调用耗时
+            llm_response_message: LLM response message
+            tool_calls_to_execute: List of tool calls
+            token_usage: Token usage data
+            llm_duration_ms: LLM call duration
         """
         try:
             await self.chat_history.append_assistant_message(
@@ -723,27 +723,27 @@ class Agent(BaseAgent):
                 token_usage=token_usage
             )
         except ValueError as e:
-            logger.error(f"添加带工具调用的助手消息失败: {e}")
+            logger.error(f"Failed to add assistant message with tool calls: {e}")
             self.set_agent_state(AgentState.ERROR)
             raise ValueError(f"无法记录助手响应 ({e})")
 
     async def _handle_no_tool_calls(self, llm_response_message: ChatCompletionMessage, no_tool_call_count: int, token_usage: Optional[TokenUsage], llm_duration_ms: float) -> tuple[int, bool, Optional[str]]:
         """
-        处理LLM响应中没有工具调用的情况
+        Handle case where LLM response has no tool calls
 
         Args:
-            llm_response_message: LLM响应消息
-            no_tool_call_count: 连续无工具调用计数
-            token_usage: token使用数据
-            llm_duration_ms: LLM调用耗时
+            llm_response_message: LLM response message
+            no_tool_call_count: Consecutive no tool call count
+            token_usage: Token usage data
+            llm_duration_ms: LLM call duration
 
         Returns:
-            Tuple: (更新后的无工具调用计数, 是否继续执行, 最终响应)
+            Tuple: (Updated no tool call count, Whether to continue execution, Final response)
         """
         no_tool_call_count += 1
-        logger.debug(f"检测到没有工具调用，开始检查是否需要退出循环，连续次数: {no_tool_call_count}")
+        logger.debug(f"Detected no tool calls, checking if loop exit is needed, consecutive count: {no_tool_call_count}")
 
-        # 添加LLM响应到历史
+        # Add LLM response to history
         try:
             await self.chat_history.append_assistant_message(
                 content=llm_response_message.content,
@@ -751,63 +751,63 @@ class Agent(BaseAgent):
                 token_usage=token_usage
             )
         except ValueError as e:
-            logger.error(f"添加无工具调用的助手响应时失败: {e}")
+            logger.error(f"Failed to add assistant response without tool calls: {e}")
             self.set_agent_state(AgentState.ERROR)
             return no_tool_call_count, False, f"内部错误：无法记录助手响应 ({e})"
 
-        # 检查是否达到退出条件
+        # Check if exit condition is met
         if no_tool_call_count >= 3:
-            logger.warning("检测到连续3次没有工具调用，退出循环")
+            logger.warning("Detected 3 consecutive no tool calls, exiting loop")
 
-            # 添加最后的消息到历史
+            # Add final message to history
             try:
                 await self.chat_history.append_assistant_message(
                     content="看起来我们的任务已经告一段落啦，有什么新的问题可以随时找我✨",
                     show_in_ui=False
                 )
             except Exception as e:
-                logger.error(f"添加无工具调用退出消息时出错: {e}")
+                logger.error(f"Error adding no tool call exit message: {e}")
 
             self.set_agent_state(AgentState.ERROR)
             return no_tool_call_count, False, "任务因连续未调用工具而终止。"
 
-        # 没有退出，追加内部提示消息
+        # Not exiting, append internal prompt message
         append_content = self._get_no_tool_call_prompt()
 
-        # 作为Assistant消息追加内部提示
+        # Append internal prompt as Assistant message
         try:
             await self.chat_history.append_assistant_message(append_content, show_in_ui=False)
         except ValueError as e:
-            logger.error(f"添加内部提示消息失败: {e}")
+            logger.error(f"Failed to add internal prompt message: {e}")
             self.set_agent_state(AgentState.ERROR)
-            return no_tool_call_count, False, f"内部错误：无法添加内部提示 ({e})"
+            return no_tool_call_count, False, f"Internal error: Unable to add internal prompt ({e})"
 
         return no_tool_call_count, True, None
 
     def _get_no_tool_call_prompt(self) -> str:
         """
-        根据Agent属性获取适当的无工具调用提示
+        Get appropriate no tool call prompt based on Agent attributes
 
         Returns:
-            str: 提示消息内容
+            str: Prompt message content
         """
         if self.has_attribute("main"):
-            return "内部思考(用户不能看到)：如果任务没完成，我就需要继续使用工具解决问题，如果我确定已经完成了所有任务（如：所有 todo.md 中的任务）并以文件的形式向用户交付了最终的结果产物时，我则需要调用 finish_task 工具结束任务。接下来我将检查我的任务是否已经完成，并决定是否调用 finish_task 工具。"
+            return "Internal thought (user cannot see): If the task is not complete, I need to continue using tools to solve the problem. If I am sure that I have completed all tasks (e.g., all tasks in todo.md) and delivered the final results to the user in the form of files, then I need to call the finish_task tool to end the task. Next, I will check if my task is complete and decide whether to call the finish_task tool."
         else:
-            return "内部思考(用户不能看到)：如果任务没完成，我就需要继续使用工具解决问题，如果我已经确定完成了用户的要求，或能以文件的形式向用户交付了最终的结果产物时，我需要调用 finish_task 工具结束任务，接下来我将检查我的任务是否已经完成并决定是否调用 finish_task 工具。"
+            return "Internal thought (user cannot see): If the task is not complete, I need to continue using tools to solve the problem. If I have confirmed that I have completed the user's requirements or can deliver the final results to the user in the form of files, I need to call the finish_task tool to end the task. Next, I will check if my task is complete and decide whether to call the finish_task tool."
 
     async def _execute_and_process_tool_calls(self, tool_calls: List[ToolCall], llm_response_message: ChatCompletionMessage) -> tuple[bool, Optional[str]]:
         """
-        执行工具调用并处理结果
+        Execute tool calls and process results
 
         Args:
-            tool_calls: 工具调用列表
-            llm_response_message: LLM响应消息
+            tool_calls: List of tool calls
+            llm_response_message: LLM response message
 
         Returns:
-            Tuple: (是否检测到finish_task, 最终响应)
+            Tuple: (Whether finish_task detected, Final response)
         """
-        # 确保llm_response_message不为空
+        # Ensure llm_response_message is not empty
         if not llm_response_message:
             logger.error("llm_response_message在工具执行前未设置！")
             llm_response_message = ChatCompletionMessage(
@@ -823,31 +823,31 @@ class Agent(BaseAgent):
 
     async def _process_tool_call_results(self, tool_call_results: List[ToolResult]) -> tuple[bool, Optional[str]]:
         """
-        处理工具调用结果
+        Process tool call results
 
         Args:
-            tool_call_results: 工具调用结果列表
+            tool_call_results: List of tool call results
 
         Returns:
-            Tuple: (是否检测到finish_task, 最终响应)
+            Tuple: (Whether finish_task detected, Final response)
         """
         finish_task_detected = False
         final_response = None
 
         for result in tool_call_results:
-            if not result:  # 跳过空结果
+            if not result:  # Skip empty results
                 continue
 
             try:
-                # 计算工具执行耗时
+                # Calculate tool execution duration
                 tool_duration_ms = None
                 if hasattr(result, 'execution_time') and result.execution_time is not None:
                     try:
                         tool_duration_ms = float(result.execution_time) * 1000
                     except (ValueError, TypeError):
-                        logger.warning(f"无法将工具执行时间 {result.execution_time} 转换为毫秒。")
+                        logger.warning(f"Unable to convert tool execution time {result.execution_time} to milliseconds.")
 
-                # 追加工具调用结果到聊天历史
+                # Append tool call result to chat history
                 await self.chat_history.append_tool_message(
                     content=result.content,
                     tool_call_id=result.tool_call_id,
@@ -855,146 +855,146 @@ class Agent(BaseAgent):
                     duration_ms=tool_duration_ms,
                 )
 
-                # 检查特殊工具调用
+                # Check for special tool calls
                 if result.system == "FINISH_TASK":
-                    logger.info("检测到 FINISH_TASK 工具调用，立即退出循环")
+                    logger.info("Detected FINISH_TASK tool call, exiting loop immediately")
                     final_response = result.content
                     self.set_agent_state(AgentState.FINISHED)
                     finish_task_detected = True
                     break
                 elif result.system == "ASK_USER":
-                    logger.info("检测到 ASK_USER 工具调用，退出循环")
+                    logger.info("Detected ASK_USER tool call, exiting loop")
                     final_response = result.content
                     self.set_agent_state(AgentState.FINISHED)  # Ask user 也算完成当前轮次
                     finish_task_detected = True
                     raise asyncio.CancelledError()
                 elif result.name == "call_agent" and self.agent_name == "super-magic":
-                    logger.info("检测到 super-magic 智能体进行了 call_agent 工具调用，将追加任务确认提醒消息")
+                    logger.info("Detected super-magic agent performed call_agent tool call, will append task confirmation reminder message")
                     await self.chat_history.append_assistant_message(
-                        content="内部思考(用户不能看到)：我已经让其它智能体进行了任务，我需要检查它们的工作进度和结果，如果我确定它已经完成了它的任务，那么我应该确认 todo.md 文件中对应的任务是否已经完成，如果已经完成我需要将对应的任务状态标记为已完成，如果未完成那么我应该思考其它方法并通过调用 call_agent 工具来继续任务。注意不能让用户知道其它智能体的存在。",
+                        content="Internal thought (user cannot see): I have delegated tasks to other agents, I need to check their work progress and results. If I confirm they have completed their tasks, then I should check if the corresponding tasks in todo.md file are completed. If completed, I need to mark the corresponding task status as done. If not completed, I should think of other methods and continue the task by calling the call_agent tool. Note: Do not let the user know about the existence of other agents.",
                         show_in_ui=False
                     )
 
             except asyncio.CancelledError:
-                # 重新抛出CancelledError，确保循环被终止
-                logger.info("重新抛出CancelledError以终止循环")
+                # Re-raise CancelledError to ensure loop is terminated
+                logger.info("Re-raising CancelledError to terminate loop")
                 raise
             except ValueError as ve:
-                logger.error(f"处理或追加工具调用结果时发生错误: {ve!s}")
+                logger.error(f"Error occurred while processing or appending tool call result: {ve!s}")
             except Exception as e:
-                logger.error(f"处理工具结果 '{getattr(result, 'name', 'unknown')}' 时发生未知错误: {e!r}", exc_info=True)
+                logger.error(f"Unknown error occurred while processing tool result '{getattr(result, 'name', 'unknown')}': {e!r}", exc_info=True)
 
-        # 检查是否需要退出
+        # Check if exit is needed
         if finish_task_detected:
-            logger.info("特殊工具调用已处理，跳出主循环")
+            logger.info("Special tool call processed, breaking out of main loop")
 
         return finish_task_detected, final_response
 
     async def _handle_agent_loop_exception(self, exception: Exception, current_exception_count: int) -> tuple[bool, Optional[str], int]:
         """
-        处理Agent循环中的异常
+        Handle exceptions in Agent loop
 
         Args:
-            exception: 捕获的异常
-            current_exception_count: 当前异常计数
+            exception: Caught exception
+            current_exception_count: Current exception count
 
         Returns:
-            Tuple: (是否继续循环, 最终响应, 更新后的异常计数)
+            Tuple: (Whether to continue loop, Final response, Updated exception count)
         """
-        logger.error(f"Agent循环执行过程中发生错误: {exception!r}")
-        logger.error(f"错误堆栈: {traceback.format_exc()}")
+        logger.error(f"Error occurred during Agent loop execution: {exception!r}")
+        logger.error(f"Error stack trace: {traceback.format_exc()}")
         self.set_agent_state(AgentState.ERROR)
 
-        # 处理中断的工具调用
+        # Handle interrupted tool calls
         await self._handle_interrupted_tool_calls(exception)
 
-        # 更新异常计数
+        # Update exception count
         current_exception_count += 1
 
-        # 计算重试策略
+        # Calculate retry strategy
         max_retries = 10
 
-        # 使用指数退避策略
+        # Use exponential backoff strategy
         wait_time, total_retry_wait_time = self._apply_exponential_backoff(current_exception_count)
 
-        # 判断是否可以继续重试
+        # Determine if retry can continue
         can_continue = current_exception_count < max_retries and total_retry_wait_time < 900
 
-        # 准备错误内容
+        # Prepare error content
         if can_continue:
-            error_content = "任务执行过程中遇到了错误，通常是工具的参数有语法错误、类型错误或遗漏了参数，我将进行重试。"
-            logger.info(f"将等待{wait_time:.1f}秒后进行第{current_exception_count}次重试（总计已等待{total_retry_wait_time:.1f}秒）")
+            error_content = "Encountered error during task execution, usually due to syntax error, type error or missing parameters in tool arguments, will retry."
+            logger.info(f"Will wait {wait_time:.1f} seconds before retry attempt {current_exception_count} (total wait time: {total_retry_wait_time:.1f} seconds)")
         else:
             if current_exception_count >= max_retries:
-                error_content = f"任务执行过程中遇到了错误，我已默默尝试了{current_exception_count}次修复，达到最大重试次数{max_retries}次。我应该已经完成了任务的一部分，可能需要你检查我当前的任务进度，并帮助我来继续任务。"
-            else:  # 超过总等待时间
-                error_content = "任务执行过程中遇到了错误，总等待时间已达到限制，不再继续重试。我应该已经完成了任务的一部分，可能需要你检查我当前的任务进度，并帮助我来继续任务。"
+                error_content = f"Encountered error during task execution, I have silently attempted {current_exception_count} fixes, reaching maximum retry limit of {max_retries} times. I should have completed part of the task, you may need to check my current progress and help me continue the task."
+            else:  # Exceeded total wait time
+                error_content = "Encountered error during task execution, total wait time has reached the limit, will not continue retrying. I should have completed part of the task, you may need to check my current progress and help me continue the task."
 
-        # 检查特殊错误情况
-        result = None  # 确保result变量在局部作用域中存在
+        # Check for special error cases
+        result = None  # Ensure result variable exists in local scope
         if 'result' in locals() and result and hasattr(result, 'ok') and not result.ok:
-            error_content = result.content  # 使用工具返回的错误信息
+            error_content = result.content  # Use error message from tool
         elif isinstance(exception, json.JSONDecodeError):
-            error_content = f"工具参数解析失败，请检查JSON格式: {exception}"
+            error_content = f"Tool parameter parsing failed, please check JSON format: {exception}"
         elif "Connection" in str(exception):
-            error_content = "我遇到了一个网络连接错误，可能是因为我一次性输出了过大的内容。我将尝试分段输出。若还是失败我将换个方案以继续任务。"
+            error_content = "I encountered a network connection error, possibly because I output excessively large content at once. I will try to output in segments. If it still fails, I will try a different approach to continue the task."
         else:
-            error_content = f"任务执行过程中遇到了错误: {type(exception).__name__}: {exception!s}"
+            error_content = f"Encountered error during task execution: {type(exception).__name__}: {exception!s}"
 
-        # 添加错误消息到历史
+        # Add error message to history
         try:
             await self.chat_history.append_assistant_message(error_content, show_in_ui=False)
         except Exception as append_err:
-            logger.error(f"添加最终错误消息到历史记录时失败: {append_err}")
+            logger.error(f"Failed to add final error message to history: {append_err}")
 
-        # 如果可以继续，执行等待
+        # If can continue, execute wait
         if can_continue:
-            logger.warning(f"虽然遇到了错误，但还没有达到最大尝试次数，等待{wait_time:.1f}秒后继续下一次循环")
-            time.sleep(wait_time)  # 确保执行实际的等待
+            logger.warning(f"Although encountered error, maximum retry limit not reached yet, waiting {wait_time:.1f} seconds before next loop")
+            time.sleep(wait_time)  # Ensure actual wait is executed
             return True, None, current_exception_count
         else:
-            logger.warning(f"已达到最大重试次数({max_retries})或最大等待时间(15分钟)，退出循环")
+            logger.warning(f"Reached maximum retry limit ({max_retries}) or maximum wait time (15 minutes), exiting loop")
             return False, error_content, current_exception_count
 
     async def _handle_interrupted_tool_calls(self, exception: Exception) -> None:
         """
-        处理因异常而中断的工具调用
+        Handle tool calls interrupted by exception
 
         Args:
-            exception: 捕获的异常
+            exception: Caught exception
         """
-        # 如果最后一条消息是带有工具调用的助手消息，为每个调用添加错误信息
+        # If last message is assistant message with tool calls, add error info for each call
         last_message = self.chat_history.get_last_message()
         if isinstance(last_message, AssistantMessage) and last_message.tool_calls:
-            general_error_message = f"由于处理过程中出现意外错误 ({exception!s})，工具调用被中断，请重新检查工具调用的参数是否正确。"
+            general_error_message = f"Tool call was interrupted due to unexpected error during processing ({exception!s}), please recheck if tool call parameters are correct."
             for tool_call in last_message.tool_calls:
                 try:
                     await self.chat_history.append_tool_message(
                         content=general_error_message,
                         tool_call_id=tool_call.id,
                     )
-                    logger.info(f"为中断的工具调用 {tool_call.id} ({tool_call.function.name}) 添加了错误消息。")
+                    logger.info(f"Added error message for interrupted tool call {tool_call.id} ({tool_call.function.name}).")
                 except Exception as insert_err:
-                    logger.error(f"插入工具调用 {tool_call.id} 的错误消息时失败: {insert_err!s}")
+                    logger.error(f"Failed to insert error message for tool call {tool_call.id}: {insert_err!s}")
 
     def _apply_exponential_backoff(self, retry_count: int) -> tuple[float, float]:
         """
-        应用指数退避策略计算重试等待时间
+        Apply exponential backoff strategy to calculate retry wait time
 
         Args:
-            retry_count: 重试次数
+            retry_count: Number of retries
 
         Returns:
-            Tuple: (本次等待时间, 总计等待时间)
+            Tuple: (Current wait time, Total wait time)
         """
-        # 基础等待时间为2秒，每次失败后翻倍，最多等待5分钟
+        # Base wait time is 2 seconds, doubles after each failure, max wait time is 5 minutes
         base_wait_time = 2
         max_wait_time = 300
 
-        # 计算当前等待时间
+        # Calculate current wait time
         wait_time = min(base_wait_time * (2 ** (retry_count - 1)), max_wait_time)
 
-        # 计算总等待时间
+        # Calculate total wait time
         if not hasattr(self, '_total_retry_wait_time'):
             self._total_retry_wait_time = 0
 

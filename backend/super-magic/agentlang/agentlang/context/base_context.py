@@ -33,50 +33,50 @@ class BaseContext:
 
     def set_metadata(self, key: str, value: Any) -> None:
         """
-        设置元数据
+        Set metadata
 
         Args:
-            key: 元数据键
-            value: 元数据值
+            key: Metadata key
+            value: Metadata value
         """
         self._metadata[key] = value
 
     def get_metadata(self, key: str, default: Any = None) -> Any:
         """
-        获取元数据
+        Get metadata
 
         Args:
-            key: 元数据键
-            default: 如果键不存在时返回的默认值
+            key: Metadata key
+            default: Default value to return if key does not exist
 
         Returns:
-            Any: 元数据值或默认值
+            Any: Metadata value or default value
         """
         return self._metadata.get(key, default)
 
     def update_metadata(self, metadata: Dict[str, Any]) -> None:
         """
-        批量更新元数据
+        Batch update metadata
 
         Args:
-            metadata: 要更新的元数据字典
+            metadata: Metadata dictionary to update
         """
         self._metadata.update(metadata)
 
     def get_creation_time(self) -> int:
         """
-        获取上下文创建时间
+        Get context creation time
 
         Returns:
-            int: 创建时间戳（毫秒）
+            int: Creation timestamp (milliseconds)
         """
         return self._created_at
 
     def merge(self, other: "BaseContext") -> None:
         """
-        合并另一个上下文的数据
+        Merge data from another context
 
         Args:
-            other: 要合并的上下文对象
+            other: Context object to merge
         """
         self._metadata.update(other._metadata) 

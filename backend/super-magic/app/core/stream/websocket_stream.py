@@ -1,7 +1,7 @@
 """
-WebSocket流实现
+WebSocket stream implementation
 
-提供基于WebSocket的流实现，用于数据的读写
+Provides WebSocket-based stream implementation for data reading and writing
 """
 
 from typing import Optional

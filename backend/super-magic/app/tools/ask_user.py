@@ -26,15 +26,15 @@ class AskUserParams(BaseToolParams):
     """Parameters for asking the user a question."""
     question: str = Field(
         ...,
-        description="要向用户提出的问题或请求"
+        description="The question or request to present to the user"
     )
     type: Optional[str] = Field(
         None,
-        description="可选的内容类型，例如 'todo'"
+        description="Optional content type, e.g. 'todo'"
     )
     content: Optional[str] = Field(
         None,
-        description="与问题相关的内容，例如任务内容、代码片段等"
+        description="Content related to the question, such as task content, code snippets, etc."
     )
 
 
@@ -70,7 +70,7 @@ class AskUser(BaseTool[AskUserParams]):
             system="ASK_USER",  # System directive marking this as a user inquiry
         )
 
-        # 设置可选字段
+        # Set optional fields
         if params.type:
             result.set_type(params.type)
         if params.content:

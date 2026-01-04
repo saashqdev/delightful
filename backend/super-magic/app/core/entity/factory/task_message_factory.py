@@ -1,7 +1,7 @@
 """
-任务消息工厂模块
+Task message factory module
 
-提供创建不同类型TaskMessage的工厂类
+Provides factory class for creating different types of TaskMessage
 """
 
 from agentlang.event.data import (
@@ -35,12 +35,12 @@ from app.core.entity.message.server_message import (
 logger = get_logger(__name__)
 
 class TaskMessageFactory:
-    """任务消息工厂类，用于创建不同类型的TaskMessage对象"""
+    """Task message factory class for creating different types of TaskMessage objects"""
 
     @classmethod
     def create_error_message(cls, agent_context: AgentContext, error_message: str) -> ServerMessage:
         """
-        创建错误消息
+        Create error message
         """
         return ServerMessage(
             metadata=agent_context.get_init_client_message_metadata(),
@@ -57,13 +57,13 @@ class TaskMessageFactory:
     @classmethod
     def create_before_init_message(cls, event: Event[BeforeInitEventData]) -> ServerMessage:
         """
-        创建初始化前的任务消息
+        Create pre-initialization task message
 
         Args:
-            event: 初始化前事件
+            event: Before initialization event
 
         Returns:
-            TaskMessage: 初始化前的任务消息
+            TaskMessage: Pre-initialization task message
         """
         agent_context = event.data.tool_context.get_extension_typed("agent_context", AgentContext)
         return ServerMessage.create(
@@ -73,7 +73,7 @@ class TaskMessageFactory:
                 sandbox_id=agent_context.get_sandbox_id(),
                 message_type=MessageType.INIT,
                 status=TaskStatus.WAITING,
-                content="工作区正在初始化",
+                content="Workspace is initializing",
                 event=event.event_type
             )
         )
@@ -81,20 +81,20 @@ class TaskMessageFactory:
     @classmethod
     def create_after_init_message(cls, event: Event[AfterInitEventData]) -> ServerMessage:
         """
-        创建初始化后的任务消息
+        Create post-initialization task message
 
         Args:
-            event: 初始化后事件
+            event: After initialization event
 
         Returns:
-            TaskMessage: 初始化后的任务消息
+            TaskMessage: Post-initialization task message
         """
         if event.data.success:
             status = TaskStatus.RUNNING
-            content = "虚拟机初始化完成"
+            content = "Virtual machine initialization complete"
         else:
             status = TaskStatus.ERROR
-            content = "虚拟机初始化失败"
+            content = "Virtual machine initialization failed"
 
         agent_context = event.data.tool_context.get_extension_typed("agent_context", AgentContext)
         return ServerMessage.create(
@@ -121,7 +121,7 @@ class TaskMessageFactory:
     @classmethod
     def create_after_client_chat_message(cls, event: Event[AfterClientChatEventData]) -> ServerMessage:
         """
-        创建客户端聊天后的任务消息
+        Create task message after client chat
         """
         return ServerMessage.create(
             metadata=event.data.agent_context.get_init_client_message_metadata(),
@@ -134,11 +134,11 @@ class TaskMessageFactory:
                 event=EventType.AFTER_CLIENT_CHAT
             )
         )
-        # 创建挂起消息
+        # Create suspended message
     @classmethod
     def create_agent_suspended_message(cls, agent_context: AgentContext) -> ServerMessage:
         """
-        创建挂起消息
+        Create suspended message
         """
         return ServerMessage.create(
             metadata=agent_context.get_init_client_message_metadata(),
@@ -147,7 +147,7 @@ class TaskMessageFactory:
                 sandbox_id=agent_context.get_sandbox_id(),
                 message_type=MessageType.CHAT,
                 status=TaskStatus.SUSPENDED,
-                content="任务已终止",
+                content="Task terminated",
                 event=EventType.AGENT_SUSPENDED
             )
         )
@@ -155,13 +155,13 @@ class TaskMessageFactory:
     @classmethod
     def create_after_main_agent_run_message(cls, event: Event[AfterMainAgentRunEventData]) -> ServerMessage:
         """
-        创建主 agent 运行后消息
+        Create message after main agent run
 
         Args:
-            event: 主agent运行后事件，包含AfterMainAgentRunEventData数据
+            event: After main agent run event, contains AfterMainAgentRunEventData data
 
         Returns:
-            ServerMessage: 主 agent 完成任务的消息
+            ServerMessage: Main agent task completion message
         """
         agent_context: AgentContext = event.data.agent_context
         all_attachments = agent_context.get_attachments()
@@ -171,19 +171,19 @@ class TaskMessageFactory:
         # Sort the filtered attachments by timestamp in descending order
         attachments = sorted(filtered_attachments, key=lambda att: att.timestamp, reverse=True)
 
-        logger.info(f"创建主 agent 完成消息，过滤掉了 {len(all_attachments) - len(attachments)} 个浏览器附件，并按时间戳排序")
+        logger.info(f"Created main agent completion message, filtered out {len(all_attachments) - len(attachments)} browser attachments and sorted by timestamp")
 
-        # 获取项目压缩包信息（如果存在）
+        # Get project archive information (if exists)
         project_archive = agent_context.get_project_archive_info()
         if project_archive:
-            logger.info(f"从 SharedContext 获取到项目压缩包信息: key={project_archive.file_key}")
+            logger.info(f"Retrieved project archive information from SharedContext: key={project_archive.file_key}")
 
         if event.data.agent_state == TaskStatus.FINISHED.value:
             status = TaskStatus.FINISHED
-            content = "任务已完成"
+            content = "Task completed"
         else:
             status = TaskStatus.ERROR
-            content = "任务执行结束"
+            content = "Task execution finished"
 
         return ServerMessage.create(
             metadata=agent_context.get_init_client_message_metadata(),
@@ -202,15 +202,15 @@ class TaskMessageFactory:
     @classmethod
     def create_before_llm_request_message(cls, event: Event[BeforeLlmRequestEventData]) -> ServerMessage:
         """
-        创建LLM请求前的任务消息
+        Create task message before LLM request
 
         Args:
-            event: LLM请求前事件
+            event: Before LLM request event
 
         Returns:
-            TaskMessage: LLM请求前的任务消息
+            TaskMessage: Task message before LLM request
         """
-        content = "正在思考"
+        content = "Thinking"
 
         agent_context = event.data.tool_context.get_extension_typed("agent_context", AgentContext)
         return ServerMessage.create(
@@ -228,25 +228,25 @@ class TaskMessageFactory:
     @classmethod
     def create_after_llm_response_message(cls, event: Event[AfterLlmResponseEventData]) -> ServerMessage:
         """
-        创建LLM响应后的任务消息
+        Create task message after LLM response
 
         Args:
-            event: LLM响应后事件
+            event: After LLM response event
 
         Returns:
-            TaskMessage: LLM响应后的任务消息
+            TaskMessage: Task message after LLM response
         """
         content = ""
         llm_response_message = event.data.llm_response_message
         if llm_response_message and llm_response_message.content:
             content = llm_response_message.content
 
-        # 从事件数据中获取show_in_ui值
+        # Get show_in_ui value from event data
         show_in_ui = getattr(event.data, "show_in_ui", True)
 
         agent_context = event.data.tool_context.get_extension_typed("agent_context", AgentContext)
 
-        # 确保 task_id 不为 None，如果为 None 则使用空字符串
+        # Ensure task_id is not None, use empty string if it is None
         task_id = agent_context.get_task_id() or ""
 
         return ServerMessage.create(
@@ -258,23 +258,23 @@ class TaskMessageFactory:
                 status=TaskStatus.RUNNING,
                 content=content,
                 event=event.event_type,
-                show_in_ui=show_in_ui  # 传递显示标志
+                show_in_ui=show_in_ui  # Pass display flag
             )
         )
 
     @classmethod
     async def create_before_tool_call_message(cls, event: Event[BeforeToolCallEventData]) -> ServerMessage:
         """
-        创建工具调用前的任务消息
+        Create task message before tool call
 
         Args:
-            event: 工具调用前事件
+            event: Before tool call event
 
         Returns:
-            TaskMessage: 工具调用前的任务消息
+            TaskMessage: Task message before tool call
         """
         tool_instance = event.data.tool_instance
-        # 如果大模型上一次已经返回了，就不再发送 content 内容了
+        # If LLM has already returned, don't send content anymore
         if event.data.llm_response_message.content and event.data.llm_response_message.content != "Continue":
             content = ""
         else:
@@ -282,7 +282,7 @@ class TaskMessageFactory:
 
         agent_context = event.data.tool_context.get_extension_typed("agent_context", AgentContext)
 
-        # 确保 task_id 不为 None
+        # Ensure task_id is not None
         task_id = agent_context.get_task_id() or ""
 
         return ServerMessage.create(
@@ -300,13 +300,13 @@ class TaskMessageFactory:
     @classmethod
     async def create_after_tool_call_message(cls, event: Event[AfterToolCallEventData]) -> ServerMessage:
         """
-        创建工具调用后的任务消息
+        Create task message after tool call
 
         Args:
-            event: 工具调用后事件
+            event: After tool call event
 
         Returns:
-            TaskMessage: 工具调用后的任务消息
+            TaskMessage: Task message after tool call
         """
         tool_name = event.data.tool_name
         execution_time = event.data.execution_time
@@ -314,18 +314,18 @@ class TaskMessageFactory:
 
         tool_instance = event.data.tool_instance
 
-        # 从事件上下文中获取附件列表
+        # Get attachment list from event context
         event_context = event.data.tool_context.get_extension_typed("event_context", EventContext)
         attachments = []
         if event_context:
             attachments = event_context.attachments
         else:
-            logger.debug("未找到事件上下文，使用空附件列表")
+            logger.debug("Event context not found, using empty attachment list")
 
-        # 1. 默认 content
+        # 1. Default content
         content = ""
 
-        # 2. 尝试 get_after_tool_call_friendly_content
+        # 2. Try get_after_tool_call_friendly_content
         friendly_content = await tool_instance.get_after_tool_call_friendly_content(
             event.data.tool_context, 
             result, 
@@ -335,7 +335,7 @@ class TaskMessageFactory:
         if friendly_content and friendly_content.strip():
             content = friendly_content
 
-        # 3. 如果 friendly_content 为空, 尝试 result.explanation
+        # 3. If friendly_content is empty, try result.explanation
         elif result.explanation is not None and result.explanation.strip():
             content = result.explanation
 
@@ -346,7 +346,7 @@ class TaskMessageFactory:
 
         friendly_action_and_remark = await tool_instance.get_after_tool_call_friendly_action_and_remark(tool_name, event.data.tool_context, result, execution_time, event.data.arguments)
 
-        # 创建工具对象
+        # Create tool object
         tool = Tool(
             id=event.data.tool_call.id,
             name=tool_name,
@@ -359,7 +359,7 @@ class TaskMessageFactory:
 
         agent_context = event.data.tool_context.get_extension_typed("agent_context", AgentContext)
 
-        # 确保 task_id 不为 None，如果为 None 则使用空字符串
+        # Ensure task_id is not None, use empty string if it is None
         task_id = agent_context.get_task_id() or ""
 
         return ServerMessage.create(
@@ -378,15 +378,15 @@ class TaskMessageFactory:
     @classmethod
     def create_before_safety_check_message(cls, event: Event[BeforeSafetyCheckEventData]) -> ServerMessage:
         """
-        创建安全检查前的任务消息
+        Create task message before safety check
 
         Args:
-            event: 安全检查前事件
+            event: Before safety check event
 
         Returns:
-            ServerMessage: 安全检查前的任务消息
+            ServerMessage: Task message before safety check
         """
-        content = "正在进行安全检查"
+        content = "Performing security check"
 
         agent_context = event.data.agent_context
         return ServerMessage.create(
@@ -405,19 +405,19 @@ class TaskMessageFactory:
     @classmethod
     def create_after_safety_check_message(cls, event: Event[AfterSafetyCheckEventData]) -> ServerMessage:
         """
-        创建安全检查后的任务消息
+        Create task message after safety check
 
         Args:
-            event: 安全检查后事件
+            event: After safety check event
 
         Returns:
-            ServerMessage: 安全检查后的任务消息
+            ServerMessage: Task message after safety check
         """
         if event.data.is_safe:
-            content = "安全检查通过"
+            content = "Security check passed"
             status = TaskStatus.RUNNING
         else:
-            content = "安全检查未通过"
+            content = "Security check failed"
             status = TaskStatus.RUNNING
 
         agent_context = event.data.agent_context

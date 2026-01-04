@@ -1,7 +1,7 @@
 """
-流处理接口模块
+Stream processing interface module
 
-提供统一的流操作接口类
+Provides unified stream operation interface classes
 """
 
 from app.core.stream.base import Stream

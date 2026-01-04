@@ -1,5 +1,5 @@
 """
-文件监听服务，启动上传文件进程
+File listener service, starts file upload process
 """
 
 import asyncio
@@ -16,21 +16,21 @@ from app.core.context.agent_context import AgentContext
 logger = get_logger(__name__)
 
 def run_tos_uploader(cmd, project_root, log_level="INFO"):
-    """TOS上传器子进程运行的函数
+    """TOS uploader subprocess running function
     
     Args:
-        cmd: 命令行参数列表
-        project_root: 项目根目录
-        log_level: 日志级别
+        cmd: Command line argument list
+        project_root: Project root directory
+        log_level: Log level
     """
     try:
-        # 设置子进程的日志
+        # Set up subprocess logging
         setup_logger(log_name="app", console_level=log_level)
         logger = get_logger("tos_uploader_process")
 
-        logger.info(f"TOS上传器子进程启动: {' '.join(cmd)}")
+        logger.info(f"TOS uploader subprocess started: {' '.join(cmd)}")
 
-        # 启动上传程序进程
+        # Start uploader process
         process = subprocess.Popen(
             cmd,
             stdout=subprocess.PIPE,
@@ -40,106 +40,106 @@ def run_tos_uploader(cmd, project_root, log_level="INFO"):
             cwd=str(project_root)
         )
 
-        # 读取并记录输出
+        # Read and log output
         for line in iter(process.stdout.readline, ''):
             if line:
-                logger.info(f"TOS上传器: {line.rstrip()}")
+                logger.info(f"TOS uploader: {line.rstrip()}")
 
         process.stdout.close()
         return_code = process.wait()
-        logger.info(f"TOS上传进程已退出，返回码: {return_code}")
+        logger.info(f"TOS upload process exited, return code: {return_code}")
 
     except Exception as e:
-        logger.error(f"TOS上传器子进程异常: {e}")
+        logger.error(f"TOS uploader subprocess exception: {e}")
         import traceback
         logger.error(traceback.format_exc())
 
 class FileListenerService:
-    """文件监听服务，启动上传文件的进程"""
+    """File listener service, starts file upload process"""
 
-    # 使用类变量跟踪上传进程
+    # Use class variable to track upload process
     _uploader_process = None
 
     @staticmethod
     def register_standard_listeners(agent_context: AgentContext) -> None:
         """
-        注册标准的文件相关事件监听器
+        Register standard file-related event listeners
         
         Args:
-            agent_context: 代理上下文对象
+            agent_context: Agent context object
         """
-        # 监听初始化完成事件
+        # Listen to initialization completion event
         agent_context.add_event_listener(
             EventType.AFTER_INIT, 
             FileListenerService._handle_after_init
         )
 
-        # 监听客户端聊天事件
+        # Listen to client chat event
         # agent_context.add_event_listener(
         #     EventType.AFTER_CLIENT_CHAT,
         #     FileListenerService._handle_after_client_chat
         # )
 
-        logger.info("已注册文件监听器")
+        logger.info("Registered file listener")
 
     @staticmethod
     async def _start_tos_uploader(agent_context: AgentContext) -> None:
         """
-        启动TOS上传程序（使用multiprocessing创建独立子进程）
+        Start TOS upload program (using multiprocessing to create independent subprocess)
         
         Args:
-            agent_context: 代理上下文对象
+            agent_context: Agent context object
         """
         try:
-            # 获取项目根目录
+            # Get project root directory
             project_root = Path(__file__).resolve().parent.parent.parent.parent
             uploader_path = project_root / "bin" / "tos_uploader.py"
 
             if not uploader_path.exists():
-                logger.error(f"TOS上传程序不存在: {uploader_path}")
+                logger.error(f"TOS upload program does not exist: {uploader_path}")
                 return
 
-            # 获取沙盒ID
+            # Get sandbox ID
             sandbox_id = agent_context.get_sandbox_id()
             if not sandbox_id:
-                logger.warning("AgentContext中没有设置沙盒ID，TOS上传程序可能无法正常工作")
+                logger.warning("Sandbox ID not set in AgentContext, TOS upload program may not work properly")
 
-            # 获取组织编码
+            # Get organization code
             organization_code = agent_context.get_organization_code()
 
-            # 工作目录
+            # Working directory
             workspace_dir = agent_context.get_workspace_dir()
 
-            # 使用和当前相同的日志级别
+            # Use the same log level as current
             log_level = os.getenv("LOG_LEVEL", "INFO")
 
-            # 构建命令
+            # Build command
             cmd = [
-                sys.executable,  # 使用当前Python解释器
+                sys.executable,  # Use current Python interpreter
                 str(uploader_path),
                 "watch",
                 "--dir", workspace_dir,
-                "--use-context"  # 使用config/upload_credentials.json
+                "--use-context"  # Use config/upload_credentials.json
             ]
 
-            # 添加沙盒ID（如果有）
+            # Add sandbox ID (if available)
             if sandbox_id:
                 cmd.extend(["--sandbox", sandbox_id])
 
-            # 如果有组织编码，添加
+            # Add organization code if available
             if organization_code:
                 cmd.extend(["--organization-code", organization_code])
 
-            # 记录启动命令
-            logger.info(f"准备启动TOS上传程序（子进程模式）: {' '.join(cmd)}")
+            # Log startup command
+            logger.info(f"Preparing to start TOS upload program (subprocess mode): {' '.join(cmd)}")
 
-            sandbox_info = f"沙盒ID: {sandbox_id}" if sandbox_id else "未设置沙盒ID"
-            logger.info(f"使用 {sandbox_info}")
+            sandbox_info = f"Sandbox ID: {sandbox_id}" if sandbox_id else "Sandbox ID not set"
+            logger.info(f"Using {sandbox_info}")
 
-            # 终止现有进程（如果有）
+            # Terminate existing process (if any)
             await FileListenerService._terminate_existing_uploader()
 
-            # 创建新的子进程运行上传器
+            # Create new subprocess to run uploader
             loop = asyncio.get_event_loop()
 
             def start_uploader_process():
@@ -148,77 +148,77 @@ class FileListenerService:
                     args=(cmd, project_root, log_level),
                     name="TOSUploader"
                 )
-                process.daemon = True  # 设置为守护进程，主进程结束时自动结束
+                process.daemon = True  # Set as daemon process, automatically ends when main process ends
                 process.start()
                 return process
 
-            # 使用run_in_executor启动子进程
+            # Use run_in_executor to start subprocess
             process = await loop.run_in_executor(None, start_uploader_process)
 
-            # 保存进程引用
+            # Save process reference
             FileListenerService._uploader_process = process
 
-            logger.info(f"TOS上传器子进程已启动，PID: {process.pid}")
+            logger.info(f"TOS uploader subprocess started, PID: {process.pid}")
 
         except Exception as e:
-            logger.error(f"启动TOS上传程序失败: {e}")
+            logger.error(f"Failed to start TOS upload program: {e}")
             import traceback
             logger.error(traceback.format_exc())
 
     @staticmethod
     async def _terminate_existing_uploader() -> None:
-        """终止现有的上传进程"""
+        """Terminate existing upload process"""
         if FileListenerService._uploader_process is not None:
             try:
                 process = FileListenerService._uploader_process
 
-                # 检查进程是否还在运行
+                # Check if process is still running
                 if process.is_alive():
-                    # 使用loop.run_in_executor执行terminate操作
+                    # Use loop.run_in_executor to execute terminate operation
                     loop = asyncio.get_event_loop()
 
                     def terminate_process():
                         process.terminate()
-                        process.join(timeout=3)  # 等待最多3秒
+                        process.join(timeout=3)  # Wait up to 3 seconds
                         if process.is_alive():
-                            logger.warning("TOS上传进程未能在超时时间内正常结束，强制终止")
+                            logger.warning("TOS upload process did not terminate normally within timeout, forcing termination")
                             process.kill()
                         return True
 
                     await loop.run_in_executor(None, terminate_process)
-                    logger.info("已终止之前的TOS上传子进程")
+                    logger.info("Terminated previous TOS upload subprocess")
                 else:
-                    logger.info("之前的TOS上传子进程已不在运行")
+                    logger.info("Previous TOS upload subprocess is no longer running")
 
             except Exception as e:
-                logger.error(f"终止之前的上传进程失败: {e}")
+                logger.error(f"Failed to terminate previous upload process: {e}")
 
-            # 重置进程引用
+            # Reset process reference
             FileListenerService._uploader_process = None
 
     @staticmethod
     async def _handle_after_init(event: Event) -> None:
         """
-        处理初始化事件，启动上传程序
+        Handle initialization event, start upload program
         
         Args:
-            event: 事件对象
+            event: Event object
         """
         try:
-            # 从事件数据中获取agent_context
+            # Get agent_context from event data
             agent_context = event.data.agent_context
 
             if agent_context:
-                # 确保凭证目录存在
+                # Ensure credentials directory exists
                 if not os.path.exists(".credentials"):
                     os.makedirs(".credentials", exist_ok=True)
 
-                # 创建异步任务来启动TOS上传程序，不阻塞当前流程
+                # Create async task to start TOS upload program, without blocking current flow
                 asyncio.create_task(FileListenerService._start_tos_uploader(agent_context))
-                logger.info("TOS上传程序启动任务已创建（子进程模式）")
+                logger.info("TOS upload program startup task created (subprocess mode)")
 
         except Exception as e:
-            logger.error(f"处理初始化事件启动上传程序出错: {e}")
+            logger.error(f"Error handling initialization event to start upload program: {e}")
 
     # @staticmethod
     # async def _handle_after_init(event: Event) -> None:

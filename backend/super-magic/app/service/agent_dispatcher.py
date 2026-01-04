@@ -112,13 +112,13 @@ class AgentDispatcher:
 
     async def load_init_client_message(self) -> bool:
         """
-        加载初始化客户端消息到agent_context
+        Load initialization client message to agent_context
 
         Returns:
-            bool: 是否成功加载并初始化
+            bool: Whether successfully loaded and initialized
         """
         if self.agent_context.get_init_client_message() is not None:
-            logger.info("agent_context 已存在客户端初始化消息，跳过文件加载")
+            logger.info("agent_context already has client initialization message, skipping file load")
             return True
 
         try:
@@ -128,19 +128,19 @@ class AgentDispatcher:
                     init_message_data = json.load(f)
                     init_message = InitClientMessage(**init_message_data)
                     await self.initialize_workspace(init_message)
-                    logger.info(f"已从 {init_client_message_file} 加载客户端初始化消息")
+                    logger.info(f"Loaded client initialization message from {init_client_message_file}")
                     return True
             else:
-                logger.error(f"客户端初始化消息文件 {init_client_message_file} 不存在")
+                logger.error(f"Client initialization message file {init_client_message_file} does not exist")
                 return False
         except Exception as e:
-            logger.error(f"加载客户端初始化消息时出错: {e}")
+            logger.error(f"Error loading client initialization message: {e}")
             return False
 
     async def initialize_workspace(self, init_message):
-        """初始化工作区"""
+        """Initialize workspace"""
         if self.is_workspace_initialized:
-            logger.info("工作区已经初始化过，跳过初始化流程")
+            logger.info("Workspace already initialized, skipping initialization process")
             return
 
         self.agent_context.set_init_client_message(init_message)
@@ -148,24 +148,24 @@ class AgentDispatcher:
         if init_message.message_subscription_config and not self.http_stream:
             self.http_stream = HTTPSubscriptionStream(init_message.message_subscription_config)
             self.agent_context.add_stream(self.http_stream)
-            logger.info("创建和添加了HTTP订阅流")
+            logger.info("Created and added HTTP subscription stream")
 
-        # 从 init_message.metadata 提取并设置关键字段
+        # Extract and set key fields from init_message.metadata
         if init_message.metadata:
-            # 设置 task_id
+            # Set task_id
             if "super_magic_task_id" in init_message.metadata:
                 self.agent_context.set_task_id(init_message.metadata["super_magic_task_id"])
-                logger.info(f"从 init_message.metadata 设置任务ID: {init_message.metadata['super_magic_task_id']}")
+                logger.info(f"Set task ID from init_message.metadata: {init_message.metadata['super_magic_task_id']}")
             
-            # 设置 sandbox_id
+            # Set sandbox_id
             if "sandbox_id" in init_message.metadata:
                 self.agent_context.set_sandbox_id(init_message.metadata["sandbox_id"])
-                logger.info(f"从 init_message.metadata 设置沙盒ID: {init_message.metadata['sandbox_id']}")
+                logger.info(f"Set sandbox ID from init_message.metadata: {init_message.metadata['sandbox_id']}")
 
-            # 设置 organization_code
+            # Set organization_code
             if "organization_code" in init_message.metadata:
                 self.agent_context.set_organization_code(init_message.metadata["organization_code"])
-                logger.info(f"从 init_message.metadata 设置组织编码: {init_message.metadata['organization_code']}")
+                logger.info(f"Set organization code from init_message.metadata: {init_message.metadata['organization_code']}")
 
         await self.agent_service.init_workspace(agent_context=self.agent_context)
 
@@ -173,17 +173,17 @@ class AgentDispatcher:
         self.agents["super-magic"] = await self.agent_service.create_agent("super-magic", self.agent_context)
 
         self.is_workspace_initialized = True
-        logger.info("工作区初始化完成")
+        logger.info("Workspace initialization completed")
 
     async def switch_agent(self, task_mode: TaskMode):
         """
-        根据task_mode切换到相应的agent
+        Switch to the corresponding agent based on task_mode
 
         Args:
-            task_mode: 任务模式，可以是TaskMode.CHAT或TaskMode.PLAN
+            task_mode: Task mode, can be TaskMode.CHAT or TaskMode.PLAN
 
         Returns:
-            Agent: 选择的Agent实例
+            Agent: Selected Agent instance
         """
         if task_mode == TaskMode.CHAT:
             agent_type = "magic"
@@ -191,43 +191,43 @@ class AgentDispatcher:
             agent_type = "super-magic"
 
         if agent_type not in self.agents:
-            logger.error(f"未找到agent类型: {agent_type}，使用默认的super-magic")
+            logger.error(f"Agent type not found: {agent_type}, using default super-magic")
             agent_type = "super-magic"
 
-        logger.info(f"根据 task_mode({task_mode}) 选择agent类型: {agent_type}")
+        logger.info(f"Selected agent type based on task_mode({task_mode}): {agent_type}")
 
         return self.agents[agent_type]
 
     async def run_agent(self, agent: Agent):
         """
-        运行Agent处理任务
+        Run Agent to process task
 
         Args:
-            agent: Agent实例
+            agent: Agent instance
 
         Returns:
-            bool: 是否成功运行
+            bool: Whether successfully run
         """
         await self.agent_service.run_agent(agent=agent)
 
     async def dispatch_agent(self, message: ChatClientMessage):
         """
-        调度agent执行任务
+        Dispatch agent to execute task
 
         Args:
-            client_message: 客户端消息
+            client_message: Client message
 
         Returns:
-            bool: 是否成功调度
+            bool: Whether successfully dispatched
         """
-        # 确保工作区已初始化
+        # Ensure workspace is initialized
         if not self.is_workspace_initialized:
             initialized = await self.load_init_client_message()
             if not initialized:
-                logger.error("智能体未初始化，请先调用工作区初始化")
+                logger.error("Agent not initialized, please initialize workspace first")
                 await self.agent_context.dispatch_event(EventType.ERROR, ErrorEventData(
                     agent_context=self.agent_context,
-                    error_message="智能体未初始化，请先调用工作区初始化"
+                    error_message="Agent not initialized, please initialize workspace first"
                 ))
                 return
 

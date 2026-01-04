@@ -26,17 +26,17 @@ logger = get_logger(__name__)
 
 class AgentService:
     def is_support_fetch_workspace(self) -> bool:
-        """是否支持获取工作空间
+        """Check if fetching workspace is supported
         
         Returns:
-            bool: 是否支持获取工作空间
+            bool: Whether fetching workspace is supported
         """
-        # 优先从环境变量获取，如果不存在则从配置文件获取
+        # Get from environment variable first, fallback to config file if not exists
         env_value = Environment.get_env("FETCH_WORKSPACE", None, bool)
         if env_value is not None:
             return env_value
 
-        # 从配置文件获取
+        # Get from config file
         try:
             from agentlang.config.config import config
             return config.get("sandbox.fetch_workspace", False)
@@ -45,15 +45,15 @@ class AgentService:
 
     async def _download_and_check_project_archive_info(self, agent_context: AgentContext) -> bool:
         """
-        下载并检查项目存档信息文件
+        Download and check project archive info file
 
         Args:
-            agent_context: 代理上下文
+            agent_context: Agent context
 
         Returns:
-            bool: 是否需要更新工作区
+            bool: Whether workspace needs to be updated
         """
-        # 获取storage_service
+        # Get storage_service
         sts_token_refresh = agent_context.get_init_client_message_sts_token_refresh()
         metadata = agent_context.get_init_client_message_metadata()
 
@@ -62,62 +62,62 @@ class AgentService:
             metadata=metadata
         )
 
-        # 尝试下载项目存档信息文件
+        # Try downloading project archive info file
         project_archive_info_file_relative_path = PathManager.get_project_archive_info_file_relative_path()
         project_archive_info_file = PathManager.get_project_archive_info_file()
 
         project_archive_info_file_key = BaseFileProcessor.combine_path(dir_path=storage_service.credentials.get_dir(), file_path=project_archive_info_file_relative_path)
-        # 判断文件是否存在
+        # Check if file exists
         if not await storage_service.exists(project_archive_info_file_key):
-            logger.info(f"项目存档信息文件不存在: {project_archive_info_file_key}")
+            logger.info(f"Project archive info file does not exist: {project_archive_info_file_key}")
             return False
-        logger.info(f"尝试下载项目存档信息文件: {project_archive_info_file_key}")
+        logger.info(f"Attempting to download project archive info file: {project_archive_info_file_key}")
         info_file_stream = await storage_service.download(
             key=project_archive_info_file_key,
             options=None
         )
 
-        # 解析远程版本信息
+        # Parse remote version info
         remote_info = json.loads(info_file_stream.read().decode('utf-8'))
         remote_version = remote_info.get('version', 0)
-        logger.info(f"远程项目存档信息版本号: {remote_version}")
+        logger.info(f"Remote project archive info version: {remote_version}")
 
-        # 获取本地版本信息
+        # Get local version info
         local_version = 0
         if os.path.exists(project_archive_info_file):
             with open(project_archive_info_file, 'r') as f:
                 local_info = json.load(f)
                 local_version = local_info.get('version', 0)
-                logger.info(f"本地项目存档信息版本号: {local_version}")
+                logger.info(f"Local project archive info version: {local_version}")
         else:
-            logger.info("本地项目存档信息文件不存在")
+            logger.info("Local project archive info file does not exist")
 
-        # 如果远程版本小于等于本地版本，则不需要更新
+        # If remote version is not greater than local version, no update needed
         if remote_version <= local_version:
-            logger.info(f"远程版本({remote_version})不大于本地版本({local_version})，无需更新工作区")
+            logger.info(f"Remote version ({remote_version}) is not greater than local version ({local_version}), no workspace update needed")
             return False
 
-        logger.info(f"远程版本({remote_version})大于本地版本({local_version})，将更新工作区")
+        logger.info(f"Remote version ({remote_version}) is greater than local version ({local_version}), will update workspace")
 
-        # 版本较新，保存远程版本信息到本地
+        # Version is newer, save remote version info locally
         project_schema_absolute_dir = PathManager.get_project_schema_absolute_dir()
         project_schema_absolute_dir.mkdir(exist_ok=True, parents=True)
         with open(project_archive_info_file, 'w') as f:
             json.dump(remote_info, f)
-            logger.info(f"已更新本地项目存档信息文件: {project_archive_info_file}")
+            logger.info(f"Updated local project archive info file: {project_archive_info_file}")
         return True
 
     async def download_and_extract_workspace(self, agent_context: AgentContext) -> None:
         """
-        从OSS下载并解压工作区
+        Download and extract workspace from OSS
 
         Args:
-            agent_context: 代理上下文，包含存储配置和update_workspace状态
+            agent_context: Agent context, contains storage configuration and update_workspace state
 
         Returns:
-            bool: 下载和解压是否成功
+            bool: Whether download and extraction succeeded
         """
-        # 获取配置
+        # Get configuration
         sts_token_refresh = agent_context.get_init_client_message_sts_token_refresh()
         metadata = agent_context.get_init_client_message_metadata()
 
@@ -126,71 +126,71 @@ class AgentService:
             metadata=metadata
         )
 
-        # 下载并检查项目存档信息文件
+        # Download and check project archive info file
         need_update = await self._download_and_check_project_archive_info(
             agent_context=agent_context
         )
 
-        # 如果不需要更新工作区，则直接返回
+        # If no update needed, return directly
         if not need_update or not self.is_support_fetch_workspace():
-            logger.info("工作区不需要更新，跳过下载和解压")
+            logger.info("Workspace does not need update, skipping download and extraction")
             return
 
-        # 从OSS下载project_archive.zip压缩包
+        # Download project_archive.zip from OSS
         file_key = BaseFileProcessor.combine_path(dir_path=storage_service.credentials.get_dir(), file_path="project_archive.zip")
-        logger.info(f"开始从OSS下载压缩包: {file_key}")
+        logger.info(f"Starting to download archive from OSS: {file_key}")
         file_stream = await storage_service.download(
             key=file_key,
             options=None
         )
 
-        # 保存到临时文件
+        # Save to temp file
         temp_zip = tempfile.NamedTemporaryFile(delete=False, suffix='.zip')
         temp_zip_path = temp_zip.name
         temp_zip.close()
 
-        # 写入临时文件
+        # Write to temp file
         with open(temp_zip_path, 'wb') as f:
             f.write(file_stream.read())
 
-        logger.info(f"压缩包下载完成: {temp_zip_path}")
-        # 打印压缩包大小
+        logger.info(f"Archive download complete: {temp_zip_path}")
+        # Print archive size
         zip_size = os.path.getsize(temp_zip_path)
-        logger.info(f"压缩包大小: {zip_size} 字节 ({zip_size/1024/1024:.2f} MB)")
+        logger.info(f"Archive size: {zip_size} bytes ({zip_size/1024/1024:.2f} MB)")
 
-        # 清空现有目录
+        # Clear existing directories
         workspace_dir = PathManager.get_workspace_dir()
         chat_history_dir = PathManager.get_chat_history_dir()
         if workspace_dir.exists():
-            logger.info(f"清空现有工作区目录: {workspace_dir}")
+            logger.info(f"Clearing existing workspace directory: {workspace_dir}")
             shutil.rmtree(workspace_dir)
         if chat_history_dir.exists():
-            logger.info(f"清空现有聊天历史目录: {chat_history_dir}")
+            logger.info(f"Clearing existing chat history directory: {chat_history_dir}")
             shutil.rmtree(chat_history_dir)
 
-        # 重新创建目录
+        # Recreate directories
         workspace_dir.mkdir(exist_ok=True)
         chat_history_dir.mkdir(exist_ok=True)
 
-        # 解压缩文件
+        # Extract archive
         project_root = PathManager.get_project_root()
-        logger.info(f"开始解压文件到: {project_root}")
+        logger.info(f"Starting to extract files to: {project_root}")
         with zipfile.ZipFile(temp_zip_path, 'r') as zip_ref:
-            # 解压所有文件到项目根目录
+            # Extract all files to project root
             zip_ref.extractall(project_root)
 
-        logger.info("工作区初始化压缩包解压完成")
+        logger.info("Workspace initialization archive extraction complete")
 
-        # 删除临时文件
+        # Delete temp file
         os.unlink(temp_zip_path)
-        logger.info(f"临时文件已删除: {temp_zip_path}")
+        logger.info(f"Temp file deleted: {temp_zip_path}")
 
     def _save_init_client_message_to_credentials(self, agent_context: AgentContext) -> None:
         """
-        保存客户端初始化消息
+        Save client initialization message
 
         Args:
-            agent_context: 代理上下文，包含客户端初始化消息
+            agent_context: Agent context, contains client initialization message
         """
         try:
             init_client_message = agent_context.get_init_client_message()
@@ -199,27 +199,27 @@ class AgentService:
                 with open(init_client_message_file, "w", encoding="utf-8") as f:
                     json.dump(init_client_message.model_dump(), f, indent=2, ensure_ascii=False)
 
-                logger.info(f"已保存客户端初始化消息到: {init_client_message_file}")
+                logger.info(f"Saved client initialization message to: {init_client_message_file}")
         except Exception as e:
-            logger.error(f"保存客户端初始化消息时出错: {e}")
+            logger.error(f"Error saving client initialization message: {e}")
 
     async def init_workspace(
         self,
         agent_context: AgentContext,
     ):
         """
-        初始化智能体
+        Initialize agent
 
         Args:
-            agent_context: 智能体上下文
+            agent_context: Agent context
         """
 
         for stream in agent_context.streams.values():
             agent_context.add_stream(stream)
 
-        logger.info("超级麦吉初始化开始")
+        logger.info("SuperMagic initialization started")
 
-        # 初始化OSS凭证
+        # Initialize OSS credentials
         sts_token_refresh = agent_context.get_init_client_message_sts_token_refresh()
         metadata = agent_context.get_init_client_message_metadata()
         await StorageFactory.get_storage(
@@ -227,14 +227,14 @@ class AgentService:
             metadata=metadata
         )
 
-        # 保存 init_client_message 到 .credentials 目录
+        # Save init_client_message to .credentials directory
         self._save_init_client_message_to_credentials(agent_context)
 
         await self.download_and_extract_workspace(agent_context)
 
-        # 创建 ToolContext 实例
+        # Create ToolContext instance
         tool_context = ToolContext(metadata=agent_context.get_metadata())
-        # 将 AgentContext 作为扩展注册
+        # Register AgentContext as extension
         tool_context.register_extension("agent_context", agent_context)
 
         after_init_data = AfterInitEventData(
@@ -244,7 +244,7 @@ class AgentService:
         )
         await agent_context.dispatch_event(EventType.AFTER_INIT, after_init_data)
 
-        logger.info("超级麦吉初始化完成")
+        logger.info("SuperMagic initialization complete")
 
         return
 
@@ -254,17 +254,17 @@ class AgentService:
         agent_context: AgentContext,
     ) -> Agent:
         """
-        创建智能体实例
+        Create agent instance
 
         Args:
-            agent_type: 智能体类型名称
-            stream_mode: 是否启用流式输出
-            agent_context: 可选的代理上下文对象，将覆盖其他参数
-            stream: 流式输出对象
-            storage_credentials: 对象存储凭证，用于配置对象存储服务
+            agent_type: Agent type name
+            stream_mode: Whether to enable streaming output
+            agent_context: Optional agent context object, will override other parameters
+            stream: Streaming output object
+            storage_credentials: Object storage credentials, used to configure object storage service
 
         Returns:
-            智能体实例和错误信息列表
+            Agent instance and error message list
         """
 
         try:
@@ -272,7 +272,7 @@ class AgentService:
 
             return agent
         except Exception as e:
-            logger.error(f"创建SuperMagic实例时出错: {e}")
+            logger.error(f"Error creating SuperMagic instance: {e}")
             import traceback
 
             logger.error(traceback.format_exc())
@@ -291,7 +291,7 @@ class AgentService:
         try:
             await agent.run_main_agent(query)
         finally:
-            # 持久化项目目录
+            # Persist project directory
             asyncio.create_task(
                 FileStorageListenerService._archive_and_upload_project(agent_context)
             )
@@ -308,18 +308,18 @@ class AgentService:
         sandbox_id: Optional[str] = "",
     ) -> AgentContext:
         """
-        创建代理上下文对象
+        Create agent context object
 
         Args:
-            stream_mode: 是否启用流式输出
-            streams: 可选的通信流实例
-            agent_type: 代理类型，用于从 agent 文件中提取模型名称
-            llm: 大语言模型名称
-            task_id: 任务ID，若为None则自动生成
-            is_main_agent: 标记当前agent是否是主agent，默认为False
+            stream_mode: Whether to enable streaming output
+            streams: Optional stream instances for communication
+            agent_type: Agent type, used to extract model name from agent file
+            llm: Large language model name
+            task_id: Task ID, auto-generated if None
+            is_main_agent: Flag indicating if current agent is the main agent, defaults to False
 
         Returns:
-            AgentContext: 代理上下文对象
+            AgentContext: Agent context object
         """
         agent_context = AgentContext()
         agent_context.set_task_id(task_id)
@@ -335,75 +335,75 @@ class AgentService:
         for stream in streams:
             agent_context.add_stream(stream)
 
-        # 如果提供了 agent_type，从文件中提取 llm
+        # If agent_type is provided, extract llm from file
         if agent_type:
-            # 读取 agent 文件内容
+            # Read agent file content
             agent_file = self.get_agent_file(agent_type)
             if os.path.exists(agent_file):
                 try:
                     with open(agent_file, "r", encoding="utf-8") as f:
                         content = f.read()
 
-                    # 使用正则表达式直接从内容中提取模型名称
+                    # Use regex to extract model name directly from content
                     model_pattern = r"<!--\s*llm:\s*([a-zA-Z0-9-_.]+)\s*-->"
                     match = re.search(model_pattern, content, re.IGNORECASE)
 
                     if match:
                         model_name = match.group(1).strip()
                         agent_context.llm = model_name
-                        logger.info(f"从 {agent_type}.agent 文件提取模型名称并设置为: {model_name}")
+                        logger.info(f"Extracted model name from {agent_type}.agent file and set to: {model_name}")
                 except Exception as e:
-                    logger.error(f"从 agent 文件提取 llm 时出错: {e}")
+                    logger.error(f"Error extracting llm from agent file: {e}")
 
         return agent_context
 
     def get_agent_file(self, agent_type: str) -> str:
         """
-        获取智能体文件路径
+        Get agent file path
         """
         return os.path.join(PathManager.get_project_root(), "agents", f"{agent_type}.agent")
 
     async def _process_attachments(self, agent_context: AgentContext, query: str, attachments: List[Dict[str, Any]]) -> str:
         """
-        处理附件并将其集成到查询中
+        Process attachments and integrate them into the query
 
         Args:
-            query: 原始用户查询
-            attachments: 附件列表，每个附件是一个字典，包含附件信息
+            query: Original user query
+            attachments: List of attachments, each attachment is a dictionary containing attachment info
 
         Returns:
-            str: 添加了附件路径信息的查询
+            str: Query with attachment path information added
         """
         if not attachments:
-            logger.info("消息中没有附件，返回原始查询")
+            logger.info("No attachments in message, returning original query")
             return query
 
-        logger.info(f"收到带附件的消息，附件数量: {len(attachments)}")
-        logger.info(f"消息内容: {query[:100]}{'...' if len(query) > 100 else ''}")
-        logger.info(f"附件详情: {json.dumps([{k: v for k, v in a.items()} for a in attachments], ensure_ascii=False)}")
+        logger.info(f"Received message with attachments, count: {len(attachments)}")
+        logger.info(f"Message content: {query[:100]}{'...' if len(query) > 100 else ''}")
+        logger.info(f"Attachment details: {json.dumps([{k: v for k, v in a.items()} for a in attachments], ensure_ascii=False)}")
 
-        # 初始化附件服务
-        logger.info("初始化附件下载服务")
+        # Initialize attachment service
+        logger.info("Initializing attachment download service")
         attachment_service = AttachmentService(agent_context)
 
-        # 下载附件
-        logger.info("开始下载附件...")
+        # Download attachments
+        logger.info("Starting attachment download...")
         attachment_paths = await attachment_service.download_attachments(attachments)
 
-        # 如果有成功下载的附件，将路径添加到提示中
+        # If successfully downloaded attachments, add paths to prompt
         if attachment_paths:
-            logger.info(f"成功下载 {len(attachment_paths)} 个附件")
-            # 为每个附件生成路径信息
-            attachment_info = "\n\n以下是用户上传的附件路径:\n"
+            logger.info(f"Successfully downloaded {len(attachment_paths)} attachments")
+            # Generate path information for each attachment
+            attachment_info = "\n\nThe following are user-uploaded attachment paths:\n"
             for i, path in enumerate(attachment_paths, 1):
                 attachment_info += f"{i}. {path}\n"
-                logger.info(f"附件 {i}: {path}")
+                logger.info(f"Attachment {i}: {path}")
 
-            # 将附件信息添加到提示中
+            # Add attachment information to prompt
             message_with_attachments = f"{query}\n{attachment_info}"
-            logger.info(f"将附件路径信息添加到消息中，新消息长度: {len(message_with_attachments)}")
+            logger.info(f"Added attachment path info to message, new message length: {len(message_with_attachments)}")
 
             return message_with_attachments
         else:
-            logger.info("没有成功下载的附件，返回原始查询")
+            logger.info("No successfully downloaded attachments, returning original query")
             return query

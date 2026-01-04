@@ -24,21 +24,21 @@ from app.utils.pdf_converter_utils import convert_pdf_locally
 
 logger = get_logger(__name__)
 
-# 保存 Markdown 结果的目录
+# Directory to save Markdown results
 DEFAULT_RECORDS_DIR_NAME = "webview_reports"
 
 def get_or_create_records_dir(dir_name: str = DEFAULT_RECORDS_DIR_NAME) -> Path:
-    """获取或创建记录目录"""
+    """Get or create records directory"""
     records_dir = PathManager.get_workspace_dir() / dir_name
     records_dir.mkdir(parents=True, exist_ok=True)
     return records_dir
 
 def is_safe_path(base_path: Path, target_path_str: str) -> bool:
-    """检查目标路径是否在基础路径下且安全"""
+    """Check if target path is under base path and safe"""
     try:
-        # 使用 resolve() 来处理 '..' 等情况
-        target_path = (base_path / target_path_str).resolve(strict=False) # strict=False 允许解析不存在的路径
-        # 确保解析后的路径仍然在基础路径下
+        # Use resolve() to handle '..' and similar cases
+        target_path = (base_path / target_path_str).resolve(strict=False) # strict=False allows resolving non-existent paths
+        # Ensure resolved path is still under base path
         return target_path.is_relative_to(base_path.resolve(strict=True))
     except Exception:
         return False
@@ -69,28 +69,28 @@ class ConvertPdfParams(BaseToolParams):
 @tool()
 class ConvertPdf(AbstractFileTool[ConvertPdfParams], WorkspaceGuardTool[ConvertPdfParams]):
     """
-    PDF 转换工具，将指定的 PDF 文件（本地路径或 URL）转换为 Markdown 格式。
+    PDF conversion tool, converts specified PDF files (local path or URL) to Markdown format.
 
-    可以指定输出 Markdown 文件的保存路径（相对于工作空间），如果不指定，将自动处理。
+    Can specify output Markdown file save path (relative to workspace), if not specified, will be auto-handled.
 
-    适用于：
-    - 将在线 PDF 文档转换为 Markdown 格式以便阅读或进一步处理。
-    - 提取 PDF 中的文本和基本结构。
+    Suitable for:
+    - Converting online PDF documents to Markdown format for reading or further processing.
+    - Extracting text and basic structure from PDFs.
 
-    支持模式:
-    - **smart (默认)**: 使用外部智能 API 处理 URL。可能提供更高质量的转换结果，但仅支持 URL 且可能较慢。
-    - **normal**: 使用内置库进行转换。支持本地文件和 URL，速度较快，但对于复杂或扫描版 PDF 效果可能不如 smart 模式。
+    Supported modes:
+    - **smart (default)**: Uses external smart API to process URLs. May provide higher quality conversion results, but only supports URLs and may be slower.
+    - **normal**: Uses built-in library for conversion. Supports local files and URLs, faster, but for complex or scanned PDFs effects may not be as good as smart mode.
 
-    要求：
-    - 输入 PDF 的路径 (`input_path`)，可以是工作区相对路径或 URL。
-    - （可选）转换模式 (`mode`)，默认为 'smart'。如果 `input_path` 是本地文件，将强制使用 'normal' 模式。
-    - （可选）提供一个安全的工作空间相对路径 (`output_path`) 用于保存 Markdown 文件。如果不提供，将自动生成路径。
-    - （可选）是否覆盖已存在的文件 (`override`)，默认为 true。仅在提供了 `output_path` 时有效。
+    Requirements:
+    - Input PDF path (`input_path`), can be workspace relative path or URL.
+    - (Optional) Conversion mode (`mode`), defaults to 'smart'. If `input_path` is local file, will force 'normal' mode.
+    - (Optional) Provide a safe workspace relative path (`output_path`) to save Markdown file. If not provided, will auto-generate path.
+    - (Optional) Whether to overwrite existing file (`override`), defaults to true. Only effective when `output_path` is provided.
 
-    调用示例：
+    Usage examples:
     ```
     {
-        "input_path": "documents/report.pdf", // 本地文件
+        "input_path": "documents/report.pdf", // Local file
         "output_path": "webview_reports/converted_report.md"
     }
     ```
@@ -100,11 +100,11 @@ class ConvertPdf(AbstractFileTool[ConvertPdfParams], WorkspaceGuardTool[ConvertP
         "output_path": "webview_reports/converted_report.md"
     }
     ```
-    或者不指定输出路径：
+    Or without specifying output path:
     ```
     {
         "input_path": "https://another.example.com/document.pdf",
-        "mode": "normal" // 使用本地库转换 URL
+        "mode": "normal" // Use local library to convert URL
     }
     ```
     ```

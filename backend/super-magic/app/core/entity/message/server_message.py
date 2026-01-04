@@ -12,7 +12,7 @@ from app.core.entity.project_archive import ProjectArchiveInfo
 
 
 class TaskStatus(str, Enum):
-    """任务状态枚举"""
+    """Task status enumeration"""
 
     WAITING = "waiting"
     RUNNING = "running"
@@ -21,7 +21,7 @@ class TaskStatus(str, Enum):
     SUSPENDED = "suspended"
 
 class ToolStatus(str, Enum):
-    """工具调用状态枚举"""
+    """Tool call status enumeration"""
 
     WAITING = "waiting"
     RUNNING = "running"
@@ -30,7 +30,7 @@ class ToolStatus(str, Enum):
 
 
 class DisplayType(str, Enum):
-    """展示类型枚举"""
+    """Display type enumeration"""
 
     TEXT = "text"
     MD = "md"
@@ -40,137 +40,137 @@ class DisplayType(str, Enum):
     SEARCH = "search"
     SCRIPT = "script"
     CODE = "code"
-    ASK_USER = "ask_user"  # 添加ASK_USER枚举值
+    ASK_USER = "ask_user"  # Add ASK_USER enum value
 
 
 class TaskStep(BaseModel):
-    """任务步骤模型"""
+    """Task step model"""
 
-    id: str  # 步骤ID，使用雪花ID
-    title: str  # 步骤标题
-    status: TaskStatus  # 步骤状态
+    id: str  # Step ID, using snowflake ID
+    title: str  # Step title
+    status: TaskStatus  # Step status
 
 
 class FileContent(BaseModel):
-    """文本、Markdown、HTML文件内容模型"""
+    """Text, Markdown, HTML file content model"""
 
-    file_name: str  # 文件名
-    content: str  # 文件内容
+    file_name: str  # File name
+    content: str  # File content
 
 
 class TerminalContent(BaseModel):
-    """终端内容模型"""
+    """Terminal content model"""
 
-    command: str  # 终端命令
-    output: str  # 终端输出
-    exit_code: int  # 终端退出码
+    command: str  # Terminal command
+    output: str  # Terminal output
+    exit_code: int  # Terminal exit code
 
 
 class ScriptExecutionContent(BaseModel):
-    """脚本执行内容模型"""
+    """Script execution content model"""
 
-    code: str  # 执行的代码内容
-    args: Optional[str] = None  # 命令行参数
-    stdout: str  # 标准输出
-    stderr: str  # 标准错误
-    exit_code: int  # 退出码
-    success: bool  # 执行是否成功
+    code: str  # Executed code content
+    args: Optional[str] = None  # Command line arguments
+    stdout: str  # Standard output
+    stderr: str  # Standard error
+    exit_code: int  # Exit code
+    success: bool  # Whether execution succeeded
 
 
 class BrowserContent(BaseModel):
-    """浏览器内容模型"""
+    """Browser content model"""
 
-    url: str  # 浏览器URL
-    title: str  # 浏览器标题
-    file_key: Optional[str] = None  # 浏览器截图
+    url: str  # Browser URL
+    title: str  # Browser title
+    file_key: Optional[str] = None  # Browser screenshot
 
 
 class SearchResultItem(BaseModel):
-    """搜索结果项模型"""
+    """Search result item model"""
 
-    title: str  # 搜索结果标题
-    url: str  # 搜索结果URL
-    snippet: str  # 搜索结果描述
-    icon_url: Optional[str] = None  # 添加网站图标URL字段
+    title: str  # Search result title
+    url: str  # Search result URL
+    snippet: str  # Search result description
+    icon_url: Optional[str] = None  # Website icon URL field
 
 
 class SearchGroupItem(BaseModel):
-    """搜索分组模型"""
+    """Search group model"""
 
-    keyword: str  # 搜索关键词
-    results: List[SearchResultItem]  # 该关键词的搜索结果列表
+    keyword: str  # Search keyword
+    results: List[SearchResultItem]  # Search result list for this keyword
 
 
 class SearchContent(BaseModel):
-    """搜索内容模型"""
+    """Search content model"""
 
-    groups: List[SearchGroupItem]  # 多组搜索结果，每组对应一个关键词
+    groups: List[SearchGroupItem]  # Multiple search result groups, each corresponding to a keyword
 
 
 class DeepWriteContent(BaseModel):
-    """深度写作内容模型"""
+    """Deep writing content model"""
 
-    title: str  # 深度写作标题
-    reasoning_content: str  # 深度写作过程内容
-    content: str  # 深度写作结论
+    title: str  # Deep writing title
+    reasoning_content: str  # Deep writing process content
+    content: str  # Deep writing conclusion
 
 
 class AskUserContent(BaseModel):
-    """用户提问内容模型"""
+    """User question content model"""
 
-    content: str  # 提问内容
-    question_type: Optional[str] = None  # 问题类型，可选参数
+    content: str  # Question content
+    question_type: Optional[str] = None  # Question type, optional parameter
 
 class ToolDetail(BaseModel):
-    """工具详情模型"""
+    """Tool detail model"""
 
-    type: DisplayType  # 展示类型
+    type: DisplayType  # Display type
     data: Union[
         FileContent, TerminalContent, BrowserContent, SearchContent,
         ScriptExecutionContent, DeepWriteContent, AskUserContent, Dict[str, Any]
-    ]  # 展示内容，根据type动态展示
+    ]  # Display content, dynamically displayed based on type
 
     model_config = ConfigDict(use_enum_values=True)
 
 
 class Tool(BaseModel):
-    """工具模型"""
+    """Tool model"""
 
-    id: str  # 工具调用id
-    name: str  # 工具名称
-    action: Optional[str] = None  # 工具执行操作
-    status: ToolStatus  # 当前工具调用状态
-    remark: Optional[str] = None  # 备注说明
-    detail: Optional[ToolDetail] = None  # 工具详情
-    attachments: Optional[List[Attachment]] = None  # 附件列表
+    id: str  # Tool call id
+    name: str  # Tool name
+    action: Optional[str] = None  # Tool execution action
+    status: ToolStatus  # Current tool call status
+    remark: Optional[str] = None  # Remark note
+    detail: Optional[ToolDetail] = None  # Tool detail
+    attachments: Optional[List[Attachment]] = None  # Attachment list
 
 
 class ServerMessagePayload(BaseModel):
-    """任务消息模型"""
+    """Task message model"""
 
     message_id: str
-    type: Union[MessageType, str]  # 消息类型
-    task_id: str  # 当前任务id
-    status: TaskStatus  # 任务状态
-    content: str = Field(default="")  # 消息内容
-    sandbox_id: Optional[str] = None  # 沙箱ID
-    steps: Optional[List[TaskStep]] = None  # 任务步骤列表
-    tool: Optional[Tool] = None  # 工具信息
-    attachments: Optional[List[Attachment]] = None  # 附件列表
-    send_timestamp: int  # 发送时间的秒级时间戳
-    event: Optional[EventType] = None  # 事件类型，可选参数
-    project_archive: Optional[ProjectArchiveInfo] = None  # 项目压缩包信息
-    show_in_ui: bool = True  # 是否在UI中显示消息
+    type: Union[MessageType, str]  # Message type
+    task_id: str  # Current task id
+    status: TaskStatus  # Task status
+    content: str = Field(default="")  # Message content
+    sandbox_id: Optional[str] = None  # Sandbox ID
+    steps: Optional[List[TaskStep]] = None  # Task step list
+    tool: Optional[Tool] = None  # Tool info
+    attachments: Optional[List[Attachment]] = None  # Attachment list
+    send_timestamp: int  # Send timestamp in seconds
+    event: Optional[EventType] = None  # Event type, optional parameter
+    project_archive: Optional[ProjectArchiveInfo] = None  # Project archive info
+    show_in_ui: bool = True  # Whether to show message in UI
 
-    model_config = ConfigDict(use_enum_values=True)  # 使用枚举值而不是枚举对象
+    model_config = ConfigDict(use_enum_values=True)  # Use enum values instead of enum objects
 
     @property
     def is_empty(self) -> bool:
         """
-        判断消息是否为空
+        Check if message is empty
 
         Returns:
-            bool: 如果消息内容为空且工具详情为空，则返回True，否则返回False
+            bool: Returns True if message content is empty and tool detail is empty, otherwise False
         """
         return not self.content and (not self.tool or (not self.tool.action and not self.tool.detail))
 
@@ -187,28 +187,28 @@ class ServerMessagePayload(BaseModel):
         attachments: Optional[List[Attachment]] = None,
         event: Optional[EventType] = None,
         project_archive: Optional[ProjectArchiveInfo] = None,
-        show_in_ui: bool = True,  # 新增参数，默认为True
+        show_in_ui: bool = True,  # New parameter, defaults to True
     ) -> "ServerMessagePayload":
         """
-        创建任务消息的工厂方法
+        Factory method to create task message
 
         Args:
-            task_id: 任务ID
-            message_type: 消息类型
-            status: 任务状态
-            content: 消息内容
-            sandbox_id: 沙箱ID，可选
-            tool: 可选的工具信息
-            steps: 可选的任务步骤列表
-            attachments: 可选的附件列表
-            event: 可选的事件类型
-            project_archive: 可选的项目压缩包信息
-            show_in_ui: 是否在UI中显示，默认为True
+            task_id: Task ID
+            message_type: Message type
+            status: Task status
+            content: Message content
+            sandbox_id: Sandbox ID, optional
+            tool: Optional tool info
+            steps: Optional task step list
+            attachments: Optional attachment list
+            event: Optional event type
+            project_archive: Optional project archive info
+            show_in_ui: Whether to show in UI, defaults to True
 
         Returns:
-            TaskMessage: 创建的任务消息对象
+            TaskMessage: Created task message object
         """
-        # 使用雪花算法生成ID
+        # Use snowflake algorithm to generate ID
         snowflake = Snowflake.create_default()
 
         return ServerMessagePayload(
@@ -224,11 +224,11 @@ class ServerMessagePayload(BaseModel):
             send_timestamp=int(time.time()),
             event=event,
             project_archive=project_archive,
-            show_in_ui=show_in_ui,  # 传递显示标志
+            show_in_ui=show_in_ui,  # Pass display flag
         )
 
 class ServerMessage(BaseModel):
-    """任务消息模型"""
+    """Task message model"""
 
     metadata: Dict[str, Any]
     payload: ServerMessagePayload

@@ -8,41 +8,41 @@ logger = get_logger(__name__)
 
 class BaseListenerService:
     """
-    基础事件监听服务，封装通用的事件注册逻辑
+    Base event listener service, encapsulates common event registration logic
     
-    提供通用的事件注册和管理功能，子类只需专注于具体事件的处理逻辑
+    Provides common event registration and management functionality, subclasses only need to focus on specific event handling logic
     """
 
     @staticmethod
     def register_event_listener(agent_context: AgentContext, event_type: EventType, listener: Callable[[Event[Any]], None]) -> None:
         """
-        为代理上下文注册事件监听器
+        Register event listener for agent context
         
         Args:
-            agent_context: 代理上下文对象
-            event_type: 事件类型
-            listener: 事件监听器函数，接收一个事件参数
+            agent_context: Agent context object
+            event_type: Event type
+            listener: Event listener function, receives one event parameter
         """
-        # 检查agent_context是否为None
+        # Check if agent_context is None
         if agent_context is None:
-            logger.warning("无法注册事件监听器: 代理上下文为None")
+            logger.warning("Cannot register event listener: agent context is None")
             return
 
-        # 向代理上下文直接注册监听器
+        # Register listener directly to agent context
         agent_context.add_event_listener(event_type, listener)
 
-        logger.info(f"已注册事件监听器: {event_type}")
+        logger.info(f"Registered event listener: {event_type}")
 
     @staticmethod
     def register_listeners(agent_context: AgentContext, event_listeners: Dict[EventType, Callable[[Event[Any]], None]]) -> None:
         """
-        批量注册多个事件监听器
+        Batch register multiple event listeners
         
         Args:
-            agent_context: 代理上下文对象
-            event_listeners: 事件类型到监听器函数的映射字典
+            agent_context: Agent context object
+            event_listeners: Dictionary mapping event types to listener functions
         """
         for event_type, listener in event_listeners.items():
             BaseListenerService.register_event_listener(agent_context, event_type, listener)
 
-        logger.info(f"已批量注册 {len(event_listeners)} 个事件监听器")
+        logger.info(f"Batch registered {len(event_listeners)} event listeners")

@@ -1,7 +1,7 @@
 """
-附件下载服务
+Attachment download service
 
-负责处理聊天消息中的附件下载
+Responsible for handling attachment downloads in chat messages
 """
 
 import asyncio
@@ -15,59 +15,59 @@ import httpx
 from agentlang.logger import get_logger
 from app.core.context.agent_context import AgentContext
 
-# 配置日志
+# Configure logging
 logger = get_logger(__name__)
 
 
 class AttachmentService:
-    """附件下载服务类"""
+    """Attachment download service class"""
 
     def __init__(self, agent_context: AgentContext):
         """
-        初始化附件下载服务
+        Initialize attachment download service
 
         Args:
-            agent_context: 代理上下文，包含存储凭证
+            agent_context: Agent context, contains storage credentials
         """
         self.agent_context = agent_context
 
-        # 记录初始化信息
-        logger.info("正在初始化附件下载服务")
+        # Record initialization information
+        logger.info("Initializing attachment download service")
 
-        # 设置附件下载目录
+        # Set attachment download directory
         self.attachments_dir = self._get_attachments_dir()
-        # 确保目录存在
+        # Ensure directory exists
         os.makedirs(self.attachments_dir, exist_ok=True)
-        logger.info(f"附件下载目录: {self.attachments_dir}")
+        logger.info(f"Attachment download directory: {self.attachments_dir}")
 
     def _get_attachments_dir(self) -> Path:
         """
-        获取附件下载目录
+        Get attachment download directory
 
-        直接使用代理工作目录
+        Directly use agent workspace directory
 
         Returns:
-            Path: 附件下载目录
+            Path: Attachment download directory
         """
-        # 直接使用代理上下文的工作目录
+        # Directly use agent context workspace directory
         workspace_dir = self.agent_context.get_workspace_dir()
         attachments_dir = Path(workspace_dir)
         return attachments_dir
 
     async def download_attachment(self, attachment: Dict[str, Any]) -> Optional[str]:
         """
-        下载单个附件
+        Download single attachment
 
         Args:
-            attachment: 附件信息，包含file_url、file_tag和filename等字段
+            attachment: Attachment info, contains file_url, file_tag, filename and other fields
 
         Returns:
-            下载后的本地文件路径，如果下载失败则返回None
+            Local file path after download, returns None if download fails
         """
         try:
-            logger.info(f"开始处理附件: {json.dumps(attachment, ensure_ascii=False)}")
+            logger.info(f"Starting to process attachment: {json.dumps(attachment, ensure_ascii=False)}")
 
-            # 获取必要字段
+            # Get required fields
             file_url = attachment.get('file_url')
             filename = attachment.get('filename')
             file_tag = attachment.get('file_tag')
@@ -75,94 +75,94 @@ class AttachmentService:
             file_size = attachment.get('file_size', 0)
 
             if not file_url or not filename:
-                logger.error(f"附件信息不完整: {attachment}")
+                logger.error(f"Attachment info incomplete: {attachment}")
                 return None
 
-            # 确保是HTTP URL
+            # Ensure HTTP URL
             if not file_url.startswith(('http://', 'https://')):
-                logger.error(f"不支持的URL格式: {file_url}，只支持HTTP或HTTPS")
+                logger.error(f"Unsupported URL format: {file_url}, only HTTP or HTTPS supported")
                 return None
 
-            logger.info(f"附件标签: {file_tag}, URL: {file_url}, 文件名: {filename}, 大小: {file_size}, 文件键: {file_key}")
+            logger.info(f"Attachment tag: {file_tag}, URL: {file_url}, filename: {filename}, size: {file_size}, file key: {file_key}")
 
-            # 处理文件名，确保安全
+            # Process filename to ensure safety
             safe_name = self._get_safe_filename(filename)
-            logger.debug(f"处理后的安全文件名: {safe_name}")
+            logger.debug(f"Processed safe filename: {safe_name}")
 
-            # 确定文件保存路径
+            # Determine file save path
             local_path = self.attachments_dir / safe_name
-            logger.info(f"附件保存路径: {local_path}")
+            logger.info(f"Attachment save path: {local_path}")
 
-            # 处理HTTP(S)链接
-            logger.info(f"开始下载HTTP文件: {file_url}")
+            # Handle HTTP(S) link
+            logger.info(f"Starting to download HTTP file: {file_url}")
             async with httpx.AsyncClient() as client:
-                logger.debug(f"开始HTTP请求: {file_url}")
+                logger.debug(f"Starting HTTP request: {file_url}")
                 try:
                     response = await client.get(file_url)
                     if response.status_code == 200:
-                        logger.info(f"HTTP请求成功, 状态码: {response.status_code}, 内容长度: {len(response.content)} 字节")
-                        # 确保父目录存在
+                        logger.info(f"HTTP request successful, status code: {response.status_code}, content length: {len(response.content)} bytes")
+                        # Ensure parent directory exists
                         os.makedirs(os.path.dirname(local_path), exist_ok=True)
-                        # 写入文件
+                        # Write file
                         with open(local_path, 'wb') as f:
                             f.write(response.content)
-                        logger.info(f"附件下载成功并保存到: {local_path}")
+                        logger.info(f"Attachment downloaded successfully and saved to: {local_path}")
                         return str(local_path)
                     else:
-                        logger.error(f"HTTP下载失败: 状态码 {response.status_code}, 响应: {response.text[:100]}...")
+                        logger.error(f"HTTP download failed: status code {response.status_code}, response: {response.text[:100]}...")
                         return None
                 except Exception as e:
-                    logger.error(f"HTTP请求异常: {e}")
+                    logger.error(f"HTTP request exception: {e}")
                     return None
 
         except Exception as e:
             import traceback
-            logger.error(f"下载附件发生错误: {e}")
+            logger.error(f"Error downloading attachment: {e}")
             logger.error(traceback.format_exc())
             return None
 
     async def download_attachments(self, attachments: List[Dict[str, Any]]) -> List[str]:
         """
-        下载消息中的所有附件
+        Download all attachments in message
 
         Args:
-            attachments: 附件列表
+            attachments: Attachment list
 
         Returns:
-            成功下载的附件本地路径列表
+            List of local paths of successfully downloaded attachments
         """
         if not attachments:
-            logger.info("没有找到附件，无需下载")
+            logger.info("No attachments found, no download needed")
             return []
 
-        logger.info(f"开始下载 {len(attachments)} 个附件")
+        logger.info(f"Starting to download {len(attachments)} attachments")
 
-        # 并发下载所有附件
+        # Download all attachments concurrently
         download_tasks = [self.download_attachment(attachment) for attachment in attachments]
         results = await asyncio.gather(*download_tasks)
 
-        # 过滤掉下载失败的附件
+        # Filter out failed downloads
         successful_downloads = [path for path in results if path]
-        logger.info(f"成功下载 {len(successful_downloads)}/{len(attachments)} 个附件")
+        logger.info(f"Successfully downloaded {len(successful_downloads)}/{len(attachments)} attachments")
 
-        # 记录每个成功的下载
+        # Log each successful download
         for i, path in enumerate(successful_downloads, 1):
-            logger.info(f"成功下载的附件 {i}: {path}")
+            logger.info(f"Successfully downloaded attachment {i}: {path}")
 
         return successful_downloads
 
     def _get_safe_filename(self, filename: str) -> str:
         """
-        处理文件名，确保文件名安全且唯一
+        Process filename to ensure it is safe and unique
 
         Args:
-            filename: 原始文件名
+            filename: Original filename
 
         Returns:
-            安全处理后的文件名
+            Safely processed filename
         """
-        # 移除路径分隔符和其他不安全字符
+        # Remove path separators and other unsafe characters
         safe_name = "".join(c for c in filename if c.isalnum() or c in "._- ")
-        logger.debug(f"安全化文件名: {filename} -> {safe_name}")
+        logger.debug(f"Sanitized filename: {filename} -> {safe_name}")
 
         return safe_name

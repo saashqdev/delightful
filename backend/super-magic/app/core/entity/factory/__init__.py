@@ -1,1 +1,1 @@
-"""工厂模块初始化文件""" 
+"""Factory module initialization file""" 

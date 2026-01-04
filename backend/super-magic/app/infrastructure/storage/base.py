@@ -23,9 +23,9 @@ T = TypeVar('T')
 
 def with_refreshed_credentials(method: Callable[..., T]) -> Callable[..., T]:
     """
-    装饰器：确保使用最新的凭证执行存储操作
+    Decorator: Ensures storage operations are executed with latest credentials
 
-    自动处理凭证刷新
+    Automatically handles credential refresh
     """
     @functools.wraps(method)
     async def wrapper(self, *args, **kwargs):
@@ -37,7 +37,7 @@ def with_refreshed_credentials(method: Callable[..., T]) -> Callable[..., T]:
 
 
 class AbstractStorage(ABC):
-    """抽象存储类，定义存储操作的接口。"""
+    """Abstract storage class, defines interface for storage operations."""
 
     def __init__(self):
         self.credentials: Optional[BaseStorageCredentials] = None
@@ -45,24 +45,24 @@ class AbstractStorage(ABC):
         self.metadata: Optional[Dict] = None
 
     def set_credentials(self, credentials: BaseStorageCredentials):
-        """设置存储凭证"""
+        """Set storage credentials"""
         self.credentials = credentials
 
     def set_sts_refresh_config(self, config: Optional[STSTokenRefreshConfig]):
-        """设置STS Token刷新配置"""
+        """Set STS Token refresh configuration"""
         self.sts_refresh_config = config
 
     def set_metadata(self, metadata: Optional[Dict]):
-        """设置元数据，用于凭证刷新"""
+        """Set metadata for credential refresh"""
         self.metadata = metadata
 
     def get_platform_name(self) -> str:
         """
-        获取当前存储服务的平台名称。
-        如果凭证中有平台信息，则返回该平台名称，否则返回 'unknown'。
+        Get current storage service platform name.
+        If credentials have platform info, return that platform name, otherwise return 'unknown'.
 
         Returns:
-            str: 存储平台名称
+            str: Storage platform name
         """
         if self.credentials and hasattr(self.credentials, 'platform'):
             if isinstance(self.credentials.platform, PlatformType):
@@ -72,11 +72,11 @@ class AbstractStorage(ABC):
 
     def get_platform_type(self) -> Optional[PlatformType]:
         """
-        获取当前存储服务的平台类型。
-        如果凭证中有平台信息且类型为 PlatformType，则返回该平台类型，否则返回 None。
+        Get current storage service platform type.
+        If credentials have platform info and type is PlatformType, return that platform type, otherwise return None.
 
         Returns:
-            Optional[PlatformType]: 存储平台类型，如果无法确定则返回 None
+            Optional[PlatformType]: Storage platform type, returns None if cannot determine
         """
         if self.credentials and hasattr(self.credentials, 'platform'):
             if isinstance(self.credentials.platform, PlatformType):
@@ -89,34 +89,34 @@ class AbstractStorage(ABC):
 
     async def refresh_credentials(self):
         """
-        如果需要则刷新凭证 - 模板方法
+        Refresh credentials if needed - template method
         """
         if self._should_refresh_credentials():
-            logger.info("开始刷新凭证")
+            logger.info("Starting credential refresh")
 
-            # 调用子类实现的刷新方法
+            # Call subclass implemented refresh method
             await self._refresh_credentials_impl()
 
-            logger.info("凭证刷新完成")
+            logger.info("Credential refresh completed")
 
-            # 刷新后自动保存到文件
+            # Automatically save to file after refresh
             if self.credentials:
                 await self._save_credentials_to_file()
 
     def _should_refresh_credentials(self) -> bool:
         """
-        判断是否需要刷新凭证 - 模板方法
+        Determine if credentials need refresh - template method
         """
-        # 基础检查：如果没有刷新配置或元数据，不需要刷新
+        # Basic check: if no refresh config or metadata, no need to refresh
         if not self.sts_refresh_config or self.metadata is None:
             return False
 
-        # 子类特定的检查逻辑
+        # Subclass specific check logic
         return self._should_refresh_credentials_impl()
 
     def _should_refresh_credentials_impl(self) -> bool:
         """
-        子类特定的凭证刷新检查逻辑，由子类实现
+        Subclass specific credential refresh check logic, implemented by subclass
         """
         raise NotImplementedError("子类必须实现此方法")
 

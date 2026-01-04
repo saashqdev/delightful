@@ -54,7 +54,7 @@ class FileStorageListenerService:
         # 使用基类方法批量注册监听器
         BaseListenerService.register_listeners(agent_context, event_listeners)
 
-        logger.info("已为代理上下文注册文件事件和主代理完成事件监听器")
+        logger.info("Registered file event and main agent completion event listeners for agent context")
 
     @staticmethod
     async def _handle_file_event(event: Event[FileEventData]) -> None:
@@ -64,8 +64,8 @@ class FileStorageListenerService:
         Args:
             event: 文件事件对象，包含FileEventData数据
         """
-        event_type_name = "创建" if event.event_type == EventType.FILE_CREATED else "更新"
-        logger.info(f"处理文件{event_type_name}事件: {event.data.filepath}")
+        event_type_name = "created" if event.event_type == EventType.FILE_CREATED else "updated"
+        logger.info(f"Processing file {event_type_name} event: {event.data.filepath}")
 
         # 1. 先上传文件到存储服务
         storage_response = await FileStorageListenerService._upload_file_to_storage(
@@ -88,7 +88,7 @@ class FileStorageListenerService:
                 # 将附件添加到代理上下文
                 FileStorageListenerService._add_attachment_to_agent_context(event.data.tool_context.get_extension_typed("agent_context", AgentContext), attachment)
             except Exception as e:
-                logger.error(f"处理附件信息失败: {e}")
+                logger.error(f"Failed to process attachment information: {e}")
 
     @staticmethod
     async def _handle_file_deleted(event: Event[FileEventData]) -> None:
@@ -98,7 +98,7 @@ class FileStorageListenerService:
         Args:
             event: 文件删除事件对象，包含FileEventData数据
         """
-        logger.info(f"处理文件删除事件: {event.data.filepath}")
+        logger.info(f"Processing file deletion event: {event.data.filepath}")
         # 文件已被删除，所以不需要上传
         # 根据业务需求，可以在这里实现删除存储服务上的文件的逻辑
         pass
@@ -129,7 +129,7 @@ class FileStorageListenerService:
                     return info.get('version', 0)
             return 0
         except Exception as e:
-            logger.error(f"获取当前版本号时出错: {e}")
+            logger.error(f"Error getting current version number: {e}")
             return 0
 
     @staticmethod
@@ -151,7 +151,7 @@ class FileStorageListenerService:
         project_archive_info_file = PathManager.get_project_archive_info_file()
         with open(project_archive_info_file, 'w') as f:
             json.dump(project_archive_info.model_dump(), f)
-            logger.info(f"项目存档信息已保存到本地: {project_archive_info_file}")
+            logger.info(f"Project archive information saved to local: {project_archive_info_file}")
 
         # 从agent_context获取storage_service
         metadata = agent_context.get_init_client_message_metadata()
@@ -172,9 +172,9 @@ class FileStorageListenerService:
         )
 
         if info_response:
-            logger.info(f"项目存档信息文件已上传: {info_file_key}")
+            logger.info(f"Project archive information file uploaded: {info_file_key}")
         else:
-            logger.error("项目存档信息文件上传失败")
+            logger.error("Project archive information file upload failed")
 
         return info_response
 
@@ -197,7 +197,7 @@ class FileStorageListenerService:
         )
 
         if not combined_zip:
-            logger.error("压缩目录失败，无法上传")
+            logger.error("Failed to compress directory, cannot upload")
             return
 
         # 计算文件MD5值和大小
@@ -231,15 +231,15 @@ class FileStorageListenerService:
             )
 
             if not storage_response:
-                logger.error(f"上传 {project_archive_dir_name} 失败")
+                logger.error(f"Failed to upload {project_archive_dir_name}")
                 return
 
-            logger.info(f"上传 {project_archive_dir_name} 成功")
+            logger.info(f"Successfully uploaded {project_archive_dir_name}")
 
             # 获取当前版本号并递增
             current_version = FileStorageListenerService._get_current_version()
             new_version = current_version + 1
-            logger.info(f"项目压缩包版本号从 {current_version} 递增到 {new_version}")
+            logger.info(f"Project archive version number incremented from {current_version} to {new_version}")
 
             # 创建带有递增版本号的项目存档信息
             project_archive_info = ProjectArchiveInfo(
@@ -258,18 +258,18 @@ class FileStorageListenerService:
             # 保存项目存档信息到代理上下文
             agent_context.set_project_archive_info(project_archive_info)
 
-            logger.info(f"项目压缩包信息已保存: key={storage_response.key}, size={file_size}, md5={file_md5}, version={new_version}")
+            logger.info(f"Project archive information saved: key={storage_response.key}, size={file_size}, md5={file_md5}, version={new_version}")
         except Exception as e:
             logger.error(traceback.format_exc())
-            logger.error(f"上传 {project_archive_dir_name} 时发生错误: {e}")
+            logger.error(f"Error occurred while uploading {project_archive_dir_name}: {e}")
 
         # 清理临时文件
         if combined_zip and os.path.exists(combined_zip):
             try:
                 os.remove(combined_zip)
-                logger.info(f"已删除临时压缩文件: {combined_zip}")
+                logger.info(f"Deleted temporary compressed file: {combined_zip}")
             except Exception as e:
-                logger.error(f"删除临时压缩文件失败: {e}")
+                logger.error(f"Failed to delete temporary compressed file: {e}")
 
     @staticmethod
     async def _upload_file_to_storage(filepath: str, agent_context: AgentContext) -> Optional[StorageResponse]:
@@ -286,7 +286,7 @@ class FileStorageListenerService:
         try:
             # 检查文件是否存在
             if not os.path.exists(filepath):
-                logger.warning(f"文件不存在，无法上传: {filepath}")
+                logger.warning(f"File does not exist, cannot upload: {filepath}")
                 return None
 
             sts_token_refresh = agent_context.get_init_client_message_sts_token_refresh()
@@ -310,7 +310,7 @@ class FileStorageListenerService:
 
             # 上传文件
             file_key = BaseFileProcessor.combine_path(storage_service.credentials.get_dir(), file_key)
-            logger.info(f"开始上传文件: {filepath}, 存储键: {file_key}")
+            logger.info(f"Starting file upload: {filepath}, storage key: {file_key}")
 
             response = await storage_service.upload(
                 file=filepath,
@@ -318,14 +318,14 @@ class FileStorageListenerService:
                 options=options
             )
 
-            logger.info(f"文件上传成功: {filepath}, 存储键: {response.key}")
+            logger.info(f"File upload successful: {filepath}, storage key: {response.key}")
             return response
 
         except (InitException, UploadException) as e:
-            logger.error(f"文件上传失败: {e}")
+            logger.error(f"File upload failed: {e}")
             return None
         except Exception as e:
-            logger.error(f"处理文件事件过程中发生错误: {e}")
+            logger.error(f"Error occurred during file event processing: {e}")
             return None
 
     @staticmethod
@@ -370,7 +370,7 @@ class FileStorageListenerService:
             timestamp=int(time.time())
         )
 
-        logger.info(f"已创建附件对象: {file_name}, 标签: {file_tag}, URL: {file_url or '无'}")
+        logger.info(f"Created attachment object: {file_name}, tag: {file_tag}, URL: {file_url or 'None'}")
         return attachment
 
     @staticmethod
@@ -388,11 +388,11 @@ class FileStorageListenerService:
             event_context = tool_context.get_extension_typed("event_context", EventContext)
             if event_context:
                 event_context.add_attachment(attachment)
-                logger.info(f"已将文件 {attachment.filename} 作为附件添加到事件上下文")
+                logger.info(f"Added file {attachment.filename} as attachment to event context")
             else:
-                logger.warning("无法添加附件到事件上下文：EventContext未注册")
+                logger.warning("Cannot add attachment to event context: EventContext not registered")
         except Exception as e:
-            logger.error(f"添加附件到事件上下文失败: {e}")
+            logger.error(f"Failed to add attachment to event context: {e}")
 
     @staticmethod
     def _add_attachment_to_agent_context(agent_context: AgentContext, attachment: Attachment) -> None:
@@ -435,7 +435,7 @@ class FileStorageListenerService:
                     base_dir=os.path.basename(directory_path)  # 要压缩的目录名称
                 )
 
-                logger.info(f"成功压缩目录 {directory_path} 到 {compressed_file}")
+                logger.info(f"Successfully compressed directory {directory_path} to {compressed_file}")
                 return compressed_file
 
             # 多个目录的情况，需要先复制到临时目录再压缩
@@ -446,7 +446,7 @@ class FileStorageListenerService:
             valid_dirs = False
             for directory in directories:
                 if not os.path.exists(directory) or not os.path.isdir(directory):
-                    logger.warning(f"要压缩的目录不存在: {directory}")
+                    logger.warning(f"Directory to compress does not exist: {directory}")
                     continue
 
                 valid_dirs = True
@@ -455,7 +455,7 @@ class FileStorageListenerService:
                 shutil.copytree(directory, target_dir)
 
             if not valid_dirs:
-                logger.error("没有有效的目录可供压缩")
+                logger.error("No valid directories available for compression")
                 shutil.rmtree(temp_source_dir)
                 return None
 
@@ -474,8 +474,8 @@ class FileStorageListenerService:
             # 清理临时源目录
             shutil.rmtree(temp_source_dir)
 
-            logger.info(f"成功将多个目录压缩到 {compressed_file}")
+            logger.info(f"Successfully compressed multiple directories to {compressed_file}")
             return compressed_file
         except Exception as e:
-            logger.error(f"压缩目录过程中发生错误: {e}")
+            logger.error(f"Error occurred during directory compression: {e}")
             return None

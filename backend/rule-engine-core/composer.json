@@ -61,7 +61,7 @@
     "repositories": [
         {
             "type": "github",
-            "url": "https://github.com/dtyq/sandbox.git"
+            "url": "https://github.com/saashqdev/delightful/sandbox.git"
         }
     ]
 }

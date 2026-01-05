@@ -17,7 +17,7 @@ setup(
     description="Simple and efficient AI agent framework",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/dtyq/agentlang",
+    url="https://github.com/saashqdev/delightful/agentlang",
     package_dir={"": "."},
     packages=find_packages(),
     classifiers=[
@@ -46,8 +46,8 @@ setup(
     ],
     keywords="agent, llm, ai, framework",
     project_urls={
-        "Bug Reports": "https://github.com/dtyq/agentlang/issues",
-        "Source": "https://github.com/dtyq/agentlang",
+        "Bug Reports": "https://github.com/saashqdev/delightful/agentlang/issues",
+        "Source": "https://github.com/saashqdev/delightful/agentlang",
     },
     include_package_data=True,  # Include data files specified in MANIFEST.in
 )

@@ -5,7 +5,7 @@
 	"keywords": [],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/dtyq/upload-sdk"
+		"url": "https://github.com/saashqdev/delightful/upload-sdk"
 	},
 	"license": "Apache License 2.0",
 	"type": "module",

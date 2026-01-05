@@ -3,7 +3,7 @@ Supports Mac OS and Linux operating systems. Windows systems can run through doc
 
 ### 1. Clone the Project
 ```bash
-git clone https://github.com/dtyq/magic.git
+git clone https://github.com/saashqdev/delightful/magic.git
 cd magic
 ```
 

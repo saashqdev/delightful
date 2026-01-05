@@ -49,15 +49,15 @@
     "repositories": [
         {
             "type": "github",
-            "url": "https://github.com/dtyq/rule-engine-core.git"
+            "url": "https://github.com/saashqdev/delightful/rule-engine-core.git"
         },
         {
             "type": "github",
-            "url": "https://github.com/dtyq/sandbox.git"
+            "url": "https://github.com/saashqdev/delightful/sandbox.git"
         },
         {
             "type": "github",
-            "url": "https://github.com/dtyq/sdk-base.git"
+            "url": "https://github.com/saashqdev/delightful/sdk-base.git"
         }
     ],
     "extra": {

@@ -41,9 +41,9 @@ Find more cases on the [official site](https://www.letsmagic.cn).
 
 SuperMagic is part of the Magic suite and works alongside:
 
-- **[Magic IM](https://github.com/dtyq/magic)** – Enterprise IM with AI agent chat and internal comms
-- **[Magic Flow](https://github.com/dtyq/magic-flow)** – Visual AI workflow orchestrator
-- **[Agentlang](https://github.com/dtyq/agentlang)** – Language-centric AI agent framework for building agents with natural language
+- **[Magic IM](https://github.com/saashqdev/delightful/magic)** – Enterprise IM with AI agent chat and internal comms
+- **[Magic Flow](https://github.com/saashqdev/delightful/magic-flow)** – Visual AI workflow orchestrator
+- **[Agentlang](https://github.com/saashqdev/delightful/agentlang)** – Language-centric AI agent framework for building agents with natural language
 
 ## Contributing and Support
 
@@ -51,4 +51,4 @@ Contributions and suggestions are welcome. If you spot an issue, please open an 
 
 ## License
 
-This project follows the [Magic Open Source License](https://github.com/dtyq/magic/blob/main/LICENSE), which is based on Apache 2.0 with additional restrictions.
+This project follows the [Magic Open Source License](https://github.com/saashqdev/delightful/magic/blob/main/LICENSE), which is based on Apache 2.0 with additional restrictions.

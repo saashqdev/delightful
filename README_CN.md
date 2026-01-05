@@ -12,16 +12,16 @@
     <a href="https://www.letsmagic.cn" target="_blank">
       <img alt="Static Badge" src="https://img.shields.io/badge/官网-301AD2">
     </a>
-    <a href="https://github.com/dtyq/magic/releases">
+    <a href="https://github.com/saashqdev/delightful/magic/releases">
       <img src="https://poser.pugx.org/dtyq/magic/v/stable" alt="Stable Version">
     </a>
-    <a href="https://github.com/dtyq/magic/graphs/commit-activity" target="_blank">
+    <a href="https://github.com/saashqdev/delightful/magic/graphs/commit-activity" target="_blank">
       <img alt="Commits last month" src="https://img.shields.io/github/commit-activity/m/dtyq/magic?labelColor=%20%2332b583&color=%20%2312b76a">
     </a>
-    <a href="https://github.com/dtyq/magic/" target="_blank">
+    <a href="https://github.com/saashqdev/delightful/magic/" target="_blank">
       <img alt="Issues closed" src="https://img.shields.io/github/issues-search?query=repo%3Adtyq%2Fmagic%20is%3Aclosed&label=issues%20closed&labelColor=%20%237d89b0&color=%20%235d6b98">
     </a>
-    <a href="https://github.com/dtyq/magic/discussions/" target="_blank">
+    <a href="https://github.com/saashqdev/delightful/magic/discussions/" target="_blank">
       <img alt="Discussion posts" src="https://img.shields.io/github/discussions/dtyq/magic?labelColor=%20%239b8afb&color=%20%237a5af8">
     </a>
     <a href="https://www.letsmagic.cn" target="_blank">
@@ -38,15 +38,15 @@
 
 ![产品矩阵](https://public-cdn.letsmagic.ai/static/img/super-magic-open-source-projects.png?v=20250819)
 
-- **[超级麦吉 Super Magic](https://github.com/dtyq/super-magic)** - 一个专为复杂任务场景设计的 **通用型 AI Agent**
-- **[麦吉聊天 Magic IM](https://github.com/dtyq/magic)** - 企业级的即时通讯系统，融合 AI Agent 对话与企业内部沟通
-- **[神奇流程 Magic Flow](https://github.com/dtyq/magic)** - 强大的可视化 AI 流程编排系统
+- **[超级麦吉 Super Magic](https://github.com/saashqdev/delightful/super-magic)** - 一个专为复杂任务场景设计的 **通用型 AI Agent**
+- **[麦吉聊天 Magic IM](https://github.com/saashqdev/delightful/magic)** - 企业级的即时通讯系统，融合 AI Agent 对话与企业内部沟通
+- **[神奇流程 Magic Flow](https://github.com/saashqdev/delightful/magic)** - 强大的可视化 AI 流程编排系统
 - **天书办公协同系统 Teamshare OS** (即将发布) - 企业级的在线协同办公系统
 
 除了上述的 AI 产品，我们还把我们构建这些产品的一些基础设施也都开源了出来：
 
-- **[Agentlang](https://github.com/dtyq/agentlang)** - Language-first AI Agent Framework 以自然语言为核心构建 AI 智能体的框架 (当前为 Python 语言的版本，基于 TypeScript 的版本也即将上线)
-- **[Magic Lens](https://github.com/dtyq/magiclens)** - 一个强大而灵活的 HTML 到 Markdown 转换工具，它使用可扩展的规则系统，能够准确地将复杂的 HTML 文档转换为简洁的 Markdown 格式
+- **[Agentlang](https://github.com/saashqdev/delightful/agentlang)** - Language-first AI Agent Framework 以自然语言为核心构建 AI 智能体的框架 (当前为 Python 语言的版本，基于 TypeScript 的版本也即将上线)
+- **[Magic Lens](https://github.com/saashqdev/delightful/magiclens)** - 一个强大而灵活的 HTML 到 Markdown 转换工具，它使用可扩展的规则系统，能够准确地将复杂的 HTML 文档转换为简洁的 Markdown 格式
 - **Magic Use** (即将发布) - 一个革命性的专门面向 AI Agent 的浏览器操作工具
 - **Magic Space** (即将发布) - 一个全新性的专门面向 AI Agent 的静态内容托管管理系统
 - **Sandbox OS** (即将发布) - 一个强大的面向 AI Agent 运行时的沙箱系统
@@ -137,7 +137,7 @@ https://gist.github.com/user-attachments/assets/7327f331-be7d-4aeb-8e19-0949adde
 
 ```bash
 # 克隆仓库
-git clone https://github.com/dtyq/magic.git
+git clone https://github.com/saashqdev/delightful/magic.git
 cd magic
 
 # 前台启动服务
@@ -188,7 +188,7 @@ cp config/.env_super_magic.example .env_super_magic
 
 ## 贡献
 
-对于想要贡献代码的人，请参阅我们的[贡献指南](https://github.com/dtyq/magic/blob/master/CONTRIBUTING_CN.md)。
+对于想要贡献代码的人，请参阅我们的[贡献指南](https://github.com/saashqdev/delightful/magic/blob/master/CONTRIBUTING_CN.md)。
 同时，请考虑通过社交媒体、活动和会议来支持麦吉，麦吉的发展离不开你的支持。
 
 ## 安全漏洞

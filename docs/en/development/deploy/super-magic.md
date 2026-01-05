@@ -15,7 +15,7 @@ Before getting started, make sure your system has the following software install
 ### 1. Get the Project Code
 
 ```bash
-git clone https://github.com/dtyq/magic.git
+git clone https://github.com/saashqdev/delightful/magic.git
 cd magic
 ```
 

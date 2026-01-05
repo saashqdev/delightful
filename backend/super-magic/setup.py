@@ -14,7 +14,7 @@ setup(
     description="SuperMagic General AI System",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/dtyq/super-magic",
+    url="https://github.com/saashqdev/delightful/super-magic",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

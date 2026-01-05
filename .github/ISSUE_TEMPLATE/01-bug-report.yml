@@ -11,12 +11,12 @@ body:
         感谢您花时间反馈bug！请填写以下的表单
 
         **Before submitting a bug report, you may**
-        - Check if the issue has already been reported in [existing issues](https://github.com/dtyq/magic/issues), you may find a way to fix it
+        - Check if the issue has already been reported in [existing issues](https://github.com/saashqdev/delightful/magic/issues), you may find a way to fix it
         - Read our [documentation](https://docs.letsmagic.cn/en), there are some FAQs
         - Try reproducing the issue with the latest version, maybe the bug you've encountered have already been fixed
 
         **在提交bug report前您可以**
-        - 看看[issues](https://github.com/dtyq/magic/issues)里是不是已经有了同样的问题，或许能快速找到想要的解决方法
+        - 看看[issues](https://github.com/saashqdev/delightful/magic/issues)里是不是已经有了同样的问题，或许能快速找到想要的解决方法
         - 查一下文档[文档](https://docs.letsmagic.cn/zh)，有一些常见问题已经列出来了
         - 试一下最新版本，或许遇到的bug已经修了
 

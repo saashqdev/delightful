@@ -43,7 +43,7 @@
     "repositories": [
         {
             "type": "github",
-            "url": "https://github.com/dtyq/sdk-base.git"
+            "url": "https://github.com/saashqdev/delightful/sdk-base.git"
         }
     ],
     "scripts": {

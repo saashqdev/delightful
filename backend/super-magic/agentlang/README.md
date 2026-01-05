@@ -8,8 +8,8 @@
 [![Python Version](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
 [![Latest Stable Version](http://poser.pugx.org/dtyq/agentlang/v)](https://packagist.org/packages/dtyq/agentlang)
-[![Status](https://img.shields.io/badge/status-beta-yellow)](https://github.com/dtyq/agentlang)
-[![Made with ❤️](https://img.shields.io/badge/Made%20with-❤️-orange.svg)](https://github.com/dtyq/agentlang)
+[![Status](https://img.shields.io/badge/status-beta-yellow)](https://github.com/saashqdev/delightful/agentlang)
+[![Made with ❤️](https://img.shields.io/badge/Made%20with-❤️-orange.svg)](https://github.com/saashqdev/delightful/agentlang)
 
 </div>
 
@@ -88,8 +88,8 @@ This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE
 ## 📞 Contact
 
 - **Email**: dev@letsmagic.ai
-- **GitHub**: [https://github.com/dtyq/agentlang](https://github.com/dtyq/agentlang)
-- **Issue Tracker**: [https://github.com/dtyq/agentlang/issues](https://github.com/dtyq/agentlang/issues)
+- **GitHub**: [https://github.com/saashqdev/delightful/agentlang](https://github.com/saashqdev/delightful/agentlang)
+- **Issue Tracker**: [https://github.com/saashqdev/delightful/agentlang/issues](https://github.com/saashqdev/delightful/agentlang/issues)
 
 ---
 

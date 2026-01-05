@@ -45,5 +45,5 @@ dependencies = [
 requires-python = ">=3.8"
 
 [project.urls]
-"Bug Reports" = "https://github.com/dtyq/agentlang/issues"
-"Source" = "https://github.com/dtyq/agentlang" 
+"Bug Reports" = "https://github.com/saashqdev/delightful/agentlang/issues"
+"Source" = "https://github.com/saashqdev/delightful/agentlang" 

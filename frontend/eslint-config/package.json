@@ -12,7 +12,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/dtyq/eslint-config"
+		"url": "https://github.com/saashqdev/delightful/eslint-config"
 	},
 	"license": "Apache License 2.0",
 	"exports": {

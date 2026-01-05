@@ -5,7 +5,7 @@
 	"keywords": [],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/dtyq/es6-template-strings"
+		"url": "https://github.com/saashqdev/delightful/es6-template-strings"
 	},
 	"license": "Apache License 2.0",
 	"type": "module",

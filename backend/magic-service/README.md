@@ -21,7 +21,7 @@ Magic Service is a high-performance PHP microservice built on the Hyperf framewo
 ## Installation & Setup
 ### 1. Clone the project
 ```bash
-git clone https://github.com/dtyq/magic.git
+git clone https://github.com/saashqdev/delightful/magic.git
 cd magic-service
 ```
 

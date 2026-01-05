@@ -3,134 +3,134 @@ description:
 globs: 
 alwaysApply: false
 ---
-@rule DDD领域驱动设计指南-修订版
-@description 项目领域分析与DDD开发规范（根据实际项目结构调整）
+@rule DDD Domain-Driven Design Guide - Revised Edition
+@description Project domain analysis and DDD development standards (adjusted based on actual project structure)
 @priority high
 @category architecture
 
-# DDD领域驱动设计指南（修订版）
+# DDD Domain-Driven Design Guide (Revised Edition)
 
-## 当前项目结构分析
+## Current Project Structure Analysis
 
-通过对当前项目结构的分析，发现项目采用了以下组织方式：
+By analyzing the current project structure, we found that the project uses the following organizational approach:
 
 ```
 src/
-├── apis/                  # API接口定义
-│   ├── modules/           # 按业务模块组织的API
-│   ├── clients/           # API客户端实现
+├── apis/                  # API interface definitions
+│   ├── modules/           # APIs organized by business modules
+│   ├── clients/           # API client implementation
 │   └── ...
-├── components/            # 共享UI组件
-├── hooks/                 # 自定义React Hooks
-├── layouts/               # 页面布局组件
-├── models/                # 数据模型定义
-│   └── user/              # 用户相关模型
-├── pages/                 # 页面组件
-├── services/              # 服务层实现
-│   └── user/              # 用户相关服务
-├── stores/                # 状态管理
-│   ├── user/              # 用户状态管理
-│   ├── approval/          # 审批流状态管理
-│   ├── calendar/          # 日历状态管理
+├── components/            # Shared UI components
+├── hooks/                 # Custom React Hooks
+├── layouts/               # Page layout components
+├── models/                # Data model definitions
+│   └── user/              # User-related models
+├── pages/                 # Page components
+├── services/              # Service layer implementation
+│   └── user/              # User-related services
+├── stores/                # State management
+│   ├── user/              # User state management
+│   ├── approval/          # Approval workflow state management
+│   ├── calendar/          # Calendar state management
 │   └── ...
-├── utils/                 # 工具函数
+├── utils/                 # Utility functions
 └── ...
 ```
 
-## 领域划分（基于当前结构）
+## Domain Partitioning (Based on Current Structure)
 
-根据现有项目结构和业务功能，我们可以识别以下核心领域：
+Based on the existing project structure and business functionality, we can identify the following core domains:
 
-1. **用户域 (User Domain)**
-   - 已有实现：`models/user`, `stores/user`, `services/user`
-   - 职责：用户账户管理、认证授权、个人信息维护
+1. **User Domain**
+   - Existing implementation: `models/user`, `stores/user`, `services/user`
+   - Responsibility: User account management, authentication and authorization, personal information maintenance
 
-2. **审批域 (Approval Domain)**
-   - 已有实现：`stores/approval`
-   - 职责：审批流程管理、表单处理、审批记录
+2. **Approval Domain**
+   - Existing implementation: `stores/approval`
+   - Responsibility: Approval workflow management, form processing, approval records
 
-3. **日历域 (Calendar Domain)**
-   - 已有实现：`stores/calendar`
-   - 职责：日程管理、提醒设置、日历视图
+3. **Calendar Domain**
+   - Existing implementation: `stores/calendar`
+   - Responsibility: Schedule management, reminder settings, calendar view
 
-4. **驱动域 (Drive Domain)**
-   - 已有实现：`stores/drive`
-   - 职责：文件存储、文件共享、权限管理
+4. **Drive Domain**
+   - Existing implementation: `stores/drive`
+   - Responsibility: File storage, file sharing, permission management
 
-5. **团队协作域 (Teamshare Domain)**
-   - 已有实现：`stores/teamshare`
-   - 职责：团队协作、共享资源、成员管理
+5. **Team Collaboration Domain**
+   - Existing implementation: `stores/teamshare`
+   - Responsibility: Team collaboration, resource sharing, member management
 
-## 改进建议：DDD架构调整
+## Improvement Suggestions: DDD Architecture Adjustments
 
-为了更好地实施DDD，建议对项目结构进行以下调整：
+To better implement DDD, we recommend the following adjustments to the project structure:
 
-### 调整后的目录结构
+### Adjusted Directory Structure
 
 ```
 src/
-├── domains/                 # 领域目录
-│   ├── user/                # 用户领域
-│   │   ├── models/          # 领域模型（实体、值对象）
-│   │   ├── repositories/    # 仓储接口
-│   │   ├── services/        # 领域服务
-│   │   └── events/          # 领域事件
-│   ├── approval/            # 审批领域
-│   ├── calendar/            # 日历领域
-│   ├── drive/               # 驱动领域
-│   └── teamshare/           # 团队协作领域
-├── application/             # 应用服务层
+├── domains/                 # Domain directory
+│   ├── user/                # User domain
+│   │   ├── models/          # Domain models (entities, value objects)
+│   │   ├── repositories/    # Repository interfaces
+│   │   ├── services/        # Domain services
+│   │   └── events/          # Domain events
+│   ├── approval/            # Approval domain
+│   ├── calendar/            # Calendar domain
+│   ├── drive/               # Drive domain
+│   └── teamshare/           # Team collaboration domain
+├── application/             # Application service layer
 │   ├── user/                
 │   ├── approval/
 │   └── ...
-├── infrastructure/          # 基础设施层
-│   ├── api/                 # API实现（转移自apis目录）
-│   ├── storage/             # 存储实现
-│   └── persistence/         # 仓储实现
-├── ui/                      # 表现层
-│   ├── components/          # 共享组件（转移自components目录）
-│   ├── pages/               # 页面组件（转移自pages目录）
-│   ├── hooks/               # 自定义Hooks（转移自hooks目录）
-│   └── stores/              # UI状态管理（重构自stores目录）
+├── infrastructure/          # Infrastructure layer
+│   ├── api/                 # API implementation (moved from apis directory)
+│   ├── storage/             # Storage implementation
+│   └── persistence/         # Repository implementation
+├── ui/                      # Presentation layer
+│   ├── components/          # Shared components (moved from components directory)
+│   ├── pages/               # Page components (moved from pages directory)
+│   ├── hooks/               # Custom Hooks (moved from hooks directory)
+│   └── stores/              # UI state management (refactored from stores directory)
 ```
 
-## 当前结构与DDD的不匹配点
+## Current Structure vs DDD Mismatch Points
 
-1. **领域模型不明确**
-   - 当前`models`目录内容有限，未充分体现领域实体和值对象
-   - 建议：丰富领域模型，将业务规则封装到模型中
+1. **Unclear Domain Models**
+   - Current `models` directory has limited content and does not fully reflect domain entities and value objects
+   - Recommendation: Enrich domain models and encapsulate business rules in models
 
-2. **状态管理与领域逻辑混合**
-   - `stores`直接包含业务逻辑，不符合DDD关注点分离原则
-   - 建议：将业务逻辑移至领域服务，stores仅负责UI状态管理
+2. **State Management Mixed with Domain Logic**
+   - `stores` directly contain business logic, which does not comply with DDD separation of concerns principle
+   - Recommendation: Move business logic to domain services, stores only responsible for UI state management
 
-3. **缺乏明确的仓储层**
-   - 没有专门的仓储接口和实现，数据访问逻辑分散
-   - 建议：引入仓储模式，实现领域模型和数据访问的分离
+3. **Lack of Explicit Repository Layer**
+   - No dedicated repository interfaces and implementations, data access logic scattered
+   - Recommendation: Introduce repository pattern to separate domain models from data access
 
-4. **领域边界不清晰**
-   - 领域之间的依赖关系不明确
-   - 建议：明确定义领域边界，通过应用服务或领域事件实现跨领域通信
+4. **Unclear Domain Boundaries**
+   - Dependencies between domains are not clear
+   - Recommendation: Clearly define domain boundaries and implement cross-domain communication through application services or domain events
 
-## 迁移策略
+## Migration Strategy
 
-为了平稳过渡到DDD架构，建议采取渐进式迁移策略：
+To smoothly transition to DDD architecture, we recommend adopting a gradual migration strategy:
 
-1. **保留现有功能**
-   - 第一阶段不改变现有功能，专注于调整架构
-   - 编写适配器连接新旧代码
+1. **Preserve Existing Functionality**
+   - First phase does not change existing functionality, focus on architecture adjustments
+   - Write adapters to connect new and old code
 
-2. **按领域逐步迁移**
-   - 从单一领域（如用户域）开始实施DDD
-   - 成功后再扩展到其他领域
+2. **Gradual Domain Migration**
+   - Start implementing DDD from a single domain (e.g., user domain)
+   - Expand to other domains after success
 
-3. **新功能采用DDD**
-   - 所有新功能采用DDD架构设计
-   - 确保新旧架构的兼容性
+3. **New Features Use DDD**
+   - All new features adopt DDD architecture design
+   - Ensure compatibility between new and old architecture
 
-## 领域对象设计示例（基于现有项目）
+## Domain Object Design Example (Based on Current Project)
 
-### 用户领域实体示例
+### User Domain Entity Example
 
 ```typescript
 // domains/user/models/User.ts
@@ -151,7 +151,7 @@ export class User {
     this._organizationCode = organizationCode;
   }
 
-  // 属性访问器
+  // Property accessors
   get id(): string {
     return this._id;
   }
@@ -160,7 +160,7 @@ export class User {
     return this._nickname;
   }
 
-  // 领域行为
+  // Domain behavior
   updateProfile(nickname: string, avatar: string): void {
     this._nickname = nickname;
     this._avatar = avatar;
@@ -174,14 +174,14 @@ export class User {
     this._status = UserStatus.ACTIVE;
   }
 
-  // 业务规则
+  // Business rules
   canAccessOrganization(orgCode: string): boolean {
     return this._organizationCode === orgCode;
   }
 }
 ```
 
-### 仓储接口示例
+### Repository Interface Example
 
 ```typescript
 // domains/user/repositories/UserRepository.ts
@@ -193,7 +193,7 @@ export interface UserRepository {
 }
 ```
 
-### 领域服务示例
+### Domain Service Example
 
 ```typescript
 // domains/user/services/UserService.ts
@@ -204,12 +204,12 @@ export class UserService {
   ) {}
 
   async registerUser(dto: RegisterUserDto): Promise<Result<User>> {
-    // 验证业务规则
+    // Validate business rules
     if (await this.userRepository.findByPhone(dto.phone)) {
-      return Result.fail('用户手机号已注册');
+      return Result.fail('Phone number already registered');
     }
 
-    // 创建用户实体
+    // Create user entity
     const user = new User(
       generateId(),
       dto.nickname,
@@ -219,10 +219,10 @@ export class UserService {
       dto.organizationCode
     );
 
-    // 持久化
+    // Persist
     await this.userRepository.save(user);
 
-    // 处理关联行为
+    // Handle related behavior
     await this.authService.createUserCredentials(user.id, dto.password);
 
     return Result.ok(user);
@@ -230,7 +230,7 @@ export class UserService {
 }
 ```
 
-### 应用服务示例
+### Application Service Example
 
 ```typescript
 // application/user/UserApplicationService.ts
@@ -241,29 +241,29 @@ export class UserApplicationService {
   ) {}
 
   async registerUser(dto: RegisterUserDto): Promise<Result<UserDto>> {
-    // 调用领域服务
+    // Call domain service
     const result = await this.userService.registerUser(dto);
     
     if (result.isFailure) {
       return Result.fail(result.error);
     }
     
-    // 转换为DTO返回
+    // Convert to DTO for return
     const user = result.value;
     return Result.ok({
       id: user.id,
       nickname: user.nickname,
       avatar: user.avatar,
       phone: user.phone,
-      // 其他属性...
+      // Other properties...
     });
   }
 }
 ```
 
-## 与现有状态管理整合
+## Integration with Existing State Management
 
-将MobX状态管理与DDD整合：
+Integrate MobX state management with DDD:
 
 ```typescript
 // ui/stores/user/userStore.ts
@@ -296,7 +296,7 @@ export class UserStore {
       });
     } catch (error) {
       runInAction(() => {
-        this.error = error instanceof Error ? error.message : '加载失败';
+        this.error = error instanceof Error ? error.message : 'Load failed';
         this.loading = false;
       });
     }
@@ -304,48 +304,48 @@ export class UserStore {
 }
 ```
 
-## 最佳实践总结
+## Best Practices Summary
 
-根据项目实际情况，推荐以下DDD实施最佳实践：
+Based on the actual project conditions, we recommend the following DDD implementation best practices:
 
-1. **增量式改进**
-   - 不要试图一次性重构整个应用
-   - 识别核心领域，优先应用DDD
+1. **Incremental Improvement**
+   - Do not attempt to refactor the entire application at once
+   - Identify core domains and prioritize DDD implementation
 
-2. **保持向后兼容**
-   - 确保新架构能与现有前端组件协同工作
-   - 添加适配层连接新旧结构
+2. **Maintain Backward Compatibility**
+   - Ensure the new architecture can work with existing frontend components
+   - Add adapter layer to connect new and old structures
 
-3. **注重领域模型设计**
-   - 将业务规则从stores迁移到领域模型和服务
-   - 明确实体、值对象和聚合的边界
+3. **Focus on Domain Model Design**
+   - Migrate business rules from stores to domain models and services
+   - Clearly define boundaries of entities, value objects, and aggregates
 
-4. **使用TypeScript强类型**
-   - 充分利用TypeScript类型系统
-   - 为领域对象定义明确的接口和类型
+4. **Utilize TypeScript Strong Typing**
+   - Make full use of TypeScript type system
+   - Define clear interfaces and types for domain objects
 
-5. **重视领域事件**
-   - 使用领域事件实现领域间的解耦
-   - 避免直接的领域间依赖
+5. **Value Domain Events**
+   - Use domain events to decouple between domains
+   - Avoid direct dependencies between domains
 
-## 渐进式实施路线图
+## Progressive Implementation Roadmap
 
-1. **第一阶段：领域识别与划分**
-   - 梳理现有业务功能，识别核心领域
-   - 定义领域模型和边界
+1. **Phase 1: Domain Identification and Partitioning**
+   - Review existing business functionality and identify core domains
+   - Define domain models and boundaries
 
-2. **第二阶段：建立基础设施**
-   - 设计仓储接口
-   - 实现数据映射层
+2. **Phase 2: Build Infrastructure**
+   - Design repository interfaces
+   - Implement data mapping layer
 
-3. **第三阶段：领域层实现**
-   - 实现领域实体和值对象
-   - 开发领域服务
+3. **Phase 3: Domain Layer Implementation**
+   - Implement domain entities and value objects
+   - Develop domain services
 
-4. **第四阶段：应用层实现**
-   - 开发应用服务
-   - 集成前端状态管理
+4. **Phase 4: Application Layer Implementation**
+   - Develop application services
+   - Integrate frontend state management
 
-5. **第五阶段：逐步迁移**
-   - 将现有功能逐个迁移至新架构
-   - 验证并调整
+5. **Phase 5: Gradual Migration**
+   - Migrate existing functionality one by one to new architecture
+   - Verify and adjust

@@ -45,12 +45,12 @@ function runTask<T extends PlatformParams>(uploadSource: Request, useCache: Bool
 	running = true
 	const task = tasks.shift()
 	let isResolve = false
-	// 是否存在该 url 请求缓存
+	// Whether there is a cached request for this url
 	if (Object.keys(globalCache).includes(url) && useCache) {
 		const { expire } = globalCache[url]
-		// 判断后端返回值是否具有 expire 字段
+		// Check if the backend return value has an expire field
 		if (expire) {
-			// ps: 距离过期还有 10分钟重新请求临时凭证
+			// ps: Re-request temporary credentials 10 minutes before expiration
 			if (new Date(expire * 1000 - 60 * 10 * 1000).getTime() > Date.now()) {
 				task?.resolve(globalCache[url] as UploadSource<T>)
 				isResolve = true
@@ -88,13 +88,13 @@ function runTask<T extends PlatformParams>(uploadSource: Request, useCache: Bool
 }
 
 /**
- * @description: 判断临时凭证是否过期，如果过期，则重新获取临时凭证
+ * @description Check if temporary credentials are expired, if expired, re-obtain temporary credentials
  * @param {Request} uploadSource
  * @param useCache
  */
 export function getUploadConfig<T extends PlatformParams>(
 	uploadSource: Request,
-	useCache: boolean = true, // 不使用缓存
+	useCache: boolean = true, // Do not use cache
 ): Promise<UploadSource<T>> {
 	return new Promise((resolve, reject) => {
 		tasks.push({ resolve, reject })

@@ -21,9 +21,9 @@ export const isIP = (host: string) => {
 	return ipv4Regex.test(host) || ipv6Regex.test(host)
 }
 
-// 校验是否JSON类型
+// Validate if it is JSON type
 export const isJson = (str: any): boolean => {
-	// 首先确保输入是字符串类型
+	// First ensure the input is a string type
 	if (typeof str !== "string") {
 		return false
 	}

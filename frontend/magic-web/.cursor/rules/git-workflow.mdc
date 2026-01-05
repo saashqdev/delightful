@@ -3,45 +3,45 @@ description:
 globs: 
 alwaysApply: false
 ---
-@rule Git 工作流指南
-@description Git 分支管理与提交规范
+@rule Git Workflow Guide
+@description Git branch management and commit conventions
 @priority medium
 @category workflow
 
-# Git 工作流指南
+# Git Workflow Guide
 
-## 分支管理
+## Branch Management
 
-根据项目的实际情况，我们采用以下分支管理策略：
+Based on our project requirements, we adopt the following branch management strategy:
 
-1. **master** - 主分支，包含最新开发代码
-2. **released** - 发布分支，保存生产环境稳定版本代码
-3. **pre-release** - 预发布分支，用于发布前的测试和验证
-4. **feature/** - 功能分支，开发新功能时从 master 分支创建
-5. **fix/** - 修复分支，用于修复问题
-6. **refactor/** - 重构分支，用于代码重构
+1. **master** - Main branch containing the latest development code
+2. **released** - Release branch, contains stable production code
+3. **pre-release** - Pre-release branch for testing and validation before release
+4. **feature/** - Feature branch, created from master for new features
+5. **fix/** - Bugfix branch, used for fixing issues
+6. **refactor/** - Refactor branch, used for code refactoring
 
-## 分支工作流程
+## Branch Workflow
 
-1. **功能开发**
-   - 从 master 分支创建 feature 分支：`git checkout -b feature/my-feature master`
-   - 在 feature 分支上开发并提交代码
-   - 完成后，创建 Merge Request 合并到 master 分支
+1. **Feature Development**
+   - Create a feature branch from master: `git checkout -b feature/my-feature master`
+   - Develop and commit code on the feature branch
+   - Upon completion, create a Merge Request to merge into master branch
 
-2. **Bug 修复**
-   - 从 master 或 released 分支创建 fix 分支：`git checkout -b fix/issue-123 master`
-   - 修复 bug 并提交代码
-   - 完成后，根据需要创建 Merge Request 合并到相应分支
+2. **Bug Fixing**
+   - Create a fix branch from master or released: `git checkout -b fix/issue-123 master`
+   - Fix bugs and commit code
+   - Upon completion, create a Merge Request to merge into the appropriate branch
 
-3. **版本发布流程**
-   - 从 master 分支更新 pre-release 分支：`git checkout pre-release && git merge master`
-   - 在 pre-release 分支上进行最终测试和调整
-   - 测试通过后，更新 released 分支：`git checkout released && git merge pre-release`
-   - 完成后，为生产版本打 tag：`git tag v1.x.x`
+3. **Version Release Process**
+   - Update pre-release from master: `git checkout pre-release && git merge master`
+   - Perform final testing and adjustments on pre-release
+   - After testing, update released: `git checkout released && git merge pre-release`
+   - Tag the production release: `git tag v1.x.x`
 
-## 提交信息规范
+## Commit Message Conventions
 
-我们采用 Emoji + 类型 的提交信息规范：
+We adopt Emoji + type commit message conventions:
 
 ```
 <emoji> <type>: <subject>
@@ -51,42 +51,42 @@ alwaysApply: false
 <footer>
 ```
 
-Emoji 和类型对应关系：
-- `✨ feat`: 新功能
-- `🐛 fix`: 修复 bug
-- `📝 docs`: 文档变更
-- `💄 style`: 代码格式(不影响代码运行的变动)
-- `♻️ refactor`: 重构(既不是增加feature，也不是修复bug)
-- `⚡️ perf`: 性能优化
-- `✅ test`: 增加测试
-- `🔧 chore`: 构建过程或辅助工具的变动
+Emoji and type correspondence:
+- `✨ feat`: New feature
+- `🐛 fix`: Bug fix
+- `📝 docs`: Documentation changes
+- `💄 style`: Code format (does not affect code execution)
+- `♻️ refactor`: Refactor (neither adding feature nor fixing bug)
+- `⚡️ perf`: Performance optimization
+- `✅ test`: Add tests
+- `🔧 chore`: Build process or tooling changes
 
-示例：
+Example:
 ```
-✨ feat: 引入用户选择器组件 & 替换发起群聊/日程添加用户/flow权限管理/agent可见范围等用户选择器
+✨ feat: Introduce user selector component & replace user selection across group chat/schedule/flow permissions/agent visibility
 
-- 重构用户选择逻辑，统一使用@feb/user-selector组件
-- 优化群聊创建流程中的用户选择体验
-- 支持按部门、姓名等多维度搜索用户
+- Refactored user selection logic to use unified @feb/user-selector component
+- Improved user selection experience in group chat creation flow
+- Support multi-dimensional search by department, name, etc.
 
 Closes #456
 ```
 
-## Code Review 规范
+## Code Review Standards
 
-1. 提交代码前，先运行测试和 lint 检查：`pnpm lint && pnpm test`
-2. 创建 Merge Request 时，添加清晰的描述
-3. Code Review 关注点：
-   - 代码质量和风格
-   - 测试覆盖
-   - 性能影响
-   - 安全问题
+1. Run tests and lint checks before submitting code: `pnpm lint && pnpm test`
+2. Add clear descriptions when creating a Merge Request
+3. Code Review focus areas:
+   - Code quality and style
+   - Test coverage
+   - Performance impact
+   - Security issues
 
-## 开发流程检查清单
+## Development Process Checklist
 
-- [ ] 从正确的分支创建新分支
-- [ ] 遵循编码规范和样式指南
-- [ ] 添加适当的单元测试
-- [ ] 通过所有测试和 lint 检查
-- [ ] 提交信息符合Emoji + 类型规范
-- [ ] 文档更新（如果需要）
+- [ ] Created new branch from the correct base branch
+- [ ] Followed coding standards and style guide
+- [ ] Added appropriate unit tests
+- [ ] Passed all tests and lint checks
+- [ ] Commit messages follow Emoji + type convention
+- [ ] Documentation updated (if needed)

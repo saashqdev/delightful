@@ -1,17 +1,17 @@
 import type { LogModule } from "../types/log"
 
 /**
- *  日志模块，用于发布日志，收集日志
+ * Log module for publishing and collecting logs
  */
 class LogPubSub {
 	private callbacks: LogModule.CallBack[] = []
 
-	// 订阅日志
+	// Subscribe to log
 	subscribe(cb: LogModule.CallBack) {
 		this.callbacks.push(cb)
 	}
 
-	// 发布日志
+	// Publish log
 	report(createLogConfig: LogModule.CreateLogConfig) {
 		const log = LogPubSub.createLog(createLogConfig)
 
@@ -21,7 +21,7 @@ class LogPubSub {
 	}
 
 	/**
-	 * 创建日志
+	 * Create log
 	 * @param {LogModule.createLogConfig} createLogConfig
 	 * @return {LogModule.LogData} LogData
 	 */

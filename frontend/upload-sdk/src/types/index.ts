@@ -7,14 +7,14 @@ import type { TOS } from "./TOS"
 import type { OBS } from "./OBS"
 import type { MinIO } from "./MinIO"
 
-/** 请求类型 */
+/** Request type */
 export type MethodType = Method
 
 /**
- * @description 统一成功响应
- * @param code 1000 为请求成功
- * @param message 请求状态信息
- * @param data 返回数据载荷
+ * @description Unified success response
+ * @param code 1000 for successful request
+ * @param message Request status information
+ * @param data Return data payload
  */
 export interface NormalSuccessResponse {
 	code: number
@@ -27,10 +27,10 @@ export interface NormalSuccessResponse {
 }
 
 /**
- * @param url 请求url
- * @param method 请求方法
- * @param headers 请求头
- * @param body 请求体
+ * @param url Request URL
+ * @param method Request method
+ * @param headers Request headers
+ * @param body Request body
  */
 export interface Request {
 	url: string
@@ -40,9 +40,9 @@ export interface Request {
 }
 
 /**
- * @description: 图片处理配置
- * @param type // 图片处理类型,例如：resize、watermark
- * @param params  图片处理参, 具体传参参考： https://help.aliyun.com/document_detail/144582.html
+ * @description: Image processing configuration
+ * @param type // Image processing type, e.g.: resize, watermark
+ * @param params  Image processing parameters, refer to: https://help.aliyun.com/document_detail/144582.html
  */
 export interface TransformImageConfig {
 	type:
@@ -65,11 +65,11 @@ export interface TransformImageConfig {
 }
 
 /**
- * @description: 下载配置
- * @param url 请求url
- * @param method 请求方法
- * @param headers 请求头
- * @param body 请求体
+ * @description: Download configuration
+ * @param url Request URL
+ * @param method Request method
+ * @param headers Request headers
+ * @param body Request body
  */
 export interface DownloadConfig extends Request {
 	option?: {
@@ -82,18 +82,18 @@ type UploadConfigOption = UploadCommonOption &
 	PlatformMultipartUploadOption
 
 /**
- * @description: 公共上传配置
- * @param rewriteFileName 是否重命名文件
+ * @description: Common upload configuration
+ * @param rewriteFileName Whether to rename the file
  */
 export interface UploadCommonOption {
 	rewriteFileName?: boolean
 }
 
 /**
- * @description: 自定义上传凭证配置
- * @param platform 平台类型
- * @param credentials 凭证信息
- * @param expire 过期时间戳（可选）
+ * @description: Custom upload credential configuration
+ * @param platform Platform type
+ * @param credentials Credential information
+ * @param expire Expiration timestamp (optional)
  */
 export interface CustomCredentials {
 	platform: PlatformType
@@ -102,15 +102,15 @@ export interface CustomCredentials {
 }
 
 /**
- * @description: 上传配置，需开发者配置请求上传凭证配置，由SDK内部帮助处理上传请求
- * @param url  请求上传凭证-url（自定义凭证时可选）
- * @param method 请求上传凭证-请求方法（自定义凭证时可选）
- * @param headers 请求上传凭证-请求头（自定义凭证时可选）
- * @param body 请求上传凭证-请求体（自定义凭证时可选）
- * @param {File | Blob} file 需要上传的文件
- * @param fileName 文件名
- * @param option 上传可选配置
- * @param customCredentials 自定义上传凭证（可选，提供此参数时会跳过凭证请求）
+ * @description: Upload configuration, requires developers to configure upload credential request, SDK handles upload request internally
+ * @param url  Request upload credential - URL (optional when using custom credentials)
+ * @param method Request upload credential - request method (optional when using custom credentials)
+ * @param headers Request upload credential - request headers (optional when using custom credentials)
+ * @param body Request upload credential - request body (optional when using custom credentials)
+ * @param {File | Blob} file File to be uploaded
+ * @param fileName File name
+ * @param option Optional upload configuration
+ * @param customCredentials Custom upload credentials (optional, will skip credential request when provided)
  */
 export interface UploadConfig {
 	url?: string
@@ -123,7 +123,7 @@ export interface UploadConfig {
 	customCredentials?: CustomCredentials
 }
 
-/** 上传回调 */
+/** Upload callback */
 export interface UploadCallBack extends TaskCallBack {}
 
 export type DonePart = { number: number; etag: string }
@@ -139,7 +139,7 @@ export interface Checkpoint {
 	doneParts: DonePart[]
 }
 
-/** percent：百分比进度 loaded：已上传字节数 total：总字节数  checkpoint：上传断点信息 */
+/** percent: percentage progress loaded: bytes uploaded total: total bytes checkpoint: upload checkpoint information */
 export type Progress = (
 	percent: number,
 	loaded: number,
@@ -147,7 +147,7 @@ export type Progress = (
 	checkpoint: Checkpoint | null,
 ) => void
 
-/** PlatformType 云存储服务商枚举类型 */
+/** PlatformType cloud storage provider enum type */
 export enum PlatformType {
 	OSS = "aliyun",
 	Kodo = "qiniu",
@@ -157,7 +157,7 @@ export enum PlatformType {
 	Minio = "minio",
 }
 
-/** 聚合平台参数 */
+/** Aggregated platform parameters */
 export type PlatformParams =
 	| OSS.AuthParams
 	| OSS.STSAuthParams
@@ -170,17 +170,17 @@ export type PlatformParams =
 	| MinIO.AuthParams
 	| MinIO.STSAuthParams
 
-/** 请求临时凭证，返回数据模板 */
+/** Request temporary credentials, return data template */
 export interface UploadSource<T extends PlatformParams> {
 	platform: PlatformType
 	temporary_credential: T
 	expire: number
 }
 
-/** Global 全局变量 */
+/** Global variables */
 export type GlobalCache<T extends PlatformParams> = Record<string, UploadSource<T>>
 
-/** 对象存储平台基础 Option */
+/** Object storage platform base Option */
 interface PlatformOption {
 	headers?: Record<string, string>
 	taskId?: TaskId
@@ -188,7 +188,7 @@ interface PlatformOption {
 	reUploadedCount?: number
 }
 
-/** 复杂上传 Option 可选字段 */
+/** Multipart upload Option optional fields */
 export interface PlatformMultipartUploadOption extends PlatformOption {
 	parallel?: number
 	partSize?: number
@@ -196,10 +196,10 @@ export interface PlatformMultipartUploadOption extends PlatformOption {
 	mime?: string | null
 }
 
-/** 简单上传 Option 可选字段 */
+/** Simple upload Option optional fields */
 export interface PlatformSimpleUploadOption extends PlatformOption {}
 
-/** 不同对象存储平台上传文件实现接口 */
+/** Upload file implementation interface for different object storage platforms */
 export type PlatformRequest<P, O> = (
 	file: File | Blob,
 	key: string,
@@ -207,7 +207,7 @@ export type PlatformRequest<P, O> = (
 	option: O,
 ) => Promise<NormalSuccessResponse>
 
-/** 对象存储平台模块 */
+/** Object storage platform module */
 export interface PlatformModule {
 	upload: PlatformRequest<
 		PlatformParams,

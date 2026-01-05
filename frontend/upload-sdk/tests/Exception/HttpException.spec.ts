@@ -3,7 +3,7 @@ import { HttpException, HttpExceptionCode } from "../../src/Exception/HttpExcept
 import { BaseException } from "../../src/Exception/BaseException"
 
 describe("HttpException", () => {
-	test("应该继承自 BaseException", () => {
+	test("should inherit from BaseException", () => {
 		const exception = new HttpException(
 			HttpExceptionCode.REQUEST_FAILED_WITH_STATUS_CODE,
 			404
@@ -13,7 +13,7 @@ describe("HttpException", () => {
 		expect(exception).toBeInstanceOf(HttpException)
 	})
 
-	test("REQUEST_FAILED_WITH_STATUS_CODE 应该包含 HTTP 状态码", () => {
+	test("REQUEST_FAILED_WITH_STATUS_CODE should contain HTTP status code", () => {
 		const httpStatus = 500
 		const exception = new HttpException(
 			HttpExceptionCode.REQUEST_FAILED_WITH_STATUS_CODE,
@@ -25,7 +25,7 @@ describe("HttpException", () => {
 		expect(exception.status).toBe(httpStatus)
 	})
 
-	test("REQUEST_IS_CANCEL 应该生成正确的错误消息", () => {
+	test("REQUEST_IS_CANCEL should generate correct error message", () => {
 		const exception = new HttpException(HttpExceptionCode.REQUEST_IS_CANCEL)
 		
 		expect(exception.message).toContain("[Uploader]")
@@ -33,7 +33,7 @@ describe("HttpException", () => {
 		expect(exception.status).toBe(5001)
 	})
 
-	test("REQUEST_IS_PAUSE 应该生成正确的错误消息", () => {
+	test("REQUEST_IS_PAUSE should generate correct error message", () => {
 		const exception = new HttpException(HttpExceptionCode.REQUEST_IS_PAUSE)
 		
 		expect(exception.message).toContain("[Uploader]")
@@ -41,7 +41,7 @@ describe("HttpException", () => {
 		expect(exception.status).toBe(5002)
 	})
 
-	test("应该正确处理不同的 HTTP 状态码", () => {
+	test("should correctly handle different HTTP status codes", () => {
 		const statuses = [400, 401, 403, 404, 500, 502, 503]
 		
 		statuses.forEach(httpStatus => {
@@ -55,7 +55,7 @@ describe("HttpException", () => {
 		})
 	})
 
-	test("异常代码应该是数字", () => {
+	test("exception code should be numeric", () => {
 		const exception = new HttpException(
 			HttpExceptionCode.REQUEST_FAILED_WITH_STATUS_CODE,
 			404
@@ -64,14 +64,14 @@ describe("HttpException", () => {
 		expect(typeof exception.status).toBe("number")
 	})
 
-	test("不同的异常应该有不同的 status 值", () => {
+	test("different exceptions should have different status values", () => {
 		const cancelException = new HttpException(HttpExceptionCode.REQUEST_IS_CANCEL)
 		const pauseException = new HttpException(HttpExceptionCode.REQUEST_IS_PAUSE)
 		
 		expect(cancelException.status).not.toBe(pauseException.status)
 	})
 
-	test("应该可以通过 catch 捕获", () => {
+	test("should be able to be caught via catch", () => {
 		expect(() => {
 			throw new HttpException(HttpExceptionCode.REQUEST_FAILED_WITH_STATUS_CODE, 404)
 		}).toThrow(HttpException)

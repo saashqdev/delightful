@@ -1,7 +1,7 @@
 import type { ErrorType } from "./error"
 
 /**
- * 日志模块命名空间
+ * Log module namespace
  * */
 export namespace LogModule {
 	export type LogType = "SUCCESS" | "ERROR" | "WARN" | "DEBUG"
@@ -12,42 +12,42 @@ export namespace LogModule {
 
 	export type CreateLogConfig = {
 		type: LogType
-		/** 事件名称 */
+		/** Event name */
 		eventName: LogEventType
-		/** 事件参数 */
+		/** Event parameters */
 		eventParams?: any
-		/** 事件响应 */
+		/** Event response */
 		eventResponse?: any
 		error?: ErrorType.UploadError
-		/** 额外内容 */
+		/** Additional content */
 		extra?: string
 	}
 
 	/**
-	 * 日志数据结构
+	 * Log data structure
 	 */
 	export interface LogData {
-		/** 状态类型 */
+		/** Status type */
 		type: LogType
-		/** 事件名称 */
+		/** Event name */
 		event_name: LogEventType
-		/** 事件参数 */
+		/** Event parameters */
 		event_params: any
-		/** 事件响应 */
+		/** Event response */
 		event_response: any
-		/** 异常类型 */
+		/** Exception type */
 		exception_type: string
-		/** 异常信息 */
+		/** Exception message */
 		exception_message: string
-		/** 触发异常所处的文件  */
+		/** File where exception was triggered */
 		exception_file: string
-		/** 触发异常所处的行数 */
+		/** Line number where exception was triggered */
 		exception_line: string
-		/** 触发异常所处的列数 */
+		/** Column number where exception was triggered */
 		exception_row: string
-		/** 额外内容 */
+		/** Additional content */
 		extra?: string
-		/** 记录时间 */
+		/** Record time */
 		time: Date
 		/** SDK名称及版本号 */
 		version: string

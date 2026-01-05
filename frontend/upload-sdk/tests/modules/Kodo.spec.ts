@@ -60,15 +60,15 @@ afterAll(() => {
 	vi.restoreAllMocks()
 })
 
-describe("Kodo模块测试", () => {
+describe("Kodo module tests", () => {
 	// Reset all mocks after each test
 	afterEach(() => {
 		vi.clearAllMocks()
 	})
 
 	// Test upload method
-	describe("upload方法", () => {
-		it("应该正确调用defaultUpload方法", () => {
+	describe("upload method", () => {
+		it("should correctly call defaultUpload method", () => {
 			// Spy on Kodo.upload method
 			const spy = vi.spyOn(Kodo, "upload")
 
@@ -88,8 +88,8 @@ describe("Kodo模块测试", () => {
 	})
 
 	// Test default upload method
-	describe("defaultUpload方法", () => {
-		it("应该在缺少必要参数时抛出异常", () => {
+	describe("defaultUpload method", () => {
+		it("should throw exception when missing required parameters", () => {
 			const file = createMockFile()
 			const key = "test.txt"
 
@@ -109,7 +109,7 @@ describe("Kodo模块测试", () => {
 		})
 
 		// Set shorter timeout to avoid infinite waiting
-		it("应该正确执行上传过程", async () => {
+		it("should correctly execute upload process", async () => {
 			const file = createMockFile("test.txt", 1024)
 			const key = "test.txt"
 			const params = {

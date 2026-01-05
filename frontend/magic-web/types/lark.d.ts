@@ -1,5 +1,5 @@
 /**
- * ======================== 飞书 JS-SDK 类型 ====================================
+ * ======================== Lark JS-SDK Types ====================================
  */
 export namespace Lark {
 	interface LarkQRLoginResponse {

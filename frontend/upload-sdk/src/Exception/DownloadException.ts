@@ -7,7 +7,7 @@ export const enum DownloadExceptionCode {
 	DOWNLOAD_REQUEST_ERROR = "DOWNLOAD_REQUEST_ERROR",
 }
 
-/** download API 异常分类 */
+/** Download API exception classification */
 export const DownloadExceptionMapping: Record<
 	string,
 	(...args: any[]) => ErrorType.BaseExceptionWithStatus
@@ -27,7 +27,7 @@ export const DownloadExceptionMapping: Record<
 }
 
 /**
- * download API 异常
+ * Download API exceptions
  * Exceptions Handler.
  */
 export class DownloadException extends BaseException {

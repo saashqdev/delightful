@@ -46,7 +46,7 @@ vi.mock("../src/utils/request", () => {
 	}
 })
 
-describe("Upload 类测试", () => {
+describe("Upload class tests", () => {
 	let uploadInstance: Upload
 	let mockFile: File
 
@@ -56,20 +56,20 @@ describe("Upload 类测试", () => {
 		vi.clearAllMocks()
 	})
 
-	describe("构造函数", () => {
-		it("应该正确实例化", () => {
+	describe("constructor", () => {
+		it("should instantiate correctly", () => {
 			expect(uploadInstance).toBeInstanceOf(Upload)
 			expect(uploadInstance.uploadManger).toBeDefined()
 		})
 
-		it("应该有正确的版本号", () => {
+		it("should have correct version number", () => {
 			expect(typeof Upload.version).toBe("string")
 			expect(Upload.version.length).toBeGreaterThan(0)
 		})
 	})
 
-	describe("upload 方法", () => {
-		it("如果缺少必要参数应该抛出异常", () => {
+	describe("upload method", () => {
+		it("should throw exception if required parameters are missing", () => {
 			const config = {
 				url: "",
 				method: "POST" as Method,
@@ -90,7 +90,7 @@ describe("Upload 类测试", () => {
 			}).toThrow(InitException)
 		})
 
-		it("当文件名中包含特殊字符时应该抛出异常", () => {
+		it("should throw exception when filename contains special characters", () => {
 			const config = {
 				url: "http://example.com",
 				method: "POST" as Method,
@@ -111,7 +111,7 @@ describe("Upload 类测试", () => {
 			)
 		})
 
-		it("当启用重写文件名选项时应该生成新文件名", () => {
+		it("should generate new filename when rewriteFileName option is enabled", () => {
 			const config = {
 				url: "http://example.com",
 				method: "POST" as Method,
@@ -128,7 +128,7 @@ describe("Upload 类测试", () => {
 			expect(config.fileName).toMatch(/^.+\.txt$/)
 		})
 
-		it("应该调用 uploadManger.createTask 方法", () => {
+		it("should call uploadManger.createTask method", () => {
 			const config = {
 				url: "http://example.com",
 				method: "POST" as Method,
@@ -148,8 +148,8 @@ describe("Upload 类测试", () => {
 		})
 	})
 
-	describe("下载方法", () => {
-		it("download 方法应该调用 request 方法并返回 Promise", async () => {
+	describe("download method", () => {
+		it("download method should call request method and return Promise", async () => {
 			const downloadConfig = {
 				url: "http://example.com/download",
 				method: "GET" as Method,
@@ -161,7 +161,7 @@ describe("Upload 类测试", () => {
 			expect(result).toEqual({ data: "success" })
 		})
 
-		it("download 方法应处理不同类型的body参数 - FormData", async () => {
+		it("download method should handle different body parameter types - FormData", async () => {
 			const formData = new FormData()
 			formData.append("key", "value")
 
@@ -187,7 +187,7 @@ describe("Upload 类测试", () => {
 			expect(optionsValue).toBe(JSON.stringify(downloadConfig.option))
 		})
 
-		it("download 方法应处理不同类型的body参数 - JSON字符串", async () => {
+		it("download method should handle different body parameter types - JSON string", async () => {
 			const jsonBody = JSON.stringify({ test: "value" })
 			const option = {
 				image: [
@@ -211,7 +211,7 @@ describe("Upload 类测试", () => {
 			expect(result).toBeDefined()
 		})
 
-		it("download 方法应处理不同类型的body参数 - 对象", async () => {
+		it("download method should handle different body parameter types - object", async () => {
 			const objectBody = { test: "value" }
 			const option = {
 				image: [
@@ -235,7 +235,7 @@ describe("Upload 类测试", () => {
 			expect(result).toBeDefined()
 		})
 
-		it("download 方法应处理body处理过程中的异常", async () => {
+		it("download method should handle exceptions during body processing", async () => {
 			// Create a malformed JSON string that will cause JSON.parse to fail
 			const malformedJson = "{ invalid json }"
 
@@ -260,22 +260,22 @@ describe("Upload 类测试", () => {
 		})
 	})
 
-	describe("任务控制方法", () => {
-		it("pause 方法应该存在并可调用", () => {
+	describe("task control methods", () => {
+		it("pause method should exist and be callable", () => {
 			expect(() => uploadInstance.pause()).not.toThrow()
 		})
 
-		it("resume 方法应该存在并可调用", () => {
+		it("resume method should exist and be callable", () => {
 			expect(() => uploadInstance.resume()).not.toThrow()
 		})
 
-		it("cancel 方法应该存在并可调用", () => {
+		it("cancel method should exist and be callable", () => {
 			expect(() => uploadInstance.cancel()).not.toThrow()
 		})
 	})
 
-	describe("静态方法", () => {
-		it("subscribeLogs 方法应该注册回调函数", async () => {
+	describe("static methods", () => {
+		it("subscribeLogs method should register callback function", async () => {
 			// Get logPubSub module
 			const logPubSub = (await import("../src/utils/logPubSub")).default
 
@@ -295,7 +295,7 @@ describe("Upload 类测试", () => {
 	})
 
 	describe("PlatformType", () => {
-		it("导出的 PlatformType 应该包含预期的平台类型", () => {
+		it("exported PlatformType should contain expected platform types", () => {
 			// Use correct enum member properties
 			expect(PlatformType.OSS).toBe("aliyun")
 			expect(PlatformType.TOS).toBe("tos")

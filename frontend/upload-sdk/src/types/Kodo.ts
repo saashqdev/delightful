@@ -1,8 +1,8 @@
 /**
- * 七牛云命名空间
+ * Qiniu cloud namespace
  */
 export namespace Kodo {
-	/** 后端返回-七牛云凭证字段 */
+	/** Backend return - Qiniu cloud credential fields */
 	export type AuthParams = {
 		token: string
 		dir: string

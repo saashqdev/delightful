@@ -1,6 +1,6 @@
 import type { IndexRouteObject, NonIndexRouteObject } from "react-router/dist/lib/context"
 
-/** 扩展 react-router 声明 */
+/** Extend react-router declarations */
 declare module "react-router" {
 	interface MagicIndexRouteObject extends IndexRouteObject {
 		name?: string

@@ -1,7 +1,7 @@
 import type { NormalSuccessResponse, PlatformType } from "../types"
 
 const DEFAULT_SUCCESS_CODE = 1000
-const DEFAULT_SUCCESS_MESSAGE = "请求成功"
+const DEFAULT_SUCCESS_MESSAGE = "Request successful"
 
 export function normalizeSuccessResponse(
 	key: string,

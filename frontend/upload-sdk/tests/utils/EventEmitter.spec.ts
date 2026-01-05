@@ -9,25 +9,25 @@ describe("EventEmitter", () => {
     emitter = new EventEmitter<TestListener>()
   })
 
-  test("应该可以注册事件监听器", () => {
+  test("should be able to register event listeners", () => {
     const mockFn = vi.fn()
     emitter.on("testEvent", mockFn);
     expect(emitter.observers).toHaveProperty("testEvent")
     expect(emitter.observers.testEvent).toBe(mockFn)
   })
 
-  test("不应重复注册同名事件监听器", () => {
+  test("should not duplicate register event listeners with same name", () => {
     const mockFn1 = vi.fn()
     const mockFn2 = vi.fn()
     emitter.on("testEvent", mockFn1)
-    emitter.on("testEvent", mockFn2) // 这个不应该被注册
+    emitter.on("testEvent", mockFn2) // This should not be registered
 
     emitter.emit("testEvent", "hello", 123)
     expect(mockFn1).toHaveBeenCalledWith("hello", 123)
     expect(mockFn2).not.toHaveBeenCalled()
   })
 
-  test("应该能够触发事件并执行监听器", () => {
+  test("should be able to trigger event and execute listeners", () => {
     const mockFn = vi.fn()
     emitter.on("testEvent", mockFn)
 
@@ -36,13 +36,13 @@ describe("EventEmitter", () => {
     expect(mockFn).toHaveBeenCalledWith("test message", 42)
   })
 
-  test("对于不存在的事件，emit 不应该抛出错误", () => {
+  test("for non-existent events, emit should not throw error", () => {
     expect(() => {
       emitter.emit("nonExistentEvent", "test", 123)
     }).not.toThrow()
   })
 
-  test("应该能够移除事件监听器", () => {
+  test("should be able to remove event listeners", () => {
     const mockFn = vi.fn()
     emitter.on("testEvent", mockFn)
     emitter.off("testEvent")
@@ -52,13 +52,13 @@ describe("EventEmitter", () => {
     expect(emitter.observers).not.toHaveProperty("testEvent")
   })
 
-  test("移除不存在的事件监听器不应该抛出错误", () => {
+  test("removing non-existent event listener should not throw error", () => {
     expect(() => {
       emitter.off("nonExistentEvent")
     }).not.toThrow()
   })
 
-  test("应该可以注册多个不同名称的事件监听器", () => {
+  test("should be able to register multiple event listeners with different names", () => {
     const mockFn1 = vi.fn()
     const mockFn2 = vi.fn()
 

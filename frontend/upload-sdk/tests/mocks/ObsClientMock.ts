@@ -1,4 +1,4 @@
-// 模拟OBS客户端
+// Mock OBS client
 class ObsClientMock {
 	accessKeyId: string
 
@@ -15,7 +15,7 @@ class ObsClientMock {
 		this.server = options.server
 	}
 
-	// 模拟初始化分片上传的方法
+	// Mock method for initializing multipart upload
 	initiateMultipartUpload(params: any, callback: any) {
 		const response = {
 			InterfaceResult: {
@@ -33,7 +33,7 @@ class ObsClientMock {
 		}, 10)
 	}
 
-	// 模拟上传分片的方法
+	// Mock method for uploading parts
 	uploadPart(params: any, callback: any) {
 		const response = {
 			InterfaceResult: {
@@ -50,7 +50,7 @@ class ObsClientMock {
 		}, 10)
 	}
 
-	// 模拟完成分片上传的方法
+	// Mock method for completing multipart upload
 	completeMultipartUpload(params: any, callback: any) {
 		const response = {
 			InterfaceResult: {
@@ -70,7 +70,7 @@ class ObsClientMock {
 		}, 10)
 	}
 
-	// 模拟取消分片上传的方法
+	// Mock method for canceling multipart upload
 	abortMultipartUpload(params: any, callback: any) {
 		const response = {
 			CommonMsg: {
@@ -84,7 +84,7 @@ class ObsClientMock {
 		}, 10)
 	}
 
-	// 模拟普通上传的方法
+	// Mock method for standard upload
 	putObject(params: any, callback: any) {
 		const response = {
 			InterfaceResult: {

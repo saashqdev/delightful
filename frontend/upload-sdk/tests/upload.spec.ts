@@ -24,7 +24,7 @@ describe("upload", () => {
 		vi.resetAllMocks()
 	})
 
-	it("如果缺少url参数，应该抛出异常", () => {
+	it("if url parameter is missing, should throw exception", () => {
 		uploadConfig.url = ""
 		expect(() => {
 			uploadManager.upload(uploadConfig)
@@ -33,7 +33,7 @@ describe("upload", () => {
 		)
 	})
 
-	it("如果缺少method参数，应该抛出异常", () => {
+	it("if method parameter is missing, should throw exception", () => {
 		// @ts-ignore
 		uploadConfig.method = ""
 		expect(() => {
@@ -43,7 +43,7 @@ describe("upload", () => {
 		)
 	})
 
-	it("如果生成的文件名包含特殊字符，应该抛出异常", () => {
+	it("if generated filename contains special characters, should throw exception", () => {
 		uploadConfig.fileName = "工作表 在 司南制作过程遇到的小问题%.txt"
 		uploadConfig.option!.rewriteFileName = false
 		expect(() => {
@@ -56,7 +56,7 @@ describe("upload", () => {
 		)
 	})
 
-	it("如果启用rewriteFileName选项，应该生成一个新的文件名", () => {
+	it("if rewriteFileName option is enabled, should generate a new filename", () => {
 		const fileName = "正常的文件名.txt"
 		uploadConfig.fileName = fileName
 		uploadConfig.option!.rewriteFileName = true
@@ -64,7 +64,7 @@ describe("upload", () => {
 		expect(uploadConfig.fileName).not.toBe(fileName)
 	})
 
-	it("应该使用正确的参数调用createTask方法", () => {
+	it("should call createTask method with correct parameters", () => {
 		const createTaskMock = vi.spyOn(uploadManager.uploadManger, "createTask")
 		uploadManager.upload(uploadConfig)
 		expect(createTaskMock).toHaveBeenCalledWith(

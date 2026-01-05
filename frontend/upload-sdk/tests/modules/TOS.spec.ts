@@ -61,10 +61,10 @@ afterEach(() => {
 	vi.clearAllMocks()
 })
 
-describe("TOS模块测试", () => {
+describe("TOS module tests", () => {
 	// Test upload method routing
-	describe("upload方法", () => {
-		it("当提供STS凭证时应该使用MultipartUpload方法", async () => {
+	describe("upload method", () => {
+		it("should use MultipartUpload method when STS credentials are provided", async () => {
 			const file = createMockFile()
 			const key = "test/test.txt"
 			const params = {
@@ -92,7 +92,7 @@ describe("TOS模块测试", () => {
 			expect(result.platform).toBe("tos")
 		})
 
-		it("当提供普通凭证时应该使用defaultUpload方法", async () => {
+		it("should use defaultUpload method when ordinary credentials are provided", async () => {
 			const file = createMockFile()
 			const key = "test/test.txt"
 			const params = {
@@ -222,7 +222,7 @@ describe("TOS模块测试", () => {
 			expect((result as any).path).toBe("test/test.txt")
 		})
 
-		it("应该处理分片上传失败的情况", async () => {
+		it("should handle multipart upload failure", async () => {
 			const file = createMockFile("test.txt", 5 * 1024 * 1024)
 			const key = "test/test.txt"
 			const params = {

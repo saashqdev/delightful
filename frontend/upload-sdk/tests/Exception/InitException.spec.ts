@@ -3,14 +3,14 @@ import { InitException, InitExceptionCode } from "../../src/Exception/InitExcept
 import { BaseException } from "../../src/Exception/BaseException"
 
 describe("InitException", () => {
-	test("应该继承自 BaseException", () => {
+	test("should inherit from BaseException", () => {
 		const exception = new InitException(InitExceptionCode.MISSING_PARAMS_FOR_UPLOAD, "param1")
 		
 		expect(exception).toBeInstanceOf(BaseException)
 		expect(exception).toBeInstanceOf(InitException)
 	})
 
-	test("MISSING_PARAMS_FOR_UPLOAD 应该生成正确的错误消息", () => {
+	test("MISSING_PARAMS_FOR_UPLOAD should generate correct error message", () => {
 		const exception = new InitException(
 			InitExceptionCode.MISSING_PARAMS_FOR_UPLOAD,
 			"url",
@@ -23,7 +23,7 @@ describe("InitException", () => {
 		expect(exception.message).toContain("must be provided")
 	})
 
-	test("UPLOAD_IS_NO_SUPPORT_THIS_PLATFORM 应该生成正确的错误消息", () => {
+	test("UPLOAD_IS_NO_SUPPORT_THIS_PLATFORM should generate correct error message", () => {
 		const platform = "unknown-platform"
 		const exception = new InitException(
 			InitExceptionCode.UPLOAD_IS_NO_SUPPORT_THIS_PLATFORM,
@@ -34,7 +34,7 @@ describe("InitException", () => {
 		expect(exception.message).toContain("not supported")
 	})
 
-	test("UPLOAD_IS_NO_SUPPORT_THIS_FILE_FORMAT 应该生成正确的错误消息", () => {
+	test("UPLOAD_IS_NO_SUPPORT_THIS_FILE_FORMAT should generate correct error message", () => {
 		const exception = new InitException(
 			InitExceptionCode.UPLOAD_IS_NO_SUPPORT_THIS_FILE_FORMAT
 		)
@@ -43,7 +43,7 @@ describe("InitException", () => {
 		expect(exception.message).toContain("Blob/File")
 	})
 
-	test("UPLOAD_FILENAME_EXIST_SPECIAL_CHAR 应该包含文件名", () => {
+	test("UPLOAD_FILENAME_EXIST_SPECIAL_CHAR should contain filename", () => {
 		const filename = "file%name.txt"
 		const exception = new InitException(
 			InitExceptionCode.UPLOAD_FILENAME_EXIST_SPECIAL_CHAR,
@@ -54,20 +54,20 @@ describe("InitException", () => {
 		expect(exception.message).toContain("special characters")
 	})
 
-	test("REUPLOAD_IS_FAILED 应该生成正确的错误消息", () => {
+	test("REUPLOAD_IS_FAILED should generate correct error message", () => {
 		const exception = new InitException(InitExceptionCode.REUPLOAD_IS_FAILED)
 		
 		expect(exception.message).toContain("[Uploader]")
 		expect(exception.message).toContain("expired")
 	})
 
-	test("异常应该有正确的名称", () => {
+	test("exception should have correct name", () => {
 		const exception = new InitException(InitExceptionCode.MISSING_PARAMS_FOR_UPLOAD, "test")
 		
 		expect(exception.name).toBe("InitException")
 	})
 
-	test("应该可以通过 catch 捕获", () => {
+	test("should be able to be caught via catch", () => {
 		expect(() => {
 			throw new InitException(InitExceptionCode.MISSING_PARAMS_FOR_UPLOAD, "url")
 		}).toThrow(InitException)

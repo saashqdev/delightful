@@ -9,7 +9,7 @@ export const enum UploadExceptionCode {
 	UPLOAD_MULTIPART_ERROR = "UPLOAD_MULTIPART_ERROR",
 }
 
-/** upload API 异常分类 */
+/** Upload API exception classification */
 export const UploadExceptionMapping: Record<
 	string,
 	(...args: any[]) => ErrorType.BaseExceptionWithStatus
@@ -37,7 +37,7 @@ export const UploadExceptionMapping: Record<
 }
 
 /**
- * upload API 异常
+ * Upload API exceptions
  * Exceptions Handler.
  */
 export class UploadException extends BaseException {

@@ -13,26 +13,26 @@ import type { Lark } from "./lark"
 
 declare global {
 	interface Window {
-		/** 主应用视窗 */
+		/** Main application window */
 		magic: MagicElectron.MagicElectronAPI
-		/** 多媒体视窗 */
+		/** Media window */
 		magicMedia: MagicMediaElectron.MagicMediaElectronAPI
-		/** 全局截图视窗 */
+		/** Global screenshot window */
 		magicScreenshot: MagicScreenshotElectron.MagicScreenshotElectronAPI
-		/** 全局搜索视窗 */
+		/** Global search window */
 		magicSearch: MagicSearchElectron.MagicSearchElectronAPI
 
-		// 临时设置开发者模式
+		// Temporarily set developer mode
 		setDebug?: (debug: boolean) => void
 
 		/**
-		 * 第三方 SDK API
+		 * Third-party SDK API
 		 */
-		/** 钉钉扫码登录API */
+		/** DingTalk QR code login API */
 		DTFrameLogin: DingTalk.DTFrameLoginAPI
-		/** 飞书扫码登录API */
+		/** Lark QR code login API */
 		QRLogin: Lark.LarkQRLogin
-		/** 飞书免登SDK */
+		/** Lark SSO SDK */
 		tt: Lark.LarkSDK
 	}
 }

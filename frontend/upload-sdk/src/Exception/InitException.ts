@@ -15,7 +15,7 @@ export const enum InitExceptionCode {
 	UPLOAD_FILENAME_EXIST_SPECIAL_CHAR = "UPLOAD_FILENAME_EXIST_SPECIAL_CHAR",
 }
 
-/** 初始化 API 异常分类 */
+/** Initialization API exception classification */
 const InitExceptionMapping: Record<string, (...args: any[]) => string> = {
 	INIT_UNKNOWN_ERROR: () => `An unknown error occurred in the initialization api`,
 	MISSING_PARAMS_FOR_UPLOAD: (...args: string[]) =>
@@ -42,7 +42,7 @@ const InitExceptionMapping: Record<string, (...args: any[]) => string> = {
 }
 
 /**
- * 初始化过程中 API 异常
+ * API exceptions during initialization
  * Exceptions Handler.
  */
 export class InitException extends BaseException {

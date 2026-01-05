@@ -2,9 +2,9 @@ import { describe, it, expect, vi } from "vitest"
 import { PlatformType } from "../../src"
 import PlatformModules from "../../src/modules"
 
-describe("上传SDK模块集成测试", () => {
-	describe("平台类型枚举", () => {
-		it("应该定义了所有支持的平台类型", () => {
+describe("Upload SDK module integration tests", () => {
+	describe("Platform type enumeration", () => {
+		it("should define all supported platform types", () => {
 			expect(PlatformType.OSS).toBeDefined()
 			expect(PlatformType.TOS).toBeDefined()
 			expect(PlatformType.Kodo).toBeDefined()
@@ -12,9 +12,9 @@ describe("上传SDK模块集成测试", () => {
 		})
 	})
 
-	describe("动态加载模块", () => {
-		it("应该能够加载所有平台模块", async () => {
-			// 阿里云模块
+	describe("Dynamic module loading", () => {
+		it("should be able to load all platform modules", async () => {
+			// Aliyun OSS module
 			const OSSModule = PlatformModules[PlatformType.OSS]
 			expect(OSSModule).toBeDefined()
 			expect(typeof OSSModule.upload).toBe("function")
@@ -22,7 +22,7 @@ describe("上传SDK模块集成测试", () => {
 			expect(typeof OSSModule.MultipartUpload).toBe("function")
 			expect(typeof OSSModule.STSUpload).toBe("function")
 
-			// 火山引擎模块
+			// Volcano TOS module
 			const TOSModule = PlatformModules[PlatformType.TOS]
 			expect(TOSModule).toBeDefined()
 			expect(typeof TOSModule.upload).toBe("function")
@@ -30,12 +30,12 @@ describe("上传SDK模块集成测试", () => {
 			expect(typeof TOSModule.MultipartUpload).toBe("function")
 			expect(typeof TOSModule.STSUpload).toBe("function")
 
-			// 七牛云模块
+			// Qiniu Kodo module
 			const KodoModule = PlatformModules[PlatformType.Kodo]
 			expect(KodoModule).toBeDefined()
 			expect(typeof KodoModule.upload).toBe("function")
 
-			// 华为云OBS模块
+			// Huawei OBS module
 			const OBSModule = PlatformModules[PlatformType.OBS]
 			expect(OBSModule).toBeDefined()
 			expect(typeof OBSModule.upload).toBe("function")
@@ -44,17 +44,17 @@ describe("上传SDK模块集成测试", () => {
 			expect(typeof OBSModule.STSUpload).toBe("function")
 		})
 
-		it("对于不支持的平台类型，PlatformModules不应该包含该类型", () => {
-			// 使用一个不存在的平台类型
+		it("for unsupported platform types, PlatformModules should not include that type", () => {
+			// Use a non-existent platform type
 			const invalidPlatformType = "InvalidPlatform" as unknown as PlatformType
 
-			// 检查PlatformModules中是否不存在该类型
+			// Check that PlatformModules does not contain this type
 			expect(PlatformModules[invalidPlatformType]).toBeUndefined()
 		})
 	})
 
-	describe("代理模块访问", () => {
-		it("应该通过代理访问各平台模块", async () => {
+	describe("proxy module access", () => {
+		it("should access all platform modules via proxy", async () => {
 			// 检查所有平台代理是否存在
 			expect(PlatformModules[PlatformType.OSS]).toBeDefined()
 			expect(PlatformModules[PlatformType.TOS]).toBeDefined()

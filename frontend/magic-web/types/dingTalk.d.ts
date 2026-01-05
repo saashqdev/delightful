@@ -1,5 +1,5 @@
 /**
- * ======================== 钉钉 JS-SDK 类型 ====================================
+ * ======================== DingTalk JS-SDK Types ====================================
  */
 export namespace DingTalk {
 	interface DTFrameDOMOptions {

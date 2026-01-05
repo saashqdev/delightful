@@ -1,21 +1,21 @@
-// 更简单的测试策略，仅测试类的公共API
+// Simpler testing strategy, only test public API of the class
 import { describe, test, expect, beforeEach, vi } from "vitest"
 import { UploadManger } from "../../src/utils/UploadManger"
 import type { Method } from "../../src/types/request"
 
-describe("UploadManger 类测试", () => {
+describe("UploadManger class tests", () => {
 	let uploadManger: UploadManger
 
 	beforeEach(() => {
-		vi.resetModules() // 重置所有模块的状态
+		vi.resetModules() // Reset all module states
 		uploadManger = new UploadManger()
 	})
 
-	describe("任务控制方法", () => {
-		test("pauseAllTask 方法应该调用每个上传任务的 pause 方法", () => {
+	describe("Task control methods", () => {
+		test("pauseAllTask method should call pause method of each upload task", () => {
 			const mockPause = vi.fn()
-			// 直接修改任务对象
-			// @ts-ignore - 访问私有属性进行测试
+			// Directly modify task object
+			// @ts-ignore - Access private property for testing
 			uploadManger["tasks"] = {
 				"test-id": { pause: mockPause },
 			}
@@ -24,7 +24,7 @@ describe("UploadManger 类测试", () => {
 			expect(mockPause).toHaveBeenCalled()
 		})
 
-		test("resumeAllTask 方法应该调用每个上传任务的 resume 方法", () => {
+		test("resumeAllTask method should call resume method of each upload task", () => {
 			const mockResume = vi.fn()
 			// @ts-ignore - 访问私有属性进行测试
 			uploadManger["tasks"] = {
@@ -35,7 +35,7 @@ describe("UploadManger 类测试", () => {
 			expect(mockResume).toHaveBeenCalled()
 		})
 
-		test("cancelAllTask 方法应该调用每个上传任务的 cancel 方法", () => {
+		test("cancelAllTask method should call cancel method of each upload task", () => {
 			const mockCancel = vi.fn()
 			// @ts-ignore - 访问私有属性进行测试
 			uploadManger["tasks"] = {
@@ -46,8 +46,8 @@ describe("UploadManger 类测试", () => {
 			expect(mockCancel).toHaveBeenCalled()
 		})
 
-		test("控制方法应该能安全处理空任务列表", () => {
-			// @ts-ignore - 访问私有属性进行测试
+		test("control methods should safely handle empty task list", () => {
+			// @ts-ignore - Access private property for testing
 			uploadManger["tasks"] = {}
 
 			expect(() => {
@@ -58,8 +58,8 @@ describe("UploadManger 类测试", () => {
 		})
 	})
 
-	describe("createTask 方法", () => {
-		test("应该返回包含所有必要方法的任务接口", () => {
+	describe("createTask method", () => {
+		test("should return task interface containing all necessary methods", () => {
 			const mockFile = new File(["test content"], "test.txt", {
 				type: "text/plain",
 			})

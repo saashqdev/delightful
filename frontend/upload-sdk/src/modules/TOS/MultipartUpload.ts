@@ -24,10 +24,10 @@ import { STSUpload } from "./STSUpload"
 import { SignatureV4Credentials } from "./utils/signatureV4Credentials"
 
 /**
- * @description: 复杂上传初始化， 用于获取向TOS服务获取 uploadId
- * @param {string} name 文件名
- * @param {TOS.STSAuthParams} params 上传凭证等字段
- * @param {TOS.InitMultipartUploadOption} option  配置字段
+ * @description: Complex upload initialization, used to get uploadId from TOS service
+ * @param {string} name filename
+ * @param {TOS.STSAuthParams} params upload credentials and other fields
+ * @param {TOS.InitMultipartUploadOption} option configuration fields
  */
 async function initMultipartUpload(
 	name: string,

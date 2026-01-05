@@ -3,7 +3,7 @@ import { DownloadException, DownloadExceptionCode } from "../../src/Exception/Do
 import { BaseException } from "../../src/Exception/BaseException"
 
 describe("DownloadException", () => {
-	test("应该继承自 BaseException", () => {
+	test("should inherit from BaseException", () => {
 		const exception = new DownloadException(
 			DownloadExceptionCode.DOWNLOAD_REQUEST_ERROR,
 			404
@@ -13,7 +13,7 @@ describe("DownloadException", () => {
 		expect(exception).toBeInstanceOf(DownloadException)
 	})
 
-	test("DOWNLOAD_REQUEST_ERROR 应该包含 HTTP 状态码", () => {
+	test("DOWNLOAD_REQUEST_ERROR should contain HTTP status code", () => {
 		const httpStatus = 404
 		const exception = new DownloadException(
 			DownloadExceptionCode.DOWNLOAD_REQUEST_ERROR,
@@ -25,7 +25,7 @@ describe("DownloadException", () => {
 		expect(exception.status).toBe(3002)
 	})
 
-	test("应该正确处理不同的 HTTP 状态码", () => {
+	test("should correctly handle different HTTP status codes", () => {
 		const statuses = [400, 401, 403, 404, 500, 502, 503]
 		
 		statuses.forEach(httpStatus => {
@@ -38,7 +38,7 @@ describe("DownloadException", () => {
 		})
 	})
 
-	test("异常代码应该是数字", () => {
+	test("exception code should be numeric", () => {
 		const exception = new DownloadException(
 			DownloadExceptionCode.DOWNLOAD_REQUEST_ERROR,
 			404
@@ -47,7 +47,7 @@ describe("DownloadException", () => {
 		expect(typeof exception.status).toBe("number")
 	})
 
-	test("应该可以通过 catch 捕获", () => {
+	test("should be able to be caught via catch", () => {
 		expect(() => {
 			throw new DownloadException(DownloadExceptionCode.DOWNLOAD_REQUEST_ERROR, 404)
 		}).toThrow(DownloadException)

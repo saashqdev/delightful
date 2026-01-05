@@ -13,7 +13,7 @@ import { checkSpecialCharacters, getFileExtension } from "./utils"
 import { nanoid } from "./utils/nanoid"
 
 export class Upload {
-	/** 包版本 */
+	/** Package version */
 	static version: string = version
 
 	uploadManger: UploadManger
@@ -23,7 +23,7 @@ export class Upload {
 	}
 
 	/**
-	 * @description: 生成文件下载/预览临时 Url
+	 * @description: Generate temporary URL for file download/preview
 	 * @param {DownloadConfig} downloadConfig
 	 * @return Promise<any>
 	 */
@@ -32,19 +32,19 @@ export class Upload {
 		let tempBody = body
 
 		try {
-			// 若body为FormData格式
+			// If body is FormData format
 			if (tempBody && tempBody instanceof FormData && option) {
 				tempBody.append("options", JSON.stringify(option))
 				// eslint-disable-next-line no-console
-				console.warn("由于body为FormData类型，option字段(图片处理参数)可能会失效")
+				console.warn("Since body is FormData type, option field (image processing parameters) may become ineffective")
 			} else if (tempBody && isJson(tempBody)) {
-				// 若body为JSON格式
+				// If body is JSON format
 				tempBody = JSON.stringify({
 					...JSON.parse(tempBody),
 					options: option,
 				})
 			} else if (tempBody && isObject(tempBody)) {
-				// 若body为Object格式
+				// If body is Object format
 				tempBody = JSON.stringify({
 					...tempBody,
 					options: option,
@@ -94,19 +94,19 @@ export class Upload {
 	}
 
 	/**
-	 * @description: 文件上传接口，包括 简单上传/分片上传/断点续传，会根据上传凭证信息选择相应的平台、以及上传方式进行上传
-	 * @param {UploadConfig} uploadConfig 上传配置
-	 * @return {UploadCallBack} uploadCallBack 上传回调
+	 * @description: File upload interface, including simple upload/multipart upload/resumable upload, will select the corresponding platform and upload method based on upload credential information
+	 * @param {UploadConfig} uploadConfig Upload configuration
+	 * @return {UploadCallBack} uploadCallBack Upload callback
 	 */
 	public upload(uploadConfig: UploadConfig): UploadCallBack {
 		const { url, method, file, option, customCredentials } = uploadConfig
 
-		// 验证参数：如果没有提供自定义凭证，则必须提供url和method
+		// Validate parameters: if no custom credentials provided, url and method must be provided
 		if (!customCredentials && (!url || !method)) {
 			throw new InitException(InitExceptionCode.MISSING_PARAMS_FOR_UPLOAD, "url", "method")
 		}
 
-		// 如果提供了自定义凭证，验证凭证参数
+		// If custom credentials are provided, validate credential parameters
 		if (customCredentials) {
 			const { platform, temporary_credential } = customCredentials
 			if (!platform || !temporary_credential) {
@@ -118,14 +118,14 @@ export class Upload {
 			}
 		}
 
-		// 处理文件名
+		// Handle filename
 		const { rewriteFileName } = option || {}
 		if (rewriteFileName) {
 			const suffix = getFileExtension(uploadConfig.fileName)
 			uploadConfig.fileName = `${nanoid()}.${suffix}`
 		}
 
-		// 检测文件名是否存在特殊字符
+		// Check if filename contains special characters
 		const hasError = checkSpecialCharacters(uploadConfig.fileName)
 		if (hasError) {
 			throw new InitException(
@@ -137,35 +137,35 @@ export class Upload {
 	}
 
 	/**
-	 * @description: 暂停所有文件上传（分片上传）
+	 * @description: Pause all file uploads (multipart upload)
 	 */
 	public pause() {
 		this.uploadManger.pauseAllTask()
 	}
 
 	/**
-	 * @description: 恢复所有文件上传（分片上传）
+	 * @description: Resume all file uploads (multipart upload)
 	 */
 	public resume() {
 		this.uploadManger.resumeAllTask()
 	}
 
 	/**
-	 * @description: 取消所有文件上传（分片上传）
+	 * @description: Cancel all file uploads (multipart upload)
 	 */
 	public cancel() {
 		this.uploadManger.cancelAllTask()
 	}
 
 	/**
-	 * @description: 传入回调函数, 订阅日志内容
+	 * @description: Pass in callback function to subscribe to log content
 	 */
 	static subscribeLogs(callback: LogModule.CallBack) {
 		logPubSub.subscribe(callback)
 	}
 }
 
-// 导出类型和函数
+// Export types and functions
 export type { DownloadConfig, UploadCallBack, UploadConfig }
 export { PlatformType, PlatformModules }
 

@@ -1,5 +1,5 @@
 /**
- * 内网上传
+ * Internal network upload
  */
 export namespace Local {
 	export interface AuthParams {

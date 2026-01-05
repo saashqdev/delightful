@@ -4,7 +4,7 @@ import copy from "esbuild-plugin-copy"
 
 const entry = ["./src/**/*.ts"]
 
-// 定义公共配置
+// Define common configuration
 const commonOptions: Partial<Options> = {
 	sourcemap: true,
 	keepNames: true,
@@ -17,7 +17,7 @@ const commonOptions: Partial<Options> = {
 	},
 }
 
-// 模块构建公共配置
+// Module build common configuration
 const moduleOptions: Partial<Options> = {
 	...commonOptions,
 	splitting: false,

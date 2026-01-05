@@ -3,14 +3,14 @@ import { UploadException, UploadExceptionCode } from "../../src/Exception/Upload
 import { BaseException } from "../../src/Exception/BaseException"
 
 describe("UploadException", () => {
-	test("应该继承自 BaseException", () => {
+	test("should inherit from BaseException", () => {
 		const exception = new UploadException(UploadExceptionCode.UPLOAD_CANCEL)
 		
 		expect(exception).toBeInstanceOf(BaseException)
 		expect(exception).toBeInstanceOf(UploadException)
 	})
 
-	test("UPLOAD_CANCEL 应该生成正确的错误消息", () => {
+	test("UPLOAD_CANCEL should generate correct error message", () => {
 		const exception = new UploadException(UploadExceptionCode.UPLOAD_CANCEL)
 		
 		expect(exception.message).toContain("[Uploader]")
@@ -18,7 +18,7 @@ describe("UploadException", () => {
 		expect(exception.status).toBe(1001)
 	})
 
-	test("UPLOAD_PAUSE 应该生成正确的错误消息", () => {
+	test("UPLOAD_PAUSE should generate correct error message", () => {
 		const exception = new UploadException(UploadExceptionCode.UPLOAD_PAUSE)
 		
 		expect(exception.message).toContain("[Uploader]")
@@ -26,27 +26,27 @@ describe("UploadException", () => {
 		expect(exception.status).toBe(1002)
 	})
 
-	test("UPLOAD_UNKNOWN_ERROR 应该生成正确的错误消息", () => {
+	test("UPLOAD_UNKNOWN_ERROR should generate correct error message", () => {
 		const exception = new UploadException(UploadExceptionCode.UPLOAD_UNKNOWN_ERROR)
 		
 		expect(exception.message).toContain("[Uploader]")
 		expect(exception.status).toBe(1000)
 	})
 
-	test("异常代码应该是数字", () => {
+	test("exception code should be numeric", () => {
 		const exception = new UploadException(UploadExceptionCode.UPLOAD_CANCEL)
 		
 		expect(typeof exception.status).toBe("number")
 	})
 
-	test("不同的异常应该有不同的 status 值", () => {
+	test("different exceptions should have different status values", () => {
 		const cancelException = new UploadException(UploadExceptionCode.UPLOAD_CANCEL)
 		const pauseException = new UploadException(UploadExceptionCode.UPLOAD_PAUSE)
 		
 		expect(cancelException.status).not.toBe(pauseException.status)
 	})
 
-	test("应该可以通过 catch 捕获", () => {
+	test("should be able to be caught via catch", () => {
 		expect(() => {
 			throw new UploadException(UploadExceptionCode.UPLOAD_CANCEL)
 		}).toThrow(UploadException)

@@ -3,7 +3,7 @@ import { vi } from "vitest"
 /* eslint-disable class-methods-use-this */
 // eslint-disable-next-line max-classes-per-file
 const mockGlobalProperties = () => {
-	// 创建XMLHttpRequest模拟 - 作为类
+	// Create XMLHttpRequest mock - as class
 	class MockXMLHttpRequest {
 		open = vi.fn()
 
@@ -27,7 +27,7 @@ const mockGlobalProperties = () => {
 
 		ontimeout: any = null
 
-		// 创建一个独立的 upload 对象，确保所有属性都可写
+		// Create a separate upload object to ensure all properties are writable
 		upload: {
 			addEventListener: any
 			onloadstart: any
@@ -40,7 +40,7 @@ const mockGlobalProperties = () => {
 		private loadHandlers: Array<() => void> = []
 
 		constructor() {
-			// 在构造函数中初始化 upload 对象，确保属性可写
+			// Initialize upload object in constructor to ensure properties are writable
 			this.upload = {
 				addEventListener: vi.fn(),
 				onloadstart: null,
@@ -51,28 +51,28 @@ const mockGlobalProperties = () => {
 			}
 		}
 
-		// send 方法需要触发回调
+		// send method needs to trigger callbacks
 		send = vi.fn(() => {
-			// 异步触发 load 事件，模拟网络请求完成
+			// Asynchronously trigger load event to simulate network request completion
 			setTimeout(() => {
-				// 触发 upload.onloadstart
+				// Trigger upload.onloadstart
 				if (this.upload.onloadstart) {
 					this.upload.onloadstart()
 				}
 
-				// 触发 upload.onload
+				// Trigger upload.onload
 				if (this.upload.onload) {
 					this.upload.onload()
 				}
 
-				// 触发主 onload
+				// Trigger main onload
 				if (this.onload) {
 					this.onload({
 						target: this,
 					})
 				}
 
-				// 触发所有通过 addEventListener 注册的 load 处理器
+				// Trigger all load handlers registered via addEventListener
 				this.loadHandlers.forEach((handler) => handler())
 			}, 0)
 		})
@@ -90,7 +90,7 @@ const mockGlobalProperties = () => {
 		abort = vi.fn()
 	}
 
-	// 创建FormData模拟 - 作为类
+	// Create FormData mock - as a class
 	class MockFormData {
 		private data: Map<string, any> = new Map()
 
@@ -130,7 +130,7 @@ const mockGlobalProperties = () => {
 		}
 	}
 
-	// 模拟Blob
+	// Mock Blob
 	class MockBlob {
 		content: Array<any>
 
@@ -160,7 +160,7 @@ const mockGlobalProperties = () => {
 		}
 	}
 
-	// 确保全局File构造函数可用
+	// Ensure global File constructor is available
 	class MockFile extends MockBlob {
 		name: string
 
@@ -174,7 +174,7 @@ const mockGlobalProperties = () => {
 		}
 	}
 
-	// 创建URL对象模拟 - 作为构造函数
+	// Create URL object mock - as constructor
 	class MockURL {
 		protocol: string
 
@@ -195,12 +195,12 @@ const mockGlobalProperties = () => {
 		origin: string
 
 		constructor(url: string, base?: string) {
-			// 简单的URL解析
+			// Simple URL parsing
 			let fullUrl = url
 
-			// 如果提供了base且url是相对路径，则组合它们
+			// If base is provided and url is relative path, combine them
 			if (base && !url.match(/^https?:\/\//)) {
-				// 简化处理：只处理base + path的情况
+			// Simplified processing: only handle base + path case
 				const baseMatch = base.match(/^(https?:\/\/[^/]+)(\/.*)?$/)
 				if (baseMatch) {
 					const baseOrigin = baseMatch[1]
@@ -248,7 +248,7 @@ const mockGlobalProperties = () => {
 		}
 	}
 
-	// 使用Object.defineProperty方式安全地添加到全局对象
+	// Use Object.defineProperty method to safely add to global object
 	Object.defineProperty(global, "XMLHttpRequest", {
 		value: MockXMLHttpRequest,
 		writable: true,
@@ -275,19 +275,19 @@ const mockGlobalProperties = () => {
 	})
 }
 
-// 初始化测试环境
+// Initialize test environment
 mockGlobalProperties()
 
-// 修补全局原型链，使instanceof检查正常工作
+// Patch global prototype chain to make instanceof checks work properly
 global.Object.prototype.constructor = function () {}
 
-// 模拟esdk-obs-browserjs模块
+// Mock esdk-obs-browserjs module
 vi.mock("esdk-obs-browserjs", async () => {
 	const ObsClientMock = await import("./mocks/ObsClientMock")
 	return ObsClientMock
 })
 
-// 模拟mime模块
+// Mock mime module
 vi.mock("mime", () => {
 	const getTypeMock = function (filename: string): string {
 		if (filename.endsWith(".jpg") || filename.endsWith(".jpeg")) return "image/jpeg"
@@ -308,5 +308,5 @@ vi.mock("mime", () => {
 	}
 })
 
-// 设置环境变量
+// Set environment variables
 process.env.NODE_ENV = "test"

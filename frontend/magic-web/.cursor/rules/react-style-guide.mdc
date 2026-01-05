@@ -3,37 +3,37 @@ description:
 globs: 
 alwaysApply: false
 ---
-@rule React 组件风格指南
-@description React 组件开发规范与最佳实践
+@rule React Component Style Guide
+@description React component development standards and best practices
 @priority high
 @category development
 
-# React 组件风格指南
+# React Component Style Guide
 
-## 组件类型
+## Component Types
 
-1. **函数组件**：默认使用函数组件和 Hooks，避免使用类组件
+1. **Function Components**: Use function components and Hooks by default, avoid class components
    ```tsx
    export const MyComponent = ({ prop1, prop2 }: MyComponentProps) => {
-     // 组件逻辑
-     return <div>组件内容</div>;
+     // Component logic
+     return <div>Component content</div>;
    };
    ```
 
-2. **HOC 模式**：需要共享逻辑时使用高阶组件
+2. **HOC Pattern**: Use higher-order components when shared logic is needed
    ```tsx
    export const withAuth = (Component: React.ComponentType<any>) => {
      return (props: any) => {
-       // 认证逻辑
+       // Authentication logic
        return <Component {...props} />;
      };
    };
    ```
 
-3. **Compound Components**：复杂组件使用复合组件模式
+3. **Compound Components**: Use compound component pattern for complex components
    ```tsx
    export const Tabs = ({ children }: TabsProps) => {
-     // Tabs 逻辑
+     // Tabs logic
      return <div className="tabs">{children}</div>;
    };
    
@@ -42,9 +42,9 @@ alwaysApply: false
    };
    ```
 
-## 样式约定
+## Style Conventions
 
-1. 使用 `createStyle` 创建样式（基于 ant-design 5）
+1. Use `createStyle` to create styles (based on ant-design 5)
    ```tsx
    import { createStyle } from 'antd-style';
    
@@ -64,21 +64,21 @@ alwaysApply: false
      const styles = useStyles();
      return (
        <div className={styles.container}>
-         <h2 className={styles.title}>标题</h2>
+         <h2 className={styles.title}>Title</h2>
        </div>
      );
    };
    ```
 
-## 状态管理
+## State Management
 
-1. **局部状态**：使用 `useState` 或 `useReducer`
-2. **全局状态**：使用 Zustand 或 MobX
-3. **复杂表单状态**：使用 `antd` 的 `Form` 组件
+1. **Local State**: Use `useState` or `useReducer`
+2. **Global State**: Use Zustand or MobX
+3. **Complex Form State**: Use `antd`'s `Form` component
 
-## Props 设计
+## Props Design
 
-1. 明确定义 Props 类型
+1. Clearly define Props types
    ```tsx
    interface ButtonProps {
      type?: 'primary' | 'default' | 'danger';
@@ -89,7 +89,7 @@ alwaysApply: false
    }
    ```
 
-2. 使用 Props 解构和默认值
+2. Use Props destructuring and default values
    ```tsx
    export const Button = ({
      type = 'default',
@@ -98,26 +98,26 @@ alwaysApply: false
      disabled = false,
      children,
    }: ButtonProps) => {
-     // 组件实现
+     // Component implementation
    };
    ```
 
-## 性能优化
+## Performance Optimization
 
-1. 使用 `useMemo` 缓存计算结果
-2. 使用 `useCallback` 缓存函数引用
-3. 使用 `React.memo` 避免不必要的重渲染
-4. 适当使用 Code Splitting 和懒加载
+1. Use `useMemo` to cache computed results
+2. Use `useCallback` to cache function references
+3. Use `React.memo` to avoid unnecessary re-renders
+4. Appropriately use Code Splitting and lazy loading
 
-## 错误处理
+## Error Handling
 
-1. 使用 ErrorBoundary 组件捕获渲染错误
-2. API 请求错误统一处理
-3. 使用 try-catch 处理可预期的异常
+1. Use ErrorBoundary component to catch rendering errors
+2. Unified handling of API request errors
+3. Use try-catch to handle expected exceptions
 
-## 可访问性
+## Accessibility
 
-1. 使用语义化的 HTML 标签
-2. 提供适当的 ARIA 属性
-3. 确保键盘可导航
-4. 保持适当的颜色对比度
+1. Use semantic HTML tags
+2. Provide appropriate ARIA attributes
+3. Ensure keyboard navigation
+4. Maintain appropriate color contrast

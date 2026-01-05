@@ -1,21 +1,21 @@
 /**
- * 检查fileName中是否存在特殊字符
+ * Check if fileName contains special characters
  * @param fileName
  */
 export function checkSpecialCharacters(fileName: string) {
-	// 在实现使用中存在
+	// Exists in actual implementation
 	return fileName.includes("%")
 }
 
 /**
- * 获取文件后缀名
+ * Get file extension
  * @param fileName
  */
 export function getFileExtension(fileName: string): string {
 	const lastDotIndex = fileName.lastIndexOf(".")
 	if (lastDotIndex === -1) {
-		return "" // 文件名中没有后缀名
+		return "" // No extension in filename
 	}
 	const extension = fileName.substring(lastDotIndex + 1)
-	return extension.toLowerCase() // 返回小写的后缀名
+	return extension.toLowerCase() // Return lowercase extension
 }

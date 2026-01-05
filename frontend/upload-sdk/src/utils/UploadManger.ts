@@ -33,7 +33,7 @@ import logPubSub from "./logPubSub"
 import { nanoid } from "./nanoid"
 import { cancelRequest, completeRequest, pauseRequest } from "./request"
 
-// 上传任务的事件订阅管理
+// Event subscription management for upload tasks
 const TaskEvent = new EventEmitter<SuccessCallback | FailCallback | ProgressCallback>()
 
 export class UploadManger {
@@ -87,38 +87,38 @@ export class UploadManger {
 		const output: TaskCallBack = {
 			success: (callback) => {
 				const taskEventCallback: SuccessCallback = (response) => {
-					// 上报成功日志
+					// Report success log
 					logPubSub.report({
 						type: "SUCCESS",
 						eventName: "upload",
 						eventParams: { ...uploadConfig },
 						eventResponse: response,
 					})
-					// 移除当前任务的所有回调
+					// Remove all callbacks for the current task
 					TaskEvent.off(`${taskId}_success`)
 					TaskEvent.off(`${taskId}_fail`)
 					TaskEvent.off(`${taskId}_progress`)
 					callback(response)
 				}
-				// 订阅当前上传任务的成功回调
+				// Subscribe to success callback for current upload task
 				TaskEvent.on(`${taskId}_success`, taskEventCallback)
 			},
 			fail: (callback) => {
 				const taskEventCallback: FailCallback = (error) => {
-					// 上报失败日志
+					// Report failure log
 					logPubSub.report({
 						type: "ERROR",
 						eventName: "upload",
 						eventParams: { ...uploadConfig },
 						error,
 					})
-					// 移除当前任务的所有回调
+					// Remove all callbacks for the current task
 					// TaskEvent.off(`${taskId}_success`)
 					// TaskEvent.off(`${taskId}_fail`)
 					// TaskEvent.off(`${taskId}_progress`)
 					callback(error)
 				}
-				// 订阅当前上传任务的失败回调
+				// Subscribe to failure callback for current upload task
 				TaskEvent.on(`${taskId}_fail`, taskEventCallback)
 			},
 			progress: (callback) => {
@@ -130,20 +130,20 @@ export class UploadManger {
 				) => {
 					callback(percent, loaded, total, checkpoint)
 				}
-				// 订阅当前上传任务的进度回调
+				// Subscribe to progress callback for current upload task
 				TaskEvent.on(`${taskId}_progress`, taskEventCallback)
 			},
 		cancel: () => {
 			const task = this.tasks[taskId]
 			if (task) {
 				cancelRequest(taskId)
-				// 移除当前任务的所有回调
+				// Remove all callbacks for the current task
 				TaskEvent.off(`${taskId}_success`)
 				TaskEvent.off(`${taskId}_fail`)
 				TaskEvent.off(`${taskId}_progress`)
 				const { pauseInfo } = task
 				if (pauseInfo) {
-					// 清空复杂上传断点信息
+					// Clear multipart upload checkpoint info
 					delete task.pauseInfo
 				}
 			}
@@ -165,7 +165,7 @@ export class UploadManger {
 			const task = this.tasks[taskId]
 			if (task) {
 				const { pauseInfo } = task
-				// 只有复杂上传方式才能恢复上传
+				// Only multipart upload can be resumed
 				if (pauseInfo) {
 					const { isPause, checkpoint } = pauseInfo
 
@@ -223,7 +223,7 @@ export class UploadManger {
 		total: number,
 		checkpoint: OSS.Checkpoint | null,
 	) => {
-		// 保存复杂上传断点信息
+		// Save multipart upload checkpoint info
 		const task = this.tasks[taskId]
 		if (checkpoint && task) {
 			task.pauseInfo = {
@@ -235,7 +235,7 @@ export class UploadManger {
 			this.notifyProgress(taskId, percent, loaded, total, null)
 		}
 	}
-		// 处理上传凭证：支持自定义凭证和传统凭证获取
+		// Handle upload credentials: support custom credentials and traditional credential retrieval
 		const uploadPromise = uploadConfig.customCredentials
 			? Promise.resolve({
 					platform: uploadConfig.customCredentials.platform,
@@ -259,7 +259,7 @@ export class UploadManger {
 				const platformType = uploadSource.platform
 				const platformConfig = uploadSource.temporary_credential
 
-				// 使用异步加载平台模块
+				// Use async loading for platform modules
 				try {
 					const platform = PlatformModules[platformType]
 
@@ -314,9 +314,9 @@ export class UploadManger {
 			})
 			.catch((err) => {
 				let message = err
-				// 当上传平台返回 token失效的错误时
+				// When upload platform returns token expiration error
 				if (err?.status === 1003) {
-					// 默认重传 3 次
+					// Retry up to 3 times by default
 					if (option?.reUploadedCount && option?.reUploadedCount >= 2) {
 						this.notifyError(
 							taskId,
@@ -330,11 +330,11 @@ export class UploadManger {
 					})
 					return
 				}
-				// 上传暂停
+				// Upload paused
 				if (err?.status === 5002) {
 					message = new UploadException(UploadExceptionCode.UPLOAD_PAUSE)
 				}
-				// 上传取消
+				// Upload canceled
 				if (err?.status === 5001) {
 					message = new UploadException(UploadExceptionCode.UPLOAD_CANCEL)
 				}
@@ -342,7 +342,7 @@ export class UploadManger {
 			})
 	}
 
-	// 全部上传暂停
+	// Pause all uploads
 	public pauseAllTask() {
 		Object.values(this.tasks).forEach((task) => {
 			if (task.pause) {
@@ -351,7 +351,7 @@ export class UploadManger {
 		})
 	}
 
-	// 全部上传继续
+	// Resume all uploads
 	public resumeAllTask() {
 		Object.values(this.tasks).forEach((task) => {
 			if (task.resume) {
@@ -360,7 +360,7 @@ export class UploadManger {
 		})
 	}
 
-	// 取消全部上传
+	// Cancel all uploads
 	public cancelAllTask() {
 		Object.values(this.tasks).forEach((task) => {
 			if (task.cancel) {

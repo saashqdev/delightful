@@ -1,5 +1,5 @@
 /**
- * @file 全局请求
+ * @file Global request
  */
 
 import { HttpException, HttpExceptionCode } from "../Exception/HttpException"
@@ -8,13 +8,13 @@ import type { RequestTask, UploadRequestConfig } from "../types/request"
 import { isObject } from "./checkDataFormat"
 import { formatHeaders } from "../modules/TOS/utils"
 
-// 维护一个请求队列
+// Maintain a request queue
 let requestTasks: RequestTask[] = []
 
-// 维护 AbortController 队列（用于 AWS SDK 等 Fetch-based 请求）
+// Maintain AbortController queue (for AWS SDK and other Fetch-based requests)
 let abortControllers: Map<TaskId, AbortController[]> = new Map()
 
-// 维护任务的取消/暂停状态（用于区分 cancel 和 pause）
+// Maintain task cancel/pause state (to distinguish between cancel and pause)
 let taskAbortStates: Map<TaskId, "cancel" | "pause"> = new Map()
 
 /**
@@ -66,18 +66,18 @@ export function getTaskAbortState(taskId: TaskId): "cancel" | "pause" | undefine
 }
 
 /**
- * XMLHttpRequest对象兼容处理
+ * XMLHttpRequest object compatibility handling
  */
 function createXHR() {
 	if (typeof XMLHttpRequest !== "undefined") {
-		// Firefox,Opera,Safari,Chrome
+		// Firefox, Opera, Safari, Chrome
 		return new XMLHttpRequest()
 	}
 	throw new HttpException(HttpExceptionCode.REQUEST_NO_XHR_OBJ_AVAILABLE)
 }
 /**
- * @description: 终止文件上传
- * @param {TaskId} taskId 任务ID
+ * @description Terminate file upload
+ * @param {TaskId} taskId Task ID
  */
 export function cancelRequest(taskId: TaskId): void {
 	// Set abort state to cancel
@@ -100,8 +100,8 @@ export function cancelRequest(taskId: TaskId): void {
 }
 
 /**
- * @description: 暂停文件上传
- * @param {TaskId} taskId 任务ID
+ * @description Pause file upload
+ * @param {TaskId} taskId Task ID
  */
 export function pauseRequest(taskId: TaskId): void {
 	// Set abort state to pause
@@ -124,9 +124,9 @@ export function pauseRequest(taskId: TaskId): void {
 }
 
 /**
- * @description: XML =>>> Object
+ * @description XML =>>> Object
  * @param {XMLDocument} xml
- * @return {Object} convertedObj 转换Object
+ * @return {Object} convertedObj Converted Object
  */
 function parseXML(xml: XMLDocument | null): Record<string, string | object> | {} {
 	// output
@@ -145,7 +145,7 @@ function parseXML(xml: XMLDocument | null): Record<string, string | object> | {}
 }
 
 /**
- * 解析header字符串为对象
+ * Parse header string to object
  * @param str
  */
 function parseHeaderString(str: string) {
@@ -163,8 +163,8 @@ function parseHeaderString(str: string) {
 }
 
 /**
- * @description: 请求结束（无论成功或者失败）
- * @param {TaskId} taskId 任务ID
+ * @description Request completion (whether success or failure)
+ * @param {TaskId} taskId Task ID
  */
 export function completeRequest(taskId: TaskId | undefined): void {
 	if (taskId === undefined) return
@@ -179,7 +179,7 @@ export function completeRequest(taskId: TaskId | undefined): void {
 }
 
 /**
- * 判断是否是JSON响应
+ * Determine if response is JSON
  * @param req
  */
 function isJSONResponse(req: XMLHttpRequest) {
@@ -187,7 +187,7 @@ function isJSONResponse(req: XMLHttpRequest) {
 }
 
 /**
- * 补充headers对象到响应对象中
+ * Add headers object to response object
  * @param result
  * @param responseHeaders
  */
@@ -202,7 +202,7 @@ function addHeadersToResponse<T extends Record<string, any>, H extends Record<st
 }
 
 /**
- * 封装XHR请求方法
+ * Encapsulate XHR request method
  * @param {UploadRequestConfig} uploadRequestConfig
  * @return {Promise<Result>}
  */
@@ -222,17 +222,17 @@ export function request<T>(uploadRequestConfig: UploadRequestConfig): Promise<T>
 	} = uploadRequestConfig
 
 	return new Promise((resolve, reject) => {
-		// 创建一个请求
+		// Create a request
 		const req = createXHR()
-		// 取消状态
+		// Cancel state
 		let isCancel: boolean = false
 
-		// 暂停状态
+		// Pause state
 		let isPause: boolean = false
 
 		req.responseType = xmlResponse ? "document" : "json"
 
-		// 监听上传文件开始
+		// Monitor upload file start
 		req.upload.onloadstart = () => {
 			if (taskId) {
 				requestTasks.push({
@@ -249,12 +249,12 @@ export function request<T>(uploadRequestConfig: UploadRequestConfig): Promise<T>
 			}
 		}
 
-		// 监听上传文件进度事件
+		// Monitor upload file progress event
 		req.upload.onprogress = (evt: any) => {
 			if (onProgress) onProgress((evt.loaded / evt.total) * 100, evt.loaded, evt.total, null)
 		}
 
-		// 处理查询参数
+		// Handle query parameters
 		let handledUrl = url
 		if (query) {
 			const queryString = Object.entries(query)
@@ -271,10 +271,10 @@ export function request<T>(uploadRequestConfig: UploadRequestConfig): Promise<T>
 			}
 		}
 
-		// 设置请求方法、请求地址、是否异步
+		// Set request method, URL, async
 		req.open(method.toUpperCase(), handledUrl, true)
 
-		// 设置请求头
+		// Set request headers
 		req.setRequestHeader("language", "zh_CN")
 
 		if (headers && Object.keys(headers).length > 0) {
@@ -284,17 +284,17 @@ export function request<T>(uploadRequestConfig: UploadRequestConfig): Promise<T>
 			})
 		}
 
-		// 发送请求
+		// Send request
 		req.send(data as XMLHttpRequestBodyInit | null)
 
-		// 接收响应
+		// Receive response
 		req.onreadystatechange = () => {
 			if (req.readyState !== 4) {
 				return
 			}
-			// 判断响应状态
+			// Judge response status
 			if (/^2\d{2}/.test(String(req.status))) {
-				// 请求成功
+				// Request success
 				let result = isJSONResponse(req) ? JSON.parse(req.response) : req.response
 				const responseHeaders: Record<string, string> = {
 					...parseHeaderString(req.getAllResponseHeaders()),
@@ -319,7 +319,7 @@ export function request<T>(uploadRequestConfig: UploadRequestConfig): Promise<T>
 					success(result)
 				}
 			} else {
-				// 请求失败
+				// Request failure
 				if (fail && typeof fail === "function") {
 					fail(req.status, reject)
 				}

@@ -9,7 +9,7 @@ export const enum HttpExceptionCode {
 	REQUEST_NO_XHR_OBJ_AVAILABLE = "REQUEST_NO_XHR_OBJ_AVAILABLE",
 }
 
-/** HTTP 异常分类 */
+/** HTTP exception classification */
 export const HttpExceptionMapping: Record<
 	string,
 	(...args: any[]) => ErrorType.BaseExceptionWithStatus

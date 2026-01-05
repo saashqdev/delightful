@@ -1,14 +1,14 @@
 /**
- * 错误类型命名空间
+ * Error type namespace
  * */
 export namespace ErrorType {
 	export interface BaseException {
-		/** 错误信息 */
+		/** Error message */
 		message: string
 	}
 
 	export interface BaseExceptionWithStatus extends BaseException {
-		/** 错误码 */
+		/** Error code */
 		status: number
 	}
 

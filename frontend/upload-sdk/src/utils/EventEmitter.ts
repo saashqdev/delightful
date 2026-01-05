@@ -1,22 +1,22 @@
-/** 事件名称 */
+/** Event name */
 type EventName = string
 
 export default class EventEmitter<T extends (...args: any[]) => void> {
 	observers: Record<EventName, T>
 
 	constructor() {
-		// 存储事件监听器的键值对
+		// Store event listener key-value pairs
 		this.observers = {}
 	}
 
-	// 注册事件监听器
+	// Register event listener
 	on(eventName: EventName, listener: T) {
 		if (!this.observers[eventName]) {
 			this.observers[eventName] = listener
 		}
 	}
 
-	// 触发事件，回调所有监听器
+	// Trigger event, callback all listeners
 	emit(eventName: EventName, ...args: Array<any>) {
 		const listener = this.observers[eventName]
 		if (listener) {
@@ -24,7 +24,7 @@ export default class EventEmitter<T extends (...args: any[]) => void> {
 		}
 	}
 
-	// 移除指定事件的指定监听器
+	// Remove specified listener for specified event
 	off(eventName: EventName) {
 		if (Object.keys(this.observers).includes(eventName)) {
 			delete this.observers[eventName]

@@ -1,11 +1,11 @@
 /**
- * Lodash ES Mock 文件
- * 为测试环境提供 lodash-es 的常用方法
+ * Lodash ES Mock file
+ * Provides common lodash-es methods for test environment
  */
 
 import * as lodash from "lodash-es"
 
-// 定义throttle和debounce的类型
+// Define types for throttle and debounce
 type ThrottleFunction = <T extends (...args: any[]) => any>(
 	func: T,
 	wait?: number,
@@ -18,7 +18,7 @@ type DebounceFunction = <T extends (...args: any[]) => any>(
 	options?: lodash.DebounceSettings,
 ) => lodash.DebouncedFunc<T>
 
-// 创建一个包含我们自定义方法的对象
+// Create an object containing our custom methods
 const customMethods: {
 	isFunction: (val: any) => boolean
 	isObject: (val: any) => boolean
@@ -86,14 +86,14 @@ const customMethods: {
 		})
 		return result
 	},
-	// 使用lodash原始方法
+	// Use original lodash methods
 	merge: lodash.merge,
 	cloneDeep: lodash.cloneDeep,
 	throttle: lodash.throttle,
 	debounce: lodash.debounce,
 }
 
-// 从自定义方法对象中导出各个方法
+// Export individual methods from custom methods object
 export const {
 	isFunction,
 	isObject,
@@ -114,5 +114,5 @@ export const {
 	debounce,
 } = customMethods
 
-// 默认导出我们的自定义方法，而不是整个lodash
+// Default export our custom methods instead of the entire lodash
 export default customMethods

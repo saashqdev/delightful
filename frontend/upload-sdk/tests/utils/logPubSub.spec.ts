@@ -4,23 +4,23 @@ import { LogModule } from "../../src/types/log"
 
 describe("logPubSub", () => {
   beforeEach(() => {
-    // 清除所有订阅者
-    // @ts-ignore - 访问私有属性进行测试
+    // Clear all subscribers
+    // @ts-ignore - Access private property for testing
     logPubSub.callbacks = []
   })
 
-  describe("subscribe方法", () => {
-    test("应该能够添加订阅者", () => {
+  describe("subscribe method", () => {
+    test("should be able to add subscribers", () => {
       const mockCallback = vi.fn()
       logPubSub.subscribe(mockCallback)
 
-      // @ts-ignore - 访问私有属性进行测试
+      // @ts-ignore - Access private property for testing
       expect(logPubSub.callbacks.length).toBe(1)
       // @ts-ignore
       expect(logPubSub.callbacks[0]).toBe(mockCallback)
     })
 
-    test("应该能够添加多个订阅者", () => {
+    test("should be able to add multiple subscribers", () => {
       const mockCallback1 = vi.fn()
       const mockCallback2 = vi.fn()
       const mockCallback3 = vi.fn()
@@ -29,13 +29,13 @@ describe("logPubSub", () => {
       logPubSub.subscribe(mockCallback2)
       logPubSub.subscribe(mockCallback3)
 
-      // @ts-ignore - 访问私有属性进行测试
+      // @ts-ignore - Access private property for testing
       expect(logPubSub.callbacks.length).toBe(3)
     })
   })
 
-  describe("report方法", () => {
-    test("应该调用所有订阅的回调函数", () => {
+  describe("report method", () => {
+    test("should call all subscribed callback functions", () => {
       const mockCallback1 = vi.fn()
       const mockCallback2 = vi.fn()
 
@@ -54,7 +54,7 @@ describe("logPubSub", () => {
       expect(mockCallback2).toHaveBeenCalledTimes(1)
     })
 
-    test("当没有订阅者时应该不会有错误", () => {
+    test("should not have errors when there are no subscribers", () => {
       expect(() => {
         logPubSub.report({
           type: "DEBUG",
@@ -63,7 +63,7 @@ describe("logPubSub", () => {
       }).not.toThrow()
     })
 
-    test("应该传递正确的日志数据给回调函数", () => {
+    test("should pass correct log data to callback function", () => {
       const mockCallback = vi.fn()
       logPubSub.subscribe(mockCallback)
 
@@ -89,8 +89,8 @@ describe("logPubSub", () => {
     })
   })
 
-  describe("createLog静态方法", () => {
-    test("应该正确创建一个普通日志对象", () => {
+  describe("createLog static method", () => {
+    test("should correctly create a normal log object", () => {
       const logConfig: LogModule.CreateLogConfig = {
         type: "DEBUG",
         eventName: "upload",
@@ -99,7 +99,7 @@ describe("logPubSub", () => {
         extra: "test_extra",
       }
 
-      // @ts-ignore - 访问静态方法
+      // @ts-ignore - Access static method
       const log = logPubSub.constructor.createLog(logConfig)
 
       expect(log).toEqual(
@@ -121,7 +121,7 @@ describe("logPubSub", () => {
       expect(log.version).toBe("Upload-SDK.js VERSION")
     })
 
-    test("应该正确创建一个错误日志对象", () => {
+    test("should correctly create an error log object", () => {
       const error = new Error("Test error message")
       error.stack =
         "Error: Test error message\n at TestFunction (test.ts:123:45)"
@@ -132,7 +132,7 @@ describe("logPubSub", () => {
         error,
       }
 
-      // @ts-ignore - 访问静态方法
+      // @ts-ignore - Access static method
       const log = logPubSub.constructor.createLog(logConfig)
 
       expect(log).toEqual(
@@ -148,13 +148,13 @@ describe("logPubSub", () => {
       )
     })
 
-    test("应该使用默认值填充可选字段", () => {
+    test("should use default values to fill optional fields", () => {
       const logConfig: LogModule.CreateLogConfig = {
         type: "WARN",
         eventName: "upload",
       }
 
-      // @ts-ignore - 访问静态方法
+      // @ts-ignore - Access static method
       const log = logPubSub.constructor.createLog(logConfig)
 
       expect(log).toEqual(

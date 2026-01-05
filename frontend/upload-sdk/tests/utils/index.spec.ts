@@ -1,9 +1,9 @@
 import { describe, test, expect } from "vitest"
 import { checkSpecialCharacters, getFileExtension } from "../../src/utils"
 
-describe("utils 工具函数测试", () => {
+describe("utils utility functions tests", () => {
 	describe("checkSpecialCharacters", () => {
-		test("当文件名中包含 % 字符时应返回 true", () => {
+		test("should return true when filename contains % character", () => {
 			expect(checkSpecialCharacters("file%name.txt")).toBe(true)
 			expect(checkSpecialCharacters("my%file.jpg")).toBe(true)
 			expect(checkSpecialCharacters("document%.pdf")).toBe(true)
@@ -11,7 +11,7 @@ describe("utils 工具函数测试", () => {
 			expect(checkSpecialCharacters("suffix%.xlsx")).toBe(true)
 		})
 
-		test("当文件名中不包含 % 字符时应返回 false", () => {
+		test("should return false when filename does not contain % character", () => {
 			expect(checkSpecialCharacters("normal.txt")).toBe(false)
 			expect(checkSpecialCharacters("file-name.jpg")).toBe(false)
 			expect(checkSpecialCharacters("file_name.pdf")).toBe(false)
@@ -22,13 +22,13 @@ describe("utils 工具函数测试", () => {
 			expect(checkSpecialCharacters("file&name.txt")).toBe(false)
 		})
 
-		test("空文件名应返回 false", () => {
+		test("empty filename should return false", () => {
 			expect(checkSpecialCharacters("")).toBe(false)
 		})
 	})
 
 	describe("getFileExtension", () => {
-		test("应正确提取常见文件类型的后缀名", () => {
+		test("should correctly extract extensions for common file types", () => {
 			expect(getFileExtension("document.txt")).toBe("txt")
 			expect(getFileExtension("image.jpg")).toBe("jpg")
 			expect(getFileExtension("presentation.pptx")).toBe("pptx")
@@ -38,28 +38,28 @@ describe("utils 工具函数测试", () => {
 			expect(getFileExtension("audio.mp3")).toBe("mp3")
 		})
 
-		test("后缀名应该转换为小写", () => {
+		test("extension should be converted to lowercase", () => {
 			expect(getFileExtension("image.JPG")).toBe("jpg")
 			expect(getFileExtension("document.TXT")).toBe("txt")
 			expect(getFileExtension("archive.ZIP")).toBe("zip")
 		})
 
-		test("如果文件名包含多个点，应只提取最后一个点后的内容", () => {
+		test("if filename contains multiple dots, should only extract content after the last dot", () => {
 			expect(getFileExtension("file.with.multiple.dots.txt")).toBe("txt")
 			expect(getFileExtension("archive.tar.gz")).toBe("gz")
 			expect(getFileExtension("version.1.0.3.json")).toBe("json")
 		})
 
-		test("如果文件名没有后缀，应返回空字符串", () => {
+		test("if filename has no extension, should return empty string", () => {
 			expect(getFileExtension("filename")).toBe("")
 			expect(getFileExtension("no_extension")).toBe("")
 		})
 
-		test("如果文件名以点结尾，应返回空字符串", () => {
+		test("if filename ends with dot, should return empty string", () => {
 			expect(getFileExtension("filename.")).toBe("")
 		})
 
-		test("如果输入是空字符串，应返回空字符串", () => {
+		test("if input is empty string, should return empty string", () => {
 			expect(getFileExtension("")).toBe("")
 		})
 	})

@@ -19,10 +19,10 @@ import { normalizeSuccessResponse } from "../../utils/response"
 import { STSUpload } from "./STSUpload"
 
 /**
- * @description: 复杂上传初始化， 用于获取向OSS服务获取 uploadId
- * @param {string} name 文件名
- * @param {OSS.MultipartUploadParams} params 上传凭证等字段
- * @param {OSS.InitMultipartUploadOption} option  配置字段
+ * @description: Initialize multipart upload, used to get uploadId from OSS service
+ * @param {string} name filename
+ * @param {OSS.MultipartUploadParams} params upload credentials and other fields
+ * @param {OSS.InitMultipartUploadOption} option configuration fields
  */
 async function initMultipartUpload(
 	name: string,

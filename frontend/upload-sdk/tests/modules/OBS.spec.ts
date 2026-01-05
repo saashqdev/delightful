@@ -172,8 +172,8 @@ afterEach(() => {
 	// Avoid modifying original object
 })
 
-describe("OBS模块测试", () => {
-	it("OBS模块应该被正确加载", () => {
+describe("OBS module tests", () => {
+	it("OBS module should be correctly loaded", () => {
 		// Check if OBS module is properly defined
 		expect(OBS).toBeDefined()
 		expect(OBS.upload).toBeDefined()
@@ -184,8 +184,8 @@ describe("OBS模块测试", () => {
 	})
 
 	// Test upload method routing
-	describe("upload方法", () => {
-		it("当提供STS凭证时应该使用MultipartUpload方法", async () => {
+	describe("upload method", () => {
+		it("should use MultipartUpload method when STS credentials are provided", async () => {
 			// Use the mocked functions we already set up, no need to re-mock here
 			const file = createMockFile()
 			const key = "test/test.txt"
@@ -218,7 +218,7 @@ describe("OBS模块测试", () => {
 			expect(result.path).toBe("test/test.txt")
 		})
 
-		it("当提供普通凭证时应该使用defaultUpload方法", async () => {
+		it("should use defaultUpload method when ordinary credentials are provided", async () => {
 			// Use the mocked functions we already set up, no need to re-mock here
 			const file = createMockFile()
 			const key = "test/test.txt"
@@ -246,8 +246,8 @@ describe("OBS模块测试", () => {
 	})
 
 	// Test default upload method
-	describe("defaultUpload方法", () => {
-		it("应该正确构建签名和请求", async () => {
+	describe("defaultUpload method", () => {
+		it("should correctly build signature and request", async () => {
 			const file = createMockFile("test.txt", 1024)
 			const key = "test/test.txt"
 			const params = {
@@ -274,7 +274,7 @@ describe("OBS模块测试", () => {
 			expect(result).toHaveProperty("path")
 		})
 
-		it("应该处理默认上传失败的情况", async () => {
+		it("should handle default upload failure", async () => {
 			// Modify mock implementation to throw error in this test
 			// @ts-ignore - We added defaultUpload in beforeEach
 			const originalUpload = OBS.defaultUpload
@@ -309,8 +309,8 @@ describe("OBS模块测试", () => {
 	})
 
 	// Test STS upload method
-	describe("STSUpload方法", () => {
-		it("应该正确构建STS签名和请求", async () => {
+	describe("STSUpload method", () => {
+		it("should correctly build STS signature and request", async () => {
 			const file = createMockFile("test.txt", 1024)
 			const key = "test/test.txt"
 			const params = {
@@ -345,8 +345,8 @@ describe("OBS模块测试", () => {
 	})
 
 	// Test multipart upload method
-	describe("MultipartUpload方法", () => {
-		it("应该初始化分片上传并上传分片", async () => {
+	describe("MultipartUpload method", () => {
+		it("should initialize multipart upload and upload parts", async () => {
 			const file = createMockFile("test.txt", 10 * 1024 * 1024) // 10MB file
 			const key = "test/test.txt"
 			const params: NOBS.STSAuthParams = {
@@ -381,7 +381,7 @@ describe("OBS模块测试", () => {
 			expect(result).toHaveProperty("path")
 		})
 
-		it("应该处理分片上传失败的情况", async () => {
+		it("should handle multipart upload failure", async () => {
 			// Modify mock implementation to throw error in this test
 			const originalMultipartUpload = OBS.MultipartUpload
 			// @ts-ignore - Temporarily change to rejected Promise

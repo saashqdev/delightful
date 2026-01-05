@@ -28,7 +28,7 @@
 		"paths": {
 			"@/*": ["./src/*"],
             // 同步开发magic-flow时开启
-            // "@dtyq/magic-flow/*": ["../magic-flow/*"]
+            // "@delightful/delightful-flow/*": ["../magic-flow/*"]
 		}
 	},
 	"include": ["src/**/*", "types/**/*"],

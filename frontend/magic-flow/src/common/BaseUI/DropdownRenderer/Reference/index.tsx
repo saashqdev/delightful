@@ -8,7 +8,7 @@ import {
 	RenderConfig,
 	VALUE_TYPE,
 } from "@/MagicExpressionWidget/types"
-import { getLatestNodeVersion, getReferencePrefix, judgeIsVariableNode } from "@/MagicFlow/utils"
+import { getLatestNodeVersion, getReferencePrefix, judgeIsVariableNode } from "@/DelightfulFlow/utils"
 import { getFormTypeToTitle } from "@/MagicJsonSchemaEditor/constants"
 import Schema from "@/MagicJsonSchemaEditor/types/Schema"
 import { IconTreeTriangleDown } from "@douyinfe/semi-icons"

@@ -11,12 +11,12 @@ import type {
 	LLMModalOption,
 	Flow,
 } from "@/types/flow"
-import type { MagicFlow } from "@dtyq/magic-flow/MagicFlow/types/flow"
+import type { MagicFlow } from "@delightful/delightful-flow/MagicFlow/types/flow"
 import type { SWRResponse } from "swr"
 import useSWR from "swr"
 import { create } from "zustand"
 import type { Knowledge } from "@/types/knowledge"
-import type { DataSourceOption } from "@dtyq/magic-flow/common/BaseUI/DropdownRenderer/Reference"
+import type { DataSourceOption } from "@delightful/delightful-flow/common/BaseUI/DropdownRenderer/Reference"
 import { FlowApi } from "@/apis"
 import type { FlowState } from "./types"
 

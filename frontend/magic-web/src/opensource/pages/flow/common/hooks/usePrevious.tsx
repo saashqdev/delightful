@@ -7,24 +7,24 @@ import {
 	useFlowData,
 	useFlowEdges,
 	useNodeConfig,
-} from "@dtyq/magic-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@dtyq/magic-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import type { NodeSchema } from "@dtyq/magic-flow/dist/MagicFlow/register/node"
-import { nodeManager } from "@dtyq/magic-flow/dist/MagicFlow/register/node"
+} from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import type { NodeSchema } from "@delightful/delightful-flow/dist/MagicFlow/register/node"
+import { nodeManager } from "@delightful/delightful-flow/dist/MagicFlow/register/node"
 import {
 	schemaToDataSource,
 	judgeIsVariableNode,
 	getNodeVersion,
-} from "@dtyq/magic-flow/dist/MagicFlow/utils"
-import { getAllPredecessors } from "@dtyq/magic-flow/dist/MagicFlow/utils/reactflowUtils"
-import type { DataSourceOption } from "@dtyq/magic-flow/dist/common/BaseUI/DropdownRenderer/Reference"
+} from "@delightful/delightful-flow/dist/MagicFlow/utils"
+import { getAllPredecessors } from "@delightful/delightful-flow/dist/MagicFlow/utils/reactflowUtils"
+import type { DataSourceOption } from "@delightful/delightful-flow/dist/common/BaseUI/DropdownRenderer/Reference"
 import { useMemo } from "react"
 import { useMemoizedFn } from "ahooks"
-import type { MagicFlow } from "@dtyq/magic-flow/dist/MagicFlow/types/flow"
-import type Schema from "@dtyq/magic-flow/dist/MagicJsonSchemaEditor/types/Schema"
-import { useNodeMap } from "@dtyq/magic-flow/dist/common/context/NodeMap/useResize"
+import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type Schema from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
+import { useNodeMap } from "@delightful/delightful-flow/dist/common/context/NodeMap/useResize"
 import { useFlowStore } from "@/opensource/stores/flow"
-import { DefaultNodeVersion } from "@dtyq/magic-flow/dist/MagicFlow/constants"
+import { DefaultNodeVersion } from "@delightful/delightful-flow/dist/MagicFlow/constants"
 import { useBotStore } from "@/opensource/stores/bot"
 import { InstructionType } from "@/types/bot"
 import { useTranslation } from "react-i18next"

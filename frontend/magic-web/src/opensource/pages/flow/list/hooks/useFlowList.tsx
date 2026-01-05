@@ -1,6 +1,6 @@
 import MagicIcon from "@/opensource/components/base/MagicIcon"
 import { RoutePath } from "@/const/routes"
-import type { MagicFlow } from "@dtyq/magic-flow/dist/MagicFlow/types/flow"
+import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
 import { IconEdit, IconTrash, IconEye, IconKey } from "@tabler/icons-react"
 import {
 	useMemoizedFn,

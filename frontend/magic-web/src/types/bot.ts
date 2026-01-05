@@ -4,7 +4,7 @@ import type {
 	InsertLocationMap,
 	StatusIconKey,
 } from "@/opensource/pages/flow/components/QuickInstructionButton/const"
-import type { MagicFlow } from "@dtyq/magic-flow/MagicFlow/types/flow"
+import type { MagicFlow } from "@delightful/delightful-flow/MagicFlow/types/flow"
 
 export interface WithPage<ListType> {
 	page: number

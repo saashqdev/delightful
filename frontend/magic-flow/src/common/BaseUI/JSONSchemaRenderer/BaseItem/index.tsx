@@ -1,4 +1,4 @@
-import { copyToClipboard } from "@/MagicFlow/utils"
+import { copyToClipboard } from "@/DelightfulFlow/utils"
 import { SchemaValueSplitor, getFormTypeToTitle } from "@/MagicJsonSchemaEditor/constants"
 import Schema from "@/MagicJsonSchemaEditor/types/Schema"
 import { Tooltip, message } from "antd"

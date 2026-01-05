@@ -1,8 +1,8 @@
 import { Form } from "antd"
-import { ExpressionMode } from "@dtyq/magic-flow/dist/MagicExpressionWidget/constant"
-import type { InputExpressionProps } from "@dtyq/magic-flow/dist/MagicExpressionWidget/types"
-import type { WidgetExpressionValue } from "@dtyq/magic-flow/dist/common/BaseUI/MagicExpressionWrap"
-import MagicExpressionWrap from "@dtyq/magic-flow/dist/common/BaseUI/MagicExpressionWrap"
+import { ExpressionMode } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
+import type { InputExpressionProps } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
+import type { WidgetExpressionValue } from "@delightful/delightful-flow/dist/common/BaseUI/MagicExpressionWrap"
+import MagicExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicExpressionWrap"
 import { cx } from "antd-style"
 import styles from "./index.module.less"
 

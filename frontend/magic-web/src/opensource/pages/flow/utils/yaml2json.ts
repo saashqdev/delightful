@@ -7,8 +7,8 @@
 import yaml from "js-yaml"
 import { v4 as uuidv4 } from "uuid"
 import { customNodeType } from "../constants"
-import { MagicFlow } from "@dtyq/magic-flow/dist/MagicFlow/types/flow"
-import { getLatestNodeVersion } from "@dtyq/magic-flow/dist/MagicFlow/utils"
+import { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import { getLatestNodeVersion } from "@delightful/delightful-flow/dist/MagicFlow/utils"
 
 interface Position {
 	x: number

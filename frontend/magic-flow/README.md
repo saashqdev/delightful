@@ -23,7 +23,7 @@ Magic Flow Foundation Package is an out-of-the-box flow library extracted from M
 
 ```bash
 # Install dependency
-npm install @dtyq/magic-flow
+npm install @delightful/delightful-flow
 ```
 
 ## 📚 Usage Guide
@@ -106,7 +106,7 @@ Magic Flow Foundation Package is an out-of-the-box flow foundation library extra
 
 ```bash
 # Install dependencies
-npm install @dtyq/magic-flow
+npm install @delightful/delightful-flow
 ```
 
 ## 📚 Usage Guide

@@ -11,7 +11,7 @@ body:
         
         **Before submitting a documentation issue:**
         - Check if the documentation issue has already been reported
-        - Browse our current [documentation](https://docs.letsmagic.cn/en)
+        - Browse our current [documentation](https://docs.bedelightful.ai/en)
         - Consider if your suggestion would help other users
 
   - type: dropdown
@@ -60,7 +60,7 @@ body:
     attributes:
       label: Documentation URL
       description: If applicable, provide the URL of the documentation page
-      placeholder: https://docs.letsmagic.cn/en/...
+      placeholder: https://docs.bedelightful.ai/en/...
     validations:
       required: false
 

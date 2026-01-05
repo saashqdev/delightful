@@ -1,6 +1,6 @@
-import { useCurrentNode } from "@dtyq/magic-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useMemo } from "react"
-import { getNodeVersion } from "@dtyq/magic-flow/dist/MagicFlow/utils"
+import { getNodeVersion } from "@delightful/delightful-flow/dist/MagicFlow/utils"
 import { get } from "lodash-es"
 import type { customNodeType } from "../../constants"
 import { nodeComponentVersionMap } from "../../nodes"

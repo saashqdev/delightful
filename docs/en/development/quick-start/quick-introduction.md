@@ -56,7 +56,7 @@ sudo cp .env.example .env
 ```
 
 ##### Magic Environment Variables Configuration Reference:
-https://docs.letsmagic.cn/en/development/deploy/environment.html
+https://docs.bedelightful.ai/en/development/deploy/environment.html
 
 ```bash
 ### To use Super Magic services, copy the following files:
@@ -66,7 +66,7 @@ sudo cp config/.env_sandbox_gateway.example config/.env_sandbox_gateway
 ```
 
 ##### Super Magic Environment Variables Configuration Reference:
-https://docs.letsmagic.cn/en/development/deploy/super-magic.html
+https://docs.bedelightful.ai/en/development/deploy/super-magic.html
 
 ##### Configure IP (Optional)
 For remote server deployment, edit the .env file and replace localhost with your server IP in the following entries:

@@ -1,4 +1,4 @@
-import { MagicFlowInstance } from "@dtyq/magic-flow/dist/MagicFlow"
+import { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
 import React, { createContext, useContext, MutableRefObject, useMemo } from "react"
 
 interface FlowInstanceContextProps {

@@ -1,16 +1,16 @@
 import { Flex, Form, Tooltip } from "antd"
 import { useForm } from "antd/lib/form/Form"
-import { ExpressionMode } from "@dtyq/magic-flow/dist/MagicExpressionWidget/constant"
+import { ExpressionMode } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
 import { useMemo } from "react"
 import { useMemoizedFn } from "ahooks"
 import {
 	useNodeConfig,
 	useNodeConfigActions,
-} from "@dtyq/magic-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@dtyq/magic-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+} from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { set, cloneDeep } from "lodash-es"
 import { IconHelp } from "@tabler/icons-react"
-import MagicSelect from "@dtyq/magic-flow/dist/common/BaseUI/Select"
+import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
 import { useTranslation } from "react-i18next"
 import { getExpressionPlaceholder } from "@/opensource/pages/flow/utils/helpers"
 import MagicExpression from "../../../common/Expression"

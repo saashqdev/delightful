@@ -1,4 +1,4 @@
-import type { NodeSchema, NodeWidget } from "@dtyq/magic-flow/dist/MagicFlow"
+import type { NodeSchema, NodeWidget } from "@delightful/delightful-flow/dist/MagicFlow"
 import {
 	IconArrowLeftFromArc,
 	IconArrowBounce,

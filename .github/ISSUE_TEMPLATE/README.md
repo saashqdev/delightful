@@ -73,7 +73,7 @@ Use this template to report problems with installing or deploying Magic.
 ## Before Creating an Issue
 
 1. **Search existing issues** - Check if your issue has already been reported
-2. **Read the documentation** - Visit [docs.letsmagic.cn](https://docs.letsmagic.cn/en)
+2. **Read the documentation** - Visit [docs.letsmagic.cn](https://docs.bedelightful.ai/en)
 3. **Try the latest version** - Ensure you're using the most recent release
 4. **Gather information** - Collect logs, error messages, and environment details
 
@@ -82,7 +82,7 @@ Use this template to report problems with installing or deploying Magic.
 If you're unsure which template to use or need help with Magic:
 
 - 💬 **Discussions**: [GitHub Discussions](https://github.com/saashqdev/delightful/magic/discussions)
-- 📖 **Documentation**: [docs.letsmagic.cn](https://docs.letsmagic.cn/en) | [Chinese Documentation](https://docs.letsmagic.cn/zh)
+- 📖 **Documentation**: [docs.letsmagic.cn](https://docs.bedelightful.ai/en) | [Chinese Documentation](https://docs.letsmagic.cn/zh)
 - 🌐 **Official Website**: [bedelightful.ai](https://www.bedelightful.ai)
 - 📧 **Enterprise Support**: bd@dtyq.com
 

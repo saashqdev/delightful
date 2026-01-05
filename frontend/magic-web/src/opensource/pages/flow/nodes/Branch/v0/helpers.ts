@@ -1,4 +1,4 @@
-import type { WidgetValue } from "@dtyq/magic-flow/dist/MagicFlow/examples/BaseFlow/common/Output"
+import type { WidgetValue } from "@delightful/delightful-flow/dist/MagicFlow/examples/BaseFlow/common/Output"
 
 export enum BranchType {
 	If = "if",

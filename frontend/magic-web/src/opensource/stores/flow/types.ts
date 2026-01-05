@@ -1,7 +1,7 @@
-import type { MagicFlow } from "@dtyq/magic-flow/MagicFlow/types/flow"
+import type { MagicFlow } from "@delightful/delightful-flow/MagicFlow/types/flow"
 import type { FlowDraft, LLMModalOption, UseableToolSet, Flow } from "@/types/flow"
 import type { Knowledge } from "@/types/knowledge"
-import type { DataSourceOption } from "@dtyq/magic-flow/common/BaseUI/DropdownRenderer/Reference"
+import type { DataSourceOption } from "@delightful/delightful-flow/common/BaseUI/DropdownRenderer/Reference"
 import type { useFlowStore } from "."
 
 export interface FlowState {

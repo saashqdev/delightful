@@ -4,7 +4,7 @@
  * 提供处理Flow操作相关的功能
  */
 
-import type { MagicFlowInstance } from "@dtyq/magic-flow/dist/MagicFlow"
+import type { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
 
 /**
  * 添加节点

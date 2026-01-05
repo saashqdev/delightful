@@ -1,10 +1,10 @@
 import type { WidgetValue } from "@/opensource/pages/flow/common/Output"
 import type { LLMLabelTagType } from "@/opensource/pages/flow/nodes/LLM/v0/components/LLMSelect/LLMLabel"
 import type { TriggerType } from "@/opensource/pages/flow/nodes/Start/v0/constants"
-import type { Expression } from "@dtyq/magic-flow/MagicConditionEdit/types/expression"
-import type { NodeTestingCtx } from "@dtyq/magic-flow/MagicFlow/context/NodeTesingContext/Context"
-import type { MagicFlow } from "@dtyq/magic-flow/MagicFlow/types/flow"
-import type Schema from "@dtyq/magic-flow/MagicJsonSchemaEditor/types/Schema"
+import type { Expression } from "@delightful/delightful-flow/MagicConditionEdit/types/expression"
+import type { NodeTestingCtx } from "@delightful/delightful-flow/MagicFlow/context/NodeTesingContext/Context"
+import type { MagicFlow } from "@delightful/delightful-flow/MagicFlow/types/flow"
+import type Schema from "@delightful/delightful-flow/MagicJsonSchemaEditor/types/Schema"
 import type { Dayjs } from "dayjs"
 
 /** 流程类型 */

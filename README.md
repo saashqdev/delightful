@@ -179,7 +179,7 @@ cp config/.env_super_magic.example .env_super_magic
 
 
 Official Website: [https://www.bedelightful.ai](https://www.bedelightful.ai)
-Documentation: [https://docs.letsmagic.cn/en](https://docs.letsmagic.cn/en)
+Documentation: [https://docs.bedelightful.ai/en](https://docs.bedelightful.ai/en)
 
 ## Contribution
 

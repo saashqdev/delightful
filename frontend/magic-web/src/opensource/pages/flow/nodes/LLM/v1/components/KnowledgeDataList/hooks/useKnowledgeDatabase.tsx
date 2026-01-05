@@ -3,7 +3,7 @@
  */
 
 import type { Knowledge } from "@/types/knowledge"
-import { useCurrentNode } from "@dtyq/magic-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useMemo, useState, useEffect } from "react"
 import RenderLabel from "../../KnowledgeDatabaseSelect/RenderLabel"
 import { useFlowStore } from "@/opensource/stores/flow"

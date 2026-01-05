@@ -75,7 +75,7 @@ export default defineConfig({
 		alias: [
 			// // Enable when developing magic-flow in sync
 			// {
-			// 	find: "@dtyq/magic-flow",
+			// 	find: "@delightful/delightful-flow",
 			//     replacement: join(__dirname, "../magic-flow"),
 			// },
 		],

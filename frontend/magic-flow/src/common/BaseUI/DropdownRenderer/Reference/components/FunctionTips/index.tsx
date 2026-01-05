@@ -1,6 +1,6 @@
 import { FuncTipsStyle } from "@/MagicExpressionWidget/style"
 import { MethodArgsItem } from "@/MagicExpressionWidget/types"
-import { useFlowInteraction } from "@/MagicFlow/components/FlowDesign/context/FlowInteraction/useFlowInteraction"
+import { useFlowInteraction } from "@/DelightfulFlow/components/FlowDesign/context/FlowInteraction/useFlowInteraction"
 import { Popover, Tooltip } from "antd"
 import i18next from "i18next"
 import React, { useMemo } from "react"

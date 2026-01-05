@@ -1,7 +1,7 @@
 # syntax version.
 
 services:
-  # API 服务
+  # API service
   magic-service:
     image: ghcr.io/dtyq/magic-service:${MAGIC_SERVICE_TAG-latest}
     platform: ${PLATFORM}
@@ -63,7 +63,7 @@ services:
       - magic-sandbox-network
 
 
-  # Web 应用
+  # Web application
   magic-web:
     image: ghcr.io/dtyq/magic-web:${MAGIC_WEB_TAG-latest}
     container_name: magic-web
@@ -81,7 +81,7 @@ services:
     networks:
       - magic-sandbox-network
 
-  # Super Magic 服务
+  # Super Magic service
   super-magic:
     image: ghcr.io/dtyq/super-magic:${SUPER_MAGIC_TAG-latest}
     container_name: super-magic
@@ -98,7 +98,7 @@ services:
     networks:
       - magic-sandbox-network
 
-  # Magic 网关服务
+  # Magic gateway service
   magic-gateway:
     image: ghcr.io/dtyq/magic-gateway:${MAGIC_GATEWAY_TAG-latest}
     container_name: magic-gateway
@@ -117,7 +117,7 @@ services:
     networks:
       - magic-sandbox-network
 
-  # 沙箱网关服务
+  # Sandbox gateway service
   sandbox-gateway:
     image: ghcr.io/dtyq/sandbox-gateway:${SANDBOX_GATEWAY_TAG-latest}
     container_name: sandbox-gateway
@@ -142,7 +142,7 @@ services:
     networks:
       - magic-sandbox-network
 
- # Caddy 文件服务
+ # Caddy file service
   caddy:
     image: caddy:2.7-alpine
     container_name: magic-caddy
@@ -159,7 +159,7 @@ services:
     networks:
       - magic-sandbox-network
 
-  # MySQL 数据库服务
+  # MySQL database service
   db:
     image: mysql:8.0
     container_name: db
@@ -183,7 +183,7 @@ services:
     networks:
       - magic-sandbox-network
 
-  # Redis 缓存服务
+  # Redis cache service
   redis:
     image: redis:6-alpine
     container_name: magic-redis
@@ -203,7 +203,7 @@ services:
       - magic-sandbox-network
 
 
-  # RabbitMQ 消息队列服务
+  # RabbitMQ message queue service
   rabbitmq:
     image: rabbitmq:4.1-management-alpine
     container_name: magic-rabbitmq
@@ -213,8 +213,8 @@ services:
       RABBITMQ_DEFAULT_PASS: ${AMQP_PASSWORD}
       RABBITMQ_DEFAULT_VHOST: ${AMQP_VHOST}
     ports:
-      - "5672:5672"   # AMQP 协议端口
-      - "15672:15672" # 管理界面端口
+      - "5672:5672"   # AMQP protocol port
+      - "15672:15672" # Management console port
     volumes:
       - ./volumes/rabbitmq/data:/var/lib/rabbitmq
       - ./volumes/rabbitmq/logs:/var/log/rabbitmq
@@ -229,7 +229,7 @@ services:
       - magic-sandbox-network
 
 
-  # OpenSearch 搜索引擎服务
+  # OpenSearch search engine service
   # opensearch:
   #   container_name: magic-opensearch
   #   image: opensearchproject/opensearch:latest
@@ -256,7 +256,7 @@ services:
   #   env_file:
   #     - .env
 
-  # OpenSearch Dashboards 可视化界面
+  # OpenSearch Dashboards UI
   # opensearch-dashboards:
   #   container_name: magic-opensearch-dashboards
   #   image: opensearchproject/opensearch-dashboards:latest
@@ -275,7 +275,7 @@ services:
   #   env_file:
   #     - .env
 
-  # Qdrant 向量数据库服务
+  # Qdrant vector database service
   qdrant:
     image: qdrant/qdrant:latest
     container_name: magic-qdrant

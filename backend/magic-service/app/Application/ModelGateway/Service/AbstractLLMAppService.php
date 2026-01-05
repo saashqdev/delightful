@@ -71,7 +71,7 @@ abstract class AbstractLLMAppService extends AbstractKernelAppService
             ExceptionBuilder::throw(MagicApiErrorCode::TOKEN_DISABLED);
         }
 
-        // 兼容
+        // Compatibility handling for legacy params
         if (isset($businessParams['organization_id'])) {
             $businessParams['organization_code'] = $businessParams['organization_id'];
         }
@@ -99,7 +99,7 @@ abstract class AbstractLLMAppService extends AbstractKernelAppService
             $dataIsolation->setSourceId('api_platform');
         }
 
-        // 设置业务参数
+        // Set business parameters
         $dataIsolation->setUserName($this->getBusinessParam('user_name', '', $businessParams));
 
         if ($dataIsolation->getAccessToken()->getType()->isUser()) {

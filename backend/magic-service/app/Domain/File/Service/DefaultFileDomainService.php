@@ -31,7 +31,7 @@ class DefaultFileDomainService
     }
 
     /**
-     * 获取文件.
+     * Get files.
      * @return DefaultFileEntity[]
      */
     public function getByOrganizationCodeAndBusinessType(DefaultFileBusinessType $defaultFileBusiness, string $organizationCode): array

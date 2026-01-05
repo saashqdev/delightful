@@ -38,7 +38,7 @@ class ExternalHttpExecutorTest extends TestCase
         // Test with real Amap MCP server
         $mcpServerConfig = new McpServerConfig(
             type: McpType::Http,
-            name: '高德地图',
+            name: 'Gaode Map',
             url: 'https://mcp.amap.com/sse?key=demo-test-key-12345'
         );
 

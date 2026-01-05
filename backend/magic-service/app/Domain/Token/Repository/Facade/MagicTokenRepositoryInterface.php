@@ -13,7 +13,7 @@ use App\Domain\Token\Entity\ValueObject\MagicTokenType;
 interface MagicTokenRepositoryInterface
 {
     /**
-     * 获取 token 关联值.比如 token对应的 magic_id是多少.
+     * Retrieve the entity related to a token (for example, which magic_id a token belongs to).
      */
     public function getTokenEntity(MagicTokenEntity $tokenDTO): ?MagicTokenEntity;
 

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\LongTermMemory\Enum;
 
 /**
- * 记忆评估状态枚举.
+ * Memory evaluation status enum.
  */
 enum MemoryEvaluationStatus: string
 {

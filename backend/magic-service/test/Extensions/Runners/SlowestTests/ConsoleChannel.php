@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Extensions\Runners\SlowestTests;
 
 /**
- * 控制台输出通道.
+ * Console output channel.
  */
 final class ConsoleChannel extends Channel
 {
@@ -21,10 +21,10 @@ final class ConsoleChannel extends Channel
         }
 
         echo "\n";
-        echo "最慢的测试：\n";
+        echo "Slowest tests:\n";
 
         foreach ($tests as $test => $time) {
-            printf("  %s: %s 毫秒\n", $test, $time);
+            printf("  %s: %s ms\n", $test, $time);
         }
     }
 }

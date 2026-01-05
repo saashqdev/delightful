@@ -19,10 +19,10 @@ class CommentDomainService
     }
 
     /**
-     * 创建一个新的评论并维护相关的索引和附件。
-     *
-     * @param CommentEntity $commentEntity 评论实体
-     * @return CommentEntity 创建后的评论实体
+    * Create a new comment and maintain related indexes and attachments.
+    *
+    * @param CommentEntity $commentEntity Comment entity
+    * @return CommentEntity Created comment entity
      */
     public function create(string $organizationCode, CommentEntity $commentEntity): CommentEntity
     {
@@ -30,10 +30,10 @@ class CommentDomainService
     }
 
     /**
-     * 更新指定的评论内容和附件。
-     *
-     * @param RequestContext $requestContext 请求上下文
-     * @param CommentEntity $commentEntity 要更新的评论实体
+    * Update comment content and attachments.
+    *
+    * @param RequestContext $requestContext Request context
+    * @param CommentEntity $commentEntity Comment entity to update
      */
     public function updateComment(
         RequestContext $requestContext,
@@ -43,11 +43,11 @@ class CommentDomainService
     }
 
     /**
-     * 根据条件获取评论列表。
-     *
-     * @param RequestContext $requestContext 请求上下文
-     * @param GetCommentsWhereVo $whereVo 查询条件值对象
-     * @return array<CommentEntity> 评论实体数组
+    * Get comments by filter conditions.
+    *
+    * @param RequestContext $requestContext Request context
+    * @param GetCommentsWhereVo $whereVo Filter value object
+    * @return array<CommentEntity> Comment entities
      */
     public function getCommentsByConditions(
         RequestContext $requestContext,
@@ -57,11 +57,11 @@ class CommentDomainService
     }
 
     /**
-     * 根据评论ID数组获取对应的评论列表。
-     *
-     * @param RequestContext $requestContext 请求上下文
-     * @param array $commentIds 评论ID数组
-     * @return array<CommentEntity> 评论实体数组
+    * Get comments by an array of IDs.
+    *
+    * @param RequestContext $requestContext Request context
+    * @param array $commentIds Comment ID list
+    * @return array<CommentEntity> Comment entities
      */
     public function getCommentsByIds(
         RequestContext $requestContext,
@@ -71,11 +71,11 @@ class CommentDomainService
     }
 
     /**
-     * 根据评论ID获取单个评论实体。
-     *
-     * @param RequestContext $requestContext 请求上下文
-     * @param int $commentId 评论ID
-     * @return ?CommentEntity 评论实体，如果不存在则返回null
+    * Get a single comment by ID.
+    *
+    * @param RequestContext $requestContext Request context
+    * @param int $commentId Comment ID
+    * @return ?CommentEntity Comment entity or null if missing
      */
     public function getCommentById(
         RequestContext $requestContext,
@@ -85,11 +85,11 @@ class CommentDomainService
     }
 
     /**
-     * 删除指定的评论。
-     *
-     * @param RequestContext $requestContext 请求上下文
-     * @param int $commentId 评论ID
-     * @return array 删除的评论ID数组
+    * Delete a comment by ID.
+    *
+    * @param RequestContext $requestContext Request context
+    * @param int $commentId Comment ID
+    * @return array Deleted comment IDs
      */
     public function delete(RequestContext $requestContext, int $commentId): array
     {
@@ -97,11 +97,11 @@ class CommentDomainService
     }
 
     /**
-     * 批量删除指定的评论及其所有子评论。
-     *
-     * @param RequestContext $requestContext 请求上下文
-     * @param array $commentIds 要删除的评论ID数组
-     * @return array 删除的评论ID数组
+    * Delete comments in batch and all their children.
+    *
+    * @param RequestContext $requestContext Request context
+    * @param array $commentIds Comment IDs to delete
+    * @return array Deleted comment IDs
      */
     public function batchDelete(
         RequestContext $requestContext,
@@ -111,10 +111,10 @@ class CommentDomainService
     }
 
     /**
-     * 批量恢复已删除的评论。
-     *
-     * @param RequestContext $requestContext 请求上下文
-     * @param array $commentIds 要恢复的评论ID数组
+    * Restore deleted comments in batch.
+    *
+    * @param RequestContext $requestContext Request context
+    * @param array $commentIds Comment IDs to restore
      */
     public function batchRestore(
         RequestContext $requestContext,
@@ -124,10 +124,10 @@ class CommentDomainService
     }
 
     /**
-     * 根据资源ID获取所有相关的评论。
-     *
-     * @param int $resourceId 资源ID
-     * @return array<CommentEntity> 评论实体数组
+    * Get all comments for a resource ID.
+    *
+    * @param int $resourceId Resource ID
+    * @return array<CommentEntity> Comment entities
      */
     public function getCommentsByResourceId(string $organizationCode, int $resourceId): array
     {
@@ -135,11 +135,11 @@ class CommentDomainService
     }
 
     /**
-     * 根据查询条件获取评论列表。
-     *
-     * @param RequestContext $requestContext 请求上下文
-     * @param GetCommentsWhereVo $commentsWhereVo 查询条件值对象
-     * @return array<CommentEntity> 评论实体数组
+    * Query comments by conditions.
+    *
+    * @param RequestContext $requestContext Request context
+    * @param GetCommentsWhereVo $commentsWhereVo Filter value object
+    * @return array<CommentEntity> Comment entities
      */
     public function query(RequestContext $requestContext, GetCommentsWhereVo $commentsWhereVo): array
     {

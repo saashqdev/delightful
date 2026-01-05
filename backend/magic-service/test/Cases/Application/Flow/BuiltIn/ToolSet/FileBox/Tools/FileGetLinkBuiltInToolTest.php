@@ -45,7 +45,7 @@ class FileGetLinkBuiltInToolTest extends ExecuteManagerBaseTest
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "root node",
         "description": "",
         "items": null,
         "value": null,
@@ -56,8 +56,8 @@ class FileGetLinkBuiltInToolTest extends ExecuteManagerBaseTest
             "key": {
                 "type": "string",
                 "key": "key",
-                "title": "文件key",
-                "description": "文件key",
+                "title": "file key",
+                "description": "file key",
                 "required": null,
                 "value": {
                     "type": "const",

@@ -13,168 +13,168 @@ use App\Domain\LongTermMemory\Entity\ValueObject\MemoryCategory;
 use App\Domain\LongTermMemory\Entity\ValueObject\MemoryType;
 
 /**
- * 长期记忆仓储接口.
+ * Long-term memory repository interface.
  */
 interface LongTermMemoryRepositoryInterface
 {
     /**
-     * 根据ID查找记忆.
+     * Find memory by ID.
      */
     public function findById(string $id): ?LongTermMemoryEntity;
 
     /**
-     * 根据ID列表批量查找记忆.
-     * @param array $ids ID列表
-     * @return array<LongTermMemoryEntity> 记忆实体列表
+     * Find memories by a list of IDs.
+     * @param array $ids ID list
+     * @return array<LongTermMemoryEntity> List of memory entities
      */
     public function findByIds(array $ids): array;
 
     /**
-     * 通用查询方法 (使用 DTO).
+     * Generic query method (uses DTO).
      * @return LongTermMemoryEntity[]
      */
     public function findMemories(MemoryQueryDTO $dto): array;
 
     /**
-     * 根据查询条件统计记忆数量.
+     * Count memories by query conditions.
      */
     public function countMemories(MemoryQueryDTO $dto): int;
 
     /**
-     * 根据组织、应用、用户查找所有记忆.
+     * Find all memories by organization, application, and user.
      */
     public function findByUser(string $orgId, string $appId, string $userId, ?string $status = null): array;
 
     /**
-     * 根据组织、应用、用户查找有效记忆（按分数排序）.
+     * Find effective memories by organization, application, and user (sorted by score).
      */
     public function findEffectiveMemoriesByUser(string $orgId, string $appId, string $userId, string $projectId, int $limit = 50): array;
 
     /**
-     * 根据标签查找记忆.
+     * Find memories by tags.
      */
     public function findByTags(string $orgId, string $appId, string $userId, array $tags, ?string $status = null): array;
 
     /**
-     * 根据记忆类型查找记忆.
+     * Find memories by memory type.
      */
     public function findByType(string $orgId, string $appId, string $userId, MemoryType $type, ?string $status = null): array;
 
     /**
-     * 根据内容关键词搜索记忆.
+     * Search memories by content keyword.
      */
     public function searchByContent(string $orgId, string $appId, string $userId, string $keyword, ?string $status = null): array;
 
     /**
-     * 查找需要淘汰的记忆.
+     * Find memories to evict.
      */
     public function findMemoriesToEvict(string $orgId, string $appId, string $userId): array;
 
     /**
-     * 查找需要压缩的记忆.
+     * Find memories that need to be compressed.
      */
     public function findMemoriesToCompress(string $orgId, string $appId, string $userId): array;
 
     /**
-     * 保存记忆.
+     * Save a memory.
      */
     public function save(LongTermMemoryEntity $memory): bool;
 
     /**
-     * 批量保存记忆.
+     * Save memories in bulk.
      */
     public function saveBatch(array $memories): bool;
 
     /**
-     * 更新记忆.
+     * Update a memory.
      */
     public function update(LongTermMemoryEntity $memory): bool;
 
     /**
-     * 批量更新记忆.
-     * @param array<LongTermMemoryEntity> $memories 记忆实体列表
-     * @return bool 是否更新成功
+     * Update memories in bulk.
+     * @param array<LongTermMemoryEntity> $memories Memory entity list
+     * @return bool Whether the update succeeded
      */
     public function updateBatch(array $memories): bool;
 
     /**
-     * 删除记忆.
+     * Delete a memory.
      */
     public function delete(string $id): bool;
 
     /**
-     * 批量删除记忆.
+     * Delete memories in bulk.
      */
     public function deleteBatch(array $ids): bool;
 
     /**
-     * 软删除记忆.
+     * Soft-delete a memory.
      */
     public function softDelete(string $id): bool;
 
     /**
-     * 统计用户的记忆数量.
+     * Count memories for a user.
      */
     public function countByUser(string $orgId, string $appId, string $userId): int;
 
     /**
-     * 统计用户各类型记忆的数量.
+     * Count memories by type for a user.
      */
     public function countByUserAndType(string $orgId, string $appId, string $userId): array;
 
     /**
-     * 获取用户记忆的总大小（字符数）.
+     * Get the total size of a user's memories (character count).
      */
     public function getTotalSizeByUser(string $orgId, string $appId, string $userId): int;
 
     /**
-     * 批量检查记忆是否属于用户.
-     * @param array $memoryIds 记忆ID列表
-     * @param string $orgId 组织ID
-     * @param string $appId 应用ID
-     * @param string $userId 用户ID
-     * @return array 返回属于用户的记忆ID列表
+     * Validate in bulk whether memories belong to a user.
+     * @param array $memoryIds Memory ID list
+     * @param string $orgId Organization ID
+     * @param string $appId Application ID
+     * @param string $userId User ID
+     * @return array IDs belonging to the user
      */
     public function filterMemoriesByUser(array $memoryIds, string $orgId, string $appId, string $userId): array;
 
     /**
-     * 批量更新记忆的启用状态.
-     * @param array $memoryIds 记忆ID列表
-     * @param bool $enabled 启用状态
-     * @param string $orgId 组织ID
-     * @param string $appId 应用ID
-     * @param string $userId 用户ID
-     * @return int 更新的记录数量
+     * Update enabled status for multiple memories.
+     * @param array $memoryIds Memory ID list
+     * @param bool $enabled Enabled status
+     * @param string $orgId Organization ID
+     * @param string $appId Application ID
+     * @param string $userId User ID
+     * @return int Number of updated records
      */
     public function batchUpdateEnabled(array $memoryIds, bool $enabled, string $orgId, string $appId, string $userId): int;
 
     /**
-     * 获取指定分类的已启用记忆数量.
-     * @param string $orgId 组织ID
-     * @param string $appId 应用ID
-     * @param string $userId 用户ID
-     * @param MemoryCategory $category 记忆分类
-     * @return int 记忆数量
+     * Get the count of enabled memories for a category.
+     * @param string $orgId Organization ID
+     * @param string $appId Application ID
+     * @param string $userId User ID
+     * @param MemoryCategory $category Memory category
+     * @return int Memory count
      */
     public function getEnabledMemoryCountByCategory(string $orgId, string $appId, string $userId, MemoryCategory $category): int;
 
     /**
-     * 根据项目ID删除记忆.
-     * @param string $orgId 组织ID
-     * @param string $appId 应用ID
-     * @param string $userId 用户ID
-     * @param string $projectId 项目ID
-     * @return int 删除的记录数量
+     * Delete memories by project ID.
+     * @param string $orgId Organization ID
+     * @param string $appId Application ID
+     * @param string $userId User ID
+     * @param string $projectId Project ID
+     * @return int Number of deleted records
      */
     public function deleteByProjectId(string $orgId, string $appId, string $userId, string $projectId): int;
 
     /**
-     * 根据项目ID列表批量删除记忆.
-     * @param string $orgId 组织ID
-     * @param string $appId 应用ID
-     * @param string $userId 用户ID
-     * @param array $projectIds 项目ID列表
-     * @return int 删除的记录数量
+     * Delete memories in bulk by project IDs.
+     * @param string $orgId Organization ID
+     * @param string $appId Application ID
+     * @param string $userId User ID
+     * @param array $projectIds Project ID list
+     * @return int Number of deleted records
      */
     public function deleteByProjectIds(string $orgId, string $appId, string $userId, array $projectIds): int;
 }

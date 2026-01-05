@@ -14,41 +14,41 @@ class organizationstructureseeder extends Seeder
     public function run(): void
     {
         $organizationCodes = ['test001', 'test002'];
-        $organizationNames = ['测试组织', '演示组织'];
+        $organizationNames = ['Test Org', 'Demo Org'];
         $departmentStructure = [
             [
-                'name' => '', // 会被 $organizationNames 替换
+                'name' => '', // Will be replaced by $organizationNames
                 'level' => 0,
                 'department_id' => PlatformRootDepartmentId::Magic,
-                'parent_department_id' => PlatformRootDepartmentId::Magic, // 表明自己就是根部门
+                'parent_department_id' => PlatformRootDepartmentId::Magic, // Marks itself as the root department
                 'children' => [
                     [
-                        'name' => '技术部',
+                        'name' => 'Technology Department',
                         'level' => 1,
                         'children' => [
-                            ['name' => '前端组', 'level' => 2],
-                            ['name' => '后端组', 'level' => 2],
-                            ['name' => '测试组', 'level' => 2],
+                            ['name' => 'Frontend Team', 'level' => 2],
+                            ['name' => 'Backend Team', 'level' => 2],
+                            ['name' => 'QA Team', 'level' => 2],
                         ],
                     ],
                     [
-                        'name' => '产品部',
+                        'name' => 'Product Department',
                         'level' => 1,
                         'children' => [
-                            ['name' => '设计组', 'level' => 2],
-                            ['name' => '产品组', 'level' => 2],
+                            ['name' => 'Design Team', 'level' => 2],
+                            ['name' => 'Product Team', 'level' => 2],
                         ],
                     ],
                     [
-                        'name' => '市场部',
+                        'name' => 'Marketing Department',
                         'level' => 1,
                         'children' => [
-                            ['name' => '营销组', 'level' => 2],
-                            ['name' => '销售组', 'level' => 2],
+                            ['name' => 'Marketing Team', 'level' => 2],
+                            ['name' => 'Sales Team', 'level' => 2],
                         ],
                     ],
                     [
-                        'name' => '人事部',
+                        'name' => 'HR Department',
                         'level' => 1,
                     ],
                 ],
@@ -56,23 +56,23 @@ class organizationstructureseeder extends Seeder
         ];
 
         try {
-            // 开启事务
+            // Begin transaction
             Db::beginTransaction();
 
-            // 确保环境记录存在
+            // Ensure the environment record exists
             $environmentId = env('MAGIC_ENV_ID');
 
-            // 1. 创建/检查组织与环境的关系
+            // 1. Create/check the relationship between organization and environment
             foreach ($organizationCodes as $index => $orgCode) {
-                // 检查组织环境关联是否已存在
+                // Check if the org-environment association already exists
                 $existingOrgEnv = Db::table('magic_organizations_environment')
                     ->where('magic_organization_code', $orgCode)
                     ->first();
 
                 if ($existingOrgEnv) {
-                    echo "组织环境关联已存在: {$existingOrgEnv['magic_organization_code']}, 登录码: {$existingOrgEnv['login_code']}" . PHP_EOL;
+                    echo "Org-environment association already exists: {$existingOrgEnv['magic_organization_code']}, login code: {$existingOrgEnv['login_code']}" . PHP_EOL;
                 } else {
-                    // 创建组织环境关联
+                    // Create org-environment association
                     $orgEnvData = [
                         'login_code' => random_int(100000, 999999),
                         'magic_organization_code' => $orgCode,
@@ -83,62 +83,65 @@ class organizationstructureseeder extends Seeder
                     ];
 
                     $orgEnvId = Db::table('magic_organizations_environment')->insertGetId($orgEnvData);
-                    echo "已创建组织环境关联: {$orgCode}, ID: {$orgEnvId}" . PHP_EOL;
+                    echo "Created org-environment association: {$orgCode}, ID: {$orgEnvId}" . PHP_EOL;
                 }
 
-                // 2. 创建部门结构
+                // 2. Create department structure
                 $departmentStructure[0]['name'] = $organizationNames[$index];
                 $this->createDepartments($departmentStructure, $orgCode);
 
-                // 3. 分配用户到部门
+                // 3. Assign users to departments
                 $this->assignUsersToDepartments($orgCode);
             }
 
-            // 提交事务
+            // Commit transaction
             Db::commit();
-            echo '组织架构数据填充完成' . PHP_EOL;
+            echo 'Organization structure seeding completed' . PHP_EOL;
         } catch (Throwable $e) {
-            // 回滚事务
+            // Roll back transaction
             Db::rollBack();
-            echo '数据填充失败: ' . $e->getMessage() . PHP_EOL;
+            echo 'Data seeding failed: ' . $e->getMessage() . PHP_EOL;
             echo 'file: ' . $e->getFile() . PHP_EOL;
             echo 'line: ' . $e->getLine() . PHP_EOL;
             echo 'trace: ' . $e->getTraceAsString() . PHP_EOL;
 
-            // 重新抛出异常以终止执行
+            // Rethrow to stop execution
             throw $e;
         }
     }
 
     /**
-     * 递归创建部门.
+     * Recursively create departments.
      */
     private function createDepartments(array $departments, string $orgCode, ?string $parentDepartmentId = null, ?string $path = null): void
     {
         foreach ($departments as $dept) {
-            // 使用预设部门ID或生成新的部门ID
+            // Use a preset department ID or generate a new one
             $departmentId = isset($dept['department_id']) ? $dept['department_id'] : IdGenerator::getSnowId();
 
-            // 使用预设父部门ID或使用传入的父部门ID
+            // Use a preset parent department ID or the provided parent ID
             $currentParentDepartmentId = isset($dept['parent_department_id']) ? $dept['parent_department_id'] : $parentDepartmentId;
 
-            // 构建部门路径
+            // Build the department path
             if (isset($dept['department_id']) && $dept['department_id'] === PlatformRootDepartmentId::Magic) {
-                // 如果是组织层级（根部门），使用特殊路径
+                // If this is the org level (root dept), use the special path
                 $currentPath = PlatformRootDepartmentId::Magic;
             } else {
-                // 否则使用常规路径构建逻辑
+                // Otherwise use the regular path logic
                 $currentPath = $path ? $path . '/' . $departmentId : PlatformRootDepartmentId::Magic . '/' . $departmentId;
             }
 
-            // 构建部门数据
+            // Build department data
             $departmentData = [
                 'department_id' => $departmentId,
                 'parent_department_id' => $currentParentDepartmentId,
                 'name' => $dept['name'],
-                'i18n_name' => json_encode(['zh-CN' => $dept['name'], 'en-US' => $this->translateDepartmentName($dept['name'])]),
+                'i18n_name' => json_encode([
+                    'zh-CN' => $dept['name'],
+                    'en-US' => $this->translateDepartmentName($dept['name']),
+                ]),
                 'order' => '0',
-                'leader_user_id' => '', // 暂时空着，后面更新
+                'leader_user_id' => '', // Placeholder, will be updated later
                 'organization_code' => $orgCode,
                 'status' => json_encode(['is_deleted' => false]),
                 'document_id' => IdGenerator::getSnowId(),
@@ -149,7 +152,7 @@ class organizationstructureseeder extends Seeder
                 'updated_at' => date('Y-m-d H:i:s'),
             ];
 
-            // 检查部门是否已存在
+            // Check if the department already exists
             $existingDept = Db::table('magic_contact_departments')
                 ->where('organization_code', $orgCode)
                 ->where('name', $dept['name'])
@@ -157,16 +160,16 @@ class organizationstructureseeder extends Seeder
                 ->first();
 
             if ($existingDept) {
-                echo "部门已存在: {$dept['name']}, ID: {$existingDept['department_id']}" . PHP_EOL;
+                echo "Department already exists: {$dept['name']}, ID: {$existingDept['department_id']}" . PHP_EOL;
                 $departmentId = $existingDept['department_id'];
                 $currentPath = $existingDept['path'];
             } else {
-                // 创建部门
+                // Create department
                 Db::table('magic_contact_departments')->insert($departmentData);
-                echo "已创建部门: {$dept['name']}, ID: {$departmentId}, 组织: {$orgCode}" . PHP_EOL;
+                echo "Created department: {$dept['name']}, ID: {$departmentId}, org: {$orgCode}" . PHP_EOL;
             }
 
-            // 递归创建子部门
+            // Recursively create child departments
             if (isset($dept['children']) && ! empty($dept['children'])) {
                 $this->createDepartments($dept['children'], $orgCode, (string) $departmentId, (string) $currentPath);
             }
@@ -174,69 +177,69 @@ class organizationstructureseeder extends Seeder
     }
 
     /**
-     * 英文部门名称转换.
+     * English department name translations.
      */
     private function translateDepartmentName(string $name): string
     {
         $translations = [
-            '总部' => 'Headquarters',
-            '技术部' => 'Technology Department',
-            '产品部' => 'Product Department',
-            '市场部' => 'Marketing Department',
-            '人事部' => 'HR Department',
-            '前端组' => 'Frontend Team',
-            '后端组' => 'Backend Team',
-            '测试组' => 'QA Team',
-            '设计组' => 'Design Team',
-            '产品组' => 'Product Team',
-            '营销组' => 'Marketing Team',
-            '销售组' => 'Sales Team',
+            'Headquarters' => 'Headquarters',
+            'Technology Department' => 'Technology Department',
+            'Product Department' => 'Product Department',
+            'Marketing Department' => 'Marketing Department',
+            'HR Department' => 'HR Department',
+            'Frontend Team' => 'Frontend Team',
+            'Backend Team' => 'Backend Team',
+            'QA Team' => 'QA Team',
+            'Design Team' => 'Design Team',
+            'Product Team' => 'Product Team',
+            'Marketing Team' => 'Marketing Team',
+            'Sales Team' => 'Sales Team',
         ];
 
         return $translations[$name] ?? $name;
     }
 
     /**
-     * 分配用户到部门.
+     * Assign users to departments.
      */
     private function assignUsersToDepartments(string $orgCode): void
     {
-        // 获取该组织下的用户
+        // Get users under the organization
         $users = Db::table('magic_contact_users')
             ->where('organization_code', $orgCode)
             ->get()
             ->toArray();
 
         if (empty($users)) {
-            echo "组织 {$orgCode} 下没有用户，跳过部门分配" . PHP_EOL;
+            echo "No users under org {$orgCode}; skipping department assignment" . PHP_EOL;
             return;
         }
 
-        // 获取该组织下的部门
+        // Get departments under the organization
         $departments = Db::table('magic_contact_departments')
             ->where('organization_code', $orgCode)
             ->get()
             ->toArray();
 
         if (empty($departments)) {
-            echo "组织 {$orgCode} 下没有部门，跳过部门分配" . PHP_EOL;
+            echo "No departments under org {$orgCode}; skipping department assignment" . PHP_EOL;
             return;
         }
 
-        // 记录主管信息的数组
+        // Track department leaders
         $leaderInfo = [];
 
-        // 先找出管理员用户作为总部主管
+        // Find an admin user to lead headquarters
         $adminUser = null;
         foreach ($users as $user) {
-            if (str_contains($user['nickname'], '管理员')) {
+            if (str_contains($user['nickname'], 'admin')) {
                 $adminUser = $user;
                 break;
             }
         }
 
         if ($adminUser) {
-            // 获取总部部门（根部门）
+            // Get the HQ department (root)
             $hqDept = null;
             foreach ($departments as $dept) {
                 if ($dept['parent_department_id'] === PlatformRootDepartmentId::Magic
@@ -249,62 +252,62 @@ class organizationstructureseeder extends Seeder
             }
 
             if ($hqDept) {
-                // 更新总部部门，设置主管
+                // Update HQ department leader
                 Db::table('magic_contact_departments')
                     ->where('id', $hqDept['id'])
                     ->update(['leader_user_id' => $adminUser['user_id']]);
 
                 $leaderInfo[$hqDept['department_id']] = $adminUser['user_id'];
 
-                // 将管理员分配到总部
+                // Assign admin to HQ
                 $this->assignUserToDepartment($adminUser, $hqDept, true, null, $orgCode);
-                echo "已将用户 {$adminUser['nickname']}(ID: {$adminUser['user_id']}) 设为总部主管" . PHP_EOL;
+                echo "Set user {$adminUser['nickname']}(ID: {$adminUser['user_id']}) as HQ leader" . PHP_EOL;
 
-                // 确保管理员至少在2个部门中
-                $adminAssignedDepartments = 1; // 已分配到总部
+                // Ensure the admin is in at least 2 departments
+                $adminAssignedDepartments = 1; // Already assigned to HQ
 
-                // 为每个一级部门分配领导
+                // Assign leaders for each level-1 department
                 $level1Depts = array_filter($departments, function ($dept) {
                     return $dept['level'] === 1;
                 });
 
-                // 首先将管理员分配到第一个一级部门
+                // First assign the admin to the first level-1 department
                 if (! empty($level1Depts)) {
                     $firstL1Dept = reset($level1Depts);
                     $this->assignUserToDepartment($adminUser, $firstL1Dept, true, null, $orgCode);
-                    echo "已将管理员 {$adminUser['nickname']}(ID: {$adminUser['user_id']}) 分配到{$firstL1Dept['name']}" . PHP_EOL;
+                    echo "Assigned admin {$adminUser['nickname']}(ID: {$adminUser['user_id']}) to {$firstL1Dept['name']}" . PHP_EOL;
                     ++$adminAssignedDepartments;
                 }
 
-                // 分配其他用户到不同部门
-                $assignedUsers = 1; // 已分配管理员
+                // Assign other users to different departments
+                $assignedUsers = 1; // Admin already assigned
                 $totalUsers = count($users);
 
                 foreach ($level1Depts as $dept) {
-                    // 如果还有未分配的普通用户，则分配一个作为部门主管
+                    // If there are unassigned regular users, assign one as department leader
                     if ($assignedUsers < $totalUsers) {
-                        // 找一个非管理员用户
+                        // Find a non-admin user
                         $deptLeader = null;
                         foreach ($users as $user) {
-                            if ($user['user_id'] !== $adminUser['user_id'] && str_contains($user['nickname'], '普通用户')) {
+                            if ($user['user_id'] !== $adminUser['user_id'] && str_contains($user['nickname'], 'user')) {
                                 $deptLeader = $user;
                                 break;
                             }
                         }
 
                         if ($deptLeader) {
-                            // 更新部门，设置主管
+                            // Update department leader
                             Db::table('magic_contact_departments')
                                 ->where('id', $dept['id'])
                                 ->update(['leader_user_id' => $deptLeader['user_id']]);
 
                             $leaderInfo[$dept['department_id']] = $deptLeader['user_id'];
 
-                            // 将该用户分配到该部门，并设为主管
+                            // Assign the user to the department and set as leader
                             $this->assignUserToDepartment($deptLeader, $dept, false, $adminUser['user_id'], $orgCode);
-                            echo "已将用户 {$deptLeader['nickname']}(ID: {$deptLeader['user_id']}) 分配到{$dept['name']}" . PHP_EOL;
+                            echo "Assigned user {$deptLeader['nickname']}(ID: {$deptLeader['user_id']}) to {$dept['name']}" . PHP_EOL;
 
-                            // 不再考虑这个用户
+                            // Remove this user from consideration
                             $users = array_filter($users, function ($user) use ($deptLeader) {
                                 return $user['user_id'] !== $deptLeader['user_id'];
                             });
@@ -314,13 +317,13 @@ class organizationstructureseeder extends Seeder
                     }
                 }
 
-                // 分配剩余用户到二级部门
+                // Assign remaining users to level-2 departments
                 $level2Depts = array_filter($departments, function ($dept) {
                     return $dept['level'] === 2;
                 });
 
                 foreach ($level2Depts as $dept) {
-                    // 找出该部门的父部门
+                    // Find the parent department
                     $parentDept = null;
                     foreach ($departments as $d) {
                         if ($d['department_id'] === $dept['parent_department_id']) {
@@ -329,17 +332,17 @@ class organizationstructureseeder extends Seeder
                         }
                     }
 
-                    // 使用父部门的leader作为当前用户的leader
+                    // Use the parent department's leader as the leader
                     $leaderUserId = $parentDept ? ($leaderInfo[$parentDept['department_id']] ?? null) : null;
 
-                    // 分配剩余用户到部门
+                    // Assign remaining users to the department
                     foreach ($users as $user) {
                         if ($assignedUsers >= $totalUsers) {
-                            break; // 所有用户都已分配
+                            break; // All users assigned
                         }
 
                         $this->assignUserToDepartment($user, $dept, false, $leaderUserId, $orgCode);
-                        echo "已将用户 {$user['nickname']}(ID: {$user['user_id']}) 分配到{$dept['name']}" . PHP_EOL;
+                        echo "Assigned user {$user['nickname']}(ID: {$user['user_id']}) to {$dept['name']}" . PHP_EOL;
 
                         ++$assignedUsers;
                     }
@@ -349,11 +352,11 @@ class organizationstructureseeder extends Seeder
     }
 
     /**
-     * 将用户分配到部门.
+     * Assign a user to a department.
      */
     private function assignUserToDepartment(array $user, array $department, bool $isLeader = false, ?string $leaderUserId = null, string $orgCode = ''): void
     {
-        // 检查是否已分配
+        // Check if already assigned
         $existingAssignment = Db::table('magic_contact_department_users')
             ->where('user_id', $user['user_id'])
             ->where('department_id', $department['department_id'])
@@ -361,42 +364,42 @@ class organizationstructureseeder extends Seeder
             ->first();
 
         if ($existingAssignment) {
-            echo "用户 {$user['nickname']} 已分配到部门 {$department['name']}" . PHP_EOL;
+            echo "User {$user['nickname']} is already assigned to department {$department['name']}" . PHP_EOL;
             return;
         }
 
-        // 创建部门用户关联
+        // Create department-user relation
         $deptUserData = [
             'magic_id' => $user['magic_id'],
             'user_id' => $user['user_id'],
             'department_id' => $department['department_id'],
             'is_leader' => $isLeader ? 1 : 0,
             'organization_code' => $orgCode,
-            'city' => '北京',
+            'city' => 'Beijing',
             'country' => 'CN',
             'join_time' => (string) time(),
             'employee_no' => 'EMP' . substr($user['user_id'], -4),
-            'employee_type' => 1, // 正式员工
+            'employee_type' => 1, // Full-time employee
             'orders' => '0',
-            'custom_attrs' => json_encode(['技能' => '编程', '爱好' => '阅读']),
+            'custom_attrs' => json_encode(['Skills' => 'Programming', 'Hobbies' => 'Reading']),
             'is_frozen' => 0,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ];
 
-        // 只给主管设置职位
+        // Only set job title for leaders
         if ($isLeader) {
-            $deptUserData['job_title'] = '部门经理';
+            $deptUserData['job_title'] = 'Department Manager';
         }
 
-        // 设置直属领导
+        // Set direct leader
         if ($leaderUserId) {
             $deptUserData['leader_user_id'] = $leaderUserId;
         }
 
         Db::table('magic_contact_department_users')->insert($deptUserData);
 
-        // 更新部门的员工数量
+        // Update the department headcount
         Db::table('magic_contact_departments')
             ->where('department_id', $department['department_id'])
             ->increment('employee_sum');

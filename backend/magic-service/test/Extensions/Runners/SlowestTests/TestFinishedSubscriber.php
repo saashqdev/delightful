@@ -23,23 +23,23 @@ class TestFinishedSubscriber implements FinishedSubscriber
     {
         $test = $event->test();
 
-        // 只记录测试方法，不记录测试类
+        // Only record test methods, not test classes
         if (! $test->isTestMethod()) {
             return;
         }
 
         $testName = $test->name();
 
-        // 兼容 PHPUnit 10.5+ 的方式获取持续时间
+        // Compatible with PHPUnit 10.5+ method to get duration
         $duration = 0;
 
-        // 尝试使用 durationSincePrevious 方法
+        // Try to use the durationSincePrevious method
         if (method_exists($event->telemetryInfo(), 'durationSincePrevious')) {
             $duration = $event->telemetryInfo()->durationSincePrevious()->asFloat();
         }
-        // 如果不存在，使用备选方案（固定值）
+        // If it doesn't exist, use alternative (fixed value)
         else {
-            $duration = 0.5; // 默认使用0.5秒作为测试时间
+            $duration = 0.5; // Default to 0.5 seconds as test time
         }
 
         $this->channel->addTest($testName, $duration);

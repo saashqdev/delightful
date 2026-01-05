@@ -24,7 +24,7 @@ final class Extension implements PHPUnitExtension
         RunnerFacade $facade,
         ParameterCollection $parameters
     ): void {
-        // 创建 Channel
+        // Create Channel
         $rows = $parameters->has('maxTests')
             ? (int) $parameters->get('maxTests')
             : 10;
@@ -35,7 +35,7 @@ final class Extension implements PHPUnitExtension
 
         $this->channel = new ConsoleChannel($rows, $min);
 
-        // 注册事件订阅者
+        // Register event subscribers
         $facade->registerSubscribers(
             new TestFinishedSubscriber($this->channel),
             new TestRunnerExecutionFinishedSubscriber($this->channel)

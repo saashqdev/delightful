@@ -12,30 +12,30 @@ use App\Domain\Provider\DTO\Item\ProviderConfigItem;
 abstract class AbstractProviderDomainService
 {
     /**
-     * 处理脱敏后的配置数据
-     * 如果数据是脱敏格式（前3位+星号+后3位），则使用原始值；否则使用新值
+     * Process config values that may be masked.
+     * If a value looks masked (first 3 chars + asterisks + last 3 chars), fall back to the old raw value; otherwise keep the new value.
      *
-     * @param ProviderConfigItem $newConfig 新的配置数据（可能包含脱敏信息）
-     * @param ProviderConfigItem $oldConfig 旧的配置数据（包含原始值）
-     * @return ProviderConfigItem 处理后的配置数据
+     * @param ProviderConfigItem $newConfig New config data (may contain masked values)
+     * @param ProviderConfigItem $oldConfig Old config data (contains original values)
+     * @return ProviderConfigItem Config data after unmasking
      */
     protected function processDesensitizedConfig(
         ProviderConfigItem $newConfig,
         ProviderConfigItem $oldConfig
     ): ProviderConfigItem {
-        // 检查ak是否为脱敏后的格式
+        // Check if ak is in masked format
         $ak = $newConfig->getAk();
         if (! empty($ak) && preg_match('/^.{3}\*+.{3}$/', $ak)) {
             $newConfig->setAk($oldConfig->getAk());
         }
 
-        // 检查sk是否为脱敏后的格式
+        // Check if sk is in masked format
         $sk = $newConfig->getSk();
         if (! empty($sk) && preg_match('/^.{3}\*+.{3}$/', $sk)) {
             $newConfig->setSk($oldConfig->getSk());
         }
 
-        // 检查apiKey是否为脱敏后的格式
+        // Check if apiKey is in masked format
         $apiKey = $newConfig->getApiKey();
         if (! empty($apiKey) && preg_match('/^.{3}\*+.{3}$/', $apiKey)) {
             $newConfig->setApiKey($oldConfig->getApiKey());

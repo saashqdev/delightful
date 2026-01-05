@@ -38,7 +38,7 @@ use Throwable;
 use function Hyperf\Translation\trans;
 
 /**
- * 长期记忆应用服务
+ * Long-term memory application service.
  */
 class LongTermMemoryAppService
 {
@@ -53,15 +53,15 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 创建记忆.
+     * Create a memory.
      */
     public function createMemory(CreateMemoryDTO $dto): string
     {
-        // 业务逻辑验证
+        // Business rules validation
         $this->validateMemoryContent($dto->content);
         $this->validateMemoryPendingContent($dto->pendingContent);
 
-        // 如果传入了项目ID，需要验证项目存在性和用户权限
+        // If a project ID is provided, verify existence and user permission
         if ($dto->projectId !== null) {
             $this->validateProjectAccess($dto->projectId, $dto->orgId, $dto->userId);
         }
@@ -70,11 +70,11 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 更新记忆.
+     * Update a memory.
      */
     public function updateMemory(string $memoryId, UpdateMemoryDTO $dto): void
     {
-        // 业务逻辑验证
+        // Business rules validation
         if ($dto->content !== null) {
             $this->validateMemoryContent($dto->content);
         }
@@ -85,7 +85,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 删除记忆.
+     * Delete a memory.
      */
     public function deleteMemory(string $memoryId): void
     {
@@ -93,7 +93,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 获取记忆详情.
+     * Get memory details.
      */
     public function getMemory(string $memoryId): LongTermMemoryEntity
     {
@@ -103,43 +103,43 @@ class LongTermMemoryAppService
             ExceptionBuilder::throw(LongTermMemoryErrorCode::MEMORY_NOT_FOUND);
         }
 
-        // 记录访问
+        // Record access
         $this->longTermMemoryDomainService->accessMemory($memoryId);
 
         return $memory;
     }
 
     /**
-     * 通用查询方法 (使用 MemoryQueryDTO).
+     * General query method (using MemoryQueryDTO).
      * @return array{success: bool, data: array, has_more: bool, next_page_token: null|string, total: int}
      */
     public function findMemories(MemoryQueryDTO $dto): array
     {
-        // 获取总数（不包含limit和offset限制）
+        // Get total count (ignoring limit and offset)
         $countDto = clone $dto;
-        $countDto->limit = 0; // 不限制条数
-        $countDto->offset = 0; // 不设置偏移
+        $countDto->limit = 0; // No row limit
+        $countDto->offset = 0; // No offset
         $total = $this->longTermMemoryDomainService->countMemories($countDto);
 
-        // 保存原始页面大小
+        // Store original page size
         $originalPageSize = $dto->limit;
 
-        // 为了判断是否有下一页，多查询一条记录
+        // Fetch one extra record to detect if there is a next page
         $queryDto = clone $dto;
         $queryDto->limit = $originalPageSize + 1;
 
         $memories = $this->longTermMemoryDomainService->findMemories($queryDto);
 
-        // 处理分页结果
+        // Handle pagination results
         $hasMore = count($memories) > $originalPageSize;
         if ($hasMore) {
-            // 移除多查询的那一条记录
+            // Remove the extra fetched record
             array_pop($memories);
         }
 
         $nextPageToken = null;
         if ($hasMore) {
-            // 生成下一页的 pageToken，offset 增加原始页面大小
+            // Generate next page token; offset advances by the original page size
             $nextOffset = $dto->offset + $originalPageSize;
             $nextPageToken = MemoryQueryDTO::generatePageToken($nextOffset);
         }
@@ -150,7 +150,7 @@ class LongTermMemoryAppService
             'nextPageToken' => $nextPageToken,
         ];
 
-        // 收集项目 ID 并批量查询项目名称
+        // Collect project IDs and fetch project names in batch
         $projectIds = [];
         foreach ($result['data'] as $memory) {
             $projectId = $memory->getProjectId();
@@ -178,7 +178,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 根据项目ID获取项目名称.
+     * Get project name by project ID.
      */
     public function getProjectNameById(?string $projectId): ?string
     {
@@ -195,10 +195,10 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 批量获取项目名称.
+     * Get project names in batch.
      *
-     * @param array $projectIds 项目ID数组
-     * @return array 项目ID => 项目名称的映射数组
+     * @param array $projectIds Array of project IDs
+     * @return array Map of project ID => project name
      */
     public function getProjectNamesBatch(array $projectIds): array
     {
@@ -206,13 +206,13 @@ class LongTermMemoryAppService
             return [];
         }
 
-        // 转换为整数数组
+        // Cast to int array
         $intIds = array_map('intval', $projectIds);
 
-        // 批量查询项目
+        // Query projects in batch
         $projects = $this->projectDomainService->getProjectsByIds($intIds);
 
-        // 构建项目ID => 项目名称的映射
+        // Build project ID => project name map
         $projectNames = [];
         foreach ($projects as $project) {
             $projectNames[(string) $project->getId()] = $project->getProjectName();
@@ -222,7 +222,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 获取有效记忆用于系统提示词.
+     * Get effective memories for system prompts.
      */
     public function getEffectiveMemoriesForPrompt(string $orgId, string $appId, string $userId, ?string $projectId, int $maxLength = 4000): string
     {
@@ -230,7 +230,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 强化记忆.
+     * Reinforce a memory.
      */
     public function reinforceMemory(string $memoryId): void
     {
@@ -238,7 +238,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 批量强化记忆.
+     * Reinforce memories in batch.
      */
     public function reinforceMemories(array $memoryIds): void
     {
@@ -246,7 +246,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 批量处理记忆建议（接受/拒绝）.
+     * Batch process memory suggestions (accept/reject).
      */
     public function batchProcessMemorySuggestions(array $memoryIds, MemoryOperationAction $action, MemoryOperationScenario $scenario = MemoryOperationScenario::ADMIN_PANEL, ?string $magicMessageId = null): void
     {
@@ -254,7 +254,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 获取记忆统计信息.
+     * Get memory statistics.
      */
     public function getMemoryStats(string $orgId, string $appId, string $userId): MemoryStatsDTO
     {
@@ -264,7 +264,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 搜索记忆.
+     * Search memories.
      */
     public function searchMemories(string $orgId, string $appId, string $userId, string $keyword): array
     {
@@ -277,7 +277,7 @@ class LongTermMemoryAppService
 
         $memories = $this->longTermMemoryDomainService->findMemories($queryDto);
 
-        // 记录访问
+        // Record access
         $memoryIds = array_map(fn ($memory) => $memory->getId(), $memories);
         $this->longTermMemoryDomainService->accessMemories($memoryIds);
 
@@ -285,13 +285,13 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 搜索记忆（包含项目名称）.
+     * Search memories (with project names).
      */
     public function searchMemoriesWithProjectNames(string $orgId, string $appId, string $userId, string $keyword): array
     {
         $memories = $this->searchMemories($orgId, $appId, $userId, $keyword);
 
-        // 收集项目 ID 并批量查询项目名称
+        // Collect project IDs and fetch project names in batch
         $projectIds = [];
         foreach ($memories as $memory) {
             $projectId = $memory->getProjectId();
@@ -311,7 +311,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 构建记忆提示词内容.
+     * Build memory prompt content.
      */
     public function buildMemoryPrompt(string $orgId, string $appId, string $userId, ?string $projectId, int $maxLength = 4000): string
     {
@@ -319,8 +319,8 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 检查记忆是否属于用户.
-     * @deprecated 使用 areMemoriesBelongToUser 替代
+     * Check whether a memory belongs to the user.
+     * @deprecated Use areMemoriesBelongToUser instead
      */
     public function isMemoryBelongToUser(string $memoryId, string $orgId, string $appId, string $userId): bool
     {
@@ -328,38 +328,38 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 批量检查记忆是否属于用户.
+     * Check in bulk whether memories belong to the user.
      */
     public function areMemoriesBelongToUser(array $memoryIds, string $orgId, string $appId, string $userId): bool
     {
         $validMemoryIds = $this->longTermMemoryDomainService->filterMemoriesByUser($memoryIds, $orgId, $appId, $userId);
 
-        // 检查所有记忆是否都属于用户
+        // Ensure all memories belong to the user
         return count($validMemoryIds) === count($memoryIds);
     }
 
     /**
-     * 评估对话内容并可能创建记忆.
+     * Evaluate conversation content and optionally create a memory.
      */
     public function evaluateAndCreateMemory(
         EvaluateConversationRequestDTO $dto,
         MagicUserAuthorization $authorization
     ): array {
         try {
-            // 1. 获取聊天模型
+            // 1. Fetch chat model
             $model = $this->getChatModel($authorization);
 
-            // 2. 判断是否应该记忆
+            // 2. Decide whether to remember
             $shouldRemember = $this->shouldRememberContent($model, $dto);
 
             if (! $shouldRemember->remember) {
                 return ['status' => MemoryEvaluationStatus::NO_MEMORY_NEEDED->value, 'reason' => $shouldRemember->explanation];
             }
 
-            // 3. 如果需要，对记忆进行评分
+            // 3. If needed, score the memory
             $score = $this->rateMemory($model, $shouldRemember->memory);
 
-            // 4. 如果评分高于阈值，则创建记忆
+            // 4. Create the memory if the score exceeds the threshold
             if ($score >= self::MEMORY_SCORE_THRESHOLD) {
                 $createDto = new CreateMemoryDTO([
                     'orgId' => $authorization->getOrganizationCode(),
@@ -368,7 +368,7 @@ class LongTermMemoryAppService
                     'memoryType' => MemoryType::CONVERSATION_ANALYSIS->value,
                     'content' => $shouldRemember->memory,
                     'explanation' => $shouldRemember->explanation,
-                    'tags' => array_merge($dto->tags, $shouldRemember->tags), // 合并外部传入的 tags 和 LLM 生成的 tags
+                    'tags' => array_merge($dto->tags, $shouldRemember->tags), // Merge external tags with LLM-generated tags
                 ]);
                 $memoryId = $this->createMemory($createDto);
                 return ['status' => MemoryEvaluationStatus::CREATED->value, 'memory_id' => $memoryId, 'score' => $score];
@@ -389,7 +389,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 对记忆进行评分.
+     * Score a memory.
      */
     public function rateMemory(ModelInterface $model, string $memory): int
     {
@@ -399,7 +399,7 @@ class LongTermMemoryAppService
         $prompt = str_replace(['${topic.messages}', '${a.memory}'], [$memory, $memory], $prompt);
 
         try {
-            // 使用系统提示词
+            // Use a system prompt
             $response = $model->chat([new SystemMessage($prompt)]);
             $content = $response->getFirstChoice()?->getMessage()->getContent();
         } catch (Throwable $e) {
@@ -414,7 +414,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 判断是否需要记住内容.
+     * Decide whether to remember content.
      */
     public function shouldRememberContent(ModelInterface $model, EvaluateConversationRequestDTO $dto): ShouldRememberDTO
     {
@@ -424,7 +424,7 @@ class LongTermMemoryAppService
         $prompt = str_replace('${topic.messages}', $dto->conversationContent, $prompt);
 
         try {
-            // 使用系统提示词
+            // Use a system prompt
             $response = $model->chat([new SystemMessage($prompt)]);
             $firstChoiceContent = $response->getFirstChoice()?->getMessage()->getContent();
         } catch (Throwable $e) {
@@ -458,7 +458,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 批量更新记忆启用状态.
+     * Batch update memory enabled status.
      */
     public function batchUpdateMemoryStatus(array $memoryIds, bool $enabled, string $orgId, string $appId, string $userId): array
     {
@@ -477,7 +477,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 获取聊天模型.
+     * Get chat model.
      */
     private function getChatModel(MagicUserAuthorization $authorization): ModelInterface
     {
@@ -491,7 +491,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 加载提示词文件.
+     * Load prompt file.
      */
     private function loadPromptFile(string $filePath): string
     {
@@ -502,7 +502,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 验证记忆内容长度.
+     * Validate memory content length.
      */
     private function validateMemoryContent(string $content): void
     {
@@ -512,7 +512,7 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 验证待变更记忆内容长度.
+     * Validate pending memory content length.
      */
     private function validateMemoryPendingContent(?string $pendingContent): void
     {
@@ -522,19 +522,19 @@ class LongTermMemoryAppService
     }
 
     /**
-     * 验证项目访问权限.
-     * 检查项目是否存在，以及是否属于当前用户.
-     * 注意：只有项目所有者才能创建项目相关的记忆.
+     * Validate project access.
+     * Ensure the project exists and belongs to the current user.
+     * Note: only project owners can create project-specific memories.
      */
     private function validateProjectAccess(string $projectId, string $orgId, string $userId): void
     {
-        // 使用 ProjectDomainService 获取项目
+        // Fetch project via ProjectDomainService
         $project = $this->projectDomainService->getProjectNotUserId((int) $projectId);
         if ($project === null) {
             ExceptionBuilder::throw(LongTermMemoryErrorCode::PROJECT_NOT_FOUND);
         }
 
-        // 检查组织代码是否匹配
+        // Verify organization code matches
         if ($project->getUserOrganizationCode() !== $orgId) {
             $this->logger->warning('Project organization code mismatch', [
                 'projectId' => $projectId,
@@ -544,7 +544,7 @@ class LongTermMemoryAppService
             ExceptionBuilder::throw(LongTermMemoryErrorCode::PROJECT_ACCESS_DENIED);
         }
 
-        // 检查用户是否是项目所有者
+        // Verify user is the project owner
         if ($project->getUserId() !== $userId) {
             $this->logger->warning('Project user ID mismatch', [
                 'projectId' => $projectId,

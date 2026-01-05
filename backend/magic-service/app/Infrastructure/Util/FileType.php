@@ -15,38 +15,38 @@ use Symfony\Component\Mime\MimeTypes;
 class FileType
 {
     /**
-     * 获取文件类型的扩展名.
+     * Get the extension for a file type.
      */
     public static function getType(string $url): string
     {
-        // 按优先级尝试不同的获取文件类型的方法
+        // Try different strategies in order of priority to determine file type
         try {
-            // 1. 尝试从URL路径中获取
+            // 1. Try deriving from URL path
             $extensionFromUrl = self::getTypeFromUrlPath($url);
             if ($extensionFromUrl) {
                 return $extensionFromUrl;
             }
 
-            // 2. 检查本地文件
+            // 2. Check local file
             if (file_exists($url)) {
                 return self::getTypeFromLocalFile($url);
             }
 
-            // 3. 尝试从HTTP头信息获取
+            // 3. Try reading HTTP headers
             $extensionFromHeaders = self::getTypeFromHeaders($url);
             if ($extensionFromHeaders) {
                 return $extensionFromHeaders;
             }
 
-            // 4. 下载文件检查MIME类型
+            // 4. Download file and inspect MIME type
             return self::getTypeFromDownload($url);
         } catch (Exception $e) {
-            throw new InvalidArgumentException('无法确定文件类型: ' . $e->getMessage());
+            throw new InvalidArgumentException('Unable to determine file type: ' . $e->getMessage());
         }
     }
 
     /**
-     * 从本地文件获取类型.
+     * Derive type from a local file.
      */
     private static function getTypeFromLocalFile(string $path): string
     {
@@ -54,14 +54,14 @@ class FileType
         $extension = self::getExtensionFromMimeType($mimeType);
 
         if (! $extension) {
-            throw new InvalidArgumentException("无法从MIME类型 '{$mimeType}' 确定文件扩展名");
+            throw new InvalidArgumentException("Cannot determine file extension from MIME type '{$mimeType}'");
         }
 
         return $extension;
     }
 
     /**
-     * 从URL路径获取类型.
+     * Derive type from URL path.
      */
     private static function getTypeFromUrlPath(string $url): ?string
     {
@@ -73,7 +73,7 @@ class FileType
     }
 
     /**
-     * 从HTTP头信息获取类型.
+     * Derive type from HTTP headers.
      */
     private static function getTypeFromHeaders(string $url): ?string
     {
@@ -92,11 +92,11 @@ class FileType
     }
 
     /**
-     * 通过下载文件获取类型.
+     * Derive type by downloading the file.
      */
     private static function getTypeFromDownload(string $url): string
     {
-        // 检测文件安全性
+        // Validate file safety
         $safeUrl = SSRFUtil::getSafeUrl($url, replaceIp: false);
         $tempFile = tempnam(sys_get_temp_dir(), 'downloaded_');
 
@@ -104,26 +104,26 @@ class FileType
             self::downloadFile($safeUrl, $tempFile);
             self::checkFileSize($tempFile);
 
-            // 检查文件的MIME类型
+            // Inspect MIME type
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
             $mimeType = finfo_file($finfo, $tempFile);
             finfo_close($finfo);
 
             $extension = self::getExtensionFromMimeType($mimeType);
             if (! $extension) {
-                throw new InvalidArgumentException("无法从MIME类型 '{$mimeType}' 确定文件扩展名");
+                throw new InvalidArgumentException("Cannot determine file extension from MIME type '{$mimeType}'");
             }
 
             return $extension;
         } finally {
             if (file_exists($tempFile)) {
-                unlink($tempFile); // 确保临时文件被删除
+                unlink($tempFile); // ensure temp file is removed
             }
         }
     }
 
     /**
-     * 创建绕过SSL验证的流上下文.
+     * Create a stream context that skips SSL verification.
      */
     private static function createStreamContext(): mixed
     {
@@ -136,7 +136,7 @@ class FileType
     }
 
     /**
-     * 下载文件到临时位置.
+     * Download file to a temporary path.
      */
     private static function downloadFile(string $url, string $tempFile): void
     {
@@ -145,7 +145,7 @@ class FileType
         $localFile = fopen($tempFile, 'w');
 
         if (! $fileStream || ! $localFile) {
-            throw new Exception('无法打开文件流');
+            throw new Exception('Unable to open file stream');
         }
 
         stream_copy_to_stream($fileStream, $localFile);
@@ -155,22 +155,22 @@ class FileType
     }
 
     /**
-     * 检查文件大小是否超限.
+     * Validate that file size is within limits.
      */
     private static function checkFileSize(string $filePath, int $maxSize = 52428800): void // 50MB
     {
         if (filesize($filePath) > $maxSize) {
-            throw new Exception('文件太大，无法下载');
+            throw new Exception('File too large to download');
         }
     }
 
     /**
-     * 从MIME类型获取文件扩展名.
+     * Get file extension from MIME type.
      */
     private static function getExtensionFromMimeType(string $mimeType): ?string
     {
         $mimeTypes = new MimeTypes();
         $extensions = $mimeTypes->getExtensions($mimeType);
-        return $extensions[0] ?? null; // 返回第一个匹配的扩展名
+        return $extensions[0] ?? null; // return the first matching extension
     }
 }

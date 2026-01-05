@@ -31,7 +31,7 @@ class InitialEnvironmentSeeder extends Seeder
             'environment' => 'production',
             'open_platform_config' => '{}',
             'private_config' => json_encode([
-                'name' => '麦吉开源',
+                'name' => 'Magic Open Source',
                 'domain' => [
                     [
                         'type' => PlatformType::Magic, // token is issued by Magic and validated internally

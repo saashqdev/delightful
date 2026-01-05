@@ -44,7 +44,7 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * ASR文件管理应用服务 - 负责ASR相关的核心业务编排.
+ * ASR file management application service responsible for core ASR orchestration.
  */
 readonly class AsrFileAppService
 {
@@ -61,7 +61,7 @@ readonly class AsrFileAppService
         private TopicDomainService $superAgentTopicDomainService,
         private MessageQueueDomainService $messageQueueDomainService,
         private TranslatorInterface $translator,
-        // 新注入的 Service
+        // Newly injected services
         private AsrTaskDomainService $asrTaskDomainService,
         private AsrValidationService $validationService,
         private AsrDirectoryService $directoryService,
@@ -75,7 +75,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 处理ASR总结任务的完整流程（包含聊天消息发送）.
+     * Handle the full ASR summary workflow, including chat message delivery.
      */
     public function processSummaryWithChat(
         SummaryRequestDTO $summaryRequest,
@@ -85,24 +85,24 @@ readonly class AsrFileAppService
             $userId = $userAuthorization->getId();
             $organizationCode = $userAuthorization->getOrganizationCode();
 
-            // 1. 验证话题并获取对话ID
+            // 1. Validate topic and fetch conversation ID
             $topicEntity = $this->validationService->validateTopicOwnership((int) $summaryRequest->topicId, $userId);
             $chatTopicId = $topicEntity->getChatTopicId();
             $conversationId = $this->magicChatDomainService->getConversationIdByTopicId($chatTopicId);
 
-            // 2. 验证任务状态（如果有file_id则跳过）
+            // 2. Validate task status (skip when a file_id exists)
             if (! $summaryRequest->hasFileId()) {
                 $this->validationService->validateTaskStatus($summaryRequest->taskKey, $userId);
             }
 
-            // 3. 验证项目权限
+            // 3. Validate project access
             $this->validationService->validateProjectAccess($summaryRequest->projectId, $userId, $organizationCode);
 
-            // 4. 查询项目、工作区和话题信息
+            // 4. Fetch project, workspace, and topic info
             [$projectName, $workspaceName] = $this->getProjectAndWorkspaceNames($summaryRequest->projectId);
             $topicName = $topicEntity->getTopicName();
 
-            // 5. 更新空项目/话题名称（如果有生成的标题）
+            // 5. Update empty project/topic names when a generated title exists
             if (! empty($summaryRequest->generatedTitle) && $this->shouldUpdateNames($projectName, $topicName)) {
                 $this->updateEmptyProjectAndTopicNames(
                     $summaryRequest->projectId,
@@ -115,7 +115,7 @@ readonly class AsrFileAppService
                 $topicName = empty(trim($topicName)) ? $summaryRequest->generatedTitle : $topicName;
             }
 
-            // 6. 异步执行录音总结流程
+            // 6. Run recording summary asynchronously
             $this->executeAsyncSummary($summaryRequest, $userAuthorization);
 
             return [
@@ -128,7 +128,7 @@ readonly class AsrFileAppService
                 'workspace_name' => $workspaceName,
             ];
         } catch (Throwable $e) {
-            $this->logger->error('处理ASR总结任务失败', [
+            $this->logger->error('Failed to process ASR summary task', [
                 'task_key' => $summaryRequest->taskKey,
                 'error' => $e->getMessage(),
             ]);
@@ -143,7 +143,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 处理ASR总结任务的异步执行流程.
+     * Handle the ASR summary task asynchronously.
      * @throws Throwable
      */
     public function handleAsrSummary(
@@ -155,36 +155,36 @@ readonly class AsrFileAppService
         $lockOwner = sprintf('%s:%s:%s', $userId, $summaryRequest->taskKey, microtime(true));
         $locked = $this->locker->spinLock($lockName, $lockOwner, AsrConfig::SUMMARY_LOCK_TTL);
         if (! $locked) {
-            $this->logger->warning('获取总结任务锁失败，跳过本次处理', [
+            $this->logger->warning('Failed to acquire summary task lock, skipping this run', [
                 'task_key' => $summaryRequest->taskKey,
                 'user_id' => $userId,
             ]);
             return;
         }
         try {
-            // 1. 准备任务状态
+            // 1. Prepare task status
             if ($summaryRequest->hasFileId()) {
                 $taskStatus = $this->createVirtualTaskStatusFromFileId($summaryRequest, $userId, $organizationCode);
             } else {
                 $taskStatus = $this->validationService->validateTaskStatus($summaryRequest->taskKey, $userId);
             }
 
-            // 2. 使用 Redis 中保存的 topic_id 获取话题及会话信息
+            // 2. Use topic_id saved in Redis to fetch topic and conversation info
             $topicEntity = $this->validationService->validateTopicOwnership((int) $taskStatus->topicId, $userId);
             $chatTopicId = $topicEntity->getChatTopicId();
             $conversationId = $this->magicChatDomainService->getConversationIdByTopicId($chatTopicId);
 
-            // 3. 准备任务状态的后续处理
+            // 3. Continue handling task status
             if (! $summaryRequest->hasFileId()) {
-                // 3.1 幂等性检查：如果总结已完成，直接返回（只发送消息，不重复处理）
+                // 3.1 Idempotency check: if summary is completed, resend chat message only
                 if ($taskStatus->isSummaryCompleted()) {
-                    $this->logger->info('检测到总结已完成，跳过重复处理，仅重新发送消息', [
+                    $this->logger->info('Summary already completed; skipping repeat processing and resending message only', [
                         'task_key' => $summaryRequest->taskKey,
                         'audio_file_id' => $taskStatus->audioFileId,
                         'status' => $taskStatus->status->value,
                     ]);
 
-                    // 仅重新发送聊天消息（支持更换模型重新总结）
+                    // Resend chat message only (supports re-summarizing with a different model)
                     $processSummaryTaskDTO = new ProcessSummaryTaskDTO(
                         $taskStatus,
                         $organizationCode,
@@ -200,13 +200,13 @@ readonly class AsrFileAppService
                     return;
                 }
 
-                // 3.2 如果录音未停止，先执行录音终止逻辑
+                // 3.2 If recording is not stopped, terminate it first
                 if (in_array($taskStatus->recordingStatus, [
                     AsrRecordingStatusEnum::START->value,
                     AsrRecordingStatusEnum::RECORDING->value,
                     AsrRecordingStatusEnum::PAUSED->value,
                 ], true)) {
-                    $this->logger->info('summary 触发录音终止', [
+                    $this->logger->info('Summary triggers recording termination', [
                         'task_key' => $summaryRequest->taskKey,
                         'old_status' => $taskStatus->recordingStatus,
                     ]);
@@ -219,7 +219,7 @@ readonly class AsrFileAppService
                 $existingWorkspaceFilePath = $taskStatus->filePath;
 
                 try {
-                    // 先生成新的显示目录路径并更新到 taskStatus（确保沙箱使用正确的目录）
+                    // Generate new display directory and update taskStatus to ensure sandbox uses the right path
                     //                    $oldDisplayDirectory = $taskStatus->displayDirectory;
                     if (! empty($summaryRequest->generatedTitle)) {
                         $newDisplayDirectory = $this->directoryService->getNewDisplayDirectory(
@@ -230,12 +230,12 @@ readonly class AsrFileAppService
                         $taskStatus->displayDirectory = $newDisplayDirectory;
                     }
 
-                    // 调用沙箱合并音频（沙箱会重命名目录但不会通知文件变动）
+                    // Merge audio in sandbox (sandbox renames directories without notifying file changes)
                     $this->updateAudioFromSandbox($taskStatus, $organizationCode, $summaryRequest->generatedTitle);
                 } catch (Throwable $mergeException) {
-                    // 回退到已有文件
+                    // Fall back to existing file
                     if (! empty($existingWorkspaceFilePath)) {
-                        $this->logger->warning('沙箱合并失败，回退使用已有工作区文件', [
+                        $this->logger->warning('Sandbox merge failed; reverting to existing workspace file', [
                             'task_key' => $summaryRequest->taskKey,
                             'file_path' => $existingWorkspaceFilePath,
                             'error' => $mergeException->getMessage(),
@@ -247,7 +247,7 @@ readonly class AsrFileAppService
                 }
             }
 
-            // 4. 发送总结消息
+            // 4. Send summary message
             $processSummaryTaskDTO = new ProcessSummaryTaskDTO(
                 $taskStatus,
                 $organizationCode,
@@ -262,19 +262,19 @@ readonly class AsrFileAppService
             $userAuthorization = $this->getUserAuthorizationFromUserId($userId);
             $this->sendSummaryChatMessage($processSummaryTaskDTO, $userAuthorization);
 
-            // 5. 标记任务为已完成（幂等性保证）
+            // 5. Mark task completed (idempotent)
             $taskStatus->updateStatus(AsrTaskStatusEnum::COMPLETED);
             $taskStatus->recordingStatus = AsrRecordingStatusEnum::STOPPED->value;
 
-            // 6. 保存任务状态
+            // 6. Persist task status
             $this->asrTaskDomainService->saveTaskStatus($taskStatus);
 
-            // 7. 清理流式识别文件（总结完成后不再需要）
+            // 7. Clean up streaming transcript files (no longer needed after summary)
             if (! empty($taskStatus->presetTranscriptFileId)) {
                 $this->presetFileService->deleteTranscriptFile($taskStatus->presetTranscriptFileId);
             }
 
-            $this->logger->info('总结任务完成', [
+            $this->logger->info('Summary task completed', [
                 'task_key' => $summaryRequest->taskKey,
                 'audio_file_id' => $taskStatus->audioFileId,
                 'status' => $taskStatus->status->value,
@@ -285,7 +285,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 验证项目权限.
+     * Validate project access permissions.
      */
     public function validateProjectAccess(string $projectId, string $userId, string $organizationCode): ProjectEntity
     {
@@ -293,7 +293,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 从Redis获取任务状态.
+     * Fetch task status from Redis.
      */
     public function getTaskStatusFromRedis(string $taskKey, string $userId): AsrTaskStatusDTO
     {
@@ -302,7 +302,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 保存任务状态到Redis.
+     * Persist task status to Redis.
      */
     public function saveTaskStatusToRedis(AsrTaskStatusDTO $taskStatus, int $ttl = AsrConfig::TASK_STATUS_TTL): void
     {
@@ -310,7 +310,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 准备录音目录.
+     * Prepare recording directories.
      */
     public function prepareRecordingDirectories(
         string $organizationCode,
@@ -325,7 +325,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 从话题获取项目ID.
+     * Get project ID from topic.
      */
     public function getProjectIdFromTopic(int $topicId, string $userId): string
     {
@@ -333,7 +333,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 验证话题并准备录音目录.
+     * Validate topic and prepare recording directories.
      */
     public function validateTopicAndPrepareDirectories(
         string $topicId,
@@ -343,16 +343,16 @@ readonly class AsrFileAppService
         string $taskKey,
         ?string $generatedTitle = null
     ): array {
-        // 验证话题和项目权限
+        // Validate topic ownership and project access
         $this->validationService->validateTopicOwnership((int) $topicId, $userId);
         $this->validationService->validateProjectAccess($projectId, $userId, $organizationCode);
 
-        // 准备录音目录
+        // Prepare recording directories
         return $this->prepareRecordingDirectories($organizationCode, $projectId, $userId, $taskKey, $generatedTitle);
     }
 
     /**
-     * 处理录音状态上报.
+     * Handle recording status reports.
      */
     public function handleStatusReport(
         string $taskKey,
@@ -371,10 +371,10 @@ readonly class AsrFileAppService
             ExceptionBuilder::throw(AsrErrorCode::TaskNotExist);
         }
 
-        // 保存 model_id、ASR 内容、笔记内容和语种
+        // Save model_id, ASR content, note content, and language
         $this->updateTaskStatusFromReport($taskStatus, $modelId, $asrStreamContent, $noteContent, $noteFileType, $language);
 
-        // 根据状态处理
+        // Dispatch based on status
         return match ($status) {
             AsrRecordingStatusEnum::START => $this->handleStartRecording($taskStatus, $userId, $organizationCode),
             AsrRecordingStatusEnum::RECORDING => $this->handleRecordingHeartbeat($taskStatus),
@@ -385,7 +385,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 自动触发总结（用于心跳超时定时任务）.
+     * Automatically trigger summary (used by heartbeat timeout cron).
      */
     public function autoTriggerSummary(AsrTaskStatusDTO $taskStatus, string $userId, string $organizationCode): void
     {
@@ -393,16 +393,16 @@ readonly class AsrFileAppService
         $lockOwner = sprintf('%s:%s:%s', $userId, $taskStatus->taskKey, microtime(true));
         $locked = $this->locker->spinLock($lockName, $lockOwner, AsrConfig::SUMMARY_LOCK_TTL);
         if (! $locked) {
-            $this->logger->warning('获取自动总结锁失败，跳过本次处理', [
+            $this->logger->warning('Failed to acquire auto-summary lock; skipping this run', [
                 'task_key' => $taskStatus->taskKey,
                 'user_id' => $userId,
             ]);
             return;
         }
         try {
-            // 幂等性检查：如果总结已完成，跳过处理
+            // Idempotency check: skip when summary already completed
             if ($taskStatus->isSummaryCompleted()) {
-                $this->logger->info('检测到自动总结已完成，跳过重复处理', [
+                $this->logger->info('Auto-summary already completed; skipping duplicate processing', [
                     'task_key' => $taskStatus->taskKey,
                     'audio_file_id' => $taskStatus->audioFileId,
                     'status' => $taskStatus->status->value,
@@ -411,7 +411,7 @@ readonly class AsrFileAppService
             }
 
             if ($taskStatus->serverSummaryRetryCount >= AsrConfig::SERVER_SUMMARY_MAX_RETRY) {
-                $this->logger->warning('自动总结重试次数达到上限，跳过本次处理', [
+                $this->logger->warning('Auto-summary retry limit reached; skipping this run', [
                     'task_key' => $taskStatus->taskKey,
                     'retry_count' => $taskStatus->serverSummaryRetryCount,
                     'max_retry' => AsrConfig::SERVER_SUMMARY_MAX_RETRY,
@@ -422,15 +422,15 @@ readonly class AsrFileAppService
             $taskStatus->markServerSummaryAttempt();
             $this->asrTaskDomainService->saveTaskStatus($taskStatus);
 
-            $this->logger->info('开始自动总结', [
+            $this->logger->info('Start auto-summary', [
                 'task_key' => $taskStatus->taskKey,
                 'project_id' => $taskStatus->projectId,
             ]);
 
-            // 生成标题
+            // Generate title
             $fileTitle = $this->titleGeneratorService->generateFromTaskStatus($taskStatus);
 
-            // 先生成新的显示目录路径并更新到 taskStatus（确保沙箱使用正确的目录）
+            // Generate new display directory path and update taskStatus to ensure sandbox uses correct directory
             //            $oldDisplayDirectory = $taskStatus->displayDirectory;
             if (! empty($fileTitle)) {
                 $newDisplayDirectory = $this->directoryService->getNewDisplayDirectory(
@@ -441,25 +441,25 @@ readonly class AsrFileAppService
                 $taskStatus->displayDirectory = $newDisplayDirectory;
             }
 
-            // 合并音频（沙箱会重命名目录但不会通知文件变动）
+            // Merge audio in sandbox (sandbox renames directories without notifying file changes)
             $this->asrSandboxService->mergeAudioFiles($taskStatus, $fileTitle, $organizationCode);
 
-            // 发送聊天消息
+            // Send chat message
             $this->sendAutoSummaryChatMessage($taskStatus, $userId, $organizationCode);
 
             $taskStatus->finishServerSummaryAttempt(true);
 
-            // 标记任务为已完成（幂等性保证）
+            // Mark task completed (idempotent)
             $taskStatus->updateStatus(AsrTaskStatusEnum::COMPLETED);
             $taskStatus->recordingStatus = AsrRecordingStatusEnum::STOPPED->value;
             $this->asrTaskDomainService->saveTaskStatus($taskStatus);
 
-            // 清理流式识别文件（总结完成后不再需要）
+            // Clean up streaming transcript files (no longer needed after summary)
             if (! empty($taskStatus->presetTranscriptFileId)) {
                 $this->presetFileService->deleteTranscriptFile($taskStatus->presetTranscriptFileId);
             }
 
-            $this->logger->info('自动总结完成', [
+            $this->logger->info('Auto-summary completed', [
                 'task_key' => $taskStatus->taskKey,
                 'audio_file_id' => $taskStatus->audioFileId,
                 'status' => $taskStatus->status->value,
@@ -468,7 +468,7 @@ readonly class AsrFileAppService
             $taskStatus->finishServerSummaryAttempt(false);
             $this->asrTaskDomainService->saveTaskStatus($taskStatus);
 
-            $this->logger->error('自动总结失败', [
+            $this->logger->error('Auto-summary failed', [
                 'task_key' => $taskStatus->taskKey,
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
@@ -479,18 +479,18 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 异步执行总结流程.
+     * Execute the summary flow asynchronously.
      */
     private function executeAsyncSummary(
         SummaryRequestDTO $summaryRequest,
         MagicUserAuthorization $userAuthorization
     ): void {
         $requestId = CoContext::getRequestId();
-        // ⚠️ 重要：使用 CoContext::getLanguage() 而不是 translator->getLocale()
-        // 因为后续的服务调用可能会修改 translator 的 locale，但 CoContext 中的语言不会被修改
+        // Important: use CoContext::getLanguage() instead of translator->getLocale()
+        // Later service calls may change the translator locale, but CoContext language stays fixed
         $language = CoContext::getLanguage();
         Coroutine::create(function () use ($summaryRequest, $userAuthorization, $language, $requestId) {
-            // 在协程中需要重新获取 translator 实例并设置语言
+            // In the coroutine, re-fetch translator instance and set language
             di(TranslatorInterface::class)->setLocale($language);
             CoContext::setLanguage($language);
             CoContext::setRequestId($requestId);
@@ -498,7 +498,7 @@ readonly class AsrFileAppService
             try {
                 $this->handleAsrSummary($summaryRequest, $userAuthorization->getId(), $userAuthorization->getOrganizationCode());
             } catch (Throwable $e) {
-                $this->logger->error('协程执行ASR总结流程失败', [
+                $this->logger->error('ASR summary coroutine execution failed', [
                     'task_key' => $summaryRequest->taskKey,
                     'error' => $e->getMessage(),
                 ]);
@@ -507,7 +507,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 获取项目和工作区名称.
+     * Get project and workspace names.
      */
     private function getProjectAndWorkspaceNames(string $projectId): array
     {
@@ -524,7 +524,7 @@ readonly class AsrFileAppService
 
             return [$projectName, $workspaceName];
         } catch (Throwable $e) {
-            $this->logger->warning('查询项目或工作区信息失败', [
+            $this->logger->warning('Failed to query project or workspace info', [
                 'project_id' => $projectId,
                 'error' => $e->getMessage(),
             ]);
@@ -533,7 +533,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 判断是否需要更新名称.
+     * Determine whether names need to be updated.
      */
     private function shouldUpdateNames(?string $projectName, ?string $topicName): bool
     {
@@ -541,7 +541,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 更新空的项目和话题名称.
+     * Update empty project and topic names.
      */
     private function updateEmptyProjectAndTopicNames(
         string $projectId,
@@ -551,7 +551,7 @@ readonly class AsrFileAppService
         string $organizationCode
     ): void {
         try {
-            // 更新项目名称
+            // Update project name when empty
             $projectEntity = $this->projectDomainService->getProject((int) $projectId, $userId);
             if (empty(trim($projectEntity->getProjectName()))) {
                 $projectEntity->setProjectName($generatedTitle);
@@ -559,14 +559,14 @@ readonly class AsrFileAppService
                 $this->projectDomainService->saveProjectEntity($projectEntity);
             }
 
-            // 更新话题名称
+            // Update topic name when empty
             $topicEntity = $this->superAgentTopicDomainService->getTopicById($topicId);
             if ($topicEntity && empty(trim($topicEntity->getTopicName()))) {
                 $dataIsolation = DataIsolation::simpleMake($organizationCode, $userId);
                 $this->superAgentTopicDomainService->updateTopic($dataIsolation, $topicId, $generatedTitle);
             }
         } catch (Throwable $e) {
-            $this->logger->warning('更新项目/话题名称失败', [
+            $this->logger->warning('Failed to update project/topic names', [
                 'project_id' => $projectId,
                 'topic_id' => $topicId,
                 'error' => $e->getMessage(),
@@ -575,7 +575,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 从文件ID创建虚拟任务状态.
+     * Create a virtual task status from an existing file ID.
      */
     private function createVirtualTaskStatusFromFileId(
         SummaryRequestDTO $summaryRequest,
@@ -607,7 +607,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 从沙箱更新音频.
+     * Update audio from the sandbox.
      */
     private function updateAudioFromSandbox(
         AsrTaskStatusDTO $taskStatus,
@@ -623,7 +623,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 根据任务状态构建音频文件数据.
+     * Build audio file data from task status.
      */
     private function buildFileDataFromTaskStatus(AsrTaskStatusDTO $taskStatus): AsrFileDataDTO
     {
@@ -643,7 +643,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 根据任务状态构建笔记文件数据.
+     * Build note file data from task status.
      */
     private function buildNoteFileDataFromTaskStatus(AsrTaskStatusDTO $taskStatus): ?AsrFileDataDTO
     {
@@ -654,7 +654,7 @@ readonly class AsrFileAppService
 
         $fileEntity = $this->taskFileDomainService->getById((int) $noteFileId);
         if ($fileEntity === null) {
-            $this->logger->warning('笔记文件不存在', [
+            $this->logger->warning('Note file does not exist', [
                 'task_key' => $taskStatus->taskKey,
                 'note_file_id' => $noteFileId,
             ]);
@@ -667,24 +667,24 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 发送总结聊天消息.
+     * Send summary chat message.
      */
     private function sendSummaryChatMessage(ProcessSummaryTaskDTO $dto, MagicUserAuthorization $userAuthorization): void
     {
         try {
-            // 构建音频文件数据
+            // Build audio file data
             $audioFileData = $this->buildFileDataFromTaskStatus($dto->taskStatus);
 
-            // 构建笔记文件数据（如果存在）
+            // Build note file data when present
             $noteFileData = $this->buildNoteFileDataFromTaskStatus($dto->taskStatus);
 
-            // 构建聊天消息（包含笔记文件）
+            // Build chat message (with optional note file)
             $chatRequest = $this->chatMessageAssembler->buildSummaryMessage($dto, $audioFileData, $noteFileData);
 
-            // 记录消息详细内容
+            // Log message details
             $messageData = $chatRequest->getData()->getMessage()->getMagicMessage();
 
-            $this->logger->info('sendSummaryChatMessage 准备发送ASR总结聊天消息', [
+            $this->logger->info('sendSummaryChatMessage ready to send ASR summary chat message', [
                 'task_key' => $dto->taskStatus->taskKey,
                 'topic_id' => $dto->topicId,
                 'conversation_id' => $dto->conversationId,
@@ -704,7 +704,7 @@ readonly class AsrFileAppService
                 $this->magicChatMessageAppService->onChatMessage($chatRequest, $userAuthorization);
             }
         } catch (Throwable $e) {
-            $this->logger->error('发送聊天消息失败', [
+            $this->logger->error('Failed to send chat message', [
                 'task_key' => $dto->taskStatus->taskKey,
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
@@ -713,7 +713,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 检查是否应该队列处理消息.
+     * Determine if the message should be queued.
      */
     private function shouldQueueMessage(string $topicId): bool
     {
@@ -727,7 +727,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 将消息写入队列.
+     * Enqueue the message for processing.
      */
     private function queueChatMessage(ProcessSummaryTaskDTO $dto, ChatRequest $chatRequest, MagicUserAuthorization $userAuthorization): void
     {
@@ -748,7 +748,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 从用户ID获取用户授权对象.
+     * Build user authorization from user ID.
      */
     private function getUserAuthorizationFromUserId(string $userId): MagicUserAuthorization
     {
@@ -760,7 +760,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 更新任务状态（从状态上报）.
+     * Update task status based on status report.
      */
     private function updateTaskStatusFromReport(
         AsrTaskStatusDTO $taskStatus,
@@ -789,25 +789,25 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 处理开始录音.
+     * Handle start recording.
      */
     private function handleStartRecording(AsrTaskStatusDTO $taskStatus, string $userId, string $organizationCode): bool
     {
-        // 每次 start 都检查沙箱是否存在，防止沙箱被回收导致音频丢失. 原因：如果暂停超过 20 分钟，沙箱可能被回收，需要重新启动以确保音频实时合并
+        // On each start, ensure sandbox exists so audio is not lost if sandbox is reclaimed after long pauses
         try {
             $this->asrSandboxService->startRecordingTask($taskStatus, $userId, $organizationCode);
-            $taskStatus->sandboxRetryCount = 0; // 成功后重置重试次数
+            $taskStatus->sandboxRetryCount = 0; // reset retries after success
         } catch (Throwable $e) {
-            // 沙箱启动失败时记录日志但继续处理（沙箱可能临时不可用）
+            // Log but continue when sandbox fails to start (sandbox may be temporarily unavailable)
             ++$taskStatus->sandboxRetryCount;
-            $this->logger->warning('沙箱任务启动失败，将在后续自动重试', [
+            $this->logger->warning('Sandbox task failed to start; will retry automatically later', [
                 'task_key' => $taskStatus->taskKey,
                 'retry_count' => $taskStatus->sandboxRetryCount,
                 'error' => $e->getMessage(),
             ]);
         }
-        $taskStatus->sandboxTaskCreated = true; // 重置标志
-        // 更新状态并设置心跳（原子操作）
+        $taskStatus->sandboxTaskCreated = true; // reset flag after attempt
+        // Update status and set heartbeat (atomic)
         $taskStatus->recordingStatus = AsrRecordingStatusEnum::START->value;
         $taskStatus->isPaused = false;
         $this->asrTaskDomainService->saveTaskStatusWithHeartbeat($taskStatus);
@@ -816,11 +816,11 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 处理录音心跳.
+     * Handle recording heartbeat.
      */
     private function handleRecordingHeartbeat(AsrTaskStatusDTO $taskStatus): bool
     {
-        // 更新状态并设置心跳（原子操作）
+        // Update status and set heartbeat (atomic)
         $taskStatus->recordingStatus = AsrRecordingStatusEnum::RECORDING->value;
         $this->asrTaskDomainService->saveTaskStatusWithHeartbeat($taskStatus);
 
@@ -828,11 +828,11 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 处理暂停录音.
+     * Handle pause recording.
      */
     private function handlePauseRecording(AsrTaskStatusDTO $taskStatus): bool
     {
-        // 更新状态并删除心跳（原子操作）
+        // Update status and delete heartbeat (atomic)
         $taskStatus->recordingStatus = AsrRecordingStatusEnum::PAUSED->value;
         $taskStatus->isPaused = true;
         $this->asrTaskDomainService->saveTaskStatusAndDeleteHeartbeat($taskStatus);
@@ -841,19 +841,19 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 处理停止录音.
+     * Handle stop recording.
      */
     private function handleStopRecording(AsrTaskStatusDTO $taskStatus): bool
     {
-        // 幂等性检查：如果录音已停止，跳过重复处理
+        // Idempotency check: skip when recording is already stopped
         if ($taskStatus->recordingStatus === AsrRecordingStatusEnum::STOPPED->value) {
-            $this->logger->info('录音已停止，跳过重复处理', [
+            $this->logger->info('Recording already stopped; skipping duplicate handling', [
                 'task_key' => $taskStatus->taskKey,
             ]);
             return true;
         }
 
-        // 更新状态并删除心跳（原子操作）
+        // Update status and delete heartbeat (atomic)
         $taskStatus->recordingStatus = AsrRecordingStatusEnum::STOPPED->value;
         $this->asrTaskDomainService->saveTaskStatusAndDeleteHeartbeat($taskStatus);
 
@@ -861,52 +861,52 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 处理取消录音.
+     * Handle cancel recording.
      */
     private function handleCancelRecording(AsrTaskStatusDTO $taskStatus): bool
     {
-        // 幂等性检查：如果录音已取消，跳过重复处理
+        // Idempotency check: skip when already canceled
         if ($taskStatus->recordingStatus === AsrRecordingStatusEnum::CANCELED->value) {
-            $this->logger->info('录音已取消，跳过重复处理', [
+            $this->logger->info('Recording already canceled; skipping duplicate handling', [
                 'task_key' => $taskStatus->taskKey,
             ]);
             return true;
         }
 
-        $this->logger->info('开始处理取消录音', [
+        $this->logger->info('Begin handling recording cancellation', [
             'task_key' => $taskStatus->taskKey,
             'sandbox_id' => $taskStatus->sandboxId,
         ]);
 
-        // 调用沙箱取消任务（如果沙箱任务已创建）
+        // Cancel sandbox task when it exists
         if ($taskStatus->sandboxTaskCreated && ! empty($taskStatus->sandboxId)) {
             try {
                 $response = $this->asrSandboxService->cancelRecordingTask($taskStatus);
-                $this->logger->info('沙箱录音任务已取消', [
+                $this->logger->info('Sandbox recording task canceled', [
                     'task_key' => $taskStatus->taskKey,
                     'sandbox_id' => $taskStatus->sandboxId,
                     'response_status' => $response->getStatus(),
                 ]);
             } catch (Throwable $e) {
-                // 沙箱取消失败不阻止本地清理
-                $this->logger->warning('沙箱取消任务失败，继续本地清理', [
+                // Sandbox cancellation failure does not block local cleanup
+                $this->logger->warning('Sandbox cancellation failed; continue local cleanup', [
                     'task_key' => $taskStatus->taskKey,
                     'error' => $e->getMessage(),
                 ]);
             }
         }
 
-        // 更新状态为取消并删除心跳
+        // Update status to canceled and delete heartbeat
         $taskStatus->recordingStatus = AsrRecordingStatusEnum::CANCELED->value;
         $this->asrTaskDomainService->saveTaskStatusAndDeleteHeartbeat($taskStatus);
 
-        // 准备 DataIsolation 对象（用于删除目录）
+        // Prepare DataIsolation object used for directory cleanup
         $dataIsolation = DataIsolation::simpleMake(
             $taskStatus->organizationCode,
             $taskStatus->userId
         );
 
-        // 获取项目信息（用于获取 workDir）
+        // Fetch project info to determine workDir
         $workDir = '';
         $projectOrganizationCode = $taskStatus->organizationCode;
         try {
@@ -914,18 +914,18 @@ readonly class AsrFileAppService
             $workDir = $projectEntity->getWorkDir();
             $projectOrganizationCode = $projectEntity->getUserOrganizationCode();
         } catch (Throwable $e) {
-            $this->logger->warning('获取项目信息失败', [
+            $this->logger->warning('Failed to fetch project info', [
                 'task_key' => $taskStatus->taskKey,
                 'project_id' => $taskStatus->projectId,
                 'error' => $e->getMessage(),
             ]);
         }
 
-        // 清理隐藏目录（包含目录下的所有文件，包括预设文件）
+        // Clean hidden directory including all descendant files (preset files included)
         if (! empty($taskStatus->tempHiddenDirectoryId) && ! empty($taskStatus->tempHiddenDirectory)) {
             try {
                 if (! empty($workDir)) {
-                    // 使用 deleteDirectoryFiles 级联删除目录及其所有子文件
+                    // Cascade delete directory and all child files using deleteDirectoryFiles
                     $deletedCount = $this->taskFileDomainService->deleteDirectoryFiles(
                         $dataIsolation,
                         $workDir,
@@ -933,22 +933,22 @@ readonly class AsrFileAppService
                         $this->getFullFileKey($taskStatus->tempHiddenDirectory, $workDir, $projectOrganizationCode),
                         $projectOrganizationCode
                     );
-                    $this->logger->info('删除隐藏目录及其子文件成功', [
+                    $this->logger->info('Deleted hidden directory and children successfully', [
                         'task_key' => $taskStatus->taskKey,
                         'hidden_directory_id' => $taskStatus->tempHiddenDirectoryId,
                         'hidden_directory_path' => $taskStatus->tempHiddenDirectory,
                         'deleted_count' => $deletedCount,
                     ]);
                 } else {
-                    // 降级：如果获取不到 workDir，只删除目录记录
+                    // Fallback: delete directory record only when workDir is unavailable
                     $this->taskFileDomainService->deleteById((int) $taskStatus->tempHiddenDirectoryId);
-                    $this->logger->warning('无法获取workDir，仅删除隐藏目录记录', [
+                    $this->logger->warning('workDir unavailable; deleted hidden directory record only', [
                         'task_key' => $taskStatus->taskKey,
                         'hidden_directory_id' => $taskStatus->tempHiddenDirectoryId,
                     ]);
                 }
             } catch (Throwable $e) {
-                $this->logger->warning('删除隐藏目录失败', [
+                $this->logger->warning('Failed to delete hidden directory', [
                     'task_key' => $taskStatus->taskKey,
                     'hidden_directory_id' => $taskStatus->tempHiddenDirectoryId,
                     'error' => $e->getMessage(),
@@ -956,11 +956,11 @@ readonly class AsrFileAppService
             }
         }
 
-        // 清理显示目录（包含目录下的所有文件，包括预设文件）
+        // Clean display directory including all descendant files (preset files included)
         if (! empty($taskStatus->displayDirectoryId) && ! empty($taskStatus->displayDirectory)) {
             try {
                 if (! empty($workDir)) {
-                    // 使用 deleteDirectoryFiles 级联删除目录及其所有子文件
+                    // Cascade delete directory and all child files using deleteDirectoryFiles
                     $deletedCount = $this->taskFileDomainService->deleteDirectoryFiles(
                         $dataIsolation,
                         $workDir,
@@ -968,22 +968,22 @@ readonly class AsrFileAppService
                         $this->getFullFileKey($taskStatus->displayDirectory, $workDir, $projectOrganizationCode),
                         $projectOrganizationCode
                     );
-                    $this->logger->info('删除显示目录及其子文件成功', [
+                    $this->logger->info('Deleted display directory and children successfully', [
                         'task_key' => $taskStatus->taskKey,
                         'display_directory_id' => $taskStatus->displayDirectoryId,
                         'display_directory_path' => $taskStatus->displayDirectory,
                         'deleted_count' => $deletedCount,
                     ]);
                 } else {
-                    // 降级：如果获取不到 workDir，只删除目录记录
+                    // Fallback: delete directory record only when workDir is unavailable
                     $this->taskFileDomainService->deleteById((int) $taskStatus->displayDirectoryId);
-                    $this->logger->warning('无法获取workDir，仅删除显示目录记录', [
+                    $this->logger->warning('workDir unavailable; deleted display directory record only', [
                         'task_key' => $taskStatus->taskKey,
                         'display_directory_id' => $taskStatus->displayDirectoryId,
                     ]);
                 }
             } catch (Throwable $e) {
-                $this->logger->warning('删除显示目录失败', [
+                $this->logger->warning('Failed to delete display directory', [
                     'task_key' => $taskStatus->taskKey,
                     'display_directory_id' => $taskStatus->displayDirectoryId,
                     'error' => $e->getMessage(),
@@ -991,16 +991,16 @@ readonly class AsrFileAppService
             }
         }
 
-        // 清理已合并的音频文件（如果存在且不在上面的目录中）
+        // Delete merged audio file when present and not covered above
         if (! empty($taskStatus->audioFileId)) {
             try {
                 $this->taskFileDomainService->deleteById((int) $taskStatus->audioFileId);
-                $this->logger->info('删除音频文件成功', [
+                $this->logger->info('Deleted audio file successfully', [
                     'task_key' => $taskStatus->taskKey,
                     'audio_file_id' => $taskStatus->audioFileId,
                 ]);
             } catch (Throwable $e) {
-                $this->logger->warning('删除音频文件失败', [
+                $this->logger->warning('Failed to delete audio file', [
                     'task_key' => $taskStatus->taskKey,
                     'audio_file_id' => $taskStatus->audioFileId,
                     'error' => $e->getMessage(),
@@ -1008,12 +1008,12 @@ readonly class AsrFileAppService
             }
         }
 
-        // 检查项目下是否还有其他文件，如果没有则删除项目
+        // Delete the project when no other files remain
         if (! empty($taskStatus->projectId)) {
             try {
                 $this->checkAndDeleteProjectIfEmpty($taskStatus);
             } catch (Throwable $e) {
-                $this->logger->warning('检查并删除空项目失败', [
+                $this->logger->warning('Failed to check and delete empty project', [
                     'task_key' => $taskStatus->taskKey,
                     'project_id' => $taskStatus->projectId,
                     'error' => $e->getMessage(),
@@ -1021,7 +1021,7 @@ readonly class AsrFileAppService
             }
         }
 
-        $this->logger->info('录音取消处理完成', [
+        $this->logger->info('Recording cancellation completed', [
             'task_key' => $taskStatus->taskKey,
         ]);
 
@@ -1029,35 +1029,35 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 检查项目是否为空，如果为空则删除项目.
+     * Delete project when it contains no files.
      */
     private function checkAndDeleteProjectIfEmpty(AsrTaskStatusDTO $taskStatus): void
     {
-        // 获取项目下所有用户文件（不包括隐藏文件）
+        // Fetch all user files in the project (excluding hidden files)
         $files = $this->taskFileDomainService->findUserFilesByProjectId($taskStatus->projectId);
 
         if (empty($files)) {
-            $this->logger->info('项目下没有文件，准备删除项目', [
+            $this->logger->info('No files in project; preparing to delete project', [
                 'task_key' => $taskStatus->taskKey,
                 'project_id' => $taskStatus->projectId,
             ]);
 
-            // 删除项目
+            // Delete project
             try {
                 $this->projectDomainService->deleteProject((int) $taskStatus->projectId, $taskStatus->userId);
-                $this->logger->info('删除空项目成功', [
+                $this->logger->info('Deleted empty project successfully', [
                     'task_key' => $taskStatus->taskKey,
                     'project_id' => $taskStatus->projectId,
                 ]);
             } catch (Throwable $e) {
-                $this->logger->error('删除空项目失败', [
+                $this->logger->error('Failed to delete empty project', [
                     'task_key' => $taskStatus->taskKey,
                     'project_id' => $taskStatus->projectId,
                     'error' => $e->getMessage(),
                 ]);
             }
         } else {
-            $this->logger->info('项目下还有文件，不删除项目', [
+            $this->logger->info('Project still contains files; skipping deletion', [
                 'task_key' => $taskStatus->taskKey,
                 'project_id' => $taskStatus->projectId,
                 'file_count' => count($files),
@@ -1066,12 +1066,12 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 构建完整的 file_key.
+     * Build a full file_key.
      *
-     * @param string $relativePath 相对路径
-     * @param string $workDir 工作目录
-     * @param string $organizationCode 组织编码
-     * @return string 完整的 file_key
+     * @param string $relativePath Relative path
+     * @param string $workDir Work directory
+     * @param string $organizationCode Organization code
+     * @return string Full file_key
      */
     private function getFullFileKey(string $relativePath, string $workDir, string $organizationCode): string
     {
@@ -1080,7 +1080,7 @@ readonly class AsrFileAppService
     }
 
     /**
-     * 发送自动总结聊天消息.
+     * Send auto-summary chat message.
      */
     private function sendAutoSummaryChatMessage(AsrTaskStatusDTO $taskStatus, string $userId, string $organizationCode): void
     {

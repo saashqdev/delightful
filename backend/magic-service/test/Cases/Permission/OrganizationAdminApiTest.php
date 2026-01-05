@@ -23,7 +23,7 @@ class OrganizationAdminApiTest extends HttpTestCase
     private string $testUserId;
 
     /**
-     * 存储登录后的token.
+     * Store the token after login.
      */
     private static string $accessToken = '';
 
@@ -32,16 +32,16 @@ class OrganizationAdminApiTest extends HttpTestCase
         parent::setUp();
         $this->superAdminAppService = $this->getContainer()->get(OrganizationAdminAppService::class);
 
-        // 为每个测试生成唯一的用户ID，避免测试之间的数据冲突
+        // Generate a unique user ID per test to avoid data conflicts
         $this->testUserId = 'test_user_' . uniqid();
 
-        // 清理可能存在的测试数据
+        // Clean up any existing test data
         $this->cleanUpTestData();
     }
 
     protected function tearDown(): void
     {
-        // 清理测试数据
+        // Clean up test data
         $this->cleanUpTestData();
 
         parent::tearDown();
@@ -49,14 +49,14 @@ class OrganizationAdminApiTest extends HttpTestCase
 
     public function testGetSuperAdminList(): void
     {
-        // 模拟HTTP请求获取列表
+        // Simulate HTTP request to get the list
         $response = $this->get('/api/v1/admin/organization-admin/list?page=1&page_size=10', [], $this->getTestHeaders());
 
-        // 验证响应格式和状态
-        $this->assertIsArray($response, '响应应该是数组格式');
+        // Validate response format and status
+        $this->assertIsArray($response, 'Response should be an array');
 
-        $this->assertEquals(1000, $response['code'] ?? 0, '响应码应为1000');
-        $this->assertArrayHasKey('data', $response, '响应应包含data字段');
+        $this->assertEquals(1000, $response['code'] ?? 0, 'Response code should be 1000');
+        $this->assertArrayHasKey('data', $response, 'Response should contain data field');
 
         $data = $response['data'];
         $this->assertIsArray($data);
@@ -72,7 +72,7 @@ class OrganizationAdminApiTest extends HttpTestCase
             'remarks' => 'Test grant via API',
         ], $this->getTestHeaders());
 
-        $this->assertEquals(1000, $response['code'] ?? 0, '响应码不为1000');
+        $this->assertEquals(1000, $response['code'] ?? 0, 'Response code should be 1000');
     }
 
     private function createDataIsolation(string $organizationCode): DataIsolation
@@ -85,7 +85,7 @@ class OrganizationAdminApiTest extends HttpTestCase
     }
 
     /**
-     * 获取测试用的请求头.
+     * Get headers for test requests.
      */
     private function getTestHeaders(): array
     {

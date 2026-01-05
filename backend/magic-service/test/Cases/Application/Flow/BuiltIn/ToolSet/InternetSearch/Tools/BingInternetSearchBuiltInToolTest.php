@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\BuiltIn\ToolSet\InternetSearch\Tools;
 
 /*
- * 本文件属于灯塔引擎版权所有，泄漏必究。
+ * This file is proprietary to Lighthouse Engine. Unauthorized disclosure is prohibited.
  */
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunnerFactory;
 use App\Domain\Flow\Entity\ValueObject\Node;
@@ -48,7 +48,7 @@ class BingInternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "root node",
         "description": "",
         "items": null,
         "value": null,
@@ -59,8 +59,8 @@ class BingInternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "search_keyword": {
                 "type": "string",
                 "key": "search_keyword",
-                "title": "用户搜索词",
-                "description": "用户搜索词",
+                "title": "user search term",
+                "description": "user search term",
                 "required": null,
                 "value": {
                     "type": "const",
@@ -82,8 +82,8 @@ class BingInternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "result_count": {
                 "type": "integer",
                 "key": "result_count",
-                "title": "返回结果数量",
-                "description": "返回结果数量",
+                "title": "number of results",
+                "description": "number of results",
                 "required": null,
                 "value": {
                     "type": "const",
@@ -115,7 +115,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'search_keyword' => '周杰伦',
+            'search_keyword' => 'Jay Chou',
             'result_count' => 1,
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -186,15 +186,15 @@ JSON, true));
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
-# 角色
-bing搜索助手
+# Role
+Bing search assistant
 
-## 流程
-调用`bing_internet_search`进行搜索
+## Flow
+Call `bing_internet_search` to perform search
 
 MARKDOWN,
 
-            'user_prompt' => '周杰伦',
+            'user_prompt' => 'Jay Chou',
         ]);
         $runner->execute($vertexResult, $executionData);
 

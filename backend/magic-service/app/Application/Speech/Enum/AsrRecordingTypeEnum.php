@@ -8,43 +8,43 @@ declare(strict_types=1);
 namespace App\Application\Speech\Enum;
 
 /**
- * ASR 录音类型枚举.
+ * ASR recording type enum.
  *
- * 【作用域】接口参数 - /api/v1/asr/upload-tokens
- * 【用途】区分录音来源类型，决定是否创建预设文件
- * 【使用场景】
- * - 前端录音：实时录音生成音频，需要预设笔记和流式识别文件供前端实时写入
- * - 文件上传：用户直传录音文件，不需要预设文件（已有完整录音）
+ * Scope: API parameter - /api/v1/asr/upload-tokens
+ * Purpose: Distinguish recording source types to decide whether to create preset files
+ * Usage:
+ * - Frontend recording: real-time recording that needs preset notes and streaming ASR files for live writes
+ * - File upload: user uploads a complete recording file; preset files are not needed
  */
 enum AsrRecordingTypeEnum: string
 {
-    case FRONTEND_RECORDING = 'frontend_recording';  // 前端录音生成音频
-    case FILE_UPLOAD = 'file_upload';                // 直传录音文件
+    case FRONTEND_RECORDING = 'frontend_recording';  // Frontend recording
+    case FILE_UPLOAD = 'file_upload';                // Directly uploaded recording file
 
     /**
-     * 获取类型描述.
+    * Get type description.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::FRONTEND_RECORDING => '前端录音',
-            self::FILE_UPLOAD => '文件上传',
+            self::FRONTEND_RECORDING => 'Frontend recording',
+            self::FILE_UPLOAD => 'File upload',
         };
     }
 
     /**
-     * 是否需要创建预设文件.
+    * Whether preset files are needed.
      */
     public function needsPresetFiles(): bool
     {
         return match ($this) {
-            self::FRONTEND_RECORDING => true,   // 前端录音需要预设文件（实时写入）
-            self::FILE_UPLOAD => false,         // 文件上传不需要预设文件（已有录音）
+            self::FRONTEND_RECORDING => true,   // Frontend recording needs preset files for live writes
+            self::FILE_UPLOAD => false,         // File upload does not need preset files (recording already exists)
         };
     }
 
     /**
-     * 从字符串安全创建枚举.
+    * Safely create the enum from a string.
      */
     public static function fromString(string $type): ?self
     {
@@ -52,10 +52,10 @@ enum AsrRecordingTypeEnum: string
     }
 
     /**
-     * 获取默认类型.
+     * Get the default type.
      */
     public static function default(): self
     {
-        return self::FILE_UPLOAD;  // 默认为文件上传（向后兼容）
+        return self::FILE_UPLOAD;  // Default to file upload (backward compatible)
     }
 }

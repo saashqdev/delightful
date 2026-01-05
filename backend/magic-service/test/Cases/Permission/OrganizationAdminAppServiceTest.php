@@ -32,16 +32,16 @@ class OrganizationAdminAppServiceTest extends HttpTestCase
         parent::setUp();
         $this->organizationAdminAppService = $this->getContainer()->get(OrganizationAdminAppService::class);
 
-        // 为每个测试生成唯一的用户ID，避免测试之间的数据冲突
+        // Generate a unique user ID per test to avoid data conflicts
         $this->testUserId = 'test_user_' . uniqid();
 
-        // 清理可能存在的测试数据
+        // Clean up any existing test data
         $this->cleanUpTestData();
     }
 
     protected function tearDown(): void
     {
-        // 清理测试数据
+        // Clean up test data
         $this->cleanUpTestData();
 
         parent::tearDown();
@@ -49,7 +49,7 @@ class OrganizationAdminAppServiceTest extends HttpTestCase
 
     public function testGrantOrganizationAdminPermission(): void
     {
-        // 授予组织管理员权限
+        // Grant organization admin permission
         $organizationAdmin = $this->organizationAdminAppService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserId,
@@ -66,14 +66,14 @@ class OrganizationAdminAppServiceTest extends HttpTestCase
 
     public function testGetOrganizationAdminByUserId(): void
     {
-        // 先授予权限
+        // Grant permission first
         $this->organizationAdminAppService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserId,
             $this->testGrantorUserId
         );
 
-        // 根据用户ID获取组织管理员
+        // Get organization admin by user ID
         $organizationAdmin = $this->organizationAdminAppService->getByUserId(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserId
@@ -85,7 +85,7 @@ class OrganizationAdminAppServiceTest extends HttpTestCase
 
     public function testQueriesOrganizationAdminList(): void
     {
-        // 先创建几个组织管理员
+        // Create a few organization admins first
         $testUserIds = [];
         for ($i = 1; $i <= 3; ++$i) {
             $uniqueUserId = 'test_user_' . uniqid() . "_{$i}";
@@ -97,7 +97,7 @@ class OrganizationAdminAppServiceTest extends HttpTestCase
             );
         }
 
-        // 查询组织管理员列表
+        // Query organization admin list
         $page = new Page(1, 10);
         $result = $this->organizationAdminAppService->queries($this->createDataIsolation($this->testOrganizationCode), $page);
 
@@ -110,14 +110,14 @@ class OrganizationAdminAppServiceTest extends HttpTestCase
 
     public function testShowOrganizationAdminDetails(): void
     {
-        // 先授予权限
+        // Grant permission first
         $organizationAdmin = $this->organizationAdminAppService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserId,
             $this->testGrantorUserId
         );
 
-        // 获取详情
+        // Get details
         $details = $this->organizationAdminAppService->show($this->createDataIsolation($this->testOrganizationCode), $organizationAdmin->getId());
 
         $this->assertIsArray($details);
@@ -133,7 +133,7 @@ class OrganizationAdminAppServiceTest extends HttpTestCase
 
     public function testDestroyOrganizationAdmin(): void
     {
-        // 先授予权限
+        // Grant permission first
         $organizationAdmin = $this->organizationAdminAppService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserId,
@@ -142,10 +142,10 @@ class OrganizationAdminAppServiceTest extends HttpTestCase
 
         $organizationAdminId = $organizationAdmin->getId();
 
-        // 删除组织管理员
+        // Delete organization admin
         $this->organizationAdminAppService->destroy($this->createDataIsolation($this->testOrganizationCode), $organizationAdminId);
 
-        // 验证已删除
+        // Verify deletion
         $deletedOrganizationAdmin = $this->organizationAdminAppService->getByUserId(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserId
@@ -161,7 +161,7 @@ class OrganizationAdminAppServiceTest extends HttpTestCase
     private function cleanUpTestData(): void
     {
         try {
-            // 清理主测试用户
+            // Clean up primary test user
             if (isset($this->testUserId)) {
                 $organizationAdmin = $this->organizationAdminAppService->getByUserId(
                     $this->createDataIsolation($this->testOrganizationCode),
@@ -172,7 +172,7 @@ class OrganizationAdminAppServiceTest extends HttpTestCase
                 }
             }
 
-            // 清理其他测试用户（使用模式匹配）
+            // Clean up other test users (pattern-based)
             for ($i = 1; $i <= 5; ++$i) {
                 $testUserId = "test_user_{$i}";
                 $organizationAdmin = $this->organizationAdminAppService->getByUserId(
@@ -184,7 +184,7 @@ class OrganizationAdminAppServiceTest extends HttpTestCase
                 }
             }
         } catch (Exception $e) {
-            // 忽略清理错误
+            // Ignore cleanup errors
         }
     }
 }

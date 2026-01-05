@@ -36,9 +36,9 @@ class InitMagicDataCommand extends HyperfCommand
         protected ApplicationRepositoryInterface $applicationRepository,
         protected ModelConfigRepositoryInterface $modelConfigRepository,
     ) {
-        // 正常模式（不初始化模型网关数据）
+        // Normal mode (no model-gateway initialization)
         // php bin/hyperf.php init-magic:data
-        // 单元测试模式（会初始化模型网关数据）
+        // Unit-test mode (initializes model-gateway data)
         // php bin/hyperf.php init-magic:data --type=all --unit-test
         parent::__construct('init-magic:data');
     }
@@ -46,12 +46,12 @@ class InitMagicDataCommand extends HyperfCommand
     public function configure()
     {
         parent::configure();
-        $this->setDescription('初始化系统必要数据');
+        $this->setDescription('Initialize required system data');
 
-        // 添加选项，控制遇到错误时是否继续执行
-        $this->addOption('continue-on-error', 'c', InputOption::VALUE_NONE, '遇到错误时是否继续执行，默认遇到错误终止执行');
-        // 添加选项，控制在type=all时是否执行model-gateway初始化
-        $this->addOption('unit-test', 'u', InputOption::VALUE_NONE, '单元测试模式，用于控制type=all时是否执行model-gateway初始化');
+        // Option to continue execution when errors occur; default stops on error
+        $this->addOption('continue-on-error', 'c', InputOption::VALUE_NONE, 'Continue when errors occur; by default execution stops on error');
+        // Option to control model-gateway initialization when type=all
+        $this->addOption('unit-test', 'u', InputOption::VALUE_NONE, 'Unit-test mode; when type=all decide whether to initialize model-gateway');
     }
 
     public function handle()
@@ -59,86 +59,86 @@ class InitMagicDataCommand extends HyperfCommand
         try {
             $this->initAllData();
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('初始化数据失败: %s', $e->getMessage()));
-            return 1; // 返回非零状态码表示执行失败
+            $this->logger->error(sprintf('Failed to initialize data: %s', $e->getMessage()));
+            return 1; // Return non-zero status to indicate failure
         }
 
-        return 0; // 返回 0 表示执行成功
+        return 0; // Return 0 to indicate success
     }
 
     /**
-     * 初始化所有类型的数据.
+     * Initialize all data types.
      */
     protected function initAllData(): void
     {
-        $this->logger->info('初始化所有数据');
+        $this->logger->info('Initializing all data');
         $continueOnError = $this->input->getOption('continue-on-error');
         $isUnitTest = $this->input->getOption('unit-test');
 
-        // 检查magic_contact_users表是否有用户数据
+        // Check whether magic_contact_users already has user data
         try {
             $userCount = Db::table('magic_contact_users')->count();
             if ($userCount > 0) {
-                $this->logger->info("magic_contact_users表已有{$userCount}条用户数据，初始化成功");
+                $this->logger->info("magic_contact_users already has {$userCount} user records; initialization complete");
                 return;
             }
         } catch (Throwable $e) {
-            $this->logger->error('检查magic_contact_users表用户数据失败: ' . $e->getMessage());
-            // 如果检查失败，继续执行初始化过程
+            $this->logger->error('Failed to check magic_contact_users user data: ' . $e->getMessage());
+            // If the check fails, continue initialization
         }
 
         try {
-            // 调用各个初始化方法
+            // Invoke each initialization routine
             $this->initUserData();
         } catch (Throwable $e) {
-            $this->logger->error('初始化用户数据失败: ' . $e->getMessage());
+            $this->logger->error('Failed to initialize user data: ' . $e->getMessage());
             if (! $continueOnError) {
                 throw $e;
             }
         }
 
-        // 只有在单元测试模式下才初始化模型网关数据
+        // Initialize model gateway data only in unit-test mode
         if ($isUnitTest) {
             try {
                 $this->initModelGatewayData();
             } catch (Throwable $e) {
-                $this->logger->error('初始化模型网关数据失败: ' . $e->getMessage());
+                $this->logger->error('Failed to initialize model gateway data: ' . $e->getMessage());
                 if (! $continueOnError) {
                     throw $e;
                 }
             }
         } else {
-            $this->logger->info('跳过初始化模型网关数据（非单元测试模式）');
+            $this->logger->info('Skipping model gateway initialization (non-unit-test mode)');
         }
 
         try {
             $this->runAllDbSeeders();
         } catch (Throwable $e) {
-            $this->logger->error('执行数据库种子失败: ' . $e->getMessage());
+            $this->logger->error('Failed to run database seeders: ' . $e->getMessage());
             if (! $continueOnError) {
                 throw $e;
             }
         }
 
-        $this->logger->info('所有数据初始化完成');
+        $this->logger->info('All data initialization completed');
     }
 
     /**
-     * 初始化用户数据.
+     * Initialize user data.
      */
     protected function initUserData(): void
     {
-        $this->logger->info('初始化用户数据');
+        $this->logger->info('Initializing user data');
         $continueOnError = $this->input->getOption('continue-on-error');
 
         try {
-            // 这里添加用户初始化逻辑
+            // Place user initialization logic here
             // ...
 
-            $this->logger->info('用户数据初始化完成');
+            $this->logger->info('User data initialization complete');
         } catch (Throwable $e) {
             $this->logger->error(sprintf(
-                '初始化用户数据失败: %s, file:%s line:%s trace:%s',
+                'Failed to initialize user data: %s, file:%s line:%s trace:%s',
                 $e->getMessage(),
                 $e->getFile(),
                 $e->getLine(),
@@ -152,68 +152,68 @@ class InitMagicDataCommand extends HyperfCommand
     }
 
     /**
-     * 初始化API访问令牌.
+     * Initialize API access tokens.
      */
     protected function initModelGatewayData(): void
     {
-        $this->logger->info('初始化 ModelGateway 数据');
+        $this->logger->info('Initializing ModelGateway data');
         $continueOnError = $this->input->getOption('continue-on-error');
 
         $dataIsolation = new LLMDataIsolation('system', 'default');
 
         try {
-            // 初始化Token
+            // Initialize tokens
             $this->initAccessTokens($dataIsolation);
         } catch (Throwable $e) {
-            $this->logger->error('初始化访问令牌失败: ' . $e->getMessage());
+            $this->logger->error('Failed to initialize access tokens: ' . $e->getMessage());
             if (! $continueOnError) {
                 throw $e;
             }
         }
 
         try {
-            // 初始化模型配置数据
+            // Initialize model configuration data
             $this->initModelConfigs();
         } catch (Throwable $e) {
-            $this->logger->error('初始化模型配置失败: ' . $e->getMessage());
+            $this->logger->error('Failed to initialize model configuration: ' . $e->getMessage());
             if (! $continueOnError) {
                 throw $e;
             }
         }
 
-        $this->logger->info('ModelGateway 数据初始化完成');
+        $this->logger->info('ModelGateway data initialization completed');
     }
 
     /**
-     * 初始化访问令牌配置.
+     * Initialize access token configuration.
      */
     protected function initAccessTokens(LLMDataIsolation $dataIsolation): void
     {
-        $this->logger->info('开始初始化访问令牌');
+        $this->logger->info('Starting access token initialization');
         $continueOnError = $this->input->getOption('continue-on-error');
 
-        // Token配置定义
+        // Token configuration definitions
         $tokenConfigs = [
-            // 用户通用Token
+            // User-wide token
             [
                 'type' => AccessTokenType::User->value,
-                'name' => '用户通用Token',
-                'description' => '用于用户访问所有模型的API Token',
+                'name' => 'User General Token',
+                'description' => 'API token for users to access all models',
                 'models' => 'all',
                 'tokenValue' => env('UNIT_TEST_USER_TOKEN', ''),
                 'user_id' => 'default_user',
                 'total_amount' => 9999999,
             ],
-            // 应用通用Token
+            // Application-wide token
             [
                 'type' => AccessTokenType::Application->value,
-                'name' => '应用通用Token',
-                'description' => '用于应用程序访问所有模型的API Token',
+                'name' => 'Application General Token',
+                'description' => 'API token for applications to access all models',
                 'models' => 'all',
                 'tokenValue' => env('MAGIC_ACCESS_TOKEN', ''),
                 'app_code' => 'default_app',
-                'app_name' => '默认应用',
-                'app_description' => '系统默认创建的应用',
+                'app_name' => 'Default Application',
+                'app_description' => 'Application created by default',
                 'total_amount' => 9999999,
                 'user_id' => 'default_user',
             ],
@@ -224,7 +224,7 @@ class InitMagicDataCommand extends HyperfCommand
                 $this->createOrUpdateToken($dataIsolation, $config);
             } catch (Throwable $e) {
                 $this->logger->error(sprintf(
-                    '初始化访问令牌失败: %s, name: %s file:%s line:%s trace:%s',
+                    'Failed to initialize access token: %s, name: %s file:%s line:%s trace:%s',
                     $e->getMessage(),
                     $config['name'],
                     $e->getFile(),
@@ -232,40 +232,40 @@ class InitMagicDataCommand extends HyperfCommand
                     $e->getTraceAsString()
                 ));
 
-                // 如果不是继续执行模式，则抛出异常终止执行
+                // If not continuing on error, abort execution
                 if (! $continueOnError) {
-                    $this->logger->error('遇到错误终止执行，如需忽略错误继续执行请使用 --continue-on-error 选项');
+                    $this->logger->error('Stopping due to error; use --continue-on-error to ignore errors');
                     throw $e;
                 }
             }
         }
 
-        $this->logger->info('访问令牌初始化完成');
+        $this->logger->info('Access token initialization complete');
     }
 
     /**
-     * 创建或更新访问令牌.
+     * Create or update an access token.
      */
     protected function createOrUpdateToken(LLMDataIsolation $dataIsolation, array $config): void
     {
-        // 检查是否已存在同名token
+        // Check whether a token with the same name exists
         $existingToken = $this->accessTokenRepository->getByName($dataIsolation, $config['name']);
 
         if ($existingToken !== null) {
             $this->logger->info(sprintf(
-                'ModelGateway Token 名称：%s 已存在，跳过初始化',
+                'ModelGateway token name %s already exists; skipping initialization',
                 $config['name']
             ));
             return;
         }
 
-        // 获取token值
+        // Resolve token value
         $tokenValue = $config['tokenValue'] ?? '10086';
         if (empty($tokenValue) && $config['type'] === AccessTokenType::Application->value) {
             $tokenValue = Uuid::uuid4()->toString();
         }
 
-        // 创建访问令牌
+        // Create access token
         $accessToken = new AccessTokenEntity();
         $accessToken->setAccessToken($tokenValue);
         $accessToken->setType(AccessTokenType::from($config['type']));
@@ -282,7 +282,7 @@ class InitMagicDataCommand extends HyperfCommand
         $accessToken->setCreatedAt(new DateTime());
         $accessToken->setUpdatedAt(new DateTime());
 
-        // 处理关联ID
+        // Handle relation ID
         if ($config['type'] === AccessTokenType::Application->value) {
             $applicationEntity = $this->getOrCreateApplication($dataIsolation, $config);
             $accessToken->setRelationId($applicationEntity->getCode());
@@ -290,11 +290,11 @@ class InitMagicDataCommand extends HyperfCommand
             $accessToken->setRelationId('system');
         }
 
-        // 保存到数据库
+        // Persist to database
         $savedToken = $this->accessTokenRepository->save($dataIsolation, $accessToken);
 
         $this->logger->info(sprintf(
-            '初始化 ModelGateway Token，类型：%s，名称：%s，Token: %s',
+            'Initialized ModelGateway token. Type: %s, Name: %s, Token: %s',
             $config['type'],
             $config['name'],
             $savedToken->getAccessToken()
@@ -302,25 +302,25 @@ class InitMagicDataCommand extends HyperfCommand
     }
 
     /**
-     * 获取或创建应用.
+     * Get or create an application.
      */
     protected function getOrCreateApplication(LLMDataIsolation $dataIsolation, array $config): ApplicationEntity
     {
         $continueOnError = $this->input->getOption('continue-on-error');
 
         try {
-            // 检查应用是否已存在
+            // Check whether the application already exists
             $existingApp = $this->applicationRepository->getByCode($dataIsolation, $config['app_code']);
 
             if ($existingApp !== null) {
                 $this->logger->info(sprintf(
-                    '应用 代码：%s 已存在，跳过初始化',
+                    'Application code %s already exists; skipping initialization',
                     $config['app_code']
                 ));
                 return $existingApp;
             }
 
-            // 创建新应用
+            // Create a new application
             $application = new ApplicationEntity();
             $application->setCode($config['app_code']);
             $application->setName($config['app_name']);
@@ -331,11 +331,11 @@ class InitMagicDataCommand extends HyperfCommand
             $application->setCreatedAt(new DateTime());
             $application->setUpdatedAt(new DateTime());
 
-            // 保存应用
+            // Persist application
             $savedApp = $this->applicationRepository->save($dataIsolation, $application);
 
             $this->logger->info(sprintf(
-                '初始化应用，代码：%s，名称：%s',
+                'Initialized application. Code: %s, Name: %s',
                 $savedApp->getCode(),
                 $savedApp->getName()
             ));
@@ -343,7 +343,7 @@ class InitMagicDataCommand extends HyperfCommand
             return $savedApp;
         } catch (Throwable $e) {
             $this->logger->error(sprintf(
-                '初始化应用失败: %s, app_code: %s file:%s line:%s trace:%s',
+                'Failed to initialize application: %s, app_code: %s file:%s line:%s trace:%s',
                 $e->getMessage(),
                 $config['app_code'],
                 $e->getFile(),
@@ -351,32 +351,32 @@ class InitMagicDataCommand extends HyperfCommand
                 $e->getTraceAsString()
             ));
 
-            // 如果不是继续执行模式，则抛出异常终止执行
+            // If not continuing on error, abort execution
             if (! $continueOnError) {
-                $this->logger->error('遇到错误终止执行，如需忽略错误继续执行请使用 --continue-on-error 选项');
+                $this->logger->error('Stopping due to error; use --continue-on-error to ignore errors');
                 throw $e;
             }
 
-            throw $e; // 即使是继续执行模式，这里也需要向上抛异常，因为调用方需要应用实体对象
+            throw $e; // Still bubble up; caller needs the application entity
         }
     }
 
     /**
-     * 初始化模型配置数据.
+     * Initialize model configuration data.
      */
     protected function initModelConfigs(): void
     {
-        $this->logger->info('开始初始化模型配置数据');
+        $this->logger->info('Starting model configuration initialization');
 
         $dataIsolation = new LLMDataIsolation('system', 'default');
         $continueOnError = $this->input->getOption('continue-on-error');
 
-        // 模型基础配置
+        // Base model configuration
         $modelBaseConfigs = [
             'deepseek-v3' => [
                 'model' => 'ep-20250222192351-h5g65',
                 'type' => 'deepseek-v3',
-                'name' => '火山的deepseek-v3',
+                'name' => 'Volcengine deepseek-v3',
                 'implementation' => '\Hyperf\Odin\Model\DoubaoModel',
                 'implementation_config' => [
                     'base_url' => 'ModelGateWayHost|http://127.0.0.1:9503',
@@ -426,7 +426,7 @@ class InitMagicDataCommand extends HyperfCommand
             'deepseek-r1' => [
                 'model' => 'ep-20250205161348-4nxnn',
                 'type' => 'deepseek-r1',
-                'name' => '火山的deepseek-r1',
+                'name' => 'Volcengine deepseek-r1',
                 'id' => 745679428835708928,
                 'implementation' => '\Hyperf\Odin\Model\DoubaoModel',
                 'implementation_config' => [
@@ -438,7 +438,7 @@ class InitMagicDataCommand extends HyperfCommand
             'text-embedding-3-small' => [
                 'model' => 'text-embedding-3-small',
                 'type' => 'text-embedding-3-small',
-                'name' => '微软的text-embedding-3-small',
+                'name' => 'Microsoft text-embedding-3-small',
                 'id' => 756574747410190336,
                 'rpm' => 1000,
                 'implementation' => '\Hyperf\Odin\Model\AzureOpenAIModel',
@@ -451,7 +451,7 @@ class InitMagicDataCommand extends HyperfCommand
             ],
         ];
 
-        // 通用默认配置
+        // Common defaults
         $defaultConfig = [
             'enabled' => true,
             'total_amount' => 5000000.000000,
@@ -464,24 +464,24 @@ class InitMagicDataCommand extends HyperfCommand
             'updated_at' => new DateTime(),
         ];
 
-        // 创建模型
+        // Create models
         $count = 0;
         foreach ($modelBaseConfigs as $baseConfig) {
             try {
-                // 检查模型是否已存在
+                // Check whether the model already exists
                 $exists = Db::table('magic_api_model_configs')
                     ->where('model', $baseConfig['model'])
                     ->exists();
 
                 if ($exists) {
-                    $this->logger->info(sprintf('模型已存在，跳过初始化: %s', $baseConfig['name']));
+                    $this->logger->info(sprintf('Model already exists; skipping initialization: %s', $baseConfig['name']));
                     continue;
                 }
 
-                // 合并基础配置和默认配置
+                // Merge base config with defaults
                 $configData = array_merge($defaultConfig, $baseConfig);
 
-                // 创建 ModelConfigEntity 实体
+                // Create ModelConfigEntity
                 $modelConfigEntity = new ModelConfigEntity();
 
                 if (isset($configData['id'])) {
@@ -508,15 +508,15 @@ class InitMagicDataCommand extends HyperfCommand
                     $modelConfigEntity->setUpdatedAt($configData['updated_at']);
                 }
 
-                // 使用仓储保存模型配置
+                // Persist model configuration via repository
                 $this->modelConfigRepository->save($dataIsolation, $modelConfigEntity);
 
                 ++$count;
 
-                $this->logger->info(sprintf('成功初始化模型: %s', $configData['name']));
+                $this->logger->info(sprintf('Initialized model: %s', $configData['name']));
             } catch (Throwable $e) {
                 $this->logger->error(sprintf(
-                    '初始化模型配置失败: %s, model: %s  file:%s line:%s  trace:%s',
+                    'Failed to initialize model config: %s, model: %s  file:%s line:%s  trace:%s',
                     $e->getMessage(),
                     $baseConfig['model'],
                     $e->getFile(),
@@ -524,27 +524,27 @@ class InitMagicDataCommand extends HyperfCommand
                     $e->getTraceAsString()
                 ));
 
-                // 如果不是继续执行模式，则抛出异常终止执行
+                // If not continuing on error, abort execution
                 if (! $continueOnError) {
-                    $this->logger->error('遇到错误终止执行，如需忽略错误继续执行请使用 --continue-on-error 选项');
+                    $this->logger->error('Stopping due to error; use --continue-on-error to ignore errors');
                     throw $e;
                 }
             }
         }
 
-        $this->logger->info(sprintf('成功初始化 %d 条模型配置数据', $count));
+        $this->logger->info(sprintf('Initialized %d model configurations', $count));
     }
 
     /**
-     * 执行所有数据库种子.
+     * Run all database seeders.
      */
     protected function runAllDbSeeders(): void
     {
-        $this->logger->info('开始执行所有数据库种子');
+        $this->logger->info('Starting all database seeders');
         $continueOnError = $this->input->getOption('continue-on-error');
 
         try {
-            // 使用命令执行器执行db:seed命令
+            // Run db:seed via command executor
             $command = 'php bin/hyperf.php db:seed --force';
             $process = proc_open($command, [
                 0 => ['pipe', 'r'],
@@ -561,38 +561,38 @@ class InitMagicDataCommand extends HyperfCommand
                 $exitCode = proc_close($process);
 
                 if ($exitCode === 0) {
-                    $this->logger->info('所有数据库种子执行完成');
+                    $this->logger->info('All database seeders completed');
                     if (! empty($output)) {
-                        $this->logger->info('输出: ' . $output);
+                        $this->logger->info('Output: ' . $output);
                     }
                 } else {
-                    $errorMessage = '数据库种子执行失败';
+                    $errorMessage = 'Database seeder execution failed';
                     if (! empty($error)) {
-                        $errorMessage .= "\n错误信息: " . $error;
+                        $errorMessage .= "\nError output: " . $error;
                         $this->logger->error($error);
                     }
                     if (! empty($output)) {
-                        $errorMessage .= "\n输出信息: " . $output;
+                        $errorMessage .= "\nStdout: " . $output;
                         $this->logger->error($output);
                     }
 
-                    // 如果不是继续执行模式，则抛出异常终止执行
+                    // If not continuing on error, abort execution
                     if (! $continueOnError) {
                         throw new RuntimeException($errorMessage);
                     }
                 }
             } else {
-                $errorMessage = '无法启动执行数据库种子的进程';
+                $errorMessage = 'Failed to start process to run database seeders';
                 $this->logger->error($errorMessage);
 
-                // 如果不是继续执行模式，则抛出异常终止执行
+                // If not continuing on error, abort execution
                 if (! $continueOnError) {
                     throw new RuntimeException($errorMessage);
                 }
             }
         } catch (Throwable $e) {
             $this->logger->error(sprintf(
-                '执行数据库种子失败: %s, file:%s line:%s trace:%s',
+                'Failed to run database seeders: %s, file:%s line:%s trace:%s',
                 $e->getMessage(),
                 $e->getFile(),
                 $e->getLine(),

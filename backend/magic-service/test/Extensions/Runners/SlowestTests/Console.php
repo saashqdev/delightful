@@ -22,7 +22,7 @@ class Console extends Channel
             return;
         }
 
-        printf("\n检查到慢测试 (数量: %d):\n", count($tests));
+        printf("\nSlow tests detected (count: %d):\n", count($tests));
 
         foreach ($tests as $test => $time) {
             echo str_pad($time, 5, ' ', STR_PAD_LEFT) . " ms: {$test}" . PHP_EOL;

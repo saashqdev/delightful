@@ -10,17 +10,17 @@ namespace HyperfTest\Extensions\Runners\SlowestTests;
 abstract class Channel
 {
     /**
-     * 存放慢测试.
+     * Stores slow tests.
      */
     protected array $tests = [];
 
     /**
-     * 需要收集的最大测试数量.
+     * Maximum number of tests to collect.
      */
     protected ?int $rows;
 
     /**
-     * 测试时间超过min毫秒的需要被收集.
+     * Collect tests whose duration exceeds min milliseconds.
      */
     protected ?int $min;
 

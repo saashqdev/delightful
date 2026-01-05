@@ -6,9 +6,9 @@ declare(strict_types=1);
  */
 
 namespace App\Infrastructure\Repository\LongTermMemory;
-
-use App\Domain\LongTermMemory\DTO\MemoryQueryDTO;
-use App\Domain\LongTermMemory\Entity\LongTermMemoryEntity;
+    /**
+     * General query method (via DTO).
+     */
 use App\Domain\LongTermMemory\Entity\ValueObject\MemoryCategory;
 use App\Domain\LongTermMemory\Entity\ValueObject\MemoryStatus;
 use App\Domain\LongTermMemory\Entity\ValueObject\MemoryType;
@@ -21,7 +21,7 @@ use Hyperf\DbConnection\Db;
 use Ramsey\Uuid\Uuid;
 
 /**
- * 基于 MySQL 的长期记忆仓储实现.
+ * MySQL-backed repository for long-term memory.
  */
 class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
 {
@@ -30,7 +30,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 根据ID查找记忆.
+     * Find a memory by ID.
      */
     public function findById(string $id): ?LongTermMemoryEntity
     {
@@ -43,7 +43,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 根据ID列表批量查找记忆.
+     * Find multiple memories by ID list.
      */
     public function findByIds(array $ids): array
     {
@@ -60,7 +60,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 通用查询方法 (使用 DTO).
+     * General query method (via DTO).
      */
     public function findMemories(MemoryQueryDTO $dto): array
     {
@@ -70,7 +70,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
             ->where('user_id', $dto->userId)
             ->whereNull('deleted_at');
 
-        // 状态筛选
+        // Filter by status
         if ($dto->status !== null && ! empty($dto->status)) {
             if (is_array($dto->status)) {
                 $query->whereIn('status', $dto->status);
@@ -79,29 +79,29 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
             }
         }
 
-        // 类型筛选
+        // Filter by type
         if ($dto->type !== null) {
             $query->where('memory_type', $dto->type->value);
         }
 
-        // 项目ID筛选
+        // Filter by project ID
         if ($dto->projectId !== null) {
             $query->where('project_id', $dto->projectId);
         }
 
-        // 启用状态筛选
+        // Filter by enabled flag
         if ($dto->enabled !== null) {
             $query->where('enabled', $dto->enabled ? 1 : 0);
         }
 
-        // 标签筛选
+        // Filter by tags
         if (! empty($dto->tags)) {
             foreach ($dto->tags as $tag) {
                 $query->whereRaw('JSON_CONTAINS(tags, ?)', [Json::encode($tag)]);
             }
         }
 
-        // 关键词搜索
+        // Keyword search
         if ($dto->keyword !== null) {
             $query->where(function (Builder $subQuery) use ($dto) {
                 $subQuery->where('content', 'like', "%{$dto->keyword}%")
@@ -109,19 +109,19 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
             });
         }
 
-        // 简单分页：使用 offset
+        // Simple pagination via offset
         if ($dto->offset > 0) {
             $query->offset($dto->offset);
         }
 
-        // 排序
+        // Sort
         $query->orderBy($dto->orderBy, $dto->orderDirection);
-        // 添加 ID 作为次要排序字段，确保结果一致性
+        // Add ID as secondary sort key for consistent results
         if ($dto->orderBy !== 'id') {
             $query->orderBy('id', $dto->orderDirection);
         }
 
-        // 限制条数
+        // Limit rows
         if ($dto->limit > 0) {
             $query->limit($dto->limit);
         }
@@ -132,7 +132,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 根据查询条件统计记忆数量.
+     * Count memories by query conditions.
      */
     public function countMemories(MemoryQueryDTO $dto): int
     {
@@ -142,7 +142,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
             ->where('user_id', $dto->userId)
             ->whereNull('deleted_at');
 
-        // 状态筛选
+        // Filter by status
         if ($dto->status !== null && ! empty($dto->status)) {
             if (is_array($dto->status)) {
                 $query->whereIn('status', $dto->status);
@@ -151,29 +151,29 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
             }
         }
 
-        // 类型筛选
+        // Filter by type
         if ($dto->type !== null) {
             $query->where('memory_type', $dto->type->value);
         }
 
-        // 项目ID筛选
+        // Filter by project ID
         if ($dto->projectId !== null) {
             $query->where('project_id', $dto->projectId);
         }
 
-        // 启用状态筛选
+        // Filter by enabled flag
         if ($dto->enabled !== null) {
             $query->where('enabled', $dto->enabled ? 1 : 0);
         }
 
-        // 标签筛选
+        // Filter by tags
         if (! empty($dto->tags)) {
             foreach ($dto->tags as $tag) {
                 $query->whereRaw('JSON_CONTAINS(tags, ?)', [Json::encode($tag)]);
             }
         }
 
-        // 关键词搜索
+        // Keyword search
         if ($dto->keyword !== null) {
             $query->where(function (Builder $subQuery) use ($dto) {
                 $subQuery->where('content', 'like', "%{$dto->keyword}%")
@@ -185,7 +185,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 根据组织、应用、用户查找所有记忆.
+     * Find memories by org, app, and user.
      */
     public function findByUser(string $orgId, string $appId, string $userId, ?string $status = null): array
     {
@@ -205,7 +205,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 根据组织、应用、用户查找有效记忆（按分数排序）.
+     * Find effective memories by org/app/user (sorted by score).
      */
     public function findEffectiveMemoriesByUser(string $orgId, string $appId, string $userId, string $projectId, int $limit = 50): array
     {
@@ -214,19 +214,19 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
             ->where('app_id', $appId)
             ->where('user_id', $userId)
             ->whereIn('status', [MemoryStatus::ACTIVE->value, MemoryStatus::PENDING_REVISION->value])
-            ->where('enabled', 1) // 只获取启用的记忆
+            ->where('enabled', 1) // Only fetch enabled memories
             ->whereNull('deleted_at')
             ->where(function (Builder $query) {
                 $query->whereNull('expires_at')
                     ->orWhere('expires_at', '>', date('Y-m-d H:i:s'));
             });
 
-        // 根据 projectId 过滤记忆
+        // Filter memories by projectId
         if (empty($projectId)) {
-            // 获取没有项目ID的记忆（全局记忆）
+            // Fetch memories without projectId (global memories)
             $query->whereNull('project_id');
         } else {
-            // 获取指定项目ID的记忆
+            // Fetch memories for the specified projectId
             $query->where('project_id', $projectId);
         }
 
@@ -235,7 +235,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
         // Convert to entities
         $entities = $this->entitiesFromArray($data->toArray());
 
-        // Sort by effective score in PHP (descending order)
+        // Sort by effective score in PHP (descending)
         usort($entities, function ($a, $b) {
             return $b->getEffectiveScore() <=> $a->getEffectiveScore();
         });
@@ -245,7 +245,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 根据标签查找记忆.
+     * Find memories by tags.
      */
     public function findByTags(string $orgId, string $appId, string $userId, array $tags, ?string $status = null): array
     {
@@ -269,7 +269,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 根据记忆类型查找记忆.
+     * Find memories by type.
      */
     public function findByType(string $orgId, string $appId, string $userId, MemoryType $type, ?string $status = null): array
     {
@@ -290,7 +290,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 根据内容关键词搜索记忆.
+     * Search memories by content keyword.
      */
     public function searchByContent(string $orgId, string $appId, string $userId, string $keyword, ?string $status = null): array
     {
@@ -313,7 +313,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 查找需要淘汰的记忆.
+     * Find memories to evict.
      */
     public function findMemoriesToEvict(string $orgId, string $appId, string $userId): array
     {
@@ -336,7 +336,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 查找需要压缩的记忆.
+     * Find memories to compress.
      */
     public function findMemoriesToCompress(string $orgId, string $appId, string $userId): array
     {
@@ -361,13 +361,13 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 保存记忆.
+     * Save a memory.
      */
     public function save(LongTermMemoryEntity $memory): bool
     {
         $data = $this->entityToArray($memory);
 
-        // 生成ID
+        // Generate ID when missing
         if (empty($data['id'])) {
             $data['id'] = Uuid::uuid4()->toString();
             $memory->setId($data['id']);
@@ -377,7 +377,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 批量保存记忆.
+     * Save memories in batch.
      */
     public function saveBatch(array $memories): bool
     {
@@ -385,7 +385,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
         foreach ($memories as $memory) {
             $memoryData = $this->entityToArray($memory);
 
-            // 生成ID
+            // Generate ID when missing
             if (empty($memoryData['id'])) {
                 $memoryData['id'] = Uuid::uuid4()->toString();
                 $memory->setId($memoryData['id']);
@@ -398,12 +398,12 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 更新记忆.
+     * Update a memory.
      */
     public function update(LongTermMemoryEntity $memory): bool
     {
         $data = $this->entityToArray($memory);
-        unset($data['id']); // 不更新ID
+        unset($data['id']); // Keep ID unchanged
 
         return $this->query()
             ->where('id', $memory->getId())
@@ -411,8 +411,8 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 批量更新记忆.
-     * @param array<LongTermMemoryEntity> $memories 记忆实体列表
+     * Update memories in batch.
+     * @param array<LongTermMemoryEntity> $memories List of memory entities
      */
     public function updateBatch(array $memories): bool
     {
@@ -423,16 +423,16 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
         return Db::transaction(function () use ($memories) {
             $table = $this->model->getTable();
 
-            // 转换实体为数组数据
+            // Convert entities to array rows
             $dataArray = [];
             foreach ($memories as $memory) {
                 $dataArray[] = $this->entityToArray($memory);
             }
 
-            // 从第一个数据项自动获取字段列表
+            // Infer field list from the first row
             $fields = array_keys($dataArray[0]);
 
-            // 构建 VALUES 部分
+            // Build VALUES section
             $valueRows = [];
             $bindings = [];
 
@@ -445,7 +445,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
                 $valueRows[] = '(' . implode(', ', $placeholders) . ')';
             }
 
-            // 构建 REPLACE INTO SQL
+            // Build REPLACE INTO SQL
             $fieldsStr = implode(', ', $fields);
             $valuesStr = implode(', ', $valueRows);
             $sql = "REPLACE INTO {$table} ({$fieldsStr}) VALUES {$valuesStr}";
@@ -461,7 +461,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 删除记忆.
+     * Delete a memory.
      */
     public function delete(string $id): bool
     {
@@ -471,7 +471,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 批量删除记忆.
+     * Delete memories in batch.
      */
     public function deleteBatch(array $ids): bool
     {
@@ -481,7 +481,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 根据项目ID删除记忆.
+     * Delete memories by project ID.
      */
     public function deleteByProjectId(string $orgId, string $appId, string $userId, string $projectId): int
     {
@@ -494,7 +494,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 根据项目ID列表批量删除记忆.
+     * Delete memories by project ID list.
      */
     public function deleteByProjectIds(string $orgId, string $appId, string $userId, array $projectIds): int
     {
@@ -511,7 +511,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 软删除记忆.
+     * Soft delete a memory.
      */
     public function softDelete(string $id): bool
     {
@@ -521,7 +521,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 统计用户的记忆数量.
+     * Count memories for a user.
      */
     public function countByUser(string $orgId, string $appId, string $userId): int
     {
@@ -534,7 +534,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 统计用户各类型记忆的数量.
+     * Count memories per type for a user.
      */
     public function countByUserAndType(string $orgId, string $appId, string $userId): array
     {
@@ -556,7 +556,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 获取用户记忆的总大小（字符数）.
+     * Get total memory size (characters) for a user.
      */
     public function getTotalSizeByUser(string $orgId, string $appId, string $userId): int
     {
@@ -574,7 +574,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 批量检查记忆是否属于用户.
+     * Filter memory IDs that belong to the user.
      */
     public function filterMemoriesByUser(array $memoryIds, string $orgId, string $appId, string $userId): array
     {
@@ -593,7 +593,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 批量更新记忆的启用状态.
+     * Batch update memory enabled flag.
      */
     public function batchUpdateEnabled(array $memoryIds, bool $enabled, string $orgId, string $appId, string $userId): int
     {
@@ -601,13 +601,13 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
             return 0;
         }
 
-        // 只能更新 active 状态的记忆
+        // Only update memories in active status
         return LongTermMemoryModel::query()
             ->whereIn('id', $memoryIds)
             ->where('org_id', $orgId)
             ->where('app_id', $appId)
             ->where('user_id', $userId)
-            ->where('status', 'active') // 只有已生效的记忆可以启用/禁用
+            ->where('status', 'active') // Only effective memories can be toggled
             ->whereNull('deleted_at')
             ->update([
                 'enabled' => $enabled ? 1 : 0,
@@ -615,12 +615,12 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 获取指定分类的已启用记忆数量.
-     * @param string $orgId 组织ID
-     * @param string $appId 应用ID
-     * @param string $userId 用户ID
-     * @param MemoryCategory $category 记忆分类
-     * @return int 记忆数量
+     * Get the enabled memory count for a given category.
+     * @param string $orgId Organization ID
+     * @param string $appId Application ID
+     * @param string $userId User ID
+     * @param MemoryCategory $category Memory category
+     * @return int Memory count
      */
     public function getEnabledMemoryCountByCategory(string $orgId, string $appId, string $userId, MemoryCategory $category): int
     {
@@ -633,11 +633,11 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
             ->whereNull('deleted_at');
 
         if ($category === MemoryCategory::PROJECT) {
-            // 项目记忆：project_id 不为空且不为空字符串
+            // Project memories: project_id is not null/empty
             $query->whereNotNull('project_id')
                 ->where('project_id', '!=', '');
         } else {
-            // 全局记忆：project_id 为空或为空字符串
+            // Global memories: project_id is null or empty
             $query->where(function ($subQuery) {
                 $subQuery->whereNull('project_id')
                     ->orWhere('project_id', '');
@@ -648,7 +648,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 获取查询构建器.
+     * Get query builder.
      */
     private function query(): Builder
     {
@@ -656,7 +656,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 将实体转换为数组以进行存储.
+     * Convert entity to array for storage.
      */
     private function entityToArray(LongTermMemoryEntity $memory): array
     {
@@ -668,7 +668,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
             'origin_text' => $memory->getOriginText(),
             'memory_type' => $memory->getMemoryType()->value,
             'status' => $memory->getStatus()->value,
-            'enabled' => $memory->isEnabled() ? 1 : 0, // 将布尔值转换为数据库可接受的值
+            'enabled' => $memory->isEnabled() ? 1 : 0, // Convert boolean to DB-friendly value
             'confidence' => $memory->getConfidence(),
             'importance' => $memory->getImportance(),
             'access_count' => $memory->getAccessCount(),
@@ -690,7 +690,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 将数组转换为实体.
+     * Convert array to entity.
      */
     private function entityFromArray(array $data): LongTermMemoryEntity
     {
@@ -698,7 +698,7 @@ class MySQLLongTermMemoryRepository implements LongTermMemoryRepositoryInterface
     }
 
     /**
-     * 将数组集合转换为实体集合.
+     * Convert array rows to entity list.
      * @return LongTermMemoryEntity[]
      */
     private function entitiesFromArray(array $dataArray): array

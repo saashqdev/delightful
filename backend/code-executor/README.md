@@ -25,10 +25,10 @@ composer require dtyq/code-executor
 ```php
 <?php
 
-use Dtyq\CodeExecutor\Executor\Aliyun\AliyunExecutor;
-use Dtyq\CodeExecutor\Executor\Aliyun\AliyunRuntimeClient;
-use Dtyq\CodeExecutor\ExecutionRequest;
-use Dtyq\CodeExecutor\Language;
+use Delightful\CodeExecutor\Executor\Aliyun\AliyunExecutor;
+use Delightful\CodeExecutor\Executor\Aliyun\AliyunRuntimeClient;
+use Delightful\CodeExecutor\ExecutionRequest;
+use Delightful\CodeExecutor\Language;
 
 // Alibaba Cloud configuration
 $config = [

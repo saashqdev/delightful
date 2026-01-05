@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace Delightful\SuperMagic\Domain\SuperAgent\Repository\Persistence;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\TokenUsageRecordEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Facade\TokenUsageRecordRepositoryInterface;
-use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Model\TokenUsageRecordModel;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\TokenUsageRecordEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade\TokenUsageRecordRepositoryInterface;
+use Delightful\SuperMagic\Domain\SuperAgent\Repository\Model\TokenUsageRecordModel;
 
 class TokenUsageRecordRepository implements TokenUsageRecordRepositoryInterface
 {

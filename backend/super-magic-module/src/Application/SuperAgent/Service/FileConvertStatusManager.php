@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\SuperMagic\Application\SuperAgent\Service;
 
 use App\Infrastructure\Util\Locker\LockerInterface;
-use Dtyq\SuperMagic\Domain\SuperAgent\Constant\ConvertStatusEnum;
-use Dtyq\SuperMagic\Domain\SuperAgent\Constant\FileConvertConstant;
+use Delightful\SuperMagic\Domain\SuperAgent\Constant\ConvertStatusEnum;
+use Delightful\SuperMagic\Domain\SuperAgent\Constant\FileConvertConstant;
 use Hyperf\Codec\Json;
 use Hyperf\Logger\LoggerFactory;
 use Hyperf\Redis\Redis;

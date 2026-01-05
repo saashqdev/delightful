@@ -7,16 +7,16 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Endpoint\Department;
 
-use Dtyq\EasyDingTalk\Kernel\Exceptions\BadRequestException;
-use Dtyq\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
-use Dtyq\EasyDingTalk\OpenDev\Api\Department\DepartmentListSubApi;
-use Dtyq\EasyDingTalk\OpenDev\Api\Department\GetAllParentDepartmentByUserApi;
-use Dtyq\EasyDingTalk\OpenDev\Api\Department\GetDeptByIdApi;
-use Dtyq\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\Department\GetAllParentDepartmentByUserParameter;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\Department\GetDeptByIdParameter;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\Department\GetSubParameter;
-use Dtyq\EasyDingTalk\OpenDev\Result\Department\DeptResult;
+use Delightful\EasyDingTalk\Kernel\Exceptions\BadRequestException;
+use Delightful\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
+use Delightful\EasyDingTalk\OpenDev\Api\Department\DepartmentListSubApi;
+use Delightful\EasyDingTalk\OpenDev\Api\Department\GetAllParentDepartmentByUserApi;
+use Delightful\EasyDingTalk\OpenDev\Api\Department\GetDeptByIdApi;
+use Delightful\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
+use Delightful\EasyDingTalk\OpenDev\Parameter\Department\GetAllParentDepartmentByUserParameter;
+use Delightful\EasyDingTalk\OpenDev\Parameter\Department\GetDeptByIdParameter;
+use Delightful\EasyDingTalk\OpenDev\Parameter\Department\GetSubParameter;
+use Delightful\EasyDingTalk\OpenDev\Result\Department\DeptResult;
 use GuzzleHttp\RequestOptions;
 
 class DepartmentEndpoint extends OpenDevEndpoint

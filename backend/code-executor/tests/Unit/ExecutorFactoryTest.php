@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\CodeExecutor\Tests\Unit;
 
-use Dtyq\CodeExecutor\ExecutorFactory;
+use Delightful\CodeExecutor\ExecutorFactory;
 use Hyperf\Contract\ConfigInterface;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;

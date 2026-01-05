@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Structure\Widget;
 
-use Dtyq\FlowExprEngine\Structure\Widget\DisplayConfigExtra\AbstractExtra;
-use Dtyq\FlowExprEngine\Structure\Widget\DisplayConfigExtra\NumberExtra;
-use Dtyq\FlowExprEngine\Structure\Widget\DisplayConfigExtra\ObjectExtra;
-use Dtyq\FlowExprEngine\Structure\Widget\DisplayConfigExtra\SelectExtra;
-use Dtyq\FlowExprEngine\Structure\Widget\DisplayConfigExtra\SwitchExtra;
+use Delightful\FlowExprEngine\Structure\Widget\DisplayConfigExtra\AbstractExtra;
+use Delightful\FlowExprEngine\Structure\Widget\DisplayConfigExtra\NumberExtra;
+use Delightful\FlowExprEngine\Structure\Widget\DisplayConfigExtra\ObjectExtra;
+use Delightful\FlowExprEngine\Structure\Widget\DisplayConfigExtra\SelectExtra;
+use Delightful\FlowExprEngine\Structure\Widget\DisplayConfigExtra\SwitchExtra;
 
 class DisplayConfig
 {

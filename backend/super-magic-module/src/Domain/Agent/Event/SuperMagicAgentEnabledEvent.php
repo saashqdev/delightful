@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Domain\Agent\Event;
 
-use Dtyq\SuperMagic\Domain\Agent\Entity\SuperMagicAgentEntity;
+use Delightful\SuperMagic\Domain\Agent\Entity\SuperMagicAgentEntity;
 
 class SuperMagicAgentEnabledEvent
 {

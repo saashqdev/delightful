@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Tests\FileService;
 
-use Dtyq\CloudFile\Kernel\FilesystemProxy;
-use Dtyq\CloudFile\Kernel\Struct\AppendUploadFile;
-use Dtyq\CloudFile\Kernel\Struct\CredentialPolicy;
-use Dtyq\CloudFile\Kernel\Struct\UploadFile;
-use Dtyq\CloudFile\Tests\CloudFileBaseTest;
+use Delightful\CloudFile\Kernel\FilesystemProxy;
+use Delightful\CloudFile\Kernel\Struct\AppendUploadFile;
+use Delightful\CloudFile\Kernel\Struct\CredentialPolicy;
+use Delightful\CloudFile\Kernel\Struct\UploadFile;
+use Delightful\CloudFile\Tests\CloudFileBaseTest;
 use Exception;
 
 /**

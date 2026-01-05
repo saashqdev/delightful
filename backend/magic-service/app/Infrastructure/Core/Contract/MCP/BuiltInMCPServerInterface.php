@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Core\Contract\MCP;
 
-use Dtyq\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
+use Delightful\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
 
 interface BuiltInMCPServerInterface
 {

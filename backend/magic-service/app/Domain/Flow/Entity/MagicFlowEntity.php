@@ -20,9 +20,9 @@ use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Closure;
 use DateTime;
-use Dtyq\FlowExprEngine\Component;
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 use Throwable;
 
 class MagicFlowEntity extends AbstractEntity

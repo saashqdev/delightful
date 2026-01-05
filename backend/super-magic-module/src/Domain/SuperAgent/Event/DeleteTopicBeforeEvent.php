@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Domain\SuperAgent\Event;
 
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\TopicEntity;
 
 /**
  * Delete topic before event - triggered before topic deletion to handle sandbox termination.

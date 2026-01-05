@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Tests\OSS;
 
-use Dtyq\CloudFile\Kernel\Exceptions\CloudFileException;
-use Dtyq\CloudFile\Kernel\Struct\CredentialPolicy;
-use Dtyq\CloudFile\Tests\CloudFileBaseTest;
+use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use Delightful\CloudFile\Kernel\Struct\CredentialPolicy;
+use Delightful\CloudFile\Tests\CloudFileBaseTest;
 
 /**
  * OSS Credential-based Object Management Test.

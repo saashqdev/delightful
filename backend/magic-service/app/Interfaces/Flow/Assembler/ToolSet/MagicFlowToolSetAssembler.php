@@ -13,7 +13,7 @@ use App\Interfaces\Flow\DTO\ToolSet\MagicFlowToolSetDTO;
 use App\Interfaces\Kernel\Assembler\FileAssembler;
 use App\Interfaces\Kernel\Assembler\OperatorAssembler;
 use App\Interfaces\Kernel\DTO\PageDTO;
-use Dtyq\CloudFile\Kernel\Struct\FileLink;
+use Delightful\CloudFile\Kernel\Struct\FileLink;
 
 class MagicFlowToolSetAssembler
 {

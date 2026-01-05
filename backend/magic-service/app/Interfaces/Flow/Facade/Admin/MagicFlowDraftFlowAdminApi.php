@@ -12,7 +12,7 @@ use App\Domain\Flow\Entity\MagicFlowDraftEntity;
 use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowDraftQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Interfaces\Flow\Assembler\FlowDraft\MagicFlowDraftAssembler;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

@@ -17,7 +17,7 @@ use App\Infrastructure\Core\Dag\VertexResult;
 use App\Infrastructure\Core\Embeddings\DocumentSplitter\DocumentSplitterSwitch;
 use App\Infrastructure\Core\Embeddings\EmbeddingGenerator\EmbeddingGenerator;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\ComponentFactory;
 
 #[FlowNodeDefine(
     type: NodeType::TextSplitter->value,

@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\CodeExecutor;
 
-use Dtyq\CodeExecutor\Executor\Aliyun\AliyunRuntimeClient;
-use Dtyq\CodeExecutor\Executor\Aliyun\AliyunRuntimeClientFactory;
+use Delightful\CodeExecutor\Executor\Aliyun\AliyunRuntimeClient;
+use Delightful\CodeExecutor\Executor\Aliyun\AliyunRuntimeClientFactory;
 
 class ConfigProvider
 {

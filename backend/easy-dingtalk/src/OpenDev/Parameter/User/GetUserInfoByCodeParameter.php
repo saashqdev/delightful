@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Parameter\User;
 
-use Dtyq\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\AbstractParameter;
+use Delightful\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
+use Delightful\EasyDingTalk\OpenDev\Parameter\AbstractParameter;
 
 class GetUserInfoByCodeParameter extends AbstractParameter
 {

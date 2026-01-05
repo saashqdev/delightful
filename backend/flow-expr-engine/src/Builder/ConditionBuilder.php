@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Builder;
 
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Exception\FlowExprEngineException;
-use Dtyq\FlowExprEngine\Structure\Condition\CompareType;
-use Dtyq\FlowExprEngine\Structure\Condition\Condition;
-use Dtyq\FlowExprEngine\Structure\Condition\ConditionItem;
-use Dtyq\FlowExprEngine\Structure\Condition\ConditionItemType;
-use Dtyq\FlowExprEngine\Structure\Condition\Ops;
-use Dtyq\FlowExprEngine\Structure\Expression\Value;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
+use Delightful\FlowExprEngine\Structure\Condition\CompareType;
+use Delightful\FlowExprEngine\Structure\Condition\Condition;
+use Delightful\FlowExprEngine\Structure\Condition\ConditionItem;
+use Delightful\FlowExprEngine\Structure\Condition\ConditionItemType;
+use Delightful\FlowExprEngine\Structure\Condition\Ops;
+use Delightful\FlowExprEngine\Structure\Expression\Value;
 
 class ConditionBuilder extends Builder
 {

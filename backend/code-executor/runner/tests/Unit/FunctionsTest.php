@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\CodeRunnerBwrap\Tests\Unit;
 
-use Dtyq\CodeRunnerBwrap\StatusCode;
-use Dtyq\CodeRunnerBwrap\Tests\TestCase;
+use Delightful\CodeRunnerBwrap\StatusCode;
+use Delightful\CodeRunnerBwrap\Tests\TestCase;
 
 use function Dtyq\CodeRunnerBwrap\env;
 use function Dtyq\CodeRunnerBwrap\error;

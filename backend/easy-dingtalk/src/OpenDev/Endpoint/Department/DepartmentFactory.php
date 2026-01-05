@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Endpoint\Department;
 
-use Dtyq\EasyDingTalk\OpenDev\Result\Department\AllParentDepartmentResult;
-use Dtyq\EasyDingTalk\OpenDev\Result\Department\DeptResult;
+use Delightful\EasyDingTalk\OpenDev\Result\Department\AllParentDepartmentResult;
+use Delightful\EasyDingTalk\OpenDev\Result\Department\DeptResult;
 
 class DepartmentFactory
 {

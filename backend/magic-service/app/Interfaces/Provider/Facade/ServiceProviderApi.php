@@ -24,7 +24,7 @@ use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use App\Interfaces\Provider\DTO\CreateProviderConfigRequest;
 use App\Interfaces\Provider\DTO\SaveProviderModelDTO;
 use App\Interfaces\Provider\DTO\UpdateProviderConfigRequest;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Exception;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;

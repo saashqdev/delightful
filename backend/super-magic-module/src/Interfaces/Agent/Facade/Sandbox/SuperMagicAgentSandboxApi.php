@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Interfaces\Agent\Facade\Sandbox;
 
-use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Dtyq\SuperMagic\Application\Agent\Service\SuperMagicAgentAppService;
-use Dtyq\SuperMagic\Interfaces\Agent\Assembler\SuperMagicAgentAssembler;
+use Delightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\SuperMagic\Application\Agent\Service\SuperMagicAgentAppService;
+use Delightful\SuperMagic\Interfaces\Agent\Assembler\SuperMagicAgentAssembler;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

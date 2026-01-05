@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Delightful\CodeExecutor\Tests\Unit\Executor\Aliyun;
 
-use Dtyq\CodeExecutor\Exception\ExecuteFailedException;
-use Dtyq\CodeExecutor\Exception\InvalidArgumentException;
-use Dtyq\CodeExecutor\ExecutionRequest;
-use Dtyq\CodeExecutor\ExecutionResult;
-use Dtyq\CodeExecutor\Executor\Aliyun\AliyunExecutor;
-use Dtyq\CodeExecutor\Executor\Aliyun\AliyunRuntimeClient;
-use Dtyq\CodeExecutor\Language;
+use Delightful\CodeExecutor\Exception\ExecuteFailedException;
+use Delightful\CodeExecutor\Exception\InvalidArgumentException;
+use Delightful\CodeExecutor\ExecutionRequest;
+use Delightful\CodeExecutor\ExecutionResult;
+use Delightful\CodeExecutor\Executor\Aliyun\AliyunExecutor;
+use Delightful\CodeExecutor\Executor\Aliyun\AliyunRuntimeClient;
+use Delightful\CodeExecutor\Language;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Application\SuperAgent\Service;
 
-use Dtyq\SuperMagic\Domain\SuperAgent\Constant\TopicDuplicateConstant;
+use Delightful\SuperMagic\Domain\SuperAgent\Constant\TopicDuplicateConstant;
 use Hyperf\Codec\Json;
 use Hyperf\Logger\LoggerFactory;
 use Hyperf\Redis\Redis;

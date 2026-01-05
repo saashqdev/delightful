@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Infrastructure\Utils;
 
-use Dtyq\SuperMagic\Domain\SuperAgent\Constant\AgentConstant;
+use Delightful\SuperMagic\Domain\SuperAgent\Constant\AgentConstant;
 use InvalidArgumentException;
 
 class WorkDirectoryUtil

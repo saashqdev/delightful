@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Api\Conversation;
 
-use Dtyq\EasyDingTalk\OpenDev\Api\OpenDevApiAbstract;
-use Dtyq\SdkBase\Kernel\Constant\RequestMethod;
+use Delightful\EasyDingTalk\OpenDev\Api\OpenDevApiAbstract;
+use Delightful\SdkBase\Kernel\Constant\RequestMethod;
 
 class CreateSceneGroupApi extends OpenDevApiAbstract
 {

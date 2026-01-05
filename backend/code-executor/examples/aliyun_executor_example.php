@@ -7,11 +7,11 @@ declare(strict_types=1);
 // Load autoloader
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Dtyq\CodeExecutor\Exception\ExecuteException;
-use Dtyq\CodeExecutor\ExecutionRequest;
-use Dtyq\CodeExecutor\Executor\Aliyun\AliyunExecutor;
-use Dtyq\CodeExecutor\Executor\Aliyun\AliyunRuntimeClient;
-use Dtyq\CodeExecutor\Language;
+use Delightful\CodeExecutor\Exception\ExecuteException;
+use Delightful\CodeExecutor\ExecutionRequest;
+use Delightful\CodeExecutor\Executor\Aliyun\AliyunExecutor;
+use Delightful\CodeExecutor\Executor\Aliyun\AliyunRuntimeClient;
+use Delightful\CodeExecutor\Language;
 
 // Check if configuration file exists
 $configFile = __DIR__ . '/aliyun_executor_config.php';

@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\PhpScript\Admin;
 
-use Dtyq\RuleEngineCore\PhpScript\PlaceholderProviderInterface;
-use Dtyq\RuleEngineCore\PhpScript\RuleType;
-use Dtyq\RuleEngineCore\Standards\Admin\RuleExecutionSetInterface;
-use Dtyq\RuleEngineCore\Standards\Exception\InvalidRuleSessionException;
-use Dtyq\RuleEngineCore\Standards\Exception\RuleExecutionSetCreateException;
+use Delightful\RuleEngineCore\PhpScript\PlaceholderProviderInterface;
+use Delightful\RuleEngineCore\PhpScript\RuleType;
+use Delightful\RuleEngineCore\Standards\Admin\RuleExecutionSetInterface;
+use Delightful\RuleEngineCore\Standards\Exception\InvalidRuleSessionException;
+use Delightful\RuleEngineCore\Standards\Exception\RuleExecutionSetCreateException;
 use PhpParser\Node\Stmt;
 use PHPSandbox\Options\SandboxOptions;
 use PHPSandbox\PHPSandbox;

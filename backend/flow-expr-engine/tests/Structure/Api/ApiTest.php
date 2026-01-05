@@ -7,16 +7,16 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Structure\Api;
 
-use Dtyq\FlowExprEngine\Exception\FlowExprEngineException;
-use Dtyq\FlowExprEngine\Structure\Api\Api;
-use Dtyq\FlowExprEngine\Structure\Api\ApiMethod;
-use Dtyq\FlowExprEngine\Structure\Api\ApiRequest;
-use Dtyq\FlowExprEngine\Structure\Api\ApiRequestBodyType;
-use Dtyq\FlowExprEngine\Structure\Api\ApiRequestOptions;
-use Dtyq\FlowExprEngine\Structure\Api\ApiSend;
-use Dtyq\FlowExprEngine\Structure\Expression\Expression;
-use Dtyq\FlowExprEngine\Structure\StructureType;
-use Dtyq\FlowExprEngine\Test\BaseTestCase;
+use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
+use Delightful\FlowExprEngine\Structure\Api\Api;
+use Delightful\FlowExprEngine\Structure\Api\ApiMethod;
+use Delightful\FlowExprEngine\Structure\Api\ApiRequest;
+use Delightful\FlowExprEngine\Structure\Api\ApiRequestBodyType;
+use Delightful\FlowExprEngine\Structure\Api\ApiRequestOptions;
+use Delightful\FlowExprEngine\Structure\Api\ApiSend;
+use Delightful\FlowExprEngine\Structure\Expression\Expression;
+use Delightful\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\Test\BaseTestCase;
 
 /**
  * @internal

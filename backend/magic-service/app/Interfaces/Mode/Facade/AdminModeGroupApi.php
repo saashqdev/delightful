@@ -15,7 +15,7 @@ use App\Infrastructure\Util\Auth\PermissionChecker;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use App\Interfaces\Mode\DTO\Request\CreateModeGroupRequest;
 use App\Interfaces\Mode\DTO\Request\UpdateModeGroupRequest;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 #[ApiResponse('low_code')]

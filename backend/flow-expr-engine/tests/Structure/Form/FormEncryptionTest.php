@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Structure\Form;
 
-use Dtyq\FlowExprEngine\Builder\FormBuilder;
-use Dtyq\FlowExprEngine\Structure\Form\Form;
-use Dtyq\FlowExprEngine\Test\BaseTestCase;
+use Delightful\FlowExprEngine\Builder\FormBuilder;
+use Delightful\FlowExprEngine\Structure\Form\Form;
+use Delightful\FlowExprEngine\Test\BaseTestCase;
 
 /**
  * @internal

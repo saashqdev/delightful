@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\TaskScheduler\Entity\Query;
 
 use DateTime;
-use Dtyq\TaskScheduler\Entity\ValueObject\TaskSchedulerStatus;
+use Delightful\TaskScheduler\Entity\ValueObject\TaskSchedulerStatus;
 
 class TaskSchedulerQuery extends BaseQuery
 {

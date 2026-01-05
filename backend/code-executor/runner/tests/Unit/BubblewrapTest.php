@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\CodeRunnerBwrap\Tests\Unit;
 
-use Dtyq\CodeRunnerBwrap\Bubblewrap;
-use Dtyq\CodeRunnerBwrap\Tests\TestCase;
+use Delightful\CodeRunnerBwrap\Bubblewrap;
+use Delightful\CodeRunnerBwrap\Tests\TestCase;
 use Hyperf\Support\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 

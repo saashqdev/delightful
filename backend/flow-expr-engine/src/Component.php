@@ -7,23 +7,23 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine;
 
-use Dtyq\FlowExprEngine\Builder\ApiBuilder;
-use Dtyq\FlowExprEngine\Builder\Builder;
-use Dtyq\FlowExprEngine\Builder\ConditionBuilder;
-use Dtyq\FlowExprEngine\Builder\ExpressionBuilder;
-use Dtyq\FlowExprEngine\Builder\FormBuilder;
-use Dtyq\FlowExprEngine\Builder\ValueBuilder;
-use Dtyq\FlowExprEngine\Builder\WidgetBuilder;
-use Dtyq\FlowExprEngine\Exception\FlowExprEngineException;
-use Dtyq\FlowExprEngine\Kernel\Traits\UnderlineObjectJsonSerializable;
-use Dtyq\FlowExprEngine\Structure\Api\Api;
-use Dtyq\FlowExprEngine\Structure\Condition\Condition;
-use Dtyq\FlowExprEngine\Structure\Expression\Expression;
-use Dtyq\FlowExprEngine\Structure\Expression\Value;
-use Dtyq\FlowExprEngine\Structure\Form\Form;
-use Dtyq\FlowExprEngine\Structure\Structure;
-use Dtyq\FlowExprEngine\Structure\StructureType;
-use Dtyq\FlowExprEngine\Structure\Widget\Widget;
+use Delightful\FlowExprEngine\Builder\ApiBuilder;
+use Delightful\FlowExprEngine\Builder\Builder;
+use Delightful\FlowExprEngine\Builder\ConditionBuilder;
+use Delightful\FlowExprEngine\Builder\ExpressionBuilder;
+use Delightful\FlowExprEngine\Builder\FormBuilder;
+use Delightful\FlowExprEngine\Builder\ValueBuilder;
+use Delightful\FlowExprEngine\Builder\WidgetBuilder;
+use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
+use Delightful\FlowExprEngine\Kernel\Traits\UnderlineObjectJsonSerializable;
+use Delightful\FlowExprEngine\Structure\Api\Api;
+use Delightful\FlowExprEngine\Structure\Condition\Condition;
+use Delightful\FlowExprEngine\Structure\Expression\Expression;
+use Delightful\FlowExprEngine\Structure\Expression\Value;
+use Delightful\FlowExprEngine\Structure\Form\Form;
+use Delightful\FlowExprEngine\Structure\Structure;
+use Delightful\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\Structure\Widget\Widget;
 use JsonSerializable;
 
 class Component implements JsonSerializable

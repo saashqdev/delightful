@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Domain\SuperAgent\Repository\Persistence;
 
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\WorkspaceVersionEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Facade\WorkspaceVersionRepositoryInterface;
-use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Model\WorkspaceVersionModel;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\WorkspaceVersionEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade\WorkspaceVersionRepositoryInterface;
+use Delightful\SuperMagic\Domain\SuperAgent\Repository\Model\WorkspaceVersionModel;
 
 class WorkspaceVersionRepository implements WorkspaceVersionRepositoryInterface
 {

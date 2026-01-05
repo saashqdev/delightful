@@ -10,9 +10,9 @@ namespace Delightful\SuperMagic\Domain\SuperAgent\Repository\Persistence;
 use App\Infrastructure\Core\AbstractRepository;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use Carbon\Carbon;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\MessageScheduleLogEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
-use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Model\MessageScheduleLogModel;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\MessageScheduleLogEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
+use Delightful\SuperMagic\Domain\SuperAgent\Repository\Model\MessageScheduleLogModel;
 
 /**
  * Message schedule log repository implementation.

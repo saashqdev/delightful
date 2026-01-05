@@ -17,8 +17,8 @@ use App\Domain\ImageGenerate\ValueObject\ImageGenerateSourceEnum;
 use App\Infrastructure\Core\Collector\BuiltInToolSet\Annotation\BuiltInToolDefine;
 use App\Infrastructure\Util\Context\RequestContext;
 use Closure;
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 
 use function di;
 

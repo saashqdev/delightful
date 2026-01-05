@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Builder;
 
-use Dtyq\FlowExprEngine\Structure\Structure;
+use Delightful\FlowExprEngine\Structure\Structure;
 
 abstract class Builder
 {

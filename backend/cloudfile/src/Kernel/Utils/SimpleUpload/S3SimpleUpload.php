@@ -11,13 +11,13 @@ use Aws\Credentials\Credentials;
 use Aws\S3\MultipartUploader;
 use Aws\S3\S3Client;
 use DateTimeInterface;
-use Dtyq\CloudFile\Kernel\Exceptions\ChunkUploadException;
-use Dtyq\CloudFile\Kernel\Exceptions\CloudFileException;
-use Dtyq\CloudFile\Kernel\Struct\AppendUploadFile;
-use Dtyq\CloudFile\Kernel\Struct\ChunkUploadFile;
-use Dtyq\CloudFile\Kernel\Struct\UploadFile;
-use Dtyq\CloudFile\Kernel\Utils\CurlHelper;
-use Dtyq\CloudFile\Kernel\Utils\SimpleUpload;
+use Delightful\CloudFile\Kernel\Exceptions\ChunkUploadException;
+use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use Delightful\CloudFile\Kernel\Struct\AppendUploadFile;
+use Delightful\CloudFile\Kernel\Struct\ChunkUploadFile;
+use Delightful\CloudFile\Kernel\Struct\UploadFile;
+use Delightful\CloudFile\Kernel\Utils\CurlHelper;
+use Delightful\CloudFile\Kernel\Utils\SimpleUpload;
 use Throwable;
 
 class S3SimpleUpload extends SimpleUpload

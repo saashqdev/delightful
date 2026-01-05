@@ -20,7 +20,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Locker\LockerInterface;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use App\Interfaces\Kernel\Assembler\FileAssembler;
-use Dtyq\SuperMagic\Domain\SuperAgent\Constant\AgentConstant;
+use Delightful\SuperMagic\Domain\SuperAgent\Constant\AgentConstant;
 use Random\RandomException;
 use RedisException;
 use Throwable;

@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\AsyncEvent\Kernel;
 
-use Dtyq\AsyncEvent\AsyncEventUtil;
-use Dtyq\AsyncEvent\Kernel\Event\AsyncEventRetryMaxEvent;
-use Dtyq\AsyncEvent\Kernel\Service\AsyncEventService;
+use Delightful\AsyncEvent\AsyncEventUtil;
+use Delightful\AsyncEvent\Kernel\Event\AsyncEventRetryMaxEvent;
+use Delightful\AsyncEvent\Kernel\Service\AsyncEventService;
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Event\Contract\ListenerInterface;

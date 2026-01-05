@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\Test\OpenDev\Provider\ChatBot;
 
-use Dtyq\EasyDingTalk\OpenDev\Parameter\ChatBot\DownloadFileParameter;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\ChatBot\SendGroupMessageParameter;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\ChatBot\SendOneOnOneChatMessagesParameter;
-use Dtyq\EasyDingTalk\OpenDev\Result\ChatBot\DownloadFileResult;
-use Dtyq\EasyDingTalk\OpenDev\Result\ChatBot\SendGroupMessageResult;
-use Dtyq\EasyDingTalk\OpenDev\Result\ChatBot\SendOneOnOneChatMessagesResult;
-use Dtyq\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;
+use Delightful\EasyDingTalk\OpenDev\Parameter\ChatBot\DownloadFileParameter;
+use Delightful\EasyDingTalk\OpenDev\Parameter\ChatBot\SendGroupMessageParameter;
+use Delightful\EasyDingTalk\OpenDev\Parameter\ChatBot\SendOneOnOneChatMessagesParameter;
+use Delightful\EasyDingTalk\OpenDev\Result\ChatBot\DownloadFileResult;
+use Delightful\EasyDingTalk\OpenDev\Result\ChatBot\SendGroupMessageResult;
+use Delightful\EasyDingTalk\OpenDev\Result\ChatBot\SendOneOnOneChatMessagesResult;
+use Delightful\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;
 
 /**
  * @internal

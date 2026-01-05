@@ -12,8 +12,8 @@ $ composer require dtyq/flow-expr-engine -vvv
 ## Usage
 
 ```php
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 
 // Create form component example
 $formComponent = ComponentFactory::generateTemplate(StructureType::Form);

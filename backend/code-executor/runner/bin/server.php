@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * This file is part of Dtyq.
  */
-use Dtyq\CodeRunnerBwrap\Server;
+use Delightful\CodeRunnerBwrap\Server;
 use Hyperf\Codec\Json;
 
 use function Dtyq\CodeRunnerBwrap\env;

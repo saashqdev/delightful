@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Flow\Entity\ValueObject;
 
 use App\Infrastructure\Core\AbstractValueObject;
-use Dtyq\FlowExprEngine\Kernel\Utils\Functions;
+use Delightful\FlowExprEngine\Kernel\Utils\Functions;
 
 class NodeDebugResult extends AbstractValueObject
 {

@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\Kernel\Contracts\Factory;
 
-use Dtyq\EasyDingTalk\Kernel\Contracts\Endpoint\Endpoint;
-use Dtyq\EasyDingTalk\Kernel\Contracts\Endpoint\EndpointInterface;
-use Dtyq\EasyDingTalk\Kernel\Exceptions\SystemException;
-use Dtyq\SdkBase\SdkBase;
+use Delightful\EasyDingTalk\Kernel\Contracts\Endpoint\Endpoint;
+use Delightful\EasyDingTalk\Kernel\Contracts\Endpoint\EndpointInterface;
+use Delightful\EasyDingTalk\Kernel\Exceptions\SystemException;
+use Delightful\SdkBase\SdkBase;
 
 abstract class FactoryAbstract
 {

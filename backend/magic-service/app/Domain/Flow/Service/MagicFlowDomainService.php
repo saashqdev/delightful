@@ -22,10 +22,10 @@ use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 use DateTime;
-use Dtyq\AsyncEvent\AsyncEventUtil;
-use Dtyq\TaskScheduler\Entity\TaskScheduler;
-use Dtyq\TaskScheduler\Entity\TaskSchedulerCrontab;
-use Dtyq\TaskScheduler\Service\TaskSchedulerDomainService;
+use Delightful\AsyncEvent\AsyncEventUtil;
+use Delightful\TaskScheduler\Entity\TaskScheduler;
+use Delightful\TaskScheduler\Entity\TaskSchedulerCrontab;
+use Delightful\TaskScheduler\Service\TaskSchedulerDomainService;
 use Throwable;
 
 class MagicFlowDomainService extends AbstractDomainService

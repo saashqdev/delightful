@@ -8,12 +8,12 @@ declare(strict_types=1);
 namespace Delightful\TaskScheduler\Crontab;
 
 use DateTime;
-use Dtyq\TaskScheduler\Entity\Query\Page;
-use Dtyq\TaskScheduler\Entity\Query\TaskSchedulerQuery;
-use Dtyq\TaskScheduler\Entity\TaskScheduler;
-use Dtyq\TaskScheduler\Entity\ValueObject\TaskSchedulerStatus;
-use Dtyq\TaskScheduler\Service\TaskSchedulerDomainService;
-use Dtyq\TaskScheduler\Util\Locker;
+use Delightful\TaskScheduler\Entity\Query\Page;
+use Delightful\TaskScheduler\Entity\Query\TaskSchedulerQuery;
+use Delightful\TaskScheduler\Entity\TaskScheduler;
+use Delightful\TaskScheduler\Entity\ValueObject\TaskSchedulerStatus;
+use Delightful\TaskScheduler\Service\TaskSchedulerDomainService;
+use Delightful\TaskScheduler\Util\Locker;
 use Hyperf\Coroutine\Concurrent;
 use Hyperf\Crontab\Annotation\Crontab;
 use Hyperf\Logger\LoggerFactory;

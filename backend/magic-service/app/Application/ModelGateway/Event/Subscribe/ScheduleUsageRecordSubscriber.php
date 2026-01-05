@@ -12,7 +12,7 @@ use App\Domain\ModelGateway\Entity\MsgLogEntity;
 use App\Domain\ModelGateway\Entity\ValueObject\LLMDataIsolation;
 use App\Domain\ModelGateway\Service\MsgLogDomainService;
 use DateTime;
-use Dtyq\AsyncEvent\Kernel\Annotation\AsyncListener;
+use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Psr\Container\ContainerInterface;

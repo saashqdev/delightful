@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\AsyncEvent\Kernel\Crontab;
 
-use Dtyq\AsyncEvent\Kernel\Service\AsyncEventService;
+use Delightful\AsyncEvent\Kernel\Service\AsyncEventService;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;

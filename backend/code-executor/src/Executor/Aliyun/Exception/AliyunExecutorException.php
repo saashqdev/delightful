@@ -7,6 +7,6 @@ declare(strict_types=1);
 
 namespace Delightful\CodeExecutor\Executor\Aliyun\Exception;
 
-use Dtyq\CodeExecutor\Exception\Exception;
+use Delightful\CodeExecutor\Exception\Exception;
 
 class AliyunExecutorException extends Exception {}

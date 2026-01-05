@@ -7,17 +7,17 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\PhpScript;
 
-use Dtyq\RuleEngineCore\PhpScript\Admin\ExecutableClass;
-use Dtyq\RuleEngineCore\PhpScript\Admin\ExecutableCodeInterface;
-use Dtyq\RuleEngineCore\PhpScript\Admin\ExecutableConstant;
-use Dtyq\RuleEngineCore\PhpScript\Admin\ExecutableFunction;
-use Dtyq\RuleEngineCore\PhpScript\Admin\RuleExecutionSet;
-use Dtyq\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
-use Dtyq\RuleEngineCore\PhpScript\RuleServiceProvider;
-use Dtyq\RuleEngineCore\PhpScript\RuleType;
-use Dtyq\RuleEngineCore\Standards\Admin\InputType;
-use Dtyq\RuleEngineCore\Standards\RuleServiceProviderManager;
-use Dtyq\RuleEngineCore\Standards\RuleSessionType;
+use Delightful\RuleEngineCore\PhpScript\Admin\ExecutableClass;
+use Delightful\RuleEngineCore\PhpScript\Admin\ExecutableCodeInterface;
+use Delightful\RuleEngineCore\PhpScript\Admin\ExecutableConstant;
+use Delightful\RuleEngineCore\PhpScript\Admin\ExecutableFunction;
+use Delightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSet;
+use Delightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
+use Delightful\RuleEngineCore\PhpScript\RuleServiceProvider;
+use Delightful\RuleEngineCore\PhpScript\RuleType;
+use Delightful\RuleEngineCore\Standards\Admin\InputType;
+use Delightful\RuleEngineCore\Standards\RuleServiceProviderManager;
+use Delightful\RuleEngineCore\Standards\RuleSessionType;
 use Hyperf\Context\ApplicationContext;
 use HyperfTest\Cases\AbstractTestCase;
 use HyperfTest\Mock\ExecutableCode\TestClass;

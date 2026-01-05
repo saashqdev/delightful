@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Structure\Widget\DisplayConfigExtra;
 
-use Dtyq\FlowExprEngine\Component;
-use Dtyq\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\ComponentFactory;
 
 class SelectExtra extends AbstractExtra
 {

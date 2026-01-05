@@ -35,7 +35,7 @@ use App\Domain\Flow\Entity\ValueObject\NodeType;
 use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\FlowNodeDefine;
 use App\Infrastructure\Core\Dag\VertexResult;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Dtyq\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\ComponentFactory;
 use Generator;
 use Hyperf\Coroutine\Parallel;
 use Hyperf\DbConnection\Db;

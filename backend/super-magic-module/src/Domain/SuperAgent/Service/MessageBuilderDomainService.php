@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace Delightful\SuperMagic\Domain\SuperAgent\Service;
 
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Dtyq\SuperMagic\Domain\Chat\DTO\Message\ChatMessage\Item\SuperAgentTool;
-use Dtyq\SuperMagic\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessage;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ValueObject\ChatInstruction;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ValueObject\MessageType;
+use Delightful\SuperMagic\Domain\Chat\DTO\Message\ChatMessage\Item\SuperAgentTool;
+use Delightful\SuperMagic\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessage;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\ChatInstruction;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\MessageType;
 
 /**
  * Message Builder Service - Focused on building various message formats.

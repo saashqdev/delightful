@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Response;
 
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ProjectForkEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ProjectForkEntity;
 
 /**
  * Fork project response DTO.

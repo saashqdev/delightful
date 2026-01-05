@@ -13,7 +13,7 @@ use App\Domain\OrganizationEnvironment\Entity\MagicEnvironmentEntity;
 use App\ErrorCode\ChatErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Auth\PermissionChecker;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**

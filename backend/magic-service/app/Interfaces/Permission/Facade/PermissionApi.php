@@ -9,7 +9,7 @@ namespace App\Interfaces\Permission\Facade;
 
 use App\Application\Permission\Service\RoleAppService;
 use App\Domain\Permission\Entity\ValueObject\PermissionDataIsolation;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

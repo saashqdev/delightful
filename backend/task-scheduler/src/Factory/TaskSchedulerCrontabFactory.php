@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\TaskScheduler\Factory;
 
-use Dtyq\TaskScheduler\Entity\TaskSchedulerCrontab;
-use Dtyq\TaskScheduler\Repository\Persistence\Model\TaskSchedulerCrontabModel;
+use Delightful\TaskScheduler\Entity\TaskSchedulerCrontab;
+use Delightful\TaskScheduler\Repository\Persistence\Model\TaskSchedulerCrontabModel;
 
 class TaskSchedulerCrontabFactory
 {

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Application\SuperAgent\Event\Publish;
 
-use Dtyq\SuperMagic\Domain\SuperAgent\Event\FileBatchCopyEvent;
+use Delightful\SuperMagic\Domain\SuperAgent\Event\FileBatchCopyEvent;
 use Hyperf\Amqp\Annotation\Producer;
 use Hyperf\Amqp\Message\ProducerMessage;
 

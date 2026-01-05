@@ -9,8 +9,8 @@ namespace OpenDev\Provider\Calendar;
 
 use DateTime;
 use DateTimeZone;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\Calendar\CreateEventParameter;
-use Dtyq\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;
+use Delightful\EasyDingTalk\OpenDev\Parameter\Calendar\CreateEventParameter;
+use Delightful\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;
 
 /**
  * @internal

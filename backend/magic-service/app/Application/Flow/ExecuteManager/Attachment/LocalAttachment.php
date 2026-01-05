@@ -9,7 +9,7 @@ namespace App\Application\Flow\ExecuteManager\Attachment;
 
 use App\Domain\File\Service\FileDomainService;
 use App\Infrastructure\Util\FileType;
-use Dtyq\CloudFile\Kernel\Struct\UploadFile;
+use Delightful\CloudFile\Kernel\Struct\UploadFile;
 
 /**
  * 本地文件.

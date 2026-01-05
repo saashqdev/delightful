@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\Kernel\Exceptions;
 
-use Dtyq\EasyDingTalk\Kernel\Constants\ErrorCode;
+use Delightful\EasyDingTalk\Kernel\Constants\ErrorCode;
 use Throwable;
 
 class InvalidParameterException extends EasyDingTalkException

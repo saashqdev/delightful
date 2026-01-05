@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile;
 
-use Dtyq\CloudFile\Kernel\AdapterName;
-use Dtyq\CloudFile\Kernel\Driver\FileService\FileServiceApi;
-use Dtyq\CloudFile\Kernel\Driver\Local\LocalDriver;
-use Dtyq\CloudFile\Kernel\Exceptions\CloudFileException;
-use Dtyq\CloudFile\Kernel\FilesystemProxy;
-use Dtyq\SdkBase\SdkBase;
+use Delightful\CloudFile\Kernel\AdapterName;
+use Delightful\CloudFile\Kernel\Driver\FileService\FileServiceApi;
+use Delightful\CloudFile\Kernel\Driver\Local\LocalDriver;
+use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use Delightful\CloudFile\Kernel\FilesystemProxy;
+use Delightful\SdkBase\SdkBase;
 use League\Flysystem\FilesystemAdapter;
 use Xxtime\Flysystem\Aliyun\OssAdapter;
 

@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request;
 
 use App\Infrastructure\Core\AbstractRequestDTO;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ValueObject\SandboxFileNotificationDataValueObject;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\SandboxFileNotificationDataValueObject;
 
 /**
  * Sandbox file notification request DTO.

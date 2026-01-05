@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\CodeExecutor\Contract;
 
-use Dtyq\CodeExecutor\ExecutionRequest;
-use Dtyq\CodeExecutor\ExecutionResult;
-use Dtyq\CodeExecutor\Language;
+use Delightful\CodeExecutor\ExecutionRequest;
+use Delightful\CodeExecutor\ExecutionResult;
+use Delightful\CodeExecutor\Language;
 
 interface ExecutorInterface
 {

@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\TaskScheduler\Repository\Persistence;
 
-use Dtyq\TaskScheduler\Entity\Query\Page;
-use Dtyq\TaskScheduler\Entity\Query\TaskSchedulerCrontabQuery;
-use Dtyq\TaskScheduler\Entity\TaskSchedulerCrontab;
-use Dtyq\TaskScheduler\Factory\TaskSchedulerCrontabFactory;
-use Dtyq\TaskScheduler\Repository\Persistence\Model\TaskSchedulerCrontabModel;
+use Delightful\TaskScheduler\Entity\Query\Page;
+use Delightful\TaskScheduler\Entity\Query\TaskSchedulerCrontabQuery;
+use Delightful\TaskScheduler\Entity\TaskSchedulerCrontab;
+use Delightful\TaskScheduler\Factory\TaskSchedulerCrontabFactory;
+use Delightful\TaskScheduler\Repository\Persistence\Model\TaskSchedulerCrontabModel;
 
 class TaskSchedulerCrontabRepository extends AbstractRepository
 {

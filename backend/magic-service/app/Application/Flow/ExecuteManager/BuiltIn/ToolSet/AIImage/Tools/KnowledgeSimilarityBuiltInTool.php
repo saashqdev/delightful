@@ -19,8 +19,8 @@ use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Knowledge\Structure\Know
 use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeBaseDataIsolation;
 use App\Infrastructure\Core\Collector\BuiltInToolSet\Annotation\BuiltInToolDefine;
 use Closure;
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 
 #[BuiltInToolDefine]
 class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Config;
 
-use Dtyq\EasyDingTalk\Kernel\Contracts\Endpoint\EndpointConfig;
+use Delightful\EasyDingTalk\Kernel\Contracts\Endpoint\EndpointConfig;
 
 class OpenDevEndpointConfig extends EndpointConfig
 {

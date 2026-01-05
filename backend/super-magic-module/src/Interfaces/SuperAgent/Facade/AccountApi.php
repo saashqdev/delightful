@@ -11,9 +11,9 @@ use App\Application\File\Service\FileAppService;
 use App\Domain\Contact\Entity\ValueObject\UserType;
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Dtyq\SuperMagic\Application\SuperAgent\Service\AccountAppService;
-use Dtyq\SuperMagic\Domain\SuperAgent\Constant\AgentConstant;
+use Delightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\SuperMagic\Application\SuperAgent\Service\AccountAppService;
+use Delightful\SuperMagic\Domain\SuperAgent\Constant\AgentConstant;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 #[ApiResponse('low_code')]

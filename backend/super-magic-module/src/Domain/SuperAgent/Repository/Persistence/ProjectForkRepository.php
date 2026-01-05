@@ -9,9 +9,9 @@ namespace Delightful\SuperMagic\Domain\SuperAgent\Repository\Persistence;
 
 use App\Infrastructure\Core\AbstractRepository;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ProjectForkEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Facade\ProjectForkRepositoryInterface;
-use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Model\ProjectForkModel;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ProjectForkEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade\ProjectForkRepositoryInterface;
+use Delightful\SuperMagic\Domain\SuperAgent\Repository\Model\ProjectForkModel;
 use RuntimeException;
 
 /**

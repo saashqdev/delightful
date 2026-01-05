@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\Standards;
 
-use Dtyq\RuleEngineCore\Standards\Exception\ConfigurationException;
+use Delightful\RuleEngineCore\Standards\Exception\ConfigurationException;
 
 class RuleSessionType
 {

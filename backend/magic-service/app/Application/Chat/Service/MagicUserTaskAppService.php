@@ -36,16 +36,16 @@ use App\Interfaces\Chat\DTO\Response\UserTaskResponseDTO;
 use App\Interfaces\Chat\DTO\UserTaskDTO;
 use App\Interfaces\Chat\DTO\UserTaskValueDTO;
 use DateTime;
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\TaskScheduler\Entity\Query\Page;
-use Dtyq\TaskScheduler\Entity\Query\TaskSchedulerCrontabQuery;
-use Dtyq\TaskScheduler\Entity\TaskScheduler;
-use Dtyq\TaskScheduler\Entity\TaskSchedulerCrontab;
-use Dtyq\TaskScheduler\Entity\TaskSchedulerValue;
-use Dtyq\TaskScheduler\Entity\ValueObject\IntervalUnit;
-use Dtyq\TaskScheduler\Entity\ValueObject\TaskType;
-use Dtyq\TaskScheduler\Service\TaskConfigDomainService;
-use Dtyq\TaskScheduler\Service\TaskSchedulerDomainService;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\TaskScheduler\Entity\Query\Page;
+use Delightful\TaskScheduler\Entity\Query\TaskSchedulerCrontabQuery;
+use Delightful\TaskScheduler\Entity\TaskScheduler;
+use Delightful\TaskScheduler\Entity\TaskSchedulerCrontab;
+use Delightful\TaskScheduler\Entity\TaskSchedulerValue;
+use Delightful\TaskScheduler\Entity\ValueObject\IntervalUnit;
+use Delightful\TaskScheduler\Entity\ValueObject\TaskType;
+use Delightful\TaskScheduler\Service\TaskConfigDomainService;
+use Delightful\TaskScheduler\Service\TaskSchedulerDomainService;
 use Hyperf\DbConnection\Annotation\Transactional;
 
 class MagicUserTaskAppService extends AbstractAppService

@@ -12,8 +12,8 @@ use App\Domain\Chat\Entity\MagicChatFileEntity;
 use App\Domain\Chat\Entity\ValueObject\FileType;
 use App\Domain\Chat\Service\MagicChatFileDomainService;
 use App\Domain\File\Service\FileDomainService;
-use Dtyq\AsyncEvent\Kernel\Annotation\AsyncListener;
-use Dtyq\CloudFile\Kernel\Struct\UploadFile;
+use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
+use Delightful\CloudFile\Kernel\Struct\UploadFile;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 

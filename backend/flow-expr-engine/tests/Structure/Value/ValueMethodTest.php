@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Structure\Value;
 
-use Dtyq\FlowExprEngine\Builder\ValueBuilder;
-use Dtyq\FlowExprEngine\Test\BaseTestCase;
+use Delightful\FlowExprEngine\Builder\ValueBuilder;
+use Delightful\FlowExprEngine\Test\BaseTestCase;
 
 /**
  * @internal

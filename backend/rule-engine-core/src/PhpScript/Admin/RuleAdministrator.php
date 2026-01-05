@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\PhpScript\Admin;
 
-use Dtyq\RuleEngineCore\PhpScript\Repository\ExecutableCodeRepositoryInterface;
-use Dtyq\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface;
-use Dtyq\RuleEngineCore\Standards\Admin\AbstractRuleAdministrator;
-use Dtyq\RuleEngineCore\Standards\Admin\InputType;
-use Dtyq\RuleEngineCore\Standards\Admin\Properties;
-use Dtyq\RuleEngineCore\Standards\Admin\RuleAdministratorInterface;
-use Dtyq\RuleEngineCore\Standards\Admin\RuleExecutionSetInterface;
+use Delightful\RuleEngineCore\PhpScript\Repository\ExecutableCodeRepositoryInterface;
+use Delightful\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface;
+use Delightful\RuleEngineCore\Standards\Admin\AbstractRuleAdministrator;
+use Delightful\RuleEngineCore\Standards\Admin\InputType;
+use Delightful\RuleEngineCore\Standards\Admin\Properties;
+use Delightful\RuleEngineCore\Standards\Admin\RuleAdministratorInterface;
+use Delightful\RuleEngineCore\Standards\Admin\RuleExecutionSetInterface;
 
 class RuleAdministrator extends AbstractRuleAdministrator implements RuleAdministratorInterface
 {

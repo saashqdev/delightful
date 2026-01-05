@@ -7,17 +7,17 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Endpoint\ChatBot;
 
-use Dtyq\EasyDingTalk\Kernel\Exceptions\BadRequestException;
-use Dtyq\EasyDingTalk\OpenDev\Api\ChatBot\DownloadFileApi;
-use Dtyq\EasyDingTalk\OpenDev\Api\ChatBot\SendGroupMessageApi;
-use Dtyq\EasyDingTalk\OpenDev\Api\ChatBot\SendOneOnOneChatMessagesApi;
-use Dtyq\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\ChatBot\DownloadFileParameter;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\ChatBot\SendGroupMessageParameter;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\ChatBot\SendOneOnOneChatMessagesParameter;
-use Dtyq\EasyDingTalk\OpenDev\Result\ChatBot\DownloadFileResult;
-use Dtyq\EasyDingTalk\OpenDev\Result\ChatBot\SendGroupMessageResult;
-use Dtyq\EasyDingTalk\OpenDev\Result\ChatBot\SendOneOnOneChatMessagesResult;
+use Delightful\EasyDingTalk\Kernel\Exceptions\BadRequestException;
+use Delightful\EasyDingTalk\OpenDev\Api\ChatBot\DownloadFileApi;
+use Delightful\EasyDingTalk\OpenDev\Api\ChatBot\SendGroupMessageApi;
+use Delightful\EasyDingTalk\OpenDev\Api\ChatBot\SendOneOnOneChatMessagesApi;
+use Delightful\EasyDingTalk\OpenDev\Endpoint\OpenDevEndpoint;
+use Delightful\EasyDingTalk\OpenDev\Parameter\ChatBot\DownloadFileParameter;
+use Delightful\EasyDingTalk\OpenDev\Parameter\ChatBot\SendGroupMessageParameter;
+use Delightful\EasyDingTalk\OpenDev\Parameter\ChatBot\SendOneOnOneChatMessagesParameter;
+use Delightful\EasyDingTalk\OpenDev\Result\ChatBot\DownloadFileResult;
+use Delightful\EasyDingTalk\OpenDev\Result\ChatBot\SendGroupMessageResult;
+use Delightful\EasyDingTalk\OpenDev\Result\ChatBot\SendOneOnOneChatMessagesResult;
 use GuzzleHttp\RequestOptions;
 
 class ChatBotEndpoint extends OpenDevEndpoint

@@ -8,10 +8,10 @@ declare(strict_types=1);
 namespace Delightful\SuperMagic\Application\SuperAgent\Assembler;
 
 use DateTime;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\DTO\Request\TimeConfigDTO;
-use Dtyq\TaskScheduler\Entity\ValueObject\IntervalUnit;
-use Dtyq\TaskScheduler\Entity\ValueObject\TaskType;
-use Dtyq\TaskScheduler\Service\TaskConfigDomainService;
+use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request\TimeConfigDTO;
+use Delightful\TaskScheduler\Entity\ValueObject\IntervalUnit;
+use Delightful\TaskScheduler\Entity\ValueObject\TaskType;
+use Delightful\TaskScheduler\Service\TaskConfigDomainService;
 use InvalidArgumentException;
 
 /**

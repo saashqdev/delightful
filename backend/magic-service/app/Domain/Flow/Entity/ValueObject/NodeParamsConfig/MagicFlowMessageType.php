@@ -9,8 +9,8 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig;
 
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\FlowExprEngine\Component;
-use Dtyq\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\ComponentFactory;
 
 enum MagicFlowMessageType: string
 {

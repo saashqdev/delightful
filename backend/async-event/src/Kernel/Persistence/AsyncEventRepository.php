@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\AsyncEvent\Kernel\Persistence;
 
 use Carbon\Carbon;
-use Dtyq\AsyncEvent\Kernel\Constants\Status;
-use Dtyq\AsyncEvent\Kernel\Persistence\Model\AsyncEventModel;
+use Delightful\AsyncEvent\Kernel\Constants\Status;
+use Delightful\AsyncEvent\Kernel\Persistence\Model\AsyncEventModel;
 
 class AsyncEventRepository
 {

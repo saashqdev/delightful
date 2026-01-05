@@ -9,7 +9,7 @@ namespace HyperfTest\Cases;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\SuperMagic\Application\SuperAgent\Service\AgentAppService;
+use Delightful\SuperMagic\Application\SuperAgent\Service\AgentAppService;
 use Hyperf\Di\Definition\FactoryDefinition;
 use Hyperf\Di\Resolver\FactoryResolver;
 use Hyperf\Di\Resolver\ResolverDispatcher;

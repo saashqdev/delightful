@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Structure\Api;
 
-use Dtyq\FlowExprEngine\Component;
-use Dtyq\FlowExprEngine\Structure\Form\Form;
+use Delightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\Structure\Form\Form;
 use JsonSerializable;
 
 class ApiRequest implements JsonSerializable

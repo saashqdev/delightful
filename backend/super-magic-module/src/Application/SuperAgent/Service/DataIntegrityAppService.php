@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Application\SuperAgent\Service;
 
-use Dtyq\SuperMagic\Infrastructure\Database\Migration\ProjectArchitectureIntegrityValidator;
+use Delightful\SuperMagic\Infrastructure\Database\Migration\ProjectArchitectureIntegrityValidator;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 

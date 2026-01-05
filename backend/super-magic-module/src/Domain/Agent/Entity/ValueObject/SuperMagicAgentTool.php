@@ -9,7 +9,7 @@ namespace Delightful\SuperMagic\Domain\Agent\Entity\ValueObject;
 
 use App\Infrastructure\Core\AbstractValueObject;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\SuperMagic\ErrorCode\SuperMagicErrorCode;
+use Delightful\SuperMagic\ErrorCode\SuperMagicErrorCode;
 
 class SuperMagicAgentTool extends AbstractValueObject
 {

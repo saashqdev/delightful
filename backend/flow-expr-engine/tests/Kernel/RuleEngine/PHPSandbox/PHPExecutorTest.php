@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Kernel\RuleEngine\PHPSandbox;
 
-use Dtyq\FlowExprEngine\SdkInfo;
-use Dtyq\FlowExprEngine\Test\BaseTestCase;
-use Dtyq\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
-use Dtyq\RuleEngineCore\PhpScript\RuleType;
-use Dtyq\RuleEngineCore\Standards\Admin\InputType;
-use Dtyq\RuleEngineCore\Standards\RuleServiceProviderManager;
-use Dtyq\RuleEngineCore\Standards\RuleSessionType;
-use Dtyq\RuleEngineCore\Standards\StatelessRuleSessionInterface;
+use Delightful\FlowExprEngine\SdkInfo;
+use Delightful\FlowExprEngine\Test\BaseTestCase;
+use Delightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
+use Delightful\RuleEngineCore\PhpScript\RuleType;
+use Delightful\RuleEngineCore\Standards\Admin\InputType;
+use Delightful\RuleEngineCore\Standards\RuleServiceProviderManager;
+use Delightful\RuleEngineCore\Standards\RuleSessionType;
+use Delightful\RuleEngineCore\Standards\StatelessRuleSessionInterface;
 
 /**
  * @internal

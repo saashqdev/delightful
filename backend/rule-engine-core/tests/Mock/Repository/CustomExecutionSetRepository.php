@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace HyperfTest\Mock\Repository;
 
-use Dtyq\RuleEngineCore\PhpScript\Admin\RuleExecutionSet;
-use Dtyq\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryDecorator;
-use Dtyq\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface;
-use Dtyq\RuleEngineCore\Standards\Admin\Properties;
-use Dtyq\RuleEngineCore\Standards\Admin\RuleExecutionSetInterface;
+use Delightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSet;
+use Delightful\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryDecorator;
+use Delightful\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface;
+use Delightful\RuleEngineCore\Standards\Admin\Properties;
+use Delightful\RuleEngineCore\Standards\Admin\RuleExecutionSetInterface;
 use Hyperf\Context\ApplicationContext;
 use Psr\SimpleCache\CacheInterface;
 

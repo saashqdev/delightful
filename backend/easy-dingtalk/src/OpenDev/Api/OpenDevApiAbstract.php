@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Api;
 
-use Dtyq\EasyDingTalk\Kernel\Constants\Host;
-use Dtyq\EasyDingTalk\Kernel\Contracts\ApiManager\ApiAbstract;
+use Delightful\EasyDingTalk\Kernel\Constants\Host;
+use Delightful\EasyDingTalk\Kernel\Contracts\ApiManager\ApiAbstract;
 
 abstract class OpenDevApiAbstract extends ApiAbstract
 {

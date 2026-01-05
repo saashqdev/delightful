@@ -10,7 +10,7 @@ namespace Delightful\SuperMagic\Infrastructure\Utils\Auth\Guard;
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\SuperMagic\Interfaces\Authorization\Web\SandboxAuthorization;
+use Delightful\SuperMagic\Interfaces\Authorization\Web\SandboxAuthorization;
 use Hyperf\Codec\Json;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;

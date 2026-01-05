@@ -11,7 +11,7 @@ use App\Application\Flow\Service\MagicFlowToolSetAppService;
 use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowToolSetQuery;
 use App\Interfaces\Flow\Assembler\ToolSet\MagicFlowToolSetAssembler;
 use App\Interfaces\Flow\DTO\ToolSet\MagicFlowToolSetDTO;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

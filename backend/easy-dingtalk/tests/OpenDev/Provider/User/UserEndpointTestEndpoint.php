@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\Test\OpenDev\Provider\User;
 
-use Dtyq\EasyDingTalk\OpenDev\Parameter\User\GetListByDeptIdParameter;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\User\GetUserInfoByUserIdParameter;
-use Dtyq\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;
+use Delightful\EasyDingTalk\OpenDev\Parameter\User\GetListByDeptIdParameter;
+use Delightful\EasyDingTalk\OpenDev\Parameter\User\GetUserInfoByUserIdParameter;
+use Delightful\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;
 
 /**
  * @internal

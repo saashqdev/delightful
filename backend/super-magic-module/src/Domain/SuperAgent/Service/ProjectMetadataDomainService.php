@@ -9,10 +9,10 @@ namespace Delightful\SuperMagic\Domain\SuperAgent\Service;
 
 use App\Domain\File\Repository\Persistence\Facade\CloudFileRepositoryInterface;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
-use Dtyq\SuperMagic\Domain\SuperAgent\Constant\ProjectFileConstant;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\TaskFileEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Facade\TaskFileRepositoryInterface;
-use Dtyq\SuperMagic\Infrastructure\Utils\FileMetadataUtil;
+use Delightful\SuperMagic\Domain\SuperAgent\Constant\ProjectFileConstant;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\TaskFileEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade\TaskFileRepositoryInterface;
+use Delightful\SuperMagic\Infrastructure\Utils\FileMetadataUtil;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Throwable;
 

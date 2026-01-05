@@ -9,7 +9,7 @@ namespace HyperfTest\Cases\Application\MCP;
 
 use App\Application\MCP\BuiltInMCP\SuperMagicChat\SuperMagicChatManager;
 use App\Domain\MCP\Entity\ValueObject\MCPDataIsolation;
-use Dtyq\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
+use Delightful\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
 use HyperfTest\Cases\BaseTest;
 
 /**

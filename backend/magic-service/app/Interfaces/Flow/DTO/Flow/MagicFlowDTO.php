@@ -10,7 +10,7 @@ namespace App\Interfaces\Flow\DTO\Flow;
 use App\Interfaces\Flow\Assembler\Node\MagicFlowNodeAssembler;
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 use App\Interfaces\Flow\DTO\Node\NodeDTO;
-use Dtyq\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\Component;
 
 class MagicFlowDTO extends AbstractFlowDTO
 {

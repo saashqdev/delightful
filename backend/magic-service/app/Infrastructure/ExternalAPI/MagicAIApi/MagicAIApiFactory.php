@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\MagicAIApi;
 
 use App\Infrastructure\ExternalAPI\MagicAIApi\Kernel\MagicAIApiException;
-use Dtyq\SdkBase\SdkBase;
+use Delightful\SdkBase\SdkBase;
 use Hyperf\Contract\ConfigInterface;
 use Psr\Container\ContainerInterface;
 

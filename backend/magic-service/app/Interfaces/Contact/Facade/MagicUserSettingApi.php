@@ -12,7 +12,7 @@ use App\Domain\Contact\Entity\ValueObject\Query\MagicUserSettingQuery;
 use App\Infrastructure\Core\AbstractApi;
 use App\Interfaces\Contact\Assembler\MagicUserSettingAssembler;
 use App\Interfaces\Contact\DTO\MagicUserSettingDTO;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse('low_code')]

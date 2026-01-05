@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade;
 
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\MessageScheduleEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\MessageScheduleEntity;
 
 /**
  * Message schedule repository interface.

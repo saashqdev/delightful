@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Structure\Condition;
 
-use Dtyq\FlowExprEngine\Builder\ConditionBuilder;
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\Condition\Condition;
-use Dtyq\FlowExprEngine\Structure\Condition\ConditionItem;
-use Dtyq\FlowExprEngine\Test\BaseTestCase;
+use Delightful\FlowExprEngine\Builder\ConditionBuilder;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\Condition\Condition;
+use Delightful\FlowExprEngine\Structure\Condition\ConditionItem;
+use Delightful\FlowExprEngine\Test\BaseTestCase;
 
 /**
  * @internal

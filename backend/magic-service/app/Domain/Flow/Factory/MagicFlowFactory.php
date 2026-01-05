@@ -15,7 +15,7 @@ use App\Domain\Flow\Entity\ValueObject\NodeOutput;
 use App\Domain\Flow\Entity\ValueObject\Type;
 use App\Domain\Flow\Repository\Persistence\Model\MagicFlowModel;
 use DateTime;
-use Dtyq\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\ComponentFactory;
 
 class MagicFlowFactory
 {

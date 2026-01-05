@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request;
 
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\SuperMagic\ErrorCode\SuperAgentErrorCode;
+use Delightful\SuperMagic\ErrorCode\SuperAgentErrorCode;
 
 class CreateBatchDownloadRequestDTO
 {

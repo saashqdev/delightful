@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Interfaces\Flow\DTO\Node;
 
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
-use Dtyq\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\Component;
 
 class NodeInputDTO extends AbstractFlowDTO
 {

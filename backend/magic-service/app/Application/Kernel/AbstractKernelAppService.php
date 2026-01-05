@@ -32,7 +32,7 @@ use App\Infrastructure\Core\DataIsolation\HandleDataIsolationInterface;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Auth\PermissionChecker;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\CloudFile\Kernel\Struct\FileLink;
+use Delightful\CloudFile\Kernel\Struct\FileLink;
 use Qbhy\HyperfAuth\Authenticatable;
 
 abstract class AbstractKernelAppService

@@ -17,8 +17,8 @@ use App\Domain\MCP\Service\MCPServerToolDomainService;
 use App\ErrorCode\MCPErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Interfaces\Flow\DTO\MagicFlowApiChatDTO;
-use Dtyq\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
-use Dtyq\PhpMcp\Types\Tools\Tool;
+use Delightful\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
+use Delightful\PhpMcp\Types\Tools\Tool;
 use Qbhy\HyperfAuth\Authenticatable;
 
 class MCPServerStreamableAppService extends AbstractMCPAppService

@@ -15,7 +15,7 @@ use App\Domain\Contact\Service\MagicUserDomainService;
 use App\ErrorCode\AsrErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\SuperMagic\Domain\SuperAgent\Service\TaskFileDomainService;
+use Delightful\SuperMagic\Domain\SuperAgent\Service\TaskFileDomainService;
 use Hyperf\Contract\TranslatorInterface;
 use Psr\Log\LoggerInterface;
 use Throwable;

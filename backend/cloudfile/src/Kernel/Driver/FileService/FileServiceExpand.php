@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Kernel\Driver\FileService;
 
-use Dtyq\CloudFile\Kernel\Driver\ExpandInterface;
-use Dtyq\CloudFile\Kernel\Exceptions\CloudFileException;
-use Dtyq\CloudFile\Kernel\Struct\ChunkDownloadConfig;
-use Dtyq\CloudFile\Kernel\Struct\CredentialPolicy;
-use Dtyq\CloudFile\Kernel\Struct\FileLink;
-use Dtyq\CloudFile\Kernel\Struct\FileMetadata;
-use Dtyq\CloudFile\Kernel\Struct\FilePreSignedUrl;
+use Delightful\CloudFile\Kernel\Driver\ExpandInterface;
+use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use Delightful\CloudFile\Kernel\Struct\ChunkDownloadConfig;
+use Delightful\CloudFile\Kernel\Struct\CredentialPolicy;
+use Delightful\CloudFile\Kernel\Struct\FileLink;
+use Delightful\CloudFile\Kernel\Struct\FileMetadata;
+use Delightful\CloudFile\Kernel\Struct\FilePreSignedUrl;
 use League\Flysystem\FileAttributes;
 
 class FileServiceExpand implements ExpandInterface

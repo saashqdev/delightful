@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Tests\Local;
 
-use Dtyq\CloudFile\Kernel\Driver\Local\LocalExpand;
-use Dtyq\CloudFile\Kernel\Exceptions\CloudFileException;
-use Dtyq\CloudFile\Kernel\Struct\CredentialPolicy;
-use Dtyq\CloudFile\Kernel\Struct\FileLink;
-use Dtyq\CloudFile\Kernel\Struct\FileMetadata;
+use Delightful\CloudFile\Kernel\Driver\Local\LocalExpand;
+use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use Delightful\CloudFile\Kernel\Struct\CredentialPolicy;
+use Delightful\CloudFile\Kernel\Struct\FileLink;
+use Delightful\CloudFile\Kernel\Struct\FileMetadata;
 use PHPUnit\Framework\TestCase;
 
 /**

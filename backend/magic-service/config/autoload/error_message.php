@@ -24,7 +24,7 @@ use App\ErrorCode\TokenErrorCode;
 use App\ErrorCode\UserErrorCode;
 use App\ErrorCode\UserTaskErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
-use Dtyq\SuperMagic\ErrorCode\SuperMagicErrorCode;
+use Delightful\SuperMagic\ErrorCode\SuperMagicErrorCode;
 
 return [
     'exception_class' => BusinessException::class,

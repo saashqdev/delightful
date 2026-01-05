@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\V1\Template;
 
-use Dtyq\FlowExprEngine\Component;
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 
 class StartInputTemplate
 {

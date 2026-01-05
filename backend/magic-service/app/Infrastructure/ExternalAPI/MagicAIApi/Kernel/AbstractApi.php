@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ExternalAPI\MagicAIApi\Kernel;
 
-use Dtyq\SdkBase\Kernel\Constant\RequestMethod;
-use Dtyq\SdkBase\SdkBase;
+use Delightful\SdkBase\Kernel\Constant\RequestMethod;
+use Delightful\SdkBase\SdkBase;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;

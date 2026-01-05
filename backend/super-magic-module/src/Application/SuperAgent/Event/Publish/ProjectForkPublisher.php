@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Application\SuperAgent\Event\Publish;
 
-use Dtyq\SuperMagic\Domain\SuperAgent\Event\ProjectForkEvent;
+use Delightful\SuperMagic\Domain\SuperAgent\Event\ProjectForkEvent;
 use Hyperf\Amqp\Annotation\Producer;
 use Hyperf\Amqp\Message\ProducerMessage;
 use PhpAmqpLib\Message\AMQPMessage;

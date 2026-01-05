@@ -18,7 +18,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\File\Parser\FileParser;
 use App\Infrastructure\Util\FileType;
 use App\Infrastructure\Util\SSRF\Exception\SSRFException;
-use Dtyq\FlowExprEngine\Exception\FlowExprEngineException;
+use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
 
 #[FlowNodeDefine(type: NodeType::Loader->value, code: NodeType::Loader->name, name: '文档解析', paramsConfig: LoaderNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: false, needOutput: true)]
 class LoaderNodeRunner extends NodeRunner

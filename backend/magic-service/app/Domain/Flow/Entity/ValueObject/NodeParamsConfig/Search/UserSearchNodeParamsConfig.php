@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search;
 
 use App\Domain\Flow\Entity\ValueObject\NodeOutput;
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 use Hyperf\Codec\Json;
 
 class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig

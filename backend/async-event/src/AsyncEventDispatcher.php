@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\AsyncEvent;
 
-use Dtyq\AsyncEvent\Kernel\Annotation\AsyncListener;
-use Dtyq\AsyncEvent\Kernel\Service\AsyncEventService;
-use Dtyq\AsyncEvent\Kernel\Utils\Locker;
+use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
+use Delightful\AsyncEvent\Kernel\Service\AsyncEventService;
+use Delightful\AsyncEvent\Kernel\Utils\Locker;
 use Hyperf\Di\Annotation\AnnotationCollector;
 use Hyperf\Engine\Coroutine;
 use Psr\EventDispatcher\EventDispatcherInterface;

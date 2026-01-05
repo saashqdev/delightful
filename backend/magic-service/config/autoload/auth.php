@@ -7,8 +7,8 @@ declare(strict_types=1);
 use App\Infrastructure\Util\Auth\Guard\WebsocketChatUserGuard;
 use App\Infrastructure\Util\Auth\Guard\WebUserGuard;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\SuperMagic\Infrastructure\Utils\Auth\Guard\SandboxGuard;
-use Dtyq\SuperMagic\Interfaces\Authorization\Web\SandboxAuthorization;
+use Delightful\SuperMagic\Infrastructure\Utils\Auth\Guard\SandboxGuard;
+use Delightful\SuperMagic\Interfaces\Authorization\Web\SandboxAuthorization;
 use Qbhy\HyperfAuth\Provider\EloquentProvider;
 
 return [

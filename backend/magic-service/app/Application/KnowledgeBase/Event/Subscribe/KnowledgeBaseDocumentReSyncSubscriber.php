@@ -13,7 +13,7 @@ use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeType;
 use App\Domain\KnowledgeBase\Event\KnowledgeBaseDocumentSavedEvent;
 use App\Domain\KnowledgeBase\Service\KnowledgeBaseDocumentDomainService;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use Dtyq\AsyncEvent\Kernel\Annotation\AsyncListener;
+use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Psr\Log\LoggerInterface;

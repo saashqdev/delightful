@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Parameter;
 
-use Dtyq\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
+use Delightful\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
 
 abstract class AbstractParameter
 {

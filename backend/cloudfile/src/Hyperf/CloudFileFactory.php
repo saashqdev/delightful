@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Hyperf;
 
-use Dtyq\CloudFile\CloudFile;
-use Dtyq\CloudFile\Kernel\Exceptions\CloudFileException;
-use Dtyq\SdkBase\SdkBase;
+use Delightful\CloudFile\CloudFile;
+use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use Delightful\SdkBase\SdkBase;
 use Hyperf\Contract\ConfigInterface;
 use Psr\Container\ContainerInterface;
 

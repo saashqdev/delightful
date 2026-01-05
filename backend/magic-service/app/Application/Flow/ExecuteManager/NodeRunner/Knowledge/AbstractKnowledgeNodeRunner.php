@@ -19,7 +19,7 @@ use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Embeddings\EmbeddingGenerator\EmbeddingGenerator;
 use App\Infrastructure\Core\Embeddings\VectorStores\VectorStoreDriver;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\Component;
 
 abstract class AbstractKnowledgeNodeRunner extends NodeRunner
 {

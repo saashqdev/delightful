@@ -9,8 +9,8 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\End;
 
 use App\Domain\Flow\Entity\ValueObject\NodeOutput;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\NodeParamsConfig;
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 
 class EndNodeParamsConfig extends NodeParamsConfig
 {

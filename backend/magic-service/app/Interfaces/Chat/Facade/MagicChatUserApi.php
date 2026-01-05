@@ -14,7 +14,7 @@ use App\Domain\Contact\Entity\ValueObject\AddFriendType;
 use App\Domain\Contact\Entity\ValueObject\UserType;
 use App\Interfaces\Chat\Assembler\PageListAssembler;
 use App\Interfaces\Chat\Assembler\UserAssembler;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use JetBrains\PhpStorm\ArrayShape;
 use Throwable;

@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\TaskScheduler\Test\Cases\Entity;
 
 use DateTime;
-use Dtyq\TaskScheduler\Entity\TaskSchedulerCrontab;
-use Dtyq\TaskScheduler\Test\Cases\AbstractTestCase;
+use Delightful\TaskScheduler\Entity\TaskSchedulerCrontab;
+use Delightful\TaskScheduler\Test\Cases\AbstractTestCase;
 
 /**
  * @internal

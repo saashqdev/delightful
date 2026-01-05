@@ -12,7 +12,7 @@ use App\Domain\Contact\Service\MagicUserDomainService;
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\AbstractApi;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 

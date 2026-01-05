@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Domain\SuperAgent\Event;
 
-use Dtyq\SuperMagic\Interfaces\SuperAgent\DTO\TopicTaskMessageDTO;
+use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\TopicTaskMessageDTO;
 
 class RunTaskCallbackEvent extends AbstractEvent
 {

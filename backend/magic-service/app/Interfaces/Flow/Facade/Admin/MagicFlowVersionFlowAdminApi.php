@@ -11,7 +11,7 @@ use App\Application\Flow\Service\MagicFlowVersionAppService;
 use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowVersionQuery;
 use App\Interfaces\Flow\Assembler\FlowVersion\MagicFlowVersionAssembler;
 use App\Interfaces\Flow\DTO\FlowVersion\MagicFlowVersionDTO;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

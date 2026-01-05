@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Result\User;
 
-use Dtyq\EasyDingTalk\OpenDev\Result\AbstractResult;
+use Delightful\EasyDingTalk\OpenDev\Result\AbstractResult;
 
 class UserListResult extends AbstractResult
 {

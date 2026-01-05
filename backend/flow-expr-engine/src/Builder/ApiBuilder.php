@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Builder;
 
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\Api\Api;
-use Dtyq\FlowExprEngine\Structure\Api\ApiMethod;
-use Dtyq\FlowExprEngine\Structure\Api\ApiRequest;
-use Dtyq\FlowExprEngine\Structure\Api\ApiRequestBodyType;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\Api\Api;
+use Delightful\FlowExprEngine\Structure\Api\ApiMethod;
+use Delightful\FlowExprEngine\Structure\Api\ApiRequest;
+use Delightful\FlowExprEngine\Structure\Api\ApiRequestBodyType;
 
 class ApiBuilder extends Builder
 {

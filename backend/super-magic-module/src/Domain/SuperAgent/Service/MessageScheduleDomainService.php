@@ -9,11 +9,11 @@ namespace Delightful\SuperMagic\Domain\SuperAgent\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\MessageScheduleEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\MessageScheduleLogEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
-use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Facade\MessageScheduleRepositoryInterface;
-use Dtyq\SuperMagic\ErrorCode\SuperAgentErrorCode;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\MessageScheduleEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\MessageScheduleLogEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
+use Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade\MessageScheduleRepositoryInterface;
+use Delightful\SuperMagic\ErrorCode\SuperAgentErrorCode;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 

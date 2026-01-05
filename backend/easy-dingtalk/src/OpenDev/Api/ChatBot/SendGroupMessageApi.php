@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Api\ChatBot;
 
-use Dtyq\EasyDingTalk\Kernel\Constants\Host;
-use Dtyq\EasyDingTalk\OpenDev\Api\OpenDevApiAbstract;
-use Dtyq\SdkBase\Kernel\Constant\RequestMethod;
+use Delightful\EasyDingTalk\Kernel\Constants\Host;
+use Delightful\EasyDingTalk\OpenDev\Api\OpenDevApiAbstract;
+use Delightful\SdkBase\Kernel\Constant\RequestMethod;
 
 /**
  * Robot sends group chat message.

@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\SuperMagic\Domain\SuperAgent\Event;
 
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\TaskFileEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\TaskFileVersionEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\TaskFileEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\TaskFileVersionEntity;
 
 /**
  * File replaced event.

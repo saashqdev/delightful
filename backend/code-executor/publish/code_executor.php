@@ -4,7 +4,7 @@ declare(strict_types=1);
 /**
  * This file is part of Dtyq.
  */
-use Dtyq\CodeExecutor\Executor\Aliyun\AliyunExecutor;
+use Delightful\CodeExecutor\Executor\Aliyun\AliyunExecutor;
 
 use function Hyperf\Support\env;
 

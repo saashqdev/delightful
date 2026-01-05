@@ -9,9 +9,9 @@ namespace App\Application\MCP\Utils\MCPExecutor;
 
 use App\ErrorCode\MCPErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\PhpMcp\Client\McpClient;
-use Dtyq\PhpMcp\Shared\Kernel\Application;
-use Dtyq\PhpMcp\Types\Responses\ListToolsResult;
+use Delightful\PhpMcp\Client\McpClient;
+use Delightful\PhpMcp\Shared\Kernel\Application;
+use Delightful\PhpMcp\Types\Responses\ListToolsResult;
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Odin\Mcp\McpServerConfig;
 use Hyperf\Odin\Mcp\McpType;

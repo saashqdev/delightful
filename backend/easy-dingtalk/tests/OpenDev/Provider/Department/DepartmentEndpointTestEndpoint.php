@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\Test\OpenDev\Provider\Department;
 
-use Dtyq\EasyDingTalk\OpenDev\Parameter\Department\GetAllParentDepartmentByUserParameter;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\Department\GetDeptByIdParameter;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\Department\GetSubParameter;
-use Dtyq\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;
+use Delightful\EasyDingTalk\OpenDev\Parameter\Department\GetAllParentDepartmentByUserParameter;
+use Delightful\EasyDingTalk\OpenDev\Parameter\Department\GetDeptByIdParameter;
+use Delightful\EasyDingTalk\OpenDev\Parameter\Department\GetSubParameter;
+use Delightful\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;
 
 /**
  * @internal

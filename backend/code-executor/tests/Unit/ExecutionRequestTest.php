@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\CodeExecutor\Tests\Unit;
 
-use Dtyq\CodeExecutor\ExecutionRequest;
-use Dtyq\CodeExecutor\Language;
+use Delightful\CodeExecutor\ExecutionRequest;
+use Delightful\CodeExecutor\Language;
 use PHPUnit\Framework\TestCase;
 
 /**

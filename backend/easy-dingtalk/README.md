@@ -28,7 +28,7 @@ composer require dtyq/easy-dingtalk -vvv
 ### Basic Usage
 
 ```php
-use Dtyq\EasyDingTalk\OpenDevFactory;
+use Delightful\EasyDingTalk\OpenDevFactory;
 
 $factory = new OpenDevFactory([
     'app_key' => 'your_app_key',

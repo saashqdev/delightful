@@ -9,8 +9,8 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Knowledge;
 
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 
 class KnowledgeFragmentStoreNodeParamsConfig extends AbstractKnowledgeNodeParamsConfig
 {

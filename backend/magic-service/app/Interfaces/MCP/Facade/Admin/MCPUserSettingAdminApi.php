@@ -9,7 +9,7 @@ namespace App\Interfaces\MCP\Facade\Admin;
 
 use App\Application\MCP\Service\MCPUserSettingAppService;
 use App\Interfaces\MCP\Assembler\MCPUserSettingAssembler;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

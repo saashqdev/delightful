@@ -11,7 +11,7 @@ use App\Application\Flow\Service\MagicFlowApiKeyAppService;
 use App\Domain\Flow\Entity\ValueObject\ApiKeyType;
 use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowApiKeyQuery;
 use App\Interfaces\Flow\Assembler\ApiKey\MagicFlowApiKeyAssembler;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

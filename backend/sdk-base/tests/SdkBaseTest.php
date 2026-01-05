@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\SdkBase\Tests;
 
-use Dtyq\SdkBase\Kernel\Component\Client\ClientRequest;
-use Dtyq\SdkBase\Kernel\Component\Config\Config;
-use Dtyq\SdkBase\Kernel\Component\Exception\ExceptionBuilder;
-use Dtyq\SdkBase\Kernel\Component\Logger\LoggerProxy;
-use Dtyq\SdkBase\Kernel\Constant\RequestMethod;
-use Dtyq\SdkBase\SdkBase;
+use Delightful\SdkBase\Kernel\Component\Client\ClientRequest;
+use Delightful\SdkBase\Kernel\Component\Config\Config;
+use Delightful\SdkBase\Kernel\Component\Exception\ExceptionBuilder;
+use Delightful\SdkBase\Kernel\Component\Logger\LoggerProxy;
+use Delightful\SdkBase\Kernel\Constant\RequestMethod;
+use Delightful\SdkBase\SdkBase;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;

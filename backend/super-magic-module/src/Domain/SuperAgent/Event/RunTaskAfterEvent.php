@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Domain\SuperAgent\Event;
 
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TokenUsageDetails;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TokenUsageDetails;
 
 class RunTaskAfterEvent extends AbstractEvent
 {

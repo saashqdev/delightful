@@ -4,7 +4,7 @@ declare(strict_types=1);
 /**
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
-use Dtyq\RuleEngineCore\ConfigProvider;
+use Delightful\RuleEngineCore\ConfigProvider;
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Di\ClassLoader;
 use Hyperf\Di\Container;

@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Domain\SuperAgent\Event;
 
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\MessageQueueEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\MessageQueueEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\TopicEntity;
 
 /**
  * Message Queue Updated Event.

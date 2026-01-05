@@ -11,7 +11,7 @@ use App\Application\Flow\Service\MagicFlowTriggerTestcaseAppService;
 use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowTriggerTestcaseQuery;
 use App\Interfaces\Flow\Assembler\TriggerTestcase\MagicFlowTriggerTestcaseAssembler;
 use App\Interfaces\Flow\DTO\TriggerTestcase\MagicFlowTriggerTestcaseDTO;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

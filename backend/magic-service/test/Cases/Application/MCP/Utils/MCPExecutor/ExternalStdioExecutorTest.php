@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\MCP\Utils\MCPExecutor;
 
 use App\Application\MCP\Utils\MCPExecutor\ExternalStdioExecutor;
-use Dtyq\PhpMcp\Types\Responses\ListToolsResult;
+use Delightful\PhpMcp\Types\Responses\ListToolsResult;
 use Hyperf\Odin\Mcp\McpServerConfig;
 use Hyperf\Odin\Mcp\McpType;
 use PHPUnit\Framework\TestCase;

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search\Structure;
 
-use Dtyq\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\Component;
 
 readonly class Filter
 {

@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Structure\Expression\ExpressionDataSource;
 
-use Dtyq\FlowExprEngine\Structure\Expression\ExpressionDataSource\ExpressionDataSource;
-use Dtyq\FlowExprEngine\Test\BaseTestCase;
+use Delightful\FlowExprEngine\Structure\Expression\ExpressionDataSource\ExpressionDataSource;
+use Delightful\FlowExprEngine\Test\BaseTestCase;
 
 /**
  * @internal

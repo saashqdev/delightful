@@ -28,7 +28,7 @@ use App\ErrorCode\MCPErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\TempAuth\TempAuthInterface;
 use App\Infrastructure\Core\ValueObject\Page;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskContext;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskContext;
 use Hyperf\Codec\Json;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;

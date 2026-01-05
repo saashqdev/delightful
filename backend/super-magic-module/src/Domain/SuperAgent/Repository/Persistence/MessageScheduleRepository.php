@@ -9,9 +9,9 @@ namespace Delightful\SuperMagic\Domain\SuperAgent\Repository\Persistence;
 
 use App\Infrastructure\Core\AbstractRepository;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\MessageScheduleEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Facade\MessageScheduleRepositoryInterface;
-use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Model\MessageScheduleModel;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\MessageScheduleEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade\MessageScheduleRepositoryInterface;
+use Delightful\SuperMagic\Domain\SuperAgent\Repository\Model\MessageScheduleModel;
 use Hyperf\DbConnection\Db;
 use RuntimeException;
 

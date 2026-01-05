@@ -26,7 +26,7 @@ use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\MiracleVisionModelRe
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\QwenImageModelRequest;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\VolcengineModelRequest;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\CloudFile\Kernel\Struct\UploadFile;
+use Delightful\CloudFile\Kernel\Struct\UploadFile;
 use HyperfTest\Cases\BaseTest;
 
 /**

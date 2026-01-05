@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\PhpScript\Admin;
 
-use Dtyq\RuleEngineCore\PhpScript\RuleType;
-use Dtyq\RuleEngineCore\Standards\Admin\Properties;
+use Delightful\RuleEngineCore\PhpScript\RuleType;
+use Delightful\RuleEngineCore\Standards\Admin\Properties;
 
 class RuleExecutionSetProperties extends Properties
 {

@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Result\User;
 
-use Dtyq\EasyDingTalk\Kernel\Exceptions\InvalidResultException;
-use Dtyq\EasyDingTalk\OpenDev\Result\AbstractResult;
+use Delightful\EasyDingTalk\Kernel\Exceptions\InvalidResultException;
+use Delightful\EasyDingTalk\OpenDev\Result\AbstractResult;
 
 class UserResult extends AbstractResult
 {

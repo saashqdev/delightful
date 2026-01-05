@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\AsyncEvent;
 
-use Dtyq\AsyncEvent\Kernel\Service\AsyncEventService;
-use Dtyq\AsyncEvent\Kernel\Utils\Locker;
+use Delightful\AsyncEvent\Kernel\Service\AsyncEventService;
+use Delightful\AsyncEvent\Kernel\Utils\Locker;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;

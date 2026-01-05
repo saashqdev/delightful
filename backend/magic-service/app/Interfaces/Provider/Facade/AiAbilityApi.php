@@ -14,7 +14,7 @@ use App\Infrastructure\Util\Permission\Annotation\CheckPermission;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use App\Interfaces\Provider\Assembler\AiAbilityAssembler;
 use App\Interfaces\Provider\DTO\UpdateAiAbilityRequest;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse('low_code')]

@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\CodeExecutor\Utils;
 
-use Dtyq\CodeExecutor\Enums\StatusCode;
-use Dtyq\CodeExecutor\Exception\ExecuteException;
-use Dtyq\CodeExecutor\Exception\ExecuteFailedException;
-use Dtyq\CodeExecutor\Exception\ExecuteTimeoutException;
-use Dtyq\CodeExecutor\Exception\InvalidArgumentException;
-use Dtyq\CodeExecutor\ExecutionResult;
+use Delightful\CodeExecutor\Enums\StatusCode;
+use Delightful\CodeExecutor\Exception\ExecuteException;
+use Delightful\CodeExecutor\Exception\ExecuteFailedException;
+use Delightful\CodeExecutor\Exception\ExecuteTimeoutException;
+use Delightful\CodeExecutor\Exception\InvalidArgumentException;
+use Delightful\CodeExecutor\ExecutionResult;
 use Hyperf\Codec\Json;
 
 /**

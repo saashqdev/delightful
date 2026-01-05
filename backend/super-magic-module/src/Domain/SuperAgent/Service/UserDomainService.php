@@ -9,7 +9,7 @@ namespace Delightful\SuperMagic\Domain\SuperAgent\Service;
 
 use App\Domain\Contact\Entity\MagicUserEntity;
 use App\Domain\Contact\Service\MagicUserDomainService;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\UserAuthorization;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\UserAuthorization;
 
 class UserDomainService
 {

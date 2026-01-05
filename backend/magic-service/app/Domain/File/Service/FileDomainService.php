@@ -11,10 +11,10 @@ use App\Domain\File\DTO\CloudFileInfoDTO;
 use App\Domain\File\Repository\Persistence\CloudFileRepository;
 use App\Domain\File\Repository\Persistence\Facade\CloudFileRepositoryInterface;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
-use Dtyq\CloudFile\Kernel\Struct\ChunkUploadFile;
-use Dtyq\CloudFile\Kernel\Struct\FileLink;
-use Dtyq\CloudFile\Kernel\Struct\FilePreSignedUrl;
-use Dtyq\CloudFile\Kernel\Struct\UploadFile;
+use Delightful\CloudFile\Kernel\Struct\ChunkUploadFile;
+use Delightful\CloudFile\Kernel\Struct\FileLink;
+use Delightful\CloudFile\Kernel\Struct\FilePreSignedUrl;
+use Delightful\CloudFile\Kernel\Struct\UploadFile;
 
 readonly class FileDomainService
 {

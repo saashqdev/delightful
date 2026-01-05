@@ -11,7 +11,7 @@ use App\Application\Agent\Service\MagicBotThirdPlatformChatAppService;
 use App\Domain\Agent\Entity\ValueObject\Query\MagicBotThirdPlatformChatQuery;
 use App\Interfaces\Agent\Assembler\MagicBotThirdPlatformChatAssembler;
 use App\Interfaces\Agent\DTO\MagicBotThirdPlatformChatDTO;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse('low_code')]

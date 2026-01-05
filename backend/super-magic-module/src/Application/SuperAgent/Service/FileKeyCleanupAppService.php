@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Application\SuperAgent\Service;
 
-use Dtyq\SuperMagic\Application\SuperAgent\DTO\CleanupFileKeysRequestDTO;
-use Dtyq\SuperMagic\Domain\SuperAgent\Service\FileKeyCleanupDomainService;
+use Delightful\SuperMagic\Application\SuperAgent\DTO\CleanupFileKeysRequestDTO;
+use Delightful\SuperMagic\Domain\SuperAgent\Service\FileKeyCleanupDomainService;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;

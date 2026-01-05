@@ -9,7 +9,7 @@ namespace Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\
 
 use DateTime;
 use DateTimeZone;
-use Dtyq\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\Methods\AbstractMethod;
+use Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\Methods\AbstractMethod;
 
 class GetRFC1123DateTime extends AbstractMethod
 {

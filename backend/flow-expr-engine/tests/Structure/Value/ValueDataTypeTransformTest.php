@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Structure\Value;
 
-use Dtyq\FlowExprEngine\Exception\FlowExprEngineException;
-use Dtyq\FlowExprEngine\Structure\Expression\ValueDataTypeTransform;
-use Dtyq\FlowExprEngine\Test\BaseTestCase;
+use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
+use Delightful\FlowExprEngine\Structure\Expression\ValueDataTypeTransform;
+use Delightful\FlowExprEngine\Test\BaseTestCase;
 use Throwable;
 
 /**

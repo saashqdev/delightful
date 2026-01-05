@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\TaskScheduler\Repository\Persistence;
 
-use Dtyq\TaskScheduler\Entity\TaskSchedulerLog;
-use Dtyq\TaskScheduler\Repository\Persistence\Model\TaskSchedulerLogModel;
+use Delightful\TaskScheduler\Entity\TaskSchedulerLog;
+use Delightful\TaskScheduler\Repository\Persistence\Model\TaskSchedulerLogModel;
 
 class TaskSchedulerLogRepository
 {

@@ -33,7 +33,7 @@ use App\Interfaces\Agent\DTO\MagicBotThirdPlatformChatDTO;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use App\Interfaces\Flow\Assembler\Flow\MagicFlowAssembler;
 use App\Interfaces\Flow\DTO\Flow\MagicFlowDTO;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Throwable;

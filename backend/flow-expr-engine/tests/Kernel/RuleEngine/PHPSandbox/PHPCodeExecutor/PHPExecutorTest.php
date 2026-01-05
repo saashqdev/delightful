@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Test\Kernel\RuleEngine\PHPSandbox\PHPCodeExecutor;
 
-use Dtyq\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\PHPCodeExecutor\PHPExecutor;
-use Dtyq\FlowExprEngine\Test\BaseTestCase;
+use Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\PHPCodeExecutor\PHPExecutor;
+use Delightful\FlowExprEngine\Test\BaseTestCase;
 
 /**
  * @internal

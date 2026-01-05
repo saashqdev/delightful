@@ -18,9 +18,9 @@ use App\Domain\Provider\Entity\ValueObject\Status;
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Infrastructure\Util\OfficialOrganizationUtil;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\SuperMagic\Application\Agent\Service\SuperMagicAgentAppService;
-use Dtyq\SuperMagic\Domain\Agent\Entity\SuperMagicAgentEntity;
-use Dtyq\SuperMagic\Domain\Agent\Entity\ValueObject\Query\SuperMagicAgentQuery;
+use Delightful\SuperMagic\Application\Agent\Service\SuperMagicAgentAppService;
+use Delightful\SuperMagic\Domain\Agent\Entity\SuperMagicAgentEntity;
+use Delightful\SuperMagic\Domain\Agent\Entity\ValueObject\Query\SuperMagicAgentQuery;
 
 class ModeAppService extends AbstractModeAppService
 {

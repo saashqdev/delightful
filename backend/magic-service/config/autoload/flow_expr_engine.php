@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 use App\Infrastructure\Core\PHPSandbox\ExecutableCode\Methods\LogicalIfMethod;
-use Dtyq\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\Methods\Date\GetISO8601Date;
-use Dtyq\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\Methods\Date\GetISO8601DateTime;
-use Dtyq\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\Methods\Date\GetISO8601DateTimeWithOffset;
-use Dtyq\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\Methods\Date\GetRFC1123DateTime;
+use Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\Methods\Date\GetISO8601Date;
+use Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\Methods\Date\GetISO8601DateTime;
+use Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\Methods\Date\GetISO8601DateTimeWithOffset;
+use Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\ExecutableCode\Methods\Date\GetRFC1123DateTime;
 
 return [
     'logger' => [

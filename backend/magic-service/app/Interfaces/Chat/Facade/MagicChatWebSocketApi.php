@@ -31,7 +31,7 @@ use App\Infrastructure\Util\ShadowCode\ShadowCode;
 use App\Infrastructure\Util\SocketIO\SocketIOUtil;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Amqp\Producer;
 use Hyperf\Codec\Json;
 use Hyperf\Context\ApplicationContext;

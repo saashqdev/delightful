@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\PhpScript\Repository;
 
-use Dtyq\RuleEngineCore\PhpScript\Admin\RuleExecutionSet;
-use Dtyq\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
-use Dtyq\RuleEngineCore\PhpScript\Repository\DefaultRuleExecutionSetRepository;
-use Dtyq\RuleEngineCore\PhpScript\RuleType;
+use Delightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSet;
+use Delightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
+use Delightful\RuleEngineCore\PhpScript\Repository\DefaultRuleExecutionSetRepository;
+use Delightful\RuleEngineCore\PhpScript\RuleType;
 use HyperfTest\Cases\AbstractTestCase;
 
 /**

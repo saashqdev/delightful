@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Kernel\Struct;
 
-use Dtyq\CloudFile\Kernel\Exceptions\CloudFileException;
-use Dtyq\CloudFile\Kernel\Utils\EasyFileTools;
-use Dtyq\CloudFile\Kernel\Utils\MimeTypes;
+use Delightful\CloudFile\Kernel\Exceptions\CloudFileException;
+use Delightful\CloudFile\Kernel\Utils\EasyFileTools;
+use Delightful\CloudFile\Kernel\Utils\MimeTypes;
 
 class AppendUploadFile
 {

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade;
 
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\WorkspaceVersionEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\WorkspaceVersionEntity;
 
 interface WorkspaceVersionRepositoryInterface
 {

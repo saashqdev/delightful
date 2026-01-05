@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine\Hyperf;
 
-use Dtyq\FlowExprEngine\ComponentContext;
-use Dtyq\FlowExprEngine\Exception\FlowExprEngineException;
-use Dtyq\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\PHPSandboxRuleEngineClient;
-use Dtyq\FlowExprEngine\SdkInfo;
-use Dtyq\FlowExprEngine\Structure\CodeRunner;
-use Dtyq\SdkBase\SdkBase;
+use Delightful\FlowExprEngine\ComponentContext;
+use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
+use Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\PHPSandboxRuleEngineClient;
+use Delightful\FlowExprEngine\SdkInfo;
+use Delightful\FlowExprEngine\Structure\CodeRunner;
+use Delightful\SdkBase\SdkBase;
 use Hyperf\Contract\ConfigInterface;
 use Psr\Container\ContainerInterface;
 

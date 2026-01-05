@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\SuperMagic\Domain\SuperAgent\Entity;
 
 use App\Infrastructure\Core\AbstractEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ValueObject\MessageQueueStatus;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\MessageQueueStatus;
 use InvalidArgumentException;
 
 /**

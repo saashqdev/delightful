@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Command\SuperAgent;
 
-use Dtyq\SuperMagic\Domain\SuperAgent\Service\FileKeyCleanupDomainService;
+use Delightful\SuperMagic\Domain\SuperAgent\Service\FileKeyCleanupDomainService;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
 use Hyperf\Logger\LoggerFactory;

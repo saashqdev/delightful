@@ -22,7 +22,7 @@ use App\Domain\ModelGateway\Entity\ValueObject\ModelGatewayDataIsolation;
 use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\FlowNodeDefine;
 use App\Infrastructure\Core\Dag\VertexResult;
 use App\Infrastructure\Util\Odin\Agent;
-use Dtyq\FlowExprEngine\Structure\Expression\ValueType;
+use Delightful\FlowExprEngine\Structure\Expression\ValueType;
 use Hyperf\Odin\Agent\Tool\UsedTool;
 use Hyperf\Odin\Message\AssistantMessage;
 use Hyperf\Odin\Message\UserMessage;

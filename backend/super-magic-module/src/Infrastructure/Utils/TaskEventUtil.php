@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\SuperMagic\Infrastructure\Utils;
 
 use App\ErrorCode\EventErrorCode;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskEvent;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskEvent;
 
 class TaskEventUtil
 {

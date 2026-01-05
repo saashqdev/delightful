@@ -34,7 +34,7 @@ namespace App\Controller;
 
 use App\Event\DemoEvent;
 use Hyperf\Di\Annotation\Inject;
-use Dtyq\AsyncEvent\AsyncEventDispatcher;
+use Delightful\AsyncEvent\AsyncEventDispatcher;
 
 class IndexController extends AbstractController
 {

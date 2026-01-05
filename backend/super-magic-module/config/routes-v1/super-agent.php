@@ -4,20 +4,20 @@ declare(strict_types=1);
 /**
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
-use Dtyq\SuperMagic\Infrastructure\Utils\Middleware\RequestContextMiddlewareV2;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\AccountApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\FileApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\FileEditingApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\FileKeyCleanupApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\MessageApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\ProjectApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\ProjectInvitationLinkApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\ProjectMemberApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\SandboxApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\SuperAgentMemoryApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\TaskApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\TopicApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\WorkspaceApi;
+use Delightful\SuperMagic\Infrastructure\Utils\Middleware\RequestContextMiddlewareV2;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\AccountApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\FileApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\FileEditingApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\FileKeyCleanupApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\MessageApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\ProjectApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\ProjectInvitationLinkApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\ProjectMemberApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\SandboxApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\SuperAgentMemoryApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\TaskApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\TopicApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\WorkspaceApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup(

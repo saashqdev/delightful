@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ExternalAPI\MagicAIApi;
 
-use Dtyq\SdkBase\SdkBase;
-use Dtyq\SdkBase\SdkBaseContext;
+use Delightful\SdkBase\SdkBase;
+use Delightful\SdkBase\SdkBaseContext;
 use RuntimeException;
 
 /**

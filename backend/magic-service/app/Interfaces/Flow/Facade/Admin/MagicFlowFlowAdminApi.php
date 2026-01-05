@@ -18,7 +18,7 @@ use App\Interfaces\Flow\Assembler\Knowledge\MagicFlowKnowledgeAssembler;
 use App\Interfaces\Flow\Assembler\Node\MagicFlowNodeAssembler;
 use App\Interfaces\Flow\Assembler\ToolSet\MagicFlowToolSetAssembler;
 use App\Interfaces\MCP\Assembler\MCPServerAssembler;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

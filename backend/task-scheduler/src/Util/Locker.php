@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\TaskScheduler\Util;
 
-use Dtyq\TaskScheduler\Exception\TaskSchedulerException;
+use Delightful\TaskScheduler\Exception\TaskSchedulerException;
 use Hyperf\Redis\RedisFactory;
 use Hyperf\Redis\RedisProxy;
 use Throwable;

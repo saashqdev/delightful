@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\Test\OpenDev;
 
-use Dtyq\EasyDingTalk\OpenDevFactory;
-use Dtyq\EasyDingTalk\Test\Mock\Container;
-use Dtyq\SdkBase\SdkBase;
+use Delightful\EasyDingTalk\OpenDevFactory;
+use Delightful\EasyDingTalk\Test\Mock\Container;
+use Delightful\SdkBase\SdkBase;
 use PHPUnit\Framework\TestCase;
 
 /**

@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\Test\OpenDev\Provider\DingCallback;
 
-use Dtyq\EasyDingTalk\OpenDev\Endpoint\DingCallback\DingCallbackMessage;
-use Dtyq\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;
+use Delightful\EasyDingTalk\OpenDev\Endpoint\DingCallback\DingCallbackMessage;
+use Delightful\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;
 
 /**
  * @internal

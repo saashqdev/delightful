@@ -15,7 +15,7 @@ use App\Domain\MCP\Repository\Facade\MCPServerRepositoryInterface;
 use App\ErrorCode\MCPErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
-use Dtyq\AsyncEvent\AsyncEventUtil;
+use Delightful\AsyncEvent\AsyncEventUtil;
 
 readonly class MCPServerDomainService
 {

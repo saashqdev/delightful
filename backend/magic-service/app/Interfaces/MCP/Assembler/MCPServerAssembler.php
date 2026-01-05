@@ -19,7 +19,7 @@ use App\Interfaces\Kernel\Assembler\OperatorAssembler;
 use App\Interfaces\Kernel\DTO\PageDTO;
 use App\Interfaces\MCP\DTO\MCPServerDTO;
 use App\Interfaces\MCP\DTO\MCPServerSelectListDTO;
-use Dtyq\CloudFile\Kernel\Struct\FileLink;
+use Delightful\CloudFile\Kernel\Struct\FileLink;
 
 class MCPServerAssembler
 {

@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\Hyperf;
 
-use Dtyq\EasyDingTalk\OpenDevFactory;
-use Dtyq\SdkBase\SdkBase;
+use Delightful\EasyDingTalk\OpenDevFactory;
+use Delightful\SdkBase\SdkBase;
 use Hyperf\Contract\ConfigInterface;
 use Psr\Container\ContainerInterface;
 

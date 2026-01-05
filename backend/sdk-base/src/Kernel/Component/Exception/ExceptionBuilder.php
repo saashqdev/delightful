@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\SdkBase\Kernel\Component\Exception;
 
-use Dtyq\SdkBase\SdkBase;
+use Delightful\SdkBase\SdkBase;
 use Exception;
 use RuntimeException;
 use Throwable;

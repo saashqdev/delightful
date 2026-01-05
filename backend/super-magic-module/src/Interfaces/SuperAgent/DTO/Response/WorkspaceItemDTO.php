@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Response;
 
 use App\Infrastructure\Core\AbstractDTO;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\WorkspaceEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\WorkspaceEntity;
 
 class WorkspaceItemDTO extends AbstractDTO
 {

@@ -17,7 +17,7 @@ use App\Interfaces\KnowledgeBase\DTO\Request\FragmentPreviewRequestDTO;
 use App\Interfaces\KnowledgeBase\DTO\Request\GetFragmentListRequestDTO;
 use App\Interfaces\KnowledgeBase\DTO\Request\UpdateFragmentRequestDTO;
 use DateTime;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 
 #[ApiResponse(version: 'low_code')]
 class KnowledgeBaseFragmentApi extends AbstractKnowledgeBaseApi

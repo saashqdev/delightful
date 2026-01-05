@@ -20,7 +20,7 @@ use App\Interfaces\Kernel\DTO\PageDTO;
 use App\Interfaces\Permission\Assembler\SubAdminAssembler;
 use App\Interfaces\Permission\DTO\CreateSubAdminRequestDTO;
 use App\Interfaces\Permission\DTO\UpdateSubAdminRequestDTO;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 use InvalidArgumentException;
 

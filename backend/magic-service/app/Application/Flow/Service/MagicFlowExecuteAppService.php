@@ -42,7 +42,7 @@ use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use App\Interfaces\Flow\DTO\MagicFlowApiChatDTO;
 use DateTime;
-use Dtyq\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\ComponentFactory;
 use Qbhy\HyperfAuth\Authenticatable;
 
 class MagicFlowExecuteAppService extends AbstractFlowAppService

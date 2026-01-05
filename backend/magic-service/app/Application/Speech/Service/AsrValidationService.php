@@ -14,12 +14,12 @@ use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
 use App\ErrorCode\AsrErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ProjectEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\TopicEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Service\ProjectDomainService;
-use Dtyq\SuperMagic\Domain\SuperAgent\Service\ProjectMemberDomainService;
-use Dtyq\SuperMagic\Domain\SuperAgent\Service\TopicDomainService;
-use Dtyq\SuperMagic\ErrorCode\SuperAgentErrorCode;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ProjectEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectDomainService;
+use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectMemberDomainService;
+use Delightful\SuperMagic\Domain\SuperAgent\Service\TopicDomainService;
+use Delightful\SuperMagic\ErrorCode\SuperAgentErrorCode;
 use Throwable;
 
 /**

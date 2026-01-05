@@ -25,7 +25,7 @@ use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\MagicFlowMessage;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\MagicFlowMessageType;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\AsyncEvent\AsyncEventUtil;
+use Delightful\AsyncEvent\AsyncEventUtil;
 
 class MessageUtil
 {

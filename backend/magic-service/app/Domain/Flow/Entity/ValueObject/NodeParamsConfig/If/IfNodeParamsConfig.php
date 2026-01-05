@@ -10,8 +10,8 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\If;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\NodeParamsConfig;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 
 class IfNodeParamsConfig extends NodeParamsConfig
 {

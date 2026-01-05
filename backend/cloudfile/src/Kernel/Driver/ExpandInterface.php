@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace Delightful\CloudFile\Kernel\Driver;
 
-use Dtyq\CloudFile\Kernel\Exceptions\ChunkDownloadException;
-use Dtyq\CloudFile\Kernel\Struct\ChunkDownloadConfig;
-use Dtyq\CloudFile\Kernel\Struct\CredentialPolicy;
-use Dtyq\CloudFile\Kernel\Struct\FileLink;
-use Dtyq\CloudFile\Kernel\Struct\FileMetadata;
-use Dtyq\CloudFile\Kernel\Struct\FilePreSignedUrl;
+use Delightful\CloudFile\Kernel\Exceptions\ChunkDownloadException;
+use Delightful\CloudFile\Kernel\Struct\ChunkDownloadConfig;
+use Delightful\CloudFile\Kernel\Struct\CredentialPolicy;
+use Delightful\CloudFile\Kernel\Struct\FileLink;
+use Delightful\CloudFile\Kernel\Struct\FileMetadata;
+use Delightful\CloudFile\Kernel\Struct\FilePreSignedUrl;
 
 interface ExpandInterface
 {

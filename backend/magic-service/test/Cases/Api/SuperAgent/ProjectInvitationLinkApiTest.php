@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Api\SuperAgent;
 
-use Dtyq\SuperMagic\Domain\Share\Constant\ResourceType;
-use Dtyq\SuperMagic\Domain\Share\Service\ResourceShareDomainService;
-use Dtyq\SuperMagic\Domain\SuperAgent\Service\ProjectMemberDomainService;
+use Delightful\SuperMagic\Domain\Share\Constant\ResourceType;
+use Delightful\SuperMagic\Domain\Share\Service\ResourceShareDomainService;
+use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectMemberDomainService;
 use Hyperf\Context\ApplicationContext;
 use Mockery;
 

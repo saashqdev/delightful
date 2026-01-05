@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\Standards\Admin;
 
-use Dtyq\RuleEngineCore\Standards\Exception\ConfigurationException;
+use Delightful\RuleEngineCore\Standards\Exception\ConfigurationException;
 use ReflectionClass;
 
 abstract class AbstractRuleAdministrator implements RuleAdministratorInterface

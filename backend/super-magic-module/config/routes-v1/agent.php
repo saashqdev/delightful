@@ -4,7 +4,7 @@ declare(strict_types=1);
 /**
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
-use Dtyq\SuperMagic\Interfaces\Agent\Facade\Admin\SuperMagicAgentAdminApi;
+use Delightful\SuperMagic\Interfaces\Agent\Facade\Admin\SuperMagicAgentAdminApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/api/v1/super-magic', function () {

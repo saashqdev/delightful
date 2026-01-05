@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Interfaces\Chat\DTO\Response;
 
 use DateTime;
-use Dtyq\TaskScheduler\Entity\TaskSchedulerCrontab;
+use Delightful\TaskScheduler\Entity\TaskSchedulerCrontab;
 
 class UserTaskResponseDTO
 {

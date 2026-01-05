@@ -10,7 +10,7 @@ namespace App\Interfaces\Flow\Facade\Admin;
 use App\Application\Flow\Service\MagicFlowAIModelAppService;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
 use App\Interfaces\Flow\Assembler\AIModel\MagicFlowAIModelAssembler;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]

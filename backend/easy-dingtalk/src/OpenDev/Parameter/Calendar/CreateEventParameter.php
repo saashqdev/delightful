@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\EasyDingTalk\OpenDev\Parameter\Calendar;
 
 use DateTime;
-use Dtyq\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
-use Dtyq\EasyDingTalk\OpenDev\Parameter\AbstractParameter;
+use Delightful\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
+use Delightful\EasyDingTalk\OpenDev\Parameter\AbstractParameter;
 
 /**
  * @see https://open.dingtalk.com/document/orgapp/create-event

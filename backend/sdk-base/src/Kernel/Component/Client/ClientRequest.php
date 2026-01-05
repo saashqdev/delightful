@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\SdkBase\Kernel\Component\Client;
 
-use Dtyq\SdkBase\Kernel\Constant\RequestMethod;
-use Dtyq\SdkBase\SdkBase;
+use Delightful\SdkBase\Kernel\Constant\RequestMethod;
+use Delightful\SdkBase\SdkBase;
 use GuzzleHttp\ClientInterface as GuzzleHttpClientInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;

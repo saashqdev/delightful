@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\SuperMagic\Interfaces\SuperAgent\Facade;
 
 use App\Infrastructure\Util\Context\RequestContext;
-use Dtyq\SuperMagic\Application\SuperAgent\DTO\CleanupFileKeysRequestDTO;
-use Dtyq\SuperMagic\Application\SuperAgent\Service\FileKeyCleanupAppService;
+use Delightful\SuperMagic\Application\SuperAgent\DTO\CleanupFileKeysRequestDTO;
+use Delightful\SuperMagic\Application\SuperAgent\Service\FileKeyCleanupAppService;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**

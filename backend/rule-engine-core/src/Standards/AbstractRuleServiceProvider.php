@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\Standards;
 
-use Dtyq\RuleEngineCore\Standards\Admin\RuleAdministratorInterface;
+use Delightful\RuleEngineCore\Standards\Admin\RuleAdministratorInterface;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
 

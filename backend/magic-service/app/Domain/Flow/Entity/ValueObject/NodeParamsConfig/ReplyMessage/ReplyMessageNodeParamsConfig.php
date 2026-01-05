@@ -9,9 +9,9 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\ReplyMessage;
 
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\MagicFlowMessageType;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\NodeParamsConfig;
-use Dtyq\FlowExprEngine\Component;
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 
 class ReplyMessageNodeParamsConfig extends NodeParamsConfig
 {

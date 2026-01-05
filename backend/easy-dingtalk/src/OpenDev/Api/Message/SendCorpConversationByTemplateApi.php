@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\EasyDingTalk\OpenDev\Api\Message;
 
-use Dtyq\EasyDingTalk\OpenDev\Api\OpenDevApiAbstract;
-use Dtyq\SdkBase\Kernel\Constant\RequestMethod;
+use Delightful\EasyDingTalk\OpenDev\Api\OpenDevApiAbstract;
+use Delightful\SdkBase\Kernel\Constant\RequestMethod;
 
 /**
  * Send work notification message using template.

@@ -8,12 +8,12 @@ declare(strict_types=1);
 namespace Delightful\SuperMagic\Domain\Agent\Repository\Persistence;
 
 use App\Infrastructure\Core\ValueObject\Page;
-use Dtyq\SuperMagic\Domain\Agent\Entity\SuperMagicAgentEntity;
-use Dtyq\SuperMagic\Domain\Agent\Entity\ValueObject\Query\SuperMagicAgentQuery;
-use Dtyq\SuperMagic\Domain\Agent\Entity\ValueObject\SuperMagicAgentDataIsolation;
-use Dtyq\SuperMagic\Domain\Agent\Factory\SuperMagicAgentFactory;
-use Dtyq\SuperMagic\Domain\Agent\Repository\Facade\SuperMagicAgentRepositoryInterface;
-use Dtyq\SuperMagic\Domain\Agent\Repository\Persistence\Model\SuperMagicAgentModel;
+use Delightful\SuperMagic\Domain\Agent\Entity\SuperMagicAgentEntity;
+use Delightful\SuperMagic\Domain\Agent\Entity\ValueObject\Query\SuperMagicAgentQuery;
+use Delightful\SuperMagic\Domain\Agent\Entity\ValueObject\SuperMagicAgentDataIsolation;
+use Delightful\SuperMagic\Domain\Agent\Factory\SuperMagicAgentFactory;
+use Delightful\SuperMagic\Domain\Agent\Repository\Facade\SuperMagicAgentRepositoryInterface;
+use Delightful\SuperMagic\Domain\Agent\Repository\Persistence\Model\SuperMagicAgentModel;
 
 class SuperMagicAgentRepository extends SuperMagicAbstractRepository implements SuperMagicAgentRepositoryInterface
 {

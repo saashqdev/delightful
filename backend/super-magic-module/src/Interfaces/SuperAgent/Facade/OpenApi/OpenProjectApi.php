@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Interfaces\SuperAgent\Facade\OpenApi;
 
-use Dtyq\ApiResponse\Annotation\ApiResponse;
-use Dtyq\SuperMagic\Application\SuperAgent\Service\ProjectAppService;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\AbstractApi;
+use Delightful\ApiResponse\Annotation\ApiResponse;
+use Delightful\SuperMagic\Application\SuperAgent\Service\ProjectAppService;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\AbstractApi;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**

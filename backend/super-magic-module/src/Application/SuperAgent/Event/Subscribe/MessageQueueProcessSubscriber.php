@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Application\SuperAgent\Event\Subscribe;
 
-use Dtyq\AsyncEvent\Kernel\Annotation\AsyncListener;
-use Dtyq\SuperMagic\Application\SuperAgent\Service\MessageQueueProcessAppService;
-use Dtyq\SuperMagic\Domain\SuperAgent\Event\RunTaskCallbackEvent;
+use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
+use Delightful\SuperMagic\Application\SuperAgent\Service\MessageQueueProcessAppService;
+use Delightful\SuperMagic\Domain\SuperAgent\Event\RunTaskCallbackEvent;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;

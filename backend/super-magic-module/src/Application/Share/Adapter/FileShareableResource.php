@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\SuperMagic\Application\Share\Adapter;
 
-use Dtyq\SuperMagic\Application\Share\DTO\ShareableResourceDTO;
-use Dtyq\SuperMagic\Application\Share\Factory\Facade\ResourceFactoryInterface;
+use Delightful\SuperMagic\Application\Share\DTO\ShareableResourceDTO;
+use Delightful\SuperMagic\Application\Share\Factory\Facade\ResourceFactoryInterface;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 

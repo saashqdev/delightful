@@ -9,10 +9,10 @@ namespace Delightful\SuperMagic\Application\Share\Adapter;
 
 use App\Application\Chat\Service\MagicUserContactAppService;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\SuperMagic\Application\Share\DTO\ShareableResourceDTO;
-use Dtyq\SuperMagic\Application\Share\Factory\Facade\ResourceFactoryInterface;
-use Dtyq\SuperMagic\Application\SuperAgent\Service\ProjectAppService;
-use Dtyq\SuperMagic\ErrorCode\SuperAgentErrorCode;
+use Delightful\SuperMagic\Application\Share\DTO\ShareableResourceDTO;
+use Delightful\SuperMagic\Application\Share\Factory\Facade\ResourceFactoryInterface;
+use Delightful\SuperMagic\Application\SuperAgent\Service\ProjectAppService;
+use Delightful\SuperMagic\ErrorCode\SuperAgentErrorCode;
 use Exception;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;

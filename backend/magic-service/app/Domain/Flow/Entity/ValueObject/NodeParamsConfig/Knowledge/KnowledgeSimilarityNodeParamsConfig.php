@@ -10,9 +10,9 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Knowledge;
 use App\Domain\Flow\Entity\ValueObject\NodeOutput;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\FlowExprEngine\Component;
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 use Hyperf\Codec\Json;
 
 class KnowledgeSimilarityNodeParamsConfig extends AbstractKnowledgeNodeParamsConfig

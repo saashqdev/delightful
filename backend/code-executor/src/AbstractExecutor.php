@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace Delightful\CodeExecutor;
 
-use Dtyq\CodeExecutor\Contract\ExecutorInterface;
-use Dtyq\CodeExecutor\Exception\ExecuteException;
-use Dtyq\CodeExecutor\Exception\ExecuteFailedException;
-use Dtyq\CodeExecutor\Exception\InvalidArgumentException;
+use Delightful\CodeExecutor\Contract\ExecutorInterface;
+use Delightful\CodeExecutor\Exception\ExecuteException;
+use Delightful\CodeExecutor\Exception\ExecuteFailedException;
+use Delightful\CodeExecutor\Exception\InvalidArgumentException;
 
 use function Dtyq\CodeExecutor\Utils\stripPHPTags;
 

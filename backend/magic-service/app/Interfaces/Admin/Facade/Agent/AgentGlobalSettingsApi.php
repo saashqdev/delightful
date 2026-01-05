@@ -10,7 +10,7 @@ namespace App\Interfaces\Admin\Facade\Agent;
 use App\Application\Admin\Agent\Service\AdminAgentAppService;
 use App\Interfaces\Admin\DTO\Request\EditAgentGlobalSettingsRequestDTO;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Qbhy\HyperfAuth\AuthManager;
 

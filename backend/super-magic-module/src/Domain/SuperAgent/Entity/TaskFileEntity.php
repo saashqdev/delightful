@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace Delightful\SuperMagic\Domain\SuperAgent\Entity;
 
 use App\Infrastructure\Core\AbstractEntity;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ValueObject\StorageType;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskFileSource;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\StorageType;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskFileSource;
 
 class TaskFileEntity extends AbstractEntity
 {

@@ -10,9 +10,9 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Cache;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\NodeParamsConfig;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Dtyq\FlowExprEngine\Component;
-use Dtyq\FlowExprEngine\ComponentFactory;
-use Dtyq\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\Component;
+use Delightful\FlowExprEngine\ComponentFactory;
+use Delightful\FlowExprEngine\Structure\StructureType;
 
 class CacheSetNodeParamsConfig extends NodeParamsConfig
 {

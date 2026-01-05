@@ -5,12 +5,12 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 use App\Infrastructure\Util\Middleware\RequestContextMiddleware;
-use Dtyq\SuperMagic\Infrastructure\Utils\Middleware\SandboxTokenAuthMiddleware;
-use Dtyq\SuperMagic\Interfaces\Agent\Facade\Sandbox\SuperMagicAgentSandboxApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\InternalApi\FileApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\OpenApi\OpenProjectApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\OpenApi\OpenTaskApi;
-use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\SandboxApi;
+use Delightful\SuperMagic\Infrastructure\Utils\Middleware\SandboxTokenAuthMiddleware;
+use Delightful\SuperMagic\Interfaces\Agent\Facade\Sandbox\SuperMagicAgentSandboxApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\InternalApi\FileApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\OpenApi\OpenProjectApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\OpenApi\OpenTaskApi;
+use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\SandboxApi;
 use Hyperf\HttpServer\Router\Router;
 
 // Sandbox open interface - naming is non-standard, needs to be deprecated

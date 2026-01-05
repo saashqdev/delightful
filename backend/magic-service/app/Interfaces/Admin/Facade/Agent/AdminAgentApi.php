@@ -17,7 +17,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Auth\PermissionChecker;
 use App\Interfaces\Admin\DTO\Request\QueryPageAgentDTO;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Dtyq\ApiResponse\Annotation\ApiResponse;
+use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Qbhy\HyperfAuth\AuthManager;
 

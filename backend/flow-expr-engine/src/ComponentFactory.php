@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Delightful\FlowExprEngine;
 
-use Dtyq\FlowExprEngine\Structure\Structure;
-use Dtyq\FlowExprEngine\Structure\StructureType;
+use Delightful\FlowExprEngine\Structure\Structure;
+use Delightful\FlowExprEngine\Structure\StructureType;
 use Throwable;
 
 class ComponentFactory

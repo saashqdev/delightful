@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace Delightful\RuleEngineCore\PhpScript\Repository;
 
-use Dtyq\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
-use Dtyq\RuleEngineCore\Standards\Admin\Properties;
-use Dtyq\RuleEngineCore\Standards\Admin\RuleExecutionSetInterface;
+use Delightful\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;
+use Delightful\RuleEngineCore\Standards\Admin\Properties;
+use Delightful\RuleEngineCore\Standards\Admin\RuleExecutionSetInterface;
 use Hyperf\Context\Context;
 
 class DefaultRuleExecutionSetRepository implements RuleExecutionSetRepositoryInterface

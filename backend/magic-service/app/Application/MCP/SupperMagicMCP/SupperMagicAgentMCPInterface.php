@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\MCP\SupperMagicMCP;
 
 use App\Domain\MCP\Entity\ValueObject\MCPDataIsolation;
-use Dtyq\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskContext;
+use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskContext;
 
 interface SupperMagicAgentMCPInterface
 {

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace Delightful\TaskScheduler\Repository\Persistence;
 
-use Dtyq\TaskScheduler\Util\Functions;
+use Delightful\TaskScheduler\Util\Functions;
 use Hyperf\Database\Model\Builder;
 
 abstract class AbstractRepository

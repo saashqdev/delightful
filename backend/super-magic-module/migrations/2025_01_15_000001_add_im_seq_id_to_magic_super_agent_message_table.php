@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('magic_super_agent_message', function (Blueprint $table) {
             // Add im_seq_id field for message sequence tracking
-            $table->bigInteger('im_seq_id')->nullable()->comment('消息序列ID，用于消息顺序追踪');
+            $table->bigInteger('im_seq_id')->nullable()->comment('message sequence ID for message order tracking');
 
             // Add index for performance optimization
             $table->index(['im_seq_id'], 'idx_im_seq_id');

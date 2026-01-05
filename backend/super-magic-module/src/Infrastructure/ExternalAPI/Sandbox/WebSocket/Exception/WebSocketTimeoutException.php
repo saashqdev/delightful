@@ -1,17 +1,1 @@
-<?php
-
-declare(strict_types=1);
-/**
- * Copyright (c) Be Delightful , Distributed under the software license
- */
-
-namespace Dtyq\SuperMagic\Infrastructure\ExternalAPI\Sandbox\WebSocket\Exception;
-
-use RuntimeException;
-
-/**
- * WebSocket超时相关异常.
- */
-class WebSocketTimeoutException extends RuntimeException
-{
-}
+<?php declare(strict_types=1); /** * Copyright (c) Be Delightful , Distributed under the software license */ namespace Dtyq\SuperMagic\Infrastructure\ExternalAPI\Sandbox\WebSocket\Exception; use RuntimeException; /** * WebSocketTimeoutRelatedAbnormal.*/ class WebSocketTimeoutException extends RuntimeException { } 

@@ -19,21 +19,21 @@ return new class extends Migration {
         }
         Schema::create('magic_super_agent_topics', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id', 64)->default('')->comment('用户ID');
-            $table->unsignedBigInteger('workspace_id')->default(0)->comment('工作区ID');
-            $table->string('chat_conversation_id', 64)->default('')->comment('chat的会话id');
-            $table->string('chat_topic_id', 64)->default('')->comment('chat的话题id');
-            $table->string('sandbox_id', 64)->default('')->comment('沙箱id');
-            $table->string('current_task_id', 64)->default('')->comment('当前任务id');
-            $table->string('current_task_status', 64)->default('')->comment('当前任务状态 waiting, running，finished，error');
-            $table->string('topic_name', 64)->default('')->comment('话题名称');
-            $table->string('work_dir', 255)->default('')->comment('工作区目录');
-            $table->string('created_uid', 64)->default('')->comment('创建者用户ID');
-            $table->string('updated_uid', 64)->default('')->comment('更新者用户ID');
+            $table->string('user_id', 64)->default('')->comment('user ID');
+            $table->unsignedBigInteger('workspace_id')->default(0)->comment('workspace ID');
+            $table->string('chat_conversation_id', 64)->default('')->comment('chat conversation ID');
+            $table->string('chat_topic_id', 64)->default('')->comment('chat topic ID');
+            $table->string('sandbox_id', 64)->default('')->comment('sandboxid');
+            $table->string('current_task_id', 64)->default('')->comment('current task ID');
+            $table->string('current_task_status', 64)->default('')->comment('current task status: waiting, running, finished, error');
+            $table->string('topic_name', 64)->default('')->comment('topic name');
+            $table->string('work_dir', 255)->default('')->comment('workspace directory');
+            $table->string('created_uid', 64)->default('')->comment('creator user ID');
+            $table->string('updated_uid', 64)->default('')->comment('updater user ID');
             $table->datetimes();
-            $table->softDeletes()->comment('删除时间');
+            $table->softDeletes()->comment('deleted time');
 
-            // 创建索引
+            // create index
             $table->index(['user_id', 'workspace_id'], 'idx_user_workspace');
         });
     }

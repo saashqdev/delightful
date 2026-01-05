@@ -10,14 +10,14 @@ namespace Dtyq\SuperMagic\ErrorCode;
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
 /**
- * 错误码范围:51000-51299 (300个可用码)
- * 分配方案：
- * - Workspace: 51000-51049 (50个)
- * - Topic: 51050-51099 (50个)
- * - Task: 51100-51149 (50个)
- * - File: 51150-51199 (50个)
- * - Reserved1: 51200-51249 (50个)
- * - Reserved2: 51250-51299 (50个).
+ * Error code range: 51000-51299 (300 available codes)
+ * Allocation plan:
+ * - Workspace: 51000-51049 (50)
+ * - Topic: 51050-51099 (50)
+ * - Task: 51100-51149 (50)
+ * - File: 51150-51199 (50)
+ * - Reserved1: 51200-51249 (50)
+ * - Reserved2: 51250-51299 (50)
  */
 enum SuperAgentErrorCode: int
 {

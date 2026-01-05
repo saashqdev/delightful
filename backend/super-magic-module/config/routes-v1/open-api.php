@@ -13,7 +13,7 @@ use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\OpenApi\OpenTaskApi;
 use Dtyq\SuperMagic\Interfaces\SuperAgent\Facade\SandboxApi;
 use Hyperf\HttpServer\Router\Router;
 
-// 沙箱开放接口 命名不规范，需要废弃
+// Sandbox open interface - naming is non-standard, needs to be deprecated
 Router::addGroup('/api/v1/sandbox-openapi', static function () {
     Router::addGroup('/agents', static function () {
         Router::get('/{code}', [SuperMagicAgentSandboxApi::class, 'show']);
@@ -21,15 +21,15 @@ Router::addGroup('/api/v1/sandbox-openapi', static function () {
     });
 });
 
-// 沙箱内部API路由分组 - 专门给沙箱调用超级麦吉使用，命名不规范，需要废弃
+// Sandbox internal API route group - specifically for sandbox calling Super Magic, naming is non-standard, needs to be deprecated
 Router::addGroup(
     '/open/internal-api',
     static function () {
-        // 超级助理相关
+        // Super Agent related
         Router::addGroup('/super-agent', static function () {
-            // 文件管理相关
+            // File management related
             Router::addGroup('/file', static function () {
-                // 创建文件版本
+                // Create file version
                 Router::post('/versions', [FileApi::class, 'createFileVersion']);
             });
         });
@@ -37,20 +37,20 @@ Router::addGroup(
     ['middleware' => [SandboxTokenAuthMiddleware::class]]
 );
 
-// 沙箱内部API路由分组 - 专门给沙箱调用超级麦吉使用
+// Sandbox internal API route group - specifically for sandbox calling Super Magic
 Router::addGroup(
     '/api/v1/open-api/sandbox',
     static function () {
-        // 文件管理相关
+        // File management related
         Router::addGroup('/file', static function () {
-            // 创建文件版本
+            // Create file version
             Router::post('/versions', [FileApi::class, 'createFileVersion']);
         });
     },
     ['middleware' => [SandboxTokenAuthMiddleware::class]]
 );
 
-// 沙箱开放接口
+// Sandbox open interface
 Router::addGroup('/api/v1/open-api/sandbox', static function () {
     Router::addGroup('/agents', static function () {
         Router::get('/{code}', [SuperMagicAgentSandboxApi::class, 'show']);
@@ -58,34 +58,34 @@ Router::addGroup('/api/v1/open-api/sandbox', static function () {
     });
 });
 
-// 项目相关 - 公开接口
+// Project related - public interface
 Router::addGroup('/api/v1/open-api/super-magic/projects', static function () {
-    // 获取项目基本信息（项目名称等）- 无需登录
+    // Get project basic information (project name, etc.) - no login required
     Router::get('/{id}', [OpenProjectApi::class, 'show']);
 });
 
-// super-magic 开放api , 注意，后续的开放api均使用super-magic 不使用super-agent
+// super-magic open api, note: all subsequent open APIs use super-magic, not super-agent
 Router::addGroup(
     '/api/v1/open-api/super-magic',
     static function () {
         Router::post('/sandbox/init', [SandboxApi::class, 'initSandboxByApiKey']);
-        // 创建agent任务
+        // Create agent task
         Router::post('/agent-task', [OpenTaskApi::class, 'agentTask']);
 
-        // 执行脚本任务, 暂时不支持
+        // Execute script task, temporarily not supported
         // Router::post('/script-task', [OpenTaskApi::class, 'scriptTask']);
 
-        // 更新任务状态
+        // Update task status
         Router::put('/task/status', [OpenTaskApi::class, 'updateTaskStatus']);
 
-        // // 获取任务
+        // // Get task
         Router::get('/task', [OpenTaskApi::class, 'getTask']);
-        // // 获取任务列表
+        // // Get task list
         // Router::get('/tasks', [OpenTaskApi::class, 'getOpenApiTaskList']);
 
-        // 任务相关
+        // Task related
         Router::addGroup('/task', static function () {
-            // 获取任务下的附件列表
+            // Get attachment list under task
             Router::get('/attachments', [OpenTaskApi::class, 'getOpenApiTaskAttachments']);
         });
     },

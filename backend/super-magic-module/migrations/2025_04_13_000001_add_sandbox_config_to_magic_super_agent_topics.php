@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('magic_super_agent_topics', function (Blueprint $table) {
-            $table->json('sandbox_config')->nullable()->comment('沙箱配置信息')->after('sandbox_id');
+            $table->json('sandbox_config')->nullable()->comment('sandboxconfiguration information')->after('sandbox_id');
         });
     }
 

@@ -40,7 +40,7 @@ class AccountApi extends AbstractApi
 
     public function getStsToken(RequestContext $requestContext): array
     {
-        // 设置用户授权信息
+        // set user authorization information
         $requestContext->setAuthorization($this->request->header('authorization', ''));
         $requestContext->setUserAuthorization($this->getAuthorization());
         $userAuthorization = new MagicUserAuthorization();

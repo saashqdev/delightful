@@ -23,319 +23,319 @@ use Hyperf\HttpServer\Router\Router;
 Router::addGroup(
     '/api/v1/super-agent',
     static function () {
-        // 工作区管理
+        // Workspace management
         Router::addGroup('/workspaces', static function () {
-            // 获取工作区列表
+            // Get workspace list
             Router::get('/queries', [WorkspaceApi::class, 'getWorkspaceList']);
-            // 获取工作区详情
+            // Get workspace details
             Router::get('/{id}', [WorkspaceApi::class, 'getWorkspaceDetail']);
-            // 获取工作区下的话题列表（优化时再实现）
+            // Get topic list under workspace (to be implemented during optimization)
             Router::post('/{id}/topics', [WorkspaceApi::class, 'getWorkspaceTopics']);
-            // 创建工作区
+            // Create workspace
             Router::post('', [WorkspaceApi::class, 'createWorkspace']);
-            // 更新工作区
+            // Update workspace
             Router::put('/{id}', [WorkspaceApi::class, 'updateWorkspace']);
-            // 删除工作区（逻辑删除）
+            // Delete workspace (soft delete)
             Router::delete('/{id}', [WorkspaceApi::class, 'deleteWorkspace']);
-            // 设置工作区归档状态
+            // Set workspace archive status
             Router::post('/set-archived', [WorkspaceApi::class, 'setArchived']);
         });
 
-        // 项目管理
+        // Project management
         Router::addGroup('/projects', static function () {
-            // 获取项目列表
+            // Get project list
             Router::get('/queries', [ProjectApi::class, 'index']);
-            // 获取用户参与的项目列表（支持协作项目过滤）
+            // Get list of projects user participates in (supports collaborative project filtering)
             Router::post('/participated', [ProjectApi::class, 'getParticipatedProjects']);
-            // 获取项目详情
+            // Get project details
             Router::get('/{id}', [ProjectApi::class, 'show']);
-            // 创建项目
+            // Create project
             Router::post('', [ProjectApi::class, 'store']);
-            // 更新项目
+            // Update project
             Router::put('/{id}', [ProjectApi::class, 'update']);
-            // 删除项目
+            // Delete project
             Router::delete('/{id}', [ProjectApi::class, 'destroy']);
-            // 置顶项目
+            // Pin project
             Router::put('/{id}/pin', [ProjectApi::class, 'pin']);
-            // 获取项目下的话题列表
+            // Get topic list under project
             Router::get('/{id}/topics', [ProjectApi::class, 'getTopics']);
-            // 检查是否需要更新项目文件列表
+            // Check if project file list needs update
             Router::get('/{id}/last-file-updated-time', [ProjectApi::class, 'checkFileListUpdate']);
-            // 获取附件列表
+            // Get attachment list
             Router::get('/{id}/cloud-files', [ProjectApi::class, 'getCloudFiles']);
-            // 复制项目
+            // Copy project
             Router::post('/fork', [ProjectApi::class, 'fork']);
-            // 查询复制状态
+            // Query copy status
             Router::get('/{id}/fork-status', [ProjectApi::class, 'forkStatus']);
-            // 移动项目到另一个工作区
+            // Move project to another workspace
             Router::post('/move', [ProjectApi::class, 'moveProject']);
 
-            // 项目成员资源管理
+            // Project member resource management
             Router::addGroup('/{projectId}/members', static function () {
-                // 获取项目协作成员
+                // Get project collaborators
                 Router::get('', [ProjectMemberApi::class, 'getMembers']);
-                // 更新项目协作成员（新版本不需要此接口）
+                // Update project collaborators (new version doesn't need this interface)
                 //                Router::put('', [ProjectMemberApi::class, 'updateMembers']);
-                // 添加项目成员
+                // Add project members
                 Router::post('', [ProjectMemberApi::class, 'createProjectMembers']);
-                // 批量删除成员
+                // Batch delete members
                 Router::delete('', [ProjectMemberApi::class, 'deleteProjectMembers']);
-                // 批量更新成员-权限
+                // Batch update member permissions
                 Router::put('/roles', [ProjectMemberApi::class, 'updateProjectMemberRoles']);
             });
 
-            // 项目邀请链接管理
+            // Project invitation link management
             Router::addGroup('/{projectId}/invitation-links', static function () {
-                // 获取项目邀请链接信息
+                // Get project invitation link information
                 Router::get('', [ProjectInvitationLinkApi::class, 'getInvitationLink']);
-                // 开启/关闭邀请链接
+                // Enable/disable invitation link
                 Router::put('/toggle', [ProjectInvitationLinkApi::class, 'toggleInvitationLink']);
-                // 重置邀请链接
+                // Reset invitation link
                 Router::post('/reset', [ProjectInvitationLinkApi::class, 'resetInvitationLink']);
-                // 设置密码保护
+                // Set password protection
                 Router::post('/password', [ProjectInvitationLinkApi::class, 'setPassword']);
-                // 重新设置密码
+                // Reset password
                 Router::post('/reset-password', [ProjectInvitationLinkApi::class, 'resetPassword']);
-                // 修改邀请链接密码
+                // Change invitation link password
                 Router::put('/change-password', [ProjectInvitationLinkApi::class, 'changePassword']);
-                // 修改权限级别
+                // Modify permission level
                 Router::put('/permission', [ProjectInvitationLinkApi::class, 'updateDefaultJoinPermission']);
             });
         });
-        // 协作项目相关路由分组
+        // Collaboration project related routing group
         Router::addGroup('/collaboration-projects', static function () {
-            // 获取协作项目列表
+            // Get collaboration project list
             Router::get('', [ProjectMemberApi::class, 'getCollaborationProjects']);
-            // 获取协作项目创建者列表
+            // Get collaboration project creator list
             Router::get('/creators', [ProjectMemberApi::class, 'getCollaborationProjectCreators']);
-            // 更新项目置顶状态
+            // Update project pin status
             Router::put('/{project_id}/pin', [ProjectMemberApi::class, 'updateProjectPin']);
-            // 更新项目快捷方式状态
+            // Update project shortcut status
             Router::put('/{project_id}/shortcut', [ProjectMemberApi::class, 'updateProjectShortcut']);
         });
 
-        // 话题相关
+        // Topic related
         Router::addGroup('/topics', static function () {
-            // 获取话题详情
+            // Get topic details
             Router::get('/{id}', [TopicApi::class, 'getTopic']);
-            // 通过话题ID获取消息列表
+            // Get message list by topic ID
             Router::post('/{id}/messages', [TopicApi::class, 'getMessagesByTopicId']);
-            // 创建话题
+            // Create topic
             Router::post('', [TopicApi::class, 'createTopic']);
-            // 更新话题
+            // Update topic
             Router::put('/{id}', [TopicApi::class, 'updateTopic']);
-            // 删除话题
+            // Delete topic
             Router::post('/delete', [TopicApi::class, 'deleteTopic']);
-            // 智能重命名话题
+            // Smart rename topic
             Router::post('/rename', [TopicApi::class, 'renameTopic']);
-            // Checkpoint 回滚管理
+            // Checkpoint rollback management
             Router::addGroup('/{id}/checkpoints', static function () {
-                // 直接回滚检查点
+                // Directly rollback checkpoint
                 Router::post('/rollback', [TopicApi::class, 'rollbackCheckpoint']);
 
                 Router::addGroup('/rollback', static function () {
-                    // 检查回滚检查点的可行性
+                    // Check checkpoint rollback feasibility
                     Router::post('/check', [TopicApi::class, 'rollbackCheckpointCheck']);
-                    // 开始回滚检查点（标记状态而非删除）
+                    // Start checkpoint rollback (mark status instead of deletion)
                     Router::post('/start', [TopicApi::class, 'rollbackCheckpointStart']);
-                    // 提交回滚检查点（物理删除撤回状态的消息）
+                    // Commit checkpoint rollback (physically delete messages in withdrawn status)
                     Router::post('/commit', [TopicApi::class, 'rollbackCheckpointCommit']);
-                    // 撤销回滚检查点（将撤回状态的消息恢复为正常状态）
+                    // Undo checkpoint rollback (restore withdrawn messages to normal status)
                     Router::post('/undo', [TopicApi::class, 'rollbackCheckpointUndo']);
                 });
             });
-            // 复制话题消息
+            // Copy topic messages
             Router::addGroup('/{id}/duplicate-chat', static function () {
-                // 复制话题消息（同步）
+                // Copy topic messages (synchronous)
                 Router::post('', [TopicApi::class, 'duplicateChat']);
-                // 复制话题消息（异步）
+                // Copy topic messages (asynchronous)
                 Router::post('/create-job', [TopicApi::class, 'duplicateChatAsync']);
-                // 检查复制话题消息是否成功
+                // Check if topic message copy is successful
                 Router::post('/check', [TopicApi::class, 'duplicateChatCheck']);
             });
         });
 
-        // 任务相关
+        // Task related
         Router::addGroup('/tasks', static function () {
-            // 获取任务下的附件列表
+            // Get attachment list under task
             Router::get('/{id}/attachments', [TaskApi::class, 'getTaskAttachments']);
         });
 
-        // 账号相关
+        // Account related
         Router::addGroup('/accounts', static function () {
-            // 初始化超级麦吉账号
+            // Initialize Super Magic account
             Router::post('/init', [AccountApi::class, 'initAccount']);
         });
 
-        // 消息队列管理
+        // Message queue management
         Router::addGroup('/message-queue', static function () {
-            // 创建消息队列
+            // Create message queue
             Router::post('', [MessageApi::class, 'createMessageQueue']);
-            // 修改消息队列
+            // Modify message queue
             Router::put('/{id}', [MessageApi::class, 'updateMessageQueue']);
-            // 删除消息队列
+            // Delete message queue
             Router::delete('/{id}', [MessageApi::class, 'deleteMessageQueue']);
-            // 查询消息队列
+            // Query message queues
             Router::post('/queries', [MessageApi::class, 'queryMessageQueues']);
-            // 消费消息
+            // Consume message
             Router::post('/{id}/consume', [MessageApi::class, 'consumeMessageQueue']);
         });
 
-        // 消息定时任务
+        // Message scheduled task
         Router::addGroup('/message-schedule', static function () {
-            // 创建定时任务
+            // Create scheduled task
             Router::post('', [MessageApi::class, 'createMessageSchedule']);
-            // 修改定时任务
+            // Modify scheduled task
             Router::put('/{id}', [MessageApi::class, 'updateMessageSchedule']);
-            // 删除定时任务
+            // Delete scheduled task
             Router::delete('/{id}', [MessageApi::class, 'deleteMessageSchedule']);
-            // 查询定时任务
+            // Query scheduled tasks
             Router::post('/queries', [MessageApi::class, 'queryMessageSchedules']);
-            // 查询定时任务详情
+            // Query scheduled task details
             Router::get('/{id}', [MessageApi::class, 'getMessageScheduleDetail']);
-            // 查询定时任务执行日志
+            // Query scheduled task execution logs
             Router::post('/{id}/logs', [MessageApi::class, 'getMessageScheduleLogs']);
-            // 手动执行定时任务（测试用途）
+            // Manually execute scheduled task (for testing)
             Router::post('/{id}/execute', [MessageApi::class, 'executeMessageScheduleForTest']);
         });
 
         Router::addGroup('/file', static function () {
-            // 获取项目文件上传STS Token
+            // Get project file upload STS Token
             Router::get('/project-upload-token', [FileApi::class, 'getProjectUploadToken']);
-            // 获取话题文件上传STS Token
+            // Get topic file upload STS Token
             Router::get('/topic-upload-token', [FileApi::class, 'getTopicUploadToken']);
-            // 创建文件和文件夹
+            // Create file and folder
             Router::post('', [FileApi::class, 'createFile']);
-            // 保存附件关系
+            // Save attachment relationship
             Router::post('/project/save', [FileApi::class, 'saveProjectFile']);
-            // 批量保存附件关系
+            // Batch save attachment relationships
             Router::post('/project/batch-save', [FileApi::class, 'batchSaveProjectFiles']);
-            // 保存文件内容
+            // Save file content
             Router::post('/save', [FileApi::class, 'saveFileContent']);
-            // 删除附件
+            // Delete attachment
             Router::delete('/{id}', [FileApi::class, 'deleteFile']);
-            // 删除目录及其下所有文件
+            // Delete directory and all files under it
             Router::post('/directory/delete', [FileApi::class, 'deleteDirectory']);
-            // 重命名文件
+            // Rename file
             Router::post('/{id}/rename', [FileApi::class, 'renameFile']);
-            // 移动文件
+            // Move file
             Router::post('/{id}/move', [FileApi::class, 'moveFile']);
-            // 复制文件
+            // Copy file
             Router::post('/{id}/copy', [FileApi::class, 'copyFile']);
-            // 获取文件版本列表
+            // Get file version list
             Router::get('/{id}/versions', [FileApi::class, 'getFileVersions']);
-            // 文件回滚到指定版本
+            // Rollback file to specified version
             Router::post('/{id}/rollback', [FileApi::class, 'rollbackFileToVersion']);
-            // 替换文件
+            // Replace file
             Router::post('/{id}/replace', [FileApi::class, 'replaceFile']);
-            // 批量移动文件
+            // Batch move files
             Router::post('/batch-move', [FileApi::class, 'batchMoveFile']);
-            // 批量复制文件
+            // Batch copy files
             Router::post('/batch-copy', [FileApi::class, 'batchCopyFile']);
-            // 批量删除文件
+            // Batch delete files
             Router::post('/batch-delete', [FileApi::class, 'batchDeleteFiles']);
 
-            // 批量下载相关
+            // Batch download related
             Router::addGroup('/batch-download', static function () {
-                // 创建批量下载任务
+                // Create batch download task
                 Router::post('/create', [FileApi::class, 'createBatchDownload']);
-                // 检查批量下载状态
+                // Check batch download status
                 Router::get('/check', [FileApi::class, 'checkBatchDownload']);
             });
 
-            // 批量操作状态查询
+            // Batch operation status query
             Router::addGroup('/batch-operation', static function () {
-                // 检查批量操作状态
+                // Check batch operation status
                 Router::get('/check', [FileApi::class, 'checkBatchOperationStatus']);
             });
 
-            // 文件编辑状态管理
-            // 加入编辑
+            // File editing status management
+            // Join editing
             Router::post('/{fileId}/join-editing', [FileEditingApi::class, 'joinEditing']);
-            // 离开编辑
+            // Leave editing
             Router::post('/{fileId}/leave-editing', [FileEditingApi::class, 'leaveEditing']);
-            // 获取编辑用户数量
+            // Get number of editing users
             Router::get('/{fileId}/editing-users', [FileEditingApi::class, 'getEditingUsers']);
         });
 
         Router::addGroup('/sandbox', static function () {
-            // 初始化沙盒
+            // Initialize sandbox
             Router::post('/init', [SandboxApi::class, 'initSandboxByAuthorization']);
-            // 获取沙盒状态
+            // Get sandbox status
             Router::get('/status', [SandboxApi::class, 'getSandboxStatus']);
-            // 升级沙箱镜像
+            // Upgrade sandbox image
             Router::put('/upgrade', [SandboxApi::class, 'upgradeSandbox']);
         });
 
-        // 文件键清理管理
+        // File key cleanup management
         Router::addGroup('/file-keys/cleanup', static function () {
-            // 获取清理统计信息
+            // Get cleanup statistics
             Router::get('/statistics', [FileKeyCleanupApi::class, 'getStatistics']);
-            // 执行清理
+            // Execute cleanup
             Router::post('', [FileKeyCleanupApi::class, 'cleanup']);
-            // 预览清理（dry-run模式）
+            // Preview cleanup (dry-run mode)
             Router::post('/preview', [FileKeyCleanupApi::class, 'preview']);
         });
 
-        // 邀请链接访问（需要认证，面向外部用户）
+        // Invitation link access (requires authentication, for external users)
         Router::addGroup('/invitation', static function () {
-            // 通过Token访问邀请链接（外部用户预览）
+            // Access invitation link by token (external user preview)
             Router::get('/links/{token}', [ProjectInvitationLinkApi::class, 'getInvitationByToken']);
 
-            // 加入项目（外部用户操作）
+            // Join project (external user operation)
             Router::post('/join', [ProjectInvitationLinkApi::class, 'joinProject']);
         });
     },
     ['middleware' => [RequestContextMiddlewareV2::class]]
 );
 
-// 既支持登录和非登录的接口类型（兼容前端组件）
+// Interface types supporting both logged-in and non-logged-in users (compatible with frontend components)
 Router::addGroup('/api/v1/super-agent', static function () {
-    // 获取话题的附件列表
+    // Get topic attachment list
     Router::addGroup('/topics', static function () {
         Router::post('/{id}/attachments', [TopicApi::class, 'getTopicAttachments']);
     });
 
-    // 获取项目的附件列表
+    // Get project attachment list
     Router::addGroup('/projects', static function () {
         Router::post('/{id}/attachments', [ProjectApi::class, 'getProjectAttachments']);
     });
 
-    // 获取任务附件 （需要替换一下这个名称）
+    // Get task attachments (need to replace this name)
     Router::post('/tasks/get-file-url', [FileApi::class, 'getFileUrls']);
-    // 投递消息
+    // Deliver message
     Router::post('/tasks/deliver-message', [TaskApi::class, 'deliverMessage']);
 
-    // 文件转换相关
+    // File conversion related
     Router::addGroup('/file-convert', static function () {
-        // 创建文件转换任务
+        // Create file conversion task
         Router::post('/create', [TaskApi::class, 'convertFiles']);
-        // 检查文件转换状态
+        // Check file conversion status
         Router::get('/check', [TaskApi::class, 'checkFileConvertStatus']);
     });
 
-    // 长期记忆管理（沙箱token验证已移到API层内部）
+    // Long-term memory management (sandbox token validation moved to API layer)
     Router::addGroup('/memories', static function () {
         Router::post('', [SuperAgentMemoryApi::class, 'createMemory']);
         Router::put('/{id}', [SuperAgentMemoryApi::class, 'agentUpdateMemory']);
         Router::delete('/{id}', [SuperAgentMemoryApi::class, 'deleteMemory']);
     });
-    // 文件相关
+    // File related
     Router::addGroup('/file', static function () {
-        // 沙盒文件变更通知
+        // Sandbox file change notification
         Router::post('/sandbox/notifications', [FileApi::class, 'handleSandboxNotification']);
-        // 刷新 STS Token (提供 super - magic 使用， 通过 metadata 换取目录信息)
+        // Refresh STS Token (for super-magic use, exchange metadata for directory information)
         Router::post('/refresh-sts-token', [FileApi::class, 'refreshStsToken']);
-        // 批量处理附件
+        // Batch process attachments
         Router::post('/process-attachments', [FileApi::class, 'processAttachments']);
-        // 新增话题附件列表(git 管理)
+        // Add topic attachment list (git management)
         Router::post('/workspace-attachments', [FileApi::class, 'workspaceAttachments']);
 
-        // 根据文件id获取文件基本信息
+        // Get basic file information by file ID
         Router::get('/{id}', [FileApi::class, 'getFileInfo']);
-        // 根据文件id获取文件名称
+        // Get file name by file ID
         Router::get('/{id}/file-name', [FileApi::class, 'getFileByName']);
-        // 批量获取下载链接
+        // Batch get download links
         // Router::post('/batch-urls', [FileApi::class, 'getFileUrls']);
     });
 });
@@ -344,7 +344,7 @@ Router::addGroup('/api/v1/super-agent', static function () {
 Router::addGroup(
     '/api/v2/super-agent',
     static function () {
-        // 获取项目的附件列表 V2 (不返回树状结构)
+        // Get project attachment list V2 (does not return tree structure)
         Router::addGroup('/projects', static function () {
             Router::post('/{id}/attachments', [ProjectApi::class, 'getProjectAttachmentsV2']);
         });

@@ -19,19 +19,19 @@ return new class extends Migration {
         }
         Schema::create('magic_super_agent_message', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('sender_type', 32)->comment('发送者类型(user/ai)');
-            $table->string('sender_uid', 64)->comment('发送者ID');
-            $table->string('receiver_uid', 64)->comment('接收者ID');
-            $table->string('message_id', 64)->unique()->comment('消息ID');
-            $table->string('type', 32)->comment('消息类型');
-            $table->string('task_id', 64)->comment('任务ID');
-            $table->bigInteger('topic_id')->nullable()->comment('话题ID');
-            $table->string('status', 32)->nullable()->comment('任务状态');
-            $table->text('content')->comment('消息内容');
-            $table->json('steps')->nullable()->comment('步骤信息');
-            $table->json('tool')->nullable()->comment('工具调用信息');
-            $table->string('event', 64)->comment('事件类型');
-            $table->integer('send_timestamp')->comment('发送时间戳');
+            $table->string('sender_type', 32)->comment('sender type(user/ai)');
+            $table->string('sender_uid', 64)->comment('sender ID');
+            $table->string('receiver_uid', 64)->comment('receiver ID');
+            $table->string('message_id', 64)->unique()->comment('message ID');
+            $table->string('type', 32)->comment('message type');
+            $table->string('task_id', 64)->comment('task ID');
+            $table->bigInteger('topic_id')->nullable()->comment('topic ID');
+            $table->string('status', 32)->nullable()->comment('task status');
+            $table->text('content')->comment('message content');
+            $table->json('steps')->nullable()->comment('step information');
+            $table->json('tool')->nullable()->comment('tool call information');
+            $table->string('event', 64)->comment('event type');
+            $table->integer('send_timestamp')->comment('send timestamp');
             $table->timestamps();
             $table->softDeletes();
 

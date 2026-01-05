@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('magic_super_agent_topics', function (Blueprint $table) {
             if (! Schema::hasColumn('magic_super_agent_topics', 'user_organization_code')) {
-                $table->string('user_organization_code', 64)->default('')->comment('用户组织编码')->after('user_id');
+                $table->string('user_organization_code', 64)->default('')->comment('user organization code')->after('user_id');
             }
         });
     }

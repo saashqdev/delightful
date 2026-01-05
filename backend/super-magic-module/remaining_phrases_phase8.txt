@@ -1,0 +1,32 @@
+Top 30 Remaining Chinese Phrases for Phase 8:
+
+ 1. Count: 110 - Phrase: 中
+ 2. Count:  81 - Phrase: 新
+ 3. Count:  79 - Phrase: 存
+ 4. Count:  76 - Phrase: 已
+ 5. Count:  62 - Phrase: 是
+ 6. Count:  58 - Phrase: 或
+ 7. Count:  51 - Phrase: 不
+ 8. Count:  47 - Phrase: 后
+ 9. Count:  47 - Phrase: 下
+10. Count:  46 - Phrase: 到
+11. Count:  45 - Phrase: 有
+12. Count:  43 - Phrase: 按
+13. Count:  43 - Phrase: 则
+14. Count:  43 - Phrase: 秒
+15. Count:  34 - Phrase: 数
+16. Count:  33 - Phrase: 锁
+17. Count:  33 - Phrase: 重新
+18. Count:  31 - Phrase: 者
+19. Count:  31 - Phrase: 时
+20. Count:  30 - Phrase: 进
+21. Count:  29 - Phrase: 未
+22. Count:  28 - Phrase: 元
+23. Count:  27 - Phrase: 的
+24. Count:  26 - Phrase: 库
+25. Count:  26 - Phrase: 只
+26. Count:  26 - Phrase: 信
+27. Count:  25 - Phrase: 应
+28. Count:  24 - Phrase: 号
+29. Count:  24 - Phrase: 先
+30. Count:  23 - Phrase: 个

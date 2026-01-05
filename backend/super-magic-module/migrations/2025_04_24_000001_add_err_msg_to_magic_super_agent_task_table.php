@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('magic_super_agent_task', function (Blueprint $table) {
             if (! Schema::hasColumn('magic_super_agent_task', 'err_msg')) {
-                $table->string('err_msg', 500)->nullable()->comment('错误信息');
+                $table->string('err_msg', 500)->nullable()->comment('error message');
             }
         });
     }

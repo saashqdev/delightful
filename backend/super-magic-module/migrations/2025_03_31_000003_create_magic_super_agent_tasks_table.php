@@ -19,19 +19,19 @@ return new class extends Migration {
         }
         Schema::create('magic_super_agent_task', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id', 64)->comment('用户id。');
-            $table->unsignedBigInteger('workspace_id')->comment('工作区id。');
-            $table->unsignedBigInteger('topic_id')->comment('话题id。');
-            $table->string('task_id', 64)->comment('任务id。沙箱服务返回的');
-            $table->string('sandbox_id', 64)->comment('沙箱id。');
-            $table->string('prompt', 5000)->comment('用户的问题。');
-            $table->string('attachments', 500)->comment('用户上传的附件信息。用 json格式存储');
-            $table->string('task_status', 64)->comment('任务状态 waiting, running，finished，error');
-            $table->string('work_dir', 255)->comment('工作区目录');
+            $table->string('user_id', 64)->comment('user ID。');
+            $table->unsignedBigInteger('workspace_id')->comment('workspace ID');
+            $table->unsignedBigInteger('topic_id')->comment('topic ID');
+            $table->string('task_id', 64)->comment('task ID returned by sandbox service');
+            $table->string('sandbox_id', 64)->comment('sandboxid。');
+            $table->string('prompt', 5000)->comment('user's question');
+            $table->string('attachments', 500)->comment('user uploaded attachment information stored in JSON format');
+            $table->string('task_status', 64)->comment('task status waiting, running，finished，error');
+            $table->string('work_dir', 255)->comment('workspace directory');
             $table->timestamps();
             $table->softDeletes();
 
-            // 创建索引
+            // create index
             $table->index(['user_id', 'workspace_id'], 'idx_user_workspace');
         });
     }

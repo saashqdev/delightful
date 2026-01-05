@@ -82,8 +82,8 @@ Use this template to report problems with installing or deploying Magic.
 If you're unsure which template to use or need help with Magic:
 
 - 💬 **Discussions**: [GitHub Discussions](https://github.com/saashqdev/delightful/magic/discussions)
-- 📖 **Documentation**: [docs.letsmagic.cn](https://docs.letsmagic.cn/en) | [中文文档](https://docs.letsmagic.cn/zh)
-- 🌐 **Official Website**: [letsmagic.ai](https://www.letsmagic.ai)
+- 📖 **Documentation**: [docs.letsmagic.cn](https://docs.letsmagic.cn/en) | [Chinese Documentation](https://docs.letsmagic.cn/zh)
+- 🌐 **Official Website**: [bedelightful.ai](https://www.bedelightful.ai)
 - 📧 **Enterprise Support**: bd@dtyq.com
 
 ## Contributing

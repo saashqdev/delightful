@@ -10,7 +10,7 @@ setup(
     name="super-magic",
     version="1.0.0",
     author="SuperMagic Team",
-    author_email="dev@letsmagic.ai",
+    author_email="dev@bedelightful.ai",
     description="SuperMagic General AI System",
     long_description=long_description,
     long_description_content_type="text/markdown",

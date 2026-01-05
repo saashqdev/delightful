@@ -51,7 +51,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"email":"admin@example.com
 
 Default Accounts and password:
 
-- Account `13812345678`: Password is `letsmagic.ai`
-- Account `13912345678`: Password is `letsmagic.ai`
+- Account `13812345678`: Password is `bedelightful.ai`
+- Account `13912345678`: Password is `bedelightful.ai`
 
 In production environments, please ensure the implementation of secure password storage and verification mechanisms. 

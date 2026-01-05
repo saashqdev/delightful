@@ -49,8 +49,8 @@ cp .env.example .env
 ### 4. Access Services
 - API Service: http://localhost:9501
 - Web Application: http://localhost:8080
-  - Account `13812345678`：Password `letsmagic.ai`
-  - Account `13912345678`：Password `letsmagic.ai`
+  - Account `13812345678`：Password `bedelightful.ai`
+  - Account `13912345678`：Password `bedelightful.ai`
 - RabbitMQ Management Interface: http://localhost:15672
   - Username: admin
   - Password: magic123456

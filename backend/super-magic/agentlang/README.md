@@ -87,7 +87,7 @@ This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE
 
 ## 📞 Contact
 
-- **Email**: dev@letsmagic.ai
+- **Email**: dev@bedelightful.ai
 - **GitHub**: [https://github.com/saashqdev/delightful/agentlang](https://github.com/saashqdev/delightful/agentlang)
 - **Issue Tracker**: [https://github.com/saashqdev/delightful/agentlang/issues](https://github.com/saashqdev/delightful/agentlang/issues)
 

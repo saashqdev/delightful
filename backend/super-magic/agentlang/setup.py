@@ -13,7 +13,7 @@ setup(
     name="agentlang",
     version="0.1.4",
     author="SuperMagic Team",
-    author_email="dev@letsmagic.ai",
+    author_email="dev@bedelightful.ai",
     description="Simple and efficient AI agent framework",
     long_description=long_description,
     long_description_content_type="text/markdown",

@@ -22,7 +22,7 @@ class InitialAccountAndUserSeeder extends Seeder
                 'email' => 'admin@example.com',
                 'real_name' => 'Administrator',
                 'gender' => 1, // male
-                'password' => 'letsmagic.ai', // default password
+                'password' => 'bedelightful.ai', // default password
             ],
             [
                 'country_code' => '86',
@@ -30,7 +30,7 @@ class InitialAccountAndUserSeeder extends Seeder
                 'email' => 'user@example.com',
                 'real_name' => 'Standard User',
                 'gender' => 2, // female
-                'password' => 'letsmagic.ai', // default password
+                'password' => 'bedelightful.ai', // default password
             ],
             [
                 'country_code' => '86',

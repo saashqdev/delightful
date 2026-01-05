@@ -2,32 +2,32 @@
 
 set -eo pipefail
 
-# 获取脚本所在目录名称
+# Get the directory containing this script
 base_dirname=$(
   cd "$(dirname "$0")"
   pwd
 )
-# 执行脚本文件位置
+# Path to the Hyperf console entry
 bin="${base_dirname}/bin/hyperf.php"
 
 
-# 检查是否已经初始化过
+# Check whether initialization has already run
 if [ ! -f "${base_dirname}/.initialized" ]; then
     echo "Initializing magic-service for the first time..."
     
-    # 执行 composer update
+    # Run composer update to install dependencies
     cd ${base_dirname}
     
 
-    # 执行迁移
+    # Run migrations
     php "${bin}" migrate --force
     
-    # 执行数据库种子
+    # Run database seeders
     php bin/hyperf.php init-magic:data
 
   
     
-    # 创建标记文件，表示已经初始化过
+    # Create a marker file to indicate initialization is complete
     touch ${base_dirname}/.initialized
     echo "Initialization completed!"
 else
@@ -35,7 +35,7 @@ else
 fi 
 
 
-# 执行seeders
+  # Run seeders if needed
 
-# 开启服务
+  # Start the service
 USE_ZEND_ALLOC=0 php -dopcache.enable_cli=0 "${bin}" start

@@ -20,14 +20,14 @@ const createHuskyDefaultConfig = () => {
 
 program
 	.command("husky")
-	.description("初始化 .husky 配置")
+	.description("Initialize .husky config")
 	.action(() => {
 		createHuskyDefaultConfig()
 	})
 
 program
 	.command("husky-emoji")
-	.description("初始化 .husky emoji 配置")
+	.description("Initialize .husky emoji config")
 	.action(() => {
 		createHuskyDefaultConfig()
 		exec(resolve(__dirname, "../../src/husky/add-commit-emoji.sh"))

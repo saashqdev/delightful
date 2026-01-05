@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-### service 本地构建镜像
+### Build the service image locally
 
 set -e
 
@@ -17,9 +17,9 @@ export WEB_IMAGE="dtyq/magic-web"
 export SERVICE_IMAGE="dtyq/magic-service"
 export REGISTRY="ghcr.io"
 
-# 获取脚本所在目录的绝对路径
+# Get the absolute path to the script directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-# 获取 service 目录的绝对路径
+# Get the absolute path to the service directory
 SERVICE_DIR="$(cd "${SCRIPT_DIR}/../backend/magic-service" && pwd)"
 
 function publish() {
@@ -31,15 +31,15 @@ function publish() {
     echo -e "\n"
 }
 
-# 检查并安装 buildx
+# Check and install buildx
 check_and_install_buildx() {
     if ! docker buildx version > /dev/null 2>&1; then
         echo "Docker Buildx not detected, attempting to install..."
         
-        # 检测操作系统并安装
+        # Detect the operating system and install
         if [[ "$OSTYPE" == "linux-gnu"* ]]; then
             echo "Linux system detected, installing Buildx..."
-            # Linux 安装方法
+            # Linux installation method
             mkdir -p ~/.docker/cli-plugins/
             BUILDX_URL="https://github.com/docker/buildx/releases/download/v0.10.4/buildx-v0.10.4.linux-amd64"
             if ! curl -sSL "$BUILDX_URL" -o ~/.docker/cli-plugins/docker-buildx; then
@@ -66,7 +66,7 @@ check_and_install_buildx() {
             exit 1
         fi
         
-        # 验证安装
+        # Verify installation
         if docker buildx version > /dev/null 2>&1; then
             echo "Docker Buildx installed successfully: $(docker buildx version | head -n 1)"
         else
@@ -80,14 +80,14 @@ check_and_install_buildx() {
 
 # build base image
 if [[ ${TASK} == "build" ]]; then
-    # 检查并安装 buildx
+    # Check and install buildx
     check_and_install_buildx
     
-    # 复制 composer.json 到 service 目录
+    # Copy composer.json into the service directory
     cp -a "${SCRIPT_DIR}/composer.json" "${SERVICE_DIR}/"
     cp -a "${SCRIPT_DIR}/composer.lock" "${SERVICE_DIR}/"
     
-    # 启用 BuildKit
+    # Enable BuildKit
     export DOCKER_BUILDKIT=1
     
     echo "Building image: ${REGISTRY}/${SERVICE_IMAGE}:${TAG}"

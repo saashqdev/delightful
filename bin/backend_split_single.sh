@@ -13,32 +13,32 @@ NOW=$(date +%s)
 COMPOSE_NAME=$1
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-# 获取路径信息（关闭命令回显以避免显示路径）
-set +x  # 暂时关闭命令回显
-# 获取脚本所在目录的绝对路径
+# Get path info (hide command output to avoid showing paths)
+set +x  # Temporarily disable command echo
+# Get the absolute path to the script directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-# 获取 backend 目录的绝对路径
+# Get the absolute path to the backend directory
 SERVICE_DIR="$(cd "${SCRIPT_DIR}/../backend" && pwd)"
-# 获取根目录的绝对路径
+# Get the absolute path to the repository root
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
-set -x  # 重新开启命令回显
+set -x  # Re-enable command echo
 
-# 加载环境变量（静默方式）
-set +x  # 暂时关闭命令回显
+# Load environment variables (quiet)
+set +x  # Temporarily disable command echo
 if [ -f "${ROOT_DIR}/.env" ]; then
     echo "Loading environment variables..."
     source "${ROOT_DIR}/.env"
 fi
-set -x  # 重新开启命令回显
+set -x  # Re-enable command echo
 
-# 使用环境变量获取Git仓库URL，默认使用GitHub
+# Use the env variable for Git repo URL, default to GitHub
 if [ -z "${GIT_REPO_URL}" ]; then
-    # 如果环境变量未设置，使用默认值
+    # Use default value if env var is not set
     GIT_REPO_URL="git@github.com:dtyq"
 fi
 REMOTE_URL="${GIT_REPO_URL}/${COMPOSE_NAME}.git"
 
-# 添加确认环节，防止误发布
+# Add a confirmation step to avoid accidental publishing
 echo "Preparing to publish component to remote repository: ${COMPOSE_NAME} -> ${REMOTE_URL}"
 if [[ $REMOTE_URL == *"github"* ]]; then
     echo "🔔 Note: Publishing code to GitHub repository"
@@ -60,7 +60,7 @@ function split()
 
 function remote()
 {
-    # 检查远程仓库是否已存在
+    # Check whether the remote already exists
     if git remote | grep -q "^$1$"; then
         CURRENT_URL=$(git remote get-url $1)
         if [ "$CURRENT_URL" != "$2" ]; then
@@ -81,7 +81,7 @@ function remote()
     fi
 }
 
-# 更健壮地处理git pull操作
+# Handle git pull more robustly
 echo "Checking remote branch status..."
 if git ls-remote --heads origin $CURRENT_BRANCH | grep -q $CURRENT_BRANCH; then
     echo "Remote branch exists, pulling now..."
@@ -90,11 +90,11 @@ else
     echo "Remote branch does not exist, skipping pull operation"
 fi
 
-# 初始化远程连接
+# Initialize remote connection
 echo "Initializing remote connection..."
 remote $COMPOSE_NAME $REMOTE_URL
 
-# 执行分割并推送
+# Split the subtree and push
 echo "Splitting and pushing..."
 split "backend/$COMPOSE_NAME" $COMPOSE_NAME
 

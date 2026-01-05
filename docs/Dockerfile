@@ -1,5 +1,5 @@
-# ===== 基础镜像配置 =====
-# 基础镜像: node:18-alpine
+# ===== Base image configuration =====
+# Base image: node:18-alpine
 ARG IMAGE_SOURCE
 ARG NODE_BASE_IMAGE=${IMAGE_SOURCE}node:18-alpine
 ARG CADDY_BASE_IMAGE=${IMAGE_SOURCE}caddy:alpine

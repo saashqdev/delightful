@@ -1,15 +1,15 @@
-# 文件服务
+# File service
 :80 {
-    # 上传文件服务根目录
+    # Root directory for uploaded files
     root * /srv/files
 
 
-    #为文件服务添加专门的前缀路径
+    # Add a dedicated prefix path for the file service
     @static_files {
         path /files/*
     }
 
-    # 处理OPTIONS预检请求
+    # Handle OPTIONS preflight requests
     @options {
         method OPTIONS
         path /files/*
@@ -23,7 +23,7 @@
         respond 204
     }
 
-    # 对匹配的静态文件路径提供文件服务
+    # Serve static files for matching paths
     handle @static_files {
         uri strip_prefix /files
         file_server browse
@@ -34,13 +34,13 @@
     }
 
 
-    # WebSocket处理
+    # WebSocket handling
     @websockets {
         header Connection *Upgrade*
         header Upgrade websocket
     }
 
-    # 反向代理WebSocket请求
+    # Reverse proxy WebSocket requests
     reverse_proxy @websockets {
         to magic-service:9502
         header_up Host {host}
@@ -50,7 +50,7 @@
         header_down Access-Control-Allow-Origin *
     }
 
-    # 反向代理 API 服务
+    # Reverse proxy API service
     reverse_proxy /api/* {
         to magic-service:9501
         header_up Host {host}
@@ -60,7 +60,7 @@
         header_down Access-Control-Allow-Origin *
     }
 
-    # 反向代理 API 服务
+    # Reverse proxy API service
     reverse_proxy /v1/* {
         to magic-service:9501
         header_up Host {host}
@@ -70,7 +70,7 @@
         header_down Access-Control-Allow-Origin *
     }
 
-    # 默认将所有其他请求代理到 magic-web 服务
+    # By default proxy all other requests to the magic-web service
     reverse_proxy {
         to magic-web:8080
         header_up Host {host}
@@ -79,7 +79,7 @@
         header_up X-Forwarded-Proto {scheme}
     }
 
-    # 日志配置
+    # Logging configuration
     log {
         output stdout
         format console

@@ -1,11 +1,11 @@
 http://:80 {
-    # 通用配置
+    # General settings
     encode {
         zstd
         gzip
     }
 
-    # 不缓存这个matcher匹配的东西
+    # Do not cache content matched by this matcher
     @no-cache {
         path /
         path */
@@ -33,11 +33,11 @@ http://:80 {
     header @no-cache {
         Cache-Control "no-cache, no-store, must-revalidate"
         Pragma "no-cache"
-        # 只能用http时间格式，见https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires
+        # Use HTTP time format only, see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires
         Expires "Thu, 01 Jan 1970 00:00:01 GMT"
     }
 
-    # 一些通用头
+    # Common headers
     header {
         # Accept-Encoding
         Vary "Accept-Encoding"
@@ -47,7 +47,7 @@ http://:80 {
         defer
     }
 
-    # 404就rewrite到index
+    # Rewrite 404s to index
     handle_errors 400 401 403 404 500 501 502 503 504 {
         file_server {
             root ./dist
@@ -55,7 +55,7 @@ http://:80 {
         rewrite /index.html
     }
 
-    # 日志
+    # Logging
     log {
         output stderr
         format json
@@ -67,22 +67,22 @@ http://:80 {
         respond `{"data": 200}`
     }
 
-    # 静态文件服务
+    # Static file service
     route {
         file_server {
             root ./dist
             index index.html
-            # 找不到则继续
+            # Continue if not found
             pass_thru
         }
-        # 不缓存
+        # Disable caching
         header {
             Cache-Control "no-cache, no-store, must-revalidate"
             Pragma "no-cache"
-            # 只能用http时间格式，见https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires
+            # Use HTTP time format only, see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires
             Expires "Thu, 01 Jan 1970 00:00:01 GMT"
         }
-        # 兼容SPA的router - 任何路由都200并返回index
+        # SPA-friendly router - always return 200 and serve index
         rewrite /index.html
         file_server {
             root ./dist

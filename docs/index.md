@@ -2,16 +2,16 @@
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
-# 添加语言自动检测脚本
+# Add language auto-detection script
 head:
   - - script
     - {}
     - |
-      // 检测浏览器语言并重定向
+      // Detect browser language and redirect
       (function() {
         var userLang = navigator.language || navigator.userLanguage;
         var path = userLang.startsWith('zh') ? '/zh/' : '/en/';
-        // 仅在根路径时进行重定向，避免重复重定向
+        // Redirect only on root path to avoid loops
         if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
           window.location.href = path;
         }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) Be Delightful , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 use App\Application\Agent\Service\MagicAgentAppService;
 use App\Interfaces\Authorization\Web\MagicUserAuthorization;

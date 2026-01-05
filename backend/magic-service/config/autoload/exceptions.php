@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) Be Delightful , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 use App\Infrastructure\Core\Exception\Handler\AppExceptionHandler;
 use App\Infrastructure\Core\Exception\Handler\BusinessExceptionHandler;

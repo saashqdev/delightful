@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) Be Delightful , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 use App\Domain\Chat\Entity\ValueObject\SearchEngineType;
 use App\Infrastructure\ExternalAPI\Search\Adapter\BingSearchAdapter;
@@ -14,7 +14,7 @@ use App\Infrastructure\ExternalAPI\Search\Adapter\MagicSearchAdapter;
 use App\Infrastructure\ExternalAPI\Search\Adapter\TavilySearchAdapter;
 
 /*
- * Copyright (c) Be Delightful , Distributed under the software license.
+ * Copyright (c) Be Delightful , Distributed under the MIT software license.
  */
 use function Hyperf\Support\env;
 

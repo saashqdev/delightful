@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) Be Delightful , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
     'cannot_modify_message' => '当前状态下无法修改消息',

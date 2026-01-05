@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) Be Delightful , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
     'disable_web_search_constraint' => ' (Tìm kiếm dựa trên nội dung không gian làm việc, không sử dụng công cụ tìm kiếm internet)',

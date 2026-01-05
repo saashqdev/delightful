@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) Be Delightful , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 use App\Domain\Chat\Entity\ValueObject\PlatformRootDepartmentId;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;

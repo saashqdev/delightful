@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) Be Delightful , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
 namespace PHPSTORM_META {

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 /**
- * Copyright (c) Be Delightful , Distributed under the software license
+ * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 use PhpCsFixer\Runner\Parallel\ParallelConfig;
 
 $header = <<<'EOF'
-Copyright (c) Be Delightful , Distributed under the software license
+Copyright (c) Be Delightful , Distributed under the MIT software license
 EOF;
 
 return (new Config())

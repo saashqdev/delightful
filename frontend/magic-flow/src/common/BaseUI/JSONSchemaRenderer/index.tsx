@@ -16,7 +16,7 @@ type JSONSchemaRenderer = {
 export default function JSONSchemaRenderer({ form }: JSONSchemaRenderer) {
 	const properties = useMemo(() => {
 		if (form && form.properties) {
-			// 将 properties 按 sort 字段进行排序，越小越排前
+			// Sort properties by the sort field; smaller values go first
 			return Object.entries(form.properties).sort(
 				([, a], [, b]) => (a.sort || 0) - (b.sort || 0),
 			)

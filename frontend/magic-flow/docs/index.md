@@ -1,15 +1,15 @@
 ---
 hero:
   title: Magic
-  description: 神奇项目的基础组件，包括流程的相关组件
+  description: Core components for the Magic project, including flow-related building blocks
   actions:
-    - text: 表达式组件
+    - text: Expression component
       link: /components/magic-expression-widget
-    - text: 表单组件
+    - text: Form component
       link: /components/magic-json-schema-editor
-    - text: 条件组件
+    - text: Condition component
       link: /components/magic-condition-edit
-    - text: 流程组件
+    - text: Flow component
       link: /components/magic-flow
 features:
 ---

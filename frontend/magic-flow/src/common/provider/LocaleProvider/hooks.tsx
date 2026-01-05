@@ -5,8 +5,8 @@ import { useShallow } from "zustand/react/shallow"
 import { store as internationalizedStore } from "./store"
 
 /**
- * 获取全局语言
- * @param includeAuto 是否包含自动
+ * Get the global language
+ * @param includeAuto whether to include the auto option
  */
 export function useGlobalLanguage<T>(includeAuto: T = true as T) {
 	const language = internationalizedStore(useShallow((store) => store.language))
@@ -15,8 +15,8 @@ export function useGlobalLanguage<T>(includeAuto: T = true as T) {
 }
 
 /**
- * 获取全局列表
- * @param includeAuto 是否包含自动
+ * Get the global language options list
+ * @param includeAuto whether to include the auto option
  */
 export function useSupportLanguageOptions(includeAuto = true) {
 	const { language, languages } = internationalizedStore(

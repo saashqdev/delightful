@@ -1,6 +1,6 @@
-# 流程组件
+# Flow Component
 
-## 基本使用
+## Basic Usage
 
 
 ```jsx
@@ -13,7 +13,7 @@ export default () => {
 }
 ```
 
-<!-- ### 自定义参数
+<!-- ### Custom Params
 
 
 ```jsx
@@ -26,7 +26,7 @@ export default () => {
 }
 ``` -->
 
-## 弹窗打开
+## Open in Modal
 
 
 ```jsx
@@ -40,7 +40,7 @@ export default () => {
     const [open, setOpen] = useState(false)
 
     return <>
-        <Button onClick={() => setOpen(true)}>打开</Button>
+        <Button onClick={() => setOpen(true)}>Open</Button>
         <BaseFlowModal open={open} onClose={() => setOpen(false)}/>
     </>
 }

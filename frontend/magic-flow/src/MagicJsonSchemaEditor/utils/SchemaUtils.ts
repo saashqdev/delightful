@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import Schema from '../types/Schema';
 
-// 默认都有的schema
+// Schema defaults shared by all types
 export const commonDefaultSchema = {
   title: '',
   description: '',
@@ -189,24 +189,24 @@ function getFieldsTitle(data: Record<string, Schema>): string[] {
 }
 
 /**
- * 生成唯一ID
+ * Generate a unique ID
  */
 export const generateUniqueId = (): string => {
     return Math.floor(Math.random() * 1000000000000000000).toString();
 };
 
 /**
- * 将普通值转换为表达式组件值
- * @param value 普通值
- * @returns 符合InputExpressionValue类型的表达式组件值
+ * Convert a plain value to an expression component value
+ * @param value plain value
+ * @returns value that matches InputExpressionValue
  */
 export const convertToExpressionValue = (value: any): any => {
-    // 处理undefined和null
+  // Handle undefined and null
     if (value === undefined || value === null) {
         return null;
     }
 
-    // 将值转换为字符串
+  // Convert the value to string
     const stringValue = String(value);
 
     return {
@@ -222,18 +222,18 @@ export const convertToExpressionValue = (value: any): any => {
     };
 };
 
-// 将普通JSON转换为Schema格式
+// Convert plain JSON to schema format
 export const convertJsonToSchema = (json: any): Schema => {
     if (json === null) {
         return getDefaultSchema("string")
     }
 
     if (Array.isArray(json)) {
-        // 处理数组
+        // Handle array
         const arraySchema = getDefaultSchema("array")
 
         if (json.length > 0) {
-            // 根据第一个元素类型确定items类型
+          // Infer items type from the first element
             const firstItem = json[0]
             const itemType = typeof firstItem
 
@@ -247,7 +247,7 @@ export const convertJsonToSchema = (json: any): Schema => {
                 arraySchema.items = getDefaultSchema(itemType)
             }
             
-            // 为数组的每个元素创建对应的属性
+            // Create properties for each array element
             arraySchema.properties = {}
             json.forEach((item, index) => {
                 if (typeof item === "object" && item !== null) {
@@ -264,7 +264,7 @@ export const convertJsonToSchema = (json: any): Schema => {
     }
 
     if (typeof json === "object") {
-        // 处理对象
+        // Handle object
         const objectSchema = getDefaultSchema("object")
         objectSchema.properties = {}
 
@@ -275,16 +275,16 @@ export const convertJsonToSchema = (json: any): Schema => {
         return objectSchema
     }
 
-    // 处理基本类型
+    // Handle primitive types
     const type = typeof json
     const schema = getDefaultSchema(type)
     schema.value = convertToExpressionValue(json)
     return schema
 }
 
-// 判断是否为Schema格式
+  // Determine whether the input is already schema format
 export const isSchemaFormat = (json: any): boolean => {
-    // 简单判断是否包含Schema的关键属性
+    // Basic check for key schema properties
     return (
         json &&
         typeof json === "object" &&
@@ -294,17 +294,17 @@ export const isSchemaFormat = (json: any): boolean => {
 }
 
 /**
- * 判断字段是否可以编辑（更改类型或名称）
- * @param parentField 父级字段对象
- * @returns 是否可编辑
+ * Determine if a field is editable (type or name)
+ * @param parentField parent field object
+ * @returns whether it is editable
  */
 export const canEditField = (parentField: Schema | null): boolean => {
     
-  // 如果父级是数组类型且已定义items，则不允许编辑
+  // Do not allow edits when parent is an array with defined items
   if (parentField && parentField.type === 'array' && parentField.items) {
     return false;
   }
   
-  // 其他情况下都可以编辑
+  // Editable in all other cases
   return true;
 };

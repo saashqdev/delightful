@@ -1,16 +1,16 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 
-// 节点分批处理钩子函数
+// Hook to process nodes in batches
 export interface BatchProcessingOptions {
-  // 单次批处理的节点数量
+  // Nodes per batch
   batchSize?: number
-  // 批次间隔时间(毫秒)
+  // Interval between batches (ms)
   interval?: number
-  // 是否在处理完成后自动停止
+  // Auto-stop when all batches finish
   autoStop?: boolean
-  // 完成回调
+  // Completion callback
   onComplete?: () => void
-  // 进度回调
+  // Progress callback
   onProgress?: (current: number, total: number) => void
 }
 
@@ -23,16 +23,16 @@ export const useNodeBatchProcessing = (options: BatchProcessingOptions = {}) => 
     onProgress
   } = options
 
-  // 批处理状态
+  // Batch processing state
   const [isProcessing, setIsProcessing] = useState(false)
   const [progress, setProgress] = useState({ current: 0, total: 0 })
   
-  // 存储节点和回调函数
+  // Store queued nodes and callbacks
   const nodeQueueRef = useRef<any[]>([])
   const processCallbackRef = useRef<(nodes: any[]) => void>(() => {})
   const intervalIdRef = useRef<any>(null)
 
-  // 停止处理
+  // Stop processing
   const stopProcessing = useCallback(() => {
     if (intervalIdRef.current) {
       clearInterval(intervalIdRef.current)
@@ -41,7 +41,7 @@ export const useNodeBatchProcessing = (options: BatchProcessingOptions = {}) => 
     setIsProcessing(false)
   }, [])
 
-  // 清理函数
+  // Cleanup
   useEffect(() => {
     return () => {
       if (intervalIdRef.current) {
@@ -50,7 +50,7 @@ export const useNodeBatchProcessing = (options: BatchProcessingOptions = {}) => 
     }
   }, [])
 
-  // 批量处理节点
+  // Process nodes in batches
   const processNodesBatch = useCallback((
     allNodes: any[],
     processCallback: (nodes: any[]) => void,
@@ -60,14 +60,14 @@ export const useNodeBatchProcessing = (options: BatchProcessingOptions = {}) => 
     const actualBatchSize = mergedOptions.batchSize || batchSize
     const actualInterval = mergedOptions.interval || interval
     
-    // 保存节点和回调函数
+    // Save nodes and callback
     nodeQueueRef.current = [...allNodes]
     processCallbackRef.current = processCallback
 
-    // 计算总批次
+    // Calculate total batches
     const totalBatches = Math.ceil(allNodes.length / actualBatchSize)
     
-    // 如果没有节点，直接返回
+    // No nodes: exit early
     if (allNodes.length === 0) {
       if (mergedOptions.onComplete) {
         mergedOptions.onComplete()
@@ -75,7 +75,7 @@ export const useNodeBatchProcessing = (options: BatchProcessingOptions = {}) => 
       return
     }
     
-    // 如果节点数量少于一个批次，直接处理
+    // Single batch: process immediately
     if (allNodes.length <= actualBatchSize) {
       processCallback(allNodes)
       setProgress({ current: 1, total: 1 })
@@ -88,13 +88,13 @@ export const useNodeBatchProcessing = (options: BatchProcessingOptions = {}) => 
       return
     }
     
-    // 开始分批处理
+    // Start batch processing
     setIsProcessing(true)
     setProgress({ current: 0, total: totalBatches })
     
     let currentBatch = 0
     
-    // 处理第一批
+    // Process first batch
     const firstBatch = allNodes.slice(0, actualBatchSize)
     processCallback(firstBatch)
     currentBatch = 1
@@ -103,12 +103,12 @@ export const useNodeBatchProcessing = (options: BatchProcessingOptions = {}) => 
       mergedOptions.onProgress(currentBatch, totalBatches)
     }
     
-    // 设置定时器处理剩余批次
+    // Schedule remaining batches
     intervalIdRef.current = setInterval(() => {
       const start = currentBatch * actualBatchSize
       const end = Math.min(start + actualBatchSize, allNodes.length)
       
-      // 如果已经处理完所有批次
+      // If all batches processed
       if (currentBatch >= totalBatches) {
         stopProcessing()
         if (mergedOptions.onComplete) {
@@ -117,18 +117,18 @@ export const useNodeBatchProcessing = (options: BatchProcessingOptions = {}) => 
         return
       }
       
-      // 创建新的节点数组，包含所有之前处理过的节点和新批次节点
+      // Build new node list including processed nodes
       const nextBatch = allNodes.slice(0, end)
       processCallback(nextBatch)
       
-      // 更新进度
+      // Update progress
       currentBatch++
       setProgress({ current: currentBatch, total: totalBatches })
       if (mergedOptions.onProgress) {
         mergedOptions.onProgress(currentBatch, totalBatches)
       }
       
-      // 所有批次处理完成后，如果设置了autoStop，则停止处理
+      // Stop when complete if autoStop is enabled
       if (currentBatch >= totalBatches && autoStop) {
         stopProcessing()
         if (mergedOptions.onComplete) {

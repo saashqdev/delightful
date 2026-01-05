@@ -23,23 +23,23 @@ const SvgLine = ({ x1, y1, x2, y2, horizontal, ...props }: LineProps) => {
 			</svg>
 		)
 
-	const endX = _x1 + 12 // 弧线的结束点 x 坐标
+	const endX = _x1 + 12 // End point x-coordinate of the arc
 	const endY = y2
 
 	const radius = 8
 	let d = `M ${_x1} ${y1}`
 
-	// 第一个折点
+	// First bend point
 	const [curveX1, curveY1] = [_x2, y2]
 	d = `${d} L ${curveX1} ${curveY1 - radius}`
 
-	// 第一个折点圆弧
+	// First bend corner arc
 	d = `${d} Q ${curveX1} ${curveY1} ${curveX1 + 10} ${curveY1}`
 
 	return (
 		<svg width="100%" height="100%" {...props}>
 			<line x1={_x1} y1={y1} x2={_x2} y2={y2 - radius} stroke="#888A92" strokeWidth="1" />
-			{/* 绘制贝塞尔曲线和圆点 */}
+			{/* Draw the bezier curve and dot */}
 			<path d={d} fill="none" stroke="#888A92" strokeWidth="1" />
 			<circle cx={endX} cy={endY} r="2" fill="#888A92" />
 		</svg>

@@ -1,5 +1,5 @@
 /**
- * 当前字段的数据源状态管理
+ * State management for the current field's data source
  */
 import i18next from "i18next"
 import _ from "lodash"
@@ -25,7 +25,7 @@ export default function useCurrentFieldSource({ curFieldKeys }: CurrentFieldSour
 	const currentFieldExpressionSource = useMemo(() => {
 		if (!expressionSource || !allowExpression) return []
 		const result = [
-			// 如果存在上文数据源
+			// Include upstream data sources if present
 			...(contextExpressionSource || []),
 			...expressionSource,
 		]

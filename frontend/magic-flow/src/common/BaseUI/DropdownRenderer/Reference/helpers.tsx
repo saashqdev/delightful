@@ -4,11 +4,11 @@ import _ from "lodash"
 import React from "react"
 import { Splitor } from "./constants"
 
-// 设置所有节点的 key 到 expandedKeys 中
+// Collect all node keys into expandedKeys
 export const getDefaultExpandedKeys = (data: TreeDataNode[]) => {
 	const keys = [] as React.Key[]
 	data.forEach((item) => {
-		// 对函数块特殊处理，默认折叠
+		// Keep function blocks collapsed by default
 		if ((item.key as string)?.includes?.(LabelTypeMap.LabelFunc)) return
 		if (item.children) {
 			keys.push(item.key)
@@ -31,7 +31,7 @@ const getJoinedParentKeys = (keys: React.Key[]) => {
 	}, [] as string[])
 }
 
-// 获取所有与关键字相关的expandKeys
+// Get all expandKeys related to the search keyword
 export const getRelationExpandKeys = (
 	data: TreeDataNode[],
 	searchKeyword: string,
@@ -59,7 +59,7 @@ export const getRelationExpandKeys = (
 	return uniqKeys
 }
 
-// 获取所有与用户输入相关的数据源
+// Get all data sources related to user input
 export const getRelationDataSource = (dataSource: ExpressionSource, title: string) => {
 	const relationDataSource = [] as ExpressionSource
 	const cloneDataSource = _.cloneDeep(dataSource)

@@ -51,7 +51,7 @@ export default memo(function MagicFileIcon({
 	const { styles } = useStyles()
 
 	const icon = useMemo(() => {
-		// 移除文件后缀最前面的点(如果存在)
+		// Remove a leading dot from the file extension (if present) 
 		const caseType = type?.replace(/^\./, "").toLocaleLowerCase()
 		switch (caseType) {
 			case "txt":

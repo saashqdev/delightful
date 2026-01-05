@@ -19,7 +19,7 @@ export const useQuery = () => {
 	return new URLSearchParams(window.location.search)
 }
 
-/** 处理基本节点模型的渲染属性
+/** Handle render props for the base node model
  * MagicFlow.Node -> reactflow node
  */
 export const handleRenderProps = (n: MagicFlow.Node, index: number, paramsName: MagicFlow.ParamsName) => {
@@ -28,15 +28,15 @@ export const handleRenderProps = (n: MagicFlow.Node, index: number, paramsName: 
 
 	const isLoopBody = judgeIsLoopBody(nodeType)
 
-	// 节点元信息是否为空（空数组，或者是空值）
+	// Check whether node meta is empty (empty array or nullish)
 	const isMetaEmpty = !n.meta || (Array.isArray(n.meta) && n.meta.length === 0)
 
 	const nodeMeta = isMetaEmpty ? { position: { x: 0, y: 0 } } : n.meta
 
-	// 当前节点的属性，icon，颜色等
+	// Current node properties such as icon and color
 	let currentNodeProperties = _.get(nodeSchemaListMap, [nodeType, getNodeVersion(n)], {} as NodeWidget)
 
-	// 添加循环内节点的特殊属性
+	// Add loop-specific properties to nodes inside loops
 	addLoopProperties(n, paramsName)
 
 	n.deletable = false
@@ -51,16 +51,16 @@ export const handleRenderProps = (n: MagicFlow.Node, index: number, paramsName: 
 		...n?.data,
 		deletable: false,
 		changeable: {
-			// 默认可以切换节点类型
+			// Allow switching node type by default
 			nodeType: true,
-			// 默认显示节点操作项（复制粘贴、删除）
+			// Show node actions (copy/paste/delete) by default
 			operation: true,
 			...(currentNodeProperties?.schema?.changeable || {}),
 		},
 		handle: {
-			// 默认携带终点
+			// Include target handle by default
 			withSourceHandle: true,
-			// 默认具备源点
+			// Include source handle by default
 			operation: true,
 			...(currentNodeProperties?.schema?.handle || {}),
 		},
@@ -93,28 +93,28 @@ export const getPxWidth = (text: string) => {
 
 
 /**
- * 将某段字符串复制到粘贴板
+ * Copy a string to the clipboard
  */
 export function copyToClipboard(text: string) {
-	// 创建一个临时的textarea元素
+	// Create a temporary textarea element
 	const textarea = document.createElement("textarea")
-	// 设置textarea的值为要复制的文本
+	// Set its value to the text to copy
 	textarea.value = text
-	// 将textarea添加到DOM中
+	// Append to the DOM
 	document.body.appendChild(textarea)
-	// 选择textarea中的文本
+	// Select the textarea text
 	textarea.select()
-	// 将文本复制到剪贴板
+	// Copy to clipboard
 	document.execCommand("copy")
-	// 移除临时textarea元素
+	// Remove the temporary element
 	document.body.removeChild(textarea)
 }
 
 
-// schema => 表达式数据源单个项
+// schema => single expression data source item
 export function schemaToDataSource(currentNodeSchema: NodeSchema & {type: BaseNodeType}, schema: Schema, isRoot = true, isGlobal = false): DataSourceOption {
     let option = {} as DataSourceOption
-    // 根节点
+	// Root node
     if(isRoot) {
         option = {
             title: currentNodeSchema.label,
@@ -146,14 +146,15 @@ export function schemaToDataSource(currentNodeSchema: NodeSchema & {type: BaseNo
 
     }
     
-    // 数组情况，直接return
+
+		// Array case: return directly
     if(schema?.type === FormItemType.Array) {
 		// console.log("array schema", schema)
 		const itemsType = schema?.items?.type
         option.type = `${FormItemType.Array}${SchemaValueSplitor}${itemsType}`
         return option
     }
-    // 对象情况，将每一个子字段作为一个children
+		// Object case: convert each child field to a child option
     Object.entries(schema?.properties || {}).forEach(([key,field]) => {
         // @ts-ignore
         option.children?.push(schemaToDataSource(currentNodeSchema, {...field, key: isRoot ? key : `${option.key}.${key}`}, false, isGlobal))
@@ -162,11 +163,11 @@ export function schemaToDataSource(currentNodeSchema: NodeSchema & {type: BaseNo
     return option
 }
 
-/** 获取引用上文值的前缀 */
+/** Get the prefix for referencing upstream values */
 export const getReferencePrefix = (node: any) => {
 	if(node?.isConstant) return null
 	const { nodeType2ReferenceKey } = nodeManager
-	/** 硬编码了前缀的节点类型 */
+	/** Node types with hard-coded prefixes */
 	let prefix = node.nodeId
 	if (Reflect.has(nodeType2ReferenceKey, node.nodeType)) {
 		prefix = Reflect.get(nodeType2ReferenceKey, node.nodeType)
@@ -174,7 +175,7 @@ export const getReferencePrefix = (node: any) => {
 	return prefix
 }
 
-/** 判断当前节点类型是否是变量节点类型 */
+/** Determine whether the node type is a variable node */
 export const judgeIsVariableNode = (nodeType: string | number) => {
 	
 	const variableNodeTypes = nodeManager.variableNodeTypes
@@ -184,27 +185,27 @@ export const judgeIsVariableNode = (nodeType: string | number) => {
 	return isVariableNode
 }
 
-/** 判断当前节点类型是否是循环体类型 */
+/** Determine whether the node type is a loop body */
 export const judgeIsLoopBody = (nodeType: string | number) => {
 	
 	const loopBodyType = nodeManager.loopBodyType
 	return nodeType == loopBodyType
 }
-/** 获取某个节点类型的节点schema */
+/** Get the schema for a given node type */
 export const getNodeSchema = (nodeType: string | number, nodeVersion?: NodeVersion): NodeSchema => {
 	
 	const { nodeVersionSchema } = flowStore.getState()
 
     const version = nodeVersion || getLatestNodeVersion(nodeType) as string
-	console.time("克隆操作")
+	console.time("clone_schema")
 	const result = _.get(nodeVersionSchema, [nodeType, version, 'schema'])
-	console.timeEnd("克隆操作")
+	console.timeEnd("clone_schema")
 	return result
 
 }
 
 
-/** 获取全局的节点分组 */
+/** Get global node groups */
 export const getNodeGroups = () => {
 	
 	const { nodeGroups  } = nodeManager
@@ -213,7 +214,7 @@ export const getNodeGroups = () => {
 
 }
 
-/** 判断是否为循环节点 */
+/** Determine whether this is a loop node */
 export const judgeLoopNode = (nodeType: string | number) => {
 	
 	const loopNodeType = nodeManager.loopNodeType
@@ -224,16 +225,16 @@ export const judgeLoopNode = (nodeType: string | number) => {
 
 
 /**
- * 根据节点Schema生成一个可用的节点
- * @param nodeSchema 节点Schema
- * @param paramsName 自定义参数名称
- * @params nodeId 生成的节点id
- * @params extraConfig 额外的节点配置
+ * Generate a node instance from a node schema
+ * @param nodeSchema node schema
+ * @param paramsName customized parameter names
+ * @params nodeId generated node id
+ * @params extraConfig additional node configuration
  */
 export const generateNewNode = (nodeSchema: NodeSchema, paramsName: MagicFlow.ParamsName, nodeId: string, position: XYPosition, extraConfig?: Record<string, any>) => {
 	const defaultParams = _.get(nodeSchema, [paramsName.params], null)
 
-	console.time("克隆操作")
+	console.time("clone_node")
 	const newNode = {
 		data: {},
 		[paramsName.params]: _.cloneDeep(defaultParams),
@@ -253,31 +254,31 @@ export const generateNewNode = (nodeSchema: NodeSchema, paramsName: MagicFlow.Pa
         node_version: getLatestNodeVersion(nodeSchema.id),
 		...(extraConfig || {})
 	}
-	console.timeEnd("克隆操作")
+	console.timeEnd("clone_node")
 	return newNode as MagicFlow.Node
 }
 
-// 获取当前节点schema的最新版本，并做兜底
+// Get the latest schema version for this node type, with a fallback
 export const getLatestNodeVersion = (nodeType: BaseNodeType) => {
     const { nodeVersionSchema } = flowStore.getState()
     const latestNodeVersion = _.last(Object.keys(_.get(nodeVersionSchema, [nodeType], {})) || []) as string 
     return latestNodeVersion || DefaultNodeVersion
 }
 
-// 获取节点的版本，默认返回v0
+// Get the node version, defaulting to v0
 export const getNodeVersion = (node: MagicFlow.Node) => {
     return node?.node_version ? node.node_version : DefaultNodeVersion
 }
 
 
-/** 是否注册了开始节点 */
+/** Check whether the start node is registered */
 export const isRegisteredStartNode = () => {
 	
 	const startNodeSchema = getNodeSchema(nodeManager.startNodeType)
 	return !!startNodeSchema
 }
 
-/** 生成开始节点 */
+/** Generate a start node */
 export const generateStartNode = (paramsName: MagicFlow.ParamsName) => {
 	const startNodeSchema = getNodeSchema(nodeManager.startNodeType)
 	
@@ -297,7 +298,7 @@ export const generateStartNode = (paramsName: MagicFlow.ParamsName) => {
 }
 
 
-/** 根据节点，生成复制后的节点 */
+/** Create a duplicated node from an existing one */
 export const generatePasteNode = (node: MagicFlow.Node, paramsName: MagicFlow.ParamsName) => {
 	const newId = generateSnowFlake()
 	
@@ -317,12 +318,12 @@ export const generatePasteNode = (node: MagicFlow.Node, paramsName: MagicFlow.Pa
 }
 
 /**
- * 生成复制后的边
- * @param rawNode 原始id到新id的映射表
- * @param oldRelationEdges 原始节点相关的边
+ * Generate duplicated edges
+ * @param rawNode mapping of original id to new id
+ * @param oldRelationEdges edges related to the original nodes
  */
 export const generatePasteEdges = (oldId2NewIdMap: Record<string,string>, oldRelationEdges: Edge[]) => {
-	console.time("克隆操作")
+	console.time("clone_edges")
 	const cloneEdges = _.cloneDeep(oldRelationEdges)
 	const newEdges = cloneEdges.reduce((acc, curEdge) => {
 		curEdge.id = generateSnowFlake()
@@ -334,19 +335,19 @@ export const generatePasteEdges = (oldId2NewIdMap: Record<string,string>, oldRel
 		}
 		return [...acc, curEdge ]
 	}, [] as Edge[])
-	console.timeEnd("克隆操作")
+	console.timeEnd("clone_edges")
 	return newEdges
 }
 
 
 
 /**
- * 生成循环体和相关的边
- * @param loopNode 循环节点
- * @param paramsName 自定义参数名称
- * @param edges 当前的边
- * @param addPosition 在那里新增的循环（画布、边、节点）
- * @returns 
+ * Generate a loop body and its related edges
+ * @param loopNode loop node
+ * @param paramsName customized parameter names
+ * @param edges current edges
+ * @param addPosition where the loop is inserted (canvas/edge/node)
+ * @returns new nodes and edges for the loop body
  */
 export const generateLoopBody = (loopNode: MagicFlow.Node, paramsName:MagicFlow.ParamsName, edges: Edge[]) => {
 	const id = generateSnowFlake()
@@ -358,7 +359,7 @@ export const generateLoopBody = (loopNode: MagicFlow.Node, paramsName:MagicFlow.
 
 	const newNodes = [] as MagicFlow.Node[]
 	const newEdges = [] as Edge[]
-	// 循环体的默认节点列表
+	// Default nodes within the loop body
 	const defaultLoopBodyNodes = [] as MagicFlow.Node[]
 
 	const nodePosition = {
@@ -369,7 +370,7 @@ export const generateLoopBody = (loopNode: MagicFlow.Node, paramsName:MagicFlow.
 	const loopBodyType = nodeManager.loopBodyType
 
 	if(!loopBodyType) {
-		console.error("没有注册循环体节点类型")
+		console.error("Loop body node type is not registered")
 	}
 
 	const loopBodyNode = {
@@ -383,7 +384,7 @@ export const generateLoopBody = (loopNode: MagicFlow.Node, paramsName:MagicFlow.
 		type: NodeModelType.Group,
 		meta: {
 			position: nodePosition,
-			// 用于后端保存及查询
+			// For backend persistence and lookup
 			parent_id: loopNode.id
 		},
 		data: {
@@ -401,7 +402,7 @@ export const generateLoopBody = (loopNode: MagicFlow.Node, paramsName:MagicFlow.
 		},
 	}
 
-	/** 循环起始节点生成逻辑 */
+	/** Generate the loop start node */
 	const loopStartNodeSchema = getNodeSchema(nodeManager.loopStartType)
 	const loopStartNodeId = generateSnowFlake()
 	const loopStartNode = generateNewNode(loopStartNodeSchema, paramsName, loopStartNodeId, {
@@ -410,13 +411,13 @@ export const generateLoopBody = (loopNode: MagicFlow.Node, paramsName:MagicFlow.
 	})
 	defaultLoopBodyNodes.push(loopStartNode)
 
-	// 设置循环节点与循环体节点的关联id，后端用于查询
+	// Link loop node and loop body for backend lookup
 	_.set(loopNode, ['meta', 'relation_id'], loopBodyNode.id)
 	
-	// 必须先增加循环体，不然expandParent不生效
+	// Add the loop body first so expandParent takes effect
 	newNodes.push(loopBodyNode)
 
-	// 生成循环体的节点
+	// Generate nodes inside the loop body
 	defaultLoopBodyNodes.forEach((n, i) => {
 		n.parentId = loopBodyNode.id
 		n.expandParent = true
@@ -455,7 +456,7 @@ export const generateLoopBody = (loopNode: MagicFlow.Node, paramsName:MagicFlow.
 // 	return a.parentId && !b.parentId ? 1 : -1;
 // };
 
-/** 获取当前已经注册的节点类型 */
+/** Get node types that are currently registered */
 export const getRegisterNodeTypes = () => {
     const { nodeVersionSchema } = flowStore.getState();
 	return Object.values(nodeVersionSchema).filter(nodeVersionWidget => {
@@ -475,15 +476,15 @@ export const getRegisterNodeTypes = () => {
 }
 
 
-/** 根据新增的边的源点，获取额外的边属性 */
+/** Derive extra edge config from the source node */
 export const getExtraEdgeConfigBySourceNode = (sourceNode: MagicFlow.Node) => {
 	return sourceNode?.parentId ? {zIndex: 1001} : {}
 }
 
 
-/** 回显时，根据循环体节点meta，设置回显属性 */
+/** Apply loop body meta to nodes when rehydrating */
 export const addLoopProperties = (node: MagicFlow.Node, paramsName: MagicFlow.ParamsName) => {
-	// 不是循环体节点 & 是循环体内的节点
+	// Node is inside a loop body but not the loop body itself
 	const isLoopBody = judgeIsLoopBody(node[paramsName.nodeType])
 	if(!isLoopBody && node?.meta?.parent_id) {
 		Object.assign(node, {
@@ -497,14 +498,14 @@ export const addLoopProperties = (node: MagicFlow.Node, paramsName: MagicFlow.Pa
 
 export const searchLoopRelationNodesAndEdges = (loopNode: MagicFlow.Node, nodes: MagicFlow.Node[], edges: Edge[]) => {
 
-	// 循环体节点id
+	// Loop body node id
 	const loopBodyNodeId = nodes.find(_n => _n?.meta?.parent_id === loopNode.id)?.id
-	// 循环节点到循环体节点的边
+	// Edge from loop node to loop body
 	const loopNode2LoopBodyEdgeId = edges.find(_e => _e.source === loopNode.id && _e.target === loopBodyNodeId)?.id
 
-	// 循环体内的节点id列表
+	// Node ids inside the loop body
 	const childNodeIds = nodes.filter(_n => _n?.meta?.parent_id === loopBodyNodeId).map(_n => _n.id)
-	// 循环体内的边id列表
+	// Edge ids inside the loop body
 	const childEdgeIds = edges.filter(_e => childNodeIds.includes(_e.source) || childNodeIds.includes(_e.target)).map(_e => _e.id)
 
 
@@ -515,40 +516,38 @@ export const searchLoopRelationNodesAndEdges = (loopNode: MagicFlow.Node, nodes:
 }
 
 /** 
- * 十六进制转rgba
- * @params hex 十六进制
- * @params alpha 透明度，如0.05表示5%
- * 示例使用
+ * Convert hex color to RGBA
+ * @params hex hex string
+ * @params alpha opacity, e.g., 0.05 means 5%
+ * Example:
 	const hexColor = "#FF7D00";
-	const alpha = 0.05; // 5% 透明度
+	const alpha = 0.05; // 5% opacity
 	const rgbaColor = hexToRgba(hexColor, alpha);
-	console.log(rgbaColor);  // 输出: #FF7D000D
+	console.log(rgbaColor);  // Outputs: #FF7D000D
  */
 export function hexToRgba(hex: string, alpha = 1) {
 	if(!hex) return ""
-    // 移除 '#' 符号
+	// Remove '#' symbol
     hex = hex.replace('#', '');
 
-    // 将颜色分为 RGB 部分
+	// Split into RGB parts
     let r = parseInt(hex.substring(0, 2), 16);
     let g = parseInt(hex.substring(2, 4), 16);
     let b = parseInt(hex.substring(4, 6), 16);
 
-    // 确保 alpha 在 0 到 1 之间，并转为 0 到 255 的范围
+	// Clamp alpha between 0 and 1 and convert to 0-255
     let a = Math.round(alpha * 255);
 
-    // 返回 RGBA 值，透明度为两位16进制数
+	// Return RGBA value with two-digit hex alpha
     return `#${hex}${a.toString(16).padStart(2, '0')}`;
 }
 
-
-// 检查是不是循环起始
+// Check whether this is a loop start node
 export const checkIsLoopStart = (node: MagicFlow.Node,paramsName: MagicFlow.ParamsName) => {
 	return nodeManager.loopStartType == node?.[paramsName.nodeType] && node?.meta?.parent_id
 }
 
-
-/** 检查是否在循环体内 */
+/** Check whether a node is inside a loop body */
 export const checkIsInGroup = (node: MagicFlow.Node) => {
 	return node?.meta?.parent_id
 }

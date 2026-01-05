@@ -10,7 +10,7 @@ import { generatePasteEdges, generatePasteNode, judgeIsLoopBody } from "."
 export const Ranksep = 100
 export const Nodesep = 100
 
-// 获取节点的中心坐标
+// Get the center coordinates of a node
 export function getNodeCenter (node: Node) {
 	return {
 		x: node.positionAbsolute!.x + node.width! / 2,
@@ -18,7 +18,7 @@ export function getNodeCenter (node: Node) {
 	}
 }
 
-// 获取某条边的原点和终点坐标
+// Get the start and end coordinates of an edge
 export function getEdgeHandlePosition (sourceNode: Node, targetNode: Node) {
 	const sourceNodeHandle = sourceNode[internalsSymbol]!.handleBounds!.source![0]
 	const targetNodeHandle = targetNode[internalsSymbol]!.handleBounds!.target![0]
@@ -31,13 +31,13 @@ export function getEdgeHandlePosition (sourceNode: Node, targetNode: Node) {
 	}
 }
 
-// 递归获取节点的所有前置节点
+// Recursively get all predecessor nodes
 export const getAllPredecessors = (curNode: MagicFlow.Node, nodes: Node[], edges: Edge[], predecessors = [] as MagicFlow.Node[]): MagicFlow.Node[] => {
-	// 使用 React Flow 提供的 getIncomers 函数获取节点的所有入度节点
+	// Use React Flow's getIncomers to gather all inbound nodes
     // @ts-ignore
 	const incomers = [...(getIncomers(curNode, nodes, edges) || [])] as MagicFlow.Node[]
 
-    // 当入度节点是分支节点，对入度节点进行二次处理
+    // When incomers are branch nodes, do a second pass to track branch ids
     const branchNodes = incomers.filter(incomeNode => nodeManager.branchNodeIds.includes(`${incomeNode.node_type}`))
     branchNodes.forEach(branchNode => {
         const edgesBranchNode2CurNode = edges.filter(edge => edge.source === branchNode.node_id && edge.target === curNode.node_id)
@@ -46,15 +46,15 @@ export const getAllPredecessors = (curNode: MagicFlow.Node, nodes: Node[], edges
         branchNode.params.outputBranchIds = branchIds
     })
 
-	// 如果没有入度节点，或者已经遍历过所有前置节点，则返回当前结果
+	// If there are no incomers or all predecessors are visited, return the result
 	if (!incomers || incomers.length === 0) {
 		return predecessors
 	}
 
-	// 合并新的前置节点 到已有的前置节点数组中
+	// Merge new predecessors into the list
 	const updatedPredecessors = [ ...incomers, ...predecessors ]
 
-	// 对于每个新的前置节点，递归调用该函数，获取其前置节点
+	// For each new predecessor, recurse to find its predecessors
 	// eslint-disable-next-line no-unused-vars
 	return incomers.reduce(
         // @ts-ignore
@@ -63,21 +63,21 @@ export const getAllPredecessors = (curNode: MagicFlow.Node, nodes: Node[], edges
 	) as MagicFlow.Node[]
 }
 
-// 递归获取节点的所有后置节点
+// Recursively get all successor nodes
 export const getAllPostNodes = (curNode: MagicFlow.Node, nodes: MagicFlow.Node[], edges: Edge[], postNodes = [] as MagicFlow.Node[]): MagicFlow.Node[] => {
-	// 使用 React Flow 提供的 getOutgoers 函数获取节点的所有出度节点
+	// Use React Flow's getOutgoers to gather all outbound nodes
     // @ts-ignore
 	const outNodes = getOutgoers(curNode, nodes, edges)
 
-	// 如果没有出度节点，或者已经遍历过所有前置节点，则返回当前结果
+	// If there are no outgoers or all successors are visited, return the result
 	if (!outNodes || outNodes.length === 0) {
 		return postNodes
 	}
 
-	// 合并新的前置节点 到已有的前置节点数组中
+	// Merge new successors into the list
 	const updatedPredecessors = [ ...outNodes, ...postNodes ]
 
-	// 对于每个新的前置节点，递归调用该函数，获取其后置节点
+	// For each new successor, recurse to find its successors
 	// eslint-disable-next-line no-unused-vars
 	return outNodes.reduce(
         // @ts-ignore
@@ -86,13 +86,13 @@ export const getAllPostNodes = (curNode: MagicFlow.Node, nodes: MagicFlow.Node[]
 	) as MagicFlow.Node[]
 }
 
-// 递归获取节点的所有后置节点
+// Recursively get all successor nodes
 // export const setNodeSteps = (curNode, nodes, edges, postNodes = [], prevStep = 0) => {
 
-// 	// 使用 React Flow 提供的 getOutgoers 函数获取节点的所有出度节点
+// 	// Use React Flow's getOutgoers to gather all outbound nodes
 // 	const outNodes = getOutgoers(curNode, nodes, edges)
 
-// 	// 对于每个新的前置节点，递归调用该函数，获取其后置节点
+// 	// For each new successor, recurse to find its successors
 // 	// eslint-disable-next-line no-unused-vars
 // 	return outNodes.reduce(
 // 		(acc, pred) => getAllPostNodes(pred, nodes, edges, acc),
@@ -101,29 +101,29 @@ export const getAllPostNodes = (curNode: MagicFlow.Node, nodes: MagicFlow.Node[]
 // }
 
 export function sortByEdges (nodes: MagicFlow.Node[], edges: Edge[]) {
-	// 创建一个字典，用来存储每个节点的入度
+	// Dictionary to store indegree for each node
 	const indegree = {} as Record<string, number>
 
-	// 创建一个字典，用来存储每个节点的出边
+	// Dictionary to store outgoing edges for each node
 	const outEdges = {} as Record<string, string[]>
 
-	// 初始化入度和出边字典
+	// Initialize indegree and outgoing edge maps
 	for (const node of nodes) {
 		indegree[node.id] = 0
 		outEdges[node.id] = []
 	}
 
-	// 计算每个节点的入度
+	// Calculate indegree for each node
 	for (const edge of edges) {
 		indegree[edge.target]++
 		outEdges[edge.source].push(edge.target)
 	}
 
-	// 创建结果数组
+	// Prepare result arrays
 	const result = [] as MagicFlow.Node[]
 	const nextNodes = [] as MagicFlow.Node[]
 
-	// 将入度为0的节点加入结果数组
+	// Seed with nodes whose indegree is zero
 	for (const node of nodes) {
 		if (indegree[node.id] === 0) {
 			nextNodes.push(node)
@@ -131,21 +131,21 @@ export function sortByEdges (nodes: MagicFlow.Node[], edges: Edge[]) {
 		}
 	}
 
-	// 遍历结果数组，并根据出边更新入度，直到结果数组为空
+	// Walk the queue and update indegree based on outgoing edges until empty
 	while (nextNodes.length > 0) {
 		const currentNode = nextNodes.shift()
 
         if(!currentNode) continue
 
-		// 获取当前节点的所有出边
+		// Get all outgoing edges for the current node
 		const currentOutEdges = outEdges[currentNode.id]
 
-		// 遍历当前节点的出边
+		// Traverse outgoing edges
 		for (const targetNodeId of currentOutEdges) {
-			// 将目标节点的入度减一
+			// Decrease indegree of the target node
 			indegree[targetNodeId]--
 
-			// 如果目标节点的入度为0，则将其加入结果数组
+			// If target node indegree is zero, enqueue it
 			if (indegree[targetNodeId] === 0) {
 				const targetNode = nodes.find(node => node.id === targetNodeId)
 				if(targetNode){
@@ -159,13 +159,13 @@ export function sortByEdges (nodes: MagicFlow.Node[], edges: Edge[]) {
 	return result
 }
 
-/** 进行dagre实际布局 */
+/** Run dagre layout */
 export const dagreLayout = (direction="TB", nodes:MagicFlow.Node[], edges: Edge[]) => {
 	const triggerNode = nodes[0]
 	const dagreGraph = new dagre.graphlib.Graph()
 	dagreGraph.setDefaultEdgeLabel(() => ({}))
 
-	// 保持起点不变，其他节点进行自动布局
+	// Keep the trigger node fixed and auto-layout the others
 	dagreGraph.setGraph({
 		rankdir: direction,
 		ranksep: Ranksep,
@@ -208,14 +208,14 @@ export const getLayoutElements = (_nodes: MagicFlow.Node[], _edges: Edge[], dire
 	const isHorizontal = direction === "LR"
 	const dagreGraph = dagreLayout(direction, resultNodes, resultEdges)
 
-	// 分组布局实例map，分组id -> 分组布局实例，可以拿到指定分组的子节点布局坐标
+	// Map of group layout instances, group id -> layout instance, to obtain child node positions
 	const subFlowDagreMap = {} as Record<string, dagre.graphlib.Graph<{}>>
 
 	_nodes.forEach((_n) => {
 		const node = resultNodes.find(n => n.id === _n.id)!
 
-		// 如果是分组节点，则需要对所有分组内的节点再进行一次布局优化
-		// 前提：分组节点的顺序必须控制在分组子节点之前
+		// If this is a group node, lay out all nodes inside the group
+		// Prerequisite: group node order must come before child nodes
 		if(judgeIsLoopBody(node?.[paramsName.nodeType])) {
 			const groupNodes = _nodes.filter(n => n.parentId === node.id)
 			const groupNodeIds = groupNodes.map(n => n.id)
@@ -224,12 +224,12 @@ export const getLayoutElements = (_nodes: MagicFlow.Node[], _edges: Edge[], dire
 			subFlowDagreMap[node.id] = subFlowDagreInstance
 		}
 
-		// 如果是分组内的节点
+		// If the node belongs to a group
 		if(!node) {
 			// const parentNodeWithPosition = dagreGraph.node(node.parentId)
 			const subFlowDagreInstance = Reflect.get(subFlowDagreMap,_n.parentId!)
 			const childNodeWithPosition = subFlowDagreInstance?.node?.(_n.id)
-			// 手动往结果数组添加分组的子节点
+			// Manually push grouped child nodes into the result
 			resultNodes.push({
 				..._n,
 				position: {
@@ -253,7 +253,7 @@ export const getLayoutElements = (_nodes: MagicFlow.Node[], _edges: Edge[], dire
 	})
 
 
-	// 针对分组外壳节点进行进一步处理，主要是限制尺寸
+	// Further adjust group wrapper nodes, mainly to constrain size
 	resultNodes.filter(n => judgeIsLoopBody(n[paramsName.nodeType])).forEach((groupNode) => {
 		const subNodes = resultNodes.filter(n => n.parentId === groupNode.id)
 		const isEmptyGroup = subNodes.length === 0
@@ -274,10 +274,10 @@ export const getLayoutElements = (_nodes: MagicFlow.Node[], _edges: Edge[], dire
 }
 
 /**
- * 更新步骤数据
- * @type {*}  类型，通过连线还是删除连线
- * @connection {*} 当前连线
- * @nodeConfig {*} 节点配置
+ * Update step data
+ * @type {*} operation type: connect or delete edge
+ * @connection {*} current connection
+ * @nodeConfig {*} node configuration
  * @returns
  */
 
@@ -338,7 +338,7 @@ export const updateTargetNodesStep = ({
 }
 
 /**
- * 校验是否存在执行节点不在流程运行范围内（如果有节点不会被执行，则会做提示）
+ * Check whether any execution nodes are outside the runnable flow (warn if some nodes will never run)
  */
 export const checkHasNodeOutOfFlow = (nodes: MagicFlow.Node[], edges: Edge[]) => {
 	if (!nodes || nodes.length === 0) return false
@@ -348,20 +348,20 @@ export const checkHasNodeOutOfFlow = (nodes: MagicFlow.Node[], edges: Edge[]) =>
 	return uniqPostNodes.length !== nodes.length - 1
 }
 
-/** 计算所有节点的中点 */
+/** Calculate the midpoint of all nodes */
 export const calculateMidpoint = (nodes: MagicFlow.Node[]) => {
 	const positions = nodes.map(n => n.position || {x: 0, y: 0})
     const totalPositions = positions.length;
 
-    // 累加所有位置的 x 和 y 坐标
+		// Sum all x and y coordinates
     const total = positions.reduce((acc, pos) => {
         acc.x += pos.x;
         acc.y += pos.y;
         return acc;
     }, {x: 0, y: 0});
 
-    // 计算中点坐标
-    const midpoint = {
+	// Compute midpoint coordinates
+		const midpoint = {
         x: total.x / totalPositions,
         y: total.y / totalPositions
     };
@@ -370,7 +370,7 @@ export const calculateMidpoint = (nodes: MagicFlow.Node[]) => {
 }
 
 
-/** 在分组内新增节点时，获取节点的实际渲染坐标 */
+/** Get rendered coordinates when adding a node inside a group */
 export const getSubNodePosition = (event: any, screenToFlowPosition: ViewportHelperFunctions['screenToFlowPosition'], parentNode: MagicFlow.Node) => {
 
 	const groupBodyPosition = parentNode?.position || { x: 0, y: 0 }
@@ -388,45 +388,45 @@ export const getSubNodePosition = (event: any, screenToFlowPosition: ViewportHel
 
 
 /**
- * 生成拷贝后的节点和边
- * @param nodeConfig 当前节点完整配置
- * @param selectionNodes 选中的节点
- * @param selectionEdges 选中的边
- * @param paramsName 自定义字段
- * @returns 
+ * Generate copied nodes and edges
+ * @param nodeConfig full node configuration
+ * @param selectionNodes selected nodes
+ * @param selectionEdges selected edges
+ * @param paramsName custom field names
+ * @returns
  */
 export const generatePasteNodesAndEdges = (nodeConfig: Record<string, MagicFlow.Node>,selectionNodes: MagicFlow.Node[], selectionEdges: Edge[], paramsName: MagicFlow.ParamsName) => {
 
     const selectedNodeIds = selectionNodes.map((n) => n.id)
     const oldId2NewIdMap = {} as Record<string, string>
 
-    // 生成复制后的节点及配置
+	// Generate duplicated nodes and configs
     const pasteNodeInfos = selectionNodes.map((n) => {
         const paste = generatePasteNode(n, paramsName)
         oldId2NewIdMap[n.id] = paste.pasteNode.id
         
-        // 处理next_nodes：只保留指向选中范围内节点的引用，移除指向外部节点的引用
+		// Handle next_nodes: keep references within the selection, drop external references
         if (paste.pasteNode[paramsName.nextNodes]) {
             const nextNodes = paste.pasteNode[paramsName.nextNodes] || []
-            // 只保留在选中范围内的nextNodes
+			// Keep only nextNodes that are part of the selection
             const filteredNextNodes = nextNodes.filter((nodeId: string) => selectedNodeIds.includes(nodeId))
             paste.pasteNode[paramsName.nextNodes] = filteredNextNodes
         }
 
-        // 处理分支节点的branches
+		// Handle branches on branch nodes
         if (nodeManager.branchNodeIds.includes(`${paste.pasteNode.node_type}`)) {
-            // 获取params字段中的branches
+			// Get branches from params
             const branches = _.get(paste.pasteNode, [paramsName.params, 'branches'])
             
             if (branches && Array.isArray(branches)) {
-                // 对每个分支进行处理，只保留指向选中范围内节点的next_nodes
+				// For each branch, keep only next_nodes inside the selection
                 branches.forEach(branch => {
                     if (branch && typeof branch === 'object' && Array.isArray(branch.next_nodes)) {
                         branch.next_nodes = branch.next_nodes.filter((nodeId: string) => selectedNodeIds.includes(nodeId))
                     }
                 })
                 
-                // 更新节点的branches
+				// Update branches back on the node
                 _.set(paste.pasteNode, [paramsName.params, 'branches'], branches)
             }
         }
@@ -434,16 +434,16 @@ export const generatePasteNodesAndEdges = (nodeConfig: Record<string, MagicFlow.
         return { ...paste }
     })
 
-    // 现在更新next_nodes和branches中的节点ID引用
+	// Update node id references in next_nodes and branches
     pasteNodeInfos.forEach(({ pasteNode }) => {
-        // 更新常规next_nodes
+		// Update regular next_nodes
         if (pasteNode[paramsName.nextNodes] && Array.isArray(pasteNode[paramsName.nextNodes])) {
             pasteNode[paramsName.nextNodes] = pasteNode[paramsName.nextNodes].map(
                 (nodeId: string) => oldId2NewIdMap[nodeId] || nodeId
             );
         }
         
-        // 更新分支节点的branches中的next_nodes
+		// Update next_nodes inside branch definitions
         if (nodeManager.branchNodeIds.includes(`${pasteNode.node_type}`)) {
             const branches = _.get(pasteNode, [paramsName.params, 'branches']);
             if (branches && Array.isArray(branches)) {
@@ -459,9 +459,9 @@ export const generatePasteNodesAndEdges = (nodeConfig: Record<string, MagicFlow.
         }
     });
 
-    // 进一步处理引用关系，比如说被复制节点A引用了被复制节点B，则需要手动替换为新的id，通过正则替换即可
+	// Replace any embedded id references so copied node A referencing copied node B now uses new ids
     pasteNodeInfos.forEach(({ pasteNode }) => {
-        // 需要替换引用ID的属性
+		// Properties where ids need replacement
         const propsToReplace = [
             paramsName.params,
             'input',
@@ -470,41 +470,41 @@ export const generatePasteNodesAndEdges = (nodeConfig: Record<string, MagicFlow.
             'meta'
         ]
         
-        // 存储每个属性的字符串形式
+		// Hold the stringified form of each property
         const stringifiedProps: Record<string, string> = {}
         
-        // 将每个属性转换为字符串
+		// Stringify each property
         propsToReplace.forEach(propName => {
             if (pasteNode?.[propName]) {
                 stringifiedProps[propName] = JSON.stringify(pasteNode[propName])
             }
         })
         
-        // 替换所有的旧ID为新ID
+		// Replace all old ids with new ones
         Object.entries(oldId2NewIdMap).forEach(([oldId, newId]) => {
             const regex = new RegExp(oldId, "g")
             
-            // 对每个属性应用替换
+			// Apply replacement to each property
             Object.keys(stringifiedProps).forEach(propName => {
                 stringifiedProps[propName] = stringifiedProps[propName].replace(regex, newId)
             })
         })
         
-        // 更新节点的对应属性
+		// Update node with replaced properties
         Object.keys(stringifiedProps).forEach(propName => {
             _.set(pasteNode, [propName], JSON.parse(stringifiedProps[propName]))
         })
     })
 
-    // 生成复制后的边
+	// Generate duplicated edges
     const relationEdges = selectionEdges.filter((e) => {
-        // 如果存在有源点或者终点不在已选节点范围内，则过滤掉
+		// Filter out edges whose source or target are outside the selection
         const isRelation =
             selectedNodeIds.includes(e.source) && selectedNodeIds.includes(e.target)
 
         return isRelation
     })
-    /** 针对当前复制的节点相关的边，生成复制后的边 */
+	/** Generate copied edges for the selected nodes */
     const pasteEdges = generatePasteEdges(oldId2NewIdMap, relationEdges)
     const pasteNodes = [] as MagicFlow.Node[]
 

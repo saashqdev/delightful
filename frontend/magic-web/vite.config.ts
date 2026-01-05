@@ -7,14 +7,14 @@ import tsConfig from "vite-tsconfig-paths"
 // import legacy from "@vitejs/plugin-legacy"
 import vitePluginImp from "vite-plugin-imp"
 
-/** 环境变量前缀 */
+/** Environment variable prefix */
 const ENV_PREFIX = "MAGIC_"
 
-/** 是否为测试环境 */
+/** Is test environment */
 // const isTest = process.env.NODE_ENV === "test"
-/** 是否为开发环境 */
+/** Is development environment */
 const isDev = process.env.NODE_ENV === "development"
-/** 是否为生产环境 */
+/** Is production environment */
 // const isProd = process.env.NODE_ENV === "production"
 
 export default defineConfig({
@@ -41,10 +41,10 @@ export default defineConfig({
 			},
 		},
 		port: 443,
-		host: "0.0.0.0", // 监听所有地址
+		host: "0.0.0.0", // Listen on all interfaces
 	},
 	envPrefix: ENV_PREFIX,
-	cacheDir: "node_modules/.vite", // 缓存目录
+	cacheDir: "node_modules/.vite", // Cache directory
 	optimizeDeps: {
 		include: [
 			"antd",
@@ -73,10 +73,10 @@ export default defineConfig({
 	assetsInclude: ["**/*.md", "**/*.mdx"],
 	resolve: {
 		alias: [
-            // // 同步开发magic-flow时需要开启
+			// // Enable when developing magic-flow in sync
 			// {
 			// 	find: "@dtyq/magic-flow",
-            //     replacement: join(__dirname, "../magic-flow"),
+			//     replacement: join(__dirname, "../magic-flow"),
 			// },
 		],
 	},
@@ -97,13 +97,13 @@ export default defineConfig({
 				},
 			],
 		}),
-		// 用于本地生成HTTPS证书
+		// Generate HTTPS certificates locally
 		isDev &&
 			mkcert({
-				// 本地配置该地址的 host, 满足文件私有桶上传
+				// Configure this host locally to allow private bucket uploads
 				hosts: ["magic.t.teamshare.cn"],
 			}),
-		// 浏览器兼容
+		// Browser compatibility
 		// legacy({
 		// 	targets: [
 		// 		"last 2 versions and not dead",
@@ -111,7 +111,7 @@ export default defineConfig({
 		// 		"chrome 91",
 		// 		"chrome 108",
 		// 		"safari 16",
-		// 	], // 需要兼容的目标列表，可以设置多个
+		// 	], // Target list requiring compatibility; can set multiple
 		// 	additionalLegacyPolyfills: ["regenerator-runtime/runtime"],
 		// 	renderLegacyChunks: true,
 		// 	polyfills: [

@@ -7,7 +7,7 @@ import { BaseColorContext } from "./context"
 interface BaseColorProviderProps extends React.PropsWithChildren<{}> {}
 
 const BaseColorProvider = ({ children }: BaseColorProviderProps) => {
-	// 从 ConfigProvider 获取主题配置
+	// Retrieve theme config from ConfigProvider
 	// @ts-ignore
 	const { theme } = React.useContext(ConfigProvider.ConfigContext)
 	const token = (theme?.token || {}) as CustomToken

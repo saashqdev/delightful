@@ -1,7 +1,7 @@
 import { last } from "lodash-es"
 
 /**
- * @description token 编码
+ * @description Token encoding
  * @param value
  */
 function encryptValue(value: string): string | undefined {
@@ -10,13 +10,13 @@ function encryptValue(value: string): string | undefined {
 }
 
 /**
- * @description 日志数据过滤器
+ * @description Log data filter
  * @param logs
  */
 export function transformer(logs: any): any {
 	try {
 		if (Array.isArray(logs)) {
-			// 处理数组元素
+			// Process array elements
 			return logs.map((item) => transformer(item))
 		}
 		const newObj: { [key: string]: any } = {}
@@ -26,16 +26,16 @@ export function transformer(logs: any): any {
 				["authorization", "token", "access_token"].includes(key) &&
 				typeof value === "string"
 			) {
-				// 找到目标字段，加密其值
+				// Target field found; obfuscate its value
 				newObj[key] = encryptValue(value)
 			} else {
-				// 递归处理嵌套对象
+				// Recurse into nested objects
 				newObj[key] = transformer(value)
 			}
 		}
 		return newObj
 	} catch (error) {
-		console.error("日志处理错误", error)
+		console.error("Log processing error", error)
 	}
 	return logs
 }

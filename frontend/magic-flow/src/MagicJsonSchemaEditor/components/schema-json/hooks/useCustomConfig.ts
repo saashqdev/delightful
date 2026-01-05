@@ -1,5 +1,5 @@
 /**
- * 根据用户传入自定义字段特殊配置及特殊控件类型，返回不同的字段可配置项
+ * Return configurable options based on user-supplied field configs and special control types
  */
 import { FormItemType } from '@/MagicExpressionWidget/types'
 import React, { useContext, useMemo } from 'react'
@@ -61,9 +61,9 @@ export default function useCustomConfig({ value, name, type }: CustomConfigProps
 		return []
 	}, [customFieldsConfig])
 	
-	// 是否可以添加子成员类型
+	// Whether child member types can be added
 	const canAddSubFields = useMemo(() => {
-		// 所有数组类型和对象类型都可以添加子级
+		// All array and object types can add children
 		return (
 			type?.startsWith?.(`${FormItemType.Array}`) ||
 			type === FormItemType.Object

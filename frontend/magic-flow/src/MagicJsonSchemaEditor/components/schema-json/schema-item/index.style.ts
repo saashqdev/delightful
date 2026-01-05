@@ -53,9 +53,9 @@ export const SchemaItemWrap = styled.div`
 
 
 interface SchemaItemRowProps extends RowProps {
-    // 当前行距离左侧的距离
+    // Distance from the current row to the left edge
     leftGap: number
-	// 是否显示checkbox
+	// Whether to show the export checkbox
 	showExportCheckbox: boolean
 }
 

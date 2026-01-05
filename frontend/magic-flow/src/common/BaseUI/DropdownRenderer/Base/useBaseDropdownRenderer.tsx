@@ -8,17 +8,17 @@ type DropdownRenderProps = {
 }
 
 export default function useBaseDropdownRenderer({ options, showSearch }: DropdownRenderProps) {
-	// 搜索关键词
+	// Search keyword
 	const [keyword, setKeyword] = useState("")
 
-	// 搜索关键字变化处理
+	// Handle search keyword changes
 	const onSearchChange = useMemoizedFn((e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target
 		setKeyword(value)
 	})
 
 	const filterOptions = useMemo(() => {
-		// 不需要支持搜索，直接返回全部
+		// If search is disabled, return all options
 		if (!showSearch) return options
 		return options.filter((option) => {
 			//@ts-ignore

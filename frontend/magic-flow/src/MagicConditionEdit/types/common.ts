@@ -6,11 +6,11 @@ import Schema from "@/MagicJsonSchemaEditor/types/Schema"
 
 export namespace Common {
 	/**
-	 * 单个组件数据结构
-	 * 表单组件 -------- Schema
-	 * 控件组件 -------- ContainerField[]
-	 * 条件组件 -------- Expression.LogicNode
-	 * 接口组件 -------- COMMON_TYPES.API_SETTINGS
+	 * Structure for a single component
+	 * Form component -------- Schema
+	 * Widget component -------- ContainerField[]
+	 * Condition component -------- Expression.LogicNode
+	 * API component -------- COMMON_TYPES.API_SETTINGS
 	 */
 	export type Component<
 		CompType extends ComponentType,
@@ -21,33 +21,33 @@ export namespace Common {
 			| API_SETTINGS
 	> = {
 		id: string
-		type: CompType // 组件类型
-		version: string // 版本
+		type: CompType // Component type
+		version: string // Version
 		structure: CompContent
 	}
 
-	/** 表单组件类型 */
+	/** Form component type */
 	export type FormComponent = Component<ComponentType.Form, Schema>
 
-	/** 控件组件类型 */
+	/** Widget component type */
 	export type WidgetComponent = Component<ComponentType.Widget, WidgetSchema>
 
-	/** 条件组件类型 */
+	/** Condition component type */
 	export type ConditionComponent = Component<ComponentType.Condition, Expression.LogicNode>
 
-	/** 控件组件类型 */
+	/** API component type */
 	export type ApiComponent = Component<ComponentType.Api, API_SETTINGS>
 
 	export type ComponentTypes = FormComponent | WidgetComponent | ConditionComponent | ApiComponent
 
-	/** 数字输入框特有配置 */
+	/** Extra config for number inputs */
 	export type NumberExtraConfig = {
 		max: number
 		min: number
 		step: number
 	}
 
-	/** 开关特有配置 */
+	/** Extra config for switch */
 	export type SwitchExtraConfig = {
 		checked_text: string
 		unchecked_text: string
@@ -59,7 +59,7 @@ export namespace Common {
 		children?: Option[]
 	}
 
-	/** 动态字段特有配置 */
+	/** Extra config for dynamic fields */
 	export type DataSourceConfig = {
 		dynamic_fields: boolean
 		data_source?: Option[]
@@ -67,12 +67,12 @@ export namespace Common {
 		multiple?: boolean
 	}
 
-	/** 时间选择器特有配置 */
+	/** Extra config for time picker */
 	export type TimePickerConfig = {
 		format: string
 	}
 
-	/** 携带哨兵的控件组件 */
+	/** Widget component carrying a sentinel */
 	export interface WidgetSchema {
 		key: string
 		type: string
@@ -82,7 +82,7 @@ export namespace Common {
 		}
 	}
 
-	/** 控件组件的Schema */
+	/** Schema for a widget component */
 	export interface BaseWidgetSchema extends Schema {
 		key: string
 		type: string
@@ -103,26 +103,26 @@ export namespace Common {
 				| object
 
 			web_config?: {
-				/** linkage模式特殊数据 */
+				/** Special data for linkage mode */
 				linkage_data?: {
 					label: string
 					required: boolean
-					/** 触发联动的key */
+					/** Key that triggers linkage */
 					trigger_key: string
-					/** 被联动的key */
+					/** Key that is linked */
 					action_key: string
 				}
-				// 是否可更改当前formItemType
+				// Whether the current formItemType can be changed
 				changeable?: boolean
-				/** 容器属性 */
+				/** Container props */
 				wrapper_props?: {
 					title?: string
 				}
 				before_widget?: BaseWidgetSchema
 				before_form_type?: string
-				/** 联动依赖项 */
+				/** Linkage dependencies */
 				dependencies?: string[]
-				/** 条件组件的特殊字段，第二个字段的特殊处理，是否隐藏第三个字段 */
+				/** Condition widget special flag: hide the third field when the second field needs special handling */
 				linkage_right_operands?: boolean
 			}
 		}
@@ -132,7 +132,7 @@ export namespace Common {
 		items?: BaseWidgetSchema
 	}
 
-	// 入参配置(依赖接口配置)
+	// Request parameter configuration (depends on API settings)
 	interface ARGS_SETTINGS {
 		params_query: Common.FormComponent
 		params_path: Common.FormComponent
@@ -141,7 +141,7 @@ export namespace Common {
 		headers: Common.FormComponent
 	}
 
-	// 接口配置
+	// API configuration
 	export interface API_SETTINGS {
 		method: string
 		domain: string

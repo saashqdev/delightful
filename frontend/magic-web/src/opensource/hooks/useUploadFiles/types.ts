@@ -6,17 +6,17 @@ export interface UploadResponse {
 	size: number
 }
 export interface UseUploadFilesParams<F> {
-	/** 文件存储类型 */
+	/** File storage type */
 	storageType?: "private" | "public"
-	/** 上传前回调 */
+	/** Callback before upload */
 	onBeforeUpload?: () => void
-	/** 上传进度回调 */
+	/** Upload progress callback */
 	onProgress?: (file: F, progress: number) => void
-	/** 上传成功回调 */
+	/** Upload success callback */
 	onSuccess?: (file: F, response: UploadResponse) => void
-	/** 上传失败回调 */
+	/** Upload failure callback */
 	onFail?: (file: F, error?: Error) => void
-	/** 上传初始化回调 */
+	/** Upload initialization callback */
 	onInit?: (file: F, tools: Pick<UploadCallBack, "cancel" | "pause" | "resume">) => void
 }
 export interface UploadResult {

@@ -1,12 +1,12 @@
 import type { PaginationResponse } from "@/types/request"
 
 /**
- * 分页数据请求
- * @param fetch 请求函数
- * @param count 每页数据量
- * @param options 配置
- * @param initPageToken 初始化页码
- * @param prevData 上一次请求的数据
+ * Paginated data request
+ * @param fetch Request function
+ * @param count Items per page
+ * @param options Config options
+ * @param initPageToken Initial page token
+ * @param prevData Previously fetched data
  * @returns
  */
 export async function fetchPaddingData<I>(

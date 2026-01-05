@@ -48,12 +48,12 @@ class Logger {
 				  }
 	}
 
-	// 获取当前的链路追踪 ID
+	// Get current trace ID
 	getTraceId(): string {
 		return this.traceId
 	}
 
-	// 记录普通日志
+	// Log standard messages
 	log(...args: unknown[]): void {
 		if ((!isProductionEnv() || isDebug()) && this.enableConfig?.console) {
 			console.groupCollapsed(
@@ -133,7 +133,7 @@ class Logger {
 				fetch("/log-report", {
 					method: "POST",
 					headers: {
-						"Content-Type": "application/json", // 设置请求头，表明发送的数据是 JSON 格式
+						"Content-Type": "application/json", // Request header indicating JSON body
 					},
 					body: JSON.stringify(logData),
 				})

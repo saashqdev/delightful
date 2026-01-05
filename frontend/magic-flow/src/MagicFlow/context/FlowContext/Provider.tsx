@@ -49,8 +49,7 @@ export const FlowProvider = ({
     processNodesBatch,
 	children,
 }: FlowCtx) => {
-	// 将数据分组到不同的context
-	const flowDataValue = useMemo(() => {
+	// Group data into different contexts
 		return {
 			flow,
 			description,
@@ -59,16 +58,14 @@ export const FlowProvider = ({
 		}
 	}, [flow, description, debuggerMode, updateFlow])
 
-	// 边状态值
-	const flowEdgesStateValue = useMemo(() => {
+	// Edge state values
 		return {
 			edges,
 			selectedEdgeId,
 		}
 	}, [edges, selectedEdgeId])
 
-	// 边动作值
-	const flowEdgesActionsValue = useMemo(() => {
+	// Edge action values
 		return {
 			onEdgesChange,
 			onConnect,
@@ -88,8 +85,7 @@ export const FlowProvider = ({
 		deleteEdges,
 	])
 
-	// 原始边值（向后兼容）
-	const flowEdgesValue = useMemo(() => {
+	// Full edge value (backward compatibility)
 		return {
 			...flowEdgesStateValue,
 			...flowEdgesActionsValue,
@@ -97,7 +93,7 @@ export const FlowProvider = ({
 	}, [flowEdgesStateValue, flowEdgesActionsValue])
 
 	const flowNodesValue = useMemo(() => {
-		return {
+	// Full FlowContext kept for backward compatibility
 			addNode,
 			deleteNodes,
 			updateNodesPosition,
@@ -141,7 +137,7 @@ export const FlowProvider = ({
 		}
 	}, [setNodeConfig, updateNodeConfig, notifyNodeChange])
 
-	// 为了向后兼容，保留整体的FlowContext
+	// Full FlowContext kept for backward compatibility
 	const fullValue = useMemo(() => {
 		return {
 			...flowDataValue,
@@ -184,12 +180,12 @@ export const FlowProvider = ({
 }
 
 
-// FlowEdgesProvider组件：针对边相关数据的专用Provider
+// FlowEdgesProvider: specialized provider for edge data
 export const FlowEdgesProvider = ({
 	children,
 	...props
 }: React.PropsWithChildren<FlowEdgesCtx>) => {
-	// 将边相关的状态和动作分开
+	// Separate edge state and actions
 	const stateValue = useMemo(() => {
 		return {
 			edges: props.edges,
@@ -217,7 +213,7 @@ export const FlowEdgesProvider = ({
 		props.deleteEdges,
 	])
 
-	// 完整的边值（向后兼容）
+	// Full edge value (backward compatibility)
 	const value = useMemo(() => {
 		return {
 			...stateValue,

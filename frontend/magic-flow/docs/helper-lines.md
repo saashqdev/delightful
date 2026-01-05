@@ -1,20 +1,20 @@
-# ReactFlow 辅助线功能
+# ReactFlow Helper Lines
 
-React Flow 辅助线组件提供了节点对齐参考线功能，帮助用户在拖拽节点时实现精确对齐。
+The React Flow helper lines component provides alignment guides to help users align nodes precisely while dragging.
 
-## 功能特点
+## Features
 
-- 在拖拽节点时显示对齐参考线
-- 支持节点吸附功能，实现精确对齐
-- 支持水平和垂直方向的对齐
-- 支持多种对齐方式：左对齐、右对齐、居中对齐、顶对齐、底对齐等
-- 适配视口的缩放和平移
-- 提供丰富的自定义配置选项
-- 支持通过控制面板按钮或快捷键开启/关闭功能
+- Show alignment guides while dragging nodes
+- Optional node snapping for precise alignment
+- Horizontal and vertical alignment
+- Multiple alignment modes: left, right, center, top, and bottom
+- Respects viewport zoom and pan
+- Rich customization options
+- Toggle via control panel button or keyboard shortcut
 
-## 使用方法
+## Usage
 
-### 基本使用
+### Basic Usage
 
 ```tsx
 import { ReactFlow, useViewport } from 'reactflow';
@@ -36,15 +36,15 @@ function FlowComponent() {
     onNodeDragStart,
     onNodeDrag,
     onNodeDragStop,
-    onNodesChange, // 如果需要节点吸附功能，必须提供此参数
-    enabled: helperLinesEnabled, // 控制辅助线功能的开关
+    onNodesChange, // Required if you need node snapping
+    enabled: helperLinesEnabled, // Toggle helper lines on/off
   });
 
   return (
     <>
-      {/* 添加一个控制按钮 */}
+      {/* Add a toggle button */}
       <button onClick={() => setHelperLinesEnabled(!helperLinesEnabled)}>
-        {helperLinesEnabled ? '禁用辅助线' : '启用辅助线'}
+        {helperLinesEnabled ? 'Disable helper lines' : 'Enable helper lines'}
       </button>
       
       <ReactFlow
@@ -53,12 +53,12 @@ function FlowComponent() {
         onNodeDragStart={handleNodeDragStart}
         onNodeDrag={handleNodeDrag}
         onNodeDragStop={handleNodeDragStop}
-        onNodesChange={onNodesChange} // 如果需要节点吸附功能，必须提供此参数
+        onNodesChange={onNodesChange} // Required for snap-to-align
         {...otherProps}
       >
-        {/* 其他组件 */}
+        {/* Other components */}
         
-        {/* 渲染辅助线 */}
+        {/* Render helper lines */}
         {hasHelperLines && (
           <HelperLines
             horizontalLines={horizontalLines}
@@ -72,9 +72,9 @@ function FlowComponent() {
 }
 ```
 
-### 自定义配置
+### Custom Configuration
 
-可以通过 `options` 参数自定义辅助线的行为和样式：
+Customize behavior and appearance via the `options` prop:
 
 ```tsx
 const {
@@ -87,18 +87,18 @@ const {
   onNodeDrag,
   onNodeDragStop,
   onNodesChange,
-  enabled: helperLinesEnabled, // 通过状态控制启用/禁用
+  enabled: helperLinesEnabled, // Toggle with state
   options: {
-    threshold: 8,        // 对齐阈值
-    color: '#0077ff',    // 辅助线颜色
-    lineWidth: 2,        // 辅助线宽度
+    threshold: 8,        // Alignment threshold
+    color: '#0077ff',    // Guide color
+    lineWidth: 2,        // Guide width
     zIndex: 10000,       // z-index
-    enableSnap: true     // 是否启用节点吸附功能
+    enableSnap: true     // Enable snap-to-align
   }
 });
 ```
 
-然后将这些选项传递给 `HelperLines` 组件：
+Then pass these options to the `HelperLines` component:
 
 ```tsx
 <HelperLines
@@ -111,51 +111,51 @@ const {
 />
 ```
 
-## API 参考
+## API Reference
 
 ### `useHelperLines` Hook
 
-#### 参数
+#### Parameters
 
-`useHelperLines` 接受一个配置对象，包含以下属性：
+`useHelperLines` accepts a configuration object with these properties:
 
-| 属性 | 类型 | 必填 | 描述 |
+| Property | Type | Required | Description |
 | --- | --- | --- | --- |
-| nodes | Node[] | 是 | React Flow 节点数组 |
-| onNodeDragStart | Function | 否 | 原始的节点拖动开始回调 |
-| onNodeDrag | Function | 否 | 原始的节点拖动回调 |
-| onNodeDragStop | Function | 否 | 原始的节点拖动结束回调 |
-| onNodesChange | Function | 否 | 节点变更回调函数，用于实现节点吸附功能 |
-| options | HelperLinesOptions | 否 | 辅助线配置选项 |
-| enabled | boolean | 否 | 是否启用辅助线功能，默认为 false |
+| nodes | Node[] | Yes | React Flow nodes array |
+| onNodeDragStart | Function | No | Original node drag start callback |
+| onNodeDrag | Function | No | Original node drag callback |
+| onNodeDragStop | Function | No | Original node drag end callback |
+| onNodesChange | Function | No | Nodes change callback, required for snapping |
+| options | HelperLinesOptions | No | Helper lines configuration |
+| enabled | boolean | No | Whether helper lines are enabled, default false |
 
-#### 返回值
+#### Returns
 
-| 属性 | 类型 | 描述 |
+| Property | Type | Description |
 | --- | --- | --- |
-| horizontalLines | number[] | 水平辅助线的位置数组 |
-| verticalLines | number[] | 垂直辅助线的位置数组 |
-| handleNodeDragStart | Function | 节点拖动开始处理函数 |
-| handleNodeDrag | Function | 节点拖动处理函数 |
-| handleNodeDragStop | Function | 节点拖动结束处理函数 |
-| hasHelperLines | boolean | 是否有辅助线需要显示 |
-| options | Object | 当前使用的配置选项 |
-| enabled | boolean | 当前辅助线功能是否启用 |
+| horizontalLines | number[] | Positions of horizontal helper lines |
+| verticalLines | number[] | Positions of vertical helper lines |
+| handleNodeDragStart | Function | Node drag start handler |
+| handleNodeDrag | Function | Node drag handler |
+| handleNodeDragStop | Function | Node drag end handler |
+| hasHelperLines | boolean | Whether helper lines should render |
+| options | Object | Current configuration in use |
+| enabled | boolean | Whether helper lines are enabled |
 
-### `HelperLines` 组件
+### `HelperLines` Component
 
-#### 属性
+#### Props
 
-| 属性 | 类型 | 必填 | 默认值 | 描述 |
+| Property | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
-| horizontalLines | number[] | 是 | - | 水平辅助线的位置数组 |
-| verticalLines | number[] | 是 | - | 垂直辅助线的位置数组 |
-| transform | ViewportTransform | 是 | - | 视口变换信息 |
-| color | string | 否 | '#ff0071' | 辅助线颜色 |
-| lineWidth | number | 否 | 1 | 辅助线宽度 |
-| zIndex | number | 否 | 9999 | 辅助线的 z-index |
+| horizontalLines | number[] | Yes | - | Positions of horizontal helper lines |
+| verticalLines | number[] | Yes | - | Positions of vertical helper lines |
+| transform | ViewportTransform | Yes | - | Viewport transform info |
+| color | string | No | '#ff0071' | Helper line color |
+| lineWidth | number | No | 1 | Helper line width |
+| zIndex | number | No | 9999 | z-index for helper lines |
 
-### 类型定义
+### Type Definitions
 
 ```typescript
 interface ViewportTransform {
@@ -173,14 +173,14 @@ interface HelperLinesOptions {
 }
 ```
 
-## 在控制面板中集成
+## Integrate in a Control Panel
 
-可以在流程图的控制面板中添加一个开关按钮，用于控制辅助线功能的启用/禁用：
+Add a toggle button to the flow control panel to enable or disable helper lines:
 
 ```tsx
-// 在控制面板的控制项中添加辅助线控制按钮
+// Add a helper-lines toggle to the control items
 const controlItemGroups = [
-  // ...其他控制组
+  // ...other control groups
   [
     {
       icon: helperLinesEnabled ? (
@@ -189,16 +189,16 @@ const controlItemGroups = [
         <IconRuler stroke={1} />
       ),
       callback: () => setHelperLinesEnabled(!helperLinesEnabled),
-      tooltips: `${helperLinesEnabled ? '禁用' : '启用'}辅助线 (Ctrl+H)`,
+      tooltips: `${helperLinesEnabled ? 'Disable' : 'Enable'} helper lines (Ctrl+H)`,
       helperLinesEnabled,
     },
   ],
 ];
 
-// 添加快捷键支持
+// Add keyboard shortcut support
 useEffect(() => {
   const handleKeyDown = (event) => {
-    // Ctrl+H 或 Command+H 切换辅助线功能
+    // Ctrl+H or Command+H toggles helper lines
     if ((event.ctrlKey || event.metaKey) && event.key === 'h') {
       event.preventDefault();
       setHelperLinesEnabled(!helperLinesEnabled);
@@ -212,43 +212,43 @@ useEffect(() => {
 }, [helperLinesEnabled, setHelperLinesEnabled]);
 ```
 
-## 实现原理
+## How It Works
 
-辅助线功能的核心实现原理：
+Core logic for helper lines:
 
-1. 监听节点拖拽事件
-2. 在拖拽过程中，计算当前拖拽节点与其他节点的位置关系
-3. 当节点之间的边缘或中心位置接近时（小于设定的阈值），显示对齐参考线
-4. 使用绝对定位的元素渲染辅助线，根据视口的缩放和平移计算正确的位置
+1. Listen for node drag events.
+2. During drag, compute positions between the active node and other nodes.
+3. When edges or centers are within the threshold, show alignment guides.
+4. Render guides with absolutely positioned elements, accounting for zoom and pan.
 
-节点吸附功能的实现原理：
+Snap-to-align logic:
 
-1. 检测到节点接近对齐位置时，计算出精确的对齐坐标
-2. 通过`onNodesChange`回调更新节点位置，使节点"吸附"到对齐位置
-3. 在多个可能的对齐位置中，优先选择最接近当前拖拽位置的参考线
+1. When a node approaches an alignment target, compute precise aligned coordinates.
+2. Update node position through `onNodesChange` so the node snaps into place.
+3. If multiple alignment candidates exist, choose the closest guide to the drag position.
 
-启用/禁用控制的实现：
+Enable/disable behavior:
 
-1. 使用状态变量`helperLinesEnabled`控制辅助线功能的开关
-2. 当功能禁用时，拖拽事件直接传递给原始处理函数，不进行辅助线计算
-3. 通过控制面板按钮或快捷键来切换功能的启用状态
-4. 当功能启用且有节点对齐时，才渲染辅助线组件
+1. The `helperLinesEnabled` state toggles the feature.
+2. When disabled, drag events pass through without helper-line calculations.
+3. The control panel button and keyboard shortcut toggle the flag.
+4. Helper lines render only when enabled and alignment targets exist.
 
-辅助线检查以下对齐方式：
+Alignment checks cover:
 
-- 水平方向
-  - 顶部对齐：节点的顶部边缘与其他节点顶部对齐
-  - 底部对齐：节点的底部边缘与其他节点底部对齐
-  - 中心对齐：节点的垂直中心线与其他节点的垂直中心线对齐
+- Horizontal
+  - Top: align top edges
+  - Bottom: align bottom edges
+  - Center: align vertical center lines
 
-- 垂直方向
-  - 左侧对齐：节点的左侧边缘与其他节点左侧对齐
-  - 右侧对齐：节点的右侧边缘与其他节点右侧对齐
-  - 中心对齐：节点的水平中心线与其他节点的水平中心线对齐 
+- Vertical
+  - Left: align left edges
+  - Right: align right edges
+  - Center: align horizontal center lines
 
-## 示例
+## Example
 
-### 带开关控制的完整示例
+### Full Example with Toggle
 
 ```tsx
 import React, { useState, useCallback, useEffect } from 'react';
@@ -268,14 +268,14 @@ const initialNodes = [
   {
     id: '1',
     type: 'default',
-    data: { label: '节点 1' },
+    data: { label: 'Node 1' },
     position: { x: 250, y: 5 },
   },
-  // ... 其他节点
+  // ... other nodes
 ];
 
 const initialEdges = [
-  // ... 边定义
+  // ... edge definitions
 ];
 
 function Flow() {
@@ -289,7 +289,7 @@ function Flow() {
     [setEdges],
   );
 
-  // 使用辅助线hook
+  // Use the helper lines hook
   const {
     horizontalLines,
     verticalLines,
@@ -308,10 +308,10 @@ function Flow() {
     }
   });
   
-  // 添加快捷键支持
+  // Add keyboard shortcut support
   useEffect(() => {
     const handleKeyDown = (event) => {
-      // Ctrl+H 或 Command+H 切换辅助线功能
+      // Ctrl+H or Command+H toggles helper lines
       if ((event.ctrlKey || event.metaKey) && event.key === 'h') {
         event.preventDefault();
         setHelperLinesEnabled(!helperLinesEnabled);
@@ -326,7 +326,7 @@ function Flow() {
 
   return (
     <div style={{ height: '100%' }}>
-      {/* 控制面板 */}
+      {/* Control panel */}
       <div style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }}>
         <button
           onClick={() => setHelperLinesEnabled(!helperLinesEnabled)}
@@ -338,7 +338,7 @@ function Flow() {
             padding: '8px',
             cursor: 'pointer',
           }}
-          title={`${helperLinesEnabled ? '禁用' : '启用'}辅助线 (Ctrl+H)`}
+          title={`${helperLinesEnabled ? 'Disable' : 'Enable'} helper lines (Ctrl+H)`}
         >
           <IconRuler size={20} stroke={1.5} />
         </button>
@@ -358,7 +358,7 @@ function Flow() {
         <Background />
         <Controls />
         
-        {/* 渲染辅助线 */}
+        {/* Render helper lines */}
         {hasHelperLines && (
           <HelperLines
             horizontalLines={horizontalLines}

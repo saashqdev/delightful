@@ -12,7 +12,7 @@ describe("MagicStreamContent", () => {
 		expect(screen.getByText("流式内容")).toBeInTheDocument()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础流式内容快照", () => {
 			const { asFragment } = renderWithTheme(<MagicStreamContent content="流式内容" />)

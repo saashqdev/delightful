@@ -18,7 +18,7 @@ describe("MagicSplitter", () => {
 		expect(screen.getByText("右侧")).toBeInTheDocument()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础分割器快照", () => {
 			const { asFragment } = renderWithTheme(

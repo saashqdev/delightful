@@ -37,7 +37,7 @@ export default function processData(
 	const argValues = names.map((name: string) => context[name])
 	const { substitutions = [], literals = [] } = data
 
-	// 针对解析失败的字段，当且仅当 options.partial 为 true 时，才会返回 ${} 字符串，否则返回解析失败 undefined
+	// For failed expressions, return ${} only when options.partial is true; otherwise return undefined
 	return [literals].concat(
 		substitutions.map((expr: string) => {
 			let resolver: Function
@@ -61,7 +61,7 @@ export default function processData(
 				}
 				return "undefined"
 
-				// 异常处理暂时不抛出，直接返回 undefined
+				// Error handling intentionally suppressed for now; returns undefined instead
 				// throw new TypeError(
 				// 	`Unable to resolve expression:\n\targs: ${ stringify(argNames) }\n\tbody: ${ stringify(
 				// 		expr

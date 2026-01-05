@@ -1,5 +1,5 @@
 /**
- * 通用型dropdown Renderer
+ * Generic dropdown renderer
  */
 import { DefaultOptionType } from "antd/lib/select"
 import { IconCheck } from "@tabler/icons-react"
@@ -40,7 +40,7 @@ export default function BaseDropdownRenderer({
 
 	const onSelectItem = useMemoizedFn((val: any) => {
 		const cloneValue = _.castArray(value).filter((v) => !!v)
-		/** 处理多选 */
+		/** Handle multi-select */
 		if (multiple) {
 			if (cloneValue?.includes?.(val)) {
 				return
@@ -49,7 +49,7 @@ export default function BaseDropdownRenderer({
 			}
 			return
 		}
-		/** 处理单选 */
+		/** Handle single-select */
 		onChange?.(val)
 	})
 

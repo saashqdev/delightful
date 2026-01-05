@@ -9,7 +9,7 @@ export default function usePropertiesLength({ prefix }: PropertiesLengthProps) {
 
 	const { showTopRow } = useGlobal()
 	
-	// type=object的字段总数
+	// Count of fields when type=object
 	const propertiesLength = useMemo(() => {
 		const result = prefix.filter((name) => name !== "properties").length
 		return showTopRow ? result + 1 : result

@@ -52,10 +52,10 @@ interface SchemaItemProp {
 	showAdv: (prefix: string[], property?: Schema) => void
 
 	/**
-	 * array或者object类型专有
+	 * Specific to array or object types
 	 * */
 	childLength?: number
-	isLastSchemaItem?: boolean // 是否是最后行子schema
+	isLastSchemaItem?: boolean // Whether this is the last child schema row
 }
 
 const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
@@ -80,7 +80,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 		return [...prefix].concat(name)
 	})
 
-	// 当前行距离左侧的gap
+	// Current row's left gap from container edge
 	const [leftGap, setLeftGap] = useState(0)
 
 	const [value, setValue] = useState({} as any)
@@ -88,7 +88,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 	const context = useContext(EditorContext)
 	const mobxContext = useContext(SchemaMobxContext)
 
-	// 获取父级字段
+	// Get parent field
 	const parentKeys = getParentKey(prefix)
 	const parentField = parentKeys.length
 		? _.get(mobxContext.schema, parentKeys)
@@ -119,7 +119,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 		setLeftGap(childFieldGap * propertiesLength)
 	}, [propertiesLength])
 
-	// 修改节点字段名
+	// Handle field name change
 	const handleChangeName = (e: any, newValue: any) => {
 		mobxContext.changeName({ keys: prefix, name, value: newValue })
 		exportFields.changeName({ keys: prefix, name, value: newValue })
@@ -132,7 +132,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 		setValue({ ...value, [key]: val })
 	})
 
-	// 修改数据类型
+	// Handle data type change
 	const handleChangeType = useMemoizedFn((newValue: any) => {
 		const keys = getPrefix().concat("type")
 
@@ -150,16 +150,16 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 	})
 
 	/*
-    展示备注编辑弹窗
-    editorName: 弹窗名称 ['description', 'mock']
-    type: 如果当前字段是object || array showEdit 不可用
+    Show remark editor dialog
+    editorName: Dialog name ['description', 'mock']
+    type: Unavailable for object || array types
     */
 	const handleShowEdit = (editorName: string, type?: string) => {
 		// @ts-ignore
 		showEdit(getPrefix(), editorName, data.properties[name][editorName], type)
 	}
 
-	//  增加子节点
+	// Add child field
 	const handleAddField = (type: string) => {
 		if (type === "object") {
 			return
@@ -177,14 +177,14 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 		})
 	}
 
-	// 控制三角形按钮
+	// Control expand/collapse button
 	const handleClickIcon = () => {
-		// 数据存储在 properties.xxx.properties 下
+		// Data stored under properties.xxx.properties
 		const keyArr = [...getPrefix()].concat("properties")
 		mobxContext.setOpenValue({ key: keyArr })
 	}
 
-	// 修改是否必须
+	// Handle field requirement toggle
 	const handleEnableRequire = useMemoizedFn((checked: any) => {
 		mobxContext.enableRequire({ keys: prefix, name, required: checked })
 		exportFields.enableRequire({ keys: prefix, name, required: checked })
@@ -213,7 +213,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 	}, [disableFields])
 
 	/**
-	 * 新值与旧值是否相等
+	 * Check whether new value equals old value
 	 */
 	const judgeIsEqualObject = () => {
 		const curKeys = [...getPrefix()]
@@ -238,12 +238,12 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 		exportFields.changeValue({ keys: curKeys, value: newValue })
 	})
 
-	// 等待gap计算完才渲染
+	// Wait for gap calculation before rendering
 	const canRender = useMemo(() => {
 		return propertiesLength === 0 || leftGap > 0
 	}, [leftGap, propertiesLength])
 
-	// 横线
+	// Horizontal line
 	const { rowSvgLineProps } = useSvgLine({ propertiesLength })
 
 	const showSvgLine = useMemo(() => {
@@ -256,9 +256,9 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 		return !!inExportFields
 	}, [exportFields.schema, getPrefix])
 
-	/** 同步更新其他的属性
-	 * 删除时：同步更新required
-	 * 新增时：更新required，并且携带上路径相关的schema参数
+	/** Sync update other attributes:
+	 * On delete: sync update required
+	 * On add: update required and include path-related schema params
 	 */
 	const updateExportFieldsRecursively = useMemoizedFn(
 		(keys: string[], type: "add" | "delete", beforeKeys = [] as string[]) => {

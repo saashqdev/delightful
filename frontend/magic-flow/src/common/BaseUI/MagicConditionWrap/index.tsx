@@ -1,4 +1,4 @@
-/** 多增加了一层渲染结构的条件组件
+/** Condition component with an extra rendering layer
  * {
         "id": "component-66399f15d691c",
         "version": "1",
@@ -27,7 +27,7 @@ interface MagicConditionWrapProps extends CustomConditionContainerProps {
 }
 
 export default function MagicConditionWrap({ ...props }: MagicConditionWrapProps) {
-	// 暂时不需要外层的结构，只需要更改structure的数据即可
+	// Outer wrapper not needed; only update the structure data
 	const onChange = useMemoizedFn((value: Expression.Condition) => {
 		if (!props.onChange || !props.value) return
 		props.onChange({

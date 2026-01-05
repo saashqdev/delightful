@@ -8,9 +8,9 @@ import { GlobalFlowStore } from "./types"
 
 
 export type GlobalFlowStoreProps = {
-	// 默认显示可以在画布添加的节点物料类型列表
+	// Default list of node material types that can be added to the canvas
 	defaultDisplayMaterialTypes: BaseNodeType[],
-    // 节点版本schema
+    // Node version schema
     nodeVersionSchema: Record<string, NodeVersionWidget>
 }
 

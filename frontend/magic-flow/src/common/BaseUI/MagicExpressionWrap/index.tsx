@@ -1,4 +1,4 @@
-/** 多增加了一层渲染结构的表达式组件
+/** Expression component with one more render layer
  * {
         "id": "component-66399f15d691c",
         "version": "1",
@@ -37,7 +37,7 @@ interface MagicExpressionWrapProps extends InputExpressionProps {
 }
 
 function MagicExpressionWrap({ ...props }: MagicExpressionWrapProps) {
-	// 暂时不需要外层的结构，只需要更改structure的数据即可
+    // We only need to change the structure data; the outer wrapper is not required for now
 	const onChange = useMemoizedFn((value: InputExpressionValue) => {
 		if (!props.onChange || !props.value) return
 		props.onChange({

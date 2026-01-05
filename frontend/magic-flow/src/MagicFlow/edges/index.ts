@@ -25,7 +25,7 @@ export const defaultEdgeConfig = {
 		strokeWidth: 2
 	},
 	data: {
-		// 是否允许在线条新增节点
+		// Whether new nodes can be added on the edge line
 		allowAddOnLine: true,
 	}
 }

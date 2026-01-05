@@ -1,7 +1,7 @@
 import type { JSONContent } from "@tiptap/core"
 
 /**
- * 添加 doc 包裹
+ * Add a doc wrapper
  * @param content
  * @returns
  */

@@ -19,7 +19,7 @@ describe("MagicCollapse", () => {
 		expect(screen.getByText("标题1")).toBeInTheDocument()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础折叠面板快照", () => {
 			const { asFragment } = renderWithTheme(

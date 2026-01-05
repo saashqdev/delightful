@@ -71,7 +71,7 @@ const FunctionTips = ({ targetOption, keyword }: FunctionTipsProps) => {
 				showArrow={false}
 				zIndex={1073}
 				overlayStyle={{
-					scale: `${currentZoom}`, // 手动调整缩放
+					scale: `${currentZoom}`, // Manually adjust zoom level
 				}}
 			>
 				<div className={styles.text}>

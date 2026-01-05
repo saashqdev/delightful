@@ -1,5 +1,5 @@
 /**
- * 定义主页各组件的数据状态 & 行为
+ * Define data state & behavior for the main page components
  */
 
 import { generateSnowFlake } from "@/common/utils/snowflake"
@@ -23,16 +23,16 @@ import {
 import { sortByEdges, updateTargetNodesStep } from "../utils/reactflowUtils"
 import useMacTouch from "./useMacTouch"
 import useUndoRedo from "./useUndoRedo"
-// 1. 导入批处理hook
+// 1. Import batch-processing hook
 import useNodeBatchProcessing from "../hooks/useNodeBatchProcessing"
 import { FLOW_EVENTS, flowEventBus } from "@/common/BaseUI/Select/constants"
 import { useDebounceFn } from "ahooks"
 
 export enum UpdateStepType {
-	// 连线
+	// Connect
 	Connect = 1,
 
-	// 删除边
+	// Delete edge
 	DelEdge = 2,
 }
 
@@ -46,25 +46,25 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 
 	const { t } = useTranslation()
 
-	// 是否处于调试模式
+	// Debug mode flag
 	const debuggerMode = query.get("debug") === "true"
 
-	// 当前流程详情
+	// Current flow details
 	const [flow, setFlow] = useState(null as MagicFlow.Flow | null)
 
-	// 2. 使用批处理hook
+	// 2. Use batch-processing hook
 	const { processNodesBatch, isProcessing, progress, stopProcessing } = useNodeBatchProcessing({
 		batchSize: 8,
 		interval: 150,
 	})
 
-	// 当前流程描述
+	// Current flow description
 	const [description, setDescription] = useState("")
 
-	// 当前节点配置
+	// Current node configuration
 	const [nodeConfig, setNodeConfig] = useState({} as Record<string, MagicFlow.Node>)
 
-	// 是否显示物料面板
+	// Whether to show the material panel
 	const [showMaterialPanel, setShowMaterialPanel] = useState(true)
 
 	const [selectedNodeId, setSelectedNodeId] = useState(null as null | string)
@@ -86,7 +86,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 
 	useMacTouch()
 
-	// // 撤销
+	// // Undo
 	// useKeyPress(
 	// 	["meta.z", "ctrl.z"],
 	// 	(e) => {
@@ -105,7 +105,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 	// 	{ exactMatch: true },
 	// )
 
-	// // 重做
+	// // Redo
 	// useKeyPress(
 	// 	["meta.shift.z", "ctrl.shift.z"],
 	// 	(e) => {
@@ -131,7 +131,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 		return setNodes((nds) => applyNodeChanges(changes, nds))
 	})
 
-	// 使用防抖函数优化边更改操作，减少频繁更新导致的性能问题
+	// Debounce edge changes to reduce update churn
 	const { run: debouncedEdgesChange } = useDebounceFn(
 		() => {
 			setEdges((eds) => applyEdgeChanges(edgesChangesRef.current, eds))
@@ -152,13 +152,13 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 	const getDefaultFlow = useMemoizedFn(() => {
 		const defaultNodes = [] as MagicFlow.Node[]
 
-		/** 如果已注册开始节点，则加入节点列表 */
+		/** If a start node is registered, add it to the list */
 		if (isRegisteredStartNode()) {
 			const newNode = generateStartNode(paramsName)
 			defaultNodes.push(newNode)
 		}
 
-		// TODO 获取节点的模板，并插入到默认的节点列表中
+		// TODO Load node templates and insert into default nodes list
 
 		return {
 			name: i18next.t("flow.untitledFlow", { ns: "magicFlow" }),
@@ -179,9 +179,9 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 		for (let i = 0; i < serverFlow.nodes.length; i++) {
 			const node = serverFlow.nodes[i]
 
-			// TODO node schema转换渲染
+			// TODO Convert node schema for rendering
 
-			/** 处理节点渲染字段 */
+			/** Prepare node render props */
 			handleRenderProps(node, i, paramsName)
 
 			cacheConfig[node.id] = node
@@ -196,7 +196,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 			})
 		})
 
-		// 初始化步骤
+		// Initialization steps
 		if (cacheNodes.length > 0) {
 			updateTargetNodesStep({
 				type: UpdateStepType.Connect,
@@ -211,12 +211,12 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 		if (isProcessing) {
 			stopProcessing()
 		}
-		// 使用批处理hook处理节点
+		// Process nodes via the batch hook
 		processNodesBatch(cacheNodes, (batchNodes) => {
 			setNodes(batchNodes)
 		})
 
-		// 边的渲染需要在节点渲染完毕之后
+		// Render edges after nodes finish rendering
 		setEdges(_.cloneDeep(renderEdges))
 
 		setNodeConfig(cacheConfig)
@@ -237,7 +237,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 		updateInternalDataByFlow(serverFlow)
 	}, [])
 
-	// 将上游流程同步到内部
+	// Sync upstream flow into local state
 	useUpdateEffect(() => {
 		console.log("currentFlow", currentFlow)
 		if (currentFlow) {
@@ -253,7 +253,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 		setFlow(flowConfig)
 	})
 
-	// 更新位置信息
+	// Update node position info
 	const updateNodesPosition = useMemoizedFn(
 		_.debounce((nodeIds, positionMap) => {
 			if (!flow) return
@@ -266,45 +266,45 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 		}, 100),
 	)
 
-	// 使用防抖函数优化节点配置更新，减少频繁更新导致的性能问题
+	// Debounce node config updates to reduce churn
 	const { run: debouncedUpdateConfig } = useDebounceFn(
 		(node: MagicFlow.Node, previousConfig: Record<string, MagicFlow.Node>) => {
-			// 使用函数式更新，仅修改特定节点
+			// Functional update: only mutate the targeted node
 			setNodeConfig((prevConfig) => {
-				// 创建新的节点配置对象，但保持其他节点的引用不变
+				// Create a new config object while preserving other references
 				const updatedConfig = { ...prevConfig }
 				updatedConfig[node.id] = node
 				return updatedConfig
 			})
 
-			// 仅通知特定节点的变化
+			// Notify listeners about the specific node change
 			if (nodeChangeEventListener && nodeChangeEventListener.emit) {
 				try {
-					// 传递节点ID作为参数，这样可以实现针对性渲染
+					// Pass node ID so consumers can render selectively
 					nodeChangeEventListener.emit("NodeChange")
 				} catch (error) {
-					// 兼容旧版本的事件发射器
+					// Backward compatibility for older emitters
 					nodeChangeEventListener.emit("NodeChange")
-					console.warn("使用了旧版本的nodeChangeEventListener，无法传递节点ID")
+					console.warn("Legacy nodeChangeEventListener in use; cannot pass node ID")
 				}
 			}
 		},
 		{ wait: 500 },
 	)
 
-	// 更新节点配置
+	// Update node configuration
 	const updateNodeConfig = useMemoizedFn(
 		(node: MagicFlow.Node, originalNode?: MagicFlow.Node) => {
 			const oldNodeIndex = nodes.findIndex((n) => n.id === node.id)
 
-			// 创建快照
+			// Create snapshot
 			if (originalNode) {
 				const snapshotNodeConfig = { ...nodeConfig }
 				snapshotNodeConfig[node.id] = originalNode
 				takeSnapshot(nodes, edges, snapshotNodeConfig)
 			}
 
-			// 更新节点
+			// Update node
 			if (oldNodeIndex !== -1) {
 				const oldNode = nodes[oldNodeIndex]
 				nodes.splice(oldNodeIndex, 1, {
@@ -315,12 +315,12 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 				})
 			}
 
-			// 将更新状态和通知变化的操作交给防抖函数处理
+			// Let the debounced handler manage updates and notifications
 			debouncedUpdateConfig(node, nodeConfig)
 		},
 	)
 
-	// 触发节点
+	// Trigger node
 	const triggerNode = useMemo(() => {
 		if (!flow || !flow.nodes || flow.nodes.length === 0) return null
 		return flow.nodes[0]
@@ -331,8 +331,8 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 		const node = nodeConfig[source]
 		const updatedNode = _.cloneDeep(node)
 
-		// 当从分支源点连接线到其他节点时
-		// 当源节点为分支节点，则更新content.branches，source分支节点id，相当于sourceHandle相当于分支id
+		// When connecting from a branch source handle to another node
+		// If the source is a branch node, update content.branches (sourceHandle corresponds to branch id)
 		if (nodeManager.branchNodeIds.includes(`${node[paramsName.nodeType]}`)) {
 			const branches = updatedNode?.[paramsName.params]?.branches || []
 			const branchIndex = branches.findIndex(
@@ -351,7 +351,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 			updatedNode?.[paramsName.params]?.branches?.splice(branchIndex, 1, newBranch)
 		}
 
-		// 下一个节点id列表中没有target，包含分支节点的情况
+		// If target is missing from next-nodes list (including branch cases)
 		if (!updatedNode?.[paramsName.nextNodes]?.includes(target)) {
 			updatedNode?.[paramsName.nextNodes]?.push(target)
 		}
@@ -370,15 +370,15 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 		setNodeConfig({ ...nodeConfig })
 	})
 
-	// 删除分支连接到其他节点的线段时
+	// When deleting a branch edge to another node
 	const updateNextNodeIdsByDeleteEdge = useMemoizedFn((connection: Edge) => {
-		// 当源节点为分支节点，source分支节点id，相当于sourceHandle相当于分支id
+		// If source is a branch node, sourceHandle corresponds to branch id
 		const { source, sourceHandle, target } = connection
 		const node = nodeConfig[source]
 		const updatedNode = _.cloneDeep(node)
 		if (!updatedNode) return
 
-		// 分支节点，向分支的下一节点列表删除数据
+		// For branch nodes, remove target from the branch next-nodes list
 		if (nodeManager.branchNodeIds.includes(`${node[paramsName.nodeType]}`)) {
 			const branches = updatedNode?.[paramsName.params]?.branches
 			const branchIndex = branches?.findIndex(
@@ -395,10 +395,10 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 			updatedNode?.[paramsName.params]?.branches?.splice(branchIndex!, 1, newBranch)
 		}
 
-		// 修改这里：只有当所有分支都不再指向该目标节点时，才从外层nextNodes中删除
+		// Remove from outer nextNodes only if no branch still points to target
 		const shouldRemoveFromNextNodes = !edges.some(
 			(edge) =>
-				edge.id !== connection.id && // 不是当前正在删除的边
+				edge.id !== connection.id && // Skip the edge being deleted
 				edge.source === source &&
 				edge.target === target,
 		)
@@ -441,7 +441,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 			...extraEdgeConfig,
 		}
 
-		// 更新source节点的下一个节点配置
+		// Update next-node configuration for the source node
 		updateNextNodeIdsByConnect(newEdge)
 
 		return setEdges((eds) => addEdge(newEdge, eds))
@@ -491,7 +491,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 	useEffect(() => {
 		try {
 			if (debuggerMode) {
-				/** 校验是否有节点，没有在主流程内 */
+				/** Validate nodes: ensure all are in the main flow */
 				if (debuggerMode) {
 					const sortedNodes = sortByEdges(Object.values(nodeConfig), edges)
 
@@ -527,7 +527,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 				}
 			}
 		} catch (error) {
-			console.error("校验节点出错", error)
+			console.error("Error validating nodes", error)
 		}
 	}, [debuggerMode, nodeConfig])
 
@@ -562,7 +562,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 		}
 	}, [selectedNodeId])
 
-	// 删除节点函数
+	// Delete nodes helper
 	const deleteNodes = useMemoizedFn((ids: string[]) => {
 		notifyNodeChange()
 		ids.forEach((id) => {
@@ -570,10 +570,10 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 			const deleteEdges = edges.filter((e) => id === e.target || id === e.source)
 			const leaveEdges = edges.filter((e) => id !== e.target && id !== e.source)
 
-			// 更新边数据
+			// Update edge state
 			setEdges(leaveEdges)
 
-			// 更新nextNodeIds
+			// Update nextNodeIds
 			deleteEdges.forEach((e) => updateNextNodeIdsByDeleteEdge(e))
 
 			if (Reflect.has(nodeConfig, id)) {
@@ -584,22 +584,22 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 		const newNodes = nodes.filter((n) => !ids.includes(n.id))
 		setNodes(newNodes)
 		if (debuggerMode) {
-			console.trace("删除了节点", ids)
+			console.trace("Deleted nodes", ids)
 		}
 	})
 
-	// 批量删除边并同步更新nextNodes
+	// Batch delete edges and sync nextNodes
 	const deleteEdges = useMemoizedFn((edgesToDelete: Edge[]) => {
 		if (!edgesToDelete.length) return
 
 		notifyNodeChange()
 
-		// 1. 对每条边调用updateNextNodeIdsByDeleteEdge来更新nextNodes
+		// 1. Update nextNodes for each edge being removed
 		edgesToDelete.forEach((edge) => {
 			updateNextNodeIdsByDeleteEdge(edge)
 		})
 
-		// 2. 从edges状态中移除这些边
+		// 2. Remove edges from state
 		const updatedEdges = edges.filter((edge) => !edgesToDelete.some((e) => e.id === edge.id))
 		setEdges(updatedEdges)
 	})

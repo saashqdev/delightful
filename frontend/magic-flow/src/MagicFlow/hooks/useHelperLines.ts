@@ -3,27 +3,27 @@ import { Node } from "reactflow";
 import { HelperLinesOptions } from "../components/HelperLines/types";
 
 interface UseHelperLinesProps {
-  /** 流程图节点 */
+  /** Flowchart nodes */
   nodes: Node[];
-  /** 原始节点拖动事件处理函数 */
+  /** Original node drag handler */
   onNodeDrag?: (event: React.MouseEvent, node: Node) => void;
-  /** 原始节点拖动开始事件处理函数 */
+  /** Original node drag-start handler */
   onNodeDragStart?: (event: React.MouseEvent, node: Node) => void;
-  /** 原始节点拖动结束事件处理函数 */
+  /** Original node drag-stop handler */
   onNodeDragStop?: (event: React.MouseEvent, node: Node, nodes?: Node[]) => void;
-  /** 节点变更函数，用于实现节点吸附功能 */
+  /** Node change handler to support snapping */
   onNodesChange?: (changes: any[]) => void;
-  /** 辅助线配置选项 */
+  /** Helper line options */
   options?: HelperLinesOptions;
-  /** 是否启用辅助线功能 */
+  /** Whether helper lines are enabled */
   enabled?: boolean;
 }
 
 /**
- * 辅助线hook，用于在拖拽节点时显示对齐参考线并实现吸附对齐
+ * Helper-lines hook: show alignment guides and snap nodes during drag
  * 
- * @param props 配置项
- * @returns 包含辅助线状态和处理函数的对象
+ * @param props Options
+ * @returns Helper line state and handlers
  */
 export function useHelperLines(props: UseHelperLinesProps) {
   const { 
@@ -36,20 +36,20 @@ export function useHelperLines(props: UseHelperLinesProps) {
     enabled = false
   } = props;
   
-  // 设置阈值，默认为5
+  // Snap threshold; default to 5
   const SNAP_THRESHOLD = options.threshold || 5;
   
-  // 是否启用吸附功能
+  // Whether snapping is enabled
   const enableSnap = options.enableSnap !== false;
 
-  // 辅助线状态
+  // Helper line state
   const [horizontalLines, setHorizontalLines] = useState<number[]>([]);
   const [verticalLines, setVerticalLines] = useState<number[]>([]);
 
-  // 当前拖动的节点
+  // Node currently being dragged
   const [draggedNode, setDraggedNode] = useState<Node | null>(null);
 
-  // 处理节点拖动开始
+  // Handle node drag start
   const handleNodeDragStart = useCallback(
     (event: React.MouseEvent, node: Node) => {
       if (enabled) {
@@ -63,10 +63,10 @@ export function useHelperLines(props: UseHelperLinesProps) {
     [onNodeDragStart, enabled]
   );
 
-  // 处理节点拖动
+  // Handle node drag
   const handleNodeDrag = useCallback(
     (event: React.MouseEvent, node: Node) => {
-      // 如果辅助线功能未启用，直接调用原始的onNodeDrag回调
+      // If helper lines are disabled, call the original handler and exit
       if (!enabled) {
         if (onNodeDrag) {
           onNodeDrag(event, node);
@@ -76,23 +76,23 @@ export function useHelperLines(props: UseHelperLinesProps) {
 
       if (!draggedNode) return;
 
-      // 清除之前的辅助线
+      // Clear previous helper lines
       setHorizontalLines([]);
       setVerticalLines([]);
 
-      // 忽略被拖动的节点
+      // Ignore the node currently being dragged
       const otherNodes = nodes.filter((n) => n.id !== node.id);
 
       const horizontalAlignments: number[] = [];
       const verticalAlignments: number[] = [];
       
-      // 用于存储节点吸附的位置
+      // Coordinates to snap to
       let snapX: number | null = null;
       let snapY: number | null = null;
 
-      // 比较当前拖动节点与其他节点的位置
+      // Compare the dragged node position against others
       otherNodes.forEach((otherNode) => {
-        // 水平对齐 - 检查顶部对齐
+        // Horizontal alignment — top
         if (Math.abs(node.position.y - otherNode.position.y) < SNAP_THRESHOLD) {
           horizontalAlignments.push(otherNode.position.y);
           if (enableSnap) {
@@ -100,7 +100,7 @@ export function useHelperLines(props: UseHelperLinesProps) {
           }
         }
 
-        // 水平对齐 - 检查底部对齐 (假设节点有高度)
+        // Horizontal alignment — bottom (assumes nodes have height)
         const nodeHeight = (node as any).height || 40;
         const otherNodeHeight = (otherNode as any).height || 40;
         if (
@@ -114,7 +114,7 @@ export function useHelperLines(props: UseHelperLinesProps) {
           }
         }
 
-        // 水平对齐 - 检查中心对齐
+        // Horizontal alignment — center
         if (
           Math.abs(
             node.position.y + nodeHeight / 2 - (otherNode.position.y + otherNodeHeight / 2)
@@ -126,7 +126,7 @@ export function useHelperLines(props: UseHelperLinesProps) {
           }
         }
 
-        // 垂直对齐 - 检查左侧对齐
+        // Vertical alignment — left
         if (Math.abs(node.position.x - otherNode.position.x) < SNAP_THRESHOLD) {
           verticalAlignments.push(otherNode.position.x);
           if (enableSnap) {
@@ -134,7 +134,7 @@ export function useHelperLines(props: UseHelperLinesProps) {
           }
         }
 
-        // 垂直对齐 - 检查右侧对齐
+        // Vertical alignment — right
         const nodeWidth = (node as any).width || 150;
         const otherNodeWidth = (otherNode as any).width || 150;
         if (
@@ -148,7 +148,7 @@ export function useHelperLines(props: UseHelperLinesProps) {
           }
         }
 
-        // 垂直对齐 - 检查中心对齐
+        // Vertical alignment — center
         if (
           Math.abs(
             node.position.x + nodeWidth / 2 - (otherNode.position.x + otherNodeWidth / 2)
@@ -161,19 +161,19 @@ export function useHelperLines(props: UseHelperLinesProps) {
         }
       });
 
-      // 更新辅助线
+      // Update helper lines
       setHorizontalLines(horizontalAlignments);
       setVerticalLines(verticalAlignments);
 
-      // 应用吸附位置
+      // Apply snap positions
       if (enableSnap && onNodesChange && (snapX !== null || snapY !== null)) {
-        // 创建一个新的节点位置对象
+        // New node position with snap applied
         const newPosition = {
           x: snapX !== null ? snapX : node.position.x,
           y: snapY !== null ? snapY : node.position.y,
         };
         
-        // 更新节点位置，应用吸附效果
+        // Update node position to apply snapping
         const nodeChange = {
           id: node.id,
           type: 'position',
@@ -182,7 +182,7 @@ export function useHelperLines(props: UseHelperLinesProps) {
         
         onNodesChange([nodeChange]);
       } else {
-        // 如果没有吸附，仍然调用原来的onNodeDrag回调
+        // If not snapping, still call the original handler
         if (onNodeDrag) {
           onNodeDrag(event, node);
         }
@@ -191,17 +191,17 @@ export function useHelperLines(props: UseHelperLinesProps) {
     [draggedNode, nodes, onNodeDrag, onNodesChange, SNAP_THRESHOLD, enableSnap, enabled]
   );
 
-  // 处理节点拖动结束
+  // Handle node drag end
   const handleNodeDragStop = useCallback(
     (event: React.MouseEvent, node: Node, dragNodes?: Node[]) => {
-      // 清除辅助线和拖动节点状态
+      // Clear helper lines and drag state
       if (enabled) {
         setHorizontalLines([]);
         setVerticalLines([]);
         setDraggedNode(null);
       }
 
-      // 调用原来的onNodeDragStop回调
+      // Invoke the original drag-stop handler
       if (onNodeDragStop) {
         onNodeDragStop(event, node, dragNodes);
       }
@@ -210,22 +210,22 @@ export function useHelperLines(props: UseHelperLinesProps) {
   );
 
   return {
-    // 状态
+    // State
     horizontalLines,
     verticalLines,
     
-    // 辅助线配置
+    // Helper line options
     options,
     
-    // 是否启用
+    // Whether enabled
     enabled,
     
-    // 事件处理器
+    // Event handlers
     handleNodeDragStart,
     handleNodeDrag,
     handleNodeDragStop,
     
-    // 是否有辅助线
+    // Derived: helper lines present
     hasHelperLines: enabled && (horizontalLines.length > 0 || verticalLines.length > 0)
   };
 } 

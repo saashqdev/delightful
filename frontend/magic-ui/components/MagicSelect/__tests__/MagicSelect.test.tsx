@@ -17,7 +17,7 @@ describe("MagicSelect", () => {
 			</MagicThemeProvider>,
 		)
 
-		// 检查是否渲染了占位符
+		// Verify placeholder renders
 		expect(screen.getByText("请选择")).toBeInTheDocument()
 	})
 
@@ -33,11 +33,11 @@ describe("MagicSelect", () => {
 			</MagicThemeProvider>,
 		)
 
-		// 检查是否显示了选中的值
+		// Verify selected value displays
 		expect(screen.getByText("选项1")).toBeInTheDocument()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础选择器快照", () => {
 			const options = [

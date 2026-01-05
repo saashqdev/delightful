@@ -1,4 +1,4 @@
-/** 多增加了一层渲染结构的表单组件
+/** Form component with one extra render layer
  * {
         "id": "component-66399f15d691c",
         "version": "1",
@@ -28,11 +28,11 @@ interface MagicJSONSchemaEditorWrap extends JsonSchemaEditorProps {
 }
 
 function MagicJSONSchemaEditorWrap({ ...props }: MagicJSONSchemaEditorWrap) {
-	// 暂时不需要外层的结构，只需要更改structure的数据即可
+	// Only need to update the structure data; the outer wrapper is not required for now
 	const onChange = useMemoizedFn((value: Schema) => {
 		if (!props.onChange || !props.value) return
 
-		/** 值相等，不进行派发 */
+		/** Skip dispatch if the value is unchanged */
 		if (_.isEqual(props.value?.structure, value)) return
 		props.onChange({
 			...props.value,

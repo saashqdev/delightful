@@ -2,7 +2,7 @@ import React from "react"
 import { NodesContext, NodesStateContext, NodesActionContext, NodesCtx } from "./Context"
 
 export function NodesProvider({ nodes, setNodes, onNodesChange, children }: NodesCtx) {
-	// 分别创建状态和动作的Context值
+	// Create separate context values for state and actions
 	const stateValue = React.useMemo(
 		() => ({
 			nodes,
@@ -18,7 +18,7 @@ export function NodesProvider({ nodes, setNodes, onNodesChange, children }: Node
 		[setNodes, onNodesChange],
 	)
 
-	// 为了向后兼容而创建的完整Context值
+	// Full context value for backward compatibility
 	const contextValue = React.useMemo(
 		() => ({
 			...stateValue,

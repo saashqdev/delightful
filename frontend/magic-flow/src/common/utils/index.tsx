@@ -12,7 +12,7 @@ export function toCamelCase(input: string): string {
 }
 
 /**
- * 生成组件默认数据
+ * Generate default component data
  * @param componentType
  * @returns
  */
@@ -32,22 +32,22 @@ export function genDefaultComponent<ResultType extends Common.ComponentTypes>(
 	return result
 }
 
-/** 生成Widget组件 */
+/** Generate a Widget component */
 export function genWidgetComponent(defaultWidget: Common.WidgetSchema | null = null) {
 	return genDefaultComponent(ComponentType.Widget, defaultWidget) as Common.WidgetComponent
 }
 
-/** 生成表单组件 */
+/** Generate a form component */
 export function genFormComponent(defaultForm: Schema | null = null) {
 	return genDefaultComponent(ComponentType.Form, defaultForm) as Common.FormComponent
 }
 
-/** 生成条件组件 */
+/** Generate a condition component */
 export function genConditionComponent() {
 	return genDefaultComponent(ComponentType.Condition) as Common.ConditionComponent
 }
 
-/** 生成Api组件 */
+/** Generate an API component */
 export function genApiComponent(defaultWidget: Common.API_SETTINGS | null = null) {
 	return genDefaultComponent(ComponentType.Api, defaultWidget) as Common.ApiComponent
 }

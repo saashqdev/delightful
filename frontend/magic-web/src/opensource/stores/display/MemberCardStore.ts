@@ -6,51 +6,51 @@ import { makeAutoObservable } from "mobx"
 import userInfoService from "@/opensource/services/userInfo"
 
 /**
- * 成员卡片
+ * Member card
  */
 class MemberCardStore {
 	/**
-	 * 是否悬停
+	 * Hover state
 	 */
 	isHover = false
 
 	/**
-	 * 是否打开
+	 * Open state
 	 */
 	open = false
 
 	/**
-	 * 卡片大小
+	 * Card dimensions
 	 */
 	size: { width: number; height: number } = { width: 320, height: 500 }
 
 	/**
-	 * 卡片外边距
+	 * Card margin
 	 */
 	marginSize: number = 10
 
 	/**
-	 * 卡片位置
+	 * Card position
 	 */
 	position: { x: number; y: number } = { x: 0, y: 0 }
 
 	/**
-	 * 用户ID
+	 * User ID
 	 */
 	uid: string | null = null
 
 	/**
-	 * 用户信息
+	 * User info
 	 */
 	userInfo: StructureUserItem | undefined = undefined
 
 	/**
-	 * 卡片类名
+	 * Card class name
 	 */
 	domClassName = DomClassName.MEMBER_CARD
 
 	/**
-	 * 卡片动画
+	 * Card animation duration
 	 */
 	animationDuration = 100
 
@@ -59,43 +59,43 @@ class MemberCardStore {
 	}
 
 	/**
-	 * 设置用户信息
-	 * @param userInfo 用户信息
+	 * Set user info
+	 * @param userInfo User info
 	 */
 	setUserInfo(userInfo: StructureUserItem | undefined) {
 		this.userInfo = userInfo
 	}
 
 	/**
-	 * 打开卡片
-	 * @param uid 用户ID
-	 * @param position 卡片位置
+	 * Open the card
+	 * @param uid User ID
+	 * @param position Card position
 	 */
 	openCard(uid: string, position: { x: number; y: number }) {
 		this.open = true
 		this.setPosition(position)
 		this.uid = uid
 
-		// 调整位置
+		// Adjust position
 		this.adjustPosition()
 
-		// 获取用户信息
+		// Read cached user info
 		this.setUserInfo(userInfoStore.get(uid))
 
-		// 更新用户信息
+		// Refresh user info
 		userInfoService.fetchUserInfos([uid], 2).then(() => {
 			this.setUserInfo(userInfoStore.get(uid))
 		})
 	}
 
 	/**
-	 * 关闭卡片
+	 * Close the card
 	 */
 	closeCard(force = false) {
 		if (this.isHover && !force) return
 		this.open = false
 		this.isHover = false
-		// 延迟重置位置，等待动画完成
+		// Reset position after animation completes
 		setTimeout(() => {
 			this.position = { x: 0, y: 0 }
 			this.uid = null
@@ -104,8 +104,8 @@ class MemberCardStore {
 	}
 
 	/**
-	 * 设置卡片位置
-	 * @param position 卡片位置
+	 * Set card position
+	 * @param position Card position
 	 */
 	setPosition(position: { x: number; y: number }) {
 		this.position.x = position.x + 10
@@ -114,40 +114,40 @@ class MemberCardStore {
 	}
 
 	/**
-	 * 设置卡片大小
-	 * @param size 卡片大小
+	 * Set card size
+	 * @param size Card size
 	 */
 	setSize(size: { width: number; height: number }) {
 		this.size = size
-		// 调整位置
+		// Adjust position
 		this.adjustPosition()
 	}
 
 	/**
-	 * 调整卡片位置
+	 * Adjust card position
 	 */
 	adjustPosition() {
-		// 调整位置, 防止超出屏幕
+		// Adjust to prevent overflow off-screen
 		if (typeof window !== "undefined") {
 			const windowWidth = window.innerWidth - this.marginSize * 2
 			const windowHeight = window.innerHeight - this.marginSize * 2
 
-			// 确保卡片右边界不超出屏幕
+			// Keep right edge within the viewport
 			if (this.position.x + this.size.width + this.marginSize > windowWidth) {
 				this.position.x = windowWidth - this.size.width - this.marginSize
 			}
 
-			// 确保卡片不超出左边界
+			// Keep left edge within the viewport
 			if (this.position.x < 0) {
 				this.position.x = this.marginSize
 			}
 
-			// 确保卡片底部不超出屏幕
+			// Keep bottom edge within the viewport
 			if (this.position.y + this.size.height > windowHeight) {
 				this.position.y = windowHeight - this.size.height - this.marginSize
 			}
 
-			// 确保卡片不超出顶部边界
+			// Keep top edge within the viewport
 			if (this.position.y < 0) {
 				this.position.y = this.marginSize
 			}
@@ -155,17 +155,17 @@ class MemberCardStore {
 	}
 
 	/**
-	 * 从元素获取用户ID
-	 * @param element 元素
-	 * @returns 用户ID
+	 * Extract user ID from an element
+	 * @param element Element
+	 * @returns User ID
 	 */
 	getUidFromElement(element: HTMLElement) {
 		return element.getAttribute("data-user-id")
 	}
 
 	/**
-	 * 设置是否悬停
-	 * @param isHover 是否悬停
+	 * Set hover state
+	 * @param isHover Hover flag
 	 */
 	setIsHover(isHover: boolean) {
 		this.isHover = isHover

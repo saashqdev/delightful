@@ -1,5 +1,5 @@
 /**
- * 定义节点的相关drag-over、drag-leave事件
+ * Define drag-over and drag-leave handlers for nodes
  */
 import { FLOW_EVENTS, flowEventBus } from "@/common/BaseUI/Select/constants"
 import { useFlowInteractionActions } from "@/MagicFlow/components/FlowDesign/context/FlowInteraction/useFlowInteraction"
@@ -34,12 +34,12 @@ export default function useDrag({ id }: UseDrag) {
 	})
 
 	const onDragOver = useMemoizedFn(() => {
-		/** 当前是节点是分组节点，则选中分组 */
+		/** If this node is a group node, select the group */
 		if (isGroupType) {
 			selectNode(id)
 			return
 		}
-		/** 当前节点 */
+		/** For a child node, select its parent group */
 		if (currentNode?.parentId) {
 			selectNode(currentNode?.parentId)
 		}
@@ -51,7 +51,7 @@ export default function useDrag({ id }: UseDrag) {
 		}
 	})
 
-	/** 新增分组的子节点 */
+	/** Add a child node under a group */
 	const addChildNode = useMemoizedFn((event, pid) => {
 		event.stopPropagation()
 		const jsonString = event.dataTransfer.getData("node-data")

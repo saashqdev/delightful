@@ -2,51 +2,51 @@ import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
 import { platformKey } from "@/common/utils/storage"
 
-/** 全局国际化语言选项 */
+/** Global internationalization language option */
 interface GlobalLanguageOption {
-	/** 当前语言标识 */
+	/** Language code */
 	locale: string
-	/** 当前语言名称 */
+	/** Language display name */
 	name: string
-	/** 用于当前语言的枚举各语言的表达 */
+	/** Translations for this locale */
 	translations: Record<string, string>
 }
 
-/** 全局国际冠号选项 */
+/** Global area code option */
 interface AreaCodeOption {
-	/** 当前语言标识 */
+	/** Language code */
 	locale: string
-	/** 当前冠号识别号 */
+	/** Area code identifier */
 	code: string
-	/** 当前语言名称 */
+	/** Language display name */
 	name: string
-	/** 用于当前语言的枚举各语言的表达 */
+	/** Translations for this locale */
 	translations: Record<string, string>
 }
 
-/** 全局语言模块 */
+/** Global language store */
 export interface GlobalLanguage {
-	/** 当前语言 */
+	/** Current language */
 	language: string
-	/** 本地语言列表 */
+	/** Local language list */
 	languages: Array<GlobalLanguageOption>
-	/** 设置当前语言 */
+	/** Set current language */
 	setLanguage: (language: string) => void
-	/** 设置语言列表 */
+	/** Set language list */
 	setLanguages: (languages: Array<GlobalLanguageOption>) => void
-	/** 国际冠号(电话号码地区识别号) */
+	/** Area codes (phone dialing codes) */
 	areaCodes: Array<AreaCodeOption>
 	setAreaCodes: (areaCodes: Array<AreaCodeOption>) => void
-	/** 获取全局国际化配置 */
+	/** Get global internationalization config */
 	// useFetchOptions: () => void
-	/** 国际化语言实例 */
+	/** Internationalization instance */
 	// instance: i18n
 }
 
-// 显式声明store类型
+// Explicitly declare store type
 export type GlobalLanguageStoreType = ReturnType<typeof createStore>
 
-// 创建store函数
+// Create store function
 const createStore = () => {
 	return create<GlobalLanguage>()(
 		persist(
@@ -90,5 +90,5 @@ const createStore = () => {
 	)
 }
 
-// 创建并导出store实例
+// Create and export store instance
 export const store = createStore()

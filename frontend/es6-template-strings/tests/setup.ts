@@ -1,2 +1,2 @@
-// 直接导入@jest/globals，这会自动注册全局测试API
+// Import @jest/globals to auto-register global test APIs
 import "@jest/globals"

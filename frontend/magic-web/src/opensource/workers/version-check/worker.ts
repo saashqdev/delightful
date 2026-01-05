@@ -1,15 +1,15 @@
 import { ReflectMessageType, MessageType } from "./const"
 import { generateUUID, getLatestAppVersion } from "./utils"
 
-export const portList: any[] = [] // 存储端口
-export const visiblePorts: any[] = [] // 存储页面可见情况
+export const portList: any[] = [] // Store ports
+export const visiblePorts: any[] = [] // Track visibility state per port
 
-// 使用对象包装intervalId，使其可变
+// Wrap intervalId to keep it mutable
 export const state = {
 	intervalId: null as NodeJS.Timeout | null,
 }
 
-// 给除自己外的窗口发送消息
+// Send message to all other windows
 function sendMessage(port: { id: any }, message: { type: string }) {
 	portList.forEach((o) => {
 		if (o.id !== port.id) {
@@ -18,7 +18,7 @@ function sendMessage(port: { id: any }, message: { type: string }) {
 	})
 }
 
-// 给所有窗口发送消息
+// Broadcast to all windows
 function broadcast(message: { type: string; data?: any; message?: string }) {
 	portList.forEach((port) => {
 		port.postMessage(message)
@@ -34,17 +34,17 @@ declare global {
 export const onconnect = function onconnect(e: { ports: any[] }) {
 	const port = e.ports[0]
 	port.id = generateUUID()
-	// 存储端口
+	// Store port
 	portList.push(port)
-	// 监听port推送
+	// Listen for incoming messages
 	// eslint-disable-next-line @typescript-eslint/no-shadow
 	port.onmessage = async function onmessage(e: any) {
-		// 取数据
+		// Retrieve data
 		const data = e.data || {}
 		const type = data.type || ""
 		switch (type) {
-			case MessageType.START: // 开启轮询
-				// 防止重复添加
+			case MessageType.START: // Start polling
+				// Prevent duplicate additions
 				if (!visiblePorts.find((o) => o === port.id)) {
 					visiblePorts.push(port.id)
 				}
@@ -80,18 +80,18 @@ export const onconnect = function onconnect(e: { ports: any[] }) {
 					})
 				}
 				break
-			case MessageType.STOP: // 停止轮询
+			case MessageType.STOP: // Stop polling
 				{
 					const visibleIndex = visiblePorts.indexOf(port.id)
 					if (visibleIndex > -1) visiblePorts.splice(visibleIndex, 1)
 				}
-				// 当所有页面不可见时，才停止轮询
+				// Stop polling only when all pages are hidden
 				if (state.intervalId !== null && visiblePorts.length === 0) {
 					clearInterval(state.intervalId)
 					state.intervalId = null
 				}
 				break
-			case MessageType.CLOSE: // 关闭当前端口
+			case MessageType.CLOSE: // Close current port
 				{
 					const index = portList.indexOf(port)
 					if (index > -1) {
@@ -99,7 +99,7 @@ export const onconnect = function onconnect(e: { ports: any[] }) {
 					}
 				}
 				break
-			case MessageType.REFRESH: // 主动刷新，通知其他页面刷新
+			case MessageType.REFRESH: // Proactively notify other pages to refresh
 				sendMessage(port, {
 					type: ReflectMessageType.REFLECT_REFRESH,
 				})

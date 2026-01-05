@@ -7,11 +7,11 @@ let literals: null | Array<string>
 let substitutions: null | Array<string>
 let template: string
 
-/** 字符串模版语法的前缀 */
+/** Prefix for template syntax */
 let Notation: string = "$"
-/** 字符串模版语法的开始标记 */
+/** Opening delimiter for template syntax */
 let NotationStart: string = "{"
-/** 字符串模版语法的结束标记 */
+/** Closing delimiter for template syntax */
 let NotationEnd: string = "}"
 
 export interface Result {

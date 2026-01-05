@@ -1,11 +1,11 @@
 /**
- * 元素类名
+ * Element class names
  */
 export const enum DomClassName {
-  /** 成员卡片 */
+  /** Member card */
   MEMBER_CARD = 'member-card',
-  /** 消息 */
+  /** Message */
   MAGIC_IMAGE = 'magic-image',
-  /** 消息列表 */
+  /** Message list */
   MESSAGE_ITEM = 'message-item',
 }

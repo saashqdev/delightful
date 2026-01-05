@@ -12,7 +12,7 @@ describe("MagicImage", () => {
 		expect(screen.getByAltText("测试图片")).toBeInTheDocument()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础图片快照", () => {
 			const { asFragment } = renderWithTheme(<MagicImage src="test.jpg" alt="测试图片" />)

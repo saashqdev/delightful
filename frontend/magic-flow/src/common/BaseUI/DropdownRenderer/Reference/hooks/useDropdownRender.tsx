@@ -9,11 +9,11 @@ type DropdownRenderProps = {
 }
 
 export default function useDropdownRender({ dataSource, userInput }: DropdownRenderProps) {
-	// 经过过滤后的数据源
+	// Data source after filtering
 	const [filterDataSource, setFilterDataSource] = useState(dataSource)
 	const [expandedKeys, setExpandedKeys] = useState<React.Key[]>([])
 	const [autoExpandParent, setAutoExpandParent] = useState(true)
-	// 搜索关键词
+	// Search keyword
 	const [keyword, setKeyword] = useState("")
 
 	const onExpand = useMemoizedFn((newExpandedKeys: React.Key[]) => {
@@ -37,7 +37,7 @@ export default function useDropdownRender({ dataSource, userInput }: DropdownRen
 		setExpandedKeys(allExpandKeys)
 	}, [userInput])
 
-	// 防抖计算
+	// Debounced expand calculation
 	const { run: updateExpandKeysByKeyword } = useDebounceFn(
 		(value: string) => {
 			const newExpandedKeys = getRelationExpandKeys(filterDataSource, value)
@@ -49,7 +49,7 @@ export default function useDropdownRender({ dataSource, userInput }: DropdownRen
 		},
 	)
 
-	// 搜索关键字变化处理
+	// Handle keyword changes
 	const onSearchChange = useMemoizedFn((e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target
 		updateExpandKeysByKeyword(value)

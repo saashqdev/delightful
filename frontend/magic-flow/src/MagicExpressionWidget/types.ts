@@ -11,13 +11,13 @@ import { SingleSelectProps } from "./components/nodes/LabelSelect/SingleSelect/S
 import { Department } from "./components/nodes/LabelDepartmentNames/LabelDepartmentNames";
 import { NameValue } from "./components/nodes/LabelNames/LabelNames";
 
-// 参数值类型
+// Parameter value types
 export const enum VALUE_TYPE {
     CONST = 'const',
     EXPRESSION = 'expression',
 }
 
-  // 参数值类型对应的字段名称
+	// Field names corresponding to parameter value types
 export const FIELDS_NAME = {
     [VALUE_TYPE.CONST]: 'const_value',
     [VALUE_TYPE.EXPRESSION]: 'expression_value',
@@ -68,7 +68,7 @@ export interface EXPRESSION_VALUE extends EXPRESSION_ITEM {
 	args?: InputExpressionValue[]
 }
 
-/** 表达式值类型 */
+/** Expression value type */
 export type InputExpressionValue = {
 	type: VALUE_TYPE
 	const_value: EXPRESSION_VALUE[]
@@ -138,76 +138,76 @@ export interface NamesRenderConfig extends BaseRenderConfig  {
 export type RenderConfig = MemberRenderConfig | MultipleRenderConfig | DateTimeRenderConfig | CheckboxRenderConfig | SelectRenderConfig | DepartmentNamesRenderConfig | NamesRenderConfig
 
 
-/** 表达式组件Props */
+/** InputExpression component props */
 export interface InputExpressionProps {
 	onChange?: (value: InputExpressionValue) => void
 	disabled?: boolean
 	dataSource?: ExpressionSource
-	/** 常量的数据源 */
+	/** Data source for constants */
 	constantDataSource?: ExpressionSource
-    /** 优先级最高 */
+	/** Highest priority placeholder */
 	placeholder?: string
-    /** 为固定值时的占位符 */
-    inputPlaceholder?: string
-    /** 为表达式时的占位符 */
-    referencePlaceholder?: string
+	/** Placeholder when using a fixed value */
+	inputPlaceholder?: string
+	/** Placeholder when using an expression */
+	referencePlaceholder?: string
 	bordered?: boolean
 	allowExpression?: boolean
 	value?: InputExpressionValue
 	mode?: ExpressionMode
-    allowModifyField?: boolean
+	allowModifyField?: boolean
 
-	/** 业务组件可以指定值类型 */
+	/** Business components can specify the value type */
 	pointedValueType?: "const_value" | "expression_value",
 
-    /** 是否只支持表达式组件 */
-    onlyExpression?: boolean
+	/** Whether only expression mode is allowed */
+	onlyExpression?: boolean
 
-    /** 是否支持多选 */
-    multiple?: boolean
+	/** Whether multiple selection is supported */
+	multiple?: boolean
 
-    /** 最小高度 */
-    minHeight?: string
-    /** 最大高度 */
-    maxHeight?: string
+	/** Minimum height */
+	minHeight?: string
+	/** Maximum height */
+	maxHeight?: string
 
-	/** 是否携带选项的schema类型，如字符串、数组、布尔值等 */
+	/** Whether to include schema type info for options (string, array, boolean, etc.) */
 	withSchemaType?: boolean
 
-	/** 最外层的类名 */
+	/** Class name for the outer wrapper */
 	wrapperClassName?: string
 
-	/** 是否支持打开弹窗编辑 */
+	/** Whether popup editing is allowed */
 	allowOpenModal?: boolean
 
-	/** 是否显示多行 */
+	/** Whether to display multiple lines */
 	showMultipleLine?: boolean
 
 	renderConfig?: RenderConfig
 
-	/** 是否需要进行加密，需配合MagicJSONSchemaEditor使用 */
+	/** Whether encryption is required; used with MagicJSONSchemaEditor */
 	encryption?: boolean
 	hasEncryptionValue?: boolean
 
-    /** 是否显示放大视图按钮 */
-    showExpand?: boolean
+	/** Whether to show the expand view button */
+	showExpand?: boolean
 
-    /** 当前表达式组件是否处于流程内 */
-    isInFlow?: boolean
+	/** Whether the expression component is used inside a flow */
+	isInFlow?: boolean
 }
 
 export enum LabelTypeMap {
 	LabelNode = "fields",
 	LabelFunc = "methods",
 	LabelText = "input",
-	LabelMember = "member", // 成员
-	LabelDateTime = 'datetime', // 日期
-	LabelMultiple = 'multiple', // 多选
-	LabelSelect = "select", // 单选
-	LabelCheckbox = "checkbox", // checkbox
-	LabelPassword = "password", // 密码
+	LabelMember = "member", // Member
+	LabelDateTime = 'datetime', // Date/time
+	LabelMultiple = 'multiple', // Multi-select
+	LabelSelect = "select", // Single-select
+	LabelCheckbox = "checkbox", // Checkbox
+	LabelPassword = "password", // Password
 	LabelDepartmentNames = "department_names",
-    LabelNames = "names", // 文本块通用类型
+	LabelNames = "names", // Generic text block type
 }
 
 export interface ChangeRef {
@@ -216,7 +216,7 @@ export interface ChangeRef {
 	getDataSource: () => any
 }
 
-// 鼠标实例
+// Mouse cursor reference
 export interface CursorRef {
 	id: string
 	type: string
@@ -225,7 +225,7 @@ export interface CursorRef {
 	nextId?: string
 }
 
-// 编辑实例
+// Editor reference
 export interface EditRef {
 	updateDisplayValue: (val: any) => void
 	getDisplayValue: () => any
@@ -235,23 +235,23 @@ export interface EditRef {
 	getCurrentNode: () => any
 }
 
-/** 验证码Ref */
+/** InputExpression ref */
 export interface InputExpressionInstance {}
 
-// 单个项类型
+// Form item types
 export enum FormItemType {
-    // 字符串
-    String= 'string',
-    // 数值
-    Number= 'number',
-    // 整数
-    Integer = 'integer',
-    // 数组
-    Array = 'array',
-    // 对象
-    Object = 'object',
-    // 布尔
-    Boolean = 'boolean',
+	// String
+	String= 'string',
+	// Number
+	Number= 'number',
+	// Integer
+	Integer = 'integer',
+	// Array
+	Array = 'array',
+	// Object
+	Object = 'object',
+	// Boolean
+	Boolean = 'boolean',
 }
 
 export type MethodOption = {

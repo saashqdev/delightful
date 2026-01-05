@@ -7,9 +7,9 @@ import { safeBinaryToBtoa } from "@/utils/encoding"
 const fileExtCache = new Map<string | File, FileTypeResult | undefined>()
 
 /**
- * 获取文件扩展名
- * @param url - 文件路径或文件对象
- * @returns 文件扩展名
+ * Get file extension
+ * @param url - File path or File object
+ * @returns File extension info
  */
 export const getFileExtension = async (url?: string | File) => {
 	if (!url) return undefined
@@ -66,9 +66,9 @@ const ensureFileExtension = (filename: string, extension: string): string => {
 }
 
 /**
- * 下载文件
- * @param url - 文件路径
- * @param name - 文件名(可选)
+ * Download file
+ * @param url - File path
+ * @param name - File name (optional)
  */
 export const downloadFile = async (url?: string, name?: string, ext?: string) => {
 	if (!url)
@@ -80,7 +80,7 @@ export const downloadFile = async (url?: string, name?: string, ext?: string) =>
 	try {
 		const extension = ext ?? (await getFileExtension(url))?.ext ?? ""
 
-		// 对于 Blob 链接,直接下载
+		// For Blob links, download directly
 		if (url.match(/^blob:/i)) {
 			const fileName = ensureFileExtension(name || "download", extension)
 			const link = document.createElement("a")
@@ -92,7 +92,7 @@ export const downloadFile = async (url?: string, name?: string, ext?: string) =>
 			return { success: true }
 		}
 
-		// 对于图片文件,使用 fetch 下载
+		// For image files, download via fetch
 		if (IMAGE_EXTENSIONS.includes(extension)) {
 			const blob =
 				extension === "svg"
@@ -101,7 +101,7 @@ export const downloadFile = async (url?: string, name?: string, ext?: string) =>
 			const downloadUrl = window.URL.createObjectURL(blob)
 			const link = document.createElement("a")
 			link.href = downloadUrl
-			// 如果没有提供文件名,从 URL 中提取，并确保有扩展名
+			// If no filename provided, derive from URL and ensure extension exists
 			const fileName = ensureFileExtension(name || "download", extension)
 			link.download = encodeURIComponent(fileName)
 			document.body.appendChild(link)
@@ -111,7 +111,7 @@ export const downloadFile = async (url?: string, name?: string, ext?: string) =>
 			return { success: true }
 		}
 
-		// 对于其他文件使用原来的方式
+		// Fallback for other file types
 		const fileName = ensureFileExtension(name || "download", extension)
 		const link = document.createElement("a")
 		link.href = url
@@ -131,7 +131,7 @@ export const downloadFile = async (url?: string, name?: string, ext?: string) =>
 
 /**
  * sha1
- * @param content - 内容
+ * @param content - Content
  * @returns sha1
  */
 async function sha1(content: ArrayBuffer | ArrayBufferView): Promise<Uint8Array> {
@@ -140,9 +140,9 @@ async function sha1(content: ArrayBuffer | ArrayBufferView): Promise<Uint8Array>
 }
 
 /**
- * 获取文件etag
- * @param file - 文件对象
- * @returns 文件etag
+ * Get file etag
+ * @param file - File object
+ * @returns File etag
  */
 export async function getFileEtag(file: Blob) {
 	const buffer = await new Promise<Uint8Array>((resolve, reject) => {
@@ -157,7 +157,7 @@ export async function getFileEtag(file: Blob) {
 		reader.readAsArrayBuffer(file)
 	})
 
-	// 以4M为单位分割
+	// Split into 4MB chunks
 	const blockSize = 4 * 1024 * 1024
 	const sha1String: Uint8Array[] = []
 	let prefix = 0x16
@@ -182,7 +182,7 @@ export async function getFileEtag(file: Blob) {
 		offset += item.length
 	})
 
-	// 如果大于4M，则对各个块的sha1结果再次sha1
+	// If larger than 4MB, hash the chunk hashes again
 	if (blockCount > 1) {
 		prefix = 0x96
 		sha1Buffer = await sha1(sha1Buffer)

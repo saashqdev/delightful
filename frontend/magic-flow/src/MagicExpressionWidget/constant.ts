@@ -13,53 +13,53 @@ export const STRING_FORMATS = [
 ]
 
 export const MOCK_SOURCE = [
-	{ name: "字符串", mock: "@string" },
-	{ name: "自然数", mock: "@natural" },
-	{ name: "浮点数", mock: "@float" },
-	{ name: "字符", mock: "@character" },
-	{ name: "布尔", mock: "@boolean" },
+	{ name: "String", mock: "@string" },
+	{ name: "Natural number", mock: "@natural" },
+	{ name: "Float", mock: "@float" },
+	{ name: "Character", mock: "@character" },
+	{ name: "Boolean", mock: "@boolean" },
 	{ name: "url", mock: "@url" },
-	{ name: "域名", mock: "@domain" },
-	{ name: "ip地址", mock: "@ip" },
+	{ name: "Domain", mock: "@domain" },
+	{ name: "IP address", mock: "@ip" },
 	{ name: "id", mock: "@id" },
 	{ name: "guid", mock: "@guid" },
-	{ name: "当前时间", mock: "@now" },
-	{ name: "时间戳", mock: "@timestamp" },
-	{ name: "日期", mock: "@date" },
-	{ name: "时间", mock: "@time" },
-	{ name: "日期时间", mock: "@datetime" },
-	{ name: "图片连接", mock: "@image" },
-	{ name: "图片data", mock: "@imageData" },
-	{ name: "颜色", mock: "@color" },
-	{ name: "颜色hex", mock: "@hex" },
-	{ name: "颜色rgba", mock: "@rgba" },
-	{ name: "颜色rgb", mock: "@rgb" },
-	{ name: "颜色hsl", mock: "@hsl" },
-	{ name: "整数", mock: "@integer" },
+	{ name: "Current time", mock: "@now" },
+	{ name: "Timestamp", mock: "@timestamp" },
+	{ name: "Date", mock: "@date" },
+	{ name: "Time", mock: "@time" },
+	{ name: "Datetime", mock: "@datetime" },
+	{ name: "Image url", mock: "@image" },
+	{ name: "Image data", mock: "@imageData" },
+	{ name: "Color", mock: "@color" },
+	{ name: "Color hex", mock: "@hex" },
+	{ name: "Color rgba", mock: "@rgba" },
+	{ name: "Color rgb", mock: "@rgb" },
+	{ name: "Color hsl", mock: "@hsl" },
+	{ name: "Integer", mock: "@integer" },
 	{ name: "email", mock: "@email" },
-	{ name: "大段文本", mock: "@paragraph" },
-	{ name: "句子", mock: "@sentence" },
-	{ name: "单词", mock: "@word" },
-	{ name: "大段中文文本", mock: "@cparagraph" },
-	{ name: "中文标题", mock: "@ctitle" },
-	{ name: "标题", mock: "@title" },
-	{ name: "姓名", mock: "@name" },
-	{ name: "中文姓名", mock: "@cname" },
-	{ name: "中文姓", mock: "@cfirst" },
-	{ name: "中文名", mock: "@clast" },
-	{ name: "英文姓", mock: "@first" },
-	{ name: "英文名", mock: "@last" },
-	{ name: "中文句子", mock: "@csentence" },
-	{ name: "中文词组", mock: "@cword" },
-	{ name: "地址", mock: "@region" },
-	{ name: "省份", mock: "@province" },
-	{ name: "城市", mock: "@city" },
-	{ name: "地区", mock: "@county" },
-	{ name: "转换为大写", mock: "@upper" },
-	{ name: "转换为小写", mock: "@lower" },
-	{ name: "挑选（枚举）", mock: "@pick" },
-	{ name: "打乱数组", mock: "@shuffle" },
-	{ name: "协议", mock: "@protocol" },
+	{ name: "Paragraph", mock: "@paragraph" },
+	{ name: "Sentence", mock: "@sentence" },
+	{ name: "Word", mock: "@word" },
+	{ name: "Chinese paragraph", mock: "@cparagraph" },
+	{ name: "Chinese title", mock: "@ctitle" },
+	{ name: "Title", mock: "@title" },
+	{ name: "Name", mock: "@name" },
+	{ name: "Chinese name", mock: "@cname" },
+	{ name: "Chinese surname", mock: "@cfirst" },
+	{ name: "Chinese given name", mock: "@clast" },
+	{ name: "English first name", mock: "@first" },
+	{ name: "English last name", mock: "@last" },
+	{ name: "Chinese sentence", mock: "@csentence" },
+	{ name: "Chinese word", mock: "@cword" },
+	{ name: "Region", mock: "@region" },
+	{ name: "Province", mock: "@province" },
+	{ name: "City", mock: "@city" },
+	{ name: "County", mock: "@county" },
+	{ name: "To uppercase", mock: "@upper" },
+	{ name: "To lowercase", mock: "@lower" },
+	{ name: "Pick (enum)", mock: "@pick" },
+	{ name: "Shuffle array", mock: "@shuffle" },
+	{ name: "Protocol", mock: "@protocol" },
 ]
 
 export const SCHEMA_TYPE = [
@@ -68,12 +68,12 @@ export const SCHEMA_TYPE = [
 	"string",
 	"number",
 	"boolean",
-	//   'integer', 暂时关闭
+	//   'integer', temporarily disabled
 ]
 
 export const ONLY_JSON_ROOT = ["object", "array"]
 
-// 键盘按键keyCode对照
+// KeyCode lookup table
 export const KeyCodeMap = {
 	ENTER: 13,
 	TAB: 9,
@@ -96,23 +96,23 @@ export const KeyCodeMap = {
 	ESC: 27,
 }
 
-// 参数值类型
+// Parameter value types
 export const enum ValueType {
 	CONST = "const",
 	EXPRESSION = "expression",
 }
 
-// 参数值类型对应的字段名称
+// Field names for each parameter value type
 export const FieldsName = {
 	[ValueType.CONST]: "const_value",
 	[ValueType.EXPRESSION]: "ExpressionValue",
 }
 
-/** 表达式模式 */
+/** Expression mode */
 export enum ExpressionMode {
-	/** 普通场景 */
+	/** Standard usage */
 	Common = "common",
-	/** 文本域 */
+	/** Textarea usage */
 	TextArea = "textarea",
 }
 

@@ -36,7 +36,7 @@ export const getAntdLocale = async (lang: string) => {
 		return locale
 	} catch (error) {
 		console.error(`Failed to load antd locale for ${normalLang}:`, error)
-		return null // 或者返回默认语言包
+		return null // Or return the default locale bundle
 	}
 }
 

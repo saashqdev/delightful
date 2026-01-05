@@ -1,35 +1,35 @@
-// 自定义流程事件名称
+// Custom flow event names
 export const FLOW_EVENTS = {
-  // 节点选中事件
+  // Node selected event
   NODE_SELECTED: 'flow:node-selected',
-  // 边选中事件
+  // Edge selected event
   EDGE_SELECTED: 'flow:edge-selected',
-  // 画布点击事件
+  // Canvas clicked event
   CANVAS_CLICKED: 'flow:canvas-clicked',
-  // 流程数据更新事件
+  // Flow data updated event
   FLOW_DATA_UPDATED: 'flow:data-updated',
-  // 布局变更事件
+  // Layout changed event
   LAYOUT_CHANGED: 'flow:layout-changed',
-  // 缩放事件
+  // Zoom event
   ZOOM_CHANGED: 'flow:zoom-changed',
 }
 
-// 事件总线工具
+// Event bus helpers
 export const flowEventBus = {
   /**
-   * 发送事件
-   * @param eventName 事件名称
-   * @param detail 事件详情
+   * Emit an event
+   * @param eventName Event name
+   * @param detail Event payload
    */
   emit: (eventName: string, detail?: any) => {
     window.dispatchEvent(new CustomEvent(eventName, { detail }))
   },
   
   /**
-   * 监听事件
-   * @param eventName 事件名称
-   * @param handler 事件处理函数
-   * @returns 清理函数
+   * Listen for an event
+   * @param eventName Event name
+   * @param handler Event handler
+   * @returns Cleanup function
    */
   on: (eventName: string, handler: (event: CustomEvent) => void) => {
     const wrappedHandler = (e: Event) => handler(e as CustomEvent)
@@ -38,9 +38,9 @@ export const flowEventBus = {
   },
   
   /**
-   * 移除事件监听
-   * @param eventName 事件名称
-   * @param handler 事件处理函数
+   * Remove an event listener
+   * @param eventName Event name
+   * @param handler Event handler
    */
   off: (eventName: string, handler: (event: CustomEvent) => void) => {
     window.removeEventListener(eventName, handler as EventListener)

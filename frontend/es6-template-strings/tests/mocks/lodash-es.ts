@@ -1,4 +1,4 @@
-// 模拟 lodash-es 的 omit 函数
+// Mock lodash-es omit function
 export function omit(obj: Record<string, any>, fields: string | string[]) {
 	const result: Record<string, any> = {}
 	const fieldsArray = typeof fields === "string" ? [fields] : fields

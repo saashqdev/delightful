@@ -3,7 +3,7 @@ import { reaction } from "mobx"
 import { userStore } from "@/opensource/models/user"
 
 /**
- * 获取当前用户信息
+ * Get current user accounts
  */
 export function useAccount() {
 	const [accounts, setAccounts] = useState(userStore.account.accounts)

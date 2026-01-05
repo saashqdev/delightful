@@ -10,15 +10,15 @@ export class UserStore {
 
 	organizations: User.UserOrganization[] = []
 
-	/** magic 组织 Code */
+	/** magic organization code */
 	organizationCode: string = ""
 
-	/** teamshare 组织 Code */
+	/** teamshare organization code */
 	teamshareOrganizationCode: string = ""
 
 	magicOrganizationMap: Record<string, User.MagicOrganization> = {}
 
-	/** 是否是管理员 */
+	/** Whether current user is an admin */
 	isAdmin: boolean = false
 
 	constructor() {
@@ -49,32 +49,32 @@ export class UserStore {
 		this.organizations = organizations
 	}
 
-	// 这里需要做的是设置麦吉组织同步天书组织，设置天书组织同步麦吉组织
+	// Sync magic organization with teamshare and vice versa
 
 	/**
-	 * @description 根据 magic 组织 Code 获取组织对象
-	 * @param {string} organizationCode magic体系的组织Code
+	 * @description Get organization object by magic organization code
+	 * @param {string} organizationCode Organization code in the magic system
 	 */
 	getOrganizationByMagic = (organizationCode: string) => {
 		const { organizations, magicOrganizationMap } = this
 		const orgMap = keyBy(organizations, "organization_code")
-		// 获取 teamshare 组织 Code
+		// Get teamshare organization code
 		return orgMap?.[
 			magicOrganizationMap?.[organizationCode]?.third_platform_organization_code ?? ""
 		]
 	}
 
 	/**
-	 * @description 获取当前账号所处组织信息 非 React 场景使用
+	 * @description Get organization info for current account (non-React usage)
 	 * @return {User.UserOrganization | undefined}
 	 */
 	getOrganization = (): User.UserOrganization | null => {
 		const { organizations, organizationCode, magicOrganizationMap, teamshareOrganizationCode } =
 			this
-		// 获取组织映射
+		// Build organization map
 		const orgMap = keyBy(organizations, "organization_code")
 		let org = null
-		// 根据 magic 组织 Code 尝试获取组织
+		// Try fetching org by magic organization code
 		if (organizationCode) {
 			org =
 				orgMap?.[

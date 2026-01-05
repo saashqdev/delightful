@@ -1,5 +1,5 @@
 /**
- * 管理当前表单组件自身数据源
+ * Manage the data source owned by the current form component
  */
 
 import _ from 'lodash';
@@ -25,7 +25,7 @@ export default function useExpressionSource({
     }
   }, [allowSourceInjectBySelf]);
 
-  // json-schema转当前表单内部数据源map
+  // Convert JSON schema to a map of internal data sources for this form
   const tranSchemaToExpressionSourceMap = useCallback(
     (schema: Schema): Record<string, Common.Options> => {
       const result = {} as Record<string, Common.Options>;
@@ -40,7 +40,7 @@ export default function useExpressionSource({
             label: _schema.title || key,
             value: `${uniqueFormId}.${key}`,
           });
-          // items优先级高，因为有items就表示是array类型，但是有properties有可能是array可能是object
+          // items has higher priority: presence of items implies an array; properties could be array or object
           if (_schema.items) {
             gen({ items: _schema.items }, [...parentKeys, key]);
           } else if (_schema.properties) {
@@ -59,13 +59,13 @@ export default function useExpressionSource({
   const updateInnerSourceMap = useCallback(
     (schema: Schema) => {
       if (!allowSourceInjectBySelf) return {} as Record<string, Common.Options>;
-      // if (!uniqueFormId) console.error('props uniqueFormId 未传');
+      // if (!uniqueFormId) console.error('props uniqueFormId is missing');
 
       const newInnerSourceMap = tranSchemaToExpressionSourceMap(schema);
 
       // console.log('newInnerSourceMap', newInnerSourceMap);
 
-      // 将schema转成map
+      // Persist the schema-derived map
       setInnerSourceMap(newInnerSourceMap);
 
       return newInnerSourceMap;

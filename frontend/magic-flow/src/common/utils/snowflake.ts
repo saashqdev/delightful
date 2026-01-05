@@ -2,19 +2,12 @@
 import SnowFlakeId from "snowflake-id"
 
 /**
- * @description 随机生成
- * @param min
- * @param max
- * @return {*}
+ * Random integer generator
  */
 export const random = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min
 
 /**
- * @description 随机生成不同类型的指定长度字符串
- * @param len
- * @param type
- * @param {string} prexfix
- * @return {string}
+ * Generate a random string of a given length and character set
  */
 export const randomString = (len = 64, type = "default", prexfix = "") => {
 	const strMap: Record<string, string> = {
@@ -33,7 +26,7 @@ export const randomString = (len = 64, type = "default", prexfix = "") => {
 	return prexfix + result
 }
 
-// 雪花id生成
+// Snowflake ID generator
 const snowflake = new SnowFlakeId({
 	mid: Math.floor(Math.random() * 1e10),
 	offset: (2021 - 1970) * 365 * 24 * 3600 * 1000
@@ -42,7 +35,7 @@ const snowflake = new SnowFlakeId({
 export function generateSnowFlake (prefix = "") {
 	if (prefix) {
 		// return prefix + md5(snowflake.generate())
-		// 不再使用雪花 + md5 的组合，长度过长，数据量大，改为 8 位随机字符串
+		// Stop using snowflake + md5 combo (too long); switch to 8-char random string
 		return randomString(8)
 	} else {
 		return snowflake.generate()

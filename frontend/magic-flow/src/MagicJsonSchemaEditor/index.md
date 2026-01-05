@@ -1,10 +1,10 @@
-# 表单组件 v2
+# Form Component v2
 
 ```shell
 yarn add @feb/json-schema-editor
 ```
 
-## 基本使用
+## Basic Usage
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -99,9 +99,9 @@ export default () => {
 }
 ```
 
-## 支持表达式
+## Enable Expressions
 
-该组件默认不支持表达式，如果需要支持表达式，需要将`allowExpression`设置为`true`，并且需要设置表达式数据源`expressionSource`
+By default expressions are disabled. To enable them, set `allowExpression` to `true` and provide an expression data source via `expressionSource`.
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -119,9 +119,9 @@ export default () => (
 );
 ```
 
-<!-- ## 根节点支持普通格式
+<!-- ## Allow Non-JSON Root Types
 
-根节点默认只支持 array、object 类型，如果需要让根节点接手其他类型需要把`onlyJson`设置为`false`
+The root node supports only `array` and `object` by default. Set `onlyJson` to `false` to allow other root types.
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -134,9 +134,9 @@ const handleOnChange = value => {
 export default () => <JsonSchemaEditor onlyJson={false} onChange={handleOnChange}/>;
 ``` -->
 
-## 不支持手动添加、删除元素
+## Disable Manual Add/Delete
 
-默认支持添加、删除元素的操作，如果将`allowOperation`设置为`false`，则不允许，只能通过数据联动
+Add/Delete is enabled by default. Set `allowOperation` to `false` to prevent manual operations and rely on data linkage only.
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -149,9 +149,9 @@ const handleOnChange = value => {
 export default () => <JsonSchemaEditor allowOperation={false} onChange={handleOnChange}/>;
 ```
 
-## 自定义参数类型可选项
+## Customize Allowed Types
 
-目前可选项支持：`object、array、string、number、boolean` 类型，不属于其中的类型会被过滤掉，当同时设置`onlyJson`和`customOptions`，后者优先级更高
+Currently the allowed types are `object`, `array`, `string`, `number`, and `boolean`; other types are filtered out. When both `onlyJson` and `customOptions` are set, `customOptions` takes precedence.
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -169,7 +169,7 @@ const handleOnChange = value => {
 export default () => <JsonSchemaEditor customOptions={customOptions} onChange={handleOnChange}/>;
 ```
 
-<!-- ## 开启 json import 功能
+<!-- ## Enable JSON Import
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -177,7 +177,7 @@ import JsonSchemaEditor from './index';
 export default () => <JsonSchemaEditor jsonImport />;
 ``` -->
 
-## 不生成第一个子节点
+## Skip Auto-Creating First Child
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -185,7 +185,7 @@ import JsonSchemaEditor from './index';
 export default () => <JsonSchemaEditor oneChildAtLeast={false} />;
 ```
 
-## 自定义第一个子节点的key
+## Customize First Child Key
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -193,7 +193,7 @@ import JsonSchemaEditor from './index';
 export default () => <JsonSchemaEditor firstChildKey="organization" />;
 ```
 
-## 使用api形式新增节点
+## Add Nodes via API
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -226,14 +226,14 @@ const onDelExcludeFirst = () => {
 }
 
 export default () => <>
-    <Button onClick={onAdd} type="primary">添加</Button>
-    <Button onClick={onDel} type="primary" style={{marginLeft: '10px'}}>删除field_0节点</Button>
-    <Button onClick={onDelExcludeFirst} type="primary" style={{marginLeft: '10px'}}>删除不是field_0之外的所有子节点</Button>
+    <Button onClick={onAdd} type="primary">Add</Button>
+    <Button onClick={onDel} type="primary" style={{marginLeft: '10px'}}>Delete field_0</Button>
+    <Button onClick={onDelExcludeFirst} type="primary" style={{marginLeft: '10px'}}>Delete all except field_0</Button>
     <JsonSchemaEditor ref={refInstance} allowOperation={false}/>
 </>;
 ```
 
-## 禁用参数名的填写
+## Disable Editing Parameter Key
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -241,7 +241,7 @@ import JsonSchemaEditor from './index';
 export default () => <JsonSchemaEditor disableFields={['key']} />;
 ```
 
-## 不显示参数值列
+## Hide Value Column
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -250,7 +250,7 @@ import { ShowColumns } from "./constants";
 export default () => <JsonSchemaEditor displayColumns={[ShowColumns.Key, ShowColumns.Label, ShowColumns.Type, ShowColumns.Description]} />;
 ```
 
-## 不显示参数类型和显示名称列
+## Hide Type and Label Columns
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -259,19 +259,19 @@ import { ShowColumns } from "./constants";
 export default () => <JsonSchemaEditor displayColumns={[ShowColumns.Key, ShowColumns.Value]} allowExpression/>;
 ```
 
-## 自定义显示名称
+## Customize Column Labels
 
 ```jsx
 import JsonSchemaEditor from './index';
 import { ShowColumns } from "./constants";
 
 export default () => <JsonSchemaEditor columnNames={{
-	[ShowColumns.Label]: "变量名称",
-	[ShowColumns.Key]: "变量Key"
+    [ShowColumns.Label]: "Variable Name",
+    [ShowColumns.Key]: "Variable Key"
 }}/>;
 ```
 
-## 不允许添加参数
+## Disallow Adding Parameters
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -280,7 +280,7 @@ import { ShowColumns } from "./constants";
 export default () => <JsonSchemaEditor showAdd={false} showOperation={false}/>;
 ```
 
-## 特殊字段处理
+## Special Field Handling
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -296,7 +296,7 @@ export default () => {
 		"type": "array",
 		"key": "root",
 		"sort": 0,
-		"title": "上下文记忆",
+        "title": "Context Memory",
 		"description": "",
 		"required": null,
 		"value": null,
@@ -304,7 +304,7 @@ export default () => {
 			"type": "object",
 			"key": "messages",
 			"sort": 0,
-			"title": "历史消息",
+            "title": "Message History",
 			"description": "",
 			"required": [
 				"role",
@@ -317,7 +317,7 @@ export default () => {
 					"type": "string",
 					"key": "role",
 					"sort": 0,
-					"title": "角色",
+                    "title": "Role",
 					"description": "",
 					"required": null,
 					"value": null,
@@ -328,7 +328,7 @@ export default () => {
 					"type": "string",
 					"key": "content",
 					"sort": 1,
-					"title": "内容",
+                    "title": "Content",
 					"description": "",
 					"required": null,
 					"value": null,
@@ -341,7 +341,7 @@ export default () => {
 	})
 
 	const mockConstantExpressionOptions = [{
-		"title": "常量",
+        "title": "Constants",
 		"key": "",
 		"nodeId": "Wrapper",
 		"nodeType": "21",
@@ -349,7 +349,7 @@ export default () => {
 		"isRoot": true,
 		"children": [
 			{
-				"title": "用户",
+                "title": "User",
 				"key": "user",
 				"nodeId": "",
 				"nodeType": "21",
@@ -359,7 +359,7 @@ export default () => {
 				"isConstant": true
 			},
 			{
-				"title": "机器人",
+                "title": "System",
 				"key": "system",
 				"nodeId": "",
 				"nodeType": "21",
@@ -394,9 +394,9 @@ export default () => {
 }
 ```
 
-## 支持加密
+## Enable Encryption
 
-如果需要进行字段的隐藏显示，则需要开启加密字段，并且需要由后端进行加密后赋值到encryption_value，value会一直是null，如果修改了value，则后端会进一步进行加密
+To hide field values, enable encryption. The backend must encrypt and fill `encryption_value`; `value` remains null. If `value` is modified, the backend will re-encrypt it.
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -536,19 +536,19 @@ export default () => {
 
 
 
-<!-- ## 允许使用当前表单的字段作为表达式数据源
+<!-- ## Allow Using Current Form Fields as an Expression Source
 
 ```jsx
 import JsonSchemaEditor from './index';
 
 const source = [
     {
-        "label": "系统变量",
+        "label": "System variables",
         "value": "fields_6530fe660cd5f",
         "desc": "",
         "children": [
             {
-                "label": "http状态码",
+                "label": "HTTP status code",
                 "value": "guzzle.response.http_code"
             }
         ]
@@ -566,19 +566,19 @@ export default () => (
 );
 ``` -->
 
-<!-- ## 注入上文表达式数据源
+<!-- ## Inject Upstream Expression Source
 
 ```jsx
 import JsonSchemaEditor from './index';
 
 const source = [
     {
-        "label": "系统变量",
+        "label": "System variables",
         "value": "fields_6530fe660cd5f",
         "desc": "",
         "children": [
             {
-                "label": "http状态码",
+                "label": "HTTP status code",
                 "value": "guzzle.response.http_code"
             }
         ]
@@ -587,16 +587,16 @@ const source = [
 
 const contextSource = [
     {
-        "label": "入参配置",
+        "label": "Input configuration",
         "value": "fields",
         "desc": "",
         "children": [
             {
-                "label": "上文字段一",
+                "label": "Upstream field one",
                 "value": "XXX.one"
             },
             {
-                "label": "上文字段二",
+                "label": "Upstream field two",
                 "value": "XXX.two"
             }
         ]
@@ -617,7 +617,7 @@ export default () => (
 );
 ``` -->
 
-<!-- ## 开启 调试模式
+<!-- ## Enable Debug Mode
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -625,7 +625,7 @@ import JsonSchemaEditor from './index';
 export default () => <JsonSchemaEditor debuggerMode />;
 ``` -->
 
-<!-- ## json 编辑器
+<!-- ## JSON Editor
 
 ```jsx
 import JsonSchemaEditor from './index';
@@ -639,7 +639,7 @@ export default () => <JsonSchemaEditor jsonEditor />;
 npm install monaco-editor
 ```
 
-组件中的 JSON 编辑器用的是在线加载 cdn 的方式，离线使用需添加以下内容
+The JSON editor uses a CDN; for offline use add the following
 
 ```jsx ｜ pure
 import { loader } from '@monaco-editor/react';
@@ -647,40 +647,40 @@ import * as monaco from 'monaco-editor';
 loader.config({ monaco });
 ``` -->
 
-## 表达式数据源数据结构
+## Expression Data Source Shape
 
-具体看表达式示例
+See the expression example for details.
 
-| 参数名称    | 描述                                               | 类型   | 是否必填 |
-| ----------- | -------------------------------------------------- | ------ | -------- |
-| label       | 标签                                               | string | 是       |
-| value       | 实际选中值                                         | string | 是       |
-| return_type | 函数块返回值类型，级联选项是函数时才有             | string | -        |
-| args        | 函数块入参，是一个参数块数组，级联选项是函数时才有 | array  | -        |
-| desc        | 函数块描述，级联选项是函数时才有                   | string | -        |
-| children    | 函数块子选项，级联选项是函数时才有                 | array  | -        |
+| Param        | Description                                                          | Type   | Required |
+| ------------ | -------------------------------------------------------------------- | ------ | -------- |
+| label        | Display label                                                        | string | Yes      |
+| value        | Actual selected value                                                | string | Yes      |
+| return_type  | Return type when the cascader option is a function                   | string | -        |
+| args         | Function parameters (array of parameter blocks) when option is a function | array  | -        |
+| desc         | Function description when option is a function                       | string | -        |
+| children     | Nested options when option is a function                             | array  | -        |
 
 ## API
 
-| 参数名称        | 描述                       | 类型                     | 默认值 |
-| --------------- | -------------------------- | ------------------------ | ------ |
-| jsonEditor      | 是否展示 json 编辑器       | boolean                  | -      |
-| onChange        | Schema 变更的回调          | (schema: Schema) => void | -      |
-| onBlur        | 编辑器 失去焦点的回调          | (schema: Schema) => void | -      |
-| data            | 初始化 Schema              | Schema or string         | -      |
-| allowExpression | 是否允许参数值用表达式形式 | boolean                  | false  |
-| onlyJson        | 是否根节点只支持复杂类型   | boolean                  | true   |
-| customOptions   | 自定义节点可选项           | object                   | {}     |
-| jsonImport      | 是否开启 import json 功能  | boolean                  | false  |
-| debuggerMode    | 是否开启调试结果模式       | boolean                  | false  |
-| allowOperation    | 是否支持手动添加、删除元素       | boolean                  | true  |
-| oneChildAtLeast    | 是否最少一个子节点       | boolean                  | true  |
-| firstChildKey    | 默认生成的第一个子节点的key       | string                  | field_0  |
-| disabledFields    | 全局禁用某些字段，不可让用户填写       | DisableField[]     | []  |
-| appendPosition    | 插入方式，当前元素后位还是尾部添加       | AppendPosition     | AppendPosition.Next  |
-| allowSourceInjectBySelf      | 是否允许计算当前表单的字段作为数据源      | boolean     | false  |
-| uniqueFormId    | 当前表单唯一id      | string     | -  |
-| contextExpressionSource    | 上文表达式数据源      | ExpressionSource     | -  |
-| onInnerSourceMapChange | 当前表单内部表达式数据源变更函数   | (innerSource: Record<string, Common.Options>) => void | -  |
-| displayColumns | 可以显示的列   | ShowColumns[] | [1,2,3,4]  |
+| Param                   | Description                                                | Type                                      | Default                  |
+| ----------------------- | ---------------------------------------------------------- | ----------------------------------------- | ------------------------ |
+| jsonEditor              | Whether to show the JSON editor                            | boolean                                   | -                        |
+| onChange                | Callback when the schema changes                           | (schema: Schema) => void                  | -                        |
+| onBlur                  | Callback when the editor loses focus                       | (schema: Schema) => void                  | -                        |
+| data                    | Initial schema                                             | Schema or string                          | -                        |
+| allowExpression         | Allow values to be expressions                             | boolean                                   | false                    |
+| onlyJson                | Restrict the root node to complex types                    | boolean                                   | true                     |
+| customOptions           | Custom node options                                        | object                                    | {}                       |
+| jsonImport              | Enable importing JSON                                      | boolean                                   | false                    |
+| debuggerMode            | Enable debug mode                                          | boolean                                   | false                    |
+| allowOperation          | Allow manually adding/removing elements                    | boolean                                   | true                     |
+| oneChildAtLeast         | Require at least one child                                 | boolean                                   | true                     |
+| firstChildKey           | Key for the first auto-generated child                     | string                                    | field_0                  |
+| disabledFields          | Globally disabled fields (user cannot edit)                | DisableField[]                            | []                       |
+| appendPosition          | Insertion position (after current or at tail)              | AppendPosition                            | AppendPosition.Next      |
+| allowSourceInjectBySelf | Allow current form fields to be used as a data source      | boolean                                   | false                    |
+| uniqueFormId            | Unique id for the current form                             | string                                    | -                        |
+| contextExpressionSource | Upstream expression data source                            | ExpressionSource                          | -                        |
+| onInnerSourceMapChange  | Callback when internal expression data source changes      | (innerSource: Record<string, Common.Options>) => void | -                        |
+| displayColumns          | Columns to display                                         | ShowColumns[]                             | [1,2,3,4]                |
 

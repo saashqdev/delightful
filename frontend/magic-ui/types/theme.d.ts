@@ -7,13 +7,13 @@ export interface NewToken {
 	magicColorUsages: ColorUsages
 }
 
-// 通过声明合并扩展 antd-style 的 `token` 类型
-// 通过给 antd-style 扩展 CustomToken 对象类型定义，可以为 useTheme 中增加相应的 token 对象
+// Extend antd-style `token` type via declaration merging
+// Add CustomToken shape so useTheme exposes these token objects
 declare module "antd-style" {
 	export interface CustomToken extends NewToken {}
 }
 
-// 扩展 antd 的 token 类型
+// Extend antd token types
 declare module "antd/es/theme/interface" {
 	export interface FullToken extends NewToken {}
 	export interface AliasToken extends NewToken {}

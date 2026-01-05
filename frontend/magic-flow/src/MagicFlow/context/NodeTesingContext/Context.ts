@@ -12,7 +12,7 @@ export type NodeTestConfig = {
 	output?: Record<string, any>
 	children_ids?: string[]
 	loop_debug_results?: NodeTestConfig[]
-	// debug日志
+	// Debug logs
 	debug_log?: Record<string, any>
 }
 

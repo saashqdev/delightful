@@ -22,7 +22,7 @@ const useVersion = () => {
 		type: "module",
 	})
 
-	// 通知更新弹窗
+	// Notify user about an available update
 	const openNotification = useCallback(() => {
 		openedRef.current = true
 		forbidUpdate.current = true
@@ -62,7 +62,7 @@ const useVersion = () => {
 		}
 	}, [modal, refresh, t])
 
-	// 根据版本判断是否更新
+	// Decide whether to prompt for an update based on version
 	const handlePageUpdateCheck = useCallback(
 		(latestVersion: string) => {
 			try {
@@ -72,7 +72,7 @@ const useVersion = () => {
 						versionRef.current = latestVersion
 					} else if (currentVersion === latestVersion) {
 						// eslint-disable-next-line no-console
-						console.log("最新版本", latestVersion)
+						console.log("Latest version", latestVersion)
 					} else if (
 						isBreakingVersion(currentVersion, latestVersion) &&
 						!forbidUpdate.current &&
@@ -88,17 +88,17 @@ const useVersion = () => {
 		[openNotification],
 	)
 
-	// 关闭检测
+	// Stop polling
 	const stopPollingPageUpdate = useCallback(() => {
 		stop()
 	}, [stop])
 
-	// 开启检测
+	// Start polling
 	const startPollingPageUpdate = useCallback(() => {
-		// 非生产环境不进行版本更新提示
+		// Skip update prompts outside production
 		if (window?.CONFIG?.MAGIC_APP_ENV !== AppEnv.Production) return
 		stopPollingPageUpdate()
-		// 重新计时
+		// Reset timer
 		start()
 	}, [start, stopPollingPageUpdate])
 
@@ -111,7 +111,7 @@ const useVersion = () => {
 	}, [startPollingPageUpdate, stopPollingPageUpdate])
 
 	useEffect(() => {
-		// 初始化时，不会触发visibilitychange事件，先主动开启轮询检测
+		// visibilitychange does not fire on init, so start polling proactively
 		startPollingPageUpdate()
 		document.addEventListener("visibilitychange", handleVisibilitychange)
 		return () => {
@@ -128,7 +128,7 @@ const useVersion = () => {
 						handlePageUpdateCheck(data.data)
 						break
 					case ReflectMessageType.REFLECT_REFRESH:
-						// 其他tab页面手动更新，同步更新
+						// Another tab refreshed manually; sync this tab
 						window.location.reload()
 						break
 					default:

@@ -13,11 +13,11 @@ describe("MagicSpin", () => {
 			</MagicThemeProvider>,
 		)
 
-		// 检查是否渲染了子元素
+		// Verify children render
 		expect(screen.getByText("内容区域")).toBeInTheDocument()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础加载器快照", () => {
 			const { asFragment } = render(

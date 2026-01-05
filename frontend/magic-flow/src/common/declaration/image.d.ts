@@ -1,4 +1,4 @@
-//文件内容:
+// File declarations
 declare module "*.svg";
 declare module "*.png";
 declare module "*.jpg";

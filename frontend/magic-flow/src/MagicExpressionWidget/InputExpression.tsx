@@ -69,7 +69,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 		hasEncryptionValue = false,
 		showExpand = false,
 		isInFlow = true,
-		// 参数值设置
+		// Parameter value configuration
 	} = props
 
 	const { t } = useTranslation()
@@ -78,10 +78,10 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 
 	const { getZoom } = useReactFlow()
 	const currentZoom = getZoom()
-	// 将maxHeight统一转换为数字
+	// Normalize maxHeight to a numeric value
 	const parsedMaxHeight = useMemo(() => parseSizeToNumber(maxHeight), [maxHeight])
 
-	// 过滤初始空值
+	// Filter out initial empty values
 	const filterValue = useMemo(() => {
 		if (!propVal) return null
 		const cloneValue = _.cloneDeep(propVal) as InputExpressionValue
@@ -91,7 +91,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 		return cloneValue
 	}, [propVal])
 
-	// 当清空值时，需要记录当前的值类型
+	// When clearing the value, remember the current value type
 	const [lastValueType, setLastValueType] = useState(VALUE_TYPE.CONST)
 
 	const [expressionVal, onChange] = useControllableValue({
@@ -128,7 +128,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 	const [allowExpressionGlobal, setAllowExpressionGlobal] = useState(allowExpression)
 
 	const valueFieldName = useMemo(() => {
-		// 业务指定了类型，直接使用该类型
+		// If the caller specifies a type, use it directly
 		if (pointedValueType) return pointedValueType
 		if (!expressionVal) return FIELDS_NAME[VALUE_TYPE.CONST]
 		return FIELDS_NAME[expressionVal.type] as keyof InputExpressionValue
@@ -221,7 +221,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 				const oldValue = foundItem[`${renderType}_value`] || []
 				let newValue = val[`${renderType}_value`] || []
 
-				// 处理选择引用值的情况
+				// Handle the case of selecting a reference value
 				if (val.type === LabelTypeMap.LabelFunc || val.type === LabelTypeMap.LabelNode) {
 					newValue = _.castArray(val)
 				}
@@ -236,7 +236,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 				]
 			}
 		}
-		// 当有选择了某个块，优先进行替换
+		// If a block is selected, replace it first
 		if (selectedNodeId) {
 			const index = copyValue.findIndex(
 				(item: EXPRESSION_ITEM) => item.uniqueId === selectedNodeId,
@@ -244,17 +244,17 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 			if (index > -1) {
 				copyValue.splice(index, 1, val)
 				resultValue = copyValue
-				// 重置光标以及选中的元素
+				// Reset cursor and selected node
 				editRef?.current?.setCursor({ id: "", type: "", offset: -1 })
 				editRef?.current?.setCurrentNode?.("")
 			}
 		}
-		// 数据不存在，且没有next和prev的关系，直接push
+		// No existing data and no prev/next links: push directly
 		else if (!editRef.current || (!currentId && !prevId && !nextId)) {
 			copyValue.push(val)
 			resultValue = copyValue
 		}
-		// 数据不存在，存在next和prev的关系
+		// No existing data but prev/next links exist
 		else if (!existItem) {
 			let p = -1
 			if (prevId) {
@@ -269,7 +269,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 			if (p < 0) copyValue.push(val)
 			resultValue = copyValue
 		}
-		// 处理兜底情况，在中间插入内容时
+		// Fallback handling when inserting content in the middle
 		else {
 			resultValue = copyValue.reduce((res, item) => {
 				if (item.uniqueId !== currentId) {
@@ -294,7 +294,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 				const newId = generateSnowFlake()
 				res.push({
 					...item,
-					// 将 < 和 > 替换为 HTML 实体，防止作为 HTML 解析
+					// Replace < and > with HTML entities to avoid HTML parsing
 					value: leftValue,
 				})
 				// console.log(
@@ -307,13 +307,13 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 				res.push({
 					...item,
 					uniqueId: newId,
-					// 将 < 和 > 替换为 HTML 实体，防止作为 HTML 解析
+					// Replace < and > with HTML entities to avoid HTML parsing
 					value: rightValue,
 				})
 				return res
 			}, [] as EXPRESSION_VALUE[])
 		}
-		// 需要统一进行一次转换处理，避免存储<和>，让浏览器识别为元素
+		// Sanitize stored values to avoid < and > being interpreted as elements
 		return resultValue.map((val) => {
 			if (val.type === LabelTypeMap.LabelText) {
 				val.value = transferSpecialSign(val.value)
@@ -332,7 +332,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 
 	const insertValue = useMemoizedFn((val: EXPRESSION_VALUE) => {
 		setOpen(false)
-		// 开启了多选且不是表达式的情况下
+		// If multiple selection is enabled while not in expression mode
 		if (!multiple && valueType === VALUE_TYPE.CONST) {
 			onChange({
 				...expressionVal,
@@ -342,11 +342,11 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 		}
 
 		if (val.type === LabelTypeMap.LabelFunc) {
-			// 当插入的函数节点
+			// When inserting a function node
 			const argsLength = val?.rawOption?.arg?.length || 0
-			// 插入默认的表达式数据格式
+			// Initialize default expression data for args
 			val.args = Array(argsLength).fill(defaultExpressionValue)
-			// 用完删除原始数据源
+			// Remove the raw option after use
 			delete val.rawOption
 		}
 
@@ -363,7 +363,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 		onChange(updatedExpressionVal)
 	})
 
-	/** mode为common时添加块元素的方法 */
+	/** Method to add block elements when mode is common */
 	const handleAddLabel = useMemoizedFn(
 		// @ts-ignore
 		(val, selectedOptions) => {
@@ -382,9 +382,9 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 				return
 			}
 			if (val[0].includes(LabelTypeMap.LabelFunc)) {
-				// 当插入的函数节点
+				// When inserting a function node
 				const argsLength = selectedOptions[selectedOptions.length - 1]?.arg?.length || 0
-				// 插入默认的表达式数据格式
+				// Initialize default expression data for args
 				// @ts-ignore
 				newNode.args = Array(argsLength).fill(defaultExpressionValue)
 			}
@@ -428,7 +428,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 		const copyValue = Array.isArray(value) ? cloneDeep(value) : []
 		setShowPlaceholder(!copyValue.length)
 
-		// 只在值真正改变时才更新
+		// Only update when the value actually changes
 		// console.log(!isEqual(copyValue, lastDate.current), copyValue, lastDate.current)
 		if (!isEqual(copyValue, lastDate.current)) {
 			copyValue.forEach((item) => {
@@ -452,12 +452,12 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 		return disabled
 	}, [disabled])
 
-	// 是否显示切换器
+	// Whether to show the type switcher
 	const showSwitch = useMemo(() => {
 		return allowExpression && mode !== ExpressionMode.TextArea && !onlyExpression
 	}, [allowExpression, mode, onlyExpression])
 
-	/** 弹层位置 */
+	/** Popup position */
 	const [position, setPosition] = useState({
 		left: 0,
 		top: 0,
@@ -555,7 +555,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 											value={valueType}
 										/>
 									)}
-									{/* 使用新的 ExpandModal 组件替换原有的放大按钮 */}
+									{/* Use the new ExpandModal component instead of the old enlarge button */}
 									{showExpand && (
 										<ExpandModal
 											value={expressionVal}
@@ -581,7 +581,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 												userInput={userInput}
 												renderConfig={renderConfig}
 												valueType={valueType}
-												// 用于给内部判断是否需要显示弹层(比如部门选择器)
+												// Allow inner components to decide whether to show a modal (e.g., department picker)
 												dropdownOpen={extraCascaderProps?.open}
 											/>
 										)}

@@ -50,7 +50,7 @@ export default class SchemaDescription {
     customFieldName,
   }: {
     keys: string[];
-    /** 自定义field的name */
+    /** Custom field name */
     customFieldName?: string;
   }): void {
     let fieldName = '';
@@ -60,7 +60,7 @@ export default class SchemaDescription {
 	const parentKeys = keys.slice(0, -1)
 	let parentField = _.get(clonedSchema, parentKeys)
 	if(parentKeys.length == 0) parentField = clonedSchema
-	//  处理数组添加字成员情况
+  // Handle adding members to an array
 	if(parentField?.type === FormItemType.Array) {
 		fieldName = `${Object.keys(currentField || {}).length}`
 		clonedSchema = _.update(clonedSchema, keys, (n) =>
@@ -107,29 +107,29 @@ export default class SchemaDescription {
     const clonedSchema = _.clone(this.schema);
     const propertiesData = _.get(this.schema, keys);
     
-    // 获取父级字段类型
+    // Get the parent field type
     const parentKeys = getParentKey(keys);
     const parentField = parentKeys.length
       ? _.get(this.schema, parentKeys)
       : this.schema;
     
-    // 根据父级类型确定fieldName
+    // Determine fieldName based on parent type
     let fieldName: string;
     if (parentField?.type === FormItemType.Array) {
-      // 如果父级是数组，fieldName为数字索引
+      // When parent is an array, use a numeric index
       fieldName = `${Object.keys(propertiesData || {}).length}`;
     } else {
-      // 非数组类型，使用原有的命名逻辑
+      // For non-array types, use the existing naming logic
       fieldName = `field_${this.fieldNum++}`;
       while (typeof propertiesData[fieldName] !== 'undefined') {
         fieldName = `field_${this.fieldNum++}`;
       }
     }
     
-    // 根据父级字段类型判断添加什么类型的字段
-    let fieldType = 'string'; // 默认为字符串类型
+    // Choose field type based on parent field type
+    let fieldType = 'string'; // Default to string type
     if (parentField?.type === FormItemType.Array) {
-      // 如果父级是数组，则添加的字段类型与数组项类型一致
+      // When parent is an array, match the array item type
       const itemsType = parentField.items?.type;
       if (itemsType) {
         fieldType = itemsType;
@@ -150,9 +150,9 @@ export default class SchemaDescription {
         [fieldName]: getDefaultSchema(fieldType),
       });
     }
-    // 默认是添加到下一个节点
+    // Default behavior: append to the next node
     let newSchema = _.update(clonedSchema, keys, () => newPropertiesData);
-    // 如果指定添加到尾部时的处理路径
+    // If append to tail is specified, handle that path
     if (position === AppendPosition.Tail) {
       newSchema = _.update(clonedSchema, keys, (n) =>
         _.assign(n, newPropertiesData),
@@ -162,7 +162,7 @@ export default class SchemaDescription {
   }
 
   changeType({ keys, value, itemsType }: { keys: string[]; value: string; itemsType?: string }): void {
-    // 获取父级字段
+    // Get the parent field
     const parentKeys = getParentKey(keys);
     const parentField = parentKeys.length
       ? _.get(this.schema, parentKeys)
@@ -191,7 +191,7 @@ export default class SchemaDescription {
     keys,
     name,
     position,
-    fields // 导入时才需要传的内容
+    fields // Only needed when importing content
   }: {
     keys: string[];
     name?: string;
@@ -209,22 +209,22 @@ export default class SchemaDescription {
       for (const i in propertiesData) {
         newPropertiesData[i] = propertiesData[i];
         if (i === name) {
-          // 导入所有属性
+          // Import all properties
           Object.entries(cloneFields?.properties || {}).forEach(([key, schema]) => {
             newPropertiesData[key] = schema;
           });
         }
       }
     } else {
-      // 直接导入所有属性
+      // Directly import all properties
       newPropertiesData = _.assign(propertiesData, {
         ...cloneFields.properties
       });
     }
     
-    // 默认是添加到下一个节点
+    // Default behavior: append to the next node
     let newSchema = _.update(clonedSchema, keys, () => newPropertiesData);
-    // 如果指定添加到尾部时的处理路径
+    // If appending to the tail is specified, handle that path
     if (position === AppendPosition.Tail) {
       newSchema = _.update(clonedSchema, keys, (n) =>
         _.assign(n, newPropertiesData),
@@ -270,7 +270,7 @@ export default class SchemaDescription {
     name: string;
     value: string;
   }): void {
-    // 获取父级字段
+    // Get the parent field
     const parentKeys = getParentKey(keys);
     const parentField = parentKeys.length
       ? _.get(this.schema, parentKeys)

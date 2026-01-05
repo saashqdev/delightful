@@ -3,7 +3,7 @@ import { nodeManager } from "@/MagicFlow"
 import i18next from "i18next"
 
 
-/** 获取bool值的常量引用 */
+/** Get the default constant references for boolean values */
 export const getDefaultBooleanConstantSource = () => {
 
 	const variableNodeType = nodeManager.variableNodeTypes?.[0]

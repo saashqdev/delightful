@@ -2,7 +2,7 @@ import type { ColorScales, ColorUsages } from "@/common/utils/palettes"
 import { merge } from "lodash"
 import type { ThemeAppearance } from "./utils"
 
-// antd4 主题配置类型
+// antd4 theme token type
 export interface AntdToken {
 	colorPrimary: string
 	colorPrimaryActive: string
@@ -21,7 +21,7 @@ export interface AntdToken {
 	[key: string]: any
 }
 
-// antd4 组件主题配置类型
+// antd4 component theme config type
 export interface ComponentsToken {
 	[key: string]: any
 }
@@ -48,7 +48,7 @@ export const genTokenMap = (
 				colorTextQuaternary: colorScales.grey[6],
 				colorTextDisabled: colorScales.grey[5],
 				colorBgElevated: colorUsages.bg[2],
-				// 添加自定义主题变量
+				// Add custom theme variables
 				magicColorScales: colorScales,
 				magicColorUsages: colorUsages,
 				titleBarHeight: 44,
@@ -73,7 +73,7 @@ export const genTokenMap = (
 				colorTextQuaternary: colorUsages.text[3],
 				colorTextDisabled: colorScales.grey[5],
 				colorBgElevated: colorUsages.bg[2],
-				// 添加自定义主题变量
+				// Add custom theme variables
 				magicColorScales: colorScales,
 				magicColorUsages: colorUsages,
 				titleBarHeight: 44,

@@ -26,16 +26,16 @@ import { ConfigProvider } from "antd"
 export * from "./register/node"
 
 type MagicFlowProps = {
-	/** 上游流程 */
+	/** Upstream flow */
 	flow?: MagicFlow.Flow
-	/** 头部右侧操作按钮组件 */
+	/** Header right-side action buttons */
 	header?: {
 		buttons?: React.ReactElement
 		backIcon?: React.ReactElement
 	}
-	/** 是否显示流程头部栏 */
+	/** Show the flow header bar */
 	showHeader?: boolean
-	/** 自定义toolbar */
+	/** Custom toolbar */
 	nodeToolbar?: {
 		list: Array<{
 			icon: () => React.ReactElement
@@ -43,52 +43,52 @@ type MagicFlowProps = {
 		}>
 		mode?: "append" | "replaceAll"
 	}
-	/** 自定义左侧物料栏头部 */
+	/** Custom left material panel header */
 	materialHeader?: React.ReactElement
-	/** 自定义节点配置名称 */
+	/** Custom node config field names */
 	customParamsName?: Partial<MagicFlow.ParamsName>
-	/** 定义节点omit参数keys */
+	/** Keys to omit from node parameters */
 	omitNodeKeys?: string[]
-	/** 是否开始部分渲染 */
+	/** Enable partial rendering */
 	onlyRenderVisibleElements?: boolean
-	/** 是否挂载时进行自动布局 */
+	/** Auto layout on mount */
 	layoutOnMount?: boolean
-	/** 是否允许开启debug模式 */
+	/** Allow debug mode */
 	allowDebug?: boolean
-	/** 是否显示额外信息 */
+	/** Show extra flow info */
 	showExtraFlowInfo?: boolean
-	/** 流程实例 */
+	/** Flow instance reference */
 	flowInteractionRef?: React.MutableRefObject<any>
 }
 
 export type MagicFlowInstance = {
-	/** 获取内部流程数据源 **/
+	/** Get internal flow data **/
 	getFlow: () => MagicFlow.Flow
-	/** 添加节点 */
+	/** Add a node */
 	addNode: (node: MagicFlow.Node) => void
-	/** 设置节点 */
+	/** Set all nodes */
 	setNodes: (nodes: MagicFlow.Node[]) => void
-	/** 设置节点配置 */
+	/** Set node configuration */
 	setNodeConfig: (nodeConfig: Record<string, MagicFlow.Node>) => void
-	/** 更新节点配置 */
+	/** Update node configuration */
 	updateNodeConfig: (nodeConfig: Record<string, MagicFlow.Node>) => void
-	/** 删除节点 */
+	/** Delete nodes */
 	deleteNodes: (nodeIds: string[]) => void
-	/** 更新节点位置 */
+	/** Update node positions */
 	updateNodesPosition: (nodeIds: string[], position: { x: number; y: number }) => void
-	/** 更新节点连接 */
+	/** Update node connections on connect */
 	updateNextNodeIdsByConnect: (nodeId: string, nextNodeIds: string[]) => void
-	/** 更新节点连接 */
+	/** Update node connections on delete */
 	updateNextNodeIdsByDeleteEdge: (nodeId: string, nextNodeIds: string[]) => void
-	/** 设置选中的节点 */
+	/** Set the selected node */
 	setSelectedNodeId: (nodeId: string) => void
-	/** 获取节点配置 */
+	/** Get node configuration */
 	getNodeConfig: () => Record<string, MagicFlow.Node>
-	/** 获取节点连接 */
+	/** Get edges */
 	getEdges: () => Edge[]
 }
 
-// 使用memo包装内容组件，避免多余渲染
+// Wrap content with memo to avoid redundant renders
 const FlowContent = React.memo(
 	({ showHeader, className }: { showHeader: boolean; className: string }) => {
 		return (

@@ -3,17 +3,17 @@ import type { DesktopCapturerSource, Display, IpcRenderer } from "electron"
 import type { FileTypeResult } from "file-type"
 import type { ThemeMode } from "antd-style"
 
-/** 媒体视窗模块 */
+/** Media window module */
 export namespace MagicMediaElectron {
-	/** 多媒体信息 */
+	/** Media payload */
 	export interface MediaInfo {
-		/** 多媒体数据 */
+		/** Media data */
 		media: Array<string>
-		/** 当前预览第几张 */
+		/** Current preview index */
 		index?: number
 	}
 
-	/** electron 多媒体视窗 API */
+	/** Electron media window API */
 	export interface MagicMediaElectronAPI {
 		media: {
 			getMedia: () => Promise<MediaInfo>
@@ -22,34 +22,34 @@ export namespace MagicMediaElectron {
 }
 
 export namespace MagicScreenshotElectron {
-	/** electron 全局截屏视窗 API - 结果 */
+	/** Electron global screenshot window API result */
 	interface GetScreenResult {
-		/** 视窗 */
+		/** Windows */
 		sources: Array<DesktopCapturerSource>
-		/** 屏幕 */
+		/** Displays */
 		displays: Array<Display>
 	}
 
-	/** electron 全局截屏视窗 API */
+	/** Electron global screenshot window API */
 	export interface MagicScreenshotElectronAPI {
 		getScreen: () => GetScreenResult
 	}
 }
 
-/** 全局搜索模块 */
+/** Global search module */
 export namespace MagicSearchElectron {
-	/** electron 全局搜索视窗 API */
+	/** Electron global search window API */
 	export interface MagicSearchElectronAPI {}
 }
 
-/** 全局主应用模块 */
+/** Global main application module */
 export namespace MagicElectron {
 	export interface ShortcutConfig {
-		/** 全局搜索快捷键 */
+		/** Global search shortcut */
 		globalSearch?: null | Array<number>
 	}
 
-	/** 应用信息 */
+	/** Application info */
 	export interface ApplicationInfo {
 		name: string
 		archKind: string
@@ -62,32 +62,32 @@ export namespace MagicElectron {
 	}
 
 	interface MacInfo {
-		/** 应用名称 */
+		/** Application name */
 		appName: string
-		/** 应用版本 */
+		/** Application version */
 		appVersion: string
-		/** 设备所在用户名称 */
+		/** Host username */
 		hostname: string
-		/** 设备唯一码 */
+		/** Device unique ID */
 		mac: string
-		/** 设备信息 */
+		/** Device info */
 		systemVersion: string
 	}
 
-	/** electron 主应用视窗 */
+	/** Electron main application window */
 	export interface MagicElectronAPI {
-		/** 环境模块 */
+		/** Environment module */
 		env: {
-			/** 是否为 linux 环境 */
+			/** Running on Linux */
 			isLinux: () => boolean
-			/** 是否为 macOS 环境 */
+			/** Running on macOS */
 			isMacOS: () => boolean
-			/** 是否为 window 环境 */
+			/** Running on Windows */
 			isWindows: () => boolean
-			/** 是否为 electron 环境 */
+			/** Running inside Electron */
 			isElectron: () => boolean
 		}
-		/** 系统模块 */
+		/** System module */
 		os: {
 			getSystemInfo: () => Promise<MacInfo>
 			getScreenInfo: () => Promise<{
@@ -95,28 +95,28 @@ export namespace MagicElectron {
 				displays: Array<Display>
 			}>
 		}
-		/** 应用模块 */
+		/** Application module */
 		app: {
 			queryApplications: () => Promise<Array<ApplicationInfo>>
 			openApplication: (appInfo: ApplicationInfo) => void
 		}
-		/** 全局配置模块 */
+		/** Global configuration module */
 		config: {
-			/** 快捷键管理 */
+			/** Shortcut management */
 			globalShortcut: {
-				/** 获取所有的注册快捷键配置 */
+				/** Get all registered shortcut configs */
 				getRegisterAll: () => Promise<Array<ConfigModal>>
-				/** 注册所有快捷键绑定 */
+				/** Register all shortcut bindings */
 				register: (config: MagicElectron.ShortcutConfig) => void
-				/** 注销单个快捷键绑定 */
+				/** Unregister a single shortcut binding */
 				unregister: (name: null | Array<number>) => void
-				/** 移除全部快捷键绑定 */
+				/** Remove all shortcut bindings */
 				unregisterAll: () => void
 			}
 		}
-		/** 多媒体模块 */
+		/** Media module */
 		media: {
-			/** 多媒体预览 */
+			/** Media preview */
 			previewMedia: (params: {
 				messageId: string | undefined
 				conversationId: string | undefined
@@ -129,52 +129,52 @@ export namespace MagicElectron {
 					| Partial<FileTypeResult>
 					| { ext?: "svg"; mime?: "image/svg+xml" }
 					| { ext?: string; mime?: string }
-				/** 是否独立显示 */
+				/** Display in standalone window */
 				standalone?: boolean
 			}) => void
 		}
-		/** 国际化语言模块 */
+		/** Internationalization module */
 		language: {
-			/** 订阅语言的变更 */
+			/** Subscribe to language changes */
 			subscribe: (callback: (lang: string) => void) => () => void
 			getLanguage: () => Promise<string>
 			setLanguage: (lang: string) => void
 		}
-		/** 应用主题模块 */
+		/** Theme module */
 		theme: {
-			/** 订阅语言的变更 */
+			/** Subscribe to theme changes */
 			subscribe: (callback: (theme: ThemeMode) => void) => () => void
 			getTheme: () => Promise<string>
 			setTheme: (theme: string) => void
 		}
-		/** 全局扩展能力模块 */
+		/** Global extension capabilities module */
 		extend: {}
-		/** 日志模块 */
+		/** Logging module */
 		log: {
 			report: (log: string | Array<any> | Record<any, any> | Error) => Promise<void>
 			query: (query?: MagicCore.LogsQuery) => Promise<Array<MagicCore.Log>>
 		}
-		/** 窗口视图模块 */
+		/** Window view module */
 		view: {
-			/** 显示回调 */
+			/** On show callback */
 			onShow: (callback: () => void) => () => void
-			/** 隐藏回调 */
+			/** On hide callback */
 			onHide: (callback: () => void) => () => void
-			/** 最小化视窗 */
+			/** Minimize window */
 			minimize: () => void
-			/** 最大化视窗 */
+			/** Maximize window */
 			maximize: () => void
-			/** 关闭视窗 */
+			/** Close window */
 			close: () => void
-			/** 全屏展示 */
+			/** Exit full screen */
 			endFullScreen: () => void
-			/** 显示视窗 */
+			/** Show window */
 			show: () => void
-			/** 隐藏视窗 */
+			/** Hide window */
 			hide: () => void
-			/** 设置视窗高度 */
+			/** Set window size */
 			setViewSize: (size: { height: number; width: number }) => void
-			/** 设置视窗位置 */
+			/** Set window position */
 			setViewPosition: (position: { x: number; y: number }) => void
 		}
 	}

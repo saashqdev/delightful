@@ -1,2 +1,2 @@
-/** 最大递归深度 */
+/** Maximum recursion depth */
 export const MAX_RECURSION_DEPTH = 512

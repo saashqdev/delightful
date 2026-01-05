@@ -3,13 +3,13 @@ import IfElseNode from "./BranchNode"
 import GroupNode from "./GroupNode"
 
 export const NodeModelType = {
-	// 普通节点
+	// Standard node
 	CommonNode: "common",
 
-	// 条件节点
+	// Condition node
 	IfElseNode: "ifElse",
 
-	// 组合节点
+	// Group node
 	Group: "Group"
 }
 
@@ -21,8 +21,8 @@ export default {
 
 
 export const InnerHandleType = {
-	// 循环端点
+	// Loop endpoint
 	LoopHandle : "LoopBodyHandle",
-	// 循环节点下一个节点端点
+	// Endpoint for the next node after a loop node
 	LoopNext : "LoopNextHandle"
 }

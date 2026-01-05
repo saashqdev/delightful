@@ -1,4 +1,4 @@
-// 打字机队列
+// Typewriter queue
 export class Typewriter {
 	private queue: string[] = []
 
@@ -8,7 +8,7 @@ export class Typewriter {
 
 	constructor(private onConsume: (str: string) => void) {}
 
-	// 输出速度动态控制
+	// Dynamically adjust output speed
 	dynamicSpeed() {
 		const speed = 2000 / this.queue.length
 		if (speed > 200) {
@@ -17,22 +17,22 @@ export class Typewriter {
 		return speed
 	}
 
-	// 快速输出模式的速度控制
+	// Speed control for fast output mode
 	fastSpeed() {
 		const speed = 500 / this.queue.length
 		if (speed > 50) {
 			return 50
 		}
-		return speed < 10 ? 10 : speed // 确保至少有10ms的延迟
+		return speed < 10 ? 10 : speed // Ensure at least a 10ms delay
 	}
 
-	// 添加字符串到队列
+	// Add a string to the queue
 	add(str: string) {
 		if (!str) return
 		this.queue.push(...str.split(""))
 	}
 
-	// 消费
+	// Consume one character
 	consume() {
 		if (this.queue.length > 0) {
 			const str = this.queue.shift()
@@ -42,7 +42,7 @@ export class Typewriter {
 		}
 	}
 
-	// 消费下一个
+	// Consume the next character
 	next(fast = false) {
 		this.consume()
 		if (this.queue.length === 0) {
@@ -50,7 +50,7 @@ export class Typewriter {
 			clearTimeout(this.timer)
 			return
 		}
-		// 根据队列中字符的数量来设置消耗每一帧的速度，用定时器消耗
+		// Set per-frame speed based on queue size and consume via timer
 		this.timer = setTimeout(
 			() => {
 				this.consume()
@@ -62,27 +62,27 @@ export class Typewriter {
 		)
 	}
 
-	// 开始消费队列
+	// Start consuming the queue
 	start() {
 		this.consuming = true
 		this.next()
 	}
 
-	// 结束消费队列
+	// Finish consuming the queue
 	done() {
 		this.consuming = true
 		clearTimeout(this.timer)
-		// 不再一次性消费，而是以更快的速度逐个消费
+		// Instead of consuming all at once, consume one by one at higher speed
 		this.next(true)
 	}
 
-	// 暂停
+	// Pause
 	stop() {
 		this.consuming = false
 		clearTimeout(this.timer)
 	}
 
-	// 恢复
+	// Resume
 	resume() {
 		this.consuming = true
 		this.next()

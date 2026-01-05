@@ -16,7 +16,7 @@ interface SchemaObjectProp {
 		type?: string,
 	) => void
 	showAdv: (prefix: string[], property?: Schema) => void
-	// 是否显示线条（object到子field的线条）
+	// Whether to show lines connecting object to child fields
 	showExtraLine?: boolean
 	setObjectLastItemOffsetTop?: React.Dispatch<React.SetStateAction<number>>
 }
@@ -33,7 +33,7 @@ const SchemaObject = (props: SchemaObjectProp): ReactElement => {
 
 	const { propertiesLength } = usePropertiesLength({ prefix })
 
-	// 子成员的长度
+	// Number of child members
 	const childLength = useMemo(() => {
 		return Object.keys(data.properties || {}).length
 	}, [data])
@@ -42,10 +42,10 @@ const SchemaObject = (props: SchemaObjectProp): ReactElement => {
 
 	const [lastSchemaOffsetTop, setLastSchemaOffsetTop] = useState(0)
 
-	// 竖线
+	// Vertical line
 	const { colSvgLineProps } = useSvgLine({ lastSchemaOffsetTop, propertiesLength, childLength })
 
-	// 是否显示svg
+	// Whether to show SVG
 	const showLine = useMemo(() => {
 		return showExtraLine
 	}, [showExtraLine])
@@ -77,7 +77,7 @@ const SchemaObject = (props: SchemaObjectProp): ReactElement => {
 								prefix={prefix}
 								showEdit={showEdit}
 								showAdv={showAdv}
-								// 对象/数组专用属性
+								// Properties specific to object/array types
 								childLength={Object.keys(data.properties || {}).length}
 								isLastSchemaItem={index === childLength - 1}
 							/>

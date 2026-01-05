@@ -1,9 +1,9 @@
 /**
- * 将svg转换为png
- * @param svg - svg字符串
- * @param width - 宽度
- * @param height - 高度，可选参数。当提供时，会在保持比例的前提下限制最大高度
- * @returns Promise<string> 返回图片base64字符串，失败时抛出错误
+ * Convert SVG to PNG
+ * @param svg - SVG string
+ * @param width - Width
+ * @param height - Optional height; when provided, caps the maximum height while preserving aspect ratio
+ * @returns Promise<string> Base64 string of the PNG image, throws on failure
  */
 export const convertSvgToPng = (
 	svg: string,
@@ -15,22 +15,22 @@ export const convertSvgToPng = (
 			const canvas = document.createElement("canvas")
 			const ctx = canvas.getContext("2d")
 			if (!ctx) {
-				throw new Error("无法获取canvas上下文")
+				throw new Error("Unable to acquire canvas context")
 			}
 
 			const img = new Image()
-			// 处理加载错误
-			img.onerror = () => reject(new Error("SVG图片加载失败"))
+			// Handle load errors
+			img.onerror = () => reject(new Error("SVG image failed to load"))
 
-			// 在图片加载完成后进行转换
+			// Convert after image loads
 			img.onload = () => {
 				try {
-					// 获取SVG原始尺寸信息
+					// Read original SVG dimensions
 					const parser = new DOMParser()
 					const svgDoc = parser.parseFromString(svg, "image/svg+xml")
 					const svgElement = svgDoc.documentElement
 
-					// 尝试从SVG中获取宽高信息
+					// Try to obtain width/height from SVG
 					let originalWidth
 					let originalHeight
 
@@ -45,7 +45,7 @@ export const convertSvgToPng = (
 						}
 					}
 
-					// 如果无法从SVG获取尺寸，使用图像的天然尺寸
+					// Fallback to intrinsic dimensions when missing in SVG
 					if (
 						!originalWidth ||
 						!originalHeight ||
@@ -53,43 +53,43 @@ export const convertSvgToPng = (
 						originalHeight <= 0
 					) {
 						originalWidth = img.naturalWidth || width
-						originalHeight = img.naturalHeight || width * 0.75 // 默认4:3比例
+						originalHeight = img.naturalHeight || width * 0.75 // Default 4:3 ratio
 					}
 
-					// 计算宽高比
+					// Calculate aspect ratio
 					const aspectRatio = originalHeight / originalWidth
 
-					// 计算目标尺寸，始终以width为基准
+					// Determine target size based on width
 					const targetWidth = width
 					let targetHeight = Math.round(width * aspectRatio)
 
-					// 仅当传入height参数时才限制高度
+					// Only cap height when provided
 					if (typeof height === "number" && height > 0) {
 						if (targetHeight > height) {
 							targetHeight = height
 						}
 					}
 
-					// 设置画布尺寸
+					// Set canvas size
 					canvas.width = targetWidth
 					canvas.height = targetHeight
 
-					// 绘制图像
+					// Draw the image
 					ctx.drawImage(img, 0, 0, targetWidth, targetHeight)
 
-					// 转换为PNG
+					// Convert to PNG
 					const pngUrl = canvas.toDataURL("image/png")
 					resolve(pngUrl)
 				} catch (err) {
-					reject(new Error(`PNG转换失败: ${err}`))
+					reject(new Error(`PNG conversion failed: ${err}`))
 				}
 			}
 
-			// 将SVG转换为base64并设置图片源
+			// Convert SVG to base64 and set as image source
 			const svgBase64 = `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svg)))}`
 			img.src = svgBase64
 		} catch (err) {
-			reject(new Error(`SVG处理失败: ${err}`))
+			reject(new Error(`SVG handling failed: ${err}`))
 		}
 	})
 }

@@ -4,7 +4,7 @@
 		"target": "ESNext",
 		"moduleResolution": "node",
 		"module": "CommonJS",
-		"esModuleInterop": false,  // 禁用 ESM 兼容逻辑
+		"esModuleInterop": false,  // Disable ESM interop logic
 		"skipLibCheck": true
 	},
 	"include": ["src/**/*", "test/**/*"],

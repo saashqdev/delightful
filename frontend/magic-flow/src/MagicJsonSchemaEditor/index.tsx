@@ -28,138 +28,94 @@ import { CLASSNAME_PREFIX } from "@/common/constants"
  * @title JsonSchemaEditor
  */
 export interface JsonSchemaEditorProps {
-	/**
-	 * @zh 是否开启 mock
-	 */
+	/** Enable mock mode */
 	mock?: boolean
-	/**
-	 * @zh 是否展示 json 编辑器
-	 */
+	/** Show the JSON editor */
 	jsonEditor?: boolean
-	/**
-	 * @zh Schema 变更的回调
-	 */
+	/** Callback when schema changes */
 	onChange?: (schema: Schema) => void
-	/**
-	 * @zh 初始化 Schema
-	 */
+	/** Initial schema */
 	data?: Schema | string
-	/**
-	 * @zh 是否允许表达式
-	 */
+	/** Allow expressions */
 	allowExpression?: boolean
-	/**
-	 * @zh 是否根节点只允许json格式
-	 */
+	/** Restrict root node to JSON format only */
 	onlyJson?: boolean
-	/**
-	 * @zh 自定义参数类型可选项(可设置items, root, normal)
-	 */
+	/** Custom parameter type options (items, root, normal) */
 	customOptions?: CustomOptions
-	/**
-	 * @zh 表达式数据源
-	 */
+	/** Expression data source */
 	expressionSource?: DataSourceOption[]
-	/**
-	 * @zh 是否开启 import json 功能
-	 */
+	/** Enable importing JSON */
 	jsonImport?: boolean
-	/**
-	 * @zh 是否开启 import json 功能
-	 */
+	/** Enable debugger mode */
 	debuggerMode?: boolean
-	/**
-	 * @zh 开发者自用，默认值编辑模式
-	 */
+	/** Developer-only: default value edit mode */
 	valueEdit?: boolean
-	/**
-	 * @zh 失去焦点事件
-	 */
+	/** Blur event callback */
 	onBlur?: (schema: Schema) => void
-	/**
-	 * 是否可以做添加删除操作
-	 */
+	/** Allow add/delete operations */
 	allowOperation?: boolean
-	/**
-	 * 是否最少有一个子节点
-	 */
+	/** Require at least one child node */
 	oneChildAtLeast?: boolean
-	/**
-	 * 默认生成的子节点的key
-	 */
+	/** Default key for the generated child node */
 	firstChildKey?: string
-	/**
-	 * 全局禁用的field列表，对应的field不可编辑
-	 */
+	/** Fields disabled globally (non-editable) */
 	disableFields?: string[]
-	/**
-	 * 添加相邻节点时，新字段的位置，默认为当前字段的下一个字段，可选择默认添加到末尾
-	 */
+	/** Position for inserting adjacent nodes; defaults to after current field, can append to end */
 	relativeAppendPosition?: AppendPosition
-	/**
-	 * TODO 是否允许使用当前表单字段作为表达式数据源，暂时不要使用
-	 */
+	/** TODO Allow using current form fields as an expression data source; do not enable for now */
 	allowSourceInjectBySelf?: boolean
-	/**
-	 * 当前表单组件唯一id
-	 */
+	/** Unique ID for the current form component */
 	uniqueFormId?: string
-	/**
-	 * 上文表单数据源
-	 */
+	/** Upstream form data source */
 	contextExpressionSource?: ExpressionSource
-	/**
-	 * 当前表单数据源变更函数
-	 */
+	/** Handler when the current form data source changes */
 	onInnerSourceMapChange?: (innerSource: Record<string, Common.Options>) => void
 
-	/**
-	 * 当前显示列
-	 */
+	/** Currently visible columns */
 	displayColumns?: ShowColumns[]
 
 	/**
-	 * 自定义参数列名称显示
+	 * Custom column labels for parameters
 	 */
 	columnNames?: Record<ShowColumns, string>
 
 	/**
-	 * 是否允许添加字段
+	 * Allow adding new fields
 	 */
 	allowAdd?: boolean
 
 	/**
-	 * 是否所有值设置只能通过表达式
+	 * Require all values to be set via expressions
 	 */
 	onlyExpression?: boolean
 
 	/**
-	 * 自定义某些字段的配置
+	 * Custom configuration for specific fields
 	 */
 	customFieldsConfig?: CustomFieldsConfig
 
 	/**
-	 * 是否显示导入
+	 * Show the import control
 	 */
 	showImport?: boolean
 
 	/**
-	 * 是否显示第一行（root层）
+	 * Show the first row (root level)
 	 */
 	showTopRow?: boolean
 
 	/**
-	 * 是否显示全局的添加参数
+	 * Show the global add-parameter action
 	 */
 	showAdd?: boolean
 
 	/**
-	 * 是否显示操作栏
+	 * Show the operations column
 	 */
 	showOperation?: boolean
 
 	/**
-	 * 是否初次加载就触发更新
+	 * Trigger updates immediately on initial load
 	 */
 	fireImmediately?: boolean
 }
@@ -204,34 +160,34 @@ const JsonSchemaObserverEditor = observer(
 			})
 
 			useEffect(() => {
-				// 默认有一个字段
+				// Default with a single field
 				let defaultSchema = genRootField(oneChildAtLeast, firstChildKey)
 				if (data) {
 					if (typeof data === "string") {
 						try {
 							defaultSchema = JSON.parse(data)
 						} catch (e) {
-							message.error("传入的字符串非 json 格式!")
+							message.error("Provided string is not valid JSON!")
 						}
 					} else if (Object.prototype.toString.call(data) === "[object Object]") {
-						// fix data是空对象首行没有加号的bug
+						// Fix: no add button on first row when data is an empty object
 						if (Object.keys(data).length > 0) {
 							defaultSchema = data as typeof defaultSchema
 						}
-						// fix php的properties是空数组
+						// Fix: PHP may send properties as an empty array
 						if (Array.isArray(data?.properties)) {
 							defaultSchema.properties = {}
 						}
 					} else {
-						message.error("json数据只支持字符串和对象")
+						message.error("JSON data supports only string or object")
 					}
 				}
 				contextVal.changeSchema(defaultSchema)
 			}, [JSON.stringify(data), oneChildAtLeast, firstChildKey])
 
-			// 单独处理reaction，确保只创建一次，并在组件卸载时清理
+			// Handle reaction separately to create it once and clean up on unmount
 			useEffect(() => {
-				// 创建reaction实例
+				// Create reaction instance
 				const disposer = reaction(
 					() => contextVal.schema,
 					(schema) => {
@@ -242,7 +198,7 @@ const JsonSchemaObserverEditor = observer(
 					{ fireImmediately },
 				)
 
-				// 返回清理函数，在组件卸载或依赖项变化时执行
+				// Return cleanup function to run on unmount or dependency change
 				return () => {
 					disposer()
 				}
@@ -255,14 +211,14 @@ const JsonSchemaObserverEditor = observer(
 				}
 			}, [uniqueFormId, contextVal.schema, updateInnerSourceMap, onInnerSourceMapChange])
 
-			// 暴露给外部的 API
+			// APIs exposed to consumers
 			useImperativeHandle(
 				ref,
 				() => ({
-					/** 在root节点下新增子节点 */
+					/** Add a child field under the root node */
 					addRootChildField: (fieldName: string) => {
 						const allKeys = Object.keys(contextVal.schema.properties || {})
-						// 已存在则不新增
+						// Skip if it already exists
 						if (!allKeys.includes(fieldName)) {
 							contextVal.addChildField({
 								keys: ["properties"],
@@ -270,13 +226,13 @@ const JsonSchemaObserverEditor = observer(
 							})
 						}
 					},
-					/** 删除root节点的子节点 */
+					/** Delete a child field under the root node */
 					deleteRootChildField: (fieldName: string) => {
 						contextVal.deleteField({
 							keys: ["properties", fieldName],
 						})
 					},
-					/** 删除不在fieldNames范围内的子节点 */
+					/** Delete child fields not included in fieldNames */
 					deleteRootChildFieldsNotIn: (fieldNames: string[]) => {
 						const allKeys = Object.keys(contextVal.schema.properties || {})
 						let delKeys = [] as string[]

@@ -5,10 +5,10 @@ import eventBus from "./eventBus"
 function MagicJSBridge(callback: (bridge: WebViewJavascriptBridge) => void) {
 	try {
 		if (window.WebViewJavascriptBridge) {
-			console.warn("WebViewJavascriptBridge已加载")
+			console.warn("WebViewJavascriptBridge is already loaded")
 			callback(window.WebViewJavascriptBridge)
 		} else {
-			console.warn("WebViewJavascriptBridge未加载")
+			console.warn("WebViewJavascriptBridge is not loaded")
 			document.addEventListener(
 				"WebViewJavascriptBridgeReady",
 				() => {
@@ -18,7 +18,7 @@ function MagicJSBridge(callback: (bridge: WebViewJavascriptBridge) => void) {
 			)
 		}
 	} catch (ex) {
-		console.error("注册 WebViewJavascriptBridge 失败", ex)
+		console.error("Failed to register WebViewJavascriptBridge", ex)
 	}
 }
 
@@ -27,26 +27,26 @@ MagicJSBridge((bridge) => {
 		console.log("bridge init")
 	})
 
-	/* 注册nativeResponse，app 通过 nativeResponse 应答 JS 调起的 nativeRequest api */
+	/* Register nativeResponse so the app can reply to JS-triggered nativeRequest APIs */
 	bridge.registerHandler("nativeResponse", (data) => {
 		const request = JSON.parse(data)
 
-		console.warn("接收到app消息", request)
-		// responseCallback(`这里可以返回数据：${data}`);
+		console.warn("Received app message", request)
+		// responseCallback(`Return data here: ${data}`);
 	})
 
-	/* 注册nativeCall，app通过该方法主动调起相关api */
+	/* Register nativeCall so the app can proactively invoke related APIs */
 	bridge.registerHandler("nativeCall", (data: string) => {
-		console.warn("接收到app消息", data)
+		console.warn("Received app message", data)
 		try {
 			const event: BridgeEvent = JSON.parse(data)
-			console.log("解析数据: ", event)
+			console.log("Parsed data: ", event)
 			console.log("eventBus", eventBus)
 			eventBus.emit(event.nativeConfig.appCallName, event.nativeDataResponse)
 		} catch (error) {
-			console.error("桥接事件 JSON 解析失败", error)
+			console.error("Bridge event JSON parse failed", error)
 		}
-		// responseCallback?.("这里可以返回数据");
+		// responseCallback?.("Return data here");
 	})
 })
 

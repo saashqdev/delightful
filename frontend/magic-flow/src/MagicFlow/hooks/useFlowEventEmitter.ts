@@ -2,60 +2,60 @@ import { useCallback } from 'react';
 import { FLOW_EVENTS, flowEventBus } from '@/common/BaseUI/Select/constants';
 
 /**
- * 用于流程设计组件，触发流程交互事件的钩子函数
- * 
- * 使用场景：
- * 1. 在节点被选中时触发事件
- * 2. 在边被选中时触发事件
- * 3. 在画布被点击时触发事件
- * 4. 在流程数据更新时触发事件
- * 5. 在布局变更时触发事件
- * 6. 在缩放变更时触发事件
+ * Hook for emitting flow-design interaction events
+ *
+ * Use cases:
+ * 1. Emit when a node is selected
+ * 2. Emit when an edge is selected
+ * 3. Emit when the canvas is clicked
+ * 4. Emit when flow data changes
+ * 5. Emit when layout changes
+ * 6. Emit when zoom changes
  */
 export const useFlowEventEmitter = () => {
   /**
-   * 触发节点选中事件
-   * @param nodeId 被选中的节点ID
+   * Emit node-selected event
+   * @param nodeId Selected node ID
    */
   const emitNodeSelected = useCallback((nodeId?: string) => {
     flowEventBus.emit(FLOW_EVENTS.NODE_SELECTED, nodeId);
   }, []);
 
   /**
-   * 触发边选中事件
-   * @param edgeId 被选中的边ID
+   * Emit edge-selected event
+   * @param edgeId Selected edge ID
    */
   const emitEdgeSelected = useCallback((edgeId?: string) => {
     flowEventBus.emit(FLOW_EVENTS.EDGE_SELECTED, edgeId);
   }, []);
 
   /**
-   * 触发画布点击事件
-   * @param position 点击位置坐标
+   * Emit canvas-clicked event
+   * @param position Click position
    */
   const emitCanvasClicked = useCallback((position?: { x: number, y: number }) => {
     flowEventBus.emit(FLOW_EVENTS.CANVAS_CLICKED, position);
   }, []);
 
   /**
-   * 触发流程数据更新事件
-   * @param data 更新的数据
+   * Emit flow-data-updated event
+   * @param data Updated flow data
    */
   const emitFlowDataUpdated = useCallback((data?: any) => {
     flowEventBus.emit(FLOW_EVENTS.FLOW_DATA_UPDATED, data);
   }, []);
 
   /**
-   * 触发布局变更事件
-   * @param layout 布局信息
+   * Emit layout-changed event
+   * @param layout Layout payload
    */
   const emitLayoutChanged = useCallback((layout?: any) => {
     flowEventBus.emit(FLOW_EVENTS.LAYOUT_CHANGED, layout);
   }, []);
 
   /**
-   * 触发缩放变更事件
-   * @param zoom 缩放信息
+   * Emit zoom-changed event
+   * @param zoom Zoom value
    */
   const emitZoomChanged = useCallback((zoom?: number) => {
     flowEventBus.emit(FLOW_EVENTS.ZOOM_CHANGED, zoom);

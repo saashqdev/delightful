@@ -21,7 +21,7 @@ describe("MagicMenu", () => {
 		expect(screen.getByText("菜单项1")).toBeInTheDocument()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础菜单快照", () => {
 			const { asFragment } = renderWithTheme(

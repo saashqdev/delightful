@@ -1,5 +1,5 @@
 /**
- * 判断是否为调试模式
+ * Check whether debug mode is enabled
  * @returns
  */
 export const isDebug = () => {

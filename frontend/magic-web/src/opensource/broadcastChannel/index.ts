@@ -71,7 +71,7 @@ export const BroadcastChannelSender = {
 	},
 
 	/**
-	 * 切换账号
+	 * Switch account
 	 * @param targetUserId
 	 * @param fallbackUserInfo
 	 */
@@ -95,7 +95,7 @@ export const BroadcastChannelSender = {
 	},
 
 	/**
-	 * 切换组织
+	 * Switch organization
 	 * @param targetUserId
 	 * @param targetOrganizationCode
 	 * @param fallbackUserInfo
@@ -117,7 +117,7 @@ export const BroadcastChannelSender = {
 	},
 
 	/**
-	 * 添加账号
+	 * Add account
 	 * @param userAccount
 	 */
 	addAccount: (userAccount: User.UserAccount) => {
@@ -128,7 +128,7 @@ export const BroadcastChannelSender = {
 	},
 
 	/**
-	 * 删除账号
+	 * Delete account
 	 * @param magicId
 	 */
 	deleteAccount: (
@@ -142,11 +142,11 @@ export const BroadcastChannelSender = {
 	},
 
 	/**
-	 * 更新组织红点
+	 * Update organization badge count
 	 * @param data
-	 * @param data.organizationCode 组织编码
-	 * @param data.count 数量
-	 * @param data.seqId 序号
+	 * @param data.organizationCode Organization code
+	 * @param data.count Count
+	 * @param data.seqId Sequence id
 	 */
 	updateOrganizationDot: (data: {
 		magicId: string

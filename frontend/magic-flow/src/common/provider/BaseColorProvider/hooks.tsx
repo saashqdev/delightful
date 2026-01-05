@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { BaseColorContext } from "./context"
 
 /**
- * 获取当前主题基础颜色变量
+ * Get base color variables from the current theme
  * @returns
  */
 export const useBaseColor = () => {

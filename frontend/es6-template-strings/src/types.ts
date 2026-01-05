@@ -1,17 +1,17 @@
-/** 解析器配置 */
+/** Parser options */
 export interface CompileOptions {
-	/** 字符串模版语法的前缀 */
+	/** Prefix for template syntax */
 	notation?: string
-	/** 字符串模版语法的开始标记 */
+	/** Opening delimiter for template syntax */
 	notationStart?: string
-	/** 字符串模版语法的结束标记 */
+	/** Closing delimiter for template syntax */
 	notationEnd?: string
 }
 
 export interface ResolveOptions {
-	/** 解析失败是否跳过解析，不跳过则解析失败为 undefined */
+	/** Skip failed expressions; otherwise return undefined for failures */
 	partial?: boolean
 }
 
-/** 字符串模版解析配置 */
+/** Template parsing options */
 export interface TemplateOptions extends CompileOptions, ResolveOptions {}

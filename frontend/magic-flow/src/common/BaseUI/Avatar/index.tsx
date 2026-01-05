@@ -15,9 +15,9 @@ const SIZE_MAP: Record<string, number> = {
 	small: 24,
 }
 export default function TsAvatar({
-	src = "", // 头像 url
-	alt = "", // 头像加载失败时显示的文字，截取最后两个字
-	size = 42, // 尺寸
+	src = "", // Avatar url
+	alt = "", // Fallback text when loading fails; take the last characters
+	size = 42, // Size
 	className = "",
 	style = {},
 	sliceLen = 0,

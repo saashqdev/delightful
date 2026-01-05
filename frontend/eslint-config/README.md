@@ -1,17 +1,17 @@
 # @dtyq/eslint-config
 
-傻瓜式 ESLint 配置包，内置所有依赖，无需额外安装 ESLint 及相关插件。
+Foolproof ESLint config package with all dependencies bundled—no extra ESLint or plugin installs needed.
 
-## 特点
+## Features
 
-- ✅ 零配置：开箱即用，一步到位
-- ✅ 内置所有依赖：不需要安装额外的 ESLint 相关包
-- ✅ 多种配置：支持基础、TypeScript、React、Vue 等多种场景
-- ✅ 与 pnpm workspace 完美兼容
+- ✅ Zero config: ready to use out of the box
+- ✅ All dependencies included: no extra ESLint-related packages required
+- ✅ Multiple presets: supports base, TypeScript, React, Vue, and more
+- ✅ Works seamlessly with pnpm workspaces
 
-## 在 pnpm workspace 中使用
+## Usage in a pnpm workspace
 
-1. 在需要使用 ESLint 的包的 `package.json` 中添加依赖：
+1. Add the dependency in the target package’s `package.json`:
 
 ```json
 {
@@ -21,30 +21,30 @@
 }
 ```
 
-2. 创建 `eslint.config.js` 文件：
+2. Create `eslint.config.js`:
 
 ```javascript
-// 最简单的用法（推荐）
+// Simplest usage (recommended)
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
-// 直接使用预设配置，一行解决
+// Use the preset directly, one line
 const typescriptPreset = require('@dtyq/eslint-config/typescript-preset');
 
 export default [
   { ...typescriptPreset },
-  // 自定义规则（可选）
+  // Custom rules (optional)
   {
     files: ['src/**/*.ts'],
     rules: {
-      // 自定义规则
+      // Custom rules
     }
   }
 ];
 ```
 
 ```javascript
-// 高级用法（组合多个配置）
+// Advanced usage (compose multiple configs)
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
@@ -54,27 +54,27 @@ const typescriptConfig = require('@dtyq/eslint-config/typescript');
 export default [
   { ...baseConfig },
   { ...typescriptConfig },
-  // 自定义规则
+  // Custom rules
   {
     files: ['src/**/*.ts'],
     rules: {
-      // 自定义规则
+      // Custom rules
     }
   }
 ];
 ```
 
 ```javascript
-// CommonJS 项目
+// CommonJS project
 const baseConfig = require('@dtyq/eslint-config/base');
 
 module.exports = {
   ...baseConfig,
-  // 自定义规则
+  // Custom rules
 };
 ```
 
-3. 添加 lint 脚本到 `package.json`：
+3. Add a lint script to `package.json`:
 
 ```json
 {
@@ -84,14 +84,14 @@ module.exports = {
 }
 ```
 
-## 可用配置
+## Available configs
 
-- `@dtyq/eslint-config` - 默认配置
-- `@dtyq/eslint-config/base` - 基础规则
-- `@dtyq/eslint-config/typescript` - TypeScript 规则
-- `@dtyq/eslint-config/typescript-preset` - TypeScript 项目预设（包含基础和 TS 规则，推荐）
-- `@dtyq/eslint-config/react` - React 规则
-- `@dtyq/eslint-config/vue` - Vue 3.x 规则
-- `@dtyq/eslint-config/vue2` - Vue 2.x 规则
-- `@dtyq/eslint-config/prettier` - Prettier 集成
-- `@dtyq/eslint-config/jsconfig` - jsconfig.json 支持
+- `@dtyq/eslint-config` - Default config
+- `@dtyq/eslint-config/base` - Base rules
+- `@dtyq/eslint-config/typescript` - TypeScript rules
+- `@dtyq/eslint-config/typescript-preset` - TypeScript preset (includes base + TS rules; recommended)
+- `@dtyq/eslint-config/react` - React rules
+- `@dtyq/eslint-config/vue` - Vue 3.x rules
+- `@dtyq/eslint-config/vue2` - Vue 2.x rules
+- `@dtyq/eslint-config/prettier` - Prettier integration
+- `@dtyq/eslint-config/jsconfig` - jsconfig.json support

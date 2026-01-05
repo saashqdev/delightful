@@ -3,7 +3,7 @@ import type { AxiosInstance } from "axios"
 
 export const jsonSchemaDesignerRequestOptions = {
 	timeout: 30000,
-	timeoutErrorMessage: "网络请求超时",
+	timeoutErrorMessage: "Network request timed out",
 	withCredentials: false,
 	headers: {
 		"content-type": "application/json"

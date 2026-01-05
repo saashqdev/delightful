@@ -18,9 +18,9 @@ export function decodeSocketIoMessage(data: string) {
 }
 
 /**
- * 自定义 payload 数据
- * @param data 数据
- * @returns payload 数据
+ * Build a custom payload
+ * @param data Payload data
+ * @returns Payload with context
  */
 function genPayload(data: unknown, context: Record<string, unknown> = {}) {
 	const { organizationCode } = userStore.user
@@ -31,7 +31,7 @@ function genPayload(data: unknown, context: Record<string, unknown> = {}) {
 			authorization: userStore.user.authorization ?? "",
 			organization_code: organizationCode ?? "",
 			language: getCurrentLang(normalizeLocale(configStore.i18n.language)),
-			// 可能后续用于消息的加密解密
+			// Reserved for future message encryption/decryption
 			signature: "",
 			...context,
 		},
@@ -40,15 +40,15 @@ function genPayload(data: unknown, context: Record<string, unknown> = {}) {
 }
 
 /**
- * 包装 Websocket 消息
- * @param type Websocket 事件类型
- * @param data JSON 数据
+ * Wrap a WebSocket message
+ * @param type WebSocket event type
+ * @param data JSON payload
  * @param ackId ACK ID
- * @param context 上下文
- * @param socketioPacketType SocketIo 数据包类型
- * @param nsp 命名空间
- * @param engineioPackType EngineIo 数据包类型
- * @returns 数据包
+ * @param context Context
+ * @param socketioPacketType Socket.IO packet type
+ * @param nsp Namespace
+ * @param engineioPackType Engine.IO packet type
+ * @returns Encoded packet
  */
 export const encodeSocketIoMessage = (
 	type: string,
@@ -59,9 +59,9 @@ export const encodeSocketIoMessage = (
 	nsp: string = "/im",
 	engineioPackType: EngineIoPacketType = EngineIoPacketType.MESSAGE,
 ) => {
-	// Socket.IO 数据包结构
+	// Socket.IO packet structure
 	// <packet type>[<# of binary attachments>-][<namespace>,][<acknowledgment id>][JSON-stringified payload without binary]
-	// 每个 Socket.IO 数据包都包装在 Engine.IO 消息数据包中，因此在通过线路发送时，它们将以字符“4”为前缀。
+	// Each Socket.IO packet is wrapped in an Engine.IO message packet, so they are prefixed with the character "4" on the wire.
 	// More Info: https://github.com/socketio/socket.io-protocol?tab=readme-ov-file#sending-and-receiving-data-1
 	const namespace = nsp ? `${nsp},` : ""
 	const payload = genPayload(data, context)
@@ -69,7 +69,7 @@ export const encodeSocketIoMessage = (
 	// @ts-ignore
 
 	// console.log(
-	// 	"%c 发送消息: ",
+	// 	"%c Send message: ",
 	// 	"background-color: yellow; color: #000;",
 	// 	payload?.data?.message?.type,
 	// 	payload,

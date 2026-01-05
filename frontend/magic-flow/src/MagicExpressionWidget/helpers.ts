@@ -13,38 +13,38 @@ const snowflake = new Snowflake({
 })
 
 /**
- * @description 生成唯一标识
- * @returns {string} 唯一标识
+ * @description Generate a unique id
+ * @returns {string} unique id
  */
 export const SnowflakeId = () => {
 	return snowflake.generate()
 }
 
-/** 查找根节点 */
+/** Find the root node */
 export const findRootNodeByValue = (treeData: Record<string, any>[], targetValue: string) => {
-	// 遍历 treeData 数据
+    // Traverse treeData entries
 	for (let i = 0; i < treeData.length; i += 1) {
 		const currentNode = treeData[i]
 
-		// 如果当前节点的值匹配目标值，则返回当前节点
+        // Return current node if its value matches the target
 		if (currentNode.value === targetValue) {
 			return currentNode
 		}
 
-		// 如果当前节点有子节点，递归查找子节点
+        // If the current node has children, recurse into them
 		if (currentNode.children) {
 			const result = findRootNodeByValue(currentNode.children, targetValue)
 			if (result) {
-				return currentNode // 如果子节点中找到目标值，返回当前节点
+                return currentNode // If a child contains the target, return the current node
 			}
 		}
 	}
 
-	// 如果未找到目标值，返回 null
+    // If the target is not found, return null
 	return null
 }
 
-/** 查找目标元素的root和本身 */
+/** Find both the root node and the target node */
 export const findRootNodeAndValueByValue = (
 	treeData: Record<string, any>[],
 	targetValue: string,
@@ -75,7 +75,7 @@ export const findRootNodeAndValueByValue = (
 	return findNode(treeData, targetValue, null)
 }
 
-/** 获取 aaa.bbb.ccc 的ccc */
+/** Get the last segment from a dotted path, e.g., aaa.bbb.ccc -> ccc */
 export const getLastName = (str: string) => {
 	const paths = str.split(".")
 	if (paths.length === 0) return str
@@ -106,13 +106,13 @@ export const checkIsAllDollarWrapped = (str: string) => {
     return pass
 }
 
-// 设置所有节点的 key 到 expandedKeys 中
+// Build a map of all nodes keyed by their reference key
 export const getDataSourceMap = (data: DataSourceOption[]) => {
     let map = {} as Record<string, DataSourceOption>
     data.forEach((item) => {
 		const prefix = getReferencePrefix(item)
 		if(prefix) {
-            // 处理选择了节点的情况
+			// Handle the case where the node itself is selected
             if(prefix === item.key) {
                 map[prefix] = item
             }else{
@@ -133,7 +133,7 @@ export const getDataSourceMap = (data: DataSourceOption[]) => {
     return map;
 };
 
-/** 获取第一个表达式项，通常用于获取「表达式单选控件」的内部实际值 */
+/** Get the first expression item, typically the inner value for the expression radio control */
 export const getExpressionFirstItem = (value: InputExpressionValue) => {
 	return value?.expression_value?.[0]
 }
@@ -172,22 +172,22 @@ const findAllIndices = (str: string, char: string): number[] => {
     return indices;
 };
 
-//查找实际进行@的表达式块，返回具体的offset和uniqueId
+// Find the expression block containing the @ trigger and return its offset and uniqueId
 export const findTargetTriggerField = (expressionField: EXPRESSION_VALUE[], cursor: CursorRef) => {
     const { offset, id } = cursor
-    // 找到所有带有Trigger的表达式块
+    // Locate all expression blocks containing the trigger character
     const allHasTriggerFields = _.cloneDeep(expressionField.filter((field) =>
         field.value.includes(TextAreaModeTrigger),
     ))
 
-    // 对以上的字符串都进行换行替换，避免offset计算错误
+    // Replace newlines to avoid offset miscalculations
     const replacedFields = allHasTriggerFields.map(field => ({
         ...field,
         value: field.value.replace(/\n/g, '$')
     }))
 
 
-    // 所有Trigger的位置
+    // All trigger positions
     const allTriggerIndices = replacedFields.reduce((result, field) => {
         // console.log("field.value",field.value,field.value.length)
         const indicesArr = findAllIndices(field.value, TextAreaModeTrigger)
@@ -205,8 +205,8 @@ export const findTargetTriggerField = (expressionField: EXPRESSION_VALUE[], curs
 
     // console.log("allTriggerIndices",allTriggerIndices,allHasTriggerFields,offset,id)
 
-    // 只要有一个Trigger的位置在当前光标之前，则显示出来
-    // TODO: 需要排查下为什么有时候光标的位置是Trigger+2
+    // Show the list as long as any trigger is before the current cursor
+    // TODO: investigate why the cursor offset is sometimes trigger+2
     const targetTriggerField = allTriggerIndices?.find?.(indicesObject => {
         const isSameOffset = indicesObject.offset === offset - 1 || indicesObject.offset === offset - 2
         const isSameField = indicesObject.uniqueId === id
@@ -216,7 +216,7 @@ export const findTargetTriggerField = (expressionField: EXPRESSION_VALUE[], curs
     return targetTriggerField
 }
 
-// 判断输入值是否是引用值
+// Check whether the input value is a reference node
 export const checkIsReferenceNode = (input: any) => {
     return input?.type === LabelTypeMap.LabelFunc || input?.type === LabelTypeMap.LabelNode
 }

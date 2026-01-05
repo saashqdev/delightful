@@ -1,4 +1,4 @@
 import { RoutePath } from "@/const/routes"
 
-// 需要keepAlive的路由
+// Routes that need to stay alive
 export const keepAliveRoutes = [RoutePath.Chat]

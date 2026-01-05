@@ -1,13 +1,13 @@
-// SharedWorker接收到MessageType类型事件后，处理后对应的事件返回，以reflect开头
+// When SharedWorker receives MessageType events, it responds with reflect-prefixed types
 export enum ReflectMessageType {
 	REFLECT_GET_LATEST_VERSION = "reflectGetLatestVersion",
 	REFLECT_REFRESH = "reflectRefresh",
 }
 
-// 发送消息的类型
+// Message types sent to the worker
 export enum MessageType {
-	START = "start", // 开启轮询，检测Etag版本
-	STOP = "stop", // 停止轮询
-	CLOSE = "close", // 关闭或刷新页面时，关闭SharedWorker的端口
+	START = "start", // Start polling to check Etag version
+	STOP = "stop", // Stop polling
+	CLOSE = "close", // Close SharedWorker port on page close/refresh
 	REFRESH = "refresh",
 }

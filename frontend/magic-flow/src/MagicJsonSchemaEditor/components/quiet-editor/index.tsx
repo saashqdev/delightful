@@ -41,27 +41,27 @@ const QuietEditor = (props: QuietEditorProp): ReactElement => {
       beforeMount={editorWillMount}
       theme="x-code-default"
       options={{
-        // 只读
+    		// Read-only
         readOnly,
-        // 关闭行数显示
+    		// Control line number display
         lineNumbers,
-        // 关闭选中行的渲染
+    		// Control selected line rendering
         renderLineHighlight,
-        // 是否折叠
+    		// Toggle code folding
         folding,
         smoothScrolling: true,
-        // 编辑器中字体大小
+    		// Editor font size
         fontSize: 13,
-        // 是否可以滚动到最后一行，可以往上滚动超出内容范围
+    		// Allow scrolling past the last line
         scrollBeyondLastLine: false,
-        // 左边空出来的宽度
+    		// Left gutter width
         lineDecorationsWidth: 19,
-        // 滚动条样式
+    		// Scrollbar styles
         scrollbar: {
           verticalScrollbarSize: 5,
           horizontalScrollbarSize: 5,
         },
-        // 小地图
+    		// Minimap configuration
         minimap: {
           enabled: false,
         },

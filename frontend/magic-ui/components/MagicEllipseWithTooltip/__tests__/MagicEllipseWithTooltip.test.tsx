@@ -12,7 +12,7 @@ describe("MagicEllipseWithTooltip", () => {
 		expect(screen.getByText("测试内容")).toBeInTheDocument()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础省略文本快照", () => {
 			const { asFragment } = renderWithTheme(

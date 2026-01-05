@@ -14,8 +14,8 @@ import { languageHelper } from "./utils"
 const LocalesContext = createContext<GlobalLanguageStoreType>(store)
 
 /**
- * @description 全局语言实例中间层，初始化时从 Storage、默认等同步当前语言
- * 语言包加载问题，需要基于 useState 主动控制，防止下级子节点被重新渲染导致 useEffect 被重复执行
+ * @description Intermediate layer for the global language instance; syncs language from storage/defaults on init
+ * Language bundle loading is controlled via useState to avoid re-rendering children and repeatedly firing useEffect
  */
 function IntermediateLayer({
 	children,
@@ -23,7 +23,7 @@ function IntermediateLayer({
 }: PropsWithChildren<{
 	instance: i18n
 }>) {
-	// 用于优化首屏加载语言包时禁止下级所有节点重新被触发导致 useEffect 被重复执行
+	// Prevent child effects from re-running while the initial language bundle is loading
 	const [loading, setLoading] = useState(true)
 
 	const language = store(

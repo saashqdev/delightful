@@ -27,7 +27,7 @@ export default () => css`
 		overflow: hidden;
 	}
 
-	/* 打印效果 */
+	/* Typing effect */
 	@keyframes typing {
 		from {
 			width: 0;
@@ -37,7 +37,7 @@ export default () => css`
 		}
 	}
 
-	/* 光标闪啊闪 */
+	/* Blinking caret */
 	@keyframes blink-caret {
 		from,
 		to {

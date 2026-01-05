@@ -5,7 +5,7 @@ import { RELATION_COMP_TYPE, RELATION_LOGICS_MAP } from "../constants"
 import { InputExpressionValue } from "@/MagicExpressionWidget/types"
 
 export namespace Expression {
-	// 表达式某一项具体值类型
+	// Concrete value type for a single expression item
 	export interface EXPRESSION_ITEM {
 		type: EXPRESSION_ITEM_TYPE
 		value: string
@@ -13,7 +13,7 @@ export namespace Expression {
 		name?: string
 	}
 
-	// 条件编辑组件，右侧具体对比项(type=compare时)
+	// Condition editor compare node (type=compare)
 	export interface CompareNode {
 		type: RELATION_COMP_TYPE
 		left_operands: InputExpressionValue
@@ -21,25 +21,25 @@ export namespace Expression {
 		right_operands: InputExpressionValue
 	}
 
-	// 条件编辑组件，右侧具体对比项(type=operation时)
+	// Condition editor operation node (type=operation)
 	export interface OperationNode {
 		type: RELATION_COMP_TYPE
 		operands: InputExpressionValue
 	}
 
-	// 条件编辑组件，整体的类型
+	// Condition editor top-level logic node type
 	export interface LogicNode {
 		ops: RELATION_LOGICS_MAP
 		children: Condition[]
 	}
 
-	// 条件编辑组件，单个项的类型
+	// Condition editor single node type
 	export type Condition = LogicNode | CompareNode
 
 	export interface ConditionSourceItem {
 		key: string
-		text: string // 选择的显示名
-		value: string // 选择的实际value
+		text: string // Display label
+		value: string // Actual value
 		have_children: boolean
 		children?: ConditionSourceItem[]
 	}

@@ -42,7 +42,7 @@ function BaseNodeComponent({ data, isConnectable, id, position }: NodeProps) {
 		return nodeConfig[id]
 	}, [nodeConfig, id])
 
-	// 使用useMemo包装对象引用，减少usePopup的不必要重新计算
+	// Wrap object references in useMemo to avoid unnecessary usePopup recalculations
 	const popupProps = useMemo(
 		() => ({
 			currentNode,
@@ -87,7 +87,7 @@ function BaseNodeComponent({ data, isConnectable, id, position }: NodeProps) {
 	const { nodeStyleMap, commonStyle, customNodeRenderConfig } = useExtraNodeConfig()
 	const { AvatarComponent } = useAvatar({ icon, color, currentNode })
 
-	// 使用useMemo稳定化NodeChildren的props
+	// Stabilize NodeChildren props with useMemo
 	const nodeChildrenProps = useMemo(
 		() => ({
 			// NodeHeader props
@@ -148,7 +148,7 @@ function BaseNodeComponent({ data, isConnectable, id, position }: NodeProps) {
 		],
 	)
 
-	// 使用useCallback稳定化各种回调函数
+	// Stabilize various callbacks with useCallback
 	const stableNodeWrapperClick = useCallback(onNodeWrapperClick, [onNodeWrapperClick])
 	const stableOnDragLeave = useCallback(onDragLeave, [onDragLeave])
 	const stableOnDragOver = useCallback(onDragOver, [onDragOver])
@@ -183,20 +183,20 @@ function BaseNodeComponent({ data, isConnectable, id, position }: NodeProps) {
 	)
 }
 
-// 自定义比较函数，判断是否需要重新渲染
+// Custom comparator to decide whether re-rendering is necessary
 const propsAreEqual = (prevProps: NodeProps, nextProps: NodeProps) => {
-	// 检查基本属性变化
+	// Check for changes in basic props
 	if (prevProps.id !== nextProps.id || prevProps.isConnectable !== nextProps.isConnectable) {
 		return false
 	}
 
-	// 因为位置变化由ReactFlow内部处理，不需要我们重新渲染节点内容
+	// Position updates are handled by ReactFlow, so we skip re-rendering for them
 
-	// 深度比较data属性中的关键项
+	// Deep-compare critical fields in the data prop
 	const prevData = prevProps.data || {}
 	const nextData = nextProps.data || {}
 
-	// 检查关键属性变化
+	// Check key attribute changes
 	if (
 		prevData.type !== nextData.type ||
 		prevData.color !== nextData.color ||
@@ -206,11 +206,11 @@ const propsAreEqual = (prevProps: NodeProps, nextProps: NodeProps) => {
 		return false
 	}
 
-	// 如果上述比较都没有变化，则认为props相等，不需要重新渲染
+	// If no differences are found, treat props as equal and skip re-render
 	return true
 }
 
-// 使用memo包装BaseNode组件
+// Wrap BaseNode with memo
 const BaseNode = memo(BaseNodeComponent, propsAreEqual)
 
 export default BaseNode

@@ -2,7 +2,7 @@ import { EXPRESSION_ITEM, EXPRESSION_VALUE, LabelTypeMap } from "../types"
 import { COLOR_DATA, COLOR_DATA_TEXT_COLOR } from "./colors"
 
 /**
- * 获取单个field的类型
+ * Get the type of a single field
  */
 export const getItemType = (typeString = "") => {
 	const types = Object.values(LabelTypeMap)
@@ -10,7 +10,7 @@ export const getItemType = (typeString = "") => {
 }
 
 /**
- * 过滤空值
+ * Filter out empty values
  */
 export const filterNullValue = (resultValue = [] as EXPRESSION_ITEM[]) => {
 	return resultValue
@@ -30,7 +30,7 @@ export const filterNullValue = (resultValue = [] as EXPRESSION_ITEM[]) => {
 		)
 }
 
-// 将<转&lt 将>转^gt，避免浏览器识别为html
+// Replace < and > with entities to avoid HTML parsing
 export const transferSpecialSign = (str: string) => {
 	return str.replace(/</g, "&lt;").replace(/>/g, "&gt;")
 }
@@ -58,7 +58,7 @@ export const getColor = (name: string) => {
 	}
 }
 
-/** 过滤掉空值 */
+/** Filter out empty values */
 export const filterEmptyValues = (values: EXPRESSION_VALUE[]) => {
 	return values?.filter?.((v) => {
 		const normalType = [LabelTypeMap.LabelNode, LabelTypeMap.LabelText, LabelTypeMap.LabelFunc]
@@ -70,24 +70,24 @@ export const filterEmptyValues = (values: EXPRESSION_VALUE[]) => {
 	})
 }
 
-// 将CSS尺寸值转换为纯数字
+// Convert CSS size values to a plain number
 export const parseSizeToNumber = (size: string | number): number => {
 	if (typeof size === "number") return size
 
-	// 如果是像素值，直接去掉px后缀并转为数字
+	// Strip px suffix and parse if it is a pixel value
 	if (size.endsWith("px")) {
 		return parseInt(size, 10)
 	}
 
-	// 如果是视口高度(vh)，计算为对应的像素值
+	// Convert viewport height (vh) to pixels
 	if (size.endsWith("vh")) {
 		const vh = parseInt(size, 10)
-		// 使用window.innerHeight获取视口高度
+		// Use window.innerHeight to get viewport height
 		const viewportHeight = typeof window !== "undefined" ? window.innerHeight : 600
 		return Math.floor((vh / 100) * viewportHeight)
 	}
 
-	// 如果没有单位或使用其他单位，尝试直接解析为数字
+	// If no unit or other units, try parsing directly
 	const parsed = parseInt(size.toString(), 10)
-	return isNaN(parsed) ? 600 : parsed // 默认值600px
+	return isNaN(parsed) ? 600 : parsed // Default to 600px
 }

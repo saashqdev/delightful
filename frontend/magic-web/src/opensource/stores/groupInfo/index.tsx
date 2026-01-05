@@ -26,24 +26,24 @@ class GroupInfoStore {
 	}
 
 	/**
-	 * 设置当前群聊
-	 * @param group 群聊
+	 * Set the current group
+	 * @param group Group info
 	 */
 	setCurrentGroup(group: GroupInfo) {
 		this.currentGroup = group
 	}
 
 	/**
-	 * 设置当前群聊成员
-	 * @param members 成员
+	 * Set current group members
+	 * @param members Members
 	 */
 	setCurrentGroupMembers(members: GroupConversationMember[]) {
 		this.currentGroupMembers = members
 	}
 
 	/**
-	 * 移除群组成员
-	 * @param userIds 用户ID
+	 * Remove group members
+	 * @param userIds User IDs
 	 */
 	removeGroupMembers(userIds: string[]) {
 		this.currentGroupMembers = this.currentGroupMembers.filter(

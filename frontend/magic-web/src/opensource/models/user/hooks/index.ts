@@ -6,7 +6,7 @@ import { useMemo } from "react"
 import { useOrganization } from "./useOrganization"
 
 /**
- * @description 获取当前账号所登录的设备
+ * @description Get devices logged in with the current account
  */
 export const useUserDevices = () => {
 	return useClientDataSWR<User.UserDeviceInfo[]>(RequestUrl.getUserDevices, () =>
@@ -15,7 +15,7 @@ export const useUserDevices = () => {
 }
 
 /**
- * @description 获取当前账号所处组织信息 Hook
+ * @description Hook to get the organization for the current account
  * @return {User.UserOrganization | undefined}
  */
 export const useCurrentMagicOrganization = (): User.MagicOrganization | null => {

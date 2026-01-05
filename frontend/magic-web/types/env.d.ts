@@ -1,33 +1,33 @@
 // types/env.d.ts
 interface ImportMetaEnv {
-	/** 当前环境 */
+	/** Current environment */
 	readonly MAGIC_APP_ENV?: "saas-test" | "saas-pre" | "saas-prod"
-	/** 是否私有化部署 */
+	/** Whether private deployment */
 	readonly MAGIC_IS_PRIVATE_DEPLOY?: "true" | "false"
-	/** WebSocket连接地址 */
+	/** WebSocket endpoint */
 	readonly MAGIC_SOCKET_BASE_URL?: string
-	/** SSO登录地址 */
+	/** SSO login URL */
 	readonly MAGIC_TEAMSHARE_BASE_URL?: string
-	/** 后端服务地址 */
+	/** Backend service URL */
 	readonly MAGIC_SERVICE_BASE_URL?: string
-	/** Keewood 后端服务地址 */
+	/** Keewood backend service URL */
 	readonly MAGIC_SERVICE_KEEWOOD_BASE_URL?: string
-	/** Teamshare 后端服务地址 */
+	/** Teamshare backend service URL */
 	readonly MAGIC_SERVICE_TEAMSHARE_BASE_URL?: string
-	/** Teamshare 高德地图Key */
+	/** Teamshare Amap key */
 	readonly MAGIC_AMAP_KEY?: string
-	/** Teamshare 高德地图Secret */
+	/** Teamshare Amap secret */
 	readonly MAGIC_GATEWAY_ADDRESS?: string
-	/** magic 应用 sha */
+	/** Magic app sha */
 	readonly MAGIC_APP_SHA?: string
-	/** magic 应用 版本 */
+	/** Magic app version */
 	readonly MAGIC_APP_VERSION?: string
 	readonly MAGIC_TEAMSHARE_WEB_URL?: string
 	readonly MAGIC_KEEWOOD_WEB_URL?: string
 	readonly MAGIC_EDITION?: string
-	/** 版权信息 */
+	/** Copyright info */
 	readonly MAGIC_COPYRIGHT?: string
-	/** ICP 备案号 */
+	/** ICP filing number */
 	readonly MAGIC_ICP_CODE?: string
 }
 

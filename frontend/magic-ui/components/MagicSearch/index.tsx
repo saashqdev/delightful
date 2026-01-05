@@ -27,11 +27,11 @@ const MagicSearch = memo(
 				onCompositionStart={() => setIsComposing(true)}
 				onCompositionEnd={(e: CompositionEvent<HTMLInputElement>) => {
 					setIsComposing(false)
-					// 在输入法结束时触发一次onChange
+					// Fire onChange once when IME composition ends
 					onChange?.(e as unknown as ChangeEvent<HTMLInputElement>)
 				}}
 				onChange={(e) => {
-					// 只在非输入法编辑状态下触发
+					// Only trigger during non-IME editing
 					setRawValue(e.target.value)
 					if (!isComposing) {
 						onChange?.(e)

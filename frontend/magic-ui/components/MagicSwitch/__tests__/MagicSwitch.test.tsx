@@ -12,7 +12,7 @@ describe("MagicSwitch", () => {
 		expect(screen.getByRole("switch")).toBeInTheDocument()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("默认开关快照", () => {
 			const { asFragment } = renderWithTheme(<MagicSwitch />)

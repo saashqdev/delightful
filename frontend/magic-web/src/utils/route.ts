@@ -1,9 +1,9 @@
 /**
- * 替换路由参数
+ * Replace route parameters
  *
- * @param route 路由
- * @param params 参数
- * @returns 带参数值路由
+ * @param route Route template
+ * @param params Param map
+ * @returns Route with parameters substituted
  */
 export const replaceRouteParams = (route: string, params: Record<string, string>) => {
 	const reg = /:([^/]+)/g
@@ -11,8 +11,8 @@ export const replaceRouteParams = (route: string, params: Record<string, string>
 }
 
 /**
- * 打开新标签
- * @param url 跳转地址
+ * Open a new tab
+ * @param url Target URL
  */
 export const openNewTab = (url?: string, base?: string) => {
 	if (!url) return
@@ -20,9 +20,9 @@ export const openNewTab = (url?: string, base?: string) => {
 }
 
 /**
- * 获取携带新参数的 url
- * @param query
- * @returns
+ * Build URL with additional query params
+ * @param query New query entries
+ * @returns URL string
  */
 export const getUrlWithNewSearchQuery = (url: string, query: Record<string, string>) => {
 	const querys = new URLSearchParams(window.location.search)

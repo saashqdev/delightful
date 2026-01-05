@@ -6,8 +6,8 @@ import ConversationService from "../services/chat/conversation/ConversationServi
 import ConversationStore from "@/opensource/stores/chatNew/conversation"
 
 /**
- * 自定义 Navigate hook
- * @returns
+ * Custom Navigate hook
+ * @returns navigate function wrapper
  */
 export const useNavigate = () => {
 	const navigate = useReactNavigate()
@@ -17,7 +17,7 @@ export const useNavigate = () => {
 				path === RoutePath.Chat &&
 				ConversationStore.currentConversation?.isAiConversation
 			) {
-				// 初始化会话 agent 信息
+				// Initialize conversation agent info before navigating
 				ConversationService.initConversationBotInfo(ConversationStore.currentConversation)
 			}
 			navigate(path, options)

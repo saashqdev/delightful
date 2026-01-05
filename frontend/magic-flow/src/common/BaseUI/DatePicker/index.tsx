@@ -10,7 +10,7 @@ import { DatePicker } from "antd"
 import React, { forwardRef } from "react"
 import style from "./style.module.less"
 
-// 定义 TsDatePicker 的 Props 类型
+// Define the TsDatePicker props type
 type TsDatePickerProps = React.ComponentProps<typeof DatePicker> & {
 	className?: string
 }
@@ -27,7 +27,7 @@ const TsDatePicker = forwardRef<HTMLDivElement, TsDatePickerProps>((props, ref) 
 	/>
 ))
 
-// 定义 RangePicker 的 Props 类型
+// Define the RangePicker props type
 type RangePickerProps = React.ComponentProps<typeof DatePicker.RangePicker> & {
 	className?: string
 }

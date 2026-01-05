@@ -6,8 +6,8 @@ import type { PropsWithChildren } from "react"
 import React, { useMemo, useState } from "react"
 
 export const ExportFieldsContext = React.createContext({
-	exportFields: new SchemaDescription(), // 需要导出的字段列表
-	showExportCheckbox: false, // 是否显示导出列
+	exportFields: new SchemaDescription(), // Fields to export
+	showExportCheckbox: false, // Whether to show the export column
 	setShowExportCheckbox: (() => {}) as React.Dispatch<React.SetStateAction<boolean>>,
 })
 
@@ -24,7 +24,7 @@ export const ExportFieldsProvider = ({
 		setExportFields(new SchemaDescription({ ...defaultExportFields }))
 	}, [defaultExportFields])
 
-	/** 是否需要打开导出选项 */
+	/** Whether to enable the export option */
 	const [showExportCheckbox, setShowExportCheckbox] = useState(false)
 
 	// console.log("EXPORT_FEIDLS", JSON.parse(JSON.stringify(exportFields.schema)))

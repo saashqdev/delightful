@@ -1,6 +1,6 @@
-# 条件组件 v2
+# Condition Component v2
 
-## 基本的示例
+## Basic example
 
 ```jsx
 import { MagicConditionEdit } from '@/index';

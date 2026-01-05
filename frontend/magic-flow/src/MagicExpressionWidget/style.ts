@@ -125,7 +125,7 @@ export const InputExpressionStyle = styled.div<{
 		background-color: #FFFFFF;
         border: 1px solid #1C1D2314;
 
-		// 当是Common时，需要+左侧的下拉宽度
+		// In Common mode, offset by the left dropdown width
 		&+div {
             bottom: auto!important;
             overflow: auto;

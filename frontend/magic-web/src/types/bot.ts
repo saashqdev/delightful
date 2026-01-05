@@ -1,4 +1,4 @@
-/** 机器人相关类型 */
+/** Bot-related types */
 import type { OperationTypes } from "@/opensource/pages/flow/components/AuthControlButton/types"
 import type {
 	InsertLocationMap,
@@ -14,7 +14,7 @@ export interface WithPage<ListType> {
 }
 
 export namespace Bot {
-	// 用户信息
+	// User info
 	export interface User {
 		magic_id: string
 		id: string
@@ -29,7 +29,7 @@ export namespace Bot {
 		user_type: number
 	}
 
-	/** 基础机器人列表 */
+	/** Basic bot list item */
 	export interface BotItem {
 		id: string
 		flow_id: string
@@ -47,7 +47,7 @@ export namespace Bot {
 		deleted_at?: string
 		deleted_uid?: string
 		bot_version?: BotVersion
-		quote?: number // 引用
+		quote?: number // Reference count
 		user_operation: OperationTypes
 		created_info: {
 			magic_id: string
@@ -84,7 +84,7 @@ export namespace Bot {
 		visibility_type: VisibleRangeType
 	}
 
-	/** 机器人版本 */
+	/** Bot version */
 	export type BotVersion = Omit<BotItem, "status" | "bot_version"> & {
 		root_id: string
 		version_number: string
@@ -102,7 +102,7 @@ export namespace Bot {
 		visibility_config: VisibilityConfig
 	}
 
-	/** 企业机器人列表 */
+	/** Enterprise bot list item */
 	export type OrgBotItem = BotItem & {
 		root_id: string
 		app_market_status: string
@@ -116,7 +116,7 @@ export namespace Bot {
 		is_add: boolean
 	}
 
-	/** 单个机器人详情 */
+	/** Bot detail */
 	export type Detail = {
 		botEntity: {
 			id: string
@@ -237,122 +237,122 @@ export enum ThirdPartyPlatformType {
 	EnterpriseWeChat = "wechat_robot",
 }
 
-/* 发布范围 */
+/* Release scope */
 export enum ScopeType {
-	// 个人
+	// Personal
 	private = 0,
-	// 组织
+	// Organization
 	organization = 1,
-	// 市场
+	// Marketplace
 	public = 2,
 }
 
-/* 可见范围 */
+/* Visibility scope */
 export enum VisibleRangeType {
-	/* 全员可见 */
+	/* Visible to everyone */
 	AllMember = 1,
-	/* 指定成员/部门可见 */
+	/* Visible to specified members/departments */
 	SpecifiedMemberOrDepartment = 2,
 }
 
-/** 快捷指令类型 */
+/** Quick instruction types */
 export const enum InstructionType {
-	// 单选项
+	// Single choice
 	SINGLE_CHOICE = 1,
-	// 开关
+	// Switch
 	SWITCH = 2,
-	// 文本
+	// Text
 	TEXT = 3,
-	// 状态
+	// Status
 	STATUS = 4,
 }
 
-/** 快捷指令组类型 */
+/** Quick instruction group types */
 export const enum InstructionGroupType {
-	// 工具栏
+	// Toolbar
 	TOOL = 1,
-	// 对话框
+	// Dialog
 	DIALOG = 2,
 }
 
-/** 快捷指令返回类型 */
+/** Quick instruction return type */
 export type RespondInstructType = {
 	[key: string]: string
 }
 
-/** 快捷指令说明 */
+/** Quick instruction description */
 export type InstructionExplanation = {
-	// 名称
+	// Name
 	name: string
-	// 描述
+	// Description
 	description: string
-	// 图片
+	// Image
 	image: string
-	// 临时图片url
+	// Temporary image URL
 	temp_image_url?: string
 }
 
-/** 快捷指令值 */
+/** Quick instruction value */
 export type InstructionValue = {
 	/** ID */
 	id: string
-	/** 名称 */
+	/** Name */
 	name: string
-	/** 值 */
+	/** Value */
 	value: string
-	/** 快捷指令说明 */
+	/** Quick instruction description */
 	instruction_explanation?: InstructionExplanation
 }
 
-/** 快捷指令 */
+/** Quick instruction */
 export interface QuickInstructionBase {
 	id: string
-	/** 名称 */
+	/** Name */
 	name: string
-	/** 描述 */
+	/** Description */
 	description: string
-	/** 直接发送指令 */
+	/** Send instruction directly */
 	send_directly?: boolean
-	/** 指令说明 */
+	/** Instruction description */
 	instruction_explanation?: InstructionExplanation
-	/** 指令插入位置 */
+	/** Instruction insertion position */
 	insert_location?: InsertLocationMap
-	/** 指令常驻 */
+	/** Instruction stays resident */
 	residency?: boolean
-	/** 指令类型 区分是：流程指令 还是 会话指令 */
+	/** Instruction type: flow instruction or conversation instruction */
 	instruction_type?: InstructionMode
 }
 
-/** 单选指令 */
+/** Single-choice instruction */
 export interface SelectorQuickInstruction extends QuickInstructionBase {
 	type: InstructionType.SINGLE_CHOICE
-	/** 值 */
+	/** Values */
 	values: InstructionValue[]
-	/** 内容 */
+	/** Content */
 	content: string
 }
 
-/** 开关指令 */
+/** Switch instruction */
 export interface SwitchQuickInstruction extends QuickInstructionBase {
 	type: InstructionType.SWITCH
-	/** 开启 */
+	/** On label */
 	on?: string
-	/** 关闭 */
+	/** Off label */
 	off?: string
-	/** 默认值 */
+	/** Default value */
 	default_value: "on" | "off"
-	/** 内容 */
+	/** Content */
 	content: string
 }
 
-/** 文本指令 */
+/** Text instruction */
 export interface TextQuickInstruction extends QuickInstructionBase {
 	type: InstructionType.TEXT
-	/** 内容 */
+	/** Content */
 	content: string
 }
 
-/** 状态文本颜色 */
+/** Status text color */
 export enum StatusTextColor {
 	DEFAULT = "default",
 	GREEN = "green",
@@ -360,75 +360,75 @@ export enum StatusTextColor {
 	ORANGE = "orange",
 }
 
-/** 状态值 */
+/** Status value */
 export type InstructionStatus = {
 	/** ID */
 	id?: string
-	/** 图标 */
+	/** Icon */
 	icon: StatusIconKey
-	/** 状态文本 */
+	/** Status label */
 	status_text: string
-	/** 状态文本颜色 */
+	/** Status label color */
 	text_color: string
-	/** 值 */
+	/** Value */
 	value: string
-	/** 状态 */
+	/** Switch state */
 	switch: boolean
 }
 
-/** 状态按钮 */
+/** Status button */
 export interface StatusQuickInstruction extends QuickInstructionBase {
 	type: InstructionType.STATUS
-	/** 默认值 */
+	/** Default value */
 	default_value: number
-	/** 值 */
+	/** Values */
 	values: InstructionStatus[]
 }
 
-/** 快捷指令显示类型 */
+/** Quick instruction display type */
 export const enum DisplayType {
-	// 系统
+	// System
 	SYSTEM = 2,
 }
 
-/** 系统指令类型 */
+/** System instruction type */
 export const enum SystemInstructType {
-	// 表情
+	// Emoji
 	EMOJI = 1,
-	// 文件
+	// File
 	FILE = 2,
-	// 话题
+	// Topic
 	TOPIC = 3,
-	// 定时任务
+	// Scheduled task
 	TASK = 4,
-	// 录音
+	// Recording
 	RECORD = 5,
 }
 
-/** 系统指令映射表 */
+/** System instruction map */
 export type SystemInstructMap = Record<SystemInstructType, string>
 
-/** 系统指令 */
+/** System instruction */
 export interface SystemInstruct extends QuickInstructionBase {
-	/** 类型 */
+	/** Type */
 	type: SystemInstructType
-	/** 显隐 */
+	/** Visibility */
 	hidden: boolean
-	/** 展示类型 */
+	/** Display type */
 	display_type: DisplayType
-	/** 图标 */
+	/** Icon */
 	icon: StatusIconKey
 }
 
-/** 快捷指令模式 */
+/** Quick instruction mode */
 export const enum InstructionMode {
-	// 流程
+	// Flow
 	Flow = 1,
-	// 对话
+	// Chat
 	Chat = 2,
 }
 
-/** 快捷指令 */
+/** Quick instruction */
 export type QuickInstruction =
 	| SelectorQuickInstruction
 	| SwitchQuickInstruction
@@ -438,7 +438,7 @@ export type QuickInstruction =
 
 export type CommonQuickInstruction = Exclude<QuickInstruction, SystemInstruct>
 
-/** 快捷指令组 */
+/** Quick instruction group */
 export type QuickInstructionList = {
 	position: InstructionGroupType
 	items: QuickInstruction[]

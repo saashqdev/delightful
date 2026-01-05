@@ -9,7 +9,7 @@ export class AccountStore {
 	}
 
 	/**
-	 * @description 账号创建
+	 * @description Create account record
 	 */
 	setAccount = (account: User.UserAccount) => {
 		const exists = this.accounts.some((acc) => acc.magic_id === account.magic_id)
@@ -19,7 +19,7 @@ export class AccountStore {
 	}
 
 	/**
-	 * @description 移除账号
+	 * @description Remove account record
 	 */
 	deleteAccount = (unionId: string) => {
 		const index = this.accounts.findIndex((acc) => acc.magic_id === unionId)
@@ -29,7 +29,7 @@ export class AccountStore {
 	}
 
 	/**
-	 * @description 更新账号
+	 * @description Update account record
 	 */
 	updateAccount = (unionId: string, updatedAccount: Partial<User.UserAccount>) => {
 		const index = this.accounts.findIndex((acc) => acc.magic_id === unionId)

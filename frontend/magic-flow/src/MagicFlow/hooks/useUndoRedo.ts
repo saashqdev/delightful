@@ -19,13 +19,13 @@ const useUndoRedo = (debuggerMode: boolean) => {
 
   useUpdateEffect(() => {
     if(debuggerMode) {
-        console.log("撤销栈更新", undoStack)
+        console.log("Undo stack updated", undoStack)
     }
   }, [undoStack])
 
    useUpdateEffect(() => {
     if(debuggerMode) {
-        console.log("重做栈更新", redoStack)
+        console.log("Redo stack updated", redoStack)
     }
   }, [redoStack])
 
@@ -39,7 +39,7 @@ const useUndoRedo = (debuggerMode: boolean) => {
         // hasUndo.current = false;
         // setUndoStack((prev) => {
         //   const newStack = [...prev, snapshot];
-        //   // 如果超过最大长度,删除最早的快照
+        //   // Drop oldest snapshot when exceeding max length
         //   if (newStack.length > MAX_STACK_SIZE) {
         //     return newStack.slice(-MAX_STACK_SIZE);
         //   }
@@ -60,11 +60,11 @@ const useUndoRedo = (debuggerMode: boolean) => {
 
     const lastSnapshot = undoStack[undoStack.length - 1];
     setUndoStack((prev) => prev.slice(0, -1));
-    // 当redo为空的时候，同时需要将当前快照进行压栈
+    // When redo is empty, also push the current snapshot
     const newRedoStackMembers = redoStack.length === 0 && !hasUndo.current ? [currentSnapshot, lastSnapshot] : [lastSnapshot]
     setRedoStack((prev) => {
       const newStack = [...prev, ...newRedoStackMembers];
-      // 如果超过最大长度,删除最早的快照
+      // Drop oldest snapshot when exceeding max length
       if (newStack.length > MAX_STACK_SIZE) {
         return newStack.slice(-MAX_STACK_SIZE);
       }
@@ -83,7 +83,7 @@ const useUndoRedo = (debuggerMode: boolean) => {
     setRedoStack((prev) => prev.slice(0, -1));
     setUndoStack((prev) => {
       const newStack = [...prev, nextSnapshot];
-      // 如果超过最大长度,删除最早的快照
+      // Drop oldest snapshot when exceeding max length
       if (newStack.length > MAX_STACK_SIZE) {
         return newStack.slice(-MAX_STACK_SIZE);
       }

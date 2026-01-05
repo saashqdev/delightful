@@ -77,7 +77,7 @@ describe("MagicButton", () => {
 		expect(ref).toHaveBeenCalled()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("默认按钮快照", () => {
 			const { asFragment } = renderWithTheme(<MagicButton>默认按钮</MagicButton>)

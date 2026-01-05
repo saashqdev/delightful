@@ -1,8 +1,8 @@
 export default {
-    // 容器类（如主容器，下拉选择器，输入框）
+    // Containers (main wrapper, selects, inputs)
     container: "8px",
-    // icon类
+    // Icon radius
     icon: "4px",
-    // 按钮类
-    button: "6px"
+    // Button radius
+    button: "6px",
 }

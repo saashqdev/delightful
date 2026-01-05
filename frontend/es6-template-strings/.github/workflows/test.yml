@@ -26,15 +26,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 安装依赖包
+      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # 运行单元测试并生成覆盖率报告
+      # Run unit tests and generate coverage report
       - name: Run unit tests
         run: npm test -- --coverage
 
-      # 上传覆盖率报告到Codecov
+      # Upload coverage report to Codecov
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:

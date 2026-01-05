@@ -2,7 +2,7 @@ import { ControlEventMessageType } from "@/types/chat/control_message"
 import { ConversationMessageType } from "@/types/chat/conversation_message"
 
 /**
- * @deprecated 使用 ChatMessageApplyServices.isChatMessage 和 ControlMessageApplyService.isControlMessageShouldRender 替代
+ * @deprecated Use ChatMessageApplyServices.isChatMessage and ControlMessageApplyService.isControlMessageShouldRender instead
  */
 export const CONVERSATION_MESSAGE_TYPES: (ConversationMessageType | ControlEventMessageType)[] = [
 	ConversationMessageType.Text,
@@ -25,10 +25,10 @@ export const CONVERSATION_MESSAGE_TYPES: (ConversationMessageType | ControlEvent
 	ConversationMessageType.HDImage,
 ]
 
-/** 魔法表单表确认消息 */
+/** Confirmation message for magic forms */
 export const MAGIC_FORM_CONFIRM_MESSAGE = "[MAGIC_FORM_CONFIRM]"
 
-/** 可撤回的会话消息类型 */
+/** Conversation message types that can be revoked */
 export const CONVERSATION_MESSAGE_CAN_REVOKE_TYPES = [
 	ConversationMessageType.Text,
 	ConversationMessageType.RichText,
@@ -39,7 +39,7 @@ export const CONVERSATION_MESSAGE_CAN_REVOKE_TYPES = [
 	ConversationMessageType.RecordingSummary,
 ]
 
-/** 可渲染为文本的会话消息类型 */
+/** Conversation message types that can render to text */
 export const CONVERSATION_MESSAGE_CAN_RENDER_TO_TEXT_TYPES = [
 	...CONVERSATION_MESSAGE_CAN_REVOKE_TYPES,
 	ControlEventMessageType.RevokeMessage,
@@ -54,5 +54,5 @@ export const enum ConversationGroupKey {
 	Other = "Other",
 }
 
-// 心跳时间偏移值
+// Heartbeat time offset
 export const HEARTBEAT_TIME_OFFSET = 2000

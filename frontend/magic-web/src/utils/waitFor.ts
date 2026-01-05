@@ -1,5 +1,5 @@
 /**
- * @description 等待某个条件成立，成立返回true，超时返回false
+ * @description Wait for a condition; resolve true when satisfied, false on timeout
  * @case 
     waitFor({
         dataFn:()=>{return window.test}, 

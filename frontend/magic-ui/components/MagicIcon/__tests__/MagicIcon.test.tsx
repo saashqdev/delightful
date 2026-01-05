@@ -12,7 +12,7 @@ describe("MagicIcon", () => {
 		expect(true).toBe(true)
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础图标快照", () => {
 			const { asFragment } = renderWithTheme(<MagicIcon name="user" />)

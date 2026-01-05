@@ -9,28 +9,28 @@ export const enum EXPRESSION_ITEM_TYPE {
 
 
 export default interface Schema {
-  // 字段的title
+  // Field title
   title?: string;
-  // 字段的类型
+  // Field type
   type: string;
-  // 字段的属性
+  // Field properties
   properties?: Record<string, Schema>;
-  // 字段是否必填
+  // Required fields
   required?: string[];
-  // 字段的描述
+  // Field description
   description?: string;
-  // 字段的子项
+  // Child schema
   items?: Schema;
-  // 字段的值
+  // Field value
   value: InputExpressionValue;
-  // 字段是否加密
+  // Whether the field is encrypted
   encryption?: boolean
-  // 字段加密的值
+  // Encrypted value
   encryption_value?: string
-  // 字段的排序
+  // Field sort order
   sort?: number
 
-  // 以下为暂时用不到的字段
+  // Fields currently unused
   default?: boolean | string;
   mock?: string | { mock: string };
   minLength?: number;
@@ -54,9 +54,9 @@ export interface CustomOptions {
   root?: FormItemType[];
 }
 
-/** 可被禁用的项枚举 */
+/** Enumeration of fields that can be disabled */
 export enum DisabledField {
-  /** 字段名 */
+  /** Field name */
   Name = 'key',
   Title = 'title',
   Description = 'description',
@@ -65,7 +65,7 @@ export enum DisabledField {
   Encryption = 'encryption',
 }
 
-/** 自定义字段配置的显示 */
+/** Visibility for custom field configuration */
 export type CustomFieldsConfig = {
 	onlyExpression?: boolean
 	constantsDataSource?: DataSourceOption[]

@@ -1,4 +1,4 @@
-/** 过滤出可用选项 */
+/** Filter available options */
 import { FormItemType } from "@/MagicExpressionWidget/types"
 import { SCHEMA_TYPE } from "@/MagicJsonSchemaEditor/constants"
 import { cleanAndFilterArray, getSelectOptions } from "@/MagicJsonSchemaEditor/utils/helpers"

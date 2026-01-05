@@ -6,9 +6,9 @@ import { t } from "i18next"
 import type { StructureUserItem } from "@/types/organization"
 
 /**
- * 获取用户名称
- * @param userDetail 用户详情
- * @returns 用户名称
+ * Get user name
+ * @param userDetail User detail
+ * @returns User name
  */
 export function getUserName(userDetail?: StructureUserItem) {
 	if (!userDetail) return t("common.unknown", { ns: "interface" })
@@ -22,18 +22,18 @@ export function getUserName(userDetail?: StructureUserItem) {
 }
 
 /**
- * 获取用户职位
- * @param userDetail 用户详情
- * @returns 用户职位
+ * Get user job title
+ * @param userDetail User detail
+ * @returns User job title
  */
 export function getUserJobTitle(userDetail?: StructureUserItem) {
 	return userDetail?.job_title
 }
 
 /**
- * 获取用户第一部门路径
- * @param userDetail 用户详情
- * @returns 用户第一部门路径
+ * Get the user's first department path
+ * @param userDetail User detail
+ * @returns First department path
  */
 export function getUserDepartmentFirstPath(userDetail?: StructureUserItem) {
 	if (!userDetail) return t("common.unknown", { ns: "interface" })
@@ -41,9 +41,9 @@ export function getUserDepartmentFirstPath(userDetail?: StructureUserItem) {
 }
 
 /**
- * 收集对话消息
- * @param conversation 对话详情
- * @param penddingMessages 等待发送的消息
+ * Collect conversation messages
+ * @param conversation Conversation detail
+ * @param penddingMessages Pending messages
  * @returns
  */
 export function collectConversationMessages(
@@ -69,9 +69,9 @@ export function collectConversationMessages(
 }
 
 /**
- * 标题带数量
- * @param title 标题
- * @param count 数量
+ * Title with count suffix
+ * @param title Title
+ * @param count Count
  * @returns
  */
 export function titleWithCount(title: string, count: number) {

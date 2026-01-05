@@ -1,5 +1,5 @@
 /**
- * 仅流程节点可使用
+ * Intended for use within flow nodes only
  */
 import { Select } from "antd"
 import { IconChevronDown, IconX } from "@tabler/icons-react"
@@ -10,7 +10,7 @@ import styles from "./index.module.less"
 import { GlobalStyle } from "./style"
 import { FLOW_EVENTS, flowEventBus } from "./constants"
 
-// 外部传入的事件处理函数类型
+// External event handler types
 export type SelectEventHandlers = {
 	onNodeSelected?: (nodeId?: string) => void
 	onEdgeSelected?: (edgeId?: string) => void
@@ -21,23 +21,23 @@ type TsSelectProps = {
 	className?: string
 	suffixIcon?: React.ReactElement
 	popupClassName?: string
-	dropdownRenderProps?: {
-		// 搜索框占位符
-		placeholder?: string
-		// 实际渲染组件
-		component?: () => ReactElement
-		// 是否显示搜索框
-		showSearch?: boolean
-		// Option的包裹层组件
-		OptionWrapper: React.FC<any>
-		[key: string]: any
-	}
-	// 新增可选的关闭下拉菜单的外部事件处理函数
+		dropdownRenderProps?: {
+			// Placeholder text for the search box
+			placeholder?: string
+			// Actual render component
+			component?: () => ReactElement
+			// Whether to show the search box
+			showSearch?: boolean
+			// Wrapper component for options
+			OptionWrapper: React.FC<any>
+			[key: string]: any
+		}
+		// Optional external handler to close the dropdown
 	eventHandlers?: SelectEventHandlers
 	[key: string]: any
 }
 
-// 使用memo包装组件，优化性能
+// Wrap with memo to improve performance
 const MagicSelectComponent = forwardRef((props: TsSelectProps, ref: any) => {
 	const { dropdownRenderProps, eventHandlers, ...restSelectProps } = props
 
@@ -50,9 +50,9 @@ const MagicSelectComponent = forwardRef((props: TsSelectProps, ref: any) => {
 	} = (dropdownRenderProps || {})!
 
 	const [open, setOpen] = useState(false)
-	const containerRef = useRef<HTMLDivElement>(null) // 引用容器
+	const containerRef = useRef<HTMLDivElement>(null) // Container reference
 
-	// 过滤掉不可见的选项
+	// Filter out options marked as invisible
 	const filterOptions = useMemo(() => {
 		// @ts-ignore
 		return restSelectProps?.options?.filter((option) => {
@@ -61,20 +61,20 @@ const MagicSelectComponent = forwardRef((props: TsSelectProps, ref: any) => {
 		})
 	}, [restSelectProps.options])
 
-	// 根据是否允许清除和当前值确定是否显示后缀图标
+	// Decide whether to show the suffix icon based on allowClear and current value
 	const showSuffixIcon = useMemo(() => {
 		if (!Reflect.has(restSelectProps, "allowClear")) return true
 		const allowClear = Reflect.get(restSelectProps, "allowClear")
 		return allowClear && !restSelectProps.value
 	}, [restSelectProps.allowClear, restSelectProps.value])
 
-	// 拦截onChange做一些额外事件
+	// Intercept onChange to add custom behavior
 	const onChangeHooks = useMemoizedFn((event) => {
 		restSelectProps.onChange?.(event)
 		setOpen(false)
 	})
 
-	// 创建一个事件监听系统，替代对Context的直接依赖
+	// Create an event listener system instead of relying directly on Context
 	const closeDropdown = useMemoizedFn(() => {
 		setOpen(false)
 	})
@@ -94,9 +94,9 @@ const MagicSelectComponent = forwardRef((props: TsSelectProps, ref: any) => {
 		eventHandlers?.onCanvasClicked?.(e.detail)
 	})
 
-	// 监听外部事件以关闭下拉菜单
+	// Listen to external events to close the dropdown
 	useEffect(() => {
-		// 清理函数数组
+		// Cleanup function list
 		const cleanupFunctions = []
 
 		const nodeClickCleanup = flowEventBus.on(FLOW_EVENTS.NODE_SELECTED, handleNodeSelected)
@@ -104,13 +104,13 @@ const MagicSelectComponent = forwardRef((props: TsSelectProps, ref: any) => {
 		const canvasClickCleanup = flowEventBus.on(FLOW_EVENTS.CANVAS_CLICKED, handleCanvasClicked)
 		cleanupFunctions.push(nodeClickCleanup, edgeClickCleanup, canvasClickCleanup)
 
-		// 返回清理函数
+		// Return cleanup function
 		return () => {
 			cleanupFunctions.forEach((cleanup) => cleanup())
 		}
 	}, [eventHandlers])
 
-	// 点击外部关闭下拉菜单
+	// Close dropdown when clicking outside
 	useEffect(() => {
 		const handleClickOutside = (e: MouseEvent) => {
 			if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
@@ -160,7 +160,7 @@ const MagicSelectComponent = forwardRef((props: TsSelectProps, ref: any) => {
 										{...restDropdownProps}
 									/>
 							  )
-							: // 加一层包裹避免onClick事件上浮
+							: // Wrap to prevent onClick from bubbling
 							  (menu) => <div onClick={(e) => e.stopPropagation()}>{menu}</div>
 					}
 					clearIcon={<IconX size={16} className={styles.clearIcon} />}
@@ -170,10 +170,10 @@ const MagicSelectComponent = forwardRef((props: TsSelectProps, ref: any) => {
 	)
 })
 
-// 使用memo包装组件，提供自定义比较函数
+// Memoized component with custom comparator
 const MagicSelect = memo(MagicSelectComponent)
 
-// 正确处理静态属性
+// Preserve static properties
 const EnhancedMagicSelect: any = MagicSelect
 EnhancedMagicSelect.Option = Select.Option
 EnhancedMagicSelect.OptGroup = Select.OptGroup

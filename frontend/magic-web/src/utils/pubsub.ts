@@ -1,5 +1,5 @@
 /**
- * 简单的发布订阅系统
+ * Simple publish-subscribe system
  */
 
 type Listener = (...args: any[]) => void
@@ -8,9 +8,9 @@ class PubSub {
 	private events: Record<string, Listener[]> = {}
 
 	/**
-	 * 订阅事件
-	 * @param event 事件名称
-	 * @param callback 回调函数
+	 * Subscribe to an event
+	 * @param event Event name
+	 * @param callback Listener callback
 	 */
 	subscribe(event: string, callback: Listener): void {
 		if (!this.events[event]) {
@@ -20,9 +20,9 @@ class PubSub {
 	}
 
 	/**
-	 * 取消订阅事件
-	 * @param event 事件名称
-	 * @param callback 可选，特定的回调函数。如果不提供，将取消该事件的所有订阅
+	 * Unsubscribe from an event
+	 * @param event Event name
+	 * @param callback Optional specific callback. If omitted, all subscriptions for the event are removed
 	 */
 	unsubscribe(event: string, callback?: Listener): void {
 		if (!this.events[event]) {
@@ -37,9 +37,9 @@ class PubSub {
 	}
 
 	/**
-	 * 发布事件
-	 * @param event 事件名称
-	 * @param args 传递给订阅者的参数
+	 * Publish an event
+	 * @param event Event name
+	 * @param args Arguments passed to listeners
 	 */
 	publish(event: string, ...args: any[]): void {
 		if (!this.events[event]) {
@@ -56,13 +56,13 @@ class PubSub {
 	}
 
 	/**
-	 * 清除所有事件订阅
+	 * Clear all event subscriptions
 	 */
 	clear(): void {
 		this.events = {}
 	}
 }
 
-// 创建并导出单例实例
+// Create and export singleton instance
 const pubsub = new PubSub()
 export default pubsub

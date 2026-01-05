@@ -1,15 +1,15 @@
 import { resolveToString, resolveToArray } from "../src"
 
-describe("es6-template-strings 导出模块测试", () => {
-	test("resolveToString 应该是一个函数", () => {
+describe("es6-template-strings export module tests", () => {
+	test("resolveToString should be a function", () => {
 		expect(typeof resolveToString).toBe("function")
 	})
 
-	test("resolveToArray 应该是一个函数", () => {
+	test("resolveToArray should be a function", () => {
 		expect(typeof resolveToArray).toBe("function")
 	})
 
-	test("默认导出应该是 resolveToString", () => {
+	test("default export should be resolveToString", () => {
 		expect(resolveToString).toBe(resolveToString)
 	})
 })

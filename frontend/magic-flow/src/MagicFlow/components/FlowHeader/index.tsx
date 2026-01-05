@@ -14,7 +14,7 @@ export default function FlowHeader() {
 	const { header, showExtraFlowInfo } = useExternal()
 	const { flow, updateFlow } = useFlowData()
 
-	// 计算showImage，避免在子组件中计算
+	// Compute showImage once to avoid re-calculating inside children
 	const showImage = useMemo(() => {
 		if (_.isBoolean(header?.showImage)) {
 			return header?.showImage

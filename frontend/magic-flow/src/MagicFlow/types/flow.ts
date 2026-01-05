@@ -3,21 +3,21 @@ import { FlowDesignerEvents, FlowStatus } from "../constants"
 import { BaseNodeType } from "../register/node"
 import { WidgetValue } from "../examples/BaseFlow/common/Output"
 
-/** 流程类型 */
+/** Flow type */
 export enum FlowType {
-    /** 主流程 */
+    /** Main flow */
     Main= 1,
-    /** 子流程 */
+    /** Subflow */
     Sub = 2
 }
 
 export namespace MagicFlow {
 
-    // 单个节点数据结构
+    // Node data structure
     export interface Node extends BaseNode {
         id: string
         node_id: string
-        // node_type: BaseNodeType  // 改为自定义参数名称了，不一定为 node_type
+        // node_type: BaseNodeType  // Renamed to a custom parameter; may differ from node_type
         meta: { 
 			position: { x: number, y: number } 
 			[key: string] : any
@@ -38,21 +38,21 @@ export namespace MagicFlow {
 		content?: {
 			[key: string]: any
 		}
-		// 是否处于debug模式
+        // Whether the node is in debug mode
 		debug?: boolean
         
-        // 前端生成
+        // Generated on the frontend
         index?: number
         output?: WidgetValue['value'] | null
         input?: WidgetValue['value'] | null
 		children?: MagicFlow.Node[]
-        // 节点版本号
+        // Node version
         node_version: string
 		[key: string]: any
     }
 
 
-    // 单个流程数据结构
+    // Flow data structure
     export interface Flow {
         id?: string
         name: string

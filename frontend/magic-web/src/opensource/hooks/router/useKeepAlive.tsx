@@ -4,23 +4,23 @@ import { keepAliveRoutes } from "@/const/keepAliveRoutes"
 import { RoutePath } from "@/const/routes"
 import LoadingFallback from "@/opensource/components/fallback/LoadingFallback"
 
-// 缓存状态类型
+// Cache state type
 type CacheState = Record<string, React.ReactNode>
 
-// 缓存action类型
+// Cache action type
 type CacheAction =
 	| { type: "ADD_CACHE"; path: string; outlet: React.ReactNode }
 	| { type: "REMOVE_CACHE"; path: string }
 
 /**
- * 使用keepAlive，根据配置的keepAliveRoutes，页面切换时，不卸载页面，改为隐藏，主要为了解决重新挂载的渲染性能问题
- * @returns { Content } - 渲染缓存的组件
+ * Keep components alive per keepAliveRoutes: hide instead of unmounting to avoid remount cost
+ * @returns { Content } - component that renders cached outlets
  */
 export const useKeepAlive = () => {
 	const location = useLocation()
 	const outlet = useOutlet()
 
-	// 缓存reducer
+	// Cache reducer
 	const cacheReducer = (state: CacheState, action: CacheAction): CacheState => {
 		switch (action.type) {
 			case "ADD_CACHE":
@@ -36,16 +36,16 @@ export const useKeepAlive = () => {
 
 	const [caches, dispatch] = useReducer(cacheReducer, {})
 
-	// 根据配置的keepAliveRoutes，判断是否需要缓存
+	// Determine if current path should be cached
 	const shouldCache = useMemo(
 		() => keepAliveRoutes.includes(location.pathname as RoutePath),
 		[location.pathname],
 	)
 
-	// 监听路由变化，管理缓存
+	// Manage cache when route changes
 	useEffect(() => {
 		if (shouldCache) {
-			// 只在缓存不存在时添加
+			// Only add when not already cached
 			if (!caches[location.pathname]) {
 				dispatch({
 					type: "ADD_CACHE",
@@ -54,16 +54,16 @@ export const useKeepAlive = () => {
 				})
 			}
 		} else {
-			// 非缓存路径，从缓存中移除
+			// Remove from cache when path is not configured for caching
 			if (caches[location.pathname]) {
 				dispatch({ type: "REMOVE_CACHE", path: location.pathname })
 			}
 		}
 	}, [shouldCache, location.pathname, outlet, caches])
 
-	// 渲染缓存的内容
+	// Render cached content
 	const Content = useMemo(() => {
-		// 获取所有缓存的页面内容
+		// Get all cached outlet content
 		const cachedOutlets = Object.entries(caches).map(([path, outlet]) => {
 			const match = path === location.pathname
 
@@ -87,9 +87,9 @@ export const useKeepAlive = () => {
 
 		return (
 			<LoadingFallback>
-				{/* 渲染所有缓存的页面，即使是隐藏状态 */}
+				{/* Render all cached pages even when hidden */}
 				{cachedOutlets}
-				{/* 非缓存路径的情况下渲染常规Outlet */}
+				{/* Render regular Outlet for non-cached paths */}
 				{!shouldCache && <Outlet />}
 			</LoadingFallback>
 		)

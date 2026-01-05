@@ -1,10 +1,10 @@
 import { DriveItemFileType } from "@/types/drive"
 
 /**
- * 获取文件访问路径
- * @param id 文件 ID
- * @param fType 文件类型
- * @returns 路径
+ * Get drive file access path
+ * @param id File ID
+ * @param fType File type
+ * @returns Redirect path
  */
 export const getDriveFileRedirectUrl = (id: string, fType: DriveItemFileType) => {
 	if (fType === DriveItemFileType.CLOUD_DOC) {

@@ -95,11 +95,11 @@ const ContentEditable = (
 		getSpaceText(),
 	])
 	const [editKey, setEditKey] = useState(new Date().valueOf())
-	const [selectedNode, setSelectedNode] = useState("") // 当前选中的节点数据(除文本节点外)
+	const [selectedNode, setSelectedNode] = useState("") // Current selected node data (excluding text nodes)
 
 	const editRef = useRef({} as KeeboardEditRef)
 	const cursorRef = useRef({} as CursorRef)
-	const editChangeRef = useRef({} as EditChangeRef) // 提供给子组件间容器方法
+	const editChangeRef = useRef({} as EditChangeRef) // Provide cross-component communication container methods
 
 	const isResetCursor = useRef(false) // 是否重置光标
 	const isEntering = useRef(false) // 是否正在拼音输入

@@ -13,7 +13,7 @@ describe("MagicPageContainer", () => {
 		expect(screen.getByText("页面内容")).toBeInTheDocument()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础页面容器快照", () => {
 			const { asFragment } = renderWithTheme(

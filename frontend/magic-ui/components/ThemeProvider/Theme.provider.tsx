@@ -8,7 +8,7 @@ import { genPalettesConfigs } from "./utils"
 import type { ColorScales, ColorUsages } from "./types"
 
 export interface NewToken {
-	/** 顶部菜单栏高度 */
+	/** Top menu bar height */
 	titleBarHeight?: number
 	magicColorScales: ColorScales
 	magicColorUsages: ColorUsages

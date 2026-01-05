@@ -11,17 +11,17 @@ class InterfaceStore {
 	chatPanelSizeKey = platformKey("chatPanel")
 
 	/**
-	 * 聊天输入框默认高度
+	 * Default height for the chat input
 	 */
 	chatInputDefaultHeight = 240
 
 	/**
-	 * 聊天侧边栏默认宽度
+	 * Default width for the chat sidebar
 	 */
 	chatSiderDefaultWidth = 240
 
 	/**
-	 * 是否显示启动页
+	 * Whether to show the start page
 	 */
 	isShowStartPage: boolean = JSON.parse(localStorage.getItem(this.isShowStartPageKey) ?? "true")
 
@@ -58,7 +58,7 @@ class InterfaceStore {
 	}
 
 	/**
-	 * 缓存聊天面板大小
+	 * Persist chat panel dimensions
 	 */
 	cacheChatPanelSize() {
 		localStorage.setItem(
@@ -71,7 +71,7 @@ class InterfaceStore {
 	}
 
 	/**
-	 * 设置聊天输入框默认高度
+	 * Set default chat input height
 	 */
 	setChatInputDefaultHeight(height: number) {
 		this.chatInputDefaultHeight = height
@@ -79,7 +79,7 @@ class InterfaceStore {
 	}
 
 	/**
-	 * 设置聊天侧边栏默认宽度
+	 * Set default chat sidebar width
 	 */
 	setChatSiderDefaultWidth(width: number) {
 		this.chatSiderDefaultWidth = width
@@ -87,5 +87,5 @@ class InterfaceStore {
 	}
 }
 
-// 创建全局单例
+// Create global singleton
 export const interfaceStore = new InterfaceStore()

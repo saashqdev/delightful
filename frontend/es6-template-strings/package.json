@@ -1,7 +1,7 @@
 {
 	"name": "@dtyq/es6-template-strings",
 	"version": "0.0.4",
-	"description": "字符串模版引擎",
+	"description": "Template string engine",
 	"keywords": [],
 	"repository": {
 		"type": "git",

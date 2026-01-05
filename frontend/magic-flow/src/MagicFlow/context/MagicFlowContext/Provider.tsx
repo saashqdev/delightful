@@ -1,5 +1,5 @@
 /**
- * 业务组件传入相关的自定义props
+ * Business components supply custom props
  */
 import { flowStore } from "@/MagicFlow/store"
 import { getRegisterNodeTypes } from "@/MagicFlow/utils"

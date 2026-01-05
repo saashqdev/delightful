@@ -12,7 +12,7 @@ describe("MagicFileIcon", () => {
 		expect(true).toBe(true)
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("PDF文件图标快照", () => {
 			const { asFragment } = renderWithTheme(<MagicFileIcon type="pdf" />)

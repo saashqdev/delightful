@@ -19,7 +19,7 @@ export interface FileUploadData {
 }
 
 /**
- * 上传文件(不包含文件上报,只包含将文件上传到OSS)
+ * Upload files (only upload to OSS; does not include reporting)
  * @param param0
  * @returns
  */
@@ -60,10 +60,10 @@ export const useUpload = <F extends FileUploadData>({
 					const { organizationCode } = userStore.user
 
 					/**
-					 * ⚠️ important：
-					 * upload-sdk 中会根据 url 缓存鉴权凭证信息
-					 * 所以需要对 url 进行组织编码隔离（目前通过添加`?organization_code=xxx`参数进行隔离）
-					 * 保证切换组织后，能正确获取鉴权信息
+					 * ⚠️ important:
+					 * upload-sdk caches auth credentials by URL.
+					 * To avoid cross-org leakage, isolate URLs with organization_code (currently by appending `?organization_code=xxx`).
+					 * Ensures correct auth after switching organizations.
 					 */
 					const url = `${
 						env("MAGIC_SERVICE_BASE_URL") +
@@ -140,24 +140,24 @@ export const useUpload = <F extends FileUploadData>({
 	})
 
 	const validateFileType = useMemoizedFn((file, maxSize = 2) => {
-		// 检查文件类型
+		// Validate file type
 		const validTypes = ["image/png", "image/gif", "image/jpeg"]
 		if (!validTypes.includes(file.type)) {
-			message.error("仅支持上传png/jpg/gif格式的图片")
+			message.error("Only png/jpg/gif images are supported")
 			return false
 		}
 
 		if (file.size / 1024 / 1024 > maxSize) {
-			message.error("图片不能超过2M")
+			message.error("Image must be no larger than 2MB")
 			return false
 		}
 		return true
 	})
 
 	/**
-	 * 获取文件的下载 URL
-	 * @param reportRes 文件报告数据
-	 * @returns 包含成功和失败结果的对象
+	 * Get download URLs for files
+	 * @param reportRes File report data
+	 * @returns Object containing fulfilled and rejected results
 	 */
 	const getFileUrls = async (reportRes: ReportFileUploadsResponse[]) => {
 		return Promise.allSettled(reportRes.map(async (r) => FileApi.getFileUrl(r.file_key))).then(
@@ -175,7 +175,7 @@ export const useUpload = <F extends FileUploadData>({
 		)
 	}
 
-	// 图片上传并获取文件url
+	// Upload images and retrieve file URLs
 	const uploadAndGetFileUrl = useMemoizedFn(
 		async (filesList, validator?: (file: File) => boolean) => {
 			const validatorFn = validator ?? validateFileType

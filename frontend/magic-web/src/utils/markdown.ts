@@ -1,9 +1,9 @@
 export const FALLBACK_LANG = "txt"
 
 /**
- * 生成代码块
- * @param lang 语言
- * @param code 代码
+ * Generate a code block
+ * @param lang Language
+ * @param code Code content
  * @returns
  */
 export const genCodeSection = (lang: string | undefined, code: string) => {

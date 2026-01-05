@@ -31,30 +31,30 @@ export type DataSourceOption = {
 	title: string
 	key: string | number
 	nodeId: string | number
-	// 当前节点类型
+	// Current node type
 	nodeType: string | number
 	children?: DataSourceOption[]
-	// 当前字段类型
+	// Current field type
 	type?: string
-	// 是否为根节点
+	// Whether this is a root node
 	isRoot?: boolean
-	// 是否为常量
+	// Whether this is a constant
 	isConstant?: boolean
-	// 数据源schema, isConstant时不传
+	// Schema for the data source; omitted when isConstant is true
 	rawSchema?: Schema
-	// 渲染类型(用于特殊处理成员、多选的渲染)
+	// Render type (used for special cases like members/multi-select)
 	renderType?: LabelTypeMap
-	// 是否为全局变量
+	// Whether this is a global variable
 	isGlobal?: boolean
-	// 数据源描述
+	// Data source description
 	desc?: string
-	// 是否为函数数据源
+	// Whether this is a function data source
 	isMethod?: boolean
-	// 是否可选
+	// Whether this option is selectable
 	selectable?: boolean
 } & Partial<MethodOption>
 
-// 函数块才有的
+// Fields only for function blocks
 export type MethodOption = {
 	args: EXPRESSION_VALUE["args"]
 	return_type: string
@@ -112,26 +112,26 @@ const CascaderDropdown = ({
 		dropdownOpen,
 	})
 
-	/** 根据不同条件返回不同的key值
-	 * 1. 常量情况，返回variables.key
-	 * 2. 函数情况，返回key
+	/** Return different key values based on option type
+	 * 1. For constants, return variables.key
+	 * 2. For functions, return key
 	 */
 	const getValueKey = useMemoizedFn((option: DataSourceOption) => {
 		const prefix = getReferencePrefix(option)
 		if (prefix) {
-			// 处理选择了节点的情况
+			// Handle the case where a node is directly selected
 			if (prefix === option.key) return prefix
 			return `${prefix}${Splitor}${option.key}`
 		}
 		return option.key
 	})
 
-	/** 根据不同条件返回不同的值类型
-	 * 1. 函数，返回函数块类型
-	 * 2. 引用，返回block类型
-	 * 3. 常量，返回Text类型
+	/** Return the value type based on option type
+	 * 1. Functions → function block type
+	 * 2. References → block type
+	 * 3. Constants → text type
 	 *
-	 * 兜底类型喂block类型
+	 * Default fallback → block type
 	 */
 	const getValueTypeByOption = useMemoizedFn((option: DataSourceOption) => {
 		if (option.isMethod) {
@@ -143,8 +143,8 @@ const CascaderDropdown = ({
 		return LabelTypeMap.LabelNode
 	})
 
-	/** 根据不同条件返回不同的key值
-	 * 2. 函数情况，返回args
+	/** Provide extra config based on option type
+	 * For functions, return args info
 	 */
 	const getExtraConfigByOption = useMemoizedFn(
 		(
@@ -163,7 +163,7 @@ const CascaderDropdown = ({
 		},
 	)
 
-	const getChangeValuesByOption = useMemoizedFn((option: DataSourceOption, trans?: string) => {
+	// Handle selection
 		const valueKey = getValueKey(option)
 		const valueType = getValueTypeByOption(option)
 		const extraConfig = getExtraConfigByOption(option)
@@ -197,10 +197,10 @@ const CascaderDropdown = ({
 		const loop = (data: TreeDataNode[], deep = 0): TreeDataNode[] =>
 			data.map((item) => {
 				/***
-				 * 计算高亮块
+				 * Compute highlighted segments
 				 */
 				const tmpItem = item as DataSourceOption
-				// 如果没有type，则为节点，应该特殊处理
+				// When no type is present, treat it as a node and handle specially
 				const isNode = !tmpItem.type
 				const formItemType = tmpItem.type
 				const strTitle = item.title as string
@@ -259,7 +259,7 @@ const CascaderDropdown = ({
 				)
 
 				/**
-				 * 处理子级
+				 * Handle children recursively
 				 */
 				if (item.children) {
 					return {
@@ -318,11 +318,11 @@ const CascaderDropdown = ({
 					autoExpandParent={autoExpandParent}
 					switcherIcon={<IconTreeTriangleDown />}
 					virtual
-					// 占据整行
+					// Occupy the full row
 					blockNode
 					onSelect={(selectKeys, { node }) => onSelect(node)}
 					onClick={(e, node) => {
-						// 如果不可选中，默认点击为展开和折叠
+						// If the node is not selectable, toggle expand/collapse on click
 						if (!node.selectable) {
 							e.preventDefault()
 							const cloneKeys = _.cloneDeep(expandedKeys)

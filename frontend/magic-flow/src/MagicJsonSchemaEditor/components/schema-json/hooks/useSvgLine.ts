@@ -13,7 +13,7 @@ export default function useSvgLine({ propertiesLength, lastSchemaOffsetTop, chil
 
 	const { showTopRow } = useGlobal()
 
-	// 竖线svg属性
+	// SVG props for the vertical line
 	const colSvgLineProps = useMemo(() => {
 		const x = (propertiesLength - 1) * childFieldGap + 7
 		const y1 = defaultY1
@@ -27,7 +27,7 @@ export default function useSvgLine({ propertiesLength, lastSchemaOffsetTop, chil
 	}, [propertiesLength, childLength, lastSchemaOffsetTop])
 
 
-	// 横线
+	// SVG props for the horizontal line
 	const rowSvgLineProps = useMemo(() => {
 		const x1 = (propertiesLength - 1) * childFieldGap + 7
 		const x2 = x1 + 12

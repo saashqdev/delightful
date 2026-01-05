@@ -17,11 +17,11 @@ describe("MagicCheckFavor", () => {
 		expect(document.querySelector('input[type="checkbox"]')).toBeChecked()
 	})
 
-	// 快照测试 - 由于组件使用随机ID，快照测试可能不稳定
+	// Snapshot test - may be unstable because component uses random IDs
 	describe("快照测试", () => {
 		it("已收藏状态快照", () => {
 			const { container } = renderWithTheme(<MagicCheckFavor checked />)
-			// 检查组件是否正确渲染，而不是依赖快照
+			// Assert component renders correctly instead of relying on snapshot
 			expect(container.querySelector('input[type="checkbox"]')).toBeChecked()
 		})
 

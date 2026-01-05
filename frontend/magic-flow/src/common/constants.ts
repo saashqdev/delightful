@@ -1,14 +1,14 @@
 /**
- * 组件类型
+ * Component types
  */
 export enum ComponentType {
-	/** 表单组件 */
+	/** Form component */
 	Form = "form",
-	/** 控件组件 */
+	/** Widget component */
 	Widget = "widget",
-	/** 条件组件 */
+	/** Condition component */
 	Condition = "condition",
-	/** api组件 */
+	/** API component */
 	Api = "api",
 }
 

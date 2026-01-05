@@ -5,29 +5,29 @@ import { getLatestNodeVersion } from "./utils"
 export const prefix = "magic-flow-"
 
 /**
- * 流程状态
+	 * Flow status
  */
 export enum FlowStatus {
-	// 未保存
+	// Unsaved
 	UnSave = -1,
 
-	// 草稿态
+	// Draft
 	Draft = 0,
 
-	// 启用态
+	// Enabled
 	Enable = 1
 }
 
 /**
- * 节点类型
+	 * Node types
  */
 export enum NodeType {
-    // 选择器
+	// Selector
 	If = "4",
 }
 
 /**
- * 默认的节点配置名称
+	 * Default node configuration field names
  */
 export const defaultParamsName = {
 	params: "params",
@@ -36,9 +36,9 @@ export const defaultParamsName = {
 }
 
 
-// 执行节点列表
+// Execution node list
 export const getExecuteNodeList = () => {
-	/** 过滤掉不需要显示在物料面板的节点 */
+	/** Filter out nodes that should not appear on the material panel */
     return Object.keys(nodeManager.nodesMap)
             .filter((nodeType) => !nodeManager.notMaterialNodeTypes.includes(nodeType))
             .map(nodeType => {
@@ -46,11 +46,11 @@ export const getExecuteNodeList = () => {
                 return _.get(nodeManager.nodesMap, [nodeType, latestVersion], {} as NodeWidget)
             })
 }
-// 执行节点分组列表
+// Execution node group list
 export const getExecuteNodeGroupList = () => {
     const executeNodeList = getExecuteNodeList()
     return executeNodeList.reduce((acc, cur) => {
-        const groupName = cur.schema.groupName || "默认分组"
+		const groupName = cur.schema.groupName || "Default Group"
         if (!acc[groupName]) acc[groupName] = []
         acc[groupName].push(cur.schema)
         return acc
@@ -58,37 +58,37 @@ export const getExecuteNodeGroupList = () => {
 }
 
 export enum FlowDesignerEvents {
-	// 保存/发布 触发事件
+	// Save/publish start event
 	SubmitStart = 1,
 
-	// 保存/发布 触发事件完成
+	// Save/publish finished event
 	SubmitFinished = 2,
 
-	// 校验失败事件
+	// Validation failure event
 	ValidateError = 3,
 
-	// 物料面板显示状态变更事件
+	// Material panel visibility change event
 	MaterialShowStatusChanged = 4
 }
 
 
-// 渲染骨架的分辨率百分比
+// Resolution percentage for rendering skeleton
 export const renderSkeletonRatio = 15
 
-// 自适应视图需要进行渲染骨架的节点数量阈值
+// Threshold of node count to render skeleton for fit view
 export const fitViewRatio = 30
 
 
-// 前端缓存的key
+// Front-end cache keys
 export const localStorageKeyMap = {
-	/** 前端交互模式 */
+	/** Front-end interaction mode */
 	InteractionMode: prefix + 'interaction-mode'
 }
 
-// 分组节点的默认内边距
+// Default padding for group nodes
 export const GROUP_MIN_DISTANCE = 30
 
-// 分组节点头部留白区域像素
+// Top padding for group node headers
 export const GROUP_TOP_GAP = 38
 
 export const DefaultNodeVersion = 'v0'

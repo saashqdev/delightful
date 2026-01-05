@@ -1,4 +1,4 @@
-// 默认用于多维表格视图的标签颜色，循环使用
+// Default label colors for multi-dimensional table view, used cyclically
 export const DEFAULT_COLOR = [
 	"#E2EBFE",
 	"#FEEAD4",
@@ -13,7 +13,7 @@ export const DEFAULT_COLOR = [
 	"#EFF0F1"
 ]
 
-// 多选、单选项的颜色集
+// Color palette for multi-select and single-select options
 export const COLOR_DATA = [
 	...DEFAULT_COLOR,
 	"rgb(251, 191, 188)",
@@ -62,7 +62,7 @@ export const COLOR_DATA = [
 	"rgba(55, 60, 67, 0.95)"
 ]
 
-// 颜色集合 对应字体颜色
+// Color palette mapped to corresponding text colors
 export const COLOR_DATA_TEXT_COLOR: Record<string, string> = {
 	"rgba(245, 74, 69, 0.9)": "#FFF",
 	"rgb(255, 136, 0)": "#FFF",

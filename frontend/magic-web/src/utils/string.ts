@@ -10,7 +10,7 @@ import { getCurrentLang } from "./locale"
 
 dayjs.extend(RelativeTime)
 
-// 每一段最多15位  如果有2段第一段从0 开始，第二段从str.length 开始
+// Each segment holds at most 15 digits; if there are two segments, the first starts at 0 and the second at str.length
 const getMidNum = (str: string, start: number, len: number) => {
 	if (start + len > 0) {
 		return +str.substr(start < 0 ? 0 : start, start < 0 ? start + len : len)
@@ -19,20 +19,20 @@ const getMidNum = (str: string, start: number, len: number) => {
 }
 
 /**
- * 比较两个大整数的大小，返回－1，0，1  a<b返回-1
+ * Compare two large integers; return -1, 0, 1. Returns -1 when a < b
  * @param {String} a
  * @param {String} b
  * @returns {number}
  */
 export const bigNumCompare = (a: string, b: string): number => {
 	let back = 0
-	// 取最大值分15份，向上取整
+	// Split the larger number into 15-digit chunks (ceil)
 	const max = Math.ceil(Math.max(a.length, b.length) / 15)
-	// 分成多少段,从左边开始
+	// Iterate from the leftmost chunk
 	for (let i = max; i > 0; i -= 1) {
 		const num1 = getMidNum(a, a.length - i * 15, 15)
 		const num2 = getMidNum(b, b.length - i * 15, 15)
-		// 15位数字相减
+		// Subtract 15-digit chunks
 		const cur = num1 - num2
 		if (cur < 0) {
 			back = -1
@@ -46,9 +46,9 @@ export const bigNumCompare = (a: string, b: string): number => {
 }
 
 /**
- * 默认时间格式化
- * @param time 时间
- * @returns 时间字符串
+ * Default time formatting
+ * @param time Time input
+ * @returns Time string
  */
 export const defaultTimeFormat = (() => {
 	const currentDay = dayjs().format("YYYY-MM-DD")
@@ -78,10 +78,10 @@ export const defaultTimeFormat = (() => {
 })()
 
 /**
- * 格式化时间
- * @param time 时间
- * @param format 格式
- * @returns 时间字符串
+ * Format time
+ * @param time Time input
+ * @param format Format string
+ * @returns Formatted time string
  */
 export const formatTime = (
 	time: number | Date | dayjs.Dayjs | null | undefined | string,
@@ -104,9 +104,9 @@ export const formatTime = (
 }
 
 /**
- * 格式化相对时间
- * @param time 时间
- * @returns 时间字符串
+ * Format relative time
+ * @param time Time input
+ * @returns Relative time string
  */
 export const formatRelativeTime = (lang?: string) => {
 	const currentDay = dayjs().format("YYYY-MM-DD")
@@ -124,12 +124,12 @@ export const formatRelativeTime = (lang?: string) => {
 		const day = dayjs(time)
 		const d = day.format("YYYY-MM-DD")
 
-		// 同一天
+		// Same day
 		if (d === currentDay) {
 			return day.format(t("format.time", { ns: "common" }))
 		}
 
-		// 相差小于24小时
+		// Less than 24 hours apart
 		if (current.diff(day, "hour") < 24) {
 			return day.format(t("format.yesterday", { ns: "common" }))
 		}
@@ -145,16 +145,16 @@ export const formatRelativeTime = (lang?: string) => {
 }
 
 /**
- * 加密手机号
- * 1. 校验手机位数，不合法不加密
- * 2. 校验手机是否合法，不加密
- * 3. 支持区号
- * 4. 自定义加密符号
- * 5. 只显示前三位和后四位
+ * Mask phone number
+ * 1. Validate length; if invalid, do not mask
+ * 2. Validate phone format; if invalid, do not mask
+ * 3. Support country code
+ * 4. Custom mask symbol
+ * 5. Show only first 3 and last 4 digits
  *
- * @param phone 手机号
- * @param symbol 加密符号
- * @returns 加密后的手机号
+ * @param phone Phone number
+ * @param symbol Masking symbol
+ * @returns Masked phone number
  */
 export function encryptPhone(phone: string, symbol: string = "*"): string {
 	if (!phone) {
@@ -164,7 +164,7 @@ export function encryptPhone(phone: string, symbol: string = "*"): string {
 	const match = phone.match(phoneRegex)
 
 	if (!match) {
-		return phone // 不合法的手机号，直接返回
+		return phone // Invalid phone number; return as-is
 	}
 
 	const countryCode = match[1] || ""
@@ -174,10 +174,10 @@ export function encryptPhone(phone: string, symbol: string = "*"): string {
 }
 
 /**
- * 校验手机号
+ * Validate phone number
  *
- * @param phone 手机号
- * @returns 是否合法
+ * @param phone Phone number
+ * @returns Whether valid
  */
 export function validatePhone(phone: string): boolean {
 	const phoneRegex = /^(\+\d{1,3})?(\d{11})$/
@@ -185,9 +185,9 @@ export function validatePhone(phone: string): boolean {
 }
 
 /**
- * 校验json
- * @param data 数据
- * @returns 是否合法
+ * Validate JSON string
+ * @param data Data string
+ * @returns Parsed object or false
  */
 export function isValidJson(data: string): false | object {
 	try {
@@ -197,7 +197,7 @@ export function isValidJson(data: string): false | object {
 	}
 }
 /**
- * 格式化文件大小
+ * Format file size
  * @param size
  * @returns
  */
@@ -223,7 +223,7 @@ export function formatFileSize(size?: number) {
 }
 
 /**
- * 判断是否是markdown
+ * Determine whether the text is Markdown
  * @param text
  * @returns
  */
@@ -247,7 +247,7 @@ export function isMarkdown(text: string): boolean {
 }
 
 /**
- * 尝试解析json
+ * Try parsing JSON
  * @param data
  * @param fallbackData
  * @returns

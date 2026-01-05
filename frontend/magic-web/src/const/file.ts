@@ -17,16 +17,16 @@ export const DRIVE_SPACE_KEY_MAP = {
 }
 
 /**
- * 可预览文件扩展名
+ * Previewable file extensions
  */
 export const PREVIEW_EXTENSIONS = ["pdf", "xls", "xlsx"]
 
-/** 图片扩展名 */
+/** Image extensions */
 export const IMAGE_EXTENSIONS = ["png", "jpg", "jpeg", "svg", "gif", "webp", "svg", "svg+xml"]
-/** 视频扩展名 */
+/** Video extensions */
 export const VIDEO_EXTENSIONS = ["mp4", "mov", "avi"]
 
-// 附件TS-ICON转换
+// Attachment TS-ICON mapping
 export const EXTENSION_ICON_MAP: Record<string, IconParkIconElement["name"]> = {
 	png: "ts-image-file",
 	jpg: "ts-image-file",
@@ -87,7 +87,7 @@ export const EXTENSION_ICON_MAP: Record<string, IconParkIconElement["name"]> = {
 	tldr: "ts-whiteboard-file",
 }
 
-// 文件类型 统一用file_type 区分 0-目录 1-多维表格 2-文档 3-表格 4-思维笔记
+// File types distinguished by file_type: 0-folder 1-multi-dimensional sheet 2-document 3-sheet 4-mind note
 export const FILE_TYPE_ICON_MAP: Record<
 	DriveItemFileType,
 	{ svgIcon: IconParkIconElement["name"]; shareIcon?: string; type: DriveItemFileType }

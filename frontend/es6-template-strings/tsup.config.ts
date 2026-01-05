@@ -1,10 +1,10 @@
 import { defineConfig } from "tsup"
 import type { Options } from "tsup"
 
-// 使用更精确的文件匹配，而不是目录
+// Use precise file globs instead of folders
 const entry = ["./src/**/*.ts"]
 
-// 定义公共配置
+// Shared configuration
 const commonOptions: Partial<Options> = {
 	sourcemap: true,
 	keepNames: true,
@@ -17,7 +17,7 @@ const commonOptions: Partial<Options> = {
 	},
 }
 
-// 模块构建公共配置
+// Shared module build configuration
 const moduleOptions: Partial<Options> = {
 	...commonOptions,
 	splitting: false,

@@ -33,7 +33,7 @@ export function RelationGroup({
 }: RelationGroupProps) {
 	const [ops, setOps] = useState((conditionData as Expression.LogicNode).ops)
 
-	// 当conditionData.ops变化时同步更新本地状态
+	// Sync local state when conditionData.ops changes
 	useEffect(() => {
 		setOps((conditionData as Expression.LogicNode).ops)
 	}, [(conditionData as Expression.LogicNode).ops])
@@ -45,7 +45,7 @@ export function RelationGroup({
 			conditionDataCopy?.children?.length === 1 &&
 			!(conditionDataCopy?.children[0] as Expression.LogicNode)?.ops
 		) {
-			// 顶层
+			// Top level
 			return false
 		}
 		return true
@@ -53,9 +53,9 @@ export function RelationGroup({
 
 	const switchOpsSign = useCallback(() => {
 		if (_.isEmpty(changeRef) || _.isEmpty(changeRef.current)) return
-		// 立即更新本地状态，使UI响应更快
+		// Update local state first for snappier UI feedback
 		setOps(ops === RELATION_LOGICS_MAP.AND ? RELATION_LOGICS_MAP.OR : RELATION_LOGICS_MAP.AND)
-		// 同时更新实际数据
+		// Then update the actual data
 		changeRef.current.switchConditionItemLogic(pos)
 	}, [changeRef, pos, ops])
 

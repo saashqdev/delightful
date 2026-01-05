@@ -9,11 +9,11 @@ const renderWithTheme = (component: React.ReactElement) =>
 describe("MagicDropdown", () => {
 	it("应该正常渲染", () => {
 		renderWithTheme(<MagicDropdown menu={{ items: [] }}>下拉</MagicDropdown>)
-		// 只要不报错即可
+		// Pass if no errors are thrown
 		expect(true).toBe(true)
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础下拉菜单快照", () => {
 			const { asFragment } = renderWithTheme(

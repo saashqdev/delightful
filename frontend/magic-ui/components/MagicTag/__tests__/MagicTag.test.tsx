@@ -12,7 +12,7 @@ describe("MagicTag", () => {
 		expect(screen.getByText("标签内容")).toBeInTheDocument()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("默认标签快照", () => {
 			const { asFragment } = renderWithTheme(<MagicTag>默认标签</MagicTag>)

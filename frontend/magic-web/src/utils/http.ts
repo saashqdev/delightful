@@ -3,10 +3,10 @@ import { resolveToString } from "@dtyq/es6-template-strings"
 import { isUndefined } from "lodash-es"
 
 /**
- * 生成请求地址
- * @param url 请求地址模板
- * @param params 参数列表
- * @returns 请求地址
+ * Generate a request URL
+ * @param url URL template
+ * @param params Path parameters
+ * @returns Request URL
  */
 export function genRequestUrl(
 	url: RequestUrl | string,
@@ -32,7 +32,7 @@ export function genRequestUrl(
 }
 
 /**
- * 判断是否是有效的 URL
+ * Check if the string is a valid URL
  * @param url
  * @returns
  */
@@ -41,7 +41,7 @@ export function isValidUrl(url: string) {
 }
 
 /**
- * 判断是否是有效的 URL
+ * Check if the text can be parsed as a valid URL
  * @param text
  * @returns
  */

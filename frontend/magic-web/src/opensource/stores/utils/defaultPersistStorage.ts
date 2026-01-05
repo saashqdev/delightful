@@ -4,7 +4,7 @@ import { get, set, del, promisifyRequest } from "idb-keyval" // can use anything
 import { debounce } from "lodash-es"
 
 /**
- * @description 重写 idb-keyval 实现版本更新后的
+ * @description Reimplement idb-keyval to handle post-upgrade versions
  * @param {string} dbName
  * @param {string} storeName
  * @param {number} version
@@ -14,7 +14,7 @@ function createStore(dbName: string, storeName: string, version: number): UseSto
 	request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
 		const db = (event.target as IDBOpenDBRequest).result
 
-		// 检查并创建新对象存储
+		// Check and create new object store
 		if (!db.objectStoreNames.contains(storeName)) {
 			db.createObjectStore(storeName)
 			console.log(`Object store ${storeName} created.`)
@@ -26,7 +26,7 @@ function createStore(dbName: string, storeName: string, version: number): UseSto
 }
 
 /**
- * @description 规范indexeddb的使用，尽量收集为一个数据库
+ * @description Normalize indexeddb usage; consolidate into a single database when possible
  * @param dbName
  * @param storeName
  * @param version

@@ -1,7 +1,7 @@
 // Import Promise.withResolvers polyfill
 import "./promise-with-resolvers"
 
-// react-markdown 中使用 Object.hasOwn
+// Object.hasOwn used in react-markdown
 // @ts-ignore
 if (!Object.hasOwn) {
 	Object.defineProperty(Object, "hasOwn", {

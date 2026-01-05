@@ -26,7 +26,7 @@ describe("MagicTable", () => {
 		expect(screen.getByText("李四")).toBeInTheDocument()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础表格快照", () => {
 			const { asFragment } = renderWithTheme(

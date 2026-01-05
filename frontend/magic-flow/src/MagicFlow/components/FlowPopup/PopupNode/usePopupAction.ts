@@ -10,7 +10,7 @@ import _ from 'lodash'
 import { useNodes } from '@/MagicFlow/context/NodesContext/useNodes'
 
 type UsePopupActionProps = {
-	// 切换目标类型
+	// Target node id when changing node type
 	targetNodeId?: string
 }
 
@@ -31,7 +31,7 @@ export default function usePopupAction({ targetNodeId }: UsePopupActionProps) {
 	const { currentNode } = useCurrentNode()
 
 
-	// 更换节点类型
+	// Switch node type
 	const toggleType = useMemoizedFn(({ key: targetNodeType }) => {
 		const node = nodeConfig[targetNodeId as string]
 
@@ -39,13 +39,13 @@ export default function usePopupAction({ targetNodeId }: UsePopupActionProps) {
 
 		const resultData = {
 			...node,
-			// 携带上节点的output
+			// Carry over existing node output
 			output: nodeSchema?.output as WidgetValue['value'],
-			// 携带上节点的input
+			// Carry over existing node input
 			input: nodeSchema?.input as WidgetValue['value'],
-			// 变更节点类型
+			// Update node type
 			[paramsName.nodeType]: targetNodeType,
-			// 重置节点配置
+			// Reset node config
 			[paramsName.params]: _.cloneDeep(nodeSchema.params),
 			name: nodeSchema.label,
             node_version: getLatestNodeVersion(nodeSchema.id),
@@ -60,20 +60,20 @@ export default function usePopupAction({ targetNodeId }: UsePopupActionProps) {
 
 		const sourceNodeType = currentNode?.[paramsName.nodeType]
 
-		// 如果从普通类型节点切换为循环节点
+		// If switching from a regular node to a loop node
 		if (judgeLoopNode(targetNodeType) && !judgeLoopNode(sourceNodeType)) {
-			// 当前切换节点是否有下一个节点
+			// Check whether the current node has a downstream node
 			const toNextEdge = edges.find(e => e.source === node.id)
 			const { newNodes: bodyNodes, newEdges: bodyEdges } = generateLoopBody(
 				resultData,
 				paramsName,
 				edges,
 			)
-			// 如果有下一个节点，则手动把原来连向下一个节点的sourceHandle改成「循环体的下一个节点端点」
+			// If a downstream node exists, reroute the sourceHandle to the loop body's next-node handle
 			if(!!toNextEdge) {
 				toNextEdge.sourceHandle = InnerHandleType.LoopNext
 			}
-			// 将body节点挂载到nodeConfig
+			// Attach loop body nodes to nodeConfig
 			bodyNodes.forEach(bodyNode => {
 				nodeConfig[bodyNode.id] = bodyNode
 			})
@@ -81,11 +81,11 @@ export default function usePopupAction({ targetNodeId }: UsePopupActionProps) {
 			setEdges([...edges, ...bodyEdges])
 			setNodeConfig({...nodeConfig})
 		} else if(judgeLoopNode(sourceNodeType) && !judgeLoopNode(targetNodeType)) {
-			// 如果从循环节点类型切换为普通节点类型，需要删掉循环体及其相关节点及边
+			// If switching from a loop node back to a regular node, remove the loop body and related nodes/edges
 			const { nodeIds, edgeIds } = searchLoopRelationNodesAndEdges(node, nodes, edges)
 			console.log("循环内相关的边", edgeIds)
 			console.log("循环内相关的节点", nodeIds)
-			// 移除nodeConfig相关的节点
+			// Remove loop body nodes from nodeConfig
 			nodeIds.forEach(nId => {
 				delete nodeConfig[nId]
 			})
@@ -97,7 +97,7 @@ export default function usePopupAction({ targetNodeId }: UsePopupActionProps) {
 			setNodes([...nodes])
 		}
 
-		// 重置布局属性
+		// Reset layout cache
 		resetLastLayoutData()
 	})
 

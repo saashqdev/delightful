@@ -8,102 +8,102 @@ import { FormItemType, NodeBaseInfo } from "../types"
 
 export const mockNodeMap: Record<string, NodeBaseInfo> = {
 	id_1: {
-		icon: <TSIcon type="ts-subtask" />,
-		name: "开始节点",
+        icon: <TSIcon type="ts-subtask" />,
+        name: "Start Node",
 		id: "id_1",
 	},
 	id_2: {
 		icon: <TSIcon type="ts-code" />,
-		name: "代码执行",
+        name: "Code Execution",
 		id: "id_2",
 	},
 }
 
 export const mockMethodsSource = [
     {
-        "label": "函数",
+        "label": "Functions",
         "value": "methods_67778c652fad9",
         "desc": "",
         "children": [
             {
-                "label": "日期/时间",
+                "label": "Date/Time",
                 "value": "35dc24eb922fca0aaf91d2c9884c0163",
                 "desc": "",
                 "children": [
                     {
-                        "label": "获取ISO 8601格式的日期（仅日期部分）",
+                        "label": "Get ISO 8601 date (date only)",
                         "value": "get_iso8601_date",
-                        "desc": "获取ISO 8601格式的日期（仅日期部分）;如：2021-01-01",
+                        "desc": "Get ISO 8601 date (date only); e.g., 2021-01-01",
                         "return_type": "string",
                         "arg": [
                             {
                                 "name": "time",
                                 "type": "int",
-                                "desc": "要计算的时间戳。默认当前时间"
+                                "desc": "Unix timestamp to use; defaults to current time"
                             }
                         ]
                     },
                     {
-                        "label": "获取ISO 8601格式的日期和时间",
+                        "label": "Get ISO 8601 date and time",
                         "value": "get_iso8601_date_time",
-                        "desc": "获取ISO 8601格式的日期和时间;如：2021-01-01T00:00:00",
+                        "desc": "Get ISO 8601 date and time; e.g., 2021-01-01T00:00:00",
                         "return_type": "string",
                         "arg": [
                             {
                                 "name": "time",
                                 "type": "int",
-                                "desc": "要计算的时间戳。默认当前时间"
+                                "desc": "Unix timestamp to use; defaults to current time"
                             }
                         ]
                     },
                     {
-                        "label": "获取带时区偏移的ISO 8601格式的日期和时间",
+                        "label": "Get ISO 8601 date and time with offset",
                         "value": "get_iso8601_date_time_with_offset",
-                        "desc": "获取带时区偏移的ISO 8601格式的日期和时间;如：2021-01-01T00:00:00+08:00",
+                        "desc": "Get ISO 8601 date and time with timezone offset; e.g., 2021-01-01T00:00:00+08:00",
                         "return_type": "string",
                         "arg": [
                             {
                                 "name": "time",
                                 "type": "int",
-                                "desc": "要计算的时间戳。默认当前时间"
+                                "desc": "Unix timestamp to use; defaults to current time"
                             }
                         ]
                     },
                     {
-                        "label": "获取RFC 1123格式的日期和时间",
+                        "label": "Get RFC 1123 date and time",
                         "value": "get_rfc1123_date_time",
-                        "desc": "获取RFC 1123格式的日期和时间;如：Sat, 21 Oct 2021 07:28:00 GMT",
+                        "desc": "Get RFC 1123 date and time; e.g., Sat, 21 Oct 2021 07:28:00 GMT",
                         "return_type": "string",
                         "arg": [
                             {
                                 "name": "time",
                                 "type": "int",
-                                "desc": "要计算的时间戳。默认当前时间"
+                                "desc": "Unix timestamp to use; defaults to current time"
                             }
                         ]
                     }
                 ]
             },
             {
-                "label": "内置函数",
+                "label": "Built-in Functions",
                 "value": "78162069390d96b9230a2f222f902b54",
                 "desc": "",
                 "children": [
                     {
-                        "label": "计算字符串的 MD5 散列值",
+                        "label": "Compute the MD5 hash of a string",
                         "value": "md5",
-                        "desc": "计算字符串的 MD5 散列值",
+                        "desc": "Compute the MD5 hash of a string",
                         "return_type": "string",
                         "arg": [
                             {
                                 "name": "string",
                                 "type": "string",
-                                "desc": "要计算的字符串。"
+                                "desc": "String to hash."
                             },
                             {
                                 "name": "binary",
                                 "type": "boolean",
-                                "desc": "如果可选的 binary 被设置为 true，那么 md5 摘要将以 16 字符长度的原始二进制格式返回。"
+                                "desc": "If optional binary is true, the md5 digest is returned in 16-byte raw binary form."
                             }
                         ]
                     },
@@ -149,20 +149,20 @@ export const mockMethodsSource = [
                         ]
                     },
                     {
-                        "label": "确定字符串是否包含指定子串",
+                        "label": "Determine whether a string contains the substring",
                         "value": "str_contains",
-                        "desc": "执行大小写区分的检查，表明 needle 是否包含在 haystack 中。",
+                        "desc": "Case-sensitive check whether needle is contained in haystack.",
                         "return_type": "boolean",
                         "arg": [
                             {
                                 "name": "haystack",
                                 "type": "string",
-                                "desc": "在其中搜索的字符串。"
+                                "desc": "String to search."
                             },
                             {
                                 "name": "needle",
                                 "type": "string",
-                                "desc": "要在 haystack 中搜索的子串。"
+                                "desc": "Substring to find within haystack."
                             }
                         ]
                     },
@@ -174,19 +174,19 @@ export const mockMethodsSource = [
                         "arg": []
                     },
                     {
-                        "label": "生成一个唯一 ID",
+                        "label": "Generate a unique ID",
                         "value": "uniqid",
-                        "desc": "生成一个唯一 ID",
+                        "desc": "Generate a unique ID",
                         "return_type": "string",
                         "arg": [
                             {
                                 "name": "prefix",
-                                "desc": "有用的参数。例如：如果在多台主机上可能在同一微秒生成唯一ID。\\n prefix为空，则返回的字符串长度为 13。more_entropy 为 true，则返回的字符串长度为 23。",
+                                "desc": "Useful when multiple hosts might generate an ID in the same microsecond. If prefix is empty, the returned string is length 13; if more_entropy is true, it is length 23.",
                                 "type": "string"
                             },
                             {
                                 "name": "more_entropy",
-                                "desc": "如果设置为 true，uniqid() 会在返回的字符串结尾增加额外的熵（使用线性同余组合发生器）。 使得唯一ID更具唯一性。",
+                                "desc": "If true, uniqid() appends extra entropy (LCG) to make the ID more unique.",
                                 "type": "bool"
                             }
                         ]
@@ -2156,42 +2156,42 @@ export const mockMethodsSource = [
 ]
 
 export const mockDataSource: DataSourceOption[] = [
-	{
-		title: "开始",
+    {
+        title: "Start",
 		key: "start",
 		nodeId: "id_1",
 		nodeType: "",
 		children: [
 			{
-				title: "结果",
+                title: "Result",
 				key: "start.result",
 				type: FormItemType.Object,
 				nodeId: "id_1",
 				nodeType: "",
 				children: [
 					{
-						title: "消息类型",
+                        title: "Message Type",
 						key: "start.result.message_type",
 						type: FormItemType.String,
 						nodeId: "id_1",
 						nodeType: "",
 					},
 					{
-						title: "消息内容",
+                        title: "Message Content",
 						key: "start.result.message_content",
 						type: FormItemType.String,
 						nodeId: "id_1",
 						nodeType: "",
 					},
 					{
-						title: "用户昵称",
+                        title: "User Nickname",
 						key: "start.result.user_name",
 						type: FormItemType.String,
 						nodeId: "id_1",
 						nodeType: "",
 					},
 					{
-						title: "发送时间",
+                        title: "Sent Time",
 						key: "start.result.send_time",
 						type: FormItemType.String,
 						nodeId: "id_1",
@@ -2201,8 +2201,8 @@ export const mockDataSource: DataSourceOption[] = [
 			},
 		],
 	},
-	{
-		title: "代码执行",
+    {
+        title: "Code Execution",
 		key: "code",
 		nodeId: "id_2",
 		nodeType: "",
@@ -2230,7 +2230,7 @@ export const mockDataSource: DataSourceOption[] = [
 					},
 
 					{
-						title: "时间字段",
+                        title: "Time Field",
 						key: "code.output.time_field",
 						type: FormItemType.String,
 						nodeId: "id_2",

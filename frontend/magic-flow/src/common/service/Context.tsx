@@ -3,7 +3,7 @@ import { JSONSchemaDesignerServiceType } from "./hooks/useJSONSchemaDesigner"
 
 const ServiceStore = {
 	/**
-	 * @description JSON Schema 设计器
+	 * @description JSON Schema designer
 	 * @type {ReturnType<typeof import('./hooks/useJSONSchemaDesigner').default>}
 	 */
 	JSONSchemaDesignerService: {} as JSONSchemaDesignerServiceType,

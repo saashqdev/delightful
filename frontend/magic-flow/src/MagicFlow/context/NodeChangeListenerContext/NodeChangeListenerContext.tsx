@@ -1,5 +1,5 @@
 /**
- * 配置变更监听器上下文
+ * Configuration change listener context
  */
 import { useEventEmitter } from "ahooks"
 import { EventEmitter } from "ahooks/lib/useEventEmitter"

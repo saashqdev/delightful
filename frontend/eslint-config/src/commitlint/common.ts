@@ -26,13 +26,13 @@ export const common = {
 			],
 		],
 		"body-max-line-length": [RuleConfigSeverity.Disabled],
-		"body-leading-blank": [RuleConfigSeverity.Disabled], // body换行
+		"body-leading-blank": [RuleConfigSeverity.Disabled], // Body starts on new line
 		// "body-leading-blank": [RuleConfigSeverity.Warning, "always"],
 		// "body-max-line-length": [RuleConfigSeverity.Error, "always", 100],
-		"footer-leading-blank": [RuleConfigSeverity.Disabled, "always"], // footer以空行开头
+		"footer-leading-blank": [RuleConfigSeverity.Disabled, "always"], // Footer begins with a blank line
 		// "footer-leading-blank": [RuleConfigSeverity.Warning, "always"],
 		"footer-max-line-length": [RuleConfigSeverity.Error, "always", 100],
-		"header-max-length": [RuleConfigSeverity.Error, "always", 72], // header最长72
+		"header-max-length": [RuleConfigSeverity.Error, "always", 72], // Header max length 72
 		// "header-max-length": [RuleConfigSeverity.Error, "always", 100],
 		"header-trim": [RuleConfigSeverity.Error, "always"],
 		"subject-case": [RuleConfigSeverity.Disabled],
@@ -42,7 +42,7 @@ export const common = {
 		// 	["sentence-case", "start-case", "pascal-case", "upper-case"],
 		// ],
 		"subject-empty": [RuleConfigSeverity.Disabled, "never"],
-		"subject-full-stop": [RuleConfigSeverity.Disabled, "never", "."], // subject以.为结束标记
+		"subject-full-stop": [RuleConfigSeverity.Disabled, "never", "."], // Subject must not end with a period
 		// "subject-full-stop": [RuleConfigSeverity.Error, "never", "."],
 		"type-case": [RuleConfigSeverity.Disabled, "always", "lower-case"],
 		"type-empty": [RuleConfigSeverity.Error, "never"],

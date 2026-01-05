@@ -1,7 +1,7 @@
 // src/theme.d.ts
 import type { ColorScales, ColorUsages } from "@/common/utils/palettes"
 
-// 扩展 antd 的主题类型
+// Extend antd provider theme typings
 declare module 'antdg-provider/context' {
 	export interface Theme {
 		token?: CustomToken;
@@ -10,7 +10,7 @@ declare module 'antdg-provider/context' {
 }
 
 export interface CustomToken {
-	/** 顶部菜单栏高度 */
+	/** Top menu bar height */
 	titleBarHeight?: number
 	magicColorScales: ColorScales
 	magicColorUsages: ColorUsages

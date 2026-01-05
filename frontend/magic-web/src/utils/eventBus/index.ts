@@ -1,5 +1,5 @@
 /**
- * 发布订阅基础实现
+ * Basic publish-subscribe implementation
  */
 class EventBus {
 	private eventMap: Record<string, ((data: any) => void)[]> = {}

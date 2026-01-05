@@ -25,11 +25,11 @@ interface RelationItemProps {
 
 export function RelationItem({
 	pos,
-	// 目前的条件编辑组件数据
+	// Current condition editor data
 	conditionData,
 	changeRef,
 	options,
-	// 数据源
+	// Data source
 	cacheDictionary,
 	readonly,
 }: RelationItemProps) {
@@ -64,7 +64,7 @@ export function RelationItem({
 		changeRef.current.updateConditionData(pos, cur, false)
 	}
 
-	/** 如果是条件，只取第一个元素显示 */
+	/** For compare mode, display only the first value */
 	const conditionValue = useMemo(() => {
 		const { condition } = cur as Expression.CompareNode
 		return condition || "equals"
@@ -81,7 +81,7 @@ export function RelationItem({
 		}
 	}, [conditionValue])
 
-	// 是否显示title
+	// Whether to show titles
 	const showTitle = useMemo(() => {
 		return showTitlePosList.includes(pos)
 	}, [showTitlePosList, pos])
@@ -214,7 +214,7 @@ export function RelationItem({
 								// 			: "visible",
 								// 	}}
 								// >
-								// 	切换
+								// 	Switch
 								// </Button>
 							}
 

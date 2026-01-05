@@ -2,10 +2,10 @@ import { useDebounceEffect, useUpdate } from "ahooks"
 import { useEffect, useRef } from "react"
 
 /**
- * 判断是否正在流式输出
- * @param value 流式输出的值
- * @param delay 流式输出的延迟时间
- * @returns 是否正在流式输出
+ * Check whether output is still streaming
+ * @param value Current streaming value
+ * @param delay Debounce delay for streaming status
+ * @returns Whether streaming is ongoing
  */
 export const useIsStreaming = (value: string, delay = 500) => {
 	const isStreaming = useRef(true)
@@ -23,7 +23,7 @@ export const useIsStreaming = (value: string, delay = 500) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value])
 
-	// 流式输出延迟
+	// Delay before marking stream as finished
 	useDebounceEffect(
 		() => {
 			if (isStreaming.current) isStreaming.current = false

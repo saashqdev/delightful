@@ -4,14 +4,14 @@ import { useRef, useState } from "react"
 
 export type MagicEllipseWithTooltipProps = HTMLAttributes<HTMLDivElement> & {
 	text: string
-	maxWidth: string // 文本最大宽度，超出部分用省略号代替
+	maxWidth: string // Maximum text width; overflow is truncated with ellipsis
 }
 
 function MagicEllipseWithTooltip({ text, maxWidth, ...props }: MagicEllipseWithTooltipProps) {
 	const textRef = useRef<HTMLDivElement>(null)
 	const [isOverflowed, setIsOverflowed] = useState(false)
 
-	// 检测文本是否溢出
+	// Check whether the text overflows
 	const checkOverflow = () => {
 		if (textRef.current) {
 			const isOverflow = textRef.current.scrollWidth > textRef.current.clientWidth

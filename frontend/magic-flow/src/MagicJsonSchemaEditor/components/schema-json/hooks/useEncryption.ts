@@ -18,24 +18,24 @@ export default function useEncryption({
 		disableFields
 	} = useGlobal()
 	
-	// 是否禁用加密
+	// Determine whether encryption should be disabled
 	const disableEncryption = useMemo(() => {
 		const isDisabledEncryption = disableFields.includes(DisabledField.Encryption)
-		// 只允许普通值进行加密
+		// Only allow basic value types to be encrypted
 		const enableEncryptionTypes = [
 			FormItemType.Integer,
 			FormItemType.Number,
 			FormItemType.String,
 		]
-		// 判断是否有加密值，已经加密过则不允许再次加密
+		// If a value is already encrypted, disallow encrypting again
 		const isEncryption = value?.encryption_value
 		return isEncryption || isDisabledEncryption || !enableEncryptionTypes.includes(value?.type)
 	}, [value, disableFields])
 
 
-	/** 加密按钮提示 */
+	/** Tooltip text for the encryption button */
 	const encryptionTooltips = useMemo(() => {
-		// 判断是否有加密值，已经加密过则不允许再次加密
+		// If already encrypted, do not allow encrypting again
 		const isEncryption = value?.encryption_value
 		if(isEncryption) return i18next.t("jsonSchema.encryptionDesc", { ns: "magicFlow" })
 		return ""

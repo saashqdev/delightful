@@ -31,9 +31,9 @@ import { ThemeProvider } from "antd-style"
 import { CLASSNAME_PREFIX } from "@/common/constants"
 
 export enum ConditionEditMode {
-	/** 单行显示 */
+	/** Inline display */
 	Inline = "inline",
-	/** 卡片形式 */
+	/** Card layout */
 	Card = "card",
 }
 
@@ -76,19 +76,19 @@ export interface CustomConditionContainerProps {
 	dataSource?: DataSourceOption[]
 	value?: Expression.Condition
 	mode?: ConditionEditMode
-	/** 是否只读 */
+	/** Read-only mode */
 	readonly?: boolean
-	/** 禁止左条件进行操作pos，对应组件内部的pos */
+	/** Disallow operations on the left condition for these internal positions */
 	leftDisabledPos?: string[]
-	/** 禁止转换和删除的pos，对应组件内部的pos */
+	/** Disallow convert/delete for these internal positions */
 	disabledOperationPos?: string[]
-	/** 当前缩放尺寸（在流程使用时传入） */
+	/** Current zoom ratio (used when embedded in flow) */
 	zoom?: number
 }
 
 /**
- * @description      字符串路径转化为数组路径
- * @params        pathStr      字符串路径
+	 * @description      Convert a string path to an array path
+	 * @params        pathStr      String path
  */
 const indexToArray = (pathStr: string) => `${pathStr}`.split("-").map((n) => +n)
 
@@ -151,7 +151,7 @@ function CustomConditionContainer(
 	}, [readonly])
 
 	const checkIsEmptyCondition = useCallback((condition: typeof DEFAULT_CONDITION_DATA) => {
-		// 跟默认值相同，直接返回true
+		// Identical to default value, treat as empty
 		if (_.isEqual(DEFAULT_CONDITION_DATA, condition)) return true
 
 		const isEmptyExpression = (expression: InputExpressionValue) => {
@@ -159,28 +159,28 @@ function CustomConditionContainer(
 			cloneExpression.const_value = (cloneExpression.const_value || []).filter(
 				(val: EXPRESSION_VALUE) => {
 					const cloneValue = { ...val }
-					// 将\n和\\n全都替换成空字符串，并且将空格去掉
+					// Remove newlines, escaped newlines, and whitespace
 					if (cloneValue) {
 						cloneValue.value = cloneValue.value
 							.replace(/\n/g, "") // Replace newlines with an empty string
 							.replace(/\\n/g, "") // Replace '\\n' with an empty string
 							.replace(/\s/g, "") // Remove spaces
 					}
-					// value为空则过滤
+					// Filter out empty values
 					return cloneValue.value
 				},
 			)
 			cloneExpression.expression_value = (cloneExpression.expression_value || []).filter(
 				(val: EXPRESSION_VALUE) => {
 					const cloneValue = { ...val }
-					// 将\n和\\n全都替换成空字符串，并且将空格去掉
+					// Remove newlines, escaped newlines, and whitespace
 					if (cloneValue) {
 						cloneValue.value = cloneValue.value
 							.replace(/\n/g, "") // Replace newlines with an empty string
 							.replace(/\\n/g, "") // Replace '\\n' with an empty string
 							.replace(/\s/g, "") // Remove spaces
 					}
-					// value为空则过滤
+					// Filter out empty values
 					return cloneValue.value
 				},
 			)
@@ -204,9 +204,9 @@ function CustomConditionContainer(
 
 	const isEmptyCondition = useCallback(
 		(data: any) => {
-			// 如果当前值等于默认值
+			// If the current value equals the default
 			if (isEqualToDefaultCondition(data)) {
-				// 如果data的左右值都为空，则传给上层组件的就是null
+				// If both sides are empty, pass null to the parent
 				const empty = checkIsEmptyCondition(data)
 				if (empty) {
 					onChange(null)
@@ -220,13 +220,12 @@ function CustomConditionContainer(
 
 	const ComponentChange = useCallback(
 		async (data: any, updateImmediately = true) => {
-			// console.log("isFrozen,", Object.isFrozen(data))
 			_.assignIn(conditionData, data)
 			onChange(data)
 			if (updateImmediately) {
 				setConditionData(_.cloneDeep(data))
 
-				// 如果当前值等于默认值
+				// If the current value equals the default
 				const empty = isEmptyCondition(data)
 				if (empty) return
 			}
@@ -235,7 +234,7 @@ function CustomConditionContainer(
 	)
 
 	/**
-	 * 检测是否是默认配置
+	 * Check whether the condition matches the default structure
 	 */
 	const isDefaultField = useCallback(
 		(currentCondition: Expression.CompareNode) => {
@@ -246,7 +245,7 @@ function CustomConditionContainer(
 	)
 
 	/**
-	 * @description: 添加逻辑 -- 增加条件平级节点
+	 * @description: Add a sibling condition node
 	 */
 	const addConditionItem = useCallback(
 		(pos: string) => {
@@ -254,7 +253,7 @@ function CustomConditionContainer(
 			const defaultData = _.cloneDeep(defaultConditionField)
 			let currentConditionByPos = null
 			if (pos === "") {
-				// 根节点
+				// Root node
 				currentConditionByPos = tempConditionData
 			} else {
 				const path = indexToArray(pos).join(".children.")
@@ -269,7 +268,7 @@ function CustomConditionContainer(
 	)
 
 	/**
-	 * @description: 新增逻辑 -- 增加条件组
+	 * @description: Add a condition group
 	 */
 	const addConditionGroup = useCallback(
 		(pos: any) => {
@@ -277,7 +276,7 @@ function CustomConditionContainer(
 			if (!pos) return
 			const path = indexToArray(pos)
 			const currentPath = path.join(".children.")
-			const itemIndex = path.pop() as number // 需要拿到当前节点的父节点
+			const itemIndex = path.pop() as number // Track parent node index
 			const parentPath = path.join(".children.")
 			const tempConditionData = _.cloneDeep(conditionData)
 			const defaultData = _.cloneDeep(defaultConditionField)
@@ -288,9 +287,9 @@ function CustomConditionContainer(
 			} as Expression.LogicNode
 
 			if (parentPath === "") {
-				// 根节点
+				// Root node
 				if (tempConditionData.children.length === 1) {
-					// 根节点，且children只有一个节点
+					// Root node with only one child
 					addConditionItem("")
 					return
 				}
@@ -308,7 +307,7 @@ function CustomConditionContainer(
 	)
 
 	/**
-	 * @description: 删除逻辑 -- 删除条件节点
+	 * @description: Delete a condition node
 
 	 */
 	const removeConditionItem = useCallback(
@@ -317,14 +316,14 @@ function CustomConditionContainer(
 			if (!pos) return
 			const path = indexToArray(pos)
 			const tempConditionData = _.cloneDeep(conditionData)
-			const itemIndex = path.pop() as number // 需要拿到当前节点的父节点
+			const itemIndex = path.pop() as number // Track parent node index
 			const parentPath = path.join(".children.")
 			if (parentPath === "") {
 				if (tempConditionData.children.length === 1) {
 					message.warning(i18next.t("common.cannotDelete", { ns: "magicFlow" }))
 					return
 				}
-				// 根节点
+				// Root node
 				tempConditionData.children.splice(itemIndex, 1)
 				if (tempConditionData.children.length === 1) {
 					const firstChild = tempConditionData.children[0] as Expression.LogicNode
@@ -336,7 +335,7 @@ function CustomConditionContainer(
 				const parentCondition = get(tempConditionData.children, parentPath)
 				parentCondition.children.splice(itemIndex, 1)
 
-				// 删除后，如果只剩一个子节点，需要将子节点提升到父节点
+				// After deletion, lift the remaining child if only one remains
 				if (parentCondition.children.length === 1) {
 					set(tempConditionData.children, parentPath, parentCondition.children[0])
 				} else {
@@ -349,18 +348,18 @@ function CustomConditionContainer(
 	)
 
 	/**
-	 * @description: 转换逻辑 -- 来回切换 默认显示子组件 / 转换后子组件
+	 * @description: Toggle between default display component and converted component
 	 */
 	const convertConditionItem = useCallback(
 		(pos: string) => {
 			if (!readonlyCheck()) return
-			if (pos === "") return // 根节点
+			if (pos === "") return // Root node
 			const tempConditionData = _.cloneDeep(conditionData)
 			const path = indexToArray(pos).join(".children.")
 			const currentConditionByPos = get(tempConditionData.children, path)
 
 			const isDefault = isDefaultField(currentConditionByPos)
-			// TODO 转换逻辑修改
+			// TODO update convert logic
 			set(
 				tempConditionData.children,
 				path,
@@ -391,7 +390,7 @@ function CustomConditionContainer(
 	)
 
 	/**
-	 * @description: 修改条件逻辑符号
+	 * @description: Switch the logical operator on a condition
 	 */
 	const switchConditionItemLogic = useCallback(
 		(pos: string) => {
@@ -399,7 +398,7 @@ function CustomConditionContainer(
 			const tempConditionData = _.cloneDeep(conditionData)
 
 			if (pos === "") {
-				// 根节点
+				// Root node
 				ComponentChange(
 					{
 						...tempConditionData,
@@ -427,10 +426,10 @@ function CustomConditionContainer(
 	)
 
 	/**
-	 * @description: 清空 conditionData
+	 * @description: Reset conditionData
 	 */
 	const resetConditionData = useCallback(() => {
-		// TODO 默认值应该长什么样
+		// TODO clarify default value shape
 		const defaultData = _.cloneDeep(defaultConditionField)
 		const tempConditionData = getSpaceCondition([defaultData as any])
 		ComponentChange(tempConditionData)
@@ -442,7 +441,7 @@ function CustomConditionContainer(
 				? (value as Expression.LogicNode).children
 				: []
 		if (initialValue.length === 0 && conditionData.children.length === 0) {
-			// 构建首行数据
+			// Build the initial row
 			addConditionItem("")
 		}
 	}, [value, conditionData.children.length, addConditionItem])
@@ -459,7 +458,7 @@ function CustomConditionContainer(
 		return () => {}
 	}, [HandleInitialConditions])
 
-	/** 设置数据源 */
+	/** Set expression data source */
 	useEffect(() => {
 		if (!dataSource) return
 		setExpressionSource(dataSource)
@@ -495,7 +494,7 @@ function CustomConditionContainer(
 		resetValue: resetConditionData,
 	}))
 
-	// 可能需要显示title的pos列表
+	// Positions where a title may be shown
 	const showTitlePosList: string[] = useMemo(() => {
 		return new Array(maxGroupDepth).fill(0).reduce((acc, cur) => {
 			if (acc.length === 0) {

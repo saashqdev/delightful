@@ -1,5 +1,5 @@
 /**
- * 使用函数生成一个UUID
+ * Generate a UUID string
  * @returns string
  */
 export function generateUUID() {
@@ -12,7 +12,7 @@ export function generateUUID() {
 }
 
 /**
- * 获取当前etag
+ * Get the current ETag
  * @returns string
  */
 export const getETag = async () => {
@@ -29,9 +29,9 @@ export const getETag = async () => {
 }
 
 /**
- * 获取最新APP版本号
- * @description 通过网络请求获取应用的最新版本号
- * @returns {Promise<string|undefined>} 成功返回版本号字符串，失败返回undefined
+ * Get the latest app version
+ * @description Fetch the latest app version from the network
+ * @returns {Promise<string|undefined>} Version string on success, undefined on failure
  */
 
 export const getLatestAppVersion = async () => {
@@ -50,15 +50,15 @@ export const getLatestAppVersion = async () => {
 	}
 }
 
-// 缓存正则表达式，避免重复创建
+// Cache the regex to avoid re-creation
 const VERSION_REGEX = /^\d+\.\d+(\.\d+)?$/
 
 /**
- * 判断两个版本号之间是否存在破坏性更新
- * @param currentVersion 当前版本号，格式为x.y或x.y.z
- * @param newVersion 新版本号，格式为x.y或x.y.z
- * @returns boolean 如果是破坏性更新返回true，否则返回false
- * @throws Error 当版本号格式无效时抛出错误
+ * Determine whether two versions indicate a breaking update
+ * @param currentVersion Current version, format x.y or x.y.z
+ * @param newVersion New version, format x.y or x.y.z
+ * @returns boolean True if breaking update, else false
+ * @throws Error When version format is invalid
  */
 export const isBreakingVersion = (currentVersion: string, newVersion: string): boolean => {
 	// 验证版本号格式

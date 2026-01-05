@@ -12,7 +12,7 @@ describe("MagicSearch", () => {
 		expect(screen.getByPlaceholderText("搜索...")).toBeInTheDocument()
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础搜索框快照", () => {
 			const { asFragment } = renderWithTheme(<MagicSearch placeholder="搜索..." />)

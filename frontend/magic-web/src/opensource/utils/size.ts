@@ -1,10 +1,10 @@
 export function getStringSizeInBytes(str: string) {
-	// 使用UTF-8编码计算字符串的字节长度
+	// Compute byte length using UTF-8 encoding
 	const totalBytes = new Blob([str]).size
 
-	// 将字节长度转换为KB
+	// Convert bytes to KB
 	const sizeInKB = totalBytes / 1024
 
-	// 返回结果
+	// Return the result
 	return sizeInKB
 }

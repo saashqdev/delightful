@@ -1,15 +1,15 @@
 #!/usr/bin/env sh
 
-# 检查根目录是否有 .husky 目录
+# Check whether .husky directory exists at repo root
 if [ ! -d "$(pwd)/.husky" ]; then
   echo "Not found .husky directory, please install husky and run 'npx husky init' in root directory first."
   exit 1
 fi
 
-# 读取./template/add-commit-emoji, 插入到 $(pwd)/.husky/commit-msg 的开头
+# Read ./template/add-commit-emoji and insert it at the top of $(pwd)/.husky/commit-msg
 TEMPLATE_FILE="$(dirname $0)/template/add-commit-emoji"
 
-# 读取.husky/commit-msg的内容，临时保存
+# Read .husky/commit-msg and save it temporarily
 COMMIT_MSG="$(pwd)/.husky/commit-msg"
 COMMIT_MSG_TMP="$(pwd)/.husky/commit-msg.tmp"
 
@@ -30,7 +30,7 @@ if [ -f "$TEMPLATE_FILE" ]; then
         rm -rf $COMMIT_MSG_TMP
     fi
 
-    # 设置执行权限
+    # Set execute permission
     chmod +x $(pwd)/.husky/commit-msg
 
     echo "\n🥳 Add Successfully! \nTry to create a commit to verify.\n"

@@ -6,18 +6,18 @@ export default function useInput() {
   const handleEnterChinese = useCallback((evt: any, newValue: string) => {
     const { data } = evt.nativeEvent
     console.log(evt, data);
-    // 中文输入法开始输入
+    // Chinese IME input starts
     if (evt.type === 'compositionstart') {
       isEntering.current = true;
       return -1;
     }
 
-    // 中文输入法结束输入
+    // Chinese IME input ends
     if (evt.type === 'compositionend') {
       isEntering.current = false;
     }
 
-    // 中间输入拼音的时候如果还没结束输入那么后面就不用执行
+    // Skip processing while IME composition is still active
     if (isEntering.current) return -1;
 
     return newValue;

@@ -1,9 +1,9 @@
 import { MagicFlow } from "@/MagicFlow/types/flow"
 import React from "react"
 
-// 状态部分
+// State segment
 export type NodesStateCtx = {
-    // 节点数据
+    // Node data
     nodes: MagicFlow.Node[]
 }
 
@@ -11,7 +11,7 @@ export const NodesStateContext = React.createContext<NodesStateCtx>({
     nodes: [],
 })
 
-// 动作部分
+// Action segment
 export type NodesActionCtx = {
     setNodes: React.Dispatch<React.SetStateAction<MagicFlow.Node[]>>
     onNodesChange: (changes: any) => void
@@ -22,11 +22,11 @@ export const NodesActionContext = React.createContext<NodesActionCtx>({
     onNodesChange: () => {},
 })
 
-// 为了向后兼容而保留的完整Context
+// Full context kept for backward compatibility
 export type NodesCtx = React.PropsWithChildren<NodesStateCtx & NodesActionCtx>
 
 export const NodesContext = React.createContext<NodesCtx>({
-    // 节点数据
+    // Node data
     nodes: [] as MagicFlow.Node[],
     setNodes: () => {},
     onNodesChange: () => {},

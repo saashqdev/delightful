@@ -13,7 +13,7 @@ const genBaseColorByConfig = (
 			return acc
 		}
 		
-		// 中横线转为大驼峰
+		// Convert hyphenated names to PascalCase
 		const color = ((matches[1] ?? "") + matches[2]).replace(/-(\w)/g, (_, v) => v.toUpperCase())
 		
 		if (!color) {

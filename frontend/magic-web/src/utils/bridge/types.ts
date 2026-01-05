@@ -1,5 +1,5 @@
 /**
- * 桥接事件类型
+ * Bridge event types
  */
 export const enum BridgeEventType {
 	GetChartImage = "getChartImage",
@@ -12,7 +12,7 @@ export const enum BridgeEventType {
 }
 
 /**
- * 共享页面类型
+ * Shared page types
  */
 export const enum SharedPageType {
 	Chart = "chart",
@@ -21,7 +21,7 @@ export const enum SharedPageType {
 }
 
 /**
- * 桥接调用native事件
+ * Bridge calls to native events
  */
 export const enum BridgeCallNativeEvent {
 	getChartImage = "GetChartImage",
@@ -30,7 +30,7 @@ export const enum BridgeCallNativeEvent {
 }
 
 /**
- * 桥接事件数据
+ * Bridge event payloads
  */
 export type BridgeEventData = {
 	[BridgeEventType.GetChartImage]: GetChartImageParams
@@ -43,14 +43,14 @@ export type BridgeEventData = {
 }
 
 /**
- * 注入Mermaid数据参数
+ * Inject Mermaid data params
  */
 export interface InjectMermaidDataParams {
 	data: string
 }
 
 /**
- * 获取Mermaid图片参数
+ * Get Mermaid image params
  */
 export interface GetMermaidImageParams {
 	data: string
@@ -59,7 +59,7 @@ export interface GetMermaidImageParams {
 }
 
 /**
- * 获取思维导图图片参数
+ * Get mind map image params
  */
 export interface GetMindMapImageParams {
 	data: string
@@ -68,21 +68,21 @@ export interface GetMindMapImageParams {
 }
 
 /**
- * 注入思维导图数据参数
+ * Inject mind map data params
  */
 export interface InjectMindMapDataParams {
 	data: string
 }
 
 /**
- * 切换页面参数
+ * Switch page params
  */
 export interface SwitchPageParams {
 	mode: SharedPageType
 }
 
 /**
- * 获取图表图片参数
+ * Get chart image params
  */
 export interface GetChartImageParams {
 	chartOptions: object
@@ -91,7 +91,7 @@ export interface GetChartImageParams {
 }
 
 /**
- * 注入图表配置参数
+ * Inject chart options params
  */
 export interface InjectChartOptionsParams {
 	chartOptions: object

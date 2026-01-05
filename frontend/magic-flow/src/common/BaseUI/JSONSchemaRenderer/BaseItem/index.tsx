@@ -10,11 +10,11 @@ import styles from "../style/index.module.less"
 
 type BaseItemProps = {
 	field: Schema
-	// 菜单显示的key
+	// Key displayed in the menu
 	displayKey: string
-	// dropdown图标点击事件
+	// Dropdown icon click handler
 	onExpand?: () => void
-	// 是否展开
+	// Whether the item is expanded
 	isDisplay?: boolean
 }
 

@@ -1,70 +1,70 @@
 export default {
-    // 主颜色（蓝）
+    // Primary color (blue)
     primary: "#315CEC",
-    // 警告色
+    // Warning color
     warning: "#FF7D00",
-    // 错误色
+    // Error color
     danger: "#FF4D3A",
-    // 成功色
+    // Success color
     success: "#32c436",
 
-    // 悬浮色调
+    // Hover tones
     hover: {
-        // icon悬浮统一样式
+        // Unified icon hover style
         iconHover: "#2E2F380D",
     },
 
-    // 文本颜色
+    // Text colors
     text: {
-        // 主颜色（蓝）
+        // Primary (blue)
         primary: "#315CEC",
-        // 主色（黑）
+        // Primary black
         black: "#1C1D23",
-        // 次色（灰偏黑）
+        // Secondary (dark gray)
         secondary_1: "#1C1D23CC",
-        // 次色（灰）
+        // Secondary (gray)
         secondary: "#1C1D2399",
-        // 说明色（灰白，更次，一般用于文本说明等）
+        // Informational (light gray, for descriptions)
         info: "#1C1D2359"
     },
 
-    // 图标颜色
+    // Icon colors
     icon: {
-        // 警告色
+        // Warning color
         warning: "#FF7D00",
-        // 次色
+        // Secondary color
         secondary: "#1C1D2359",
-        // 错误色
+        // Error color
         danger: "#FF4D3A"
     },
 
-    // 边框
+    // Borders
     border: {
         default: "#1C1D2314"
     },
 
-    // placeholder
+    // Placeholder
     placeholder: {
         default: "#1C1D2359"
     },
 
-    // 背景色
+    // Background colors
     background: {
-        // 主背景色
+        // Primary background
         primary: "#EEF3FD",
-        // 成功背景色
+        // Success background
         success: "#ECF9EC",
-        // 默认背景色
+        // Default background
         default: "#2E2F380D",
-        // 警告背景色
+        // Warning background
         warning: "#FFF8EB",
-        // 警告背景次色（如条件组件的或）
+        // Secondary warning background (e.g., condition component OR)
         warningSecondary: "#FFECCC",
-        // tag标签默认背景色
+        // Default tag background
         tagDefault: "#2E2F3817",
-        // slider组件背景色
+        // Slider background
         slider: "#A9BFF7",
-        // tooltip背景色
+        // Tooltip background
         tooltip: "#41464C",
     }
 }

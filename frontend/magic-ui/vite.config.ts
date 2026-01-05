@@ -5,7 +5,7 @@ import dts from "vite-plugin-dts"
 import { glob } from "glob"
 
 export default defineConfig(({ command }) => {
-	// 如果是预览模式，使用开发服务器配置
+	// Use dev server config when previewing
 	if (command === "serve") {
 		return {
 			plugins: [react()],
@@ -21,7 +21,7 @@ export default defineConfig(({ command }) => {
 		}
 	}
 
-	// 构建库的配置
+	// Library build configuration
 	return {
 		plugins: [
 			react(),
@@ -38,9 +38,9 @@ export default defineConfig(({ command }) => {
 		build: {
 			lib: {
 				entry: {
-					// 总入口文件
+					// Root entry file
 					index: resolve(__dirname, "components/index.ts"),
-					// 各个组件的入口文件
+					// Entry file for each component
 					...glob
 						.sync("components/*/index.ts*")
 						.reduce((entries: Record<string, string>, file: string) => {

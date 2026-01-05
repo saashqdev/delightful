@@ -19,22 +19,22 @@ export function cleanAndFilterArray<FilterType>(inputArray: FilterType[]): Filte
   if (!inputArray) return [];
 
   const allowedTypes = SCHEMA_TYPE;
-  // 过滤空字符串和非法类型的元素
+	// Filter out empty strings and invalid types
   const filteredArray = _.filter(inputArray, (item) => {
     if (_.isEmpty(item)) {
-      return false; // 过滤空字符串
+		  return false; // Drop empty strings
     }
     return allowedTypes.includes(item as any);
   });
 
-  // 使用 lodash 的 uniqWith 函数来删除重复项
+	// Remove duplicates using lodash uniqWith
   // @ts-ignore
   const uniqueArray = _.uniqWith(filteredArray, _.isEqual);
 
   return uniqueArray;
 }
 
-/** 生成默认的根节点 */
+/** Generate the default root node */
 export const genRootField = (
   oneChildAtLeast: boolean,
   firstChildKey: string,
@@ -56,8 +56,7 @@ export const genRootField = (
   return defaultSchema;
 };
 
-
-// 获取当前schema枚举可选的下拉数据源
+// Get dropdown options for the current schema enum
 export const getSelectOptions = (schemaTypes: FormItemType[]) => {
     return schemaTypes.reduce((acc, curSchemaType) => {
         const schemaTypeOptions = _.get(getSchemaToOptionsMap(), [curSchemaType], [])
@@ -66,7 +65,7 @@ export const getSelectOptions = (schemaTypes: FormItemType[]) => {
     }, [] as SchemaOption[])
 }
 
-/** 不关注值字段的导出 */
+/** Export schema without value fields */
 export const unFocusSchemaValue = (schema: Schema) => {
 	//@ts-ignore
 	if(schema.value) schema.value = null

@@ -1,23 +1,23 @@
 /**
- * 验证码类型
+ * Verification code types
  */
 export const enum VerificationCode {
-	/** 修改密码 */
+	/** Change password */
 	ChangePassword = "change_password",
-	/** 修改手机 */
+	/** Change phone */
 	ChangePhone = "change_phone",
-	/** 绑定手机 */
+	/** Bind phone */
 	BindPhone = "bind_phone",
-	/** 账号注册 */
+	/** Account registration */
 	RegisterAccount = "register_account",
-	/** 账号登录激活 */
+	/** Account login activation */
 	AccountLoginActive = "account_login_active",
-	/** 账号注册激活 */
+	/** Account registration activation */
 	AccountRegisterActive = "account_register_active",
-	/** 账号登录 */
+	/** Account login */
 	AccountLogin = "account_login",
-	/** 账号登录绑定第三方平台 */
+	/** Account login binds third-party platform */
 	AccountLoginBindThirdPlatform = "account_login_bind_third_platform",
-	/** 设备登出 */
+	/** Device logout */
 	DeviceLogout = "device_logout",
 }

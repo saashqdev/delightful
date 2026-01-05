@@ -17,7 +17,7 @@ describe("MagicSegmented", () => {
 			</MagicThemeProvider>,
 		)
 
-		// 检查是否渲染了选项
+		// Verify options render
 		expect(screen.getByText("选项1")).toBeInTheDocument()
 		expect(screen.getByText("选项2")).toBeInTheDocument()
 		expect(screen.getByText("选项3")).toBeInTheDocument()
@@ -42,7 +42,7 @@ describe("MagicSegmented", () => {
 		expect(onChange).toHaveBeenCalledWith("2")
 	})
 
-	// 快照测试
+	// Snapshot test
 	describe("快照测试", () => {
 		it("基础分段控制器快照", () => {
 			const options = [

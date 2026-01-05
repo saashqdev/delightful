@@ -1,5 +1,5 @@
 /**
- * 部门选择器相关的状态
+ * State management for the department selector
  */
 
 import { useTextareaModeContext } from "@/MagicExpressionWidget/context/TextareaMode/useTextareaModeContext"

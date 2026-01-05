@@ -2,18 +2,18 @@ import type { SeqMessageBase } from "./base"
 import type { ConversationMessageStatus } from "./conversation_message"
 
 /**
- * 即时消息类型
+ * Intermediate (real-time) message types
  */
 
 export const enum IntermediateMessageType {
-	/** 开始会话输入 */
+	/** Start conversation input */
 	StartConversationInput = "start_conversation_input",
-	/** 结束会话输入 */
+	/** End conversation input */
 	EndConversationInput = "end_conversation_input",
 }
 
 /**
- * 开始会话输入消息
+ * Start conversation input message
  */
 export interface StartConversationInputMessage extends SeqMessageBase {
 	type: IntermediateMessageType.StartConversationInput
@@ -23,7 +23,7 @@ export interface StartConversationInputMessage extends SeqMessageBase {
 }
 
 /**
- * 结束会话输入消息
+ * End conversation input message
  */
 export interface EndConversationInputMessage extends SeqMessageBase {
 	type: IntermediateMessageType.EndConversationInput
@@ -32,7 +32,7 @@ export interface EndConversationInputMessage extends SeqMessageBase {
 	status: ConversationMessageStatus
 }
 /**
- * 即时消息
+ * Intermediate message union
  */
 
 export type IntermediateMessage = StartConversationInputMessage | EndConversationInputMessage

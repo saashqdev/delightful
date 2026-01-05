@@ -8,5 +8,5 @@ export class AccountRepository extends GlobalBaseRepository<User.UserAccount> {
 		super(AccountRepository.tableName)
 	}
 	
-	// 查询单个账号、移除单个帐号
+	// Query or remove a single account
 }

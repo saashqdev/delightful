@@ -8,22 +8,22 @@ export const RightOperandsKey = "right_operands"
 
 export const posSeparator = "-"
 
-// 条件编辑组件的条件映射
+// Condition mapping for the editor
 export const enum RELATION_LOGICS_MAP {
 	AND = "AND",
 	OR = "OR",
 }
 
-// 条件编辑组件单个项组件类型
+// Component types for individual condition items
 export const enum RELATION_COMP_TYPE {
 	COMPARE = "compare",
 	OPERATION = "operation",
 }
 
-// 特殊条件值（右边控件不需要展示）
+// Special conditions where the right-side control is hidden
 export const SpecialConditionValues = ["empty", "not_empty", "valuable", "no_valuable"]
 
-// 条件编辑组件的条件枚举（暂时写死）
+// Static list of condition options
 export const CONDITION_OPTIONS = [
 	{
 		label: i18next.t("common.equals", { ns: "magicFlow" }),
@@ -75,7 +75,7 @@ export const CONDITION_OPTIONS = [
 	},
 ]
 
-// 默认的条件表达式项（新增时用）
+// Default condition expression item (for new entries)
 export const DEFAULT_CONDITION_FIELD: Expression.CompareNode = {
 	type: RELATION_COMP_TYPE.COMPARE,
 	right_operands: defaultExpressionValue,
@@ -83,13 +83,13 @@ export const DEFAULT_CONDITION_FIELD: Expression.CompareNode = {
 	condition: "equals",
 }
 
-// 转换后的条件表达式项（转换时用）
+// Converted condition expression item (for transforms)
 export const DEFAULT_CONVERT_FIELD: Expression.OperationNode = {
 	type: RELATION_COMP_TYPE.OPERATION,
 	operands: defaultExpressionValue,
 }
 
-// 默认的条件表达式值
+// Default condition expression value
 export const DEFAULT_CONDITION_DATA: Expression.LogicNode = {
 	ops: RELATION_LOGICS_MAP.AND,
 	children: [

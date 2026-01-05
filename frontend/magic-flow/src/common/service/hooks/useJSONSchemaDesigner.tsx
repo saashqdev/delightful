@@ -12,7 +12,7 @@ export type JSONSchemaDesignerServiceType = {
 
 export default ({ request }: { request: RequestInstance }) => {
 	/**
-	 * @description 获取object类型的动态字段数据源
+	 * @description Fetch dynamic field data sources for object types
 	 */
 	const getDynamicObject = useMemoizedFn(() => {
 		return request({
@@ -22,7 +22,7 @@ export default ({ request }: { request: RequestInstance }) => {
 	})
 
 	/**
-	 * @description 获取string类型的动态字段数据源
+	 * @description Fetch dynamic field data sources for string types
 	 */
 	const getDynamicOptions = useMemoizedFn(() => {
 		return request({
@@ -31,7 +31,7 @@ export default ({ request }: { request: RequestInstance }) => {
 		})
 	})
 
-	// 获取动态字段创建模板 options
+	// Fetch dynamic field creation template for options
 	const getOptionsDynamicDefault = useMemoizedFn(() => {
 		return request({
 			url: "/v1/dynamic-fields-options-api-template",
@@ -39,7 +39,7 @@ export default ({ request }: { request: RequestInstance }) => {
 		})
 	})
 
-	// 获取动态字段创建模板 objects
+	// Fetch dynamic field creation template for objects
 	const getObjectDynamicDefault = useMemoizedFn(() => {
 		return request({
 			url: "/v1/dynamic-fields-objects-api-template",

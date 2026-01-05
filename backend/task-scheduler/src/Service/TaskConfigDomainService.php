@@ -20,19 +20,19 @@ class TaskConfigDomainService
     private string $crontabRule = '';
 
     public function __construct(
-        // 定时类型
+        // Schedule type
         private readonly TaskType $type,
-        // 具体日期
+        // Specific date
         private ?string $day = null,
-        // 具体时间
+        // Specific time
         private readonly ?string $time = null,
-        // 自定义周期的时候，间隔单位 day / week / month / year
+        // Interval unit for custom cycles: day / week / month / year
         private ?IntervalUnit $unit = null,
-        // 自定义周期的时候，间隔频率，如每天，每周，每月，每年
+        // Interval frequency for custom cycles, e.g., daily, weekly, monthly, yearly
         private ?int $interval = null,
-        // unit=week时为[1~7]，unit=month时为[1~31]
+        // When unit=week use [1~7]; when unit=month use [1~31]
         private ?array $values = null,
-        // 结束日期，该日期后不生成数据
+        // End date; no data generated after this date
         private readonly ?DateTime $deadline = null,
     ) {
         $this->validate();
@@ -58,14 +58,14 @@ class TaskConfigDomainService
         return new DateTime($this->day . ' ' . $this->time);
     }
 
-    // 传入参数判断是否需要不重复的定时任务
+    // Determine from parameters whether a non-repeating cron task is needed
     public function getCrontabRule(bool $isNoRepeat = false): string
     {
         if (! empty($this->crontabRule)) {
             return $this->crontabRule;
         }
         if ($this->type === TaskType::NoRepeat && $isNoRepeat == false) {
-            throw new InvalidArgumentException('当前类型无需生成定时规则');
+            throw new InvalidArgumentException('This type does not require generating a cron rule');
         }
         $minute = $hour = $dayOfMonth = $month = $dayOfWeek = '*';
         if (! empty($this->time)) {
@@ -77,7 +77,7 @@ class TaskConfigDomainService
             case TaskType::DailyRepeat:
                 break;
             case TaskType::WeeklyRepeat:
-                // 0-6 表示周一到周日，所以得兼容一下 crontab 的规则 0 表示周日
+                // 0-6 represents Monday to Sunday; crontab uses 0 for Sunday
                 $dayOfWeek = (int) $this->day + 1;
                 if ($dayOfWeek == 7) {
                     $dayOfWeek = 0;
@@ -113,7 +113,7 @@ class TaskConfigDomainService
 
         $this->crontabRule = "{$minute} {$hour} {$dayOfMonth} {$month} {$dayOfWeek}";
         if (! CronExpression::isValidExpression($this->crontabRule)) {
-            throw new InvalidArgumentException('生成定时规则失败');
+            throw new InvalidArgumentException('Failed to generate cron rule');
         }
         return $this->crontabRule;
     }
@@ -132,34 +132,34 @@ class TaskConfigDomainService
     {
         $unitType = IntervalUnit::tryFrom($taskSchedulerValue->getUnit());
         if (! $unitType) {
-            throw new TaskSchedulerParamsSchedulerException('间隔单位未找到');
+            throw new TaskSchedulerParamsSchedulerException('Interval unit not found');
         }
 
-        // 根据截止时间 和当前时间 得出间隔多少天
+        // Calculate the number of days between the deadline and now
         $deadline = $this->getDeadline();
         $time = new DateTime();
 
-        // 如果单位是年，那么month 不能为空
+        // If the unit is year, month cannot be empty
         if ($unitType == IntervalUnit::Year && empty($taskSchedulerValue->getMonth())) {
-            throw new TaskSchedulerParamsSchedulerException('自定义重复选择年份时，月份不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Month cannot be empty when custom repeat is yearly');
         }
 
-        // 如果单位是年
+        // If the unit is year
         if ($unitType == IntervalUnit::Year && empty($deadline)) {
-            // 未来10年
+            // Next 10 years
             $deadline = $time->modify('+10 years');
         } elseif (! $deadline) {
-            // 未来两年
+            // Next two years
             $deadline = $time->modify('+2 years');
         }
 
         $days = $deadline->diff(new DateTime())->days;
-        // 最多不能超过5年
+        // Cannot exceed five years
         if ($days > 1825 && $unitType != IntervalUnit::Year) {
-            throw new TaskSchedulerParamsSchedulerException('间隔时间不能超过5年');
+            throw new TaskSchedulerParamsSchedulerException('Interval cannot exceed five years');
         }
         // if ($days < $taskSchedulerValue->getInterval()) {
-        //     throw new TaskSchedulerParamsSchedulerException('每日间隔时间不能超过截止时间');
+        //     throw new TaskSchedulerParamsSchedulerException('Daily interval cannot exceed the deadline');
         // }
 
         $number = 1;
@@ -174,7 +174,7 @@ class TaskConfigDomainService
                 case IntervalUnit::Week:
                     $weeks = $deadline->diff($time)->days / 7;
                     // if ($weeks < $taskSchedulerValue->getInterval()) {
-                    //     throw new TaskSchedulerParamsSchedulerException('每周间隔时间不能超过或等于截止时间');
+                    //     throw new TaskSchedulerParamsSchedulerException('Weekly interval cannot exceed or equal the deadline');
                     // }
 
                     $number += ceil($weeks / $taskSchedulerValue->getInterval());
@@ -185,7 +185,7 @@ class TaskConfigDomainService
                         $months = $months + 1;
                     }
                     // if ($months < $taskSchedulerValue->getInterval()) {
-                    //     throw new TaskSchedulerParamsSchedulerException('每月间隔时间不能超过或等于截止时间');
+                    //     throw new TaskSchedulerParamsSchedulerException('Monthly interval cannot exceed or equal the deadline');
                     // }
 
                     $number += ceil($months / $taskSchedulerValue->getInterval());
@@ -194,7 +194,7 @@ class TaskConfigDomainService
                     $years = $deadline->diff($time)->days / 365;
 
                     // if ($years < $taskSchedulerValue->getInterval()) {
-                    //     throw new TaskSchedulerParamsSchedulerException('每年间隔时间不能超过或等于截止时间');
+                    //     throw new TaskSchedulerParamsSchedulerException('Yearly interval cannot exceed or equal the deadline');
                     // }
 
                     $number += ceil($years / $taskSchedulerValue->getInterval());
@@ -257,7 +257,7 @@ class TaskConfigDomainService
                     $modify = (int) $taskSchedulerValue->getInterval() * $i;
 
                     $newExpectTime = clone $this->getDatetime()->modify("+{$modify} {$taskSchedulerValue->getUnit()}");
-                    // 获取当月一共有多少天
+                    // Get the total days of the current month
                     $days = $newExpectTime->format('t');
                     foreach ($taskSchedulerValue->getValues() as $value) {
                         if ($value > $days) {
@@ -299,7 +299,7 @@ class TaskConfigDomainService
         $deadlineDate = clone $deadline->setTime((int) $h, (int) $i);
 
         // var_dump($expectTimes);
-        // 如果期望时间大于截止时间，则删除
+        // Remove expected times that exceed the deadline
         foreach ($expectTimes as $key => $expectTime) {
             if ($expectTime->getTimestamp() > $deadlineDate->getTimestamp()) {
                 unset($expectTimes[$key]);
@@ -307,7 +307,7 @@ class TaskConfigDomainService
         }
 
         if (empty($expectTimes)) {
-            throw new TaskSchedulerParamsSchedulerException('未能生成任何定时任务,请检查配置');
+            throw new TaskSchedulerParamsSchedulerException('No scheduled tasks could be generated; please check configuration');
         }
         return $expectTimes;
     }
@@ -319,37 +319,37 @@ class TaskConfigDomainService
         }
         if ($this->type === TaskType::CustomRepeat) {
             if (empty($this->unit)) {
-                throw new InvalidArgumentException('自定义周期间隔单位 不能为空');
+                throw new InvalidArgumentException('Custom interval unit cannot be empty');
             }
             if (empty($this->interval)) {
-                throw new InvalidArgumentException('自定义周期间隔频率 不能为空');
+                throw new InvalidArgumentException('Custom interval frequency cannot be empty');
             }
 
             if ($this->interval < 1 || $this->interval > 30) {
-                throw new InvalidArgumentException('自定义周期间隔频率 只能在1~30之间');
+                throw new InvalidArgumentException('Custom interval frequency must be between 1 and 30');
             }
-            // 只有是周或者月的时候，才能有 values
+            // Only week or month units can have values
             if (in_array($this->unit, [IntervalUnit::Week, IntervalUnit::Month])) {
                 if (empty($this->values)) {
-                    throw new InvalidArgumentException('自定义周期间隔频率 不能为空');
+                    throw new InvalidArgumentException('Custom interval frequency cannot be empty');
                 }
                 if ($this->unit === IntervalUnit::Week) {
                     foreach ($this->values as $value) {
                         if (! is_int($value)) {
-                            throw new InvalidArgumentException('自定义周期间隔频率 只能是整数');
+                            throw new InvalidArgumentException('Custom interval frequency must be an integer');
                         }
                         if ($value < 0 || $value > 6) {
-                            throw new InvalidArgumentException('自定义周期间隔频率 只能在0~6之间');
+                            throw new InvalidArgumentException('Custom interval frequency must be between 0 and 6');
                         }
                     }
                 }
                 if ($this->unit === IntervalUnit::Month) {
                     foreach ($this->values as $value) {
                         if (! is_int($value)) {
-                            throw new InvalidArgumentException('自定义周期间隔频率 只能是整数');
+                            throw new InvalidArgumentException('Custom interval frequency must be an integer');
                         }
                         if ($value < 1 || $value > 31) {
-                            throw new InvalidArgumentException('自定义周期间隔频率 只能在1~31之间');
+                            throw new InvalidArgumentException('Custom interval frequency must be between 1 and 31');
                         }
                     }
                 }
@@ -362,43 +362,43 @@ class TaskConfigDomainService
             $this->values = null;
         }
         if ($this->type->needDay() && is_null($this->day)) {
-            throw new InvalidArgumentException('日期 不能为空');
+            throw new InvalidArgumentException('Date cannot be empty');
         }
         if ($this->type->needTime() && is_null($this->time)) {
-            throw new InvalidArgumentException('时间 不能为空');
+            throw new InvalidArgumentException('Time cannot be empty');
         }
 
-        // 每周的时候，day 表示周几 0-6  0是周一
+        // For weekly schedules, day represents the weekday 0-6 where 0 is Monday
         if ($this->type === TaskType::WeeklyRepeat) {
             if (! is_numeric($this->day) || $this->day < 0 || $this->day > 6) {
-                throw new InvalidArgumentException('日期 只能在0~6之间');
+                throw new InvalidArgumentException('Date must be between 0 and 6');
             }
             $this->day = (string) ((int) $this->day);
         }
 
-        // 每月的时候，day 表示第几天
+        // For monthly schedules, day represents the day of the month
         if ($this->type === TaskType::MonthlyRepeat) {
             if (! is_numeric($this->day) || $this->day < 1 || $this->day > 31) {
-                throw new InvalidArgumentException('日期 只能在1~31之间');
+                throw new InvalidArgumentException('Date must be between 1 and 31');
             }
             $this->day = (string) ((int) $this->day);
         }
 
-        // 不重复、每年、每月的时候，day 表示日期
+        // For non-repeating, yearly, or monthly schedules, day represents the date
         if (in_array($this->type, [TaskType::NoRepeat, TaskType::AnnuallyRepeat])) {
             if (! is_string($this->day) || empty($this->day) || ! strtotime($this->day)) {
-                throw new InvalidArgumentException('日期 格式错误');
+                throw new InvalidArgumentException('Date format is invalid');
             }
         }
 
         $dayTimestamp = strtotime($this->day ?? '');
 
         if ($dayTimestamp) {
-            // 时间只能是未来的，
-            // TODO 有bug， 当天也会认为是未来的
+            // Time must be in the future
+            // TODO bug: the same day is also considered future
             // if (! is_null($this->day) && $dayTimestamp < time()) {
             //
-            //     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '日期 不能是过去的');
+            //     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'Date cannot be in the past');
             // }
 
             if (! is_null($this->time) && ! is_null($this->day)) {
@@ -407,7 +407,7 @@ class TaskConfigDomainService
                     throw new InvalidArgumentException('Invalid date/time format');
                 }
                 if ($dateTime->getTimestamp() < time() && $this->type != TaskType::CustomRepeat) {
-                    throw new InvalidArgumentException('距离当前时间过于接近,请调整时间');
+                    throw new InvalidArgumentException('The time is too close to now; please adjust');
                 }
             }
         }
@@ -415,23 +415,23 @@ class TaskConfigDomainService
         if (! empty($this->time) && ! empty($this->deadline)) {
             $deadline = DateTime::createFromFormat('Y-m-d H:i', $this->deadline->format('Y-m-d') . ' ' . $this->time);
             if ($deadline === false) {
-                throw new InvalidArgumentException('截止日期 格式错误');
+                throw new InvalidArgumentException('Deadline format is invalid');
             }
             $deadlineTimeStamp = $deadline->getTimestamp();
         } elseif (! empty($this->deadline)) {
             $deadlineTimeStamp = $this->deadline->getTimestamp();
         }
 
-        // 如果是自定义重复，并且没有设置截止时间，则默认两年
+        // For custom repeats with no deadline set, default to two years
         if ($this->type == TaskType::CustomRepeat && empty($this->deadline)) {
             $deadline = new DateTime();
             $deadline->modify('+2 years');
             $deadlineTimeStamp = $deadline->getTimestamp();
         }
 
-        // 截止时间只能是未来的
+        // Deadline must be in the future
         if ($deadlineTimeStamp && $deadlineTimeStamp < time()) {
-            throw new InvalidArgumentException('截止日期 距离当前时间过于接近,请调整时间');
+            throw new InvalidArgumentException('The deadline is too close to the current time; please adjust');
         }
     }
 }

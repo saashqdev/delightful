@@ -23,72 +23,72 @@ class TaskScheduler
     private string $environment;
 
     /**
-     * 业务id.
-     * 一般用于业务识别.
-     * 可作为来源标识.
+     * Business id.
+     * Typically used for business identification.
+     * Can serve as a source identifier.
      */
     private string $externalId;
 
     /**
-     * 调度名称.
+     * Schedule name.
      */
     private string $name;
 
     /**
-     * 预期调度时间.
-     * 分钟级别.
+     * Expected schedule time.
+     * Minute-level precision.
      */
     private DateTime $expectTime;
 
     /**
-     * 调度类型：1 定时调度，2 指定调度.
+     * Schedule type: 1 cron-based, 2 specific time.
      */
     private int $type;
 
     /**
-     * 剩余重试次数.
+     * Remaining retry attempts.
      */
     private int $retryTimes;
 
     /**
-     * 实际调度时间.
+     * Actual schedule time.
      */
     private ?DateTime $actualTime = null;
 
     /**
-     * 调度耗时.
+     * Schedule duration.
      */
     private int $costTime = 0;
 
     /**
-     * 调度状态
+     * Schedule status
      */
     private TaskSchedulerStatus $status;
 
     /**
-     * 调度方法.
-     * [Class, Method] 的格式.
+     * Schedule method.
+     * In [Class, Method] format.
      */
     private array $callbackMethod;
 
     /**
-     * 调度方法参数.
+     * Schedule method parameters.
      */
     private array $callbackParams = [];
 
     /**
-     * 备注.
+     * Remark.
      */
     private string $remark = '';
 
     /**
-     * 创建人.
-     * 可不填，看业务是否需要.
+     * Created by.
+     * Optional depending on business needs.
      */
     private string $creator = '';
 
     /**
-     * 创建时间.
+     * Created at.
      */
     private DateTime $createdAt;
 
@@ -103,13 +103,13 @@ class TaskScheduler
             $this->environment = Functions::getEnv();
         }
         if (empty($this->externalId)) {
-            throw new TaskSchedulerParamsSchedulerException('业务标识 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Business identifier cannot be empty');
         }
         if (empty($this->name)) {
-            throw new TaskSchedulerParamsSchedulerException('调度名称 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Schedule name cannot be empty');
         }
         if (empty($this->expectTime)) {
-            throw new TaskSchedulerParamsSchedulerException('预期调度时间 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Expected schedule time cannot be empty');
         }
         if (empty($this->type)) {
             $this->type = 1;
@@ -127,14 +127,14 @@ class TaskScheduler
     public function prepareForExecution(): void
     {
         if (! in_array($this->status, [TaskSchedulerStatus::Pending, TaskSchedulerStatus::Retry])) {
-            throw new TaskSchedulerParamsSchedulerException('只有待执行或重试状态的调度才能执行');
+            throw new TaskSchedulerParamsSchedulerException('Only pending or retry schedules can be executed');
         }
     }
 
     public function prepareForCancel(): void
     {
         if (! in_array($this->status, [TaskSchedulerStatus::Pending, TaskSchedulerStatus::Retry])) {
-            throw new TaskSchedulerParamsSchedulerException('只有待执行或重试状态的调度才能取消');
+            throw new TaskSchedulerParamsSchedulerException('Only pending or retry schedules can be cancelled');
         }
     }
 
@@ -353,14 +353,14 @@ class TaskScheduler
     private function checkCallbackMethod(): void
     {
         if (empty($this->callbackMethod)) {
-            throw new TaskSchedulerParamsSchedulerException('调度方法 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Schedule method cannot be empty');
         }
         if (count($this->callbackMethod) !== 2) {
-            throw new TaskSchedulerParamsSchedulerException('调度方法格式错误');
+            throw new TaskSchedulerParamsSchedulerException('Schedule method format is invalid');
         }
         foreach ($this->callbackMethod as $method) {
             if (! is_string($method)) {
-                throw new TaskSchedulerParamsSchedulerException('调度方法格式错误');
+                throw new TaskSchedulerParamsSchedulerException('Schedule method format is invalid');
             }
         }
     }

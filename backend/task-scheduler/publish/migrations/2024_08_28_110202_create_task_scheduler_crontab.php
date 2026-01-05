@@ -19,18 +19,18 @@ class CreateTaskSchedulerCrontab extends Migration
     {
         Schema::create(config('task_scheduler.table_names.task_scheduler_crontab', 'task_scheduler_crontab'), function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('external_id', 64)->comment('业务 id')->index();
-            $table->string('name', 64)->comment('名称');
-            $table->string('crontab', 64)->comment('crontab表达式');
-            $table->dateTime('last_gen_time')->nullable()->comment('最后生成时间');
-            $table->boolean('enabled')->default(true)->comment('是否启用');
-            $table->integer('retry_times')->default(0)->comment('总重试次数');
-            $table->json('callback_method')->comment('回调方法');
-            $table->json('callback_params')->comment('回调参数');
-            $table->string('remark', 255)->default('')->comment('备注');
-            $table->dateTime('deadline')->nullable()->comment('结束时间');
-            $table->string('creator', 64)->default('')->comment('创建人');
-            $table->dateTime('created_at')->comment('创建时间');
+            $table->string('external_id', 64)->comment('business id')->index();
+            $table->string('name', 64)->comment('name');
+            $table->string('crontab', 64)->comment('crontab expression');
+            $table->dateTime('last_gen_time')->nullable()->comment('last generation time');
+            $table->boolean('enabled')->default(true)->comment('enabled');
+            $table->integer('retry_times')->default(0)->comment('total retry attempts');
+            $table->json('callback_method')->comment('callback method');
+            $table->json('callback_params')->comment('callback parameters');
+            $table->string('remark', 255)->default('')->comment('remark');
+            $table->dateTime('deadline')->nullable()->comment('end time');
+            $table->string('creator', 64)->default('')->comment('creator');
+            $table->dateTime('created_at')->comment('created at');
 
             $table->index(['last_gen_time']);
         });

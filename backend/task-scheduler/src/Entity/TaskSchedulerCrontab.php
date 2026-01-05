@@ -19,9 +19,9 @@ class TaskSchedulerCrontab
     private string $environment;
 
     /**
-     * 业务id.
-     * 一般用于业务识别.
-     * 可作为来源标识.
+     * Business id.
+     * Typically used for business identification.
+     * Can serve as a source identifier.
      */
     private string $externalId;
 
@@ -55,22 +55,22 @@ class TaskSchedulerCrontab
             $this->environment = Functions::getEnv();
         }
         if (empty($this->name)) {
-            throw new TaskSchedulerParamsSchedulerException('定时名称 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Schedule name cannot be empty');
         }
         if (empty($this->externalId)) {
-            throw new TaskSchedulerParamsSchedulerException('业务标识 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Business identifier cannot be empty');
         }
         if (empty($this->crontab)) {
-            throw new TaskSchedulerParamsSchedulerException('定时规则 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Cron rule cannot be empty');
         }
         if (! CronExpression::isValidExpression($this->crontab)) {
-            throw new TaskSchedulerParamsSchedulerException('定时规则 格式错误');
+            throw new TaskSchedulerParamsSchedulerException('Cron rule format is invalid');
         }
         if (empty($this->lastGenTime)) {
             $this->lastGenTime = new DateTime();
         }
         if (! isset($this->enabled)) {
-            throw new TaskSchedulerParamsSchedulerException('是否启用 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Enabled flag cannot be empty');
         }
         if (! isset($this->retryTimes) || $this->retryTimes < 0) {
             $this->retryTimes = 0;
@@ -81,7 +81,7 @@ class TaskSchedulerCrontab
             $nowDate = date('Y-m-d', time());
             $nowDate = strtotime($nowDate);
             if ($deadlineDate < $nowDate) {
-                throw new TaskSchedulerParamsSchedulerException('结束时间 不能小于当前时间');
+                throw new TaskSchedulerParamsSchedulerException('End time cannot be earlier than now');
             }
         }
 
@@ -96,22 +96,22 @@ class TaskSchedulerCrontab
             $this->environment = Functions::getEnv();
         }
         if (empty($this->name)) {
-            throw new TaskSchedulerParamsSchedulerException('定时名称 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Schedule name cannot be empty');
         }
         if (empty($this->externalId)) {
-            throw new TaskSchedulerParamsSchedulerException('业务标识 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Business identifier cannot be empty');
         }
         if (empty($this->crontab)) {
-            throw new TaskSchedulerParamsSchedulerException('定时规则 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Cron rule cannot be empty');
         }
         if (! CronExpression::isValidExpression($this->crontab)) {
-            throw new TaskSchedulerParamsSchedulerException('定时规则 格式错误');
+            throw new TaskSchedulerParamsSchedulerException('Cron rule format is invalid');
         }
         if (empty($this->lastGenTime)) {
             $this->lastGenTime = new DateTime();
         }
         if (! isset($this->enabled)) {
-            throw new TaskSchedulerParamsSchedulerException('是否启用 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Enabled flag cannot be empty');
         }
         if (! isset($this->retryTimes) || $this->retryTimes < 0) {
             $this->retryTimes = 0;
@@ -122,7 +122,7 @@ class TaskSchedulerCrontab
             $nowDate = date('Y-m-d', time());
             $nowDate = strtotime($nowDate);
             if ($deadlineDate < $nowDate) {
-                throw new TaskSchedulerParamsSchedulerException('结束时间 不能小于当前时间');
+                throw new TaskSchedulerParamsSchedulerException('End time cannot be earlier than now');
             }
         }
 
@@ -134,25 +134,25 @@ class TaskSchedulerCrontab
     public function prepareForCreateScheduleTask(): void
     {
         if (empty($this->id)) {
-            throw new TaskSchedulerParamsSchedulerException('定时任务ID 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Cron task ID cannot be empty');
         }
         if (empty($this->crontab)) {
-            throw new TaskSchedulerParamsSchedulerException('定时规则 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Cron rule cannot be empty');
         }
         if (! CronExpression::isValidExpression($this->crontab)) {
-            throw new TaskSchedulerParamsSchedulerException('定时规则 格式错误');
+            throw new TaskSchedulerParamsSchedulerException('Cron rule format is invalid');
         }
         if (empty($this->lastGenTime)) {
             $this->lastGenTime = new DateTime();
         }
         if (! $this->enabled) {
-            throw new TaskSchedulerParamsSchedulerException('未启用的定时任务不能生成调度任务');
+            throw new TaskSchedulerParamsSchedulerException('Disabled cron tasks cannot generate schedules');
         }
         $this->checkCallbackMethod();
     }
 
     /**
-     * 获取指定日期内的数据.
+     * Get data within the specified date range.
      * @return DateTime[]
      */
     public function listCycleDate(DateTime $endTime, int $limit = 50): array
@@ -166,12 +166,12 @@ class TaskSchedulerCrontab
 
         $runDates = $cron->getMultipleRunDates($limit, $this->lastGenTime, false, false);
         foreach ($runDates as $runDate) {
-            // 如果超过了结束时间，就不需要了
+            // If it exceeds the end time, skip it
             if ($runDate > $endTime) {
                 break;
             }
             $list[] = $runDate;
-            // 更新上次时间
+            // Update the last time
             $this->lastGenTime = $runDate;
         }
         return $list;
@@ -358,14 +358,14 @@ class TaskSchedulerCrontab
     private function checkCallbackMethod(): void
     {
         if (empty($this->callbackMethod)) {
-            throw new TaskSchedulerParamsSchedulerException('调度方法 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Schedule method cannot be empty');
         }
         if (count($this->callbackMethod) !== 2) {
-            throw new TaskSchedulerParamsSchedulerException('调度方法格式错误');
+            throw new TaskSchedulerParamsSchedulerException('Schedule method format is invalid');
         }
         foreach ($this->callbackMethod as $method) {
             if (! is_string($method)) {
-                throw new TaskSchedulerParamsSchedulerException('调度方法格式错误');
+                throw new TaskSchedulerParamsSchedulerException('Schedule method format is invalid');
             }
         }
     }

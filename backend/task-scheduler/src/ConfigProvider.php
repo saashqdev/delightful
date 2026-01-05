@@ -33,26 +33,26 @@ class ConfigProvider
                 [
                     'id' => 'migration',
                     'description' => 'migration file.',
-                    'source' => __DIR__ . '/../publish/migrations/2024_08_28_110155_create_task_scheduler.php',  // 对应的配置文件路径
-                    'destination' => BASE_PATH . '/migrations/2024_08_28_110155_create_task_scheduler.php', // 复制为这个路径下的该文件
+                    'source' => __DIR__ . '/../publish/migrations/2024_08_28_110155_create_task_scheduler.php',  // Corresponding config file path
+                    'destination' => BASE_PATH . '/migrations/2024_08_28_110155_create_task_scheduler.php', // Copy this file to this path
                 ],
                 [
                     'id' => 'migration',
                     'description' => 'migration file.',
-                    'source' => __DIR__ . '/../publish/migrations/2024_08_28_110158_create_task_scheduler_log.php',  // 对应的配置文件路径
-                    'destination' => BASE_PATH . '/migrations/2024_08_28_110158_create_task_scheduler_log.php', // 复制为这个路径下的该文件
+                    'source' => __DIR__ . '/../publish/migrations/2024_08_28_110158_create_task_scheduler_log.php',  // Corresponding config file path
+                    'destination' => BASE_PATH . '/migrations/2024_08_28_110158_create_task_scheduler_log.php', // Copy this file to this path
                 ],
                 [
                     'id' => 'migration',
                     'description' => 'migration file.',
-                    'source' => __DIR__ . '/../publish/migrations/2024_08_28_110202_create_task_scheduler_crontab.php',  // 对应的配置文件路径
-                    'destination' => BASE_PATH . '/migrations/2024_08_28_110202_create_task_scheduler_crontab.php', // 复制为这个路径下的该文件
+                    'source' => __DIR__ . '/../publish/migrations/2024_08_28_110202_create_task_scheduler_crontab.php',  // Corresponding config file path
+                    'destination' => BASE_PATH . '/migrations/2024_08_28_110202_create_task_scheduler_crontab.php', // Copy this file to this path
                 ],
                 [
                     'id' => 'migration',
                     'description' => 'migration file.',
-                    'source' => __DIR__ . '/../publish/migrations/2024_10_22_101130_task_scheduler_add_environment.php',  // 对应的配置文件路径
-                    'destination' => BASE_PATH . '/migrations/2024_10_22_101130_task_scheduler_add_environment.php', // 复制为这个路径下的该文件
+                    'source' => __DIR__ . '/../publish/migrations/2024_10_22_101130_task_scheduler_add_environment.php',  // Corresponding config file path
+                    'destination' => BASE_PATH . '/migrations/2024_10_22_101130_task_scheduler_add_environment.php', // Copy this file to this path
                 ],
             ],
         ];

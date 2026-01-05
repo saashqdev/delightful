@@ -21,7 +21,7 @@ class TaskSchedulerRepository extends AbstractRepository
     {
         if ($scheduleTask->shouldCreate()) {
             $model = new TaskSchedulerModel();
-            // 如果是创建过的，就不创建了
+            // Skip creation if it already exists
             if ($this->existsByExternalIdAndExpectTime($scheduleTask->getExternalId(), $scheduleTask->getExpectTime())) {
                 return $scheduleTask;
             }
@@ -41,7 +41,7 @@ class TaskSchedulerRepository extends AbstractRepository
         return $scheduleTask;
     }
 
-    // 批量写入
+    // Batch insert
     public function batchCreate(array $scheduleTasks): void
     {
         $models = [];
@@ -49,7 +49,7 @@ class TaskSchedulerRepository extends AbstractRepository
             $models[] = $scheduleTask->toModelString();
         }
 
-        // 拆分批量写入,每次写入500条
+        // Split batch inserts; write 500 records per chunk
         $newModels = array_chunk($models, 500);
         foreach ($newModels as $model) {
             TaskSchedulerModel::query()->insert($model);

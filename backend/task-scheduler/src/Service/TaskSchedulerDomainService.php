@@ -52,12 +52,12 @@ class TaskSchedulerDomainService
         if (! $crontab) {
             return null;
         }
-        // 转TaskSchedulerCrontab实体
+          // Convert to TaskSchedulerCrontab entity
         return TaskSchedulerCrontabFactory::modelToEntity($crontab);
     }
 
     /**
-     * 创建指定调度.
+      * Create a specified schedule.
      */
     public function create(TaskScheduler $scheduleTask): void
     {
@@ -66,7 +66,7 @@ class TaskSchedulerDomainService
     }
 
     /**
-     * 创建定时调度.
+     * Create a cron-based schedule.
      */
     public function createCrontab(TaskSchedulerCrontab $scheduleTaskCrontab): TaskSchedulerCrontab
     {
@@ -75,7 +75,7 @@ class TaskSchedulerDomainService
     }
 
     /**
-     * 批量创建定时调度.
+     * Batch create cron schedules.
      */
     public function batchCreate(array $scheduleTasks): void
     {
@@ -91,7 +91,7 @@ class TaskSchedulerDomainService
     }
 
     /**
-     * 修改定时调度.
+     * Update a cron-based schedule.
      */
     public function saveCrontab(TaskSchedulerCrontab $scheduleTaskCrontab): void
     {
@@ -99,36 +99,36 @@ class TaskSchedulerDomainService
         $this->scheduleTaskCrontabRepository->save($scheduleTaskCrontab);
     }
 
-    // 清理scheduler 调度 和 crontab 规则
+    // Clear scheduler tasks and crontab rules
     #[Transactional]
     public function clearByExternalId(string $externalId): void
     {
-        // 清理 scheduler 调度
+        // Clear scheduler tasks
         $this->scheduleTaskRepository->clearByExternalId($externalId);
-        // 清理 crontab 规则
+        // Clear crontab rules
         $this->scheduleTaskCrontabRepository->clearByExternalId($externalId);
     }
 
-    // 清理scheduler 调度
+    // Clear scheduler tasks
     #[Transactional]
     public function clearTaskByExternalId(string $externalId): void
     {
-        // 清理 scheduler 调度
+        // Clear scheduler tasks
         $this->scheduleTaskRepository->clearByExternalId($externalId);
     }
 
     /**
-     * 通过定时规则创建指定调度.
+     * Create scheduled tasks based on a cron rule.
      */
     #[Transactional]
     public function createByCrontab(TaskSchedulerCrontab $scheduleTaskCrontab, int $days = 3): void
     {
         // if ($days < 1 || $days > 3) {
-        //     throw new TaskSchedulerParamsSchedulerException('仅支持1-3天的周期提前生成');
+        //     throw new TaskSchedulerParamsSchedulerException('Only 1-3 day windows are supported for pre-generation');
         // }
         $scheduleTaskCrontab->prepareForCreateScheduleTask();
 
-        // 获取未来几天和截止日期的最小值
+        // Use the earlier of the upcoming days window and the deadline
         $endTime = (new DateTime())->add(new DateInterval('P' . $days . 'D'));
         if ($scheduleTaskCrontab->getDeadline()) {
             $endTime = min($endTime, $scheduleTaskCrontab->getDeadline());
@@ -138,7 +138,7 @@ class TaskSchedulerDomainService
         foreach ($dateList as $date) {
             $task = TaskSchedulerFactory::createByCrontab($scheduleTaskCrontab, $date);
             $this->create($task);
-            // 如果已经进入截止时间，那么关闭该 crontab
+            // If the deadline has been reached, disable this crontab
             if ($scheduleTaskCrontab->getDeadline() && $scheduleTaskCrontab->getDeadline() <= $date) {
                 $scheduleTaskCrontab->setEnabled(false);
             }
@@ -147,7 +147,7 @@ class TaskSchedulerDomainService
     }
 
     /**
-     * 查询调度任务.
+     * Query scheduled tasks.
      * @return array{total: int, list: array<TaskScheduler>}
      */
     public function queries(TaskSchedulerQuery $query, Page $page): array
@@ -156,7 +156,7 @@ class TaskSchedulerDomainService
     }
 
     /**
-     * 查询定时调度任务.
+     * Query cron schedule tasks.
      * @return array{total: int, list: array<TaskSchedulerCrontab>}
      */
     public function queriesCrontab(TaskSchedulerCrontabQuery $query, Page $page): array
@@ -165,7 +165,7 @@ class TaskSchedulerDomainService
     }
 
     /**
-     * 执行调度任务.
+     * Execute a scheduled task.
      */
     public function execute(TaskScheduler $scheduleTask): TaskSchedulerExecuteResult
     {
@@ -183,7 +183,7 @@ class TaskSchedulerDomainService
                 if ($retryTimes > 0) {
                     $scheduleTask->setStatus(TaskSchedulerStatus::Retry);
                 } else {
-                    // 重试次数用完，标记为失败
+                    // Retries exhausted, mark as failed
                     $scheduleTask->setStatus(TaskSchedulerStatus::Failed);
                 }
             }
@@ -199,7 +199,7 @@ class TaskSchedulerDomainService
     }
 
     /**
-     * 取消调度任务.
+     * Cancel scheduled tasks.
      */
     #[Transactional]
     public function cancel(TaskSchedulerQuery $query): void
@@ -235,7 +235,7 @@ class TaskSchedulerDomainService
     }
 
     /**
-     * 归档.
+     * Archive.
      */
     private function createLog(TaskScheduler $scheduleTask, ?TaskSchedulerExecuteResult $result = null): void
     {

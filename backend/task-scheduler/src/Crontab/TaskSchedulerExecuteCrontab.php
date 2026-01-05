@@ -22,7 +22,7 @@ use Throwable;
 
 use function Hyperf\Config\config;
 
-#[Crontab(rule: '* * * * *', name: 'TaskSchedulerExecuteCrontab', singleton: true, mutexExpires: 90, onOneServer: true, callback: 'execute', memo: '执行调度')]
+#[Crontab(rule: '* * * * *', name: 'TaskSchedulerExecuteCrontab', singleton: true, mutexExpires: 90, onOneServer: true, callback: 'execute', memo: 'Execute schedules')]
 class TaskSchedulerExecuteCrontab
 {
     protected Concurrent $concurrent;
@@ -44,7 +44,7 @@ class TaskSchedulerExecuteCrontab
 
     public function execute(): void
     {
-        // 获取已经超过了调度时间，还未开始的任务进行执行
+        // Fetch tasks whose scheduled time has passed and have not started yet
         $query = new TaskSchedulerQuery();
         $query->setExpectTimeLt(new DateTime());
         $query->setStatus(TaskSchedulerStatus::Pending);
@@ -82,14 +82,14 @@ class TaskSchedulerExecuteCrontab
                 return;
             }
 
-            // 实时查询最新数据
+            // Fetch the latest data in real time
             $taskScheduler = $this->scheduleTaskDomainService->getById($taskScheduler->getId());
             if (! $taskScheduler) {
                 return;
             }
             $this->scheduleTaskDomainService->execute($taskScheduler);
         } catch (Throwable $throwable) {
-            $this->logger->notice('执行调度失败', [
+            $this->logger->notice('Failed to execute schedule', [
                 'task_scheduler_id' => $taskScheduler->getId(),
                 'exception' => $throwable->getMessage(),
             ]);

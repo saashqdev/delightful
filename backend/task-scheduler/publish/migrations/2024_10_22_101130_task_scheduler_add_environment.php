@@ -18,19 +18,19 @@ class TaskSchedulerAddEnvironment extends Migration
     public function up(): void
     {
         Schema::table(config('task_scheduler.table_names.task_scheduler', 'task_scheduler'), function (Blueprint $table) {
-            $table->string('environment', 64)->default('')->comment('环境');
+            $table->string('environment', 64)->default('')->comment('environment');
 
             $table->index(['environment', 'external_id']);
         });
 
         Schema::table(config('task_scheduler.table_names.task_scheduler_log', 'task_scheduler_log'), function (Blueprint $table) {
-            $table->string('environment', 64)->default('')->comment('环境');
+            $table->string('environment', 64)->default('')->comment('environment');
 
             $table->index(['environment', 'external_id']);
         });
 
         Schema::table(config('task_scheduler.table_names.task_scheduler_crontab', 'task_scheduler_crontab'), function (Blueprint $table) {
-            $table->string('environment', 64)->default('')->comment('环境');
+            $table->string('environment', 64)->default('')->comment('environment');
 
             $table->index(['environment', 'external_id']);
         });

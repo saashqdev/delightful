@@ -1,0 +1,66 @@
+backend\task-scheduler\src\Service\TaskConfigDomainService.php:162: //     throw new TaskSchedulerParamsSchedulerException('每日间隔时间不能超过截止时间');
+backend\task-scheduler\src\Service\TaskConfigDomainService.php:177: //     throw new TaskSchedulerParamsSchedulerException('每周间隔时间不能超过或等于截止时间');
+backend\task-scheduler\src\Service\TaskConfigDomainService.php:188: //     throw new TaskSchedulerParamsSchedulerException('每月间隔时间不能超过或等于截止时间');
+backend\task-scheduler\src\Service\TaskConfigDomainService.php:197: //     throw new TaskSchedulerParamsSchedulerException('每年间隔时间不能超过或等于截止时间');
+backend\task-scheduler\src\Service\TaskSchedulerDomainService.php:94: * 修改定时调度.
+backend\task-scheduler\src\Service\TaskSchedulerDomainService.php:127: //     throw new TaskSchedulerParamsSchedulerException('仅支持1-3天的周期提前生成');
+backend\task-scheduler\src\Service\TaskSchedulerDomainService.php:131: // 获取未来几天和截止日期的最小值
+backend\task-scheduler\README.md:3: ## 安装
+backend\task-scheduler\README.md:9: ## 使用方式请见
+backend\task-scheduler\README.md:14: ## 说明
+backend\task-scheduler\README.md:15: > 仅支持分钟级调用
+backend\task-scheduler\README.md:17: 调度方式
+backend\task-scheduler\README.md:18: 1. 定时调度
+backend\task-scheduler\README.md:19: 2. 指定调度
+backend\task-scheduler\README.md:21: 创建调度任务
+backend\task-scheduler\README.md:22: 1. 定时调度需要有个定时器去生成未来 n 小时内的需要执行的任务数据
+backend\task-scheduler\README.md:23: 2. 根据任务时间生成调度任务
+backend\task-scheduler\README.md:25: 执行任务
+backend\task-scheduler\README.md:26: 1. 执行已到时间的任务，改变状态，如果有误则执行报错事件
+backend\task-scheduler\README.md:27: 2. 调度结束后，记录到归档表
+backend\task-scheduler\README.md:29: 后台执行
+backend\task-scheduler\README.md:30: 1. 每天检测超过 n 天已完成的调度任务，删除。防止调度表过大
+backend\task-scheduler\README.md:31: 2. 每分钟检测未来 n 天内需要执行的任务，生成调度任务
+backend\task-scheduler\README.md:32: 3. 每分钟检测已到时间的任务，执行
+backend\task-scheduler\README.md:34: 数据库
+backend\task-scheduler\README.md:35: 1. 任务调度表(task_scheduler) 用于具体执行的任务记录
+backend\task-scheduler\README.md:36: 2. 任务归档表(task_scheduler_log) 用于保存已完成的任务记录，仅做归档，方便以后回档查看历史记录
+backend\task-scheduler\README.md:37: 3. 定时任务表(task_scheduler_crontab) 用于保存定时任务规则
+backend\task-scheduler\README.md:39: ## 记得创建表结构
+backend\task-scheduler\README.md:49: external_id     varchar(64)             not null comment '业务 id',
+backend\task-scheduler\README.md:50: name            varchar(64)             not null comment '名称',
+backend\task-scheduler\README.md:51: expect_time     datetime                not null comment '预期执行时间',
+backend\task-scheduler\README.md:52: actual_time     datetime                null comment '实际执行时间',
+backend\task-scheduler\README.md:53: type            tinyint      default 2  not null comment '调度类型：1 定时调度，2 指定调度',
+backend\task-scheduler\README.md:54: cost_time       int          default 0  not null comment '耗时 毫秒',
+backend\task-scheduler\README.md:55: retry_times     int          default 0  not null comment '剩余重试次数',
+backend\task-scheduler\README.md:56: status          tinyint      default 0  not null comment '状态',
+backend\task-scheduler\README.md:57: callback_method json                    not null comment '回调方法',
+backend\task-scheduler\README.md:58: callback_params json                    not null comment '回调参数',
+backend\task-scheduler\README.md:59: remark          varchar(255) default '' not null comment '备注',
+backend\task-scheduler\README.md:60: creator         varchar(64)  default '' not null comment '创建人',
+backend\task-scheduler\README.md:61: created_at      datetime                not null comment '创建时间'
+backend\task-scheduler\README.md:75: name            varchar(64)             not null comment '名称',
+backend\task-scheduler\README.md:76: crontab         varchar(64)             not null comment 'crontab表达式',
+backend\task-scheduler\README.md:77: last_gen_time   datetime                null comment '最后生成时间',
+backend\task-scheduler\README.md:78: enabled         tinyint(1)   default 1  not null comment '是否启用',
+backend\task-scheduler\README.md:79: retry_times     int          default 0  not null comment '总重试次数',
+backend\task-scheduler\README.md:80: callback_method json                    not null comment '回调方法',
+backend\task-scheduler\README.md:81: callback_params json                    not null comment '回调参数',
+backend\task-scheduler\README.md:82: remark          varchar(255) default '' not null comment '备注',
+backend\task-scheduler\README.md:83: creator         varchar(64)  default '' not null comment '创建人',
+backend\task-scheduler\README.md:84: created_at      datetime                not null comment '创建时间'
+backend\task-scheduler\README.md:95: task_id         bigint unsigned         not null comment '任务ID',
+backend\task-scheduler\README.md:96: external_id     varchar(64)             not null comment '业务标识',
+backend\task-scheduler\README.md:97: name            varchar(64)             not null comment '名称',
+backend\task-scheduler\README.md:98: expect_time     datetime                not null comment '预期执行时间',
+backend\task-scheduler\README.md:99: actual_time     datetime                null comment '实际执行时间',
+backend\task-scheduler\README.md:100: type            tinyint      default 2  not null comment '类型',
+backend\task-scheduler\README.md:101: cost_time       int          default 0  not null comment '耗时',
+backend\task-scheduler\README.md:102: status          tinyint      default 0  not null comment '状态',
+backend\task-scheduler\README.md:103: callback_method json                    not null comment '回调方法',
+backend\task-scheduler\README.md:104: callback_params json                    not null comment '回调参数',
+backend\task-scheduler\README.md:105: remark          varchar(255) default '' not null comment '备注',
+backend\task-scheduler\README.md:106: creator         varchar(64)  default '' not null comment '创建人',
+backend\task-scheduler\README.md:107: created_at      datetime                not null comment '创建时间',
+backend\task-scheduler\README.md:108: result          json                    null comment '结果'

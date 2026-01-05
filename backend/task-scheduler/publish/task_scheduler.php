@@ -5,17 +5,17 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the software license
  */
 return [
-    // 定时生成未来 n 天的数据
+    // Periodically generate data for the next n days
     'crontab_days' => 3,
-    // 超过 n 天的数据会被清理
+    // Data older than n days will be cleared
     'clear_days' => 10,
 
-    // 开启环境隔离
+    // Enable environment isolation
     'environment_enabled' => false,
 
-    // 同时执行的定时任务数量，协程数量控制
+    // Number of scheduled tasks executed concurrently; controls coroutine count
     'concurrency' => 500,
 
-    // 锁超时时间
+    // Lock timeout
     'lock_timeout' => 600,
 ];

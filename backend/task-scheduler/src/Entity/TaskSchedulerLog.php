@@ -22,72 +22,72 @@ class TaskSchedulerLog
     private string $environment;
 
     /**
-     * 调度标识.
-     * 一般用于业务识别.
-     * 可作为来源标识.
+     * Schedule identifier.
+     * Typically used for business identification.
+     * Can serve as a source identifier.
      */
     private string $externalId;
 
     /**
-     * 调度名称.
+     * Schedule name.
      */
     private string $name;
 
     /**
-     * 预期调度时间.
-     * 分钟级别.
+     * Expected schedule time.
+     * Minute-level precision.
      */
     private DateTime $expectTime;
 
     /**
-     * 实际调度时间.
+     * Actual schedule time.
      */
     private ?DateTime $actualTime = null;
 
     /**
-     * 调度耗时.
+     * Schedule duration.
      */
     private int $costTime = 0;
 
     /**
-     * 调度状态
+     * Schedule status
      */
     private TaskSchedulerStatus $status;
 
     /**
-     * 调度类型.
+     * Schedule type.
      */
     private int $type;
 
     /**
-     * 调度方法.
-     * [Class, Method] 的格式.
+     * Schedule method.
+     * In [Class, Method] format.
      */
     private array $callbackMethod;
 
     /**
-     * 调度方法参数.
+     * Schedule method parameters.
      */
     private array $callbackParams = [];
 
     /**
-     * 备注.
+     * Remark.
      */
     private string $remark = '';
 
     /**
-     * 创建人.
-     * 可不填，看业务是否需要.
+     * Created by.
+     * Optional depending on business needs.
      */
     private string $creator = '';
 
     /**
-     * 创建时间.
+     * Created at.
      */
     private DateTime $createdAt;
 
     /**
-     * 调度执行结果.
+     * Schedule execution result.
      */
     private ?TaskSchedulerExecuteResult $result = null;
 
@@ -97,16 +97,16 @@ class TaskSchedulerLog
             $this->environment = Functions::getEnv();
         }
         if (empty($this->taskId)) {
-            throw new TaskSchedulerParamsSchedulerException('任务ID 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Task ID cannot be empty');
         }
         if (empty($this->externalId)) {
-            throw new TaskSchedulerParamsSchedulerException('业务标识 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Business identifier cannot be empty');
         }
         if (empty($this->name)) {
-            throw new TaskSchedulerParamsSchedulerException('调度名称 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Schedule name cannot be empty');
         }
         if (empty($this->expectTime)) {
-            throw new TaskSchedulerParamsSchedulerException('预期调度时间 不能为空');
+            throw new TaskSchedulerParamsSchedulerException('Expected schedule time cannot be empty');
         }
         unset($this->id);
     }

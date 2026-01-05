@@ -13,7 +13,7 @@ Copyright (c) Be Delightful , Distributed under the software license
 EOF;
 
 return (new Config())
-    // 并发 cs-fix
+    // Concurrent cs-fix
     ->setParallelConfig(new ParallelConfig(8))
     ->setRiskyAllowed(true)
     ->setRules([

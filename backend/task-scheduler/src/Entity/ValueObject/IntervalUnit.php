@@ -10,22 +10,22 @@ namespace Dtyq\TaskScheduler\Entity\ValueObject;
 enum IntervalUnit: string
 {
     /**
-     * 间隔执行单位:天.
+     * Interval unit: day.
      */
     case Day = 'day';
 
     /**
-     * 间隔执行单位:周.
+     * Interval unit: week.
      */
     case Week = 'week';
 
     /**
-     * 间隔执行单位:月.
+     * Interval unit: month.
      */
     case Month = 'month';
 
     /**
-     * 间隔执行单位:年.
+     * Interval unit: year.
      */
     case Year = 'year';
 }

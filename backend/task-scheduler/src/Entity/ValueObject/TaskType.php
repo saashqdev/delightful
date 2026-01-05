@@ -10,32 +10,32 @@ namespace Dtyq\TaskScheduler\Entity\ValueObject;
 enum TaskType: string
 {
     /**
-     * 不重复.
+     * Do not repeat.
      */
     case NoRepeat = 'no_repeat';
 
     /**
-     * 每天重复.
+     * Repeat daily.
      */
     case DailyRepeat = 'daily_repeat';
 
     /**
-     * 每周重复.
+     * Repeat weekly.
      */
     case WeeklyRepeat = 'weekly_repeat';
 
     /**
-     * 每月重复.
+     * Repeat monthly.
      */
     case MonthlyRepeat = 'monthly_repeat';
 
     /**
-     * 每年重复.
+     * Repeat yearly.
      */
     case AnnuallyRepeat = 'annually_repeat';
 
     /**
-     * 每个工作日重复.
+     * Repeat on each weekday.
      */
     case WeekdayRepeat = 'weekday_repeat';
 
@@ -48,7 +48,7 @@ enum TaskType: string
     case Sunday = 'Sunday';
 
     /**
-     * 自定义重复.
+     * Custom repeat.
      */
     case CustomRepeat = 'custom_repeat';
 

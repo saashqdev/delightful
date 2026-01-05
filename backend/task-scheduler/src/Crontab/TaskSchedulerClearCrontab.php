@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 
 use function Hyperf\Config\config;
 
-#[Crontab(rule: '0 2 * * *', name: 'TaskSchedulerClearCrontab', singleton: true, mutexExpires: 600, onOneServer: true, callback: 'execute', memo: '清理超过 n 天的调度数据')]
+#[Crontab(rule: '0 2 * * *', name: 'TaskSchedulerClearCrontab', singleton: true, mutexExpires: 600, onOneServer: true, callback: 'execute', memo: 'Clear scheduling data older than n days')]
 class TaskSchedulerClearCrontab
 {
     private LoggerInterface $logger;
@@ -33,13 +33,13 @@ class TaskSchedulerClearCrontab
 
     public function execute(): void
     {
-        // 清理超过 n 天的调度数据
+        // Clear scheduled data older than n days
         $clearDays = config('task_scheduler.clear_days', 3);
         $clearTime = (new DateTime())->sub(new DateInterval("P{$clearDays}D"));
 
         $query = new TaskSchedulerQuery();
         $query->setOrder(['id' => 'asc']);
-        // 1 页 1 页慢慢删除
+        // Delete one page at a time
         $page = new Page(1, 1000);
         $limitPage = 100;
         while (true) {
@@ -56,7 +56,7 @@ class TaskSchedulerClearCrontab
             }
             if (! empty($clearIds)) {
                 $this->scheduleTaskDomainService->deleteByIds($clearIds);
-                $this->logger->info('清理调度数据', [
+                $this->logger->info('Cleared scheduled data', [
                     'clear_ids' => $clearIds,
                 ]);
             }

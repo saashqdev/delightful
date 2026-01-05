@@ -18,7 +18,7 @@ use Throwable;
 
 use function Hyperf\Config\config;
 
-#[Crontab(rule: '* * * * *', name: 'TaskSchedulerCreateCrontab', singleton: true, mutexExpires: 90, onOneServer: true, callback: 'execute', memo: '创建未来 n 天的调度数据')]
+#[Crontab(rule: '* * * * *', name: 'TaskSchedulerCreateCrontab', singleton: true, mutexExpires: 90, onOneServer: true, callback: 'execute', memo: 'Create scheduled data for the next n days')]
 class TaskSchedulerCreateCrontab
 {
     private LoggerInterface $logger;
@@ -34,7 +34,7 @@ class TaskSchedulerCreateCrontab
     {
         $days = config('task_scheduler.crontab_days', 3);
         $lastTime = new DateTime();
-        // 获取 lastTime 超过的数据
+        // Retrieve records newer than lastTime
         $query = new TaskSchedulerCrontabQuery();
         $query->setLastGenTimeGt($lastTime);
         $query->setEnable(true);
@@ -50,7 +50,7 @@ class TaskSchedulerCreateCrontab
                 try {
                     $this->scheduleTaskDomainService->createByCrontab($scheduleTask, $days);
                 } catch (Throwable $throwable) {
-                    $this->logger->notice('创建调度失败', [
+                    $this->logger->notice('Failed to create schedule', [
                         'task_scheduler_id' => $scheduleTask->getId(),
                         'exception' => $throwable->getMessage(),
                     ]);

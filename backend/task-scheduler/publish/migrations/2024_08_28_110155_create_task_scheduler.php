@@ -19,19 +19,19 @@ class CreateTaskScheduler extends Migration
     {
         Schema::create(config('task_scheduler.table_names.task_scheduler', 'task_scheduler'), function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('external_id', 64)->comment('业务 id')->index();
-            $table->string('name', 64)->comment('名称');
-            $table->dateTimeTz('expect_time')->comment('预期执行时间');
-            $table->dateTimeTz('actual_time')->nullable()->comment('实际执行时间');
-            $table->tinyInteger('type')->default(2)->comment('类型');
-            $table->integer('cost_time')->default(0)->comment('耗时 毫秒');
-            $table->integer('retry_times')->default(0)->comment('剩余重试次数');
-            $table->tinyInteger('status')->default(0)->comment('状态');
-            $table->json('callback_method')->comment('回调方法');
-            $table->json('callback_params')->comment('回调参数');
-            $table->string('remark', 255)->default('')->comment('备注');
-            $table->string('creator', 64)->default('')->comment('创建人');
-            $table->dateTimeTz('created_at')->comment('创建时间');
+            $table->string('external_id', 64)->comment('business id')->index();
+            $table->string('name', 64)->comment('name');
+            $table->dateTimeTz('expect_time')->comment('expected execution time');
+            $table->dateTimeTz('actual_time')->nullable()->comment('actual execution time');
+            $table->tinyInteger('type')->default(2)->comment('type');
+            $table->integer('cost_time')->default(0)->comment('duration milliseconds');
+            $table->integer('retry_times')->default(0)->comment('remaining retries');
+            $table->tinyInteger('status')->default(0)->comment('status');
+            $table->json('callback_method')->comment('callback method');
+            $table->json('callback_params')->comment('callback parameters');
+            $table->string('remark', 255)->default('')->comment('remark');
+            $table->string('creator', 64)->default('')->comment('creator');
+            $table->dateTimeTz('created_at')->comment('created at');
             $table->index(['status', 'expect_time']);
         });
     }

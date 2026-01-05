@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\PHPCodeExecutor;
+namespace Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\PHPCodeExecutor;
 
 use Dtyq\FlowExprEngine\Exception\FlowExprEngineException;
 use Dtyq\RuleEngineCore\Standards\Exception\InvalidRuleSessionException;

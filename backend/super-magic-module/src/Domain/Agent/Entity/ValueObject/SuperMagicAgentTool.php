@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Domain\Agent\Entity\ValueObject;
+namespace Delightful\SuperMagic\Domain\Agent\Entity\ValueObject;
 
 use App\Infrastructure\Core\AbstractValueObject;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;

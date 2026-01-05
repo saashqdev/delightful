@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\OpenDev\Parameter\Department;
+namespace Delightful\EasyDingTalk\OpenDev\Parameter\Department;
 
 use Dtyq\EasyDingTalk\OpenDev\Parameter\AbstractParameter;
 

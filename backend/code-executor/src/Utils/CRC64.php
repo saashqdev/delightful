@@ -5,7 +5,7 @@ declare(strict_types=1);
  * This file is part of Dtyq.
  */
 
-namespace Dtyq\CodeExecutor\Utils;
+namespace Delightful\CodeExecutor\Utils;
 
 /**
  * CRC64 calculation utility class.

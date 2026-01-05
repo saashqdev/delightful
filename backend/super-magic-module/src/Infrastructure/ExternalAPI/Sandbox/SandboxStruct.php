@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Infrastructure\ExternalAPI\Sandbox;
+namespace Delightful\SuperMagic\Infrastructure\ExternalAPI\Sandbox;
 
 class SandboxStruct
 {

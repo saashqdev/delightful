@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Test\Structure\Form;
+namespace Delightful\FlowExprEngine\Test\Structure\Form;
 
 use Dtyq\FlowExprEngine\Builder\FormBuilder;
 use Dtyq\FlowExprEngine\Structure\Form\Form;

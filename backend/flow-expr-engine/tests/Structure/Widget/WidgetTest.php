@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Test\Structure\Widget;
+namespace Delightful\FlowExprEngine\Test\Structure\Widget;
 
 use Dtyq\FlowExprEngine\Builder\WidgetBuilder;
 use Dtyq\FlowExprEngine\Structure\Widget\ShowOptions;

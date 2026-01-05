@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\OpenDev\Result\Calendar;
+namespace Delightful\EasyDingTalk\OpenDev\Result\Calendar;
 
 use Dtyq\EasyDingTalk\Kernel\Exceptions\InvalidResultException;
 use Dtyq\EasyDingTalk\OpenDev\Result\AbstractResult;

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\Options\ExecuteOption;
+namespace Delightful\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\Options\ExecuteOption;
 
 use Dtyq\FlowExprEngine\SdkInfo;
 use Dtyq\RuleEngineCore\PhpScript\Admin\RuleExecutionSetProperties;

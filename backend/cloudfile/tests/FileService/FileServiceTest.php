@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\CloudFile\Tests\FileService;
+namespace Delightful\CloudFile\Tests\FileService;
 
 use Dtyq\CloudFile\Kernel\FilesystemProxy;
 use Dtyq\CloudFile\Kernel\Struct\AppendUploadFile;

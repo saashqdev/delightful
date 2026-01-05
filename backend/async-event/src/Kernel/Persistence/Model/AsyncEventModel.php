@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\AsyncEvent\Kernel\Persistence\Model;
+namespace Delightful\AsyncEvent\Kernel\Persistence\Model;
 
 use Carbon\Carbon;
 use Hyperf\DbConnection\Model\Model;

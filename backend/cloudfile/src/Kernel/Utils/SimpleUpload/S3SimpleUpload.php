@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\CloudFile\Kernel\Utils\SimpleUpload;
+namespace Delightful\CloudFile\Kernel\Utils\SimpleUpload;
 
 use Aws\Credentials\Credentials;
 use Aws\S3\MultipartUploader;

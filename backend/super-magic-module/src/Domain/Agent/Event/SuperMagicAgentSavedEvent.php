@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Domain\Agent\Event;
+namespace Delightful\SuperMagic\Domain\Agent\Event;
 
 use Dtyq\SuperMagic\Domain\Agent\Entity\SuperMagicAgentEntity;
 

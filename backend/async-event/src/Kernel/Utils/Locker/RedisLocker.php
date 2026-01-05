@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\AsyncEvent\Kernel\Utils\Locker;
+namespace Delightful\AsyncEvent\Kernel\Utils\Locker;
 
 use Hyperf\Redis\RedisFactory;
 use Hyperf\Redis\RedisProxy;

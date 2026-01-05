@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\AsyncEvent\Kernel\Constants;
+namespace Delightful\AsyncEvent\Kernel\Constants;
 
 class Status
 {

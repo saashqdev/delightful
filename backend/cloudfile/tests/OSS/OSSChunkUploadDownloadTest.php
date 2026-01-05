@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\CloudFile\Tests\OSS;
+namespace Delightful\CloudFile\Tests\OSS;
 
 use Dtyq\CloudFile\Kernel\Struct\ChunkDownloadConfig;
 use Dtyq\CloudFile\Kernel\Struct\ChunkUploadConfig;

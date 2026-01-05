@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\AsyncEvent\Kernel\Command;
+namespace Delightful\AsyncEvent\Kernel\Command;
 
 use Dtyq\AsyncEvent\Kernel\AsyncEventRetry;
 use Dtyq\AsyncEvent\Kernel\Crontab\RetryCrontab;

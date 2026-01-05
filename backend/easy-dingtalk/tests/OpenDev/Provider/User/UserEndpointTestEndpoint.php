@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\Test\OpenDev\Provider\User;
+namespace Delightful\EasyDingTalk\Test\OpenDev\Provider\User;
 
 use Dtyq\EasyDingTalk\OpenDev\Parameter\User\GetListByDeptIdParameter;
 use Dtyq\EasyDingTalk\OpenDev\Parameter\User\GetUserInfoByUserIdParameter;

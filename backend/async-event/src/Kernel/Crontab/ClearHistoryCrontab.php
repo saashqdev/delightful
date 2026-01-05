@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\AsyncEvent\Kernel\Crontab;
+namespace Delightful\AsyncEvent\Kernel\Crontab;
 
 use Dtyq\AsyncEvent\Kernel\Service\AsyncEventService;
 use Hyperf\Logger\LoggerFactory;

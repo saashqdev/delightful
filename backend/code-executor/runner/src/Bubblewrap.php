@@ -5,7 +5,7 @@ declare(strict_types=1);
  * This file is part of Dtyq.
  */
 
-namespace Dtyq\CodeRunnerBwrap;
+namespace Delightful\CodeRunnerBwrap;
 
 use Hyperf\Support\Filesystem\FileNotFoundException;
 use Hyperf\Support\Filesystem\Filesystem;

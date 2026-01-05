@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Builder;
+namespace Delightful\FlowExprEngine\Builder;
 
 use Dtyq\FlowExprEngine\ComponentFactory;
 use Dtyq\FlowExprEngine\Structure\Api\Api;

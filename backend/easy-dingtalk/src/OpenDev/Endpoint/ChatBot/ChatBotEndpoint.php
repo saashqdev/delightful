@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\OpenDev\Endpoint\ChatBot;
+namespace Delightful\EasyDingTalk\OpenDev\Endpoint\ChatBot;
 
 use Dtyq\EasyDingTalk\Kernel\Exceptions\BadRequestException;
 use Dtyq\EasyDingTalk\OpenDev\Api\ChatBot\DownloadFileApi;

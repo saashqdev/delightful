@@ -5,7 +5,7 @@ declare(strict_types=1);
  * This file is part of Dtyq.
  */
 
-namespace Dtyq\CodeExecutor\Tests\Unit\Enums;
+namespace Delightful\CodeExecutor\Tests\Unit\Enums;
 
 use Dtyq\CodeExecutor\Enums\StatusCode;
 use PHPUnit\Framework\TestCase;

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\AsyncEvent\Kernel\Service;
+namespace Delightful\AsyncEvent\Kernel\Service;
 
 use Dtyq\AsyncEvent\Kernel\Constants\Status;
 use Dtyq\AsyncEvent\Kernel\Persistence\AsyncEventRepository;

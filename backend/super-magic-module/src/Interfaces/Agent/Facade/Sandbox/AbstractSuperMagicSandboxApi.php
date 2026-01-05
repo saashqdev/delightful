@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Interfaces\Agent\Facade\Sandbox;
+namespace Delightful\SuperMagic\Interfaces\Agent\Facade\Sandbox;
 
 use App\Infrastructure\Core\AbstractAuthApi;
 

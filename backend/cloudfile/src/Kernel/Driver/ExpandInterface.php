@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\CloudFile\Kernel\Driver;
+namespace Delightful\CloudFile\Kernel\Driver;
 
 use Dtyq\CloudFile\Kernel\Exceptions\ChunkDownloadException;
 use Dtyq\CloudFile\Kernel\Struct\ChunkDownloadConfig;

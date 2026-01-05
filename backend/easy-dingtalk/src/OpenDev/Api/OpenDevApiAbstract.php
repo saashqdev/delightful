@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\OpenDev\Api;
+namespace Delightful\EasyDingTalk\OpenDev\Api;
 
 use Dtyq\EasyDingTalk\Kernel\Constants\Host;
 use Dtyq\EasyDingTalk\Kernel\Contracts\ApiManager\ApiAbstract;

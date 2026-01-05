@@ -5,7 +5,7 @@ declare(strict_types=1);
  * This file is part of Dtyq.
  */
 
-namespace Dtyq\CodeExecutor\Tests\Unit;
+namespace Delightful\CodeExecutor\Tests\Unit;
 
 use Dtyq\CodeExecutor\ExecutorFactory;
 use Hyperf\Contract\ConfigInterface;

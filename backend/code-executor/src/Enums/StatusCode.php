@@ -6,7 +6,7 @@ declare(strict_types=1);
  * This file is part of Dtyq.
  */
 
-namespace Dtyq\CodeExecutor\Enums;
+namespace Delightful\CodeExecutor\Enums;
 
 enum StatusCode: int
 {

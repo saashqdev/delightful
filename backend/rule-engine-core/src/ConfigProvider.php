@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\RuleEngineCore;
+namespace Delightful\RuleEngineCore;
 
 use Dtyq\RuleEngineCore\PhpScript\PlaceholderProvider;
 use Dtyq\RuleEngineCore\PhpScript\PlaceholderProviderInterface;

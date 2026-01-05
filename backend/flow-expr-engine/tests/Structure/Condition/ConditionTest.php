@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Test\Structure\Condition;
+namespace Delightful\FlowExprEngine\Test\Structure\Condition;
 
 use Dtyq\FlowExprEngine\Builder\ConditionBuilder;
 use Dtyq\FlowExprEngine\ComponentFactory;

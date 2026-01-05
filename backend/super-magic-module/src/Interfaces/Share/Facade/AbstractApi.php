@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Interfaces\Share\Facade;
+namespace Delightful\SuperMagic\Interfaces\Share\Facade;
 
 use App\Infrastructure\Core\Traits\MagicUserAuthorizationTrait;
 

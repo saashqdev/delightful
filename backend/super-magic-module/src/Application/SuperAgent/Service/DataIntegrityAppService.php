@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Application\SuperAgent\Service;
+namespace Delightful\SuperMagic\Application\SuperAgent\Service;
 
 use Dtyq\SuperMagic\Infrastructure\Database\Migration\ProjectArchitectureIntegrityValidator;
 use Hyperf\Logger\LoggerFactory;

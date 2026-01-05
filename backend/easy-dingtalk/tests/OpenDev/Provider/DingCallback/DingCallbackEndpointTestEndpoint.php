@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\Test\OpenDev\Provider\DingCallback;
+namespace Delightful\EasyDingTalk\Test\OpenDev\Provider\DingCallback;
 
 use Dtyq\EasyDingTalk\OpenDev\Endpoint\DingCallback\DingCallbackMessage;
 use Dtyq\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;

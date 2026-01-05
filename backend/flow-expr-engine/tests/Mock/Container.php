@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Test\Mock;
+namespace Delightful\FlowExprEngine\Test\Mock;
 
 use GuzzleHttp\Client;
 use Psr\Container\ContainerInterface;

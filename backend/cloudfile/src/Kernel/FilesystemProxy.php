@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\CloudFile\Kernel;
+namespace Delightful\CloudFile\Kernel;
 
 use Dtyq\CloudFile\Kernel\Driver\ExpandInterface;
 use Dtyq\CloudFile\Kernel\Driver\FileService\FileServiceApi;

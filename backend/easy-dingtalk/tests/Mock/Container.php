@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\Test\Mock;
+namespace Delightful\EasyDingTalk\Test\Mock;
 
 use GuzzleHttp\Client;
 use Psr\Container\ContainerInterface;

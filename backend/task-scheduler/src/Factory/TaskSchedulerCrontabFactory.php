@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\TaskScheduler\Factory;
+namespace Delightful\TaskScheduler\Factory;
 
 use Dtyq\TaskScheduler\Entity\TaskSchedulerCrontab;
 use Dtyq\TaskScheduler\Repository\Persistence\Model\TaskSchedulerCrontabModel;

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Hyperf\Listener;
+namespace Delightful\FlowExprEngine\Hyperf\Listener;
 
 use Dtyq\FlowExprEngine\Hyperf\FlowExprEngineFactory;
 use Hyperf\Contract\ConfigInterface;

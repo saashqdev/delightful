@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Test\Structure\Value;
+namespace Delightful\FlowExprEngine\Test\Structure\Value;
 
 use Dtyq\FlowExprEngine\Builder\ValueBuilder;
 use Dtyq\FlowExprEngine\ComponentFactory;

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Domain\Share\Event;
+namespace Delightful\SuperMagic\Domain\Share\Event;
 
 class CancelShareAfterEvent
 {

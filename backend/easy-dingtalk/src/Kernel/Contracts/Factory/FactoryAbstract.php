@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\Kernel\Contracts\Factory;
+namespace Delightful\EasyDingTalk\Kernel\Contracts\Factory;
 
 use Dtyq\EasyDingTalk\Kernel\Contracts\Endpoint\Endpoint;
 use Dtyq\EasyDingTalk\Kernel\Contracts\Endpoint\EndpointInterface;

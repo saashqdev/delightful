@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Interfaces\SuperAgent\DTO\Request;
+namespace Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request;
 
 /**
  * Get participated projects request DTO

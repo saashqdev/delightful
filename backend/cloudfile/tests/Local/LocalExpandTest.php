@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\CloudFile\Tests\Local;
+namespace Delightful\CloudFile\Tests\Local;
 
 use Dtyq\CloudFile\Kernel\Driver\Local\LocalExpand;
 use Dtyq\CloudFile\Kernel\Exceptions\CloudFileException;

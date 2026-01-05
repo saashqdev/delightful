@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\OpenDev\Endpoint\Conversation;
+namespace Delightful\EasyDingTalk\OpenDev\Endpoint\Conversation;
 
 use Dtyq\EasyDingTalk\OpenDev\Result\Conversation\CreateGroupResult;
 use Dtyq\EasyDingTalk\OpenDev\Result\Conversation\CreateSceneGroupResult;

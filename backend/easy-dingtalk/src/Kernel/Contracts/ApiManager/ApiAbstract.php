@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\Kernel\Contracts\ApiManager;
+namespace Delightful\EasyDingTalk\Kernel\Contracts\ApiManager;
 
 abstract class ApiAbstract implements ApiInterface
 {

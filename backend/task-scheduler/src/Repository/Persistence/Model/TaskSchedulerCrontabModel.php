@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\TaskScheduler\Repository\Persistence\Model;
+namespace Delightful\TaskScheduler\Repository\Persistence\Model;
 
 use DateTime;
 use Hyperf\DbConnection\Model\Model;

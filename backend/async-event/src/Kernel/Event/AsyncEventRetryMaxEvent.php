@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\AsyncEvent\Kernel\Event;
+namespace Delightful\AsyncEvent\Kernel\Event;
 
 use Dtyq\AsyncEvent\Kernel\Persistence\Model\AsyncEventModel;
 

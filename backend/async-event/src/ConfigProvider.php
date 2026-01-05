@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\AsyncEvent;
+namespace Delightful\AsyncEvent;
 
 use Dtyq\AsyncEvent\Kernel\Crontab\ClearHistoryCrontab;
 use Dtyq\AsyncEvent\Kernel\Crontab\RetryCrontab;

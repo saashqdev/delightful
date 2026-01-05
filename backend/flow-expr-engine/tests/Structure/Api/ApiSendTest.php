@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Test\Structure\Api;
+namespace Delightful\FlowExprEngine\Test\Structure\Api;
 
 use Dtyq\FlowExprEngine\Structure\Api\ApiRequestBodyType;
 use Dtyq\FlowExprEngine\Structure\Api\ApiRequestOptions;

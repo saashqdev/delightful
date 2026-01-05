@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Structure\Expression;
+namespace Delightful\FlowExprEngine\Structure\Expression;
 
 use DateTime;
 use Dtyq\FlowExprEngine\ComponentContext;

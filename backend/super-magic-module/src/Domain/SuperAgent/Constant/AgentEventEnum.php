@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Domain\SuperAgent\Constant;
+namespace Delightful\SuperMagic\Domain\SuperAgent\Constant;
 
 use InvalidArgumentException;
 

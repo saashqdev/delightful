@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Interfaces\SuperAgent\Facade;
+namespace Delightful\SuperMagic\Interfaces\SuperAgent\Facade;
 
 use App\Application\File\Service\FileAppService;
 use App\Domain\Contact\Entity\ValueObject\UserType;

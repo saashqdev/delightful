@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\OpenDev\Api\Calendar;
+namespace Delightful\EasyDingTalk\OpenDev\Api\Calendar;
 
 use Dtyq\EasyDingTalk\Kernel\Constants\Host;
 use Dtyq\EasyDingTalk\OpenDev\Api\OpenDevApiAbstract;

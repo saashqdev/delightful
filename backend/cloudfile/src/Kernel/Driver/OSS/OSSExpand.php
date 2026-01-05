@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\CloudFile\Kernel\Driver\OSS;
+namespace Delightful\CloudFile\Kernel\Driver\OSS;
 
 use AlibabaCloud\Client\AlibabaCloud;
 use AlibabaCloud\Sts\Sts;

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\OpenDev\Api\User;
+namespace Delightful\EasyDingTalk\OpenDev\Api\User;
 
 use Dtyq\EasyDingTalk\OpenDev\Api\OpenDevApiAbstract;
 use Dtyq\SdkBase\Kernel\Constant\RequestMethod;

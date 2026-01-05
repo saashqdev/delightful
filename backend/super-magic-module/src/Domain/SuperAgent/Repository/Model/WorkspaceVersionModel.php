@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Domain\SuperAgent\Repository\Model;
+namespace Delightful\SuperMagic\Domain\SuperAgent\Repository\Model;
 
 use App\Infrastructure\Core\AbstractModel;
 use Hyperf\Database\Model\SoftDeletes;

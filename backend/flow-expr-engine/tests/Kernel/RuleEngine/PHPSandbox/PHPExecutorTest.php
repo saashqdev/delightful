@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Test\Kernel\RuleEngine\PHPSandbox;
+namespace Delightful\FlowExprEngine\Test\Kernel\RuleEngine\PHPSandbox;
 
 use Dtyq\FlowExprEngine\SdkInfo;
 use Dtyq\FlowExprEngine\Test\BaseTestCase;

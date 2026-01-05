@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Domain\SuperAgent\Repository\Persistence;
+namespace Delightful\SuperMagic\Domain\SuperAgent\Repository\Persistence;
 
 use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Facade\TaskFileCleanupRepositoryInterface;
 use Dtyq\SuperMagic\Domain\SuperAgent\Repository\Model\TaskFileModel;

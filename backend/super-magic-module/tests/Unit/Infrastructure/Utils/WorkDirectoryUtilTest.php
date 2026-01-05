@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Tests\Unit\Infrastructure\Utils;
+namespace Delightful\SuperMagic\Tests\Unit\Infrastructure\Utils;
 
 use Dtyq\SuperMagic\Infrastructure\Utils\WorkDirectoryUtil;
 use PHPUnit\Framework\TestCase;

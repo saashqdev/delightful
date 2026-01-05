@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\CloudFile\Kernel\Driver\TOS;
+namespace Delightful\CloudFile\Kernel\Driver\TOS;
 
 use Dtyq\CloudFile\Kernel\Exceptions\CloudFileException;
 use League\Flysystem\Config;

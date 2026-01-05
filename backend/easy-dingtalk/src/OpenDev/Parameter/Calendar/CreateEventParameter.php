@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\OpenDev\Parameter\Calendar;
+namespace Delightful\EasyDingTalk\OpenDev\Parameter\Calendar;
 
 use DateTime;
 use Dtyq\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\Kernel\Constants;
+namespace Delightful\EasyDingTalk\Kernel\Constants;
 
 class Host
 {

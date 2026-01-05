@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\RuleEngineCore\PhpScript\Repository;
+namespace Delightful\RuleEngineCore\PhpScript\Repository;
 
 use Dtyq\RuleEngineCore\PhpScript\Admin\ExecutableCodeInterface;
 use Dtyq\RuleEngineCore\PhpScript\Admin\ExecutableType;

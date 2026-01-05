@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\RuleEngineCore\Standards;
+namespace Delightful\RuleEngineCore\Standards;
 
 use Dtyq\RuleEngineCore\Standards\Exception\ConfigurationException;
 use Dtyq\RuleEngineCore\Standards\Exception\RuleException;

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\ApiResponse\Aspect;
+namespace Delightful\ApiResponse\Aspect;
 
 use Dtyq\ApiResponse\Annotation\ApiResponse;
 use Dtyq\ApiResponse\Exception\ApiResponseException;

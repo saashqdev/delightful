@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\AsyncEvent\Kernel\Persistence;
+namespace Delightful\AsyncEvent\Kernel\Persistence;
 
 use Carbon\Carbon;
 use Dtyq\AsyncEvent\Kernel\Constants\Status;

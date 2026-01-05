@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\TaskScheduler\Entity\ValueObject;
+namespace Delightful\TaskScheduler\Entity\ValueObject;
 
 enum TaskType: string
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\RuleEngineCore\PhpScript\Admin;
+namespace Delightful\RuleEngineCore\PhpScript\Admin;
 
 use Closure;
 use Dtyq\RuleEngineCore\Standards\Exception\RuleAdministrationException;

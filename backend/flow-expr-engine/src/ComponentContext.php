@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine;
+namespace Delightful\FlowExprEngine;
 
 use Dtyq\SdkBase\SdkBase;
 use Dtyq\SdkBase\SdkBaseContext;

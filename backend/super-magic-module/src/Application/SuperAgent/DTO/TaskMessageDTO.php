@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Application\SuperAgent\DTO;
+namespace Delightful\SuperMagic\Application\SuperAgent\DTO;
 
 /**
  * Task message DTO for recording task messages.

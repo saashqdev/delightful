@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\Test\OpenDev\Provider\ChatBot;
+namespace Delightful\EasyDingTalk\Test\OpenDev\Provider\ChatBot;
 
 use Dtyq\EasyDingTalk\OpenDev\Parameter\ChatBot\DownloadFileParameter;
 use Dtyq\EasyDingTalk\OpenDev\Parameter\ChatBot\SendGroupMessageParameter;

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\Kernel\Exceptions;
+namespace Delightful\EasyDingTalk\Kernel\Exceptions;
 
 use Dtyq\EasyDingTalk\Kernel\Constants\ErrorCode;
 use Throwable;

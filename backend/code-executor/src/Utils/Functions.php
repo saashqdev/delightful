@@ -5,7 +5,7 @@ declare(strict_types=1);
  * This file is part of Dtyq.
  */
 
-namespace Dtyq\CodeExecutor\Utils;
+namespace Delightful\CodeExecutor\Utils;
 
 use Dtyq\CodeExecutor\Enums\StatusCode;
 use Dtyq\CodeExecutor\Exception\ExecuteException;

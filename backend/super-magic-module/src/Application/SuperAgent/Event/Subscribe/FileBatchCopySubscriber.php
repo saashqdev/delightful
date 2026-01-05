@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\SuperMagic\Application\SuperAgent\Event\Subscribe;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Util\Locker\LockerInterface;

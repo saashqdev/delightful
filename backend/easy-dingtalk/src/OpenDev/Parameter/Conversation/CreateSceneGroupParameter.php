@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\OpenDev\Parameter\Conversation;
+namespace Delightful\EasyDingTalk\OpenDev\Parameter\Conversation;
 
 use Dtyq\EasyDingTalk\Kernel\Exceptions\InvalidParameterException;
 use Dtyq\EasyDingTalk\OpenDev\Parameter\AbstractParameter;

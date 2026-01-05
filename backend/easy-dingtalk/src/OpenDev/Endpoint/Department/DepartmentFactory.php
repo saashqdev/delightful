@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\OpenDev\Endpoint\Department;
+namespace Delightful\EasyDingTalk\OpenDev\Endpoint\Department;
 
 use Dtyq\EasyDingTalk\OpenDev\Result\Department\AllParentDepartmentResult;
 use Dtyq\EasyDingTalk\OpenDev\Result\Department\DeptResult;

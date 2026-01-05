@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SdkBase\Kernel\Component\Config;
+namespace Delightful\SdkBase\Kernel\Component\Config;
 
 use Adbar\Dot;
 use InvalidArgumentException;

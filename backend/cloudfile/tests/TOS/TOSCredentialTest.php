@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\CloudFile\Tests\TOS;
+namespace Delightful\CloudFile\Tests\TOS;
 
 use Dtyq\CloudFile\Kernel\Exceptions\CloudFileException;
 use Dtyq\CloudFile\Kernel\Struct\CredentialPolicy;

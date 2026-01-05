@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Kernel\RuleEngine;
+namespace Delightful\FlowExprEngine\Kernel\RuleEngine;
 
 use Dtyq\FlowExprEngine\Structure\Condition\Condition;
 use Dtyq\FlowExprEngine\Structure\Expression\Expression;

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\OpenDev\Endpoint\DingCallback;
+namespace Delightful\EasyDingTalk\OpenDev\Endpoint\DingCallback;
 
 class Prpcrypt
 {

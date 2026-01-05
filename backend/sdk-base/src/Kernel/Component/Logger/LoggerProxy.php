@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SdkBase\Kernel\Component\Logger;
+namespace Delightful\SdkBase\Kernel\Component\Logger;
 
 use Psr\Log\LoggerInterface;
 

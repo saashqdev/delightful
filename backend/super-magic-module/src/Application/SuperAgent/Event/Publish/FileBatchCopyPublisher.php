@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Application\SuperAgent\Event\Publish;
+namespace Delightful\SuperMagic\Application\SuperAgent\Event\Publish;
 
 use Dtyq\SuperMagic\Domain\SuperAgent\Event\FileBatchCopyEvent;
 use Hyperf\Amqp\Annotation\Producer;

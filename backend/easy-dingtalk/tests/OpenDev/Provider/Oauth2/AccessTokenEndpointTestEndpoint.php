@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\Test\OpenDev\Provider\Oauth2;
+namespace Delightful\EasyDingTalk\Test\OpenDev\Provider\Oauth2;
 
 use Dtyq\EasyDingTalk\Test\OpenDev\OpenDevEndpointBaseTestCase;
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * This file is part of Dtyq.
  */
 
-namespace Dtyq\CodeExecutor\Tests\Unit\Executor\Aliyun;
+namespace Delightful\CodeExecutor\Tests\Unit\Executor\Aliyun;
 
 use AlibabaCloud\SDK\FC\V20230330\Models\InvokeFunctionResponse;
 use Dtyq\CodeExecutor\Enums\StatusCode;

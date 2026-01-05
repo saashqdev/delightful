@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\Test\OpenDev;
+namespace Delightful\EasyDingTalk\Test\OpenDev;
 
 use Dtyq\EasyDingTalk\OpenDevFactory;
 use Dtyq\EasyDingTalk\Test\Mock\Container;

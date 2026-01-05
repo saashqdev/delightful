@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Test\Kernel\RuleEngine\PHPSandbox\PHPCodeExecutor;
+namespace Delightful\FlowExprEngine\Test\Kernel\RuleEngine\PHPSandbox\PHPCodeExecutor;
 
 use Dtyq\FlowExprEngine\Kernel\RuleEngine\PHPSandbox\PHPCodeExecutor\PHPExecutor;
 use Dtyq\FlowExprEngine\Test\BaseTestCase;

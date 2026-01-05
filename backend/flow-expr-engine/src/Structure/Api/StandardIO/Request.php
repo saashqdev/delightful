@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Structure\Api\StandardIO;
+namespace Delightful\FlowExprEngine\Structure\Api\StandardIO;
 
 use Dtyq\FlowExprEngine\Kernel\Utils\Functions;
 

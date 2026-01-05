@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\TaskScheduler\Service;
+namespace Delightful\TaskScheduler\Service;
 
 use Cron\CronExpression;
 use DateTime;

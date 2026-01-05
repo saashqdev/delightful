@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Test\Structure\Expression;
+namespace Delightful\FlowExprEngine\Test\Structure\Expression;
 
 use Dtyq\FlowExprEngine\Builder\ExpressionBuilder;
 use Dtyq\FlowExprEngine\Structure\Expression\Expression;

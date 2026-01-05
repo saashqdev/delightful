@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Structure\Widget;
+namespace Delightful\FlowExprEngine\Structure\Widget;
 
 use Dtyq\FlowExprEngine\Exception\FlowExprEngineException;
 use Dtyq\FlowExprEngine\Structure\Expression\Value;

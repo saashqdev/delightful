@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Hyperf;
+namespace Delightful\FlowExprEngine\Hyperf;
 
 use Dtyq\FlowExprEngine\Hyperf\Listener\BootSdkListener;
 use Psr\Http\Client\ClientInterface;

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\AsyncEvent\Kernel;
+namespace Delightful\AsyncEvent\Kernel;
 
 use Dtyq\AsyncEvent\AsyncEventUtil;
 use Dtyq\AsyncEvent\Kernel\Event\AsyncEventRetryMaxEvent;

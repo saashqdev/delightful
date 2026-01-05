@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SdkBase;
+namespace Delightful\SdkBase;
 
 use Dtyq\SdkBase\Kernel\Component\Client\ClientRequest;
 use Dtyq\SdkBase\Kernel\Component\Config\Config;

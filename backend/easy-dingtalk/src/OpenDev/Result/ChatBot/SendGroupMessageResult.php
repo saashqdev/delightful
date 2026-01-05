@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\EasyDingTalk\OpenDev\Result\ChatBot;
+namespace Delightful\EasyDingTalk\OpenDev\Result\ChatBot;
 
 use Dtyq\EasyDingTalk\OpenDev\Result\AbstractResult;
 

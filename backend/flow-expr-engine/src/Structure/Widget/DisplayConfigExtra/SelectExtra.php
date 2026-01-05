@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\FlowExprEngine\Structure\Widget\DisplayConfigExtra;
+namespace Delightful\FlowExprEngine\Structure\Widget\DisplayConfigExtra;
 
 use Dtyq\FlowExprEngine\Component;
 use Dtyq\FlowExprEngine\ComponentFactory;

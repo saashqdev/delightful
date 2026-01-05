@@ -5,7 +5,7 @@ declare(strict_types=1);
  * This file is part of Dtyq.
  */
 
-namespace Dtyq\CodeRunnerBwrap\Tests\Unit;
+namespace Delightful\CodeRunnerBwrap\Tests\Unit;
 
 use Dtyq\CodeRunnerBwrap\Bubblewrap;
 use Dtyq\CodeRunnerBwrap\Tests\TestCase;

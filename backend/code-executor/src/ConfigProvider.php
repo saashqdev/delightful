@@ -5,7 +5,7 @@ declare(strict_types=1);
  * This file is part of Dtyq.
  */
 
-namespace Dtyq\CodeExecutor;
+namespace Delightful\CodeExecutor;
 
 use Dtyq\CodeExecutor\Executor\Aliyun\AliyunRuntimeClient;
 use Dtyq\CodeExecutor\Executor\Aliyun\AliyunRuntimeClientFactory;

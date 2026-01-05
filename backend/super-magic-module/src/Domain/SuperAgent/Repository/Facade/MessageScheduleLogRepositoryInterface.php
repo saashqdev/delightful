@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Domain\SuperAgent\Repository\Facade;
+namespace Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade;
 
 use Dtyq\SuperMagic\Domain\SuperAgent\Entity\MessageScheduleLogEntity;
 

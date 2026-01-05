@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Application\Chat\Service;
+namespace Delightful\SuperMagic\Application\Chat\Service;
 
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Service\MagicConversationDomainService;

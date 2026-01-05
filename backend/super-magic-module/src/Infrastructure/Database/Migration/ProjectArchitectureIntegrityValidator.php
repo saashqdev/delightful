@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Infrastructure\Database\Migration;
+namespace Delightful\SuperMagic\Infrastructure\Database\Migration;
 
 use Exception;
 use Hyperf\DbConnection\Db;

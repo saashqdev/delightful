@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Dtyq\SuperMagic\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\SuperMagic\Application\SuperAgent\Event\Subscribe;
 
 use Dtyq\AsyncEvent\Kernel\Annotation\AsyncListener;
 use Dtyq\SuperMagic\Application\SuperAgent\Service\MessageQueueProcessAppService;

@@ -25,43 +25,43 @@ from app.utils.pdf_converter_utils import convert_pdf_locally
 
 logger = get_logger(__name__)
 
-# 设置最大Token限制
+# Set maximum token limit
 MAX_TOTAL_TOKENS = 30000
 
 
 class ReadFileParams(BaseToolParams):
-    """读取文件参数"""
-    file_path: str = Field(..., description="要读取的文件路径，相对于工作目录或绝对路径")
-    offset: int = Field(0, description="开始读取的行号（从0开始）")
-    limit: int = Field(200, description="要读取的行数或页数，默认200行，如果要读取整个文件，请设置为-1")
+    """File reading parameters"""
+    file_path: str = Field(..., description="The file path to read, either relative to working directory or absolute path")
+    offset: int = Field(0, description="Starting line number to read (0-based)")
+    limit: int = Field(200, description="Number of lines or pages to read, default 200 lines, set to -1 to read entire file")
 
 
 @tool()
 class ReadFile(AbstractFileTool[ReadFileParams], WorkspaceGuardTool[ReadFileParams]):
-    """读取文件内容工具
+    """File content reading tool
 
-    这个工具可以读取指定路径的文件内容，支持文本文件、PDF和DOCX等格式。
+    This tool can read file contents at specified paths, supporting text files, PDF, DOCX, and other formats.
 
-    支持的文件类型：
-    - 文本文件（.txt、.md、.py、.js等）
-    - PDF文件（.pdf）
-        - 若需要读取扫描件，请使用更为昂贵的 convert_pdf 工具转为 Markdown 格式后再使用本工具读取
-        - 读取 PDF 文件时，会自动创建 Markdown 映射文件，后续读取 PDF 文件时会读取 Markdown 映射文件，而不是真地读取原始文件
-        - 你可以将读取操作当成 PDF 转换工具使用，对于非扫描件的 PDF 文件，自动转换后的 Markdown 文件可以被任意使用
-    - Word文档（.docx）
-    - Jupyter Notebook（.ipynb）
-    - Excel文件（.xls、.xlsx）
-    - CSV文件（.csv）
+    Supported file types:
+    - Text files (.txt, .md, .py, .js, etc.)
+    - PDF files (.pdf)
+        - For reading scanned documents, use the more expensive convert_pdf tool to convert to Markdown format first
+        - When reading PDF files, Markdown mapping files are automatically created, and subsequent reads will use these Markdown mapping files instead of the original files
+        - You can use the read operation as a PDF conversion tool; for non-scanned PDF files, the automatically converted Markdown files can be used freely
+    - Word documents (.docx)
+    - Jupyter Notebooks (.ipynb)
+    - Excel files (.xls, .xlsx)
+    - CSV files (.csv)
 
-    注意：
-    - 读取工作目录外的文件被禁止
-    - 二进制文件可能无法正确读取
-    - 过大的文件将被拒绝读取，你必须分段读取部分内容来理解文件概要
-    - 对于Excel和CSV文件，建议使用代码处理数据而不是直接使用文本内容
-    - 为避免内容过长，一次性读取超过30000 token 时会自动截断内容，必须阅读完整的情况下，你可以分多次读取
+    Notes:
+    - Reading files outside the working directory is prohibited
+    - Binary files may not be read correctly
+    - Large files will be rejected; you must read partial content in segments to understand file overview
+    - For Excel and CSV files, it is recommended to process data with code rather than use text content directly
+    - To avoid overly long content, if a single read exceeds 30,000 tokens, content will be automatically truncated; if you need to read the complete content, you can read multiple times
     """
 
-    # Excel处理的最大行数限制
+    # Maximum row limit for Excel processing
     EXCEL_MAX_ROWS = 1000
     EXCEL_MAX_PREVIEW_ROWS = 50
 
@@ -72,139 +72,139 @@ class ReadFile(AbstractFileTool[ReadFileParams], WorkspaceGuardTool[ReadFilePara
 
     async def execute(self, tool_context: ToolContext, params: ReadFileParams) -> ToolResult:
         """
-        执行文件读取操作
+        Execute file reading operation
 
         Args:
-            tool_context: 工具上下文
-            params: 文件读取参数
+            tool_context: Tool context
+            params: File reading parameters
 
         Returns:
-            ToolResult: 包含文件内容或错误信息
+            ToolResult: Contains file content or error information
         """
         return await self.execute_purely(params)
 
     async def execute_purely(self, params: ReadFileParams) -> ToolResult:
         """
-        执行文件读取操作，无需工具上下文参数
+        Execute file reading operation without tool context parameters
 
         Args:
-            params: 文件读取参数
+            params: File reading parameters
 
         Returns:
-            ToolResult: 包含文件内容或错误信息
+            ToolResult: Contains file content or error information
         """
         try:
-            # 使用父类方法获取安全的文件路径
+            # Use parent class method to get safe file path
             file_path, error = self.get_safe_path(params.file_path)
             if error:
                 return ToolResult(error=error)
 
             original_file_name = file_path.name # Store original name before path changes
-            read_path = file_path  # 默认读取原始文件路径
+            read_path = file_path  # Default to read the original file path
             cache_just_created = False # Flag to indicate if cache was created in this call
-            # 标记本次调用是否创建了缓存
+            # Mark whether cache was created in this call
 
-            # --- PDF 缓存处理逻辑 ---
+            # --- PDF cache handling logic ---
             if file_path.suffix.lower() == '.pdf':
                 cache_md_path = file_path.with_suffix('.md')
                 try:
                     cache_exists = await aiofiles.os.path.exists(cache_md_path)
 
                     if cache_exists:
-                        logger.info(f"使用缓存文件: {cache_md_path} 读取 PDF 内容: {file_path}")
-                        read_path = cache_md_path # 设置读取路径为缓存文件
+                        logger.info(f"Using cache file: {cache_md_path} to read PDF content: {file_path}")
+                        read_path = cache_md_path # Set read path to cache file
                         cache_just_created = False
                     else:
-                        logger.info(f"缓存文件 {cache_md_path} 不存在，尝试本地转换: {file_path}")
-                        # 调用工具函数获取 Markdown 文本
+                        logger.info(f"Cache file {cache_md_path} does not exist, attempting local conversion: {file_path}")
+                        # Call utility function to get Markdown text
                         markdown_content = await convert_pdf_locally(file_path)
 
                         if markdown_content is None:
-                            # 转换失败
-                            logger.error(f"本地 PDF 转换失败，无法读取: {file_path}")
-                            return ToolResult(error=f"无法转换 PDF 文件 '{file_path.name}' 为 Markdown。")
+                            # Conversion failed
+                            logger.error(f"Local PDF conversion failed, unable to read: {file_path}")
+                            return ToolResult(error=f"Unable to convert PDF file '{file_path.name}' to Markdown.")
 
-                        # 转换成功，写入缓存文件
+                        # Conversion successful, write cache file
                         try:
                             async with aiofiles.open(cache_md_path, "w", encoding="utf-8") as cache_f:
                                 await cache_f.write(markdown_content)
-                            logger.info(f"已成功创建 PDF 缓存文件: {cache_md_path}")
-                            cache_just_created = True # 标记缓存刚刚创建
-                            read_path = cache_md_path # 设置读取路径为新创建的缓存
+                            logger.info(f"Successfully created PDF cache file: {cache_md_path}")
+                            cache_just_created = True # Mark cache as just created
+                            read_path = cache_md_path # Set read path to newly created cache
                         except Exception as write_e:
-                            logger.exception(f"写入 PDF 缓存文件失败 ({cache_md_path}): {write_e!s}")
-                            # 即使写入缓存失败，也尝试返回转换后的内容，但不设置 read_path
-                            # 或者返回错误？这里选择返回错误，因为无法保证后续一致性
-                            return ToolResult(error=f"PDF 转换成功但写入缓存文件 '{cache_md_path.name}' 失败: {write_e!s}")
+                            logger.exception(f"Failed to write PDF cache file ({cache_md_path}): {write_e!s}")
+                            # Even if writing cache fails, try to return converted content but don't set read_path
+                            # Or return an error? Here we choose to return an error because we can't guarantee consistency
+                            return ToolResult(error=f"PDF conversion succeeded but writing cache file '{cache_md_path.name}' failed: {write_e!s}")
 
                 except Exception as e:
-                    # 捕获检查缓存或转换/写入过程中的错误
-                    logger.exception(f"处理 PDF 时出错 ({file_path}): {e!s}")
-                    return ToolResult(error=f"处理 PDF 时出错: {e!s}")
-            # --- PDF 缓存处理逻辑结束 ---
+                    # Capture errors during cache checking or conversion/write process
+                    logger.exception(f"Error processing PDF ({file_path}): {e!s}")
+                    return ToolResult(error=f"Error processing PDF: {e!s}")
+            # --- PDF cache handling logic ends ---
 
 
-            # 检查最终的 read_path 是否有效
+            # Check if the final read_path is valid
             if not await aiofiles.os.path.exists(read_path):
                  # This might happen if PDF conversion failed silently, cache was deleted, or it's another non-existent file
-                 # 如果PDF转换静默失败、缓存被删除，或者这是另一个不存在的文件，可能会发生这种情况
-                 return ToolResult(error=f"无法找到要读取的文件: {read_path} (原始请求: {original_file_name})")
+                 # If PDF conversion fails silently, cache is deleted, or this is another non-existent file, this may happen
+                 return ToolResult(error=f"Unable to find file to read: {read_path} (original request: {original_file_name})")
             if await aiofiles.os.path.isdir(read_path):
-                # 如果是 PDF 缓存路径变成目录，也报错
-                return ToolResult(error=f"读取路径是个文件夹: {read_path} (原始请求: {original_file_name})，请使用 list_dir 工具获取文件夹内容")
+                # If the PDF cache path is a directory, also report an error
+                return ToolResult(error=f"Read path is a directory: {read_path} (original request: {original_file_name}), please use list_dir tool to get directory contents")
 
-            # --- 内容读取逻辑 ---
+            # --- Content reading logic ---
             read_extension = read_path.suffix.lower()
-            # 定义需要 MarkItDown 处理的非文本扩展名（不包括 .pdf 和 .md）
-            markitdown_extensions = {".ipynb", ".csv", ".xlsx", ".xls", ".docx"} # 添加或移除需要的格式
+            # Define non-text extensions that need MarkItDown processing (excluding .pdf and .md)
+            markitdown_extensions = {".ipynb", ".csv", ".xlsx", ".xls", ".docx"} # Add or remove required formats
 
             content: str = ""
             is_binary = await self._is_binary_file(read_path)
 
-            # 判断是否使用 MarkItDown
+            # Determine whether to use MarkItDown
             use_markitdown = (
                 read_extension in markitdown_extensions or
-                (is_binary and read_extension not in {".md", ".txt", ".py", ".js", ".json", ".yaml", ".html", ".css"}) # 示例常见文本类型
+                (is_binary and read_extension not in {".md", ".txt", ".py", ".js", ".json", ".yaml", ".html", ".css"}) # Example common text types
             )
 
             if use_markitdown:
-                 logger.info(f"文件 {read_path} (原始: {original_file_name}) 使用 markitdown 进行读取")
+                 logger.info(f"File {read_path} (original: {original_file_name}) using markitdown for reading")
                  try:
-                     # MarkItDown 需要二进制读取
+                     # MarkItDown requires binary reading
                      async with aiofiles.open(read_path, "rb") as f:
-                         # 传递原始的 offset 和 limit 给 MarkItDown (除了 PDF 缓存创建阶段)
-                         # 注意：这里传递的是用户原始请求的 offset 和 limit
+                         # Pass original offset and limit to MarkItDown (except during PDF cache creation phase)
+                         # Note: offset and limit passed here are from user's original request
                          result = self.md.convert(f, stream_info=StreamInfo(extension=read_extension), offset=params.offset, limit=params.limit)
                          if not result or not result.markdown:
-                             logger.warning(f"MarkItDown 转换返回空内容: {read_path}")
-                             content = "[文件转换结果为空]"
+                             logger.warning(f"MarkItDown conversion returned empty content: {read_path}")
+                             content = "[File conversion result is empty]"
                          else:
                              content = result.markdown
                  except Exception as e:
-                     logger.exception(f"使用 MarkItDown 读取文件失败 ({read_path}): {e!s}")
-                     return ToolResult(error=f"文件转换失败: {e!s}")
+                     logger.exception(f"Failed to read file using MarkItDown ({read_path}): {e!s}")
+                     return ToolResult(error=f"File conversion failed: {e!s}")
             else:
-                 # 使用文本读取逻辑 (包括读取 .md 缓存)
-                 logger.info(f"文件 {read_path} (原始: {original_file_name}) 使用文本读取逻辑")
+                 # Use text reading logic (including reading .md cache)
+                 logger.info(f"File {read_path} (original: {original_file_name}) using text reading logic")
                  if params.limit is None or params.limit <= 0:
                      content = await self._read_text_file(read_path)
                  else:
                      content = await self._read_text_file_with_range(
                          read_path, params.offset, params.limit
                      )
-            # --- 内容读取逻辑结束 ---
+            # --- Content reading logic ends ---
 
 
-            # 计算token数量并处理截断
+            # Calculate token count and handle truncation
             content_tokens = num_tokens_from_string(content)
             total_chars = len(content)
             content_truncated = False
 
             if content_tokens > MAX_TOTAL_TOKENS:
-                logger.info(f"文件 {read_path.name} (原始: {original_file_name}) 内容token数 ({content_tokens}) 超出限制 ({MAX_TOTAL_TOKENS})，进行截断")
+                logger.info(f"File {read_path.name} (original: {original_file_name}) content token count ({content_tokens}) exceeds limit ({MAX_TOTAL_TOKENS}), truncating")
                 content_truncated = True
 
-                # 使用二分查找确定最佳截断点
+                # Use binary search to find the best truncation point
                 left, right = 0, len(content)
                 best_content = ""
                 best_tokens = 0
@@ -223,35 +223,35 @@ class ReadFile(AbstractFileTool[ReadFileParams], WorkspaceGuardTool[ReadFilePara
 
                 content = best_content
                 content_tokens = best_tokens
-                truncation_note = f"\n\n[内容已截断：原始token数超过{MAX_TOTAL_TOKENS}的限制]"
+                truncation_note = f"\n\n[Content truncated: original token count exceeds {MAX_TOTAL_TOKENS} limit]"
                 content += truncation_note
 
-            # 添加文件元信息 - 使用 original_file_name 作为用户看到的文件名，read_path 用于内部信息
+            # Add file metadata - use original_file_name as file name shown to user, read_path for internal info
             shown_chars = len(content)
-            truncation_status = "（已截断）" if content_truncated else ""
-            meta_info = f"# 文件: {original_file_name}\n\n**文件信息**: 总字符数: {total_chars}，显示字符数: {shown_chars}{truncation_status}，Token数: {content_tokens}"
+            truncation_status = " (Truncated)" if content_truncated else ""
+            meta_info = f"# File: {original_file_name}\n\n**File Info**: Total characters: {total_chars}, Display characters: {shown_chars}{truncation_status}, Tokens: {content_tokens}"
             if str(read_path) != str(file_path): # Only add if reading from a different path (e.g., cache)
-                meta_info += f" (读取自: `{read_path.name}`)" # Use backticks for filename
+                meta_info += f" (Read from: `{read_path.name}`)" # Use backticks for filename
             meta_info += "\n\n---\n\n" # Correct newline escaping
-            raw_content = content # 存储未加 meta_info 的原始内容
+            raw_content = content # Store original content without meta_info
             extra_info = {
                 "raw_content": raw_content,
                 "original_file_path": str(file_path),
                 "read_path": str(read_path),
-                "cache_just_created": cache_just_created # 也将缓存创建状态放入
+                "cache_just_created": cache_just_created # Also include cache creation status
             }
 
-            # --- 如果适用，在此处附加缓存创建通知 ---
+            # --- If applicable, append cache creation notification here ---
             if cache_just_created:
-                cache_note = f"\n\n*注意：首次读取，已将源 PDF 文件 '{original_file_name}' 的内容转换为 Markdown 文件 '{read_path.name}' 并缓存。后续读取此 PDF 将直接使用此缓存文件。*"
-                # 确保 cache_note 被添加到最终内容中
-                # 如果内容被截断，追加到截断后的内容
+                cache_note = f"\n\n*Note: First read, the contents of source PDF file '{original_file_name}' have been converted to Markdown file '{read_path.name}' and cached. Subsequent reads of this PDF will directly use this cache file.*"
+                # Ensure cache_note is added to final content
+                # If content is truncated, append to truncated content
                 # Append cache note to the raw_content BEFORE meta_info is prepended
                 raw_content += cache_note
-            # --- 缓存通知结束 ---
+            # --- Cache notification ends ---
 
             # Construct final content with meta info prepended to the potentially modified raw_content
-            content_with_meta = meta_info + content # 使用可能被截断的 content
+            content_with_meta = meta_info + content # Use potentially truncated content
 
             return ToolResult(
                 content=content_with_meta,
@@ -259,63 +259,63 @@ class ReadFile(AbstractFileTool[ReadFileParams], WorkspaceGuardTool[ReadFilePara
             )
 
         except Exception as e:
-            logger.exception(f"读取文件失败 (原始请求: {params.file_path}): {e!s}")
-            return ToolResult(error=f"读取文件失败: {e!s}")
+            logger.exception(f"Failed to read file (original request: {params.file_path}): {e!s}")
+            return ToolResult(error=f"Failed to read file: {e!s}")
 
     async def _is_binary_file(self, file_path: Path) -> bool:
-        """检查文件是否为二进制文件"""
+        """Check whether the file is a binary file"""
         try:
-            # 读取文件前4KB来判断是否为二进制文件
+            # Read first 4KB of file to determine if it is binary
             chunk_size = 4 * 1024
             async with aiofiles.open(file_path, "rb") as f:
                 chunk = await f.read(chunk_size)
 
-                # 如果刚好是4KB边界，可能会截断UTF-8多字节字符，多读几个字节
+                # If exactly at 4KB boundary, might truncate UTF-8 multi-byte chars, read more bytes
                 if len(chunk) == chunk_size:
-                    # 定位到刚才读取的位置
+                    # Seek back to start
                     await f.seek(0)
-                    # 多读几个字节，确保完整的UTF-8字符
+                    # Read more bytes to ensure complete UTF-8 characters
                     chunk = await f.read(chunk_size + 4)
 
-            # 检查是否包含NULL字节（二进制文件的特征）
+            # Check for NULL byte (characteristic of binary files)
             if b"\x00" in chunk:
                 return True
 
-            # 尝试以UTF-8解码，如果失败则可能是二进制文件
+            # Try UTF-8 decoding, if it fails might be binary file
             try:
                 chunk.decode("utf-8")
                 return False
             except UnicodeDecodeError:
-                # 尝试使用ignore错误处理，如果内容大部分可以解析为文本，就不认为是二进制
+                # Try ignore error handling; if content mostly parses as text, don't consider it binary
                 decoded = chunk.decode("utf-8", errors="ignore")
-                # 如果解码后的文本长度至少是原始数据的25%，认为是文本文件
+                # If decoded text length is at least 25% of original data, consider it text file
                 if len(decoded) > len(chunk) * 0.25:
                     return False
                 return True
         except Exception:
             # On error (e.g. permission denied), assume not binary or handle appropriately
-            # 发生错误时（例如权限拒绝），适当地处理或假设不是二进制文件
-            logger.warning(f"无法确定文件是否为二进制: {file_path}", exc_info=True)
+            # When error occurs (e.g. permission denied), handle appropriately or assume not binary
+            logger.warning(f"Unable to determine if file is binary: {file_path}", exc_info=True)
             return False # Default to not binary if unsure
-            # 如果不确定，默认为非二进制
+            # If uncertain, default to non-binary
 
     async def _read_text_file(self, file_path: Path) -> str:
-        """读取整个文本文件内容"""
+        """Read entire text file content"""
         async with aiofiles.open(file_path, "r", encoding="utf-8", errors="replace") as f:
             return await f.read()
 
     async def _read_text_file_with_range(self, file_path: Path, offset: int, limit: int) -> str:
-        """读取指定范围的文本文件内容
+        """Read text file content within specified range
 
         Args:
-            file_path: 文件路径
-            offset: 起始行号（从0开始）
-            limit: 要读取的行数，如果为负数则读取到文件末尾
+            file_path: File path
+            offset: Starting line number (0-based)
+            limit: Number of lines to read, if negative read to end of file
 
         Returns:
-            包含行号信息和指定范围内容的字符串，如果范围无效则返回提示信息
+            String containing line number info and content within range, return prompt if range invalid
         """
-        # 统计文件总行数并读取指定范围内容
+        # Count total lines and read specified range content
         all_lines = []
         target_lines = []
 
@@ -323,79 +323,79 @@ class ReadFile(AbstractFileTool[ReadFileParams], WorkspaceGuardTool[ReadFilePara
             line_idx = 0
             async for line in f:
                 all_lines.append(line)
-                # 根据行索引应用 offset 和 limit
-                if limit > 0: # 如果 limit 是正数，从 offset 开始读取 limit 行
+                # Apply offset and limit based on line index
+                if limit > 0: # If limit is positive, read limit lines starting from offset
                     if offset <= line_idx < offset + limit:
                         target_lines.append(line)
-                elif offset <= line_idx: # 如果 limit 不是正数（<=0 或 None），从 offset 读取到文件末尾
+                elif offset <= line_idx: # If limit is non-positive (<=0 or None), read from offset to end
                     target_lines.append(line)
                 line_idx += 1
 
         total_lines = len(all_lines)
-        start_line = offset + 1  # 转为1-indexed便于用户理解
+        start_line = offset + 1  # Convert to 1-indexed for user understanding
 
-        # 构建结果头部信息
+        # Build result header information
         if not target_lines:
             if offset >= total_lines:
-                header = f"# 读取内容为空：起始行 {start_line} 超过文件总行数 {total_lines}\n\n"
+                header = f"# Read content is empty: starting line {start_line} exceeds total file lines {total_lines}\n\n"
             else:
                 # Calculate the intended end line based on limit
-                # 根据 limit 计算预期的结束行号
+                # Based on limit, calculate intended end line number
                 end_line_intended = (offset + limit) if limit > 0 else total_lines
-                header = f"# 读取内容为空：指定范围第 {start_line} 行到第 {end_line_intended} 行没有内容（文件共 {total_lines} 行）\n\n"
+                header = f"# Read content is empty: specified range from line {start_line} to {end_line_intended} has no content (file has {total_lines} lines)\n\n"
             return header
         else:
             # Actual end line is offset + number of lines read
-            # 实际的结束行号是 offset + 读取的行数
+            # Actual end line is offset + number of lines read
             end_line_actual = offset + len(target_lines)
-            header = f"# 显示第 {start_line} 行到第 {end_line_actual} 行（文件共 {total_lines} 行）\n\n"
+            header = f"# Showing lines {start_line} to {end_line_actual} (file has {total_lines} lines)\n\n"
 
         content = "".join(target_lines)
 
-        # 添加省略标注
+        # Add ellipsis annotations
         has_prefix = offset > 0
         has_suffix = end_line_actual < total_lines
 
         if has_prefix:
             prefix_lines = offset
-            prefix = f"# ... 前面有{prefix_lines}行  ...\n\n"
+            prefix = f"# ... Previous {prefix_lines} lines ...\n\n"
             content = prefix + content
 
         if has_suffix:
             suffix_lines = total_lines - end_line_actual
-            suffix = f"\n\n# ... 后面还有{suffix_lines}行  ..."
+            suffix = f"\n\n# ... {suffix_lines} more lines below ..."
             content = content + suffix
 
         return header + content
 
     async def get_tool_detail(self, tool_context: ToolContext, result: ToolResult, arguments: Dict[str, Any] = None) -> Optional[ToolDetail]:
         """
-        根据工具执行结果获取对应的ToolDetail
+        Get corresponding ToolDetail based on tool execution result
 
         Args:
-            tool_context: 工具上下文
-            result: 工具执行的结果
-            arguments: 工具执行的参数字典
+            tool_context: Tool context
+            result: Tool execution result
+            arguments: Tool execution arguments dictionary
 
         Returns:
-            Optional[ToolDetail]: 工具详情对象，可能为None
+            Optional[ToolDetail]: Tool detail object, may be None
         """
         if not result.ok or not result.extra_info or "raw_content" not in result.extra_info:
             return None
 
-        # 从 extra_info 获取路径
+        # Get path from extra_info
         original_file_path_str = result.extra_info.get("original_file_path")
         read_path_str = result.extra_info.get("read_path")
 
         if not original_file_path_str or not read_path_str:
-             logger.warning("无法从 extra_info 获取 original_file_path 或 read_path，尝试从 arguments 回退")
-             # 可以尝试从 arguments 回退，或者直接返回 None
+             logger.warning("Unable to get original_file_path or read_path from extra_info, trying fallback from arguments")
+             # Can try fallback from arguments or return None directly
              if arguments and "file_path" in arguments:
                  original_file_path_str = arguments["file_path"]
-                 # 如果没有 read_path, 只能猜测它和 original 一样
+                 # If no read_path, can only guess it's the same as original
                  read_path_str = read_path_str or original_file_path_str
              else:
-                  logger.error("无法确定文件路径信息，无法生成 ToolDetail")
+                  logger.error("Unable to determine file path information, unable to generate ToolDetail")
                   return None
 
 
@@ -408,40 +408,40 @@ class ReadFile(AbstractFileTool[ReadFileParams], WorkspaceGuardTool[ReadFilePara
         # If the read path was a generated .md (from PDF cache), force TEXT or MARKDOWN display type
         if read_path_str.endswith('.md') and original_file_path_str.endswith('.pdf'):
              display_type = DisplayType.TEXT # Or potentially a specific MARKDOWN type if exists
-             # 或者如果存在特定的 MARKDOWN 类型，则使用它
+             # Or use specific MARKDOWN type if it exists
 
         return ToolDetail(
             type=display_type,
             data=FileContent(
                 # Show the original requested filename to the user
-                # 向用户显示原始请求的文件名
+                # Show original requested filename to user
                 file_name=original_file_name,
                 # Content is the raw content (without meta) from the read file (could be .md)
-                # 内容是来自读取文件（可能是 .md）的原始内容（不含元信息）
+                # Content is raw content (without metadata) from read file (could be .md)
                 content=result.extra_info["raw_content"]
             )
         )
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
         """
-        获取工具调用后的友好动作和备注
+        Get friendly action and remark after tool call
         """
         # Use the original file path requested by the user
         file_path_str = arguments.get("file_path", "")
-        file_name = os.path.basename(file_path_str) if file_path_str else "文件"
+        file_name = os.path.basename(file_path_str) if file_path_str else "file"
 
         if not result.ok:
             # Keep error reporting simple, using the original file name
-            # 使用原始文件名保持错误报告简洁
+            # Use original file name to keep error reporting concise
             return {
-                "action": "读取文件",
-                "remark": f"读取「{file_name}」失败: {result.error or result.content}" # Use error if available
-                # 如果有错误信息则使用，否则使用 content
+                "action": "Read file",
+                "remark": f"Failed to read '{file_name}': {result.error or result.content}" # Use error if available
+                # Use error if available, otherwise use content
             }
 
         # Success message always refers to the original requested file
-        # 成功消息始终引用原始请求的文件
+        # Success message always refers to original requested file
         return {
-            "action": "读取文件",
-            "remark": f"「{file_name}」"
+            "action": "Read file",
+            "remark": f"'{file_name}'"
         }

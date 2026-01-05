@@ -79,13 +79,13 @@ class TokenUsageReport:
 
     def __init__(self, token_tracker: 'TokenUsageTracker', pricing: ModelPricing,
                 sandbox_id: str = "default", report_dir: Optional[str] = None):
-        """初始化
+        """Initialize a token usage report generator.
 
         Args:
-            token_tracker: token使用跟踪器
-            pricing: 模型价格配置
-            sandbox_id: 沙箱ID，用于区分不同的使用环境
-            report_dir: 报告文件保存目录，默认为None表示使用默认目录
+            token_tracker: Token usage tracker
+            pricing: Model pricing configuration
+            sandbox_id: Sandbox ID to differentiate environments
+            report_dir: Directory to save reports; default None uses the standard path
         """
         self.token_tracker = token_tracker
         self.pricing = pricing
@@ -97,34 +97,23 @@ class TokenUsageReport:
                 path_manager = ApplicationContext.get_path_manager()
                 self.report_dir = path_manager.get_chat_history_dir()
             except (ImportError, RuntimeError):
-                # 导入失败时使用备用目录
-                logger.warning("无法导入 PathManager 或获取聊天历史目录，使用备用目录")
+                # Fall back when PathManager lookup fails
+                logger.warning("Failed to import PathManager or get chat history dir; using fallback directory")
                 self.report_dir = os.path.join(os.getcwd(), ".chat_history")
         else:
             self.report_dir = report_dir
 
-        # 确保报告目录存在
+        # Ensure the report directory exists
         os.makedirs(self.report_dir, exist_ok=True)
 
     def get_report_file_path(self) -> str:
-        """获取报告文件的路径
-
-        Returns:
-            str: 报告文件的完整路径
-        """
-        # 使用沙箱ID创建唯一的文件名
+        """Get the report file path."""
+        # Use sandbox_id to create unique filename
         file_name = f"{self.sandbox_id}_token_usage.json"
         return os.path.join(self.report_dir, file_name)
 
     def _serialize_report(self, report: CostReport) -> Dict[str, Any]:
-        """将CostReport序列化为可JSON化的字典
-
-        Args:
-            report: 报告对象
-
-        Returns:
-            Dict[str, Any]: 可JSON化的字典
-        """
+        """Serialize CostReport into a JSON-friendly dict."""
         models_data = []
         for model in report.models:
             model_data = {
@@ -136,7 +125,7 @@ class TokenUsageReport:
                 "currency": model.currency
             }
 
-            # 添加缓存相关数据
+            # Add cache-related data when present
             if model.usage.input_tokens_details:
                 if model.usage.input_tokens_details.cache_write_tokens:
                     model_data["cache_write_tokens"] = model.usage.input_tokens_details.cache_write_tokens
@@ -152,29 +141,22 @@ class TokenUsageReport:
         }
 
     def _deserialize_report(self, data: Dict[str, Any]) -> CostReport:
-        """从字典反序列化CostReport
-
-        Args:
-            data: 字典数据
-
-        Returns:
-            CostReport: 报告对象
-        """
+        """Deserialize CostReport from a dictionary."""
         report = CostReport()
         report.timestamp = data.get("timestamp", report.timestamp)
         report.currency_code = data.get("currency_code", report.currency_code)
 
-        # 解析模型数据
+        # Parse model data
         for model_data in data.get("models", []):
             model_name = model_data.get("model_name", "")
 
-            # 创建输入token详情对象
+            # Build input token details
             input_details = InputTokensDetails(
                 cache_write_tokens=model_data.get("cache_write_tokens", 0),
                 cached_tokens=model_data.get("cache_hit_tokens", 0)
             )
 
-            # 创建token使用量对象
+            # Build token usage object
             usage = TokenUsage(
                 input_tokens=model_data.get("input_tokens", 0),
                 output_tokens=model_data.get("output_tokens", 0),
@@ -182,7 +164,7 @@ class TokenUsageReport:
                 input_tokens_details=input_details
             )
 
-            # 创建模型使用对象
+            # Create model usage entry
             model_usage = ModelUsage(
                 model_name=model_name,
                 usage=usage,
@@ -195,81 +177,65 @@ class TokenUsageReport:
         return report
 
     def _get_or_create_report(self) -> CostReport:
-        """获取现有报告对象或创建新的报告对象
-
-        Returns:
-            CostReport: 报告对象
-        """
+        """Load existing report or create a new one."""
         file_path = self.get_report_file_path()
 
-        # 如果文件存在，尝试从文件加载
+        # If file exists, try to load
         if os.path.exists(file_path):
             try:
                 with open(file_path, 'r', encoding='utf-8') as f:
                     report_data = json.load(f)
                     return self._deserialize_report(report_data)
             except Exception as e:
-                logger.error(f"读取现有token使用报告失败: {e!s}")
+                logger.error(f"Failed to read existing token usage report: {e!s}")
 
-        # 如果文件不存在或读取失败，创建新的报告对象
+        # File missing or load failed: create new report
         return CostReport(currency_code=self.pricing.display_currency)
 
     def _save_report(self, report: CostReport) -> bool:
-        """保存报告到文件
-
-        Args:
-            report: 报告对象
-
-        Returns:
-            bool: 是否保存成功
-        """
+        """Save report to file."""
         file_path = self.get_report_file_path()
 
         try:
-            # 将报告转换为可JSON化的字典
+            # Convert to JSON-ready dict
             report_dict = self._serialize_report(report)
 
-            # 保存到文件
+            # Write to disk
             with open(file_path, 'w', encoding='utf-8') as f:
                 json.dump(report_dict, f, ensure_ascii=False, indent=2)
 
-            logger.info(f"保存token使用报告到文件成功: {file_path}")
+            logger.info(f"Saved token usage report to file: {file_path}")
             return True
         except Exception as e:
-            logger.error(f"保存token使用报告到文件失败: {e!s}")
+            logger.error(f"Failed to save token usage report to file: {e!s}")
             return False
 
     def update_and_save_usage(self, model_id: str, token_usage: TokenUsage) -> None:
-        """更新并保存当前token使用情况到JSON文件
-
-        Args:
-            model_id: 模型ID
-            token_usage: TokenUsage对象
-        """
-        # 检查是否有token_tracker
+        """Update and persist current token usage to JSON file."""
+        # Ensure tracker is present
         if not self.token_tracker:
-            logger.error("无法更新token使用情况，未设置token_tracker")
+            logger.error("Cannot update token usage because token_tracker is not set")
             return
 
-        # 获取或创建报告
+        # Load or create report
         report = self._get_or_create_report()
 
-        # 计算成本
+        # Calculate cost
         cost, currency = self.pricing.calculate_cost(model_id, token_usage)
 
-        # 如果货币不匹配，转换成本
+        # Convert currency if needed
         if currency != report.currency_code:
             cost = self.pricing.convert_currency(cost, currency, report.currency_code)
 
-        # 查找现有模型或创建新模型
+        # Find existing model entry or create a new one
         existing_model = next((m for m in report.models if m.model_name == model_id), None)
 
         if existing_model:
-            # 更新现有模型
+            # Update existing model
             existing_model.usage.input_tokens += token_usage.input_tokens
             existing_model.usage.output_tokens += token_usage.output_tokens
 
-            # 更新缓存相关数据
+            # Update cache-related data
             if token_usage.input_tokens_details:
                 if not existing_model.usage.input_tokens_details:
                     existing_model.usage.input_tokens_details = InputTokensDetails()
@@ -286,13 +252,13 @@ class TokenUsageReport:
                         token_usage.input_tokens_details.cached_tokens
                     )
 
-            # 更新总tokens
+            # Recompute totals
             existing_model.usage.total_tokens = existing_model.usage.input_tokens + existing_model.usage.output_tokens
 
-            # 更新成本
+            # Update cost
             existing_model.cost += cost
         else:
-            # 创建新的模型使用记录
+            # Create a new model usage entry
             model_usage = ModelUsage(
                 model_name=model_id,
                 usage=token_usage,
@@ -301,48 +267,41 @@ class TokenUsageReport:
             )
             report.models.append(model_usage)
 
-        # 保存报告
+        # Save report
         self._save_report(report)
 
-        # 重置累计使用量，避免下次再次累加
+        # Reset tracker accumulation to avoid double counting
         self.token_tracker.reset()
 
     def format_report(self, report: CostReport) -> str:
-        """格式化报告为可读字符串
-
-        Args:
-            report: 报告对象
-
-        Returns:
-            str: 格式化后的报告字符串
-        """
+        """Format a report into a readable string."""
         currency_symbol = get_currency_symbol(report.currency_code)
 
-        formatted = "Token使用统计报告\n"
+        formatted = "Token usage report\n"
         formatted += "-" * 40 + "\n"
 
-        # 添加每个模型的使用情况
+        # Add usage per model
         for model in report.models:
-            formatted += f"模型: {model.model_name}\n"
-            formatted += f"  输入tokens: {model.usage.input_tokens:,}\n"
-            formatted += f"  输出tokens: {model.usage.output_tokens:,}\n"
+            formatted += f"Model: {model.model_name}\n"
+            formatted += f"  Input tokens: {model.usage.input_tokens:,}\n"
+            formatted += f"  Output tokens: {model.usage.output_tokens:,}\n"
 
-            # 添加缓存相关信息
+            # Cache-related info
             if model.usage.input_tokens_details:
                 if model.usage.input_tokens_details.cache_write_tokens:
-                    formatted += f"  缓存写入tokens: {model.usage.input_tokens_details.cache_write_tokens:,}\n"
+                    formatted += f"  Cache write tokens: {model.usage.input_tokens_details.cache_write_tokens:,}\n"
                 if model.usage.input_tokens_details.cached_tokens:
-                    formatted += f"  缓存命中tokens: {model.usage.input_tokens_details.cached_tokens:,}\n"
+                    formatted += f"  Cache hit tokens: {model.usage.input_tokens_details.cached_tokens:,}\n"
 
-            formatted += f"  总tokens: {model.usage.total_tokens:,}\n"
-            formatted += f"  估算成本: {currency_symbol}{model.cost:.6f}\n\n"
+            formatted += f"  Total tokens: {model.usage.total_tokens:,}\n"
+            formatted += f"  Estimated cost: {currency_symbol}{model.cost:.6f}\n\n"
 
-        # 添加总计
-        formatted += "总计:\n"
-        formatted += f"  总输入tokens: {report.total_input_tokens:,}\n"
-        formatted += f"  总输出tokens: {report.total_output_tokens:,}\n"
+        # Totals
+        formatted += "Totals:\n"
+        formatted += f"  Total input tokens: {report.total_input_tokens:,}\n"
+        formatted += f"  Total output tokens: {report.total_output_tokens:,}\n"
 
-        # 计算缓存相关总计
+        # Aggregate cache-related totals
         total_cache_write_tokens = sum(
             (m.usage.input_tokens_details.cache_write_tokens or 0)
             for m in report.models
@@ -356,36 +315,32 @@ class TokenUsageReport:
         )
 
         if total_cache_write_tokens > 0:
-            formatted += f"  总缓存写入tokens: {total_cache_write_tokens:,}\n"
+            formatted += f"  Total cache write tokens: {total_cache_write_tokens:,}\n"
         if total_cache_hit_tokens > 0:
-            formatted += f"  总缓存命中tokens: {total_cache_hit_tokens:,}\n"
+            formatted += f"  Total cache hit tokens: {total_cache_hit_tokens:,}\n"
 
-        formatted += f"  所有tokens总计: {report.total_tokens:,}\n"
-        formatted += f"  总估算成本: {currency_symbol}{report.total_cost:.6f}\n"
+        formatted += f"  Overall tokens: {report.total_tokens:,}\n"
+        formatted += f"  Total estimated cost: {currency_symbol}{report.total_cost:.6f}\n"
 
-        formatted += f"\n报告时间: {report.timestamp}"
+        formatted += f"\nReport time: {report.timestamp}"
 
         return formatted
 
     def get_cost_report(self) -> CostReport:
-        """获取token使用和成本报告
-
-        Returns:
-            CostReport: 成本报告对象
-        """
+        """Get token usage and cost report."""
         file_path = self.get_report_file_path()
 
-        # 尝试读取文件
+        # Try reading existing file
         if os.path.exists(file_path):
             try:
                 with open(file_path, 'r', encoding='utf-8') as f:
                     report_data = json.load(f)
 
-                # 转换为CostReport对象
+                # Convert to CostReport
                 return self._deserialize_report(report_data)
 
             except Exception as e:
-                logger.error(f"读取token使用报告失败: {e}")
+                logger.error(f"Failed to read token usage report: {e}")
 
-        # 如果文件不存在或读取失败，创建新的报告
+        # Missing or failed read: return new report
         return CostReport(currency_code=self.pricing.display_currency)

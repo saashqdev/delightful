@@ -19,174 +19,174 @@ logger = get_logger(__name__)
 
 
 class WriteToFileParams(BaseToolParams):
-    """写入文件参数"""
+    """Write to file parameters"""
     file_path: str = Field(
         ...,
-        description="要写入的文件路径，相对于工作目录或绝对路径，不要包含工作目录，比如希望将文件写到 .workspace/todo.md，只需要传入 todo.md 即可"
+        description="File path to write to, relative to working directory or absolute path. Do not include working directory, for example if you want to write file to .workspace/todo.md, just pass todo.md"
     )
     content: str = Field(
         ...,
-        description="要写入文件的完整内容"
+        description="Complete content to write to file"
     )
     overwrite: bool = Field(
         False,
-        description="是否允许覆盖已存在的文件。默认为 false，不允许覆盖。"
+        description="Whether to allow overwriting existing file. Defaults to false, overwrite not allowed."
     )
 
     @classmethod
     def get_custom_error_message(cls, field_name: str, error_type: str) -> Optional[str]:
-        """获取自定义参数错误信息"""
+        """Get custom parameter error information"""
         if field_name == "content":
             error_message = (
-                "缺少必要参数'content'。这可能是因为您提供的内容过长，超出了token限制。\n"
-                "建议：\n"
-                "1. 减少输出内容的量，分批次完成文件内容\n"
-                "2. 将大文件拆分为多个小文件\n"
-                "3. 确保在调用时明确提供content参数"
+                "Missing required parameter 'content'. This may be because the content you provided is too long and exceeds the token limit.\n"
+                "Suggestions:\n"
+                "1. Reduce the amount of output content and complete file content in batches\n"
+                "2. Split large files into multiple smaller files\n"
+                "3. Ensure clearly providing content parameters when calling"
             )
             return error_message
         return None
 
 
 class WriteResult(NamedTuple):
-    """写入结果详情"""
-    content: str  # 写入的内容
-    file_exists: bool  # 文件是否已存在
-    total_lines: int  # 总行数
-    file_size: int  # 文件大小（字节）
-    has_syntax_errors: bool  # 是否有语法错误
-    syntax_errors: list  # 语法错误列表
+    """Write result details"""
+    content: str  # Content to write
+    file_exists: bool  # Whether file already exists
+    total_lines: int  # Total number of lines
+    file_size: int  # File size (bytes)
+    has_syntax_errors: bool  # Whether there are syntax errors
+    syntax_errors: list  # Syntax error list
 
 
 @tool()
 class WriteToFile(AbstractFileTool[WriteToFileParams], WorkspaceGuardTool[WriteToFileParams]):
     """
-    写入文件工具
+    Write to file tool
 
-    这个工具可以将内容写入到指定路径的文件中，如果文件不存在会创建文件。
+    This tool can write content to a file at the specified path. If the file does not exist, it will create the file.
 
-    - 如果文件不存在，将自动创建文件和必要的目录。
-    - 如果文件已存在，默认行为是返回错误。要覆盖现有文件，请将 overwrite 参数设置为 true。
-    - 减少单次输出内容的量，建议分批次完成文件内容，先调用 write_to_file 写入新文件，再调用 replace_in_file 来修改追加文件内容。
-    - 如果需要复制或移动文件，请使用 shell_exec 工具来执行 cp 或 mv 命令。
-    - 如果需要对现有文件进行局部修改，请务必使用 replace_in_file 工具。
+    - If the file does not exist, the file and necessary directories will be automatically created.
+    - If the file already exists, the default behavior is to return an error. To overwrite an existing file, set the overwrite parameter to true.
+    - To reduce the amount of content output at once, it is recommended to complete file content in batches, first call write_to_file to write a new file, then call replace_in_file to modify and append file content.
+    - If you need to copy or move files, use the shell_exec tool to execute cp or mv commands.
+    - If you need to make partial modifications to an existing file, be sure to use the replace_in_file tool.
     """
 
     async def execute(self, tool_context: ToolContext, params: WriteToFileParams) -> ToolResult:
         """
-        执行文件写入操作
+        Execute file write operation
 
         Args:
-            tool_context: 工具上下文
-            params: 参数对象，包含文件路径、内容和覆盖选项
+            tool_context: Tool context
+            params: Parameters object containing file path, content and overwrite option
 
         Returns:
-            ToolResult: 包含操作结果
+            ToolResult: Contains operation result
         """
         try:
-            # 使用父类方法获取安全的文件路径
+            # Use parent class method to get safe file path
             file_path, error = self.get_safe_path(params.file_path)
             if error:
                 return ToolResult(error=error)
 
-            # 检查文件是否存在
+            # Check if file exists
             file_exists = file_path.exists()
 
-            # 如果文件已存在且不允许覆盖
+            # If file already exists and overwrite not allowed
             if file_exists and not params.overwrite:
                 return ToolResult(
-                    error=f"文件 {file_path!s} 已存在。如需覆盖，请在参数中设置 `overwrite=true`。"
+                    error=f"File {file_path!s} already exists. If you need to overwrite, set `overwrite=true` in parameters."
                 )
 
-            # 创建目录（如果需要）
+            # Create directories (if needed)
             await self._create_directories(file_path)
 
-            # 写入文件内容
+            # Write file content
             await self._write_file(file_path, params.content)
 
-            # 触发文件事件
+            # Trigger file event
             event_type = EventType.FILE_UPDATED if file_exists else EventType.FILE_CREATED
             await self._dispatch_file_event(tool_context, str(file_path), event_type)
 
-            # 执行语法检查
+            # Run syntax check
             valid, errors = SyntaxChecker.check_syntax(str(file_path), params.content)
 
-            # 计算文件统计信息
+            # Calculate file statistics information
             write_result = self._calculate_write_stats(
                 params.content,
-                file_exists, # 传递原始的文件存在状态
+                file_exists, # Pass original file existence status
                 not valid,
                 errors
             )
 
-            # 生成格式化的输出
-            action_verb = "文件覆盖" if file_exists else "文件创建"
+            # Generate formatted output
+            action_verb = "File overwritten" if file_exists else "File created"
             output = (
                 f"{action_verb}: {file_path} | "
-                f"{write_result.total_lines}行 | "
-                f"大小:{write_result.file_size}字节"
+                f"{write_result.total_lines} lines | "
+                f"Size: {write_result.file_size} bytes"
             )
 
-            # 如果有语法错误，添加到结果中
+            # If there are syntax errors, add to result
             if not valid:
                 errors_str = "\n".join(errors)
-                output += f"\n\n警告：文件存在语法问题：\n{errors_str}"
-                logger.warning(f"文件 {file_path} 存在语法问题: {errors}")
+                output += f"\n\nWarning: File has syntax problems:\n{errors_str}"
+                logger.warning(f"File {file_path} has syntax problems: {errors}")
 
-            # 返回操作结果
+            # Return operation result
             return ToolResult(content=output)
 
         except Exception as e:
-            logger.exception(f"写入文件失败: {e!s}")
-            return ToolResult(error=f"写入文件失败: {e!s}。这可能是因为您提供的内容过长，超出了token限制。\n"
-                "建议：\n"
-                "1. 减少输出内容的量，分批次追加文件内容\n"
-                "2. 将大内容拆分为多次追加操作\n"
-                "3. 确保在调用时明确提供content参数")
+            logger.exception(f"Write file failed: {e!s}")
+            return ToolResult(error=f"Write file failed: {e!s}. This may be because the content you provided is too long and exceeds the token limit.\n"
+                "Suggestions:\n"
+                "1. Reduce the amount of output content and append file content in batches\n"
+                "2. Split large content into multiple append operations\n"
+                "3. Ensure clearly providing content parameters when calling")
 
     async def _create_directories(self, file_path: Path) -> None:
-        """创建文件所需的目录结构"""
+        """Create directory structure required for file"""
         directory = file_path.parent
 
         if not directory.exists():
             os.makedirs(directory, exist_ok=True)
-            logger.info(f"创建目录: {directory}")
+            logger.info(f"Created directory: {directory}")
 
     async def _write_file(self, file_path: Path, content: str) -> None:
-        """写入文件内容"""
-        # 处理内容末尾可能的空行
+        """Write file content"""
+        # Handle possible empty lines at end of content
         if not content.endswith("\n"):
             content += "\n"
 
         async with aiofiles.open(file_path, "w", encoding="utf-8") as f:
             await f.write(content)
 
-        logger.info(f"文件写入完成: {file_path}")
+        logger.info(f"File write completed: {file_path}")
 
     async def get_tool_detail(self, tool_context: ToolContext, result: ToolResult, arguments: Dict[str, Any] = None) -> Optional[ToolDetail]:
         """
-        根据工具执行结果获取对应的ToolDetail
+        Get corresponding ToolDetail based on tool execution result
 
         Args:
-            tool_context: 工具上下文
-            result: 工具执行的结果
-            arguments: 工具执行的参数字典
+            tool_context: Tool context
+            result: Tool execution result
+            arguments: Tool execution parameters dictionary
 
         Returns:
-            Optional[ToolDetail]: 工具详情对象，可能为None
+            Optional[ToolDetail]: Tool details object, may be None
         """
         if not result.ok:
             return None
 
         if not arguments or "file_path" not in arguments or "content" not in arguments:
-            logger.warning("没有提供file_path或content参数")
+            logger.warning("file_path or content parameters not provided")
             return None
 
         file_path = arguments["file_path"]
         content = arguments["content"]
         file_name = os.path.basename(file_path)
 
-        # 使用 AbstractFileTool 的方法获取显示类型
+        # Use AbstractFileTool method to get display type
         display_type = self.get_display_type_by_extension(file_path)
 
         return ToolDetail(
@@ -199,34 +199,34 @@ class WriteToFile(AbstractFileTool[WriteToFileParams], WorkspaceGuardTool[WriteT
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
         """
-        获取工具调用后的友好动作和备注
+        Get friendly action and remark after tool call
         """
         if not arguments or "file_path" not in arguments:
             return {
-                "action": "写入文件",
-                "remark": "写入异常，重新尝试"
+                "action": "Write to file",
+                "remark": "Write failed, retry"
             }
 
         file_path = arguments["file_path"]
         file_name = os.path.basename(file_path)
 
-        # 判断是创建还是覆盖
-        # 这里我们无法直接访问 file_exists 变量，但可以通过参数来推断
-        # 如果调用成功，并且 overwrite=True 或者文件原本不存在，则操作成功
-        # 我们可以根据 result.content 来判断，但这不够健壮
-        # 一个更可靠（但非完美）的方法是检查 ToolResult 的内容是否包含"覆盖"字样
-        # 或者，我们可以考虑在 execute 成功时将操作类型（创建/覆盖）放入 ToolResult 的 metadata 或直接修改 content
-        # 为了简单起见，我们暂时通过参数和 ToolResult 的内容推断
-        action = "创建并写入文件"
+        # Determine whether it's create or overwrite
+        # Here we cannot directly access file_exists variable, but can infer from parameters
+        # If call successful and either overwrite=True or file originally didn't exist, then operation successful
+        # We can judge from result.content, but this is not robust enough
+        # A more reliable (but not perfect) method is to check if ToolResult content contains "overwrite"
+        # Or we can consider putting operation type (create/overwrite) in ToolResult metadata or directly modify content during successful execute
+        # For simplicity, we temporarily infer through parameters and ToolResult content
+        action = "Create and write to file"
         if result.ok and result.content:
-            # 检查 ToolResult 的输出信息判断是创建还是覆盖
-            if "文件覆盖:" in result.content:
-                action = "覆盖文件"
-            elif "文件创建:" in result.content:
-                action = "创建并写入文件"
+            # Determine whether it's create or overwrite by checking ToolResult output information
+            if "File overwritten:" in result.content:
+                action = "Overwrite file"
+            elif "File created:" in result.content:
+                action = "Create and write to file"
 
-        # 更准确的方式是在 execute 方法中确定操作类型并传递
-        # 但目前我们依赖 result.content
+        # A more accurate way is to determine operation type in execute method and pass it
+        # But currently we rely on result.content
 
         return {
             "action": action,
@@ -235,26 +235,26 @@ class WriteToFile(AbstractFileTool[WriteToFileParams], WorkspaceGuardTool[WriteT
 
     def _calculate_write_stats(self, content: str, file_exists: bool, has_syntax_errors: bool, syntax_errors: list) -> WriteResult:
         """
-        计算写入操作的统计信息
+        Calculate write operation statistics information
 
         Args:
-            content: 写入的内容
-            file_exists: 文件是否已存在
-            has_syntax_errors: 是否有语法错误
-            syntax_errors: 语法错误列表
+            content: Content to write
+            file_exists: Whether file already exists
+            has_syntax_errors: Whether there are syntax errors
+            syntax_errors: Syntax error list
 
         Returns:
-            WriteResult: 包含写入统计信息的结果对象
+            WriteResult: Result object containing write statistics information
         """
-        # 确保内容以换行符结束
+        # Ensure content ends with newline
         normalized_content = content
         if not normalized_content.endswith("\n"):
             normalized_content += "\n"
 
-        # 计算行数
+        # Calculate number of lines
         total_lines = normalized_content.count('\n') + (0 if normalized_content.endswith('\n') or not normalized_content else 1)
 
-        # 计算文件大小
+        # Calculate file size
         file_size = len(normalized_content.encode('utf-8'))
 
         return WriteResult(

@@ -17,71 +17,71 @@ from app.tools.core import BaseTool, BaseToolParams, tool
 
 logger = get_logger(__name__)
 
-# 搜索结果最大数量
+# Maximum number of search results
 MAX_RESULTS = 10
 
 
 class WebSearchParams(BaseToolParams):
-    """必应搜索参数"""
+    """Web search parameters"""
     query: List[str] = Field(
         ...,
-        description="搜索查询内容数组，可同时传入多个不同的查询词并行搜索，单个查询时传入只包含一个元素的数组即可"
+        description="List of search queries; pass multiple queries to search in parallel. For a single query, pass an array with one element."
     )
     num_results: int = Field(
         10,
-        description="每个查询返回的结果数量 (默认: 10，最大: 20)"
+        description="Number of results per query (default: 10, max: 20)"
     )
     language: str = Field(
         "zh-CN",
-        description="搜索语言 (默认: zh-CN)"
+        description="Search language (default: zh-CN)"
     )
     region: str = Field(
         "CN",
-        description="搜索区域 (默认: CN)"
+        description="Search region (default: CN)"
     )
     safe_search: bool = Field(
         True,
-        description="是否启用安全搜索 (默认: true)"
+        description="Whether to enable safe search (default: true)"
     )
     time_period: Optional[str] = Field(
         None,
-        description="搜索时间范围 (可选): day, week, month, year"
+        description="Search time period (optional): day, week, month, year"
     )
 
 
-# 自定义 WebSearchAPI 实现，替代 langchain_community 的 WebSearchAPIWrapper
+# Custom WebSearchAPI implementation replacing langchain_community's WebSearchAPIWrapper
 class WebSearchAPI:
-    """自定义的 Bing 搜索 API 包装器"""
+    """Custom Bing search API wrapper"""
 
     def __init__(self, k: int = 10, search_kwargs: dict = None):
         """
-        初始化 Bing 搜索 API 包装器
+        Initialize Bing search API wrapper.
 
         Args:
-            k: 返回结果数量
-            search_kwargs: 搜索参数
+            k: Number of results to return
+            search_kwargs: Search parameters
         """
         self.k = k
         self.search_kwargs = search_kwargs or {}
-        # 从配置管理器获取 API 密钥和搜索 URL，而不是从环境变量
+        # Get API key and search URL from config instead of environment variables
         self.subscription_key = config.get("bing.search_api_key", "")
         self.search_url = config.get("bing.search_endpoint", "https://api.bing.microsoft.com/v7.0") + "/search"
 
     async def run(self, query: str) -> str:
         """
-        执行搜索并返回结果的文本摘要
+        Execute search and return text summary.
 
         Args:
-            query: 搜索查询
+            query: Search query
 
         Returns:
-            str: 搜索结果的文本摘要
+            str: Text summary of search results
         """
         search_results = await self._search(query)
         if not search_results:
             return "No results found"
 
-        # 格式化为文本
+        # Format as text
         result_str = ""
         for i, result in enumerate(search_results, 1):
             result_str += f"{i}. {result['title']}: {result['snippet']}\n"
@@ -90,14 +90,14 @@ class WebSearchAPI:
 
     async def results(self, query: str, k: int = None) -> List[Dict[str, Any]]:
         """
-        执行搜索并返回结构化结果
+        Execute search and return structured results.
 
         Args:
-            query: 搜索查询
-            k: 结果数量，覆盖初始化时设置的值
+            query: Search query
+            k: Number of results, overrides initialized value
 
         Returns:
-            List[Dict[str, Any]]: 搜索结果列表
+            List[Dict[str, Any]]: List of search results
         """
         limit = k if k is not None else self.k
         search_results = await self._search(query, limit)
@@ -105,48 +105,48 @@ class WebSearchAPI:
 
     async def _search(self, query: str, limit: int = None) -> List[Dict[str, Any]]:
         """
-        执行实际的 Bing 搜索 API 调用
+        Execute actual Bing search API call.
 
         Args:
-            query: 搜索查询
-            limit: 结果数量限制
+            query: Search query
+            limit: Result count limit
 
         Returns:
-            List[Dict[str, Any]]: 搜索结果列表
+            List[Dict[str, Any]]: List of search results
         """
         if not self.subscription_key:
             raise ValueError("Bing Search API key is required")
 
-        # 设置请求头
+        # Set request headers
         headers = {
             "Ocp-Apim-Subscription-Key": self.subscription_key,
             "Accept": "application/json"
         }
 
-        # 设置查询参数
+        # Set query parameters
         params = {
             "q": query,
             "count": limit or self.k,
             **self.search_kwargs
         }
 
-        # 清理参数
+        # Clean parameters
         for k, v in list(params.items()):
             if v is None:
                 del params[k]
 
         try:
-            # 发送 HTTP 请求
+            # Send HTTP request
             async with aiohttp.ClientSession() as session:
                 async with session.get(self.search_url, headers=headers, params=params) as response:
                     if response.status != 200:
                         error_detail = await response.text()
-                        logger.error(f"Bing Search API 请求失败: {response.status} {error_detail}")
+                        logger.error(f"Bing Search API requestfailed: {response.status} {error_detail}")
                         return []
 
                     data = await response.json()
 
-                    # 解析响应数据
+                    # Parse response data
                     if "webPages" not in data or "value" not in data["webPages"]:
                         return []
 
@@ -160,25 +160,25 @@ class WebSearchAPI:
 
                     return results[:limit or self.k]
         except Exception as e:
-            logger.error(f"Bing Search API 请求异常: {e}")
+            logger.error(f"Bing Search API request error: {e}")
             return []
 
 
-# Tavily 搜索 API 包装器
+# Tavily search API wrapper
 class TavilySearchAPI:
-    """自定义的 Tavily 搜索 API 包装器"""
+    """Custom Tavily search API wrapper"""
 
     def __init__(self, k: int = 10, search_kwargs: dict = None):
         """
-        初始化 Tavily 搜索 API 包装器
+        Initialize Tavily search API wrapper.
 
         Args:
-            k: 返回结果数量
-            search_kwargs: 搜索参数
+            k: Number of results to return
+            search_kwargs: Search parameters
         """
         self.k = k
         self.search_kwargs = search_kwargs or {}
-        # 从配置管理器获取 API 密钥和搜索 URL
+        # Get API key and search URL from config
         self.api_key = config.get("tavily.api_key", "")
         self.api_endpoint = config.get("tavily.api_endpoint", "https://api.tavily.com")
         self.search_endpoint = config.get("tavily.search_endpoint", "/search")
@@ -186,26 +186,26 @@ class TavilySearchAPI:
 
     async def run(self, query: str) -> str:
         """
-        执行搜索并返回结果的文本摘要
+        Execute search and return text summary.
 
         Args:
-            query: 搜索查询
+            query: Search query
 
         Returns:
-            str: 搜索结果的文本摘要
+            str: Text summary of search results
         """
         search_results = await self._search(query)
         if not search_results or not search_results.get("results"):
             return "No results found"
 
-        # 格式化为文本，包含 AI 生成的答案和搜索结果
+        # Format as text, including AI-generated answer and search results
         result_str = ""
 
-        # 添加 AI 生成的答案（如果有）
+        # Add AI-generated answer (if any)
         if search_results.get("answer"):
-            result_str += f"AI 生成的答案: {search_results['answer']}\n\n搜索结果:\n"
+            result_str += f"AI generated answer: {search_results['answer']}\n\nSearch results:\n"
 
-        # 添加搜索结果
+        # Add search results
         for i, result in enumerate(search_results["results"], 1):
             result_str += f"{i}. {result['title']}: {result['content']}\n"
 
@@ -213,23 +213,23 @@ class TavilySearchAPI:
 
     async def results(self, query: str, k: int = None) -> List[Dict[str, Any]]:
         """
-        执行搜索并返回结构化结果
+        Execute search and return structured results.
 
         Args:
-            query: 搜索查询
-            k: 结果数量，覆盖初始化时设置的值
+            query: Search query
+            k: Number of results, overrides initialized value
 
         Returns:
-            List[Dict[str, Any]]: 搜索结果列表
+            List[Dict[str, Any]]: List of search results
         """
         limit = k if k is not None else self.k
         search_results = await self._search(query, limit)
 
-        # 检查结果是否有效
+        # Check if results are valid
         if not search_results or not search_results.get("results"):
             return []
 
-        # 转换结果格式以与 Bing 搜索结果兼容
+        # Convert results to match Bing format
         formatted_results = []
         for item in search_results["results"]:
             formatted_results.append({
@@ -244,25 +244,25 @@ class TavilySearchAPI:
 
     async def _search(self, query: str, limit: int = None) -> Dict[str, Any]:
         """
-        执行实际的 Tavily 搜索 API 调用
+        Execute actual Tavily search API call.
 
         Args:
-            query: 搜索查询
-            limit: 结果数量限制
+            query: Search query
+            limit: Result count limit
 
         Returns:
-            Dict[str, Any]: 搜索结果
+            Dict[str, Any]: Search result
         """
         if not self.api_key:
             raise ValueError("Tavily Search API key is required")
 
-        # 设置请求头
+        # Set request headers
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json"
         }
 
-        # 设置请求数据
+        # Set request payload
         data = {
             "query": query,
             "max_results": limit or self.k,
@@ -272,21 +272,21 @@ class TavilySearchAPI:
         }
 
         try:
-            # 发送 HTTP 请求
+            # Send HTTP request
             async with aiohttp.ClientSession() as session:
                 async with session.post(self.search_url, headers=headers, json=data) as response:
                     if response.status != 200:
                         error_detail = await response.text()
-                        logger.error(f"Tavily Search API 请求失败: {response.status} {error_detail}")
+                        logger.error(f"Tavily Search API requestfailed: {response.status} {error_detail}")
                         return {}
 
                     return await response.json()
         except Exception as e:
-            logger.error(f"Tavily Search API 请求异常: {e}")
+            logger.error(f"Tavily Search API request error: {e}")
             return {}
 
     def _extract_domain(self, url: str) -> str:
-        """从URL中提取域名"""
+        """Extract domain from URL"""
         try:
             domain = re.search(r"https?://([^/]+)", url)
             if domain:
@@ -296,114 +296,114 @@ class TavilySearchAPI:
             return url
 
     def _get_favicon_url(self, domain: str) -> str:
-        """生成网站favicon的URL"""
+        """Generate website favicon URL"""
         return f"https://{domain}/favicon.ico"
 
 
 @tool()
 class WebSearch(BaseTool[WebSearchParams]):
     """
-    互联网搜索工具，用于进行网络搜索。
-    支持多个查询并行处理，善用并发搜索，可大幅提高搜索效率。
-    根据信息收集规则，搜索结果中的摘要不是有效来源，必须通过浏览器访问原始页面获取完整信息。
-    搜索结果将包含标题、URL、摘要和来源网站。
+    Internet search tool for web queries.
+    Supports multiple queries in parallel; parallel searches improve efficiency.
+    Per information-gathering rules, search summaries are not authoritative; use the browser to open original pages for complete information.
+    Results include title, URL, summary, and source site.
 
-    使用场景：
-    - 查找最新信息和新闻
-    - 搜索特定主题的资料和参考
-    - 查询事实和数据
-    - 寻找解决方案和教程
-    - 同时搜索多个相关主题，高效并发获取多种信息
+    Use cases:
+    - Find latest information and news
+    - Search references on specific topics
+    - Query facts and data
+    - Look up solutions and tutorials
+    - Search multiple related topics in parallel to gather diverse information
 
-    注意：
-    - 搜索结果仅提供线索，需要通过浏览器工具访问原始页面获取完整信息
-    - 应从多个搜索结果中获取信息以进行交叉验证
-    - 对于复杂查询，应分解为多个简单查询并利用工具的并发能力
+    Notes:
+    - Search results are only leads; visit original pages via browser tool for full information
+    - Gather info from multiple results for cross-validation
+    - For complex queries, break into simpler ones and leverage parallel searches
     """
 
     def __init__(self, **data):
         super().__init__(**data)
-        # 从配置中获取API密钥和端点
-        # Bing 搜索配置
+        # Load API keys and endpoints
+        # Bing search config
         self.bing_api_key = config.get("bing.search_api_key", default="")
         self.bing_endpoint = config.get("bing.search_endpoint", default="https://api.bing.microsoft.com/v7.0")
 
-        # Tavily 搜索配置
+        # Tavily search config
         self.tavily_api_key = config.get("tavily.api_key", default="")
         self.tavily_endpoint = config.get("tavily.api_endpoint", default="https://api.tavily.com")
 
-        # 获取默认搜索引擎配置
+        # Default search engine
         self.default_engine = config.get("search.default_engine", default="bing").lower()
 
-        # 根据配置和可用性决定使用哪个搜索引擎
+        # Decide which engine to use based on config and availability
         self.use_tavily = False
 
-        # 1. 如果明确指定使用 tavily 且 tavily 配置有效，则使用 tavily
+        # 1. If default is tavily and tavily config is valid, use tavily
         if self.default_engine == "tavily" and self.tavily_api_key:
             self.use_tavily = True
-        # 2. 如果明确指定使用 bing 且 bing 配置有效，则使用 bing
+        # 2. If default is bing and bing config is valid, use bing
         elif self.default_engine == "bing" and self.bing_api_key:
             self.use_tavily = False
-        # 3. 如果 bing 不可用但 tavily 可用，则使用 tavily
+        # 3. If bing unavailable but tavily available, use tavily
         elif not self.bing_api_key and self.tavily_api_key:
             self.use_tavily = True
 
-        logger.info(f"搜索工具初始化，使用搜索引擎: {'Tavily' if self.use_tavily else 'Bing'}")
+        logger.info(f"Search tool initialized, engine: {'Tavily' if self.use_tavily else 'Bing'}")
 
     def is_available(self) -> bool:
         """
-        检查搜索工具是否可用
+        Check whether search tool is available.
 
-        检查搜索API的API密钥和端点是否已正确配置
+        Validates API keys and endpoints for the configured search API.
 
         Returns:
-            bool: 如果工具可用返回True，否则返回False
+            bool: True if available, else False
         """
-        # 根据当前配置的搜索引擎判断可用性
+        # Check availability based on configured search engine
         if self.use_tavily:
-            # 检查 Tavily 搜索是否可用
+            # Check Tavily availability
             if self.tavily_api_key and self.tavily_endpoint:
                 return True
 
-            # Tavily 不可用但是配置文件中指定使用 Tavily，尝试回退到 Bing
+            # Tavily unavailable but configured; attempt fallback to Bing
             if self.default_engine == "tavily":
-                logger.warning("指定的 Tavily 搜索不可用，尝试使用 Bing 搜索作为备选")
+                logger.warning("Configured Tavily search unavailable; attempting Bing as fallback")
                 if self.bing_api_key and self.bing_endpoint:
                     self.use_tavily = False
                     return True
         else:
-            # 检查 Bing 搜索是否可用
+            # Check Bing availability
             if self.bing_api_key and self.bing_endpoint:
                 return True
 
-            # Bing 不可用但是配置文件中指定使用 Bing，尝试回退到 Tavily
+            # Bing unavailable but configured; attempt fallback to Tavily
             if self.default_engine == "bing":
-                logger.warning("指定的 Bing 搜索不可用，尝试使用 Tavily 搜索作为备选")
+                logger.warning("Configured Bing search unavailable; attempting Tavily as fallback")
                 if self.tavily_api_key and self.tavily_endpoint:
                     self.use_tavily = True
                     return True
 
-        # 记录错误信息
+        # Log errors
         if self.use_tavily:
             if not self.tavily_api_key:
-                logger.warning("Tavily搜索API密钥未配置")
+                logger.warning("Tavily search API key not configured")
             elif not self.tavily_endpoint:
-                logger.warning("Tavily搜索API端点未配置")
+                logger.warning("Tavily search API endpoint not configured")
         else:
             if not self.bing_api_key:
-                logger.warning("必应搜索API密钥未配置")
+                logger.warning("Bing search API key not configured")
             elif not self.bing_endpoint:
-                logger.warning("必应搜索API端点未配置")
+                logger.warning("Bing search API endpoint not configured")
 
-        # 检查是否有任何可用的搜索引擎作为备选
+        # Check for any available search engine as fallback
         if not self.use_tavily and not self.bing_api_key:
             if self.tavily_api_key and self.tavily_endpoint:
-                logger.info("使用 Tavily 搜索作为备选")
+                logger.info("Using Tavily search as fallback")
                 self.use_tavily = True
                 return True
         elif self.use_tavily and not self.tavily_api_key:
             if self.bing_api_key and self.bing_endpoint:
-                logger.info("使用 Bing 搜索作为备选")
+                logger.info("Using Bing search as fallback")
                 self.use_tavily = False
                 return True
 
@@ -415,17 +415,17 @@ class WebSearch(BaseTool[WebSearchParams]):
         params: WebSearchParams
     ) -> ToolResult:
         """
-        执行搜索并返回格式化的结果。
+        Execute search and return formatted result.
 
         Args:
-            tool_context: 工具上下文
-            params: 搜索参数对象
+            tool_context: tool context
+            params: Search parameters object
 
         Returns:
-            WebSearchToolResult: 包含搜索结果的工具结果
+            WebSearchToolResult: Tool result containing search results
         """
         try:
-            # 获取参数
+            # getparameters
             query = params.query
             num_results = params.num_results
             language = params.language
@@ -433,18 +433,18 @@ class WebSearch(BaseTool[WebSearchParams]):
             safe_search = params.safe_search
             time_period = params.time_period
 
-            # 验证参数
+            # Validate parameters
             if not query:
-                return WebSearchToolResult(content="搜索查询不能为空")
+                return WebSearchToolResult(content="Search query cannot be empty")
 
             if num_results > MAX_RESULTS:
                 num_results = MAX_RESULTS
 
-            # 记录搜索请求
+            # Log search request
             api_type = "Tavily" if self.use_tavily else "Bing"
-            logger.info(f"执行{api_type}互联网搜索: 查询数量={len(query)}, 每个查询结果数量={num_results}")
+            logger.info(f"Executing {api_type} web search: query_count={len(query)}, results_per_query={num_results}")
 
-            # 并发执行所有查询
+            # Execute all queries in parallel
             tasks = [
                 self._perform_search(
                     query=q,
@@ -458,14 +458,14 @@ class WebSearch(BaseTool[WebSearchParams]):
             ]
             all_results = await asyncio.gather(*tasks)
 
-            # 创建结构化结果
+            # Build structured result
             result = self._handle_queries_results(query, all_results)
 
             if len(query) > 1:
-                message = f"我已从搜索引擎中分别搜索了: {', '.join(query)}"
+                message = f"Searched individually for: {', '.join(query)}"
             else:
-                message = f"我已从搜索引擎中搜索了: {query[0]}"
-            # 设置输出文本
+                message = f"Searched: {query[0]}"
+            # Set output text
             output_dict = {
                 "message": message,
                 "results": result.output_results_to_dict()
@@ -475,23 +475,23 @@ class WebSearch(BaseTool[WebSearchParams]):
             return result
 
         except Exception as e:
-            logger.exception(f"搜索操作失败: {e!s}")
-            return WebSearchToolResult(error=f"搜索操作失败: {e!s}")
+            logger.exception(f"Search action failed: {e!s}")
+            return WebSearchToolResult(error=f"Search action failed: {e!s}")
 
     def _handle_queries_results(self, queries: List[str], all_results: List[List[Dict[str, Any]]]) -> WebSearchToolResult:
         """
-        格式化多个查询的搜索结果
+        Format search results for multiple queries
 
         Args:
-            queries: 查询字符串列表
-            all_results: 每个查询对应的搜索结果列表
+            queries: List of query strings
+            all_results: Search results list per query
 
         Returns:
-            WebSearchToolResult: 包含所有格式化搜索结果的工具结果
+            WebSearchToolResult: Tool result containing formatted search results
         """
         result = WebSearchToolResult(content="")
 
-        # 格式化所有结果
+        # Format all results
         for q, search_results in zip(queries, all_results):
             result.set_output_results(q, search_results)
             result.set_search_results(q, search_results)
@@ -501,9 +501,9 @@ class WebSearch(BaseTool[WebSearchParams]):
     async def _perform_search(
         self, query: str, num_results: int, language: str, region: str, safe_search: bool, time_period: Optional[str]
     ) -> List[Dict[str, Any]]:
-        """执行实际的搜索请求，根据配置使用 Bing 或 Tavily"""
+        """Perform actual search request using Bing or Tavily based on configuration."""
 
-        # 检查是否使用 Tavily 搜索
+        # Decide engine
         if self.use_tavily:
             return await self._perform_tavily_search(
                 query=query,
@@ -526,21 +526,21 @@ class WebSearch(BaseTool[WebSearchParams]):
     async def _perform_bing_search(
         self, query: str, num_results: int, language: str, region: str, safe_search: bool, time_period: Optional[str]
     ) -> List[Dict[str, Any]]:
-        """执行 Bing 搜索请求"""
-        # 设置搜索参数
+        """Execute Bing search request"""
+        # Set search parameters
         search_params = {
             "count": num_results,
             "setLang": language,
             "mkt": f"{language}-{region}",
         }
 
-        # 设置安全搜索
+        # Set safe search
         if safe_search:
             search_params["safeSearch"] = "Strict"
         else:
             search_params["safeSearch"] = "Off"
 
-        # 设置时间范围
+        # Set time period
         if time_period:
             if time_period == "day":
                 search_params["freshness"] = "Day"
@@ -550,22 +550,22 @@ class WebSearch(BaseTool[WebSearchParams]):
                 search_params["freshness"] = "Month"
 
         try:
-            # 创建 WebSearchAPI 实例
+            # Create WebSearchAPI instance
             search = WebSearchAPI(
-                k=num_results,  # 返回结果数量
+                k=num_results,  # Number of results to return
                 search_kwargs={
-                    "mkt": f"{language}-{region}",  # 设置区域
-                    "setLang": language,  # 设置语言
+                    "mkt": f"{language}-{region}",  # Set region
+                    "setLang": language,  # Set language
                 },
             )
 
-            # 执行搜索请求
-            # 获取结构化结果
+            # Execute search request
+            # Get structured results
             search_results = await search.results(query, num_results)
 
-            # 增强结果，添加来源网站和favicon
+            # Enrich results with source domain and favicon
             for item in search_results:
-                # 提取域名（来源网站）
+                # Extract domain (source site)
                 domain = self._extract_domain(item["link"])
                 item["domain"] = domain
                 item["icon_url"] = self._get_favicon_url(domain)
@@ -573,17 +573,17 @@ class WebSearch(BaseTool[WebSearchParams]):
             return search_results
 
         except Exception as e:
-            logger.error(f"必应搜索API请求失败: {e!s}")
-            return []  # 返回空结果
+            logger.error(f"Bing search API request failed: {e!s}")
+            return []  # Return empty results
 
     async def _perform_tavily_search(
         self, query: str, num_results: int, language: str, region: str, safe_search: bool, time_period: Optional[str]
     ) -> List[Dict[str, Any]]:
-        """执行 Tavily 搜索请求"""
-        # 设置搜索参数
+        """Execute Tavily search request"""
+        # Set search parameters
         search_kwargs = {}
 
-        # 设置时间范围
+        # Set time period
         if time_period:
             if time_period == "day":
                 search_kwargs["days"] = 1
@@ -593,22 +593,22 @@ class WebSearch(BaseTool[WebSearchParams]):
                 search_kwargs["days"] = 30
 
         try:
-            # 创建 TavilySearchAPI 实例
+            # Create TavilySearchAPI instance
             search = TavilySearchAPI(
-                k=num_results,  # 返回结果数量
+                k=num_results,  # Number of results to return
                 search_kwargs=search_kwargs
             )
 
-            # 执行搜索请求
+            # Execute search request
             search_results = await search.results(query, num_results)
             return search_results
 
         except Exception as e:
-            logger.error(f"Tavily搜索API请求失败: {e!s}")
-            return []  # 返回空结果
+            logger.error(f"Tavily search API request failed: {e!s}")
+            return []  # Return empty results
 
     def _extract_domain(self, url: str) -> str:
-        """从URL中提取域名"""
+        """Extract domain from URL"""
         try:
             domain = re.search(r"https?://([^/]+)", url)
             if domain:
@@ -618,20 +618,20 @@ class WebSearch(BaseTool[WebSearchParams]):
             return url
 
     def _get_favicon_url(self, domain: str) -> str:
-        """生成网站favicon的URL"""
+        """Generate website favicon URL"""
         return f"https://{domain}/favicon.ico"
 
     async def get_tool_detail(self, tool_context: ToolContext, result: ToolResult, arguments: Dict[str, Any] = None) -> Optional[ToolDetail]:
         """
-        生成工具详情，用于前端展示
+        Generate tool detail for frontend display
 
         Args:
-            tool_context: 工具上下文
-            result: 工具结果
-            arguments: 工具参数
+            tool_context: tool context
+            result: Tool result
+            arguments: Tool parameters
 
         Returns:
-            Optional[ToolDetail]: 工具详情
+            Optional[ToolDetail]: Tool detail
         """
         if not result.content:
             return None
@@ -640,29 +640,29 @@ class WebSearch(BaseTool[WebSearchParams]):
             if not isinstance(result, WebSearchToolResult):
                 return None
 
-            # 使用工厂创建展示详情
+            # Use factory to create display detail
             return ToolDetailFactory.create_search_detail_from_search_results(
                 search_results=result.search_results,
             )
         except Exception as e:
-            logger.error(f"生成工具详情失败: {e!s}")
+            logger.error(f"Generate tool detail failed: {e!s}")
             return None
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
-        """获取工具调用后的友好动作和备注"""
+        """Friendly action/remark after tool call"""
         if not arguments or "query" not in arguments:
             return {
-                "action": "互联网搜索",
-                "remark": "已完成搜索"
+                "action": "Web search",
+                "remark": "Search completed"
             }
 
         query = arguments["query"]
         if len(query) > 1:
             return {
-                "action": "互联网搜索",
-                "remark": f"搜索: {', '.join(query)}"
+                "action": "Web search",
+                "remark": f"Searched: {', '.join(query)}"
             }
         return {
-            "action": "互联网搜索",
-            "remark": f"搜索: {query[0]}"
+            "action": "Web search",
+            "remark": f"Searched: {query[0]}"
         }

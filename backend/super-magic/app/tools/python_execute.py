@@ -16,51 +16,51 @@ logger = get_logger(__name__)
 
 
 class PythonExecuteParams(BaseToolParams):
-    """Python代码执行参数
+    """Python code execution parameters
 
-    注意：code 和 file_path 参数只能二选一，不能同时提供，也不能同时为空：
-    - 当提供 code 参数时，将执行代码字符串
-    - 当提供 file_path 参数时，将执行指定路径的Python文件
+    Note: code and file_path parameters are mutually exclusive, cannot be provided simultaneously, and cannot both be empty:
+    - When code parameter is provided, the code string will be executed
+    - When file_path parameter is provided, the Python file at the specified path will be executed
     """
     code: Optional[str] = Field(
         None,
-        description="要执行的Python代码字符串，与file_path二选一，不能同时提供"
+        description="Python code string to execute, mutually exclusive with file_path, cannot be provided simultaneously"
     )
     file_path: Optional[str] = Field(
         None,
-        description="要执行的Python文件路径，与code二选一，不能同时提供"
+        description="Path to Python file to execute, mutually exclusive with code, cannot be provided simultaneously"
     )
     cwd: Optional[str] = Field(
         None,
-        description="命令执行的工作目录（可选）"
+        description="Working directory for command execution (optional)"
     )
     timeout: int = Field(
         60,
-        description="执行超时时间（秒），默认60秒"
+        description="Execution timeout (seconds), default 60 seconds"
     )
     args: Optional[str] = Field(
         None,
-        description="传递给Python脚本的命令行参数（可选）"
+        description="Command line arguments to pass to Python script (optional)"
     )
 
 
 @tool()
 class PythonExecute(WorkspaceGuardTool[PythonExecuteParams]):
     """
-    执行Python代码的工具，支持代码字符串和文件路径执行
+    Tool for executing Python code, supports execution of code strings and file paths
 
-    使用场景：
-    - 执行Python代码字符串
-    - 执行Python脚本文件
-    - 进行数据处理
-    - 测试功能实现
+    Use cases:
+    - Execute Python code strings
+    - Execute Python script files
+    - Perform data processing
+    - Test feature implementations
 
-    注意：
-    - code 和 file_path 参数只能二选一，不能同时提供
-    - 代码将在新的Python解释器进程中执行
-    - 支持设置工作目录
-    - 可以设置超时时间
-    - 可以向脚本传递命令行参数
+    Notes:
+    - code and file_path parameters are mutually exclusive, cannot be provided simultaneously
+    - Code will be executed in a new Python interpreter process
+    - Supports setting working directory
+    - Can set timeout duration
+    - Can pass command line arguments to scripts
     """
 
     async def execute(
@@ -69,80 +69,80 @@ class PythonExecute(WorkspaceGuardTool[PythonExecuteParams]):
         params: PythonExecuteParams
     ) -> ToolResult:
         """
-        执行提供的Python代码或脚本文件，带有超时限制。
+        Execute provided Python code or script file with timeout limit.
 
         Args:
-            tool_context: 工具上下文
-            params: 参数对象，包含要执行的代码或文件路径和超时设置
+            tool_context: Tool context
+            params: Parameter object containing code or file path to execute and timeout settings
 
         Returns:
-            ToolResult: 包含执行输出或错误信息。
+            ToolResult: Contains execution output or error messages.
         """
-        # 验证参数
+        # Validate parameters
         if not params.code and not params.file_path:
-            return ToolResult(error="参数错误：必须提供code或file_path参数之一")
+            return ToolResult(error="Parameter error: must provide either code or file_path parameter")
 
         if params.code and params.file_path:
-            return ToolResult(error="参数错误：code和file_path参数不能同时提供，请只选择一种方式执行Python代码")
+            return ToolResult(error="Parameter error: code and file_path parameters cannot be provided simultaneously, please choose only one method to execute Python code")
 
         try:
-            # 处理工作目录
+            # Handle working directory
             work_dir = self.base_dir
             if params.cwd:
-                # 使用父类方法获取安全的工作目录路径
+                # Use parent class method to get safe working directory path
                 cwd_path, error = self.get_safe_path(params.cwd)
                 if error:
-                    return ToolResult(error=f"工作目录错误：{error}")
+                    return ToolResult(error=f"Working directory error: {error}")
                 work_dir = cwd_path
 
-            # 确保工作目录存在
+            # Ensure working directory exists
             if not work_dir.exists():
                 return ToolResult(
-                    error=f"工作目录错误：目录不存在 - {work_dir}"
+                    error=f"Working directory error: directory does not exist - {work_dir}"
                 )
 
-            # 根据参数类型准备执行命令
+            # Prepare execution command based on parameter type
             if params.file_path:
-                # 验证文件路径安全性
+                # Validate file path safety
                 file_path, error = self.get_safe_path(params.file_path)
                 if error:
-                    return ToolResult(error=f"文件路径错误：{error}")
+                    return ToolResult(error=f"File path error: {error}")
 
-                # 确保文件存在
+                # Ensure file exists
                 if not file_path.exists():
                     return ToolResult(
-                        error=f"文件错误：Python文件不存在 - {file_path}"
+                        error=f"File error: Python file does not exist - {file_path}"
                     )
 
-                # 构建命令：python file_path [args]
+                # Build command: python file_path [args]
                 cmd_args = ["python", str(file_path)]
                 if params.args:
                     cmd_args.extend(params.args.split())
 
-                logger.debug(f"执行Python文件: {file_path}, 工作目录: {work_dir}")
+                logger.debug(f"Executing Python file: {file_path}, working directory: {work_dir}")
 
             else:
-                # 执行代码字符串
-                # 创建临时Python文件
+                # Execute code string
+                # Create temporary Python file
                 temp_file = work_dir / "_temp_code.py"
                 try:
                     with open(temp_file, "w", encoding="utf-8") as f:
                         f.write(params.code)
 
-                    # 构建命令：python _temp_code.py [args]
+                    # Build command: python _temp_code.py [args]
                     cmd_args = ["python", str(temp_file)]
                     if params.args:
                         cmd_args.extend(params.args.split())
 
-                    logger.debug(f"执行Python代码字符串, 工作目录: {work_dir}")
+                    logger.debug(f"Executing Python code string, working directory: {work_dir}")
 
                 except Exception as e:
-                    logger.error(f"创建临时Python文件失败: {e}")
+                    logger.error(f"Failed to create temporary Python file: {e}")
                     return ToolResult(
-                        error=f"临时文件错误：无法创建临时Python文件 - {e}"
+                        error=f"Temporary file error: Unable to create temporary Python file - {e}"
                     )
 
-            # 创建进程
+            # Create process
             try:
                 env_vars = {
                     **os.environ,
@@ -160,7 +160,7 @@ class PythonExecute(WorkspaceGuardTool[PythonExecuteParams]):
                     env=env_vars,
                 )
 
-                # 等待进程完成，带超时
+                # Wait for process to complete with timeout
                 stdout, stderr = await asyncio.wait_for(
                     process.communicate(), timeout=params.timeout
                 )
@@ -168,52 +168,52 @@ class PythonExecute(WorkspaceGuardTool[PythonExecuteParams]):
                 stderr_str = stderr.decode(errors='replace').strip() if stderr else ""
                 exit_code = process.returncode
 
-                # 构建结果消息，使其更结构化和人类可读
-                execution_type = "文件执行" if params.file_path else "代码执行"
-                execution_target = params.file_path if params.file_path else "代码片段"
+                # Build result message to make it more structured and human-readable
+                execution_type = "File execution" if params.file_path else "Code execution"
+                execution_target = params.file_path if params.file_path else "code snippet"
 
-                # 构建更友好、结构化的结果消息
+                # Build more friendly and structured result message
                 if exit_code == 0:
-                    status = "成功"
+                    status = "Success"
                     result_sections = []
 
-                    # 添加基本信息和输出内容
+                    # Add basic information and output content
                     header = f"{execution_type}: {execution_target}"
                     if params.args:
-                        header += f" (参数: {params.args})"
+                        header += f" (arguments: {params.args})"
 
                     result_sections.append(header)
-                    result_sections.append(f"状态: {status}")
+                    result_sections.append(f"Status: {status}")
 
-                    # 添加输出内容（如果有）
+                    # Add output content (if any)
                     if stdout_str:
-                        result_sections.append(f"输出:\n{stdout_str}")
+                        result_sections.append(f"Output:\n{stdout_str}")
                     else:
-                        result_sections.append("输出: (无)")
+                        result_sections.append("Output: (none)")
 
                     result_message = "\n".join(result_sections)
                 else:
-                    status = f"失败 (退出码: {exit_code})"
+                    status = f"Failed (exit code: {exit_code})"
                     result_sections = []
 
-                    # 添加基本信息
+                    # Add basic information
                     header = f"{execution_type}: {execution_target}"
                     if params.args:
-                        header += f" (参数: {params.args})"
+                        header += f" (arguments: {params.args})"
 
                     result_sections.append(header)
-                    result_sections.append(f"状态: {status}")
+                    result_sections.append(f"Status: {status}")
 
-                    # 添加输出和错误信息
+                    # Add output and error messages
                     if stdout_str:
-                        result_sections.append(f"标准输出:\n{stdout_str}")
+                        result_sections.append(f"Standard output:\n{stdout_str}")
 
                     if stderr_str:
-                        result_sections.append(f"错误信息:\n{stderr_str}")
+                        result_sections.append(f"Error message:\n{stderr_str}")
 
                     result_message = "\n".join(result_sections)
 
-                # 构造详细信息JSON并保存到system字段（用于系统内部使用，不直接展示给用户）
+                # Build detailed information JSON and save to system field (for internal system use, not directly displayed to users)
                 execution_info = {
                     "command": " ".join(cmd_args),
                     "execution_type": "file" if params.file_path else "code",
@@ -230,10 +230,10 @@ class PythonExecute(WorkspaceGuardTool[PythonExecuteParams]):
 
                 if params.code and temp_file.exists():
                     try:
-                        # 删除临时文件
+                        # Delete temporary file
                         os.unlink(temp_file)
                     except Exception as e:
-                        logger.warning(f"删除临时文件失败: {e}")
+                        logger.warning(f"Failed to delete temporary file: {e}")
 
                 if exit_code == 0:
                     result = ToolResult(
@@ -247,7 +247,7 @@ class PythonExecute(WorkspaceGuardTool[PythonExecuteParams]):
                 return result
 
             except asyncio.TimeoutError:
-                # 超时，强制终止进程
+                # Timeout, force terminate process
                 if process.returncode is None:
                     try:
                         process.kill()
@@ -257,18 +257,18 @@ class PythonExecute(WorkspaceGuardTool[PythonExecuteParams]):
 
                 if params.code and temp_file.exists():
                     try:
-                        # 删除临时文件
+                        # Delete temporary file
                         os.unlink(temp_file)
                     except Exception as e:
-                        logger.warning(f"删除临时文件失败: {e}")
+                        logger.warning(f"Failed to delete temporary file: {e}")
 
-                execution_type = "文件执行" if params.file_path else "代码执行"
-                execution_target = params.file_path if params.file_path else "代码片段"
+                execution_type = "File execution" if params.file_path else "Code execution"
+                execution_target = params.file_path if params.file_path else "code snippet"
 
                 timeout_message = (
                     f"{execution_type}: {execution_target}\n"
-                    f"状态: 执行超时 ({params.timeout}秒)\n"
-                    f"原因: 代码执行时间超过了设定的时间限制"
+                    f"Status: Execution timeout ({params.timeout} seconds)\n"
+                    f"Reason: Code execution time exceeded the set time limit"
                 )
 
                 return ToolResult(
@@ -276,11 +276,11 @@ class PythonExecute(WorkspaceGuardTool[PythonExecuteParams]):
                 )
 
         except Exception as e:
-            logger.exception(f"执行Python代码时出错: {e}")
+            logger.exception(f"Error executing Python code: {e}")
             error_message = (
-                f"执行错误\n"
-                f"错误类型: {type(e).__name__}\n"
-                f"错误详情: {e!s}"
+                f"Execution error\n"
+                f"Error type: {type(e).__name__}\n"
+                f"Error details: {e!s}"
             )
             return ToolResult(
                 error=error_message
@@ -288,70 +288,70 @@ class PythonExecute(WorkspaceGuardTool[PythonExecuteParams]):
 
     async def get_tool_detail(self, tool_context: ToolContext, result: ToolResult, arguments: Dict[str, Any] = None) -> Optional[ToolDetail]:
         """
-        根据工具执行结果获取对应的ToolDetail
+        Get corresponding ToolDetail based on tool execution result
 
         Args:
-            tool_context: 工具上下文
-            result: 工具执行的结果
-            arguments: 工具执行的参数字典
+            tool_context: Tool context
+            result: Tool execution result
+            arguments: Tool execution parameter dictionary
 
         Returns:
-            Optional[ToolDetail]: 工具详情对象，可能为None
+            Optional[ToolDetail]: Tool detail object, may be None
         """
         if not result.ok and not result.error:
             return None
 
-        # 获取代码内容
+        # Get code content
         code = ""
         if arguments.get("file_path"):
-            # 如果是文件执行，读取文件内容
+            # If file execution, read file content
             file_path, error = self.get_safe_path(arguments.get("file_path"))
             if not error and file_path.exists():
                 try:
                     with open(file_path, "r", encoding="utf-8") as f:
                         code = f.read()
                 except Exception as e:
-                    logger.warning(f"读取文件内容失败: {e}")
-                    code = f"# 无法读取文件内容: {file_path}\n# 错误: {e}"
+                    logger.warning(f"Failed to read file content: {e}")
+                    code = f"# Unable to read file content: {file_path}\n# Error: {e}"
             else:
-                code = f"# 文件不存在或路径错误: {arguments.get('file_path')}"
+                code = f"# File does not exist or path is incorrect: {arguments.get('file_path')}"
         elif arguments.get("code"):
-            # 如果是代码执行，直接使用代码参数
+            # If code execution, use code parameter directly
             code = arguments.get("code")
         else:
-            code = "# 没有提供代码内容"
+            code = "# No code content provided"
 
-        # 获取命令行参数
+        # Get command line arguments
         args = arguments.get("args")
 
-        # 尝试从result.system获取详细信息
+        # Try to get detailed information from result.system
         execution_info = {}
         if result.system:
             try:
                 execution_info = json.loads(result.system)
             except Exception as e:
-                logger.warning(f"解析执行信息失败: {e}")
+                logger.warning(f"Failed to parse execution information: {e}")
 
-        # 获取stdout、stderr和exit_code
+        # Get stdout, stderr and exit_code
         stdout = execution_info.get("stdout", "")
         stderr = execution_info.get("stderr", "")
         exit_code = execution_info.get("exit_code", 0)
         success = execution_info.get("success", result.ok)
 
-        # 如果没有从system中获取到信息，则使用result中的内容
+        # If no information obtained from system, use content from result
         if not stdout and not stderr:
             if result.ok:
                 stdout = result.content
             else:
                 stderr = result.error
 
-        # 创建脚本执行内容对象
+        # Create script execution content object
         script_content = FileContent(
             file_name="",
             content=code,
         )
 
-        # 返回工具详情
+        # Return tool details
         return ToolDetail(
             type=DisplayType.CODE,
             data=script_content
@@ -359,10 +359,10 @@ class PythonExecute(WorkspaceGuardTool[PythonExecuteParams]):
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
         """
-        获取工具调用后的友好动作和备注
+        Get friendly action and remark after tool call
         """
-        action_type = "执行Python文件" if arguments.get("file_path") else "执行Python代码"
-        action_target = arguments.get("file_path", "代码片段")
+        action_type = "Execute Python file" if arguments.get("file_path") else "Execute Python code"
+        action_target = arguments.get("file_path", "code snippet")
 
         return {
             "action": f"{action_type}",

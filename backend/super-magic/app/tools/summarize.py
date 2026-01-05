@@ -14,38 +14,38 @@ from app.tools.read_file import ReadFile, ReadFileParams
 
 logger = get_logger(__name__)
 
-# 默认最大 Token 数
+# Default maximum token count
 DEFAULT_MAX_TOKENS = 10000
 
 
 class SummarizeParams(BaseToolParams):
-    """摘要工具参数"""
+    """Summary tool parameters"""
     file_path: str = Field(
         ...,
-        description="需要生成摘要的文件路径"
+        description="File path for which to generate summary"
     )
     max_length: int = Field(
         default=300,
-        description="摘要的最大长度（字符数）"
+        description="Maximum length of summary (number of characters)"
     )
 
 
 @tool()
 class Summarize(BaseTool[SummarizeParams]):
     """
-    摘要工具，用于从文本文件内容生成简洁的摘要。
+    Summary tool for generating concise summaries from text file content.
 
-    适用于包括但不限于以下场景：
-    - 长篇文章的内容概括
-    - 研究论文的摘要生成
-    - 会议记录的要点提取
-    - 新闻文章的核心信息提取
+    Applicable to the following scenarios:
+    - Content summarization of long articles
+    - Summary generation for research papers
+    - Key points extraction from meeting minutes
+    - Core information extraction from news articles
 
-    要求：
-    - 摘要应基于文件内容，不要添加不在原文中的信息
-    - 摘要应保留原文的关键信息和主要观点
+    Requirements:
+    - Summary should be based on file content, do not add information not in the original
+    - Summary should preserve key information and main viewpoints of the original
 
-    调用示例：
+    Usage example:
     ```
     {
         "file_path": "./webview_report/article.md",
@@ -65,33 +65,33 @@ class Summarize(BaseTool[SummarizeParams]):
         self,
         params: SummarizeParams
     ) -> ToolResult:
-        """执行摘要并返回结果。
+        """Execute summary and return result.
 
         Args:
-            tool_context: 工具上下文
-            params: 摘要参数对象
+            tool_context: Tool context
+            params: Summary parameters object
 
         Returns:
-            ToolResult: 包含摘要结果的工具结果
+            ToolResult: Tool result containing summary result
         """
         try:
-            # 获取参数
+            # Get parameters
             file_path = params.file_path
             max_length = params.max_length
             model_id = "deepseek-chat"
 
-            # 记录摘要请求
-            logger.info(f"执行摘要: 文件路径={file_path}, 最大长度={max_length}, 模型={model_id}")
+            # Log summary request
+            logger.info(f"execute/executionsummary: file path={file_path}, maximumlength={max_length}, model={model_id}")
 
-            # 读取文件内容
+            # Read file content
             file_content = await self._read_file(file_path)
             if not file_content:
-                return ToolResult(error=f"无法读取文件: {file_path}")
+                return ToolResult(error=f"Unable to read file: {file_path}")
 
-            # 提取文件名用于显示
+            # Extract file name for display
             file_name = file_path.split('/')[-1]
 
-            # 调用内部方法处理摘要
+            # Call internal method to process summary
             summary_content = await self.summarize_content(
                 content=file_content,
                 title=file_name,
@@ -100,71 +100,71 @@ class Summarize(BaseTool[SummarizeParams]):
             )
 
             if not summary_content:
-                return ToolResult(error="生成摘要失败")
+                return ToolResult(error="Generate summary failed")
 
-            # 创建结果
+            # Create result
             result = ToolResult(
-                content=f"## 文件摘要: {file_name}\n\n{summary_content}",
+                content=f"## File summary: {file_name}\n\n{summary_content}",
                 extra_info={"file_path": file_path, "file_name": file_name}
             )
 
             return result
 
         except Exception as e:
-            logger.exception(f"摘要操作失败: {e!s}")
-            return ToolResult(error=f"摘要操作失败: {e!s}")
+            logger.exception(f"Summary operation failed: {e!s}")
+            return ToolResult(error=f"Summary operation failed: {e!s}")
 
     async def summarize_content(
         self,
         content: str,
-        title: str = "文档",
+        title: str = "Document",
         max_length: int = 300,
         model_id: str = "deepseek-chat"
     ) -> Optional[str]:
-        """直接对文本内容生成摘要，无需文件读取
+        """Directly generate summary for text content without file reading
 
         Args:
-            tool_context: 工具上下文
-            content: 需要摘要的文本内容
-            title: 内容标题
-            max_length: 摘要最大长度
-            temperature: 模型温度
-            model_id: 使用的模型ID
+            tool_context: Tool context
+            content: Text content to summarize
+            title: Content title
+            max_length: Summary maximum length
+            temperature: Model temperature
+            model_id: Model ID to use
 
         Returns:
-            Optional[str]: 摘要内容，失败则返回None
+            Optional[str]: Summary content, returns None if failed
         """
         try:
-            # 在这里进行截断
+            # Truncate here
             truncated_content, is_truncated = truncate_text_by_token(content, DEFAULT_MAX_TOKENS)
             if is_truncated:
-                logger.warning(f"摘要内容被截断: title='{title}', original_length={len(content)}, truncated_length={len(truncated_content)}")
+                logger.warning(f"Summary content was truncated: title='{title}', original_length={len(content)}, truncated_length={len(truncated_content)}")
 
-            # 获取并格式化当前时间上下文
-            current_time_str = datetime.now().strftime("%Y年%m月%d日 %H:%M:%S 星期{}(第%W周)".format(
-                ["一", "二", "三", "四", "五", "六", "日"][datetime.now().weekday()]))
+            # Get and format current time context
+            current_time_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S Weekday {} (Week #%W)".format(
+                ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][datetime.now().weekday()]))
 
-            # 构建提示语
-            prompt = f"""请为以下文本内容生成一个简洁明了的摘要，控制在 {max_length} 字符以内。
-摘要应包含文档的主要观点、关键信息和重要结论。
-请确保摘要是对原始内容的忠实概括，不要添加原文中不存在的信息。
+            # Build prompt
+            prompt = f"""Please generate a concise and clear summary for the following text content, keeping it within {max_length} characters.
+The summary should include the main points, key information, and important conclusions of the document.
+Please ensure the summary is a faithful overview of the original content, without adding information not present in the original text.
 
-当前时间: {current_time_str}
+Current time: {current_time_str}
 
-文档标题: {title}
+Document title: {title}
 
-文本内容:
+Text content:
 ```
 {truncated_content}
 ```
 
-请提供摘要:"""
+Please provide the summary:"""
 
-            # 构建消息
+            # Build messages
             messages = [
                 {
                     "role": "system",
-                    "content": "你是一个专业的文本摘要助手，擅长提取文本的核心内容并生成简洁明了的摘要。"
+                    "content": "You are a professional text summarization assistant, skilled at extracting core content from text and generating concise and clear summaries."
                 },
                 {
                     "role": "user",
@@ -172,87 +172,87 @@ class Summarize(BaseTool[SummarizeParams]):
                 }
             ]
 
-            # 请求模型
+            # Request model
             response = await LLMFactory.call_with_tool_support(
                 model_id=model_id,
                 messages=messages,
-                tools=None,  # 不需要工具支持
+                tools=None,  # No tool support needed
                 stop=None,
             )
 
-            # 处理响应
+            # Process response
             if not response or not response.choices or len(response.choices) == 0:
-                logger.error("没有从模型收到有效响应")
+                logger.error("No valid response received from model")
                 return None
 
-            # 获取摘要内容
+            # Get summary content
             summary_content = response.choices[0].message.content
 
-            # 如果内容被截断，添加提示
+            # If content was truncated, add notice
             if is_truncated:
-                summary_content += "\n\n(注：此摘要基于截断内容生成)"
+                summary_content += "\n\n(Note: This summary was generated based on truncated content)"
 
             return summary_content if summary_content else None
 
         except Exception as e:
-            logger.exception(f"处理内容摘要失败: {e!s}")
+            logger.exception(f"Content summary processing failed: {e!s}")
             return None
 
     async def get_tool_detail(self, tool_context: ToolContext, result: ToolResult, arguments: Dict[str, Any] = None) -> Optional[ToolDetail]:
         """
-        生成工具详情，用于前端展示
+        Generate tool details for frontend display
 
         Args:
-            tool_context: 工具上下文
-            result: 工具结果
-            arguments: 工具参数
+            tool_context: Tool context
+            result: Tool result
+            arguments: Tool parameters
 
         Returns:
-            Optional[ToolDetail]: 工具详情
+            Optional[ToolDetail]: Tool details
         """
         if not result.content:
             return None
 
         try:
-            file_name = result.extra_info.get("file_name", "文件") if result.extra_info else "文件"
+            file_name = result.extra_info.get("file_name", "file") if result.extra_info else "file"
 
-            # 返回Markdown格式的摘要内容
+            # Return Markdown formatted summary content
             return ToolDetail(
                 type=DisplayType.MD,
                 data=FileContent(
-                    file_name=f"{file_name}_摘要.md",
+                    file_name=f"{file_name}_summary.md",
                     content=result.content
                 )
             )
         except Exception as e:
-            logger.error(f"生成工具详情失败: {e!s}")
+            logger.error(f"Generate tool details failed: {e!s}")
             return None
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
-        """获取工具调用后的友好动作和备注"""
+        """Get friendly action and remark after tool call"""
         if not arguments or "file_path" not in arguments:
             return {
-                "action": "生成摘要",
-                "remark": "已完成摘要生成"
+                "action": "Generate summary",
+                "remark": "Completed summary generation"
             }
 
         file_path = arguments["file_path"]
-        # 提取文件名
+        # Extract file name
         file_name = file_path.split('/')[-1]
         return {
-            "action": "生成摘要",
-            "remark": f"已为 {file_name} 生成摘要"
+            "action": "Generate summary",
+            "remark": f"Generated summary for {file_name}"
         }
 
     async def _read_file(self, file_path: str) -> Optional[str]:
-        """读取文件内容
+        """Read file content
 
         Args:
-            tool_context: 工具上下文
-            file_path: 文件路径
+            tool_context: Tool context
+            file_path: File path
 
         Returns:
-            Optional[str]: 文件内容，如果读取失败则返回None
+            Optional[str]: File content, returns None if read failed
         """
         try:
             read_file_tool = ReadFile()
@@ -266,8 +266,8 @@ class Summarize(BaseTool[SummarizeParams]):
             if result.ok:
                 return result.content
             else:
-                logger.error(f"读取文件 {file_path} 失败: {result.content}")
+                logger.error(f"Read file {file_path} failed: {result.content}")
                 return None
         except Exception as e:
-            logger.error(f"读取文件 {file_path} 时发生异常: {e}")
+            logger.error(f"Exception occurred while reading file {file_path}: {e}")
             return None

@@ -13,72 +13,72 @@ from app.tools.workspace_guard_tool import WorkspaceGuardTool
 
 logger = get_logger(__name__)
 
-# 设置最大Token限制
+# Set maximum token limit
 MAX_TOTAL_TOKENS = 30000
 
 class ReadFilesParams(BaseToolParams):
-    """批量读取文件参数"""
-    files: List[str] = Field(..., description="要读取的文件路径列表，相对于工作目录或绝对路径")
-    offset: int = Field(0, description="开始读取的行号（从0开始），适用于所有文件")
-    limit: int = Field(200, description="要读取的行数或页数，默认200行，如果要读取整个文件，请设置为-1")
+    """Batch file reading parameters"""
+    files: List[str] = Field(..., description="List of file paths to read, relative to working directory or absolute path")
+    offset: int = Field(0, description="Starting line number for reading (starting from 0), applies to all files")
+    limit: int = Field(200, description="Number of lines or pages to read, default 200 lines, set to -1 to read entire file")
 
 
 class FileReadingResult(BaseModel):
-    """单个文件的读取结果"""
+    """Single file reading result"""
     file_path: str
-    content: str  # 完整内容（包含元信息）
+    content: str  # Complete content (including metadata)
     is_success: bool
     error_message: Optional[str] = None
-    tokens: int = 0  # token数量，用于计算截断
+    tokens: int = 0  # Token count for calculating truncation
 
 
 @tool()
 class ReadFiles(WorkspaceGuardTool[ReadFilesParams]):
     """
-    批量读取文件内容工具
+    Batch file reading tool
 
-    这个工具可以一次性读取多个指定路径的文件内容，所有文件使用相同的读取参数。
-    支持的文件类型与 ReadFile 工具相同，包括文本文件、PDF和DOCX等格式。
+    This tool can read the contents of multiple specified file paths at once, with all files using the same reading parameters.
+    Supported file types are the same as the ReadFile tool, including text files, PDF and DOCX formats.
 
-    支持的文件类型：
-    - 文本文件（.txt、.md、.py、.js等）
-    - PDF文件（.pdf）
-    - Word文档（.docx）
-    - Jupyter Notebook（.ipynb）
-    - Excel文件（.xls、.xlsx）
-    - CSV文件（.csv）
+    Supported file types:
+    - Text files (.txt, .md, .py, .js, etc.)
+    - PDF files (.pdf)
+    - Word documents (.docx)
+    - Jupyter Notebook (.ipynb)
+    - Excel files (.xls, .xlsx)
+    - CSV files (.csv)
 
-    注意：
-    - 读取工作目录外的文件被禁止
-    - 二进制文件可能无法正确读取
-    - 过大的文件将被拒绝读取，你必须分段读取部分内容来理解文件概要
-    - 对于Excel和CSV文件，建议使用代码处理数据而不是直接使用文本内容
-    - 为避免内容过长，总token数超过30000时会自动截断内容
+    Notes:
+    - Reading files outside the working directory is prohibited
+    - Binary files may not be read correctly
+    - Oversized files will be rejected for reading, you must read parts of the content in segments to understand the file overview
+    - For Excel and CSV files, it is recommended to use code to process data rather than using text content directly
+    - To avoid long content, the total token count exceeding 30000 will be automatically truncated
     """
 
     async def execute(self, tool_context: ToolContext, params: ReadFilesParams) -> ToolResult:
         """
-        执行批量文件读取操作
+        Execute batch file reading operation
 
         Args:
-            tool_context: 工具上下文
-            params: 批量文件读取参数
+            tool_context: Tool context
+            params: Batch file reading parameters
 
         Returns:
-            ToolResult: 包含批量文件内容或错误信息
+            ToolResult: Contains batch file content or error information
         """
         if not params.files:
-            return ToolResult(error="没有指定要读取的文件")
+            return ToolResult(error="No files specified to read")
 
         results = []
         read_file_tool = ReadFile()
         read_failure_count = 0
         has_truncation = False
 
-        # 批量处理每个文件，收集结果
+        # Process each file in batch and collect results
         for filepath in params.files:
             try:
-                # 构造单文件读取参数
+                # Construct single file reading parameters
                 file_params = ReadFileParams(
                     file_path=filepath,
                     offset=params.offset,
@@ -86,15 +86,15 @@ class ReadFiles(WorkspaceGuardTool[ReadFilesParams]):
                     explanation=params.explanation if hasattr(params, 'explanation') else ""
                 )
 
-                # 调用 ReadFile 工具读取单个文件
+                # Call ReadFile tool to read single file
                 result = await read_file_tool.execute(tool_context, file_params)
 
                 if result.ok:
-                    # 直接使用 ReadFile 返回的完整内容（包含元信息）
+                    # Directly use complete content returned by ReadFile (including metadata)
                     content = result.content
                     tokens = num_tokens_from_string(content)
 
-                    # 创建文件读取结果对象
+                    # Create file reading result object
                     file_result = FileReadingResult(
                         file_path=filepath,
                         content=content,
@@ -108,46 +108,46 @@ class ReadFiles(WorkspaceGuardTool[ReadFilesParams]):
                         file_path=filepath,
                         content="",
                         is_success=False,
-                        error_message=result.content,  # 失败时，content 实际是错误信息
+                        error_message=result.content,  # When failed, content is actually error message
                         tokens=0
                     ))
                     read_failure_count += 1
             except Exception as e:
-                logger.exception(f"读取文件失败: {e!s}")
+                logger.exception(f"Failed to read file: {e!s}")
                 results.append(FileReadingResult(
                     file_path=filepath,
                     content="",
                     is_success=False,
-                    error_message=f"读取文件异常: {e!s}",
+                    error_message=f"File reading exception: {e!s}",
                     tokens=0
                 ))
                 read_failure_count += 1
 
-        # 检查是否需要截断内容以符合token限制
+        # Check if content needs to be truncated to comply with token limit
         total_content_tokens = sum(result.tokens for result in results if result.is_success)
 
-        # 为摘要预留token
-        header_tokens = 500  # 为头部预留的token
+        # Reserve tokens for summary
+        header_tokens = 500  # Tokens reserved for header
         available_tokens = MAX_TOTAL_TOKENS - header_tokens
 
-        # 如果内容token数超出限制，进行截断
+        # If content tokens exceed limit, perform truncation
         if total_content_tokens > available_tokens:
             has_truncation = True
-            logger.info(f"内容总token数({total_content_tokens})超出限制({available_tokens})，进行截断")
+            logger.info(f"Total content tokens ({total_content_tokens}) exceed limit ({available_tokens}), performing truncation")
             results = self._truncate_contents(results, available_tokens)
 
-        # 生成摘要信息
+        # Generate summary information
         total_files = len(params.files)
         success_count = total_files - read_failure_count
-        truncation_info = "，内容已截断" if has_truncation else ""
-        summary = f"共读取 {total_files} 个文件，成功: {success_count}，失败: {read_failure_count}{truncation_info}"
+        truncation_info = ", content truncated" if has_truncation else ""
+        summary = f"Total {total_files} files read, Success: {success_count}, Failed: {read_failure_count}{truncation_info}"
 
-        # 格式化最终结果
+        # Format final result
         formatted_result = self._format_results(results, summary, has_truncation)
 
-        # 记录实际token数
+        # Record actual token count
         actual_tokens = num_tokens_from_string(formatted_result)
-        logger.info(f"最终输出token数: {actual_tokens}")
+        logger.info(f"Final output tokens: {actual_tokens}")
 
         return ToolResult(
             content=formatted_result,
@@ -156,32 +156,32 @@ class ReadFiles(WorkspaceGuardTool[ReadFilesParams]):
 
     def _truncate_contents(self, results: List[FileReadingResult], available_tokens: int) -> List[FileReadingResult]:
         """
-        按比例截断内容以符合token限制
+        Truncate content proportionally to comply with token limit
 
         Args:
-            results: 文件读取结果列表
-            available_tokens: 可用的token数
+            results: List of file reading results
+            available_tokens: Number of available tokens
 
         Returns:
-            截断后的结果列表
+            List of truncated results
         """
         successful_files = [r for r in results if r.is_success]
 
         if not successful_files:
             return results
 
-        # 计算需要截断的总token数
+        # Calculate total tokens to be truncated
         total_tokens = sum(r.tokens for r in successful_files)
         ratio = available_tokens / total_tokens
 
-        # 按比例分配token
+        # Allocate tokens proportionally
         for result in successful_files:
-            allocated_tokens = max(300, int(result.tokens * ratio))  # 确保每个文件至少有一些内容
+            allocated_tokens = max(300, int(result.tokens * ratio))  # Ensure each file has at least some content
             if result.tokens > allocated_tokens:
-                # 尝试仅保留文件开头（包括元信息和部分内容）
+                # Try to keep only the beginning of the file (including metadata and partial content)
                 content = result.content
 
-                # 通过二分查找找到合适的截断点
+                # Find suitable truncation point through binary search
                 left, right = 0, len(content)
                 best_content = ""
                 best_tokens = 0
@@ -198,67 +198,67 @@ class ReadFiles(WorkspaceGuardTool[ReadFilesParams]):
                     else:
                         right = mid - 1
 
-                # 更新结果
-                result.content = best_content + "\n\n[内容已截断...]"
-                result.tokens = best_tokens + 10  # 为截断提示增加一些token
+                # Update result
+                result.content = best_content + "\n\n[Content truncated...]"
+                result.tokens = best_tokens + 10  # Add some tokens for truncation notice
 
         return results
 
     def _format_results(self, results: List[FileReadingResult], summary: str, has_truncation: bool) -> str:
         """
-        格式化多个文件的读取结果
+        Format reading results for multiple files
 
         Args:
-            results: 文件读取结果列表
-            summary: 摘要信息
-            has_truncation: 是否有内容被截断
+            results: List of file reading results
+            summary: Summary information
+            has_truncation: Whether any content has been truncated
 
         Returns:
-            格式化后的结果文本
+            Formatted result text
         """
         formatted_parts = []
 
-        # 添加摘要信息
-        formatted_parts.append(f"# 批量读取文件结果\n\n**{summary}**\n")
+        # Add summary information
+        formatted_parts.append(f"# Batch File Reading Results\n\n**{summary}**\n")
 
         if has_truncation:
-            formatted_parts.append(f"> **注意**：由于内容过长（超过{MAX_TOTAL_TOKENS}token），部分文件内容已被截断。\n")
+            formatted_parts.append(f"> **Note**: Due to long content (exceeding {MAX_TOTAL_TOKENS} tokens), some file content has been truncated.\n")
 
-        # 添加分隔线
+        # Add separator line
         formatted_parts.append("-" * 80 + "\n")
 
-        # 添加每个文件的结果
+        # Add results for each file
         for idx, result in enumerate(results):
-            # 添加文件分隔符（除了第一个文件）
+            # Add file separator (except for first file)
             if idx > 0:
                 formatted_parts.append("\n" + "=" * 80 + "\n")
 
             if result.is_success:
-                # 直接使用ReadFile生成的内容（已包含元信息）
+                # Directly use content generated by ReadFile (already contains metadata)
                 formatted_parts.append(result.content)
             else:
-                # 对失败的文件添加错误信息
-                formatted_parts.append(f"## 文件: {result.file_path}\n\n读取失败: {result.error_message}\n")
+                # Add error information for failed files
+                formatted_parts.append(f"## File: {result.file_path}\n\nRead failed: {result.error_message}\n")
 
         return "\n".join(formatted_parts)
 
     async def get_tool_detail(self, tool_context: ToolContext, result: ToolResult, arguments: Dict[str, Any] = None) -> Optional[ToolDetail]:
         """
-        根据工具执行结果获取对应的ToolDetail
+        Get ToolDetail based on tool execution result
 
         Args:
-            tool_context: 工具上下文
-            result: 工具执行的结果
-            arguments: 工具执行的参数字典
+            tool_context: Tool context
+            result: Tool execution result
+            arguments: Tool execution parameter dictionary
 
         Returns:
-            Optional[ToolDetail]: 工具详情对象，可能为None
+            Optional[ToolDetail]: Tool detail object, may be None
         """
         if not result.ok:
             return None
 
         if not arguments or "files" not in arguments:
-            logger.warning("没有提供files参数")
+            logger.warning("No files parameter provided")
             return None
 
         file_count = len(arguments["files"])
@@ -266,30 +266,30 @@ class ReadFiles(WorkspaceGuardTool[ReadFilesParams]):
         return ToolDetail(
             type=DisplayType.MD,
             data=FileContent(
-                file_name=f"批量读取文件 (共{file_count}个文件)",
+                file_name=f"Batch read files (total {file_count} files)",
                 content=result.content
             )
         )
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
         """
-        获取工具调用后的友好动作和备注
+        Get friendly action and remark after tool call
         """
         if not arguments or "files" not in arguments:
             return {
-                "action": "批量读取文件",
-                "remark": "读取多个文件失败"
+                "action": "Batch read files",
+                "remark": "Failed to read multiple files"
             }
 
         file_count = len(arguments["files"])
 
         if not result.ok:
             return {
-                "action": "批量读取文件",
-                "remark": f"批量读取{file_count}个文件失败"
+                "action": "Batch read files",
+                "remark": f"Failed to batch read {file_count} files"
             }
 
         return {
-            "action": "批量读取文件",
-            "remark": f"已读取{file_count}个文件"
+            "action": "Batch read files",
+            "remark": f"Read {file_count} files"
         }

@@ -1,7 +1,6 @@
-"""
-agentlang 通用工具模块
+"""agentlang common utilities module
 
-提供各种实用工具类和函数，用于支持 agentlang 框架的功能
+Provides various utility classes and functions to support the agentlang framework.
 """
 
 __all__ = [

@@ -1,7 +1,6 @@
-"""
-Token 估计器模块
+"""Token estimator module
 
-提供计算 LLM 模型 token 数量的辅助函数
+Provides helper functions for calculating LLM model token counts.
 """
 
 import tiktoken
@@ -12,112 +11,109 @@ logger = get_logger(__name__)
 
 
 def num_tokens_from_string(string: str, model: str = "gpt-3.5-turbo") -> int:
-    """
-    估计字符串的 token 数量
+    """Estimate token count for a string.
 
     Args:
-        string: 要计算的字符串
-        model: 模型名称，支持 OpenAI 的模型系列
+        string: String to calculate
+        model: Model name, supports OpenAI model families
 
     Returns:
-        int: 估计的 token 数量
+        int: Estimated token count
     """
     if not string:
         return 0
 
     try:
-        # 获取对应模型的编码器
+        # Get encoder for the model
         try:
             if model.startswith(("gpt-4", "gpt-3.5-turbo")):
                 encoding = tiktoken.encoding_for_model(model)
             else:
-                # 默认使用通用编码器
+                # Default to general-purpose encoder
                 encoding = tiktoken.get_encoding("cl100k_base")
         except Exception as enc_err:
-            # 编码器获取失败，直接抛出异常使用模拟计算方法
-            logger.error(f"获取编码器失败: {enc_err!s}，使用模拟计算方法")
+            # Encoder acquisition failed, raise exception to use simulation method
+            logger.error(f"Failed to get encoder: {enc_err!s}, using simulation method")
             raise
 
-        # 计算并返回token数量
+        # Calculate and return token count
         return len(encoding.encode(string))
     except Exception as e:
-        # 记录错误日志
-        logger.error(f"Token计算出错: {e!s}，使用模拟计算方法")
+        # Log error
+        logger.error(f"Token calculation error: {e!s}, using simulation method")
 
-        # 使用自己实现的模拟计算方法
+        # Use custom simulation calculation method
         return _simulate_token_count(string)
 
 
 def _simulate_token_count(text: str) -> int:
-    """
-    模拟计算token数量的方法
+    """Simulate token count calculation method.
 
-    英文约每4个字符算1个token
-    中文约每1.5个字符算1个token
+    English: approximately 1 token per 4 characters
+    Chinese: approximately 1 token per 1.5 characters
 
     Args:
-        text: 要计算的文本
+        text: Text to calculate
 
     Returns:
-        int: 估计的token数量
+        int: Estimated token count
     """
     if not text:
         return 0
 
-    # 统计中文字符数量
+    # Count Chinese characters
     chinese_char_count = sum(1 for char in text if '\u4e00' <= char <= '\u9fff')
 
-    # 统计非中文字符数量
+    # Count non-Chinese characters
     non_chinese_char_count = len(text) - chinese_char_count
 
-    # 估算token数量：中文字符/1.5 + 非中文字符/4
+    # Estimate tokens: Chinese characters/1.5 + non-Chinese characters/4
     estimated_tokens = int(chinese_char_count / 1.5 + non_chinese_char_count / 4)
 
-    # 确保至少返回1个token
+    # Ensure at least 1 token is returned
     return max(1, estimated_tokens)
 
 
 def truncate_text_by_token(text: str, max_tokens: int) -> tuple[str, bool]:
-    """
-    截取文本使其不超过指定的token数量
+    """Truncate text to not exceed specified token count.
 
     Args:
-        text: 要截取的文本
-        max_tokens: 最大token数量
+        text: Text to truncate
+        max_tokens: Maximum token count
 
     Returns:
-        tuple[str, bool]: (截取后的文本, 是否被截断)
+        tuple[str, bool]: (truncated text, whether it was truncated)
     """
     if not text:
         return "", False
 
-    # 如果文本很短，直接返回
+    # If text is very short, return directly
     if len(text) < max_tokens:
         return text, False
 
-    # 初始化计数器和当前位置
+    # Initialize counter and current position
     token_count = 0
     position = 0
 
-    # 遍历文本字符
+    # Iterate through text characters
     for i, char in enumerate(text):
-        # 增加token计数
+        # Increment token count
         if '\u4e00' <= char <= '\u9fff':
-            # 中文字符
+            # Chinese character
             token_count += 1 / 1.5
         else:
-            # 非中文字符
+            # Non-Chinese character
             token_count += 1 / 4
 
-        # 检查是否达到最大token数
+        # Check if max tokens reached
         if int(token_count) >= max_tokens:
             position = i
             break
 
-    # 如果没有达到最大token数，表示整个文本都在限制内
+    # If max tokens not reached, entire text is within limit
     if position == 0 or position >= len(text) - 1:
         return text, False
 
-    # 截断文本并添加省略提示
-    truncated_text = text[:position] + "\n\n... [内容过长已截断] ..."
+    # Truncate text and add ellipsis indicator
+    truncated_text = text[:position] + "\n\n... [Content too long, truncated] ..."
     return truncated_text, True 

@@ -1,51 +1,51 @@
-"""浏览器操作基础模块
+"""Browser operation foundation module
 
-定义了浏览器操作的基础类和装饰器
+Defines base classes and decorators for browser operations.
 
-# 浏览器操作架构设计
+# Browser Operation Architecture
 
-## 设计理念
+## Design Goals
 
-本模块实现了一个模块化、可扩展的浏览器操作架构，主要设计目标包括：
-- 减少每个操作声明的代码量
-- 提高代码可维护性
-- 支持更灵活的操作扩展
-- 保持功能完整性和兼容性
+This module implements a modular, extensible browser operation architecture with goals to:
+- Reduce boilerplate for declaring each operation
+- Improve maintainability
+- Enable flexible operation extension
+- Preserve functionality and compatibility
 
-## 核心组件
+## Core Components
 
-1. **参数模型化**:
-   - 使用Pydantic模型替代手写JSONSchema
-   - 利用类型注解自动生成参数验证
-   - 基础参数类(BaseOperationParams)提取公共参数
+1. **Parameter modeling**:
+    - Use Pydantic models instead of handwritten JSON Schema
+    - Leverage type hints to auto-generate validation
+    - BaseOperationParams captures shared parameters
 
-2. **操作装饰器(@operation)**:
-   - 自动从方法文档提取描述
-   - 自动识别参数类型
-   - 自动生成操作示例
-   - 简化操作注册过程
+2. **Operation decorator (@operation)**:
+    - Auto-extract description from docstrings
+    - Auto-detect parameter types
+    - Auto-generate operation examples
+    - Simplify registration
 
-3. **操作组织与分组**:
-   - OperationGroup基类用于组织相关操作
-   - 按功能分类操作到不同模块
-   - 插件式架构支持动态加载
+3. **Operation grouping**:
+    - OperationGroup organizes related operations
+    - Operations are grouped by functionality
+    - Plugin-style architecture supports dynamic loading
 
-4. **统一结果格式**:
-   - 提供标准化的结果格式
-   - 统一错误处理和返回结构
+4. **Unified result format**:
+    - Standardized result structure
+    - Consistent error handling and responses
 
-## 扩展操作
+## Extending operations
 
-要添加新的浏览器操作：
-1. 在合适的操作组模块中定义参数类，继承BaseOperationParams
-2. 实现操作方法并使用@operation装饰器注册
-3. 无需额外配置，操作会被自动发现和注册
+To add new browser operations:
+1. Define a params class in the appropriate operation group module, subclassing BaseOperationParams
+2. Implement the operation method and decorate with @operation
+3. No extra config needed; the operation will be auto-discovered and registered
 
-## 相关文件
+## Related files
 
-- base.py: 基础类和装饰器定义
-- operations_registry.py: 操作注册和管理
-- [各操作组模块].py: 按功能分组的具体操作实现
+- base.py: base classes and decorator definitions
+- operations_registry.py: operation registry and management
+- [operation group modules].py: concrete grouped operation implementations
 """
 
 import functools
@@ -58,14 +58,14 @@ from pydantic import BaseModel, Field
 from agentlang.logger import get_logger
 from agentlang.tools.tool_result import ToolResult
 
-# 日志记录器
+# Logger
 logger = get_logger(__name__)
 
 
 class BaseOperationParams(BaseModel):
-    """基础操作参数模型
+    """Base parameter model for operations.
 
-    所有操作参数模型的基类，定义了共同的参数
+    Shared parameters for all operation parameter models.
     """
     page_id: Optional[str] = Field(
         "",
@@ -77,50 +77,50 @@ def operation(
     name: Optional[str] = None,
     example: Optional[Union[Dict[str, Any], List[Dict[str, Any]]]] = None
 ):
-    """操作注册装饰器
+    """Operation registration decorator.
 
-    用于注册浏览器操作并提取参数类型信息
+    Registers browser operations and extracts parameter type info.
 
     Args:
-        name: 操作名称，默认使用函数名（去除前导下划线）
-        example: 操作示例，如果不提供则尝试自动生成
+        name: Operation name; defaults to function name (without leading underscore)
+        example: Operation examples; if not provided, attempts auto-generation
     """
     def decorator(func: Callable):
-        # 获取函数的第一个类型注解参数(除self和browser外)
+        # Get the first annotated parameter after self and browser
         sig = inspect.signature(func)
         params_class = None
-        for param_name, param in list(sig.parameters.items())[2:]:  # 跳过self和browser
+        for param_name, param in list(sig.parameters.items())[2:]:  # Skip self and browser
             if param.annotation != inspect.Parameter.empty:
                 params_class = param.annotation
                 break
 
         @functools.wraps(func)
         async def wrapper(self, browser, params, *args, **kwargs):
-            # 验证参数
+            # Validate parameters
             if params_class and not isinstance(params, params_class):
-                # 尝试转换
+                # Attempt conversion
                 try:
                     params = params_class(**params)
                 except Exception as e:
-                    # 转换错误时提供更友好的错误信息
-                    logger.debug(f"参数验证失败: {e!s}")
+                    # Provide friendlier error info on validation failure
+                    logger.debug(f"parametersvalidatefailed: {e!s}")
 
-                    # 创建友好的错误消息
+                    # Build friendly error message
                     error_msg = self._generate_friendly_validation_error(e, name or func.__name__.lstrip('_'), params_class)
 
-                    # 返回友好的错误结果 - 使用ToolResult
+                    # Return friendly error result
                     return ToolResult(error=error_msg)
 
             return await func(self, browser, params, *args, **kwargs)
 
-        # 存储操作元数据
+        # Store operation metadata
         operation_name = name or func.__name__.lstrip('_')
         wrapper.operation_name = operation_name
         wrapper.params_class = params_class
-        wrapper.description = func.__doc__ if func.__doc__ else "" # 恢复为使用完整 docstring
-        wrapper.is_operation = True  # 标记为操作
+        wrapper.description = func.__doc__ if func.__doc__ else ""
+        wrapper.is_operation = True  # Mark as operation
 
-        # 处理示例，确保始终为列表
+        # Process examples, always store as list
         examples = []
         if example:
             if isinstance(example, list):
@@ -128,82 +128,77 @@ def operation(
             elif isinstance(example, dict):
                 examples.append(example)
             else:
-                logger.warning(f"操作 '{operation_name}' 的示例格式无效，应为字典或字典列表")
+                logger.warning(f"Invalid example format for operation '{operation_name}'; must be a dict or list of dicts")
         elif params_class:
-            # 自动生成示例
+            # Auto-generate example
             try:
-                # 创建示例参数 - 只包含有默认值的字段
+                # Create example params only for fields with defaults
                 example_params = {}
                 required_fields = []
 
-                # 收集字段信息
+                # Collect field info
                 for field_name, field in params_class.model_fields.items():
-                    # 只添加有默认值的非必填字段
+                    # Add optional fields with defaults
                     if field.default is not None and field.default is not ...:
                         example_params[field_name] = field.default
                     elif field.is_required():
                         required_fields.append(field_name)
 
-                # 为必填字段添加合理的占位符
+                # Add placeholders for required fields
                 if required_fields:
-                    # 常见字段的示例值
+                    # Common example values
                     common_field_examples = {
                         "url": "https://{actual_domain}/article/12345",
                         "selector": "#abcdefg",
-                        "text": "示例文本",
-                        "query": "搜索关键词"
+                        "text": "example text",
+                        "query": "Search keywords"
                     }
 
-                    # 为必填字段添加示例值
+                    # Insert example values for required fields
                     for field in required_fields:
                         if field in common_field_examples:
                             example_params[field] = f"<{common_field_examples[field]}>"
 
-                # 创建最终示例
+                # Build final example
                 generated_example = {
                     "operation": operation_name,
                     "operation_params": example_params
                 }
 
-                # 如果有必填字段但未提供示例值，添加提示
+                # If required fields missing example values, add note
                 if required_fields and not any(field in example_params for field in required_fields):
                     generated_example["required_fields"] = required_fields
-                    generated_example["note"] = f"需要提供: {', '.join(required_fields)}"
+                    generated_example["note"] = f"Please provide: {', '.join(required_fields)}"
                 examples.append(generated_example)
 
             except Exception as e:
-                logger.debug(f"生成操作示例失败: {e!s}")
-                # 如果没有提供示例且无法自动生成，则保持 examples 列表为空
+                logger.debug(f"Auto-generating operation example failed: {e!s}")
                 pass
         else:
-            # 如果没有提供示例且无法自动生成，则保持 examples 列表为空
             pass
 
-        wrapper.examples = examples # 始终存储为列表
+        wrapper.examples = examples
 
         return wrapper
     return decorator
 
 
 class OperationGroup(ABC):
-    """操作组基类
+    """Base class for operation groups.
 
-    用于组织相关操作的基类
+    Organizes related operations.
     """
-    # 组信息
     group_name: ClassVar[str] = "base"
-    group_description: ClassVar[str] = "基础操作组"
+    group_description: ClassVar[str] = "Base operation group"
 
     def __init__(self):
-        """初始化操作组，注册操作"""
-        # 注册表 - 实例变量
+        """Initialize operation group and register operations"""
         self.operations: Dict[str, Dict[str, Any]] = {}
-        logger.debug(f"初始化操作组: {self.__class__.group_name}")
+        logger.debug(f"Initializing operation group: {self.__class__.group_name}")
         self.register_operations()
 
     def register_operations(self):
-        """注册该组中的所有操作"""
-        # 查找带有 is_operation 标记的实例方法
+        """Register all operations in this group"""
         for name, method in inspect.getmembers(self, inspect.ismethod):
             if hasattr(method, 'is_operation') and method.is_operation:
                 op_name = method.operation_name
@@ -211,31 +206,21 @@ class OperationGroup(ABC):
                     "handler": method,
                     "params_class": getattr(method, 'params_class', None),
                     "description": method.description,
-                    "examples": getattr(method, 'examples', []) # 获取示例列表
+                    "examples": getattr(method, 'examples', [])
                 }
-                logger.debug(f"注册操作: {op_name} (来自 {self.__class__.group_name})")
+                logger.debug(f"Registered operation: {op_name} (from {self.__class__.group_name})")
 
     def get_operations(self) -> Dict[str, Dict[str, Any]]:
-        """获取该组中的所有操作"""
+            """Get all operations in the group"""
         return self.operations
 
     def _generate_friendly_validation_error(self, error, operation_name, params_class):
-        """生成友好的参数验证错误消息
-
-        Args:
-            error: 原始错误
-            operation_name: 操作名称
-            params_class: 参数类
-
-        Returns:
-            str: 友好的错误消息
-        """
-        # 处理pydantic验证错误
+        """Generate friendly parameter validation error message."""
         if hasattr(error, 'errors') and callable(getattr(error, 'errors')):
             try:
                 error_details = error.errors()
 
-                # 检查是否有缺失字段
+                # Check missing fields
                 missing_fields = []
                 type_errors = []
                 other_errors = []
@@ -251,112 +236,101 @@ class OperationGroup(ABC):
                     else:
                         other_errors.append((field_path, err))
 
-                # 处理缺失字段
+                # Handle missing fields
                 if missing_fields:
                     missing_fields_str = ", ".join(missing_fields)
-                    error_msg = f"操作 '{operation_name}' 缺少必填参数: {missing_fields_str}"
+                    error_msg = f"Operation '{operation_name}' is missing required parameters: {missing_fields_str}"
 
-                    # 添加必填字段的说明
+                    # Add descriptions for required fields
                     if params_class and hasattr(params_class, 'model_fields'):
-                        error_msg += "\n\n以下是必填参数的说明:"
+                        error_msg += "\n\nRequired parameter descriptions:"
                         for field in missing_fields:
                             if field in params_class.model_fields:
                                 field_obj = params_class.model_fields[field]
-                                field_desc = field_obj.description or "无描述"
+                                field_desc = field_obj.description or "No description"
                                 error_msg += f"\n- {field}: {field_desc}"
 
                     return error_msg
 
-                # 处理类型错误
+                # Handle type errors
                 if type_errors:
                     errors_desc = []
                     for field_path, err in type_errors:
-                        # 获取预期类型
-                        expected_type = "正确格式"
+                        expected_type = "correct format"
                         if "expected_type" in err.get("ctx", {}):
                             expected_type = err["ctx"]["expected_type"]
 
-                        # 获取实际值类型
-                        received_type = "不正确的类型"
+                        received_type = "wrong type"
                         if "input_type" in err.get("ctx", {}):
                             received_type = err["ctx"]["input_type"]
 
-                        errors_desc.append(f"'{field_path}' 应为 {expected_type} 类型，当前为 {received_type}")
+                        errors_desc.append(f"'{field_path}' should be {expected_type}, received {received_type}")
 
-                    return f"操作 '{operation_name}' 参数类型错误: " + "; ".join(errors_desc)
+                    return f"Operation '{operation_name}' parameter type error: " + "; ".join(errors_desc)
 
-                # 处理其他验证错误
+                # Handle other validation errors
                 if other_errors:
                     errors_desc = []
                     for field_path, err in other_errors:
-                        msg = err.get("msg", "验证失败")
+                        msg = err.get("msg", "validation failed")
                         errors_desc.append(f"'{field_path}': {msg}")
 
-                    return f"操作 '{operation_name}' 参数验证失败: " + "; ".join(errors_desc)
+                    return f"Operation '{operation_name}' parameter validation failed: " + "; ".join(errors_desc)
 
             except Exception as e:
-                logger.debug(f"解析验证错误详情失败: {e!s}")
+                logger.debug(f"Parsing validation error details failed: {e!s}")
 
-        # 如果无法处理为结构化错误，提供一般性的错误消息
+        # Fallback messages
         if "dict" in str(error).lower() and "list" in str(error).lower():
-            return f"操作 '{operation_name}' 的参数必须是对象(字典)格式，而不是数组或其他类型"
+            return f"Operation '{operation_name}' parameters must be an object (dict), not an array or other type"
 
         if "missing" in str(error).lower():
-            return f"操作 '{operation_name}' 缺少必填参数，请检查参数完整性"
+            return f"Operation '{operation_name}' is missing required parameters; please check completeness"
 
         if "validation error" in str(error).lower():
-            return f"操作 '{operation_name}' 参数验证失败，请检查参数类型和格式"
+            return f"Operation '{operation_name}' parameter validation failed; please verify types and format"
 
-        # 默认消息
-        return f"操作 '{operation_name}' 参数错误: {error!s}"
+        return f"Operation '{operation_name}' parameter error: {error!s}"
 
-    # --- 新增: 页面验证辅助方法 ---
+    # --- Page validation helper ---
     async def _get_validated_page(self, browser: 'MagicBrowser', params: BaseOperationParams) -> tuple[Optional['Page'], Optional[ToolResult]]:
-        """获取并验证页面对象。
+        """Get and validate a page object.
 
-        处理 page_id 获取逻辑，并检查页面是否存在且未关闭。
-        如果页面无效，直接返回包含错误信息的 ToolResult。
-
-        Args:
-            browser: MagicBrowser 实例 (使用前向引用避免循环导入)
-            params: 操作参数对象
-
-        Returns:
-            tuple: (Page对象 | None, ToolResult | None)
+        Resolves page_id and checks that the page exists and is open.
+        If invalid, returns a ToolResult with error info.
         """
         page_id = params.page_id
         error_reason = ""
-        page: Optional['Page'] = None # 明确类型
+        page: Optional['Page'] = None
 
         try:
             if not page_id:
-                page_id = await browser.get_active_page_id() # get_active_page_id 内部已检查
+                page_id = await browser.get_active_page_id()
                 if not page_id:
-                    error_reason = "没有活动的页面"
+                    error_reason = "No active page"
                 else:
                     page = await browser.get_page_by_id(page_id)
-                    if not page: # 再次确认活动页面是否有效
-                        error_reason = f"活动的页面 {page_id} 已失效或关闭"
+                    if not page:
+                        error_reason = f"Active page {page_id} is unavailable or closed"
             else:
-                # 提供了 page_id，直接获取并验证
+                # Page id provided; fetch and validate
                 page = await browser.get_page_by_id(page_id)
                 if not page:
-                    error_reason = f"指定的页面 {page_id} 不存在或已关闭"
+                    error_reason = f"Page {page_id} does not exist or is closed"
 
-            # 如果有错误，返回 ToolResult
+            # Return ToolResult on error
             if error_reason:
-                error_msg = f"{error_reason}，请确认页面 ID 是否正确，或先使用 goto 打开一个页面。"
-                logger.warning(f"页面验证失败 ({params.__class__.__name__}): {error_msg}")
+                error_msg = f"{error_reason}. Confirm page ID or use goto to open a page."
+                logger.warning(f"Page validation failed ({params.__class__.__name__}): {error_msg}")
                 return None, ToolResult(error=error_msg)
 
-            # 页面有效，返回页面对象
+            # Page is valid
             return page, None
 
         except Exception as e:
-            # 捕获 browser 调用可能出现的意外错误
-            logger.error(f"验证页面时发生意外错误: {e}", exc_info=True)
-            return None, ToolResult(error=f"获取或验证页面时发生内部错误: {e}")
+            logger.error(f"Unexpected error while validating page: {e}", exc_info=True)
+            return None, ToolResult(error=f"Internal error getting or validating page: {e}")
 
-    # --- 结束新增 ---
+    # --- End helper ---
 
-# 动态导入操作组
+# Dynamic import of operation groups

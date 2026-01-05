@@ -1,49 +1,49 @@
-"""浏览器操作注册表
+"""Browser operation registry
 
-动态加载和管理所有操作组
+Dynamically loads and manages all operation groups.
 
-# 操作注册表设计
+# Registry Design
 
-## 设计目标
+## Goals
 
-操作注册表是浏览器操作架构的核心组件，它实现了以下目标：
-- 集中管理所有操作组和操作
-- 支持动态发现和加载操作
-- 提供统一的操作访问接口
-- 支持按组织和分类查询操作
+Core component of the browser operation architecture, providing:
+- Central management of operation groups and operations
+- Dynamic discovery and loading of operations
+- Unified access interface
+- Grouped/category queries
 
-## 工作原理
+## How it works
 
-1. **动态发现**：
-   - 自动扫描use_browser_operations包下的所有模块
-   - 查找并注册所有OperationGroup子类
-   - 无需手动注册，新增操作组会被自动发现
+1. **Discovery**:
+    - Scans all modules under use_browser_operations
+    - Finds and registers all OperationGroup subclasses
+    - No manual registration needed; new groups auto-discovered
 
-2. **懒加载机制**：
-   - 注册表使用延迟初始化模式
-   - 首次请求操作时才实例化操作组
-   - 减少启动时间和资源消耗
+2. **Lazy init**:
+    - Delayed initialization
+    - Instantiates groups on first request
+    - Reduces startup time/resources
 
-3. **插件式架构**：
-   - 遵循开闭原则，支持扩展不修改
-   - 新操作可以在独立模块中定义
-   - 操作组间保持松耦合
+3. **Plugin architecture**:
+    - Open/closed principle; extend without modifying
+    - New operations can live in separate modules
+    - Loose coupling between groups
 
-## 使用方式
+## Usage
 
-- 获取操作: operations_registry.get_operation(name)
-- 获取所有操作: operations_registry.get_all_operations()
-- 按组获取操作: operations_registry.get_operations_by_group(group_name)
-- 获取组信息: operations_registry.get_group_info()
+- Get operation: operations_registry.get_operation(name)
+- Get all operations: operations_registry.get_all_operations()
+- Get by group: operations_registry.get_operations_by_group(group_name)
+- Get group info: operations_registry.get_group_info()
 
-## 扩展注册表
+## Extending
 
-添加新的操作组只需：
-1. 创建继承自OperationGroup的新类
-2. 定义group_name和group_description类变量
-3. 在类中实现操作方法并使用@operation装饰器
+To add a new operation group:
+1. Create a class inheriting OperationGroup
+2. Define group_name and group_description
+3. Implement operations decorated with @operation
 
-无需修改注册表代码，新操作组将被自动发现和加载。
+No registry code changes required; discovery is automatic.
 """
 
 import importlib
@@ -56,13 +56,13 @@ from typing import Any, Dict, List, Optional, Type
 from agentlang.logger import get_logger
 from app.tools.use_browser_operations.base import OperationGroup
 
-# 日志记录器
+# Registry logger
 logger = get_logger(__name__)
 
 class OperationsRegistry:
-    """浏览器操作注册表
+    """Browser operation registry
 
-    动态加载和管理所有操作组
+    Dynamically loads and manages all operation groups.
     """
     def __init__(self):
         self._operation_groups: Dict[str, Type[OperationGroup]] = {}
@@ -71,63 +71,59 @@ class OperationsRegistry:
         self._initialized = False
 
     def register_operation_group(self, group_class: Type[OperationGroup]):
-        """注册操作组
-
-        Args:
-            group_class: 操作组类
-        """
+        """Register an operation group."""
         group_name = group_class.group_name
         self._operation_groups[group_name] = group_class
-        logger.debug(f"注册操作组: {group_name}")
+        logger.debug(f"Registered operation group: {group_name}")
 
     def auto_discover_operation_groups(self):
-        """自动发现并注册操作组
+        """Auto-discover and register operation groups.
 
-        扫描use_browser_operations包下的所有模块，查找并注册所有OperationGroup子类
+        Scans use_browser_operations for OperationGroup subclasses.
         """
-        # 获取当前包路径
+        # Locate the current package path
         package_name = 'app.tools.use_browser_operations'
         package = sys.modules[package_name]
         package_path = os.path.dirname(package.__file__)
 
-        logger.debug(f"开始扫描 {package_path} 下的操作组")
+        logger.debug(f"Scanning {package_path} for operation groups")
 
-        # 扫描该包下的所有模块
+        # Scan all modules under the package
         for _, module_name, is_pkg in pkgutil.iter_modules([package_path]):
-            # 跳过package和当前模块，避免循环导入
+            # Skip packages and current modules to avoid circular imports
             if is_pkg or module_name in ['operations_registry', 'base']:
                 continue
 
-            # 动态导入模块
+            # Dynamically import the module
             module_fullname = f"{package_name}.{module_name}"
             try:
                 module = importlib.import_module(module_fullname)
 
-                # 查找模块中的所有OperationGroup子类
+                # Find all OperationGroup subclasses in the module
                 for name, obj in inspect.getmembers(module):
                     if (inspect.isclass(obj) and
                         issubclass(obj, OperationGroup) and
                         obj != OperationGroup):
-                        # 注册找到的操作组
+                        # Register the discovered action group
                         self.register_operation_group(obj)
-                        logger.debug(f"从模块 {module_name} 中自动发现并注册操作组: {obj.group_name}")
+                        logger.debug(f"Discovered and registered operation group from module {module_name}: {obj.group_name}")
             except Exception as e:
-                logger.error(f"加载模块 {module_fullname} 失败: {e!s}")
+                logger.error(f"Failed to load module {module_fullname}: {e!s}")
 
-        logger.info(f"操作组自动发现完成，共发现 {len(self._operation_groups)} 个操作组")
+        logger.info(f"Auto-discovery complete; found {len(self._operation_groups)} operation groups")
 
     def initialize(self):
-        """初始化注册表，创建所有操作组实例并注册操作"""
+        """Initialize registry: create group instances and register operations."""
         if self._initialized:
             return
 
-        logger.debug(f"初始化操作注册表，操作组数: {len(self._operation_groups)}")
+        logger.debug(f"Initializing operation registry; groups: {len(self._operation_groups)}")
 
-        # 创建操作组实例
+        # Create action group instances
         for group_name, group_class in self._operation_groups.items():
             self._group_instances[group_name] = group_class()
 
-        # 注册所有操作
+        # Register all actions
         for group_name, group_instance in self._group_instances.items():
             operations = group_instance.get_operations()
             for op_name, op_info in operations.items():
@@ -138,48 +134,30 @@ class OperationsRegistry:
                     "description": op_info["description"],
                     "examples": op_info.get("examples", []),
                 }
-                logger.debug(f"注册操作: {op_name} (来自 {group_name})")
+                logger.debug(f"Registered operation: {op_name} (from {group_name})")
 
         self._initialized = True
-        logger.info(f"操作注册表初始化完成，共 {len(self._operations)} 个操作")
+            logger.info(f"Operation registry initialized; {len(self._operations)} operations")
 
     def get_operation(self, operation_name: str) -> Optional[Dict[str, Any]]:
-        """获取操作信息
-
-        Args:
-            operation_name: 操作名称
-
-        Returns:
-            操作信息字典，如果不存在则返回None
-        """
+        """Get operation info by name."""
         if not self._initialized:
             self.initialize()
 
         op_info = self._operations.get(operation_name)
         if not op_info:
-            logger.warning(f"未找到操作: {operation_name}")
+            logger.warning(f"Operation not found: {operation_name}")
 
         return op_info
 
     def get_all_operations(self) -> Dict[str, Dict[str, Any]]:
-        """获取所有操作
-
-        Returns:
-            所有操作信息字典
-        """
+        """Get all operations."""
         if not self._initialized:
             self.initialize()
         return self._operations
 
     def get_operations_by_group(self, group_name: str) -> Dict[str, Dict[str, Any]]:
-        """按组获取操作
-
-        Args:
-            group_name: 组名称
-
-        Returns:
-            组内的操作信息字典
-        """
+        """Get operations by group name."""
         if not self._initialized:
             self.initialize()
         operations = {}
@@ -189,21 +167,13 @@ class OperationsRegistry:
         return operations
 
     def get_group_names(self) -> List[str]:
-        """获取所有组名称
-
-        Returns:
-            所有组名称列表
-        """
+        """Get all group names."""
         if not self._initialized:
             self.initialize()
         return list(self._operation_groups.keys())
 
     def get_group_info(self) -> Dict[str, Dict[str, Any]]:
-        """获取所有组信息
-
-        Returns:
-            所有组信息字典
-        """
+        """Get metadata for all groups."""
         if not self._initialized:
             self.initialize()
         group_info = {}
@@ -216,11 +186,11 @@ class OperationsRegistry:
         return group_info
 
 
-# 创建全局操作注册表实例
+# Create global registry
 operations_registry = OperationsRegistry()
 
-# 自动发现并注册所有操作组
+# Auto-discover and register all operation groups
 operations_registry.auto_discover_operation_groups()
 
-# 初始化注册表
+# Initialize registry
 operations_registry.initialize()

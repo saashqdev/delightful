@@ -1,6 +1,4 @@
-"""
-重试工具函数，提供解析错误信息和实现重试机制的功能
-"""
+"""Retry utility functions, provides error message parsing and retry mechanism."""
 
 import asyncio
 import random
@@ -15,17 +13,16 @@ T = TypeVar("T")
 
 
 def extract_retry_delay_from_error(error_message: str) -> Optional[int]:
-    """
-    从错误消息中提取需要等待的重试时间（秒）
+    """Extract retry delay time (seconds) from error message.
     
     Args:
-        error_message: 错误信息字符串
+        error_message: Error message string
 
     Returns:
-        int | None: 需要等待的秒数，如果没有找到则返回 None
+        int | None: Number of seconds to wait, or None if not found
     """
-    # 尝试匹配常见的重试时间模式，例如 "retry after 16 seconds" 或 "Please retry after 16 seconds"
-    # Azure OpenAI 错误消息格式: "Please retry after 16 seconds."
+    # Try to match common retry time patterns, e.g., "retry after 16 seconds" or "Please retry after 16 seconds"
+    # Azure OpenAI error message format: "Please retry after 16 seconds."
     pattern = r"retry after (\d+) seconds"
     match = re.search(pattern, error_message, re.IGNORECASE)
 
@@ -44,28 +41,27 @@ async def retry_with_exponential_backoff(
     jitter: bool = True,
     **kwargs: Any
 ) -> Any:
-    """
-    使用指数退避策略重试函数
+    """Retry function using exponential backoff strategy.
     
     Args:
-        func: 要重试的函数
-        args: 函数的位置参数
-        max_retries: 最大重试次数，默认为5
-        initial_delay: 初始延迟时间（秒），默认为1.0
-        exponential_base: 指数基数，默认为2.0
-        jitter: 是否添加随机抖动，默认为True
-        kwargs: 函数的关键字参数
+        func: Function to retry
+        args: Positional arguments for the function
+        max_retries: Maximum number of retries, default is 5
+        initial_delay: Initial delay time (seconds), default is 1.0
+        exponential_base: Exponential base, default is 2.0
+        jitter: Whether to add random jitter, default is True
+        kwargs: Keyword arguments for the function
         
     Returns:
-        Any: 函数的返回值
+        Any: Return value of the function
         
     Raises:
-        Exception: 如果所有重试都失败，则抛出最后一个异常
+        Exception: If all retries fail, raise the last exception
     """
     delay = initial_delay
     last_exception = None
 
-    # 尝试执行函数，最多重试 max_retries 次
+    # Try to execute function, retry up to max_retries times
     for attempt in range(max_retries + 1):
         try:
             return await func(*args, **kwargs)
@@ -73,32 +69,32 @@ async def retry_with_exponential_backoff(
             last_exception = e
 
             if attempt == max_retries:
-                logger.error(f"达到最大重试次数 {max_retries}，放弃重试")
+                logger.error(f"Reached maximum retry count {max_retries}, giving up")
                 raise
 
-            # 从错误消息中提取重试延迟时间
+            # Extract retry delay time from error message
             error_message = str(e)
             retry_delay = extract_retry_delay_from_error(error_message)
 
-            # 如果找到了明确的重试时间，使用它
+            # If found explicit retry time, use it
             if retry_delay is not None:
                 delay = retry_delay
-                logger.info(f"从错误消息中提取到重试延迟时间: {delay}秒")
+                logger.info(f"Extracted retry delay from error message: {delay} seconds")
             else:
-                # 否则使用指数退避策略
+                # Otherwise use exponential backoff strategy
                 delay = initial_delay * (exponential_base ** attempt)
 
-            # 添加随机抖动以避免多个请求同时重试
+            # Add random jitter to avoid multiple requests retrying simultaneously
             if jitter:
                 delay = delay * (0.5 + random.random())
 
-            logger.warning(f"第 {attempt+1} 次尝试失败: {error_message}，将在 {delay:.2f} 秒后重试")
+            logger.warning(f"Attempt {attempt+1} failed: {error_message}, will retry after {delay:.2f} seconds")
 
-            # 等待延迟时间
+            # Wait for delay time
             await asyncio.sleep(delay)
 
-    # 这里不应该被执行到，因为最后一次尝试失败会在循环中抛出异常
+    # This should not be reached, as the last attempt failure will raise in the loop
     if last_exception:
         raise last_exception
 
-    raise RuntimeError("所有重试都失败，但没有异常被捕获，这不应该发生") 
+    raise RuntimeError("All retries failed but no exception was captured, this should not happen") 

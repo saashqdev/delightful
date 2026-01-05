@@ -12,7 +12,7 @@ from datetime import datetime, timedelta
 from typing import Any, Dict, List, Literal, Optional, Union
 
 from agentlang.config.config import config
-from agentlang.llms.token_usage.models import TokenUsage  # 导入统一的 TokenUsage 类
+from agentlang.llms.token_usage.models import TokenUsage  # Unified TokenUsage class
 from agentlang.logger import get_logger
 
 logger = get_logger(__name__)
@@ -351,26 +351,26 @@ class AssistantMessage:
 
     def to_dict(self) -> Dict[str, Any]:
         result = {
-            "id": str(uuid.uuid4()), # 运行时 ID
+            "id": str(uuid.uuid4()),  # Runtime ID
             "timestamp": self.created_at,
             "role": self.role,
             "content": self.content,
             "show_in_ui": self.show_in_ui,
-            "duration_ms": self.duration_ms, # 注意：这个字段在 save 时会被移除，转换成 duration 字符串
+            "duration_ms": self.duration_ms,  # Note: removed on save; converted to duration string
         }
 
-        # 处理 token_usage
+        # Handle token_usage
         if self.token_usage:
             result["token_usage"] = self.token_usage.to_dict()
 
-        # 只有当 compression_info 不为 None 时才添加
+        # Only include compression_info when present
         if self.compression_info:
             result["compression_info"] = self.compression_info.to_dict()
 
         if self.tool_calls:
             result["tool_calls"] = [tc.to_dict() for tc in self.tool_calls]
 
-        # 清理值为 None 的顶级键 (除了 content 和 tool_calls，因为 assistant 可以只有其中一个)
+        # Drop top-level keys that are None (except content/tool_calls since assistant can have either)
         result = {k: v for k, v in result.items() if v is not None or k in ['content', 'tool_calls']}
 
         return result

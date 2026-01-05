@@ -1,1 +1,1 @@
-"""PDF 插件模块""" 
+"""Markitdown plugin modules"""

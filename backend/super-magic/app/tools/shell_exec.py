@@ -18,45 +18,45 @@ logger = get_logger(__name__)
 
 
 class ShellExecParams(BaseToolParams):
-    """Shell命令执行参数"""
+    """Shell command execution parameters"""
     command: str = Field(
         ...,
-        description="要执行的 shell 命令"
+        description="Shell command to execute"
     )
     cwd: Optional[str] = Field(
         None,
-        description="命令执行的工作目录（可选）"
+        description="Working directory for command execution (optional)"
     )
     timeout: int = Field(
         60,
-        description="命令执行超时时间（秒），默认 60 秒"
+        description="Command execution timeout time (seconds), default 60 seconds"
     )
 
 
 @tool()
 class ShellExec(WorkspaceGuardTool[ShellExecParams]):
     """
-    Shell命令执行工具，用于执行系统命令。
+    Shell command execution tool for executing system commands.
 
-    使用场景：
-    - 执行系统命令
-    - 运行脚本
-    - 管理进程
-    - 文件操作
+    Use cases:
+    - Execute system commands
+    - Run scripts
+    - Manage processes
+    - File operations
 
-    注意：
-    - 命令将在系统 shell 中执行
-    - 支持设置工作目录
-    - 可以设置超时时间
-    - 只允许执行白名单中的安全命令，绝对不能执行有害命令
-    - 某些危险操作（如删除）需要额外确认
-    - 支持安全的复合命令执行（例如：mkdir -p /path && curl -o /file）
-    - 尽量一次只执行一个命令，尽量不要执行复合命令
+    Notes:
+    - Commands will be executed in the system shell
+    - Support setting working directory
+    - Can set timeout
+    - Only allow executing safe commands in whitelist, absolutely cannot execute harmful commands
+    - Some dangerous operations (such as deletion) require additional confirmation
+    - Support safe composite command execution (e.g.: mkdir -p /path && curl -o /file)
+    - Try to execute only one command at a time, avoid executing composite commands
     """
 
-    # 命令白名单配置
+    # Command whitelist configuration
     SAFE_COMMANDS: Dict[str, Set[str]] = {
-        # 文件和目录操作
+        # File and directory operations
         "ls": {"ls", "ls -l", "ls -la", "ls -lh", "ls -lah"},
         "cd": {"cd", "cd ..", "cd -"},
         "pwd": {"pwd"},
@@ -69,32 +69,32 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
         "touch": {"touch"},
         "chmod": {"chmod +x", "chmod 644", "chmod 755"},
         "find": {"find . -name", "find . -type", "find * -name", "find * -type"},
-        # 进程管理
+        # Process management
         "ps": {"ps", "ps aux", "ps -ef"},
         "kill": {"kill", "kill -9", "kill -15"},
         "pkill": {"pkill", "pkill -f"},
-        # 系统信息
+        # System information
         "df": {"df", "df -h"},
         "du": {"du", "du -h", "du -sh"},
         "free": {"free", "free -h", "free -m"},
         "top": {"top -n"},
         "htop": {"htop"},
-        # 网络工具
+        # Network tools
         "ping": {"ping -c"},
         "curl": {"curl", "curl -I", "curl -L", "curl -O", "curl -o"},
         "wget": {"wget"},
         "netstat": {"netstat", "netstat -an", "netstat -tulpn"},
         "ss": {"ss", "ss -tulpn"},
-        # 包管理
+        # Package management
         "pip": {"pip list", "pip show", "pip install", "pip uninstall"},
         "pip3": {"pip3 list", "pip3 show", "pip3 install", "pip3 uninstall"},
         "npm": {"npm list", "npm install", "npm uninstall", "npm run"},
         "yarn": {"yarn", "yarn add", "yarn remove", "yarn install"},
-        # 压缩和解压
+        # Compression and extraction
         "tar": {"tar -czf", "tar -xzf", "tar -cjf", "tar -xjf"},
         "zip": {"zip", "zip -r"},
         "unzip": {"unzip"},
-        # Git 操作
+        # Git action
         "git": {
             "git status",
             "git log",
@@ -112,41 +112,41 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
             "git clone",
             "git init",
         },
-        # 文本处理
+        # Text processing
         "grep": {"grep", "grep -r", "grep -i", "grep -v"},
         "sed": {"sed 's/", "sed -i 's/"},
         "awk": {"awk '{print", "awk -F"},
         "wc": {"wc", "wc -l", "wc -w"},
         "sort": {"sort", "sort -r", "sort -n"},
         "uniq": {"uniq", "uniq -c"},
-        # Python 相关
+        # Python related
         "python": {"python", "python3", "python -m", "python3 -m"},
         "pytest": {"pytest", "pytest -v", "pytest -k"},
         "coverage": {"coverage run", "coverage report"},
-        # 环境变量
+        # Environment variables
         "env": {"env", "env | grep"},
         "export": {"export"},
         "echo": {"echo", "echo $"},
     }
 
-    # 允许的命令分隔符
+    # Allowed command separators
     ALLOWED_SEPARATORS = ["&&", ";"]
 
     def _split_commands(self, command: str) -> List[str]:
         """
-        将复合命令拆分为单个命令列表
+        Split composite command into list of individual commands
 
         Args:
-            command: 可能包含分隔符的命令字符串
+            command: Command string that may contain separators
 
         Returns:
-            List[str]: 拆分后的命令列表
+            List[str]: List of split commands
         """
-        # 先保存分隔符用于临时替换
+        # First save separators for temporary replacement
         temp_replacements = {}
         preserved_command = command
 
-        # 临时替换引号内的内容以防止错误拆分
+        # Temporarily replace content within quotes to prevent incorrect splitting
         in_single_quote = False
         in_double_quote = False
         quote_content = ""
@@ -181,8 +181,8 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
                     quote_start = i
             i += 1
 
-        # 使用正则表达式拆分命令
-        # 注意：这个正则表达式匹配命令分隔符（&& 或 ;）
+        # Split commands using regex
+        # Note: This regex matches command separators (&& or ;)
         commands = []
         for separator in self.ALLOWED_SEPARATORS:
             if separator in preserved_command:
@@ -190,13 +190,13 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
 
         raw_commands = preserved_command.split("##SEP##")
 
-        # 恢复原始引号内容
+        # Restore original quote content
         for cmd in raw_commands:
             cmd = cmd.strip()
             if not cmd:
                 continue
 
-            # 恢复所有临时替换
+            # Restore all temporary replacements
             for placeholder, original in temp_replacements.items():
                 cmd = cmd.replace(placeholder, original)
 
@@ -206,26 +206,26 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
 
     def _is_command_safe(self, command: str) -> bool:
         """
-        检查命令是否在白名单中
+        Check if command is in whitelist
 
         Args:
-            command: 要检查的命令
+            command: The command to check
 
         Returns:
-            bool: 命令是否安全
+            bool: Whether the command is safe
         """
-        # 分割命令和参数
+        # Split command and parameters
         cmd_parts = command.strip().split()
         if not cmd_parts:
             return False
 
         base_cmd = cmd_parts[0]
 
-        # 检查基础命令是否在白名单中
+        # Check if base command is in whitelist
         if base_cmd not in self.SAFE_COMMANDS:
             return False
 
-        # 检查完整命令模式是否匹配白名单规则
+        # Check if complete command pattern matches whitelist rules
         for safe_pattern in self.SAFE_COMMANDS[base_cmd]:
             pattern = f"^{safe_pattern.replace('*', '.*')}.*$"
             if re.match(pattern, command):
@@ -235,64 +235,64 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
 
     def _sanitize_command(self, command: str) -> str:
         """
-        清理和规范化命令，但保留允许的分隔符
+        Clean and normalize command, but preserve allowed separators
 
         Args:
-            command: 原始命令
+            command: The original command
 
         Returns:
-            str: 清理后的命令
+            str: The cleaned command
         """
-        # 移除危险的 shell 操作符，但保留允许的分隔符
+        # Remove dangerous shell operators, but preserve allowed separators
         dangerous_operators = ["|", ">", "<", "`", "$", "\\"]
         cleaned_command = command
 
         for op in dangerous_operators:
             cleaned_command = cleaned_command.replace(op, "")
 
-        # 移除多余的空格，但保留命令之间的分隔
+        # Remove extra spaces, but preserve separators between commands
         for sep in self.ALLOWED_SEPARATORS:
             cleaned_command = cleaned_command.replace(sep, f" {sep} ")
 
-        # 规范化空格
+        # Normalize whitespace
         cleaned_command = " ".join(filter(None, cleaned_command.split()))
 
         return cleaned_command
 
     def _validate_commands(self, commands: List[str]) -> Tuple[bool, Optional[str]]:
         """
-        验证所有拆分后的命令是否安全
+        Validate if all split commands are safe
 
         Args:
-            commands: 拆分后的命令列表
+            commands: List of split commands
 
         Returns:
-            Tuple[bool, Optional[str]]: (是否全部安全, 错误信息)
+            Tuple[bool, Optional[str]]: (Whether all are safe, error information)
         """
         for cmd in commands:
             if not self._is_command_safe(cmd):
-                return False, f"命令不在安全白名单中: {cmd}"
+                return False, f"Command not in safe whitelist: {cmd}"
         return True, None
 
     def _check_workspace_path_safety(self, command: str) -> bool:
         """
-        检查命令中的路径是否都在工作区内
+        Check if paths in command are all within workspace
 
         Args:
-            command: 要检查的命令
+            command: The command to check
 
         Returns:
-            bool: 路径是否安全
+            bool: Whether the paths are safe
         """
-        # 提取命令中的所有路径参数
-        # 这是一个简化的实现，可能需要更复杂的逻辑来处理所有情况
+        # Extract all path parameters in command
+        # This is a simplified implementation, may need more complex logic to process all cases
         workspace_path = str(self.base_dir)
 
-        # 简单检查命令中提到的路径是否都在工作区内
+        # Simply check if paths mentioned in command are all within workspace
         words = command.split()
         for word in words:
             if word.startswith('/') and not word.startswith(workspace_path):
-                # 检查是否是工作区路径
+                # Check if it's a workspace path
                 if not any(workspace_path in word for workspace_path in ['.workspace', 'super-magic/.workspace']):
                     return False
 
@@ -300,20 +300,20 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
 
     async def execute(self, tool_context: ToolContext, params: ShellExecParams) -> TerminalToolResult:
         """
-        执行 shell 命令，支持复合命令
+        Execute shell command, supports composite commands
 
         Args:
-            tool_context: 工具上下文
-            params: 参数对象，包含命令、工作目录和超时时间
+            tool_context: Tool context
+            params: Parameters object containing command, working directory and timeout
 
         Returns:
-            TerminalToolResult: 包含执行结果的结构化结果对象
+            TerminalToolResult: Structured result object containing execution result
         """
         try:
-            # 处理工作目录
+            # Process working directory
             work_dir = self.base_dir
             if params.cwd:
-                # 使用父类方法获取安全的工作目录路径
+                # Use parent class method to get safe working directory path
                 cwd_path, error = self.get_safe_path(params.cwd)
                 if error:
                     return TerminalToolResult(
@@ -322,19 +322,19 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
                     )
                 work_dir = cwd_path
 
-            # 确保工作目录存在
+            # Ensure working directory exists
             if not work_dir.exists():
                 return TerminalToolResult(
-                    error=f"工作目录不存在: {work_dir}",
+                    error=f"Working directory does not exist: {work_dir}",
                     command=params.command
                 )
 
-            # 检查是否是复合命令
+            # Check if it is a composite command
             if any(sep in params.command for sep in self.ALLOWED_SEPARATORS):
-                # 拆分命令
+                # Split command
                 commands = self._split_commands(params.command)
 
-                # 验证所有命令是否安全
+                # Validate all commands are safe
                 all_safe, error_msg = self._validate_commands(commands)
                 if not all_safe:
                     return TerminalToolResult(
@@ -342,39 +342,39 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
                         command=params.command
                     )
 
-                # 检查所有命令中的路径是否安全
+                # Check if paths in all commands are safe
                 for cmd in commands:
                     if not self._check_workspace_path_safety(cmd):
                         return TerminalToolResult(
-                            error=f"命令包含工作区外的路径，不允许执行: {cmd}",
+                            error=f"Command contains path outside workspace, execution not allowed: {cmd}",
                             command=params.command
                         )
 
-                # 对于复合命令，保留分隔符并清理危险操作符
+                # For composite commands, preserve separators and clean dangerous operators
                 cleaned_command = self._sanitize_command(params.command)
 
-                logger.debug(f"执行复合命令: {cleaned_command}, 工作目录: {work_dir}")
+                logger.debug(f"Executing composite command: {cleaned_command}, working directory: {work_dir}")
 
             else:
-                # 单个命令，使用原有逻辑处理
+                # Single command, use original logic to process
                 cleaned_command = self._sanitize_command(params.command)
                 if not self._is_command_safe(cleaned_command):
                     return TerminalToolResult(
-                        error=f"命令不在安全白名单中: {params.command}",
+                        error=f"Command not in safe whitelist: {params.command}",
                         command=params.command
                     )
 
-                # 检查路径安全性
+                # Check path safety
                 if not self._check_workspace_path_safety(cleaned_command):
                     return TerminalToolResult(
-                        error=f"命令包含工作区外的路径，不允许执行: {cleaned_command}",
+                        error=f"Command contains path outside workspace, execution not allowed: {cleaned_command}",
                         command=params.command
                     )
 
-                logger.debug(f"执行命令: {cleaned_command}, 工作目录: {work_dir}")
+                logger.debug(f"Execute command: {cleaned_command}, working directory: {work_dir}")
 
-            # 创建结果对象
-            result = TerminalToolResult(command=cleaned_command, content="命令执行中...")
+            # Create result object
+            result = TerminalToolResult(command=cleaned_command, content="Command executing...")
 
             env_vars = {
                 **os.environ,
@@ -384,7 +384,7 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
                 'LANG': 'C.UTF-8'
             }
 
-            # 创建子进程
+            # Create subprocess
             process = await asyncio.create_subprocess_shell(
                 cleaned_command,
                 stdout=asyncio.subprocess.PIPE,
@@ -394,7 +394,7 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
             )
 
             try:
-                # 等待进程完成，带超时
+                # Wait for process to complete with timeout
                 stdout, stderr = await asyncio.wait_for(
                     process.communicate(), timeout=params.timeout
                 )
@@ -402,21 +402,21 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
                 stderr_str = stderr.decode().strip() if stderr else ""
                 exit_code = process.returncode
 
-                # 设置退出码
+                # Set exit code
                 result.set_exit_code(exit_code)
 
-                # 构建结构化内容
+                # Build structured content
                 if exit_code == 0:
-                    # 成功情况
-                    content = "命令执行成功\n"
+                    # Success case
+                    content = "Command execution successful\n"
                     if stdout_str:
                         content += f"stdout:\n{stdout_str}\n"
                     if stderr_str:
                         content += f"stderr:\n{stderr_str}\n"
                     result.content = content.strip()
                 else:
-                    # 失败情况
-                    error_content = f"命令执行失败 (退出码: {exit_code})\n"
+                    # Failed case
+                    error_content = f"Command execution failed (exit code: {exit_code})\n"
                     if stdout_str:
                         error_content += f"stdout:\n{stdout_str}\n"
                     if stderr_str:
@@ -424,7 +424,7 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
                     result.content = error_content.strip()
                     result.ok = False
 
-                # 构造命令信息JSON并保存到system字段
+                # Construct command information JSON and save to system field
                 system_info = {
                     "command": cleaned_command,
                     "cwd": str(work_dir),
@@ -438,7 +438,7 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
                 return result
 
             except asyncio.TimeoutError:
-                # 超时，强制终止进程
+                # Timeout, forcefully terminate process
                 if process.returncode is None:
                     try:
                         process.kill()
@@ -447,61 +447,61 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
                         pass
 
                 return TerminalToolResult(
-                    error=f"命令执行超时 ({params.timeout}秒): {cleaned_command}",
+                    error=f"Command execution timeout ({params.timeout} seconds): {cleaned_command}",
                     command=cleaned_command,
-                    exit_code=-1  # 使用-1表示超时
+                    exit_code=-1  # Use -1 to indicate timeout
                 )
 
         except Exception as e:
-            logger.exception(f"执行命令时出错: {e}")
+            logger.exception(f"Error executing command: {e}")
             return TerminalToolResult(
-                error=f"执行命令时出错: {e}",
+                error=f"Error executing command: {e}",
                 command=params.command,
-                exit_code=-2  # 使用-2表示异常
+                exit_code=-2  # Use -2 to indicate exception
             )
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
         """
-        获取工具调用后的友好动作和备注
+        Get friendly action and remark after tool call
         """
         command = arguments.get("command", "") if arguments else ""
         return {
-            "action": "执行Shell命令",
+            "action": "Executed shell command",
             "remark": command
         }
 
     async def get_tool_detail(self, tool_context: ToolContext, result: ToolResult, arguments: Dict[str, Any] = None) -> Optional[ToolDetail]:
         """
-        根据工具执行结果获取对应的ToolDetail
+        Get corresponding ToolDetail based on tool execution result
 
         Args:
-            tool_context: 工具上下文
-            result: 工具执行的结果
-            arguments: 工具执行的参数字典
+            tool_context: Tool context
+            result: Tool execution result
+            arguments: Tool execution parameters dictionary
 
         Returns:
-            Optional[ToolDetail]: 工具详情对象，可能为None
+            Optional[ToolDetail]: Tool detail object, may be None
         """
         if not result.ok:
             return None
 
         if not isinstance(result, TerminalToolResult):
-            logger.warning("结果不是TerminalToolResult类型")
+            logger.warning("Result is not of TerminalToolResult type")
             return None
 
-        # 获取命令、输出和退出码
+        # Get command, output and exit code
         command = result.command if hasattr(result, 'command') else arguments.get("command", "")
         output = result.content if result.content else ""
         exit_code = result.exit_code if hasattr(result, 'exit_code') else 0
 
-        # 创建终端内容对象
+        # Create terminal content object
         terminal_content = TerminalContent(
             command=command,
             output=output,
             exit_code=exit_code
         )
 
-        # 返回工具详情
+        # Return tool details
         return ToolDetail(
             type=DisplayType.TERMINAL,
             data=terminal_content

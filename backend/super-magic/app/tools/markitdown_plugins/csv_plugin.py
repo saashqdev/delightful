@@ -1,4 +1,4 @@
-"""CSV 解析插件实现"""
+"""CSV parsing plugin implementation"""
 
 from pathlib import Path
 from typing import Any, BinaryIO
@@ -9,7 +9,7 @@ from markitdown import (
     StreamInfo,
 )
 
-__plugin_interface_version__ = 1  # 插件接口版本
+__plugin_interface_version__ = 1  # Plugin interface version
 
 ACCEPTED_MIME_TYPE_PREFIXES = [
     "text/csv",
@@ -17,12 +17,12 @@ ACCEPTED_MIME_TYPE_PREFIXES = [
 
 ACCEPTED_FILE_EXTENSIONS = [".csv"]
 
-# CSV处理的最大行数限制
+# Maximum row limits for CSV processing
 CSV_MAX_ROWS = 1000
 CSV_MAX_PREVIEW_ROWS = 50
 
 class CSVConverter(DocumentConverter):
-    """CSV 文件转换器"""
+    """CSV file converter"""
 
     def accepts(
         self,
@@ -30,7 +30,7 @@ class CSVConverter(DocumentConverter):
         stream_info: StreamInfo,
         **kwargs: Any,
     ) -> bool:
-        """检查是否接受该文件类型"""
+        """Check whether this file type is accepted"""
         mimetype = (stream_info.mimetype or "").lower()
         extension = (stream_info.extension or "").lower()
 
@@ -49,33 +49,33 @@ class CSVConverter(DocumentConverter):
         stream_info: StreamInfo,
         **kwargs: Any,
     ) -> DocumentConverterResult:
-        """转换 CSV 文件为 Markdown"""
+        """Convert CSV file to Markdown"""
         try:
-            # 获取文件路径
+            # Get file path
             file_path = Path(file_stream.name) if hasattr(file_stream, 'name') and file_stream.name else None
             if not file_path:
                 return DocumentConverterResult(
                     title=None,
-                    markdown="错误: 无法获取文件路径",
+                    markdown="error: cannot get file path",
                 )
 
-            # 获取 offset 和 limit 参数
+            # Get offset and limit parameters
             offset = kwargs.get('offset', 0)
             limit = kwargs.get('limit', None)
 
-            # 如果未指定limit或limit<=0，则使用默认最大行数
+            # Use default max rows if limit not specified or <=0
             read_limit = CSV_MAX_ROWS if limit is None or limit <= 0 else limit
 
-            # 提供pandas安装提示
+            # Provide pandas install hint
             try:
                 import pandas as pd
             except ImportError:
                 return DocumentConverterResult(
                     title=None,
-                    markdown="错误: 需要安装pandas库才能读取CSV文件: pip install pandas",
+                    markdown="error: pandas is required to read CSV files: pip install pandas",
                 )
 
-            # 尝试不同的编码读取CSV
+            # Try different encodings to read CSV
             encodings = ['utf-8', 'gbk', 'gb2312', 'latin1']
             df = None
             used_encoding = None
@@ -86,7 +86,7 @@ class CSVConverter(DocumentConverter):
                         df = pd.read_csv(
                             file_path,
                             encoding=encoding,
-                            skiprows=range(1, offset + 1),  # 保留header行，但跳过其他行
+                            skiprows=range(1, offset + 1),  # Keep header, skip other rows
                             nrows=read_limit
                         )
                     else:
@@ -102,51 +102,51 @@ class CSVConverter(DocumentConverter):
                 except Exception as e:
                     return DocumentConverterResult(
                         title=None,
-                        markdown=f"使用编码 {encoding} 读取CSV失败: {e!s}",
+                        markdown=f"Reading CSV with encoding {encoding} failed: {e!s}",
                     )
 
             if df is None:
                 return DocumentConverterResult(
                     title=None,
-                    markdown=f"错误: 无法用常见编码(utf-8, gbk等)读取CSV文件: {file_path.name}",
+                    markdown=f"error: failed to read CSV with common encodings (utf-8, gbk, etc.): {file_path.name}",
                 )
 
-            # 获取行列信息
+            # Get row/column info
             row_count = len(df)
             col_count = len(df.columns)
 
             result_text = []
-            result_text.append(f"# CSV文件: {file_path.name}")
-            result_text.append(f"* 使用编码: {used_encoding}")
-            result_text.append(f"* 列数: {col_count}")
-            result_text.append(f"* 读取到的行数: {row_count}")
+            result_text.append(f"# CSVfile: {file_path.name}")
+            result_text.append(f"* Encoding used: {used_encoding}")
+            result_text.append(f"* Columns: {col_count}")
+            result_text.append(f"* Rows read: {row_count}")
 
             if row_count >= read_limit:
-                result_text.append(f"* 注意: 实际行数可能超过 {read_limit} 行，此处仅显示部分数据")
-                result_text.append("* 建议: 建议使用代码处理此CSV数据，例如:")
+                result_text.append(f"* Note: Actual rows may exceed {read_limit}; showing partial data")
+                result_text.append("* Tip: Use code to process this CSV, e.g.:")
                 result_text.append("```python")
                 result_text.append("import pandas as pd")
                 result_text.append(f"df = pd.read_csv('{file_path.name}', encoding='{used_encoding}')")
-                result_text.append("# 然后使用DataFrame的方法处理数据")
+                result_text.append("# Then use DataFrame methods to process data")
                 result_text.append("```")
 
-            # 将DataFrame转为字符串表示
+            # Convert DataFrame to string
             if row_count > 0:
-                # 对于行数过多的情况，只显示前几行
+                # For many rows, preview first rows
                 if row_count > CSV_MAX_PREVIEW_ROWS:
                     preview_df = df.head(CSV_MAX_PREVIEW_ROWS)
-                    result_text.append(f"\n## 数据预览 (前 {CSV_MAX_PREVIEW_ROWS} 行):")
+                    result_text.append(f"\n## Data preview (first {CSV_MAX_PREVIEW_ROWS} rows):")
                     result_text.append("```")
                     result_text.append(preview_df.to_string(index=False))
                     result_text.append("```")
-                    result_text.append(f"\n* 注意: 仅显示 {CSV_MAX_PREVIEW_ROWS} 行数据预览，完整数据请使用代码处理")
+                    result_text.append(f"\n* Note: Showing only {CSV_MAX_PREVIEW_ROWS} rows; use code for full data")
                 else:
-                    result_text.append("\n## 数据内容:")
+                    result_text.append("\n## Data content:")
                     result_text.append("```")
                     result_text.append(df.to_string(index=False))
                     result_text.append("```")
             else:
-                result_text.append("\n* CSV文件为空或指定范围内没有数据")
+                result_text.append("\n* CSV file is empty or has no data in the specified range")
 
             return DocumentConverterResult(
                 title=None,
@@ -155,5 +155,5 @@ class CSVConverter(DocumentConverter):
         except Exception as e:
             return DocumentConverterResult(
                 title=None,
-                markdown=f"解析CSV失败: {e!s}",
+                markdown=f"Parsing CSV failed: {e!s}",
             ) 

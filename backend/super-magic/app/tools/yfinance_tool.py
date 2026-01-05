@@ -1,6 +1,6 @@
-"""YFinance 工具模块
+"""YFinance tool module
 
-提供从 Yahoo Finance 获取金融市场数据的功能
+Provides functions to fetch financial market data from Yahoo Finance.
 """
 
 import asyncio
@@ -19,134 +19,134 @@ from app.tools.core import BaseTool, BaseToolParams, tool
 
 logger = get_logger(__name__)
 
-# 可用的查询类型
+# Available query types
 QUERY_TYPES = ["history", "info", "financials", "actions", "dividends", "institutional_holders",
               "major_holders", "balance_sheet", "cashflow", "earnings", "sustainability",
               "recommendations", "calendar", "news", "market_status"]
 
-# 时间周期映射
+# Time period mapping
 PERIOD_MAPPING = {
-    "1d": "1 天",
-    "5d": "5 天",
-    "1mo": "1 个月",
-    "3mo": "3 个月",
-    "6mo": "6 个月",
-    "1y": "1 年",
-    "2y": "2 年",
-    "5y": "5 年",
-    "10y": "10 年",
-    "ytd": "今年至今",
-    "max": "最大范围"
+    "1d": "1 day",
+    "5d": "5 days",
+    "1mo": "1 month",
+    "3mo": "3 months",
+    "6mo": "6 months",
+    "1y": "1 year",
+    "2y": "2 years",
+    "5y": "5 years",
+    "10y": "10 years",
+    "ytd": "Year to date",
+    "max": "Maximum range"
 }
 
-# 有效的时间间隔
+# Valid intervals
 VALID_INTERVALS = ["1m", "2m", "5m", "15m", "30m", "60m", "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo"]
 
 
 class YFinanceParams(BaseToolParams):
-    """YFinance 工具参数"""
+    """YFinance tool parameters"""
 
     ticker: str = Field(
         ...,
-        description="股票代码或股票代码列表，如 AAPL (苹果)、MSFT (微软)、GOOG (谷歌)、BABA (阿里巴巴)、9988.HK (港股阿里巴巴)、600519.SS (贵州茅台)等"
+        description="Stock symbol or list. Examples: AAPL, MSFT, GOOG, BABA, 9988.HK, 600519.SS"
     )
 
     query_type: str = Field(
         ...,
-        description=f"查询类型，支持以下选项：{', '.join(QUERY_TYPES)}"
+        description=f"Query type, supported options: {', '.join(QUERY_TYPES)}"
     )
 
     period: str = Field(
         "1mo",
-        description="时间范围，仅适用于 history 查询。可选值: 1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max"
+        description="Time period, only for history query. Options: 1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max"
     )
 
     interval: str = Field(
         "1d",
-        description="价格数据的时间间隔，仅适用于 history 查询。可选值: 1m, 2m, 5m, 15m, 30m, 60m, 90m, 1h, 1d, 5d, 1wk, 1mo, 3mo"
+        description="Price interval, only for history query. Options: 1m, 2m, 5m, 15m, 30m, 60m, 90m, 1h, 1d, 5d, 1wk, 1mo, 3mo"
     )
 
     limit: int = Field(
         10,
-        description="返回结果的最大条目数，用于限制返回数据量"
+        description="Maximum number of results to return"
     )
 
     @field_validator("query_type")
     def validate_query_type(cls, v):
-        """验证查询类型是否有效"""
+        """Validate query type"""
         if v not in QUERY_TYPES:
-            raise ValueError(f"无效的查询类型: {v}。有效选项: {', '.join(QUERY_TYPES)}")
+            raise ValueError(f"Invalid query type: {v}. Valid options: {', '.join(QUERY_TYPES)}")
         return v
 
     @field_validator("period")
     def validate_period(cls, v):
-        """验证时间范围是否有效"""
+        """Validate time period"""
         if v not in PERIOD_MAPPING:
-            raise ValueError(f"无效的时间范围: {v}。有效选项: {', '.join(PERIOD_MAPPING.keys())}")
+            raise ValueError(f"Invalid time period: {v}. Valid options: {', '.join(PERIOD_MAPPING.keys())}")
         return v
 
     @field_validator("interval")
     def validate_interval(cls, v):
-        """验证时间间隔是否有效"""
+        """Validate time interval"""
         if v not in VALID_INTERVALS:
-            raise ValueError(f"无效的时间间隔: {v}。有效选项: {', '.join(VALID_INTERVALS)}")
+            raise ValueError(f"Invalid interval: {v}. Valid options: {', '.join(VALID_INTERVALS)}")
         return v
 
     @classmethod
     def get_custom_error_message(cls, field_name: str, error_type: str) -> Optional[str]:
-        """获取自定义参数错误信息"""
+        """Get custom parameter error information"""
         if field_name == "ticker" and error_type == "missing":
-            return "请提供股票代码，例如 AAPL (苹果)、MSFT (微软)或 600519.SS (贵州茅台)"
+            return "Please provide a stock symbol, e.g., AAPL, MSFT, or 600519.SS"
 
         if field_name == "query_type" and error_type == "missing":
-            return f"请提供查询类型，有效选项: {', '.join(QUERY_TYPES)}"
+            return f"Please provide query type. Valid options: {', '.join(QUERY_TYPES)}"
 
         return None
 
 
 @tool()
 class YFinance(BaseTool[YFinanceParams]):
-    """Yahoo Finance 金融数据工具"""
+    """Yahoo Finance data tool"""
 
-    # 设置参数类
+    # Set params class
     params_class = YFinanceParams
 
-    # 设置工具元数据
+    # Tool metadata
     name = "yfinance"
-    description = """Yahoo Finance 金融数据工具，用于获取股票和金融市场数据。
-支持获取股票价格历史、公司基本信息、财务数据、股息信息等各类金融数据。
-数据来源为 Yahoo Finance，通过 yfinance 库获取。
+    description = """Yahoo Finance data tool for fetching stock and market data.
+Supports historical prices, company fundamentals, financial data, dividends, and more.
+Data source: Yahoo Finance via yfinance library.
 
-使用场景:
-- 获取股票历史价格和趋势分析
-- 获取公司基本信息和财务健康状况
-- 获取股息数据和分红历史
-- 获取财务报表数据(资产负债表、现金流量表等)
-- 获取机构持股和主要持股人信息
-- 获取市场状态和热门股票信息
+Use cases:
+- Fetch historical prices and trends
+- Get company fundamentals and financial health
+- Get dividend data and history
+- Retrieve financial statements (balance sheet, cash flow, etc.)
+- Get institutional/major holders information
+- Get market status and popular tickers
 
-支持的查询类型:
-- history: 历史价格数据
-- info: 公司基本信息和概览
-- financials: 财务报表摘要
-- actions: 股票行动(分红、拆分等)
-- dividends: 股息分红历史
-- institutional_holders: 机构持股情况
-- major_holders: 主要持股人
-- balance_sheet: 资产负债表
-- cashflow: 现金流量表
-- earnings: 收益数据
-- sustainability: 可持续发展评级
-- recommendations: 分析师推荐
-- calendar: 财报日历
-- news: 相关新闻
-- market_status: 市场状态
+Supported query types:
+- history: Historical price data
+- info: Company fundamentals and overview
+- financials: Financial statements summary
+- actions: Corporate actions (dividends, splits, etc.)
+- dividends: Dividend history
+- institutional_holders: Institutional holders
+- major_holders: Major holders
+- balance_sheet: Balance sheet
+- cashflow: Cash flow statement
+- earnings: Earnings data
+- sustainability: Sustainability ratings
+- recommendations: Analyst recommendations
+- calendar: Earnings/calendar events
+- news: Related news
+- market_status: Market status
 
-注意事项:
-- 请提供准确的股票代码，美股代码直接使用(如AAPL)，港股需添加.HK后缀(如9988.HK)，A股需添加.SS或.SZ后缀(如600519.SS)
-- 历史数据查询支持不同的时间范围和间隔设置
-- 部分查询类型可能对某些股票不可用
-- 数据可能有延迟，不适合实时交易决策
+Notes:
+- Provide accurate ticker symbols; US stocks use plain ticker (e.g., AAPL), HK stocks append .HK (e.g., 9988.HK), A-shares append .SS or .SZ (e.g., 600519.SS)
+- History queries support different time periods and intervals
+- Some query types may not be available for certain tickers
+- Data may be delayed and is not suitable for real-time trading decisions
 """
 
     async def execute(
@@ -155,27 +155,27 @@ class YFinance(BaseTool[YFinanceParams]):
         params: YFinanceParams
     ) -> ToolResult:
         """
-        执行 YFinance 查询并返回格式化的结果。
+        Execute YFinance query and return formatted result.
 
         Args:
-            tool_context: 工具上下文
-            params: 查询参数对象
+            tool_context: tool context
+            params: Query parameters object
 
         Returns:
-            YFinanceToolResult: 包含查询结果的工具结果
+            YFinanceToolResult: Tool result containing query output
         """
         try:
-            # 获取参数
+            # getparameters
             ticker = params.ticker
             query_type = params.query_type
             period = params.period
             interval = params.interval
             limit = params.limit
 
-            # 记录查询请求
-            logger.info(f"执行 YFinance 查询: 股票={ticker}, 类型={query_type}, 周期={period}, 间隔={interval}")
+            # Log query request
+            logger.info(f"Executing YFinance query: ticker={ticker}, type={query_type}, period={period}, interval={interval}")
 
-            # 创建结果对象
+            # Create result object
             result = YFinanceToolResult(content="")
             result.set_ticker(ticker)
             result.set_query_type(query_type)
@@ -183,26 +183,26 @@ class YFinance(BaseTool[YFinanceParams]):
             if query_type == "history":
                 result.set_time_period(period)
 
-            # 执行查询
+            # Execute query
             data = await self._perform_query(ticker, query_type, period, interval, limit)
 
-            # 处理查询结果
+            # Process query result
             if not data:
                 return YFinanceToolResult(
-                    error=f"没有找到 {ticker} 的 {query_type} 数据",
+                    error=f"No {query_type} data found for {ticker}",
                     ticker=ticker,
                     query_type=query_type
                 )
 
-            # 格式化输出
+            # Format output
             formatted_result = self._format_result(ticker, query_type, data, period)
             result.content = formatted_result
 
             return result
 
         except Exception as e:
-            logger.exception(f"YFinance 查询操作失败: {e!s}")
-            return YFinanceToolResult(error=f"金融数据查询失败: {e!s}")
+            logger.exception(f"YFinance query failed: {e!s}")
+            return YFinanceToolResult(error=f"Financial data query failed: {e!s}")
 
     async def _perform_query(
         self,
@@ -212,30 +212,30 @@ class YFinance(BaseTool[YFinanceParams]):
         interval: str,
         limit: int
     ) -> Any:
-        """执行实际的 YFinance 查询
+        """Execute actual YFinance query
 
         Args:
-            ticker: 股票代码
-            query_type: 查询类型
-            period: 时间范围
-            interval: 时间间隔
-            limit: 限制结果数量
+            ticker: stock symbol
+            query_type: Query type
+            period: time period
+            interval: Time interval
+            limit: Limit result count
 
         Returns:
-            Any: 查询结果数据
+            Any: Query result data
         """
-        # 创建异步任务
+        # Create async task
         loop = asyncio.get_event_loop()
 
         try:
-            # 使用 run_in_executor 将同步 YFinance 操作转换为异步
+            # Use run_in_executor to turn sync YFinance action into async
             result = await loop.run_in_executor(
                 None,
                 lambda: self._sync_query(ticker, query_type, period, interval, limit)
             )
             return result
         except Exception as e:
-            logger.error(f"YFinance 查询失败: {e!s}")
+            logger.error(f"YFinance query failed: {e!s}")
             return None
 
     def _sync_query(
@@ -246,46 +246,46 @@ class YFinance(BaseTool[YFinanceParams]):
         interval: str,
         limit: int
     ) -> Any:
-        """同步执行 YFinance 查询
+        """Synchronous YFinance query
 
         Args:
-            ticker: 股票代码
-            query_type: 查询类型
-            period: 时间范围
-            interval: 时间间隔
-            limit: 限制结果数量
+            ticker: stock symbol
+            query_type: Query type
+            period: time period
+            interval: Time interval
+            limit: Limit result count
 
         Returns:
-            Any: 查询结果数据
+            Any: Query result data
         """
-        # 获取股票信息
+        # Get ticker information
         ticker_obj = yf.Ticker(ticker)
 
-        # 根据查询类型执行不同操作
+        # Execute different actions by query type
         if query_type == "history":
-            # 获取历史价格数据
+            # Get historical price data
             df = ticker_obj.history(period=period, interval=interval)
-            # 转换为字典列表并限制数量
+            # Convert to list of dicts and limit
             records = df.tail(limit).reset_index().to_dict('records')
-            # 处理日期格式
+            # Format date
             for record in records:
                 if 'Date' in record and isinstance(record['Date'], datetime):
                     record['Date'] = record['Date'].strftime('%Y-%m-%d %H:%M:%S')
             return records
 
         elif query_type == "info":
-            # 获取公司基本信息
+            # Get company info
             return ticker_obj.info
 
         elif query_type == "financials":
-            # 获取财务报表摘要
+            # Get financial statements summary
             financials = ticker_obj.financials
             if financials is not None and not financials.empty:
                 return financials.to_dict()
             return None
 
         elif query_type == "actions":
-            # 获取股票行动(分红、拆分等)
+            # Get corporate actions (dividends, splits)
             actions = ticker_obj.actions
             if actions is not None and not actions.empty:
                 records = actions.tail(limit).reset_index().to_dict('records')
@@ -296,7 +296,7 @@ class YFinance(BaseTool[YFinanceParams]):
             return None
 
         elif query_type == "dividends":
-            # 获取股息分红历史
+            # Get dividend history
             dividends = ticker_obj.dividends
             if dividends is not None and not dividends.empty:
                 records = dividends.tail(limit).reset_index().to_dict('records')
@@ -307,49 +307,49 @@ class YFinance(BaseTool[YFinanceParams]):
             return None
 
         elif query_type == "institutional_holders":
-            # 获取机构持股情况
+            # Get institutional holders
             holders = ticker_obj.institutional_holders
             if holders is not None and not holders.empty:
                 return holders.head(limit).to_dict('records')
             return None
 
         elif query_type == "major_holders":
-            # 获取主要持股人
+            # Get major holders
             holders = ticker_obj.major_holders
             if holders is not None and not holders.empty:
                 return holders.to_dict('records')
             return None
 
         elif query_type == "balance_sheet":
-            # 获取资产负债表
+            # Get balance sheet
             balance_sheet = ticker_obj.balance_sheet
             if balance_sheet is not None and not balance_sheet.empty:
                 return balance_sheet.to_dict()
             return None
 
         elif query_type == "cashflow":
-            # 获取现金流量表
+            # Get cash flow statement
             cashflow = ticker_obj.cashflow
             if cashflow is not None and not cashflow.empty:
                 return cashflow.to_dict()
             return None
 
         elif query_type == "earnings":
-            # 获取收益数据
+            # Get earnings data
             earnings = ticker_obj.earnings
             if earnings is not None and not earnings.empty:
                 return earnings.to_dict()
             return None
 
         elif query_type == "sustainability":
-            # 获取可持续发展评级
+            # Get sustainability ratings
             sustainability = ticker_obj.sustainability
             if sustainability is not None and not sustainability.empty:
                 return sustainability.to_dict()
             return None
 
         elif query_type == "recommendations":
-            # 获取分析师推荐
+            # Get analyst recommendations
             recommendations = ticker_obj.recommendations
             if recommendations is not None and not recommendations.empty:
                 records = recommendations.tail(limit).reset_index().to_dict('records')
@@ -360,21 +360,21 @@ class YFinance(BaseTool[YFinanceParams]):
             return None
 
         elif query_type == "calendar":
-            # 获取财报日历
+            # Get earnings/calendar
             calendar = ticker_obj.calendar
             if calendar is not None and not calendar.empty:
                 return calendar.to_dict()
             return None
 
         elif query_type == "news":
-            # 获取相关新闻
+            # Get related news
             news = ticker_obj.news
             return news[:limit] if news else None
 
         elif query_type == "market_status":
-            # 获取市场状态
-            # 由于 yfinance 没有直接的市场状态 API，我们可以通过获取主要指数的最新数据来展示市场状态
-            indices = ['^DJI', '^GSPC', '^IXIC', '^HSI', '000001.SS']  # 道琼斯、标普500、纳斯达克、恒生指数、上证指数
+            # Get market status
+            # yfinance has no direct market status API; approximate using major indices
+            indices = ['^DJI', '^GSPC', '^IXIC', '^HSI', '000001.SS']  # Dow, S&P 500, Nasdaq, Hang Seng, SSE
             market_data = {}
 
             for index in indices:
@@ -394,41 +394,41 @@ class YFinance(BaseTool[YFinanceParams]):
                             'volume': last_row['Volume']
                         }
                 except Exception as e:
-                    logger.error(f"获取指数 {index} 数据失败: {e!s}")
+                    logger.error(f"Failed to fetch index {index} data: {e!s}")
 
             return market_data
 
-        # 默认返回 None
+        # Default return None
         return None
 
     def _format_result(self, ticker: str, query_type: str, data: Any, period: str = None) -> str:
-        """格式化查询结果为友好的文本输出
+        """Format query result into friendly text
 
         Args:
-            ticker: 股票代码
-            query_type: 查询类型
-            data: 查询结果数据
-            period: 时间范围
+            ticker: stock symbol
+            query_type: Query type
+            data: Query result data
+            period: time period
 
         Returns:
-            str: 格式化后的结果文本
+            str: Formatted result text
         """
         if not data:
-            return f"没有找到 {ticker} 的 {query_type} 数据"
+            return f"No {query_type} data found for {ticker}"
 
-        # 根据查询类型进行不同的格式化
+        # Format differently per query type
         if query_type == "history":
-            # 格式化历史价格数据
+            # Format historical price data
             period_text = PERIOD_MAPPING.get(period, period)
             result = {
-                "message": f"{ticker} 在过去 {period_text} 的历史价格数据",
+                "message": f"Historical price data for {ticker} over past {period_text}",
                 "data": data
             }
             return json.dumps(result, ensure_ascii=False)
 
         elif query_type == "info":
-            # 格式化公司基本信息
-            # 选择最重要的字段显示
+            # Format company info
+            # Select key fields
             important_fields = [
                 'shortName', 'longName', 'sector', 'industry', 'website',
                 'market', 'marketCap', 'currency', 'exchange',
@@ -439,25 +439,25 @@ class YFinance(BaseTool[YFinanceParams]):
                 'revenueGrowth', 'totalRevenue', 'grossMargins', 'profitMargins'
             ]
 
-            # 过滤数据，只保留重要字段
+            # Filter data to key fields
             filtered_data = {k: v for k, v in data.items() if k in important_fields and v is not None}
 
             result = {
-                "message": f"{ticker} 的公司基本信息",
+                "message": f"Company information for {ticker}",
                 "data": filtered_data
             }
             return json.dumps(result, ensure_ascii=False)
 
         elif query_type in ["financials", "balance_sheet", "cashflow", "earnings", "sustainability", "calendar"]:
-            # 这些是DataFrame转换的嵌套字典，需要特殊处理
+            # DataFrame-derived nested dicts; need special handling
             result = {
-                "message": f"{ticker} 的 {query_type} 数据",
+                "message": f"{query_type} data for {ticker}",
                 "data": self._process_dataframe_dict(data)
             }
             return json.dumps(result, ensure_ascii=False)
 
         elif query_type == "news":
-            # 格式化新闻数据
+            # Format news data
             formatted_news = []
             for news_item in data:
                 formatted_news.append({
@@ -470,35 +470,35 @@ class YFinance(BaseTool[YFinanceParams]):
                 })
 
             result = {
-                "message": f"{ticker} 的相关新闻",
+                "message": f"Related news for {ticker}",
                 "data": formatted_news
             }
             return json.dumps(result, ensure_ascii=False)
 
         elif query_type == "market_status":
-            # 格式化市场状态
+            # Format market status
             result = {
-                "message": "当前主要市场指数状态",
+                "message": "Current major market indices status",
                 "data": data
             }
             return json.dumps(result, ensure_ascii=False)
 
         else:
-            # 其他类型直接返回JSON字符串
+            # Other types: return JSON string
             result = {
-                "message": f"{ticker} 的 {query_type} 数据",
+                "message": f"{query_type} data for {ticker}",
                 "data": data
             }
             return json.dumps(result, ensure_ascii=False)
 
     def _process_dataframe_dict(self, data: Dict) -> Dict:
-        """处理从DataFrame转换来的嵌套字典，使其适合JSON序列化
+        """Process nested dict converted from DataFrame for JSON serialization
 
         Args:
-            data: DataFrame转换的字典
+            data: Dictionary converted from DataFrame
 
         Returns:
-            Dict: 处理后的字典
+            Dict: Processed dictionary
         """
         result = {}
 
@@ -506,16 +506,16 @@ class YFinance(BaseTool[YFinanceParams]):
             column_data = {}
 
             for date, value in values.items():
-                # 将日期对象转换为字符串
+                # Convert date objects to string
                 if isinstance(date, datetime):
                     date_str = date.strftime('%Y-%m-%d')
                 else:
                     date_str = str(date)
 
-                # 确保值是可序列化的
+                # Ensure value is serializable
                 if isinstance(value, (int, float, str, bool)) or value is None:
                     column_data[date_str] = value
-                elif hasattr(value, 'item'):  # numpy类型
+                elif hasattr(value, 'item'):  # numpy value
                     column_data[date_str] = value.item()
                 else:
                     column_data[date_str] = str(value)
@@ -525,20 +525,20 @@ class YFinance(BaseTool[YFinanceParams]):
         return result
 
     def _get_index_name(self, index_symbol: str) -> str:
-        """获取指数的中文名称
+        """Get human-friendly index name
 
         Args:
-            index_symbol: 指数代码
+            index_symbol: Index code
 
         Returns:
-            str: 指数名称
+            str: Index name
         """
         index_names = {
-            '^DJI': '道琼斯工业平均指数',
-            '^GSPC': '标普500指数',
-            '^IXIC': '纳斯达克综合指数',
-            '^HSI': '恒生指数',
-            '000001.SS': '上证指数'
+            '^DJI': 'Dow Jones Industrial Average',
+            '^GSPC': 'S&P 500',
+            '^IXIC': 'NASDAQ Composite',
+            '^HSI': 'Hang Seng Index',
+            '000001.SS': 'SSE Composite Index'
         }
 
         return index_names.get(index_symbol, index_symbol)

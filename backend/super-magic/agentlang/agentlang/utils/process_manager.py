@@ -1,12 +1,13 @@
 """
-子进程管理模块，提供独立的子进程管理功能
+"""Subprocess management module, provides independent subprocess management.
 
-此模块实现了一个可靠的子进程管理器，用于在FastAPI应用中管理长时间运行的后台进程。
-主要功能包括：
-1. 创建和管理独立的子进程
-2. 优雅地处理进程的终止和资源清理
-3. 集成FastAPI生命周期事件
-4. 提供异步接口与FastAPI的异步模型兼容
+This module implements a reliable subprocess manager for managing long-running
+background processes in FastAPI applications.
+Main features include:
+1. Create and manage independent subprocesses
+2. Gracefully handle process termination and resource cleanup
+3. Integrate with FastAPI lifecycle events
+4. Provide async interface compatible with FastAPI's async model
 """
 
 import asyncio
@@ -23,16 +24,15 @@ from agentlang.logger import get_logger
 logger = get_logger(__name__)
 
 class WorkerProcess:
-    """工作进程包装类，用于管理单个子进程"""
+    """Worker process wrapper class for managing a single subprocess."""
 
     def __init__(self, worker_function: Callable, *args: Any, **kwargs: Any):
-        """
-        初始化工作进程
+        """Initialize worker process.
 
         Args:
-            worker_function: 要在子进程中运行的函数
-            args: 传递给工作函数的位置参数
-            kwargs: 传递给工作函数的关键字参数
+            worker_function: Function to run in the subprocess
+            args: Positional arguments for the worker function
+            kwargs: Keyword arguments for the worker function
         """
         self.worker_function = worker_function
         self.args = args
@@ -41,17 +41,16 @@ class WorkerProcess:
         self.start_time: Optional[float] = None
 
     def start(self) -> int:
-        """
-        启动工作进程
+        """Start the worker process.
 
         Returns:
-            int: 进程ID
+            int: Process ID
         """
         self.process = mp.Process(
             target=self.worker_function,
             args=self.args,
             kwargs=self.kwargs,
-            daemon=True  # 设置为守护进程，主进程结束时自动结束
+            daemon=True  # Set as daemon process, auto-terminates when main process ends
         )
         self.process.start()
         self.start_time = time.time()
@@ -59,14 +58,13 @@ class WorkerProcess:
         return self.process.pid
 
     def terminate(self, timeout: int = 5) -> bool:
-        """
-        终止工作进程，首先尝试优雅终止，如果失败则强制终止
+        """Terminate the worker process, try graceful termination first, force if failed.
 
         Args:
-            timeout: 等待进程终止的超时时间(秒)
+            timeout: Timeout in seconds to wait for process termination
 
         Returns:
-            bool: 终止是否成功
+            bool: Whether termination was successful
         """
         if not self.process or not self.process.is_alive():
             logger.warning("Attempting to terminate a non-existent or already terminated process")
@@ -74,16 +72,16 @@ class WorkerProcess:
 
         logger.info(f"Terminating worker process PID={self.process.pid}")
 
-        # 尝试正常终止
+        # Attempt normal termination
         self.process.terminate()
         self.process.join(timeout=timeout)
 
-        # 如果进程仍在运行，强制终止
+        # If process is still running, force termination
         if self.process.is_alive():
             logger.warning(f"Worker process (PID={self.process.pid}) failed to terminate normally within {timeout} seconds, forcing termination")
             try:
                 os.kill(self.process.pid, signal.SIGKILL)
-                self.process.join(timeout=1)  # 再等待一小段时间
+                self.process.join(timeout=1)  # Wait a bit longer
             except Exception as e:
                 logger.error(f"Error during forced termination of worker process: {e}")
                 return False
@@ -92,20 +90,18 @@ class WorkerProcess:
         return True
 
     def is_alive(self) -> bool:
-        """
-        检查进程是否仍在运行
+        """Check if the process is still running.
 
         Returns:
-            bool: 进程是否存活
+            bool: Whether the process is alive
         """
         return self.process is not None and self.process.is_alive()
 
     def get_info(self) -> Dict[str, Any]:
-        """
-        获取进程信息
+        """Get process information.
 
         Returns:
-            Dict: 包含进程信息的字典
+            Dict: Dictionary containing process information
         """
         if not self.process:
             return {"status": "not_started"}
@@ -119,25 +115,25 @@ class WorkerProcess:
 
 
 class ProcessManager:
-    """进程管理器，管理多个工作进程"""
+    """Process manager for managing multiple worker processes."""
 
-    _instance = None  # 单例实例
+    _instance = None  # Singleton instance
 
     @staticmethod
     def run_command(cmd, cwd=None, **kwargs):
-        """通用的命令行执行函数
+        """Generic command-line execution function.
 
         Args:
-            cmd: 命令行参数列表
-            cwd: 工作目录
-            **kwargs: 其他传递给subprocess.Popen的参数
+            cmd: Command-line argument list
+            cwd: Working directory
+            **kwargs: Additional arguments passed to subprocess.Popen
         """
         try:
-            # 设置子进程的日志
+            # Set up subprocess logging
             logger = logging.getLogger("cmd_runner")
             logger.info(f"Command-line subprocess started: {' '.join(cmd if isinstance(cmd, list) else [cmd])}")
 
-            # 启动进程
+            # Start process
             process = subprocess.Popen(
                 cmd,
                 stdout=subprocess.PIPE,
@@ -148,7 +144,7 @@ class ProcessManager:
                 **kwargs
             )
 
-            # 读取并记录输出
+            # Read and log output
             for line in iter(process.stdout.readline, ''):
                 if line:
                     logger.info(f"Command output: {line.rstrip()}")
@@ -164,167 +160,161 @@ class ProcessManager:
 
     @classmethod
     def get_instance(cls) -> 'ProcessManager':
-        """
-        获取ProcessManager的单例实例
+        """Get the singleton instance of ProcessManager.
 
         Returns:
-            ProcessManager: 单例实例
+            ProcessManager: Singleton instance
         """
         if cls._instance is None:
             cls._instance = ProcessManager()
         return cls._instance
 
     def __init__(self):
-        """初始化进程管理器"""
+        """Initialize the process manager."""
         self.workers: Dict[str, WorkerProcess] = {}
         self._shutdown_event = asyncio.Event()
         self._monitor_task = None
         logger.info("Process manager initialized")
 
     async def start_worker(self, name: str, worker_function: Callable, *args: Any, **kwargs: Any) -> int:
-        """
-        异步启动一个新的工作进程
+        """Start a new worker process asynchronously.
 
         Args:
-            name: 进程的唯一名称
-            worker_function: 要在子进程中运行的函数
-            args: 传递给工作函数的位置参数
-            kwargs: 传递给工作函数的关键字参数
+            name: Unique name for the process
+            worker_function: Function to run in the subprocess
+            args: Positional arguments for the worker function
+            kwargs: Keyword arguments for the worker function
 
         Returns:
-            int: 进程ID
+            int: Process ID
         """
-        # 如果已存在同名进程，先停止它
+        # If a process with the same name exists, stop it first
         if name in self.workers:
             await self.stop_worker(name)
 
-        # 创建并启动新进程
+        # Create and start new process
         loop = asyncio.get_event_loop()
         worker = WorkerProcess(worker_function, *args, **kwargs)
 
-        # 在线程池中运行start方法，避免阻塞事件循环
+        # Run start method in thread pool to avoid blocking event loop
         pid = await loop.run_in_executor(None, worker.start)
 
-        # 记录进程
+        # Record the process
         self.workers[name] = worker
-        logger.info(f"工作进程 '{name}' 已启动，PID={pid}")
+        logger.info(f"Worker process '{name}' started, PID={pid}")
 
-        # 如果监控任务未运行，启动它
+        # If monitoring task is not running, start it
         if self._monitor_task is None or self._monitor_task.done():
             self._monitor_task = asyncio.create_task(self._monitor_workers())
 
         return pid
 
     async def start_worker_with_cmd(self, name: str, cmd: List[str], cwd: str = None, **kwargs: Any) -> int:
-        """
-        异步启动一个新的命令行工作进程
+        """Start a new command-line worker process asynchronously.
 
         Args:
-            name: 进程的唯一名称
-            cmd: 要执行的命令行列表
-            cwd: 工作目录
-            kwargs: 传递给subprocess.Popen的其他参数
+            name: Unique name for the process
+            cmd: Command-line list to execute
+            cwd: Working directory
+            kwargs: Additional arguments passed to subprocess.Popen
 
         Returns:
-            int: 进程ID
+            int: Process ID
         """
-        # 如果已存在同名进程，先停止它
+        # If a process with the same name exists, stop it first
         if name in self.workers:
             await self.stop_worker(name)
 
-        # 创建并启动新进程
+        # Create and start new process
         loop = asyncio.get_event_loop()
         worker = WorkerProcess(self.run_command, cmd, cwd, **kwargs)
 
-        # 在线程池中运行start方法，避免阻塞事件循环
+        # Run start method in thread pool to avoid blocking event loop
         pid = await loop.run_in_executor(None, worker.start)
 
-        # 记录进程
+        # Record the process
         self.workers[name] = worker
-        logger.info(f"命令行工作进程 '{name}' 已启动，PID={pid}")
+        logger.info(f"Command-line worker process '{name}' started, PID={pid}")
 
-        # 如果监控任务未运行，启动它
+        # If monitoring task is not running, start it
         if self._monitor_task is None or self._monitor_task.done():
             self._monitor_task = asyncio.create_task(self._monitor_workers())
 
         return pid
 
     async def stop_worker(self, name: str, timeout: int = 5) -> bool:
-        """
-        异步停止一个工作进程
+        """Stop a worker process asynchronously.
 
         Args:
-            name: 进程名称
-            timeout: 等待进程终止的超时时间(秒)
+            name: Process name
+            timeout: Timeout in seconds to wait for process termination
 
         Returns:
-            bool: 操作是否成功
+            bool: Whether the operation was successful
         """
         if name not in self.workers:
-            logger.warning(f"尝试停止不存在的工作进程: {name}")
+            logger.warning(f"Attempting to stop non-existent worker process: {name}")
             return False
 
         worker = self.workers[name]
         loop = asyncio.get_event_loop()
 
-        # 在线程池中运行terminate方法
+        # Run terminate method in thread pool
         success = await loop.run_in_executor(None, lambda: worker.terminate(timeout))
 
         if success:
-            # 从字典中移除
+            # Remove from dictionary
             del self.workers[name]
-            logger.info(f"工作进程 '{name}' 已停止并从管理器移除")
+            logger.info(f"Worker process '{name}' stopped and removed from manager")
 
         return success
 
     async def stop_all(self, timeout: int = 5) -> Dict[str, bool]:
-        """
-        异步停止所有工作进程
+        """Stop all worker processes asynchronously.
 
         Args:
-            timeout: 等待每个进程终止的超时时间(秒)
+            timeout: Timeout in seconds to wait for each process termination
 
         Returns:
-            Dict[str, bool]: 每个进程名称及其停止是否成功的映射
+            Dict[str, bool]: Mapping of each process name to whether it stopped successfully
         """
-        logger.info("正在停止所有工作进程...")
+        logger.info("Stopping all worker processes...")
 
-        # 设置关闭事件，停止监控任务
+        # Set shutdown event, stop monitoring task
         self._shutdown_event.set()
         if self._monitor_task and not self._monitor_task.done():
             try:
                 self._monitor_task.cancel()
-                await asyncio.sleep(0.1)  # 给任务一点时间取消
+                await asyncio.sleep(0.1)  # Give task some time to cancel
             except asyncio.CancelledError:
                 pass
 
         results = {}
         worker_names = list(self.workers.keys())
 
-        # 并发停止所有进程
+        # Stop all processes concurrently
         tasks = [self.stop_worker(name, timeout) for name in worker_names]
         if tasks:
             results_list = await asyncio.gather(*tasks, return_exceptions=True)
             results = {name: result for name, result in zip(worker_names, results_list) if not isinstance(result, Exception)}
 
-            # 处理异常
+            # Handle exceptions
             for name, result in zip(worker_names, results_list):
                 if isinstance(result, Exception):
-                    logger.error(f"停止工作进程 '{name}' 时出错: {result}")
+                    logger.error(f"Error stopping worker process '{name}': {result}")
                     results[name] = False
 
-        logger.info(f"所有工作进程停止操作完成，结果: {results}")
+        logger.info(f"All worker processes stop operation completed, results: {results}")
         return results
 
     async def get_worker_info(self, name: str = None) -> Dict[str, Any]:
-        """
-        获取特定工作进程或所有进程的信息
+        """Get information for a specific worker process or all processes.
 
         Args:
-            name: 进程名称，如果为None则返回所有进程信息
+            name: Process name, if None returns information for all processes
 
         Returns:
-            Dict: 包含进程信息的字典
+            Dict: Dictionary containing process information
         """
         if name:
             if name in self.workers:
@@ -334,31 +324,30 @@ class ProcessManager:
         return {name: worker.get_info() for name, worker in self.workers.items()}
 
     async def _monitor_workers(self) -> None:
-        """
-        监控工作进程状态的后台任务
+        """Background task for monitoring worker process status.
 
-        自动检测退出的进程并从管理器中移除
+        Automatically detects exited processes and removes them from the manager.
         """
-        logger.info("进程监控任务已启动")
+        logger.info("Process monitoring task started")
         try:
             while not self._shutdown_event.is_set():
                 for name in list(self.workers.keys()):
                     worker = self.workers.get(name)
                     if worker and not worker.is_alive():
                         info = worker.get_info()
-                        logger.info(f"检测到工作进程 '{name}' 已退出，退出码: {info.get('exit_code')}")
-                        # 从字典中移除已退出的进程
+                        logger.info(f"Detected worker process '{name}' has exited, exit code: {info.get('exit_code')}")
+                        # Remove exited process from dictionary
                         del self.workers[name]
 
-                # 每秒检查一次
+                # Check every second
                 try:
                     await asyncio.wait_for(self._shutdown_event.wait(), timeout=1)
                 except asyncio.TimeoutError:
-                    pass  # 预期的超时，继续循环
+                    pass  # Expected timeout, continue loop
 
         except asyncio.CancelledError:
-            logger.info("进程监控任务已取消")
+            logger.info("Process monitoring task cancelled")
         except Exception as e:
-            logger.error(f"进程监控任务出错: {e}", exc_info=True)
+            logger.error(f"Process monitoring task error: {e}", exc_info=True)
         finally:
-            logger.info("进程监控任务已结束")
+            logger.info("Process monitoring task ended")

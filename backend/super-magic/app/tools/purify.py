@@ -118,49 +118,49 @@ class Purify(BaseTool[PurifyParams]):
         original_content: str,
         criteria: Optional[str],
     ) -> Optional[str]:
-        """核心净化逻辑：添加行号、调用LLM、解析结果、过滤内容"""
+        """Core purification logic: add line numbers, call LLM, parse results, filter content"""
         try:
-            # 预处理：按行分割原始内容
-            original_lines = original_content.splitlines() # splitlines() 会自动处理各种换行符
+            # Preprocessing: split original content by lines
+            original_lines = original_content.splitlines() # splitlines() automatically handles various line endings
             if not original_lines:
-                return original_content # 如果分割后为空列表，说明原文可能是空的或只有换行符
+                return original_content # If split result is empty list, original content might be empty or only newlines
 
-            # 添加行号 (1-based)
+            # Add line numbers (1-based)
             lines_with_numbers = [f"{i+1}: {line}" for i, line in enumerate(original_lines)]
             content_with_line_numbers = "\n".join(lines_with_numbers)
 
-            # （可选）截断处理
+            # (Optional) Truncation handling
             truncated_content, is_truncated = truncate_text_by_token(content_with_line_numbers, DEFAULT_MAX_TOKENS)
             if is_truncated:
-                logger.warning(f"净化内容被截断: original_lines={len(original_lines)}, truncated_length={len(truncated_content)}")
-                # 注意：如果截断，LLM只能看到部分行，返回的行号也是基于这部分的，可能导致净化不完整
+                logger.warning(f"Purification content was truncated: original_lines={len(original_lines)}, truncated_length={len(truncated_content)}")
+                # Note: If truncated, LLM can only see partial lines, returned line numbers are also based on this part, may result in incomplete purification
 
-            # 构建 Prompt
+            # Build Prompt
             system_prompt = (
-                "你是文本净化助手，通常被用于网页内容净化。\n"
-                "你的任务是分析以下带行号的文本内容，识别出需要删除的行。\n"
-                "你需要谨慎地删除以下内容：广告、网页中的噪音（如：每个网页都会出现的导航栏或页脚内容，而非当前页面独有的信息）、多次重复出现的信息（保留最主要的那一条）、连续的多个空行等代表格式而非内容的行。\n"
-                "你要谨慎地进行删除，极力避免删除有价值的信息，只删除那些非常明显的垃圾信息，不要为了净化而净化。\n"
-                "你要确保删除后的文本是连贯的，不要破坏原有的结构和逻辑。\n"
-                "重要：请严格按照格式要求，仅输出需要删除的行的行号列表，以英文逗号分隔，确保只包含数字和逗号，不要包含任何其他文字、解释、空格或换行符。例如：3,5,10,11,25\n"
-                "如果所有行都需要保留，请返回空字符串。"
+                "You are a text purification assistant, typically used for web content purification.\n"
+                "Your task is to analyze the following text content with line numbers and identify lines that need to be deleted.\n"
+                "You need to carefully delete the following: advertisements, noise in web pages (such as navigation bars or footer content that appears on every webpage, rather than information unique to the current page), repeatedly appearing information (keep the most important one), consecutive multiple blank lines and other format-only lines.\n"
+                "You must be cautious when deleting, strive to avoid deleting valuable information, only delete very obvious junk information, do not purify for the sake of purifying.\n"
+                "You must ensure the text after deletion is coherent and does not break the original structure and logic.\n"
+                "Important: Strictly follow the format requirements, only output the list of line numbers to be deleted, separated by English commas, ensure it only contains numbers and commas, do not include any other text, explanations, spaces or newlines. For example: 3,5,10,11,25\n"
+                "If all lines need to be kept, please return an empty string."
             )
 
             user_prompt_parts = []
             if criteria:
-                user_prompt_parts.append(f"请特别注意以下用户要求：```\n{criteria}\n```")
+                user_prompt_parts.append(f"Please pay special attention to the following user requirements: ```\n{criteria}\n```")
 
-            user_prompt_parts.append(f"\n需要分析的文本内容如下:\n---\n{truncated_content}\n---")
+            user_prompt_parts.append(f"\nText content to analyze is as follows:\n---\n{truncated_content}\n---")
             user_prompt = "\n".join(user_prompt_parts)
 
-            # 构建消息
+            # Build messages
             messages = [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ]
 
-            # 调用 LLM
-            logger.debug(f"向 LLM 发送净化请求: 模型={DEFAULT_MODEL_ID}")
+            # Call LLM
+            logger.debug(f"Sending purification request to LLM: model={DEFAULT_MODEL_ID}")
             response = await LLMFactory.call_with_tool_support(
                 model_id=DEFAULT_MODEL_ID,
                 messages=messages,
@@ -168,125 +168,125 @@ class Purify(BaseTool[PurifyParams]):
                 stop=None,
             )
 
-            # 检查响应是否有效，content 可能是 None 或空字符串
+            # Check if response is valid, content might be None or empty string
             if not response or not response.choices or len(response.choices) == 0 or response.choices[0].message is None:
-                logger.error("LLM 返回了无效的响应结构")
+                logger.error("LLM returned an invalid response structure")
                 return None
 
-            # content 可能为 None 或 字符串
+            # content might be None or string
             llm_output_content = response.choices[0].message.content
             llm_output = llm_output_content.strip() if llm_output_content is not None else ""
 
-            logger.debug(f"LLM 返回的待删除行号原始输出: '{llm_output}'")
+            logger.debug(f"LLM returned raw output for line numbers to delete: '{llm_output}'")
 
-            # 解析响应，提取行号
+            # Parse response, extract line numbers
             lines_to_remove_set: Set[int] = set()
-            if llm_output: # 只有在LLM返回非空字符串时才尝试解析
-                # 使用正则表达式提取所有数字
+            if llm_output: # Only attempt to parse when LLM returns a non-empty string
+                # Use regex to extract all numbers
                 line_numbers_str = re.findall(r'\d+', llm_output)
-                # 检查是否只包含数字和逗号（以及可能的空格，已被strip移除）
-                # 如果提取出的数字拼接后和原始输出（去除非数字逗号后）不一致，说明含有非法字符
+                # Check if it only contains numbers and commas (and possible spaces, already removed by strip)
+                # If extracted numbers concatenated are inconsistent with original output (after removing non-numeric non-comma chars), it means there are illegal characters
                 if not all(c.isdigit() or c == ',' for c in llm_output.replace(" ", "")):
-                   logger.warning(f"LLM 返回的内容包含除数字和逗号外的字符: '{llm_output}'. 尝试仅提取数字。")
+                   logger.warning(f"LLM returned content contains characters other than numbers and commas: '{llm_output}'. Attempting to extract only numbers.")
 
-                if not line_numbers_str and llm_output: # 返回了非空但无法提取数字的内容
-                     logger.error(f"LLM 返回了无法解析为行号列表的非空内容: '{llm_output}'. 净化失败。")
+                if not line_numbers_str and llm_output: # Returned non-empty but unable to extract numbers
+                     logger.error(f"LLM returned non-empty content that cannot be parsed into a line number list: '{llm_output}'. Purification failed.")
                      return None
 
                 for num_str in line_numbers_str:
                     try:
                         line_num = int(num_str)
-                        if line_num > 0: # 行号是从1开始的
+                        if line_num > 0: # Line numbers start from 1
                              lines_to_remove_set.add(line_num)
                     except ValueError:
-                        # 这理论上不应该发生，因为 re.findall(r'\d+') 只会返回数字字符串
-                        logger.warning(f"尝试将 '{num_str}' 转换为整数时出错，已忽略。LLM原始输出: '{llm_output}'")
+                        # This should theoretically never happen, because re.findall(r'\d+') only returns numeric strings
+                        logger.warning(f"Error trying to convert '{num_str}' to integer, ignored. LLM raw output: '{llm_output}'")
 
-            logger.info(f"解析得到待删除行号 ({len(lines_to_remove_set)}个): {sorted(list(lines_to_remove_set))}")
+            logger.info(f"Parsed line numbers to delete ({len(lines_to_remove_set)} lines): {sorted(list(lines_to_remove_set))}")
 
-            # 调试日志：使用 opt(lazy=True) 实现惰性求值，打印完整的被删除行内容
+            # Debug log: use opt(lazy=True) for lazy evaluation, print complete deleted line content
             logger.opt(lazy=True).debug(
-                "将要删除的行内容 ({} 行):\n{}",
-                lambda: len(lines_to_remove_set), # 参数1: 行数
-                lambda: "\n".join( # 参数2: 拼接后的内容
+                "Lines to be deleted ({} lines):\n{}",
+                lambda: len(lines_to_remove_set), # Parameter 1: line count
+                lambda: "\n".join( # Parameter 2: concatenated content
                     f"  - Line {line_num}: {original_lines[line_num - 1]}"
-                    if 0 < line_num <= len(original_lines) else f"  - Line {line_num}: (无效行号)"
+                    if 0 < line_num <= len(original_lines) else f"  - Line {line_num}: (invalid line number)"
                     for line_num in sorted(list(lines_to_remove_set))
                 )
             )
 
-            # 过滤内容
+            # Filter content
             purified_lines = []
             for i, line in enumerate(original_lines):
-                # 当前行号是 i + 1
+                # Current line number is i + 1
                 if (i + 1) not in lines_to_remove_set:
                     purified_lines.append(line)
 
-            # 重组内容
+            # Reassemble content
             final_content = "\n".join(purified_lines)
 
-            # 如果截断了，添加提示
+            # If truncated, add note
             if is_truncated:
-                final_content += "\n\n(注：由于原文过长，此净化结果基于部分内容生成)"
+                final_content += "\n\n(Note: Due to excessive original content length, this purification result is based on partial content)"
 
             return final_content
 
         except Exception as e:
-            logger.exception(f"处理内容净化失败: {e!s}")
+            logger.exception(f"Content purification processing failed: {e!s}")
             return None
 
     async def get_tool_detail(self, tool_context: ToolContext, result: ToolResult, arguments: Dict[str, Any] = None) -> Optional[ToolDetail]:
-        """生成工具详情，用于前端展示"""
+        """Generate tool detail for frontend display"""
         if not result.ok or not result.content or not result.extra_info:
             return None
 
-        file_name = result.extra_info.get("file_name", "文件")
+        file_name = result.extra_info.get("file_name", "file")
         purified = result.extra_info.get("purified", False)
 
-        if not purified: # 文件为空或处理失败时，不展示特殊详情
-             # 可以返回一个简单的文本提示，或者None
+        if not purified: # When file is empty or processing failed, don't show special details
+             # Can return a simple text hint, or None
              return ToolDetail(type=DisplayType.TEXT, data=result.content)
 
-        # 对于成功净化的结果，以Markdown文件形式展示
+        # For successfully purified results, display as Markdown file
         try:
-            # 尝试保留原始文件扩展名，如果无法确定则用 .txt
+            # Try to keep original file extension, if unable to determine use .txt
             base_name, _, extension = file_name.rpartition('.')
-            if not extension or len(extension) > 5: # 简单判断是否是有效扩展名
+            if not extension or len(extension) > 5: # Simple check if it's a valid extension
                 extension = "txt"
             purified_file_name = f"{base_name or file_name}_purified.{extension}"
 
             return ToolDetail(
-                type=DisplayType.MD, # 或者根据文件类型决定？这里简化为MD
+                type=DisplayType.MD, # Or decide based on file type? Simplified to MD here
                 data=FileContent(
                     file_name=purified_file_name,
-                    content=result.content # result.content 已经是净化后的文本
+                    content=result.content # result.content is already the purified text
                 )
             )
         except Exception as e:
-            logger.error(f"生成净化工具详情失败: {e!s}")
-            return None # 出错则不显示详情
+            logger.error(f"Failed to generate purification tool detail: {e!s}")
+            return None # Don't display details if error occurs
 
     async def get_after_tool_call_friendly_action_and_remark(self, tool_name: str, tool_context: ToolContext, result: ToolResult, execution_time: float, arguments: Dict[str, Any] = None) -> Dict:
-        """获取工具调用后的友好动作和备注"""
-        action = "净化文件"
-        remark = "已完成文件净化" # 默认备注
+        """Get friendly action and remark after tool call"""
+        action = "Purify file"
+        remark = "File purification completed" # Default remark
 
         if arguments and "file_path" in arguments:
             file_path = arguments["file_path"]
             file_name = file_path.split('/')[-1]
             if result.ok and result.extra_info and result.extra_info.get("purified", False):
-                 remark = f"已完成对 '{file_name}' 的净化"
+                 remark = f"Purification of '{file_name}' completed"
             elif result.ok and result.extra_info and not result.extra_info.get("purified", False):
-                 remark = f"文件 '{file_name}' 无需净化" # 文件为空的情况
+                 remark = f"File '{file_name}' does not need purification" # File is empty case
             elif not result.ok:
-                 remark = f"净化 '{file_name}' 失败: {result.error or '未知错误'}"
+                 remark = f"Purification of '{file_name}' failed: {result.error or 'unknown error'}"
             else:
-                 remark = f"已尝试净化 '{file_name}'" # 默认成功，但无特殊信息
+                 remark = f"Attempted to purify '{file_name}'" # Default success, but no special info
 
         return {
             "action": action,
             "remark": remark
         }
 
-# 注意：确认 aiofiles 是否已在 requirements.txt 中
+# Note: Confirm if aiofiles is in requirements.txt
 # pip install aiofiles

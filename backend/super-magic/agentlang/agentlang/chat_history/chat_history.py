@@ -672,21 +672,21 @@ class ChatHistory:
 
     def get_messages_for_llm(self) -> List[Dict[str, Any]]:
         """
-        获取用于传递给 LLM API 的消息列表 (字典格式，严格白名单字段)。
-        此方法确保只包含 LLM API 理解的字段，并且格式正确。
-        所有内部使用的字段 (如 show_in_ui, duration_ms, token_usage, created_at, system(tool)) 都不会包含在内。
+        Build a whitelist-safe message list for LLM APIs (dict format).
+        Only includes fields the API understands; internal fields (show_in_ui, duration_ms,
+        token_usage, created_at, system/tool flags) are excluded.
         """
         llm_messages = []
-        # 遍历所有内部存储的消息
+        # Iterate all stored messages
         for message in self.messages:
-            # --- 白名单模式：只添加 API 需要的字段 --- #
+            # Whitelist mode: only include fields required by the API
             llm_msg: Dict[str, Any] = {"role": message.role}
 
             role = message.role
 
             if role == "system":
-                # System 消息只需要 role 和 content
-                content = getattr(message, 'content', ' ') # 确保 content 存在
+                # System messages only need role and content
+                content = getattr(message, 'content', ' ')  # Ensure content exists
                 llm_msg["content"] = content if content and content.strip() else " "
 
             elif role == "user":
@@ -764,45 +764,45 @@ class ChatHistory:
 
     def get_last_messages(self, n: int = 1) -> Union[Optional[ChatMessage], List[ChatMessage]]:
         """
-        获取最后的n条消息。
+        Get the last n messages.
 
         Args:
-            n (int): 要获取的消息数量，默认为1。
+            n (int): Number of messages to fetch. Defaults to 1.
 
         Returns:
             Union[Optional[ChatMessage], List[ChatMessage]]:
-            - 当n=1时：返回最后一条消息，如果历史为空则返回None
-            - 当n>1时：返回最后n条消息的列表，如果历史记录少于n条则返回所有可用消息
+            - When n=1: last message, or None if empty
+            - When n>1: list of the last n messages (or all if fewer)
         """
         if not self.messages:
             return None if n == 1 else []
 
         if n == 1:
-            # 返回单个消息对象，保持与旧get_last_message()相同的返回类型
+            # Return a single message to match legacy get_last_message()
             return self.messages[-1]
         else:
-            # 返回最后n条消息的列表
+            # Return list of last n messages
             return self.messages[-min(n, len(self.messages)):]
 
     def get_last_message(self) -> Optional[ChatMessage]:
         """
-        获取最后一条消息。
+        Get the last message.
 
-        注意: 此方法保留用于向后兼容性，建议使用get_last_messages()。
+        Note: kept for backward compatibility; prefer get_last_messages().
 
         Returns:
-            Optional[ChatMessage]: 最后一条消息，如果历史为空则返回 None。
+            Optional[ChatMessage]: Last message, or None if empty.
         """
         return self.get_last_messages(1)
 
     def get_second_last_message(self) -> Optional[ChatMessage]:
         """
-        获取倒数第二条消息。
+        Get the second-to-last message.
 
-        注意: 此方法保留用于向后兼容性，建议使用get_last_messages(2)[0]。
+        Note: kept for backward compatibility; prefer get_last_messages(2)[0].
 
         Returns:
-            Optional[ChatMessage]: 倒数第二条消息，如果历史记录少于两条则返回 None。
+            Optional[ChatMessage]: Second-to-last message, or None if fewer than two.
         """
         if len(self.messages) >= 2:
             return self.messages[-2]
@@ -810,153 +810,156 @@ class ChatHistory:
 
     def remove_last_message(self) -> Optional[ChatMessage]:
         """
-        移除最后一条消息并保存。
+        Remove the last message and save.
 
         Returns:
-            Optional[ChatMessage]: 被移除的消息，如果历史为空则返回 None。
+            Optional[ChatMessage]: Removed message, or None if empty.
         """
         if self.messages:
             removed_message = self.messages.pop()
             self.save()
-            logger.debug(f"移除了最后一条消息: {removed_message}")
+            logger.debug(f"Removed last message: {removed_message}")
             return removed_message
-        logger.debug("尝试移除最后一条消息，但历史记录为空。")
+        logger.debug("Tried to remove last message, but history is empty.")
         return None
 
     def insert_message_before_last(self, message: ChatMessage) -> None:
         """
-        在倒数第二条消息的位置插入一条消息，并保存。
-        如果历史记录少于一条消息，则效果等同于追加。
+        Insert a message before the last entry and save.
+        If there are fewer than one message, this acts as append.
 
         Args:
-            message (ChatMessage): 要插入的消息对象。
+            message (ChatMessage): Message to insert.
         """
         try:
             validated_message = self._validate_and_standardize(message)
             if len(self.messages) > 0:
                  insert_index = len(self.messages) - 1
                  self.messages.insert(insert_index, validated_message)
-                 logger.debug(f"在索引 {insert_index} 处插入消息: {validated_message}")
+                 logger.debug(f"Inserted message at index {insert_index}: {validated_message}")
             else:
-                 self.messages.append(validated_message) # 如果列表为空或只有一个元素，则追加
-                 logger.debug(f"历史记录不足，追加消息: {validated_message}")
+                 self.messages.append(validated_message)
+                 logger.debug(f"History too short, appended message: {validated_message}")
 
             self.save()
         except ValueError as e:
-             logger.error(f"插入无效消息失败: {e}")
+             logger.error(f"Failed to insert invalid message: {e}")
              raise
         except Exception as e:
-            logger.error(f"插入消息时发生意外错误: {e}", exc_info=True)
-            # 根据策略决定是否抛出异常
+            logger.error(f"Unexpected error inserting message: {e}", exc_info=True)
+            # Decide whether to re-raise based on policy
 
     def replace(self, new_messages: List[ChatMessage]) -> None:
         """
-        替换当前的聊天历史为新的消息列表，并保存。
+        Replace current chat history with a new message list and save.
 
         Args:
-            new_messages (List[ChatMessage]): 新的消息列表，用于替换当前历史。
+            new_messages (List[ChatMessage]): Messages to replace current history.
         """
         try:
-            # 验证每条消息
+            # Validate each message
             validated_messages = []
             for message in new_messages:
                 try:
                     validated_message = self._validate_and_standardize(message)
                     validated_messages.append(validated_message)
                 except ValueError as e:
-                    logger.warning(f"替换历史时跳过无效消息: {message}, 错误: {e}")
+                    logger.warning(f"Skipping invalid message while replacing history: {message}, error: {e}")
 
-            # 清空原有消息并添加新消息
+            # Replace messages
             self.messages.clear()
             self.messages.extend(validated_messages)
 
-            # 保存更新后的历史
+            # Save updated history
             self.save()
-            logger.info(f"聊天历史已替换为 {len(validated_messages)} 条新消息")
+            logger.info(f"Chat history replaced with {len(validated_messages)} new messages")
         except Exception as e:
-            logger.error(f"替换聊天历史时发生错误: {e}", exc_info=True)
+            logger.error(f"Error replacing chat history: {e}", exc_info=True)
             raise
 
     async def check_and_compress_if_needed(self) -> bool:
         """
-        检查聊天历史是否需要压缩，如需要则执行压缩。
-        此方法应在添加新消息后或其他适当时机调用。
+        Check whether chat history needs compression and compress if needed.
+        Call after adding messages or at other suitable times.
 
         Returns:
-            bool: 是否执行了压缩操作
+            bool: Whether compression was executed.
         """
-        # 获取当前消息数和token数
+        # Get current message and token counts
         current_message_count = self.count
         current_token_count = self.tokens_count
 
-        # 判断是否需要压缩
+        # Decide whether compression is needed
         if not self.compressor.should_compress(current_message_count, current_token_count):
             return False
 
-        logger.info("开始压缩聊天历史")
-        # 执行压缩
+        logger.info("Starting chat history compression")
+        # Perform compression
         return await self._compress_history()
 
     async def _compress_history(self) -> bool:
         """
-        历史压缩方法，实际执行压缩操作。
+        Internal compression routine.
 
         Returns:
-            bool: 是否执行了压缩操作
+            bool: Whether compression was executed.
         """
         try:
             original_count = len(self.messages)
-            # 筛选需要压缩的消息和需要保留的消息
+            # Identify messages to compress and to preserve
             to_preserved, to_compress, recent_messages = self.compressor._filter_messages_to_compress(self.messages)
 
             if not to_compress:
-                logger.info("没有需要压缩的消息")
+                logger.info("No messages need compression")
                 return False
 
-            # 压缩消息
+            # Compress selected messages
             compressed_message = await self.compressor.compress_messages(to_compress, to_preserved)
             if not compressed_message:
-                logger.warning("压缩失败，保持原始消息不变")
+                logger.warning("Compression failed; keeping original messages")
                 return False
 
-            # 用压缩后的消息和保留的消息替换原消息列表
+            # Replace with preserved + compressed + recent messages
             new_messages = to_preserved + [compressed_message] + recent_messages
 
-            # 更新消息列表
+            # Update message list
             self.replace(new_messages)
 
-            # 更新压缩器状态
+            # Update compressor stats
             self.compressor.update_compression_stats(
                 message_count=self.count,
                 token_count=self.tokens_count
             )
 
-            # 记录压缩效果
+            # Record compression results
             compressed_count = len(new_messages)
-            logger.info(f"压缩完成：原消息数={original_count}，压缩后消息数={compressed_count}，"
-                      f"压缩率={(original_count-compressed_count)/original_count:.1%}")
+            logger.info(
+                f"Compression complete: original_count={original_count}, "
+                f"compressed_count={compressed_count}, "
+                f"ratio={(original_count - compressed_count) / original_count:.1%}"
+            )
 
             return True
 
         except Exception as e:
-            logger.exception(f"压缩历史记录时出错: {e}")
+            logger.exception(f"Error compressing history: {e}")
             return False
 
     async def compress_history(self) -> bool:
         """
-        手动触发聊天历史压缩，不考虑任何阈值条件，强制执行压缩。
+        Manually trigger chat history compression, ignoring thresholds.
 
         Returns:
-            bool: 是否成功执行了压缩
+            bool: Whether compression executed successfully.
         """
-        logger.info("手动触发聊天历史压缩")
-        # 获取当前消息数和token数
+        logger.info("Manual chat history compression triggered")
+        # Get current message and token counts
         current_message_count = self.count
         current_token_count = self.tokens_count
 
-        # 强制执行压缩
+        # Force compression
         if not self.compressor.should_compress(current_message_count, current_token_count, force=True):
-            logger.info("即使强制压缩也无需执行压缩操作")
+            logger.info("Forced compression not needed")
             return False
 
         return await self._compress_history()
@@ -964,36 +967,35 @@ class ChatHistory:
     @staticmethod
     def upgrade_compression_config(chat_history: 'ChatHistory') -> 'ChatHistory':
         """
-        为已有的ChatHistory对象升级添加压缩配置。
-        在系统升级后，可能有些持久化的ChatHistory对象不包含压缩功能相关的字段，
-        可以通过此方法升级它们。
+        Add compression configuration to an existing ChatHistory instance.
+        Useful when persisted objects predate compression fields.
 
         Args:
-            chat_history (ChatHistory): 要升级的聊天历史对象
+            chat_history (ChatHistory): Chat history instance to upgrade.
 
         Returns:
-            ChatHistory: 升级后的聊天历史对象
+            ChatHistory: Upgraded chat history with compression config.
         """
-        # 检查是否已有压缩配置
+        # Check for existing compression config
         if hasattr(chat_history, 'compression_config') and chat_history.compression_config:
-            logger.debug("聊天历史已有压缩配置，无需升级")
+            logger.debug("Chat history already has compression config; no upgrade needed")
             return chat_history
 
-        # 添加默认压缩配置
-        logger.info(f"为聊天历史 {chat_history.agent_name}<{chat_history.agent_id}> 添加压缩配置")
+        # Add default compression config
+        logger.info(f"Adding compression config to chat history {chat_history.agent_name}<{chat_history.agent_id}>")
         chat_history.compression_config = CompressionConfig()
 
-        # 创建压缩器
+        # Create compressor
         chat_history.compressor = ChatHistoryCompressor(chat_history.compression_config)
 
         return chat_history
 
     def get_first_user_message(self) -> Optional[str]:
         """
-        获取聊天历史中第一条用户消息的内容。
+        Get the content of the first user message in history.
 
         Returns:
-            Optional[str]: 第一条用户消息的内容，如果没有用户消息则返回 None
+            Optional[str]: Content of the first user message, or None if none exist.
         """
         for message in self.messages:
             if message.role == "user":
@@ -1002,24 +1004,24 @@ class ChatHistory:
 
     def replace_last_user_message(self, new_content: str) -> bool:
         """
-        替换聊天历史中最后一条用户消息的内容。
+        Replace the content of the last user message.
 
         Args:
-            new_content (str): 新的消息内容
+            new_content (str): New message content.
 
         Returns:
-            bool: 是否成功替换了消息
+            bool: Whether the replacement succeeded.
         """
-        # 从后向前查找第一条用户消息
+        # Search backward for the last user message
         for i in range(len(self.messages) - 1, -1, -1):
             if self.messages[i].role == "user":
-                # 找到了用户消息，替换内容
+            # Found user message; replace content
                 self.messages[i].content = new_content
-                # 保存更改
+                # Persist change
                 self.save()
-                logger.debug(f"已将最后一条用户消息内容替换为: {new_content}")
+                logger.debug(f"Replaced last user message content with: {new_content}")
                 return True
 
-        # 未找到用户消息
-        logger.warning("尝试替换最后一条用户消息，但未找到任何用户消息")
+        # No user message found
+        logger.warning("Tried to replace last user message but none were found")
         return False

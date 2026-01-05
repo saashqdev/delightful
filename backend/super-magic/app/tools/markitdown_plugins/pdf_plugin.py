@@ -1,4 +1,4 @@
-"""PDF 解析插件实现"""
+"""PDF parsing plugin implementation"""
 
 import re
 from pathlib import Path
@@ -11,7 +11,7 @@ from markitdown import (
     StreamInfo,
 )
 
-__plugin_interface_version__ = 1  # 插件接口版本
+__plugin_interface_version__ = 1  # Plugin interface version
 
 ACCEPTED_MIME_TYPE_PREFIXES = [
     "application/pdf",
@@ -20,7 +20,7 @@ ACCEPTED_MIME_TYPE_PREFIXES = [
 ACCEPTED_FILE_EXTENSIONS = [".pdf"]
 
 class PDFConverter(DocumentConverter):
-    """PDF 文件转换器"""
+    """PDF file converter"""
 
     def accepts(
         self,
@@ -28,7 +28,7 @@ class PDFConverter(DocumentConverter):
         stream_info: StreamInfo,
         **kwargs: Any,
     ) -> bool:
-        """检查是否接受该文件类型"""
+        """Check whether this file type is accepted"""
         mimetype = (stream_info.mimetype or "").lower()
         extension = (stream_info.extension or "").lower()
 
@@ -47,7 +47,7 @@ class PDFConverter(DocumentConverter):
         stream_info: StreamInfo,
         **kwargs: Any,
     ) -> DocumentConverterResult:
-        """转换 PDF 文件为 Markdown"""
+        """Convert PDF file to Markdown"""
         try:
             result_text = []
 
@@ -58,93 +58,93 @@ class PDFConverter(DocumentConverter):
             result_text.append(f"# {file_name}")
             result_text.append("")
 
-            # 提取元数据信息
+            # Extract metadata
             doc_info = []
 
-            # 读取 PDF 文件
+            # Read PDF file
             pdf_reader = PyPDF2.PdfReader(file_stream)
 
-            # 获取页数
+            # Get page count
             num_pages = len(pdf_reader.pages)
-            doc_info.append(f"- 页数: {num_pages}")
+            doc_info.append(f"- Pages: {num_pages}")
 
-            # 提取文档信息
+            # Extract document metadata
             if pdf_reader.metadata:
                 metadata = pdf_reader.metadata
                 if metadata.title:
-                    doc_info.append(f"- 标题: {metadata.title}")
+                    doc_info.append(f"- Title: {metadata.title}")
                 if metadata.author:
-                    doc_info.append(f"- 作者: {metadata.author}")
+                    doc_info.append(f"- Author: {metadata.author}")
                 if metadata.subject:
-                    doc_info.append(f"- 主题: {metadata.subject}")
+                    doc_info.append(f"- Subject: {metadata.subject}")
                 if metadata.creator:
-                    doc_info.append(f"- 创建工具: {metadata.creator}")
+                    doc_info.append(f"- Created by: {metadata.creator}")
                 if hasattr(metadata, 'creation_date') and metadata.creation_date:
-                    doc_info.append(f"- 创建日期: {metadata.creation_date}")
+                    doc_info.append(f"- Creation date: {metadata.creation_date}")
 
-            # 添加文档信息区块
+            # Add document info block
             if doc_info:
-                result_text.append("## 文档信息")
+                result_text.append("## Document info")
                 result_text.append("")
                 result_text.extend(doc_info)
                 result_text.append("")
 
-            # 获取 offset 和 limit 参数
+            # Get offset and limit parameters
             offset = kwargs.get('offset', 0)
             limit = kwargs.get('limit', None)
 
-            # 计算要读取的页面范围
+            # Calculate page range to read
             start_page = max(0, offset)
             end_page = num_pages if limit is None or limit <= 0 else min(num_pages, start_page + limit)
 
-            # 如果是部分读取，添加页码范围提示
+            # Add page range note when partial read
             if start_page > 0 or (end_page < num_pages and limit is not None and limit > 0):
-                result_text.append(f"## 显示第 {start_page + 1} 页到第 {end_page} 页（共 {num_pages} 页）")
+                result_text.append(f"## Showing pages {start_page + 1} to {end_page} (total {num_pages})")
                 result_text.append("")
 
-            # 逐页提取内容
+            # Extract content page by page
             for page_num in range(start_page, end_page):
                 page = pdf_reader.pages[page_num]
 
-                # 添加页码标题
-                result_text.append(f"## 第 {page_num + 1} 页")
+                # Add page heading
+                result_text.append(f"## Page {page_num + 1}")
 
-                # 提取文本
+                # Extract text
                 try:
                     text = page.extract_text()
                     if text:
-                        # 检测可能的表格
+                        # Detect potential tables
                         table_detected = self._detect_table(text)
                         if table_detected:
                             text = self._process_potential_table(text)
 
-                        # 检测图片区域
+                        # Mark possible image regions
                         text = self._mark_potential_images(text)
 
-                        # 格式化文本
+                        # Format text
                         text = re.sub(r'\n{3,}', '\n\n', text)
                         text = re.sub(r'(?m)^(\s*)\*(\s+)', r'\1-\2', text)
                         text = re.sub(r'(?m)^(\s*)(\d+)\.(\s+)', r'\1\2.\3', text)
                         text = re.sub(r'(?m)^(\s*)>(\s+)', r'\1>\2', text)
                         text = self._detect_headings(text)
 
-                        # 添加格式化后的文本
+                        # Add formatted text
                         result_text.append(text)
                     else:
-                        result_text.append("[无文本内容]")
-                        result_text.append("\n*注意：此页可能为图片页面，无法提取文本内容*\n")
+                        result_text.append("[No text content]")
+                        result_text.append("\n*Note: This page may be image-only; text could not be extracted*\n")
                 except Exception as e:
-                    result_text.append(f"[提取文本失败: {e!s}]")
+                    result_text.append(f"[Text extraction failed: {e!s}]")
 
-                # 添加页面分隔符
+                # Add page separator
                 result_text.append("")
 
-            # 添加前后页面提示
+            # Add before/after page hints
             if start_page > 0:
-                result_text.insert(len(doc_info) + 5 if doc_info else 3, f"*注意：前 {start_page} 页未显示，可以通过设置 offset=0 查看*\n")
+                result_text.insert(len(doc_info) + 5 if doc_info else 3, f"*Note: First {start_page} page(s) not shown; set offset=0 to view*\n")
 
             if end_page < num_pages:
-                result_text.append(f"*注意：还有 {num_pages - end_page} 页未显示，可以通过增加 limit 参数或调整 offset 查看*")
+                result_text.append(f"*Note: {num_pages - end_page} page(s) not shown; increase limit or adjust offset to view*")
 
             return DocumentConverterResult(
                 title=None,
@@ -153,11 +153,11 @@ class PDFConverter(DocumentConverter):
         except Exception as e:
             return DocumentConverterResult(
                 title=None,
-                markdown=f"解析 PDF 失败: {e!s}",
+                markdown=f"Parsing PDF failed: {e!s}",
             )
 
     def _detect_table(self, text: str) -> bool:
-        """检测文本中是否包含表格"""
+        """Detect whether text likely contains tables"""
         lines = text.split('\n')
         if len(lines) < 3:
             return False
@@ -195,7 +195,7 @@ class PDFConverter(DocumentConverter):
         return False
 
     def _patterns_similar(self, pattern1: str, pattern2: str) -> bool:
-        """检查两个空格模式是否相似"""
+        """Check if two space patterns are similar"""
         p1_spaces = pattern1.count('s')
         p2_spaces = pattern2.count('s')
 
@@ -203,7 +203,7 @@ class PDFConverter(DocumentConverter):
                 abs(len(pattern1) - len(pattern2)) / max(len(pattern1), len(pattern2), 1) < 0.3)
 
     def _process_potential_table(self, text: str) -> str:
-        """处理可能的表格文本为 markdown 表格格式"""
+        """Process potential table text into markdown table format"""
         lines = text.split('\n')
         result_lines = []
 
@@ -233,9 +233,9 @@ class PDFConverter(DocumentConverter):
                         md_line += f" {col.strip()} |"
                     markdown_table.append(md_line)
 
-                result_lines.append("\n*检测到可能的表格内容:*\n")
+                result_lines.append("\n*Detected potential table content:*\n")
                 result_lines.extend(markdown_table)
-                result_lines.append("\n*注意: 上述表格是基于文本分析自动生成的，可能不准确*\n")
+                result_lines.append("\n*Note: Table generated automatically from text; may be inaccurate*\n")
 
                 i = j
             else:
@@ -245,7 +245,7 @@ class PDFConverter(DocumentConverter):
         return '\n'.join(result_lines)
 
     def _is_potential_table_row(self, line: str) -> bool:
-        """检查一行是否可能是表格的一部分"""
+        """Check if a line is likely part of a table"""
         if len(line.strip()) < 10:
             return False
 
@@ -253,24 +253,24 @@ class PDFConverter(DocumentConverter):
         return space_blocks >= 2 and len(re.sub(r'\s+', '', line)) > 5
 
     def _split_table_columns(self, line: str) -> list:
-        """将表格行分割为列"""
+        """Split a table row into columns"""
         return re.split(r'\s{2,}', line.strip())
 
     def _mark_potential_images(self, text: str) -> str:
-        """标记可能的图片区域"""
+        """Mark potential image regions"""
         patterns = [
-            r'图\s*\d+[\s\.:：]',
-            r'figure\s*\d+[\s\.:：]',
-            r'fig\.\s*\d+[\s\.:：]',
-            r'image\s*\d+[\s\.:：]',
-            r'photo\s*\d+[\s\.:：]',
-            r'illustration\s*\d+[\s\.:：]'
+            r'\u56fe\s*\d+[\s\.:\uff1a]',
+            r'figure\s*\d+[\s\.:\uff1a]',
+            r'fig\.\s*\d+[\s\.:\uff1a]',
+            r'image\s*\d+[\s\.:\uff1a]',
+            r'photo\s*\d+[\s\.:\uff1a]',
+            r'illustration\s*\d+[\s\.:\uff1a]'
         ]
 
         for pattern in patterns:
             text = re.sub(
                 pattern=f'({pattern})(.*?)($|\n\n)',
-                repl=r'\1\2\n\n*[图片占位符: 此处可能包含图片内容]*\n\3',
+                repl=r'\1\2\n\n*[Image placeholder: likely image content here]*\n\3',
                 string=text,
                 flags=re.DOTALL | re.IGNORECASE
             )
@@ -278,7 +278,7 @@ class PDFConverter(DocumentConverter):
         return text
 
     def _detect_headings(self, text: str) -> str:
-        """检测并格式化标题"""
+        """Detect and format headings"""
         lines = text.split('\n')
         result_lines = []
 

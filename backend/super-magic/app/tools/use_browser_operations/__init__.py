@@ -1,6 +1,6 @@
-"""浏览器操作模块
+"""Browser operations module
 
-此模块包含所有浏览器操作的定义和实现，使用Pydantic模型进行参数验证。
+Contains definitions and implementations for all browser operations, using Pydantic models for parameter validation.
 """
 
 from app.tools.use_browser_operations.base import BaseOperationParams, OperationGroup, operation

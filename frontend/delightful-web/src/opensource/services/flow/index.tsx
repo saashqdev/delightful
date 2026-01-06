@@ -18,7 +18,7 @@ class FlowService {
 		this.flowApi = dependencies.FlowApi
 	}
 
-	/** 查询流程列表 */
+	/** Query flow list */
 	getFlowList({ type = FlowType.Main, page = 1, pageSize = 100, name }: GetFlowListParams) {
 		return this.flowApi.getFlowList({
 			type,
@@ -28,192 +28,192 @@ class FlowService {
 		})
 	}
 
-	/** 查询流程详情 */
+	/** Query flow details */
 	getFlow(flowId: string) {
 		return this.flowApi.getFlow(flowId)
 	}
 
-	/** 流程试运行 */
+	/** Flow trial run */
 	testFlow(flow: DelightfulFlow.Flow & { trigger_config: TriggerConfig }) {
 		return this.flowApi.testFlow(flow)
 	}
 
-	/** 新增或修改流程基本信息 */
+	/** Add or update flow basic information */
 	addOrUpdateFlowBaseInfo(flow: Partial<DelightfulFlow.Flow> & { type?: FlowType }) {
 		return this.flowApi.addOrUpdateFlowBaseInfo(flow)
 	}
 
-	/** 删除流程 */
+	/** Delete flow */
 	deleteFlow(flowId: string) {
 		return this.flowApi.deleteFlow(flowId)
 	}
 
-	/** 保存流程详情 */
+	/** Save flow details */
 	saveFlow(flow: DelightfulFlow.Flow) {
 		return this.flowApi.saveFlow(flow)
 	}
 
-	/** 保存流程为草稿 */
+	/** Save flow as draft */
 	saveFlowDraft(draftDetail: FlowDraft.RequestArgs, flowId: string) {
 		return this.flowApi.saveFlowDraft(draftDetail, flowId)
 	}
 
-	/** 查询流程草稿列表 */
+	/** Query flow draft list */
 	getFlowDraftList(flowId: string) {
 		return this.flowApi.getFlowDraftList(flowId)
 	}
 
-	/** 查询流程草稿详情 */
+	/** Query flow draft details */
 	getFlowDraftDetail(flowId: string, draftId: string) {
 		return this.flowApi.getFlowDraftDetail(flowId, draftId)
 	}
 
-	/** 删除流程草稿 */
+	/** Delete flow draft */
 	deleteFlowDraft(flowId: string, draftId: string) {
 		return this.flowApi.deleteFlowDraft(flowId, draftId)
 	}
 
-	/** 查询流程版本列表 */
+	/** Query flow version list */
 	getFlowPublishList(flowId: string, page = 1, pageSize = 200) {
 		return this.flowApi.getFlowPublishList(flowId, page, pageSize)
 	}
 
-	/** 查询流程版本详情 */
+	/** Query flow version details */
 	getFlowPublishDetail(flowId: string, versionId: string) {
 		return this.flowApi.getFlowPublishDetail(flowId, versionId)
 	}
 
-	/** 发布流程版本 */
+	/** Publish flow version */
 	publishFlow(publishDetail: FlowDraft.RequestArgs, flowId: string) {
 		return this.flowApi.publishFlow(publishDetail, flowId)
 	}
 
-	/** 回滚流程版本 */
+	/** Rollback flow version */
 	restoreFlow(flowId: string, versionId: string) {
 		return this.flowApi.restoreFlow(flowId, versionId)
 	}
 
-	/** 修改流程启用状态 */
+	/** Modify flow enable status */
 	changeEnableStatus(id: string) {
 		return this.flowApi.changeEnableStatus(id)
 	}
 
-	/** 单点调试 */
+	/** Single node debug */
 	testNode(params: TestNodeParams) {
 		return this.flowApi.testNode(params)
 	}
 
-	/** 获取可用 LLM 模型 */
+	/** Get available LLM models */
 	getLLMModal() {
 		return this.flowApi.getLLMModal()
 	}
 
-	/** 给指定工作流添加开放平台应用 */
+	/** Add open platform application to specified workflow */
 	bindOpenApiAccount(flowId: string, openPlatformAppIds: string[]) {
 		return this.flowApi.bindOpenApiAccount(flowId, openPlatformAppIds)
 	}
 
-	/** 移除指定工作流的开放平台应用 */
+	/** Remove open platform application from specified workflow */
 	removeOpenApiAccount(flowId: string, openPlatformAppIds: string[]) {
 		return this.flowApi.removeOpenApiAccount(flowId, openPlatformAppIds)
 	}
 
-	/** 获取指定工作流绑定的开放平台应用列表 */
+	/** Get bound open platform application list for specified workflow */
 	getOpenApiAccountList(flowId: string, page = 1, pageSize = 100) {
 		return this.flowApi.getOpenApiAccountList(flowId, page, pageSize)
 	}
 
-	/** 获取当前用户可绑定的开放平台应用列表 */
+	/** Get current user's bindable open platform application list */
 	getOpenPlatformOfMine(page = 1, pageSize = 100) {
 		return this.flowApi.getOpenPlatformOfMine(page, pageSize)
 	}
 
-	/** 获取子流程的出入参 */
+	/** Get subflow input and output parameters */
 	getSubFlowArguments(flowId: string) {
 		return this.flowApi.getSubFlowArguments(flowId)
 	}
 
-	/** 保存 api-key */
+	/** Save api-key */
 	saveApiKey(params: ApiKeyRequestParams, flowId: string) {
 		return this.flowApi.saveApiKey(params, flowId)
 	}
 
-	/** 查询 api-key 列表 */
+	/** Query api-key list */
 	getApiKeyList(flowId: string, page = 1, pageSize = 100) {
 		return this.flowApi.getApiKeyList(flowId, page, pageSize)
 	}
 
-	/** 查询 api-key 详情 */
+	/** Query api-key details */
 	getApiKeyDetail(id: string, flowId: string) {
 		return this.flowApi.getApiKeyDetail(id, flowId)
 	}
 
-	/** 删除 api-key  */
+	/** Delete api-key  */
 	deleteApiKey(id: string, flowId: string) {
 		return this.flowApi.deleteApiKey(id, flowId)
 	}
 
-	/** 重建 api-key  */
+	/** Rebuild api-key  */
 	rebuildApiKey(id: string, flowId: string) {
 		return this.flowApi.rebuildApiKey(id, flowId)
 	}
 
-	/** 获取数据表  */
+	/** Get data sheets  */
 	getSheets(fileId: string) {
 		return this.flowApi.getSheets(fileId)
 	}
 
-	/** 搜索文件列表 */
+	/** Search file list */
 	getFiles(params: File.RequestParams) {
 		return this.flowApi.getFiles(params)
 	}
 
-	/** 搜索文件列表 */
+	/** Search file list */
 	getFile(fileId: string) {
 		return this.flowApi.getFile(fileId)
 	}
 
-	/** 工具集列表 */
+	/** Toolset list */
 	getToolList({ page = 1, pageSize = 10, name }: FlowTool.GetToolListParams) {
 		return this.flowApi.getToolList({ page, pageSize, name })
 	}
 
-	/** 可用的工具集列表 */
+	/** Available toolset list */
 	getUseableToolList() {
 		return this.flowApi.getUseableToolList()
 	}
 
-	/** 可用的知识库列表 */
+	/** Available knowledge base list */
 	getUseableDatabaseList() {
 		return this.flowApi.getUseableDatabaseList()
 	}
 
-	/** 查询流工具集详情 */
+	/** Query flow toolset details */
 	getToolDetail(id: string) {
 		return this.flowApi.getToolDetail(id)
 	}
 
-	/** 删除工具集 */
+	/** Delete toolset */
 	deleteTool(id: string) {
 		return this.flowApi.deleteTool(id)
 	}
 
-	/** 保存工具集 */
+	/** Save toolset */
 	saveTool(params: FlowTool.SaveToolParams) {
 		return this.flowApi.saveTool(params)
 	}
 
-	/** 保存工具集 */
+	/** Save toolset */
 	getAvailableTools(toolIds: string[]) {
 		return this.flowApi.getAvailableTools(toolIds)
 	}
 
-	/** 获取函数表达式数据源 */
+	/** Get function expression data source */
 	getMethodsDataSource() {
 		return this.flowApi.getMethodsDataSource()
 	}
 
-	/** 获取视觉理解模型数据源 */
+	/** Get vision understanding model data source */
 	getVisionModels(category: string = "vlm") {
 		return this.flowApi.getVisionModels(category)
 	}
@@ -223,7 +223,7 @@ class FlowService {
 		return this.flowApi.callToolOrFlow(apiKey, params)
 	}
 
-	/** 调用Agent进行对话 */
+	/** Call Agent for conversation */
 	callAgent(apiKey: string, params: { message: string; conversation_id: string }) {
 		return this.flowApi.callAgent(apiKey, params)
 	}

@@ -9,7 +9,7 @@ import { FlowService } from "./flow"
 export function initializeApp() {
 	const container = new ServiceContainer()
 
-	// 将 API 初始化延迟到实际创建服务时进行
+	// Delay API initialization until services are actually created
 	container.registerFactory<UserService>(
 		"userService",
 		(c: Container) => new UserService(apis as any, c),
@@ -24,7 +24,7 @@ export function initializeApp() {
 
 	container.registerFactory<FlowService>("flowService", () => new FlowService(apis as any))
 
-	// 获取服务实例 - 容器内部会处理异步工厂的情况
+	// Get service instances - container handles async factory internally
 	const userService = container.get<UserService>("userService")
 	const loginService = container.get<LoginService>("loginService")
 	const configService = container.get<ConfigService>("configService")
@@ -32,7 +32,7 @@ export function initializeApp() {
 
 	initialApi(container)
 
-	// 返回可供应用使用的服务实例
+	// Return service instances for application use
 	return {
 		userService,
 		loginService,

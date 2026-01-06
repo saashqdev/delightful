@@ -21,7 +21,7 @@ export class ConfigService {
 		const config = new ConfigRepository()
 		const theme = await config.getThemeConfig()
 
-		// 主题初始化
+		// Theme initialization
 		if (!theme) {
 			const defaultTheme = configStore.theme.theme
 			await config.setThemeConfig(defaultTheme)
@@ -29,7 +29,7 @@ export class ConfigService {
 			configStore.theme.setTheme(theme as ThemeMode)
 		}
 
-		// 国际化语言初始化
+		// Internationalization language initialization
 		const locale = await config.getLocaleConfig()
 		if (!locale) {
 			const defaultLocale = configStore.i18n.language
@@ -38,7 +38,7 @@ export class ConfigService {
 			configStore.i18n.setLanguage(locale)
 		}
 
-		// 集群编码初始化
+		// Cluster code initialization
 		const clusterCode = await config.getClusterConfig()
 		if (!clusterCode) {
 			const defaultClusterCodeCache = configStore.cluster.clusterCodeCache
@@ -47,7 +47,7 @@ export class ConfigService {
 			configStore.cluster.setClusterCodeCache(clusterCode)
 		}
 
-		// 集群配置初始化
+		// Cluster configuration initialization
 		const cluster = new ClusterRepository()
 		const clustersConfig = await cluster.getAll()
 		if (!clustersConfig) {
@@ -100,7 +100,7 @@ export class ConfigService {
 	 */
 	async setClusterConfig(authCode: string, clusterConfig: Common.PrivateConfig) {
 		try {
-			// 数据持久化
+			// Data persistence
 			const config = new ConfigRepository()
 			await config.setClusterConfig(authCode)
 			const cluster = new ClusterRepository()
@@ -109,7 +109,7 @@ export class ConfigService {
 			console.warn(error)
 		}
 
-		// 内存状态变更
+		// Memory state change
 		configStore.cluster.setClusterCodeCache(authCode)
 		configStore.cluster.setClusterConfig(authCode, clusterConfig)
 	}

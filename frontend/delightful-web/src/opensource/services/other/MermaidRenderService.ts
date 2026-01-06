@@ -19,26 +19,26 @@ class MermaidRenderService {
 	}
 
 	/**
-	 * 判断svg是否生成失败
+	 * Check if svg generation failed
 	 * @param svg svg
-	 * @returns 是否生成失败
+	 * @returns Whether generation failed
 	 */
 	isErrorSvg(svg: string) {
 		return svg.includes(MERMAID_ERROR_SVG)
 	}
 
 	/**
-	 * 缓存svg
-	 * @param chart 图表
+	 * Cache svg
+	 * @param chart Chart
 	 * @param svg svg
 	 */
 	cache(chart: string, svg: RenderResult) {
-		// 如果缓存中存在且svg相同，则不缓存
+		// If cache exists and svg is the same, don't cache
 		if (this.cacheSvg.get(chart) && this.cacheSvg.get(chart)?.svg === svg.svg) {
 			return this.cacheSvg.get(chart)
 		}
 
-		// 匹配到<g></g>标签，则认为没有渲染成功
+		// If matches <g></g> tag, consider rendering unsuccessful
 		if (this.isErrorSvg(svg.svg)) {
 			return undefined
 		}
@@ -53,7 +53,7 @@ class MermaidRenderService {
 		this.cacheSvg.set(chart, result)
 
 		this.db.mermaid.put(result).catch((err) => {
-			console.error("缓存失败", err)
+			console.error("Cache failed", err)
 		})
 
 		return result

@@ -5,7 +5,7 @@ import { StructureItemType } from "@/types/organization"
 import DelightfulInfiniteScrollList from "../index"
 import type { DelightfulListItemData } from "../../DelightfulList/types"
 
-// 模拟InfiniteScroll组件
+// Mock InfiniteScroll component
 vi.mock("react-infinite-scroll-component", () => {
 	return {
 		default: ({ children, next, hasMore }: any) => (
@@ -13,7 +13,7 @@ vi.mock("react-infinite-scroll-component", () => {
 				{children}
 				{hasMore && (
 					<button type="button" onClick={next} data-testid="load-more">
-						加载更多
+						Load more
 					</button>
 				)}
 			</div>
@@ -21,7 +21,7 @@ vi.mock("react-infinite-scroll-component", () => {
 	}
 })
 
-// 模拟VirtualList组件
+// Mock VirtualList component
 vi.mock("rc-virtual-list", () => {
 	return {
 		default: ({ children, data, onScroll, height }: any) => (
@@ -40,21 +40,21 @@ vi.mock("rc-virtual-list", () => {
 					}}
 					data-testid="scroll-to-bottom"
 				>
-					滚动到底部
+					Scroll to bottom
 				</button>
 			</div>
 		),
 	}
 })
 
-// 模拟DelightfulList相关组件和样式
+// Mock DelightfulList-related components and styles
 vi.mock("../../DelightfulList/DelightfulListItem", () => {
 	return {
 		default: ({ title, desc, avatar, active, onClick, data }: any) => (
 			<div data-testid="delightful-list-item" className={active ? "active" : ""} onClick={onClick}>
 				{avatar && <div data-testid="avatar">{avatar}</div>}
 				<div data-testid="title">
-					{typeof title === "string" ? title : data?.title || "title对象"}
+					{typeof title === "string" ? title : data?.title || "title object"}
 				</div>
 				{desc && <div data-testid="desc">{desc}</div>}
 				{data && <div data-testid="item-data">{data.name}</div>}
@@ -63,14 +63,14 @@ vi.mock("../../DelightfulList/DelightfulListItem", () => {
 	}
 })
 
-// 模拟DelightfulEmpty组件
+// Mock DelightfulEmpty component
 vi.mock("../../base/DelightfulEmpty", () => {
 	return {
-		default: () => <div data-testid="empty-state">没有数据</div>,
+		default: () => <div data-testid="empty-state">No data</div>,
 	}
 })
 
-// 模拟antd组件
+// Mock antd components
 vi.mock("antd", async () => {
 	const antd = await vi.importActual("antd")
 	return {
@@ -110,7 +110,7 @@ vi.mock("antd", async () => {
 		),
 		Spin: ({ size }: any) => (
 			<div data-testid="ant-spin" className={size}>
-				加载中...
+				Loading...
 			</div>
 		),
 	}
@@ -131,7 +131,7 @@ vi.mock("react-i18next", () => ({
 vi.mock("antd-style", () => {
 	return {
 		createStyles: (fn: any) => {
-			// 提供在styles.ts中需要的token值
+			// Provide token values used in styles.ts
 			const token = {
 				delightfulColorScales: { grey: [0, 1, 2, 3, 4, 5] },
 				delightfulColorUsages: {
@@ -148,26 +148,26 @@ vi.mock("antd-style", () => {
 	}
 })
 
-// 清理所有模拟
+// Clear all mocks
 beforeEach(() => {
 	vi.clearAllMocks()
 })
 
-// 测试数据类型
+// Test data type
 interface TestItem {
 	id: string
 	name: string
 }
 
-// 创建模拟数据
+// Create mock data
 const createMockData = (count: number, startId = 0): TestItem[] => {
 	return Array.from({ length: count }, (_, i) => ({
 		id: `test-${i + startId}`,
-		name: `测试项 ${i + startId}`,
+		name: `Test item ${i + startId}`,
 	}))
 }
 
-// 创建模拟分页响应
+// Create mock pagination response
 const createMockPaginationResponse = (
 	items: TestItem[],
 	hasMore = true,
@@ -180,7 +180,7 @@ const createMockPaginationResponse = (
 	}
 }
 
-// 数据转换函数
+// Data transform function
 const mockItemsTransform = (item: unknown): DelightfulListItemData => {
 	const typedItem = item as TestItem
 	return {
@@ -191,12 +191,12 @@ const mockItemsTransform = (item: unknown): DelightfulListItemData => {
 }
 
 describe("DelightfulInfiniteScrollList", () => {
-	// 在每个测试前重置所有模拟
+	// Reset mocks before each test
 	beforeEach(() => {
 		vi.clearAllMocks()
 	})
 
-	test("渲染空状态", async () => {
+	test("renders empty state", async () => {
 		const mockTrigger = vi.fn().mockResolvedValue(createMockPaginationResponse([]))
 
 		act(() => {
@@ -209,14 +209,14 @@ describe("DelightfulInfiniteScrollList", () => {
 			)
 		})
 
-		// 等待异步操作完成
+		// Wait for async tasks
 		await waitFor(() => {
 			expect(screen.getByTestId("empty-state")).toBeInTheDocument()
 		})
 	})
 
-	test("渲染自定义空状态", async () => {
-		const customEmptyState = <div data-testid="custom-empty">自定义空状态</div>
+	test("renders custom empty state", async () => {
+		const customEmptyState = <div data-testid="custom-empty">Custom empty state</div>
 		const mockTrigger = vi.fn().mockResolvedValue(createMockPaginationResponse([]))
 
 		act(() => {
@@ -230,13 +230,13 @@ describe("DelightfulInfiniteScrollList", () => {
 			)
 		})
 
-		// 等待异步操作完成
+		// Wait for async tasks
 		await waitFor(() => {
 			expect(screen.getByTestId("custom-empty")).toBeInTheDocument()
 		})
 	})
 
-	test("渲染数据列表", () => {
+	test("renders data list", () => {
 		const mockData = createMockData(3)
 		render(
 			<DelightfulInfiniteScrollList
@@ -248,10 +248,10 @@ describe("DelightfulInfiniteScrollList", () => {
 
 		const listItems = screen.getAllByTestId("delightful-list-item")
 		expect(listItems).toHaveLength(3)
-		expect(listItems[0]).toHaveTextContent("测试项 0")
+		expect(listItems[0]).toHaveTextContent("Test item 0")
 	})
 
-	test("点击列表项触发回调", () => {
+	test("clicking list item triggers callback", () => {
 		const mockData = createMockData(3)
 		const onItemClick = vi.fn()
 		render(
@@ -268,7 +268,7 @@ describe("DelightfulInfiniteScrollList", () => {
 		expect(onItemClick).toHaveBeenCalledWith(expect.objectContaining({ id: "test-1" }))
 	})
 
-	test("触发加载更多", async () => {
+	test("loads more items", async () => {
 		const mockTrigger = vi
 			.fn()
 			.mockResolvedValue(createMockPaginationResponse(createMockData(3, 3), false))
@@ -295,7 +295,7 @@ describe("DelightfulInfiniteScrollList", () => {
 		})
 	})
 
-	test("禁用加载更多功能", async () => {
+	test("disables load more when flagged", async () => {
 		const mockTrigger = vi
 			.fn()
 			.mockResolvedValue(createMockPaginationResponse(createMockData(3, 3), true))
@@ -313,21 +313,21 @@ describe("DelightfulInfiniteScrollList", () => {
 		const scrollButton = screen.getByTestId("scroll-to-bottom")
 		fireEvent.click(scrollButton)
 
-		// 等待一小段时间后验证没有触发加载
+		// Wait briefly then verify no load triggered
 		await new Promise((r) => {
 			setTimeout(r, 100)
 		})
 		expect(mockTrigger).not.toHaveBeenCalled()
 	})
 
-	test("自定义加载指示器", async () => {
+	test("custom loading indicator", async () => {
 		const mockTrigger = vi.fn().mockImplementation(() => {
 			// 使用setTimeout和Promise.resolve绕过Promise executor警告
 			setTimeout(() => {}, 0)
 			return Promise.resolve(createMockPaginationResponse(createMockData(3, 3), false))
 		})
 
-		const customLoadingIndicator = <div data-testid="custom-loading">自定义加载中...</div>
+		const customLoadingIndicator = <div data-testid="custom-loading">Custom loading...</div>
 
 		render(
 			<DelightfulInfiniteScrollList
@@ -346,7 +346,7 @@ describe("DelightfulInfiniteScrollList", () => {
 		})
 	})
 
-	test("自定义项目高度", () => {
+	test("custom item height", () => {
 		const mockData = createMockData(3)
 		render(
 			<DelightfulInfiniteScrollList
@@ -361,7 +361,7 @@ describe("DelightfulInfiniteScrollList", () => {
 		expect(virtualList).toBeInTheDocument()
 	})
 
-	test("自定义容器高度", () => {
+	test("custom container height", () => {
 		const mockData = createMockData(3)
 		render(
 			<DelightfulInfiniteScrollList
@@ -377,9 +377,9 @@ describe("DelightfulInfiniteScrollList", () => {
 	})
 })
 
-// 检查复选框功能
-describe("DelightfulInfiniteScrollList 复选框功能", () => {
-	test("渲染复选框", () => {
+// Checkbox functionality
+describe("DelightfulInfiniteScrollList checkbox support", () => {
+	test("renders checkboxes", () => {
 		const mockData = createMockData(3)
 		render(
 			<DelightfulInfiniteScrollList

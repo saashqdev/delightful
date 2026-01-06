@@ -5,7 +5,7 @@ import type { StructureItemType } from "@/types/organization"
 import type { DelightfulListItemData } from "../../DelightfulList/types"
 import DelightfulInfiniteScrollList from "../DelightfulInfiniteScrollList"
 
-// 模拟InfiniteScroll组件
+// Mock InfiniteScroll component
 vi.mock("react-infinite-scroll-component", () => {
 	return {
 		default: ({ children, next, hasMore }: any) => (
@@ -13,7 +13,7 @@ vi.mock("react-infinite-scroll-component", () => {
 				{children}
 				{hasMore && (
 					<button type="button" onClick={next} data-testid="load-more">
-						加载更多
+						Load more
 					</button>
 				)}
 			</div>
@@ -21,13 +21,13 @@ vi.mock("react-infinite-scroll-component", () => {
 	}
 })
 
-// 模拟DelightfulList相关组件和样式
+// Mock DelightfulList-related components and styles
 vi.mock("../../DelightfulList/DelightfulListItem", () => {
 	return {
 		default: ({ title, desc, avatar, active, onClick }: any) => (
 			<div data-testid="delightful-list-item" className={active ? "active" : ""} onClick={onClick}>
 				{avatar && <div data-testid="avatar">{avatar}</div>}
-				<div data-testid="title">{typeof title === "string" ? title : "title对象"}</div>
+				<div data-testid="title">{typeof title === "string" ? title : "title object"}</div>
 				{desc && <div data-testid="desc">{desc}</div>}
 			</div>
 		),
@@ -37,7 +37,7 @@ vi.mock("../../DelightfulList/DelightfulListItem", () => {
 vi.mock("antd-style", () => {
 	return {
 		createStyles: (fn: any) => {
-			// 提供在styles.ts中需要的token值
+			// Provide token values required in styles.ts
 			const token = {
 				delightfulColorScales: { grey: [0, 1, 2, 3, 4, 5] },
 				delightfulColorUsages: {
@@ -54,7 +54,7 @@ vi.mock("antd-style", () => {
 	}
 })
 
-// 模拟i18n
+// Mock i18n
 vi.mock("react-i18next", () => ({
 	useTranslation: () => {
 		return {
@@ -66,7 +66,7 @@ vi.mock("react-i18next", () => ({
 	},
 }))
 
-// 模拟Ant Design组件
+// Mock Ant Design components
 vi.mock("antd", () => {
 	const Checkbox = ({ checked, disabled, onChange }: any) => (
 		<input
@@ -93,7 +93,7 @@ vi.mock("antd", () => {
 		),
 		Spin: ({ size }: any) => (
 			<div data-testid="mock-spin" className={size}>
-				加载中...
+				Loading...
 			</div>
 		),
 		List: ({ children, style, className }: any) => (
@@ -104,32 +104,32 @@ vi.mock("antd", () => {
 	}
 })
 
-// 清理所有模拟
+// Clear all mocks
 beforeEach(() => {
 	vi.clearAllMocks()
 })
 
-// 测试接口
+// Test interfaces
 interface TestItem {
 	id: string
 	name: string
 }
 
-// 测试数据类型
+// Test data type
 interface TestItemData extends DelightfulListItemData {
 	id: string
 	name: string
 }
 
-// 创建模拟数据 - 可创建大量数据进行性能测试
+// Create mock data — can generate large sets for perf tests
 const createMockData = (count: number, startId = 0): TestItem[] => {
 	return Array.from({ length: count }).map((_, index) => ({
 		id: `item-${startId + index}`,
-		name: `测试项 ${startId + index}`,
+		name: `Test item ${startId + index}`,
 	}))
 }
 
-// 模拟分页响应
+// Mock pagination response
 const createMockPaginationResponse = (
 	items: TestItem[],
 	hasMore = true,
@@ -142,7 +142,7 @@ const createMockPaginationResponse = (
 	}
 }
 
-// 数据转换函数 - 转换每个项目
+// Data transform function
 const mockItemsTransform = (item: unknown): TestItemData => {
 	const typedItem = item as TestItem
 	return {
@@ -151,11 +151,11 @@ const mockItemsTransform = (item: unknown): TestItemData => {
 		// 基础DelightfulListItemData属性
 		title: typedItem.name,
 		avatar: "",
-		desc: `描述 ${typedItem.id}`,
+		desc: `Description ${typedItem.id}`,
 	}
 }
 
-// 测量函数执行时间
+// Measure function execution time
 const measureExecutionTime = async (callback: () => Promise<void> | void): Promise<number> => {
 	const start = performance.now()
 	await callback()
@@ -163,13 +163,13 @@ const measureExecutionTime = async (callback: () => Promise<void> | void): Promi
 	return end - start
 }
 
-describe("DelightfulInfiniteScrollList性能测试", () => {
-	// 测试不同数据量下的渲染性能
-	test("渲染性能：不同数据量下的初始渲染时间", async () => {
+describe("DelightfulInfiniteScrollList performance", () => {
+	// Render performance with varying data sizes
+	test("render performance: initial render across data sizes", async () => {
 		const dataSizes = [10, 50, 100, 200]
 		const renderTimes: { size: number; time: number }[] = []
 
-		// 测试不同数据量的渲染时间
+		// Test render time for each data size
 		const testRenderTime = async (index: number) => {
 			if (index >= dataSizes.length) return
 
@@ -189,42 +189,41 @@ describe("DelightfulInfiniteScrollList性能测试", () => {
 					/>,
 				)
 
-				// 确保所有项目都已渲染
+				// Ensure all items rendered
 				const items = screen.getAllByTestId("delightful-list-item")
 				expect(items.length).toBe(size)
 
-				// 卸载组件以便下一次测试
+				// Unmount for next run
 				unmount()
 			})
 
 			renderTimes.push({ size, time })
-			console.log(`渲染 ${size} 项数据耗时: ${time.toFixed(2)}ms`)
+			console.log(`Render ${size} items took: ${time.toFixed(2)}ms`)
 
-			// 递归测试下一个数据量
+			// Recurse for next data size
 			await testRenderTime(index + 1)
 		}
 
-		// 开始测试
+		// Kick off tests
 		await testRenderTime(0)
 
-		// 验证渲染时间与数据量成正比关系
-		// 注意：这只是一个粗略的验证，实际上渲染时间的增长可能不是完全线性的
+		// Verify render time roughly scales with data size
+		// Note: Rough check; growth may not be perfectly linear
 		for (let i = 1; i < renderTimes.length; i += 1) {
 			const current = renderTimes[i]
 			const previous = renderTimes[i - 1]
 			const ratio = current.time / previous.time
 
 			console.log(
-				`数据量从 ${previous.size} 增加到 ${current.size} 时，渲染时间比例为: ${ratio.toFixed(2)}`,
+				`When data grows from ${previous.size} to ${current.size}, render time ratio: ${ratio.toFixed(2)}`,
 			)
 
-			// 渲染时间不应该超过数据量增长的5倍
-			// 这个阈值是一个经验值，可以根据实际情况调整
+			// Render time should not exceed 5x the data growth (heuristic threshold)
 			expect(ratio).toBeLessThan((current.size / previous.size) * 5)
 		}
 	})
 
-	// 测试滚动加载更多时的性能
+	// Interaction performance: load-more path (skipped due to env limits)
 	test.skip("交互性能：加载更多数据的响应时间", async () => {
 		const initialSize = 10
 		const mockData = createMockData(initialSize)
@@ -234,7 +233,7 @@ describe("DelightfulInfiniteScrollList性能测试", () => {
 				createMockPaginationResponse(createMockData(10), true, "next-page-2"),
 			)
 
-		// 渲染组件
+		// Render component
 		render(
 			<DelightfulInfiniteScrollList
 				data={createMockPaginationResponse(mockData, true, "next-page")}
@@ -243,17 +242,17 @@ describe("DelightfulInfiniteScrollList性能测试", () => {
 			/>,
 		)
 
-		// 初始渲染应该有initialSize个项目
+		// Initial render should have initialSize items
 		const initialItems = screen.getAllByTestId("delightful-list-item")
 		expect(initialItems.length).toBe(initialSize)
 
-		// 由于测试环境的限制，我们无法正确模拟加载更多的交互
-		// 这个测试在真实环境中应该能够正常工作
-		console.log("加载更多数据的测试已跳过，因为在测试环境中无法正确模拟")
+		// Due to test env limits, load-more interaction can't be simulated reliably
+		// This should work in a real environment
+		console.log("Load-more test skipped; cannot simulate accurately in test env")
 	})
 
-	// 测试复选框操作的性能
-	test("复选框操作性能：选中/取消选中的响应时间", async () => {
+	// Checkbox performance: select/deselect timings
+	test("checkbox performance: select/deselect response time", async () => {
 		const dataSize = 100
 		const mockItems = createMockData(dataSize)
 		const mockData = createMockPaginationResponse(mockItems)
@@ -276,16 +275,16 @@ describe("DelightfulInfiniteScrollList性能测试", () => {
 		const checkboxes = screen.getAllByTestId("mock-checkbox")
 		expect(checkboxes.length).toBe(100)
 
-		// 测量选中第一个复选框的响应时间
+		// Measure select timing on first checkbox
 		const selectTime = await measureExecutionTime(() => {
 			fireEvent.click(checkboxes[0])
 		})
 
-		console.log(`选中操作响应时间: ${selectTime.toFixed(2)}ms`)
+		console.log(`Select response time: ${selectTime.toFixed(2)}ms`)
 		expect(mockOnChange).toHaveBeenCalledTimes(1)
-		expect(selectTime).toBeLessThan(200) // 响应时间应该在200ms以内
+		expect(selectTime).toBeLessThan(200) // Should be under 200ms
 
-		// 模拟已经选中了50个复选框
+		// Pretend 50 checkboxes are preselected
 		const initialChecked = Array.from({ length: 50 }).map((_, i) => ({
 			id: `item-${i}`,
 			name: `测试项 ${i}`,
@@ -295,7 +294,7 @@ describe("DelightfulInfiniteScrollList性能测试", () => {
 			dataType: "user" as StructureItemType,
 		}))
 
-		// 重新渲染组件
+		// Re-render component
 		render(
 			<DelightfulInfiniteScrollList
 				data={mockData}
@@ -309,29 +308,29 @@ describe("DelightfulInfiniteScrollList性能测试", () => {
 			/>,
 		)
 
-		// 清除之前的调用记录
+		// Clear previous calls
 		mockOnChange.mockClear()
 
-		// 测量取消选中多个复选框的响应时间
+		// Measure deselect timing
 		const updatedCheckboxes = screen.getAllByTestId("mock-checkbox")
 
-		// 取消选中第一个复选框（已选中的）
+		// Deselect the first (already selected) checkbox
 		const unselectTime = await measureExecutionTime(() => {
 			fireEvent.click(updatedCheckboxes[0])
 		})
 
-		console.log(`取消选中操作响应时间: ${unselectTime.toFixed(2)}ms`)
+		console.log(`Deselect response time: ${unselectTime.toFixed(2)}ms`)
 		expect(mockOnChange).toHaveBeenCalledTimes(1)
-		expect(unselectTime).toBeLessThan(200) // 响应时间应该在200ms以内
+		expect(unselectTime).toBeLessThan(200) // Should be under 200ms
 	})
 
-	// 综合性能测试：模拟真实用户场景
-	test("综合性能：模拟真实用户交互场景", async () => {
+	// End-to-end performance: realistic user scenario
+	test("end-to-end performance: realistic interaction flow", async () => {
 		const dataSize = 150
 		const initialCheckedCount = 20
 		const mockData = createMockData(dataSize)
 
-		// 预先选中20个项目
+		// Preselect 20 items
 		const initialCheckedItems = mockData.slice(0, initialCheckedCount).map((item) => ({
 			id: item.id,
 			name: item.name,
@@ -347,7 +346,7 @@ describe("DelightfulInfiniteScrollList性能测试", () => {
 				createMockPaginationResponse(createMockData(10, dataSize), true, "next-page-2"),
 			)
 
-		// 测量总渲染时间
+		// Measure total render time
 		const totalRenderTime = await measureExecutionTime(async () => {
 			render(
 				<DelightfulInfiniteScrollList
@@ -364,11 +363,11 @@ describe("DelightfulInfiniteScrollList性能测试", () => {
 		})
 
 		console.log(
-			`初始渲染时间（${dataSize}项，${initialCheckedCount}项已选中）: ${totalRenderTime.toFixed(2)}ms`,
+			`Initial render (${dataSize} items, ${initialCheckedCount} preselected): ${totalRenderTime.toFixed(2)}ms`,
 		)
-		expect(totalRenderTime).toBeLessThan(500) // 初始渲染应该在500ms内完成
+		expect(totalRenderTime).toBeLessThan(500) // Initial render should be under 500ms
 
-		// 这里我们只验证组件是否正确渲染
+		// Only verify correct render here
 		const items = screen.getAllByTestId("delightful-list-item")
 		expect(items.length).toBe(150)
 	})

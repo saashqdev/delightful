@@ -3,7 +3,7 @@ import { vi, describe, test, expect, beforeEach, afterEach } from "vitest"
 import DelightfulList from "../DelightfulList"
 import type { DelightfulListItemData } from "../types"
 
-// 模拟DelightfulAvatar组件
+// Mock DelightfulAvatar component
 vi.mock("@/opensource/components/base/DelightfulAvatar", () => ({
 	default: ({ children, className, size }: any) => (
 		<div className={className || "mock-avatar"} data-size={size}>
@@ -12,7 +12,7 @@ vi.mock("@/opensource/components/base/DelightfulAvatar", () => ({
 	),
 }))
 
-// 模拟样式模块，解决token问题
+// Mock styles module to provide tokens
 vi.mock("../styles", () => ({
 	useDelightfulListItemStyles: () => ({
 		styles: {
@@ -28,26 +28,26 @@ vi.mock("../styles", () => ({
 	}),
 }))
 
-// 创建测试数据
+// Test data
 interface TestItemData extends DelightfulListItemData {
 	id: string
 	title: string
 	customField?: string
 }
 
-// 生成测试项
+// Generate test items
 const createTestItems = (count: number): TestItemData[] => {
 	return Array.from({ length: count }).map((_, index) => ({
 		id: `item-${index}`,
-		title: `测试项 ${index}`,
-		customField: `自定义字段 ${index}`,
+		title: `Test item ${index}`,
+		customField: `Custom field ${index}`,
 		avatar: `https://example.com/avatar/${index}.jpg`,
-		hoverSection: <div>悬停内容 {index}</div>,
+		hoverSection: <div>Hover content {index}</div>,
 	}))
 }
 
-describe("DelightfulList 性能测试", () => {
-	// 高级别模拟
+describe("DelightfulList performance", () => {
+	// High-level mocks
 	let originalConsoleWarn: typeof console.warn
 	let warnSpy: ReturnType<typeof vi.fn>
 
@@ -61,76 +61,74 @@ describe("DelightfulList 性能测试", () => {
 		console.warn = originalConsoleWarn
 	})
 
-	// 测试可能导致不必要重渲染的 active 属性
-	test("active 属性变化时不应导致过度重渲染", async () => {
+	// Active prop changes should not cause excessive rerenders
+	test("active prop change should not over-render", async () => {
 		const items = createTestItems(20)
 
 		const { rerender } = render(<DelightfulList items={items} active="item-1" />)
 
-		// 重置模拟
+		// Reset spy
 		warnSpy.mockReset()
 
-		// 数据没变，只有 active 属性变化
+		// Data unchanged, only active prop changes
 		rerender(<DelightfulList items={items} active="item-2" />)
 
-		// 期望没有发生 React 优化警告
+		// Expect no React optimization warnings
 		expect(warnSpy).not.toHaveBeenCalledWith(
 			expect.stringMatching(/Component is re-rendering too many times/),
 		)
 	})
 
-	// 测试大量数据渲染性能
-	test("渲染大量数据时的性能", () => {
+	// Render performance with large data
+	test("render performance with large datasets", () => {
 		const smallItems = createTestItems(10)
 		const mediumItems = createTestItems(100)
 		const largeItems = createTestItems(500)
 
-		// 记录小列表渲染时间
+		// Record small list render time
 		const smallStartTime = performance.now()
 		const { unmount: unmountSmall } = render(<DelightfulList items={smallItems} />)
 		const smallEndTime = performance.now()
 		unmountSmall()
 
-		// 记录中等列表渲染时间
+		// Record medium list render time
 		const mediumStartTime = performance.now()
 		const { unmount: unmountMedium } = render(<DelightfulList items={mediumItems} />)
 		const mediumEndTime = performance.now()
 		unmountMedium()
 
-		// 记录大列表渲染时间
+		// Record large list render time
 		const largeStartTime = performance.now()
 		const { unmount: unmountLarge } = render(<DelightfulList items={largeItems} />)
 		const largeEndTime = performance.now()
 		unmountLarge()
 
-		// 计算渲染时间
+		// Compute render durations
 		const smallRenderTime = smallEndTime - smallStartTime
 		const mediumRenderTime = mediumEndTime - mediumStartTime
 		const largeRenderTime = largeEndTime - largeStartTime
 
-		console.log(`渲染 10 个项目耗时: ${smallRenderTime}ms`)
-		console.log(`渲染 100 个项目耗时: ${mediumRenderTime}ms`)
-		console.log(`渲染 500 个项目耗时: ${largeRenderTime}ms`)
+		console.log(`Render 10 items: ${smallRenderTime}ms`)
+		console.log(`Render 100 items: ${mediumRenderTime}ms`)
+		console.log(`Render 500 items: ${largeRenderTime}ms`)
 
-		// 检查渲染时间是否接近线性增长
-		// 如果线性增长，mediumRenderTime 应约为 smallRenderTime 的 10 倍
-		// largeRenderTime 应约为 smallRenderTime 的 50 倍
-		// 但考虑到 React 的优化和其他因素，使用一个合理的倍数检查
+		// Check whether render times grow roughly linearly
+		// Medium should be around 10x small; large around 50x small (heuristic)
 		expect(mediumRenderTime).toBeLessThan(smallRenderTime * 20)
 		expect(largeRenderTime).toBeLessThan(mediumRenderTime * 10)
 	})
 
-	// 测试频繁更新的性能
-	test("频繁更新时的性能", () => {
+	// Performance under frequent updates
+	test("performance under frequent updates", () => {
 		const items = createTestItems(50)
 		const { rerender } = render(<DelightfulList items={items} />)
 
 		const iterations = 10
 		const startTime = performance.now()
 
-		// 模拟多次重新渲染
+		// Simulate repeated rerenders
 		for (let i = 0; i < iterations; i += 1) {
-			// 每次更新不同的 active 项
+			// Each iteration updates a different active item
 			act(() => {
 				rerender(<DelightfulList items={items} active={`item-${i}`} />)
 			})
@@ -139,33 +137,33 @@ describe("DelightfulList 性能测试", () => {
 		const endTime = performance.now()
 		const averageRenderTime = (endTime - startTime) / iterations
 
-		console.log(`频繁更新测试: 平均每次渲染耗时 ${averageRenderTime}ms`)
+		console.log(`Frequent update test: avg render ${averageRenderTime}ms`)
 
-		// 期望平均渲染时间不超过一个合理阈值
+		// Expect average render time under a reasonable threshold
 		expect(averageRenderTime).toBeLessThan(50)
 	})
 
-	// 测试记忆化是否正常工作
-	test("记忆化优化应该有效减少重渲染", () => {
+	// Memoization should reduce rerenders
+	test("memoization should reduce rerenders", () => {
 		const items = createTestItems(20)
 		const onClick = vi.fn()
 
-		// 首次渲染
+		// First render
 		const { rerender } = render(<DelightfulList items={items} onItemClick={onClick} />)
 
-		// 用相同的 props 重新渲染
+		// Rerender with identical props
 		const startTime = performance.now()
 		rerender(<DelightfulList items={items} onItemClick={onClick} />)
 		const endTime = performance.now()
 
-		// 由于 memo 优化，相同 props 的重渲染应该非常快
+		// With memo, identical-prop rerenders should be very fast
 		const rerenderTime = endTime - startTime
-		console.log(`相同 props 重渲染耗时: ${rerenderTime}ms`)
+		console.log(`Same-prop rerender time: ${rerenderTime}ms`)
 
-		// 期望重渲染时间极短
+		// Expect very short rerender duration
 		expect(rerenderTime).toBeLessThan(10)
 
-		// 非引用相等但内容相同的 props
+		// Props with identical content but new references
 		const sameContentItems = createTestItems(20)
 		const sameContentOnClick = vi.fn()
 
@@ -174,37 +172,36 @@ describe("DelightfulList 性能测试", () => {
 		const endTimeNewProps = performance.now()
 
 		const newPropsRerenderTime = endTimeNewProps - startTimeNewProps
-		console.log(`内容相同但引用不同的 props 重渲染耗时: ${newPropsRerenderTime}ms`)
+		console.log(`Same-content new-prop rerender time: ${newPropsRerenderTime}ms`)
 
-		// 这里可能会暴露出记忆化不足的问题，因为 props 引用改变了
-		// 但内容相同，理想情况下不应该触发完整重渲染
+		// May expose memo gaps when references change despite identical content
 	})
 
-	// 测试大量列表项的鼠标交互性能
-	test("与大量列表项进行鼠标交互的性能", () => {
+	// Mouse interaction performance with many items
+	test("mouse interaction performance with many items", () => {
 		const items = createTestItems(100)
 
 		render(<DelightfulList items={items} />)
 
-		// 获取所有列表项
-		const listItems = screen.getAllByText(/测试项 \d+/)
+		// Get all list items
+		const listItems = screen.getAllByText(/Test item \d+/)
 
-		// 模拟鼠标悬停在多个项目上
+		// Simulate hovering multiple items
 		const startTime = performance.now()
 
 		for (let i = 0; i < 10; i += 1) {
-			// 模拟鼠标进入
+			// Mouse enter
 			fireEvent.mouseEnter(listItems[i])
-			// 模拟鼠标离开
+			// Mouse leave
 			fireEvent.mouseLeave(listItems[i])
 		}
 
 		const endTime = performance.now()
 		const hoverTime = endTime - startTime
 
-		console.log(`10次鼠标悬停交互耗时: ${hoverTime}ms`)
+		console.log(`10 hover interactions took: ${hoverTime}ms`)
 
-		// 期望鼠标交互性能良好
-		expect(hoverTime / 10).toBeLessThan(20) // 每次交互平均不超过20ms
+		// Expect good hover performance
+		expect(hoverTime / 10).toBeLessThan(20) // Average under 20ms per interaction
 	})
 })

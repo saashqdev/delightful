@@ -21,7 +21,7 @@ export interface DelightfulListItemProps<D extends DelightfulListItemType = Deli
 	}
 }
 
-// 将复杂的Avatar渲染逻辑抽离为独立组件
+// Extract complex avatar rendering into its own component
 const ItemAvatar = memo(
 	<D extends DelightfulListItemType>({
 		avatar,
@@ -32,33 +32,33 @@ const ItemAvatar = memo(
 		isHover: boolean
 		className?: string
 	}) => {
-		// 如果没有头像，返回null
+		// No avatar provided
 		if (!avatar) return null
 
-		// 如果是函数，调用函数
+		// Avatar provided as render function
 		if (typeof avatar === "function") return avatar(isHover)
 
-		// 如果是字符串，渲染简单头像
+		// Avatar provided as string URL
 		if (typeof avatar === "string")
 			return <DelightfulAvatar size="large" src={avatar} className={className} />
 
-		// 如果是对象，渲染带属性的头像
+		// Avatar provided as object with props
 		return <DelightfulAvatar size="large" src={avatar.src} className={className} {...avatar} />
 	},
 	(prev, next) => {
-		// 自定义比较函数，优化渲染
+		// Custom comparator to optimize renders
 		if (prev.isHover !== next.isHover) return false
 		if (prev.className !== next.className) return false
 
-		// 如果avatar是函数，我们总是重新渲染，因为无法比较函数内容
+		// Rerender when avatar is a function since content is unknown
 		if (typeof prev.avatar === "function" || typeof next.avatar === "function") return false
 
-		// 简单比较字符串或对象引用
+		// Otherwise compare primitive/reference equality
 		return prev.avatar === next.avatar
 	},
 )
 
-// 标题组件，单独处理标题渲染逻辑
+// Title component handles title rendering separately
 const ItemTitle = memo(
 	// eslint-disable-next-line react/prop-types
 	<D extends DelightfulListItemType>({ title, isHover }: { title: D["title"]; isHover: boolean }) => {
@@ -67,20 +67,20 @@ const ItemTitle = memo(
 			return title
 		}, [title, isHover])
 
-		// 直接返回渲染后的标题，不使用Fragment
+		// Return rendered title directly
 		return renderedTitle as React.ReactNode
 	},
 	(prev, next) => {
 		if (prev.isHover !== next.isHover) return false
 
-		// 如果title是函数，我们总是重新渲染，因为无法比较函数内容
+		// Rerender when title is a function since content is unknown
 		if (typeof prev.title === "function" || typeof next.title === "function") return false
 
 		return prev.title === next.title
 	},
 )
 
-// 悬停内容组件
+// Hover content component
 const HoverSection = memo(
 	({
 		content,
@@ -114,7 +114,7 @@ const HoverSection = memo(
 	},
 )
 
-// 主组件实现
+// Main component
 function DelightfulListItemBase<D extends DelightfulListItemType = DelightfulListItemType>({
 	data,
 	active,
@@ -127,7 +127,7 @@ function DelightfulListItemBase<D extends DelightfulListItemType = DelightfulLis
 	const ref = useRef<HTMLDivElement | null>(null)
 	const isHover = useHover(ref)
 
-	// 使用 useCallback 记忆化事件处理函数
+	// Memoize handlers
 	const handleMore = useCallback<MouseEventHandler<HTMLDivElement>>((e) => {
 		e.stopPropagation()
 	}, [])
@@ -136,7 +136,7 @@ function DelightfulListItemBase<D extends DelightfulListItemType = DelightfulLis
 		onClick?.(data)
 	}, [data, onClick])
 
-	// 使用 useMemo 计算 class 名称，避免每次渲染重新计算
+	// Memoize class names
 	const containerClassName = useMemo(() => {
 		return cx(
 			styles.container,
@@ -178,9 +178,9 @@ function DelightfulListItemBase<D extends DelightfulListItemType = DelightfulLis
 	)
 }
 
-// 使用 memo 包装组件，并提供自定义比较函数以进一步优化性能
+// Memo-wrap component with custom comparator for perf
 const DelightfulListItemOptimized = memo(DelightfulListItemBase, (prevProps, nextProps) => {
-	// 如果 active 状态、className 或 classNames 改变，我们需要重新渲染
+	// Rerender if active, className, or classNames change
 	if (prevProps.active !== nextProps.active) return false
 	if (prevProps.className !== nextProps.className) return false
 	if (
@@ -193,23 +193,22 @@ const DelightfulListItemOptimized = memo(DelightfulListItemBase, (prevProps, nex
 		return false
 	}
 
-	// 如果点击处理程序改变，我们需要重新渲染
+	// Rerender if click handler changes
 	if (prevProps.onClick !== nextProps.onClick) return false
 
-	// 最关键的比较：数据是否改变
-	// 如果数据ID相同且内容没有变化，我们可以跳过渲染
+	// Core comparison: detect data changes
 	const prevData = prevProps.data
 	const nextData = nextProps.data
 
-	// 首先比较ID，这是必须相同的
+	// ID must match
 	if (prevData.id !== nextData.id) return false
 
-	// 然后比较其他重要属性，如 title, avatar 和 hoverSection
+	// Then compare other key properties
 	if (prevData.title !== nextData.title) return false
 	if (prevData.avatar !== nextData.avatar) return false
 	if (prevData.hoverSection !== nextData.hoverSection) return false
 
-	// 如果所有关键属性都相同，我们可以跳过重新渲染
+	// Skip rerender when nothing changed
 	return true
 }) as typeof DelightfulListItemBase
 

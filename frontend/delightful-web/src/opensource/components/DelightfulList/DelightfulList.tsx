@@ -21,7 +21,7 @@ export interface DelightfulListProps<R extends DelightfulListItemItemType = Deli
 	listItemComponent?: ComponentType<DelightfulListItemProps<R>>
 }
 
-// 优化列表项组件，确保只有在必要时才重新渲染
+// Optimize list items so they only rerender when necessary
 type DelightfulListItemWrapperProps<R extends DelightfulListItemItemType> = {
 	item: string | R
 	index: number
@@ -33,7 +33,7 @@ type DelightfulListItemWrapperProps<R extends DelightfulListItemItemType> = {
 	listItemProps?: Partial<DelightfulListItemProps<R>>
 }
 
-// 单独封装列表项组件，实现精细的重渲染控制
+// Wrap list item separately for fine-grained rerender control
 function DelightfulListItemWrapperComponent<R extends DelightfulListItemItemType>(
 	props: DelightfulListItemWrapperProps<R>,
 ) {
@@ -48,7 +48,7 @@ function DelightfulListItemWrapperComponent<R extends DelightfulListItemItemType
 		listItemProps,
 	} = props
 
-	// 处理字符串项，转换为对象
+	// Convert string items to objects
 	const item = useMemo(() => {
 		if (typeof rawItem === "string") {
 			return { id: rawItem } as R
@@ -56,12 +56,12 @@ function DelightfulListItemWrapperComponent<R extends DelightfulListItemItemType
 		return rawItem
 	}, [rawItem])
 
-	// 计算活动状态，避免在父组件中重复计算
+	// Compute active state locally to avoid parent recomputation
 	const activeStatus = useMemo(() => {
 		return typeof active === "function" ? active(item, index) : active === item.id
 	}, [active, item, index])
 
-	// 记忆化点击处理器
+	// Memoize click handler
 	const handleClick = useCallback(
 		(data: R) => {
 			if (onItemClick) {
@@ -84,17 +84,17 @@ function DelightfulListItemWrapperComponent<R extends DelightfulListItemItemType
 	)
 }
 
-// 使用类型安全的方式创建 memo 组件
+// Create memoized component with type safety
 const DelightfulListItemWrapper = memo(
 	DelightfulListItemWrapperComponent,
-	// 自定义比较函数，避免不必要的重渲染
+	// Custom comparator to avoid unnecessary rerenders
 	<R extends DelightfulListItemItemType>(
 		prevProps: DelightfulListItemWrapperProps<R>,
 		nextProps: DelightfulListItemWrapperProps<R>,
 	) => {
-		// 如果item引用相同，直接跳过更新
+		// If item reference is identical, check other props only
 		if (prevProps.item === nextProps.item) {
-			// 但仍需检查其他属性
+			// Still verify other props
 			return (
 				prevProps.active === nextProps.active &&
 				prevProps.onItemClick === nextProps.onItemClick &&
@@ -105,14 +105,14 @@ const DelightfulListItemWrapper = memo(
 			)
 		}
 
-		// 对于不同引用的item，检查内容是否相同
+		// For different references, compare content for equality
 		if (
 			typeof prevProps.item === "object" &&
 			typeof nextProps.item === "object" &&
 			prevProps.item?.id === nextProps.item?.id &&
 			isEqual(prevProps.item, nextProps.item)
 		) {
-			// 内容相同，检查其他属性
+			// Content matches; verify remaining props
 			return (
 				prevProps.active === nextProps.active &&
 				prevProps.onItemClick === nextProps.onItemClick &&
@@ -123,7 +123,7 @@ const DelightfulListItemWrapper = memo(
 			)
 		}
 
-		// 默认情况下，认为组件需要更新
+		// Otherwise, allow rerender
 		return false
 	},
 ) as typeof DelightfulListItemWrapperComponent
@@ -148,10 +148,10 @@ const DelightfulListBase = forwardRef(
 			...flexProps
 		} = props
 
-		// 记忆化样式，避免每次渲染都创建新样式对象
+		// Memoize style object to avoid recreation
 		const styles = useMemo(() => ({ width: "100%", ...style }), [style])
 
-		// 记忆化列表项数组
+		// Memoize rendered items array
 		const renderedItems = useMemo(() => {
 			if (!items || items.length === 0) return null
 
@@ -178,7 +178,7 @@ const DelightfulListBase = forwardRef(
 			listItemProps,
 		])
 
-		// 处理空列表状态
+		// Handle empty state
 		if (!items || items.length === 0) {
 			if (!emptyProps) return null
 
@@ -198,7 +198,7 @@ const DelightfulListBase = forwardRef(
 	},
 )
 
-// 使用 memo 包装组件，提供更好的性能
+// Wrap with memo for better performance
 const DelightfulListOptimized = memo(DelightfulListBase) as typeof DelightfulListBase
 
 export default DelightfulListOptimized

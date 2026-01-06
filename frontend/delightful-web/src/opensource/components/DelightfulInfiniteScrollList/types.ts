@@ -5,42 +5,42 @@ import type { Props as InfiniteScrollProps } from "react-infinite-scroll-compone
 import type { DelightfulListItemData as DelightfulListItemType } from "../DelightfulList/types"
 
 /**
- * DelightfulInfiniteScrollList 组件的属性类型
+ * Props for DelightfulInfiniteScrollList
  */
 export interface DelightfulInfiniteScrollListProps<
 	D,
 	ItemR extends DelightfulListItemType = DelightfulListItemType,
 	DataType extends StructureItemType = StructureItemType,
 > extends Omit<Partial<InfiniteScrollProps>, "children" | "dataLength" | "next" | "hasMore"> {
-	/** 初始数据 */
+	/** Initial data */
 	data?: PaginationResponse<D>
-	/** 用于加载更多数据的触发函数 */
+	/** Trigger function to load more data */
 	trigger: (params: { page_token: string }) => Promise<PaginationResponse<D>>
-	/** 将原始数据项转换为列表项的函数 */
+	/** Transform raw item into a list item */
 	itemsTransform: (item: D) => ItemR
-	/** 点击列表项时的回调函数 */
+	/** Callback when a list item is clicked */
 	onItemClick?: (item: ItemR) => void
-	/** 复选框选项配置 */
+	/** Checkbox configuration */
 	checkboxOptions?: {
-		/** 当前选中的项目 */
+		/** Currently selected items */
 		checked?: WithIdAndDataType<ItemR, DataType>[]
-		/** 选中状态变化的回调函数 */
+		/** Callback when selection changes */
 		onChange?: (checked: WithIdAndDataType<ItemR, DataType>[]) => void
-		/** 禁用的项目 */
+		/** Disabled items */
 		disabled?: WithIdAndDataType<ItemR, DataType>[]
-		/** 数据类型 */
+		/** Data type */
 		dataType: DataType
 	}
-	/** 无数据时的回退内容 */
+	/** Fallback when there is no data */
 	noDataFallback?: React.ReactNode
-	/** 容器高度，单位像素，默认为400 */
+	/** Container height in pixels, default 400 */
 	containerHeight?: number
-	/** 是否禁用加载更多功能 */
+	/** Disable load-more functionality */
 	disableLoadMore?: boolean
-	/** 每个项目的高度，默认为60 */
+	/** Height of each item, default 60 */
 	itemHeight?: number
-	/** 滚动阈值，默认为50 */
+	/** Scroll threshold, default 50 */
 	scrollThreshold?: number
-	/** 自定义加载指示器 */
+	/** Custom loading indicator */
 	loadingIndicator?: React.ReactNode
 }

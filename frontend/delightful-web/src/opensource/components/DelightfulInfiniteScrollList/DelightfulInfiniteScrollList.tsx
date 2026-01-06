@@ -25,28 +25,28 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 	scrollThreshold = 50,
 	loadingIndicator,
 }: DelightfulInfiniteScrollListProps<D, ItemR>) {
-	// 数据和加载状态
+	// Data and loading state
 	const [listData, setListData] = useState<D[]>(() => data?.items || [])
 	const pageTokenRef = useRef(data?.page_token || "")
 	const [hasMore, setHasMore] = useState<boolean>(data?.has_more ?? true)
 	const [loading, setLoading] = useState<boolean>(false)
-	// 添加一个请求标识符，用于处理竞态条件
+	// Request identifier to handle race conditions
 	const requestIdRef = useRef(0)
 
-	// 在测试环境中，确保loading状态不会阻止空状态的渲染
+	// In tests, ensure loading state does not block rendering the empty view
 	const isTestEnv = process.env.NODE_ENV === "test"
 
-	// 将原始数据转换为列表项，使用记忆化避免不必要的转换
+	// Transform raw data into list items; memoized to avoid redundant work
 	const itemsArray = useMemo(() => {
 		if (!listData || listData.length === 0) return []
 
-		// 处理单个项目或数组的情况
+		// Handle single item or array inputs
 		return Array.isArray(listData)
 			? listData.map((item) => itemsTransform(item as D))
 			: [itemsTransform(listData as D)]
 	}, [listData, itemsTransform])
 
-	// 创建查找表，用于快速检查选中和禁用状态
+	// Lookup maps for checked/disabled states
 	const checkedItemsMap = useMemo(() => {
 		if (!checkboxOptions?.checked) return new Map<string, boolean>()
 
@@ -67,18 +67,18 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 		return map
 	}, [checkboxOptions?.disabled])
 
-	// 加载更多数据
+	// Load more data
 	const loadMore = useCallback(() => {
 		if (!hasMore || loading || disableLoadMore) return
 
 		setLoading(true)
-		// 递增请求ID以识别最新的请求
+		// Increment request ID to mark the latest call
 		const currentRequestId = requestIdRef.current + 1
 		requestIdRef.current = currentRequestId
 
 		trigger?.({ page_token: pageTokenRef.current })
 			.then((response) => {
-				// 检查这是否是最新的请求，如果不是则忽略结果
+				// Ignore results from stale requests
 				if (currentRequestId !== requestIdRef.current) return
 
 				if (response && Array.isArray(response.items)) {
@@ -88,22 +88,22 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 				}
 			})
 			.catch((error) => {
-				// 只处理当前请求的错误
+				// Only handle errors from the latest request
 				if (currentRequestId === requestIdRef.current) {
 					console.error("Failed to load more data:", error)
 				}
 			})
 			.finally(() => {
-				// 只更新最新请求的加载状态
+				// Only clear loading for the latest request
 				if (currentRequestId === requestIdRef.current) {
 					setLoading(false)
 				}
 			})
 	}, [trigger, hasMore, loading, disableLoadMore])
 
-	// 触发器变化时重置列表
+	// Reset list when trigger changes
 	useUpdateEffect(() => {
-		// 增加请求ID，取消任何进行中的请求
+		// Bump request ID to cancel in-flight requests
 		requestIdRef.current += 1
 
 		setHasMore(true)
@@ -111,24 +111,24 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 		setLoading(false)
 		setListData([])
 
-		// 直接调用loadMore，不使用setTimeout
+		// Call loadMore directly
 		loadMore()
 	}, [trigger])
 
-	// 初始加载
+	// Initial load
 	useMount(() => {
-		// 如果有初始数据且不为空，使用初始数据
+		// If initial data exists, use it
 		if (data && data.items.length > 0) {
 			setListData(data.items)
 			pageTokenRef.current = data.page_token || ""
 			setHasMore(data.has_more)
 		} else {
-			// 否则执行初始加载
+			// Otherwise perform initial fetch
 			loadMore()
 		}
 	})
 
-	// 处理复选框选择/取消选择
+	// Handle checkbox select/deselect
 	const handleItemCheck = useCallback(
 		(item: ItemR, checked: boolean) => {
 			if (!checkboxOptions?.onChange) return
@@ -136,7 +136,7 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 			let newChecked: WithIdAndDataType<ItemR, any>[] = []
 
 			if (checked) {
-				// 添加到选中列表
+				// Add to checked list
 				newChecked = [
 					...(checkboxOptions.checked || []),
 					{
@@ -146,17 +146,17 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 					} as WithIdAndDataType<ItemR, any>,
 				]
 			} else {
-				// 从选中列表中移除
+				// Remove from checked list
 				newChecked = (checkboxOptions.checked || []).filter((i) => i.id !== item.id)
 			}
 
-			// 调用外部 onChange 回调
+			// Invoke external onChange callback
 			checkboxOptions.onChange(newChecked)
 		},
 		[checkboxOptions],
 	)
 
-	// 检查项目是否被选中
+	// Check if item is selected
 	const isItemChecked = useCallback(
 		(itemId: string): boolean => {
 			return checkedItemsMap.has(itemId)
@@ -164,7 +164,7 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 		[checkedItemsMap],
 	)
 
-	// 检查项目是否被禁用
+	// Check if item is disabled
 	const isItemDisabled = useCallback(
 		(itemId: string): boolean => {
 			return disabledItemsMap.has(itemId)
@@ -172,7 +172,7 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 		[disabledItemsMap],
 	)
 
-	// 优化滚动处理函数
+	// Optimized scroll handler
 	const onScroll = useMemoizedFn((e: React.UIEvent<HTMLElement, UIEvent>) => {
 		console.log("onScroll", loading, hasMore, disableLoadMore)
 		if (loading || !hasMore || disableLoadMore) return
@@ -183,38 +183,38 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 		}
 	})
 
-	// 自定义列表项组件（使用 memo 优化渲染）
+	// Custom list item component (memoized)
 	const CustomListItem = memo(({ data: itemData, ...restProps }: DelightfulListItemProps<ItemR>) => {
-		// 没有复选框选项时直接渲染普通列表项
+		// Without checkbox options, render a plain list item
 		if (!checkboxOptions) {
 			return <DelightfulListItem<ItemR> data={itemData} {...restProps} />
 		}
 
-		// 获取状态
+		// Status flags
 		const checked = isItemChecked(itemData.id)
 		const disabled = isItemDisabled(itemData.id)
 
-		// 处理复选框点击
+		// Handle checkbox click
 		const handleCheckboxClick = (e: React.MouseEvent) => {
 			e.stopPropagation()
 			if (disabled) return
 
-			// 切换选中状态
+			// Toggle selection
 			handleItemCheck(itemData, !checked)
 		}
 
-		// 处理列表项点击
+		// Handle list item click
 		const handleItemClick = () => {
-			// 如果项目被禁用，只触发点击事件，不切换选中状态
+			// If disabled, only fire click handler, do not toggle selection
 			if (disabled) {
 				onItemClick?.(itemData)
 				return
 			}
 
-			// 切换选中状态
+			// Toggle selection
 			handleItemCheck(itemData, !checked)
 
-			// 触发点击事件
+			// Fire click handler
 			onItemClick?.(itemData)
 		}
 
@@ -230,7 +230,7 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 		)
 	})
 
-	// 确保不会破坏显示组件名称的调试信息
+	// Preserve display name for clearer debugging
 	CustomListItem.displayName = "CustomListItem"
 
 	// Memoized loading indicator
@@ -246,7 +246,7 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 
 	const noData = !itemsArray || itemsArray.length === 0
 
-	// 处理列表项点击
+	// Handle list item click
 	const handleItemClick = useCallback(
 		(item: ItemR) => {
 			if (onItemClick) {
@@ -289,7 +289,7 @@ function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListIt
 	)
 }
 
-// 使用 memo 优化组件，避免不必要的重新渲染
+	// Memoize component to avoid unnecessary re-renders
 const DelightfulInfiniteScrollList = memo(DelightfulInfiniteScrollListComponent) as <
 	D,
 	ItemR extends DelightfulListItemType = DelightfulListItemType,

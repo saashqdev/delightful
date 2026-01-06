@@ -4,21 +4,21 @@ import { vi, describe, test, expect, beforeEach } from "vitest"
 import DelightfulListItem from "../DelightfulListItem"
 import type { DelightfulListItemData } from "../types"
 
-// 模拟 ahooks 的 useHover hook
+// Mock ahooks useHover hook
 vi.mock("ahooks", () => ({
 	useHover: vi.fn(),
 }))
 
-// 模拟 DelightfulAvatar 组件
+// Mock DelightfulAvatar component
 vi.mock("@/opensource/components/base/DelightfulAvatar", () => ({
 	default: vi.fn().mockImplementation(({ src, className }) => (
 		<div className={className} data-testid="mock-avatar" data-src={src}>
-			模拟头像
+			Mock Avatar
 		</div>
 	)),
 }))
 
-// 模拟样式模块
+// Mock styles module
 vi.mock("../styles", () => ({
 	useDelightfulListItemStyles: () => ({
 		styles: {
@@ -30,144 +30,142 @@ vi.mock("../styles", () => ({
 	}),
 }))
 
-describe("DelightfulListItem 组件", () => {
-	// 在每个测试前重置所有模拟
+describe("DelightfulListItem component", () => {
+	// Reset mocks before each test
 	beforeEach(() => {
 		vi.clearAllMocks()
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReset()
 	})
 
-	// 基本渲染测试
-	test("基本渲染 - 渲染简单的列表项", () => {
-		// 设置 useHover 的返回值为 false
+	// Basic render
+	test("basic render - renders simple list item", () => {
+		// useHover returns false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
 		const item: DelightfulListItemData = {
 			id: "test-1",
-			title: "测试项目1",
+			title: "Test item 1",
 		}
 
 		render(<DelightfulListItem data={item} />)
 
-		// 验证标题是否正确渲染
-		expect(screen.getByText("测试项目1")).toBeInTheDocument()
+		// Title renders
+		expect(screen.getByText("Test item 1")).toBeInTheDocument()
 
-		// 验证类名是否正确应用
+		// Classes apply
 		const container = screen.getByTestId("delightful-list-item")
 		expect(container).toHaveClass("mock-container")
 		expect(container).not.toHaveClass("mock-active")
 	})
 
-	// 测试 active 状态
-	test("active状态 - 当组件处于激活状态时应用正确的样式", () => {
-		// 设置 useHover 的返回值为 false
+	// Active state
+	test("active state - applies active styles when active", () => {
+		// useHover returns false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
 		const item: DelightfulListItemData = {
 			id: "test-1",
-			title: "测试项目1",
+			title: "Test item 1",
 		}
 
 		render(<DelightfulListItem data={item} active />)
 
-		// 验证 active 类名是否正确应用
+		// Active class applied
 		const container = screen.getByTestId("delightful-list-item")
 		expect(container).toHaveClass("mock-container")
 		expect(container).toHaveClass("mock-active")
 	})
 
-	// 测试点击事件
-	test("点击事件 - 点击项目时应触发 onClick 回调", () => {
-		// 设置 useHover 的返回值为 false
+	// Click handling
+	test("click - triggers onClick when item clicked", () => {
+		// useHover returns false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
 		const item: DelightfulListItemData = {
 			id: "test-1",
-			title: "测试项目1",
+			title: "Test item 1",
 		}
 
 		const handleClick = vi.fn()
 
 		render(<DelightfulListItem data={item} onClick={handleClick} />)
 
-		// 在这种情况下，由于模拟导致事件处理程序可能未正确绑定，
-		// 我们直接断言组件接收了正确的 onClick prop，并假设它会正确处理点击事件
-
-		// 在实际组件中，onClick 函数应该会在点击时被调用，但在测试环境中可能受模拟影响
+		// Due to mocks, handlers may not bind; assert callback wiring instead
+		// In real component, onClick fires on click; in test we simulate by calling
 		expect(handleClick).not.toHaveBeenCalled()
 
-		// 直接调用 onClick 函数模拟点击
+		// Manually invoke onClick to simulate click
 		if (handleClick) handleClick(item)
 
-		// 验证回调是否被调用，并且传入了正确的数据
+		// Callback invoked with correct payload
 		expect(handleClick).toHaveBeenCalledTimes(1)
 		expect(handleClick).toHaveBeenCalledWith(item)
 	})
 
-	// 测试头像渲染 - 字符串类型
-	test("头像渲染 - 当传入字符串类型的头像时应正确渲染", () => {
-		// 设置 useHover 的返回值为 false
+	// Avatar render - string
+	test("avatar render - renders when avatar is string", () => {
+		// useHover returns false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
 		const item: DelightfulListItemData = {
 			id: "test-1",
-			title: "测试项目1",
+			title: "Test item 1",
 			avatar: "https://example.com/avatar.jpg",
 		}
 
 		render(<DelightfulListItem data={item} />)
 
-		// 验证头像是否被渲染
+		// Avatar renders
 		const avatar = screen.getByTestId("mock-avatar")
 		expect(avatar).toBeInTheDocument()
 		expect(avatar).toHaveAttribute("data-src", "https://example.com/avatar.jpg")
 	})
 
-	// 测试头像渲染 - 对象类型
-	test("头像渲染 - 当传入对象类型的头像时应正确渲染", () => {
-		// 设置 useHover 的返回值为 false
+	// Avatar render - object
+	test("avatar render - renders when avatar is object", () => {
+		// useHover returns false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
 		const item: DelightfulListItemData = {
 			id: "test-1",
-			title: "测试项目1",
-			avatar: { src: "https://example.com/avatar.jpg", alt: "测试头像" },
+			title: "Test item 1",
+			avatar: { src: "https://example.com/avatar.jpg", alt: "Test avatar" },
 		}
 
 		render(<DelightfulListItem data={item} />)
 
-		// 验证头像是否被渲染
+		// Avatar renders
 		const avatar = screen.getByTestId("mock-avatar")
 		expect(avatar).toBeInTheDocument()
 		expect(avatar).toHaveAttribute("data-src", "https://example.com/avatar.jpg")
 	})
 
-	// 测试头像渲染 - 函数类型
-	test("头像渲染 - 当传入函数类型的头像时应正确渲染", () => {
-		// 设置 useHover 的返回值为 true，确保函数被调用
+	// Avatar render - function
+	test("avatar render - renders when avatar is function", () => {
+		// useHover returns true to ensure function runs
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(true)
 
-		const avatarFn = vi.fn().mockReturnValue(<div data-testid="custom-avatar">自定义头像</div>)
+		const avatarFn = vi.fn().mockReturnValue(<div data-testid="custom-avatar">Custom avatar</div>)
 
 		const item: DelightfulListItemData = {
 			id: "test-1",
-			title: "测试项目1",
+			title: "Test item 1",
 			avatar: avatarFn,
 		}
 
 		render(<DelightfulListItem data={item} />)
 
-		// 验证头像函数是否被调用并渲染
+		// Avatar function called and rendered
 		expect(avatarFn).toHaveBeenCalledWith(true)
 		expect(screen.getByTestId("custom-avatar")).toBeInTheDocument()
 	})
 
-	// 测试标题渲染 - 函数类型
-	test("标题渲染 - 当传入函数类型的标题时应正确渲染", () => {
-		// 设置 useHover 的返回值为 true，确保函数被调用
+	// Title render - function
+	test("title render - renders when title is function", () => {
+		// useHover returns true to ensure function runs
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(true)
 
-		const titleFn = vi.fn().mockReturnValue(<span data-testid="custom-title">自定义标题</span>)
+		const titleFn = vi.fn().mockReturnValue(<span data-testid="custom-title">Custom title</span>)
 
 		const item: DelightfulListItemData = {
 			id: "test-1",
@@ -176,14 +174,14 @@ describe("DelightfulListItem 组件", () => {
 
 		render(<DelightfulListItem data={item} />)
 
-		// 验证标题函数是否被调用并渲染
+		// Title function called and rendered
 		expect(titleFn).toHaveBeenCalledWith(true)
 		expect(screen.getByTestId("custom-title")).toBeInTheDocument()
 	})
 
-	// 测试悬停区域渲染
-	test("悬停区域 - 当鼠标悬停时应显示悬停区域内容", () => {
-		// 模拟 HoverSection 组件的行为
+	// Hover section render
+	test("hover section - shows hover content when hovered", () => {
+		// Mock HoverSection behavior
 		const MockHoverSection = ({
 			isHover,
 			content,
@@ -196,59 +194,57 @@ describe("DelightfulListItem 组件", () => {
 			</div>
 		)
 
-		// 首先测试非悬停状态
+		// Non-hover state first
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
-		// 使用自定义渲染函数，直接测试 HoverSection 组件
+		// Render HoverSection directly
 		const { rerender } = render(
 			<MockHoverSection
 				isHover={false}
-				content={<div data-testid="hover-content">悬停内容</div>}
+				content={<div data-testid="hover-content">Hover content</div>}
 			/>,
 		)
 
-		// 验证悬停内容存在但不可见
+		// Hover content exists but hidden
 		const hoverSection = screen.getByTestId("hover-section")
 		expect(hoverSection).toHaveStyle("display: none")
 
-		// 然后测试悬停状态
+		// Hovered state
 		rerender(
-			<MockHoverSection isHover content={<div data-testid="hover-content">悬停内容</div>} />,
+			<MockHoverSection isHover content={<div data-testid="hover-content">Hover content</div>} />,
 		)
 
-		// 验证悬停内容现在可见
+		// Hover content visible
 		expect(screen.getByTestId("hover-section")).toHaveStyle("display: block")
 	})
 
-	// 测试 memo 优化 - 当数据没有变化时不应重新渲染
-	test("渲染优化 - 当数据没有变化时不应重新渲染", () => {
-		// 设置 useHover 的返回值为 false
+	// Memo: avoid rerender when data unchanged
+	test("render optimization - should not rerender when data unchanged", () => {
+		// useHover returns false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
 		const item: DelightfulListItemData = {
 			id: "test-1",
-			title: "测试项目1",
+			title: "Test item 1",
 		}
 
 		const { rerender } = render(<DelightfulListItem data={item} />)
 
-		// 重新渲染组件但保持数据不变
+		// Rerender with unchanged data
 		rerender(<DelightfulListItem data={item} />)
 
-		// 这个测试难以直接断言组件没有重新渲染
-		// 通常需要使用Jest模拟组件内部方法或使用特殊工具监控渲染次数
-		// 这里只是简单验证组件仍然正确显示
-		expect(screen.getByText("测试项目1")).toBeInTheDocument()
+		// We simply assert content still renders
+		expect(screen.getByText("Test item 1")).toBeInTheDocument()
 	})
 
-	// 测试自定义className的应用
-	test("自定义样式 - 应正确应用自定义className", () => {
-		// 设置 useHover 的返回值为 false
+	// Custom className
+	test("custom styles - applies custom className", () => {
+		// useHover returns false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
 		const item: DelightfulListItemData = {
 			id: "test-1",
-			title: "测试项目1",
+			title: "Test item 1",
 		}
 
 		const customClass = "custom-container-class"
@@ -258,7 +254,7 @@ describe("DelightfulListItem 组件", () => {
 
 		render(<DelightfulListItem data={item} className={customClass} classNames={classNames} />)
 
-		// 验证自定义类名是否被应用
+		// Custom classes applied
 		const container = screen.getByTestId("delightful-list-item")
 		expect(container).toHaveClass("custom-container-class")
 		expect(container).toHaveClass("custom-container")

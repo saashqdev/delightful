@@ -3,7 +3,7 @@ import { vi, describe, test, expect } from "vitest"
 import DelightfulList from "../DelightfulList"
 import type { DelightfulListItemData } from "../types"
 
-// 模拟样式模块，解决token问题
+// Mock styles module to satisfy tokens
 vi.mock("../styles", () => ({
 	useDelightfulListItemStyles: () => ({
 		styles: {
@@ -19,142 +19,140 @@ vi.mock("../styles", () => ({
 	}),
 }))
 
-// 创建测试数据
+// Test data
 interface TestItemData extends DelightfulListItemData {
 	id: string
 	title: string
 	customField?: string
 }
 
-// 生成测试项
+// Generate test items
 const createTestItems = (count: number): TestItemData[] => {
 	return Array.from({ length: count }).map((_, index) => ({
 		id: `item-${index}`,
-		title: `测试项 ${index}`,
-		customField: `自定义字段 ${index}`,
+		title: `Test item ${index}`,
+		customField: `Custom field ${index}`,
 	}))
 }
 
-describe("DelightfulList 组件", () => {
-	// 测试基本渲染
-	test("正确渲染列表项", () => {
+describe("DelightfulList component", () => {
+	// Basic rendering
+	test("renders list items", () => {
 		const items = createTestItems(3)
 
 		render(<DelightfulList items={items} />)
 
-		// 验证所有项都被渲染
+		// All items render
 		items.forEach((item) => {
 			expect(screen.getByText(item.title)).toBeInTheDocument()
 		})
 	})
 
-	// 测试空列表
-	test("空列表时渲染 DelightfulEmpty 组件", () => {
+	// Empty list
+	test("renders DelightfulEmpty when list is empty", () => {
 		const { container } = render(<DelightfulList items={[]} />)
 
-		// 由于 DelightfulEmpty 可能没有特定的测试 ID，我们检查是否没有渲染列表项
+		// DelightfulEmpty may not expose a test id; ensure no list items render
 		expect(container.querySelectorAll(".ant-flex").length).toBe(0)
 	})
 
-	// 测试项点击事件
-	test("点击列表项触发 onItemClick 回调", () => {
+	// Item click handling
+	test("clicking an item triggers onItemClick", () => {
 		const items = createTestItems(3)
 		const handleItemClick = vi.fn()
 
 		render(<DelightfulList items={items} onItemClick={handleItemClick} />)
 
-		// 点击第二个列表项
-		fireEvent.click(screen.getByText("测试项 1"))
+		// Click second item
+		fireEvent.click(screen.getByText("Test item 1"))
 
-		// 验证回调被调用，并传入了正确的数据
+		// Callback invoked with correct payload
 		expect(handleItemClick).toHaveBeenCalledTimes(1)
 		expect(handleItemClick).toHaveBeenCalledWith(items[1])
 	})
 
-	// 测试 active 状态（string 类型）
-	test("正确应用 active 状态（string 类型）", () => {
+	// Active state (string)
+	test("applies active state when string id provided", () => {
 		const items = createTestItems(3)
 		const activeId = "item-1"
 
 		const { container } = render(<DelightfulList items={items} active={activeId} />)
 
-		// 检查是否只有一个项目有 active 样式类
+		// Only one item should have the active class
 		const activeItems = container.querySelectorAll(".mock-active")
 		expect(activeItems.length).toBe(1)
 
-		// 检查激活项是否包含预期的标题
+		// Active item contains expected title
 		const activeItem = activeItems[0]
 		const parentElement = activeItem.closest(".mock-container")
-		expect(parentElement?.textContent).toContain("测试项 1")
+		expect(parentElement?.textContent).toContain("Test item 1")
 	})
 
-	// 测试 active 状态（函数类型）
-	test("正确应用 active 状态（函数类型）", () => {
+	// Active state (function)
+	test("applies active state when predicate provided", () => {
 		const items = createTestItems(5)
 		const isActive = (_: TestItemData, index: number) => index === 2
 
 		render(<DelightfulList items={items} active={isActive} />)
 
-		// 检查是否只有一个项目有 active 样式类
+		// Only one item should have the active class
 		const activeItems = document.querySelectorAll(".mock-active")
 		expect(activeItems.length).toBe(1)
 
-		// 检查激活项是否包含预期的标题
+		// Active item contains expected title
 		const activeItem = activeItems[0]
 		const parentElement = activeItem.closest(".mock-container")
-		expect(parentElement?.textContent).toContain("测试项 2")
+		expect(parentElement?.textContent).toContain("Test item 2")
 	})
 
-	// 测试字符串项转换
-	test("正确处理字符串项", () => {
+	// String item handling
+	test("handles string items", () => {
 		const stringItems = ["item-0", "item-1", "item-2"]
 
 		render(<DelightfulList items={stringItems} />)
 
-		// 验证所有项都被渲染
+		// All items render
 		const elements = document.querySelectorAll(".mock-container")
 		expect(elements.length).toBe(3)
 	})
 
-	// 性能测试：渲染大量项目
-	test("性能测试：渲染大量列表项", () => {
-		// 创建100个测试项
+	// Performance: render many items
+	test("performance: renders many items", () => {
+		// Create 100 items
 		const items = createTestItems(100)
 
-		// 记录渲染开始时间
+		// Measure render time
 		const startTime = performance.now()
 
 		render(<DelightfulList items={items} />)
 
-		// 记录渲染结束时间
 		const endTime = performance.now()
 
-		// 计算渲染时间
 		const renderTime = endTime - startTime
 
-		// 渲染时间不应该超过特定阈值，这里设置为200ms作为示例
-		console.log(`渲染100个项目耗时: ${renderTime}ms`)
+		// Render time should stay under a sample threshold (200ms)
+		console.log(`Render 100 items: ${renderTime}ms`)
 		expect(renderTime).toBeLessThan(200)
 
-		// 验证所有项都被渲染
+		// All items render
 		const elements = document.querySelectorAll(".mock-container")
 		expect(elements.length).toBe(100)
 	})
 
-	// 测试自定义列表项组件
-	test("支持自定义列表项组件", () => {
+	// Custom list item component
+	test("supports custom list item component", () => {
 		const items = createTestItems(3)
 
-		// 创建自定义列表项组件
+		// Create custom list item component
 		const CustomListItem = vi.fn().mockImplementation((props: any) => (
 			<div data-testid="custom-item">
-				<span>自定义项: {props.data.title}</span>
+				<span>Custom item: {props.data.title}</span>
 			</div>
 		))
 
 		render(<DelightfulList items={items} listItemComponent={CustomListItem} />)
 
-		// 验证自定义组件被使用
+		// Custom component is used
 		expect(CustomListItem).toHaveBeenCalledTimes(3)
 		expect(screen.getAllByTestId("custom-item").length).toBe(3)
 	})

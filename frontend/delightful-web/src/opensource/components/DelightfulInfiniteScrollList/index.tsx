@@ -2,5 +2,5 @@ import DelightfulInfiniteScrollList from "./DelightfulInfiniteScrollList"
 
 export type { DelightfulInfiniteScrollListProps } from "./types"
 
-// 添加默认导出
+// Default export
 export default DelightfulInfiniteScrollList

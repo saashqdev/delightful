@@ -8,11 +8,11 @@ import React, { ReactElement, useContext, useEffect, useMemo, useState } from "r
 import { useTranslation } from "react-i18next"
 import { observer } from "mobx-react"
 import resolveToString from "@/common/utils/template"
-import { MagicExpressionWidget } from "@/index"
-import MagicSelect from "@/common/BaseUI/Select"
-import MagicInput from "@/common/BaseUI/Input"
-import { useExportFields } from "@/MagicJsonSchemaEditor/context/ExportFieldsContext/useExportFields"
-import { InputExpressionValue } from "@/MagicExpressionWidget/types"
+import { DelightfulExpressionWidget } from "@/index"
+import DelightfulSelect from "@/common/BaseUI/Select"
+import DelightfulInput from "@/common/BaseUI/Input"
+import { useExportFields } from "@/DelightfulJsonSchemaEditor/context/ExportFieldsContext/useExportFields"
+import { InputExpressionValue } from "@/DelightfulExpressionWidget/types"
 import { SchemaMobxContext } from "../../.."
 import {
 	JSONPATH_JOIN_CHAR,
@@ -378,7 +378,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 
 						{displayColumns.includes(ShowColumns.Label) && (
 							<Col span={LabelCol} className="label-col">
-								<MagicInput
+								<DelightfulInput
 									placeholder={resolveToString(
 										i18next.t("flow.pleaseInputSomething", {
 											ns: "magicFlow",
@@ -398,7 +398,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 
 						{displayColumns.includes(ShowColumns.Type) && (
 							<Col span={TypeCol} className="type-col">
-								<MagicSelect
+								<DelightfulSelect
 									style={{ width: "100%" }}
 									onChange={handleChangeType}
 									value={selectValue}
@@ -414,7 +414,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 											</Option>
 										)
 									})}
-								</MagicSelect>
+								</DelightfulSelect>
 							</Col>
 						)}
 
@@ -456,7 +456,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 
 						{displayColumns.includes(ShowColumns.Value) && (
 							<Col span={ValueCol} className="value-col">
-								<MagicExpressionWidget
+								<DelightfulExpressionWidget
 									value={value.value}
 									onChange={(val: InputExpressionValue) =>
 										handleExpressionValueChange(["value"], val)
@@ -482,7 +482,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 
 						{displayColumns.includes(ShowColumns.Description) && (
 							<Col span={DescCol}>
-								<MagicInput
+								<DelightfulInput
 									suffix={
 										<IconEdit
 											className="input-icon-editor"

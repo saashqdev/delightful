@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Application\Share\Adapter;
+namespace Delightful\SuperDelightful\Application\Share\Adapter;
 
-use Delightful\SuperMagic\Application\Share\DTO\ShareableResourceDTO;
-use Delightful\SuperMagic\Application\Share\Factory\Facade\ResourceFactoryInterface;
+use Delightful\SuperDelightful\Application\Share\DTO\ShareableResourceDTO;
+use Delightful\SuperDelightful\Application\Share\Factory\Facade\ResourceFactoryInterface;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 

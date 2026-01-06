@@ -5,7 +5,7 @@ import { useDebounceFn, useMemoizedFn } from "ahooks"
 import { replaceRouteParams } from "@/utils/route"
 import { RoutePath } from "@/const/routes"
 import { FlowRouteType } from "@/types/flow"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { useSearchParams } from "react-router-dom"
 import { useNavigate } from "@/opensource/hooks/useNavigate"
 import { useTranslation } from "react-i18next"
@@ -103,7 +103,7 @@ export default function VectorKnowledgeDetail() {
 		<Flex className={styles.wrapper}>
 			<Flex vertical className={styles.leftContainer}>
 				<Flex className={styles.header} align="center" gap={14}>
-					<MagicIcon
+					<DelightfulIcon
 						component={IconChevronLeft}
 						size={24}
 						className={styles.arrow}

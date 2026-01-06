@@ -1,5 +1,5 @@
 import { Flex } from "antd"
-import MagicSplitter from "@/opensource/components/base/MagicSplitter"
+import DelightfulSplitter from "@/opensource/components/base/DelightfulSplitter"
 import ChatSubSider from "../ChatSubSider"
 import EmptyConversationFallback from "../EmptyFallback"
 import { ChatDomId } from "../../constants"
@@ -14,14 +14,14 @@ function EmptyState() {
 
 	return (
 		<Flex flex={1} className={styles.chat} id={ChatDomId.ChatContainer}>
-			<MagicSplitter className={styles.splitter}>
-				<MagicSplitter.Panel min={200} defaultSize={240} max={300}>
+			<DelightfulSplitter className={styles.splitter}>
+				<DelightfulSplitter.Panel min={200} defaultSize={240} max={300}>
 					<ChatSubSider />
-				</MagicSplitter.Panel>
-				<MagicSplitter.Panel>
+				</DelightfulSplitter.Panel>
+				<DelightfulSplitter.Panel>
 					<EmptyConversationFallback />
-				</MagicSplitter.Panel>
-			</MagicSplitter>
+				</DelightfulSplitter.Panel>
+			</DelightfulSplitter>
 		</Flex>
 	)
 }

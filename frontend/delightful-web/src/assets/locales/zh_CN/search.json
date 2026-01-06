@@ -1,21 +1,21 @@
 {
 	"search": {
-		"askMagic": "问问 Magic",
+		"askDelightful": "问问 Delightful",
 		"askAl": "AI 搜索",
 		"askTranslate": "翻译",
 		"askWrite": "帮我写作",
 		"askAnswer": "解答疑惑",
-		"searchMagic": "搜索 Magic",
+		"searchDelightful": "搜索 Delightful",
 		"appOpen": "打开应用",
 		"fileSearchLocal": "查找本地文件",
 		"aiSkills": "AI 技能",
 		"searchHistory": "搜索历史",
 		"youMayWantToFind": "你可能想找",
 		"comprehensiveSkills": "综合技能",
-		"magicOpenJourney": "Magic · 打开神奇的搜索之旅...",
+		"magicOpenJourney": "Delightful · 打开神奇的搜索之旅...",
 		"inputVoice": "语音输入",
 		"keyboardSpace": "空格",
-		"magicOpen": "打开 Magic"
+		"magicOpen": "打开 Delightful"
 	},
 	"quickSearch": {
 		"search": "搜索",

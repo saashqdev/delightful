@@ -8,20 +8,20 @@ declare(strict_types=1);
 namespace App\Application\Chat\Service;
 
 use App\Application\ModelGateway\Service\LLMAppService;
-use App\Domain\Chat\DTO\ImageConvertHigh\Request\MagicChatImageConvertHighReqDTO;
+use App\Domain\Chat\DTO\ImageConvertHigh\Request\DelightfulChatImageConvertHighReqDTO;
 use App\Domain\Chat\DTO\Message\ChatMessage\AIImageCardMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\ImageConvertHighCardMessage;
 use App\Domain\Chat\Entity\Items\SeqExtra;
-use App\Domain\Chat\Entity\MagicChatFileEntity;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulChatFileEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\AIImage\Radio;
 use App\Domain\Chat\Entity\ValueObject\FileType;
 use App\Domain\Chat\Entity\ValueObject\ImageConvertHigh\ImageConvertHighResponseType;
-use App\Domain\Chat\Service\MagicAIImageDomainService;
-use App\Domain\Chat\Service\MagicChatDomainService;
-use App\Domain\Chat\Service\MagicChatFileDomainService;
-use App\Domain\Chat\Service\MagicConversationDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Chat\Service\DelightfulAIImageDomainService;
+use App\Domain\Chat\Service\DelightfulChatDomainService;
+use App\Domain\Chat\Service\DelightfulChatFileDomainService;
+use App\Domain\Chat\Service\DelightfulConversationDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\Provider\Service\AdminProviderDomainService;
 use App\ErrorCode\ImageGenerateErrorCode;
@@ -47,17 +47,17 @@ use function mb_strlen;
 /**
  * AI文生图.
  */
-class MagicChatImageConvertHighAppService extends AbstractAIImageAppService
+class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
 {
     protected LoggerInterface $logger;
 
     public function __construct(
-        protected readonly MagicConversationDomainService $magicConversationDomainService,
-        protected readonly MagicUserDomainService $magicUserDomainService,
-        protected readonly MagicChatDomainService $magicChatDomainService,
-        protected readonly MagicAIImageDomainService $magicAIImageDomainService,
+        protected readonly DelightfulConversationDomainService $magicConversationDomainService,
+        protected readonly DelightfulUserDomainService $magicUserDomainService,
+        protected readonly DelightfulChatDomainService $magicChatDomainService,
+        protected readonly DelightfulAIImageDomainService $magicAIImageDomainService,
         protected readonly FileDomainService $fileDomainService,
-        protected readonly MagicChatFileDomainService $magicChatFileDomainService,
+        protected readonly DelightfulChatFileDomainService $magicChatFileDomainService,
         protected readonly AdminProviderDomainService $serviceProviderDomainService,
         protected readonly LLMAppService $llmAppService,
         protected readonly Redis $redis,
@@ -69,7 +69,7 @@ class MagicChatImageConvertHighAppService extends AbstractAIImageAppService
     /**
      * @throws SSRFException
      */
-    public function handleUserMessage(RequestContext $requestContext, MagicChatImageConvertHighReqDTO $reqDTO): void
+    public function handleUserMessage(RequestContext $requestContext, DelightfulChatImageConvertHighReqDTO $reqDTO): void
     {
         $referContent = $this->getReferContentForAIImage($reqDTO->getReferMessageId());
         if ($referContent instanceof AIImageCardMessage || $referContent instanceof ImageConvertHighCardMessage) {
@@ -162,7 +162,7 @@ class MagicChatImageConvertHighAppService extends AbstractAIImageAppService
                 // 同步文件至magic
                 $fileUploadDTOs = [];
                 $fileType = FileType::getTypeFromFileExtension($uploadFile->getExt());
-                $fileUploadDTO = new MagicChatFileEntity();
+                $fileUploadDTO = new DelightfulChatFileEntity();
                 $fileUploadDTO->setFileKey($uploadFile->getKey());
                 $fileUploadDTO->setFileSize($uploadFile->getSize());
                 $fileUploadDTO->setFileExtension($uploadFile->getExt());
@@ -185,7 +185,7 @@ class MagicChatImageConvertHighAppService extends AbstractAIImageAppService
         return $images;
     }
 
-    private function handleGlobalThrowable(MagicChatImageConvertHighReqDTO $reqDTO, Throwable $e)
+    private function handleGlobalThrowable(DelightfulChatImageConvertHighReqDTO $reqDTO, Throwable $e)
     {
         $errorCode = $e->getCode();
         $errorMessage = __('chat.agent.user_call_agent_fail_notice');
@@ -268,7 +268,7 @@ class MagicChatImageConvertHighAppService extends AbstractAIImageAppService
         $messageInterface = new ImageConvertHighCardMessage($content);
         $extra = new SeqExtra();
         $extra->setTopicId($topicId);
-        $seqDTO = (new MagicSeqEntity())
+        $seqDTO = (new DelightfulSeqEntity())
             ->setConversationId($conversationId)
             ->setContent($messageInterface)
             ->setSeqType($messageInterface->getMessageTypeEnum())
@@ -276,11 +276,11 @@ class MagicChatImageConvertHighAppService extends AbstractAIImageAppService
             ->setReferMessageId($referMessageId)
             ->setExtra($extra);
         // 设置话题 id
-        return $this->getMagicChatMessageAppService()->aiSendMessage($seqDTO, $appMessageId, doNotParseReferMessageId: true);
+        return $this->getDelightfulChatMessageAppService()->aiSendMessage($seqDTO, $appMessageId, doNotParseReferMessageId: true);
     }
 
-    private function getMagicChatMessageAppService(): MagicChatMessageAppService
+    private function getDelightfulChatMessageAppService(): DelightfulChatMessageAppService
     {
-        return di(MagicChatMessageAppService::class);
+        return di(DelightfulChatMessageAppService::class);
     }
 }

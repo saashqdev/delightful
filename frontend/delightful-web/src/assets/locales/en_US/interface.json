@@ -3,7 +3,7 @@
 	"ErrorHappened": "Some Error Happended!",
 	"FrontendVersionDetected": "Project update detected",
 	"GFDSAQ_DINGTALK_SSO_ENVIRONMENT": "DingTalk Bindeng Environment",
-	"MagicChat": "McGee Chat",
+	"DelightfulChat": "McGee Chat",
 	"PleaseReloadThePage": "Reloading in progress",
 	"Reload": "reload",
 	"agent": {
@@ -1068,14 +1068,14 @@
 			"socialMediaLabel": "Social media account",
 			"socialMediaPlaceholder": "Please provide the links to your personal profiles on LinkedIn, X, TikTok, Weibo, Douyin, Xiaohongshu, or other social media platforms. If you have multiple accounts, please provide them all to us.",
 			"submit": "Submit",
-			"tasksLabel": "What tasks would you like Magic AI to perform for you?",
-			"tasksPlaceholder": "What tasks would you like Magic AI to complete for you? Please let us know your ideas in detail; the more specific your ideas are, the better we can provide solutions for you.",
+			"tasksLabel": "What tasks would you like Delightful AI to perform for you?",
+			"tasksPlaceholder": "What tasks would you like Delightful AI to complete for you? Please let us know your ideas in detail; the more specific your ideas are, the better we can provide solutions for you.",
 			"tasksRequired": "Tasks is required",
 			"title": "Join the waitlist"
 		},
 		"leaveAccount": "Log out",
 		"nextStep": "Next",
-		"successRegister": "You have successfully registered for 「Magic AI」"
+		"successRegister": "You have successfully registered for 「Delightful AI」"
 	},
 	"memberCard": {
 		"assistantIntroduction": "Assistant introduction",
@@ -1198,7 +1198,7 @@
 	"send": "Send",
 	"setting": {
 		"VerificationCode": "Code",
-		"aboutMagic": "About Magic",
+		"aboutDelightful": "About Delightful",
 		"aboutUs": "About",
 		"accountManage": "Account",
 		"aiCompletion": "AI automatic completion",
@@ -1208,7 +1208,7 @@
 		"auto": "Auto",
 		"avatar": "Avatar",
 		"binded": "Bound",
-		"canUseInLoginMagic": "Used for logging into Magic",
+		"canUseInLoginDelightful": "Used for logging into Delightful",
 		"cancelBind": "Disconnect",
 		"change": "Change",
 		"changePassword": "Modify",
@@ -1244,7 +1244,7 @@
 		"loginDevices": "Device",
 		"loginPassword": "Password",
 		"loginTime": "Last Login",
-		"magicId": "Magic ID",
+		"magicId": "Delightful ID",
 		"modern": "Modern",
 		"newPhone": "New mobile number",
 		"newPhoneCode": "New mobile phone number verification code",
@@ -1310,7 +1310,7 @@
 		"notification": "notify",
 		"orgNotAuthorized": "The organization has not been authorized yet",
 		"setting": "Settings",
-		"superMagic": "",
+		"superDelightful": "",
 		"switchLanguage": "Switch Language",
 		"switchOrganization": "Change Enterprise",
 		"switchOrganizationConfirm": "The page will refresh automatically after switching. Do you want to continue?",
@@ -1320,7 +1320,7 @@
 		"workspace": "Workplace",
 		"accountManagement": "Account",
 		"deviceManagement": "Device",
-		"admin": "Magic Admin"
+		"admin": "Delightful Admin"
 	},
 	"spin": {
 		"loadingUserInfo": "Loading user information...",

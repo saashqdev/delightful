@@ -1,6 +1,6 @@
 import { createStyles } from "antd-style"
 import { useEffect, useRef, useState } from "react"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { Flex } from "antd"
 
 interface IsolatedHTMLRendererProps {
@@ -168,7 +168,7 @@ export default function IsolatedHTMLRenderer({
 					justify="center"
 					style={{ width: "100%", height: "100%" }}
 				>
-					<MagicSpin spinning />
+					<DelightfulSpin spinning />
 				</Flex>
 			</div>
 		)

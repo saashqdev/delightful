@@ -2,7 +2,7 @@ import type { NodeViewProps } from "@tiptap/core"
 import { NodeViewWrapper } from "@tiptap/react"
 import { memo } from "react"
 
-const MagicEmojiNodeRender = memo((props: NodeViewProps) => {
+const DelightfulEmojiNodeRender = memo((props: NodeViewProps) => {
 	const {
 		node: {
 			attrs: { code, ns, suffix = ".png", size },
@@ -23,4 +23,4 @@ const MagicEmojiNodeRender = memo((props: NodeViewProps) => {
 	)
 })
 
-export default MagicEmojiNodeRender
+export default DelightfulEmojiNodeRender

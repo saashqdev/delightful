@@ -1,21 +1,21 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicMemberAvatar from "@/opensource/components/business/MagicMemberAvatar"
-import { MagicList } from "@/opensource/components/MagicList"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulMemberAvatar from "@/opensource/components/business/DelightfulMemberAvatar"
+import { DelightfulList } from "@/opensource/components/DelightfulList"
 import AutoTooltipText from "@/opensource/components/other/AutoTooltipText"
 import { IconChevronRight, IconMinus, IconPlus } from "@tabler/icons-react"
 import { Col, Flex, message, Row, Switch, Typography } from "antd"
 import { useMemo, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { useBoolean, useMemoizedFn } from "ahooks"
-import type { MagicListItemData } from "@/opensource/components/MagicList/types"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import type { DelightfulListItemData } from "@/opensource/components/DelightfulList/types"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import conversationStore from "@/opensource/stores/chatNew/conversation"
 import { ChatApi } from "@/apis"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { Virtuoso } from "react-virtuoso"
 
-import MagicGroupAvatar from "@/opensource/components/business/MagicGroupAvatar"
+import DelightfulGroupAvatar from "@/opensource/components/business/DelightfulGroupAvatar"
 import useGroupInfo from "@/opensource/hooks/chat/useGroupInfo"
 import { observer } from "mobx-react-lite"
 import ConversationService from "@/opensource/services/chat/conversation/ConversationService"
@@ -57,7 +57,7 @@ const GroupSetting = observer(() => {
 
 	const { groupInfo } = useGroupInfo(conversation?.receive_id)
 
-	const organization = userStore.user.getOrganizationByMagic(
+	const organization = userStore.user.getOrganizationByDelightful(
 		conversation?.user_organization_code ?? "",
 	)
 
@@ -73,14 +73,14 @@ const GroupSetting = observer(() => {
 				extra: (
 					<Flex align="center" gap={4} className={styles.groupNameContent}>
 						<div className={styles.groupNameContent}>{groupInfo?.group_name}</div>
-						<MagicIcon component={IconChevronRight} />
+						<DelightfulIcon component={IconChevronRight} />
 					</Flex>
 				),
 			},
 			// {
 			// 	id: GroupSettingListItemId.GroupNotice,
 			// 	title: t("chat.groupSetting.groupNotice"),
-			// 	extra: <MagicIcon component={IconChevronRight} />,
+			// 	extra: <DelightfulIcon component={IconChevronRight} />,
 			// },
 		]
 	}, [groupInfo?.group_name, t])
@@ -108,9 +108,9 @@ const GroupSetting = observer(() => {
 
 	/**
 	 * 点击群组信息列表项
-	 * @param {MagicListItemData} item 列表项数据
+	 * @param {DelightfulListItemData} item 列表项数据
 	 */
-	const onGroupInfoListItemClick = useMemoizedFn(({ id }: MagicListItemData) => {
+	const onGroupInfoListItemClick = useMemoizedFn(({ id }: DelightfulListItemData) => {
 		if (!conversation) return
 		switch (id) {
 			case GroupSettingListItemId.UpdateGroupName:
@@ -195,7 +195,7 @@ const GroupSetting = observer(() => {
 	// 			id: GroupSettingListItemId.GroupAdmin,
 	// 			title: (
 	// 				<Flex align="center" gap={4}>
-	// 					<MagicMemberAvatar uid={groupInfo?.group_owner} />
+	// 					<DelightfulMemberAvatar uid={groupInfo?.group_owner} />
 	// 					<Flex vertical>
 	// 						<span>{t("chat.groupSetting.groupAdmin")}</span>
 	// 						<span className={styles.groupAdminTip}>
@@ -204,7 +204,7 @@ const GroupSetting = observer(() => {
 	// 					</Flex>
 	// 				</Flex>
 	// 			),
-	// 			extra: <MagicIcon component={IconChevronRight} />,
+	// 			extra: <DelightfulIcon component={IconChevronRight} />,
 	// 		},
 	// 		{
 	// 			id: GroupSettingListItemId.GroupType,
@@ -214,7 +214,7 @@ const GroupSetting = observer(() => {
 	// 					{groupInfo?.group_type
 	// 						? groupTypes[groupInfo?.group_type].label
 	// 						: undefined}
-	// 					<MagicIcon component={IconChevronRight} />
+	// 					<DelightfulIcon component={IconChevronRight} />
 	// 				</Flex>
 	// 			),
 	// 		},
@@ -253,7 +253,7 @@ const GroupSetting = observer(() => {
 		if (!conversation) return
 		const isOwner = groupInfo?.group_owner === userStore.user.userInfo?.user_id
 		if (isOwner) {
-			MagicModal.info({
+			DelightfulModal.info({
 				centered: true,
 				title: t("common.tip", { ns: "interface" }),
 				content: t("chat.groupSetting.ownerLeaveGroupTip", { ns: "interface" }),
@@ -263,7 +263,7 @@ const GroupSetting = observer(() => {
 		}
 
 		// 二次确认
-		MagicModal.confirm({
+		DelightfulModal.confirm({
 			centered: true,
 			title: t("common.tip", { ns: "interface" }),
 			content: t("chat.groupSetting.leaveGroupConfirm", { ns: "interface" }),
@@ -284,7 +284,7 @@ const GroupSetting = observer(() => {
 	const handleRemoveGroup = useMemoizedFn(() => {
 		if (!conversation) return
 
-		MagicModal.confirm({
+		DelightfulModal.confirm({
 			centered: true,
 			title: t("common.tip", { ns: "interface" }),
 			content: t("chat.groupSetting.removeGroupConfirm", { ns: "interface" }),
@@ -326,9 +326,9 @@ const GroupSetting = observer(() => {
 						return (
 							<Col key="add-member" className={styles.member}>
 								<Flex vertical align="center" justify="center" gap={4}>
-									<MagicButton
+									<DelightfulButton
 										className={styles.addMember}
-										icon={<MagicIcon component={IconPlus} size={24} />}
+										icon={<DelightfulIcon component={IconPlus} size={24} />}
 										type="default"
 										onClick={openAddGroupMemberModal}
 									/>
@@ -345,9 +345,9 @@ const GroupSetting = observer(() => {
 						return (
 							<Col key="remove-member" className={styles.member}>
 								<Flex vertical align="center" justify="center" gap={4}>
-									<MagicButton
+									<DelightfulButton
 										className={styles.addMember}
-										icon={<MagicIcon component={IconMinus} size={24} />}
+										icon={<DelightfulIcon component={IconMinus} size={24} />}
 										type="default"
 										onClick={openRemoveGroupMemberModal}
 									/>
@@ -365,7 +365,7 @@ const GroupSetting = observer(() => {
 							key={(item as GroupConversationMember).user_id}
 							className={styles.member}
 						>
-							<MagicMemberAvatar
+							<DelightfulMemberAvatar
 								size={44}
 								uid={(item as GroupConversationMember).user_id}
 								showName="vertical"
@@ -380,7 +380,7 @@ const GroupSetting = observer(() => {
 	return (
 		<Flex vertical gap={10} align="start" className={styles.container}>
 			<Flex gap={6} align="center" className={styles.groupInfo}>
-				<MagicGroupAvatar
+				<DelightfulGroupAvatar
 					gid={conversation?.receive_id ?? ""}
 					className={styles.groupAvatar}
 					size={40}
@@ -419,7 +419,7 @@ const GroupSetting = observer(() => {
 				</div>
 			</div>
 			<Typography.Text className={styles.title}>{t("chat.groupInfo")}</Typography.Text>
-			<MagicList
+			<DelightfulList
 				gap={0}
 				className={styles.list}
 				items={groupInfoListItem}
@@ -429,7 +429,7 @@ const GroupSetting = observer(() => {
 			<Typography.Text className={styles.title}>
 				{t("chat.groupSetting.userSetting")}
 			</Typography.Text>
-			<MagicList
+			<DelightfulList
 				gap={0}
 				className={styles.list}
 				items={listItems}
@@ -440,7 +440,7 @@ const GroupSetting = observer(() => {
 					<Typography.Text className={styles.title}>
 						{t("chat.groupSetting.groupAdmin")}
 					</Typography.Text>
-					<MagicList
+					<DelightfulList
 						gap={0}
 						className={styles.list}
 						items={groupAdminListItem}
@@ -450,16 +450,16 @@ const GroupSetting = observer(() => {
 				</>
 			) : null} */}
 			<Flex vertical flex={1} className={commonStyles.buttonList}>
-				{/* <MagicButton type="link" danger block>
+				{/* <DelightfulButton type="link" danger block>
 					{t("chat.chatSetting.deleteMessageRecords")}
-				</MagicButton> */}
-				<MagicButton type="link" danger block onClick={handleLeaveGroup}>
+				</DelightfulButton> */}
+				<DelightfulButton type="link" danger block onClick={handleLeaveGroup}>
 					{t("chat.groupSetting.leaveGroup")}
-				</MagicButton>
+				</DelightfulButton>
 				{isAdmin && (
-					<MagicButton type="link" danger block onClick={handleRemoveGroup}>
+					<DelightfulButton type="link" danger block onClick={handleRemoveGroup}>
 						{t("chat.groupSetting.dissolveGroup")}
-					</MagicButton>
+					</DelightfulButton>
 				)}
 			</Flex>
 			<UpdateGroupNameModal

@@ -1,16 +1,16 @@
 /**
  * magic-flow节点业务组件
  */
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useTranslation } from "react-i18next"
-import type { MagicFlowInstance, NodeSchema } from "@delightful/delightful-flow/dist/MagicFlow"
-import MagicFlowComponent from "@delightful/delightful-flow/dist/MagicFlow"
-import { MaterialSourceProvider } from "@delightful/delightful-flow/dist/MagicFlow/context/MaterialSourceContext/MaterialSourceContext"
+import type { DelightfulFlowInstance, NodeSchema } from "@delightful/delightful-flow/dist/DelightfulFlow"
+import DelightfulFlowComponent from "@delightful/delightful-flow/dist/DelightfulFlow"
+import { MaterialSourceProvider } from "@delightful/delightful-flow/dist/DelightfulFlow/context/MaterialSourceContext/MaterialSourceContext"
 import { NodeMapProvider } from "@delightful/delightful-flow/dist/common/context/NodeMap/Provider"
 import { RoutePath } from "@/const/routes"
 import { ToastContainer } from "react-toastify"
-import { NodeChangeListenerProvider } from "@delightful/delightful-flow/dist/MagicFlow/context/NodeChangeListenerContext/NodeChangeListenerContext"
-import { ExtraNodeConfigProvider } from "@delightful/delightful-flow/dist/MagicFlow/context/ExtraNodeConfigContext/Provider"
+import { NodeChangeListenerProvider } from "@delightful/delightful-flow/dist/DelightfulFlow/context/NodeChangeListenerContext/NodeChangeListenerContext"
+import { ExtraNodeConfigProvider } from "@delightful/delightful-flow/dist/DelightfulFlow/context/ExtraNodeConfigContext/Provider"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { ConfigProvider, message } from "antd"
 import { useMemoizedFn, useSize } from "ahooks"
@@ -84,7 +84,7 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 	// 是否显示FlowAssistant
 	const [showFlowAssistant, setShowFlowAssistant] = useState(false)
 
-	const flowInstance = useRef(null as null | MagicFlowInstance)
+	const flowInstance = useRef(null as null | DelightfulFlowInstance)
 
 	const flowInteractionRef = useRef(null as any)
 
@@ -200,32 +200,32 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 		return (
 			<>
 				{isAgent && isAdminRight && isReleasedToMarket && (
-					<MagicButton justify="flex-start" size="large" type="text" block>
+					<DelightfulButton justify="flex-start" size="large" type="text" block>
 						<AuthControlButton
 							Icon
 							resourceId={agent.botEntity.id as string}
 							resourceType={ResourceTypes.Agent}
 						/>
-					</MagicButton>
+					</DelightfulButton>
 				)}
 				{isEditRight && (
-					<MagicButton justify="flex-start" size="large" type="text" block>
+					<DelightfulButton justify="flex-start" size="large" type="text" block>
 						<ApiKeyButton flow={currentFlow!} Icon isAgent={isAgent} />
-					</MagicButton>
+					</DelightfulButton>
 				)}
 				<div className={styles.divider} />
-				<MagicButton justify="flex-start" size="large" type="text" block>
+				<DelightfulButton justify="flex-start" size="large" type="text" block>
 					<GlobalVariablesButton
 						Icon
 						flow={currentFlow}
 						hasEditRight={isEditRight || isAdminRight}
 						flowInstance={flowInstance}
 					/>
-				</MagicButton>
+				</DelightfulButton>
 				{isAgent && isEditRight && (
-					<MagicButton justify="flex-start" size="large" type="text" block>
+					<DelightfulButton justify="flex-start" size="large" type="text" block>
 						<QuickInstructionButton agent={agent} Icon />
-					</MagicButton>
+					</DelightfulButton>
 				)}
 			</>
 		)
@@ -233,7 +233,7 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 
 	const moreIcon = useMemo(() => {
 		return (
-			<MagicButton
+			<DelightfulButton
 				className={styles.moreIcon}
 				icon={<IconMenu2 size={16} color="#000000" />}
 			/>
@@ -300,12 +300,12 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 						{/* 添加AI助手按钮 */}
 
 						{/* {isEditRight && isCommercial && (
-							<MagicButton
+							<DelightfulButton
 								onClick={() => setShowFlowAssistant((prev) => !prev)}
 								icon={<IconRobot size={16} />}
 							>
 								{t("common.flowAssistant", { ns: "flow" })}
-							</MagicButton>
+							</DelightfulButton>
 						)} */}
 
 						{/* <SaveDraftButton
@@ -441,7 +441,7 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 											})}
 										>
 											{/* @ts-ignore */}
-											<MagicFlowComponent
+											<DelightfulFlowComponent
 												header={flowHeader}
 												showExtraFlowInfo={false}
 												ref={flowInstance}

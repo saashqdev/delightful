@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import { useMemoizedFn } from "ahooks"
 import AgreePolicyCheckbox from "@/opensource/pages/login/components/AgreePolicyCheckbox"
 import { App, Flex } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useTranslation } from "react-i18next"
 import { createStyles } from "antd-style"
 
@@ -72,21 +72,21 @@ export function useUserAgreedPolicy() {
 				closable: false,
 				footer: (
 					<Flex justify="flex-end" style={{ marginTop: 20 }} gap={12}>
-						<MagicButton
+						<DelightfulButton
 							variant="solid"
 							type="default"
 							onClick={() => responseFn(false)}
 						>
 							{t("button.cancel")}
-						</MagicButton>
-						<MagicButton
+						</DelightfulButton>
+						<DelightfulButton
 							type="primary"
 							onClick={() => {
 								responseFn(true)
 							}}
 						>
 							{t("button.confirm")}
-						</MagicButton>
+						</DelightfulButton>
 					</Flex>
 				),
 			})

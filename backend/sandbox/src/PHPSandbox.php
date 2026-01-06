@@ -214,7 +214,7 @@ class PHPSandbox implements IteratorAggregate
         return array_keys(get_object_vars($this));
     }
 
-    /** Magic method to provide API compatibility for v1.* code.
+    /** Delightful method to provide API compatibility for v1.* code.
      * @param string $method The method name to call
      * @param array $arguments The method arguments to call
      * @return mixed
@@ -229,7 +229,7 @@ class PHPSandbox implements IteratorAggregate
         return null;
     }
 
-    /** Magic method to call SandboxOptions instance members.
+    /** Delightful method to call SandboxOptions instance members.
      * @param string $name The method arguments to call
      */
     public function __get(string $name)

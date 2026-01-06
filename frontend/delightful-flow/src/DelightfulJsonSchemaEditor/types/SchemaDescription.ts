@@ -11,7 +11,7 @@ import {
 } from '../utils/SchemaUtils';
 import Open from './Open';
 import Schema from './Schema';
-import { FormItemType, InputExpressionValue, VALUE_TYPE } from '@/MagicExpressionWidget/types';
+import { FormItemType, InputExpressionValue, VALUE_TYPE } from '@/DelightfulExpressionWidget/types';
 
 export default class SchemaDescription {
   schema: Schema;

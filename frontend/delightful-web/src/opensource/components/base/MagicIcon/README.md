@@ -1,6 +1,6 @@
-# MagicIcon 魔法图标组件
+# DelightfulIcon 魔法图标组件
 
-`MagicIcon` 是一个基于 Tabler Icons 的图标包装组件，提供了主题适配和统一的样式控制。
+`DelightfulIcon` 是一个基于 Tabler Icons 的图标包装组件，提供了主题适配和统一的样式控制。
 
 ## 属性
 
@@ -14,26 +14,26 @@
 ## 基础用法
 
 ```tsx
-import { MagicIcon } from '@/components/base/MagicIcon';
+import { DelightfulIcon } from '@/components/base/DelightfulIcon';
 import { IconHome, IconStar, IconSettings } from '@tabler/icons-react';
 
 // 基础图标
-<MagicIcon component={IconHome} />
+<DelightfulIcon component={IconHome} />
 
 // 自定义大小
-<MagicIcon component={IconStar} size={24} />
+<DelightfulIcon component={IconStar} size={24} />
 
 // 自定义颜色（会覆盖主题颜色）
-<MagicIcon component={IconSettings} color="blue" />
+<DelightfulIcon component={IconSettings} color="blue" />
 
 // 自定义线条粗细
-<MagicIcon component={IconHome} stroke={2} />
+<DelightfulIcon component={IconHome} stroke={2} />
 
 // 激活状态
-<MagicIcon component={IconStar} active />
+<DelightfulIcon component={IconStar} active />
 
 // 带动画效果（如果实现了动画）
-<MagicIcon component={IconSettings} animation />
+<DelightfulIcon component={IconSettings} animation />
 ```
 
 ## 特点
@@ -50,4 +50,4 @@ import { IconHome, IconStar, IconSettings } from '@tabler/icons-react';
 -   需要统一管理图标样式时
 -   需要为图标添加交互状态（如激活状态）时
 
-MagicIcon 组件让你的图标使用更加简单和统一，同时确保它们能够适应应用的主题设置。
+DelightfulIcon 组件让你的图标使用更加简单和统一，同时确保它们能够适应应用的主题设置。

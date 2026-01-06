@@ -74,7 +74,7 @@ function IntermediateLayer({
 	)
 }
 
-export function MagicFlowLocaleProvider(
+export function DelightfulFlowLocaleProvider(
 	props: PropsWithChildren<{ store?: GlobalLanguageStoreType; i18nInstance: i18n }>,
 ) {
 	return (

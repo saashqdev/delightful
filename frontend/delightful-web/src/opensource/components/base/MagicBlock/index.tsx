@@ -1,7 +1,7 @@
 import type { HTMLAttributes, PropsWithChildren } from "react"
 import { useRef } from "react"
 
-function MagicEditBlock({ children, ...props }: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) {
+function DelightfulEditBlock({ children, ...props }: PropsWithChildren<HTMLAttributes<HTMLDivElement>>) {
 	const ref = useRef<HTMLDivElement>(null)
 
 	return (
@@ -11,4 +11,4 @@ function MagicEditBlock({ children, ...props }: PropsWithChildren<HTMLAttributes
 	)
 }
 
-export default MagicEditBlock
+export default DelightfulEditBlock

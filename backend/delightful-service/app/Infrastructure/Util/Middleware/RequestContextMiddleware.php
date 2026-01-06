@@ -13,7 +13,7 @@ use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestCoContext;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -45,7 +45,7 @@ class RequestContextMiddleware implements MiddlewareInterface
     }
 
     /**
-     * @return MagicUserAuthorization
+     * @return DelightfulUserAuthorization
      */
     protected function getAuthorization(): Authenticatable
     {
@@ -59,7 +59,7 @@ class RequestContextMiddleware implements MiddlewareInterface
         }
     }
 
-    protected function getOpenPlatformAuthorization(ServerRequestInterface $request, string $accessToken): MagicUserAuthorization
+    protected function getOpenPlatformAuthorization(ServerRequestInterface $request, string $accessToken): DelightfulUserAuthorization
     {
         try {
             $magicUserId = $request->getHeaderLine('magic-user-id');
@@ -73,13 +73,13 @@ class RequestContextMiddleware implements MiddlewareInterface
                 ];
             }
             $modelGatewayDataIsolation = $this->llmAppService->createModelGatewayDataIsolationByAccessToken($accessToken, $businessParams);
-            $magicUserAuthorization = new MagicUserAuthorization();
+            $magicUserAuthorization = new DelightfulUserAuthorization();
             $magicUserAuthorization->setId($modelGatewayDataIsolation->getCurrentUserId());
             $magicUserAuthorization->setOrganizationCode($modelGatewayDataIsolation->getCurrentOrganizationCode());
-            $magicUserAuthorization->setMagicId($modelGatewayDataIsolation->getMagicId());
+            $magicUserAuthorization->setDelightfulId($modelGatewayDataIsolation->getDelightfulId());
             $magicUserAuthorization->setThirdPlatformUserId($modelGatewayDataIsolation->getThirdPlatformUserId());
             $magicUserAuthorization->setThirdPlatformOrganizationCode($modelGatewayDataIsolation->getThirdPlatformOrganizationCode());
-            $magicUserAuthorization->setMagicEnvId($modelGatewayDataIsolation->getEnvId());
+            $magicUserAuthorization->setDelightfulEnvId($modelGatewayDataIsolation->getEnvId());
             $magicUserAuthorization->setUserType(UserType::Human);
             return $magicUserAuthorization;
         } catch (BusinessException $exception) {

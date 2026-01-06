@@ -2,10 +2,10 @@ import { Empty, Flex } from "antd"
 import { memo, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { useSize, useBoolean, useUpdateEffect, useMemoizedFn } from "ahooks"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconWand } from "@tabler/icons-react"
 import { debounce } from "lodash-es"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { useStyles } from "../style"
 import type { Image } from "../index"
 import ImageWrapper from "./ImageWrapper"
@@ -127,7 +127,7 @@ const WaterfallList = memo(({ data, onImageClick, ...rest }: WaterfallListProps)
 
 	if (data.length === 0) return <Empty />
 
-	if (isPaused) return <MagicSpin spinning={isPaused} />
+	if (isPaused) return <DelightfulSpin spinning={isPaused} />
 
 	return (
 		<div
@@ -162,14 +162,14 @@ const WaterfallList = memo(({ data, onImageClick, ...rest }: WaterfallListProps)
 							gap={10}
 						>
 							<div className={styles.prompt}>{item.prompt}</div>
-							<MagicButton
+							<DelightfulButton
 								block
 								className={styles.magicButton}
 								icon={<IconWand size={20} />}
 								onClick={() => onImageClick(item.prompt)}
 							>
 								{t("chat.aiImage.makeTheSame")}
-							</MagicButton>
+							</DelightfulButton>
 						</Flex>
 					)}
 				</Flex>

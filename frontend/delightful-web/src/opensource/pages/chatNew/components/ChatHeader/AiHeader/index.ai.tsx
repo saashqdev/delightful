@@ -1,11 +1,11 @@
 import { Flex } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import type { HTMLAttributes } from "react"
 import { getUserName } from "@/utils/modules/chat"
 import { cx } from "antd-style"
 import conversationStore from "@/opensource/stores/chatNew/conversation"
-import MagicMemberAvatar from "@/opensource/components/business/MagicMemberAvatar"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulMemberAvatar from "@/opensource/components/business/DelightfulMemberAvatar"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { useTranslation } from "react-i18next"
 import { useMemoizedFn } from "ahooks"
 import useUserInfo from "@/opensource/hooks/chat/useUserInfo"
@@ -16,7 +16,7 @@ import { IconMessageTopic } from "@/enhance/tabler/icons-react"
 import conversationService from "@/opensource/services/chat/conversation/ConversationService"
 import type Conversation from "@/opensource/models/chat/conversation"
 import useStyles from "../styles"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 
 interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 	conversation: Conversation
@@ -59,31 +59,31 @@ const AiHeader = observer(({ conversation, className }: HeaderProps) => {
 			className={cx(styles.header, className)}
 		>
 			<Flex gap={8} align="center" flex={1}>
-				<MagicAvatar src={conversationUser?.avatar_url} size={40}>
+				<DelightfulAvatar src={conversationUser?.avatar_url} size={40}>
 					{getUserName(conversationUser)}
-				</MagicAvatar>
+				</DelightfulAvatar>
 				<Flex vertical flex={1}>
 					<span className={styles.headerTitle}>{getUserName(conversationUser)}</span>
 					<CurrentTopic />
 				</Flex>
 			</Flex>
 			<Flex gap={2}>
-				<MagicButton
+				<DelightfulButton
 					className={cx({
 						[styles.extraSectionButtonActive]: topicOpen,
 					})}
 					tip={t("chat.topic.topic")}
 					type="text"
-					icon={<MagicIcon size={20} color="currentColor" component={IconMessageTopic} />}
+					icon={<DelightfulIcon size={20} color="currentColor" component={IconMessageTopic} />}
 					onClick={topicIconClick}
 				/>
-				<MagicButton
+				<DelightfulButton
 					className={cx({
 						[styles.extraSectionButtonActive]: settingOpen,
 					})}
 					tip={t("chat.setting")}
 					type="text"
-					icon={<MagicIcon size={20} color="currentColor" component={IconDots} />}
+					icon={<DelightfulIcon size={20} color="currentColor" component={IconDots} />}
 					onClick={onSettingClick}
 				/>
 			</Flex>

@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\Facade\Open;
 
-use App\Application\Flow\Service\MagicFlowExecuteAppService;
-use App\Interfaces\Flow\Assembler\MagicFlowExecuteLogAssembler;
-use App\Interfaces\Flow\DTO\MagicFlowApiChatDTO;
+use App\Application\Flow\Service\DelightfulFlowExecuteAppService;
+use App\Interfaces\Flow\Assembler\DelightfulFlowExecuteLogAssembler;
+use App\Interfaces\Flow\DTO\DelightfulFlowApiChatDTO;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]
-class MagicFlowOpenApi extends AbstractOpenApi
+class DelightfulFlowOpenApi extends AbstractOpenApi
 {
     #[Inject]
-    protected MagicFlowExecuteAppService $magicFlowExecuteAppServiceService;
+    protected DelightfulFlowExecuteAppService $magicFlowExecuteAppServiceService;
 
     #[Inject]
-    protected MagicFlowExecuteLogAssembler $magicFlowExecuteLogAssembler;
+    protected DelightfulFlowExecuteLogAssembler $magicFlowExecuteLogAssembler;
 
     public function chat()
     {
@@ -77,9 +77,9 @@ class MagicFlowOpenApi extends AbstractOpenApi
         return $this->magicFlowExecuteLogAssembler->createExecuteResultDTO($log);
     }
 
-    private function createApiChatDTO(): MagicFlowApiChatDTO
+    private function createApiChatDTO(): DelightfulFlowApiChatDTO
     {
-        $apiChatDTO = new MagicFlowApiChatDTO($this->request->all());
+        $apiChatDTO = new DelightfulFlowApiChatDTO($this->request->all());
 
         $apiChatDTO->setApiKey($this->request->header('api-key', ''));
         $apiChatDTO->setAuthorization($this->request->header('authorization', ''));

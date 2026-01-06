@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Application\Agent\Service;
 
-use App\Domain\Agent\Constant\MagicAgentVersionStatus;
-use App\Domain\Agent\Entity\MagicAgentEntity;
+use App\Domain\Agent\Constant\DelightfulAgentVersionStatus;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
 use App\Domain\Agent\Entity\ValueObject\AgentDataIsolation;
-use App\Domain\Agent\Entity\ValueObject\Query\MagicAgentQuery;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulAgentQuery;
 use App\Domain\Agent\Entity\ValueObject\Visibility\VisibilityType;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowVersionQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowVersionQuery;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\ResourceType;
 use App\Domain\Permission\Entity\ValueObject\PermissionDataIsolation;
 use App\Infrastructure\Core\ValueObject\Page;
@@ -27,11 +27,11 @@ class AgentAppService extends AbstractAppService
      * 查询 Agent 列表.
      *
      * @param Authenticatable $authorization 授权用户
-     * @param MagicAgentQuery $query 查询条件
+     * @param DelightfulAgentQuery $query 查询条件
      * @param Page $page 分页信息
-     * @return array{total: int, list: array<MagicAgentEntity>, icons: array<string,FileLink>}
+     * @return array{total: int, list: array<DelightfulAgentEntity>, icons: array<string,FileLink>}
      */
-    public function queriesAvailable(Authenticatable $authorization, MagicAgentQuery $query, Page $page, bool $containOfficialOrganization = false): array
+    public function queriesAvailable(Authenticatable $authorization, DelightfulAgentQuery $query, Page $page, bool $containOfficialOrganization = false): array
     {
         $agentDataIsolation = $this->createAgentDataIsolation($authorization);
         $agentDataIsolation->setContainOfficialOrganization($containOfficialOrganization);
@@ -69,7 +69,7 @@ class AgentAppService extends AbstractAppService
             return ['total' => 0, 'list' => [], 'icons' => []];
         }
         $query->setIds($agentIds);
-        $query->setStatus(MagicAgentVersionStatus::ENTERPRISE_ENABLED->value);
+        $query->setStatus(DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value);
         $query->setSelect(['id', 'robot_name', 'robot_avatar', 'robot_description', 'created_at', 'flow_code', 'organization_code']);
 
         $data = $this->agentDomainService->queries($agentDataIsolation, $query, $page);
@@ -92,7 +92,7 @@ class AgentAppService extends AbstractAppService
 
     private function getOrgAvailableAgentIds(AgentDataIsolation $agentDataIsolation, bool $containOfficialOrganization = false): array
     {
-        $query = new MagicFLowVersionQuery();
+        $query = new DelightfulFLowVersionQuery();
         $query->setSelect(['id', 'root_id', 'visibility_config', 'organization_code']);
         $page = Page::createNoPage();
         $data = $this->agentDomainService->getOrgAvailableAgentIds($agentDataIsolation, $query, $page);
@@ -146,7 +146,7 @@ class AgentAppService extends AbstractAppService
     /**
      * 按照指定的ID顺序对助理列表进行排序.
      *
-     * @param array<MagicAgentEntity> $agents 助理实体数组
+     * @param array<DelightfulAgentEntity> $agents 助理实体数组
      * @param array $sortedIds 排序的ID数组
      * @return array 排序后的助理数组
      */

@@ -3,10 +3,10 @@ import { memo, useMemo } from "react"
 import type { StructureItem } from "@/types/organization"
 import { createStyles } from "antd-style"
 import { Flex } from "antd"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 
 import { IconChevronRight, IconSitemap } from "@tabler/icons-react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 
 interface DepartmentProps extends HTMLAttributes<HTMLDivElement> {
 	data: StructureItem
@@ -64,7 +64,7 @@ const Department = memo(
 				return itemArrow(item)
 			}
 			return itemArrow ? (
-				<MagicIcon component={IconChevronRight} className={styles.arrow} size={24} />
+				<DelightfulIcon component={IconChevronRight} className={styles.arrow} size={24} />
 			) : null
 		}, [item, itemArrow, styles.arrow])
 
@@ -72,7 +72,7 @@ const Department = memo(
 			<Flex align="center" className={styles.container} justify="space-between" {...props}>
 				<Flex gap={8} align="center">
 					<div className={styles.departmentIcon}>
-						<MagicIcon color="currentColor" size={20} component={IconSitemap} />
+						<DelightfulIcon color="currentColor" size={20} component={IconSitemap} />
 					</div>
 					{item.name}
 					{showMemberCount ? (

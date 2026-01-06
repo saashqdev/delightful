@@ -11,7 +11,7 @@ use Closure;
 
 use function Hyperf\Support\call;
 
-class MagicStreamTextProcessor
+class DelightfulStreamTextProcessor
 {
     private const int STATE_NORMAL = 0;    // 普通文本状态
 
@@ -21,7 +21,7 @@ class MagicStreamTextProcessor
 
     private Closure $outputCall;
 
-    private string $tag = 'Magic';
+    private string $tag = 'Delightful';
 
     private string $buffer = '';
 
@@ -36,9 +36,9 @@ class MagicStreamTextProcessor
     {
         $this->outputCall = $outputCall;
         $this->successLengths = [
-            mb_strlen('<MagicImage>') + 16 + mb_strlen('</MagicImage>'),
-            mb_strlen('<MagicVideo>') + 16 + mb_strlen('</MagicVideo>'),
-            mb_strlen('<MagicMention>') + 16 + mb_strlen('</MagicMention>'),
+            mb_strlen('<DelightfulImage>') + 16 + mb_strlen('</DelightfulImage>'),
+            mb_strlen('<DelightfulVideo>') + 16 + mb_strlen('</DelightfulVideo>'),
+            mb_strlen('<DelightfulMention>') + 16 + mb_strlen('</DelightfulMention>'),
         ];
     }
 

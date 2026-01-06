@@ -28,7 +28,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     public function save(OrganizationEntity $organizationEntity): OrganizationEntity
     {
         $data = [
-            'magic_organization_code' => $organizationEntity->getMagicOrganizationCode(),
+            'magic_organization_code' => $organizationEntity->getDelightfulOrganizationCode(),
             'name' => $organizationEntity->getName(),
             'platform_type' => $organizationEntity->getPlatformType(),
             'logo' => $organizationEntity->getLogo(),
@@ -239,7 +239,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     {
         $entity = new OrganizationEntity();
         $entity->setId($model->id);
-        $entity->setMagicOrganizationCode($model->magic_organization_code);
+        $entity->setDelightfulOrganizationCode($model->magic_organization_code);
         $entity->setName($model->name);
         $entity->setPlatformType($model->platform_type);
         $entity->setLogo($model->logo);

@@ -9,8 +9,8 @@ namespace App\Application\Kernel\Service;
 
 use App\Application\Contact\UserSetting\UserSettingKey;
 use App\Application\Kernel\DTO\PlatformSettings;
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
-use App\Domain\Contact\Service\MagicUserSettingDomainService;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
+use App\Domain\Contact\Service\DelightfulUserSettingDomainService;
 use Hyperf\Redis\Redis;
 
 class PlatformSettingsAppService
@@ -18,7 +18,7 @@ class PlatformSettingsAppService
     private const string CACHE_KEY = 'magic:platform_settings_cache';
 
     public function __construct(
-        private readonly MagicUserSettingDomainService $userSettingDomainService,
+        private readonly DelightfulUserSettingDomainService $userSettingDomainService,
         private readonly Redis $redis,
     ) {
     }
@@ -39,10 +39,10 @@ class PlatformSettingsAppService
 
     public function save(PlatformSettings $settings): PlatformSettings
     {
-        $entity = new MagicUserSettingEntity();
+        $entity = new DelightfulUserSettingEntity();
         $entity->setKey(UserSettingKey::PlatformSettings->value);
         $entity->setValue($settings->toArray());
-        $entity->setMagicId(null);
+        $entity->setDelightfulId(null);
         $this->userSettingDomainService->saveGlobal($entity);
         $this->redis->del(self::CACHE_KEY);
         return $settings;

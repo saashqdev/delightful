@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Domain\Share\Event;
+namespace Delightful\SuperDelightful\Domain\Share\Event;
 
 class CreateShareBeforeEvent
 {

@@ -7,30 +7,30 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Contact\Facade;
 
-use App\Application\Contact\Service\MagicUserSettingAppService;
-use App\Domain\Contact\Entity\ValueObject\Query\MagicUserSettingQuery;
+use App\Application\Contact\Service\DelightfulUserSettingAppService;
+use App\Domain\Contact\Entity\ValueObject\Query\DelightfulUserSettingQuery;
 use App\Infrastructure\Core\AbstractApi;
-use App\Interfaces\Contact\Assembler\MagicUserSettingAssembler;
-use App\Interfaces\Contact\DTO\MagicUserSettingDTO;
+use App\Interfaces\Contact\Assembler\DelightfulUserSettingAssembler;
+use App\Interfaces\Contact\DTO\DelightfulUserSettingDTO;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse('low_code')]
-class MagicUserSettingApi extends AbstractApi
+class DelightfulUserSettingApi extends AbstractApi
 {
     #[Inject]
-    protected MagicUserSettingAppService $magicUserSettingAppService;
+    protected DelightfulUserSettingAppService $magicUserSettingAppService;
 
     public function save()
     {
         $authorization = $this->getAuthorization();
 
-        $dto = new MagicUserSettingDTO($this->request->all());
-        $entity = MagicUserSettingAssembler::createEntity($dto);
+        $dto = new DelightfulUserSettingDTO($this->request->all());
+        $entity = DelightfulUserSettingAssembler::createEntity($dto);
 
         $savedEntity = $this->magicUserSettingAppService->save($authorization, $entity);
 
-        return MagicUserSettingAssembler::createDTO($savedEntity);
+        return DelightfulUserSettingAssembler::createDTO($savedEntity);
     }
 
     public function get(string $key)
@@ -43,7 +43,7 @@ class MagicUserSettingApi extends AbstractApi
             return null;
         }
 
-        return MagicUserSettingAssembler::createDTO($entity);
+        return DelightfulUserSettingAssembler::createDTO($entity);
     }
 
     public function queries()
@@ -51,11 +51,11 @@ class MagicUserSettingApi extends AbstractApi
         $authorization = $this->getAuthorization();
         $page = $this->createPage();
 
-        $query = new MagicUserSettingQuery($this->request->all());
+        $query = new DelightfulUserSettingQuery($this->request->all());
 
         $result = $this->magicUserSettingAppService->queries($authorization, $query, $page);
 
-        return MagicUserSettingAssembler::createPageListDTO(
+        return DelightfulUserSettingAssembler::createPageListDTO(
             total: $result['total'],
             list: $result['list'],
             page: $page

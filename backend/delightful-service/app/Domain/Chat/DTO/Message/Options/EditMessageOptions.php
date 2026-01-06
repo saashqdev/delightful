@@ -22,12 +22,12 @@ class EditMessageOptions extends AbstractEntity
         parent::__construct($data);
     }
 
-    public function getMagicMessageId(): ?string
+    public function getDelightfulMessageId(): ?string
     {
         return $this->magicMessageId ?? null;
     }
 
-    public function setMagicMessageId(?string $magicMessageId): static
+    public function setDelightfulMessageId(?string $magicMessageId): static
     {
         isset($magicMessageId) && $this->magicMessageId = $magicMessageId;
         return $this;

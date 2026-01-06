@@ -10,7 +10,7 @@ import React, { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import styles from "../index.module.less"
 import { useReactFlow } from "reactflow"
-import { MagicFlow } from "@/DelightfulFlow/types/flow"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 
 export default function useFlowHeader() {
 	const { t } = useTranslation()
@@ -61,7 +61,7 @@ export default function useFlowHeader() {
 		const nodes = getNodes()
 		const edges = getEdges()
 		/** 校验是否有节点，没有在主流程内 */
-		const existOutOfFlowNode = checkHasNodeOutOfFlow(nodes as MagicFlow.Node[], edges)
+		const existOutOfFlowNode = checkHasNodeOutOfFlow(nodes as DelightfulFlow.Node[], edges)
 		if (debuggerMode) {
 			const sortedNodes = sortByEdges(Object.values(nodeConfig), edges)
 

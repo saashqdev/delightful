@@ -1,7 +1,7 @@
 # Personnel Retrieval Node
 
 ## What is a Personnel Retrieval Node?
-The Personnel Retrieval Node is a functional node in Magic Flow workflow specifically designed for querying and filtering organizational personnel information. It allows you to quickly locate and obtain personnel data based on multiple conditions (such as name, employee ID, position, department, etc.), much like performing precise searches in a corporate directory.
+The Personnel Retrieval Node is a functional node in Delightful Flow workflow specifically designed for querying and filtering organizational personnel information. It allows you to quickly locate and obtain personnel data based on multiple conditions (such as name, employee ID, position, department, etc.), much like performing precise searches in a corporate directory.
 
 **Image Description:**
 

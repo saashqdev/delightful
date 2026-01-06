@@ -9,7 +9,7 @@
 - **高性能**：使用 Go 语言实现，相比 Python 版本有显著的性能提升
 - **认证服务**：为容器生成临时访问令牌
 - **环境变量保护**：容器不能直接获取环境变量值，只能通过API代理间接使用
-- **多服务支持**：可同时支持多个API服务（如OpenAI、DeepSeek、Magic等）
+- **多服务支持**：可同时支持多个API服务（如OpenAI、DeepSeek、Delightful等）
 - **环境变量名称路由**：通过环境变量名称直接访问对应的服务
 - **API 代理**：自动替换请求中的环境变量引用
 - **支持多种环境变量引用格式**：`env:VAR`、`${VAR}`、`$VAR`、`OPENAI_*` 等
@@ -196,7 +196,7 @@ OPENAI_API_KEY=sk-xxxx
 OPENAI_API_BASE_URL=https://api.openai.com/v1
 OPENAI_MODEL=gpt-4
 
-# Magic 服务配置
+# Delightful 服务配置
 DELIGHTFUL_API_KEY=xxx
 DELIGHTFUL_API_BASE_URL=https://api.magic.com/v1
 DELIGHTFUL_MODEL=gpt-4o-global
@@ -249,23 +249,23 @@ curl -X POST http://localhost:8000/auth \
 ```json
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "header": "Magic-Authorization",
-  "example": "Magic-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  "header": "Delightful-Authorization",
+  "example": "Delightful-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
 
-临时令牌现在**永久有效**，没有过期时间限制。你只需获取一次令牌，可以长期使用。在容器运行时，应该在启动容器时将宿主机获取的令牌通过环境变量注入到容器中。请注意使用`Magic-Authorization`头部而不是标准的`Authorization`头部发送请求。
+临时令牌现在**永久有效**，没有过期时间限制。你只需获取一次令牌，可以长期使用。在容器运行时，应该在启动容器时将宿主机获取的令牌通过环境变量注入到容器中。请注意使用`Delightful-Authorization`头部而不是标准的`Authorization`头部发送请求。
 
 ### 2. 查询可用环境变量
 
 ```bash
 # 获取所有允许的环境变量名称
 curl  http://host.docker.internal:8000/env \
-  -H "Magic-Authorization: Bearer YOUR_TOKEN"
+  -H "Delightful-Authorization: Bearer YOUR_TOKEN"
 
 # 查询特定环境变量是否可用
 curl "http://host.docker.internal:8000/env?vars=OPENAI_API_KEY,OPENAI_MODEL" \
-  -H "Magic-Authorization: Bearer YOUR_TOKEN"
+  -H "Delightful-Authorization: Bearer YOUR_TOKEN"
 ```
 
 响应示例：
@@ -280,7 +280,7 @@ curl "http://host.docker.internal:8000/env?vars=OPENAI_API_KEY,OPENAI_MODEL" \
 
 ```bash
 curl http://localhost:8000/services \
-  -H "Magic-Authorization: Bearer YOUR_TOKEN"
+  -H "Delightful-Authorization: Bearer YOUR_TOKEN"
 ```
 
 响应示例：
@@ -316,7 +316,7 @@ curl http://localhost:8000/services \
 ```bash
 # 直接通过环境变量名称访问
 curl -X POST http://host.docker.internal:8000/OPENAI_API_BASE_URL/v1/chat/completions \
-  -H "Magic-Authorization: Bearer YOUR_TOKEN" \
+  -H "Delightful-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "gpt-4",
@@ -327,7 +327,7 @@ curl -X POST http://host.docker.internal:8000/OPENAI_API_BASE_URL/v1/chat/comple
 
 # 也可以直接使用环境变量名称作为值（当字符串完全匹配时）
 curl -X POST http://host.docker.internal:8000/OPENAI_API_BASE_URL/v1/chat/completions \
-  -H "Magic-Authorization: Bearer YOUR_TOKEN" \
+  -H "Delightful-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "OPENAI_MODEL",
@@ -336,9 +336,9 @@ curl -X POST http://host.docker.internal:8000/OPENAI_API_BASE_URL/v1/chat/comple
     ]
   }'
 
-# 使用 Magic 服务
+# 使用 Delightful 服务
 curl -X POST http://host.docker.internal:8000/DELIGHTFUL_API_BASE_URL/v1/chat/completions \
-  -H "Magic-Authorization: Bearer YOUR_TOKEN" \
+  -H "Delightful-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "DELIGHTFUL_MODEL",
@@ -353,7 +353,7 @@ curl -X POST http://host.docker.internal:8000/DELIGHTFUL_API_BASE_URL/v1/chat/co
 ```bash
 # 调用 OpenAI 服务
 curl -X POST http://host.docker.internal:8000/openai/v1/chat/completions \
-  -H "Magic-Authorization: Bearer YOUR_TOKEN" \
+  -H "Delightful-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "env:OPENAI_MODEL",
@@ -362,9 +362,9 @@ curl -X POST http://host.docker.internal:8000/openai/v1/chat/completions \
     ]
   }'
 
-# 调用 Magic 服务
+# 调用 Delightful 服务
 curl -X POST http://host.docker.internal:8000/magic/v1/chat/completions \
-  -H "Magic-Authorization: Bearer YOUR_TOKEN" \
+  -H "Delightful-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "env:DELIGHTFUL_MODEL",
@@ -378,7 +378,7 @@ curl -X POST http://host.docker.internal:8000/magic/v1/chat/completions \
 
 ```bash
 curl -X POST "http://host.docker.internal:8000/v1/chat/completions?service=deepseek" \
-  -H "Magic-Authorization: Bearer YOUR_TOKEN" \
+  -H "Delightful-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "env:DEEPSEEK_MODEL",
@@ -392,7 +392,7 @@ curl -X POST "http://host.docker.internal:8000/v1/chat/completions?service=deeps
 
 ```bash
 curl -X POST http://host.docker.internal:8000/v1/chat/completions \
-  -H "Magic-Authorization: Bearer YOUR_TOKEN" \
+  -H "Delightful-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "model": "env:OPENAI_MODEL",
@@ -485,7 +485,7 @@ GATEWAY_URL=$API_GATEWAY_URL
 
 # 查询可用服务
 curl -s "$GATEWAY_URL/services" \
-  -H "Magic-Authorization: Bearer $TOKEN"
+  -H "Delightful-Authorization: Bearer $TOKEN"
 ```
 
 ### 4. 使用Docker Compose配置多环境
@@ -517,7 +517,7 @@ ENV=test PORT=8001 API_TOKEN=$TOKEN docker-compose up -d
 
 1. **环境变量保护**：容器无法直接获取宿主机环境变量的值，只能通过API代理请求间接使用
 2. **环境变量替换**：API网关自动替换请求中的环境变量引用，容器无需知道实际值
-3. **自定义认证头**：使用Magic-Authorization头避免与其他服务的Authorization产生冲突
+3. **自定义认证头**：使用Delightful-Authorization头避免与其他服务的Authorization产生冲突
 4. **多服务隔离**：各服务的API密钥由网关管理，不会泄露给容器
 5. **临时令牌**：所有请求需要有效的认证令牌，令牌有时效限制
 6. **容器隔离**：每个容器使用独立的令牌，无法访问其他容器的令牌

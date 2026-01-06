@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Application\MCP\Service;
 
-use App\Application\Flow\Service\MagicFlowExecuteAppService;
+use App\Application\Flow\Service\DelightfulFlowExecuteAppService;
 use App\Application\MCP\BuiltInMCP\BuiltInMCPFactory;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\MCP\Entity\MCPServerToolEntity;
@@ -16,7 +16,7 @@ use App\Domain\MCP\Entity\ValueObject\ToolSource;
 use App\Domain\MCP\Service\MCPServerToolDomainService;
 use App\ErrorCode\MCPErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Flow\DTO\MagicFlowApiChatDTO;
+use App\Interfaces\Flow\DTO\DelightfulFlowApiChatDTO;
 use Delightful\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
 use Delightful\PhpMcp\Types\Tools\Tool;
 use Qbhy\HyperfAuth\Authenticatable;
@@ -83,12 +83,12 @@ class MCPServerStreamableAppService extends AbstractMCPAppService
                     $label = $MCPServerToolEntity ? (string) $MCPServerToolEntity->getName() : (string) $toolId;
                     ExceptionBuilder::throw(MCPErrorCode::ValidateFailed, 'common.disabled', ['label' => $label]);
                 }
-                $apiChatDTO = new MagicFlowApiChatDTO();
+                $apiChatDTO = new DelightfulFlowApiChatDTO();
                 $apiChatDTO->setParams($arguments);
                 $apiChatDTO->setFlowCode($MCPServerToolEntity->getRelCode());
                 $apiChatDTO->setFlowVersionCode($MCPServerToolEntity->getRelVersionCode());
                 $apiChatDTO->setMessage('mcp_tool_call');
-                return di(MagicFlowExecuteAppService::class)->apiParamCallByRemoteTool($flowDataIsolation, $apiChatDTO, 'mcp_tool');
+                return di(DelightfulFlowExecuteAppService::class)->apiParamCallByRemoteTool($flowDataIsolation, $apiChatDTO, 'mcp_tool');
             },
             default => null,
         };

@@ -4,7 +4,7 @@ import ReasoningContent from "./ReasoningContent"
 import streamLoadingIcon from "@/assets/resources/stream-loading-2.png"
 import EnhanceMarkdown from "./EnhanceMarkdown"
 
-interface MagicTextProps extends Omit<HTMLAttributes<HTMLDivElement>, "content"> {
+interface DelightfulTextProps extends Omit<HTMLAttributes<HTMLDivElement>, "content"> {
 	content?: string
 	reasoningContent?: string
 	isSelf?: boolean
@@ -27,7 +27,7 @@ const Markdown = memo(function Markdown({
 	isStreaming,
 	isReasoningStreaming,
 	enableLatex = true,
-}: MagicTextProps) {
+}: DelightfulTextProps) {
 	const { styles, cx } = useStyles()
 
 	if (isStreaming || isReasoningStreaming) {

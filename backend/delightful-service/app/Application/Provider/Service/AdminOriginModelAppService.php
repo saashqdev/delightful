@@ -12,7 +12,7 @@ use App\Domain\Provider\Entity\ProviderOriginalModelEntity;
 use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 use App\Domain\Provider\Entity\ValueObject\ProviderOriginalModelType;
 use App\Domain\Provider\Service\ProviderOriginalModelDomainService;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Provider\Assembler\ProviderAdminAssembler;
 
 class AdminOriginModelAppService
@@ -27,7 +27,7 @@ class AdminOriginModelAppService
      *
      * @return array<ProviderOriginalModelDTO>
      */
-    public function list(MagicUserAuthorization $authorization): array
+    public function list(DelightfulUserAuthorization $authorization): array
     {
         $dataIsolation = ProviderDataIsolation::create(
             $authorization->getOrganizationCode(),
@@ -40,7 +40,7 @@ class AdminOriginModelAppService
     /**
      * Add an original model identifier.
      */
-    public function create(MagicUserAuthorization $authorization, string $modelId): ProviderOriginalModelDTO
+    public function create(DelightfulUserAuthorization $authorization, string $modelId): ProviderOriginalModelDTO
     {
         $dataIsolation = ProviderDataIsolation::create(
             $authorization->getOrganizationCode(),
@@ -60,7 +60,7 @@ class AdminOriginModelAppService
     /**
      * Delete an original model identifier.
      */
-    public function delete(MagicUserAuthorization $authorization, string $id): void
+    public function delete(DelightfulUserAuthorization $authorization, string $id): void
     {
         $dataIsolation = ProviderDataIsolation::create(
             $authorization->getOrganizationCode(),

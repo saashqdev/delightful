@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Factory;
 
-use App\Domain\Chat\Entity\MagicConversationEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationStatus;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 
-class MagicConversationFactory
+class DelightfulConversationFactory
 {
-    public static function arrayToEntity(array $conversation): MagicConversationEntity
+    public static function arrayToEntity(array $conversation): DelightfulConversationEntity
     {
-        $entity = new MagicConversationEntity();
+        $entity = new DelightfulConversationEntity();
         $entity->setId($conversation['id']);
         $entity->setUserId($conversation['user_id']);
         $entity->setUserOrganizationCode($conversation['user_organization_code']);

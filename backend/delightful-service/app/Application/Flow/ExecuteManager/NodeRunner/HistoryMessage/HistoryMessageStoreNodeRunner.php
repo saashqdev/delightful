@@ -14,7 +14,7 @@ use App\Application\Flow\ExecuteManager\Message\MessageUtil;
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunner;
 use App\Domain\Chat\DTO\Message\TextContentInterface;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\HistoryMessage\HistoryMessageStoreNodeParamsConfig;
-use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\MagicFlowMessage;
+use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\DelightfulFlowMessage;
 use App\Domain\Flow\Entity\ValueObject\NodeType;
 use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\FlowNodeDefine;
 use App\Infrastructure\Core\Dag\VertexResult;
@@ -37,7 +37,7 @@ class HistoryMessageStoreNodeRunner extends NodeRunner
         /** @var HistoryMessageStoreNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        $magicFlowMessage = new MagicFlowMessage(
+        $magicFlowMessage = new DelightfulFlowMessage(
             $paramsConfig->getType(),
             $paramsConfig->getContent(),
             $paramsConfig->getLink(),
@@ -61,12 +61,12 @@ class HistoryMessageStoreNodeRunner extends NodeRunner
             $content = $IMResponse->getTextContent();
         }
 
-        $LLMMemoryMessage = new LLMMemoryMessage(Role::User, $content, $executionData->getTriggerData()->getMessageEntity()->getMagicMessageId());
+        $LLMMemoryMessage = new LLMMemoryMessage(Role::User, $content, $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId());
         $LLMMemoryMessage->setConversationId($executionData->getConversationId());
-        $LLMMemoryMessage->setMessageId($executionData->getTriggerData()->getMessageEntity()->getMagicMessageId());
-        $LLMMemoryMessage->setMountId($executionData->getTriggerData()->getMessageEntity()->getMagicMessageId());
+        $LLMMemoryMessage->setMessageId($executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId());
+        $LLMMemoryMessage->setMountId($executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId());
         $LLMMemoryMessage->setAttachments($executionData->getTriggerData()->getAttachments());
-        $LLMMemoryMessage->setOriginalContent(MagicFlowMessage::createContent($IMResponse));
+        $LLMMemoryMessage->setOriginalContent(DelightfulFlowMessage::createContent($IMResponse));
         $LLMMemoryMessage->setTopicId($executionData->getTopicIdString());
         $LLMMemoryMessage->setRequestId($executionData->getId());
         $LLMMemoryMessage->setUid($executionData->getOperator()->getUid());

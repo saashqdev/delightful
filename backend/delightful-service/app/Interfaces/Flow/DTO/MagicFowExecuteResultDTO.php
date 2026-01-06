@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\DTO;
 
-class MagicFowExecuteResultDTO extends AbstractFlowDTO
+class DelightfulFowExecuteResultDTO extends AbstractFlowDTO
 {
     public string $taskId;
 

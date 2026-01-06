@@ -7,8 +7,8 @@
     }
  */
 
-import MagicConditionEdit from "@delightful/delightful-flow/dist/MagicConditionEdit"
-import type { Expression } from "@delightful/delightful-flow/dist/MagicConditionEdit/types/expression"
+import DelightfulConditionEdit from "@delightful/delightful-flow/dist/DelightfulConditionEdit"
+import type { Expression } from "@delightful/delightful-flow/dist/DelightfulConditionEdit/types/expression"
 import { useMemoizedFn } from "ahooks"
 import { useMemo } from "react"
 
@@ -20,13 +20,13 @@ export type WidgetConditionValue = {
 }
 
 // @ts-ignore
-interface MagicConditionWrapProps {
+interface DelightfulConditionWrapProps {
 	value?: WidgetConditionValue
 	onChange?: (value: WidgetConditionValue) => void
 	[key: string]: any
 }
 
-export default function MagicConditionWrap({ ...props }: MagicConditionWrapProps) {
+export default function DelightfulConditionWrap({ ...props }: DelightfulConditionWrapProps) {
 	// 暂时不需要外层的结构，只需要更改structure的数据即可
 	const onChange = useMemoizedFn((value: Expression.Condition) => {
 		if (!props.onChange || !props.value) return
@@ -38,7 +38,7 @@ export default function MagicConditionWrap({ ...props }: MagicConditionWrapProps
 
 	// 避免每次因为Form.Item onChange导致重新渲染
 	const MemoComponent = useMemo(() => {
-		return <MagicConditionEdit {...props} value={props?.value?.structure} onChange={onChange} />
+		return <DelightfulConditionEdit {...props} value={props?.value?.structure} onChange={onChange} />
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 

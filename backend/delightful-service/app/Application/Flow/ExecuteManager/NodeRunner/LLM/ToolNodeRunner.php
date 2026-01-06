@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\Flow\ExecuteManager\NodeRunner\LLM;
 
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\LLM\ToolNodeParamsConfig;
 use App\Domain\Flow\Entity\ValueObject\NodeType;
 use App\ErrorCode\FlowErrorCode;
@@ -57,7 +57,7 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         $executionData->saveNodeContext($this->node->getNodeId(), $result);
     }
 
-    private function parseInputByLLM(VertexResult $vertexResult, ExecutionData $executionData, MagicFlowEntity $magicFlowEntity, string $userPrompt): array
+    private function parseInputByLLM(VertexResult $vertexResult, ExecutionData $executionData, DelightfulFlowEntity $magicFlowEntity, string $userPrompt): array
     {
         /** @var ToolNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
@@ -66,7 +66,7 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         $paramsConfig->setSystemPrompt($systemPrompt);
 
         // 一定是忽略当前消息
-        $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getMagicMessageId()];
+        $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
 
         $memoryManager = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), ignoreMessageIds: $ignoreMessageIds);
 
@@ -77,7 +77,7 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         return $this->formatJson($content);
     }
 
-    private function buildSystemPrompt(MagicFlowEntity $magicFlowEntity): string
+    private function buildSystemPrompt(DelightfulFlowEntity $magicFlowEntity): string
     {
         return PromptUtil::getToolCallPrompt([':tool' => json_encode($magicFlowEntity->getInput()?->getForm()?->getForm()->toJsonSchema() ?? [], JSON_UNESCAPED_UNICODE)]);
     }

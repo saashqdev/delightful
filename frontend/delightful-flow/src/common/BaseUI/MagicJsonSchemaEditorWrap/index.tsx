@@ -7,9 +7,9 @@
     }
  */
 
-import { JsonSchemaEditorProps } from "@/MagicJsonSchemaEditor"
-import Schema from "@/MagicJsonSchemaEditor/types/Schema"
-import { MagicJsonSchemaEditor } from "@/index"
+import { JsonSchemaEditorProps } from "@/DelightfulJsonSchemaEditor"
+import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
+import { DelightfulJsonSchemaEditor } from "@/index"
 import { useMemoizedFn } from "ahooks"
 import _ from "lodash"
 import React from "react"
@@ -22,12 +22,12 @@ export type WidgetJSONSchemaValue = {
 }
 
 //@ts-ignore
-interface MagicJSONSchemaEditorWrap extends JsonSchemaEditorProps {
+interface DelightfulJSONSchemaEditorWrap extends JsonSchemaEditorProps {
 	value?: WidgetJSONSchemaValue
 	onChange?: (value: WidgetJSONSchemaValue) => void
 }
 
-function MagicJSONSchemaEditorWrap({ ...props }: MagicJSONSchemaEditorWrap) {
+function DelightfulJSONSchemaEditorWrap({ ...props }: DelightfulJSONSchemaEditorWrap) {
 	// Only need to update the structure data; the outer wrapper is not required for now
 	const onChange = useMemoizedFn((value: Schema) => {
 		if (!props.onChange || !props.value) return
@@ -40,7 +40,7 @@ function MagicJSONSchemaEditorWrap({ ...props }: MagicJSONSchemaEditorWrap) {
 		})
 	})
 
-	return <MagicJsonSchemaEditor {...props} data={props?.value?.structure} onChange={onChange} />
+	return <DelightfulJsonSchemaEditor {...props} data={props?.value?.structure} onChange={onChange} />
 }
 
-export default MagicJSONSchemaEditorWrap as any
+export default DelightfulJSONSchemaEditorWrap as any

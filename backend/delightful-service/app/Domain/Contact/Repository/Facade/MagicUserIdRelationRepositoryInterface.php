@@ -7,16 +7,16 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Repository\Facade;
 
-use App\Domain\Contact\Entity\MagicUserIdRelationEntity;
+use App\Domain\Contact\Entity\DelightfulUserIdRelationEntity;
 
-interface MagicUserIdRelationRepositoryInterface
+interface DelightfulUserIdRelationRepositoryInterface
 {
     // 创建
-    public function createUserIdRelation(MagicUserIdRelationEntity $userIdRelationEntity): void;
+    public function createUserIdRelation(DelightfulUserIdRelationEntity $userIdRelationEntity): void;
 
     // 查询
-    public function getRelationIdExists(MagicUserIdRelationEntity $userIdRelationEntity): array;
+    public function getRelationIdExists(DelightfulUserIdRelationEntity $userIdRelationEntity): array;
 
     // id_type,relation_type,relation_value 查询 user_id,然后去查询用户信息
-    public function getUerIdByRelation(MagicUserIdRelationEntity $userIdRelationEntity): string;
+    public function getUerIdByRelation(DelightfulUserIdRelationEntity $userIdRelationEntity): string;
 }

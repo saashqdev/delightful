@@ -1,11 +1,11 @@
 import { memo, useCallback, useMemo, useRef, useState } from "react"
 import { Input, Dropdown, message, Table, Modal, Empty, Button, Space } from "antd"
 import { IconChevronDown } from "@tabler/icons-react"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import type { ColumnsType } from "antd/es/table"
 import { useSize } from "ahooks"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { useStyles } from "../MarkedFiles/styles"
 import { useStyles as useCommonStyles } from "../FileManager/styles"
 import type { DataItem } from "./useData"
@@ -150,16 +150,16 @@ export default memo(function SharedTopics() {
 					}}
 				/>
 				<Dropdown menu={{ items: dropdownItems }} disabled={selectedRowKeys.length === 0}>
-					<MagicButton className={styles.batchOperationButton} onClick={handleRemove}>
+					<DelightfulButton className={styles.batchOperationButton} onClick={handleRemove}>
 						<span>批量操作</span>
-						<MagicIcon component={IconChevronDown} size={20} stroke={2} />
-					</MagicButton>
+						<DelightfulIcon component={IconChevronDown} size={20} stroke={2} />
+					</DelightfulButton>
 				</Dropdown>
 			</div>
 			<div ref={containerRef} className={commonStyles.pageContent}>
 				{loading || !containerSize ? (
 					<div className={commonStyles.loadingWrapper}>
-						<MagicSpin />
+						<DelightfulSpin />
 					</div>
 				) : (
 					content

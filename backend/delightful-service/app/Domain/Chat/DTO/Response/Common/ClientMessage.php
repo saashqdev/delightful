@@ -61,7 +61,7 @@ class ClientMessage extends AbstractEntity
     public function toArray(bool $filterNull = false): array
     {
         return [
-            'magic_message_id' => $this->getMagicMessageId(),
+            'magic_message_id' => $this->getDelightfulMessageId(),
             'app_message_id' => $this->getAppMessageId(),
             'topic_id' => $this->getTopicId(),
             'type' => $this->getType(),
@@ -74,12 +74,12 @@ class ClientMessage extends AbstractEntity
         ];
     }
 
-    public function getMagicMessageId(): string
+    public function getDelightfulMessageId(): string
     {
         return $this->magicMessageId ?? '';
     }
 
-    public function setMagicMessageId(string $magicMessageId): void
+    public function setDelightfulMessageId(string $magicMessageId): void
     {
         $this->magicMessageId = $magicMessageId;
     }

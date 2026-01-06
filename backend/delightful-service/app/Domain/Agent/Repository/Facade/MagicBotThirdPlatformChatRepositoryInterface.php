@@ -7,22 +7,22 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Repository\Facade;
 
-use App\Domain\Agent\Entity\MagicBotThirdPlatformChatEntity;
-use App\Domain\Agent\Entity\ValueObject\Query\MagicBotThirdPlatformChatQuery;
+use App\Domain\Agent\Entity\DelightfulBotThirdPlatformChatEntity;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulBotThirdPlatformChatQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
-interface MagicBotThirdPlatformChatRepositoryInterface
+interface DelightfulBotThirdPlatformChatRepositoryInterface
 {
-    public function save(MagicBotThirdPlatformChatEntity $entity): MagicBotThirdPlatformChatEntity;
+    public function save(DelightfulBotThirdPlatformChatEntity $entity): DelightfulBotThirdPlatformChatEntity;
 
-    public function getByKey(string $key): ?MagicBotThirdPlatformChatEntity;
+    public function getByKey(string $key): ?DelightfulBotThirdPlatformChatEntity;
 
-    public function getById(int $id): ?MagicBotThirdPlatformChatEntity;
+    public function getById(int $id): ?DelightfulBotThirdPlatformChatEntity;
 
     /**
-     * @return array{total: int, list: MagicBotThirdPlatformChatEntity[]}
+     * @return array{total: int, list: DelightfulBotThirdPlatformChatEntity[]}
      */
-    public function queries(MagicBotThirdPlatformChatQuery $query, Page $page): array;
+    public function queries(DelightfulBotThirdPlatformChatQuery $query, Page $page): array;
 
-    public function destroy(MagicBotThirdPlatformChatEntity $entity): void;
+    public function destroy(DelightfulBotThirdPlatformChatEntity $entity): void;
 }

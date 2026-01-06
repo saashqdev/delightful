@@ -5,7 +5,7 @@ import { drawTextAvatar } from "./utils"
 import { createStyles } from "antd-style"
 import { useMemoizedFn } from "ahooks"
 
-export interface MagicAvatarProps extends AvatarProps {
+export interface DelightfulAvatarProps extends AvatarProps {
 	badgeProps?: BadgeProps
 }
 
@@ -20,7 +20,7 @@ const getTextAvatar = (text: string | ReactNode, backgroundColor?: string, color
 	return drawTextAvatar(textString, backgroundColor, color) ?? ""
 }
 
-const MagicAvatar = forwardRef<HTMLSpanElement, MagicAvatarProps>(
+const DelightfulAvatar = forwardRef<HTMLSpanElement, DelightfulAvatarProps>(
 	({ children, src, size = 40, style, badgeProps, className, ...props }, ref) => {
 		const { styles } = useStyles()
 
@@ -90,6 +90,6 @@ const MagicAvatar = forwardRef<HTMLSpanElement, MagicAvatarProps>(
 	},
 )
 
-MagicAvatar.displayName = "MagicAvatar"
+DelightfulAvatar.displayName = "DelightfulAvatar"
 
-export default MagicAvatar
+export default DelightfulAvatar

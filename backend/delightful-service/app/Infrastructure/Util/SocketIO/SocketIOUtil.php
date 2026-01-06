@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Util\SocketIO;
 
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ChatSocketIoNameSpace;
 use App\Domain\Chat\Entity\ValueObject\SocketEventType;
 use App\Interfaces\Chat\Assembler\SeqAssembler;
@@ -22,7 +22,7 @@ class SocketIOUtil
      * Optimized push: only send seq_id, let RedisAdapter get complete message content locally
      * This can reduce Redis pub/sub bandwidth usage.
      */
-    public static function sendSequenceId(MagicSeqEntity $receiveSeqEntity)
+    public static function sendSequenceId(DelightfulSeqEntity $receiveSeqEntity)
     {
         $socketEventType = self::getSocketEventType($receiveSeqEntity);
         // Only push seq_id, RedisAdapter will get complete content through MessageContentProvider
@@ -38,7 +38,7 @@ class SocketIOUtil
         di(SocketIO::class)->of(ChatSocketIoNameSpace::Im->value)->to($roomId)->emit($socketEventType->value, $pushData);
     }
 
-    private static function getSocketEventType(MagicSeqEntity $seqEntity): SocketEventType
+    private static function getSocketEventType(DelightfulSeqEntity $seqEntity): SocketEventType
     {
         return SeqAssembler::getSocketEventType($seqEntity);
     }

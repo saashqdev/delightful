@@ -8,17 +8,17 @@ declare(strict_types=1);
 namespace App\Application\Chat\Service;
 
 use App\Domain\Authentication\DTO\LoginResponseDTO;
-use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
-use App\Domain\OrganizationEnvironment\Entity\MagicEnvironmentEntity;
+use App\Domain\Contact\Service\DelightfulDepartmentDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
+use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 use App\Infrastructure\Core\Contract\Session\LoginCheckInterface;
 use App\Infrastructure\Core\Contract\Session\SessionInterface;
 
 class SessionAppService implements SessionInterface
 {
     public function __construct(
-        protected MagicDepartmentDomainService $magicDepartmentDomainService,
-        protected MagicUserDomainService $magicUserDomainService
+        protected DelightfulDepartmentDomainService $magicDepartmentDomainService,
+        protected DelightfulUserDomainService $magicUserDomainService
     ) {
     }
 
@@ -26,7 +26,7 @@ class SessionAppService implements SessionInterface
      * 登录校验.
      * @return LoginResponseDTO[]
      */
-    public function LoginCheck(LoginCheckInterface $loginCheck, MagicEnvironmentEntity $magicEnvironmentEntity, ?string $magicOrganizationCode = null): array
+    public function LoginCheck(LoginCheckInterface $loginCheck, DelightfulEnvironmentEntity $magicEnvironmentEntity, ?string $magicOrganizationCode = null): array
     {
         $loginResponses = $this->magicUserDomainService->magicUserLoginCheck($loginCheck->getAuthorization(), $magicEnvironmentEntity, $magicOrganizationCode);
         // 增加组织name和头像
@@ -34,7 +34,7 @@ class SessionAppService implements SessionInterface
             // 收集所有组织代码
             $orgCodes = [];
             foreach ($loginResponses as $loginResponse) {
-                $orgCode = $loginResponse->getMagicOrganizationCode();
+                $orgCode = $loginResponse->getDelightfulOrganizationCode();
                 if (! empty($orgCode)) {
                     $orgCodes[] = $orgCode;
                 }
@@ -47,7 +47,7 @@ class SessionAppService implements SessionInterface
 
                 // 填充登录响应信息
                 foreach ($loginResponses as $loginResponse) {
-                    $orgCode = $loginResponse->getMagicOrganizationCode();
+                    $orgCode = $loginResponse->getDelightfulOrganizationCode();
                     if (! empty($orgCode) && isset($rootDepartments[$orgCode])) {
                         $loginResponse->setOrganizationName($rootDepartments[$orgCode]->getName() ?? '');
                     }

@@ -1,5 +1,5 @@
-import LoadingMessage from "@/opensource/pages/superMagic/components/LoadingMessage"
-import Node from "@/opensource/pages/superMagic/components/MessageList/components/Node"
+import LoadingMessage from "@/opensource/pages/superDelightful/components/LoadingMessage"
+import Node from "@/opensource/pages/superDelightful/components/MessageList/components/Node"
 import { memo } from "react"
 import type { MessageItem } from "../../pages/workspace/types"
 import { useStyles } from "./styles"

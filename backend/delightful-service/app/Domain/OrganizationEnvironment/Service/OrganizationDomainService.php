@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\OrganizationEnvironment\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\OrganizationEnvironment\Entity\OrganizationEntity;
 use App\Domain\OrganizationEnvironment\Repository\Facade\OrganizationRepositoryInterface;
 use App\Domain\Permission\Service\OrganizationAdminDomainService;
@@ -25,7 +25,7 @@ readonly class OrganizationDomainService
 {
     public function __construct(
         private OrganizationRepositoryInterface $organizationRepository,
-        private MagicUserDomainService $userDomainService,
+        private DelightfulUserDomainService $userDomainService,
         private OrganizationAdminDomainService $organizationAdminDomainService
     ) {
     }
@@ -36,7 +36,7 @@ readonly class OrganizationDomainService
     public function create(OrganizationEntity $organizationEntity): OrganizationEntity
     {
         // 检查编码是否已存在
-        if ($this->organizationRepository->existsByCode($organizationEntity->getMagicOrganizationCode())) {
+        if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }
 
@@ -57,7 +57,7 @@ readonly class OrganizationDomainService
             // 个人组织不添加组织管理员
             // 为创建者添加组织管理员权限并标记为组织创建人
             try {
-                $dataIsolation = DataIsolation::simpleMake($savedOrganization->getMagicOrganizationCode(), (string) $creatorId);
+                $dataIsolation = DataIsolation::simpleMake($savedOrganization->getDelightfulOrganizationCode(), (string) $creatorId);
                 $this->organizationAdminDomainService->grant(
                     $dataIsolation,
                     (string) $creatorId,
@@ -84,7 +84,7 @@ readonly class OrganizationDomainService
         }
 
         // 检查编码是否已存在（排除当前组织）
-        if ($this->organizationRepository->existsByCode($organizationEntity->getMagicOrganizationCode(), $organizationEntity->getId())) {
+        if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode(), $organizationEntity->getId())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }
 
@@ -124,7 +124,7 @@ readonly class OrganizationDomainService
 
         $codeMapEntity = [];
         foreach ($entities as $entity) {
-            $codeMapEntity[$entity->getMagicOrganizationCode()] = $entity;
+            $codeMapEntity[$entity->getDelightfulOrganizationCode()] = $entity;
         }
         return $codeMapEntity;
     }

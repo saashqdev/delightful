@@ -330,7 +330,7 @@ class ChatTopicService {
 	 * @param force 是否强制更新
 	 * @returns 魔法话题名称
 	 */
-	getAndSetMagicTopicName(topicId: string, force = false) {
+	getAndSetDelightfulTopicName(topicId: string, force = false) {
 		const conversationId = conversationStore.currentConversation?.id
 		if (!conversationId) {
 			return Promise.reject(new Error("conversationId 不存在"))
@@ -347,7 +347,7 @@ class ChatTopicService {
 		if (!isAiConversation(conversationStore.currentConversation?.receive_type))
 			return Promise.resolve()
 
-		return ChatApi.getMagicTopicName(conversationId, topicId)
+		return ChatApi.getDelightfulTopicName(conversationId, topicId)
 			.then((res) => {
 				return this.updateTopic(topicId, res.name)
 			})

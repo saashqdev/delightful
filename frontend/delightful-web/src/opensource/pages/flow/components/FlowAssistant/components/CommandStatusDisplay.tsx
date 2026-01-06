@@ -2,7 +2,7 @@ import React from "react"
 import { Spin } from "antd"
 import { IconCheck, IconX } from "@tabler/icons-react"
 import { useStyles } from "../styles"
-import MagicMarkdown from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown"
+import DelightfulMarkdown from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown"
 
 export interface CommandStatus {
 	type: string
@@ -24,7 +24,7 @@ const CommandStatusDisplay: React.FC<CommandStatusDisplayProps> = ({ commandStat
 
 	return (
 		<div className={styles.messageContentWrapper}>
-			{content ? <MagicMarkdown content={content} /> : null}
+			{content ? <DelightfulMarkdown content={content} /> : null}
 			<div className={styles.commandStatusContainer}>
 				{commandStatus.map((cmd) => {
 					let statusClassName = ""

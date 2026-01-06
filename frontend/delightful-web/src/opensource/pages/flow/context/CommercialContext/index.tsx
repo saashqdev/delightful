@@ -1,4 +1,4 @@
-import { NodeSchema } from "@delightful/delightful-flow/dist/MagicFlow"
+import { NodeSchema } from "@delightful/delightful-flow/dist/DelightfulFlow"
 import React, { createContext, useContext, ReactNode } from "react"
 import { ComponentVersionMap } from "../../nodes"
 

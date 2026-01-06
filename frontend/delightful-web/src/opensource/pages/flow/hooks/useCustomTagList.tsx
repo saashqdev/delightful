@@ -2,10 +2,10 @@ import { IconAlertCircleFilled, IconCircleCheckFilled } from "@tabler/icons-reac
 import { createStyles, cx } from "antd-style"
 import type { Dispatch, SetStateAction } from "react"
 import { useMemo } from "react"
-import Tags from "@delightful/delightful-flow/dist/MagicFlow/components/FlowHeader/components/Tags"
+import Tags from "@delightful/delightful-flow/dist/DelightfulFlow/components/FlowHeader/components/Tags"
 import { Spin, Flex, Popconfirm, Tooltip } from "antd"
 import { useTranslation } from "react-i18next"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { useMemoizedFn } from "ahooks"
 import type { Bot } from "@/types/bot"
 import { BotApi, FlowApi } from "@/apis"
@@ -58,10 +58,10 @@ type UseCustomTagListProps = {
 	isMainFlow: boolean
 	isSaving: boolean
 	lastSaveTime: string
-	flow?: MagicFlow.Flow
+	flow?: DelightfulFlow.Flow
 	isAgent: boolean
 	agent: Bot.Detail
-	setCurrentFlow: Dispatch<SetStateAction<MagicFlow.Flow | undefined>>
+	setCurrentFlow: Dispatch<SetStateAction<DelightfulFlow.Flow | undefined>>
 }
 
 export default function useCustomTagList({

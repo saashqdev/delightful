@@ -22,7 +22,7 @@ import type { DeleteTopicMessage, ConversationTopic, CreateTopicMessage } from "
 import type { CreateGroupConversationParams } from "@/types/chat/seen_message"
 import type {
 	SeqRecord,
-	GetMagicTopicNameResponse,
+	GetDelightfulTopicNameResponse,
 	MessageReceiveListResponse,
 	GetConversationAiAutoCompletionResponse,
 	GetConversationMessagesParams,
@@ -249,9 +249,9 @@ export const generateChatApi = (fetch: HttpClient, socket: ChatWebSocket) => ({
 	 * @param id 话题id
 	 * @returns
 	 */
-	getMagicTopicName(conversation_id: string, id: string) {
-		return fetch.put<GetMagicTopicNameResponse>(
-			genRequestUrl(RequestUrl.getMagicTopicName, {
+	getDelightfulTopicName(conversation_id: string, id: string) {
+		return fetch.put<GetDelightfulTopicNameResponse>(
+			genRequestUrl(RequestUrl.getDelightfulTopicName, {
 				conversationId: conversation_id,
 				topicId: id,
 			}),

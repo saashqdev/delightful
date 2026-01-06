@@ -1,16 +1,16 @@
 import type { FlowDraft } from "@/types/flow"
 import { Flex, Tooltip } from "antd"
 import EmptyIcon from "@/assets/logos/empty.svg"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { useMemo } from "react"
 import { cx } from "antd-style"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { useTranslation } from "react-i18next"
 import { useStyles } from "./style"
 
 export type PublishCardItemProps = {
 	version: FlowDraft.ListItem
-	flow?: MagicFlow.Flow
+	flow?: DelightfulFlow.Flow
 	onSwitchDraft: (version: FlowDraft.ListItem) => void
 }
 
@@ -46,7 +46,7 @@ export default function PublishCardItem({ version, flow, onSwitchDraft }: Publis
 			<span className={styles.draftDesc}>{version.description}</span>
 			<Flex justify="space-between">
 				<Flex justify="space-between" gap={4} align="center">
-					<MagicAvatar
+					<DelightfulAvatar
 						className={styles.avatarIcon}
 						size={20}
 						shape="circle"

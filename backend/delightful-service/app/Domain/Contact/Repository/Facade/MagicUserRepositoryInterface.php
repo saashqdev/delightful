@@ -7,39 +7,39 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Repository\Facade;
 
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\UserIdType;
 use App\Domain\Contact\Entity\ValueObject\UserOption;
 
-interface MagicUserRepositoryInterface
+interface DelightfulUserRepositoryInterface
 {
     public function getSquareAgentList(): array;
 
-    public function createUser(MagicUserEntity $userDTO): MagicUserEntity;
+    public function createUser(DelightfulUserEntity $userDTO): DelightfulUserEntity;
 
     /**
-     * @param MagicUserEntity[] $userDTOs
-     * @return MagicUserEntity[]
+     * @param DelightfulUserEntity[] $userDTOs
+     * @return DelightfulUserEntity[]
      */
     public function createUsers(array $userDTOs): array;
 
-    public function getUserById(string $id): ?MagicUserEntity;
+    public function getUserById(string $id): ?DelightfulUserEntity;
 
-    public function getUserByMagicId(DataIsolation $dataIsolation, string $id): ?MagicUserEntity;
+    public function getUserByDelightfulId(DataIsolation $dataIsolation, string $id): ?DelightfulUserEntity;
 
     /**
-     * @return MagicUserEntity[]
+     * @return DelightfulUserEntity[]
      */
     public function getUserByIdsAndOrganizations(array $ids, array $organizationCodes = [], array $column = ['*']): array;
 
     /**
-     * @return array<string, MagicUserEntity>
+     * @return array<string, DelightfulUserEntity>
      */
     public function getUserByPageToken(string $pageToken = '', int $pageSize = 50): array;
 
     /**
-     * @return array<string, MagicUserEntity>
+     * @return array<string, DelightfulUserEntity>
      */
     public function getByUserIds(string $organizationCode, array $userIds): array;
 
@@ -57,7 +57,7 @@ interface MagicUserRepositoryInterface
      * 根据 magicId 获取用户所属的组织列表.
      * @return string[]
      */
-    public function getUserOrganizationsByMagicId(string $magicId): array;
+    public function getUserOrganizationsByDelightfulId(string $magicId): array;
 
     public function getUserByAiCode(string $aiCode): array;
 
@@ -77,38 +77,38 @@ interface MagicUserRepositoryInterface
 
     public function deleteUserByIds(array $ids): int;
 
-    public function getUserByAccountAndOrganization(string $accountId, string $organizationCode): ?MagicUserEntity;
+    public function getUserByAccountAndOrganization(string $accountId, string $organizationCode): ?DelightfulUserEntity;
 
     public function getUserByAccountsAndOrganization(array $accountIds, string $organizationCode): array;
 
-    public function getUserByAccountsInMagic(array $accountIds): array;
+    public function getUserByAccountsInDelightful(array $accountIds): array;
 
     public function searchByNickName(string $nickName, string $organizationCode): array;
 
-    public function searchByNickNameInMagic(string $nickName): array;
+    public function searchByNickNameInDelightful(string $nickName): array;
 
     public function getUserByIds(array $ids): array;
 
-    public function saveUser(MagicUserEntity $userDTO): MagicUserEntity;
+    public function saveUser(DelightfulUserEntity $userDTO): DelightfulUserEntity;
 
     public function addUserManual(string $userId, string $userManual): void;
 
     /**
-     * @return MagicUserEntity[]
+     * @return DelightfulUserEntity[]
      */
-    public function getUsersByMagicIdAndOrganizationCode(array $magicIds, string $organizationCode): array;
+    public function getUsersByDelightfulIdAndOrganizationCode(array $magicIds, string $organizationCode): array;
 
     /**
-     * @return MagicUserEntity[]
+     * @return DelightfulUserEntity[]
      */
-    public function getUserByMagicIds(array $magicIds): array;
+    public function getUserByDelightfulIds(array $magicIds): array;
 
     /**
-     * @return MagicUserEntity[]
+     * @return DelightfulUserEntity[]
      */
     public function getUserAllUserIds(string $userId): array;
 
     public function updateUserOptionByIds(array $ids, ?UserOption $userOption = null): int;
 
-    public function getMagicIdsByUserIds(array $userIds): array;
+    public function getDelightfulIdsByUserIds(array $userIds): array;
 }

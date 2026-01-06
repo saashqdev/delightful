@@ -12,7 +12,7 @@ use App\ErrorCode\AgentErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 
-class MagicBotThirdPlatformChatEntity extends AbstractEntity
+class DelightfulBotThirdPlatformChatEntity extends AbstractEntity
 {
     protected ?int $id = null;
 

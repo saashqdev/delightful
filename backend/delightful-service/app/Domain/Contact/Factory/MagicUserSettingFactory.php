@@ -7,16 +7,16 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Factory;
 
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
 use App\Domain\Contact\Repository\Persistence\Model\UserSettingModel;
 
-class MagicUserSettingFactory
+class DelightfulUserSettingFactory
 {
-    public static function createEntity(UserSettingModel $model): MagicUserSettingEntity
+    public static function createEntity(UserSettingModel $model): DelightfulUserSettingEntity
     {
-        $entity = new MagicUserSettingEntity();
+        $entity = new DelightfulUserSettingEntity();
         $entity->setId($model->id);
-        $entity->setMagicId($model->magic_id);
+        $entity->setDelightfulId($model->magic_id);
         $entity->setOrganizationCode($model->organization_code);
         $entity->setUserId($model->user_id);
         $entity->setKey($model->key);
@@ -29,11 +29,11 @@ class MagicUserSettingFactory
         return $entity;
     }
 
-    public static function createModel(MagicUserSettingEntity $entity): array
+    public static function createModel(DelightfulUserSettingEntity $entity): array
     {
         return [
             'id' => $entity->getId(),
-            'magic_id' => $entity->getMagicId(),
+            'magic_id' => $entity->getDelightfulId(),
             'organization_code' => $entity->getOrganizationCode(),
             'user_id' => $entity->getUserId(),
             'key' => $entity->getKey(),

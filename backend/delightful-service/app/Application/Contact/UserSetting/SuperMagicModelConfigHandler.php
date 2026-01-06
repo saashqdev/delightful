@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Application\Contact\UserSetting;
 
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 use App\Domain\Provider\Service\ProviderModelDomainService;
@@ -15,7 +15,7 @@ use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 use DateTime;
 use stdClass;
 
-class SuperMagicModelConfigHandler extends AbstractUserSettingHandler
+class SuperDelightfulModelConfigHandler extends AbstractUserSettingHandler
 {
     public function __construct(
         protected ProviderModelDomainService $providerModelDomainService,
@@ -23,7 +23,7 @@ class SuperMagicModelConfigHandler extends AbstractUserSettingHandler
     ) {
     }
 
-    public function populateValue(BaseDataIsolation $dataIsolation, MagicUserSettingEntity $setting): void
+    public function populateValue(BaseDataIsolation $dataIsolation, DelightfulUserSettingEntity $setting): void
     {
         $value = $setting->getValue();
         $providerDataIsolation = ProviderDataIsolation::createByBaseDataIsolation($dataIsolation);
@@ -60,10 +60,10 @@ class SuperMagicModelConfigHandler extends AbstractUserSettingHandler
         $setting->setValue($result);
     }
 
-    public function generateDefault(): ?MagicUserSettingEntity
+    public function generateDefault(): ?DelightfulUserSettingEntity
     {
-        $setting = new MagicUserSettingEntity();
-        $setting->setKey(UserSettingKey::SuperMagicMCPServers->value);
+        $setting = new DelightfulUserSettingEntity();
+        $setting->setKey(UserSettingKey::SuperDelightfulMCPServers->value);
         $setting->setValue(['model' => new stdClass(), 'image_model' => new stdClass()]);
         $setting->setCreatedAt(new DateTime());
         $setting->setUpdatedAt(new DateTime());

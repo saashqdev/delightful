@@ -8,30 +8,30 @@ declare(strict_types=1);
 namespace App\Application\Chat\Service;
 
 use App\Domain\Contact\Entity\AccountEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\AccountStatus;
 use App\Domain\Contact\Entity\ValueObject\UserType;
-use App\Domain\Contact\Service\MagicAccountDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulAccountDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Service\MagicFlowDomainService;
+use App\Domain\Flow\Service\DelightfulFlowDomainService;
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Kernel\Assembler\FileAssembler;
-use Delightful\SuperMagic\Domain\SuperAgent\Constant\AgentConstant;
+use Delightful\SuperDelightful\Domain\SuperAgent\Constant\AgentConstant;
 use Random\RandomException;
 use RedisException;
 use Throwable;
 
-class MagicAccountAppService extends AbstractAppService
+class DelightfulAccountAppService extends AbstractAppService
 {
     public function __construct(
-        protected readonly MagicUserDomainService $userDomainService,
-        protected readonly MagicAccountDomainService $accountDomainService,
+        protected readonly DelightfulUserDomainService $userDomainService,
+        protected readonly DelightfulAccountDomainService $accountDomainService,
         protected readonly LockerInterface $locker,
-        protected readonly MagicFlowDomainService $magicFlowDomainService,
+        protected readonly DelightfulFlowDomainService $magicFlowDomainService,
     ) {
     }
 
@@ -43,7 +43,7 @@ class MagicAccountAppService extends AbstractAppService
         return $this->accountDomainService->humanRegister($stateCode, $phone, $verifyCode, $password);
     }
 
-    public function addUserAndAccount(MagicUserEntity $userDTO, AccountEntity $accountDTO): void
+    public function addUserAndAccount(DelightfulUserEntity $userDTO, AccountEntity $accountDTO): void
     {
         $this->accountDomainService->addUserAndAccount($userDTO, $accountDTO);
     }
@@ -61,7 +61,7 @@ class MagicAccountAppService extends AbstractAppService
      * @param null|AccountEntity $accountDTO 支持启用/禁用智能体
      * @throws Throwable
      */
-    public function aiRegister(MagicUserEntity $userDTO, MagicUserAuthorization $authorization, string $aiCode, ?AccountEntity $accountDTO = null): MagicUserEntity
+    public function aiRegister(DelightfulUserEntity $userDTO, DelightfulUserAuthorization $authorization, string $aiCode, ?AccountEntity $accountDTO = null): DelightfulUserEntity
     {
         $userDTO->setAvatarUrl(FileAssembler::formatPath($userDTO->getAvatarUrl()));
 
@@ -71,9 +71,9 @@ class MagicAccountAppService extends AbstractAppService
         $this->locker->spinLock($spinLockKey, $spinLockKeyOwner, 3);
         try {
             $userDTO->setUserType(UserType::Ai);
-            if (empty($authorization->getMagicId()) && ! empty($authorization->getId())) {
+            if (empty($authorization->getDelightfulId()) && ! empty($authorization->getId())) {
                 $magicInfo = $this->userDomainService->getUserById($authorization->getId());
-                $authorization->setMagicId($magicInfo?->getMagicId());
+                $authorization->setDelightfulId($magicInfo?->getDelightfulId());
                 $authorization->setOrganizationCode($magicInfo?->getOrganizationCode());
             }
             // 通过 aiCode 查询 magic_flows 表获取所属组织。
@@ -106,8 +106,8 @@ class MagicAccountAppService extends AbstractAppService
         // 检查验证码是否正确
     }
 
-    public function getAccountInfoByMagicId(string $magicId): ?AccountEntity
+    public function getAccountInfoByDelightfulId(string $magicId): ?AccountEntity
     {
-        return $this->accountDomainService->getAccountInfoByMagicId($magicId);
+        return $this->accountDomainService->getAccountInfoByDelightfulId($magicId);
     }
 }

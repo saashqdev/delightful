@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Application\Chat\Event\Subscribe\Agent;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Chat\Event\Agent\UserCallAgentFailEvent;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
@@ -50,7 +50,7 @@ class UserCallAgentFailSubscriber implements ListenerInterface
             ];
             // 消息防重
             $appMessageId = 'system-' . IdGenerator::getUniqueId32();
-            $seqDTO = new MagicSeqEntity();
+            $seqDTO = new DelightfulSeqEntity();
             // 表明引用关系
             $seqDTO->setReferMessageId($seqEntity->getMessageId());
             $seqDTO->setConversationId($conversationId);
@@ -63,7 +63,7 @@ class UserCallAgentFailSubscriber implements ListenerInterface
             // 原样输出扩展参数,但是要排除 编辑消息选项
             $seqExtra = $seqEntity->getExtra()?->getExtraCanCopyData();
             $seqDTO->setExtra($seqExtra);
-            di(MagicChatMessageAppService::class)->aiSendMessage($seqDTO, $appMessageId, doNotParseReferMessageId: true);
+            di(DelightfulChatMessageAppService::class)->aiSendMessage($seqDTO, $appMessageId, doNotParseReferMessageId: true);
         } catch (Throwable $throwable) {
             $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)->get(get_class($this));
             $logger->error('UserCallAgentEventError', [

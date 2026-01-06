@@ -1,5 +1,5 @@
 import { prefix } from "@/DelightfulFlow/constants"
-import { MagicFlow } from "@/DelightfulFlow/types/flow"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import { IconUploadError } from "@douyinfe/semi-icons"
 import { Flex, Popconfirm } from "antd"
 import { IconCopy, IconTrash } from "@tabler/icons-react"
@@ -15,7 +15,7 @@ import styles from "./index.module.less"
 type SelectionToolsProps = {
 	show: boolean
 	setShow: React.Dispatch<React.SetStateAction<boolean>>
-	selectionNodes: MagicFlow.Node[]
+	selectionNodes: DelightfulFlow.Node[]
 	selectionEdges: Edge[]
 	onCopy: () => void
 }

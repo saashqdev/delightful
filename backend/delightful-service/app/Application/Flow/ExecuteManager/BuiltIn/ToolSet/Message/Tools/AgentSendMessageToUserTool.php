@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\ExecuteManager\BuiltIn\ToolSet\Message\Tools;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\Flow\ExecuteManager\BuiltIn\BuiltInToolSet;
 use App\Application\Flow\ExecuteManager\BuiltIn\ToolSet\AbstractBuiltInTool;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Infrastructure\Core\Collector\BuiltInToolSet\Annotation\BuiltInToolDefine;
@@ -28,12 +28,12 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
     {
         return function (ExecutionData $executionData) {
             $params = $executionData->getTriggerData()->getParams();
-            // $magicAgentAppService = di(MagicAgentAppService::class);
+            // $magicAgentAppService = di(DelightfulAgentAppService::class);
             $senderUserId = $executionData->getAgentUserId();
             // 助手发送消息
             $assistantMessage = new TextMessage(['content' => $params['content']]);
             $appMessageId = IdGenerator::getUniqueId32();
-            $receiveSeqDTO = new MagicSeqEntity();
+            $receiveSeqDTO = new DelightfulSeqEntity();
             $receiveSeqDTO->setContent($assistantMessage);
             $receiveSeqDTO->setSeqType($assistantMessage->getMessageTypeEnum());
             $receiverIds = $params['receiver_user_ids'];
@@ -41,7 +41,7 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
             $receiverType = ConversationType::User;
 
             foreach ($receiverIds as $receiverId) {
-                di(MagicChatMessageAppService::class)->agentSendMessage(
+                di(DelightfulChatMessageAppService::class)->agentSendMessage(
                     aiSeqDTO: $receiveSeqDTO,
                     senderUserId: $senderUserId,
                     receiverId: $receiverId,

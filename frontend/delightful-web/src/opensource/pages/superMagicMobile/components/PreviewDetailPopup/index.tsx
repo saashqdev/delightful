@@ -1,13 +1,13 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import Render from "@/opensource/pages/superMagic/components/Detail/Render"
-import type { DetailData } from "@/opensource/pages/superMagic/components/Detail/types"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import Render from "@/opensource/pages/superDelightful/components/Detail/Render"
+import type { DetailData } from "@/opensource/pages/superDelightful/components/Detail/types"
 import { IconX } from "@tabler/icons-react"
 import { Popup, SafeArea } from "antd-mobile"
 import type { Ref } from "react"
 import { forwardRef, memo, useCallback, useImperativeHandle, useState } from "react"
 import MobileButton from "../MobileButton"
 import { useStyles } from "./styles"
-import { useDetailActions } from "@/opensource/pages/superMagic/components/Detail/hooks/useDetailActions"
+import { useDetailActions } from "@/opensource/pages/superDelightful/components/Detail/hooks/useDetailActions"
 import { isEmpty } from "lodash-es"
 
 export interface PreviewDetail<T extends keyof DetailData = any> {
@@ -80,7 +80,7 @@ function PreviewDetailPopup(props: PreviewDetailPopupProps, ref: Ref<PreviewDeta
 							setVisible(false)
 						}}
 					>
-						<MagicIcon size={22} stroke={2} component={IconX} />
+						<DelightfulIcon size={22} stroke={2} component={IconX} />
 					</MobileButton>
 				</div>
 			</div>

@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Domain\SuperAgent\Repository\Persistence;
+namespace Delightful\SuperDelightful\Domain\SuperAgent\Repository\Persistence;
 
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\WorkspaceVersionEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade\WorkspaceVersionRepositoryInterface;
-use Delightful\SuperMagic\Domain\SuperAgent\Repository\Model\WorkspaceVersionModel;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\WorkspaceVersionEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Repository\Facade\WorkspaceVersionRepositoryInterface;
+use Delightful\SuperDelightful\Domain\SuperAgent\Repository\Model\WorkspaceVersionModel;
 
 class WorkspaceVersionRepository implements WorkspaceVersionRepositoryInterface
 {

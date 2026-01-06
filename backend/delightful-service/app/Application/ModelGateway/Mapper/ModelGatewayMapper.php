@@ -20,7 +20,7 @@ use App\Infrastructure\Core\Contract\Model\RerankInterface;
 use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 use App\Infrastructure\Core\Model\ImageGenerationModel;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\ImageModel;
-use App\Infrastructure\ExternalAPI\MagicAIApi\MagicAILocalModel;
+use App\Infrastructure\ExternalAPI\DelightfulAIApi\DelightfulAILocalModel;
 use DateTime;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Logger\LoggerFactory;
@@ -72,7 +72,7 @@ class ModelGatewayMapper extends ModelMapper
         return (bool) $this->getByAdmin($dataIsolation, $model);
     }
 
-    public function getOfficialChatModelProxy(string $model): MagicAILocalModel
+    public function getOfficialChatModelProxy(string $model): DelightfulAILocalModel
     {
         $dataIsolation = ModelGatewayDataIsolation::create('', '');
         $dataIsolation->setCurrentOrganizationCode($dataIsolation->getOfficialOrganizationCode());
@@ -83,7 +83,7 @@ class ModelGatewayMapper extends ModelMapper
      * 内部使用 chat 时，一定是使用该方法.
      * 会自动替代为本地代理模型.
      */
-    public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): MagicAILocalModel
+    public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): DelightfulAILocalModel
     {
         $dataIsolation = ModelGatewayDataIsolation::createByBaseDataIsolation($dataIsolation);
         $odinModel = $this->getOrganizationChatModel($dataIsolation, $model);
@@ -100,7 +100,7 @@ class ModelGatewayMapper extends ModelMapper
      * 内部使用 embedding 时，一定是使用该方法.
      * 会自动替代为本地代理模型.
      */
-    public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): MagicAILocalModel
+    public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): DelightfulAILocalModel
     {
         $dataIsolation = ModelGatewayDataIsolation::createByBaseDataIsolation($dataIsolation);
         /** @var AbstractModel $odinModel */
@@ -206,7 +206,7 @@ class ModelGatewayMapper extends ModelMapper
                 icon: $model->getIcon() ?: '',
                 tags: [['type' => 1, 'value' => 'Image Generation']],
                 createdAt: $model->getCreatedAt() ?? new DateTime(),
-                owner: 'MagicAI',
+                owner: 'DelightfulAI',
                 providerAlias: '',
                 providerModelId: (string) $model->getId(),
                 description: $model->getLocalizedDescription($dataIsolation->getLanguage()) ?? '',
@@ -234,9 +234,9 @@ class ModelGatewayMapper extends ModelMapper
                 name: $name,
                 label: $name,
                 icon: '',
-                tags: [['type' => 1, 'value' => 'MagicAI']],
+                tags: [['type' => 1, 'value' => 'DelightfulAI']],
                 createdAt: new DateTime(),
-                owner: 'MagicOdin',
+                owner: 'DelightfulOdin',
                 description: '',
             );
             $this->logger->info('EnvModelRegister', [
@@ -252,9 +252,9 @@ class ModelGatewayMapper extends ModelMapper
                 name: $name,
                 label: $name,
                 icon: '',
-                tags: [['type' => 1, 'value' => 'MagicAI']],
+                tags: [['type' => 1, 'value' => 'DelightfulAI']],
                 createdAt: new DateTime(),
-                owner: 'MagicOdin',
+                owner: 'DelightfulOdin',
                 description: '',
             );
             $this->logger->info('EnvModelRegister', [
@@ -404,10 +404,10 @@ class ModelGatewayMapper extends ModelMapper
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 
-        // 如果不是官方组织，但是模型是官方组织，统一显示 Magic
+        // 如果不是官方组织，但是模型是官方组织，统一显示 Delightful
         if (! $providerDataIsolation->isOfficialOrganization()
             && in_array($providerConfigEntity->getOrganizationCode(), $providerDataIsolation->getOfficialOrganizationCodes())) {
-            $providerName = 'Magic';
+            $providerName = 'Delightful';
         }
 
         try {
@@ -453,7 +453,7 @@ class ModelGatewayMapper extends ModelMapper
                 icon: $iconUrl,
                 tags: [['type' => 1, 'value' => "{$providerName}"]],
                 createdAt: $providerEntity->getCreatedAt(),
-                owner: 'MagicAI',
+                owner: 'DelightfulAI',
                 providerAlias: $providerConfigEntity->getAlias() ?? $providerEntity->getName(),
                 providerModelId: (string) $providerModelEntity->getId(),
                 providerId: (string) $providerConfigEntity->getId(),
@@ -514,11 +514,11 @@ class ModelGatewayMapper extends ModelMapper
         return $this->createModelByProvider($providerDataIsolation, $providerModelEntity, $providerConfigEntity, $providerEntity);
     }
 
-    private function createProxy(ModelGatewayDataIsolation $dataIsolation, string $model, ModelOptions $modelOptions, ApiOptions $apiOptions, bool $useOfficialAccessToken = false): MagicAILocalModel
+    private function createProxy(ModelGatewayDataIsolation $dataIsolation, string $model, ModelOptions $modelOptions, ApiOptions $apiOptions, bool $useOfficialAccessToken = false): DelightfulAILocalModel
     {
         // 使用ModelFactory创建模型实例
         $odinModel = ModelFactory::create(
-            MagicAILocalModel::class,
+            DelightfulAILocalModel::class,
             $model,
             [
                 'use_official_access_token' => $useOfficialAccessToken,
@@ -530,8 +530,8 @@ class ModelGatewayMapper extends ModelMapper
             $apiOptions,
             $this->logger
         );
-        if (! $odinModel instanceof MagicAILocalModel) {
-            throw new InvalidArgumentException(sprintf('Implementation %s is not defined.', MagicAILocalModel::class));
+        if (! $odinModel instanceof DelightfulAILocalModel) {
+            throw new InvalidArgumentException(sprintf('Implementation %s is not defined.', DelightfulAILocalModel::class));
         }
         return $odinModel;
     }

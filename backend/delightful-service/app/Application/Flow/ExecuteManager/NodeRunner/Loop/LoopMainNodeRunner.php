@@ -9,9 +9,9 @@ namespace App\Application\Flow\ExecuteManager\NodeRunner\Loop;
 
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionFlowCollector;
-use App\Application\Flow\ExecuteManager\MagicFlowExecutor;
+use App\Application\Flow\ExecuteManager\DelightfulFlowExecutor;
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunner;
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Loop\LoopMainNodeParamsConfig;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Loop\LoopType;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\TriggerType;
@@ -42,7 +42,7 @@ class LoopMainNodeRunner extends NodeRunner
         if (empty($bodyId)) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.relation_id_empty');
         }
-        $magicFlow = ExecutionFlowCollector::getOrCreate($executionData->getUniqueId(), $executionData->getMagicFlowEntity());
+        $magicFlow = ExecutionFlowCollector::getOrCreate($executionData->getUniqueId(), $executionData->getDelightfulFlowEntity());
 
         $loopFlow = $this->createLoopFlow($bodyId, $magicFlow);
         if (! $loopFlow) {
@@ -129,13 +129,13 @@ class LoopMainNodeRunner extends NodeRunner
         }
     }
 
-    private function createLoopFlow(string $bodyId, MagicFlowEntity $magicFlow): ?MagicFlowEntity
+    private function createLoopFlow(string $bodyId, DelightfulFlowEntity $magicFlow): ?DelightfulFlowEntity
     {
-        $loopMagicFlow = clone $magicFlow;
+        $loopDelightfulFlow = clone $magicFlow;
 
         // 做区分
-        $loopMagicFlow->setCode($magicFlow->getCode() . '_loop');
-        $loopMagicFlow->setType(Type::Loop);
+        $loopDelightfulFlow->setCode($magicFlow->getCode() . '_loop');
+        $loopDelightfulFlow->setType(Type::Loop);
 
         // 循环体节点
         $bodyNode = $magicFlow->getNodeById($bodyId);
@@ -155,15 +155,15 @@ class LoopMainNodeRunner extends NodeRunner
             $node->setMeta($meta);
         }
         // 更换执行的节点
-        $loopMagicFlow->setNodes($childNodes);
+        $loopDelightfulFlow->setNodes($childNodes);
 
-        return $loopMagicFlow;
+        return $loopDelightfulFlow;
     }
 
-    private function runLoopFlow(MagicFlowEntity $loopMagicFlow, ExecutionData $executionData): void
+    private function runLoopFlow(DelightfulFlowEntity $loopDelightfulFlow, ExecutionData $executionData): void
     {
         try {
-            $subExecutor = new MagicFlowExecutor($loopMagicFlow, $executionData);
+            $subExecutor = new DelightfulFlowExecutor($loopDelightfulFlow, $executionData);
             $subExecutor->setInLoop(true);
             // 复用当前的执行数据，循环体内可访问和修改
             $subExecutor->execute(TriggerType::LoopStart);
@@ -171,7 +171,7 @@ class LoopMainNodeRunner extends NodeRunner
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $throwable->getMessage()]);
         }
         // 节点内部的异常在 node 的 debug 信息中记录
-        foreach ($loopMagicFlow->getNodes() as $node) {
+        foreach ($loopDelightfulFlow->getNodes() as $node) {
             if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                 ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $node->getNodeDebugResult()->getErrorMessage()]);
             }

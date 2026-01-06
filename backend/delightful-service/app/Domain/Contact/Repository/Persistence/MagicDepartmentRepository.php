@@ -9,9 +9,9 @@ namespace App\Domain\Contact\Repository\Persistence;
 
 use App\Domain\Chat\DTO\PageResponseDTO\DepartmentsPageResponseDTO;
 use App\Domain\Chat\Entity\ValueObject\PlatformRootDepartmentId;
-use App\Domain\Contact\Entity\MagicDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentEntity;
 use App\Domain\Contact\Entity\ValueObject\DepartmentOption;
-use App\Domain\Contact\Repository\Facade\MagicDepartmentRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulDepartmentRepositoryInterface;
 use App\Domain\Contact\Repository\Persistence\Model\DepartmentModel;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\Locker\LockerInterface;
@@ -26,7 +26,7 @@ use JetBrains\PhpStorm\ArrayShape;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
-class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
+class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryInterface
 {
     public function __construct(
         protected DepartmentModel $model,
@@ -40,7 +40,7 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
         }
     }
 
-    public function getDepartmentById(string $departmentId, string $organizationCode): ?MagicDepartmentEntity
+    public function getDepartmentById(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity
     {
         $department = $this->model->newQuery()
             ->where('organization_code', $organizationCode)
@@ -53,7 +53,7 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
     }
 
     /**
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
     public function getDepartmentsByIds(array $departmentIds, string $organizationCode, bool $keyById = false): array
     {
@@ -68,9 +68,9 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
     }
 
     /**
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
-    public function getDepartmentsByIdsInMagic(array $departmentIds, bool $keyById = false): array
+    public function getDepartmentsByIdsInDelightful(array $departmentIds, bool $keyById = false): array
     {
         if (empty($departmentIds)) {
             return [];
@@ -131,7 +131,7 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
         return Db::select($query->toSql(), $query->getBindings());
     }
 
-    public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?MagicDepartmentEntity
+    public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity
     {
         // 对于前端来说, -1 表示根部门信息.
         $query = $this->model->newQuery()->where('organization_code', $organizationCode);
@@ -150,7 +150,7 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
     }
 
     /**
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
     public function searchDepartments(string $departmentName, string $organizationCode, string $pageToken = '', ?int $pageSize = null): array
     {
@@ -170,7 +170,7 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
 
     /**
      * 获取组织的所有部门.
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
     public function getOrganizationDepartments(string $organizationCode, array $fields = ['*'], bool $keyById = false): array
     {
@@ -187,7 +187,7 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
      * 获取部门的所有子部门的成员总数.
      * 使用自旋锁避免并发，一次性查询所有部门数据并缓存到 Redis.
      */
-    public function getSelfAndChildrenEmployeeSum(MagicDepartmentEntity $magicDepartmentEntity): int
+    public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $magicDepartmentEntity): int
     {
         $organizationCode = $magicDepartmentEntity->getOrganizationCode();
         $departmentId = $magicDepartmentEntity->getDepartmentId();
@@ -232,8 +232,8 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
     }
 
     /**
-     * @param MagicDepartmentEntity[] $magicDepartmentsDTO
-     * @return MagicDepartmentEntity[]
+     * @param DelightfulDepartmentEntity[] $magicDepartmentsDTO
+     * @return DelightfulDepartmentEntity[]
      */
     public function createDepartments(array $magicDepartmentsDTO): array
     {
@@ -304,7 +304,7 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
     /**
      * 批量获取多个组织的根部门信息.
      * @param array $organizationCodes 组织代码数组
-     * @return MagicDepartmentEntity[] 根部门实体数组
+     * @return DelightfulDepartmentEntity[] 根部门实体数组
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array
     {
@@ -365,7 +365,7 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
     }
 
     /**
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
     protected function getDepartmentsEntity(array $departments, bool $keyById = false): array
     {

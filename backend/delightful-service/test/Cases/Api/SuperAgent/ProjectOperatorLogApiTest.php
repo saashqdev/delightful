@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Api\SuperAgent;
 
-use Delightful\SuperMagic\Domain\SuperAgent\Constants\OperationAction;
-use Delightful\SuperMagic\Domain\SuperAgent\Constants\ResourceType;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectOperationLogDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Constants\OperationAction;
+use Delightful\SuperDelightful\Domain\SuperAgent\Constants\ResourceType;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectOperationLogDomainService;
 
 /**
  * @internal

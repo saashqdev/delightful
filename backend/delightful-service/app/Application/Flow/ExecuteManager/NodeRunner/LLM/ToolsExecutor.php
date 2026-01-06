@@ -9,14 +9,14 @@ namespace App\Application\Flow\ExecuteManager\NodeRunner\LLM;
 
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
 use App\Application\Flow\ExecuteManager\ExecutionData\TriggerData;
-use App\Application\Flow\ExecuteManager\MagicFlowExecutor;
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Application\Flow\ExecuteManager\DelightfulFlowExecutor;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\LLM\Structure\OptionTool;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\TriggerType;
 use App\Domain\Flow\Entity\ValueObject\Type;
-use App\Domain\Flow\Factory\MagicFlowFactory;
-use App\Domain\Flow\Service\MagicFlowDomainService;
+use App\Domain\Flow\Factory\DelightfulFlowFactory;
+use App\Domain\Flow\Service\DelightfulFlowDomainService;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Collector\BuiltInToolSet\BuiltInToolSetCollector;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -35,7 +35,7 @@ class ToolsExecutor extends AbstractTool
 {
     protected bool $validateParameters = false;
 
-    private MagicFlowEntity $magicFlowEntity;
+    private DelightfulFlowEntity $magicFlowEntity;
 
     private ExecutionData $executionData;
 
@@ -68,7 +68,7 @@ class ToolsExecutor extends AbstractTool
             $customSystemInput = $optionTool->getCustomSystemInput()?->getFormComponent()?->getForm()?->getKeyValue($executionData->getExpressionFieldData()) ?? [];
 
             $tool = new ToolsExecutor();
-            $tool->setMagicFlowEntity($toolsFlow);
+            $tool->setDelightfulFlowEntity($toolsFlow);
             $tool->setExecutionData($executionData);
             $tool->setOptionTool($optionTool);
             $tool->setCustomSystemInput($customSystemInput);
@@ -82,7 +82,7 @@ class ToolsExecutor extends AbstractTool
     }
 
     /**
-     * @return array<MagicFlowEntity>
+     * @return array<DelightfulFlowEntity>
      */
     public static function getToolFlows(FlowDataIsolation $dataIsolation, array $codes, bool $keyWithCode = false): array
     {
@@ -105,7 +105,7 @@ class ToolsExecutor extends AbstractTool
             }
         }
         if (! empty($codes)) {
-            $toolFlows = di(MagicFlowDomainService::class)->getByCodes($dataIsolation, $codes);
+            $toolFlows = di(DelightfulFlowDomainService::class)->getByCodes($dataIsolation, $codes);
             foreach ($toolFlows as $toolFlow) {
                 if ($toolFlow->isEnabled() && $toolFlow->getType()->isTools()) {
                     if ($keyWithCode) {
@@ -121,7 +121,7 @@ class ToolsExecutor extends AbstractTool
 
     public static function execute(
         ExecutionData $executionData,
-        MagicFlowEntity $toolFlow,
+        DelightfulFlowEntity $toolFlow,
         array $args = [],
         array $customSystemInput = [],
         bool $async = false,
@@ -150,7 +150,7 @@ class ToolsExecutor extends AbstractTool
                 conversationId: $executionData->getConversationId(),
             );
             $toolsExecutionData->extends($executionData);
-            $toolsExecutor = new MagicFlowExecutor($toolFlow, $toolsExecutionData);
+            $toolsExecutor = new DelightfulFlowExecutor($toolFlow, $toolsExecutionData);
 
             if ($async) {
                 $fromCoroutineId = Coroutine::id();
@@ -213,7 +213,7 @@ class ToolsExecutor extends AbstractTool
         return $data;
     }
 
-    public function setMagicFlowEntity(MagicFlowEntity $magicFlowEntity): void
+    public function setDelightfulFlowEntity(DelightfulFlowEntity $magicFlowEntity): void
     {
         $this->magicFlowEntity = $magicFlowEntity;
     }
@@ -262,7 +262,7 @@ class ToolsExecutor extends AbstractTool
         }
         $args = $parameters;
         // 隔离数据
-        $flow = MagicFlowFactory::arrayToEntity($this->magicFlowEntity->toArray());
+        $flow = DelightfulFlowFactory::arrayToEntity($this->magicFlowEntity->toArray());
         // 内置工具特殊值
         if ($this->magicFlowEntity->hasCallback()) {
             $flow->setCallback($this->magicFlowEntity->getCallback());

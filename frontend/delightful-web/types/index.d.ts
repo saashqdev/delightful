@@ -3,10 +3,10 @@ import "./theme"
 import "./assets"
 import "./react-router"
 import type {
-	MagicElectron,
-	MagicMediaElectron,
-	MagicScreenshotElectron,
-	MagicSearchElectron,
+	DelightfulElectron,
+	DelightfulMediaElectron,
+	DelightfulScreenshotElectron,
+	DelightfulSearchElectron,
 } from "./electron"
 import type { DingTalk } from "./dingTalk"
 import type { Lark } from "./lark"
@@ -14,13 +14,13 @@ import type { Lark } from "./lark"
 declare global {
 	interface Window {
 		/** Main application window */
-		magic: MagicElectron.MagicElectronAPI
+		magic: DelightfulElectron.DelightfulElectronAPI
 		/** Media window */
-		magicMedia: MagicMediaElectron.MagicMediaElectronAPI
+		magicMedia: DelightfulMediaElectron.DelightfulMediaElectronAPI
 		/** Global screenshot window */
-		magicScreenshot: MagicScreenshotElectron.MagicScreenshotElectronAPI
+		magicScreenshot: DelightfulScreenshotElectron.DelightfulScreenshotElectronAPI
 		/** Global search window */
-		magicSearch: MagicSearchElectron.MagicSearchElectronAPI
+		magicSearch: DelightfulSearchElectron.DelightfulSearchElectronAPI
 
 		// Temporarily set developer mode
 		setDebug?: (debug: boolean) => void

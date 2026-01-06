@@ -7,9 +7,9 @@
     }
  */
 
-import { CustomConditionContainerProps } from "@/MagicConditionEdit"
-import { Expression } from "@/MagicConditionEdit/types/expression"
-import { MagicConditionEdit } from "@/index"
+import { CustomConditionContainerProps } from "@/DelightfulConditionEdit"
+import { Expression } from "@/DelightfulConditionEdit/types/expression"
+import { DelightfulConditionEdit } from "@/index"
 import { useMemoizedFn } from "ahooks"
 import React from "react"
 
@@ -21,12 +21,12 @@ export type WidgetConditionValue = {
 }
 
 //@ts-ignore
-interface MagicConditionWrapProps extends CustomConditionContainerProps {
+interface DelightfulConditionWrapProps extends CustomConditionContainerProps {
 	value?: WidgetConditionValue
 	onChange?: (value: WidgetConditionValue) => void
 }
 
-export default function MagicConditionWrap({ ...props }: MagicConditionWrapProps) {
+export default function DelightfulConditionWrap({ ...props }: DelightfulConditionWrapProps) {
 	// Outer wrapper not needed; only update the structure data
 	const onChange = useMemoizedFn((value: Expression.Condition) => {
 		if (!props.onChange || !props.value) return
@@ -36,5 +36,5 @@ export default function MagicConditionWrap({ ...props }: MagicConditionWrapProps
 		})
 	})
 
-	return <MagicConditionEdit {...props} value={props?.value?.structure} onChange={onChange} />
+	return <DelightfulConditionEdit {...props} value={props?.value?.structure} onChange={onChange} />
 }

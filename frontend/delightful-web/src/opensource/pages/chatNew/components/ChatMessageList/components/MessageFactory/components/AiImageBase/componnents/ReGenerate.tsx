@@ -3,7 +3,7 @@ import { memo } from "react"
 import { useTranslation } from "react-i18next"
 import { Popover } from "antd"
 import { IconRefresh } from "@tabler/icons-react"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useMemoizedFn } from "ahooks"
 import {
 	ConversationMessageType,
@@ -84,9 +84,9 @@ const ReGenerate = memo(({ messageId }: RevokeTipProps) => {
 
 	return (
 		<Popover content={t("chat.aiImage.reGenerate")}>
-			<MagicButton onClick={onReGenerate} className={styles.regenerateButton}>
+			<DelightfulButton onClick={onReGenerate} className={styles.regenerateButton}>
 				<IconRefresh size={16} color="currentColor" />
-			</MagicButton>
+			</DelightfulButton>
 		</Popover>
 	)
 })

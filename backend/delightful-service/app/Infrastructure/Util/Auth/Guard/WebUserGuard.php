@@ -9,7 +9,7 @@ namespace App\Infrastructure\Util\Auth\Guard;
 
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Hyperf\Codec\Json;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -32,7 +32,7 @@ class WebUserGuard extends AbstractAuthGuard
     }
 
     /**
-     * @return MagicUserAuthorization
+     * @return DelightfulUserAuthorization
      * @throws Throwable
      */
     public function user(): ?Authenticatable
@@ -51,15 +51,15 @@ class WebUserGuard extends AbstractAuthGuard
         $cacheKey = 'auth_user:' . md5($authorization . $organizationCode);
         $cachedResult = $this->redis->get($cacheKey);
         if ($cachedResult) {
-            $user = unserialize($cachedResult, ['allowed_classes' => [MagicUserAuthorization::class]]);
-            if ($user instanceof MagicUserAuthorization) {
+            $user = unserialize($cachedResult, ['allowed_classes' => [DelightfulUserAuthorization::class]]);
+            if ($user instanceof DelightfulUserAuthorization) {
                 return $user;
             }
         }
 
         try {
-            // 下面这段实际调用的是 MagicUserAuthorization 的 retrieveById 方法
-            /** @var null|MagicUserAuthorization $user */
+            // 下面这段实际调用的是 DelightfulUserAuthorization 的 retrieveById 方法
+            /** @var null|DelightfulUserAuthorization $user */
             $user = $this->userProvider->retrieveByCredentials([
                 'authorization' => $authorization,
                 'organizationCode' => $organizationCode,
@@ -70,10 +70,10 @@ class WebUserGuard extends AbstractAuthGuard
             if (empty($user->getOrganizationCode())) {
                 ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
             }
-            if ($user instanceof MagicUserAuthorization) {
+            if ($user instanceof DelightfulUserAuthorization) {
                 $this->redis->setex($cacheKey, 60, serialize($user));
             }
-            $logger->info('WebUserGuard UserAuthorization', ['uid' => $user->getId(), 'name' => $user->getNickname(), 'organization' => $user->getOrganizationCode(), 'env' => $user->getMagicEnvId()]);
+            $logger->info('WebUserGuard UserAuthorization', ['uid' => $user->getId(), 'name' => $user->getNickname(), 'organization' => $user->getOrganizationCode(), 'env' => $user->getDelightfulEnvId()]);
             return $user;
         } catch (Throwable $exception) {
             $errMsg = [

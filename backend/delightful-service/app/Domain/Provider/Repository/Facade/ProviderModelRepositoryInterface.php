@@ -50,10 +50,10 @@ interface ProviderModelRepositoryInterface
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId, ProviderEntity $providerEntity): array;
 
     /**
-     * 获取组织可用模型列表（包含组织自己的模型和Magic模型）.
+     * 获取组织可用模型列表（包含组织自己的模型和Delightful模型）.
      * @param ProviderDataIsolation $dataIsolation 数据隔离对象
      * @param null|Category $category 模型分类，为空时返回所有分类模型
-     * @return ProviderModelEntity[] 按sort降序排序的模型列表，包含组织模型和Magic模型（不去重）
+     * @return ProviderModelEntity[] 按sort降序排序的模型列表，包含组织模型和Delightful模型（不去重）
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, Status $status = Status::Enabled): array;
 

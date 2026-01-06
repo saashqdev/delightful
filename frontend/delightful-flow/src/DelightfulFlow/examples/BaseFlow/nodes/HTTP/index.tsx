@@ -1,9 +1,9 @@
 import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import { ShowColumns } from "@/MagicJsonSchemaEditor/constants"
-import Schema from "@/MagicJsonSchemaEditor/types/Schema"
+import { ShowColumns } from "@/DelightfulJsonSchemaEditor/constants"
+import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import DropdownCard from "@/common/BaseUI/DropdownCard"
-import { MagicJsonSchemaEditor } from "@/index"
+import { DelightfulJsonSchemaEditor } from "@/index"
 import { useUpdateEffect } from "ahooks"
 import React, { useEffect, useState } from "react"
 import usePrevious from "../../common/hooks/usePrevious"
@@ -39,7 +39,7 @@ export default function HTTPNode() {
 	return (
 		<div className={styles.http}>
 			<DropdownCard title="输出" height="auto" headerClassWrapper={styles.output}>
-				<MagicJsonSchemaEditor
+				<DelightfulJsonSchemaEditor
 					data={output}
 					onChange={setOutput}
 					allowExpression

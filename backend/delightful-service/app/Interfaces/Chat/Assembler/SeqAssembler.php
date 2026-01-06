@@ -15,15 +15,15 @@ use App\Domain\Chat\DTO\Response\ClientSequenceResponse;
 use App\Domain\Chat\DTO\Response\Common\ClientMessage;
 use App\Domain\Chat\DTO\Response\Common\ClientSequence;
 use App\Domain\Chat\Entity\Items\SeqExtra;
-use App\Domain\Chat\Entity\MagicMessageEntity;
-use App\Domain\Chat\Entity\MagicSeqEntity;
-use App\Domain\Chat\Entity\MagicTopicEntity;
-use App\Domain\Chat\Entity\ValueObject\MagicMessageStatus;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
+use App\Domain\Chat\Entity\DelightfulTopicEntity;
+use App\Domain\Chat\Entity\ValueObject\DelightfulMessageStatus;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\MessageOptionsEnum;
 use App\Domain\Chat\Entity\ValueObject\SocketEventType;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\ErrorCode\ChatErrorCode;
 use App\Infrastructure\Core\Constants\Order;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -34,15 +34,15 @@ use Throwable;
 
 class SeqAssembler
 {
-    public static function getSeqEntity(array $seqInfo): MagicSeqEntity
+    public static function getSeqEntity(array $seqInfo): DelightfulSeqEntity
     {
-        return new MagicSeqEntity($seqInfo);
+        return new DelightfulSeqEntity($seqInfo);
     }
 
     /**
      * 将entity转换为可以直接写入数据库的数据.
      */
-    public static function getInsertDataByEntity(MagicSeqEntity $magicSeqEntity): array
+    public static function getInsertDataByEntity(DelightfulSeqEntity $magicSeqEntity): array
     {
         $seqData = $magicSeqEntity->toArray();
         $seqData['content'] = Json::encode($seqData['content'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
@@ -114,8 +114,8 @@ class SeqAssembler
      * 生成客户端需要的Seq结构.
      */
     public static function getClientSeqStruct(
-        MagicSeqEntity $seqEntity,
-        ?MagicMessageEntity $messageEntity = null
+        DelightfulSeqEntity $seqEntity,
+        ?DelightfulMessageEntity $messageEntity = null
     ): ClientSequenceResponse {
         $clientSequence = self::getClientSequence($seqEntity, $messageEntity);
         return new ClientSequenceResponse([
@@ -127,7 +127,7 @@ class SeqAssembler
     /**
      * 根据已经存在的seqEntity,生成已读/已查看/撤回/编辑等消息状态变更类型的回执消息.
      */
-    public static function generateReceiveStatusChangeSeqEntity(MagicSeqEntity $originSeqEntity, ControlMessageType $messageType): MagicSeqEntity
+    public static function generateReceiveStatusChangeSeqEntity(DelightfulSeqEntity $originSeqEntity, ControlMessageType $messageType): DelightfulSeqEntity
     {
         // 编辑/撤回/引用的回执,都是 refer 的是自己聊天的消息 id
         if ($originSeqEntity->getSeqType() instanceof ChatMessageType) {
@@ -142,13 +142,13 @@ class SeqAssembler
         $seqData = $statusChangeSeqEntity->toArray();
         if ($messageType === ControlMessageType::SeenMessages) {
             // 变更状态为已读
-            $seqData['status'] = MagicMessageStatus::Seen->value;
+            $seqData['status'] = DelightfulMessageStatus::Seen->value;
             // 回写时将 $referMessageIds 拆开,每条消息生成一条已读消息
             $seqData['content'] = Json::encode(['refer_message_ids' => [$referMessageId]], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
         if ($messageType === ControlMessageType::RevokeMessage) {
             // 变更状态为已撤回
-            $seqData['status'] = MagicMessageStatus::Revoked->value;
+            $seqData['status'] = DelightfulMessageStatus::Revoked->value;
             $seqData['content'] = Json::encode(['refer_message_id' => $referMessageId], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
         return self::generateStatusChangeSeqEntity($seqData, $referMessageId);
@@ -158,7 +158,7 @@ class SeqAssembler
      * 根据已经存在的seqEntity,生成已读/已查看/撤回/编辑等消息状态变更类型的回执消息.
      * @param string $referMessageId 支持指定引用的消息id,用于给接收方的其他设备推送回执,或者给发件方推送回执
      */
-    public static function generateStatusChangeSeqEntity(array $seqData, string $referMessageId): MagicSeqEntity
+    public static function generateStatusChangeSeqEntity(array $seqData, string $referMessageId): DelightfulSeqEntity
     {
         $messageId = (string) IdGenerator::getSnowId();
         $time = date('Y-m-d H:i:s');
@@ -178,7 +178,7 @@ class SeqAssembler
     /**
      * 根据已经存在的seqEntity,生成topic变更类型的控制消息.
      */
-    public static function generateTopicChangeSeqEntity(MagicSeqEntity $seqEntity, MagicTopicEntity $topicEntity, ?MagicUserEntity $receiveUserEntity): MagicSeqEntity
+    public static function generateTopicChangeSeqEntity(DelightfulSeqEntity $seqEntity, DelightfulTopicEntity $topicEntity, ?DelightfulUserEntity $receiveUserEntity): DelightfulSeqEntity
     {
         $seqData = $seqEntity->toArray();
         $messageId = (string) IdGenerator::getSnowId();
@@ -187,7 +187,7 @@ class SeqAssembler
         $seqData['id'] = $messageId;
         // 序列所属用户可能发生变更
         if ($receiveUserEntity !== null) {
-            $seqData['object_id'] = $receiveUserEntity->getMagicId();
+            $seqData['object_id'] = $receiveUserEntity->getDelightfulId();
             $seqData['object_type'] = $receiveUserEntity->getUserType()->value;
         }
         $seqData['message_id'] = $messageId;
@@ -245,7 +245,7 @@ class SeqAssembler
     /**
      * Get corresponding Socket event type based on sequence entity.
      */
-    public static function getSocketEventType(MagicSeqEntity $seqEntity): SocketEventType
+    public static function getSocketEventType(DelightfulSeqEntity $seqEntity): SocketEventType
     {
         if ($seqEntity->getSeqType() instanceof ControlMessageType) {
             return SocketEventType::Control;
@@ -253,7 +253,7 @@ class SeqAssembler
         return SocketEventType::Chat;
     }
 
-    private static function getClientSequence(MagicSeqEntity $seqEntity, ?MagicMessageEntity $messageEntity = null): ClientSequence
+    private static function getClientSequence(DelightfulSeqEntity $seqEntity, ?DelightfulMessageEntity $messageEntity = null): ClientSequence
     {
         // 由于编辑消息可能更改消息类型，因此如果 $messageEntity 不为空，优先使用 $messageEntity 的消息类型
         if ($messageEntity !== null) {
@@ -282,7 +282,7 @@ class SeqAssembler
         // 生成客户端消息结构
         $clientMessageData = [
             // 服务端生成的消息唯一id，全局唯一。用于撤回、编辑消息。
-            'magic_message_id' => $seqEntity->getMagicMessageId(),
+            'magic_message_id' => $seqEntity->getDelightfulMessageId(),
             // 客户端生成，需要ios/安卓/web三端共同确定一个生成算法。用于告知客户端，magic_message_id的由来
             'app_message_id' => $seqEntity->getAppMessageId(),
             // 发送者

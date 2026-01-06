@@ -1,14 +1,14 @@
 import { useMemo } from "react"
 
 import { DatePicker, Form, TimePicker } from "antd"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import { useFlow } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
 import type { DefaultOptionType } from "antd/lib/select"
 import { useMemoizedFn } from "ahooks"
 import dayjs from "dayjs"
 import weekday from "dayjs/plugin/weekday"
 import localeData from "dayjs/plugin/localeData"
-import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
 import { useTranslation } from "react-i18next"
 import { resolveToString } from "@dtyq/es6-template-strings"
 import styles from "./index.module.less"
@@ -56,7 +56,7 @@ const DayOption = ({ value, type, options, onChange }: DateOptionsProps) => {
 			format="YYYY-MM-DD"
 		/>
 	) : (
-		<MagicSelect
+		<DelightfulSelect
 			value={displayValue}
 			options={options}
 			onChange={onChange}
@@ -206,7 +206,7 @@ const TimeTrigger = ({ branchId }: TimeTriggeredProps) => {
 		>
 			<Form.Item className={styles.cycleSelect}>
 				<Form.Item name="type" className={styles.typeOption}>
-					<MagicSelect options={CYCLE_TYPE_OPTION} fieldNames={{ value: "id" }} />
+					<DelightfulSelect options={CYCLE_TYPE_OPTION} fieldNames={{ value: "id" }} />
 				</Form.Item>
 				{![CycleTypeMap.DAILY_REPEAT, CycleTypeMap.WEEKDAY_REPEAT].includes(cycleType) && (
 					<Form.Item name="day" className={styles.dayOption}>

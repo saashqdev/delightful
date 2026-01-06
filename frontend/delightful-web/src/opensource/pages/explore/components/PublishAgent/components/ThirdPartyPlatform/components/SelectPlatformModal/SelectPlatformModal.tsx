@@ -1,10 +1,10 @@
 import { Flex, Form, Input } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { cx } from "antd-style"
 import { IconCheck } from "@tabler/icons-react"
 import { useMemoizedFn, useUpdateEffect } from "ahooks"
-import MagicEllipseWithTooltip from "@/opensource/components/base/MagicEllipseWithTooltip/MagicEllipseWithTooltip"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulEllipseWithTooltip from "@/opensource/components/base/DelightfulEllipseWithTooltip/DelightfulEllipseWithTooltip"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { useTranslation } from "react-i18next"
 import { ThirdPartyPlatformType } from "@/types/bot"
 import { useStyles } from "./style"
@@ -77,12 +77,12 @@ export default function SelectPlatformButton({
 
 	return (
 		<>
-			<MagicButton type="primary" ghost onClick={onOpen}>
+			<DelightfulButton type="primary" ghost onClick={onOpen}>
 				{t("common.addPlatform", {
 					ns: "flow",
 				})}
-			</MagicButton>
-			<MagicModal
+			</DelightfulButton>
+			<DelightfulModal
 				width={700}
 				title={t("common.selectPlatform", {
 					ns: "flow",
@@ -134,12 +134,12 @@ export default function SelectPlatformButton({
 										<IconCheck size={24} color="#fff" />
 									</Flex>
 								)}
-								<MagicEllipseWithTooltip
+								<DelightfulEllipseWithTooltip
 									text={platform.title}
 									maxWidth="180px"
 									className="platform-title"
 								/>
-								<MagicEllipseWithTooltip
+								<DelightfulEllipseWithTooltip
 									text={t("common.enterpriseApp", {
 										ns: "flow",
 									})}
@@ -166,7 +166,7 @@ export default function SelectPlatformButton({
 						/>
 					</Form.Item>
 				</Form>
-			</MagicModal>
+			</DelightfulModal>
 		</>
 	)
 }

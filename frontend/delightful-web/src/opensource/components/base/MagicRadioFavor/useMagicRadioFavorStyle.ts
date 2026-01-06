@@ -1,6 +1,6 @@
 import { createStyles } from "antd-style"
 
-export const useMagicRadioFavorStyle = createStyles(({ css, token }) => {
+export const useDelightfulRadioFavorStyle = createStyles(({ css, token }) => {
 	// Semi/usage/fill/--color-fill-0
 	const containerBG = token.magicColorUsages.fill[0]
 	return {

@@ -11,7 +11,7 @@ use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Core\AbstractRepository;
 use Hyperf\Database\Model\Builder;
 
-class AbstractMagicContactRepository extends AbstractRepository
+class AbstractDelightfulContactRepository extends AbstractRepository
 {
     protected function createContactBuilder(DataIsolation $dataIsolation, Builder $builder): Builder
     {

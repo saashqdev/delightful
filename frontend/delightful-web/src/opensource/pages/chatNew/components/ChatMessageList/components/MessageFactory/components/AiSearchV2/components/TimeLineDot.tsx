@@ -1,6 +1,6 @@
 import { memo } from "react"
 import { createStyles } from "antd-style"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconCheck } from "@tabler/icons-react"
 import { TimeLineDotStatus } from "../const"
 import DotSpreading from "./DotSpreading"
@@ -61,7 +61,7 @@ const useStyles = createStyles(({ css, token }) => {
 export const SuccessDot = memo(({ style }: { style?: React.CSSProperties }) => {
 	const { styles } = useStyles()
 	return (
-		<MagicIcon
+		<DelightfulIcon
 			color="currentColor"
 			component={IconCheck}
 			size={14}

@@ -1,7 +1,7 @@
 # Intent Recognition Node
 
 ## What is an Intent Recognition Node?
-The Intent Recognition Node is an intelligent analysis node in Magic Flow workflow that can understand and analyze user input text to identify user intentions. Simply put, this node acts like an "understanding expert" that can discern what users want to do and guide the workflow to different processing paths based on different intents.
+The Intent Recognition Node is an intelligent analysis node in Delightful Flow workflow that can understand and analyze user input text to identify user intentions. Simply put, this node acts like an "understanding expert" that can discern what users want to do and guide the workflow to different processing paths based on different intents.
 
 **Image Description:**
 

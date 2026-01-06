@@ -1,6 +1,6 @@
-import { MagicList } from "@/opensource/components/MagicList"
-import MagicSearch from "@/opensource/components/base/MagicSearch"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import { DelightfulList } from "@/opensource/components/DelightfulList"
+import DelightfulSearch from "@/opensource/components/base/DelightfulSearch"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { contactStore } from "@/opensource/stores/contact"
 import type { StructureUserItem } from "@/types/organization"
 import { useBoolean, useDebounce, useMemoizedFn } from "ahooks"
@@ -138,20 +138,20 @@ const MentionSelect = observer(
 				}}
 				content={
 					<Flex vertical>
-						<MagicSearch
+						<DelightfulSearch
 							value={searchValue}
 							className={styles.search}
 							placeholder={t("chat.mentionPanel.search.placeholder")}
 						/>
-						<MagicSpin section spinning={isLoading} className={styles.list}>
-							<MagicList
+						<DelightfulSpin section spinning={isLoading} className={styles.list}>
+							<DelightfulList
 								ref={listRef}
 								items={userList}
 								active={(_, index) => index === userSelectIndex}
 								onItemClick={confirmItem}
 								gap={0}
 							/>
-						</MagicSpin>
+						</DelightfulSpin>
 					</Flex>
 				}
 				open={visible}

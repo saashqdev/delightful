@@ -1,5 +1,5 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { Flex, Form, Popover } from "antd"
 import { memo, useEffect, useMemo, useState } from "react"
 import { useMemoizedFn } from "ahooks"
@@ -33,7 +33,7 @@ const IconSelectPopover = memo(({ name, formIcon, onChangeIcon }: IconSelectPopo
 	const content = useMemo(() => {
 		return (
 			<Flex gap={10} vertical>
-				<MagicButton
+				<DelightfulButton
 					className={cx(styles.button, {
 						[styles.selectedIconButton]: icon === "IconWand",
 					})}
@@ -41,17 +41,17 @@ const IconSelectPopover = memo(({ name, formIcon, onChangeIcon }: IconSelectPopo
 					onClick={() => onSelectIcon("IconWand")}
 				>
 					{t("explore.buttonText.useDefaultIcon")}
-				</MagicButton>
+				</DelightfulButton>
 				<div className={styles.iconGrid}>
 					{instructStatusIcons.map((item: StatusIconKey) => (
-						<MagicButton
+						<DelightfulButton
 							type="text"
 							key={item}
 							className={cx(styles.iconButton, {
 								[styles.selectedIconButton]: item === icon,
 							})}
 							icon={
-								<MagicIcon
+								<DelightfulIcon
 									color="currentColor"
 									size={16}
 									component={StatusIcons[item]}
@@ -83,11 +83,11 @@ const IconSelectPopover = memo(({ name, formIcon, onChangeIcon }: IconSelectPopo
 				trigger="click"
 				overlayClassName={styles.iconPopover}
 			>
-				<MagicButton
+				<DelightfulButton
 					type="text"
 					className={cx(styles.iconButton, styles.iconOuterButton)}
 					icon={
-						<MagicIcon color="currentColor" size={16} component={StatusIcons[icon]} />
+						<DelightfulIcon color="currentColor" size={16} component={StatusIcons[icon]} />
 					}
 				/>
 			</Popover>

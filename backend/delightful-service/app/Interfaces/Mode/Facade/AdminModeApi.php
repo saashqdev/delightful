@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Mode\Facade;
 
-use App\Application\Kernel\Enum\MagicOperationEnum;
-use App\Application\Kernel\Enum\MagicResourceEnum;
+use App\Application\Kernel\Enum\DelightfulOperationEnum;
+use App\Application\Kernel\Enum\DelightfulResourceEnum;
 use App\Application\Mode\DTO\Admin\AdminModeAggregateDTO;
 use App\Application\Mode\Service\AdminModeAppService;
 use App\Infrastructure\Core\AbstractApi;
@@ -30,7 +30,7 @@ class AdminModeApi extends AbstractApi
     /**
      * 获取模式列表.
      */
-    #[CheckPermission([MagicResourceEnum::ADMIN_AI_MODE], MagicOperationEnum::QUERY)]
+    #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::QUERY)]
     public function getModes(RequestInterface $request)
     {
         $authorization = $this->getAuthorization();
@@ -45,14 +45,14 @@ class AdminModeApi extends AbstractApi
     /**
      * 获取模式详情.
      */
-    #[CheckPermission([MagicResourceEnum::ADMIN_AI_MODE], MagicOperationEnum::QUERY)]
+    #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::QUERY)]
     public function getMode(RequestInterface $request, string $id)
     {
         $authorization = $this->getAuthorization();
         return $this->adminModeAppService->getModeById($authorization, $id);
     }
 
-    #[CheckPermission([MagicResourceEnum::ADMIN_AI_MODE], MagicOperationEnum::QUERY)]
+    #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::QUERY)]
     public function getOriginMode(RequestInterface $request, string $id)
     {
         $authorization = $this->getAuthorization();
@@ -62,7 +62,7 @@ class AdminModeApi extends AbstractApi
     /**
      * 创建模式.
      */
-    #[CheckPermission([MagicResourceEnum::ADMIN_AI_MODE], MagicOperationEnum::EDIT)]
+    #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::EDIT)]
     public function createMode(CreateModeRequest $request)
     {
         $authorization = $this->getAuthorization();
@@ -73,7 +73,7 @@ class AdminModeApi extends AbstractApi
     /**
      * 更新模式.
      */
-    #[CheckPermission([MagicResourceEnum::ADMIN_AI_MODE], MagicOperationEnum::EDIT)]
+    #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::EDIT)]
     public function updateMode(UpdateModeRequest $request, string $id)
     {
         $authorization = $this->getAuthorization();
@@ -84,7 +84,7 @@ class AdminModeApi extends AbstractApi
     /**
      * 更新模式状态
      */
-    #[CheckPermission([MagicResourceEnum::ADMIN_AI_MODE], MagicOperationEnum::EDIT)]
+    #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::EDIT)]
     public function updateModeStatus(RequestInterface $request, string $id)
     {
         $authorization = $this->getAuthorization();
@@ -96,14 +96,14 @@ class AdminModeApi extends AbstractApi
     /**
      * 获取默认模式.
      */
-    #[CheckPermission([MagicResourceEnum::ADMIN_AI_MODE], MagicOperationEnum::QUERY)]
+    #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::QUERY)]
     public function getDefaultMode()
     {
         $authorization = $this->getAuthorization();
         return $this->adminModeAppService->getDefaultMode($authorization);
     }
 
-    #[CheckPermission([MagicResourceEnum::ADMIN_AI_MODE], MagicOperationEnum::EDIT)]
+    #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::EDIT)]
     public function saveModeConfig(RequestInterface $request, string $id)
     {
         $authorization = $this->getAuthorization();

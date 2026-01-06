@@ -10,7 +10,7 @@ namespace App\Interfaces\Contact\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 use App\Interfaces\Kernel\DTO\Traits\StringIdDTOTrait;
 
-class MagicUserSettingDTO extends AbstractDTO
+class DelightfulUserSettingDTO extends AbstractDTO
 {
     use StringIdDTOTrait;
 

@@ -44,13 +44,13 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
 
         $ignoreMessageIds = [];
         if ($systemHasContent || $userHasContent) {
-            $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getMagicMessageId()];
+            $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
         }
 
         // 加载记忆
         $memoryManager = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), $paramsConfig->getMessages(), $ignoreMessageIds);
 
-        $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getMagicMessageId();
+        $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId();
         $contentMessage = $currentMessage = null;
         // 尝试在记忆中找到 content 消息
         foreach ($memoryManager->getMessages() as $message) {

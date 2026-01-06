@@ -7,16 +7,16 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Assembler;
 
-use App\Domain\Group\Entity\MagicGroupEntity;
-use App\Domain\Group\Entity\MagicGroupUserEntity;
+use App\Domain\Group\Entity\DelightfulGroupEntity;
+use App\Domain\Group\Entity\DelightfulGroupUserEntity;
 use App\Domain\Group\Entity\ValueObject\GroupStatusEnum;
 use App\Domain\Group\Entity\ValueObject\GroupTypeEnum;
 
 class GroupAssembler
 {
-    public static function getGroupEntity(array $group): MagicGroupEntity
+    public static function getGroupEntity(array $group): DelightfulGroupEntity
     {
-        $groupEntity = new MagicGroupEntity();
+        $groupEntity = new DelightfulGroupEntity();
         $groupEntity->setId((string) $group['id']);
         $groupEntity->setGroupName($group['group_name']);
         $groupEntity->setGroupAvatar($group['group_avatar']);
@@ -30,9 +30,9 @@ class GroupAssembler
         return $groupEntity;
     }
 
-    public static function getGroupUserEntity(array $groupUser): MagicGroupUserEntity
+    public static function getGroupUserEntity(array $groupUser): DelightfulGroupUserEntity
     {
-        $groupUserEntity = new MagicGroupUserEntity();
+        $groupUserEntity = new DelightfulGroupUserEntity();
         $groupUserEntity->setId($groupUser['id']);
         $groupUserEntity->setGroupId($groupUser['group_id']);
         $groupUserEntity->setUserId($groupUser['user_id']);

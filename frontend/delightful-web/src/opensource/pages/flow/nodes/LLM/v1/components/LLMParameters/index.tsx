@@ -4,8 +4,8 @@
 import { Form, Switch, Tooltip, Select } from "antd"
 import { IconHelp } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
-import MagicInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
-import MagicSlider from "@delightful/delightful-flow/dist/common/BaseUI/Slider"
+import DelightfulInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
+import DelightfulSlider from "@delightful/delightful-flow/dist/common/BaseUI/Slider"
 import { useFlowStore } from "@/opensource/stores/flow"
 import { useTranslation } from "react-i18next"
 import { useMemo } from "react"
@@ -160,7 +160,7 @@ export default function LLMParametersV1() {
 								name={["model_config", "temperature"]}
 								className={styles.right}
 							>
-								<MagicSlider
+								<DelightfulSlider
 									min={temperature.extra.min}
 									max={temperature.extra.max}
 									step={temperature.extra.step}
@@ -171,7 +171,7 @@ export default function LLMParametersV1() {
 								name={["model_config", "temperature"]}
 								className={styles.right}
 							>
-								<MagicInput
+								<DelightfulInput
 									className={styles.input}
 									type="number"
 									min={temperature.extra.min}
@@ -200,7 +200,7 @@ export default function LLMParametersV1() {
 							</Tooltip>
 						</div>
 						<Form.Item className={styles.right} name={["model_config", "max_record"]}>
-							<MagicInput className={styles.input} type="number" />
+							<DelightfulInput className={styles.input} type="number" />
 						</Form.Item>
 					</div>
 					<div className={styles.formItemRow}>

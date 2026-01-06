@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\ExecuteManager\NodeRunner\Loop;
 
 use App\Application\Flow\ExecuteManager\ExecutionData\TriggerData;
-use App\Application\Flow\ExecuteManager\MagicFlowExecutor;
+use App\Application\Flow\ExecuteManager\DelightfulFlowExecutor;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\TriggerType;
-use App\Domain\Flow\Factory\MagicFlowFactory;
+use App\Domain\Flow\Factory\DelightfulFlowFactory;
 use DateTime;
 use Hyperf\Codec\Json;
 use HyperfTest\Cases\Application\Flow\ExecuteManager\ExecuteManagerBaseTest;
@@ -24,7 +24,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
 {
     public function testRunCount()
     {
-        $magicFlow = $this->createMagicFlowCount();
+        $magicFlow = $this->createDelightfulFlowCount();
         $operator = $this->getOperator();
         $triggerData = new TriggerData(
             triggerTime: new DateTime(),
@@ -35,7 +35,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
             ],
         );
         $executionData = $this->createExecutionData(TriggerType::ParamCall, $triggerData);
-        $executor = new MagicFlowExecutor($magicFlow, $executionData);
+        $executor = new DelightfulFlowExecutor($magicFlow, $executionData);
         $executor->execute();
 
         foreach ($magicFlow->getNodes() as $node) {
@@ -45,7 +45,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
         }
     }
 
-    private function createMagicFlowCount(): MagicFlowEntity
+    private function createDelightfulFlowCount(): DelightfulFlowEntity
     {
         $array = Json::decode(
             <<<'JSON'
@@ -326,6 +326,6 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
 JSON
         );
 
-        return MagicFlowFactory::arrayToEntity($array);
+        return DelightfulFlowFactory::arrayToEntity($array);
     }
 }

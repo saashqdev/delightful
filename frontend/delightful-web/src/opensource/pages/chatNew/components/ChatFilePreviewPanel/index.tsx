@@ -4,9 +4,9 @@ import { computed } from "mobx"
 import { lazy, Suspense, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicEmpty from "@/opensource/components/base/MagicEmpty"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulEmpty from "@/opensource/components/base/DelightfulEmpty"
 
 import { useStyles } from "./styles"
 
@@ -15,7 +15,7 @@ import MessageFilePreviewService from "@/opensource/services/chat/message/Messag
 import MessageFilePreviewStore from "@/opensource/stores/chatNew/messagePreview/FilePreviewStore"
 
 const UniverComponent = lazy(() => import("@/opensource/components/UniverComponent"))
-const MagicPdfRender = lazy(() => import("@/opensource/components/base/MagicPdfRender"))
+const DelightfulPdfRender = lazy(() => import("@/opensource/components/base/DelightfulPdfRender"))
 
 const ChatFilePreviewPanel = observer(function ChatFilePreviewPanel() {
 	const { t } = useTranslation("interface")
@@ -58,7 +58,7 @@ const ChatFilePreviewPanel = observer(function ChatFilePreviewPanel() {
 	}
 
 	const Content = () => {
-		if (!fileInfo || !data) return <MagicEmpty />
+		if (!fileInfo || !data) return <DelightfulEmpty />
 
 		switch (previewInfo?.file_extension) {
 			case "xlsx":
@@ -72,9 +72,9 @@ const ChatFilePreviewPanel = observer(function ChatFilePreviewPanel() {
 					/>
 				)
 			case "pdf":
-				return <MagicPdfRender file={data} height="100%" />
+				return <DelightfulPdfRender file={data} height="100%" />
 			default:
-				return <MagicEmpty description={t("chat.filePreview.notSupportFileType")} />
+				return <DelightfulEmpty description={t("chat.filePreview.notSupportFileType")} />
 		}
 	}
 
@@ -87,10 +87,10 @@ const ChatFilePreviewPanel = observer(function ChatFilePreviewPanel() {
 					</div>
 				</div>
 				<div className={styles.headerRight}>
-					<MagicButton
+					<DelightfulButton
 						type="text"
 						icon={
-							<MagicIcon
+							<DelightfulIcon
 								component={
 									isFullscreen ? IconArrowsDiagonalMinimize2 : IconArrowsDiagonal
 								}
@@ -98,9 +98,9 @@ const ChatFilePreviewPanel = observer(function ChatFilePreviewPanel() {
 						}
 						onClick={toggleFullscreen}
 					/>
-					<MagicButton
+					<DelightfulButton
 						type="text"
-						icon={<MagicIcon component={IconX} />}
+						icon={<DelightfulIcon component={IconX} />}
 						onClick={MessageFilePreviewService.clearPreviewInfo}
 					/>
 				</div>

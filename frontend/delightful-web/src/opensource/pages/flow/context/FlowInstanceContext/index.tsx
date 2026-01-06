@@ -1,14 +1,14 @@
-import { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
+import { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
 import React, { createContext, useContext, MutableRefObject, useMemo } from "react"
 
 interface FlowInstanceContextProps {
-	flowInstance: MutableRefObject<MagicFlowInstance | null>
+	flowInstance: MutableRefObject<DelightfulFlowInstance | null>
 }
 
 const FlowInstanceContext = createContext<FlowInstanceContextProps | undefined>(undefined)
 
 interface FlowInstanceProviderProps extends React.PropsWithChildren {
-	flowInstance: MutableRefObject<MagicFlowInstance | null>
+	flowInstance: MutableRefObject<DelightfulFlowInstance | null>
 }
 
 export const FlowInstanceProvider = ({ flowInstance, children }: FlowInstanceProviderProps) => {

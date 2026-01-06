@@ -18,7 +18,7 @@ body:
     id: deployment-type
     attributes:
       label: Deployment Type
-      description: How do you run Magic?
+      description: How do you run Delightful?
       options:
         - Self-hosted (Docker)
         - Self-hosted (Source)

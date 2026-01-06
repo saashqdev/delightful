@@ -7,22 +7,22 @@ declare(strict_types=1);
 
 namespace App\Domain\OrganizationEnvironment\Repository\Facade;
 
-use App\Domain\OrganizationEnvironment\Entity\MagicEnvironmentEntity;
-use App\Domain\OrganizationEnvironment\Entity\MagicOrganizationEnvEntity;
+use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
+use App\Domain\OrganizationEnvironment\Entity\DelightfulOrganizationEnvEntity;
 
 interface OrganizationsEnvironmentRepositoryInterface
 {
-    public function getOrganizationEnvironmentByMagicOrganizationCode(string $magicOrganizationCode): ?MagicOrganizationEnvEntity;
+    public function getOrganizationEnvironmentByDelightfulOrganizationCode(string $magicOrganizationCode): ?DelightfulOrganizationEnvEntity;
 
-    public function getOrganizationEnvironmentByOrganizationCode(string $originOrganizationCode, MagicEnvironmentEntity $magicEnvironmentEntity): ?MagicOrganizationEnvEntity;
+    public function getOrganizationEnvironmentByOrganizationCode(string $originOrganizationCode, DelightfulEnvironmentEntity $magicEnvironmentEntity): ?DelightfulOrganizationEnvEntity;
 
-    public function createOrganizationEnvironment(MagicOrganizationEnvEntity $magicOrganizationEnvEntity): void;
+    public function createOrganizationEnvironment(DelightfulOrganizationEnvEntity $magicOrganizationEnvEntity): void;
 
     /**
      * @param string[] $magicOrganizationCodes
-     * @return MagicOrganizationEnvEntity[]
+     * @return DelightfulOrganizationEnvEntity[]
      */
-    public function getOrganizationEnvironments(array $magicOrganizationCodes, MagicEnvironmentEntity $magicEnvironmentEntity): array;
+    public function getOrganizationEnvironments(array $magicOrganizationCodes, DelightfulEnvironmentEntity $magicEnvironmentEntity): array;
 
     /**
      * 获取所有组织编码
@@ -30,5 +30,5 @@ interface OrganizationsEnvironmentRepositoryInterface
      */
     public function getAllOrganizationCodes(): array;
 
-    public function getOrganizationEnvironmentByThirdPartyOrganizationCode(string $thirdPartyOrganizationCode, MagicEnvironmentEntity $magicEnvironmentEntity): ?MagicOrganizationEnvEntity;
+    public function getOrganizationEnvironmentByThirdPartyOrganizationCode(string $thirdPartyOrganizationCode, DelightfulEnvironmentEntity $magicEnvironmentEntity): ?DelightfulOrganizationEnvEntity;
 }

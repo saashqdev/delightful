@@ -1,7 +1,7 @@
 import type { PopoverProps } from "antd"
 import { Popover } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconDots } from "@tabler/icons-react"
 import { useState } from "react"
 import useStyles from "./styles"
@@ -51,9 +51,9 @@ function OperateMenu({
 			<div onContextMenu={handleContextMenu} onClick={handleClick} className={className}>
 				{useIcon &&
 					(Icon || (
-						<MagicButton
+						<DelightfulButton
 							type="text"
-							icon={<MagicIcon color="currentColor" component={IconDots} size={18} />}
+							icon={<DelightfulIcon color="currentColor" component={IconDots} size={18} />}
 						/>
 					))}
 				{children}

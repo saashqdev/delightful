@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\ModelGateway\Entity;
 
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
@@ -42,16 +42,16 @@ class ApplicationEntity extends AbstractEntity
     public function prepareForCreation(): void
     {
         if (empty($this->organizationCode)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'organization_code']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'organization_code']);
         }
         if (empty($this->code)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'code']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'code']);
         }
         if (empty($this->name)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'name']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'name']);
         }
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'creator']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'creator']);
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
@@ -73,7 +73,7 @@ class ApplicationEntity extends AbstractEntity
             $LLMApplicationEntity->setIcon($this->icon);
         }
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'creator']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'creator']);
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();

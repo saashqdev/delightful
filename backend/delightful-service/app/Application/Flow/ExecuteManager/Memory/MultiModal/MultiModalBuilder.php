@@ -10,12 +10,12 @@ namespace App\Application\Flow\ExecuteManager\Memory\MultiModal;
 use App\Application\Flow\ExecuteManager\BuiltIn\ToolSet\AtomicNode\Tools\VisionTool;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
 use App\Domain\Chat\DTO\Message\TextContentInterface;
-use App\Domain\Flow\Entity\MagicFlowMultiModalLogEntity;
-use App\Domain\Flow\Service\MagicFlowMultiModalLogDomainService;
+use App\Domain\Flow\Entity\DelightfulFlowMultiModalLogEntity;
+use App\Domain\Flow\Service\DelightfulFlowMultiModalLogDomainService;
 
 class MultiModalBuilder
 {
-    public static function vision(ExecutionData $executionData, string $visionModel): ?MagicFlowMultiModalLogEntity
+    public static function vision(ExecutionData $executionData, string $visionModel): ?DelightfulFlowMultiModalLogEntity
     {
         if (empty($executionData->getTriggerData()->getAttachments())) {
             return null;
@@ -55,11 +55,11 @@ class MultiModalBuilder
             return null;
         }
 
-        $magicFlowMultiModalLogEntity = new MagicFlowMultiModalLogEntity();
-        $magicFlowMultiModalLogEntity->setMessageId($executionData->getTriggerData()->getMessageEntity()->getMagicMessageId());
+        $magicFlowMultiModalLogEntity = new DelightfulFlowMultiModalLogEntity();
+        $magicFlowMultiModalLogEntity->setMessageId($executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId());
         $magicFlowMultiModalLogEntity->setAnalysisResult($visionResult['response']);
         $magicFlowMultiModalLogEntity->setType(1);
         $magicFlowMultiModalLogEntity->setModel($visionResult['model']);
-        return di(MagicFlowMultiModalLogDomainService::class)->create($executionData->getDataIsolation(), $magicFlowMultiModalLogEntity);
+        return di(DelightfulFlowMultiModalLogDomainService::class)->create($executionData->getDataIsolation(), $magicFlowMultiModalLogEntity);
     }
 }

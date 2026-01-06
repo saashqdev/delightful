@@ -10,7 +10,7 @@ use App\Infrastructure\ExternalAPI\Search\Adapter\CloudswaySearchAdapter;
 use App\Infrastructure\ExternalAPI\Search\Adapter\DuckDuckGoSearchAdapter;
 use App\Infrastructure\ExternalAPI\Search\Adapter\GoogleSearchAdapter;
 use App\Infrastructure\ExternalAPI\Search\Adapter\JinaSearchAdapter;
-use App\Infrastructure\ExternalAPI\Search\Adapter\MagicSearchAdapter;
+use App\Infrastructure\ExternalAPI\Search\Adapter\DelightfulSearchAdapter;
 use App\Infrastructure\ExternalAPI\Search\Adapter\TavilySearchAdapter;
 
 /*
@@ -22,7 +22,7 @@ return [
     'backend' => env('SEARCH_BACKEND', 'bing'),
     'drivers' => [
         SearchEngineType::Delightful->value => [
-            'class_name' => MagicSearchAdapter::class,
+            'class_name' => DelightfulSearchAdapter::class,
             'base_url' => env('DELIGHTFUL_SEARCH_BASE_URL', ''),
             'api_key' => env('DELIGHTFUL_SEARCH_API_KEY', ''),
         ],

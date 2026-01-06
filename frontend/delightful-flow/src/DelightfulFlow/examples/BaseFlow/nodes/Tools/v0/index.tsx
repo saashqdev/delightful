@@ -1,6 +1,6 @@
 import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import MagicSelect from "@/common/BaseUI/Select"
+import DelightfulSelect from "@/common/BaseUI/Select"
 import { Form } from "antd"
 import { useMemoizedFn } from "ahooks"
 import _ from "lodash"
@@ -59,7 +59,7 @@ export default function ToolsV0() {
 				onValuesChange={onValuesChange}
 			>
 				<Form.Item name="tool_id" className={styles.select} label="选择工具">
-					<MagicSelect options={toolOptions} style={{ width: "100%" }} showSearch />
+					<DelightfulSelect options={toolOptions} style={{ width: "100%" }} showSearch />
 				</Form.Item>
 			</Form>
 		</NodeOutputWrap>

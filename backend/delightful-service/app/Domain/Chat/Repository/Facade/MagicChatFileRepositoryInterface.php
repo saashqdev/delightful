@@ -7,31 +7,31 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Repository\Facade;
 
-use App\Domain\Chat\Entity\MagicChatFileEntity;
+use App\Domain\Chat\Entity\DelightfulChatFileEntity;
 
-interface MagicChatFileRepositoryInterface
+interface DelightfulChatFileRepositoryInterface
 {
     // 用户上传了文件
-    public function uploadFile(MagicChatFileEntity $magicFileDTO): MagicChatFileEntity;
+    public function uploadFile(DelightfulChatFileEntity $magicFileDTO): DelightfulChatFileEntity;
 
     /**
      * 批量上传文件.
-     * @param MagicChatFileEntity[] $magicFileDTOs
-     * @return MagicChatFileEntity[]
+     * @param DelightfulChatFileEntity[] $magicFileDTOs
+     * @return DelightfulChatFileEntity[]
      */
     public function uploadFiles(array $magicFileDTOs): array;
 
     /**
-     * @return MagicChatFileEntity[]
+     * @return DelightfulChatFileEntity[]
      */
     public function getChatFileByIds(array $fileIds, ?string $order = null, ?int $limit = null): array;
 
     /**
      * 通过file_key查找文件.
      */
-    public function getChatFileByFileKey(string $fileKey): ?MagicChatFileEntity;
+    public function getChatFileByFileKey(string $fileKey): ?DelightfulChatFileEntity;
 
-    public function updateFile(MagicChatFileEntity $fileEntity): void;
+    public function updateFile(DelightfulChatFileEntity $fileEntity): void;
 
-    public function updateFileById(string $fileId, MagicChatFileEntity $entity);
+    public function updateFileById(string $fileId, DelightfulChatFileEntity $entity);
 }

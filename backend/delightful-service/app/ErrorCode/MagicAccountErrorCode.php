@@ -12,7 +12,7 @@ use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 /**
  * 错误码范围:[4100, 4300].
  */
-enum MagicAccountErrorCode: int
+enum DelightfulAccountErrorCode: int
 {
     // 登录类型不支持
     #[ErrorMessage('account.login_type_not_support')]

@@ -1,9 +1,9 @@
 import { useMemo } from "react"
 import { useMemoizedFn, useResetState, useUpdateEffect } from "ahooks"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
-import { NodeTestingProvider } from "@delightful/delightful-flow/dist/MagicFlow/context/NodeTesingContext/Provider"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import { NodeTestingProvider } from "@delightful/delightful-flow/dist/DelightfulFlow/context/NodeTesingContext/Provider"
 import { pick } from "lodash-es"
-import { getNodeVersion } from "@delightful/delightful-flow/dist/MagicFlow/utils"
+import { getNodeVersion } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
 import { FlowApi } from "@/apis"
 import type { CustomFlowCtx } from "./Context"
 import { CustomFlowContext } from "./Context"
@@ -29,7 +29,7 @@ export const CustomFlowProvider = ({ children, testFlowResult, setCurrentFlow }:
 	}, [testFlowResult])
 
 	const testNode = useMemoizedFn(
-		async (node: MagicFlow.Node, dataSource: Record<string, any>) => {
+		async (node: DelightfulFlow.Node, dataSource: Record<string, any>) => {
 			if (`${node.node_type}` === customNodeType.Code) {
 				node = shadowNode(node)
 			}

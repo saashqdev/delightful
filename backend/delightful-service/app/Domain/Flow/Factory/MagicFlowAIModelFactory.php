@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Factory;
 
-use App\Domain\Flow\Entity\MagicFlowAIModelEntity;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowAIModelModel;
+use App\Domain\Flow\Entity\DelightfulFlowAIModelEntity;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowAIModelModel;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Hyperf\Odin\Contract\Model\EmbeddingInterface;
@@ -16,11 +16,11 @@ use Hyperf\Odin\Contract\Model\ModelInterface;
 use Hyperf\Odin\Factory\ModelFactory;
 use Hyperf\Odin\Model\ModelOptions;
 
-class MagicFlowAIModelFactory
+class DelightfulFlowAIModelFactory
 {
-    public static function modelToEntity(MagicFlowAIModelModel $model): MagicFlowAIModelEntity
+    public static function modelToEntity(DelightfulFlowAIModelModel $model): DelightfulFlowAIModelEntity
     {
-        $entity = new MagicFlowAIModelEntity();
+        $entity = new DelightfulFlowAIModelEntity();
         $entity->setId($model->id);
         $entity->setOrganizationCode($model->organization_code);
         $entity->setName($model->name);
@@ -44,7 +44,7 @@ class MagicFlowAIModelFactory
         return $entity;
     }
 
-    public static function createOdinModel(MagicFlowAIModelEntity $magicFlowAIModelEntity): EmbeddingInterface|ModelInterface
+    public static function createOdinModel(DelightfulFlowAIModelEntity $magicFlowAIModelEntity): EmbeddingInterface|ModelInterface
     {
         if (! $magicFlowAIModelEntity->isEnabled()) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.model.disabled', ['model_name' => $magicFlowAIModelEntity->getName()]);

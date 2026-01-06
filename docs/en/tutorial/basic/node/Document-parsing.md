@@ -1,6 +1,6 @@
 # Document Parsing Node
 ## What is a Document Parsing Node?
-The Document Parsing Node is your "entry point" for processing various files and data sources in Magic Flow. It works like an intelligent reader, capable of reading and understanding document content in different formats, converting original files into text data that subsequent nodes can process. Whether it's locally uploaded PDF, WORD files, or web content from the internet, the Document Parsing Node can help you extract valuable information.
+The Document Parsing Node is your "entry point" for processing various files and data sources in Delightful Flow. It works like an intelligent reader, capable of reading and understanding document content in different formats, converting original files into text data that subsequent nodes can process. Whether it's locally uploaded PDF, WORD files, or web content from the internet, the Document Parsing Node can help you extract valuable information.
 
 **Image Description:**
 
@@ -58,7 +58,7 @@ Connect the output of the Document Parsing Node to subsequent processing nodes, 
 
 ## Precautions
 ### File Size Limitations
-The Magic Flow platform has size limitations for uploaded files, typically not exceeding 50MB. For larger files, it is recommended to split them before uploading or to introduce them using the URL method.
+The Delightful Flow platform has size limitations for uploaded files, typically not exceeding 50MB. For larger files, it is recommended to split them before uploading or to introduce them using the URL method.
 
 ### File Format Support
 Although the Document Parsing Node supports multiple formats, parsing effects may vary for different formats:

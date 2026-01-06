@@ -173,7 +173,7 @@ export const FooterLogo = (props: MobilePageIconProps) => {
 	)
 }
 
-export const Magic = (props: MobilePageIconProps) => {
+export const Delightful = (props: MobilePageIconProps) => {
 	const { size = 1, className } = props
 	return (
 		<svg

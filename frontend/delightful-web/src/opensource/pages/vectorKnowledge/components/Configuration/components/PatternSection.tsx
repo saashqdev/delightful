@@ -1,7 +1,7 @@
 import { ReactNode, ForwardRefExoticComponent, RefAttributes } from "react"
 import { Flex } from "antd"
 import { useVectorKnowledgeConfigurationStyles } from "../styles"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { cx } from "antd-style"
 import { Icon, IconProps } from "@tabler/icons-react"
 
@@ -54,7 +54,7 @@ export default function PatternSection({
 					justify="center"
 					className={cx(styles.patternIcon, getIconColorClass())}
 				>
-					<MagicIcon component={icon} color="currentColor" />
+					<DelightfulIcon component={icon} color="currentColor" />
 				</Flex>
 				<div style={{ flex: 1 }}>
 					<div className={styles.patternTitle}>{title}</div>

@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Permission\DTO;
 
-use App\Domain\Contact\Entity\MagicDepartmentEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
-use App\Domain\Group\Entity\MagicGroupEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
+use App\Domain\Group\Entity\DelightfulGroupEntity;
 use App\Infrastructure\Core\AbstractDTO;
 
 class TargetInfoDTO extends AbstractDTO
@@ -24,7 +24,7 @@ class TargetInfoDTO extends AbstractDTO
 
     public static function makeByUser(mixed $userEntity): ?TargetInfoDTO
     {
-        if (! $userEntity instanceof MagicUserEntity) {
+        if (! $userEntity instanceof DelightfulUserEntity) {
             return null;
         }
         $targetInfoDTO = new TargetInfoDTO();
@@ -38,7 +38,7 @@ class TargetInfoDTO extends AbstractDTO
 
     public static function makeByGroup(mixed $groupEntity): ?TargetInfoDTO
     {
-        if (! $groupEntity instanceof MagicGroupEntity) {
+        if (! $groupEntity instanceof DelightfulGroupEntity) {
             return null;
         }
         $targetInfoDTO = new TargetInfoDTO();
@@ -51,7 +51,7 @@ class TargetInfoDTO extends AbstractDTO
 
     public static function makeByDepartment(mixed $departmentEntity): ?TargetInfoDTO
     {
-        if (! $departmentEntity instanceof MagicDepartmentEntity) {
+        if (! $departmentEntity instanceof DelightfulDepartmentEntity) {
             return null;
         }
         $targetInfoDTO = new TargetInfoDTO();

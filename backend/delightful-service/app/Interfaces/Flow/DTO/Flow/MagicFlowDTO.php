@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\DTO\Flow;
 
-use App\Interfaces\Flow\Assembler\Node\MagicFlowNodeAssembler;
+use App\Interfaces\Flow\Assembler\Node\DelightfulFlowNodeAssembler;
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 use App\Interfaces\Flow\DTO\Node\NodeDTO;
 use Delightful\FlowExprEngine\Component;
 
-class MagicFlowDTO extends AbstractFlowDTO
+class DelightfulFlowDTO extends AbstractFlowDTO
 {
     /**
      * 流程名称（助理名称）.
@@ -125,7 +125,7 @@ class MagicFlowDTO extends AbstractFlowDTO
 
         $list = [];
         foreach ($nodes as $node) {
-            $nodeDTO = MagicFlowNodeAssembler::createNodeDTOByMixed($node);
+            $nodeDTO = DelightfulFlowNodeAssembler::createNodeDTOByMixed($node);
             if ($nodeDTO) {
                 $list[] = $nodeDTO;
             }

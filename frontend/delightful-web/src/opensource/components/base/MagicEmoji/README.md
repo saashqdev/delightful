@@ -1,6 +1,6 @@
-# MagicEmoji 魔法表情组件
+# DelightfulEmoji 魔法表情组件
 
-MagicEmoji 是一个简单的表情图片渲染组件，用于在界面中显示表情符号。该组件基于 HTML 的 img 标签实现，支持自定义表情代码、命名空间和后缀等属性。
+DelightfulEmoji 是一个简单的表情图片渲染组件，用于在界面中显示表情符号。该组件基于 HTML 的 img 标签实现，支持自定义表情代码、命名空间和后缀等属性。
 
 ## 属性
 
@@ -16,19 +16,19 @@ MagicEmoji 是一个简单的表情图片渲染组件，用于在界面中显示
 ## 基本用法
 
 ```tsx
-import MagicEmoji from '@/components/base/MagicEmoji';
+import DelightfulEmoji from '@/components/base/DelightfulEmoji';
 
 // 基本用法
-<MagicEmoji code="smile" />
+<DelightfulEmoji code="smile" />
 
 // 自定义命名空间和后缀
-<MagicEmoji code="heart" ns="custom/" suffix=".svg" />
+<DelightfulEmoji code="heart" ns="custom/" suffix=".svg" />
 
 // 设置表情大小
-<MagicEmoji code="thumbs_up" size={24} />
+<DelightfulEmoji code="thumbs_up" size={24} />
 
 // 添加其他 img 属性
-<MagicEmoji code="star" className="custom-emoji" onClick={handleClick} />
+<DelightfulEmoji code="star" className="custom-emoji" onClick={handleClick} />
 ```
 
 ## 特性
@@ -45,4 +45,4 @@ import MagicEmoji from '@/components/base/MagicEmoji';
 -   在用户界面中添加情感化元素
 -   在评论或反馈系统中使用表情表达情感
 
-MagicEmoji 组件设计简洁，易于集成到各种需要显示表情的场景中。通过提供统一的表情渲染接口，确保应用中表情的一致性和可维护性。
+DelightfulEmoji 组件设计简洁，易于集成到各种需要显示表情的场景中。通过提供统一的表情渲染接口，确保应用中表情的一致性和可维护性。

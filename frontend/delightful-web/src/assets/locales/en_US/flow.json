@@ -812,7 +812,7 @@
 		"desc": "Update the variable if it exists, add the variable if it doesn't"
 	},
 	"magicTable": {
-		"name": "Magic Table",
+		"name": "Delightful Table",
 		"desc": "Used to perform CRUD operations on the specified magic table"
 	},
 	"addRecord": {

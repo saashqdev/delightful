@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Permission\Service;
 
-use App\Application\Kernel\Contract\MagicPermissionInterface;
-use App\Application\Kernel\MagicPermission;
-use App\Domain\Contact\Repository\Facade\MagicUserRepositoryInterface;
+use App\Application\Kernel\Contract\DelightfulPermissionInterface;
+use App\Application\Kernel\DelightfulPermission;
+use App\Domain\Contact\Repository\Facade\DelightfulUserRepositoryInterface;
 use App\Domain\Permission\Entity\RoleEntity;
 use App\Domain\Permission\Entity\ValueObject\PermissionDataIsolation;
 use App\Domain\Permission\Repository\Facade\RoleRepositoryInterface;
@@ -27,8 +27,8 @@ readonly class RoleDomainService
 
     public function __construct(
         private RoleRepositoryInterface $roleRepository,
-        private MagicPermissionInterface $permission,
-        private MagicUserRepositoryInterface $userRepository
+        private DelightfulPermissionInterface $permission,
+        private DelightfulUserRepositoryInterface $userRepository
     ) {
     }
 
@@ -88,7 +88,7 @@ readonly class RoleDomainService
             }
 
             // 跳过全局权限常量，无需参与标签提取
-            if ($permissionKey === MagicPermission::ALL_PERMISSIONS) {
+            if ($permissionKey === DelightfulPermission::ALL_PERMISSIONS) {
                 continue;
             }
 
@@ -238,7 +238,7 @@ readonly class RoleDomainService
      */
     public function getPermissionTree(bool $isPlatformOrganization = false): array
     {
-        $permissionEnum = di(MagicPermissionInterface::class);
+        $permissionEnum = di(DelightfulPermissionInterface::class);
         return $permissionEnum->getPermissionTree($isPlatformOrganization);
     }
 
@@ -247,7 +247,7 @@ readonly class RoleDomainService
      *
      * 逻辑：
      * 1. 根据当前组织查找是否已有同名角色；
-     * 2. 若不存在，则创建新的角色并赋予 MagicPermission::ALL_PERMISSIONS；
+     * 2. 若不存在，则创建新的角色并赋予 DelightfulPermission::ALL_PERMISSIONS；
      * 3. 若存在，则确保其包含 ALL_PERMISSIONS；
      * 4. 将用户 ID 列表加入角色关联用户列表；
      * 5. 保存角色。
@@ -273,8 +273,8 @@ readonly class RoleDomainService
 
         // 2. 确保拥有全局权限 ALL_PERMISSIONS
         $permissions = $roleEntity->getPermissions();
-        if (! in_array(MagicPermission::ALL_PERMISSIONS, $permissions, true)) {
-            $permissions[] = MagicPermission::ALL_PERMISSIONS;
+        if (! in_array(DelightfulPermission::ALL_PERMISSIONS, $permissions, true)) {
+            $permissions[] = DelightfulPermission::ALL_PERMISSIONS;
             $roleEntity->setPermissions($permissions);
         }
 

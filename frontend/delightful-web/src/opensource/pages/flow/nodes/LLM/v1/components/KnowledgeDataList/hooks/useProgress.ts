@@ -1,5 +1,5 @@
 import type { Knowledge } from "@/types/knowledge"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useMemoizedFn } from "ahooks"
 import React, { useEffect, useMemo, useRef } from "react"
 import { get } from "lodash-es"

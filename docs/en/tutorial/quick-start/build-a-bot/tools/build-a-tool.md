@@ -25,7 +25,7 @@ Based on the above scenario objectives, our designed workflow will include the f
 3. Configure the corresponding tool on the [Large Model Node] of the corresponding AI assistant
 
 ## II. Create a Knowledge Assistant Toolkit
-1. Log in to the [Magic](https://www.letsmagic.cn/login) platform. (If it's a private deployment, log in to the corresponding private login platform)
+1. Log in to the [Delightful](https://www.letsmagic.cn/login) platform. (If it's a private deployment, log in to the corresponding private login platform)
 2. Click [AI Assistant] in the left menu bar, and click [Create Toolkit] on the right
 3. Upload the toolkit image, and fill in the assistant's name and a simple description
 4. Click [Knowledge Assistant Toolkit], and click [Add Tool] on the right

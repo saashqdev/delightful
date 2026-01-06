@@ -10,7 +10,7 @@ namespace App\Domain\Chat\DTO\AISearch\Request;
 use App\Domain\Chat\DTO\Message\ChatMessage\RichTextMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
 use App\Domain\Chat\DTO\Message\MessageInterface;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Chat\Entity\ValueObject\SearchEngineType;
 use App\Infrastructure\Util\Tiptap\TiptapUtil;
@@ -19,7 +19,7 @@ use Hyperf\Odin\Memory\MessageHistory;
 use Hyperf\Odin\Message\AssistantMessage;
 use Hyperf\Odin\Message\UserMessage;
 
-class MagicChatAggregateSearchReqDTO
+class DelightfulChatAggregateSearchReqDTO
 {
     public string $userMessage;
 
@@ -45,7 +45,7 @@ class MagicChatAggregateSearchReqDTO
 
     protected string $organizationCode = '';
 
-    private MagicSeqEntity $magicSeqEntity;
+    private DelightfulSeqEntity $magicSeqEntity;
 
     public function getOrganizationCode(): string
     {
@@ -126,7 +126,7 @@ class MagicChatAggregateSearchReqDTO
         return $this->getDetail ?? false;
     }
 
-    public function setGetDetail(bool $getDetail): MagicChatAggregateSearchReqDTO
+    public function setGetDetail(bool $getDetail): DelightfulChatAggregateSearchReqDTO
     {
         $this->getDetail = $getDetail;
         return $this;
@@ -137,18 +137,18 @@ class MagicChatAggregateSearchReqDTO
         return $this->appMessageId ?? '';
     }
 
-    public function setAppMessageId(string $appMessageId): MagicChatAggregateSearchReqDTO
+    public function setAppMessageId(string $appMessageId): DelightfulChatAggregateSearchReqDTO
     {
         $this->appMessageId = $appMessageId;
         return $this;
     }
 
-    public function getMagicChatMessageHistory(): array
+    public function getDelightfulChatMessageHistory(): array
     {
         return $this->magicChatMessageHistory;
     }
 
-    public function setMagicChatMessageHistory(array $magicChatMessageHistory): MagicChatAggregateSearchReqDTO
+    public function setDelightfulChatMessageHistory(array $magicChatMessageHistory): DelightfulChatAggregateSearchReqDTO
     {
         $this->magicChatMessageHistory = $magicChatMessageHistory;
         return $this;
@@ -159,7 +159,7 @@ class MagicChatAggregateSearchReqDTO
         return $this->language;
     }
 
-    public function setLanguage(string $language): MagicChatAggregateSearchReqDTO
+    public function setLanguage(string $language): DelightfulChatAggregateSearchReqDTO
     {
         $this->language = $language;
         return $this;
@@ -170,7 +170,7 @@ class MagicChatAggregateSearchReqDTO
         return $this->requestId;
     }
 
-    public function setRequestId(?string $requestId): MagicChatAggregateSearchReqDTO
+    public function setRequestId(?string $requestId): DelightfulChatAggregateSearchReqDTO
     {
         $this->requestId = $requestId;
         return $this;
@@ -181,7 +181,7 @@ class MagicChatAggregateSearchReqDTO
         return $this->searchDeepLevel;
     }
 
-    public function setSearchDeepLevel(SearchDeepLevel $searchDeepLevel): MagicChatAggregateSearchReqDTO
+    public function setSearchDeepLevel(SearchDeepLevel $searchDeepLevel): DelightfulChatAggregateSearchReqDTO
     {
         $this->searchDeepLevel = $searchDeepLevel;
         return $this;
@@ -210,12 +210,12 @@ class MagicChatAggregateSearchReqDTO
         return $history;
     }
 
-    public function getMagicSeqEntity(): MagicSeqEntity
+    public function getDelightfulSeqEntity(): DelightfulSeqEntity
     {
-        return $this->magicSeqEntity ?? new MagicSeqEntity();
+        return $this->magicSeqEntity ?? new DelightfulSeqEntity();
     }
 
-    public function setMagicSeqEntity(MagicSeqEntity $magicSeqEntity): void
+    public function setDelightfulSeqEntity(DelightfulSeqEntity $magicSeqEntity): void
     {
         $this->magicSeqEntity = $magicSeqEntity;
     }

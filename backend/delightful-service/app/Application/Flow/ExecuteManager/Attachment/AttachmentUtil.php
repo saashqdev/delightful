@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Application\Flow\ExecuteManager\Attachment;
 
 use App\Domain\Chat\DTO\Message\ChatMessage\AbstractAttachmentMessage;
-use App\Domain\Chat\Entity\MagicMessageEntity;
-use App\Domain\Chat\Service\MagicChatFileDomainService;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
+use App\Domain\Chat\Service\DelightfulChatFileDomainService;
 use App\Domain\File\Service\FileDomainService;
 
 class AttachmentUtil
@@ -17,12 +17,12 @@ class AttachmentUtil
     /**
      * @return array<Attachment>
      */
-    public static function getByMagicMessageEntity(MagicMessageEntity $messageEntity): array
+    public static function getByDelightfulMessageEntity(DelightfulMessageEntity $messageEntity): array
     {
         $attachments = [];
         $messageContent = $messageEntity->getContent();
         if ($messageContent instanceof AbstractAttachmentMessage) {
-            $magicChatFileDomainService = di(MagicChatFileDomainService::class);
+            $magicChatFileDomainService = di(DelightfulChatFileDomainService::class);
             $fileDomainService = di(FileDomainService::class);
 
             $chatFiles = $magicChatFileDomainService->getFileEntitiesByFileIds($messageContent->getFileIds());

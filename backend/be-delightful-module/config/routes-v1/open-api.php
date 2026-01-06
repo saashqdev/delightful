@@ -5,23 +5,23 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 use App\Infrastructure\Util\Middleware\RequestContextMiddleware;
-use Delightful\SuperMagic\Infrastructure\Utils\Middleware\SandboxTokenAuthMiddleware;
-use Delightful\SuperMagic\Interfaces\Agent\Facade\Sandbox\SuperMagicAgentSandboxApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\InternalApi\FileApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\OpenApi\OpenProjectApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\OpenApi\OpenTaskApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\SandboxApi;
+use Delightful\SuperDelightful\Infrastructure\Utils\Middleware\SandboxTokenAuthMiddleware;
+use Delightful\SuperDelightful\Interfaces\Agent\Facade\Sandbox\SuperDelightfulAgentSandboxApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\InternalApi\FileApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\OpenApi\OpenProjectApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\OpenApi\OpenTaskApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\SandboxApi;
 use Hyperf\HttpServer\Router\Router;
 
 // Sandbox open interface - naming is non-standard, needs to be deprecated
 Router::addGroup('/api/v1/sandbox-openapi', static function () {
     Router::addGroup('/agents', static function () {
-        Router::get('/{code}', [SuperMagicAgentSandboxApi::class, 'show']);
-        Router::post('/tool-execute', [SuperMagicAgentSandboxApi::class, 'executeTool']);
+        Router::get('/{code}', [SuperDelightfulAgentSandboxApi::class, 'show']);
+        Router::post('/tool-execute', [SuperDelightfulAgentSandboxApi::class, 'executeTool']);
     });
 });
 
-// Sandbox internal API route group - specifically for sandbox calling Super Magic, naming is non-standard, needs to be deprecated
+// Sandbox internal API route group - specifically for sandbox calling Super Delightful, naming is non-standard, needs to be deprecated
 Router::addGroup(
     '/open/internal-api',
     static function () {
@@ -37,7 +37,7 @@ Router::addGroup(
     ['middleware' => [SandboxTokenAuthMiddleware::class]]
 );
 
-// Sandbox internal API route group - specifically for sandbox calling Super Magic
+// Sandbox internal API route group - specifically for sandbox calling Super Delightful
 Router::addGroup(
     '/api/v1/open-api/sandbox',
     static function () {
@@ -53,8 +53,8 @@ Router::addGroup(
 // Sandbox open interface
 Router::addGroup('/api/v1/open-api/sandbox', static function () {
     Router::addGroup('/agents', static function () {
-        Router::get('/{code}', [SuperMagicAgentSandboxApi::class, 'show']);
-        Router::post('/tool-execute', [SuperMagicAgentSandboxApi::class, 'executeTool']);
+        Router::get('/{code}', [SuperDelightfulAgentSandboxApi::class, 'show']);
+        Router::post('/tool-execute', [SuperDelightfulAgentSandboxApi::class, 'executeTool']);
     });
 });
 

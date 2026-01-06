@@ -1,5 +1,5 @@
-import MagicSearch from "@/opensource/components/base/MagicSearch"
-import MagicInfiniteScrollList from "@/opensource/components/MagicInfiniteScrollList"
+import DelightfulSearch from "@/opensource/components/base/DelightfulSearch"
+import DelightfulInfiniteScrollList from "@/opensource/components/DelightfulInfiniteScrollList"
 import type { StructureUserItem } from "@/types/organization"
 import { StructureItemType } from "@/types/organization"
 import type { PaginationResponse } from "@/types/request"
@@ -7,8 +7,8 @@ import { useControllableValue, useDebounce, useMemoizedFn } from "ahooks"
 import { useCallback, memo, useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import useSWRMutation from "swr/mutation"
-import type { MagicListItemData } from "@/opensource/components/MagicList/types"
-import MagicScrollBar from "@/opensource/components/base/MagicScrollBar"
+import type { DelightfulListItemData } from "@/opensource/components/DelightfulList/types"
+import DelightfulScrollBar from "@/opensource/components/base/DelightfulScrollBar"
 import { Flex, Spin } from "antd"
 import type { CSSProperties } from "react"
 import { ContactApi } from "@/apis"
@@ -30,7 +30,7 @@ export interface MemberSearchProps {
 	filterResult?: (result: any) => any
 }
 
-type Data = UserSelectItem & MagicListItemData
+type Data = UserSelectItem & DelightfulListItemData
 
 // 定义搜索结果列表组件的Props
 interface SearchResultListProps {
@@ -94,7 +94,7 @@ const SearchResultList = memo(function SearchResultList({
 	// 显示加载状态或搜索结果
 	return (
 		<div style={containerStyle}>
-			<MagicScrollBar
+			<DelightfulScrollBar
 				className={listClassName}
 				style={{
 					height: "100%",
@@ -113,12 +113,12 @@ const SearchResultList = memo(function SearchResultList({
 						<Spin />
 					</Flex>
 				) : (
-					<MagicInfiniteScrollList
+					<DelightfulInfiniteScrollList
 						data={data}
 						trigger={trigger}
 						itemsTransform={transformUserToListItem}
 						onItemClick={onItemClick}
-						// @ts-ignore - MagicInfiniteScrollList 组件期望的泛型类型与我们提供的不匹配
+						// @ts-ignore - DelightfulInfiniteScrollList 组件期望的泛型类型与我们提供的不匹配
 						// 但在运行时会正常工作，因为所需属性都存在
 						checkboxOptions={
 							checkboxOptions
@@ -136,7 +136,7 @@ const SearchResultList = memo(function SearchResultList({
 						containerHeight={containerHeight}
 					/>
 				)}
-			</MagicScrollBar>
+			</DelightfulScrollBar>
 		</div>
 	)
 })
@@ -286,7 +286,7 @@ const MemberSearch = (props: MemberSearchProps) => {
 
 	return (
 		<Flex vertical gap={10} className={className} style={style}>
-			<MagicSearch
+			<DelightfulSearch
 				value={searchValue}
 				onChange={handleSearchChange}
 				onFocus={handleFocus}

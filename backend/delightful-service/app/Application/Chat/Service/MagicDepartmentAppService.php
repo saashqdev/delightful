@@ -7,38 +7,38 @@ declare(strict_types=1);
 
 namespace App\Application\Chat\Service;
 
-use App\Domain\Agent\Service\MagicAgentDomainService;
+use App\Domain\Agent\Service\DelightfulAgentDomainService;
 use App\Domain\Chat\DTO\PageResponseDTO\DepartmentsPageResponseDTO;
 use App\Domain\Chat\Entity\ValueObject\PlatformRootDepartmentId;
 use App\Domain\Contact\DTO\DepartmentQueryDTO;
-use App\Domain\Contact\Entity\MagicDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentEntity;
 use App\Domain\Contact\Entity\ValueObject\DepartmentOption;
 use App\Domain\Contact\Entity\ValueObject\DepartmentSumType;
-use App\Domain\Contact\Service\MagicAccountDomainService;
-use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\MagicThirdPlatformDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
-use App\Domain\OrganizationEnvironment\Service\MagicOrganizationEnvDomainService;
+use App\Domain\Contact\Service\DelightfulAccountDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentDomainService;
+use App\Domain\Contact\Service\DelightfulThirdPlatformDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
+use App\Domain\OrganizationEnvironment\Service\DelightfulOrganizationEnvDomainService;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Chat\Assembler\PageListAssembler;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
-class MagicDepartmentAppService extends AbstractAppService
+class DelightfulDepartmentAppService extends AbstractAppService
 {
     public LoggerInterface $logger;
 
     public function __construct(
-        protected MagicDepartmentDomainService $magicDepartmentDomainService,
-        protected MagicOrganizationEnvDomainService $organizationEnvDomainService,
-        protected MagicAccountDomainService $magicAccountDomainService,
-        protected MagicUserDomainService $magicUserDomainService,
+        protected DelightfulDepartmentDomainService $magicDepartmentDomainService,
+        protected DelightfulOrganizationEnvDomainService $organizationEnvDomainService,
+        protected DelightfulAccountDomainService $magicAccountDomainService,
+        protected DelightfulUserDomainService $magicUserDomainService,
         protected LockerInterface $locker,
         protected LoggerFactory $loggerFactory,
-        protected MagicAgentDomainService $magicAgentDomainService,
-        protected MagicThirdPlatformDomainService $thirdPlatformDomainService,
+        protected DelightfulAgentDomainService $magicAgentDomainService,
+        protected DelightfulThirdPlatformDomainService $thirdPlatformDomainService,
     ) {
         try {
             $this->logger = $loggerFactory->get(get_class($this));
@@ -47,7 +47,7 @@ class MagicDepartmentAppService extends AbstractAppService
     }
 
     // 查询部门详情,需要返回是否有子部门
-    public function getDepartmentById(DepartmentQueryDTO $queryDTO, MagicUserAuthorization $userAuthorization): ?MagicDepartmentEntity
+    public function getDepartmentById(DepartmentQueryDTO $queryDTO, DelightfulUserAuthorization $userAuthorization): ?DelightfulDepartmentEntity
     {
         // 对于前端来说, -1 表示根部门信息.
         $dataIsolation = $this->createDataIsolation($userAuthorization);
@@ -63,9 +63,9 @@ class MagicDepartmentAppService extends AbstractAppService
 
     /**
      * 查询部门详情.
-     * @return array<MagicDepartmentEntity>
+     * @return array<DelightfulDepartmentEntity>
      */
-    public function getDepartmentByIds(DepartmentQueryDTO $queryDTO, MagicUserAuthorization $userAuthorization): array
+    public function getDepartmentByIds(DepartmentQueryDTO $queryDTO, DelightfulUserAuthorization $userAuthorization): array
     {
         // 对于前端来说, -1 表示根部门信息.
         $dataIsolation = $this->createDataIsolation($userAuthorization);
@@ -73,7 +73,7 @@ class MagicDepartmentAppService extends AbstractAppService
         return $this->filterDepartmentsHidden($departmentEntities);
     }
 
-    public function getSubDepartments(DepartmentQueryDTO $queryDTO, MagicUserAuthorization $userAuthorization): DepartmentsPageResponseDTO
+    public function getSubDepartments(DepartmentQueryDTO $queryDTO, DelightfulUserAuthorization $userAuthorization): DepartmentsPageResponseDTO
     {
         $offset = 0;
         $pageSize = 50;
@@ -101,7 +101,7 @@ class MagicDepartmentAppService extends AbstractAppService
         return $departmentsPageResponseDTO;
     }
 
-    public function searchDepartment(DepartmentQueryDTO $queryDTO, MagicUserAuthorization $userAuthorization): array
+    public function searchDepartment(DepartmentQueryDTO $queryDTO, DelightfulUserAuthorization $userAuthorization): array
     {
         $pageToken = $queryDTO->getPageToken();
         $departmentName = $queryDTO->getQuery();
@@ -123,7 +123,7 @@ class MagicDepartmentAppService extends AbstractAppService
 
     /**
      * 通讯录和搜索相关接口，过滤隐藏部门和隐藏用户。
-     * @param MagicDepartmentEntity[] $magicDepartments
+     * @param DelightfulDepartmentEntity[] $magicDepartments
      */
     protected function filterDepartmentsHidden(array $magicDepartments): array
     {
@@ -138,7 +138,7 @@ class MagicDepartmentAppService extends AbstractAppService
     /**
      * 设置部门以及所有子部门的人员数量.
      */
-    protected function setChildrenEmployeeSum(DepartmentQueryDTO $queryDTO, MagicDepartmentEntity $departmentEntity): void
+    protected function setChildrenEmployeeSum(DepartmentQueryDTO $queryDTO, DelightfulDepartmentEntity $departmentEntity): void
     {
         // 部门以及所有子部门的人员数量
         if ($queryDTO->getSumType() === DepartmentSumType::All) {

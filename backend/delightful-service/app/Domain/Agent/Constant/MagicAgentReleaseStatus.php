@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Constant;
 
-enum MagicAgentReleaseStatus: int
+enum DelightfulAgentReleaseStatus: int
 {
     case PERSONAL_USE = 0; // 个人使用
     case PUBLISHED_TO_ENTERPRISE = 1; // 发布到企业

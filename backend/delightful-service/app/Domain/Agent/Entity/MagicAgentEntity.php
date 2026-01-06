@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Entity;
 
-use App\Domain\Agent\Constant\MagicAgentVersionStatus;
+use App\Domain\Agent\Constant\DelightfulAgentVersionStatus;
 use Hyperf\Codec\Json;
 
-class MagicAgentEntity extends AbstractEntity
+class DelightfulAgentEntity extends AbstractEntity
 {
     /**
      * 主键.
@@ -96,7 +96,7 @@ class MagicAgentEntity extends AbstractEntity
 
     public function isAvailable(): bool
     {
-        return $this->status === MagicAgentVersionStatus::ENTERPRISE_ENABLED->value;
+        return $this->status === DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value;
     }
 
     public function getUserOperation(): int

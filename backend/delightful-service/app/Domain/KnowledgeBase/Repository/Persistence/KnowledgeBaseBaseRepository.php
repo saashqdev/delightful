@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\KnowledgeBase\Repository\Persistence;
 
-use App\Domain\Flow\Factory\MagicFlowKnowledgeFactory;
+use App\Domain\Flow\Factory\DelightfulFlowKnowledgeFactory;
 use App\Domain\KnowledgeBase\Entity\KnowledgeBaseEntity;
 use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeBaseDataIsolation;
 use App\Domain\KnowledgeBase\Entity\ValueObject\Query\KnowledgeBaseQuery;
@@ -32,7 +32,7 @@ class KnowledgeBaseBaseRepository extends KnowledgeBaseAbstractRepository implem
         if (! $model) {
             return null;
         }
-        return MagicFlowKnowledgeFactory::modelToEntity($model);
+        return DelightfulFlowKnowledgeFactory::modelToEntity($model);
     }
 
     public function getByCodes(KnowledgeBaseDataIsolation $dataIsolation, array $codes): array
@@ -45,7 +45,7 @@ class KnowledgeBaseBaseRepository extends KnowledgeBaseAbstractRepository implem
 
         $result = [];
         foreach ($models as $model) {
-            $result[] = MagicFlowKnowledgeFactory::modelToEntity($model);
+            $result[] = DelightfulFlowKnowledgeFactory::modelToEntity($model);
         }
         return $result;
     }
@@ -60,7 +60,7 @@ class KnowledgeBaseBaseRepository extends KnowledgeBaseAbstractRepository implem
             $model = $builder->where('id', $magicFlowKnowledgeEntity->getId())->first();
         }
 
-        $model->fill(MagicFlowKnowledgeFactory::entityToAttributes($magicFlowKnowledgeEntity));
+        $model->fill(DelightfulFlowKnowledgeFactory::entityToAttributes($magicFlowKnowledgeEntity));
         $model->save();
 
         $magicFlowKnowledgeEntity->setId($model->id);
@@ -105,7 +105,7 @@ class KnowledgeBaseBaseRepository extends KnowledgeBaseAbstractRepository implem
         if (! empty($data['list'])) {
             $list = [];
             foreach ($data['list'] as $model) {
-                $list[] = MagicFlowKnowledgeFactory::modelToEntity($model);
+                $list[] = DelightfulFlowKnowledgeFactory::modelToEntity($model);
             }
             $data['list'] = $list;
         }

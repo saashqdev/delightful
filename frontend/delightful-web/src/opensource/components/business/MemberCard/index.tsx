@@ -1,13 +1,13 @@
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { getUserName } from "@/utils/modules/chat"
 import { IconBuildingSkyscraper, IconMessage } from "@tabler/icons-react"
 import { Descriptions, Flex } from "antd"
 import { useTranslation } from "react-i18next"
 import { UserType } from "@/types/user"
 import { useMemo, useRef } from "react"
-import MagicSegmented from "@/opensource/components/base/MagicSegmented"
+import DelightfulSegmented from "@/opensource/components/base/DelightfulSegmented"
 import { useMemoizedFn } from "ahooks"
 import { useChatWithMember } from "@/opensource/hooks/chat/useChatWithMember"
 import MemberCardStore from "@/opensource/stores/display/MemberCardStore"
@@ -125,22 +125,22 @@ const MemberCard = observer(() => {
 			{/* 头部卡片 */}
 			<Flex vertical className={styles.header} gap={10}>
 				<Flex className={styles.headerTop} gap={14} align="center">
-					<MagicAvatar className={styles.avatar} src={userInfo?.avatar_url} size={80}>
+					<DelightfulAvatar className={styles.avatar} src={userInfo?.avatar_url} size={80}>
 						{getUserName(userInfo)}
-					</MagicAvatar>
+					</DelightfulAvatar>
 					<span className={styles.username}>{getUserName(userInfo)}</span>
 				</Flex>
 				<Flex gap={2} align="center">
-					<MagicIcon component={IconBuildingSkyscraper} />
+					<DelightfulIcon component={IconBuildingSkyscraper} />
 					<span className={styles.organization}>{organization?.organization_name}</span>
 				</Flex>
 				{/* {isNormalPerson && (
 					<Flex gap={10}>
-						<MagicButton
+						<DelightfulButton
 							block
 							className={styles.scheduleButton}
 							icon={
-								<MagicIcon
+								<DelightfulIcon
 									color="currentColor"
 									component={IconCalendarTime}
 									size={18}
@@ -148,78 +148,78 @@ const MemberCard = observer(() => {
 							}
 						>
 							{t("memberCard.viewSchedule")}
-						</MagicButton>
-						<MagicButton
+						</DelightfulButton>
+						<DelightfulButton
 							block
 							className={styles.tasksAssociatedWithMeButton}
 							icon={
-								<MagicIcon color="currentColor" component={IconSubtask} size={18} />
+								<DelightfulIcon color="currentColor" component={IconSubtask} size={18} />
 							}
 						>
 							{t("memberCard.tasksAssociatedWithMe")}
-						</MagicButton>
+						</DelightfulButton>
 					</Flex>
 				)} */}
 			</Flex>
 			{isNormalPerson && (
-				<MagicSegmented block className={styles.segmented} options={options} />
+				<DelightfulSegmented block className={styles.segmented} options={options} />
 			)}
 			{/* 详情信息 */}
 			<Descriptions colon={false} column={1} items={items} className={styles.descriptions} />
 			{/* 底部按钮 */}
 			<Flex vertical gap={10}>
-				<MagicButton
+				<DelightfulButton
 					hidden={!isNormalPerson}
 					block
 					size="large"
 					type="default"
 					className={styles.button}
-					icon={<MagicIcon color="currentColor" component={IconMessage} size={20} />}
+					icon={<DelightfulIcon color="currentColor" component={IconMessage} size={20} />}
 					onClick={handleChatWith}
 				>
 					{t("memberCard.sendMessage")}
-				</MagicButton>
-				{/* <MagicButton
+				</DelightfulButton>
+				{/* <DelightfulButton
 					hidden={!isNormalPerson}
 					block
 					size="large"
 					type="default"
 					className={styles.button}
-					icon={<MagicIcon color="currentColor" component={IconPhoneCall} size={20} />}
+					icon={<DelightfulIcon color="currentColor" component={IconPhoneCall} size={20} />}
 				>
 					{t("memberCard.call")}
-				</MagicButton> */}
-				<MagicButton
+				</DelightfulButton> */}
+				<DelightfulButton
 					hidden={!isAi}
 					block
 					size="large"
 					type="default"
 					className={styles.button}
-					icon={<MagicIcon color="currentColor" component={IconMessage} size={20} />}
+					icon={<DelightfulIcon color="currentColor" component={IconMessage} size={20} />}
 					onClick={handleChatWith}
 				>
 					{t("memberCard.sendMessage")}
-				</MagicButton>
-				{/* <MagicButton
+				</DelightfulButton>
+				{/* <DelightfulButton
 					hidden={!isNormalPerson}
 					block
 					size="large"
 					type="default"
 					className={cx(styles.button, styles.shareBusinessCardButton)}
-					icon={<MagicIcon color="currentColor" component={IconShare} size={20} />}
+					icon={<DelightfulIcon color="currentColor" component={IconShare} size={20} />}
 				>
 					{t("memberCard.shareBusinessCard")}
-				</MagicButton>
-				<MagicButton
+				</DelightfulButton>
+				<DelightfulButton
 					hidden={!isAi}
 					block
 					size="large"
 					type="default"
 					className={cx(styles.button, styles.shareBusinessCardButton)}
-					icon={<MagicIcon color="currentColor" component={IconShare} size={20} />}
+					icon={<DelightfulIcon color="currentColor" component={IconShare} size={20} />}
 				>
 					{t("memberCard.shareBusinessCard")}
-				</MagicButton> */}
+				</DelightfulButton> */}
 			</Flex>
 		</Flex>
 	)

@@ -15,7 +15,7 @@ export const enum UserStatus {
 
 export namespace User {
 	/** magic 生态下组织（湾镇组织信息需要与 teamshare 中组织信息作映射） */
-	export interface MagicOrganization {
+	export interface DelightfulOrganization {
 		/** magic 用户UnionID（整个magic生态下唯一） */
 		magic_id: string
 		/** magic 组织编码 */
@@ -72,7 +72,7 @@ export namespace User {
 		avatar: string
 		/** 用户 Token */
 		access_token: string
-		organizations: Array<MagicOrganization>
+		organizations: Array<DelightfulOrganization>
 		teamshareOrganizations: Array<UserOrganization>
 	}
 

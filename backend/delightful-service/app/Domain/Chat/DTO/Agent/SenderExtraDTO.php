@@ -13,12 +13,12 @@ class SenderExtraDTO extends AbstractDTO
 {
     protected ?int $magicEnvId = null;
 
-    public function getMagicEnvId(): ?int
+    public function getDelightfulEnvId(): ?int
     {
         return $this->magicEnvId;
     }
 
-    public function setMagicEnvId(?int $magicEnvId): self
+    public function setDelightfulEnvId(?int $magicEnvId): self
     {
         $this->magicEnvId = $magicEnvId;
         return $this;

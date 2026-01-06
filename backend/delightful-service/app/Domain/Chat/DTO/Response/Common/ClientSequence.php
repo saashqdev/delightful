@@ -48,7 +48,7 @@ class ClientSequence extends AbstractEntity
     public function toArray(bool $filterNull = false): array
     {
         $data = [
-            'magic_id' => $this->getMagicId(),
+            'magic_id' => $this->getDelightfulId(),
             'seq_id' => $this->getSeqId(),
             'message_id' => $this->getMessageId(),
             'refer_message_id' => $this->getReferMessageId(),
@@ -65,12 +65,12 @@ class ClientSequence extends AbstractEntity
         return $data;
     }
 
-    public function getMagicId(): string
+    public function getDelightfulId(): string
     {
         return $this->magicId ?? '';
     }
 
-    public function setMagicId(?string $magicId): void
+    public function setDelightfulId(?string $magicId): void
     {
         $magicId !== null && $this->magicId = $magicId;
     }

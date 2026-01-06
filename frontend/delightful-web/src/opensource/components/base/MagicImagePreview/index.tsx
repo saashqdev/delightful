@@ -14,9 +14,9 @@ import {
 } from "@tabler/icons-react"
 import { useMemoizedFn, useUpdateEffect } from "ahooks"
 import { useTranslation } from "react-i18next"
-import MagicSegmented from "@/opensource/components/base/MagicSegmented"
-import MagicButton from "../MagicButton"
-import MagicIcon from "../MagicIcon"
+import DelightfulSegmented from "@/opensource/components/base/DelightfulSegmented"
+import DelightfulButton from "../DelightfulButton"
+import DelightfulIcon from "../DelightfulIcon"
 import useScale from "./hooks/useScale"
 import useRotate from "./hooks/useRotate"
 import useOffset from "./hooks/useOffset"
@@ -43,7 +43,7 @@ interface Props extends HTMLAttributes<HTMLImageElement> {
 /**
  * 图片预览组件
  */
-const MagicImagePreview = memo((props: Props) => {
+const DelightfulImagePreview = memo((props: Props) => {
 	const {
 		hasCompare,
 		viewType,
@@ -122,30 +122,30 @@ const MagicImagePreview = memo((props: Props) => {
 			</div>
 			<Flex className={styles.toolContainer} align="center" gap={12}>
 				{onPrev && (
-					<MagicButton
+					<DelightfulButton
 						type="link"
 						className={styles.toolButton}
 						onClick={onPrev}
 						disabled={prevDisabled}
 					>
-						<MagicIcon color="currentColor" component={IconChevronLeft} size={24} />
-					</MagicButton>
+						<DelightfulIcon color="currentColor" component={IconChevronLeft} size={24} />
+					</DelightfulButton>
 				)}
 				{onNext && (
-					<MagicButton
+					<DelightfulButton
 						type="link"
 						className={styles.toolButton}
 						onClick={onNext}
 						disabled={nextDisabled}
 					>
-						<MagicIcon color="currentColor" component={IconChevronRight} size={24} />
-					</MagicButton>
+						<DelightfulIcon color="currentColor" component={IconChevronRight} size={24} />
+					</DelightfulButton>
 				)}
 				{(onPrev || onNext) && <div className={styles.divider} />}
 				<Flex gap={8} align="center">
-					<MagicButton type="link" className={styles.toolButton} onClick={subTenPercent}>
-						<MagicIcon color="currentColor" component={IconZoomOut} size={24} />
-					</MagicButton>
+					<DelightfulButton type="link" className={styles.toolButton} onClick={subTenPercent}>
+						<DelightfulIcon color="currentColor" component={IconZoomOut} size={24} />
+					</DelightfulButton>
 					<Slider
 						className={styles.slider}
 						min={0.1}
@@ -159,22 +159,22 @@ const MagicImagePreview = memo((props: Props) => {
 						onChange={setScale}
 					/>
 					<span className={styles.sliderText}>{Math.round(scale * 100)}%</span>
-					<MagicButton type="link" className={styles.toolButton} onClick={addTenPercent}>
-						<MagicIcon color="currentColor" component={IconZoomIn} size={24} />
-					</MagicButton>
+					<DelightfulButton type="link" className={styles.toolButton} onClick={addTenPercent}>
+						<DelightfulIcon color="currentColor" component={IconZoomIn} size={24} />
+					</DelightfulButton>
 				</Flex>
 				{/* 1:1 */}
-				<MagicButton type="link" className={styles.toolButton} onClick={resetImage}>
-					<MagicIcon color="currentColor" component={IconRelationOneToOne} size={24} />
-				</MagicButton>
+				<DelightfulButton type="link" className={styles.toolButton} onClick={resetImage}>
+					<DelightfulIcon color="currentColor" component={IconRelationOneToOne} size={24} />
+				</DelightfulButton>
 				{/* 旋转 */}
-				<MagicButton type="link" className={styles.toolButton} onClick={rotateImage}>
-					<MagicIcon color="currentColor" component={IconRotateRectangle} size={24} />
-				</MagicButton>
+				<DelightfulButton type="link" className={styles.toolButton} onClick={rotateImage}>
+					<DelightfulIcon color="currentColor" component={IconRotateRectangle} size={24} />
+				</DelightfulButton>
 				{hasCompare && (
 					<>
 						<div className={styles.divider} />
-						<MagicSegmented
+						<DelightfulSegmented
 							options={segmentedOptions}
 							className={styles.segmented}
 							value={viewType}
@@ -184,7 +184,7 @@ const MagicImagePreview = memo((props: Props) => {
 				)}
 			</Flex>
 			{hasCompare && viewType === CompareViewType.LONG_PRESS && (
-				<MagicButton
+				<DelightfulButton
 					type="default"
 					className={styles.longPressButton}
 					onPointerDown={onLongPressStart}
@@ -193,10 +193,10 @@ const MagicImagePreview = memo((props: Props) => {
 				>
 					<IconSquareToggle color="currentColor" size={18} />
 					{t("chat.imagePreview.longPressCompare")}
-				</MagicButton>
+				</DelightfulButton>
 			)}
 		</div>
 	)
 })
 
-export default MagicImagePreview
+export default DelightfulImagePreview

@@ -5,7 +5,7 @@ import { useMemoizedFn } from "ahooks"
 import { Form } from "antd"
 import _ from "lodash"
 import React from "react"
-import MagicExpression from "../../../common/Expression"
+import DelightfulExpression from "../../../common/Expression"
 import Output from "../../../common/Output"
 import useCurrentNodeUpdate from "../../../common/hooks/useCurrentNodeUpdate"
 import usePrevious from "../../../common/hooks/usePrevious"
@@ -70,7 +70,7 @@ export default function LLMV0() {
 						headerClassWrapper={styles.promptWrapper}
 						height="auto"
 					>
-						<MagicExpression
+						<DelightfulExpression
 							label="System"
 							name="system_prompt"
 							placeholder="大模型固定的引导词，通过调整内容引导大模型聊天方向，提示词内容会被固定在上下文的开头，支持使用“@”添加变量"
@@ -78,7 +78,7 @@ export default function LLMV0() {
 							showExpand
 						/>
 
-						<MagicExpression
+						<DelightfulExpression
 							label="User"
 							name="user_prompt"
 							placeholder="大模型固定的引导词，通过调整内容引导大模型聊天方向，提示词内容会被固定在上下文的开头，支持使用“@”添加变量"

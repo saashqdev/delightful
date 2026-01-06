@@ -18,7 +18,7 @@ use Hyperf\Codec\Json;
 /**
  * 聊天和控制消息的基类.
  */
-abstract class MagicMessageStruct extends AbstractEntity implements MessageInterface
+abstract class DelightfulMessageStruct extends AbstractEntity implements MessageInterface
 {
     /**
      * @var null|ChatInstruction[]

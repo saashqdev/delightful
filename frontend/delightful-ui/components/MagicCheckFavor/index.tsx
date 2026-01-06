@@ -1,7 +1,7 @@
 import { HTMLAttributes, useEffect, useMemo, useState } from "react"
 import { useStyles } from "./style"
 
-export type MagicCheckFavorProps = {
+export type DelightfulCheckFavorProps = {
 	onChange?: (checked: boolean) => void
 	checked?: boolean
 } & HTMLAttributes<HTMLDivElement>
@@ -10,7 +10,7 @@ const genRandomId = () => {
 	return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
 
-function MagicCheckFavor({ checked, onChange, className, ...props }: MagicCheckFavorProps) {
+function DelightfulCheckFavor({ checked, onChange, className, ...props }: DelightfulCheckFavorProps) {
 	const { styles, cx } = useStyles()
 
 	const checkId = useMemo(() => genRandomId(), [])
@@ -38,6 +38,6 @@ function MagicCheckFavor({ checked, onChange, className, ...props }: MagicCheckF
 	)
 }
 
-MagicCheckFavor.displayName = "MagicCheckFavor"
+DelightfulCheckFavor.displayName = "DelightfulCheckFavor"
 
-export default MagicCheckFavor
+export default DelightfulCheckFavor

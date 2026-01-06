@@ -2,14 +2,14 @@ import { useTranslation } from "react-i18next"
 import { Form, Input, message, Flex } from "antd"
 import { useMemoizedFn } from "ahooks"
 import { useForm } from "antd/es/form/Form"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import type { Bot } from "@/types/bot"
 import { useEffect, useState, useMemo } from "react"
 import { createStyles } from "antd-style"
 import { useUpload } from "@/opensource/hooks/useUploadFiles"
 import { useNavigate } from "@/opensource/hooks/useNavigate"
 import defaultAgentAvatar from "@/assets/logos/agent-avatar.jpg"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { RoutePath } from "@/const/routes"
 import { replaceRouteParams } from "@/utils/route"
 import { useBotStore } from "@/opensource/stores/bot"
@@ -154,7 +154,7 @@ function AddOrUpdateAgent({ agent, open, close, submit }: AddOrUpdateAgentProps)
 	}, [agent, form, open])
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			className={styles.modal}
 			title={title}
 			open={open}
@@ -174,7 +174,7 @@ function AddOrUpdateAgent({ agent, open, close, submit }: AddOrUpdateAgentProps)
 				<Form.Item name="robot_avatar" className={styles.formItem}>
 					<Flex vertical align="center" gap={10} className={styles.uploadAvatarBox}>
 						{imageUrl ? (
-							<MagicAvatar size={100} src={imageUrl} style={{ borderRadius: 20 }} />
+							<DelightfulAvatar size={100} src={imageUrl} style={{ borderRadius: 20 }} />
 						) : (
 							<img
 								src={defaultAgentAvatar}
@@ -210,7 +210,7 @@ function AddOrUpdateAgent({ agent, open, close, submit }: AddOrUpdateAgentProps)
 					/>
 				</Form.Item>
 			</Form>
-		</MagicModal>
+		</DelightfulModal>
 	)
 }
 

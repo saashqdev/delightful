@@ -48,14 +48,14 @@ vi.mock("../extensions/file-handler", () => {
 })
 
 // 模拟组件
-const MagicRichEditor = React.lazy(() => import("../index"))
+const DelightfulRichEditor = React.lazy(() => import("../index"))
 
 // 测试包装器
 const TestWrapper = ({ children }: { children: React.ReactNode }) => {
 	return <div>{children}</div>
 }
 
-describe("MagicRichEditor 文本处理", () => {
+describe("DelightfulRichEditor 文本处理", () => {
 	beforeEach(() => {
 		vi.clearAllMocks()
 	})
@@ -64,7 +64,7 @@ describe("MagicRichEditor 文本处理", () => {
 		render(
 			<TestWrapper>
 				<React.Suspense fallback={<div>Loading...</div>}>
-					<MagicRichEditor placeholder="测试粘贴文本" />
+					<DelightfulRichEditor placeholder="测试粘贴文本" />
 				</React.Suspense>
 			</TestWrapper>,
 		)
@@ -84,7 +84,7 @@ describe("MagicRichEditor 文本处理", () => {
 		render(
 			<TestWrapper>
 				<React.Suspense fallback={<div>Loading...</div>}>
-					<MagicRichEditor placeholder="测试回车键" enterBreak />
+					<DelightfulRichEditor placeholder="测试回车键" enterBreak />
 				</React.Suspense>
 			</TestWrapper>,
 		)

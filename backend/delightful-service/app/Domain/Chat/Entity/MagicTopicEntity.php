@@ -10,7 +10,7 @@ namespace App\Domain\Chat\Entity;
 /**
  * 话题所属的消息.
  */
-final class MagicTopicEntity extends AbstractEntity
+final class DelightfulTopicEntity extends AbstractEntity
 {
     protected string $id = '';
 

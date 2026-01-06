@@ -1,6 +1,6 @@
 # Selector Node
 ## What is a Selector Node?
-The Selector Node is a conditional judgment node in the Magic Flow workflow that allows you to divide the workflow into different execution paths based on set conditions. It's like a fork in the road, choosing different directions based on different situations. Through the Selector Node, you can build intelligent workflows with logical branches, implementing functions that perform different operations based on different conditions.
+The Selector Node is a conditional judgment node in the Delightful Flow workflow that allows you to divide the workflow into different execution paths based on set conditions. It's like a fork in the road, choosing different directions based on different situations. Through the Selector Node, you can build intelligent workflows with logical branches, implementing functions that perform different operations based on different conditions.
 
 **Image Description:**
 

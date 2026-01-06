@@ -1,4 +1,4 @@
-export const enum MagicMermaidType {
+export const enum DelightfulMermaidType {
 	Mermaid = "Mermaid",
 	Code = "Code",
 }

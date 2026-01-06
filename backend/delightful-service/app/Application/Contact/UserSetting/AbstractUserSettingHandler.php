@@ -7,16 +7,16 @@ declare(strict_types=1);
 
 namespace App\Application\Contact\UserSetting;
 
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
 use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 
 abstract class AbstractUserSettingHandler implements UserSettingHandlerInterface
 {
-    public function valueGetHandle(BaseDataIsolation $dataIsolation, MagicUserSettingEntity $setting): void
+    public function valueGetHandle(BaseDataIsolation $dataIsolation, DelightfulUserSettingEntity $setting): void
     {
     }
 
-    public function generateDefault(): ?MagicUserSettingEntity
+    public function generateDefault(): ?DelightfulUserSettingEntity
     {
         return null;
     }

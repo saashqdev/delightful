@@ -9,7 +9,7 @@ namespace App\Application\Contact\DTO;
 
 use App\Infrastructure\Core\AbstractDTO;
 
-class MagicUserOrganizationItemDTO extends AbstractDTO
+class DelightfulUserOrganizationItemDTO extends AbstractDTO
 {
     protected string $magicOrganizationCode = '';
 
@@ -33,12 +33,12 @@ class MagicUserOrganizationItemDTO extends AbstractDTO
 
     protected ?string $subscriptionTier = null;
 
-    public function getMagicOrganizationCode(): string
+    public function getDelightfulOrganizationCode(): string
     {
         return $this->magicOrganizationCode;
     }
 
-    public function setMagicOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
     {
         $this->magicOrganizationCode = $magicOrganizationCode;
     }

@@ -7,22 +7,22 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Persistence;
 
-use App\Domain\Flow\Entity\MagicFlowAIModelEntity;
+use App\Domain\Flow\Entity\DelightfulFlowAIModelEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowAIModelQuery;
-use App\Domain\Flow\Factory\MagicFlowAIModelFactory;
-use App\Domain\Flow\Repository\Facade\MagicFlowAIModelRepositoryInterface;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowAIModelModel;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowAIModelQuery;
+use App\Domain\Flow\Factory\DelightfulFlowAIModelFactory;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowAIModelRepositoryInterface;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowAIModelModel;
 use App\Infrastructure\Core\ValueObject\Page;
 
-class MagicFlowAIModelRepository extends MagicFlowAbstractRepository implements MagicFlowAIModelRepositoryInterface
+class DelightfulFlowAIModelRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowAIModelRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowAIModelEntity $magicFlowAIModelEntity): MagicFlowAIModelEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelEntity $magicFlowAIModelEntity): DelightfulFlowAIModelEntity
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowAIModelModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowAIModelModel::query());
         $model = $builder->where('name', $magicFlowAIModelEntity->getName())->first();
         if (! $model) {
-            $model = new MagicFlowAIModelModel();
+            $model = new DelightfulFlowAIModelModel();
         }
         $model->fill($this->getAttributes($magicFlowAIModelEntity));
         $model->save();
@@ -30,23 +30,23 @@ class MagicFlowAIModelRepository extends MagicFlowAbstractRepository implements 
         return $magicFlowAIModelEntity;
     }
 
-    public function getByName(FlowDataIsolation $dataIsolation, string $name): ?MagicFlowAIModelEntity
+    public function getByName(FlowDataIsolation $dataIsolation, string $name): ?DelightfulFlowAIModelEntity
     {
         if (empty($name)) {
             return null;
         }
-        $builder = $this->createBuilder($dataIsolation, MagicFlowAIModelModel::query());
-        /** @var null|MagicFlowAIModelModel $model */
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowAIModelModel::query());
+        /** @var null|DelightfulFlowAIModelModel $model */
         $model = $builder->where('name', $name)->first();
         if (! $model) {
             return null;
         }
-        return MagicFlowAIModelFactory::modelToEntity($model);
+        return DelightfulFlowAIModelFactory::modelToEntity($model);
     }
 
-    public function queries(FlowDataIsolation $dataIsolation, MagicFlowAIModelQuery $query, Page $page): array
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelQuery $query, Page $page): array
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowAIModelModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowAIModelModel::query());
 
         if ($query->getEnabled() !== null) {
             $builder->where('enabled', $query->getEnabled());
@@ -63,7 +63,7 @@ class MagicFlowAIModelRepository extends MagicFlowAbstractRepository implements 
         if (! empty($data['list'])) {
             $list = [];
             foreach ($data['list'] as $value) {
-                $list[] = MagicFlowAIModelFactory::modelToEntity($value);
+                $list[] = DelightfulFlowAIModelFactory::modelToEntity($value);
             }
             $data['list'] = $list;
         }

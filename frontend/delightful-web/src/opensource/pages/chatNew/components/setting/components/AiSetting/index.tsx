@@ -1,5 +1,5 @@
-import MagicMemberAvatar from "@/opensource/components/business/MagicMemberAvatar"
-import { MagicList } from "@/opensource/components/MagicList"
+import DelightfulMemberAvatar from "@/opensource/components/business/DelightfulMemberAvatar"
+import { DelightfulList } from "@/opensource/components/DelightfulList"
 import type Conversation from "@/opensource/models/chat/conversation"
 import { Col, Flex, Row, Switch, Typography } from "antd"
 import { useMemo } from "react"
@@ -90,14 +90,14 @@ const AiSetting = observer(({ conversation }: AiSettingProps) => {
 			>
 				{members.map((uid) => (
 					<Col key={uid} className={styles.member}>
-						<MagicMemberAvatar size={45} uid={uid} showName="vertical" />
+						<DelightfulMemberAvatar size={45} uid={uid} showName="vertical" />
 					</Col>
 				))}
 				{/* <Col className={styles.member}>
 					<Flex vertical align="center" justify="center" gap={4}>
-						<MagicButton
+						<DelightfulButton
 							className={styles.addMember}
-							icon={<MagicIcon component={IconPlus} size={24} />}
+							icon={<DelightfulIcon component={IconPlus} size={24} />}
 							type="default"
 						/>
 						<AutoTooltipText maxWidth={50} className={styles.text}>
@@ -107,7 +107,7 @@ const AiSetting = observer(({ conversation }: AiSettingProps) => {
 				</Col> */}
 			</Row>
 			<Typography.Text className={styles.title}>{t("chat.setting")}</Typography.Text>
-			<MagicList
+			<DelightfulList
 				gap={0}
 				className={styles.list}
 				items={chatSettingListItems}
@@ -116,7 +116,7 @@ const AiSetting = observer(({ conversation }: AiSettingProps) => {
 			{/* <Typography.Text className={styles.title}>
 				{t("chat.authorityAuthorizationManagement.title")}
 			</Typography.Text>
-			<MagicList
+			<DelightfulList
 				gap={0}
 				className={styles.list}
 				items={authorityAuthorizationManagementListItems}
@@ -124,12 +124,12 @@ const AiSetting = observer(({ conversation }: AiSettingProps) => {
 				emptyProps={authorityAuthorizationManagementEmptyProps}
 			/> */}
 			{/* <Flex vertical flex={1} className={commonStyles.buttonList}>
-				<MagicButton type="link" block className={styles.shareToOther}>
+				<DelightfulButton type="link" block className={styles.shareToOther}>
 					{t("chat.chatSetting.shareToOther")}
-				</MagicButton>
-				<MagicButton type="link" danger block>
+				</DelightfulButton>
+				<DelightfulButton type="link" danger block>
 					{t("chat.chatSetting.deleteMessageRecords")}
-				</MagicButton>
+				</DelightfulButton>
 			</Flex> */}
 		</Flex>
 	)

@@ -8,7 +8,7 @@ version = "0.1.4"
 description = "Language-first AI Agent Framework - An AI agent framework built around natural language"
 readme = "README.md"
 authors = [
-    {name = "SuperMagic Team", email = "dev@bedelightful.ai"}
+    {name = "SuperDelightful Team", email = "dev@bedelightful.ai"}
 ]
 license = {text = "Apache-2.0"}
 classifiers = [

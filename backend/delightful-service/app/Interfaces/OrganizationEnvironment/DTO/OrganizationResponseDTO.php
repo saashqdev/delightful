@@ -40,7 +40,7 @@ class OrganizationResponseDTO extends AbstractDTO
         $this->id = $id;
     }
 
-    public function setMagicOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
     {
         $this->magicOrganizationCode = $magicOrganizationCode;
     }

@@ -12,7 +12,7 @@ use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 /**
  * magic api 错误码范围:4000, 4999.
  */
-enum MagicApiErrorCode: int
+enum DelightfulApiErrorCode: int
 {
     // token不存在
     #[ErrorMessage(message: 'api.token.not_exist')]

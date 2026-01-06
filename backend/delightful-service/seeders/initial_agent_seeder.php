@@ -4,8 +4,8 @@ declare(strict_types=1);
 /**
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
-use App\Application\Agent\Service\MagicAgentAppService;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Application\Agent\Service\DelightfulAgentAppService;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Hyperf\Database\Seeders\Seeder;
 use Hyperf\DbConnection\Db;
 
@@ -25,15 +25,15 @@ class InitialAgentSeeder extends Seeder
             }
             foreach ($users as $user) {
                 // Create user authorization object
-                $authorization = new MagicUserAuthorization();
+                $authorization = new DelightfulUserAuthorization();
                 $authorization->setId($user['user_id']);
                 $authorization->setOrganizationCode($user['organization_code']);
 
                 // Initialize assistants
                 echo "Initializing agent for user {$user['user_id']}...\n";
                 try {
-                    /** @var MagicAgentAppService $agentService */
-                    $agentService = di(MagicAgentAppService::class);
+                    /** @var DelightfulAgentAppService $agentService */
+                    $agentService = di(DelightfulAgentAppService::class);
                     $agentService->initAgents($authorization);
                     echo "Agent initialization succeeded for user {$user['user_id']}\n";
                 } catch (Throwable $e) {

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { useArgsModalContext } from "@/MagicExpressionWidget/context/ArgsModalContext/useArgsModalContext"
+import { useArgsModalContext } from "@/DelightfulExpressionWidget/context/ArgsModalContext/useArgsModalContext"
 import { Splitor } from "@/common/BaseUI/DropdownRenderer/Reference/constants"
 import { ExpandAltOutlined } from "@ant-design/icons"
 import { IconClose } from "@douyinfe/semi-icons"

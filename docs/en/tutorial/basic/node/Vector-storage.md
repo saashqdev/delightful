@@ -1,7 +1,7 @@
 # Vector Storage Node
 
 ## What is a Vector Storage Node?
-The Vector Storage Node is a functional component in Magic Flow workflows used for storing text content in vector databases. It can convert text content into vector form and save it in knowledge bases, facilitating subsequent semantic retrieval and content matching. Simply put, vector storage is like an intelligent information warehouse that not only stores the content itself but also preserves the semantic features of the content, enabling subsequent queries through semantic similarity.
+The Vector Storage Node is a functional component in Delightful Flow workflows used for storing text content in vector databases. It can convert text content into vector form and save it in knowledge bases, facilitating subsequent semantic retrieval and content matching. Simply put, vector storage is like an intelligent information warehouse that not only stores the content itself but also preserves the semantic features of the content, enabling subsequent queries through semantic similarity.
 
 **Image Description:**
 

@@ -1,6 +1,6 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { IconUserPlus } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
 import type { ModalProps } from "antd"
@@ -121,7 +121,7 @@ function UrgentModal({ onClose: _onClose }: UrgentModalProps) {
 	})
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			title={t("chat.urgentModal.title")}
 			open={open}
 			onOk={onOk}
@@ -152,11 +152,11 @@ function UrgentModal({ onClose: _onClose }: UrgentModalProps) {
 					label={t("chat.urgentModal.form.recipient")}
 					name="recipient"
 				>
-					<MagicButton
+					<DelightfulButton
 						type="default"
 						className={styles.addBtn}
 						icon={
-							<MagicIcon
+							<DelightfulIcon
 								color="currentColor"
 								size={18}
 								stroke={2}
@@ -165,7 +165,7 @@ function UrgentModal({ onClose: _onClose }: UrgentModalProps) {
 						}
 					>
 						{t("button.add")}
-					</MagicButton>
+					</DelightfulButton>
 				</Form.Item>
 				<Form.Item
 					className={styles.formItem}
@@ -187,7 +187,7 @@ function UrgentModal({ onClose: _onClose }: UrgentModalProps) {
 					/>
 				</Form.Item>
 			</Form>
-		</MagicModal>
+		</DelightfulModal>
 	)
 }
 

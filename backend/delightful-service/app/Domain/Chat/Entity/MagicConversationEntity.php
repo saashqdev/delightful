@@ -16,7 +16,7 @@ use Hyperf\Codec\Json;
 /**
  * 会话,一个用户在不同组织下的会话是不同的.
  */
-final class MagicConversationEntity extends AbstractEntity
+final class DelightfulConversationEntity extends AbstractEntity
 {
     protected string $id = '';
 
@@ -241,7 +241,7 @@ final class MagicConversationEntity extends AbstractEntity
         $this->instructs = $instructs;
     }
 
-    public static function fromUserGroupConversationQueryDTO(UserGroupConversationQueryDTO $dto): MagicConversationEntity
+    public static function fromUserGroupConversationQueryDTO(UserGroupConversationQueryDTO $dto): DelightfulConversationEntity
     {
         $conversationEntity = new self();
         $conversationEntity->setUserId($dto->getUserId());

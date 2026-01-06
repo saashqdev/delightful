@@ -3,13 +3,13 @@ import { Dropdown } from "antd"
 import { cx } from "antd-style"
 import { useStyles } from "./style"
 
-export type MagicDropdownProps = DropDownProps
+export type DelightfulDropdownProps = DropDownProps
 
-function MagicDropdown({
+function DelightfulDropdown({
 	menu: { rootClassName, ...menu } = {},
 	overlayClassName,
 	...props
-}: MagicDropdownProps) {
+}: DelightfulDropdownProps) {
 	const { styles } = useStyles()
 
 	return (
@@ -24,4 +24,4 @@ function MagicDropdown({
 	)
 }
 
-export default MagicDropdown
+export default DelightfulDropdown

@@ -16,20 +16,20 @@ import {
 	useFlow,
 	useFlowData,
 	useNodeConfigActions,
-} from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+} from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import TsInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
 import { useTranslation } from "react-i18next"
 
 import TsSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
 import { useMemo } from "react"
-import { ShowColumns } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/constants"
-import MagicJsonSchemaEditor from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor"
-import { FormItemType } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
+import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
+import DelightfulJsonSchemaEditor from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor"
+import { FormItemType } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 import { FlowType } from "@/types/flow"
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
 import JSONSchemaRenderer from "@/opensource/pages/flow/components/JSONSchemaRenderer"
-import CustomHandle from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/Handle/Source"
+import CustomHandle from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/Handle/Source"
 import styles from "./index.module.less"
 import type { WidgetValue } from "../../../common/Output"
 import "./index.less"
@@ -400,7 +400,7 @@ export default function StartV1() {
 											className={styles.args}
 											valuePropName="data"
 										>
-											<MagicJsonSchemaEditor
+											<DelightfulJsonSchemaEditor
 												allowExpression
 												expressionSource={[]}
 												displayColumns={[
@@ -437,7 +437,7 @@ export default function StartV1() {
 										className={styles.args}
 										valuePropName="data"
 									>
-										<MagicJsonSchemaEditor
+										<DelightfulJsonSchemaEditor
 											allowExpression
 											expressionSource={[]}
 											displayColumns={[

@@ -12,22 +12,22 @@ import FlowMaterialPanel from "./components/FlowMaterialPanel"
 import { defaultParamsName, prefix } from "./constants"
 import { ExternalProvider } from "./context/ExternalContext/Provider"
 import { FlowProvider } from "./context/FlowContext/Provider"
-import { MagicFlowProvider } from "./context/MagicFlowContext/Provider"
+import { DelightfulFlowProvider } from "./context/DelightfulFlowContext/Provider"
 import { NodesProvider } from "./context/NodesContext/Provider"
 import { ResizeProvider } from "./context/ResizeContext/Provider"
 import useBaseFlow from "./hooks/useBaseFlow"
 import useResize from "./hooks/useResize"
 import "./index.css"
 import styles from "./index.module.less"
-import { MagicFlow } from "./types/flow"
+import { DelightfulFlow } from "./types/flow"
 import { CLASSNAME_PREFIX } from "@/common/constants"
 import { ConfigProvider } from "antd"
 
 export * from "./register/node"
 
-type MagicFlowProps = {
+type DelightfulFlowProps = {
 	/** Upstream flow */
-	flow?: MagicFlow.Flow
+	flow?: DelightfulFlow.Flow
 	/** Header right-side action buttons */
 	header?: {
 		buttons?: React.ReactElement
@@ -46,7 +46,7 @@ type MagicFlowProps = {
 	/** Custom left material panel header */
 	materialHeader?: React.ReactElement
 	/** Custom node config field names */
-	customParamsName?: Partial<MagicFlow.ParamsName>
+	customParamsName?: Partial<DelightfulFlow.ParamsName>
 	/** Keys to omit from node parameters */
 	omitNodeKeys?: string[]
 	/** Enable partial rendering */
@@ -61,17 +61,17 @@ type MagicFlowProps = {
 	flowInteractionRef?: React.MutableRefObject<any>
 }
 
-export type MagicFlowInstance = {
+export type DelightfulFlowInstance = {
 	/** Get internal flow data **/
-	getFlow: () => MagicFlow.Flow
+	getFlow: () => DelightfulFlow.Flow
 	/** Add a node */
-	addNode: (node: MagicFlow.Node) => void
+	addNode: (node: DelightfulFlow.Node) => void
 	/** Set all nodes */
-	setNodes: (nodes: MagicFlow.Node[]) => void
+	setNodes: (nodes: DelightfulFlow.Node[]) => void
 	/** Set node configuration */
-	setNodeConfig: (nodeConfig: Record<string, MagicFlow.Node>) => void
+	setNodeConfig: (nodeConfig: Record<string, DelightfulFlow.Node>) => void
 	/** Update node configuration */
-	updateNodeConfig: (nodeConfig: Record<string, MagicFlow.Node>) => void
+	updateNodeConfig: (nodeConfig: Record<string, DelightfulFlow.Node>) => void
 	/** Delete nodes */
 	deleteNodes: (nodeIds: string[]) => void
 	/** Update node positions */
@@ -83,7 +83,7 @@ export type MagicFlowInstance = {
 	/** Set the selected node */
 	setSelectedNodeId: (nodeId: string) => void
 	/** Get node configuration */
-	getNodeConfig: () => Record<string, MagicFlow.Node>
+	getNodeConfig: () => Record<string, DelightfulFlow.Node>
 	/** Get edges */
 	getEdges: () => Edge[]
 }
@@ -103,7 +103,7 @@ const FlowContent = React.memo(
 	},
 )
 
-const MagicFlowComponent = React.forwardRef(
+const DelightfulFlowComponent = React.forwardRef(
 	(
 		{
 			flow: currentFlow,
@@ -118,7 +118,7 @@ const MagicFlowComponent = React.forwardRef(
 			allowDebug = false,
 			showExtraFlowInfo = true,
 			flowInteractionRef,
-		}: MagicFlowProps,
+		}: DelightfulFlowProps,
 		ref,
 	) => {
 		const { windowSize } = useResize()
@@ -299,7 +299,7 @@ const MagicFlowComponent = React.forwardRef(
 				}}
 			>
 				<ConfigProvider prefixCls={CLASSNAME_PREFIX}>
-					<MagicFlowProvider>
+					<DelightfulFlowProvider>
 						<ExternalProvider {...externalProviderProps}>
 							<ResizeProvider windowSize={windowSize}>
 								<ReactFlowProvider>
@@ -324,11 +324,11 @@ const MagicFlowComponent = React.forwardRef(
 								</ReactFlowProvider>
 							</ResizeProvider>
 						</ExternalProvider>
-					</MagicFlowProvider>
+					</DelightfulFlowProvider>
 				</ConfigProvider>
 			</ErrorBoundary>
 		)
 	},
 )
 
-export default MagicFlowComponent
+export default DelightfulFlowComponent

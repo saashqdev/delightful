@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Factory;
 
-use App\Domain\Agent\Entity\MagicBotThirdPlatformChatEntity;
+use App\Domain\Agent\Entity\DelightfulBotThirdPlatformChatEntity;
 use App\Domain\Agent\Entity\ValueObject\ThirdPlatformChat\ThirdPlatformChatType;
-use App\Domain\Agent\Repository\Persistence\Model\MagicBotThirdPlatformChatModel;
+use App\Domain\Agent\Repository\Persistence\Model\DelightfulBotThirdPlatformChatModel;
 
-class MagicAgentThirdPlatformChatFactory
+class DelightfulAgentThirdPlatformChatFactory
 {
-    public static function modelToEntity(MagicBotThirdPlatformChatModel $model): MagicBotThirdPlatformChatEntity
+    public static function modelToEntity(DelightfulBotThirdPlatformChatModel $model): DelightfulBotThirdPlatformChatEntity
     {
-        $entity = new MagicBotThirdPlatformChatEntity();
+        $entity = new DelightfulBotThirdPlatformChatEntity();
         $entity->setId($model->id);
         $entity->setBotId($model->bot_id);
         $entity->setKey($model->key);

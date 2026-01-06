@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowDraftEntity;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowDraftQuery;
+use App\Domain\Flow\Entity\DelightfulFlowDraftEntity;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowDraftQuery;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 use Qbhy\HyperfAuth\Authenticatable;
 
-class MagicFlowDraftAppService extends AbstractFlowAppService
+class DelightfulFlowDraftAppService extends AbstractFlowAppService
 {
     /**
      * 查询草稿列表.
-     * @return array{total: int, list: array<MagicFlowDraftEntity>, users: array}
+     * @return array{total: int, list: array<DelightfulFlowDraftEntity>, users: array}
      */
-    public function queries(Authenticatable $authorization, MagicFLowDraftQuery $query, Page $page): array
+    public function queries(Authenticatable $authorization, DelightfulFLowDraftQuery $query, Page $page): array
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         if (empty($query->getFlowCode())) {
@@ -43,7 +43,7 @@ class MagicFlowDraftAppService extends AbstractFlowAppService
     /**
      * 获取草稿详情.
      */
-    public function show(Authenticatable $authorization, string $flowCode, string $draftCode): MagicFlowDraftEntity
+    public function show(Authenticatable $authorization, string $flowCode, string $draftCode): DelightfulFlowDraftEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $this->getFlowAndValidateOperation($dataIsolation, $flowCode, 'read');
@@ -64,14 +64,14 @@ class MagicFlowDraftAppService extends AbstractFlowAppService
     /**
      * 保存草稿.
      */
-    public function save(Authenticatable $authorization, MagicFlowDraftEntity $savingMagicFlowDraftEntity): MagicFlowDraftEntity
+    public function save(Authenticatable $authorization, DelightfulFlowDraftEntity $savingDelightfulFlowDraftEntity): DelightfulFlowDraftEntity
     {
-        if (empty($savingMagicFlowDraftEntity->getFlowCode())) {
+        if (empty($savingDelightfulFlowDraftEntity->getFlowCode())) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow_code']);
         }
         $dataIsolation = $this->createFlowDataIsolation($authorization);
-        $this->getFlowAndValidateOperation($dataIsolation, $savingMagicFlowDraftEntity->getFlowCode(), 'edit');
+        $this->getFlowAndValidateOperation($dataIsolation, $savingDelightfulFlowDraftEntity->getFlowCode(), 'edit');
 
-        return $this->magicFlowDraftDomainService->save($dataIsolation, $savingMagicFlowDraftEntity);
+        return $this->magicFlowDraftDomainService->save($dataIsolation, $savingDelightfulFlowDraftEntity);
     }
 }

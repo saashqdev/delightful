@@ -1,20 +1,20 @@
-import MagicImagePreview from "@/opensource/components/base/MagicImagePreview"
+import DelightfulImagePreview from "@/opensource/components/base/DelightfulImagePreview"
 import { resolveToString } from "@dtyq/es6-template-strings"
 import { Flex, Progress } from "antd"
 import useStyles from "../../styles"
 import ImageCompareSlider from "../ImageCompareSlider"
 import MessageImagePreview from "@/opensource/services/chat/message/MessageImagePreview"
 import { ImagePreviewInfo } from "@/types/chat/preview"
-import useCurrentImageSwitcher from "@/opensource/components/base/MagicImagePreview/hooks/useCurrentImageSwitcher"
+import useCurrentImageSwitcher from "@/opensource/components/base/DelightfulImagePreview/hooks/useCurrentImageSwitcher"
 import useImageAction from "../../hooks/useImageAction"
 import { memo, useMemo, useRef } from "react"
-import useImageSize from "@/opensource/components/base/MagicImagePreview/hooks/useImageSize"
+import useImageSize from "@/opensource/components/base/DelightfulImagePreview/hooks/useImageSize"
 import { useTranslation } from "react-i18next"
 import { isEqual } from "lodash-es"
-import MagicEmpty from "@/opensource/components/base/MagicEmpty"
+import DelightfulEmpty from "@/opensource/components/base/DelightfulEmpty"
 import { useMemoizedFn } from "ahooks"
-import MagicDropdown from "@/opensource/components/base/MagicDropdown"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulDropdown from "@/opensource/components/base/DelightfulDropdown"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconCopy } from "@tabler/icons-react"
 
 interface ImagePreviewMainProps {
@@ -90,7 +90,7 @@ const ImagePreviewMain = memo(function ImagePreviewMain({
 				key: "download",
 				label: (
 					<Flex align="center" gap={4}>
-						<MagicIcon component={IconCopy} size={16} color="currentColor" />
+						<DelightfulIcon component={IconCopy} size={16} color="currentColor" />
 						{t("chat.imagePreview.copy")}
 					</Flex>
 				),
@@ -106,19 +106,19 @@ const ImagePreviewMain = memo(function ImagePreviewMain({
 	if (!currentImage)
 		return (
 			<Flex justify="center" align="center" className={styles.imagePreview}>
-				<MagicEmpty description={t("chat.NoContent", { ns: "message" })} />
+				<DelightfulEmpty description={t("chat.NoContent", { ns: "message" })} />
 			</Flex>
 		)
 
 	return (
-		<MagicDropdown
+		<DelightfulDropdown
 			trigger={["contextMenu"]}
 			menu={{
 				items: getContextMenuItems(),
 			}}
 		>
 			<div className={containerClassName}>
-				<MagicImagePreview
+				<DelightfulImagePreview
 					rootClassName={styles.imagePreview}
 					onNext={info?.standalone ? undefined : toNext}
 					onPrev={info?.standalone ? undefined : toPrev}
@@ -139,7 +139,7 @@ const ImagePreviewMain = memo(function ImagePreviewMain({
 					) : (
 						ImageNode
 					)}
-				</MagicImagePreview>
+				</DelightfulImagePreview>
 				{loading && (
 					<Flex align="center" gap={10} className={styles.mask}>
 						<Progress percent={progress} showInfo={false} className={styles.progress} />
@@ -160,7 +160,7 @@ const ImagePreviewMain = memo(function ImagePreviewMain({
 					</Flex>
 				)}
 			</div>
-		</MagicDropdown>
+		</DelightfulDropdown>
 	)
 },
 isEqual)

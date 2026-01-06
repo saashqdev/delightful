@@ -1,5 +1,5 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconMessage2X } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
 import { observer } from "mobx-react-lite"
@@ -26,9 +26,9 @@ const HideConversationButton = observer(({ conversationId }: { conversationId: s
 	if (!conversation) return null
 
 	return (
-		<MagicButton
+		<DelightfulButton
 			justify="flex-start"
-			icon={<MagicIcon color="currentColor" component={IconMessage2X} size={20} />}
+			icon={<DelightfulIcon color="currentColor" component={IconMessage2X} size={20} />}
 			size="large"
 			type="text"
 			danger
@@ -36,7 +36,7 @@ const HideConversationButton = observer(({ conversationId }: { conversationId: s
 			onClick={handleHideConversation}
 		>
 			{t("chat.floatButton.removeGroup")}
-		</MagicButton>
+		</DelightfulButton>
 	)
 })
 

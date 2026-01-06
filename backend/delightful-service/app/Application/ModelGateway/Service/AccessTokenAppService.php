@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Application\ModelGateway\Service;
 
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\ModelGateway\Entity\AccessTokenEntity;
 use App\Domain\ModelGateway\Entity\ValueObject\Query\AccessTokenQuery;
 use App\ErrorCode\GenericErrorCode;
@@ -18,7 +18,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 class AccessTokenAppService extends AbstractLLMAppService
 {
     /**
-     * @return array{total: int, list: AccessTokenEntity[], users: array<string, MagicUserEntity>}
+     * @return array{total: int, list: AccessTokenEntity[], users: array<string, DelightfulUserEntity>}
      */
     public function queries(Authenticatable $authorization, AccessTokenQuery $query, Page $page): array
     {

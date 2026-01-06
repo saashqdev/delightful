@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Repository\Persistence;
 
-use App\Domain\Chat\Repository\Persistence\Model\MagicDeviceModel;
+use App\Domain\Chat\Repository\Persistence\Model\DelightfulDeviceModel;
 use Hyperf\Snowflake\IdGeneratorInterface;
 
-class MagicDeviceRepository
+class DelightfulDeviceRepository
 {
     public function __construct(
-        protected MagicDeviceModel $magicDevice,
+        protected DelightfulDeviceModel $magicDevice,
         private readonly IdGeneratorInterface $idGenerator,
     ) {
     }

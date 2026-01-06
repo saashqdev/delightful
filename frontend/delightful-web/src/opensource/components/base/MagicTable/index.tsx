@@ -2,7 +2,7 @@ import type { TableProps } from "antd"
 import { Table } from "antd"
 import { createStyles } from "antd-style"
 import type { AnyObject } from "antd/es/_util/type"
-import { useMagicSpinProps } from "../MagicSpin/useMagicSpinProps"
+import { useDelightfulSpinProps } from "../DelightfulSpin/useDelightfulSpinProps"
 
 const useStyles = createStyles(
 	(
@@ -32,12 +32,12 @@ const useStyles = createStyles(
 	},
 )
 
-function MagicTable<D extends AnyObject = AnyObject>({
+function DelightfulTable<D extends AnyObject = AnyObject>({
 	loading = false,
 	scroll,
 	...props
 }: TableProps<D>) {
-	const magicSpinProps = useMagicSpinProps(true)
+	const magicSpinProps = useDelightfulSpinProps(true)
 
 	const { styles } = useStyles({
 		scrollHeight: scroll?.y,
@@ -56,4 +56,4 @@ function MagicTable<D extends AnyObject = AnyObject>({
 	)
 }
 
-export default MagicTable
+export default DelightfulTable

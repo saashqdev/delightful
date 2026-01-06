@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Application\Permission;
 
-use App\Application\Kernel\Enum\MagicOperationEnum;
-use App\Application\Kernel\Enum\MagicResourceEnum;
-use App\Application\Kernel\MagicPermission;
+use App\Application\Kernel\Enum\DelightfulOperationEnum;
+use App\Application\Kernel\Enum\DelightfulResourceEnum;
+use App\Application\Kernel\DelightfulPermission;
 use App\Application\Permission\Service\RoleAppService;
 use App\Domain\Permission\Entity\RoleEntity;
 use App\Domain\Permission\Entity\ValueObject\PermissionDataIsolation;
@@ -44,11 +44,11 @@ class RoleAppServiceTest extends HttpTestCase
         $roleEntity->setOrganizationCode($this->dataIsolation->getCurrentOrganizationCode());
         $roleEntity->setStatus(1);
 
-        $magicPermission = new MagicPermission();
+        $magicPermission = new DelightfulPermission();
         // Add test permission data
         $testPermissions = [
-            $magicPermission->buildPermission(MagicResourceEnum::ADMIN_AI_MODEL->value, MagicOperationEnum::EDIT->value),
-            $magicPermission->buildPermission(MagicResourceEnum::ADMIN_AI_IMAGE->value, MagicOperationEnum::QUERY->value),
+            $magicPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_MODEL->value, DelightfulOperationEnum::EDIT->value),
+            $magicPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_IMAGE->value, DelightfulOperationEnum::QUERY->value),
         ];
         $roleEntity->setPermissions($testPermissions);
 

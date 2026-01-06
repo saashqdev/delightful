@@ -1,10 +1,10 @@
 import { Flex, Form, Input } from "antd"
 import { useTranslation } from "react-i18next"
 import { useBoolean, useMemoizedFn } from "ahooks"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import type { OpenableProps } from "@/utils/react"
 import IconWarning from "@/enhance/tabler/icons-react/icons/IconWarning"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useMemo, useState } from "react"
 
 import { colorScales } from "@/opensource/providers/ThemeProvider/colors"
@@ -49,17 +49,17 @@ function DeleteDangerModal({
 
 	const footer = useMemoizedFn(() => (
 		<Flex justify="end" gap={12}>
-			<MagicButton onClick={onCancel} type="text" className={styles.button}>
+			<DelightfulButton onClick={onCancel} type="text" className={styles.button}>
 				{t("button.cancel")}
-			</MagicButton>
-			<MagicButton disabled={disable} onClick={onConfirm} className={styles.dangerButton}>
+			</DelightfulButton>
+			<DelightfulButton disabled={disable} onClick={onConfirm} className={styles.dangerButton}>
 				{t("deleteConfirm")}
-			</MagicButton>
+			</DelightfulButton>
 		</Flex>
 	))
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			className={styles.modal}
 			centered
 			maskClosable={false}
@@ -126,7 +126,7 @@ function DeleteDangerModal({
 					)}
 				</Flex>
 			</Flex>
-		</MagicModal>
+		</DelightfulModal>
 	)
 }
 

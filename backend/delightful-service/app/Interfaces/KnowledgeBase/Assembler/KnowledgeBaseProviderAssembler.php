@@ -20,7 +20,7 @@ class KnowledgeBaseProviderAssembler
     {
         $dtoList = [];
         foreach ($models as $modelId => $model) {
-            $providerAlias = $model->getInfo()['attributes']['provider_alias'] ?? 'MagicAI';
+            $providerAlias = $model->getInfo()['attributes']['provider_alias'] ?? 'DelightfulAI';
             if (! isset($dtoList[$providerAlias])) {
                 $dtoList[$providerAlias] = new ServiceProviderDTO([
                     'id' => $providerAlias,

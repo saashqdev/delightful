@@ -3,17 +3,17 @@ import { useForm } from "antd/lib/form/Form"
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
 
 import { useMemoizedFn } from "ahooks"
-import { useNodeConfigActions } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useNodeConfigActions } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { set } from "lodash-es"
-import MagicJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicJsonSchemaEditorWrap"
-import { ShowColumns } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/constants"
-import { DisabledField } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
+import DelightfulJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulJsonSchemaEditorWrap"
+import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
+import { DisabledField } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import usePrevious from "@/opensource/pages/flow/common/hooks/usePrevious"
 import useCurrentNodeUpdate from "@/opensource/pages/flow/common/hooks/useCurrentNodeUpdate"
 import NodeOutputWrap from "@/opensource/pages/flow/components/NodeOutputWrap/NodeOutputWrap"
 import ToolSelect from "@/opensource/pages/flow/components/ToolsSelect/ToolSelect"
-import MagicExpression from "@/opensource/pages/flow/common/Expression"
+import DelightfulExpression from "@/opensource/pages/flow/common/Expression"
 import { useTranslation } from "react-i18next"
 import { getExpressionPlaceholder } from "@/opensource/pages/flow/utils/helpers"
 import useLLM from "./hooks/useLLM"
@@ -114,7 +114,7 @@ export default function LLMV1() {
 								label={t("llm.loadMemory", { ns: "flow" })}
 								className={styles.messageFormItem}
 							>
-								<MagicJSONSchemaEditorWrap
+								<DelightfulJSONSchemaEditorWrap
 									allowExpression
 									value={currentNode?.params?.messages}
 									expressionSource={expressionDataSource}
@@ -147,7 +147,7 @@ export default function LLMV1() {
 								/>
 							</Form.Item>
 						)}
-						<MagicExpression
+						<DelightfulExpression
 							label="System"
 							name="system_prompt"
 							placeholder={getExpressionPlaceholder(
@@ -157,7 +157,7 @@ export default function LLMV1() {
 							showExpand
 						/>
 
-						<MagicExpression
+						<DelightfulExpression
 							label="User"
 							name="user_prompt"
 							placeholder={getExpressionPlaceholder(

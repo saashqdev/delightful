@@ -1,6 +1,6 @@
-# MagicDropdown 魔法下拉菜单组件
+# DelightfulDropdown 魔法下拉菜单组件
 
-`MagicDropdown` 是一个基于 Ant Design Dropdown 组件的增强版下拉菜单，提供了更美观的样式和更好的用户体验。
+`DelightfulDropdown` 是一个基于 Ant Design Dropdown 组件的增强版下拉菜单，提供了更美观的样式和更好的用户体验。
 
 ## 属性
 
@@ -13,7 +13,7 @@
 ## 基础用法
 
 ```tsx
-import { MagicDropdown } from '@/components/base/MagicDropdown';
+import { DelightfulDropdown } from '@/components/base/DelightfulDropdown';
 import { Button, Space } from 'antd';
 import type { MenuProps } from 'antd';
 import { IconSettings, IconUser, IconLogout } from '@tabler/icons-react';
@@ -42,34 +42,34 @@ const items: MenuProps['items'] = [
 ];
 
 // 基础用法
-<MagicDropdown menu={{ items }}>
+<DelightfulDropdown menu={{ items }}>
   <Button>点击显示下拉菜单</Button>
-</MagicDropdown>
+</DelightfulDropdown>
 
 // 带触发方式
-<MagicDropdown menu={{ items }} trigger={['hover']}>
+<DelightfulDropdown menu={{ items }} trigger={['hover']}>
   <Button>悬停显示下拉菜单</Button>
-</MagicDropdown>
+</DelightfulDropdown>
 
 // 带箭头
-<MagicDropdown menu={{ items }} arrow>
+<DelightfulDropdown menu={{ items }} arrow>
   <Button>带箭头的下拉菜单</Button>
-</MagicDropdown>
+</DelightfulDropdown>
 
 // 带事件处理
-<MagicDropdown
+<DelightfulDropdown
   menu={{
     items,
     onClick: (e) => console.log('点击了菜单项:', e.key),
   }}
 >
   <Button>点击菜单项触发事件</Button>
-</MagicDropdown>
+</DelightfulDropdown>
 
 // 禁用状态
-<MagicDropdown menu={{ items }} disabled>
+<DelightfulDropdown menu={{ items }} disabled>
   <Button>禁用的下拉菜单</Button>
-</MagicDropdown>
+</DelightfulDropdown>
 ```
 
 ## 特点
@@ -88,4 +88,4 @@ const items: MenuProps['items'] = [
 -   需要在下拉菜单中包含危险操作时
 -   需要更美观的下拉菜单样式时
 
-MagicDropdown 组件让你的下拉菜单更加美观和易用，同时保持了 Ant Design Dropdown 的所有功能特性。
+DelightfulDropdown 组件让你的下拉菜单更加美观和易用，同时保持了 Ant Design Dropdown 的所有功能特性。

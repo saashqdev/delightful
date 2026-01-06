@@ -7,65 +7,65 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\VO;
 
-use App\Domain\Agent\Entity\MagicAgentEntity;
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 
-class MagicAgentVO
+class DelightfulAgentVO
 {
-    public MagicAgentEntity $agentEntity;
+    public DelightfulAgentEntity $agentEntity;
 
-    public MagicAgentEntity $botEntity;
+    public DelightfulAgentEntity $botEntity;
 
-    public ?MagicAgentVersionEntity $agentVersionEntity = null;
+    public ?DelightfulAgentVersionEntity $agentVersionEntity = null;
 
-    public ?MagicAgentVersionEntity $botVersionEntity = null;
+    public ?DelightfulAgentVersionEntity $botVersionEntity = null;
 
-    public MagicUserEntity $magicUserEntity;
+    public DelightfulUserEntity $magicUserEntity;
 
-    public ?MagicFlowEntity $magicFlowEntity = null;
+    public ?DelightfulFlowEntity $magicFlowEntity = null;
 
     public bool $isAdd = false;
 
-    public function getAgentEntity(): MagicAgentEntity
+    public function getAgentEntity(): DelightfulAgentEntity
     {
         return $this->agentEntity;
     }
 
-    public function setAgentEntity(MagicAgentEntity $agentEntity): void
+    public function setAgentEntity(DelightfulAgentEntity $agentEntity): void
     {
         $this->agentEntity = $agentEntity;
         $this->botEntity = $agentEntity;
     }
 
-    public function getAgentVersionEntity(): ?MagicAgentVersionEntity
+    public function getAgentVersionEntity(): ?DelightfulAgentVersionEntity
     {
         return $this->agentVersionEntity;
     }
 
-    public function setAgentVersionEntity(?MagicAgentVersionEntity $agentVersionEntity): void
+    public function setAgentVersionEntity(?DelightfulAgentVersionEntity $agentVersionEntity): void
     {
         $this->agentVersionEntity = $agentVersionEntity;
         $this->botVersionEntity = $agentVersionEntity;
     }
 
-    public function getMagicUserEntity(): MagicUserEntity
+    public function getDelightfulUserEntity(): DelightfulUserEntity
     {
         return $this->magicUserEntity;
     }
 
-    public function setMagicUserEntity(MagicUserEntity $magicUserEntity): void
+    public function setDelightfulUserEntity(DelightfulUserEntity $magicUserEntity): void
     {
         $this->magicUserEntity = $magicUserEntity;
     }
 
-    public function getMagicFlowEntity(): ?MagicFlowEntity
+    public function getDelightfulFlowEntity(): ?DelightfulFlowEntity
     {
         return $this->magicFlowEntity;
     }
 
-    public function setMagicFlowEntity(?MagicFlowEntity $magicFlowEntity): void
+    public function setDelightfulFlowEntity(?DelightfulFlowEntity $magicFlowEntity): void
     {
         $this->magicFlowEntity = $magicFlowEntity;
     }

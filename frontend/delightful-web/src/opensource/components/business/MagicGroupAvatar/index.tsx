@@ -1,19 +1,19 @@
-import type { MagicAvatarProps } from "@/opensource/components/base/MagicAvatar"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import type { DelightfulAvatarProps } from "@/opensource/components/base/DelightfulAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import useGroupInfo from "@/opensource/hooks/chat/useGroupInfo"
 
-interface MagicGroupAvatarProps extends MagicAvatarProps {
+interface DelightfulGroupAvatarProps extends DelightfulAvatarProps {
 	gid: string
 }
 
-const MagicGroupAvatar = ({ gid, badgeProps, ...rest }: MagicGroupAvatarProps) => {
+const DelightfulGroupAvatar = ({ gid, badgeProps, ...rest }: DelightfulGroupAvatarProps) => {
 	const { groupInfo } = useGroupInfo(gid)
 
 	return (
-		<MagicAvatar src={groupInfo?.group_avatar} badgeProps={badgeProps} {...rest}>
+		<DelightfulAvatar src={groupInfo?.group_avatar} badgeProps={badgeProps} {...rest}>
 			{groupInfo?.group_name}
-		</MagicAvatar>
+		</DelightfulAvatar>
 	)
 }
 
-export default MagicGroupAvatar
+export default DelightfulGroupAvatar

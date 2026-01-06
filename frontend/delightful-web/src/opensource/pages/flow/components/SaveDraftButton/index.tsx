@@ -1,20 +1,20 @@
 import { Button, message, Form } from "antd"
-import MagicInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
-import type { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
+import DelightfulInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
+import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { useMemo, type MutableRefObject } from "react"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import type { FlowDraft } from "@/types/flow"
 import antdStyles from "@/opensource/pages/flow/index.module.less"
 import { useTranslation } from "react-i18next"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { FlowApi } from "@/apis"
 import styles from "./index.module.less"
 import { getCurrentDateTimeString, shadowFlow } from "../../utils/helpers"
 
 type SaveDraftButtonProps = {
-	flowInstance?: MutableRefObject<MagicFlowInstance | null>
-	flow?: MagicFlow.Flow
+	flowInstance?: MutableRefObject<DelightfulFlowInstance | null>
+	flow?: DelightfulFlow.Flow
 	draft?: FlowDraft.ListItem
 	Icon?: any
 	initDraftList?: (this: any, flowCode: any) => Promise<FlowDraft.Detail[]>
@@ -100,7 +100,7 @@ export default function SaveDraftButton({
 			)}
 			{Icon && <Icon onClick={setTrue} />}
 
-			<MagicModal
+			<DelightfulModal
 				className={antdStyles.antdModal}
 				title={t("common.draftModalTitle", { ns: "flow" })}
 				open={open}
@@ -109,13 +109,13 @@ export default function SaveDraftButton({
 			>
 				<Form form={form} className={styles.form} initialValues={initialValues}>
 					<Form.Item name="name" label={t("common.draftName", { ns: "flow" })}>
-						<MagicInput />
+						<DelightfulInput />
 					</Form.Item>
 					<Form.Item name="description" label={t("common.draftDesc", { ns: "flow" })}>
-						<MagicInput.TextArea />
+						<DelightfulInput.TextArea />
 					</Form.Item>
 				</Form>
-			</MagicModal>
+			</DelightfulModal>
 		</>
 	)
 }

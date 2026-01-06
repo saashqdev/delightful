@@ -1,12 +1,12 @@
 import { magic } from "@/enhance/magicElectron"
 import { useEffect } from "react"
 
-interface MagicElectronViewHookProps {
+interface DelightfulElectronViewHookProps {
 	onShow?: () => void
 	onHide?: () => void
 }
 
-export default function useView(props: MagicElectronViewHookProps) {
+export default function useView(props: DelightfulElectronViewHookProps) {
 	const { onShow, onHide } = props
 
 	useEffect(() => {

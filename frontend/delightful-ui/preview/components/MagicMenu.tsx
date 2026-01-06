@@ -1,5 +1,5 @@
 import React from "react"
-import MagicMenu from "../../components/MagicMenu"
+import DelightfulMenu from "../../components/DelightfulMenu"
 import ComponentDemo from "./Container"
 
 const MenuDemo: React.FC = () => {
@@ -31,7 +31,7 @@ const MenuDemo: React.FC = () => {
 	return (
 		<div>
 			<ComponentDemo title="水平菜单" description="水平方向的菜单" code="mode='horizontal'">
-				<MagicMenu
+				<DelightfulMenu
 					mode="horizontal"
 					items={horizontalItems}
 					style={{ borderBottom: "1px solid #f0f0f0" }}
@@ -40,18 +40,18 @@ const MenuDemo: React.FC = () => {
 
 			<ComponentDemo title="垂直菜单" description="垂直方向的菜单" code="mode='vertical'">
 				<div style={{ width: 200, border: "1px solid #f0f0f0" }}>
-					<MagicMenu mode="vertical" items={verticalItems} />
+					<DelightfulMenu mode="vertical" items={verticalItems} />
 				</div>
 			</ComponentDemo>
 
 			<ComponentDemo title="嵌套菜单" description="支持嵌套子菜单" code="children">
 				<div style={{ width: 200, border: "1px solid #f0f0f0" }}>
-					<MagicMenu mode="vertical" items={nestedItems} />
+					<DelightfulMenu mode="vertical" items={nestedItems} />
 				</div>
 			</ComponentDemo>
 
 			<ComponentDemo title="事件处理" description="监听菜单点击事件" code="onClick">
-				<MagicMenu
+				<DelightfulMenu
 					mode="horizontal"
 					items={horizontalItems}
 					onClick={({ key }) => {
@@ -66,7 +66,7 @@ const MenuDemo: React.FC = () => {
 				description="设置默认选中的菜单项"
 				code="defaultSelectedKeys"
 			>
-				<MagicMenu
+				<DelightfulMenu
 					mode="horizontal"
 					items={horizontalItems}
 					defaultSelectedKeys={["1"]}

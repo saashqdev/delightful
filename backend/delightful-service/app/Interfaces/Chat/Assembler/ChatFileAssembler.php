@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Assembler;
 
-use App\Domain\Chat\Entity\MagicChatFileEntity;
+use App\Domain\Chat\Entity\DelightfulChatFileEntity;
 
 class ChatFileAssembler
 {
-    public static function getChatFileEntity(array $chatFile): MagicChatFileEntity
+    public static function getChatFileEntity(array $chatFile): DelightfulChatFileEntity
     {
-        return new MagicChatFileEntity($chatFile);
+        return new DelightfulChatFileEntity($chatFile);
     }
 }

@@ -4,7 +4,7 @@ import { Flex } from "antd"
 import { get } from "lodash-es"
 import { useMemo } from "react"
 import { cx } from "antd-style"
-import MagicCollapse from "@/opensource/components/base/MagicCollapse"
+import DelightfulCollapse from "@/opensource/components/base/DelightfulCollapse"
 import { useMemoizedFn, useMount } from "ahooks"
 import { useTranslation } from "react-i18next"
 import RecordSummaryManager from "@/opensource/services/chat/recordSummary/RecordSummaryManager"
@@ -126,7 +126,7 @@ export default function useFooter({
 
 	const footerOriginContent = useMemo(() => {
 		return status === RecordSummaryStatus.Summarized ? (
-			<MagicCollapse className={styles.collapse} items={collapseItems} />
+			<DelightfulCollapse className={styles.collapse} items={collapseItems} />
 		) : null
 	}, [collapseItems, styles.collapse, status])
 

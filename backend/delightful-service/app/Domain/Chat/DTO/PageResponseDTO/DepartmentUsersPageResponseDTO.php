@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\DTO\PageResponseDTO;
 
-use App\Domain\Contact\Entity\MagicDepartmentUserEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentUserEntity;
 
 /**
  * 分页响应DTO.
@@ -15,7 +15,7 @@ use App\Domain\Contact\Entity\MagicDepartmentUserEntity;
 class DepartmentUsersPageResponseDTO extends PageResponseDTO
 {
     /**
-     * @var MagicDepartmentUserEntity[]
+     * @var DelightfulDepartmentUserEntity[]
      */
     protected array $items = [];
 

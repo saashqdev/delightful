@@ -14,7 +14,7 @@ use App\Domain\Provider\Entity\ValueObject\ProviderCode;
 use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 use App\Domain\Provider\Entity\ValueObject\Query\ProviderModelQuery;
 use App\Domain\Provider\Entity\ValueObject\Status;
-use App\Domain\Provider\Repository\Facade\MagicProviderAndModelsInterface;
+use App\Domain\Provider\Repository\Facade\DelightfulProviderAndModelsInterface;
 use App\Domain\Provider\Repository\Facade\ProviderModelRepositoryInterface;
 use App\Domain\Provider\Repository\Persistence\Model\ProviderConfigModel;
 use App\Domain\Provider\Repository\Persistence\Model\ProviderModelModel;
@@ -34,7 +34,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     protected bool $filterOrganizationCode = true;
 
     public function __construct(
-        private readonly MagicProviderAndModelsInterface $magicProviderAndModels,
+        private readonly DelightfulProviderAndModelsInterface $magicProviderAndModels,
     ) {
     }
 
@@ -149,7 +149,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             if ($this->isOfficialOrganization($modelOrganizationCode)
                 && ! $this->isOfficialOrganization($currentOrganizationCode)) {
                 // 模型属于官方组织且当前组织不是官方组织：走写时复制逻辑
-                $organizationModelId = $this->magicProviderAndModels->updateMagicModelStatus($dataIsolation, $model);
+                $organizationModelId = $this->magicProviderAndModels->updateDelightfulModelStatus($dataIsolation, $model);
             } else {
                 // 其他情况：无权限操作
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
@@ -186,7 +186,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     {
         // 如果是官方服务商，需要进行数据合并和状态判断
         if ($providerEntity->getProviderCode() === ProviderCode::Official && ! OfficialOrganizationUtil::isOfficialOrganization($dataIsolation->getCurrentOrganizationCode())) {
-            return $this->magicProviderAndModels->getMagicEnableModels($dataIsolation->getCurrentOrganizationCode(), $providerEntity->getCategory());
+            return $this->magicProviderAndModels->getDelightfulEnableModels($dataIsolation->getCurrentOrganizationCode(), $providerEntity->getCategory());
         }
 
         // 非官方服务商，按原逻辑查询指定配置下的模型
@@ -202,10 +202,10 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 获取组织可用模型列表（包含组织自己的模型和Magic模型）.
+     * 获取组织可用模型列表（包含组织自己的模型和Delightful模型）.
      * @param ProviderDataIsolation $dataIsolation 数据隔离对象
      * @param null|Category $category 模型分类，为空时返回所有分类模型
-     * @return ProviderModelEntity[] 按sort降序排序的模型列表，包含组织模型和Magic模型（不去重）
+     * @return ProviderModelEntity[] 按sort降序排序的模型列表，包含组织模型和Delightful模型（不去重）
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, ?Status $status = Status::Enabled): array
     {
@@ -266,10 +266,10 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             $organizationModels = ProviderModelAssembler::toEntities($organizationModelsResult);
         }
 
-        // 3. 获取Magic模型（如果不是官方组织）
+        // 3. 获取Delightful模型（如果不是官方组织）
         $magicModels = [];
         if (! OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
-            $magicModels = $this->magicProviderAndModels->getMagicEnableModels($organizationCode, $category);
+            $magicModels = $this->magicProviderAndModels->getDelightfulEnableModels($organizationCode, $category);
         }
 
         // 4. 直接合并模型列表，不去重

@@ -143,7 +143,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
         /** @var AbstractLLMNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        $flow = $executionData->getMagicFlowEntity();
+        $flow = $executionData->getDelightfulFlowEntity();
         $startNodeId = $flow?->getStartNode()?->getNodeId();
         if ($startNodeId) {
             $systemNodeId = $flow?->getStartNode()->getSystemNodeId();
@@ -165,7 +165,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
         /** @var AbstractLLMNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        $flow = $executionData->getMagicFlowEntity();
+        $flow = $executionData->getDelightfulFlowEntity();
         $startNodeId = $flow?->getStartNode()?->getNodeId();
         if ($startNodeId) {
             $systemNodeId = $flow?->getStartNode()->getSystemNodeId();

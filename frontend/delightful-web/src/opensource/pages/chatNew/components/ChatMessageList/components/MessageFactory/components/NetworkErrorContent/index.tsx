@@ -1,4 +1,4 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconReload } from "@tabler/icons-react"
 import { Flex } from "antd"
 import { createStyles } from "antd-style"
@@ -41,14 +41,14 @@ const NetworkErrorContent = memo(({ onReload, icon, className }: NetworkErrorCon
 		>
 			<div className={styles.invalidText}>{t("chat.message.networkError.description")}</div>
 			{onReload && (
-				<MagicButton
+				<DelightfulButton
 					type="link"
 					size="small"
 					onClick={onReload}
 					icon={icon ?? <IconReload size={18} color="currentColor" />}
 				>
 					{t("chat.message.networkError.reload")}
-				</MagicButton>
+				</DelightfulButton>
 			)}
 		</Flex>
 	)

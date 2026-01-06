@@ -1,7 +1,7 @@
 import { useSize } from "ahooks"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import {
 	IconBook2,
 	IconBox,
@@ -14,25 +14,25 @@ import {
 	IconUserSquareRounded,
 } from "@tabler/icons-react"
 import { RoutePath } from "@/const/routes"
-import SuperMagicIcon from "@/opensource/pages/superMagic/assets/svg/tabler-icon-super-magic.svg"
+import SuperDelightfulIcon from "@/opensource/pages/superDelightful/assets/svg/tabler-icon-super-magic.svg"
 import { isCommercial } from "@/utils/env"
-import MagicLogo from "@/opensource/components/MagicLogo"
-import { LogoType } from "@/opensource/components/MagicLogo/LogoType"
+import DelightfulLogo from "@/opensource/components/DelightfulLogo"
+import { LogoType } from "@/opensource/components/DelightfulLogo/LogoType"
 import type { MenuItemType } from "antd/es/menu/interface"
 import { useSideMenuStyle } from "./styles"
 
-interface MagicMenuItemType extends MenuItemType {
+interface DelightfulMenuItemType extends MenuItemType {
 	hidden: boolean
 }
 
 export function useSideMenu() {
 	const { t } = useTranslation("interface")
 	const { styles } = useSideMenuStyle()
-	return useMemo<Array<Array<MagicMenuItemType>>>(() => {
-		const imMenu: Array<MagicMenuItemType> = [
+	return useMemo<Array<Array<DelightfulMenuItemType>>>(() => {
+		const imMenu: Array<DelightfulMenuItemType> = [
 			{
 				icon: (
-					<MagicIcon
+					<DelightfulIcon
 						color="currentColor"
 						className={styles.navIcon}
 						component={IconMessage}
@@ -44,15 +44,15 @@ export function useSideMenu() {
 			},
 			{
 				icon: (
-					<img src={SuperMagicIcon} alt="" className={styles.navIcon} />
+					<img src={SuperDelightfulIcon} alt="" className={styles.navIcon} />
 				),
 				hidden: false,
-				label: t("sider.superMagic"),
-				key: RoutePath.SuperMagic,
+				label: t("sider.superDelightful"),
+				key: RoutePath.SuperDelightful,
 			},
 			{
 				icon: (
-					<MagicIcon
+					<DelightfulIcon
 						color="currentColor"
 						className={styles.navIcon}
 						component={IconUserSquareRounded}
@@ -63,10 +63,10 @@ export function useSideMenu() {
 				key: RoutePath.ContactsOrganization,
 			},
 		]
-		const aiMenu: Array<MagicMenuItemType> = [
+		const aiMenu: Array<DelightfulMenuItemType> = [
 			{
 				icon: (
-					<MagicIcon
+					<DelightfulIcon
 						color="currentColor"
 						className={styles.navIcon}
 						component={IconBox}
@@ -78,7 +78,7 @@ export function useSideMenu() {
 			},
 			{
 				icon: (
-					<MagicLogo
+					<DelightfulLogo
 						className={styles.navIcon}
 						type={LogoType.ICON}
 						style={{ color: "rgba(0, 0, 0, 0.88)" }}
@@ -89,10 +89,10 @@ export function useSideMenu() {
 				key: RoutePath.Explore,
 			},
 		]
-		const extendMenu: Array<MagicMenuItemType> = [
+		const extendMenu: Array<DelightfulMenuItemType> = [
 			{
 				icon: (
-					<MagicIcon
+					<DelightfulIcon
 						color="currentColor"
 						className={styles.navIcon}
 						component={IconCalendarEvent}
@@ -104,7 +104,7 @@ export function useSideMenu() {
 			},
 			{
 				icon: (
-					<MagicIcon
+					<DelightfulIcon
 						color="currentColor"
 						className={styles.navIcon}
 						component={IconRubberStamp}
@@ -116,7 +116,7 @@ export function useSideMenu() {
 			},
 			{
 				icon: (
-					<MagicIcon
+					<DelightfulIcon
 						color="currentColor"
 						className={styles.navIcon}
 						component={IconChecklist}
@@ -128,7 +128,7 @@ export function useSideMenu() {
 			},
 			{
 				icon: (
-					<MagicIcon
+					<DelightfulIcon
 						color="currentColor"
 						className={styles.navIcon}
 						component={IconFolderOpen}
@@ -140,7 +140,7 @@ export function useSideMenu() {
 			},
 			{
 				icon: (
-					<MagicIcon
+					<DelightfulIcon
 						color="currentColor"
 						className={styles.navIcon}
 						component={IconBook2}
@@ -152,7 +152,7 @@ export function useSideMenu() {
 			},
 			{
 				icon: (
-					<MagicIcon
+					<DelightfulIcon
 						color="currentColor"
 						className={styles.navIcon}
 						component={IconFolderStar}
@@ -163,7 +163,7 @@ export function useSideMenu() {
 				key: RoutePath.Favorites,
 			},
 		]
-		return [imMenu, aiMenu, extendMenu].reduce<Array<Array<MagicMenuItemType>>>(
+		return [imMenu, aiMenu, extendMenu].reduce<Array<Array<DelightfulMenuItemType>>>(
 			(array, menuGroup) => {
 				const menu = menuGroup.filter((i) => !i.hidden)
 				if (menu.length > 0) {

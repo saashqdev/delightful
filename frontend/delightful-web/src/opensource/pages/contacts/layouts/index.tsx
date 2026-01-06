@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 import { Outlet } from "react-router"
 import { Flex } from "antd"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import ContactsSubSider from "../components/ContactsSubSider"
 import ContactPageDataProvider from "../components/ContactDataProvider"
 import { useStyles } from "./styles"
@@ -30,7 +30,7 @@ import { useStyles } from "./styles"
 // 	return (
 // 		<Flex className={styles.topBar} align="center" justify="space-between">
 // 			<span className={styles.title}>{t("contacts.topBar.title")}</span>
-// 			<MagicSegmented
+// 			<DelightfulSegmented
 // 				options={segmentedOptions}
 // 				className={styles.segmented}
 // 				value={viewType}
@@ -50,7 +50,7 @@ function ContactsLayout() {
 				<Flex flex={1}>
 					<ContactsSubSider />
 					<Flex flex={1}>
-						<Suspense fallback={<MagicSpin />}>
+						<Suspense fallback={<DelightfulSpin />}>
 							<Outlet />
 						</Suspense>
 					</Flex>

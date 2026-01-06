@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\DTO\Flow;
 
-use App\Interfaces\Flow\Assembler\Node\MagicFlowNodeAssembler;
+use App\Interfaces\Flow\Assembler\Node\DelightfulFlowNodeAssembler;
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 use App\Interfaces\Flow\DTO\Node\NodeInputDTO;
 use App\Interfaces\Flow\DTO\Node\NodeOutputDTO;
 
-class MagicFlowListDTO extends AbstractFlowDTO
+class DelightfulFlowListDTO extends AbstractFlowDTO
 {
     /**
      * 流程名称（助理名称）.
@@ -100,7 +100,7 @@ class MagicFlowListDTO extends AbstractFlowDTO
 
     public function setInput(mixed $input): void
     {
-        $this->input = MagicFlowNodeAssembler::createNodeInputDTOByMixed($input);
+        $this->input = DelightfulFlowNodeAssembler::createNodeInputDTOByMixed($input);
     }
 
     public function getOutput(): ?NodeOutputDTO
@@ -110,7 +110,7 @@ class MagicFlowListDTO extends AbstractFlowDTO
 
     public function setOutput(mixed $output): void
     {
-        $this->output = MagicFlowNodeAssembler::createNodeOutputDTOByMixed($output);
+        $this->output = DelightfulFlowNodeAssembler::createNodeOutputDTOByMixed($output);
     }
 
     public function getToolSetId(): string
@@ -140,6 +140,6 @@ class MagicFlowListDTO extends AbstractFlowDTO
 
     public function setCustomSystemInput(mixed $customSystemInput): void
     {
-        $this->customSystemInput = MagicFlowNodeAssembler::createNodeInputDTOByMixed($customSystemInput);
+        $this->customSystemInput = DelightfulFlowNodeAssembler::createNodeInputDTOByMixed($customSystemInput);
     }
 }

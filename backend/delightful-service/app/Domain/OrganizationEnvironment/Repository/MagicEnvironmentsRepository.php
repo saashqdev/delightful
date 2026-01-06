@@ -7,54 +7,54 @@ declare(strict_types=1);
 
 namespace App\Domain\OrganizationEnvironment\Repository;
 
-use App\Domain\OrganizationEnvironment\Entity\MagicEnvironmentEntity;
+use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 use App\Domain\OrganizationEnvironment\Repository\Facade\EnvironmentRepositoryInterface;
-use App\Domain\OrganizationEnvironment\Repository\Model\MagicEnvironmentModel;
+use App\Domain\OrganizationEnvironment\Repository\Model\DelightfulEnvironmentModel;
 use Hyperf\Cache\Annotation\Cacheable;
 use Hyperf\Cache\Annotation\CacheEvict;
 use Hyperf\Codec\Json;
 
-readonly class MagicEnvironmentsRepository implements EnvironmentRepositoryInterface
+readonly class DelightfulEnvironmentsRepository implements EnvironmentRepositoryInterface
 {
-    public function __construct(private MagicEnvironmentModel $magicEnvironmentModel)
+    public function __construct(private DelightfulEnvironmentModel $magicEnvironmentModel)
     {
     }
 
-    public function getEnvById(string $id): ?MagicEnvironmentEntity
+    public function getEnvById(string $id): ?DelightfulEnvironmentEntity
     {
         $env = $this->getEnvByIdArray($id);
         if (! $env) {
             return null;
         }
-        return new MagicEnvironmentEntity($env);
+        return new DelightfulEnvironmentEntity($env);
     }
 
     /**
-     * @return MagicEnvironmentEntity[]
+     * @return DelightfulEnvironmentEntity[]
      */
-    public function getMagicEnvironments(): array
+    public function getDelightfulEnvironments(): array
     {
         $entities = [];
         foreach ($this->magicEnvironmentModel->newQuery()->get()->toArray() as $env) {
-            $entities[] = new MagicEnvironmentEntity($env);
+            $entities[] = new DelightfulEnvironmentEntity($env);
         }
         return $entities;
     }
 
     /**
-     * @return MagicEnvironmentEntity[]
+     * @return DelightfulEnvironmentEntity[]
      */
-    public function getMagicEnvironmentsByIds(array $ids): array
+    public function getDelightfulEnvironmentsByIds(array $ids): array
     {
         $entities = [];
         $data = $this->magicEnvironmentModel->newQuery()->whereIn('id', $ids)->get()->toArray();
         foreach ($data as $env) {
-            $entities[] = new MagicEnvironmentEntity($env);
+            $entities[] = new DelightfulEnvironmentEntity($env);
         }
         return $entities;
     }
 
-    public function getMagicEnvironmentById(int $envId): ?MagicEnvironmentEntity
+    public function getDelightfulEnvironmentById(int $envId): ?DelightfulEnvironmentEntity
     {
         $magicOrganizationEnv = $this->magicEnvironmentModel->newQuery()
             ->where('id', $envId)
@@ -63,11 +63,11 @@ readonly class MagicEnvironmentsRepository implements EnvironmentRepositoryInter
         if (empty($magicOrganizationEnv)) {
             return null;
         }
-        return new MagicEnvironmentEntity($magicOrganizationEnv);
+        return new DelightfulEnvironmentEntity($magicOrganizationEnv);
     }
 
     // 创建环境
-    public function createMagicEnvironment(MagicEnvironmentEntity $environmentDTO): MagicEnvironmentEntity
+    public function createDelightfulEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {
         if (empty($environmentDTO->getId())) {
             $environmentDTO->setId($this->magicEnvironmentModel->newQuery()->max('id') + 1);
@@ -86,7 +86,7 @@ readonly class MagicEnvironmentsRepository implements EnvironmentRepositoryInter
 
     // 更新环境
     #[CacheEvict(prefix: 'magic_environment', value: '_#{environmentDTO.magicId}')]
-    public function updateMagicEnvironment(MagicEnvironmentEntity $environmentDTO): MagicEnvironmentEntity
+    public function updateDelightfulEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {
         $time = date('Y-m-d H:i:s');
         $environmentDTO->setUpdatedAt($time);
@@ -104,7 +104,7 @@ readonly class MagicEnvironmentsRepository implements EnvironmentRepositoryInter
         return $environmentDTO;
     }
 
-    public function getEnvironmentEntityByLoginCode(string $loginCode): ?MagicEnvironmentEntity
+    public function getEnvironmentEntityByLoginCode(string $loginCode): ?DelightfulEnvironmentEntity
     {
         $magicOrganizationEnv = $this->magicEnvironmentModel->newQuery()
             ->where('environment_code', $loginCode)
@@ -112,7 +112,7 @@ readonly class MagicEnvironmentsRepository implements EnvironmentRepositoryInter
         if (empty($magicOrganizationEnv)) {
             return null;
         }
-        return new MagicEnvironmentEntity($magicOrganizationEnv->toArray());
+        return new DelightfulEnvironmentEntity($magicOrganizationEnv->toArray());
     }
 
     #[Cacheable(prefix: 'magic_environment', value: '_#{id}', ttl: 60)]

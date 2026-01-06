@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Factory;
 
-use App\Domain\Chat\Entity\MagicMessageEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
 
-class MagicMessageFactory
+class DelightfulMessageFactory
 {
-    public static function arrayToEntity(array $message): MagicMessageEntity
+    public static function arrayToEntity(array $message): DelightfulMessageEntity
     {
-        return new MagicMessageEntity($message);
+        return new DelightfulMessageEntity($message);
     }
 }

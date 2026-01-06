@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace App\Interfaces\Chat\Assembler;
 
 use App\Domain\Contact\Entity\AccountEntity;
-use App\Domain\Contact\Entity\MagicDepartmentEntity;
-use App\Domain\Contact\Entity\MagicDepartmentUserEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DepartmentOption;
 use App\Domain\Contact\Entity\ValueObject\EmployeeType;
 use App\Interfaces\Chat\DTO\UserDepartmentDetailDTO;
@@ -63,9 +63,9 @@ class UserAssembler
         return $userInfos;
     }
 
-    public static function getUserEntity(array $user): MagicUserEntity
+    public static function getUserEntity(array $user): DelightfulUserEntity
     {
-        return new MagicUserEntity($user);
+        return new DelightfulUserEntity($user);
     }
 
     public static function getUserEntities(array $users): array
@@ -93,7 +93,7 @@ class UserAssembler
 
     /**
      * @param AccountEntity[] $accounts
-     * @param MagicUserEntity[] $users
+     * @param DelightfulUserEntity[] $users
      * @return array<UserDetailDTO>
      */
     public static function getUsersDetail(array $users, array $accounts): array
@@ -136,9 +136,9 @@ class UserAssembler
 
     /**
      * 一个用户可能存在于多个部门.
-     * @param MagicDepartmentUserEntity[] $departmentUsers
+     * @param DelightfulDepartmentUserEntity[] $departmentUsers
      * @param UserDetailDTO[] $usersDetail
-     * @param array<string, MagicDepartmentEntity[]> $departmentsInfo
+     * @param array<string, DelightfulDepartmentEntity[]> $departmentsInfo
      * @param bool $withDepartmentFullPath 是否返回部门的完整路径
      * @return UserDepartmentDetailDTO[]
      */
@@ -168,14 +168,14 @@ class UserAssembler
 
             foreach ($userDepartmentRelations as $departmentUser) {
                 $userDepartmentId = $departmentUser['department_id'] ?? '';
-                /** @var MagicDepartmentEntity[] $departments */
+                /** @var DelightfulDepartmentEntity[] $departments */
                 $departments = $departmentsInfo[$userDepartmentId] ?? [];
 
                 if (! empty($departments)) {
                     if ($withDepartmentFullPath) {
                         // 完整路径模式: 为每个部门保存完整层级结构
                         $pathNodes = array_map(
-                            fn (MagicDepartmentEntity $department) => self::assemblePathNodeByDepartmentInfo($department),
+                            fn (DelightfulDepartmentEntity $department) => self::assemblePathNodeByDepartmentInfo($department),
                             $departments
                         );
                         $fullPathNodes[$userDepartmentId] = $pathNodes;
@@ -231,7 +231,7 @@ class UserAssembler
         return array_values($usersDepartmentDetailDTOList);
     }
 
-    private static function assemblePathNodeByDepartmentInfo(MagicDepartmentEntity $departmentInfo): array
+    private static function assemblePathNodeByDepartmentInfo(DelightfulDepartmentEntity $departmentInfo): array
     {
         return [
             // 部门名称

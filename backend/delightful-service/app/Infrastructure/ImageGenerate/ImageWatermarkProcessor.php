@@ -297,7 +297,7 @@ class ImageWatermarkProcessor
         $context = stream_context_create([
             'http' => [
                 'timeout' => 10,
-                'user_agent' => 'Magic-Service/1.0',
+                'user_agent' => 'Delightful-Service/1.0',
             ],
         ]);
 

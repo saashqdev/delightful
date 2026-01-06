@@ -15,7 +15,7 @@ use App\Domain\ModelGateway\Entity\ValueObject\ModelGatewayOfficialApp;
 use App\Domain\ModelGateway\Entity\ValueObject\SystemAccessTokenManager;
 use App\Domain\ModelGateway\Service\ApplicationDomainService;
 
-class MagicAccessToken
+class DelightfulAccessToken
 {
     public static function init(): void
     {

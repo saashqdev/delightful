@@ -1,4 +1,4 @@
-import { useGlobal } from '@/MagicJsonSchemaEditor/context/GlobalContext/useGlobal'
+import { useGlobal } from '@/DelightfulJsonSchemaEditor/context/GlobalContext/useGlobal'
 import React, { useMemo } from 'react'
 
 type PropertiesLengthProps = {

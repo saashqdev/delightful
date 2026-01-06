@@ -1,10 +1,10 @@
-import type { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
+import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
 import { useMemoizedFn } from "ahooks"
 import type { Dispatch, MutableRefObject, SetStateAction } from "react"
 import { useEffect, useState } from "react"
 import { useFlowStore } from "@/opensource/stores/flow"
 import { first } from "lodash-es"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import type { FlowDraft } from "@/types/flow"
 import { useTranslation } from "react-i18next"
 import { FlowApi } from "@/apis"
@@ -15,10 +15,10 @@ import { getCurrentDateTimeString, shadowFlow } from "../utils/helpers"
  */
 
 type UseAutoSaveProps = {
-	flowInstance: MutableRefObject<MagicFlowInstance | null>
+	flowInstance: MutableRefObject<DelightfulFlowInstance | null>
 	isAgent: boolean
 	initDraftList: (this: any, flowCode: any) => Promise<FlowDraft.Detail[]>
-	setCurrentFlow: Dispatch<SetStateAction<MagicFlow.Flow | undefined>>
+	setCurrentFlow: Dispatch<SetStateAction<DelightfulFlow.Flow | undefined>>
 }
 export default function useAutoSave({ flowInstance, isAgent, initDraftList }: UseAutoSaveProps) {
 	const { t } = useTranslation()

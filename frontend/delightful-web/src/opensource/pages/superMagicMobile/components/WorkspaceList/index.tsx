@@ -1,6 +1,6 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import TopicIcon from "@/opensource/pages/superMagic/components/TopicIcon"
-import type { Workspace } from "@/opensource/pages/superMagic/pages/Workspace/types"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import TopicIcon from "@/opensource/pages/superDelightful/components/TopicIcon"
+import type { Workspace } from "@/opensource/pages/superDelightful/pages/Workspace/types"
 import { IconChevronDown, IconChevronUp, IconDeviceImac, IconPlus } from "@tabler/icons-react"
 import { cx } from "antd-style"
 import { memo, useState } from "react"
@@ -62,7 +62,7 @@ export default memo(function WorkspaceList(props: WorkspaceListProps) {
 								setActiveWorkspace?.(workspaceActive ? null : workspaceItem.id)
 							}}
 						>
-							<MagicIcon
+							<DelightfulIcon
 								size={18}
 								stroke={2}
 								component={IconDeviceImac}
@@ -71,7 +71,7 @@ export default memo(function WorkspaceList(props: WorkspaceListProps) {
 							<div className={cx(styles.name, workspaceActive && styles.nameActive)}>
 								{workspaceItem.name}
 							</div>
-							<MagicIcon
+							<DelightfulIcon
 								size={18}
 								stroke={2}
 								component={workspaceActive ? IconChevronUp : IconChevronDown}
@@ -88,11 +88,11 @@ export default memo(function WorkspaceList(props: WorkspaceListProps) {
 											onAddTopicButtonClick?.(workspaceItem.id)
 										}}
 									>
-										<MagicIcon size={18} component={IconPlus} stroke={2} />
+										<DelightfulIcon size={18} component={IconPlus} stroke={2} />
 										<span>新建话题</span>
 									</MobileButton>
 									{/* <MobileButton borderDisabled className={styles.settingsButton}>
-										<MagicIcon size={18} component={IconSettings} stroke={2} />
+										<DelightfulIcon size={18} component={IconSettings} stroke={2} />
 									</MobileButton> */}
 								</div>
 								<div className={styles.topicContainer}>

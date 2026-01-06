@@ -1,6 +1,6 @@
 import { createStyles } from "antd-style"
 import { Suspense, type PropsWithChildren } from "react"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 
 const useStyles = createStyles(({ token, css, prefixCls }) => {
 	return {
@@ -30,9 +30,9 @@ function LoadingFallback({ children }: PropsWithChildren) {
 	return (
 		<Suspense
 			fallback={
-				<MagicSpin spinning className={styles.spin}>
+				<DelightfulSpin spinning className={styles.spin}>
 					<div style={{ height: "100vh" }} />
-				</MagicSpin>
+				</DelightfulSpin>
 			}
 		>
 			{children}

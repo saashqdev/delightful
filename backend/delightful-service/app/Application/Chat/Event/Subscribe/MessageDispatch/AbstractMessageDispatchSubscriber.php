@@ -93,7 +93,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                     if ($userSeqEntity->canTriggerFlow()) {
                         $dataIsolation = new DataIsolation();
                         $dataIsolation->setCurrentOrganizationCode($userSeqEntity->getOrganizationCode());
-                        $userEntity = $this->magicUserRepository->getUserByMagicId($dataIsolation, $userSeqEntity->getObjectId());
+                        $userEntity = $this->magicUserRepository->getUserByDelightfulId($dataIsolation, $userSeqEntity->getObjectId());
                         if ($userEntity === null) {
                             $this->logger->error('messageDispatch user not found: seqId:' . $seqId);
                             return Result::ACK;

@@ -9,44 +9,44 @@ namespace App\Domain\Chat\Repository\Facade;
 
 use App\Domain\Chat\DTO\MessagesQueryDTO;
 use App\Domain\Chat\DTO\Response\ClientSequenceResponse;
-use App\Domain\Chat\Entity\MagicTopicEntity;
-use App\Domain\Chat\Entity\MagicTopicMessageEntity;
+use App\Domain\Chat\Entity\DelightfulTopicEntity;
+use App\Domain\Chat\Entity\DelightfulTopicMessageEntity;
 
-interface MagicChatTopicRepositoryInterface
+interface DelightfulChatTopicRepositoryInterface
 {
     // 创建话题
-    public function createTopic(MagicTopicEntity $magicTopicEntity): MagicTopicEntity;
+    public function createTopic(DelightfulTopicEntity $magicTopicEntity): DelightfulTopicEntity;
 
     // 更新话题
-    public function updateTopic(MagicTopicEntity $magicTopicEntity): MagicTopicEntity;
+    public function updateTopic(DelightfulTopicEntity $magicTopicEntity): DelightfulTopicEntity;
 
     // 删除话题
-    public function deleteTopic(MagicTopicEntity $magicTopicDTO): int;
+    public function deleteTopic(DelightfulTopicEntity $magicTopicDTO): int;
 
     /**
      * 获取会话的会话列表.
      * @param string[] $topicIds
-     * @return array<MagicTopicEntity>
+     * @return array<DelightfulTopicEntity>
      */
     public function getTopicsByConversationId(string $conversationId, array $topicIds): array;
 
-    public function getTopicEntity(MagicTopicEntity $magicTopicDTO): ?MagicTopicEntity;
+    public function getTopicEntity(DelightfulTopicEntity $magicTopicDTO): ?DelightfulTopicEntity;
 
-    public function createTopicMessage(MagicTopicMessageEntity $topicMessageDTO): MagicTopicMessageEntity;
+    public function createTopicMessage(DelightfulTopicMessageEntity $topicMessageDTO): DelightfulTopicMessageEntity;
 
     public function createTopicMessages(array $data): bool;
 
     /**
-     * @return array<MagicTopicMessageEntity>
+     * @return array<DelightfulTopicMessageEntity>
      */
     public function getTopicMessageByMessageIds(array $messageIds): array;
 
-    public function getPrivateChatReceiveTopicEntity(string $senderTopicId, string $senderConversationId): ?MagicTopicEntity;
+    public function getPrivateChatReceiveTopicEntity(string $senderTopicId, string $senderConversationId): ?DelightfulTopicEntity;
 
-    public function getTopicByName(string $conversationId, string $topicName): ?MagicTopicEntity;
+    public function getTopicByName(string $conversationId, string $topicName): ?DelightfulTopicEntity;
 
     /**
-     * @return array<MagicTopicMessageEntity>
+     * @return array<DelightfulTopicMessageEntity>
      */
     public function getTopicMessagesByConversationId(string $conversationId): array;
 
@@ -59,14 +59,14 @@ interface MagicChatTopicRepositoryInterface
     /**
      * 通过topic_id获取话题信息（不需要conversation_id）.
      */
-    public function getTopicByTopicId(string $topicId): ?MagicTopicEntity;
+    public function getTopicByTopicId(string $topicId): ?DelightfulTopicEntity;
 
     public function deleteTopicByIds(array $ids);
 
     /**
      * Get topics by topic ID.
      * @param string $topicId 话题ID
-     * @return MagicTopicEntity[] 话题实体数组
+     * @return DelightfulTopicEntity[] 话题实体数组
      */
     public function getTopicsByTopicId(string $topicId): array;
 
@@ -75,7 +75,7 @@ interface MagicChatTopicRepositoryInterface
      * @param string $conversationId 会话ID
      * @param string $topicId 话题ID
      * @param int $maxSeqId 最大序列ID（包含该ID）
-     * @return MagicTopicMessageEntity[] 话题消息实体数组
+     * @return DelightfulTopicMessageEntity[] 话题消息实体数组
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array;
 }

@@ -2,11 +2,11 @@ import type { AggregateAISearchCardSearch } from "@/types/chat/conversation_mess
 import type { ReactNode } from "react"
 import { createContext, useMemo } from "react"
 
-export const MagicCitationContext = createContext<{
+export const DelightfulCitationContext = createContext<{
 	sources: AggregateAISearchCardSearch[]
 }>({ sources: [] })
 
-const MagicCitationProvider = ({
+const DelightfulCitationProvider = ({
 	sources,
 	children,
 }: {
@@ -19,7 +19,7 @@ const MagicCitationProvider = ({
 		}
 	}, [sources])
 
-	return <MagicCitationContext.Provider value={value}>{children}</MagicCitationContext.Provider>
+	return <DelightfulCitationContext.Provider value={value}>{children}</DelightfulCitationContext.Provider>
 }
 
-export default MagicCitationProvider
+export default DelightfulCitationProvider

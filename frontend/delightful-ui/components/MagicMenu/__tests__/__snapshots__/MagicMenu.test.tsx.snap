@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MagicMenu > 快照测试 > 垂直菜单快照 1`] = `
+exports[`DelightfulMenu > 快照测试 > 垂直菜单快照 1`] = `
 <DocumentFragment>
   <ul
     class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rk magic-menu-css-var"
@@ -42,7 +42,7 @@ exports[`MagicMenu > 快照测试 > 垂直菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicMenu > 快照测试 > 基础菜单快照 1`] = `
+exports[`DelightfulMenu > 快照测试 > 基础菜单快照 1`] = `
 <DocumentFragment>
   <ul
     class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-r3 magic-menu-css-var"
@@ -84,7 +84,7 @@ exports[`MagicMenu > 快照测试 > 基础菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicMenu > 快照测试 > 带图标菜单快照 1`] = `
+exports[`DelightfulMenu > 快照测试 > 带图标菜单快照 1`] = `
 <DocumentFragment>
   <ul
     class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-r8 magic-menu-css-var"
@@ -136,7 +136,7 @@ exports[`MagicMenu > 快照测试 > 带图标菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicMenu > 快照测试 > 带子菜单快照 1`] = `
+exports[`DelightfulMenu > 快照测试 > 带子菜单快照 1`] = `
 <DocumentFragment>
   <ul
     class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rd magic-menu-css-var"
@@ -175,7 +175,7 @@ exports[`MagicMenu > 快照测试 > 带子菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicMenu > 快照测试 > 带类名菜单快照 1`] = `
+exports[`DelightfulMenu > 快照测试 > 带类名菜单快照 1`] = `
 <DocumentFragment>
   <ul
     class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk custom-menu acss-1691gak css-dev-only-do-not-override-yotw4n css-var-ru magic-menu-css-var"
@@ -217,7 +217,7 @@ exports[`MagicMenu > 快照测试 > 带类名菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicMenu > 快照测试 > 带自定义样式菜单快照 1`] = `
+exports[`DelightfulMenu > 快照测试 > 带自定义样式菜单快照 1`] = `
 <DocumentFragment>
   <ul
     class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rp magic-menu-css-var"
@@ -260,7 +260,7 @@ exports[`MagicMenu > 快照测试 > 带自定义样式菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicMenu > 快照测试 > 选中状态菜单快照 1`] = `
+exports[`DelightfulMenu > 快照测试 > 选中状态菜单快照 1`] = `
 <DocumentFragment>
   <ul
     class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rf magic-menu-css-var"

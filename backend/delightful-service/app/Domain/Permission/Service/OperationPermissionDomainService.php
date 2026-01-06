@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Domain\Permission\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation as ContactDataIsolation;
-use App\Domain\Contact\Repository\Facade\MagicDepartmentUserRepositoryInterface;
-use App\Domain\Group\Repository\Facade\MagicGroupRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulDepartmentUserRepositoryInterface;
+use App\Domain\Group\Repository\Facade\DelightfulGroupRepositoryInterface;
 use App\Domain\Permission\Entity\OperationPermissionEntity;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\Operation;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\ResourceType;
@@ -24,8 +24,8 @@ readonly class OperationPermissionDomainService
 {
     public function __construct(
         private OperationPermissionRepositoryInterface $operationPermissionRepository,
-        private MagicGroupRepositoryInterface $magicGroupRepository,
-        private MagicDepartmentUserRepositoryInterface $departmentUserRepository,
+        private DelightfulGroupRepositoryInterface $magicGroupRepository,
+        private DelightfulDepartmentUserRepositoryInterface $departmentUserRepository,
     ) {
     }
 

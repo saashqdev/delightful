@@ -1,13 +1,13 @@
-# MagicPdfRender 架构设计
+# DelightfulPdfRender 架构设计
 
 ## 概述
 
-MagicPdfRender 组件已经按照 SOLID 原则和组件化最佳实践进行了重构，将原来的 697 行单体组件拆分为多个职责单一、可复用的模块。
+DelightfulPdfRender 组件已经按照 SOLID 原则和组件化最佳实践进行了重构，将原来的 697 行单体组件拆分为多个职责单一、可复用的模块。
 
 ## 架构图
 
 ```
-MagicPdfRender/
+DelightfulPdfRender/
 ├── index.tsx                    # 主组件（164行）
 ├── types.ts                     # 类型定义
 ├── styles.ts                    # 样式定义
@@ -146,18 +146,18 @@ PDF 文档查看器：
 ## 使用示例
 
 ```tsx
-import MagicPdfRender from './MagicPdfRender'
+import DelightfulPdfRender from './DelightfulPdfRender'
 
 // 基本使用（功能完全一致）
-<MagicPdfRender 
+<DelightfulPdfRender 
   file="path/to/document.pdf"
   height="800px"
   initialScale={1.2}
 />
 
 // 也可以独立使用子组件
-import { usePdfState, usePdfActions } from './MagicPdfRender/hooks'
-import Toolbar from './MagicPdfRender/components/Toolbar'
+import { usePdfState, usePdfActions } from './DelightfulPdfRender/hooks'
+import Toolbar from './DelightfulPdfRender/components/Toolbar'
 
 function CustomPdfViewer() {
   const pdfState = usePdfState({ initialScale: 1.0, file: "test.pdf" })
@@ -173,7 +173,7 @@ function CustomPdfViewer() {
 
 ```tsx
 // 重构前后的使用方式完全一致
-<MagicPdfRender 
+<DelightfulPdfRender 
   file={pdfFile}
   showToolbar={true}
   height="600px"

@@ -10,7 +10,7 @@ namespace App\Application\ModelGateway\MicroAgent;
 use App\Application\ModelGateway\Mapper\ModelGatewayMapper;
 use App\Application\ModelGateway\Service\ModelConfigAppService;
 use App\Domain\ModelGateway\Entity\ValueObject\ModelGatewayDataIsolation;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Hyperf\Odin\Api\Response\ChatCompletionResponse;
 use Hyperf\Odin\Message\SystemMessage;
@@ -38,7 +38,7 @@ class MicroAgent
         $systemContent = $this->replaceSystemVariables($systemReplace);
 
         if (empty($systemContent)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'system_content']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'system_content']);
         }
 
         $systemPrompt = new SystemMessage($systemContent);

@@ -3,7 +3,7 @@
  */
 
 import { Flex, Form } from "antd"
-import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import styles from "../SearchUsers.module.less"
@@ -20,7 +20,7 @@ export default function useFilters() {
 			<Flex className={styles.filterTypeWrap} align="center" gap={4}>
 				<span className={styles.text}>{t("common.meet", { ns: "flow" })}</span>
 				<Form.Item name="filter_type">
-					<MagicSelect
+					<DelightfulSelect
 						options={[
 							{
 								label: t("common.all", { ns: "flow" }),

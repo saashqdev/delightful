@@ -2,12 +2,12 @@ import { useMessageRenderContext } from "@/opensource/components/business/Messag
 import { useStyles } from "./styles"
 import { cx } from "antd-style"
 import { memo } from "react"
-interface MagicInlineCodeProps {
+interface DelightfulInlineCodeProps {
 	data?: string
 	className?: string
 }
 
-const MagicInlineCode = memo(function MagicInlineCode(props: MagicInlineCodeProps) {
+const DelightfulInlineCode = memo(function DelightfulInlineCode(props: DelightfulInlineCodeProps) {
 	const { styles } = useStyles()
 	const { hiddenDetail } = useMessageRenderContext()
 	const { data: propsValue, className } = props
@@ -22,4 +22,4 @@ const MagicInlineCode = memo(function MagicInlineCode(props: MagicInlineCodeProp
 	return <code className={cx(styles.default, className)}>{propsValue}</code>
 })
 
-export default MagicInlineCode
+export default DelightfulInlineCode

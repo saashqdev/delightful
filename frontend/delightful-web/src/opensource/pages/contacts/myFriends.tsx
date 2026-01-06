@@ -1,4 +1,4 @@
-import { MagicList } from "@/opensource/components/MagicList"
+import { DelightfulList } from "@/opensource/components/DelightfulList"
 import { createStyles } from "antd-style"
 
 const useStyles = createStyles(({ css }) => {
@@ -11,7 +11,7 @@ const useStyles = createStyles(({ css }) => {
 
 function MyFriends() {
 	const { styles } = useStyles()
-	return <MagicList items={[]} className={styles.list} />
+	return <DelightfulList items={[]} className={styles.list} />
 }
 
 export default MyFriends

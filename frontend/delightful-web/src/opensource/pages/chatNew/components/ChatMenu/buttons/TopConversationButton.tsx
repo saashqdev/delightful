@@ -1,5 +1,5 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import conversationStore from "@/opensource/stores/chatNew/conversation"
 import conversationService from "@/opensource/services/chat/conversation/ConversationService"
 import { IconPin } from "@tabler/icons-react"
@@ -21,9 +21,9 @@ const TopConversationButton = observer(({ conversationId }: { conversationId: st
 	if (!conversation) return null
 
 	return (
-		<MagicButton
+		<DelightfulButton
 			justify="flex-start"
-			icon={<MagicIcon component={IconPin} size={20} />}
+			icon={<DelightfulIcon component={IconPin} size={20} />}
 			size="large"
 			type="text"
 			block
@@ -32,7 +32,7 @@ const TopConversationButton = observer(({ conversationId }: { conversationId: st
 			{conversation.is_top
 				? t("chat.floatButton.cancelTopConversation")
 				: t("chat.floatButton.topConversation")}
-		</MagicButton>
+		</DelightfulButton>
 	)
 })
 

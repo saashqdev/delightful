@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Agent\Assembler;
 
-use App\Domain\Agent\Entity\MagicAgentEntity;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Interfaces\Agent\DTO\AvailableAgentDTO;
 use App\Interfaces\Kernel\Assembler\FileAssembler;
@@ -19,7 +19,7 @@ class AgentAssembler
     /**
      * @param array<string, FileLink> $icons
      */
-    public static function createAvailableAgentDTO(MagicAgentEntity $agentEntity, array $icons = []): AvailableAgentDTO
+    public static function createAvailableAgentDTO(DelightfulAgentEntity $agentEntity, array $icons = []): AvailableAgentDTO
     {
         $dto = new AvailableAgentDTO();
         $dto->setId($agentEntity->getId());
@@ -32,7 +32,7 @@ class AgentAssembler
 
     public static function createAvailableList(Page $page, int $total, array $list, array $icons = []): PageDTO
     {
-        $list = array_map(fn (MagicAgentEntity $entity) => self::createAvailableAgentDTO($entity, $icons), $list);
+        $list = array_map(fn (DelightfulAgentEntity $entity) => self::createAvailableAgentDTO($entity, $icons), $list);
         return new PageDTO($page->getPage(), $total, $list);
     }
 

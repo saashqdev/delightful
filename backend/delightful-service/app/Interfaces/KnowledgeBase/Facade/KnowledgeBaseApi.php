@@ -13,7 +13,7 @@ use App\Domain\KnowledgeBase\Entity\ValueObject\Query\KnowledgeBaseQuery;
 use App\ErrorCode\AuthenticationErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Kernel\DTO\PageDTO;
 use App\Interfaces\KnowledgeBase\Assembler\KnowledgeBaseAssembler;
 use App\Interfaces\KnowledgeBase\Assembler\KnowledgeBaseDocumentAssembler;
@@ -48,7 +48,7 @@ class KnowledgeBaseApi extends AbstractKnowledgeBaseApi
 
     public function queries()
     {
-        /** @var MagicUserAuthorization $authorization */
+        /** @var DelightfulUserAuthorization $authorization */
         $authorization = $this->getAuthorization();
         $query = new KnowledgeBaseQuery($this->request->all());
         $query->setOrder(['updated_at' => 'desc']);
@@ -93,7 +93,7 @@ class KnowledgeBaseApi extends AbstractKnowledgeBaseApi
         }
 
         /**
-         * @var MagicUserAuthorization $authorization
+         * @var DelightfulUserAuthorization $authorization
          */
         $authorization = $this->getAuthorization();
         $fileLink = $this->fileAppService->getLink($authorization->getOrganizationCode(), $fileKey, StorageBucketType::Private);

@@ -1,6 +1,6 @@
 import { prefix } from "@/DelightfulFlow/constants"
 import { useMaterialSource } from "@/DelightfulFlow/context/MaterialSourceContext/MaterialSourceContext"
-import { MagicFlow } from "@/DelightfulFlow/types/flow"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import { Empty, Select } from "antd"
 import { IconCaretDownFilled } from "@tabler/icons-react"
 import clsx from "clsx"
@@ -31,7 +31,7 @@ export default function PanelAgent() {
 			/>
 			<div className={clsx(styles.panelAgentList, `${prefix}panel-agent-list`)}>
 				{schema &&
-					agent?.list?.map?.((flow: Partial<MagicFlow.Flow>) => {
+					agent?.list?.map?.((flow: Partial<DelightfulFlow.Flow>) => {
 						return (
 							<MaterialItem
 								{...schema}

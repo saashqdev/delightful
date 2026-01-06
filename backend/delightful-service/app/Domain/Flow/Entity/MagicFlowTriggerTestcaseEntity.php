@@ -14,7 +14,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Carbon\Carbon;
 use DateTime;
 
-class MagicFlowTriggerTestcaseEntity extends AbstractEntity
+class DelightfulFlowTriggerTestcaseEntity extends AbstractEntity
 {
     protected ?int $id = null;
 
@@ -52,7 +52,7 @@ class MagicFlowTriggerTestcaseEntity extends AbstractEntity
         $this->updatedAt = $this->createdAt;
     }
 
-    public function prepareForModification(MagicFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): void
+    public function prepareForModification(DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): void
     {
         $this->requiredValidate();
 

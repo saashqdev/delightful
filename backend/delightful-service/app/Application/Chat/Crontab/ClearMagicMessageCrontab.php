@@ -11,8 +11,8 @@ use Carbon\Carbon;
 use Hyperf\Crontab\Annotation\Crontab;
 use Psr\Log\LoggerInterface;
 
-// #[Crontab(rule: '*/1 * * * *', name: 'ClearMagicMessageCrontab', singleton: true, mutexExpires: 600, onOneServer: true, callback: 'execute', memo: '清理magicMessage')]
-readonly class ClearMagicMessageCrontab
+// #[Crontab(rule: '*/1 * * * *', name: 'ClearDelightfulMessageCrontab', singleton: true, mutexExpires: 600, onOneServer: true, callback: 'execute', memo: '清理magicMessage')]
+readonly class ClearDelightfulMessageCrontab
 {
     public function __construct(
         private LoggerInterface $logger,
@@ -21,15 +21,15 @@ readonly class ClearMagicMessageCrontab
 
     public function execute(): void
     {
-        $this->logger->info('ClearMagicMessageCrontab start');
+        $this->logger->info('ClearDelightfulMessageCrontab start');
         $time = Carbon::now()->subMinutes(30)->toDateTimeString();
-        $this->clearMagicMessage($time);
-        $this->logger->info('ClearMagicMessageCrontab success');
+        $this->clearDelightfulMessage($time);
+        $this->logger->info('ClearDelightfulMessageCrontab success');
     }
 
-    public function clearMagicMessage(string $time): void
+    public function clearDelightfulMessage(string $time): void
     {
         // 录音功能已移除，此方法保留为空实现，可根据需要添加其他清理逻辑
-        $this->logger->info(sprintf('ClearMagicMessageCrontab time: %s - recording functionality removed', $time));
+        $this->logger->info(sprintf('ClearDelightfulMessageCrontab time: %s - recording functionality removed', $time));
     }
 }

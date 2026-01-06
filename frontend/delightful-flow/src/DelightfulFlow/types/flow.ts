@@ -11,7 +11,7 @@ export enum FlowType {
     Sub = 2
 }
 
-export namespace MagicFlow {
+export namespace DelightfulFlow {
 
     // Node data structure
     export interface Node extends BaseNode {
@@ -45,7 +45,7 @@ export namespace MagicFlow {
         index?: number
         output?: WidgetValue['value'] | null
         input?: WidgetValue['value'] | null
-		children?: MagicFlow.Node[]
+		children?: DelightfulFlow.Node[]
         // Node version
         node_version: string
 		[key: string]: any

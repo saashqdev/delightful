@@ -352,7 +352,7 @@ export const enum RequestUrl {
 	/** Get topic messages */
 	getTopicMessages = "/api/v2/magic/topic/messages",
 	/** Smart rename topic */
-	getMagicTopicName = "/api/v1/im/conversations/${conversationId}/topics/${topicId}/name",
+	getDelightfulTopicName = "/api/v1/im/conversations/${conversationId}/topics/${topicId}/name",
 
 	/** Get files */
 	getFiles = "/api/v1/teamshare/multi-table/file/queries",
@@ -368,8 +368,8 @@ export const enum RequestUrl {
 	getResourceAccess = "/api/v1/operation-permissions/resource-access",
 	/** Transfer creator */
 	transferOwner = "/api/v1/operation-permissions/transfer-owner",
-	/** Bind Authorization + authorization code in Magic */
-	bindMagicAuthorization = "/api/v1/auth/status",
+	/** Bind Authorization + authorization code in Delightful */
+	bindDelightfulAuthorization = "/api/v1/auth/status",
 	/** [New] Exchange user token for one-time temp token */
 	userTokenToTempToken = "/api/v1/auth/temp-token",
 	/** [New] Exchange temp token for user token */

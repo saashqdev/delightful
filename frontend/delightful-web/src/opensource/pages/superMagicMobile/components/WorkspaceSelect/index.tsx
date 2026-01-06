@@ -1,6 +1,6 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import TopicIcon from "@/opensource/pages/superMagic/components/TopicIcon"
-import type { Thread, Workspace } from "@/opensource/pages/superMagic/pages/Workspace/types"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import TopicIcon from "@/opensource/pages/superDelightful/components/TopicIcon"
+import type { Thread, Workspace } from "@/opensource/pages/superDelightful/pages/Workspace/types"
 import { IconChevronDown, IconPlus, IconX } from "@tabler/icons-react"
 import { Popup, SafeArea } from "antd-mobile"
 import type { Ref } from "react"
@@ -52,7 +52,7 @@ function WorkspaceSelect(props: WorkspaceSelectProps, ref: Ref<WorkspaceSelectRe
 				<div className={styles.name}>
 					{workspaceName} / {topicName}
 				</div>
-				<MagicIcon
+				<DelightfulIcon
 					size={18}
 					stroke={2}
 					component={IconChevronDown}
@@ -82,7 +82,7 @@ function WorkspaceSelect(props: WorkspaceSelectProps, ref: Ref<WorkspaceSelectRe
 									setVisible(false)
 								}}
 							>
-								<MagicIcon size={22} stroke={2} component={IconX} />
+								<DelightfulIcon size={22} stroke={2} component={IconX} />
 							</MobileButton>
 						</div>
 					</div>
@@ -102,7 +102,7 @@ function WorkspaceSelect(props: WorkspaceSelectProps, ref: Ref<WorkspaceSelectRe
 							className={styles.popupContentFooterContent}
 							onClick={onAddWorkspaceButtonClick}
 						>
-							<MagicIcon size={20} stroke={2} component={IconPlus} />
+							<DelightfulIcon size={20} stroke={2} component={IconPlus} />
 							<span>新增工作区</span>
 						</div>
 						<SafeArea position="bottom" />

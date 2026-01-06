@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Application\Contact\Service;
 
-use App\Application\Contact\DTO\MagicUserOrganizationItemDTO;
-use App\Application\Contact\DTO\MagicUserOrganizationListDTO;
+use App\Application\Contact\DTO\DelightfulUserOrganizationItemDTO;
+use App\Application\Contact\DTO\DelightfulUserOrganizationListDTO;
 use App\Application\Contact\Support\OrganizationProductResolver;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicUserDomainService;
-use App\Domain\OrganizationEnvironment\Service\MagicOrganizationEnvDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
+use App\Domain\OrganizationEnvironment\Service\DelightfulOrganizationEnvDomainService;
 use App\Domain\OrganizationEnvironment\Service\OrganizationDomainService;
 use App\Domain\Permission\Service\OrganizationAdminDomainService;
 use App\ErrorCode\UserErrorCode;
@@ -23,16 +23,16 @@ use Throwable;
 /**
  * 用户当前组织应用服务
  */
-class MagicUserOrganizationAppService
+class DelightfulUserOrganizationAppService
 {
     #[Inject]
-    protected MagicUserDomainService $userDomainService;
+    protected DelightfulUserDomainService $userDomainService;
 
     #[Inject]
-    protected MagicUserSettingAppService $userSettingAppService;
+    protected DelightfulUserSettingAppService $userSettingAppService;
 
     #[Inject]
-    protected MagicOrganizationEnvDomainService $organizationEnvDomainService;
+    protected DelightfulOrganizationEnvDomainService $organizationEnvDomainService;
 
     #[Inject]
     protected OrganizationDomainService $organizationDomainService;
@@ -48,7 +48,7 @@ class MagicUserOrganizationAppService
      */
     public function getCurrentOrganizationCode(string $magicId): ?array
     {
-        return $this->userSettingAppService->getCurrentOrganizationDataByMagicId($magicId);
+        return $this->userSettingAppService->getCurrentOrganizationDataByDelightfulId($magicId);
     }
 
     /**
@@ -57,13 +57,13 @@ class MagicUserOrganizationAppService
     public function setCurrentOrganizationCode(string $magicId, string $magicOrganizationCode): array
     {
         // 1. 查询用户是否在指定组织中
-        $userOrganizations = $this->userDomainService->getUserOrganizationsByMagicId($magicId);
+        $userOrganizations = $this->userDomainService->getUserOrganizationsByDelightfulId($magicId);
         if (! in_array($magicOrganizationCode, $userOrganizations, true)) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
 
         // 2. 查询这个组织的相关信息：magic_organizations_environment
-        $organizationEnvEntity = $this->organizationEnvDomainService->getOrganizationEnvironmentByMagicOrganizationCode($magicOrganizationCode);
+        $organizationEnvEntity = $this->organizationEnvDomainService->getOrganizationEnvironmentByDelightfulOrganizationCode($magicOrganizationCode);
         if (! $organizationEnvEntity) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
@@ -76,7 +76,7 @@ class MagicUserOrganizationAppService
             'switch_time' => time(),
         ];
 
-        $this->userSettingAppService->saveCurrentOrganizationDataByMagicId($magicId, $organizationData);
+        $this->userSettingAppService->saveCurrentOrganizationDataByDelightfulId($magicId, $organizationData);
         return $organizationData;
     }
 
@@ -85,11 +85,11 @@ class MagicUserOrganizationAppService
      *
      * @throws Throwable
      */
-    public function getOrganizationsByAuthorization(string $authorization): MagicUserOrganizationListDTO
+    public function getOrganizationsByAuthorization(string $authorization): DelightfulUserOrganizationListDTO
     {
         $userDetails = $this->userDomainService->getUsersDetailByAccountFromAuthorization($authorization);
         if (empty($userDetails)) {
-            return new MagicUserOrganizationListDTO();
+            return new DelightfulUserOrganizationListDTO();
         }
 
         $organizationUserMap = [];
@@ -105,23 +105,23 @@ class MagicUserOrganizationAppService
             }
 
             if ($magicId === null) {
-                $magicId = $detail->getMagicId();
+                $magicId = $detail->getDelightfulId();
             }
         }
 
         if ($magicId === null || empty($organizationUserMap)) {
-            return new MagicUserOrganizationListDTO();
+            return new DelightfulUserOrganizationListDTO();
         }
 
         $organizations = $this->organizationDomainService->getByCodes(array_keys($organizationUserMap));
         if (empty($organizations)) {
-            return new MagicUserOrganizationListDTO();
+            return new DelightfulUserOrganizationListDTO();
         }
 
         $currentOrganizationData = $this->getCurrentOrganizationCode($magicId) ?? [];
         $currentOrganizationCode = $currentOrganizationData['magic_organization_code'] ?? null;
 
-        $listDTO = new MagicUserOrganizationListDTO();
+        $listDTO = new DelightfulUserOrganizationListDTO();
         foreach ($organizations as $organizationCode => $organizationEntity) {
             if ($organizationEntity === null || ! $organizationEntity->isNormal()) {
                 continue;
@@ -138,7 +138,7 @@ class MagicUserOrganizationAppService
 
             $subscriptionInfo = $this->organizationProductResolver->resolveSubscriptionInfo($organizationCode, $userId);
 
-            $item = new MagicUserOrganizationItemDTO([
+            $item = new DelightfulUserOrganizationItemDTO([
                 'magic_organization_code' => $organizationCode,
                 'name' => $organizationEntity->getName(),
                 'organization_type' => $organizationEntity->getType(),

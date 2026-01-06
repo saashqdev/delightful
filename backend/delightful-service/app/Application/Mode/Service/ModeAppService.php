@@ -17,23 +17,23 @@ use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 use App\Domain\Provider\Entity\ValueObject\Status;
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Infrastructure\Util\OfficialOrganizationUtil;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Delightful\SuperMagic\Application\Agent\Service\SuperMagicAgentAppService;
-use Delightful\SuperMagic\Domain\Agent\Entity\SuperMagicAgentEntity;
-use Delightful\SuperMagic\Domain\Agent\Entity\ValueObject\Query\SuperMagicAgentQuery;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use Delightful\SuperDelightful\Application\Agent\Service\SuperDelightfulAgentAppService;
+use Delightful\SuperDelightful\Domain\Agent\Entity\SuperDelightfulAgentEntity;
+use Delightful\SuperDelightful\Domain\Agent\Entity\ValueObject\Query\SuperDelightfulAgentQuery;
 
 class ModeAppService extends AbstractModeAppService
 {
-    public function getModes(MagicUserAuthorization $authorization): array
+    public function getModes(DelightfulUserAuthorization $authorization): array
     {
         $modeDataIsolation = $this->getModeDataIsolation($authorization);
         $modeDataIsolation->disabled();
 
         // 获取目前的所有可用的 agent
-        $superMagicAgentAppService = di(SuperMagicAgentAppService::class);
-        $agentData = $superMagicAgentAppService->queries($authorization, new SuperMagicAgentQuery(), Page::createNoPage());
+        $superDelightfulAgentAppService = di(SuperDelightfulAgentAppService::class);
+        $agentData = $superDelightfulAgentAppService->queries($authorization, new SuperDelightfulAgentQuery(), Page::createNoPage());
         // 合并常用和全部 agent 列表，常用在前
-        /** @var array<SuperMagicAgentEntity> $allAgents */
+        /** @var array<SuperDelightfulAgentEntity> $allAgents */
         $allAgents = array_merge($agentData['frequent'], $agentData['all']);
         if (empty($allAgents)) {
             return [];
@@ -158,7 +158,7 @@ class ModeAppService extends AbstractModeAppService
     /**
      * @return ModeGroupDetailDTO[]
      */
-    public function getModeByIdentifier(MagicUserAuthorization $authorization, string $identifier): array
+    public function getModeByIdentifier(DelightfulUserAuthorization $authorization, string $identifier): array
     {
         $modeDataIsolation = $this->getModeDataIsolation($authorization);
         $modeDataIsolation->disabled();

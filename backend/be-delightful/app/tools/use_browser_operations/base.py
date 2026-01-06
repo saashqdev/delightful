@@ -293,7 +293,7 @@ class OperationGroup(ABC):
         return f"Operation '{operation_name}' parameter error: {error!s}"
 
     # --- Page validation helper ---
-    async def _get_validated_page(self, browser: 'MagicBrowser', params: BaseOperationParams) -> tuple[Optional['Page'], Optional[ToolResult]]:
+    async def _get_validated_page(self, browser: 'DelightfulBrowser', params: BaseOperationParams) -> tuple[Optional['Page'], Optional[ToolResult]]:
         """Get and validate a page object.
 
         Resolves page_id and checks that the page exists and is open.

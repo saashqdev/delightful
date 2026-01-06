@@ -1,4 +1,4 @@
-import MagicLoading from "@/opensource/components/other/MagicLoading"
+import DelightfulLoading from "@/opensource/components/other/DelightfulLoading"
 import { createStyles } from "antd-style"
 import { useMemo } from "react"
 
@@ -40,12 +40,12 @@ export const useStyles = createStyles(({ css, prefixCls }, { size }: { size: num
 	}
 })
 
-export function useMagicSpinProps(section: boolean = true, size?: "small" | "default" | "large") {
+export function useDelightfulSpinProps(section: boolean = true, size?: "small" | "default" | "large") {
 	const { styles } = useStyles({ size: sizeMap[size ?? "default"] })
 
 	return useMemo(
 		() => ({
-			indicator: <MagicLoading section={section} />,
+			indicator: <DelightfulLoading section={section} />,
 			rootClassName: styles.icon,
 			wrapperClassName: styles.wrapper,
 		}),

@@ -1,17 +1,17 @@
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { Avatar, Flex, Input, Select, List, message } from "antd"
 import { useMemoizedFn, useBoolean, useResetState, useSize } from "ahooks"
 import { useMemo, useRef, useState } from "react"
 import AgentEmptyImage from "@/assets/logos/empty-ai.svg"
 import { IconSearch, IconTrash, IconEdit } from "@tabler/icons-react"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import type { Bot } from "@/types/bot"
 import { useTranslation } from "react-i18next"
 import InfiniteScroll from "react-infinite-scroll-component"
 import { useNavigate } from "@/opensource/hooks/useNavigate"
 import { replaceRouteParams } from "@/utils/route"
 import { RoutePath } from "@/const/routes"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import DeleteDangerModal from "@/opensource/components/business/DeleteDangerModal"
 import { openModal } from "@/utils/react"
 import useSWRInfinite from "swr/infinite"
@@ -142,9 +142,9 @@ function AgentPage() {
 						{botList.length === 0 ? t("agent.agentEmpty") : t("flow.searchTips")}
 					</div>
 				</Flex>
-				<MagicButton type="primary" onClick={openAddAgentModal}>
+				<DelightfulButton type="primary" onClick={openAddAgentModal}>
 					{t("explore.buttonText.createAssistant")}
-				</MagicButton>
+				</DelightfulButton>
 			</Flex>
 		)
 	}, [botList.length, openAddAgentModal, styles.EmptyImage, styles.emptyTips, t])
@@ -192,21 +192,21 @@ function AgentPage() {
 		return (
 			<>
 				{hasEditRight(bot.user_operation) && (
-					<MagicButton
+					<DelightfulButton
 						justify="flex-start"
-						icon={<MagicIcon component={IconEdit} size={20} color="currentColor" />}
+						icon={<DelightfulIcon component={IconEdit} size={20} color="currentColor" />}
 						size="large"
 						type="text"
 						block
 						onClick={() => handleClickBot(bot, "update")}
 					>
 						{t("button.edit")} {t("sider.assistants")}
-					</MagicButton>
+					</DelightfulButton>
 				)}
 				{hasAdminRight(bot.user_operation) && (
-					<MagicButton
+					<DelightfulButton
 						justify="flex-start"
-						icon={<MagicIcon component={IconTrash} size={20} color="currentColor" />}
+						icon={<DelightfulIcon component={IconTrash} size={20} color="currentColor" />}
 						size="large"
 						type="text"
 						block
@@ -214,7 +214,7 @@ function AgentPage() {
 						onClick={() => deleteItem(bot)}
 					>
 						{t("chat.delete")} {t("sider.assistants")}
-					</MagicButton>
+					</DelightfulButton>
 				)}
 			</>
 		)
@@ -234,7 +234,7 @@ function AgentPage() {
 						onChange={(e) => setKeyword(e.target.value)}
 						placeholder={t("common.search", { ns: "flow" })}
 					/>
-					<MagicButton
+					<DelightfulButton
 						type="primary"
 						style={{ borderRadius: 8 }}
 						onClick={() => {
@@ -243,11 +243,11 @@ function AgentPage() {
 						}}
 					>
 						{t("explore.buttonText.createAssistant")}
-					</MagicButton>
+					</DelightfulButton>
 				</Flex>
 			</Flex>
 
-			<MagicSpin section spinning={isLoading}>
+			<DelightfulSpin section spinning={isLoading}>
 				<div
 					ref={scrollRef}
 					id="scrollableDiv"
@@ -296,7 +296,7 @@ function AgentPage() {
 						</InfiniteScroll>
 					)}
 				</div>
-			</MagicSpin>
+			</DelightfulSpin>
 
 			<AddOrUpdateAgent
 				open={addAgentModalOpen}

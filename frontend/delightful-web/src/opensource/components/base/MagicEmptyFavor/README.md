@@ -1,6 +1,6 @@
-# MagicEmptyFavor 魔法空收藏组件
+# DelightfulEmptyFavor 魔法空收藏组件
 
-MagicEmptyFavor 是一个用于显示收藏夹为空状态的组件。当用户的收藏列表为空时，该组件会显示一个友好的提示信息和图标，提升用户体验。
+DelightfulEmptyFavor 是一个用于显示收藏夹为空状态的组件。当用户的收藏列表为空时，该组件会显示一个友好的提示信息和图标，提升用户体验。
 
 ## 属性
 
@@ -11,16 +11,16 @@ MagicEmptyFavor 是一个用于显示收藏夹为空状态的组件。当用户�
 ## 基本用法
 
 ```tsx
-import MagicEmptyFavor from '@/components/base/MagicEmptyFavor';
+import DelightfulEmptyFavor from '@/components/base/DelightfulEmptyFavor';
 
 // 基本用法 - 使用默认文本
-<MagicEmptyFavor />
+<DelightfulEmptyFavor />
 
 // 自定义文本
-<MagicEmptyFavor text="您还没有添加任何收藏项" />
+<DelightfulEmptyFavor text="您还没有添加任何收藏项" />
 
 // 在条件渲染中使用
-{favoritesList.length === 0 && <MagicEmptyFavor />}
+{favoritesList.length === 0 && <DelightfulEmptyFavor />}
 ```
 
 ## 特性
@@ -38,4 +38,4 @@ import MagicEmptyFavor from '@/components/base/MagicEmptyFavor';
 -   搜索结果为空时的友好提示
 -   任何需要显示"无数据"状态的场景
 
-MagicEmptyFavor 组件通过提供一个视觉上吸引人的空状态提示，改善了用户在面对空列表时的体验，同时鼓励用户添加内容到收藏夹中。
+DelightfulEmptyFavor 组件通过提供一个视觉上吸引人的空状态提示，改善了用户在面对空列表时的体验，同时鼓励用户添加内容到收藏夹中。

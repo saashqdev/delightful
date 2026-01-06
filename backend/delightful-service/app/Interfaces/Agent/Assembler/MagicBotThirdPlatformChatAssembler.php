@@ -7,17 +7,17 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Agent\Assembler;
 
-use App\Domain\Agent\Entity\MagicBotThirdPlatformChatEntity;
+use App\Domain\Agent\Entity\DelightfulBotThirdPlatformChatEntity;
 use App\Domain\Agent\Entity\ValueObject\ThirdPlatformChat\ThirdPlatformChatType;
 use App\Infrastructure\Core\PageDTO;
 use App\Infrastructure\Core\ValueObject\Page;
-use App\Interfaces\Agent\DTO\MagicBotThirdPlatformChatDTO;
+use App\Interfaces\Agent\DTO\DelightfulBotThirdPlatformChatDTO;
 
-class MagicBotThirdPlatformChatAssembler
+class DelightfulBotThirdPlatformChatAssembler
 {
-    public function createDO(MagicBotThirdPlatformChatDTO $DTO): MagicBotThirdPlatformChatEntity
+    public function createDO(DelightfulBotThirdPlatformChatDTO $DTO): DelightfulBotThirdPlatformChatEntity
     {
-        $DO = new MagicBotThirdPlatformChatEntity();
+        $DO = new DelightfulBotThirdPlatformChatEntity();
         $DO->setId($DTO->getId());
         $DO->setBotId($DTO->getBotId());
         $DO->setKey($DTO->getKey());
@@ -28,9 +28,9 @@ class MagicBotThirdPlatformChatAssembler
         return $DO;
     }
 
-    public function createDTO(MagicBotThirdPlatformChatEntity $DO, bool $desensitize = false): MagicBotThirdPlatformChatDTO
+    public function createDTO(DelightfulBotThirdPlatformChatEntity $DO, bool $desensitize = false): DelightfulBotThirdPlatformChatDTO
     {
-        $DTO = new MagicBotThirdPlatformChatDTO();
+        $DTO = new DelightfulBotThirdPlatformChatDTO();
         $DTO->setId($DO->getId());
         $DTO->setBotId($DO->getBotId());
         $DTO->setKey($DO->getKey());
@@ -62,7 +62,7 @@ class MagicBotThirdPlatformChatAssembler
     {
         $pageDTO = new PageDTO();
         $pageDTO->setTotal($total);
-        $pageDTO->setList(array_map(fn (MagicBotThirdPlatformChatEntity $DO) => $this->createDTO($DO, $desensitize), $list));
+        $pageDTO->setList(array_map(fn (DelightfulBotThirdPlatformChatEntity $DO) => $this->createDTO($DO, $desensitize), $list));
         $pageDTO->setPage($page->getPage());
         return $pageDTO;
     }

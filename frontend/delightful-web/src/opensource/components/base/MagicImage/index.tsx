@@ -1,10 +1,10 @@
 import type { ImgHTMLAttributes } from "react"
 import { memo, useState } from "react"
 
-interface MagicImageProps extends ImgHTMLAttributes<HTMLImageElement> {
+interface DelightfulImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 	errorSrc?: string
 }
-export default memo(function MagicImage(props: MagicImageProps) {
+export default memo(function DelightfulImage(props: DelightfulImageProps) {
 	const { errorSrc, ...imgProps } = props
 
 	const [src, setSrc] = useState<string>(imgProps.src || "")

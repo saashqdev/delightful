@@ -7,19 +7,19 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Repository\Persistence;
 
-use App\Domain\Chat\Entity\MagicMessageVersionEntity;
-use App\Domain\Chat\Repository\Facade\MagicChatMessageVersionsRepositoryInterface;
-use App\Domain\Chat\Repository\Persistence\Model\MagicMessageVersionsModel;
+use App\Domain\Chat\Entity\DelightfulMessageVersionEntity;
+use App\Domain\Chat\Repository\Facade\DelightfulChatMessageVersionsRepositoryInterface;
+use App\Domain\Chat\Repository\Persistence\Model\DelightfulMessageVersionsModel;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 
-class MagicMessageVersionsRepository implements MagicChatMessageVersionsRepositoryInterface
+class DelightfulMessageVersionsRepository implements DelightfulChatMessageVersionsRepositoryInterface
 {
     public function __construct(
-        protected MagicMessageVersionsModel $messageVersionsModel
+        protected DelightfulMessageVersionsModel $messageVersionsModel
     ) {
     }
 
-    public function createMessageVersion(MagicMessageVersionEntity $messageVersionDTO): MagicMessageVersionEntity
+    public function createMessageVersion(DelightfulMessageVersionEntity $messageVersionDTO): DelightfulMessageVersionEntity
     {
         $data = $messageVersionDTO->toArray();
         $time = date('Y-m-d H:i:s');
@@ -32,7 +32,7 @@ class MagicMessageVersionsRepository implements MagicChatMessageVersionsReposito
     }
 
     /**
-     * @return MagicMessageVersionEntity[]
+     * @return DelightfulMessageVersionEntity[]
      */
     public function getMessageVersions(string $magicMessageId): array
     {
@@ -47,9 +47,9 @@ class MagicMessageVersionsRepository implements MagicChatMessageVersionsReposito
         return $entities;
     }
 
-    // 组装 MagicMessageVersionEntity 对象
-    private function assembleMessageVersionEntity(array $data): MagicMessageVersionEntity
+    // 组装 DelightfulMessageVersionEntity 对象
+    private function assembleMessageVersionEntity(array $data): DelightfulMessageVersionEntity
     {
-        return new MagicMessageVersionEntity($data);
+        return new DelightfulMessageVersionEntity($data);
     }
 }

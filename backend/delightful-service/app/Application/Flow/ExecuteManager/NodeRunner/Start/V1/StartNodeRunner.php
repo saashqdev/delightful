@@ -53,7 +53,7 @@ class StartNodeRunner extends AbstractStartNodeRunner
             [
                 'trigger_type' => $triggerType->name,
                 'conversation_id' => $executionData->getOriginConversationId(),
-                'message_id' => $executionData->getTriggerData()?->getMessageEntity()?->getMagicMessageId(),
+                'message_id' => $executionData->getTriggerData()?->getMessageEntity()?->getDelightfulMessageId(),
             ]
         );
         $result = match ($triggerType) {

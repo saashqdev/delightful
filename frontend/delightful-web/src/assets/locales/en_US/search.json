@@ -1,21 +1,21 @@
 {
 	"search": {
-		"askMagic": "Ask Magic",
+		"askDelightful": "Ask Delightful",
 		"askAl": "AI Search",
 		"askTranslate": "Translate",
 		"askWrite": "Help Me Write",
 		"askAnswer": "Answer Questions",
-		"searchMagic": "Search Magic",
+		"searchDelightful": "Search Delightful",
 		"appOpen": "Open App",
 		"fileSearchLocal": "Search Local Files",
 		"aiSkills": "AI Skills",
 		"searchHistory": "Search History",
 		"youMayWantToFind": "You May Want To Find",
 		"comprehensiveSkills": "Comprehensive Skills",
-		"magicOpenJourney": "Magic · Open the amazing search journey...",
+		"magicOpenJourney": "Delightful · Open the amazing search journey...",
 		"inputVoice": "Voice Input",
 		"keyboardSpace": "Space",
-		"magicOpen": "Open Magic"
+		"magicOpen": "Open Delightful"
 	},
 	"quickSearch": {
 		"search": "Search",

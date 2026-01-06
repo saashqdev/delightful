@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Application\MCP\Service;
 
-use App\Application\Flow\Service\MagicFlowExecuteAppService;
+use App\Application\Flow\Service\DelightfulFlowExecuteAppService;
 use App\Domain\MCP\Entity\MCPServerToolEntity;
 use App\Domain\MCP\Entity\ValueObject\MCPDataIsolation;
 use App\Domain\MCP\Entity\ValueObject\ToolSource;
 use App\ErrorCode\MCPErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\MCP\Tools\MCPTool;
-use App\Interfaces\Flow\DTO\MagicFlowApiChatDTO;
+use App\Interfaces\Flow\DTO\DelightfulFlowApiChatDTO;
 use Qbhy\HyperfAuth\Authenticatable;
 
 class MCPServerSSEAppService extends AbstractMCPAppService
@@ -61,12 +61,12 @@ class MCPServerSSEAppService extends AbstractMCPAppService
         return match ($MCPServerToolEntity->getSource()) {
             ToolSource::FlowTool => function (array $arguments) use ($dataIsolation, $MCPServerToolEntity) {
                 $flowDataIsolation = $this->createFlowDataIsolation($dataIsolation);
-                $apiChatDTO = new MagicFlowApiChatDTO();
+                $apiChatDTO = new DelightfulFlowApiChatDTO();
                 $apiChatDTO->setParams($arguments);
                 $apiChatDTO->setFlowCode($MCPServerToolEntity->getRelCode());
                 $apiChatDTO->setFlowVersionCode($MCPServerToolEntity->getRelVersionCode());
                 $apiChatDTO->setMessage('mcp_tool_call');
-                return di(MagicFlowExecuteAppService::class)->apiParamCallByRemoteTool($flowDataIsolation, $apiChatDTO, 'mcp_tool');
+                return di(DelightfulFlowExecuteAppService::class)->apiParamCallByRemoteTool($flowDataIsolation, $apiChatDTO, 'mcp_tool');
             },
             default => null,
         };

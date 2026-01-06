@@ -1,7 +1,7 @@
 # Large Model Call Node
 
 ## What is a Large Model Call Node?
-The Large Model Call Node is a core node in Magic Flow workflow that allows you to interact directly with large language models (such as GPT-4) for generating text content, answering questions, analyzing content, or performing reasoning. Simply put, this node acts as a bridge for you to communicate with artificial intelligence on the Magic platform.
+The Large Model Call Node is a core node in Delightful Flow workflow that allows you to interact directly with large language models (such as GPT-4) for generating text content, answering questions, analyzing content, or performing reasoning. Simply put, this node acts as a bridge for you to communicate with artificial intelligence on the Delightful platform.
 
 **Image Description:**
 

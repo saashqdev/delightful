@@ -19,7 +19,7 @@ interface DataIsolationInterface
 
     public function getCurrentUserId(): string;
 
-    public function getMagicId(): string;
+    public function getDelightfulId(): string;
 
     public function getThirdPlatformOrganizationCode(): string;
 
@@ -41,7 +41,7 @@ interface DataIsolationInterface
 
     public function setEnvId(int $envId): static;
 
-    public function setMagicId(string $magicId): static;
+    public function setDelightfulId(string $magicId): static;
 
     public function disabled(): static;
 

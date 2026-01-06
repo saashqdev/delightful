@@ -8,8 +8,8 @@ describe("PreprocessService - LaTeX", () => {
 			const result = PreprocessService.preprocess(markdown, { enableLatex: true })
 			const content = result.join(" ")
 
-			expect(content).toContain('<MagicLatexInline math="E = mc^2" />')
-			expect(content).toContain('<MagicLatexInline math="a + b = c" />')
+			expect(content).toContain('<DelightfulLatexInline math="E = mc^2" />')
+			expect(content).toContain('<DelightfulLatexInline math="a + b = c" />')
 		})
 
 		it("should not process inline math when LaTeX is disabled", () => {
@@ -18,7 +18,7 @@ describe("PreprocessService - LaTeX", () => {
 			const content = result.join(" ")
 
 			expect(content).toContain("$E = mc^2$")
-			expect(content).not.toContain("<MagicLatexInline")
+			expect(content).not.toContain("<DelightfulLatexInline")
 		})
 
 		it("should handle complex inline formulas", () => {
@@ -27,7 +27,7 @@ describe("PreprocessService - LaTeX", () => {
 			const content = result.join(" ")
 
 			expect(content).toContain(
-				'<MagicLatexInline math="\\frac{a}{b} + \\sqrt{c^2 + d^2}" />',
+				'<DelightfulLatexInline math="\\frac{a}{b} + \\sqrt{c^2 + d^2}" />',
 			)
 		})
 	})
@@ -46,7 +46,7 @@ $$
 			const content = result.join(" ")
 
 			expect(content).toContain(
-				'<MagicLatexBlock math="\\frac{d}{dx}\\left( \\int_{0}^{x} f(u)\\,du\\right)=f(x)" />',
+				'<DelightfulLatexBlock math="\\frac{d}{dx}\\left( \\int_{0}^{x} f(u)\\,du\\right)=f(x)" />',
 			)
 		})
 
@@ -62,7 +62,7 @@ $$
 			const result = PreprocessService.preprocess(markdown, { enableLatex: true })
 			const content = result.join(" ")
 
-			expect(content).toContain('<MagicLatexBlock math="\\begin{equation}')
+			expect(content).toContain('<DelightfulLatexBlock math="\\begin{equation}')
 			expect(content).toContain('\\end{equation}" />')
 		})
 
@@ -77,7 +77,7 @@ $$
 			const content = result.join(" ")
 
 			expect(content).toContain("$$")
-			expect(content).not.toContain("<MagicLatexBlock")
+			expect(content).not.toContain("<DelightfulLatexBlock")
 		})
 	})
 
@@ -101,10 +101,10 @@ $$
 			const content = result.join(" ")
 
 			// Should process both inline and block formulas
-			expect(content).toContain('<MagicLatexInline math="E = mc^2" />')
-			expect(content).toContain('<MagicLatexInline math="a + b = c" />')
+			expect(content).toContain('<DelightfulLatexInline math="E = mc^2" />')
+			expect(content).toContain('<DelightfulLatexInline math="a + b = c" />')
 			expect(content).toContain(
-				'<MagicLatexBlock math="\\frac{d}{dx}\\left( \\int_{0}^{x} f(u)\\,du\\right)=f(x)" />',
+				'<DelightfulLatexBlock math="\\frac{d}{dx}\\left( \\int_{0}^{x} f(u)\\,du\\right)=f(x)" />',
 			)
 		})
 
@@ -123,9 +123,9 @@ $$
 			const content = result.join(" ")
 
 			// Should correctly identify and process different formula types
-			expect(content).toContain('<MagicLatexInline math="x = 1" />')
-			expect(content).toContain('<MagicLatexInline math="z = \\sqrt{x}" />')
-			expect(content).toContain('<MagicLatexBlock math="y = x^2 + 2x + 1" />')
+			expect(content).toContain('<DelightfulLatexInline math="x = 1" />')
+			expect(content).toContain('<DelightfulLatexInline math="z = \\sqrt{x}" />')
+			expect(content).toContain('<DelightfulLatexBlock math="y = x^2 + 2x + 1" />')
 
 			// Should not have any bare $ symbols
 			const processedContent = content.replace(/<[^>]*>/g, "") // Remove HTML tags
@@ -139,8 +139,8 @@ $$
 			const result = PreprocessService.preprocess(markdown, { enableLatex: true })
 			const content = result.join(" ")
 
-			expect(content).toContain('<MagicLatexBlock math="" />')
-			expect(content).toContain('<MagicLatexInline math="x = " />')
+			expect(content).toContain('<DelightfulLatexBlock math="" />')
+			expect(content).toContain('<DelightfulLatexInline math="x = " />')
 		})
 
 		it("should not process formulas with newlines in inline math", () => {

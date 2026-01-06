@@ -122,13 +122,13 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
         return $this;
     }
 
-    public function hasModify(KnowledgeBaseFragmentEntity $savingMagicFlowKnowledgeFragmentEntity): bool
+    public function hasModify(KnowledgeBaseFragmentEntity $savingDelightfulFlowKnowledgeFragmentEntity): bool
     {
         // 如果 content 和 metadata 都没有变化，就不需要更新了
-        if ($savingMagicFlowKnowledgeFragmentEntity->getContent() === $this->content
-            && $savingMagicFlowKnowledgeFragmentEntity->getMetadata() === $this->metadata
-            && $savingMagicFlowKnowledgeFragmentEntity->getBusinessId() === $this->businessId
-            && $savingMagicFlowKnowledgeFragmentEntity->getDocumentCode() === $this->documentCode
+        if ($savingDelightfulFlowKnowledgeFragmentEntity->getContent() === $this->content
+            && $savingDelightfulFlowKnowledgeFragmentEntity->getMetadata() === $this->metadata
+            && $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId() === $this->businessId
+            && $savingDelightfulFlowKnowledgeFragmentEntity->getDocumentCode() === $this->documentCode
         ) {
             return false;
         }

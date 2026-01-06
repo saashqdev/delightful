@@ -3,8 +3,8 @@ import { createStyles, cx } from "antd-style"
 import type { ReactNode } from "react"
 import { forwardRef, memo, useMemo } from "react"
 import { IconX } from "@tabler/icons-react"
-import MagicButton from "../MagicButton"
-import MagicIcon from "../MagicIcon"
+import DelightfulButton from "../DelightfulButton"
+import DelightfulIcon from "../DelightfulIcon"
 
 const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) => {
 	return {
@@ -85,11 +85,11 @@ const PageContainer = memo(
 							{icon}
 							{_title}
 						</Flex>
-						<MagicButton
+						<DelightfulButton
 							type="text"
 							hidden={!closeable}
 							className={styles.closeButton}
-							icon={<MagicIcon component={IconX} />}
+							icon={<DelightfulIcon component={IconX} />}
 							onClick={onClose}
 						/>
 					</Flex>

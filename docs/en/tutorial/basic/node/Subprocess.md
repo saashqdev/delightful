@@ -45,7 +45,7 @@ Output parameters are used to receive the return values after the subprocess com
 ## Usage Instructions
 ### Basic Configuration Steps
 1. **Create a Subprocess**:
-    1. Create a new process on the Magic platform
+    1. Create a new process on the Delightful platform
     2. Configure appropriate start and end nodes
     3. Design the internal logic of the subprocess
 2. **Add a Subprocess Node in the Main Process**:

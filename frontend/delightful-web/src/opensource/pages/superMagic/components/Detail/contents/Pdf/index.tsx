@@ -1,13 +1,13 @@
-import PDFIcon from "@/opensource/pages/superMagic/assets/file_icon/pdf.svg"
-import CommonHeader from "@/opensource/pages/superMagic/components/Detail/components/CommonHeader"
+import PDFIcon from "@/opensource/pages/superDelightful/assets/file_icon/pdf.svg"
+import CommonHeader from "@/opensource/pages/superDelightful/components/Detail/components/CommonHeader"
 import { useRef, useState, useEffect, useCallback } from "react"
 import { useStyles } from "./style"
 import CommonFooter from "../../components/CommonFooter"
-import { useFileUrl } from "@/opensource/pages/superMagic/hooks/useFileUrl"
+import { useFileUrl } from "@/opensource/pages/superDelightful/hooks/useFileUrl"
 import { Document, Page, pdfjs } from "react-pdf"
 import "react-pdf/dist/esm/Page/AnnotationLayer.css"
 import "react-pdf/dist/esm/Page/TextLayer.css"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { Button, Flex, Slider, Space } from "antd"
 import { ZoomInOutlined, ZoomOutOutlined, RotateRightOutlined } from "@ant-design/icons"
 import { debounce } from "lodash-es"
@@ -132,7 +132,7 @@ export default function PDFViewer(props: any) {
 								justify="center"
 								style={{ width: "100%", height: "100%" }}
 							>
-								<MagicSpin spinning />
+								<DelightfulSpin spinning />
 							</Flex>
 						}
 					>

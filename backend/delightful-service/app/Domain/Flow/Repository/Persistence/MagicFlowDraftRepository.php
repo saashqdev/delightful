@@ -7,22 +7,22 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Persistence;
 
-use App\Domain\Flow\Entity\MagicFlowDraftEntity;
+use App\Domain\Flow\Entity\DelightfulFlowDraftEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowDraftQuery;
-use App\Domain\Flow\Factory\MagicFlowDraftFactory;
-use App\Domain\Flow\Repository\Facade\MagicFlowDraftRepositoryInterface;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowDraftModel;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowDraftQuery;
+use App\Domain\Flow\Factory\DelightfulFlowDraftFactory;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowDraftRepositoryInterface;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowDraftModel;
 use App\Infrastructure\Core\ValueObject\Page;
 
-class MagicFlowDraftRepository extends MagicFlowAbstractRepository implements MagicFlowDraftRepositoryInterface
+class DelightfulFlowDraftRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowDraftRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowDraftEntity $magicFlowDraftEntity): MagicFlowDraftEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $magicFlowDraftEntity): DelightfulFlowDraftEntity
     {
         if (! $magicFlowDraftEntity->getId()) {
-            $magicFlowDraftModel = new MagicFlowDraftModel();
+            $magicFlowDraftModel = new DelightfulFlowDraftModel();
         } else {
-            $builder = $this->createBuilder($dataIsolation, MagicFlowDraftModel::query());
+            $builder = $this->createBuilder($dataIsolation, DelightfulFlowDraftModel::query());
             $magicFlowDraftModel = $builder->where('id', $magicFlowDraftEntity->getId())->first();
         }
 
@@ -34,31 +34,31 @@ class MagicFlowDraftRepository extends MagicFlowAbstractRepository implements Ma
         return $magicFlowDraftEntity;
     }
 
-    public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?MagicFlowDraftEntity
+    public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowDraftEntity
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowDraftModel::query());
-        /** @var null|MagicFlowDraftModel $draftModel */
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowDraftModel::query());
+        /** @var null|DelightfulFlowDraftModel $draftModel */
         $draftModel = $builder->where('code', $code)->first();
         if (! $draftModel) {
             return null;
         }
-        return MagicFlowDraftFactory::modelToEntity($draftModel);
+        return DelightfulFlowDraftFactory::modelToEntity($draftModel);
     }
 
-    public function getByFlowCodeAndCode(FlowDataIsolation $dataIsolation, string $flowCode, string $code): ?MagicFlowDraftEntity
+    public function getByFlowCodeAndCode(FlowDataIsolation $dataIsolation, string $flowCode, string $code): ?DelightfulFlowDraftEntity
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowDraftModel::query());
-        /** @var null|MagicFlowDraftModel $draftModel */
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowDraftModel::query());
+        /** @var null|DelightfulFlowDraftModel $draftModel */
         $draftModel = $builder->where('flow_code', $flowCode)->where('code', $code)->first();
         if (! $draftModel) {
             return null;
         }
-        return MagicFlowDraftFactory::modelToEntity($draftModel);
+        return DelightfulFlowDraftFactory::modelToEntity($draftModel);
     }
 
-    public function queries(FlowDataIsolation $dataIsolation, MagicFLowDraftQuery $query, Page $page): array
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowDraftQuery $query, Page $page): array
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowDraftModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowDraftModel::query());
         if ($query->flowCode) {
             $builder->where('flow_code', $query->flowCode);
         }
@@ -67,7 +67,7 @@ class MagicFlowDraftRepository extends MagicFlowAbstractRepository implements Ma
         if (! empty($data['list'])) {
             $list = [];
             foreach ($data['list'] as $draftModel) {
-                $list[] = MagicFlowDraftFactory::modelToEntity($draftModel);
+                $list[] = DelightfulFlowDraftFactory::modelToEntity($draftModel);
             }
             $data['list'] = $list;
         }
@@ -75,21 +75,21 @@ class MagicFlowDraftRepository extends MagicFlowAbstractRepository implements Ma
         return $data;
     }
 
-    public function remove(FlowDataIsolation $dataIsolation, MagicFlowDraftEntity $magicFlowDraftEntity): void
+    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $magicFlowDraftEntity): void
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowDraftModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowDraftModel::query());
         $builder->where('code', $magicFlowDraftEntity->getCode())->delete();
     }
 
     public function clearEarlyRecords(FlowDataIsolation $dataIsolation, string $flowCode): void
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowDraftModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowDraftModel::query());
         $builder->where('flow_code', $flowCode)->orderBy('id', 'asc');
 
         $count = $builder->count();
 
-        if ($count > MagicFlowDraftEntity::MAX_RECORD) {
-            $builder->offset(MagicFlowDraftEntity::MAX_RECORD)->take($count - MagicFlowDraftEntity::MAX_RECORD)->delete();
+        if ($count > DelightfulFlowDraftEntity::MAX_RECORD) {
+            $builder->offset(DelightfulFlowDraftEntity::MAX_RECORD)->take($count - DelightfulFlowDraftEntity::MAX_RECORD)->delete();
         }
     }
 }

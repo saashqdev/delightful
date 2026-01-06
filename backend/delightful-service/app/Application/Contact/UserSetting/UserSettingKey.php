@@ -12,13 +12,13 @@ enum UserSettingKey: string
     case None = 'none';
 
     // 全局 mcp 用户配置
-    case SuperMagicMCPServers = 'super_magic_mcp_servers';
+    case SuperDelightfulMCPServers = 'super_magic_mcp_servers';
 
     // 项目 mcp 用户配置
-    case SuperMagicProjectMCPServers = 'SuperMagicProjectMCPServers';
+    case SuperDelightfulProjectMCPServers = 'SuperDelightfulProjectMCPServers';
 
     // 项目话题模型配置
-    case SuperMagicProjectTopicModel = 'SuperMagicProjectTopicModel';
+    case SuperDelightfulProjectTopicModel = 'SuperDelightfulProjectTopicModel';
 
     // 用户当前组织
     case CurrentOrganization = 'CurrentOrganization';
@@ -30,23 +30,23 @@ enum UserSettingKey: string
     case PlatformSettings = 'PlatformSettings';
 
     // 智能体排序配置
-    case SuperMagicAgentSort = 'SuperMagicAgentSort';
+    case SuperDelightfulAgentSort = 'SuperDelightfulAgentSort';
 
-    public static function genSuperMagicProjectMCPServers(string $projectId): string
+    public static function genSuperDelightfulProjectMCPServers(string $projectId): string
     {
-        return self::SuperMagicProjectMCPServers->value . '_' . $projectId;
+        return self::SuperDelightfulProjectMCPServers->value . '_' . $projectId;
     }
 
-    public static function genSuperMagicProjectTopicModel(string $topicId): string
+    public static function genSuperDelightfulProjectTopicModel(string $topicId): string
     {
-        return self::SuperMagicProjectTopicModel->value . '_' . $topicId;
+        return self::SuperDelightfulProjectTopicModel->value . '_' . $topicId;
     }
 
     public function getValueHandler(): ?UserSettingHandlerInterface
     {
         return match ($this) {
-            self::SuperMagicMCPServers,self::SuperMagicProjectMCPServers => di(SuperMagicMCPServerHandler::class),
-            self::SuperMagicProjectTopicModel => di(SuperMagicModelConfigHandler::class),
+            self::SuperDelightfulMCPServers,self::SuperDelightfulProjectMCPServers => di(SuperDelightfulMCPServerHandler::class),
+            self::SuperDelightfulProjectTopicModel => di(SuperDelightfulModelConfigHandler::class),
             default => null,
         };
     }
@@ -58,12 +58,12 @@ enum UserSettingKey: string
             return $userSettingKey;
         }
 
-        if (str_starts_with($key, self::SuperMagicProjectMCPServers->value)) {
-            return self::SuperMagicProjectMCPServers;
+        if (str_starts_with($key, self::SuperDelightfulProjectMCPServers->value)) {
+            return self::SuperDelightfulProjectMCPServers;
         }
 
-        if (str_starts_with($key, self::SuperMagicProjectTopicModel->value)) {
-            return self::SuperMagicProjectTopicModel;
+        if (str_starts_with($key, self::SuperDelightfulProjectTopicModel->value)) {
+            return self::SuperDelightfulProjectTopicModel;
         }
 
         return self::None;

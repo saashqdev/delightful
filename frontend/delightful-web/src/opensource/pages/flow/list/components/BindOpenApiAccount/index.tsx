@@ -6,13 +6,13 @@ import { mutate } from "swr"
 import { RequestUrl } from "@/opensource/apis/constant"
 import type { PlatformItem } from "@/types/flow"
 import { IconX } from "@tabler/icons-react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { useState } from "react"
 import type { DefaultOptionType } from "antd/es/select"
 import { createStyles } from "antd-style"
 
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { FlowApi } from "@/apis"
 
 type BindOpenApiAccountForm = {
@@ -159,7 +159,7 @@ function BindOpenApiAccount({ flowId, open, onClose }: BindOpenApiAccountProps) 
 		return option.realLabel.toLowerCase().includes(input.toLowerCase())
 	})
 	return (
-		<MagicModal
+		<DelightfulModal
 			title="授权应用"
 			open={open}
 			onOk={handleOk}
@@ -193,7 +193,7 @@ function BindOpenApiAccount({ flowId, open, onClose }: BindOpenApiAccountProps) 
 						/>
 					</Flex>
 				</Form.Item>
-				<MagicSpin section spinning={isLoading}>
+				<DelightfulSpin section spinning={isLoading}>
 					<Form.Item label="已添加应用">
 						<Form.List name="bind">
 							{(subFields) => (
@@ -237,7 +237,7 @@ function BindOpenApiAccount({ flowId, open, onClose }: BindOpenApiAccountProps) 
 													<span>{fieldData.name}</span>
 												</Flex>
 												<Tooltip title={`移除${fieldData.name}`}>
-													<MagicIcon
+													<DelightfulIcon
 														component={IconX}
 														className={styles.iconX}
 														onClick={() => {
@@ -254,9 +254,9 @@ function BindOpenApiAccount({ flowId, open, onClose }: BindOpenApiAccountProps) 
 							)}
 						</Form.List>
 					</Form.Item>
-				</MagicSpin>
+				</DelightfulSpin>
 			</Form>
-		</MagicModal>
+		</DelightfulModal>
 	)
 }
 

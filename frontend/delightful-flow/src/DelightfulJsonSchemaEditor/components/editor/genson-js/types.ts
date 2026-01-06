@@ -1,4 +1,4 @@
-import { FormItemType } from "@/MagicExpressionWidget/types";
+import { FormItemType } from "@/DelightfulExpressionWidget/types";
 
 // copy from https://github.com/aspecto-io/genson-js
 // export enum FormItemType {

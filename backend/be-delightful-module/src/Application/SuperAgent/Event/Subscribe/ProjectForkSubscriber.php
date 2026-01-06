@@ -5,13 +5,13 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\SuperDelightful\Application\SuperAgent\Event\Subscribe;
 
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use Delightful\SuperMagic\Application\SuperAgent\Service\ProjectAppService;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\ProjectForkEvent;
+use Delightful\SuperDelightful\Application\SuperAgent\Service\ProjectAppService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\ProjectForkEvent;
 use Hyperf\Amqp\Annotation\Consumer;
 use Hyperf\Amqp\Message\ConsumerMessage;
 use Hyperf\Amqp\Result;

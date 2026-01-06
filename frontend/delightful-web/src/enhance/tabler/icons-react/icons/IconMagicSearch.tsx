@@ -1,7 +1,7 @@
 import type { IconProps } from "@tabler/icons-react"
 import { memo } from "react"
 
-const IconMagicSearch = memo(({ size, className }: IconProps) => {
+const IconDelightfulSearch = memo(({ size, className }: IconProps) => {
 	return (
 		<svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
 			<g clipPath="url(#clip0_5531_108768)">
@@ -79,4 +79,4 @@ const IconMagicSearch = memo(({ size, className }: IconProps) => {
 	)
 })
 
-export default IconMagicSearch
+export default IconDelightfulSearch

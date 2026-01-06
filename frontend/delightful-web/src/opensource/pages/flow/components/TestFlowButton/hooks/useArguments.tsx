@@ -9,10 +9,10 @@ import { useEffect, useMemo, useState } from "react"
 import type { FormInstance } from "antd"
 import { Form } from "antd"
 import { getComponent } from "@/opensource/pages/flow/utils/helpers"
-import type { FormItemType } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
+import type { FormItemType } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 import { FlowType } from "@/types/flow"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
-import type { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
 import { transformSchemaToDynamicFormItem } from "../helpers"
 
 export type DynamicFormItem = {
@@ -25,9 +25,9 @@ export type DynamicFormItem = {
 type UseArgumentsProps = {
 	open: boolean
 	form: FormInstance
-	flow?: MagicFlow.Flow
+	flow?: DelightfulFlow.Flow
 	onValuesChange: (this: any, changeValues: any) => void
-	flowInstance: MutableRefObject<MagicFlowInstance | null>
+	flowInstance: MutableRefObject<DelightfulFlowInstance | null>
 }
 
 export default function useArguments({
@@ -48,7 +48,7 @@ export default function useArguments({
 		if (isArgumentsFlow && open) {
 			const latestFlow = flowInstance?.current?.getFlow?.()
 			const startNode = latestFlow?.nodes?.find?.(
-				(n: MagicFlow.Node) => `${n.node_type}` === customNodeType.Start,
+				(n: DelightfulFlow.Node) => `${n.node_type}` === customNodeType.Start,
 			)
 			const argumentsBranch = startNode?.params?.branches?.find?.(
 				// @ts-ignore

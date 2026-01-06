@@ -9,7 +9,7 @@ yarn add @feb/json-schema-editor
 ```jsx
 import JsonSchemaEditor from './index';
 import { useState } from "react";
-import { mockDataSource, mockNodeMap } from "@/MagicExpressionWidget/components/dataSource"
+import { mockDataSource, mockNodeMap } from "@/DelightfulExpressionWidget/components/dataSource"
 
 export default () => {
 
@@ -106,7 +106,7 @@ By default expressions are disabled. To enable them, set `allowExpression` to `t
 ```jsx
 import JsonSchemaEditor from './index';
 
-import { mockDataSource, mockNodeMap } from "@/MagicExpressionWidget/components/dataSource"
+import { mockDataSource, mockNodeMap } from "@/DelightfulExpressionWidget/components/dataSource"
 
 
 const handleOnChange = value => {
@@ -285,7 +285,7 @@ export default () => <JsonSchemaEditor showAdd={false} showOperation={false}/>;
 ```jsx
 import JsonSchemaEditor from './index';
 import { useState } from "react";
-import { mockDataSource, mockNodeMap } from "@/MagicExpressionWidget/components/dataSource"
+import { mockDataSource, mockNodeMap } from "@/DelightfulExpressionWidget/components/dataSource"
 import { ShowColumns } from "./constants";
 import { DisabledField } from "./types/Schema"
 
@@ -401,7 +401,7 @@ To hide field values, enable encryption. The backend must encrypt and fill `encr
 ```jsx
 import JsonSchemaEditor from './index';
 import { useState } from "react";
-import { mockDataSource, mockNodeMap } from "@/MagicExpressionWidget/components/dataSource"
+import { mockDataSource, mockNodeMap } from "@/DelightfulExpressionWidget/components/dataSource"
 import { ShowColumns } from "./constants";
 
 export default () => {

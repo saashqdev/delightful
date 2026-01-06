@@ -42,7 +42,7 @@ class SaveProviderModelDTO extends AbstractDTO
 
     protected ?Status $status;
 
-    protected ?int $superMagicDisplayState;
+    protected ?int $superDelightfulDisplayState;
 
     protected ?int $sort;
 
@@ -194,17 +194,17 @@ class SaveProviderModelDTO extends AbstractDTO
         }
     }
 
-    public function getSuperMagicDisplayState(): ?int
+    public function getSuperDelightfulDisplayState(): ?int
     {
-        return $this->superMagicDisplayState ?? null;
+        return $this->superDelightfulDisplayState ?? null;
     }
 
-    public function setSuperMagicDisplayState(null|bool|int|string $superMagicDisplayState): void
+    public function setSuperDelightfulDisplayState(null|bool|int|string $superDelightfulDisplayState): void
     {
-        if ($superMagicDisplayState === null) {
-            $this->superMagicDisplayState = null;
+        if ($superDelightfulDisplayState === null) {
+            $this->superDelightfulDisplayState = null;
         } else {
-            $this->superMagicDisplayState = (int) $superMagicDisplayState;
+            $this->superDelightfulDisplayState = (int) $superDelightfulDisplayState;
         }
     }
 

@@ -18,9 +18,9 @@ interface ImportMetaEnv {
 	readonly DELIGHTFUL_AMAP_KEY?: string
 	/** Teamshare Amap secret */
 	readonly DELIGHTFUL_GATEWAY_ADDRESS?: string
-	/** Magic app sha */
+	/** Delightful app sha */
 	readonly DELIGHTFUL_APP_SHA?: string
-	/** Magic app version */
+	/** Delightful app version */
 	readonly DELIGHTFUL_APP_VERSION?: string
 	readonly DELIGHTFUL_TEAMSHARE_WEB_URL?: string
 	readonly DELIGHTFUL_KEEWOOD_WEB_URL?: string

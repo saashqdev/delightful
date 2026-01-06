@@ -1,6 +1,6 @@
-# MagicBlock 魔法块组件
+# DelightfulBlock 魔法块组件
 
-`MagicBlock` 是一个简单的可编辑内容块组件，提供了一个具有 `contentEditable` 属性的 div 容器，允许用户直接编辑其中的内容。
+`DelightfulBlock` 是一个简单的可编辑内容块组件，提供了一个具有 `contentEditable` 属性的 div 容器，允许用户直接编辑其中的内容。
 
 ## 属性
 
@@ -12,13 +12,13 @@
 ## 基础用法
 
 ```tsx
-import MagicBlock from '@/components/base/MagicBlock';
+import DelightfulBlock from '@/components/base/DelightfulBlock';
 
 // 基础用法
-<MagicBlock>可编辑的内容</MagicBlock>
+<DelightfulBlock>可编辑的内容</DelightfulBlock>
 
 // 设置样式
-<MagicBlock
+<DelightfulBlock
   style={{
     padding: '10px',
     border: '1px solid #eee',
@@ -26,15 +26,15 @@ import MagicBlock from '@/components/base/MagicBlock';
   }}
 >
   带样式的可编辑内容
-</MagicBlock>
+</DelightfulBlock>
 
 // 添加事件处理
-<MagicBlock
+<DelightfulBlock
   onBlur={(e) => console.log('编辑完成', e.currentTarget.textContent)}
   onInput={(e) => console.log('内容变化', e.currentTarget.textContent)}
 >
   带事件处理的可编辑内容
-</MagicBlock>
+</DelightfulBlock>
 ```
 
 ## 特点
@@ -51,4 +51,4 @@ import MagicBlock from '@/components/base/MagicBlock';
 -   不需要复杂富文本编辑功能的简单编辑场景
 -   需要自定义编辑区域的外观和行为时
 
-MagicBlock 组件提供了一个简单而灵活的内容编辑解决方案，适用于各种需要基本文本编辑功能的场景。
+DelightfulBlock 组件提供了一个简单而灵活的内容编辑解决方案，适用于各种需要基本文本编辑功能的场景。

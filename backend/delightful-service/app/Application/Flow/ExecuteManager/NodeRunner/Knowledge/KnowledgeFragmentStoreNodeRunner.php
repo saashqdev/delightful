@@ -59,20 +59,20 @@ class KnowledgeFragmentStoreNodeRunner extends AbstractKnowledgeNodeRunner
         $documentDomainService = di(KnowledgeBaseDocumentDomainService::class);
         $fragmentDomainService = di(KnowledgeBaseFragmentDomainService::class);
         $dataIsolation = $executionData->getDataIsolation();
-        $knowledgeBaseDataIsolation = KnowledgeBaseDataIsolation::create($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId(), $dataIsolation->getMagicId());
+        $knowledgeBaseDataIsolation = KnowledgeBaseDataIsolation::create($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId(), $dataIsolation->getDelightfulId());
         $knowledgeBaseEntity = $knowledgeBaseDomainService->show($knowledgeBaseDataIsolation, $knowledgeCode);
         // 这里要建立一个归纳的文档
         $documentEntity = $documentDomainService->getOrCreateDefaultDocument($knowledgeBaseDataIsolation, $knowledgeBaseEntity);
 
-        $savingMagicFlowKnowledgeFragmentEntity = new KnowledgeBaseFragmentEntity();
-        $savingMagicFlowKnowledgeFragmentEntity->setKnowledgeCode($knowledgeCode);
-        $savingMagicFlowKnowledgeFragmentEntity->setDocumentCode($documentEntity->getCode());
-        $savingMagicFlowKnowledgeFragmentEntity->setContent($content);
-        $savingMagicFlowKnowledgeFragmentEntity->setMetadata($metadata);
-        $savingMagicFlowKnowledgeFragmentEntity->setBusinessId($businessId);
-        $savingMagicFlowKnowledgeFragmentEntity->setCreator($executionData->getOperator()->getUid());
-        $savingMagicFlowKnowledgeFragmentEntity->setCreatedAt(new DateTime());
+        $savingDelightfulFlowKnowledgeFragmentEntity = new KnowledgeBaseFragmentEntity();
+        $savingDelightfulFlowKnowledgeFragmentEntity->setKnowledgeCode($knowledgeCode);
+        $savingDelightfulFlowKnowledgeFragmentEntity->setDocumentCode($documentEntity->getCode());
+        $savingDelightfulFlowKnowledgeFragmentEntity->setContent($content);
+        $savingDelightfulFlowKnowledgeFragmentEntity->setMetadata($metadata);
+        $savingDelightfulFlowKnowledgeFragmentEntity->setBusinessId($businessId);
+        $savingDelightfulFlowKnowledgeFragmentEntity->setCreator($executionData->getOperator()->getUid());
+        $savingDelightfulFlowKnowledgeFragmentEntity->setCreatedAt(new DateTime());
 
-        $fragmentDomainService->save($knowledgeBaseDataIsolation, $knowledgeBaseEntity, $documentEntity, $savingMagicFlowKnowledgeFragmentEntity);
+        $fragmentDomainService->save($knowledgeBaseDataIsolation, $knowledgeBaseEntity, $documentEntity, $savingDelightfulFlowKnowledgeFragmentEntity);
     }
 }

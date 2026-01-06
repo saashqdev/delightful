@@ -81,7 +81,7 @@ services:
     networks:
       - magic-sandbox-network
 
-  # Super Magic service
+  # Super Delightful service
   super-magic:
     image: ghcr.io/dtyq/super-magic:${SUPER_DELIGHTFUL_TAG-latest}
     container_name: super-magic
@@ -98,7 +98,7 @@ services:
     networks:
       - magic-sandbox-network
 
-  # Magic gateway service
+  # Delightful gateway service
   magic-gateway:
     image: ghcr.io/dtyq/magic-gateway:${DELIGHTFUL_GATEWAY_TAG-latest}
     container_name: magic-gateway

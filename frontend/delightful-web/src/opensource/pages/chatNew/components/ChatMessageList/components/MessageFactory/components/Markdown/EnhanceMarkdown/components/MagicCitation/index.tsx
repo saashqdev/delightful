@@ -1,18 +1,18 @@
 import { Flex, Popover } from "antd"
 import Divider from "@/opensource/components/other/Divider"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useTranslation } from "react-i18next"
 import { IconLink } from "@tabler/icons-react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { useMemoizedFn } from "ahooks"
 import { useFontSize } from "@/opensource/providers/AppearanceProvider/hooks"
-import { useMagicCitationSources } from "./hooks"
+import { useDelightfulCitationSources } from "./hooks"
 import { useStyles } from "./style"
 
-const MagicCitation = ({ index }: { index: number }) => {
+const DelightfulCitation = ({ index }: { index: number }) => {
 	const { fontSize } = useFontSize()
 	const { styles } = useStyles({ fontSize })
-	const { sources } = useMagicCitationSources()
+	const { sources } = useDelightfulCitationSources()
 	const { t } = useTranslation("interface")
 
 	const source = sources[index - 1]
@@ -35,17 +35,17 @@ const MagicCitation = ({ index }: { index: number }) => {
 				<Flex vertical gap={10}>
 					{source.snippet}
 					<Divider direction="horizontal" />
-					<MagicButton
+					<DelightfulButton
 						type="link"
 						onClick={openSourcePage}
 						size="small"
 						className={styles.sourceButton}
 					>
 						<Flex gap={4} align="center" style={{ width: "100%" }}>
-							<MagicIcon color="currentColor" component={IconLink} size={14} />
+							<DelightfulIcon color="currentColor" component={IconLink} size={14} />
 							{t("chat.markdown.citation.viewSource")}
 						</Flex>
-					</MagicButton>
+					</DelightfulButton>
 				</Flex>
 			}
 		>
@@ -54,4 +54,4 @@ const MagicCitation = ({ index }: { index: number }) => {
 	)
 }
 
-export default MagicCitation
+export default DelightfulCitation

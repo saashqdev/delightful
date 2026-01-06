@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Listener;
 
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Event\ConversationCreatedEvent;
-use App\Domain\Chat\Service\MagicTopicDomainService;
+use App\Domain\Chat\Service\DelightfulTopicDomainService;
 use Hyperf\Event\Contract\ListenerInterface;
 
 class ConversationCreatedListener implements ListenerInterface
@@ -34,7 +34,7 @@ class ConversationCreatedListener implements ListenerInterface
 
         // 仅为AI会话自动创建话题
         if ($conversation->getReceiveType() === ConversationType::Ai) {
-            $topicDomainService = di(MagicTopicDomainService::class);
+            $topicDomainService = di(DelightfulTopicDomainService::class);
             $topicDomainService->agentSendMessageGetTopicId($conversation, 0);
         }
     }

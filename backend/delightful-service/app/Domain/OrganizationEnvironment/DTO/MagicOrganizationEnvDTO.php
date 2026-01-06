@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Domain\OrganizationEnvironment\DTO;
 
-use App\Domain\OrganizationEnvironment\Entity\MagicEnvironmentEntity;
+use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 
-class MagicOrganizationEnvDTO extends MagicEnvironmentEntity
+class DelightfulOrganizationEnvDTO extends DelightfulEnvironmentEntity
 {
     protected string $orgEnvId;
 
@@ -21,19 +21,19 @@ class MagicOrganizationEnvDTO extends MagicEnvironmentEntity
 
     protected int $environmentId;
 
-    protected ?MagicEnvironmentEntity $magicEnvironmentEntity = null;
+    protected ?DelightfulEnvironmentEntity $magicEnvironmentEntity = null;
 
     public function __construct(array $data = [])
     {
         parent::__construct($data);
     }
 
-    public function getMagicEnvironmentEntity(): ?MagicEnvironmentEntity
+    public function getDelightfulEnvironmentEntity(): ?DelightfulEnvironmentEntity
     {
         return $this->magicEnvironmentEntity;
     }
 
-    public function setMagicEnvironmentEntity(?MagicEnvironmentEntity $magicEnvironmentEntity): void
+    public function setDelightfulEnvironmentEntity(?DelightfulEnvironmentEntity $magicEnvironmentEntity): void
     {
         $this->magicEnvironmentEntity = $magicEnvironmentEntity;
     }
@@ -58,12 +58,12 @@ class MagicOrganizationEnvDTO extends MagicEnvironmentEntity
         $this->loginCode = $loginCode;
     }
 
-    public function getMagicOrganizationCode(): string
+    public function getDelightfulOrganizationCode(): string
     {
         return $this->magicOrganizationCode;
     }
 
-    public function setMagicOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
     {
         $this->magicOrganizationCode = $magicOrganizationCode;
     }

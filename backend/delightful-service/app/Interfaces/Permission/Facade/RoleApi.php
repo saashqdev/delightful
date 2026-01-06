@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Permission\Facade;
 
-use App\Application\Chat\Service\MagicUserInfoAppService;
-use App\Application\Kernel\Enum\MagicOperationEnum;
-use App\Application\Kernel\Enum\MagicResourceEnum;
+use App\Application\Chat\Service\DelightfulUserInfoAppService;
+use App\Application\Kernel\Enum\DelightfulOperationEnum;
+use App\Application\Kernel\Enum\DelightfulResourceEnum;
 use App\Application\Permission\Service\RoleAppService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation as ContactDataIsolation;
 use App\Domain\Permission\Entity\RoleEntity;
@@ -31,9 +31,9 @@ class RoleApi extends AbstractPermissionApi
     protected RoleAppService $roleAppService;
 
     #[Inject]
-    protected MagicUserInfoAppService $userInfoAppService;
+    protected DelightfulUserInfoAppService $userInfoAppService;
 
-    #[CheckPermission(MagicResourceEnum::SAFE_SUB_ADMIN, MagicOperationEnum::QUERY)]
+    #[CheckPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN, DelightfulOperationEnum::QUERY)]
     public function getSubAdminList(): array
     {
         // 获取认证信息
@@ -98,7 +98,7 @@ class RoleApi extends AbstractPermissionApi
         return (new PageDTO($page->getPage(), $result['total'], $list))->toArray();
     }
 
-    #[CheckPermission(MagicResourceEnum::SAFE_SUB_ADMIN, MagicOperationEnum::QUERY)]
+    #[CheckPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN, DelightfulOperationEnum::QUERY)]
     public function getSubAdminById(int $id): array
     {
         // 获取认证信息
@@ -126,7 +126,7 @@ class RoleApi extends AbstractPermissionApi
         return SubAdminAssembler::assembleWithUserInfo($roleEntity, $userInfo);
     }
 
-    #[CheckPermission(MagicResourceEnum::SAFE_SUB_ADMIN, MagicOperationEnum::EDIT)]
+    #[CheckPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN, DelightfulOperationEnum::EDIT)]
     public function createSubAdmin(): array
     {
         // 获取认证信息
@@ -162,7 +162,7 @@ class RoleApi extends AbstractPermissionApi
         return $savedRole->toArray();
     }
 
-    #[CheckPermission(MagicResourceEnum::SAFE_SUB_ADMIN, MagicOperationEnum::EDIT)]
+    #[CheckPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN, DelightfulOperationEnum::EDIT)]
     public function updateSubAdmin(): array
     {
         // 获取认证信息
@@ -210,7 +210,7 @@ class RoleApi extends AbstractPermissionApi
         return $savedRole->toArray();
     }
 
-    #[CheckPermission(MagicResourceEnum::SAFE_SUB_ADMIN, MagicOperationEnum::EDIT)]
+    #[CheckPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN, DelightfulOperationEnum::EDIT)]
     public function deleteSubAdmin(int $id): array
     {
         // 获取认证信息

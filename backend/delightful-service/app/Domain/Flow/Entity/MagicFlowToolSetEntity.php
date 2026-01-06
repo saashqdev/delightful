@@ -14,7 +14,7 @@ use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
-class MagicFlowToolSetEntity extends AbstractEntity
+class DelightfulFlowToolSetEntity extends AbstractEntity
 {
     protected ?int $id = null;
 
@@ -58,9 +58,9 @@ class MagicFlowToolSetEntity extends AbstractEntity
 
     private int $userOperation = 0;
 
-    public static function createNotGrouped(string $organizationCode): MagicFlowToolSetEntity
+    public static function createNotGrouped(string $organizationCode): DelightfulFlowToolSetEntity
     {
-        $toolSet = new MagicFlowToolSetEntity();
+        $toolSet = new DelightfulFlowToolSetEntity();
         $toolSet->setId(0);
         $toolSet->setOrganizationCode($organizationCode);
         $toolSet->setCode(ConstValue::TOOL_SET_DEFAULT_CODE);
@@ -99,7 +99,7 @@ class MagicFlowToolSetEntity extends AbstractEntity
         $this->id = null;
     }
 
-    public function prepareForModification(MagicFlowToolSetEntity $magicFlowToolSetEntity): void
+    public function prepareForModification(DelightfulFlowToolSetEntity $magicFlowToolSetEntity): void
     {
         if (empty($this->organizationCode)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.organization_code.empty');

@@ -16,7 +16,7 @@ use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\MiracleVisionModelRe
 /**
  * AI文生图.
  */
-class MagicAIImageDomainService extends AbstractDomainService
+class DelightfulAIImageDomainService extends AbstractDomainService
 {
     // 图片转高清
     public function imageConvertHigh(string $url, MiracleVisionModel $imageGenerateService): string

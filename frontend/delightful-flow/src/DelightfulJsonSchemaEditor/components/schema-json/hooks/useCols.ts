@@ -1,5 +1,5 @@
-import { ShowColumns } from '@/MagicJsonSchemaEditor/constants'
-import { useGlobal } from '@/MagicJsonSchemaEditor/context/GlobalContext/useGlobal'
+import { ShowColumns } from '@/DelightfulJsonSchemaEditor/constants'
+import { useGlobal } from '@/DelightfulJsonSchemaEditor/context/GlobalContext/useGlobal'
 import React, { useMemo } from 'react'
 
 export default function useCols() {

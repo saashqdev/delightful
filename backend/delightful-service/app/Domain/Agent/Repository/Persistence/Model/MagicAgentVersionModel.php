@@ -11,7 +11,7 @@ use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 use Hyperf\Snowflake\Concern\Snowflake;
 
-class MagicAgentVersionModel extends Model
+class DelightfulAgentVersionModel extends Model
 {
     use Snowflake;
     use SoftDeletes;

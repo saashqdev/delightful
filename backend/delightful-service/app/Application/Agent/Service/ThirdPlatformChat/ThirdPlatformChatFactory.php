@@ -10,14 +10,14 @@ namespace App\Application\Agent\Service\ThirdPlatformChat;
 use App\Application\Agent\Service\ThirdPlatformChat\DingRobot\DingRobotChat;
 use App\Application\Agent\Service\ThirdPlatformChat\FeiShuRobot\FeiShuRobotChat;
 use App\Application\Agent\Service\ThirdPlatformChat\WeChatRobot\WeChatRobotChat;
-use App\Domain\Agent\Entity\MagicBotThirdPlatformChatEntity;
+use App\Domain\Agent\Entity\DelightfulBotThirdPlatformChatEntity;
 use App\Domain\Agent\Entity\ValueObject\ThirdPlatformChat\ThirdPlatformChatType;
 
 class ThirdPlatformChatFactory
 {
     public static array $containers = [];
 
-    public static function make(MagicBotThirdPlatformChatEntity $entity): ThirdPlatformChatInterface
+    public static function make(DelightfulBotThirdPlatformChatEntity $entity): ThirdPlatformChatInterface
     {
         if (isset(self::$containers[$entity->getId()])) {
             return self::$containers[$entity->getId()];

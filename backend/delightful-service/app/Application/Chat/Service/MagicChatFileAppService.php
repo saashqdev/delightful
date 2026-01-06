@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Application\Chat\Service;
 
-use App\Domain\Chat\Entity\MagicChatFileEntity;
+use App\Domain\Chat\Entity\DelightfulChatFileEntity;
 use App\Domain\Chat\Entity\ValueObject\FileType;
-use App\Domain\Chat\Service\MagicChatFileDomainService;
+use App\Domain\Chat\Service\DelightfulChatFileDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\File\Service\FileDomainService;
 
@@ -17,10 +17,10 @@ use App\Domain\File\Service\FileDomainService;
  * 聊天文件应用服务
  * 提供给其他领域使用的接口.
  */
-class MagicChatFileAppService extends AbstractAppService
+class DelightfulChatFileAppService extends AbstractAppService
 {
     public function __construct(
-        private readonly MagicChatFileDomainService $magicChatFileDomainService,
+        private readonly DelightfulChatFileDomainService $magicChatFileDomainService,
         private readonly FileDomainService $fileDomainService
     ) {
     }
@@ -37,7 +37,7 @@ class MagicChatFileAppService extends AbstractAppService
     public function saveOrUpdateByFileKey(string $fileKey, DataIsolation $dataIsolation, array $fileData): array
     {
         // 1. 准备文件实体
-        $fileEntity = new MagicChatFileEntity();
+        $fileEntity = new DelightfulChatFileEntity();
         $fileEntity->setFileKey($fileKey);
         $fileEntity->setFileExtension($fileData['file_extension'] ?? '');
         $fileEntity->setFileName($fileData['filename'] ?? '');

@@ -9,15 +9,15 @@ namespace App\Domain\Contact\Repository\Facade;
 
 use App\Domain\Contact\Entity\AccountEntity;
 
-interface MagicAccountRepositoryInterface
+interface DelightfulAccountRepositoryInterface
 {
     // 查询账号信息
-    public function getAccountInfoByMagicId(string $magicId): ?AccountEntity;
+    public function getAccountInfoByDelightfulId(string $magicId): ?AccountEntity;
 
     /**
      * @return AccountEntity[]
      */
-    public function getAccountByMagicIds(array $magicIds): array;
+    public function getAccountByDelightfulIds(array $magicIds): array;
 
     // 创建账号
     public function createAccount(AccountEntity $accountDTO): AccountEntity;
@@ -31,7 +31,7 @@ interface MagicAccountRepositoryInterface
     /**
      * @return AccountEntity[]
      */
-    public function getAccountInfoByMagicIds(array $magicIds): array;
+    public function getAccountInfoByDelightfulIds(array $magicIds): array;
 
     public function getAccountInfoByAiCode(string $aiCode): ?AccountEntity;
 

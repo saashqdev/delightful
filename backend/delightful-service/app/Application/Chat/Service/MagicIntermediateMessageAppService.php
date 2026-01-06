@@ -7,24 +7,24 @@ declare(strict_types=1);
 
 namespace App\Application\Chat\Service;
 
-use App\Domain\Chat\DTO\MagicMessageDTO;
+use App\Domain\Chat\DTO\DelightfulMessageDTO;
 use App\Domain\Chat\DTO\Message\ChatMessage\RawMessage;
 use App\Domain\Chat\DTO\Request\ChatRequest;
 use App\Domain\Chat\Entity\Items\SeqExtra;
-use App\Domain\Chat\Entity\MagicConversationEntity;
-use App\Domain\Chat\Entity\MagicMessageEntity;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationStatus;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\IntermediateMessageType;
 use App\Domain\Chat\Entity\ValueObject\SocketEventType;
-use App\Domain\Chat\Service\MagicChatDomainService;
-use App\Domain\Chat\Service\MagicIntermediateDomainService;
+use App\Domain\Chat\Service\DelightfulChatDomainService;
+use App\Domain\Chat\Service\DelightfulIntermediateDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\ErrorCode\ChatErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\SocketIO\SocketIOUtil;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
 use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Throwable;
@@ -32,11 +32,11 @@ use Throwable;
 /**
  * 控制消息相关.
  */
-class MagicIntermediateMessageAppService extends AbstractAppService
+class DelightfulIntermediateMessageAppService extends AbstractAppService
 {
     public function __construct(
-        protected readonly MagicIntermediateDomainService $magicIntermediateDomainService,
-        protected readonly MagicChatDomainService $magicChatDomainService,
+        protected readonly DelightfulIntermediateDomainService $magicIntermediateDomainService,
+        protected readonly DelightfulChatDomainService $magicChatDomainService,
     ) {
     }
 
@@ -44,7 +44,7 @@ class MagicIntermediateMessageAppService extends AbstractAppService
      * 根据客户端发来的控制消息类型,分发到对应的处理模块.
      * @throws Throwable
      */
-    public function dispatchClientIntermediateMessage(ChatRequest $chatRequest, MagicUserAuthorization $userAuthorization): ?array
+    public function dispatchClientIntermediateMessage(ChatRequest $chatRequest, DelightfulUserAuthorization $userAuthorization): ?array
     {
         $conversationEntity = $this->magicChatDomainService->getConversationById($chatRequest->getData()->getConversationId());
         if ($conversationEntity === null) {
@@ -67,7 +67,7 @@ class MagicIntermediateMessageAppService extends AbstractAppService
         }
 
         match ($messageDTO->getMessageType()) {
-            IntermediateMessageType::SuperMagicInstruction => $this->magicIntermediateDomainService->handleSuperMagicInstructionMessage(
+            IntermediateMessageType::SuperDelightfulInstruction => $this->magicIntermediateDomainService->handleSuperDelightfulInstructionMessage(
                 $messageDTO,
                 $dataIsolation,
                 $conversationEntity,
@@ -77,7 +77,7 @@ class MagicIntermediateMessageAppService extends AbstractAppService
         return null;
     }
 
-    public function checkSendMessageAuth(MagicConversationEntity $conversationEntity, DataIsolation $dataIsolation): void
+    public function checkSendMessageAuth(DelightfulConversationEntity $conversationEntity, DataIsolation $dataIsolation): void
     {
         // 检查会话 id所属组织，与当前传入组织编码的一致性
         if ($conversationEntity->getUserOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
@@ -89,14 +89,14 @@ class MagicIntermediateMessageAppService extends AbstractAppService
         }
     }
 
-    private function handleRawMessage(MagicMessageDTO $messageDTO, MagicConversationEntity $conversationEntity, ChatRequest $chatRequest): void
+    private function handleRawMessage(DelightfulMessageDTO $messageDTO, DelightfulConversationEntity $conversationEntity, ChatRequest $chatRequest): void
     {
         $receiveUserEntity = $this->magicChatDomainService->getUserInfo($conversationEntity->getReceiveId());
 
-        $messageEntity = new MagicMessageEntity();
+        $messageEntity = new DelightfulMessageEntity();
         $messageEntity->setMessageType(ChatMessageType::Raw);
         $messageEntity->setContent($messageDTO->getContent());
-        $seqEntity = new MagicSeqEntity();
+        $seqEntity = new DelightfulSeqEntity();
         $seqEntity->setSeqType(ChatMessageType::Raw);
         $seqEntity->setContent($messageDTO->getContent());
         $seqEntity->setConversationId($chatRequest->getData()->getConversationId());
@@ -104,6 +104,6 @@ class MagicIntermediateMessageAppService extends AbstractAppService
         $seqEntity->setAppMessageId($messageDTO->getAppMessageId());
         $clientSeqStruct = SeqAssembler::getClientSeqStruct($seqEntity, $messageEntity);
         $pushData = $clientSeqStruct->toArray();
-        SocketIOUtil::sendIntermediate(SocketEventType::Intermediate, $receiveUserEntity->getMagicId(), $pushData);
+        SocketIOUtil::sendIntermediate(SocketEventType::Intermediate, $receiveUserEntity->getDelightfulId(), $pushData);
     }
 }

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\DTO\Node;
 
-use App\Interfaces\Flow\Assembler\Node\MagicFlowNodeAssembler;
+use App\Interfaces\Flow\Assembler\Node\DelightfulFlowNodeAssembler;
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 
 class NodeDTO extends AbstractFlowDTO
@@ -213,7 +213,7 @@ class NodeDTO extends AbstractFlowDTO
      */
     public function setInput(mixed $input): void
     {
-        $this->input = MagicFlowNodeAssembler::createNodeInputDTOByMixed($input);
+        $this->input = DelightfulFlowNodeAssembler::createNodeInputDTOByMixed($input);
     }
 
     /**
@@ -229,7 +229,7 @@ class NodeDTO extends AbstractFlowDTO
      */
     public function setOutput(mixed $output): void
     {
-        $this->output = MagicFlowNodeAssembler::createNodeOutputDTOByMixed($output);
+        $this->output = DelightfulFlowNodeAssembler::createNodeOutputDTOByMixed($output);
     }
 
     /**
@@ -245,6 +245,6 @@ class NodeDTO extends AbstractFlowDTO
      */
     public function setSystemOutput(null|array|NodeOutputDTO $systemOutput): void
     {
-        $this->systemOutput = MagicFlowNodeAssembler::createNodeOutputDTOByMixed($systemOutput);
+        $this->systemOutput = DelightfulFlowNodeAssembler::createNodeOutputDTOByMixed($systemOutput);
     }
 }

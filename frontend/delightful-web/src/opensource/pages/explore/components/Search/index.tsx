@@ -3,9 +3,9 @@ import { Flex, Select } from "antd"
 import { useTranslation } from "react-i18next"
 import { IconChevronRight, IconSearch } from "@tabler/icons-react"
 import { useDebounceFn, useMemoizedFn } from "ahooks"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import type { Bot } from "@/types/bot"
-import MagicEmpty from "@/opensource/components/base/MagicEmpty"
+import DelightfulEmpty from "@/opensource/components/base/DelightfulEmpty"
 import { resolveToString } from "@dtyq/es6-template-strings"
 import { colorUsages } from "@/opensource/providers/ThemeProvider/colors"
 import VirtualList from "rc-virtual-list"
@@ -72,7 +72,7 @@ const Search = memo(({ handleClickCard }: { handleClickCard: (id: string) => voi
 
 	return (
 		<Flex className={styles.searchGroup}>
-			<MagicIcon
+			<DelightfulIcon
 				component={IconSearch}
 				size={24}
 				color={colorUsages.text[3]}
@@ -86,7 +86,7 @@ const Search = memo(({ handleClickCard }: { handleClickCard: (id: string) => voi
 				filterOption={false}
 				suffixIcon={null}
 				onSearch={debounceSearch}
-				notFoundContent={<MagicEmpty />}
+				notFoundContent={<DelightfulEmpty />}
 				popupClassName={styles.searchPopup}
 				open={open}
 				onDropdownVisibleChange={(visible) => {
@@ -140,13 +140,13 @@ const Search = memo(({ handleClickCard }: { handleClickCard: (id: string) => voi
 													}}
 													textGap4
 												/>
-												<MagicIcon component={IconChevronRight} size={24} />
+												<DelightfulIcon component={IconChevronRight} size={24} />
 											</Flex>
 										)}
 									</VirtualList>
 								</>
 							)}
-							{searchResult.length === 0 && <MagicEmpty />}
+							{searchResult.length === 0 && <DelightfulEmpty />}
 						</Flex>
 					)
 				}}

@@ -10,7 +10,7 @@ namespace App\Domain\Agent\Entity;
 use App\Domain\Agent\Entity\ValueObject\Visibility\VisibilityConfig;
 use Hyperf\Codec\Json;
 
-class MagicAgentVersionEntity extends AbstractEntity
+class DelightfulAgentVersionEntity extends AbstractEntity
 {
     /**
      * 主键.

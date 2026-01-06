@@ -10,7 +10,7 @@ namespace App\Domain\Contact\Repository\Persistence;
 use App\Application\Chat\Event\Publish\InitDefaultAssistantConversationDispatchPublisher;
 use App\Domain\Agent\Event\InitDefaultAssistantConversationEvent;
 use App\Domain\Contact\Entity\Item\UserExtra;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\AccountStatus;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\UserIdType;
@@ -18,7 +18,7 @@ use App\Domain\Contact\Entity\ValueObject\UserOption;
 use App\Domain\Contact\Entity\ValueObject\UserStatus;
 use App\Domain\Contact\Entity\ValueObject\UserType;
 use App\Domain\Contact\Factory\ContactUserFactory;
-use App\Domain\Contact\Repository\Facade\MagicUserRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulUserRepositoryInterface;
 use App\Domain\Contact\Repository\Persistence\Model\AccountModel;
 use App\Domain\Contact\Repository\Persistence\Model\UserModel;
 use App\ErrorCode\ChatErrorCode;
@@ -34,7 +34,7 @@ use Hyperf\DbConnection\Db;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 
-readonly class MagicUserRepository implements MagicUserRepositoryInterface
+readonly class DelightfulUserRepository implements DelightfulUserRepositoryInterface
 {
     private LoggerInterface $logger;
 
@@ -71,12 +71,12 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
         return [$popular, $latest];
     }
 
-    public function createUser(MagicUserEntity $userDTO): MagicUserEntity
+    public function createUser(DelightfulUserEntity $userDTO): DelightfulUserEntity
     {
         if ($userDTO->getId() === null) {
             $userDTO->setId(IdGenerator::getSnowId());
         }
-        if (empty($userDTO->getMagicId())) {
+        if (empty($userDTO->getDelightfulId())) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
         $userData = $userDTO->toArray();
@@ -91,8 +91,8 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
     }
 
     /**
-     * @param MagicUserEntity[] $userDTOs
-     * @return MagicUserEntity[]
+     * @param DelightfulUserEntity[] $userDTOs
+     * @return DelightfulUserEntity[]
      */
     public function createUsers(array $userDTOs): array
     {
@@ -103,7 +103,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
             if ($userDTO->getId() === null) {
                 $userDTO->setId(IdGenerator::getSnowId());
             }
-            if (empty($userDTO->getMagicId())) {
+            if (empty($userDTO->getDelightfulId())) {
                 ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
             }
             $userDTO->setCreatedAt($time);
@@ -119,7 +119,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
         return $userEntities;
     }
 
-    public function getUserById(string $id): ?MagicUserEntity
+    public function getUserById(string $id): ?DelightfulUserEntity
     {
         $user = $this->getUser($id);
         if (empty($user)) {
@@ -128,7 +128,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
         return UserAssembler::getUserEntity($user);
     }
 
-    public function getUserByMagicId(DataIsolation $dataIsolation, string $id): ?MagicUserEntity
+    public function getUserByDelightfulId(DataIsolation $dataIsolation, string $id): ?DelightfulUserEntity
     {
         $user = UserModel::query()
             ->where('magic_id', $id)
@@ -138,7 +138,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
     }
 
     /**
-     * @return MagicUserEntity[]
+     * @return DelightfulUserEntity[]
      */
     public function getUserByIdsAndOrganizations(array $ids, array $organizationCodes = [], array $column = ['*']): array
     {
@@ -153,7 +153,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
     }
 
     /**
-     * @return array<string, MagicUserEntity>
+     * @return array<string, DelightfulUserEntity>
      */
     public function getUserByPageToken(string $pageToken = '', int $pageSize = 50): array
     {
@@ -173,7 +173,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
     }
 
     /**
-     * @return array<string, MagicUserEntity>
+     * @return array<string, DelightfulUserEntity>
      */
     public function getByUserIds(string $organizationCode, array $userIds): array
     {
@@ -198,7 +198,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
             return [];
         }
 
-        $magicId = $userEntity->getMagicId();
+        $magicId = $userEntity->getDelightfulId();
 
         // 第二次查询：根据 magic_id 查询所有该账号在不同组织中的用户记录
         $query = $this->userModel::query()
@@ -216,7 +216,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
      * 根据 magicId 获取用户所属的组织列表.
      * @return string[]
      */
-    public function getUserOrganizationsByMagicId(string $magicId): array
+    public function getUserOrganizationsByDelightfulId(string $magicId): array
     {
         $query = $this->userModel::query()
             ->select('organization_code')
@@ -334,7 +334,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
             ->delete();
     }
 
-    public function getUserByAccountAndOrganization(string $accountId, string $organizationCode): ?MagicUserEntity
+    public function getUserByAccountAndOrganization(string $accountId, string $organizationCode): ?DelightfulUserEntity
     {
         $user = $this->getUserArrayByAccountAndOrganization($accountId, $organizationCode);
         return $user ? UserAssembler::getUserEntity($user) : null;
@@ -348,7 +348,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
         return Db::select($query->toSql(), $query->getBindings());
     }
 
-    public function getUserByAccountsInMagic(array $accountIds): array
+    public function getUserByAccountsInDelightful(array $accountIds): array
     {
         $query = $this->userModel::query()->whereIn('magic_id', $accountIds);
         return Db::select($query->toSql(), $query->getBindings());
@@ -365,7 +365,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
         return Db::select($query->toSql(), $query->getBindings());
     }
 
-    public function searchByNickNameInMagic(string $nickName): array
+    public function searchByNickNameInDelightful(string $nickName): array
     {
         if (empty($nickName)) {
             return [];
@@ -389,7 +389,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
     }
 
     #[CacheEvict(prefix: 'userEntity', value: '_#{userDTO.userId}')]
-    public function saveUser(MagicUserEntity $userDTO): MagicUserEntity
+    public function saveUser(DelightfulUserEntity $userDTO): DelightfulUserEntity
     {
         $user = $this->getUserById($userDTO->getUserId());
         if ($user === null) {
@@ -417,9 +417,9 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
     }
 
     /**
-     * @return MagicUserEntity[]
+     * @return DelightfulUserEntity[]
      */
-    public function getUsersByMagicIdAndOrganizationCode(array $magicIds, string $organizationCode): array
+    public function getUsersByDelightfulIdAndOrganizationCode(array $magicIds, string $organizationCode): array
     {
         $users = $this->userModel::query()
             ->whereIn('magic_id', $magicIds)
@@ -433,9 +433,9 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
     }
 
     /**
-     * @return MagicUserEntity[]
+     * @return DelightfulUserEntity[]
      */
-    public function getUserByMagicIds(array $magicIds): array
+    public function getUserByDelightfulIds(array $magicIds): array
     {
         $users = $this->userModel::query()->whereIn('magic_id', $magicIds);
         $users = Db::select($users->toSql(), $users->getBindings());
@@ -447,7 +447,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
     }
 
     /**
-     * @return MagicUserEntity[]
+     * @return DelightfulUserEntity[]
      */
     public function getUserAllUserIds(string $userId): array
     {
@@ -455,7 +455,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
         if ($user === null) {
             return [];
         }
-        $users = $this->userModel::query()->where('magic_id', $user->getMagicId());
+        $users = $this->userModel::query()->where('magic_id', $user->getDelightfulId());
         $users = Db::select($users->toSql(), $users->getBindings());
         $userEntities = [];
         foreach ($users as $user) {
@@ -473,7 +473,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
             ->update($data);
     }
 
-    public function getMagicIdsByUserIds(array $userIds): array
+    public function getDelightfulIdsByUserIds(array $userIds): array
     {
         return UserModel::query()->whereIn('user_id', $userIds)->pluck('magic_id')->toArray();
     }
@@ -501,7 +501,7 @@ readonly class MagicUserRepository implements MagicUserRepositoryInterface
     /**
      * 投递初始化默认助手会话事件到MQ.
      */
-    private function publishInitDefaultAssistantConversationEventForMQ(MagicUserEntity $userEntity): void
+    private function publishInitDefaultAssistantConversationEventForMQ(DelightfulUserEntity $userEntity): void
     {
         $initDefaultAssistantConversationEvent = new InitDefaultAssistantConversationEvent(
             $userEntity,

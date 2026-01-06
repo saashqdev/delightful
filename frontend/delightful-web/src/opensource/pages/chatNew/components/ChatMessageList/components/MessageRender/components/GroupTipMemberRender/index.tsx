@@ -1,4 +1,4 @@
-import MagicMemberAvatar from "@/opensource/components/business/MagicMemberAvatar"
+import DelightfulMemberAvatar from "@/opensource/components/business/DelightfulMemberAvatar"
 import { getUserName } from "@/utils/modules/chat"
 import { observer } from "mobx-react-lite"
 import { useTipStyles } from "../../../../hooks/useTipStyles"
@@ -16,9 +16,9 @@ const GroupTipMemberRender = observer(({ uid }: { uid: string }) => {
 	}
 
 	return (
-		<MagicMemberAvatar uid={uid} classNames={{ name: styles.highlight }}>
+		<DelightfulMemberAvatar uid={uid} classNames={{ name: styles.highlight }}>
 			{(user) => <span className={styles.highlight}>{getUserName(user)}</span>}
-		</MagicMemberAvatar>
+		</DelightfulMemberAvatar>
 	)
 })
 

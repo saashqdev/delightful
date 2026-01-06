@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react"
 import { createStyles, cx } from "antd-style"
 import { memo } from "react"
@@ -36,7 +36,7 @@ export default memo(function TaskListProcess(props: TaskListProcessProps) {
 				<span>/</span>
 				<span>{max}</span>
 			</div>
-			<MagicIcon
+			<DelightfulIcon
 				size={16}
 				stroke={2}
 				component={collapsed ? IconChevronDown : IconChevronUp}

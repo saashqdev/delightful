@@ -5,7 +5,7 @@ import { configStore } from "@/opensource/models/config"
 import { HttpClient } from "../core/HttpClient"
 import generatorUnionRequest from "@/opensource/apis/core/unionRequest"
 
-export class MagicHttpClient extends HttpClient {
+export class DelightfulHttpClient extends HttpClient {
 	constructor() {
 		super(env("DELIGHTFUL_SERVICE_BASE_URL"))
 		this.setupInterceptors()
@@ -49,7 +49,7 @@ export class MagicHttpClient extends HttpClient {
 	}
 }
 
-const magicClient = new MagicHttpClient()
+const magicClient = new DelightfulHttpClient()
 
 const unionRequestDecorator = generatorUnionRequest()
 

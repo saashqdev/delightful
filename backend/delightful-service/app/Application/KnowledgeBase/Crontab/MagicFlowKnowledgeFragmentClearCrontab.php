@@ -10,8 +10,8 @@ namespace App\Application\KnowledgeBase\Crontab;
 use Hyperf\Crontab\Annotation\Crontab;
 use Hyperf\DbConnection\Db;
 
-#[Crontab(rule: '0 3 * * *', name: 'MagicFlowKnowledgeFragmentClearCrontab', singleton: true, mutexExpires: 600, onOneServer: true, callback: 'execute', memo: '定时清理知识库')]
-readonly class MagicFlowKnowledgeFragmentClearCrontab
+#[Crontab(rule: '0 3 * * *', name: 'DelightfulFlowKnowledgeFragmentClearCrontab', singleton: true, mutexExpires: 600, onOneServer: true, callback: 'execute', memo: '定时清理知识库')]
+readonly class DelightfulFlowKnowledgeFragmentClearCrontab
 {
     public function execute(): void
     {

@@ -1,6 +1,6 @@
 import React from "react"
 import { Space } from "antd"
-import MagicAvatar from "../../components/MagicAvatar"
+import DelightfulAvatar from "../../components/DelightfulAvatar"
 import ComponentDemo from "./Container"
 
 const AvatarDemo: React.FC = () => {
@@ -12,12 +12,12 @@ const AvatarDemo: React.FC = () => {
 				code="children: string | ReactNode"
 			>
 				<Space wrap>
-					<MagicAvatar>张三</MagicAvatar>
-					<MagicAvatar>李四</MagicAvatar>
-					<MagicAvatar>王五</MagicAvatar>
-					<MagicAvatar>John</MagicAvatar>
-					<MagicAvatar>Alice</MagicAvatar>
-					<MagicAvatar src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" />
+					<DelightfulAvatar>张三</DelightfulAvatar>
+					<DelightfulAvatar>李四</DelightfulAvatar>
+					<DelightfulAvatar>王五</DelightfulAvatar>
+					<DelightfulAvatar>John</DelightfulAvatar>
+					<DelightfulAvatar>Alice</DelightfulAvatar>
+					<DelightfulAvatar src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" />
 				</Space>
 			</ComponentDemo>
 
@@ -27,10 +27,10 @@ const AvatarDemo: React.FC = () => {
 				code="size: 'small' | 'default' | 'large' | number"
 			>
 				<Space wrap align="center">
-					<MagicAvatar size="small">小</MagicAvatar>
-					<MagicAvatar>默认</MagicAvatar>
-					<MagicAvatar size="large">大</MagicAvatar>
-					<MagicAvatar size={96}>超大</MagicAvatar>
+					<DelightfulAvatar size="small">小</DelightfulAvatar>
+					<DelightfulAvatar>默认</DelightfulAvatar>
+					<DelightfulAvatar size="large">大</DelightfulAvatar>
+					<DelightfulAvatar size={96}>超大</DelightfulAvatar>
 				</Space>
 			</ComponentDemo>
 
@@ -40,41 +40,41 @@ const AvatarDemo: React.FC = () => {
 				code="badgeProps: BadgeProps"
 			>
 				<Space wrap>
-					<MagicAvatar
+					<DelightfulAvatar
 						badgeProps={{
 							count: 5,
 						}}
 					>
 						张三
-					</MagicAvatar>
-					<MagicAvatar
+					</DelightfulAvatar>
+					<DelightfulAvatar
 						badgeProps={{
 							dot: true,
 						}}
 					>
 						李四
-					</MagicAvatar>
-					<MagicAvatar
+					</DelightfulAvatar>
+					<DelightfulAvatar
 						badgeProps={{
 							status: "success",
 						}}
 					>
 						王五
-					</MagicAvatar>
-					<MagicAvatar
+					</DelightfulAvatar>
+					<DelightfulAvatar
 						badgeProps={{
 							status: "error",
 						}}
 					>
 						赵六
-					</MagicAvatar>
-					<MagicAvatar
+					</DelightfulAvatar>
+					<DelightfulAvatar
 						badgeProps={{
 							status: "processing",
 						}}
 					>
 						钱七
-					</MagicAvatar>
+					</DelightfulAvatar>
 				</Space>
 			</ComponentDemo>
 
@@ -84,19 +84,19 @@ const AvatarDemo: React.FC = () => {
 				code="style: CSSProperties"
 			>
 				<Space wrap>
-					<MagicAvatar style={{ backgroundColor: "#f50", color: "#fff" }}>
+					<DelightfulAvatar style={{ backgroundColor: "#f50", color: "#fff" }}>
 						红色
-					</MagicAvatar>
-					<MagicAvatar style={{ backgroundColor: "#52c41a", color: "#fff" }}>
+					</DelightfulAvatar>
+					<DelightfulAvatar style={{ backgroundColor: "#52c41a", color: "#fff" }}>
 						绿色
-					</MagicAvatar>
-					<MagicAvatar style={{ backgroundColor: "#1890ff", color: "#fff" }}>
+					</DelightfulAvatar>
+					<DelightfulAvatar style={{ backgroundColor: "#1890ff", color: "#fff" }}>
 						蓝色
-					</MagicAvatar>
-					<MagicAvatar style={{ backgroundColor: "#722ed1", color: "#fff" }}>
+					</DelightfulAvatar>
+					<DelightfulAvatar style={{ backgroundColor: "#722ed1", color: "#fff" }}>
 						紫色
-					</MagicAvatar>
-					<MagicAvatar style={{ border: "2px solid #f50" }}>边框</MagicAvatar>
+					</DelightfulAvatar>
+					<DelightfulAvatar style={{ border: "2px solid #f50" }}>边框</DelightfulAvatar>
 				</Space>
 			</ComponentDemo>
 
@@ -106,10 +106,10 @@ const AvatarDemo: React.FC = () => {
 				code="src: string"
 			>
 				<Space wrap>
-					<MagicAvatar src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" />
-					<MagicAvatar src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alice" />
-					<MagicAvatar src="https://api.dicebear.com/7.x/avataaars/svg?seed=Bob" />
-					<MagicAvatar src="invalid-url">回退</MagicAvatar>
+					<DelightfulAvatar src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" />
+					<DelightfulAvatar src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alice" />
+					<DelightfulAvatar src="https://api.dicebear.com/7.x/avataaars/svg?seed=Bob" />
+					<DelightfulAvatar src="invalid-url">回退</DelightfulAvatar>
 				</Space>
 			</ComponentDemo>
 
@@ -122,29 +122,29 @@ const AvatarDemo: React.FC = () => {
 					<div>
 						<strong>在线用户列表：</strong>
 						<Space wrap style={{ marginLeft: 16 }}>
-							<MagicAvatar size={32} badgeProps={{ status: "success" }}>
+							<DelightfulAvatar size={32} badgeProps={{ status: "success" }}>
 								张三
-							</MagicAvatar>
-							<MagicAvatar size={32} badgeProps={{ status: "success" }}>
+							</DelightfulAvatar>
+							<DelightfulAvatar size={32} badgeProps={{ status: "success" }}>
 								李四
-							</MagicAvatar>
-							<MagicAvatar size={32} badgeProps={{ status: "default" }}>
+							</DelightfulAvatar>
+							<DelightfulAvatar size={32} badgeProps={{ status: "default" }}>
 								王五
-							</MagicAvatar>
+							</DelightfulAvatar>
 						</Space>
 					</div>
 					<div style={{ marginTop: 16 }}>
 						<strong>消息通知：</strong>
 						<Space wrap style={{ marginLeft: 16 }}>
-							<MagicAvatar size={40} badgeProps={{ count: 3 }}>
+							<DelightfulAvatar size={40} badgeProps={{ count: 3 }}>
 								系统
-							</MagicAvatar>
-							<MagicAvatar size={40} badgeProps={{ count: 12 }}>
+							</DelightfulAvatar>
+							<DelightfulAvatar size={40} badgeProps={{ count: 12 }}>
 								团队
-							</MagicAvatar>
-							<MagicAvatar size={40} badgeProps={{ dot: true }}>
+							</DelightfulAvatar>
+							<DelightfulAvatar size={40} badgeProps={{ dot: true }}>
 								私信
-							</MagicAvatar>
+							</DelightfulAvatar>
 						</Space>
 					</div>
 				</Space>

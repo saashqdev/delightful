@@ -7,28 +7,28 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Persistence;
 
-use App\Domain\Flow\Entity\MagicFlowMemoryHistoryEntity;
+use App\Domain\Flow\Entity\DelightfulFlowMemoryHistoryEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowMemoryHistoryQuery;
-use App\Domain\Flow\Factory\MagicFlowMemoryHistoryFactory;
-use App\Domain\Flow\Repository\Facade\MagicFlowMemoryHistoryRepositoryInterface;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowMemoryHistoryModel;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowMemoryHistoryQuery;
+use App\Domain\Flow\Factory\DelightfulFlowMemoryHistoryFactory;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowMemoryHistoryRepositoryInterface;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowMemoryHistoryModel;
 use App\Infrastructure\Core\ValueObject\Page;
 
-class MagicFlowMemoryHistoryRepository extends MagicFlowAbstractRepository implements MagicFlowMemoryHistoryRepositoryInterface
+class DelightfulFlowMemoryHistoryRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowMemoryHistoryRepositoryInterface
 {
-    public function create(FlowDataIsolation $dataIsolation, MagicFlowMemoryHistoryEntity $magicFlowMemoryHistoryEntity): MagicFlowMemoryHistoryEntity
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryEntity $magicFlowMemoryHistoryEntity): DelightfulFlowMemoryHistoryEntity
     {
-        $model = new MagicFlowMemoryHistoryModel();
+        $model = new DelightfulFlowMemoryHistoryModel();
         $model->fill($this->getAttributes($magicFlowMemoryHistoryEntity));
         $model->save();
         $magicFlowMemoryHistoryEntity->setId($model->id);
         return $magicFlowMemoryHistoryEntity;
     }
 
-    public function queries(FlowDataIsolation $dataIsolation, MagicFlowMemoryHistoryQuery $query, Page $page): array
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryQuery $query, Page $page): array
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowMemoryHistoryModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowMemoryHistoryModel::query());
 
         if ($query->getConversationId()) {
             $builder->where('conversation_id', $query->getConversationId());
@@ -61,7 +61,7 @@ class MagicFlowMemoryHistoryRepository extends MagicFlowAbstractRepository imple
         if (! empty($data['list'])) {
             $list = [];
             foreach ($data['list'] as $model) {
-                $list[] = MagicFlowMemoryHistoryFactory::modelToEntity($model);
+                $list[] = DelightfulFlowMemoryHistoryFactory::modelToEntity($model);
             }
             $data['list'] = $list;
         }
@@ -71,7 +71,7 @@ class MagicFlowMemoryHistoryRepository extends MagicFlowAbstractRepository imple
 
     public function removeByConversationId(FlowDataIsolation $dataIsolation, string $conversationId): void
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowMemoryHistoryModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowMemoryHistoryModel::query());
         $builder->where('conversation_id', $conversationId)->update(['conversation_id' => $conversationId . '-d' . time()]);
     }
 }

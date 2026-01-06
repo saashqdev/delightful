@@ -1,6 +1,6 @@
 import React from "react"
 import { Space } from "antd"
-import MagicSearch from "../../components/MagicSearch"
+import DelightfulSearch from "../../components/DelightfulSearch"
 import ComponentDemo from "./Container"
 
 const SearchDemo: React.FC = () => {
@@ -9,10 +9,10 @@ const SearchDemo: React.FC = () => {
 			<ComponentDemo
 				title="基础搜索"
 				description="最基本的搜索组件"
-				code="<MagicSearch placeholder='请输入搜索内容' />"
+				code="<DelightfulSearch placeholder='请输入搜索内容' />"
 			>
 				<Space>
-					<MagicSearch placeholder="请输入搜索内容" style={{ width: 300 }} />
+					<DelightfulSearch placeholder="请输入搜索内容" style={{ width: 300 }} />
 				</Space>
 			</ComponentDemo>
 
@@ -22,9 +22,9 @@ const SearchDemo: React.FC = () => {
 				code="size: 'large' | 'middle' | 'small'"
 			>
 				<Space direction="vertical">
-					<MagicSearch placeholder="大尺寸搜索框" size="large" style={{ width: 300 }} />
-					<MagicSearch placeholder="默认尺寸搜索框" style={{ width: 300 }} />
-					<MagicSearch placeholder="小尺寸搜索框" size="small" style={{ width: 300 }} />
+					<DelightfulSearch placeholder="大尺寸搜索框" size="large" style={{ width: 300 }} />
+					<DelightfulSearch placeholder="默认尺寸搜索框" style={{ width: 300 }} />
+					<DelightfulSearch placeholder="小尺寸搜索框" size="small" style={{ width: 300 }} />
 				</Space>
 			</ComponentDemo>
 
@@ -34,7 +34,7 @@ const SearchDemo: React.FC = () => {
 				code="onSearch | onChange"
 			>
 				<Space direction="vertical">
-					<MagicSearch
+					<DelightfulSearch
 						placeholder="输入时触发onChange"
 						style={{ width: 300 }}
 						onChange={(e) => console.log("输入内容:", e.target.value)}

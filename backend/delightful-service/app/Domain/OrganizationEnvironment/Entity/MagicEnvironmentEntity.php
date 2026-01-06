@@ -9,12 +9,12 @@ namespace App\Domain\OrganizationEnvironment\Entity;
 
 use App\Domain\Chat\Entity\AbstractEntity;
 use App\Domain\OrganizationEnvironment\Entity\Facade\OpenPlatformConfigInterface;
-use App\Domain\OrganizationEnvironment\Entity\Item\MagicEnvironmentExtra;
+use App\Domain\OrganizationEnvironment\Entity\Item\DelightfulEnvironmentExtra;
 use App\Domain\OrganizationEnvironment\Entity\ValueObject\DeploymentEnum;
 use App\Domain\OrganizationEnvironment\Entity\ValueObject\EnvironmentEnum;
 use Hyperf\Codec\Json;
 
-class MagicEnvironmentEntity extends AbstractEntity
+class DelightfulEnvironmentEntity extends AbstractEntity
 {
     protected int $id;
 
@@ -30,7 +30,7 @@ class MagicEnvironmentEntity extends AbstractEntity
 
     protected ?array $privateConfig = null;
 
-    protected ?MagicEnvironmentExtra $extra = null;
+    protected ?DelightfulEnvironmentExtra $extra = null;
 
     protected string $createdAt;
 
@@ -41,19 +41,19 @@ class MagicEnvironmentEntity extends AbstractEntity
         parent::__construct($data);
     }
 
-    public function getExtra(): ?MagicEnvironmentExtra
+    public function getExtra(): ?DelightfulEnvironmentExtra
     {
         return $this->extra;
     }
 
-    public function setExtra(null|array|MagicEnvironmentExtra|string $extra): void
+    public function setExtra(null|array|DelightfulEnvironmentExtra|string $extra): void
     {
         if (is_string($extra)) {
             $extra = Json::decode($extra);
         }
 
         if (is_array($extra)) {
-            $extra = new MagicEnvironmentExtra($extra);
+            $extra = new DelightfulEnvironmentExtra($extra);
         }
 
         $this->extra = $extra;

@@ -8,17 +8,17 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\Contract\Authorization;
 
 use App\Domain\Contact\Entity\ValueObject\UserType;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Service\MagicFlowApiKeyDomainService;
+use App\Domain\Flow\Service\DelightfulFlowApiKeyDomainService;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use App\Interfaces\Flow\DTO\MagicFlowApiChatDTO;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use App\Interfaces\Flow\DTO\DelightfulFlowApiChatDTO;
 
 class BaseFlowOpenApiCheck implements FlowOpenApiCheckInterface
 {
-    public function handle(MagicFlowApiChatDTO $magicFlowApiChatDTO): MagicUserAuthorization
+    public function handle(DelightfulFlowApiChatDTO $magicFlowApiChatDTO): DelightfulUserAuthorization
     {
         $authOptions = $this->getAuthOptions($magicFlowApiChatDTO);
         return match ($authOptions['type']) {
@@ -30,7 +30,7 @@ class BaseFlowOpenApiCheck implements FlowOpenApiCheckInterface
     /**
      * @return array{type: string, authorization: string}
      */
-    protected function getAuthOptions(MagicFlowApiChatDTO $magicFlowApiChatDTO): array
+    protected function getAuthOptions(DelightfulFlowApiChatDTO $magicFlowApiChatDTO): array
     {
         $data = [
             'type' => '',
@@ -54,20 +54,20 @@ class BaseFlowOpenApiCheck implements FlowOpenApiCheckInterface
         ExceptionBuilder::throw(FlowErrorCode::AccessDenied, 'error authorization');
     }
 
-    protected function apiKey(MagicFlowApiChatDTO $magicFlowApiChatDTO, string $authorization): MagicUserAuthorization
+    protected function apiKey(DelightfulFlowApiChatDTO $magicFlowApiChatDTO, string $authorization): DelightfulUserAuthorization
     {
-        $apiKey = di(MagicFlowApiKeyDomainService::class)->getBySecretKey(FlowDataIsolation::create()->disabled(), $authorization);
-        $magicUserAuthorization = new MagicUserAuthorization();
+        $apiKey = di(DelightfulFlowApiKeyDomainService::class)->getBySecretKey(FlowDataIsolation::create()->disabled(), $authorization);
+        $magicUserAuthorization = new DelightfulUserAuthorization();
         $magicUserAuthorization
             ->setId($apiKey->getCreator())
             ->setOrganizationCode($apiKey->getOrganizationCode())
             ->setUserType(UserType::Human)
-            ->setMagicEnvId(0);
+            ->setDelightfulEnvId(0);
         if (empty($magicFlowApiChatDTO->getConversationId())) {
             $magicFlowApiChatDTO->setConversationId($apiKey->getConversationId());
         }
         $magicFlowApiChatDTO->setFlowCode($apiKey->getFlowCode());
-        $user = di(MagicUserDomainService::class)->getByUserId($apiKey->getCreator());
+        $user = di(DelightfulUserDomainService::class)->getByUserId($apiKey->getCreator());
         $magicFlowApiChatDTO->addShareOptions('user', $user);
         $magicFlowApiChatDTO->addShareOptions('source_id', 'sk_flow');
         return $magicUserAuthorization;

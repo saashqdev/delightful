@@ -42,7 +42,7 @@ export const enum ConversationMessageType {
 	Voice = "voice",
 
 	/** 魔法搜索卡片消息 */
-	MagicSearchCard = "magic_search_card",
+	DelightfulSearchCard = "magic_search_card",
 
 	/** AI 文生图 */
 	AiImage = "ai_image_card",
@@ -54,7 +54,7 @@ export const enum ConversationMessageType {
 	RecordingSummary = "recording_summary",
 
 	/** 超级麦吉消息 */
-	SuperMagic = "general_agent_card",
+	SuperDelightful = "general_agent_card",
 }
 
 /**
@@ -106,8 +106,8 @@ export interface ConversationMessageBase extends SeqMessageBase {
 	is_local_deleted?: boolean
 }
 
-export interface SuperMagicContent {
-	type: ConversationMessageType.SuperMagic
+export interface SuperDelightfulContent {
+	type: ConversationMessageType.SuperDelightful
 	content: string
 }
 
@@ -612,7 +612,7 @@ export interface WikiSearchItem {
 	noCache: boolean
 }
 
-export interface MagicSearchCardContent {
+export interface DelightfulSearchCardContent {
 	/** 搜索结果 */
 	search: WikiSearchItem[]
 	/** 回答 */
@@ -624,9 +624,9 @@ export interface MagicSearchCardContent {
 /**
  * 魔法搜索卡片消息
  */
-export interface MagicSearchCardConversationMessage extends ConversationMessageBase {
-	type: ConversationMessageType.MagicSearchCard
-	magic_search_card?: MagicSearchCardContent
+export interface DelightfulSearchCardConversationMessage extends ConversationMessageBase {
+	type: ConversationMessageType.DelightfulSearchCard
+	magic_search_card?: DelightfulSearchCardContent
 }
 
 export const enum AIImagesDataType {
@@ -722,7 +722,7 @@ export type MessageCanRevoke =
 	| TextConversationMessage
 	| RichTextConversationMessage
 	| MarkdownConversationMessage
-	| MagicSearchCardConversationMessage
+	| DelightfulSearchCardConversationMessage
 	| FileConversationMessage
 	| ImageConversationMessage
 	| VideoConversationMessage
@@ -736,7 +736,7 @@ export type ConversationMessage =
 	| TextConversationMessage
 	| RichTextConversationMessage
 	| MarkdownConversationMessage
-	| MagicSearchCardConversationMessage
+	| DelightfulSearchCardConversationMessage
 	| FileConversationMessage
 	| ImageConversationMessage
 	| VideoConversationMessage

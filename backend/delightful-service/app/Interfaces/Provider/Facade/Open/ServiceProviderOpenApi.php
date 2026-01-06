@@ -11,7 +11,7 @@ use App\Application\Provider\Service\AdminProviderAppService;
 use App\Domain\Provider\Entity\ValueObject\Category;
 use App\ErrorCode\ServiceProviderErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Provider\Facade\AbstractApi;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
@@ -30,7 +30,7 @@ class ServiceProviderOpenApi extends AbstractApi
      */
     public function getProvidersByCategory(RequestInterface $request): array
     {
-        /** @var MagicUserAuthorization $authenticatable */
+        /** @var DelightfulUserAuthorization $authenticatable */
         $authenticatable = $this->getAuthorization();
         $category = $request->input('category', 'llm');
         $serviceProviderCategory = Category::tryFrom($category);

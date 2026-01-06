@@ -1,6 +1,6 @@
-# MagicSplitter 魔法分割面板组件
+# DelightfulSplitter 魔法分割面板组件
 
-`MagicSplitter` 是一个基于 Ant Design Splitter 组件的增强版分割面板，提供了更简洁的样式和更好的用户体验。
+`DelightfulSplitter` 是一个基于 Ant Design Splitter 组件的增强版分割面板，提供了更简洁的样式和更好的用户体验。
 
 ## 属性
 
@@ -10,72 +10,72 @@
 
 ## 子组件
 
--   `MagicSplitter.Panel` - 分割面板的子面板组件，用于定义每个可调整大小的区域
+-   `DelightfulSplitter.Panel` - 分割面板的子面板组件，用于定义每个可调整大小的区域
 
 ## 基础用法
 
 ```tsx
-import { MagicSplitter } from '@/components/base/MagicSplitter';
+import { DelightfulSplitter } from '@/components/base/DelightfulSplitter';
 
 // 基础用法 - 水平分割
-<MagicSplitter>
-  <MagicSplitter.Panel>
+<DelightfulSplitter>
+  <DelightfulSplitter.Panel>
     <div>左侧面板内容</div>
-  </MagicSplitter.Panel>
-  <MagicSplitter.Panel>
+  </DelightfulSplitter.Panel>
+  <DelightfulSplitter.Panel>
     <div>右侧面板内容</div>
-  </MagicSplitter.Panel>
-</MagicSplitter>
+  </DelightfulSplitter.Panel>
+</DelightfulSplitter>
 
 // 垂直分割
-<MagicSplitter split="horizontal">
-  <MagicSplitter.Panel>
+<DelightfulSplitter split="horizontal">
+  <DelightfulSplitter.Panel>
     <div>上方面板内容</div>
-  </MagicSplitter.Panel>
-  <MagicSplitter.Panel>
+  </DelightfulSplitter.Panel>
+  <DelightfulSplitter.Panel>
     <div>下方面板内容</div>
-  </MagicSplitter.Panel>
-</MagicSplitter>
+  </DelightfulSplitter.Panel>
+</DelightfulSplitter>
 
 // 设置默认尺寸
-<MagicSplitter defaultSizes={[30, 70]}>
-  <MagicSplitter.Panel>
+<DelightfulSplitter defaultSizes={[30, 70]}>
+  <DelightfulSplitter.Panel>
     <div>左侧面板内容 (30%)</div>
-  </MagicSplitter.Panel>
-  <MagicSplitter.Panel>
+  </DelightfulSplitter.Panel>
+  <DelightfulSplitter.Panel>
     <div>右侧面板内容 (70%)</div>
-  </MagicSplitter.Panel>
-</MagicSplitter>
+  </DelightfulSplitter.Panel>
+</DelightfulSplitter>
 
 // 多个面板
-<MagicSplitter>
-  <MagicSplitter.Panel>
+<DelightfulSplitter>
+  <DelightfulSplitter.Panel>
     <div>第一个面板</div>
-  </MagicSplitter.Panel>
-  <MagicSplitter.Panel>
+  </DelightfulSplitter.Panel>
+  <DelightfulSplitter.Panel>
     <div>第二个面板</div>
-  </MagicSplitter.Panel>
-  <MagicSplitter.Panel>
+  </DelightfulSplitter.Panel>
+  <DelightfulSplitter.Panel>
     <div>第三个面板</div>
-  </MagicSplitter.Panel>
-</MagicSplitter>
+  </DelightfulSplitter.Panel>
+</DelightfulSplitter>
 
 // 嵌套使用
-<MagicSplitter>
-  <MagicSplitter.Panel>
+<DelightfulSplitter>
+  <DelightfulSplitter.Panel>
     <div>左侧面板</div>
-  </MagicSplitter.Panel>
-  <MagicSplitter.Panel>
-    <MagicSplitter split="horizontal">
-      <MagicSplitter.Panel>
+  </DelightfulSplitter.Panel>
+  <DelightfulSplitter.Panel>
+    <DelightfulSplitter split="horizontal">
+      <DelightfulSplitter.Panel>
         <div>右上面板</div>
-      </MagicSplitter.Panel>
-      <MagicSplitter.Panel>
+      </DelightfulSplitter.Panel>
+      <DelightfulSplitter.Panel>
         <div>右下面板</div>
-      </MagicSplitter.Panel>
-    </MagicSplitter>
-  </MagicSplitter.Panel>
-</MagicSplitter>
+      </DelightfulSplitter.Panel>
+    </DelightfulSplitter>
+  </DelightfulSplitter.Panel>
+</DelightfulSplitter>
 ```
 
 ## 特点
@@ -92,4 +92,4 @@ import { MagicSplitter } from '@/components/base/MagicSplitter';
 -   需要实现代码编辑器、文件浏览器等需要灵活调整空间的界面时
 -   需要用户能够自定义各个区域的大小时
 
-MagicSplitter 组件让你的分割面板更加简洁和用户友好，同时保持了 Ant Design Splitter 的所有功能特性。
+DelightfulSplitter 组件让你的分割面板更加简洁和用户友好，同时保持了 Ant Design Splitter 的所有功能特性。

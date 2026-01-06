@@ -7,18 +7,18 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Service;
 
-use App\Domain\Chat\Repository\Persistence\MagicContactIdMappingRepository;
-use App\Domain\Contact\Entity\MagicThirdPlatformIdMappingEntity;
+use App\Domain\Chat\Repository\Persistence\DelightfulContactIdMappingRepository;
+use App\Domain\Contact\Entity\DelightfulThirdPlatformIdMappingEntity;
 use App\Domain\Contact\Entity\ValueObject\PlatformType;
 
-readonly class MagicThirdPlatformDomainService
+readonly class DelightfulThirdPlatformDomainService
 {
-    public function __construct(private MagicContactIdMappingRepository $thirdPlatformRepository)
+    public function __construct(private DelightfulContactIdMappingRepository $thirdPlatformRepository)
     {
     }
 
     /**
-     * @return MagicThirdPlatformIdMappingEntity[]
+     * @return DelightfulThirdPlatformIdMappingEntity[]
      */
     public function getThirdDepartments(
         array $currentDepartmentIds,

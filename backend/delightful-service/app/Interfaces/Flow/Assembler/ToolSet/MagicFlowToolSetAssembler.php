@@ -7,19 +7,19 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\Assembler\ToolSet;
 
-use App\Domain\Flow\Entity\MagicFlowToolSetEntity;
+use App\Domain\Flow\Entity\DelightfulFlowToolSetEntity;
 use App\Infrastructure\Core\ValueObject\Page;
-use App\Interfaces\Flow\DTO\ToolSet\MagicFlowToolSetDTO;
+use App\Interfaces\Flow\DTO\ToolSet\DelightfulFlowToolSetDTO;
 use App\Interfaces\Kernel\Assembler\FileAssembler;
 use App\Interfaces\Kernel\Assembler\OperatorAssembler;
 use App\Interfaces\Kernel\DTO\PageDTO;
 use Delightful\CloudFile\Kernel\Struct\FileLink;
 
-class MagicFlowToolSetAssembler
+class DelightfulFlowToolSetAssembler
 {
-    public static function createDTO(MagicFlowToolSetEntity $magicFlowToolSetEntity, array $icons = [], array $users = []): MagicFlowToolSetDTO
+    public static function createDTO(DelightfulFlowToolSetEntity $magicFlowToolSetEntity, array $icons = [], array $users = []): DelightfulFlowToolSetDTO
     {
-        $DTO = new MagicFlowToolSetDTO();
+        $DTO = new DelightfulFlowToolSetDTO();
         $DTO->setId($magicFlowToolSetEntity->getCode());
         $DTO->setName($magicFlowToolSetEntity->getName());
         $DTO->setDescription($magicFlowToolSetEntity->getDescription());
@@ -36,9 +36,9 @@ class MagicFlowToolSetAssembler
         return $DTO;
     }
 
-    public static function createDO(MagicFlowToolSetDTO $magicFlowToolSetDTO): MagicFlowToolSetEntity
+    public static function createDO(DelightfulFlowToolSetDTO $magicFlowToolSetDTO): DelightfulFlowToolSetEntity
     {
-        $magicFlowToolSetEntity = new MagicFlowToolSetEntity();
+        $magicFlowToolSetEntity = new DelightfulFlowToolSetEntity();
         $magicFlowToolSetEntity->setCode((string) $magicFlowToolSetDTO->getId());
         $magicFlowToolSetEntity->setName($magicFlowToolSetDTO->getName());
         $magicFlowToolSetEntity->setDescription($magicFlowToolSetDTO->getDescription());
@@ -52,7 +52,7 @@ class MagicFlowToolSetAssembler
      */
     public static function createPageListDTO(int $total, array $list, Page $page, array $users = [], array $icons = []): PageDTO
     {
-        $list = array_map(fn (MagicFlowToolSetEntity $magicFlowToolSetEntity) => self::createDTO($magicFlowToolSetEntity, $icons, $users), $list);
+        $list = array_map(fn (DelightfulFlowToolSetEntity $magicFlowToolSetEntity) => self::createDTO($magicFlowToolSetEntity, $icons, $users), $list);
         return new PageDTO($page->getPage(), $total, $list);
     }
 }

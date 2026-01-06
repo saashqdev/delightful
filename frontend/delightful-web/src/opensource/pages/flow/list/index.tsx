@@ -1,4 +1,4 @@
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { Avatar, Flex, Input, List, Select } from "antd"
 import { useEffect, useMemo, useState } from "react"
 import { Flow, FlowRouteType, VectorKnowledge } from "@/types/flow"
@@ -7,9 +7,9 @@ import { useNavigate } from "@/opensource/hooks/useNavigate"
 import FlowEmptyImage from "@/assets/logos/empty-flow.png"
 import ToolsEmptyImage from "@/assets/logos/empty-tools.svg"
 import { IconSearch } from "@tabler/icons-react"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import InfiniteScroll from "react-infinite-scroll-component"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { useTranslation } from "react-i18next"
 import { resolveToString } from "@dtyq/es6-template-strings"
 import AddOrUpdateFlow from "./components/AddOrUpdateFlow"
@@ -128,16 +128,16 @@ function FlowListPage() {
 							onChange={(e) => setKeyword(e.target.value)}
 							placeholder={globalT("common.search", { ns: "flow" })}
 						/>
-						<MagicButton
+						<DelightfulButton
 							style={{ borderRadius: 8 }}
 							type="primary"
 							onClick={createHandler}
 						>
 							{t("common.createSomething", { ns: "flow", name: title })}
-						</MagicButton>
+						</DelightfulButton>
 					</Flex>
 				</Flex>
-				<MagicSpin section spinning={loading}>
+				<DelightfulSpin section spinning={loading}>
 					<div
 						id="scrollableDiv"
 						ref={scrollRef}
@@ -172,9 +172,9 @@ function FlowListPage() {
 								</div>
 
 								{flowList.length === 0 && (
-									<MagicButton type="primary" onClick={createHandler}>
+									<DelightfulButton type="primary" onClick={createHandler}>
 										{t("common.createSomething", { ns: "flow", name: title })}
-									</MagicButton>
+									</DelightfulButton>
 								)}
 							</Flex>
 						)}
@@ -210,7 +210,7 @@ function FlowListPage() {
 									loading={loading}
 									renderItem={(
 										item:
-											| MagicFlow.Flow
+											| DelightfulFlow.Flow
 											| Knowledge.KnowledgeItem
 											| Flow.Mcp.Detail,
 									) => {
@@ -233,7 +233,7 @@ function FlowListPage() {
 							</InfiniteScroll>
 						)}
 					</div>
-				</MagicSpin>
+				</DelightfulSpin>
 			</Flex>
 			{flowType !== FlowRouteType.VectorKnowledge && (
 				<RightDrawer

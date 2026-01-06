@@ -203,7 +203,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
      * 根据组织和服务商类型获取服务商配置列表.
      * 新逻辑：以数据库中的实际配置为准，对于数据库中没有的服务商类型，使用模板补充
      * 支持多个相同 provider_code 的配置（组织管理员手动添加的）
-     * 最终结果处理时，官方组织会过滤掉Magic服务商，普通组织会将Magic服务商置顶.
+     * 最终结果处理时，官方组织会过滤掉Delightful服务商，普通组织会将Delightful服务商置顶.
      * @param string $organizationCode 组织编码
      * @param Category $category 服务商类型
      * @return ProviderConfigDTO[]
@@ -243,7 +243,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
                 continue;
             }
 
-            // 如果是官方组织，过滤掉 Magic 服务商（Official），因为 magic 服务商就是官方组织配置的模型总和
+            // 如果是官方组织，过滤掉 Delightful 服务商（Official），因为 magic 服务商就是官方组织配置的模型总和
             /*if ($isOfficialOrganization && $provider->getProviderCode() === ProviderCode::Official) {
                 continue;
             }*/
@@ -263,7 +263,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             return $b->getSort() <=> $a->getSort(); // 降序排列，数字大的在前
         });
 
-        // 如果找到 Magic 服务商，将其放在第一位（非官方组织才会有 Magic 服务商）
+        // 如果找到 Delightful 服务商，将其放在第一位（非官方组织才会有 Delightful 服务商）
         if ($magicProvider !== null) {
             $result = array_merge([$magicProvider], $otherProviders);
         } else {

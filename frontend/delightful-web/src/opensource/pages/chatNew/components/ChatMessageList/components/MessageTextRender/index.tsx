@@ -3,8 +3,8 @@ import type { ConversationMessage } from "@/types/chat/conversation_message"
 import { ConversationMessageType } from "@/types/chat/conversation_message"
 import { useTranslation } from "react-i18next"
 import { isConversationMessage } from "@/utils/chat/message"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
-import MagicMarkdown from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
+import DelightfulMarkdown from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown"
 import { Flex } from "antd"
 import useChatFileUrls from "@/opensource/hooks/chat/useChatFileUrls"
 import { ControlEventMessageType } from "@/types/chat/control_message"
@@ -87,7 +87,7 @@ const MessageTextRender = observer(
 		switch (message.type) {
 			case ConversationMessageType.Text:
 				return (
-					<MagicMarkdown
+					<DelightfulMarkdown
 						className={cx(styles.content, className)}
 						content={sliceMessageText(message.text?.content ?? "")}
 						hiddenDetail
@@ -105,7 +105,7 @@ const MessageTextRender = observer(
 				)
 			case ConversationMessageType.Markdown:
 				return (
-					<MagicMarkdown
+					<DelightfulMarkdown
 						className={cx(styles.content, className)}
 						content={sliceMessageText(message.markdown?.content ?? "")}
 						hiddenDetail
@@ -122,7 +122,7 @@ const MessageTextRender = observer(
 					)
 				}
 				return (
-					<MagicMarkdown
+					<DelightfulMarkdown
 						className={cx(styles.content, className)}
 						content={sliceMessageText(
 							message.aggregate_ai_search_card?.llm_response ?? "",
@@ -130,7 +130,7 @@ const MessageTextRender = observer(
 						hiddenDetail
 					/>
 				)
-			case ConversationMessageType.MagicSearchCard:
+			case ConversationMessageType.DelightfulSearchCard:
 				return t("chat.messageTextRender.magic_search_card")
 			case ConversationMessageType.Files:
 				return t("chat.messageTextRender.files")
@@ -139,7 +139,7 @@ const MessageTextRender = observer(
 			case ConversationMessageType.HDImage:
 				return referImgUrl ? (
 					<Flex gap={4} align="center">
-						<MagicAvatar src={referImgUrl} size={30} shape="square" />
+						<DelightfulAvatar src={referImgUrl} size={30} shape="square" />
 						<span className={styles.aiImageText}>{referImgText}</span>
 					</Flex>
 				) : (

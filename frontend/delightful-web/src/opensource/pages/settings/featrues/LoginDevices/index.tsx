@@ -1,5 +1,5 @@
 import { useUserDevices } from "@/opensource/models/user/hooks"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import LoginDevicesTip from "../../components/LoginDevicesTip"
 import DeviceItem from "../DeviceItem"
 
@@ -9,7 +9,7 @@ function LoginDevices() {
 	return (
 		<>
 			<LoginDevicesTip />
-			<MagicSpin spinning={isLoading}>
+			<DelightfulSpin spinning={isLoading}>
 				{devices?.map((item) => {
 					return (
 						<DeviceItem
@@ -21,7 +21,7 @@ function LoginDevices() {
 						/>
 					)
 				})}
-			</MagicSpin>
+			</DelightfulSpin>
 		</>
 	)
 }

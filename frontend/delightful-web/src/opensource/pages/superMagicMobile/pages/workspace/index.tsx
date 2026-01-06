@@ -7,15 +7,15 @@ import type {
 	FileItem,
 	Thread,
 	Workspace,
-} from "@/opensource/pages/superMagic/pages/Workspace/types"
+} from "@/opensource/pages/superDelightful/pages/Workspace/types"
 import {
 	editThread,
 	editWorkspace,
 	getTopicsByWorkspaceId,
 	getWorkspaces,
-} from "@/opensource/pages/superMagic/utils/api"
-import AccountActions from "@/opensource/pages/superMagicMobile/components/AccountActions"
-import PreviewDetailPopup from "@/opensource/pages/superMagicMobile/components/PreviewDetailPopup/index"
+} from "@/opensource/pages/superDelightful/utils/api"
+import AccountActions from "@/opensource/pages/superDelightfulMobile/components/AccountActions"
+import PreviewDetailPopup from "@/opensource/pages/superDelightfulMobile/components/PreviewDetailPopup/index"
 import { EventType } from "@/types/chat"
 import type { ConversationMessageSend } from "@/types/chat/conversation_message"
 import { ConversationMessageType } from "@/types/chat/conversation_message"
@@ -23,8 +23,8 @@ import { Popup, SafeArea } from "antd-mobile"
 import { message } from "antd"
 import { cx } from "antd-style"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import type { SuperMagicMobileLayoutRef } from "../../components/Layout"
-import SuperMagicMobileLayout from "../../components/Layout"
+import type { SuperDelightfulMobileLayoutRef } from "../../components/Layout"
+import SuperDelightfulMobileLayout from "../../components/Layout"
 import type { MessagePanelProps } from "../../components/MessagePanel"
 import type { PreviewDetailPopupRef } from "../../components/PreviewDetailPopup"
 import SwitchRoute from "../../components/SwitchRoute"
@@ -33,14 +33,14 @@ import WorkspaceChat from "../../components/WorkspaceChat"
 import type { WorkspaceSelectRef } from "../../components/WorkspaceSelect"
 import WorkspaceSelect from "../../components/WorkspaceSelect"
 import WorkspaceWelcome from "../../components/WorkspaceWelcome"
-import { isInApp } from "@/opensource/pages/superMagicMobile/utils/mobile"
+import { isInApp } from "@/opensource/pages/superDelightfulMobile/utils/mobile"
 import AppMenu from "../../components/AppMenu"
 import { useStyles } from "./styles"
 import { isEmpty } from "lodash-es"
 import { FileData } from "@/opensource/pages/chatNew/components/MessageEditor/components/InputFiles/types"
 import { genFileData } from "@/opensource/pages/chatNew/components/MessageEditor/components/InputFiles/utils"
 
-export default observer(function SuperMagicMobileWorkspace({
+export default observer(function SuperDelightfulMobileWorkspace({
 	workspaces,
 	selectedWorkspace,
 	setWorkspaces,
@@ -61,7 +61,7 @@ export default observer(function SuperMagicMobileWorkspace({
 }: any) {
 	const { styles } = useStyles()
 	const { userInfo } = userStore.user
-	const layoutRef = useRef<SuperMagicMobileLayoutRef>(null)
+	const layoutRef = useRef<SuperDelightfulMobileLayoutRef>(null)
 	const workspaceSelectRef = useRef<WorkspaceSelectRef>(null)
 	const previewDetailPopupRef = useRef<PreviewDetailPopupRef>(null)
 	const [popupVisible, setPopupVisible] = useState(false)
@@ -249,7 +249,7 @@ export default observer(function SuperMagicMobileWorkspace({
 	return (
 		<>
 			<SafeArea position="top" />
-			<SuperMagicMobileLayout
+			<SuperDelightfulMobileLayout
 				ref={layoutRef}
 				// navigateItems={navigateItems}
 				headerCenter={
@@ -283,7 +283,7 @@ export default observer(function SuperMagicMobileWorkspace({
 						<WorkspaceWelcome {...messagePanelProps} setFileList={setFileList} />
 					)}
 				</div>
-			</SuperMagicMobileLayout>
+			</SuperDelightfulMobileLayout>
 			<PreviewDetailPopup
 				ref={previewDetailPopupRef}
 				setUserSelectDetail={(detail: any) => {

@@ -7,21 +7,21 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Facade;
 
-use App\Application\Agent\Service\MagicAgentAppService;
-use App\Application\Chat\Service\MagicChatGroupAppService;
-use App\Application\Chat\Service\MagicChatMessageAppService;
-use App\Application\Chat\Service\MagicControlMessageAppService;
-use App\Application\Chat\Service\MagicConversationAppService;
+use App\Application\Agent\Service\DelightfulAgentAppService;
+use App\Application\Chat\Service\DelightfulChatGroupAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
+use App\Application\Chat\Service\DelightfulControlMessageAppService;
+use App\Application\Chat\Service\DelightfulConversationAppService;
 use App\Domain\Chat\DTO\ChatCompletionsDTO;
 use App\Domain\Chat\DTO\ConversationListQueryDTO;
 use App\Domain\Chat\DTO\Message\ControlMessage\InstructMessage;
 use App\Domain\Chat\DTO\MessagesQueryDTO;
-use App\Domain\Chat\Entity\MagicChatFileEntity;
-use App\Domain\Chat\Entity\MagicMessageEntity;
+use App\Domain\Chat\Entity\DelightfulChatFileEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\FileType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
-use App\Domain\Group\Entity\MagicGroupEntity;
+use App\Domain\Group\Entity\DelightfulGroupEntity;
 use App\Domain\Group\Entity\ValueObject\GroupStatusEnum;
 use App\Domain\Group\Entity\ValueObject\GroupTypeEnum;
 use App\ErrorCode\AgentErrorCode;
@@ -43,16 +43,16 @@ use Hyperf\Validation\Rule;
 use Throwable;
 
 #[ApiResponse('low_code')]
-class MagicChatHttpApi extends AbstractApi
+class DelightfulChatHttpApi extends AbstractApi
 {
     public function __construct(
         private readonly ValidatorFactoryInterface $validatorFactory,
         private readonly StdoutLoggerInterface $logger,
-        private readonly MagicChatMessageAppService $magicChatMessageAppService,
-        private readonly MagicConversationAppService $magicConversationAppService,
-        private readonly MagicChatGroupAppService $chatGroupAppService,
-        protected readonly MagicAgentAppService $magicAgentAppService,
-        protected readonly MagicControlMessageAppService $magicControlMessageAppService,
+        private readonly DelightfulChatMessageAppService $magicChatMessageAppService,
+        private readonly DelightfulConversationAppService $magicConversationAppService,
+        private readonly DelightfulChatGroupAppService $chatGroupAppService,
+        protected readonly DelightfulAgentAppService $magicAgentAppService,
+        protected readonly DelightfulControlMessageAppService $magicControlMessageAppService,
         private readonly Redis $redis,
     ) {
     }
@@ -232,7 +232,7 @@ class MagicChatHttpApi extends AbstractApi
         ];
         $params = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
-        $magicGroupDTO = new MagicGroupEntity();
+        $magicGroupDTO = new DelightfulGroupEntity();
         $magicGroupDTO->setGroupAvatar($params['group_avatar']);
         $magicGroupDTO->setGroupName($params['group_name']);
         $magicGroupDTO->setGroupType(GroupTypeEnum::from($params['group_type']));
@@ -256,7 +256,7 @@ class MagicChatHttpApi extends AbstractApi
         ];
         $params = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
-        $magicGroupDTO = new MagicGroupEntity();
+        $magicGroupDTO = new DelightfulGroupEntity();
         $magicGroupDTO->setId($id);
         // 人员和部门不能同时为空
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
@@ -268,7 +268,7 @@ class MagicChatHttpApi extends AbstractApi
     public function leaveGroupConversation(string $id): array
     {
         $authorization = $this->getAuthorization();
-        $magicGroupDTO = new MagicGroupEntity();
+        $magicGroupDTO = new DelightfulGroupEntity();
         $magicGroupDTO->setId($id);
         return $this->chatGroupAppService->leaveGroupConversation(
             $authorization,
@@ -286,7 +286,7 @@ class MagicChatHttpApi extends AbstractApi
         ];
         $params = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
-        $magicGroupDTO = new MagicGroupEntity();
+        $magicGroupDTO = new DelightfulGroupEntity();
         $magicGroupDTO->setId($id);
         return $this->chatGroupAppService->groupKickUsers(
             $authorization,
@@ -302,7 +302,7 @@ class MagicChatHttpApi extends AbstractApi
     public function groupDelete(string $id): array
     {
         $authorization = $this->getAuthorization();
-        $magicGroupDTO = new MagicGroupEntity();
+        $magicGroupDTO = new DelightfulGroupEntity();
         $magicGroupDTO->setId($id);
         return $this->chatGroupAppService->deleteGroup($authorization, $magicGroupDTO);
     }
@@ -310,7 +310,7 @@ class MagicChatHttpApi extends AbstractApi
     /**
      * 批量获取群信息（名称、公告等）.
      */
-    public function getMagicGroupList(RequestInterface $request): array
+    public function getDelightfulGroupList(RequestInterface $request): array
     {
         $groupIds = (array) $request->input('group_ids', '');
         $pageToken = (string) $request->input('page_token', '');
@@ -332,7 +332,7 @@ class MagicChatHttpApi extends AbstractApi
         ];
         $params = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
-        $magicGroupDTO = new MagicGroupEntity();
+        $magicGroupDTO = new DelightfulGroupEntity();
         $magicGroupDTO->setId($id);
         $magicGroupDTO->setGroupName($params['group_name'] ?? null);
         $magicGroupDTO->setGroupAvatar($params['group_avatar'] ?? null);
@@ -379,7 +379,7 @@ class MagicChatHttpApi extends AbstractApi
         ];
         $params = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
-        $groupDTO = new MagicGroupEntity();
+        $groupDTO = new DelightfulGroupEntity();
         $groupDTO->setId($id);
         $groupDTO->setGroupOwner($params['owner_user_id']);
         return $this->chatGroupAppService->groupTransferOwner($groupDTO, $authorization);
@@ -399,7 +399,7 @@ class MagicChatHttpApi extends AbstractApi
         $fileUploadDTOs = [];
         foreach ($params as $file) {
             $fileType = FileType::getTypeFromFileExtension($file['file_extension']);
-            $fileUploadDTO = new MagicChatFileEntity();
+            $fileUploadDTO = new DelightfulChatFileEntity();
             $fileUploadDTO->setFileKey($file['file_key']);
             $fileUploadDTO->setFileSize($file['file_size']);
             $fileUploadDTO->setFileExtension($file['file_extension']);
@@ -423,7 +423,7 @@ class MagicChatHttpApi extends AbstractApi
         foreach ($params as $param) {
             $fileId = $param['file_id'];
             $messageId = $param['message_id'];
-            $fileQueryDTO = new MagicChatFileEntity();
+            $fileQueryDTO = new DelightfulChatFileEntity();
             $fileQueryDTO->setFileId($fileId);
             $fileQueryDTO->setMessageId($messageId);
             $fileDTOs[] = $fileQueryDTO;
@@ -480,7 +480,7 @@ class MagicChatHttpApi extends AbstractApi
         $agentInstruct = $magicAgentVersionEntity->getInstructs();
         $instructResult = $this->magicConversationAppService->saveInstruct($authenticatable, $instructs, $conversationId, $agentInstruct);
 
-        $magicMessageEntity = new MagicMessageEntity();
+        $magicMessageEntity = new DelightfulMessageEntity();
         $magicMessageEntity->setSenderOrganizationCode($authenticatable->getOrganizationCode());
         $magicMessageEntity->setSenderType(ConversationType::Ai);
         $magicMessageEntity->setMessageType(ControlMessageType::AgentInstruct);

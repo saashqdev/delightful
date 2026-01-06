@@ -85,7 +85,7 @@ class Definitions
                 case KeywordConstants::CONSTANTS:
                     return $this->defineConst($name, $value);
                 case KeywordConstants::Delightful_CONSTANTS:
-                    return $this->defineMagicConst($name, $value);
+                    return $this->defineDelightfulConst($name, $value);
                 case KeywordConstants::NAMESPACES:
                     return $this->defineNamespace($name);
                 case KeywordConstants::ALIASES:
@@ -140,7 +140,7 @@ class Definitions
                 case KeywordConstants::CONSTANTS:
                     return $this->undefineConst($name);
                 case KeywordConstants::Delightful_CONSTANTS:
-                    return $this->undefineMagicConst($name);
+                    return $this->undefineDelightfulConst($name);
                 case KeywordConstants::NAMESPACES:
                     return $this->undefineNamespace($name);
                 case KeywordConstants::ALIASES:
@@ -658,15 +658,15 @@ class Definitions
      * @return Definitions Returns the PHPSandbox instance for fluent querying
      * @throws Throwable Throws exception if unnamed magic constant is defined
      */
-    public function defineMagicConst($name, $value): self
+    public function defineDelightfulConst($name, $value): self
     {
         if (is_array($name)) {
-            return $this->defineMagicConsts($name);
+            return $this->defineDelightfulConsts($name);
         }
         if (! $name) {
             $this->error->validationError('Cannot define unnamed magic constant!', Error::DEFINE_DELIGHTFUL_CONST_ERROR, null, '');
         }
-        $name = $this->normalizeMagicConst($name);
+        $name = $this->normalizeDelightfulConst($name);
         $this->definitions[KeywordConstants::Delightful_CONSTANTS][$name] = $value;
         return $this;
     }
@@ -679,10 +679,10 @@ class Definitions
      *
      * @return Definitions Returns the PHPSandbox instance for fluent querying
      */
-    public function defineMagicConsts(array $magic_constants = []): self
+    public function defineDelightfulConsts(array $magic_constants = []): self
     {
         foreach ($magic_constants as $name => $value) {
-            $this->defineMagicConst($name, $value);
+            $this->defineDelightfulConst($name, $value);
         }
         return $this;
     }
@@ -691,7 +691,7 @@ class Definitions
      *
      * @return int Returns the number of magic constants this instance has defined
      */
-    public function hasDefinedMagicConsts(): int
+    public function hasDefinedDelightfulConsts(): int
     {
         return count($this->definitions[KeywordConstants::Delightful_CONSTANTS]);
     }
@@ -702,9 +702,9 @@ class Definitions
      *
      * @return bool Returns true if PHPSandbox instance has defined magic constant, false otherwise
      */
-    public function isDefinedMagicConst($name): bool
+    public function isDefinedDelightfulConst($name): bool
     {
-        $name = $this->normalizeMagicConst($name);
+        $name = $this->normalizeDelightfulConst($name);
         return isset($this->definitions[KeywordConstants::Delightful_CONSTANTS][$name]);
     }
 
@@ -716,12 +716,12 @@ class Definitions
      *
      * @return Definitions Returns the PHPSandbox instance for fluent querying
      */
-    public function undefineMagicConst($name): self
+    public function undefineDelightfulConst($name): self
     {
         if (is_array($name)) {
-            return $this->undefineMagicConsts($name);
+            return $this->undefineDelightfulConsts($name);
         }
-        $name = $this->normalizeMagicConst($name);
+        $name = $this->normalizeDelightfulConst($name);
         if (isset($this->definitions[KeywordConstants::Delightful_CONSTANTS][$name])) {
             unset($this->definitions[KeywordConstants::Delightful_CONSTANTS][$name]);
         }
@@ -736,11 +736,11 @@ class Definitions
      *
      * @return Definitions Returns the PHPSandbox instance for fluent querying
      */
-    public function undefineMagicConsts(array $magic_constants = []): self
+    public function undefineDelightfulConsts(array $magic_constants = []): self
     {
         if (count($magic_constants)) {
             foreach ($magic_constants as $magic_constant) {
-                $this->undefineMagicConst($magic_constant);
+                $this->undefineDelightfulConst($magic_constant);
             }
         } else {
             $this->definitions[KeywordConstants::Delightful_CONSTANTS] = [];
@@ -748,9 +748,9 @@ class Definitions
         return $this;
     }
 
-    public function getDefinedMagicConst(string $name): mixed
+    public function getDefinedDelightfulConst(string $name): mixed
     {
-        $name = $this->normalizeMagicConst($name);
+        $name = $this->normalizeDelightfulConst($name);
         return $this->definitions[KeywordConstants::Delightful_CONSTANTS][$name];
     }
 

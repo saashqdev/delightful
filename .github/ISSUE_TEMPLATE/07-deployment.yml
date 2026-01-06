@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for reporting a deployment or installation issue! This helps us improve the Magic setup experience.
+        Thanks for reporting a deployment or installation issue! This helps us improve the Delightful setup experience.
         
         **Before submitting a deployment issue:**
         - Check the [installation documentation](https://docs.bedelightful.ai/en)
@@ -69,7 +69,7 @@ body:
       label: Steps to Reproduce
       description: Detailed steps you followed that led to the issue
       placeholder: |
-        1. Download Magic from [source]
+        1. Download Delightful from [source]
         2. Run command: [command]
         3. Configure [component]
         4. Observe error: [error]
@@ -89,7 +89,7 @@ body:
         - Available RAM: [e.g. 16GB]
         - Available Disk Space: [e.g. 100GB]
         - Network Configuration: [e.g. Corporate firewall, proxy]
-        - Magic Version: [e.g. v1.0.0, latest, commit hash]
+        - Delightful Version: [e.g. v1.0.0, latest, commit hash]
     validations:
       required: true
 
@@ -154,7 +154,7 @@ body:
     id: first-time
     attributes:
       label: Installation Type
-      description: Is this your first time installing Magic?
+      description: Is this your first time installing Delightful?
       options:
         - First-time installation
         - Reinstallation after previous success
@@ -171,7 +171,7 @@ body:
       description: Have you tried any troubleshooting steps or alternative approaches?
       placeholder: |
         - Cleared Docker volumes and restarted
-        - Tried different Magic version
+        - Tried different Delightful version
         - Changed environment variables
         - Checked firewall settings
         - [other troubleshooting steps]
@@ -184,7 +184,7 @@ body:
       label: Severity
       description: How much is this blocking you?
       options:
-        - Critical - Cannot proceed with Magic at all
+        - Critical - Cannot proceed with Delightful at all
         - High - Major functionality not working
         - Medium - Some features not working
         - Low - Minor inconvenience

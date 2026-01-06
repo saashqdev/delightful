@@ -5,15 +5,15 @@ import { useForm } from "antd/es/form/Form"
 import type { MutableRefObject } from "react"
 import { useEffect, useMemo } from "react"
 import type { TriggerConfig } from "@/types/flow"
-import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
 import dayjs from "dayjs"
 import { nanoid } from "nanoid"
-import MagicInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
-import type { FormItemType } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
-import type { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
+import DelightfulInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { FormItemType } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
 import antdStyles from "@/opensource/pages/flow/index.module.less"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { useUserInfo } from "@/opensource/models/user/hooks"
 import styles from "./index.module.less"
 import { TriggerType, TriggerTypeOptions } from "../../nodes/Start/v0/constants"
@@ -28,8 +28,8 @@ type TestFlowForm = TriggerConfig
 type TestFlowProps = {
 	onFinished: (triggerConfig: TriggerConfig, closeModal: () => void) => void
 	loading: boolean
-	flow?: MagicFlow.Flow
-	flowInstance: MutableRefObject<MagicFlowInstance | null>
+	flow?: DelightfulFlow.Flow
+	flowInstance: MutableRefObject<DelightfulFlowInstance | null>
 }
 
 function TestFlowButton({ onFinished, loading, flow, flowInstance }: TestFlowProps) {
@@ -155,7 +155,7 @@ function TestFlowButton({ onFinished, loading, flow, flowInstance }: TestFlowPro
 			>
 				{t("common.testFlow", { ns: "flow" })}
 			</Button>
-			<MagicModal
+			<DelightfulModal
 				title={t("common.fillContent", { ns: "flow" })}
 				open={open}
 				onOk={handleOk}
@@ -182,7 +182,7 @@ function TestFlowButton({ onFinished, loading, flow, flowInstance }: TestFlowPro
 						style={{ display: isArgumentsFlow ? "none" : "block" }}
 						className="form-item"
 					>
-						<MagicSelect
+						<DelightfulSelect
 							options={TriggerTypeOptions}
 							className={styles.triggerTypeSelect}
 							placeholder={t("common.pleaseSelect", { ns: "flow" })}
@@ -196,7 +196,7 @@ function TestFlowButton({ onFinished, loading, flow, flowInstance }: TestFlowPro
 							required
 							className="form-item"
 						>
-							<MagicInput placeholder={t("common.pleaseInput", { ns: "flow" })} />
+							<DelightfulInput placeholder={t("common.pleaseInput", { ns: "flow" })} />
 						</Form.Item>
 					)}
 					{!isArgumentsFlow && (
@@ -208,7 +208,7 @@ function TestFlowButton({ onFinished, loading, flow, flowInstance }: TestFlowPro
 									required
 									className="form-item"
 								>
-									<MagicInput
+									<DelightfulInput
 										placeholder={t("common.usernamePlaceholder", {
 											ns: "flow",
 										})}
@@ -237,7 +237,7 @@ function TestFlowButton({ onFinished, loading, flow, flowInstance }: TestFlowPro
 										required
 										className="form-item"
 									>
-										<MagicSelect
+										<DelightfulSelect
 											options={messageTypeOptions}
 											placeholder={t("common.messageTypePlaceholder", {
 												ns: "flow",
@@ -300,7 +300,7 @@ function TestFlowButton({ onFinished, loading, flow, flowInstance }: TestFlowPro
 						<Switch />
 					</Form.Item>
 				</Form>
-			</MagicModal>
+			</DelightfulModal>
 		</>
 	)
 }

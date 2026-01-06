@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\ExecuteManager\NodeRunner\Sub;
 
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
-use App\Application\Flow\ExecuteManager\MagicFlowExecutor;
+use App\Application\Flow\ExecuteManager\DelightfulFlowExecutor;
 use App\Domain\Flow\Entity\ValueObject\Node;
 use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Domain\Flow\Entity\ValueObject\NodeOutput;
@@ -115,7 +115,7 @@ JSON,
 
         $node->setCallback(function (VertexResult $vertexResult, ExecutionData $executionData, array $fontResults) {});
 
-        $runner = MagicFlowExecutor::getNodeRunner($node);
+        $runner = DelightfulFlowExecutor::getNodeRunner($node);
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('DELIGHTFUL-FLOW-NODE-662617c1a07615-9318288811', [

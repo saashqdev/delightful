@@ -1,5 +1,5 @@
-import MagicDropdown from "@/opensource/components/base/MagicDropdown"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulDropdown from "@/opensource/components/base/DelightfulDropdown"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import type { ConversationTopic } from "@/types/chat/topic"
 import { useBoolean, useMemoizedFn, useUpdateEffect } from "ahooks"
 import { App, Form, Input, MenuProps, type DropdownProps } from "antd"
@@ -79,7 +79,7 @@ const TopicMenu = memo(function TopicMenu({ children, topic, ...props }: TopicMe
 		switch (e.key) {
 			case TopicMenuKey.AI_RENAME:
 				setLoadingTrue()
-				chatTopicService.getAndSetMagicTopicName?.(topic.id, true).finally(() => {
+				chatTopicService.getAndSetDelightfulTopicName?.(topic.id, true).finally(() => {
 					setLoadingFalse()
 				})
 				break
@@ -103,7 +103,7 @@ const TopicMenu = memo(function TopicMenu({ children, topic, ...props }: TopicMe
 
 	return (
 		<>
-			<MagicDropdown
+			<DelightfulDropdown
 				trigger={["click"]}
 				menu={{
 					items: menuItems,
@@ -115,8 +115,8 @@ const TopicMenu = memo(function TopicMenu({ children, topic, ...props }: TopicMe
 				{...props}
 			>
 				{Children}
-			</MagicDropdown>
-			<MagicModal
+			</DelightfulDropdown>
+			<DelightfulModal
 				width={400}
 				title={t("chat.topic.menu.rename_topic")}
 				open={renameModalOpen}
@@ -134,7 +134,7 @@ const TopicMenu = memo(function TopicMenu({ children, topic, ...props }: TopicMe
 						showCount
 					/>
 				</Form.Item>
-			</MagicModal>
+			</DelightfulModal>
 		</>
 	)
 })

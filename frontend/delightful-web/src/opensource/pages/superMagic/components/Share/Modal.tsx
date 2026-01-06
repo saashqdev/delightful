@@ -1,5 +1,5 @@
-import MagicModal from "@/opensource/components/base/MagicModal"
-import { getShareInfoByCode } from "@/opensource/pages/superMagic/utils/api"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
+import { getShareInfoByCode } from "@/opensource/pages/superDelightful/utils/api"
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import Share from "."
 import { isEmpty } from "lodash-es"
@@ -72,7 +72,7 @@ export default memo(function ShareModel(props: ShareModalProps) {
 		if (newType === type) return
 
 		if (newType === ShareType.OnlySelf) {
-			MagicModal.confirm({
+			DelightfulModal.confirm({
 				title: "提示",
 				content: "关闭当前话题分享后，已分享的回放链接将即时失效",
 				onOk: (e) => {
@@ -85,7 +85,7 @@ export default memo(function ShareModel(props: ShareModalProps) {
 				cancelText: "取消",
 			})
 		} else if (newType === ShareType.Internet) {
-			MagicModal.confirm({
+			DelightfulModal.confirm({
 				title: "提示",
 				content:
 					"当前话题回放即将开启互联网分享，开启后，任何人均可通过链接或链接及密码访问话题回放",
@@ -102,7 +102,7 @@ export default memo(function ShareModel(props: ShareModalProps) {
 	}
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			title="分享"
 			{...modalProps}
 			//@ts-ignore 这里需要兼容下ts类型
@@ -123,6 +123,6 @@ export default memo(function ShareModel(props: ShareModalProps) {
 				shareUrl={shareUrl}
 				handleCopyLink={handleCopyLink}
 			/>
-		</MagicModal>
+		</DelightfulModal>
 	)
 })

@@ -2,7 +2,7 @@ import { type PropsWithChildren } from "react"
 import { useLocation, useSearchParams } from "react-router-dom"
 import { useNavigate } from "@/opensource/hooks/useNavigate"
 import { useTranslation } from "react-i18next"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { RoutePath } from "@/const/routes"
 import { useBotStore } from "@/opensource/stores/bot"
 import { withThirdPartyAuth } from "@/opensource/layouts/middlewares/withThirdPartyAuth"
@@ -130,9 +130,9 @@ function AuthenticationProvider({ children }: PropsWithChildren) {
 
 	if (!success) {
 		return (
-			<MagicSpin spinning tip={t("spin.loadingAuth")} wrapperClassName={styles.spin}>
+			<DelightfulSpin spinning tip={t("spin.loadingAuth")} wrapperClassName={styles.spin}>
 				<div style={{ height: "100vh" }} />
-			</MagicSpin>
+			</DelightfulSpin>
 		)
 	}
 

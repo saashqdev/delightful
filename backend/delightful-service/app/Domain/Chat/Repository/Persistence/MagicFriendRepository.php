@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Repository\Persistence;
 
-use App\Domain\Chat\Entity\MagicFriendEntity;
-use App\Domain\Chat\Repository\Facade\MagicFriendRepositoryInterface;
-use App\Domain\Chat\Repository\Persistence\Model\MagicFriendModel;
+use App\Domain\Chat\Entity\DelightfulFriendEntity;
+use App\Domain\Chat\Repository\Facade\DelightfulFriendRepositoryInterface;
+use App\Domain\Chat\Repository\Persistence\Model\DelightfulFriendModel;
 use App\Domain\Contact\DTO\FriendQueryDTO;
 
-class MagicFriendRepository implements MagicFriendRepositoryInterface
+class DelightfulFriendRepository implements DelightfulFriendRepositoryInterface
 {
     public function __construct(
-        protected MagicFriendModel $friend
+        protected DelightfulFriendModel $friend
     ) {
     }
 
@@ -31,7 +31,7 @@ class MagicFriendRepository implements MagicFriendRepositoryInterface
     }
 
     /**
-     * @return MagicFriendEntity[]
+     * @return DelightfulFriendEntity[]
      */
     public function getFriendList(FriendQueryDTO $friendQueryDTO, string $userId): array
     {
@@ -45,7 +45,7 @@ class MagicFriendRepository implements MagicFriendRepositoryInterface
         }
         $friends = $query->get()->toArray();
         return array_map(function ($friend) {
-            return new MagicFriendEntity($friend);
+            return new DelightfulFriendEntity($friend);
         }, $friends);
     }
 }

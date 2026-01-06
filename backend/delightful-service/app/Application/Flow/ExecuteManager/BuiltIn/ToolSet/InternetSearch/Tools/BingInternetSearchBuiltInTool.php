@@ -11,7 +11,7 @@ use App\Application\Flow\ExecuteManager\BuiltIn\BuiltInToolSet;
 use App\Application\Flow\ExecuteManager\BuiltIn\ToolSet\AbstractBuiltInTool;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
 use App\Domain\Chat\Entity\ValueObject\SearchEngineType;
-use App\Domain\Chat\Service\MagicLLMDomainService;
+use App\Domain\Chat\Service\DelightfulLLMDomainService;
 use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Domain\Flow\Entity\ValueObject\NodeOutput;
 use App\Infrastructure\Core\Collector\BuiltInToolSet\Annotation\BuiltInToolDefine;
@@ -45,7 +45,7 @@ class BingInternetSearchBuiltInTool extends AbstractBuiltInTool
             $args = $executionData->getTriggerData()->getParams();
             $searchKeyword = $args['search_keyword'] ?? '';
             $count = (int) ($args['result_count'] ?? 10);
-            $clearSearch = di(MagicLLMDomainService::class)->search($searchKeyword, SearchEngineType::Bing)['clear_search'];
+            $clearSearch = di(DelightfulLLMDomainService::class)->search($searchKeyword, SearchEngineType::Bing)['clear_search'];
             $clearSearch = array_slice($clearSearch, 0, $count);
             $clearSearch = array_map(function ($item) {
                 return [

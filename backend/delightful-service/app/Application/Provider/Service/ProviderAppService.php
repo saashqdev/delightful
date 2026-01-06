@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace app\Application\Provider\Service;
 
-use App\Application\Provider\DTO\SuperMagicModelDTO;
-use App\Application\Provider\DTO\SuperMagicProviderDTO;
+use App\Application\Provider\DTO\SuperDelightfulModelDTO;
+use App\Application\Provider\DTO\SuperDelightfulProviderDTO;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\Provider\Entity\ProviderConfigEntity;
 use App\Domain\Provider\Entity\ProviderEntity;
@@ -29,13 +29,13 @@ class ProviderAppService
     }
 
     /**
-     * Get super magic display models and Magic provider models visible to current organization.
+     * Get super magic display models and Delightful provider models visible to current organization.
      * @param string $organizationCode Organization code
-     * @return SuperMagicModelDTO[]
+     * @return SuperDelightfulModelDTO[]
      */
-    public function getSuperMagicDisplayModelsForOrganization(string $organizationCode): array
+    public function getSuperDelightfulDisplayModelsForOrganization(string $organizationCode): array
     {
-        $models = $this->adminProviderDomainService->getSuperMagicDisplayModelsForOrganization($organizationCode);
+        $models = $this->adminProviderDomainService->getSuperDelightfulDisplayModelsForOrganization($organizationCode);
 
         if (empty($models)) {
             return [];
@@ -119,7 +119,7 @@ class ProviderAppService
         // 创建DTO并设置图标URL
         $modelDTOs = [];
         foreach ($models as $model) {
-            $modelDTO = new SuperMagicModelDTO($model->toArray());
+            $modelDTO = new SuperDelightfulModelDTO($model->toArray());
 
             $localizedModelName = $model->getLocalizedName($locale);
             $localizedModelDescription = $model->getLocalizedDescription($locale);
@@ -148,7 +148,7 @@ class ProviderAppService
                 $localizedName = $this->getProviderDisplayName($providerEntity, $configEntity, $isRecommended, $locale);
                 $providerIconUrl = $providerIconUrls[$configId] ?? '';
 
-                $providerDTO = new SuperMagicProviderDTO([
+                $providerDTO = new SuperDelightfulProviderDTO([
                     'name' => $localizedName,
                     'icon' => $providerIconUrl,
                     'sort' => $model->getSort(),

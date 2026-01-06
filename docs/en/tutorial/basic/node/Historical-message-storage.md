@@ -1,7 +1,7 @@
 # Historical Message Storage Node
 
 ## What is a Historical Message Storage Node?
-The Historical Message Storage Node is a functional node in Magic Flow workflow used for recording and saving conversation messages. It acts like a memory storage unit that can save specified text information into the conversation history for subsequent queries and usage. These stored messages can be retrieved in subsequent interactions, providing conversation memory capability for AI assistants.
+The Historical Message Storage Node is a functional node in Delightful Flow workflow used for recording and saving conversation messages. It acts like a memory storage unit that can save specified text information into the conversation history for subsequent queries and usage. These stored messages can be retrieved in subsequent interactions, providing conversation memory capability for AI assistants.
 
 **Image Description:**
 

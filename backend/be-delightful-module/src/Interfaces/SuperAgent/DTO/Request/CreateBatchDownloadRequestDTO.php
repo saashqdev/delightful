@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request;
+namespace Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request;
 
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\SuperMagic\ErrorCode\SuperAgentErrorCode;
+use Delightful\SuperDelightful\ErrorCode\SuperAgentErrorCode;
 
 class CreateBatchDownloadRequestDTO
 {

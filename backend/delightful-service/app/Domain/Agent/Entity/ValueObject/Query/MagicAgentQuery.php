@@ -9,7 +9,7 @@ namespace App\Domain\Agent\Entity\ValueObject\Query;
 
 use App\Infrastructure\Core\ValueObject\Query;
 
-class MagicAgentQuery extends Query
+class DelightfulAgentQuery extends Query
 {
     private ?array $ids = null;
 

@@ -62,7 +62,7 @@ class ExecuteManagerBaseTest extends BaseTest
         $operator->setRealName('unit-test-real_name');
         $operator->setAvatar('unit-test-avatar');
         $operator->setOrganizationCode('DT001');
-        $operator->setMagicId('123456789012345680');
+        $operator->setDelightfulId('123456789012345680');
         return $operator;
     }
 }

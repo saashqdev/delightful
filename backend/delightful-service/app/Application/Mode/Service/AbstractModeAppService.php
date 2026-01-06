@@ -25,7 +25,7 @@ use App\Domain\Provider\Service\ModelFilter\OrganizationBasedModelFilterInterfac
 use App\Domain\Provider\Service\ProviderConfigDomainService;
 use App\Domain\Provider\Service\ProviderModelDomainService;
 use App\Infrastructure\Util\OfficialOrganizationUtil;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Psr\Log\LoggerInterface;
 
 abstract class AbstractModeAppService extends AbstractKernelAppService
@@ -150,7 +150,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     /**
      * 获取数据隔离对象
      */
-    protected function getModeDataIsolation(MagicUserAuthorization $authorization): ModeDataIsolation
+    protected function getModeDataIsolation(DelightfulUserAuthorization $authorization): ModeDataIsolation
     {
         return $this->createModeDataIsolation($authorization);
     }
@@ -160,7 +160,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
      *
      * @param ModeGroupDetailDTO[] $modeGroupDetails
      */
-    protected function processModeGroupDetailIcons(MagicUserAuthorization $authorization, array $modeGroupDetails): void
+    protected function processModeGroupDetailIcons(DelightfulUserAuthorization $authorization, array $modeGroupDetails): void
     {
         // 收集所有需要处理的icon路径
         $iconPaths = [];

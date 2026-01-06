@@ -12,7 +12,7 @@ with open(os.path.join(os.path.dirname(__file__), "README.md"), "r", encoding="u
 setup(
     name="agentlang",
     version="0.1.4",
-    author="SuperMagic Team",
+    author="SuperDelightful Team",
     author_email="dev@bedelightful.ai",
     description="Simple and efficient AI agent framework",
     long_description=long_description,

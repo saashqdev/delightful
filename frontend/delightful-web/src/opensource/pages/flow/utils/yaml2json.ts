@@ -7,8 +7,8 @@
 import yaml from "js-yaml"
 import { v4 as uuidv4 } from "uuid"
 import { customNodeType } from "../constants"
-import { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
-import { getLatestNodeVersion } from "@delightful/delightful-flow/dist/MagicFlow/utils"
+import { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import { getLatestNodeVersion } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
 
 interface Position {
 	x: number
@@ -537,7 +537,7 @@ export const yamlString2jsonString = (yamlString: string): string => {
  * @param nodeYamlString 节点的YAML字符串
  * @returns Flow节点对象
  */
-export const nodeYamlString2json = (nodeYamlString: string): MagicFlow.Node => {
+export const nodeYamlString2json = (nodeYamlString: string): DelightfulFlow.Node => {
 	try {
 		// 解析YAML字符串为对象
 		const dslNode = yaml.load(nodeYamlString) as any

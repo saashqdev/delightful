@@ -15,7 +15,7 @@ use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
-class MagicFlowPermissionEntity extends AbstractEntity
+class DelightfulFlowPermissionEntity extends AbstractEntity
 {
     protected ?int $id = null;
 

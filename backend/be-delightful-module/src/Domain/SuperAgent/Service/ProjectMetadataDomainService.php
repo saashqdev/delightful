@@ -5,14 +5,14 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Domain\SuperAgent\Service;
+namespace Delightful\SuperDelightful\Domain\SuperAgent\Service;
 
 use App\Domain\File\Repository\Persistence\Facade\CloudFileRepositoryInterface;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
-use Delightful\SuperMagic\Domain\SuperAgent\Constant\ProjectFileConstant;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade\TaskFileRepositoryInterface;
-use Delightful\SuperMagic\Infrastructure\Utils\FileMetadataUtil;
+use Delightful\SuperDelightful\Domain\SuperAgent\Constant\ProjectFileConstant;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Repository\Facade\TaskFileRepositoryInterface;
+use Delightful\SuperDelightful\Infrastructure\Utils\FileMetadataUtil;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Throwable;
 
@@ -49,7 +49,7 @@ class ProjectMetadataDomainService
             }
 
             // 2. Extract metadata using utility
-            $metadata = FileMetadataUtil::extractMagicProjectConfig($fileUrl);
+            $metadata = FileMetadataUtil::extractDelightfulProjectConfig($fileUrl);
             if ($metadata === null) {
                 $this->logger->info('No metadata extracted from project.js', [
                     'file_id' => $projectJsFileEntity->getFileId(),

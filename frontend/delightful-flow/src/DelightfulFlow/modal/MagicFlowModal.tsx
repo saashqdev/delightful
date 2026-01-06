@@ -1,4 +1,4 @@
-import { MagicFlow } from "@/index"
+import { DelightfulFlow } from "@/index"
 import { Modal } from "antd"
 import { IconChevronLeft } from "@tabler/icons-react"
 import clsx from "clsx"
@@ -6,7 +6,7 @@ import React, { useMemo } from "react"
 import { prefix } from "../constants"
 import styles from "./index.module.less"
 
-export default function MagicFlowModal({ ...props }) {
+export default function DelightfulFlowModal({ ...props }) {
 	const backIcon = useMemo(() => {
 		return (
 			<IconChevronLeft
@@ -30,7 +30,7 @@ export default function MagicFlowModal({ ...props }) {
 			wrapClassName={clsx(styles.magicFlowModal, `${prefix}modal`)}
 			destroyOnClose
 		>
-			<MagicFlow {...props} header={{ ...(props.header || {}), backIcon }} />
+			<DelightfulFlow {...props} header={{ ...(props.header || {}), backIcon }} />
 		</Modal>
 	)
 }

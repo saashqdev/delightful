@@ -14,7 +14,7 @@ use PHPSandbox\Parser\Closure\ReflectionClosure;
 use PHPSandbox\PHPSandbox;
 use PHPSandbox\Runtime\Proxy\ArgFunctions;
 use PHPSandbox\Runtime\Proxy\DefinedFunctions;
-use PHPSandbox\Runtime\Proxy\MagicConstants;
+use PHPSandbox\Runtime\Proxy\DelightfulConstants;
 use PHPSandbox\Runtime\Proxy\SandboxedStringFunctions;
 use PHPSandbox\Runtime\Proxy\Superglobals;
 use PHPSandbox\SandboxedString;
@@ -35,7 +35,7 @@ class RuntimeProxy
 
     protected Superglobals $superglobals;
 
-    protected MagicConstants $magicConstants;
+    protected DelightfulConstants $magicConstants;
 
     protected ArgFunctions $argFunctions;
 
@@ -58,7 +58,7 @@ class RuntimeProxy
         $this->superglobals = new Superglobals();
         $this->superglobals->setOptions($this->options);
 
-        $this->magicConstants = new MagicConstants();
+        $this->magicConstants = new DelightfulConstants();
         $this->magicConstants->setOptions($this->options);
 
         $this->argFunctions = new ArgFunctions();
@@ -76,7 +76,7 @@ class RuntimeProxy
         return $this->superglobals;
     }
 
-    public function magicConstants(): MagicConstants
+    public function magicConstants(): DelightfulConstants
     {
         return $this->magicConstants;
     }

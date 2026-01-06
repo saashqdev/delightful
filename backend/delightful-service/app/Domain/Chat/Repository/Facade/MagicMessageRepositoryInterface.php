@@ -7,36 +7,36 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Repository\Facade;
 
-use App\Domain\Chat\Entity\MagicMessageEntity;
-use App\Domain\Chat\Entity\MagicMessageVersionEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
+use App\Domain\Chat\Entity\DelightfulMessageVersionEntity;
 
-interface MagicMessageRepositoryInterface
+interface DelightfulMessageRepositoryInterface
 {
     public function createMessage(array $message): void;
 
     public function getMessages(array $magicMessageIds, ?array $rangMessageTypes = null): array;
 
-    public function getMessageByMagicMessageId(string $magicMessageId): ?MagicMessageEntity;
+    public function getMessageByDelightfulMessageId(string $magicMessageId): ?DelightfulMessageEntity;
 
-    public function deleteByMagicMessageIds(array $magicMessageIds);
+    public function deleteByDelightfulMessageIds(array $magicMessageIds);
 
     public function updateMessageContent(string $magicMessageId, array $messageContent): void;
 
-    public function updateMessageContentAndVersionId(MagicMessageEntity $messageEntity, MagicMessageVersionEntity $magicMessageVersionEntity): void;
+    public function updateMessageContentAndVersionId(DelightfulMessageEntity $messageEntity, DelightfulMessageVersionEntity $magicMessageVersionEntity): void;
 
     /**
      * Check if message exists by app_message_id and optional message_type.
      */
     public function isMessageExistsByAppMessageId(string $appMessageId, string $messageType = ''): bool;
 
-    public function getMagicMessageIdByAppMessageId(string $appMessageId, string $messageType = ''): string;
+    public function getDelightfulMessageIdByAppMessageId(string $appMessageId, string $messageType = ''): string;
 
     /**
      * Get messages by magic message IDs.
-     * @param array $magicMessageIds Magic message ID数组
-     * @return MagicMessageEntity[] 消息实体数组
+     * @param array $magicMessageIds Delightful message ID数组
+     * @return DelightfulMessageEntity[] 消息实体数组
      */
-    public function getMessagesByMagicMessageIds(array $magicMessageIds): array;
+    public function getMessagesByDelightfulMessageIds(array $magicMessageIds): array;
 
     /**
      * Batch create messages.

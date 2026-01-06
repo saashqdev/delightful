@@ -13,7 +13,7 @@ use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
-class MagicFlowDraftEntity extends AbstractEntity
+class DelightfulFlowDraftEntity extends AbstractEntity
 {
     /**
      * 最大记录数.
@@ -56,7 +56,7 @@ class MagicFlowDraftEntity extends AbstractEntity
         $this->updatedAt = $this->createdAt;
     }
 
-    public function prepareForModification(MagicFlowDraftEntity $magicFlowDraftEntity): void
+    public function prepareForModification(DelightfulFlowDraftEntity $magicFlowDraftEntity): void
     {
         $this->requiredValidate();
 
@@ -66,7 +66,7 @@ class MagicFlowDraftEntity extends AbstractEntity
         $magicFlowDraftEntity->setUpdatedAt($this->createdAt);
 
         if (! is_null($this->magicFlow)) {
-            $magicFlowDraftEntity->setMagicFlow($this->magicFlow);
+            $magicFlowDraftEntity->setDelightfulFlow($this->magicFlow);
         }
     }
 
@@ -130,12 +130,12 @@ class MagicFlowDraftEntity extends AbstractEntity
         $this->description = $description;
     }
 
-    public function getMagicFlow(): ?array
+    public function getDelightfulFlow(): ?array
     {
         return $this->magicFlow;
     }
 
-    public function setMagicFlow(?array $magicFlow): void
+    public function setDelightfulFlow(?array $magicFlow): void
     {
         $this->magicFlow = $magicFlow;
     }

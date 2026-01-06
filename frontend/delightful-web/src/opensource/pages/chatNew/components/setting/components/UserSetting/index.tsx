@@ -1,5 +1,5 @@
-import MagicMemberAvatar from "@/opensource/components/business/MagicMemberAvatar"
-import { MagicList } from "@/opensource/components/MagicList"
+import DelightfulMemberAvatar from "@/opensource/components/business/DelightfulMemberAvatar"
+import { DelightfulList } from "@/opensource/components/DelightfulList"
 import { Col, Flex, Row, Switch, Typography } from "antd"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
@@ -82,14 +82,14 @@ const NormalUserSetting = observer(() => {
 			>
 				{members.map((uid) => (
 					<Col key={uid} className={styles.member}>
-						<MagicMemberAvatar size={45} uid={uid} showName="vertical" />
+						<DelightfulMemberAvatar size={45} uid={uid} showName="vertical" />
 					</Col>
 				))}
 				{/* <Col className={styles.member}>
 					<Flex vertical align="center" justify="center" gap={4}>
-						<MagicButton
+						<DelightfulButton
 							className={styles.addMember}
-							icon={<MagicIcon component={IconPlus} size={24} />}
+							icon={<DelightfulIcon component={IconPlus} size={24} />}
 							type="default"
 						/>
 						<AutoTooltipText maxWidth={50} className={styles.text}>
@@ -99,7 +99,7 @@ const NormalUserSetting = observer(() => {
 				</Col> */}
 			</Row>
 			<Typography.Text className={styles.title}>{t("chat.setting")}</Typography.Text>
-			<MagicList
+			<DelightfulList
 				gap={0}
 				className={styles.list}
 				items={listItems}

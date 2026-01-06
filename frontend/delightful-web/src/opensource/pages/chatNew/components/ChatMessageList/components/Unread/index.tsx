@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next"
 import { IconEye, IconEyeCheck } from "@tabler/icons-react"
 import { memo } from "react"
 import { calculateRelativeSize } from "@/utils/styles"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { colorUsages } from "@/opensource/providers/ThemeProvider/colors"
 import { useFontSize } from "@/opensource/providers/AppearanceProvider/hooks"
 
@@ -40,7 +40,7 @@ const Unread = memo(
 			>
 				{status ? (
 					<>
-						<MagicIcon
+						<DelightfulIcon
 							component={IconEye}
 							size={calculateRelativeSize(16, fontSize)}
 							color={colorUsages.text[2]}
@@ -49,7 +49,7 @@ const Unread = memo(
 					</>
 				) : (
 					<>
-						<MagicIcon
+						<DelightfulIcon
 							component={IconEyeCheck}
 							size={calculateRelativeSize(16, fontSize)}
 							color={colorUsages.text[2]}

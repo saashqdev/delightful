@@ -9,7 +9,7 @@ namespace App\Domain\OrganizationEnvironment\Entity;
 
 use App\Domain\Chat\Entity\AbstractEntity;
 
-class MagicOrganizationEnvEntity extends AbstractEntity
+class DelightfulOrganizationEnvEntity extends AbstractEntity
 {
     protected ?string $id = null;
 
@@ -45,12 +45,12 @@ class MagicOrganizationEnvEntity extends AbstractEntity
         $this->loginCode = $loginCode;
     }
 
-    public function getMagicOrganizationCode(): string
+    public function getDelightfulOrganizationCode(): string
     {
         return $this->magicOrganizationCode;
     }
 
-    public function setMagicOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
     {
         $this->magicOrganizationCode = $magicOrganizationCode;
     }

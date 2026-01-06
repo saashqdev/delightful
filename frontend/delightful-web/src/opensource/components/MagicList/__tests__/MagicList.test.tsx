@@ -1,11 +1,11 @@
 import { render, screen, fireEvent } from "@testing-library/react"
 import { vi, describe, test, expect } from "vitest"
-import MagicList from "../MagicList"
-import type { MagicListItemData } from "../types"
+import DelightfulList from "../DelightfulList"
+import type { DelightfulListItemData } from "../types"
 
 // 模拟样式模块，解决token问题
 vi.mock("../styles", () => ({
-	useMagicListItemStyles: () => ({
+	useDelightfulListItemStyles: () => ({
 		styles: {
 			container: "mock-container",
 			active: "mock-active",
@@ -20,7 +20,7 @@ vi.mock("../styles", () => ({
 }))
 
 // 创建测试数据
-interface TestItemData extends MagicListItemData {
+interface TestItemData extends DelightfulListItemData {
 	id: string
 	title: string
 	customField?: string
@@ -35,12 +35,12 @@ const createTestItems = (count: number): TestItemData[] => {
 	}))
 }
 
-describe("MagicList 组件", () => {
+describe("DelightfulList 组件", () => {
 	// 测试基本渲染
 	test("正确渲染列表项", () => {
 		const items = createTestItems(3)
 
-		render(<MagicList items={items} />)
+		render(<DelightfulList items={items} />)
 
 		// 验证所有项都被渲染
 		items.forEach((item) => {
@@ -49,10 +49,10 @@ describe("MagicList 组件", () => {
 	})
 
 	// 测试空列表
-	test("空列表时渲染 MagicEmpty 组件", () => {
-		const { container } = render(<MagicList items={[]} />)
+	test("空列表时渲染 DelightfulEmpty 组件", () => {
+		const { container } = render(<DelightfulList items={[]} />)
 
-		// 由于 MagicEmpty 可能没有特定的测试 ID，我们检查是否没有渲染列表项
+		// 由于 DelightfulEmpty 可能没有特定的测试 ID，我们检查是否没有渲染列表项
 		expect(container.querySelectorAll(".ant-flex").length).toBe(0)
 	})
 
@@ -61,7 +61,7 @@ describe("MagicList 组件", () => {
 		const items = createTestItems(3)
 		const handleItemClick = vi.fn()
 
-		render(<MagicList items={items} onItemClick={handleItemClick} />)
+		render(<DelightfulList items={items} onItemClick={handleItemClick} />)
 
 		// 点击第二个列表项
 		fireEvent.click(screen.getByText("测试项 1"))
@@ -76,7 +76,7 @@ describe("MagicList 组件", () => {
 		const items = createTestItems(3)
 		const activeId = "item-1"
 
-		const { container } = render(<MagicList items={items} active={activeId} />)
+		const { container } = render(<DelightfulList items={items} active={activeId} />)
 
 		// 检查是否只有一个项目有 active 样式类
 		const activeItems = container.querySelectorAll(".mock-active")
@@ -93,7 +93,7 @@ describe("MagicList 组件", () => {
 		const items = createTestItems(5)
 		const isActive = (_: TestItemData, index: number) => index === 2
 
-		render(<MagicList items={items} active={isActive} />)
+		render(<DelightfulList items={items} active={isActive} />)
 
 		// 检查是否只有一个项目有 active 样式类
 		const activeItems = document.querySelectorAll(".mock-active")
@@ -109,7 +109,7 @@ describe("MagicList 组件", () => {
 	test("正确处理字符串项", () => {
 		const stringItems = ["item-0", "item-1", "item-2"]
 
-		render(<MagicList items={stringItems} />)
+		render(<DelightfulList items={stringItems} />)
 
 		// 验证所有项都被渲染
 		const elements = document.querySelectorAll(".mock-container")
@@ -124,7 +124,7 @@ describe("MagicList 组件", () => {
 		// 记录渲染开始时间
 		const startTime = performance.now()
 
-		render(<MagicList items={items} />)
+		render(<DelightfulList items={items} />)
 
 		// 记录渲染结束时间
 		const endTime = performance.now()
@@ -152,7 +152,7 @@ describe("MagicList 组件", () => {
 			</div>
 		))
 
-		render(<MagicList items={items} listItemComponent={CustomListItem} />)
+		render(<DelightfulList items={items} listItemComponent={CustomListItem} />)
 
 		// 验证自定义组件被使用
 		expect(CustomListItem).toHaveBeenCalledTimes(3)

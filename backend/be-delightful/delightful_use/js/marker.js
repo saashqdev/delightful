@@ -1,5 +1,5 @@
 /**
- * MagicMaker - 高级感交互元素标记工具
+ * DelightfulMaker - 高级感交互元素标记工具
  * 在网页可交互元素上绘制彩色边框并在右上角添加字母+数字组合标记
  *
  * 提供两个核心方法：
@@ -791,7 +791,7 @@
     if (!isMarking) return;
 
     // 获取当前所有交互元素
-    const currentElements = window.MagicTouch.getInteractiveDomNodes('viewport');
+    const currentElements = window.DelightfulTouch.getInteractiveDomNodes('viewport');
 
     // 移除已经消失或隐藏的元素的标记
     markers = removeInvalidMarkers(currentElements);
@@ -893,7 +893,7 @@
     utils.insertXCharacter();
 
     // 获取所有可见的可交互元素并创建标记
-    const domElements = window.MagicTouch.getInteractiveDomNodes('viewport');
+    const domElements = window.DelightfulTouch.getInteractiveDomNodes('viewport');
     // getInteractiveDomNodes('viewport')已经返回可见元素，不需要再次过滤
 
     domElements.forEach((domElement, index) => {
@@ -969,7 +969,7 @@
   }
 
   // 暴露公共接口
-  window.MagicMarker = {
+  window.DelightfulMarker = {
     mark: mark,
     unmark: unmark,
     find: find

@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Service;
 
-use App\Domain\Agent\Constant\MagicAgentReleaseStatus;
-use App\Domain\Agent\Constant\MagicAgentVersionStatus;
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
-use App\Domain\Agent\Repository\Persistence\MagicAgentRepository;
-use App\Domain\Agent\Repository\Persistence\MagicAgentVersionRepository;
-use App\Domain\Contact\Repository\Persistence\MagicUserRepository;
-use App\Domain\Flow\Repository\Facade\MagicFlowVersionRepositoryInterface;
+use App\Domain\Agent\Constant\DelightfulAgentReleaseStatus;
+use App\Domain\Agent\Constant\DelightfulAgentVersionStatus;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
+use App\Domain\Agent\Repository\Persistence\DelightfulAgentRepository;
+use App\Domain\Agent\Repository\Persistence\DelightfulAgentVersionRepository;
+use App\Domain\Contact\Repository\Persistence\DelightfulUserRepository;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowVersionRepositoryInterface;
 use App\ErrorCode\AgentErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -21,18 +21,18 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 /**
  * 助理 service.
  */
-class MagicAgentVersionDomainService
+class DelightfulAgentVersionDomainService
 {
     public function __construct(
-        public MagicAgentVersionRepository $agentVersionRepository,
-        public MagicAgentRepository $agentRepository,
-        public MagicUserRepository $magicUserRepository,
-        public MagicFlowVersionRepositoryInterface $magicFlowVersionRepository
+        public DelightfulAgentVersionRepository $agentVersionRepository,
+        public DelightfulAgentRepository $agentRepository,
+        public DelightfulUserRepository $magicUserRepository,
+        public DelightfulFlowVersionRepositoryInterface $magicFlowVersionRepository
     ) {
     }
 
     /**
-     * @return MagicAgentVersionEntity[]
+     * @return DelightfulAgentVersionEntity[]
      */
     public function getAgentsByOrganization(string $organizationCode, array $agentIds, int $page, int $pageSize, string $agentName, ?string $descriptionKeyword = null): array
     {
@@ -46,7 +46,7 @@ class MagicAgentVersionDomainService
 
     /**
      * 优化版本：直接获取启用的助理版本，避免传入大量ID.
-     * @return MagicAgentVersionEntity[]
+     * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
     {
@@ -74,7 +74,7 @@ class MagicAgentVersionDomainService
     /**
      * 发布版本.
      */
-    public function releaseAgentVersion(MagicAgentVersionEntity $magicAgentVersionEntity): array
+    public function releaseAgentVersion(DelightfulAgentVersionEntity $magicAgentVersionEntity): array
     {
         // 审批开关 todo
         $approvalOpen = false;
@@ -82,33 +82,33 @@ class MagicAgentVersionDomainService
 
         $msg = '';
         // 如果旧状态已经是企业或者市场，则不允许回退
-        $oldMagicAgentVersionEntity = $this->agentVersionRepository->getNewestAgentVersionEntity($magicAgentVersionEntity->getAgentId());
-        if ($oldMagicAgentVersionEntity !== null) {
-            $this->validateVersionNumber($magicAgentVersionEntity->getVersionNumber(), $oldMagicAgentVersionEntity->getVersionNumber());
-            $this->validateReleaseScope($magicAgentVersionEntity->getReleaseScope(), $oldMagicAgentVersionEntity->getReleaseScope());
+        $oldDelightfulAgentVersionEntity = $this->agentVersionRepository->getNewestAgentVersionEntity($magicAgentVersionEntity->getAgentId());
+        if ($oldDelightfulAgentVersionEntity !== null) {
+            $this->validateVersionNumber($magicAgentVersionEntity->getVersionNumber(), $oldDelightfulAgentVersionEntity->getVersionNumber());
+            $this->validateReleaseScope($magicAgentVersionEntity->getReleaseScope(), $oldDelightfulAgentVersionEntity->getReleaseScope());
         }
 
-        if ($magicAgentVersionEntity->getReleaseScope() === MagicAgentReleaseStatus::PERSONAL_USE->value) {
+        if ($magicAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PERSONAL_USE->value) {
             // 个人使用
             $msg = '发布成功';
-        } elseif ($magicAgentVersionEntity->getReleaseScope() === MagicAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
+        } elseif ($magicAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
             // 发布到企业内部
             /* @phpstan-ignore-next-line */
             if ($approvalOpen) {
-                $magicAgentVersionEntity->setApprovalStatus(MagicAgentVersionStatus::APPROVAL_PENDING->value);
-                $magicAgentVersionEntity->setEnterpriseReleaseStatus(MagicAgentVersionStatus::APP_MARKET_LISTED->value);
+                $magicAgentVersionEntity->setApprovalStatus(DelightfulAgentVersionStatus::APPROVAL_PENDING->value);
+                $magicAgentVersionEntity->setEnterpriseReleaseStatus(DelightfulAgentVersionStatus::APP_MARKET_LISTED->value);
                 $msg = '提交成功';
             } else {
-                $magicAgentVersionEntity->setEnterpriseReleaseStatus(MagicAgentVersionStatus::ENTERPRISE_PUBLISHED->value);
+                $magicAgentVersionEntity->setEnterpriseReleaseStatus(DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value);
             }
             $msg = '发布成功';
-        } elseif ($magicAgentVersionEntity->getReleaseScope() === MagicAgentReleaseStatus::PUBLISHED_TO_MARKET->value) {
+        } elseif ($magicAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value) {
             // 发布到应用市场
             // 审核开关
             /* @phpstan-ignore-next-line */
             if ($reviewOpen) {
             } else {
-                $magicAgentVersionEntity->setAppMarketStatus(MagicAgentVersionStatus::APP_MARKET_LISTED->value);
+                $magicAgentVersionEntity->setAppMarketStatus(DelightfulAgentVersionStatus::APP_MARKET_LISTED->value);
             }
         }
 
@@ -117,14 +117,14 @@ class MagicAgentVersionDomainService
         return ['msg' => $msg, 'data' => $magicAgentVersionEntity];
     }
 
-    public function getAgentById(string $id): MagicAgentVersionEntity
+    public function getAgentById(string $id): DelightfulAgentVersionEntity
     {
         return $this->agentVersionRepository->getAgentById($id);
     }
 
     /**
      * 根据ids获取助理版本.
-     * @return array<MagicAgentVersionEntity>
+     * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentByIds(array $ids): array
     {
@@ -135,7 +135,7 @@ class MagicAgentVersionDomainService
     }
 
     /**
-     * @return MagicAgentVersionEntity[]
+     * @return DelightfulAgentVersionEntity[]
      */
     public function getReleaseAgentVersions(string $agentId): array
     {
@@ -152,12 +152,12 @@ class MagicAgentVersionDomainService
         /* @phpstan-ignore-next-line */
         if ($approvalOpen) {
             // 校验状态
-            if ($agent->getApprovalStatus() !== MagicAgentVersionStatus::APPROVAL_PASSED->value) {
+            if ($agent->getApprovalStatus() !== DelightfulAgentVersionStatus::APPROVAL_PASSED->value) {
                 ExceptionBuilder::throw(AgentErrorCode::VERSION_CAN_ONLY_BE_ENABLED_AFTER_APPROVAL);
             }
         }
 
-        $this->agentVersionRepository->setEnterpriseStatus($id, MagicAgentVersionStatus::ENTERPRISE_ENABLED->value);
+        $this->agentVersionRepository->setEnterpriseStatus($id, DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value);
 
         return true;
     }
@@ -166,11 +166,11 @@ class MagicAgentVersionDomainService
     {
         $agent = $this->agentVersionRepository->getAgentById($id);
 
-        if ($agent->getEnterpriseReleaseStatus() !== MagicAgentVersionStatus::ENTERPRISE_ENABLED->value) {
+        if ($agent->getEnterpriseReleaseStatus() !== DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value) {
             ExceptionBuilder::throw(AgentErrorCode::VERSION_ONLY_ENABLED_CAN_BE_DISABLED);
         }
 
-        $this->agentVersionRepository->setEnterpriseStatus($id, MagicAgentVersionStatus::ENTERPRISE_DISABLED->value);
+        $this->agentVersionRepository->setEnterpriseStatus($id, DelightfulAgentVersionStatus::ENTERPRISE_DISABLED->value);
 
         return true;
     }
@@ -216,14 +216,14 @@ class MagicAgentVersionDomainService
     }
 
     /**
-     * @return MagicAgentVersionEntity[]
+     * @return DelightfulAgentVersionEntity[]
      */
     public function listAgentVersionsByIds(array $agentVersionIds): array
     {
         return $this->agentVersionRepository->listAgentVersionsByIds($agentVersionIds);
     }
 
-    public function getById(string $agentVersionId): MagicAgentVersionEntity
+    public function getById(string $agentVersionId): DelightfulAgentVersionEntity
     {
         return $this->agentVersionRepository->getAgentById($agentVersionId);
     }
@@ -233,7 +233,7 @@ class MagicAgentVersionDomainService
         $this->agentVersionRepository->updateAgentEnterpriseStatus($agentVersionId, $status);
     }
 
-    public function getAgentByFlowCode(string $flowCode): ?MagicAgentVersionEntity
+    public function getAgentByFlowCode(string $flowCode): ?DelightfulAgentVersionEntity
     {
         return $this->agentVersionRepository->getAgentByFlowCode($flowCode);
     }
@@ -244,12 +244,12 @@ class MagicAgentVersionDomainService
      * @param array $agentVersionIds 助理版本ID列表
      * @param string $cursor 游标ID，如果为空字符串则从最新开始
      * @param int $pageSize 每页数量
-     * @return array<MagicAgentVersionEntity>
+     * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentsByOrganizationWithCursor(string $organizationCode, array $agentVersionIds, string $cursor, int $pageSize): array
     {
         $res = $this->agentVersionRepository->getAgentsByOrganizationWithCursor($organizationCode, $agentVersionIds, $cursor, $pageSize);
-        return array_map(fn ($item) => new MagicAgentVersionEntity($item), $res);
+        return array_map(fn ($item) => new DelightfulAgentVersionEntity($item), $res);
     }
 
     /**
@@ -277,8 +277,8 @@ class MagicAgentVersionDomainService
 
         // 检查是否试图从更高级别的发布范围回退到更低级别
         $errorMessage = match ($oldScope) {
-            MagicAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value => 'agent.already_published_to_enterprise_cannot_publish_to_individual',
-            MagicAgentReleaseStatus::PUBLISHED_TO_MARKET->value => 'agent.already_published_to_market_cannot_publish_to_individual',
+            DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value => 'agent.already_published_to_enterprise_cannot_publish_to_individual',
+            DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value => 'agent.already_published_to_market_cannot_publish_to_individual',
             default => null,
         };
 

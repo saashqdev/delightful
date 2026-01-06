@@ -1,5 +1,5 @@
 /** tslint-disable */
-import { SchemaValueSplitor } from "@/MagicJsonSchemaEditor/constants"
+import { SchemaValueSplitor } from "@/DelightfulJsonSchemaEditor/constants"
 import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference"
 import TSIcon from "@/common/BaseUI/TSIcon"
 import React from "react"

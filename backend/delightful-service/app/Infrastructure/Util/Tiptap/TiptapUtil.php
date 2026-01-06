@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Util\Tiptap;
 
 use App\Infrastructure\Util\Tiptap\CustomExtension\ImageNode;
-use App\Infrastructure\Util\Tiptap\CustomExtension\MagicEmojiNode;
+use App\Infrastructure\Util\Tiptap\CustomExtension\DelightfulEmojiNode;
 use App\Infrastructure\Util\Tiptap\CustomExtension\MentionNode;
 use App\Infrastructure\Util\Tiptap\CustomExtension\QuickInstruction\QuickInstructionNode;
 use Tiptap\Editor;
@@ -52,7 +52,7 @@ class TiptapUtil
                 new QuickInstructionNode(),
                 new MentionNode(),
                 new ImageNode(),
-                new MagicEmojiNode(),
+                new DelightfulEmojiNode(),
             ],
         ]);
     }

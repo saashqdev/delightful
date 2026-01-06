@@ -7,7 +7,7 @@ interface EllipsisWithTooltipProps extends HTMLAttributes<HTMLDivElement> {
 	maxWidth: string // 文本最大宽度，超出部分用省略号代替
 }
 
-const MagicEllipseWithTooltip = ({ text, maxWidth, ...props }: EllipsisWithTooltipProps) => {
+const DelightfulEllipseWithTooltip = ({ text, maxWidth, ...props }: EllipsisWithTooltipProps) => {
 	const textRef = useRef<HTMLDivElement>(null)
 	const [isOverflowed, setIsOverflowed] = useState(false)
 
@@ -38,4 +38,4 @@ const MagicEllipseWithTooltip = ({ text, maxWidth, ...props }: EllipsisWithToolt
 	)
 }
 
-export default MagicEllipseWithTooltip
+export default DelightfulEllipseWithTooltip

@@ -7,21 +7,21 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Repository\Persistence;
 
-use App\Domain\Chat\Entity\MagicChatFileEntity;
-use App\Domain\Chat\Repository\Facade\MagicChatFileRepositoryInterface;
-use App\Domain\Chat\Repository\Persistence\Model\MagicChatFileModel;
+use App\Domain\Chat\Entity\DelightfulChatFileEntity;
+use App\Domain\Chat\Repository\Facade\DelightfulChatFileRepositoryInterface;
+use App\Domain\Chat\Repository\Persistence\Model\DelightfulChatFileModel;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use Carbon\Carbon;
 use Hyperf\DbConnection\Db;
 
-class MagicChatFileRepository implements MagicChatFileRepositoryInterface
+class DelightfulChatFileRepository implements DelightfulChatFileRepositoryInterface
 {
     public function __construct(
-        protected MagicChatFileModel $magicChatFileModel
+        protected DelightfulChatFileModel $magicChatFileModel
     ) {
     }
 
-    public function uploadFile(MagicChatFileEntity $magicFileDTO): MagicChatFileEntity
+    public function uploadFile(DelightfulChatFileEntity $magicFileDTO): DelightfulChatFileEntity
     {
         if (empty($magicFileDTO->getFileId())) {
             $id = (string) IdGenerator::getSnowId();
@@ -48,7 +48,7 @@ class MagicChatFileRepository implements MagicChatFileRepositoryInterface
     }
 
     /**
-     * @return MagicChatFileEntity[]
+     * @return DelightfulChatFileEntity[]
      */
     public function getChatFileByIds(array $fileIds, ?string $order = null, ?int $limit = null): array
     {
@@ -67,7 +67,7 @@ class MagicChatFileRepository implements MagicChatFileRepositoryInterface
         // Sort by fileIds order in PHP
         $fileMap = [];
         foreach ($files as $file) {
-            $fileMap[$file['file_id']] = new MagicChatFileEntity($file);
+            $fileMap[$file['file_id']] = new DelightfulChatFileEntity($file);
         }
 
         $fileEntities = [];
@@ -89,7 +89,7 @@ class MagicChatFileRepository implements MagicChatFileRepositoryInterface
     /**
      * 通过file_key查找文件.
      */
-    public function getChatFileByFileKey(string $fileKey): ?MagicChatFileEntity
+    public function getChatFileByFileKey(string $fileKey): ?DelightfulChatFileEntity
     {
         $file = $this->magicChatFileModel::query()
             ->where('file_key', $fileKey)
@@ -99,13 +99,13 @@ class MagicChatFileRepository implements MagicChatFileRepositoryInterface
             return null;
         }
 
-        return new MagicChatFileEntity($file->toArray());
+        return new DelightfulChatFileEntity($file->toArray());
     }
 
     /**
      * 更新文件信息.
      */
-    public function updateFile(MagicChatFileEntity $fileEntity): void
+    public function updateFile(DelightfulChatFileEntity $fileEntity): void
     {
         $this->magicChatFileModel->newQuery()
             ->where('file_id', $fileEntity->getFileId())
@@ -119,10 +119,10 @@ class MagicChatFileRepository implements MagicChatFileRepositoryInterface
             ]);
     }
 
-    public function updateFileById(string $fileId, MagicChatFileEntity $entity)
+    public function updateFileById(string $fileId, DelightfulChatFileEntity $entity)
     {
         // 文件更新需谨慎，暂时只允许更新file_name
-        $model = new MagicChatFileModel();
+        $model = new DelightfulChatFileModel();
         $updateData = [];
         if ($entity->getFileKey()) {
             $updateData['file_key'] = $entity->getFileKey();

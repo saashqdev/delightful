@@ -27,7 +27,7 @@ use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use App\Infrastructure\Util\Asr\Service\ByteDanceSTSService;
 use App\Infrastructure\Util\Context\CoContext;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Exception;
 use Hyperf\HttpServer\Annotation\Controller;
@@ -67,7 +67,7 @@ class AsrApi extends AbstractApi
     public function show(RequestInterface $request): array
     {
         $userAuthorization = $this->getAuthorization();
-        $magicId = $userAuthorization->getMagicId();
+        $magicId = $userAuthorization->getDelightfulId();
 
         $refresh = (bool) $request->input('refresh', false);
         $duration = 60 * 60 * 12; // 12小时
@@ -82,7 +82,7 @@ class AsrApi extends AbstractApi
             'resource_id' => $tokenData['resource_id'],
             'user' => [
                 'user_id' => $userAuthorization->getId(),
-                'magic_id' => $userAuthorization->getMagicId(),
+                'magic_id' => $userAuthorization->getDelightfulId(),
                 'organization_code' => $userAuthorization->getOrganizationCode(),
             ],
         ];
@@ -95,7 +95,7 @@ class AsrApi extends AbstractApi
     public function destroy(): array
     {
         $userAuthorization = $this->getAuthorization();
-        $magicId = $userAuthorization->getMagicId();
+        $magicId = $userAuthorization->getDelightfulId();
 
         $cleared = $this->stsService->clearUserJwtTokenCache($magicId);
 
@@ -104,7 +104,7 @@ class AsrApi extends AbstractApi
             'message' => $cleared ? trans('asr.api.token.cache_cleared') : trans('asr.api.token.cache_not_exist'),
             'user' => [
                 'user_id' => $userAuthorization->getId(),
-                'magic_id' => $userAuthorization->getMagicId(),
+                'magic_id' => $userAuthorization->getDelightfulId(),
                 'organization_code' => $userAuthorization->getOrganizationCode(),
             ],
         ];
@@ -116,7 +116,7 @@ class AsrApi extends AbstractApi
      */
     public function summary(RequestInterface $request): array
     {
-        /** @var MagicUserAuthorization $userAuthorization */
+        /** @var DelightfulUserAuthorization $userAuthorization */
         $userAuthorization = $this->getAuthorization();
         $userId = $userAuthorization->getId();
         $summaryRequest = $this->validateAndBuildSummaryRequest($request, $userAuthorization);
@@ -170,7 +170,7 @@ class AsrApi extends AbstractApi
     {
         $operationId = uniqid('op_', true);
 
-        /** @var MagicUserAuthorization $userAuthorization */
+        /** @var DelightfulUserAuthorization $userAuthorization */
         $userAuthorization = $this->getAuthorization();
         $userId = $userAuthorization->getId();
         $organizationCode = $userAuthorization->getOrganizationCode();
@@ -436,7 +436,7 @@ class AsrApi extends AbstractApi
     /**
      * 验证并构建总结请求DTO.
      */
-    private function validateAndBuildSummaryRequest(RequestInterface $request, MagicUserAuthorization $userAuthorization): SummaryRequestDTO
+    private function validateAndBuildSummaryRequest(RequestInterface $request, DelightfulUserAuthorization $userAuthorization): SummaryRequestDTO
     {
         $taskKey = $request->input('task_key', '');
         $projectId = $request->input('project_id', '');
@@ -721,7 +721,7 @@ class AsrApi extends AbstractApi
     /**
      * 构建STS Token.
      */
-    private function buildStsToken(MagicUserAuthorization $userAuthorization, string $projectId, string $userId): array
+    private function buildStsToken(DelightfulUserAuthorization $userAuthorization, string $projectId, string $userId): array
     {
         $storageType = StorageBucketType::SandBox->value;
         $expires = 60 * 60;

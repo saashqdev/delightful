@@ -9,9 +9,9 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="super-magic",
     version="1.0.0",
-    author="SuperMagic Team",
+    author="SuperDelightful Team",
     author_email="dev@bedelightful.ai",
-    description="SuperMagic General AI System",
+    description="SuperDelightful General AI System",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/saashqdev/delightful/super-magic",

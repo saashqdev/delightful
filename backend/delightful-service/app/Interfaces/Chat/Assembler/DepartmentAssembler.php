@@ -7,24 +7,24 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Assembler;
 
-use App\Domain\Contact\Entity\MagicDepartmentEntity;
-use App\Domain\Contact\Entity\MagicThirdPlatformDepartmentEntity;
-use App\Domain\Contact\Entity\MagicThirdPlatformIdMappingEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulThirdPlatformDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulThirdPlatformIdMappingEntity;
 
 class DepartmentAssembler
 {
-    public static function getDepartmentEntity(array $department): MagicDepartmentEntity
+    public static function getDepartmentEntity(array $department): DelightfulDepartmentEntity
     {
-        return new MagicDepartmentEntity($department);
+        return new DelightfulDepartmentEntity($department);
     }
 
-    public static function getMagicThirdPlatformIdMappingEntity(array $thirdPlatformIdMapping): MagicThirdPlatformIdMappingEntity
+    public static function getDelightfulThirdPlatformIdMappingEntity(array $thirdPlatformIdMapping): DelightfulThirdPlatformIdMappingEntity
     {
-        return new MagicThirdPlatformIdMappingEntity($thirdPlatformIdMapping);
+        return new DelightfulThirdPlatformIdMappingEntity($thirdPlatformIdMapping);
     }
 
-    public static function getThirdPlatformDepartmentEntity(array $thirdPlatformDepartment): MagicThirdPlatformDepartmentEntity
+    public static function getThirdPlatformDepartmentEntity(array $thirdPlatformDepartment): DelightfulThirdPlatformDepartmentEntity
     {
-        return new MagicThirdPlatformDepartmentEntity($thirdPlatformDepartment);
+        return new DelightfulThirdPlatformDepartmentEntity($thirdPlatformDepartment);
     }
 }

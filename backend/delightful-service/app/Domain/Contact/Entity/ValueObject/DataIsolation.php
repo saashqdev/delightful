@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Entity\ValueObject;
 
-use App\Domain\Contact\Repository\Facade\MagicUserRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulUserRepositoryInterface;
 use App\Infrastructure\Core\AbstractObject;
 
 /**
@@ -20,7 +20,7 @@ class DataIsolation extends AbstractObject
     /**
      * 当前的账号id. 所有账号统一注意隐私保护,不对第三方返回.
      */
-    protected string $currentMagicId = '';
+    protected string $currentDelightfulId = '';
 
     /**
      * 当前的组织编码.
@@ -63,7 +63,7 @@ class DataIsolation extends AbstractObject
     public function getUserType(): ?UserType
     {
         if (empty($this->userType) && ! empty($this->getCurrentUserId())) {
-            $userEntity = di(MagicUserRepositoryInterface::class)->getUserById($this->getCurrentUserId());
+            $userEntity = di(DelightfulUserRepositoryInterface::class)->getUserById($this->getCurrentUserId());
             $userEntity && $this->setUserType($userEntity->getUserType());
         }
         return $this->userType;
@@ -92,14 +92,14 @@ class DataIsolation extends AbstractObject
         return $static;
     }
 
-    public function getCurrentMagicId(): string
+    public function getCurrentDelightfulId(): string
     {
-        return $this->currentMagicId;
+        return $this->currentDelightfulId;
     }
 
-    public function setCurrentMagicId(string $currentMagicId): void
+    public function setCurrentDelightfulId(string $currentDelightfulId): void
     {
-        $this->currentMagicId = $currentMagicId;
+        $this->currentDelightfulId = $currentDelightfulId;
     }
 
     public function getCurrentAppId(): ?string

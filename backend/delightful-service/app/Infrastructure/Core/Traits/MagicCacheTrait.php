@@ -12,7 +12,7 @@ use Hyperf\Cache\Driver\MemoryDriver;
 use Hyperf\Context\ApplicationContext;
 use Throwable;
 
-trait MagicCacheTrait
+trait DelightfulCacheTrait
 {
     /**
      * 缓存对象属性的下划线和驼峰命名，避免频繁计算.

@@ -1,4 +1,4 @@
-import { NodeBaseInfo } from "@/MagicExpressionWidget/types"
+import { NodeBaseInfo } from "@/DelightfulExpressionWidget/types"
 import React from "react"
 import { AppendPosition, ShowColumns } from "../../constants"
 import { Common } from "../../types/Common"

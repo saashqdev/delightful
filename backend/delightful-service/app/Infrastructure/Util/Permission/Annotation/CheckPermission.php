@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Util\Permission\Annotation;
 
-use App\Application\Kernel\Contract\MagicPermissionInterface;
+use App\Application\Kernel\Contract\DelightfulPermissionInterface;
 use Attribute;
 use BackedEnum;
 use Hyperf\Di\Annotation\AbstractAnnotation;
@@ -16,7 +16,7 @@ use Hyperf\Di\Annotation\AbstractAnnotation;
  * 权限校验注解，用于方法或类上声明所需的权限。
  *
  * 示例：
- * #[CheckPermission(MagicResourceEnum::CONSOLE_API_ASSISTANT, MagicOperationEnum::QUERY)]
+ * #[CheckPermission(DelightfulResourceEnum::CONSOLE_API_ASSISTANT, DelightfulOperationEnum::QUERY)]
  */
 #[Attribute(Attribute::TARGET_CLASS | Attribute::TARGET_METHOD)]
 class CheckPermission extends AbstractAnnotation
@@ -59,7 +59,7 @@ class CheckPermission extends AbstractAnnotation
      */
     public function getPermissionKeys(): array
     {
-        $permission = di(MagicPermissionInterface::class);
+        $permission = di(DelightfulPermissionInterface::class);
 
         $resources = is_array($this->resource) ? $this->resource : [$this->resource];
 

@@ -1,4 +1,4 @@
-import ShellIcon from "@/opensource/pages/superMagic/assets/svg/Frame.svg"
+import ShellIcon from "@/opensource/pages/superDelightful/assets/svg/Frame.svg"
 import { memo, useEffect, useRef } from "react"
 import CommonFooter from "../../components/CommonFooter"
 import CommonHeader from "../../components/CommonHeader"

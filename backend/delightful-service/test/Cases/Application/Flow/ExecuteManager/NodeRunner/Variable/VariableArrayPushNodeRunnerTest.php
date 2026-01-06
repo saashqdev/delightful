@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Application\Flow\ExecuteManager\NodeRunner\Variable;
 
-use App\Application\Flow\ExecuteManager\MagicFlowExecutor;
+use App\Application\Flow\ExecuteManager\DelightfulFlowExecutor;
 use App\Domain\Flow\Entity\ValueObject\Node;
 use App\Domain\Flow\Entity\ValueObject\NodeType;
 use App\Infrastructure\Core\Dag\VertexResult;
@@ -93,7 +93,7 @@ JSON, true));
 
         $node->validate();
 
-        $runner = MagicFlowExecutor::getNodeRunner($node);
+        $runner = DelightfulFlowExecutor::getNodeRunner($node);
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->variableSave('var1', ['value777', 'value888']);

@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\SuperDelightful\Application\SuperAgent\Event\Subscribe;
 
 use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
-use Delightful\SuperMagic\Application\SuperAgent\Service\MessageQueueProcessAppService;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\RunTaskCallbackEvent;
+use Delightful\SuperDelightful\Application\SuperAgent\Service\MessageQueueProcessAppService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\RunTaskCallbackEvent;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;

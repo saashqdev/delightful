@@ -389,11 +389,11 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * Get super magic display models and Magic provider models visible to current organization.
+     * Get super magic display models and Delightful provider models visible to current organization.
      * @param string $organizationCode Organization code
      * @return ProviderModelEntity[]
      */
-    public function getSuperMagicDisplayModelsForOrganization(string $organizationCode): array
+    public function getSuperDelightfulDisplayModelsForOrganization(string $organizationCode): array
     {
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
@@ -403,23 +403,23 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // 按super_magic_display_state过滤
         $models = [];
         foreach ($allModels as $model) {
-            if ($model->isSuperMagicDisplayState() === 1) {
+            if ($model->isSuperDelightfulDisplayState() === 1) {
                 $models[] = $model;
             }
         }
 
-        $superMagicModels = [];
+        $superDelightfulModels = [];
         foreach ($models as $model) {
             $modelConfig = $model->getConfig();
             if (! $modelConfig || ! $modelConfig->isSupportFunction()) {
                 continue;
             }
-            $superMagicModels[] = $model;
+            $superDelightfulModels[] = $model;
         }
 
         // 根据 modelId 去重
         $uniqueModels = [];
-        foreach ($superMagicModels as $model) {
+        foreach ($superDelightfulModels as $model) {
             $uniqueModels[$model->getModelId()] = $model;
         }
 
@@ -452,9 +452,9 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 初始化Magic服务商配置数据.
+     * 初始化Delightful服务商配置数据.
      */
-    public function initializeMagicProviderConfigs(): int
+    public function initializeDelightfulProviderConfigs(): int
     {
         $count = 0;
         $categories = [Category::LLM, Category::VLM];

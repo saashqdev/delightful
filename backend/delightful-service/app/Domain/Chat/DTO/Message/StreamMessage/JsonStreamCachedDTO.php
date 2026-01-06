@@ -25,7 +25,7 @@ class JsonStreamCachedDTO extends AbstractEntity
     /**
      * 收件人的 magic_id.
      */
-    protected string $receiveMagicId;
+    protected string $receiveDelightfulId;
 
     /**
      * 缓存大 json 数据.
@@ -87,12 +87,12 @@ class JsonStreamCachedDTO extends AbstractEntity
         return $this;
     }
 
-    public function getMagicMessageId(): ?string
+    public function getDelightfulMessageId(): ?string
     {
         return $this->magicMessageId ?? null;
     }
 
-    public function setMagicMessageId(null|int|string $magicMessageId): self
+    public function setDelightfulMessageId(null|int|string $magicMessageId): self
     {
         if (is_numeric($magicMessageId)) {
             $this->magicMessageId = (string) $magicMessageId;
@@ -102,17 +102,17 @@ class JsonStreamCachedDTO extends AbstractEntity
         return $this;
     }
 
-    public function getReceiveMagicId(): ?string
+    public function getReceiveDelightfulId(): ?string
     {
-        return $this->receiveMagicId ?? null;
+        return $this->receiveDelightfulId ?? null;
     }
 
-    public function setReceiveMagicId(null|int|string $receiveMagicId): self
+    public function setReceiveDelightfulId(null|int|string $receiveDelightfulId): self
     {
-        if (is_numeric($receiveMagicId)) {
-            $this->receiveMagicId = (string) $receiveMagicId;
+        if (is_numeric($receiveDelightfulId)) {
+            $this->receiveDelightfulId = (string) $receiveDelightfulId;
         } else {
-            $this->receiveMagicId = $receiveMagicId;
+            $this->receiveDelightfulId = $receiveDelightfulId;
         }
         return $this;
     }

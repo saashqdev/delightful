@@ -3,7 +3,7 @@
  */
 import { useFlowStore } from "@/opensource/stores/flow"
 import type { Bot } from "@/types/bot"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { useMemoizedFn, useMount, useUpdateEffect } from "ahooks"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
@@ -34,7 +34,7 @@ export default function useFlowDetail({ agent, showFlowIsDraftToast }: FlowDetai
 
 	const { updateFlowDraftList, updateFlowPublishList, draftList } = useFlowStore()
 
-	const [currentFlow, setCurrentFlow] = useState<MagicFlow.Flow>()
+	const [currentFlow, setCurrentFlow] = useState<DelightfulFlow.Flow>()
 
 	useMount(() => {
 		// 初次加载先重置版本和草稿数据，避免脏数据影响

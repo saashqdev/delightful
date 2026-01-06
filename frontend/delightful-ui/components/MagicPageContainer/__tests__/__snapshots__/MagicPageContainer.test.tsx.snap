@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MagicPageContainer > 快照测试 > 基础页面容器快照 1`] = `
+exports[`DelightfulPageContainer > 快照测试 > 基础页面容器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-card acss-1t0i3xo css-dev-only-do-not-override-yotw4n css-var-r1"
@@ -36,7 +36,7 @@ exports[`MagicPageContainer > 快照测试 > 基础页面容器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicPageContainer > 快照测试 > 带操作按钮页面容器快照 1`] = `
+exports[`DelightfulPageContainer > 快照测试 > 带操作按钮页面容器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-card acss-1t0i3xo css-dev-only-do-not-override-yotw4n css-var-r4"
@@ -79,7 +79,7 @@ exports[`MagicPageContainer > 快照测试 > 带操作按钮页面容器快照 1
 </DocumentFragment>
 `;
 
-exports[`MagicPageContainer > 快照测试 > 带标签页页面容器快照 1`] = `
+exports[`DelightfulPageContainer > 快照测试 > 带标签页页面容器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-card magic-card-contain-tabs acss-1t0i3xo css-dev-only-do-not-override-yotw4n css-var-r5"
@@ -216,7 +216,7 @@ exports[`MagicPageContainer > 快照测试 > 带标签页页面容器快照 1`] 
 </DocumentFragment>
 `;
 
-exports[`MagicPageContainer > 快照测试 > 带类名页面容器快照 1`] = `
+exports[`DelightfulPageContainer > 快照测试 > 带类名页面容器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-card acss-1t0i3xo custom-page css-dev-only-do-not-override-yotw4n css-var-r2"
@@ -252,7 +252,7 @@ exports[`MagicPageContainer > 快照测试 > 带类名页面容器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicPageContainer > 快照测试 > 带自定义属性页面容器快照 1`] = `
+exports[`DelightfulPageContainer > 快照测试 > 带自定义属性页面容器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-card acss-1t0i3xo css-dev-only-do-not-override-yotw4n css-var-r3"
@@ -289,7 +289,7 @@ exports[`MagicPageContainer > 快照测试 > 带自定义属性页面容器快�
 </DocumentFragment>
 `;
 
-exports[`MagicPageContainer > 快照测试 > 带自定义样式页面容器快照 1`] = `
+exports[`DelightfulPageContainer > 快照测试 > 带自定义样式页面容器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-card acss-1t0i3xo css-dev-only-do-not-override-yotw4n css-var-r7"
@@ -326,7 +326,7 @@ exports[`MagicPageContainer > 快照测试 > 带自定义样式页面容器快�
 </DocumentFragment>
 `;
 
-exports[`MagicPageContainer > 快照测试 > 无标题页面容器快照 1`] = `
+exports[`DelightfulPageContainer > 快照测试 > 无标题页面容器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-card acss-1t0i3xo css-dev-only-do-not-override-yotw4n css-var-r8"

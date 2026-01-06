@@ -1,6 +1,6 @@
-import { FormItemType, InputExpressionValue } from "@/MagicExpressionWidget/types"
+import { FormItemType, InputExpressionValue } from "@/DelightfulExpressionWidget/types"
 import { copyToClipboard } from "@/DelightfulFlow/utils"
-import { useExportFields } from "@/MagicJsonSchemaEditor/context/ExportFieldsContext/useExportFields"
+import { useExportFields } from "@/DelightfulJsonSchemaEditor/context/ExportFieldsContext/useExportFields"
 import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference"
 import { Button, Checkbox, Col, Flex, Input, Modal, Row, Tabs, Tooltip, message } from "antd"
 import { IconFileExport, IconPlus, IconSelect } from "@tabler/icons-react"

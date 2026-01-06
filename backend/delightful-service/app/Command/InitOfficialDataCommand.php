@@ -223,7 +223,7 @@ class InitOfficialDataCommand extends HyperfCommand
     {
         $this->info('');
         $this->info('═════════════════════════════════════════');
-        $this->info('  Magic Official Data Initialization');
+        $this->info('  Delightful Official Data Initialization');
         $this->info('═════════════════════════════════════════');
     }
 

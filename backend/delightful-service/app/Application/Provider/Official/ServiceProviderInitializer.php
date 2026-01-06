@@ -81,12 +81,12 @@ class ServiceProviderInitializer
         $now = now();
 
         return [
-            // Magic - LLM (Official)
+            // Delightful - LLM (Official)
             [
                 'id' => '759103339540475904',
-                'name' => 'Magic',
+                'name' => 'Delightful',
                 'provider_code' => 'Official',
-                'description' => '由 Magic 通过官方部署的 API 来实现 AI 模型的调用，可直接购买积分使用海量的大模型。',
+                'description' => '由 Delightful 通过官方部署的 API 来实现 AI 模型的调用，可直接购买积分使用海量的大模型。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/magic.png',
                 'provider_type' => 1, // Official
                 'category' => 'llm',
@@ -97,12 +97,12 @@ class ServiceProviderInitializer
                 'deleted_at' => null,
                 'translate' => json_encode([
                     'name' => [
-                        'en_US' => 'Magic',
-                        'zh_CN' => 'Magic',
+                        'en_US' => 'Delightful',
+                        'zh_CN' => 'Delightful',
                     ],
                     'description' => [
-                        'en_US' => 'The AI model invocation is achieved through the API officially deployed by Magic, and you can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => '由 Magic 通过官方部署的 API 来实现 AI 模型的调用，可直接购买积分使用海量的大模型。',
+                        'en_US' => 'The AI model invocation is achieved through the API officially deployed by Delightful, and you can directly purchase points to use a vast number of large models.',
+                        'zh_CN' => '由 Delightful 通过官方部署的 API 来实现 AI 模型的调用，可直接购买积分使用海量的大模型。',
                     ],
                 ]),
                 'remark' => '',
@@ -211,12 +211,12 @@ class ServiceProviderInitializer
                 ]),
                 'remark' => '',
             ],
-            // Magic - VLM (Official)
+            // Delightful - VLM (Official)
             [
                 'id' => '759144726407426049',
-                'name' => 'Magic',
+                'name' => 'Delightful',
                 'provider_code' => 'Official',
-                'description' => '由 Magic 通过官方部署的 API 来实现多种热门的文生图、图生图等模型的调用，可直接购买积分使用海量的大模型。',
+                'description' => '由 Delightful 通过官方部署的 API 来实现多种热门的文生图、图生图等模型的调用，可直接购买积分使用海量的大模型。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/magic.png',
                 'provider_type' => 1, // Official
                 'category' => 'vlm',
@@ -227,12 +227,12 @@ class ServiceProviderInitializer
                 'deleted_at' => null,
                 'translate' => json_encode([
                     'name' => [
-                        'en_US' => 'Magic',
-                        'zh_CN' => 'Magic',
+                        'en_US' => 'Delightful',
+                        'zh_CN' => 'Delightful',
                     ],
                     'description' => [
-                        'en_US' => 'Magic implements the invocation of various popular models such as text-to-image and image-to-image through the officially deployed API. You can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => '由 Magic 通过官方部署的 API 来实现多种热门的文生图、图生图等模型的调用，可直接购买积分使用海量的大模型。',
+                        'en_US' => 'Delightful implements the invocation of various popular models such as text-to-image and image-to-image through the officially deployed API. You can directly purchase points to use a vast number of large models.',
+                        'zh_CN' => '由 Delightful 通过官方部署的 API 来实现多种热门的文生图、图生图等模型的调用，可直接购买积分使用海量的大模型。',
                     ],
                 ]),
                 'remark' => '',

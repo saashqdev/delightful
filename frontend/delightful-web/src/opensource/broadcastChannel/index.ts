@@ -1,5 +1,5 @@
 import { SeqResponse } from "@/types/request"
-import { MagicBroadcastChannel } from "./broadcastChannel"
+import { DelightfulBroadcastChannel } from "./broadcastChannel"
 import { EVENTS } from "./eventFactory/events"
 import {
 	ConversationMessageSend,
@@ -11,7 +11,7 @@ import { FullMessage, ApplyMessageOptions } from "@/types/chat/message"
 import type { CMessage } from "@/types/chat"
 import { User } from "@/types/user"
 
-const magicBroadcastChannel = new MagicBroadcastChannel("magic-chat-broadcast-channel")
+const magicBroadcastChannel = new DelightfulBroadcastChannel("magic-chat-broadcast-channel")
 
 export const BroadcastChannelSender = {
 	addSendMessage: (renderMessage: FullMessage, message: ConversationMessageSend) => {

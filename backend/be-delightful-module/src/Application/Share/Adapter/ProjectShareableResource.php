@@ -5,14 +5,14 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Application\Share\Adapter;
+namespace Delightful\SuperDelightful\Application\Share\Adapter;
 
-use App\Application\Chat\Service\MagicUserContactAppService;
+use App\Application\Chat\Service\DelightfulUserContactAppService;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\SuperMagic\Application\Share\DTO\ShareableResourceDTO;
-use Delightful\SuperMagic\Application\Share\Factory\Facade\ResourceFactoryInterface;
-use Delightful\SuperMagic\Application\SuperAgent\Service\ProjectAppService;
-use Delightful\SuperMagic\ErrorCode\SuperAgentErrorCode;
+use Delightful\SuperDelightful\Application\Share\DTO\ShareableResourceDTO;
+use Delightful\SuperDelightful\Application\Share\Factory\Facade\ResourceFactoryInterface;
+use Delightful\SuperDelightful\Application\SuperAgent\Service\ProjectAppService;
+use Delightful\SuperDelightful\ErrorCode\SuperAgentErrorCode;
 use Exception;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
@@ -26,7 +26,7 @@ class ProjectShareableResource implements ResourceFactoryInterface
 
     public function __construct(
         private readonly ProjectAppService $projectAppService,
-        private readonly MagicUserContactAppService $magicUserContactAppService,
+        private readonly DelightfulUserContactAppService $magicUserContactAppService,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(self::class);

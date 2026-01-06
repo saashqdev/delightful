@@ -1,4 +1,4 @@
-import MagicLogo from "@/opensource/components/MagicLogo"
+import DelightfulLogo from "@/opensource/components/DelightfulLogo"
 import { createStyles, cx } from "antd-style"
 import type { HTMLAttributes } from "react"
 import { useRef } from "react"
@@ -184,7 +184,7 @@ function HomeBotAnimation({ ...props }: HTMLAttributes<HTMLDivElement>) {
 					{t("home.botAnimation.tooltip4")}
 				</span>
 				<div ref={ref}>
-					<MagicLogo className={styles.logo} />
+					<DelightfulLogo className={styles.logo} />
 				</div>
 			</div>
 		</div>

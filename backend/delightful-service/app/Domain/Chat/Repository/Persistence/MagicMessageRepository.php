@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Repository\Persistence;
 
-use App\Domain\Chat\Entity\MagicMessageEntity;
-use App\Domain\Chat\Entity\MagicMessageVersionEntity;
-use App\Domain\Chat\Repository\Facade\MagicMessageRepositoryInterface;
-use App\Domain\Chat\Repository\Persistence\Model\MagicMessageModel;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
+use App\Domain\Chat\Entity\DelightfulMessageVersionEntity;
+use App\Domain\Chat\Repository\Facade\DelightfulMessageRepositoryInterface;
+use App\Domain\Chat\Repository\Persistence\Model\DelightfulMessageModel;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Hyperf\Cache\Annotation\Cacheable;
 use Hyperf\Cache\Annotation\CacheEvict;
 use Hyperf\Codec\Json;
 use Hyperf\DbConnection\Db;
 
-class MagicMessageRepository implements MagicMessageRepositoryInterface
+class DelightfulMessageRepository implements DelightfulMessageRepositoryInterface
 {
     public function __construct(
-        protected MagicMessageModel $magicMessage
+        protected DelightfulMessageModel $magicMessage
     ) {
     }
 
@@ -43,13 +43,13 @@ class MagicMessageRepository implements MagicMessageRepositoryInterface
         return Db::select($query->toSql(), $query->getBindings());
     }
 
-    public function getMessageByMagicMessageId(string $magicMessageId): ?MagicMessageEntity
+    public function getMessageByDelightfulMessageId(string $magicMessageId): ?DelightfulMessageEntity
     {
-        $message = $this->getMessageDataByMagicMessageId($magicMessageId);
+        $message = $this->getMessageDataByDelightfulMessageId($magicMessageId);
         return MessageAssembler::getMessageEntity($message);
     }
 
-    public function deleteByMagicMessageIds(array $magicMessageIds)
+    public function deleteByDelightfulMessageIds(array $magicMessageIds)
     {
         $magicMessageIds = array_values(array_unique(array_filter($magicMessageIds)));
         if (empty($magicMessageIds)) {
@@ -67,10 +67,10 @@ class MagicMessageRepository implements MagicMessageRepositoryInterface
         );
     }
 
-    #[CacheEvict(prefix: 'getMessageByMagicMessageId', value: '_#{messageEntity.magicMessageId}')]
-    public function updateMessageContentAndVersionId(MagicMessageEntity $messageEntity, MagicMessageVersionEntity $magicMessageVersionEntity): void
+    #[CacheEvict(prefix: 'getMessageByDelightfulMessageId', value: '_#{messageEntity.magicMessageId}')]
+    public function updateMessageContentAndVersionId(DelightfulMessageEntity $messageEntity, DelightfulMessageVersionEntity $magicMessageVersionEntity): void
     {
-        $this->magicMessage::query()->where('magic_message_id', $messageEntity->getMagicMessageId())->update(
+        $this->magicMessage::query()->where('magic_message_id', $messageEntity->getDelightfulMessageId())->update(
             [
                 'current_version_id' => $magicMessageVersionEntity->getVersionId(),
                 // 编辑消息允许修改消息类型
@@ -106,7 +106,7 @@ class MagicMessageRepository implements MagicMessageRepositoryInterface
         return $query->limit(1)->exists();
     }
 
-    public function getMagicMessageIdByAppMessageId(string $appMessageId, string $messageType = ''): string
+    public function getDelightfulMessageIdByAppMessageId(string $appMessageId, string $messageType = ''): string
     {
         if (empty($appMessageId)) {
             return '';
@@ -132,10 +132,10 @@ class MagicMessageRepository implements MagicMessageRepositoryInterface
 
     /**
      * Get messages by magic message IDs.
-     * @param array $magicMessageIds Magic message ID数组
-     * @return MagicMessageEntity[] 消息实体数组
+     * @param array $magicMessageIds Delightful message ID数组
+     * @return DelightfulMessageEntity[] 消息实体数组
      */
-    public function getMessagesByMagicMessageIds(array $magicMessageIds): array
+    public function getMessagesByDelightfulMessageIds(array $magicMessageIds): array
     {
         if (empty($magicMessageIds)) {
             return [];
@@ -163,8 +163,8 @@ class MagicMessageRepository implements MagicMessageRepositoryInterface
         return $this->magicMessage::query()->insert($messagesData);
     }
 
-    #[Cacheable(prefix: 'getMessageByMagicMessageId', value: '_#{magicMessageId}', ttl: 10)]
-    private function getMessageDataByMagicMessageId(string $magicMessageId)
+    #[Cacheable(prefix: 'getMessageByDelightfulMessageId', value: '_#{magicMessageId}', ttl: 10)]
+    private function getMessageDataByDelightfulMessageId(string $magicMessageId)
     {
         $query = $this->magicMessage::query()->where('magic_message_id', $magicMessageId);
         $message = Db::select($query->toSql(), $query->getBindings())[0] ?? null;

@@ -1,17 +1,17 @@
 import { useTranslation } from "react-i18next"
 import type { RadioChangeEvent } from "antd"
 import { DatePicker, Flex, Form, Input, message, Radio, Select } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useEffect, useMemo, useState } from "react"
 import { IconCalendarClock, IconChevronLeft } from "@tabler/icons-react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import InputNumberComp from "../InputNumber"
 import { useMemoizedFn } from "ahooks"
 import type { Dayjs } from "dayjs"
 import type { UserTask } from "@/types/chat/task"
 import dayjs from "dayjs"
 import chatTopicStore from "@/opensource/stores/chatNew/topic"
-import { MagicSwitch } from "@/opensource/components/base/MagicSwitch"
+import { DelightfulSwitch } from "@/opensource/components/base/DelightfulSwitch"
 import weekday from "dayjs/plugin/weekday"
 import localeData from "dayjs/plugin/localeData"
 import TopicService from "@/opensource/services/chat/topic/class"
@@ -205,9 +205,9 @@ const CreateTask = observer(({ conversationId, currentTask, reBack }: CreateTask
 	return (
 		<Flex vertical gap={10}>
 			<Flex align="center" gap={4}>
-				<MagicButton type="text" className={styles.buttonBack} onClick={onCancel}>
-					<MagicIcon component={IconChevronLeft} size={26} />
-				</MagicButton>
+				<DelightfulButton type="text" className={styles.buttonBack} onClick={onCancel}>
+					<DelightfulIcon component={IconChevronLeft} size={26} />
+				</DelightfulButton>
 				<div className={styles.title}>{title}</div>
 			</Flex>
 			<Form layout="vertical" form={form} requiredMark={false}>
@@ -331,7 +331,7 @@ const CreateTask = observer(({ conversationId, currentTask, reBack }: CreateTask
 								<CustomRepeat type={selectedUnit} />
 								<Flex gap={4} align="center">
 									<Form.Item noStyle name="neverEnd">
-										<MagicSwitch
+										<DelightfulSwitch
 											onChange={(checked) => {
 												setShowDeadline(!checked)
 												form.setFieldValue(["value", "deadline"], null)
@@ -384,12 +384,12 @@ const CreateTask = observer(({ conversationId, currentTask, reBack }: CreateTask
 				</Form.Item>
 			</Form>
 			<Flex align="center" gap={10} justify="flex-end">
-				<MagicButton type="default" onClick={onCancel}>
+				<DelightfulButton type="default" onClick={onCancel}>
 					{t("common.cancel")}
-				</MagicButton>
-				<MagicButton type="primary" onClick={onConfirm}>
+				</DelightfulButton>
+				<DelightfulButton type="primary" onClick={onConfirm}>
 					{t("common.confirm")}
-				</MagicButton>
+				</DelightfulButton>
 			</Flex>
 		</Flex>
 	)

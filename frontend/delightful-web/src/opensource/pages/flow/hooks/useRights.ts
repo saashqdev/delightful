@@ -2,13 +2,13 @@
  * Agent权限相关
  */
 import { useMemo } from "react"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import type { Bot } from "@/types/bot"
 import { ScopeType } from "@/types/bot"
 import { hasAdminRight, hasEditRight } from "../components/AuthControlButton/types"
 
 type RightProps = {
-	flow: MagicFlow.Flow
+	flow: DelightfulFlow.Flow
 	agent: Bot.Detail
 }
 

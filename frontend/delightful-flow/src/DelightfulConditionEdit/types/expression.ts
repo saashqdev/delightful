@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Common } from "./common"
-import { EXPRESSION_ITEM_TYPE } from "@/MagicJsonSchemaEditor/types/Schema"
+import { EXPRESSION_ITEM_TYPE } from "@/DelightfulJsonSchemaEditor/types/Schema"
 import { RELATION_COMP_TYPE, RELATION_LOGICS_MAP } from "../constants"
-import { InputExpressionValue } from "@/MagicExpressionWidget/types"
+import { InputExpressionValue } from "@/DelightfulExpressionWidget/types"
 
 export namespace Expression {
 	// Concrete value type for a single expression item

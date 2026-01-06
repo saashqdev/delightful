@@ -3,9 +3,9 @@ import type { MenuProps } from "antd"
 import { Menu } from "antd"
 import { useStyles } from "./style"
 
-export type MagicMenuProps = MenuProps
+export type DelightfulMenuProps = MenuProps
 
-const MagicMenu = memo(function MagicMenu({ rootClassName, className, ...props }: MagicMenuProps) {
+const DelightfulMenu = memo(function DelightfulMenu({ rootClassName, className, ...props }: DelightfulMenuProps) {
 	const { styles, cx } = useStyles()
 
 	return (
@@ -17,4 +17,4 @@ const MagicMenu = memo(function MagicMenu({ rootClassName, className, ...props }
 	)
 })
 
-export default MagicMenu
+export default DelightfulMenu

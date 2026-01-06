@@ -9,7 +9,7 @@ namespace App\Domain\ModelGateway\Entity;
 
 use App\Domain\ModelGateway\Entity\ValueObject\AccessTokenType;
 use App\Domain\ModelGateway\Entity\ValueObject\Amount;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
@@ -67,22 +67,22 @@ class AccessTokenEntity extends AbstractEntity
     public function prepareForCreation(): void
     {
         if (empty($this->organizationCode)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'organization_code']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'organization_code']);
         }
         if (empty($this->type)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'type']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'type']);
         }
         if (empty($this->relationId)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'relation_id']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'relation_id']);
         }
         if (empty($this->name)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'name']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'name']);
         }
         if (empty($this->models)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'models']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'models']);
         }
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'creator']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'creator']);
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
@@ -112,7 +112,7 @@ class AccessTokenEntity extends AbstractEntity
         $accessTokenEntity->setRpm($this->rpm);
 
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'creator']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'creator']);
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
@@ -133,7 +133,7 @@ class AccessTokenEntity extends AbstractEntity
             return;
         }
         if (! in_array($model, $this->models)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::MODEL_NOT_SUPPORT);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::MODEL_NOT_SUPPORT);
         }
     }
 
@@ -151,13 +151,13 @@ class AccessTokenEntity extends AbstractEntity
             }
         }
 
-        ExceptionBuilder::throw(MagicApiErrorCode::TOKEN_IP_NOT_IN_WHITE_LIST);
+        ExceptionBuilder::throw(DelightfulApiErrorCode::TOKEN_IP_NOT_IN_WHITE_LIST);
     }
 
     public function checkExpiredTime(DateTime $now): void
     {
         if ($this->expireTime && $this->expireTime->getTimestamp() < $now->getTimestamp()) {
-            ExceptionBuilder::throw(MagicApiErrorCode::TOKEN_EXPIRED);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::TOKEN_EXPIRED);
         }
     }
 
@@ -167,13 +167,13 @@ class AccessTokenEntity extends AbstractEntity
             return;
         }
 
-        ExceptionBuilder::throw(MagicApiErrorCode::RATE_LIMIT);
+        ExceptionBuilder::throw(DelightfulApiErrorCode::RATE_LIMIT);
     }
 
     public function checkAmount(): void
     {
         if (! Amount::isEnough($this->totalAmount, $this->useAmount)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::TOKEN_QUOTA_NOT_ENOUGH);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::TOKEN_QUOTA_NOT_ENOUGH);
         }
     }
 

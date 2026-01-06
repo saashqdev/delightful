@@ -1,11 +1,11 @@
 import { IconChevronRight } from "@tabler/icons-react"
 import { Collapse, type CollapseProps } from "antd"
-import MagicIcon from "../MagicIcon"
+import DelightfulIcon from "../DelightfulIcon"
 import { useStyles } from "./style"
 
-export type MagicCollapseProps = CollapseProps
+export type DelightfulCollapseProps = CollapseProps
 
-function MagicCollapse({ className, ...props }: MagicCollapseProps) {
+function DelightfulCollapse({ className, ...props }: DelightfulCollapseProps) {
 	const { styles, cx } = useStyles()
 
 	return (
@@ -15,7 +15,7 @@ function MagicCollapse({ className, ...props }: MagicCollapseProps) {
 			bordered={false}
 			expandIconPosition="end"
 			expandIcon={({ isActive }) => (
-				<MagicIcon
+				<DelightfulIcon
 					component={IconChevronRight}
 					size={24}
 					style={{
@@ -29,4 +29,4 @@ function MagicCollapse({ className, ...props }: MagicCollapseProps) {
 	)
 }
 
-export default MagicCollapse
+export default DelightfulCollapse

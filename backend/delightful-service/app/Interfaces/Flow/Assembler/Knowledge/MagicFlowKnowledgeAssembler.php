@@ -13,7 +13,7 @@ use App\Interfaces\Kernel\Assembler\OperatorAssembler;
 use App\Interfaces\Kernel\DTO\PageDTO;
 use App\Interfaces\KnowledgeBase\DTO\KnowledgeBaseListDTO;
 
-class MagicFlowKnowledgeAssembler
+class DelightfulFlowKnowledgeAssembler
 {
     /**
      * @param array<KnowledgeBaseEntity> $list

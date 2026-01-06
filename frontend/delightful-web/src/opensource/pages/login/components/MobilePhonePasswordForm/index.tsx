@@ -1,8 +1,8 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconEye, IconEyeOff } from "@tabler/icons-react"
 import { Flex, Form, Input } from "antd"
 import { useTranslation } from "react-i18next"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import type { LoginPanelProps } from "@/types/login"
 import { Login } from "@/types/login"
 import { useDebounceFn, useMemoizedFn } from "ahooks"
@@ -74,7 +74,7 @@ export default function MobilePhonePasswordForm(props: PasswordFormProps) {
 						<Input.Password
 							placeholder={t("password.placeholder")}
 							iconRender={(visible) => (
-								<MagicIcon
+								<DelightfulIcon
 									component={visible ? IconEye : IconEyeOff}
 									size={16}
 									color={magicColorUsages.text[2]}
@@ -84,23 +84,23 @@ export default function MobilePhonePasswordForm(props: PasswordFormProps) {
 							autoComplete="current-password"
 						/>
 					</Form.Item>
-					<MagicButton
+					<DelightfulButton
 						type="primary"
 						block
 						className={styles.login}
 						onClick={handleSubmit}
 					>
 						{t("login")}
-					</MagicButton>
+					</DelightfulButton>
 				</Flex>
 				{/* <div className={styles.options}>
-					<MagicButton
+					<DelightfulButton
 						type="link"
 						onClick={() => switchLoginType(loginConfig.switchType)}
 					>
 						{t(loginConfig.translateKey.switch)}
-					</MagicButton>
-					<MagicButton type="link">{t("findPassword")}</MagicButton>
+					</DelightfulButton>
+					<DelightfulButton type="link">{t("findPassword")}</DelightfulButton>
 				</div> */}
 			</Form>
 		</Flex>

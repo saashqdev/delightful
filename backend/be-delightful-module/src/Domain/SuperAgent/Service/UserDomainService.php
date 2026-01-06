@@ -5,20 +5,20 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Domain\SuperAgent\Service;
+namespace Delightful\SuperDelightful\Domain\SuperAgent\Service;
 
-use App\Domain\Contact\Entity\MagicUserEntity;
-use App\Domain\Contact\Service\MagicUserDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\UserAuthorization;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\UserAuthorization;
 
 class UserDomainService
 {
     public function __construct(
-        protected MagicUserDomainService $magicUserDomainService,
+        protected DelightfulUserDomainService $magicUserDomainService,
     ) {
     }
 
-    public function getUserEntity(string $userId): ?MagicUserEntity
+    public function getUserEntity(string $userId): ?DelightfulUserEntity
     {
         return $this->magicUserDomainService->getUserById($userId);
     }

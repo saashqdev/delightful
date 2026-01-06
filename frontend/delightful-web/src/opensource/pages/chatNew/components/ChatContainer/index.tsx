@@ -1,7 +1,7 @@
 import { Flex } from "antd"
 import { Suspense, lazy } from "react"
 import { observer } from "mobx-react-lite"
-import MagicSplitter from "@/opensource/components/base/MagicSplitter"
+import DelightfulSplitter from "@/opensource/components/base/DelightfulSplitter"
 import ChatSubSider from "../ChatSubSider"
 import MainContent from "../MainContent"
 import ChatImagePreviewModal from "../ChatImagePreviewModal"
@@ -38,20 +38,20 @@ const ChatContainer = observer(function ChatContainer({
 
 	return (
 		<Flex flex={1} className={styles.chat} id={ChatDomId.ChatContainer}>
-			<MagicSplitter onResize={onSiderResize}>
-				<MagicSplitter.Panel
+			<DelightfulSplitter onResize={onSiderResize}>
+				<DelightfulSplitter.Panel
 					min={200}
 					defaultSize={interfaceStore.chatSiderDefaultWidth}
 					size={sizes[0]}
 					max={300}
 				>
 					<ChatSubSider />
-				</MagicSplitter.Panel>
-				<MagicSplitter.Panel size={sizes[1]}>
+				</DelightfulSplitter.Panel>
+				<DelightfulSplitter.Panel size={sizes[1]}>
 					<MainContent onInputResize={onInputResize} style={{ height: "100%" }} />
-				</MagicSplitter.Panel>
+				</DelightfulSplitter.Panel>
 				{MessageFilePreviewStore.open && (
-					<MagicSplitter.Panel
+					<DelightfulSplitter.Panel
 						max={totalWidth - sizes[0]! - mainMinWidth}
 						min="20%"
 						size={sizes[2]}
@@ -59,9 +59,9 @@ const ChatContainer = observer(function ChatContainer({
 						<Suspense fallback={null}>
 							<ChatFilePreviewPanel />
 						</Suspense>
-					</MagicSplitter.Panel>
+					</DelightfulSplitter.Panel>
 				)}
-			</MagicSplitter>
+			</DelightfulSplitter>
 			<ChatImagePreviewModal />
 			{conversationStore.currentConversation?.isGroupConversation && (
 				<Suspense fallback={null}>

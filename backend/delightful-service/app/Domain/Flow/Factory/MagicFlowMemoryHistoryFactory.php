@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Factory;
 
-use App\Domain\Flow\Entity\MagicFlowMemoryHistoryEntity;
+use App\Domain\Flow\Entity\DelightfulFlowMemoryHistoryEntity;
 use App\Domain\Flow\Entity\ValueObject\MemoryType;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowMemoryHistoryModel;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowMemoryHistoryModel;
 
-class MagicFlowMemoryHistoryFactory
+class DelightfulFlowMemoryHistoryFactory
 {
-    public static function modelToEntity(MagicFlowMemoryHistoryModel $model): MagicFlowMemoryHistoryEntity
+    public static function modelToEntity(DelightfulFlowMemoryHistoryModel $model): DelightfulFlowMemoryHistoryEntity
     {
-        $entity = new MagicFlowMemoryHistoryEntity();
+        $entity = new DelightfulFlowMemoryHistoryEntity();
         $entity->setId($model->id);
         $entity->setType(MemoryType::from($model->type));
         $entity->setConversationId($model->conversation_id);

@@ -7,29 +7,29 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\Facade\Admin;
 
-use App\Application\Flow\Service\MagicFlowToolSetAppService;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowToolSetQuery;
-use App\Interfaces\Flow\Assembler\ToolSet\MagicFlowToolSetAssembler;
-use App\Interfaces\Flow\DTO\ToolSet\MagicFlowToolSetDTO;
+use App\Application\Flow\Service\DelightfulFlowToolSetAppService;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowToolSetQuery;
+use App\Interfaces\Flow\Assembler\ToolSet\DelightfulFlowToolSetAssembler;
+use App\Interfaces\Flow\DTO\ToolSet\DelightfulFlowToolSetDTO;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]
-class MagicFlowToolSetApiFlow extends AbstractFlowAdminApi
+class DelightfulFlowToolSetApiFlow extends AbstractFlowAdminApi
 {
     #[Inject]
-    protected MagicFlowToolSetAppService $magicFlowToolSetAppService;
+    protected DelightfulFlowToolSetAppService $magicFlowToolSetAppService;
 
     public function save()
     {
         $authorization = $this->getAuthorization();
 
-        $DTO = new MagicFlowToolSetDTO($this->request->all());
+        $DTO = new DelightfulFlowToolSetDTO($this->request->all());
 
-        $DO = MagicFlowToolSetAssembler::createDO($DTO);
+        $DO = DelightfulFlowToolSetAssembler::createDO($DTO);
         $entity = $this->magicFlowToolSetAppService->save($authorization, $DO);
         $icons = $this->magicFlowToolSetAppService->getIcons($entity->getOrganizationCode(), [$entity->getIcon()]);
-        return MagicFlowToolSetAssembler::createDTO($entity, $icons);
+        return DelightfulFlowToolSetAssembler::createDTO($entity, $icons);
     }
 
     public function queries()
@@ -37,10 +37,10 @@ class MagicFlowToolSetApiFlow extends AbstractFlowAdminApi
         $authorization = $this->getAuthorization();
         $page = $this->createPage();
 
-        $query = new MagicFlowToolSetQuery($this->request->all());
+        $query = new DelightfulFlowToolSetQuery($this->request->all());
         $query->withToolsSimpleInfo = true;
         $result = $this->magicFlowToolSetAppService->queries($authorization, $query, $page);
-        return MagicFlowToolSetAssembler::createPageListDTO(
+        return DelightfulFlowToolSetAssembler::createPageListDTO(
             total: $result['total'],
             list: $result['list'],
             page: $page,
@@ -54,7 +54,7 @@ class MagicFlowToolSetApiFlow extends AbstractFlowAdminApi
         $authorization = $this->getAuthorization();
         $entity = $this->magicFlowToolSetAppService->getByCode($authorization, $code);
         $icons = $this->magicFlowToolSetAppService->getIcons($entity->getOrganizationCode(), [$entity->getIcon()]);
-        return MagicFlowToolSetAssembler::createDTO($entity, $icons);
+        return DelightfulFlowToolSetAssembler::createDTO($entity, $icons);
     }
 
     public function destroy(string $code)

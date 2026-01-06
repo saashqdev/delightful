@@ -1,7 +1,7 @@
 import { i18n } from "i18next"
 import type { PropsWithChildren } from "react"
 import React from "react"
-import { MagicFlowLocaleProvider } from "../LocaleProvider"
+import { DelightfulFlowLocaleProvider } from "../LocaleProvider"
 import ThemeProvider from "../ThemeProvider"
 
 function AppearanceProvider({
@@ -11,9 +11,9 @@ function AppearanceProvider({
 	i18nInstance: i18n
 }>) {
 	return (
-		<MagicFlowLocaleProvider i18nInstance={i18nInstance}>
+		<DelightfulFlowLocaleProvider i18nInstance={i18nInstance}>
 			<ThemeProvider>{children}</ThemeProvider>
-		</MagicFlowLocaleProvider>
+		</DelightfulFlowLocaleProvider>
 	)
 }
 

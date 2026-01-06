@@ -6,13 +6,13 @@ import AddOrUpdateAgent from "@/opensource/pages/explore/components/AddOrUpdateA
 import type { Bot } from "@/types/bot"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { useMemo } from "react"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 
 type EditAgentModalProps = {
 	agent: Bot.Detail
 	setAgent: React.Dispatch<React.SetStateAction<Bot.Detail>>
-	currentFlow?: MagicFlow.Flow
-	setCurrentFlow: React.Dispatch<React.SetStateAction<MagicFlow.Flow | undefined>>
+	currentFlow?: DelightfulFlow.Flow
+	setCurrentFlow: React.Dispatch<React.SetStateAction<DelightfulFlow.Flow | undefined>>
 }
 
 export default function useEditAgentModal({

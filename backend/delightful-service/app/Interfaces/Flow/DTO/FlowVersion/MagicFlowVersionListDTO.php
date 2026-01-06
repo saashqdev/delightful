@@ -9,7 +9,7 @@ namespace App\Interfaces\Flow\DTO\FlowVersion;
 
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 
-class MagicFlowVersionListDTO extends AbstractFlowDTO
+class DelightfulFlowVersionListDTO extends AbstractFlowDTO
 {
     public string $name = '';
 

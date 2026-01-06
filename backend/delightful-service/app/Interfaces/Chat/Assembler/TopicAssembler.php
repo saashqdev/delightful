@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Assembler;
 
-use App\Domain\Chat\Entity\MagicTopicEntity;
-use App\Domain\Chat\Entity\MagicTopicMessageEntity;
+use App\Domain\Chat\Entity\DelightfulTopicEntity;
+use App\Domain\Chat\Entity\DelightfulTopicMessageEntity;
 
 class TopicAssembler
 {
-    public static function getTopicEntity(array $topic): MagicTopicEntity
+    public static function getTopicEntity(array $topic): DelightfulTopicEntity
     {
-        $topicEntity = new MagicTopicEntity();
+        $topicEntity = new DelightfulTopicEntity();
         $topicEntity->setId($topic['id']);
         $topicEntity->setTopicId($topic['topic_id']);
         $topicEntity->setConversationId($topic['conversation_id']);
@@ -27,7 +27,7 @@ class TopicAssembler
     }
 
     /**
-     * @return array<MagicTopicEntity>
+     * @return array<DelightfulTopicEntity>
      */
     public static function getTopicEntities(array $topics): array
     {
@@ -38,13 +38,13 @@ class TopicAssembler
         return $topicEntities;
     }
 
-    public static function getTopicMessageEntity(array $topicMessage): MagicTopicMessageEntity
+    public static function getTopicMessageEntity(array $topicMessage): DelightfulTopicMessageEntity
     {
-        return new MagicTopicMessageEntity($topicMessage);
+        return new DelightfulTopicMessageEntity($topicMessage);
     }
 
     /**
-     * @return array<MagicTopicMessageEntity>
+     * @return array<DelightfulTopicMessageEntity>
      */
     public static function getTopicMessageEntities(array $topicMessages): array
     {

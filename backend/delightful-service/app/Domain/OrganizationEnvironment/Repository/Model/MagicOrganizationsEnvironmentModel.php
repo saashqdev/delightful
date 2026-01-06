@@ -10,7 +10,7 @@ namespace App\Domain\OrganizationEnvironment\Repository\Model;
 use Hyperf\DbConnection\Model\Model;
 use Hyperf\Snowflake\Concern\Snowflake;
 
-class MagicOrganizationsEnvironmentModel extends Model
+class DelightfulOrganizationsEnvironmentModel extends Model
 {
     use Snowflake;
 

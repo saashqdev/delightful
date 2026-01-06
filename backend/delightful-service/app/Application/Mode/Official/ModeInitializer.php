@@ -276,7 +276,7 @@ class ModeInitializer
                     'zh_CN' => 'PPT 模式',
                 ]),
                 'placeholder_i18n' => json_encode([
-                    'en_US' => 'You can enter the theme and specific requirements of the PPT, or upload files, Super Magic will help you create a beautiful PPT. Enter to send; Shift + Enter to line break',
+                    'en_US' => 'You can enter the theme and specific requirements of the PPT, or upload files, Super Delightful will help you create a beautiful PPT. Enter to send; Shift + Enter to line break',
                     'zh_CN' => '您可输入 PPT 的主题和具体要求，或上传文件，超级麦吉将为您制作精美的 PPT。 Enter 发送 ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'ppt',
@@ -303,7 +303,7 @@ class ModeInitializer
                     'zh_CN' => '数据分析',
                 ]),
                 'placeholder_i18n' => json_encode([
-                    'en_US' => 'You can select data sources or upload Excel files, and then enter the requirements for analysis. Super Magic will perform comprehensive data analysis for you. Enter to send; Shift + Enter to line break',
+                    'en_US' => 'You can select data sources or upload Excel files, and then enter the requirements for analysis. Super Delightful will perform comprehensive data analysis for you. Enter to send; Shift + Enter to line break',
                     'zh_CN' => '您可选择数据源或上传 Excel 文件后，输入需要分析的需求，超级麦吉将为您进行全面的数据分析。 Enter 发送 ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'data_analysis',
@@ -357,7 +357,7 @@ class ModeInitializer
                     'zh_CN' => '录音总结',
                 ]),
                 'placeholder_i18n' => json_encode([
-                    'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Super Magic will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
+                    'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Super Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
                     'zh_CN' => '您可输入会议的文字内容，或上传会议录音文件，超级麦吉将为您进行完整的会议总结。 Enter 发送 ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'summary',
@@ -384,11 +384,11 @@ class ModeInitializer
                     'zh_CN' => '通用模式',
                 ]),
                 'placeholder_i18n' => json_encode([
-                    'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Super Magic will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
+                    'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Super Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
                     'zh_CN' => '请输入您的需求，或上传文件，超级麦吉将为您解决问题。 Enter 发送 ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'general',
-                'icon' => 'IconSuperMagic',
+                'icon' => 'IconSuperDelightful',
                 'color' => '#315CEC',
                 'sort' => 10000,
                 'description' => '',

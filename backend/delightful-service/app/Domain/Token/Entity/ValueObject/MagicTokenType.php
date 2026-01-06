@@ -10,7 +10,7 @@ namespace App\Domain\Token\Entity\ValueObject;
 /**
  * token类型:0:账号,1:用户,2:组织,3:应用,4:流程.
  */
-enum MagicTokenType: int
+enum DelightfulTokenType: int
 {
     // 用户(组织下的一个用户),type_relation_value为用户id
     case User = 0;
@@ -33,7 +33,7 @@ enum MagicTokenType: int
     /**
      * 通过枚举值名称的字符串获取枚举值.
      */
-    public static function getCaseFromName(string $typeName): ?MagicTokenType
+    public static function getCaseFromName(string $typeName): ?DelightfulTokenType
     {
         foreach (self::cases() as $userType) {
             if ($userType->name === $typeName) {

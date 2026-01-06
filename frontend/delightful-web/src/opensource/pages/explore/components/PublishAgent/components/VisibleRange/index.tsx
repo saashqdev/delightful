@@ -3,13 +3,13 @@ import type { RadioChangeEvent } from "antd"
 import { Flex, Form, Radio } from "antd"
 import { memo, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconPlus, IconSitemap, IconX } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
 import { openModal } from "@/utils/react"
 import type { OrganizationSelectItem } from "@/opensource/components/business/MemberDepartmentSelectPanel/types"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { StructureItemType } from "@/types/organization"
 import { AddMemberModal } from "./AddMemberModal"
 import { useStyles } from "./style"
@@ -62,14 +62,14 @@ const VisibleRange = memo(({ selected, setSelected }: VisibleRangeProps) => {
 			case StructureItemType.User:
 				return (
 					<>
-						<MagicAvatar src={item.avatar_url} size={18} />
+						<DelightfulAvatar src={item.avatar_url} size={18} />
 						<div>{item.nickname || ""}</div>
 					</>
 				)
 			case StructureItemType.Department:
 				return (
 					<>
-						<MagicIcon
+						<DelightfulIcon
 							color="currentColor"
 							component={IconSitemap}
 							size={18}
@@ -99,14 +99,14 @@ const VisibleRange = memo(({ selected, setSelected }: VisibleRangeProps) => {
 				</Form.Item>
 				{scope === VisibleRangeType.SpecifiedMemberOrDepartment && (
 					<div className={styles.member}>
-						<MagicButton
+						<DelightfulButton
 							icon={<IconPlus size={20} />}
 							type="primary"
 							ghost
 							onClick={handleAddMember}
 						>
 							{t("explore.form.addMemberOrDepartment")}
-						</MagicButton>
+						</DelightfulButton>
 						<Flex gap={8} className={styles.memberList}>
 							{selected.map((item) => (
 								<Flex
@@ -116,7 +116,7 @@ const VisibleRange = memo(({ selected, setSelected }: VisibleRangeProps) => {
 									align="center"
 								>
 									{getUserItem(item)}
-									<MagicIcon
+									<DelightfulIcon
 										component={IconX}
 										size={16}
 										onClick={() => handleRemove(item.id)}

@@ -148,10 +148,10 @@ class PageRegistry:
                         # Try to load userscript even if core module fails? Or return directly?
                         # return # Temporarily choose to return to avoid injection in incomplete state
 
-                    # Initialize MagicMarker (if exists)
-                    # Check if MagicMarker really exists to avoid unnecessary evaluate calls
-                    if core_success and "marker" in core_modules: # Assume marker module provides MagicMarker
-                        await page.evaluate("if(typeof window.MagicMarker !== 'undefined' && window.MagicMarker.mark) window.MagicMarker.mark()")
+                    # Initialize DelightfulMarker (if exists)
+                    # Check if DelightfulMarker really exists to avoid unnecessary evaluate calls
+                    if core_success and "marker" in core_modules: # Assume marker module provides DelightfulMarker
+                        await page.evaluate("if(typeof window.DelightfulMarker !== 'undefined' && window.DelightfulMarker.mark) window.DelightfulMarker.mark()")
 
                     logger.info(f"Page {page_id} URL: {page_url} core JS module load completed.")
 

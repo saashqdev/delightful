@@ -16,7 +16,7 @@ import { User } from "@/types/user"
 import UserDispatchService from "@/opensource/services/user/UserDispatchService"
 import OrganizationDispatchService from "@/opensource/services/chat/dots/OrganizationDispatchService"
 import { userStore } from "@/opensource/models/user"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { BroadcastChannelSender } from ".."
 import { toJS } from "mobx"
 import { t } from "i18next"
@@ -177,7 +177,7 @@ eventFactory.on(EVENTS.DO_LOGIN, (data) => {
 // 	console.log("DO_SWITCH_USER", data)
 // })
 
-let switchOrganizationModal: ReturnType<typeof MagicModal.confirm> | null = null
+let switchOrganizationModal: ReturnType<typeof DelightfulModal.confirm> | null = null
 
 // 切换组织
 eventFactory.on(
@@ -192,7 +192,7 @@ eventFactory.on(
 				currentOrganizationCode !== data.magicOrganizationCode)
 		) {
 			switchOrganizationModal?.destroy()
-			switchOrganizationModal = MagicModal.confirm({
+			switchOrganizationModal = DelightfulModal.confirm({
 				title: t("broadcastChannel.organization.title", { ns: "common" }),
 				content: t("broadcastChannel.organization.content", { ns: "common" }),
 				okText: t("broadcastChannel.organization.confirm", { ns: "common" }),
@@ -249,7 +249,7 @@ eventFactory.on(EVENTS.DO_UPDATE_ORGANIZATION, (data) => {
 	console.log("DO_UPDATE_ORGANIZATION", data)
 })
 
-let switchAccountModal: ReturnType<typeof MagicModal.confirm> | null = null
+let switchAccountModal: ReturnType<typeof DelightfulModal.confirm> | null = null
 
 // 切换账号
 eventFactory.on(
@@ -259,7 +259,7 @@ eventFactory.on(
 
 		if (currentUserInfo && currentUserInfo.magic_id !== data.magicId) {
 			switchAccountModal?.destroy()
-			switchAccountModal = MagicModal.confirm({
+			switchAccountModal = DelightfulModal.confirm({
 				title: t("broadcastChannel.account.title", { ns: "common" }),
 				content: t("broadcastChannel.account.content", { ns: "common" }),
 				okText: t("broadcastChannel.account.confirm", { ns: "common" }),

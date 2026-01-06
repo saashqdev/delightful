@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Interfaces\OrganizationEnvironment\Facade\Admin;
 
-use App\Application\Kernel\Enum\MagicOperationEnum;
-use App\Application\Kernel\Enum\MagicResourceEnum;
+use App\Application\Kernel\Enum\DelightfulOperationEnum;
+use App\Application\Kernel\Enum\DelightfulResourceEnum;
 use App\Application\OrganizationEnvironment\Service\OrganizationAppService;
 use App\Infrastructure\Core\AbstractApi;
 use App\Infrastructure\Core\ValueObject\Page;
@@ -25,7 +25,7 @@ class OrganizationApi extends AbstractApi
     #[Inject]
     protected OrganizationAppService $organizationAppService;
 
-    #[CheckPermission(MagicResourceEnum::PLATFORM_ORGANIZATION_LIST, MagicOperationEnum::QUERY)]
+    #[CheckPermission(DelightfulResourceEnum::PLATFORM_ORGANIZATION_LIST, DelightfulOperationEnum::QUERY)]
     public function queries(): array
     {
         $requestDTO = OrganizationListRequestDTO::fromRequest($this->request);
@@ -46,7 +46,7 @@ class OrganizationApi extends AbstractApi
                 foreach ($creatorSummaries as $userId => $summary) {
                     $creator = new OrganizationCreatorResponseDTO();
                     $creator->setUserId($summary['user_id'] ?? '');
-                    $creator->setMagicId($summary['magic_id'] ?? null);
+                    $creator->setDelightfulId($summary['magic_id'] ?? null);
                     $creator->setName($summary['name'] ?? '');
                     $creator->setAvatar($summary['avatar'] ?? '');
                     $creator->setEmail($summary['email'] ?? null);

@@ -1,6 +1,6 @@
-# MagicMarpit 魔法幻灯片组件
+# DelightfulMarpit 魔法幻灯片组件
 
-MagicMarpit 是一个基于 Marpit 和 Reveal.js 的幻灯片渲染组件，用于将 Markdown 格式的内容转换为交互式幻灯片展示。该组件支持丰富的幻灯片功能，如切换动画、主题设置等。
+DelightfulMarpit 是一个基于 Marpit 和 Reveal.js 的幻灯片渲染组件，用于将 Markdown 格式的内容转换为交互式幻灯片展示。该组件支持丰富的幻灯片功能，如切换动画、主题设置等。
 
 ## 属性
 
@@ -11,7 +11,7 @@ MagicMarpit 是一个基于 Marpit 和 Reveal.js 的幻灯片渲染组件，用�
 ## 基本用法
 
 ```tsx
-import MagicMarpit from "@/components/base/MagicMarpit"
+import DelightfulMarpit from "@/components/base/DelightfulMarpit"
 
 // 基本用法
 const slideContent = `
@@ -34,12 +34,12 @@ theme: default
 # 感谢观看
 `
 
-;<MagicMarpit content={slideContent} />
+;<DelightfulMarpit content={slideContent} />
 ```
 
 ## Markdown 语法
 
-MagicMarpit 使用 Marpit 的语法来定义幻灯片：
+DelightfulMarpit 使用 Marpit 的语法来定义幻灯片：
 
 1. 使用 `---` 分隔不同的幻灯片
 2. 在第一个 `---` 前可以设置全局主题和样式
@@ -93,4 +93,4 @@ function hello() {
 -   会议和报告内容的呈现
 -   任何需要将 Markdown 内容转换为幻灯片的场景
 
-MagicMarpit 组件为应用提供了一种简单而强大的方式，将文本内容转换为专业的幻灯片展示，特别适合需要频繁更新内容或基于数据生成演示文稿的场景。
+DelightfulMarpit 组件为应用提供了一种简单而强大的方式，将文本内容转换为专业的幻灯片展示，特别适合需要频繁更新内容或基于数据生成演示文稿的场景。

@@ -27,7 +27,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Throwable;
 
 #[Command]
-class InitMagicDataCommand extends HyperfCommand
+class InitDelightfulDataCommand extends HyperfCommand
 {
     public function __construct(
         protected ContainerInterface $container,

@@ -5,10 +5,10 @@ import { cx } from "antd-style"
 import { useTranslation } from "react-i18next"
 import { forwardRef, useState, memo } from "react"
 import type { CompositionEvent, ChangeEvent } from "react"
-import MagicIcon from "../MagicIcon"
+import DelightfulIcon from "../DelightfulIcon"
 import { useSearchStyles } from "./style"
 
-const MagicSearch = memo(
+const DelightfulSearch = memo(
 	forwardRef<InputRef, InputProps>(({ className, onChange, value, ...props }, ref) => {
 		const { styles } = useSearchStyles()
 		const { t } = useTranslation("interface")
@@ -35,11 +35,11 @@ const MagicSearch = memo(
 				}}
 				className={cx(styles.search, className)}
 				placeholder={t("search")}
-				prefix={<MagicIcon component={IconSearch} size={20} color="currentColor" />}
+				prefix={<DelightfulIcon component={IconSearch} size={20} color="currentColor" />}
 				{...props}
 			/>
 		)
 	}),
 )
 
-export default MagicSearch
+export default DelightfulSearch

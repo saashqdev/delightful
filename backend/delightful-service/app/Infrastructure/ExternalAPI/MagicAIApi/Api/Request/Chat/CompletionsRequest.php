@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Infrastructure\ExternalAPI\MagicAIApi\Api\Request\Chat;
+namespace App\Infrastructure\ExternalAPI\DelightfulAIApi\Api\Request\Chat;
 
-use App\Infrastructure\ExternalAPI\MagicAIApi\Kernel\AbstractRequest;
+use App\Infrastructure\ExternalAPI\DelightfulAIApi\Kernel\AbstractRequest;
 
 class CompletionsRequest extends AbstractRequest
 {

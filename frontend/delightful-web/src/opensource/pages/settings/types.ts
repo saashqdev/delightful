@@ -6,6 +6,6 @@ export const enum SettingSection {
 	HOTKEYS_SETTING = "hotkeySetting",
 	FALLBACK = "fallback",
 	UPDATE_LOG = "updateLog",
-	ABOUT_DELIGHTFUL = "aboutMagic",
+	ABOUT_DELIGHTFUL = "aboutDelightful",
 	DEVELOP_TOOLS = "DEVELOP_TOOLS",
 }

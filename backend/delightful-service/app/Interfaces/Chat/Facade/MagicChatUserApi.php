@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Facade;
 
-use App\Application\Chat\Service\MagicUserContactAppService;
+use App\Application\Chat\Service\DelightfulUserContactAppService;
 use App\Domain\Contact\DTO\FriendQueryDTO;
 use App\Domain\Contact\DTO\UserUpdateDTO;
 use App\Domain\Contact\Entity\ValueObject\AddFriendType;
@@ -20,10 +20,10 @@ use JetBrains\PhpStorm\ArrayShape;
 use Throwable;
 
 #[ApiResponse('low_code')]
-class MagicChatUserApi extends AbstractApi
+class DelightfulChatUserApi extends AbstractApi
 {
     public function __construct(
-        private readonly MagicUserContactAppService $userAppService,
+        private readonly DelightfulUserContactAppService $userAppService,
     ) {
     }
 

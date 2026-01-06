@@ -3,8 +3,8 @@ import { IconCircleCheckFilled, IconInfoCircle } from "@tabler/icons-react"
 import { useBoolean, useMemoizedFn } from "ahooks"
 
 import { useTranslation } from "react-i18next"
-import MagicModal from "@/opensource/components/base/MagicModal"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { colorScales } from "@/opensource/providers/ThemeProvider/colors"
 import type { Bot } from "@/types/bot"
 import { useNavigate } from "@/opensource/hooks/useNavigate"
@@ -12,7 +12,7 @@ import { RoutePath } from "@/const/routes"
 import { useState, useEffect } from "react"
 import { Status } from "@/opensource/pages/flow/agent/constants"
 import { resolveToString } from "@dtyq/es6-template-strings"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { openModal } from "@/utils/react"
 import DeleteDangerModal from "@/opensource/components/business/DeleteDangerModal"
 import { BotApi } from "@/apis"
@@ -70,13 +70,13 @@ export default function AgentInfoButton({ agent, isAdminRight }: AgentInfoButton
 
 	return (
 		<>
-			<MagicButton
+			<DelightfulButton
 				tip={t("agent.agentInfo")}
 				className={styles.iconButton}
 				onClick={setTrue}
 				icon={<IconInfoCircle size={16} color="#000000" />}
 			/>
-			<MagicModal
+			<DelightfulModal
 				title={
 					<Flex gap={4} align="center">
 						<Button
@@ -99,9 +99,9 @@ export default function AgentInfoButton({ agent, isAdminRight }: AgentInfoButton
 						<Flex justify="space-between">
 							<div className={styles.text2}>{t("agent.creator")}</div>
 							<Flex gap={5}>
-								<MagicAvatar src={agent.magicUserEntity?.avatar_url} size={22}>
+								<DelightfulAvatar src={agent.magicUserEntity?.avatar_url} size={22}>
 									{agent.magicUserEntity?.nickname}
-								</MagicAvatar>
+								</DelightfulAvatar>
 								<div>{agent.magicUserEntity?.nickname}</div>
 							</Flex>
 						</Flex>
@@ -164,19 +164,19 @@ export default function AgentInfoButton({ agent, isAdminRight }: AgentInfoButton
 					</Flex>
 					{isAdminRight && (
 						<Flex align="center" gap={8} justify="center">
-							{/* <MagicButton className={cx(styles.button, styles.transfer)}>
+							{/* <DelightfulButton className={cx(styles.button, styles.transfer)}>
 							{t("agent.transferCreator")}
-						</MagicButton> */}
-							<MagicButton
+						</DelightfulButton> */}
+							<DelightfulButton
 								className={cx(styles.button, styles.delete)}
 								onClick={handleDelete}
 							>
 								{t("agent.deleteAgent")}
-							</MagicButton>
+							</DelightfulButton>
 						</Flex>
 					)}
 				</Flex>
-			</MagicModal>
+			</DelightfulModal>
 		</>
 	)
 }

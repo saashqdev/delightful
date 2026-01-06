@@ -7,18 +7,18 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\ExecuteManager\NodeRunner\Chat\V0;
 
-use App\Application\Agent\Service\MagicBotThirdPlatformChatAppService;
-use App\Application\Chat\Service\MagicChatGroupAppService;
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Agent\Service\DelightfulBotThirdPlatformChatAppService;
+use App\Application\Chat\Service\DelightfulChatGroupAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunner;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Chat\V0\CreateGroupNodeParamsConfig;
 use App\Domain\Flow\Entity\ValueObject\NodeType;
-use App\Domain\Group\Entity\MagicGroupEntity;
+use App\Domain\Group\Entity\DelightfulGroupEntity;
 use App\Domain\Group\Entity\ValueObject\GroupStatusEnum;
 use App\Domain\Group\Entity\ValueObject\GroupTypeEnum;
 use App\ErrorCode\FlowErrorCode;
@@ -26,7 +26,7 @@ use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\FlowNodeDefine;
 use App\Infrastructure\Core\Dag\VertexResult;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 
 #[FlowNodeDefine(
     type: NodeType::CreateGroup->value,
@@ -62,11 +62,11 @@ class CreateGroupNodeRunner extends NodeRunner
         $vertexResult->addDebugLog('group_owner', $groupOwnerId);
 
         // 获取 owner 的用户信息
-        $groupOwnerInfo = di(MagicUserDomainService::class)->getUserById($groupOwnerId);
+        $groupOwnerInfo = di(DelightfulUserDomainService::class)->getUserById($groupOwnerId);
         if (! $groupOwnerInfo) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'common.not_found', ['label' => 'group_owner']);
         }
-        $vertexResult->addDebugLog('group_owner_magic_id', $groupOwnerInfo->getMagicId());
+        $vertexResult->addDebugLog('group_owner_magic_id', $groupOwnerInfo->getDelightfulId());
 
         // 群成员，全是用户 ID
         $groupMembers = $paramsConfig->getGroupMembers()?->getValue()->getResult($executionData->getExpressionFieldData());
@@ -111,13 +111,13 @@ class CreateGroupNodeRunner extends NodeRunner
         }
 
         // 以 owner 的身份去创建
-        $ownerAuthorization = new MagicUserAuthorization();
+        $ownerAuthorization = new DelightfulUserAuthorization();
         $ownerAuthorization->setId($groupOwnerInfo->getUserId());
         $ownerAuthorization->setOrganizationCode($groupOwnerInfo->getOrganizationCode());
-        $ownerAuthorization->setMagicId($groupOwnerInfo->getMagicId());
+        $ownerAuthorization->setDelightfulId($groupOwnerInfo->getDelightfulId());
         $ownerAuthorization->setUserType($groupOwnerInfo->getUserType());
 
-        $magicGroupDTO = new MagicGroupEntity();
+        $magicGroupDTO = new DelightfulGroupEntity();
         $magicGroupDTO->setGroupAvatar('');
         $magicGroupDTO->setGroupName($groupName);
         $magicGroupDTO->setGroupType($groupType);
@@ -131,13 +131,13 @@ class CreateGroupNodeRunner extends NodeRunner
             // 助手发送群聊消息
             $assistantMessage = new TextMessage(['content' => $assistantOpeningSpeech]);
             $appMessageId = IdGenerator::getUniqueId32();
-            $receiveSeqDTO = new MagicSeqEntity();
+            $receiveSeqDTO = new DelightfulSeqEntity();
             $receiveSeqDTO->setContent($assistantMessage);
             $receiveSeqDTO->setSeqType($assistantMessage->getMessageTypeEnum());
 
             $receiverId = $magicGroupDTO->getId();
             $senderUserId = $executionData->getAgentUserId();
-            di(MagicChatMessageAppService::class)->agentSendMessage(
+            di(DelightfulChatMessageAppService::class)->agentSendMessage(
                 aiSeqDTO: $receiveSeqDTO,
                 senderUserId: $senderUserId,
                 receiverId: $receiverId,
@@ -154,12 +154,12 @@ class CreateGroupNodeRunner extends NodeRunner
         $vertexResult->setResult($magicGroup);
     }
 
-    private function createChatGroup(string $agentKey, array $groupMemberIds, MagicUserAuthorization $userAuthorization, MagicGroupEntity $magicGroupDTO): void
+    private function createChatGroup(string $agentKey, array $groupMemberIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $magicGroupDTO): void
     {
         if (! empty($agentKey)) {
-            di(MagicBotThirdPlatformChatAppService::class)->createChatGroup($agentKey, $groupMemberIds, $userAuthorization, $magicGroupDTO);
+            di(DelightfulBotThirdPlatformChatAppService::class)->createChatGroup($agentKey, $groupMemberIds, $userAuthorization, $magicGroupDTO);
         } else {
-            di(MagicChatGroupAppService::class)->createChatGroup($groupMemberIds, [], $userAuthorization, $magicGroupDTO);
+            di(DelightfulChatGroupAppService::class)->createChatGroup($groupMemberIds, [], $userAuthorization, $magicGroupDTO);
         }
     }
 }

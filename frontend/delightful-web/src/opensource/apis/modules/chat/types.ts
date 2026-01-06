@@ -19,7 +19,7 @@ export interface DefaultSeqRecord<M> {
 /**
  * 获取会话名称 - 响应
  */
-export type GetMagicTopicNameResponse = {
+export type GetDelightfulTopicNameResponse = {
 	conversation_id: string
 	id: string
 	name: string

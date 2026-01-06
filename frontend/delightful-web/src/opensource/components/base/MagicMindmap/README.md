@@ -1,6 +1,6 @@
-# MagicMindmap 魔法思维导图组件
+# DelightfulMindmap 魔法思维导图组件
 
-MagicMindmap 是一个用于渲染和交互式操作思维导图的组件。该组件基于 MindMap 库实现，支持思维导图的展示、缩放和自适应布局等功能，为用户提供直观的思维导图可视化体验。
+DelightfulMindmap 是一个用于渲染和交互式操作思维导图的组件。该组件基于 MindMap 库实现，支持思维导图的展示、缩放和自适应布局等功能，为用户提供直观的思维导图可视化体验。
 
 ## 属性
 
@@ -14,7 +14,7 @@ MagicMindmap 是一个用于渲染和交互式操作思维导图的组件。该�
 ## 基本用法
 
 ```tsx
-import MagicMindmap from '@/components/base/MagicMindmap';
+import DelightfulMindmap from '@/components/base/DelightfulMindmap';
 
 // 基本用法
 const mindmapData = {
@@ -39,13 +39,13 @@ const mindmapData = {
   ]
 };
 
-<MagicMindmap data={mindmapData} />
+<DelightfulMindmap data={mindmapData} />
 
 // 只读模式
-<MagicMindmap data={mindmapData} readonly={true} />
+<DelightfulMindmap data={mindmapData} readonly={true} />
 
 // 自定义样式
-<MagicMindmap
+<DelightfulMindmap
   data={mindmapData}
   className="custom-mindmap"
   style={{ height: '500px', border: '1px solid #eee' }}
@@ -83,4 +83,4 @@ interface MindMapNode {
 -   学习内容的结构化展示
 -   任何需要展示层级关系和关联的场景
 
-MagicMindmap 组件为应用提供了一种直观而强大的方式来展示和操作思维导图，帮助用户更好地理解和组织信息结构。
+DelightfulMindmap 组件为应用提供了一种直观而强大的方式来展示和操作思维导图，帮助用户更好地理解和组织信息结构。

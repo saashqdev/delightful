@@ -1,4 +1,4 @@
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { getUserName } from "@/utils/modules/chat"
 import { Flex } from "antd"
 import { cx } from "antd-style"
@@ -9,9 +9,9 @@ import userInfoStore from "@/opensource/stores/userInfo"
 import { computed } from "mobx"
 import { observer } from "mobx-react-lite"
 import { useStyles } from "./styles"
-import type { MagicMemberAvatarProps } from "./types"
+import type { DelightfulMemberAvatarProps } from "./types"
 
-const MagicMemberAvatar = observer(
+const DelightfulMemberAvatar = observer(
 	({
 		uid,
 		showName = "none",
@@ -21,7 +21,7 @@ const MagicMemberAvatar = observer(
 		showPopover = true,
 		children,
 		...rest
-	}: MagicMemberAvatarProps) => {
+	}: DelightfulMemberAvatarProps) => {
 		const userInfo = useMemo(() => {
 			return computed(() => {
 				if (uid) {
@@ -51,14 +51,14 @@ const MagicMemberAvatar = observer(
 						className={className}
 					>
 						{showAvatar ? (
-							<MagicAvatar
+							<DelightfulAvatar
 								shape="square"
 								src={userInfo?.avatar_url}
 								className={cx(styles.avatar, classNames?.avatar)}
 								{...rest}
 							>
 								{name}
-							</MagicAvatar>
+							</DelightfulAvatar>
 						) : null}
 						{showName !== "none" ? (
 							<AutoTooltipText
@@ -75,6 +75,6 @@ const MagicMemberAvatar = observer(
 	},
 )
 
-const memoizedMagicMemberAvatar = memo(MagicMemberAvatar)
+const memoizedDelightfulMemberAvatar = memo(DelightfulMemberAvatar)
 
-export default memoizedMagicMemberAvatar
+export default memoizedDelightfulMemberAvatar

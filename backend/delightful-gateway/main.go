@@ -69,8 +69,8 @@ var (
 type JWTClaims struct {
 	jwt.RegisteredClaims
 	ContainerID           string `json:"container_id"`
-	MagicUserID           string `json:"magic_user_id,omitempty"`
-	MagicOrganizationCode string `json:"magic_organization_code,omitempty"`
+	DelightfulUserID           string `json:"magic_user_id,omitempty"`
+	DelightfulOrganizationCode string `json:"magic_organization_code,omitempty"`
 	// Add token version for revocation
 	TokenVersion int64 `json:"token_version"`
 	// Add creation time
@@ -509,8 +509,8 @@ func authHandler(w http.ResponseWriter, r *http.Request) {
 			NotBefore: jwt.NewNumericDate(time.Now()),                          // Effective immediately
 		},
 		ContainerID:           userID, // Keep field name unchanged, but store user ID
-		MagicUserID:           magicUserID,
-		MagicOrganizationCode: magicOrganizationCode,
+		DelightfulUserID:           magicUserID,
+		DelightfulOrganizationCode: magicOrganizationCode,
 		TokenVersion:          currentVersion,
 		CreatedAt:             time.Now().Unix(),
 		KeyID:                 jwtSecretID,
@@ -539,8 +539,8 @@ func authHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]string{
 		"token":    tokenString,
-		"header":   "Magic-Authorization",
-		"example":  fmt.Sprintf("Magic-Authorization: Bearer %s", tokenString),
+		"header":   "Delightful-Authorization",
+		"example":  fmt.Sprintf("Delightful-Authorization: Bearer %s", tokenString),
 		"note":     "Please ensure to add Bearer prefix when using the token, otherwise the gateway will add it automatically",
 		"security": "Token contains replay protection and key version control",
 	})
@@ -612,10 +612,10 @@ func validateToken(tokenString string) (*JWTClaims, bool) {
 // Middleware: validate token
 func withAuth(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// Get token (prioritize Magic-Authorization header, then standard Authorization header)
-		authHeader := r.Header.Get("Magic-Authorization")
+		// Get token (prioritize Delightful-Authorization header, then standard Authorization header)
+		authHeader := r.Header.Get("Delightful-Authorization")
 		if authHeader == "" {
-			// If Magic-Authorization doesn't exist, try standard Authorization header
+			// If Delightful-Authorization doesn't exist, try standard Authorization header
 			authHeader = r.Header.Get("Authorization")
 			if authHeader == "" {
 				http.Error(w, "Authorization required", http.StatusUnauthorized)
@@ -631,12 +631,12 @@ func withAuth(next http.HandlerFunc) http.HandlerFunc {
 				}
 			}
 		} else {
-			// Check if Magic-Authorization header contains Bearer prefix
+			// Check if Delightful-Authorization header contains Bearer prefix
 			if !strings.HasPrefix(strings.ToLower(authHeader), "bearer ") {
 				// If no Bearer prefix, add it automatically
 				authHeader = "Bearer " + authHeader
 				if debugMode {
-					//logger.Printf("Automatically added Bearer prefix to Magic-Authorization header: %s", authHeader)
+					//logger.Printf("Automatically added Bearer prefix to Delightful-Authorization header: %s", authHeader)
 				}
 			}
 		}
@@ -650,8 +650,8 @@ func withAuth(next http.HandlerFunc) http.HandlerFunc {
 
 		// Store token information in request context
 		r.Header.Set("X-User-Id", claims.ContainerID)
-		r.Header.Set("magic-user-id", claims.MagicUserID)
-		r.Header.Set("magic-organization-code", claims.MagicOrganizationCode)
+		r.Header.Set("magic-user-id", claims.DelightfulUserID)
+		r.Header.Set("magic-organization-code", claims.DelightfulOrganizationCode)
 
 		// Store JWT claims in request context for subsequent handlers
 		ctx := context.WithValue(r.Context(), "jwt_claims", claims)
@@ -977,10 +977,10 @@ func proxyHandler(w http.ResponseWriter, r *http.Request) {
 		if claims, ok := r.Context().Value("jwt_claims").(*JWTClaims); ok {
 			// Only use JWT values when original request headers don't have values
 			if magicUserID == "" {
-				magicUserID = claims.MagicUserID
+				magicUserID = claims.DelightfulUserID
 			}
 			if magicOrganizationCode == "" {
-				magicOrganizationCode = claims.MagicOrganizationCode
+				magicOrganizationCode = claims.DelightfulOrganizationCode
 			}
 		}
 
@@ -1659,8 +1659,8 @@ func logFullRequest(r *http.Request) {
 	for key, values := range r.Header {
 		for _, value := range values {
 			if debugMode {
-				// Filter out Magic-Authorization and X-Gateway-Api-Key
-				if key != "Magic-Authorization" && key != "X-Gateway-Api-Key" {
+				// Filter out Delightful-Authorization and X-Gateway-Api-Key
+				if key != "Delightful-Authorization" && key != "X-Gateway-Api-Key" {
 					logger.Printf("%s: %s", key, value)
 				}
 			}

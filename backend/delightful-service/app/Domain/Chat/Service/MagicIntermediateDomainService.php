@@ -8,12 +8,12 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Service;
 
 use App\Domain\Chat\DTO\Agent\SenderExtraDTO;
-use App\Domain\Chat\DTO\MagicMessageDTO;
+use App\Domain\Chat\DTO\DelightfulMessageDTO;
 use App\Domain\Chat\Entity\Items\SeqExtra;
-use App\Domain\Chat\Entity\MagicConversationEntity;
-use App\Domain\Chat\Entity\MagicMessageEntity;
-use App\Domain\Chat\Entity\MagicSeqEntity;
-use App\Domain\Chat\Entity\MagicTopicEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
+use App\Domain\Chat\Entity\DelightfulTopicEntity;
 use App\Domain\Chat\Event\Agent\UserCallAgentEvent;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\ErrorCode\ChatErrorCode;
@@ -23,16 +23,16 @@ use Throwable;
 /**
  * 临时消息相关.
  */
-class MagicIntermediateDomainService extends AbstractDomainService
+class DelightfulIntermediateDomainService extends AbstractDomainService
 {
     // 超级麦吉的交互指令临时消息处理
     /**
      * @throws Throwable
      */
-    public function handleSuperMagicInstructionMessage(
-        MagicMessageDTO $messageDTO,
+    public function handleSuperDelightfulInstructionMessage(
+        DelightfulMessageDTO $messageDTO,
         DataIsolation $dataIsolation,
-        MagicConversationEntity $userConversationEntity,
+        DelightfulConversationEntity $userConversationEntity,
     ): void {
         try {
             // 1. 获取发送者（当前用户）信息
@@ -45,7 +45,7 @@ class MagicIntermediateDomainService extends AbstractDomainService
             if (! $senderUserEntity) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
             }
-            $senderAccountEntity = $this->magicAccountRepository->getAccountInfoByMagicId($senderUserEntity->getMagicId());
+            $senderAccountEntity = $this->magicAccountRepository->getAccountInfoByDelightfulId($senderUserEntity->getDelightfulId());
 
             if (! $senderAccountEntity) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
@@ -57,7 +57,7 @@ class MagicIntermediateDomainService extends AbstractDomainService
             if (! $agentUserEntity) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
             }
-            $agentAccountEntity = $this->magicAccountRepository->getAccountInfoByMagicId($agentUserEntity->getMagicId());
+            $agentAccountEntity = $this->magicAccountRepository->getAccountInfoByDelightfulId($agentUserEntity->getDelightfulId());
 
             if (! $agentAccountEntity) {
                 ExceptionBuilder::throw(ChatErrorCode::AI_NOT_FOUND);
@@ -75,10 +75,10 @@ class MagicIntermediateDomainService extends AbstractDomainService
             $agentConversationId = $agentConversationEntity->getId();
 
             // 4. 创建序列实体 (临时消息不需要持久化序列)
-            $seqEntity = new MagicSeqEntity();
+            $seqEntity = new DelightfulSeqEntity();
             $seqEntity->setAppMessageId($messageDTO->getAppMessageId());
             $seqEntity->setConversationId($agentConversationId);
-            $seqEntity->setObjectId($agentAccountEntity->getMagicId());
+            $seqEntity->setObjectId($agentAccountEntity->getDelightfulId());
             $seqEntity->setContent($messageDTO->getContent());
 
             // 设置额外信息 (包括 topicId)
@@ -96,7 +96,7 @@ class MagicIntermediateDomainService extends AbstractDomainService
             $seqEntity->setExtra($seqExtra);
 
             // 5. 创建消息实体 (转换DTO为Entity，但不持久化)
-            $messageEntity = new MagicMessageEntity();
+            $messageEntity = new DelightfulMessageEntity();
             $messageEntity->setSenderId($messageDTO->getSenderId());
             $messageEntity->setSenderType($messageDTO->getSenderType());
             $messageEntity->setSenderOrganizationCode($messageDTO->getSenderOrganizationCode());
@@ -111,7 +111,7 @@ class MagicIntermediateDomainService extends AbstractDomainService
             // 6. 创建发送者额外信息
             $senderExtraDTO = new SenderExtraDTO();
             // 临时消息可能不需要环境ID，使用默认值
-            $senderExtraDTO->setMagicEnvId(null);
+            $senderExtraDTO->setDelightfulEnvId(null);
 
             // 7. 触发用户调用超级麦吉事件
             event_dispatch(new UserCallAgentEvent(
@@ -125,7 +125,7 @@ class MagicIntermediateDomainService extends AbstractDomainService
             ));
         } catch (Throwable $e) {
             // 记录错误日志，但不阻断处理流程
-            $this->logger?->error('HandleSuperMagicInstructionMessage failed', [
+            $this->logger?->error('HandleSuperDelightfulInstructionMessage failed', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
                 'messageDTO' => $messageDTO->toArray(),
@@ -140,7 +140,7 @@ class MagicIntermediateDomainService extends AbstractDomainService
     private function validateTopicOwnership(string $topicId, string $conversationId, DataIsolation $dataIsolation): void
     {
         // 创建话题DTO
-        $topicDTO = new MagicTopicEntity();
+        $topicDTO = new DelightfulTopicEntity();
         $topicDTO->setTopicId($topicId);
         $topicDTO->setConversationId($conversationId);
 

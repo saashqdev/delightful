@@ -1,5 +1,5 @@
-import type { MagicIconProps } from "@/opensource/components/base/MagicIcon"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import type { DelightfulIconProps } from "@/opensource/components/base/DelightfulIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import IconWandColorful from "@/enhance/tabler/icons-react/icons/IconWandColorful"
 import { IconWand } from "@tabler/icons-react"
 import { Flex } from "antd"
@@ -40,7 +40,7 @@ const useStyles = createStyles(
 interface ActionWrapperProps extends HTMLAttributes<HTMLDivElement> {
 	disabled?: boolean
 	active?: boolean
-	iconComponent?: MagicIconProps["component"]
+	iconComponent?: DelightfulIconProps["component"]
 }
 
 const ActionWrapper = ({
@@ -60,7 +60,7 @@ const ActionWrapper = ({
 			gap={4}
 			{...rest}
 		>
-			<MagicIcon
+			<DelightfulIcon
 				component={iconComponent ?? (active ? IconWandColorful : IconWand)}
 				color="currentColor"
 				size={18}

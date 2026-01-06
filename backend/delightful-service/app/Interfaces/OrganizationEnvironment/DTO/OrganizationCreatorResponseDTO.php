@@ -28,7 +28,7 @@ class OrganizationCreatorResponseDTO extends AbstractDTO
         $this->userId = $userId ?? '';
     }
 
-    public function setMagicId(?string $magicId): void
+    public function setDelightfulId(?string $magicId): void
     {
         $this->magicId = $magicId;
     }

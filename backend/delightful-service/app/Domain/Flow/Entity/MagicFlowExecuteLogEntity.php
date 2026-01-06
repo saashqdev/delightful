@@ -13,7 +13,7 @@ use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
-class MagicFlowExecuteLogEntity extends AbstractEntity
+class DelightfulFlowExecuteLogEntity extends AbstractEntity
 {
     protected ?int $id = null;
 

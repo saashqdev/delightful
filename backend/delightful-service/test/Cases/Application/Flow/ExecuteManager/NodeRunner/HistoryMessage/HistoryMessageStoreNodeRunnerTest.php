@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\ExecuteManager\NodeRunner\HistoryMessage;
 
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
-use App\Application\Flow\ExecuteManager\MagicFlowExecutor;
+use App\Application\Flow\ExecuteManager\DelightfulFlowExecutor;
 use App\Domain\Flow\Entity\ValueObject\Node;
 use App\Domain\Flow\Entity\ValueObject\NodeType;
 use App\Infrastructure\Core\Dag\VertexResult;
@@ -48,7 +48,7 @@ JSON, true));
         $this->assertTrue(true);
         $node->setCallback(function (VertexResult $vertexResult, ExecutionData $executionData, array $fontResults) {});
 
-        $runner = MagicFlowExecutor::getNodeRunner($node);
+        $runner = DelightfulFlowExecutor::getNodeRunner($node);
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [

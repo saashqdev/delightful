@@ -1,5 +1,5 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { splitNumber } from "@/utils/number"
 
 import { IconThumbUp, IconThumbUpFilled } from "@tabler/icons-react"
@@ -33,14 +33,14 @@ function PraiseButton({ hasPraise = false, count }: PraiseButtonProps) {
 	const { styles } = useStyles()
 
 	return (
-		<MagicButton
+		<DelightfulButton
 			className={cx({ [styles.hasPraise]: hasPraise })}
 			justify="flex-start"
 			icon={
 				hasPraise ? (
-					<MagicIcon component={IconThumbUpFilled} size={20} />
+					<DelightfulIcon component={IconThumbUpFilled} size={20} />
 				) : (
-					<MagicIcon component={IconThumbUp} size={20} />
+					<DelightfulIcon component={IconThumbUp} size={20} />
 				)
 			}
 			size="large"
@@ -51,7 +51,7 @@ function PraiseButton({ hasPraise = false, count }: PraiseButtonProps) {
 				{hasPraise ? t("chat.floatButton.Praised") : t("chat.floatButton.Praise")}
 				{count ? <span className={styles.count}>{splitNumber(count)}</span> : null}
 			</Flex>
-		</MagicButton>
+		</DelightfulButton>
 	)
 }
 

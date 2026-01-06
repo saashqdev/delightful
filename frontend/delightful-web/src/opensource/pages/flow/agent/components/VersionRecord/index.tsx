@@ -3,12 +3,12 @@ import type { TableProps } from "antd"
 import { Flex, Avatar } from "antd"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import EmptyIcon from "@/assets/logos/empty.svg"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import type { Bot } from "@/types/bot"
 import { useEffect, useState, useMemo } from "react"
 import { createStyles } from "antd-style"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
-import MagicTable from "@/opensource/components/base/MagicTable"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
+import DelightfulTable from "@/opensource/components/base/DelightfulTable"
 import { BotApi } from "@/apis"
 import { ApprovalStatusMap, Approvaltatus, EntrepriseStatusMap } from "../../constants"
 
@@ -103,7 +103,7 @@ function PublishAgent({ agentId, open, close }: VersionProps) {
 	}, [t])
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			width={1000}
 			title={t("agent.versionManagement")}
 			open={open}
@@ -112,7 +112,7 @@ function PublishAgent({ agentId, open, close }: VersionProps) {
 			closable
 			centered
 		>
-			<MagicSpin section spinning={isLoading}>
+			<DelightfulSpin section spinning={isLoading}>
 				<div
 					className={cx(styles.wrapper, {
 						[styles.isEmptyList]: versionList.length === 0,
@@ -124,11 +124,11 @@ function PublishAgent({ agentId, open, close }: VersionProps) {
 						</Flex>
 					)}
 					{versionList.length !== 0 && (
-						<MagicTable<Bot.BotVersion> columns={columns} dataSource={versionList} />
+						<DelightfulTable<Bot.BotVersion> columns={columns} dataSource={versionList} />
 					)}
 				</div>
-			</MagicSpin>
-		</MagicModal>
+			</DelightfulSpin>
+		</DelightfulModal>
 	)
 }
 

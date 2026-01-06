@@ -152,7 +152,7 @@ export const mockSetup = () => {
 		Mention: { configure: mockMentionConfigure },
 	}))
 
-	// 模拟 MagicEmoji 扩展
+	// 模拟 DelightfulEmoji 扩展
 	vi.mock("../extensions/magicEmoji", () => ({
 		default: {
 			configure: mockEmojiConfigure,
@@ -287,12 +287,12 @@ vi.mock("@tiptap/starter-kit", () => {
 	}
 })
 
-// Mock MagicLoading and MagicSpin components
-vi.mock("@/opensource/components/base/MagicLoading", () => ({
+// Mock DelightfulLoading and DelightfulSpin components
+vi.mock("@/opensource/components/base/DelightfulLoading", () => ({
 	default: vi.fn().mockImplementation(({ children }) => children),
 }))
 
-vi.mock("@/opensource/components/base/MagicSpin", () => ({
+vi.mock("@/opensource/components/base/DelightfulSpin", () => ({
 	default: vi.fn().mockImplementation(({ children }) => children),
 }))
 

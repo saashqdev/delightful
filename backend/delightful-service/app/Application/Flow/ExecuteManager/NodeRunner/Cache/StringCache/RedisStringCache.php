@@ -15,7 +15,7 @@ use Psr\SimpleCache\CacheInterface;
  */
 class RedisStringCache implements StringCacheInterface
 {
-    private string $keyPrefix = 'MagicFlowStringCache';
+    private string $keyPrefix = 'DelightfulFlowStringCache';
 
     public function __construct(private readonly CacheInterface $cache)
     {

@@ -251,7 +251,7 @@ class Validation
      *
      * @return Validation Returns the Validation instance for fluent querying
      */
-    public function setMagicConstValidator(callable $callable): self
+    public function setDelightfulConstValidator(callable $callable): self
     {
         $this->validation[ValidationConstants::Delightful_CONSTANT] = $callable;
         return $this;
@@ -260,7 +260,7 @@ class Validation
     /** Get validation callable for magic constants.
      *
      */
-    public function getMagicConstValidator(): ?callable
+    public function getDelightfulConstValidator(): ?callable
     {
         return $this->validation[ValidationConstants::Delightful_CONSTANT] ?? null;
     }
@@ -269,7 +269,7 @@ class Validation
      *
      * @return Validation Returns the Validation instance for fluent querying
      */
-    public function unsetMagicConstValidator(): self
+    public function unsetDelightfulConstValidator(): self
     {
         $this->validation[ValidationConstants::Delightful_CONSTANT] = null;
         return $this;

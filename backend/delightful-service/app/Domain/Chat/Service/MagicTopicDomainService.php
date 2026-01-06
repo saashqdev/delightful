@@ -11,10 +11,10 @@ use App\Domain\Chat\DTO\Message\ControlMessage\TopicCreateMessage;
 use App\Domain\Chat\DTO\Message\ControlMessage\TopicDeleteMessage;
 use App\Domain\Chat\DTO\Message\ControlMessage\TopicUpdateMessage;
 use App\Domain\Chat\Entity\Items\ConversationExtra;
-use App\Domain\Chat\Entity\MagicConversationEntity;
-use App\Domain\Chat\Entity\MagicMessageEntity;
-use App\Domain\Chat\Entity\MagicSeqEntity;
-use App\Domain\Chat\Entity\MagicTopicEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
+use App\Domain\Chat\Entity\DelightfulTopicEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
@@ -33,9 +33,9 @@ use function Hyperf\Translation\__;
 /**
  * 处理消息流(seq)相关.
  */
-class MagicTopicDomainService extends AbstractDomainService
+class DelightfulTopicDomainService extends AbstractDomainService
 {
-    public function getMagicApiAccessToken(string $modelName)
+    public function getDelightfulApiAccessToken(string $modelName)
     {
         $magicFlowAIModelEntity = $this->magicFlowAIModelRepository->getByName(FlowDataIsolation::create(), $modelName);
         if ($magicFlowAIModelEntity === null) {
@@ -49,7 +49,7 @@ class MagicTopicDomainService extends AbstractDomainService
      * 注意此时的消息结构(各种id等)都是发起方的值.
      * @throws Throwable
      */
-    public function dispatchMQTopicOperation(MagicSeqEntity $senderSeqEntity): ?MagicSeqEntity
+    public function dispatchMQTopicOperation(DelightfulSeqEntity $senderSeqEntity): ?DelightfulSeqEntity
     {
         Db::beginTransaction();
         try {
@@ -68,7 +68,7 @@ class MagicTopicDomainService extends AbstractDomainService
                     if ($receiveConversationEntity === null) {
                         return null;
                     }
-                    $receiveTopicDTO = new MagicTopicEntity();
+                    $receiveTopicDTO = new DelightfulTopicEntity();
                     $receiveTopicDTO->setTopicId($topicId);
                     $receiveTopicDTO->setConversationId($receiveConversationEntity->getId());
                     // 查询收件方的话题是否存在
@@ -116,7 +116,7 @@ class MagicTopicDomainService extends AbstractDomainService
                 // 获取收件方的 magic_id
                 $receiveUserId = $receiveConversationEntity->getUserId();
                 $receiveUserEntity = $this->magicUserRepository->getUserById($receiveUserId);
-                if (! $receiveUserEntity?->getMagicId()) {
+                if (! $receiveUserEntity?->getDelightfulId()) {
                     return null;
                 }
                 $senderSeqEntity = SeqAssembler::generateTopicChangeSeqEntity($senderSeqEntity, $receiveTopicEntity, $receiveUserEntity);
@@ -139,7 +139,7 @@ class MagicTopicDomainService extends AbstractDomainService
      * @return string 会话id
      * @throws Throwable
      */
-    public function clientOperateTopic(MagicMessageEntity $messageDTO, DataIsolation $dataIsolation): string
+    public function clientOperateTopic(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): string
     {
         $messageTypeEnum = $messageDTO->getMessageType();
         if (! in_array(
@@ -171,7 +171,7 @@ class MagicTopicDomainService extends AbstractDomainService
             case ControlMessageType::DeleteTopic:
                 /** @var TopicDeleteMessage $messageStruct */
                 $messageStruct = $messageDTO->getContent();
-                $topicDTO = new MagicTopicEntity();
+                $topicDTO = new DelightfulTopicEntity();
                 $topicDTO->setTopicId($messageStruct->getId());
                 $topicDTO->setConversationId($messageStruct->getConversationId());
                 $this->checkTopicBelong($topicDTO, $dataIsolation);
@@ -202,7 +202,7 @@ class MagicTopicDomainService extends AbstractDomainService
     /**
      * 根据收件方或者发件方的会话 id + 话题 id，为收件方创建一个新的话题.
      */
-    public function createReceiveTopic(string $topicId, string $senderConversationId = '', string $receiveConversationId = ''): ?MagicTopicEntity
+    public function createReceiveTopic(string $topicId, string $senderConversationId = '', string $receiveConversationId = ''): ?DelightfulTopicEntity
     {
         // 为消息接收方创建话题
         if ($senderConversationId) {
@@ -214,7 +214,7 @@ class MagicTopicDomainService extends AbstractDomainService
         if (! isset($receiveConversationEntity)) {
             return null;
         }
-        $receiveTopicDTO = new MagicTopicEntity();
+        $receiveTopicDTO = new DelightfulTopicEntity();
         $receiveTopicDTO->setTopicId($topicId);
         $receiveTopicDTO->setName('');
         $receiveTopicDTO->setConversationId($receiveConversationEntity->getId());
@@ -225,9 +225,9 @@ class MagicTopicDomainService extends AbstractDomainService
     }
 
     // 更新话题
-    public function updateTopic(TopicUpdateMessage $messageStruct, DataIsolation $dataIsolation): MagicTopicEntity
+    public function updateTopic(TopicUpdateMessage $messageStruct, DataIsolation $dataIsolation): DelightfulTopicEntity
     {
-        $topicDTO = new MagicTopicEntity();
+        $topicDTO = new DelightfulTopicEntity();
         $topicDTO->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $topicDTO->setTopicId($messageStruct->getId());
         $topicDTO->setConversationId($messageStruct->getConversationId());
@@ -242,12 +242,12 @@ class MagicTopicDomainService extends AbstractDomainService
      * @param int $getType todo 0:默认话题 1:最近的话题 2:智能确定话题，暂时只支持默认话题 3 新增话题
      * @throws Throwable
      */
-    public function agentSendMessageGetTopicId(MagicConversationEntity $senderConversationEntity, int $getType): string
+    public function agentSendMessageGetTopicId(DelightfulConversationEntity $senderConversationEntity, int $getType): string
     {
         $receiverConversationEntity = $this->magicConversationRepository->getReceiveConversationBySenderConversationId($senderConversationEntity->getId());
         // 为收件方创建会话，但是不再触发 ConversationCreatedEvent 事件，避免事件循环
         if (($receiverConversationEntity === null) && in_array($senderConversationEntity->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {
-            $conversationDTO = new MagicConversationEntity();
+            $conversationDTO = new DelightfulConversationEntity();
             $conversationDTO->setUserId($senderConversationEntity->getReceiveId());
             $conversationDTO->setReceiveId($senderConversationEntity->getUserId());
             # 创建会话窗口
@@ -279,7 +279,7 @@ class MagicTopicDomainService extends AbstractDomainService
         return $defaultTopicId;
     }
 
-    private function checkTopicBelong(MagicTopicEntity $topicDTO, DataIsolation $dataIsolation): void
+    private function checkTopicBelong(DelightfulTopicEntity $topicDTO, DataIsolation $dataIsolation): void
     {
         // 判断话题id所属的会话id是否是当前用户的
         $topicEntity = $this->magicChatTopicRepository->getTopicEntity($topicDTO);
@@ -292,7 +292,7 @@ class MagicTopicDomainService extends AbstractDomainService
     /**
      * 检查默认话题是否存在.
      */
-    private function checkDefaultTopicExist(MagicConversationEntity $conversationEntity): ?string
+    private function checkDefaultTopicExist(DelightfulConversationEntity $conversationEntity): ?string
     {
         // 判断有没有默认话题的标签
         $topicId = $conversationEntity->getExtra()?->getDefaultTopicId();
@@ -307,9 +307,9 @@ class MagicTopicDomainService extends AbstractDomainService
     /**
      * 创建并更新默认话题.
      */
-    private function createAndUpdateDefaultTopic(MagicConversationEntity $conversationEntity, string $defaultTopicId): void
+    private function createAndUpdateDefaultTopic(DelightfulConversationEntity $conversationEntity, string $defaultTopicId): void
     {
-        $topicDTO = new MagicTopicEntity();
+        $topicDTO = new DelightfulTopicEntity();
         $topicDTO->setConversationId($conversationEntity->getId());
         $topicDTO->setTopicId($defaultTopicId);
         $topicDTO->setOrganizationCode($conversationEntity->getUserOrganizationCode());

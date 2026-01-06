@@ -7,16 +7,16 @@ declare(strict_types=1);
 
 namespace App\Application\Admin\Agent\Service\Extra\Strategy;
 
-use App\Application\Chat\Service\MagicAgentAppService;
-use App\Domain\Agent\Entity\MagicAgentEntity;
+use App\Application\Chat\Service\DelightfulAgentAppService;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
 use App\Interfaces\Admin\DTO\Extra\SettingExtraDTOInterface;
 use App\Interfaces\Admin\DTO\Extra\ThirdPartyPublishExtraDTO;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use InvalidArgumentException;
 
 class ThirdPartyPublishExtraDetailAppenderStrategy implements ExtraDetailAppenderStrategyInterface
 {
-    public function appendExtraDetail(SettingExtraDTOInterface $extraDTO, MagicUserAuthorization $userAuthorization): SettingExtraDTOInterface
+    public function appendExtraDetail(SettingExtraDTOInterface $extraDTO, DelightfulUserAuthorization $userAuthorization): SettingExtraDTOInterface
     {
         if (! $extraDTO instanceof ThirdPartyPublishExtraDTO) {
             throw new InvalidArgumentException('Expected ThirdPartyPublishExtraDTO');
@@ -27,11 +27,11 @@ class ThirdPartyPublishExtraDetailAppenderStrategy implements ExtraDetailAppende
         return $extraDTO;
     }
 
-    public function appendSelectedAgentsInfo(ThirdPartyPublishExtraDTO $extraDTO, ?MagicUserAuthorization $userAuthorization): self
+    public function appendSelectedAgentsInfo(ThirdPartyPublishExtraDTO $extraDTO, ?DelightfulUserAuthorization $userAuthorization): self
     {
         $agentRootIds = array_column($extraDTO->getSelectedAgents(), 'agent_id');
-        $agentEntities = $this->getMagicAgentAppService()->getAgentsForAdmin($agentRootIds, $userAuthorization);
-        /** @var array<int, MagicAgentEntity> $agentEntities */
+        $agentEntities = $this->getDelightfulAgentAppService()->getAgentsForAdmin($agentRootIds, $userAuthorization);
+        /** @var array<int, DelightfulAgentEntity> $agentEntities */
         $agentEntities = array_column($agentEntities, null, 'id');
         foreach ($extraDTO->getSelectedAgents() as $selectedAgent) {
             $agentEntity = $agentEntities[(int) $selectedAgent->getAgentId()] ?? null;
@@ -41,8 +41,8 @@ class ThirdPartyPublishExtraDetailAppenderStrategy implements ExtraDetailAppende
         return $this;
     }
 
-    private function getMagicAgentAppService(): MagicAgentAppService
+    private function getDelightfulAgentAppService(): DelightfulAgentAppService
     {
-        return di(MagicAgentAppService::class);
+        return di(DelightfulAgentAppService::class);
     }
 }

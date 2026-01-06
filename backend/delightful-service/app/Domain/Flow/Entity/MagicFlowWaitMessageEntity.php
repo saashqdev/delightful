@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
-class MagicFlowWaitMessageEntity extends AbstractEntity
+class DelightfulFlowWaitMessageEntity extends AbstractEntity
 {
     protected ?int $id = null;
 

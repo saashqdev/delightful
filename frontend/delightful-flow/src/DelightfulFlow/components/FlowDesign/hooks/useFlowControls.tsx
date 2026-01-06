@@ -12,7 +12,7 @@ import {
 import { useNodes } from "@/DelightfulFlow/context/NodesContext/useNodes"
 import { useResize } from "@/DelightfulFlow/context/ResizeContext/useResize"
 import { EdgeModelTypes, defaultEdgeConfig } from "@/DelightfulFlow/edges"
-import { MagicFlow } from "@/DelightfulFlow/types/flow"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import { handleRenderProps, isRegisteredStartNode } from "@/DelightfulFlow/utils"
 import { generatePasteNodesAndEdges, getLayoutElements } from "@/DelightfulFlow/utils/reactflowUtils"
 import {
@@ -87,14 +87,14 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 	// 布局之前的数据
 	const [lastLayoutData, setLastLayoutData, resetLastLayoutData] = useResetState({
 		undoable: false,
-		nodes: [] as MagicFlow.Node[],
+		nodes: [] as DelightfulFlow.Node[],
 		edges: [] as Edge[],
 	})
 
 	const { interaction, onInteractionChange, openInteractionSelect, setOpenInteractionSelect } =
 		useInteraction()
 
-	const updateConfigPosition = useMemoizedFn((layoutNodes: MagicFlow.Node[]) => {
+	const updateConfigPosition = useMemoizedFn((layoutNodes: DelightfulFlow.Node[]) => {
 		layoutNodes.forEach((n) => {
 			const curNodeConfig = nodeConfig[n.node_id]
 			_.set(curNodeConfig, ["meta", "position"], n.position)
@@ -649,8 +649,8 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 			try {
 				const json = JSON.parse(text)
 				if (json?.nodes && json?.edges) {
-					const cacheConfig = {} as Record<string, MagicFlow.Node>
-					const cacheNodes = [] as MagicFlow.Node[]
+					const cacheConfig = {} as Record<string, DelightfulFlow.Node>
+					const cacheNodes = [] as DelightfulFlow.Node[]
 					const { pasteEdges, pasteNodes } = generatePasteNodesAndEdges(
 						nodeConfig,
 						json.nodes,

@@ -7,21 +7,21 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Event;
 
-use App\Domain\Chat\Entity\MagicConversationEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
 
 class ConversationCreatedEvent
 {
     /**
-     * @param MagicConversationEntity $conversation 创建的会话实体
+     * @param DelightfulConversationEntity $conversation 创建的会话实体
      */
-    public function __construct(private readonly MagicConversationEntity $conversation)
+    public function __construct(private readonly DelightfulConversationEntity $conversation)
     {
     }
 
     /**
      * 获取创建的会话实体.
      */
-    public function getConversation(): MagicConversationEntity
+    public function getConversation(): DelightfulConversationEntity
     {
         return $this->conversation;
     }

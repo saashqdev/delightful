@@ -43,12 +43,12 @@ body:
       label: Component
       description: Which component/module does this security issue affect?
       options:
-        - Super Magic
-        - Magic IM (Chat System)
-        - Magic Flow (Workflow System)
-        - Magic Service (Backend API)
-        - Magic Web (Frontend)
-        - Magic Gateway
+        - Super Delightful
+        - Delightful IM (Chat System)
+        - Delightful Flow (Workflow System)
+        - Delightful Service (Backend API)
+        - Delightful Web (Frontend)
+        - Delightful Gateway
         - Authentication system
         - Authorization/Permissions
         - Data storage/handling
@@ -139,7 +139,7 @@ body:
       label: Environment
       description: Please provide environment details where this security issue was observed
       placeholder: |
-        - Magic Version: [e.g. v1.0.0]
+        - Delightful Version: [e.g. v1.0.0]
         - Deployment: [e.g. Docker, Cloud, Self-hosted]
         - Configuration: [relevant security settings]
         - Browser: [if frontend related]

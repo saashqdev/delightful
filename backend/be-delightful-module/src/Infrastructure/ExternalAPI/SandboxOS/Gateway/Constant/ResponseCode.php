@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Infrastructure\ExternalAPI\SandboxOS\Gateway\Constant;
+namespace Delightful\SuperDelightful\Infrastructure\ExternalAPI\SandboxOS\Gateway\Constant;
 
 /**
  * Sandbox Gateway Response Code Constants

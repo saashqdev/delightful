@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconMessage2Plus } from "@tabler/icons-react"
 import { Flex } from "antd"
 import { useTranslation } from "react-i18next"
@@ -18,7 +18,7 @@ const CreateTopicItem = () => {
 	return (
 		<div className={cx(styles.container)} onClick={onCreateTopic}>
 			<Flex align="center" gap={4}>
-				<MagicIcon component={IconMessage2Plus} size={24} />
+				<DelightfulIcon component={IconMessage2Plus} size={24} />
 				<span className={styles.topicTitle}>{t("chat.topic.createTopic")}</span>
 			</Flex>
 		</div>

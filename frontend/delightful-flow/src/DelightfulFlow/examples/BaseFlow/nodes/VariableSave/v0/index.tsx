@@ -1,7 +1,7 @@
 import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import { ShowColumns } from "@/MagicJsonSchemaEditor/constants"
-import MagicJSONSchemaEditorWrap from "@/common/BaseUI/MagicJsonSchemaEditorWrap"
+import { ShowColumns } from "@/DelightfulJsonSchemaEditor/constants"
+import DelightfulJSONSchemaEditorWrap from "@/common/BaseUI/DelightfulJsonSchemaEditorWrap"
 import { Form } from "antd"
 import { useMemoizedFn } from "ahooks"
 import _ from "lodash"
@@ -43,7 +43,7 @@ export default function VariableSaveV0() {
 				onValuesChange={onValuesChange}
 			>
 				<Form.Item name={["variables", "form"]}>
-					<MagicJSONSchemaEditorWrap
+					<DelightfulJSONSchemaEditorWrap
 						allowExpression
 						expressionSource={expressionDataSource}
 						displayColumns={[

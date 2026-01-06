@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Infrastructure\ExternalAPI\MagicAIApi\Api;
+namespace App\Infrastructure\ExternalAPI\DelightfulAIApi\Api;
 
-use App\Infrastructure\ExternalAPI\MagicAIApi\Api\Request\Chat\CompletionsRequest;
-use App\Infrastructure\ExternalAPI\MagicAIApi\Api\Response\Chat\CompletionsResponse;
-use App\Infrastructure\ExternalAPI\MagicAIApi\Kernel\AbstractApi;
+use App\Infrastructure\ExternalAPI\DelightfulAIApi\Api\Request\Chat\CompletionsRequest;
+use App\Infrastructure\ExternalAPI\DelightfulAIApi\Api\Response\Chat\CompletionsResponse;
+use App\Infrastructure\ExternalAPI\DelightfulAIApi\Kernel\AbstractApi;
 use GuzzleHttp\RequestOptions;
 
 class Chat extends AbstractApi

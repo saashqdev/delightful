@@ -6,9 +6,9 @@ import { useTranslation } from "react-i18next"
 import { useMemo } from "react"
 import { useStyles } from "./styles"
 
-export type MagicModalProps = ModalProps
+export type DelightfulModalProps = ModalProps
 
-function MagicModal({ classNames: classNamesInProp, ...props }: MagicModalProps) {
+function DelightfulModal({ classNames: classNamesInProp, ...props }: DelightfulModalProps) {
 	const { t } = useTranslation("interface")
 
 	const { styles } = useStyles()
@@ -65,37 +65,37 @@ const defaultModalProps: ModalFuncProps = {
     },
 }
 
-MagicModal.confirm = (config: ModalFuncProps) =>
+DelightfulModal.confirm = (config: ModalFuncProps) =>
   AntdModal.confirm({
     ...defaultModalProps,
     ...config,
   })
 
-MagicModal.info = (config: ModalFuncProps) =>
+DelightfulModal.info = (config: ModalFuncProps) =>
 	AntdModal.info({
     ...defaultModalProps,
 		...config,
 	})
 
-MagicModal.success = (config: ModalFuncProps) =>
+DelightfulModal.success = (config: ModalFuncProps) =>
 	AntdModal.success({
 		okText: i18nT("common.confirm", { ns: "interface" }),
 		cancelText: i18nT("button.cancel", { ns: "interface" }),
 		...config,
 	})
 
-MagicModal.error = (config: ModalFuncProps) =>
+DelightfulModal.error = (config: ModalFuncProps) =>
 	AntdModal.error({
 		okText: i18nT("common.confirm", { ns: "interface" }),
 		cancelText: i18nT("button.cancel", { ns: "interface" }),
 		...config,
 	})
 
-MagicModal.warning = (config: ModalFuncProps) =>
+DelightfulModal.warning = (config: ModalFuncProps) =>
 	AntdModal.warning({
 		okText: i18nT("common.confirm", { ns: "interface" }),
 		cancelText: i18nT("button.cancel", { ns: "interface" }),
 		...config,
 	})
 
-export default MagicModal
+export default DelightfulModal

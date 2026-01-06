@@ -11,7 +11,7 @@ use App\Domain\KnowledgeBase\Entity\KnowledgeBaseFragmentEntity;
 use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeSyncStatus;
 use App\Domain\KnowledgeBase\Repository\Persistence\Model\KnowledgeBaseFragmentsModel;
 
-class MagicFlowKnowledgeFragmentFactory
+class DelightfulFlowKnowledgeFragmentFactory
 {
     public static function modelToEntity(KnowledgeBaseFragmentsModel $model): KnowledgeBaseFragmentEntity
     {

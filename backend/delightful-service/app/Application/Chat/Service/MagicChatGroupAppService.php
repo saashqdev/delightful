@@ -7,27 +7,27 @@ declare(strict_types=1);
 
 namespace App\Application\Chat\Service;
 
-use App\Domain\Agent\Service\MagicAgentDomainService;
+use App\Domain\Agent\Service\DelightfulAgentDomainService;
 use App\Domain\Chat\DTO\PageResponseDTO\GroupsPageResponseDTO;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 use App\Domain\Chat\Event\Group\GroupDeleteEvent;
-use App\Domain\Chat\Service\MagicControlDomainService;
-use App\Domain\Chat\Service\MagicConversationDomainService;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Chat\Service\DelightfulControlDomainService;
+use App\Domain\Chat\Service\DelightfulConversationDomainService;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
-use App\Domain\Group\Entity\MagicGroupEntity;
+use App\Domain\Contact\Service\DelightfulDepartmentDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
+use App\Domain\Group\Entity\DelightfulGroupEntity;
 use App\Domain\Group\Entity\ValueObject\GroupLimitEnum;
 use App\Domain\Group\Entity\ValueObject\GroupStatusEnum;
-use App\Domain\Group\Service\MagicGroupDomainService;
+use App\Domain\Group\Service\DelightfulGroupDomainService;
 use App\Domain\Permission\Service\OperationPermissionDomainService;
 use App\ErrorCode\ChatErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Delightful\AsyncEvent\AsyncEventUtil;
 use Hyperf\Context\ApplicationContext;
@@ -38,20 +38,20 @@ use Throwable;
 
 use function Hyperf\Coroutine\co;
 
-class MagicChatGroupAppService extends AbstractAppService
+class DelightfulChatGroupAppService extends AbstractAppService
 {
     public function __construct(
-        protected readonly MagicGroupDomainService $magicGroupDomainService,
-        protected readonly MagicUserDomainService $magicUserDomainService,
-        protected readonly MagicDepartmentUserDomainService $magicDepartmentUserDomainService,
-        protected readonly MagicDepartmentDomainService $magicDepartmentDomainService,
-        protected readonly MagicControlMessageAppService $controlMessageAppService,
-        protected readonly MagicConversationDomainService $magicConversationDomainService,
-        protected readonly MagicControlDomainService $magicControlDomainService,
+        protected readonly DelightfulGroupDomainService $magicGroupDomainService,
+        protected readonly DelightfulUserDomainService $magicUserDomainService,
+        protected readonly DelightfulDepartmentUserDomainService $magicDepartmentUserDomainService,
+        protected readonly DelightfulDepartmentDomainService $magicDepartmentDomainService,
+        protected readonly DelightfulControlMessageAppService $controlMessageAppService,
+        protected readonly DelightfulConversationDomainService $magicConversationDomainService,
+        protected readonly DelightfulControlDomainService $magicControlDomainService,
         protected LoggerInterface $logger,
-        protected readonly MagicAgentDomainService $magicAgentDomainService,
+        protected readonly DelightfulAgentDomainService $magicAgentDomainService,
         protected readonly OperationPermissionDomainService $operationPermissionDomainService,
-        protected readonly MagicUserContactAppService $magicUserContactAppService
+        protected readonly DelightfulUserContactAppService $magicUserContactAppService
     ) {
         try {
             $this->logger = ApplicationContext::getContainer()->get(LoggerFactory::class)->get(get_class($this));
@@ -60,7 +60,7 @@ class MagicChatGroupAppService extends AbstractAppService
     }
 
     // 创建群聊
-    public function createChatGroup(array $groupUserIds, array $inputDepartmentIds, MagicUserAuthorization $userAuthorization, MagicGroupEntity $magicGroupDTO): array
+    public function createChatGroup(array $groupUserIds, array $inputDepartmentIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $magicGroupDTO): array
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $chatGroupUserNumLimit = GroupLimitEnum::NormalGroup->value;
@@ -103,7 +103,7 @@ class MagicChatGroupAppService extends AbstractAppService
     /**
      * 群聊加人.
      */
-    public function groupAddUsers(array $groupAddUserIds, array $inputDepartmentIds, MagicUserAuthorization $userAuthorization, MagicGroupEntity $magicGroupDTO): array
+    public function groupAddUsers(array $groupAddUserIds, array $inputDepartmentIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $magicGroupDTO): array
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         // 检查群聊是否存在
@@ -152,8 +152,8 @@ class MagicChatGroupAppService extends AbstractAppService
     }
 
     public function groupKickUsers(
-        MagicUserAuthorization $userAuthorization,
-        MagicGroupEntity $magicGroupDTO,
+        DelightfulUserAuthorization $userAuthorization,
+        DelightfulGroupEntity $magicGroupDTO,
         array $userIds,
         ControlMessageType $controlMessageType
     ): array {
@@ -174,8 +174,8 @@ class MagicChatGroupAppService extends AbstractAppService
     }
 
     public function leaveGroupConversation(
-        MagicUserAuthorization $userAuthorization,
-        MagicGroupEntity $magicGroupDTO,
+        DelightfulUserAuthorization $userAuthorization,
+        DelightfulGroupEntity $magicGroupDTO,
         array $userIds,
         ControlMessageType $controlMessageType
     ): array {
@@ -205,7 +205,7 @@ class MagicChatGroupAppService extends AbstractAppService
         return $this->noticeGroupChangeSeq($userSeq);
     }
 
-    public function deleteGroup(MagicUserAuthorization $userAuthorization, MagicGroupEntity $magicGroupDTO): array
+    public function deleteGroup(DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $magicGroupDTO): array
     {
         // 获取所有群成员
         $groupUsers = $this->magicGroupDomainService->getGroupUserList(
@@ -256,7 +256,7 @@ class MagicChatGroupAppService extends AbstractAppService
         return $this->noticeGroupChangeSeq($userSeq);
     }
 
-    public function GroupUpdateInfo(MagicUserAuthorization $userAuthorization, MagicGroupEntity $magicGroupDTO): array
+    public function GroupUpdateInfo(DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $magicGroupDTO): array
     {
         if (empty($magicGroupDTO->getGroupAvatar()) && empty($magicGroupDTO->getGroupName())) {
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR, 'chat.common.param_error', ['param' => 'group_name, group_avatar']);
@@ -300,7 +300,7 @@ class MagicChatGroupAppService extends AbstractAppService
         return $this->noticeGroupChangeSeq($userSeq);
     }
 
-    public function getGroupsInfo(array $groupIds, MagicUserAuthorization $userAuthorization): array
+    public function getGroupsInfo(array $groupIds, DelightfulUserAuthorization $userAuthorization): array
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         return $this->magicGroupDomainService->getGroupsInfoByIds($groupIds, $dataIsolation);
@@ -309,7 +309,7 @@ class MagicChatGroupAppService extends AbstractAppService
     /**
      * 获取群的成员列表.
      */
-    public function getGroupUserList(string $groupId, string $pageToken, MagicUserAuthorization $userAuthorization): array
+    public function getGroupUserList(string $groupId, string $pageToken, DelightfulUserAuthorization $userAuthorization): array
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         return $this->magicGroupDomainService->getGroupUserList($groupId, $pageToken, $dataIsolation);
@@ -318,13 +318,13 @@ class MagicChatGroupAppService extends AbstractAppService
     /**
      * 获取用户的群列表.
      */
-    public function getUserGroupList(string $pageToken, MagicUserAuthorization $userAuthorization, int $pageSize): GroupsPageResponseDTO
+    public function getUserGroupList(string $pageToken, DelightfulUserAuthorization $userAuthorization, int $pageSize): GroupsPageResponseDTO
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         return $this->magicGroupDomainService->getUserGroupList($pageToken, $dataIsolation, $pageSize);
     }
 
-    public function groupTransferOwner(MagicGroupEntity $magicGroupDTO, MagicUserAuthorization $userAuthorization): array
+    public function groupTransferOwner(DelightfulGroupEntity $magicGroupDTO, DelightfulUserAuthorization $userAuthorization): array
     {
         // 检查群聊是否存在
         $groupId = $magicGroupDTO->getId();
@@ -364,10 +364,10 @@ class MagicChatGroupAppService extends AbstractAppService
      */
     protected function groupRemoveUsers(
         DataIsolation $dataIsolation,
-        MagicGroupEntity $groupEntity,
+        DelightfulGroupEntity $groupEntity,
         array $userIds,
         ControlMessageType $controlMessageType
-    ): MagicSeqEntity {
+    ): DelightfulSeqEntity {
         // 查询群聊中的用户
         $groupUsers = $this->magicGroupDomainService->getGroupUserList($groupEntity->getId(), '', $dataIsolation, ['user_id']);
         $groupUsers = array_column($groupUsers, 'user_id');
@@ -396,7 +396,7 @@ class MagicChatGroupAppService extends AbstractAppService
 
     /**
      * 获取本次需要添加的群成员.
-     * @return MagicUserEntity[]
+     * @return DelightfulUserEntity[]
      */
     private function getGroupAddUsers(array $needAddGroupUserIds, DataIsolation $dataIsolation, array $inputDepartmentIds, int $chatGroupUserNumLimit): array
     {
@@ -426,7 +426,7 @@ class MagicChatGroupAppService extends AbstractAppService
         return $groupAddUsers;
     }
 
-    private function getGroupName(MagicGroupEntity $magicGroupDTO, array $userIds, DataIsolation $dataIsolation): string
+    private function getGroupName(DelightfulGroupEntity $magicGroupDTO, array $userIds, DataIsolation $dataIsolation): string
     {
         // 如果群聊名称为空,获取群主 + 20 个群成员的昵称
         if (empty($magicGroupDTO->getGroupName())) {
@@ -452,10 +452,10 @@ class MagicChatGroupAppService extends AbstractAppService
     private function addGroupUsers(
         array $userIds,
         array $structure,
-        MagicGroupEntity $groupEntity,
+        DelightfulGroupEntity $groupEntity,
         DataIsolation $dataIsolation,
         ControlMessageType $controlMessageType
-    ): MagicSeqEntity {
+    ): DelightfulSeqEntity {
         // 往群聊中添加用户
         $this->magicGroupDomainService->addUsersToGroup($groupEntity, $userIds);
         // 为新增的成员创建会话窗口
@@ -468,10 +468,10 @@ class MagicChatGroupAppService extends AbstractAppService
      */
     private function createAndDispatchOperateGroupUsersSeq(
         array $seqContent,
-        MagicGroupEntity $groupEntity,
+        DelightfulGroupEntity $groupEntity,
         DataIsolation $dataIsolation,
         ControlMessageType $controlMessageType
-    ): MagicSeqEntity {
+    ): DelightfulSeqEntity {
         // 为当前操作者,生成群成员变更Seq,并经由 mq 分发给群成员
         $groupUserChangeSeq = $this->magicGroupDomainService->createGroupUserChangeSeq($dataIsolation, $groupEntity, $seqContent, $controlMessageType);
         $seqCreateEvent = $this->magicControlDomainService->getControlSeqCreatedEvent($groupUserChangeSeq);
@@ -479,7 +479,7 @@ class MagicChatGroupAppService extends AbstractAppService
         return $groupUserChangeSeq;
     }
 
-    private function noticeGroupChangeSeq(MagicSeqEntity $seqEntity): array
+    private function noticeGroupChangeSeq(DelightfulSeqEntity $seqEntity): array
     {
         // 协程通知用户其他设备,放在事务外面
         co(function () use ($seqEntity) {

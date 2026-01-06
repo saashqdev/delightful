@@ -29,7 +29,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property int $level
  * @property string $execution_type
  */
-class MagicFlowExecuteLogModel extends AbstractModel
+class DelightfulFlowExecuteLogModel extends AbstractModel
 {
     use Snowflake;
 

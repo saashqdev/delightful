@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Repository\Persistence;
 
-use App\Domain\Agent\Entity\MagicAgentEntity;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
 use App\Domain\Agent\Entity\ValueObject\AgentDataIsolation;
-use App\Domain\Agent\Entity\ValueObject\Query\MagicAgentQuery;
-use App\Domain\Agent\Factory\MagicAgentFactory;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulAgentQuery;
+use App\Domain\Agent\Factory\DelightfulAgentFactory;
 use App\Domain\Agent\Repository\Facade\AgentRepositoryInterface;
-use App\Domain\Agent\Repository\Persistence\Model\MagicAgentModel;
+use App\Domain\Agent\Repository\Persistence\Model\DelightfulAgentModel;
 use App\Infrastructure\Core\AbstractRepository;
 use App\Infrastructure\Core\ValueObject\Page;
 
@@ -23,11 +23,11 @@ class AgentRepository extends AbstractRepository implements AgentRepositoryInter
     /**
      * 查询 Agent 列表.
      *
-     * @return array{total: int, list: array<MagicAgentEntity>}
+     * @return array{total: int, list: array<DelightfulAgentEntity>}
      */
-    public function queries(AgentDataIsolation $agentDataIsolation, MagicAgentQuery $agentQuery, Page $page): array
+    public function queries(AgentDataIsolation $agentDataIsolation, DelightfulAgentQuery $agentQuery, Page $page): array
     {
-        $builder = $this->createBuilder($agentDataIsolation, MagicAgentModel::query());
+        $builder = $this->createBuilder($agentDataIsolation, DelightfulAgentModel::query());
 
         // 设置查询条件
         if (! is_null($agentQuery->getIds())) {
@@ -46,9 +46,9 @@ class AgentRepository extends AbstractRepository implements AgentRepositoryInter
         // 分页查询
         $data = $this->getByPage($builder, $page, $agentQuery);
         $list = [];
-        /** @var MagicAgentModel $agent */
+        /** @var DelightfulAgentModel $agent */
         foreach ($data['list'] as $agent) {
-            $list[] = MagicAgentFactory::modelToEntity($agent);
+            $list[] = DelightfulAgentFactory::modelToEntity($agent);
         }
         $data['list'] = $list;
         return $data;

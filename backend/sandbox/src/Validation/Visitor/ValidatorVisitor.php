@@ -458,11 +458,11 @@ class ValidatorVisitor extends NodeVisitorAbstract
             if (! $this->options->isAllowBackticks()) {
                 $this->sandbox->error->validationError('Sandboxed code attempted to use shell execution backticks!', Error::BACKTICKS_ERROR, $node);
             }
-        } elseif ($name = $this->isMagicConst($node)) {
-            if (! $this->validator->checkMagicConst($name)) {
-                $this->sandbox->error->validationError('Magic constant failed custom validation!', Error::VALID_DELIGHTFUL_CONST_ERROR, $node, $name);
+        } elseif ($name = $this->isDelightfulConst($node)) {
+            if (! $this->validator->checkDelightfulConst($name)) {
+                $this->sandbox->error->validationError('Delightful constant failed custom validation!', Error::VALID_DELIGHTFUL_CONST_ERROR, $node, $name);
             }
-            if ($this->options->definitions()->isDefinedMagicConst($name)) {
+            if ($this->options->definitions()->isDefinedDelightfulConst($name)) {
                 //                return new Node\Expr\MethodCall(new Node\Expr\Variable($sandboxInnerVariable), '_get_magic_const', [new Node\Arg(new Node\Scalar\String_($name))], $node->getAttributes());
                 return $this->builderFactory->methodCall(
                     $this->builderFactory->methodCall($this->buildRuntimeContainerNode(), 'magicConstants'),
@@ -522,9 +522,9 @@ class ValidatorVisitor extends NodeVisitorAbstract
      *
      * @return null|string Return string name of node, or null if it is not a magic constant
      */
-    protected function isMagicConst(Node $node): ?string
+    protected function isDelightfulConst(Node $node): ?string
     {
-        return ($node instanceof Node\Scalar\MagicConst) ? $node->getName() : null;
+        return ($node instanceof Node\Scalar\DelightfulConst) ? $node->getName() : null;
     }
 
     /** Test the current PhpParser_Node node to see if it is a keyword, and return the name if it is and null if it is not.

@@ -12,12 +12,12 @@ use App\Application\Flow\ExecuteManager\Attachment\Attachment;
 use App\Application\Flow\ExecuteManager\NodeRunner\ReplyMessage\Struct\Message;
 use App\Domain\Agent\Entity\ValueObject\ThirdPlatformChat\ThirdPlatformChatType;
 use App\Domain\Chat\DTO\Message\ChatMessage\Item\InstructionConfig;
-use App\Domain\Chat\Entity\MagicMessageEntity;
-use App\Domain\Chat\Entity\MagicSeqEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation as ContactDataIsolation;
-use App\Domain\Contact\Service\MagicUserDomainService;
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\TriggerType;
 use App\Infrastructure\Core\Dag\VertexResult;
@@ -140,7 +140,7 @@ class ExecutionData
 
     private string $uniqueParentId = '';
 
-    private ?MagicFlowEntity $magicFlowEntity = null;
+    private ?DelightfulFlowEntity $magicFlowEntity = null;
 
     /**
      * 当前 agent 的指令配置列表.
@@ -203,7 +203,7 @@ class ExecutionData
         return $this->executionType;
     }
 
-    public function setSenderEntities(MagicUserEntity $userEntity, MagicSeqEntity $seqEntity, ?MagicMessageEntity $messageEntity): void
+    public function setSenderEntities(DelightfulUserEntity $userEntity, DelightfulSeqEntity $seqEntity, ?DelightfulMessageEntity $messageEntity): void
     {
         $this->senderEntities = [
             'user' => $userEntity,
@@ -212,7 +212,7 @@ class ExecutionData
         ];
     }
 
-    #[ArrayShape(['user' => MagicUserEntity::class, 'seq' => MagicSeqEntity::class, 'message' => MagicMessageEntity::class])]
+    #[ArrayShape(['user' => DelightfulUserEntity::class, 'seq' => DelightfulSeqEntity::class, 'message' => DelightfulMessageEntity::class])]
     public function getSenderEntities(): array
     {
         return $this->senderEntities;
@@ -577,12 +577,12 @@ class ExecutionData
         if (! empty($this->parentFlowCode)) {
             $flowCode = $this->parentFlowCode;
         }
-        $flowOrganizationCode = $this->getMagicFlowEntity()?->getOrganizationCode();
+        $flowOrganizationCode = $this->getDelightfulFlowEntity()?->getOrganizationCode();
         if (empty($flowOrganizationCode)) {
             $flowOrganizationCode = $this->dataIsolation->getCurrentOrganizationCode();
         }
         $contactDataIsolation = ContactDataIsolation::create($flowOrganizationCode, $this->dataIsolation->getCurrentUserId());
-        $user = di(MagicUserDomainService::class)->getByAiCode($contactDataIsolation, $flowCode);
+        $user = di(DelightfulUserDomainService::class)->getByAiCode($contactDataIsolation, $flowCode);
         return $user?->getUserId() ?? '';
     }
 
@@ -634,12 +634,12 @@ class ExecutionData
         return $this->uniqueParentId;
     }
 
-    public function getMagicFlowEntity(): ?MagicFlowEntity
+    public function getDelightfulFlowEntity(): ?DelightfulFlowEntity
     {
         return $this->magicFlowEntity;
     }
 
-    public function setMagicFlowEntity(?MagicFlowEntity $magicFlowEntity): void
+    public function setDelightfulFlowEntity(?DelightfulFlowEntity $magicFlowEntity): void
     {
         $this->magicFlowEntity = $magicFlowEntity;
     }

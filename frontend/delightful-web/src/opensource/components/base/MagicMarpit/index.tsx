@@ -6,7 +6,7 @@ import Reveal from "reveal.js"
 import "reveal.js/dist/reveal.css"
 import "reveal.js/dist/theme/black.css"
 
-interface MagicMarpitProps extends HTMLAttributes<HTMLDivElement> {
+interface DelightfulMarpitProps extends HTMLAttributes<HTMLDivElement> {
 	content: string
 }
 
@@ -22,7 +22,7 @@ const useStyles = createStyles(({ css }) => ({
 	`,
 }))
 
-const MagicMarpit = ({ content, className }: MagicMarpitProps) => {
+const DelightfulMarpit = ({ content, className }: DelightfulMarpitProps) => {
 	const deckDivRef = useRef<HTMLDivElement>(null) // reference to deck container div
 	const deckRef = useRef<Reveal.Api | null>(null) // reference to deck reveal instance
 
@@ -82,4 +82,4 @@ const MagicMarpit = ({ content, className }: MagicMarpitProps) => {
 	)
 }
 
-export default MagicMarpit
+export default DelightfulMarpit

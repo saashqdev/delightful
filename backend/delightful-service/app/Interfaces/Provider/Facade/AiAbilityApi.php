@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Provider\Facade;
 
-use App\Application\Kernel\Enum\MagicOperationEnum;
-use App\Application\Kernel\Enum\MagicResourceEnum;
+use App\Application\Kernel\Enum\DelightfulOperationEnum;
+use App\Application\Kernel\Enum\DelightfulResourceEnum;
 use App\Application\Provider\Service\AiAbilityAppService;
 use App\Infrastructure\Util\Permission\Annotation\CheckPermission;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Provider\Assembler\AiAbilityAssembler;
 use App\Interfaces\Provider\DTO\UpdateAiAbilityRequest;
 use Delightful\ApiResponse\Annotation\ApiResponse;
@@ -26,10 +26,10 @@ class AiAbilityApi extends AbstractApi
     /**
      * Get all AI abilities.
      */
-    #[CheckPermission([MagicResourceEnum::ADMIN_AI_ABILITY], MagicOperationEnum::QUERY)]
+    #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_ABILITY], DelightfulOperationEnum::QUERY)]
     public function queries(): array
     {
-        /** @var MagicUserAuthorization $authorization */
+        /** @var DelightfulUserAuthorization $authorization */
         $authorization = $this->getAuthorization();
 
         $list = $this->aiAbilityAppService->queries($authorization);
@@ -40,10 +40,10 @@ class AiAbilityApi extends AbstractApi
     /**
      * Get AI ability details.
      */
-    #[CheckPermission([MagicResourceEnum::ADMIN_AI_ABILITY], MagicOperationEnum::QUERY)]
+    #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_ABILITY], DelightfulOperationEnum::QUERY)]
     public function detail(string $code): array
     {
-        /** @var MagicUserAuthorization $authorization */
+        /** @var DelightfulUserAuthorization $authorization */
         $authorization = $this->getAuthorization();
 
         $detail = $this->aiAbilityAppService->getDetail($authorization, $code);
@@ -54,10 +54,10 @@ class AiAbilityApi extends AbstractApi
     /**
      * Update an AI ability.
      */
-    #[CheckPermission([MagicResourceEnum::ADMIN_AI_ABILITY], MagicOperationEnum::EDIT)]
+    #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_ABILITY], DelightfulOperationEnum::EDIT)]
     public function update(string $code): array
     {
-        /** @var MagicUserAuthorization $authorization */
+        /** @var DelightfulUserAuthorization $authorization */
         $authorization = $this->getAuthorization();
 
         $requestData = $this->request->all();

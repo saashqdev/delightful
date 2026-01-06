@@ -1,15 +1,15 @@
-import type { MagicButtonProps } from "@/opensource/components/base/MagicButton"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import type { DelightfulButtonProps } from "@/opensource/components/base/DelightfulButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IMStyle } from "@/opensource/providers/AppearanceProvider/context"
 import { IconMoodHappy } from "@tabler/icons-react"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import { Popover } from "antd"
-import MagicEmojiPanel from "@/opensource/components/base/MagicEmojiPanel"
-import type { EmojiInfo } from "@/opensource/components/base/MagicEmojiPanel/types"
+import DelightfulEmojiPanel from "@/opensource/components/base/DelightfulEmojiPanel"
+import type { EmojiInfo } from "@/opensource/components/base/DelightfulEmojiPanel/types"
 
-interface EmojiButtonProps extends Omit<MagicButtonProps, "onClick"> {
+interface EmojiButtonProps extends Omit<DelightfulButtonProps, "onClick"> {
 	iconSize?: number
 	imStyle?: IMStyle
 	onEmojiClick?: (emoji: EmojiInfo) => void
@@ -28,7 +28,7 @@ function EmojiButton({
 
 	return (
 		<Popover
-			content={<MagicEmojiPanel onClick={onEmojiClick} />}
+			content={<DelightfulEmojiPanel onClick={onEmojiClick} />}
 			trigger="click"
 			styles={{
 				body: {
@@ -36,14 +36,14 @@ function EmojiButton({
 				},
 			}}
 		>
-			<MagicButton
+			<DelightfulButton
 				type="text"
-				icon={<MagicIcon color="currentColor" size={iconSize} component={IconMoodHappy} />}
+				icon={<DelightfulIcon color="currentColor" size={iconSize} component={IconMoodHappy} />}
 				className={className}
 				{...props}
 			>
 				{isStandard ? t("chat.input.emoji") : undefined}
-			</MagicButton>
+			</DelightfulButton>
 		</Popover>
 	)
 }

@@ -7,50 +7,50 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Persistence;
 
-use App\Domain\Flow\Entity\MagicFlowMultiModalLogEntity;
+use App\Domain\Flow\Entity\DelightfulFlowMultiModalLogEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Factory\MagicFlowMultiModalLogFactory;
-use App\Domain\Flow\Repository\Facade\MagicFlowMultiModalLogRepositoryInterface;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowMultiModalLogModel;
+use App\Domain\Flow\Factory\DelightfulFlowMultiModalLogFactory;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowMultiModalLogRepositoryInterface;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowMultiModalLogModel;
 
-class MagicFlowMultiModalLogRepository extends MagicFlowAbstractRepository implements MagicFlowMultiModalLogRepositoryInterface
+class DelightfulFlowMultiModalLogRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowMultiModalLogRepositoryInterface
 {
-    public function create(FlowDataIsolation $dataIsolation, MagicFlowMultiModalLogEntity $entity): MagicFlowMultiModalLogEntity
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMultiModalLogEntity $entity): DelightfulFlowMultiModalLogEntity
     {
-        $model = MagicFlowMultiModalLogFactory::entityToModel($entity);
+        $model = DelightfulFlowMultiModalLogFactory::entityToModel($entity);
         $model->save();
-        return MagicFlowMultiModalLogFactory::modelToEntity($model);
+        return DelightfulFlowMultiModalLogFactory::modelToEntity($model);
     }
 
-    public function getById(FlowDataIsolation $dataIsolation, int $id): ?MagicFlowMultiModalLogEntity
+    public function getById(FlowDataIsolation $dataIsolation, int $id): ?DelightfulFlowMultiModalLogEntity
     {
-        $query = $this->createBuilder($dataIsolation, MagicFlowMultiModalLogModel::query());
+        $query = $this->createBuilder($dataIsolation, DelightfulFlowMultiModalLogModel::query());
         $model = $query->where('id', $id)->first();
 
         if (empty($model)) {
             return null;
         }
 
-        return MagicFlowMultiModalLogFactory::modelToEntity($model);
+        return DelightfulFlowMultiModalLogFactory::modelToEntity($model);
     }
 
-    public function getByMessageId(FlowDataIsolation $dataIsolation, string $messageId): ?MagicFlowMultiModalLogEntity
+    public function getByMessageId(FlowDataIsolation $dataIsolation, string $messageId): ?DelightfulFlowMultiModalLogEntity
     {
-        $query = $this->createBuilder($dataIsolation, MagicFlowMultiModalLogModel::query());
+        $query = $this->createBuilder($dataIsolation, DelightfulFlowMultiModalLogModel::query());
         $model = $query->where('message_id', $messageId)->first();
 
         if (empty($model)) {
             return null;
         }
 
-        return MagicFlowMultiModalLogFactory::modelToEntity($model);
+        return DelightfulFlowMultiModalLogFactory::modelToEntity($model);
     }
 
     /**
      * 批量获取多个消息ID对应的多模态日志记录.
      *
      * @param array<string> $messageIds
-     * @return array<MagicFlowMultiModalLogEntity>
+     * @return array<DelightfulFlowMultiModalLogEntity>
      */
     public function getByMessageIds(FlowDataIsolation $dataIsolation, array $messageIds, bool $keyByMessageId = false): array
     {
@@ -59,7 +59,7 @@ class MagicFlowMultiModalLogRepository extends MagicFlowAbstractRepository imple
             return [];
         }
 
-        $query = $this->createBuilder($dataIsolation, MagicFlowMultiModalLogModel::query());
+        $query = $this->createBuilder($dataIsolation, DelightfulFlowMultiModalLogModel::query());
         $models = $query->whereIn('message_id', $messageIds)->get();
 
         if ($models->isEmpty()) {
@@ -68,7 +68,7 @@ class MagicFlowMultiModalLogRepository extends MagicFlowAbstractRepository imple
 
         $entities = [];
         foreach ($models as $model) {
-            $entity = MagicFlowMultiModalLogFactory::modelToEntity($model);
+            $entity = DelightfulFlowMultiModalLogFactory::modelToEntity($model);
             if ($keyByMessageId) {
                 $entities[$entity->getMessageId()] = $entity;
             } else {

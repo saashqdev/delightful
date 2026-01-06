@@ -5,18 +5,18 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Application\Chat\Service;
+namespace Delightful\SuperDelightful\Application\Chat\Service;
 
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
-use App\Domain\Chat\Service\MagicConversationDomainService;
-use App\Domain\Chat\Service\MagicTopicDomainService;
+use App\Domain\Chat\Service\DelightfulConversationDomainService;
+use App\Domain\Chat\Service\DelightfulTopicDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\SuperMagic\Application\SuperAgent\Service\AbstractAppService;
-use Delightful\SuperMagic\Application\SuperAgent\Service\AccountAppService;
-use Delightful\SuperMagic\Domain\SuperAgent\Constant\AgentConstant;
+use Delightful\SuperDelightful\Application\SuperAgent\Service\AbstractAppService;
+use Delightful\SuperDelightful\Application\SuperAgent\Service\AccountAppService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Constant\AgentConstant;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -26,18 +26,18 @@ class ChatAppService extends AbstractAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        protected MagicUserDomainService $userDomainService,
+        protected DelightfulUserDomainService $userDomainService,
         protected AccountAppService $accountAppService,
-        protected MagicConversationDomainService $magicConversationDomainService,
-        protected MagicTopicDomainService $topicDomainService,
+        protected DelightfulConversationDomainService $magicConversationDomainService,
+        protected DelightfulTopicDomainService $topicDomainService,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(get_class($this));
     }
 
     /**
-     * Initializes Magic Chat conversation and topic.
-     * This method sets up the necessary chat infrastructure for a "Super Magic" interaction.
+     * Initializes Delightful Chat conversation and topic.
+     * This method sets up the necessary chat infrastructure for a "Super Delightful" interaction.
      * It fetches/creates an AI user, then gets/creates a conversation for the current user
      * with this AI user, and finally generates a topic ID for this conversation.
      *
@@ -45,9 +45,9 @@ class ChatAppService extends AbstractAppService
      * @return array an array containing the chat conversation ID and chat conversation topic ID
      * @throws Throwable if any error occurs during the process
      */
-    public function initMagicChatConversation(DataIsolation $dataIsolation): array
+    public function initDelightfulChatConversation(DataIsolation $dataIsolation): array
     {
-        $aiUserEntity = $this->getOrCreateSuperMagicUser($dataIsolation);
+        $aiUserEntity = $this->getOrCreateSuperDelightfulUser($dataIsolation);
         $currentUserId = $dataIsolation->getCurrentUserId();
         $aiUserId = $aiUserEntity->getUserId();
         $this->logger->info(sprintf('Getting or creating conversation for user ID: %s with AI user ID: %s in organization: %s', $currentUserId, $aiUserId, $dataIsolation->getCurrentOrganizationCode()));
@@ -69,29 +69,29 @@ class ChatAppService extends AbstractAppService
     }
 
     /**
-     * Get the Super Magic agent user ID for the given organization.
-     * This method retrieves the AI user entity for the Super Magic agent
+     * Get the Super Delightful agent user ID for the given organization.
+     * This method retrieves the AI user entity for the Super Delightful agent
      * and returns its user ID.
      *
      * @param DataIsolation $dataIsolation data isolation context
      * @return string the agent user ID
      * @throws Throwable if the agent user is not found
      */
-    public function getSuperMagicAgentUserId(DataIsolation $dataIsolation): string
+    public function getSuperDelightfulAgentUserId(DataIsolation $dataIsolation): string
     {
-        $aiUserEntity = $this->getOrCreateSuperMagicUser($dataIsolation);
+        $aiUserEntity = $this->getOrCreateSuperDelightfulUser($dataIsolation);
         return $aiUserEntity->getUserId();
     }
 
     /**
-     * Get or create the Super Magic AI user entity.
+     * Get or create the Super Delightful AI user entity.
      * This is a private method to avoid code duplication between different public methods.
      *
      * @param DataIsolation $dataIsolation data isolation context
      * @return object the AI user entity
      * @throws Throwable if the agent user is not found after initialization attempts
      */
-    private function getOrCreateSuperMagicUser(DataIsolation $dataIsolation): object
+    private function getOrCreateSuperDelightfulUser(DataIsolation $dataIsolation): object
     {
         $this->logger->info(sprintf('Attempting to get AI user with code: %s for organization: %s', AgentConstant::SUPER_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
         $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::SUPER_DELIGHTFUL_CODE);

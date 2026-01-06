@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace App\Domain\Token\Repository\Facade;
 
 // Allows specifying arbitrary extra data
-interface MagicTokenExtraInterface
+interface DelightfulTokenExtraInterface
 {
-    public function getMagicEnvId(): ?int;
+    public function getDelightfulEnvId(): ?int;
 
-    public function setMagicEnvId(?int $magicEnvId): void;
+    public function setDelightfulEnvId(?int $magicEnvId): void;
 
     public function setTokenExtraData(array $extraData): self;
 

@@ -7,26 +7,26 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Persistence;
 
-use App\Domain\Flow\Entity\MagicFlowExecuteLogEntity;
+use App\Domain\Flow\Entity\DelightfulFlowExecuteLogEntity;
 use App\Domain\Flow\Entity\ValueObject\ExecuteLogStatus;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Factory\MagicFlowExecuteLogFactory;
-use App\Domain\Flow\Repository\Facade\MagicFlowExecuteLogRepositoryInterface;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowExecuteLogModel;
+use App\Domain\Flow\Factory\DelightfulFlowExecuteLogFactory;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowExecuteLogRepositoryInterface;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowExecuteLogModel;
 use App\Infrastructure\Core\ValueObject\Page;
 
-class MagicFlowExecuteLogRepository extends MagicFlowAbstractRepository implements MagicFlowExecuteLogRepositoryInterface
+class DelightfulFlowExecuteLogRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowExecuteLogRepositoryInterface
 {
-    public function create(FlowDataIsolation $dataIsolation, MagicFlowExecuteLogEntity $magicFlowExecuteLogEntity): MagicFlowExecuteLogEntity
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): DelightfulFlowExecuteLogEntity
     {
-        $model = new MagicFlowExecuteLogModel();
+        $model = new DelightfulFlowExecuteLogModel();
         $model->fill($this->getAttributes($magicFlowExecuteLogEntity));
         $model->save();
         $magicFlowExecuteLogEntity->setId($model->id);
         return $magicFlowExecuteLogEntity;
     }
 
-    public function updateStatus(FlowDataIsolation $dataIsolation, MagicFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
+    public function updateStatus(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
     {
         $update = [
             'status' => $magicFlowExecuteLogEntity->getStatus()->value,
@@ -35,17 +35,17 @@ class MagicFlowExecuteLogRepository extends MagicFlowAbstractRepository implemen
         if ($magicFlowExecuteLogEntity->getStatus()->isFinished()) {
             $update['result'] = json_encode($magicFlowExecuteLogEntity->getResult(), JSON_UNESCAPED_UNICODE);
         }
-        $builder = $this->createBuilder($dataIsolation, MagicFlowExecuteLogModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowExecuteLogModel::query());
         $builder->where('id', $magicFlowExecuteLogEntity->getId())
             ->update($update);
     }
 
     /**
-     * @return MagicFlowExecuteLogEntity[]
+     * @return DelightfulFlowExecuteLogEntity[]
      */
     public function getRunningTimeoutList(FlowDataIsolation $dataIsolation, int $timeout, Page $page): array
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowExecuteLogModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowExecuteLogModel::query());
         $builder = $builder
             ->whereIn('status', [ExecuteLogStatus::Running, ExecuteLogStatus::Pending])
             // 只重试顶层
@@ -59,17 +59,17 @@ class MagicFlowExecuteLogRepository extends MagicFlowAbstractRepository implemen
         $models = $builder->get();
         $result = [];
         foreach ($models as $model) {
-            $result[] = MagicFlowExecuteLogFactory::modelToEntity($model);
+            $result[] = DelightfulFlowExecuteLogFactory::modelToEntity($model);
         }
         return $result;
     }
 
-    public function getByExecuteId(FlowDataIsolation $dataIsolation, string $executeId): ?MagicFlowExecuteLogEntity
+    public function getByExecuteId(FlowDataIsolation $dataIsolation, string $executeId): ?DelightfulFlowExecuteLogEntity
     {
         if (empty($executeId)) {
             return null;
         }
-        $builder = $this->createBuilder($dataIsolation, MagicFlowExecuteLogModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowExecuteLogModel::query());
         if (strlen($executeId) === 18 && is_numeric($executeId)) {
             // 主键查询
             $model = $builder->where('id', $executeId)->first();
@@ -80,12 +80,12 @@ class MagicFlowExecuteLogRepository extends MagicFlowAbstractRepository implemen
         if ($model === null) {
             return null;
         }
-        return MagicFlowExecuteLogFactory::modelToEntity($model);
+        return DelightfulFlowExecuteLogFactory::modelToEntity($model);
     }
 
-    public function incrementRetryCount(FlowDataIsolation $dataIsolation, MagicFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
+    public function incrementRetryCount(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowExecuteLogModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowExecuteLogModel::query());
         $builder->where('id', $magicFlowExecuteLogEntity->getId())
             ->increment('retry_count');
         $magicFlowExecuteLogEntity->setRetryCount($magicFlowExecuteLogEntity->getRetryCount() + 1);

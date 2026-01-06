@@ -38,7 +38,7 @@ type TsSelectProps = {
 }
 
 // Wrap with memo to improve performance
-const MagicSelectComponent = forwardRef((props: TsSelectProps, ref: any) => {
+const DelightfulSelectComponent = forwardRef((props: TsSelectProps, ref: any) => {
 	const { dropdownRenderProps, eventHandlers, ...restSelectProps } = props
 
 	const {
@@ -171,11 +171,11 @@ const MagicSelectComponent = forwardRef((props: TsSelectProps, ref: any) => {
 })
 
 // Memoized component with custom comparator
-const MagicSelect = memo(MagicSelectComponent)
+const DelightfulSelect = memo(DelightfulSelectComponent)
 
 // Preserve static properties
-const EnhancedMagicSelect: any = MagicSelect
-EnhancedMagicSelect.Option = Select.Option
-EnhancedMagicSelect.OptGroup = Select.OptGroup
+const EnhancedDelightfulSelect: any = DelightfulSelect
+EnhancedDelightfulSelect.Option = Select.Option
+EnhancedDelightfulSelect.OptGroup = Select.OptGroup
 
-export default EnhancedMagicSelect
+export default EnhancedDelightfulSelect

@@ -217,7 +217,7 @@ class AgentService:
         for stream in agent_context.streams.values():
             agent_context.add_stream(stream)
 
-        logger.info("SuperMagic initialization started")
+        logger.info("SuperDelightful initialization started")
 
         # Initialize OSS credentials
         sts_token_refresh = agent_context.get_init_client_message_sts_token_refresh()
@@ -244,7 +244,7 @@ class AgentService:
         )
         await agent_context.dispatch_event(EventType.AFTER_INIT, after_init_data)
 
-        logger.info("SuperMagic initialization complete")
+        logger.info("SuperDelightful initialization complete")
 
         return
 
@@ -272,7 +272,7 @@ class AgentService:
 
             return agent
         except Exception as e:
-            logger.error(f"Error creating SuperMagic instance: {e}")
+            logger.error(f"Error creating SuperDelightful instance: {e}")
             import traceback
 
             logger.error(traceback.format_exc())

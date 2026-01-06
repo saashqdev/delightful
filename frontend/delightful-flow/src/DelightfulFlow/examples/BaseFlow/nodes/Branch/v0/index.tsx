@@ -1,5 +1,5 @@
-import { ConditionInstance } from "@/MagicConditionEdit"
-import { Expression } from "@/MagicConditionEdit/types/expression"
+import { ConditionInstance } from "@/DelightfulConditionEdit"
+import { Expression } from "@/DelightfulConditionEdit/types/expression"
 import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useMemoizedFn, useUpdateEffect } from "ahooks"

@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace App\Application\Flow\ExecuteManager\Attachment\Event\Subscriber;
 
 use App\Application\Flow\ExecuteManager\Attachment\Event\ExternalAttachmentUploadEvent;
-use App\Domain\Chat\Entity\MagicChatFileEntity;
+use App\Domain\Chat\Entity\DelightfulChatFileEntity;
 use App\Domain\Chat\Entity\ValueObject\FileType;
-use App\Domain\Chat\Service\MagicChatFileDomainService;
+use App\Domain\Chat\Service\DelightfulChatFileDomainService;
 use App\Domain\File\Service\FileDomainService;
 use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
 use Delightful\CloudFile\Kernel\Struct\UploadFile;
@@ -47,14 +47,14 @@ class ExternalAttachmentUploadSubscriber implements ListenerInterface
             $uploadFile
         );
 
-        $magicChatFileEntity = new MagicChatFileEntity();
+        $magicChatFileEntity = new DelightfulChatFileEntity();
         $magicChatFileEntity->setFileId($externalAttachment->getChatFileId());
         $magicChatFileEntity->setFileType(FileType::getTypeFromFileExtension($uploadFile->getExt()));
         $magicChatFileEntity->setFileSize($uploadFile->getSize());
         $magicChatFileEntity->setFileKey($uploadFile->getKey());
         $magicChatFileEntity->setFileName($uploadFile->getName());
         $magicChatFileEntity->setFileExtension($uploadFile->getExt());
-        $chatFileDomainService = di(MagicChatFileDomainService::class);
+        $chatFileDomainService = di(DelightfulChatFileDomainService::class);
         $chatFileDomainService->updateFile($magicChatFileEntity);
     }
 }

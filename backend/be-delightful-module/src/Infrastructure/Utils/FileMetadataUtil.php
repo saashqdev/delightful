@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Infrastructure\Utils;
+namespace Delightful\SuperDelightful\Infrastructure\Utils;
 
 use Exception;
 
@@ -19,7 +19,7 @@ class FileMetadataUtil
      * @return null|array Returns the configuration array or null if not found
      * @throws Exception If file cannot be read or JSON is invalid
      */
-    public static function extractMagicProjectConfig(string $jsFilePath): ?array
+    public static function extractDelightfulProjectConfig(string $jsFilePath): ?array
     {
         // Read file content
         $jsContent = file_get_contents($jsFilePath);

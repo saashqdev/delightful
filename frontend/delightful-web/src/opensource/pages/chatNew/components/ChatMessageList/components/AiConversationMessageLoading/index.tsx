@@ -1,4 +1,4 @@
-import MagicMemberAvatar from "@/opensource/components/business/MagicMemberAvatar"
+import DelightfulMemberAvatar from "@/opensource/components/business/DelightfulMemberAvatar"
 import { calculateRelativeSize } from "@/utils/styles"
 import { Flex } from "antd"
 import type { HTMLAttributes } from "react"
@@ -49,7 +49,7 @@ const AiConversationMessageLoading = observer(
 				data-message-id="ai-conversation-message-loading"
 				style={{ willChange: "transform" }}
 			>
-				<MagicMemberAvatar
+				<DelightfulMemberAvatar
 					uid={ConversationStore.currentConversation?.receive_id}
 					size={calculateRelativeSize(40, fontSize)}
 				/>

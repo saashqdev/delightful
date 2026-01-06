@@ -7,24 +7,24 @@ import {
 	useFlowData,
 	useFlowEdges,
 	useNodeConfig,
-} from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import type { NodeSchema } from "@delightful/delightful-flow/dist/MagicFlow/register/node"
-import { nodeManager } from "@delightful/delightful-flow/dist/MagicFlow/register/node"
+} from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import type { NodeSchema } from "@delightful/delightful-flow/dist/DelightfulFlow/register/node"
+import { nodeManager } from "@delightful/delightful-flow/dist/DelightfulFlow/register/node"
 import {
 	schemaToDataSource,
 	judgeIsVariableNode,
 	getNodeVersion,
-} from "@delightful/delightful-flow/dist/MagicFlow/utils"
-import { getAllPredecessors } from "@delightful/delightful-flow/dist/MagicFlow/utils/reactflowUtils"
+} from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
+import { getAllPredecessors } from "@delightful/delightful-flow/dist/DelightfulFlow/utils/reactflowUtils"
 import type { DataSourceOption } from "@delightful/delightful-flow/dist/common/BaseUI/DropdownRenderer/Reference"
 import { useMemo } from "react"
 import { useMemoizedFn } from "ahooks"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
-import type Schema from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type Schema from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import { useNodeMap } from "@delightful/delightful-flow/dist/common/context/NodeMap/useResize"
 import { useFlowStore } from "@/opensource/stores/flow"
-import { DefaultNodeVersion } from "@delightful/delightful-flow/dist/MagicFlow/constants"
+import { DefaultNodeVersion } from "@delightful/delightful-flow/dist/DelightfulFlow/constants"
 import { useBotStore } from "@/opensource/stores/bot"
 import { InstructionType } from "@/types/bot"
 import { useTranslation } from "react-i18next"
@@ -46,7 +46,7 @@ export default function usePrevious() {
 	const updateVariableOption = useMemoizedFn(
 		(
 			currentOptions: DataSourceOption[],
-			curNode: MagicFlow.Node | any,
+			curNode: DelightfulFlow.Node | any,
 			pointerVariables?: Schema,
 		) => {
 			// 暂定有指定变量schema的情况下为环境变量
@@ -101,7 +101,7 @@ export default function usePrevious() {
 		},
 	)
 
-	const filterCanReferenceNodes = useMemoizedFn((allNodes: MagicFlow.Node[]) => {
+	const filterCanReferenceNodes = useMemoizedFn((allNodes: DelightfulFlow.Node[]) => {
 		const { canReferenceNodeTypes } = nodeManager
 		return allNodes.filter((n) => {
 			return canReferenceNodeTypes.includes(`${n.node_type}`)
@@ -110,7 +110,7 @@ export default function usePrevious() {
 
 	// 动态生成数据源
 	const generateDynamicSource = useMemoizedFn(
-		(outputs: Schema[], currentNodeSchema: NodeSchema, cur: MagicFlow.Node, suffix: string) => {
+		(outputs: Schema[], currentNodeSchema: NodeSchema, cur: DelightfulFlow.Node, suffix: string) => {
 			return outputs.map((output) => {
 				return schemaToDataSource(
 					{

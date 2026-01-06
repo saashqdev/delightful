@@ -18,7 +18,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $created_at
  * @property string $updated_at
  */
-class MagicChatTopicMessageModel extends Model
+class DelightfulChatTopicMessageModel extends Model
 {
     use SoftDeletes;
 

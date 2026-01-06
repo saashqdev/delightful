@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
-import { FormItemType } from "@/MagicExpressionWidget/types"
-import Schema from "@/MagicJsonSchemaEditor/types/Schema"
+import { FormItemType } from "@/DelightfulExpressionWidget/types"
+import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import _ from "lodash"
 import React, { useMemo, useState } from "react"
 import BaseItem from "../BaseItem"

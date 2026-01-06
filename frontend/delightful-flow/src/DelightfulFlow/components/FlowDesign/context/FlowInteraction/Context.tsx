@@ -1,5 +1,5 @@
 import { NodeSchema } from "@/DelightfulFlow/register/node"
-import { MagicFlow } from "@/DelightfulFlow/types/flow"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import React from "react"
 import { Edge, Node } from "reactflow"
 
@@ -9,7 +9,7 @@ export type FlowInteractionStateType = {
 	showParamsComp: boolean
 	showSelectionTools: boolean
 	currentZoom: number
-	selectionNodes: MagicFlow.Node[]
+	selectionNodes: DelightfulFlow.Node[]
 	selectionEdges: Edge[]
 }
 
@@ -20,7 +20,7 @@ export type FlowInteractionActionsType = {
 		nodeData: NodeSchema,
 		extraConfig?: Record<string, any>,
 	) => Promise<void>
-	layout: () => MagicFlow.Node[]
+	layout: () => DelightfulFlow.Node[]
 	setShowSelectionTools: React.Dispatch<React.SetStateAction<boolean>>
 	onNodesDelete: (_nodes: Node[]) => void
 	reactFlowWrapper?: React.RefObject<HTMLDivElement>

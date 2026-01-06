@@ -7,19 +7,19 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Facade;
 
-use App\Domain\Flow\Entity\MagicFlowAIModelEntity;
+use App\Domain\Flow\Entity\DelightfulFlowAIModelEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowAIModelQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowAIModelQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
-interface MagicFlowAIModelRepositoryInterface
+interface DelightfulFlowAIModelRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowAIModelEntity $magicFlowAIModelEntity): MagicFlowAIModelEntity;
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelEntity $magicFlowAIModelEntity): DelightfulFlowAIModelEntity;
 
-    public function getByName(FlowDataIsolation $dataIsolation, string $name): ?MagicFlowAIModelEntity;
+    public function getByName(FlowDataIsolation $dataIsolation, string $name): ?DelightfulFlowAIModelEntity;
 
     /**
-     * @return array{total: int, list: array<MagicFlowAIModelEntity>}
+     * @return array{total: int, list: array<DelightfulFlowAIModelEntity>}
      */
-    public function queries(FlowDataIsolation $dataIsolation, MagicFlowAIModelQuery $query, Page $page): array;
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelQuery $query, Page $page): array;
 }

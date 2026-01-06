@@ -98,10 +98,10 @@ describe("PreprocessService", () => {
 			expect(typeof rule.replace).toBe("function")
 		})
 
-		it("should wrap latex content in MagicLatexInline component", () => {
+		it("should wrap latex content in DelightfulLatexInline component", () => {
 			const rule = service.getInlineLatexRule()
 			const result = rule.replace("$E=mc^2$", "E=mc^2")
-			expect(result).toBe('<MagicLatexInline math="E=mc^2" />')
+			expect(result).toBe('<DelightfulLatexInline math="E=mc^2" />')
 		})
 	})
 
@@ -342,7 +342,7 @@ describe("PreprocessService", () => {
 		it("should process markdown with latex enabled", () => {
 			const markdown = "This is a formula: $E=mc^2$ and some text"
 			const result = service.preprocess(markdown, { enableLatex: true })
-			expect(result.join("")).toContain('<MagicLatexInline math="E=mc^2" />')
+			expect(result.join("")).toContain('<DelightfulLatexInline math="E=mc^2" />')
 		})
 
 		it("should not process latex when disabled", () => {
@@ -354,7 +354,7 @@ describe("PreprocessService", () => {
 		it("should process citations", () => {
 			const markdown = "This is a citation [[citation:1]]"
 			const result = service.preprocess(markdown)
-			expect(result.join("")).toContain('<MagicCitation index="1" />')
+			expect(result.join("")).toContain('<DelightfulCitation index="1" />')
 		})
 
 		it("should process task lists", () => {
@@ -512,13 +512,13 @@ describe("PreprocessService", () => {
 			expect(joinedResult).toContain("牛顿第二定律")
 
 			// 验证LaTeX处理
-			expect(joinedResult).toContain('<MagicLatexInline math="F = ma" />')
-			expect(joinedResult).toContain('<MagicLatexInline math="E = mc^2" />')
+			expect(joinedResult).toContain('<DelightfulLatexInline math="F = ma" />')
+			expect(joinedResult).toContain('<DelightfulLatexInline math="E = mc^2" />')
 
 			// 验证引用处理
-			expect(joinedResult).toContain('<MagicCitation index="1" />')
-			expect(joinedResult).toContain('<MagicCitation index="2" />')
-			expect(joinedResult).toContain('<MagicCitation index="3" />')
+			expect(joinedResult).toContain('<DelightfulCitation index="1" />')
+			expect(joinedResult).toContain('<DelightfulCitation index="2" />')
+			expect(joinedResult).toContain('<DelightfulCitation index="3" />')
 
 			// 验证任务列表
 			expect(joinedResult).toContain('<input type="checkbox" checked readonly')

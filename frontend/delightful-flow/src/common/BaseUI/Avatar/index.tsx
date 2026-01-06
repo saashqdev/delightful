@@ -1,4 +1,4 @@
-import hash from "@/MagicExpressionWidget/utils"
+import hash from "@/DelightfulExpressionWidget/utils"
 import { useMemoizedFn } from "ahooks"
 import React, { useEffect, useMemo, useState } from "react"
 import styleModule from "./style.module.less"

@@ -7,17 +7,17 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Factory;
 
-use App\Domain\Flow\Entity\MagicFlowPermissionEntity;
+use App\Domain\Flow\Entity\DelightfulFlowPermissionEntity;
 use App\Domain\Flow\Entity\ValueObject\Permission\Operation;
 use App\Domain\Flow\Entity\ValueObject\Permission\ResourceType;
 use App\Domain\Flow\Entity\ValueObject\Permission\TargetType;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowPermissionModel;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowPermissionModel;
 
-class MagicFlowPermissionFactory
+class DelightfulFlowPermissionFactory
 {
-    public static function createEntity(MagicFlowPermissionModel $model): MagicFlowPermissionEntity
+    public static function createEntity(DelightfulFlowPermissionModel $model): DelightfulFlowPermissionEntity
     {
-        $entity = new MagicFlowPermissionEntity();
+        $entity = new DelightfulFlowPermissionEntity();
         $entity->setId($model->id);
         $entity->setOrganizationCode($model->organization_code);
         $entity->setResourceType(ResourceType::from($model->resource_type));

@@ -11,10 +11,10 @@ use App\Domain\Authentication\Repository\Facade\AuthenticationRepositoryInterfac
 use App\Domain\Authentication\Service\AuthenticationDomainService;
 use App\Domain\Authentication\Service\PasswordService;
 use App\Domain\Contact\Entity\AccountEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\OrganizationEnvironment\Repository\Facade\EnvironmentRepositoryInterface;
-use App\Domain\Token\Repository\Facade\MagicTokenRepositoryInterface;
+use App\Domain\Token\Repository\Facade\DelightfulTokenRepositoryInterface;
 use App\ErrorCode\AuthenticationErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Interfaces\Authentication\DTO\CheckLoginRequest;
@@ -23,10 +23,10 @@ use App\Interfaces\Authentication\DTO\CheckLoginResponse;
 readonly class LoginAppService
 {
     public function __construct(
-        protected MagicTokenRepositoryInterface $tokenRepository,
+        protected DelightfulTokenRepositoryInterface $tokenRepository,
         protected EnvironmentRepositoryInterface $environmentRepository,
         protected AuthenticationDomainService $authenticationDomainService,
-        protected MagicUserDomainService $userDomainService,
+        protected DelightfulUserDomainService $userDomainService,
         protected AuthenticationRepositoryInterface $authenticationRepository,
         protected PasswordService $passwordService
     ) {
@@ -44,7 +44,7 @@ readonly class LoginAppService
         $user = $this->verifyAndGetUserInOrganization($account, $request->getOrganizationCode());
 
         // 生成令牌
-        $authorization = $this->authenticationDomainService->generateAccountToken($account->getMagicId());
+        $authorization = $this->authenticationDomainService->generateAccountToken($account->getDelightfulId());
 
         // 构建响应
         return $this->buildLoginResponse($authorization, $account, $user);
@@ -104,10 +104,10 @@ readonly class LoginAppService
     /**
      * 验证用户在组织内是否存在.
      */
-    private function verifyAndGetUserInOrganization(AccountEntity $account, string $organizationCode): MagicUserEntity
+    private function verifyAndGetUserInOrganization(AccountEntity $account, string $organizationCode): DelightfulUserEntity
     {
         $user = $this->authenticationDomainService->findUserInOrganization(
-            $account->getMagicId(),
+            $account->getDelightfulId(),
             $organizationCode
         );
 
@@ -121,7 +121,7 @@ readonly class LoginAppService
     /**
      * 构建登录响应.
      */
-    private function buildLoginResponse(string $authorization, AccountEntity $account, MagicUserEntity $user): CheckLoginResponse
+    private function buildLoginResponse(string $authorization, AccountEntity $account, DelightfulUserEntity $user): CheckLoginResponse
     {
         $response = new CheckLoginResponse();
 

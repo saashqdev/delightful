@@ -1,5 +1,5 @@
-// import MagicButton from "@/opensource/components/base/MagicButton"
-// import MagicIcon from "@/opensource/components/base/MagicIcon"
+// import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+// import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 // import { IconMenuDeep } from "@tabler/icons-react"
 // import { useTranslation } from "react-i18next"
 import TopConversationButton from "../buttons/TopConversationButton"
@@ -13,15 +13,15 @@ export default function UserPopoverContent({ conversationId }: { conversationId:
 		<>
 			<TopConversationButton conversationId={conversationId} />
 			<MuteConversationButton conversationId={conversationId} />
-			{/* <MagicButton
+			{/* <DelightfulButton
 				justify="flex-start"
-				icon={<MagicIcon component={IconMenuDeep} size={20} />}
+				icon={<DelightfulIcon component={IconMenuDeep} size={20} />}
 				size="large"
 				type="text"
 				block
 			>
 				{t("chat.floatButton.moveToGroup")}
-			</MagicButton> */}
+			</DelightfulButton> */}
 			<HideConversationButton conversationId={conversationId} />
 		</>
 	)

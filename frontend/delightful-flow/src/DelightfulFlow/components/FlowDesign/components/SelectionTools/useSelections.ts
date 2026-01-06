@@ -1,7 +1,7 @@
 /**
  * 框选相关的状态
  */
-import { MagicFlow } from '@/DelightfulFlow/types/flow'
+import { DelightfulFlow } from '@/DelightfulFlow/types/flow'
 import { copyToClipboard } from '@/DelightfulFlow/utils'
 import { calculateMidpoint } from '@/DelightfulFlow/utils/reactflowUtils'
 import { useMemoizedFn, useUpdate, useUpdateEffect } from 'ahooks'
@@ -23,7 +23,7 @@ export default function useSelections({ flowInstance }:UseSelectionsProps) {
 	const [showSelectionTools, setShowSelectionTools] = useState(false)
 
 	// 被框选节点
-	const [selectionNodes, setSelectionNodes] = useState([] as MagicFlow.Node[])
+	const [selectionNodes, setSelectionNodes] = useState([] as DelightfulFlow.Node[])
 
 	// 被框选的边
 	const [selectionEdges, setSelectionEdges] = useState([] as Edge[])

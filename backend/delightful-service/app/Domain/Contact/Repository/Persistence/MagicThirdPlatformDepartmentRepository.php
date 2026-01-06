@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Repository\Persistence;
 
 use App\Domain\Chat\Entity\ValueObject\PlatformRootDepartmentId;
-use App\Domain\Contact\Entity\MagicThirdPlatformDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulThirdPlatformDepartmentEntity;
 use App\Domain\Contact\Entity\ValueObject\PlatformType;
-use App\Domain\Contact\Repository\Facade\MagicThirdPlatformDepartmentRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulThirdPlatformDepartmentRepositoryInterface;
 use App\Domain\Contact\Repository\Persistence\Model\ThirdPlatformDepartmentModel;
 use App\Interfaces\Chat\Assembler\DepartmentAssembler;
 use Hyperf\Database\Model\Builder;
@@ -19,14 +19,14 @@ use JetBrains\PhpStorm\ArrayShape;
 /**
  * @deprecated
  */
-class MagicThirdPlatformDepartmentRepository implements MagicThirdPlatformDepartmentRepositoryInterface
+class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlatformDepartmentRepositoryInterface
 {
     public function __construct(
         protected ThirdPlatformDepartmentModel $model,
     ) {
     }
 
-    public function getDepartmentById(string $thirdDepartmentId, string $organizationCode, PlatformType $thirdPlatformType): ?MagicThirdPlatformDepartmentEntity
+    public function getDepartmentById(string $thirdDepartmentId, string $organizationCode, PlatformType $thirdPlatformType): ?DelightfulThirdPlatformDepartmentEntity
     {
         $department = $this->model::query()
             ->where('magic_organization_code', $organizationCode)
@@ -40,7 +40,7 @@ class MagicThirdPlatformDepartmentRepository implements MagicThirdPlatformDepart
     }
 
     /**
-     * @return MagicThirdPlatformDepartmentEntity[]
+     * @return DelightfulThirdPlatformDepartmentEntity[]
      */
     public function getDepartmentByIds(array $departmentIds, string $organizationCode, bool $keyById = false): array
     {
@@ -56,7 +56,7 @@ class MagicThirdPlatformDepartmentRepository implements MagicThirdPlatformDepart
     }
 
     /**
-     * @return MagicThirdPlatformDepartmentEntity[]
+     * @return DelightfulThirdPlatformDepartmentEntity[]
      */
     public function getSubDepartmentsById(string $departmentId, string $organizationCode, int $size, int $offset): array
     {
@@ -73,7 +73,7 @@ class MagicThirdPlatformDepartmentRepository implements MagicThirdPlatformDepart
 
     /**
      * 获取某一层级的部门.
-     * @return MagicThirdPlatformDepartmentEntity[]
+     * @return DelightfulThirdPlatformDepartmentEntity[]
      */
     public function getSubDepartmentsByLevel(int $currentDepartmentLevel, string $organizationCode, int $depth, int $size, int $offset): array
     {
@@ -112,7 +112,7 @@ class MagicThirdPlatformDepartmentRepository implements MagicThirdPlatformDepart
             ->toArray();
     }
 
-    public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?MagicThirdPlatformDepartmentEntity
+    public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?DelightfulThirdPlatformDepartmentEntity
     {
         // 对于前端来说, -1 表示根部门信息.
         $query = $this->model::query()->where('magic_organization_code', $organizationCode);
@@ -132,7 +132,7 @@ class MagicThirdPlatformDepartmentRepository implements MagicThirdPlatformDepart
 
     /**
      * 获取组织的所有部门.
-     * @return MagicThirdPlatformDepartmentEntity[]
+     * @return DelightfulThirdPlatformDepartmentEntity[]
      */
     public function getOrganizationDepartments(string $organizationCode, array $fields = ['*']): array
     {
@@ -144,7 +144,7 @@ class MagicThirdPlatformDepartmentRepository implements MagicThirdPlatformDepart
     }
 
     /**
-     * @return MagicThirdPlatformDepartmentEntity[]
+     * @return DelightfulThirdPlatformDepartmentEntity[]
      */
     protected function getDepartmentsEntity(array $departments, bool $keyById = false): array
     {

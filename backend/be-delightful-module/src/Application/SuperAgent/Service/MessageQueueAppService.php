@@ -5,22 +5,22 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Application\SuperAgent\Service;
+namespace Delightful\SuperDelightful\Application\SuperAgent\Service;
 
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\MessageQueueEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\MessageQueueCreatedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\MessageQueueDeletedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\MessageQueueUpdatedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\MessageQueueDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\SuperMagic\ErrorCode\SuperAgentErrorCode;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request\ConsumeMessageQueueRequestDTO;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request\CreateMessageQueueRequestDTO;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request\QueryMessageQueueRequestDTO;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request\UpdateMessageQueueRequestDTO;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\MessageQueueEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\MessageQueueCreatedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\MessageQueueDeletedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\MessageQueueUpdatedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\MessageQueueDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\TopicDomainService;
+use Delightful\SuperDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\ConsumeMessageQueueRequestDTO;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\CreateMessageQueueRequestDTO;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\QueryMessageQueueRequestDTO;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\UpdateMessageQueueRequestDTO;
 use Hyperf\Logger\LoggerFactory;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;

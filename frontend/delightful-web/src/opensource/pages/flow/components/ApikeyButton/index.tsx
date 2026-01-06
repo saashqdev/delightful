@@ -1,7 +1,7 @@
 import KeyManagerButton from "@/opensource/pages/flow/components/KeyManager/KeyManagerButton"
 import { Button, Flex } from "antd"
 import { useBoolean } from "ahooks"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { createStyles, cx } from "antd-style"
 import type { Knowledge } from "@/types/knowledge"
 
@@ -24,7 +24,7 @@ const useStyles = createStyles(({ css }) => {
 
 type UseApiKeyProps = {
 	Icon?: boolean
-	flow: MagicFlow.Flow | Knowledge.Detail
+	flow: DelightfulFlow.Flow | Knowledge.Detail
 	isAgent: boolean
 	className?: string
 }

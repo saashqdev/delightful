@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Application\ModelGateway\MicroAgent\AgentParser;
 
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 
 readonly class AgentParserFactory
@@ -45,7 +45,7 @@ readonly class AgentParserFactory
     public function getAgentContentFromFile(string $filePath): array
     {
         if (! file_exists($filePath)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.file_not_found', [
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.file_not_found', [
                 'file' => $filePath,
             ]);
         }
@@ -68,7 +68,7 @@ readonly class AgentParserFactory
 
         // Parse agent name to support directory.agent format
         if (str_contains($agent, '.')) {
-            // Directory format: SuperMagicAgent.content_generator -> SuperMagicAgent/content_generator
+            // Directory format: SuperDelightfulAgent.content_generator -> SuperDelightfulAgent/content_generator
             $parts = explode('.', $agent, 2);
             $directory = $parts[0];
             $agentName = $parts[1];
@@ -86,7 +86,7 @@ readonly class AgentParserFactory
             }
         }
 
-        ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.file_not_found', [
+        ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.file_not_found', [
             'file' => $basePath . '/' . $agentPath . '.{' . implode(',', $supportedExtensions) . '}',
         ]);
     }
@@ -104,7 +104,7 @@ readonly class AgentParserFactory
             }
         }
 
-        ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.unsupported_format', [
+        ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.unsupported_format', [
             'file' => $filePath,
             'supported_extensions' => $this->getAllSupportedExtensions(),
         ]);

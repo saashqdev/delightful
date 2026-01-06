@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\DTO\Message\ControlMessage;
 
-use App\Domain\Chat\DTO\Message\MagicMessageStruct;
+use App\Domain\Chat\DTO\Message\DelightfulMessageStruct;
 
-abstract class AbstractControlMessageStruct extends MagicMessageStruct
+abstract class AbstractControlMessageStruct extends DelightfulMessageStruct
 {
 }

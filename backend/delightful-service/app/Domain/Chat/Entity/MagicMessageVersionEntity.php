@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Entity;
 
-class MagicMessageVersionEntity extends AbstractEntity
+class DelightfulMessageVersionEntity extends AbstractEntity
 {
     protected string $versionId;
 
@@ -39,12 +39,12 @@ class MagicMessageVersionEntity extends AbstractEntity
         return $this;
     }
 
-    public function getMagicMessageId(): string
+    public function getDelightfulMessageId(): string
     {
         return $this->magicMessageId;
     }
 
-    public function setMagicMessageId(string $magicMessageId): static
+    public function setDelightfulMessageId(string $magicMessageId): static
     {
         $this->magicMessageId = $magicMessageId;
         return $this;

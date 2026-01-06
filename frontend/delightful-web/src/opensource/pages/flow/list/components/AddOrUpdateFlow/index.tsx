@@ -2,12 +2,12 @@ import { useTranslation } from "react-i18next"
 import { Flex, Form, Input, message } from "antd"
 import { useMemoizedFn } from "ahooks"
 import { useForm } from "antd/es/form/Form"
-import MagicModal from "@/opensource/components/base/MagicModal"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { Flow, FlowTool, FlowRouteType, FlowType } from "@/types/flow"
 import { useEffect, useMemo, useState } from "react"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
-import type { FileData } from "@/opensource/components/MagicConversation/components/MagicInput/components/InputFiles/types"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
+import type { FileData } from "@/opensource/components/DelightfulConversation/components/DelightfulInput/components/InputFiles/types"
 import UploadButton from "@/opensource/pages/explore/components/UploadButton"
 import { createStyles } from "antd-style"
 import defaultFlowAvatar from "@/assets/logos/flow-avatar.png"
@@ -19,7 +19,7 @@ import { useBotStore } from "@/opensource/stores/bot"
 import { FlowApi } from "@/apis"
 import type { Knowledge } from "@/types/knowledge"
 
-type AddOrUpdateFlowForm = Pick<MagicFlow.Flow, "name" | "description"> & {
+type AddOrUpdateFlowForm = Pick<DelightfulFlow.Flow, "name" | "description"> & {
 	icon: string
 }
 
@@ -27,16 +27,16 @@ type AddOrUpdateFlowProps = {
 	flowType: FlowRouteType
 	title: string
 	open: boolean
-	flow?: MagicFlow.Flow | Knowledge.KnowledgeItem | Flow.Mcp.Detail
+	flow?: DelightfulFlow.Flow | Knowledge.KnowledgeItem | Flow.Mcp.Detail
 	tool?: FlowTool.Tool | Flow.Mcp.ListItem
 	groupId?: string
 	onClose: () => void
 	updateFlowOrTool: (
-		data: MagicFlow.Flow | FlowTool.Detail | Flow.Mcp.Detail,
+		data: DelightfulFlow.Flow | FlowTool.Detail | Flow.Mcp.Detail,
 		isTool: boolean,
 		update: boolean,
 	) => void
-	addNewFlow: (data: MagicFlow.Flow | FlowTool.Detail | Flow.Mcp.Detail) => void
+	addNewFlow: (data: DelightfulFlow.Flow | FlowTool.Detail | Flow.Mcp.Detail) => void
 }
 
 const useStyles = createStyles(({ css, token }) => {
@@ -254,7 +254,7 @@ function AddOrUpdateFlow({
 	}, [flow?.id, open, tool?.code, groupId])
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			title={operationTitle}
 			open={open}
 			onOk={handleOk}
@@ -277,7 +277,7 @@ function AddOrUpdateFlow({
 					<Form.Item name="icon" className={styles.formItem}>
 						<Flex vertical align="center" gap={10} className={styles.avatar}>
 							{imageUrl ? (
-								<MagicAvatar
+								<DelightfulAvatar
 									src={imageUrl}
 									size={100}
 									style={{ borderRadius: 20 }}
@@ -322,7 +322,7 @@ function AddOrUpdateFlow({
 					/>
 				</Form.Item>
 			</Form>
-		</MagicModal>
+		</DelightfulModal>
 	)
 }
 

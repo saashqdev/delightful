@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace HyperfTest;
 
-use App\Application\ModelGateway\Official\MagicAccessToken;
+use App\Application\ModelGateway\Official\DelightfulAccessToken;
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Testing;
 use Mockery;
@@ -36,7 +36,7 @@ abstract class HttpTestCase extends TestCase
         parent::__construct($name);
         $this->client = make(Testing\Client::class);
         // $this->client = make(Testing\HttpClient::class, ['baseUri' => 'http://127.0.0.1:9764']);
-        MagicAccessToken::init();
+        DelightfulAccessToken::init();
     }
 
     public function __call($name, $arguments)

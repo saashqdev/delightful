@@ -70,22 +70,22 @@ class AccountEntity extends AbstractEntity
         parent::__construct($data);
     }
 
-    public function getMagicEnvironmentId(): int
+    public function getDelightfulEnvironmentId(): int
     {
         return $this->magicEnvironmentId;
     }
 
-    public function setMagicEnvironmentId(int $magicEnvironmentId): void
+    public function setDelightfulEnvironmentId(int $magicEnvironmentId): void
     {
         $this->magicEnvironmentId = $magicEnvironmentId;
     }
 
-    public function getMagicId(): ?string
+    public function getDelightfulId(): ?string
     {
         return $this->magicId;
     }
 
-    public function setMagicId(null|int|string $magicId): void
+    public function setDelightfulId(null|int|string $magicId): void
     {
         if (is_int($magicId)) {
             $magicId = (string) $magicId;

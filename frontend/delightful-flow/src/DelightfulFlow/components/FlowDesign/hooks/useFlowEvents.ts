@@ -15,7 +15,7 @@ import { FlowDesignerEvents, renderSkeletonRatio } from "@/DelightfulFlow/consta
 import useViewport from "../../common/hooks/useViewport"
 import { controlDuration } from "./useFlowControls"
 import { generateLoopBody, generateNewNode, judgeIsLoopBody, judgeLoopNode } from "@/DelightfulFlow/utils"
-import { MagicFlow } from "@/DelightfulFlow/types/flow"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import { FLOW_EVENTS, flowEventBus } from "@/common/BaseUI/Select/constants"
 
 type UseFlowEventProps = {
@@ -293,7 +293,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 	})
 
 	// backspace删除事件
-	const onNodesDelete = useMemoizedFn((_nodes: (Node & Partial<MagicFlow.Node>)[]) => {
+	const onNodesDelete = useMemoizedFn((_nodes: (Node & Partial<DelightfulFlow.Node>)[]) => {
 		const deleteIds = _nodes.reduce((acc, n) => {
 			// @ts-ignore
 			const nodeType = n.node_type

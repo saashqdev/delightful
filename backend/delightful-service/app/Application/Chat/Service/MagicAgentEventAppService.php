@@ -11,12 +11,12 @@ use App\Application\Chat\Event\Subscribe\Agent\Factory\AgentFactory;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 use App\Domain\Chat\Event\Agent\AgentExecuteInterface;
 use App\Domain\Chat\Event\Agent\UserCallAgentEvent;
-use App\Domain\Chat\Service\MagicConversationDomainService;
+use App\Domain\Chat\Service\DelightfulConversationDomainService;
 
-class MagicAgentEventAppService implements AgentExecuteInterface
+class DelightfulAgentEventAppService implements AgentExecuteInterface
 {
     public function __construct(
-        protected readonly MagicConversationDomainService $magicConversationDomainService,
+        protected readonly DelightfulConversationDomainService $magicConversationDomainService,
     ) {
     }
 

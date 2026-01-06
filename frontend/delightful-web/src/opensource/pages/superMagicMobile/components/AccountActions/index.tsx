@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next"
 import { useNavigate } from "react-router-dom"
 import { BroadcastChannelSender } from "@/opensource/broadcastChannel"
 import ComponentRender from "@/opensource/components/ComponentRender"
-import MagicDropdown from "@/opensource/components/base/MagicDropdown"
+import DelightfulDropdown from "@/opensource/components/base/DelightfulDropdown"
 
 interface AccountActionsProps {
 	onSwitchOrganization?: () => void
@@ -126,7 +126,7 @@ export default observer(function AccountActions({
 
 	return (
 		<div className={styles.container}>
-			<MagicDropdown
+			<DelightfulDropdown
 				trigger={["click"]}
 				placement="top"
 				open={modalVisible}
@@ -142,7 +142,7 @@ export default observer(function AccountActions({
 				<div className={styles.item}>
 					<IconSwitchHorizontal className={styles.icon} /> <span>切换组织</span>
 				</div>
-			</MagicDropdown>
+			</DelightfulDropdown>
 			<div className={cx(styles.item, styles.logoutItem)} onClick={handleLogout}>
 				<IconLogout className={styles.icon} /> <span>退出账号</span>
 			</div>

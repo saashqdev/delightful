@@ -9,21 +9,21 @@ namespace App\Application\Chat\Service;
 
 use App\Application\Flow\ExecuteManager\Attachment\AbstractAttachment;
 use App\Application\ModelGateway\Service\LLMAppService;
-use App\Domain\Chat\DTO\AIImage\Request\MagicChatAIImageReqDTO;
+use App\Domain\Chat\DTO\AIImage\Request\DelightfulChatAIImageReqDTO;
 use App\Domain\Chat\DTO\Message\ChatMessage\AIImageCardMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\ImageConvertHighCardMessage;
 use App\Domain\Chat\Entity\Items\SeqExtra;
-use App\Domain\Chat\Entity\MagicChatFileEntity;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulChatFileEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\AIImage\AIImageCardResponseType;
 use App\Domain\Chat\Entity\ValueObject\AIImage\AIImageGenerateParamsVO;
 use App\Domain\Chat\Entity\ValueObject\AIImage\Radio;
 use App\Domain\Chat\Entity\ValueObject\FileType;
-use App\Domain\Chat\Service\MagicAIImageDomainService;
-use App\Domain\Chat\Service\MagicChatDomainService;
-use App\Domain\Chat\Service\MagicChatFileDomainService;
-use App\Domain\Chat\Service\MagicConversationDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Chat\Service\DelightfulAIImageDomainService;
+use App\Domain\Chat\Service\DelightfulChatDomainService;
+use App\Domain\Chat\Service\DelightfulChatFileDomainService;
+use App\Domain\Chat\Service\DelightfulConversationDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\ModelGateway\Service\MsgLogDomainService;
 use App\Domain\Provider\Service\AdminProviderDomainService;
@@ -46,17 +46,17 @@ use function mb_strlen;
 /**
  * AI文生图.
  */
-class MagicChatAIImageAppService extends AbstractAIImageAppService
+class DelightfulChatAIImageAppService extends AbstractAIImageAppService
 {
     protected LoggerInterface $logger;
 
     public function __construct(
-        protected readonly MagicConversationDomainService $magicConversationDomainService,
-        protected readonly MagicUserDomainService $magicUserDomainService,
-        protected readonly MagicChatDomainService $magicChatDomainService,
-        protected readonly MagicAIImageDomainService $magicAIImageDomainService,
+        protected readonly DelightfulConversationDomainService $magicConversationDomainService,
+        protected readonly DelightfulUserDomainService $magicUserDomainService,
+        protected readonly DelightfulChatDomainService $magicChatDomainService,
+        protected readonly DelightfulAIImageDomainService $magicAIImageDomainService,
         protected readonly FileDomainService $fileDomainService,
-        protected readonly MagicChatFileDomainService $magicChatFileDomainService,
+        protected readonly DelightfulChatFileDomainService $magicChatFileDomainService,
         protected readonly AdminProviderDomainService $serviceProviderDomainService,
         protected readonly LLMAppService $llmAppService,
         protected readonly MsgLogDomainService $msgLogDomainService,
@@ -66,7 +66,7 @@ class MagicChatAIImageAppService extends AbstractAIImageAppService
         $this->logger = di()->get(LoggerFactory::class)->get(get_class($this));
     }
 
-    public function handleUserMessage(RequestContext $requestContext, MagicChatAIImageReqDTO $reqDTO): void
+    public function handleUserMessage(RequestContext $requestContext, DelightfulChatAIImageReqDTO $reqDTO): void
     {
         $referContent = $this->getReferContentForAIImage($reqDTO->getReferMessageId());
         $referText = $this->getReferTextByContentForAIImage($referContent);
@@ -114,7 +114,7 @@ class MagicChatAIImageAppService extends AbstractAIImageAppService
     /**
      * 对引用内容重新文生图.
      */
-    private function handleGenerateImageByReference(RequestContext $requestContext, MagicChatAIImageReqDTO $reqDTO): void
+    private function handleGenerateImageByReference(RequestContext $requestContext, DelightfulChatAIImageReqDTO $reqDTO): void
     {
         $reqDTO->getParams()->setGenerateNum(1);
         // 清空空值
@@ -126,7 +126,7 @@ class MagicChatAIImageAppService extends AbstractAIImageAppService
     /**
      * 文生图.
      */
-    private function handleGenerateImage(RequestContext $requestContext, MagicChatAIImageReqDTO $reqDTO): void
+    private function handleGenerateImage(RequestContext $requestContext, DelightfulChatAIImageReqDTO $reqDTO): void
     {
         $res = $this->generateImage($requestContext, $reqDTO->getParams());
         $this->aiSendMessage(
@@ -188,7 +188,7 @@ class MagicChatAIImageAppService extends AbstractAIImageAppService
                 // 同步文件至magic
                 $fileUploadDTOs = [];
                 $fileType = FileType::getTypeFromFileExtension($uploadFile->getExt());
-                $fileUploadDTO = new MagicChatFileEntity();
+                $fileUploadDTO = new DelightfulChatFileEntity();
                 $fileUploadDTO->setFileKey($uploadFile->getKey());
                 $fileUploadDTO->setFileSize($uploadFile->getSize());
                 $fileUploadDTO->setFileExtension($uploadFile->getExt());
@@ -211,7 +211,7 @@ class MagicChatAIImageAppService extends AbstractAIImageAppService
         return $images;
     }
 
-    private function handleGlobalThrowable(MagicChatAIImageReqDTO $reqDTO, Throwable $e)
+    private function handleGlobalThrowable(DelightfulChatAIImageReqDTO $reqDTO, Throwable $e)
     {
         $errorCode = $e->getCode();
         $errorMessage = __('chat.agent.user_call_agent_fail_notice');
@@ -270,7 +270,7 @@ class MagicChatAIImageAppService extends AbstractAIImageAppService
         $messageInterface = new AIImageCardMessage($content);
         $extra = new SeqExtra();
         $extra->setTopicId($topicId);
-        $seqDTO = (new MagicSeqEntity())
+        $seqDTO = (new DelightfulSeqEntity())
             ->setConversationId($conversationId)
             ->setContent($messageInterface)
             ->setSeqType($messageInterface->getMessageTypeEnum())
@@ -278,11 +278,11 @@ class MagicChatAIImageAppService extends AbstractAIImageAppService
             ->setExtra($extra)
             ->setReferMessageId($referMessageId);
         // 设置话题 id
-        return $this->getMagicChatMessageAppService()->aiSendMessage($seqDTO, $appMessageId, doNotParseReferMessageId: true);
+        return $this->getDelightfulChatMessageAppService()->aiSendMessage($seqDTO, $appMessageId, doNotParseReferMessageId: true);
     }
 
-    private function getMagicChatMessageAppService(): MagicChatMessageAppService
+    private function getDelightfulChatMessageAppService(): DelightfulChatMessageAppService
     {
-        return di(MagicChatMessageAppService::class);
+        return di(DelightfulChatMessageAppService::class);
     }
 }

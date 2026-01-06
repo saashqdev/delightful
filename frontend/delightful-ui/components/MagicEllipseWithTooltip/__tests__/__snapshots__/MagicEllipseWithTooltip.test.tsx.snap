@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MagicEllipseWithTooltip > 快照测试 > 基础省略文本快照 1`] = `
+exports[`DelightfulEllipseWithTooltip > 快照测试 > 基础省略文本快照 1`] = `
 <DocumentFragment>
   <div
     aria-describedby="test-id"
@@ -11,7 +11,7 @@ exports[`MagicEllipseWithTooltip > 快照测试 > 基础省略文本快照 1`] =
 </DocumentFragment>
 `;
 
-exports[`MagicEllipseWithTooltip > 快照测试 > 带类名快照 1`] = `
+exports[`DelightfulEllipseWithTooltip > 快照测试 > 带类名快照 1`] = `
 <DocumentFragment>
   <div
     aria-describedby="test-id"
@@ -23,7 +23,7 @@ exports[`MagicEllipseWithTooltip > 快照测试 > 带类名快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicEllipseWithTooltip > 快照测试 > 带自定义样式快照 1`] = `
+exports[`DelightfulEllipseWithTooltip > 快照测试 > 带自定义样式快照 1`] = `
 <DocumentFragment>
   <div
     aria-describedby="test-id"
@@ -34,7 +34,7 @@ exports[`MagicEllipseWithTooltip > 快照测试 > 带自定义样式快照 1`] =
 </DocumentFragment>
 `;
 
-exports[`MagicEllipseWithTooltip > 快照测试 > 空文本快照 1`] = `
+exports[`DelightfulEllipseWithTooltip > 快照测试 > 空文本快照 1`] = `
 <DocumentFragment>
   <div
     aria-describedby="test-id"
@@ -43,7 +43,7 @@ exports[`MagicEllipseWithTooltip > 快照测试 > 空文本快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicEllipseWithTooltip > 快照测试 > 自定义最大宽度快照 1`] = `
+exports[`DelightfulEllipseWithTooltip > 快照测试 > 自定义最大宽度快照 1`] = `
 <DocumentFragment>
   <div
     aria-describedby="test-id"
@@ -54,7 +54,7 @@ exports[`MagicEllipseWithTooltip > 快照测试 > 自定义最大宽度快照 1`
 </DocumentFragment>
 `;
 
-exports[`MagicEllipseWithTooltip > 快照测试 > 长文本省略快照 1`] = `
+exports[`DelightfulEllipseWithTooltip > 快照测试 > 长文本省略快照 1`] = `
 <DocumentFragment>
   <div
     aria-describedby="test-id"

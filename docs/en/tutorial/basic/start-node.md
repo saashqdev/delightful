@@ -1,6 +1,6 @@
 # Start Node
 
-The Start Node is the entry point of any flow in Magic. It defines how your flow begins and what initial data it receives.
+The Start Node is the entry point of any flow in Delightful. It defines how your flow begins and what initial data it receives.
 
 ## Overview
 

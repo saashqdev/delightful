@@ -5,7 +5,7 @@ import { useMemoizedFn, useMount } from "ahooks"
 import { useUpload } from "@/opensource/hooks/useUploadFiles"
 import type { FileData } from "@/opensource/pages/chatNew/components/MessageEditor/components/InputFiles/types"
 import { genFileData } from "@/opensource/pages/chatNew/components/MessageEditor/components/InputFiles/utils"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import type { InstructionExplanation as InstructionExplanationType } from "@/types/bot"
 import { useStyles } from "../styles"
 
@@ -33,7 +33,7 @@ export const InstructionExplanation = memo(
 		})
 
 		const uploadButton = uploading ? (
-			<MagicButton type="text" loading size="small" />
+			<DelightfulButton type="text" loading size="small" />
 		) : (
 			<Flex vertical align="center" className={styles.uploadTip}>
 				<div>{t("explore.form.instructionExpImgTip1")}</div>
@@ -109,17 +109,17 @@ export const InstructionExplanation = memo(
 						/>
 					</Form.Item>
 					<Flex justify="end" gap={10}>
-						<MagicButton
+						<DelightfulButton
 							type="text"
 							className={styles.button}
 							style={{ width: 80 }}
 							onClick={handleCancel}
 						>
 							{t("button.cancel")}
-						</MagicButton>
-						<MagicButton type="primary" style={{ width: 80 }} onClick={handleSave}>
+						</DelightfulButton>
+						<DelightfulButton type="primary" style={{ width: 80 }} onClick={handleSave}>
 							{t("button.save")}
-						</MagicButton>
+						</DelightfulButton>
 					</Flex>
 				</Flex>
 			</Form>

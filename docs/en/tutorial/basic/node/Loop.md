@@ -1,7 +1,7 @@
 # Loop Node
 
 ## What is a Loop Node?
-The Loop Node is a flow control node in Magic Flow workflow that allows you to repeatedly execute a series of operations until a specific condition is met or a specified number of iterations is completed. Simply put, the Loop Node acts like a "repeat execution" instruction, helping you automate repetitive tasks and improve work efficiency.
+The Loop Node is a flow control node in Delightful Flow workflow that allows you to repeatedly execute a series of operations until a specific condition is met or a specified number of iterations is completed. Simply put, the Loop Node acts like a "repeat execution" instruction, helping you automate repetitive tasks and improve work efficiency.
 
 **Image Description:**
 The Loop Node interface includes two main parts: the outer "Loop" component and the inner "Start Node". In the Loop component, you can set the loop type, loop conditions, or count; the Start Node represents the starting point of each loop iteration.

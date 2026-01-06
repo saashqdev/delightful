@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Application\ModelGateway\Event\Subscribe;
 
-use App\Application\ModelGateway\Official\MagicAccessToken;
+use App\Application\ModelGateway\Official\DelightfulAccessToken;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Server\Event\MainCoroutineServerStart;
@@ -27,6 +27,6 @@ class OfficialAppTokenCheckSubscriber implements ListenerInterface
 
     public function process(object $event): void
     {
-        MagicAccessToken::init();
+        DelightfulAccessToken::init();
     }
 }

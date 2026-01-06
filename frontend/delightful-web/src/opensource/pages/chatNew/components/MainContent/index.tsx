@@ -1,7 +1,7 @@
 import { Flex } from "antd"
 import { Suspense, lazy, type CSSProperties } from "react"
 import { observer } from "mobx-react-lite"
-import MagicSplitter from "@/opensource/components/base/MagicSplitter"
+import DelightfulSplitter from "@/opensource/components/base/DelightfulSplitter"
 import ChatMessageList from "../ChatMessageList"
 import Header from "../ChatHeader"
 import DragFileSendTip from "../ChatMessageList/components/DragFileSendTip"
@@ -36,18 +36,18 @@ const MainContent = observer(function MainContent({ onInputResize, style }: Main
 
 	return (
 		<Flex style={style}>
-			<MagicSplitter layout="vertical" className={styles.main} onResizeEnd={onInputResize}>
-				<MagicSplitter.Panel min={60} defaultSize={60} max={60}>
+			<DelightfulSplitter layout="vertical" className={styles.main} onResizeEnd={onInputResize}>
+				<DelightfulSplitter.Panel min={60} defaultSize={60} max={60}>
 					<Header />
-				</MagicSplitter.Panel>
-				<MagicSplitter.Panel>
+				</DelightfulSplitter.Panel>
+				<DelightfulSplitter.Panel>
 					<div className={styles.chatList}>
 						<DragFileSendTip>
 							<ChatMessageList />
 						</DragFileSendTip>
 					</div>
-				</MagicSplitter.Panel>
-				<MagicSplitter.Panel
+				</DelightfulSplitter.Panel>
+				<DelightfulSplitter.Panel
 					min={200}
 					defaultSize={interfaceStore.chatInputDefaultHeight}
 					max="50%"
@@ -55,8 +55,8 @@ const MainContent = observer(function MainContent({ onInputResize, style }: Main
 					<div className={styles.editor}>
 						<MessageEditor visible sendWhenEnter />
 					</div>
-				</MagicSplitter.Panel>
-			</MagicSplitter>
+				</DelightfulSplitter.Panel>
+			</DelightfulSplitter>
 			{showExtra && (
 				<div className={styles.extra}>
 					<Suspense fallback={null}>

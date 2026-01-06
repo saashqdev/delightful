@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Entity;
 
 use App\Domain\Chat\DTO\Message\ChatMessage\Item\ChatInstruction;
 use App\Domain\Chat\DTO\Message\EmptyMessage;
-use App\Domain\Chat\DTO\Message\MagicMessageStruct;
+use App\Domain\Chat\DTO\Message\DelightfulMessageStruct;
 use App\Domain\Chat\DTO\Message\MessageInterface;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
@@ -23,7 +23,7 @@ use InvalidArgumentException;
 /**
  * 消息的内容详情. 一条消息可能被多个会话/序列号关联，所以消息内容是独立的.
  */
-class MagicMessageEntity extends AbstractEntity
+class DelightfulMessageEntity extends AbstractEntity
 {
     protected string $id = '';
 
@@ -228,7 +228,7 @@ class MagicMessageEntity extends AbstractEntity
     public function getChatInstructions(): array
     {
         $messageContent = $this->getContent();
-        if (! $messageContent instanceof MagicMessageStruct) {
+        if (! $messageContent instanceof DelightfulMessageStruct) {
             return [];
         }
         return $messageContent->getInstructs() ?? [];
@@ -307,12 +307,12 @@ class MagicMessageEntity extends AbstractEntity
         return $this;
     }
 
-    public function getMagicMessageId(): ?string
+    public function getDelightfulMessageId(): ?string
     {
         return $this->magicMessageId;
     }
 
-    public function setMagicMessageId(string $id): static
+    public function setDelightfulMessageId(string $id): static
     {
         $this->magicMessageId = $id;
         return $this;

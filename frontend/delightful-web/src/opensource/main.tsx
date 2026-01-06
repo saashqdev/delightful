@@ -1,6 +1,6 @@
 import "./index.css"
 // 初始化 emoji 缓存
-import "@/opensource/components/base/MagicEmojiPanel/cache"
+import "@/opensource/components/base/DelightfulEmojiPanel/cache"
 import { enableMapSet } from "immer"
 // import ReactDom from "react-dom"
 import { createRoot } from "react-dom/client"

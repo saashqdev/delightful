@@ -4,7 +4,7 @@ import type {
 	InsertLocationMap,
 	StatusIconKey,
 } from "@/opensource/pages/flow/components/QuickInstructionButton/const"
-import type { MagicFlow } from "@delightful/delightful-flow/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/DelightfulFlow/types/flow"
 
 export interface WithPage<ListType> {
 	page: number
@@ -135,7 +135,7 @@ export namespace Bot {
 			instructs: QuickInstructionList[]
 			start_page: boolean
 		}
-		magicFlowEntity: MagicFlow.Flow & {
+		magicFlowEntity: DelightfulFlow.Flow & {
 			updated_at: string
 		}
 		magicUserEntity: User
@@ -184,7 +184,7 @@ export namespace Bot {
 		version_number: string
 		version_description: string
 		release_scope: number
-		magic_flow: MagicFlow.Flow
+		magic_flow: DelightfulFlow.Flow
 		third_platform_list: Bot.ThirdPartyPlatform[]
 		visibility_config: VisibilityConfig
 	}

@@ -5,10 +5,10 @@ import { Flex } from "antd"
 import type { PropsWithChildren } from "react"
 import { Suspense } from "react"
 import { IconChevronLeft } from "@tabler/icons-react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { useNavigate } from "@/opensource/hooks/useNavigate"
 import { useTranslation } from "react-i18next"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import FlowSubSider from "../components/FlowSubSider"
 import LoadingFallback from "@/opensource/components/fallback/LoadingFallback"
 
@@ -95,7 +95,7 @@ export default function FlowLayout({ children }: FlowLayoutProps) {
 	return (
 		<Flex flex={1} vertical>
 			<Flex className={styles.header} align="center" gap={14}>
-				<MagicIcon
+				<DelightfulIcon
 					component={IconChevronLeft}
 					size={24}
 					className={styles.arrow}

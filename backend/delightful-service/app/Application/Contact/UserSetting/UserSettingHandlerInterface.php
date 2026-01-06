@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Application\Contact\UserSetting;
 
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
 use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 
 interface UserSettingHandlerInterface
 {
-    public function populateValue(BaseDataIsolation $dataIsolation, MagicUserSettingEntity $setting): void;
+    public function populateValue(BaseDataIsolation $dataIsolation, DelightfulUserSettingEntity $setting): void;
 
-    public function generateDefault(): ?MagicUserSettingEntity;
+    public function generateDefault(): ?DelightfulUserSettingEntity;
 }

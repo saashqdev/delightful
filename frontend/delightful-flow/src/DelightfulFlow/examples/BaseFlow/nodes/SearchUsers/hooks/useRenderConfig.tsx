@@ -2,9 +2,9 @@
  * 表达式组件的自定义渲染属性
  */
 
-import { Department } from "@/MagicExpressionWidget/components/nodes/LabelDepartmentNames/LabelDepartmentNames"
-import DepartmentModalFC from "@/MagicExpressionWidget/mock/DepartmentModal"
-import { EXPRESSION_VALUE, LabelTypeMap } from "@/MagicExpressionWidget/types"
+import { Department } from "@/DelightfulExpressionWidget/components/nodes/LabelDepartmentNames/LabelDepartmentNames"
+import DepartmentModalFC from "@/DelightfulExpressionWidget/mock/DepartmentModal"
+import { EXPRESSION_VALUE, LabelTypeMap } from "@/DelightfulExpressionWidget/types"
 import { useMemoizedFn } from "ahooks"
 import _ from "lodash"
 import React from "react"

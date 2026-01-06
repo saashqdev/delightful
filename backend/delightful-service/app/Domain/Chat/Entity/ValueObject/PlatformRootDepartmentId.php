@@ -14,7 +14,7 @@ use App\Domain\Contact\Entity\ValueObject\PlatformType;
  */
 class PlatformRootDepartmentId
 {
-    public const string Magic = '-1';
+    public const string Delightful = '-1';
 
     public const string DingTalk = '1';
 

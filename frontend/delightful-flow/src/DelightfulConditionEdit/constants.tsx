@@ -1,4 +1,4 @@
-import { defaultExpressionValue } from "@/MagicExpressionWidget/constant"
+import { defaultExpressionValue } from "@/DelightfulExpressionWidget/constant"
 import i18next from "i18next"
 import { Expression } from "./types/expression"
 

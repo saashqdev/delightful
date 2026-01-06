@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 import { RoutePath } from "@/const/routes"
 import type { PropsWithChildren } from "react"
 import { Suspense, useEffect } from "react"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { useLocation } from "react-router"
 import { useNavigate } from "@/opensource/hooks/useNavigate"
 
@@ -23,5 +23,5 @@ export default function VectorKnowledgeLayout({ children }: VectorKnowledgeLayou
 		}
 	}, [pathname, navigate])
 
-	return <Suspense fallback={<MagicSpin />}>{children || <Outlet />}</Suspense>
+	return <Suspense fallback={<DelightfulSpin />}>{children || <Outlet />}</Suspense>
 }

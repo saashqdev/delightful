@@ -9,12 +9,12 @@ namespace App\Application\Admin\Agent\Service\Extra\Strategy;
 
 use App\Interfaces\Admin\DTO\Extra\DefaultFriendExtraDTO;
 use App\Interfaces\Admin\DTO\Extra\SettingExtraDTOInterface;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use InvalidArgumentException;
 
 class DefaultFriendExtraDetailAppenderStrategy implements ExtraDetailAppenderStrategyInterface
 {
-    public function appendExtraDetail(SettingExtraDTOInterface $extraDTO, MagicUserAuthorization $userAuthorization): SettingExtraDTOInterface
+    public function appendExtraDetail(SettingExtraDTOInterface $extraDTO, DelightfulUserAuthorization $userAuthorization): SettingExtraDTOInterface
     {
         if (! $extraDTO instanceof DefaultFriendExtraDTO) {
             throw new InvalidArgumentException('Expected DefaultFriendExtraDTO');

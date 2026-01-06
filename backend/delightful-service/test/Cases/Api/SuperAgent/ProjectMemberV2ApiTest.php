@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Api\SuperAgent;
 
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ProjectMemberEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\MemberRole;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\MemberStatus;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\MemberType;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectMemberDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ProjectMemberEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\MemberRole;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\MemberStatus;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\MemberType;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
 use Exception;
 use Mockery;
 

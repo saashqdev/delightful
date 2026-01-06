@@ -1,6 +1,6 @@
-# MagicScrollBar 魔法滚动条组件
+# DelightfulScrollBar 魔法滚动条组件
 
-`MagicScrollBar` 是一个基于 simplebar-core 的增强版滚动条组件，提供了更美观、更流畅的自定义滚动条体验。
+`DelightfulScrollBar` 是一个基于 simplebar-core 的增强版滚动条组件，提供了更美观、更流畅的自定义滚动条体验。
 
 ## 属性
 
@@ -14,30 +14,30 @@
 ## 基础用法
 
 ```tsx
-import { MagicScrollBar } from '@/components/base/MagicScrollBar';
+import { DelightfulScrollBar } from '@/components/base/DelightfulScrollBar';
 
 // 基础用法
-<MagicScrollBar style={{ maxHeight: '300px' }}>
+<DelightfulScrollBar style={{ maxHeight: '300px' }}>
   <div>
     {/* 大量内容 */}
     {Array.from({ length: 50 }).map((_, index) => (
       <p key={index}>这是第 {index + 1} 行内容</p>
     ))}
   </div>
-</MagicScrollBar>
+</DelightfulScrollBar>
 
 // 自定义滚动条选项
-<MagicScrollBar
+<DelightfulScrollBar
   autoHide={false} // 始终显示滚动条
   style={{ maxHeight: '300px', width: '100%' }}
 >
   <div>
     {/* 内容 */}
   </div>
-</MagicScrollBar>
+</DelightfulScrollBar>
 
 // 使用渲染函数
-<MagicScrollBar>
+<DelightfulScrollBar>
   {({ scrollableNodeRef, scrollableNodeProps, contentNodeRef, contentNodeProps }) => (
     <div {...scrollableNodeProps}>
       <div {...contentNodeProps}>
@@ -46,19 +46,19 @@ import { MagicScrollBar } from '@/components/base/MagicScrollBar';
       </div>
     </div>
   )}
-</MagicScrollBar>
+</DelightfulScrollBar>
 
 // 在容器中使用
 <div style={{ height: '500px', border: '1px solid #ccc' }}>
-  <MagicScrollBar style={{ height: '100%' }}>
+  <DelightfulScrollBar style={{ height: '100%' }}>
     <div>
       {/* 内容 */}
     </div>
-  </MagicScrollBar>
+  </DelightfulScrollBar>
 </div>
 
 // 水平滚动
-<MagicScrollBar style={{ width: '300px' }}>
+<DelightfulScrollBar style={{ width: '300px' }}>
   <div style={{ display: 'flex', width: '1000px' }}>
     {Array.from({ length: 20 }).map((_, index) => (
       <div
@@ -74,7 +74,7 @@ import { MagicScrollBar } from '@/components/base/MagicScrollBar';
       </div>
     ))}
   </div>
-</MagicScrollBar>
+</DelightfulScrollBar>
 ```
 
 ## 特点
@@ -93,4 +93,4 @@ import { MagicScrollBar } from '@/components/base/MagicScrollBar';
 -   需要控制滚动条的显示和隐藏行为时
 -   需要在复杂布局中使用滚动条时
 
-MagicScrollBar 组件让你的滚动条更加美观和用户友好，适合在各种需要滚动内容的场景下使用。
+DelightfulScrollBar 组件让你的滚动条更加美观和用户友好，适合在各种需要滚动内容的场景下使用。

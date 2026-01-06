@@ -1,10 +1,10 @@
 import { render, screen, fireEvent, act } from "@testing-library/react"
 import { vi, describe, test, expect, beforeEach, afterEach } from "vitest"
-import MagicList from "../MagicList"
-import type { MagicListItemData } from "../types"
+import DelightfulList from "../DelightfulList"
+import type { DelightfulListItemData } from "../types"
 
-// 模拟MagicAvatar组件
-vi.mock("@/opensource/components/base/MagicAvatar", () => ({
+// 模拟DelightfulAvatar组件
+vi.mock("@/opensource/components/base/DelightfulAvatar", () => ({
 	default: ({ children, className, size }: any) => (
 		<div className={className || "mock-avatar"} data-size={size}>
 			{children || "Avatar"}
@@ -14,7 +14,7 @@ vi.mock("@/opensource/components/base/MagicAvatar", () => ({
 
 // 模拟样式模块，解决token问题
 vi.mock("../styles", () => ({
-	useMagicListItemStyles: () => ({
+	useDelightfulListItemStyles: () => ({
 		styles: {
 			container: "mock-container",
 			active: "mock-active",
@@ -29,7 +29,7 @@ vi.mock("../styles", () => ({
 }))
 
 // 创建测试数据
-interface TestItemData extends MagicListItemData {
+interface TestItemData extends DelightfulListItemData {
 	id: string
 	title: string
 	customField?: string
@@ -46,7 +46,7 @@ const createTestItems = (count: number): TestItemData[] => {
 	}))
 }
 
-describe("MagicList 性能测试", () => {
+describe("DelightfulList 性能测试", () => {
 	// 高级别模拟
 	let originalConsoleWarn: typeof console.warn
 	let warnSpy: ReturnType<typeof vi.fn>
@@ -65,13 +65,13 @@ describe("MagicList 性能测试", () => {
 	test("active 属性变化时不应导致过度重渲染", async () => {
 		const items = createTestItems(20)
 
-		const { rerender } = render(<MagicList items={items} active="item-1" />)
+		const { rerender } = render(<DelightfulList items={items} active="item-1" />)
 
 		// 重置模拟
 		warnSpy.mockReset()
 
 		// 数据没变，只有 active 属性变化
-		rerender(<MagicList items={items} active="item-2" />)
+		rerender(<DelightfulList items={items} active="item-2" />)
 
 		// 期望没有发生 React 优化警告
 		expect(warnSpy).not.toHaveBeenCalledWith(
@@ -87,19 +87,19 @@ describe("MagicList 性能测试", () => {
 
 		// 记录小列表渲染时间
 		const smallStartTime = performance.now()
-		const { unmount: unmountSmall } = render(<MagicList items={smallItems} />)
+		const { unmount: unmountSmall } = render(<DelightfulList items={smallItems} />)
 		const smallEndTime = performance.now()
 		unmountSmall()
 
 		// 记录中等列表渲染时间
 		const mediumStartTime = performance.now()
-		const { unmount: unmountMedium } = render(<MagicList items={mediumItems} />)
+		const { unmount: unmountMedium } = render(<DelightfulList items={mediumItems} />)
 		const mediumEndTime = performance.now()
 		unmountMedium()
 
 		// 记录大列表渲染时间
 		const largeStartTime = performance.now()
-		const { unmount: unmountLarge } = render(<MagicList items={largeItems} />)
+		const { unmount: unmountLarge } = render(<DelightfulList items={largeItems} />)
 		const largeEndTime = performance.now()
 		unmountLarge()
 
@@ -123,7 +123,7 @@ describe("MagicList 性能测试", () => {
 	// 测试频繁更新的性能
 	test("频繁更新时的性能", () => {
 		const items = createTestItems(50)
-		const { rerender } = render(<MagicList items={items} />)
+		const { rerender } = render(<DelightfulList items={items} />)
 
 		const iterations = 10
 		const startTime = performance.now()
@@ -132,7 +132,7 @@ describe("MagicList 性能测试", () => {
 		for (let i = 0; i < iterations; i += 1) {
 			// 每次更新不同的 active 项
 			act(() => {
-				rerender(<MagicList items={items} active={`item-${i}`} />)
+				rerender(<DelightfulList items={items} active={`item-${i}`} />)
 			})
 		}
 
@@ -151,11 +151,11 @@ describe("MagicList 性能测试", () => {
 		const onClick = vi.fn()
 
 		// 首次渲染
-		const { rerender } = render(<MagicList items={items} onItemClick={onClick} />)
+		const { rerender } = render(<DelightfulList items={items} onItemClick={onClick} />)
 
 		// 用相同的 props 重新渲染
 		const startTime = performance.now()
-		rerender(<MagicList items={items} onItemClick={onClick} />)
+		rerender(<DelightfulList items={items} onItemClick={onClick} />)
 		const endTime = performance.now()
 
 		// 由于 memo 优化，相同 props 的重渲染应该非常快
@@ -170,7 +170,7 @@ describe("MagicList 性能测试", () => {
 		const sameContentOnClick = vi.fn()
 
 		const startTimeNewProps = performance.now()
-		rerender(<MagicList items={sameContentItems} onItemClick={sameContentOnClick} />)
+		rerender(<DelightfulList items={sameContentItems} onItemClick={sameContentOnClick} />)
 		const endTimeNewProps = performance.now()
 
 		const newPropsRerenderTime = endTimeNewProps - startTimeNewProps
@@ -184,7 +184,7 @@ describe("MagicList 性能测试", () => {
 	test("与大量列表项进行鼠标交互的性能", () => {
 		const items = createTestItems(100)
 
-		render(<MagicList items={items} />)
+		render(<DelightfulList items={items} />)
 
 		// 获取所有列表项
 		const listItems = screen.getAllByText(/测试项 \d+/)

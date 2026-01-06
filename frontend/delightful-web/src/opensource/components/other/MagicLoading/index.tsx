@@ -5,12 +5,12 @@ import loadingJson from "./loading.json?raw"
 
 const url = URL.createObjectURL(new Blob([loadingJson], { type: "application/json" }))
 
-interface MagicLoadingProps extends DotLottieReactProps {
+interface DelightfulLoadingProps extends DotLottieReactProps {
 	section?: boolean
 	size?: number
 }
 
-const MagicLoading = memo(function MagicLoading({ section, ...props }: MagicLoadingProps) {
+const DelightfulLoading = memo(function DelightfulLoading({ section, ...props }: DelightfulLoadingProps) {
 	return (
 		<DotLottieReact
 			src={section ? url : url}
@@ -22,4 +22,4 @@ const MagicLoading = memo(function MagicLoading({ section, ...props }: MagicLoad
 	)
 })
 
-export default MagicLoading
+export default DelightfulLoading

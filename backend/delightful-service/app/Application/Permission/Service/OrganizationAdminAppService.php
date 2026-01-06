@@ -9,9 +9,9 @@ namespace App\Application\Permission\Service;
 
 use App\Application\Kernel\AbstractKernelAppService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\Permission\Entity\OrganizationAdminEntity;
 use App\Domain\Permission\Service\OrganizationAdminDomainService;
 use App\Infrastructure\Core\ValueObject\Page;
@@ -21,9 +21,9 @@ class OrganizationAdminAppService extends AbstractKernelAppService
 {
     public function __construct(
         private readonly OrganizationAdminDomainService $organizationAdminDomainService,
-        private readonly MagicUserDomainService $userDomainService,
-        private readonly MagicDepartmentUserDomainService $departmentUserDomainService,
-        private readonly MagicDepartmentDomainService $departmentDomainService
+        private readonly DelightfulUserDomainService $userDomainService,
+        private readonly DelightfulDepartmentUserDomainService $departmentUserDomainService,
+        private readonly DelightfulDepartmentDomainService $departmentDomainService
     ) {
     }
 

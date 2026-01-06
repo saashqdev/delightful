@@ -1,7 +1,7 @@
 import {
 	downloadFileContent,
 	getTemporaryDownloadUrl,
-} from "@/opensource/pages/superMagic/utils/api"
+} from "@/opensource/pages/superDelightful/utils/api"
 import { useEffect, useState } from "react"
 import { useDebounceEffect, useDeepCompareEffect } from "ahooks"
 export const useFileData = ({

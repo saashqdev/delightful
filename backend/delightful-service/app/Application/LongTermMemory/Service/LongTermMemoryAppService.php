@@ -25,10 +25,10 @@ use App\ErrorCode\LongTermMemoryErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\LLMParse\LLMResponseParseUtil;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Delightful\SuperMagic\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationAction;
-use Delightful\SuperMagic\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationScenario;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectDomainService;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use Delightful\SuperDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationAction;
+use Delightful\SuperDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationScenario;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectDomainService;
 use Hyperf\Odin\Contract\Model\ModelInterface;
 use Hyperf\Odin\Message\SystemMessage;
 use InvalidArgumentException;
@@ -343,7 +343,7 @@ class LongTermMemoryAppService
      */
     public function evaluateAndCreateMemory(
         EvaluateConversationRequestDTO $dto,
-        MagicUserAuthorization $authorization
+        DelightfulUserAuthorization $authorization
     ): array {
         try {
             // 1. Fetch chat model
@@ -479,7 +479,7 @@ class LongTermMemoryAppService
     /**
      * Get chat model.
      */
-    private function getChatModel(MagicUserAuthorization $authorization): ModelInterface
+    private function getChatModel(DelightfulUserAuthorization $authorization): ModelInterface
     {
         $modelName = di(ModelConfigAppService::class)->getChatModelTypeByFallbackChain(
             $authorization->getOrganizationCode(),

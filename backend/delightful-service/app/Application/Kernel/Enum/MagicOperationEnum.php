@@ -9,7 +9,7 @@ namespace App\Application\Kernel\Enum;
 
 use function Hyperf\Translation\__;
 
-enum MagicOperationEnum: string
+enum DelightfulOperationEnum: string
 {
     case QUERY = 'query';
     case EDIT = 'edit';

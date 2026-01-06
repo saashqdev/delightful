@@ -71,7 +71,7 @@ class OperationPermissionApi extends AbstractPermissionApi
      */
     public function getUserOrganizationAdminList(): array
     {
-        $organizationCodes = PermissionChecker::getUserOrganizationAdminList($this->getAuthorization()->getMagicId());
+        $organizationCodes = PermissionChecker::getUserOrganizationAdminList($this->getAuthorization()->getDelightfulId());
 
         return [
             'organization_codes' => $organizationCodes,

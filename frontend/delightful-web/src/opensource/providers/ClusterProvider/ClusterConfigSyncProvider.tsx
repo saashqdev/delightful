@@ -4,7 +4,7 @@ import { userStore } from "@/opensource/models/user"
 import { loginService } from "@/services"
 import { useMount, useDebounceFn } from "ahooks"
 import { createStyles } from "antd-style"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { useClusterCode } from "@/opensource/providers/ClusterProvider"
 import { useTranslation } from "react-i18next"
 
@@ -69,9 +69,9 @@ export function ClusterConfigSyncProvider(props: PropsWithChildren) {
 	})
 
 	return loading ? (
-		<MagicSpin spinning wrapperClassName={styles.spin} tip={t("spin.loadingCluster")}>
+		<DelightfulSpin spinning wrapperClassName={styles.spin} tip={t("spin.loadingCluster")}>
 			<div style={{ height: "100vh" }} />
-		</MagicSpin>
+		</DelightfulSpin>
 	) : (
 		children
 	)

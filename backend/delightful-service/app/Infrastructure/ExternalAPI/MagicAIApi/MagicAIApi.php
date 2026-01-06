@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Infrastructure\ExternalAPI\MagicAIApi;
+namespace App\Infrastructure\ExternalAPI\DelightfulAIApi;
 
 use Delightful\SdkBase\SdkBase;
 use Delightful\SdkBase\SdkBaseContext;
@@ -14,7 +14,7 @@ use RuntimeException;
 /**
  * @property Api\Chat $chat
  */
-class MagicAIApi
+class DelightfulAIApi
 {
     public const string NAME = 'magic_ai';
 

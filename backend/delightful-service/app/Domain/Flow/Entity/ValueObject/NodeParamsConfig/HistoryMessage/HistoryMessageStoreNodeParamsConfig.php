@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\HistoryMessage;
 
-use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\MagicFlowMessageType;
+use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\DelightfulFlowMessageType;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\NodeParamsConfig;
 use Delightful\FlowExprEngine\Component;
 use Delightful\FlowExprEngine\ComponentFactory;
@@ -15,7 +15,7 @@ use Delightful\FlowExprEngine\Structure\StructureType;
 
 class HistoryMessageStoreNodeParamsConfig extends NodeParamsConfig
 {
-    private MagicFlowMessageType $type;
+    private DelightfulFlowMessageType $type;
 
     private ?Component $content = null;
 
@@ -23,7 +23,7 @@ class HistoryMessageStoreNodeParamsConfig extends NodeParamsConfig
 
     private ?Component $linkDesc = null;
 
-    public function getType(): MagicFlowMessageType
+    public function getType(): DelightfulFlowMessageType
     {
         return $this->type;
     }
@@ -45,7 +45,7 @@ class HistoryMessageStoreNodeParamsConfig extends NodeParamsConfig
 
     public function validate(): array
     {
-        $data = MagicFlowMessageType::validateParams($this->node->getParams());
+        $data = DelightfulFlowMessageType::validateParams($this->node->getParams());
         $this->type = $data['type'];
         $this->content = $data['content'];
         $this->link = $data['link'];
@@ -61,7 +61,7 @@ class HistoryMessageStoreNodeParamsConfig extends NodeParamsConfig
     public function generateTemplate(): void
     {
         $this->node->setParams([
-            'type' => MagicFlowMessageType::Text,
+            'type' => DelightfulFlowMessageType::Text,
             'content' => ComponentFactory::generateTemplate(StructureType::Value)->toArray(),
             'link' => ComponentFactory::generateTemplate(StructureType::Value)->toArray(),
             'link_desc' => ComponentFactory::generateTemplate(StructureType::Value)->toArray(),

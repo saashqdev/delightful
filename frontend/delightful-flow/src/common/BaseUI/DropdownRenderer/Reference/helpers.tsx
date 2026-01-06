@@ -1,4 +1,4 @@
-import { ExpressionSource, LabelTypeMap } from "@/MagicExpressionWidget/types"
+import { ExpressionSource, LabelTypeMap } from "@/DelightfulExpressionWidget/types"
 import { TreeDataNode } from "antd"
 import _ from "lodash"
 import React from "react"

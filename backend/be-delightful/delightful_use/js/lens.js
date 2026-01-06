@@ -1,5 +1,5 @@
 /**
- * @fileoverview MagicLens - 智能网页内容转Markdown工具
+ * @fileoverview DelightfulLens - 智能网页内容转Markdown工具
  *
  * 该脚本分析网页 DOM 结构，提取主要内容，并将其转换为 Markdown 格式。
  * 它能够处理各种 HTML 元素，包括标题、段落、列表、链接、图片、代码块和表格。
@@ -223,7 +223,7 @@
         return window.getComputedStyle(element);
       } catch (e) {
         // 在某些边缘情况（例如元素在获取样式前被移除）下可能抛出异常
-        // console.warn("MagicLens: Failed to get computed style for element:", element, e); // 调试时可取消注释
+        // console.warn("DelightfulLens: Failed to get computed style for element:", element, e); // 调试时可取消注释
         return null;
       }
     },
@@ -313,7 +313,7 @@
           rect.left < viewportWidth;      // 元素的左侧在视口右侧之左
 
       if (!overlaps) {
-        // console.debug(`MagicLens (isElementInViewport): Basic overlap check failed. Element:`, element); // 调试时可开启
+        // console.debug(`DelightfulLens (isElementInViewport): Basic overlap check failed. Element:`, element); // 调试时可开启
         return false; // 完全不重叠，直接判定不在视口内
       }
 
@@ -343,7 +343,7 @@
           visibleRatio >= MIN_AREA_RATIO_IN_VIEWPORT;
 
       /* // 详细调试日志，可按需开启
-      console.debug(`MagicLens (isElementInViewport): Element:`, element,
+      console.debug(`DelightfulLens (isElementInViewport): Element:`, element,
                     `Rect: {T:${rect.top.toFixed(0)}, L:${rect.left.toFixed(0)}, B:${rect.bottom.toFixed(0)}, R:${rect.right.toFixed(0)}, W:${rect.width.toFixed(0)}, H:${rect.height.toFixed(0)}}`,
                     `Viewport: {W:${viewportWidth}, H:${viewportHeight}}`,
                     `Visible Rect: {T:${visibleTop.toFixed(0)}, L:${visibleLeft.toFixed(0)}, B:${visibleBottom.toFixed(0)}, R:${visibleRight.toFixed(0)}, W:${visibleWidth.toFixed(0)}, H:${visibleHeight.toFixed(0)}}`,
@@ -562,13 +562,13 @@
         // 限制允许的协议
         const allowedProtocols = ['http:', 'https:', 'ftp:', 'mailto:', 'data:'];
         if (!allowedProtocols.includes(absoluteUrl.protocol)) {
-          // console.warn("MagicLens: Ignoring URL with disallowed protocol:", absoluteUrl.protocol, absoluteUrl.href); // 调试时可开启
+          // console.warn("DelightfulLens: Ignoring URL with disallowed protocol:", absoluteUrl.protocol, absoluteUrl.href); // 调试时可开启
           return null;
         }
 
         // 对 Data URI 进行长度限制
         if (absoluteUrl.protocol === 'data:' && absoluteUrl.href.length > MAX_DATA_URL_LENGTH) {
-          // console.warn("MagicLens: Ignoring long data URI:", absoluteUrl.href.substring(0, 50) + "..."); // 调试时可开启
+          // console.warn("DelightfulLens: Ignoring long data URI:", absoluteUrl.href.substring(0, 50) + "..."); // 调试时可开启
           return null;
         }
 
@@ -576,7 +576,7 @@
         return absoluteUrl.href;
       } catch (e) {
         // URL 解析失败 (无效的 URL 格式)
-        // console.warn("MagicLens: Failed to resolve URL:", url, e); // 调试时可开启
+        // console.warn("DelightfulLens: Failed to resolve URL:", url, e); // 调试时可开启
         return null;
       }
     },
@@ -772,7 +772,7 @@
         // 解析 body 的 font-size，如果失败或无效，使用默认值
         return parseFloat(bodyStyle?.fontSize) || DEFAULT_BASE_FONT_SIZE;
       } catch (e) {
-        // console.warn("MagicLens: Failed to get base font size."); // 调试时可开启
+        // console.warn("DelightfulLens: Failed to get base font size."); // 调试时可开启
         return DEFAULT_BASE_FONT_SIZE;
       }
     },
@@ -977,7 +977,7 @@
                   return Math.min(HEADING_LEVELS, Math.max(1, level));
               }
           } catch (e) {
-              // console.warn("MagicLens: Error analyzing heading style:", element, e); // 调试时可开启
+              // console.warn("DelightfulLens: Error analyzing heading style:", element, e); // 调试时可开启
               return 0; // 出错时返回 0
           }
 
@@ -1232,7 +1232,7 @@
         // 其他节点类型 (如注释节点已在前面过滤) 直接忽略，result 保持 null
       } catch (e) {
         // 捕获处理过程中可能出现的异常
-        console.error("MagicLens: Error processing node:", node, e);
+        console.error("DelightfulLens: Error processing node:", node, e);
         caughtError = e;
         result = null; // 出错时结果无效
       } finally {
@@ -1393,11 +1393,11 @@
           // --- 修改：调用新的判断函数 ---
           if (this.isLayoutTable(/** @type {HTMLTableElement} */(element))) {
             // 如果是布局表格，则像处理 DIV 一样处理其内容
-            // console.debug("MagicLens: Treating table as layout block:", element); // Optional debug log
+            // console.debug("DelightfulLens: Treating table as layout block:", element); // Optional debug log
             result = this.processGenericBlock(element, childContext);
           } else {
             // 否则，按原来的方式处理为数据表格
-            // console.debug("MagicLens: Treating table as data table:", element); // Optional debug log
+            // console.debug("DelightfulLens: Treating table as data table:", element); // Optional debug log
             result = this.processTable(element, childContext);
           }
           // --- 结束修改 ---
@@ -1557,7 +1557,7 @@
         // 3. 查找链接内的第一个标题元素 (h1-h6)
         const headingElement = element.querySelector('h1, h2, h3, h4, h5, h6');
         if (!headingElement) {
-            // console.warn("MagicLens (StructuredLink): No heading found inside the link, cannot process as structured link.", element);
+            // console.warn("DelightfulLens (StructuredLink): No heading found inside the link, cannot process as structured link.", element);
             return null; // 没有找到标题，无法按预期处理
         }
         const headingLevel = parseInt(headingElement.tagName.substring(1));
@@ -1570,7 +1570,7 @@
             titleText = utils.stripMarkdown(headingContentResult.markdown); // 剥离 Markdown
         }
         if (utils.isEmptyText(titleText)) {
-            // console.warn("MagicLens (StructuredLink): Heading found, but its text content is empty.", headingElement);
+            // console.warn("DelightfulLens (StructuredLink): Heading found, but its text content is empty.", headingElement);
             return null; // 标题文本为空，无法处理
         }
 
@@ -1859,7 +1859,7 @@
               }
           } else {
               // 在 UL/OL 中遇到非 LI 的直接子元素，通常是无效 HTML，忽略它
-              // console.warn("MagicLens: Non-LI element found directly inside a list, skipped:", child);
+              // console.warn("DelightfulLens: Non-LI element found directly inside a list, skipped:", child);
           }
       });
 
@@ -2461,7 +2461,7 @@
               }
           });
 
-          // console.debug(`MagicLens (contentFinder): Found ${candidateElements.length} candidates, filtered to ${relevantElements.length} relevant top-level elements for scope '${scope}'.`, relevantElements); // 调试时可开启
+          // console.debug(`DelightfulLens (contentFinder): Found ${candidateElements.length} candidates, filtered to ${relevantElements.length} relevant top-level elements for scope '${scope}'.`, relevantElements); // 调试时可开启
 
           return relevantElements; // 返回最终筛选和排序后的顶层元素数组
       },
@@ -2485,13 +2485,13 @@
     const rootElement = document.body;
     let elementsToProcess = []; // 存储待处理的顶层元素
 
-    // console.log(`MagicLens: Starting Markdown conversion with scope "${scope}".`); // 调试时可开启
+    // console.log(`DelightfulLens: Starting Markdown conversion with scope "${scope}".`); // 调试时可开启
 
     try {
       // 1. 使用 contentFinder 查找顶层相关元素
       //    这一步会根据 scope 进行初步的可见性/视口过滤。
       elementsToProcess = contentFinder.findRelevantElements(rootElement, scope);
-      // console.log(`MagicLens: Found ${elementsToProcess.length} top-level element(s) for processing.`); // 调试时可开启
+      // console.log(`DelightfulLens: Found ${elementsToProcess.length} top-level element(s) for processing.`); // 调试时可开启
 
       // 2. 使用 contentExtractor 从找到的顶层元素开始生成 Markdown
       //    这一步会应用详细的"最小单元过滤原则"。
@@ -2499,29 +2499,29 @@
           elementsToProcess,
           { scope: scope } // 将 scope 传递给 extractor 的全局上下文
       );
-      // console.log("MagicLens: Markdown generation complete."); // 调试时可开启
+      // console.log("DelightfulLens: Markdown generation complete."); // 调试时可开启
 
       // 返回最终生成的 Markdown 结果
       return markdownResult;
 
     } catch (e) {
       // 捕获在主流程中未被捕获的意外顶层错误
-      console.error("MagicLens: Critical error during Markdown conversion process:", e);
+      console.error("DelightfulLens: Critical error during Markdown conversion process:", e);
       // 返回一个包含错误信息的注释，方便调用方了解问题
-      return `/* MagicLens Error: Conversion failed unexpectedly. ${e.message || e} */`;
+      return `/* DelightfulLens Error: Conversion failed unexpectedly. ${e.message || e} */`;
     }
   }
 
   // --- 导出接口 ---
-  // 将 MagicLens 对象挂载到 window 全局对象上，使其可以被外部脚本调用。
-  // 例如： `let markdown = window.MagicLens.readAsMarkdown('viewport');`
-  window.MagicLens = {
+  // 将 DelightfulLens 对象挂载到 window 全局对象上，使其可以被外部脚本调用。
+  // 例如： `let markdown = window.DelightfulLens.readAsMarkdown('viewport');`
+  window.DelightfulLens = {
     readAsMarkdown: readAsMarkdown,
     // 如果需要，可以在此对象上暴露其他公共方法或信息
     getVersion: function() { return '1.5.1'; } // 示例：获取版本号
   };
 
   // 在控制台输出一条消息，表示脚本已成功加载和初始化
-  console.log("MagicLens v1.5.1 initialized successfully.");
+  console.log("DelightfulLens v1.5.1 initialized successfully.");
 
 })(); // 立即调用执行函数 (IIFE) 结束

@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace App\Domain\Agent\DTO;
 
 use App\Domain\Agent\Entity\AbstractEntity;
-use App\Domain\Agent\Entity\MagicAgentEntity;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
 use App\ErrorCode\AgentErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 
-class MagicAgentDTO extends AbstractEntity
+class DelightfulAgentDTO extends AbstractEntity
 {
     /**
      * 主键.
@@ -52,11 +52,11 @@ class MagicAgentDTO extends AbstractEntity
 
     private bool $startPage = false;
 
-    public function toEntity(): MagicAgentEntity
+    public function toEntity(): DelightfulAgentEntity
     {
         $this->validateBasicFields();
 
-        $magicAgentEntity = new MagicAgentEntity();
+        $magicAgentEntity = new DelightfulAgentEntity();
         $magicAgentEntity->setId($this->id);
         $magicAgentEntity->setAgentName($this->getAgentName());
         $magicAgentEntity->setAgentAvatar($this->getAgentAvatar());

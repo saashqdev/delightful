@@ -9,7 +9,7 @@ namespace App\Domain\Contact\Entity;
 
 use App\Domain\Contact\Entity\ValueObject\DepartmentOption;
 
-class MagicDepartmentEntity extends AbstractEntity
+class DelightfulDepartmentEntity extends AbstractEntity
 {
     protected ?string $id = null;
 
@@ -60,7 +60,7 @@ class MagicDepartmentEntity extends AbstractEntity
         return $this->option;
     }
 
-    public function setOption(null|DepartmentOption|int $option): MagicDepartmentEntity
+    public function setOption(null|DepartmentOption|int $option): DelightfulDepartmentEntity
     {
         if (is_int($option)) {
             $option = DepartmentOption::tryFrom($option);

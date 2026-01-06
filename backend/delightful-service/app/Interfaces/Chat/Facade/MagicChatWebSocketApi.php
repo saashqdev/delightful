@@ -9,12 +9,12 @@ namespace App\Interfaces\Chat\Facade;
 
 use App\Application\Chat\Event\Publish\MessageDispatchPublisher;
 use App\Application\Chat\Event\Publish\MessagePushPublisher;
-use App\Application\Chat\Service\MagicChatMessageAppService;
-use App\Application\Chat\Service\MagicControlMessageAppService;
-use App\Application\Chat\Service\MagicIntermediateMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
+use App\Application\Chat\Service\DelightfulControlMessageAppService;
+use App\Application\Chat\Service\DelightfulIntermediateMessageAppService;
 use App\Domain\Chat\Annotation\VerifyStructure;
 use App\Domain\Chat\DTO\Request\ChatRequest;
-use App\Domain\Chat\DTO\Request\Common\MagicContext;
+use App\Domain\Chat\DTO\Request\Common\DelightfulContext;
 use App\Domain\Chat\DTO\Request\ControlRequest;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessagePriority;
@@ -29,7 +29,7 @@ use App\Infrastructure\Util\Context\CoContext;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\ShadowCode\ShadowCode;
 use App\Infrastructure\Util\SocketIO\SocketIOUtil;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Amqp\Producer;
@@ -56,7 +56,7 @@ use function Hyperf\Coroutine\co;
 
 #[SocketIONamespace('/im')]
 #[ApiResponse('low_code')]
-class MagicChatWebSocketApi extends BaseNamespace
+class DelightfulChatWebSocketApi extends BaseNamespace
 {
     /**
      * @var WebsocketChatUserGuard
@@ -66,15 +66,15 @@ class MagicChatWebSocketApi extends BaseNamespace
     public function __construct(
         Sender $sender,
         SidProviderInterface $sidProvider,
-        private readonly MagicChatMessageAppService $magicChatMessageAppService,
+        private readonly DelightfulChatMessageAppService $magicChatMessageAppService,
         private readonly ValidatorFactoryInterface $validatorFactory,
         private readonly StdoutLoggerInterface $logger,
         private readonly SocketIOConfig $config,
         private readonly Redis $redis,
         private readonly Timer $timer,
         private readonly AuthManager $authManager,
-        private readonly MagicControlMessageAppService $magicControlMessageAppService,
-        private readonly MagicIntermediateMessageAppService $magicIntermediateMessageAppService,
+        private readonly DelightfulControlMessageAppService $magicControlMessageAppService,
+        private readonly DelightfulIntermediateMessageAppService $magicIntermediateMessageAppService,
         private readonly TranslatorInterface $translator
     ) {
         $this->config->setPingTimeout(2000); // ping 超时
@@ -111,7 +111,7 @@ class MagicChatWebSocketApi extends BaseNamespace
         $this->setLocale($params['context']['language'] ?? '');
         try {
             // 使用 magicChatContract 校验参数
-            $context = new MagicContext($params['context']);
+            $context = new DelightfulContext($params['context']);
             // 兼容历史版本,从query中获取token
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->magicChatMessageAppService->setUserContext($userToken, $context);
@@ -120,7 +120,7 @@ class MagicChatWebSocketApi extends BaseNamespace
             // 将账号的所有设备加入同一个房间
             $this->magicChatMessageAppService->joinRoom($userAuthorization, $socket);
             return ['type' => 'user', 'user' => [
-                'magic_id' => $userAuthorization->getMagicId(),
+                'magic_id' => $userAuthorization->getDelightfulId(),
                 'user_id' => $userAuthorization->getId(),
                 'status' => $userAuthorization->getStatus(),
                 'nickname' => $userAuthorization->getNickname(),
@@ -311,7 +311,7 @@ class MagicChatWebSocketApi extends BaseNamespace
     }
 
     /**
-     * @return MagicUserAuthorization
+     * @return DelightfulUserAuthorization
      * @throws Throwable
      */
     protected function getAuthorization(): Authenticatable

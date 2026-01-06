@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Application\OrganizationEnvironment\Service;
 
-use App\Domain\Contact\Service\MagicAccountDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulAccountDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\OrganizationEnvironment\Service\OrganizationDomainService;
 use App\Infrastructure\Core\ValueObject\Page;
 use Hyperf\Di\Annotation\Inject;
@@ -19,10 +19,10 @@ class OrganizationAppService
     protected OrganizationDomainService $organizationDomainService;
 
     #[Inject]
-    protected MagicUserDomainService $magicUserDomainService;
+    protected DelightfulUserDomainService $magicUserDomainService;
 
     #[Inject]
-    protected MagicAccountDomainService $magicAccountDomainService;
+    protected DelightfulAccountDomainService $magicAccountDomainService;
 
     /**
      * @return array{total: int, list: array}
@@ -57,18 +57,18 @@ class OrganizationAppService
             }
             $creatorMap[$userId] = [
                 'user_id' => $userId,
-                'magic_id' => $user->getMagicId(),
+                'magic_id' => $user->getDelightfulId(),
                 'name' => $user->getNickname(),
                 'avatar' => $user->getAvatarUrl(),
             ];
-            $magicId = $user->getMagicId();
+            $magicId = $user->getDelightfulId();
             $magicIdToUserId[$magicId] = $userId;
         }
 
         if ($magicIdToUserId !== []) {
-            $accounts = $this->magicAccountDomainService->getAccountByMagicIds(array_keys($magicIdToUserId));
+            $accounts = $this->magicAccountDomainService->getAccountByDelightfulIds(array_keys($magicIdToUserId));
             foreach ($accounts as $account) {
-                $magicId = $account->getMagicId();
+                $magicId = $account->getDelightfulId();
                 if ($magicId === null || $magicId === '') {
                     continue;
                 }

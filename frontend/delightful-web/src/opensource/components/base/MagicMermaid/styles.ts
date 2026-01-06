@@ -1,8 +1,8 @@
 import { createStyles } from "antd-style"
-import { MagicMermaidType } from "./constants"
+import { DelightfulMermaidType } from "./constants"
 
 export const useStyles = createStyles(
-	({ css, token, isDarkMode }, { type }: { type: MagicMermaidType }) => ({
+	({ css, token, isDarkMode }, { type }: { type: DelightfulMermaidType }) => ({
 		container: css`
 			position: relative;
 			display: flex;
@@ -16,7 +16,7 @@ export const useStyles = createStyles(
 			overflow: hidden;
 		`,
 		error: css`
-			display: ${type === MagicMermaidType.Mermaid ? "block" : "none"};
+			display: ${type === DelightfulMermaidType.Mermaid ? "block" : "none"};
 			padding: 10px;
 			margin-right: 140px;
 		`,
@@ -27,7 +27,7 @@ export const useStyles = createStyles(
 			z-index: 1;
 		`,
 		mermaid: css`
-			display: ${type === MagicMermaidType.Mermaid ? "block" : "none"};
+			display: ${type === DelightfulMermaidType.Mermaid ? "block" : "none"};
 			width: 100%;
 			font-size: 14px;
 			line-height: 1;
@@ -44,7 +44,7 @@ export const useStyles = createStyles(
 			}
 		`,
 		code: css`
-			display: ${type === MagicMermaidType.Mermaid ? "none" : "block"};
+			display: ${type === DelightfulMermaidType.Mermaid ? "none" : "block"};
 			width: 100%;
 			border: none;
 			margin: 0;

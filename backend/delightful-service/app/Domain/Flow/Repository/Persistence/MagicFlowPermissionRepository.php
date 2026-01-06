@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Persistence;
 
-use App\Domain\Flow\Entity\MagicFlowPermissionEntity;
+use App\Domain\Flow\Entity\DelightfulFlowPermissionEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\Flow\Entity\ValueObject\Permission\ResourceType;
 use App\Domain\Flow\Entity\ValueObject\Permission\TargetType;
-use App\Domain\Flow\Factory\MagicFlowPermissionFactory;
-use App\Domain\Flow\Repository\Facade\MagicFlowPermissionRepositoryInterface;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowPermissionModel;
+use App\Domain\Flow\Factory\DelightfulFlowPermissionFactory;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowPermissionRepositoryInterface;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowPermissionModel;
 use App\Infrastructure\Core\ValueObject\Page;
 
-class MagicFlowPermissionRepository extends MagicFlowAbstractRepository implements MagicFlowPermissionRepositoryInterface
+class DelightfulFlowPermissionRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowPermissionRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowPermissionEntity $magicFlowPermissionEntity): MagicFlowPermissionEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowPermissionEntity $magicFlowPermissionEntity): DelightfulFlowPermissionEntity
     {
-        $model = $this->createBuilder($dataIsolation, MagicFlowPermissionModel::query())
+        $model = $this->createBuilder($dataIsolation, DelightfulFlowPermissionModel::query())
             ->where('resource_type', $magicFlowPermissionEntity->getResourceType()->value)
             ->where('resource_id', $magicFlowPermissionEntity->getResourceId())
             ->where('target_type', $magicFlowPermissionEntity->getTargetType()->value)
@@ -33,7 +33,7 @@ class MagicFlowPermissionRepository extends MagicFlowAbstractRepository implemen
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);
         } else {
-            $model = new MagicFlowPermissionModel();
+            $model = new DelightfulFlowPermissionModel();
             $model->fill($this->getAttributes($magicFlowPermissionEntity));
         }
         $model->save();
@@ -43,10 +43,10 @@ class MagicFlowPermissionRepository extends MagicFlowAbstractRepository implemen
         return $magicFlowPermissionEntity;
     }
 
-    public function getByResourceAndTarget(FlowDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, TargetType $targetType, string $targetId): ?MagicFlowPermissionEntity
+    public function getByResourceAndTarget(FlowDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, TargetType $targetType, string $targetId): ?DelightfulFlowPermissionEntity
     {
-        /** @var null|MagicFlowPermissionModel $model */
-        $model = $this->createBuilder($dataIsolation, MagicFlowPermissionModel::query())
+        /** @var null|DelightfulFlowPermissionModel $model */
+        $model = $this->createBuilder($dataIsolation, DelightfulFlowPermissionModel::query())
             ->where('resource_type', $resourceType->value)
             ->where('resource_id', $resourceId)
             ->where('target_type', $targetType->value)
@@ -55,12 +55,12 @@ class MagicFlowPermissionRepository extends MagicFlowAbstractRepository implemen
         if ($model === null) {
             return null;
         }
-        return MagicFlowPermissionFactory::createEntity($model);
+        return DelightfulFlowPermissionFactory::createEntity($model);
     }
 
     public function getByResource(FlowDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, Page $page): array
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowPermissionModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowPermissionModel::query());
 
         $builder->where('resource_type', $resourceType->value);
         $builder->where('resource_id', $resourceId);
@@ -69,7 +69,7 @@ class MagicFlowPermissionRepository extends MagicFlowAbstractRepository implemen
         if (! empty($data['list'])) {
             $list = [];
             foreach ($data['list'] as $model) {
-                $list[] = MagicFlowPermissionFactory::createEntity($model);
+                $list[] = DelightfulFlowPermissionFactory::createEntity($model);
             }
             $data['list'] = $list;
         }
@@ -79,7 +79,7 @@ class MagicFlowPermissionRepository extends MagicFlowAbstractRepository implemen
 
     public function removeByIds(FlowDataIsolation $dataIsolation, array $ids): void
     {
-        $this->createBuilder($dataIsolation, MagicFlowPermissionModel::query())
+        $this->createBuilder($dataIsolation, DelightfulFlowPermissionModel::query())
             ->whereIn('id', $ids)
             ->delete();
     }

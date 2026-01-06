@@ -14,7 +14,7 @@ import MessageContent from "./components/MessageContent"
 import MessageSeenStatus from "../MessageSeenStatus"
 import MessageSendStatus from "../MessageSendStatus"
 import useStyles from "./style"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import MemberCardStore from "@/opensource/stores/display/MemberCardStore"
 import useInfoStore from "@/opensource/stores/userInfo"
 import { useMemoizedFn } from "ahooks"
@@ -70,14 +70,14 @@ const Avatar = observer(function Avatar({
 	})
 
 	return (
-		<MagicAvatar
+		<DelightfulAvatar
 			className={styles.avatar}
 			src={info.avatar_url}
 			size={size}
 			onClick={handleAvatarClick}
 		>
 			{name}
-		</MagicAvatar>
+		</DelightfulAvatar>
 	)
 })
 

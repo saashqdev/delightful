@@ -1,4 +1,4 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { Flex, Typography } from "antd"
 import { createStyles } from "antd-style"
 import { memo } from "react"
@@ -44,14 +44,14 @@ export default memo(function EmptyNotice() {
 					{t("chat.groupNotice.empty")}
 				</Typography.Text>
 			</Flex>
-			<MagicButton
+			<DelightfulButton
 				size="large"
 				type="primary"
 				className={styles.button}
 				onClick={addNewNotice}
 			>
 				{t("chat.groupNotice.postNewNotice")}
-			</MagicButton>
+			</DelightfulButton>
 		</Flex>
 	)
 })

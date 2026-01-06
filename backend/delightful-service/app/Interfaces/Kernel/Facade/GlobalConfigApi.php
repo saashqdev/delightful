@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Interfaces\Kernel\Facade;
 
 use App\Application\Kernel\DTO\GlobalConfig;
-use App\Application\Kernel\Service\MagicSettingAppService;
+use App\Application\Kernel\Service\DelightfulSettingAppService;
 use App\Application\Kernel\Service\PlatformSettingsAppService;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -18,7 +18,7 @@ use Throwable;
 class GlobalConfigApi
 {
     public function __construct(
-        private readonly MagicSettingAppService $magicSettingAppService,
+        private readonly DelightfulSettingAppService $magicSettingAppService,
     ) {
     }
 

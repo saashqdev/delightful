@@ -13,7 +13,7 @@ import type {
 	Bot,
 } from "@/types/bot"
 import { InstructionMode, InstructionType } from "@/types/bot"
-import type { MagicRichEditorRef } from "@/opensource/components/base/MagicRichEditor"
+import type { DelightfulRichEditorRef } from "@/opensource/components/base/DelightfulRichEditor"
 import { InsertLocationMap } from "@/opensource/pages/flow/components/QuickInstructionButton/const"
 import type { ConversationMessageInstruct } from "@/types/chat/conversation_message"
 import {
@@ -32,7 +32,7 @@ export interface InstructUpdateCallback {
 
 export interface ConversationBotDataManagerProps {
 	// 编辑器相关
-	editorRef?: MagicRichEditorRef | null
+	editorRef?: DelightfulRichEditorRef | null
 	onSend?: (
 		content: JSONContent | undefined,
 		onlyTextContent: boolean,
@@ -44,7 +44,7 @@ export interface ConversationBotDataManagerProps {
  */
 class ConversationBotDataService {
 	// 编辑器相关
-	editorRef?: MagicRichEditorRef | null
+	editorRef?: DelightfulRichEditorRef | null
 
 	onSend?: (
 		content: JSONContent | undefined,

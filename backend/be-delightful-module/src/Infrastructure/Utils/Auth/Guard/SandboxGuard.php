@@ -5,12 +5,12 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Infrastructure\Utils\Auth\Guard;
+namespace Delightful\SuperDelightful\Infrastructure\Utils\Auth\Guard;
 
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Delightful\SuperMagic\Interfaces\Authorization\Web\SandboxAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use Delightful\SuperDelightful\Interfaces\Authorization\Web\SandboxAuthorization;
 use Hyperf\Codec\Json;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -46,8 +46,8 @@ class SandboxGuard extends AbstractAuthGuard
         $cacheKey = 'auth_user:' . md5($token . $userId);
         $cachedResult = $this->redis->get($cacheKey);
         if ($cachedResult) {
-            $user = unserialize($cachedResult, ['allowed_classes' => [MagicUserAuthorization::class]]);
-            if ($user instanceof MagicUserAuthorization) {
+            $user = unserialize($cachedResult, ['allowed_classes' => [DelightfulUserAuthorization::class]]);
+            if ($user instanceof DelightfulUserAuthorization) {
                 return $user;
             }
         }
@@ -64,7 +64,7 @@ class SandboxGuard extends AbstractAuthGuard
             if (empty($user->getOrganizationCode())) {
                 ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
             }
-            if ($user instanceof MagicUserAuthorization) {
+            if ($user instanceof DelightfulUserAuthorization) {
                 $this->redis->setex($cacheKey, 60, serialize($user));
             }
             $logger->info('SandboxGuard UserAuthorization', ['uid' => $user->getId(), 'name' => $user->getRealName(), 'organization' => $user->getOrganizationCode()]);

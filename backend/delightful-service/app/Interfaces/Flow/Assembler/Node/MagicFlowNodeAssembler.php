@@ -14,7 +14,7 @@ use App\Interfaces\Flow\DTO\Node\NodeDTO;
 use App\Interfaces\Flow\DTO\Node\NodeInputDTO;
 use App\Interfaces\Flow\DTO\Node\NodeOutputDTO;
 
-class MagicFlowNodeAssembler
+class DelightfulFlowNodeAssembler
 {
     public static function createNodeDTO(Node $node): NodeDTO
     {

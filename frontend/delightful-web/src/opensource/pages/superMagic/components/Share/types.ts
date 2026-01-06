@@ -1,4 +1,4 @@
-import type { MagicModalProps } from "@/opensource/components/base/MagicModal"
+import type { DelightfulModalProps } from "@/opensource/components/base/DelightfulModal"
 
 /** 分享类型 */
 export enum ShareType {
@@ -41,6 +41,6 @@ export interface ShareProps {
 	handleCopyLink?: () => void
 }
 
-export interface ShareModalProps extends Omit<ShareProps, "type">, MagicModalProps {
+export interface ShareModalProps extends Omit<ShareProps, "type">, DelightfulModalProps {
 	afterSubmit?: ({ type, extraData }: { type: ShareType; extraData: any }) => void
 }

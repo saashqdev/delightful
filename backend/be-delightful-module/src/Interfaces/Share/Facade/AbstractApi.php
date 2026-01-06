@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Interfaces\Share\Facade;
+namespace Delightful\SuperDelightful\Interfaces\Share\Facade;
 
-use App\Infrastructure\Core\Traits\MagicUserAuthorizationTrait;
+use App\Infrastructure\Core\Traits\DelightfulUserAuthorizationTrait;
 
 abstract class AbstractApi
 {
-    use MagicUserAuthorizationTrait;
+    use DelightfulUserAuthorizationTrait;
 }

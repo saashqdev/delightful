@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Service;
 
-use App\Domain\Chat\DTO\AISearch\Request\MagicChatAggregateSearchReqDTO;
+use App\Domain\Chat\DTO\AISearch\Request\DelightfulChatAggregateSearchReqDTO;
 use App\Domain\Chat\DTO\Message\ChatMessage\Item\DeepSearch\EventItem;
 use App\Domain\Chat\DTO\Message\ChatMessage\Item\DeepSearch\SearchDetailItem;
 use App\Domain\Chat\Entity\ValueObject\AISearchCommonQueryVo;
 use App\Domain\Chat\Entity\ValueObject\BingSearchMarketCode;
 use App\Domain\Chat\Entity\ValueObject\SearchEngineType;
-use App\Domain\Flow\Entity\MagicFlowAIModelEntity;
+use App\Domain\Flow\Entity\DelightfulFlowAIModelEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Repository\Facade\MagicFlowAIModelRepositoryInterface;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowAIModelRepositoryInterface;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\OdinTools\MindSearch\SubQuestionsTool;
@@ -59,7 +59,7 @@ use function trim;
 use const JSON_UNESCAPED_SLASHES;
 use const JSON_UNESCAPED_UNICODE;
 
-class MagicLLMDomainService
+class DelightfulLLMDomainService
 {
     // 搜索结果丢给大模型的最大字数限制，避免响应太慢
     public const int LLM_STR_MAX_LEN = 30000;
@@ -313,7 +313,7 @@ class MagicLLMDomainService
     public function __construct(
         private readonly Redis $redis,
         public TavilySearch $apiWrapper,
-        protected readonly MagicFlowAIModelRepositoryInterface $magicFlowAIModelRepository,
+        protected readonly DelightfulFlowAIModelRepositoryInterface $magicFlowAIModelRepository,
         protected LoggerFactory $loggerFactory,
     ) {
         $this->logger = $this->loggerFactory->get(get_class($this));
@@ -366,7 +366,7 @@ class MagicLLMDomainService
                 null,
                 $queryVo->getMessageHistory(),
                 $conversationId,
-                $queryVo->getMagicApiBusinessParam()
+                $queryVo->getDelightfulApiBusinessParam()
             );
             $mindMapMessage = (string) $mindMapMessage;
             // 去掉换行符
@@ -430,7 +430,7 @@ class MagicLLMDomainService
                 [],
                 $queryVo->getMessageHistory(),
                 $conversationId,
-                $queryVo->getMagicApiBusinessParam()
+                $queryVo->getDelightfulApiBusinessParam()
             );
             $relationEventsResponse = $this->stripMarkdownCodeBlock($relationEventsResponse, 'json');
             $this->logger->info(Json::encode([
@@ -469,7 +469,7 @@ class MagicLLMDomainService
                 $queryVo->getModel(),
                 $queryVo->getMessageHistory(),
                 $queryVo->getConversationId(),
-                $queryVo->getMagicApiBusinessParam(),
+                $queryVo->getDelightfulApiBusinessParam(),
             );
         } catch (Throwable $e) {
             $this->logger->error(sprintf('mindSearch 解析响应时发生错误:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
@@ -497,7 +497,7 @@ class MagicLLMDomainService
                 [],
                 $queryVo->getMessageHistory(),
                 $queryVo->getConversationId(),
-                $queryVo->getMagicApiBusinessParam()
+                $queryVo->getDelightfulApiBusinessParam()
             );
             return (string) $response;
         } catch (Throwable $e) {
@@ -536,7 +536,7 @@ class MagicLLMDomainService
                 $tools,
                 $messageHistory,
                 $conversationId,
-                $queryVo->getMagicApiBusinessParam()
+                $queryVo->getDelightfulApiBusinessParam()
             );
             foreach ($this->getLLMToolsCall($generateSearchKeywordsResponse) as $toolCall) {
                 if ($toolCall->getName() === SubQuestionsTool::$name) {
@@ -601,7 +601,7 @@ class MagicLLMDomainService
                 $model,
                 messageHistory: $messageHistory,
                 conversationId: $conversationId,
-                businessParams: $queryVo->getMagicApiBusinessParam()
+                businessParams: $queryVo->getDelightfulApiBusinessParam()
             );
             if (! empty($filteredSearchResponse) && $filteredSearchResponse !== '[]') {
                 $filteredSearchResponse = $this->stripMarkdownCodeBlock($filteredSearchResponse, 'json');
@@ -689,10 +689,10 @@ class MagicLLMDomainService
      * 让大模型虚空拆解子问题，对热梗/实时拆解的会不好。
      * @return string[]
      */
-    public function generateSearchKeywordsByUserInput(MagicChatAggregateSearchReqDTO $dto, ModelInterface $modelInterface): array
+    public function generateSearchKeywordsByUserInput(DelightfulChatAggregateSearchReqDTO $dto, ModelInterface $modelInterface): array
     {
         $userInputKeyword = $dto->getUserMessage();
-        $magicChatMessageHistory = $dto->getMagicChatMessageHistory();
+        $magicChatMessageHistory = $dto->getDelightfulChatMessageHistory();
         $queryVo = (new AISearchCommonQueryVo())
             ->setUserMessage($userInputKeyword)
             ->setSearchEngine(SearchEngineType::Bing)
@@ -706,7 +706,7 @@ class MagicLLMDomainService
         $subKeywords = Retry::whenThrows()->sleep(200)->max(3)->call(function () use ($queryVo, $magicChatMessageHistory) {
             // 每次重试清空之前的上下文
             $llmConversationId = (string) IdGenerator::getSnowId();
-            $llmHistoryMessage = MagicChatAggregateSearchReqDTO::generateLLMHistory($magicChatMessageHistory, $llmConversationId);
+            $llmHistoryMessage = DelightfulChatAggregateSearchReqDTO::generateLLMHistory($magicChatMessageHistory, $llmConversationId);
             $queryVo->setMessageHistory($llmHistoryMessage)->setConversationId($llmConversationId);
             return $this->generateSearchKeywords($queryVo);
         });
@@ -916,7 +916,7 @@ class MagicLLMDomainService
                 tools: $tools,
                 messageHistory: $messageHistory,
                 conversationId: $conversationId,
-                businessParams: $queryVo->getMagicApiBusinessParam()
+                businessParams: $queryVo->getDelightfulApiBusinessParam()
             );
             // todo 从 function getLLMToolsCall() 方法中获取相关问题
             foreach ($this->getLLMToolsCall($relatedQuestionsResponse) as $toolCall) {
@@ -1008,7 +1008,7 @@ class MagicLLMDomainService
         return $matchString;
     }
 
-    protected function getModelEntity(string $name): MagicFlowAIModelEntity
+    protected function getModelEntity(string $name): DelightfulFlowAIModelEntity
     {
         $model = $this->magicFlowAIModelRepository->getByName(FlowDataIsolation::create(), $name);
         if (! $model) {

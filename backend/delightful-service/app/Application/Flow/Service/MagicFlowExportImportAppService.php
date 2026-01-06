@@ -7,18 +7,18 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\Service;
 
-use App\Domain\Agent\Entity\MagicAgentEntity;
-use App\Domain\Agent\Service\MagicAgentDomainService;
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
+use App\Domain\Agent\Service\DelightfulAgentDomainService;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 use App\Domain\Flow\Entity\ValueObject\Code;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\Flow\Entity\ValueObject\NodeType;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowToolSetQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowToolSetQuery;
 use App\Domain\Flow\Entity\ValueObject\Type;
-use App\Domain\Flow\Factory\MagicFlowFactory;
-use App\Domain\Flow\Factory\MagicFlowToolSetFactory;
-use App\Domain\Flow\Service\MagicFlowDomainService;
-use App\Domain\Flow\Service\MagicFlowToolSetDomainService;
+use App\Domain\Flow\Factory\DelightfulFlowFactory;
+use App\Domain\Flow\Factory\DelightfulFlowToolSetFactory;
+use App\Domain\Flow\Service\DelightfulFlowDomainService;
+use App\Domain\Flow\Service\DelightfulFlowToolSetDomainService;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
@@ -27,11 +27,11 @@ use DateTime;
 use Hyperf\Contract\ConfigInterface;
 use Throwable;
 
-class MagicFlowExportImportAppService
+class DelightfulFlowExportImportAppService
 {
     public function __construct(
-        protected MagicFlowDomainService $magicFlowDomainService,
-        protected MagicFlowToolSetDomainService $magicFlowToolSetDomainService,
+        protected DelightfulFlowDomainService $magicFlowDomainService,
+        protected DelightfulFlowToolSetDomainService $magicFlowToolSetDomainService,
         protected ConfigInterface $config
     ) {
     }
@@ -80,7 +80,7 @@ class MagicFlowExportImportAppService
      * 导入助理流程
      * 遇到重复的工具或流程会创建新实例，并通过名称区分.
      */
-    public function importFlow(FlowDataIsolation $dataIsolation, array $importData, string $agentId = ''): MagicFlowEntity
+    public function importFlow(FlowDataIsolation $dataIsolation, array $importData, string $agentId = ''): DelightfulFlowEntity
     {
         // 导入主流程
         $mainFlowData = $importData['main_flow'] ?? null;
@@ -218,7 +218,7 @@ class MagicFlowExportImportAppService
      * 导出流程和助理信息
      * 包含流程的所有数据以及助理的基本信息.
      */
-    public function exportFlowWithAgent(FlowDataIsolation $dataIsolation, string $flowCode, MagicAgentEntity $agent): array
+    public function exportFlowWithAgent(FlowDataIsolation $dataIsolation, string $flowCode, DelightfulAgentEntity $agent): array
     {
         // 获取流程数据
         $flowData = $this->exportFlow($dataIsolation, $flowCode);
@@ -259,9 +259,9 @@ class MagicFlowExportImportAppService
         $mainFlow = $this->importFlow($dataIsolation, $flowData);
 
         // 2. 创建新的助理并关联流程
-        $agentDomainService = di(MagicAgentDomainService::class);
+        $agentDomainService = di(DelightfulAgentDomainService::class);
 
-        $agentEntity = new MagicAgentEntity();
+        $agentEntity = new DelightfulAgentEntity();
         $agentEntity->setId('');
         $agentEntity->setAgentName($agentData['name'] ?? ('导入的助理_' . date('YmdHis')));
         $agentEntity->setAgentDescription($agentData['description'] ?? '');
@@ -331,7 +331,7 @@ class MagicFlowExportImportAppService
         // 保留agentId字段，如果存在的话
         $agentId = $flowData['agent_id'] ?? '';
         // 创建流程实体并保存
-        $flowEntity = MagicFlowFactory::arrayToEntity($flowData);
+        $flowEntity = DelightfulFlowFactory::arrayToEntity($flowData);
         $flowEntity->setCreator($dataIsolation->getCurrentUserId());
         $flowEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
 
@@ -383,7 +383,7 @@ class MagicFlowExportImportAppService
         $toolSetData['updated_at'] = new DateTime();
 
         // 使用工厂方法创建工具集实体
-        $toolSetEntity = MagicFlowToolSetFactory::arrayToEntity($toolSetData);
+        $toolSetEntity = DelightfulFlowToolSetFactory::arrayToEntity($toolSetData);
 
         // 保存工具集
         $savedToolSet = $this->magicFlowToolSetDomainService->create($dataIsolation, $toolSetEntity);
@@ -428,7 +428,7 @@ class MagicFlowExportImportAppService
 
         // 使用查询对象检查是否存在同名工具集
         while (true) {
-            $query = new MagicFlowToolSetQuery();
+            $query = new DelightfulFlowToolSetQuery();
             $query->setName($newName);
             $result = $this->magicFlowToolSetDomainService->queries($dataIsolation, $query, new Page(1, 100));
 
@@ -700,7 +700,7 @@ class MagicFlowExportImportAppService
             return;
         }
 
-        $agentDomainService = di(MagicAgentDomainService::class);
+        $agentDomainService = di(DelightfulAgentDomainService::class);
         // 设置流程代码并保存助理
         $agentDomainService->associateFlowWithAgent($agentId, $flowCode);
     }
@@ -826,7 +826,7 @@ class MagicFlowExportImportAppService
      */
     private function processFlowForExport(
         FlowDataIsolation $dataIsolation,
-        MagicFlowEntity $flow,
+        DelightfulFlowEntity $flow,
         array &$exportData,
         array &$processedFlowCodes,
         array &$processedToolSetIds
@@ -846,7 +846,7 @@ class MagicFlowExportImportAppService
      */
     private function processToolSet(
         FlowDataIsolation $dataIsolation,
-        MagicFlowEntity $flow,
+        DelightfulFlowEntity $flow,
         array &$exportData,
         array &$processedToolSetIds
     ): void {
@@ -870,7 +870,7 @@ class MagicFlowExportImportAppService
      */
     private function processSubFlowNodes(
         FlowDataIsolation $dataIsolation,
-        MagicFlowEntity $flow,
+        DelightfulFlowEntity $flow,
         array &$exportData,
         array &$processedFlowCodes,
         array &$processedToolSetIds
@@ -908,7 +908,7 @@ class MagicFlowExportImportAppService
      */
     private function processToolNodes(
         FlowDataIsolation $dataIsolation,
-        MagicFlowEntity $flow,
+        DelightfulFlowEntity $flow,
         array &$exportData,
         array &$processedFlowCodes,
         array &$processedToolSetIds

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Command\Flow;
 
-use App\Application\Flow\Service\MagicFlowExportImportAppService;
+use App\Application\Flow\Service\DelightfulFlowExportImportAppService;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use GuzzleHttp\Client;
 use Hyperf\Command\Annotation\Command;
@@ -21,13 +21,13 @@ class ImportAgentWithFlowCommand extends HyperfCommand
 {
     protected ContainerInterface $container;
 
-    protected MagicFlowExportImportAppService $exportImportService;
+    protected DelightfulFlowExportImportAppService $exportImportService;
 
     public function __construct(
         ContainerInterface $container
     ) {
         $this->container = $container;
-        $this->exportImportService = $container->get(MagicFlowExportImportAppService::class);
+        $this->exportImportService = $container->get(DelightfulFlowExportImportAppService::class);
         parent::__construct('agent:import');
         $this->setDescription('从OSS导入助理（包含主流程、工具、子流程等）');
         $this->addArgument('file_url', InputArgument::REQUIRED, '导出助理数据文件的URL');

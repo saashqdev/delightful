@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import { App, Flex } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import type MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import type DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { AppEnv } from "@/types/env"
 import useCheckUpdateWorker from "./useCheckUpdateWorker"
 import { ReflectMessageType } from "./const"
@@ -11,7 +11,7 @@ import { isBreakingVersion } from "./utils"
 const useVersion = () => {
 	const forbidUpdate = useRef(false)
 	const versionRef = useRef<string>()
-	const modalRef = useRef<ReturnType<typeof MagicModal.info> | null>(null)
+	const modalRef = useRef<ReturnType<typeof DelightfulModal.info> | null>(null)
 	const openedRef = useRef(false)
 	const { t } = useTranslation("interface")
 
@@ -34,7 +34,7 @@ const useVersion = () => {
 			closable: false,
 			footer: (
 				<Flex justify="flex-end" gap={8}>
-					<MagicButton
+					<DelightfulButton
 						onClick={() => {
 							forbidUpdate.current = false
 							modalRef.current?.destroy()
@@ -42,8 +42,8 @@ const useVersion = () => {
 						}}
 					>
 						{t("common.cancel")}
-					</MagicButton>
-					<MagicButton
+					</DelightfulButton>
+					<DelightfulButton
 						type="primary"
 						onClick={() => {
 							refresh()
@@ -51,7 +51,7 @@ const useVersion = () => {
 						}}
 					>
 						{t("common.refresh")}
-					</MagicButton>
+					</DelightfulButton>
 				</Flex>
 			),
 		}

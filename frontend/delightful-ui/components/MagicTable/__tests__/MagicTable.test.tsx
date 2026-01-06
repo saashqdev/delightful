@@ -1,15 +1,15 @@
 import { render, screen } from "@testing-library/react"
-import MagicThemeProvider from "../../ThemeProvider"
+import DelightfulThemeProvider from "../../ThemeProvider"
 import { describe, it, expect } from "vitest"
-import MagicTable from "../index"
+import DelightfulTable from "../index"
 
 const renderWithTheme = (component: React.ReactElement) =>
-	render(<MagicThemeProvider theme="light">{component}</MagicThemeProvider>)
+	render(<DelightfulThemeProvider theme="light">{component}</DelightfulThemeProvider>)
 
-describe("MagicTable", () => {
+describe("DelightfulTable", () => {
 	it("应该正常渲染", () => {
 		renderWithTheme(
-			<MagicTable
+			<DelightfulTable
 				columns={[
 					{ title: "姓名", dataIndex: "name", key: "name" },
 					{ title: "年龄", dataIndex: "age", key: "age" },
@@ -30,7 +30,7 @@ describe("MagicTable", () => {
 	describe("快照测试", () => {
 		it("基础表格快照", () => {
 			const { asFragment } = renderWithTheme(
-				<MagicTable
+				<DelightfulTable
 					columns={[
 						{ title: "姓名", dataIndex: "name", key: "name" },
 						{ title: "年龄", dataIndex: "age", key: "age" },
@@ -46,7 +46,7 @@ describe("MagicTable", () => {
 
 		it("空数据表格快照", () => {
 			const { asFragment } = renderWithTheme(
-				<MagicTable
+				<DelightfulTable
 					columns={[
 						{ title: "姓名", dataIndex: "name", key: "name" },
 						{ title: "年龄", dataIndex: "age", key: "age" },
@@ -59,7 +59,7 @@ describe("MagicTable", () => {
 
 		it("带分页表格快照", () => {
 			const { asFragment } = renderWithTheme(
-				<MagicTable
+				<DelightfulTable
 					columns={[
 						{ title: "姓名", dataIndex: "name", key: "name" },
 						{ title: "年龄", dataIndex: "age", key: "age" },
@@ -76,7 +76,7 @@ describe("MagicTable", () => {
 
 		it("带排序表格快照", () => {
 			const { asFragment } = renderWithTheme(
-				<MagicTable
+				<DelightfulTable
 					columns={[
 						{ title: "姓名", dataIndex: "name", key: "name", sorter: true },
 						{ title: "年龄", dataIndex: "age", key: "age", sorter: true },
@@ -92,7 +92,7 @@ describe("MagicTable", () => {
 
 		it("带选择框表格快照", () => {
 			const { asFragment } = renderWithTheme(
-				<MagicTable
+				<DelightfulTable
 					rowSelection={{}}
 					columns={[
 						{ title: "姓名", dataIndex: "name", key: "name" },
@@ -109,7 +109,7 @@ describe("MagicTable", () => {
 
 		it("紧凑型表格快照", () => {
 			const { asFragment } = renderWithTheme(
-				<MagicTable
+				<DelightfulTable
 					size="small"
 					columns={[
 						{ title: "姓名", dataIndex: "name", key: "name" },

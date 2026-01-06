@@ -1,5 +1,5 @@
 import { IconMessages, IconPlus } from "@tabler/icons-react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { useTranslation } from "react-i18next"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { Popover, Menu } from "antd"
@@ -43,7 +43,7 @@ function MenuButton() {
 		return [
 			{
 				key: MenuItemType.MenuAction,
-				icon: <MagicIcon component={IconMessages} size={20} />,
+				icon: <DelightfulIcon component={IconMessages} size={20} />,
 				label: t("sider.LaunchAGroupChat", { ns: "interface" }),
 			},
 		]

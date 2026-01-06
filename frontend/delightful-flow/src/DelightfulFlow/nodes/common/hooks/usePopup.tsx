@@ -2,12 +2,12 @@
  * 处理节点类型下拉状态和行为
  */
 
-import { MagicFlow } from "@/DelightfulFlow/types/flow"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import { useMemoizedFn, useUpdateEffect } from "ahooks"
 import { useEffect, useState } from "react"
 
 type DropdownProps = {
-	currentNode: MagicFlow.Node
+	currentNode: DelightfulFlow.Node
 	isSelected: boolean
 }
 

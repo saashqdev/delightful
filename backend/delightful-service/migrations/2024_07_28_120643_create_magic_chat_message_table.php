@@ -8,7 +8,7 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateMagicChatMessageTable extends Migration
+class CreateDelightfulChatMessageTable extends Migration
 {
     /**
      * Run the migrations.

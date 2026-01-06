@@ -1,5 +1,5 @@
 import { memo } from "react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconWorld } from "@tabler/icons-react"
 import { cx } from "antd-style"
 import { useStyles } from "./styles"
@@ -18,7 +18,7 @@ export default memo(function Browser(props: BrowserProps) {
 	return (
 		<div className={cx(styles.header, className)} style={style}>
 			<div className={styles.url}>
-				<MagicIcon className={styles.icon} component={IconWorld} stroke={2} size={20} />
+				<DelightfulIcon className={styles.icon} component={IconWorld} stroke={2} size={20} />
 				<div className={styles.text} title={url}>
 					{url}
 				</div>

@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowMemoryHistoryEntity;
+use App\Domain\Flow\Entity\DelightfulFlowMemoryHistoryEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowMemoryHistoryQuery;
-use App\Domain\Flow\Repository\Facade\MagicFlowMemoryHistoryRepositoryInterface;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowMemoryHistoryQuery;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowMemoryHistoryRepositoryInterface;
 use App\Infrastructure\Core\ValueObject\Page;
 
-class MagicFlowMemoryHistoryDomainService extends AbstractDomainService
+class DelightfulFlowMemoryHistoryDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly MagicFlowMemoryHistoryRepositoryInterface $magicFlowMemoryHistoryRepository,
+        private readonly DelightfulFlowMemoryHistoryRepositoryInterface $magicFlowMemoryHistoryRepository,
     ) {
     }
 
-    public function create(FlowDataIsolation $dataIsolation, MagicFlowMemoryHistoryEntity $magicFlowMemoryHistoryEntity): MagicFlowMemoryHistoryEntity
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryEntity $magicFlowMemoryHistoryEntity): DelightfulFlowMemoryHistoryEntity
     {
         $magicFlowMemoryHistoryEntity->prepareForCreation();
 
@@ -28,9 +28,9 @@ class MagicFlowMemoryHistoryDomainService extends AbstractDomainService
     }
 
     /**
-     * @return array{total: int, list: array<MagicFlowMemoryHistoryEntity>}
+     * @return array{total: int, list: array<DelightfulFlowMemoryHistoryEntity>}
      */
-    public function queries(FlowDataIsolation $dataIsolation, MagicFlowMemoryHistoryQuery $query, Page $page): array
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryQuery $query, Page $page): array
     {
         return $this->magicFlowMemoryHistoryRepository->queries($dataIsolation, $query, $page);
     }

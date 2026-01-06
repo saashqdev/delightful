@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Application\Speech\Service;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\Speech\Assembler\AsrPromptAssembler;
 use App\Application\Speech\DTO\AsrTaskStatusDTO;
 use App\Application\Speech\DTO\NoteDTO;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\ErrorCode\AsrErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\TaskFileDomainService;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
 use Hyperf\Contract\TranslatorInterface;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -27,9 +27,9 @@ use Throwable;
 readonly class AsrTitleGeneratorService
 {
     public function __construct(
-        private MagicChatMessageAppService $magicChatMessageAppService,
+        private DelightfulChatMessageAppService $magicChatMessageAppService,
         private TaskFileDomainService $taskFileDomainService,
-        private MagicUserDomainService $magicUserDomainService,
+        private DelightfulUserDomainService $magicUserDomainService,
         private TranslatorInterface $translator,
         private LoggerInterface $logger
     ) {
@@ -41,7 +41,7 @@ readonly class AsrTitleGeneratorService
      * 场景一：有 asr_stream_content（前端实时录音），直接用内容生成标题
      * 场景二：有 file_id（上传已有文件），构建提示词生成标题
      *
-     * @param MagicUserAuthorization $userAuthorization 用户授权
+     * @param DelightfulUserAuthorization $userAuthorization 用户授权
      * @param string $asrStreamContent ASR流式识别内容
      * @param null|string $fileId 文件ID
      * @param null|NoteDTO $note 笔记内容
@@ -49,7 +49,7 @@ readonly class AsrTitleGeneratorService
      * @return null|string 生成的标题
      */
     public function generateTitleForScenario(
-        MagicUserAuthorization $userAuthorization,
+        DelightfulUserAuthorization $userAuthorization,
         string $asrStreamContent,
         ?string $fileId,
         ?NoteDTO $note,
@@ -213,13 +213,13 @@ readonly class AsrTitleGeneratorService
     /**
      * 为文件直传场景生成标题（仅根据文件名）.
      *
-     * @param MagicUserAuthorization $userAuthorization 用户授权
+     * @param DelightfulUserAuthorization $userAuthorization 用户授权
      * @param string $fileName 文件名
      * @param string $taskKey 任务键（用于日志）
      * @return null|string 生成的标题
      */
     public function generateTitleForFileUpload(
-        MagicUserAuthorization $userAuthorization,
+        DelightfulUserAuthorization $userAuthorization,
         string $fileName,
         string $taskKey
     ): ?string {
@@ -285,14 +285,14 @@ readonly class AsrTitleGeneratorService
      * 从用户ID获取用户授权对象.
      *
      * @param string $userId 用户ID
-     * @return MagicUserAuthorization 用户授权对象
+     * @return DelightfulUserAuthorization 用户授权对象
      */
-    private function getUserAuthorizationFromUserId(string $userId): MagicUserAuthorization
+    private function getUserAuthorizationFromUserId(string $userId): DelightfulUserAuthorization
     {
         $userEntity = $this->magicUserDomainService->getUserById($userId);
         if ($userEntity === null) {
             ExceptionBuilder::throw(AsrErrorCode::UserNotExist);
         }
-        return MagicUserAuthorization::fromUserEntity($userEntity);
+        return DelightfulUserAuthorization::fromUserEntity($userEntity);
     }
 }

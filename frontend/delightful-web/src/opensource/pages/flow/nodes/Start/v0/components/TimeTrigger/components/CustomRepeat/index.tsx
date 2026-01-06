@@ -5,7 +5,7 @@ import weekday from "dayjs/plugin/weekday"
 import localeData from "dayjs/plugin/localeData"
 import { DatePicker, Radio } from "antd"
 import { cx } from "antd-style"
-import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
 import { useTranslation } from "react-i18next"
 import type { TimeTriggerParams } from "../../types"
 import { UNIT_OPTIONS, Units, WEEK_MAP } from "../../constants"
@@ -112,13 +112,13 @@ const CustomRepeat = ({ value, onChange }: CustomRepeatProps) => {
 				<p>{t("start.repeatFrequency", { ns: "flow" })}</p>
 				<div className={styles.repeatType}>
 					<span>{t("start.per", { ns: "flow" })}</span>
-					<MagicSelect
+					<DelightfulSelect
 						onChange={updateInterval}
 						value={displayValue.interval}
 						options={rateOptions}
 						fieldNames={{ value: "id" }}
 					/>
-					<MagicSelect
+					<DelightfulSelect
 						onChange={updateUnit}
 						value={displayValue.unit}
 						options={UNIT_OPTIONS}

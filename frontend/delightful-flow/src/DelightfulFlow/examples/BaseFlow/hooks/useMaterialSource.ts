@@ -1,4 +1,4 @@
-import { MagicFlow } from '@/DelightfulFlow/types/flow'
+import { DelightfulFlow } from '@/DelightfulFlow/types/flow'
 import React, { useMemo, useState } from 'react'
 import { mockFlowList } from '../mock/flowList'
 import _ from 'lodash'
@@ -7,7 +7,7 @@ import { mockToolSets } from '../mock/toolsets'
 
 export default function useMaterialSource() {
 
-    const [subFlowList, setSubFlowList] = useState([] as MagicFlow.Flow[])
+    const [subFlowList, setSubFlowList] = useState([] as DelightfulFlow.Flow[])
 
     const [toolGroup, setToolGroups] = useState([] as MaterialGroup[])
 

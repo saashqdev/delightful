@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { EXPRESSION_ITEM } from '@/MagicExpressionWidget/types'
+import { EXPRESSION_ITEM } from '@/DelightfulExpressionWidget/types'
 
 type DatasetProps = {
 	config: EXPRESSION_ITEM

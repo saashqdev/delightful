@@ -38,13 +38,13 @@ class OrganizationConfigEntity extends AbstractEntity
         //            return;
         //        }
         //
-        //        ExceptionBuilder::throw(MagicApiErrorCode::RATE_LIMIT);
+        //        ExceptionBuilder::throw(DelightfulApiErrorCode::RATE_LIMIT);
     }
 
     public function checkAmount(): void
     {
         //        if (! Amount::isEnough($this->totalAmount, $this->useAmount)) {
-        //            ExceptionBuilder::throw(MagicApiErrorCode::TOKEN_QUOTA_NOT_ENOUGH);
+        //            ExceptionBuilder::throw(DelightfulApiErrorCode::TOKEN_QUOTA_NOT_ENOUGH);
         //        }
     }
 

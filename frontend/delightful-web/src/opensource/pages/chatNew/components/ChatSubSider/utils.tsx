@@ -11,13 +11,13 @@ import type { SeqResponse } from "@/types/request"
 import { generateText, generateHTML } from "@tiptap/core"
 import StarterKit from "@tiptap/starter-kit"
 import { memoize } from "lodash-es"
-import MagicEmojiNode from "@/opensource/components/base/MagicRichEditor/extensions/magicEmoji"
-import MentionExtension from "@/opensource/components/base/MagicRichEditor/extensions/mention"
-import MagicEmoji from "@/opensource/components/base/MagicEmoji"
-import { emojiFilePathCache } from "@/opensource/components/base/MagicEmojiPanel/cache"
+import DelightfulEmojiNode from "@/opensource/components/base/DelightfulRichEditor/extensions/magicEmoji"
+import MentionExtension from "@/opensource/components/base/DelightfulRichEditor/extensions/mention"
+import DelightfulEmoji from "@/opensource/components/base/DelightfulEmoji"
+import { emojiFilePathCache } from "@/opensource/components/base/DelightfulEmojiPanel/cache"
 import TextAlign from "@tiptap/extension-text-align"
 import TextStyle from "@tiptap/extension-text-style"
-import { ImageExtension } from "@/opensource/components/base/MagicRichEditor/extensions/image"
+import { ImageExtension } from "@/opensource/components/base/DelightfulRichEditor/extensions/image"
 import { QuickInstructionNodeChatSubSiderExtension } from "../quick-instruction/extension"
 import { extractSourcePlaceholders } from "../ChatMessageList/components/MessageFactory/components/AiSearch/utils"
 
@@ -55,7 +55,7 @@ export const generateRichText = memoize(
 						StarterKit,
 						TextAlign,
 						TextStyle,
-						MagicEmojiNode,
+						DelightfulEmojiNode,
 						MentionExtension,
 						QuickInstructionNodeChatSubSiderExtension,
 						ImageExtension,
@@ -65,7 +65,7 @@ export const generateRichText = memoize(
 						StarterKit,
 						TextAlign,
 						TextStyle,
-						MagicEmojiNode,
+						DelightfulEmojiNode,
 						MentionExtension,
 						QuickInstructionNodeChatSubSiderExtension,
 						ImageExtension,
@@ -92,7 +92,7 @@ export function getRichTextHtml(content?: string) {
 }
 
 // 缓存 emoji 正则表达式
-const createMagicEmojiRegex = memoize(() => {
+const createDelightfulEmojiRegex = memoize(() => {
 	// 创建匹配所有魔法表情的正则表达式
 	// 例如: 匹配 [smile], [laugh] 等格式
 	return new RegExp(
@@ -104,13 +104,13 @@ const createMagicEmojiRegex = memoize(() => {
 })
 
 // 使用缓存的正则表达式
-export const magicEmojiRegex = createMagicEmojiRegex()
+export const magicEmojiRegex = createDelightfulEmojiRegex()
 
 /**
  * 递归查找并替换表情符号
  * @param content 需要处理的文本内容
  */
-const findAndReplaceMagicEmoji = (content?: string) => {
+const findAndReplaceDelightfulEmoji = (content?: string) => {
 	if (!content) return content
 
 	const splitArray = extractSourcePlaceholders(content, magicEmojiRegex)
@@ -121,7 +121,7 @@ const findAndReplaceMagicEmoji = (content?: string) => {
 			const code = item.slice(1, -1)
 			// 如果是有效的表情符号代码，返回对应的组件
 			if (emojiFilePathCache.has(code)) {
-				return <MagicEmoji key={code} code={code} width={16} />
+				return <DelightfulEmoji key={code} code={code} width={16} />
 			}
 			return item
 		}
@@ -142,7 +142,7 @@ export const getRichMessagePasteText = (content?: string) => {
 			StarterKit,
 			TextAlign,
 			TextStyle,
-			MagicEmojiNode.extend({
+			DelightfulEmojiNode.extend({
 				renderText(props) {
 					return `[${props.node.attrs.code}]`
 				},
@@ -173,19 +173,19 @@ export function getMessageText(
 		case ConversationMessageType.Text:
 			return onlyText
 				? message.message.text?.content
-				: (findAndReplaceMagicEmoji(message.message.text?.content) as string)
+				: (findAndReplaceDelightfulEmoji(message.message.text?.content) as string)
 		case ConversationMessageType.RichText:
 			if (!message.message.rich_text?.content) return ""
 			return onlyText
 				? generateRichText(message.message.rich_text?.content)
-				: (findAndReplaceMagicEmoji(
+				: (findAndReplaceDelightfulEmoji(
 						generateRichText(message.message.rich_text?.content),
 				  ) as string)
 		case ConversationMessageType.Markdown:
 			return onlyText
 				? message.message.markdown?.content
-				: (findAndReplaceMagicEmoji(message.message.markdown?.content) as string)
-		case ConversationMessageType.MagicSearchCard:
+				: (findAndReplaceDelightfulEmoji(message.message.markdown?.content) as string)
+		case ConversationMessageType.DelightfulSearchCard:
 			return i18next.t("chat.subSider.specialCardMessage", { ns: "interface" })
 		case ConversationMessageType.Files:
 			return i18next.t("chat.subSider.files", { ns: "interface" })

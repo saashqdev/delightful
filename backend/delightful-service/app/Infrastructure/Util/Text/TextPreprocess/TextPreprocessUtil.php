@@ -27,7 +27,7 @@ class TextPreprocessUtil
         // 保护标签内容
         $protectedContent = [];
         $text = preg_replace_callback(
-            '/<MagicCompressibleContent[^>]*>.*?<\/MagicCompressibleContent>/s',
+            '/<DelightfulCompressibleContent[^>]*>.*?<\/DelightfulCompressibleContent>/s',
             function ($matches) use (&$protectedContent) {
                 $key = '{{PROTECTED_' . count($protectedContent) . '}}';
                 $protectedContent[$key] = $matches[0];

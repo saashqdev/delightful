@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Service;
 
-class MagicMigrationUserDomainService
+class DelightfulMigrationUserDomainService
 {
     public function __construct(
     ) {

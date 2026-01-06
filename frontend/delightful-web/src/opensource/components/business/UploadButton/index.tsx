@@ -1,13 +1,13 @@
-import type { MagicButtonProps } from "@/opensource/components/base/MagicButton"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import type { DelightfulButtonProps } from "@/opensource/components/base/DelightfulButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import UploadAction from "@/opensource/components/base/UploadAction"
 import type { IMStyle } from "@/opensource/providers/AppearanceProvider/context"
 import { IconFileUpload } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
 import { memo } from "react"
 
-interface UploadButtonProps extends MagicButtonProps {
+interface UploadButtonProps extends DelightfulButtonProps {
 	loading?: boolean
 	icon?: React.ReactNode
 	imStyle?: IMStyle
@@ -19,18 +19,18 @@ const UploadButton = memo(
 	({ icon, onFileChange, multiple = true, children, ...props }: UploadButtonProps) => {
 		const UploadHandler = useMemoizedFn((onUpload) => {
 			return (
-				<MagicButton
+				<DelightfulButton
 					type="text"
 					onClick={onUpload}
 					icon={
 						icon || (
-							<MagicIcon color="currentColor" size={20} component={IconFileUpload} />
+							<DelightfulIcon color="currentColor" size={20} component={IconFileUpload} />
 						)
 					}
 					{...props}
 				>
 					{children}
-				</MagicButton>
+				</DelightfulButton>
 			)
 		})
 

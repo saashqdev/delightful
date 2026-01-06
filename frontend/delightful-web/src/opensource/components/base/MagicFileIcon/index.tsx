@@ -35,7 +35,7 @@ import zipSVG from "./assets/zip.svg"
 
 import otherSVG from "./assets/other.svg"
 
-interface MagicFileIconProps {
+interface DelightfulFileIconProps {
 	type?: string
 	size?: number
 	className?: string
@@ -56,12 +56,12 @@ const useStyles = createStyles(() => ({
 	},
 }))
 
-export default memo(function MagicFileIcon({
+export default memo(function DelightfulFileIcon({
 	type,
 	size = 24,
 	className,
 	style,
-}: MagicFileIconProps) {
+}: DelightfulFileIconProps) {
 	const { styles } = useStyles()
 
 	const icon = useMemo(() => {

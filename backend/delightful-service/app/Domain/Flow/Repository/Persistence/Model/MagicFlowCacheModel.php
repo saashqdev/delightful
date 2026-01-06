@@ -26,7 +26,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $updated_uid
  * @property DateTime $updated_at
  */
-class MagicFlowCacheModel extends AbstractModel
+class DelightfulFlowCacheModel extends AbstractModel
 {
     use Snowflake;
 

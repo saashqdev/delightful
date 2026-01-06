@@ -1,8 +1,8 @@
-import { useGlobalContext } from '@/MagicExpressionWidget/context/GlobalContext/useGlobalContext'
+import { useGlobalContext } from '@/DelightfulExpressionWidget/context/GlobalContext/useGlobalContext'
 import { useMemoizedFn, useUpdateEffect } from 'ahooks'
 import React from 'react'
-import { EXPRESSION_ITEM, LabelTypeMap } from '@/MagicExpressionWidget/types'
-import { SnowflakeId } from '@/MagicExpressionWidget/helpers'
+import { EXPRESSION_ITEM, LabelTypeMap } from '@/DelightfulExpressionWidget/types'
+import { SnowflakeId } from '@/DelightfulExpressionWidget/helpers'
 
 
 export type EncryptionProps = {

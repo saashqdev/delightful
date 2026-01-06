@@ -12,12 +12,12 @@ use App\Application\Flow\ExecuteManager\Attachment\AttachmentUtil;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
 use App\Application\Flow\ExecuteManager\Memory\LLMMemoryMessage;
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunner;
-use App\Domain\Agent\Service\MagicAgentDomainService;
+use App\Domain\Agent\Service\DelightfulAgentDomainService;
 use App\Domain\Chat\DTO\Message\ChatMessage\VoiceMessage;
 use App\Domain\Chat\DTO\Message\TextContentInterface;
-use App\Domain\Chat\Entity\MagicMessageEntity;
-use App\Domain\Chat\Repository\Facade\MagicMessageRepositoryInterface;
-use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\MagicFlowMessage;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
+use App\Domain\Chat\Repository\Facade\DelightfulMessageRepositoryInterface;
+use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\DelightfulFlowMessage;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\Branch;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\TriggerType;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\V1\StartNodeParamsConfig;
@@ -44,11 +44,11 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.start.content_empty');
         }
 
-        $LLMMemoryMessage = new LLMMemoryMessage(Role::User, $result['message_content'], $executionData->getTriggerData()->getMessageEntity()->getMagicMessageId());
+        $LLMMemoryMessage = new LLMMemoryMessage(Role::User, $result['message_content'], $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId());
         $LLMMemoryMessage->setConversationId($executionData->getConversationId());
         $LLMMemoryMessage->setAttachments($executionData->getTriggerData()->getAttachments());
         $LLMMemoryMessage->setOriginalContent(
-            MagicFlowMessage::createContent(
+            DelightfulFlowMessage::createContent(
                 message: $executionData->getTriggerData()->getMessageEntity()->getContent(),
                 attachments: $executionData->getTriggerData()->getAttachments(),
             ),
@@ -237,26 +237,26 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         ];
     }
 
-    private function appendAttachments(ExecutionData $executionData, MagicMessageEntity $messageEntity): void
+    private function appendAttachments(ExecutionData $executionData, DelightfulMessageEntity $messageEntity): void
     {
         if (! empty($executionData->getTriggerData()->getAttachments())) {
             return;
         }
-        $attachments = AttachmentUtil::getByMagicMessageEntity($messageEntity);
+        $attachments = AttachmentUtil::getByDelightfulMessageEntity($messageEntity);
         foreach ($attachments as $attachment) {
             $executionData->getTriggerData()->addAttachment($attachment);
         }
     }
 
-    private function appendInstructions(ExecutionData $executionData, MagicMessageEntity $messageEntity): void
+    private function appendInstructions(ExecutionData $executionData, DelightfulMessageEntity $messageEntity): void
     {
-        $magicFlowEntity = $executionData->getMagicFlowEntity();
+        $magicFlowEntity = $executionData->getDelightfulFlowEntity();
         if (! $magicFlowEntity || ! $magicFlowEntity->getType()->isMain()) {
             return;
         }
         // 兜底，如果没有 agent 的流程指令，尝试实时获取
         if (empty($executionData->getInstructionConfigs())) {
-            $instructs = di(MagicAgentDomainService::class)->getAgentById($executionData->getAgentId())->getInstructs();
+            $instructs = di(DelightfulAgentDomainService::class)->getAgentById($executionData->getAgentId())->getInstructs();
             $executionData->setInstructionConfigs($instructs);
         }
 
@@ -302,7 +302,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
     /**
      * Get text content with timing and update processing for voice messages.
      */
-    private function getTextContentWithTiming(TextContentInterface $messageContent, MagicMessageEntity $messageEntity, ExecutionData $executionData): string
+    private function getTextContentWithTiming(TextContentInterface $messageContent, DelightfulMessageEntity $messageEntity, ExecutionData $executionData): string
     {
         // If it's a voice message, perform special processing
         if ($messageContent instanceof VoiceMessage) {
@@ -316,10 +316,10 @@ abstract class AbstractStartNodeRunner extends NodeRunner
     /**
      * Handle voice messages with timing and update logic.
      */
-    private function handleVoiceMessage(VoiceMessage $voiceMessage, MagicMessageEntity $messageEntity, ExecutionData $executionData): string
+    private function handleVoiceMessage(VoiceMessage $voiceMessage, DelightfulMessageEntity $messageEntity, ExecutionData $executionData): string
     {
         // Set magicMessageId for subsequent updates
-        $voiceMessage->setMagicMessageId($messageEntity->getMagicMessageId());
+        $voiceMessage->setDelightfulMessageId($messageEntity->getDelightfulMessageId());
 
         // Record start time
         $startTime = microtime(true);
@@ -333,7 +333,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
         // If duration is greater than 1 second, update message content to database
         if ($duration > 1.0) {
-            $this->updateVoiceMessageContent($messageEntity->getMagicMessageId(), $voiceMessage);
+            $this->updateVoiceMessageContent($messageEntity->getDelightfulMessageId(), $voiceMessage);
         }
 
         // Clear audio attachments as they have been converted to text content
@@ -349,7 +349,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
     {
         try {
             $container = ApplicationContext::getContainer();
-            $messageRepository = $container->get(MagicMessageRepositoryInterface::class);
+            $messageRepository = $container->get(DelightfulMessageRepositoryInterface::class);
 
             // 将 VoiceMessage 转换为数组格式用于更新
             $messageContent = $voiceMessage->toArray();

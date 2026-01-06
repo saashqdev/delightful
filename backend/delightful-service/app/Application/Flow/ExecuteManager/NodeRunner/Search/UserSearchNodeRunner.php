@@ -11,10 +11,10 @@ use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
 use App\Application\Flow\ExecuteManager\ExecutionData\Operator;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation as ContactDataIsolation;
 use App\Domain\Contact\Entity\ValueObject\UserType;
-use App\Domain\Contact\Service\MagicAccountDomainService;
-use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulAccountDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search\Structure\LeftType;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search\Structure\OperatorType;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search\UserSearchNodeParamsConfig;
@@ -56,18 +56,18 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         });
         $users = [];
         if (! empty($allUserIds)) {
-            $magicUserDomain = di(MagicUserDomainService::class);
-            $magicAccountDomain = di(MagicAccountDomainService::class);
-            $departmentUserDomain = di(MagicDepartmentUserDomainService::class);
-            $departmentDomain = di(MagicDepartmentDomainService::class);
+            $magicUserDomain = di(DelightfulUserDomainService::class);
+            $magicAccountDomain = di(DelightfulAccountDomainService::class);
+            $departmentUserDomain = di(DelightfulDepartmentUserDomainService::class);
+            $departmentDomain = di(DelightfulDepartmentDomainService::class);
 
             $contactDataIsolation = ContactDataIsolation::create($executionData->getOperator()->getOrganizationCode(), $executionData->getOperator()->getUid());
             $magicUsers = $magicUserDomain->getByUserIds($contactDataIsolation, $allUserIds);
             $magicIds = [];
             foreach ($magicUsers as $magicUser) {
-                $magicIds[] = $magicUser->getMagicId();
+                $magicIds[] = $magicUser->getDelightfulId();
             }
-            $magicAccounts = $magicAccountDomain->getByMagicIds($magicIds);
+            $magicAccounts = $magicAccountDomain->getByDelightfulIds($magicIds);
             $departmentUsers = $departmentUserDomain->getDepartmentUsersByUserIds($allUserIds, $contactDataIsolation);
             $departmentIds = array_column($departmentUsers, 'department_id');
 
@@ -95,7 +95,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
                 if ($magicUser->getUserType() !== UserType::Human) {
                     continue;
                 }
-                if (! $magicAccount = $magicAccounts[$magicUser->getMagicId()] ?? null) {
+                if (! $magicAccount = $magicAccounts[$magicUser->getDelightfulId()] ?? null) {
                     continue;
                 }
                 $departmentArray = [];

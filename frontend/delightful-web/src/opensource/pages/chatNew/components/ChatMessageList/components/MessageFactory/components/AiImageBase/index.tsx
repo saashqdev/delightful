@@ -22,7 +22,7 @@ import AiImage from "./componnents/AiImage"
 import { useStyles } from "./styles"
 import ErrorContent from "../ErrorContent"
 
-export interface MagicAiImagesProps {
+export interface DelightfulAiImagesProps {
 	messageId: string
 	type: ConversationMessageType.AiImage | ConversationMessageType.HDImage
 	content?: AIImagesContent | HDImageContent
@@ -35,7 +35,7 @@ interface Response {
 	isError: boolean
 }
 
-const MagicAiImages = observer(({ type, content, messageId }: MagicAiImagesProps) => {
+const DelightfulAiImages = observer(({ type, content, messageId }: DelightfulAiImagesProps) => {
 	const previewFileInfo = MessageFilePreviewStore.previewInfo
 
 	const sendMessage = useSendMessage(messageId)
@@ -200,4 +200,4 @@ const MagicAiImages = observer(({ type, content, messageId }: MagicAiImagesProps
 	)
 })
 
-export default MagicAiImages
+export default DelightfulAiImages

@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Facade;
 
-use App\Application\Chat\Service\MagicDepartmentAppService;
-use App\Application\Chat\Service\MagicUserContactAppService;
+use App\Application\Chat\Service\DelightfulDepartmentAppService;
+use App\Application\Chat\Service\DelightfulUserContactAppService;
 use App\Application\Kernel\SuperPermissionEnum;
 use App\Domain\Contact\DTO\DepartmentQueryDTO;
 use App\Domain\Contact\DTO\UserQueryDTO;
@@ -26,11 +26,11 @@ use Hyperf\HttpServer\Contract\RequestInterface;
  * 管理后台的通讯录接口,与开放平台的接口返回格式不同.
  */
 #[ApiResponse('low_code')]
-class MagicChatAdminContactApi extends AbstractApi
+class DelightfulChatAdminContactApi extends AbstractApi
 {
     public function __construct(
-        private readonly MagicDepartmentAppService $departmentContactAppService,
-        private readonly MagicUserContactAppService $userContactAppService,
+        private readonly DelightfulDepartmentAppService $departmentContactAppService,
+        private readonly DelightfulUserContactAppService $userContactAppService,
     ) {
     }
 

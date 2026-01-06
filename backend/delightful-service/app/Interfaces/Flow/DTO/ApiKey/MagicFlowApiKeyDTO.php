@@ -9,7 +9,7 @@ namespace App\Interfaces\Flow\DTO\ApiKey;
 
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 
-class MagicFlowApiKeyDTO extends AbstractFlowDTO
+class DelightfulFlowApiKeyDTO extends AbstractFlowDTO
 {
     public string $flowCode;
 

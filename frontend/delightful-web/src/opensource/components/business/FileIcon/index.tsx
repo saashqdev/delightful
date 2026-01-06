@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import TSIcon from "@/opensource/components/base/TSIcon"
 import { IconFile } from "@tabler/icons-react"
 import { EXTENSION_ICON_MAP, IMAGE_EXTENSIONS } from "@/const/file"
@@ -18,7 +18,7 @@ const FileIcon = ({ ext, src, size = 16 }: FileIconProps) => {
 		case ext && SupportedFileExt.includes(ext):
 			return <TSIcon type={EXTENSION_ICON_MAP[ext]} size={`${size}px`} />
 		default:
-			return <MagicIcon component={IconFile} size={size} color="currentColor" />
+			return <DelightfulIcon component={IconFile} size={size} color="currentColor" />
 	}
 }
 

@@ -25,7 +25,7 @@ export type OnSubmitFn<T extends Login.LoginType> = (
 
 export interface LoginStepResult {
 	access_token: string
-	magicOrganizationMap: Record<string, User.MagicOrganization>
+	magicOrganizationMap: Record<string, User.DelightfulOrganization>
 	organizations?: Array<User.UserOrganization>
 	/** magic 生态下的组织Code */
 	organizationCode?: string

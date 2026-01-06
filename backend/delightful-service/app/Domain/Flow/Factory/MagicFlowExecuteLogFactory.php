@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Factory;
 
-use App\Domain\Flow\Entity\MagicFlowExecuteLogEntity;
+use App\Domain\Flow\Entity\DelightfulFlowExecuteLogEntity;
 use App\Domain\Flow\Entity\ValueObject\ExecuteLogStatus;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowExecuteLogModel;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowExecuteLogModel;
 
-class MagicFlowExecuteLogFactory
+class DelightfulFlowExecuteLogFactory
 {
-    public static function modelToEntity(MagicFlowExecuteLogModel $model): MagicFlowExecuteLogEntity
+    public static function modelToEntity(DelightfulFlowExecuteLogModel $model): DelightfulFlowExecuteLogEntity
     {
-        $entity = new MagicFlowExecuteLogEntity();
+        $entity = new DelightfulFlowExecuteLogEntity();
         $entity->setId($model->id);
         $entity->setExecuteDataId($model->execute_data_id);
         $entity->setFlowCode($model->flow_code);

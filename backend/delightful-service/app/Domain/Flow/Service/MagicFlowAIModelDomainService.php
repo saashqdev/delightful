@@ -7,28 +7,28 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowAIModelEntity;
+use App\Domain\Flow\Entity\DelightfulFlowAIModelEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowAIModelQuery;
-use App\Domain\Flow\Repository\Facade\MagicFlowAIModelRepositoryInterface;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowAIModelQuery;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowAIModelRepositoryInterface;
 use App\Infrastructure\Core\ValueObject\Page;
 
-class MagicFlowAIModelDomainService extends AbstractDomainService
+class DelightfulFlowAIModelDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly MagicFlowAIModelRepositoryInterface $magicFlowAIModelRepository
+        private readonly DelightfulFlowAIModelRepositoryInterface $magicFlowAIModelRepository
     ) {
     }
 
-    public function getByName(FlowDataIsolation $dataIsolation, string $name): ?MagicFlowAIModelEntity
+    public function getByName(FlowDataIsolation $dataIsolation, string $name): ?DelightfulFlowAIModelEntity
     {
         return $this->magicFlowAIModelRepository->getByName($dataIsolation, $name);
     }
 
     /**
-     * @return array{total: int, list: array<MagicFlowAIModelEntity>}
+     * @return array{total: int, list: array<DelightfulFlowAIModelEntity>}
      */
-    public function queries(FlowDataIsolation $dataIsolation, MagicFlowAIModelQuery $query, Page $page): array
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelQuery $query, Page $page): array
     {
         return $this->magicFlowAIModelRepository->queries($dataIsolation, $query, $page);
     }

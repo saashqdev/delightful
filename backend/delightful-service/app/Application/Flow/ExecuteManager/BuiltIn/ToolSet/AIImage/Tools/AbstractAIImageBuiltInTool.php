@@ -7,21 +7,21 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\ExecuteManager\BuiltIn\ToolSet\AIImage\Tools;
 
-use App\Application\Chat\Service\MagicChatAIImageAppService;
+use App\Application\Chat\Service\DelightfulChatAIImageAppService;
 use App\Application\Flow\ExecuteManager\BuiltIn\ToolSet\AbstractBuiltInTool;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
-use App\Domain\Chat\DTO\AIImage\Request\MagicChatAIImageReqDTO;
+use App\Domain\Chat\DTO\AIImage\Request\DelightfulChatAIImageReqDTO;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
 use App\Domain\Chat\Entity\ValueObject\AIImage\Radio;
-use App\Domain\Chat\Service\MagicConversationDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Chat\Service\DelightfulConversationDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Domain\ImageGenerate\ValueObject\ImageGenerateSourceEnum;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\ImageGenerateModelType;
 use App\Infrastructure\Util\Context\RequestContext;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\FlowExprEngine\ComponentFactory;
 use Delightful\FlowExprEngine\Structure\StructureType;
 
@@ -200,7 +200,7 @@ JSON,
 
         $textMessage = new TextMessage([]);
         $textMessage->setContent($searchKeyword);
-        $reqDto = (new MagicChatAIImageReqDTO())
+        $reqDto = (new DelightfulChatAIImageReqDTO())
             ->setTopicId($executionData->getTopicId() ?? '')
             ->setConversationId($agentConversationId)
             ->setUserMessage($textMessage)
@@ -214,36 +214,36 @@ JSON,
         $imageGenerateParamsVO->setRatioForModel($radio, $enumModel);
         $radio = $imageGenerateParamsVO->getRatio();
         $imageGenerateParamsVO->setSizeFromRadioAndModel($radio, $enumModel)->setModel($model);
-        $this->getMagicChatAIImageAppService()->handleUserMessage($requestContext, $reqDto);
+        $this->getDelightfulChatAIImageAppService()->handleUserMessage($requestContext, $reqDto);
         return [];
     }
 
-    protected function getAssistantAuthorization(string $assistantUserId): MagicUserAuthorization
+    protected function getAssistantAuthorization(string $assistantUserId): DelightfulUserAuthorization
     {
         // 获取助理的用户信息。生成的图片上传者是助理自己。
-        $assistantInfoEntity = $this->getMagicUserDomainService()->getUserById($assistantUserId);
+        $assistantInfoEntity = $this->getDelightfulUserDomainService()->getUserById($assistantUserId);
         if ($assistantInfoEntity === null) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'assistant_not_found');
         }
-        $assistantAuthorization = new MagicUserAuthorization();
+        $assistantAuthorization = new DelightfulUserAuthorization();
         $assistantAuthorization->setId($assistantInfoEntity->getUserId());
         $assistantAuthorization->setOrganizationCode($assistantInfoEntity->getOrganizationCode());
         $assistantAuthorization->setUserType($assistantInfoEntity->getUserType());
         return $assistantAuthorization;
     }
 
-    protected function getMagicChatAIImageAppService(): MagicChatAIImageAppService
+    protected function getDelightfulChatAIImageAppService(): DelightfulChatAIImageAppService
     {
-        return di(MagicChatAIImageAppService::class);
+        return di(DelightfulChatAIImageAppService::class);
     }
 
-    protected function getMagicUserDomainService(): MagicUserDomainService
+    protected function getDelightfulUserDomainService(): DelightfulUserDomainService
     {
-        return di(MagicUserDomainService::class);
+        return di(DelightfulUserDomainService::class);
     }
 
-    protected function getMagicConversationDomainService(): MagicConversationDomainService
+    protected function getDelightfulConversationDomainService(): DelightfulConversationDomainService
     {
-        return di(MagicConversationDomainService::class);
+        return di(DelightfulConversationDomainService::class);
     }
 }

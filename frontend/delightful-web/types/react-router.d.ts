@@ -2,14 +2,14 @@ import type { IndexRouteObject, NonIndexRouteObject } from "react-router/dist/li
 
 /** Extend react-router declarations */
 declare module "react-router" {
-	interface MagicIndexRouteObject extends IndexRouteObject {
+	interface DelightfulIndexRouteObject extends IndexRouteObject {
 		name?: string
 	}
 
-	interface MagicNonIndexRouteObject extends NonIndexRouteObject {
+	interface DelightfulNonIndexRouteObject extends NonIndexRouteObject {
 		name?: string
-		children?: Array<MagicRouteObject>
+		children?: Array<DelightfulRouteObject>
 	}
 
-	export type MagicRouteObject = MagicIndexRouteObject | MagicNonIndexRouteObject
+	export type DelightfulRouteObject = DelightfulIndexRouteObject | DelightfulNonIndexRouteObject
 }

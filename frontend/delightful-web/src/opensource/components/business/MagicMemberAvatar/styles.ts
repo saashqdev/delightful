@@ -1,8 +1,8 @@
 import { createStyles } from "antd-style"
-import type { MagicMemberAvatarProps } from "./types"
+import type { DelightfulMemberAvatarProps } from "./types"
 
 export const useStyles = createStyles(
-	({ css }, { nameVisible }: { nameVisible: MagicMemberAvatarProps["showName"] }) => ({
+	({ css }, { nameVisible }: { nameVisible: DelightfulMemberAvatarProps["showName"] }) => ({
 		avatar: css`
 			cursor: pointer;
 			user-select: none;

@@ -1,4 +1,4 @@
-import Schema from "@/MagicJsonSchemaEditor/types/Schema"
+import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import DropdownCard from "@/common/BaseUI/DropdownCard"
 import JSONSchemaRenderer from "@/common/BaseUI/JSONSchemaRenderer"
 import React from "react"

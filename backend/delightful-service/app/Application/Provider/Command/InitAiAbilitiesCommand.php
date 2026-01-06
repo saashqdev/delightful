@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\Provider\Command;
 
 use App\Application\Provider\Service\AiAbilityAppService;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
 use Psr\Container\ContainerInterface;
@@ -49,7 +49,7 @@ class InitAiAbilitiesCommand extends HyperfCommand
 
         try {
             // 创建一个临时的 Authorization 对象用于命令行
-            $authorization = new MagicUserAuthorization();
+            $authorization = new DelightfulUserAuthorization();
             $authorization->setOrganizationCode($organizationCode);
 
             $count = $this->aiAbilityAppService->initializeAbilities($authorization);

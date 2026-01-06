@@ -1,4 +1,4 @@
-import type { MagicFlow } from "@delightful/delightful-flow/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/DelightfulFlow/types/flow"
 import type {
 	ApiKeyRequestParams,
 	FlowDraft,
@@ -34,12 +34,12 @@ class FlowService {
 	}
 
 	/** 流程试运行 */
-	testFlow(flow: MagicFlow.Flow & { trigger_config: TriggerConfig }) {
+	testFlow(flow: DelightfulFlow.Flow & { trigger_config: TriggerConfig }) {
 		return this.flowApi.testFlow(flow)
 	}
 
 	/** 新增或修改流程基本信息 */
-	addOrUpdateFlowBaseInfo(flow: Partial<MagicFlow.Flow> & { type?: FlowType }) {
+	addOrUpdateFlowBaseInfo(flow: Partial<DelightfulFlow.Flow> & { type?: FlowType }) {
 		return this.flowApi.addOrUpdateFlowBaseInfo(flow)
 	}
 
@@ -49,7 +49,7 @@ class FlowService {
 	}
 
 	/** 保存流程详情 */
-	saveFlow(flow: MagicFlow.Flow) {
+	saveFlow(flow: DelightfulFlow.Flow) {
 		return this.flowApi.saveFlow(flow)
 	}
 

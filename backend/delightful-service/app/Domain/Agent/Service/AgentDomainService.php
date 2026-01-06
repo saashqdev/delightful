@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Service;
 
-use App\Domain\Agent\Entity\MagicAgentEntity;
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
 use App\Domain\Agent\Entity\ValueObject\AgentDataIsolation;
-use App\Domain\Agent\Entity\ValueObject\Query\MagicAgentQuery;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulAgentQuery;
 use App\Domain\Agent\Repository\Facade\AgentRepositoryInterface;
 use App\Domain\Agent\Repository\Facade\AgentVersionRepositoryInterface;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowVersionQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowVersionQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
 readonly class AgentDomainService
@@ -27,9 +27,9 @@ readonly class AgentDomainService
     /**
      * 查询 Agent 列表.
      *
-     * @return array{total: int, list: array<MagicAgentEntity>}
+     * @return array{total: int, list: array<DelightfulAgentEntity>}
      */
-    public function queries(AgentDataIsolation $agentDataIsolation, MagicAgentQuery $agentQuery, Page $page): array
+    public function queries(AgentDataIsolation $agentDataIsolation, DelightfulAgentQuery $agentQuery, Page $page): array
     {
         return $this->agentRepository->queries($agentDataIsolation, $agentQuery, $page);
     }
@@ -37,9 +37,9 @@ readonly class AgentDomainService
     /**
      * 获取组织内可用的 Agent 版本.
      *
-     * @return array{total: int, list: array<MagicAgentVersionEntity>}
+     * @return array{total: int, list: array<DelightfulAgentVersionEntity>}
      */
-    public function getOrgAvailableAgentIds(AgentDataIsolation $dataIsolation, MagicFLowVersionQuery $query, Page $page): array
+    public function getOrgAvailableAgentIds(AgentDataIsolation $dataIsolation, DelightfulFLowVersionQuery $query, Page $page): array
     {
         return $this->agentVersionRepository->getOrgAvailableAgents($dataIsolation, $query, $page);
     }

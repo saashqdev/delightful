@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\ModelGateway\MicroAgent\AgentParser;
 
 use App\Application\ModelGateway\MicroAgent\AgentParser\AgentParserFactory;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use PHPUnit\Framework\TestCase;
 
@@ -49,7 +49,7 @@ class AgentParserFactoryTest extends TestCase
     public function testGetAgentContentFileNotFound(): void
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionCode(MagicApiErrorCode::ValidateFailed->value);
+        $this->expectExceptionCode(DelightfulApiErrorCode::ValidateFailed->value);
 
         $this->factory->getAgentContent('non_existent_agent');
     }
@@ -62,7 +62,7 @@ class AgentParserFactoryTest extends TestCase
 
         try {
             $this->expectException(BusinessException::class);
-            $this->expectExceptionCode(MagicApiErrorCode::ValidateFailed->value);
+            $this->expectExceptionCode(DelightfulApiErrorCode::ValidateFailed->value);
 
             // This should fail because we don't have a .txt parser
             $this->factory->getAgentContent(basename($tempFile, '.txt'));

@@ -1,6 +1,6 @@
-# MagicUpload 魔法上传组件
+# DelightfulUpload 魔法上传组件
 
-`MagicUpload` 是一个文件上传组件，提供了简单易用的文件上传功能，支持单文件和多文件上传，可以与其他组件如按钮或拖拽区域结合使用。
+`DelightfulUpload` 是一个文件上传组件，提供了简单易用的文件上传功能，支持单文件和多文件上传，可以与其他组件如按钮或拖拽区域结合使用。
 
 ## 属性
 
@@ -15,9 +15,9 @@
 ## 基础用法
 
 ```tsx
-import { MagicUpload } from '@/components/base/MagicUpload';
-import MagicButton from '@/components/base/MagicButton';
-import MagicIcon from '@/components/base/MagicIcon';
+import { DelightfulUpload } from '@/components/base/DelightfulUpload';
+import DelightfulButton from '@/components/base/DelightfulButton';
+import DelightfulIcon from '@/components/base/DelightfulIcon';
 import { IconFileUpload } from '@tabler/icons-react';
 
 // 基础用法
@@ -25,32 +25,32 @@ const handleFileChange = (files) => {
   console.log('选择的文件:', files);
 };
 
-<MagicUpload onFileChange={handleFileChange}>
-  <MagicButton
-    icon={<MagicIcon component={IconFileUpload} />}
+<DelightfulUpload onFileChange={handleFileChange}>
+  <DelightfulButton
+    icon={<DelightfulIcon component={IconFileUpload} />}
   >
     上传文件
-  </MagicButton>
-</MagicUpload>
+  </DelightfulButton>
+</DelightfulUpload>
 
 // 多文件上传
-<MagicUpload
+<DelightfulUpload
   multiple
   onFileChange={handleFileChange}
 >
-  <MagicButton>上传多个文件</MagicButton>
-</MagicUpload>
+  <DelightfulButton>上传多个文件</DelightfulButton>
+</DelightfulUpload>
 
 // 限制文件类型
-<MagicUpload
+<DelightfulUpload
   accept="image/*"
   onFileChange={handleFileChange}
 >
-  <MagicButton>只上传图片</MagicButton>
-</MagicUpload>
+  <DelightfulButton>只上传图片</DelightfulButton>
+</DelightfulUpload>
 
 // 自定义上传区域
-<MagicUpload onFileChange={handleFileChange}>
+<DelightfulUpload onFileChange={handleFileChange}>
   <div style={{
     border: '2px dashed #ccc',
     padding: '20px',
@@ -59,7 +59,7 @@ const handleFileChange = (files) => {
   }}>
     <p>点击或拖拽文件到此区域上传</p>
   </div>
-</MagicUpload>
+</DelightfulUpload>
 ```
 
 ## 特点
@@ -77,4 +77,4 @@ const handleFileChange = (files) => {
 -   需要处理单文件或多文件上传时
 -   需要在表单中集成文件上传功能时
 
-MagicUpload 组件提供了一个简单而灵活的文件上传解决方案，适用于各种需要文件上传功能的场景。
+DelightfulUpload 组件提供了一个简单而灵活的文件上传解决方案，适用于各种需要文件上传功能的场景。

@@ -10,7 +10,7 @@ namespace App\Domain\Chat\DTO\ImageConvertHigh\Request;
 use App\Domain\Chat\DTO\Message\MessageInterface;
 use App\Domain\ImageGenerate\ValueObject\ImageGenerateSourceEnum;
 
-class MagicChatImageConvertHighReqDTO
+class DelightfulChatImageConvertHighReqDTO
 {
     public MessageInterface $userMessage;
 
@@ -43,7 +43,7 @@ class MagicChatImageConvertHighReqDTO
         return $this->referText;
     }
 
-    public function setReferText(?string $referText): MagicChatImageConvertHighReqDTO
+    public function setReferText(?string $referText): DelightfulChatImageConvertHighReqDTO
     {
         $this->referText = $referText;
         return $this;
@@ -54,7 +54,7 @@ class MagicChatImageConvertHighReqDTO
         return $this->referMessageId;
     }
 
-    public function setReferMessageId(?string $referMessageId): MagicChatImageConvertHighReqDTO
+    public function setReferMessageId(?string $referMessageId): DelightfulChatImageConvertHighReqDTO
     {
         $this->referMessageId = $referMessageId;
         return $this;
@@ -65,7 +65,7 @@ class MagicChatImageConvertHighReqDTO
         return $this->originImageUrl;
     }
 
-    public function setOriginImageUrl(string $originImageUrl): MagicChatImageConvertHighReqDTO
+    public function setOriginImageUrl(string $originImageUrl): DelightfulChatImageConvertHighReqDTO
     {
         $this->originImageUrl = $originImageUrl;
         return $this;
@@ -76,7 +76,7 @@ class MagicChatImageConvertHighReqDTO
         return $this->userMessage;
     }
 
-    public function setUserMessage(MessageInterface $userMessage): MagicChatImageConvertHighReqDTO
+    public function setUserMessage(MessageInterface $userMessage): DelightfulChatImageConvertHighReqDTO
     {
         $this->userMessage = $userMessage;
         return $this;
@@ -87,7 +87,7 @@ class MagicChatImageConvertHighReqDTO
         return $this->conversationId;
     }
 
-    public function setConversationId(string $conversationId): MagicChatImageConvertHighReqDTO
+    public function setConversationId(string $conversationId): DelightfulChatImageConvertHighReqDTO
     {
         $this->conversationId = $conversationId;
         return $this;
@@ -98,7 +98,7 @@ class MagicChatImageConvertHighReqDTO
         return $this->topicId;
     }
 
-    public function setTopicId(string $topicId): MagicChatImageConvertHighReqDTO
+    public function setTopicId(string $topicId): DelightfulChatImageConvertHighReqDTO
     {
         $this->topicId = $topicId;
         return $this;
@@ -109,7 +109,7 @@ class MagicChatImageConvertHighReqDTO
         return $this->appMessageId;
     }
 
-    public function setAppMessageId(string $appMessageId): MagicChatImageConvertHighReqDTO
+    public function setAppMessageId(string $appMessageId): DelightfulChatImageConvertHighReqDTO
     {
         $this->appMessageId = $appMessageId;
         return $this;
@@ -120,7 +120,7 @@ class MagicChatImageConvertHighReqDTO
         return $this->language;
     }
 
-    public function setLanguage(string $language): MagicChatImageConvertHighReqDTO
+    public function setLanguage(string $language): DelightfulChatImageConvertHighReqDTO
     {
         $this->language = $language;
         return $this;
@@ -131,7 +131,7 @@ class MagicChatImageConvertHighReqDTO
         return $this->requestId;
     }
 
-    public function setRequestId(?string $requestId): MagicChatImageConvertHighReqDTO
+    public function setRequestId(?string $requestId): DelightfulChatImageConvertHighReqDTO
     {
         $this->requestId = $requestId;
         return $this;
@@ -142,7 +142,7 @@ class MagicChatImageConvertHighReqDTO
         return $this->originImageId;
     }
 
-    public function setOriginImageId(string $originImageId): MagicChatImageConvertHighReqDTO
+    public function setOriginImageId(string $originImageId): DelightfulChatImageConvertHighReqDTO
     {
         $this->originImageId = $originImageId;
         return $this;
@@ -153,7 +153,7 @@ class MagicChatImageConvertHighReqDTO
         return $this->radio;
     }
 
-    public function setRadio(?string $radio): MagicChatImageConvertHighReqDTO
+    public function setRadio(?string $radio): DelightfulChatImageConvertHighReqDTO
     {
         $this->radio = $radio;
         return $this;

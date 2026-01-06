@@ -8,12 +8,12 @@ declare(strict_types=1);
 namespace App\Interfaces\Kernel\Facade;
 
 use App\Application\Kernel\DTO\PlatformSettings;
-use App\Application\Kernel\Enum\MagicOperationEnum;
-use App\Application\Kernel\Enum\MagicResourceEnum;
+use App\Application\Kernel\Enum\DelightfulOperationEnum;
+use App\Application\Kernel\Enum\DelightfulResourceEnum;
 use App\Application\Kernel\Service\PlatformSettingsAppService;
 use App\ErrorCode\PermissionErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Infrastructure\Core\Traits\MagicUserAuthorizationTrait;
+use App\Infrastructure\Core\Traits\DelightfulUserAuthorizationTrait;
 use App\Infrastructure\Util\Permission\Annotation\CheckPermission;
 use App\Interfaces\Kernel\DTO\Request\PlatformSettingsUpdateRequest;
 use Delightful\ApiResponse\Annotation\ApiResponse;
@@ -21,21 +21,21 @@ use Delightful\ApiResponse\Annotation\ApiResponse;
 #[ApiResponse('low_code')]
 class PlatformSettingsApi
 {
-    use MagicUserAuthorizationTrait;
+    use DelightfulUserAuthorizationTrait;
 
     public function __construct(
         private readonly PlatformSettingsAppService $platformSettingsAppService,
     ) {
     }
 
-    #[CheckPermission(MagicResourceEnum::PLATFORM_SETTING_PLATFORM_INFO, MagicOperationEnum::QUERY)]
+    #[CheckPermission(DelightfulResourceEnum::PLATFORM_SETTING_PLATFORM_INFO, DelightfulOperationEnum::QUERY)]
     public function show(): array
     {
         $settings = $this->platformSettingsAppService->get()->toArray();
         return self::platformSettingsToResponse($settings);
     }
 
-    #[CheckPermission(MagicResourceEnum::PLATFORM_SETTING_PLATFORM_INFO, MagicOperationEnum::EDIT)]
+    #[CheckPermission(DelightfulResourceEnum::PLATFORM_SETTING_PLATFORM_INFO, DelightfulOperationEnum::EDIT)]
     public function update(PlatformSettingsUpdateRequest $request): array
     {
         $existing = $this->platformSettingsAppService->get();

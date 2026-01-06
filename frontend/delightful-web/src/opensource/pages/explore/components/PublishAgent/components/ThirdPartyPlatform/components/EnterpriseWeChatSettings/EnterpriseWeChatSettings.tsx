@@ -1,13 +1,13 @@
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import type { FormListOperation } from "antd"
 import { Flex, Form, Input, message, Steps } from "antd"
 import { useMemo } from "react"
 import { useMemoizedFn, useResetState, useUpdateEffect } from "ahooks"
-import MagicEllipseWithTooltip from "@/opensource/components/base/MagicEllipseWithTooltip/MagicEllipseWithTooltip"
+import DelightfulEllipseWithTooltip from "@/opensource/components/base/DelightfulEllipseWithTooltip/DelightfulEllipseWithTooltip"
 import { IconCircleCheckFilled, IconCopy } from "@tabler/icons-react"
 import { cx } from "antd-style"
-import { copyToClipboard } from "@delightful/delightful-flow/dist/MagicFlow/utils"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import { copyToClipboard } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useTranslation } from "react-i18next"
 import { ThirdPartyPlatformType } from "@/types/bot"
 import { env } from "@/utils/env"
@@ -120,7 +120,7 @@ export default function EnterpriseWeChatSettings({
 	})
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			width={700}
 			title={t("common.enterpriseWeChatSettings", { ns: "flow" })}
 			open={open}
@@ -266,11 +266,11 @@ export default function EnterpriseWeChatSettings({
 					<>
 						<div className={styles.infoCard}>
 							<Flex vertical gap={8} className={styles.infoCardContent}>
-								<MagicEllipseWithTooltip
+								<DelightfulEllipseWithTooltip
 									text={t("common.intoEnterpriseWeChatInfo", { ns: "flow" })}
 									maxWidth="580px"
 								/>
-								<MagicEllipseWithTooltip
+								<DelightfulEllipseWithTooltip
 									text={t("common.addEnterpriseWeChatAgentInfo", { ns: "flow" })}
 									maxWidth="580px"
 								/>
@@ -312,7 +312,7 @@ export default function EnterpriseWeChatSettings({
 								{t("common.messageReceiveAddr", { ns: "flow" })}
 							</span>
 							<Flex className={styles.formInput}>
-								<MagicEllipseWithTooltip
+								<DelightfulEllipseWithTooltip
 									text={wechatAddr}
 									maxWidth=""
 									className={styles.url}
@@ -348,7 +348,7 @@ export default function EnterpriseWeChatSettings({
 								ns: "flow",
 							})}
 						</span>
-						<MagicButton
+						<DelightfulButton
 							onClick={onClose}
 							className={styles.backBtn}
 							color="default"
@@ -357,10 +357,10 @@ export default function EnterpriseWeChatSettings({
 							{t("common.backToPublishPage", {
 								ns: "flow",
 							})}
-						</MagicButton>
+						</DelightfulButton>
 					</Flex>
 				)}
 			</Form>
-		</MagicModal>
+		</DelightfulModal>
 	)
 }

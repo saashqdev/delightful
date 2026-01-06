@@ -2,7 +2,7 @@ import { getIncomers, internalsSymbol, getOutgoers, Node, Edge, Position, Connec
 import dagre from "dagre"
 import { UpdateStepType } from "../hooks/useBaseFlow"
 import _ from "lodash"
-import { MagicFlow } from "../types/flow"
+import { DelightfulFlow } from "../types/flow"
 import { nodeManager } from "../register/node"
 import { GROUP_MIN_DISTANCE, GROUP_TOP_GAP } from "../constants"
 import { generatePasteEdges, generatePasteNode, judgeIsLoopBody } from "."
@@ -32,10 +32,10 @@ export function getEdgeHandlePosition (sourceNode: Node, targetNode: Node) {
 }
 
 // Recursively get all predecessor nodes
-export const getAllPredecessors = (curNode: MagicFlow.Node, nodes: Node[], edges: Edge[], predecessors = [] as MagicFlow.Node[]): MagicFlow.Node[] => {
+export const getAllPredecessors = (curNode: DelightfulFlow.Node, nodes: Node[], edges: Edge[], predecessors = [] as DelightfulFlow.Node[]): DelightfulFlow.Node[] => {
 	// Use React Flow's getIncomers to gather all inbound nodes
     // @ts-ignore
-	const incomers = [...(getIncomers(curNode, nodes, edges) || [])] as MagicFlow.Node[]
+	const incomers = [...(getIncomers(curNode, nodes, edges) || [])] as DelightfulFlow.Node[]
 
     // When incomers are branch nodes, do a second pass to track branch ids
     const branchNodes = incomers.filter(incomeNode => nodeManager.branchNodeIds.includes(`${incomeNode.node_type}`))
@@ -60,11 +60,11 @@ export const getAllPredecessors = (curNode: MagicFlow.Node, nodes: Node[], edges
         // @ts-ignore
 		(acc, pred) => getAllPredecessors(pred, nodes, edges, acc),
 		updatedPredecessors
-	) as MagicFlow.Node[]
+	) as DelightfulFlow.Node[]
 }
 
 // Recursively get all successor nodes
-export const getAllPostNodes = (curNode: MagicFlow.Node, nodes: MagicFlow.Node[], edges: Edge[], postNodes = [] as MagicFlow.Node[]): MagicFlow.Node[] => {
+export const getAllPostNodes = (curNode: DelightfulFlow.Node, nodes: DelightfulFlow.Node[], edges: Edge[], postNodes = [] as DelightfulFlow.Node[]): DelightfulFlow.Node[] => {
 	// Use React Flow's getOutgoers to gather all outbound nodes
     // @ts-ignore
 	const outNodes = getOutgoers(curNode, nodes, edges)
@@ -83,7 +83,7 @@ export const getAllPostNodes = (curNode: MagicFlow.Node, nodes: MagicFlow.Node[]
         // @ts-ignore
 		(acc, pred) => getAllPostNodes(pred, nodes, edges, acc),
 		updatedPredecessors
-	) as MagicFlow.Node[]
+	) as DelightfulFlow.Node[]
 }
 
 // Recursively get all successor nodes
@@ -100,7 +100,7 @@ export const getAllPostNodes = (curNode: MagicFlow.Node, nodes: MagicFlow.Node[]
 // 	)
 // }
 
-export function sortByEdges (nodes: MagicFlow.Node[], edges: Edge[]) {
+export function sortByEdges (nodes: DelightfulFlow.Node[], edges: Edge[]) {
 	// Dictionary to store indegree for each node
 	const indegree = {} as Record<string, number>
 
@@ -120,8 +120,8 @@ export function sortByEdges (nodes: MagicFlow.Node[], edges: Edge[]) {
 	}
 
 	// Prepare result arrays
-	const result = [] as MagicFlow.Node[]
-	const nextNodes = [] as MagicFlow.Node[]
+	const result = [] as DelightfulFlow.Node[]
+	const nextNodes = [] as DelightfulFlow.Node[]
 
 	// Seed with nodes whose indegree is zero
 	for (const node of nodes) {
@@ -160,7 +160,7 @@ export function sortByEdges (nodes: MagicFlow.Node[], edges: Edge[]) {
 }
 
 /** Run dagre layout */
-export const dagreLayout = (direction="TB", nodes:MagicFlow.Node[], edges: Edge[]) => {
+export const dagreLayout = (direction="TB", nodes:DelightfulFlow.Node[], edges: Edge[]) => {
 	const triggerNode = nodes[0]
 	const dagreGraph = new dagre.graphlib.Graph()
 	dagreGraph.setDefaultEdgeLabel(() => ({}))
@@ -175,7 +175,7 @@ export const dagreLayout = (direction="TB", nodes:MagicFlow.Node[], edges: Edge[
 		marginy: 0
 	})
 
-	nodes.forEach((node: MagicFlow.Node) => {
+	nodes.forEach((node: DelightfulFlow.Node) => {
 		dagreGraph.setNode(node.id, { width: node.width, height: node.height })
 	})
 
@@ -188,7 +188,7 @@ export const dagreLayout = (direction="TB", nodes:MagicFlow.Node[], edges: Edge[
 	return dagreGraph
 }
 
-export const getLayoutElements = (_nodes: MagicFlow.Node[], _edges: Edge[], direction = "TB", paramsName: MagicFlow.ParamsName) => {
+export const getLayoutElements = (_nodes: DelightfulFlow.Node[], _edges: Edge[], direction = "TB", paramsName: DelightfulFlow.ParamsName) => {
 
 	const result = {
 		nodes: _nodes,
@@ -284,8 +284,8 @@ export const getLayoutElements = (_nodes: MagicFlow.Node[], _edges: Edge[], dire
 type UpdateTargetNodesStepProps = {
     type: UpdateStepType
     connection: Connection | Edge
-    nodeConfig: Record<string, MagicFlow.Node>
-    nodes: MagicFlow.Node[]
+    nodeConfig: Record<string, DelightfulFlow.Node>
+    nodes: DelightfulFlow.Node[]
     edges: Edge[]
     beforeStep?: number
 }
@@ -304,7 +304,7 @@ export const updateTargetNodesStep = ({
 	}
 	if (!sourceNode) return
     // @ts-ignore
-	const outNodes = getOutgoers(sourceNode, nodes, edges) as MagicFlow.Node[]
+	const outNodes = getOutgoers(sourceNode, nodes, edges) as DelightfulFlow.Node[]
 
 	for (const outNode of outNodes) {
 		const outNodeConfig = nodeConfig[outNode.node_id]
@@ -340,7 +340,7 @@ export const updateTargetNodesStep = ({
 /**
  * Check whether any execution nodes are outside the runnable flow (warn if some nodes will never run)
  */
-export const checkHasNodeOutOfFlow = (nodes: MagicFlow.Node[], edges: Edge[]) => {
+export const checkHasNodeOutOfFlow = (nodes: DelightfulFlow.Node[], edges: Edge[]) => {
 	if (!nodes || nodes.length === 0) return false
 	const triggerNode = nodes[0]
 	const postNodes = getAllPostNodes(triggerNode, nodes, edges)
@@ -349,7 +349,7 @@ export const checkHasNodeOutOfFlow = (nodes: MagicFlow.Node[], edges: Edge[]) =>
 }
 
 /** Calculate the midpoint of all nodes */
-export const calculateMidpoint = (nodes: MagicFlow.Node[]) => {
+export const calculateMidpoint = (nodes: DelightfulFlow.Node[]) => {
 	const positions = nodes.map(n => n.position || {x: 0, y: 0})
     const totalPositions = positions.length;
 
@@ -371,7 +371,7 @@ export const calculateMidpoint = (nodes: MagicFlow.Node[]) => {
 
 
 /** Get rendered coordinates when adding a node inside a group */
-export const getSubNodePosition = (event: any, screenToFlowPosition: ViewportHelperFunctions['screenToFlowPosition'], parentNode: MagicFlow.Node) => {
+export const getSubNodePosition = (event: any, screenToFlowPosition: ViewportHelperFunctions['screenToFlowPosition'], parentNode: DelightfulFlow.Node) => {
 
 	const groupBodyPosition = parentNode?.position || { x: 0, y: 0 }
 
@@ -395,7 +395,7 @@ export const getSubNodePosition = (event: any, screenToFlowPosition: ViewportHel
  * @param paramsName custom field names
  * @returns
  */
-export const generatePasteNodesAndEdges = (nodeConfig: Record<string, MagicFlow.Node>,selectionNodes: MagicFlow.Node[], selectionEdges: Edge[], paramsName: MagicFlow.ParamsName) => {
+export const generatePasteNodesAndEdges = (nodeConfig: Record<string, DelightfulFlow.Node>,selectionNodes: DelightfulFlow.Node[], selectionEdges: Edge[], paramsName: DelightfulFlow.ParamsName) => {
 
     const selectedNodeIds = selectionNodes.map((n) => n.id)
     const oldId2NewIdMap = {} as Record<string, string>
@@ -506,7 +506,7 @@ export const generatePasteNodesAndEdges = (nodeConfig: Record<string, MagicFlow.
     })
 	/** Generate copied edges for the selected nodes */
     const pasteEdges = generatePasteEdges(oldId2NewIdMap, relationEdges)
-    const pasteNodes = [] as MagicFlow.Node[]
+    const pasteNodes = [] as DelightfulFlow.Node[]
 
     pasteNodeInfos.forEach(({ pasteNode }) => {
         pasteNodes.push(pasteNode)

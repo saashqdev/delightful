@@ -2,14 +2,14 @@ import useSendMessage from "@/opensource/pages/chatNew/hooks/useSendMessage"
 import { ConversationMessageType } from "@/types/chat/conversation_message"
 import { useMemoizedFn } from "ahooks"
 import { memo, type AnchorHTMLAttributes } from "react"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import { MagicFunctionLinkType } from "./const"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import { DelightfulFunctionLinkType } from "./const"
 
-type MagicFunctionLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+type DelightfulFunctionLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
 	href: string
 }
 
-const MagicFunctionLink = memo(({ href, children }: MagicFunctionLinkProps) => {
+const DelightfulFunctionLink = memo(({ href, children }: DelightfulFunctionLinkProps) => {
 	const sendMessage = useSendMessage()
 
 	const handleClick = useMemoizedFn((e: React.MouseEvent<HTMLButtonElement>) => {
@@ -18,7 +18,7 @@ const MagicFunctionLink = memo(({ href, children }: MagicFunctionLinkProps) => {
 
 		const url = new URL(href)
 		switch (url.hostname) {
-			case MagicFunctionLinkType.SendMessage:
+			case DelightfulFunctionLinkType.SendMessage:
 				const searchParams = new URLSearchParams(url.search)
 				const content = searchParams.get("content")
 
@@ -39,10 +39,10 @@ const MagicFunctionLink = memo(({ href, children }: MagicFunctionLinkProps) => {
 	})
 
 	return (
-		<MagicButton type="link" size="small" style={{ display: "inline" }} onClick={handleClick}>
+		<DelightfulButton type="link" size="small" style={{ display: "inline" }} onClick={handleClick}>
 			{children}
-		</MagicButton>
+		</DelightfulButton>
 	)
 })
 
-export default MagicFunctionLink
+export default DelightfulFunctionLink

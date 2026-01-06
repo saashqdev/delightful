@@ -7,16 +7,16 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Factory;
 
-use App\Domain\Flow\Entity\MagicFlowToolSetEntity;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowToolSetModel;
+use App\Domain\Flow\Entity\DelightfulFlowToolSetEntity;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowToolSetModel;
 use DateTime;
 
-class MagicFlowToolSetFactory
+class DelightfulFlowToolSetFactory
 {
-    public static function modelToEntity(MagicFlowToolSetModel $model): MagicFlowToolSetEntity
+    public static function modelToEntity(DelightfulFlowToolSetModel $model): DelightfulFlowToolSetEntity
     {
         $array = $model->toArray();
-        $entity = new MagicFlowToolSetEntity();
+        $entity = new DelightfulFlowToolSetEntity();
         $entity->setId($model->id);
         $entity->setOrganizationCode($model->organization_code);
         $entity->setCode($model->code);
@@ -37,9 +37,9 @@ class MagicFlowToolSetFactory
     /**
      * 将数组转换为工具集实体.
      */
-    public static function arrayToEntity(array $toolSetData): MagicFlowToolSetEntity
+    public static function arrayToEntity(array $toolSetData): DelightfulFlowToolSetEntity
     {
-        $entity = new MagicFlowToolSetEntity();
+        $entity = new DelightfulFlowToolSetEntity();
 
         // 设置基本属性
         $entity->setId($toolSetData['id'] ?? 0);

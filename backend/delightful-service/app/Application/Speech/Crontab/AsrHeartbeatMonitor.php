@@ -12,11 +12,11 @@ use App\Application\Speech\Enum\AsrRecordingStatusEnum;
 use App\Application\Speech\Service\AsrFileAppService;
 use App\Domain\Asr\Constants\AsrConfig;
 use App\Domain\Asr\Constants\AsrRedisKeys;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\ErrorCode\AsrErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Redis\RedisUtil;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Hyperf\Crontab\Annotation\Crontab;
 use Hyperf\Logger\LoggerFactory;
 use Hyperf\Redis\Redis;
@@ -42,7 +42,7 @@ class AsrHeartbeatMonitor
     public function __construct(
         private readonly Redis $redis,
         private readonly AsrFileAppService $asrFileAppService,
-        private readonly MagicUserDomainService $magicUserDomainService,
+        private readonly DelightfulUserDomainService $magicUserDomainService,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get('AsrHeartbeatMonitor');
@@ -234,7 +234,7 @@ class AsrHeartbeatMonitor
                 ExceptionBuilder::throw(AsrErrorCode::UserNotExist);
             }
 
-            $userAuthorization = MagicUserAuthorization::fromUserEntity($userEntity);
+            $userAuthorization = DelightfulUserAuthorization::fromUserEntity($userEntity);
             $organizationCode = $taskStatus->organizationCode ?? $userAuthorization->getOrganizationCode();
 
             // 直接调用自动总结方法（会在方法内部更新状态）

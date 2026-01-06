@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Entity\ValueObject;
 
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 
-enum MagicMessageStatus: int
+enum DelightfulMessageStatus: int
 {
     // 未读
     case Unread = 0;
@@ -29,13 +29,13 @@ enum MagicMessageStatus: int
     }
 
     // 根据控制消息类型获取消息状态
-    public static function getMessageStatusByControlMessageType(ControlMessageType $controlMessageType): MagicMessageStatus
+    public static function getMessageStatusByControlMessageType(ControlMessageType $controlMessageType): DelightfulMessageStatus
     {
         return match ($controlMessageType) {
-            ControlMessageType::SeenMessages => MagicMessageStatus::Seen,
-            ControlMessageType::ReadMessage => MagicMessageStatus::Read,
-            ControlMessageType::RevokeMessage => MagicMessageStatus::Revoked,
-            default => MagicMessageStatus::Seen
+            ControlMessageType::SeenMessages => DelightfulMessageStatus::Seen,
+            ControlMessageType::ReadMessage => DelightfulMessageStatus::Read,
+            ControlMessageType::RevokeMessage => DelightfulMessageStatus::Revoked,
+            default => DelightfulMessageStatus::Seen
         };
     }
 }

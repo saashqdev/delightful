@@ -2,11 +2,11 @@ import { Card, Flex, type CardProps } from "antd"
 import type { ReactNode } from "react"
 import { forwardRef, memo, useMemo } from "react"
 import { IconX } from "@tabler/icons-react"
-import MagicButton from "../MagicButton"
-import MagicIcon from "../MagicIcon"
+import DelightfulButton from "../DelightfulButton"
+import DelightfulIcon from "../DelightfulIcon"
 import { useStyles } from "./style"
 
-export interface MagicPageContainerProps extends CardProps {
+export interface DelightfulPageContainerProps extends CardProps {
 	className?: string
 	icon?: ReactNode
 	closeable?: boolean
@@ -14,7 +14,7 @@ export interface MagicPageContainerProps extends CardProps {
 }
 
 const PageContainer = memo(
-	forwardRef<HTMLDivElement, MagicPageContainerProps>(
+	forwardRef<HTMLDivElement, DelightfulPageContainerProps>(
 		(
 			{
 				children,
@@ -37,11 +37,11 @@ const PageContainer = memo(
 							{icon}
 							{_title}
 						</Flex>
-						<MagicButton
+						<DelightfulButton
 							type="text"
 							hidden={!closeable}
 							className={styles.closeButton}
-							icon={<MagicIcon component={IconX} />}
+							icon={<DelightfulIcon component={IconX} />}
 							onClick={onClose}
 						/>
 					</Flex>

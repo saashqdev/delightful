@@ -6,13 +6,13 @@ import type { ForwardRefExoticComponent, RefAttributes } from "react"
 
 type Props = Omit<IconProps, "ref"> & RefAttributes<Icon>
 
-export interface MagicIconProps extends Props {
+export interface DelightfulIconProps extends Props {
 	component?: ForwardRefExoticComponent<Omit<IconProps, "ref"> & RefAttributes<Icon>>
 	active?: boolean
 	animation?: boolean
 }
 
-const MagicIcon = memo(function MagicIcon({ component: Comp, ...props }: MagicIconProps) {
+const DelightfulIcon = memo(function DelightfulIcon({ component: Comp, ...props }: DelightfulIconProps) {
 	const { isDarkMode } = useThemeMode()
 
 	if (!Comp) {
@@ -28,4 +28,4 @@ const MagicIcon = memo(function MagicIcon({ component: Comp, ...props }: MagicIc
 	)
 })
 
-export default MagicIcon
+export default DelightfulIcon

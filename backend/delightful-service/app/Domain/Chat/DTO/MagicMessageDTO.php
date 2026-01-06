@@ -14,7 +14,7 @@ use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\IntermediateMessageType;
 use App\Infrastructure\Core\AbstractDTO;
 
-class MagicMessageDTO extends AbstractDTO
+class DelightfulMessageDTO extends AbstractDTO
 {
     protected ?string $senderId;
 

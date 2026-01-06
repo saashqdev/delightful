@@ -29,7 +29,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $updated_uid
  * @property string $updated_at
  */
-class MagicFlowApiKeyModel extends AbstractModel
+class DelightfulFlowApiKeyModel extends AbstractModel
 {
     use Snowflake;
     use SoftDeletes;

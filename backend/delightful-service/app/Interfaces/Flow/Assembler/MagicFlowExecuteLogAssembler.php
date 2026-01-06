@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\Assembler;
 
-use App\Domain\Flow\Entity\MagicFlowExecuteLogEntity;
-use App\Interfaces\Flow\DTO\MagicFowExecuteResultDTO;
+use App\Domain\Flow\Entity\DelightfulFlowExecuteLogEntity;
+use App\Interfaces\Flow\DTO\DelightfulFowExecuteResultDTO;
 
-class MagicFlowExecuteLogAssembler
+class DelightfulFlowExecuteLogAssembler
 {
-    public function createExecuteResultDTO(MagicFlowExecuteLogEntity $magicFlowExecuteLogEntity): MagicFowExecuteResultDTO
+    public function createExecuteResultDTO(DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): DelightfulFowExecuteResultDTO
     {
-        $executeResultDTO = new MagicFowExecuteResultDTO();
+        $executeResultDTO = new DelightfulFowExecuteResultDTO();
         $executeResultDTO->setTaskId((string) $magicFlowExecuteLogEntity->getId());
         $executeResultDTO->setStatus($magicFlowExecuteLogEntity->getStatus()->value);
         $executeResultDTO->setStatusLabel($magicFlowExecuteLogEntity->getStatus()->name);

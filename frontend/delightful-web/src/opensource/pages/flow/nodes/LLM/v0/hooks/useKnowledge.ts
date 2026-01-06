@@ -4,7 +4,7 @@
 
 import type { Knowledge } from "@/types/knowledge"
 import type { FormInstance } from "antd"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useMemoizedFn } from "ahooks"
 import { set } from "lodash-es"
 import { getDefaultKnowledge } from "../helpers"

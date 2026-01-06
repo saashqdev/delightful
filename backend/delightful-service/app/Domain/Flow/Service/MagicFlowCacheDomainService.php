@@ -7,21 +7,21 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowCacheEntity;
+use App\Domain\Flow\Entity\DelightfulFlowCacheEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Repository\Facade\MagicFlowCacheRepositoryInterface;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowCacheRepositoryInterface;
 
 /**
  * Flow缓存领域服务
  */
-class MagicFlowCacheDomainService extends AbstractDomainService
+class DelightfulFlowCacheDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly MagicFlowCacheRepositoryInterface $magicFlowCacheRepository,
+        private readonly DelightfulFlowCacheRepositoryInterface $magicFlowCacheRepository,
     ) {
     }
 
-    public function saveCache(FlowDataIsolation $dataIsolation, MagicFlowCacheEntity $entity): MagicFlowCacheEntity
+    public function saveCache(FlowDataIsolation $dataIsolation, DelightfulFlowCacheEntity $entity): DelightfulFlowCacheEntity
     {
         $entity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $existingEntity = $this->magicFlowCacheRepository->findByPrefixAndKey($dataIsolation, $entity->getCachePrefix(), $entity->getCacheKey());
@@ -37,7 +37,7 @@ class MagicFlowCacheDomainService extends AbstractDomainService
         return $this->magicFlowCacheRepository->save($dataIsolation, $entity);
     }
 
-    public function getCache(FlowDataIsolation $dataIsolation, string $cachePrefix, string $cacheKey): ?MagicFlowCacheEntity
+    public function getCache(FlowDataIsolation $dataIsolation, string $cachePrefix, string $cacheKey): ?DelightfulFlowCacheEntity
     {
         $entity = $this->magicFlowCacheRepository->findByPrefixAndKey($dataIsolation, $cachePrefix, $cacheKey);
 

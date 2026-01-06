@@ -110,12 +110,12 @@ class OrganizationEntity extends AbstractEntity
         $this->id = $id ? (int) $id : null;
     }
 
-    public function getMagicOrganizationCode(): string
+    public function getDelightfulOrganizationCode(): string
     {
         return $this->magicOrganizationCode;
     }
 
-    public function setMagicOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
     {
         $this->magicOrganizationCode = $magicOrganizationCode;
     }

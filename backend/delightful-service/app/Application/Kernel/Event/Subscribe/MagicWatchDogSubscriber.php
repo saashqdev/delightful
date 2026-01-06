@@ -17,7 +17,7 @@ use Swow\Coroutine;
 use Swow\Watchdog;
 use WeakMap;
 
-readonly class MagicWatchDogSubscriber implements ListenerInterface
+readonly class DelightfulWatchDogSubscriber implements ListenerInterface
 {
     public function __construct()
     {
@@ -40,7 +40,7 @@ readonly class MagicWatchDogSubscriber implements ListenerInterface
             return;
         }
         $quantum = 10 * 1000 * 1000; // 单位：毫秒
-        $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)?->get('MagicWatchDogSubscriber');
+        $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)?->get('DelightfulWatchDogSubscriber');
         // 看门狗找同步阻塞的地方
         $logger->info('麦吉看门狗，启动！');
         $alertCountMap = new WeakMap();

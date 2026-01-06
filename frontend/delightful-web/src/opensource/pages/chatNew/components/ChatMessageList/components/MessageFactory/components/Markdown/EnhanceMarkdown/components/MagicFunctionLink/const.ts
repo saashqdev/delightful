@@ -1,4 +1,4 @@
-export const enum MagicFunctionLinkType {
+export const enum DelightfulFunctionLinkType {
 	/**
 	 * 发送消息
 	 */

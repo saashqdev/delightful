@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Util\Auth\Guard;
 
-use App\Domain\Chat\DTO\Request\Common\MagicContext;
+use App\Domain\Chat\DTO\Request\Common\DelightfulContext;
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Hyperf\WebSocketServer\Context as WebSocketContext;
 use Qbhy\HyperfAuth\Authenticatable;
 use Throwable;
@@ -21,13 +21,13 @@ use Throwable;
 class WebsocketChatUserGuard extends WebUserGuard
 {
     /**
-     * @return MagicUserAuthorization
+     * @return DelightfulUserAuthorization
      * @throws Throwable
      */
     public function user(): Authenticatable
     {
-        /** @var MagicContext $magicContext */
-        $magicContext = WebSocketContext::get(MagicContext::class);
+        /** @var DelightfulContext $magicContext */
+        $magicContext = WebSocketContext::get(DelightfulContext::class);
         $userAuthToken = $magicContext?->getAuthorization();
         if (empty($userAuthToken)) {
             ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND);
@@ -42,17 +42,17 @@ class WebsocketChatUserGuard extends WebUserGuard
             if ($result instanceof Throwable) {
                 throw $result;
             }
-            if ($result instanceof MagicUserAuthorization) {
+            if ($result instanceof DelightfulUserAuthorization) {
                 return $result;
             }
             ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND);
         }
-        // 下面这段实际调用的是 MagicUserAuthorization 的 retrieveById 方法
-        /** @var MagicUserAuthorization $user */
+        // 下面这段实际调用的是 DelightfulUserAuthorization 的 retrieveById 方法
+        /** @var DelightfulUserAuthorization $user */
         $user = $this->userProvider->retrieveByCredentials([
             'authorization' => $userAuthToken,
             'organizationCode' => $organizationCode,
-            'superMagicAgentUserId' => $magicContext->getSuperMagicAgentUserId(),
+            'superDelightfulAgentUserId' => $magicContext->getSuperDelightfulAgentUserId(),
         ]);
         if (empty($user->getOrganizationCode())) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);

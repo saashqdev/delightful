@@ -1,67 +1,67 @@
-export { default as MagicThemeProvider } from "./ThemeProvider"
+export { default as DelightfulThemeProvider } from "./ThemeProvider"
 
-export { default as MagicAvatar } from "./MagicAvatar"
-export type { MagicAvatarProps } from "./MagicAvatar"
+export { default as DelightfulAvatar } from "./DelightfulAvatar"
+export type { DelightfulAvatarProps } from "./DelightfulAvatar"
 
-export type { MagicButtonProps } from "./MagicButton"
-export { default as MagicButton } from "./MagicButton"
+export type { DelightfulButtonProps } from "./DelightfulButton"
+export { default as DelightfulButton } from "./DelightfulButton"
 
-export type { MagicCheckFavorProps } from "./MagicCheckFavor"
-export { default as MagicCheckFavor } from "./MagicCheckFavor"
+export type { DelightfulCheckFavorProps } from "./DelightfulCheckFavor"
+export { default as DelightfulCheckFavor } from "./DelightfulCheckFavor"
 
-export type { MagicCollapseProps } from "./MagicCollapse"
-export { default as MagicCollapse } from "./MagicCollapse"
+export type { DelightfulCollapseProps } from "./DelightfulCollapse"
+export { default as DelightfulCollapse } from "./DelightfulCollapse"
 
-export type { MagicDropdownProps } from "./MagicDropdown"
-export { default as MagicDropdown } from "./MagicDropdown"
+export type { DelightfulDropdownProps } from "./DelightfulDropdown"
+export { default as DelightfulDropdown } from "./DelightfulDropdown"
 
-export type { MagicEllipseWithTooltipProps } from "./MagicEllipseWithTooltip"
-export { default as MagicEllipseWithTooltip } from "./MagicEllipseWithTooltip"
+export type { DelightfulEllipseWithTooltipProps } from "./DelightfulEllipseWithTooltip"
+export { default as DelightfulEllipseWithTooltip } from "./DelightfulEllipseWithTooltip"
 
-export type { MagicFileIconProps } from "./MagicFileIcon"
-export { default as MagicFileIcon } from "./MagicFileIcon"
+export type { DelightfulFileIconProps } from "./DelightfulFileIcon"
+export { default as DelightfulFileIcon } from "./DelightfulFileIcon"
 
-export type { MagicIconProps } from "./MagicIcon"
-export { default as MagicIcon } from "./MagicIcon"
+export type { DelightfulIconProps } from "./DelightfulIcon"
+export { default as DelightfulIcon } from "./DelightfulIcon"
 
-export type { MagicImageProps } from "./MagicImage"
-export { default as MagicImage } from "./MagicImage"
+export type { DelightfulImageProps } from "./DelightfulImage"
+export { default as DelightfulImage } from "./DelightfulImage"
 
-export type { MagicMenuProps } from "./MagicMenu"
-export { default as MagicMenu } from "./MagicMenu"
+export type { DelightfulMenuProps } from "./DelightfulMenu"
+export { default as DelightfulMenu } from "./DelightfulMenu"
 
-export type { MagicModalProps } from "./MagicModal"
-export { default as MagicModal } from "./MagicModal"
+export type { DelightfulModalProps } from "./DelightfulModal"
+export { default as DelightfulModal } from "./DelightfulModal"
 
-export type { MagicPageContainerProps } from "./MagicPageContainer"
-export { default as MagicPageContainer } from "./MagicPageContainer"
+export type { DelightfulPageContainerProps } from "./DelightfulPageContainer"
+export { default as DelightfulPageContainer } from "./DelightfulPageContainer"
 
-export type { MagicSearchProps } from "./MagicSearch"
-export { default as MagicSearch } from "./MagicSearch"
+export type { DelightfulSearchProps } from "./DelightfulSearch"
+export { default as DelightfulSearch } from "./DelightfulSearch"
 
-export type { MagicSegmentedProps } from "./MagicSegmented"
-export { default as MagicSegmented } from "./MagicSegmented"
+export type { DelightfulSegmentedProps } from "./DelightfulSegmented"
+export { default as DelightfulSegmented } from "./DelightfulSegmented"
 
-export type { MagicSelectProps } from "./MagicSelect"
-export { default as MagicSelect } from "./MagicSelect"
+export type { DelightfulSelectProps } from "./DelightfulSelect"
+export { default as DelightfulSelect } from "./DelightfulSelect"
 
-export type { MagicSpinProps } from "./MagicSpin"
-export { default as MagicSpin } from "./MagicSpin"
+export type { DelightfulSpinProps } from "./DelightfulSpin"
+export { default as DelightfulSpin } from "./DelightfulSpin"
 
-export type { MagicSplitterProps } from "./MagicSplitter"
-export { default as MagicSplitter } from "./MagicSplitter"
+export type { DelightfulSplitterProps } from "./DelightfulSplitter"
+export { default as DelightfulSplitter } from "./DelightfulSplitter"
 
-export type { MagicStreamContentProps } from "./MagicStreamContent"
-export { default as MagicStreamContent } from "./MagicStreamContent"
+export type { DelightfulStreamContentProps } from "./DelightfulStreamContent"
+export { default as DelightfulStreamContent } from "./DelightfulStreamContent"
 
-export type { MagicSwitchProps } from "./MagicSwitch"
-export { default as MagicSwitch } from "./MagicSwitch"
+export type { DelightfulSwitchProps } from "./DelightfulSwitch"
+export { default as DelightfulSwitch } from "./DelightfulSwitch"
 
-export type { MagicTableProps } from "./MagicTable"
-export { default as MagicTable } from "./MagicTable"
+export type { DelightfulTableProps } from "./DelightfulTable"
+export { default as DelightfulTable } from "./DelightfulTable"
 
-export type { MagicTagProps } from "./MagicTag"
-export { default as MagicTag } from "./MagicTag"
+export type { DelightfulTagProps } from "./DelightfulTag"
+export { default as DelightfulTag } from "./DelightfulTag"
 
-export type { MagicUploadActionProps } from "./MagicUploadAction"
-export { default as MagicUploadAction } from "./MagicUploadAction"
+export type { DelightfulUploadActionProps } from "./DelightfulUploadAction"
+export { default as DelightfulUploadAction } from "./DelightfulUploadAction"

@@ -1,3 +1,3 @@
-import MagicScrollBar from "./MagicScrollBar"
+import DelightfulScrollBar from "./DelightfulScrollBar"
 
-export default MagicScrollBar
+export default DelightfulScrollBar

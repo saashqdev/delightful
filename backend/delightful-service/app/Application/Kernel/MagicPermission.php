@@ -7,27 +7,27 @@ declare(strict_types=1);
 
 namespace App\Application\Kernel;
 
-use App\Application\Kernel\Contract\MagicPermissionInterface;
-use App\Application\Kernel\Enum\MagicAdminResourceEnum;
-use App\Application\Kernel\Enum\MagicOperationEnum;
-use App\Application\Kernel\Enum\MagicResourceEnum;
+use App\Application\Kernel\Contract\DelightfulPermissionInterface;
+use App\Application\Kernel\Enum\DelightfulAdminResourceEnum;
+use App\Application\Kernel\Enum\DelightfulOperationEnum;
+use App\Application\Kernel\Enum\DelightfulResourceEnum;
 use App\ErrorCode\PermissionErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use BackedEnum;
 use Exception;
 use InvalidArgumentException;
 
-class MagicPermission implements MagicPermissionInterface
+class DelightfulPermission implements DelightfulPermissionInterface
 {
     // ========== 全局权限 ==========
-    public const string ALL_PERMISSIONS = MagicAdminResourceEnum::ORGANIZATION_ADMIN->value;
+    public const string ALL_PERMISSIONS = DelightfulAdminResourceEnum::ORGANIZATION_ADMIN->value;
 
     /**
      * 获取所有操作类型.
      */
     public function getOperations(): array
     {
-        return array_map(static fn (MagicOperationEnum $op) => $op->value, MagicOperationEnum::cases());
+        return array_map(static fn (DelightfulOperationEnum $op) => $op->value, DelightfulOperationEnum::cases());
     }
 
     /**
@@ -35,15 +35,15 @@ class MagicPermission implements MagicPermissionInterface
      */
     public function getResources(): array
     {
-        return array_map(static fn (MagicResourceEnum $res) => $res->value, MagicResourceEnum::cases());
+        return array_map(static fn (DelightfulResourceEnum $res) => $res->value, DelightfulResourceEnum::cases());
     }
 
     /**
-     * 获取资源的国际化标签（由 MagicResourceEnum 提供）.
+     * 获取资源的国际化标签（由 DelightfulResourceEnum 提供）.
      */
     public function getResourceLabel(string $resource): string
     {
-        $enum = MagicResourceEnum::tryFrom($resource);
+        $enum = DelightfulResourceEnum::tryFrom($resource);
         if (! $enum) {
             throw new InvalidArgumentException('Not a resource type: ' . $resource);
         }
@@ -113,7 +113,7 @@ class MagicPermission implements MagicPermissionInterface
      */
     public function getOperationLabel(string $operation): string
     {
-        $enum = MagicOperationEnum::tryFrom($operation);
+        $enum = DelightfulOperationEnum::tryFrom($operation);
         if (! $enum) {
             throw new InvalidArgumentException('Not an operation type: ' . $operation);
         }
@@ -131,7 +131,7 @@ class MagicPermission implements MagicPermissionInterface
      */
     public function getResourceModule(string $resource): string
     {
-        $enum = MagicResourceEnum::tryFrom($resource);
+        $enum = DelightfulResourceEnum::tryFrom($resource);
         if (! $enum) {
             throw new InvalidArgumentException('Not a resource type: ' . $resource);
         }
@@ -155,7 +155,7 @@ class MagicPermission implements MagicPermissionInterface
         if ($moduleLabel === $moduleEnum->translationKey()) {
             // 如果缺失翻译，手动兼容已知模块
             return match ($moduleEnum) {
-                MagicResourceEnum::ADMIN_AI => 'AI管理',
+                DelightfulResourceEnum::ADMIN_AI => 'AI管理',
                 default => $moduleEnum->value,
             };
         }
@@ -222,7 +222,7 @@ class MagicPermission implements MagicPermissionInterface
             $platformKey = array_shift($segments); // 平台，如 Admin
 
             // 平台组织独有：非平台组织时，过滤掉 platform 平台的资源
-            if ($platformKey === MagicResourceEnum::PLATFORM->value && ! $isPlatformOrganization) {
+            if ($platformKey === DelightfulResourceEnum::PLATFORM->value && ! $isPlatformOrganization) {
                 continue;
             }
             // 初始化平台根节点
@@ -319,7 +319,7 @@ class MagicPermission implements MagicPermissionInterface
         // 平台组织校验：非平台组织不允许访问 platform 平台资源
         $parsed = $this->parsePermission($permissionKey);
         $platformKey = explode('.', $parsed['resource'])[0];
-        if ($platformKey === MagicResourceEnum::PLATFORM->value && ! $isPlatformOrganization) {
+        if ($platformKey === DelightfulResourceEnum::PLATFORM->value && ! $isPlatformOrganization) {
             return false;
         }
 
@@ -336,9 +336,9 @@ class MagicPermission implements MagicPermissionInterface
         $parsed = $this->parsePermission($permissionKey);
         // 默认隐式：edit -> query（若两操作均存在）
         $ops = $this->getOperationsByResource($parsed['resource']);
-        if (in_array(MagicOperationEnum::EDIT->value, $ops, true) && in_array(MagicOperationEnum::QUERY->value, $ops, true)) {
-            if ($parsed['operation'] === MagicOperationEnum::QUERY->value) {
-                $permissionKey = $this->buildPermission($parsed['resource'], MagicOperationEnum::EDIT->value);
+        if (in_array(DelightfulOperationEnum::EDIT->value, $ops, true) && in_array(DelightfulOperationEnum::QUERY->value, $ops, true)) {
+            if ($parsed['operation'] === DelightfulOperationEnum::QUERY->value) {
+                $permissionKey = $this->buildPermission($parsed['resource'], DelightfulOperationEnum::EDIT->value);
                 if (in_array($permissionKey, $userPermissions, true)) {
                     return true;
                 }
@@ -353,7 +353,7 @@ class MagicPermission implements MagicPermissionInterface
      */
     protected function getOperationsByResource(string $resource): array
     {
-        $enum = MagicResourceEnum::tryFrom($resource);
+        $enum = DelightfulResourceEnum::tryFrom($resource);
         $opEnumClass = $enum
             ? $this->resolveOperationEnumClass($enum)
             : $this->resolveOperationEnumClassFromUnknownResource($resource);
@@ -372,16 +372,16 @@ class MagicPermission implements MagicPermissionInterface
     }
 
     /**
-     * 返回资源绑定的 Operation Enum 类名，默认读取 `MagicResourceEnum::operationEnumClass()`。
+     * 返回资源绑定的 Operation Enum 类名，默认读取 `DelightfulResourceEnum::operationEnumClass()`。
      * 企业版可覆盖本方法，将企业资源映射到自定义的 Operation Enum。
      */
-    protected function resolveOperationEnumClass(MagicResourceEnum $resourceEnum): string
+    protected function resolveOperationEnumClass(DelightfulResourceEnum $resourceEnum): string
     {
         return $resourceEnum->operationEnumClass();
     }
 
     /**
-     * 对于非 MagicResourceEnum 定义的资源，子类可覆盖该方法以解析到相应的 Operation Enum。
+     * 对于非 DelightfulResourceEnum 定义的资源，子类可覆盖该方法以解析到相应的 Operation Enum。
      * 开源默认抛错。
      */
     protected function resolveOperationEnumClassFromUnknownResource(string $resource): string
@@ -394,7 +394,7 @@ class MagicPermission implements MagicPermissionInterface
      */
     protected function getOperationLabelByResource(string $resource, string $operation): string
     {
-        $enum = MagicResourceEnum::tryFrom($resource);
+        $enum = DelightfulResourceEnum::tryFrom($resource);
         $opEnumClass = $enum
             ? $this->resolveOperationEnumClass($enum)
             : $this->resolveOperationEnumClassFromUnknownResource($resource);
@@ -403,7 +403,7 @@ class MagicPermission implements MagicPermissionInterface
             if (! $opEnum) {
                 throw new InvalidArgumentException('Not an operation type: ' . $operation);
             }
-            // 要求自定义 OperationEnum 实现 label()/translationKey() 与 MagicOperationEnum 对齐
+            // 要求自定义 OperationEnum 实现 label()/translationKey() 与 DelightfulOperationEnum 对齐
             if (method_exists($opEnum, 'label') && method_exists($opEnum, 'translationKey')) {
                 $translated = $opEnum->label();
                 if ($translated === $opEnum->translationKey()) {
@@ -434,7 +434,7 @@ class MagicPermission implements MagicPermissionInterface
      */
     private function getPlatformLabel(string $platformKey): string
     {
-        $enum = MagicResourceEnum::tryFrom($platformKey);
+        $enum = DelightfulResourceEnum::tryFrom($platformKey);
         if ($enum) {
             $label = $enum->label();
             if ($label !== $enum->translationKey()) {

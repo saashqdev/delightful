@@ -2098,12 +2098,12 @@
         {
             "names": {
                 "zh_CN": "魔杖",
-                "en_US": "Magic wand",
+                "en_US": "Delightful wand",
                 "ms_MY": "Tongkat ajaib",
                 "vi_VN": "Cây đũa thần",
                 "th_TH": "ไม้กายสิทธิ์",
-                "fil_PH": "Magic wand",
-                "en_SG": "Magic wand"
+                "fil_PH": "Delightful wand",
+                "en_SG": "Delightful wand"
             },
             "filePath": "magic_wand.png",
             "code": "magic_wand"

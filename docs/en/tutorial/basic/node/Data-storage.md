@@ -1,6 +1,6 @@
 # Data Storage Node
 ## What is a Data Storage Node?
-The Data Storage Node is a functional component in the Magic platform used for persistently saving key information. It's like a reliable notebook that can record important data in the workflow and access it whenever needed, retaining this information even after the conversation ends.
+The Data Storage Node is a functional component in the Delightful platform used for persistently saving key information. It's like a reliable notebook that can record important data in the workflow and access it whenever needed, retaining this information even after the conversation ends.
 
 **Image Description:**
 

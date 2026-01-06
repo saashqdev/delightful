@@ -26,7 +26,7 @@ class Message extends AbstractEntity
     protected string $type;
 
     /**
-     * 根据 type 的类型,来确定 MagicMessage 的具体类型.
+     * 根据 type 的类型,来确定 DelightfulMessage 的具体类型.
      */
     protected MessageInterface $magicMessage;
 
@@ -81,12 +81,12 @@ class Message extends AbstractEntity
         $this->type = $type;
     }
 
-    public function getMagicMessage(): MessageInterface
+    public function getDelightfulMessage(): MessageInterface
     {
         return $this->magicMessage;
     }
 
-    public function setMagicMessage(MessageInterface $magicMessage): void
+    public function setDelightfulMessage(MessageInterface $magicMessage): void
     {
         $this->magicMessage = $magicMessage;
     }

@@ -1,4 +1,4 @@
-import type { FileItem } from "@/opensource/pages/superMagic/pages/Workspace/types"
+import type { FileItem } from "@/opensource/pages/superDelightful/pages/Workspace/types"
 
 export interface MessageSeqItem {
 	magic_id: string

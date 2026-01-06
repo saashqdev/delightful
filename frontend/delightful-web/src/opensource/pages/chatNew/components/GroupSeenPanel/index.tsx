@@ -1,4 +1,4 @@
-import MagicMemberAvatar from "@/opensource/components/business/MagicMemberAvatar"
+import DelightfulMemberAvatar from "@/opensource/components/business/DelightfulMemberAvatar"
 import { resolveToString } from "@dtyq/es6-template-strings"
 
 import { Flex } from "antd"
@@ -8,9 +8,9 @@ import { useGroupMessageSeenPopoverStyles } from "./style"
 import { observer } from "mobx-react-lite"
 import { useEffect, useRef } from "react"
 import { useDeepCompareEffect, useHover, useSize } from "ahooks"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { IconX } from "@tabler/icons-react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 
 const GroupSeenPanel = observer(() => {
 	const { t } = useTranslation("interface")
@@ -47,13 +47,13 @@ const GroupSeenPanel = observer(() => {
 			<Flex gap={8} align="center" justify="space-between" className={styles.title}>
 				{t("chat.message.groupSeenPopover.title")}
 				<div className={styles.close}>
-					<MagicIcon
+					<DelightfulIcon
 						component={IconX}
 						onClick={() => GroupSeenPanelStore.closePanel(true)}
 					/>
 				</div>
 			</Flex>
-			<MagicSpin section spinning={loading}>
+			<DelightfulSpin section spinning={loading}>
 				<Flex>
 					<Flex vertical flex={1} gap={8} className={styles.section}>
 						<span className={styles.text}>
@@ -63,7 +63,7 @@ const GroupSeenPanel = observer(() => {
 						</span>
 						<Flex gap={8} vertical className={styles.list}>
 							{messageReceiveList?.unseen_list.map((uid) => (
-								<MagicMemberAvatar
+								<DelightfulMemberAvatar
 									showPopover={false}
 									showName="horizontal"
 									key={uid}
@@ -82,7 +82,7 @@ const GroupSeenPanel = observer(() => {
 						</span>
 						<Flex gap={8} vertical className={styles.list}>
 							{messageReceiveList?.seen_list.map((uid) => (
-								<MagicMemberAvatar
+								<DelightfulMemberAvatar
 									showPopover={false}
 									showName="horizontal"
 									key={uid}
@@ -93,7 +93,7 @@ const GroupSeenPanel = observer(() => {
 						</Flex>
 					</Flex>
 				</Flex>
-			</MagicSpin>
+			</DelightfulSpin>
 		</div>
 	)
 })

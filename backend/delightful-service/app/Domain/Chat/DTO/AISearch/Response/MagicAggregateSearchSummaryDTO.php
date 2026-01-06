@@ -9,7 +9,7 @@ namespace App\Domain\Chat\DTO\AISearch\Response;
 
 use App\Domain\Chat\Entity\AbstractEntity;
 
-class MagicAggregateSearchSummaryDTO extends AbstractEntity
+class DelightfulAggregateSearchSummaryDTO extends AbstractEntity
 {
     protected string $llmResponse = '';
 

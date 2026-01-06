@@ -10,16 +10,16 @@ namespace App\Application\Speech\Service;
 use App\Application\Speech\DTO\AsrTaskStatusDTO;
 use App\Domain\Asr\Service\AsrTaskDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
 use App\ErrorCode\AsrErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectMemberDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\SuperMagic\ErrorCode\SuperAgentErrorCode;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ProjectEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\TopicDomainService;
+use Delightful\SuperDelightful\ErrorCode\SuperAgentErrorCode;
 use Throwable;
 
 /**
@@ -31,7 +31,7 @@ readonly class AsrValidationService
     public function __construct(
         private ProjectDomainService $projectDomainService,
         private ProjectMemberDomainService $projectMemberDomainService,
-        private MagicDepartmentUserDomainService $magicDepartmentUserDomainService,
+        private DelightfulDepartmentUserDomainService $magicDepartmentUserDomainService,
         private TopicDomainService $topicDomainService,
         private AsrTaskDomainService $asrTaskDomainService
     ) {

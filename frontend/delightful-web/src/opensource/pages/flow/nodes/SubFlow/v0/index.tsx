@@ -1,15 +1,15 @@
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
 import { useMemo, useState } from "react"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import { ShowColumns } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/constants"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
 import JSONSchemaRenderer from "@/opensource/pages/flow/components/JSONSchemaRenderer"
 import { useFlowStore } from "@/opensource/stores/flow"
 import { Form, Select } from "antd"
 import { useMemoizedFn, useMount, useUpdateEffect } from "ahooks"
 import { get, set } from "lodash-es"
-import type Schema from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
-import MagicJsonSchemaEditor from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor"
-import { useNodeConfigActions } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
+import type Schema from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
+import DelightfulJsonSchemaEditor from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor"
+import { useNodeConfigActions } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
 import { replaceRouteParams } from "@/utils/route"
 import { RoutePath } from "@/const/routes"
 import RenderLabelCommon from "@/opensource/pages/flow/components/RenderLabel/RenderLabel"
@@ -171,7 +171,7 @@ export default function SubFlowV0() {
 			</Form.Item>
 			<div className={styles.input}>
 				<DropdownCard title={t("common.input", { ns: "flow" })} height="auto">
-					<MagicJsonSchemaEditor
+					<DelightfulJsonSchemaEditor
 						data={input}
 						onChange={setInput}
 						allowExpression

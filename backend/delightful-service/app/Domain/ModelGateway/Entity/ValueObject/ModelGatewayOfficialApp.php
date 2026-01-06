@@ -9,7 +9,7 @@ namespace App\Domain\ModelGateway\Entity\ValueObject;
 
 class ModelGatewayOfficialApp
 {
-    public const string APP_CODE = 'Magic';
+    public const string APP_CODE = 'Delightful';
 
     public static function isOfficialApp(string $code): bool
     {

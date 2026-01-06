@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Domain\Token\Entity;
 
-use App\Domain\Token\Entity\ValueObject\MagicTokenType;
-use App\Domain\Token\Repository\Facade\MagicTokenExtraInterface;
+use App\Domain\Token\Entity\ValueObject\DelightfulTokenType;
+use App\Domain\Token\Repository\Facade\DelightfulTokenExtraInterface;
 use Hyperf\Codec\Json;
 
-class MagicTokenEntity extends AbstractEntity
+class DelightfulTokenEntity extends AbstractEntity
 {
     protected int $id;
 
-    protected MagicTokenType $type;
+    protected DelightfulTokenType $type;
 
     protected string $typeRelationValue;
 
@@ -27,10 +27,10 @@ class MagicTokenEntity extends AbstractEntity
 
     protected string $expiredAt;
 
-    protected ?MagicTokenExtraInterface $extra = null;
+    protected ?DelightfulTokenExtraInterface $extra = null;
 
     // 如果第三方平台 toke 太长了，就搞短点，便于存储和查询
-    public function getMagicShortToken(string $longToken): string
+    public function getDelightfulShortToken(string $longToken): string
     {
         if (strlen($longToken) > 128) {
             return hash('sha256', $longToken);
@@ -38,12 +38,12 @@ class MagicTokenEntity extends AbstractEntity
         return $longToken;
     }
 
-    public function getExtra(): ?MagicTokenExtraInterface
+    public function getExtra(): ?DelightfulTokenExtraInterface
     {
         return $this->extra;
     }
 
-    public function setExtra(null|array|MagicTokenExtraInterface|string $extra): void
+    public function setExtra(null|array|DelightfulTokenExtraInterface|string $extra): void
     {
         if (is_string($extra) && $extra !== '') {
             $extra = Json::decode($extra);
@@ -51,7 +51,7 @@ class MagicTokenEntity extends AbstractEntity
         if (empty($extra)) {
             $extra = null;
         } elseif (is_array($extra)) {
-            $extra = make(MagicTokenExtraInterface::class)->setTokenExtraData($extra);
+            $extra = make(DelightfulTokenExtraInterface::class)->setTokenExtraData($extra);
         }
         $this->extra = $extra;
     }
@@ -76,15 +76,15 @@ class MagicTokenEntity extends AbstractEntity
         $this->id = $id;
     }
 
-    public function getType(): MagicTokenType
+    public function getType(): DelightfulTokenType
     {
         return $this->type;
     }
 
-    public function setType(int|MagicTokenType $type): void
+    public function setType(int|DelightfulTokenType $type): void
     {
         if (is_int($type)) {
-            $this->type = MagicTokenType::from($type);
+            $this->type = DelightfulTokenType::from($type);
         } else {
             $this->type = $type;
         }

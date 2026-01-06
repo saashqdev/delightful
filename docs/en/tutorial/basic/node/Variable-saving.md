@@ -1,7 +1,7 @@
 # Variable Saving Node
 
 ## What is a Variable Saving Node?
-The Variable Saving Node is a basic data processing node in Magic Flow, used to create, set, or update variables within workflows. This node helps you store temporary data in the process for use by subsequent nodes, enabling data transfer and sharing between different nodes.
+The Variable Saving Node is a basic data processing node in Delightful Flow, used to create, set, or update variables within workflows. This node helps you store temporary data in the process for use by subsequent nodes, enabling data transfer and sharing between different nodes.
 
 **Image Description:**
 

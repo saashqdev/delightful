@@ -9,7 +9,7 @@ namespace App\Interfaces\File\Facade\Admin;
 
 use App\Application\File\Service\FileAppService;
 use App\Domain\File\Constant\DefaultFileBusinessType;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -66,7 +66,7 @@ class FileApi extends AbstractAdminApi
     {
         $businessType = $request->input('business_type');
         /**
-         * @var MagicUserAuthorization $authenticatable
+         * @var DelightfulUserAuthorization $authenticatable
          */
         $authenticatable = $this->getAuthorization();
         return $this->fileAppService->getFileByBusinessType(DefaultFileBusinessType::from($businessType), $authenticatable->getOrganizationCode());
@@ -75,7 +75,7 @@ class FileApi extends AbstractAdminApi
     public function uploadBusinessType(RequestInterface $request)
     {
         /**
-         * @var MagicUserAuthorization $authenticatable
+         * @var DelightfulUserAuthorization $authenticatable
          */
         $authenticatable = $this->getAuthorization();
         $fileKey = $request->input('file_key');
@@ -86,7 +86,7 @@ class FileApi extends AbstractAdminApi
     public function deleteBusinessFile(RequestInterface $request)
     {
         /**
-         * @var MagicUserAuthorization $authenticatable
+         * @var DelightfulUserAuthorization $authenticatable
          */
         $authenticatable = $this->getAuthorization();
         $fileKey = $request->input('file_key');

@@ -16,7 +16,7 @@ export class UserStore {
 	/** teamshare organization code */
 	teamshareOrganizationCode: string = ""
 
-	magicOrganizationMap: Record<string, User.MagicOrganization> = {}
+	magicOrganizationMap: Record<string, User.DelightfulOrganization> = {}
 
 	/** Whether current user is an admin */
 	isAdmin: boolean = false
@@ -41,7 +41,7 @@ export class UserStore {
 		this.teamshareOrganizationCode = teamshareOrganizationCode
 	}
 
-	setOrganizations = (organizations: Record<string, User.MagicOrganization>) => {
+	setOrganizations = (organizations: Record<string, User.DelightfulOrganization>) => {
 		this.magicOrganizationMap = organizations
 	}
 
@@ -55,7 +55,7 @@ export class UserStore {
 	 * @description Get organization object by magic organization code
 	 * @param {string} organizationCode Organization code in the magic system
 	 */
-	getOrganizationByMagic = (organizationCode: string) => {
+	getOrganizationByDelightful = (organizationCode: string) => {
 		const { organizations, magicOrganizationMap } = this
 		const orgMap = keyBy(organizations, "organization_code")
 		// Get teamshare organization code

@@ -9,7 +9,7 @@ use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 use Hyperf\DbConnection\Db;
 
-class CreateMagicApiMsgLogTable extends Migration
+class CreateDelightfulApiMsgLogTable extends Migration
 {
     /**
      * Run the migrations.

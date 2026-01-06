@@ -25,7 +25,7 @@ use Delightful\FlowExprEngine\ComponentFactory;
 use Delightful\FlowExprEngine\Structure\StructureType;
 use Throwable;
 
-class MagicFlowEntity extends AbstractEntity
+class DelightfulFlowEntity extends AbstractEntity
 {
     protected ?int $id = null;
 
@@ -135,7 +135,7 @@ class MagicFlowEntity extends AbstractEntity
         $this->collectNodes();
     }
 
-    public function prepareForSaveNode(?MagicFlowEntity $magicFlowEntity): void
+    public function prepareForSaveNode(?DelightfulFlowEntity $magicFlowEntity): void
     {
         $this->nodeValidate();
 
@@ -164,7 +164,7 @@ class MagicFlowEntity extends AbstractEntity
         $this->edges = [];
     }
 
-    public function prepareForModification(MagicFlowEntity $magicFlow): void
+    public function prepareForModification(DelightfulFlowEntity $magicFlow): void
     {
         $this->requiredValidate();
 
@@ -187,11 +187,11 @@ class MagicFlowEntity extends AbstractEntity
         }
     }
 
-    public function prepareForPublish(MagicFlowVersionEntity $magicFlowVersionEntity, string $publisher): void
+    public function prepareForPublish(DelightfulFlowVersionEntity $magicFlowVersionEntity, string $publisher): void
     {
         $this->versionCode = $magicFlowVersionEntity->getCode();
 
-        $magicFlow = $magicFlowVersionEntity->getMagicFlow();
+        $magicFlow = $magicFlowVersionEntity->getDelightfulFlow();
 
         $this->name = $magicFlow->getName();
         $this->description = $magicFlow->getDescription();

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, type PropsWithChildren } from "react"
 import type { CMessage } from "@/types/chat"
 import { EventType } from "@/types/chat"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { useTranslation } from "react-i18next"
 import { useLocation } from "react-router"
 import { bigNumCompare } from "@/utils/string"
@@ -92,9 +92,9 @@ const ChatProvider = observer(function ChatProvider({ children }: ChatServicePro
 
 	const Fallback = useMemo(
 		() => (
-			<MagicSpin tip={t("spin.loadingUserInfo")} wrapperClassName={styles.spin}>
+			<DelightfulSpin tip={t("spin.loadingUserInfo")} wrapperClassName={styles.spin}>
 				<div className={styles.container} />
-			</MagicSpin>
+			</DelightfulSpin>
 		),
 		[styles.container, styles.spin, t],
 	)

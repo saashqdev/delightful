@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowWaitMessageEntity;
+use App\Domain\Flow\Entity\DelightfulFlowWaitMessageEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Repository\Facade\MagicFlowWaitMessageRepositoryInterface;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowWaitMessageRepositoryInterface;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 
-class MagicFlowWaitMessageDomainService extends AbstractDomainService
+class DelightfulFlowWaitMessageDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly MagicFlowWaitMessageRepositoryInterface $magicFlowWaitMessageRepository,
+        private readonly DelightfulFlowWaitMessageRepositoryInterface $magicFlowWaitMessageRepository,
     ) {
     }
 
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowWaitMessageEntity $savingWaitMessageEntity): MagicFlowWaitMessageEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowWaitMessageEntity $savingWaitMessageEntity): DelightfulFlowWaitMessageEntity
     {
         $savingWaitMessageEntity->setCreator($dataIsolation->getCurrentUserId());
         $savingWaitMessageEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
@@ -40,7 +40,7 @@ class MagicFlowWaitMessageDomainService extends AbstractDomainService
         $this->magicFlowWaitMessageRepository->handled($dataIsolation, $id);
     }
 
-    public function getLastWaitMessage(FlowDataIsolation $dataIsolation, string $conversationId, string $flowCode, string $flowVersion): ?MagicFlowWaitMessageEntity
+    public function getLastWaitMessage(FlowDataIsolation $dataIsolation, string $conversationId, string $flowCode, string $flowVersion): ?DelightfulFlowWaitMessageEntity
     {
         // 应该不会很多，直接取所有
         $waitMessages = $this->listByUnhandledConversationId($dataIsolation, $conversationId);
@@ -62,7 +62,7 @@ class MagicFlowWaitMessageDomainService extends AbstractDomainService
     }
 
     /**
-     * @return MagicFlowWaitMessageEntity[]
+     * @return DelightfulFlowWaitMessageEntity[]
      */
     public function listByUnhandledConversationId(FlowDataIsolation $dataIsolation, string $conversationId): array
     {

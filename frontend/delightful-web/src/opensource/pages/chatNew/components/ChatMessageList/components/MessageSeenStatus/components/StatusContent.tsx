@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconEye, IconEyeCheck } from "@tabler/icons-react"
 import { Flex } from "antd"
 import { createStyles } from "antd-style"
@@ -27,7 +27,7 @@ const StatusIcon = memo(function StatusIcon({
 	icon: typeof IconEye | typeof IconEyeCheck
 	className: string
 }) {
-	return <MagicIcon component={Icon} size={16} className={className} />
+	return <DelightfulIcon component={Icon} size={16} className={className} />
 })
 
 // 文本独立，避免重复渲染

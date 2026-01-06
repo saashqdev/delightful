@@ -1,10 +1,10 @@
-import ImageWrapper from "@/opensource/components/base/MagicImagePreview/components/ImageWrapper"
+import ImageWrapper from "@/opensource/components/base/DelightfulImagePreview/components/ImageWrapper"
 import { Flex } from "antd"
 import type { HTMLAttributes } from "react"
 import { memo, useMemo, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import AiGradientBgAnimation from "@/opensource/components/animations/AiGradientBgAnimation"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconBadgeHd, IconMessageForward } from "@tabler/icons-react"
 import type { AIImagesContentItem, HDImageDataType } from "@/types/chat/conversation_message"
 import { AIImagesDataType } from "@/types/chat/conversation_message"
@@ -105,13 +105,13 @@ const AiImage = memo(({ type, className, item, onEdit, onToHD, ...rest }: AiImag
 			/>
 			{show && imgLoaded && (
 				<Flex gap={4} className={styles.buttonGroup} style={{ right }}>
-					<MagicButton className={styles.button} onClick={() => onEdit?.(item)}>
+					<DelightfulButton className={styles.button} onClick={() => onEdit?.(item)}>
 						<Flex gap={2} align="center" justify="center">
 							<IconMessageForward size={20} />
 							{showText && t("button.edit")}
 						</Flex>
-					</MagicButton>
-					<MagicButton
+					</DelightfulButton>
+					<DelightfulButton
 						className={styles.button}
 						onClick={() => onToHD?.(item?.file_id)}
 						disabled={!!item?.old_file_id}
@@ -120,7 +120,7 @@ const AiImage = memo(({ type, className, item, onEdit, onToHD, ...rest }: AiImag
 							<IconBadgeHd size={20} />
 							{showText && hdText}
 						</Flex>
-					</MagicButton>
+					</DelightfulButton>
 				</Flex>
 			)}
 		</Flex>

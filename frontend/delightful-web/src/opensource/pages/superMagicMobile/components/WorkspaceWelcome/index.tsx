@@ -1,11 +1,11 @@
 import { memo } from "react"
-import magicBetaSVG from "@/opensource/pages/superMagic/assets/svg/super_magic_logo.svg"
-import arrowDownSVG from "@/opensource/pages/superMagicMobile/assets/svg/arrow-down.svg"
+import magicBetaSVG from "@/opensource/pages/superDelightful/assets/svg/super_magic_logo.svg"
+import arrowDownSVG from "@/opensource/pages/superDelightfulMobile/assets/svg/arrow-down.svg"
 import { cx } from "antd-style"
 import { useStyles } from "./styles"
 import type { MessagePanelProps } from "../MessagePanel"
 // import MessagePanel from "../MessagePanel"
-import MessagePanel from "@/opensource/pages/superMagic/components/MessagePanel/MessagePanel"
+import MessagePanel from "@/opensource/pages/superDelightful/components/MessagePanel/MessagePanel"
 import WorkspaceCase from "../WorkspaceCase"
 
 interface WorkspaceWelcomeProps extends MessagePanelProps {

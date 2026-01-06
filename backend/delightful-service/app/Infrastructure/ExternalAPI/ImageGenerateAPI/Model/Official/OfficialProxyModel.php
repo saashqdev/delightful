@@ -12,7 +12,7 @@ use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\ImageGenerateRequest
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\OfficialProxyRequest;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Response\ImageGenerateResponse;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Response\OpenAIFormatResponse;
-use App\Infrastructure\Util\MagicUriTool;
+use App\Infrastructure\Util\DelightfulUriTool;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -44,7 +44,7 @@ class OfficialProxyModel extends AbstractImageGenerate
 
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        $uri = MagicUriTool::getImagesGenerationsUri();
+        $uri = DelightfulUriTool::getImagesGenerationsUri();
 
         $fullUrl = $this->url . $uri;
         try {

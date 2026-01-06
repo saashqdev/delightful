@@ -2,7 +2,7 @@
  * 人员检索条件相关状态和行为&组件
  */
 
-import MagicSelect from "@/common/BaseUI/Select"
+import DelightfulSelect from "@/common/BaseUI/Select"
 import { Flex, Form } from "antd"
 import React, { useMemo } from "react"
 import styles from "../SearchUsers.module.less"
@@ -18,7 +18,7 @@ export default function useFilters() {
 			<Flex className={styles.filterTypeWrap} align="center" gap={4}>
 				<span className={styles.text}>符合</span>
 				<Form.Item name="filter_type">
-					<MagicSelect
+					<DelightfulSelect
 						options={[
 							{
 								label: "所有",

@@ -7,25 +7,25 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Facade;
 
-use App\Domain\Flow\Entity\MagicFlowDraftEntity;
+use App\Domain\Flow\Entity\DelightfulFlowDraftEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowDraftQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowDraftQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
-interface MagicFlowDraftRepositoryInterface
+interface DelightfulFlowDraftRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowDraftEntity $magicFlowDraftEntity): MagicFlowDraftEntity;
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $magicFlowDraftEntity): DelightfulFlowDraftEntity;
 
-    public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?MagicFlowDraftEntity;
+    public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowDraftEntity;
 
-    public function getByFlowCodeAndCode(FlowDataIsolation $dataIsolation, string $flowCode, string $code): ?MagicFlowDraftEntity;
+    public function getByFlowCodeAndCode(FlowDataIsolation $dataIsolation, string $flowCode, string $code): ?DelightfulFlowDraftEntity;
 
     /**
-     * @return array{total: int, list: array<MagicFlowDraftEntity>}
+     * @return array{total: int, list: array<DelightfulFlowDraftEntity>}
      */
-    public function queries(FlowDataIsolation $dataIsolation, MagicFLowDraftQuery $query, Page $page): array;
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowDraftQuery $query, Page $page): array;
 
-    public function remove(FlowDataIsolation $dataIsolation, MagicFlowDraftEntity $magicFlowDraftEntity): void;
+    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $magicFlowDraftEntity): void;
 
     public function clearEarlyRecords(FlowDataIsolation $dataIsolation, string $flowCode): void;
 }

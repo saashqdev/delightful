@@ -9,7 +9,7 @@ namespace App\Interfaces\Flow\DTO\AIModel;
 
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 
-class MagicFlowAIModelDTO extends AbstractFlowDTO
+class DelightfulFlowAIModelDTO extends AbstractFlowDTO
 {
     public string $name;
 
@@ -46,7 +46,7 @@ class MagicFlowAIModelDTO extends AbstractFlowDTO
         return $this->modelName;
     }
 
-    public function setModelName(?string $modelName): MagicFlowAIModelDTO
+    public function setModelName(?string $modelName): DelightfulFlowAIModelDTO
     {
         $this->modelName = $modelName ?? '';
         return $this;

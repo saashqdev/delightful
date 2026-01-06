@@ -7,29 +7,29 @@ import { useMemo } from "react"
 import type {
 	EXPRESSION_VALUE,
 	InputExpressionValue,
-} from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
-import { FormItemType, LabelTypeMap } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
+} from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import { FormItemType, LabelTypeMap } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { Form, Input } from "antd"
 import { useForm } from "antd/lib/form/Form"
 import { useTranslation } from "react-i18next"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { cloneDeep, merge, uniqBy, get, set } from "lodash-es"
 import {
 	useFlowData,
 	useNodeConfig,
-} from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
+} from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
 import type { DataSourceOption } from "@delightful/delightful-flow/dist/common/BaseUI/DropdownRenderer/Reference"
-import type Schema from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
+import type Schema from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import type { ResolveRule } from "@/types/flow"
 import { ComponentTypes } from "@/types/flow"
-import MagicJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicJsonSchemaEditorWrap"
-import { ShowColumns } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/constants"
-import { DisabledField } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
-import { SystemNodeSuffix } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
+import DelightfulJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulJsonSchemaEditorWrap"
+import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
+import { DisabledField } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
+import { SystemNodeSuffix } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
 import antdStyles from "@/opensource/pages/flow/index.module.less"
 import { cx } from "antd-style"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import TestNodeBtn from "../TestNodeBtn"
 import { useCustomFlow } from "../../context/CustomFlowContext/useCustomFlow"
 import styles from "./testNode.module.less"
@@ -263,7 +263,7 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 				{(rules || []).length > 0 && <TestNodeBtn testFn={test} />}
 				<UpgradeVersionBtn />
 
-				<MagicModal
+				<DelightfulModal
 					title={t("common.inputArgs", { ns: "flow" })}
 					open={open}
 					onOk={handleOk}
@@ -286,7 +286,7 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 								name="trigger_data_form"
 								label={t("common.referenceArgsSettings", { ns: "flow" })}
 							>
-								<MagicJSONSchemaEditorWrap
+								<DelightfulJSONSchemaEditorWrap
 									oneChildAtLeast={false}
 									allowExpression={false}
 									expressionSource={[]}
@@ -320,7 +320,7 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 								name="global_variable"
 								label={t("common.environmentArgsSettings", { ns: "flow" })}
 							>
-								<MagicJSONSchemaEditorWrap
+								<DelightfulJSONSchemaEditorWrap
 									oneChildAtLeast={false}
 									allowExpression={false}
 									expressionSource={[]}
@@ -367,7 +367,7 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 							</Form.Item>
 						)}
 					</Form>
-				</MagicModal>
+				</DelightfulModal>
 			</>
 		)
 	}, [

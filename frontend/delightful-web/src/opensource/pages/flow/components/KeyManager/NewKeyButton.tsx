@@ -1,5 +1,5 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { generateSnowFlake } from "@/opensource/pages/flow/utils/helpers"
 import type { Conversation } from "@/types/chat/conversation"
 import { Flow, type ApiKey, type ApiKeyRequestParams, type NewKeyForm } from "@/types/flow"
@@ -95,12 +95,12 @@ export default function NewKeyButton({
 			{IconComponent ? (
 				<IconComponent onClick={setTrue} />
 			) : (
-				<MagicButton justify="flex-start" type="primary" onClick={setTrue}>
+				<DelightfulButton justify="flex-start" type="primary" onClick={setTrue}>
 					{t("flow.apiKey.addKey")}
-				</MagicButton>
+				</DelightfulButton>
 			)}
 
-			<MagicModal
+			<DelightfulModal
 				title={t("flow.apiKey.addKey")}
 				open={open}
 				closable
@@ -128,7 +128,7 @@ export default function NewKeyButton({
 						<Input.TextArea placeholder={t("flow.apiKey.descPlaceholder")} />
 					</Form.Item>
 				</Form>
-			</MagicModal>
+			</DelightfulModal>
 		</>
 	)
 }

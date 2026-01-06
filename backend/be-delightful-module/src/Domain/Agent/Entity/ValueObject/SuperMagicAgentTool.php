@@ -5,13 +5,13 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Domain\Agent\Entity\ValueObject;
+namespace Delightful\SuperDelightful\Domain\Agent\Entity\ValueObject;
 
 use App\Infrastructure\Core\AbstractValueObject;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\SuperMagic\ErrorCode\SuperMagicErrorCode;
+use Delightful\SuperDelightful\ErrorCode\SuperDelightfulErrorCode;
 
-class SuperMagicAgentTool extends AbstractValueObject
+class SuperDelightfulAgentTool extends AbstractValueObject
 {
     protected string $code;
 
@@ -21,7 +21,7 @@ class SuperMagicAgentTool extends AbstractValueObject
 
     protected string $icon = '';
 
-    protected SuperMagicAgentToolType $type;
+    protected SuperDelightfulAgentToolType $type;
 
     protected ?array $schema = null;
 
@@ -65,17 +65,17 @@ class SuperMagicAgentTool extends AbstractValueObject
         $this->icon = $icon;
     }
 
-    public function getType(): SuperMagicAgentToolType
+    public function getType(): SuperDelightfulAgentToolType
     {
         return $this->type;
     }
 
-    public function setType(int|SuperMagicAgentToolType $type): void
+    public function setType(int|SuperDelightfulAgentToolType $type): void
     {
         if (is_int($type)) {
-            $type = SuperMagicAgentToolType::tryFrom($type);
+            $type = SuperDelightfulAgentToolType::tryFrom($type);
             if ($type === null) {
-                ExceptionBuilder::throw(SuperMagicErrorCode::ValidateFailed, 'common.invalid', ['label' => 'super_magic.agent.fields.tools']);
+                ExceptionBuilder::throw(SuperDelightfulErrorCode::ValidateFailed, 'common.invalid', ['label' => 'super_magic.agent.fields.tools']);
             }
         }
         $this->type = $type;

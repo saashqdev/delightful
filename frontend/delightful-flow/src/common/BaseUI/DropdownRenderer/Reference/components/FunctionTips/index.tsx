@@ -1,5 +1,5 @@
-import { FuncTipsStyle } from "@/MagicExpressionWidget/style"
-import { MethodArgsItem } from "@/MagicExpressionWidget/types"
+import { FuncTipsStyle } from "@/DelightfulExpressionWidget/style"
+import { MethodArgsItem } from "@/DelightfulExpressionWidget/types"
 import { useFlowInteraction } from "@/DelightfulFlow/components/FlowDesign/context/FlowInteraction/useFlowInteraction"
 import { Popover, Tooltip } from "antd"
 import i18next from "i18next"

@@ -51,7 +51,7 @@ class GPTAPI
             'headers' => [
                 'TT-API-KEY' => $this->apiKey,
                 'Accept' => '*/*',
-                'User-Agent' => 'Magic-Service/1.0',
+                'User-Agent' => 'Delightful-Service/1.0',
             ],
         ]);
 

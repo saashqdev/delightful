@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\ExecuteManager\BuiltIn\ToolSet\Crontab\Tools;
 
-use App\Application\Chat\Service\MagicUserContactAppService;
-use App\Application\Chat\Service\MagicUserTaskAppService;
+use App\Application\Chat\Service\DelightfulUserContactAppService;
+use App\Application\Chat\Service\DelightfulUserTaskAppService;
 use App\Application\Flow\ExecuteManager\BuiltIn\BuiltInToolSet;
 use App\Application\Flow\ExecuteManager\BuiltIn\ToolSet\AbstractBuiltInTool;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
 use App\Domain\Contact\Entity\ValueObject\UserType;
 use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Infrastructure\Core\Collector\BuiltInToolSet\Annotation\BuiltInToolDefine;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Chat\DTO\UserTaskDTO;
 use App\Interfaces\Chat\DTO\UserTaskValueDTO;
 use Closure;
@@ -33,11 +33,11 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
 
             $dataIsolation = $executionData->getDataIsolation();
 
-            $authorization = new MagicUserAuthorization();
-            $magicUserContactAppService = di(MagicUserContactAppService::class);
+            $authorization = new DelightfulUserAuthorization();
+            $magicUserContactAppService = di(DelightfulUserContactAppService::class);
             $user = $magicUserContactAppService->getByUserId($dataIsolation->getCurrentUserId());
 
-            $authorization->setMagicEnvId($dataIsolation->getEnvId());
+            $authorization->setDelightfulEnvId($dataIsolation->getEnvId());
             $authorization->setId($dataIsolation->getCurrentUserId());
             $authorization->setOrganizationCode($user->getOrganizationCode());
             $authorization->setUserType(UserType::Human);
@@ -45,7 +45,7 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
             $userTaskDTO = new UserTaskDTO($params);
             $creator = $authorization->getId();
             $userTaskDTO->setCreator($creator);
-            $userTaskDTO->setMagicEnvId($authorization->getMagicEnvId());
+            $userTaskDTO->setDelightfulEnvId($authorization->getDelightfulEnvId());
             $userTaskDTO->setNickname($user->getNickname());
 
             $userTaskDTO->setConversationId($userTaskDTO->getConversationId());
@@ -61,7 +61,7 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
             if ($userTaskDTO->getValue()['deadline']) {
                 $userTaskValueDTO->setDeadline(new DateTime($userTaskDTO->getValue()['deadline']));
             }
-            $magicUserTaskAppService = di(MagicUserTaskAppService::class);
+            $magicUserTaskAppService = di(DelightfulUserTaskAppService::class);
             $crontab = $magicUserTaskAppService->createTask($userTaskDTO, $userTaskValueDTO);
             return [
                 'crontab' => $crontab,

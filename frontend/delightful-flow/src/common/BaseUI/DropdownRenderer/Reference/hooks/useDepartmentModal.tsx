@@ -2,7 +2,7 @@
  * State management for the department selector
  */
 
-import { useTextareaModeContext } from "@/MagicExpressionWidget/context/TextareaMode/useTextareaModeContext"
+import { useTextareaModeContext } from "@/DelightfulExpressionWidget/context/TextareaMode/useTextareaModeContext"
 import { useMemoizedFn, useResetState } from "ahooks"
 import { useEffect } from "react"
 

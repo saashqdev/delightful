@@ -7,6 +7,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Repository\Facade;
 
-interface MagicThirdPlatformDepartmentUserRepositoryInterface
+interface DelightfulThirdPlatformDepartmentUserRepositoryInterface
 {
 }

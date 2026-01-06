@@ -1,6 +1,6 @@
 # Image Generation Node
 ## What is an Image Generation Node?
-The Image Generation Node is a powerful tool provided by the Magic Flow platform that automatically generates high-quality images based on your text descriptions (prompts). It's like communicating with a professional artist - you describe the scene you want, and the artist draws the corresponding image for you.
+The Image Generation Node is a powerful tool provided by the Delightful Flow platform that automatically generates high-quality images based on your text descriptions (prompts). It's like communicating with a professional artist - you describe the scene you want, and the artist draws the corresponding image for you.
 
 **Image Description:**
 

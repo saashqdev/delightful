@@ -4,17 +4,17 @@ import { useTranslation } from "react-i18next"
 import { IconCheck, IconCopy } from "@tabler/icons-react"
 import useClipboard from "react-use-clipboard"
 
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import type { HTMLAttributes } from "react"
 import { memo, useMemo, useRef } from "react"
 import { calculateRelativeSize } from "@/utils/styles"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { useMessageRenderContext } from "@/opensource/components/business/MessageRenderProvider/hooks"
 import { useFontSize } from "@/opensource/providers/AppearanceProvider/hooks"
 import { useHighlight } from "./hooks/useHighlight"
 import { useStyles } from "./style"
 
-interface MagicCodeProps extends Omit<HTMLAttributes<HTMLDivElement>, "value" | "onChange"> {
+interface DelightfulCodeProps extends Omit<HTMLAttributes<HTMLDivElement>, "value" | "onChange"> {
 	data?: string
 	language?: string
 	theme?: "dark" | "light"
@@ -23,7 +23,7 @@ interface MagicCodeProps extends Omit<HTMLAttributes<HTMLDivElement>, "value" | 
 	copyText?: string
 }
 
-const MagicCode = memo((props: MagicCodeProps) => {
+const DelightfulCode = memo((props: DelightfulCodeProps) => {
 	const {
 		data: value,
 		onChange,
@@ -78,14 +78,14 @@ const MagicCode = memo((props: MagicCodeProps) => {
 			ref={codeContainer}
 			{...rest}
 		>
-			<MagicButton
+			<DelightfulButton
 				hidden={!isHover || isStreaming}
 				type="text"
 				className={cx(styles.copy, "magic-code-copy")}
 				onClick={setCopied}
 				size="small"
 				icon={
-					<MagicIcon
+					<DelightfulIcon
 						color="currentColor"
 						component={isCopied ? IconCheck : IconCopy}
 						size={iconSize}
@@ -93,7 +93,7 @@ const MagicCode = memo((props: MagicCodeProps) => {
 				}
 			>
 				{copyText ?? t("chat.markdown.copy")}
-			</MagicButton>
+			</DelightfulButton>
 			{isLoading || isStreaming ? (
 				<code className={cx(styles.inner, styles.raw)}>{controllableValue?.trim()}</code>
 			) : (
@@ -109,4 +109,4 @@ const MagicCode = memo((props: MagicCodeProps) => {
 	)
 })
 
-export default MagicCode
+export default DelightfulCode

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Entity\ValueObject\Query;
 
-class MagicFlowToolSetQuery extends Query
+class DelightfulFlowToolSetQuery extends Query
 {
     public ?bool $withToolsSimpleInfo = null;
 

@@ -1,5 +1,5 @@
 import React from "react"
-import MagicTable from "../../components/MagicTable"
+import DelightfulTable from "../../components/DelightfulTable"
 import ComponentDemo from "./Container"
 
 const TableDemo: React.FC = () => {
@@ -64,9 +64,9 @@ const TableDemo: React.FC = () => {
 			<ComponentDemo
 				title="基础表格"
 				description="最基本的表格组件"
-				code="<MagicTable columns={columns} dataSource={dataSource} />"
+				code="<DelightfulTable columns={columns} dataSource={dataSource} />"
 			>
-				<MagicTable columns={columns} dataSource={dataSource} />
+				<DelightfulTable columns={columns} dataSource={dataSource} />
 			</ComponentDemo>
 
 			<ComponentDemo
@@ -74,7 +74,7 @@ const TableDemo: React.FC = () => {
 				description="支持分页功能的表格"
 				code="pagination: { pageSize: 2 }"
 			>
-				<MagicTable
+				<DelightfulTable
 					columns={columns}
 					dataSource={dataSource}
 					pagination={{ pageSize: 2 }}
@@ -82,7 +82,7 @@ const TableDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo title="可选择的表格" description="支持行选择的表格" code="rowSelection">
-				<MagicTable
+				<DelightfulTable
 					columns={columns}
 					dataSource={dataSource}
 					rowSelection={{
@@ -98,7 +98,7 @@ const TableDemo: React.FC = () => {
 				description="支持列排序的表格"
 				code="sorter: (a, b) => a.age - b.age"
 			>
-				<MagicTable
+				<DelightfulTable
 					columns={[
 						...columns.slice(0, 2),
 						{
@@ -118,7 +118,7 @@ const TableDemo: React.FC = () => {
 				description="支持加载状态的表格"
 				code="loading: true"
 			>
-				<MagicTable columns={columns} dataSource={dataSource} loading={true} />
+				<DelightfulTable columns={columns} dataSource={dataSource} loading={true} />
 			</ComponentDemo>
 		</div>
 	)

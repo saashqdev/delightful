@@ -1,5 +1,5 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { useSize } from "ahooks"
 import { Col, Empty, Input, Row } from "antd"
 import { cx } from "antd-style"
@@ -29,15 +29,15 @@ export default memo(function DeployedWebsites() {
 									<div className={styles.itemImage}>123</div>
 								</div>
 								<div className={styles.itemFooter}>
-									<MagicButton type="link" className={styles.button}>
+									<DelightfulButton type="link" className={styles.button}>
 										打开链接
-									</MagicButton>
-									<MagicButton type="link" className={styles.button}>
+									</DelightfulButton>
+									<DelightfulButton type="link" className={styles.button}>
 										设置权限
-									</MagicButton>
-									<MagicButton type="link" danger className={styles.button}>
+									</DelightfulButton>
+									<DelightfulButton type="link" danger className={styles.button}>
 										删除
-									</MagicButton>
+									</DelightfulButton>
 								</div>
 							</div>
 						</Col>
@@ -68,7 +68,7 @@ export default memo(function DeployedWebsites() {
 			<div ref={containerRef} className={cx(commonStyles.pageContent, styles.pageContent)}>
 				{loading || !containerSize ? (
 					<div className={commonStyles.loadingWrapper}>
-						<MagicSpin />
+						<DelightfulSpin />
 					</div>
 				) : (
 					content

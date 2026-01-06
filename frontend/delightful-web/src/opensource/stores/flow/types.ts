@@ -1,15 +1,15 @@
-import type { MagicFlow } from "@delightful/delightful-flow/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/DelightfulFlow/types/flow"
 import type { FlowDraft, LLMModalOption, UseableToolSet, Flow } from "@/types/flow"
 import type { Knowledge } from "@/types/knowledge"
 import type { DataSourceOption } from "@delightful/delightful-flow/common/BaseUI/DropdownRenderer/Reference"
 import type { useFlowStore } from "."
 
 export interface FlowState {
-	subFlows: MagicFlow.Flow[]
+	subFlows: DelightfulFlow.Flow[]
 	draftList: FlowDraft.ListItem[]
 	publishList: FlowDraft.ListItem[]
 	isGlobalVariableChanged: boolean
-	toolInputOutputMap: Record<string, MagicFlow.Flow>
+	toolInputOutputMap: Record<string, DelightfulFlow.Flow>
 	useableToolSets: UseableToolSet.Item[]
 	models: LLMModalOption[]
 	useableDatabases: Knowledge.KnowledgeItem[]

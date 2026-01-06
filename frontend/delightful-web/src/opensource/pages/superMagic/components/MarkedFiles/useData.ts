@@ -51,7 +51,7 @@ export default ({ searchKeywords }: UseDataProps) => {
 
 				// 工作区名称
 				const workspaces = [
-					{ id: "ws1", name: "Magic项目" },
+					{ id: "ws1", name: "Delightful项目" },
 					{ id: "ws2", name: "团队项目" },
 					{ id: "ws3", name: "个人项目" },
 					{ id: "ws4", name: "研发中心" },

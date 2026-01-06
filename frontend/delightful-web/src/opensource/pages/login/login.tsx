@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next"
 import { useDebounceFn, useMemoizedFn } from "ahooks"
 import { getDeviceInfo } from "@/utils/devices"
 import { Login } from "@/types/login"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { useState } from "react"
 import Logger from "@/utils/log/Logger"
 import { loginService, userService } from "@/services"
@@ -96,9 +96,9 @@ function LoginPage() {
 	)
 
 	return (
-		<MagicSpin spinning={loading}>
+		<DelightfulSpin spinning={loading}>
 			<MobilePhonePasswordForm form={form} onSubmit={onSubmit} />
-		</MagicSpin>
+		</DelightfulSpin>
 	)
 }
 

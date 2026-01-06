@@ -113,7 +113,7 @@ for i in {1..5}; do
         echo -e "${BLUE}获取令牌示例:${NC}"
         echo -e "${BLUE}curl -X POST http://localhost:8001/auth -H \"X-USER-ID: your-user-id\"${NC}"
         echo -e "${BLUE}注意: 获取令牌请求只能从本地(localhost)发起${NC}"
-        echo -e "${BLUE}提示: 令牌永久有效，无过期时间限制，使用Magic-Authorization头${NC}"
+        echo -e "${BLUE}提示: 令牌永久有效，无过期时间限制，使用Delightful-Authorization头${NC}"
 
         # 显示Docker示例
         echo -e "${BLUE}Docker容器使用示例:${NC}"
@@ -122,7 +122,7 @@ for i in {1..5}; do
         echo -e "${BLUE}# 2. 启动容器并注入令牌${NC}"
         echo -e "${BLUE}docker run -e API_TOKEN=\"\$TOKEN\" -e API_GATEWAY_URL=\"http://host.docker.internal:8001\" your-image${NC}"
         echo -e "${BLUE}# 3. 容器内使用令牌示例${NC}"
-        echo -e "${BLUE}curl -H \"Magic-Authorization: Bearer \$API_TOKEN\" \$API_GATEWAY_URL/services${NC}"
+        echo -e "${BLUE}curl -H \"Delightful-Authorization: Bearer \$API_TOKEN\" \$API_GATEWAY_URL/services${NC}"
 
         echo -e "${YELLOW}按 Ctrl+C 停止服务${NC}"
 

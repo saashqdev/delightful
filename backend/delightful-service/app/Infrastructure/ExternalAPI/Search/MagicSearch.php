@@ -16,9 +16,9 @@ use Psr\Log\LoggerInterface;
 use RuntimeException;
 
 /**
- * Magic search engine - calls internal /v2/search API.
+ * Delightful search engine - calls internal /v2/search API.
  */
-class MagicSearch
+class DelightfulSearch
 {
     private const int DEFAULT_SEARCH_ENGINE_TIMEOUT = 30;
 
@@ -30,10 +30,10 @@ class MagicSearch
     }
 
     /**
-     * Execute Magic search by calling internal unified search API.
+     * Execute Delightful search by calling internal unified search API.
      *
      * @param string $query Search query
-     * @param string $baseUrl Magic service base URL (from config)
+     * @param string $baseUrl Delightful service base URL (from config)
      * @param string $apiKey API key for authorization (from config)
      * @param string $mkt Market code (e.g., zh-CN, en-US)
      * @param int $count Number of results (1-50)
@@ -106,7 +106,7 @@ class MagicSearch
                 $statusCode = $e->getResponse()?->getStatusCode();
                 $reason = $e->getResponse()?->getReasonPhrase();
                 $responseBody = $e->getResponse()?->getBody()->getContents();
-                $this->logger->error(sprintf('Magic Search HTTP %d %s: %s', $statusCode, $reason, $responseBody), [
+                $this->logger->error(sprintf('Delightful Search HTTP %d %s: %s', $statusCode, $reason, $responseBody), [
                     'base_url' => $baseUrl,
                     'status_code' => $statusCode,
                 ]);
@@ -118,7 +118,7 @@ class MagicSearch
                 ]);
             }
 
-            throw new RuntimeException('Magic search engine error: ' . $e->getMessage());
+            throw new RuntimeException('Delightful search engine error: ' . $e->getMessage());
         }
 
         return $data;

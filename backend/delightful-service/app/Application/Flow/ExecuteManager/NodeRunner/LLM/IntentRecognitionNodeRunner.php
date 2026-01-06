@@ -73,7 +73,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
         // 如果意图识别开启了自动加载记忆，那么需要剔除当前消息
         $ignoreMessageIds = [];
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
-            $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getMagicMessageId()];
+            $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
         }
 
         // 加载记忆

@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Infrastructure\Utils;
+namespace Delightful\SuperDelightful\Infrastructure\Utils;
 
-use Delightful\SuperMagic\Domain\SuperAgent\Constant\AgentConstant;
+use Delightful\SuperDelightful\Domain\SuperAgent\Constant\AgentConstant;
 use InvalidArgumentException;
 
 class WorkDirectoryUtil

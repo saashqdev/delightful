@@ -1,11 +1,11 @@
-import { getNodeVersion, schemaToDataSource } from "@delightful/delightful-flow/dist/MagicFlow/utils"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import { getNodeVersion, schemaToDataSource } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import type { NodeVersionMap } from "@delightful/delightful-flow/dist/common/context/NodeMap/Context"
 import { customNodeType } from "../../constants"
 
 /** 生成循环体内特殊可引用项数据源 */
 export const generateLoopItemOptions = (
-	loopNode: MagicFlow.Node,
+	loopNode: DelightfulFlow.Node,
 	nodeSchemaMap: NodeVersionMap,
 ) => {
 	const nodeVersion = getNodeVersion(loopNode)

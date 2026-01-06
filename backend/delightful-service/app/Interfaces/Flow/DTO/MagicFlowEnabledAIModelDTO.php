@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\DTO;
 
-class MagicFlowEnabledAIModelDTO extends AbstractFlowDTO
+class DelightfulFlowEnabledAIModelDTO extends AbstractFlowDTO
 {
     public string $value;
 

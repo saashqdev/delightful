@@ -13,7 +13,7 @@ import conversationSidebarStore from "@/opensource/stores/chatNew/conversationSi
 import EditorStore from "@/opensource/stores/chatNew/messageUI/editor"
 import MessageStore from "@/opensource/stores/chatNew/message"
 import { groupBy, last } from "lodash-es"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { t } from "i18next"
 import { ConversationMessageType } from "@/types/chat/conversation_message"
 import groupInfoService from "@/opensource/services/groupInfo"
@@ -157,7 +157,7 @@ class ConversationService {
 	 * @param conversationId 会话
 	 */
 	groupConversationDisband(conversationId: string) {
-		MagicModal.info({
+		DelightfulModal.info({
 			content: t("chat.groupDisbandTip.disbandGroup", { ns: "interface" }),
 			centered: true,
 			okText: t("common.confirm", { ns: "interface" }),

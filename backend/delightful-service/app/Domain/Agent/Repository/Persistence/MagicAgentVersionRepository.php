@@ -7,28 +7,28 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Repository\Persistence;
 
-use App\Domain\Agent\Constant\MagicAgentReleaseStatus;
-use App\Domain\Agent\Constant\MagicAgentVersionStatus;
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
-use App\Domain\Agent\Factory\MagicAgentVersionFactory;
-use App\Domain\Agent\Repository\Facade\MagicAgentVersionRepositoryInterface;
-use App\Domain\Agent\Repository\Persistence\Model\MagicAgentVersionModel;
+use App\Domain\Agent\Constant\DelightfulAgentReleaseStatus;
+use App\Domain\Agent\Constant\DelightfulAgentVersionStatus;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
+use App\Domain\Agent\Factory\DelightfulAgentVersionFactory;
+use App\Domain\Agent\Repository\Facade\DelightfulAgentVersionRepositoryInterface;
+use App\Domain\Agent\Repository\Persistence\Model\DelightfulAgentVersionModel;
 use App\ErrorCode\AgentErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Hyperf\Codec\Json;
 use Hyperf\Database\Model\Builder;
 use Hyperf\DbConnection\Db;
 
-class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterface
+class DelightfulAgentVersionRepository implements DelightfulAgentVersionRepositoryInterface
 {
-    public function __construct(public MagicAgentVersionModel $agentVersionModel)
+    public function __construct(public DelightfulAgentVersionModel $agentVersionModel)
     {
     }
 
     /**
      * 获取助理版本.
      */
-    public function getAgentById(string $id): MagicAgentVersionEntity
+    public function getAgentById(string $id): DelightfulAgentVersionEntity
     {
         $model = $this->agentVersionModel::query()
             ->where('id', $id)
@@ -36,11 +36,11 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
         if (! $model) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_does_not_exist');
         }
-        return MagicAgentVersionFactory::toEntity($model->toArray());
+        return DelightfulAgentVersionFactory::toEntity($model->toArray());
     }
 
     /**
-     * @return MagicAgentVersionEntity[]
+     * @return DelightfulAgentVersionEntity[]
      */
     public function getAgentsByOrganization(string $organizationCode, array $agentIds, int $page, int $pageSize, string $agentName, ?string $descriptionKeyword = null): array
     {
@@ -49,7 +49,7 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
         $builder = $this->agentVersionModel::query();
         $query = $builder
             ->where('organization_code', $organizationCode)
-            ->where('enterprise_release_status', MagicAgentVersionStatus::ENTERPRISE_PUBLISHED->value)
+            ->where('enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value)
             ->whereIn('id', $agentIds)
             ->where(function (Builder $query) use ($agentName, $descriptionKeyword) {
                 $query
@@ -65,7 +65,7 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
             ->take($pageSize);
 
         $result = Db::select($query->toSql(), $query->getBindings());
-        return MagicAgentVersionFactory::toEntities($result);
+        return DelightfulAgentVersionFactory::toEntities($result);
     }
 
     public function getAgentsByOrganizationCount(string $organizationCode, array $agentIds, string $agentName): int
@@ -76,14 +76,14 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
         }
         return $builder
             ->where('organization_code', $organizationCode)
-            ->where('enterprise_release_status', MagicAgentVersionStatus::ENTERPRISE_PUBLISHED->value) // 确保外层筛选启用状态
+            ->where('enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value) // 确保外层筛选启用状态
             ->whereIn('id', $agentIds)
             ->count();
     }
 
     /**
      * 优化版本：直接通过JOIN查询获取启用的助理版本，避免传入大量ID.
-     * @return MagicAgentVersionEntity[]
+     * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
     {
@@ -93,9 +93,9 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
             ->select('magic_bot_versions.*')
             ->join('magic_bots', 'magic_bots.bot_version_id', '=', 'magic_bot_versions.id')
             ->where('magic_bot_versions.organization_code', $organizationCode)
-            ->where('magic_bot_versions.enterprise_release_status', MagicAgentVersionStatus::ENTERPRISE_PUBLISHED->value)
+            ->where('magic_bot_versions.enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value)
             ->where('magic_bots.organization_code', $organizationCode)
-            ->where('magic_bots.status', MagicAgentVersionStatus::ENTERPRISE_ENABLED->value)
+            ->where('magic_bots.status', DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value)
             ->when(! empty($agentName), function ($query) use ($agentName) {
                 $query->where('magic_bot_versions.robot_name', 'like', "%{$agentName}%");
             })
@@ -104,7 +104,7 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
             ->take($pageSize);
 
         $result = Db::select($query->toSql(), $query->getBindings());
-        return MagicAgentVersionFactory::toEntities($result);
+        return DelightfulAgentVersionFactory::toEntities($result);
     }
 
     /**
@@ -115,9 +115,9 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
         return $this->agentVersionModel::query()
             ->join('magic_bots', 'magic_bots.bot_version_id', '=', 'magic_bot_versions.id')
             ->where('magic_bot_versions.organization_code', $organizationCode)
-            ->where('magic_bot_versions.enterprise_release_status', MagicAgentVersionStatus::ENTERPRISE_PUBLISHED->value)
+            ->where('magic_bot_versions.enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value)
             ->where('magic_bots.organization_code', $organizationCode)
-            ->where('magic_bots.status', MagicAgentVersionStatus::ENTERPRISE_ENABLED->value)
+            ->where('magic_bots.status', DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value)
             ->when(! empty($agentName), function ($query) use ($agentName) {
                 $query->where('magic_bot_versions.robot_name', 'like', "%{$agentName}%");
             })
@@ -125,20 +125,20 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
     }
 
     /**
-     * @return MagicAgentVersionEntity[]
+     * @return DelightfulAgentVersionEntity[]
      */
     public function getAgentsFromMarketplace(array $agentIds, int $page, int $pageSize): array
     {
         $offset = ($page - 1) * $pageSize;
         $query = $this->agentVersionModel::query()
             ->whereIn('id', $agentIds)
-            ->where('app_market_status', MagicAgentVersionStatus::APP_MARKET_LISTED)
+            ->where('app_market_status', DelightfulAgentVersionStatus::APP_MARKET_LISTED)
             ->orderByDesc('id')
             ->skip($offset)
             ->take($pageSize);
 
         $result = Db::select($query->toSql(), $query->getBindings());
-        return MagicAgentVersionFactory::toEntities($result);
+        return DelightfulAgentVersionFactory::toEntities($result);
     }
 
     public function getAgentsFromMarketplaceCount(array $agentIds): int
@@ -146,12 +146,12 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
         // 使用 count() 方法来统计符合条件的记录数
         return $this->agentVersionModel::query()
             ->whereIn('id', $agentIds)
-            ->where('app_market_status', MagicAgentVersionStatus::APP_MARKET_LISTED)
+            ->where('app_market_status', DelightfulAgentVersionStatus::APP_MARKET_LISTED)
             ->orderByDesc('id')
             ->count();
     }
 
-    public function insert(MagicAgentVersionEntity $agentVersionEntity): MagicAgentVersionEntity
+    public function insert(DelightfulAgentVersionEntity $agentVersionEntity): DelightfulAgentVersionEntity
     {
         $agentVersionEntity->setCreatedAt(date('Y-m-d H:i:s'));
         $agentVersionEntity->setUpdatedAt(date('Y-m-d H:i:s'));
@@ -163,7 +163,7 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
     }
 
     /**
-     * @return MagicAgentVersionEntity[]
+     * @return DelightfulAgentVersionEntity[]
      */
     public function getReleaseAgentVersions(string $agentId): array
     {
@@ -172,7 +172,7 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
             ->orderByDesc('id');
 
         $result = Db::select($query->toSql(), $query->getBindings());
-        return MagicAgentVersionFactory::toEntities($result);
+        return DelightfulAgentVersionFactory::toEntities($result);
     }
 
     public function setEnterpriseStatus(string $id, int $status): void
@@ -215,13 +215,13 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
     }
 
     /**
-     * @return MagicAgentVersionEntity[]
+     * @return DelightfulAgentVersionEntity[]
      */
     public function listAgentVersionsByIds(array $agentVersionIds): array
     {
         $query = $this->agentVersionModel::query()->whereIn('id', $agentVersionIds);
         $result = Db::select($query->toSql(), $query->getBindings());
-        return MagicAgentVersionFactory::toEntities($result);
+        return DelightfulAgentVersionFactory::toEntities($result);
     }
 
     public function updateAgentEnterpriseStatus(string $agentVersionId, int $status): void
@@ -231,7 +231,7 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
             ->update(['enterprise_release_status' => $status]);
     }
 
-    public function getNewestAgentVersionEntity(string $agentId): ?MagicAgentVersionEntity
+    public function getNewestAgentVersionEntity(string $agentId): ?DelightfulAgentVersionEntity
     {
         // 获取 $agentId 通过
         $model = $this->agentVersionModel::query()
@@ -241,10 +241,10 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
         if ($model === null) {
             return $model;
         }
-        return MagicAgentVersionFactory::toEntity($model->toArray());
+        return DelightfulAgentVersionFactory::toEntity($model->toArray());
     }
 
-    public function getAgentByFlowCode(string $flowCode): ?MagicAgentVersionEntity
+    public function getAgentByFlowCode(string $flowCode): ?DelightfulAgentVersionEntity
     {
         // 获取 $agentId 通过
         $model = $this->agentVersionModel::query()
@@ -254,14 +254,14 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
         if ($model === null) {
             return null;
         }
-        return MagicAgentVersionFactory::toEntity($model->toArray());
+        return DelightfulAgentVersionFactory::toEntity($model->toArray());
     }
 
     public function getEnterpriseAvailableAgentIds(string $organizationCode): array
     {
         return $this->agentVersionModel::query()
             ->where('organization_code', $organizationCode)
-            ->where('release_scope', MagicAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value)
+            ->where('release_scope', DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value)
             ->groupBy('root_id')
             ->pluck('root_id')->toArray();
     }
@@ -276,7 +276,7 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
             ->toArray();
     }
 
-    public function updateById(MagicAgentVersionEntity $agentVersionEntity): MagicAgentVersionEntity
+    public function updateById(DelightfulAgentVersionEntity $agentVersionEntity): DelightfulAgentVersionEntity
     {
         $model = $this->agentVersionModel::query()
             ->where('id', $agentVersionEntity->getId())
@@ -287,7 +287,7 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
         $model->fill($agentVersionEntity->toArray());
         $model->save();
         unset($model['agent_id'],$model['agent_name'],$model['agent_avatar'],$model['agent_description']);
-        return MagicAgentVersionFactory::toEntity($model->toArray());
+        return DelightfulAgentVersionFactory::toEntity($model->toArray());
     }
 
     /**
@@ -314,13 +314,13 @@ class MagicAgentVersionRepository implements MagicAgentVersionRepositoryInterfac
 
     /**
      * 根据ids获取助理版本.
-     * @return array<MagicAgentVersionEntity>
+     * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentByIds(array $ids)
     {
         $model = $this->agentVersionModel::query()
             ->whereIn('id', $ids)
             ->get();
-        return MagicAgentVersionFactory::toEntities($model->toArray());
+        return DelightfulAgentVersionFactory::toEntities($model->toArray());
     }
 }

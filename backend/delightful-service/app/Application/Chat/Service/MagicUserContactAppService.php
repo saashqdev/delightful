@@ -7,40 +7,40 @@ declare(strict_types=1);
 
 namespace App\Application\Chat\Service;
 
-use App\Domain\Agent\Service\MagicAgentDomainService;
+use App\Domain\Agent\Service\DelightfulAgentDomainService;
 use App\Domain\Chat\DTO\Message\ControlMessage\AddFriendMessage;
 use App\Domain\Chat\DTO\PageResponseDTO\PageResponseDTO;
-use App\Domain\Chat\Entity\MagicConversationEntity;
-use App\Domain\Chat\Entity\MagicMessageEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 use App\Domain\Chat\Entity\ValueObject\PlatformRootDepartmentId;
-use App\Domain\Chat\Service\MagicChatDomainService;
+use App\Domain\Chat\Service\DelightfulChatDomainService;
 use App\Domain\Contact\DTO\FriendQueryDTO;
 use App\Domain\Contact\DTO\UserQueryDTO;
 use App\Domain\Contact\DTO\UserUpdateDTO;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\AddFriendType;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\DepartmentOption;
 use App\Domain\Contact\Entity\ValueObject\UserOption;
 use App\Domain\Contact\Entity\ValueObject\UserQueryType;
 use App\Domain\Contact\Entity\ValueObject\UserType;
-use App\Domain\Contact\Service\Facade\MagicUserDomainExtendInterface;
-use App\Domain\Contact\Service\MagicAccountDomainService;
-use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\Facade\DelightfulUserDomainExtendInterface;
+use App\Domain\Contact\Service\DelightfulAccountDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\File\Service\FileDomainService;
-use App\Domain\OrganizationEnvironment\Entity\MagicEnvironmentEntity;
-use App\Domain\OrganizationEnvironment\Service\MagicOrganizationEnvDomainService;
+use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
+use App\Domain\OrganizationEnvironment\Service\DelightfulOrganizationEnvDomainService;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\Operation;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\ResourceType;
 use App\Domain\Permission\Service\OperationPermissionDomainService;
 use App\ErrorCode\ChatErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Chat\Assembler\PageListAssembler;
 use App\Interfaces\Chat\Assembler\UserAssembler;
 use App\Interfaces\Chat\DTO\AgentInfoDTO;
@@ -54,19 +54,19 @@ use Psr\Log\LoggerInterface;
 use Qbhy\HyperfAuth\Authenticatable;
 use Throwable;
 
-class MagicUserContactAppService extends AbstractAppService
+class DelightfulUserContactAppService extends AbstractAppService
 {
     public function __construct(
-        protected readonly MagicUserDomainService $userDomainService,
-        protected readonly MagicAccountDomainService $accountDomainService,
-        protected readonly MagicDepartmentUserDomainService $departmentUserDomainService,
-        protected readonly MagicDepartmentDomainService $departmentChartDomainService,
+        protected readonly DelightfulUserDomainService $userDomainService,
+        protected readonly DelightfulAccountDomainService $accountDomainService,
+        protected readonly DelightfulDepartmentUserDomainService $departmentUserDomainService,
+        protected readonly DelightfulDepartmentDomainService $departmentChartDomainService,
         protected LoggerInterface $logger,
-        protected readonly MagicOrganizationEnvDomainService $magicOrganizationEnvDomainService,
+        protected readonly DelightfulOrganizationEnvDomainService $magicOrganizationEnvDomainService,
         protected readonly FileDomainService $fileDomainService,
-        protected readonly MagicAgentDomainService $magicAgentDomainService,
+        protected readonly DelightfulAgentDomainService $magicAgentDomainService,
         protected readonly OperationPermissionDomainService $operationPermissionDomainService,
-        protected readonly MagicChatDomainService $magicChatDomainService,
+        protected readonly DelightfulChatDomainService $magicChatDomainService,
         protected readonly ContainerInterface $container
     ) {
         try {
@@ -79,7 +79,7 @@ class MagicUserContactAppService extends AbstractAppService
      * @param string $friendId 好友的用户id. 好友可能是ai
      * @throws Throwable
      */
-    public function addFriend(MagicUserAuthorization $userAuthorization, string $friendId, AddFriendType $addFriendType): bool
+    public function addFriend(DelightfulUserAuthorization $userAuthorization, string $friendId, AddFriendType $addFriendType): bool
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
@@ -94,7 +94,7 @@ class MagicUserContactAppService extends AbstractAppService
         // 发送添加好友消息。加好友拆分为：好友申请/好友同意/好友拒绝
         if ($addFriendType === AddFriendType::PASS) {
             // 发送添加好友控制消息
-            $friendUserEntity = new MagicUserEntity();
+            $friendUserEntity = new DelightfulUserEntity();
             $friendUserEntity->setUserId($friendId);
             $this->sendAddFriendControlMessage($dataIsolation, $friendUserEntity);
         }
@@ -105,7 +105,7 @@ class MagicUserContactAppService extends AbstractAppService
      * 向AI助理发送添加好友控制消息.
      * @throws Throwable
      */
-    public function sendAddFriendControlMessage(DataIsolation $dataIsolation, MagicUserEntity $friendUserEntity): bool
+    public function sendAddFriendControlMessage(DataIsolation $dataIsolation, DelightfulUserEntity $friendUserEntity): bool
     {
         // 检查是否已经是好友
         if ($this->userDomainService->isFriend($dataIsolation->getCurrentUserId(), $friendUserEntity->getUserId())) {
@@ -113,7 +113,7 @@ class MagicUserContactAppService extends AbstractAppService
         }
 
         $now = date('Y-m-d H:i:s');
-        $messageDTO = new MagicMessageEntity([
+        $messageDTO = new DelightfulMessageEntity([
             'receive_id' => $friendUserEntity->getUserId(),
             'receive_type' => ConversationType::Ai->value,
             'message_type' => ControlMessageType::AddFriendSuccess->value,
@@ -132,7 +132,7 @@ class MagicUserContactAppService extends AbstractAppService
         ]);
         /** @var AddFriendMessage $messageStruct */
         $messageStruct = $messageDTO->getContent();
-        $conversationEntity = new MagicConversationEntity();
+        $conversationEntity = new DelightfulConversationEntity();
         $conversationEntity->setReceiveId($messageStruct->getReceiveId());
         $receiveType = ConversationType::tryFrom($messageStruct->getReceiveType());
         if ($receiveType === null) {
@@ -140,7 +140,7 @@ class MagicUserContactAppService extends AbstractAppService
         }
         $conversationEntity->setReceiveType($receiveType);
 
-        $receiverConversationEntity = new MagicConversationEntity();
+        $receiverConversationEntity = new DelightfulConversationEntity();
         $receiverConversationEntity->setUserId($messageStruct->getReceiveId());
         $receiverConversationEntity->setUserOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         // 通用控制消息处理逻辑
@@ -154,7 +154,7 @@ class MagicUserContactAppService extends AbstractAppService
         return $this->userDomainService->searchFriend($keyword);
     }
 
-    public function getUserWithoutDepartmentInfoByIds(array $ids, MagicUserAuthorization $authorization, array $column = ['*']): array
+    public function getUserWithoutDepartmentInfoByIds(array $ids, DelightfulUserAuthorization $authorization, array $column = ['*']): array
     {
         $dataIsolation = $this->createDataIsolation($authorization);
         return $this->userDomainService->getUserByIds($ids, $dataIsolation, $column);
@@ -163,7 +163,7 @@ class MagicUserContactAppService extends AbstractAppService
     /**
      * 批量查询组织架构、ai 、或者个人版的用户.
      */
-    public function getUserDetailByIds(UserQueryDTO $dto, MagicUserAuthorization $authorization): array
+    public function getUserDetailByIds(UserQueryDTO $dto, DelightfulUserAuthorization $authorization): array
     {
         $userIds = $dto->getUserIds();
         $pageToken = (int) $dto->getPageToken();
@@ -207,7 +207,7 @@ class MagicUserContactAppService extends AbstractAppService
         return PageListAssembler::pageByMysql($users, (int) $dto->getPageToken(), $pageSize, count($dto->getUserIds()));
     }
 
-    public function getUsersDetailByDepartmentId(UserQueryDTO $dto, MagicUserAuthorization $authorization): array
+    public function getUsersDetailByDepartmentId(UserQueryDTO $dto, DelightfulUserAuthorization $authorization): array
     {
         $dataIsolation = $this->createDataIsolation($authorization);
         // 根部门被抽象为 -1，所以这里需要转换
@@ -245,7 +245,7 @@ class MagicUserContactAppService extends AbstractAppService
     /**
      * 按 用户昵称/真名/手机号/邮箱/部门路径/职位 搜索用户.
      */
-    public function searchDepartmentUser(UserQueryDTO $queryDTO, MagicUserAuthorization $authorization): array
+    public function searchDepartmentUser(UserQueryDTO $queryDTO, DelightfulUserAuthorization $authorization): array
     {
         $this->logger->info(sprintf('searchDepartmentUser query:%s', Json::encode($queryDTO->toArray())));
 
@@ -287,7 +287,7 @@ class MagicUserContactAppService extends AbstractAppService
         return $usersForQueryDepartmentPath;
     }
 
-    public function getUserFriendList(FriendQueryDTO $friendQueryDTO, MagicUserAuthorization $authorization): array
+    public function getUserFriendList(FriendQueryDTO $friendQueryDTO, DelightfulUserAuthorization $authorization): array
     {
         $dataIsolation = $this->createDataIsolation($authorization);
         return $this->userDomainService->getUserFriendList($friendQueryDTO, $dataIsolation);
@@ -298,7 +298,7 @@ class MagicUserContactAppService extends AbstractAppService
         return $this->userDomainService->updateUserOptionByIds($userIds, $userOption);
     }
 
-    public function getEnvByAuthorization(string $authorization): ?MagicEnvironmentEntity
+    public function getEnvByAuthorization(string $authorization): ?DelightfulEnvironmentEntity
     {
         return $this->magicOrganizationEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
     }
@@ -328,16 +328,16 @@ class MagicUserContactAppService extends AbstractAppService
         return PageListAssembler::pageByMysql($usersDetailDTOList, 0, 0, count($usersDetailDTOList));
     }
 
-    public function getByUserId(string $userId): ?MagicUserEntity
+    public function getByUserId(string $userId): ?DelightfulUserEntity
     {
         return $this->userDomainService->getByUserId($userId);
     }
 
-    public function getLoginCodeEnv(string $loginCode): MagicEnvironmentEntity
+    public function getLoginCodeEnv(string $loginCode): DelightfulEnvironmentEntity
     {
         if (empty($loginCode)) {
             // 如果没有传，那么默认取当前环境
-            $magicEnvironmentEntity = $this->magicOrganizationEnvDomainService->getCurrentDefaultMagicEnv();
+            $magicEnvironmentEntity = $this->magicOrganizationEnvDomainService->getCurrentDefaultDelightfulEnv();
         } else {
             $magicEnvironmentEntity = $this->magicOrganizationEnvDomainService->getEnvironmentEntityByLoginCode($loginCode);
         }
@@ -350,19 +350,19 @@ class MagicUserContactAppService extends AbstractAppService
     /**
      * 是否允许更新用户信息.
      */
-    public function getUserUpdatePermission(MagicUserAuthorization $userAuthorization): array
+    public function getUserUpdatePermission(DelightfulUserAuthorization $userAuthorization): array
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        return di(MagicUserDomainExtendInterface::class)->getUserUpdatePermission($dataIsolation);
+        return di(DelightfulUserDomainExtendInterface::class)->getUserUpdatePermission($dataIsolation);
     }
 
     /**
      * 更新用户信息.
      */
-    public function updateUserInfo(MagicUserAuthorization $userAuthorization, UserUpdateDTO $userUpdateDTO): MagicUserEntity
+    public function updateUserInfo(DelightfulUserAuthorization $userAuthorization, UserUpdateDTO $userUpdateDTO): DelightfulUserEntity
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        $userDomainExtendService = di(MagicUserDomainExtendInterface::class);
+        $userDomainExtendService = di(DelightfulUserDomainExtendInterface::class);
         $userDomainExtendService->updateUserInfo($dataIsolation, $userUpdateDTO);
         return $this->getByUserId($dataIsolation->getCurrentUserId());
     }

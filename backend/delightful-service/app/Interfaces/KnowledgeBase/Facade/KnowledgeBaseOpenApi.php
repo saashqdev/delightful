@@ -22,21 +22,21 @@ class KnowledgeBaseOpenApi extends AbstractOpenApi
     //    public function save()
     //    {
     //        $authorization = $this->getAuthorization();
-    //        $dto = new MagicFlowKnowledgeDTO($this->request->all());
+    //        $dto = new DelightfulFlowKnowledgeDTO($this->request->all());
     //
-    //        $magicFlowKnowledgeDO = MagicFlowKnowledgeAssembler::creatDO($dto);
+    //        $magicFlowKnowledgeDO = DelightfulFlowKnowledgeAssembler::creatDO($dto);
     //        $magicFlowKnowledgeEntity = $this->knowledgeBaseAppService->save($authorization, $magicFlowKnowledgeDO);
-    //        return MagicFlowKnowledgeAssembler::createDTO($magicFlowKnowledgeEntity);
+    //        return DelightfulFlowKnowledgeAssembler::createDTO($magicFlowKnowledgeEntity);
     //    }
     //
     //    public function saveProcess()
     //    {
     //        $authorization = $this->getAuthorization();
-    //        $dto = new MagicFlowKnowledgeDTO($this->request->all());
+    //        $dto = new DelightfulFlowKnowledgeDTO($this->request->all());
     //
-    //        $magicFlowKnowledgeDO = MagicFlowKnowledgeAssembler::creatDO($dto);
+    //        $magicFlowKnowledgeDO = DelightfulFlowKnowledgeAssembler::creatDO($dto);
     //        $magicFlowKnowledgeEntity = $this->knowledgeBaseAppService->saveProcess($authorization, $magicFlowKnowledgeDO);
-    //        return MagicFlowKnowledgeAssembler::createDTO($magicFlowKnowledgeEntity);
+    //        return DelightfulFlowKnowledgeAssembler::createDTO($magicFlowKnowledgeEntity);
     //    }
     //
     //    public function queries()
@@ -48,7 +48,7 @@ class KnowledgeBaseOpenApi extends AbstractOpenApi
     //        $query->setTypes(KnowledgeType::openListValue());
     //        $page = $this->createPage();
     //        $result = $this->knowledgeBaseAppService->queries($authorization, $query, $page);
-    //        return MagicFlowKnowledgeAssembler::createPageListDTO($result['total'], $result['list'], $page, $result['users']);
+    //        return DelightfulFlowKnowledgeAssembler::createPageListDTO($result['total'], $result['list'], $page, $result['users']);
     //    }
     //
     //    public function showByBusinessId()
@@ -62,13 +62,13 @@ class KnowledgeBaseOpenApi extends AbstractOpenApi
     //        if (! $magicFlowKnowledgeEntity) {
     //            return null;
     //        }
-    //        return MagicFlowKnowledgeAssembler::createDTO($magicFlowKnowledgeEntity);
+    //        return DelightfulFlowKnowledgeAssembler::createDTO($magicFlowKnowledgeEntity);
     //    }
     //
     //    public function show(string $id)
     //    {
     //        $magicFlowKnowledgeEntity = $this->knowledgeBaseAppService->show($this->getAuthorization(), $id);
-    //        return MagicFlowKnowledgeAssembler::createDTO($magicFlowKnowledgeEntity);
+    //        return DelightfulFlowKnowledgeAssembler::createDTO($magicFlowKnowledgeEntity);
     //    }
     //
     //    public function destroy(string $id)
@@ -87,17 +87,17 @@ class KnowledgeBaseOpenApi extends AbstractOpenApi
     //        $knowledgeSimilarity = new KnowledgeSimilarityFilter($this->request->all());
     //
     //        $result = $this->knowledgeBaseAppService->similarity($authorization, $knowledgeSimilarity);
-    //        return MagicFlowKnowledgeFragmentAssembler::createPageListDTO(count($result), $result, new Page(1, count($result)));
+    //        return DelightfulFlowKnowledgeFragmentAssembler::createPageListDTO(count($result), $result, new Page(1, count($result)));
     //    }
     //
     //    public function fragmentSave()
     //    {
     //        $authorization = $this->getAuthorization();
-    //        $dto = new MagicFlowKnowledgeFragmentDTO($this->request->all());
+    //        $dto = new DelightfulFlowKnowledgeFragmentDTO($this->request->all());
     //
-    //        $DO = MagicFlowKnowledgeFragmentAssembler::createDO($dto);
+    //        $DO = DelightfulFlowKnowledgeFragmentAssembler::createDO($dto);
     //        $entity = $this->knowledgeBaseAppService->fragmentSave($authorization, $DO);
-    //        return MagicFlowKnowledgeFragmentAssembler::createDTO($entity);
+    //        return DelightfulFlowKnowledgeFragmentAssembler::createDTO($entity);
     //    }
     //
     //    public function fragmentQueries()
@@ -108,13 +108,13 @@ class KnowledgeBaseOpenApi extends AbstractOpenApi
     //        $query->setOrder(['updated_at' => 'desc']);
     //        $page = $this->createPage();
     //        $result = $this->knowledgeBaseFragmentAppService->queries($authorization, $query, $page);
-    //        return MagicFlowKnowledgeFragmentAssembler::createPageListDTO($result['total'], $result['list'], $page);
+    //        return DelightfulFlowKnowledgeFragmentAssembler::createPageListDTO($result['total'], $result['list'], $page);
     //    }
     //
     //    public function fragmentShow(string $id)
     //    {
     //        $entity = $this->knowledgeBaseFragmentAppService->fragmentShow($this->getAuthorization(), (int) $id);
-    //        return MagicFlowKnowledgeFragmentAssembler::createDTO($entity);
+    //        return DelightfulFlowKnowledgeFragmentAssembler::createDTO($entity);
     //    }
     //
     //    public function fragmentDestroyByMetadataFilter()

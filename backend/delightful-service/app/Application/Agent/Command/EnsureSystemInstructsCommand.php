@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace App\Application\Agent\Command;
 
 use App\Domain\Agent\Constant\SystemInstructType;
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
-use App\Domain\Agent\Repository\Persistence\MagicAgentRepository;
-use App\Domain\Agent\Repository\Persistence\MagicAgentVersionRepository;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
+use App\Domain\Agent\Repository\Persistence\DelightfulAgentRepository;
+use App\Domain\Agent\Repository\Persistence\DelightfulAgentVersionRepository;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
 use Psr\Container\ContainerInterface;
@@ -18,7 +18,7 @@ use Psr\Container\ContainerInterface;
 #[Command]
 class EnsureSystemInstructsCommand extends HyperfCommand
 {
-    public function __construct(protected ContainerInterface $container, public MagicAgentRepository $agentRepository, public MagicAgentVersionRepository $agentVersionRepository)
+    public function __construct(protected ContainerInterface $container, public DelightfulAgentRepository $agentRepository, public DelightfulAgentVersionRepository $agentVersionRepository)
     {
         parent::__construct('agent:ensure-system-instructs');
     }
@@ -102,7 +102,7 @@ class EnsureSystemInstructsCommand extends HyperfCommand
                 // Persist changes when prompts differ
                 if ($newInstructs !== $instructs) {
                     $this->agentVersionRepository->updateById(
-                        new MagicAgentVersionEntity(array_merge($version, ['instructs' => $newInstructs]))
+                        new DelightfulAgentVersionEntity(array_merge($version, ['instructs' => $newInstructs]))
                     );
                     ++$versionUpdated;
                     $this->output->writeln(sprintf('Updated assistant version [%s] system interaction prompts', $version['id']));

@@ -1,7 +1,7 @@
 import { Flex, message } from "antd"
 import { useTranslation } from "react-i18next"
 import { IconSend, IconCircleX, IconMessage2Plus } from "@tabler/icons-react"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useMemo, useRef, useState, useEffect } from "react"
 import type { HTMLAttributes } from "react"
 import { useThrottleFn, useKeyPress, useMemoizedFn, useMount, useDebounceFn } from "ahooks"
@@ -10,20 +10,20 @@ import type { JSONContent, UseEditorOptions } from "@tiptap/react"
 import { cloneDeep, omit } from "lodash-es"
 import type { ReportFileUploadsResponse } from "@/opensource/apis/modules/file"
 import { InstructionGroupType, SystemInstructType } from "@/types/bot"
-import MagicEmojiNodeExtension from "@/opensource/components/base/MagicRichEditor/extensions/magicEmoji"
+import DelightfulEmojiNodeExtension from "@/opensource/components/base/DelightfulRichEditor/extensions/magicEmoji"
 import {
 	FileError,
 	fileToBase64,
 	isOnlyText,
 	transformJSONContent,
 	isValidImageFile,
-} from "@/opensource/components/base/MagicRichEditor/utils"
-import { Image } from "@/opensource/components/base/MagicRichEditor/extensions/image"
+} from "@/opensource/components/base/DelightfulRichEditor/utils"
+import { Image } from "@/opensource/components/base/DelightfulRichEditor/extensions/image"
 import { observer } from "mobx-react-lite"
-import type { MagicRichEditorRef } from "@/opensource/components/base/MagicRichEditor"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicRichEditor from "@/opensource/components/base/MagicRichEditor"
-import type { EmojiInfo } from "@/opensource/components/base/MagicEmojiPanel/types"
+import type { DelightfulRichEditorRef } from "@/opensource/components/base/DelightfulRichEditor"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulRichEditor from "@/opensource/components/base/DelightfulRichEditor"
+import type { EmojiInfo } from "@/opensource/components/base/DelightfulEmojiPanel/types"
 import { useGlobalLanguage } from "@/opensource/models/config/hooks"
 import TopicService from "@/opensource/services/chat/topic/class"
 import { IMStyle, useAppearanceStore } from "@/opensource/providers/AppearanceProvider/context"
@@ -42,7 +42,7 @@ import InputFiles from "./components/InputFiles"
 import UploadButton from "./components/UploadButton"
 import EmojiButton from "./components/EmojiButton"
 import { genFileData } from "./components/InputFiles/utils"
-import MagicInputLayout from "./components/MagicInputLayout"
+import DelightfulInputLayout from "./components/DelightfulInputLayout"
 import useInputStyles from "./hooks/useInputStyles"
 // import useRecordingSummary from "./hooks/useRecordingSummary"
 import TimedTaskButton from "./components/TimedTaskButton"
@@ -52,7 +52,7 @@ import MessageRefer from "../ChatMessageList/components/ReferMessage"
 import { generateRichText } from "../ChatSubSider/utils"
 import { FileApi } from "@/apis"
 import MessageStore from "@/opensource/stores/chatNew/message"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import MessageService from "@/opensource/services/chat/message/MessageService"
 import EditorService from "@/opensource/services/chat/editor/EditorService"
 import AiCompletionService from "@/opensource/services/chat/editor/AiCompletionService"
@@ -68,7 +68,7 @@ export interface SendData {
 
 const MAX_UPLOAD_COUNT = 20
 
-export interface MagicInputProps extends Omit<HTMLAttributes<HTMLDivElement>, "defaultValue"> {
+export interface DelightfulInputProps extends Omit<HTMLAttributes<HTMLDivElement>, "defaultValue"> {
 	/** 底层编辑器 Tiptap 配置 */
 	tiptapProps?: UseEditorOptions
 	/** 是否可见 */
@@ -98,7 +98,7 @@ const MessageEditor = observer(function MessageEditor({
 	className,
 	inputMainClassName,
 	...rest
-}: MagicInputProps) {
+}: DelightfulInputProps) {
 	/** Translation */
 	const { t } = useTranslation("interface")
 	/** Language */
@@ -111,7 +111,7 @@ const MessageEditor = observer(function MessageEditor({
 	const conversationId = ConversationStore.currentConversation?.id
 	const topicId = ConversationStore.currentConversation?.current_topic_id
 
-	const editorRef = useRef<MagicRichEditorRef>(null)
+	const editorRef = useRef<DelightfulRichEditorRef>(null)
 	const [isEmpty, setIsEmpty] = useState<boolean>(true)
 
 	const { value, setValue, isValidContent } = EditorStore
@@ -360,7 +360,7 @@ const MessageEditor = observer(function MessageEditor({
 			?.chain()
 			.focus()
 			.insertContent({
-				type: MagicEmojiNodeExtension.name,
+				type: DelightfulEmojiNodeExtension.name,
 				attrs: { ...emoji, locale: language },
 			})
 			.run()
@@ -445,14 +445,14 @@ const MessageEditor = observer(function MessageEditor({
 
 	const newTopicButton = useMemo(
 		() => (
-			<MagicButton
+			<DelightfulButton
 				className={standardStyles.button}
 				type="text"
-				icon={<MagicIcon size={20} color="currentColor" component={IconMessage2Plus} />}
+				icon={<DelightfulIcon size={20} color="currentColor" component={IconMessage2Plus} />}
 				onClick={onCreateTopic}
 			>
 				{t("chat.input.newTopic")}
-			</MagicButton>
+			</DelightfulButton>
 		),
 		[onCreateTopic, standardStyles.button, t],
 	)
@@ -467,14 +467,14 @@ const MessageEditor = observer(function MessageEditor({
 	// })
 
 	// const recordingSummaryButton = (
-	// 	<MagicButton
+	// 	<DelightfulButton
 	// 		className={standardStyles.button}
 	// 		type="text"
 	// 		icon={RecordingSummaryButton}
 	// 		onClick={onStartRecordingSummary}
 	// 	>
 	// 		{messageT("chat.recording_summary.title")}
-	// 	</MagicButton>
+	// 	</DelightfulButton>
 	// )
 
 	const recordingSummaryButton = null
@@ -533,9 +533,9 @@ const MessageEditor = observer(function MessageEditor({
 					className={standardStyles.referMessage}
 					onClick={handleReferMessageClick}
 				/>
-				<MagicButton
+				<DelightfulButton
 					type="text"
-					icon={<MagicIcon size={20} component={IconCircleX} />}
+					icon={<DelightfulIcon size={20} component={IconCircleX} />}
 					onClick={MessageReplyService.reset}
 				/>
 			</Flex>
@@ -708,7 +708,7 @@ const MessageEditor = observer(function MessageEditor({
 			if (MessageService.isTextSizeOverLimit(JSON.stringify(normalValue))) {
 				// 超长文本
 				return new Promise((resolve) => {
-					MagicModal.confirm({
+					DelightfulModal.confirm({
 						title: "提示",
 						content: "发送的内存超长，是否转为文档发送到当前会话？",
 						okText: "确定",
@@ -750,16 +750,16 @@ const MessageEditor = observer(function MessageEditor({
 				<span className={standardStyles.tip}>
 					{isWindows ? t("placeholder.magicInputWindows") : t("placeholder.magicInput")}
 				</span>
-				<MagicButton
+				<DelightfulButton
 					type="primary"
 					size="large"
 					disabled={sendDisabled}
 					className={modernStyles.sendButton}
-					icon={<MagicIcon color="currentColor" component={IconSend} />}
+					icon={<DelightfulIcon color="currentColor" component={IconSend} />}
 					onClick={handleSend}
 				>
 					{t("send")}
-				</MagicButton>
+				</DelightfulButton>
 			</Flex>
 		),
 		[
@@ -802,7 +802,7 @@ const MessageEditor = observer(function MessageEditor({
 	const ChildrenRender = useMemoizedFn(({ className: inputClassName }) => {
 		return (
 			<>
-				<MagicRichEditor
+				<DelightfulRichEditor
 					ref={editorRef}
 					placeholder={
 						placeholder ?? t("chat.pleaseEnterMessageContent", { ns: "message" })
@@ -835,7 +835,7 @@ const MessageEditor = observer(function MessageEditor({
 	if (!visible) return null
 
 	return (
-		<MagicInputLayout
+		<DelightfulInputLayout
 			theme={theme}
 			extra={referMessage}
 			buttons={
@@ -852,7 +852,7 @@ const MessageEditor = observer(function MessageEditor({
 			{...omit(rest, ["onContentChange"])}
 		>
 			{ChildrenRender}
-		</MagicInputLayout>
+		</DelightfulInputLayout>
 	)
 })
 

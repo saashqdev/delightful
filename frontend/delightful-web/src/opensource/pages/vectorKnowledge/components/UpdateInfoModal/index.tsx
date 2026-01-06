@@ -2,9 +2,9 @@ import { useTranslation } from "react-i18next"
 import { Flex, Form, Input, message } from "antd"
 import { useMemoizedFn } from "ahooks"
 import { useForm } from "antd/es/form/Form"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { useEffect, useState } from "react"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import type { FileData } from "@/opensource/pages/chatNew/components/MessageEditor/components/InputFiles/types"
 import UploadButton from "../Upload/UploadButton"
 import { createStyles } from "antd-style"
@@ -120,7 +120,7 @@ function UpdateInfoModal({ details, open, onClose, updateList }: UpdateInfoModal
 	}, [details, form, open])
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			title={flowT("knowledgeDatabase.updateKnowledge")}
 			open={open}
 			onOk={handleOk}
@@ -140,7 +140,7 @@ function UpdateInfoModal({ details, open, onClose, updateList }: UpdateInfoModal
 			>
 				<Form.Item name="icon" className={styles.formItem}>
 					<Flex vertical align="center" gap={10} className={styles.avatar}>
-						<MagicAvatar
+						<DelightfulAvatar
 							src={imagePreviewUrl || DEFAULT_KNOWLEDGE_ICON}
 							size={100}
 							style={{ borderRadius: 20 }}
@@ -173,7 +173,7 @@ function UpdateInfoModal({ details, open, onClose, updateList }: UpdateInfoModal
 					/>
 				</Form.Item>
 			</Form>
-		</MagicModal>
+		</DelightfulModal>
 	)
 }
 

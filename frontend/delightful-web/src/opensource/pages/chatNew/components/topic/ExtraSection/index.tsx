@@ -1,7 +1,7 @@
 import PageContainer from "@/opensource/components/base/PageContainer"
 import { useMemo, useState } from "react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicSearch from "@/opensource/components/base/MagicSearch"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulSearch from "@/opensource/components/base/DelightfulSearch"
 import { IconMessageTopic } from "@/enhance/tabler/icons-react"
 import { MessageReceiveType } from "@/types/chat"
 import { useDebounce, useMemoizedFn } from "ahooks"
@@ -81,7 +81,7 @@ const TopicExtraSection = observer(() => {
 
 	const iconNode = useMemo(() => {
 		return (
-			<MagicIcon
+			<DelightfulIcon
 				color="currentColor"
 				className={styles.icon}
 				stroke={2}
@@ -102,7 +102,7 @@ const TopicExtraSection = observer(() => {
 			className={styles.container}
 			classNames={classNames}
 		>
-			<MagicSearch
+			<DelightfulSearch
 				className={styles.search}
 				value={searchValue}
 				onChange={onSearchValueChange}

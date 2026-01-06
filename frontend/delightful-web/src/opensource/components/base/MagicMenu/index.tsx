@@ -44,7 +44,7 @@ const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) => {
 	}
 })
 
-const MagicMenu = memo(({ rootClassName, className, ...props }: MenuProps) => {
+const DelightfulMenu = memo(({ rootClassName, className, ...props }: MenuProps) => {
 	const { styles, cx } = useStyles()
 	return (
 		<Menu
@@ -55,4 +55,4 @@ const MagicMenu = memo(({ rootClassName, className, ...props }: MenuProps) => {
 	)
 })
 
-export default MagicMenu
+export default DelightfulMenu

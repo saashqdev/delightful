@@ -1,7 +1,7 @@
 import { Form, Input, Flex, Divider, InputNumber } from "antd"
 import { IconLayoutNavbar, IconBlockquote, IconFileDescription } from "@tabler/icons-react"
 import { useTranslation } from "react-i18next"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import PatternSection from "./PatternSection"
 import TextPreprocessRule from "./TextPreprocessRule"
 import CheckboxItem from "./CheckboxItem"
@@ -60,7 +60,7 @@ export default function ParentChildSegmentSection({
 					>
 						<Flex align="center" gap={8}>
 							<Flex align="center" justify="center" className={styles.patternIcon}>
-								<MagicIcon component={IconBlockquote} color="#315CEC" />
+								<DelightfulIcon component={IconBlockquote} color="#315CEC" />
 							</Flex>
 							<div>
 								<div className={styles.patternTitle}>
@@ -127,7 +127,7 @@ export default function ParentChildSegmentSection({
 					>
 						<Flex align="center" gap={8}>
 							<Flex align="center" justify="center" className={styles.patternIcon}>
-								<MagicIcon component={IconFileDescription} color="#FF7D00" />
+								<DelightfulIcon component={IconFileDescription} color="#FF7D00" />
 							</Flex>
 							<div>
 								<div className={styles.patternTitle}>

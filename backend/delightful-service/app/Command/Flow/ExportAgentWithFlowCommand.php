@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Command\Flow;
 
-use App\Application\Flow\Service\MagicFlowExportImportAppService;
-use App\Domain\Agent\Service\MagicAgentDomainService;
+use App\Application\Flow\Service\DelightfulFlowExportImportAppService;
+use App\Domain\Agent\Service\DelightfulAgentDomainService;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
@@ -28,9 +28,9 @@ class ExportAgentWithFlowCommand extends HyperfCommand
 {
     protected ContainerInterface $container;
 
-    protected MagicFlowExportImportAppService $exportImportService;
+    protected DelightfulFlowExportImportAppService $exportImportService;
 
-    protected MagicAgentDomainService $agentDomainService;
+    protected DelightfulAgentDomainService $agentDomainService;
 
     protected FileDomainService $fileDomainService;
 
@@ -38,8 +38,8 @@ class ExportAgentWithFlowCommand extends HyperfCommand
         ContainerInterface $container
     ) {
         $this->container = $container;
-        $this->exportImportService = $this->container->get(MagicFlowExportImportAppService::class);
-        $this->agentDomainService = $this->container->get(MagicAgentDomainService::class);
+        $this->exportImportService = $this->container->get(DelightfulFlowExportImportAppService::class);
+        $this->agentDomainService = $this->container->get(DelightfulAgentDomainService::class);
         $this->fileDomainService = $this->container->get(FileDomainService::class);
         parent::__construct('agent:export');
         $this->setDescription('导出助理到OSS（包含主流程、工具、子流程等）');

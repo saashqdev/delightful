@@ -7,29 +7,29 @@ declare(strict_types=1);
 
 namespace App\Domain\Token\Service;
 
-use App\Domain\Token\Entity\MagicTokenEntity;
-use App\Domain\Token\Repository\Facade\MagicTokenRepositoryInterface;
+use App\Domain\Token\Entity\DelightfulTokenEntity;
+use App\Domain\Token\Repository\Facade\DelightfulTokenRepositoryInterface;
 
-class MagicTokenDomainService
+class DelightfulTokenDomainService
 {
     public function __construct(
-        protected MagicTokenRepositoryInterface $magicTokenRepository,
+        protected DelightfulTokenRepositoryInterface $magicTokenRepository,
     ) {
     }
 
-    public function createToken(MagicTokenEntity $tokenEntity): MagicTokenEntity
+    public function createToken(DelightfulTokenEntity $tokenEntity): DelightfulTokenEntity
     {
         $this->magicTokenRepository->createToken($tokenEntity);
         return $tokenEntity;
     }
 
-    public function getAccountId(MagicTokenEntity $tokenEntity): string
+    public function getAccountId(DelightfulTokenEntity $tokenEntity): string
     {
         $this->magicTokenRepository->getTokenEntity($tokenEntity);
         return $tokenEntity->getTypeRelationValue();
     }
 
-    public function getUserId(MagicTokenEntity $tokenEntity): string
+    public function getUserId(DelightfulTokenEntity $tokenEntity): string
     {
         $this->magicTokenRepository->getTokenEntity($tokenEntity);
         return $tokenEntity->getTypeRelationValue();

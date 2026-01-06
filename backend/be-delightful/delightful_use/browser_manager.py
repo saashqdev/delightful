@@ -12,7 +12,7 @@ from typing import Dict, Optional
 
 from playwright.async_api import Browser, BrowserContext, async_playwright
 
-from magic_use.magic_browser_config import MagicBrowserConfig
+from magic_use.magic_browser_config import DelightfulBrowserConfig
 
 # Set up logging
 logger = logging.getLogger(__name__)
@@ -68,7 +68,7 @@ class BrowserManager:
             if self._client_refs == 0 and self._initialized:
                 await self.close()
 
-    async def initialize(self, config: MagicBrowserConfig = None) -> None:
+    async def initialize(self, config: DelightfulBrowserConfig = None) -> None:
         """Initialize browser instance
 
         Args:
@@ -79,7 +79,7 @@ class BrowserManager:
             if self._initialized:
                 return
 
-            self.config = config or MagicBrowserConfig.create_for_scraping()
+            self.config = config or DelightfulBrowserConfig.create_for_scraping()
 
             try:
                 # Start Playwright
@@ -118,7 +118,7 @@ class BrowserManager:
                     self._playwright = None
                 raise
 
-    async def get_context(self, config: Optional[MagicBrowserConfig] = None) -> tuple[str, BrowserContext]:
+    async def get_context(self, config: Optional[DelightfulBrowserConfig] = None) -> tuple[str, BrowserContext]:
         """Get or create browser context
 
         If browser is not initialized yet, initialize it first

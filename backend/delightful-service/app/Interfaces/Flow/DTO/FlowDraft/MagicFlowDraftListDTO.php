@@ -9,7 +9,7 @@ namespace App\Interfaces\Flow\DTO\FlowDraft;
 
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 
-class MagicFlowDraftListDTO extends AbstractFlowDTO
+class DelightfulFlowDraftListDTO extends AbstractFlowDTO
 {
     public string $name = '';
 

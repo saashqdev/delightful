@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react"
 
-import { FormItemType } from "@/MagicExpressionWidget/types"
+import { FormItemType } from "@/DelightfulExpressionWidget/types"
 import TSIcon from "@/common/BaseUI/TSIcon"
 import { Button, Dropdown, Input, Popover, Tooltip } from "antd"
 import { useMemoizedFn, useMount, useResetState, useUpdateEffect } from "ahooks"

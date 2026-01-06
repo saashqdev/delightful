@@ -7,21 +7,21 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowMultiModalLogEntity;
+use App\Domain\Flow\Entity\DelightfulFlowMultiModalLogEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Repository\Facade\MagicFlowMultiModalLogRepositoryInterface;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowMultiModalLogRepositoryInterface;
 
-class MagicFlowMultiModalLogDomainService extends AbstractDomainService
+class DelightfulFlowMultiModalLogDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly MagicFlowMultiModalLogRepositoryInterface $magicFlowMultiModalLogRepository,
+        private readonly DelightfulFlowMultiModalLogRepositoryInterface $magicFlowMultiModalLogRepository,
     ) {
     }
 
     /**
      * 创建多模态日志记录.
      */
-    public function create(FlowDataIsolation $dataIsolation, MagicFlowMultiModalLogEntity $entity): MagicFlowMultiModalLogEntity
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMultiModalLogEntity $entity): DelightfulFlowMultiModalLogEntity
     {
         $entity->prepareForCreation();
         return $this->magicFlowMultiModalLogRepository->create($dataIsolation, $entity);
@@ -30,7 +30,7 @@ class MagicFlowMultiModalLogDomainService extends AbstractDomainService
     /**
      * 根据ID获取多模态日志记录.
      */
-    public function getById(FlowDataIsolation $dataIsolation, int $id): ?MagicFlowMultiModalLogEntity
+    public function getById(FlowDataIsolation $dataIsolation, int $id): ?DelightfulFlowMultiModalLogEntity
     {
         return $this->magicFlowMultiModalLogRepository->getById($dataIsolation, $id);
     }
@@ -38,7 +38,7 @@ class MagicFlowMultiModalLogDomainService extends AbstractDomainService
     /**
      * 根据消息ID获取多模态日志记录.
      */
-    public function getByMessageId(FlowDataIsolation $dataIsolation, string $messageId): ?MagicFlowMultiModalLogEntity
+    public function getByMessageId(FlowDataIsolation $dataIsolation, string $messageId): ?DelightfulFlowMultiModalLogEntity
     {
         return $this->magicFlowMultiModalLogRepository->getByMessageId($dataIsolation, $messageId);
     }
@@ -47,7 +47,7 @@ class MagicFlowMultiModalLogDomainService extends AbstractDomainService
      * 批量获取多个消息ID对应的多模态日志记录.
      *
      * @param array<string> $messageIds
-     * @return array<MagicFlowMultiModalLogEntity>
+     * @return array<DelightfulFlowMultiModalLogEntity>
      */
     public function getByMessageIds(FlowDataIsolation $dataIsolation, array $messageIds, bool $keyByMessageId = false): array
     {

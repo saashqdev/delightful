@@ -2,7 +2,7 @@ import { useRef } from "react"
 import { pdfjs } from "react-pdf"
 import { useTranslation } from "react-i18next"
 import type { FC } from "react"
-import type { MagicPdfRenderProps } from "./types"
+import type { DelightfulPdfRenderProps } from "./types"
 import { useStyles } from "./styles"
 
 // Import react-pdf styles
@@ -22,7 +22,7 @@ import PdfViewer from "./components/PdfViewer"
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`
 
-function MagicPdfRender({
+function DelightfulPdfRender({
 	file,
 	showToolbar = true,
 	initialScale = 1.0,
@@ -34,7 +34,7 @@ function MagicPdfRender({
 	enableKeyboard = true,
 	onLoadError,
 	onLoadSuccess,
-}: MagicPdfRenderProps): JSX.Element {
+}: DelightfulPdfRenderProps): JSX.Element {
 	const { styles } = useStyles()
 	const { t } = useTranslation("component")
 	const containerRef = useRef<HTMLDivElement>(null)
@@ -159,5 +159,5 @@ function MagicPdfRender({
 	)
 }
 
-export default MagicPdfRender as FC<MagicPdfRenderProps>
-export type { MagicPdfRenderProps } from "./types"
+export default DelightfulPdfRender as FC<DelightfulPdfRenderProps>
+export type { DelightfulPdfRenderProps } from "./types"

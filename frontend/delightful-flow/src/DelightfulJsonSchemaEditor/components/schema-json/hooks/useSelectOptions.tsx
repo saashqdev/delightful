@@ -1,7 +1,7 @@
 /** Filter available options */
-import { FormItemType } from "@/MagicExpressionWidget/types"
-import { SCHEMA_TYPE } from "@/MagicJsonSchemaEditor/constants"
-import { cleanAndFilterArray, getSelectOptions } from "@/MagicJsonSchemaEditor/utils/helpers"
+import { FormItemType } from "@/DelightfulExpressionWidget/types"
+import { SCHEMA_TYPE } from "@/DelightfulJsonSchemaEditor/constants"
+import { cleanAndFilterArray, getSelectOptions } from "@/DelightfulJsonSchemaEditor/utils/helpers"
 import { useContext, useMemo } from "react"
 import { EditorContext } from "../../editor"
 

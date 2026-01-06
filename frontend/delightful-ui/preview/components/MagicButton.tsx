@@ -1,6 +1,6 @@
 import React from "react"
 import { Space } from "antd"
-import MagicButton from "../../components/MagicButton"
+import DelightfulButton from "../../components/DelightfulButton"
 import ComponentDemo from "./Container"
 
 const ButtonDemo: React.FC = () => {
@@ -12,11 +12,11 @@ const ButtonDemo: React.FC = () => {
 				code="type: 'default' | 'primary' | 'dashed' | 'link' | 'text'"
 			>
 				<Space wrap>
-					<MagicButton>默认按钮</MagicButton>
-					<MagicButton type="primary">主要按钮</MagicButton>
-					<MagicButton type="dashed">虚线按钮</MagicButton>
-					<MagicButton type="link">链接按钮</MagicButton>
-					<MagicButton type="text">文本按钮</MagicButton>
+					<DelightfulButton>默认按钮</DelightfulButton>
+					<DelightfulButton type="primary">主要按钮</DelightfulButton>
+					<DelightfulButton type="dashed">虚线按钮</DelightfulButton>
+					<DelightfulButton type="link">链接按钮</DelightfulButton>
+					<DelightfulButton type="text">文本按钮</DelightfulButton>
 				</Space>
 			</ComponentDemo>
 
@@ -26,9 +26,9 @@ const ButtonDemo: React.FC = () => {
 				code="size: 'large' | 'default' | 'small'"
 			>
 				<Space wrap>
-					<MagicButton size="large">大按钮</MagicButton>
-					<MagicButton>默认按钮</MagicButton>
-					<MagicButton size="small">小按钮</MagicButton>
+					<DelightfulButton size="large">大按钮</DelightfulButton>
+					<DelightfulButton>默认按钮</DelightfulButton>
+					<DelightfulButton size="small">小按钮</DelightfulButton>
 				</Space>
 			</ComponentDemo>
 
@@ -38,11 +38,11 @@ const ButtonDemo: React.FC = () => {
 				code="loading | disabled"
 			>
 				<Space wrap>
-					<MagicButton loading>加载中</MagicButton>
-					<MagicButton disabled>禁用按钮</MagicButton>
-					<MagicButton type="primary" loading>
+					<DelightfulButton loading>加载中</DelightfulButton>
+					<DelightfulButton disabled>禁用按钮</DelightfulButton>
+					<DelightfulButton type="primary" loading>
 						主要加载
-					</MagicButton>
+					</DelightfulButton>
 				</Space>
 			</ComponentDemo>
 
@@ -52,15 +52,15 @@ const ButtonDemo: React.FC = () => {
 				code="justify: 'flex-start' | 'center' | 'flex-end'"
 			>
 				<Space direction="vertical" style={{ width: "100%" }}>
-					<MagicButton justify="flex-start" style={{ width: 200 }}>
+					<DelightfulButton justify="flex-start" style={{ width: 200 }}>
 						左对齐按钮
-					</MagicButton>
-					<MagicButton justify="center" style={{ width: 200 }}>
+					</DelightfulButton>
+					<DelightfulButton justify="center" style={{ width: 200 }}>
 						居中对齐按钮
-					</MagicButton>
-					<MagicButton justify="flex-end" style={{ width: 200 }}>
+					</DelightfulButton>
+					<DelightfulButton justify="flex-end" style={{ width: 200 }}>
 						右对齐按钮
-					</MagicButton>
+					</DelightfulButton>
 				</Space>
 			</ComponentDemo>
 
@@ -70,13 +70,13 @@ const ButtonDemo: React.FC = () => {
 				code="icon: ReactNode"
 			>
 				<Space wrap>
-					<MagicButton icon="🔍">搜索</MagicButton>
-					<MagicButton type="primary" icon="➕">
+					<DelightfulButton icon="🔍">搜索</DelightfulButton>
+					<DelightfulButton type="primary" icon="➕">
 						添加
-					</MagicButton>
-					<MagicButton type="dashed" icon="📁">
+					</DelightfulButton>
+					<DelightfulButton type="dashed" icon="📁">
 						文件夹
-					</MagicButton>
+					</DelightfulButton>
 				</Space>
 			</ComponentDemo>
 
@@ -86,10 +86,10 @@ const ButtonDemo: React.FC = () => {
 				code="tip: ReactNode"
 			>
 				<Space wrap>
-					<MagicButton tip="这是一个提示">悬停查看提示</MagicButton>
-					<MagicButton type="primary" tip="主要按钮提示">
+					<DelightfulButton tip="这是一个提示">悬停查看提示</DelightfulButton>
+					<DelightfulButton type="primary" tip="主要按钮提示">
 						主要按钮
-					</MagicButton>
+					</DelightfulButton>
 				</Space>
 			</ComponentDemo>
 		</div>

@@ -10,24 +10,24 @@ namespace App\Application\Flow\ExecuteManager\Memory\Persistence;
 use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 use App\Application\Flow\ExecuteManager\Memory\LLMMemoryMessage;
 use App\Application\Flow\ExecuteManager\Memory\MemoryQuery;
-use App\Domain\Flow\Entity\MagicFlowMemoryHistoryEntity;
+use App\Domain\Flow\Entity\DelightfulFlowMemoryHistoryEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\Flow\Entity\ValueObject\MemoryType;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowMemoryHistoryQuery;
-use App\Domain\Flow\Service\MagicFlowMemoryHistoryDomainService;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowMemoryHistoryQuery;
+use App\Domain\Flow\Service\DelightfulFlowMemoryHistoryDomainService;
 use App\Infrastructure\Core\ValueObject\Page;
 use DateTime;
 
 class FlowMemory implements MemoryPersistenceInterface
 {
     public function __construct(
-        protected MagicFlowMemoryHistoryDomainService $magicFlowMemoryHistoryDomainService,
+        protected DelightfulFlowMemoryHistoryDomainService $magicFlowMemoryHistoryDomainService,
     ) {
     }
 
     public function queries(MemoryQuery $memoryQuery, array $ignoreMessageIds = []): array
     {
-        $query = new MagicFlowMemoryHistoryQuery();
+        $query = new DelightfulFlowMemoryHistoryQuery();
         $query->setConversationId($memoryQuery->getConversationId());
         $query->setTopicId($memoryQuery->getTopicId());
         $query->setType(MemoryType::Chat->value);
@@ -40,7 +40,7 @@ class FlowMemory implements MemoryPersistenceInterface
         $flowDataIsolation = FlowDataIsolation::create()->disabled();
 
         $historyResult = $this->magicFlowMemoryHistoryDomainService->queries($flowDataIsolation, $query, $page);
-        /** @var MagicFlowMemoryHistoryEntity[] $histories */
+        /** @var DelightfulFlowMemoryHistoryEntity[] $histories */
         $histories = array_reverse($historyResult['list'], true);
 
         $messages = [];
@@ -60,7 +60,7 @@ class FlowMemory implements MemoryPersistenceInterface
 
     public function store(LLMMemoryMessage $LLMMemoryMessage): void
     {
-        $history = new MagicFlowMemoryHistoryEntity();
+        $history = new DelightfulFlowMemoryHistoryEntity();
         $history->setType(MemoryType::Chat);
         $history->setConversationId($LLMMemoryMessage->getConversationId());
         $history->setTopicId($LLMMemoryMessage->getTopicId());

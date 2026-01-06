@@ -1,6 +1,6 @@
-import { ExpressionMode } from "@/MagicExpressionWidget/constant"
-import { InputExpressionProps } from "@/MagicExpressionWidget/types"
-import MagicExpressionWrap, { WidgetExpressionValue } from "@/common/BaseUI/MagicExpressionWrap"
+import { ExpressionMode } from "@/DelightfulExpressionWidget/constant"
+import { InputExpressionProps } from "@/DelightfulExpressionWidget/types"
+import DelightfulExpressionWrap, { WidgetExpressionValue } from "@/common/BaseUI/DelightfulExpressionWrap"
 import { Form } from "antd"
 import clsx from "clsx"
 import React from "react"
@@ -16,7 +16,7 @@ interface LLMInput extends Partial<InputExpressionProps> {
 	className?: string
 }
 
-export default function MagicExpression({
+export default function DelightfulExpression({
 	label,
 	name,
 	value,
@@ -37,7 +37,7 @@ export default function MagicExpression({
 			</div>
 			<div className={styles.body}>
 				<Form.Item name={name}>
-					<MagicExpressionWrap
+					<DelightfulExpressionWrap
 						onlyExpression
 						mode={ExpressionMode.TextArea}
 						placeholder={placeholder}

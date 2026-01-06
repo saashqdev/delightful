@@ -1,6 +1,6 @@
 import React from "react"
 import { Space } from "antd"
-import MagicSelect from "../../components/MagicSelect"
+import DelightfulSelect from "../../components/DelightfulSelect"
 import ComponentDemo from "./Container"
 
 const SelectDemo: React.FC = () => {
@@ -17,16 +17,16 @@ const SelectDemo: React.FC = () => {
 			<ComponentDemo
 				title="基础选择器"
 				description="最基本的选择器组件"
-				code="<MagicSelect placeholder='请选择' options={options} />"
+				code="<DelightfulSelect placeholder='请选择' options={options} />"
 			>
 				<Space>
-					<MagicSelect placeholder="请选择" style={{ width: 200 }} options={options} />
+					<DelightfulSelect placeholder="请选择" style={{ width: 200 }} options={options} />
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo title="多选选择器" description="支持多选的选择器" code="mode='multiple'">
 				<Space>
-					<MagicSelect
+					<DelightfulSelect
 						mode="multiple"
 						placeholder="请选择多个选项"
 						style={{ width: 300 }}
@@ -41,18 +41,18 @@ const SelectDemo: React.FC = () => {
 				code="size: 'large' | 'middle' | 'small'"
 			>
 				<Space direction="vertical">
-					<MagicSelect
+					<DelightfulSelect
 						size="large"
 						placeholder="大尺寸选择器"
 						style={{ width: 200 }}
 						options={options}
 					/>
-					<MagicSelect
+					<DelightfulSelect
 						placeholder="默认尺寸选择器"
 						style={{ width: 200 }}
 						options={options}
 					/>
-					<MagicSelect
+					<DelightfulSelect
 						size="small"
 						placeholder="小尺寸选择器"
 						style={{ width: 200 }}
@@ -67,7 +67,7 @@ const SelectDemo: React.FC = () => {
 				code="showSearch"
 			>
 				<Space>
-					<MagicSelect
+					<DelightfulSelect
 						showSearch
 						placeholder="可搜索的选择器"
 						style={{ width: 200 }}
@@ -85,13 +85,13 @@ const SelectDemo: React.FC = () => {
 				code="onChange | onSelect | onDeselect"
 			>
 				<Space direction="vertical">
-					<MagicSelect
+					<DelightfulSelect
 						placeholder="监听选择变化"
 						style={{ width: 200 }}
 						options={options}
 						onChange={(value) => console.log("选择的值:", value)}
 					/>
-					<MagicSelect
+					<DelightfulSelect
 						mode="multiple"
 						placeholder="监听多选变化"
 						style={{ width: 300 }}

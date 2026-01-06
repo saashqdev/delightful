@@ -25,7 +25,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $updated_uid
  * @property DateTime $updated_at
  */
-class MagicFlowPermissionModel extends AbstractModel
+class DelightfulFlowPermissionModel extends AbstractModel
 {
     use SoftDeletes;
     use Snowflake;

@@ -47,19 +47,19 @@ export const defaultPreprocessRules: PreprocessRule[] = [
 	// 移除块级公式处理 - 将在条件处理中添加
 	{
 		regex: CITATION_REGEX_1,
-		replace: (_, index) => `<MagicCitation index="${index}" />`,
+		replace: (_, index) => `<DelightfulCitation index="${index}" />`,
 	},
 	{
 		regex: CITATION_REGEX_2,
-		replace: (_, index) => `<MagicCitation index="${index}" />`,
+		replace: (_, index) => `<DelightfulCitation index="${index}" />`,
 	},
 	{
 		regex: CITATION_REGEX_3,
-		replace: (_, index) => `<MagicCitation index="${index}" />`,
+		replace: (_, index) => `<DelightfulCitation index="${index}" />`,
 	},
 	{
 		regex: CITATION_REGEX_4,
-		replace: (_, index) => `<MagicCitation index="${index}" />`,
+		replace: (_, index) => `<DelightfulCitation index="${index}" />`,
 	},
 	{
 		regex: LINKED_IMAGE_REGEX,

@@ -1,10 +1,10 @@
 import type { WidgetValue } from "@/opensource/pages/flow/common/Output"
 import type { LLMLabelTagType } from "@/opensource/pages/flow/nodes/LLM/v0/components/LLMSelect/LLMLabel"
 import type { TriggerType } from "@/opensource/pages/flow/nodes/Start/v0/constants"
-import type { Expression } from "@delightful/delightful-flow/MagicConditionEdit/types/expression"
-import type { NodeTestingCtx } from "@delightful/delightful-flow/MagicFlow/context/NodeTesingContext/Context"
-import type { MagicFlow } from "@delightful/delightful-flow/MagicFlow/types/flow"
-import type Schema from "@delightful/delightful-flow/MagicJsonSchemaEditor/types/Schema"
+import type { Expression } from "@delightful/delightful-flow/DelightfulConditionEdit/types/expression"
+import type { NodeTestingCtx } from "@delightful/delightful-flow/DelightfulFlow/context/NodeTesingContext/Context"
+import type { DelightfulFlow } from "@delightful/delightful-flow/DelightfulFlow/types/flow"
+import type Schema from "@delightful/delightful-flow/DelightfulJsonSchemaEditor/types/Schema"
 import type { Dayjs } from "dayjs"
 
 /** 流程类型 */
@@ -91,7 +91,7 @@ export interface NodeTestingResult {
 	end_time: number
 	elapsed_time: string
 	error_message: string
-	params: Pick<MagicFlow.Node, "params">
+	params: Pick<DelightfulFlow.Node, "params">
 	input: string[]
 	output: {
 		content: string
@@ -99,7 +99,7 @@ export interface NodeTestingResult {
 }
 
 export type TestNodeParams = Pick<
-	MagicFlow.Node,
+	DelightfulFlow.Node,
 	"params" | "input" | "node_type" | "node_version"
 > & {
 	trigger_config: {
@@ -141,11 +141,11 @@ export type PlatformItem = {
 
 /** 子流程出入参数据格式 */
 export type SubFlowArgument = Pick<
-	MagicFlow.Flow,
+	DelightfulFlow.Flow,
 	"id" | "name" | "description" | "enabled" | "type"
 > & {
-	input: MagicFlow.Node["input"]
-	output: MagicFlow.Node["input"]
+	input: DelightfulFlow.Node["input"]
+	output: DelightfulFlow.Node["input"]
 	custom_system_input: WidgetValue["value"]
 	icon: string
 }
@@ -165,7 +165,7 @@ export namespace FlowDraft {
 		created_at: string
 		modifier: string
 		updated_at: string
-		magic_flow: MagicFlow.Flow
+		magic_flow: DelightfulFlow.Flow
 		creator_info: PlatformItem
 		modifier_info: PlatformItem
 	}

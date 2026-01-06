@@ -1,1 +1,1 @@
-export { default as MagicList } from "./MagicList"
+export { default as DelightfulList } from "./DelightfulList"

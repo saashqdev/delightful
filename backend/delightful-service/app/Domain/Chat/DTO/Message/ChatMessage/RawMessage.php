@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\DTO\Message\ChatMessage;
 
-use App\Domain\Chat\DTO\Message\MagicMessageStruct;
+use App\Domain\Chat\DTO\Message\DelightfulMessageStruct;
 use App\Domain\Chat\DTO\Message\StreamMessage\StreamMessageTrait;
 use App\Domain\Chat\DTO\Message\StreamMessageInterface;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
@@ -15,7 +15,7 @@ use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 /**
  * 原始消息，可快速用于一些需要临时转发的数据格式，原样输出.
  */
-class RawMessage extends MagicMessageStruct implements StreamMessageInterface
+class RawMessage extends DelightfulMessageStruct implements StreamMessageInterface
 {
     use StreamMessageTrait;
 

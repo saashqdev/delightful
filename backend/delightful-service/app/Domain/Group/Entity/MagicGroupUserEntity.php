@@ -9,7 +9,7 @@ namespace App\Domain\Group\Entity;
 
 use ArrayAccess;
 
-final class MagicGroupUserEntity extends AbstractEntity implements ArrayAccess
+final class DelightfulGroupUserEntity extends AbstractEntity implements ArrayAccess
 {
     protected string $id;
 

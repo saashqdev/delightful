@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\ModelGateway\MicroAgent\AgentParser;
 
 use App\Application\ModelGateway\MicroAgent\AgentParser\YamlAgentParser;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use PHPUnit\Framework\TestCase;
 
@@ -71,7 +71,7 @@ class YamlAgentParserTest extends TestCase
     public function testLoadFromFileNotFound(): void
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionCode(MagicApiErrorCode::ValidateFailed->value);
+        $this->expectExceptionCode(DelightfulApiErrorCode::ValidateFailed->value);
 
         $this->parser->loadFromFile('/non/existent/file.agent.yaml');
     }
@@ -84,7 +84,7 @@ class YamlAgentParserTest extends TestCase
 
         try {
             $this->expectException(BusinessException::class);
-            $this->expectExceptionCode(MagicApiErrorCode::ValidateFailed->value);
+            $this->expectExceptionCode(DelightfulApiErrorCode::ValidateFailed->value);
 
             $this->parser->loadFromFile($tempFile);
         } finally {

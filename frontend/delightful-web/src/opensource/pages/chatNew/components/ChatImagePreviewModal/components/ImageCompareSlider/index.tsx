@@ -4,7 +4,7 @@ import { useMemoizedFn } from "ahooks"
 import { Flex } from "antd"
 
 import { useTranslation } from "react-i18next"
-import { CompareViewType } from "@/opensource/components/base/MagicImagePreview/constants"
+import { CompareViewType } from "@/opensource/components/base/DelightfulImagePreview/constants"
 import type { ImagePreviewInfo } from "@/types/chat/preview"
 import { useStyles } from "./styles"
 

@@ -1,7 +1,7 @@
 import { Affix, Flex } from "antd"
 import { memo } from "react"
 import { useTranslation } from "react-i18next"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconMessage } from "@tabler/icons-react"
 import CNLogo from "@/assets/text/ai-image-chinese.svg"
 import { interfaceStore } from "@/opensource/stores/interface"
@@ -34,7 +34,7 @@ const Header = memo(({ tags, currentType, selectType }: HeaderProps) => {
 							</div>
 						</Flex>
 					</Flex>
-					<MagicButton
+					<DelightfulButton
 						type="text"
 						className={styles.magicButton}
 						style={{ borderRadius: "50px" }}
@@ -42,12 +42,12 @@ const Header = memo(({ tags, currentType, selectType }: HeaderProps) => {
 					>
 						<IconMessage size={18} />
 						{t("chat.aiImage.checkHistoryConversation")}
-					</MagicButton>
+					</DelightfulButton>
 				</Flex>
 				<Flex gap={8} style={{ flexWrap: "wrap" }}>
 					{tags.map((tag) => {
 						return (
-							<MagicButton
+							<DelightfulButton
 								type="text"
 								onClick={() => selectType(tag.id)}
 								key={tag.id}
@@ -56,7 +56,7 @@ const Header = memo(({ tags, currentType, selectType }: HeaderProps) => {
 								})}
 							>
 								{tag.type}
-							</MagicButton>
+							</DelightfulButton>
 						)
 					})}
 				</Flex>

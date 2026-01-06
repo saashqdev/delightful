@@ -1,4 +1,4 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { Form } from "antd"
 import { useTranslation } from "react-i18next"
 import { useStyles } from "./styles"
@@ -33,14 +33,14 @@ const AddToolButtonComponent = ({ onClick }: { onClick: () => void }) => {
 	})
 
 	return (
-		<MagicButton
+		<DelightfulButton
 			key="import-tools"
 			type="primary"
 			style={{ width: "100%" }}
 			onClick={onClickFn}
 		>
 			{t("mcp.importTools", { ns: "flow" })}
-		</MagicButton>
+		</DelightfulButton>
 	)
 }
 

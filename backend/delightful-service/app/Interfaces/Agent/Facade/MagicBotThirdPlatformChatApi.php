@@ -7,26 +7,26 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Agent\Facade;
 
-use App\Application\Agent\Service\MagicBotThirdPlatformChatAppService;
-use App\Domain\Agent\Entity\ValueObject\Query\MagicBotThirdPlatformChatQuery;
-use App\Interfaces\Agent\Assembler\MagicBotThirdPlatformChatAssembler;
-use App\Interfaces\Agent\DTO\MagicBotThirdPlatformChatDTO;
+use App\Application\Agent\Service\DelightfulBotThirdPlatformChatAppService;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulBotThirdPlatformChatQuery;
+use App\Interfaces\Agent\Assembler\DelightfulBotThirdPlatformChatAssembler;
+use App\Interfaces\Agent\DTO\DelightfulBotThirdPlatformChatDTO;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse('low_code')]
-class MagicBotThirdPlatformChatApi extends AbstractApi
+class DelightfulBotThirdPlatformChatApi extends AbstractApi
 {
     #[Inject]
-    protected MagicBotThirdPlatformChatAppService $magicBotThirdPlatformChatAppService;
+    protected DelightfulBotThirdPlatformChatAppService $magicBotThirdPlatformChatAppService;
 
     #[Inject]
-    protected MagicBotThirdPlatformChatAssembler $magicBotThirdPlatformChatAssembler;
+    protected DelightfulBotThirdPlatformChatAssembler $magicBotThirdPlatformChatAssembler;
 
     public function save()
     {
         $authorization = $this->getAuthorization();
-        $DTO = new MagicBotThirdPlatformChatDTO($this->request->all());
+        $DTO = new DelightfulBotThirdPlatformChatDTO($this->request->all());
         $DO = $this->magicBotThirdPlatformChatAssembler->createDO($DTO);
         $entity = $this->magicBotThirdPlatformChatAppService->save($authorization, $DO);
         return $this->magicBotThirdPlatformChatAssembler->createDTO($entity);
@@ -44,7 +44,7 @@ class MagicBotThirdPlatformChatApi extends AbstractApi
     {
         $authorization = $this->getAuthorization();
         $page = $this->createPage();
-        $query = new MagicBotThirdPlatformChatQuery();
+        $query = new DelightfulBotThirdPlatformChatQuery();
         $query->setBotId($botId);
         $data = $this->magicBotThirdPlatformChatAppService->queries($authorization, $query, $page);
         return $this->magicBotThirdPlatformChatAssembler->createPageDTO($data['total'], $data['list'], $page);

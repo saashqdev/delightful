@@ -1,13 +1,13 @@
 /**
  * Return configurable options based on user-supplied field configs and special control types
  */
-import { FormItemType } from '@/MagicExpressionWidget/types'
+import { FormItemType } from '@/DelightfulExpressionWidget/types'
 import React, { useContext, useMemo } from 'react'
 import { getDefaultBooleanConstantSource } from '../schema-item/constants'
-import { useGlobal } from '@/MagicJsonSchemaEditor/context/GlobalContext/useGlobal'
+import { useGlobal } from '@/DelightfulJsonSchemaEditor/context/GlobalContext/useGlobal'
 import { EditorContext } from '../../editor'
 import _ from 'lodash'
-import { SchemaValueSplitor } from '@/MagicJsonSchemaEditor/constants'
+import { SchemaValueSplitor } from '@/DelightfulJsonSchemaEditor/constants'
 
 type CustomConfigProps = {
 	value: any

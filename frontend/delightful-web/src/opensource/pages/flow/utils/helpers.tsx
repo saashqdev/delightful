@@ -1,13 +1,13 @@
 import { Switch } from "antd"
 import type { DataSourceOption } from "@delightful/delightful-flow/dist/common/BaseUI/DropdownRenderer/Reference"
-import { Common } from "@delightful/delightful-flow/dist/MagicConditionEdit/types/common"
-import MagicInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
-import type { EXPRESSION_VALUE } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
-import { FormItemType, LabelTypeMap } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
-import type JSONSchema from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
-import { flowStore } from "@delightful/delightful-flow/dist/MagicFlow/store/index"
-import type { NodeSchema } from "@delightful/delightful-flow/dist/MagicFlow"
+import { Common } from "@delightful/delightful-flow/dist/DelightfulConditionEdit/types/common"
+import DelightfulInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
+import type { EXPRESSION_VALUE } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import { FormItemType, LabelTypeMap } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type JSONSchema from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
+import { flowStore } from "@delightful/delightful-flow/dist/DelightfulFlow/store/index"
+import type { NodeSchema } from "@delightful/delightful-flow/dist/DelightfulFlow"
 
 import type { Sheet } from "@/types/sheet"
 import { Schema } from "@/types/sheet"
@@ -17,11 +17,11 @@ import SnowFlakeId from "snowflake-id"
 import i18next from "i18next"
 import { useFlowStore } from "@/opensource/stores/flow"
 import type { ComponentTypes, UseableToolSet } from "@/types/flow"
-import { getLatestNodeVersion } from "@delightful/delightful-flow/dist/MagicFlow/utils"
+import { getLatestNodeVersion } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
 import { customNodeType } from "../constants"
 import { shadow, unshadow } from "./shadow"
-import { JsonSchemaEditorProps } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor"
-import { getDefaultSchema } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/utils/SchemaUtils"
+import { JsonSchemaEditorProps } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor"
+import { getDefaultSchema } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/utils/SchemaUtils"
 import { ContactApi } from "@/apis"
 import { UserType } from "@/types/user"
 
@@ -59,16 +59,16 @@ export function generateSnowFlake() {
 }
 
 /** 检查是否在循环体内 */
-export const checkIsInLoop = (node: MagicFlow.Node) => {
+export const checkIsInLoop = (node: DelightfulFlow.Node) => {
 	return node?.meta?.parent_id
 }
 
 export const getComponent = (type: string) => {
 	const componentMap = {
-		[FormItemType.Number]: <MagicInput type="number" />,
-		[FormItemType.String]: <MagicInput.TextArea />,
+		[FormItemType.Number]: <DelightfulInput type="number" />,
+		[FormItemType.String]: <DelightfulInput.TextArea />,
 		[FormItemType.Boolean]: <Switch />,
-		[FormItemType.Integer]: <MagicInput type="number" />,
+		[FormItemType.Integer]: <DelightfulInput type="number" />,
 		[FormItemType.Array]: <div>暂不支持选择数组</div>,
 		[FormItemType.Object]: <div>暂不支持选择对象</div>,
 	}
@@ -208,7 +208,7 @@ export const getCurrentDateTimeString = () => {
 /**
  * 将flow的所有代码节点值都进行混淆处理
  */
-export const shadowFlow = (flow: MagicFlow.Flow) => {
+export const shadowFlow = (flow: DelightfulFlow.Flow) => {
 	const cloneFlow = cloneDeep(flow)
 
 	const allCodeNode = Object.values(cloneFlow.nodes).filter(
@@ -227,7 +227,7 @@ export const shadowFlow = (flow: MagicFlow.Flow) => {
 /**
  * 将flow的所有代码节点值都进行解码处理
  */
-export const unShadowFlow = (flow: MagicFlow.Flow) => {
+export const unShadowFlow = (flow: DelightfulFlow.Flow) => {
 	const cloneFlow = cloneDeep(flow)
 
 	const allCodeNode = Object.values(cloneFlow.nodes).filter(
@@ -246,7 +246,7 @@ export const unShadowFlow = (flow: MagicFlow.Flow) => {
 /**
  * 将代码节点进行混淆处理
  */
-export const shadowNode = (node: MagicFlow.Node) => {
+export const shadowNode = (node: DelightfulFlow.Node) => {
 	const cloneNode = cloneDeep(node)
 	const codeData = get(cloneNode, ["params", "code"], "")
 	set(cloneNode, ["params", "code"], shadow(codeData))

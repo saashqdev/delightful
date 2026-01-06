@@ -4,7 +4,7 @@ import { memo, useMemo } from "react"
 import type { OperationTypes } from "@/opensource/pages/flow/components/AuthControlButton/types"
 import { useTranslation } from "react-i18next"
 import { Flow, FlowRouteType, FlowTool } from "@/types/flow"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import type { DrawerItem, DataType } from "../RightDrawer"
 import useStyles from "./style"
 import type { FlowWithTools } from "../../hooks/useFlowList"
@@ -22,7 +22,7 @@ interface ToolCardProps {
 	) => void
 	getDropdownItems: (
 		tool: FlowTool.Tool | Flow.Mcp.ListItem,
-		flow: MagicFlow.Flow,
+		flow: DelightfulFlow.Flow,
 	) => React.ReactNode
 	flowType: FlowRouteType
 }

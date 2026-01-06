@@ -5,7 +5,7 @@ import { useStyles } from "./styles"
 import AnimatedLoading, { loadingContainerStyle } from "./components/AnimatedLoading"
 import type { CommandStatus } from "./components/CommandStatusDisplay"
 import CommandStatusDisplay from "./components/CommandStatusDisplay"
-import MagicMarkdown from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown"
+import DelightfulMarkdown from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown"
 import { useCommandDetection } from "./hooks/useCommandDetection"
 import USER_AVATAR_URL from "./static/user.png"
 import ASSISTANT_AVATAR_URL from "./static/assistant.png"
@@ -90,7 +90,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 			// 有内容时显示自定义动画
 			return (
 				<>
-					<MagicMarkdown content={displayContent} />
+					<DelightfulMarkdown content={displayContent} />
 					<AnimatedLoading />
 				</>
 			)
@@ -115,7 +115,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 		if (status === "error") {
 			return (
 				<div className={styles.messageContentWrapper}>
-					<MagicMarkdown content={displayContent} />
+					<DelightfulMarkdown content={displayContent} />
 				</div>
 			)
 		}
@@ -124,7 +124,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 		if (displayContent && status === "loading") {
 			return (
 				<div className={styles.messageContentWrapper}>
-					<MagicMarkdown content={displayContent} />
+					<DelightfulMarkdown content={displayContent} />
 					{renderConfirmButtons()}
 				</div>
 			)
@@ -143,7 +143,7 @@ function MessageItem(props: MessageProps): React.ReactElement {
 		// 正常消息内容或空内容
 		return (
 			<div className={styles.messageContentWrapper}>
-				{displayContent ? <MagicMarkdown content={displayContent} /> : null}
+				{displayContent ? <DelightfulMarkdown content={displayContent} /> : null}
 				{renderConfirmButtons()}
 			</div>
 		)

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\ModelGateway\Assembler;
 
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\ModelGateway\Entity\ApplicationEntity;
 use App\Infrastructure\Core\PageDTO;
 use App\Infrastructure\Core\ValueObject\Page;
@@ -30,7 +30,7 @@ class ApplicationAssembler
     }
 
     /**
-     * @param array<string, MagicUserEntity> $users
+     * @param array<string, DelightfulUserEntity> $users
      * @param array<string, FileLink> $icons
      */
     public static function createDTO(ApplicationEntity $DO, array $users = [], array $icons = []): ApplicationDTO
@@ -52,7 +52,7 @@ class ApplicationAssembler
     }
 
     /**
-     * @param array{total: int, list: ApplicationEntity[], users: array<string, MagicUserEntity>, icons: array<string, FileLink>} $data
+     * @param array{total: int, list: ApplicationEntity[], users: array<string, DelightfulUserEntity>, icons: array<string, FileLink>} $data
      */
     public static function createPageDTO(array $data, Page $page): PageDTO
     {

@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace App\Application\Chat\Service;
 
-use App\Domain\OrganizationEnvironment\Entity\MagicEnvironmentEntity;
-use App\Domain\OrganizationEnvironment\Service\MagicOrganizationEnvDomainService;
+use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
+use App\Domain\OrganizationEnvironment\Service\DelightfulOrganizationEnvDomainService;
 
-class MagicEnvironmentAppService extends AbstractAppService
+class DelightfulEnvironmentAppService extends AbstractAppService
 {
     public function __construct(
-        protected MagicOrganizationEnvDomainService $magicOrganizationEnvDomainService,
+        protected DelightfulOrganizationEnvDomainService $magicOrganizationEnvDomainService,
     ) {
     }
 
     /**
-     * @return MagicEnvironmentEntity[]
+     * @return DelightfulEnvironmentEntity[]
      */
-    public function getMagicEnvironments(array $ids): array
+    public function getDelightfulEnvironments(array $ids): array
     {
         if (empty($ids)) {
             return $this->magicOrganizationEnvDomainService->getEnvironmentEntities();
@@ -29,13 +29,13 @@ class MagicEnvironmentAppService extends AbstractAppService
     }
 
     // 创建环境
-    public function createMagicEnvironment(MagicEnvironmentEntity $environmentDTO): MagicEnvironmentEntity
+    public function createDelightfulEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {
         return $this->magicOrganizationEnvDomainService->createEnvironment($environmentDTO);
     }
 
     // 更新环境
-    public function updateMagicEnvironment(MagicEnvironmentEntity $environmentDTO): MagicEnvironmentEntity
+    public function updateDelightfulEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {
         return $this->magicOrganizationEnvDomainService->updateEnvironment($environmentDTO);
     }

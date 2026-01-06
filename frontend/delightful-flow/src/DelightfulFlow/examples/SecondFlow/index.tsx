@@ -1,5 +1,5 @@
 import { NodeMapProvider } from "@/common/context/NodeMap/Provider"
-import { MagicFlow } from "@/index"
+import { DelightfulFlow } from "@/index"
 import React, { useMemo } from "react"
 import { generateNodeVersionSchema } from "../BaseFlow/utils/version"
 import { installAllNodes } from "./utils"
@@ -12,7 +12,7 @@ export default function SecondFlow() {
 	}, [])
 	return (
 		<NodeMapProvider nodeMap={nodeSchemaMap}>
-			<MagicFlow
+			<DelightfulFlow
 				// @ts-ignore
 				flowInstance={flowInstance}
 				customParamsName={{

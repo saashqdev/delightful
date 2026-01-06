@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace App\Application\Kernel\Enum;
 
 /**
- * Magic 组织管理员资源.
+ * Delightful 组织管理员资源.
  */
-enum MagicAdminResourceEnum: string
+enum DelightfulAdminResourceEnum: string
 {
     case ORGANIZATION_ADMIN = 'DELIGHTFUL_ALL_PERMISSIONS';
 }

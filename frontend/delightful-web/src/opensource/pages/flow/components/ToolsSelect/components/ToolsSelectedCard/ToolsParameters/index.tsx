@@ -4,10 +4,10 @@
 import type { FormListFieldData } from "antd"
 import { Form, Switch, Tooltip, Flex } from "antd"
 import { IconHelp } from "@tabler/icons-react"
-import MagicJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicJsonSchemaEditorWrap"
+import DelightfulJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulJsonSchemaEditorWrap"
 import usePrevious from "@/opensource/pages/flow/common/hooks/usePrevious"
-import { ShowColumns } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/constants"
-import { DisabledField } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
+import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
+import { DisabledField } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import { useTranslation } from "react-i18next"
 import styles from "./index.module.less"
 import useToolsParameters from "./hooks/useToolsParameters"
@@ -41,7 +41,7 @@ export default function ToolsParameters({ field }: ToolsParametersProps) {
 				</Flex>
 				<div className={styles.label}>{t("common.customSystemInput", { ns: "flow" })}</div>
 				<Form.Item name={[field.name, "custom_system_input", "form"]}>
-					<MagicJSONSchemaEditorWrap
+					<DelightfulJSONSchemaEditorWrap
 						allowExpression
 						expressionSource={expressionDataSource}
 						displayColumns={[ShowColumns.Key, ShowColumns.Type, ShowColumns.Value]}

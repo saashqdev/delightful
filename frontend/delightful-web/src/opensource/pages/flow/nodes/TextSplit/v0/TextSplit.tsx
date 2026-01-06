@@ -1,12 +1,12 @@
 import { Form } from "antd"
 import { useForm } from "antd/lib/form/Form"
 import { useMemoizedFn } from "ahooks"
-import { useNodeConfigActions } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useNodeConfigActions } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { set, cloneDeep } from "lodash-es"
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
-import MagicExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicExpressionWrap"
-import { ExpressionMode } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
+import DelightfulExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
+import { ExpressionMode } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
 import { useMemo } from "react"
 import JSONSchemaRenderer from "@/opensource/pages/flow/components/JSONSchemaRenderer"
 import usePrevious from "@/opensource/pages/flow/common/hooks/usePrevious"
@@ -68,7 +68,7 @@ export default function TextSplitV0() {
 				onValuesChange={onValuesChange}
 			>
 				<Form.Item name={["content"]} label={t("textSplit.splitContent", { ns: "flow" })}>
-					<MagicExpressionWrap
+					<DelightfulExpressionWrap
 						onlyExpression
 						mode={ExpressionMode.TextArea}
 						placeholder={getExpressionPlaceholder(

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Application\Chat;
 
-use App\Application\Chat\Service\MagicUserTaskAppService;
+use App\Application\Chat\Service\DelightfulUserTaskAppService;
 use App\Interfaces\Chat\DTO\UserTaskDTO;
 use App\Interfaces\Chat\DTO\UserTaskValueDTO;
 use DateTime;
@@ -17,7 +17,7 @@ use Mockery;
 /**
  * @internal
  */
-class MagicUserTaskAppServiceTest extends BaseTest
+class DelightfulUserTaskAppServiceTest extends BaseTest
 {
     protected function tearDown(): void
     {
@@ -49,7 +49,7 @@ class MagicUserTaskAppServiceTest extends BaseTest
     //         'interval' => null,
     //     ];
     //     // 创建被测试的服务实例, 使用依赖注入
-    //     $service = make(MagicUserTaskAppService::class);
+    //     $service = make(DelightfulUserTaskAppService::class);
     //     // {"branchId": "branch_83f180194d23", "flowCode": "DELIGHTFUL-FLOW-6784c05fc92ec0-09863904", "routineConfig": {"day": null, "time": "00:00", "type": "daily_repeat", "topic": {"name": null, "type": ""}, "value": {"unit": null, "values": null, "deadline": null, "interval": null}}}
     //     $flowCode = 'DELIGHTFUL-FLOW-6784c05fc92ec0-09863904';
     //     //  $branchId = 'branch_83f180194d23';
@@ -63,7 +63,7 @@ class MagicUserTaskAppServiceTest extends BaseTest
     // 测试创建自定义重复任务 day 场景
     public function testCreateCustomRepeatTaskDay()
     {
-        $service = make(MagicUserTaskAppService::class);
+        $service = make(DelightfulUserTaskAppService::class);
         $userTask = new UserTaskDTO();
         $userTask->setAgentId('737330322528899073');
         $userTask->setTopicId('749639569880518657');
@@ -88,7 +88,7 @@ class MagicUserTaskAppServiceTest extends BaseTest
     // 测试创建自定义重复任务 week 场景
     public function testCreateCustomRepeatTaskWeek()
     {
-        $service = make(MagicUserTaskAppService::class);
+        $service = make(DelightfulUserTaskAppService::class);
         $userTask = new UserTaskDTO();
         $userTask->setAgentId('737330322528899073');
         $userTask->setTopicId('749639569880518657');
@@ -113,7 +113,7 @@ class MagicUserTaskAppServiceTest extends BaseTest
     // 测试创建自定义重复任务 month 场景
     public function testCreateCustomRepeatTaskMonth()
     {
-        $service = make(MagicUserTaskAppService::class);
+        $service = make(DelightfulUserTaskAppService::class);
         $userTask = new UserTaskDTO();
         $userTask->setAgentId('737330322528899073');
         $userTask->setTopicId('749639569880518657');
@@ -138,7 +138,7 @@ class MagicUserTaskAppServiceTest extends BaseTest
     // 测试创建自定义重复任务 year 场景
     public function testCreateCustomRepeatTaskYear()
     {
-        $service = make(MagicUserTaskAppService::class);
+        $service = make(DelightfulUserTaskAppService::class);
 
         $userTask = new UserTaskDTO();
         $userTask->setAgentId('737330322528899073');

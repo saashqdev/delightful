@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Domain\SuperAgent\Event;
+namespace Delightful\SuperDelightful\Domain\SuperAgent\Event;
 
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\TaskFileVersionEntity;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TaskFileVersionEntity;
 
 /**
  * File replaced event.
@@ -19,7 +19,7 @@ class FileReplacedEvent
     public function __construct(
         private readonly TaskFileEntity $fileEntity,
         private readonly ?TaskFileVersionEntity $versionEntity,
-        private readonly MagicUserAuthorization $userAuthorization,
+        private readonly DelightfulUserAuthorization $userAuthorization,
         private readonly bool $isCrossTypeReplace
     ) {
     }
@@ -43,7 +43,7 @@ class FileReplacedEvent
     /**
      * Get user authorization.
      */
-    public function getUserAuthorization(): MagicUserAuthorization
+    public function getUserAuthorization(): DelightfulUserAuthorization
     {
         return $this->userAuthorization;
     }

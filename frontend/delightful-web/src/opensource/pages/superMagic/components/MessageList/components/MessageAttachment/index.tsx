@@ -1,13 +1,13 @@
-import MagicFileIcon from "@/opensource/components/base/MagicFileIcon"
+import DelightfulFileIcon from "@/opensource/components/base/DelightfulFileIcon"
 import {
 	downloadFileContent,
 	getTemporaryDownloadUrl,
-} from "@/opensource/pages/superMagic/utils/api"
-import { getFileType } from "@/opensource/pages/superMagic/utils/handleFIle"
+} from "@/opensource/pages/superDelightful/utils/api"
+import { getFileType } from "@/opensource/pages/superDelightful/utils/handleFIle"
 import { useState } from "react"
 import { useStyles } from "./style"
 import type { AttachmentProps } from "./type"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconChevronDown, IconChevronRight, IconDownload, IconEye } from "@tabler/icons-react"
 
 export const Attachment = ({
@@ -82,7 +82,7 @@ export const Attachment = ({
 							}}
 						>
 							<div className={styles.attachmentItem}>
-								<MagicFileIcon
+								<DelightfulFileIcon
 									type={item.file_extension}
 									size={24}
 									className={styles.threadTitleImage}
@@ -94,14 +94,14 @@ export const Attachment = ({
 								{/* {item.contentLength && (
                                         <span className={styles.attachmentSize}>{formatFileSize(item.contentLength)}</span>
                                     )} */}
-								<MagicIcon
+								<DelightfulIcon
 									className={styles.attachmentEye}
 									onClick={toggleExpanded}
 									component={IconEye}
 									stroke={2}
 									size={18}
 								/>
-								<MagicIcon
+								<DelightfulIcon
 									className={styles.attachmentAction}
 									onClick={(e: any) => {
 										e.stopPropagation()

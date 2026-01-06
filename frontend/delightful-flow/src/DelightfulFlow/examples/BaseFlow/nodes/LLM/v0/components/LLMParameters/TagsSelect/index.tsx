@@ -1,4 +1,4 @@
-import MagicSelect from "@/common/BaseUI/Select"
+import DelightfulSelect from "@/common/BaseUI/Select"
 import { SelectProps } from "antd/lib/select"
 import React, { useState } from "react"
 
@@ -26,7 +26,7 @@ const TagsSelect = ({ ...props }: TagsSelect) => {
 	}
 
 	return (
-		<MagicSelect
+		<DelightfulSelect
 			mode="tags"
 			multiple
 			searchValue={inputValue}

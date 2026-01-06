@@ -1,9 +1,9 @@
-import MagicCollapse from "@/opensource/components/base/MagicCollapse"
+import DelightfulCollapse from "@/opensource/components/base/DelightfulCollapse"
 import { Flex, Input } from "antd"
 import { useTranslation } from "react-i18next"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import PageContainer from "@/opensource/components/base/PageContainer"
-import { useCurrentMagicOrganization, useUserInfo } from "@/opensource/models/user/hooks"
+import { useCurrentDelightfulOrganization, useUserInfo } from "@/opensource/models/user/hooks"
 import AiCompletionSwitch from "./featrues/AiCompletionSwitch"
 import AppearenceSwitch from "./featrues/AppearenceSwitch"
 import FontSizeChanger from "./featrues/FontSizeChanger"
@@ -36,11 +36,11 @@ function SettingPage() {
 
 	const { userInfo: info } = useUserInfo()
 
-	const organization = useCurrentMagicOrganization()
+	const organization = useCurrentDelightfulOrganization()
 
 	return (
 		<PageContainer title={t("setting.systemSetting")} className={styles.container}>
-			<MagicCollapse
+			<DelightfulCollapse
 				ghost={false}
 				bordered={false}
 				className={styles.collapse}
@@ -114,12 +114,12 @@ function SettingPage() {
 									title={t("setting.enterprise")}
 									extra={
 										<Flex align="center" gap={10}>
-											<MagicAvatar
+											<DelightfulAvatar
 												src={organization?.organization_logo}
 												size={32}
 											>
 												{organization?.organization_name}
-											</MagicAvatar>
+											</DelightfulAvatar>
 											{organization?.organization_name}
 										</Flex>
 									}
@@ -127,9 +127,9 @@ function SettingPage() {
 								<SettingItem
 									title={t("setting.avatar")}
 									extra={
-										<MagicAvatar src={info?.avatar}>
+										<DelightfulAvatar src={info?.avatar}>
 											{info?.nickname}
-										</MagicAvatar>
+										</DelightfulAvatar>
 									}
 								/>
 								<SettingItem

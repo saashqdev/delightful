@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Assembler;
 
-use App\Domain\Chat\DTO\MagicMessageDTO;
+use App\Domain\Chat\DTO\DelightfulMessageDTO;
 use App\Domain\Chat\DTO\Message\ChatMessage\AggregateAISearchCardMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\AggregateAISearchCardMessageV2;
 use App\Domain\Chat\DTO\Message\ChatMessage\AIImageCardMessage;
@@ -46,21 +46,21 @@ use App\Domain\Chat\DTO\Message\ControlMessage\TopicCreateMessage;
 use App\Domain\Chat\DTO\Message\ControlMessage\TopicDeleteMessage;
 use App\Domain\Chat\DTO\Message\ControlMessage\TopicUpdateMessage;
 use App\Domain\Chat\DTO\Message\ControlMessage\UnknowControlMessage;
-use App\Domain\Chat\DTO\Message\IntermediateMessage\SuperMagicInstructionMessage;
+use App\Domain\Chat\DTO\Message\IntermediateMessage\SuperDelightfulInstructionMessage;
 use App\Domain\Chat\DTO\Message\MessageInterface;
 use App\Domain\Chat\DTO\Request\ChatRequest;
 use App\Domain\Chat\DTO\Request\ControlRequest;
-use App\Domain\Chat\Entity\MagicConversationEntity;
-use App\Domain\Chat\Entity\MagicMessageEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\IntermediateMessageType;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\ErrorCode\ChatErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Throwable;
 
 class MessageAssembler
@@ -107,24 +107,24 @@ class MessageAssembler
         ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR);
     }
 
-    public static function getMessageEntity(?array $message): ?MagicMessageEntity
+    public static function getMessageEntity(?array $message): ?DelightfulMessageEntity
     {
         if (empty($message)) {
             return null;
         }
-        return new MagicMessageEntity($message);
+        return new DelightfulMessageEntity($message);
     }
 
     public static function getChatMessageDTOByRequest(
         ChatRequest $chatRequest,
-        MagicConversationEntity $conversationEntity,
-        MagicUserEntity $senderUserEntity
-    ): MagicMessageEntity {
+        DelightfulConversationEntity $conversationEntity,
+        DelightfulUserEntity $senderUserEntity
+    ): DelightfulMessageEntity {
         $time = date('Y-m-d H:i:s');
         $appMessageId = $chatRequest->getData()->getMessage()->getAppMessageId();
         $requestMessage = $chatRequest->getData()->getMessage();
         // 消息的type和content抽象出来
-        $messageDTO = new MagicMessageEntity();
+        $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($conversationEntity->getUserId());
         // TODO 会话表应该冗余的记录收发双方的用户类型，目前只记录了收件方的，需要补充
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
@@ -134,8 +134,8 @@ class MessageAssembler
         $messageDTO->setReceiveType($conversationEntity->getReceiveType());
         $messageDTO->setReceiveOrganizationCode($conversationEntity->getReceiveOrganizationCode());
         $messageDTO->setAppMessageId($appMessageId);
-        $messageDTO->setContent($requestMessage->getMagicMessage());
-        $messageDTO->setMessageType($requestMessage->getMagicMessage()->getMessageTypeEnum());
+        $messageDTO->setContent($requestMessage->getDelightfulMessage());
+        $messageDTO->setMessageType($requestMessage->getDelightfulMessage()->getMessageTypeEnum());
         $messageDTO->setSendTime($time);
         $messageDTO->setCreatedAt($time);
         $messageDTO->setUpdatedAt($time);
@@ -145,15 +145,15 @@ class MessageAssembler
 
     public static function getIntermediateMessageDTO(
         ChatRequest $chatRequest,
-        MagicConversationEntity $conversationEntity,
-        MagicUserEntity $senderUserEntity
-    ): MagicMessageDTO {
+        DelightfulConversationEntity $conversationEntity,
+        DelightfulUserEntity $senderUserEntity
+    ): DelightfulMessageDTO {
         $time = date('Y-m-d H:i:s');
         $appMessageId = $chatRequest->getData()->getMessage()->getAppMessageId();
         $requestMessage = $chatRequest->getData()->getMessage();
         $topicId = $chatRequest->getData()->getMessage()->getTopicId();
         // 消息的type和content抽象出来
-        $messageDTO = new MagicMessageDTO();
+        $messageDTO = new DelightfulMessageDTO();
         $messageDTO->setSenderId($conversationEntity->getUserId());
         // TODO 会话表应该冗余的记录收发双方的用户类型，目前只记录了收件方的，需要补充
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
@@ -163,8 +163,8 @@ class MessageAssembler
         $messageDTO->setReceiveType($conversationEntity->getReceiveType());
         $messageDTO->setReceiveOrganizationCode($conversationEntity->getReceiveOrganizationCode());
         $messageDTO->setAppMessageId($appMessageId);
-        $messageDTO->setContent($requestMessage->getMagicMessage());
-        $messageDTO->setMessageType($requestMessage->getMagicMessage()->getMessageTypeEnum());
+        $messageDTO->setContent($requestMessage->getDelightfulMessage());
+        $messageDTO->setMessageType($requestMessage->getDelightfulMessage()->getMessageTypeEnum());
         $messageDTO->setSendTime($time);
         $messageDTO->setCreatedAt($time);
         $messageDTO->setUpdatedAt($time);
@@ -176,12 +176,12 @@ class MessageAssembler
     /**
      * 根据 protobuf 的消息结构,获取对应的消息对象.
      */
-    public static function getControlMessageDTOByRequest(ControlRequest $controlRequest, MagicUserAuthorization $userAuthorization, ConversationType $conversationType): MagicMessageEntity
+    public static function getControlMessageDTOByRequest(ControlRequest $controlRequest, DelightfulUserAuthorization $userAuthorization, ConversationType $conversationType): DelightfulMessageEntity
     {
         $appMessageId = $controlRequest->getData()->getMessage()->getAppMessageId();
-        $messageStruct = $controlRequest->getData()->getMessage()->getMagicMessage();
+        $messageStruct = $controlRequest->getData()->getMessage()->getDelightfulMessage();
         # 将protobuf的消息转换为对应的对象
-        $messageEntity = new MagicMessageEntity();
+        $messageEntity = new DelightfulMessageEntity();
         $messageEntity->setSenderId($userAuthorization->getId());
         $messageEntity->setSenderType($conversationType);
         $messageEntity->setSenderOrganizationCode($userAuthorization->getOrganizationCode());
@@ -262,7 +262,7 @@ class MessageAssembler
     public static function getIntermediateMessageStruct(IntermediateMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
         return match ($messageTypeEnum) {
-            IntermediateMessageType::SuperMagicInstruction => new SuperMagicInstructionMessage($messageStructArray),
+            IntermediateMessageType::SuperDelightfulInstruction => new SuperDelightfulInstructionMessage($messageStructArray),
         };
     }
 

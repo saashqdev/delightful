@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Factory;
 
-use App\Domain\Flow\Entity\MagicFlowWaitMessageEntity;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowWaitMessageModel;
+use App\Domain\Flow\Entity\DelightfulFlowWaitMessageEntity;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowWaitMessageModel;
 
-class MagicFlowWaitMessageFactory
+class DelightfulFlowWaitMessageFactory
 {
-    public static function modelToEntity(MagicFlowWaitMessageModel $model): MagicFlowWaitMessageEntity
+    public static function modelToEntity(DelightfulFlowWaitMessageModel $model): DelightfulFlowWaitMessageEntity
     {
-        $entity = new MagicFlowWaitMessageEntity();
+        $entity = new DelightfulFlowWaitMessageEntity();
         $entity->setId($model->id);
         $entity->setOrganizationCode($model->organization_code);
         $entity->setConversationId($model->conversation_id);

@@ -2,14 +2,14 @@ import { Form } from "antd"
 import { useForm } from "antd/lib/form/Form"
 import { useMemo } from "react"
 import { useMemoizedFn } from "ahooks"
-import { useNodeConfigActions } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useNodeConfigActions } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { set, cloneDeep } from "lodash-es"
-import MagicExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicExpressionWrap"
-import { ExpressionMode } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
-import { ShowColumns } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/constants"
-import { FormItemType } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
-import MagicJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicJsonSchemaEditorWrap"
+import DelightfulExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
+import { ExpressionMode } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
+import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
+import { FormItemType } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import DelightfulJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulJsonSchemaEditorWrap"
 import { useTranslation } from "react-i18next"
 import styles from "./index.module.less"
 import usePrevious from "../../../common/hooks/usePrevious"
@@ -67,7 +67,7 @@ export default function VectorDeleteV0() {
 					className={styles.metadata}
 					style={{ marginBottom: 0 }}
 				>
-					<MagicJSONSchemaEditorWrap
+					<DelightfulJSONSchemaEditorWrap
 						allowExpression
 						expressionSource={expressionDataSource}
 						displayColumns={[ShowColumns.Key, ShowColumns.Type, ShowColumns.Value]}
@@ -83,7 +83,7 @@ export default function VectorDeleteV0() {
 					extra={t("common.businessIdDesc", { ns: "flow" })}
 					style={{ marginBottom: 0 }}
 				>
-					<MagicExpressionWrap
+					<DelightfulExpressionWrap
 						placeholder={t("common.allowExpressionPlaceholder", { ns: "flow" })}
 						dataSource={expressionDataSource}
 						onlyExpression

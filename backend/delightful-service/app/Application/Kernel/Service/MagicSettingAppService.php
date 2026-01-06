@@ -10,16 +10,16 @@ namespace App\Application\Kernel\Service;
 use App\Application\Contact\UserSetting\UserSettingKey;
 use App\Application\Kernel\AbstractKernelAppService;
 use App\Application\Kernel\DTO\GlobalConfig;
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
-use App\Domain\Contact\Service\MagicUserSettingDomainService;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
+use App\Domain\Contact\Service\DelightfulUserSettingDomainService;
 use Hyperf\Redis\Redis;
 
-class MagicSettingAppService extends AbstractKernelAppService
+class DelightfulSettingAppService extends AbstractKernelAppService
 {
     private const string CACHE_KEY = 'magic:global_config_cache';
 
     public function __construct(
-        private readonly MagicUserSettingDomainService $magicUserSettingDomainService,
+        private readonly DelightfulUserSettingDomainService $magicUserSettingDomainService,
         private readonly Redis $redis,
     ) {
     }
@@ -30,7 +30,7 @@ class MagicSettingAppService extends AbstractKernelAppService
      */
     public function save(GlobalConfig $config): GlobalConfig
     {
-        $entity = new MagicUserSettingEntity();
+        $entity = new DelightfulUserSettingEntity();
         $entity->setKey(UserSettingKey::GlobalConfig->value);
         $entity->setValue($config->toArray());
 

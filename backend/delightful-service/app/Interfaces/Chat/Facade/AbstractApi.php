@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Facade;
 
-use App\Infrastructure\Core\Traits\MagicUserAuthorizationTrait;
+use App\Infrastructure\Core\Traits\DelightfulUserAuthorizationTrait;
 
 abstract class AbstractApi
 {
-    use MagicUserAuthorizationTrait;
+    use DelightfulUserAuthorizationTrait;
 }

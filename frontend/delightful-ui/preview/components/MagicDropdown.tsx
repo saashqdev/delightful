@@ -1,7 +1,7 @@
 import React from "react"
 import { Space } from "antd"
-import MagicDropdown from "../../components/MagicDropdown"
-import MagicButton from "../../components/MagicButton"
+import DelightfulDropdown from "../../components/DelightfulDropdown"
+import DelightfulButton from "../../components/DelightfulButton"
 import ComponentDemo from "./Container"
 
 const DropdownDemo: React.FC = () => {
@@ -29,28 +29,28 @@ const DropdownDemo: React.FC = () => {
 			<ComponentDemo
 				title="基础下拉菜单"
 				description="最基本的下拉菜单组件"
-				code="<MagicDropdown menu={{ items }}><Button>下拉菜单</Button></MagicDropdown>"
+				code="<DelightfulDropdown menu={{ items }}><Button>下拉菜单</Button></DelightfulDropdown>"
 			>
 				<Space>
-					<MagicDropdown
+					<DelightfulDropdown
 						menu={{
 							items: menuItems,
 						}}
 					>
-						<MagicButton>下拉菜单</MagicButton>
-					</MagicDropdown>
+						<DelightfulButton>下拉菜单</DelightfulButton>
+					</DelightfulDropdown>
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo title="嵌套菜单" description="支持嵌套子菜单" code="children">
 				<Space>
-					<MagicDropdown
+					<DelightfulDropdown
 						menu={{
 							items: nestedMenuItems,
 						}}
 					>
-						<MagicButton>嵌套菜单</MagicButton>
-					</MagicDropdown>
+						<DelightfulButton>嵌套菜单</DelightfulButton>
+					</DelightfulDropdown>
 				</Space>
 			</ComponentDemo>
 
@@ -60,22 +60,22 @@ const DropdownDemo: React.FC = () => {
 				code="trigger: 'click' | 'hover' | 'contextMenu'"
 			>
 				<Space>
-					<MagicDropdown
+					<DelightfulDropdown
 						trigger={["click"]}
 						menu={{
 							items: menuItems,
 						}}
 					>
-						<MagicButton>点击触发</MagicButton>
-					</MagicDropdown>
-					<MagicDropdown
+						<DelightfulButton>点击触发</DelightfulButton>
+					</DelightfulDropdown>
+					<DelightfulDropdown
 						trigger={["hover"]}
 						menu={{
 							items: menuItems,
 						}}
 					>
-						<MagicButton>悬停触发</MagicButton>
-					</MagicDropdown>
+						<DelightfulButton>悬停触发</DelightfulButton>
+					</DelightfulDropdown>
 				</Space>
 			</ComponentDemo>
 
@@ -85,28 +85,28 @@ const DropdownDemo: React.FC = () => {
 				code="placement: 'top' | 'bottom' | 'left' | 'right'"
 			>
 				<Space>
-					<MagicDropdown
+					<DelightfulDropdown
 						placement="top"
 						menu={{
 							items: menuItems,
 						}}
 					>
-						<MagicButton>顶部显示</MagicButton>
-					</MagicDropdown>
-					<MagicDropdown
+						<DelightfulButton>顶部显示</DelightfulButton>
+					</DelightfulDropdown>
+					<DelightfulDropdown
 						placement="bottom"
 						menu={{
 							items: menuItems,
 						}}
 					>
-						<MagicButton>底部显示</MagicButton>
-					</MagicDropdown>
+						<DelightfulButton>底部显示</DelightfulButton>
+					</DelightfulDropdown>
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo title="事件处理" description="监听菜单点击事件" code="onClick">
 				<Space>
-					<MagicDropdown
+					<DelightfulDropdown
 						menu={{
 							items: menuItems,
 							onClick: ({ key }) => {
@@ -114,8 +114,8 @@ const DropdownDemo: React.FC = () => {
 							},
 						}}
 					>
-						<MagicButton>事件处理</MagicButton>
-					</MagicDropdown>
+						<DelightfulButton>事件处理</DelightfulButton>
+					</DelightfulDropdown>
 				</Space>
 			</ComponentDemo>
 		</div>

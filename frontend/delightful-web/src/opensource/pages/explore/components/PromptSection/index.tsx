@@ -1,7 +1,7 @@
 import { Card, Col, Row } from "antd"
 import { createStyles } from "antd-style"
-import MagicEmpty from "@/opensource/components/base/MagicEmpty"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulEmpty from "@/opensource/components/base/DelightfulEmpty"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { useMemo } from "react"
 import { useSize } from "ahooks"
 import { useTranslation } from "react-i18next"
@@ -111,8 +111,8 @@ function PropmtSection({
 			classNames={{ header: styles.header, body: styles.body }}
 			tabList={tabs}
 		>
-			<MagicSpin section spinning={loading} className={styles.spin}>
-				{cards.length === 0 && !loading ? <MagicEmpty className={styles.empty} /> : null}
+			<DelightfulSpin section spinning={loading} className={styles.spin}>
+				{cards.length === 0 && !loading ? <DelightfulEmpty className={styles.empty} /> : null}
 				<Row gutter={[colSpan, 14]} className={styles.body} align="middle">
 					{cards.map((item) => {
 						const key = item.id
@@ -132,7 +132,7 @@ function PropmtSection({
 						)
 					})}
 				</Row>
-			</MagicSpin>
+			</DelightfulSpin>
 		</Card>
 	)
 }

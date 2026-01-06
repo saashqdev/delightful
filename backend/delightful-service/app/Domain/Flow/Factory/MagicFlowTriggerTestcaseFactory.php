@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Factory;
 
-use App\Domain\Flow\Entity\MagicFlowTriggerTestcaseEntity;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowTriggerTestcaseModel;
+use App\Domain\Flow\Entity\DelightfulFlowTriggerTestcaseEntity;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowTriggerTestcaseModel;
 
-class MagicFlowTriggerTestcaseFactory
+class DelightfulFlowTriggerTestcaseFactory
 {
-    public static function modelToEntity(MagicFlowTriggerTestcaseModel $model): MagicFlowTriggerTestcaseEntity
+    public static function modelToEntity(DelightfulFlowTriggerTestcaseModel $model): DelightfulFlowTriggerTestcaseEntity
     {
-        $entity = new MagicFlowTriggerTestcaseEntity();
+        $entity = new DelightfulFlowTriggerTestcaseEntity();
         $entity->setId($model->id);
         $entity->setFlowCode($model->flow_code);
         $entity->setCode($model->code);

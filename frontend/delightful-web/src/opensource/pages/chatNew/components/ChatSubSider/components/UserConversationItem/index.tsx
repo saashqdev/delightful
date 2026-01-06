@@ -1,10 +1,10 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconDots } from "@tabler/icons-react"
 import { getUserName } from "@/utils/modules/chat"
 import { Flex } from "antd"
 import { formatRelativeTime } from "@/utils/string"
-import MagicMemberAvatar from "@/opensource/components/business/MagicMemberAvatar"
+import DelightfulMemberAvatar from "@/opensource/components/business/DelightfulMemberAvatar"
 import useUserInfo from "@/opensource/hooks/chat/useUserInfo"
 import { useBoolean } from "ahooks"
 import { cx } from "antd-style"
@@ -40,7 +40,7 @@ const UserConversationItem = observer(({ conversationId, onClick }: UserConversa
 	const language = useGlobalLanguage(false)
 
 	const Avatar = useMemo(() => {
-		return <MagicMemberAvatar uid={userInfo?.user_id} showAvatar showPopover={false} />
+		return <DelightfulMemberAvatar uid={userInfo?.user_id} showAvatar showPopover={false} />
 	}, [userInfo])
 
 	return (
@@ -79,11 +79,11 @@ const UserConversationItem = observer(({ conversationId, onClick }: UserConversa
 				</Flex>
 				{/* 更多 */}
 				<div className={styles.extra} onClick={(e) => e.stopPropagation()}>
-					<MagicButton
+					<DelightfulButton
 						type="text"
 						className={styles.moreButton}
 						onClick={toggle}
-						icon={<MagicIcon color="currentColor" component={IconDots} size={18} />}
+						icon={<DelightfulIcon color="currentColor" component={IconDots} size={18} />}
 					/>
 				</div>
 			</Flex>

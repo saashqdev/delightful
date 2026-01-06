@@ -7,9 +7,9 @@ import type { DrawerProps } from "antd"
 
 // UI 组件库
 import { Checkbox, Drawer, Flex } from "antd"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import AutoTooltipText from "@/opensource/components/other/AutoTooltipText"
 
 // 图标
@@ -81,7 +81,7 @@ const RemoveGroupMember = observer(
 				onClose={onClose}
 				title={
 					<Flex align="center" gap={4}>
-						<MagicIcon component={IconChevronLeft} size={24} onClick={onClose} />
+						<DelightfulIcon component={IconChevronLeft} size={24} onClick={onClose} />
 						{t("chat.groupSetting.removeMember")}
 					</Flex>
 				}
@@ -110,9 +110,9 @@ const RemoveGroupMember = observer(
 									checked={selectedMembers.includes(user.user_id)}
 									onChange={() => onSelectMember(user.user_id)}
 								/>
-								<MagicAvatar size={28} src={userInfo?.avatar_url}>
+								<DelightfulAvatar size={28} src={userInfo?.avatar_url}>
 									{getUserName(userInfo)}
-								</MagicAvatar>
+								</DelightfulAvatar>
 								<Flex vertical flex={1}>
 									<AutoTooltipText>{getUserName(userInfo)}</AutoTooltipText>
 									<AutoTooltipText className={styles.jobTitle}>
@@ -120,21 +120,21 @@ const RemoveGroupMember = observer(
 									</AutoTooltipText>
 								</Flex>
 								{userInfo?.user_id !== groupInfo?.group_owner && (
-									<MagicButton
+									<DelightfulButton
 										type="default"
 										danger
 										className={styles.removeButton}
 										onClick={() => onRemoveMembers([user.user_id])}
 									>
 										{t("chat.groupSetting.remove")}
-									</MagicButton>
+									</DelightfulButton>
 								)}
 							</Flex>
 						)
 					})}
 				</Flex>
 				{selectedMembers.length > 0 && (
-					<MagicButton
+					<DelightfulButton
 						className={styles.removeCheckedButton}
 						size="large"
 						block
@@ -142,7 +142,7 @@ const RemoveGroupMember = observer(
 						onClick={() => onRemoveMembers(selectedMembers)}
 					>
 						{t("chat.groupSetting.remove")} ({selectedMembers.length})
-					</MagicButton>
+					</DelightfulButton>
 				)}
 			</Drawer>
 		)

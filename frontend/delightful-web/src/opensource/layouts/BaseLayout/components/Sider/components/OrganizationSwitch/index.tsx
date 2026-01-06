@@ -1,5 +1,5 @@
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
-import { useCurrentMagicOrganization } from "@/opensource/models/user/hooks"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
+import { useCurrentDelightfulOrganization } from "@/opensource/models/user/hooks"
 import ComponentRender from "@/opensource/components/ComponentRender"
 import { Popover } from "antd"
 import type { ReactNode } from "react"
@@ -19,18 +19,18 @@ const OrganizationSwitch = memo(function OrganizationSwitch({
 }: OrganizationSwitchProps) {
 	const { styles, cx } = useStyles()
 
-	const currentAccount = useCurrentMagicOrganization()
+	const currentAccount = useCurrentDelightfulOrganization()
 
 	const [open, setOpen] = useState(false)
 
 	const ChildrenContent = children ?? (
-		<MagicAvatar
+		<DelightfulAvatar
 			src={currentAccount?.organization_logo}
 			size={30}
 			className={cx(className, styles.avatar)}
 		>
 			{currentAccount?.organization_name}
-		</MagicAvatar>
+		</DelightfulAvatar>
 	)
 
 	if (!showPopover) {

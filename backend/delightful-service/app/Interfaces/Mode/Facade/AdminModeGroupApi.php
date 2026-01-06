@@ -12,7 +12,7 @@ use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\AbstractApi;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Auth\PermissionChecker;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Mode\DTO\Request\CreateModeGroupRequest;
 use App\Interfaces\Mode\DTO\Request\UpdateModeGroupRequest;
 use Delightful\ApiResponse\Annotation\ApiResponse;
@@ -94,7 +94,7 @@ class AdminModeGroupApi extends AbstractApi
         return $officialOrganization === $organizationCode;
     }
 
-    private function checkAuth(MagicUserAuthorization $authenticatable)
+    private function checkAuth(DelightfulUserAuthorization $authenticatable)
     {
         $isCurrentOrganizationOfficial = $this->isCurrentOrganizationOfficial();
         $isOrganizationAdmin = PermissionChecker::isOrganizationAdmin($authenticatable->getOrganizationCode(), $authenticatable->getMobile());

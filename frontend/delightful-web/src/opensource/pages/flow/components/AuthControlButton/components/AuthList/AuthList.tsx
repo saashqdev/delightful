@@ -1,10 +1,10 @@
 import { Flex, Button, Select } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
-import MagicLogo from "@/opensource/components/MagicLogo"
-import { LogoType } from "@/opensource/components/MagicLogo/LogoType"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
+import DelightfulLogo from "@/opensource/components/DelightfulLogo"
+import { LogoType } from "@/opensource/components/DelightfulLogo/LogoType"
 import { useMemoizedFn } from "ahooks"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconSitemap } from "@tabler/icons-react"
 import { useStyles as useDepartmentStyles } from "@/opensource/components/business/OrganizationPanel/components/Department"
 import { resolveToString } from "@dtyq/es6-template-strings"
@@ -48,13 +48,13 @@ export default function AuthList({ onOk, onCancel }: AuthListProps) {
 			return auth.target_info?.icon
 		}
 		return (
-			<MagicAvatar
-				src={<MagicIcon color="currentColor" size={20} component={IconSitemap} />}
+			<DelightfulAvatar
+				src={<DelightfulIcon color="currentColor" size={20} component={IconSitemap} />}
 				size={32}
 				className={departmentStyles.departmentIcon}
 			>
 				{auth.target_info?.name}
-			</MagicAvatar>
+			</DelightfulAvatar>
 		)
 	})
 
@@ -97,14 +97,14 @@ export default function AuthList({ onOk, onCancel }: AuthListProps) {
 					return (
 						<Flex className={styles.member} gap={8} align="center">
 							<Flex className="left" gap={9.6} align="center">
-								<MagicAvatar
+								<DelightfulAvatar
 									src={getAvatar(auth)}
 									alt=""
 									size={29}
 									className="avatar"
 								>
-									<MagicLogo type={LogoType.ICON} />
-								</MagicAvatar>
+									<DelightfulLogo type={LogoType.ICON} />
+								</DelightfulAvatar>
 								<Flex className="memberInfo" vertical>
 									<span className="name">{auth.target_info?.name}</span>
 									<span className="desc">{auth.target_info?.department}</span>
@@ -142,12 +142,12 @@ export default function AuthList({ onOk, onCancel }: AuthListProps) {
 			</div>
 			<Flex className={styles.footer} justify="flex-end">
 				<Flex gap={10}>
-					<MagicButton type="default" onClick={onCancel}>
+					<DelightfulButton type="default" onClick={onCancel}>
 						{t("common.cancel", { ns: "flow" })}
-					</MagicButton>
-					<MagicButton type="primary" onClick={onOk}>
+					</DelightfulButton>
+					<DelightfulButton type="primary" onClick={onOk}>
 						{t("common.save", { ns: "flow" })}
-					</MagicButton>
+					</DelightfulButton>
 				</Flex>
 			</Flex>
 		</Flex>

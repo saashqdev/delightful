@@ -51,7 +51,7 @@ class PreprocessService {
 		return {
 			regex: INLINE_MATH_REGEX,
 			replace: (_, formulaContent) =>
-				`<MagicLatexInline math="${this.encodeForAttribute(formulaContent)}" />`,
+				`<DelightfulLatexInline math="${this.encodeForAttribute(formulaContent)}" />`,
 		}
 	}
 
@@ -63,7 +63,7 @@ class PreprocessService {
 		return {
 			regex: BLOCK_MATH_REGEX,
 			replace: (_, formulaContent) =>
-				`<MagicLatexBlock math="${this.encodeForAttribute(formulaContent.trim())}" />`,
+				`<DelightfulLatexBlock math="${this.encodeForAttribute(formulaContent.trim())}" />`,
 		}
 	}
 
@@ -317,15 +317,15 @@ class PreprocessService {
 	/**
 	 * 修复段落开头的HTML标签问题
 	 * 当行开头（或换行后紧跟）出现内联HTML标签时，添加零宽度空格确保段落完整性
-	 * 注意：不处理块级元素如 MagicLatexBlock, div, hr 等
+	 * 注意：不处理块级元素如 DelightfulLatexBlock, div, hr 等
 	 * @param markdown
 	 * @returns
 	 */
 	private fixParagraphInlineHtmlTags(markdown: string): string {
 		// 覆盖常见的内联HTML标签：abbr, sup, span, a, kbd, cite, q, s, u, mark, small, strong, em, sub
-		// 以及Magic开头的内联组件标签（但排除块级组件）
+		// 以及Delightful开头的内联组件标签（但排除块级组件）
 		return markdown.replace(
-			/(\n|^)(\s*)(<(?:abbr|sup|span|a|kbd|cite|q|s|u|mark|small|strong|em|sub|MagicLatexInline|MagicCitation)\b[^>]*>)/g,
+			/(\n|^)(\s*)(<(?:abbr|sup|span|a|kbd|cite|q|s|u|mark|small|strong|em|sub|DelightfulLatexInline|DelightfulCitation)\b[^>]*>)/g,
 			"$1$2\u200B$3",
 		)
 	}

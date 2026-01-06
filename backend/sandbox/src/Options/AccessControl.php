@@ -499,7 +499,7 @@ class AccessControl
      *
      * @return int Returns the number of whitelisted magic constants this instance has defined
      */
-    public function hasWhitelistedMagicConsts(): int
+    public function hasWhitelistedDelightfulConsts(): int
     {
         return count($this->whitelist[KeywordConstants::Delightful_CONSTANTS]);
     }
@@ -508,7 +508,7 @@ class AccessControl
      *
      * @return int Returns the number of blacklisted magic constants this instance has defined
      */
-    public function hasBlacklistedMagicConsts(): int
+    public function hasBlacklistedDelightfulConsts(): int
     {
         return count($this->blacklist[KeywordConstants::Delightful_CONSTANTS]);
     }
@@ -519,9 +519,9 @@ class AccessControl
      *
      * @return bool Returns true if PHPSandbox instance has whitelisted magic constant $name, false otherwise
      */
-    public function isWhitelistedMagicConst(string $name): bool
+    public function isWhitelistedDelightfulConst(string $name): bool
     {
-        $name = $this->normalizeMagicConst($name);
+        $name = $this->normalizeDelightfulConst($name);
         return isset($this->whitelist[KeywordConstants::Delightful_CONSTANTS][$name]);
     }
 
@@ -531,9 +531,9 @@ class AccessControl
      *
      * @return bool Returns true if PHPSandbox instance has blacklisted magic constant $name, false otherwise
      */
-    public function isBlacklistedMagicConst(string $name): bool
+    public function isBlacklistedDelightfulConst(string $name): bool
     {
-        $name = $this->normalizeMagicConst($name);
+        $name = $this->normalizeDelightfulConst($name);
         return isset($this->blacklist[KeywordConstants::Delightful_CONSTANTS][$name]);
     }
 
@@ -1461,12 +1461,12 @@ class AccessControl
      *
      * @return AccessControl Returns the PHPSandbox instance for fluent querying
      */
-    public function whitelistMagicConst($name): self
+    public function whitelistDelightfulConst($name): self
     {
         if (func_num_args() > 1) {
-            return $this->whitelistMagicConst(func_get_args());
+            return $this->whitelistDelightfulConst(func_get_args());
         }
-        $name = $this->normalizeMagicConst($name);
+        $name = $this->normalizeDelightfulConst($name);
         return $this->whitelist(KeywordConstants::Delightful_CONSTANTS, $name);
     }
 
@@ -1478,12 +1478,12 @@ class AccessControl
      *
      * @return AccessControl Returns the PHPSandbox instance for fluent querying
      */
-    public function blacklistMagicConst($name): self
+    public function blacklistDelightfulConst($name): self
     {
         if (func_num_args() > 1) {
-            return $this->blacklistMagicConst(func_get_args());
+            return $this->blacklistDelightfulConst(func_get_args());
         }
-        $name = $this->normalizeMagicConst($name);
+        $name = $this->normalizeDelightfulConst($name);
         return $this->blacklist(KeywordConstants::Delightful_CONSTANTS, $name);
     }
 
@@ -1495,12 +1495,12 @@ class AccessControl
      *
      * @return AccessControl Returns the PHPSandbox instance for fluent querying
      */
-    public function dewhitelistMagicConst($name): self
+    public function dewhitelistDelightfulConst($name): self
     {
         if (func_num_args() > 1) {
-            return $this->dewhitelistMagicConst(func_get_args());
+            return $this->dewhitelistDelightfulConst(func_get_args());
         }
-        $name = $this->normalizeMagicConst($name);
+        $name = $this->normalizeDelightfulConst($name);
         return $this->dewhitelist(KeywordConstants::Delightful_CONSTANTS, $name);
     }
 
@@ -1512,12 +1512,12 @@ class AccessControl
      *
      * @return AccessControl Returns the PHPSandbox instance for fluent querying
      */
-    public function deblacklistMagicConst($name): self
+    public function deblacklistDelightfulConst($name): self
     {
         if (func_num_args() > 1) {
-            return $this->deblacklistMagicConst(func_get_args());
+            return $this->deblacklistDelightfulConst(func_get_args());
         }
-        $name = $this->normalizeMagicConst($name);
+        $name = $this->normalizeDelightfulConst($name);
         return $this->deblacklist(KeywordConstants::Delightful_CONSTANTS, $name);
     }
 

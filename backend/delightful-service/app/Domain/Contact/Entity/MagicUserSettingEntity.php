@@ -9,7 +9,7 @@ namespace App\Domain\Contact\Entity;
 
 use DateTime;
 
-class MagicUserSettingEntity extends AbstractEntity
+class DelightfulUserSettingEntity extends AbstractEntity
 {
     private ?int $id = null;
 
@@ -41,12 +41,12 @@ class MagicUserSettingEntity extends AbstractEntity
         $this->id = $id;
     }
 
-    public function getMagicId(): ?string
+    public function getDelightfulId(): ?string
     {
         return $this->magicId;
     }
 
-    public function setMagicId(?string $magicId): void
+    public function setDelightfulId(?string $magicId): void
     {
         $this->magicId = $magicId;
     }
@@ -143,10 +143,10 @@ class MagicUserSettingEntity extends AbstractEntity
         $this->modifier = $this->creator;
     }
 
-    public function prepareForModification(MagicUserSettingEntity $existingEntity): void
+    public function prepareForModification(DelightfulUserSettingEntity $existingEntity): void
     {
         $this->id = $existingEntity->getId();
-        $this->magicId = $existingEntity->getMagicId();
+        $this->magicId = $existingEntity->getDelightfulId();
         $this->organizationCode = $existingEntity->getOrganizationCode();
         $this->createdAt = $existingEntity->getCreatedAt();
         $this->creator = $existingEntity->getCreator();

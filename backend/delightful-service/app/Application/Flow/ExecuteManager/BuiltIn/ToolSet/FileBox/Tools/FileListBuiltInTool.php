@@ -14,9 +14,9 @@ use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionType;
 use App\Application\Flow\ExecuteManager\Memory\MemoryQuery;
 use App\Application\Flow\ExecuteManager\Memory\Persistence\ChatMemory;
 use App\Domain\Chat\DTO\Message\ChatMessage\AbstractAttachmentMessage;
-use App\Domain\Chat\Entity\MagicChatFileEntity;
+use App\Domain\Chat\Entity\DelightfulChatFileEntity;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
-use App\Domain\Chat\Service\MagicChatFileDomainService;
+use App\Domain\Chat\Service\DelightfulChatFileDomainService;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Domain\Flow\Entity\ValueObject\NodeOutput;
@@ -268,7 +268,7 @@ JSON,
     }
 
     /**
-     * @return array<MagicChatFileEntity>
+     * @return array<DelightfulChatFileEntity>
      */
     private function getChatFilesByConversationIdAndTopicId(
         string $conversationId,
@@ -306,7 +306,7 @@ JSON,
         }
 
         // 排序+数量
-        $magicChatFileDomainService = di(MagicChatFileDomainService::class);
+        $magicChatFileDomainService = di(DelightfulChatFileDomainService::class);
         return $magicChatFileDomainService->getFileEntitiesByFileIds($attachmentIds, $order, $limit);
     }
 }

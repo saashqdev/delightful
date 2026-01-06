@@ -8,14 +8,14 @@ declare(strict_types=1);
 namespace App\Application\Flow\Service;
 
 use App\Application\ModelGateway\Mapper\ModelGatewayMapper;
-use App\Domain\Flow\Entity\MagicFlowAIModelEntity;
+use App\Domain\Flow\Entity\DelightfulFlowAIModelEntity;
 use Hyperf\Odin\Model\AbstractModel;
 use Qbhy\HyperfAuth\Authenticatable;
 
-class MagicFlowAIModelAppService extends AbstractFlowAppService
+class DelightfulFlowAIModelAppService extends AbstractFlowAppService
 {
     /**
-     * @return array{total: int, list: array<MagicFlowAIModelEntity>}
+     * @return array{total: int, list: array<DelightfulFlowAIModelEntity>}
      */
     public function getEnabled(Authenticatable $authorization): array
     {
@@ -31,7 +31,7 @@ class MagicFlowAIModelAppService extends AbstractFlowAppService
                 continue;
             }
 
-            $modelEntity = new MagicFlowAIModelEntity();
+            $modelEntity = new DelightfulFlowAIModelEntity();
             $modelEntity->setName($odinModel->getAttributes()->getName());
             $modelEntity->setModelName($model->getModelName());
             $modelEntity->setLabel($odinModel->getAttributes()->getLabel() ?: $odinModel->getAttributes()->getName());

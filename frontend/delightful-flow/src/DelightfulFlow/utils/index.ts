@@ -1,13 +1,13 @@
 import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference"
 import { BaseNodeType, nodeManager, NodeSchema, NodeVersion, NodeVersionWidget, NodeWidget } from "../register/node"
-import { FormItemType } from "@/MagicExpressionWidget/types"
-import Schema from "@/MagicJsonSchemaEditor/types/Schema"
+import { FormItemType } from "@/DelightfulExpressionWidget/types"
+import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import _ from "lodash"
 import { Edge, XYPosition } from "reactflow"
-import { MagicFlow } from "../types/flow"
+import { DelightfulFlow } from "../types/flow"
 import { generateSnowFlake } from "@/common/utils/snowflake"
 import { pasteTranslateSize } from "../nodes/common/toolbar/useToolbar"
-import { SchemaValueSplitor } from "@/MagicJsonSchemaEditor/constants"
+import { SchemaValueSplitor } from "@/DelightfulJsonSchemaEditor/constants"
 import { InnerHandleType, NodeModelType } from "../nodes"
 import { defaultEdgeConfig } from "../edges"
 import { DefaultNodeVersion, GROUP_MIN_DISTANCE, GROUP_TOP_GAP, NodeType } from "../constants"
@@ -20,9 +20,9 @@ export const useQuery = () => {
 }
 
 /** Handle render props for the base node model
- * MagicFlow.Node -> reactflow node
+ * DelightfulFlow.Node -> reactflow node
  */
-export const handleRenderProps = (n: MagicFlow.Node, index: number, paramsName: MagicFlow.ParamsName) => {
+export const handleRenderProps = (n: DelightfulFlow.Node, index: number, paramsName: DelightfulFlow.ParamsName) => {
 	const nodeSchemaListMap = nodeManager.nodesMap
 	const nodeType = n[paramsName.nodeType] as NodeType
 
@@ -231,7 +231,7 @@ export const judgeLoopNode = (nodeType: string | number) => {
  * @params nodeId generated node id
  * @params extraConfig additional node configuration
  */
-export const generateNewNode = (nodeSchema: NodeSchema, paramsName: MagicFlow.ParamsName, nodeId: string, position: XYPosition, extraConfig?: Record<string, any>) => {
+export const generateNewNode = (nodeSchema: NodeSchema, paramsName: DelightfulFlow.ParamsName, nodeId: string, position: XYPosition, extraConfig?: Record<string, any>) => {
 	const defaultParams = _.get(nodeSchema, [paramsName.params], null)
 
 	console.time("clone_node")
@@ -255,7 +255,7 @@ export const generateNewNode = (nodeSchema: NodeSchema, paramsName: MagicFlow.Pa
 		...(extraConfig || {})
 	}
 	console.timeEnd("clone_node")
-	return newNode as MagicFlow.Node
+	return newNode as DelightfulFlow.Node
 }
 
 // Get the latest schema version for this node type, with a fallback
@@ -266,7 +266,7 @@ export const getLatestNodeVersion = (nodeType: BaseNodeType) => {
 }
 
 // Get the node version, defaulting to v0
-export const getNodeVersion = (node: MagicFlow.Node) => {
+export const getNodeVersion = (node: DelightfulFlow.Node) => {
     return node?.node_version ? node.node_version : DefaultNodeVersion
 }
 
@@ -279,7 +279,7 @@ export const isRegisteredStartNode = () => {
 }
 
 /** Generate a start node */
-export const generateStartNode = (paramsName: MagicFlow.ParamsName) => {
+export const generateStartNode = (paramsName: DelightfulFlow.ParamsName) => {
 	const startNodeSchema = getNodeSchema(nodeManager.startNodeType)
 	
 	const startNodeId = generateSnowFlake()
@@ -299,7 +299,7 @@ export const generateStartNode = (paramsName: MagicFlow.ParamsName) => {
 
 
 /** Create a duplicated node from an existing one */
-export const generatePasteNode = (node: MagicFlow.Node, paramsName: MagicFlow.ParamsName) => {
+export const generatePasteNode = (node: DelightfulFlow.Node, paramsName: DelightfulFlow.ParamsName) => {
 	const newId = generateSnowFlake()
 	
 	const pasteNode = {
@@ -309,7 +309,7 @@ export const generatePasteNode = (node: MagicFlow.Node, paramsName: MagicFlow.Pa
 		node_id: newId,
 		[paramsName?.nextNodes!]: node?.[paramsName?.nextNodes!] || [],
 		position: { x: node.position!.x + pasteTranslateSize, y: node.position!.y + pasteTranslateSize }
-	} as MagicFlow.Node
+	} as DelightfulFlow.Node
 
     
 	return {
@@ -349,7 +349,7 @@ export const generatePasteEdges = (oldId2NewIdMap: Record<string,string>, oldRel
  * @param addPosition where the loop is inserted (canvas/edge/node)
  * @returns new nodes and edges for the loop body
  */
-export const generateLoopBody = (loopNode: MagicFlow.Node, paramsName:MagicFlow.ParamsName, edges: Edge[]) => {
+export const generateLoopBody = (loopNode: DelightfulFlow.Node, paramsName:DelightfulFlow.ParamsName, edges: Edge[]) => {
 	const id = generateSnowFlake()
 	const loopNodeSchema = getNodeSchema(loopNode[paramsName.nodeType])
 	const loopNodeWidth = parseInt(loopNodeSchema?.style?.width as string, 10)
@@ -357,10 +357,10 @@ export const generateLoopBody = (loopNode: MagicFlow.Node, paramsName:MagicFlow.
 	const loopStartWidth = parseInt(loopStartSchema?.style?.width as string, 10)
 	const loopStartConfig = nodeManager.loopStartConfig
 
-	const newNodes = [] as MagicFlow.Node[]
+	const newNodes = [] as DelightfulFlow.Node[]
 	const newEdges = [] as Edge[]
 	// Default nodes within the loop body
-	const defaultLoopBodyNodes = [] as MagicFlow.Node[]
+	const defaultLoopBodyNodes = [] as DelightfulFlow.Node[]
 
 	const nodePosition = {
 		x: (loopNode?.position?.x || 0) + loopNodeWidth + Ranksep,
@@ -448,7 +448,7 @@ export const generateLoopBody = (loopNode: MagicFlow.Node, paramsName:MagicFlow.
 	}
 }
 
-// export const sortNodes = (a: MagicFlow.Node, b: MagicFlow.Node): number => {
+// export const sortNodes = (a: DelightfulFlow.Node, b: DelightfulFlow.Node): number => {
 // 	if (a.parentId && b.parentId) {
 // 		return 0;
 // 	}
@@ -477,13 +477,13 @@ export const getRegisterNodeTypes = () => {
 
 
 /** Derive extra edge config from the source node */
-export const getExtraEdgeConfigBySourceNode = (sourceNode: MagicFlow.Node) => {
+export const getExtraEdgeConfigBySourceNode = (sourceNode: DelightfulFlow.Node) => {
 	return sourceNode?.parentId ? {zIndex: 1001} : {}
 }
 
 
 /** Apply loop body meta to nodes when rehydrating */
-export const addLoopProperties = (node: MagicFlow.Node, paramsName: MagicFlow.ParamsName) => {
+export const addLoopProperties = (node: DelightfulFlow.Node, paramsName: DelightfulFlow.ParamsName) => {
 	// Node is inside a loop body but not the loop body itself
 	const isLoopBody = judgeIsLoopBody(node[paramsName.nodeType])
 	if(!isLoopBody && node?.meta?.parent_id) {
@@ -496,7 +496,7 @@ export const addLoopProperties = (node: MagicFlow.Node, paramsName: MagicFlow.Pa
 }
 
 
-export const searchLoopRelationNodesAndEdges = (loopNode: MagicFlow.Node, nodes: MagicFlow.Node[], edges: Edge[]) => {
+export const searchLoopRelationNodesAndEdges = (loopNode: DelightfulFlow.Node, nodes: DelightfulFlow.Node[], edges: Edge[]) => {
 
 	// Loop body node id
 	const loopBodyNodeId = nodes.find(_n => _n?.meta?.parent_id === loopNode.id)?.id
@@ -543,11 +543,11 @@ export function hexToRgba(hex: string, alpha = 1) {
 }
 
 // Check whether this is a loop start node
-export const checkIsLoopStart = (node: MagicFlow.Node,paramsName: MagicFlow.ParamsName) => {
+export const checkIsLoopStart = (node: DelightfulFlow.Node,paramsName: DelightfulFlow.ParamsName) => {
 	return nodeManager.loopStartType == node?.[paramsName.nodeType] && node?.meta?.parent_id
 }
 
 /** Check whether a node is inside a loop body */
-export const checkIsInGroup = (node: MagicFlow.Node) => {
+export const checkIsInGroup = (node: DelightfulFlow.Node) => {
 	return node?.meta?.parent_id
 }

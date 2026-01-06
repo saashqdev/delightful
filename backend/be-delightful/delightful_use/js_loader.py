@@ -80,7 +80,7 @@ class JSLoader:
             # Check if module already loaded unless forcing reload
             if not force_reload:
                 check_exists_script = f"""() => {{
-                    return window.MagicUse && window.MagicUse['{module_name}'];
+                    return window.DelightfulUse && window.DelightfulUse['{module_name}'];
                 }}"""
 
                 module_exists = await self.page.evaluate(check_exists_script)
@@ -121,15 +121,15 @@ class JSLoader:
             load_script = f"""
             () => {{
                 try {{
-                    window.SuperMagic = window.SuperMagic || {{
+                    window.SuperDelightful = window.SuperDelightful || {{
                         'version': '0.0.1',
                     }};
-                    window.MagicUse = window.MagicUse || {{}};
+                    window.DelightfulUse = window.DelightfulUse || {{}};
                     // Execute module code
                     (function() {{
                         {js_code}
                     }})();
-                    window.MagicUse['{module_name}'] = true;
+                    window.DelightfulUse['{module_name}'] = true;
                     return true;
                 }} catch (error) {{
                     console.error('Error executing module code:', error);

@@ -10,12 +10,12 @@ namespace App\Interfaces\Authorization\Web;
 use App\Application\LongTermMemory\Enum\AppCodeEnum;
 use App\Domain\Authentication\DTO\LoginCheckDTO;
 use App\Domain\Authentication\DTO\LoginResponseDTO;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\PlatformType;
 use App\Domain\Contact\Entity\ValueObject\UserType;
-use App\Domain\Contact\Service\MagicAccountDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
-use App\Domain\OrganizationEnvironment\Service\MagicOrganizationEnvDomainService;
+use App\Domain\Contact\Service\DelightfulAccountDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
+use App\Domain\OrganizationEnvironment\Service\DelightfulOrganizationEnvDomainService;
 use App\ErrorCode\ChatErrorCode;
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Contract\Session\SessionInterface;
@@ -25,7 +25,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 /**
  * 如果改了这个类的名称/属性/命名空间，请修改 WebUserGuard.php 的 cacheKey ，避免缓存无法还原
  */
-class MagicUserAuthorization extends AbstractAuthorization
+class DelightfulUserAuthorization extends AbstractAuthorization
 {
     /**
      * 账号在某个组织下的id,即user_id.
@@ -92,19 +92,19 @@ class MagicUserAuthorization extends AbstractAuthorization
         if (empty($authorization) || empty($organizationCode)) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
-        $userDomainService = di(MagicUserDomainService::class);
-        $accountDomainService = di(MagicAccountDomainService::class);
-        $magicEnvDomainService = di(MagicOrganizationEnvDomainService::class);
+        $userDomainService = di(DelightfulUserDomainService::class);
+        $accountDomainService = di(DelightfulAccountDomainService::class);
+        $magicEnvDomainService = di(DelightfulOrganizationEnvDomainService::class);
         $sessionInterface = di(SessionInterface::class);
 
-        $superMagicAgentUserId = $key['superMagicAgentUserId'] ?? '';
-        if ($superMagicAgentUserId) {
+        $superDelightfulAgentUserId = $key['superDelightfulAgentUserId'] ?? '';
+        if ($superDelightfulAgentUserId) {
             // 处理超级麦吉的 agent 用户
             $sandboxToken = config('super-magic.sandbox.token', '');
             if (empty($sandboxToken) || $sandboxToken !== $authorization) {
                 ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND, 'token error');
             }
-            $magicUserId = $superMagicAgentUserId;
+            $magicUserId = $superDelightfulAgentUserId;
             $magicEnvEntity = null;
             $loginResponseDTO = null;
             // 直接登录
@@ -114,7 +114,7 @@ class MagicUserAuthorization extends AbstractAuthorization
         // 多环境下 $authorization 可能重复，会有问题（概率趋近无穷小）
         $magicEnvEntity = $magicEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
         if ($magicEnvEntity === null) {
-            $magicEnvEntity = $magicEnvDomainService->getCurrentDefaultMagicEnv();
+            $magicEnvEntity = $magicEnvDomainService->getCurrentDefaultDelightfulEnv();
             if ($magicEnvEntity === null) {
                 // token没有绑定环境，且没有默认环境配置
                 ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
@@ -123,14 +123,14 @@ class MagicUserAuthorization extends AbstractAuthorization
         // 如果是麦吉自己下发的 Token,就由自己校验
         $loginCheckDTO = new LoginCheckDTO();
         $loginCheckDTO->setAuthorization($authorization);
-        /** @var LoginResponseDTO[] $currentEnvMagicOrganizationUsers */
-        $currentEnvMagicOrganizationUsers = $sessionInterface->loginCheck($loginCheckDTO, $magicEnvEntity, $organizationCode);
-        $currentEnvMagicOrganizationUsers = array_column($currentEnvMagicOrganizationUsers, null, 'magic_organization_code');
-        $loginResponseDTO = $currentEnvMagicOrganizationUsers[$organizationCode] ?? null;
+        /** @var LoginResponseDTO[] $currentEnvDelightfulOrganizationUsers */
+        $currentEnvDelightfulOrganizationUsers = $sessionInterface->loginCheck($loginCheckDTO, $magicEnvEntity, $organizationCode);
+        $currentEnvDelightfulOrganizationUsers = array_column($currentEnvDelightfulOrganizationUsers, null, 'magic_organization_code');
+        $loginResponseDTO = $currentEnvDelightfulOrganizationUsers[$organizationCode] ?? null;
         if ($loginResponseDTO === null) {
             ExceptionBuilder::throw(ChatErrorCode::LOGIN_FAILED);
         }
-        $magicUserId = $loginResponseDTO->getMagicUserId();
+        $magicUserId = $loginResponseDTO->getDelightfulUserId();
         if (empty($magicUserId)) {
             ExceptionBuilder::throw(ChatErrorCode::LOGIN_FAILED);
         }
@@ -140,7 +140,7 @@ class MagicUserAuthorization extends AbstractAuthorization
         if ($userEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::LOGIN_FAILED);
         }
-        $magicAccountEntity = $accountDomainService->getAccountInfoByMagicId($userEntity->getMagicId());
+        $magicAccountEntity = $accountDomainService->getAccountInfoByDelightfulId($userEntity->getDelightfulId());
         if ($magicAccountEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::LOGIN_FAILED);
         }
@@ -150,8 +150,8 @@ class MagicUserAuthorization extends AbstractAuthorization
         $magicUserInfo->setAvatar($userEntity->getAvatarUrl());
         $magicUserInfo->setStatus((string) $userEntity->getStatus()->value);
         $magicUserInfo->setOrganizationCode($userEntity->getOrganizationCode());
-        $magicUserInfo->setMagicId($userEntity->getMagicId());
-        $magicUserInfo->setMagicEnvId($magicEnvEntity?->getId() ?? 0);
+        $magicUserInfo->setDelightfulId($userEntity->getDelightfulId());
+        $magicUserInfo->setDelightfulEnvId($magicEnvEntity?->getId() ?? 0);
         $magicUserInfo->setMobile($magicAccountEntity->getPhone());
         $magicUserInfo->setCountryCode($magicAccountEntity->getCountryCode());
         $magicUserInfo->setRealName($magicAccountEntity->getRealName());
@@ -207,7 +207,7 @@ class MagicUserAuthorization extends AbstractAuthorization
         return $this->avatar;
     }
 
-    public function setAvatar(string $avatar): MagicUserAuthorization
+    public function setAvatar(string $avatar): DelightfulUserAuthorization
     {
         $this->avatar = $avatar;
         return $this;
@@ -218,7 +218,7 @@ class MagicUserAuthorization extends AbstractAuthorization
         return $this->realName;
     }
 
-    public function setRealName(string $realName): MagicUserAuthorization
+    public function setRealName(string $realName): DelightfulUserAuthorization
     {
         $this->realName = $realName;
         return $this;
@@ -229,7 +229,7 @@ class MagicUserAuthorization extends AbstractAuthorization
         return $this->organizationCode;
     }
 
-    public function setOrganizationCode(string $organizationCode): MagicUserAuthorization
+    public function setOrganizationCode(string $organizationCode): DelightfulUserAuthorization
     {
         $this->organizationCode = $organizationCode;
         return $this;
@@ -240,7 +240,7 @@ class MagicUserAuthorization extends AbstractAuthorization
         return $this->applicationCode ?: AppCodeEnum::SUPER_DELIGHTFUL->value;
     }
 
-    public function setApplicationCode(string $applicationCode): MagicUserAuthorization
+    public function setApplicationCode(string $applicationCode): DelightfulUserAuthorization
     {
         $this->applicationCode = $applicationCode;
         return $this;
@@ -261,7 +261,7 @@ class MagicUserAuthorization extends AbstractAuthorization
         return $this->id;
     }
 
-    public function setId(string $id): MagicUserAuthorization
+    public function setId(string $id): DelightfulUserAuthorization
     {
         $this->id = $id;
         return $this;
@@ -272,28 +272,28 @@ class MagicUserAuthorization extends AbstractAuthorization
         return $this->nickname;
     }
 
-    public function setNickname(string $nickname): MagicUserAuthorization
+    public function setNickname(string $nickname): DelightfulUserAuthorization
     {
         $this->nickname = $nickname;
         return $this;
     }
 
-    public function getMagicId(): string
+    public function getDelightfulId(): string
     {
         return $this->magicId;
     }
 
-    public function setMagicId(string $magicId): void
+    public function setDelightfulId(string $magicId): void
     {
         $this->magicId = $magicId;
     }
 
-    public function getMagicEnvId(): int
+    public function getDelightfulEnvId(): int
     {
         return $this->magicEnvId;
     }
 
-    public function setMagicEnvId(int $magicEnvId): void
+    public function setDelightfulEnvId(int $magicEnvId): void
     {
         $this->magicEnvId = $magicEnvId;
     }
@@ -333,11 +333,11 @@ class MagicUserAuthorization extends AbstractAuthorization
         return $this;
     }
 
-    public static function fromUserEntity(MagicUserEntity $userEntity): MagicUserAuthorization
+    public static function fromUserEntity(DelightfulUserEntity $userEntity): DelightfulUserAuthorization
     {
-        $authorization = new MagicUserAuthorization();
+        $authorization = new DelightfulUserAuthorization();
         $authorization->setId($userEntity->getUserId());
-        $authorization->setMagicId($userEntity->getMagicId());
+        $authorization->setDelightfulId($userEntity->getDelightfulId());
         $authorization->setOrganizationCode($userEntity->getOrganizationCode());
         $authorization->setUserType($userEntity->getUserType());
         return $authorization;

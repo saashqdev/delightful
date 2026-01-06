@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\Contact\UserSetting;
 
 use App\Application\Permission\Service\OperationPermissionAppService;
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\MCP\Entity\ValueObject\MCPDataIsolation;
 use App\Domain\MCP\Entity\ValueObject\Query\MCPServerQuery;
@@ -18,7 +18,7 @@ use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 use App\Infrastructure\Core\ValueObject\Page;
 use DateTime;
 
-class SuperMagicMCPServerHandler extends AbstractUserSettingHandler
+class SuperDelightfulMCPServerHandler extends AbstractUserSettingHandler
 {
     public function __construct(
         protected OperationPermissionAppService $operationPermissionAppService,
@@ -27,7 +27,7 @@ class SuperMagicMCPServerHandler extends AbstractUserSettingHandler
     ) {
     }
 
-    public function populateValue(BaseDataIsolation $dataIsolation, MagicUserSettingEntity $setting): void
+    public function populateValue(BaseDataIsolation $dataIsolation, DelightfulUserSettingEntity $setting): void
     {
         $mcpDataIsolation = MCPDataIsolation::createByBaseDataIsolation($dataIsolation);
 
@@ -61,10 +61,10 @@ class SuperMagicMCPServerHandler extends AbstractUserSettingHandler
         $setting->setValue(['servers' => $servers]);
     }
 
-    public function generateDefault(): ?MagicUserSettingEntity
+    public function generateDefault(): ?DelightfulUserSettingEntity
     {
-        $setting = new MagicUserSettingEntity();
-        $setting->setKey(UserSettingKey::SuperMagicMCPServers->value);
+        $setting = new DelightfulUserSettingEntity();
+        $setting->setKey(UserSettingKey::SuperDelightfulMCPServers->value);
         $setting->setValue(['servers' => []]);
         $setting->setCreatedAt(new DateTime());
         $setting->setUpdatedAt(new DateTime());

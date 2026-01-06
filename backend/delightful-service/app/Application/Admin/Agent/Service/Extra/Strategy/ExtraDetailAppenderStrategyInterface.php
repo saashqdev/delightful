@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace App\Application\Admin\Agent\Service\Extra\Strategy;
 
 use App\Interfaces\Admin\DTO\Extra\SettingExtraDTOInterface;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 
 interface ExtraDetailAppenderStrategyInterface
 {
-    public function appendExtraDetail(SettingExtraDTOInterface $extraDTO, MagicUserAuthorization $userAuthorization): SettingExtraDTOInterface;
+    public function appendExtraDetail(SettingExtraDTOInterface $extraDTO, DelightfulUserAuthorization $userAuthorization): SettingExtraDTOInterface;
 }

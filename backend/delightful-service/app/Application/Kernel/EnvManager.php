@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Application\Kernel;
 
 use App\Application\ModelGateway\Mapper\ProviderManager;
-use App\Domain\Contact\Service\MagicUserDomainService;
-use App\Domain\OrganizationEnvironment\Service\MagicOrganizationEnvDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
+use App\Domain\OrganizationEnvironment\Service\DelightfulOrganizationEnvDomainService;
 use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 use App\Domain\Provider\Service\ModelFilter\PackageFilterInterface;
 use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
@@ -33,11 +33,11 @@ class EnvManager
             $envId = $baseDataIsolation->getEnvId();
         }
 
-        $magicOrganizationEnvDomainService = di(MagicOrganizationEnvDomainService::class);
+        $magicOrganizationEnvDomainService = di(DelightfulOrganizationEnvDomainService::class);
 
         if (! $envId) {
             $envDTO = $magicOrganizationEnvDomainService->getOrganizationsEnvironmentDTO($baseDataIsolation->getCurrentOrganizationCode());
-            $env = $envDTO?->getMagicEnvironmentEntity();
+            $env = $envDTO?->getDelightfulEnvironmentEntity();
             $envId = $envDTO?->getEnvironmentId() ?? 0;
             $relationEnvIds = $env?->getRelationEnvIds() ?? [];
             if (count($relationEnvIds) > 0 && ! $env?->getEnvironment()?->isProduction()) {
@@ -45,7 +45,7 @@ class EnvManager
                     if ($relationEnvId === $envId) {
                         continue;
                     }
-                    $relationEnv = $magicOrganizationEnvDomainService->getMagicEnvironmentById((int) $relationEnvId);
+                    $relationEnv = $magicOrganizationEnvDomainService->getDelightfulEnvironmentById((int) $relationEnvId);
                     if ($relationEnv?->getEnvironment()?->isProduction()) {
                         $env = $relationEnv;
                         break;
@@ -53,7 +53,7 @@ class EnvManager
                 }
             }
         } else {
-            $env = $magicOrganizationEnvDomainService->getMagicEnvironmentById($envId);
+            $env = $magicOrganizationEnvDomainService->getDelightfulEnvironmentById($envId);
         }
         if (! $env) {
             return;
@@ -75,11 +75,11 @@ class EnvManager
         Context::set('LastBaseDataIsolationInitEnv', $baseDataIsolation);
     }
 
-    public static function getMagicId(string $userId): ?string
+    public static function getDelightfulId(string $userId): ?string
     {
-        $magicUserDomainService = di(MagicUserDomainService::class);
+        $magicUserDomainService = di(DelightfulUserDomainService::class);
         $magicUser = $magicUserDomainService->getByUserId($userId);
-        return $magicUser?->getMagicId();
+        return $magicUser?->getDelightfulId();
     }
 
     private static function initSubscription(BaseDataIsolation $baseDataIsolation, bool $lazy = true): void
@@ -92,7 +92,7 @@ class EnvManager
             return;
         }
         $subscriptionManager = $baseDataIsolation->getSubscriptionManager();
-        $providerDataIsolation = ProviderDataIsolation::create($baseDataIsolation->getCurrentOrganizationCode(), $baseDataIsolation->getCurrentUserId(), $baseDataIsolation->getMagicId());
+        $providerDataIsolation = ProviderDataIsolation::create($baseDataIsolation->getCurrentOrganizationCode(), $baseDataIsolation->getCurrentUserId(), $baseDataIsolation->getDelightfulId());
         $providerDataIsolation->setContainOfficialOrganization(true);
         if (! $subscriptionManager->isEnabled()) {
             return;

@@ -18,8 +18,8 @@
     }
  */
 
-import { InputExpressionProps, InputExpressionValue } from "@/MagicExpressionWidget/types"
-import { MagicExpressionWidget } from "@/index"
+import { InputExpressionProps, InputExpressionValue } from "@/DelightfulExpressionWidget/types"
+import { DelightfulExpressionWidget } from "@/index"
 import { useMemoizedFn } from "ahooks"
 import React from "react"
 
@@ -31,12 +31,12 @@ export type WidgetExpressionValue = {
 }
 
 //@ts-ignore
-interface MagicExpressionWrapProps extends InputExpressionProps {
+interface DelightfulExpressionWrapProps extends InputExpressionProps {
 	value?: WidgetExpressionValue
 	onChange?: (value: WidgetExpressionValue) => void
 }
 
-function MagicExpressionWrap({ ...props }: MagicExpressionWrapProps) {
+function DelightfulExpressionWrap({ ...props }: DelightfulExpressionWrapProps) {
     // We only need to change the structure data; the outer wrapper is not required for now
 	const onChange = useMemoizedFn((value: InputExpressionValue) => {
 		if (!props.onChange || !props.value) return
@@ -46,7 +46,7 @@ function MagicExpressionWrap({ ...props }: MagicExpressionWrapProps) {
 		})
 	})
 
-	return <MagicExpressionWidget {...props} value={props?.value?.structure} onChange={onChange} />
+	return <DelightfulExpressionWidget {...props} value={props?.value?.structure} onChange={onChange} />
 }
 
-export default MagicExpressionWrap as any
+export default DelightfulExpressionWrap as any

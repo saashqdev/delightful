@@ -1,6 +1,6 @@
-import MagicFileIcon from "@/opensource/components/base/MagicFileIcon"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import type { FileItem } from "@/opensource/pages/superMagic/pages/Workspace/types"
+import DelightfulFileIcon from "@/opensource/components/base/DelightfulFileIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import type { FileItem } from "@/opensource/pages/superDelightful/pages/Workspace/types"
 import { formatFileSize } from "@/utils/string"
 import { IconX } from "@tabler/icons-react"
 import { createStyles, cx } from "antd-style"
@@ -83,7 +83,7 @@ export default memo(function MessagePanelFiles(props: MessagePanelFilesProps) {
 				return (
 					<div key={item.file_key} className={styles.item}>
 						<div className={styles.content}>
-							<MagicFileIcon type={getFileType(item.file_name)} size={14} />
+							<DelightfulFileIcon type={getFileType(item.file_name)} size={14} />
 							<span className={styles.name}>{item.file_name}</span>
 							<span className={styles.size}>{formatFileSize(item.file_size)}</span>
 						</div>
@@ -95,7 +95,7 @@ export default memo(function MessagePanelFiles(props: MessagePanelFilesProps) {
 								)
 							}}
 						>
-							<MagicIcon
+							<DelightfulIcon
 								component={IconX}
 								size={10}
 								stroke={2}

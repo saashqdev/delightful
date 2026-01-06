@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\ExecuteManager\BuiltIn\ToolSet\InternetSearch\Tools;
 
-use App\Application\Chat\Service\MagicAISearchToolAppService;
+use App\Application\Chat\Service\DelightfulAISearchToolAppService;
 use App\Application\Flow\ExecuteManager\BuiltIn\BuiltInToolSet;
 use App\Application\Flow\ExecuteManager\BuiltIn\ToolSet\AbstractBuiltInTool;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
-use App\Domain\Chat\DTO\AISearch\Request\MagicChatAggregateSearchReqDTO;
+use App\Domain\Chat\DTO\AISearch\Request\DelightfulChatAggregateSearchReqDTO;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
 use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Flow\Entity\ValueObject\NodeInput;
@@ -25,7 +25,7 @@ use function di;
 
 #[BuiltInToolDefine]
 /**
- * Magic internet search tool version, only returns search results, does not push websocket messages.
+ * Delightful internet search tool version, only returns search results, does not push websocket messages.
  */
 class InternetSearchSummaryBuiltInTool extends AbstractBuiltInTool
 {
@@ -41,7 +41,7 @@ class InternetSearchSummaryBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'Magic internet search summary tool-only version, does not push messages.';
+        return 'Delightful internet search summary tool-only version, does not push messages.';
     }
 
     public function getCallback(): ?Closure
@@ -74,7 +74,7 @@ class InternetSearchSummaryBuiltInTool extends AbstractBuiltInTool
             $organizationCode = $executionData->getDataIsolation()->getCurrentOrganizationCode();
             $userId = $executionData->getDataIsolation()->getCurrentUserId();
 
-            $magicChatAggregateSearchReqDTO = (new MagicChatAggregateSearchReqDTO())
+            $magicChatAggregateSearchReqDTO = (new DelightfulChatAggregateSearchReqDTO())
                 ->setConversationId($conversationId)
                 ->setTopicId((string) $topicId)
                 ->setUserMessage($searchKeywordMessage)
@@ -85,10 +85,10 @@ class InternetSearchSummaryBuiltInTool extends AbstractBuiltInTool
             try {
                 if ($useDeepSearch) {
                     // Use deep search tool
-                    $searchResult = di(MagicAISearchToolAppService::class)->executeInternetSearch($magicChatAggregateSearchReqDTO, true, 'deepInternetSearchForToolError');
+                    $searchResult = di(DelightfulAISearchToolAppService::class)->executeInternetSearch($magicChatAggregateSearchReqDTO, true, 'deepInternetSearchForToolError');
                 } else {
                     // Use simple search tool
-                    $searchResult = di(MagicAISearchToolAppService::class)->executeInternetSearch($magicChatAggregateSearchReqDTO, false, 'aggregateSearchError');
+                    $searchResult = di(DelightfulAISearchToolAppService::class)->executeInternetSearch($magicChatAggregateSearchReqDTO, false, 'aggregateSearchError');
                 }
 
                 if ($searchResult === null) {

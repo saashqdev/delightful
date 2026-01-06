@@ -5,8 +5,8 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 use App\Infrastructure\Util\Middleware\RequestContextMiddleware;
-use App\Interfaces\Agent\Facade\MagicAgentApi;
-use App\Interfaces\Agent\Facade\MagicBotThirdPlatformChatApi;
+use App\Interfaces\Agent\Facade\DelightfulAgentApi;
+use App\Interfaces\Agent\Facade\DelightfulBotThirdPlatformChatApi;
 use App\Interfaces\Agent\Facade\Open\ThirdPlatformChatApi;
 use Hyperf\HttpServer\Router\Router;
 
@@ -14,80 +14,80 @@ Router::addGroup('/api/v1', static function () {
     // Agent management
     Router::addGroup('/agents', static function () {
         // List agents
-        Router::get('/queries', [MagicAgentApi::class, 'queries']);
-        Router::post('/queries', [MagicAgentApi::class, 'queries']);
+        Router::get('/queries', [DelightfulAgentApi::class, 'queries']);
+        Router::post('/queries', [DelightfulAgentApi::class, 'queries']);
         // Get available agents
-        Router::get('/available', [MagicAgentApi::class, 'queriesAvailable']);
+        Router::get('/available', [DelightfulAgentApi::class, 'queriesAvailable']);
         // Get agents available for chat mode
-        Router::get('/chat-mode/available', [MagicAgentApi::class, 'getChatModeAvailableAgents']);
+        Router::get('/chat-mode/available', [DelightfulAgentApi::class, 'getChatModeAvailableAgents']);
         // Save an agent
-        Router::post('', [MagicAgentApi::class, 'saveAgent']);
+        Router::post('', [DelightfulAgentApi::class, 'saveAgent']);
         // Get a single agent
-        Router::get('/{agentId:\d+}', [MagicAgentApi::class, 'getAgentDetailByAgentId']);
+        Router::get('/{agentId:\d+}', [DelightfulAgentApi::class, 'getAgentDetailByAgentId']);
         // Delete an agent
-        Router::delete('/{agentId}', [MagicAgentApi::class, 'deleteAgentById']);
+        Router::delete('/{agentId}', [DelightfulAgentApi::class, 'deleteAgentById']);
 
         // Update agent status
-        Router::put('/{agentId}/status', [MagicAgentApi::class, 'updateAgentStatus']);
+        Router::put('/{agentId}/status', [DelightfulAgentApi::class, 'updateAgentStatus']);
         // Update enterprise agent status
-        Router::put('/{agentId}/enterprise-status', [MagicAgentApi::class, 'updateAgentEnterpriseStatus']);
+        Router::put('/{agentId}/enterprise-status', [DelightfulAgentApi::class, 'updateAgentEnterpriseStatus']);
         // Register agent and add friend
-        Router::post('/{agentVersionId}/register-friend', [MagicAgentApi::class, 'registerAgentAndAddFriend']);
+        Router::post('/{agentVersionId}/register-friend', [DelightfulAgentApi::class, 'registerAgentAndAddFriend']);
         // Check whether the agent has been updated
-        Router::get('/{agentId}/is-updated', [MagicAgentApi::class, 'isUpdated']);
+        Router::get('/{agentId}/is-updated', [DelightfulAgentApi::class, 'isUpdated']);
 
         // Save an instruction
-        Router::post('/{agentId}/instructs', [MagicAgentApi::class, 'saveInstruct']);
+        Router::post('/{agentId}/instructs', [DelightfulAgentApi::class, 'saveInstruct']);
 
         // Get the max version
-        Router::get('/{agentId}/max', [MagicAgentApi::class, 'getAgentMaxVersion']);
+        Router::get('/{agentId}/max', [DelightfulAgentApi::class, 'getAgentMaxVersion']);
 
         // Version management
         Router::addGroup('/versions', static function () {
             // Get a released version
-            Router::get('/{agentVersionId:\d+}', [MagicAgentApi::class, 'getAgentVersionById']);
+            Router::get('/{agentVersionId:\d+}', [DelightfulAgentApi::class, 'getAgentVersionById']);
             // Get agents belonging to the organization
-            Router::get('/organization', [MagicAgentApi::class, 'getAgentsByOrganization']);
+            Router::get('/organization', [DelightfulAgentApi::class, 'getAgentsByOrganization']);
             // Get marketplace agents
-            Router::get('/marketplace', [MagicAgentApi::class, 'getAgentsFromMarketplace']);
+            Router::get('/marketplace', [DelightfulAgentApi::class, 'getAgentsFromMarketplace']);
             // Release a version
-            Router::post('', [MagicAgentApi::class, 'releaseAgentVersion']);
+            Router::post('', [DelightfulAgentApi::class, 'releaseAgentVersion']);
         });
 
         // Get versions for a specific agent
-        Router::get('/{agentId:\d+}/versions', [MagicAgentApi::class, 'getReleaseAgentVersions']);
+        Router::get('/{agentId:\d+}/versions', [DelightfulAgentApi::class, 'getReleaseAgentVersions']);
 
         // Version operations
         Router::addGroup('/versions', static function () {
             // Get details by userId
-            Router::get('/{userId}/user', [MagicAgentApi::class, 'getDetailByUserId']);
+            Router::get('/{userId}/user', [DelightfulAgentApi::class, 'getDetailByUserId']);
         });
     });
 
     // Instruction options
     Router::addGroup('/agent-options', static function () {
         // Get instruction type options
-        Router::get('/instruct-types', [MagicAgentApi::class, 'getInstructTypeOptions']);
+        Router::get('/instruct-types', [DelightfulAgentApi::class, 'getInstructTypeOptions']);
         // Get instruction group type options
-        Router::get('/instruct-group-types', [MagicAgentApi::class, 'getInstructGroupTypeOptions']);
+        Router::get('/instruct-group-types', [DelightfulAgentApi::class, 'getInstructGroupTypeOptions']);
         // Get instruction state color options
-        Router::get('/instruct-state-colors', [MagicAgentApi::class, 'getInstructionStateColorOptions']);
+        Router::get('/instruct-state-colors', [DelightfulAgentApi::class, 'getInstructionStateColorOptions']);
         // Get instruction icon color options
-        Router::get('/instruct-state-icons', [MagicAgentApi::class, 'getInstructionIconColorOptions']);
+        Router::get('/instruct-state-icons', [DelightfulAgentApi::class, 'getInstructionIconColorOptions']);
         // Get system instruction type options
-        Router::get('/instruct-system', [MagicAgentApi::class, 'getSystemInstructTypeOptions']);
+        Router::get('/instruct-system', [DelightfulAgentApi::class, 'getSystemInstructTypeOptions']);
     });
 
     // Third-party bot chat management
     Router::addGroup('/agents/third-platform', function () {
         // Save
-        Router::post('/', [MagicBotThirdPlatformChatApi::class, 'save']);
+        Router::post('/', [DelightfulBotThirdPlatformChatApi::class, 'save']);
         // Query
-        Router::post('/{botId}/queries', [MagicBotThirdPlatformChatApi::class, 'queries']);
+        Router::post('/{botId}/queries', [DelightfulBotThirdPlatformChatApi::class, 'queries']);
         // List
-        Router::get('/{botId}/list', [MagicBotThirdPlatformChatApi::class, 'listByBotId']);
+        Router::get('/{botId}/list', [DelightfulBotThirdPlatformChatApi::class, 'listByBotId']);
         // Delete
-        Router::delete('/{id}', [MagicBotThirdPlatformChatApi::class, 'destroy']);
+        Router::delete('/{id}', [DelightfulBotThirdPlatformChatApi::class, 'destroy']);
     });
 }, ['middleware' => [RequestContextMiddleware::class]]);
 

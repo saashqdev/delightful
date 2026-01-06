@@ -71,9 +71,9 @@ export const getSlicedText = (message: ConversationMessage, revoked: boolean = f
 				type: ConversationMessageType.AggregateAISearchCardV2,
 				text: (message.aggregate_ai_search_card_v2?.summary?.content ?? "").slice(0, 50),
 			}
-		case ConversationMessageType.MagicSearchCard:
+		case ConversationMessageType.DelightfulSearchCard:
 			return {
-				type: ConversationMessageType.MagicSearchCard,
+				type: ConversationMessageType.DelightfulSearchCard,
 				text: t("chat.messageTextRender.magic_search_card", { ns: "interface" }),
 			}
 		case ConversationMessageType.Files:

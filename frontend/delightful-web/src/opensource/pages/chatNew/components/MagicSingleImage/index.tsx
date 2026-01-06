@@ -1,10 +1,10 @@
-import ImageWrapper from "@/opensource/components/base/MagicImagePreview/components/ImageWrapper"
+import ImageWrapper from "@/opensource/components/base/DelightfulImagePreview/components/ImageWrapper"
 import { useConversationMessage } from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageItem/components/ConversationMessageProvider/hooks"
 import type { ConversationMessageAttachment } from "@/types/chat/conversation_message"
 import { createStyles } from "antd-style"
 import { memo } from "react"
 
-interface MagicSingleImageProps {
+interface DelightfulSingleImageProps {
 	data: ConversationMessageAttachment
 }
 
@@ -18,7 +18,7 @@ const useStyles = createStyles(({ css }) => ({
 	`,
 }))
 
-const MagicSingleImage = memo(({ data }: MagicSingleImageProps) => {
+const DelightfulSingleImage = memo(({ data }: DelightfulSingleImageProps) => {
 	const { styles } = useStyles()
 	const { messageId } = useConversationMessage()
 
@@ -34,4 +34,4 @@ const MagicSingleImage = memo(({ data }: MagicSingleImageProps) => {
 	)
 })
 
-export default MagicSingleImage
+export default DelightfulSingleImage

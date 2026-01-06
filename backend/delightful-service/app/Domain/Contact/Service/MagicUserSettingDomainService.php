@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Service;
 
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Entity\ValueObject\Query\MagicUserSettingQuery;
-use App\Domain\Contact\Repository\Facade\MagicUserSettingRepositoryInterface;
+use App\Domain\Contact\Entity\ValueObject\Query\DelightfulUserSettingQuery;
+use App\Domain\Contact\Repository\Facade\DelightfulUserSettingRepositoryInterface;
 use App\Infrastructure\Core\ValueObject\Page;
 
-readonly class MagicUserSettingDomainService
+readonly class DelightfulUserSettingDomainService
 {
     public function __construct(
-        private MagicUserSettingRepositoryInterface $magicUserSettingRepository
+        private DelightfulUserSettingRepositoryInterface $magicUserSettingRepository
     ) {
     }
 
-    public function get(DataIsolation $dataIsolation, string $key): ?MagicUserSettingEntity
+    public function get(DataIsolation $dataIsolation, string $key): ?DelightfulUserSettingEntity
     {
         return $this->magicUserSettingRepository->get($dataIsolation, $key);
     }
@@ -28,7 +28,7 @@ readonly class MagicUserSettingDomainService
     /**
      * 获取全局配置.
      */
-    public function getGlobal(string $key): ?MagicUserSettingEntity
+    public function getGlobal(string $key): ?DelightfulUserSettingEntity
     {
         return $this->magicUserSettingRepository->getGlobal($key);
     }
@@ -36,24 +36,24 @@ readonly class MagicUserSettingDomainService
     /**
      * 保存全局配置.
      */
-    public function saveGlobal(MagicUserSettingEntity $savingEntity): MagicUserSettingEntity
+    public function saveGlobal(DelightfulUserSettingEntity $savingEntity): DelightfulUserSettingEntity
     {
         return $this->magicUserSettingRepository->saveGlobal($savingEntity);
     }
 
     /**
-     * @return array{total: int, list: array<MagicUserSettingEntity>}
+     * @return array{total: int, list: array<DelightfulUserSettingEntity>}
      */
-    public function queries(DataIsolation $dataIsolation, MagicUserSettingQuery $query, Page $page): array
+    public function queries(DataIsolation $dataIsolation, DelightfulUserSettingQuery $query, Page $page): array
     {
         return $this->magicUserSettingRepository->queries($dataIsolation, $query, $page);
     }
 
-    public function save(DataIsolation $dataIsolation, MagicUserSettingEntity $savingEntity): MagicUserSettingEntity
+    public function save(DataIsolation $dataIsolation, DelightfulUserSettingEntity $savingEntity): DelightfulUserSettingEntity
     {
         $savingEntity->setCreator($dataIsolation->getCurrentUserId());
         $savingEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        $savingEntity->setMagicId($dataIsolation->getCurrentMagicId());
+        $savingEntity->setDelightfulId($dataIsolation->getCurrentDelightfulId());
         $savingEntity->setUserId($dataIsolation->getCurrentUserId());
 
         $existingEntity = $this->magicUserSettingRepository->get($dataIsolation, $savingEntity->getKey());
@@ -71,10 +71,10 @@ readonly class MagicUserSettingDomainService
     /**
      * 通过 magicId 保存用户设置（跨组织）.
      */
-    public function saveByMagicId(string $magicId, MagicUserSettingEntity $magicUserSettingEntity): MagicUserSettingEntity
+    public function saveByDelightfulId(string $magicId, DelightfulUserSettingEntity $magicUserSettingEntity): DelightfulUserSettingEntity
     {
         // 获取现有记录以保持实体完整性
-        $existingEntity = $this->magicUserSettingRepository->getByMagicId($magicId, $magicUserSettingEntity->getKey());
+        $existingEntity = $this->magicUserSettingRepository->getByDelightfulId($magicId, $magicUserSettingEntity->getKey());
 
         if ($existingEntity) {
             $magicUserSettingEntity->prepareForModification($existingEntity);
@@ -82,14 +82,14 @@ readonly class MagicUserSettingDomainService
             $magicUserSettingEntity->prepareForCreation();
         }
 
-        return $this->magicUserSettingRepository->saveByMagicId($magicId, $magicUserSettingEntity);
+        return $this->magicUserSettingRepository->saveByDelightfulId($magicId, $magicUserSettingEntity);
     }
 
     /**
      * 通过 magicId 获取用户设置（跨组织）.
      */
-    public function getByMagicId(string $magicId, string $key): ?MagicUserSettingEntity
+    public function getByDelightfulId(string $magicId, string $key): ?DelightfulUserSettingEntity
     {
-        return $this->magicUserSettingRepository->getByMagicId($magicId, $key);
+        return $this->magicUserSettingRepository->getByDelightfulId($magicId, $key);
     }
 }

@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Application\Chat\Event\Subscribe;
 
-use App\Application\Agent\Service\MagicAgentAppService;
-use App\Application\Chat\Service\MagicAccountAppService;
-use App\Domain\Agent\Service\MagicAgentDomainService;
-use App\Domain\Agent\Service\MagicAgentVersionDomainService;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Application\Agent\Service\DelightfulAgentAppService;
+use App\Application\Chat\Service\DelightfulAccountAppService;
+use App\Domain\Agent\Service\DelightfulAgentDomainService;
+use App\Domain\Agent\Service\DelightfulAgentVersionDomainService;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\UserStatus;
 use App\Domain\Contact\Entity\ValueObject\UserType;
-use App\Domain\Contact\Service\MagicUserDomainService;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Hyperf\Amqp\Annotation\Consumer;
 use Hyperf\Amqp\Message\ConsumerMessage;
 use Hyperf\Amqp\Result;
@@ -30,12 +30,12 @@ class InitDefaultAssistantConversationSubscriber extends ConsumerMessage
     private LoggerInterface $logger;
 
     public function __construct(
-        protected MagicAgentAppService $magicAgentAppService,
-        protected MagicAgentDomainService $magicAgentDomainService,
-        protected MagicUserDomainService $magicUserDomainService,
-        protected MagicAgentVersionDomainService $magicAgentVersionDomainService,
-        protected MagicUserAuthorization $magicUserAuthorization,
-        protected MagicAccountAppService $magicAccountAppService,
+        protected DelightfulAgentAppService $magicAgentAppService,
+        protected DelightfulAgentDomainService $magicAgentDomainService,
+        protected DelightfulUserDomainService $magicUserDomainService,
+        protected DelightfulAgentVersionDomainService $magicAgentVersionDomainService,
+        protected DelightfulUserAuthorization $magicUserAuthorization,
+        protected DelightfulAccountAppService $magicAccountAppService,
     ) {
         $this->logger = di(LoggerFactory::class)->get(get_class($this));
     }
@@ -46,8 +46,8 @@ class InitDefaultAssistantConversationSubscriber extends ConsumerMessage
             $data['user_entity']['user_type'] = UserType::tryFrom($data['user_entity']['user_type']);
             $data['user_entity']['status'] = UserStatus::tryFrom($data['user_entity']['status']);
             $data['user_entity']['like_num'] = (int) $data['user_entity']['like_num'];
-            /** @var MagicUserEntity $userEntity */
-            $userEntity = new MagicUserEntity($data['user_entity']);
+            /** @var DelightfulUserEntity $userEntity */
+            $userEntity = new DelightfulUserEntity($data['user_entity']);
             /** @var array<string> $defaultConversationAICodes */
             $defaultConversationAICodes = $data['default_conversation_ai_codes'];
             // 先批量注册，防止组织下没有该助理用户.
@@ -64,16 +64,16 @@ class InitDefaultAssistantConversationSubscriber extends ConsumerMessage
     /**
      * 注册助理，防止组织下没有该助理用户.
      */
-    public function batchAiRegister(MagicUserEntity $userEntity, ?array $defaultConversationAICodes = null): void
+    public function batchAiRegister(DelightfulUserEntity $userEntity, ?array $defaultConversationAICodes = null): void
     {
-        $authorization = MagicUserAuthorization::fromUserEntity($userEntity);
+        $authorization = DelightfulUserAuthorization::fromUserEntity($userEntity);
         $defaultConversationAICodes = $defaultConversationAICodes ?? $this->magicAgentDomainService->getDefaultConversationAICodes();
         foreach ($defaultConversationAICodes as $aiCode) {
             $magicAgentVersionEntity = $this->magicAgentVersionDomainService->getAgentByFlowCode($aiCode);
             $agentName = $magicAgentVersionEntity->getAgentName();
             $this->logger->info("注册助理，aiCode: {$aiCode}, 名称: {$agentName}");
             try {
-                $aiUserDTO = MagicUserEntity::fromMagicAgentVersionEntity($magicAgentVersionEntity);
+                $aiUserDTO = DelightfulUserEntity::fromDelightfulAgentVersionEntity($magicAgentVersionEntity);
                 $this->magicAccountAppService->aiRegister($aiUserDTO, $authorization, $aiCode);
                 $this->logger->info("注册助理成功，aiCode: {$aiCode}, 名称: {$agentName}");
             } catch (Throwable $e) {

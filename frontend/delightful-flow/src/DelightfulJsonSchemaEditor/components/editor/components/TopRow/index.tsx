@@ -6,22 +6,22 @@ import i18next from "i18next"
 import React, { useContext, useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import resolveToString from "@/common/utils/template"
-import { InputExpressionValue } from "@/MagicExpressionWidget/types"
-import { SchemaMobxContext } from "@/MagicJsonSchemaEditor"
-import useCols from "@/MagicJsonSchemaEditor/components/schema-json/hooks/useCols"
-import useCustomConfig from "@/MagicJsonSchemaEditor/components/schema-json/hooks/useCustomConfig"
-import usePropertiesLength from "@/MagicJsonSchemaEditor/components/schema-json/hooks/usePropertiesLength"
-import useSelectOptions from "@/MagicJsonSchemaEditor/components/schema-json/hooks/useSelectOptions"
-import useSvgLine from "@/MagicJsonSchemaEditor/components/schema-json/hooks/useSvgLine"
-import { SchemaObjectWrap } from "@/MagicJsonSchemaEditor/components/schema-json/schema-object/index.style"
-import SvgLine from "@/MagicJsonSchemaEditor/components/svgLine"
-import { SchemaValueSplitor, ShowColumns } from "@/MagicJsonSchemaEditor/constants"
-import { useExportFields } from "@/MagicJsonSchemaEditor/context/ExportFieldsContext/useExportFields"
-import { useGlobal } from "@/MagicJsonSchemaEditor/context/GlobalContext/useGlobal"
-import { DisabledField } from "@/MagicJsonSchemaEditor/types/Schema"
-import MagicInput from "@/common/BaseUI/Input"
-import MagicSelect from "@/common/BaseUI/Select"
-import { MagicExpressionWidget } from "@/index"
+import { InputExpressionValue } from "@/DelightfulExpressionWidget/types"
+import { SchemaMobxContext } from "@/DelightfulJsonSchemaEditor"
+import useCols from "@/DelightfulJsonSchemaEditor/components/schema-json/hooks/useCols"
+import useCustomConfig from "@/DelightfulJsonSchemaEditor/components/schema-json/hooks/useCustomConfig"
+import usePropertiesLength from "@/DelightfulJsonSchemaEditor/components/schema-json/hooks/usePropertiesLength"
+import useSelectOptions from "@/DelightfulJsonSchemaEditor/components/schema-json/hooks/useSelectOptions"
+import useSvgLine from "@/DelightfulJsonSchemaEditor/components/schema-json/hooks/useSvgLine"
+import { SchemaObjectWrap } from "@/DelightfulJsonSchemaEditor/components/schema-json/schema-object/index.style"
+import SvgLine from "@/DelightfulJsonSchemaEditor/components/svgLine"
+import { SchemaValueSplitor, ShowColumns } from "@/DelightfulJsonSchemaEditor/constants"
+import { useExportFields } from "@/DelightfulJsonSchemaEditor/context/ExportFieldsContext/useExportFields"
+import { useGlobal } from "@/DelightfulJsonSchemaEditor/context/GlobalContext/useGlobal"
+import { DisabledField } from "@/DelightfulJsonSchemaEditor/types/Schema"
+import DelightfulInput from "@/common/BaseUI/Input"
+import DelightfulSelect from "@/common/BaseUI/Select"
+import { DelightfulExpressionWidget } from "@/index"
 import { TopRowWrapper } from "./style"
 
 export type TopRowProps = {
@@ -108,7 +108,7 @@ export default function TopRow(props: TopRowProps) {
 									className="field-name key-col"
 								>
 									<Col flex="auto">
-										<MagicInput
+										<DelightfulInput
 											disabled
 											// @ts-ignore
 											value={schemaMobx.schema?.key || "root"}
@@ -120,7 +120,7 @@ export default function TopRow(props: TopRowProps) {
 
 						{displayColumns.includes(ShowColumns.Label) && (
 							<Col span={LabelCol} className="label-col ">
-								<MagicInput
+								<DelightfulInput
 									placeholder={resolveToString(
 										i18next.t("flow.pleaseInputSomething", { ns: "magicFlow" }),
 										{
@@ -138,7 +138,7 @@ export default function TopRow(props: TopRowProps) {
 
 						{displayColumns.includes(ShowColumns.Type) && (
 							<Col span={TypeCol} className="type-col">
-								<MagicSelect
+								<DelightfulSelect
 									style={{ width: "100%" }}
 									onChange={(value: string) => handleChangeType(`type`, value)}
 									value={selectValue || "object"}
@@ -151,7 +151,7 @@ export default function TopRow(props: TopRowProps) {
 											</Option>
 										)
 									})}
-								</MagicSelect>
+								</DelightfulSelect>
 							</Col>
 						)}
 						{displayColumns.includes(ShowColumns.Required) && (
@@ -177,7 +177,7 @@ export default function TopRow(props: TopRowProps) {
 
 						{displayColumns.includes(ShowColumns.Value) && (
 							<Col span={ValueCol} className="value-col">
-								<MagicExpressionWidget
+								<DelightfulExpressionWidget
 									value={schemaMobx.schema.value}
 									onChange={(val: InputExpressionValue) =>
 										handleChangeValue(["value"], val)
@@ -198,7 +198,7 @@ export default function TopRow(props: TopRowProps) {
 
 						{displayColumns.includes(ShowColumns.Description) && (
 							<Col span={DescCol}>
-								<MagicInput
+								<DelightfulInput
 									suffix={
 										<IconEdit
 											className="input-icon-editor"

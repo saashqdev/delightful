@@ -1,22 +1,22 @@
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
 import { useMemo } from "react"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import { ShowColumns } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/constants"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
 import { Form, Switch, Flex, Select, Tooltip } from "antd"
-import MagicJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicJsonSchemaEditorWrap"
-import { DisabledField } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
+import DelightfulJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulJsonSchemaEditorWrap"
+import { DisabledField } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import { IconHelp } from "@tabler/icons-react"
 import { get, set } from "lodash-es"
 import { useMemoizedFn, useMount } from "ahooks"
 import { useFlowStore } from "@/opensource/stores/flow"
-import { useNodeConfigActions } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
+import { useNodeConfigActions } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
 import { replaceRouteParams } from "@/utils/route"
 import { RoutePath } from "@/const/routes"
 import usePrevious from "@/opensource/pages/flow/common/hooks/usePrevious"
 import useToolsParameters from "@/opensource/pages/flow/components/ToolsSelect/components/ToolsSelectedCard/ToolsParameters/hooks/useToolsParameters"
 import useCurrentNodeUpdate from "@/opensource/pages/flow/common/hooks/useCurrentNodeUpdate"
 import NodeOutputWrap from "@/opensource/pages/flow/components/NodeOutputWrap/NodeOutputWrap"
-import MagicExpression from "@/opensource/pages/flow/common/Expression"
+import DelightfulExpression from "@/opensource/pages/flow/common/Expression"
 import llmStyles from "@/opensource/pages/flow/nodes/LLM/v0/index.module.less"
 import RenderLabelCommon from "@/opensource/pages/flow/components/RenderLabel/RenderLabel"
 import { useTranslation } from "react-i18next"
@@ -217,7 +217,7 @@ export default function ToolsV0() {
 						height="auto"
 					>
 						<Form.Item name={["custom_system_input", "form"]}>
-							<MagicJSONSchemaEditorWrap
+							<DelightfulJSONSchemaEditorWrap
 								allowExpression
 								expressionSource={expressionDataSource}
 								displayColumns={[
@@ -262,7 +262,7 @@ export default function ToolsV0() {
 								headerClassWrapper={llmStyles.promptWrapper}
 								height="auto"
 							>
-								<MagicExpression
+								<DelightfulExpression
 									label="User"
 									name="user_prompt"
 									placeholder={t("common.allowExpressionPlaceholder", {
@@ -280,7 +280,7 @@ export default function ToolsV0() {
 					<div className={styles.input} style={{ borderBottom: "none" }}>
 						<DropdownCard title={t("common.input", { ns: "flow" })} height="auto">
 							<Form.Item name={["input", "form"]}>
-								<MagicJSONSchemaEditorWrap
+								<DelightfulJSONSchemaEditorWrap
 									allowExpression
 									expressionSource={expressionDataSource}
 									displayColumns={[

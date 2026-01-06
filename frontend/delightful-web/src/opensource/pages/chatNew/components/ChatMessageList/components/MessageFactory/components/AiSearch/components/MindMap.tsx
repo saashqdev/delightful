@@ -1,5 +1,5 @@
-import MagicMarkmap from "@/opensource/components/base/MagicMarkmap"
-import MagicMindMap from "@/opensource/components/base/MagicMindmap"
+import DelightfulMarkmap from "@/opensource/components/base/DelightfulMarkmap"
+import DelightfulMindMap from "@/opensource/components/base/DelightfulMindmap"
 import type { AggregateAISearchCardMindMapChildren } from "@/types/chat/conversation_message"
 import { Flex } from "antd"
 import { memo } from "react"
@@ -29,13 +29,13 @@ const MindMap = memo(({ data, pptData, className }: MindMapProps) => {
 
 		return (
 			<Flex vertical className={styles.mindmap}>
-				<MagicMarkmap data={data} pptData={pptData} />
+				<DelightfulMarkmap data={data} pptData={pptData} />
 			</Flex>
 		)
 	}
 	return (
 		<Flex vertical className={cx(styles.mindmap, className)}>
-			<MagicMindMap data-testid="mindmap" data={data} />
+			<DelightfulMindMap data-testid="mindmap" data={data} />
 		</Flex>
 	)
 })

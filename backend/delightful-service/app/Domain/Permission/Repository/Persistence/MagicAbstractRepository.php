@@ -15,7 +15,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Database\Model\Collection;
 
-abstract class MagicAbstractRepository
+abstract class DelightfulAbstractRepository
 {
     use DataIsolationFilter;
 

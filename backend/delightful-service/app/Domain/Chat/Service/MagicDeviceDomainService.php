@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Service;
 
-use App\Domain\Chat\Repository\Persistence\MagicDeviceRepository;
+use App\Domain\Chat\Repository\Persistence\DelightfulDeviceRepository;
 
-readonly class MagicDeviceDomainService
+readonly class DelightfulDeviceDomainService
 {
     public function __construct(
-        private MagicDeviceRepository $deviceRepository,
+        private DelightfulDeviceRepository $deviceRepository,
     ) {
     }
 

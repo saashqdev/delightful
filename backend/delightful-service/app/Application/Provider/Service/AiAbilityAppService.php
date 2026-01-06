@@ -16,7 +16,7 @@ use App\Domain\Provider\Service\AiAbilityDomainService;
 use App\ErrorCode\ServiceProviderErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Provider\Assembler\AiAbilityAssembler;
 use App\Interfaces\Provider\DTO\UpdateAiAbilityRequest;
 use Hyperf\Contract\TranslatorInterface;
@@ -36,10 +36,10 @@ class AiAbilityAppService extends AbstractKernelAppService
     /**
      * 获取所有AI能力列表.
      *
-     * @param MagicUserAuthorization $authorization 用户授权信息
+     * @param DelightfulUserAuthorization $authorization 用户授权信息
      * @return array<AiAbilityListDTO>
      */
-    public function queries(MagicUserAuthorization $authorization): array
+    public function queries(DelightfulUserAuthorization $authorization): array
     {
         $dataIsolation = $this->createProviderDataIsolation($authorization);
 
@@ -53,10 +53,10 @@ class AiAbilityAppService extends AbstractKernelAppService
     /**
      * 获取AI能力详情.
      *
-     * @param MagicUserAuthorization $authorization 用户授权信息
+     * @param DelightfulUserAuthorization $authorization 用户授权信息
      * @param string $code 能力代码
      */
-    public function getDetail(MagicUserAuthorization $authorization, string $code): AiAbilityDetailDTO
+    public function getDetail(DelightfulUserAuthorization $authorization, string $code): AiAbilityDetailDTO
     {
         $dataIsolation = $this->createProviderDataIsolation($authorization);
 
@@ -77,11 +77,11 @@ class AiAbilityAppService extends AbstractKernelAppService
     /**
      * 更新AI能力.
      *
-     * @param MagicUserAuthorization $authorization 用户授权信息
+     * @param DelightfulUserAuthorization $authorization 用户授权信息
      * @param UpdateAiAbilityRequest $request 更新请求
      * @return bool 是否更新成功
      */
-    public function update(MagicUserAuthorization $authorization, UpdateAiAbilityRequest $request): bool
+    public function update(DelightfulUserAuthorization $authorization, UpdateAiAbilityRequest $request): bool
     {
         $dataIsolation = $this->createProviderDataIsolation($authorization);
 
@@ -119,10 +119,10 @@ class AiAbilityAppService extends AbstractKernelAppService
     /**
      * 初始化AI能力数据（从配置文件同步到数据库）.
      *
-     * @param MagicUserAuthorization $authorization 用户授权信息
+     * @param DelightfulUserAuthorization $authorization 用户授权信息
      * @return int 初始化的数量
      */
-    public function initializeAbilities(MagicUserAuthorization $authorization): int
+    public function initializeAbilities(DelightfulUserAuthorization $authorization): int
     {
         $dataIsolation = $this->createProviderDataIsolation($authorization);
 

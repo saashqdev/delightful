@@ -10,7 +10,7 @@ namespace App\Domain\Chat\Repository\Persistence\Model;
 use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
-class MagicContactThirdPlatformIdMappingModel extends Model
+class DelightfulContactThirdPlatformIdMappingModel extends Model
 {
     use SoftDeletes;
 

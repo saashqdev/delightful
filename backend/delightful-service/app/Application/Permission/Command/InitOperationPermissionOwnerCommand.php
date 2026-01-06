@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Application\Permission\Command;
 
-use App\Domain\Agent\Entity\ValueObject\Query\MagicAgentQuery;
-use App\Domain\Agent\Service\MagicAgentDomainService;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulAgentQuery;
+use App\Domain\Agent\Service\DelightfulAgentDomainService;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowQuery;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowToolSetQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowToolSetQuery;
 use App\Domain\Flow\Entity\ValueObject\Type;
-use App\Domain\Flow\Service\MagicFlowDomainService;
-use App\Domain\Flow\Service\MagicFlowToolSetDomainService;
+use App\Domain\Flow\Service\DelightfulFlowDomainService;
+use App\Domain\Flow\Service\DelightfulFlowToolSetDomainService;
 use App\Domain\KnowledgeBase\Entity\ValueObject\Query\KnowledgeBaseQuery;
 use App\Domain\KnowledgeBase\Service\KnowledgeBaseDomainService;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\ResourceType;
@@ -50,10 +50,10 @@ class InitOperationPermissionOwnerCommand extends HyperfCommand
 
     private function initAgent(): void
     {
-        $service = $this->container->get(MagicAgentDomainService::class);
+        $service = $this->container->get(DelightfulAgentDomainService::class);
         $resourceType = ResourceType::AgentCode;
 
-        $query = new MagicAgentQuery();
+        $query = new DelightfulAgentQuery();
         $data = $service->queries($query, Page::createNoPage());
         $list = $data['list'] ?? [];
         foreach ($list as $agent) {
@@ -66,11 +66,11 @@ class InitOperationPermissionOwnerCommand extends HyperfCommand
 
     private function initSubFlow(): void
     {
-        $service = $this->container->get(MagicFlowDomainService::class);
+        $service = $this->container->get(DelightfulFlowDomainService::class);
         $flowDataIsolation = FlowDataIsolation::create();
         $resourceType = ResourceType::SubFlowCode;
 
-        $query = new MagicFLowQuery();
+        $query = new DelightfulFLowQuery();
         $query->setType(Type::Sub->value);
         $data = $service->queries($flowDataIsolation, $query, Page::createNoPage());
         $list = $data['list'] ?? [];
@@ -84,11 +84,11 @@ class InitOperationPermissionOwnerCommand extends HyperfCommand
 
     private function initToolSet(): void
     {
-        $service = $this->container->get(MagicFlowToolSetDomainService::class);
+        $service = $this->container->get(DelightfulFlowToolSetDomainService::class);
         $flowDataIsolation = FlowDataIsolation::create();
         $resourceType = ResourceType::ToolSet;
 
-        $data = $service->queries($flowDataIsolation, new MagicFlowToolSetQuery(), Page::createNoPage());
+        $data = $service->queries($flowDataIsolation, new DelightfulFlowToolSetQuery(), Page::createNoPage());
         foreach ($data['list'] ?? [] as $toolSet) {
             $resourceId = $toolSet->getCode();
             $permissionDataIsolation = PermissionDataIsolation::create($toolSet->getOrganizationCode(), $toolSet->getCreator());

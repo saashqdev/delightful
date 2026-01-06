@@ -1,5 +1,5 @@
-import type { MagicListItemProps } from "@/opensource/components/MagicList/MagicListItem"
-import type MagicListItem from "@/opensource/components/MagicList/MagicListItem"
+import type { DelightfulListItemProps } from "@/opensource/components/DelightfulList/DelightfulListItem"
+import type DelightfulListItem from "@/opensource/components/DelightfulList/DelightfulListItem"
 import { useHover } from "ahooks"
 import { Flex } from "antd"
 import { createStyles } from "antd-style"
@@ -30,7 +30,7 @@ const useStyles = createStyles(({ css, token }) => ({
 	`,
 }))
 
-const SettingListItem = memo(({ data, className, onClick, ...props }: MagicListItemProps) => {
+const SettingListItem = memo(({ data, className, onClick, ...props }: DelightfulListItemProps) => {
 	const { styles, cx } = useStyles()
 
 	const ref = useRef<HTMLDivElement>(null)
@@ -54,4 +54,4 @@ const SettingListItem = memo(({ data, className, onClick, ...props }: MagicListI
 	)
 })
 
-export default SettingListItem as typeof MagicListItem
+export default SettingListItem as typeof DelightfulListItem

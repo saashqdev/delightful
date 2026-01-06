@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Entity\ValueObject\Query;
 
-class MagicFlowApiKeyQuery extends Query
+class DelightfulFlowApiKeyQuery extends Query
 {
     public ?string $flowCode = null;
 

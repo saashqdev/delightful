@@ -8,7 +8,7 @@ use Hyperf\Database\Migrations\Migration;
 use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
-class CreateMagicFlowKnowledge extends Migration
+class CreateDelightfulFlowKnowledge extends Migration
 {
     /**
      * Run the migrations.

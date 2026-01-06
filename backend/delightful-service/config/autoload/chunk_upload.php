@@ -309,7 +309,7 @@ return [
     /*
      * HTTP User-Agent for chunk downloads
      */
-    'download_user_agent' => env('CHUNK_DOWNLOAD_USER_AGENT', 'Magic-ChunkDownload/1.0'),
+    'download_user_agent' => env('CHUNK_DOWNLOAD_USER_AGENT', 'Delightful-ChunkDownload/1.0'),
 
     /*
      * Enable automatic fallback to regular download if chunk download fails

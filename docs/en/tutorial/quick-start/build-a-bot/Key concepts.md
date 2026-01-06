@@ -9,7 +9,7 @@ Variables are used to connect the input and output between nodes in a workflow, 
 
 ---
 ## Version List
-Magic provides a real-time online saving mechanism. Through the version list records, the latest modifications can be saved at any time, facilitating collaborative recording and preventing data loss.
+Delightful provides a real-time online saving mechanism. Through the version list records, the latest modifications can be saved at any time, facilitating collaborative recording and preventing data loss.
 
 ![Key Concepts](https://cdn.letsmagic.cn/static/img/Key-concepts-2.png)
 

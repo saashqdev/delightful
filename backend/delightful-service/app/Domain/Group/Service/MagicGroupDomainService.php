@@ -13,14 +13,14 @@ use App\Domain\Chat\DTO\Message\ControlMessage\GroupOwnerChangeMessage;
 use App\Domain\Chat\DTO\Message\ControlMessage\GroupUserAddMessage;
 use App\Domain\Chat\DTO\Message\ControlMessage\GroupUserRemoveMessage;
 use App\Domain\Chat\DTO\PageResponseDTO\GroupsPageResponseDTO;
-use App\Domain\Chat\Entity\MagicConversationEntity;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
-use App\Domain\Chat\Entity\ValueObject\MagicMessageStatus;
+use App\Domain\Chat\Entity\ValueObject\DelightfulMessageStatus;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 use App\Domain\Chat\Service\AbstractDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Group\Entity\MagicGroupEntity;
+use App\Domain\Group\Entity\DelightfulGroupEntity;
 use App\Domain\Group\Entity\ValueObject\GroupStatusEnum;
 use App\ErrorCode\ChatErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -31,12 +31,12 @@ use Hyperf\Codec\Json;
 use Hyperf\DbConnection\Db;
 use Throwable;
 
-class MagicGroupDomainService extends AbstractDomainService
+class DelightfulGroupDomainService extends AbstractDomainService
 {
     use DataIsolationTrait;
 
     // 创建群组
-    public function createGroup(MagicGroupEntity $magicGroupDTO, DataIsolation $dataIsolation): MagicGroupEntity
+    public function createGroup(DelightfulGroupEntity $magicGroupDTO, DataIsolation $dataIsolation): DelightfulGroupEntity
     {
         $magicGroupDTO->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $magicGroupDTO->setGroupOwner($dataIsolation->getCurrentUserId());
@@ -45,19 +45,19 @@ class MagicGroupDomainService extends AbstractDomainService
         return $this->magicGroupRepository->createGroup($magicGroupDTO);
     }
 
-    public function addUsersToGroup(MagicGroupEntity $magicGroupEntity, array $userIds): bool
+    public function addUsersToGroup(DelightfulGroupEntity $magicGroupEntity, array $userIds): bool
     {
         return $this->magicGroupRepository->addUsersToGroup($magicGroupEntity, $userIds);
     }
 
     // 减少群成员
-    public function removeUsersFromGroup(MagicGroupEntity $magicGroupEntity, array $userIds): int
+    public function removeUsersFromGroup(DelightfulGroupEntity $magicGroupEntity, array $userIds): int
     {
         // todo 如果是群主离开,需要转移群主
         return $this->magicGroupRepository->removeUsersFromGroup($magicGroupEntity, $userIds);
     }
 
-    public function GroupUpdateInfo(MagicGroupEntity $magicGroupDTO, DataIsolation $dataIsolation): MagicGroupEntity
+    public function GroupUpdateInfo(DelightfulGroupEntity $magicGroupDTO, DataIsolation $dataIsolation): DelightfulGroupEntity
     {
         $updateData = [];
         if (! empty($magicGroupDTO->getGroupName())) {
@@ -74,7 +74,7 @@ class MagicGroupDomainService extends AbstractDomainService
         return $magicGroupEntity;
     }
 
-    public function getGroupInfoById(string $groupId, DataIsolation $dataIsolation): ?MagicGroupEntity
+    public function getGroupInfoById(string $groupId, DataIsolation $dataIsolation): ?DelightfulGroupEntity
     {
         return $this->magicGroupRepository->getGroupInfoById($groupId, $dataIsolation->getCurrentOrganizationCode());
     }
@@ -85,7 +85,7 @@ class MagicGroupDomainService extends AbstractDomainService
     }
 
     /**
-     * @return MagicGroupEntity[]
+     * @return DelightfulGroupEntity[]
      */
     public function getGroupsInfoByIds(array $groupIds, DataIsolation $dataIsolation, bool $keyById = false): array
     {
@@ -119,7 +119,7 @@ class MagicGroupDomainService extends AbstractDomainService
         // 用户在这些群聊中的会话id
         $groupIds = array_column($groupDTOS, 'id');
         $conversations = $this->magicConversationRepository->getConversationsByReceiveIds($dataIsolation->getCurrentUserId(), $groupIds);
-        /** @var MagicConversationEntity[] $conversations */
+        /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'receive_id');
         $groupList = [];
         foreach ($groupDTOS as $groupDTO) {
@@ -135,7 +135,7 @@ class MagicGroupDomainService extends AbstractDomainService
     /**
      * @throws Throwable
      */
-    public function handlerMQGroupUserChangeSeq(MagicSeqEntity $groupUserChangeSeqEntity): void
+    public function handlerMQGroupUserChangeSeq(DelightfulSeqEntity $groupUserChangeSeqEntity): void
     {
         Db::beginTransaction();
         try {
@@ -176,10 +176,10 @@ class MagicGroupDomainService extends AbstractDomainService
 
     public function createGroupUserChangeSeq(
         DataIsolation $dataIsolation,
-        MagicGroupEntity $groupEntity,
+        DelightfulGroupEntity $groupEntity,
         array $seqContent,
         ControlMessageType $controlMessageType
-    ): MagicSeqEntity {
+    ): DelightfulSeqEntity {
         // 返回会话id,方便前端操作
         $userConversations = $this->getGroupUserConversationsByUserIds([$dataIsolation->getCurrentUserId()], $groupEntity->getId());
         $seqContent['conversation_id'] = $userConversations[$dataIsolation->getCurrentUserId()] ?? '';
@@ -187,12 +187,12 @@ class MagicGroupDomainService extends AbstractDomainService
         return $this->magicSeqRepository->createSequence($seqEntity->toArray());
     }
 
-    public function deleteGroup(MagicGroupEntity $magicGroupEntity): int
+    public function deleteGroup(DelightfulGroupEntity $magicGroupEntity): int
     {
         return $this->magicGroupRepository->deleteGroup($magicGroupEntity);
     }
 
-    public function getGroupControlSeq(MagicGroupEntity $magicGroupEntity, DataIsolation $dataIsolation, ControlMessageType $controlMessageType): ?MagicSeqEntity
+    public function getGroupControlSeq(DelightfulGroupEntity $magicGroupEntity, DataIsolation $dataIsolation, ControlMessageType $controlMessageType): ?DelightfulSeqEntity
     {
         // 群会话信息
         $conversation = $this->magicConversationRepository->getConversationsByReceiveIds($dataIsolation->getCurrentUserId(), [$magicGroupEntity->getId()])[0] ?? [];
@@ -200,13 +200,13 @@ class MagicGroupDomainService extends AbstractDomainService
             return null;
         }
         return $this->magicSeqRepository->getConversationSeqByType(
-            $dataIsolation->getCurrentMagicId(),
+            $dataIsolation->getCurrentDelightfulId(),
             $conversation->getId(),
             $controlMessageType
         );
     }
 
-    public function transferGroupOwner(MagicGroupEntity $groupEntity, DataIsolation $dataIsolation, MagicGroupEntity $magicGroupDTO): bool
+    public function transferGroupOwner(DelightfulGroupEntity $groupEntity, DataIsolation $dataIsolation, DelightfulGroupEntity $magicGroupDTO): bool
     {
         // 检查用户是否是群主
         $oldGroupOwner = $groupEntity->getGroupOwner();
@@ -223,7 +223,7 @@ class MagicGroupDomainService extends AbstractDomainService
         return $this->magicGroupRepository->transferGroupOwner($groupId, $oldGroupOwner, $newOwnerUserId);
     }
 
-    protected function getGroupChangeSeqEntity(DataIsolation $dataIsolation, MagicGroupEntity $groupEntity, array $seqContent, ControlMessageType $controlMessageType): MagicSeqEntity
+    protected function getGroupChangeSeqEntity(DataIsolation $dataIsolation, DelightfulGroupEntity $groupEntity, array $seqContent, ControlMessageType $controlMessageType): DelightfulSeqEntity
     {
         $id = (string) IdGenerator::getSnowId();
         $time = date('Y-m-d H:i:s');
@@ -231,7 +231,7 @@ class MagicGroupDomainService extends AbstractDomainService
             'id' => $id,
             'organization_code' => $groupEntity->getOrganizationCode(),
             'object_type' => ConversationType::User->value,
-            'object_id' => $dataIsolation->getCurrentMagicId(),
+            'object_id' => $dataIsolation->getCurrentDelightfulId(),
             'seq_id' => $id,
             'seq_type' => $controlMessageType->value,
             'content' => Json::encode($seqContent, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
@@ -241,7 +241,7 @@ class MagicGroupDomainService extends AbstractDomainService
             'refer_message_id' => '',
             'sender_message_id' => '',
             'conversation_id' => $seqContent['conversation_id'] ?? '',
-            'status' => MagicMessageStatus::Read->value, // 控制消息不需要已读回执
+            'status' => DelightfulMessageStatus::Read->value, // 控制消息不需要已读回执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => '',
@@ -308,7 +308,7 @@ class MagicGroupDomainService extends AbstractDomainService
                 'refer_message_id' => '',
                 'sender_message_id' => '',
                 'conversation_id' => $conversationId,
-                'status' => MagicMessageStatus::Read->value, // 发送方自己的消息,默认已读
+                'status' => DelightfulMessageStatus::Read->value, // 发送方自己的消息,默认已读
                 'created_at' => $time,
                 'updated_at' => $time,
                 'app_message_id' => '',

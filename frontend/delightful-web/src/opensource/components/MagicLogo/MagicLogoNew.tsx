@@ -45,7 +45,7 @@ const useStyles = createStyles(() => {
 	}
 })
 
-const MagicLogoNew = memo(function MagicLogoNew({ className }: { className?: string }) {
+const DelightfulLogoNew = memo(function DelightfulLogoNew({ className }: { className?: string }) {
 	const { styles } = useStyles()
 
 	return (
@@ -112,4 +112,4 @@ const MagicLogoNew = memo(function MagicLogoNew({ className }: { className?: str
 	)
 })
 
-export default MagicLogoNew
+export default DelightfulLogoNew

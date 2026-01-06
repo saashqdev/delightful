@@ -1,14 +1,14 @@
 import { Flex, message } from "antd"
 import { useTranslation } from "react-i18next"
-import { IconMagicBots } from "@/enhance/tabler/icons-react"
+import { IconDelightfulBots } from "@/enhance/tabler/icons-react"
 import CNLogo from "@/assets/logos/exploreLogo-cn.svg"
 import ENLogo from "@/assets/logos/exploreLogo-en.svg"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { useEffect, useState, useMemo } from "react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { useNavigate } from "@/opensource/hooks/useNavigate"
 import { RoutePath } from "@/const/routes"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useBotStore } from "@/opensource/stores/bot"
 import type { Bot } from "@/types/bot"
 import { useGlobalLanguage } from "@/opensource/models/config/hooks"
@@ -183,7 +183,7 @@ function ExplorePage() {
 					<Search handleClickCard={handleClickCard} />
 
 					<Flex gap={10} align="center">
-						<MagicButton
+						<DelightfulButton
 							type="text"
 							className={styles.button}
 							onClick={() => {
@@ -191,15 +191,15 @@ function ExplorePage() {
 							}}
 						>
 							{t("explore.buttonText.mangageAssistant")}
-						</MagicButton>
-						<MagicButton
+						</DelightfulButton>
+						<DelightfulButton
 							type="text"
 							className={cx(styles.button, styles.magicColor)}
-							icon={<MagicIcon component={IconMagicBots} size={20} color="white" />}
+							icon={<DelightfulIcon component={IconDelightfulBots} size={20} color="white" />}
 							onClick={openAddAgentModal}
 						>
 							{t("explore.buttonText.createAssistant")}
-						</MagicButton>
+						</DelightfulButton>
 					</Flex>
 				</Flex>
 

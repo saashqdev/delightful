@@ -5,7 +5,7 @@ import type { GetAntdTheme } from "antd-style"
 import { useTheme, ThemeProvider, createStyles, cx } from "antd-style"
 import { forwardRef, memo, useMemo, type CSSProperties, type ReactNode } from "react"
 
-export interface MagicButtonProps extends ButtonProps {
+export interface DelightfulButtonProps extends ButtonProps {
 	justify?: CSSProperties["justifyContent"]
 	theme?: boolean
 	tip?: ReactNode
@@ -39,8 +39,8 @@ const useStyles = createStyles(
 	}),
 )
 
-const MagicButton = memo(
-	forwardRef<HTMLButtonElement, MagicButtonProps>(
+const DelightfulButton = memo(
+	forwardRef<HTMLButtonElement, DelightfulButtonProps>(
 		(
 			{
 				tip,
@@ -49,7 +49,7 @@ const MagicButton = memo(
 				theme = true,
 				hidden,
 				...props
-			}: MagicButtonProps,
+			}: DelightfulButtonProps,
 			ref,
 		) => {
 			const { styles } = useStyles({ justify })
@@ -102,4 +102,4 @@ const MagicButton = memo(
 	),
 )
 
-export default MagicButton
+export default DelightfulButton

@@ -1,17 +1,17 @@
 import { IconChevronDown } from "@tabler/icons-react"
 import type { SelectProps } from "antd"
 import { Select } from "antd"
-import MagicIcon from "../MagicIcon"
+import DelightfulIcon from "../DelightfulIcon"
 import { memo } from "react"
 
-export type MagicSelectProps = SelectProps
+export type DelightfulSelectProps = SelectProps
 
-const suffixIcon = <MagicIcon component={IconChevronDown} size={16} />
+const suffixIcon = <DelightfulIcon component={IconChevronDown} size={16} />
 
-const MagicSelect = memo(({ ...props }: MagicSelectProps) => {
+const DelightfulSelect = memo(({ ...props }: DelightfulSelectProps) => {
 	return <Select suffixIcon={suffixIcon} {...props} />
 })
 
-MagicSelect.displayName = "MagicSelect"
+DelightfulSelect.displayName = "DelightfulSelect"
 
-export default MagicSelect
+export default DelightfulSelect

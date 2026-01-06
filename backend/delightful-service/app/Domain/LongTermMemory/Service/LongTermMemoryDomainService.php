@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\LongTermMemory\Service;
 
-use App\Domain\Chat\Repository\Facade\MagicMessageRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulMessageRepositoryInterface;
 use App\Domain\LongTermMemory\Assembler\LongTermMemoryAssembler;
 use App\Domain\LongTermMemory\DTO\CreateMemoryDTO;
 use App\Domain\LongTermMemory\DTO\MemoryQueryDTO;
@@ -22,9 +22,9 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\Locker\LockerInterface;
 use DateTime;
-use Delightful\SuperMagic\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationAction;
-use Delightful\SuperMagic\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationScenario;
-use Delightful\SuperMagic\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessage;
+use Delightful\SuperDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationAction;
+use Delightful\SuperDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationScenario;
+use Delightful\SuperDelightful\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessage;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -40,7 +40,7 @@ readonly class LongTermMemoryDomainService
         private LongTermMemoryRepositoryInterface $repository,
         private LoggerInterface $logger,
         private LockerInterface $locker,
-        private MagicMessageRepositoryInterface $messageRepository,
+        private DelightfulMessageRepositoryInterface $messageRepository,
     ) {
     }
 
@@ -688,7 +688,7 @@ readonly class LongTermMemoryDomainService
     {
         try {
             // 根据 magic_message_id 查询消息数据
-            $messageEntity = $this->messageRepository->getMessageByMagicMessageId($magicMessageId);
+            $messageEntity = $this->messageRepository->getMessageByDelightfulMessageId($magicMessageId);
 
             if (! $messageEntity) {
                 $this->logger->warning('Message not found for memory operation update', [

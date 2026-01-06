@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Core\Contract\Flow;
 
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Domain\Flow\Entity\ValueObject\NodeOutput;
 use Closure;
 
 interface BuiltInToolInterface
 {
-    public function generateToolFlow(string $organizationCode = '', string $userId = ''): MagicFlowEntity;
+    public function generateToolFlow(string $organizationCode = '', string $userId = ''): DelightfulFlowEntity;
 
     public function getToolSetCode(): string;
 

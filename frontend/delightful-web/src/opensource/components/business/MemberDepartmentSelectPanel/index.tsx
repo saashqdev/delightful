@@ -1,14 +1,14 @@
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { Flex } from "antd"
 import { useTranslation } from "react-i18next"
 import { memo, useMemo, useState } from "react"
-import MagicSegmented from "@/opensource/components/base/MagicSegmented"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulSegmented from "@/opensource/components/base/DelightfulSegmented"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { resolveToString } from "@dtyq/es6-template-strings"
 import { groupBy } from "lodash-es"
 import { StructureItemType } from "@/types/organization"
 import { useControllableValue, useMemoizedFn, useUpdateEffect } from "ahooks"
-import MagicScrollBar from "@/opensource/components/base/MagicScrollBar"
+import DelightfulScrollBar from "@/opensource/components/base/DelightfulScrollBar"
 import OrganizationPanel from "../OrganizationPanel"
 import type { MemberDepartmentSelectPanelProps, OrganizationSelectItem } from "./types"
 import GroupSelectPanel from "../GroupSelectPanel"
@@ -114,7 +114,7 @@ const MemberDepartmentSelectPanel = memo((props: MemberDepartmentSelectPanelProp
 	const DefaultEmptyFallback = useMemo(() => {
 		return (
 			<Flex vertical style={{ height: "100%", overflow: "hidden" }}>
-				<MagicSegmented<PanelKey>
+				<DelightfulSegmented<PanelKey>
 					circle={false}
 					value={segment}
 					block
@@ -129,10 +129,10 @@ const MemberDepartmentSelectPanel = memo((props: MemberDepartmentSelectPanelProp
 						overflow: "hidden",
 						display: "flex",
 						flexDirection: "column",
-						height: "calc(100% - 32px)", // 减去 MagicSegmented 的高度
+						height: "calc(100% - 32px)", // 减去 DelightfulSegmented 的高度
 					}}
 				>
-					<MagicScrollBar
+					<DelightfulScrollBar
 						className={styles.panelWrapper}
 						style={{
 							display: segment === PanelKey.ByOrganization ? "flex" : "none",
@@ -146,8 +146,8 @@ const MemberDepartmentSelectPanel = memo((props: MemberDepartmentSelectPanelProp
 						}}
 					>
 						<OrganizationPanel checkboxOptions={organizationCheckboxOptions} />
-					</MagicScrollBar>
-					<MagicScrollBar
+					</DelightfulScrollBar>
+					<DelightfulScrollBar
 						className={styles.panelWrapper}
 						style={{
 							display: segment === PanelKey.ByGroup ? "flex" : "none",
@@ -165,7 +165,7 @@ const MemberDepartmentSelectPanel = memo((props: MemberDepartmentSelectPanelProp
 							onChange={setSelected}
 							style={{ flex: 1, height: "100%" }}
 						/>
-					</MagicScrollBar>
+					</DelightfulScrollBar>
 				</div>
 			</Flex>
 		)
@@ -181,7 +181,7 @@ const MemberDepartmentSelectPanel = memo((props: MemberDepartmentSelectPanelProp
 	const shouldShowDefaultEmptyFallback = !searchValue
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			open
 			title={title ?? t("common.select", { ns: "interface" })}
 			width={860}
@@ -285,16 +285,16 @@ const MemberDepartmentSelectPanel = memo((props: MemberDepartmentSelectPanelProp
 						</Flex>
 					</Flex>
 					<Flex align="center" gap={10} justify="flex-end" className={styles.footer}>
-						<MagicButton type="default" onClick={onCancel}>
+						<DelightfulButton type="default" onClick={onCancel}>
 							{t("common.cancel", { ns: "interface" })}
-						</MagicButton>
-						<MagicButton type="primary" onClick={handleOk}>
+						</DelightfulButton>
+						<DelightfulButton type="primary" onClick={handleOk}>
 							{t("common.confirm", { ns: "interface" })}
-						</MagicButton>
+						</DelightfulButton>
 					</Flex>
 				</Flex>
 			</Flex>
-		</MagicModal>
+		</DelightfulModal>
 	)
 })
 

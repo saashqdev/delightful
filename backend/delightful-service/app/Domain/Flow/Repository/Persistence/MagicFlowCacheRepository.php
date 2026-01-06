@@ -7,22 +7,22 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Persistence;
 
-use App\Domain\Flow\Entity\MagicFlowCacheEntity;
+use App\Domain\Flow\Entity\DelightfulFlowCacheEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Factory\MagicFlowCacheFactory;
-use App\Domain\Flow\Repository\Facade\MagicFlowCacheRepositoryInterface;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowCacheModel;
+use App\Domain\Flow\Factory\DelightfulFlowCacheFactory;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowCacheRepositoryInterface;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowCacheModel;
 
-class MagicFlowCacheRepository extends MagicFlowAbstractRepository implements MagicFlowCacheRepositoryInterface
+class DelightfulFlowCacheRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowCacheRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowCacheEntity $entity): MagicFlowCacheEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowCacheEntity $entity): DelightfulFlowCacheEntity
     {
         if ($entity->shouldCreate()) {
             $entity->prepareForCreation();
-            $model = new MagicFlowCacheModel();
+            $model = new DelightfulFlowCacheModel();
         } else {
-            /** @var MagicFlowCacheModel $model */
-            $model = MagicFlowCacheModel::find($entity->getId());
+            /** @var DelightfulFlowCacheModel $model */
+            $model = DelightfulFlowCacheModel::find($entity->getId());
         }
 
         $model->fill($this->getAttributes($entity));
@@ -33,41 +33,41 @@ class MagicFlowCacheRepository extends MagicFlowAbstractRepository implements Ma
         return $entity;
     }
 
-    public function findByPrefixAndKey(FlowDataIsolation $dataIsolation, string $cachePrefix, string $cacheKey): ?MagicFlowCacheEntity
+    public function findByPrefixAndKey(FlowDataIsolation $dataIsolation, string $cachePrefix, string $cacheKey): ?DelightfulFlowCacheEntity
     {
         $cacheHash = $this->generateCacheHash($cachePrefix, $cacheKey);
 
-        $builder = $this->createBuilder($dataIsolation, MagicFlowCacheModel::query());
-        /** @var null|MagicFlowCacheModel $model */
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowCacheModel::query());
+        /** @var null|DelightfulFlowCacheModel $model */
         $model = $builder->where('cache_hash', $cacheHash)->first();
 
         if (! $model) {
             return null;
         }
 
-        return MagicFlowCacheFactory::modelToEntity($model);
+        return DelightfulFlowCacheFactory::modelToEntity($model);
     }
 
     public function deleteByPrefixAndKey(FlowDataIsolation $dataIsolation, string $cachePrefix, string $cacheKey): bool
     {
         $cacheHash = $this->generateCacheHash($cachePrefix, $cacheKey);
 
-        $builder = $this->createBuilder($dataIsolation, MagicFlowCacheModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowCacheModel::query());
         $deleted = $builder->where('cache_hash', $cacheHash)->delete();
 
         return $deleted > 0;
     }
 
-    public function delete(FlowDataIsolation $dataIsolation, MagicFlowCacheEntity $entity): bool
+    public function delete(FlowDataIsolation $dataIsolation, DelightfulFlowCacheEntity $entity): bool
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowCacheModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowCacheModel::query());
         $deleted = $builder->where('id', $entity->getId())->delete();
 
         return $deleted > 0;
     }
 
     /**
-     * Generate cache hash using the same algorithm as MagicFlowCacheEntity.
+     * Generate cache hash using the same algorithm as DelightfulFlowCacheEntity.
      *
      * @param string $cachePrefix Cache prefix
      * @param string $cacheKey Cache key

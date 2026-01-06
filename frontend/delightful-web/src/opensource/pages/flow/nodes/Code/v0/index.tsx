@@ -1,18 +1,18 @@
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
-import { ShowColumns } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/constants"
+import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
 import { useMemo, useRef, useState } from "react"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import Editor from "@monaco-editor/react"
 import { useMemoizedFn, useUpdateEffect } from "ahooks"
 import { cloneDeep, set } from "lodash-es"
 import { Form, Modal } from "antd"
-import MagicJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicJsonSchemaEditorWrap"
+import DelightfulJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulJsonSchemaEditorWrap"
 import {
 	useFlowData,
 	useNodeConfigActions,
-} from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import MagicExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicExpressionWrap"
-import { ExpressionMode } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
+} from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import DelightfulExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
+import { ExpressionMode } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
 import { useTranslation } from "react-i18next"
 import styles from "./index.module.less"
 import usePrevious from "../../../common/hooks/usePrevious"
@@ -121,7 +121,7 @@ export default function Code() {
 			<div className={styles.input}>
 				<DropdownCard title={t("common.input", { ns: "flow" })} height="auto">
 					<Form.Item name="input">
-						<MagicJSONSchemaEditorWrap
+						<DelightfulJSONSchemaEditorWrap
 							allowExpression
 							expressionSource={expressionDataSource}
 							displayColumns={[ShowColumns.Key, ShowColumns.Value, ShowColumns.Type]}
@@ -175,7 +175,7 @@ export default function Code() {
 					)}
 					{currentNode?.params?.mode === CodeMode.Expression && (
 						<Form.Item name={["import_code"]}>
-							<MagicExpressionWrap
+							<DelightfulExpressionWrap
 								onlyExpression
 								dataSource={expressionDataSource}
 								mode={ExpressionMode.TextArea}
@@ -189,7 +189,7 @@ export default function Code() {
 			<div className={styles.output}>
 				<DropdownCard title={t("common.output", { ns: "flow" })} height="auto">
 					<Form.Item name="output">
-						<MagicJSONSchemaEditorWrap
+						<DelightfulJSONSchemaEditorWrap
 							allowExpression
 							expressionSource={expressionDataSource}
 							displayColumns={[ShowColumns.Key, ShowColumns.Label, ShowColumns.Type]}

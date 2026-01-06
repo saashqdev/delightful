@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Util\Auth\Permission;
 
-use App\Domain\Contact\Service\MagicAccountDomainService;
+use App\Domain\Contact\Service\DelightfulAccountDomainService;
 use Hyperf\Di\Annotation\Inject;
 
 class Permission implements PermissionInterface
 {
     #[Inject]
-    protected MagicAccountDomainService $magicAccountDomainService;
+    protected DelightfulAccountDomainService $magicAccountDomainService;
 
     /**
      * 判断是否超级管理员.
@@ -41,7 +41,7 @@ class Permission implements PermissionInterface
     public function getOrganizationAdminList(string $magicId): array
     {
         // 通过 magicID 获取手机号码
-        $accountEntity = $this->magicAccountDomainService->getAccountInfoByMagicId($magicId);
+        $accountEntity = $this->magicAccountDomainService->getAccountInfoByDelightfulId($magicId);
         if ($accountEntity === null) {
             return [];
         }

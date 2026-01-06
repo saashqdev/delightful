@@ -10,18 +10,18 @@ namespace App\Infrastructure\ExternalAPI\Search\Adapter;
 use App\Infrastructure\ExternalAPI\Search\DTO\SearchResponseDTO;
 use App\Infrastructure\ExternalAPI\Search\DTO\SearchResultItemDTO;
 use App\Infrastructure\ExternalAPI\Search\DTO\WebPagesDTO;
-use App\Infrastructure\ExternalAPI\Search\MagicSearch;
+use App\Infrastructure\ExternalAPI\Search\DelightfulSearch;
 
 /**
- * Magic Search API adapter.
- * Calls internal Magic search API which proxies to other search engines.
+ * Delightful Search API adapter.
+ * Calls internal Delightful search API which proxies to other search engines.
  */
-class MagicSearchAdapter implements SearchEngineAdapterInterface
+class DelightfulSearchAdapter implements SearchEngineAdapterInterface
 {
     private array $providerConfig;
 
     public function __construct(
-        private readonly MagicSearch $magicSearch,
+        private readonly DelightfulSearch $magicSearch,
         array $providerConfig = []
     ) {
         $this->providerConfig = $providerConfig;
@@ -40,7 +40,7 @@ class MagicSearchAdapter implements SearchEngineAdapterInterface
         $baseUrl = $this->providerConfig['request_url'] ?? '';
         $apiKey = $this->providerConfig['api_key'] ?? '';
 
-        // Call Magic search API
+        // Call Delightful search API
         $rawResponse = $this->magicSearch->search(
             $query,
             $baseUrl,
@@ -61,7 +61,7 @@ class MagicSearchAdapter implements SearchEngineAdapterInterface
     {
         $response = new SearchResponseDTO();
 
-        // Magic API returns data in snake_case format, need to convert
+        // Delightful API returns data in snake_case format, need to convert
         if (isset($magicResponse['web_pages'])) {
             $webPagesData = $magicResponse['web_pages'];
             $webPages = new WebPagesDTO();

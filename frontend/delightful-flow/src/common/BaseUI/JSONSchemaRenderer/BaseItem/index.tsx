@@ -1,6 +1,6 @@
 import { copyToClipboard } from "@/DelightfulFlow/utils"
-import { SchemaValueSplitor, getFormTypeToTitle } from "@/MagicJsonSchemaEditor/constants"
-import Schema from "@/MagicJsonSchemaEditor/types/Schema"
+import { SchemaValueSplitor, getFormTypeToTitle } from "@/DelightfulJsonSchemaEditor/constants"
+import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import { Tooltip, message } from "antd"
 import { IconCaretDownFilled, IconCaretRightFilled } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"

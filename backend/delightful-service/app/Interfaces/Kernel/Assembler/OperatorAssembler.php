@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Kernel\Assembler;
 
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Infrastructure\Core\Operator;
 use App\Interfaces\Kernel\DTO\OperatorDTO;
 use DateTime;
@@ -24,7 +24,7 @@ class OperatorAssembler
         return $dto;
     }
 
-    public static function createOperatorDTOByUserEntity(?MagicUserEntity $user, null|DateTime|string $dateTime = null): ?OperatorDTO
+    public static function createOperatorDTOByUserEntity(?DelightfulUserEntity $user, null|DateTime|string $dateTime = null): ?OperatorDTO
     {
         if (! $user) {
             return null;

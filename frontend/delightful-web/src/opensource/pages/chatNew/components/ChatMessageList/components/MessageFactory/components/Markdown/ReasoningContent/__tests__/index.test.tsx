@@ -4,7 +4,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest"
 import ReasoningContent from "../index"
 
 // 模拟依赖组件
-vi.mock("@/opensource/components/base/MagicIcon", () => ({
+vi.mock("@/opensource/components/base/DelightfulIcon", () => ({
 	default: ({
 		component: Icon,
 		...props

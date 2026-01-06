@@ -1,6 +1,6 @@
-# MagicImagePreview 魔法图片预览组件
+# DelightfulImagePreview 魔法图片预览组件
 
-`MagicImagePreview` 是一个功能丰富的图片预览组件，提供缩放、旋转、拖拽、对比等多种交互功能，适用于需要详细查看图片的场景。
+`DelightfulImagePreview` 是一个功能丰富的图片预览组件，提供缩放、旋转、拖拽、对比等多种交互功能，适用于需要详细查看图片的场景。
 
 ## 属性
 
@@ -29,25 +29,25 @@
 ## 基础用法
 
 ```tsx
-import { MagicImagePreview } from '@/components/base/MagicImagePreview';
+import { DelightfulImagePreview } from '@/components/base/DelightfulImagePreview';
 
 // 基础用法
-<MagicImagePreview>
+<DelightfulImagePreview>
   <img src="/path/to/image.jpg" alt="预览图片" />
-</MagicImagePreview>
+</DelightfulImagePreview>
 
 // 带导航按钮的图片预览
-<MagicImagePreview
+<DelightfulImagePreview
   onNext={handleNextImage}
   onPrev={handlePrevImage}
   nextDisabled={isLastImage}
   prevDisabled={isFirstImage}
 >
   <img src={currentImage} alt="预览图片" />
-</MagicImagePreview>
+</DelightfulImagePreview>
 
 // 带图片对比功能
-<MagicImagePreview
+<DelightfulImagePreview
   hasCompare={true}
   viewType={CompareViewType.PULL}
   onChangeViewType={handleViewTypeChange}
@@ -58,16 +58,16 @@ import { MagicImagePreview } from '@/components/base/MagicImagePreview';
     <img src="/path/to/original-image.jpg" alt="原图" />
     <img src="/path/to/compared-image.jpg" alt="对比图" />
   </div>
-</MagicImagePreview>
+</DelightfulImagePreview>
 
 // 自定义样式
-<MagicImagePreview rootClassName="custom-preview-container">
+<DelightfulImagePreview rootClassName="custom-preview-container">
   <img
     src="/path/to/image.jpg"
     alt="预览图片"
     className="custom-image"
   />
-</MagicImagePreview>
+</DelightfulImagePreview>
 ```
 
 ## 特点
@@ -90,4 +90,4 @@ import { MagicImagePreview } from '@/components/base/MagicImagePreview';
 -   需要在应用中提供专业的图片预览功能时
 -   需要查看高清图片细节时
 
-MagicImagePreview 组件提供了专业的图片预览体验，适合在需要详细查看图片内容的场景中使用，如图片库、照片编辑应用、产品展示等。
+DelightfulImagePreview 组件提供了专业的图片预览体验，适合在需要详细查看图片内容的场景中使用，如图片库、照片编辑应用、产品展示等。

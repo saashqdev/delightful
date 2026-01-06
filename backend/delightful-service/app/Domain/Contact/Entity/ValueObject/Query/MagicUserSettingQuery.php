@@ -9,7 +9,7 @@ namespace App\Domain\Contact\Entity\ValueObject\Query;
 
 use App\Infrastructure\Core\AbstractQuery;
 
-class MagicUserSettingQuery extends AbstractQuery
+class DelightfulUserSettingQuery extends AbstractQuery
 {
     private ?string $userId = null;
 

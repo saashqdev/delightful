@@ -4,8 +4,8 @@ import {
 	smartTopicRename,
 	getTopicsByWorkspaceId,
 	getTopicDetailByTopicId,
-} from "@/opensource/pages/superMagic/utils/api"
-import SuperMagicMobileWorkSpace from "@/opensource/pages/superMagicMobile/pages/workspace/index"
+} from "@/opensource/pages/superDelightful/utils/api"
+import SuperDelightfulMobileWorkSpace from "@/opensource/pages/superDelightfulMobile/pages/workspace/index"
 import pubsub from "@/utils/pubsub"
 import { useDeepCompareEffect, useResponsive } from "ahooks"
 import { Modal } from "antd"
@@ -567,7 +567,7 @@ function MainWorkspaceContent() {
 
 	console.log("isEmptyStatus-->", isEmptyStatus)
 	return isMobile ? (
-		<SuperMagicMobileWorkSpace
+		<SuperDelightfulMobileWorkSpace
 			workspaces={workspaces}
 			selectedWorkspace={selectedWorkspace}
 			fetchWorkspaces={fetchWorkspaces}

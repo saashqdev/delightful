@@ -4,7 +4,7 @@ import Snowflake from 'snowflake-id';
 import { SCHEMA_TYPE, SchemaOption, getSchemaToOptionsMap } from '../constants';
 import Schema from '../types/Schema';
 import { commonDefaultSchema } from './SchemaUtils';
-import { FormItemType } from '@/MagicExpressionWidget/types';
+import { FormItemType } from '@/DelightfulExpressionWidget/types';
 
 const snowflake = new Snowflake({
   mid: 1024,

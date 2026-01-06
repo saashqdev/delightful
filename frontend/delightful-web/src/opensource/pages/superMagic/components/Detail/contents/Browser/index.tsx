@@ -1,4 +1,4 @@
-import { getTemporaryDownloadUrl } from "@/opensource/pages/superMagic/utils/api"
+import { getTemporaryDownloadUrl } from "@/opensource/pages/superDelightful/utils/api"
 import { memo, useEffect, useState } from "react"
 import BrowserNavigate from "../../components/BrowserNavigate"
 import CommonFooter from "../../components/CommonFooter"

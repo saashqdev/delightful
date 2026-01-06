@@ -14,8 +14,8 @@ use App\ErrorCode\GenericErrorCode;
 use App\ErrorCode\HttpErrorCode;
 use App\ErrorCode\ImageGenerateErrorCode;
 use App\ErrorCode\LongTermMemoryErrorCode;
-use App\ErrorCode\MagicAccountErrorCode;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulAccountErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\ErrorCode\MCPErrorCode;
 use App\ErrorCode\ModeErrorCode;
 use App\ErrorCode\PermissionErrorCode;
@@ -24,7 +24,7 @@ use App\ErrorCode\TokenErrorCode;
 use App\ErrorCode\UserErrorCode;
 use App\ErrorCode\UserTaskErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
-use Delightful\SuperMagic\ErrorCode\SuperMagicErrorCode;
+use Delightful\SuperDelightful\ErrorCode\SuperDelightfulErrorCode;
 
 return [
     'exception_class' => BusinessException::class,
@@ -32,8 +32,8 @@ return [
         HttpErrorCode::class => [100, 600],
         UserErrorCode::class => [2150, 2999],
         ChatErrorCode::class => [3000, 3999],
-        MagicApiErrorCode::class => [4000, 4100],
-        MagicAccountErrorCode::class => [4100, 4300],
+        DelightfulApiErrorCode::class => [4000, 4100],
+        DelightfulAccountErrorCode::class => [4100, 4300],
         GenericErrorCode::class => [5000, 9000],
         EventErrorCode::class => [6000, 6999],
         TokenErrorCode::class => [9000, 10000],
@@ -48,6 +48,6 @@ return [
         ServiceProviderErrorCode::class => [44000, 44999],
         LongTermMemoryErrorCode::class => [45000, 45999],
         MCPErrorCode::class => [51500, 51599],
-        SuperMagicErrorCode::class => [60000, 60999],
+        SuperDelightfulErrorCode::class => [60000, 60999],
     ],
 ];

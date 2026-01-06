@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Event;
 
-use App\Domain\Flow\Entity\MagicFlowToolSetEntity;
+use App\Domain\Flow\Entity\DelightfulFlowToolSetEntity;
 
-class MagicFLowToolSetSavedEvent
+class DelightfulFLowToolSetSavedEvent
 {
-    public function __construct(public MagicFlowToolSetEntity $toolSetEntity, public bool $create)
+    public function __construct(public DelightfulFlowToolSetEntity $toolSetEntity, public bool $create)
     {
     }
 }

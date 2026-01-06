@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react"
 import type { HTTP } from "@/types/flow"
 import { useMemoizedFn, useUpdateEffect } from "ahooks"
-import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
-import MagicInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
+import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
 import type { EventEmitter } from "ahooks/lib/useEventEmitter"
 import { useTranslation } from "react-i18next"
 import styles from "./index.module.less"
@@ -44,7 +44,7 @@ function PostAddrSettings({ value, onChange, paths, pathEventEmitter }: PostAddr
 
 	const SelectBefore = useMemo(
 		() => (
-			<MagicSelect
+			<DelightfulSelect
 				value={value.method}
 				className={styles.methodSelect}
 				style={{ width: 120 }}
@@ -84,7 +84,7 @@ function PostAddrSettings({ value, onChange, paths, pathEventEmitter }: PostAddr
 					placeholder="请输入域名"
 				/> */}
 				<div style={{ flex: 1, marginLeft: "4px" }}>
-					<MagicInput
+					<DelightfulInput
 						value={url}
 						onChange={onURLUpdate}
 						placeholder={t("http.requestUrlPlaceholder", { ns: "flow" })}

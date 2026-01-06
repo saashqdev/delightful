@@ -7,23 +7,23 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\ExecuteManager\ExecutionData;
 
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 
 class ExecutionFlowCollector
 {
     protected static array $flows = [];
 
-    public static function getOrCreate(string $key, MagicFlowEntity $magicFlowEntity): MagicFlowEntity
+    public static function getOrCreate(string $key, DelightfulFlowEntity $magicFlowEntity): DelightfulFlowEntity
     {
         return self::$flows[$key] ??= $magicFlowEntity;
     }
 
-    public static function add(string $key, MagicFlowEntity $magicFlowEntity): void
+    public static function add(string $key, DelightfulFlowEntity $magicFlowEntity): void
     {
         self::$flows[$key] = $magicFlowEntity;
     }
 
-    public static function get(string $key): ?MagicFlowEntity
+    public static function get(string $key): ?DelightfulFlowEntity
     {
         return self::$flows[$key] ?? null;
     }

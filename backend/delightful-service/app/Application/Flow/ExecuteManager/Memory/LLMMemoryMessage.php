@@ -11,9 +11,9 @@ use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 use App\Application\Flow\ExecuteManager\Attachment\AttachmentUtil;
 use App\Application\Flow\ExecuteManager\Attachment\ExternalAttachment;
 use App\Domain\Chat\DTO\Message\TextContentInterface;
-use App\Domain\Chat\Entity\MagicMessageEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
-use App\Domain\Flow\Entity\MagicFlowMemoryHistoryEntity;
+use App\Domain\Flow\Entity\DelightfulFlowMemoryHistoryEntity;
 use Hyperf\Odin\Contract\Message\MessageInterface;
 use Hyperf\Odin\Message\AssistantMessage;
 use Hyperf\Odin\Message\Role;
@@ -121,7 +121,7 @@ class LLMMemoryMessage
         return $images;
     }
 
-    public static function createByChatMemory(MagicMessageEntity $magicMessageEntity): ?self
+    public static function createByChatMemory(DelightfulMessageEntity $magicMessageEntity): ?self
     {
         $messageContent = $magicMessageEntity->getContent();
         $textContent = '';
@@ -130,7 +130,7 @@ class LLMMemoryMessage
         }
 
         // 获取附件
-        $attachments = AttachmentUtil::getByMagicMessageEntity($magicMessageEntity);
+        $attachments = AttachmentUtil::getByDelightfulMessageEntity($magicMessageEntity);
         if ($textContent === '' && empty($attachments)) {
             return null;
         }
@@ -139,13 +139,13 @@ class LLMMemoryMessage
         $messageType = $magicMessageEntity->getSenderType() ?? ConversationType::Ai;
         $role = ($messageType === ConversationType::Ai) ? Role::Assistant : Role::User;
 
-        $customMessage = new LLMMemoryMessage($role, $textContent, $magicMessageEntity->getMagicMessageId());
+        $customMessage = new LLMMemoryMessage($role, $textContent, $magicMessageEntity->getDelightfulMessageId());
         $customMessage->setAttachments($attachments);
         $customMessage->setOriginalContent($magicMessageEntity->toArray());
         return $customMessage;
     }
 
-    public static function createByFlowMemory(MagicFlowMemoryHistoryEntity $magicFlowMemoryHistoryEntity): ?self
+    public static function createByFlowMemory(DelightfulFlowMemoryHistoryEntity $magicFlowMemoryHistoryEntity): ?self
     {
         $role = Role::tryFrom($magicFlowMemoryHistoryEntity->getRole());
         if (! $role) {

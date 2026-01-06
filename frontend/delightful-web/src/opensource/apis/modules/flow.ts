@@ -1,6 +1,6 @@
 import { genRequestUrl } from "@/utils/http"
 import { RequestUrl } from "../constant"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import type {
 	ApiKey,
 	ApiKeyRequestParams,
@@ -21,7 +21,7 @@ import type {
 import { FlowType } from "@/types/flow"
 import type { File, Sheet } from "@/types/sheet"
 import type { Knowledge } from "@/types/knowledge"
-import type { MethodOption } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
+import type { MethodOption } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 import type { HttpClient } from "../core/HttpClient"
 
 export const generateFlowApi = (fetch: HttpClient) => ({
@@ -29,7 +29,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	 * 查询流程列表
 	 */
 	getFlowList({ type = FlowType.Main, page = 1, pageSize = 100, name }: GetFlowListParams) {
-		return fetch.post<WithPage<MagicFlow.Flow[]>>(genRequestUrl(RequestUrl.getFlowList), {
+		return fetch.post<WithPage<DelightfulFlow.Flow[]>>(genRequestUrl(RequestUrl.getFlowList), {
 			type,
 			page,
 			page_size: pageSize,
@@ -41,13 +41,13 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	 * 查询流程详情
 	 */
 	getFlow(flowId: string) {
-		return fetch.get<MagicFlow.Flow>(genRequestUrl(RequestUrl.getFlow, { flowId }))
+		return fetch.get<DelightfulFlow.Flow>(genRequestUrl(RequestUrl.getFlow, { flowId }))
 	},
 
 	/**
 	 * 流程试运行
 	 */
-	testFlow(flow: MagicFlow.Flow & { trigger_config: TriggerConfig }) {
+	testFlow(flow: DelightfulFlow.Flow & { trigger_config: TriggerConfig }) {
 		return fetch.post<TestResult>(
 			genRequestUrl(RequestUrl.testFlow, { flowId: flow.id! }),
 			flow,
@@ -57,8 +57,8 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	/**
 	 * 新增或修改流程基本信息
 	 */
-	addOrUpdateFlowBaseInfo(flow: Partial<MagicFlow.Flow> & { type?: FlowType }) {
-		return fetch.post<MagicFlow.Flow>(genRequestUrl(RequestUrl.addOrUpdateFlowBaseInfo), flow)
+	addOrUpdateFlowBaseInfo(flow: Partial<DelightfulFlow.Flow> & { type?: FlowType }) {
+		return fetch.post<DelightfulFlow.Flow>(genRequestUrl(RequestUrl.addOrUpdateFlowBaseInfo), flow)
 	},
 
 	/**
@@ -71,7 +71,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	/**
 	 * 保存流程详情
 	 */
-	saveFlow(flow: MagicFlow.Flow) {
+	saveFlow(flow: DelightfulFlow.Flow) {
 		return fetch.post<null>(genRequestUrl(RequestUrl.saveFlow, { flowId: flow.id! }), flow)
 	},
 
@@ -319,7 +319,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	 * 获取工具列表
 	 */
 	getToolList({ page = 1, pageSize = 10, name }: FlowTool.GetToolListParams) {
-		return fetch.post<WithPage<MagicFlow.Flow[]>>(genRequestUrl(RequestUrl.getToolList), {
+		return fetch.post<WithPage<DelightfulFlow.Flow[]>>(genRequestUrl(RequestUrl.getToolList), {
 			page,
 			page_size: pageSize,
 			name,
@@ -369,7 +369,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	 * 获取可用工具
 	 */
 	getAvailableTools(toolIds: string[]) {
-		return fetch.post<WithPage<MagicFlow.Flow[]>>(genRequestUrl(RequestUrl.getAvailableTools), {
+		return fetch.post<WithPage<DelightfulFlow.Flow[]>>(genRequestUrl(RequestUrl.getAvailableTools), {
 			codes: toolIds,
 		})
 	},
@@ -416,7 +416,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	 * 获取节点模板
 	 */
 	getNodeTemplate(nodeType: string) {
-		return fetch.post<MagicFlow.Node>(genRequestUrl(RequestUrl.getNodeTemplate), {
+		return fetch.post<DelightfulFlow.Node>(genRequestUrl(RequestUrl.getNodeTemplate), {
 			params: {},
 			node_type: nodeType,
             node_version: "latest"

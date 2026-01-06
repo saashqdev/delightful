@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowVersionEntity;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowVersionQuery;
+use App\Domain\Flow\Entity\DelightfulFlowVersionEntity;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowVersionQuery;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 use Qbhy\HyperfAuth\Authenticatable;
 
-class MagicFlowVersionAppService extends AbstractFlowAppService
+class DelightfulFlowVersionAppService extends AbstractFlowAppService
 {
     /**
      * 查询版本列表.
-     * @return array{total: int, list: array<MagicFlowVersionEntity>, users: array}
+     * @return array{total: int, list: array<DelightfulFlowVersionEntity>, users: array}
      */
-    public function queries(Authenticatable $authorization, MagicFLowVersionQuery $query, Page $page): array
+    public function queries(Authenticatable $authorization, DelightfulFLowVersionQuery $query, Page $page): array
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         if (empty($query->getFlowCode())) {
@@ -43,7 +43,7 @@ class MagicFlowVersionAppService extends AbstractFlowAppService
     /**
      * 获取版本详情.
      */
-    public function show(Authenticatable $authorization, string $flowCode, string $versionCode): MagicFlowVersionEntity
+    public function show(Authenticatable $authorization, string $flowCode, string $versionCode): DelightfulFlowVersionEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         if (empty($flowCode)) {
@@ -51,14 +51,14 @@ class MagicFlowVersionAppService extends AbstractFlowAppService
         }
         $magicFlow = $this->getFlowAndValidateOperation($dataIsolation, $flowCode, 'read');
         $version = $this->magicFlowVersionDomainService->show($dataIsolation, $magicFlow->getCode(), $versionCode);
-        $version->getMagicFlow()->setUserOperation($magicFlow->getUserOperation());
+        $version->getDelightfulFlow()->setUserOperation($magicFlow->getUserOperation());
         return $version;
     }
 
     /**
      * 发布版本.
      */
-    public function publish(Authenticatable $authorization, MagicFlowVersionEntity $magicFlowVersionEntity): MagicFlowVersionEntity
+    public function publish(Authenticatable $authorization, DelightfulFlowVersionEntity $magicFlowVersionEntity): DelightfulFlowVersionEntity
     {
         if (empty($magicFlowVersionEntity->getFlowCode())) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow_code']);
@@ -67,14 +67,14 @@ class MagicFlowVersionAppService extends AbstractFlowAppService
         $magicFlow = $this->getFlowAndValidateOperation($dataIsolation, $magicFlowVersionEntity->getFlowCode(), 'edit');
 
         $version = $this->magicFlowVersionDomainService->publish($dataIsolation, $magicFlow, $magicFlowVersionEntity);
-        $version->getMagicFlow()->setUserOperation($magicFlow->getUserOperation());
+        $version->getDelightfulFlow()->setUserOperation($magicFlow->getUserOperation());
         return $version;
     }
 
     /**
      * 回滚版本.
      */
-    public function rollback(Authenticatable $authorization, string $flowCode, string $versionCode): MagicFlowVersionEntity
+    public function rollback(Authenticatable $authorization, string $flowCode, string $versionCode): DelightfulFlowVersionEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         if (empty($flowCode)) {
@@ -83,7 +83,7 @@ class MagicFlowVersionAppService extends AbstractFlowAppService
         $magicFlow = $this->getFlowAndValidateOperation($dataIsolation, $flowCode, 'edit');
 
         $version = $this->magicFlowVersionDomainService->rollback($dataIsolation, $magicFlow, $versionCode);
-        $version->getMagicFlow()->setUserOperation($magicFlow->getUserOperation());
+        $version->getDelightfulFlow()->setUserOperation($magicFlow->getUserOperation());
         return $version;
     }
 }

@@ -1,5 +1,5 @@
-import { Common } from "@/MagicConditionEdit/types/common"
-import Schema from "@/MagicJsonSchemaEditor/types/Schema"
+import { Common } from "@/DelightfulConditionEdit/types/common"
+import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import { ComponentType } from "../constants"
 
 export function toCamelCase(input: string): string {

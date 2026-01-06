@@ -1,6 +1,6 @@
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicTag from "@/opensource/components/base/MagicTag"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulTag from "@/opensource/components/base/DelightfulTag"
 import { IconSitemap } from "@tabler/icons-react"
 import type { TagProps } from "antd"
 import { Flex } from "antd"
@@ -29,22 +29,22 @@ const SelectItemTag = memo(function SelectItemTag({
 	const { styles } = useStyles()
 
 	return (
-		<MagicTag closable onClose={onClose} className={styles.tag} {...props}>
+		<DelightfulTag closable onClose={onClose} className={styles.tag} {...props}>
 			{(() => {
 				switch (true) {
 					case isMember(data):
 						return (
 							<Flex align="center" gap={10}>
-								<MagicAvatar size={20} src={data.avatar_url}>
+								<DelightfulAvatar size={20} src={data.avatar_url}>
 									{data.real_name}
-								</MagicAvatar>
+								</DelightfulAvatar>
 								{data.real_name}
 							</Flex>
 						)
 					case isDepartment(data):
 						return (
 							<Flex align="center" gap={10}>
-								<MagicIcon
+								<DelightfulIcon
 									color="currentColor"
 									component={IconSitemap}
 									size={18}
@@ -56,7 +56,7 @@ const SelectItemTag = memo(function SelectItemTag({
 					case isGroup(data):
 						return (
 							<Flex align="center" gap={10}>
-								<MagicAvatar size={20} src={data.group_avatar} />
+								<DelightfulAvatar size={20} src={data.group_avatar} />
 								{data.group_name}
 							</Flex>
 						)
@@ -64,7 +64,7 @@ const SelectItemTag = memo(function SelectItemTag({
 						return null
 				}
 			})()}
-		</MagicTag>
+		</DelightfulTag>
 	)
 })
 

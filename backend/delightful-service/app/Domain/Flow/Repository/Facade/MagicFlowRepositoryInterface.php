@@ -7,31 +7,31 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Facade;
 
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowQuery;
 use App\Domain\Flow\Entity\ValueObject\Type;
 use App\Infrastructure\Core\ValueObject\Page;
 
-interface MagicFlowRepositoryInterface
+interface DelightfulFlowRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowEntity $magicFlowEntity): MagicFlowEntity;
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $magicFlowEntity): DelightfulFlowEntity;
 
-    public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?MagicFlowEntity;
+    public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowEntity;
 
     /**
-     * @return array<MagicFlowEntity>
+     * @return array<DelightfulFlowEntity>
      */
     public function getByCodes(FlowDataIsolation $dataIsolation, array $codes): array;
 
-    public function getByName(FlowDataIsolation $dataIsolation, string $name, Type $type): ?MagicFlowEntity;
+    public function getByName(FlowDataIsolation $dataIsolation, string $name, Type $type): ?DelightfulFlowEntity;
 
-    public function remove(FlowDataIsolation $dataIsolation, MagicFlowEntity $magicFlowEntity): void;
+    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $magicFlowEntity): void;
 
     /**
-     * @return array{total: int, list: array<MagicFlowEntity>}
+     * @return array{total: int, list: array<DelightfulFlowEntity>}
      */
-    public function queries(FlowDataIsolation $dataIsolation, MagicFLowQuery $query, Page $page): array;
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowQuery $query, Page $page): array;
 
     public function changeEnable(FlowDataIsolation $dataIsolation, string $code, bool $enable): void;
 

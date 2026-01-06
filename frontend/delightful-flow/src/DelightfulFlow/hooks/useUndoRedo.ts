@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import { useMemo, useRef, useState } from 'react';
 import {  Edge } from 'reactflow';
-import { MagicFlow } from '../types/flow';
+import { DelightfulFlow } from '../types/flow';
 import { useMemoizedFn, useUpdateEffect } from 'ahooks';
 
 type Snapshot = {
-  nodes: MagicFlow.Node[];
+  nodes: DelightfulFlow.Node[];
   edges: Edge[];
   nodeConfig: Record<string, any>;
 };
@@ -30,7 +30,7 @@ const useUndoRedo = (debuggerMode: boolean) => {
   }, [redoStack])
 
   const takeSnapshot = useMemo(() => 
-      (nodes: MagicFlow.Node[], edges: Edge[], nodeConfig: Record<string, any>) => {
+      (nodes: DelightfulFlow.Node[], edges: Edge[], nodeConfig: Record<string, any>) => {
         // const snapshot: Snapshot = {
         //   nodes: _.cloneDeep(nodes),
         //   edges: _.cloneDeep(edges),

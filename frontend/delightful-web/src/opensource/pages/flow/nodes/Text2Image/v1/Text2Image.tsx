@@ -1,9 +1,9 @@
 import { Form, Flex } from "antd"
-import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
 import { useMemoizedFn } from "ahooks"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import { useNodeConfigActions } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { ExpressionMode } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useNodeConfigActions } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { ExpressionMode } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
 import { cx } from "antd-style"
 import { useMemo } from "react"
@@ -11,7 +11,7 @@ import { getExpressionPlaceholder, removeEmptyValues } from "@/opensource/pages/
 import usePrevious from "@/opensource/pages/flow/common/hooks/usePrevious"
 import useCurrentNodeUpdate from "@/opensource/pages/flow/common/hooks/useCurrentNodeUpdate"
 import NodeOutputWrap from "@/opensource/pages/flow/components/NodeOutputWrap/NodeOutputWrap"
-import MagicExpression from "@/opensource/pages/flow/common/Expression"
+import DelightfulExpression from "@/opensource/pages/flow/common/Expression"
 import { useTranslation } from "react-i18next"
 import { useFlowStore } from "@/opensource/stores/flow"
 import RenderLabelCommon from "@/opensource/pages/flow/components/RenderLabel/RenderLabel"
@@ -135,7 +135,7 @@ export default function Text2ImageV1() {
 					label={t("common.model", { ns: "flow" })}
 					className={styles.formItem}
 				>
-					<MagicSelect
+					<DelightfulSelect
 						options={dynamicModelOptions}
 						labelRender={(props: any) => {
 							if (!props.value) return undefined
@@ -153,7 +153,7 @@ export default function Text2ImageV1() {
 					/>
 				</Form.Item>
 				{hasRatio && (
-					<MagicExpression
+					<DelightfulExpression
 						name="ratio"
 						label={t("text2Image.size", { ns: "flow" })}
 						allowExpression
@@ -167,7 +167,7 @@ export default function Text2ImageV1() {
 						onlyExpression={false}
 					/>
 				)}
-				<MagicExpression
+				<DelightfulExpression
 					name="reference_images"
 					label={t("text2Image.referenceImage", { ns: "flow" })}
 					dataSource={expressionDataSource}
@@ -184,7 +184,7 @@ export default function Text2ImageV1() {
 						justify="space-between"
 						className={styles.formItem}
 					>
-						<MagicExpression
+						<DelightfulExpression
 							name="width"
 							label={t("common.width", { ns: "flow" })}
 							onlyExpression
@@ -194,7 +194,7 @@ export default function Text2ImageV1() {
 							className={styles.heightCol}
 							minHeight="auto"
 						/>
-						<MagicExpression
+						<DelightfulExpression
 							name="height"
 							label={t("common.height", { ns: "flow" })}
 							onlyExpression
@@ -217,7 +217,7 @@ export default function Text2ImageV1() {
 					title={t("text2Image.name", { ns: "flow" })}
 					className={cx(styles.formItem, styles.imagePrompt)}
 				>
-					<MagicExpression
+					<DelightfulExpression
 						label={t("text2Image.positivePrompt", { ns: "flow" })}
 						name="user_prompt"
 						placeholder={getExpressionPlaceholder(
@@ -226,7 +226,7 @@ export default function Text2ImageV1() {
 						dataSource={expressionDataSource}
 					/>
 
-					{/* <MagicExpression
+					{/* <DelightfulExpression
 						label={t("text2Image.negativePrompt", { ns: "flow" })}
 						name="negative_prompt"
 						placeholder={getExpressionPlaceholder(

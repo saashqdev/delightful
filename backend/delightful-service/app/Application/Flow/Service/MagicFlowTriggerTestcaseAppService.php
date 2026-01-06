@@ -7,17 +7,17 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowTriggerTestcaseEntity;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowTriggerTestcaseQuery;
+use App\Domain\Flow\Entity\DelightfulFlowTriggerTestcaseEntity;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowTriggerTestcaseQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 use Qbhy\HyperfAuth\Authenticatable;
 
-class MagicFlowTriggerTestcaseAppService extends AbstractFlowAppService
+class DelightfulFlowTriggerTestcaseAppService extends AbstractFlowAppService
 {
     /**
      * 保存触发测试集.
      */
-    public function save(Authenticatable $authorization, MagicFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): MagicFlowTriggerTestcaseEntity
+    public function save(Authenticatable $authorization, DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): DelightfulFlowTriggerTestcaseEntity
     {
         return $this->magicFlowTriggerTestcaseDomainService->save($this->createFlowDataIsolation($authorization), $magicFlowTriggerTestcaseEntity);
     }
@@ -25,7 +25,7 @@ class MagicFlowTriggerTestcaseAppService extends AbstractFlowAppService
     /**
      * 获取触发测试集.
      */
-    public function show(Authenticatable $authorization, string $flowCode, string $testcaseCode): MagicFlowTriggerTestcaseEntity
+    public function show(Authenticatable $authorization, string $flowCode, string $testcaseCode): DelightfulFlowTriggerTestcaseEntity
     {
         return $this->magicFlowTriggerTestcaseDomainService->show($this->createFlowDataIsolation($authorization), $flowCode, $testcaseCode);
     }
@@ -42,9 +42,9 @@ class MagicFlowTriggerTestcaseAppService extends AbstractFlowAppService
 
     /**
      * 查询触发测试集.
-     * @return array{total: int, list: array<MagicFlowTriggerTestcaseEntity>, users: array}
+     * @return array{total: int, list: array<DelightfulFlowTriggerTestcaseEntity>, users: array}
      */
-    public function queries(Authenticatable $authorization, MagicFLowTriggerTestcaseQuery $query, Page $page): array
+    public function queries(Authenticatable $authorization, DelightfulFLowTriggerTestcaseQuery $query, Page $page): array
     {
         $result = $this->magicFlowTriggerTestcaseDomainService->queries($this->createFlowDataIsolation($authorization), $query, $page);
         $userIds = [];

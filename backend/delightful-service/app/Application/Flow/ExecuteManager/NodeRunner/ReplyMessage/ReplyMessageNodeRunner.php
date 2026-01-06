@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\ExecuteManager\NodeRunner\ReplyMessage;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\Flow\ExecuteManager\Attachment\AbstractAttachment;
 use App\Application\Flow\ExecuteManager\Compressible\CompressibleContent;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
@@ -16,7 +16,7 @@ use App\Application\Flow\ExecuteManager\ExecutionData\FlowStreamStatus;
 use App\Application\Flow\ExecuteManager\Memory\LLMMemoryMessage;
 use App\Application\Flow\ExecuteManager\Message\MessageUtil;
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunner;
-use App\Application\Flow\ExecuteManager\NodeRunner\ReplyMessage\Struct\MagicStreamTextProcessor;
+use App\Application\Flow\ExecuteManager\NodeRunner\ReplyMessage\Struct\DelightfulStreamTextProcessor;
 use App\Application\Flow\ExecuteManager\NodeRunner\ReplyMessage\Struct\Message;
 use App\Application\Flow\ExecuteManager\NodeRunner\ReplyMessage\Struct\StreamResponse;
 use App\Application\Flow\ExecuteManager\Stream\FlowEventStreamManager;
@@ -25,10 +25,10 @@ use App\Domain\Chat\DTO\Message\MessageInterface;
 use App\Domain\Chat\DTO\Message\StreamMessage\StreamMessageStatus;
 use App\Domain\Chat\DTO\Message\StreamMessage\StreamOptions;
 use App\Domain\Chat\DTO\Message\TextContentInterface;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
-use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\MagicFlowMessage;
+use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\DelightfulFlowMessage;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\ReplyMessage\ReplyMessageNodeParamsConfig;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Routine\TopicConfig;
 use App\Domain\Flow\Entity\ValueObject\NodeType;
@@ -66,7 +66,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             return;
         }
 
-        $magicFlowMessage = new MagicFlowMessage(
+        $magicFlowMessage = new DelightfulFlowMessage(
             $paramsConfig->getType(),
             $paramsConfig->getContent(),
             $paramsConfig->getLink(),
@@ -124,7 +124,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             return;
         }
 
-        $receiveSeqDTO = new MagicSeqEntity();
+        $receiveSeqDTO = new DelightfulSeqEntity();
         $receiveSeqDTO->setContent($IMResponse);
         $receiveSeqDTO->setSeqType($IMResponse->getMessageTypeEnum());
         $senderUser = $executionData->getSenderEntities()['user'] ?? null;
@@ -133,7 +133,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $receiveSeqDTO->setExtra($flowSeqEntity->getExtra()?->getExtraCanCopyData());
             $receiveSeqDTO->setReferMessageId($flowSeqEntity->getMessageId());
         }
-        $magicChatMessageAppService = di(MagicChatMessageAppService::class);
+        $magicChatMessageAppService = di(DelightfulChatMessageAppService::class);
         $magicChatMessageAppService->agentSendMessage(
             aiSeqDTO: $receiveSeqDTO,
             senderUserId: $executionData->getAgentUserId(),
@@ -166,7 +166,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         $LLMMemoryMessage = new LLMMemoryMessage(Role::Assistant, $content, $id);
         $LLMMemoryMessage->setConversationId($executionData->getConversationId());
         $LLMMemoryMessage->setAttachments($executionData->getTriggerData()->getAttachments());
-        $LLMMemoryMessage->setOriginalContent(MagicFlowMessage::createContent($IMResponse));
+        $LLMMemoryMessage->setOriginalContent(DelightfulFlowMessage::createContent($IMResponse));
         $LLMMemoryMessage->setTopicId($executionData->getTopicIdString());
         $LLMMemoryMessage->setRequestId($executionData->getId());
         $LLMMemoryMessage->setUid($executionData->getAgentUserId() ?: $executionData->getOperator()->getUid());
@@ -196,12 +196,12 @@ class ReplyMessageNodeRunner extends NodeRunner
         $topicConfig = new TopicConfig($routineConfig['topic']['type'] ?? '', ComponentFactory::fastCreate($routineConfig['topic']['name'] ?? []));
 
         $aiUserId = $executionData->getAgentUserId();
-        $magicChatMessageAppService = di(MagicChatMessageAppService::class);
+        $magicChatMessageAppService = di(DelightfulChatMessageAppService::class);
 
         $parallel = new Parallel(10);
         foreach ($userIds as $userId) {
             $parallel->add(function () use ($IMResponse, $userId, $aiUserId, $magicChatMessageAppService) {
-                $receiveSeqDTO = new MagicSeqEntity();
+                $receiveSeqDTO = new DelightfulSeqEntity();
                 $receiveSeqDTO->setContent($IMResponse);
                 $receiveSeqDTO->setSeqType($IMResponse->getMessageTypeEnum());
 
@@ -253,7 +253,7 @@ class ReplyMessageNodeRunner extends NodeRunner
 
             FlowEventStreamManager::write($messageStruct->toSteamResponse('message'));
         };
-        $magicStreamTextProcessor = new MagicStreamTextProcessor($outputCall);
+        $magicStreamTextProcessor = new DelightfulStreamTextProcessor($outputCall);
 
         $reasoning = false;
         $lastChoice = null;
@@ -284,7 +284,7 @@ class ReplyMessageNodeRunner extends NodeRunner
 
     private function sendMessageForStreamIMChat(ExecutionData $executionData, Generator $chatCompletionChoiceGenerator, StreamResponse $streamResponse): void
     {
-        $chatAppService = di(MagicChatMessageAppService::class);
+        $chatAppService = di(DelightfulChatMessageAppService::class);
 
         $appMessageId = IdGenerator::getUniqueId32();
 
@@ -296,7 +296,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         $messageContent = new TextMessage();
         $messageContent->setContent('');
         $messageContent->setStreamOptions($streamOptions);
-        $receiveSeqDTO = (new MagicSeqEntity())
+        $receiveSeqDTO = (new DelightfulSeqEntity())
             ->setSeqType(ChatMessageType::Text)
             ->setReferMessageId('')
             ->setContent($messageContent);
@@ -335,7 +335,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $receiveSeqDTO->setContent($messageContent);
             $chatAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $receiveUserId, $appMessageId, receiverType: ConversationType::User);
         };
-        $magicStreamTextProcessor = new MagicStreamTextProcessor($outputCall);
+        $magicStreamTextProcessor = new DelightfulStreamTextProcessor($outputCall);
 
         $reasoning = false;
         try {

@@ -1,6 +1,6 @@
 import { Flex, Switch } from "antd"
 import { useMemoizedFn } from "ahooks"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { memo, useMemo } from "react"
 import PromptCard from "@/opensource/pages/explore/components/PromptCard"
 import { IconCircleCheckFilled, IconAlertCircleFilled, IconTools } from "@tabler/icons-react"
@@ -17,7 +17,7 @@ import OperateMenu from "../OperateMenu"
 import { hasEditRight, hasViewRight } from "../AuthControlButton/types"
 import type { Knowledge } from "@/types/knowledge"
 
-type Flow = MagicFlow.Flow & {
+type Flow = DelightfulFlow.Flow & {
 	quote?: number
 	icon?: string
 	created_at?: string
@@ -31,7 +31,7 @@ type FlowCardProps = {
 	lineCount: number
 	flowType?: FlowRouteType
 	dropdownItems: React.ReactNode
-	onCardClick: (flow: MagicFlow.Flow | Knowledge.KnowledgeItem | FlowScope.Mcp.Detail) => void
+	onCardClick: (flow: DelightfulFlow.Flow | Knowledge.KnowledgeItem | FlowScope.Mcp.Detail) => void
 	updateEnable: (flow: Flow | Knowledge.KnowledgeItem | FlowScope.Mcp.Detail) => void
 }
 

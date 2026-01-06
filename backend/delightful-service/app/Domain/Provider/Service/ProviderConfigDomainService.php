@@ -50,7 +50,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId): ?ProviderConfigModelsDTO
     {
-        // 1. 获取服务商配置实体，包含模板ID和虚拟Magic服务商的统一处理
+        // 1. 获取服务商配置实体，包含模板ID和虚拟Delightful服务商的统一处理
         $providerConfigEntity = $this->getProviderConfig($dataIsolation, $configId);
         if (! $providerConfigEntity) {
             return null;

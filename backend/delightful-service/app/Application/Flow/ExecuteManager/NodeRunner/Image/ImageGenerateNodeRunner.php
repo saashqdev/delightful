@@ -15,7 +15,7 @@ use App\Domain\Flow\Entity\ValueObject\NodeType;
 use App\Domain\ImageGenerate\ValueObject\ImageGenerateSourceEnum;
 use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\FlowNodeDefine;
 use App\Infrastructure\Core\Dag\VertexResult;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 
 #[FlowNodeDefine(
     type: NodeType::ImageGenerate->value,
@@ -74,7 +74,7 @@ class ImageGenerateNodeRunner extends NodeRunner
         $agentId = $executionData->getAgentId();
         $data['agent_id'] = $agentId;
         $flowDataIsolation = $executionData->getDataIsolation();
-        $magicUserAuthorization = new MagicUserAuthorization();
+        $magicUserAuthorization = new DelightfulUserAuthorization();
         $magicUserAuthorization->setOrganizationCode($flowDataIsolation->getCurrentOrganizationCode());
         $magicUserAuthorization->setId($flowDataIsolation->getCurrentUserId());
         $data['source_type'] = ImageGenerateSourceEnum::FLOW_NODE;

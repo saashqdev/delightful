@@ -5,12 +5,12 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Application\MCP\BuiltInMCP\SuperMagicChat;
+namespace App\Application\MCP\BuiltInMCP\SuperDelightfulChat;
 
 use App\Application\Flow\ExecuteManager\NodeRunner\LLM\ToolsExecutor;
-use App\Application\Flow\Service\MagicFlowExecuteAppService;
+use App\Application\Flow\Service\DelightfulFlowExecuteAppService;
 use App\Application\Permission\Service\OperationPermissionAppService;
-use App\Domain\Agent\Service\MagicAgentDomainService;
+use App\Domain\Agent\Service\DelightfulAgentDomainService;
 use App\Domain\Chat\Entity\ValueObject\InstructionType;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\MCP\Entity\ValueObject\MCPDataIsolation;
@@ -18,13 +18,13 @@ use App\Domain\Permission\Entity\ValueObject\OperationPermission\ResourceType;
 use App\Domain\Permission\Entity\ValueObject\PermissionDataIsolation;
 use App\ErrorCode\MCPErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Flow\DTO\MagicFlowApiChatDTO;
+use App\Interfaces\Flow\DTO\DelightfulFlowApiChatDTO;
 use Delightful\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
 use Delightful\PhpMcp\Types\Tools\Tool;
 use Hyperf\Redis\RedisFactory;
 use Hyperf\Redis\RedisProxy;
 
-class SuperMagicChatManager
+class SuperDelightfulChatManager
 {
     private const string REDIS_KEY_PREFIX = 'super_magic_chat_manager:';
 
@@ -79,7 +79,7 @@ class SuperMagicChatManager
     private static function getAgents(FlowDataIsolation $flowDataIsolation, array $agentIds): array
     {
         // 1. 查询所有可用 agent
-        $agents = di(MagicAgentDomainService::class)->getAgentByIds($agentIds);
+        $agents = di(DelightfulAgentDomainService::class)->getAgentByIds($agentIds);
 
         // 如果没有可用的 agents，直接返回空数组
         if (empty($agents)) {
@@ -196,16 +196,16 @@ MARKDOWN;
                 if (! $message) {
                     ExceptionBuilder::throw(MCPErrorCode::ValidateFailed, 'common.required', ['label' => 'message']);
                 }
-                $agent = di(MagicAgentDomainService::class)->getAgentById($agentId);
+                $agent = di(DelightfulAgentDomainService::class)->getAgentById($agentId);
                 if (! $agent) {
                     ExceptionBuilder::throw(MCPErrorCode::ValidateFailed, 'common.not_found', ['label' => $agentId]);
                 }
-                $apiChatDTO = new MagicFlowApiChatDTO();
+                $apiChatDTO = new DelightfulFlowApiChatDTO();
                 $apiChatDTO->setFlowCode($agent->getFlowCode());
                 $apiChatDTO->setMessage($message);
                 $apiChatDTO->setConversationId($arguments['conversation_id'] ?? '');
                 $apiChatDTO->setInstruction($arguments['instruction'] ?? []);
-                return di(MagicFlowExecuteAppService::class)->apiChatByMCPTool($flowDataIsolation, $apiChatDTO);
+                return di(DelightfulFlowExecuteAppService::class)->apiChatByMCPTool($flowDataIsolation, $apiChatDTO);
             },
         );
         return [$registeredAgent];
@@ -372,12 +372,12 @@ MARKDOWN;
                         $label = $toolFlow ? $toolFlow->getName() : $toolFlowId;
                         ExceptionBuilder::throw(MCPErrorCode::ValidateFailed, 'common.disabled', ['label' => $label]);
                     }
-                    $apiChatDTO = new MagicFlowApiChatDTO();
+                    $apiChatDTO = new DelightfulFlowApiChatDTO();
                     $apiChatDTO->setParams($arguments);
                     $apiChatDTO->setFlowCode($toolFlow->getCode());
                     $apiChatDTO->setFlowVersionCode($toolFlow->getVersionCode());
                     $apiChatDTO->setMessage('mcp_tool_call');
-                    return di(MagicFlowExecuteAppService::class)->apiParamCallByRemoteTool($flowDataIsolation, $apiChatDTO, 'super_magic_mcp_tool');
+                    return di(DelightfulFlowExecuteAppService::class)->apiParamCallByRemoteTool($flowDataIsolation, $apiChatDTO, 'super_magic_mcp_tool');
                 },
             );
         }

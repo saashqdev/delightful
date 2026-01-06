@@ -1,6 +1,6 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MessageList from "@/opensource/pages/superMagic/components/MessageList/index"
-import { editThread, getWorkspaces } from "@/opensource/pages/superMagic/utils/api"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import MessageList from "@/opensource/pages/superDelightful/components/MessageList/index"
+import { editThread, getWorkspaces } from "@/opensource/pages/superDelightful/utils/api"
 import { IconChevronDown, IconChevronRight, IconDots } from "@tabler/icons-react"
 import type { InputRef, MenuProps } from "antd"
 import { Button, Dropdown, Input, Modal, Tooltip, Typography } from "antd"
@@ -201,7 +201,7 @@ export default function ArchivedWorkspaces() {
 								type="text"
 								size="small"
 								icon={
-									<MagicIcon
+									<DelightfulIcon
 										size={18}
 										component={
 											workspaceIsCollapsed
@@ -294,7 +294,7 @@ export default function ArchivedWorkspaces() {
 																size="small"
 																onClick={(e) => e.stopPropagation()}
 															>
-																<MagicIcon
+																<DelightfulIcon
 																	size={18}
 																	component={IconDots}
 																	stroke={2}
@@ -324,7 +324,7 @@ export default function ArchivedWorkspaces() {
 								type="text"
 								size="small"
 								icon={
-									<MagicIcon
+									<DelightfulIcon
 										size={18}
 										component={
 											threadIsCollapsed ? IconChevronRight : IconChevronDown
@@ -414,7 +414,7 @@ export default function ArchivedWorkspaces() {
 																size="small"
 																onClick={(e) => e.stopPropagation()}
 															>
-																<MagicIcon
+																<DelightfulIcon
 																	size={18}
 																	component={IconDots}
 																	stroke={2}

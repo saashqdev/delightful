@@ -9,11 +9,11 @@ namespace App\Domain\Chat\Repository\Persistence;
 
 use App\Domain\Chat\DTO\ConversationListQueryDTO;
 use App\Domain\Chat\DTO\PageResponseDTO\ConversationsPageResponseDTO;
-use App\Domain\Chat\Entity\MagicConversationEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationStatus;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
-use App\Domain\Chat\Repository\Facade\MagicChatConversationRepositoryInterface;
-use App\Domain\Chat\Repository\Persistence\Model\MagicChatConversationModel;
+use App\Domain\Chat\Repository\Facade\DelightfulChatConversationRepositoryInterface;
+use App\Domain\Chat\Repository\Persistence\Model\DelightfulChatConversationModel;
 use App\ErrorCode\ChatErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
@@ -24,15 +24,15 @@ use Hyperf\Codec\Json;
 use Hyperf\DbConnection\Db;
 use Hyperf\Redis\Redis;
 
-class MagicChatConversationRepository implements MagicChatConversationRepositoryInterface
+class DelightfulChatConversationRepository implements DelightfulChatConversationRepositoryInterface
 {
     public function __construct(
-        protected MagicChatConversationModel $magicChatConversationModel,
+        protected DelightfulChatConversationModel $magicChatConversationModel,
         private readonly Redis $redis
     ) {
     }
 
-    public function getConversationsByUserIds(MagicConversationEntity $conversation, ConversationListQueryDTO $queryDTO, array $userIds): ConversationsPageResponseDTO
+    public function getConversationsByUserIds(DelightfulConversationEntity $conversation, ConversationListQueryDTO $queryDTO, array $userIds): ConversationsPageResponseDTO
     {
         $conversationIds = $queryDTO->getIds();
         $limit = $queryDTO->getLimit() ?: 100;
@@ -68,7 +68,7 @@ class MagicChatConversationRepository implements MagicChatConversationRepository
     }
 
     /**
-     * @return MagicConversationEntity[]
+     * @return DelightfulConversationEntity[]
      */
     public function getConversationByIds(array $conversationIds): array
     {
@@ -77,7 +77,7 @@ class MagicChatConversationRepository implements MagicChatConversationRepository
         return ConversationAssembler::getConversationEntities($conversations);
     }
 
-    public function addConversation(MagicConversationEntity $conversation): MagicConversationEntity
+    public function addConversation(DelightfulConversationEntity $conversation): DelightfulConversationEntity
     {
         $time = date('Y-m-d H:i:s');
         if (empty($conversation->getUserOrganizationCode()) || empty($conversation->getReceiveOrganizationCode())) {
@@ -105,7 +105,7 @@ class MagicChatConversationRepository implements MagicChatConversationRepository
         return ConversationAssembler::getConversationEntity($conversationData);
     }
 
-    public function getConversationByUserIdAndReceiveId(MagicConversationEntity $conversation): ?MagicConversationEntity
+    public function getConversationByUserIdAndReceiveId(DelightfulConversationEntity $conversation): ?DelightfulConversationEntity
     {
         $conversationData = $this->getConversationArrayByUserIdAndReceiveId($conversation);
         if (empty($conversationData)) {
@@ -114,7 +114,7 @@ class MagicChatConversationRepository implements MagicChatConversationRepository
         return ConversationAssembler::getConversationEntity($conversationData);
     }
 
-    public function getConversationById(string $conversationId): ?MagicConversationEntity
+    public function getConversationById(string $conversationId): ?DelightfulConversationEntity
     {
         $conversation = $this->getConversationArrayById($conversationId);
         if (empty($conversation)) {
@@ -125,7 +125,7 @@ class MagicChatConversationRepository implements MagicChatConversationRepository
 
     /**
      * (分组织)获取用户与指定用户的会话窗口信息.
-     * @return array<MagicConversationEntity>
+     * @return array<DelightfulConversationEntity>
      */
     public function getConversationsByReceiveIds(string $userId, array $receiveIds, ?string $userOrganizationCode = null): array
     {
@@ -138,7 +138,7 @@ class MagicChatConversationRepository implements MagicChatConversationRepository
         return ConversationAssembler::getConversationEntities($conversations);
     }
 
-    public function getReceiveConversationBySenderConversationId(string $senderConversationId): ?MagicConversationEntity
+    public function getReceiveConversationBySenderConversationId(string $senderConversationId): ?DelightfulConversationEntity
     {
         // 获取发件方的信息
         $senderConversationEntity = $this->getConversationById($senderConversationId);
@@ -146,7 +146,7 @@ class MagicChatConversationRepository implements MagicChatConversationRepository
             return null;
         }
         // 获取收件方的会话窗口
-        $receiveConversationDTO = new MagicConversationEntity();
+        $receiveConversationDTO = new DelightfulConversationEntity();
         $receiveConversationDTO->setUserId($senderConversationEntity->getReceiveId());
         $receiveConversationDTO->setReceiveId($senderConversationEntity->getUserId());
         $receiveConversationEntity = $this->getConversationByUserIdAndReceiveId($receiveConversationDTO);
@@ -187,7 +187,7 @@ class MagicChatConversationRepository implements MagicChatConversationRepository
     }
 
     /**
-     * @return MagicConversationEntity[]
+     * @return DelightfulConversationEntity[]
      */
     public function batchGetConversations(array $userIds, string $receiveId, ConversationType $receiveType): array
     {
@@ -236,7 +236,7 @@ class MagicChatConversationRepository implements MagicChatConversationRepository
     }
 
     /**
-     * @return MagicConversationEntity[]
+     * @return DelightfulConversationEntity[]
      */
     public function getRelatedConversationsWithInstructByUserId(array $userIds): array
     {
@@ -308,7 +308,7 @@ class MagicChatConversationRepository implements MagicChatConversationRepository
             ]);
     }
 
-    private function getConversationArrayByUserIdAndReceiveId(MagicConversationEntity $conversation): ?array
+    private function getConversationArrayByUserIdAndReceiveId(DelightfulConversationEntity $conversation): ?array
     {
         $cacheKey = sprintf(
             'conversation_%s_%s_%s_%s',

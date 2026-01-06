@@ -16,13 +16,13 @@ use App\Application\Flow\ExecuteManager\Memory\FlowMemoryManager;
 use App\Application\ModelGateway\Mapper\ModelGatewayMapper;
 use App\Application\ModelGateway\Service\LLMAppService;
 use App\Application\Permission\Service\OperationPermissionAppService;
-use App\Domain\Chat\Service\MagicChatFileDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Chat\Service\DelightfulChatFileDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\Flow\Entity\ValueObject\MemoryType;
 use App\Domain\Flow\Entity\ValueObject\Node;
 use App\Domain\Flow\Entity\ValueObject\NodeDebugResult;
-use App\Domain\Flow\Service\MagicFlowDomainService;
+use App\Domain\Flow\Service\DelightfulFlowDomainService;
 use App\Domain\ModelGateway\Service\MsgLogDomainService;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Contract\Flow\NodeRunnerInterface;
@@ -47,7 +47,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     protected FlowMemoryManager $flowMemoryManager;
 
-    protected MagicFlowDomainService $magicFlowDomainService;
+    protected DelightfulFlowDomainService $magicFlowDomainService;
 
     protected FileDomainService $fileDomainService;
 
@@ -57,11 +57,11 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     protected CacheInterface $cache;
 
-    protected MagicChatFileDomainService $magicChatFileDomainService;
+    protected DelightfulChatFileDomainService $magicChatFileDomainService;
 
     protected MsgLogDomainService $msgLogDomainService;
 
-    protected MagicUserDomainService $userDomainService;
+    protected DelightfulUserDomainService $userDomainService;
 
     protected ModelGatewayMapper $modelGatewayMapper;
 
@@ -74,12 +74,12 @@ abstract class NodeRunner implements NodeRunnerInterface
         $this->logger = di(LoggerFactory::class)->get('NodeRunner');
         $this->cache = di(CacheInterface::class);
         $this->flowMemoryManager = di(FlowMemoryManager::class);
-        $this->magicFlowDomainService = di(MagicFlowDomainService::class);
+        $this->magicFlowDomainService = di(DelightfulFlowDomainService::class);
         $this->fileDomainService = di(FileDomainService::class);
         $this->operationPermissionAppService = di(OperationPermissionAppService::class);
-        $this->magicChatFileDomainService = di(MagicChatFileDomainService::class);
+        $this->magicChatFileDomainService = di(DelightfulChatFileDomainService::class);
         $this->msgLogDomainService = di(MsgLogDomainService::class);
-        $this->userDomainService = di(MagicUserDomainService::class);
+        $this->userDomainService = di(DelightfulUserDomainService::class);
         $this->modelGatewayMapper = di(ModelGatewayMapper::class);
         $this->llmAppService = di(LLMAppService::class);
 

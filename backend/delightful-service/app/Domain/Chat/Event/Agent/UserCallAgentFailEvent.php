@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Event\Agent;
 
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Infrastructure\Core\AbstractEvent;
 
 /**
@@ -16,7 +16,7 @@ use App\Infrastructure\Core\AbstractEvent;
 class UserCallAgentFailEvent extends AbstractEvent
 {
     public function __construct(
-        public MagicSeqEntity $seqEntity,
+        public DelightfulSeqEntity $seqEntity,
     ) {
     }
 }

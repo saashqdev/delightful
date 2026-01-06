@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\DTO;
 
-use App\Domain\Agent\Constant\MagicAgentReleaseStatus;
+use App\Domain\Agent\Constant\DelightfulAgentReleaseStatus;
 use App\Domain\Agent\Entity\AbstractEntity;
 use App\Domain\Agent\Entity\ValueObject\Visibility\VisibilityConfig;
 use App\Domain\Agent\Entity\ValueObject\Visibility\VisibilityType;
 use App\ErrorCode\AgentErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 
-class MagicAgentVersionDTO extends AbstractEntity
+class DelightfulAgentVersionDTO extends AbstractEntity
 {
     private ?string $agentId = null;
 
@@ -38,11 +38,11 @@ class MagicAgentVersionDTO extends AbstractEntity
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.version_description_length_cannot_exceed_500_characters');
         }
 
-        if (! in_array($this->releaseScope, array_map(fn ($status) => $status->value, MagicAgentReleaseStatus::cases()), true)) {
+        if (! in_array($this->releaseScope, array_map(fn ($status) => $status->value, DelightfulAgentReleaseStatus::cases()), true)) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.invalid_version_release_range');
         }
 
-        if ($this->releaseScope === MagicAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
+        if ($this->releaseScope === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
             $this->validatesVisibilityConfig();
         }
 

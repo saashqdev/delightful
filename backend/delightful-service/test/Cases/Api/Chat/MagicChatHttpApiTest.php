@@ -12,7 +12,7 @@ use HyperfTest\Cases\Api\AbstractHttpTest;
 /**
  * @internal
  */
-class MagicChatHttpApiTest extends AbstractHttpTest
+class DelightfulChatHttpApiTest extends AbstractHttpTest
 {
     /**
      * 测试会话窗口中的聊天补全功能.

@@ -1,5 +1,5 @@
 import { NodeVersionMap } from "@/common/context/NodeMap/Context"
-import { SnowflakeId } from "@/MagicExpressionWidget/helpers"
+import { SnowflakeId } from "@/DelightfulExpressionWidget/helpers"
 import {
 	EditRef,
 	EXPRESSION_VALUE,
@@ -7,10 +7,10 @@ import {
 	MethodArgsItem,
 	RenderConfig,
 	VALUE_TYPE,
-} from "@/MagicExpressionWidget/types"
+} from "@/DelightfulExpressionWidget/types"
 import { getLatestNodeVersion, getReferencePrefix, judgeIsVariableNode } from "@/DelightfulFlow/utils"
-import { getFormTypeToTitle } from "@/MagicJsonSchemaEditor/constants"
-import Schema from "@/MagicJsonSchemaEditor/types/Schema"
+import { getFormTypeToTitle } from "@/DelightfulJsonSchemaEditor/constants"
+import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import { IconTreeTriangleDown } from "@douyinfe/semi-icons"
 import { Tooltip, Tree, TreeDataNode } from "antd"
 import { Icon } from "@iconify/react"

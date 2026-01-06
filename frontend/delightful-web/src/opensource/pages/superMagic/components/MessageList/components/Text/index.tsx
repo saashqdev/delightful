@@ -1,4 +1,4 @@
-import MagicAva from "@/opensource/pages/superMagic/assets/svg/magicAva.svg"
+import DelightfulAva from "@/opensource/pages/superDelightful/assets/svg/magicAva.svg"
 import { userStore } from "@/opensource/models/user"
 import { IconChecks } from "@tabler/icons-react"
 import MarkDown from "react-markdown"
@@ -56,7 +56,7 @@ function Text(props: TextProps) {
 						</>
 					) : (
 						<>
-							<img src={MagicAva} alt="avatar" className={styles.avatar} />
+							<img src={DelightfulAva} alt="avatar" className={styles.avatar} />
 							<span className={styles.timestamp}>
 								{formatTimestamp(data?.send_timestamp)}
 							</span>

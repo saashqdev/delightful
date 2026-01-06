@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Permission\Assembler;
 
-use App\Domain\Contact\Entity\MagicDepartmentEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
-use App\Domain\Group\Entity\MagicGroupEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
+use App\Domain\Group\Entity\DelightfulGroupEntity;
 use App\Domain\Permission\Entity\OperationPermissionEntity;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\Operation;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\ResourceType;
@@ -38,9 +38,9 @@ class OperationPermissionAssembler
 
     /**
      * @param array<OperationPermissionEntity> $operationPermissions
-     * @param array<string, MagicUserEntity> $users
-     * @param array<string, MagicDepartmentEntity> $departments
-     * @param array<string, MagicGroupEntity> $groups
+     * @param array<string, DelightfulUserEntity> $users
+     * @param array<string, DelightfulDepartmentEntity> $departments
+     * @param array<string, DelightfulGroupEntity> $groups
      */
     public static function createResourceAccessDTO(ResourceType $resourceType, string $resourceId, array $operationPermissions, array $users = [], array $departments = [], array $groups = []): ResourceAccessDTO
     {

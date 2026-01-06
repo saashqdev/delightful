@@ -1,8 +1,8 @@
-import MagicIcon from "@/opensource/pages/share/assets/icon/magic_logo.svg"
-import { getAttachmentsByThreadId } from "@/opensource/pages/superMagic/utils/api"
+import DelightfulIcon from "@/opensource/pages/share/assets/icon/magic_logo.svg"
+import { getAttachmentsByThreadId } from "@/opensource/pages/superDelightful/utils/api"
 import { IconMenu2 } from "@tabler/icons-react"
 import { useResponsive } from "ahooks"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { Button, Flex } from "antd"
 import { createStyles } from "antd-style"
 import { isEmpty } from "lodash-es"
@@ -312,7 +312,7 @@ export default function Share() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<img src={MagicIcon} alt="" className={isMobile ? "" : styles.magicIcon} />
+				<img src={DelightfulIcon} alt="" className={isMobile ? "" : styles.magicIcon} />
 				{isMobile ? (
 					<div className={styles.menuIconContainer}>
 						<IconMenu2
@@ -336,7 +336,7 @@ export default function Share() {
 			<div className={styles.content}>
 				{loading && (
 					<Flex className={styles.spinContainer} align="center" justify="center">
-						<MagicSpin />
+						<DelightfulSpin />
 					</Flex>
 				)}
 				{isNeedPassword && isEmpty(data) && !error && !loading && (

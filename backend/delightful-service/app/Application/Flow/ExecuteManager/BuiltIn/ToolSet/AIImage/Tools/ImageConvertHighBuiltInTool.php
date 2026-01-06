@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\ExecuteManager\BuiltIn\ToolSet\AIImage\Tools;
 
-use App\Application\Chat\Service\MagicChatImageConvertHighAppService;
+use App\Application\Chat\Service\DelightfulChatImageConvertHighAppService;
 use App\Application\Flow\ExecuteManager\BuiltIn\BuiltInToolSet;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
-use App\Domain\Chat\DTO\ImageConvertHigh\Request\MagicChatImageConvertHighReqDTO;
+use App\Domain\Chat\DTO\ImageConvertHigh\Request\DelightfulChatImageConvertHighReqDTO;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
 use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Domain\ImageGenerate\ValueObject\ImageGenerateSourceEnum;
@@ -58,7 +58,7 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
 
             $textMessage = new TextMessage([]);
             $textMessage->setContent($searchKeyword);
-            $reqDto = (new MagicChatImageConvertHighReqDTO())
+            $reqDto = (new DelightfulChatImageConvertHighReqDTO())
                 ->setTopicId($executionData->getTopicId() ?? '')
                 ->setConversationId($agentConversationId)
                 ->setUserMessage($textMessage)
@@ -67,7 +67,7 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
                 ->setReferMessageId($executionData->getTriggerData()?->getSeqEntity()?->getSeqId())
                 ->setSourceId($this->getCode())
                 ->setSourceType(ImageGenerateSourceEnum::TOOL);
-            $this->getMagicChatImageConvertHighAppService()->handleUserMessage($requestContext, $reqDto);
+            $this->getDelightfulChatImageConvertHighAppService()->handleUserMessage($requestContext, $reqDto);
             return [];
         };
     }
@@ -188,8 +188,8 @@ JSON,
         return $input;
     }
 
-    protected function getMagicChatImageConvertHighAppService(): MagicChatImageConvertHighAppService
+    protected function getDelightfulChatImageConvertHighAppService(): DelightfulChatImageConvertHighAppService
     {
-        return di(MagicChatImageConvertHighAppService::class);
+        return di(DelightfulChatImageConvertHighAppService::class);
     }
 }

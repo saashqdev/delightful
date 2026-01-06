@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace App\Domain\Chat\DTO\Request;
 
 use App\Domain\Chat\DTO\Request\Common\ChatRequestData;
-use App\Domain\Chat\DTO\Request\Common\MagicContext;
+use App\Domain\Chat\DTO\Request\Common\DelightfulContext;
 
 class StreamRequest extends AbstractRequest
 {
-    protected MagicContext $context;
+    protected DelightfulContext $context;
 
     protected ChatRequestData $data;
 
@@ -21,17 +21,17 @@ class StreamRequest extends AbstractRequest
         parent::__construct($data);
     }
 
-    public function getContext(): MagicContext
+    public function getContext(): DelightfulContext
     {
         return $this->context;
     }
 
-    public function setContext(array|MagicContext $context): void
+    public function setContext(array|DelightfulContext $context): void
     {
-        if ($context instanceof MagicContext) {
+        if ($context instanceof DelightfulContext) {
             $this->context = $context;
         } else {
-            $this->context = new MagicContext($context);
+            $this->context = new DelightfulContext($context);
         }
     }
 

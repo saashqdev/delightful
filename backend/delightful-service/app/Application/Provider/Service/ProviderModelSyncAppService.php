@@ -15,7 +15,7 @@ use App\Domain\Provider\Entity\ValueObject\ProviderCode;
 use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 use App\Domain\Provider\Service\ProviderConfigDomainService;
 use App\Domain\Provider\Service\ProviderModelDomainService;
-use App\Infrastructure\Util\MagicUriTool;
+use App\Infrastructure\Util\DelightfulUriTool;
 use App\Infrastructure\Util\SSRF\SSRFUtil;
 use App\Interfaces\Provider\DTO\SaveProviderModelDTO;
 use Delightful\CloudFile\Kernel\Struct\UploadFile;
@@ -378,6 +378,6 @@ class ProviderModelSyncAppService
      */
     private function buildModelsApiUrl(string $baseUrl): string
     {
-        return rtrim($baseUrl, '/') . MagicUriTool::getModelsUri();
+        return rtrim($baseUrl, '/') . DelightfulUriTool::getModelsUri();
     }
 }

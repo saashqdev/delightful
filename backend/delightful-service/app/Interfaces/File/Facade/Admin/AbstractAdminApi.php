@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Interfaces\File\Facade\Admin;
 
-use App\Infrastructure\Core\Traits\MagicUserAuthorizationTrait;
+use App\Infrastructure\Core\Traits\DelightfulUserAuthorizationTrait;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 abstract class AbstractAdminApi
 {
-    use MagicUserAuthorizationTrait;
+    use DelightfulUserAuthorizationTrait;
 
     public function __construct(
         protected readonly RequestInterface $request,

@@ -3,7 +3,7 @@ import { forwardRef, useMemo } from "react"
 import { IconDots } from "@tabler/icons-react"
 import { useLocation } from "react-router"
 import { useNavigate } from "@/opensource/hooks/useNavigate"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { useMemoizedFn } from "ahooks"
 import { useGlobalLanguage } from "@/opensource/models/config/hooks"
 import Divider from "@/opensource/components/other/Divider"
@@ -13,7 +13,7 @@ import { useStyles } from "./styles"
 import UserMenus from "./components/UserMenus"
 import OrganizationSwitch from "./components/OrganizationSwitch"
 import { RoutePath } from "@/const/routes"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { userStore } from "@/opensource/models/user"
 import { observer } from "mobx-react-lite"
 
@@ -66,7 +66,7 @@ const Sider = observer(
 		const OrganizationSwitchChildren = useMemo(
 			() => (
 				<div className={styles.icon}>
-					<MagicIcon color="currentColor" size={16} component={IconDots} />
+					<DelightfulIcon color="currentColor" size={16} component={IconDots} />
 				</div>
 			),
 			[styles.icon],
@@ -81,9 +81,9 @@ const Sider = observer(
 				justify="space-between"
 			>
 				<UserMenus>
-					<MagicAvatar src={userInfo?.avatar} size={40}>
+					<DelightfulAvatar src={userInfo?.avatar} size={40}>
 						{userInfo?.nickname}
-					</MagicAvatar>
+					</DelightfulAvatar>
 				</UserMenus>
 				<Divider direction="horizontal" className={styles.divider} />
 				<Flex vertical flex={1} className={styles.menus}>

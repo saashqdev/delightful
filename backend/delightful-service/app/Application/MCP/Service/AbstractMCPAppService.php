@@ -10,8 +10,8 @@ namespace App\Application\MCP\Service;
 use App\Application\Flow\ExecuteManager\NodeRunner\LLM\ToolsExecutor;
 use App\Application\Kernel\AbstractKernelAppService;
 use App\Application\Permission\Service\OperationPermissionAppService;
-use App\Domain\Flow\Service\MagicFlowDomainService;
-use App\Domain\Flow\Service\MagicFlowVersionDomainService;
+use App\Domain\Flow\Service\DelightfulFlowDomainService;
+use App\Domain\Flow\Service\DelightfulFlowVersionDomainService;
 use App\Domain\MCP\Entity\MCPServerToolEntity;
 use App\Domain\MCP\Entity\ValueObject\MCPDataIsolation;
 use App\Domain\MCP\Entity\ValueObject\ToolOptions;
@@ -31,8 +31,8 @@ abstract class AbstractMCPAppService extends AbstractKernelAppService
     public function __construct(
         protected readonly MCPServerDomainService $mcpServerDomainService,
         protected readonly MCPServerToolDomainService $mcpServerToolDomainService,
-        protected readonly MagicFlowDomainService $magicFlowDomainService,
-        protected readonly MagicFlowVersionDomainService $magicFlowVersionDomainService,
+        protected readonly DelightfulFlowDomainService $magicFlowDomainService,
+        protected readonly DelightfulFlowVersionDomainService $magicFlowVersionDomainService,
         protected readonly OperationPermissionAppService $operationPermissionAppService,
         protected readonly MCPUserSettingDomainService $mcpUserSettingDomainService,
         LoggerFactory $loggerFactory,
@@ -177,7 +177,7 @@ abstract class AbstractMCPAppService extends AbstractKernelAppService
             // Handle version information
             if ($entity->getRelVersionCode() && isset($versionToolsMap[$entity->getRelVersionCode()])) {
                 $toolVersion = $versionToolsMap[$entity->getRelVersionCode()];
-                $tool = $toolVersion->getMagicFlow() ?? $tool;
+                $tool = $toolVersion->getDelightfulFlow() ?? $tool;
                 $entity->setVersion($toolVersion->getName());
             }
 

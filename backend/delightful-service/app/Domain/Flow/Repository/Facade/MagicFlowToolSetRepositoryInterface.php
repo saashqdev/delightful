@@ -7,21 +7,21 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Facade;
 
-use App\Domain\Flow\Entity\MagicFlowToolSetEntity;
+use App\Domain\Flow\Entity\DelightfulFlowToolSetEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowToolSetQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowToolSetQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
-interface MagicFlowToolSetRepositoryInterface
+interface DelightfulFlowToolSetRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowToolSetEntity $magicFlowToolSetEntity): MagicFlowToolSetEntity;
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowToolSetEntity $magicFlowToolSetEntity): DelightfulFlowToolSetEntity;
 
     public function destroy(FlowDataIsolation $dataIsolation, string $code): void;
 
     /**
-     * @return array{total: int, list: array<MagicFlowToolSetEntity>}
+     * @return array{total: int, list: array<DelightfulFlowToolSetEntity>}
      */
-    public function queries(FlowDataIsolation $dataIsolation, MagicFlowToolSetQuery $query, Page $page): array;
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowToolSetQuery $query, Page $page): array;
 
-    public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?MagicFlowToolSetEntity;
+    public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowToolSetEntity;
 }

@@ -1,6 +1,6 @@
 import { Flex, Form } from "antd"
 import { useTranslation } from "react-i18next"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconPlus } from "@tabler/icons-react"
 import { memo } from "react"
 import type { InstructionStatus, QuickInstruction } from "@/types/bot"
@@ -95,13 +95,13 @@ const StatusButton = memo(({ form }: StatusButtonProps) => {
 									))}
 							</Flex>
 							<Form.Item>
-								<MagicButton
+								<DelightfulButton
 									className={styles.button}
 									icon={<IconPlus size={16} />}
 									onClick={() => add()}
 								>
 									{t("explore.buttonText.addStatus")}
-								</MagicButton>
+								</DelightfulButton>
 							</Form.Item>
 							<span className={styles.desc}>{t("explore.form.statusTip")}</span>
 						</SortableContext>

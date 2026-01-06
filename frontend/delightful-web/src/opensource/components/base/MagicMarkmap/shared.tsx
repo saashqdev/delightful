@@ -15,7 +15,7 @@ const useStyles = createStyles(({ css }) => ({
 	`,
 }))
 
-const MagicMarkmapShared = memo(() => {
+const DelightfulMarkmapShared = memo(() => {
 	const [mindMapData, setMindMapData] = useState<string>("")
 	const { styles } = useStyles()
 	const [options] = useState<Partial<IMarkmapOptions>>({})
@@ -54,4 +54,4 @@ const MagicMarkmapShared = memo(() => {
 	return <MarkmapBase options={options} data={mindMapData} className={styles.mindMap} />
 })
 
-export default MagicMarkmapShared
+export default DelightfulMarkmapShared

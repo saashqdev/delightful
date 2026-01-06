@@ -1,7 +1,7 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconWorld } from "@tabler/icons-react"
 import { createStyles, useTheme } from "antd-style"
-import MagicSelect from "@/opensource/components/base/MagicSelect"
+import DelightfulSelect from "@/opensource/components/base/DelightfulSelect"
 import {
 	setGlobalLanguage,
 	useGlobalLanguage,
@@ -46,9 +46,9 @@ function LanguageSelect() {
 	const { isDarkMode } = useTheme()
 
 	return (
-		<MagicSelect
+		<DelightfulSelect
 			prefix={
-				<MagicIcon component={IconWorld} size={20} color={isDarkMode ? "#fff" : "#000"} />
+				<DelightfulIcon component={IconWorld} size={20} color={isDarkMode ? "#fff" : "#000"} />
 			}
 			value={lang}
 			className={cx(styles.select)}

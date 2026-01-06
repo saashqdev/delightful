@@ -16,7 +16,7 @@ function addSpaceBetweenChineseAndEnglish(text: string): string {
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Magic Docs",
+  title: "Delightful Docs",
   description: "The New Generation Enterprise-level AI Application Innovation Engine",
   locales: {
     root: en,

@@ -6,9 +6,9 @@ declare(strict_types=1);
  */
 use App\Infrastructure\Util\Auth\Guard\WebsocketChatUserGuard;
 use App\Infrastructure\Util\Auth\Guard\WebUserGuard;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Delightful\SuperMagic\Infrastructure\Utils\Auth\Guard\SandboxGuard;
-use Delightful\SuperMagic\Interfaces\Authorization\Web\SandboxAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use Delightful\SuperDelightful\Infrastructure\Utils\Auth\Guard\SandboxGuard;
+use Delightful\SuperDelightful\Interfaces\Authorization\Web\SandboxAuthorization;
 use Qbhy\HyperfAuth\Provider\EloquentProvider;
 
 return [
@@ -35,7 +35,7 @@ return [
         // 麦吉自建用户体系
         'magic-users' => [
             'driver' => EloquentProvider::class,
-            'model' => MagicUserAuthorization::class,
+            'model' => DelightfulUserAuthorization::class,
         ],
         'sandbox' => [
             'driver' => EloquentProvider::class,

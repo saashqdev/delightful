@@ -2,13 +2,13 @@ import { Form } from "antd"
 import { useForm } from "antd/lib/form/Form"
 import { useMemo } from "react"
 import { useMemoizedFn } from "ahooks"
-import { useNodeConfigActions } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useNodeConfigActions } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { set } from "lodash-es"
-import MagicJsonSchemaEditor from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor"
-import { ShowColumns } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/constants"
-import { FormItemType } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
-import type Schema from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
+import DelightfulJsonSchemaEditor from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor"
+import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
+import { FormItemType } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import type Schema from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import styles from "./index.module.less"
 import usePrevious from "../../../common/hooks/usePrevious"
 import useCurrentNodeUpdate from "../../../common/hooks/useCurrentNodeUpdate"
@@ -56,7 +56,7 @@ export default function End() {
 				onValuesChange={onValuesChange}
 			>
 				<Form.Item name={["output"]} className={styles.output} valuePropName="data">
-					<MagicJsonSchemaEditor
+					<DelightfulJsonSchemaEditor
 						allowExpression
 						expressionSource={expressionDataSource}
 						displayColumns={[

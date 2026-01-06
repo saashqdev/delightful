@@ -18,7 +18,7 @@ export const useUserDevices = () => {
  * @description Hook to get the organization for the current account
  * @return {User.UserOrganization | undefined}
  */
-export const useCurrentMagicOrganization = (): User.MagicOrganization | null => {
+export const useCurrentDelightfulOrganization = (): User.DelightfulOrganization | null => {
 	const { organizationCode, magicOrganizationMap } = useOrganization()
 
 	return useMemo(() => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Space } from "antd"
-import MagicSegmented from "../../components/MagicSegmented"
+import DelightfulSegmented from "../../components/DelightfulSegmented"
 import ComponentDemo from "./Container"
 
 const SegmentedDemo: React.FC = () => {
@@ -12,11 +12,11 @@ const SegmentedDemo: React.FC = () => {
 			<ComponentDemo
 				title="基础分段控制器"
 				description="最基本的分段控制器组件"
-				code="<MagicSegmented options={['选项1', '选项2', '选项3']} />"
+				code="<DelightfulSegmented options={['选项1', '选项2', '选项3']} />"
 			>
 				<Space>
-					<MagicSegmented options={["选项1", "选项2", "选项3"]} />
-					<MagicSegmented circle={false} options={["选项1", "选项2", "选项3"]} />
+					<DelightfulSegmented options={["选项1", "选项2", "选项3"]} />
+					<DelightfulSegmented circle={false} options={["选项1", "选项2", "选项3"]} />
 				</Space>
 			</ComponentDemo>
 
@@ -26,7 +26,7 @@ const SegmentedDemo: React.FC = () => {
 				code="value | onChange"
 			>
 				<Space direction="vertical">
-					<MagicSegmented
+					<DelightfulSegmented
 						options={["选项1", "选项2", "选项3"]}
 						value={value1}
 						onChange={setValue1}
@@ -41,15 +41,15 @@ const SegmentedDemo: React.FC = () => {
 				code="size: 'large' | 'default' | 'small'"
 			>
 				<Space direction="vertical">
-					<MagicSegmented options={["选项1", "选项2", "选项3"]} size="large" />
-					<MagicSegmented options={["选项1", "选项2", "选项3"]} />
-					<MagicSegmented options={["选项1", "选项2", "选项3"]} size="small" />
+					<DelightfulSegmented options={["选项1", "选项2", "选项3"]} size="large" />
+					<DelightfulSegmented options={["选项1", "选项2", "选项3"]} />
+					<DelightfulSegmented options={["选项1", "选项2", "选项3"]} size="small" />
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo title="禁用状态" description="支持禁用某些选项" code="disabled">
 				<Space>
-					<MagicSegmented
+					<DelightfulSegmented
 						options={[
 							{ label: "选项1", value: "选项1" },
 							{ label: "选项2", value: "选项2", disabled: true },
@@ -65,7 +65,7 @@ const SegmentedDemo: React.FC = () => {
 				code="onChange: (value) => void"
 			>
 				<Space direction="vertical">
-					<MagicSegmented
+					<DelightfulSegmented
 						options={["选项1", "选项2", "选项3"]}
 						value={value2}
 						onChange={(value) => {

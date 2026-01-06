@@ -1,14 +1,14 @@
 import { Form, Flex, Switch } from "antd"
-import { ExpressionMode } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
+import { ExpressionMode } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
-import { LabelTypeMap } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
+import { LabelTypeMap } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 import { useMemoizedFn } from "ahooks"
-import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
 import { useTranslation } from "react-i18next"
 import { ContactApi } from "@/apis"
 import useInitialValue from "../../../common/hooks/useInitialValue"
 import { customNodeType } from "../../../constants"
-import MagicExpression from "../../../common/Expression"
+import DelightfulExpression from "../../../common/Expression"
 import usePrevious from "../../../common/hooks/usePrevious"
 import { groupTypeOptions } from "./constants"
 import useStyles from "./style"
@@ -43,7 +43,7 @@ export default function GroupChatV0() {
 			onValuesChange={onValuesChange}
 		>
 			<DropdownCard title={t("groupChat.groupSettings", { ns: "flow" })}>
-				<MagicExpression
+				<DelightfulExpression
 					name="group_name"
 					label={t("groupChat.groupName", { ns: "flow" })}
 					mode={ExpressionMode.Common}
@@ -54,7 +54,7 @@ export default function GroupChatV0() {
 					showCustomLabel={false}
 				/>
 
-				<MagicExpression
+				<DelightfulExpression
 					name="group_owner"
 					label={t("groupChat.groupOwner", { ns: "flow" })}
 					mode={ExpressionMode.Common}
@@ -79,7 +79,7 @@ export default function GroupChatV0() {
 					}}
 				/>
 
-				<MagicExpression
+				<DelightfulExpression
 					name="group_members"
 					label={t("groupChat.groupMembers", { ns: "flow" })}
 					mode={ExpressionMode.Common}
@@ -110,7 +110,7 @@ export default function GroupChatV0() {
 					required
 					className={styles.formItem}
 				>
-					<MagicSelect options={groupTypeOptions} />
+					<DelightfulSelect options={groupTypeOptions} />
 				</Form.Item>
 			</DropdownCard>
 			<Flex className={styles.switchSettings} align="center" gap={6}>

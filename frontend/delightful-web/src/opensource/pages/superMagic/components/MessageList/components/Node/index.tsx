@@ -1,4 +1,4 @@
-import { messageFilter } from "@/opensource/pages/superMagic/utils/handleMessage"
+import { messageFilter } from "@/opensource/pages/superDelightful/utils/handleMessage"
 import { isEmpty, pick } from "lodash-es"
 import { Attachment } from "../MessageAttachment"
 import NodeHeader from "../NodeHeader"

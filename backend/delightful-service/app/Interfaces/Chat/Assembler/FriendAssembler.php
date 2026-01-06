@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Assembler;
 
-use App\Domain\Chat\Entity\MagicFriendEntity;
+use App\Domain\Chat\Entity\DelightfulFriendEntity;
 
 class FriendAssembler
 {
-    public static function getFriendEntity(array $friend): MagicFriendEntity
+    public static function getFriendEntity(array $friend): DelightfulFriendEntity
     {
-        return new MagicFriendEntity($friend);
+        return new DelightfulFriendEntity($friend);
     }
 }

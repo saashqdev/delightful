@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\DTO\FlowVersion;
 
-use App\Interfaces\Flow\Assembler\Flow\MagicFlowAssembler;
+use App\Interfaces\Flow\Assembler\Flow\DelightfulFlowAssembler;
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
-use App\Interfaces\Flow\DTO\Flow\MagicFlowDTO;
+use App\Interfaces\Flow\DTO\Flow\DelightfulFlowDTO;
 
-class MagicFlowVersionDTO extends AbstractFlowDTO
+class DelightfulFlowVersionDTO extends AbstractFlowDTO
 {
     public string $name = '';
 
@@ -19,7 +19,7 @@ class MagicFlowVersionDTO extends AbstractFlowDTO
 
     public string $flowCode;
 
-    public ?MagicFlowDTO $magicFlow;
+    public ?DelightfulFlowDTO $magicFlow;
 
     public function getName(): string
     {
@@ -51,13 +51,13 @@ class MagicFlowVersionDTO extends AbstractFlowDTO
         $this->flowCode = $flowCode ?? '';
     }
 
-    public function getMagicFLow(): ?MagicFlowDTO
+    public function getDelightfulFLow(): ?DelightfulFlowDTO
     {
         return $this->magicFlow;
     }
 
-    public function setMagicFLow(mixed $magicFlow): void
+    public function setDelightfulFLow(mixed $magicFlow): void
     {
-        $this->magicFlow = MagicFlowAssembler::createMagicFlowDTOByMixed($magicFlow);
+        $this->magicFlow = DelightfulFlowAssembler::createDelightfulFlowDTOByMixed($magicFlow);
     }
 }

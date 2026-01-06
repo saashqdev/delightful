@@ -1,6 +1,6 @@
 import { Tag, type TagProps } from "antd"
 import { createStyles } from "antd-style"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconX } from "@tabler/icons-react"
 
 const useStyles = createStyles(({ css, prefixCls, token }) => ({
@@ -21,12 +21,12 @@ const useStyles = createStyles(({ css, prefixCls, token }) => ({
 	`,
 }))
 
-export default function MagicTag({ className, ...props }: TagProps) {
+export default function DelightfulTag({ className, ...props }: TagProps) {
 	const { styles, cx } = useStyles()
 	return (
 		<Tag
 			className={cx(styles.tag, className)}
-			closeIcon={<MagicIcon component={IconX} size={16} stroke={2} />}
+			closeIcon={<DelightfulIcon component={IconX} size={16} stroke={2} />}
 			{...props}
 		/>
 	)

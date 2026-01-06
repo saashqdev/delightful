@@ -9,7 +9,7 @@ namespace App\Domain\Agent\Entity\ValueObject\Query;
 
 use App\Infrastructure\Core\ValueObject\Query;
 
-class MagicBotThirdPlatformChatQuery extends Query
+class DelightfulBotThirdPlatformChatQuery extends Query
 {
     private ?string $botId = null;
 

@@ -1,10 +1,10 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconDots } from "@tabler/icons-react"
 import { useRef } from "react"
 import { Flex } from "antd"
 import { formatRelativeTime } from "@/utils/string"
-import MagicGroupAvatar from "@/opensource/components/business/MagicGroupAvatar"
+import DelightfulGroupAvatar from "@/opensource/components/business/DelightfulGroupAvatar"
 import useGroupInfo from "@/opensource/hooks/chat/useGroupInfo"
 import { useBoolean, useHover } from "ahooks"
 import conversationStore from "@/opensource/stores/chatNew/conversation"
@@ -65,7 +65,7 @@ const GroupConversationItem = observer(
 				>
 					<div style={{ flexShrink: 0 }}>
 						<ConversationBadge count={unreadDots}>
-							<MagicGroupAvatar gid={conversation.receive_id} />
+							<DelightfulGroupAvatar gid={conversation.receive_id} />
 						</ConversationBadge>
 					</div>
 					<Flex vertical flex={1} justify="space-between" className={styles.mainWrapper}>
@@ -89,10 +89,10 @@ const GroupConversationItem = observer(
 						className={styles.extra}
 						onClick={(e) => e.stopPropagation()}
 					>
-						<MagicButton
+						<DelightfulButton
 							type="text"
 							className={styles.moreButton}
-							icon={<MagicIcon component={IconDots} size={18} />}
+							icon={<DelightfulIcon component={IconDots} size={18} />}
 							onClick={toggle}
 						/>
 					</div>

@@ -185,7 +185,7 @@ export interface InputExpressionProps {
 
 	renderConfig?: RenderConfig
 
-	/** Whether encryption is required; used with MagicJSONSchemaEditor */
+	/** Whether encryption is required; used with DelightfulJSONSchemaEditor */
 	encryption?: boolean
 	hasEncryptionValue?: boolean
 

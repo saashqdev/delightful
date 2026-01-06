@@ -1,7 +1,7 @@
 import type { IconProps } from "@tabler/icons-react"
 import { memo } from "react"
 
-const IconMagicLogo = memo(({ size = 24, className, style }: IconProps) => {
+const IconDelightfulLogo = memo(({ size = 24, className, style }: IconProps) => {
 	const iconSize = typeof size === "string" ? parseInt(size, 10) : size
 
 	return (
@@ -117,4 +117,4 @@ const IconMagicLogo = memo(({ size = 24, className, style }: IconProps) => {
 	)
 })
 
-export default IconMagicLogo
+export default IconDelightfulLogo

@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Factory;
 
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
 use Hyperf\Codec\Json;
 
-class MagicAgentVersionFactory
+class DelightfulAgentVersionFactory
 {
-    public static function toEntity(array $botVersion): MagicAgentVersionEntity
+    public static function toEntity(array $botVersion): DelightfulAgentVersionEntity
     {
         if (isset($botVersion['instructs']) && is_string($botVersion['instructs'])) {
             $botVersion['instructs'] = Json::decode($botVersion['instructs']);
@@ -20,7 +20,7 @@ class MagicAgentVersionFactory
         if (isset($botVersion['visibility_config']) && is_string($botVersion['visibility_config'])) {
             $botVersion['visibility_config'] = Json::decode($botVersion['visibility_config']);
         }
-        return new MagicAgentVersionEntity($botVersion);
+        return new DelightfulAgentVersionEntity($botVersion);
     }
 
     public static function toEntities(array $botVersions): array
@@ -36,7 +36,7 @@ class MagicAgentVersionFactory
     }
 
     /**
-     * @param $botVersionEntities MagicAgentVersionEntity[]
+     * @param $botVersionEntities DelightfulAgentVersionEntity[]
      */
     public static function toArrays(array $botVersionEntities): array
     {

@@ -4,7 +4,7 @@ import type { FileTypeResult } from "file-type"
 import type { ThemeMode } from "antd-style"
 
 /** Media window module */
-export namespace MagicMediaElectron {
+export namespace DelightfulMediaElectron {
 	/** Media payload */
 	export interface MediaInfo {
 		/** Media data */
@@ -14,14 +14,14 @@ export namespace MagicMediaElectron {
 	}
 
 	/** Electron media window API */
-	export interface MagicMediaElectronAPI {
+	export interface DelightfulMediaElectronAPI {
 		media: {
 			getMedia: () => Promise<MediaInfo>
 		}
 	}
 }
 
-export namespace MagicScreenshotElectron {
+export namespace DelightfulScreenshotElectron {
 	/** Electron global screenshot window API result */
 	interface GetScreenResult {
 		/** Windows */
@@ -31,19 +31,19 @@ export namespace MagicScreenshotElectron {
 	}
 
 	/** Electron global screenshot window API */
-	export interface MagicScreenshotElectronAPI {
+	export interface DelightfulScreenshotElectronAPI {
 		getScreen: () => GetScreenResult
 	}
 }
 
 /** Global search module */
-export namespace MagicSearchElectron {
+export namespace DelightfulSearchElectron {
 	/** Electron global search window API */
-	export interface MagicSearchElectronAPI {}
+	export interface DelightfulSearchElectronAPI {}
 }
 
 /** Global main application module */
-export namespace MagicElectron {
+export namespace DelightfulElectron {
 	export interface ShortcutConfig {
 		/** Global search shortcut */
 		globalSearch?: null | Array<number>
@@ -75,7 +75,7 @@ export namespace MagicElectron {
 	}
 
 	/** Electron main application window */
-	export interface MagicElectronAPI {
+	export interface DelightfulElectronAPI {
 		/** Environment module */
 		env: {
 			/** Running on Linux */
@@ -107,7 +107,7 @@ export namespace MagicElectron {
 				/** Get all registered shortcut configs */
 				getRegisterAll: () => Promise<Array<ConfigModal>>
 				/** Register all shortcut bindings */
-				register: (config: MagicElectron.ShortcutConfig) => void
+				register: (config: DelightfulElectron.ShortcutConfig) => void
 				/** Unregister a single shortcut binding */
 				unregister: (name: null | Array<number>) => void
 				/** Remove all shortcut bindings */
@@ -152,7 +152,7 @@ export namespace MagicElectron {
 		/** Logging module */
 		log: {
 			report: (log: string | Array<any> | Record<any, any> | Error) => Promise<void>
-			query: (query?: MagicCore.LogsQuery) => Promise<Array<MagicCore.Log>>
+			query: (query?: DelightfulCore.LogsQuery) => Promise<Array<DelightfulCore.Log>>
 		}
 		/** Window view module */
 		view: {

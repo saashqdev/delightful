@@ -1,4 +1,4 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { Flex } from "antd"
 import { createStyles } from "antd-style"
 import type { ComponentProps } from "react"
@@ -36,17 +36,17 @@ function ErrorContent({ onReport, onRetry, className, ...props }: ErrorContentPr
 			{...props}
 		>
 			<div className={styles.invalidText}>
-				未知的错误原因导致无法正常渲染内容，请联系 Magic 开发团队。
+				未知的错误原因导致无法正常渲染内容，请联系 Delightful 开发团队。
 			</div>
 			{onReport && (
-				<MagicButton type="link" onClick={onReport}>
+				<DelightfulButton type="link" onClick={onReport}>
 					上报异常错误
-				</MagicButton>
+				</DelightfulButton>
 			)}
 			{onRetry && (
-				<MagicButton type="link" onClick={onRetry}>
+				<DelightfulButton type="link" onClick={onRetry}>
 					重试
-				</MagicButton>
+				</DelightfulButton>
 			)}
 		</Flex>
 	)

@@ -1,4 +1,4 @@
-export interface MagicPdfRenderProps {
+export interface DelightfulPdfRenderProps {
 	/** PDF 文件源，可以是 File 对象或 URL 字符串 */
 	file?: File | string | null
 	/** 是否显示工具栏 */

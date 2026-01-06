@@ -14,10 +14,10 @@ use App\Application\Flow\ExecuteManager\Memory\LLMMemoryMessage;
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunner;
 use App\Domain\Chat\DTO\Message\ChatMessage\AIImageCardMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\VoiceMessage;
-use App\Domain\Chat\Entity\MagicMessageEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
-use App\Domain\Chat\Repository\Facade\MagicMessageRepositoryInterface;
-use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\MagicFlowMessage;
+use App\Domain\Chat\Repository\Facade\DelightfulMessageRepositoryInterface;
+use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\DelightfulFlowMessage;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\StartNodeParamsConfig;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\Branch;
 use App\ErrorCode\FlowErrorCode;
@@ -43,12 +43,12 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.start.content_empty');
         }
 
-        $LLMMemoryMessage = new LLMMemoryMessage(Role::User, $result['content'], $executionData->getTriggerData()->getMessageEntity()->getMagicMessageId());
+        $LLMMemoryMessage = new LLMMemoryMessage(Role::User, $result['content'], $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId());
         $LLMMemoryMessage->setConversationId($executionData->getConversationId());
-        $LLMMemoryMessage->setMessageId($executionData->getTriggerData()->getMessageEntity()->getMagicMessageId());
+        $LLMMemoryMessage->setMessageId($executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId());
         $LLMMemoryMessage->setAttachments($executionData->getTriggerData()->getAttachments());
         $LLMMemoryMessage->setOriginalContent(
-            MagicFlowMessage::createContent(
+            DelightfulFlowMessage::createContent(
                 message: $executionData->getTriggerData()->getMessageEntity()->getContent(),
                 attachments: $executionData->getTriggerData()->getAttachments()
             )
@@ -228,9 +228,9 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         ];
     }
 
-    private function appendAttachments(ExecutionData $executionData, MagicMessageEntity $messageEntity): void
+    private function appendAttachments(ExecutionData $executionData, DelightfulMessageEntity $messageEntity): void
     {
-        $attachments = AttachmentUtil::getByMagicMessageEntity($messageEntity);
+        $attachments = AttachmentUtil::getByDelightfulMessageEntity($messageEntity);
         foreach ($attachments as $attachment) {
             $executionData->getTriggerData()->addAttachment($attachment);
         }
@@ -239,7 +239,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
     /**
      * Handle voice messages with timing and update logic.
      */
-    private function handleVoiceMessage(MagicMessageEntity $messageEntity, ExecutionData $executionData): string
+    private function handleVoiceMessage(DelightfulMessageEntity $messageEntity, ExecutionData $executionData): string
     {
         $messageContent = $messageEntity->getContent();
 
@@ -249,7 +249,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         }
 
         // Set magicMessageId for subsequent updates
-        $messageContent->setMagicMessageId($messageEntity->getMagicMessageId());
+        $messageContent->setDelightfulMessageId($messageEntity->getDelightfulMessageId());
 
         // Record start time
         $startTime = microtime(true);
@@ -263,7 +263,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
         // If duration is greater than 1 second, update message content to database
         if ($duration > 1.0) {
-            $this->updateVoiceMessageContent($messageEntity->getMagicMessageId(), $messageContent);
+            $this->updateVoiceMessageContent($messageEntity->getDelightfulMessageId(), $messageContent);
         }
 
         // Clear audio attachments as they have been converted to text content
@@ -279,7 +279,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
     {
         try {
             $container = ApplicationContext::getContainer();
-            $messageRepository = $container->get(MagicMessageRepositoryInterface::class);
+            $messageRepository = $container->get(DelightfulMessageRepositoryInterface::class);
 
             // Convert VoiceMessage to array format for update
             $messageContent = $voiceMessage->toArray();

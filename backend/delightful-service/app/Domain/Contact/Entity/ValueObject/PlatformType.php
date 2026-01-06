@@ -14,7 +14,7 @@ enum PlatformType: string
 {
     // 天书
     case Teamshare = 'teamshare';
-    case Magic = 'magic';
+    case Delightful = 'magic';
     case DingTalk = 'ding_talk';
     case FeiShu = 'feishu';
     case WeCom = 'wecom';

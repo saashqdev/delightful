@@ -5,35 +5,35 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Application\SuperAgent\Service;
+namespace Delightful\SuperDelightful\Application\SuperAgent\Service;
 
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\ModelGateway\Entity\ValueObject\AccessTokenType;
 use App\Domain\ModelGateway\Service\AccessTokenDomainService;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\EventException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Delightful\AsyncEvent\AsyncEventUtil;
-use Delightful\SuperMagic\Application\SuperAgent\DTO\TaskMessageDTO;
-use Delightful\SuperMagic\Application\SuperAgent\DTO\UserMessageDTO;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\TaskEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\TaskMessageEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\ChatInstruction;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\CreationSource;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskContext;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\RunTaskBeforeEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\AgentDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\TaskDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\SuperMagic\ErrorCode\SuperAgentErrorCode;
-use Delightful\SuperMagic\Infrastructure\Utils\WorkDirectoryUtil;
+use Delightful\SuperDelightful\Application\SuperAgent\DTO\TaskMessageDTO;
+use Delightful\SuperDelightful\Application\SuperAgent\DTO\UserMessageDTO;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TaskEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TaskMessageEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\ChatInstruction;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\CreationSource;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\TaskContext;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\RunTaskBeforeEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\AgentDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\TaskDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\TopicDomainService;
+use Delightful\SuperDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\SuperDelightful\Infrastructure\Utils\WorkDirectoryUtil;
 use Hyperf\Logger\LoggerFactory;
 use Hyperf\Odin\Message\Role;
 use Psr\Log\LoggerInterface;
@@ -52,12 +52,12 @@ class HandleApiMessageAppService extends AbstractAppService
     public function __construct(
         private readonly TopicDomainService $topicDomainService,
         private readonly TaskDomainService $taskDomainService,
-        private readonly MagicDepartmentUserDomainService $departmentUserDomainService,
+        private readonly DelightfulDepartmentUserDomainService $departmentUserDomainService,
         private readonly TopicTaskAppService $topicTaskAppService,
         private readonly FileProcessAppService $fileProcessAppService,
         private readonly AgentDomainService $agentDomainService,
         private readonly AccessTokenDomainService $accessTokenDomainService,
-        private readonly MagicUserDomainService $userDomainService,
+        private readonly DelightfulUserDomainService $userDomainService,
         private readonly TaskFileDomainService $taskFileDomainService,
         private readonly ProjectDomainService $projectDomainService,
         LoggerFactory $loggerFactory
@@ -296,7 +296,7 @@ class HandleApiMessageAppService extends AbstractAppService
         }
     }
 
-    public function getUserAuthorization(string $apiKey, string $uid = ''): MagicUserEntity
+    public function getUserAuthorization(string $apiKey, string $uid = ''): DelightfulUserEntity
     {
         $accessToken = $this->accessTokenDomainService->getByAccessToken($apiKey);
         if (empty($accessToken)) {

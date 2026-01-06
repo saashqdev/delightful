@@ -1,13 +1,13 @@
 import type { SpinProps } from "antd"
 import { Spin } from "antd"
 import { memo } from "react"
-import { useMagicSpinProps } from "./style"
+import { useDelightfulSpinProps } from "./style"
 import { cx } from "antd-style"
 
-export type MagicSpinProps = SpinProps
+export type DelightfulSpinProps = SpinProps
 
-const MagicSpin = memo(function MagicSpin({ children, size, className, ...props }: MagicSpinProps) {
-	const magicSpinProps = useMagicSpinProps(size)
+const DelightfulSpin = memo(function DelightfulSpin({ children, size, className, ...props }: DelightfulSpinProps) {
+	const magicSpinProps = useDelightfulSpinProps(size)
 
 	return (
 		<Spin
@@ -20,4 +20,4 @@ const MagicSpin = memo(function MagicSpin({ children, size, className, ...props 
 	)
 })
 
-export default MagicSpin
+export default DelightfulSpin

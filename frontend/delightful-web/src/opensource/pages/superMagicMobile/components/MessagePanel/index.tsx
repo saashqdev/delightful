@@ -1,6 +1,6 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import UploadAction from "@/opensource/components/base/UploadAction"
-import type { FileItem, TaskData } from "@/opensource/pages/superMagic/pages/Workspace/types"
+import type { FileItem, TaskData } from "@/opensource/pages/superDelightful/pages/Workspace/types"
 import { IconFileUpload, IconSend } from "@tabler/icons-react"
 import { cx } from "antd-style"
 import { isEmpty } from "lodash-es"
@@ -130,7 +130,7 @@ export default memo(function MessagePanel(props: MessagePanelProps) {
 									className={styles.button}
 									onClick={trigger}
 								>
-									<MagicIcon size={18} stroke={2} component={IconFileUpload} />
+									<DelightfulIcon size={18} stroke={2} component={IconFileUpload} />
 									<span>文件</span>
 								</MobileButton>
 							)}
@@ -157,7 +157,7 @@ export default memo(function MessagePanel(props: MessagePanelProps) {
 								setFileList?.([])
 							}}
 						>
-							<MagicIcon size={18} stroke={2} component={IconSend} />
+							<DelightfulIcon size={18} stroke={2} component={IconSend} />
 							<span>发送</span>
 						</MobileButton>
 					</div>

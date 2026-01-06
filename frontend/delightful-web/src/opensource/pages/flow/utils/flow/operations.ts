@@ -4,14 +4,14 @@
  * 提供处理Flow操作相关的功能
  */
 
-import type { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
+import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
 
 /**
  * 添加节点
  * @param operation 操作对象
  * @param flowInstance 流实例
  */
-const addNode = async (operation: any, flowInstance: MagicFlowInstance): Promise<void> => {
+const addNode = async (operation: any, flowInstance: DelightfulFlowInstance): Promise<void> => {
 	const { nodeType, position, data = {}, params = {} } = operation
 
 	if (!nodeType) {
@@ -43,7 +43,7 @@ const addNode = async (operation: any, flowInstance: MagicFlowInstance): Promise
  * @param operation 操作对象
  * @param flowInstance 流实例
  */
-const updateNode = async (operation: any, flowInstance: MagicFlowInstance): Promise<void> => {
+const updateNode = async (operation: any, flowInstance: DelightfulFlowInstance): Promise<void> => {
 	const { nodeId, data, params } = operation
 
 	if (!nodeId) {
@@ -71,7 +71,7 @@ const updateNode = async (operation: any, flowInstance: MagicFlowInstance): Prom
  * @param operation 操作对象
  * @param flowInstance 流实例
  */
-const deleteNode = async (operation: any, flowInstance: MagicFlowInstance): Promise<void> => {
+const deleteNode = async (operation: any, flowInstance: DelightfulFlowInstance): Promise<void> => {
 	const { nodeId } = operation
 
 	if (!nodeId) {
@@ -86,7 +86,7 @@ const deleteNode = async (operation: any, flowInstance: MagicFlowInstance): Prom
  * @param operation 操作对象
  * @param flowInstance 流实例
  */
-const connectNodes = async (operation: any, flowInstance: MagicFlowInstance): Promise<void> => {
+const connectNodes = async (operation: any, flowInstance: DelightfulFlowInstance): Promise<void> => {
 	const { sourceId, targetId, sourceHandle, targetHandle } = operation
 
 	if (!sourceId || !targetId) {
@@ -107,7 +107,7 @@ const connectNodes = async (operation: any, flowInstance: MagicFlowInstance): Pr
  * @param operation 操作对象
  * @param flowInstance 流实例
  */
-const disconnectNodes = async (operation: any, flowInstance: MagicFlowInstance): Promise<void> => {
+const disconnectNodes = async (operation: any, flowInstance: DelightfulFlowInstance): Promise<void> => {
 	const { sourceId, targetId } = operation
 
 	if (!sourceId || !targetId) {
@@ -132,7 +132,7 @@ const disconnectNodes = async (operation: any, flowInstance: MagicFlowInstance):
  */
 export const executeOperation = async (
 	operation: any,
-	flowInstance: MagicFlowInstance,
+	flowInstance: DelightfulFlowInstance,
 	flowId: string,
 ): Promise<boolean> => {
 	if (!operation || !flowInstance) return false
@@ -178,7 +178,7 @@ export const executeOperation = async (
  */
 export const executeOperations = async (
 	operations: any[],
-	flowInstance: MagicFlowInstance,
+	flowInstance: DelightfulFlowInstance,
 	flowId: string,
 	onComplete?: () => void,
 	onUpdate?: (operation: any, index: number, success: boolean) => void,

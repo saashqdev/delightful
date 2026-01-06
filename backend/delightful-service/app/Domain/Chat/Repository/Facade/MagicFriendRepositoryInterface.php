@@ -7,17 +7,17 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Repository\Facade;
 
-use App\Domain\Chat\Entity\MagicFriendEntity;
+use App\Domain\Chat\Entity\DelightfulFriendEntity;
 use App\Domain\Contact\DTO\FriendQueryDTO;
 
-interface MagicFriendRepositoryInterface
+interface DelightfulFriendRepositoryInterface
 {
     public function insertFriend(array $friendEntity): void;
 
     public function isFriend(string $userId, string $friendId): bool;
 
     /**
-     * @return MagicFriendEntity[]
+     * @return DelightfulFriendEntity[]
      */
     public function getFriendList(FriendQueryDTO $friendQueryDTO, string $userId): array;
 }

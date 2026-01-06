@@ -10,7 +10,7 @@ namespace App\Interfaces\Agent\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 use App\Interfaces\Kernel\DTO\Traits\StringIdDTOTrait;
 
-class MagicBotThirdPlatformChatDTO extends AbstractDTO
+class DelightfulBotThirdPlatformChatDTO extends AbstractDTO
 {
     use StringIdDTOTrait;
 

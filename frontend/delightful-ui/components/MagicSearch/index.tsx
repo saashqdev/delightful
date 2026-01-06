@@ -4,13 +4,13 @@ import { Input } from "antd"
 import { cx } from "antd-style"
 import { forwardRef, useState, memo, useEffect } from "react"
 import type { CompositionEvent, ChangeEvent } from "react"
-import MagicIcon from "../MagicIcon"
+import DelightfulIcon from "../DelightfulIcon"
 import { useStyles } from "./style"
 
-export type MagicSearchProps = InputProps
+export type DelightfulSearchProps = InputProps
 
-const MagicSearch = memo(
-	forwardRef<InputRef, MagicSearchProps>(({ className, onChange, value, ...props }, ref) => {
+const DelightfulSearch = memo(
+	forwardRef<InputRef, DelightfulSearchProps>(({ className, onChange, value, ...props }, ref) => {
 		const { styles } = useStyles()
 
 		const [rawValue, setRawValue] = useState(value)
@@ -38,11 +38,11 @@ const MagicSearch = memo(
 					}
 				}}
 				className={cx(styles.search, className)}
-				prefix={<MagicIcon component={IconSearch} size={20} color="currentColor" />}
+				prefix={<DelightfulIcon component={IconSearch} size={20} color="currentColor" />}
 				{...props}
 			/>
 		)
 	}),
 )
 
-export default MagicSearch
+export default DelightfulSearch

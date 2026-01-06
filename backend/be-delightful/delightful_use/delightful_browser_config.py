@@ -26,7 +26,7 @@ DEFAULT_HEADERS = {
 }
 
 @dataclass
-class MagicBrowserProxyConfig:
+class DelightfulBrowserProxyConfig:
     """Proxy server configuration"""
 
     # Proxy server address (e.g., http://proxy.example.com:8080)
@@ -59,7 +59,7 @@ class MagicBrowserProxyConfig:
 
 
 @dataclass
-class MagicBrowserConfig:
+class DelightfulBrowserConfig:
     """Browser configuration class"""
 
     # Browser type: chromium, firefox, webkit
@@ -91,7 +91,7 @@ class MagicBrowserConfig:
     advanced_bypass_anti_scraping: bool = False
 
     # Proxy configuration
-    proxy: Optional[MagicBrowserProxyConfig] = None
+    proxy: Optional[DelightfulBrowserProxyConfig] = None
 
     # Implicit wait timeout (milliseconds)
     default_timeout: int = 30000
@@ -373,7 +373,7 @@ class MagicBrowserConfig:
             logger.error(f"Failed to save storage state: {e}")
 
     @classmethod
-    def create_for_scraping(cls) -> 'MagicBrowserConfig':
+    def create_for_scraping(cls) -> 'DelightfulBrowserConfig':
         """Create configuration optimized for web scraping"""
         return cls(
             headless=True,

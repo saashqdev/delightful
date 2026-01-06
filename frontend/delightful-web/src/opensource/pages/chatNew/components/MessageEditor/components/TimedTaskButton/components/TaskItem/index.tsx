@@ -7,7 +7,7 @@ import OperateMenu from "@/opensource/pages/flow/components/OperateMenu"
 import type { UserTask } from "@/types/chat/task"
 import { resolveToString } from "@dtyq/es6-template-strings"
 
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import chatTopicStore from "@/opensource/stores/chatNew/topic"
 import { observer } from "mobx-react-lite"
 import { useStyles } from "../TaskList/styles"
@@ -125,7 +125,7 @@ const TaskItem = observer(({ data, menuItems }: TaskItemProps) => {
 				<div className={cx(styles.subTitle, styles.ellipsis)}>{data.name}</div>
 				<div className={cx(styles.desc, styles.ellipsis)}>{taskDesc}</div>
 				<Flex gap={4} align="center">
-					<MagicIcon component={IconMessageTopic} size={16} />
+					<DelightfulIcon component={IconMessageTopic} size={16} />
 					<span className={styles.desc}>{topicName || t("chat.topic.newTopic")}</span>
 				</Flex>
 			</Flex>

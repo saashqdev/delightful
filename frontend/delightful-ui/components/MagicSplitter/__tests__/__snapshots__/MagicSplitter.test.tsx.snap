@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MagicSplitter > 快照测试 > 基础分割器快照 1`] = `
+exports[`DelightfulSplitter > 快照测试 > 基础分割器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-splitter acss-1ms8eiu magic-splitter-horizontal css-var-r1 magic-splitter-css-var css-dev-only-do-not-override-yotw4n"
@@ -32,7 +32,7 @@ exports[`MagicSplitter > 快照测试 > 基础分割器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSplitter > 快照测试 > 复杂内容分割器快照 1`] = `
+exports[`DelightfulSplitter > 快照测试 > 复杂内容分割器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-splitter acss-1ms8eiu magic-splitter-horizontal css-var-r6 magic-splitter-css-var css-dev-only-do-not-override-yotw4n"
@@ -74,7 +74,7 @@ exports[`MagicSplitter > 快照测试 > 复杂内容分割器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSplitter > 快照测试 > 带类名分割器快照 1`] = `
+exports[`DelightfulSplitter > 快照测试 > 带类名分割器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-splitter acss-1ms8eiu custom-splitter magic-splitter-horizontal css-var-r3 magic-splitter-css-var css-dev-only-do-not-override-yotw4n"
@@ -106,7 +106,7 @@ exports[`MagicSplitter > 快照测试 > 带类名分割器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSplitter > 快照测试 > 带类名分割器快照 2`] = `
+exports[`DelightfulSplitter > 快照测试 > 带类名分割器快照 2`] = `
 <DocumentFragment>
   <div
     class="magic-splitter acss-1ms8eiu custom-splitter magic-splitter-horizontal css-var-r5 magic-splitter-css-var css-dev-only-do-not-override-yotw4n"
@@ -138,7 +138,7 @@ exports[`MagicSplitter > 快照测试 > 带类名分割器快照 2`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSplitter > 快照测试 > 带自定义样式分割器快照 1`] = `
+exports[`DelightfulSplitter > 快照测试 > 带自定义样式分割器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-splitter acss-1ms8eiu magic-splitter-horizontal css-var-r2 magic-splitter-css-var css-dev-only-do-not-override-yotw4n"
@@ -171,7 +171,7 @@ exports[`MagicSplitter > 快照测试 > 带自定义样式分割器快照 1`] = 
 </DocumentFragment>
 `;
 
-exports[`MagicSplitter > 快照测试 > 带自定义样式分割器快照 2`] = `
+exports[`DelightfulSplitter > 快照测试 > 带自定义样式分割器快照 2`] = `
 <DocumentFragment>
   <div
     class="magic-splitter acss-1ms8eiu magic-splitter-horizontal css-var-r4 magic-splitter-css-var css-dev-only-do-not-override-yotw4n"

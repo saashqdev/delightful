@@ -15,13 +15,13 @@ use App\Application\Flow\ExecuteManager\ExecutionData\FlowStreamStatus;
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunnerFactory;
 use App\Application\Flow\ExecuteManager\NodeRunner\ReplyMessage\Struct\Message;
 use App\Application\Flow\ExecuteManager\Stream\FlowEventStreamManager;
-use App\Domain\Flow\Entity\MagicFlowEntity;
-use App\Domain\Flow\Entity\MagicFlowExecuteLogEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowExecuteLogEntity;
 use App\Domain\Flow\Entity\ValueObject\ExecuteLogStatus;
 use App\Domain\Flow\Entity\ValueObject\Node;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\TriggerType;
-use App\Domain\Flow\Service\MagicFlowExecuteLogDomainService;
-use App\Domain\Flow\Service\MagicFlowWaitMessageDomainService;
+use App\Domain\Flow\Service\DelightfulFlowExecuteLogDomainService;
+use App\Domain\Flow\Service\DelightfulFlowWaitMessageDomainService;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Dag\Dag;
 use App\Infrastructure\Core\Dag\Vertex;
@@ -38,7 +38,7 @@ use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
-class MagicFlowExecutor
+class DelightfulFlowExecutor
 {
     private Dag $dag;
 
@@ -59,26 +59,26 @@ class MagicFlowExecutor
 
     private bool $success = true;
 
-    private MagicFlowExecuteLogEntity $magicFlowExecuteLogEntity;
+    private DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity;
 
-    private MagicFlowExecuteLogDomainService $magicFlowExecuteLogDomainService;
+    private DelightfulFlowExecuteLogDomainService $magicFlowExecuteLogDomainService;
 
     private LockerInterface $locker;
 
     private bool $inLoop = false;
 
     public function __construct(
-        private readonly MagicFlowEntity $magicFlowEntity,
+        private readonly DelightfulFlowEntity $magicFlowEntity,
         private readonly ExecutionData $executionData,
         private bool $async = false,
-        ?MagicFlowExecuteLogEntity $lastMagicFlowExecuteLogEntity = null,
+        ?DelightfulFlowExecuteLogEntity $lastDelightfulFlowExecuteLogEntity = null,
     ) {
-        if ($lastMagicFlowExecuteLogEntity) {
-            $this->magicFlowExecuteLogEntity = $lastMagicFlowExecuteLogEntity;
+        if ($lastDelightfulFlowExecuteLogEntity) {
+            $this->magicFlowExecuteLogEntity = $lastDelightfulFlowExecuteLogEntity;
         }
         $this->locker = di(LockerInterface::class);
-        $this->logger = ApplicationContext::getContainer()->get(LoggerFactory::class)->get('MagicFlowExecutor');
-        $this->magicFlowExecuteLogDomainService = di(MagicFlowExecuteLogDomainService::class);
+        $this->logger = ApplicationContext::getContainer()->get(LoggerFactory::class)->get('DelightfulFlowExecutor');
+        $this->magicFlowExecuteLogDomainService = di(DelightfulFlowExecuteLogDomainService::class);
         $this->init();
     }
 
@@ -124,7 +124,7 @@ class MagicFlowExecutor
         return $this->success;
     }
 
-    public function setMagicFlowExecuteLogEntity(MagicFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
+    public function setDelightfulFlowExecuteLogEntity(DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
     {
         $this->magicFlowExecuteLogEntity = $magicFlowExecuteLogEntity;
     }
@@ -161,8 +161,8 @@ class MagicFlowExecutor
         if (empty($this->executionData->getAgentId())) {
             $this->executionData->setAgentId($this->magicFlowEntity->getAgentId());
         }
-        if (empty($this->executionData->getMagicFlowEntity())) {
-            $this->executionData->setMagicFlowEntity($this->magicFlowEntity);
+        if (empty($this->executionData->getDelightfulFlowEntity())) {
+            $this->executionData->setDelightfulFlowEntity($this->magicFlowEntity);
         }
         if (! ExecutionFlowCollector::get($this->executionData->getUniqueId())) {
             ExecutionFlowCollector::add($this->executionData->getUniqueId(), $this->magicFlowEntity);
@@ -272,7 +272,7 @@ class MagicFlowExecutor
 
         if ($this->success) {
             if ($this->waitMessageId) {
-                di(MagicFlowWaitMessageDomainService::class)->handled(
+                di(DelightfulFlowWaitMessageDomainService::class)->handled(
                     $this->executionData->getDataIsolation(),
                     $this->waitMessageId
                 );
@@ -351,7 +351,7 @@ class MagicFlowExecutor
 
     protected function handleWaitMessage(): void
     {
-        $waitMessageDomainService = di(MagicFlowWaitMessageDomainService::class);
+        $waitMessageDomainService = di(DelightfulFlowWaitMessageDomainService::class);
         $lastWaitMessageEntity = $waitMessageDomainService->getLastWaitMessage(
             $this->executionData->getDataIsolation(),
             $this->executionData->getConversationId(),
@@ -361,7 +361,7 @@ class MagicFlowExecutor
         if ($lastWaitMessageEntity) {
             $waitNode = $this->magicFlowEntity->getNodeById($lastWaitMessageEntity->getWaitNodeId());
             if (! $waitNode) {
-                di(MagicFlowWaitMessageDomainService::class)->handled(
+                di(DelightfulFlowWaitMessageDomainService::class)->handled(
                     $this->executionData->getDataIsolation(),
                     $lastWaitMessageEntity->getId()
                 );
@@ -379,7 +379,7 @@ class MagicFlowExecutor
         if (! empty($this->magicFlowExecuteLogEntity)) {
             return;
         }
-        $executeLog = new MagicFlowExecuteLogEntity();
+        $executeLog = new DelightfulFlowExecuteLogEntity();
         $executeLog->setExecuteDataId($this->executionData->getId());
         $executeLog->setConversationId($this->executionData->getConversationId());
         $executeLog->setFlowCode($this->magicFlowEntity->getCode());
@@ -419,7 +419,7 @@ class MagicFlowExecutor
         }
     }
 
-    private function addNodes(MagicFlowEntity $magicFlowEntity): void
+    private function addNodes(DelightfulFlowEntity $magicFlowEntity): void
     {
         foreach ($magicFlowEntity->getNodes() as $node) {
             // 跳过在循环体中的节点
@@ -541,6 +541,6 @@ class MagicFlowExecutor
 
     private function getLockerKey(): string
     {
-        return 'MagicFLowExecutor:' . $this->executorId;
+        return 'DelightfulFLowExecutor:' . $this->executorId;
     }
 }

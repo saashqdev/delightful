@@ -1,9 +1,9 @@
-import MagicFileIcon from "@/opensource/components/base/MagicFileIcon"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import FoldIcon from "@/opensource/pages/superMagic/assets/svg/file-folder.svg"
-import topicEmpty from "@/opensource/pages/superMagic/assets/svg/topic-empty.svg"
-import { getTemporaryDownloadUrl } from "@/opensource/pages/superMagic/utils/api"
-import { getFileType } from "@/opensource/pages/superMagic/utils/handleFIle"
+import DelightfulFileIcon from "@/opensource/components/base/DelightfulFileIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import FoldIcon from "@/opensource/pages/superDelightful/assets/svg/file-folder.svg"
+import topicEmpty from "@/opensource/pages/superDelightful/assets/svg/topic-empty.svg"
+import { getTemporaryDownloadUrl } from "@/opensource/pages/superDelightful/utils/api"
+import { getFileType } from "@/opensource/pages/superDelightful/utils/handleFIle"
 import { IconChevronDown, IconChevronRight, IconDownload } from "@tabler/icons-react"
 import { useResponsive } from "ahooks"
 import { Button, Input, Tooltip, Typography } from "antd"
@@ -174,7 +174,7 @@ export default function AttachmentList({
 										type="text"
 										size="small"
 										icon={
-											<MagicIcon
+											<DelightfulIcon
 												size={18}
 												component={
 													isFolderCollapsed
@@ -246,7 +246,7 @@ export default function AttachmentList({
 								className={styles.iconWrapper}
 								style={{ marginLeft: hasFolders || level > 0 ? "2px" : "0" }}
 							>
-								<MagicFileIcon
+								<DelightfulFileIcon
 									type={item.file_extension}
 									size={18}
 									className={styles.threadTitleImage}
@@ -256,7 +256,7 @@ export default function AttachmentList({
 								{renderText(item.file_name, item.file_name)}
 							</div>
 						</div>
-						<MagicIcon
+						<DelightfulIcon
 							className={styles.attachmentAction}
 							onClick={(e: any) => handleDownloadFile(item.file_id, e)}
 							component={IconDownload}
@@ -278,7 +278,7 @@ export default function AttachmentList({
 							type="text"
 							size="small"
 							icon={
-								<MagicIcon
+								<DelightfulIcon
 									size={18}
 									component={
 										isFileListCollapsed ? IconChevronRight : IconChevronDown

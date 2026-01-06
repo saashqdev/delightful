@@ -4,9 +4,9 @@ import { SearchProps } from "antd/lib/input"
 import React, { forwardRef } from "react"
 import { InputGlobalStyle } from "./style"
 
-interface MagicInputProps extends InputProps {}
+interface DelightfulInputProps extends InputProps {}
 
-const MagicInput: any = forwardRef((props: MagicInputProps, ref: any) => {
+const DelightfulInput: any = forwardRef((props: DelightfulInputProps, ref: any) => {
 	return (
 		<>
 			<InputGlobalStyle />
@@ -15,17 +15,17 @@ const MagicInput: any = forwardRef((props: MagicInputProps, ref: any) => {
 	)
 })
 
-MagicInput.TextArea = forwardRef((props: TextAreaProps, ref: any) => (
+DelightfulInput.TextArea = forwardRef((props: TextAreaProps, ref: any) => (
 	<Input.TextArea {...props} className={`${props.className}`} ref={ref} />
 ))
-MagicInput.Search = forwardRef((props: SearchProps, ref: any) => (
+DelightfulInput.Search = forwardRef((props: SearchProps, ref: any) => (
 	<Input.Search {...props} className={`${props.className}`} ref={ref} />
 ))
-MagicInput.Group = forwardRef((props: GroupProps, ref: any) => (
+DelightfulInput.Group = forwardRef((props: GroupProps, ref: any) => (
 	<Input.Group {...props} className={`${props.className}`} />
 ))
-MagicInput.Password = forwardRef((props: MagicInputProps, ref: any) => (
+DelightfulInput.Password = forwardRef((props: DelightfulInputProps, ref: any) => (
 	<Input.Password {...props} className={`${props.className}`} ref={ref} />
 ))
 
-export default MagicInput
+export default DelightfulInput

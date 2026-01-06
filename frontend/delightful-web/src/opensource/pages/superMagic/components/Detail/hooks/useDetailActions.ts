@@ -2,8 +2,8 @@ import { useState, useEffect, useMemo } from "react"
 import {
 	downloadFileContent,
 	getTemporaryDownloadUrl,
-} from "@/opensource/pages/superMagic/utils/api"
-import { getFileType } from "@/opensource/pages/superMagic/utils/handleFIle"
+} from "@/opensource/pages/superDelightful/utils/api"
+import { getFileType } from "@/opensource/pages/superDelightful/utils/handleFIle"
 
 // 定义图片文件扩展名的数组
 const IMAGE_EXTENSIONS = [

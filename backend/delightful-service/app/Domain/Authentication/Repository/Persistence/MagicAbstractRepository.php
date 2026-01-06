@@ -9,7 +9,7 @@ namespace App\Domain\Authentication\Repository\Persistence;
 
 use App\Infrastructure\Core\AbstractRepository;
 
-abstract class MagicAbstractRepository extends AbstractRepository
+abstract class DelightfulAbstractRepository extends AbstractRepository
 {
     protected array $attributeMaps = [
         'creator' => 'created_uid',

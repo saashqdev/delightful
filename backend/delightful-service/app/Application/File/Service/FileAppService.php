@@ -16,7 +16,7 @@ use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\CloudFile\Kernel\AdapterName;
 use Delightful\CloudFile\Kernel\Struct\ChunkUploadFile;
 use Delightful\CloudFile\Kernel\Struct\FileLink;
@@ -156,7 +156,7 @@ class FileAppService extends AbstractAppService
         return $fileObject;
     }
 
-    public function uploadBusinessType(MagicUserAuthorization $authorization, string $fileKey, string $businessType): string
+    public function uploadBusinessType(DelightfulUserAuthorization $authorization, string $fileKey, string $businessType): string
     {
         $defaultFileBusinessType = DefaultFileBusinessType::from($businessType);
         $organizationCode = $authorization->getOrganizationCode();
@@ -183,7 +183,7 @@ class FileAppService extends AbstractAppService
         return $this->fileDomainService->getLink($organizationCode, $fileKey)->getUrl();
     }
 
-    public function deleteBusinessFile(MagicUserAuthorization $authorization, string $fileKey, string $businessType): bool
+    public function deleteBusinessFile(DelightfulUserAuthorization $authorization, string $fileKey, string $businessType): bool
     {
         if (! DefaultFileBusinessType::tryFrom($businessType)) {
             return false;

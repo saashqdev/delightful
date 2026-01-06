@@ -13,5 +13,5 @@
 
 ## Version Iteration Cycle
 
-Magic adopts an agile development model with a weekly iteration plan, releasing a version every `Monday (UTC/GMT+08:00)`. This is usually a z version release, but could also be a y version. For x versions, the specific iteration plan and timeline will be determined based on actual research outcomes.   
-For information about Magic's version rules, please refer to the [Version Description] chapter. 
+Delightful adopts an agile development model with a weekly iteration plan, releasing a version every `Monday (UTC/GMT+08:00)`. This is usually a z version release, but could also be a y version. For x versions, the specific iteration plan and timeline will be determined based on actual research outcomes.   
+For information about Delightful's version rules, please refer to the [Version Description] chapter. 

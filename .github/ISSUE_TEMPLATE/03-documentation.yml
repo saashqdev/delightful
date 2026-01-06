@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for helping improve Magic's documentation! Clear documentation is crucial for project success.
+        Thanks for helping improve Delightful's documentation! Clear documentation is crucial for project success.
         
         **Before submitting a documentation issue:**
         - Check if the documentation issue has already been reported
@@ -39,12 +39,12 @@ body:
       label: Component
       description: Which component/module does this documentation relate to?
       options:
-        - Super Magic
-        - Magic IM (Chat System)
-        - Magic Flow (Workflow System)
-        - Magic Service (Backend API)
-        - Magic Web (Frontend)
-        - Magic Gateway
+        - Super Delightful
+        - Delightful IM (Chat System)
+        - Delightful Flow (Workflow System)
+        - Delightful Service (Backend API)
+        - Delightful Web (Frontend)
+        - Delightful Gateway
         - Agentlang Framework
         - Installation/Deployment
         - Getting Started

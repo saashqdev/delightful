@@ -28,7 +28,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $updated_at
  * @property string $deleted_at
  */
-class MagicChatConversationModel extends Model
+class DelightfulChatConversationModel extends Model
 {
     use SoftDeletes;
 

@@ -11,7 +11,7 @@ use App\Domain\Chat\DTO\Message\ChatMessage\Item\InstructionValue;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 
-class MagicFlowApiChatDTO extends AbstractFlowDTO
+class DelightfulFlowApiChatDTO extends AbstractFlowDTO
 {
     public string $message = '';
 

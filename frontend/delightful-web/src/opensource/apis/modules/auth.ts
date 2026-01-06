@@ -34,14 +34,14 @@ export const generateAuthApi = (fetch: HttpClient) => ({
 	 * @param {string} authCode 登录授权码（私有化部署就有用，非私有化传空字符串）
 	 * @param {string} thirdPlatformOrganizationCode 第一次创建组织时，返回的 第三方平台组织code，后端同步用户账号信息
 	 */
-	bindMagicAuthorization(
+	bindDelightfulAuthorization(
 		authorization: string,
 		authCode: string,
 		thirdPlatformOrganizationCode?: string,
 	) {
-		return fetch.get<Array<User.MagicOrganization>>(
+		return fetch.get<Array<User.DelightfulOrganization>>(
 			genRequestUrl(
-				RequestUrl.bindMagicAuthorization,
+				RequestUrl.bindDelightfulAuthorization,
 				{},
 				{
 					login_code: authCode || "",

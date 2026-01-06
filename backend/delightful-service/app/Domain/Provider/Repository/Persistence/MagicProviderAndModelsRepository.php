@@ -15,7 +15,7 @@ use App\Domain\Provider\Entity\ValueObject\DisabledByType;
 use App\Domain\Provider\Entity\ValueObject\ProviderCode;
 use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 use App\Domain\Provider\Entity\ValueObject\Status;
-use App\Domain\Provider\Repository\Facade\MagicProviderAndModelsInterface;
+use App\Domain\Provider\Repository\Facade\DelightfulProviderAndModelsInterface;
 use App\Domain\Provider\Repository\Persistence\Model\ProviderConfigModel;
 use App\Domain\Provider\Repository\Persistence\Model\ProviderModelModel;
 use App\Domain\Provider\Service\ModelFilter\PackageFilterInterface;
@@ -31,7 +31,7 @@ use DateTime;
 use Hyperf\Database\Model\Builder;
 use Hyperf\DbConnection\Db;
 
-class MagicProviderAndModelsRepository extends AbstractProviderModelRepository implements MagicProviderAndModelsInterface
+class DelightfulProviderAndModelsRepository extends AbstractProviderModelRepository implements DelightfulProviderAndModelsInterface
 {
     protected bool $filterOrganizationCode = true;
 
@@ -43,9 +43,9 @@ class MagicProviderAndModelsRepository extends AbstractProviderModelRepository i
     }
 
     /**
-     * 获取组织下的 Magic 服务商配置（不含模型详情）.
+     * 获取组织下的 Delightful 服务商配置（不含模型详情）.
      */
-    public function getMagicProvider(ProviderDataIsolation $dataIsolation, Category $category, ?Status $status = null): ?ProviderConfigDTO
+    public function getDelightfulProvider(ProviderDataIsolation $dataIsolation, Category $category, ?Status $status = null): ?ProviderConfigDTO
     {
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
@@ -84,7 +84,7 @@ class MagicProviderAndModelsRepository extends AbstractProviderModelRepository i
             return null;
         }
 
-        // 根据Category类型设置对应的组织Magic服务商模板配置ID
+        // 根据Category类型设置对应的组织Delightful服务商模板配置ID
         $templateId = ProviderConfigIdAssembler::generateProviderTemplate(ProviderCode::Official, $category);
 
         $templateData = [
@@ -111,13 +111,13 @@ class MagicProviderAndModelsRepository extends AbstractProviderModelRepository i
     }
 
     /**
-     * 根据组织编码和类别获取 Magic 服务商启用中的模型列表.
+     * 根据组织编码和类别获取 Delightful 服务商启用中的模型列表.
      *
      * @param string $organizationCode 组织编码
      * @param null|Category $category 服务商类别，为空时返回所有分类模型
-     * @return array<ProviderModelEntity> Magic 服务商模型实体数组
+     * @return array<ProviderModelEntity> Delightful 服务商模型实体数组
      */
-    public function getMagicEnableModels(string $organizationCode, ?Category $category = null): array
+    public function getDelightfulEnableModels(string $organizationCode, ?Category $category = null): array
     {
         if (OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
             return [];
@@ -181,9 +181,9 @@ class MagicProviderAndModelsRepository extends AbstractProviderModelRepository i
     }
 
     /**
-     * 查找 Magic 模型是否已经在组织中.
+     * 查找 Delightful 模型是否已经在组织中.
      */
-    public function getMagicModelByParentId(ProviderDataIsolation $dataIsolation, string $modelParentId): ?ProviderModelEntity
+    public function getDelightfulModelByParentId(ProviderDataIsolation $dataIsolation, string $modelParentId): ?ProviderModelEntity
     {
         $query = $this->createProviderModelQuery()
             ->where('organization_code', $dataIsolation->getCurrentOrganizationCode())
@@ -196,9 +196,9 @@ class MagicProviderAndModelsRepository extends AbstractProviderModelRepository i
     }
 
     /**
-     * 根据ID获取组织 Magic 模型.
+     * 根据ID获取组织 Delightful 模型.
      */
-    public function getMagicModelById(int $id): ?ProviderModelEntity
+    public function getDelightfulModelById(int $id): ?ProviderModelEntity
     {
         $officeOrganization = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
@@ -216,9 +216,9 @@ class MagicProviderAndModelsRepository extends AbstractProviderModelRepository i
     }
 
     /**
-     * 非官方组织更新 Magic 模型状态（写时复制逻辑）.
+     * 非官方组织更新 Delightful 模型状态（写时复制逻辑）.
      */
-    public function updateMagicModelStatus(
+    public function updateDelightfulModelStatus(
         ProviderDataIsolation $dataIsolation,
         ProviderModelEntity $officialModel
     ): string {
@@ -242,7 +242,7 @@ class MagicProviderAndModelsRepository extends AbstractProviderModelRepository i
             }
 
             // 2. 查找现有的组织模型记录（在锁保护下再次检查）
-            $organizationModel = $this->getMagicModelByParentId($dataIsolation, (string) $officialModel->getId());
+            $organizationModel = $this->getDelightfulModelByParentId($dataIsolation, (string) $officialModel->getId());
 
             if ($organizationModel) {
                 $organizationModelId = (string) $organizationModel->getId();
@@ -356,7 +356,7 @@ class MagicProviderAndModelsRepository extends AbstractProviderModelRepository i
     }
 
     /**
-     * 把官方组织的模型当做 Magic Model 写入非官方组织。
+     * 把官方组织的模型当做 Delightful Model 写入非官方组织。
      */
     private function copyOfficeModelToOrganization(
         ProviderDataIsolation $dataIsolation,
@@ -366,7 +366,7 @@ class MagicProviderAndModelsRepository extends AbstractProviderModelRepository i
         $organizationModel = new ProviderModelEntity($officialModel->toArray());
         $organizationModel->setServiceProviderConfigId(0);
         $organizationModel->setModelParentId($officialModel->getId());
-        $organizationModel->setIsOffice(true); // Magic服务商下的模型
+        $organizationModel->setIsOffice(true); // Delightful服务商下的模型
         $organizationModel->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $organizationModel->setId(IdGenerator::getSnowId());
         // 避免错误复制 config

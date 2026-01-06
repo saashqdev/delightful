@@ -27,7 +27,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $updated_uid
  * @property DateTime $updated_at
  */
-class MagicFlowToolSetModel extends AbstractModel
+class DelightfulFlowToolSetModel extends AbstractModel
 {
     use Snowflake;
     use SoftDeletes;
@@ -57,6 +57,6 @@ class MagicFlowToolSetModel extends AbstractModel
     public function tools(): HasMany
     {
         /* @phpstan-ignore-next-line */
-        return $this->hasMany(MagicFlowModel::class, 'tool_set_id', 'code')->where('type', Type::Tools->value);
+        return $this->hasMany(DelightfulFlowModel::class, 'tool_set_id', 'code')->where('type', Type::Tools->value);
     }
 }

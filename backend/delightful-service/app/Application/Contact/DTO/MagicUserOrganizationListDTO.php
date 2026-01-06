@@ -9,15 +9,15 @@ namespace App\Application\Contact\DTO;
 
 use App\Infrastructure\Core\AbstractDTO;
 
-class MagicUserOrganizationListDTO extends AbstractDTO
+class DelightfulUserOrganizationListDTO extends AbstractDTO
 {
     /**
-     * @var MagicUserOrganizationItemDTO[]
+     * @var DelightfulUserOrganizationItemDTO[]
      */
     protected array $items = [];
 
     /**
-     * @return MagicUserOrganizationItemDTO[]
+     * @return DelightfulUserOrganizationItemDTO[]
      */
     public function getItems(): array
     {
@@ -25,14 +25,14 @@ class MagicUserOrganizationListDTO extends AbstractDTO
     }
 
     /**
-     * @param MagicUserOrganizationItemDTO[] $items
+     * @param DelightfulUserOrganizationItemDTO[] $items
      */
     public function setItems(array $items): void
     {
         $this->items = $items;
     }
 
-    public function addItem(MagicUserOrganizationItemDTO $item): void
+    public function addItem(DelightfulUserOrganizationItemDTO $item): void
     {
         $this->items[] = $item;
     }

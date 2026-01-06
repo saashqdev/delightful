@@ -16,7 +16,7 @@
 //
 // export interface LoginStepResult {
 // 	access_token: string
-// 	magicOrganizationMap: Record<string, User.MagicOrganization>
+// 	magicOrganizationMap: Record<string, User.DelightfulOrganization>
 // 	organizations?: Array<User.UserOrganization>
 // 	/** magic 生态下的组织Code */
 // 	organizationCode?: string
@@ -100,7 +100,7 @@
 // 			): Promise<Omit<LoginStepResult, "organizationCode">> => {
 // 				try {
 // 					const { access_token } = params
-// 					const result = await AuthService.bindMagicAuthorization(
+// 					const result = await AuthService.bindDelightfulAuthorization(
 // 						access_token,
 // 						deployCode,
 // 						teamshareOrganizationCode,
@@ -152,7 +152,7 @@
 // 			try {
 // 				const {
 // 					access_token,
-// 					magicOrganizationMap: allMagicOrganizationMap,
+// 					magicOrganizationMap: allDelightfulOrganizationMap,
 // 					deployCode,
 // 				} = params
 //
@@ -164,7 +164,7 @@
 // 				const teamshareOrgsCode = organizations.map((o) => o.organization_code)
 //
 // 				// 获取到 teamshare 的组织后，需要针对上步 magicOrganizationMap 进行合法性过滤(因后端没处理 magicOrganizationMap 数据的合法性，所以这里需要根据 teamshare 中不存在的组织过滤 magicOrganizationMap)
-// 				const magicOrganizationArray = Object.values(allMagicOrganizationMap).filter((o) =>
+// 				const magicOrganizationArray = Object.values(allDelightfulOrganizationMap).filter((o) =>
 // 					teamshareOrgsCode.includes(o.third_platform_organization_code),
 // 				)
 // 				const magicOrganizationMap = keyBy(

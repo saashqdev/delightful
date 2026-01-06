@@ -12,7 +12,7 @@ from pydantic import Field
 from agentlang.logger import get_logger
 from agentlang.tools.tool_result import ToolResult
 from app.tools.use_browser_operations.base import BaseOperationParams, OperationGroup, operation
-from magic_use.magic_browser import GotoSuccess, MagicBrowser, MagicBrowserError, ScrollToSuccess
+from magic_use.magic_browser import GotoSuccess, DelightfulBrowser, DelightfulBrowserError, ScrollToSuccess
 
 # Logger
 logger = get_logger(__name__)
@@ -90,7 +90,7 @@ class NavigationOperations(OperationGroup):
             }
         }
     )
-    async def goto(self, browser: MagicBrowser, params: GotoParams) -> ToolResult:
+    async def goto(self, browser: DelightfulBrowser, params: GotoParams) -> ToolResult:
         """Navigate to the specified URL.
 
         If page_id is not provided, a new page is created automatically.
@@ -109,12 +109,12 @@ class NavigationOperations(OperationGroup):
             page, error_result = await self._get_validated_page(browser, params)
             if error_result: return error_result
 
-        # 3. Call MagicBrowser.goto
+        # 3. Call DelightfulBrowser.goto
         try:
             result = await browser.goto(page_id=page_id_to_use, url=url)
 
             # 4. Handle results
-            if isinstance(result, MagicBrowserError):
+            if isinstance(result, DelightfulBrowserError):
                 suggestion = self._get_document_suggestion(url)
                 error_msg = f"{result.error}{f' {suggestion}' if suggestion else ''}".strip()
                 return ToolResult(error=error_msg)
@@ -148,7 +148,7 @@ class NavigationOperations(OperationGroup):
             }
         }
     )
-    async def scroll_to(self, browser: MagicBrowser, params: ScrollToParams) -> ToolResult:
+    async def scroll_to(self, browser: DelightfulBrowser, params: ScrollToParams) -> ToolResult:
         """Scroll to an approximate screen position (based on viewport height)."""
         # 1. Get and validate page
         page, error_result = await self._get_validated_page(browser, params)
@@ -157,7 +157,7 @@ class NavigationOperations(OperationGroup):
         if not page_id:
             return ToolResult(error="Cannot determine page ID to scroll")
 
-        # 2. Call MagicBrowser.scroll_to
+        # 2. Call DelightfulBrowser.scroll_to
         try:
             result = await browser.scroll_to(
                 page_id=page_id,
@@ -165,7 +165,7 @@ class NavigationOperations(OperationGroup):
             )
 
             # 3. Handle results
-            if isinstance(result, MagicBrowserError):
+            if isinstance(result, DelightfulBrowserError):
                 return ToolResult(error=result.error)
             elif isinstance(result, ScrollToSuccess):
                 markdown_content = (

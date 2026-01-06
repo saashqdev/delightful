@@ -1,6 +1,6 @@
-# MagicRichEditor 魔法富文本编辑器组件
+# DelightfulRichEditor 魔法富文本编辑器组件
 
-`MagicRichEditor` 是一个基于 TipTap 的富文本编辑器组件，提供了文本格式化、图片插入、表情符号、提及功能等丰富的编辑功能。
+`DelightfulRichEditor` 是一个基于 TipTap 的富文本编辑器组件，提供了文本格式化、图片插入、表情符号、提及功能等丰富的编辑功能。
 
 ## 属性
 
@@ -18,33 +18,33 @@
 ## 基础用法
 
 ```tsx
-import { MagicRichEditor } from '@/components/base/MagicRichEditor';
+import { DelightfulRichEditor } from '@/components/base/DelightfulRichEditor';
 import { useRef } from 'react';
-import type { MagicRichEditorRef } from '@/components/base/MagicRichEditor';
+import type { DelightfulRichEditorRef } from '@/components/base/DelightfulRichEditor';
 
 // 基础用法
-<MagicRichEditor
+<DelightfulRichEditor
   placeholder="请输入内容..."
   style={{ height: '300px' }}
 />
 
 // 带初始内容
-<MagicRichEditor
+<DelightfulRichEditor
   content="<p>这是初始内容</p>"
   style={{ height: '300px' }}
 />
 
 // 不显示工具栏
-<MagicRichEditor
+<DelightfulRichEditor
   showToolBar={false}
   placeholder="无工具栏的编辑器"
   style={{ height: '200px' }}
 />
 
 // 使用 ref 获取编辑器实例
-const editorRef = useRef<MagicRichEditorRef>(null);
+const editorRef = useRef<DelightfulRichEditorRef>(null);
 
-<MagicRichEditor
+<DelightfulRichEditor
   ref={editorRef}
   placeholder="使用 ref 控制的编辑器"
   style={{ height: '300px' }}
@@ -57,7 +57,7 @@ const getContent = () => {
 };
 
 // 监听内容变化
-<MagicRichEditor
+<DelightfulRichEditor
   editorProps={{
     onUpdate: ({ editor }) => {
       console.log('内容已更新:', editor.getHTML());
@@ -67,7 +67,7 @@ const getContent = () => {
 />
 
 // 自定义回车键行为
-<MagicRichEditor
+<DelightfulRichEditor
   enterBreak={true}
   onEnter={(editor) => {
     console.log('回车键被按下');
@@ -95,4 +95,4 @@ const getContent = () => {
 -   需要一个功能完善但界面简洁的编辑器时
 -   需要自定义编辑器行为以适应特定交互需求时
 
-MagicRichEditor 组件让你的应用拥有专业的富文本编辑能力，适合用于评论系统、内容创作、邮件编辑等多种场景。
+DelightfulRichEditor 组件让你的应用拥有专业的富文本编辑能力，适合用于评论系统、内容创作、邮件编辑等多种场景。

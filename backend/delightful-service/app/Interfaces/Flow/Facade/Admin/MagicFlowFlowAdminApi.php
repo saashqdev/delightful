@@ -7,28 +7,28 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\Facade\Admin;
 
-use App\Application\Flow\Service\MagicFlowAppService;
-use App\Application\Flow\Service\MagicFlowExecuteAppService;
+use App\Application\Flow\Service\DelightfulFlowAppService;
+use App\Application\Flow\Service\DelightfulFlowExecuteAppService;
 use App\Application\MCP\Service\MCPServerAppService;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowQuery;
 use App\Domain\MCP\Entity\ValueObject\Query\MCPServerQuery;
 use App\Infrastructure\Core\ValueObject\Page;
-use App\Interfaces\Flow\Assembler\Flow\MagicFlowAssembler;
-use App\Interfaces\Flow\Assembler\Knowledge\MagicFlowKnowledgeAssembler;
-use App\Interfaces\Flow\Assembler\Node\MagicFlowNodeAssembler;
-use App\Interfaces\Flow\Assembler\ToolSet\MagicFlowToolSetAssembler;
+use App\Interfaces\Flow\Assembler\Flow\DelightfulFlowAssembler;
+use App\Interfaces\Flow\Assembler\Knowledge\DelightfulFlowKnowledgeAssembler;
+use App\Interfaces\Flow\Assembler\Node\DelightfulFlowNodeAssembler;
+use App\Interfaces\Flow\Assembler\ToolSet\DelightfulFlowToolSetAssembler;
 use App\Interfaces\MCP\Assembler\MCPServerAssembler;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]
-class MagicFlowFlowAdminApi extends AbstractFlowAdminApi
+class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
 {
     #[Inject]
-    protected MagicFlowAppService $magicFlowAppService;
+    protected DelightfulFlowAppService $magicFlowAppService;
 
     #[Inject]
-    protected MagicFlowExecuteAppService $magicFlowExecuteAppService;
+    protected DelightfulFlowExecuteAppService $magicFlowExecuteAppService;
 
     #[Inject]
     protected MCPServerAppService $mcpServerAppService;
@@ -51,12 +51,12 @@ class MagicFlowFlowAdminApi extends AbstractFlowAdminApi
     {
         $this->getAuthorization();
 
-        $nodeDTO = MagicFlowNodeAssembler::createNodeDTOByMixed($this->request->all());
-        $nodeDO = MagicFlowNodeAssembler::createNodeDO($nodeDTO);
+        $nodeDTO = DelightfulFlowNodeAssembler::createNodeDTOByMixed($this->request->all());
+        $nodeDO = DelightfulFlowNodeAssembler::createNodeDO($nodeDTO);
 
         $node = $this->magicFlowAppService->getNodeTemplate($this->getAuthorization(), $nodeDO);
 
-        return MagicFlowNodeAssembler::createNodeDTO($node);
+        return DelightfulFlowNodeAssembler::createNodeDTO($node);
     }
 
     /**
@@ -65,8 +65,8 @@ class MagicFlowFlowAdminApi extends AbstractFlowAdminApi
     public function singleDebugNode()
     {
         $authorization = $this->getAuthorization();
-        $nodeDTO = MagicFlowNodeAssembler::createNodeDTOByMixed($this->request->all());
-        $nodeDO = MagicFlowNodeAssembler::createNodeDO($nodeDTO);
+        $nodeDTO = DelightfulFlowNodeAssembler::createNodeDTOByMixed($this->request->all());
+        $nodeDO = DelightfulFlowNodeAssembler::createNodeDO($nodeDTO);
         return $this->magicFlowAppService->singleDebugNode(
             $authorization,
             $nodeDO,
@@ -81,13 +81,13 @@ class MagicFlowFlowAdminApi extends AbstractFlowAdminApi
     public function saveFlow()
     {
         $authorization = $this->getAuthorization();
-        $magicFlowDTO = MagicFlowAssembler::createMagicFlowDTOByMixed($this->request->all());
-        $magicFlowDO = MagicFlowAssembler::createMagicFlowDO($magicFlowDTO);
+        $magicFlowDTO = DelightfulFlowAssembler::createDelightfulFlowDTOByMixed($this->request->all());
+        $magicFlowDO = DelightfulFlowAssembler::createDelightfulFlowDO($magicFlowDTO);
 
         $magicFlow = $this->magicFlowAppService->save($authorization, $magicFlowDO);
         $icons = $this->magicFlowAppService->getIcons($magicFlow->getOrganizationCode(), [$magicFlow->getIcon()]);
 
-        return MagicFlowAssembler::createMagicFlowDTO($magicFlow, $icons);
+        return DelightfulFlowAssembler::createDelightfulFlowDTO($magicFlow, $icons);
     }
 
     /**
@@ -96,8 +96,8 @@ class MagicFlowFlowAdminApi extends AbstractFlowAdminApi
     public function flowDebug(string $flowId)
     {
         $authorization = $this->getAuthorization();
-        $magicFlowDTO = MagicFlowAssembler::createMagicFlowDTOByMixed($this->request->all());
-        $magicFlowDO = MagicFlowAssembler::createMagicFlowDO($magicFlowDTO);
+        $magicFlowDTO = DelightfulFlowAssembler::createDelightfulFlowDTOByMixed($this->request->all());
+        $magicFlowDO = DelightfulFlowAssembler::createDelightfulFlowDO($magicFlowDTO);
         $magicFlowDO->setCode($flowId);
 
         // 触发方式、触发数据
@@ -113,11 +113,11 @@ class MagicFlowFlowAdminApi extends AbstractFlowAdminApi
     {
         $authorization = $this->getAuthorization();
         $params = $this->request->all();
-        $query = new MagicFLowQuery($params);
+        $query = new DelightfulFLowQuery($params);
         $query->setOrder(['updated_at' => 'desc']);
         $page = $this->createPage();
         $result = $this->magicFlowAppService->queries($authorization, $query, $page);
-        return MagicFlowAssembler::createPageListDTO($result['total'], $result['list'], $page, $result['users'], $result['icons']);
+        return DelightfulFlowAssembler::createPageListDTO($result['total'], $result['list'], $page, $result['users'], $result['icons']);
     }
 
     /**
@@ -127,9 +127,9 @@ class MagicFlowFlowAdminApi extends AbstractFlowAdminApi
     {
         $authorization = $this->getAuthorization();
         $params = $this->request->all();
-        $query = new MagicFLowQuery($params);
+        $query = new DelightfulFLowQuery($params);
         $result = $this->magicFlowAppService->queryTools($authorization, $query);
-        return MagicFlowAssembler::createPageListDTO($result['total'], $result['list'], Page::createNoPage());
+        return DelightfulFlowAssembler::createPageListDTO($result['total'], $result['list'], Page::createNoPage());
     }
 
     /**
@@ -139,7 +139,7 @@ class MagicFlowFlowAdminApi extends AbstractFlowAdminApi
     {
         $withBuiltin = (bool) $this->request->input('with_builtin', true);
         $result = $this->magicFlowAppService->queryToolSets($this->getAuthorization(), $withBuiltin);
-        return MagicFlowToolSetAssembler::createPageListDTO($result['total'], $result['list'], Page::createNoPage(), $result['users'], $result['icons']);
+        return DelightfulFlowToolSetAssembler::createPageListDTO($result['total'], $result['list'], Page::createNoPage(), $result['users'], $result['icons']);
     }
 
     public function queryMCPList()
@@ -168,7 +168,7 @@ class MagicFlowFlowAdminApi extends AbstractFlowAdminApi
     public function queryKnowledge()
     {
         $result = $this->magicFlowAppService->queryKnowledge($this->getAuthorization());
-        return MagicFlowKnowledgeAssembler::createPageListDTO($result['total'], $result['list'], Page::createNoPage(), $result['users']);
+        return DelightfulFlowKnowledgeAssembler::createPageListDTO($result['total'], $result['list'], Page::createNoPage(), $result['users']);
     }
 
     /**
@@ -178,13 +178,13 @@ class MagicFlowFlowAdminApi extends AbstractFlowAdminApi
     {
         $magicFlow = $this->magicFlowAppService->getByCode($this->getAuthorization(), $flowId);
         $icons = $this->magicFlowAppService->getIcons($magicFlow->getOrganizationCode(), [$magicFlow->getIcon()]);
-        return MagicFlowAssembler::createMagicFlowDTO($magicFlow, $icons);
+        return DelightfulFlowAssembler::createDelightfulFlowDTO($magicFlow, $icons);
     }
 
     public function showParams(string $flowId)
     {
         $magicFlow = $this->magicFlowAppService->getByCode($this->getAuthorization(), $flowId);
-        return MagicFlowAssembler::createMagicFlowParamsDTO($magicFlow);
+        return DelightfulFlowAssembler::createDelightfulFlowParamsDTO($magicFlow);
     }
 
     /**

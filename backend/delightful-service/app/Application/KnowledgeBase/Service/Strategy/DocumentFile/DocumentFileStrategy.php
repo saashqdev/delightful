@@ -91,7 +91,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 替换内容中的图片为 MagicCompressibleContent 标签.
+     * 替换内容中的图片为 DelightfulCompressibleContent 标签.
      */
     private function replaceImages(string $content, KnowledgeBaseDataIsolation $dataIsolation, ?string $knowledgeBaseCode = null): string
     {
@@ -152,7 +152,7 @@ class DocumentFileStrategy
                 }
 
                 // 替换图片链接
-                $content = str_replace($fullMatches[$index], '<MagicCompressibleContent Type="Image">![image](magic_knowledge_base_file_' . $fileKey . ')</MagicCompressibleContent>', $content);
+                $content = str_replace($fullMatches[$index], '<DelightfulCompressibleContent Type="Image">![image](magic_knowledge_base_file_' . $fileKey . ')</DelightfulCompressibleContent>', $content);
             } catch (Throwable $e) {
                 $this->logger->error('Failed to process image', [
                     'error' => $e->getMessage(),

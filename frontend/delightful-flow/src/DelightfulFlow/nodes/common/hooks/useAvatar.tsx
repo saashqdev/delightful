@@ -1,7 +1,7 @@
 import { prefix } from "@/DelightfulFlow/constants"
-import styles from "@/MagicFlow/nodes/BaseNode/index.module.less"
+import styles from "@/DelightfulFlow/nodes/BaseNode/index.module.less"
 import { nodeManager } from "@/DelightfulFlow/register/node"
-import { MagicFlow } from "@/DelightfulFlow/types/flow"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import clsx from "clsx"
 import _ from "lodash"
 import React, { useMemo } from "react"
@@ -9,7 +9,7 @@ import React, { useMemo } from "react"
 type UseAvatarProps = {
 	icon: React.ReactNode | null
 	color: string
-	currentNode: MagicFlow.Node
+	currentNode: DelightfulFlow.Node
 }
 
 export default function useAvatar({ icon, color, currentNode }: UseAvatarProps) {

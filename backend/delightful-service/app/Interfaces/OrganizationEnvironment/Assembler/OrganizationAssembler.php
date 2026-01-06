@@ -39,7 +39,7 @@ class OrganizationAssembler
     {
         $dto = new OrganizationResponseDTO();
         $dto->setId($entity->getId());
-        $dto->setMagicOrganizationCode($entity->getMagicOrganizationCode());
+        $dto->setDelightfulOrganizationCode($entity->getDelightfulOrganizationCode());
         $dto->setName($entity->getName());
         $dto->setStatus($entity->getStatus());
         $dto->setType($entity->getType());

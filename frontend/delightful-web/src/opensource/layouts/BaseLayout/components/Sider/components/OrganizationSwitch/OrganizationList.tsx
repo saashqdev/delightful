@@ -1,8 +1,8 @@
 import { memo, useRef } from "react"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { IconCheck, IconPlus } from "@tabler/icons-react"
-import MagicScrollBar from "@/opensource/components/base/MagicScrollBar"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulScrollBar from "@/opensource/components/base/DelightfulScrollBar"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { colorScales } from "@/opensource/providers/ThemeProvider/colors"
 import { Badge, Flex, Affix } from "antd"
 import { useTranslation } from "react-i18next"
@@ -23,7 +23,7 @@ interface OrganizationItemProps {
 	isSelected: boolean
 	onClick?: () => void
 	account: User.UserAccount
-	organization: User.MagicOrganization
+	organization: User.DelightfulOrganization
 }
 
 const OrganizationItem = observer((props: OrganizationItemProps) => {
@@ -38,7 +38,7 @@ const OrganizationItem = observer((props: OrganizationItemProps) => {
 	const unreadDotsGroupByOrganization = OrganizationDotsStore.dots
 
 	const switchOrganization = useMemoizedFn(
-		async (accountInfo: User.UserAccount, organizationInfo: User.MagicOrganization) => {
+		async (accountInfo: User.UserAccount, organizationInfo: User.DelightfulOrganization) => {
 			if (disabled) {
 				return
 			}
@@ -64,7 +64,7 @@ const OrganizationItem = observer((props: OrganizationItemProps) => {
 					} catch (err) {
 						console.error(err)
 						// 切换失败，恢复当前组织
-						userService.setMagicOrganizationCode(userInfo?.organization_code)
+						userService.setDelightfulOrganizationCode(userInfo?.organization_code)
 						userService.setUserInfo(userInfo)
 					}
 				}
@@ -87,7 +87,7 @@ const OrganizationItem = observer((props: OrganizationItemProps) => {
 			})}
 		>
 			<div className={styles.itemIcon}>
-				<MagicAvatar
+				<DelightfulAvatar
 					src={organization.organization_logo}
 					size={30}
 					className={cx(styles.avatar, {
@@ -95,12 +95,12 @@ const OrganizationItem = observer((props: OrganizationItemProps) => {
 					})}
 				>
 					{organization.organization_name}
-				</MagicAvatar>
+				</DelightfulAvatar>
 			</div>
 			<div className={styles.itemText}>{organization.organization_name}</div>
 			<Flex>
 				{isSelected ? (
-					<MagicIcon
+					<DelightfulIcon
 						color={colorScales.brand[5]}
 						size={20}
 						stroke={2}
@@ -140,7 +140,7 @@ function OrganizationListComponent(props: OrganizationListItemProps) {
 
 	return (
 		<div className={styles.container}>
-			<MagicScrollBar
+			<DelightfulScrollBar
 				className={styles.scroll}
 				autoHide={false}
 				scrollableNodeProps={{
@@ -161,14 +161,14 @@ function OrganizationListComponent(props: OrganizationListItemProps) {
 										<span className={styles.groupHeaderLine} />
 									</div>
 									<div className={styles.groupWrapper}>
-										<MagicAvatar
+										<DelightfulAvatar
 											src={account.avatar}
 											className={cx(styles.avatar, {
 												[styles.avatarDisabled]: false,
 											})}
 										>
 											{account.nickname}
-										</MagicAvatar>
+										</DelightfulAvatar>
 										<span className={styles.groupTitle}>
 											{account.nickname}
 										</span>
@@ -199,7 +199,7 @@ function OrganizationListComponent(props: OrganizationListItemProps) {
 						</div>
 					)
 				})}
-			</MagicScrollBar>
+			</DelightfulScrollBar>
 			<div className={styles.button} onClick={handleAddAccount}>
 				<IconPlus size={20} />
 				{t("sider.addAccount")}

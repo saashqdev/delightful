@@ -1,21 +1,21 @@
 import { IconChevronRight, IconUsers } from "@tabler/icons-react"
 import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { MagicList } from "@/opensource/components/MagicList"
+import { DelightfulList } from "@/opensource/components/DelightfulList"
 import { useLocation } from "react-router"
 import { useNavigate } from "@/opensource/hooks/useNavigate"
 import { RoutePath } from "@/const/routes"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import SubSiderContainer from "@/opensource/layouts/BaseLayout/components/SubSider"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { Flex } from "antd"
 import AutoTooltipText from "@/opensource/components/other/AutoTooltipText"
-import { IconMagicBots } from "@/enhance/tabler/icons-react"
-import type { MagicListItemData } from "@/opensource/components/MagicList/types"
+import { IconDelightfulBots } from "@/enhance/tabler/icons-react"
+import type { DelightfulListItemData } from "@/opensource/components/DelightfulList/types"
 import { useMemoizedFn, useMount } from "ahooks"
-import { useCurrentMagicOrganization } from "@/opensource/models/user/hooks"
+import { useCurrentDelightfulOrganization } from "@/opensource/models/user/hooks"
 import { contactStore } from "@/opensource/stores/contact"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { useStyles } from "./styles"
 import { Line } from "./Line"
 import { useContactPageDataContext } from "../ContactDataProvider/hooks"
@@ -26,13 +26,13 @@ import userInfoService from "@/opensource/services/userInfo"
 import { observer } from "mobx-react-lite"
 
 interface CurrentOrganizationProps {
-	onItemClick: (data: MagicListItemData) => void
+	onItemClick: (data: DelightfulListItemData) => void
 }
 
 const CurrentOrganization = observer(({ onItemClick }: CurrentOrganizationProps) => {
 	const { t } = useTranslation("interface")
 	const { styles } = useStyles()
-	const organization = useCurrentMagicOrganization()
+	const organization = useCurrentDelightfulOrganization()
 
 	const [userInfo, setUserInfo] = useState<StructureUserItem | null>(null)
 	const [departmentInfos, setDepartmentInfos] = useState<any[]>([])
@@ -77,20 +77,20 @@ const CurrentOrganization = observer(({ onItemClick }: CurrentOrganizationProps)
 	return (
 		<Flex vertical gap={4}>
 			<Flex gap={8}>
-				<MagicAvatar
+				<DelightfulAvatar
 					size={42}
 					src={organization.organization_logo}
 					className={styles.avatar}
 				>
 					{organization.organization_name}
-				</MagicAvatar>
+				</DelightfulAvatar>
 				<Flex vertical justify="center">
 					<AutoTooltipText className={styles.organizationName}>
 						{organization.organization_name}
 					</AutoTooltipText>
 				</Flex>
 			</Flex>
-			<MagicList
+			<DelightfulList
 				onItemClick={onItemClick}
 				className={styles.collapse}
 				items={[
@@ -104,7 +104,7 @@ const CurrentOrganization = observer(({ onItemClick }: CurrentOrganizationProps)
 								{t("contacts.subSider.organization")}
 							</Flex>
 						),
-						extra: <MagicIcon size={18} component={IconChevronRight} />,
+						extra: <DelightfulIcon size={18} component={IconChevronRight} />,
 					},
 					...(pathNodesState?.map((node) => {
 						return {
@@ -115,16 +115,16 @@ const CurrentOrganization = observer(({ onItemClick }: CurrentOrganizationProps)
 								name: n.name,
 							})),
 							title: (
-								<MagicSpin spinning={isLoadingDepartmentInfos}>
+								<DelightfulSpin spinning={isLoadingDepartmentInfos}>
 									<Flex gap={8} align="center" style={{ marginLeft: 40 }}>
 										{Line}
 										<span className={styles.departmentPathName}>
 											{node.departmentPathName}
 										</span>
 									</Flex>
-								</MagicSpin>
+								</DelightfulSpin>
 							),
-							extra: <MagicIcon size={18} component={IconChevronRight} />,
+							extra: <DelightfulIcon size={18} component={IconChevronRight} />,
 						}
 					}) ?? []),
 				]}
@@ -143,13 +143,13 @@ function ContactsSubSider() {
 	const [collapseKey, setCollapseKey] = useState<string>(pathname)
 
 	const { setCurrentDepartmentPath } = useContactPageDataContext()
-	const handleOrganizationItemClick = useMemoizedFn(({ id, pathNodes }: MagicListItemData) => {
+	const handleOrganizationItemClick = useMemoizedFn(({ id, pathNodes }: DelightfulListItemData) => {
 		setCollapseKey(id)
 		setCurrentDepartmentPath(pathNodes)
 		navigate(RoutePath.ContactsOrganization)
 	})
 
-	const handleItemClick = useMemoizedFn(({ route }: MagicListItemData) => {
+	const handleItemClick = useMemoizedFn(({ route }: DelightfulListItemData) => {
 		navigate(route)
 	})
 
@@ -161,7 +161,7 @@ function ContactsSubSider() {
 					<CurrentOrganization onItemClick={handleOrganizationItemClick} />
 				</Flex>
 				<div className={styles.divider} />
-				<MagicList
+				<DelightfulList
 					active={collapseKey}
 					onItemClick={handleItemClick}
 					items={[
@@ -170,7 +170,7 @@ function ContactsSubSider() {
 							route: RoutePath.ContactsAiAssistant,
 							title: t("contacts.subSider.aiAssistant"),
 							avatar: {
-								src: <MagicIcon color="currentColor" component={IconMagicBots} />,
+								src: <DelightfulIcon color="currentColor" component={IconDelightfulBots} />,
 								style: {
 									background: magicColorScales.brand[5],
 									padding: 8,
@@ -178,7 +178,7 @@ function ContactsSubSider() {
 								},
 							},
 							extra: (
-								<MagicIcon
+								<DelightfulIcon
 									color="currentColor"
 									size={18}
 									component={IconChevronRight}
@@ -190,7 +190,7 @@ function ContactsSubSider() {
 						// 	route: RoutePath.ContactsMyFriends,
 						// 	title: t("contacts.subSider.followee"),
 						// 	avatar: {
-						// 		icon: <MagicIcon color="currentColor" component={IconUserStar} />,
+						// 		icon: <DelightfulIcon color="currentColor" component={IconUserStar} />,
 						// 		style: {
 						// 			background: colorScales.pink[5],
 						// 			padding: 8,
@@ -198,7 +198,7 @@ function ContactsSubSider() {
 						// 		},
 						// 	},
 						// 	extra: (
-						// 		<MagicIcon
+						// 		<DelightfulIcon
 						// 			color="currentColor"
 						// 			size={18}
 						// 			component={IconChevronRight}
@@ -210,7 +210,7 @@ function ContactsSubSider() {
 							route: RoutePath.ContactsMyGroups,
 							title: t("contacts.subSider.myGroups"),
 							avatar: {
-								src: <MagicIcon color="currentColor" component={IconUsers} />,
+								src: <DelightfulIcon color="currentColor" component={IconUsers} />,
 								style: {
 									background: magicColorScales.lightGreen[5],
 									padding: 8,
@@ -218,7 +218,7 @@ function ContactsSubSider() {
 								},
 							},
 							extra: (
-								<MagicIcon
+								<DelightfulIcon
 									color="currentColor"
 									size={18}
 									component={IconChevronRight}

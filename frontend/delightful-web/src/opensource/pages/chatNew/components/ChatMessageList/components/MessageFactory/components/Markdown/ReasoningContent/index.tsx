@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconBrain, IconChevronUp } from "@tabler/icons-react"
 import { useUpdateEffect } from "ahooks"
 import { Flex } from "antd"
@@ -68,9 +68,9 @@ const ReasoningContent = ({
 					gap={2}
 					onClick={() => setIsCollapse(false)}
 				>
-					<MagicIcon component={IconBrain} color="currentColor" size={14} />
+					<DelightfulIcon component={IconBrain} color="currentColor" size={14} />
 					{t("chat.message.thought_process")}
-					<MagicIcon
+					<DelightfulIcon
 						component={IconChevronUp}
 						size={14}
 						color="currentColor"
@@ -93,9 +93,9 @@ const ReasoningContent = ({
 				gap={2}
 				onClick={() => setIsCollapse(true)}
 			>
-				<MagicIcon component={IconBrain} color="currentColor" size={14} />
+				<DelightfulIcon component={IconBrain} color="currentColor" size={14} />
 				{t("chat.message.thought_process")}
-				<MagicIcon
+				<DelightfulIcon
 					component={IconChevronUp}
 					size={14}
 					color="currentColor"

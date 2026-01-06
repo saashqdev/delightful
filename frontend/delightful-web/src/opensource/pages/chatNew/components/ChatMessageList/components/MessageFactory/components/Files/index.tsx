@@ -1,5 +1,5 @@
 import { memo } from "react"
-import MagicFiles from "../../../../../MagicFiles"
+import DelightfulFiles from "../../../../../DelightfulFiles"
 
 interface Props {
 	files?: any[]
@@ -8,7 +8,7 @@ interface Props {
 
 const Files = memo(
 	({ files, messageId }: Props) => {
-		return <MagicFiles data={files} messageId={messageId} />
+		return <DelightfulFiles data={files} messageId={messageId} />
 	},
 	(prev, next) => prev.messageId === next.messageId,
 )

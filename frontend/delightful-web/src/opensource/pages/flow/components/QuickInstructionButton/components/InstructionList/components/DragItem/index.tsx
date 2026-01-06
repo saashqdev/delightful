@@ -9,7 +9,7 @@ import {
 } from "@/types/bot"
 import { useTranslation } from "react-i18next"
 import { Flex, Tag } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import {
 	IconSparkles,
 	IconEdit,
@@ -18,7 +18,7 @@ import {
 	IconEye,
 	IconEyeOff,
 } from "@tabler/icons-react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { useBotStore } from "@/opensource/stores/bot"
 import { useStyles } from "../../styles"
 import { StatusIcons } from "../../../../const"
@@ -90,7 +90,7 @@ export const DragItem = ({
 				align="center"
 			>
 				<Flex gap={8} align="center">
-					<MagicButton
+					<DelightfulButton
 						type="text"
 						size="small"
 						icon={<IconGripVertical size={18} />}
@@ -108,7 +108,7 @@ export const DragItem = ({
 							</div>
 						) : (
 							<Flex align="center" className={styles.icon}>
-								<MagicIcon
+								<DelightfulIcon
 									size={20}
 									color="currentColor"
 									component={StatusIcons[(item as SystemInstruct).icon]}
@@ -122,22 +122,22 @@ export const DragItem = ({
 				</Flex>
 				{isSortable ? (
 					<Flex gap={4}>
-						<MagicButton
+						<DelightfulButton
 							className={styles.actionButton}
 							onClick={() =>
 								selectInstruction?.(type, item as CommonQuickInstruction)
 							}
 						>
 							<IconEdit size={18} color="currentColor" />
-						</MagicButton>
-						<MagicButton
+						</DelightfulButton>
+						<DelightfulButton
 							className={styles.actionButton}
 							onClick={() =>
 								deleteInstruction?.(type, item as CommonQuickInstruction)
 							}
 						>
 							<IconTrashX size={18} color="currentColor" />
-						</MagicButton>
+						</DelightfulButton>
 					</Flex>
 				) : (
 					<Flex gap={8} align="center">

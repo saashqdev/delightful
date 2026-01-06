@@ -40,6 +40,6 @@ class EndNodeRunner extends NodeRunner
         $executionData->saveNodeContext($this->node->getNodeId(), $result);
 
         // 动态设置结束节点 id
-        $executionData->getMagicFlowEntity()?->setEndNode($this->node);
+        $executionData->getDelightfulFlowEntity()?->setEndNode($this->node);
     }
 }

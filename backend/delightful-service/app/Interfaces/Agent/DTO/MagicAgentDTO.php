@@ -9,7 +9,7 @@ namespace App\Interfaces\Agent\DTO;
 
 use App\Infrastructure\Core\AbstractDTO;
 
-class MagicAgentDTO extends AbstractDTO
+class DelightfulAgentDTO extends AbstractDTO
 {
     public string $id;
 

@@ -2,10 +2,10 @@ import { useRef } from "react"
 import { message as antdMessage } from "antd"
 import { useTranslation } from "react-i18next"
 import { useMemoizedFn } from "ahooks"
-import { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { set } from "lodash-es"
 import { FlowApi } from "@/apis"
-import { getLatestNodeVersion } from "@delightful/delightful-flow/dist/MagicFlow/utils"
+import { getLatestNodeVersion } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
 
 interface UseFlowOperationsProps {
 	flowInteractionRef: React.MutableRefObject<any>
@@ -29,7 +29,7 @@ export default function useFlowOperations({
 			if (!flowInteractionRef.current) return
 
 			const node = flowInteractionRef.current.nodes?.find?.(
-				(n: MagicFlow.Node) => n.node_id === nodeId,
+				(n: DelightfulFlow.Node) => n.node_id === nodeId,
 			)
 			if (node && node.width && node.height) {
 				flowInteractionRef.current.updateViewPortToTargetNode(node)
@@ -138,7 +138,7 @@ export default function useFlowOperations({
 			// 获取当前源节点的下一个节点列表
 			const currentFlow = flowInteractionRef.current.getFlow()
 			const sourceNode = currentFlow.nodes?.find(
-				(node: MagicFlow.Node) => node.id === sourceNodeId,
+				(node: DelightfulFlow.Node) => node.id === sourceNodeId,
 			)
 			const nextNodeIds = (sourceNode?.next_nodes || []).filter(
 				(id: string) => id !== targetNodeId,

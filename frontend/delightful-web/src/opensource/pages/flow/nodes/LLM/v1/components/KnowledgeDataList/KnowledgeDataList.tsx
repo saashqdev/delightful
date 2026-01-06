@@ -1,8 +1,8 @@
 import { Flex, Form, Tooltip, Flex as AntdFlex } from "antd"
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
 import { IconCircleMinus, IconHelp } from "@tabler/icons-react"
-import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
-import MagicSlider from "@delightful/delightful-flow/dist/common/BaseUI/Slider"
+import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulSlider from "@delightful/delightful-flow/dist/common/BaseUI/Slider"
 import { useTranslation } from "react-i18next"
 import TSIcon from "@/opensource/components/base/TSIcon"
 import useFormListRemove from "@/opensource/pages/flow/common/hooks/useFormListRemove"
@@ -80,12 +80,12 @@ export default function KnowledgeDataListV1({
 								initInterval={initInterval}
 							/>
 						) : (
-							<MagicSelect key={knowledgeTypeValue} options={[]} />
+							<DelightfulSelect key={knowledgeTypeValue} options={[]} />
 						)}
 					</Form.Item>
 				)
 			default:
-				return <MagicSelect key={knowledgeTypeValue} options={[]} />
+				return <DelightfulSelect key={knowledgeTypeValue} options={[]} />
 		}
 	}
 
@@ -119,7 +119,7 @@ export default function KnowledgeDataListV1({
 															noStyle
 															name={[subField.name, "knowledge_type"]}
 														>
-															<MagicSelect
+															<DelightfulSelect
 																options={knowledgeDataOptions}
 																fieldNames={{
 																	label: "label",
@@ -182,7 +182,7 @@ export default function KnowledgeDataListV1({
 							</div>
 							<div className={styles.right}>
 								<Form.Item name={limitName}>
-									<MagicSlider
+									<DelightfulSlider
 										min={limit.extra.min}
 										max={limit.extra.max}
 										step={limit.extra.step}
@@ -207,7 +207,7 @@ export default function KnowledgeDataListV1({
 							</div>
 							<div className={styles.right}>
 								<Form.Item name={scoreName}>
-									<MagicSlider
+									<DelightfulSlider
 										min={score.extra.min}
 										max={score.extra.max}
 										step={score.extra.step}

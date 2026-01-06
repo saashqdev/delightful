@@ -9,7 +9,7 @@ namespace App\Domain\Token\Repository\Persistence\Model;
 
 use Hyperf\DbConnection\Model\Model;
 
-class MagicToken extends Model
+class DelightfulToken extends Model
 {
     /**
      * The table associated with the model.

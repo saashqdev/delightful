@@ -13,7 +13,7 @@ use ArrayAccess;
 /**
  * 之前太多地方使用数组访问，这里使用 ArrayAccess 接口来实现数组访问.
  */
-class MagicDepartmentUserEntity extends AbstractEntity implements ArrayAccess
+class DelightfulDepartmentUserEntity extends AbstractEntity implements ArrayAccess
 {
     protected string $id = '';
 
@@ -66,12 +66,12 @@ class MagicDepartmentUserEntity extends AbstractEntity implements ArrayAccess
         $this->id = $id;
     }
 
-    public function getMagicId(): string
+    public function getDelightfulId(): string
     {
         return $this->magicId;
     }
 
-    public function setMagicId(int|string $magicId): void
+    public function setDelightfulId(int|string $magicId): void
     {
         if (is_int($magicId)) {
             $magicId = (string) $magicId;

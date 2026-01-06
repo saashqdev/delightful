@@ -81,7 +81,7 @@ export class LoginService {
 		): Promise<Omit<LoginStepResult, "organizationCode">> => {
 			try {
 				const { access_token } = params
-				const result = await this.authApi.bindMagicAuthorization(
+				const result = await this.authApi.bindDelightfulAuthorization(
 					access_token,
 					clusterCode,
 					teamshareOrganizationCode,
@@ -172,7 +172,7 @@ export class LoginService {
 			// const teamshareOrgsCode = organizations.map((o) => o.organization_code)
 			//
 			// // 获取到 teamshare 的组织后，需要针对上步 magicOrganizationMap 进行合法性过滤(因后端没处理 magicOrganizationMap 数据的合法性，所以这里需要根据 teamshare 中不存在的组织过滤 magicOrganizationMap)
-			// const magicOrganizationArray = Object.values(allMagicOrganizationMap).filter((o) =>
+			// const magicOrganizationArray = Object.values(allDelightfulOrganizationMap).filter((o) =>
 			// 	teamshareOrgsCode.includes(o.third_platform_organization_code),
 			// )
 			// const magicOrganizationMap = keyBy(

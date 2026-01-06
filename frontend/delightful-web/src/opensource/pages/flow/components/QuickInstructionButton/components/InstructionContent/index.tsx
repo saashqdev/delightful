@@ -1,17 +1,17 @@
 import { memo } from "react"
 import { useTranslation } from "react-i18next"
 import { Flex, Form } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { InstructionType } from "@/types/bot"
 import { resolveToString } from "@dtyq/es6-template-strings"
-import type { MagicRichEditorRef } from "@/opensource/components/base/MagicRichEditor"
-import MagicRichEditor from "@/opensource/components/base/MagicRichEditor"
+import type { DelightfulRichEditorRef } from "@/opensource/components/base/DelightfulRichEditor"
+import DelightfulRichEditor from "@/opensource/components/base/DelightfulRichEditor"
 import type { UseEditorOptions } from "@tiptap/react"
 import { IconAt } from "@tabler/icons-react"
 import { useStyles } from "../../styles"
 
 interface InstructionContentProps {
-	editorRef: React.RefObject<MagicRichEditorRef>
+	editorRef: React.RefObject<DelightfulRichEditorRef>
 	selectedValue: InstructionType
 	editorOptions: UseEditorOptions
 	insertInstruction: () => void
@@ -29,14 +29,14 @@ export const InstructionContent = memo(
 							{t("explore.form.instructionContent")}
 						</span>
 						{selectedValue !== InstructionType.TEXT && (
-							<MagicButton
+							<DelightfulButton
 								type="text"
 								className={styles.atButton}
 								onClick={insertInstruction}
 							>
 								<IconAt size={14} color="currentColor" />
 								{t("explore.form.insertInstruction")}
-							</MagicButton>
+							</DelightfulButton>
 						)}
 					</Flex>
 					<Form.Item
@@ -51,7 +51,7 @@ export const InstructionContent = memo(
 							},
 						]}
 					>
-						<MagicRichEditor
+						<DelightfulRichEditor
 							ref={editorRef}
 							showToolBar={false}
 							className={styles.editor}

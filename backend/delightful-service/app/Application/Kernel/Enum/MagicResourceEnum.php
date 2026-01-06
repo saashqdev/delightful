@@ -10,7 +10,7 @@ namespace App\Application\Kernel\Enum;
 use function Hyperf\Translation\__;
 
 /**
- * Magic 资源枚举.
+ * Delightful 资源枚举.
  *
  * 1. 使用 Backed Enum 将每个资源映射为唯一字符串 key。
  * 2. 通过方法提供 label / parent  等元信息，方便后续生成权限树、做 i18n 等。
@@ -18,7 +18,7 @@ use function Hyperf\Translation\__;
  *
  * 注意：如果你修改了这个文件，请执行单元测试 PermissionApiTest.testGetPermissionTree.
  */
-enum MagicResourceEnum: string
+enum DelightfulResourceEnum: string
 {
     // ===== 顶级 =====
     case PLATFORM = 'platform'; # 平台管理后台
@@ -109,11 +109,11 @@ enum MagicResourceEnum: string
 
     /**
      * 返回与该资源绑定的 Operation Enum 类名。
-     * 默认使用 MagicOperationEnum。
+     * 默认使用 DelightfulOperationEnum。
      * 如需为特定资源自定义操作集，可在此返回自定义 Enum::class。
      */
     public function operationEnumClass(): string
     {
-        return MagicOperationEnum::class;
+        return DelightfulOperationEnum::class;
     }
 }

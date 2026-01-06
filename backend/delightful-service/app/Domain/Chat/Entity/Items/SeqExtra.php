@@ -27,12 +27,12 @@ class SeqExtra extends AbstractEntity
 
     protected ?string $language = null;
 
-    public function getMagicEnvId(): ?int
+    public function getDelightfulEnvId(): ?int
     {
         return $this->magicEnvId;
     }
 
-    public function setMagicEnvId(?int $magicEnvId): self
+    public function setDelightfulEnvId(?int $magicEnvId): self
     {
         $this->magicEnvId = $magicEnvId;
         return $this;
@@ -53,7 +53,7 @@ class SeqExtra extends AbstractEntity
     public function getExtraCanCopyData(): array
     {
         return [
-            'magic_env_id' => $this->getMagicEnvId(),
+            'magic_env_id' => $this->getDelightfulEnvId(),
             'topic_id' => $this->getTopicId(),
         ];
     }

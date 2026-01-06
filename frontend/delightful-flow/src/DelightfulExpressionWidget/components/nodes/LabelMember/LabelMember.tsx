@@ -1,5 +1,5 @@
-import { checkIsReferenceNode } from "@/MagicExpressionWidget/helpers"
-import { EXPRESSION_ITEM, WithReference } from "@/MagicExpressionWidget/types"
+import { checkIsReferenceNode } from "@/DelightfulExpressionWidget/helpers"
+import { EXPRESSION_ITEM, WithReference } from "@/DelightfulExpressionWidget/types"
 import { useMemoizedFn } from "ahooks"
 import React, { useState } from "react"
 import useDatasetProps from "../../hooks/useDatasetProps"

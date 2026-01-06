@@ -13,7 +13,7 @@ use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
-class MagicFlowMemoryHistoryEntity extends AbstractEntity
+class DelightfulFlowMemoryHistoryEntity extends AbstractEntity
 {
     protected ?int $id = null;
 

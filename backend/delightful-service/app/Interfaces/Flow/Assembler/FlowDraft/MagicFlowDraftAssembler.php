@@ -7,62 +7,62 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\Assembler\FlowDraft;
 
-use App\Domain\Flow\Entity\MagicFlowDraftEntity;
+use App\Domain\Flow\Entity\DelightfulFlowDraftEntity;
 use App\Infrastructure\Core\ValueObject\Page;
-use App\Interfaces\Flow\DTO\FlowDraft\MagicFlowDraftDTO;
-use App\Interfaces\Flow\DTO\FlowDraft\MagicFlowDraftListDTO;
+use App\Interfaces\Flow\DTO\FlowDraft\DelightfulFlowDraftDTO;
+use App\Interfaces\Flow\DTO\FlowDraft\DelightfulFlowDraftListDTO;
 use App\Interfaces\Kernel\Assembler\FileAssembler;
 use App\Interfaces\Kernel\Assembler\OperatorAssembler;
 use App\Interfaces\Kernel\DTO\PageDTO;
 
-class MagicFlowDraftAssembler
+class DelightfulFlowDraftAssembler
 {
-    public static function createFlowDraftDTOByMixed(mixed $data): ?MagicFlowDraftDTO
+    public static function createFlowDraftDTOByMixed(mixed $data): ?DelightfulFlowDraftDTO
     {
-        if ($data instanceof MagicFlowDraftDTO) {
+        if ($data instanceof DelightfulFlowDraftDTO) {
             return $data;
         }
         if (is_array($data)) {
-            return new MagicFlowDraftDTO($data);
+            return new DelightfulFlowDraftDTO($data);
         }
         return null;
     }
 
     /**
-     * @param array<MagicFlowDraftEntity> $list
+     * @param array<DelightfulFlowDraftEntity> $list
      */
     public static function createPageListDTO(int $total, array $list, Page $page, array $users = []): PageDTO
     {
-        $list = array_map(fn (MagicFlowDraftEntity $magicFlowDraftEntity) => self::createMagicFlowDraftListDTO($magicFlowDraftEntity, $users), $list);
+        $list = array_map(fn (DelightfulFlowDraftEntity $magicFlowDraftEntity) => self::createDelightfulFlowDraftListDTO($magicFlowDraftEntity, $users), $list);
         return new PageDTO($page->getPage(), $total, $list);
     }
 
-    public static function createMagicFlowDraftDO(MagicFlowDraftDTO $magicFlowDraftDTO): MagicFlowDraftEntity
+    public static function createDelightfulFlowDraftDO(DelightfulFlowDraftDTO $magicFlowDraftDTO): DelightfulFlowDraftEntity
     {
-        $magicFlowDraft = new MagicFlowDraftEntity();
+        $magicFlowDraft = new DelightfulFlowDraftEntity();
         $magicFlowDraft->setFlowCode($magicFlowDraftDTO->getFlowCode());
         $magicFlowDraft->setCode((string) $magicFlowDraftDTO->getId());
         $magicFlowDraft->setName($magicFlowDraftDTO->getName());
         $magicFlowDraft->setDescription($magicFlowDraftDTO->getDescription());
-        $magicFlowDraft->setMagicFlow($magicFlowDraftDTO->getMagicFLow());
+        $magicFlowDraft->setDelightfulFlow($magicFlowDraftDTO->getDelightfulFLow());
         return $magicFlowDraft;
     }
 
-    public static function createMagicFlowDraftDTO(MagicFlowDraftEntity $magicFlowDraft, array $users = [], array $icons = []): MagicFlowDraftDTO
+    public static function createDelightfulFlowDraftDTO(DelightfulFlowDraftEntity $magicFlowDraft, array $users = [], array $icons = []): DelightfulFlowDraftDTO
     {
-        $dto = new MagicFlowDraftDTO($magicFlowDraft->toArray());
+        $dto = new DelightfulFlowDraftDTO($magicFlowDraft->toArray());
         $dto->setId($magicFlowDraft->getCode());
         $dto->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowDraft->getCreator()] ?? null, $magicFlowDraft->getCreatedAt()));
         $dto->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowDraft->getModifier()] ?? null, $magicFlowDraft->getUpdatedAt()));
-        if (isset($dto->getMagicFLow()['icon'])) {
-            $dto->getMagicFLow()['icon'] = FileAssembler::getUrl($icons[$magicFlowDraft->getMagicFlow()['icon']] ?? null);
+        if (isset($dto->getDelightfulFLow()['icon'])) {
+            $dto->getDelightfulFLow()['icon'] = FileAssembler::getUrl($icons[$magicFlowDraft->getDelightfulFlow()['icon']] ?? null);
         }
         return $dto;
     }
 
-    protected static function createMagicFlowDraftListDTO(MagicFlowDraftEntity $magicFlowDraftEntity, array $users = []): MagicFlowDraftListDTO
+    protected static function createDelightfulFlowDraftListDTO(DelightfulFlowDraftEntity $magicFlowDraftEntity, array $users = []): DelightfulFlowDraftListDTO
     {
-        $dto = new MagicFlowDraftListDTO($magicFlowDraftEntity->toArray());
+        $dto = new DelightfulFlowDraftListDTO($magicFlowDraftEntity->toArray());
         $dto->setId($magicFlowDraftEntity->getCode());
         $dto->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowDraftEntity->getCreator()] ?? null, $magicFlowDraftEntity->getCreatedAt()));
         $dto->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowDraftEntity->getModifier()] ?? null, $magicFlowDraftEntity->getUpdatedAt()));

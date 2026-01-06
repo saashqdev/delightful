@@ -13,7 +13,7 @@ use App\Domain\Speech\Entity\Dto\FlashSpeechSubmitDTO;
 use App\Domain\Speech\Entity\Dto\LargeModelSpeechSubmitDTO;
 use App\Domain\Speech\Entity\Dto\SpeechQueryDTO;
 use App\Domain\Speech\Entity\Dto\SpeechSubmitDTO;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\ExternalAPI\Volcengine\DTO\SpeechRecognitionResultDTO;
 use App\Infrastructure\ExternalAPI\Volcengine\SpeechRecognition\VolcengineStandardClient;
@@ -90,7 +90,7 @@ class SpeechToTextStandardAppService
     {
         $accessTokenEntity = $this->accessTokenDomainService->getByAccessToken($accessToken);
         if (! $accessTokenEntity) {
-            ExceptionBuilder::throw(MagicApiErrorCode::TOKEN_NOT_EXIST);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::TOKEN_NOT_EXIST);
         }
 
         $accessTokenEntity->checkIps($clientIps);

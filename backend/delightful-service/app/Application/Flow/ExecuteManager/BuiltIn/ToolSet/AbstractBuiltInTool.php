@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\ExecuteManager\BuiltIn\ToolSet;
 
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 use App\Domain\Flow\Entity\ValueObject\Node;
 use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Domain\Flow\Entity\ValueObject\NodeOutput;
@@ -18,9 +18,9 @@ use DateTime;
 
 abstract class AbstractBuiltInTool implements BuiltInToolInterface
 {
-    public function generateToolFlow(string $organizationCode = '', string $userId = ''): MagicFlowEntity
+    public function generateToolFlow(string $organizationCode = '', string $userId = ''): DelightfulFlowEntity
     {
-        $toolFlow = new MagicFlowEntity();
+        $toolFlow = new DelightfulFlowEntity();
         $toolFlow->setOrganizationCode($organizationCode);
         $toolFlow->setCode($this->getCode());
         $toolFlow->setName($this->getName());

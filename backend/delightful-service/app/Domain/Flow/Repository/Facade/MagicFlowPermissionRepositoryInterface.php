@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Facade;
 
-use App\Domain\Flow\Entity\MagicFlowPermissionEntity;
+use App\Domain\Flow\Entity\DelightfulFlowPermissionEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\Flow\Entity\ValueObject\Permission\ResourceType;
 use App\Domain\Flow\Entity\ValueObject\Permission\TargetType;
 use App\Infrastructure\Core\ValueObject\Page;
 
-interface MagicFlowPermissionRepositoryInterface
+interface DelightfulFlowPermissionRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowPermissionEntity $magicFlowPermissionEntity): MagicFlowPermissionEntity;
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowPermissionEntity $magicFlowPermissionEntity): DelightfulFlowPermissionEntity;
 
-    public function getByResourceAndTarget(FlowDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, TargetType $targetType, string $targetId): ?MagicFlowPermissionEntity;
+    public function getByResourceAndTarget(FlowDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, TargetType $targetType, string $targetId): ?DelightfulFlowPermissionEntity;
 
     /**
-     * @return MagicFlowPermissionEntity[]
+     * @return DelightfulFlowPermissionEntity[]
      */
     public function getByResource(FlowDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, Page $page): array;
 

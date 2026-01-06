@@ -11,7 +11,7 @@ use App\Domain\ModelGateway\Entity\ApplicationEntity;
 use App\Domain\ModelGateway\Entity\ValueObject\LLMDataIsolation;
 use App\Domain\ModelGateway\Entity\ValueObject\Query\ApplicationQuery;
 use App\Domain\ModelGateway\Repository\Facade\ApplicationRepositoryInterface;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 
@@ -37,12 +37,12 @@ class ApplicationDomainService extends AbstractDomainService
             $LLMApplicationEntity->prepareForCreation();
             // code 在最组织下唯一
             if ($this->LLMApplicationRepository->getByCode($dataIsolation, $savingLLMApplicationEntity->getCode())) {
-                ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.exist', ['label' => $savingLLMApplicationEntity->getCode()]);
+                ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.exist', ['label' => $savingLLMApplicationEntity->getCode()]);
             }
         } else {
             $LLMApplicationEntity = $this->LLMApplicationRepository->getById($dataIsolation, $savingLLMApplicationEntity->getId());
             if (! $LLMApplicationEntity) {
-                ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.not_found', ['label' => $savingLLMApplicationEntity->getId()]);
+                ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.not_found', ['label' => $savingLLMApplicationEntity->getId()]);
             }
             $savingLLMApplicationEntity->prepareForModification($LLMApplicationEntity);
         }
@@ -53,7 +53,7 @@ class ApplicationDomainService extends AbstractDomainService
     {
         $LLMApplicationEntity = $this->LLMApplicationRepository->getById($dataIsolation, $id);
         if (! $LLMApplicationEntity) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.not_found', ['label' => $id]);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.not_found', ['label' => $id]);
         }
         return $LLMApplicationEntity;
     }

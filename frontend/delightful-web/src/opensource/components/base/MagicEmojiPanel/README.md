@@ -1,6 +1,6 @@
-# MagicEmojiPanel 魔法表情面板组件
+# DelightfulEmojiPanel 魔法表情面板组件
 
-MagicEmojiPanel 是一个功能丰富的表情选择面板组件，用于在应用中提供表情选择功能。该组件展示了一系列可点击的表情，并支持切换不同类型的表情面板（如普通表情和喜欢表情）。
+DelightfulEmojiPanel 是一个功能丰富的表情选择面板组件，用于在应用中提供表情选择功能。该组件展示了一系列可点击的表情，并支持切换不同类型的表情面板（如普通表情和喜欢表情）。
 
 ## 属性
 
@@ -28,8 +28,8 @@ export type EmojiInfo = {
 ## 基本用法
 
 ```tsx
-import MagicEmojiPanel from "@/components/base/MagicEmojiPanel"
-import type { EmojiInfo } from "@/components/base/MagicEmojiPanel/types"
+import DelightfulEmojiPanel from "@/components/base/DelightfulEmojiPanel"
+import type { EmojiInfo } from "@/components/base/DelightfulEmojiPanel/types"
 
 // 基本用法
 const handleEmojiClick = (emoji: EmojiInfo) => {
@@ -37,12 +37,12 @@ const handleEmojiClick = (emoji: EmojiInfo) => {
 	// 处理表情选择逻辑
 }
 
-;<MagicEmojiPanel onClick={handleEmojiClick} />
+;<DelightfulEmojiPanel onClick={handleEmojiClick} />
 
 // 在弹出框中使用
 import { Popover } from "antd"
 ;<Popover
-	content={<MagicEmojiPanel onClick={handleEmojiClick} />}
+	content={<DelightfulEmojiPanel onClick={handleEmojiClick} />}
 	trigger="click"
 	styles={{
 		body: {
@@ -69,4 +69,4 @@ import { Popover } from "antd"
 -   富文本编辑器中的表情插入功能
 -   任何需要用户选择表情的交互场景
 
-MagicEmojiPanel 组件提供了一个完整的表情选择解决方案，可以轻松集成到各种需要表情输入功能的应用中，提升用户体验和交互乐趣。
+DelightfulEmojiPanel 组件提供了一个完整的表情选择解决方案，可以轻松集成到各种需要表情输入功能的应用中，提升用户体验和交互乐趣。

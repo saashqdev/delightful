@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\ModelGateway\Entity\Dto;
 
 use App\Domain\Chat\Entity\AbstractEntity;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 
 abstract class AbstractRequestDTO extends AbstractEntity implements ProxyModelRequestInterface
@@ -40,7 +40,7 @@ abstract class AbstractRequestDTO extends AbstractEntity implements ProxyModelRe
     {
         $value = $this->businessParams[$key] ?? null;
         if ($checkExists && is_null($value)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => $key]);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => $key]);
         }
         return $value;
     }

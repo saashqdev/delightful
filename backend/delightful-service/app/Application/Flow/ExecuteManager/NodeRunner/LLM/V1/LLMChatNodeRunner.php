@@ -14,10 +14,10 @@ use App\Application\Flow\ExecuteManager\Memory\MultiModal\MultiModalBuilder;
 use App\Application\Flow\ExecuteManager\Memory\MultiModal\MultiModalContentFormatter;
 use App\Application\Flow\ExecuteManager\NodeRunner\LLM\AbstractLLMNodeRunner;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\LLM\V1\LLMChatNodeParamsConfig;
-use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\MagicFlowMessageType;
+use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\DelightfulFlowMessageType;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\ReplyMessage\ReplyMessageNodeParamsConfig;
 use App\Domain\Flow\Entity\ValueObject\NodeType;
-use App\Domain\Flow\Service\MagicFlowMultiModalLogDomainService;
+use App\Domain\Flow\Service\DelightfulFlowMultiModalLogDomainService;
 use App\Domain\ModelGateway\Entity\ValueObject\ModelGatewayDataIsolation;
 use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\FlowNodeDefine;
 use App\Infrastructure\Core\Dag\VertexResult;
@@ -80,7 +80,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             $userHasContent = $this->contentIsInUserPrompt($executionData);
 
             if ($systemHasContent || $userHasContent) {
-                $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getMagicMessageId()];
+                $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
             }
         }
 
@@ -89,7 +89,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
 
         // 只有自动记忆需要处理以下多模态消息
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
-            $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getMagicMessageId();
+            $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId();
             $contentMessage = null;
             // 尝试在记忆中找到 content 消息
             foreach ($memoryManager->getMessages() as $message) {
@@ -152,7 +152,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             foreach ($memoryManager->getMessages() as $message) {
                 $magicMessageIds[] = $message->getIdentifier();
             }
-            $multiModalLogs = di(MagicFlowMultiModalLogDomainService::class)->getByMessageIds($executionData->getDataIsolation(), $magicMessageIds, true);
+            $multiModalLogs = di(DelightfulFlowMultiModalLogDomainService::class)->getByMessageIds($executionData->getDataIsolation(), $magicMessageIds, true);
             foreach ($memoryManager->getMessages() as $message) {
                 if ($message instanceof UserMessage) {
                     $multiModalLog = $multiModalLogs[$message->getIdentifier()] ?? null;
@@ -294,7 +294,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
     private function tryIntrovertedReplyMessageNode(VertexResult $vertexResult, ExecutionData $executionData, $frontResults): array
     {
         $nextNodeId = $vertexResult->getChildrenIds()[0];
-        $flow = $executionData->getMagicFlowEntity();
+        $flow = $executionData->getDelightfulFlowEntity();
         $nextNode = $flow?->getNodeById($nextNodeId);
         if ($nextNode?->getNodeType() !== NodeType::ReplyMessage->value) {
             return ['', ''];
@@ -318,7 +318,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         }
         $nextNodeId = $vertexResult->getChildrenIds()[0];
 
-        $flow = $executionData->getMagicFlowEntity();
+        $flow = $executionData->getDelightfulFlowEntity();
 
         $nextNode = $flow?->getNodeById($nextNodeId);
         if ($nextNode?->getNodeType() !== NodeType::ReplyMessage->value) {
@@ -327,7 +327,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         /** @var ReplyMessageNodeParamsConfig $paramsConfig */
         $paramsConfig = $nextNode->getNodeParamsConfig();
         // 只支持 text 和 markdown
-        if (! in_array($paramsConfig->getType(), [MagicFlowMessageType::Text, MagicFlowMessageType::Markdown], true)) {
+        if (! in_array($paramsConfig->getType(), [DelightfulFlowMessageType::Text, DelightfulFlowMessageType::Markdown], true)) {
             return false;
         }
 

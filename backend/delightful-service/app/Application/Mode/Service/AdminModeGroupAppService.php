@@ -9,7 +9,7 @@ namespace App\Application\Mode\Service;
 
 use App\Application\Mode\Assembler\AdminModeAssembler;
 use App\Application\Mode\DTO\Admin\AdminModeGroupDTO;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Mode\DTO\Request\CreateModeGroupRequest;
 use App\Interfaces\Mode\DTO\Request\UpdateModeGroupRequest;
 use Exception;
@@ -21,7 +21,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     /**
      * 根据模式ID获取分组列表 (管理后台用，包含完整i18n字段).
      */
-    public function getGroupsByModeId(MagicUserAuthorization $authorization, string $modeId): array
+    public function getGroupsByModeId(DelightfulUserAuthorization $authorization, string $modeId): array
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
         $groups = $this->groupDomainService->getGroupsByModeId($dataIsolation, $modeId);
@@ -37,7 +37,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     /**
      * 获取分组详情 (管理后台用).
      */
-    public function getGroupById(MagicUserAuthorization $authorization, string $groupId): ?array
+    public function getGroupById(DelightfulUserAuthorization $authorization, string $groupId): ?array
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
         $group = $this->groupDomainService->getGroupById($dataIsolation, $groupId);
@@ -59,7 +59,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     /**
      * 创建分组 (管理后台用).
      */
-    public function createGroup(MagicUserAuthorization $authorization, CreateModeGroupRequest $request): AdminModeGroupDTO
+    public function createGroup(DelightfulUserAuthorization $authorization, CreateModeGroupRequest $request): AdminModeGroupDTO
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
 
@@ -90,7 +90,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     /**
      * 更新分组 (管理后台用).
      */
-    public function updateGroup(MagicUserAuthorization $authorization, string $groupId, UpdateModeGroupRequest $request): AdminModeGroupDTO
+    public function updateGroup(DelightfulUserAuthorization $authorization, string $groupId, UpdateModeGroupRequest $request): AdminModeGroupDTO
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
 
@@ -119,7 +119,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     /**
      * 删除分组.
      */
-    public function deleteGroup(MagicUserAuthorization $authorization, string $groupId): void
+    public function deleteGroup(DelightfulUserAuthorization $authorization, string $groupId): void
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
 

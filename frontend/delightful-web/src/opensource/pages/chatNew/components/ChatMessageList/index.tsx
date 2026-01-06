@@ -5,10 +5,10 @@ import MessageStore from "@/opensource/stores/chatNew/message"
 import MessageService from "@/opensource/services/chat/message/MessageService"
 import conversationStore from "@/opensource/stores/chatNew/conversation"
 import MessageImagePreview from "@/opensource/services/chat/message/MessageImagePreview"
-import MagicDropdown from "@/opensource/components/base/MagicDropdown"
+import DelightfulDropdown from "@/opensource/components/base/DelightfulDropdown"
 import MessageDropdownService from "@/opensource/services/chat/message/MessageDropdownService"
 import MessageDropdownStore from "@/opensource/stores/chatNew/messageUI/Dropdown"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { useTranslation } from "react-i18next"
 import { autorun, toJS } from "mobx"
 import { cx } from "antd-style"
@@ -545,7 +545,7 @@ const ChatMessageList = observer(() => {
 					/>
 					<div ref={bottomRef} />
 				</div>
-				<MagicDropdown
+				<DelightfulDropdown
 					className="message-item-menu"
 					autoAdjustOverflow
 					open={state.openDropdown}
@@ -566,7 +566,7 @@ const ChatMessageList = observer(() => {
 							}
 							return {
 								icon: item.icon ? (
-									<MagicIcon
+									<DelightfulIcon
 										color={item.icon.color}
 										component={item.icon.component as any}
 										size={item.icon.size}
@@ -583,7 +583,7 @@ const ChatMessageList = observer(() => {
 					}}
 				>
 					<div style={{ display: "none" }} />
-				</MagicDropdown>
+				</DelightfulDropdown>
 			</div>
 			<BackBottom visible={!state.isAtBottom} onScrollToBottom={() => scrollToBottom(true)} />
 		</div>

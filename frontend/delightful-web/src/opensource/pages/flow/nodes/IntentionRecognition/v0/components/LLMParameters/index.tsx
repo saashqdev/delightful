@@ -5,7 +5,7 @@ import { Form, Switch, Tooltip } from "antd"
 import { IconHelp } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
 import { set, get } from "lodash-es"
-import MagicInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
+import DelightfulInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
 import type { LLMOption } from "@/opensource/pages/flow/nodes/LLM/v0/components/LLMSelect"
 import LLMSelectV0 from "@/opensource/pages/flow/nodes/LLM/v0/components/LLMSelect"
 import { useTranslation } from "react-i18next"
@@ -63,7 +63,7 @@ export default function LLMParameters({
 							</Tooltip>
 						</div>
 						<div className={styles.right}>
-							<MagicInput
+							<DelightfulInput
 								value={get(LLMValue, [maxRecord.key], maxRecord.defaultValue)}
 								onChange={(e: any) =>
 									onParamChanged([maxRecord.key], parseInt(e.target.value, 10))

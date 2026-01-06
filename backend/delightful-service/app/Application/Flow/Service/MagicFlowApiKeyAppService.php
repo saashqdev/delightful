@@ -7,44 +7,44 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowApiKeyEntity;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowApiKeyQuery;
+use App\Domain\Flow\Entity\DelightfulFlowApiKeyEntity;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowApiKeyQuery;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 use Qbhy\HyperfAuth\Authenticatable;
 
-class MagicFlowApiKeyAppService extends AbstractFlowAppService
+class DelightfulFlowApiKeyAppService extends AbstractFlowAppService
 {
-    public function save(Authenticatable $authorization, MagicFlowApiKeyEntity $savingMagicFlowApiKeyEntity): MagicFlowApiKeyEntity
+    public function save(Authenticatable $authorization, DelightfulFlowApiKeyEntity $savingDelightfulFlowApiKeyEntity): DelightfulFlowApiKeyEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
 
-        $magicFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $savingMagicFlowApiKeyEntity->getFlowCode());
+        $magicFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $savingDelightfulFlowApiKeyEntity->getFlowCode());
         if (! $magicFlow) {
-            ExceptionBuilder::throw(FlowErrorCode::BusinessException, 'flow.common.not_found', ['label' => $savingMagicFlowApiKeyEntity->getFlowCode()]);
+            ExceptionBuilder::throw(FlowErrorCode::BusinessException, 'flow.common.not_found', ['label' => $savingDelightfulFlowApiKeyEntity->getFlowCode()]);
         }
         // 需要至少能查看，才能维护自己的 API-KEY
-        $this->getFlowOperation($dataIsolation, $magicFlow)->validate('r', $savingMagicFlowApiKeyEntity->getFlowCode());
-        return $this->magicFlowApiKeyDomainService->save($dataIsolation, $savingMagicFlowApiKeyEntity);
+        $this->getFlowOperation($dataIsolation, $magicFlow)->validate('r', $savingDelightfulFlowApiKeyEntity->getFlowCode());
+        return $this->magicFlowApiKeyDomainService->save($dataIsolation, $savingDelightfulFlowApiKeyEntity);
     }
 
-    public function changeSecretKey(Authenticatable $authorization, string $flowId, string $code): MagicFlowApiKeyEntity
+    public function changeSecretKey(Authenticatable $authorization, string $flowId, string $code): DelightfulFlowApiKeyEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         return $this->magicFlowApiKeyDomainService->changeSecretKey($dataIsolation, $code, $authorization->getId());
     }
 
-    public function getByCode(Authenticatable $authorization, string $flowId, string $code): ?MagicFlowApiKeyEntity
+    public function getByCode(Authenticatable $authorization, string $flowId, string $code): ?DelightfulFlowApiKeyEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         return $this->magicFlowApiKeyDomainService->getByCode($dataIsolation, $code, $authorization->getId());
     }
 
     /**
-     * @return array{total: int, list: array<MagicFlowApiKeyEntity>}
+     * @return array{total: int, list: array<DelightfulFlowApiKeyEntity>}
      */
-    public function queries(Authenticatable $authorization, MagicFlowApiKeyQuery $query, Page $page): array
+    public function queries(Authenticatable $authorization, DelightfulFlowApiKeyQuery $query, Page $page): array
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         return $this->magicFlowApiKeyDomainService->queries($dataIsolation, $query, $page);

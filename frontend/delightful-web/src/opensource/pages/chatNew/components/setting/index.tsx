@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { useMemo, useState } from "react"
 import { useMemoizedFn } from "ahooks"
 import { IconMessage2Cog } from "@tabler/icons-react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { MessageReceiveType } from "@/types/chat"
 import { observer } from "mobx-react-lite"
 import conversationStore from "@/opensource/stores/chatNew/conversation"
@@ -66,7 +66,7 @@ const ChatSetting = observer(() => {
 			onClose={onClose}
 			title={
 				<Flex align="center" gap={8}>
-					<MagicIcon
+					<DelightfulIcon
 						color="currentColor"
 						className={styles.icon}
 						stroke={2}
@@ -84,7 +84,7 @@ const ChatSetting = observer(() => {
 			}}
 		>
 			{Render}
-			{/* <MagicButton
+			{/* <DelightfulButton
 				onClick={async () => {
 					// 从网络获取 9 张随机图片，正方形
 					const testImageUrls = Array.from({ length: 9 }).map((_, i) => {
@@ -100,7 +100,7 @@ const ChatSetting = observer(() => {
 				}}
 			>
 				111
-			</MagicButton> */}
+			</DelightfulButton> */}
 		</Drawer>
 	)
 })

@@ -54,7 +54,7 @@ const useStyles = createStyles(({ css, prefixCls, isDarkMode, token }) => {
 	}
 })
 
-function MagicDropdown({
+function DelightfulDropdown({
 	menu: { rootClassName, ...menu } = {},
 	overlayClassName,
 	...props
@@ -73,4 +73,4 @@ function MagicDropdown({
 	)
 }
 
-export default MagicDropdown
+export default DelightfulDropdown

@@ -1,6 +1,6 @@
 import React from "react"
 import { Space } from "antd"
-import MagicFileIcon from "../../components/MagicFileIcon"
+import DelightfulFileIcon from "../../components/DelightfulFileIcon"
 import ComponentDemo from "./Container"
 
 const FileIconDemo: React.FC = () => {
@@ -9,13 +9,13 @@ const FileIconDemo: React.FC = () => {
 			<ComponentDemo
 				title="基础文件图标"
 				description="最基本的文件图标组件"
-				code="<MagicFileIcon type='pdf' />"
+				code="<DelightfulFileIcon type='pdf' />"
 			>
 				<Space>
-					<MagicFileIcon type="pdf" />
-					<MagicFileIcon type="doc" />
-					<MagicFileIcon type="xls" />
-					<MagicFileIcon type="ppt" />
+					<DelightfulFileIcon type="pdf" />
+					<DelightfulFileIcon type="doc" />
+					<DelightfulFileIcon type="xls" />
+					<DelightfulFileIcon type="ppt" />
 				</Space>
 			</ComponentDemo>
 
@@ -25,12 +25,12 @@ const FileIconDemo: React.FC = () => {
 				code="type: 'pdf' | 'doc' | 'xls' | 'ppt' | 'txt'"
 			>
 				<Space wrap>
-					<MagicFileIcon type="pdf" />
-					<MagicFileIcon type="doc" />
-					<MagicFileIcon type="xls" />
-					<MagicFileIcon type="ppt" />
-					<MagicFileIcon type="txt" />
-					<MagicFileIcon type="markdown" />
+					<DelightfulFileIcon type="pdf" />
+					<DelightfulFileIcon type="doc" />
+					<DelightfulFileIcon type="xls" />
+					<DelightfulFileIcon type="ppt" />
+					<DelightfulFileIcon type="txt" />
+					<DelightfulFileIcon type="markdown" />
 				</Space>
 			</ComponentDemo>
 
@@ -40,9 +40,9 @@ const FileIconDemo: React.FC = () => {
 				code="type: 'image' | 'video' | 'audio'"
 			>
 				<Space wrap>
-					<MagicFileIcon type="image" />
-					<MagicFileIcon type="video" />
-					<MagicFileIcon type="audio" />
+					<DelightfulFileIcon type="image" />
+					<DelightfulFileIcon type="video" />
+					<DelightfulFileIcon type="audio" />
 				</Space>
 			</ComponentDemo>
 
@@ -52,12 +52,12 @@ const FileIconDemo: React.FC = () => {
 				code="type: 'code' | 'json' | 'xml' | 'html' | 'css' | 'js'"
 			>
 				<Space wrap>
-					<MagicFileIcon type="code" />
-					<MagicFileIcon type="json" />
-					<MagicFileIcon type="xml" />
-					<MagicFileIcon type="html" />
-					<MagicFileIcon type="css" />
-					<MagicFileIcon type="js" />
+					<DelightfulFileIcon type="code" />
+					<DelightfulFileIcon type="json" />
+					<DelightfulFileIcon type="xml" />
+					<DelightfulFileIcon type="html" />
+					<DelightfulFileIcon type="css" />
+					<DelightfulFileIcon type="js" />
 				</Space>
 			</ComponentDemo>
 
@@ -67,10 +67,10 @@ const FileIconDemo: React.FC = () => {
 				code="type: 'folder' | 'zip' | 'link' | 'other'"
 			>
 				<Space wrap>
-					<MagicFileIcon type="folder" />
-					<MagicFileIcon type="zip" />
-					<MagicFileIcon type="link" />
-					<MagicFileIcon type="other" />
+					<DelightfulFileIcon type="folder" />
+					<DelightfulFileIcon type="zip" />
+					<DelightfulFileIcon type="link" />
+					<DelightfulFileIcon type="other" />
 				</Space>
 			</ComponentDemo>
 
@@ -80,10 +80,10 @@ const FileIconDemo: React.FC = () => {
 				code="size: number | string"
 			>
 				<Space>
-					<MagicFileIcon type="pdf" size={16} />
-					<MagicFileIcon type="pdf" size={24} />
-					<MagicFileIcon type="pdf" size={32} />
-					<MagicFileIcon type="pdf" size={48} />
+					<DelightfulFileIcon type="pdf" size={16} />
+					<DelightfulFileIcon type="pdf" size={24} />
+					<DelightfulFileIcon type="pdf" size={32} />
+					<DelightfulFileIcon type="pdf" size={48} />
 				</Space>
 			</ComponentDemo>
 		</div>

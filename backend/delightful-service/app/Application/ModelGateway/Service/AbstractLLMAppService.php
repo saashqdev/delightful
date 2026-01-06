@@ -11,7 +11,7 @@ use App\Application\Kernel\AbstractKernelAppService;
 use App\Application\Kernel\EnvManager;
 use App\Application\ModelGateway\Component\Points\PointComponentInterface;
 use App\Application\ModelGateway\Mapper\ModelGatewayMapper;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\ImageGenerate\Contract\WatermarkConfigInterface;
 use App\Domain\ModelGateway\Entity\ValueObject\AccessTokenType;
@@ -25,7 +25,7 @@ use App\Domain\ModelGateway\Service\UserConfigDomainService;
 use App\Domain\Provider\Service\AdminProviderDomainService;
 use App\Domain\Provider\Service\ModelFilter\PackageFilterInterface;
 use App\Domain\Provider\Service\ProviderModelDomainService;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\ImageGenerate\ImageWatermarkProcessor;
 use Hyperf\HttpServer\Contract\RequestInterface;
@@ -44,7 +44,7 @@ abstract class AbstractLLMAppService extends AbstractKernelAppService
         protected readonly OrganizationConfigDomainService $organizationConfigDomainService,
         protected readonly UserConfigDomainService $userConfigDomainService,
         protected readonly MsgLogDomainService $msgLogDomainService,
-        protected readonly MagicUserDomainService $magicUserDomainService,
+        protected readonly DelightfulUserDomainService $magicUserDomainService,
         protected LoggerFactory $loggerFactory,
         protected AdminProviderDomainService $serviceProviderDomainService,
         protected ModelGatewayMapper $modelGatewayMapper,
@@ -61,14 +61,14 @@ abstract class AbstractLLMAppService extends AbstractKernelAppService
     public function createModelGatewayDataIsolationByAccessToken(string $accessToken, array $businessParams = []): ModelGatewayDataIsolation
     {
         if (empty($accessToken)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::TOKEN_NOT_EXIST);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::TOKEN_NOT_EXIST);
         }
         $accessToken = $this->accessTokenDomainService->getByAccessToken($accessToken);
         if (! $accessToken) {
-            ExceptionBuilder::throw(MagicApiErrorCode::TOKEN_NOT_EXIST);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::TOKEN_NOT_EXIST);
         }
         if (! $accessToken->isEnabled()) {
-            ExceptionBuilder::throw(MagicApiErrorCode::TOKEN_DISABLED);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::TOKEN_DISABLED);
         }
 
         // Compatibility handling for legacy params
@@ -85,7 +85,7 @@ abstract class AbstractLLMAppService extends AbstractKernelAppService
                 $this->getApplicationUserId($businessParams)
             ),
             AccessTokenType::User => ModelGatewayDataIsolation::create($accessToken->getOrganizationCode(), $accessToken->getRelationId()),
-            default => ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'Access token type not supported'),
+            default => ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'Access token type not supported'),
         };
         EnvManager::initDataIsolationEnv($dataIsolation);
         $dataIsolation->setAccessToken($accessToken);
@@ -113,7 +113,7 @@ abstract class AbstractLLMAppService extends AbstractKernelAppService
     {
         $org = $this->getBusinessParam('organization_code', '', $businessParams);
         if (empty($org)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'Organization code is required for application access token');
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'Organization code is required for application access token');
         }
         return $org;
     }
@@ -122,7 +122,7 @@ abstract class AbstractLLMAppService extends AbstractKernelAppService
     {
         $userId = $this->getBusinessParam('user_id', '', $businessParams);
         if (empty($userId)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'User id is required for application access token');
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'User id is required for application access token');
         }
         return $userId;
     }

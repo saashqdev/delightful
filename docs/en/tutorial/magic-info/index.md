@@ -1,6 +1,6 @@
-# Magic - AI Application Development Platform
+# Delightful - AI Application Development Platform
 
-Magic is an enterprise-grade AI application development platform, providing businesses with a complete solution from AI assistant creation to multi-platform deployment. Below are the platform's core functions and features:
+Delightful is an enterprise-grade AI application development platform, providing businesses with a complete solution from AI assistant creation to multi-platform deployment. Below are the platform's core functions and features:
 
 ## Core Functions Overview
 
@@ -55,7 +55,7 @@ The platform offers a clean and intuitive interface similar to WeChat, supportin
 
 Create an AI assistant that can answer employees' daily questions by integrating store-related knowledge, covering equipment management, cashier system operation, after-sales service, and other aspects, improving the efficiency of middle-platform departments.
 
-### Magic Approval Assistant
+### Delightful Approval Assistant
 
 Implement "one-sentence approval initiation" functionality, completing intelligent review and automatic decision-making through AI technology, greatly improving approval efficiency and reducing manual intervention.
 
@@ -68,6 +68,6 @@ Achieve complex project management tasks with a single user instruction through 
 - **Team Collaboration**: Support team collaboration in developing intelligent agents through team spaces
 - **AI FLOW**: Accelerate FLOW implementation with AI, requiring only 3.2 days on average from concept to deployment, saving 78% of labor costs compared to traditional FLOW development
 - **Professional Version Services**: Provide paid SaaS solutions supporting more advanced features and services
-- **Super Magic**: Leveraging advanced AI algorithms to deeply understand search intent, quickly retrieve enterprise knowledge bases, documents, and web information, generating in-depth research reports
+- **Super Delightful**: Leveraging advanced AI algorithms to deeply understand search intent, quickly retrieve enterprise knowledge bases, documents, and web information, generating in-depth research reports
 
-The Magic platform makes AI application development simple and efficient, allowing you to quickly build intelligent applications needed by enterprises, regardless of your programming background, enhancing the digital and intelligent levels of your business. 
+The Delightful platform makes AI application development simple and efficient, allowing you to quickly build intelligent applications needed by enterprises, regardless of your programming background, enhancing the digital and intelligent levels of your business. 

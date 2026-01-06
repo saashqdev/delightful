@@ -1,5 +1,5 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import OrganizationPanel from "@/opensource/components/business/OrganizationPanel"
 import { isDepartment, isMember } from "@/opensource/components/business/OrganizationPanel/utils"
 import { useMemoizedFn } from "ahooks"
@@ -115,7 +115,7 @@ function CreateGroupConversationModal({ open, close, ...props }: CreateGroupConv
 	const shouldShowDefaultEmptyFallback = !searchValue
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			className={styles.modal}
 			centered
 			maskClosable={false}
@@ -223,16 +223,16 @@ function CreateGroupConversationModal({ open, close, ...props }: CreateGroupConv
 						</Form>
 					</div>
 					<Flex align="center" justify="flex-end" gap={10} className={styles.footer}>
-						<MagicButton type="default" onClick={onCancel}>
+						<DelightfulButton type="default" onClick={onCancel}>
 							{t("button.cancel", { ns: "interface" })}
-						</MagicButton>
-						<MagicButton type="primary" onClick={onConfirm}>
+						</DelightfulButton>
+						<DelightfulButton type="primary" onClick={onConfirm}>
 							{t("button.create", { ns: "interface" })}
-						</MagicButton>
+						</DelightfulButton>
 					</Flex>
 				</div>
 			</Flex>
-		</MagicModal>
+		</DelightfulModal>
 	)
 }
 

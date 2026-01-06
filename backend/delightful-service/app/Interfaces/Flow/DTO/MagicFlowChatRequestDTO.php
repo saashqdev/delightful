@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\DTO;
 
-class MagicFlowChatRequestDTO extends AbstractFlowDTO
+class DelightfulFlowChatRequestDTO extends AbstractFlowDTO
 {
     public string $conversationId = '';
 

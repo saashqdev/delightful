@@ -19,7 +19,7 @@ interface InputLayoutProps extends Omit<FlexProps, "children"> {
 	inputMainClassName?: string
 }
 
-const MagicInputLayout = memo(
+const DelightfulInputLayout = memo(
 	forwardRef<HTMLElement, InputLayoutProps>((props, ref) => {
 		const {
 			theme,
@@ -81,4 +81,4 @@ const MagicInputLayout = memo(
 	}),
 )
 
-export default MagicInputLayout
+export default DelightfulInputLayout

@@ -9,7 +9,7 @@ namespace App\Application\Flow\ExecuteManager\NodeRunner\Sub;
 
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
 use App\Application\Flow\ExecuteManager\ExecutionData\TriggerData;
-use App\Application\Flow\ExecuteManager\MagicFlowExecutor;
+use App\Application\Flow\ExecuteManager\DelightfulFlowExecutor;
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunner;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\TriggerType;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Sub\SubNodeParamsConfig;
@@ -66,7 +66,7 @@ class SubNodeRunner extends NodeRunner
                 executionType: $executionData->getExecutionType(),
             );
             $subExecutionData->extends($executionData);
-            $subExecutor = new MagicFlowExecutor($subFlow, $subExecutionData);
+            $subExecutor = new DelightfulFlowExecutor($subFlow, $subExecutionData);
             $subExecutor->execute();
         } catch (Throwable $throwable) {
             ExceptionBuilder::throw(

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\ModelGateway\Entity\Dto;
 
 use App\Domain\ImageGenerate\ValueObject\WatermarkConfig;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\ImageGenerateModelType;
 
@@ -66,19 +66,19 @@ class TextGenerateImageDTO extends AbstractRequestDTO
     public function valid()
     {
         if ($this->model === '') {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'model_field']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'model_field']);
         }
 
         if ($this->size === '') {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'size_field']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'size_field']);
         }
 
         if ($this->n < 1 || $this->n > 4) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.invalid_range', ['label' => 'Number of images', 'min' => 1, 'max' => 4]);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.invalid_range', ['label' => 'Number of images', 'min' => 1, 'max' => 4]);
         }
 
         if ($this->prompt === '') {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'prompt_field']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'prompt_field']);
         }
     }
 

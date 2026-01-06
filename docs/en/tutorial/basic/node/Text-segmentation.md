@@ -1,6 +1,6 @@
 # Text Segmentation Node
 ## What is a Text Segmentation Node?
-The Text Segmentation Node is a special data processing node in the Magic workflow, mainly used to split long text into smaller text fragments according to specific strategies. This node is particularly useful when processing large amounts of text data, as it can divide overly long text content into smaller chunks suitable for large model processing, improving efficiency and accuracy.
+The Text Segmentation Node is a special data processing node in the Delightful workflow, mainly used to split long text into smaller text fragments according to specific strategies. This node is particularly useful when processing large amounts of text data, as it can divide overly long text content into smaller chunks suitable for large model processing, improving efficiency and accuracy.
 
 **Image Description:**
 

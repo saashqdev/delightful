@@ -14,7 +14,7 @@ use Psr\Container\ContainerInterface;
 use Throwable;
 
 #[Command]
-class InitMagicProviderCommand extends HyperfCommand
+class InitDelightfulProviderCommand extends HyperfCommand
 {
     protected ContainerInterface $container;
 
@@ -29,24 +29,24 @@ class InitMagicProviderCommand extends HyperfCommand
     public function configure(): void
     {
         parent::configure();
-        $this->setDescription('初始化Magic服务商配置数据');
+        $this->setDescription('初始化Delightful服务商配置数据');
     }
 
     public function handle(): void
     {
         $this->adminProviderAppService = $this->container->get(AdminProviderAppService::class);
 
-        $this->info('开始初始化Magic服务商配置数据...');
+        $this->info('开始初始化Delightful服务商配置数据...');
 
         try {
-            $count = $this->adminProviderAppService->initializeMagicProviderConfigs();
+            $count = $this->adminProviderAppService->initializeDelightfulProviderConfigs();
             $this->info("成功初始化 {$count} 个服务商配置");
         } catch (Throwable $e) {
-            $this->error('初始化Magic服务商配置数据失败: ' . $e->getMessage());
+            $this->error('初始化Delightful服务商配置数据失败: ' . $e->getMessage());
             $this->error($e->getTraceAsString());
             return;
         }
 
-        $this->info('Magic服务商配置数据初始化完成');
+        $this->info('Delightful服务商配置数据初始化完成');
     }
 }

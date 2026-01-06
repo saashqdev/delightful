@@ -107,7 +107,7 @@ class ChatMessageApplyService {
 			ConversationMessageType.Text,
 			ConversationMessageType.RichText,
 			ConversationMessageType.Markdown,
-			ConversationMessageType.MagicSearchCard,
+			ConversationMessageType.DelightfulSearchCard,
 			ConversationMessageType.Files,
 			ConversationMessageType.Image,
 			ConversationMessageType.Video,
@@ -140,7 +140,7 @@ class ChatMessageApplyService {
 			ConversationMessageType.Text,
 			ConversationMessageType.RichText,
 			ConversationMessageType.Markdown,
-			ConversationMessageType.MagicSearchCard,
+			ConversationMessageType.DelightfulSearchCard,
 			ConversationMessageType.Files,
 			ConversationMessageType.Image,
 			ConversationMessageType.Video,
@@ -204,7 +204,7 @@ class ChatMessageApplyService {
 				)
 				break
 			case ConversationMessageType.RichText:
-			case ConversationMessageType.MagicSearchCard:
+			case ConversationMessageType.DelightfulSearchCard:
 			case ConversationMessageType.Files:
 			case ConversationMessageType.Image:
 			case ConversationMessageType.Video:
@@ -268,7 +268,7 @@ class ChatMessageApplyService {
 			// 如果是 AI 会话，此时消息列表的数量为 2，调用智能重命名
 			if (MessageStore.messages.length === 2 && !isHistoryMessage) {
 				// 调用智能重命名
-				chatTopicService.getAndSetMagicTopicName(message.message.topic_id ?? "")
+				chatTopicService.getAndSetDelightfulTopicName(message.message.topic_id ?? "")
 			}
 		}
 

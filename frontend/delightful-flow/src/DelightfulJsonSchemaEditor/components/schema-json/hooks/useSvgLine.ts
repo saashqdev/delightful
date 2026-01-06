@@ -1,5 +1,5 @@
-import { childFieldGap } from '@/MagicJsonSchemaEditor/constants'
-import { useGlobal } from '@/MagicJsonSchemaEditor/context/GlobalContext/useGlobal'
+import { childFieldGap } from '@/DelightfulJsonSchemaEditor/constants'
+import { useGlobal } from '@/DelightfulJsonSchemaEditor/context/GlobalContext/useGlobal'
 import React, { useMemo } from 'react'
 
 type SvgLineProps = {

@@ -1,14 +1,14 @@
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
 import { Flex, Form } from "antd"
-import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
-import MagicExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicExpressionWrap"
-import { ExpressionMode } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
+import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
+import { ExpressionMode } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
 import { IconCircleMinus, IconPlus } from "@tabler/icons-react"
 import { useMemo } from "react"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useMemoizedFn } from "ahooks"
 import { set } from "lodash-es"
-import { useFlow } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
+import { useFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
 import usePrevious from "@/opensource/pages/flow/common/hooks/usePrevious"
 import { customNodeType } from "@/opensource/pages/flow/constants"
 import useCurrentNodeUpdate from "@/opensource/pages/flow/common/hooks/useCurrentNodeUpdate"
@@ -84,7 +84,7 @@ export default function SearchUsersV0() {
 															noStyle
 															name={[subField.name, "left"]}
 														>
-															<MagicSelect
+															<DelightfulSelect
 																options={filterTargetOptions}
 															/>
 														</Form.Item>
@@ -94,7 +94,7 @@ export default function SearchUsersV0() {
 															noStyle
 															name={[subField.name, "operator"]}
 														>
-															<MagicSelect
+															<DelightfulSelect
 																options={operatorOptions}
 															/>
 														</Form.Item>
@@ -105,7 +105,7 @@ export default function SearchUsersV0() {
 															name={[subField.name, "right"]}
 															className={styles.right}
 														>
-															<MagicExpressionWrap
+															<DelightfulExpressionWrap
 																placeholder={t(
 																	"common.allowExpressionPlaceholder",
 																	{

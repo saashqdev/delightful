@@ -8,15 +8,15 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Repository\Persistence;
 
 use App\Domain\Chat\DTO\PageResponseDTO\DepartmentUsersPageResponseDTO;
-use App\Domain\Contact\Entity\MagicDepartmentUserEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Repository\Facade\MagicDepartmentUserRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulDepartmentUserRepositoryInterface;
 use App\Domain\Contact\Repository\Persistence\Model\DepartmentModel;
 use App\Domain\Contact\Repository\Persistence\Model\DepartmentUserModel;
 use Hyperf\DbConnection\Db;
 use Psr\SimpleCache\CacheInterface;
 
-class MagicDepartmentUserRepository implements MagicDepartmentUserRepositoryInterface
+class DelightfulDepartmentUserRepository implements DelightfulDepartmentUserRepositoryInterface
 {
     public function __construct(
         protected DepartmentUserModel $departmentUserModel,
@@ -24,7 +24,7 @@ class MagicDepartmentUserRepository implements MagicDepartmentUserRepositoryInte
     }
 
     /**
-     * @return MagicDepartmentUserEntity[]
+     * @return DelightfulDepartmentUserEntity[]
      */
     public function getDepartmentUsersByUserIds(array $userIds, string $organizationCode): array
     {
@@ -36,9 +36,9 @@ class MagicDepartmentUserRepository implements MagicDepartmentUserRepositoryInte
     }
 
     /**
-     * @return MagicDepartmentUserEntity[]
+     * @return DelightfulDepartmentUserEntity[]
      */
-    public function getDepartmentUsersByUserIdsInMagic(array $userIds): array
+    public function getDepartmentUsersByUserIdsInDelightful(array $userIds): array
     {
         $query = $this->departmentUserModel->newQuery()->whereIn('user_id', $userIds);
         $departmentUsers = Db::select($query->toSql(), $query->getBindings());
@@ -64,7 +64,7 @@ class MagicDepartmentUserRepository implements MagicDepartmentUserRepositoryInte
     }
 
     /**
-     * @return MagicDepartmentUserEntity[]
+     * @return DelightfulDepartmentUserEntity[]
      */
     public function getDepartmentUsersByDepartmentIds(array $departmentIds, string $organizationCode, int $limit, array $fields = ['*']): array
     {
@@ -80,7 +80,7 @@ class MagicDepartmentUserRepository implements MagicDepartmentUserRepositoryInte
     public function getDepartmentIdsByUserIds(DataIsolation $dataIsolation, array $userIds, bool $withAllParentIds = false): array
     {
         $cache = di(CacheInterface::class);
-        $key = 'MagicDepartmentUser:' . md5('department_ids_by_user_ids_' . implode('_', $userIds) . '_' . $dataIsolation->getCurrentOrganizationCode() . '_' . ($withAllParentIds ? 'all' : 'direct'));
+        $key = 'DelightfulDepartmentUser:' . md5('department_ids_by_user_ids_' . implode('_', $userIds) . '_' . $dataIsolation->getCurrentOrganizationCode() . '_' . ($withAllParentIds ? 'all' : 'direct'));
         if ($cache->has($key)) {
             return (array) $cache->get($key);
         }
@@ -129,7 +129,7 @@ class MagicDepartmentUserRepository implements MagicDepartmentUserRepositoryInte
             ->update($updateData);
     }
 
-    public function deleteDepartmentUsersByMagicIds(array $magicIds, string $departmentId, string $magicOrganizationCode): int
+    public function deleteDepartmentUsersByDelightfulIds(array $magicIds, string $departmentId, string $magicOrganizationCode): int
     {
         return (int) $this->departmentUserModel->newQuery()
             ->where('organization_code', $magicOrganizationCode)
@@ -139,7 +139,7 @@ class MagicDepartmentUserRepository implements MagicDepartmentUserRepositoryInte
     }
 
     /**
-     * @return MagicDepartmentUserEntity[]
+     * @return DelightfulDepartmentUserEntity[]
      */
     public function searchDepartmentUsersByJobTitle(string $keyword, string $magicOrganizationCode): array
     {
@@ -148,17 +148,17 @@ class MagicDepartmentUserRepository implements MagicDepartmentUserRepositoryInte
             ->where('organization_code', $magicOrganizationCode)
             ->get()
             ->toArray();
-        return array_map(fn ($item) => new MagicDepartmentUserEntity($item), $res);
+        return array_map(fn ($item) => new DelightfulDepartmentUserEntity($item), $res);
     }
 
     /**
-     * @return MagicDepartmentUserEntity[]
+     * @return DelightfulDepartmentUserEntity[]
      */
     private function getDepartmentUserEntities(array $departmentUsers): array
     {
         $departmentUserEntities = [];
         foreach ($departmentUsers as $departmentUser) {
-            $departmentUserEntities[] = new MagicDepartmentUserEntity($departmentUser);
+            $departmentUserEntities[] = new DelightfulDepartmentUserEntity($departmentUser);
         }
         return $departmentUserEntities;
     }

@@ -9,7 +9,7 @@ namespace App\Domain\OrganizationEnvironment\Entity\Item;
 
 use App\Domain\Chat\Entity\AbstractEntity;
 
-class MagicEnvironmentExtra extends AbstractEntity
+class DelightfulEnvironmentExtra extends AbstractEntity
 {
     // 预发布和生产可以看做是一个环境，所以这里存一下关联的环境 ids
     protected array $relationEnvIds;

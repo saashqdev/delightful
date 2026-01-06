@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Factory;
 
-use App\Domain\Flow\Entity\MagicFlowMultiModalLogEntity;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowMultiModalLogModel;
+use App\Domain\Flow\Entity\DelightfulFlowMultiModalLogEntity;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowMultiModalLogModel;
 use Carbon\Carbon;
 
-class MagicFlowMultiModalLogFactory
+class DelightfulFlowMultiModalLogFactory
 {
-    public static function modelToEntity(MagicFlowMultiModalLogModel $model): MagicFlowMultiModalLogEntity
+    public static function modelToEntity(DelightfulFlowMultiModalLogModel $model): DelightfulFlowMultiModalLogEntity
     {
-        $entity = new MagicFlowMultiModalLogEntity();
+        $entity = new DelightfulFlowMultiModalLogEntity();
         $entity->setId($model->id);
         $entity->setMessageId($model->message_id);
         $entity->setType($model->type);
@@ -26,9 +26,9 @@ class MagicFlowMultiModalLogFactory
         return $entity;
     }
 
-    public static function entityToModel(MagicFlowMultiModalLogEntity $entity): MagicFlowMultiModalLogModel
+    public static function entityToModel(DelightfulFlowMultiModalLogEntity $entity): DelightfulFlowMultiModalLogModel
     {
-        $model = new MagicFlowMultiModalLogModel();
+        $model = new DelightfulFlowMultiModalLogModel();
         if ($entity->getId() !== null) {
             $model->id = $entity->getId();
         }

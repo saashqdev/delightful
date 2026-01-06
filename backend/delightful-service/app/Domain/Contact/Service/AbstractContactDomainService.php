@@ -8,26 +8,26 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Service;
 
 use App\Domain\Authentication\Service\PasswordService;
-use App\Domain\Chat\Repository\Facade\MagicChatConversationRepositoryInterface;
-use App\Domain\Chat\Repository\Facade\MagicChatFileRepositoryInterface;
-use App\Domain\Chat\Repository\Facade\MagicChatSeqRepositoryInterface;
-use App\Domain\Chat\Repository\Facade\MagicChatTopicRepositoryInterface;
-use App\Domain\Chat\Repository\Facade\MagicContactIdMappingRepositoryInterface;
-use App\Domain\Chat\Repository\Facade\MagicFriendRepositoryInterface;
-use App\Domain\Chat\Repository\Facade\MagicMessageRepositoryInterface;
-use App\Domain\Chat\Repository\Persistence\MagicContactIdMappingRepository;
-use App\Domain\Contact\Repository\Facade\MagicAccountRepositoryInterface;
-use App\Domain\Contact\Repository\Facade\MagicDepartmentRepositoryInterface;
-use App\Domain\Contact\Repository\Facade\MagicDepartmentUserRepositoryInterface;
-use App\Domain\Contact\Repository\Facade\MagicUserIdRelationRepositoryInterface;
-use App\Domain\Contact\Repository\Facade\MagicUserRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulChatConversationRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulChatFileRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulChatSeqRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulChatTopicRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulContactIdMappingRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulFriendRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulMessageRepositoryInterface;
+use App\Domain\Chat\Repository\Persistence\DelightfulContactIdMappingRepository;
+use App\Domain\Contact\Repository\Facade\DelightfulAccountRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulDepartmentRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulDepartmentUserRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulUserIdRelationRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulUserRepositoryInterface;
 use App\Domain\File\Repository\Persistence\Facade\CloudFileRepositoryInterface;
-use App\Domain\Flow\Repository\Facade\MagicFlowAIModelRepositoryInterface;
-use App\Domain\Group\Repository\Facade\MagicGroupRepositoryInterface;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowAIModelRepositoryInterface;
+use App\Domain\Group\Repository\Facade\DelightfulGroupRepositoryInterface;
 use App\Domain\OrganizationEnvironment\Repository\Facade\EnvironmentRepositoryInterface;
 use App\Domain\OrganizationEnvironment\Repository\Facade\OrganizationsEnvironmentRepositoryInterface;
 use App\Domain\OrganizationEnvironment\Repository\Facade\OrganizationsPlatformRepositoryInterface;
-use App\Domain\Token\Repository\Facade\MagicTokenRepositoryInterface;
+use App\Domain\Token\Repository\Facade\DelightfulTokenRepositoryInterface;
 use App\Infrastructure\ExternalAPI\Sms\SmsInterface;
 use App\Infrastructure\ExternalAPI\Sms\TemplateInterface;
 use App\Infrastructure\Util\Locker\LockerInterface;
@@ -43,35 +43,35 @@ use Throwable;
 abstract class AbstractContactDomainService
 {
     public function __construct(
-        protected MagicUserRepositoryInterface $userRepository,
+        protected DelightfulUserRepositoryInterface $userRepository,
         protected IdGeneratorInterface $idGenerator,
         protected Redis $redis,
         protected SmsInterface $sms,
         protected TemplateInterface $template,
-        protected MagicAccountRepositoryInterface $accountRepository,
+        protected DelightfulAccountRepositoryInterface $accountRepository,
         protected LockerInterface $locker,
         protected PasswordService $passwordService,
-        protected MagicMessageRepositoryInterface $magicMessageRepository,
-        protected MagicChatSeqRepositoryInterface $magicSeqRepository,
-        protected MagicAccountRepositoryInterface $magicAccountRepository,
-        protected MagicChatConversationRepositoryInterface $magicConversationRepository,
+        protected DelightfulMessageRepositoryInterface $magicMessageRepository,
+        protected DelightfulChatSeqRepositoryInterface $magicSeqRepository,
+        protected DelightfulAccountRepositoryInterface $magicAccountRepository,
+        protected DelightfulChatConversationRepositoryInterface $magicConversationRepository,
         protected RedisLocker $redisLocker,
         protected Producer $producer,
-        protected MagicChatTopicRepositoryInterface $magicChatTopicRepository,
-        protected MagicGroupRepositoryInterface $magicGroupRepository,
-        protected MagicChatFileRepositoryInterface $magicFileRepository,
-        protected readonly MagicFriendRepositoryInterface $friendRepository,
-        protected readonly MagicUserIdRelationRepositoryInterface $userIdRelationRepository,
-        protected readonly MagicContactIdMappingRepositoryInterface $contactThirdPlatformIdMappingRepository,
-        protected readonly MagicContactIdMappingRepository $contactIdMappingRepository,
+        protected DelightfulChatTopicRepositoryInterface $magicChatTopicRepository,
+        protected DelightfulGroupRepositoryInterface $magicGroupRepository,
+        protected DelightfulChatFileRepositoryInterface $magicFileRepository,
+        protected readonly DelightfulFriendRepositoryInterface $friendRepository,
+        protected readonly DelightfulUserIdRelationRepositoryInterface $userIdRelationRepository,
+        protected readonly DelightfulContactIdMappingRepositoryInterface $contactThirdPlatformIdMappingRepository,
+        protected readonly DelightfulContactIdMappingRepository $contactIdMappingRepository,
         protected readonly OrganizationsEnvironmentRepositoryInterface $magicOrganizationsEnvironmentRepository,
-        protected readonly MagicTokenRepositoryInterface $magicTokenRepository,
+        protected readonly DelightfulTokenRepositoryInterface $magicTokenRepository,
         protected readonly EnvironmentRepositoryInterface $magicEnvironmentsRepository,
-        protected readonly MagicFlowAIModelRepositoryInterface $magicFlowAIModelRepository,
+        protected readonly DelightfulFlowAIModelRepositoryInterface $magicFlowAIModelRepository,
         protected LoggerInterface $logger,
-        protected MagicDepartmentUserRepositoryInterface $departmentUserRepository,
-        protected readonly MagicContactIdMappingRepositoryInterface $thirdPlatformIdMappingRepository,
-        protected readonly MagicDepartmentRepositoryInterface $departmentRepository,
+        protected DelightfulDepartmentUserRepositoryInterface $departmentUserRepository,
+        protected readonly DelightfulContactIdMappingRepositoryInterface $thirdPlatformIdMappingRepository,
+        protected readonly DelightfulDepartmentRepositoryInterface $departmentRepository,
         protected CloudFileRepositoryInterface $cloudFileRepository,
         protected readonly OrganizationsPlatformRepositoryInterface $organizationsPlatformRepository,
     ) {

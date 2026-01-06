@@ -1,11 +1,11 @@
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { Flex } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import type { HTMLAttributes } from "react"
 import type Conversation from "@/opensource/models/chat/conversation"
 import { cx } from "antd-style"
 import conversationStore from "@/opensource/stores/chatNew/conversation"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import useGroupInfo from "@/opensource/hooks/chat/useGroupInfo"
 import { observer } from "mobx-react-lite"
 import { useTranslation } from "react-i18next"
@@ -28,7 +28,7 @@ const GroupHeader = observer(({ conversation, className }: HeaderProps) => {
 
 	const { groupInfo } = useGroupInfo(conversation.receive_id)
 
-	const organization = userStore.user.getOrganizationByMagic(groupInfo?.organization_code ?? "")
+	const organization = userStore.user.getOrganizationByDelightful(groupInfo?.organization_code ?? "")
 
 	const { settingOpen } = conversationStore
 
@@ -45,7 +45,7 @@ const GroupHeader = observer(({ conversation, className }: HeaderProps) => {
 				className={cx(styles.header, className)}
 			>
 				<Flex gap={8} align="center" flex={1}>
-					<MagicAvatar src={groupInfo?.group_avatar}>{groupInfo?.group_name}</MagicAvatar>
+					<DelightfulAvatar src={groupInfo?.group_avatar}>{groupInfo?.group_name}</DelightfulAvatar>
 					<Flex vertical flex={1}>
 						<span className={styles.headerTitle}>{groupInfo?.group_name}</span>
 						<span className={styles.headerTopic}>
@@ -54,7 +54,7 @@ const GroupHeader = observer(({ conversation, className }: HeaderProps) => {
 					</Flex>
 				</Flex>
 				<Flex gap={2}>
-					{/* <MagicButton
+					{/* <DelightfulButton
 						key={ExtraSectionKey.Topic}
 						className={cx({
 							[styles.extraSectionButtonActive]: topicOpen,
@@ -62,7 +62,7 @@ const GroupHeader = observer(({ conversation, className }: HeaderProps) => {
 						tip={t("chat.topic.topic")}
 						type="text"
 						icon={
-							<MagicIcon
+							<DelightfulIcon
 								size={20}
 								color="currentColor"
 								component={IconMessageTopic}
@@ -70,14 +70,14 @@ const GroupHeader = observer(({ conversation, className }: HeaderProps) => {
 						}
 						onClick={onTopicClick}
 					/> */}
-					<MagicButton
+					<DelightfulButton
 						key={ExtraSectionKey.Setting}
 						className={cx({
 							[styles.extraSectionButtonActive]: settingOpen,
 						})}
 						tip={t("chat.setting")}
 						type="text"
-						icon={<MagicIcon size={20} color="currentColor" component={IconDots} />}
+						icon={<DelightfulIcon size={20} color="currentColor" component={IconDots} />}
 						onClick={onSettingClick}
 					/>
 				</Flex>

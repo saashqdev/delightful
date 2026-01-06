@@ -1,5 +1,5 @@
 import { memo } from "react"
-import magic from "@/opensource/pages/superMagic/assets/svg/magic.svg"
+import magic from "@/opensource/pages/superDelightful/assets/svg/magic.svg"
 import CommonFooter from "../CommonFooter"
 import { DetailType } from "../../types"
 import { useStyles } from "./styles"
@@ -14,7 +14,7 @@ export default memo(function Empty() {
 			</span>
 			<div className={styles.emptyBody}>
 				<div className={styles.emptyContent}>
-					<img src={magic} alt="Magic" />
+					<img src={magic} alt="Delightful" />
 					<p>超级麦吉已准备就绪，随时可执行任务</p>
 				</div>
 			</div>

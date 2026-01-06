@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Input, message, Tooltip } from "antd"
 import { useTranslation } from "react-i18next"
 import { IconFileUpload } from "@tabler/icons-react"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { useTheme } from "antd-style"
 
 interface CurlImporterProps {
@@ -44,7 +44,7 @@ const CurlImporter: React.FC<CurlImporterProps> = ({ visible, onCancel, onImport
 				/>
 			</Tooltip>
 
-			<MagicModal
+			<DelightfulModal
 				title={t("http.curlImport.modalTitle", { ns: "flow" })}
 				open={visible}
 				onCancel={onCancel}
@@ -62,7 +62,7 @@ const CurlImporter: React.FC<CurlImporterProps> = ({ visible, onCancel, onImport
 				<p style={{ marginTop: 8, fontSize: 12, color: "#999" }}>
 					{t("http.curlImport.supportInfo", { ns: "flow" })}
 				</p>
-			</MagicModal>
+			</DelightfulModal>
 		</>
 	)
 }

@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from "react"
 import { forwardRef, memo, useMemo } from "react"
 import { isObject } from "lodash-es"
-import { emojiLocaleCache } from "@/opensource/components/base/MagicEmojiPanel/cache"
+import { emojiLocaleCache } from "@/opensource/components/base/DelightfulEmojiPanel/cache"
 import { useFontSize } from "@/opensource/providers/AppearanceProvider/hooks"
 import { useStyles } from "./styles"
 

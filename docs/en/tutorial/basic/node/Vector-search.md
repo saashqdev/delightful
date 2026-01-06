@@ -1,7 +1,7 @@
 # Vector Search Node
 
 ## What is a Vector Search Node?
-The Vector Search Node is a functional node in Magic Flow workflows used for quickly retrieving similar content from vector databases. It can find semantically similar content fragments from pre-stored knowledge bases based on user-provided query text. Simply put, vector search is like an intelligent search engine that not only finds content containing keywords but also understands the semantics of questions and returns relevant information.
+The Vector Search Node is a functional node in Delightful Flow workflows used for quickly retrieving similar content from vector databases. It can find semantically similar content fragments from pre-stored knowledge bases based on user-provided query text. Simply put, vector search is like an intelligent search engine that not only finds content containing keywords but also understands the semantics of questions and returns relevant information.
 
 **Image Description:**
 

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Permission\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Repository\Facade\MagicUserRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulUserRepositoryInterface;
 use App\Domain\OrganizationEnvironment\Repository\Facade\OrganizationRepositoryInterface;
 use App\Domain\Permission\Entity\OrganizationAdminEntity;
 use App\Domain\Permission\Entity\ValueObject\PermissionDataIsolation;
@@ -28,7 +28,7 @@ class OrganizationAdminDomainService
 
     public function __construct(
         private readonly OrganizationAdminRepositoryInterface $organizationAdminRepository,
-        private readonly MagicUserRepositoryInterface $userRepository,
+        private readonly DelightfulUserRepositoryInterface $userRepository,
         private readonly RoleDomainService $roleDomainService,
         private readonly OrganizationRepositoryInterface $organizationRepository
     ) {

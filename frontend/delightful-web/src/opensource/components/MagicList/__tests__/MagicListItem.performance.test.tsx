@@ -1,15 +1,15 @@
 import { render } from "@testing-library/react"
 import { vi, describe, test, expect, beforeEach } from "vitest"
-import MagicListItem from "../MagicListItem"
-import type { MagicListItemData } from "../types"
+import DelightfulListItem from "../DelightfulListItem"
+import type { DelightfulListItemData } from "../types"
 
 // 模拟 ahooks 的 useHover hook
 vi.mock("ahooks", () => ({
 	useHover: vi.fn().mockReturnValue(false),
 }))
 
-// 模拟 MagicAvatar 组件
-vi.mock("@/opensource/components/base/MagicAvatar", () => ({
+// 模拟 DelightfulAvatar 组件
+vi.mock("@/opensource/components/base/DelightfulAvatar", () => ({
 	default: vi.fn().mockImplementation(({ src, className }) => (
 		<div className={className} data-testid="mock-avatar" data-src={src}>
 			模拟头像
@@ -19,7 +19,7 @@ vi.mock("@/opensource/components/base/MagicAvatar", () => ({
 
 // 模拟样式模块
 vi.mock("../styles", () => ({
-	useMagicListItemStyles: () => ({
+	useDelightfulListItemStyles: () => ({
 		styles: {
 			container: "mock-container",
 			active: "mock-active",
@@ -30,13 +30,13 @@ vi.mock("../styles", () => ({
 }))
 
 // 创建测试数据
-const createTestItem = (id: string): MagicListItemData => ({
+const createTestItem = (id: string): DelightfulListItemData => ({
 	id,
 	title: `测试项目 ${id}`,
 	avatar: `https://example.com/avatar-${id}.jpg`,
 })
 
-describe("MagicListItem 性能测试", () => {
+describe("DelightfulListItem 性能测试", () => {
 	// 在每个测试前重置所有模拟
 	beforeEach(() => {
 		vi.clearAllMocks()
@@ -49,13 +49,13 @@ describe("MagicListItem 性能测试", () => {
 		// 记录渲染开始时间
 		const startTime = performance.now()
 
-		render(<MagicListItem data={item} />)
+		render(<DelightfulListItem data={item} />)
 
 		// 记录渲染结束时间
 		const endTime = performance.now()
 		const renderTime = endTime - startTime
 
-		console.log(`MagicListItem 渲染耗时: ${renderTime}ms`)
+		console.log(`DelightfulListItem 渲染耗时: ${renderTime}ms`)
 
 		// 不使用硬编码的时间限制，而是检查渲染是否完成
 		expect(renderTime).toBeGreaterThan(0) // 确保计时正常工作
@@ -68,14 +68,14 @@ describe("MagicListItem 性能测试", () => {
 	// 测试memo优化 - 使用具有相同数据的多次重新渲染
 	test("渲染优化 - 使用相同数据重新渲染应该快速", () => {
 		const item = createTestItem("test-1")
-		const { rerender } = render(<MagicListItem data={item} />)
+		const { rerender } = render(<DelightfulListItem data={item} />)
 
 		// 测试重新渲染相同数据的性能
 		const startTime = performance.now()
 
 		// 多次重新渲染相同数据
 		for (let i = 0; i < 10; i += 1) {
-			rerender(<MagicListItem data={item} />)
+			rerender(<DelightfulListItem data={item} />)
 		}
 
 		const endTime = performance.now()
@@ -87,7 +87,7 @@ describe("MagicListItem 性能测试", () => {
 		// 首先渲染一个具有新ID的组件以获取基准时间
 		const newItem = { ...item, id: "test-new" }
 		const newStartTime = performance.now()
-		rerender(<MagicListItem data={newItem} />)
+		rerender(<DelightfulListItem data={newItem} />)
 		const newEndTime = performance.now()
 		const newItemRenderTime = newEndTime - newStartTime
 
@@ -106,7 +106,7 @@ describe("MagicListItem 性能测试", () => {
 	test("渲染优化 - 部分数据变化时应该高效渲染", () => {
 		// 初始数据
 		const initialItem = createTestItem("test-1")
-		const { rerender } = render(<MagicListItem data={initialItem} />)
+		const { rerender } = render(<DelightfulListItem data={initialItem} />)
 
 		// 测试仅改变标题时的性能
 		const startTimeTitle = performance.now()
@@ -117,7 +117,7 @@ describe("MagicListItem 性能测试", () => {
 			title: "新标题",
 		}
 
-		rerender(<MagicListItem data={itemWithNewTitle} />)
+		rerender(<DelightfulListItem data={itemWithNewTitle} />)
 
 		const endTimeTitle = performance.now()
 		const titleChangeTime = endTimeTitle - startTimeTitle
@@ -132,7 +132,7 @@ describe("MagicListItem 性能测试", () => {
 			id: "test-2",
 		}
 
-		rerender(<MagicListItem data={itemWithNewId} />)
+		rerender(<DelightfulListItem data={itemWithNewId} />)
 
 		const endTimeId = performance.now()
 		const idChangeTime = endTimeId - startTimeId
@@ -179,7 +179,7 @@ describe("MagicListItem 性能测试", () => {
 		const { unmount } = render(
 			<div>
 				{items.map((item) => (
-					<MagicListItem key={item.id} data={item} />
+					<DelightfulListItem key={item.id} data={item} />
 				))}
 			</div>,
 		)
@@ -200,9 +200,9 @@ describe("MagicListItem 性能测试", () => {
 		const renderSpy = vi.fn()
 
 		// 创建一个包装组件来监控渲染次数
-		const TestWrapper = ({ item, active }: { item: MagicListItemData; active?: boolean }) => {
+		const TestWrapper = ({ item, active }: { item: DelightfulListItemData; active?: boolean }) => {
 			renderSpy()
-			return <MagicListItem data={item} active={active} />
+			return <DelightfulListItem data={item} active={active} />
 		}
 
 		const item = createTestItem("test-1")
@@ -214,20 +214,20 @@ describe("MagicListItem 性能测试", () => {
 		// 使用相同的数据重新渲染
 		rerender(<TestWrapper item={item} />)
 
-		// 包装组件应该重新渲染，但内部的MagicListItem不应该
+		// 包装组件应该重新渲染，但内部的DelightfulListItem不应该
 		expect(renderSpy).toHaveBeenCalledTimes(1)
 
 		// 更改active属性
 		rerender(<TestWrapper item={item} active />)
 
-		// 这应该触发MagicListItem的重新渲染
+		// 这应该触发DelightfulListItem的重新渲染
 		expect(renderSpy).toHaveBeenCalledTimes(2)
 
 		// 更改item中的ID
 		const newItem = { ...item, id: "test-2" }
 		rerender(<TestWrapper item={newItem} active />)
 
-		// 这应该触发MagicListItem的重新渲染
+		// 这应该触发DelightfulListItem的重新渲染
 		expect(renderSpy).toHaveBeenCalledTimes(3)
 	})
 })

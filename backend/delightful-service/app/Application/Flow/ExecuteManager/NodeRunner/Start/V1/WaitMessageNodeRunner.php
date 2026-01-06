@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace App\Application\Flow\ExecuteManager\NodeRunner\Start\V1;
 
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
-use App\Domain\Flow\Entity\MagicFlowWaitMessageEntity;
+use App\Domain\Flow\Entity\DelightfulFlowWaitMessageEntity;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\TriggerType;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\V1\WaitMessageNodeParamsConfig;
 use App\Domain\Flow\Entity\ValueObject\NodeType;
-use App\Domain\Flow\Service\MagicFlowWaitMessageDomainService;
+use App\Domain\Flow\Service\DelightfulFlowWaitMessageDomainService;
 use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\FlowNodeDefine;
 use App\Infrastructure\Core\Dag\VertexResult;
 
@@ -31,7 +31,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
     {
         $dataIsolation = $executionData->getDataIsolation();
-        $waitMessageDomainService = di(MagicFlowWaitMessageDomainService::class);
+        $waitMessageDomainService = di(DelightfulFlowWaitMessageDomainService::class);
 
         // 如果是作为开始节点
         if ($executionData->getTriggerType() === TriggerType::WaitMessage) {
@@ -42,11 +42,11 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
         }
 
         // 如果是作为运行节点 仅记录，然后结束当前执行
-        $waitMessageEntity = new MagicFlowWaitMessageEntity();
+        $waitMessageEntity = new DelightfulFlowWaitMessageEntity();
         $waitMessageEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $waitMessageEntity->setConversationId($executionData->getConversationId());
         $waitMessageEntity->setOriginConversationId($executionData->getOriginConversationId());
-        $waitMessageEntity->setMessageId($executionData->getTriggerData()->getMessageEntity()->getMagicMessageId());
+        $waitMessageEntity->setMessageId($executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId());
         $waitMessageEntity->setWaitNodeId($this->node->getNodeId());
         $waitMessageEntity->setFlowCode($executionData->getFlowCode());
         $waitMessageEntity->setFlowVersion($executionData->getFlowVersion());

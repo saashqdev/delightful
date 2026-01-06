@@ -96,8 +96,8 @@ That's all!
 		expect(hrCount).toBe(3)
 
 		// Test citations
-		expect(content).toContain('<MagicCitation index="1" />')
-		expect(content).toContain('<MagicCitation index="2" />')
+		expect(content).toContain('<DelightfulCitation index="1" />')
+		expect(content).toContain('<DelightfulCitation index="2" />')
 
 		// Test that table is processed to HTML
 		expect(content).toContain("<table>")

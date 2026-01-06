@@ -3,7 +3,7 @@ import { render, screen, fireEvent, cleanup } from "@testing-library/react"
 import type { ReactNode } from "react"
 import type { Editor } from "@tiptap/react"
 import * as TiptapReact from "@tiptap/react"
-import MagicRichEditor from "../index"
+import DelightfulRichEditor from "../index"
 
 // 提升模拟函数
 const mockUndo = vi.hoisted(() => vi.fn())
@@ -152,7 +152,7 @@ vi.mock("../extensions/file-handler", () => ({
 	},
 }))
 
-// 模拟 MagicEmoji 扩展
+// 模拟 DelightfulEmoji 扩展
 vi.mock("../extensions/magicEmoji", () => ({
 	default: {
 		configure: vi.fn().mockReturnValue({}),
@@ -250,7 +250,7 @@ const TestWrapper = ({ children }: { children: ReactNode }) => (
 	<div data-testid="test-wrapper">{children}</div>
 )
 
-describe("MagicRichEditor 撤销重做功能", () => {
+describe("DelightfulRichEditor 撤销重做功能", () => {
 	beforeEach(() => {
 		// 每个测试前重置模拟函数的调用记录
 		vi.clearAllMocks()
@@ -264,7 +264,7 @@ describe("MagicRichEditor 撤销重做功能", () => {
 	it("工具栏应包含撤销和重做按钮", () => {
 		render(
 			<TestWrapper>
-				<MagicRichEditor />
+				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
@@ -276,7 +276,7 @@ describe("MagicRichEditor 撤销重做功能", () => {
 	it("点击撤销按钮应触发撤销命令", () => {
 		render(
 			<TestWrapper>
-				<MagicRichEditor />
+				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
@@ -291,7 +291,7 @@ describe("MagicRichEditor 撤销重做功能", () => {
 	it("点击重做按钮应触发重做命令", () => {
 		render(
 			<TestWrapper>
-				<MagicRichEditor />
+				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
@@ -306,7 +306,7 @@ describe("MagicRichEditor 撤销重做功能", () => {
 	it("快捷键Ctrl+Z/Cmd+Z应触发撤销命令", () => {
 		render(
 			<TestWrapper>
-				<MagicRichEditor />
+				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
@@ -326,7 +326,7 @@ describe("MagicRichEditor 撤销重做功能", () => {
 	it("快捷键Ctrl+Shift+Z/Cmd+Shift+Z应触发重做命令", () => {
 		render(
 			<TestWrapper>
-				<MagicRichEditor />
+				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
@@ -346,7 +346,7 @@ describe("MagicRichEditor 撤销重做功能", () => {
 	it("快捷键Ctrl+Y/Cmd+Y应触发重做命令", () => {
 		render(
 			<TestWrapper>
-				<MagicRichEditor />
+				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
@@ -395,7 +395,7 @@ describe("MagicRichEditor 撤销重做功能", () => {
 
 		render(
 			<TestWrapper>
-				<MagicRichEditor content="Hello" />
+				<DelightfulRichEditor content="Hello" />
 			</TestWrapper>,
 		)
 

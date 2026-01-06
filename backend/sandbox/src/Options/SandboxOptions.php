@@ -80,7 +80,7 @@ class SandboxOptions
      * @var bool Flag to indicate whether the sandbox should validate magic constants
      * @default true
      */
-    protected bool $validateMagicConstants = true;
+    protected bool $validateDelightfulConstants = true;
 
     /**
      * @var bool Flag to indicate whether the sandbox should validate namespaces
@@ -473,14 +473,14 @@ class SandboxOptions
         return $this;
     }
 
-    public function isValidateMagicConstants(): bool
+    public function isValidateDelightfulConstants(): bool
     {
-        return $this->validateMagicConstants;
+        return $this->validateDelightfulConstants;
     }
 
-    public function setValidateMagicConstants(bool $validateMagicConstants): self
+    public function setValidateDelightfulConstants(bool $validateDelightfulConstants): self
     {
-        $this->validateMagicConstants = $validateMagicConstants;
+        $this->validateDelightfulConstants = $validateDelightfulConstants;
         return $this;
     }
 
@@ -1208,7 +1208,7 @@ class SandboxOptions
             case 'validateGlobals':
             case 'validateSuperglobals':
             case 'validateConstants':
-            case 'validateMagicConstants':
+            case 'validateDelightfulConstants':
             case 'validateNamespaces':
             case 'validateAliases':
             case 'validateClasses':
@@ -1294,7 +1294,7 @@ class SandboxOptions
             case 'validateGlobals':
             case 'validateSuperglobals':
             case 'validateConstants':
-            case 'validateMagicConstants':
+            case 'validateDelightfulConstants':
             case 'validateNamespaces':
             case 'validateAliases':
             case 'validateClasses':

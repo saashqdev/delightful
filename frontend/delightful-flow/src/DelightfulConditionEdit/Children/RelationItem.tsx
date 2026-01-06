@@ -1,8 +1,8 @@
-import { getDataSourceMap, getExpressionFirstItem } from "@/MagicExpressionWidget/helpers"
-import { FormItemType } from "@/MagicExpressionWidget/types"
-import { getDefaultBooleanConstantSource } from "@/MagicJsonSchemaEditor/components/schema-json/schema-item/constants"
-import MagicSelect from "@/common/BaseUI/Select"
-import { MagicExpressionWidget } from "@/index"
+import { getDataSourceMap, getExpressionFirstItem } from "@/DelightfulExpressionWidget/helpers"
+import { FormItemType } from "@/DelightfulExpressionWidget/types"
+import { getDefaultBooleanConstantSource } from "@/DelightfulJsonSchemaEditor/components/schema-json/schema-item/constants"
+import DelightfulSelect from "@/common/BaseUI/Select"
+import { DelightfulExpressionWidget } from "@/index"
 import { IconCircleMinus, IconCirclePlus } from "@tabler/icons-react"
 import classname from "clsx"
 import i18next from "i18next"
@@ -118,7 +118,7 @@ export function RelationItem({
 										})}
 									</div>
 								)}
-								<MagicExpressionWidget
+								<DelightfulExpressionWidget
 									onChange={(value) => {
 										handleChange(value, "left_operands")
 									}}
@@ -144,7 +144,7 @@ export function RelationItem({
 										{i18next.t("common.selectConditions", { ns: "magicFlow" })}
 									</div>
 								)}
-								<MagicSelect
+								<DelightfulSelect
 									style={{ width: "100%" }}
 									onChange={(value: any) => handleChange(value, "condition")}
 									options={CONDITION_OPTIONS}
@@ -159,7 +159,7 @@ export function RelationItem({
 										{i18next.t("common.compareValue", { ns: "magicFlow" })}
 									</div>
 								)}
-								<MagicExpressionWidget
+								<DelightfulExpressionWidget
 									onChange={(value) => {
 										handleChange(value, "right_operands")
 									}}
@@ -177,7 +177,7 @@ export function RelationItem({
 					<div className="condition_vertical_row">
 						<div className="condition_vertical_col">
 							<div className="condition_fields-item">
-								<MagicExpressionWidget
+								<DelightfulExpressionWidget
 									value={(cur as Expression.OperationNode).operands}
 									dataSource={expressionSource}
 									onChange={(value) => handleChange(value, "operands")}

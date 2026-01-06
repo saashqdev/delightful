@@ -7,48 +7,48 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Persistence;
 
-use App\Domain\Flow\Entity\MagicFlowApiKeyEntity;
+use App\Domain\Flow\Entity\DelightfulFlowApiKeyEntity;
 use App\Domain\Flow\Entity\ValueObject\ApiKeyType;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowApiKeyQuery;
-use App\Domain\Flow\Factory\MagicFlowApiKeyFactory;
-use App\Domain\Flow\Repository\Facade\MagicFlowApiKeyRepositoryInterface;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowApiKeyModel;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowApiKeyQuery;
+use App\Domain\Flow\Factory\DelightfulFlowApiKeyFactory;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowApiKeyRepositoryInterface;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowApiKeyModel;
 use App\Infrastructure\Core\ValueObject\Page;
 
-class MagicFlowApiKeyRepository extends MagicFlowAbstractRepository implements MagicFlowApiKeyRepositoryInterface
+class DelightfulFlowApiKeyRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowApiKeyRepositoryInterface
 {
     protected bool $filterOrganizationCode = true;
 
-    public function getBySecretKey(FlowDataIsolation $dataIsolation, string $secretKey): ?MagicFlowApiKeyEntity
+    public function getBySecretKey(FlowDataIsolation $dataIsolation, string $secretKey): ?DelightfulFlowApiKeyEntity
     {
         if (empty($secretKey)) {
             return null;
         }
-        $builder = $this->createBuilder($dataIsolation, MagicFlowApiKeyModel::query());
-        /** @var null|MagicFlowApiKeyModel $model */
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowApiKeyModel::query());
+        /** @var null|DelightfulFlowApiKeyModel $model */
         $model = $builder->where('secret_key', $secretKey)->first();
-        return $model ? MagicFlowApiKeyFactory::modelToEntity($model) : null;
+        return $model ? DelightfulFlowApiKeyFactory::modelToEntity($model) : null;
     }
 
-    public function getByCode(FlowDataIsolation $dataIsolation, string $code, ?string $creator = null): ?MagicFlowApiKeyEntity
+    public function getByCode(FlowDataIsolation $dataIsolation, string $code, ?string $creator = null): ?DelightfulFlowApiKeyEntity
     {
         if (empty($code)) {
             return null;
         }
-        $builder = $this->createBuilder($dataIsolation, MagicFlowApiKeyModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowApiKeyModel::query());
         $builder->where('code', $code);
         if (! is_null($creator)) {
             $builder->where('created_uid', $creator);
         }
-        /** @var null|MagicFlowApiKeyModel $model */
+        /** @var null|DelightfulFlowApiKeyModel $model */
         $model = $builder->first();
-        return $model ? MagicFlowApiKeyFactory::modelToEntity($model) : null;
+        return $model ? DelightfulFlowApiKeyFactory::modelToEntity($model) : null;
     }
 
-    public function exist(FlowDataIsolation $dataIsolation, MagicFlowApiKeyEntity $magicFlowApiKeyEntity): bool
+    public function exist(FlowDataIsolation $dataIsolation, DelightfulFlowApiKeyEntity $magicFlowApiKeyEntity): bool
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowApiKeyModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowApiKeyModel::query());
         $builder->where('flow_code', $magicFlowApiKeyEntity->getFlowCode())
             ->where('conversation_id', $magicFlowApiKeyEntity->getConversationId());
         /* @phpstan-ignore-next-line */
@@ -61,11 +61,11 @@ class MagicFlowApiKeyRepository extends MagicFlowAbstractRepository implements M
     }
 
     /**
-     * @return array{total: int, list: array<MagicFlowApiKeyEntity>}
+     * @return array{total: int, list: array<DelightfulFlowApiKeyEntity>}
      */
-    public function queries(FlowDataIsolation $dataIsolation, MagicFlowApiKeyQuery $query, Page $page): array
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowApiKeyQuery $query, Page $page): array
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowApiKeyModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowApiKeyModel::query());
         if ($query->getFlowCode()) {
             $builder->where('flow_code', $query->getFlowCode());
         }
@@ -80,20 +80,20 @@ class MagicFlowApiKeyRepository extends MagicFlowAbstractRepository implements M
         if (! empty($data['list'])) {
             $list = [];
             foreach ($data['list'] as $model) {
-                $list[] = MagicFlowApiKeyFactory::modelToEntity($model);
+                $list[] = DelightfulFlowApiKeyFactory::modelToEntity($model);
             }
             $data['list'] = $list;
         }
         return $data;
     }
 
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowApiKeyEntity $magicFlowApiKeyEntity): MagicFlowApiKeyEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowApiKeyEntity $magicFlowApiKeyEntity): DelightfulFlowApiKeyEntity
     {
-        $model = $this->createBuilder($dataIsolation, MagicFlowApiKeyModel::query())
+        $model = $this->createBuilder($dataIsolation, DelightfulFlowApiKeyModel::query())
             ->where('code', $magicFlowApiKeyEntity->getCode())
             ->first();
         if (! $model) {
-            $model = new MagicFlowApiKeyModel();
+            $model = new DelightfulFlowApiKeyModel();
         }
 
         $model->fill($this->getAttributes($magicFlowApiKeyEntity));
@@ -104,7 +104,7 @@ class MagicFlowApiKeyRepository extends MagicFlowAbstractRepository implements M
 
     public function destroy(FlowDataIsolation $dataIsolation, string $code): void
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowApiKeyModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowApiKeyModel::query());
         $builder->where('code', $code)->delete();
     }
 }

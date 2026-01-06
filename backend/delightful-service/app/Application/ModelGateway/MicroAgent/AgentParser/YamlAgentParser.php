@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Application\ModelGateway\MicroAgent\AgentParser;
 
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 
 readonly class YamlAgentParser implements AgentParserInterface
@@ -18,19 +18,19 @@ readonly class YamlAgentParser implements AgentParserInterface
     public function loadFromFile(string $filePath): array
     {
         if (! file_exists($filePath)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.file_not_found', ['file' => $filePath]);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.file_not_found', ['file' => $filePath]);
         }
 
         $content = file_get_contents($filePath);
         if ($content === false) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.file_read_failed', ['file' => $filePath]);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.file_read_failed', ['file' => $filePath]);
         }
 
         // Parse content directly
         $parts = preg_split('/^---$/m', $content, 3);
 
         if (count($parts) < 2) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.invalid_format', ['format' => 'YAML Agent']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.invalid_format', ['format' => 'YAML Agent']);
         }
 
         $configSection = trim($parts[1]);

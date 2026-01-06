@@ -4,9 +4,9 @@ import type { SearchProps } from "antd/es/input"
 import { IconSearch } from "@tabler/icons-react"
 
 import { colorUsages } from "@/opensource/providers/ThemeProvider/colors"
-import MagicIcon from "../MagicIcon"
+import DelightfulIcon from "../DelightfulIcon"
 
-interface MagicSearchInputProps extends SearchProps {}
+interface DelightfulSearchInputProps extends SearchProps {}
 
 const useStyles = createStyles(({ token, css, prefixCls }) => ({
 	search: css`
@@ -37,14 +37,14 @@ const useStyles = createStyles(({ token, css, prefixCls }) => ({
 	`,
 }))
 
-function MagicSearchInput({ ...rest }: MagicSearchInputProps) {
+function DelightfulSearchInput({ ...rest }: DelightfulSearchInputProps) {
 	const { styles } = useStyles()
 
 	return (
 		<Input.Search
 			size="large"
 			addonBefore={
-				<MagicIcon color={colorUsages.text[3]} stroke={2} component={IconSearch} />
+				<DelightfulIcon color={colorUsages.text[3]} stroke={2} component={IconSearch} />
 			}
 			className={styles.search}
 			{...rest}
@@ -52,4 +52,4 @@ function MagicSearchInput({ ...rest }: MagicSearchInputProps) {
 	)
 }
 
-export default MagicSearchInput
+export default DelightfulSearchInput

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Space } from "antd"
-import MagicCheckFavor from "../../components/MagicCheckFavor"
+import DelightfulCheckFavor from "../../components/DelightfulCheckFavor"
 import ComponentDemo from "./Container"
 
 const CheckFavorDemo: React.FC = () => {
@@ -12,11 +12,11 @@ const CheckFavorDemo: React.FC = () => {
 			<ComponentDemo
 				title="基础收藏"
 				description="最基本的收藏组件"
-				code="<MagicCheckFavor />"
+				code="<DelightfulCheckFavor />"
 			>
 				<Space>
-					<MagicCheckFavor />
-					<MagicCheckFavor defaultChecked />
+					<DelightfulCheckFavor />
+					<DelightfulCheckFavor defaultChecked />
 				</Space>
 			</ComponentDemo>
 
@@ -26,7 +26,7 @@ const CheckFavorDemo: React.FC = () => {
 				code="checked | onChange"
 			>
 				<Space>
-					<MagicCheckFavor
+					<DelightfulCheckFavor
 						checked={checked1}
 						onChange={(checked) => setChecked1(checked as boolean)}
 					/>
@@ -36,8 +36,8 @@ const CheckFavorDemo: React.FC = () => {
 
 			<ComponentDemo title="默认状态" description="设置默认的收藏状态" code="defaultChecked">
 				<Space>
-					<MagicCheckFavor defaultChecked={false} />
-					<MagicCheckFavor defaultChecked={true} />
+					<DelightfulCheckFavor defaultChecked={false} />
+					<DelightfulCheckFavor defaultChecked={true} />
 				</Space>
 			</ComponentDemo>
 
@@ -47,7 +47,7 @@ const CheckFavorDemo: React.FC = () => {
 				code="onChange: (checked: boolean) => void"
 			>
 				<Space direction="vertical">
-					<MagicCheckFavor
+					<DelightfulCheckFavor
 						checked={checked2}
 						onChange={(checked) => {
 							setChecked2(checked as boolean)
@@ -64,8 +64,8 @@ const CheckFavorDemo: React.FC = () => {
 				code="className | style"
 			>
 				<Space>
-					<MagicCheckFavor className="custom-favor" style={{ transform: "scale(1.5)" }} />
-					<MagicCheckFavor
+					<DelightfulCheckFavor className="custom-favor" style={{ transform: "scale(1.5)" }} />
+					<DelightfulCheckFavor
 						defaultChecked
 						style={{
 							transform: "scale(1.2)",

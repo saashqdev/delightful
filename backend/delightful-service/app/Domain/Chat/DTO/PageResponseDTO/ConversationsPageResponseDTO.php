@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\DTO\PageResponseDTO;
 
-use App\Domain\Chat\Entity\MagicConversationEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
 
 /**
  * 分页响应DTO.
@@ -15,7 +15,7 @@ use App\Domain\Chat\Entity\MagicConversationEntity;
 class ConversationsPageResponseDTO extends PageResponseDTO
 {
     /**
-     * @var MagicConversationEntity[]
+     * @var DelightfulConversationEntity[]
      */
     protected array $items = [];
 

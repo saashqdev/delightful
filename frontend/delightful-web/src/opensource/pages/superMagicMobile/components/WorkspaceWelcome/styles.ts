@@ -1,4 +1,4 @@
-import background from "@/opensource/pages/superMagicMobile/assets/image/background.png"
+import background from "@/opensource/pages/superDelightfulMobile/assets/image/background.png"
 import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(() => {

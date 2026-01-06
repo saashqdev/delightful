@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Repository\Persistence;
 
-use App\Domain\Contact\Entity\MagicUserIdRelationEntity;
-use App\Domain\Contact\Repository\Facade\MagicUserIdRelationRepositoryInterface;
+use App\Domain\Contact\Entity\DelightfulUserIdRelationEntity;
+use App\Domain\Contact\Repository\Facade\DelightfulUserIdRelationRepositoryInterface;
 use App\Domain\Contact\Repository\Persistence\Model\UserIdRelationModel;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use Hyperf\DbConnection\Db;
 
-readonly class MagicUserIdRelationRepository implements MagicUserIdRelationRepositoryInterface
+readonly class DelightfulUserIdRelationRepository implements DelightfulUserIdRelationRepositoryInterface
 {
     public function __construct(
         protected UserIdRelationModel $userIdRelationModel,
     ) {
     }
 
-    public function createUserIdRelation(MagicUserIdRelationEntity $userIdRelationEntity): void
+    public function createUserIdRelation(DelightfulUserIdRelationEntity $userIdRelationEntity): void
     {
         // 生成关联关系
         $time = date('Y-m-d H:i:s');
@@ -38,7 +38,7 @@ readonly class MagicUserIdRelationRepository implements MagicUserIdRelationRepos
         ]);
     }
 
-    public function getRelationIdExists(MagicUserIdRelationEntity $userIdRelationEntity): array
+    public function getRelationIdExists(DelightfulUserIdRelationEntity $userIdRelationEntity): array
     {
         // 根据 account_id/id_type/relation_value 查询是否已经生成了关联关系
         $userIdRelationModel = $this->userIdRelationModel::query()
@@ -51,7 +51,7 @@ readonly class MagicUserIdRelationRepository implements MagicUserIdRelationRepos
     }
 
     // id_type,relation_type,relation_value 查询 user_id,然后去查询用户信息
-    public function getUerIdByRelation(MagicUserIdRelationEntity $userIdRelationEntity): string
+    public function getUerIdByRelation(DelightfulUserIdRelationEntity $userIdRelationEntity): string
     {
         $query = $this->userIdRelationModel::query()
             ->where('relation_type', $userIdRelationEntity->getRelationType())

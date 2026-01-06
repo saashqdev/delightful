@@ -12,7 +12,7 @@ use App\Application\Flow\ExecuteManager\Memory\FlowMemoryManager;
 use App\Application\Flow\ExecuteManager\Memory\MemoryQuery;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\LLM\Structure\ModelConfig;
-use App\Domain\Flow\Service\MagicFlowAIModelDomainService;
+use App\Domain\Flow\Service\DelightfulFlowAIModelDomainService;
 use HyperfTest\Cases\Application\Flow\ExecuteManager\ExecuteManagerBaseTest;
 
 /**
@@ -45,7 +45,7 @@ class MemoryManagerTest extends ExecuteManagerBaseTest
             vision: true,
             visionModel: 'gpt-4o-global1'
         );
-        $modelConfig->setCurrentModel(di(MagicFlowAIModelDomainService::class)->getByName($ex->getDataIsolation(), 'gpt-4o-global'));
+        $modelConfig->setCurrentModel(di(DelightfulFlowAIModelDomainService::class)->getByName($ex->getDataIsolation(), 'gpt-4o-global'));
         $memoryQuery = new MemoryQuery(ExecutionType::SKApi, 'DF-usi_a450dd07688be6273b5ef112ad50ba7e_tr_5uaaCQwO12391', '5uaaCQwO12391', '');
         $memoryQuery->setDistinctMessage(true);
         $messages = $manager->queries($ex, $memoryQuery, $modelConfig);

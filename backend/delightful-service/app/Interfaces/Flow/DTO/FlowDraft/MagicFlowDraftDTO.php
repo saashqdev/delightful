@@ -9,7 +9,7 @@ namespace App\Interfaces\Flow\DTO\FlowDraft;
 
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 
-class MagicFlowDraftDTO extends AbstractFlowDTO
+class DelightfulFlowDraftDTO extends AbstractFlowDTO
 {
     public string $name = '';
 
@@ -49,12 +49,12 @@ class MagicFlowDraftDTO extends AbstractFlowDTO
         $this->flowCode = $flowCode ?? '';
     }
 
-    public function getMagicFlow(): ?array
+    public function getDelightfulFlow(): ?array
     {
         return $this->magicFlow;
     }
 
-    public function setMagicFlow(?array $magicFlow): void
+    public function setDelightfulFlow(?array $magicFlow): void
     {
         $this->magicFlow = $magicFlow;
     }

@@ -1,12 +1,12 @@
 import { FlowApi } from "@/apis"
 import { Flex, Avatar, message } from "antd"
 import { useBoolean, useMemoizedFn, useResetState } from "ahooks"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { IconX, IconEdit } from "@tabler/icons-react"
 import { memo, useEffect, useMemo } from "react"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { useTranslation } from "react-i18next"
 import { Flow, FlowTool, FlowRouteType } from "@/types/flow"
 import FlowEmptyImage from "@/assets/logos/empty-flow.png"
@@ -29,7 +29,7 @@ import ToolImportButton from "./components/ToolImportButton"
 import { EventEmitter } from "ahooks/lib/useEventEmitter"
 import { pick } from "lodash-es"
 import { Knowledge } from "@/types/knowledge"
-export type DataType = MagicFlow.Flow | Knowledge.KnowledgeItem | Flow.Mcp.Detail
+export type DataType = DelightfulFlow.Flow | Knowledge.KnowledgeItem | Flow.Mcp.Detail
 
 export type DrawerItem = {
 	id?: string
@@ -52,7 +52,7 @@ type RightDrawerProps = {
 	setGroupId: React.Dispatch<React.SetStateAction<string>>
 	getDropdownItems: (
 		tool: FlowTool.Tool | Flow.Mcp.ListItem,
-		flow: MagicFlow.Flow,
+		flow: DelightfulFlow.Flow,
 	) => React.ReactNode
 	mcpEventListener?: EventEmitter<string>
 	setCurrentFlow: (flow: DataType) => void
@@ -253,14 +253,14 @@ function RightDrawer({
 		const toolsBtn = [
 			...(hasEditRight(data.user_operation)
 				? [
-						<MagicButton
+						<DelightfulButton
 							key="add-tools"
 							type="primary"
 							style={{ flex: 1 }}
 							onClick={handleAddTool}
 						>
 							{t("flow.addTools")}
-						</MagicButton>,
+						</DelightfulButton>,
 				  ]
 				: []),
 			...(hasAdminRight(data.user_operation)
@@ -276,7 +276,7 @@ function RightDrawer({
 		const flowsBtn = [
 			...(hasViewRight(data.user_operation)
 				? [
-						<MagicButton
+						<DelightfulButton
 							key="go-to-flow"
 							type="primary"
 							onClick={() => goToFlow(data?.id ?? "")}
@@ -284,26 +284,26 @@ function RightDrawer({
 							{hasEditRight(data.user_operation)
 								? t("button.edit")
 								: t("button.view")}
-						</MagicButton>,
+						</DelightfulButton>,
 				  ]
 				: []),
 			...(hasEditRight(data.user_operation)
 				? [
-						// <MagicButton
+						// <DelightfulButton
 						// 	type="text"
 						// 	className={styles.button}
 						// 	onClick={openBindOpenApiAccount}
 						// >
 						// 	{t("flow.appAuth")}
-						// </MagicButton>,
-						<MagicButton
+						// </DelightfulButton>,
+						<DelightfulButton
 							key="api-key"
 							type="text"
 							className={styles.button}
 							onClick={openKeyManager}
 						>
 							API Key
-						</MagicButton>,
+						</DelightfulButton>,
 				  ]
 				: []),
 
@@ -327,14 +327,14 @@ function RightDrawer({
 							key="import-tools"
 							setCurrentFlow={setCurrentFlow}
 						/>,
-						<MagicButton
+						<DelightfulButton
 							key="api-key"
 							type="text"
 							className={styles.button}
 							onClick={openKeyManager}
 						>
 							API Key
-						</MagicButton>,
+						</DelightfulButton>,
 						<AuthControlButton
 							key="auth-control-flow"
 							className={styles.button}
@@ -391,16 +391,16 @@ function RightDrawer({
 			<Flex vertical className={styles.top} gap={10}>
 				<Flex justify="space-between" align="center" gap={8}>
 					{data?.icon ? (
-						<MagicAvatar style={{ borderRadius: 8 }} src={data?.icon} size={50}>
+						<DelightfulAvatar style={{ borderRadius: 8 }} src={data?.icon} size={50}>
 							{data?.name}
-						</MagicAvatar>
+						</DelightfulAvatar>
 					) : (
 						defaultAvatar
 					)}
 					<Flex justify="flex-start" align="center" flex={1} gap={8}>
 						<div className={styles.title}>{data?.name}</div>
 						{hasEditRight(data.user_operation) && (
-							<MagicIcon
+							<DelightfulIcon
 								component={IconEdit}
 								size={16}
 								style={{ cursor: "pointer", flexShrink: 0 }}
@@ -408,8 +408,8 @@ function RightDrawer({
 							/>
 						)}
 					</Flex>
-					<MagicButton
-						icon={<MagicIcon component={IconX} size={24} />}
+					<DelightfulButton
+						icon={<DelightfulIcon component={IconX} size={24} />}
 						type="text"
 						className={styles.close}
 						onClick={handleInnerClose}

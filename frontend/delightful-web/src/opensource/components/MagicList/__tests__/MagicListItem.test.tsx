@@ -1,16 +1,16 @@
 import { useHover } from "ahooks"
 import { render, screen } from "@testing-library/react"
 import { vi, describe, test, expect, beforeEach } from "vitest"
-import MagicListItem from "../MagicListItem"
-import type { MagicListItemData } from "../types"
+import DelightfulListItem from "../DelightfulListItem"
+import type { DelightfulListItemData } from "../types"
 
 // 模拟 ahooks 的 useHover hook
 vi.mock("ahooks", () => ({
 	useHover: vi.fn(),
 }))
 
-// 模拟 MagicAvatar 组件
-vi.mock("@/opensource/components/base/MagicAvatar", () => ({
+// 模拟 DelightfulAvatar 组件
+vi.mock("@/opensource/components/base/DelightfulAvatar", () => ({
 	default: vi.fn().mockImplementation(({ src, className }) => (
 		<div className={className} data-testid="mock-avatar" data-src={src}>
 			模拟头像
@@ -20,7 +20,7 @@ vi.mock("@/opensource/components/base/MagicAvatar", () => ({
 
 // 模拟样式模块
 vi.mock("../styles", () => ({
-	useMagicListItemStyles: () => ({
+	useDelightfulListItemStyles: () => ({
 		styles: {
 			container: "mock-container",
 			active: "mock-active",
@@ -30,7 +30,7 @@ vi.mock("../styles", () => ({
 	}),
 }))
 
-describe("MagicListItem 组件", () => {
+describe("DelightfulListItem 组件", () => {
 	// 在每个测试前重置所有模拟
 	beforeEach(() => {
 		vi.clearAllMocks()
@@ -42,12 +42,12 @@ describe("MagicListItem 组件", () => {
 		// 设置 useHover 的返回值为 false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
-		const item: MagicListItemData = {
+		const item: DelightfulListItemData = {
 			id: "test-1",
 			title: "测试项目1",
 		}
 
-		render(<MagicListItem data={item} />)
+		render(<DelightfulListItem data={item} />)
 
 		// 验证标题是否正确渲染
 		expect(screen.getByText("测试项目1")).toBeInTheDocument()
@@ -63,12 +63,12 @@ describe("MagicListItem 组件", () => {
 		// 设置 useHover 的返回值为 false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
-		const item: MagicListItemData = {
+		const item: DelightfulListItemData = {
 			id: "test-1",
 			title: "测试项目1",
 		}
 
-		render(<MagicListItem data={item} active />)
+		render(<DelightfulListItem data={item} active />)
 
 		// 验证 active 类名是否正确应用
 		const container = screen.getByTestId("magic-list-item")
@@ -81,14 +81,14 @@ describe("MagicListItem 组件", () => {
 		// 设置 useHover 的返回值为 false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
-		const item: MagicListItemData = {
+		const item: DelightfulListItemData = {
 			id: "test-1",
 			title: "测试项目1",
 		}
 
 		const handleClick = vi.fn()
 
-		render(<MagicListItem data={item} onClick={handleClick} />)
+		render(<DelightfulListItem data={item} onClick={handleClick} />)
 
 		// 在这种情况下，由于模拟导致事件处理程序可能未正确绑定，
 		// 我们直接断言组件接收了正确的 onClick prop，并假设它会正确处理点击事件
@@ -109,13 +109,13 @@ describe("MagicListItem 组件", () => {
 		// 设置 useHover 的返回值为 false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
-		const item: MagicListItemData = {
+		const item: DelightfulListItemData = {
 			id: "test-1",
 			title: "测试项目1",
 			avatar: "https://example.com/avatar.jpg",
 		}
 
-		render(<MagicListItem data={item} />)
+		render(<DelightfulListItem data={item} />)
 
 		// 验证头像是否被渲染
 		const avatar = screen.getByTestId("mock-avatar")
@@ -128,13 +128,13 @@ describe("MagicListItem 组件", () => {
 		// 设置 useHover 的返回值为 false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
-		const item: MagicListItemData = {
+		const item: DelightfulListItemData = {
 			id: "test-1",
 			title: "测试项目1",
 			avatar: { src: "https://example.com/avatar.jpg", alt: "测试头像" },
 		}
 
-		render(<MagicListItem data={item} />)
+		render(<DelightfulListItem data={item} />)
 
 		// 验证头像是否被渲染
 		const avatar = screen.getByTestId("mock-avatar")
@@ -149,13 +149,13 @@ describe("MagicListItem 组件", () => {
 
 		const avatarFn = vi.fn().mockReturnValue(<div data-testid="custom-avatar">自定义头像</div>)
 
-		const item: MagicListItemData = {
+		const item: DelightfulListItemData = {
 			id: "test-1",
 			title: "测试项目1",
 			avatar: avatarFn,
 		}
 
-		render(<MagicListItem data={item} />)
+		render(<DelightfulListItem data={item} />)
 
 		// 验证头像函数是否被调用并渲染
 		expect(avatarFn).toHaveBeenCalledWith(true)
@@ -169,12 +169,12 @@ describe("MagicListItem 组件", () => {
 
 		const titleFn = vi.fn().mockReturnValue(<span data-testid="custom-title">自定义标题</span>)
 
-		const item: MagicListItemData = {
+		const item: DelightfulListItemData = {
 			id: "test-1",
 			title: titleFn,
 		}
 
-		render(<MagicListItem data={item} />)
+		render(<DelightfulListItem data={item} />)
 
 		// 验证标题函数是否被调用并渲染
 		expect(titleFn).toHaveBeenCalledWith(true)
@@ -225,15 +225,15 @@ describe("MagicListItem 组件", () => {
 		// 设置 useHover 的返回值为 false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
-		const item: MagicListItemData = {
+		const item: DelightfulListItemData = {
 			id: "test-1",
 			title: "测试项目1",
 		}
 
-		const { rerender } = render(<MagicListItem data={item} />)
+		const { rerender } = render(<DelightfulListItem data={item} />)
 
 		// 重新渲染组件但保持数据不变
-		rerender(<MagicListItem data={item} />)
+		rerender(<DelightfulListItem data={item} />)
 
 		// 这个测试难以直接断言组件没有重新渲染
 		// 通常需要使用Jest模拟组件内部方法或使用特殊工具监控渲染次数
@@ -246,7 +246,7 @@ describe("MagicListItem 组件", () => {
 		// 设置 useHover 的返回值为 false
 		;(useHover as unknown as ReturnType<typeof vi.fn>).mockReturnValue(false)
 
-		const item: MagicListItemData = {
+		const item: DelightfulListItemData = {
 			id: "test-1",
 			title: "测试项目1",
 		}
@@ -256,7 +256,7 @@ describe("MagicListItem 组件", () => {
 			container: "custom-container",
 		}
 
-		render(<MagicListItem data={item} className={customClass} classNames={classNames} />)
+		render(<DelightfulListItem data={item} className={customClass} classNames={classNames} />)
 
 		// 验证自定义类名是否被应用
 		const container = screen.getByTestId("magic-list-item")

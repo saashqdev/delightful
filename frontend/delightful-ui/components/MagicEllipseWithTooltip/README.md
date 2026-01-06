@@ -1,6 +1,6 @@
-# MagicEllipseWithTooltip 魔法省略提示组件
+# DelightfulEllipseWithTooltip 魔法省略提示组件
 
-`MagicEllipseWithTooltip` 是一个智能的文本省略组件，当文本超出指定宽度时自动显示省略号，并在鼠标悬停时通过工具提示显示完整文本。
+`DelightfulEllipseWithTooltip` 是一个智能的文本省略组件，当文本超出指定宽度时自动显示省略号，并在鼠标悬停时通过工具提示显示完整文本。
 
 ## 属性
 
@@ -13,16 +13,16 @@
 ## 基础用法
 
 ```tsx
-import { MagicEllipseWithTooltip } from '@/components/base/MagicEllipseWithTooltip';
+import { DelightfulEllipseWithTooltip } from '@/components/base/DelightfulEllipseWithTooltip';
 
 // 基础用法
-<MagicEllipseWithTooltip
+<DelightfulEllipseWithTooltip
   text="这是一段很长的文本，当它超出指定宽度时会显示省略号，鼠标悬停时会显示完整内容"
   maxWidth="200px"
 />
 
 // 自定义样式
-<MagicEllipseWithTooltip
+<DelightfulEllipseWithTooltip
   text="自定义样式的省略文本"
   maxWidth="150px"
   style={{
@@ -39,7 +39,7 @@ import { MagicEllipseWithTooltip } from '@/components/base/MagicEllipseWithToolt
       title: '描述',
       dataIndex: 'description',
       render: (text) => (
-        <MagicEllipseWithTooltip
+        <DelightfulEllipseWithTooltip
           text={text}
           maxWidth="150px"
         />
@@ -55,7 +55,7 @@ import { MagicEllipseWithTooltip } from '@/components/base/MagicEllipseWithToolt
   dataSource={data}
   renderItem={(item) => (
     <List.Item>
-      <MagicEllipseWithTooltip
+      <DelightfulEllipseWithTooltip
         text={item.title}
         maxWidth="100%"
       />
@@ -64,7 +64,7 @@ import { MagicEllipseWithTooltip } from '@/components/base/MagicEllipseWithToolt
 />
 
 // 处理事件
-<MagicEllipseWithTooltip
+<DelightfulEllipseWithTooltip
   text="点击我触发事件"
   maxWidth="120px"
   onClick={() => console.log('文本被点击了')}
@@ -85,4 +85,4 @@ import { MagicEllipseWithTooltip } from '@/components/base/MagicEllipseWithToolt
 -   在表格、列表、卡片等组件中显示标题或描述时
 -   需要确保用户可以查看被截断文本的完整内容时
 
-MagicEllipseWithTooltip 组件让你的长文本展示更加优雅和用户友好，既保持了界面的整洁，又确保了信息的完整性。
+DelightfulEllipseWithTooltip 组件让你的长文本展示更加优雅和用户友好，既保持了界面的整洁，又确保了信息的完整性。

@@ -2,8 +2,8 @@ import { render, screen, fireEvent } from "@testing-library/react"
 import { vi, describe, test, expect, beforeEach } from "vitest"
 import type { PaginationResponse } from "@/types/request"
 import type { StructureItemType } from "@/types/organization"
-import type { MagicListItemData } from "../../MagicList/types"
-import MagicInfiniteScrollList from "../MagicInfiniteScrollList"
+import type { DelightfulListItemData } from "../../DelightfulList/types"
+import DelightfulInfiniteScrollList from "../DelightfulInfiniteScrollList"
 
 // 模拟InfiniteScroll组件
 vi.mock("react-infinite-scroll-component", () => {
@@ -21,8 +21,8 @@ vi.mock("react-infinite-scroll-component", () => {
 	}
 })
 
-// 模拟MagicList相关组件和样式
-vi.mock("../../MagicList/MagicListItem", () => {
+// 模拟DelightfulList相关组件和样式
+vi.mock("../../DelightfulList/DelightfulListItem", () => {
 	return {
 		default: ({ title, desc, avatar, active, onClick }: any) => (
 			<div data-testid="magic-list-item" className={active ? "active" : ""} onClick={onClick}>
@@ -116,7 +116,7 @@ interface TestItem {
 }
 
 // 测试数据类型
-interface TestItemData extends MagicListItemData {
+interface TestItemData extends DelightfulListItemData {
 	id: string
 	name: string
 }
@@ -148,7 +148,7 @@ const mockItemsTransform = (item: unknown): TestItemData => {
 	return {
 		id: typedItem.id,
 		name: typedItem.name,
-		// 基础MagicListItemData属性
+		// 基础DelightfulListItemData属性
 		title: typedItem.name,
 		avatar: "",
 		desc: `描述 ${typedItem.id}`,
@@ -163,7 +163,7 @@ const measureExecutionTime = async (callback: () => Promise<void> | void): Promi
 	return end - start
 }
 
-describe("MagicInfiniteScrollList性能测试", () => {
+describe("DelightfulInfiniteScrollList性能测试", () => {
 	// 测试不同数据量下的渲染性能
 	test("渲染性能：不同数据量下的初始渲染时间", async () => {
 		const dataSizes = [10, 50, 100, 200]
@@ -182,7 +182,7 @@ describe("MagicInfiniteScrollList性能测试", () => {
 
 			const time = await measureExecutionTime(async () => {
 				const { unmount } = render(
-					<MagicInfiniteScrollList
+					<DelightfulInfiniteScrollList
 						data={mockData}
 						trigger={mockTrigger}
 						itemsTransform={mockItemsTransform}
@@ -236,7 +236,7 @@ describe("MagicInfiniteScrollList性能测试", () => {
 
 		// 渲染组件
 		render(
-			<MagicInfiniteScrollList
+			<DelightfulInfiniteScrollList
 				data={createMockPaginationResponse(mockData, true, "next-page")}
 				trigger={mockTrigger}
 				itemsTransform={mockItemsTransform}
@@ -261,7 +261,7 @@ describe("MagicInfiniteScrollList性能测试", () => {
 		const mockOnChange = vi.fn()
 
 		render(
-			<MagicInfiniteScrollList
+			<DelightfulInfiniteScrollList
 				data={mockData}
 				trigger={mockTrigger}
 				itemsTransform={mockItemsTransform}
@@ -297,7 +297,7 @@ describe("MagicInfiniteScrollList性能测试", () => {
 
 		// 重新渲染组件
 		render(
-			<MagicInfiniteScrollList
+			<DelightfulInfiniteScrollList
 				data={mockData}
 				trigger={mockTrigger}
 				itemsTransform={mockItemsTransform}
@@ -350,7 +350,7 @@ describe("MagicInfiniteScrollList性能测试", () => {
 		// 测量总渲染时间
 		const totalRenderTime = await measureExecutionTime(async () => {
 			render(
-				<MagicInfiniteScrollList
+				<DelightfulInfiniteScrollList
 					data={createMockPaginationResponse(mockData, true, "next-page")}
 					trigger={mockTrigger}
 					itemsTransform={mockItemsTransform}

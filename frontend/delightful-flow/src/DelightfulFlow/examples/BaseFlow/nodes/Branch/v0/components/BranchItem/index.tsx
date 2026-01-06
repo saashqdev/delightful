@@ -1,5 +1,5 @@
-import MagicConditionEdit, { ConditionInstance } from "@/MagicConditionEdit"
-import { Expression } from "@/MagicConditionEdit/types/expression"
+import DelightfulConditionEdit, { ConditionInstance } from "@/DelightfulConditionEdit"
+import { Expression } from "@/DelightfulConditionEdit/types/expression"
 import CustomHandle from "@/DelightfulFlow/nodes/common/Handle/Source"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import DropdownCard from "@/common/BaseUI/DropdownCard"
@@ -67,7 +67,7 @@ export default function BranchItem({
 		) : (
 			<DropdownCard title="如果" height="auto" suffixIcon={SuffixIcon}>
 				<div className={styles.branchItem}>
-					<MagicConditionEdit
+					<DelightfulConditionEdit
 						value={value?.parameters?.structure}
 						onChange={(structure) => onChange(structure, currentIndex)}
 						dataSource={expressionDataSource}

@@ -1,12 +1,12 @@
 import { memo, useCallback, useMemo, useRef, useState } from "react"
 import { Input, Dropdown, message, Table, Modal, Empty } from "antd"
 import { IconChevronDown } from "@tabler/icons-react"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import type { ColumnsType } from "antd/es/table"
 import { useSize } from "ahooks"
 import { StarFilled } from "@ant-design/icons"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { useStyles } from "./styles"
 import { useStyles as useCommonStyles } from "../FileManager/styles"
 import type { DataItem } from "./useData"
@@ -92,7 +92,7 @@ export default memo(function MarkedFiles() {
 				width: "15%",
 				render: (value, record) => {
 					return (
-						<MagicButton
+						<DelightfulButton
 							className={styles.topicButton}
 							type="link"
 							onClick={() => {
@@ -100,7 +100,7 @@ export default memo(function MarkedFiles() {
 							}}
 						>
 							{value}
-						</MagicButton>
+						</DelightfulButton>
 					)
 				},
 			},
@@ -114,7 +114,7 @@ export default memo(function MarkedFiles() {
 				align: "center",
 				width: 80,
 				render: (_, record) => (
-					<MagicButton
+					<DelightfulButton
 						type="text"
 						className={styles.starIconButton}
 						icon={<StarFilled className={styles.starIcon} />}
@@ -173,16 +173,16 @@ export default memo(function MarkedFiles() {
 					}}
 				/>
 				<Dropdown menu={{ items: dropdownItems }} disabled={selectedRowKeys.length === 0}>
-					<MagicButton className={styles.batchOperationButton} onClick={handleRemove}>
+					<DelightfulButton className={styles.batchOperationButton} onClick={handleRemove}>
 						<span>批量操作</span>
-						<MagicIcon component={IconChevronDown} size={20} stroke={2} />
-					</MagicButton>
+						<DelightfulIcon component={IconChevronDown} size={20} stroke={2} />
+					</DelightfulButton>
 				</Dropdown>
 			</div>
 			<div ref={containerRef} className={commonStyles.pageContent}>
 				{loading || !containerSize ? (
 					<div className={commonStyles.loadingWrapper}>
-						<MagicSpin />
+						<DelightfulSpin />
 					</div>
 				) : (
 					content

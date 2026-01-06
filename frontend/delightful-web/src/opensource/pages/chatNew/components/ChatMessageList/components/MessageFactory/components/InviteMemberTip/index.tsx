@@ -1,5 +1,5 @@
 import type { GroupAddMemberMessage } from "@/types/chat/control_message"
-import MagicMemberAvatar from "@/opensource/components/business/MagicMemberAvatar"
+import DelightfulMemberAvatar from "@/opensource/components/business/DelightfulMemberAvatar"
 import { useTranslation } from "react-i18next"
 import { Fragment } from "react/jsx-runtime"
 import { memo, type HTMLAttributes, useEffect } from "react"

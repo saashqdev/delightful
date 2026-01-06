@@ -2,11 +2,11 @@ import type { FlowDraft } from "@/types/flow"
 import { IconEdit, IconTrashX } from "@tabler/icons-react"
 import { Flex, Popconfirm, Tooltip } from "antd"
 import EmptyIcon from "@/assets/logos/empty.svg"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { useMemo, type MutableRefObject } from "react"
-import type { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
+import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
 import { cx } from "antd-style"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { useTranslation } from "react-i18next"
 import { resolveToString } from "@dtyq/es6-template-strings"
 import styles from "./index.module.less"
@@ -15,8 +15,8 @@ import SaveDraftButton from "../../SaveDraftButton"
 type DraftCardItemProps = {
 	draft: FlowDraft.ListItem
 	onDeleteItem: (draftId: string) => void
-	flow?: MagicFlow.Flow
-	flowInstance?: MutableRefObject<MagicFlowInstance | null>
+	flow?: DelightfulFlow.Flow
+	flowInstance?: MutableRefObject<DelightfulFlowInstance | null>
 	onSwitchDraft: (draft: FlowDraft.ListItem) => void
 	initDraftList?: (this: any, flowCode: any) => Promise<FlowDraft.Detail[]>
 }
@@ -86,7 +86,7 @@ export default function DraftCardItem({
 			<span className={styles.draftDesc}>{draft.description}</span>
 			<Flex justify="space-between">
 				<Flex justify="space-between" gap={4} align="center">
-					<MagicAvatar
+					<DelightfulAvatar
 						size={20}
 						shape="circle"
 						src={draft?.modifier_info?.avatar || EmptyIcon}

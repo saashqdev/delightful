@@ -19,7 +19,7 @@ import useFlowOperations from "./useFlowOperations"
 import useTestFunctions from "./useTestFunctions"
 import { useConfirmOperations } from "./hooks/useConfirmOperations"
 import { useSendAgentMessage } from "./hooks/useSendAgentMessage"
-import { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { FlowApi } from "@/apis"
 
 // MD5生成函数
@@ -52,7 +52,7 @@ export interface Message extends MessageProps {}
 
 interface FlowAssistantProps {
 	flowInteractionRef: React.MutableRefObject<any>
-	flow?: MagicFlow.Flow
+	flow?: DelightfulFlow.Flow
 	onClose: () => void
 	isAgent: boolean
 	saveDraft: () => Promise<void>

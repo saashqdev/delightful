@@ -1,6 +1,6 @@
 import React from "react"
 import { Space } from "antd"
-import MagicCollapse from "../../components/MagicCollapse"
+import DelightfulCollapse from "../../components/DelightfulCollapse"
 import ComponentDemo from "./Container"
 
 const CollapseDemo: React.FC = () => {
@@ -36,13 +36,13 @@ const CollapseDemo: React.FC = () => {
 			<ComponentDemo
 				title="基础折叠面板"
 				description="最基本的折叠面板组件"
-				code="<MagicCollapse items={items} />"
+				code="<DelightfulCollapse items={items} />"
 			>
-				<MagicCollapse items={items} />
+				<DelightfulCollapse items={items} />
 			</ComponentDemo>
 
 			<ComponentDemo title="手风琴模式" description="同时只能展开一个面板" code="accordion">
-				<MagicCollapse items={items} accordion />
+				<DelightfulCollapse items={items} accordion />
 			</ComponentDemo>
 
 			<ComponentDemo
@@ -50,7 +50,7 @@ const CollapseDemo: React.FC = () => {
 				description="设置默认展开的面板"
 				code="defaultActiveKey"
 			>
-				<MagicCollapse items={items} defaultActiveKey={["1", "2"]} />
+				<DelightfulCollapse items={items} defaultActiveKey={["1", "2"]} />
 			</ComponentDemo>
 
 			<ComponentDemo
@@ -58,7 +58,7 @@ const CollapseDemo: React.FC = () => {
 				description="通过activeKey控制展开状态"
 				code="activeKey | onChange"
 			>
-				<MagicCollapse
+				<DelightfulCollapse
 					items={items}
 					activeKey={["1"]}
 					onChange={(keys) => console.log("展开的面板:", keys)}
@@ -71,9 +71,9 @@ const CollapseDemo: React.FC = () => {
 				code="size: 'large' | 'default' | 'small'"
 			>
 				<Space direction="vertical" style={{ width: "100%" }}>
-					<MagicCollapse items={items} size="large" />
-					<MagicCollapse items={items} />
-					<MagicCollapse items={items} size="small" />
+					<DelightfulCollapse items={items} size="large" />
+					<DelightfulCollapse items={items} />
+					<DelightfulCollapse items={items} size="small" />
 				</Space>
 			</ComponentDemo>
 		</div>

@@ -1,13 +1,13 @@
 import { Flex } from "antd"
 import { useTranslation } from "react-i18next"
 import { useBoolean, useMemoizedFn } from "ahooks"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import type { OpenableProps } from "@/utils/react"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useMemo } from "react"
 import magicIcon from "@/assets/logos/magic-avatar.svg"
 import { IconKey } from "@tabler/icons-react"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { useStyles } from "./styles"
 import { ScopeLabel } from "./constant"
 
@@ -43,26 +43,26 @@ function OAuthModal({
 
 	const footer = useMemoizedFn(() => (
 		<Flex align="center" style={{ width: "100%" }} gap={10}>
-			<MagicButton onClick={onCancel} type="text" className={cx(styles.button, styles.flex1)}>
+			<DelightfulButton onClick={onCancel} type="text" className={cx(styles.button, styles.flex1)}>
 				{t("button.reject")}
-			</MagicButton>
-			<MagicButton onClick={onConfirm} type="primary" className={styles.flex1}>
+			</DelightfulButton>
+			<DelightfulButton onClick={onConfirm} type="primary" className={styles.flex1}>
 				{t("button.allow")}
-			</MagicButton>
+			</DelightfulButton>
 		</Flex>
 	))
 
 	const title = useMemo(() => {
 		return (
 			<Flex align="center" gap={8}>
-				<MagicAvatar src={<IconKey size={14} />} size={20} className={styles.icon} />
+				<DelightfulAvatar src={<IconKey size={14} />} size={20} className={styles.icon} />
 				{t("oauth.permission")}
 			</Flex>
 		)
 	}, [styles.icon, t])
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			className={styles.modal}
 			centered
 			maskClosable={false}
@@ -88,7 +88,7 @@ function OAuthModal({
 						})}
 				</ul>
 			</Flex>
-		</MagicModal>
+		</DelightfulModal>
 	)
 }
 

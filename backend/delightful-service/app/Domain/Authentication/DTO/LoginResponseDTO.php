@@ -29,34 +29,34 @@ class LoginResponseDTO extends AbstractEntity implements LoginResponseInterface
 
     protected ?PlatformType $thirdPlatformType = null;
 
-    public function getMagicId(): string
+    public function getDelightfulId(): string
     {
         return $this->magicId;
     }
 
-    public function setMagicId(string $magicId): static
+    public function setDelightfulId(string $magicId): static
     {
         $this->magicId = $magicId;
         return $this;
     }
 
-    public function getMagicUserId(): string
+    public function getDelightfulUserId(): string
     {
         return $this->magicUserId;
     }
 
-    public function setMagicUserId(string $magicUserId): static
+    public function setDelightfulUserId(string $magicUserId): static
     {
         $this->magicUserId = $magicUserId;
         return $this;
     }
 
-    public function getMagicOrganizationCode(): string
+    public function getDelightfulOrganizationCode(): string
     {
         return $this->magicOrganizationCode;
     }
 
-    public function setMagicOrganizationCode(string $magicOrganizationCode): static
+    public function setDelightfulOrganizationCode(string $magicOrganizationCode): static
     {
         $this->magicOrganizationCode = $magicOrganizationCode;
         return $this;

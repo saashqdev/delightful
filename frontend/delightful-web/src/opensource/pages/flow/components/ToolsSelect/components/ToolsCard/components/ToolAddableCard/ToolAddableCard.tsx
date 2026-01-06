@@ -1,10 +1,10 @@
 import { Flex, Tooltip } from "antd"
 import { memo, useMemo } from "react"
 import { ComponentTypes, FlowRouteType, type UseableToolSet } from "@/types/flow"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconHelp, IconPlus, IconWindowMaximize } from "@tabler/icons-react"
 import DefaultToolIcon from "@/assets/logos/tool-avatar.png"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { replaceRouteParams } from "@/utils/route"
 import { RoutePath } from "@/const/routes"
 import { genDefaultComponent } from "@/opensource/pages/flow/utils/helpers"
@@ -201,7 +201,7 @@ const ToolAddableCard = memo(
 							})}
 						</div>
 					</Flex>
-					<MagicButton
+					<DelightfulButton
 						type="default"
 						onClick={() => {
 							onAddTool({
@@ -225,7 +225,7 @@ const ToolAddableCard = memo(
 							size={20}
 						/>
 						{t("common.add", { ns: "flow" })}
-					</MagicButton>
+					</DelightfulButton>
 				</Flex>
 			</Flex>
 		)

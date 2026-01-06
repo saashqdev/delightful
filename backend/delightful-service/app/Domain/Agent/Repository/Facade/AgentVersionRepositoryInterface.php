@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Repository\Facade;
 
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
 use App\Domain\Agent\Entity\ValueObject\AgentDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowVersionQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowVersionQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
 interface AgentVersionRepositoryInterface
@@ -17,7 +17,7 @@ interface AgentVersionRepositoryInterface
     /**
      * 获取组织内可用的 Agent 版本.
      *
-     * @return array{total: int, list: array<MagicAgentVersionEntity>}
+     * @return array{total: int, list: array<DelightfulAgentVersionEntity>}
      */
-    public function getOrgAvailableAgents(AgentDataIsolation $dataIsolation, MagicFLowVersionQuery $query, Page $page): array;
+    public function getOrgAvailableAgents(AgentDataIsolation $dataIsolation, DelightfulFLowVersionQuery $query, Page $page): array;
 }

@@ -1,6 +1,6 @@
-# MagicMarkmap 魔法思维导图组件
+# DelightfulMarkmap 魔法思维导图组件
 
-`MagicMarkmap` 是一个用于渲染和展示思维导图的组件，基于 Markmap 库实现，支持将 Markdown 格式的文本转换为交互式思维导图。
+`DelightfulMarkmap` 是一个用于渲染和展示思维导图的组件，基于 Markmap 库实现，支持将 Markdown 格式的文本转换为交互式思维导图。
 
 ## 属性
 
@@ -13,7 +13,7 @@
 ## 基础用法
 
 ```tsx
-import { MagicMarkmap } from '@/components/base/MagicMarkmap';
+import { DelightfulMarkmap } from '@/components/base/DelightfulMarkmap';
 
 // 基础用法
 const markdownContent = `
@@ -29,13 +29,13 @@ const markdownContent = `
 ### 维护
 `;
 
-<MagicMarkmap content={markdownContent} />
+<DelightfulMarkmap content={markdownContent} />
 
 // 只读模式
-<MagicMarkmap content={markdownContent} readonly />
+<DelightfulMarkmap content={markdownContent} readonly />
 
 // 自定义样式
-<MagicMarkmap
+<DelightfulMarkmap
   content={markdownContent}
   style={{ height: '500px', width: '100%' }}
 />
@@ -43,7 +43,7 @@ const markdownContent = `
 
 ## 思维导图格式
 
-MagicMarkmap 使用 Markdown 的标题层级结构来定义思维导图的节点层级：
+DelightfulMarkmap 使用 Markdown 的标题层级结构来定义思维导图的节点层级：
 
 ```markdown
 # 根节点
@@ -79,4 +79,4 @@ MagicMarkmap 使用 Markdown 的标题层级结构来定义思维导图的节点
 -   需要将 Markdown 文档转换为思维导图时
 -   需要在对话或文档中嵌入交互式思维导图时
 
-MagicMarkmap 组件让思维导图的创建和展示变得简单高效，是展示结构化信息的理想选择。
+DelightfulMarkmap 组件让思维导图的创建和展示变得简单高效，是展示结构化信息的理想选择。

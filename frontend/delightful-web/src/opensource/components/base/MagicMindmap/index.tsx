@@ -4,7 +4,7 @@ import type { HTMLAttributes } from "react"
 import { memo, useEffect, useRef } from "react"
 import MindMap from "simple-mind-map"
 
-interface MagicMindMapProps extends HTMLAttributes<HTMLDivElement> {
+interface DelightfulMindMapProps extends HTMLAttributes<HTMLDivElement> {
 	data?: AggregateAISearchCardMindMapChildren | null
 	readonly?: boolean
 }
@@ -18,7 +18,7 @@ const useStyles = createStyles(({ css }) => {
 	}
 })
 
-const MagicMindMap = memo(({ data, className, readonly = true, ...props }: MagicMindMapProps) => {
+const DelightfulMindMap = memo(({ data, className, readonly = true, ...props }: DelightfulMindMapProps) => {
 	const { styles, cx } = useStyles()
 	const ref = useRef<HTMLDivElement>(null)
 	const mindmapRef = useRef<MindMap | null>(null)
@@ -72,4 +72,4 @@ const MagicMindMap = memo(({ data, className, readonly = true, ...props }: Magic
 	return <div ref={ref} className={cx(styles.mindmap, className)} {...props} />
 })
 
-export default MagicMindMap
+export default DelightfulMindMap

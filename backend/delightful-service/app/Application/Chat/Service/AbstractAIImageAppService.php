@@ -12,7 +12,7 @@ use App\Domain\Chat\DTO\Message\ChatMessage\ImageConvertHighCardMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\RichTextMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
 use App\Domain\Chat\DTO\Message\MessageInterface;
-use App\Domain\Chat\Service\MagicChatDomainService;
+use App\Domain\Chat\Service\DelightfulChatDomainService;
 
 use function di;
 
@@ -20,7 +20,7 @@ class AbstractAIImageAppService extends AbstractAppService
 {
     protected function getReferContentForAIImage(string $referMessageId): ?MessageInterface
     {
-        $magicChatDomainService = di(MagicChatDomainService::class);
+        $magicChatDomainService = di(DelightfulChatDomainService::class);
         // 获取消息
         $referSeq = $magicChatDomainService->getSeqMessageByIds([$referMessageId])[0] ?? [];
         // 假如消息有引用，获取引用消息
@@ -28,7 +28,7 @@ class AbstractAIImageAppService extends AbstractAppService
             $referSeq = $magicChatDomainService->getSeqMessageByIds([$referSeq['refer_message_id']])[0] ?? [];
         }
         // 获取引用消息文本内容
-        $referMessage = $magicChatDomainService->getMessageByMagicMessageId($referSeq['magic_message_id'] ?? '');
+        $referMessage = $magicChatDomainService->getMessageByDelightfulMessageId($referSeq['magic_message_id'] ?? '');
         return $referMessage?->getContent();
     }
 

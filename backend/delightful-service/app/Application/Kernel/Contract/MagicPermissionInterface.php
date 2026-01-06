@@ -11,7 +11,7 @@ namespace App\Application\Kernel\Contract;
  * 权限枚举接口
  * 提供权限管理的统一抽象
  */
-interface MagicPermissionInterface
+interface DelightfulPermissionInterface
 {
     /**
      * 获取所有操作类型.

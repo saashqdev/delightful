@@ -7,17 +7,17 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Assembler;
 
-use App\Domain\Chat\Entity\MagicConversationEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
 
 class ConversationAssembler
 {
-    public static function getConversationEntity(array $conversationInfo): MagicConversationEntity
+    public static function getConversationEntity(array $conversationInfo): DelightfulConversationEntity
     {
-        return new MagicConversationEntity($conversationInfo);
+        return new DelightfulConversationEntity($conversationInfo);
     }
 
     /**
-     * @return MagicConversationEntity[]
+     * @return DelightfulConversationEntity[]
      */
     public static function getConversationEntities(array $conversationInfos): array
     {

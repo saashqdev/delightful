@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Core\Exception\Handler;
 
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\EventException;
 use App\Infrastructure\Util\Context\CoContext;
@@ -84,7 +84,7 @@ class OpenAIProxyExceptionHandler extends AbstractExceptionHandler
             return false;
         }
 
-        $magicApiErrorCode = MagicApiErrorCode::tryFrom($throwable->getCode());
+        $magicApiErrorCode = DelightfulApiErrorCode::tryFrom($throwable->getCode());
         if (! $magicApiErrorCode) {
             return false;
         }

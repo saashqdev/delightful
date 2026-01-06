@@ -16,16 +16,16 @@ use App\Domain\Contact\Repository\Persistence\Model\AccountModel;
 use App\Domain\Contact\Repository\Persistence\Model\DepartmentModel;
 use App\Domain\Contact\Repository\Persistence\Model\DepartmentUserModel;
 use App\Domain\Contact\Repository\Persistence\Model\UserModel;
-use App\Domain\Contact\Service\MagicAccountDomainService;
-use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulAccountDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search\Structure\LeftType;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search\Structure\OperatorType;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search\UserSearchNodeParamsConfig;
 use App\Domain\Flow\Entity\ValueObject\NodeType;
-use App\Domain\Group\Repository\Persistence\Model\MagicGroupModel;
-use App\Domain\Group\Repository\Persistence\Model\MagicGroupUserModel;
+use App\Domain\Group\Repository\Persistence\Model\DelightfulGroupModel;
+use App\Domain\Group\Repository\Persistence\Model\DelightfulGroupUserModel;
 use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\FlowNodeDefine;
 use App\Infrastructure\Core\Dag\VertexResult;
 
@@ -62,18 +62,18 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         });
         $users = [];
         if (! empty($allUserIds)) {
-            $magicUserDomain = di(MagicUserDomainService::class);
-            $magicAccountDomain = di(MagicAccountDomainService::class);
-            $departmentUserDomain = di(MagicDepartmentUserDomainService::class);
-            $departmentDomain = di(MagicDepartmentDomainService::class);
+            $magicUserDomain = di(DelightfulUserDomainService::class);
+            $magicAccountDomain = di(DelightfulAccountDomainService::class);
+            $departmentUserDomain = di(DelightfulDepartmentUserDomainService::class);
+            $departmentDomain = di(DelightfulDepartmentDomainService::class);
 
             $contactDataIsolation = ContactDataIsolation::create($executionData->getOperator()->getOrganizationCode(), $executionData->getOperator()->getUid());
             $magicUsers = $magicUserDomain->getByUserIds($contactDataIsolation, $allUserIds);
             $magicIds = [];
             foreach ($magicUsers as $magicUser) {
-                $magicIds[] = $magicUser->getMagicId();
+                $magicIds[] = $magicUser->getDelightfulId();
             }
-            $magicAccounts = $magicAccountDomain->getByMagicIds($magicIds);
+            $magicAccounts = $magicAccountDomain->getByDelightfulIds($magicIds);
             $departmentUsers = $departmentUserDomain->getDepartmentUsersByUserIds($allUserIds, $contactDataIsolation);
             $departmentIds = array_column($departmentUsers, 'department_id');
 
@@ -101,7 +101,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
                 if ($magicUser->getUserType() !== UserType::Human) {
                     continue;
                 }
-                if (! $magicAccount = $magicAccounts[$magicUser->getMagicId()] ?? null) {
+                if (! $magicAccount = $magicAccounts[$magicUser->getDelightfulId()] ?? null) {
                     continue;
                 }
                 $departmentArray = [];
@@ -286,7 +286,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
 
     private function getUserIdsByGroupName(Operator $operator, OperatorType $operatorType, mixed $groupName, ?array $filterUserIds = null): array
     {
-        $db = MagicGroupModel::query()->where('organization_code', '=', $operator->getOrganizationCode());
+        $db = DelightfulGroupModel::query()->where('organization_code', '=', $operator->getOrganizationCode());
         switch ($operatorType) {
             case OperatorType::Equals:
                 if (is_array($groupName)) {
@@ -325,7 +325,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         if (empty($groupIds)) {
             return [];
         }
-        $userDB = MagicGroupUserModel::query()
+        $userDB = DelightfulGroupUserModel::query()
             ->whereIn('group_id', $groupIds)
             ->where('organization_code', '=', $operator->getOrganizationCode());
         if (! empty($filterUserIds)) {

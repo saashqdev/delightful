@@ -1,6 +1,6 @@
-import type { MagicButtonProps } from "@/opensource/components/base/MagicButton"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import type { DelightfulButtonProps } from "@/opensource/components/base/DelightfulButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import UploadAction from "@/opensource/components/base/UploadAction"
 import { IMStyle } from "@/opensource/providers/AppearanceProvider/context"
 import { IconCloudUpload } from "@tabler/icons-react"
@@ -23,7 +23,7 @@ const useStyles = createStyles(({ token, css }) => {
 	}
 })
 
-interface UploadButtonProps extends MagicButtonProps {
+interface UploadButtonProps extends DelightfulButtonProps {
 	icon?: React.ReactNode
 	text?: string
 	imStyle?: IMStyle
@@ -43,16 +43,16 @@ function UploadButton({
 	const { styles } = useStyles()
 	const UploadHandler = useMemoizedFn((onUpload) => {
 		return (
-			<MagicButton
+			<DelightfulButton
 				className={styles.uploadButton}
 				type="text"
 				loading={loading}
 				onClick={onUpload}
-				icon={icon || <MagicIcon size={20} component={IconCloudUpload} />}
+				icon={icon || <DelightfulIcon size={20} component={IconCloudUpload} />}
 				{...props}
 			>
 				{text || t("agent.upload")}
-			</MagicButton>
+			</DelightfulButton>
 		)
 	})
 

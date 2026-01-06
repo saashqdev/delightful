@@ -522,9 +522,9 @@ class Validator
      * @return bool Returns true if magic constant is valid
      * @throws Throwable Throws exception if validation error occurs
      */
-    public function checkMagicConst($name): bool
+    public function checkDelightfulConst($name): bool
     {
-        if (! $this->options->isValidateMagicConstants()) {
+        if (! $this->options->isValidateDelightfulConstants()) {
             return true;
         }
         $original_name = $name;
@@ -534,16 +534,16 @@ class Validator
         if (! $name) {
             $this->error->validationError('Sandboxed code attempted to call unnamed magic constant!', Error::VALID_DELIGHTFUL_CONST_ERROR, null, '');
         }
-        if (is_callable($this->options->validation()->getMagicConstValidator())) {
-            return call_user_func_array($this->options->validation()->getMagicConstValidator(), [$name, $this]);
+        if (is_callable($this->options->validation()->getDelightfulConstValidator())) {
+            return call_user_func_array($this->options->validation()->getDelightfulConstValidator(), [$name, $this]);
         }
-        if (! $this->options->definitions()->isDefinedMagicConst($name)) {
-            if ($this->options->accessControl()->hasWhitelistedMagicConsts()) {
-                if (! $this->options->accessControl()->isWhitelistedMagicConst($name)) {
+        if (! $this->options->definitions()->isDefinedDelightfulConst($name)) {
+            if ($this->options->accessControl()->hasWhitelistedDelightfulConsts()) {
+                if (! $this->options->accessControl()->isWhitelistedDelightfulConst($name)) {
                     $this->error->validationError("Sandboxed code attempted to call non-whitelisted magic constant: {$original_name}", Error::WHITELIST_DELIGHTFUL_CONST_ERROR, null, $original_name);
                 }
-            } elseif ($this->options->accessControl()->hasBlacklistedMagicConsts()) {
-                if ($this->options->accessControl()->isBlacklistedMagicConst($name)) {
+            } elseif ($this->options->accessControl()->hasBlacklistedDelightfulConsts()) {
+                if ($this->options->accessControl()->isBlacklistedDelightfulConst($name)) {
                     $this->error->validationError("Sandboxed code attempted to call blacklisted magic constant: {$original_name}", Error::BLACKLIST_DELIGHTFUL_CONST_ERROR, null, $original_name);
                 }
             } else {

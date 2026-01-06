@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Application\Speech\Service;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\Speech\Assembler\AsrAssembler;
 use App\Application\Speech\Assembler\ChatMessageAssembler;
 use App\Application\Speech\DTO\AsrTaskStatusDTO;
@@ -21,22 +21,22 @@ use App\Domain\Asr\Constants\AsrRedisKeys;
 use App\Domain\Asr\Service\AsrTaskDomainService;
 use App\Domain\Chat\DTO\Request\ChatRequest;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
-use App\Domain\Chat\Service\MagicChatDomainService;
+use App\Domain\Chat\Service\DelightfulChatDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\ErrorCode\AsrErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\CoContext;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskStatus as SuperAgentTaskStatus;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\MessageQueueDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\WorkspaceDomainService;
-use Delightful\SuperMagic\ErrorCode\SuperAgentErrorCode;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ProjectEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus as SuperAgentTaskStatus;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\MessageQueueDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\TopicDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\WorkspaceDomainService;
+use Delightful\SuperDelightful\ErrorCode\SuperAgentErrorCode;
 use Hyperf\Contract\TranslatorInterface;
 use Hyperf\Engine\Coroutine;
 use Hyperf\Logger\LoggerFactory;
@@ -54,10 +54,10 @@ readonly class AsrFileAppService
         private ProjectDomainService $projectDomainService,
         private TaskFileDomainService $taskFileDomainService,
         private WorkspaceDomainService $workspaceDomainService,
-        private MagicUserDomainService $magicUserDomainService,
+        private DelightfulUserDomainService $magicUserDomainService,
         private ChatMessageAssembler $chatMessageAssembler,
-        private MagicChatMessageAppService $magicChatMessageAppService,
-        private MagicChatDomainService $magicChatDomainService,
+        private DelightfulChatMessageAppService $magicChatMessageAppService,
+        private DelightfulChatDomainService $magicChatDomainService,
         private TopicDomainService $superAgentTopicDomainService,
         private MessageQueueDomainService $messageQueueDomainService,
         private TranslatorInterface $translator,
@@ -79,7 +79,7 @@ readonly class AsrFileAppService
      */
     public function processSummaryWithChat(
         SummaryRequestDTO $summaryRequest,
-        MagicUserAuthorization $userAuthorization
+        DelightfulUserAuthorization $userAuthorization
     ): array {
         try {
             $userId = $userAuthorization->getId();
@@ -483,7 +483,7 @@ readonly class AsrFileAppService
      */
     private function executeAsyncSummary(
         SummaryRequestDTO $summaryRequest,
-        MagicUserAuthorization $userAuthorization
+        DelightfulUserAuthorization $userAuthorization
     ): void {
         $requestId = CoContext::getRequestId();
         // Important: use CoContext::getLanguage() instead of translator->getLocale()
@@ -669,7 +669,7 @@ readonly class AsrFileAppService
     /**
      * Send summary chat message.
      */
-    private function sendSummaryChatMessage(ProcessSummaryTaskDTO $dto, MagicUserAuthorization $userAuthorization): void
+    private function sendSummaryChatMessage(ProcessSummaryTaskDTO $dto, DelightfulUserAuthorization $userAuthorization): void
     {
         try {
             // Build audio file data
@@ -682,7 +682,7 @@ readonly class AsrFileAppService
             $chatRequest = $this->chatMessageAssembler->buildSummaryMessage($dto, $audioFileData, $noteFileData);
 
             // Log message details
-            $messageData = $chatRequest->getData()->getMessage()->getMagicMessage();
+            $messageData = $chatRequest->getData()->getMessage()->getDelightfulMessage();
 
             $this->logger->info('sendSummaryChatMessage ready to send ASR summary chat message', [
                 'task_key' => $dto->taskStatus->taskKey,
@@ -729,7 +729,7 @@ readonly class AsrFileAppService
     /**
      * Enqueue the message for processing.
      */
-    private function queueChatMessage(ProcessSummaryTaskDTO $dto, ChatRequest $chatRequest, MagicUserAuthorization $userAuthorization): void
+    private function queueChatMessage(ProcessSummaryTaskDTO $dto, ChatRequest $chatRequest, DelightfulUserAuthorization $userAuthorization): void
     {
         $dataIsolation = DataIsolation::create($userAuthorization->getOrganizationCode(), $userAuthorization->getId());
         $topicEntity = $this->superAgentTopicDomainService->getTopicById((int) $dto->topicId);
@@ -737,7 +737,7 @@ readonly class AsrFileAppService
             ExceptionBuilder::throw(AsrErrorCode::TopicNotExist, '', ['topicId' => $dto->topicId]);
         }
 
-        $messageContent = $chatRequest->getData()->getMessage()->getMagicMessage()->toArray();
+        $messageContent = $chatRequest->getData()->getMessage()->getDelightfulMessage()->toArray();
         $this->messageQueueDomainService->createMessage(
             $dataIsolation,
             (int) $dto->projectId,
@@ -750,13 +750,13 @@ readonly class AsrFileAppService
     /**
      * Build user authorization from user ID.
      */
-    private function getUserAuthorizationFromUserId(string $userId): MagicUserAuthorization
+    private function getUserAuthorizationFromUserId(string $userId): DelightfulUserAuthorization
     {
         $userEntity = $this->magicUserDomainService->getUserById($userId);
         if ($userEntity === null) {
             ExceptionBuilder::throw(AsrErrorCode::UserNotExist);
         }
-        return MagicUserAuthorization::fromUserEntity($userEntity);
+        return DelightfulUserAuthorization::fromUserEntity($userEntity);
     }
 
     /**

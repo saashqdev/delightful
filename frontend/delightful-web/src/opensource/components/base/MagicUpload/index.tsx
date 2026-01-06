@@ -1,5 +1,5 @@
-function MagicUpload() {
-	return <div>MagicUpload</div>
+function DelightfulUpload() {
+	return <div>DelightfulUpload</div>
 }
 
-export default MagicUpload
+export default DelightfulUpload

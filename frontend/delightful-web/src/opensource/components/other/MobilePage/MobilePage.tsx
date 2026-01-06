@@ -8,7 +8,7 @@ import {
 	Logo,
 	Name,
 	FooterLogo,
-	Magic,
+	Delightful,
 	MacIcon,
 	WinIcon,
 	IOSIcon,
@@ -80,7 +80,7 @@ function MobilePage() {
 				</div>
 			</div>
 
-			<Magic className={styles.watermark} size={1} />
+			<Delightful className={styles.watermark} size={1} />
 		</div>
 	)
 }

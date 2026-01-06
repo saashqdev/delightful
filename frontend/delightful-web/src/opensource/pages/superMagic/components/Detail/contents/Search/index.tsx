@@ -1,5 +1,5 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicImage from "@/opensource/components/base/MagicImage"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulImage from "@/opensource/components/base/DelightfulImage"
 import { IconSearch } from "@tabler/icons-react"
 import { Input } from "antd"
 import { memo, useCallback } from "react"
@@ -39,7 +39,7 @@ export default memo(function Search(props: SearchProps) {
 				<Input
 					value={keyword}
 					readOnly
-					prefix={<MagicIcon component={IconSearch} size={20} />}
+					prefix={<DelightfulIcon component={IconSearch} size={20} />}
 					className={styles.searchInput}
 				/>
 			</div>
@@ -60,7 +60,7 @@ export default memo(function Search(props: SearchProps) {
 										className={styles.resultItem}
 									>
 										<div className={styles.icon}>
-											<MagicImage
+											<DelightfulImage
 												src={item.icon_url}
 												errorSrc={defaultSVG}
 												className={styles.iconImg}

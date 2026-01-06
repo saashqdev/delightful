@@ -1,5 +1,5 @@
-import Logo from "@/opensource/components/MagicLogo"
-import { LogoType } from "@/opensource/components/MagicLogo/LogoType"
+import Logo from "@/opensource/components/DelightfulLogo"
+import { LogoType } from "@/opensource/components/DelightfulLogo/LogoType"
 import HomeBotAnimation from "@/opensource/components/animations/HomeBotAnimation"
 import { Flex } from "antd"
 import { createStyles } from "antd-style"

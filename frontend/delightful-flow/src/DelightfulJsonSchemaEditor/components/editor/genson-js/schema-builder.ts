@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars,@typescript-eslint/no-use-before-define */
 // copy from https://github.com/aspecto-io/genson-js
-import { FormItemType } from '@/MagicExpressionWidget/types';
+import { FormItemType } from '@/DelightfulExpressionWidget/types';
 import { Schema, SchemaGenOptions } from './types';
 
 // eslint-disable-next-line

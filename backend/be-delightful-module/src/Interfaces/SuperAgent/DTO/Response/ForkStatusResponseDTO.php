@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Response;
+namespace Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Response;
 
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ProjectForkEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ProjectForkEntity;
 
 /**
  * Fork status response DTO.

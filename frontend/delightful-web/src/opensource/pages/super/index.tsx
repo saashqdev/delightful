@@ -1,8 +1,8 @@
 import GlobalErrorBoundary from "@/opensource/components/fallback/GlobalErrorBoundary"
 import AuthenticationProvider from "@/opensource/providers/AuthenticationProvider"
 import GlobalChatProvider from "@/opensource/providers/ChatProvider"
-import SuperMagic from "@/opensource/pages/superMagic"
-import { reportErrorLog } from "@/opensource/pages/superMagic/utils/api"
+import SuperDelightful from "@/opensource/pages/superDelightful"
+import { reportErrorLog } from "@/opensource/pages/superDelightful/utils/api"
 import Logger from "@/utils/log/Logger"
 import { createStyles } from "antd-style"
 import { isEmpty } from "lodash-es"
@@ -91,7 +91,7 @@ function Super() {
 			<GlobalErrorBoundary>
 				<AuthenticationProvider>
 					<GlobalChatProvider>
-						<SuperMagic />
+						<SuperDelightful />
 					</GlobalChatProvider>
 				</AuthenticationProvider>
 			</GlobalErrorBoundary>

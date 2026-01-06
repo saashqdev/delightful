@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Authentication\Facade;
 
-use App\Application\Chat\Service\MagicUserContactAppService;
+use App\Application\Chat\Service\DelightfulUserContactAppService;
 use App\Domain\Authentication\DTO\LoginCheckDTO;
 use App\Infrastructure\Core\Contract\Session\SessionInterface;
 use Delightful\ApiResponse\Annotation\ApiResponse;
@@ -22,7 +22,7 @@ class AuthenticationApi
     protected Redis $redis;
 
     #[Inject]
-    protected MagicUserContactAppService $userAppService;
+    protected DelightfulUserContactAppService $userAppService;
 
     #[Inject]
     protected SessionInterface $sessionInterface;

@@ -1,5 +1,5 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicRichEditor from "@/opensource/components/base/MagicRichEditor"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulRichEditor from "@/opensource/components/base/DelightfulRichEditor"
 import type { ExtraSectionComponentProps } from "@/opensource/pages/chatNew/types"
 import { useMemoizedFn } from "ahooks"
 import { Drawer, Flex } from "antd"
@@ -71,17 +71,17 @@ export default function NewGroupNotice({ onClose: onCloseInProps }: ExtraSection
 			}}
 		>
 			<Flex vertical gap={10} className={styles.container}>
-				<MagicRichEditor
+				<DelightfulRichEditor
 					className={styles.editor}
 					placeholder={t("chat.groupNotice.placeholder")}
 				/>
 				<Flex justify="end" align="center" gap={10} className={styles.footer}>
-					<MagicButton size="large" type="default" onClick={onClose}>
+					<DelightfulButton size="large" type="default" onClick={onClose}>
 						取消
-					</MagicButton>
-					<MagicButton size="large" type="primary" onClick={onClose}>
+					</DelightfulButton>
+					<DelightfulButton size="large" type="primary" onClick={onClose}>
 						下一步
-					</MagicButton>
+					</DelightfulButton>
 				</Flex>
 			</Flex>
 		</Drawer>

@@ -2,7 +2,7 @@ import { nanoid } from "nanoid"
 import type { BridgeEvent, WebViewJavascriptBridge } from "./types"
 import eventBus from "./eventBus"
 
-function MagicJSBridge(callback: (bridge: WebViewJavascriptBridge) => void) {
+function DelightfulJSBridge(callback: (bridge: WebViewJavascriptBridge) => void) {
 	try {
 		if (window.WebViewJavascriptBridge) {
 			console.warn("WebViewJavascriptBridge is already loaded")
@@ -22,7 +22,7 @@ function MagicJSBridge(callback: (bridge: WebViewJavascriptBridge) => void) {
 	}
 }
 
-MagicJSBridge((bridge) => {
+DelightfulJSBridge((bridge) => {
 	bridge.init(() => {
 		console.log("bridge init")
 	})
@@ -62,7 +62,7 @@ window.bridge = {
 			nativeRequest: data ?? {},
 		}
 
-		MagicJSBridge((bridge) => {
+		DelightfulJSBridge((bridge) => {
 			if (typeof bridge === "undefined") {
 				return
 			}

@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next"
 import { Form, Input, message } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { useForm } from "antd/es/form/Form"
 import { mutate } from "swr"
 import { RequestUrl } from "@/opensource/apis/constant"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import type { Knowledge } from "@/types/knowledge"
 import { useEffect, useMemo } from "react"
 import { IconEdit } from "@tabler/icons-react"
@@ -104,11 +104,11 @@ function UpdateKnowledge({ knowledge, updateKnowledge, initKnowledgeList }: Upda
 			{knowledge?.id ? (
 				<IconEdit className={styles.iconEdit} onClick={setTrue} />
 			) : (
-				<MagicButton type="dashed" onClick={setTrue}>
+				<DelightfulButton type="dashed" onClick={setTrue}>
 					{title}
-				</MagicButton>
+				</DelightfulButton>
 			)}
-			<MagicModal
+			<DelightfulModal
 				title={title}
 				open={open}
 				onOk={handleOk}
@@ -144,7 +144,7 @@ function UpdateKnowledge({ knowledge, updateKnowledge, initKnowledgeList }: Upda
 						/>
 					</Form.Item>
 				</Form>
-			</MagicModal>
+			</DelightfulModal>
 		</>
 	)
 }

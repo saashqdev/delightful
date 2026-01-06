@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconAlertCircle, IconDots, IconPlus } from "@tabler/icons-react"
 import type { InputRef, MenuProps } from "antd"
 import { Button, Dropdown, Input, Space } from "antd"
@@ -267,7 +267,7 @@ const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
 									onClick={(e) => e.stopPropagation()}
 									className={styles.moreIconButton}
 								>
-									<MagicIcon
+									<DelightfulIcon
 										size={18}
 										component={IconDots}
 										stroke={2}
@@ -279,7 +279,7 @@ const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
 					)
 				})}
 				<div className={styles.addWorkspaceButton} onClick={onStartAddWorkspace}>
-					<MagicIcon size={18} component={IconPlus} stroke={2} />
+					<DelightfulIcon size={18} component={IconPlus} stroke={2} />
 				</div>
 			</Space>
 			<div className={styles.tips}>

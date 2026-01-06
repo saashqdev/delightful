@@ -9,10 +9,10 @@ namespace App\Application\Flow\ExecuteManager\Crontab;
 
 use App\Application\Flow\ExecuteManager\Archive\FlowExecutorArchiveCloud;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
-use App\Application\Flow\ExecuteManager\MagicFlowExecutor;
-use App\Domain\Flow\Entity\MagicFlowExecuteLogEntity;
+use App\Application\Flow\ExecuteManager\DelightfulFlowExecutor;
+use App\Domain\Flow\Entity\DelightfulFlowExecuteLogEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Service\MagicFlowExecuteLogDomainService;
+use App\Domain\Flow\Service\DelightfulFlowExecuteLogDomainService;
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Infrastructure\Util\Locker\LockerInterface;
 use Hyperf\Coroutine\Parallel;
@@ -22,13 +22,13 @@ use Psr\Container\ContainerInterface;
 #[Crontab(rule: '* * * * *', name: 'FlowBreakpointRetryCrontab', singleton: true, mutexExpires: 60 * 5, onOneServer: true, callback: 'execute', memo: '流程断点重试定时任务', enable: true)]
 class FlowBreakpointRetryCrontab
 {
-    private MagicFlowExecuteLogDomainService $magicFlowExecuteLogDomainService;
+    private DelightfulFlowExecuteLogDomainService $magicFlowExecuteLogDomainService;
 
     private LockerInterface $locker;
 
     public function __construct(ContainerInterface $container)
     {
-        $this->magicFlowExecuteLogDomainService = $container->get(MagicFlowExecuteLogDomainService::class);
+        $this->magicFlowExecuteLogDomainService = $container->get(DelightfulFlowExecuteLogDomainService::class);
         $this->locker = $container->get(LockerInterface::class);
     }
 
@@ -59,7 +59,7 @@ class FlowBreakpointRetryCrontab
         }
     }
 
-    private function retry(MagicFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
+    private function retry(DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
     {
         $lockKey = "FlowBreakpointRetryCrontab-{$magicFlowExecuteLogEntity->getExecuteDataId()}";
         $lockOwner = 'FlowBreakpointRetryCrontab';
@@ -87,7 +87,7 @@ class FlowBreakpointRetryCrontab
             // 重置一些记录
             $executionData->rewind();
 
-            $executor = new MagicFlowExecutor($flowEntity, $executionData, lastMagicFlowExecuteLogEntity: $magicFlowExecuteLogEntity);
+            $executor = new DelightfulFlowExecutor($flowEntity, $executionData, lastDelightfulFlowExecuteLogEntity: $magicFlowExecuteLogEntity);
             $executor->execute();
         } finally {
             $this->locker->release($lockKey, $lockOwner);

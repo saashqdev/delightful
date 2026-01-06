@@ -1,13 +1,13 @@
 import { DotLottieWorkerReact } from "@lottiefiles/dotlottie-react"
 import type { ComponentProps } from "react"
 import { memo } from "react"
-import MagicSearchLoading from "./magic-search.json?raw"
+import DelightfulSearchLoading from "./magic-search.json?raw"
 
 interface SearchAnimationProps extends ComponentProps<typeof DotLottieWorkerReact> {
 	size: number
 }
 
-const url = URL.createObjectURL(new Blob([MagicSearchLoading], { type: "application/json" }))
+const url = URL.createObjectURL(new Blob([DelightfulSearchLoading], { type: "application/json" }))
 
 const SearchAnimation = memo(({ size, ...props }: SearchAnimationProps) => {
 	return (

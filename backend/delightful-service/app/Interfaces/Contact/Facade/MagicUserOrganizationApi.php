@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Contact\Facade;
 
-use App\Application\Contact\Service\MagicUserOrganizationAppService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Application\Contact\Service\DelightfulUserOrganizationAppService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\AbstractApi;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -20,13 +20,13 @@ use Hyperf\HttpServer\Contract\RequestInterface;
  * 用户当前组织管理API.
  */
 #[ApiResponse('low_code')]
-class MagicUserOrganizationApi extends AbstractApi
+class DelightfulUserOrganizationApi extends AbstractApi
 {
     #[Inject]
-    protected MagicUserOrganizationAppService $userOrganizationAppService;
+    protected DelightfulUserOrganizationAppService $userOrganizationAppService;
 
     #[Inject]
-    protected MagicUserDomainService $userDomainService;
+    protected DelightfulUserDomainService $userDomainService;
 
     /**
      * 获取用户当前组织代码
@@ -39,7 +39,7 @@ class MagicUserOrganizationApi extends AbstractApi
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
 
-        $magicId = $this->getMagicIdByAuthorization($authorization);
+        $magicId = $this->getDelightfulIdByAuthorization($authorization);
 
         // 获取当前用户的组织代码
         return $this->userOrganizationAppService->getCurrentOrganizationCode($magicId);
@@ -56,7 +56,7 @@ class MagicUserOrganizationApi extends AbstractApi
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
 
-        $magicId = $this->getMagicIdByAuthorization($authorization);
+        $magicId = $this->getDelightfulIdByAuthorization($authorization);
 
         // 从请求体获取组织代码
         $organizationCode = (string) $request->input('magic_organization_code', '');
@@ -81,13 +81,13 @@ class MagicUserOrganizationApi extends AbstractApi
         return $this->userOrganizationAppService->getOrganizationsByAuthorization($authorization)->toArray();
     }
 
-    private function getMagicIdByAuthorization(string $authorization): string
+    private function getDelightfulIdByAuthorization(string $authorization): string
     {
         $userDetails = $this->userDomainService->getUsersDetailByAccountFromAuthorization($authorization);
         if (empty($userDetails)) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
         // 同一账号下 magic_id 全局唯一，这里取第一个即可
-        return $userDetails[0]->getMagicId();
+        return $userDetails[0]->getDelightfulId();
     }
 }

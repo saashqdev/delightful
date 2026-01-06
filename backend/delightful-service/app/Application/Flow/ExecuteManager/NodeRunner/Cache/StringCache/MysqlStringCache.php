@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\ExecuteManager\NodeRunner\Cache\StringCache;
 
-use App\Domain\Flow\Entity\MagicFlowCacheEntity;
+use App\Domain\Flow\Entity\DelightfulFlowCacheEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Service\MagicFlowCacheDomainService;
+use App\Domain\Flow\Service\DelightfulFlowCacheDomainService;
 use Exception;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
@@ -22,7 +22,7 @@ class MysqlStringCache implements StringCacheInterface
     private LoggerInterface $logger;
 
     public function __construct(
-        private readonly MagicFlowCacheDomainService $magicFlowCacheDomainService,
+        private readonly DelightfulFlowCacheDomainService $magicFlowCacheDomainService,
         LoggerFactory $loggerFactory,
     ) {
         $this->logger = $loggerFactory->get('MysqlStringCache');
@@ -31,7 +31,7 @@ class MysqlStringCache implements StringCacheInterface
     public function set(FlowDataIsolation $dataIsolation, string $prefix, string $key, string $value, int $ttl = 7200): bool
     {
         try {
-            $entity = new MagicFlowCacheEntity();
+            $entity = new DelightfulFlowCacheEntity();
             $entity->setCachePrefix($prefix);
             $entity->setCacheKey($key);
             $entity->setCacheValue($value);

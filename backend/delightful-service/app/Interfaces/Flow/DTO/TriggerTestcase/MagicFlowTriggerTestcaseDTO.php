@@ -9,7 +9,7 @@ namespace App\Interfaces\Flow\DTO\TriggerTestcase;
 
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 
-class MagicFlowTriggerTestcaseDTO extends AbstractFlowDTO
+class DelightfulFlowTriggerTestcaseDTO extends AbstractFlowDTO
 {
     public string $name = '';
 

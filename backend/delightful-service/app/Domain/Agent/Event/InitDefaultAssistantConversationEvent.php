@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Event;
 
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 
 class InitDefaultAssistantConversationEvent
 {
     public function __construct(
-        public MagicUserEntity $userEntity,
+        public DelightfulUserEntity $userEntity,
         public ?array $defaultConversationAICodes = null,
     ) {
     }
@@ -28,12 +28,12 @@ class InitDefaultAssistantConversationEvent
         return $this;
     }
 
-    public function getUserEntity(): MagicUserEntity
+    public function getUserEntity(): DelightfulUserEntity
     {
         return $this->userEntity;
     }
 
-    public function setUserEntity(MagicUserEntity $userEntity): InitDefaultAssistantConversationEvent
+    public function setUserEntity(DelightfulUserEntity $userEntity): InitDefaultAssistantConversationEvent
     {
         $this->userEntity = $userEntity;
         return $this;

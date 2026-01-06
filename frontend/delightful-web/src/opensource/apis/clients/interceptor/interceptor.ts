@@ -76,7 +76,7 @@ export function generateInvalidOrgResInterceptor(service: Container) {
 		if (jsonResponse?.code === BusinessResponseCode.InvalidOrganization) {
 			service
 				.get<UserService>("userService")
-				.setMagicOrganizationCode(userStore.user.organizations?.[0]?.organization_code)
+				.setDelightfulOrganizationCode(userStore.user.organizations?.[0]?.organization_code)
 			window.location.reload()
 		}
 		return response

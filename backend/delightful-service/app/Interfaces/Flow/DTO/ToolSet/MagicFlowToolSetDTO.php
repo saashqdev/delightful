@@ -9,7 +9,7 @@ namespace App\Interfaces\Flow\DTO\ToolSet;
 
 use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 
-class MagicFlowToolSetDTO extends AbstractFlowDTO
+class DelightfulFlowToolSetDTO extends AbstractFlowDTO
 {
     /**
      * 工具集名称.

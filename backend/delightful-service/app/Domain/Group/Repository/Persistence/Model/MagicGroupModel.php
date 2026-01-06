@@ -9,7 +9,7 @@ namespace App\Domain\Group\Repository\Persistence\Model;
 
 use Hyperf\DbConnection\Model\Model;
 
-class MagicGroupModel extends Model
+class DelightfulGroupModel extends Model
 {
     /**
      * The table associated with the model.

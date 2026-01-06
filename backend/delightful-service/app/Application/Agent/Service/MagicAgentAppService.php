@@ -7,29 +7,29 @@ declare(strict_types=1);
 
 namespace App\Application\Agent\Service;
 
-use App\Application\Chat\Service\MagicUserContactAppService;
-use App\Application\Flow\Service\MagicFlowAIModelAppService;
-use App\Domain\Agent\Constant\MagicAgentQueryStatus;
-use App\Domain\Agent\Constant\MagicAgentReleaseStatus;
-use App\Domain\Agent\Constant\MagicAgentVersionStatus;
-use App\Domain\Agent\DTO\MagicAgentDTO;
-use App\Domain\Agent\DTO\MagicAgentVersionDTO;
-use App\Domain\Agent\Entity\MagicAgentEntity;
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
-use App\Domain\Agent\Entity\MagicBotThirdPlatformChatEntity;
-use App\Domain\Agent\Entity\ValueObject\Query\MagicAgentQuery;
+use App\Application\Chat\Service\DelightfulUserContactAppService;
+use App\Application\Flow\Service\DelightfulFlowAIModelAppService;
+use App\Domain\Agent\Constant\DelightfulAgentQueryStatus;
+use App\Domain\Agent\Constant\DelightfulAgentReleaseStatus;
+use App\Domain\Agent\Constant\DelightfulAgentVersionStatus;
+use App\Domain\Agent\DTO\DelightfulAgentDTO;
+use App\Domain\Agent\DTO\DelightfulAgentVersionDTO;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
+use App\Domain\Agent\Entity\DelightfulBotThirdPlatformChatEntity;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulAgentQuery;
 use App\Domain\Agent\Entity\ValueObject\Visibility\User;
 use App\Domain\Agent\Entity\ValueObject\Visibility\VisibilityConfig;
 use App\Domain\Agent\Entity\ValueObject\Visibility\VisibilityType;
-use App\Domain\Agent\Factory\MagicAgentVersionFactory;
-use App\Domain\Agent\VO\MagicAgentVO;
-use App\Domain\Chat\Event\Agent\MagicAgentInstructEvent;
+use App\Domain\Agent\Factory\DelightfulAgentVersionFactory;
+use App\Domain\Agent\VO\DelightfulAgentVO;
+use App\Domain\Chat\Event\Agent\DelightfulAgentInstructEvent;
 use App\Domain\Contact\DTO\FriendQueryDTO;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation as ContactDataIsolation;
-use App\Domain\Flow\Entity\MagicFlowEntity;
-use App\Domain\Flow\Entity\MagicFlowVersionEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowVersionEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\Flow\Entity\ValueObject\Type;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\Operation;
@@ -39,9 +39,9 @@ use App\ErrorCode\AgentErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Infrastructure\Util\OfficialOrganizationUtil;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use App\Interfaces\Flow\Assembler\Flow\MagicFlowAssembler;
-use App\Interfaces\Flow\DTO\Flow\MagicFlowDTO;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use App\Interfaces\Flow\Assembler\Flow\DelightfulFlowAssembler;
+use App\Interfaces\Flow\DTO\Flow\DelightfulFlowDTO;
 use App\Interfaces\Kernel\Assembler\FileAssembler;
 use Delightful\AsyncEvent\AsyncEventUtil;
 use Delightful\CloudFile\Kernel\Struct\FileLink;
@@ -53,15 +53,15 @@ use Psr\Log\LoggerInterface;
 use Qbhy\HyperfAuth\Authenticatable;
 use Throwable;
 
-class MagicAgentAppService extends AbstractAppService
+class DelightfulAgentAppService extends AbstractAppService
 {
     protected LoggerInterface $logger;
 
     /**
-     * @param MagicUserAuthorization $authorization
-     * @return array{total: int, list: array<MagicAgentEntity>, avatars: array<FileLink>}
+     * @param DelightfulUserAuthorization $authorization
+     * @return array{total: int, list: array<DelightfulAgentEntity>, avatars: array<FileLink>}
      */
-    public function queries(Authenticatable $authorization, MagicAgentQuery $query, Page $page): array
+    public function queries(Authenticatable $authorization, DelightfulAgentQuery $query, Page $page): array
     {
         $permissionDataIsolation = new PermissionDataIsolation($authorization->getOrganizationCode(), $authorization->getId());
 
@@ -90,14 +90,14 @@ class MagicAgentAppService extends AbstractAppService
     // 创建/修改助理
     #[Transactional]
     /**
-     * @param MagicUserAuthorization $authorization
+     * @param DelightfulUserAuthorization $authorization
      */
-    public function saveAgent(Authenticatable $authorization, MagicAgentDTO $magicAgentDTO): MagicAgentEntity
+    public function saveAgent(Authenticatable $authorization, DelightfulAgentDTO $magicAgentDTO): DelightfulAgentEntity
     {
         $magicAgentEntity = $magicAgentDTO->toEntity();
         $magicAgentEntity->setAgentAvatar(FileAssembler::formatPath($magicAgentEntity->getAgentAvatar()));
         if (empty($magicAgentEntity->getId())) {
-            $magicFlowEntity = new MagicFlowEntity();
+            $magicFlowEntity = new DelightfulFlowEntity();
             $magicFlowEntity->setName($magicAgentEntity->getAgentName());
             $magicFlowEntity->setDescription($magicAgentEntity->getAgentDescription());
             $magicFlowEntity->setIcon($magicAgentEntity->getAgentAvatar());
@@ -108,7 +108,7 @@ class MagicAgentAppService extends AbstractAppService
             $magicFlowEntity = $this->magicFlowDomainService->createByAgent($flowDataIsolation, $magicFlowEntity);
 
             $magicAgentEntity->setFlowCode($magicFlowEntity->getCode());
-            $magicAgentEntity->setStatus(MagicAgentVersionStatus::ENTERPRISE_ENABLED->value);
+            $magicAgentEntity->setStatus(DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value);
         } else {
             // 修改得检查权限
             $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $magicAgentEntity->getId())->validate('edit', $magicAgentEntity->getId());
@@ -126,7 +126,7 @@ class MagicAgentAppService extends AbstractAppService
     // 删除助理
 
     /**
-     * @param MagicUserAuthorization $authorization
+     * @param DelightfulUserAuthorization $authorization
      */
     public function deleteAgentById(Authenticatable $authorization, string $id): bool
     {
@@ -136,17 +136,17 @@ class MagicAgentAppService extends AbstractAppService
 
     // 获取指定用户的助理
     #[Deprecated]
-    public function getAgentsByUserIdPage(string $userId, int $page, int $pageSize, string $agentName, MagicAgentQueryStatus $queryStatus): array
+    public function getAgentsByUserIdPage(string $userId, int $page, int $pageSize, string $agentName, DelightfulAgentQueryStatus $queryStatus): array
     {
-        $query = new MagicAgentQuery();
+        $query = new DelightfulAgentQuery();
         $query->setCreatedUid($userId);
         $query->setAgentName($agentName);
         $query->setOrder(['id' => 'desc']);
 
         // 设置版本状态过滤
-        if ($queryStatus === MagicAgentQueryStatus::PUBLISHED) {
+        if ($queryStatus === DelightfulAgentQueryStatus::PUBLISHED) {
             $query->setHasVersion(true);
-        } elseif ($queryStatus === MagicAgentQueryStatus::UNPUBLISHED) {
+        } elseif ($queryStatus === DelightfulAgentQueryStatus::UNPUBLISHED) {
             $query->setHasVersion(false);
         }
 
@@ -190,13 +190,13 @@ class MagicAgentAppService extends AbstractAppService
         ];
     }
 
-    public function getAgentById(string $agentVersionId, MagicUserAuthorization $authorization): MagicAgentVersionEntity
+    public function getAgentById(string $agentVersionId, DelightfulUserAuthorization $authorization): DelightfulAgentVersionEntity
     {
         try {
             // 首先尝试作为 agent_version_id 从已发布版本中获取
             $magicAgentVersionEntity = $this->magicAgentVersionDomainService->getAgentById($agentVersionId);
         } catch (Throwable $e) {
-            // 如果失败，从 magic_bots 表获取原始助理数据，并转换为 MagicAgentVersionEntity（版本号为 null）
+            // 如果失败，从 magic_bots 表获取原始助理数据，并转换为 DelightfulAgentVersionEntity（版本号为 null）
             try {
                 $magicAgentEntity = $this->magicAgentDomainService->getById($agentVersionId);
                 $magicAgentVersionEntity = $this->convertAgentToAgentVersion($magicAgentEntity);
@@ -217,7 +217,7 @@ class MagicAgentAppService extends AbstractAppService
     }
 
     // 获取发布版本的助理,对于用户的
-    public function getAgentVersionByIdForUser(string $agentVersionId, MagicUserAuthorization $authorization): MagicAgentVO
+    public function getAgentVersionByIdForUser(string $agentVersionId, DelightfulUserAuthorization $authorization): DelightfulAgentVO
     {
         $magicAgentVersionEntity = $this->magicAgentVersionDomainService->getAgentById($agentVersionId);
         $organizationCode = $authorization->getOrganizationCode();
@@ -234,32 +234,32 @@ class MagicAgentAppService extends AbstractAppService
         $magicAgentEntity = $this->magicAgentDomainService->getById($magicAgentVersionEntity->getAgentId());
 
         $magicAgentEntity->setInstructs($this->processInstructionsImages($magicAgentEntity->getInstructs(), $magicAgentEntity->getOrganizationCode()));
-        if ($magicAgentEntity->getStatus() === MagicAgentVersionStatus::ENTERPRISE_DISABLED->value) {
+        if ($magicAgentEntity->getStatus() === DelightfulAgentVersionStatus::ENTERPRISE_DISABLED->value) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_does_not_exist');
         }
         $fileLink = $this->fileDomainService->getLink($organizationCode, $magicAgentEntity->getAgentAvatar());
         if ($fileLink !== null) {
             $magicAgentEntity->setAgentAvatar($fileLink->getUrl());
         }
-        $magicAgentVO = new MagicAgentVO();
+        $magicAgentVO = new DelightfulAgentVO();
         $magicAgentVO->setAgentEntity($magicAgentEntity);
         $magicAgentVO->setAgentVersionEntity($magicAgentVersionEntity);
         $createdUid = $magicAgentVersionEntity->getCreatedUid();
         $magicUserEntity = $this->magicUserDomainService->getUserById($createdUid);
         if ($magicUserEntity !== null) {
-            $userDto = new MagicUserEntity();
+            $userDto = new DelightfulUserEntity();
             $userDto->setAvatarUrl($magicUserEntity->getAvatarUrl());
             $userDto->setNickname($magicUserEntity->getNickname());
             $userDto->setUserId($magicUserEntity->getUserId());
-            $magicAgentVO->setMagicUserEntity($userDto);
+            $magicAgentVO->setDelightfulUserEntity($userDto);
         }
         // 根据工作流id获取工作流信息
         $flowDataIsolation = new FlowDataIsolation($authorization->getOrganizationCode(), $authorization->getId());
         $magicFlowVersionEntity = $this->magicFlowVersionDomainService->show($flowDataIsolation, $magicAgentVersionEntity->getFlowCode(), $magicAgentVersionEntity->getFlowVersion());
-        $magicFlowEntity = $magicFlowVersionEntity->getMagicFlow();
+        $magicFlowEntity = $magicFlowVersionEntity->getDelightfulFlow();
 
         $magicFlowEntity->setUserOperation($magicAgentEntity->getUserOperation());
-        $magicAgentVO->setMagicFlowEntity($magicFlowEntity);
+        $magicAgentVO->setDelightfulFlowEntity($magicFlowEntity);
         $friendQueryDTO = new FriendQueryDTO();
         $friendQueryDTO->setAiCodes([$magicAgentVersionEntity->getFlowCode()]);
 
@@ -281,11 +281,11 @@ class MagicAgentAppService extends AbstractAppService
 
     /**
      * 获取企业内部的助理.
-     * @param MagicUserAuthorization $authorization
+     * @param DelightfulUserAuthorization $authorization
      */
     public function getAgentsByOrganizationPage(Authenticatable $authorization, int $page, int $pageSize, string $agentName): array
     {
-        if (! $authorization instanceof MagicUserAuthorization) {
+        if (! $authorization instanceof DelightfulUserAuthorization) {
             return [];
         }
 
@@ -305,7 +305,7 @@ class MagicAgentAppService extends AbstractAppService
         }
 
         // 转换为数组格式
-        $agentVersions = MagicAgentVersionFactory::toArrays($visibleAgentVersions);
+        $agentVersions = DelightfulAgentVersionFactory::toArrays($visibleAgentVersions);
 
         // 获取助理总数
         $totalAgentsCount = $this->getTotalAgentsCount($organizationCode, $agentName);
@@ -327,12 +327,12 @@ class MagicAgentAppService extends AbstractAppService
     /**
      * 获取聊天模式可用助理列表（全量数据，不分页）.
      * @param Authenticatable $authorization 用户授权
-     * @param MagicAgentQuery $query 查询条件
+     * @param DelightfulAgentQuery $query 查询条件
      * @return array 助理列表及会话ID
      */
-    public function getChatModeAvailableAgents(Authenticatable $authorization, MagicAgentQuery $query): array
+    public function getChatModeAvailableAgents(Authenticatable $authorization, DelightfulAgentQuery $query): array
     {
-        if (! $authorization instanceof MagicUserAuthorization) {
+        if (! $authorization instanceof DelightfulUserAuthorization) {
             return ['total' => 0, 'list' => []];
         }
 
@@ -348,7 +348,7 @@ class MagicAgentAppService extends AbstractAppService
 
         // 获取全量助理实体
         $totalCount = $fullData['total'];
-        /** @var MagicAgentEntity[] $agentEntities */
+        /** @var DelightfulAgentEntity[] $agentEntities */
         $agentEntities = $fullData['list'];
 
         // 获取助理会话映射
@@ -408,10 +408,10 @@ class MagicAgentAppService extends AbstractAppService
     // 发布助理版本
 
     /**
-     * @param null|MagicBotThirdPlatformChatEntity[] $thirdPlatformList
+     * @param null|DelightfulBotThirdPlatformChatEntity[] $thirdPlatformList
      */
     #[Transactional]
-    public function releaseAgentVersion(Authenticatable $authorization, MagicAgentVersionDTO $agentVersionDTO, ?MagicFlowEntity $publishMagicFlowEntity = null, ?array $thirdPlatformList = null): array
+    public function releaseAgentVersion(Authenticatable $authorization, DelightfulAgentVersionDTO $agentVersionDTO, ?DelightfulFlowEntity $publishDelightfulFlowEntity = null, ?array $thirdPlatformList = null): array
     {
         $key = 'agent:release:' . $agentVersionDTO->getAgentId();
         $userId = $authorization->getId();
@@ -427,7 +427,7 @@ class MagicAgentAppService extends AbstractAppService
         $agentVersionDTO->check();
 
         // 只有发布到企业才把自己给添加
-        if ($agentVersionDTO->getReleaseScope() === MagicAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
+        if ($agentVersionDTO->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
             $visibilityConfig = $agentVersionDTO->getVisibilityConfig();
             if (! $visibilityConfig) {
                 $visibilityConfig = new VisibilityConfig();
@@ -446,23 +446,23 @@ class MagicAgentAppService extends AbstractAppService
         $isAddFriend = $agent->getAgentVersionId() === null;
 
         // 如果助理状态是禁用则不可发布
-        if ($agent->getStatus() === MagicAgentVersionStatus::ENTERPRISE_DISABLED->value) {
+        if ($agent->getStatus() === DelightfulAgentVersionStatus::ENTERPRISE_DISABLED->value) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_status_disabled_cannot_publish');
         }
         $magicAgentVersionEntity = $this->buildAgentVersion($agent, $agentVersionDTO);
 
         // 发布最新连接流
         $flowDataIsolation = $this->createFlowDataIsolation($authorization);
-        if ($publishMagicFlowEntity && ! $publishMagicFlowEntity->shouldCreate()) {
-            $publishMagicFlowEntity->setCode($agent->getFlowCode());
-            $magicFlow = $this->magicFlowDomainService->getByCode($flowDataIsolation, $publishMagicFlowEntity->getCode());
+        if ($publishDelightfulFlowEntity && ! $publishDelightfulFlowEntity->shouldCreate()) {
+            $publishDelightfulFlowEntity->setCode($agent->getFlowCode());
+            $magicFlow = $this->magicFlowDomainService->getByCode($flowDataIsolation, $publishDelightfulFlowEntity->getCode());
             if (! $magicFlow) {
                 ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.not_configured_workflow');
             }
-            $magicFlowVersionEntity = new MagicFlowVersionEntity();
+            $magicFlowVersionEntity = new DelightfulFlowVersionEntity();
             $magicFlowVersionEntity->setName($magicAgentVersionEntity->getVersionNumber());
             $magicFlowVersionEntity->setFlowCode($magicFlow->getCode());
-            $magicFlowVersionEntity->setMagicFlow($publishMagicFlowEntity);
+            $magicFlowVersionEntity->setDelightfulFlow($publishDelightfulFlowEntity);
             $magicFlowVersionEntity = $this->magicFlowVersionDomainService->publish($flowDataIsolation, $magicFlow, $magicFlowVersionEntity);
         } else {
             $magicFlowVersionEntity = $this->magicFlowVersionDomainService->getLastVersion($flowDataIsolation, $magicAgentVersionEntity->getFlowCode());
@@ -476,7 +476,7 @@ class MagicAgentAppService extends AbstractAppService
         $result = $this->magicAgentVersionDomainService->releaseAgentVersion($magicAgentVersionEntity);
 
         // 如果发布的是个人，那么不能操作第三方助理
-        if ($magicAgentVersionEntity->getReleaseScope() === MagicAgentReleaseStatus::PERSONAL_USE->value) {
+        if ($magicAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PERSONAL_USE->value) {
             $thirdPlatformList = null;
         }
         // 同步第三方助理
@@ -497,7 +497,7 @@ class MagicAgentAppService extends AbstractAppService
     // 查询助理的版本记录
 
     /**
-     * @param MagicUserAuthorization $authorization
+     * @param DelightfulUserAuthorization $authorization
      */
     public function getReleaseAgentVersions(Authenticatable $authorization, string $agentId): array
     {
@@ -507,7 +507,7 @@ class MagicAgentAppService extends AbstractAppService
         if (empty($releaseAgentVersions)) {
             return $releaseAgentVersions;
         }
-        $releaseAgentVersions = MagicAgentVersionFactory::toArrays($releaseAgentVersions);
+        $releaseAgentVersions = DelightfulAgentVersionFactory::toArrays($releaseAgentVersions);
         $creatorUids = array_unique(array_column($releaseAgentVersions, 'created_uid'));
         $dataIsolation = ContactDataIsolation::create($authorization->getOrganizationCode(), $authorization->getId());
         $creators = $this->magicUserDomainService->getUserByIds($creatorUids, $dataIsolation);
@@ -536,7 +536,7 @@ class MagicAgentAppService extends AbstractAppService
     // 获取助理最新版本号
 
     /**
-     * @param MagicUserAuthorization $authorization
+     * @param DelightfulUserAuthorization $authorization
      */
     public function getAgentMaxVersion(Authenticatable $authorization, string $agentId): string
     {
@@ -545,9 +545,9 @@ class MagicAgentAppService extends AbstractAppService
     }
 
     /**
-     * @param MagicUserAuthorization $authorization
+     * @param DelightfulUserAuthorization $authorization
      */
-    public function updateAgentStatus(Authenticatable $authorization, string $agentId, MagicAgentVersionStatus $status): void
+    public function updateAgentStatus(Authenticatable $authorization, string $agentId, DelightfulAgentVersionStatus $status): void
     {
         $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $agentId)->validate('w', $agentId);
 
@@ -556,14 +556,14 @@ class MagicAgentAppService extends AbstractAppService
     }
 
     /**
-     * @param MagicUserAuthorization $authorization
+     * @param DelightfulUserAuthorization $authorization
      */
     public function updateAgentEnterpriseStatus(Authenticatable $authorization, string $agentId, int $status, string $userId): void
     {
         $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $agentId)->validate('w', $agentId);
 
         // 校验
-        if ($status !== MagicAgentVersionStatus::ENTERPRISE_PUBLISHED->value && $status !== MagicAgentVersionStatus::ENTERPRISE_UNPUBLISHED->value) {
+        if ($status !== DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value && $status !== DelightfulAgentVersionStatus::ENTERPRISE_UNPUBLISHED->value) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.status_can_only_be_published_or_unpublished');
         }
         // 获取助理
@@ -582,7 +582,7 @@ class MagicAgentAppService extends AbstractAppService
         $magicAgentVersionEntity = $this->magicAgentVersionDomainService->getById($magicAgentEntity->getAgentVersionId());
 
         // 校验状态是否允许被修改: APPROVAL_PASSED
-        if ($magicAgentVersionEntity->getApprovalStatus() !== MagicAgentVersionStatus::APPROVAL_PASSED->value) {
+        if ($magicAgentVersionEntity->getApprovalStatus() !== DelightfulAgentVersionStatus::APPROVAL_PASSED->value) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.approval_not_passed_cannot_modify_status');
         }
 
@@ -591,9 +591,9 @@ class MagicAgentAppService extends AbstractAppService
     }
 
     /**
-     * @param MagicUserAuthorization $authenticatable
+     * @param DelightfulUserAuthorization $authenticatable
      */
-    public function getAgentDetail(string $agentId, Authenticatable $authenticatable): MagicAgentVO
+    public function getAgentDetail(string $agentId, Authenticatable $authenticatable): DelightfulAgentVO
     {
         $flowDataIsolation = new FlowDataIsolation($authenticatable->getOrganizationCode(), $authenticatable->getId());
         $userId = $authenticatable->getId();
@@ -607,7 +607,7 @@ class MagicAgentAppService extends AbstractAppService
         );
         $agentOperation->validate('read', $agentId);
 
-        $magicAgentVO = new MagicAgentVO();
+        $magicAgentVO = new DelightfulAgentVO();
         // 获取助理信息
         $magicAgentEntity = $this->magicAgentDomainService->getById($agentId);
 
@@ -630,7 +630,7 @@ class MagicAgentAppService extends AbstractAppService
 
             $magicAgentVO->setAgentVersionEntity($magicAgentVersionEntity);
             $magicFlowVersionEntity = $this->magicFlowVersionDomainService->show($flowDataIsolation, $magicAgentVersionEntity->getFlowCode(), $magicAgentVersionEntity->getFlowVersion());
-            $magicFlowEntity = $magicFlowVersionEntity->getMagicFlow();
+            $magicFlowEntity = $magicFlowVersionEntity->getDelightfulFlow();
 
             // 只有发布了才会有状态
             $friendQueryDTO = new FriendQueryDTO();
@@ -650,15 +650,15 @@ class MagicAgentAppService extends AbstractAppService
         }
 
         $magicFlowEntity->setUserOperation($magicAgentEntity->getUserOperation());
-        $magicAgentVO->setMagicFlowEntity($magicFlowEntity);
+        $magicAgentVO->setDelightfulFlowEntity($magicFlowEntity);
         $createdUid = $magicAgentEntity->getCreatedUid();
         $magicUserEntity = $this->magicUserDomainService->getUserById($createdUid);
         if ($magicUserEntity) {
-            $userDto = new MagicUserEntity();
+            $userDto = new DelightfulUserEntity();
             $userDto->setAvatarUrl($magicUserEntity->getAvatarUrl());
             $userDto->setNickname($magicUserEntity->getNickname());
             $userDto->setUserId($magicUserEntity->getUserId());
-            $magicAgentVO->setMagicUserEntity($userDto);
+            $magicAgentVO->setDelightfulUserEntity($userDto);
         }
 
         if ($magicAgentVO->getAgentVersionEntity()) {
@@ -668,7 +668,7 @@ class MagicAgentAppService extends AbstractAppService
     }
 
     /**
-     * @param MagicUserAuthorization $authenticatable
+     * @param DelightfulUserAuthorization $authenticatable
      */
     public function isUpdated(Authenticatable $authenticatable, string $agentId): bool
     {
@@ -712,14 +712,14 @@ class MagicAgentAppService extends AbstractAppService
         return $oldInstruct !== $newInstruct;
     }
 
-    public function getDetailByUserId(string $userId): ?MagicAgentVersionEntity
+    public function getDetailByUserId(string $userId): ?DelightfulAgentVersionEntity
     {
         $magicUserEntity = $this->magicUserDomainService->getUserById($userId);
         if ($magicUserEntity === null) {
             throw new InvalidArgumentException('user is empty');
         }
-        $magicId = $magicUserEntity->getMagicId();
-        $accountEntity = $this->magicAccountDomainService->getAccountInfoByMagicId($magicId);
+        $magicId = $magicUserEntity->getDelightfulId();
+        $accountEntity = $this->magicAccountDomainService->getAccountInfoByDelightfulId($magicId);
         if ($accountEntity === null) {
             throw new InvalidArgumentException('account is empty');
         }
@@ -731,7 +731,7 @@ class MagicAgentAppService extends AbstractAppService
     /**
      * 同步默认助理会话.
      */
-    public function initDefaultAssistantConversation(MagicUserEntity $userEntity, ?array $defaultConversationAICodes = null): void
+    public function initDefaultAssistantConversation(DelightfulUserEntity $userEntity, ?array $defaultConversationAICodes = null): void
     {
         $dataIsolation = DataIsolation::create($userEntity->getOrganizationCode(), $userEntity->getUserId());
         $defaultConversationAICodes = $defaultConversationAICodes ?? $this->magicAgentDomainService->getDefaultConversationAICodes();
@@ -751,9 +751,9 @@ class MagicAgentAppService extends AbstractAppService
                     $friendId = $aiUserEntity->getUserId();
                     $this->magicUserDomainService->addFriend($dataIsolation, $friendId);
                     // 发送添加好友控制消息
-                    $friendUserEntity = new MagicUserEntity();
+                    $friendUserEntity = new DelightfulUserEntity();
                     $friendUserEntity->setUserId($friendId);
-                    di(MagicUserContactAppService::class)->sendAddFriendControlMessage($dataIsolation, $friendUserEntity);
+                    di(DelightfulUserContactAppService::class)->sendAddFriendControlMessage($dataIsolation, $friendUserEntity);
                 });
                 $this->logger->info("初始化助理会话成功，aiCode: {$aiCode}, 名称: {$agentName}");
             } catch (Throwable $e) {
@@ -764,7 +764,7 @@ class MagicAgentAppService extends AbstractAppService
         }
     }
 
-    public function saveInstruct(MagicUserAuthorization $authorization, string $agentId, array $instructs): array
+    public function saveInstruct(DelightfulUserAuthorization $authorization, string $agentId, array $instructs): array
     {
         // 助理是否有权限
         $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $agentId)->validate('w', $agentId);
@@ -786,9 +786,9 @@ class MagicAgentAppService extends AbstractAppService
      * 获取可见性配置中成员和部门的详细信息.
      *
      * @param null|VisibilityConfig $visibilityConfig 可见性配置
-     * @param MagicUserAuthorization $authorization 用户授权信息
+     * @param DelightfulUserAuthorization $authorization 用户授权信息
      */
-    public function setVisibilityConfigDetails(?VisibilityConfig $visibilityConfig, MagicUserAuthorization $authorization)
+    public function setVisibilityConfigDetails(?VisibilityConfig $visibilityConfig, DelightfulUserAuthorization $authorization)
     {
         if (! $visibilityConfig) {
             return;
@@ -845,7 +845,7 @@ class MagicAgentAppService extends AbstractAppService
         }
     }
 
-    public function initAgents(MagicUserAuthorization $authenticatable): void
+    public function initAgents(DelightfulUserAuthorization $authenticatable): void
     {
         $orgCode = $authenticatable->getOrganizationCode();
         $userId = $authenticatable->getId();
@@ -873,12 +873,12 @@ class MagicAgentAppService extends AbstractAppService
     /**
      * 为新注册的组织创建人初始化一个Chat.
      *
-     * @param MagicUserAuthorization $authorization 用户授权信息
+     * @param DelightfulUserAuthorization $authorization 用户授权信息
      */
     #[Transactional]
     public function initChatAgent(Authenticatable $authorization): void
     {
-        $service = di(MagicFlowAIModelAppService::class);
+        $service = di(DelightfulFlowAIModelAppService::class);
         $models = $service->getEnabled($authorization);
         $modelName = '';
         if (! empty($models['list'])) {
@@ -901,12 +901,12 @@ class MagicAgentAppService extends AbstractAppService
     /**
      * 为新注册的组织创建人初始化一个文生图Agent.
      *
-     * @param MagicUserAuthorization $authorization 用户授权信息
+     * @param DelightfulUserAuthorization $authorization 用户授权信息
      */
     #[Transactional]
     public function initImageGenerationAgent(Authenticatable $authorization): void
     {
-        $service = di(MagicFlowAIModelAppService::class);
+        $service = di(DelightfulFlowAIModelAppService::class);
         $models = $service->getEnabled($authorization);
         $modelName = '';
         if (! empty($models['list'])) {
@@ -930,12 +930,12 @@ class MagicAgentAppService extends AbstractAppService
     /**
      * 为新注册的组织创建人初始化一个文档解析Agent.
      *
-     * @param MagicUserAuthorization $authorization 用户授权信息
+     * @param DelightfulUserAuthorization $authorization 用户授权信息
      */
     #[Transactional]
     public function initDocAnalysisAgent(Authenticatable $authorization): void
     {
-        $service = di(MagicFlowAIModelAppService::class);
+        $service = di(DelightfulFlowAIModelAppService::class);
         $models = $service->getEnabled($authorization);
         $modelName = '';
         if (! empty($models['list'])) {
@@ -957,16 +957,16 @@ class MagicAgentAppService extends AbstractAppService
     /**
      * 从配置文件初始化自定义Agent.
      *
-     * @param $authorization MagicUserAuthorization 用户授权信息
+     * @param $authorization DelightfulUserAuthorization 用户授权信息
      * @param array $config 包含Agent配置的数组
-     * @return MagicAgentEntity 创建的机器人实体
+     * @return DelightfulAgentEntity 创建的机器人实体
      * @throws Throwable 当配置无效或初始化失败时抛出异常
      */
     #[Transactional]
-    public function initAgentFromConfig(MagicUserAuthorization $authorization, array $config): MagicAgentEntity
+    public function initAgentFromConfig(DelightfulUserAuthorization $authorization, array $config): DelightfulAgentEntity
     {
         // 创建机器人
-        $magicAgentDTO = new MagicAgentDTO();
+        $magicAgentDTO = new DelightfulAgentDTO();
         $magicAgentDTO->setAgentName($config['agent_name']);
         $magicAgentDTO->setAgentDescription($config['agent_description'] ?? '');
         $magicAgentDTO->setAgentAvatar($config['agent_avatar'] ?? $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '');
@@ -978,16 +978,16 @@ class MagicAgentAppService extends AbstractAppService
             $this->magicAgentDomainService->updateInstruct($authorization->getOrganizationCode(), $magicAgentEntity->getId(), $config['instruct'], $authorization->getId());
         }
         // 创建Flow
-        $magicFLowDTO = new MagicFlowDTO($config['flow']);
-        $magicFlowAssembler = new MagicFlowAssembler();
-        $magicFlowDO = $magicFlowAssembler::createMagicFlowDO($magicFLowDTO);
+        $magicFLowDTO = new DelightfulFlowDTO($config['flow']);
+        $magicFlowAssembler = new DelightfulFlowAssembler();
+        $magicFlowDO = $magicFlowAssembler::createDelightfulFlowDO($magicFLowDTO);
 
         // 创建版本
-        $agentVersionDTO = new MagicAgentVersionDTO();
+        $agentVersionDTO = new DelightfulAgentVersionDTO();
         $agentVersionDTO->setAgentId($magicAgentEntity->getId());
         $agentVersionDTO->setVersionNumber('0.0.1');
         $agentVersionDTO->setVersionDescription('初始版本');
-        $agentVersionDTO->setReleaseScope(MagicAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value);
+        $agentVersionDTO->setReleaseScope(DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value);
         $agentVersionDTO->setCreatedUid($authorization->getId());
 
         $this->releaseAgentVersion($authorization, $agentVersionDTO, $magicFlowDO);
@@ -1154,7 +1154,7 @@ class MagicAgentAppService extends AbstractAppService
     /**
      * 处理助理头像和好友状态
      */
-    private function enrichAgentAvatarAndFriendStatus(array &$agentVersions, MagicUserAuthorization $authorization): void
+    private function enrichAgentAvatarAndFriendStatus(array &$agentVersions, DelightfulUserAuthorization $authorization): void
     {
         // 批量收集需要获取链接的文件路径和flow_code
         $avatarPaths = [];
@@ -1306,14 +1306,14 @@ class MagicAgentAppService extends AbstractAppService
         return $instructs;
     }
 
-    private function updateWithInstructConversation(MagicAgentVersionEntity $magicAgentVersionEntity): void
+    private function updateWithInstructConversation(DelightfulAgentVersionEntity $magicAgentVersionEntity): void
     {
-        AsyncEventUtil::dispatch(new MagicAgentInstructEvent($magicAgentVersionEntity));
+        AsyncEventUtil::dispatch(new DelightfulAgentInstructEvent($magicAgentVersionEntity));
     }
 
-    private function buildAgentVersion(MagicAgentEntity $agentEntity, MagicAgentVersionDTO $agentVersionDTO): MagicAgentVersionEntity
+    private function buildAgentVersion(DelightfulAgentEntity $agentEntity, DelightfulAgentVersionDTO $agentVersionDTO): DelightfulAgentVersionEntity
     {
-        $magicAgentVersionEntity = new MagicAgentVersionEntity();
+        $magicAgentVersionEntity = new DelightfulAgentVersionEntity();
 
         $magicAgentVersionEntity->setFlowCode($agentEntity->getFlowCode());
         $magicAgentVersionEntity->setAgentId($agentEntity->getId());
@@ -1378,11 +1378,11 @@ class MagicAgentAppService extends AbstractAppService
     /**
      * 获取助理会话映射.
      *
-     * @param MagicAgentEntity[] $agentEntities 助理实体数组
-     * @param MagicUserAuthorization $authorization 用户授权对象
+     * @param DelightfulAgentEntity[] $agentEntities 助理实体数组
+     * @param DelightfulUserAuthorization $authorization 用户授权对象
      * @return array 返回 [flowCodeToUserIdMap, conversationMap]
      */
-    private function getAgentConversationMapping(array $agentEntities, MagicUserAuthorization $authorization): array
+    private function getAgentConversationMapping(array $agentEntities, DelightfulUserAuthorization $authorization): array
     {
         // 3. 分离官方和非官方助理
         [$officialAgents, $userOrgAgents] = $this->separateOfficialAndUserAgents($agentEntities);
@@ -1432,11 +1432,11 @@ class MagicAgentAppService extends AbstractAppService
     /**
      * 批量获取助理头像URL.
      *
-     * @param MagicAgentEntity[] $agentEntities 助理实体数组
-     * @param MagicUserAuthorization $authorization 用户授权对象
+     * @param DelightfulAgentEntity[] $agentEntities 助理实体数组
+     * @param DelightfulUserAuthorization $authorization 用户授权对象
      * @return array 头像路径到URL的映射
      */
-    private function batchGetAvatarUrls(array $agentEntities, MagicUserAuthorization $authorization): array
+    private function batchGetAvatarUrls(array $agentEntities, DelightfulUserAuthorization $authorization): array
     {
         // 分离官方组织和用户组织的助理
         [$officialAgents, $userOrgAgents] = $this->separateOfficialAndUserAgents($agentEntities);
@@ -1477,15 +1477,15 @@ class MagicAgentAppService extends AbstractAppService
     }
 
     /**
-     * 将 MagicAgentEntity 转换为 MagicAgentVersionEntity.
+     * 将 DelightfulAgentEntity 转换为 DelightfulAgentVersionEntity.
      * 用于处理私人助理没有发布版本的情况.
      *
-     * @param MagicAgentEntity $agentEntity 助理实体
-     * @return MagicAgentVersionEntity 助理版本实体
+     * @param DelightfulAgentEntity $agentEntity 助理实体
+     * @return DelightfulAgentVersionEntity 助理版本实体
      */
-    private function convertAgentToAgentVersion(MagicAgentEntity $agentEntity): MagicAgentVersionEntity
+    private function convertAgentToAgentVersion(DelightfulAgentEntity $agentEntity): DelightfulAgentVersionEntity
     {
-        $magicAgentVersionEntity = new MagicAgentVersionEntity();
+        $magicAgentVersionEntity = new DelightfulAgentVersionEntity();
 
         // 设置基本信息
         $magicAgentVersionEntity->setFlowCode($agentEntity->getFlowCode());

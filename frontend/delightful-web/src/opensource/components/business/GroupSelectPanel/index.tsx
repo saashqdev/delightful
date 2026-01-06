@@ -1,5 +1,5 @@
-import MagicInfiniteScrollList from "@/opensource/components/MagicInfiniteScrollList"
-import type { MagicListItemData } from "@/opensource/components/MagicList/types"
+import DelightfulInfiniteScrollList from "@/opensource/components/DelightfulInfiniteScrollList"
+import type { DelightfulListItemData } from "@/opensource/components/DelightfulList/types"
 import { contactStore } from "@/opensource/stores/contact"
 import type { GroupConversationDetailWithConversationId } from "@/types/chat/conversation"
 import { StructureItemType } from "@/types/organization"
@@ -8,7 +8,7 @@ import { useMemo, useState, useEffect, useCallback } from "react"
 import type { OrganizationSelectItem } from "../MemberDepartmentSelectPanel/types"
 import { observer } from "mobx-react-lite"
 
-type GroupSelectItem = OrganizationSelectItem & MagicListItemData
+type GroupSelectItem = OrganizationSelectItem & DelightfulListItemData
 
 const itemsTransform = (item: GroupConversationDetailWithConversationId): GroupSelectItem => ({
 	...item,
@@ -59,7 +59,7 @@ const GroupSelectPanel = observer((props: GroupSelectPanelProps) => {
 	)
 
 	return (
-		<MagicInfiniteScrollList<GroupConversationDetailWithConversationId, GroupSelectItem>
+		<DelightfulInfiniteScrollList<GroupConversationDetailWithConversationId, GroupSelectItem>
 			data={data}
 			trigger={fetchData}
 			itemsTransform={itemsTransform}

@@ -10,7 +10,7 @@ import { useUpdateEffect } from "ahooks"
 import { useMemo } from "react"
 import useViewport from "../../common/hooks/useViewport"
 import { Interactions } from "../components/InteractionSelect"
-import { MagicFlow } from "@/DelightfulFlow/types/flow"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import { Edge } from "reactflow"
 import { NodeSchema } from "@/DelightfulFlow/register/node"
 import { useExternalConfig, useExternalRef } from "@/DelightfulFlow/context/ExternalContext/useExternal"
@@ -24,7 +24,7 @@ type UseFlowCommandProps = {
 	onZoomOut?: () => void
 	onEdgeTypeChange?: (type: string) => void
 	onLock?: () => void
-	onNodesDelete?: (_nodes: (Node & Partial<MagicFlow.Node>)[]) => void
+	onNodesDelete?: (_nodes: (Node & Partial<DelightfulFlow.Node>)[]) => void
 	onEdgesDelete?: (edges: Edge[]) => void
 	onAddItem?: (
 		event: any,

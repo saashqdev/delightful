@@ -1,4 +1,4 @@
-import MagicAva from "@/opensource/pages/superMagic/assets/svg/magicAva.svg"
+import DelightfulAva from "@/opensource/pages/superDelightful/assets/svg/magicAva.svg"
 import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ prefixCls }) => ({
@@ -88,7 +88,7 @@ export const useStyles = createStyles(({ prefixCls }) => ({
 		},
 	},
 	assistantAvatar: {
-		backgroundImage: `url(${MagicAva})`,
+		backgroundImage: `url(${DelightfulAva})`,
 		boxShadow: "none",
 		borderRadius: "50%",
 	},

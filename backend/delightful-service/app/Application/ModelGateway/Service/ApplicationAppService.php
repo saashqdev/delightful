@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Application\ModelGateway\Service;
 
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation as ContactDataIsolation;
 use App\Domain\ModelGateway\Entity\ApplicationEntity;
 use App\Domain\ModelGateway\Entity\ValueObject\ModelGatewayOfficialApp;
@@ -21,7 +21,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 class ApplicationAppService extends AbstractLLMAppService
 {
     /**
-     * @return array{llm_application: ApplicationEntity, users: array<string, MagicUserEntity>, icons: array<string, FileLink>}
+     * @return array{llm_application: ApplicationEntity, users: array<string, DelightfulUserEntity>, icons: array<string, FileLink>}
      */
     public function save(Authenticatable $authorization, ApplicationEntity $savingLLMApplicationEntity): array
     {
@@ -50,7 +50,7 @@ class ApplicationAppService extends AbstractLLMAppService
     }
 
     /**
-     * @return array{total: int, list: ApplicationEntity[], users: array<string, MagicUserEntity>, icons: array<string, FileLink>}
+     * @return array{total: int, list: ApplicationEntity[], users: array<string, DelightfulUserEntity>, icons: array<string, FileLink>}
      */
     public function queries(Authenticatable $authorization, ApplicationQuery $query, Page $page): array
     {
@@ -77,7 +77,7 @@ class ApplicationAppService extends AbstractLLMAppService
     }
 
     /**
-     * @return array{llm_application: ApplicationEntity, users: array<string, MagicUserEntity>, icons: array<string, FileLink>}
+     * @return array{llm_application: ApplicationEntity, users: array<string, DelightfulUserEntity>, icons: array<string, FileLink>}
      */
     public function show(Authenticatable $authorization, int $id): array
     {

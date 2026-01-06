@@ -9,7 +9,7 @@ namespace App\Application\MCP\Service;
 
 use App\Application\MCP\Utils\MCPExecutor\MCPExecutorFactory;
 use App\Application\MCP\Utils\MCPServerConfigUtil;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\MCP\Entity\MCPServerEntity;
 use App\Domain\MCP\Entity\MCPServerToolEntity;
 use App\Domain\MCP\Entity\ValueObject\MCPDataIsolation;
@@ -59,7 +59,7 @@ class MCPServerAppService extends AbstractMCPAppService
     }
 
     /**
-     * @return array{total: int, list: array<MCPServerEntity>, icons: array<string, FileLink>, users: array<string, MagicUserEntity>}
+     * @return array{total: int, list: array<MCPServerEntity>, icons: array<string, FileLink>, users: array<string, DelightfulUserEntity>}
      */
     public function queries(Authenticatable $authorization, MCPServerQuery $query, Page $page, bool $office = false): array
     {

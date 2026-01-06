@@ -1,14 +1,14 @@
-import type { MagicButtonProps } from "@/opensource/components/base/MagicButton"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicMarpit from "@/opensource/components/base/MagicMarpit"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import type { DelightfulButtonProps } from "@/opensource/components/base/DelightfulButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulMarpit from "@/opensource/components/base/DelightfulMarpit"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import IconWandColorful from "@/enhance/tabler/icons-react/icons/IconWandColorful"
 import { memo } from "react"
 import { useTranslation } from "react-i18next"
 import { useBoolean } from "ahooks"
 import { useStyles } from "./styles"
 
-const ExportPPTButton = memo(({ content, className, ...rest }: MagicButtonProps) => {
+const ExportPPTButton = memo(({ content, className, ...rest }: DelightfulButtonProps) => {
 	const { t } = useTranslation("interface")
 	const { styles, cx } = useStyles()
 
@@ -18,7 +18,7 @@ const ExportPPTButton = memo(({ content, className, ...rest }: MagicButtonProps)
 
 	return (
 		<>
-			<MagicButton
+			<DelightfulButton
 				type="text"
 				className={cx(styles.button, className)}
 				icon={<IconWandColorful />}
@@ -26,8 +26,8 @@ const ExportPPTButton = memo(({ content, className, ...rest }: MagicButtonProps)
 				{...rest}
 			>
 				<span className={styles.text}>{t("chat.markmap.generatePPT")}</span>
-			</MagicButton>
-			<MagicModal
+			</DelightfulButton>
+			<DelightfulModal
 				open={open}
 				width="fit-content"
 				destroyOnClose
@@ -39,8 +39,8 @@ const ExportPPTButton = memo(({ content, className, ...rest }: MagicButtonProps)
 				closable
 				footer={null}
 			>
-				<MagicMarpit content={content} />
-			</MagicModal>
+				<DelightfulMarpit content={content} />
+			</DelightfulModal>
 		</>
 	)
 })

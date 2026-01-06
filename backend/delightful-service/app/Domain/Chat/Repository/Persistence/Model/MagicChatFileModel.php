@@ -23,7 +23,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $updated_at
  * @property string $deleted_at
  */
-class MagicChatFileModel extends Model
+class DelightfulChatFileModel extends Model
 {
     /**
      * The table associated with the model.

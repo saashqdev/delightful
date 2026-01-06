@@ -8,16 +8,16 @@ import { IconMaximize, IconPhotoDown } from "@tabler/icons-react"
 import { downloadFile } from "@/utils/file"
 import type { IMarkmapOptions } from "markmap-common"
 import Divider from "@/opensource/components/other/Divider"
-import MagicButton from "../MagicButton"
-import MagicIcon from "../MagicIcon"
+import DelightfulButton from "../DelightfulButton"
+import DelightfulIcon from "../DelightfulIcon"
 import ExportPPTButton from "./components/ExportPPTButton"
 import { useStyles } from "./styles"
 import { exportMarkmapToPng } from "./utils"
 import type { MarkmapBaseRef } from "./components/MarkmapBase"
 import MarkmapBase from "./components/MarkmapBase"
-import MagicModal from "../MagicModal"
+import DelightfulModal from "../DelightfulModal"
 
-interface MagicMarkmapProps extends HTMLAttributes<SVGSVGElement> {
+interface DelightfulMarkmapProps extends HTMLAttributes<SVGSVGElement> {
 	showToolBar?: boolean
 	showTitle?: boolean
 	pptData?: string | null
@@ -32,7 +32,7 @@ const defaultOptions = (enable: boolean): Partial<IMarkmapOptions> => ({
 	zoom: enable,
 })
 
-const MagicMarkmap = memo(
+const DelightfulMarkmap = memo(
 	({
 		data,
 		pptData,
@@ -41,7 +41,7 @@ const MagicMarkmap = memo(
 		showToolBar = true,
 		fullScreen = false,
 		exitFullScreen,
-	}: MagicMarkmapProps) => {
+	}: DelightfulMarkmapProps) => {
 		const { styles, cx } = useStyles()
 		const { t } = useTranslation("interface")
 
@@ -97,12 +97,12 @@ const MagicMarkmap = memo(
 						<div className={styles.mindmapTitle}>
 							{showTitle ? t("chat.aggregate_ai_search_card.mind_map") : null}
 						</div>
-						<MagicButton
+						<DelightfulButton
 							className={styles.button}
 							type="text"
 							onClick={handleFullScreen}
 							icon={
-								<MagicIcon
+								<DelightfulIcon
 									color="currentColor"
 									component={IconMaximize}
 									size={20}
@@ -112,8 +112,8 @@ const MagicMarkmap = memo(
 							{fullScreen
 								? t("chat.markmap.exitFullScreen")
 								: t("chat.markmap.fullScreen")}
-						</MagicButton>
-						<MagicModal
+						</DelightfulButton>
+						<DelightfulModal
 							centered
 							width="90vw"
 							classNames={{
@@ -124,19 +124,19 @@ const MagicMarkmap = memo(
 							onCancel={() => setFullScreenOpen(false)}
 							footer={null}
 						>
-							<MagicMarkmap
+							<DelightfulMarkmap
 								data={data}
 								pptData={pptData}
 								fullScreen
 								showTitle={false}
 								exitFullScreen={() => setFullScreenOpen(false)}
 							/>
-						</MagicModal>
-						<MagicButton
+						</DelightfulModal>
+						<DelightfulButton
 							className={styles.button}
 							type="text"
 							icon={
-								<MagicIcon
+								<DelightfulIcon
 									color="currentColor"
 									component={IconPhotoDown}
 									size={20}
@@ -145,7 +145,7 @@ const MagicMarkmap = memo(
 							onClick={handleDownloadPicture}
 						>
 							{t("chat.markmap.downloadPicture")}
-						</MagicButton>
+						</DelightfulButton>
 						{!fullScreen ? (
 							<>
 								<Divider direction="vertical" />
@@ -175,4 +175,4 @@ const MagicMarkmap = memo(
 	},
 )
 
-export default MagicMarkmap
+export default DelightfulMarkmap

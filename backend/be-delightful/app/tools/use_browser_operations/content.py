@@ -19,8 +19,8 @@ from app.tools.summarize import Summarize
 from app.tools.use_browser_operations.base import BaseOperationParams, OperationGroup, operation
 from app.tools.visual_understanding import VisualUnderstanding, VisualUnderstandingParams
 from magic_use.magic_browser import (
-    MagicBrowser,
-    MagicBrowserError,
+    DelightfulBrowser,
+    DelightfulBrowserError,
     MarkdownSuccess,
     PageStateSuccess,
     ScreenshotSuccess,
@@ -107,7 +107,7 @@ class ContentOperations(OperationGroup):
             }
         ]
     )
-    async def read_as_markdown(self, browser: MagicBrowser, params: ReadAsMarkdownParams) -> ToolResult:
+    async def read_as_markdown(self, browser: DelightfulBrowser, params: ReadAsMarkdownParams) -> ToolResult:
         """Read page content as Markdown.
 
         Retrieves all content on the page, including text, links, and images. Images are returned as links only; to understand image content, combine `visual_query` with `scroll_to` to analyze the page progressively.
@@ -130,12 +130,12 @@ class ContentOperations(OperationGroup):
         if not page_id:
             return ToolResult(error="Unable to determine page ID for read_as_markdown")
 
-        # 2) call MagicBrowser.read_as_markdown
+        # 2) call DelightfulBrowser.read_as_markdown
         try:
             result = await browser.read_as_markdown(page_id=page_id, scope=params.scope)
 
             # 3) process returned result
-            if isinstance(result, MagicBrowserError):
+            if isinstance(result, DelightfulBrowserError):
                 return ToolResult(error=result.error)
             elif isinstance(result, MarkdownSuccess):
                 # Extract data
@@ -263,7 +263,7 @@ class ContentOperations(OperationGroup):
             }
         }]
     )
-    async def visual_query(self, browser: MagicBrowser, params: VisualQueryParams) -> ToolResult:
+    async def visual_query(self, browser: DelightfulBrowser, params: VisualQueryParams) -> ToolResult:
         """Use visual understanding to analyze the current viewport. Combine with `scroll_to` to inspect layout/style/elements across the page, or to interpret image-heavy pages. Visual analysis cannot extract link URLs; use `read_as_markdown` or `get_interactive_elements` if URLs are needed.
         """
         # 1) get and validate page
@@ -276,12 +276,12 @@ class ContentOperations(OperationGroup):
         logger.info(f"Starting visual_query: page={page_id}, query='{params.query}'")
 
         try:
-            # 2) Screenshot current viewport via MagicBrowser temp file
+            # 2) Screenshot current viewport via DelightfulBrowser temp file
             logger.info(f"Requesting screenshot for page {page_id} to run visual_query...")
             # Always use temp file for screenshot
             screenshot_result = await browser.take_screenshot(page_id=page_id, path=None, full_page=False)
 
-            if isinstance(screenshot_result, MagicBrowserError):
+            if isinstance(screenshot_result, DelightfulBrowserError):
                 logger.error(f"visual_query screenshot failed: {screenshot_result.error}")
                 return ToolResult(error=f"visual_query screenshot failed: {screenshot_result.error}")
             elif not isinstance(screenshot_result, ScreenshotSuccess):
@@ -289,7 +289,7 @@ class ContentOperations(OperationGroup):
                 return ToolResult(error="take_screenshot returned an unexpected result type")
 
             screenshot_path = screenshot_result.path
-            # Temp file managed by MagicBrowser; no need to track is_temp here
+            # Temp file managed by DelightfulBrowser; no need to track is_temp here
             logger.info(f"visual_query screenshot saved at: {screenshot_path}")
 
             # 3) Call visual understanding tool

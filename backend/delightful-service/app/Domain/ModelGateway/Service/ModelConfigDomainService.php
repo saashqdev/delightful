@@ -11,7 +11,7 @@ use App\Domain\ModelGateway\Entity\ModelConfigEntity;
 use App\Domain\ModelGateway\Entity\ValueObject\LLMDataIsolation;
 use App\Domain\ModelGateway\Entity\ValueObject\Query\ModelConfigQuery;
 use App\Domain\ModelGateway\Repository\Facade\ModelConfigRepositoryInterface;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 
@@ -32,7 +32,7 @@ class ModelConfigDomainService extends AbstractDomainService
     {
         $modelConfig = $this->magicApiModelConfigRepository->getByModel($dataIsolation, $model);
         if (! $modelConfig) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.not_found', ['label' => $model]);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.not_found', ['label' => $model]);
         }
         return $modelConfig;
     }
@@ -77,7 +77,7 @@ class ModelConfigDomainService extends AbstractDomainService
         $dataIsolation = LLMDataIsolation::create();
         $modelConfig = $this->magicApiModelConfigRepository->getById($dataIsolation, $id);
         if (! $modelConfig) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.not_found', ['label' => "ID: {$id}"]);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.not_found', ['label' => "ID: {$id}"]);
         }
         return $modelConfig;
     }

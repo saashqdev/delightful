@@ -9,7 +9,7 @@ namespace App\Interfaces\Admin\Facade\Agent;
 
 use App\Application\Admin\Agent\Service\AdminAgentAppService;
 use App\Interfaces\Admin\DTO\Request\EditAgentGlobalSettingsRequestDTO;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Qbhy\HyperfAuth\AuthManager;
@@ -39,7 +39,7 @@ class AgentGlobalSettingsApi extends AbstractApi
 
     public function getGlobalSettings(): array
     {
-        /** @var MagicUserAuthorization $userAuthorization */
+        /** @var DelightfulUserAuthorization $userAuthorization */
         $userAuthorization = $this->getAuthorization();
         return $this->globalSettingsAppService->getGlobalSettings($userAuthorization);
     }

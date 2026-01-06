@@ -2,18 +2,18 @@ import { useMemoizedFn } from "ahooks"
 import type { ChangeEventHandler, HTMLAttributes, ReactNode } from "react"
 import { memo, useRef } from "react"
 
-export interface MagicUploadActionProps extends HTMLAttributes<HTMLInputElement> {
+export interface DelightfulUploadActionProps extends HTMLAttributes<HTMLInputElement> {
 	multiple?: boolean
 	handler: (onUpload: () => void) => ReactNode
 	onFileChange?: (File: FileList) => void
 }
 
-function MagicUploadAction({
+function DelightfulUploadAction({
 	handler,
 	onFileChange,
 	multiple = false,
 	...props
-}: MagicUploadActionProps) {
+}: DelightfulUploadActionProps) {
 	const uploadRef = useRef<HTMLInputElement>(null)
 
 	const handleUpload = useMemoizedFn(() => {
@@ -43,4 +43,4 @@ function MagicUploadAction({
 	)
 }
 
-export default memo(MagicUploadAction)
+export default memo(DelightfulUploadAction)

@@ -10,7 +10,7 @@ namespace App\Application\ModelGateway\Service;
 use App\Application\ModelGateway\Event\ModelUsageEvent;
 use App\Application\ModelGateway\Event\WebSearchUsageEvent;
 use App\Application\ModelGateway\Mapper\OdinModel;
-use App\Domain\Chat\DTO\ImageConvertHigh\Request\MagicChatImageConvertHighReqDTO;
+use App\Domain\Chat\DTO\ImageConvertHigh\Request\DelightfulChatImageConvertHighReqDTO;
 use App\Domain\Chat\Entity\ValueObject\AIImage\AIImageGenerateParamsVO;
 use App\Domain\ImageGenerate\ValueObject\ImageGenerateSourceEnum;
 use App\Domain\ImageGenerate\ValueObject\ImplicitWatermark;
@@ -34,7 +34,7 @@ use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 use App\Domain\Provider\Entity\ValueObject\Status;
 use App\Domain\Provider\Service\AiAbilityDomainService;
 use App\ErrorCode\ImageGenerateErrorCode;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\ErrorCode\ServiceProviderErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -53,7 +53,7 @@ use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Model\MiracleVision\MiracleV
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Model\MiracleVision\MiracleVisionModelResponse;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\MiracleVisionModelRequest;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Response\OpenAIFormatResponse;
-use App\Infrastructure\ExternalAPI\MagicAIApi\MagicAILocalModel;
+use App\Infrastructure\ExternalAPI\DelightfulAIApi\DelightfulAILocalModel;
 use App\Infrastructure\ExternalAPI\Search\BingSearch;
 use App\Infrastructure\ExternalAPI\Search\DTO\SearchResponseDTO;
 use App\Infrastructure\ExternalAPI\Search\Factory\SearchEngineAdapterFactory;
@@ -62,7 +62,7 @@ use App\Infrastructure\Util\Context\CoContext;
 use App\Infrastructure\Util\SSRF\Exception\SSRFException;
 use App\Infrastructure\Util\SSRF\SSRFUtil;
 use App\Infrastructure\Util\StringMaskUtil;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\ModelGateway\Assembler\EndpointAssembler;
 use DateTime;
 use Delightful\AsyncEvent\AsyncEventUtil;
@@ -186,7 +186,7 @@ class LLMAppService extends AbstractLLMAppService
     /**
      * @throws Exception
      */
-    public function imageGenerate(MagicUserAuthorization $authorization, string $modelVersion, string $modelId, array $data): array
+    public function imageGenerate(DelightfulUserAuthorization $authorization, string $modelVersion, string $modelId, array $data): array
     {
         $providerConfigEntity = $this->serviceProviderDomainService->getServiceProviderConfig($modelVersion, $modelId, $authorization->getOrganizationCode());
         if ($providerConfigEntity === null) {
@@ -195,10 +195,10 @@ class LLMAppService extends AbstractLLMAppService
 
         // 只有model_id参数，则获取model_version
         if (empty($modelVersion) && $modelId) {
-            $providerDataIsolation = new ProviderDataIsolation($authorization->getOrganizationCode(), $authorization->getId(), $authorization->getMagicId());
+            $providerDataIsolation = new ProviderDataIsolation($authorization->getOrganizationCode(), $authorization->getId(), $authorization->getDelightfulId());
             $imageModel = $this->modelGatewayMapper->getOrganizationImageModel($providerDataIsolation, $modelId);
             if (! $imageModel) {
-                ExceptionBuilder::throw(MagicApiErrorCode::MODEL_NOT_SUPPORT);
+                ExceptionBuilder::throw(DelightfulApiErrorCode::MODEL_NOT_SUPPORT);
             }
             $modelVersion = $imageModel->getModelVersion();
         }
@@ -282,7 +282,7 @@ class LLMAppService extends AbstractLLMAppService
     /**
      * @throws SSRFException
      */
-    public function imageConvertHigh(MagicUserAuthorization $userAuthorization, MagicChatImageConvertHighReqDTO $reqDTO): string
+    public function imageConvertHigh(DelightfulUserAuthorization $userAuthorization, DelightfulChatImageConvertHighReqDTO $reqDTO): string
     {
         $url = $reqDTO->getOriginImageUrl();
         $url = SSRFUtil::getSafeUrl($url, replaceIp: false);
@@ -315,7 +315,7 @@ class LLMAppService extends AbstractLLMAppService
     /**
      * @throws Exception
      */
-    public function imageConvertHighQuery(MagicUserAuthorization $userAuthorization, string $taskId): MiracleVisionModelResponse
+    public function imageConvertHighQuery(DelightfulUserAuthorization $userAuthorization, string $taskId): MiracleVisionModelResponse
     {
         $miracleVisionServiceProviderConfig = $this->serviceProviderDomainService->getMiracleVisionServiceProviderConfig(ImageGenerateModelType::MiracleVisionHightModelId->value, $userAuthorization->getOrganizationCode());
         /**
@@ -351,20 +351,20 @@ class LLMAppService extends AbstractLLMAppService
         // 1. Validate access token
         $accessTokenEntity = $this->accessTokenDomainService->getByAccessToken($accessToken);
         if (! $accessTokenEntity) {
-            ExceptionBuilder::throw(MagicApiErrorCode::TOKEN_NOT_EXIST);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::TOKEN_NOT_EXIST);
         }
 
         // 2. Validate search parameters
         if (empty($query)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'Search query is required');
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'Search query is required');
         }
 
         if ($count < 1 || $count > 50) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'Count must be between 1 and 50');
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'Count must be between 1 and 50');
         }
 
         if ($offset < 0 || $offset > 1000) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'Offset must be between 0 and 1000');
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'Offset must be between 0 and 1000');
         }
 
         // 3. Create data isolation object (for logging and permission control)
@@ -391,7 +391,7 @@ class LLMAppService extends AbstractLLMAppService
             // 5. Get Bing API key from config
             $subscriptionKey = config('search.drivers.bing.api_key');
             if (empty($subscriptionKey)) {
-                ExceptionBuilder::throw(MagicApiErrorCode::MODEL_RESPONSE_FAIL, 'Bing Search API key is not configured');
+                ExceptionBuilder::throw(DelightfulApiErrorCode::MODEL_RESPONSE_FAIL, 'Bing Search API key is not configured');
             }
 
             // 6. Call BingSearch directly for native API response
@@ -436,7 +436,7 @@ class LLMAppService extends AbstractLLMAppService
             ]);
 
             ExceptionBuilder::throw(
-                MagicApiErrorCode::MODEL_RESPONSE_FAIL,
+                DelightfulApiErrorCode::MODEL_RESPONSE_FAIL,
                 'Bing search failed: ' . $e->getMessage(),
                 throwable: $e
             );
@@ -470,7 +470,7 @@ class LLMAppService extends AbstractLLMAppService
         // Check if ability is enabled
         if (! $aiAbilityEntity || $aiAbilityEntity->getStatus() !== Status::Enabled) {
             ExceptionBuilder::throw(
-                MagicApiErrorCode::MODEL_RESPONSE_FAIL,
+                DelightfulApiErrorCode::MODEL_RESPONSE_FAIL,
                 'Web search ability is disabled'
             );
         }
@@ -487,7 +487,7 @@ class LLMAppService extends AbstractLLMAppService
 
         if ($enabledConfig === null) {
             ExceptionBuilder::throw(
-                MagicApiErrorCode::MODEL_RESPONSE_FAIL,
+                DelightfulApiErrorCode::MODEL_RESPONSE_FAIL,
                 'No enabled search engine configuration found'
             );
         }
@@ -515,7 +515,7 @@ class LLMAppService extends AbstractLLMAppService
             // 9. Check engine availability
             if (! $adapter->isAvailable()) {
                 ExceptionBuilder::throw(
-                    MagicApiErrorCode::MODEL_RESPONSE_FAIL,
+                    DelightfulApiErrorCode::MODEL_RESPONSE_FAIL,
                     "Search engine '{$adapter->getEngineName()}' is not available (API key not configured or service unavailable)"
                 );
             }
@@ -586,7 +586,7 @@ class LLMAppService extends AbstractLLMAppService
             ]);
 
             ExceptionBuilder::throw(
-                MagicApiErrorCode::MODEL_RESPONSE_FAIL,
+                DelightfulApiErrorCode::MODEL_RESPONSE_FAIL,
                 'Unified search failed: ' . $e->getMessage(),
                 throwable: $e
             );
@@ -868,7 +868,7 @@ class LLMAppService extends AbstractLLMAppService
                     $model = $model->getModel();
                 }
                 // Try to use model_name to get real data again
-                if ($model instanceof MagicAILocalModel) {
+                if ($model instanceof DelightfulAILocalModel) {
                     $modelId = $model->getModelName();
                     $model = match ($proxyModelRequest->getType()) {
                         'chat' => $this->modelGatewayMapper->getOrganizationChatModel($modelGatewayDataIsolation, $modelId),
@@ -881,12 +881,12 @@ class LLMAppService extends AbstractLLMAppService
                     }
                 }
             } catch (Throwable $throwable) {
-                ExceptionBuilder::throw(MagicApiErrorCode::MODEL_NOT_SUPPORT, throwable: $throwable);
+                ExceptionBuilder::throw(DelightfulApiErrorCode::MODEL_NOT_SUPPORT, throwable: $throwable);
             }
 
             // Prevent infinite loop
-            if (! $model || $model instanceof MagicAILocalModel) {
-                ExceptionBuilder::throw(MagicApiErrorCode::MODEL_NOT_SUPPORT);
+            if (! $model || $model instanceof DelightfulAILocalModel) {
+                ExceptionBuilder::throw(DelightfulApiErrorCode::MODEL_NOT_SUPPORT);
             }
             /* @phpstan-ignore-next-line */
             if ($model instanceof AwsBedrockModel && method_exists($model, 'setConfig')) {
@@ -969,7 +969,7 @@ class LLMAppService extends AbstractLLMAppService
             );
 
             AsyncEventUtil::dispatch($chatUsageEvent);
-            ExceptionBuilder::throw(MagicApiErrorCode::MODEL_RESPONSE_FAIL, $message, throwable: $throwable);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::MODEL_RESPONSE_FAIL, $message, throwable: $throwable);
         }
     }
 
@@ -1398,7 +1398,7 @@ class LLMAppService extends AbstractLLMAppService
     {
         $accessToken = $this->accessTokenDomainService->getByAccessToken($proxyModelRequest->getAccessToken());
         if (! $accessToken) {
-            ExceptionBuilder::throw(MagicApiErrorCode::TOKEN_NOT_EXIST);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::TOKEN_NOT_EXIST);
         }
 
         $accessToken->checkModel($proxyModelRequest->getModel());
@@ -1522,7 +1522,7 @@ class LLMAppService extends AbstractLLMAppService
                 true => $odinModel->chatStreamWithRequest($chatRequest),
                 default => $odinModel->chatWithRequest($chatRequest),
             },
-            default => ExceptionBuilder::throw(MagicApiErrorCode::MODEL_RESPONSE_FAIL, 'Unsupported call method'),
+            default => ExceptionBuilder::throw(DelightfulApiErrorCode::MODEL_RESPONSE_FAIL, 'Unsupported call method'),
         };
     }
 
@@ -1631,7 +1631,7 @@ class LLMAppService extends AbstractLLMAppService
     {
         // Handle edge case where both numbers are zero
         if ($a === 0 && $b === 0) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed);
         }
 
         // Use absolute values to ensure positive result
@@ -1652,10 +1652,10 @@ class LLMAppService extends AbstractLLMAppService
      * Process base64 images by uploading them to file storage and returning accessible URLs.
      *
      * @param array $images Array of base64 encoded images
-     * @param MagicUserAuthorization $authorization User authorization for organization context
+     * @param DelightfulUserAuthorization $authorization User authorization for organization context
      * @return array Array of processed image URLs or original base64 data on failure
      */
-    private function processBase64Images(array $images, MagicUserAuthorization $authorization): array
+    private function processBase64Images(array $images, DelightfulUserAuthorization $authorization): array
     {
         $processedImages = [];
 

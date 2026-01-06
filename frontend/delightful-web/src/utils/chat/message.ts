@@ -14,7 +14,7 @@ export const isConversationMessage = (
 		ConversationMessageType.RichText,
 		ConversationMessageType.Markdown,
 		ConversationMessageType.AggregateAISearchCard,
-		ConversationMessageType.MagicSearchCard,
+		ConversationMessageType.DelightfulSearchCard,
 		ConversationMessageType.Files,
 		ConversationMessageType.Image,
 		ConversationMessageType.Video,

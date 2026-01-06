@@ -5,7 +5,7 @@ import { memo, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { Select } from "antd"
 import { useMemoizedFn } from "ahooks"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconCaretDownFilled } from "@tabler/icons-react"
 import { InstructionType } from "@/types/bot"
 import { useMessageRenderContext } from "@/opensource/components/business/MessageRenderProvider/hooks"
@@ -46,7 +46,7 @@ const QuickInstructionSelectorNodeRender = (props: NodeViewProps) => {
 
 	const arrowIcon = useMemo(() => {
 		return (
-			<MagicIcon
+			<DelightfulIcon
 				size={14}
 				color="currentColor"
 				className={styles.icon}

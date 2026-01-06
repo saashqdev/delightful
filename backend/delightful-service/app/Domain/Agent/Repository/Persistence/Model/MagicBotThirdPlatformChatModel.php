@@ -26,7 +26,7 @@ use function Hyperf\Config\config;
  * @property string $identification
  * @property DateTime $deleted_at
  */
-class MagicBotThirdPlatformChatModel extends Model
+class DelightfulBotThirdPlatformChatModel extends Model
 {
     use SoftDeletes;
     use Snowflake;

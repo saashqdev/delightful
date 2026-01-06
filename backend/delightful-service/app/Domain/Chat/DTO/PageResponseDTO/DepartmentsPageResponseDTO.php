@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\DTO\PageResponseDTO;
 
-use App\Domain\Contact\Entity\MagicDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentEntity;
 
 class DepartmentsPageResponseDTO extends PageResponseDTO
 {
     /**
-     * @var MagicDepartmentEntity[]
+     * @var DelightfulDepartmentEntity[]
      */
     protected array $items = [];
 

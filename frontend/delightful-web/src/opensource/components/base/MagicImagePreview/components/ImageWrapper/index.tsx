@@ -14,8 +14,8 @@ import type { ImagePreviewInfo } from "@/types/chat/preview"
 import useImageSize from "../../hooks/useImageSize"
 import { useStyles } from "./styles"
 import { IconPhotoX } from "@tabler/icons-react"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { safeJsonToBtoa } from "@/utils/encoding"
 
 type HTMLImageElementProps = JSX.IntrinsicElements["img"]
@@ -251,9 +251,9 @@ const ImageWrapper = observer((props: ImageWrapperProps) => {
 		return (
 			<Tooltip title={t("chat.message.networkError.reload")}>
 				<div className={styles.imageLoadError} onClick={handleReloadImage}>
-					<MagicIcon component={IconPhotoX} size={16} />
+					<DelightfulIcon component={IconPhotoX} size={16} />
 					{t("chat.message.imageLoadFailed")}
-					<MagicButton
+					<DelightfulButton
 						className="reload-button"
 						size="small"
 						onClick={handleReloadImage}

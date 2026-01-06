@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Interfaces\MCP\Facade\Admin;
 
-use App\Application\Contact\Service\MagicUserSettingAppService;
+use App\Application\Contact\Service\DelightfulUserSettingAppService;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]
-class MCPSuperMagicProjectSettingAdminApi extends AbstractMCPAdminApi
+class MCPSuperDelightfulProjectSettingAdminApi extends AbstractMCPAdminApi
 {
     #[Inject]
-    protected MagicUserSettingAppService $magicUserSettingAppService;
+    protected DelightfulUserSettingAppService $magicUserSettingAppService;
 
     public function save(string $projectId)
     {

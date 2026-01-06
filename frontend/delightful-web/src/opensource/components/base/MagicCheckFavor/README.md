@@ -1,6 +1,6 @@
-# MagicCheckFavor 魔法复选组件
+# DelightfulCheckFavor 魔法复选组件
 
-MagicCheckFavor 是一个自定义样式的复选框组件，专为收藏夹和偏好设置等场景设计。该组件提供了一个可选中/取消选中的交互元素，具有特殊的视觉样式，使其在收藏相关功能中更加直观。
+DelightfulCheckFavor 是一个自定义样式的复选框组件，专为收藏夹和偏好设置等场景设计。该组件提供了一个可选中/取消选中的交互元素，具有特殊的视觉样式，使其在收藏相关功能中更加直观。
 
 ## 属性
 
@@ -12,19 +12,19 @@ MagicCheckFavor 是一个自定义样式的复选框组件，专为收藏夹和�
 ## 基本用法
 
 ```tsx
-import MagicCheckFavor from '@/components/base/MagicCheckFavor';
+import DelightfulCheckFavor from '@/components/base/DelightfulCheckFavor';
 import { useState } from 'react';
 
 // 基本用法
 const [isChecked, setIsChecked] = useState(false);
 
-<MagicCheckFavor
+<DelightfulCheckFavor
   checked={isChecked}
   onChange={(checked) => setIsChecked(checked)}
 />
 
 // 默认选中
-<MagicCheckFavor
+<DelightfulCheckFavor
   checked={true}
   onChange={(checked) => console.log('选中状态:', checked)}
 />
@@ -32,7 +32,7 @@ const [isChecked, setIsChecked] = useState(false);
 // 在列表项中使用
 <div className="item">
   <span>收藏项目</span>
-  <MagicCheckFavor
+  <DelightfulCheckFavor
     checked={item.isFavorite}
     onChange={(checked) => handleFavoriteChange(item.id, checked)}
   />
@@ -54,4 +54,4 @@ const [isChecked, setIsChecked] = useState(false);
 -   偏好设置中的开关选项
 -   任何需要表示"收藏"或"喜爱"状态的界面元素
 
-MagicCheckFavor 组件通过提供一个视觉上更符合收藏场景的复选框，使得用户在进行收藏操作时能够获得更直观的反馈，提升整体用户体验。
+DelightfulCheckFavor 组件通过提供一个视觉上更符合收藏场景的复选框，使得用户在进行收藏操作时能够获得更直观的反馈，提升整体用户体验。

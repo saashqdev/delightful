@@ -1,12 +1,12 @@
-import SourceHandle from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/Handle/Source"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import SourceHandle from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/Handle/Source"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
-import MagicConditionEdit from "@delightful/delightful-flow/dist/MagicConditionEdit"
+import DelightfulConditionEdit from "@delightful/delightful-flow/dist/DelightfulConditionEdit"
 import type { IfBranch } from "@/types/flow"
 import { useMemo } from "react"
 import { IconPlus, IconTrash } from "@tabler/icons-react"
-import type { ConditionInstance } from "@delightful/delightful-flow/dist/MagicConditionEdit/index"
-import type { Expression } from "@delightful/delightful-flow/dist/MagicConditionEdit/types/expression"
+import type { ConditionInstance } from "@delightful/delightful-flow/dist/DelightfulConditionEdit/index"
+import type { Expression } from "@delightful/delightful-flow/dist/DelightfulConditionEdit/types/expression"
 import { Flex } from "antd"
 import type { DataSourceOption } from "@delightful/delightful-flow/dist/common/BaseUI/DropdownRenderer/Reference"
 import { cx } from "antd-style"
@@ -77,7 +77,7 @@ export default function BranchItem({
 				suffixIcon={SuffixIcon}
 			>
 				<div className={styles.branchItem}>
-					<MagicConditionEdit
+					<DelightfulConditionEdit
 						value={value?.parameters?.structure}
 						onChange={(structure) => onChange(structure, currentIndex)}
 						dataSource={expressionDataSource}

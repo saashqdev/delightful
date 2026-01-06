@@ -486,7 +486,7 @@ class SandboxConfigTest extends TestCase
     /**
      * Test whether sandbox disallows magic constants by default.
      */
-    public function testMagicConstants()
+    public function testDelightfulConstants()
     {
         $this->expectException('PHPSandbox\Error');
         $this->sandbox->execute(function () { return __DIR__; });
@@ -495,9 +495,9 @@ class SandboxConfigTest extends TestCase
     /*
      * Test whether sandbox allows whitelisted magic constants.
      */
-    //    public function testWhitelistMagicConstants()
+    //    public function testWhitelistDelightfulConstants()
     //    {
-    //        $this->sandbox->accessControlOptions()->whitelistMagicConst('DIR');
+    //        $this->sandbox->accessControlOptions()->whitelistDelightfulConst('DIR');
     //        $this->assertEquals(str_replace('test', 'src', __DIR__), $this->sandbox->execute(function () { return __DIR__; }));
     //    }
 }

@@ -1,6 +1,6 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { RoutePath } from "@/const/routes"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { IconEdit, IconTrash, IconEye, IconKey } from "@tabler/icons-react"
 import {
 	useMemoizedFn,
@@ -20,7 +20,7 @@ import { replaceRouteParams } from "@/utils/route"
 import { openModal } from "@/utils/react"
 import DeleteDangerModal from "@/opensource/components/business/DeleteDangerModal"
 import useSWRInfinite from "swr/infinite"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { FlowApi, KnowledgeApi } from "@/apis"
 import { hasAdminRight, hasEditRight, hasViewRight } from "../../components/AuthControlButton/types"
 import { useDebounceSearch } from "../../hooks/useDebounceSearch"
@@ -32,13 +32,13 @@ interface FlowListHooksProps {
 	flowType: FlowRouteType
 }
 
-export interface FlowWithTools extends MagicFlow.Flow {
+export interface FlowWithTools extends DelightfulFlow.Flow {
 	tools?: FlowTool.Tool[]
 }
 
 interface KeyProp {
 	pageIndex: number
-	previousPageData: { list: MagicFlow.Flow[]; page: number; total: number } | null
+	previousPageData: { list: DelightfulFlow.Flow[]; page: number; total: number } | null
 	type: FlowRouteType
 	name: string
 	size: number
@@ -311,7 +311,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 					// 更新工具集中的工具数量
 					mutate((currentData: CurrentDataType) => {
 						const updatedData = currentData?.map((page) => {
-							const list = page?.list.map((item: MagicFlow.Flow) => {
+							const list = page?.list.map((item: DelightfulFlow.Flow) => {
 								if (item.id === flow.tool_set_id) {
 									item.tools = tools
 									return item
@@ -331,7 +331,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 						if (!currentData) return currentData
 						const updatedData = currentData?.map((page) => ({
 							...page,
-							list: page?.list.filter((item: MagicFlow.Flow) => item.id !== flow.id),
+							list: page?.list.filter((item: DelightfulFlow.Flow) => item.id !== flow.id),
 						}))
 						updatedData[0].total -= 1 // 更新总数
 						return updatedData
@@ -396,7 +396,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 			return currentData?.map((page) => ({
 				...page,
 				list: page?.list.map(
-					(item: MagicFlow.Flow) =>
+					(item: DelightfulFlow.Flow) =>
 						item.id === flow.id
 							? { ...item, enabled: !flow.enabled } // 更新目标项
 							: item, // 保持其他项不变
@@ -443,7 +443,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 					return currentData?.map((page) => ({
 						...page,
 						list: page?.list.map(
-							(item: MagicFlow.Flow) =>
+							(item: DelightfulFlow.Flow) =>
 								item.id === flow.tool_set_id
 									? { ...item, tools } // 更新目标项
 									: item, // 保持其他项不变
@@ -466,7 +466,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 			mutate((currentData: CurrentDataType) => {
 				return currentData?.map((page) => ({
 					...page,
-					list: page?.list.map((item: MagicFlow.Flow) =>
+					list: page?.list.map((item: DelightfulFlow.Flow) =>
 						item.id === flow.id
 							? {
 									...item,
@@ -481,7 +481,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 		}
 	})
 
-	// const handleCopy = useMemoizedFn((flow: MagicFlow.Flow | FlowTool.Tool) => {
+	// const handleCopy = useMemoizedFn((flow: DelightfulFlow.Flow | FlowTool.Tool) => {
 	// 	copyToClipboard(flow.id!)
 	// 	message.success(`${t("chat.copy")} ${t("flow.apiKey.success")}`)
 	// })
@@ -492,15 +492,15 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 	})
 
 	const getDropdownItems = useMemoizedFn(
-		(flow: MagicFlow.Flow | Knowledge.KnowledgeItem | Flow.Mcp.Detail) => {
+		(flow: DelightfulFlow.Flow | Knowledge.KnowledgeItem | Flow.Mcp.Detail) => {
 			return (
 				<>
 					{flowType === FlowRouteType.VectorKnowledge &&
 						hasViewRight(flow.user_operation) && (
-							<MagicButton
+							<DelightfulButton
 								justify="flex-start"
 								icon={
-									<MagicIcon component={IconEye} size={20} color="currentColor" />
+									<DelightfulIcon component={IconEye} size={20} color="currentColor" />
 								}
 								size="large"
 								type="text"
@@ -510,12 +510,12 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 								}}
 							>
 								{t("flow.viewDetails")}
-							</MagicButton>
+							</DelightfulButton>
 						)}
 					{hasEditRight(flow.user_operation) && (
-						<MagicButton
+						<DelightfulButton
 							justify="flex-start"
-							icon={<MagicIcon component={IconEdit} size={20} color="currentColor" />}
+							icon={<DelightfulIcon component={IconEdit} size={20} color="currentColor" />}
 							size="large"
 							type="text"
 							block
@@ -525,13 +525,13 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 							}}
 						>
 							{changeInfoTitle}
-						</MagicButton>
+						</DelightfulButton>
 					)}
 					{hasAdminRight(flow.user_operation) && (
-						<MagicButton
+						<DelightfulButton
 							justify="flex-start"
 							icon={
-								<MagicIcon component={IconTrash} size={20} color="currentColor" />
+								<DelightfulIcon component={IconTrash} size={20} color="currentColor" />
 							}
 							size="large"
 							type="text"
@@ -540,7 +540,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 							onClick={() => deleteFlow(flow)}
 						>
 							{globalT("common.deleteSomething", { ns: "flow", name: title })}
-						</MagicButton>
+						</DelightfulButton>
 					)}
 				</>
 			)
@@ -553,7 +553,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 	}, [isMcp, globalT, t])
 
 	const getRightPanelDropdownItems = useMemoizedFn(
-		(tool: FlowTool.Tool | Flow.Mcp.ListItem, flow: MagicFlow.Flow) => {
+		(tool: FlowTool.Tool | Flow.Mcp.ListItem, flow: DelightfulFlow.Flow) => {
 			return (
 				<>
 					{isMcp && !checkIsLatestMcpTool(tool as Flow.Mcp.ListItem) && (
@@ -561,22 +561,22 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 							title={t("mcp.confirmToUpdateVersion", { ns: "flow" })}
 							onConfirm={() => updateVersion(tool as Flow.Mcp.ListItem)}
 						>
-							<MagicButton
+							<DelightfulButton
 								justify="flex-start"
 								icon={
-									<MagicIcon component={IconKey} size={20} color="currentColor" />
+									<DelightfulIcon component={IconKey} size={20} color="currentColor" />
 								}
 								size="large"
 								type="text"
 								block
 							>
 								{t("mcp.updateVersion", { ns: "flow" })}
-							</MagicButton>
+							</DelightfulButton>
 						</Popconfirm>
 					)}
-					<MagicButton
+					<DelightfulButton
 						justify="flex-start"
-						icon={<MagicIcon component={IconEdit} size={20} color="currentColor" />}
+						icon={<DelightfulIcon component={IconEdit} size={20} color="currentColor" />}
 						size="large"
 						type="text"
 						block
@@ -594,10 +594,10 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 							ns: "flow",
 							name: t("flow.tools"),
 						})}
-					</MagicButton>
-					{/* <MagicButton
+					</DelightfulButton>
+					{/* <DelightfulButton
 						justify="flex-start"
-						icon={<MagicIcon component={IconCopy} size={20} color="currentColor" />}
+						icon={<DelightfulIcon component={IconCopy} size={20} color="currentColor" />}
 						size="large"
 						type="text"
 						block
@@ -605,12 +605,12 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 					>
 						{t("chat.copy")}
 						{t("flow.tools")}
-					</MagicButton> */}
+					</DelightfulButton> */}
 					{hasAdminRight(flow.user_operation) && (
-						<MagicButton
+						<DelightfulButton
 							justify="flex-start"
 							icon={
-								<MagicIcon component={IconTrash} size={20} color="currentColor" />
+								<DelightfulIcon component={IconTrash} size={20} color="currentColor" />
 							}
 							size="large"
 							type="text"
@@ -622,7 +622,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 								ns: "flow",
 								name: t("flow.tools"),
 							})}
-						</MagicButton>
+						</DelightfulButton>
 					)}
 				</>
 			)
@@ -630,7 +630,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 	)
 
 	const handleCardClick = useMemoizedFn(
-		(flow: MagicFlow.Flow | Knowledge.KnowledgeItem | Flow.Mcp.Detail) => {
+		(flow: DelightfulFlow.Flow | Knowledge.KnowledgeItem | Flow.Mcp.Detail) => {
 			// 点击向量知识库直接跳转详情
 		if (flowType === FlowRouteType.VectorKnowledge && flow.code) {
 			return goToKnowledgeDetail(flow.code)

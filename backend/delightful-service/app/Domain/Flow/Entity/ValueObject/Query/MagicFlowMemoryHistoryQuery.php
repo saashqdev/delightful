@@ -9,7 +9,7 @@ namespace App\Domain\Flow\Entity\ValueObject\Query;
 
 use DateTime;
 
-class MagicFlowMemoryHistoryQuery extends Query
+class DelightfulFlowMemoryHistoryQuery extends Query
 {
     private int $type = 0;
 

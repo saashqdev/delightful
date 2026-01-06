@@ -10,15 +10,15 @@ namespace App\Domain\Chat\Service;
 use App\Domain\Chat\DTO\Agent\SenderExtraDTO;
 use App\Domain\Chat\DTO\Message\ControlMessage\AddFriendMessage;
 use App\Domain\Chat\DTO\Request\Common\ControlRequestData;
-use App\Domain\Chat\Entity\MagicMessageEntity;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 use App\Domain\Chat\Event\Agent\UserCallAgentEvent;
 use App\Domain\Chat\Event\Agent\UserCallAgentFailEvent;
 use App\Domain\Contact\Entity\AccountEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\UserType;
 use App\ErrorCode\ChatErrorCode;
@@ -26,7 +26,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\CoContext;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\SocketIO\SocketIOUtil;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Hyperf\Codec\Json;
 use Hyperf\Contract\TranslatorInterface;
@@ -39,7 +39,7 @@ use function Hyperf\Support\retry;
 /**
  * 处理消息流(seq)相关.
  */
-class MagicSeqDomainService extends AbstractDomainService
+class DelightfulSeqDomainService extends AbstractDomainService
 {
     /**
      * 消息推送. 对已经生成的seq,推送给seq的拥有者.
@@ -73,9 +73,9 @@ class MagicSeqDomainService extends AbstractDomainService
             // 推送控制消息. 控制消息一般没有 messageEntity (聊天消息实体)
             $this->pushControlSeq($seqEntity, $seqUserEntity);
         } else {
-            $messageEntity = $this->magicMessageRepository->getMessageByMagicMessageId($seqEntity->getMagicMessageId());
+            $messageEntity = $this->magicMessageRepository->getMessageByDelightfulMessageId($seqEntity->getDelightfulMessageId());
             if ($messageEntity === null) {
-                $this->logger->error('messagePush magic_message_id:{magic_message_id} message not found', ['magic_message_id' => $seqEntity->getMagicMessageId()]);
+                $this->logger->error('messagePush magic_message_id:{magic_message_id} message not found', ['magic_message_id' => $seqEntity->getDelightfulMessageId()]);
                 return;
             }
             // 以下是聊天消息推送
@@ -86,7 +86,7 @@ class MagicSeqDomainService extends AbstractDomainService
     /**
      * 对已经生成的seq,推送给seq的拥有者.
      */
-    public function pushControlSeq(MagicSeqEntity $seqEntity, MagicUserEntity $seqUserEntity, ?MagicMessageEntity $messageEntity = null): void
+    public function pushControlSeq(DelightfulSeqEntity $seqEntity, DelightfulUserEntity $seqUserEntity, ?DelightfulMessageEntity $messageEntity = null): void
     {
         // 有些控制消息,不仅控制自己的设备,还需要控制对方的设备
         // 控制消息推送. todo:待优化,合并推送已读的控制消息
@@ -97,9 +97,9 @@ class MagicSeqDomainService extends AbstractDomainService
         if ($seqEntity->getObjectType() === ConversationType::Ai && ($seqEntity->getSeqType() instanceof ControlMessageType)) {
             // 如果是给AI的需要触发flow流程的控制消息，触发flow流程
             $agentUserEntity = $seqUserEntity; // 此时的 seqUserEntity 是 AI
-            $agentAccountEntity = $this->magicAccountRepository->getAccountInfoByMagicId($agentUserEntity->getMagicId());
+            $agentAccountEntity = $this->magicAccountRepository->getAccountInfoByDelightfulId($agentUserEntity->getDelightfulId());
             if ($agentAccountEntity === null) {
-                $this->logger->error('UserCallAgentEventError magic_id:{magic_id} ai not found', ['magic_id' => $agentUserEntity->getMagicId()]);
+                $this->logger->error('UserCallAgentEventError magic_id:{magic_id} ai not found', ['magic_id' => $agentUserEntity->getDelightfulId()]);
                 return;
             }
             $senderUserEntity = null; // （人类）发送方的 user_entity
@@ -127,7 +127,7 @@ class MagicSeqDomainService extends AbstractDomainService
      * 对已经生成的seq,推送给seq的拥有者.
      * @throws Throwable
      */
-    public function pushChatSeq(MagicSeqEntity $selfSeqEntity, MagicUserEntity $userEntity, MagicMessageEntity $messageEntity): void
+    public function pushChatSeq(DelightfulSeqEntity $selfSeqEntity, DelightfulUserEntity $userEntity, DelightfulMessageEntity $messageEntity): void
     {
         // 如果序列号归属于 ai,且发件人是 ai,不需要推送
         if ($selfSeqEntity->getObjectType() === ConversationType::Ai && $messageEntity->getSenderType() === ConversationType::Ai) {
@@ -138,7 +138,7 @@ class MagicSeqDomainService extends AbstractDomainService
         $magicId = $selfSeqEntity->getObjectId();
         switch ($receiveConversationType) {
             case ConversationType::Ai:
-                $aiAccountEntity = $this->magicAccountRepository->getAccountInfoByMagicId($magicId);
+                $aiAccountEntity = $this->magicAccountRepository->getAccountInfoByDelightfulId($magicId);
                 if ($aiAccountEntity === null) {
                     $this->logger->error('UserCallAgentEventError magic_id:{magic_id} ai not found', ['magic_id' => $magicId]);
                     return;
@@ -146,11 +146,11 @@ class MagicSeqDomainService extends AbstractDomainService
                 $senderUserEntity = $this->magicUserRepository->getUserById($messageEntity->getSenderId());
                 // 消息发送者没有找到
                 if ($senderUserEntity === null || empty($selfSeqEntity->getSenderMessageId())) {
-                    $this->logger->error('UserCallAgentEventError magic_message_id:{magic_message_id} sender_message_id not found', ['magic_message_id' => $selfSeqEntity->getMagicMessageId()]);
+                    $this->logger->error('UserCallAgentEventError magic_message_id:{magic_message_id} sender_message_id not found', ['magic_message_id' => $selfSeqEntity->getDelightfulMessageId()]);
                     return;
                 }
-                $messageSenderMagicId = $this->magicUserRepository->getUserById($messageEntity->getSenderId())?->getMagicId();
-                if ($magicId === $messageSenderMagicId) {
+                $messageSenderDelightfulId = $this->magicUserRepository->getUserById($messageEntity->getSenderId())?->getDelightfulId();
+                if ($magicId === $messageSenderDelightfulId) {
                     // ai 自己发的消息,不能再触发流程调用!
                     $this->logger->error('UserCallAgentEventError magic_id:{magic_id} ai can not call flow', ['magic_id' => $magicId]);
                     return;
@@ -185,7 +185,7 @@ class MagicSeqDomainService extends AbstractDomainService
                     'sender_message_id' => $pushData['seq']['sender_message_id'],
                     'conversation_id' => $pushData['seq']['conversation_id'],
                     'organization_code' => $pushData['seq']['organization_code'],
-                    'magic_message_id' => $selfSeqEntity->getMagicMessageId(),
+                    'magic_message_id' => $selfSeqEntity->getDelightfulMessageId(),
                     'app_message_id' => $selfSeqEntity->getAppMessageId(),
                     'topic_id' => $pushData['seq']['message']['topic_id'] ?? '',
                     'sender_id' => $pushData['seq']['message']['sender_id'] ?? '',
@@ -214,15 +214,15 @@ class MagicSeqDomainService extends AbstractDomainService
      * A magic_message_id will create seq entities for both sender and receiver.
      *
      * @param string $magicMessageId The magic_message_id
-     * @return MagicSeqEntity[] Array of seq entities
+     * @return DelightfulSeqEntity[] Array of seq entities
      */
-    public function getSeqEntitiesByMagicMessageId(string $magicMessageId): array
+    public function getSeqEntitiesByDelightfulMessageId(string $magicMessageId): array
     {
         if (empty($magicMessageId)) {
             return [];
         }
 
-        $seqList = $this->magicSeqRepository->getBothSeqListByMagicMessageId($magicMessageId);
+        $seqList = $this->magicSeqRepository->getBothSeqListByDelightfulMessageId($magicMessageId);
 
         $seqEntities = [];
         foreach ($seqList as $seqData) {
@@ -236,10 +236,10 @@ class MagicSeqDomainService extends AbstractDomainService
      * Get the minimum seq_id record for the same user (object_id) based on magic_message_id
      * Used to find the original message when there are multiple edited versions.
      */
-    public function getSelfMinSeqIdByMagicMessageId(MagicSeqEntity $magicSeqEntity): ?MagicSeqEntity
+    public function getSelfMinSeqIdByDelightfulMessageId(DelightfulSeqEntity $magicSeqEntity): ?DelightfulSeqEntity
     {
         // Get all seq records with minimum seq_id for each user
-        $seqList = $this->magicSeqRepository->getMinSeqListByMagicMessageId($magicSeqEntity->getMagicMessageId());
+        $seqList = $this->magicSeqRepository->getMinSeqListByDelightfulMessageId($magicSeqEntity->getDelightfulMessageId());
 
         if (empty($seqList)) {
             return null;
@@ -249,7 +249,7 @@ class MagicSeqDomainService extends AbstractDomainService
         $targetObjectId = $magicSeqEntity->getObjectId();
         foreach ($seqList as $seqData) {
             if ($seqData['object_id'] === $targetObjectId) {
-                // Convert array data to MagicSeqEntity object
+                // Convert array data to DelightfulSeqEntity object
                 return SeqAssembler::getSeqEntity($seqData);
             }
         }
@@ -267,9 +267,9 @@ class MagicSeqDomainService extends AbstractDomainService
     /**
      * 发送已读回执.
      */
-    private function aiSendReadStatusChangeReceipt(MagicSeqEntity $selfSeqEntity, MagicUserEntity $userEntity): void
+    private function aiSendReadStatusChangeReceipt(DelightfulSeqEntity $selfSeqEntity, DelightfulUserEntity $userEntity): void
     {
-        $userAuth = new MagicUserAuthorization();
+        $userAuth = new DelightfulUserAuthorization();
         $userAuth->setId($userEntity->getUserId());
         $userAuth->setOrganizationCode($selfSeqEntity->getOrganizationCode());
         // 消息的type和content抽象出来
@@ -292,7 +292,7 @@ class MagicSeqDomainService extends AbstractDomainService
         }
     }
 
-    private function getControlMessageDTO(MagicUserAuthorization $userAuth, MagicSeqEntity $selfSeqEntity): MagicMessageEntity
+    private function getControlMessageDTO(DelightfulUserAuthorization $userAuth, DelightfulSeqEntity $selfSeqEntity): DelightfulMessageEntity
     {
         $messageTypeString = ControlMessageType::SeenMessages->getName();
         $ControlRequestData = new ControlRequestData(
@@ -307,11 +307,11 @@ class MagicSeqDomainService extends AbstractDomainService
                 'refer_message_id' => $selfSeqEntity->getSeqId(),
             ]
         );
-        $content = $ControlRequestData->getMessage()->getMagicMessage();
-        $messageType = $ControlRequestData->getMessage()->getMagicMessage()->getMessageTypeEnum();
+        $content = $ControlRequestData->getMessage()->getDelightfulMessage();
+        $messageType = $ControlRequestData->getMessage()->getDelightfulMessage()->getMessageTypeEnum();
         // 控制消息的接收方,需要根据控制消息的类型再确定,因此不在此处处理
         $time = date('Y-m-d H:i:s');
-        $messageDTO = new MagicMessageEntity();
+        $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($userAuth->getId());
         $messageDTO->setSenderType(ConversationType::Ai);
         $messageDTO->setSenderOrganizationCode($userAuth->getOrganizationCode());
@@ -329,19 +329,19 @@ class MagicSeqDomainService extends AbstractDomainService
     /**
      * 协程调用magic flow,处理用户发来的消息.
      */
-    private function userCallFlow(AccountEntity $agentAccountEntity, MagicUserEntity $agentUserEntity, MagicUserEntity $senderUserEntity, MagicSeqEntity $seqEntity): void
+    private function userCallFlow(AccountEntity $agentAccountEntity, DelightfulUserEntity $agentUserEntity, DelightfulUserEntity $senderUserEntity, DelightfulSeqEntity $seqEntity): void
     {
         if (empty($agentAccountEntity->getAiCode())) {
             ExceptionBuilder::throw(ChatErrorCode::AI_NOT_FOUND);
         }
         // 获取messageEntity
-        $messageEntity = $this->magicMessageRepository->getMessageByMagicMessageId($seqEntity->getMagicMessageId());
+        $messageEntity = $this->magicMessageRepository->getMessageByDelightfulMessageId($seqEntity->getDelightfulMessageId());
 
         // 只有聊天消息和已读回执才触发flow
         $messageType = $messageEntity?->getMessageType();
         if ($messageType instanceof ChatMessageType || $seqEntity->canTriggerFlow()) {
             // 获取用户的真名
-            $senderAccountEntity = $this->magicAccountRepository->getAccountInfoByMagicId($senderUserEntity->getMagicId());
+            $senderAccountEntity = $this->magicAccountRepository->getAccountInfoByDelightfulId($senderUserEntity->getDelightfulId());
             // 开协程了，复制 requestId
             $requestId = CoContext::getRequestId();
             // 协程透传语言
@@ -372,7 +372,7 @@ class MagicSeqDomainService extends AbstractDomainService
                         $senderUserEntity,
                         $seqEntity,
                         $messageEntity,
-                        (new SenderExtraDTO())->setMagicEnvId($seqEntity->getExtra()?->getMagicEnvId())
+                        (new SenderExtraDTO())->setDelightfulEnvId($seqEntity->getExtra()?->getDelightfulEnvId())
                     ));
                 } catch (Throwable $throwable) {
                     $this->logger->error('UserCallAgentEventError', [

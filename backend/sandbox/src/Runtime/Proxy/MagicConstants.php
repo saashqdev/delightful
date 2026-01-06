@@ -13,7 +13,7 @@ use PHPSandbox\Options\SandboxOptions;
  * Extracted from original PHPSandbox built-in methods.
  * @internal
  */
-class MagicConstants implements RuntimeProxyInterface
+class DelightfulConstants implements RuntimeProxyInterface
 {
     /**
      * @static
@@ -46,8 +46,8 @@ class MagicConstants implements RuntimeProxyInterface
      */
     public function _get_magic_const(string $name)
     {
-        if ($this->options->definitions()->isDefinedMagicConst($name)) {
-            $magic_constant = $this->options->definitions()->getDefinedMagicConst($name);
+        if ($this->options->definitions()->isDefinedDelightfulConst($name)) {
+            $magic_constant = $this->options->definitions()->getDefinedDelightfulConst($name);
             if (is_callable($magic_constant)) {
                 return call_user_func_array($magic_constant, [$this]);
             }

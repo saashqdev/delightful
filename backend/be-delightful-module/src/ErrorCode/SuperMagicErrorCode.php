@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\ErrorCode;
+namespace Delightful\SuperDelightful\ErrorCode;
 
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
-enum SuperMagicErrorCode: int
+enum SuperDelightfulErrorCode: int
 {
     #[ErrorMessage(message: 'super_magic.validate_failed')]
     case ValidateFailed = 60001;

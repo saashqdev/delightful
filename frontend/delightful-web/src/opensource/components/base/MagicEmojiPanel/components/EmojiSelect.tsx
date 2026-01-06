@@ -1,5 +1,5 @@
 import { Flex, Popover, Tooltip } from "antd"
-import MagicEmoji from "@/opensource/components/base/MagicEmoji"
+import DelightfulEmoji from "@/opensource/components/base/DelightfulEmoji"
 import { memo, useState, useRef } from "react"
 import { useMemoizedFn } from "ahooks"
 import { replace } from "lodash-es"
@@ -75,7 +75,7 @@ const EmojiSelect = memo(
 					onMouseLeave={handleMouseLeave}
 					style={{ height: 48 }}
 				>
-					<MagicEmoji
+					<DelightfulEmoji
 						ns={ns}
 						code={config.code}
 						className={emojiClassName}

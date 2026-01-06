@@ -9,18 +9,18 @@ namespace App\Application\Admin\Agent\Assembler;
 
 use App\Application\Admin\Agent\DTO\AdminAgentDetailDTO;
 use App\Application\Admin\Agent\DTO\AdminAgentDTO;
-use App\Domain\Agent\Entity\MagicAgentEntity;
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
 
 class AgentAssembler
 {
     // entity 转 dto
-    public static function entityToDTO(MagicAgentEntity $entity): AdminAgentDTO
+    public static function entityToDTO(DelightfulAgentEntity $entity): AdminAgentDTO
     {
         return new AdminAgentDTO($entity->toArray());
     }
 
-    public static function toAdminAgentDetail(MagicAgentEntity $agentEntity, MagicAgentVersionEntity $agentVersionEntity): AdminAgentDetailDTO
+    public static function toAdminAgentDetail(DelightfulAgentEntity $agentEntity, DelightfulAgentVersionEntity $agentVersionEntity): AdminAgentDetailDTO
     {
         $adminAgentDetailDTO = new AdminAgentDetailDTO();
         $adminAgentDetailDTO->setId($agentEntity->getId());

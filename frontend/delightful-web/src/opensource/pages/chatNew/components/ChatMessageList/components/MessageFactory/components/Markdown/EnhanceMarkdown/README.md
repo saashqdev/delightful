@@ -1,6 +1,6 @@
-# MagicMarkdown 魔法 Markdown 渲染组件
+# DelightfulMarkdown 魔法 Markdown 渲染组件
 
-`MagicMarkdown` 是一个功能强大的 Markdown 渲染组件，基于 react-markdown，支持代码高亮、LaTeX 公式、HTML 内容等多种扩展功能。
+`DelightfulMarkdown` 是一个功能强大的 Markdown 渲染组件，基于 react-markdown，支持代码高亮、LaTeX 公式、HTML 内容等多种扩展功能。
 
 ## 属性
 
@@ -17,31 +17,31 @@
 ## 基础用法
 
 ```tsx
-import { MagicMarkdown } from '@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown';
+import { DelightfulMarkdown } from '@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown';
 
 // 基础用法
-<MagicMarkdown content="# 标题\n这是一段普通文本" />
+<DelightfulMarkdown content="# 标题\n这是一段普通文本" />
 
 // 启用 LaTeX 公式
-<MagicMarkdown
+<DelightfulMarkdown
   content="爱因斯坦质能方程：$E=mc^2$"
   enableLatex
 />
 
 // 允许 HTML 内容
-<MagicMarkdown
+<DelightfulMarkdown
   content="这是一个<span style='color:red'>红色</span>文本"
   allowHtml
 />
 
 // 流式渲染（适用于打字机效果）
-<MagicMarkdown
+<DelightfulMarkdown
   content="正在生成的内容..."
   isStreaming
 />
 
 // 自定义组件
-<MagicMarkdown
+<DelightfulMarkdown
   content="# 自定义标题"
   components={{
     h1: ({ node, ...props }) => <h1 style={{ color: 'blue' }} {...props} />
@@ -49,7 +49,7 @@ import { MagicMarkdown } from '@/opensource/pages/chatNew/components/ChatMessage
 />
 
 // 使用自定义插件
-<MagicMarkdown
+<DelightfulMarkdown
   content="内容"
   remarkPlugins={[myCustomPlugin]}
   rehypePlugins={[myCustomRehypePlugin]}
@@ -68,7 +68,7 @@ import { MagicMarkdown } from '@/opensource/pages/chatNew/components/ChatMessage
 
 ## 内置组件
 
-MagicMarkdown 内置了多个优化的组件用于渲染特定的 Markdown 元素：
+DelightfulMarkdown 内置了多个优化的组件用于渲染特定的 Markdown 元素：
 
 -   `A`：优化的链接组件，支持外部链接安全打开
 -   `Code`：代码块和行内代码组件，支持语法高亮
@@ -82,4 +82,4 @@ MagicMarkdown 内置了多个优化的组件用于渲染特定的 Markdown 元�
 -   需要支持代码高亮和数学公式时
 -   需要流式渲染内容（如聊天机器人回复）时
 
-MagicMarkdown 组件让你的 Markdown 内容展示更加美观和功能丰富，适合在各种需要富文本展示的场景下使用。
+DelightfulMarkdown 组件让你的 Markdown 内容展示更加美观和功能丰富，适合在各种需要富文本展示的场景下使用。

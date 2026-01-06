@@ -20,7 +20,7 @@ from playwright.async_api import Page, Error as PlaywrightError
 
 from agentlang.utils.file import safe_delete
 from magic_use.browser_manager import BrowserManager
-from magic_use.magic_browser_config import MagicBrowserConfig
+from magic_use.magic_browser_config import DelightfulBrowserConfig
 from magic_use.page_registry import PageRegistry, PageState
 
 # Setup logging
@@ -29,8 +29,8 @@ logger = logging.getLogger(__name__)
 
 # --- DTO Definitions ---
 
-class MagicBrowserError(BaseModel):
-    """Generic MagicBrowser operation failure result"""
+class DelightfulBrowserError(BaseModel):
+    """Generic DelightfulBrowser operation failure result"""
     success: Literal[False] = False
     error: str = Field(..., description="Error message description")
     operation: Optional[str] = Field(None, description="Name of failed operation")
@@ -97,16 +97,16 @@ class ScrollToSuccess(BaseModel):
     after: ScrollPositionData
 
 # Define unified return type alias
-MagicBrowserResult = Union[
+DelightfulBrowserResult = Union[
     GotoSuccess, ClickSuccess, InputSuccess, ScreenshotSuccess, MarkdownSuccess,
     InteractiveElementsSuccess, JSEvalSuccess, PageStateSuccess, ScrollSuccess, ScrollToSuccess,
-    MagicBrowserError
+    DelightfulBrowserError
 ]
 
 # --- End DTO Definitions ---
 
 
-class MagicBrowser:
+class DelightfulBrowser:
     """Browser control class
 
     Manages browser page collection, provides page operations and content retrieval functionality.
@@ -114,13 +114,13 @@ class MagicBrowser:
     Uniformly handles underlying Playwright errors and returns structured result objects.
     """
 
-    def __init__(self, config: Optional[MagicBrowserConfig] = None):
+    def __init__(self, config: Optional[DelightfulBrowserConfig] = None):
         """Initialize browser control class
 
         Args:
             config: Browser configuration, if None use default scraping configuration
         """
-        self.config = config or MagicBrowserConfig.create_for_scraping()
+        self.config = config or DelightfulBrowserConfig.create_for_scraping()
         self._browser_manager = BrowserManager()
         self._page_registry = PageRegistry()
 
@@ -163,7 +163,7 @@ class MagicBrowser:
             self._active_context_id = context_id
 
             self._initialized = True
-            logger.info("MagicBrowser initialization completed")
+            logger.info("DelightfulBrowser initialization completed")
         except Exception as e:
             logger.error(f"Failed to initialize browser: {e}", exc_info=True)
             raise
@@ -269,7 +269,7 @@ class MagicBrowser:
         # PageRegistry's get_all_pages is optimized to return only open pages
         return await self._page_registry.get_all_pages()
 
-    async def goto(self, page_id: Optional[str], url: str, wait_until: str = "domcontentloaded") -> MagicBrowserResult:
+    async def goto(self, page_id: Optional[str], url: str, wait_until: str = "domcontentloaded") -> DelightfulBrowserResult:
         """Navigate to specified URL, if page_id is None, automatically create new page."""
         operation_name = "goto"
         page: Optional[Page] = None
@@ -288,7 +288,7 @@ class MagicBrowser:
             else:
                 page = await self.get_page_by_id(actual_page_id)
                 if not page:
-                    return MagicBrowserError(error=f"Page does not exist or is closed: {actual_page_id}", operation=operation_name)
+                    return DelightfulBrowserError(error=f"Page does not exist or is closed: {actual_page_id}", operation=operation_name)
 
             # Set active page (even for existing pages, update to active)
             self._active_page_id = actual_page_id
@@ -315,18 +315,18 @@ class MagicBrowser:
         except PlaywrightError as e: # Catch specific Playwright errors
             error_msg = f"Failed to navigate to {url} (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False) # PlaywrightError typically has enough info
-            return MagicBrowserError(error=error_msg, operation=operation_name, details={"url": url, "page_id": actual_page_id})
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details={"url": url, "page_id": actual_page_id})
         except Exception as e: # Catch other unexpected errors
             error_msg = f"Failed to navigate to {url} (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details={"url": url, "page_id": actual_page_id})
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details={"url": url, "page_id": actual_page_id})
 
-    async def click(self, page_id: str, selector: str) -> MagicBrowserResult:
+    async def click(self, page_id: str, selector: str) -> DelightfulBrowserResult:
         """Click specified element"""
         operation_name = "click"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
+            return DelightfulBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         try:
             self._active_page_id = page_id # Click operation also sets active page
@@ -361,18 +361,18 @@ class MagicBrowser:
                 error_msg = f"Click failed: Element '{selector}' not found or element is not visible/not interactable."
             elif "timeout" in str(e).lower():
                 error_msg = f"Click on element '{selector}' timed out, element may not have appeared or become clickable within expected time."
-            return MagicBrowserError(error=error_msg, operation=operation_name, details={"selector": selector, "page_id": page_id})
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details={"selector": selector, "page_id": page_id})
         except Exception as e:
             error_msg = f"Failed to click element '{selector}' (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details={"selector": selector, "page_id": page_id})
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details={"selector": selector, "page_id": page_id})
 
-    async def input_text(self, page_id: str, selector: str, text: str, clear_first: bool = True, press_enter: bool = False) -> MagicBrowserResult:
+    async def input_text(self, page_id: str, selector: str, text: str, clear_first: bool = True, press_enter: bool = False) -> DelightfulBrowserResult:
         """Input text into input field"""
         operation_name = "input_text"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
+            return DelightfulBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         details = {"selector": selector, "text_preview": text[:50] + '...', "clear_first": clear_first, "press_enter": press_enter, "page_id": page_id}
 
@@ -422,18 +422,18 @@ class MagicBrowser:
                 error_msg = f"Input failed: element corresponding to selector '{selector}' is not an input element (e.g., input, textarea)."
             elif "timeout" in str(e).lower():
                 error_msg = f"Input text to '{selector}' timed out."
-            return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details=details)
         except Exception as e:
             error_msg = f"Failed to input text to '{selector}' (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details=details)
 
-    async def scroll_page(self, page_id: str, direction: str, full_page: bool = False) -> MagicBrowserResult:
+    async def scroll_page(self, page_id: str, direction: str, full_page: bool = False) -> DelightfulBrowserResult:
         """Scroll page"""
         operation_name = "scroll_page"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
+            return DelightfulBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         details = {"direction": direction, "full_page": full_page, "page_id": page_id}
 
@@ -479,7 +479,7 @@ class MagicBrowser:
                 target_y = max(0, document_height - viewport_height) # Scroll to bottom to make bottom visible
             else:
                 # Should not happen due to Literal type checking, but as a safeguard
-                return MagicBrowserError(error=f"Invalid scroll direction: {direction}", operation=operation_name, details=details)
+                return DelightfulBrowserError(error=f"Invalid scroll direction: {direction}", operation=operation_name, details=details)
 
             # Ensure target coordinates are numbers
             target_x = float(target_x)
@@ -507,21 +507,21 @@ class MagicBrowser:
         except PlaywrightError as e:
             error_msg = f"Scroll page failed (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details=details)
         except Exception as e:
             error_msg = f"Scroll page failed (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details=details)
 
-    async def scroll_to(self, page_id: str, screen_number: int) -> MagicBrowserResult:
+    async def scroll_to(self, page_id: str, screen_number: int) -> DelightfulBrowserResult:
         """Scroll page to the position of the specified screen number (>=1)."""
         operation_name = "scroll_to"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
+            return DelightfulBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         if screen_number < 1:
-            return MagicBrowserError(error="Screen number must be greater than or equal to 1", operation=operation_name, details={"screen_number": screen_number})
+            return DelightfulBrowserError(error="Screen number must be greater than or equal to 1", operation=operation_name, details={"screen_number": screen_number})
 
         details = {"screen_number": screen_number, "page_id": page_id}
 
@@ -558,34 +558,34 @@ class MagicBrowser:
         except PlaywrightError as e:
             error_msg = f"Scroll to screen {screen_number} failed (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details=details)
         except Exception as e:
             error_msg = f"Scroll to screen {screen_number} failed (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details=details)
 
-    async def get_page_state(self, page_id: str) -> MagicBrowserResult:
+    async def get_page_state(self, page_id: str) -> DelightfulBrowserResult:
         """Get page state information"""
         operation_name = "get_page_state"
         # PageRegistry.get_page_state internally handles page not found case and returns PageState(error=...)
         try:
             page_state: PageState = await self._page_registry.get_page_state(page_id)
             if page_state.error:
-                # Convert PageState error to MagicBrowserError
-                return MagicBrowserError(error=page_state.error, operation=operation_name, details={"page_id": page_id})
+                # Convert PageState error to DelightfulBrowserError
+                return DelightfulBrowserError(error=page_state.error, operation=operation_name, details={"page_id": page_id})
             else:
                 return PageStateSuccess(state=page_state)
         except Exception as e: # Catch other exceptions that PageRegistry might throw
             error_msg = f"Unexpected error getting page state for {page_id}: {e}"
             logger.error(error_msg, exc_info=True)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details={"page_id": page_id})
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details={"page_id": page_id})
 
-    async def read_as_markdown(self, page_id: str, scope: str = "viewport") -> MagicBrowserResult:
+    async def read_as_markdown(self, page_id: str, scope: str = "viewport") -> DelightfulBrowserResult:
         """Get Markdown representation of page content"""
         operation_name = "read_as_markdown"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
+            return DelightfulBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         details = {"scope": scope, "page_id": page_id}
 
@@ -596,15 +596,15 @@ class MagicBrowser:
             # Internal JS module loading
             load_result = await self._page_registry.ensure_js_module_loaded(page_id, ["lens"])
             if not load_result.get("lens"):
-                return MagicBrowserError(error="Failed to load JS module 'lens'", operation=operation_name, details=details)
+                return DelightfulBrowserError(error="Failed to load JS module 'lens'", operation=operation_name, details=details)
 
             if scope not in ["viewport", "all"]:
-                return MagicBrowserError(error=f"Invalid scope: {scope}, supports 'viewport' or 'all'", operation=operation_name, details=details)
+                return DelightfulBrowserError(error=f"Invalid scope: {scope}, supports 'viewport' or 'all'", operation=operation_name, details=details)
 
             script = f"""
             async () => {{
                 try {{
-                    return await window.MagicLens.readAsMarkdown('{scope}');
+                    return await window.DelightfulLens.readAsMarkdown('{scope}');
                 }} catch (e) {{
                     return {{ error: e.toString(), stack: e.stack }};
                 }}
@@ -615,7 +615,7 @@ class MagicBrowser:
             if isinstance(result, dict) and "error" in result:
                 js_error = f"JS execution to get Markdown failed ({scope}): {result['error']}"
                 logger.error(js_error)
-                return MagicBrowserError(error=js_error, operation=operation_name, details=details)
+                return DelightfulBrowserError(error=js_error, operation=operation_name, details=details)
 
             url = page.url
             title = await page.title() or "No title" # Also need to handle title retrieval error
@@ -626,22 +626,22 @@ class MagicBrowser:
         except PlaywrightError as e:
             error_msg = f"Read Markdown failed (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details=details)
         except Exception as e:
             error_msg = f"Read Markdown failed (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details=details)
 
-    async def get_interactive_elements(self, page_id: str, scope: str = "viewport") -> MagicBrowserResult:
+    async def get_interactive_elements(self, page_id: str, scope: str = "viewport") -> DelightfulBrowserResult:
         """Get interactive elements in page"""
         operation_name = "get_interactive_elements"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
+            return DelightfulBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         details = {"scope": scope, "page_id": page_id}
         if scope not in ["viewport", "all"]:
-            return MagicBrowserError(error=f"Invalid scope: {scope}", operation=operation_name, details=details)
+            return DelightfulBrowserError(error=f"Invalid scope: {scope}", operation=operation_name, details=details)
 
         try:
             self._active_page_id = page_id
@@ -650,13 +650,13 @@ class MagicBrowser:
             # Internal JS module loading
             load_result = await self._page_registry.ensure_js_module_loaded(page_id, ["touch"])
             if not load_result.get("touch"):
-                return MagicBrowserError(error="Failed to load JS module 'touch'", operation=operation_name, details=details)
+                return DelightfulBrowserError(error="Failed to load JS module 'touch'", operation=operation_name, details=details)
 
             scope_value = "viewport" if scope == "viewport" else "all"
             script = f"""
             async () => {{
                 try {{
-                    return await window.MagicTouch.getInteractiveElements('{scope_value}');
+                    return await window.DelightfulTouch.getInteractiveElements('{scope_value}');
                 }} catch (e) {{
                     return {{ error: e.toString(), stack: e.stack }};
                 }}
@@ -667,7 +667,7 @@ class MagicBrowser:
             if isinstance(result, dict) and "error" in result:
                 js_error = f"JS execution to get interactive elements failed: {result['error']}"
                 logger.error(js_error)
-                return MagicBrowserError(error=js_error, operation=operation_name, details=details)
+                return DelightfulBrowserError(error=js_error, operation=operation_name, details=details)
 
             # result should be a categorized elements dictionary
             elements_by_category = result if isinstance(result, dict) else {}
@@ -679,18 +679,18 @@ class MagicBrowser:
         except PlaywrightError as e:
             error_msg = f"Get interactive elements failed (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details=details)
         except Exception as e:
             error_msg = f"Get interactive elements failed (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details=details)
 
-    async def take_screenshot(self, page_id: str, path: Optional[str] = None, full_page: bool = False) -> MagicBrowserResult:
+    async def take_screenshot(self, page_id: str, path: Optional[str] = None, full_page: bool = False) -> DelightfulBrowserResult:
         """Take screenshot of specified page"""
         operation_name = "take_screenshot"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
+            return DelightfulBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         target_path_obj: Optional[Path] = None
         is_temp: bool = False
@@ -704,10 +704,10 @@ class MagicBrowser:
                 try:
                     target_path_obj.parent.mkdir(parents=True, exist_ok=True)
                 except Exception as mkdir_e:
-                    return MagicBrowserError(error=f"Unable to create screenshot directory: {mkdir_e}", operation=operation_name, details={"path": path})
+                    return DelightfulBrowserError(error=f"Unable to create screenshot directory: {mkdir_e}", operation=operation_name, details={"path": path})
             else:
                 if not self._TEMP_SCREENSHOT_DIR:
-                    return MagicBrowserError(error="Temporary screenshot directory not available", operation=operation_name)
+                    return DelightfulBrowserError(error="Temporary screenshot directory not available", operation=operation_name)
                 temp_filename = f"screenshot_{uuid.uuid4()}.png"
                 target_path_obj = self._TEMP_SCREENSHOT_DIR / temp_filename
                 is_temp = True
@@ -728,18 +728,18 @@ class MagicBrowser:
         except PlaywrightError as e:
             error_msg = f"Screenshot failed (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details={"path": final_path_str, "full_page": full_page, "page_id": page_id})
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details={"path": final_path_str, "full_page": full_page, "page_id": page_id})
         except Exception as e:
             error_msg = f"Screenshot failed (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details={"path": final_path_str, "full_page": full_page, "page_id": page_id})
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details={"path": final_path_str, "full_page": full_page, "page_id": page_id})
 
-    async def evaluate_js(self, page_id: str, js_code: str) -> MagicBrowserResult:
+    async def evaluate_js(self, page_id: str, js_code: str) -> DelightfulBrowserResult:
         """Execute JavaScript code on specified page"""
         operation_name = "evaluate_js"
         page = await self.get_page_by_id(page_id)
         if not page:
-            return MagicBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
+            return DelightfulBrowserError(error=f"Page does not exist or is closed: {page_id}", operation=operation_name)
 
         details = {"js_code_preview": js_code[:100] + '...', "page_id": page_id}
 
@@ -752,11 +752,11 @@ class MagicBrowser:
         except PlaywrightError as e:
             error_msg = f"Execute JS failed (Playwright Error): {e}"
             logger.error(error_msg, exc_info=False)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details=details)
         except Exception as e:
             error_msg = f"Execute JS failed (Unexpected Error): {e}"
             logger.error(error_msg, exc_info=True)
-            return MagicBrowserError(error=error_msg, operation=operation_name, details=details)
+            return DelightfulBrowserError(error=error_msg, operation=operation_name, details=details)
 
     # --- Cleanup ---
     async def cleanup_temp_files(self):
@@ -775,7 +775,7 @@ class MagicBrowser:
         """Close browser, close all managed pages, unregister client and clean up temp files"""
         if not self._initialized:
             return
-        logger.info("Start closing MagicBrowser...")
+        logger.info("Start closing DelightfulBrowser...")
         try:
             # Close all managed pages
             page_close_tasks = []
@@ -808,10 +808,10 @@ class MagicBrowser:
             await self.cleanup_temp_files()
 
             self._initialized = False
-            logger.info("MagicBrowser close completed.")
+            logger.info("DelightfulBrowser close completed.")
 
         except Exception as e:
-            logger.error(f"Exception occurred closing MagicBrowser: {e}", exc_info=True)
+            logger.error(f"Exception occurred closing DelightfulBrowser: {e}", exc_info=True)
         finally:
             # Ensure state is reset
             self._initialized = False
@@ -903,4 +903,4 @@ class MagicBrowser:
                 logger.debug(f"Error removing network listeners (page may be closed): {remove_e}")
 
 # JSLoader moved to js_loader.py
-# Other dependent classes (BrowserManager, MagicBrowserConfig, PageRegistry) imported from respective files
+# Other dependent classes (BrowserManager, DelightfulBrowserConfig, PageRegistry) imported from respective files

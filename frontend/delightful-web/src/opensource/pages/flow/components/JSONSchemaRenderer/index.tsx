@@ -5,8 +5,8 @@ import BaseItem from "./BaseItem"
 import GroupItem from "./GroupItem"
 import useExtraClassname from "./hooks/useExtraClassname"
 import { useStyles } from "./style/style"
-import Schema from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
-import { FormItemType } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
+import Schema from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
+import { FormItemType } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 
 type JSONSchemaRenderer = {
 	form: Schema

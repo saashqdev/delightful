@@ -13,7 +13,7 @@ import { replaceRouteParams } from "@/utils/route"
 import { RoutePath } from "@/const/routes"
 import { useSearchParams } from "react-router-dom"
 import { FlowRouteType } from "@/types/flow"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { useVectorKnowledgeCreateStyles } from "./styles"
 import { getFileIconByExt } from "../../constant"
 import VectorKnowledgeEmbed from "../Embed"
@@ -405,7 +405,7 @@ export default function VectorKnowledgeCreate() {
 	return (
 		<Flex className={styles.wrapper} vertical>
 			<Flex className={styles.header} align="center" gap={14}>
-				<MagicIcon
+				<DelightfulIcon
 					component={IconChevronLeft}
 					size={24}
 					className={styles.arrow}

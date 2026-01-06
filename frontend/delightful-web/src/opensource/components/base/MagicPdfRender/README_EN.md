@@ -1,4 +1,4 @@
-# MagicPdfRender
+# DelightfulPdfRender
 
 A PDF preview component based on `react-pdf` that supports file and URL rendering with complete interactive features.
 
@@ -16,13 +16,13 @@ A PDF preview component based on `react-pdf` that supports file and URL renderin
 ## Basic Usage
 
 ```tsx
-import MagicPdfRender from './components/base/MagicPdfRender'
+import DelightfulPdfRender from './components/base/DelightfulPdfRender'
 
 function App() {
   const [file, setFile] = useState<File | string | null>(null)
   
   return (
-    <MagicPdfRender
+    <DelightfulPdfRender
       file={file}
       height={600}
       showToolbar
@@ -121,7 +121,7 @@ const useCustomStyles = createStyles(({ token }) => ({
 The component provides comprehensive error handling:
 
 ```tsx
-<MagicPdfRender
+<DelightfulPdfRender
   file={file}
   onLoadError={(error) => {
     console.error('PDF load failed:', error)
@@ -165,7 +165,7 @@ function App() {
     <div>
       <Button onClick={() => switchLanguage("zh_CN")}>中文</Button>
       <Button onClick={() => switchLanguage("en_US")}>English</Button>
-      <MagicPdfRender file={file} />
+      <DelightfulPdfRender file={file} />
     </div>
   )
 }
@@ -188,7 +188,7 @@ The component has been refactored following SOLID principles and best practices,
 ### Structure
 
 ```
-MagicPdfRender/
+DelightfulPdfRender/
 ├── index.tsx                    # Main component (164 lines)
 ├── types.ts                     # Type definitions
 ├── styles.ts                    # Style definitions
@@ -220,7 +220,7 @@ The refactored component is **fully backward compatible**. Existing usage patter
 
 ```tsx
 // Usage remains identical before and after refactoring
-<MagicPdfRender 
+<DelightfulPdfRender 
   file={pdfFile}
   showToolbar={true}
   height="600px"

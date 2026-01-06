@@ -3,7 +3,7 @@ import { cx } from "antd-style"
 import type { FC, SyntheticEvent } from "react"
 import { useCallback, useRef, useState } from "react"
 import { useMemoizedFn } from "ahooks"
-import ImageWrapper from "@/opensource/components/base/MagicImagePreview/components/ImageWrapper"
+import ImageWrapper from "@/opensource/components/base/DelightfulImagePreview/components/ImageWrapper"
 import type { ElementDimensions } from "../../hooks/use-drag-resize"
 import { useStyles } from "./styles"
 

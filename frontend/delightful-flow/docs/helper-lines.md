@@ -18,7 +18,7 @@ The React Flow helper lines component provides alignment guides to help users al
 
 ```tsx
 import { ReactFlow, useViewport } from 'reactflow';
-import { HelperLines, useHelperLines } from '@/MagicFlow/components/HelperLines';
+import { HelperLines, useHelperLines } from '@/DelightfulFlow/components/HelperLines';
 
 function FlowComponent() {
   const { x, y, zoom } = useViewport();
@@ -260,7 +260,7 @@ import ReactFlow, {
   useEdgesState, 
   useViewport 
 } from 'reactflow';
-import { HelperLines, useHelperLines } from '@/MagicFlow/components/HelperLines';
+import { HelperLines, useHelperLines } from '@/DelightfulFlow/components/HelperLines';
 import { IconRuler } from '@tabler/icons-react';
 import 'reactflow/dist/style.css';
 

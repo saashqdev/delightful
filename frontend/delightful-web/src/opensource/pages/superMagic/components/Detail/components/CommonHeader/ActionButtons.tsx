@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { memo } from "react"
 import {
 	IconArrowsDiagonal,
@@ -113,7 +113,7 @@ export default memo(function ActionButtons(props: ActionButtonsProps) {
 	return (
 		<Flex gap={4}>
 			{hasUserSelectDetail && (
-				<MagicIcon
+				<DelightfulIcon
 					size={28}
 					component={IconChevronLeft}
 					stroke={2}
@@ -122,7 +122,7 @@ export default memo(function ActionButtons(props: ActionButtonsProps) {
 				/>
 			)}
 			{hasUserSelectDetail && (
-				<MagicIcon
+				<DelightfulIcon
 					size={28}
 					component={IconChevronRight}
 					stroke={2}
@@ -133,7 +133,7 @@ export default memo(function ActionButtons(props: ActionButtonsProps) {
 
 			{/* 移动端不显示全屏按钮 */}
 			{!isMobile && !isFullscreen && (
-				<MagicIcon
+				<DelightfulIcon
 					size={28}
 					component={IconArrowsDiagonal}
 					stroke={2}
@@ -142,7 +142,7 @@ export default memo(function ActionButtons(props: ActionButtonsProps) {
 				/>
 			)}
 			{!isMobile && isFullscreen && (
-				<MagicIcon
+				<DelightfulIcon
 					size={28}
 					component={IconArrowsDiagonalMinimize2}
 					stroke={2}
@@ -152,7 +152,7 @@ export default memo(function ActionButtons(props: ActionButtonsProps) {
 			)}
 
 			{hasUserSelectDetail && isDownloadable() && (
-				<MagicIcon
+				<DelightfulIcon
 					size={28}
 					component={IconDownload}
 					stroke={2}
@@ -162,7 +162,7 @@ export default memo(function ActionButtons(props: ActionButtonsProps) {
 			)}
 
 			{hasUserSelectDetail && !isMobile && (
-				<MagicIcon
+				<DelightfulIcon
 					size={28}
 					component={IconX}
 					stroke={2}

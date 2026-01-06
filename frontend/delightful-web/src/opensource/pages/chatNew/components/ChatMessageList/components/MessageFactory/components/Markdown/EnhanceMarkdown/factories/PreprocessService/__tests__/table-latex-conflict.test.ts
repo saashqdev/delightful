@@ -26,9 +26,9 @@ describe("PreprocessService - Table and LaTeX Conflict", () => {
 		expect(content).toContain("$35")
 
 		// Should NOT contain LaTeX components for table prices
-		expect(content).not.toContain('<MagicLatexInline math="15')
-		expect(content).not.toContain('<MagicLatexInline math="25')
-		expect(content).not.toContain('<MagicLatexInline math="35')
+		expect(content).not.toContain('<DelightfulLatexInline math="15')
+		expect(content).not.toContain('<DelightfulLatexInline math="25')
+		expect(content).not.toContain('<DelightfulLatexInline math="35')
 
 		// Should NOT contain any placeholder remnants
 		expect(content).not.toContain("__DOLLAR_PLACEHOLDER__")
@@ -50,7 +50,7 @@ describe("PreprocessService - Table and LaTeX Conflict", () => {
 		expect(content).toContain("$15")
 
 		// Should still process real LaTeX formulas
-		expect(content).toContain('<MagicLatexInline math="E = mc^2" />')
+		expect(content).toContain('<DelightfulLatexInline math="E = mc^2" />')
 
 		// Should NOT contain any placeholder remnants
 		expect(content).not.toContain("__DOLLAR_PLACEHOLDER__")
@@ -75,11 +75,11 @@ describe("PreprocessService - Table and LaTeX Conflict", () => {
 		expect(content).toContain("这不是公式：$x + y$")
 
 		// Real LaTeX outside table should work (note: single backslash in output)
-		expect(content).toContain('<MagicLatexInline math="\\sum_{i=1}^{n} x_i = total" />')
+		expect(content).toContain('<DelightfulLatexInline math="\\sum_{i=1}^{n} x_i = total" />')
 
 		// Should not create LaTeX components for table content
-		expect(content).not.toContain('<MagicLatexInline math="100.50')
-		expect(content).not.toContain('<MagicLatexInline math="x + y')
+		expect(content).not.toContain('<DelightfulLatexInline math="100.50')
+		expect(content).not.toContain('<DelightfulLatexInline math="x + y')
 
 		// Should NOT contain any placeholder remnants
 		expect(content).not.toContain("__DOLLAR_PLACEHOLDER__")

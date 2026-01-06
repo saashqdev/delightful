@@ -1,7 +1,7 @@
 # Tool Node
 
 ## What is a Tool Node?
-The Tool Node is a powerful node in Magic Flow that allows you to call and use various preset tools within workflows. Like a multi-functional Swiss Army knife, the Tool Node helps you execute specific tasks such as data processing, information queries, or automated operations. You can use these tools in two ways: through natural language descriptions (large model calls) or direct parameter settings (parameter calls), meeting different scenario requirements.
+The Tool Node is a powerful node in Delightful Flow that allows you to call and use various preset tools within workflows. Like a multi-functional Swiss Army knife, the Tool Node helps you execute specific tasks such as data processing, information queries, or automated operations. You can use these tools in two ways: through natural language descriptions (large model calls) or direct parameter settings (parameter calls), meeting different scenario requirements.
 
 **Image Description:**
 
@@ -10,7 +10,7 @@ The Tool Node interface mainly consists of a call mode selection area and a para
 
 ## Why Do We Need a Tool Node?
 When building intelligent workflows, you often need to execute standardized tasks or call specific functions. The Tool Node exists to solve this problem:
-1. **Function Extension**: Expands Magic Flow's capabilities, enabling workflows to perform more specialized tasks
+1. **Function Extension**: Expands Delightful Flow's capabilities, enabling workflows to perform more specialized tasks
 2. **Standardized Operations**: Provides a unified interface for calling various tools, simplifying workflow design
 3. **Flexible Calls**: Supports multiple calling methods, making it easy to use even without technical background
 4. **Process Automation**: Converts manual operations into automated processes, improving efficiency and consistency

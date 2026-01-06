@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Core\DataIsolation;
 
-use App\Domain\OrganizationEnvironment\Entity\MagicEnvironmentEntity;
+use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 
 class BaseThirdPlatformDataIsolationManager implements ThirdPlatformDataIsolationManagerInterface
 {
@@ -15,7 +15,7 @@ class BaseThirdPlatformDataIsolationManager implements ThirdPlatformDataIsolatio
     {
     }
 
-    public function init(DataIsolationInterface $dataIsolation, MagicEnvironmentEntity $magicEnvironmentEntity): void
+    public function init(DataIsolationInterface $dataIsolation, DelightfulEnvironmentEntity $magicEnvironmentEntity): void
     {
     }
 

@@ -7,22 +7,22 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Application\Kernel;
 
-use App\Application\Kernel\Contract\MagicPermissionInterface;
-use App\Application\Kernel\MagicPermission;
+use App\Application\Kernel\Contract\DelightfulPermissionInterface;
+use App\Application\Kernel\DelightfulPermission;
 use HyperfTest\HttpTestCase;
 use InvalidArgumentException;
 
 /**
  * @internal
  */
-class MagicPermissionEnumTest extends HttpTestCase
+class DelightfulPermissionEnumTest extends HttpTestCase
 {
-    private MagicPermissionInterface $permissionEnum;
+    private DelightfulPermissionInterface $permissionEnum;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->permissionEnum = di(MagicPermissionInterface::class);
+        $this->permissionEnum = di(DelightfulPermissionInterface::class);
     }
 
     public function testGetOperations()
@@ -103,7 +103,7 @@ class MagicPermissionEnumTest extends HttpTestCase
     public function testIsValidPermissionWithValidKeys()
     {
         // 测试全局权限
-        $this->assertTrue($this->permissionEnum->isValidPermission(MagicPermission::ALL_PERMISSIONS));
+        $this->assertTrue($this->permissionEnum->isValidPermission(DelightfulPermission::ALL_PERMISSIONS));
 
         // 测试有效的权限组合
         $this->assertTrue($this->permissionEnum->isValidPermission('admin.ai.model_management.query'));
@@ -188,7 +188,7 @@ class MagicPermissionEnumTest extends HttpTestCase
     public function testImplementsInterface()
     {
         $this->assertInstanceOf(
-            MagicPermissionInterface::class,
+            DelightfulPermissionInterface::class,
             $this->permissionEnum
         );
     }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 /**
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
-use Delightful\SuperMagic\Infrastructure\Utils\Auth\Guard\SandboxGuard;
-use Delightful\SuperMagic\Interfaces\Authorization\Web\SandboxAuthorization;
+use Delightful\SuperDelightful\Infrastructure\Utils\Auth\Guard\SandboxGuard;
+use Delightful\SuperDelightful\Interfaces\Authorization\Web\SandboxAuthorization;
 use Qbhy\HyperfAuth\Provider\EloquentProvider;
 
 return [

@@ -5,22 +5,22 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Application\MCP\SupperMagicMCP;
+namespace App\Application\MCP\SupperDelightfulMCP;
 
 use App\Application\Contact\UserSetting\UserSettingKey;
 use App\Application\Flow\ExecuteManager\NodeRunner\LLM\ToolsExecutor;
-use App\Application\MCP\BuiltInMCP\SuperMagicChat\SuperMagicChatBuiltInMCPServer;
+use App\Application\MCP\BuiltInMCP\SuperDelightfulChat\SuperDelightfulChatBuiltInMCPServer;
 use App\Application\MCP\Service\MCPServerAppService;
 use App\Application\MCP\Utils\MCPServerConfigUtil;
 use App\Domain\Agent\Entity\ValueObject\AgentDataIsolation;
-use App\Domain\Agent\Entity\ValueObject\Query\MagicAgentQuery;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulAgentQuery;
 use App\Domain\Agent\Service\AgentDomainService;
 use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\MentionType;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicUserSettingDomainService;
+use App\Domain\Contact\Service\DelightfulUserSettingDomainService;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowQuery;
-use App\Domain\Flow\Service\MagicFlowDomainService;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowQuery;
+use App\Domain\Flow\Service\DelightfulFlowDomainService;
 use App\Domain\MCP\Entity\MCPServerEntity;
 use App\Domain\MCP\Entity\ValueObject\MCPDataIsolation;
 use App\Domain\MCP\Entity\ValueObject\Query\MCPServerQuery;
@@ -28,25 +28,25 @@ use App\ErrorCode\MCPErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\TempAuth\TempAuthInterface;
 use App\Infrastructure\Core\ValueObject\Page;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskContext;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\TaskContext;
 use Hyperf\Codec\Json;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
-readonly class SupperMagicAgentMCP implements SupperMagicAgentMCPInterface
+readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInterface
 {
     protected LoggerInterface $logger;
 
     public function __construct(
-        protected MagicUserSettingDomainService $magicUserSettingDomainService,
+        protected DelightfulUserSettingDomainService $magicUserSettingDomainService,
         protected MCPServerAppService $MCPServerAppService,
         protected TempAuthInterface $tempAuth,
         protected AgentDomainService $agentDomainService,
-        protected MagicFlowDomainService $magicFlowDomainService,
+        protected DelightfulFlowDomainService $magicFlowDomainService,
         LoggerFactory $loggerFactory,
     ) {
-        $this->logger = $loggerFactory->get('SupperMagicAgentMCP');
+        $this->logger = $loggerFactory->get('SupperDelightfulAgentMCP');
     }
 
     public function createChatMessageRequestMcpConfig(MCPDataIsolation $dataIsolation, TaskContext $taskContext, array $agentIds = [], array $mcpIds = [], array $toolIds = []): ?array
@@ -84,11 +84,11 @@ readonly class SupperMagicAgentMCP implements SupperMagicAgentMCPInterface
             $mcpIds = array_values(array_filter(array_unique($mcpIds)));
             $toolIds = array_values(array_filter(array_unique($toolIds)));
 
-            $builtinSuperMagicServer = SuperMagicChatBuiltInMCPServer::createByChatParams($dataIsolation, $agentIds, $toolIds);
+            $builtinSuperDelightfulServer = SuperDelightfulChatBuiltInMCPServer::createByChatParams($dataIsolation, $agentIds, $toolIds);
 
             $serverOptions = [];
-            if ($builtinSuperMagicServer) {
-                $serverOptions[$builtinSuperMagicServer->getCode()] = $this->createBuiltinSuperMagicServerOptions($dataIsolation, $agentIds, $toolIds);
+            if ($builtinSuperDelightfulServer) {
+                $serverOptions[$builtinSuperDelightfulServer->getCode()] = $this->createBuiltinSuperDelightfulServerOptions($dataIsolation, $agentIds, $toolIds);
             }
 
             $projectId = $taskContext->getTask()->getProjectId();
@@ -97,7 +97,7 @@ readonly class SupperMagicAgentMCP implements SupperMagicAgentMCPInterface
                 $mcpIds = array_merge($mcpIds, $projectMcpIds);
             }
 
-            $mcpServers = $this->createMcpServers($dataIsolation, $mcpIds, [$builtinSuperMagicServer], $serverOptions);
+            $mcpServers = $this->createMcpServers($dataIsolation, $mcpIds, [$builtinSuperDelightfulServer], $serverOptions);
 
             $mcpServers = [
                 'mcpServers' => $mcpServers,
@@ -189,27 +189,27 @@ readonly class SupperMagicAgentMCP implements SupperMagicAgentMCPInterface
         $dataIsolation = DataIsolation::create($mcpDataIsolation->getCurrentOrganizationCode(), $mcpDataIsolation->getCurrentUserId());
         $mcpServerIds = [];
 
-        $mcpSettings = $this->magicUserSettingDomainService->get($dataIsolation, UserSettingKey::genSuperMagicProjectMCPServers($projectId));
+        $mcpSettings = $this->magicUserSettingDomainService->get($dataIsolation, UserSettingKey::genSuperDelightfulProjectMCPServers($projectId));
         if ($mcpSettings) {
             $mcpServerIds = array_filter(array_column($mcpSettings->getValue()['servers'], 'id'));
         }
         return $mcpServerIds;
     }
 
-    private function createBuiltinSuperMagicServerOptions(MCPDataIsolation $dataIsolation, array $agentIds = [], array $toolIds = []): array
+    private function createBuiltinSuperDelightfulServerOptions(MCPDataIsolation $dataIsolation, array $agentIds = [], array $toolIds = []): array
     {
         $labelNames = [];
 
         // 查询 agent 信息
         $agentDataIsolation = AgentDataIsolation::createByBaseDataIsolation($dataIsolation);
-        $agentQuery = new MagicAgentQuery();
+        $agentQuery = new DelightfulAgentQuery();
         $agentQuery->setIds($agentIds);
         $agents = $this->agentDomainService->queries($agentDataIsolation->disabled(), $agentQuery, Page::createNoPage())['list'] ?? [];
         $agentInfos = [];
 
         // 查询 tool 信息
         $flowDataIsolation = FlowDataIsolation::createByBaseDataIsolation($dataIsolation);
-        $flowQuery = new MagicFLowQuery();
+        $flowQuery = new DelightfulFLowQuery();
         $flowQuery->setCodes($toolIds);
         $tools = ToolsExecutor::getToolFlows($flowDataIsolation->disabled(), $toolIds);
 

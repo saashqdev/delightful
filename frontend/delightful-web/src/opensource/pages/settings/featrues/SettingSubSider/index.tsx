@@ -1,8 +1,8 @@
-import MagicLogo from "@/opensource/components/MagicLogo"
-import { LogoType } from "@/opensource/components/MagicLogo/LogoType"
-import MagicCollapse from "@/opensource/components/base/MagicCollapse"
-import { MagicList } from "@/opensource/components/MagicList"
-import type { MagicListItemData } from "@/opensource/components/MagicList/types"
+import DelightfulLogo from "@/opensource/components/DelightfulLogo"
+import { LogoType } from "@/opensource/components/DelightfulLogo/LogoType"
+import DelightfulCollapse from "@/opensource/components/base/DelightfulCollapse"
+import { DelightfulList } from "@/opensource/components/DelightfulList"
+import type { DelightfulListItemData } from "@/opensource/components/DelightfulList/types"
 
 import {
 	IconDeviceDesktopCog,
@@ -17,7 +17,7 @@ import { createStyles, cx } from "antd-style"
 import type { TFunction } from "i18next"
 import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import SubSiderContainer from "@/opensource/layouts/BaseLayout/components/SubSider"
 import { colorScales } from "@/opensource/providers/ThemeProvider/colors"
 import { SettingSection } from "../../types"
@@ -44,11 +44,11 @@ const useStyles = createStyles(({ isDarkMode, prefixCls, token }) => {
 	}
 })
 
-const systemSettingItems: (t: TFunction<"interface">) => MagicListItemData[] = (t) => [
+const systemSettingItems: (t: TFunction<"interface">) => DelightfulListItemData[] = (t) => [
 	{
 		id: SettingSection.GENERAL_SETTING,
 		avatar: {
-			icon: <MagicIcon component={IconSettings} />,
+			icon: <DelightfulIcon component={IconSettings} />,
 			style: { background: colorScales.violet[5], padding: 8 },
 		},
 		title: t("setting.generalSetting", {
@@ -58,7 +58,7 @@ const systemSettingItems: (t: TFunction<"interface">) => MagicListItemData[] = (
 	{
 		id: SettingSection.ACCOUNT_MANAGE,
 		avatar: {
-			icon: <MagicIcon component={IconUserCircle} />,
+			icon: <DelightfulIcon component={IconUserCircle} />,
 			style: { background: colorScales.green[5], padding: 8 },
 		},
 		title: t("setting.accountManage", { ns: "interface" }),
@@ -66,18 +66,18 @@ const systemSettingItems: (t: TFunction<"interface">) => MagicListItemData[] = (
 	{
 		id: SettingSection.LOGIN_DEVICES,
 		avatar: {
-			icon: <MagicIcon component={IconDeviceDesktopCog} />,
+			icon: <DelightfulIcon component={IconDeviceDesktopCog} />,
 			style: { background: colorScales.orange[5], padding: 8 },
 		},
 		title: t("setting.loginDevices", { ns: "interface" }),
 	},
 ]
 
-const aboutUsItems: (t: TFunction) => MagicListItemData[] = (t) => [
+const aboutUsItems: (t: TFunction) => DelightfulListItemData[] = (t) => [
 	{
 		id: SettingSection.FALLBACK,
 		avatar: {
-			icon: <MagicIcon component={IconMailbox} />,
+			icon: <DelightfulIcon component={IconMailbox} />,
 			style: { background: colorScales.pink[5], padding: 8 },
 		},
 		title: t("setting.fallback", {
@@ -87,7 +87,7 @@ const aboutUsItems: (t: TFunction) => MagicListItemData[] = (t) => [
 	{
 		id: SettingSection.UPDATE_LOG,
 		avatar: {
-			icon: <MagicIcon component={IconFileDescription} />,
+			icon: <DelightfulIcon component={IconFileDescription} />,
 			style: { background: colorScales.blue[5], padding: 8 },
 		},
 		title: t("setting.updateLog", {
@@ -97,10 +97,10 @@ const aboutUsItems: (t: TFunction) => MagicListItemData[] = (t) => [
 	{
 		id: SettingSection.ABOUT_DELIGHTFUL,
 		avatar: {
-			icon: <MagicLogo type={LogoType.ICON} />,
+			icon: <DelightfulLogo type={LogoType.ICON} />,
 			style: { background: colorScales.brand[5], padding: 8 },
 		},
-		title: t("setting.aboutMagic", {
+		title: t("setting.aboutDelightful", {
 			ns: "interface",
 		}),
 	},
@@ -120,12 +120,12 @@ function SettingSubSider() {
 		() => [
 			{
 				label: <span className={styles.collapseLabel}>{t("setting.systemSetting")}</span>,
-				children: <MagicList onItemClick={navigateTo} items={systemSettingItems(t)} />,
+				children: <DelightfulList onItemClick={navigateTo} items={systemSettingItems(t)} />,
 				key: "SystemSetting",
 			},
 			{
 				label: <span className={styles.collapseLabel}>{t("setting.aboutUs")}</span>,
-				children: <MagicList onItemClick={navigateTo} items={aboutUsItems(t)} />,
+				children: <DelightfulList onItemClick={navigateTo} items={aboutUsItems(t)} />,
 				key: "AboutUs",
 			},
 		],
@@ -134,7 +134,7 @@ function SettingSubSider() {
 
 	return (
 		<SubSiderContainer>
-			<MagicCollapse
+			<DelightfulCollapse
 				activeKey={collapseKey}
 				onChange={(key) => setCollapseKey(key)}
 				className={cx(styles.collapse)}

@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react"
-import CommonHeader from "@/opensource/pages/superMagic/components/Detail/components/CommonHeader"
-// import ExcelIcon from "@/opensource/pages/superMagic/assets/file_icon/excel.svg"
-// import PowerPointIcon from "@/opensource/pages/superMagic/assets/file_icon/powerpoint.svg"
+import CommonHeader from "@/opensource/pages/superDelightful/components/Detail/components/CommonHeader"
+// import ExcelIcon from "@/opensource/pages/superDelightful/assets/file_icon/excel.svg"
+// import PowerPointIcon from "@/opensource/pages/superDelightful/assets/file_icon/powerpoint.svg"
 import { Skeleton } from "antd"
 import { UniverComponent } from "@/opensource/components/UniverComponent"
-import MagicFileIcon from "@/opensource/components/base/MagicFileIcon"
+import DelightfulFileIcon from "@/opensource/components/base/DelightfulFileIcon"
 import CommonFooter from "../../components/CommonFooter"
-import { useFileUrl } from "@/opensource/pages/superMagic/hooks/useFileUrl"
+import { useFileUrl } from "@/opensource/pages/superDelightful/hooks/useFileUrl"
 
 export default function UniverViewer(props: any) {
 	const {
@@ -36,7 +36,7 @@ export default function UniverViewer(props: any) {
 	// 根据文件扩展名决定使用哪个图标
 	const getFileIcon = () => {
 		const extension = (file_extension || "").toLowerCase()
-		return <MagicFileIcon type={extension} size={18} />
+		return <DelightfulFileIcon type={extension} size={18} />
 	}
 
 	// 判断文件类型

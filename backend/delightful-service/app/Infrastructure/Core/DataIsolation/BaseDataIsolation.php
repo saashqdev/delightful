@@ -81,7 +81,7 @@ class BaseDataIsolation implements DataIsolationInterface
         $self = new static(
             currentOrganizationCode: $baseDataIsolation->getCurrentOrganizationCode(),
             userId: $baseDataIsolation->getCurrentUserId(),
-            magicId: $baseDataIsolation->getMagicId()
+            magicId: $baseDataIsolation->getDelightfulId()
         );
         $self->extends($baseDataIsolation);
         return $self;
@@ -96,7 +96,7 @@ class BaseDataIsolation implements DataIsolationInterface
     {
         $this->currentOrganizationCode = $parentDataIsolation->getCurrentOrganizationCode();
         $this->currentUserId = $parentDataIsolation->getCurrentUserId();
-        $this->magicId = $parentDataIsolation->getMagicId();
+        $this->magicId = $parentDataIsolation->getDelightfulId();
         $this->envId = $parentDataIsolation->getEnvId();
         $this->enabled = $parentDataIsolation->isEnable();
         $this->subscriptionManager = $parentDataIsolation->getSubscriptionManager();
@@ -154,12 +154,12 @@ class BaseDataIsolation implements DataIsolationInterface
         return $this;
     }
 
-    public function getMagicId(): string
+    public function getDelightfulId(): string
     {
         return $this->magicId;
     }
 
-    public function setMagicId(string $magicId): static
+    public function setDelightfulId(string $magicId): static
     {
         $this->magicId = $magicId;
         return $this;

@@ -18,8 +18,8 @@ from magic_use.magic_browser import (
     InputSuccess,
     InteractiveElementsSuccess,
     JSEvalSuccess,
-    MagicBrowser,
-    MagicBrowserError,
+    DelightfulBrowser,
+    DelightfulBrowserError,
     ScreenshotSuccess,
     ScrollToSuccess,
 )
@@ -99,7 +99,7 @@ class InteractionOperations(OperationGroup):
             }
         }
     )
-    async def get_interactive_elements(self, browser: MagicBrowser, params: GetInteractiveElementsParams) -> ToolResult:
+    async def get_interactive_elements(self, browser: DelightfulBrowser, params: GetInteractiveElementsParams) -> ToolResult:
         """Retrieve interactive elements on the page (buttons, links, inputs, etc.).
 
         Scope options:
@@ -120,7 +120,7 @@ class InteractionOperations(OperationGroup):
             result = await browser.get_interactive_elements(page_id, scope)
 
             # Process result
-            if isinstance(result, MagicBrowserError):
+            if isinstance(result, DelightfulBrowserError):
                 return ToolResult(error=result.error)
             elif isinstance(result, InteractiveElementsSuccess):
                 # Extract element data
@@ -205,7 +205,7 @@ class InteractionOperations(OperationGroup):
             }
         }
     )
-    async def find_interactive_element_visually(self, browser: MagicBrowser, params: FindInteractiveElementVisuallyParams) -> ToolResult:
+    async def find_interactive_element_visually(self, browser: DelightfulBrowser, params: FindInteractiveElementVisuallyParams) -> ToolResult:
         """Find interactive elements visually using natural language.
 
         Works with vague descriptions (e.g., "search box") but must target a single element, not a region. Recommended to inspect page structure with `visual_query` first. Returns a list of CSS selectors built from visual markers.
@@ -231,7 +231,7 @@ class InteractionOperations(OperationGroup):
             # Use temporary file for screenshot
             screenshot_result = await browser.take_screenshot(page_id=page_id, path=None, full_page=False)
 
-            if isinstance(screenshot_result, MagicBrowserError):
+            if isinstance(screenshot_result, DelightfulBrowserError):
                 logger.error(f"Visual locate screenshot failed: {screenshot_result.error}")
                 return ToolResult(error=f"Screenshot for visual locate failed: {screenshot_result.error}")
             elif not isinstance(screenshot_result, ScreenshotSuccess):
@@ -279,7 +279,7 @@ class InteractionOperations(OperationGroup):
                 (() => {{
                     const markerIdStr = "{marker_id}"; // current marker id
                     // Use marker.js global find to get touchId
-                    const touchId = window.MagicMarker.find(markerIdStr);
+                    const touchId = window.DelightfulMarker.find(markerIdStr);
                     if (!touchId) {{
                         return null; // touchId not found
                     }}
@@ -314,7 +314,7 @@ class InteractionOperations(OperationGroup):
                 logger.info(f"Running JS on page {page_id} to fetch element details (marker: '{marker_id}')...")
                 element_details_result = await browser.evaluate_js(page_id=page_id, js_code=js_code)
 
-                if isinstance(element_details_result, MagicBrowserError):
+                if isinstance(element_details_result, DelightfulBrowserError):
                     logger.error(f"Failed to fetch element details for marker {marker_id}: {element_details_result.error}")
                     continue
                 elif not isinstance(element_details_result, JSEvalSuccess):
@@ -388,7 +388,7 @@ class InteractionOperations(OperationGroup):
             }
         }
     )
-    async def click(self, browser: MagicBrowser, params: ClickParams) -> ToolResult:
+    async def click(self, browser: DelightfulBrowser, params: ClickParams) -> ToolResult:
         """Click an element on the page. Prefer goto for navigation when possible.
 
         Accepts a CSS selector. Use get_interactive_elements or find_interactive_element_visually to obtain one.
@@ -415,7 +415,7 @@ class InteractionOperations(OperationGroup):
             logger.info(f"Attempting click: {selector}")
             result = await browser.click(page_id, selector)
 
-            if isinstance(result, MagicBrowserError):
+            if isinstance(result, DelightfulBrowserError):
                 return ToolResult(error=result.error)
             elif isinstance(result, ClickSuccess):
                 # Format success
@@ -450,7 +450,7 @@ class InteractionOperations(OperationGroup):
         }
     )
     @operation(name="input") # Expose the action name as 'input'
-    async def input_text(self, browser: MagicBrowser, params: InputTextParams) -> ToolResult:
+    async def input_text(self, browser: DelightfulBrowser, params: InputTextParams) -> ToolResult:
         """Type text into an input element.
 
         Accepts a CSS selector. Use get_interactive_elements or find_interactive_element_visually to obtain one. Provide context-appropriate input.
@@ -479,7 +479,7 @@ class InteractionOperations(OperationGroup):
             logger.info(f"Attempting to input text into {selector}: '{text[:20]}...'")
             result = await browser.input_text(page_id, selector, text, clear_first, press_enter)
 
-            if isinstance(result, MagicBrowserError):
+            if isinstance(result, DelightfulBrowserError):
                 return ToolResult(error=result.error)
             elif isinstance(result, InputSuccess):
                 # Format success
@@ -512,7 +512,7 @@ class InteractionOperations(OperationGroup):
             }
         }
     )
-    async def scroll_to(self, browser: MagicBrowser, params: ScrollToParams) -> ToolResult:
+    async def scroll_to(self, browser: DelightfulBrowser, params: ScrollToParams) -> ToolResult:
         """Scroll the page to a specific screen index (1-based)."""
         page_id = params.page_id
         if not page_id:
@@ -526,7 +526,7 @@ class InteractionOperations(OperationGroup):
             logger.info(f"Scrolling page {page_id} to screen: {screen_number}")
             result = await browser.scroll_to(page_id, screen_number)
 
-            if isinstance(result, MagicBrowserError):
+            if isinstance(result, DelightfulBrowserError):
                 return ToolResult(error=result.error)
             elif isinstance(result, ScrollToSuccess):
                 # Build result description

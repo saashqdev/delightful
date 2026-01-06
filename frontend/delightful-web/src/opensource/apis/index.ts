@@ -17,7 +17,7 @@ import { generateChatApi } from "./modules/chat"
 export const UserApi = generateUserApi(magicClient)
 export const CommonApi = generateCommonApi(magicClient)
 
-/** Magic 服务 */
+/** Delightful 服务 */
 export const AuthApi = generateAuthApi(magicClient)
 export const ContactApi = generateContactApi(magicClient)
 export const BotApi = generateBotApi(magicClient)

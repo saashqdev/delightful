@@ -7,30 +7,30 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\Assembler\AIModel;
 
-use App\Domain\Flow\Entity\MagicFlowAIModelEntity;
+use App\Domain\Flow\Entity\DelightfulFlowAIModelEntity;
 use App\Infrastructure\Core\ValueObject\Page;
-use App\Interfaces\Flow\DTO\AIModel\MagicFlowAIModelDTO;
-use App\Interfaces\Flow\DTO\MagicFlowEnabledAIModelDTO;
+use App\Interfaces\Flow\DTO\AIModel\DelightfulFlowAIModelDTO;
+use App\Interfaces\Flow\DTO\DelightfulFlowEnabledAIModelDTO;
 use App\Interfaces\Kernel\Assembler\FileAssembler;
 use App\Interfaces\Kernel\Assembler\OperatorAssembler;
 use App\Interfaces\Kernel\DTO\PageDTO;
 
-class MagicFlowAIModelAssembler
+class DelightfulFlowAIModelAssembler
 {
-    public static function createFlowAIModelDTOByMixed(mixed $data): ?MagicFlowAIModelDTO
+    public static function createFlowAIModelDTOByMixed(mixed $data): ?DelightfulFlowAIModelDTO
     {
-        if ($data instanceof MagicFlowAIModelDTO) {
+        if ($data instanceof DelightfulFlowAIModelDTO) {
             return $data;
         }
         if (is_array($data)) {
-            return new MagicFlowAIModelDTO($data);
+            return new DelightfulFlowAIModelDTO($data);
         }
         return null;
     }
 
-    public static function createDO(MagicFlowAIModelDTO $dto): MagicFlowAIModelEntity
+    public static function createDO(DelightfulFlowAIModelDTO $dto): DelightfulFlowAIModelEntity
     {
-        $entity = new MagicFlowAIModelEntity();
+        $entity = new DelightfulFlowAIModelEntity();
         $entity->setName($dto->getName());
         $entity->setLabel($dto->getLabel());
         $entity->setTags($dto->getTags());
@@ -48,9 +48,9 @@ class MagicFlowAIModelAssembler
         return $entity;
     }
 
-    public static function createDTO(MagicFlowAIModelEntity $magicFlowAIModelEntity, array $users = []): MagicFlowAIModelDTO
+    public static function createDTO(DelightfulFlowAIModelEntity $magicFlowAIModelEntity, array $users = []): DelightfulFlowAIModelDTO
     {
-        $dto = new MagicFlowAIModelDTO($magicFlowAIModelEntity->toArray());
+        $dto = new DelightfulFlowAIModelDTO($magicFlowAIModelEntity->toArray());
         $dto->setId($magicFlowAIModelEntity->getId());
 
         $dto->setCreator($magicFlowAIModelEntity->getCreatedUid());
@@ -63,17 +63,17 @@ class MagicFlowAIModelAssembler
     }
 
     /**
-     * @param MagicFlowAIModelEntity[] $list
+     * @param DelightfulFlowAIModelEntity[] $list
      */
     public static function createPageListDTO(int $total, array $list, Page $page): PageDTO
     {
-        $list = array_map(fn (MagicFlowAIModelEntity $entity) => self::createDTO($entity), $list);
+        $list = array_map(fn (DelightfulFlowAIModelEntity $entity) => self::createDTO($entity), $list);
         return new PageDTO($page->getPage(), $total, $list);
     }
 
-    public static function createEnabledDTO(MagicFlowAIModelEntity $magicFlowAIModelEntity): MagicFlowEnabledAIModelDTO
+    public static function createEnabledDTO(DelightfulFlowAIModelEntity $magicFlowAIModelEntity): DelightfulFlowEnabledAIModelDTO
     {
-        $dto = new MagicFlowEnabledAIModelDTO($magicFlowAIModelEntity->toArray());
+        $dto = new DelightfulFlowEnabledAIModelDTO($magicFlowAIModelEntity->toArray());
         $dto->setValue($magicFlowAIModelEntity->getName());
         $dto->setIcon($magicFlowAIModelEntity->getIcon());
         $dto->setVision($magicFlowAIModelEntity->isSupportMultiModal());
@@ -83,7 +83,7 @@ class MagicFlowAIModelAssembler
 
     public static function createEnabledListDTO(array $list): array
     {
-        $list = array_map(fn (MagicFlowAIModelEntity $entity) => self::createEnabledDTO($entity), $list);
+        $list = array_map(fn (DelightfulFlowAIModelEntity $entity) => self::createEnabledDTO($entity), $list);
         return [
             'models' => $list,
         ];

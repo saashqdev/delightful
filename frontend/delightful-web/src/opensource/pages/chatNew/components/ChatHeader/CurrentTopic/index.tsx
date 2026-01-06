@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next"
 import { createStyles, cx } from "antd-style"
 import { Flex } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconArrowsExchange, IconLogout2 } from "@tabler/icons-react"
 import { type HTMLAttributes } from "react"
 import { useMemoizedFn } from "ahooks"
@@ -87,24 +87,24 @@ const CurrentTopic = observer(({ className }: CurrentTopicProps) => {
 				</span>
 			</Flex>
 			<Flex align="center" gap={20}>
-				<MagicButton
+				<DelightfulButton
 					className={styles.button}
 					type="link"
 					icon={
-						<MagicIcon color="currentColor" component={IconArrowsExchange} size={20} />
+						<DelightfulIcon color="currentColor" component={IconArrowsExchange} size={20} />
 					}
 					onClick={switchTopic}
 				>
 					{t("chat.topic.switchTopic")}
-				</MagicButton>
-				<MagicButton
+				</DelightfulButton>
+				<DelightfulButton
 					className={styles.button}
 					type="link"
-					icon={<MagicIcon color="currentColor" component={IconLogout2} size={20} />}
+					icon={<DelightfulIcon color="currentColor" component={IconLogout2} size={20} />}
 					onClick={backChatMode}
 				>
 					{t("chat.topic.backChat")}
-				</MagicButton>
+				</DelightfulButton>
 			</Flex>
 		</Flex>
 	)

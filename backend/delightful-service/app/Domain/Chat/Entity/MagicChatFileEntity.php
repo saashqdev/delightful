@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Entity;
 
 use App\Domain\Chat\Entity\ValueObject\FileType;
 
-final class MagicChatFileEntity extends AbstractEntity
+final class DelightfulChatFileEntity extends AbstractEntity
 {
     protected ?string $fileId = null;
 
@@ -89,12 +89,12 @@ final class MagicChatFileEntity extends AbstractEntity
         $this->userId = $userId;
     }
 
-    public function getMagicMessageId(): ?string
+    public function getDelightfulMessageId(): ?string
     {
         return $this->magicMessageId;
     }
 
-    public function setMagicMessageId(?string $magicMessageId): void
+    public function setDelightfulMessageId(?string $magicMessageId): void
     {
         $this->magicMessageId = $magicMessageId;
     }

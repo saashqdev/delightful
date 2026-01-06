@@ -201,7 +201,7 @@ class AISearchCommonQueryVo
     }
 
     // magic api 二期参数
-    public function getMagicApiBusinessParam(): array
+    public function getDelightfulApiBusinessParam(): array
     {
         return [
             'organization_id' => $this->getOrganizationCode(),

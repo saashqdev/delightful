@@ -1,4 +1,4 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { Flex, Form, InputNumber } from "antd"
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react"
 import { memo } from "react"
@@ -30,13 +30,13 @@ const InputNumberComp = memo(function InputNumberComp({
 				/>
 			</Form.Item>
 			<Flex vertical gap={0} className={styles.buttonGroup}>
-				<MagicButton
+				<DelightfulButton
 					type="text"
 					className={styles.button}
 					icon={<IconChevronUp size={8} />}
 					onClick={() => onIncrease(name)}
 				/>
-				<MagicButton
+				<DelightfulButton
 					type="text"
 					className={styles.button}
 					icon={<IconChevronDown size={8} />}

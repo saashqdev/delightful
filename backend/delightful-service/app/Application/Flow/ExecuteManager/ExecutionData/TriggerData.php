@@ -9,10 +9,10 @@ namespace App\Application\Flow\ExecuteManager\ExecutionData;
 
 use App\Application\Flow\ExecuteManager\Attachment\AbstractAttachment;
 use App\Domain\Chat\DTO\Message\MessageInterface;
-use App\Domain\Chat\Entity\MagicMessageEntity;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Contact\Entity\AccountEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\UserType;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -42,10 +42,10 @@ class TriggerData
         private readonly bool $isIgnoreMessageEntity = false,
         private readonly ?TriggerDataUserExtInfo $triggerDataUserExtInfo = null,
     ) {
-        if (empty($this->userInfo['user_entity']) || ! $this->userInfo['user_entity'] instanceof MagicUserEntity) {
+        if (empty($this->userInfo['user_entity']) || ! $this->userInfo['user_entity'] instanceof DelightfulUserEntity) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'sender_user_not_found');
         }
-        if (! $this->isIgnoreMessageEntity && (empty($this->messageInfo['message_entity']) || ! $this->messageInfo['message_entity'] instanceof MagicMessageEntity)) {
+        if (! $this->isIgnoreMessageEntity && (empty($this->messageInfo['message_entity']) || ! $this->messageInfo['message_entity'] instanceof DelightfulMessageEntity)) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'sender_message_not_found');
         }
 
@@ -80,9 +80,9 @@ class TriggerData
         $this->agentKey = $agentKey;
     }
 
-    public static function createUserEntity(string $userId, string $nickname, string $organizationCode = ''): MagicUserEntity
+    public static function createUserEntity(string $userId, string $nickname, string $organizationCode = ''): DelightfulUserEntity
     {
-        $userEntity = new MagicUserEntity();
+        $userEntity = new DelightfulUserEntity();
         $userEntity->setOrganizationCode($organizationCode);
         $userEntity->setUserId($userId);
         $userEntity->setNickname($nickname);
@@ -90,12 +90,12 @@ class TriggerData
         return $userEntity;
     }
 
-    public static function createMessageEntity(MessageInterface $message): MagicMessageEntity
+    public static function createMessageEntity(MessageInterface $message): DelightfulMessageEntity
     {
-        $messageEntity = new MagicMessageEntity();
+        $messageEntity = new DelightfulMessageEntity();
         $id = uniqid('AC_');
         $messageEntity->setId($id);
-        $messageEntity->setMagicMessageId($id);
+        $messageEntity->setDelightfulMessageId($id);
         $messageEntity->setMessageType($message->getMessageTypeEnum());
         $messageEntity->setContent($message);
         return $messageEntity;
@@ -126,7 +126,7 @@ class TriggerData
         $this->params = $params;
     }
 
-    public function getUserEntity(): MagicUserEntity
+    public function getUserEntity(): DelightfulUserEntity
     {
         return $this->userInfo['user_entity'];
     }
@@ -139,12 +139,12 @@ class TriggerData
         return null;
     }
 
-    public function getMessageEntity(): ?MagicMessageEntity
+    public function getMessageEntity(): ?DelightfulMessageEntity
     {
         return $this->messageInfo['message_entity'];
     }
 
-    public function getSeqEntity(): ?MagicSeqEntity
+    public function getSeqEntity(): ?DelightfulSeqEntity
     {
         return $this->messageInfo['seq_entity'] ?? null;
     }

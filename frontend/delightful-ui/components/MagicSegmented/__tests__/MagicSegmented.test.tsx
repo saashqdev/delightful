@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react"
-import MagicThemeProvider from "../../ThemeProvider"
+import DelightfulThemeProvider from "../../ThemeProvider"
 import { describe, it, expect, vi } from "vitest"
-import MagicSegmented from "../index"
+import DelightfulSegmented from "../index"
 
-describe("MagicSegmented", () => {
+describe("DelightfulSegmented", () => {
 	it("should render without crashing", () => {
 		const options = [
 			{ label: "选项1", value: "1" },
@@ -12,9 +12,9 @@ describe("MagicSegmented", () => {
 		]
 
 		render(
-			<MagicThemeProvider theme="light">
-				<MagicSegmented options={options} />
-			</MagicThemeProvider>,
+			<DelightfulThemeProvider theme="light">
+				<DelightfulSegmented options={options} />
+			</DelightfulThemeProvider>,
 		)
 
 		// Verify options render
@@ -31,9 +31,9 @@ describe("MagicSegmented", () => {
 		const onChange = vi.fn()
 
 		render(
-			<MagicThemeProvider theme="light">
-				<MagicSegmented options={options} onChange={onChange} />
-			</MagicThemeProvider>,
+			<DelightfulThemeProvider theme="light">
+				<DelightfulSegmented options={options} onChange={onChange} />
+			</DelightfulThemeProvider>,
 		)
 
 		const option2 = screen.getByText("选项2")
@@ -52,9 +52,9 @@ describe("MagicSegmented", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSegmented options={options} />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSegmented options={options} />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
@@ -67,9 +67,9 @@ describe("MagicSegmented", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSegmented options={options} defaultValue="2" />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSegmented options={options} defaultValue="2" />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
@@ -81,9 +81,9 @@ describe("MagicSegmented", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSegmented options={options} disabled />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSegmented options={options} disabled />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
@@ -95,9 +95,9 @@ describe("MagicSegmented", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSegmented options={options} size="large" />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSegmented options={options} size="large" />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
@@ -109,9 +109,9 @@ describe("MagicSegmented", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSegmented options={options} size="small" />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSegmented options={options} size="small" />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
@@ -123,9 +123,9 @@ describe("MagicSegmented", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSegmented options={options} />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSegmented options={options} />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
@@ -137,9 +137,9 @@ describe("MagicSegmented", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSegmented options={options} block />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSegmented options={options} block />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})

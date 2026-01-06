@@ -10,7 +10,7 @@ import type { HTMLAttributes } from "react"
 import { memo } from "react"
 import { createStyles, cx, useThemeMode } from "antd-style"
 
-import { IconMagicTextLogo } from "@/enhance/tabler/icons-react"
+import { IconDelightfulTextLogo } from "@/enhance/tabler/icons-react"
 import { LogoType } from "./LogoType"
 
 import magicLogoJson from "./magic-logo.json?raw"
@@ -57,7 +57,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 	}
 })
 
-const MagicLogo = memo(({ type = LogoType.MAIN, beta: isBeta, className, ...props }: LogoProps) => {
+const DelightfulLogo = memo(({ type = LogoType.MAIN, beta: isBeta, className, ...props }: LogoProps) => {
 	const { appearance } = useThemeMode()
 
 	const { styles } = useStyles()
@@ -179,14 +179,14 @@ const MagicLogo = memo(({ type = LogoType.MAIN, beta: isBeta, className, ...prop
 	if (type === LogoType.TEXT) {
 		return (
 			<Flex align="flex-start" gap={4}>
-				<IconMagicTextLogo size={props?.size} style={props?.style} />
+				<IconDelightfulTextLogo size={props?.size} style={props?.style} />
 				{isBeta ? <span className={styles.beta}>BETA</span> : null}
 			</Flex>
 		)
 	}
 
 	if (type === LogoType.COLOR_TEXT) {
-		// return <AnimationMagic />
+		// return <AnimationDelightful />
 		return (
 			<img
 				src={appearance === "dark" ? magicColorTextDark : magicColorText}
@@ -218,4 +218,4 @@ const MagicLogo = memo(({ type = LogoType.MAIN, beta: isBeta, className, ...prop
 	return <img src={logo} alt="logo" width="323" {...props} />
 })
 
-export default MagicLogo
+export default DelightfulLogo

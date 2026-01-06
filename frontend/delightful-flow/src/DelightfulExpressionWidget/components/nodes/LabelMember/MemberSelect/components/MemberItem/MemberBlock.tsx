@@ -1,4 +1,4 @@
-import { getColor } from "@/MagicExpressionWidget/utils"
+import { getColor } from "@/DelightfulExpressionWidget/utils"
 import TsAvatar from "@/common/BaseUI/Avatar"
 import { IconX } from "@tabler/icons-react"
 import React from "react"

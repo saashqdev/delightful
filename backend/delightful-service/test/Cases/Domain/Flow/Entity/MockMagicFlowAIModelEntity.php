@@ -7,19 +7,19 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Domain\Flow\Entity;
 
-use App\Domain\Flow\Entity\MagicFlowAIModelEntity;
+use App\Domain\Flow\Entity\DelightfulFlowAIModelEntity;
 use Delightful\ObjectGenerator\ObjectGeneratorFactory;
 
-class MockMagicFlowAIModelEntity
+class MockDelightfulFlowAIModelEntity
 {
-    public static function createMockMagicFlowAIModelEntity(string $name): ?MagicFlowAIModelEntity
+    public static function createMockDelightfulFlowAIModelEntity(string $name): ?DelightfulFlowAIModelEntity
     {
-        $file = BASE_PATH . '/test/Stub/MagicFlowAIModelEntity/' . $name . '.json';
+        $file = BASE_PATH . '/test/Stub/DelightfulFlowAIModelEntity/' . $name . '.json';
         if (! file_exists($file)) {
             return null;
         }
         $json = file_get_contents($file);
-        $entity = new MagicFlowAIModelEntity();
+        $entity = new DelightfulFlowAIModelEntity();
         ObjectGeneratorFactory::object()->shouldBindJson($entity, $json);
         return $entity;
     }

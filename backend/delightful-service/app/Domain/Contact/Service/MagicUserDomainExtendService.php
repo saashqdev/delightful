@@ -9,16 +9,16 @@ namespace App\Domain\Contact\Service;
 
 use App\Domain\Contact\DTO\UserUpdateDTO;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Repository\Facade\MagicUserRepositoryInterface;
-use App\Domain\Contact\Service\Facade\MagicUserDomainExtendInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulUserRepositoryInterface;
+use App\Domain\Contact\Service\Facade\DelightfulUserDomainExtendInterface;
 use App\Infrastructure\Core\Traits\DataIsolationTrait;
 
-class MagicUserDomainExtendService implements MagicUserDomainExtendInterface
+class DelightfulUserDomainExtendService implements DelightfulUserDomainExtendInterface
 {
     use DataIsolationTrait;
 
     public function __construct(
-        protected MagicUserRepositoryInterface $userRepository,
+        protected DelightfulUserRepositoryInterface $userRepository,
     ) {
     }
 

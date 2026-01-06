@@ -1,9 +1,9 @@
 import { mergeAttributes, Node, nodePasteRule } from "@tiptap/core"
 import { ReactNodeViewRenderer } from "@tiptap/react"
 import type { HTMLAttributes } from "react"
-import { emojiLocaleCache } from "@/opensource/components/base/MagicEmojiPanel/cache"
+import { emojiLocaleCache } from "@/opensource/components/base/DelightfulEmojiPanel/cache"
 import { magicEmojiRegex } from "@/opensource/pages/chatNew/components/ChatSubSider/utils"
-import MagicEmojiNodeRender from "./MagicEmojiNodeRender"
+import DelightfulEmojiNodeRender from "./DelightfulEmojiNodeRender"
 
 type Options = {
 	basePath?: string
@@ -12,7 +12,7 @@ type Options = {
 
 const ExtensionName = "magic-emoji"
 
-const MagicEmojiNodeExtension = Node.create<Options>({
+const DelightfulEmojiNodeExtension = Node.create<Options>({
 	name: ExtensionName,
 	group: "inline",
 	inline: true,
@@ -67,7 +67,7 @@ const MagicEmojiNodeExtension = Node.create<Options>({
 	},
 
 	addNodeView() {
-		return ReactNodeViewRenderer(MagicEmojiNodeRender)
+		return ReactNodeViewRenderer(DelightfulEmojiNodeRender)
 	},
 	renderText({ node }) {
 		// FIXME: 获取当前语言对应的表情名称 失败
@@ -75,4 +75,4 @@ const MagicEmojiNodeExtension = Node.create<Options>({
 	},
 })
 
-export default MagicEmojiNodeExtension
+export default DelightfulEmojiNodeExtension

@@ -2,7 +2,7 @@ import { memo } from "react"
 import type { FormInstance } from "antd"
 import { Button, Flex, Form, Input, Select, Switch } from "antd"
 import { useTranslation } from "react-i18next"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconCircleMinus, IconGripVertical } from "@tabler/icons-react"
 import type { InstructionStatus, QuickInstruction } from "@/types/bot"
 import { StatusTextColor } from "@/types/bot"
@@ -141,7 +141,7 @@ const FromItem = memo(({ name, form, disabled, remove }: FormItemProps) => {
 					onChange={(checked) => onChangeSwitch(name, checked)}
 				/>
 			</Form.Item>
-			<MagicButton
+			<DelightfulButton
 				type="text"
 				className={styles.button}
 				disabled={disabled}

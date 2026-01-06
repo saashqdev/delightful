@@ -3,8 +3,8 @@ import type { ReactNode, MutableRefObject, HTMLAttributes } from "react"
 import SimpleBarCore from "simplebar-core"
 import type { SimpleBarOptions } from "simplebar-core"
 import { useDeepCompareEffect } from "ahooks"
-import "./MagicScrollBar.css"
-import { useStyles } from "@/opensource/components/base/MagicScrollBar/styles"
+import "./DelightfulScrollBar.css"
+import { useStyles } from "@/opensource/components/base/DelightfulScrollBar/styles"
 
 type RenderFunc = (props: {
 	scrollableNodeRef: MutableRefObject<HTMLElement | undefined>
@@ -19,7 +19,7 @@ type RenderFunc = (props: {
 	}
 }) => ReactNode
 
-export interface MagicScrollBarProps
+export interface DelightfulScrollBarProps
 	extends Omit<HTMLAttributes<HTMLDivElement>, "children">,
 		SimpleBarOptions {
 	children?: ReactNode | RenderFunc
@@ -30,7 +30,7 @@ export interface MagicScrollBarProps
 	}
 }
 
-const MagicScrollBar = forwardRef<SimpleBarCore | null, MagicScrollBarProps>(
+const DelightfulScrollBar = forwardRef<SimpleBarCore | null, DelightfulScrollBarProps>(
 	({ children, scrollableNodeProps = {}, ...otherProps }, ref) => {
 		const elRef = useRef()
 		const scrollableNodeRef = useRef<HTMLElement>()
@@ -139,4 +139,4 @@ const MagicScrollBar = forwardRef<SimpleBarCore | null, MagicScrollBarProps>(
 	},
 )
 
-export default MagicScrollBar
+export default DelightfulScrollBar

@@ -1,7 +1,7 @@
 import { ConversationMessageType, RecordSummaryStatus } from "@/types/chat/conversation_message"
 import { useMemoizedFn, useNetwork } from "ahooks"
 import { useMemo } from "react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconMicrophone } from "@tabler/icons-react"
 import MessageService from "@/opensource/services/chat/message/MessageService"
 import ReferMessageStore from "@/opensource/stores/chatNew/messageUI/Reply"
@@ -61,7 +61,7 @@ export default function useRecordingSummary({ conversationId }: UseRecordingSumm
 		// return isRecording ? (
 		// <ScaleLoader />
 		// ) : (
-		return <MagicIcon color="currentColor" size={20} component={IconMicrophone} />
+		return <DelightfulIcon color="currentColor" size={20} component={IconMicrophone} />
 		// )
 	}, [])
 

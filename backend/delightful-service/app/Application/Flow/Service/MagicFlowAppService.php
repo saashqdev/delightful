@@ -13,10 +13,10 @@ use App\Application\Flow\ExecuteManager\ExecutionData\TriggerData;
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunnerFactory;
 use App\Application\Kernel\SuperPermissionEnum;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation as ContactDataIsolation;
-use App\Domain\Flow\Entity\MagicFlowEntity;
-use App\Domain\Flow\Entity\MagicFlowToolSetEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowToolSetEntity;
 use App\Domain\Flow\Entity\ValueObject\Code;
 use App\Domain\Flow\Entity\ValueObject\ConstValue;
 use App\Domain\Flow\Entity\ValueObject\ConversationId;
@@ -24,10 +24,10 @@ use App\Domain\Flow\Entity\ValueObject\Node;
 use App\Domain\Flow\Entity\ValueObject\NodeDebugResult;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\NodeParamsConfigFactory;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\TriggerType;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowQuery;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowToolSetQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowToolSetQuery;
 use App\Domain\Flow\Entity\ValueObject\Type;
-use App\Domain\Flow\Event\MagicFlowChangeEnabledEvent;
+use App\Domain\Flow\Event\DelightfulFlowChangeEnabledEvent;
 use App\Domain\KnowledgeBase\Entity\KnowledgeBaseEntity;
 use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeType;
 use App\Domain\KnowledgeBase\Entity\ValueObject\Query\KnowledgeBaseQuery;
@@ -41,7 +41,7 @@ use App\Infrastructure\Core\Dag\VertexResult;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Infrastructure\Util\Auth\PermissionChecker;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use DateTime;
 use Delightful\AsyncEvent\AsyncEventUtil;
 use Delightful\CloudFile\Kernel\Struct\FileLink;
@@ -50,7 +50,7 @@ use Delightful\FlowExprEngine\Structure\Expression\ExpressionDataSource\Expressi
 use Hyperf\DbConnection\Annotation\Transactional;
 use Qbhy\HyperfAuth\Authenticatable;
 
-class MagicFlowAppService extends AbstractFlowAppService
+class DelightfulFlowAppService extends AbstractFlowAppService
 {
     public function nodeVersions(): array
     {
@@ -127,7 +127,7 @@ class MagicFlowAppService extends AbstractFlowAppService
      * 保存基本信息.
      */
     #[Transactional]
-    public function save(Authenticatable $authorization, MagicFlowEntity $magicFlowEntity): MagicFlowEntity
+    public function save(Authenticatable $authorization, DelightfulFlowEntity $magicFlowEntity): DelightfulFlowEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
 
@@ -147,16 +147,16 @@ class MagicFlowAppService extends AbstractFlowAppService
     /**
      * 保存节点.
      */
-    public function saveNode(Authenticatable $authorization, MagicFlowEntity $magicFlowEntity): MagicFlowEntity
+    public function saveNode(Authenticatable $authorization, DelightfulFlowEntity $magicFlowEntity): DelightfulFlowEntity
     {
         return $this->magicFlowDomainService->saveNode($this->createFlowDataIsolation($authorization), $magicFlowEntity);
     }
 
     /**
      * 查询流程.
-     * @return array{total: int, list: array<MagicFlowEntity>, users: array<string, MagicUserEntity>, icons: array<string, FileLink>}
+     * @return array{total: int, list: array<DelightfulFlowEntity>, users: array<string, DelightfulUserEntity>, icons: array<string, FileLink>}
      */
-    public function queries(Authenticatable $authorization, MagicFLowQuery $query, Page $page): array
+    public function queries(Authenticatable $authorization, DelightfulFLowQuery $query, Page $page): array
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
@@ -235,9 +235,9 @@ class MagicFlowAppService extends AbstractFlowAppService
 
     /**
      * 查询工具.
-     * @return array{total: int, list: array<MagicFlowEntity>}
+     * @return array{total: int, list: array<DelightfulFlowEntity>}
      */
-    public function queryTools(Authenticatable $authorization, MagicFLowQuery $query): array
+    public function queryTools(Authenticatable $authorization, DelightfulFLowQuery $query): array
     {
         $page = Page::createNoPage();
         $dataIsolation = $this->createFlowDataIsolation($authorization);
@@ -256,7 +256,7 @@ class MagicFlowAppService extends AbstractFlowAppService
         $toolSetIds = array_keys($toolSetResources);
 
         // 再过滤一下启用的工具集
-        $toolSetQuery = new MagicFlowToolSetQuery();
+        $toolSetQuery = new DelightfulFlowToolSetQuery();
         $toolSetQuery->setCodes($toolSetIds);
         $toolSetQuery->setEnabled(true);
         $toolSetData = $this->magicFlowToolSetDomainService->queries($dataIsolation, $toolSetQuery, $page);
@@ -282,18 +282,18 @@ class MagicFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * @return array{total: int, list: array<MagicFlowToolSetEntity>, icons: array<string, FileLink>, users: array<string, MagicUserEntity>}
+     * @return array{total: int, list: array<DelightfulFlowToolSetEntity>, icons: array<string, FileLink>, users: array<string, DelightfulUserEntity>}
      */
     public function queryToolSets(Authenticatable $authorization, bool $withBuiltInTools = true, bool $withIcons = true): array
     {
-        /** @var MagicUserAuthorization $authorization */
+        /** @var DelightfulUserAuthorization $authorization */
         $page = Page::createNoPage();
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
 
-        $toolSetQuery = new MagicFlowToolSetQuery();
+        $toolSetQuery = new DelightfulFlowToolSetQuery();
         $toolSetQuery->setEnabled(true);
-        $toolQuery = new MagicFLowQuery();
+        $toolQuery = new DelightfulFLowQuery();
         $toolQuery->setType(Type::Tools->value);
         $toolQuery->setEnabled(true);
 
@@ -366,7 +366,7 @@ class MagicFlowAppService extends AbstractFlowAppService
         }
 
         // 过滤掉没有任何工具的工具集
-        $toolSetData['list'] = array_filter($toolSetData['list'], fn (MagicFlowToolSetEntity $toolSet) => ! empty($toolSet->getTools()));
+        $toolSetData['list'] = array_filter($toolSetData['list'], fn (DelightfulFlowToolSetEntity $toolSet) => ! empty($toolSet->getTools()));
         $toolSetData['total'] = count($toolSetData['list']);
 
         $toolSetData['icons'] = $withIcons ? $this->getIcons($dataIsolation->getCurrentOrganizationCode(), $iconPaths) : [];
@@ -380,7 +380,7 @@ class MagicFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * @return array{total: int, list: array<KnowledgeBaseEntity>, users: array<MagicUserEntity>}
+     * @return array{total: int, list: array<KnowledgeBaseEntity>, users: array<DelightfulUserEntity>}
      */
     public function queryKnowledge(Authenticatable $authorization): array
     {
@@ -427,7 +427,7 @@ class MagicFlowAppService extends AbstractFlowAppService
     /**
      * 获取流程.
      */
-    public function getByCode(Authenticatable $authorization, string $flowId): MagicFlowEntity
+    public function getByCode(Authenticatable $authorization, string $flowId): DelightfulFlowEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $magicFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $flowId);
@@ -453,7 +453,7 @@ class MagicFlowAppService extends AbstractFlowAppService
         $this->getFlowOperation($dataIsolation, $magicFlow)->validate('edit', $flowId);
 
         $this->magicFlowDomainService->changeEnable($dataIsolation, $magicFlow, $enable);
-        AsyncEventUtil::dispatch(new MagicFlowChangeEnabledEvent($magicFlow));
+        AsyncEventUtil::dispatch(new DelightfulFlowChangeEnabledEvent($magicFlow));
     }
 
     /**

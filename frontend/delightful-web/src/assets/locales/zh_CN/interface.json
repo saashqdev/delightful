@@ -3,7 +3,7 @@
 	"ErrorHappened": "发生了错误",
 	"FrontendVersionDetected": "检测到项目更新",
 	"GFDSAQ_DINGTALK_SSO_ENVIRONMENT": "钉钉免登环境",
-	"MagicChat": "麦吉聊聊",
+	"DelightfulChat": "麦吉聊聊",
 	"PleaseReloadThePage": "请刷新页面，重新加载内容",
 	"Reload": "重新加载",
 	"agent": {
@@ -1061,7 +1061,7 @@
 			"emailLabel": "联系邮箱",
 			"emailPlaceholder": "请提供您的常用联系邮箱，如：mail@letsmagic.cn",
 			"emailRequired": "请输入联系邮箱",
-			"formDescription": "填写以下资料，申请加入「麦吉·Magic」候选名单，我们将很快为您发送邀请码",
+			"formDescription": "填写以下资料，申请加入「麦吉·Delightful」候选名单，我们将很快为您发送邀请码",
 			"jobInfoLabel": "职业信息",
 			"jobInfoPlaceholder": "请提供您的公司名称、职位，或其他与职业相关的信息。",
 			"joinShortlist": "加入候选名单",
@@ -1075,7 +1075,7 @@
 		},
 		"leaveAccount": "退出账号",
 		"nextStep": "下一步",
-		"successRegister": "您已成功注册「麦吉·Magic」"
+		"successRegister": "您已成功注册「麦吉·Delightful」"
 	},
 	"memberCard": {
 		"assistantIntroduction": "助理介绍",
@@ -1198,7 +1198,7 @@
 	"send": "发送",
 	"setting": {
 		"VerificationCode": "验证码",
-		"aboutMagic": "关于Magic",
+		"aboutDelightful": "关于Delightful",
 		"aboutUs": "关于我们",
 		"accountManage": "账号管理",
 		"aiCompletion": "AI 自动补全",
@@ -1208,7 +1208,7 @@
 		"auto": "自动",
 		"avatar": "头像",
 		"binded": "已绑定",
-		"canUseInLoginMagic": "可用于登录 Magic",
+		"canUseInLoginDelightful": "可用于登录 Delightful",
 		"cancelBind": "取消绑定",
 		"change": "更换",
 		"changePassword": "修改密码",
@@ -1244,7 +1244,7 @@
 		"loginDevices": "登录设备",
 		"loginPassword": "登录密码",
 		"loginTime": "登录时间",
-		"magicId": "Magic ID",
+		"magicId": "Delightful ID",
 		"modern": "现代化",
 		"newPhone": "新手机号",
 		"newPhoneCode": "新手机号验证码",
@@ -1310,7 +1310,7 @@
 		"notification": "通知",
 		"orgNotAuthorized": "组织暂未授权",
 		"setting": "设置",
-		"superMagic": "超级麦吉",
+		"superDelightful": "超级麦吉",
 		"switchLanguage": "切换语言",
 		"switchOrganization": "切换组织",
 		"switchOrganizationConfirm": "切换后页面将自动刷新，是否继续？",

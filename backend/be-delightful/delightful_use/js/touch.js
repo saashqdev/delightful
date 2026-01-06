@@ -1,5 +1,5 @@
 /**
- * MagicTouch，给 AI 提供先进的网页触觉
+ * DelightfulTouch，给 AI 提供先进的网页触觉
  * 用于获取页面中所有交互式元素并进行分类
  */
 (function() {
@@ -163,7 +163,7 @@
    * @param {Element} element - DOM元素
    * @returns {string} - 生成的魔法ID
    */
-  function generateMagicId(element) {
+  function generateDelightfulId(element) {
     if (!element) {
       return 'unknown';
     }
@@ -831,7 +831,7 @@
 
     // 在返回前为所有最终确定的节点添加 magic-touch-id
     finalNodes.forEach(element => {
-      const magicId = generateMagicId(element);
+      const magicId = generateDelightfulId(element);
       element.setAttribute('magic-touch-id', magicId);
     });
 
@@ -865,7 +865,7 @@
       const magicId = element.getAttribute('magic-touch-id');
       // 如果没有 magicId，则跳过此元素或记录错误
       if (!magicId) {
-        console.warn("MagicTouch: Element missing magic-touch-id.", element);
+        console.warn("DelightfulTouch: Element missing magic-touch-id.", element);
         continue; // 跳过这个没有 ID 的元素
       }
 
@@ -908,7 +908,7 @@
       } else {
         // 如果出现意外的分类（理论上不应发生），放入 'other'
         result.other.push(elementInfo);
-        console.warn(`MagicTouch: Element with unexpected category '${category}' found. Added to 'other'.`, element);
+        console.warn(`DelightfulTouch: Element with unexpected category '${category}' found. Added to 'other'.`, element);
       }
     }
 
@@ -924,12 +924,12 @@
   }
 
   // 将核心功能暴露到 window 对象上
-  window.MagicTouch = {
+  window.DelightfulTouch = {
     getInteractiveDomNodes: getInteractiveDomNodes,     // 获取原始DOM节点 (主要供内部或调试使用)
     getInteractiveElements: getInteractiveElements, // 获取结构化的元素信息 (主要API)
   };
 
-  // 可以在控制台调用 MagicTouch.getInteractiveElements() 或 MagicTouch.getInteractiveElements('all') 查看结果
-  // console.log("MagicTouch initialized. Call MagicTouch.getInteractiveElements() to get elements.");
+  // 可以在控制台调用 DelightfulTouch.getInteractiveElements() 或 DelightfulTouch.getInteractiveElements('all') 查看结果
+  // console.log("DelightfulTouch initialized. Call DelightfulTouch.getInteractiveElements() to get elements.");
 
 })();

@@ -16,11 +16,11 @@ import useContent from "./hooks/useContent"
 import useStyles from "./styles"
 import useTranslate from "./hooks/useTranslate"
 
-type MagicRecordSummaryProps = {
+type DelightfulRecordSummaryProps = {
 	data?: RecordSummaryConversationMessage
 }
 
-const MagicRecordSummary = observer(({ data }: MagicRecordSummaryProps) => {
+const DelightfulRecordSummary = observer(({ data }: DelightfulRecordSummaryProps) => {
 	const { fontSize } = useFontSize()
 
 	const messageContent = useMemo(() => {
@@ -102,4 +102,4 @@ const MagicRecordSummary = observer(({ data }: MagicRecordSummaryProps) => {
 	)
 })
 
-export default MagicRecordSummary
+export default DelightfulRecordSummary

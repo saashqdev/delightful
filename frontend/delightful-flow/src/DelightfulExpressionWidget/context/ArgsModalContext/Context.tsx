@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { EXPRESSION_ITEM, InputExpressionValue } from "@/MagicExpressionWidget/types"
+import { EXPRESSION_ITEM, InputExpressionValue } from "@/DelightfulExpressionWidget/types"
 import React from "react"
 
 export type ArgsModalContextType = {

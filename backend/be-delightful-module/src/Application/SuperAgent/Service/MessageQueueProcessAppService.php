@@ -5,25 +5,25 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Application\SuperAgent\Service;
+namespace Delightful\SuperDelightful\Application\SuperAgent\Service;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Domain\Chat\Entity\Items\SeqExtra;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Carbon\Carbon;
-use Delightful\SuperMagic\Domain\SuperAgent\Constant\AgentConstant;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\MessageQueueEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\MessageQueueStatus;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\MessageQueueConsumedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\MessageQueueDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\TopicDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Constant\AgentConstant;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\MessageQueueEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\MessageQueueStatus;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\MessageQueueConsumedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\MessageQueueDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\TopicDomainService;
 use Hyperf\Logger\LoggerFactory;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
@@ -41,10 +41,10 @@ class MessageQueueProcessAppService extends AbstractAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        private readonly MagicChatMessageAppService $chatMessageAppService,
+        private readonly DelightfulChatMessageAppService $chatMessageAppService,
         private readonly MessageQueueDomainService $messageQueueDomainService,
         private readonly TopicDomainService $topicDomainService,
-        private readonly MagicUserDomainService $userDomainService,
+        private readonly DelightfulUserDomainService $userDomainService,
         private readonly EventDispatcherInterface $eventDispatcher,
         LoggerFactory $loggerFactory
     ) {
@@ -254,8 +254,8 @@ class MessageQueueProcessAppService extends AbstractAppService
         $messageStruct
     ): array {
         try {
-            // Create MagicSeqEntity based on message content
-            $seqEntity = new MagicSeqEntity();
+            // Create DelightfulSeqEntity based on message content
+            $seqEntity = new DelightfulSeqEntity();
             $seqEntity->setContent($messageStruct);
             $seqEntity->setSeqType(ChatMessageType::from($message->getMessageType()));
 

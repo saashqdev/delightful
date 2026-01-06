@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\ExecuteManager\BuiltIn\ToolSet\InternetSearch\Tools;
 
-use App\Application\Chat\Service\MagicChatAISearchV2AppService;
+use App\Application\Chat\Service\DelightfulChatAISearchV2AppService;
 use App\Application\Flow\ExecuteManager\BuiltIn\BuiltInToolSet;
 use App\Application\Flow\ExecuteManager\BuiltIn\ToolSet\AbstractBuiltInTool;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
-use App\Domain\Chat\DTO\AISearch\Request\MagicChatAggregateSearchReqDTO;
+use App\Domain\Chat\DTO\AISearch\Request\DelightfulChatAggregateSearchReqDTO;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
 use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Flow\Entity\ValueObject\NodeInput;
@@ -61,12 +61,12 @@ class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
             $topicId = $executionData->getTopicId();
             $searchKeywordMessage = new TextMessage();
             $searchKeywordMessage->setContent($userQuestion);
-            $magicChatAggregateSearchReqDTO = (new MagicChatAggregateSearchReqDTO())
+            $magicChatAggregateSearchReqDTO = (new DelightfulChatAggregateSearchReqDTO())
                 ->setConversationId($conversationId)
                 ->setTopicId((string) $topicId)
                 ->setUserMessage($searchKeywordMessage)
                 ->setSearchDeepLevel($useDeepSearch ? SearchDeepLevel::DEEP : SearchDeepLevel::SIMPLE);
-            di(MagicChatAISearchV2AppService::class)->aggregateSearch($magicChatAggregateSearchReqDTO);
+            di(DelightfulChatAISearchV2AppService::class)->aggregateSearch($magicChatAggregateSearchReqDTO);
             return null;
         };
     }

@@ -1,4 +1,4 @@
-// import request from "@/services/base/fetch/superMagic"
+// import request from "@/services/base/fetch/superDelightful"
 import magicClient from "@/opensource/apis/clients/magic"
 // import { REMOTE_HTTP_URL } from "../constans"
 
@@ -82,8 +82,8 @@ export const deleteThread = async ({ id, workspace_id }: { id: string; workspace
 
 // 通过话题id获取附件列表
 export const getAttachmentsByThreadId = async ({ id }: { id: string }) => {
-	const isMagicShare = window?.location?.pathname?.includes("magic-share")
-	const url = isMagicShare
+	const isDelightfulShare = window?.location?.pathname?.includes("magic-share")
+	const url = isDelightfulShare
 		? "/api/v1/super-agent/admin/topic/user-attachments"
 		: `/api/v1/super-agent/topics/${id}/attachments`
 	return magicClient.post(url, {
@@ -149,8 +149,8 @@ export const getMessagesByConversationId = async ({
 
 // 通过文件id获取临时下载url
 export const getTemporaryDownloadUrl = async ({ file_ids }: { file_ids: string[] }) => {
-	const isMagicShare = window?.location?.pathname?.includes("magic-share")
-	const apiPath = isMagicShare
+	const isDelightfulShare = window?.location?.pathname?.includes("magic-share")
+	const apiPath = isDelightfulShare
 		? "/api/v1/super-agent/admin/topic/user-attachment-url"
 		: "/api/v1/super-agent/tasks/get-file-url"
 

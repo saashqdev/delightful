@@ -1,4 +1,4 @@
-# MagicPdfRender
+# DelightfulPdfRender
 
 基于 `react-pdf` 实现的 PDF 预览组件，支持文件和 URL 渲染，提供完整的交互功能。
 
@@ -16,13 +16,13 @@
 ## 基本用法
 
 ```tsx
-import MagicPdfRender from './components/base/MagicPdfRender'
+import DelightfulPdfRender from './components/base/DelightfulPdfRender'
 
 function App() {
   const [file, setFile] = useState<File | string | null>(null)
   
   return (
-    <MagicPdfRender
+    <DelightfulPdfRender
       file={file}
       height={600}
       showToolbar
@@ -121,7 +121,7 @@ const useCustomStyles = createStyles(({ token }) => ({
 组件提供了完整的错误处理机制：
 
 ```tsx
-<MagicPdfRender
+<DelightfulPdfRender
   file={file}
   onLoadError={(error) => {
     console.error('PDF 加载失败:', error)
@@ -165,7 +165,7 @@ function App() {
     <div>
       <Button onClick={() => switchLanguage("zh_CN")}>中文</Button>
       <Button onClick={() => switchLanguage("en_US")}>English</Button>
-      <MagicPdfRender file={file} />
+      <DelightfulPdfRender file={file} />
     </div>
   )
 }

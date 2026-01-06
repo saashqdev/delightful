@@ -4,9 +4,9 @@ import { cx } from "antd-style"
 import { useMemo } from "react"
 import { useStyles } from "./style"
 
-export type MagicModalProps = ModalProps
+export type DelightfulModalProps = ModalProps
 
-function MagicModal({ classNames: classNamesInProp, ...props }: MagicModalProps) {
+function DelightfulModal({ classNames: classNamesInProp, ...props }: DelightfulModalProps) {
 	const { styles } = useStyles()
 
 	const classNames = useMemo(
@@ -53,31 +53,31 @@ const defaultModalProps: ModalFuncProps = {
 	},
 }
 
-MagicModal.confirm = (config: ModalFuncProps) =>
+DelightfulModal.confirm = (config: ModalFuncProps) =>
 	AntdModal.confirm({
 		...defaultModalProps,
 		...config,
 	})
 
-MagicModal.info = (config: ModalFuncProps) =>
+DelightfulModal.info = (config: ModalFuncProps) =>
 	AntdModal.info({
 		...defaultModalProps,
 		...config,
 	})
 
-MagicModal.success = (config: ModalFuncProps) =>
+DelightfulModal.success = (config: ModalFuncProps) =>
 	AntdModal.success({
 		...config,
 	})
 
-MagicModal.error = (config: ModalFuncProps) =>
+DelightfulModal.error = (config: ModalFuncProps) =>
 	AntdModal.error({
 		...config,
 	})
 
-MagicModal.warning = (config: ModalFuncProps) =>
+DelightfulModal.warning = (config: ModalFuncProps) =>
 	AntdModal.warning({
 		...config,
 	})
 
-export default MagicModal
+export default DelightfulModal

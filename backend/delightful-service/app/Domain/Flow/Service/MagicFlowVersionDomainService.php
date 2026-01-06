@@ -7,45 +7,45 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowEntity;
-use App\Domain\Flow\Entity\MagicFlowVersionEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowVersionEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowVersionQuery;
-use App\Domain\Flow\Event\MagicFlowPublishedEvent;
-use App\Domain\Flow\Repository\Facade\MagicFlowRepositoryInterface;
-use App\Domain\Flow\Repository\Facade\MagicFlowVersionRepositoryInterface;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowVersionQuery;
+use App\Domain\Flow\Event\DelightfulFlowPublishedEvent;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowRepositoryInterface;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowVersionRepositoryInterface;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 use Delightful\AsyncEvent\AsyncEventUtil;
 use Hyperf\DbConnection\Annotation\Transactional;
 
-class MagicFlowVersionDomainService extends AbstractDomainService
+class DelightfulFlowVersionDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly MagicFlowRepositoryInterface $magicFlowRepository,
-        private readonly MagicFlowVersionRepositoryInterface $magicFlowVersionRepository,
+        private readonly DelightfulFlowRepositoryInterface $magicFlowRepository,
+        private readonly DelightfulFlowVersionRepositoryInterface $magicFlowVersionRepository,
     ) {
     }
 
     /**
-     * @return array<MagicFlowVersionEntity>
+     * @return array<DelightfulFlowVersionEntity>
      */
     public function getByCodes(FlowDataIsolation $dataIsolation, array $versionCodes): array
     {
         return $this->magicFlowVersionRepository->getByCodes($dataIsolation, $versionCodes);
     }
 
-    public function getLastVersion(FlowDataIsolation $dataIsolation, string $flowCode): ?MagicFlowVersionEntity
+    public function getLastVersion(FlowDataIsolation $dataIsolation, string $flowCode): ?DelightfulFlowVersionEntity
     {
         return $this->magicFlowVersionRepository->getLastVersion($dataIsolation, $flowCode);
     }
 
     /**
      * 查询版本列表.
-     * @return array{total: int, list: array<MagicFlowVersionEntity>}
+     * @return array{total: int, list: array<DelightfulFlowVersionEntity>}
      */
-    public function queries(FlowDataIsolation $dataIsolation, MagicFLowVersionQuery $query, Page $page): array
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowVersionQuery $query, Page $page): array
     {
         return $this->magicFlowVersionRepository->queries($dataIsolation, $query, $page);
     }
@@ -53,7 +53,7 @@ class MagicFlowVersionDomainService extends AbstractDomainService
     /**
      * 获取版本详情.
      */
-    public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $versionCode): MagicFlowVersionEntity
+    public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $versionCode): DelightfulFlowVersionEntity
     {
         $version = $this->magicFlowVersionRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $versionCode);
         if (! $version) {
@@ -66,27 +66,27 @@ class MagicFlowVersionDomainService extends AbstractDomainService
      * 发版.
      */
     #[Transactional]
-    public function publish(FlowDataIsolation $dataIsolation, MagicFlowEntity $magicFlow, MagicFlowVersionEntity $magicFlowVersionEntity): MagicFlowVersionEntity
+    public function publish(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $magicFlow, DelightfulFlowVersionEntity $magicFlowVersionEntity): DelightfulFlowVersionEntity
     {
         $magicFlowVersionEntity->setCreator($dataIsolation->getCurrentUserId());
         $magicFlowVersionEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $magicFlowVersionEntity->prepareForCreation();
         if (empty($magicFlow->getVersionCode())) {
             $magicFlow->setEnabled(true);
-            $magicFlowVersionEntity->getMagicFlow()->setEnabled(true);
+            $magicFlowVersionEntity->getDelightfulFlow()->setEnabled(true);
         }
         $magicFlow->prepareForPublish($magicFlowVersionEntity, $dataIsolation->getCurrentUserId());
 
         $magicFlowVersionEntity = $this->magicFlowVersionRepository->create($dataIsolation, $magicFlowVersionEntity);
         $this->magicFlowRepository->save($dataIsolation, $magicFlow);
-        AsyncEventUtil::dispatch(new MagicFlowPublishedEvent($magicFlowVersionEntity->getMagicFlow()));
+        AsyncEventUtil::dispatch(new DelightfulFlowPublishedEvent($magicFlowVersionEntity->getDelightfulFlow()));
         return $magicFlowVersionEntity;
     }
 
     /**
      * 回滚版本.
      */
-    public function rollback(FlowDataIsolation $dataIsolation, MagicFlowEntity $magicFlow, string $versionCode): MagicFlowVersionEntity
+    public function rollback(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $magicFlow, string $versionCode): DelightfulFlowVersionEntity
     {
         $version = $this->magicFlowVersionRepository->getByFlowCodeAndCode($dataIsolation, $magicFlow->getCode(), $versionCode);
         if (! $version) {
@@ -95,7 +95,7 @@ class MagicFlowVersionDomainService extends AbstractDomainService
 
         $magicFlow->prepareForPublish($version, $dataIsolation->getCurrentUserId());
         $this->magicFlowRepository->save($dataIsolation, $magicFlow);
-        AsyncEventUtil::dispatch(new MagicFlowPublishedEvent($magicFlow));
+        AsyncEventUtil::dispatch(new DelightfulFlowPublishedEvent($magicFlow));
         return $version;
     }
 

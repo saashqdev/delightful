@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Admin\Facade\Agent;
 
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Qbhy\HyperfAuth\Authenticatable;
 use Qbhy\HyperfAuth\AuthGuard;
@@ -24,7 +24,7 @@ abstract class AbstractApi
         $this->adminGuard = $this->authManager->guard(name: 'web');
     }
 
-    protected function getAuthorization(): Authenticatable|MagicUserAuthorization
+    protected function getAuthorization(): Authenticatable|DelightfulUserAuthorization
     {
         return $this->adminGuard->user();
     }

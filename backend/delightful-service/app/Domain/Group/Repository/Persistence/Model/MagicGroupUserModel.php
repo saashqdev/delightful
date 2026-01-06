@@ -14,7 +14,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $group_id
  * @property string $user_id
  */
-class MagicGroupUserModel extends Model
+class DelightfulGroupUserModel extends Model
 {
     /**
      * The table associated with the model.

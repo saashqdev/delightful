@@ -33,7 +33,7 @@ logger = get_logger(__name__)
 
 class StreamListenerService:
     """
-    SuperMagic event listener service for handling and sending SuperMagic events
+    SuperDelightful event listener service for handling and sending SuperDelightful events
     """
 
     @staticmethod

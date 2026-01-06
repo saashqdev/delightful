@@ -2,8 +2,8 @@ import { render, screen, fireEvent, waitFor, act } from "@testing-library/react"
 import { vi, describe, test, expect, beforeEach } from "vitest"
 import type { PaginationResponse } from "@/types/request"
 import { StructureItemType } from "@/types/organization"
-import MagicInfiniteScrollList from "../index"
-import type { MagicListItemData } from "../../MagicList/types"
+import DelightfulInfiniteScrollList from "../index"
+import type { DelightfulListItemData } from "../../DelightfulList/types"
 
 // 模拟InfiniteScroll组件
 vi.mock("react-infinite-scroll-component", () => {
@@ -47,8 +47,8 @@ vi.mock("rc-virtual-list", () => {
 	}
 })
 
-// 模拟MagicList相关组件和样式
-vi.mock("../../MagicList/MagicListItem", () => {
+// 模拟DelightfulList相关组件和样式
+vi.mock("../../DelightfulList/DelightfulListItem", () => {
 	return {
 		default: ({ title, desc, avatar, active, onClick, data }: any) => (
 			<div data-testid="magic-list-item" className={active ? "active" : ""} onClick={onClick}>
@@ -63,8 +63,8 @@ vi.mock("../../MagicList/MagicListItem", () => {
 	}
 })
 
-// 模拟MagicEmpty组件
-vi.mock("../../base/MagicEmpty", () => {
+// 模拟DelightfulEmpty组件
+vi.mock("../../base/DelightfulEmpty", () => {
 	return {
 		default: () => <div data-testid="empty-state">没有数据</div>,
 	}
@@ -181,7 +181,7 @@ const createMockPaginationResponse = (
 }
 
 // 数据转换函数
-const mockItemsTransform = (item: unknown): MagicListItemData => {
+const mockItemsTransform = (item: unknown): DelightfulListItemData => {
 	const typedItem = item as TestItem
 	return {
 		id: typedItem.id,
@@ -190,7 +190,7 @@ const mockItemsTransform = (item: unknown): MagicListItemData => {
 	}
 }
 
-describe("MagicInfiniteScrollList", () => {
+describe("DelightfulInfiniteScrollList", () => {
 	// 在每个测试前重置所有模拟
 	beforeEach(() => {
 		vi.clearAllMocks()
@@ -201,7 +201,7 @@ describe("MagicInfiniteScrollList", () => {
 
 		act(() => {
 			render(
-				<MagicInfiniteScrollList
+				<DelightfulInfiniteScrollList
 					data={createMockPaginationResponse([])}
 					trigger={mockTrigger}
 					itemsTransform={mockItemsTransform}
@@ -221,7 +221,7 @@ describe("MagicInfiniteScrollList", () => {
 
 		act(() => {
 			render(
-				<MagicInfiniteScrollList
+				<DelightfulInfiniteScrollList
 					data={createMockPaginationResponse([])}
 					trigger={mockTrigger}
 					itemsTransform={mockItemsTransform}
@@ -239,7 +239,7 @@ describe("MagicInfiniteScrollList", () => {
 	test("渲染数据列表", () => {
 		const mockData = createMockData(3)
 		render(
-			<MagicInfiniteScrollList
+			<DelightfulInfiniteScrollList
 				data={createMockPaginationResponse(mockData, false)}
 				trigger={vi.fn()}
 				itemsTransform={mockItemsTransform}
@@ -255,7 +255,7 @@ describe("MagicInfiniteScrollList", () => {
 		const mockData = createMockData(3)
 		const onItemClick = vi.fn()
 		render(
-			<MagicInfiniteScrollList
+			<DelightfulInfiniteScrollList
 				data={createMockPaginationResponse(mockData, false)}
 				trigger={vi.fn()}
 				itemsTransform={mockItemsTransform}
@@ -275,7 +275,7 @@ describe("MagicInfiniteScrollList", () => {
 		const mockData = createMockData(3)
 
 		render(
-			<MagicInfiniteScrollList
+			<DelightfulInfiniteScrollList
 				data={createMockPaginationResponse(mockData, true)}
 				trigger={mockTrigger}
 				itemsTransform={mockItemsTransform}
@@ -302,7 +302,7 @@ describe("MagicInfiniteScrollList", () => {
 		const mockData = createMockData(3)
 
 		render(
-			<MagicInfiniteScrollList
+			<DelightfulInfiniteScrollList
 				data={createMockPaginationResponse(mockData, true)}
 				trigger={mockTrigger}
 				itemsTransform={mockItemsTransform}
@@ -330,7 +330,7 @@ describe("MagicInfiniteScrollList", () => {
 		const customLoadingIndicator = <div data-testid="custom-loading">自定义加载中...</div>
 
 		render(
-			<MagicInfiniteScrollList
+			<DelightfulInfiniteScrollList
 				data={createMockPaginationResponse(createMockData(3), true)}
 				trigger={mockTrigger}
 				itemsTransform={mockItemsTransform}
@@ -349,7 +349,7 @@ describe("MagicInfiniteScrollList", () => {
 	test("自定义项目高度", () => {
 		const mockData = createMockData(3)
 		render(
-			<MagicInfiniteScrollList
+			<DelightfulInfiniteScrollList
 				data={createMockPaginationResponse(mockData, false)}
 				trigger={vi.fn()}
 				itemsTransform={mockItemsTransform}
@@ -364,7 +364,7 @@ describe("MagicInfiniteScrollList", () => {
 	test("自定义容器高度", () => {
 		const mockData = createMockData(3)
 		render(
-			<MagicInfiniteScrollList
+			<DelightfulInfiniteScrollList
 				data={createMockPaginationResponse(mockData, false)}
 				trigger={vi.fn()}
 				itemsTransform={mockItemsTransform}
@@ -378,11 +378,11 @@ describe("MagicInfiniteScrollList", () => {
 })
 
 // 检查复选框功能
-describe("MagicInfiniteScrollList 复选框功能", () => {
+describe("DelightfulInfiniteScrollList 复选框功能", () => {
 	test("渲染复选框", () => {
 		const mockData = createMockData(3)
 		render(
-			<MagicInfiniteScrollList
+			<DelightfulInfiniteScrollList
 				data={createMockPaginationResponse(mockData, false)}
 				trigger={vi.fn()}
 				itemsTransform={mockItemsTransform}
@@ -402,7 +402,7 @@ describe("MagicInfiniteScrollList 复选框功能", () => {
 		const mockData = createMockData(3)
 		const onChange = vi.fn()
 		render(
-			<MagicInfiniteScrollList
+			<DelightfulInfiniteScrollList
 				data={createMockPaginationResponse(mockData, false)}
 				trigger={vi.fn()}
 				itemsTransform={mockItemsTransform}
@@ -429,7 +429,7 @@ describe("MagicInfiniteScrollList 复选框功能", () => {
 		const mockData = createMockData(3)
 		const onChange = vi.fn()
 		render(
-			<MagicInfiniteScrollList
+			<DelightfulInfiniteScrollList
 				data={createMockPaginationResponse(mockData, false)}
 				trigger={vi.fn()}
 				itemsTransform={mockItemsTransform}

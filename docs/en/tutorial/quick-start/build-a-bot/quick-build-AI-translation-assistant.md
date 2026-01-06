@@ -2,7 +2,7 @@
 
 With the continuous advancement of artificial intelligence technology, large language models have demonstrated excellent performance in translation quality, efficiency, context understanding, and multilingual support. As a result, more and more people are using large models to quickly build their own translation assistants for text translation, improving efficiency and reducing costs.
 
-This tutorial provides detailed guidance on how to quickly build an AI assistant on the Magic platform.
+This tutorial provides detailed guidance on how to quickly build an AI assistant on the Delightful platform.
 
 # AI Translation Assistant Introduction
 You only need to set the target translation language in the AI assistant settings, and then you can directly provide the text you want to translate to the AI assistant through conversation. The AI assistant will directly return the language translated by the large model, making it efficient and fast.
@@ -18,7 +18,7 @@ Based on the above scenario goals, our designed workflow will include the follow
 4. Node to output translated content
 
 ## 2. Create AI Translation Assistant
-1. Log in to the [Magic](https://www.letsmagic.cn/login) platform. (If using private deployment, log in to the corresponding private deployment platform)
+1. Log in to the [Delightful](https://www.letsmagic.cn/login) platform. (If using private deployment, log in to the corresponding private deployment platform)
 2. Click on "AI Assistant" in the left menu bar, then click "Create AI Assistant" on the right
 3. Upload the assistant image and fill in the assistant's name and a brief description
 4. Click "Create" to successfully enter the AI assistant's workflow orchestration interface

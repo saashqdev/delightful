@@ -1,6 +1,6 @@
 import { Flex, Form, Input } from "antd"
 import { useTranslation } from "react-i18next"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconCircleMinus, IconPlus } from "@tabler/icons-react"
 import { memo } from "react"
 import type { InstructionExplanation, InstructionValue } from "@/types/bot"
@@ -77,7 +77,7 @@ const SingleChoice = memo(({ fieldValues, onFinish }: SingleChoiceProps) => {
 									onFinish={(val) => onFinish(val, 0)}
 								/>
 							</Form.Item>
-							<MagicButton
+							<DelightfulButton
 								type="text"
 								className={styles.button}
 								disabled={fields.length === 1}
@@ -133,7 +133,7 @@ const SingleChoice = memo(({ fieldValues, onFinish }: SingleChoiceProps) => {
 											onFinish={(val) => onFinish(val, field.name)}
 										/>
 									</Form.Item>
-									<MagicButton
+									<DelightfulButton
 										type="text"
 										className={styles.button}
 										disabled={fields.length === 1}
@@ -144,13 +144,13 @@ const SingleChoice = memo(({ fieldValues, onFinish }: SingleChoiceProps) => {
 							))}
 					</Flex>
 					<Form.Item>
-						<MagicButton
+						<DelightfulButton
 							className={styles.button}
 							icon={<IconPlus size={16} />}
 							onClick={() => add()}
 						>
 							{t("explore.buttonText.addOption")}
-						</MagicButton>
+						</DelightfulButton>
 					</Form.Item>
 				</>
 			)}

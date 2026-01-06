@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 use App\Domain\Contact\Entity\ValueObject\UserIdType;
-use App\Domain\Contact\Repository\Facade\MagicUserRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulUserRepositoryInterface;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use Hyperf\Database\Seeders\Seeder;
 use Hyperf\DbConnection\Db;
@@ -43,7 +43,7 @@ class InitialAccountAndUserSeeder extends Seeder
         ];
 
         $createdAccountIds = [];
-        $allMagicIds = [];
+        $allDelightfulIds = [];
 
         try {
             // Begin transaction
@@ -62,8 +62,8 @@ class InitialAccountAndUserSeeder extends Seeder
                     ->first();
 
                 if ($existingAccount) {
-                    echo "Account already exists: {$existingAccount['real_name']}, ID: {$existingAccount['id']}, Magic ID: {$existingAccount['magic_id']}" . PHP_EOL;
-                    $allMagicIds[] = $existingAccount['magic_id'];
+                    echo "Account already exists: {$existingAccount['real_name']}, ID: {$existingAccount['id']}, Delightful ID: {$existingAccount['magic_id']}" . PHP_EOL;
+                    $allDelightfulIds[] = $existingAccount['magic_id'];
                 } else {
                     // Create a new account
                     $magicId = IdGenerator::getSnowId();
@@ -82,9 +82,9 @@ class InitialAccountAndUserSeeder extends Seeder
                     ];
 
                     $accountId = Db::table('magic_contact_accounts')->insertGetId($accountData);
-                    echo "Created new account: {$accountInfo['real_name']}, ID: {$accountId}, Magic ID: {$magicId}" . PHP_EOL;
+                    echo "Created new account: {$accountInfo['real_name']}, ID: {$accountId}, Delightful ID: {$magicId}" . PHP_EOL;
                     $createdAccountIds[] = $accountId;
-                    $allMagicIds[] = $magicId;
+                    $allDelightfulIds[] = $magicId;
                 }
             }
 
@@ -97,7 +97,7 @@ class InitialAccountAndUserSeeder extends Seeder
             // Create two users under different organizations for each account
             $organizationCodes = ['test001', 'test002'];
 
-            foreach ($allMagicIds as $index => $magicId) {
+            foreach ($allDelightfulIds as $index => $magicId) {
                 $name = $index === 0 ? 'Administrator' : 'Standard User';
 
                 foreach ($organizationCodes as $orgIndex => $orgCode) {
@@ -113,7 +113,7 @@ class InitialAccountAndUserSeeder extends Seeder
                     }
 
                     // Create the user record
-                    $userId = di(MagicUserRepositoryInterface::class)->getUserIdByType(UserIdType::UserId, $orgCode);
+                    $userId = di(DelightfulUserRepositoryInterface::class)->getUserIdByType(UserIdType::UserId, $orgCode);
                     $userData = [
                         'magic_id' => $magicId,
                         'organization_code' => $orgCode,

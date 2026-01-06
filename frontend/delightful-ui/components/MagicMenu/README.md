@@ -1,6 +1,6 @@
-# MagicMenu 魔法菜单组件
+# DelightfulMenu 魔法菜单组件
 
-`MagicMenu` 是一个基于 Ant Design Menu 组件的增强版菜单，提供了更简洁的样式和更好的用户体验。
+`DelightfulMenu` 是一个基于 Ant Design Menu 组件的增强版菜单，提供了更简洁的样式和更好的用户体验。
 
 ## 属性
 
@@ -11,11 +11,11 @@
 ## 基础用法
 
 ```tsx
-import { MagicMenu } from '@/components/base/MagicMenu';
+import { DelightfulMenu } from '@/components/base/DelightfulMenu';
 import { IconHome, IconUser, IconSettings } from '@tabler/icons-react';
 
 // 基础用法
-<MagicMenu
+<DelightfulMenu
   items={[
     {
       key: 'home',
@@ -36,7 +36,7 @@ import { IconHome, IconUser, IconSettings } from '@tabler/icons-react';
 />
 
 // 默认选中项
-<MagicMenu
+<DelightfulMenu
   defaultSelectedKeys={['home']}
   items={[
     {
@@ -51,7 +51,7 @@ import { IconHome, IconUser, IconSettings } from '@tabler/icons-react';
 />
 
 // 垂直菜单
-<MagicMenu
+<DelightfulMenu
   mode="vertical"
   items={[
     {
@@ -66,7 +66,7 @@ import { IconHome, IconUser, IconSettings } from '@tabler/icons-react';
 />
 
 // 带子菜单
-<MagicMenu
+<DelightfulMenu
   mode="vertical"
   items={[
     {
@@ -91,7 +91,7 @@ import { IconHome, IconUser, IconSettings } from '@tabler/icons-react';
 />
 
 // 危险操作
-<MagicMenu
+<DelightfulMenu
   items={[
     {
       key: 'profile',
@@ -106,7 +106,7 @@ import { IconHome, IconUser, IconSettings } from '@tabler/icons-react';
 />
 
 // 监听选择事件
-<MagicMenu
+<DelightfulMenu
   onClick={({ key }) => console.log('点击了:', key)}
   items={[
     {
@@ -135,4 +135,4 @@ import { IconHome, IconUser, IconSettings } from '@tabler/icons-react';
 -   需要在下拉菜单中展示选项时
 -   需要创建上下文菜单（右键菜单）时
 
-MagicMenu 组件让你的菜单更加简洁和用户友好，同时保持了 Ant Design Menu 的所有功能特性。
+DelightfulMenu 组件让你的菜单更加简洁和用户友好，同时保持了 Ant Design Menu 的所有功能特性。

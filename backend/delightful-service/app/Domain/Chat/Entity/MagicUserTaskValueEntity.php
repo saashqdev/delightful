@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Entity;
 
 use App\Infrastructure\Core\AbstractEntity;
 
-class MagicUserTaskValueEntity extends AbstractEntity
+class DelightfulUserTaskValueEntity extends AbstractEntity
 {
     protected int $interval;
 

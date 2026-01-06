@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Application\Permission\Service;
 
-use App\Domain\Contact\Entity\MagicDepartmentEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation as ContactDataIsolation;
-use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\Flow\Entity\ValueObject\ConstValue;
-use App\Domain\Group\Entity\MagicGroupEntity;
-use App\Domain\Group\Service\MagicGroupDomainService;
+use App\Domain\Group\Entity\DelightfulGroupEntity;
+use App\Domain\Group\Service\DelightfulGroupDomainService;
 use App\Domain\Permission\Entity\OperationPermissionEntity;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\Operation;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\ResourceType;
@@ -32,10 +32,10 @@ class OperationPermissionAppService extends AbstractPermissionAppService
 {
     public function __construct(
         private readonly OperationPermissionDomainService $operationPermissionDomainService,
-        private readonly MagicUserDomainService $magicUserDomainService,
-        private readonly MagicDepartmentDomainService $magicDepartmentDomainService,
-        private readonly MagicDepartmentUserDomainService $magicDepartmentUserDomainService,
-        private readonly MagicGroupDomainService $magicGroupDomainService,
+        private readonly DelightfulUserDomainService $magicUserDomainService,
+        private readonly DelightfulDepartmentDomainService $magicDepartmentDomainService,
+        private readonly DelightfulDepartmentUserDomainService $magicDepartmentUserDomainService,
+        private readonly DelightfulGroupDomainService $magicGroupDomainService,
     ) {
     }
 
@@ -53,7 +53,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * @return array{list: array<string, OperationPermissionEntity>, users: array<string, MagicUserEntity>,departments:MagicDepartmentEntity[], groups: array<string, MagicGroupEntity>}
+     * @return array{list: array<string, OperationPermissionEntity>, users: array<string, DelightfulUserEntity>,departments:DelightfulDepartmentEntity[], groups: array<string, DelightfulGroupEntity>}
      */
     public function listByResource(Authenticatable $authorization, ResourceType $resourceType, string $resourceId): array
     {

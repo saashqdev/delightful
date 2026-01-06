@@ -12,9 +12,9 @@ use App\Application\Permission\Service\OperationPermissionAppService;
 use App\Domain\Admin\Entity\ValueObject\AdminDataIsolation;
 use App\Domain\Agent\Entity\ValueObject\AgentDataIsolation;
 use App\Domain\Authentication\Entity\ValueObject\AuthenticationDataIsolation;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation as ContactDataIsolation;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeBaseDataIsolation;
@@ -31,19 +31,19 @@ use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 use App\Infrastructure\Core\DataIsolation\HandleDataIsolationInterface;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Auth\PermissionChecker;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\CloudFile\Kernel\Struct\FileLink;
 use Qbhy\HyperfAuth\Authenticatable;
 
 abstract class AbstractKernelAppService
 {
     /**
-     * @return array<string,MagicUserEntity>
+     * @return array<string,DelightfulUserEntity>
      */
     public function getUsers(string $organizationCode, array $userIds): array
     {
         $userIds = array_values(array_unique($userIds));
-        return di(MagicUserDomainService::class)->getByUserIds(
+        return di(DelightfulUserDomainService::class)->getByUserIds(
             ContactDataIsolation::simpleMake($organizationCode),
             $userIds
         );
@@ -91,13 +91,13 @@ abstract class AbstractKernelAppService
         $operator->setUid($flowDataIsolation->getCurrentUserId());
         $operator->setOrganizationCode($flowDataIsolation->getCurrentOrganizationCode());
 
-        if ($authorization instanceof MagicUserAuthorization) {
+        if ($authorization instanceof DelightfulUserAuthorization) {
             $operator->setUid($authorization->getId());
             $operator->setOrganizationCode($authorization->getOrganizationCode());
             $operator->setNickname($authorization->getNickname());
             $operator->setRealName($authorization->getRealName());
             $operator->setAvatar($authorization->getAvatar());
-            $operator->setMagicId($authorization->getMagicId());
+            $operator->setDelightfulId($authorization->getDelightfulId());
         }
         if (! $operator->hasUid()) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'flow.system.uid_not_found');
@@ -223,7 +223,7 @@ abstract class AbstractKernelAppService
 
     protected function checkInternalWhite(Authenticatable $authorization, SuperPermissionEnum $permission): void
     {
-        if ($authorization instanceof MagicUserAuthorization) {
+        if ($authorization instanceof DelightfulUserAuthorization) {
             if (PermissionChecker::mobileHasPermission($authorization->getMobile(), $permission)) {
                 return;
             }

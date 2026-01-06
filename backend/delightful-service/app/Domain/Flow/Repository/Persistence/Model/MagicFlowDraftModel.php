@@ -26,7 +26,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property DateTime $updated_at
  * @property DateTime $deleted_at
  */
-class MagicFlowDraftModel extends AbstractModel
+class DelightfulFlowDraftModel extends AbstractModel
 {
     use Snowflake;
     use SoftDeletes;

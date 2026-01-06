@@ -1,6 +1,6 @@
-# MagicRadioFavor 魔法单选组件
+# DelightfulRadioFavor 魔法单选组件
 
-MagicRadioFavor 是一个自定义样式的单选按钮组件，专为收藏夹和偏好设置等场景设计。该组件提供了一组可选项，用户可以从中选择一个选项，组件会以特殊的样式显示当前选中的选项。
+DelightfulRadioFavor 是一个自定义样式的单选按钮组件，专为收藏夹和偏好设置等场景设计。该组件提供了一组可选项，用户可以从中选择一个选项，组件会以特殊的样式显示当前选中的选项。
 
 ## 属性
 
@@ -14,7 +14,7 @@ MagicRadioFavor 是一个自定义样式的单选按钮组件，专为收藏夹�
 ## 基本用法
 
 ```tsx
-import MagicRadioFavor from '@/components/base/MagicRadioFavor';
+import DelightfulRadioFavor from '@/components/base/DelightfulRadioFavor';
 
 // 基本用法
 const options = [
@@ -25,14 +25,14 @@ const options = [
 
 const [selected, setSelected] = useState('option1');
 
-<MagicRadioFavor
+<DelightfulRadioFavor
   options={options}
   selectedValue={selected}
   onChange={(value) => setSelected(value)}
 />
 
 // 使用 value 属性
-<MagicRadioFavor
+<DelightfulRadioFavor
   options={options}
   value={selected}
   onChange={(value) => setSelected(value)}
@@ -54,4 +54,4 @@ const [selected, setSelected] = useState('option1');
 -   筛选条件的单选场景
 -   任何需要用户从多个选项中选择一个的交互场景
 
-MagicRadioFavor 组件提供了一种视觉上更吸引人的单选方式，特别适合在需要强调用户选择的界面中使用，如收藏夹、偏好设置等场景。
+DelightfulRadioFavor 组件提供了一种视觉上更吸引人的单选方式，特别适合在需要强调用户选择的界面中使用，如收藏夹、偏好设置等场景。

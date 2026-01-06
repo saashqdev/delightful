@@ -12,19 +12,19 @@ use App\Domain\Permission\Entity\ValueObject\OperationPermission\Operation;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\ResourceType;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\TargetType;
 use App\Domain\Permission\Entity\ValueObject\PermissionDataIsolation;
-use App\Domain\Permission\Factory\MagicOperationPermissionFactory;
+use App\Domain\Permission\Factory\DelightfulOperationPermissionFactory;
 use App\Domain\Permission\Repository\Facade\OperationPermissionRepositoryInterface;
-use App\Domain\Permission\Repository\Persistence\Model\MagicOperationPermissionModel;
+use App\Domain\Permission\Repository\Persistence\Model\DelightfulOperationPermissionModel;
 
-class OperationPermissionRepository extends MagicAbstractRepository implements OperationPermissionRepositoryInterface
+class OperationPermissionRepository extends DelightfulAbstractRepository implements OperationPermissionRepositoryInterface
 {
     protected bool $filterOrganizationCode = true;
 
     public function save(PermissionDataIsolation $dataIsolation, OperationPermissionEntity $operationPermissionEntity): OperationPermissionEntity
     {
-        $builder = $this->createBuilder($dataIsolation, MagicOperationPermissionModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulOperationPermissionModel::query());
 
-        /** @var null|MagicOperationPermissionModel $model */
+        /** @var null|DelightfulOperationPermissionModel $model */
         $model = $builder
             ->where('resource_type', $operationPermissionEntity->getResourceType()->value)
             ->where('resource_id', $operationPermissionEntity->getResourceId())
@@ -42,7 +42,7 @@ class OperationPermissionRepository extends MagicAbstractRepository implements O
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);
         } else {
-            $model = new MagicOperationPermissionModel();
+            $model = new DelightfulOperationPermissionModel();
             $model->fill($this->getAttributes($operationPermissionEntity));
         }
         $model->save();
@@ -54,9 +54,9 @@ class OperationPermissionRepository extends MagicAbstractRepository implements O
 
     public function getResourceOwner(PermissionDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId): ?OperationPermissionEntity
     {
-        $builder = $this->createBuilder($dataIsolation, MagicOperationPermissionModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulOperationPermissionModel::query());
 
-        /** @var null|MagicOperationPermissionModel $model */
+        /** @var null|DelightfulOperationPermissionModel $model */
         $model = $builder
             ->where('resource_type', $resourceType->value)
             ->where('resource_id', $resourceId)
@@ -66,7 +66,7 @@ class OperationPermissionRepository extends MagicAbstractRepository implements O
         if (! $model) {
             return null;
         }
-        return MagicOperationPermissionFactory::createEntity($model);
+        return DelightfulOperationPermissionFactory::createEntity($model);
     }
 
     /**
@@ -74,15 +74,15 @@ class OperationPermissionRepository extends MagicAbstractRepository implements O
      */
     public function listByResource(PermissionDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId): array
     {
-        $builder = $this->createBuilder($dataIsolation, MagicOperationPermissionModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulOperationPermissionModel::query());
 
         $builder->where('resource_type', $resourceType->value);
         $builder->where('resource_id', $resourceId);
 
         $list = [];
-        /** @var MagicOperationPermissionModel $model */
+        /** @var DelightfulOperationPermissionModel $model */
         foreach ($builder->get() as $model) {
-            $entity = MagicOperationPermissionFactory::createEntity($model);
+            $entity = DelightfulOperationPermissionFactory::createEntity($model);
             $list[$entity->getTargetType()->value . '_' . $entity->getTargetId()] = $entity;
         }
 
@@ -94,7 +94,7 @@ class OperationPermissionRepository extends MagicAbstractRepository implements O
      */
     public function listByTargetIds(PermissionDataIsolation $dataIsolation, ResourceType $resourceType, array $targetIds, array $resourceIds = []): array
     {
-        $builder = $this->createBuilder($dataIsolation, MagicOperationPermissionModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulOperationPermissionModel::query());
 
         $builder->where('resource_type', $resourceType->value);
         if (! empty($resourceIds)) {
@@ -103,9 +103,9 @@ class OperationPermissionRepository extends MagicAbstractRepository implements O
         $builder->whereIn('target_id', $targetIds);
 
         $list = [];
-        /** @var MagicOperationPermissionModel $model */
+        /** @var DelightfulOperationPermissionModel $model */
         foreach ($builder->get() as $model) {
-            $entity = MagicOperationPermissionFactory::createEntity($model);
+            $entity = DelightfulOperationPermissionFactory::createEntity($model);
             $list[] = $entity;
         }
 
@@ -125,7 +125,7 @@ class OperationPermissionRepository extends MagicAbstractRepository implements O
             return;
         }
 
-        MagicOperationPermissionModel::insert($models);
+        DelightfulOperationPermissionModel::insert($models);
     }
 
     /**
@@ -137,7 +137,7 @@ class OperationPermissionRepository extends MagicAbstractRepository implements O
             if (! $operationPermission->getId()) {
                 continue;
             }
-            $builder = $this->createBuilder($dataIsolation, MagicOperationPermissionModel::query());
+            $builder = $this->createBuilder($dataIsolation, DelightfulOperationPermissionModel::query());
             $builder->where('id', $operationPermission->getId())->update($this->getAttributes($operationPermission));
         }
     }
@@ -157,7 +157,7 @@ class OperationPermissionRepository extends MagicAbstractRepository implements O
             return;
         }
 
-        $builder = $this->createBuilder($dataIsolation, MagicOperationPermissionModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulOperationPermissionModel::query());
         $builder->whereIn('id', $ids);
         $builder->delete();
     }

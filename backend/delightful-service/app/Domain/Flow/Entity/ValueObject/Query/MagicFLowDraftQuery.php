@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Entity\ValueObject\Query;
 
-class MagicFLowDraftQuery extends Query
+class DelightfulFLowDraftQuery extends Query
 {
     public string $flowCode = '';
 

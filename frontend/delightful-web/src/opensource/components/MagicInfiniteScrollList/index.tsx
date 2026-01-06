@@ -1,6 +1,6 @@
-import MagicInfiniteScrollList from "./MagicInfiniteScrollList"
+import DelightfulInfiniteScrollList from "./DelightfulInfiniteScrollList"
 
-export type { MagicInfiniteScrollListProps } from "./types"
+export type { DelightfulInfiniteScrollListProps } from "./types"
 
 // 添加默认导出
-export default MagicInfiniteScrollList
+export default DelightfulInfiniteScrollList

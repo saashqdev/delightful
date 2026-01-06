@@ -10,7 +10,7 @@ namespace App\Domain\Group\Entity;
 use App\Domain\Group\Entity\ValueObject\GroupStatusEnum;
 use App\Domain\Group\Entity\ValueObject\GroupTypeEnum;
 
-class MagicGroupEntity extends AbstractEntity
+class DelightfulGroupEntity extends AbstractEntity
 {
     protected string $id = '';
 

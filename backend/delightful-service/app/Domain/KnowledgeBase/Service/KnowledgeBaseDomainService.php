@@ -39,14 +39,14 @@ readonly class KnowledgeBaseDomainService
      * 保存知识库 - 基本信息.
      * @param array<DocumentFileInterface> $files
      */
-    public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $savingMagicFlowKnowledgeEntity, array $files = []): KnowledgeBaseEntity
+    public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $savingDelightfulFlowKnowledgeEntity, array $files = []): KnowledgeBaseEntity
     {
-        $savingMagicFlowKnowledgeEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        $savingMagicFlowKnowledgeEntity->setCreator($dataIsolation->getCurrentUserId());
+        $savingDelightfulFlowKnowledgeEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
+        $savingDelightfulFlowKnowledgeEntity->setCreator($dataIsolation->getCurrentUserId());
         $create = false;
-        if ($savingMagicFlowKnowledgeEntity->shouldCreate()) {
-            $savingMagicFlowKnowledgeEntity->prepareForCreation();
-            $magicFlowKnowledgeEntity = $savingMagicFlowKnowledgeEntity;
+        if ($savingDelightfulFlowKnowledgeEntity->shouldCreate()) {
+            $savingDelightfulFlowKnowledgeEntity->prepareForCreation();
+            $magicFlowKnowledgeEntity = $savingDelightfulFlowKnowledgeEntity;
             $create = true;
 
             // 使用已经提前生成好的 code
@@ -57,11 +57,11 @@ readonly class KnowledgeBaseDomainService
                 }
             }
         } else {
-            $magicFlowKnowledgeEntity = $this->magicFlowKnowledgeRepository->getByCode($dataIsolation, $savingMagicFlowKnowledgeEntity->getCode());
+            $magicFlowKnowledgeEntity = $this->magicFlowKnowledgeRepository->getByCode($dataIsolation, $savingDelightfulFlowKnowledgeEntity->getCode());
             if (empty($magicFlowKnowledgeEntity)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'flow.common.not_found', ['label' => $savingMagicFlowKnowledgeEntity->getCode()]);
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'flow.common.not_found', ['label' => $savingDelightfulFlowKnowledgeEntity->getCode()]);
             }
-            $savingMagicFlowKnowledgeEntity->prepareForModification($magicFlowKnowledgeEntity);
+            $savingDelightfulFlowKnowledgeEntity->prepareForModification($magicFlowKnowledgeEntity);
         }
 
         $magicFlowKnowledgeEntity = $this->magicFlowKnowledgeRepository->save($dataIsolation, $magicFlowKnowledgeEntity);

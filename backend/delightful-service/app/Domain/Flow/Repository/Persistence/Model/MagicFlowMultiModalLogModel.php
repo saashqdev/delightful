@@ -20,7 +20,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class MagicFlowMultiModalLogModel extends AbstractModel
+class DelightfulFlowMultiModalLogModel extends AbstractModel
 {
     use Snowflake;
 

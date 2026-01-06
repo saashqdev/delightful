@@ -10,13 +10,13 @@ namespace App\Infrastructure\Core\Traits;
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestCoContext;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Qbhy\HyperfAuth\Authenticatable;
 
-trait MagicUserAuthorizationTrait
+trait DelightfulUserAuthorizationTrait
 {
     /**
-     * @return MagicUserAuthorization
+     * @return DelightfulUserAuthorization
      */
     protected function getAuthorization(): Authenticatable
     {

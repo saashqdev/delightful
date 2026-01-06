@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconWifi, IconWifiOff } from "@tabler/icons-react"
 import { useNetwork, useUpdateEffect } from "ahooks"
 import { App } from "antd"
@@ -19,7 +19,7 @@ const NetworkTip = memo(() => {
 	useUpdateEffect(() => {
 		if (!online) {
 			ref.current = message.error({
-				icon: <MagicIcon component={IconWifiOff} color={colorScales.red[4]} />,
+				icon: <DelightfulIcon component={IconWifiOff} color={colorScales.red[4]} />,
 				content: t("networkTip.offline"),
 				duration: 0,
 				key: networkTipKey,
@@ -29,7 +29,7 @@ const NetworkTip = memo(() => {
 			})
 		} else if (ref.current) {
 			message.success({
-				icon: <MagicIcon component={IconWifi} color={colorScales.green[5]} />,
+				icon: <DelightfulIcon component={IconWifi} color={colorScales.green[5]} />,
 				content: t("networkTip.online"),
 				duration: 3,
 				key: networkTipKey,

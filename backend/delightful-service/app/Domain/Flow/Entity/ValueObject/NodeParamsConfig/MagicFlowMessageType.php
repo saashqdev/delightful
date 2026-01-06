@@ -12,7 +12,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Delightful\FlowExprEngine\Component;
 use Delightful\FlowExprEngine\ComponentFactory;
 
-enum MagicFlowMessageType: string
+enum DelightfulFlowMessageType: string
 {
     case None = 'none';
     case Text = 'text';
@@ -30,7 +30,7 @@ enum MagicFlowMessageType: string
         return in_array($this, [self::Image, self::Video, self::Audio, self::File]);
     }
 
-    public static function make(string $type): ?MagicFlowMessageType
+    public static function make(string $type): ?DelightfulFlowMessageType
     {
         return match (strtolower($type)) {
             'text' => self::Text,
@@ -45,11 +45,11 @@ enum MagicFlowMessageType: string
     }
 
     /**
-     * @return array{type: MagicFlowMessageType, content: null|Component, link: null|Component, link_desc: null|Component}
+     * @return array{type: DelightfulFlowMessageType, content: null|Component, link: null|Component, link_desc: null|Component}
      */
     public static function validateParams(array $params): array
     {
-        $type = MagicFlowMessageType::make($params['message_type'] ?? ($params['type'] ?? ''));
+        $type = DelightfulFlowMessageType::make($params['message_type'] ?? ($params['type'] ?? ''));
         if (! $type) {
             ExceptionBuilder::throw(FlowErrorCode::MessageError, 'flow.node.message.type_error');
         }
@@ -60,16 +60,16 @@ enum MagicFlowMessageType: string
         $linkDescComponent = ComponentFactory::fastCreate($params['link_desc'] ?? []);
 
         switch ($type) {
-            case MagicFlowMessageType::Text:
-            case MagicFlowMessageType::Markdown:
+            case DelightfulFlowMessageType::Text:
+            case DelightfulFlowMessageType::Markdown:
                 if (! $contentComponent?->isValue()) {
                     ExceptionBuilder::throw(FlowErrorCode::MessageError, 'flow.component.format_error', ['label' => 'content']);
                 }
                 break;
-            case MagicFlowMessageType::Image:
-            case MagicFlowMessageType::Video:
-            case MagicFlowMessageType::Audio:
-            case MagicFlowMessageType::File:
+            case DelightfulFlowMessageType::Image:
+            case DelightfulFlowMessageType::Video:
+            case DelightfulFlowMessageType::Audio:
+            case DelightfulFlowMessageType::File:
                 if (! $linkComponent?->isValue()) {
                     ExceptionBuilder::throw(FlowErrorCode::MessageError, 'flow.component.format_error', ['label' => 'link']);
                 }
@@ -77,7 +77,7 @@ enum MagicFlowMessageType: string
                     ExceptionBuilder::throw(FlowErrorCode::MessageError, 'flow.component.format_error', ['label' => 'link_desc']);
                 }
                 break;
-            case MagicFlowMessageType::AIMessage:
+            case DelightfulFlowMessageType::AIMessage:
                 if (! $contentComponent?->isForm()) {
                     ExceptionBuilder::throw(FlowErrorCode::MessageError, 'flow.component.format_error', ['label' => 'content']);
                 }

@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Repository\Facade;
 
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
 
-interface MagicAgentVersionRepositoryInterface
+interface DelightfulAgentVersionRepositoryInterface
 {
-    public function insert(MagicAgentVersionEntity $agentVersionEntity): MagicAgentVersionEntity;
+    public function insert(DelightfulAgentVersionEntity $agentVersionEntity): DelightfulAgentVersionEntity;
 
-    public function getAgentById(string $id): ?MagicAgentVersionEntity;
+    public function getAgentById(string $id): ?DelightfulAgentVersionEntity;
 
     public function getAgentsByOrganization(string $organizationCode, array $agentIds, int $page, int $pageSize, string $agentName): array;
 

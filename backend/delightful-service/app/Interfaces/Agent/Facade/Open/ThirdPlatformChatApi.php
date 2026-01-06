@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Agent\Facade\Open;
 
-use App\Application\Agent\Service\MagicBotThirdPlatformChatAppService;
+use App\Application\Agent\Service\DelightfulBotThirdPlatformChatAppService;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -15,7 +15,7 @@ readonly class ThirdPlatformChatApi
 {
     public function __construct(
         protected RequestInterface $request,
-        protected MagicBotThirdPlatformChatAppService $magicBotThirdPlatformChatAppService
+        protected DelightfulBotThirdPlatformChatAppService $magicBotThirdPlatformChatAppService
     ) {
     }
 

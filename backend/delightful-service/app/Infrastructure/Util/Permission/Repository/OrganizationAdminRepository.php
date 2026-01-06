@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Util\Permission\Repository;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Repository\Facade\MagicUserRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulUserRepositoryInterface;
 use App\Domain\Permission\Entity\OrganizationAdminEntity;
 use App\Domain\Permission\Repository\Facade\OrganizationAdminRepositoryInterface;
 use App\Domain\Permission\Repository\Persistence\Model\OrganizationAdminModel;
@@ -25,7 +25,7 @@ use function Hyperf\Support\now;
 readonly class OrganizationAdminRepository implements OrganizationAdminRepositoryInterface
 {
     public function __construct(
-        private MagicUserRepositoryInterface $userRepository
+        private DelightfulUserRepositoryInterface $userRepository
     ) {
     }
 
@@ -37,7 +37,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
         $data = [
             'user_id' => $organizationAdminEntity->getUserId(),
             'organization_code' => $dataIsolation->getCurrentOrganizationCode(),
-            'magic_id' => $organizationAdminEntity->getMagicId(),
+            'magic_id' => $organizationAdminEntity->getDelightfulId(),
             'grantor_user_id' => $organizationAdminEntity->getGrantorUserId(),
             'granted_at' => $organizationAdminEntity->getGrantedAt(),
             'status' => $organizationAdminEntity->getStatus(),
@@ -158,7 +158,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
         // 获取用户的 magic_id
         $user = $this->userRepository->getUserById($userId);
         if ($user) {
-            $entity->setMagicId($user->getMagicId());
+            $entity->setDelightfulId($user->getDelightfulId());
         }
 
         $entity->setGrantorUserId($grantorUserId);
@@ -251,7 +251,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
         $entity->setId($data['id'] ?? null);
         $entity->setUserId($data['user_id'] ?? '');
         $entity->setOrganizationCode($data['organization_code'] ?? '');
-        $entity->setMagicId($data['magic_id'] ?? null);
+        $entity->setDelightfulId($data['magic_id'] ?? null);
         $entity->setGrantorUserId($data['grantor_user_id'] ?? null);
         $entity->setStatus($data['status'] ?? 1);
         $entity->setIsOrganizationCreator((bool) ($data['is_organization_creator'] ?? false));

@@ -1,5 +1,5 @@
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
-import type { MaterialGroup } from "@delightful/delightful-flow/dist/MagicFlow/context/MaterialSourceContext/MaterialSourceContext"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
+import type { MaterialGroup } from "@delightful/delightful-flow/dist/DelightfulFlow/context/MaterialSourceContext/MaterialSourceContext"
 import { useEffect, useMemo, useState } from "react"
 import { useFlowStore } from "@/opensource/stores/flow"
 import { cloneDeep } from "lodash-es"
@@ -10,7 +10,7 @@ import { v0Template } from "../nodes/SubFlow/v0/template"
 export default function useMaterialSource() {
 	const { subFlows, useableToolSets } = useFlowStore()
 
-	const [subFlowList, setSubFlowList] = useState([] as MagicFlow.Flow[])
+	const [subFlowList, setSubFlowList] = useState([] as DelightfulFlow.Flow[])
 
 	const [toolGroup, setToolGroups] = useState([] as MaterialGroup[])
 

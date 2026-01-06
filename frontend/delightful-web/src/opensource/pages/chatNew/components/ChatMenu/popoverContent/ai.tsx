@@ -1,5 +1,5 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconUserCog } from "@tabler/icons-react"
 import { useTranslation } from "react-i18next"
 import { RoutePath } from "@/const/routes"
@@ -45,16 +45,16 @@ const AiPopoverContent = observer(({ receiveId, conversationId }: AiPopoverConte
 			{/* <PraiseButton /> */}
 			{!isUndefined(ai?.agent_info?.user_operation) &&
 				hasEditRight(ai?.agent_info?.user_operation) && (
-					<MagicButton
+					<DelightfulButton
 						justify="flex-start"
-						icon={<MagicIcon component={IconUserCog} size={20} />}
+						icon={<DelightfulIcon component={IconUserCog} size={20} />}
 						size="large"
 						type="text"
 						block
 						onClick={navigateToWorkflow}
 					>
 						{t("chat.floatButton.aiAssistantConfiguration")}
-					</MagicButton>
+					</DelightfulButton>
 				)}
 			{/* <div style={{ height: 1, background: colorUsages.border }} /> */}
 			<UserPopoverContent conversationId={conversationId} />

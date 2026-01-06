@@ -1,7 +1,7 @@
 import { memo } from "react"
 import { Flex } from "antd"
 import { useTranslation } from "react-i18next"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useStyles } from "./style"
 
 interface SuccessResultProps {
@@ -25,15 +25,15 @@ const SuccessResult = memo(
 					</div>
 					<div>{t("explore.form.conversationTip")}</div>
 				</Flex>
-				<MagicButton type="primary" className={styles.button} onClick={handleConversation}>
+				<DelightfulButton type="primary" className={styles.button} onClick={handleConversation}>
 					{t("explore.buttonText.conversationAssistant")}
-				</MagicButton>
-				<MagicButton
+				</DelightfulButton>
+				<DelightfulButton
 					className={cx(styles.button, styles.defaultButton)}
 					onClick={handleCancel}
 				>
 					{t("button.close")}
-				</MagicButton>
+				</DelightfulButton>
 			</Flex>
 		)
 	},

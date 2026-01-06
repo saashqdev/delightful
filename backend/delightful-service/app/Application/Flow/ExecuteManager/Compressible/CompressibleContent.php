@@ -15,9 +15,9 @@ class CompressibleContent
      * 需要处理的压缩标签.
      */
     private static array $tags = [
-        ['<MagicCompressibleContent Type="Image">', '</MagicCompressibleContent>', '<MagicImage>', '</MagicImage>'],
-        ['<MagicCompressibleContent Type="Video">', '</MagicCompressibleContent>', '<MagicVideo>', '</MagicVideo>'],
-        ['<MagicCompressibleContent Type="Mention">', '</MagicCompressibleContent>', '<MagicMention>', '</MagicMention>'],
+        ['<DelightfulCompressibleContent Type="Image">', '</DelightfulCompressibleContent>', '<DelightfulImage>', '</DelightfulImage>'],
+        ['<DelightfulCompressibleContent Type="Video">', '</DelightfulCompressibleContent>', '<DelightfulVideo>', '</DelightfulVideo>'],
+        ['<DelightfulCompressibleContent Type="Mention">', '</DelightfulCompressibleContent>', '<DelightfulMention>', '</DelightfulMention>'],
     ];
 
     public static function compress(string $content): string

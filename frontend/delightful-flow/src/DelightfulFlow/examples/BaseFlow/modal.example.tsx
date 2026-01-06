@@ -1,8 +1,8 @@
 /**
  * magic-flow节点业务组件
  */
-import { MagicFlowInstance } from "@/DelightfulFlow"
-import MagicFlowModal from "@/DelightfulFlow/modal/MagicFlowModal"
+import { DelightfulFlowInstance } from "@/DelightfulFlow"
+import DelightfulFlowModal from "@/DelightfulFlow/modal/DelightfulFlowModal"
 import { Button } from "antd"
 import { IconCopyPlus } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
@@ -18,7 +18,7 @@ type FlowProps = { open?: boolean; onClose?: () => void }
 
 export default function BaseFlow({ open, onClose }: FlowProps) {
 	installAllNodes()
-	const flowInstance = useRef(null as null | MagicFlowInstance)
+	const flowInstance = useRef(null as null | DelightfulFlowInstance)
 
 	const toolbars = useToolbar()
 
@@ -56,7 +56,7 @@ export default function BaseFlow({ open, onClose }: FlowProps) {
 	return (
 		// @ts-ignore
 		<NodeMapProvider nodeMap={nodeSchemaMap}>
-			<MagicFlowModal
+			<DelightfulFlowModal
 				ref={flowInstance}
 				header={flowHeader}
 				// @ts-ignore

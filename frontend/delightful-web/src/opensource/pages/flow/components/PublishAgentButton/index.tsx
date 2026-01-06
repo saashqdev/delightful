@@ -1,15 +1,15 @@
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { useTranslation } from "react-i18next"
 import type { Bot } from "@/types/bot"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import PublishAgent from "@/opensource/pages/explore/components/PublishAgent"
 import type { MutableRefObject } from "react"
-import type { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
+import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
 
 type PublishAgentButtonProps = {
 	agent: Bot.Detail
 	setAgent: React.Dispatch<React.SetStateAction<Bot.Detail>>
-	flowInstance: MutableRefObject<MagicFlowInstance | null>
+	flowInstance: MutableRefObject<DelightfulFlowInstance | null>
 	initPublishList?: (this: any, agentId: any) => Promise<void>
 }
 
@@ -40,9 +40,9 @@ export default function PublishAgentButton({
 
 	return (
 		<>
-			<MagicButton type="primary" onClick={setTrue}>
+			<DelightfulButton type="primary" onClick={setTrue}>
 				{t("button.publish")}
-			</MagicButton>
+			</DelightfulButton>
 			<PublishAgent
 				agentId={agent.botEntity?.id}
 				scope={agent.botVersionEntity?.release_scope}

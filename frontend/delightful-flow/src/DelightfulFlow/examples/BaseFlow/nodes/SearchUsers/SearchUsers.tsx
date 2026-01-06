@@ -1,9 +1,9 @@
-import { ExpressionMode } from "@/MagicExpressionWidget/constant"
+import { ExpressionMode } from "@/DelightfulExpressionWidget/constant"
 import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import DropdownCard from "@/common/BaseUI/DropdownCard"
-import MagicExpressionWrap from "@/common/BaseUI/MagicExpressionWrap"
-import MagicSelect from "@/common/BaseUI/Select"
+import DelightfulExpressionWrap from "@/common/BaseUI/DelightfulExpressionWrap"
+import DelightfulSelect from "@/common/BaseUI/Select"
 import { Flex, Form } from "antd"
 import { IconCircleMinus, IconPlus } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
@@ -70,7 +70,7 @@ export default function SearchUsers() {
 															noStyle
 															name={[subField.name, "left"]}
 														>
-															<MagicSelect
+															<DelightfulSelect
 																options={filterTargetOptions}
 															/>
 														</Form.Item>
@@ -80,7 +80,7 @@ export default function SearchUsers() {
 															noStyle
 															name={[subField.name, "operator"]}
 														>
-															<MagicSelect
+															<DelightfulSelect
 																options={operatorOptions}
 															/>
 														</Form.Item>
@@ -91,7 +91,7 @@ export default function SearchUsers() {
 															name={[subField.name, "right"]}
 															className={styles.right}
 														>
-															<MagicExpressionWrap
+															<DelightfulExpressionWrap
 																placeholder="使用@添加变量"
 																dataSource={expressionDataSource}
 																mode={ExpressionMode.Common}

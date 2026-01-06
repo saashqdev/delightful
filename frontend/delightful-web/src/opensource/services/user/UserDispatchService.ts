@@ -15,16 +15,16 @@ const UserDispatchService = {
 		magicOrganizationCode: string
 	}) => {
 		const oldUserInfo = cloneDeep(userStore.user.userInfo)
-		const oldMagicOrganizationCode = userStore.user.organizationCode
+		const oldDelightfulOrganizationCode = userStore.user.organizationCode
 
 		try {
 			userService.setUserInfo(data.userInfo)
-			userService.setMagicOrganizationCode(data.magicOrganizationCode)
+			userService.setDelightfulOrganizationCode(data.magicOrganizationCode)
 			await userService.loadUserInfo(data.userInfo, { showSwitchLoading: true })
 		} catch (err) {
 			// 切换失败，恢复当前组织
 			userService.setUserInfo(oldUserInfo)
-			userService.setMagicOrganizationCode(oldMagicOrganizationCode)
+			userService.setDelightfulOrganizationCode(oldDelightfulOrganizationCode)
 		}
 	},
 

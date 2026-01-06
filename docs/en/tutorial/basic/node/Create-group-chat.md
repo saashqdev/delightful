@@ -1,6 +1,6 @@
 # Create Group Chat Node
 ## What is a Create Group Chat Node?
-The Create Group Chat Node is a function node in Magic Flow specifically designed for creating multi-person chat groups. Through this node, you can automatically create various types of group chats in your workflow, such as internal work groups, project groups, training groups, etc., and automatically add specified members. It's just like manually creating a group chat in your daily social software, but this process can be done automatically in the workflow.
+The Create Group Chat Node is a function node in Delightful Flow specifically designed for creating multi-person chat groups. Through this node, you can automatically create various types of group chats in your workflow, such as internal work groups, project groups, training groups, etc., and automatically add specified members. It's just like manually creating a group chat in your daily social software, but this process can be done automatically in the workflow.
 
 **Image Description:**
 

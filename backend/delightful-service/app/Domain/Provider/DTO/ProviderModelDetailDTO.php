@@ -44,7 +44,7 @@ class ProviderModelDetailDTO extends AbstractDTO
 
     protected ?DisabledByType $disabledBy = null; // 禁用来源：official-官方禁用，user-用户禁用，NULL-未禁用
 
-    protected int $superMagicDisplayState = 0;
+    protected int $superDelightfulDisplayState = 0;
 
     protected ?int $loadBalancingWeight = null;
 
@@ -326,17 +326,17 @@ class ProviderModelDetailDTO extends AbstractDTO
         }
     }
 
-    public function getSuperMagicDisplayState(): int
+    public function getSuperDelightfulDisplayState(): int
     {
-        return $this->superMagicDisplayState;
+        return $this->superDelightfulDisplayState;
     }
 
-    public function setSuperMagicDisplayState(null|int|string $superMagicDisplayState): void
+    public function setSuperDelightfulDisplayState(null|int|string $superDelightfulDisplayState): void
     {
-        if ($superMagicDisplayState === null) {
-            $this->superMagicDisplayState = 0;
+        if ($superDelightfulDisplayState === null) {
+            $this->superDelightfulDisplayState = 0;
         } else {
-            $this->superMagicDisplayState = (int) $superMagicDisplayState;
+            $this->superDelightfulDisplayState = (int) $superDelightfulDisplayState;
         }
     }
 

@@ -1,4 +1,4 @@
-import { getTemporaryDownloadUrl } from "@/opensource/pages/superMagic/utils/api"
+import { getTemporaryDownloadUrl } from "@/opensource/pages/superDelightful/utils/api"
 import { useDebounceEffect } from "ahooks"
 import { useState } from "react"
 

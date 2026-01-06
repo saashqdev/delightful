@@ -1,16 +1,16 @@
-# Magic Issue Templates
+# Delightful Issue Templates
 
-This directory contains issue templates for the Magic project to help you report issues and request features effectively.
+This directory contains issue templates for the Delightful project to help you report issues and request features effectively.
 
 **🇺🇸 English Users**: Use the templates below without the `-zh` suffix.
 
 ## Available Templates
 
 ### 🐛 Bug Report (`01-bug-report.yml`)
-Use this template to report bugs or unexpected behavior in Magic.
+Use this template to report bugs or unexpected behavior in Delightful.
 
 **When to use:**
-- Magic is not working as expected
+- Delightful is not working as expected
 - You encounter errors or crashes
 - Features are behaving incorrectly
 
@@ -18,7 +18,7 @@ Use this template to report bugs or unexpected behavior in Magic.
 Use this template to suggest new features or enhancements.
 
 **When to use:**
-- You have an idea for improving Magic
+- You have an idea for improving Delightful
 - You need functionality that doesn't exist
 - You want to suggest enhancements to existing features
 
@@ -34,7 +34,7 @@ Use this template to report documentation issues or suggest improvements.
 Use this template to report performance problems or suggest optimizations.
 
 **When to use:**
-- Magic is running slowly
+- Delightful is running slowly
 - High resource usage (CPU, memory)
 - API endpoints are taking too long to respond
 
@@ -57,7 +57,7 @@ Use this template to report issues with APIs, SDKs, or third-party integrations.
 - SDK or library issues
 
 ### 🚀 Deployment / Installation Issue (`07-deployment.yml`)
-Use this template to report problems with installing or deploying Magic.
+Use this template to report problems with installing or deploying Delightful.
 
 **When to use:**
 - Installation process is failing
@@ -67,7 +67,7 @@ Use this template to report problems with installing or deploying Magic.
 ## How to Choose the Right Template
 
 1. **Start with the issue type** - What kind of problem are you experiencing?
-2. **Consider the component** - Which part of Magic is affected?
+2. **Consider the component** - Which part of Delightful is affected?
 3. **Check severity** - How critical is the issue?
 
 ## Before Creating an Issue
@@ -79,7 +79,7 @@ Use this template to report problems with installing or deploying Magic.
 
 ## Need Help?
 
-If you're unsure which template to use or need help with Magic:
+If you're unsure which template to use or need help with Delightful:
 
 - 💬 **Discussions**: [GitHub Discussions](https://github.com/saashqdev/delightful/magic/discussions)
 - 📖 **Documentation**: [docs.letsmagic.cn](https://docs.bedelightful.ai/en) | [Chinese Documentation](https://docs.letsmagic.cn/zh)
@@ -88,8 +88,8 @@ If you're unsure which template to use or need help with Magic:
 
 ## Contributing
 
-We welcome contributions! Please see our [Contributing Guide](../../CONTRIBUTING.md) for more information on how to contribute to Magic.
+We welcome contributions! Please see our [Contributing Guide](../../CONTRIBUTING.md) for more information on how to contribute to Delightful.
 
 ---
 
-Thank you for helping improve Magic! 🔮 
+Thank you for helping improve Delightful! 🔮 

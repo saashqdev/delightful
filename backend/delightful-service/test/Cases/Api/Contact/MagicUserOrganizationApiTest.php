@@ -13,7 +13,7 @@ use HyperfTest\Cases\Api\AbstractHttpTest;
  * @internal
  * 用户当前组织管理API测试
  */
-class MagicUserOrganizationApiTest extends AbstractHttpTest
+class DelightfulUserOrganizationApiTest extends AbstractHttpTest
 {
     private const string GET_CURRENT_ORGANIZATION_API = '/api/v1/contact/accounts/me/organization-code';
 

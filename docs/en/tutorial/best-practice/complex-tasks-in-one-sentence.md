@@ -1,10 +1,10 @@
 # Executing Complex Tasks with One Sentence
 
 ## Background
-In a work environment, we often need to understand our supervisor's intentions from a single sentence, break it down into work tasks, and execute them step by step. This document demonstrates how to process complex tasks with a single sentence in Magic.
+In a work environment, we often need to understand our supervisor's intentions from a single sentence, break it down into work tasks, and execute them step by step. This document demonstrates how to process complex tasks with a single sentence in Delightful.
 
 ## Case Introduction
-The Magic Project Assistant is designed for enterprise management, helping managers complete project management tasks. It handles tedious project follow-up tasks, allowing project managers to focus on core business matters.
+The Delightful Project Assistant is designed for enterprise management, helping managers complete project management tasks. It handles tedious project follow-up tasks, allowing project managers to focus on core business matters.
 
 ## Implementation Method:
 **Thinking Agent (DeepSeek)**: Outputs task execution plans.

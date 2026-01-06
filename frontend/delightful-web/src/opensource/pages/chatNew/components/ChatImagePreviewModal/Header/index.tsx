@@ -1,8 +1,8 @@
 import { Flex } from "antd"
-import MagicMemberAvatar from "@/opensource/components/business/MagicMemberAvatar"
+import DelightfulMemberAvatar from "@/opensource/components/business/DelightfulMemberAvatar"
 import { formatFileSize, formatTime } from "@/utils/string"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconBadgeHd, IconDownload, IconMessagePin, IconShare3 } from "@tabler/icons-react"
 import { useTranslation } from "react-i18next"
 import type {
@@ -77,7 +77,7 @@ function Header(props: ChatImagePreviewHeader) {
 			onMouseDown={onMouseDown}
 		>
 			<Flex gap={10}>
-				<MagicMemberAvatar uid={message?.message?.sender_id} showPopover={false} />
+				<DelightfulMemberAvatar uid={message?.message?.sender_id} showPopover={false} />
 				<Flex vertical gap={2}>
 					<div className={styles.title}>{title}</div>
 					<div className={styles.subtitle}>
@@ -86,35 +86,35 @@ function Header(props: ChatImagePreviewHeader) {
 				</Flex>
 			</Flex>
 			<Flex gap={10}>
-				<MagicButton type="text" className={styles.headerButton} onClick={onHighDefinition}>
+				<DelightfulButton type="text" className={styles.headerButton} onClick={onHighDefinition}>
 					<Flex vertical align="center" justify="center">
-						<MagicIcon color="currentColor" component={IconBadgeHd} size={20} />
+						<DelightfulIcon color="currentColor" component={IconBadgeHd} size={20} />
 						<span>{t("chat.imagePreview.highDefinitionImage")}</span>
 					</Flex>
-				</MagicButton>
-				<MagicButton
+				</DelightfulButton>
+				<DelightfulButton
 					hidden={!info?.messageId}
 					type="text"
 					className={styles.headerButton}
 					onClick={navigateToMessage}
 				>
 					<Flex vertical align="center" justify="center">
-						<MagicIcon color="currentColor" component={IconMessagePin} size={20} />
+						<DelightfulIcon color="currentColor" component={IconMessagePin} size={20} />
 						<span>{t("chat.imagePreview.navigateToMessage")}</span>
 					</Flex>
-				</MagicButton>
-				<MagicButton type="text" className={styles.headerButton}>
+				</DelightfulButton>
+				<DelightfulButton type="text" className={styles.headerButton}>
 					<Flex vertical align="center" justify="center">
-						<MagicIcon color="currentColor" component={IconShare3} size={20} />
+						<DelightfulIcon color="currentColor" component={IconShare3} size={20} />
 						<span>{t("chat.imagePreview.transpond")}</span>
 					</Flex>
-				</MagicButton>
-				<MagicButton type="text" className={styles.headerButton} onClick={onDownload}>
+				</DelightfulButton>
+				<DelightfulButton type="text" className={styles.headerButton} onClick={onDownload}>
 					<Flex vertical align="center" justify="center">
-						<MagicIcon color="currentColor" component={IconDownload} size={20} />
+						<DelightfulIcon color="currentColor" component={IconDownload} size={20} />
 						<span>{t("chat.imagePreview.download")}</span>
 					</Flex>
-				</MagicButton>
+				</DelightfulButton>
 			</Flex>
 		</Flex>
 	)

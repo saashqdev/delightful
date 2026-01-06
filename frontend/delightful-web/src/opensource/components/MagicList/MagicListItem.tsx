@@ -2,12 +2,12 @@ import { Flex } from "antd"
 import { cx } from "antd-style"
 import { useMemo, memo, useRef, useCallback } from "react"
 import type { MouseEventHandler, HTMLAttributes } from "react"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { useHover } from "ahooks"
-import type { MagicListItemData as MagicListItemType } from "./types"
-import { useMagicListItemStyles } from "./styles"
+import type { DelightfulListItemData as DelightfulListItemType } from "./types"
+import { useDelightfulListItemStyles } from "./styles"
 
-export interface MagicListItemProps<D extends MagicListItemType = MagicListItemType>
+export interface DelightfulListItemProps<D extends DelightfulListItemType = DelightfulListItemType>
 	extends Omit<HTMLAttributes<HTMLDivElement>, "data" | "onClick" | "children"> {
 	data: D
 	active?: boolean
@@ -23,7 +23,7 @@ export interface MagicListItemProps<D extends MagicListItemType = MagicListItemT
 
 // 将复杂的Avatar渲染逻辑抽离为独立组件
 const ItemAvatar = memo(
-	<D extends MagicListItemType>({
+	<D extends DelightfulListItemType>({
 		avatar,
 		isHover,
 		className,
@@ -40,10 +40,10 @@ const ItemAvatar = memo(
 
 		// 如果是字符串，渲染简单头像
 		if (typeof avatar === "string")
-			return <MagicAvatar size="large" src={avatar} className={className} />
+			return <DelightfulAvatar size="large" src={avatar} className={className} />
 
 		// 如果是对象，渲染带属性的头像
-		return <MagicAvatar size="large" src={avatar.src} className={className} {...avatar} />
+		return <DelightfulAvatar size="large" src={avatar.src} className={className} {...avatar} />
 	},
 	(prev, next) => {
 		// 自定义比较函数，优化渲染
@@ -61,7 +61,7 @@ const ItemAvatar = memo(
 // 标题组件，单独处理标题渲染逻辑
 const ItemTitle = memo(
 	// eslint-disable-next-line react/prop-types
-	<D extends MagicListItemType>({ title, isHover }: { title: D["title"]; isHover: boolean }) => {
+	<D extends DelightfulListItemType>({ title, isHover }: { title: D["title"]; isHover: boolean }) => {
 		const renderedTitle = useMemo(() => {
 			if (typeof title === "function") return title(isHover)
 			return title
@@ -91,7 +91,7 @@ const HoverSection = memo(
 		isHover: boolean
 		onClickHandler: MouseEventHandler<HTMLDivElement>
 	}) => {
-		const { styles } = useMagicListItemStyles()
+		const { styles } = useDelightfulListItemStyles()
 
 		if (!content) return null
 
@@ -115,15 +115,15 @@ const HoverSection = memo(
 )
 
 // 主组件实现
-function MagicListItemBase<D extends MagicListItemType = MagicListItemType>({
+function DelightfulListItemBase<D extends DelightfulListItemType = DelightfulListItemType>({
 	data,
 	active,
 	className,
 	classNames,
 	onClick,
 	...props
-}: MagicListItemProps<D>) {
-	const { styles } = useMagicListItemStyles()
+}: DelightfulListItemProps<D>) {
+	const { styles } = useDelightfulListItemStyles()
 	const ref = useRef<HTMLDivElement | null>(null)
 	const isHover = useHover(ref)
 
@@ -179,7 +179,7 @@ function MagicListItemBase<D extends MagicListItemType = MagicListItemType>({
 }
 
 // 使用 memo 包装组件，并提供自定义比较函数以进一步优化性能
-const MagicListItemOptimized = memo(MagicListItemBase, (prevProps, nextProps) => {
+const DelightfulListItemOptimized = memo(DelightfulListItemBase, (prevProps, nextProps) => {
 	// 如果 active 状态、className 或 classNames 改变，我们需要重新渲染
 	if (prevProps.active !== nextProps.active) return false
 	if (prevProps.className !== nextProps.className) return false
@@ -211,6 +211,6 @@ const MagicListItemOptimized = memo(MagicListItemBase, (prevProps, nextProps) =>
 
 	// 如果所有关键属性都相同，我们可以跳过重新渲染
 	return true
-}) as typeof MagicListItemBase
+}) as typeof DelightfulListItemBase
 
-export default MagicListItemOptimized
+export default DelightfulListItemOptimized

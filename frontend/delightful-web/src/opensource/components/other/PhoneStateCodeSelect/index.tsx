@@ -1,7 +1,7 @@
 import { type SelectProps } from "antd"
 import { useMemo } from "react"
 import { useAreaCodes, useGlobalLanguage } from "@/opensource/models/config/hooks"
-import MagicSelect from "@/opensource/components/base/MagicSelect"
+import DelightfulSelect from "@/opensource/components/base/DelightfulSelect"
 
 function PhoneStateCodeSelect({ value, onChange }: SelectProps) {
 	const { areaCodes } = useAreaCodes()
@@ -18,7 +18,7 @@ function PhoneStateCodeSelect({ value, onChange }: SelectProps) {
 	}, [areaCodes, language])
 
 	return (
-		<MagicSelect
+		<DelightfulSelect
 			options={phoneOptions}
 			defaultValue="+86"
 			value={value}

@@ -1,6 +1,6 @@
 import { Flex } from "antd"
 import { memo, useMemo } from "react"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import defaultFlowAvatar from "@/assets/logos/flow-avatar.png"
 import defaultToolAvatar from "@/assets/logos/tool-avatar.png"
 import defaultAgentAvatar from "@/assets/logos/agent-avatar.jpg"
@@ -68,9 +68,9 @@ const PromptCard = memo(
 					align={height === 40 ? "center" : "flex-start"}
 				>
 					{icon ? (
-						<MagicAvatar style={{ borderRadius: 8 }} src={icon} size={50}>
+						<DelightfulAvatar style={{ borderRadius: 8 }} src={icon} size={50}>
 							{title}
-						</MagicAvatar>
+						</DelightfulAvatar>
 					) : (
 						defaultAvatar
 					)}

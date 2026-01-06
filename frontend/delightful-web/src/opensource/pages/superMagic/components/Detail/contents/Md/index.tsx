@@ -1,13 +1,13 @@
-import MagicFileIcon from "@/opensource/components/base/MagicFileIcon"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
-import { getTemporaryDownloadUrl } from "@/opensource/pages/superMagic/utils/api"
+import DelightfulFileIcon from "@/opensource/components/base/DelightfulFileIcon"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
+import { getTemporaryDownloadUrl } from "@/opensource/pages/superDelightful/utils/api"
 import { memo, useEffect, useMemo, useState } from "react"
 import MarkDown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import CommonHeader from "../../components/CommonHeader"
 import { useStyles } from "./styles"
 import CommonFooter from "../../components/CommonFooter"
-import { useFileData } from "@/opensource/pages/superMagic/hooks/useFileData"
+import { useFileData } from "@/opensource/pages/superDelightful/hooks/useFileData"
 
 interface AttachmentFile {
 	file_id: string
@@ -150,7 +150,7 @@ export default memo(function TextEditor(props: any) {
 	return (
 		<div className={styles.textEditorContainer}>
 			<CommonHeader
-				icon={<MagicFileIcon size={20} type="md" />}
+				icon={<DelightfulFileIcon size={20} type="md" />}
 				title={data?.file_name || data?.title}
 				setUserSelectDetail={setUserSelectDetail}
 				type={type}
@@ -168,7 +168,7 @@ export default memo(function TextEditor(props: any) {
 			<div className={styles.editorBody}>
 				{isLoading ? (
 					<div className={styles.loadingContainer}>
-						<MagicSpin spinning />
+						<DelightfulSpin spinning />
 					</div>
 				) : (
 					<MarkDown

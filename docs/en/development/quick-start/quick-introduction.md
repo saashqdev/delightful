@@ -1,4 +1,4 @@
-# 🎩 Magic - Next Generation Enterprise AI Application Innovation Engine
+# 🎩 Delightful - Next Generation Enterprise AI Application Innovation Engine
 
 <div align="center">
 
@@ -8,7 +8,7 @@
 
 </div>
 
-Magic is a powerful enterprise-grade AI application innovation engine designed to help developers quickly build and deploy AI applications. It provides a complete development framework, rich toolchain, and best practices, making AI application development simple and efficient.
+Delightful is a powerful enterprise-grade AI application innovation engine designed to help developers quickly build and deploy AI applications. It provides a complete development framework, rich toolchain, and best practices, making AI application development simple and efficient.
 
 ![flow](https://cdn.letsmagic.cn/static/img/showmagic.jpg)
 
@@ -27,7 +27,7 @@ Magic is a powerful enterprise-grade AI application innovation engine designed t
 - Supported Operating Systems: macOS, Linux, or Windows
 - Docker and Docker Compose installed (refer to section 3.3 for Docker installation)
 - Network connection (for pulling images and detecting public IP)
-- Git installed (for cloning Magic code)
+- Git installed (for cloning Delightful code)
 
 ### II. Installation Steps
 
@@ -44,28 +44,28 @@ cd magic
 
 ##### Main Configuration Files
 - .env: Main environment variables configuration file
-- config/.env_super_magic: Super Magic service configuration file (if you choose to install)
-- config/.env_magic_gateway: Magic Gateway configuration file (if you choose to install Super Magic)
-- config/.env_sandbox_gateway: Sandbox Gateway configuration file (if you choose to install Super Magic)
+- config/.env_super_magic: Super Delightful service configuration file (if you choose to install)
+- config/.env_magic_gateway: Delightful Gateway configuration file (if you choose to install Super Delightful)
+- config/.env_sandbox_gateway: Sandbox Gateway configuration file (if you choose to install Super Delightful)
 - For macOS/Linux, missing files will be automatically copied during installation; Windows users need to manually copy and modify them
 
 ##### Manually Configure Files and Modify Required Values
 ```bash
-### To use Magic, copy .env.example to .env
+### To use Delightful, copy .env.example to .env
 sudo cp .env.example .env
 ```
 
-##### Magic Environment Variables Configuration Reference:
+##### Delightful Environment Variables Configuration Reference:
 https://docs.bedelightful.ai/en/development/deploy/environment.html
 
 ```bash
-### To use Super Magic services, copy the following files:
+### To use Super Delightful services, copy the following files:
 sudo cp config/.env_super_magic.example config/.env_super_magic
 sudo cp config/.env_magic_gateway.example config/.env_magic_gateway
 sudo cp config/.env_sandbox_gateway.example config/.env_sandbox_gateway
 ```
 
-##### Super Magic Environment Variables Configuration Reference:
+##### Super Delightful Environment Variables Configuration Reference:
 https://docs.bedelightful.ai/en/development/deploy/super-magic.html
 
 ##### Configure IP (Optional)
@@ -75,7 +75,7 @@ DELIGHTFUL_SOCKET_BASE_URL=ws://<server_IP>:9502
 DELIGHTFUL_SERVICE_BASE_URL=http://<server_IP>:9501
 ```
 
-If you choose to install Super Magic service, ensure the following configuration files exist:
+If you choose to install Super Delightful service, ensure the following configuration files exist:
 - config/.env_super_magic
 - config/.env_magic_gateway
 - config/.env_sandbox_gateway
@@ -103,7 +103,7 @@ docker network create magic-sandbox-network
 docker compose up
 ```
 
-To start Super Magic related services:
+To start Super Delightful related services:
 
 ```bash
 docker compose --profile magic-gateway --profile sandbox-gateway up
@@ -129,10 +129,10 @@ The script will guide you through the following steps:
 docker network create magic-sandbox-network
 ```
 
-###### Super Magic Service Installation
-- Choose 1 to install Super Magic service (requires pre-configuration of files in the config/ directory)
-- Choose 2 to not install Super Magic service
-![Super Magic Service Installation](https://public-cdn.letsmagic.cn/static/img/super_magic_service_install.png)
+###### Super Delightful Service Installation
+- Choose 1 to install Super Delightful service (requires pre-configuration of files in the config/ directory)
+- Choose 2 to not install Super Delightful service
+![Super Delightful Service Installation](https://public-cdn.letsmagic.cn/static/img/super_magic_service_install.png)
 
 #### 2.5 First Run
 After the first run, the system will create a bin/magic.lock file (macOS/Linux), and subsequent startups will skip the installation configuration process.
@@ -153,8 +153,8 @@ Available commands:
 - restart: Restart all services
 - status: Display service status
 - logs: Display service logs
-- super-magic: Start only Super Magic service (foreground)
-- super-magic-daemon: Start only Super Magic service (background)
+- super-magic: Start only Super Delightful service (foreground)
+- super-magic-daemon: Start only Super Delightful service (background)
 - help: Display help information
 
 ##### Windows
@@ -179,10 +179,10 @@ docker compose ps
 # View logs
 docker compose logs -f
 
-# Use Super Magic service (foreground)
+# Use Super Delightful service (foreground)
 docker compose --profile magic-gateway --profile sandbox-gateway up
 
-# Use Super Magic service (background)
+# Use Super Delightful service (background)
 docker compose --profile magic-gateway --profile sandbox-gateway up -d
 ```
 
@@ -314,7 +314,7 @@ sudo systemctl start docker
 
 ### V. Uninstallation
 
-To uninstall Magic system:
+To uninstall Delightful system:
 
 1. Stop and remove all containers
 
@@ -337,7 +337,7 @@ To uninstall Magic system:
 
 ## 📚 Documentation
 
-For detailed documentation, please visit [Magic Documentation Center](http://docs.letsmagic.cn/).
+For detailed documentation, please visit [Delightful Documentation Center](http://docs.letsmagic.cn/).
 
 ## 🤝 Contribution
 
@@ -355,7 +355,7 @@ We welcome contributions in various forms, including but not limited to:
 
 ## 🙏 Acknowledgements
 
-Thanks to all developers who have contributed to Magic!
+Thanks to all developers who have contributed to Delightful!
 
 <div align="center">
 

@@ -7,23 +7,23 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Persistence;
 
-use App\Domain\Flow\Entity\MagicFlowToolSetEntity;
+use App\Domain\Flow\Entity\DelightfulFlowToolSetEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowToolSetQuery;
-use App\Domain\Flow\Factory\MagicFlowToolSetFactory;
-use App\Domain\Flow\Repository\Facade\MagicFlowToolSetRepositoryInterface;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowToolSetModel;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowToolSetQuery;
+use App\Domain\Flow\Factory\DelightfulFlowToolSetFactory;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowToolSetRepositoryInterface;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowToolSetModel;
 use App\Infrastructure\Core\ValueObject\Page;
 use Hyperf\Database\Model\Relations\HasMany;
 
-class MagicFlowToolSetRepository extends MagicFlowAbstractRepository implements MagicFlowToolSetRepositoryInterface
+class DelightfulFlowToolSetRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowToolSetRepositoryInterface
 {
     protected bool $filterOrganizationCode = true;
 
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowToolSetEntity $magicFlowToolSetEntity): MagicFlowToolSetEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowToolSetEntity $magicFlowToolSetEntity): DelightfulFlowToolSetEntity
     {
-        /** @var MagicFlowToolSetModel $model */
-        $model = $this->createBuilder($dataIsolation, MagicFlowToolSetModel::query())->firstOrNew([
+        /** @var DelightfulFlowToolSetModel $model */
+        $model = $this->createBuilder($dataIsolation, DelightfulFlowToolSetModel::query())->firstOrNew([
             'code' => $magicFlowToolSetEntity->getCode(),
         ]);
 
@@ -35,13 +35,13 @@ class MagicFlowToolSetRepository extends MagicFlowAbstractRepository implements 
 
     public function destroy(FlowDataIsolation $dataIsolation, string $code): void
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowToolSetModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowToolSetModel::query());
         $builder->where('code', $code)->delete();
     }
 
-    public function queries(FlowDataIsolation $dataIsolation, MagicFlowToolSetQuery $query, Page $page): array
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowToolSetQuery $query, Page $page): array
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowToolSetModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowToolSetModel::query());
 
         if (! is_null($query->getCodes())) {
             $builder->whereIn('code', $query->getCodes());
@@ -63,21 +63,21 @@ class MagicFlowToolSetRepository extends MagicFlowAbstractRepository implements 
         if (! empty($data['list'])) {
             $list = [];
             foreach ($data['list'] as $model) {
-                $list[] = MagicFlowToolSetFactory::modelToEntity($model);
+                $list[] = DelightfulFlowToolSetFactory::modelToEntity($model);
             }
             $data['list'] = $list;
         }
         return $data;
     }
 
-    public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?MagicFlowToolSetEntity
+    public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowToolSetEntity
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowToolSetModel::query());
-        /** @var null|MagicFlowToolSetModel $model */
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowToolSetModel::query());
+        /** @var null|DelightfulFlowToolSetModel $model */
         $model = $builder->where('code', $code)->first();
         if (! $model) {
             return null;
         }
-        return MagicFlowToolSetFactory::modelToEntity($model);
+        return DelightfulFlowToolSetFactory::modelToEntity($model);
     }
 }

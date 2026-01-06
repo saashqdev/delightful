@@ -4,8 +4,8 @@ import { IconChevronLeft, IconX } from "@tabler/icons-react"
 import { cx } from "antd-style"
 import { useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { useForm } from "antd/es/form/Form"
 import type {
 	QuickInstructionList,
@@ -244,7 +244,7 @@ export default function QuickInstructionButton({ agent, Icon }: QuickInstruction
 	const Title = useMemo(() => {
 		return edit ? (
 			<Flex gap={8} className={styles.title} align="center">
-				<MagicIcon
+				<DelightfulIcon
 					component={IconChevronLeft}
 					className={styles.pointer}
 					onClick={handleCancel}
@@ -260,7 +260,7 @@ export default function QuickInstructionButton({ agent, Icon }: QuickInstruction
 					<div
 						className={styles.topTitle}
 					>{`${t("agent.quickInstruction")} (${instructionNum})`}</div>
-					<MagicIcon component={IconX} className={styles.pointer} onClick={setFalse} />
+					<DelightfulIcon component={IconX} className={styles.pointer} onClick={setFalse} />
 				</Flex>
 				<div className={styles.desc}>{t("agent.instructionsDesc")}</div>
 			</Flex>
@@ -301,9 +301,9 @@ export default function QuickInstructionButton({ agent, Icon }: QuickInstruction
 				closeIcon={null}
 				footer={
 					edit && (
-						<MagicButton type="primary" style={{ width: 100 }} onClick={form.submit}>
+						<DelightfulButton type="primary" style={{ width: 100 }} onClick={form.submit}>
 							{t("button.save")}
-						</MagicButton>
+						</DelightfulButton>
 					)
 				}
 				zIndex={1000}

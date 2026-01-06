@@ -8,15 +8,15 @@ declare(strict_types=1);
 namespace App\Domain\Agent\Service;
 
 use App\Domain\Agent\Constant\InstructType;
-use App\Domain\Agent\Constant\MagicAgentVersionStatus;
+use App\Domain\Agent\Constant\DelightfulAgentVersionStatus;
 use App\Domain\Agent\Constant\SystemInstructType;
-use App\Domain\Agent\Entity\MagicAgentEntity;
-use App\Domain\Agent\Entity\ValueObject\Query\MagicAgentQuery;
-use App\Domain\Agent\Event\MagicAgentDeletedEvent;
-use App\Domain\Agent\Event\MagicAgentSavedEvent;
-use App\Domain\Agent\Factory\MagicAgentVersionFactory;
-use App\Domain\Agent\Repository\Persistence\MagicAgentRepository;
-use App\Domain\Agent\Repository\Persistence\MagicAgentVersionRepository;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulAgentQuery;
+use App\Domain\Agent\Event\DelightfulAgentDeletedEvent;
+use App\Domain\Agent\Event\DelightfulAgentSavedEvent;
+use App\Domain\Agent\Factory\DelightfulAgentVersionFactory;
+use App\Domain\Agent\Repository\Persistence\DelightfulAgentRepository;
+use App\Domain\Agent\Repository\Persistence\DelightfulAgentVersionRepository;
 use App\Domain\File\Repository\Persistence\Facade\CloudFileRepositoryInterface;
 use App\ErrorCode\AgentErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -29,24 +29,24 @@ use Hyperf\DbConnection\Db;
 /**
  * 助理 service.
  */
-class MagicAgentDomainService
+class DelightfulAgentDomainService
 {
     public function __construct(
-        public MagicAgentRepository $agentRepository,
-        public MagicAgentVersionRepository $agentVersionRepository,
+        public DelightfulAgentRepository $agentRepository,
+        public DelightfulAgentVersionRepository $agentVersionRepository,
         protected readonly CloudFileRepositoryInterface $cloudFileRepository
     ) {
     }
 
     /**
-     * @return array{total: int, list: array<MagicAgentEntity>}
+     * @return array{total: int, list: array<DelightfulAgentEntity>}
      */
-    public function queries(MagicAgentQuery $query, Page $page): array
+    public function queries(DelightfulAgentQuery $query, Page $page): array
     {
         return $this->agentRepository->queries($query, $page);
     }
 
-    public function getByFlowCode(string $flowCode): MagicAgentEntity
+    public function getByFlowCode(string $flowCode): DelightfulAgentEntity
     {
         $agent = $this->agentRepository->getByFlowCode($flowCode);
         if ($agent === null) {
@@ -56,14 +56,14 @@ class MagicAgentDomainService
     }
 
     /**
-     * @return MagicAgentEntity[]
+     * @return DelightfulAgentEntity[]
      */
     public function getByFlowCodes(array $flowCodes): array
     {
         return $this->agentRepository->getByFlowCodes($flowCodes);
     }
 
-    public function saveAgent(MagicAgentEntity $agentEntity): MagicAgentEntity
+    public function saveAgent(DelightfulAgentEntity $agentEntity): DelightfulAgentEntity
     {
         $create = false;
         if (empty($agentEntity->getId())) {
@@ -86,7 +86,7 @@ class MagicAgentDomainService
             $agent->setStartPage($agentEntity->getStartPage());
             $agent = $this->agentRepository->updateById($agent);
         }
-        AsyncEventUtil::dispatch(new MagicAgentSavedEvent($agent, $create));
+        AsyncEventUtil::dispatch(new DelightfulAgentSavedEvent($agent, $create));
         return $agent;
     }
 
@@ -99,12 +99,12 @@ class MagicAgentDomainService
             $magicAgentEntity = $this->agentRepository->getAgentById($id);
             $this->agentRepository->deleteAgentById($id, $organizationCode);
             $this->agentVersionRepository->deleteByAgentId($id, $organizationCode);
-            AsyncEventUtil::dispatch(new MagicAgentDeletedEvent($magicAgentEntity));
+            AsyncEventUtil::dispatch(new DelightfulAgentDeletedEvent($magicAgentEntity));
         });
         return true;
     }
 
-    public function getAgentById(string $agentId): MagicAgentEntity
+    public function getAgentById(string $agentId): DelightfulAgentEntity
     {
         return $this->agentRepository->getAgentById($agentId);
     }
@@ -116,25 +116,25 @@ class MagicAgentDomainService
 
     public function updateAgentStatus(string $agentId, int $status): void
     {
-        if ($status !== MagicAgentVersionStatus::ENTERPRISE_ENABLED->value && $status !== MagicAgentVersionStatus::ENTERPRISE_DISABLED->value) {
+        if ($status !== DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value && $status !== DelightfulAgentVersionStatus::ENTERPRISE_DISABLED->value) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_status_only_enable_or_disable');
         }
 
-        $magicAgentEntity = new MagicAgentEntity();
+        $magicAgentEntity = new DelightfulAgentEntity();
         $magicAgentEntity->setId($agentId);
         $magicAgentEntity->setStatus($status);
         $this->agentRepository->updateStatus($agentId, $status);
     }
 
     /**
-     * @return MagicAgentEntity[]
+     * @return DelightfulAgentEntity[]
      */
     public function getEnabledAgents(): array
     {
         return $this->agentRepository->getEnabledAgents();
     }
 
-    public function getById(string $agentId): MagicAgentEntity
+    public function getById(string $agentId): DelightfulAgentEntity
     {
         return $this->agentRepository->getById($agentId);
     }
@@ -178,7 +178,7 @@ class MagicAgentDomainService
             return [];
         }
 
-        $agents = MagicAgentVersionFactory::toArrays($agents);
+        $agents = DelightfulAgentVersionFactory::toArrays($agents);
 
         // 收集助理头像文件键
         $fileKeys = array_column($agents, 'agent_avatar');
@@ -214,7 +214,7 @@ class MagicAgentDomainService
     }
 
     /**
-     * @return array<MagicAgentEntity>
+     * @return array<DelightfulAgentEntity>
      */
     public function getAgentByIds(array $agentIds): array
     {
@@ -245,7 +245,7 @@ class MagicAgentDomainService
 
     /**
      * 查询企业下的所有助理,条件查询：状态，创建人，搜索.
-     * @return array<MagicAgentEntity>
+     * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
     {

@@ -17,23 +17,23 @@ use App\Domain\Chat\DTO\Message\ChatMessage\Item\ChatAttachment;
 use App\Domain\Chat\DTO\Message\ChatMessage\MarkdownMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
 use App\Domain\Chat\DTO\Message\MessageInterface;
-use App\Domain\Chat\Entity\MagicChatFileEntity;
+use App\Domain\Chat\Entity\DelightfulChatFileEntity;
 use App\Domain\Chat\Entity\ValueObject\FileType;
-use App\Domain\Chat\Service\MagicChatFileDomainService;
+use App\Domain\Chat\Service\DelightfulChatFileDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation as ContactDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\MagicFlowMessage;
-use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\MagicFlowMessageType;
+use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\DelightfulFlowMessage;
+use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\DelightfulFlowMessageType;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Delightful\AsyncEvent\AsyncEventUtil;
 
 class MessageUtil
 {
-    public static function getIMResponse(MagicFlowMessage $magicFlowMessage, ExecutionData $executionData, array $linkPaths = []): ?MessageInterface
+    public static function getIMResponse(DelightfulFlowMessage $magicFlowMessage, ExecutionData $executionData, array $linkPaths = []): ?MessageInterface
     {
         switch ($magicFlowMessage->getType()) {
-            case MagicFlowMessageType::Text:
-            case MagicFlowMessageType::Markdown:
+            case DelightfulFlowMessageType::Text:
+            case DelightfulFlowMessageType::Markdown:
                 $content = clone $magicFlowMessage->getContent()?->getValue();
                 if (! $content) {
                     return null;
@@ -47,7 +47,7 @@ class MessageUtil
                     ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.message.content_error');
                 }
                 $contentString = trim($contentString);
-                if ($magicFlowMessage->getType() === MagicFlowMessageType::Markdown) {
+                if ($magicFlowMessage->getType() === DelightfulFlowMessageType::Markdown) {
                     return new MarkdownMessage([
                         'content' => $contentString,
                     ]);
@@ -55,7 +55,7 @@ class MessageUtil
                 return new TextMessage([
                     'content' => $contentString,
                 ]);
-            case MagicFlowMessageType::Image:
+            case DelightfulFlowMessageType::Image:
                 $chatAttachments = [];
                 foreach ($linkPaths as $linkPath) {
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
@@ -88,7 +88,7 @@ class MessageUtil
                 }
                 $message->setAttachments($chatAttachments);
                 return $message;
-            case MagicFlowMessageType::File:
+            case DelightfulFlowMessageType::File:
                 $chatAttachments = [];
                 // 这里的描述是用来标记文件名称
                 $linkDesc = $magicFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
@@ -120,7 +120,7 @@ class MessageUtil
                 $message = new FilesMessage([]);
                 $message->setAttachments($chatAttachments);
                 return $message;
-            case MagicFlowMessageType::AIMessage:
+            case DelightfulFlowMessageType::AIMessage:
                 $content = clone $magicFlowMessage->getContent()?->getForm();
                 if (! $content) {
                     return null;
@@ -140,7 +140,7 @@ class MessageUtil
     /**
      * 上报文件.
      */
-    private static function report2ChatFile(AbstractAttachment $attachment, ExecutionData $executionData): MagicChatFileEntity
+    private static function report2ChatFile(AbstractAttachment $attachment, ExecutionData $executionData): DelightfulChatFileEntity
     {
         // 这里应该是相当于 agent 上传了文件
         $dataIsolation = ContactDataIsolation::create(
@@ -148,7 +148,7 @@ class MessageUtil
             $executionData->getAgentUserId() ?: $executionData->getDataIsolation()->getCurrentUserId()
         );
 
-        $magicChatFileEntity = new MagicChatFileEntity();
+        $magicChatFileEntity = new DelightfulChatFileEntity();
 
         $magicChatFileEntity->setFileType(FileType::getTypeFromFileExtension($attachment->getExt()));
         $magicChatFileEntity->setFileSize($attachment->getSize());
@@ -157,7 +157,7 @@ class MessageUtil
         $magicChatFileEntity->setFileExtension($attachment->getExt());
         $magicChatFileEntity->setExternalUrl($attachment->getUrl());
 
-        $chatFileDomainService = di(MagicChatFileDomainService::class);
+        $chatFileDomainService = di(DelightfulChatFileDomainService::class);
         $chatFile = $chatFileDomainService->fileUpload([$magicChatFileEntity], $dataIsolation)[0] ?? null;
         if (! $chatFile) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.message.attachment_report_failed');

@@ -68,35 +68,35 @@ readonly class KnowledgeBaseFragmentDomainService
         KnowledgeBaseDataIsolation $dataIsolation,
         KnowledgeBaseEntity $knowledgeBaseEntity,
         KnowledgeBaseDocumentEntity $knowledgeBaseDocumentEntity,
-        KnowledgeBaseFragmentEntity $savingMagicFlowKnowledgeFragmentEntity
+        KnowledgeBaseFragmentEntity $savingDelightfulFlowKnowledgeFragmentEntity
     ): KnowledgeBaseFragmentEntity {
-        $savingMagicFlowKnowledgeFragmentEntity->setKnowledgeCode($knowledgeBaseEntity->getCode());
-        $savingMagicFlowKnowledgeFragmentEntity->setDocumentCode($knowledgeBaseDocumentEntity->getCode());
-        $savingMagicFlowKnowledgeFragmentEntity->setCreator($dataIsolation->getCurrentUserId());
+        $savingDelightfulFlowKnowledgeFragmentEntity->setKnowledgeCode($knowledgeBaseEntity->getCode());
+        $savingDelightfulFlowKnowledgeFragmentEntity->setDocumentCode($knowledgeBaseDocumentEntity->getCode());
+        $savingDelightfulFlowKnowledgeFragmentEntity->setCreator($dataIsolation->getCurrentUserId());
 
         // 如果有业务id，并且业务 ID 存在，也可以相当于更新
         $knowledgeBaseFragmentEntity = null;
-        if (! empty($savingMagicFlowKnowledgeFragmentEntity->getBusinessId()) && empty($savingMagicFlowKnowledgeFragmentEntity->getId())) {
-            $knowledgeBaseFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $savingMagicFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingMagicFlowKnowledgeFragmentEntity->getBusinessId());
+        if (! empty($savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId()) && empty($savingDelightfulFlowKnowledgeFragmentEntity->getId())) {
+            $knowledgeBaseFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId());
             if (! is_null($knowledgeBaseFragmentEntity)) {
-                $savingMagicFlowKnowledgeFragmentEntity->setId($knowledgeBaseFragmentEntity->getId());
+                $savingDelightfulFlowKnowledgeFragmentEntity->setId($knowledgeBaseFragmentEntity->getId());
             }
         }
 
-        if ($savingMagicFlowKnowledgeFragmentEntity->shouldCreate()) {
-            $savingMagicFlowKnowledgeFragmentEntity->prepareForCreation();
-            $knowledgeBaseFragmentEntity = $savingMagicFlowKnowledgeFragmentEntity;
+        if ($savingDelightfulFlowKnowledgeFragmentEntity->shouldCreate()) {
+            $savingDelightfulFlowKnowledgeFragmentEntity->prepareForCreation();
+            $knowledgeBaseFragmentEntity = $savingDelightfulFlowKnowledgeFragmentEntity;
         } else {
-            $knowledgeBaseFragmentEntity = $knowledgeBaseFragmentEntity ?? $this->knowledgeBaseFragmentRepository->getById($dataIsolation, $savingMagicFlowKnowledgeFragmentEntity->getId());
+            $knowledgeBaseFragmentEntity = $knowledgeBaseFragmentEntity ?? $this->knowledgeBaseFragmentRepository->getById($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getId());
             if (empty($knowledgeBaseFragmentEntity)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$savingMagicFlowKnowledgeFragmentEntity->getId()}] 没有找到");
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$savingDelightfulFlowKnowledgeFragmentEntity->getId()}] 没有找到");
             }
             // 如果没有变化，就不需要更新了
-            if (! $knowledgeBaseFragmentEntity->hasModify($savingMagicFlowKnowledgeFragmentEntity)) {
+            if (! $knowledgeBaseFragmentEntity->hasModify($savingDelightfulFlowKnowledgeFragmentEntity)) {
                 return $knowledgeBaseFragmentEntity;
             }
 
-            $savingMagicFlowKnowledgeFragmentEntity->prepareForModification($knowledgeBaseFragmentEntity);
+            $savingDelightfulFlowKnowledgeFragmentEntity->prepareForModification($knowledgeBaseFragmentEntity);
         }
 
         Db::transaction(function () use ($dataIsolation, $knowledgeBaseFragmentEntity) {

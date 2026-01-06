@@ -1,6 +1,6 @@
 import { useExternal } from "@/DelightfulFlow/context/ExternalContext/useExternal"
 import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
-import { useMagicFlow } from "@/DelightfulFlow/context/MagicFlowContext/useMagicFlow"
+import { useDelightfulFlow } from "@/DelightfulFlow/context/DelightfulFlowContext/useDelightfulFlow"
 import { InnerHandleType } from "@/DelightfulFlow/nodes"
 import CustomHandle from "@/DelightfulFlow/nodes/common/Handle/Source"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
@@ -19,7 +19,7 @@ export default function Loop() {
 
 	const { paramsName } = useExternal()
 
-	const { displayMaterialTypes, updateDisplayMaterialType } = useMagicFlow()
+	const { displayMaterialTypes, updateDisplayMaterialType } = useDelightfulFlow()
 
 	useUpdateEffect(() => {
 		const selectedNode = nodeConfig?.[selectedNodeId!]

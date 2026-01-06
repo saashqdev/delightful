@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useMagicRadioFavorStyle } from "./useMagicRadioFavorStyle"
+import { useDelightfulRadioFavorStyle } from "./useDelightfulRadioFavorStyle"
 
 interface Option {
 	label: string
@@ -13,10 +13,10 @@ type Props = {
 	value: any
 }
 
-export default function MagicRadioFavor({ options, onChange, selectedValue, value }: Props) {
+export default function DelightfulRadioFavor({ options, onChange, selectedValue, value }: Props) {
 	const [activeRadio, setActiveRadio] = useState<number>(value)
 
-	const { styles, cx } = useMagicRadioFavorStyle()
+	const { styles, cx } = useDelightfulRadioFavorStyle()
 	const handleChange = (changeValue: any) => {
 		console.log(selectedValue)
 		if (onChange) {

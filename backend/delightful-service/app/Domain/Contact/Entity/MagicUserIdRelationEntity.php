@@ -13,7 +13,7 @@ use App\Domain\Contact\Entity\ValueObject\UserIdType;
 /**
  * user_id 与 open_id/union_id的映射关系.
  */
-class MagicUserIdRelationEntity extends AbstractEntity
+class DelightfulUserIdRelationEntity extends AbstractEntity
 {
     protected ?int $id;
 

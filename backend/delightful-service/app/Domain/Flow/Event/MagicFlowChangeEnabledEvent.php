@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Event;
 
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 
-class MagicFlowChangeEnabledEvent
+class DelightfulFlowChangeEnabledEvent
 {
     public function __construct(
-        public MagicFlowEntity $magicFlowEntity,
+        public DelightfulFlowEntity $magicFlowEntity,
     ) {
     }
 }

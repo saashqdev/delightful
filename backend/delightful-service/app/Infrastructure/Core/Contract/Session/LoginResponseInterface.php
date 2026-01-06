@@ -11,17 +11,17 @@ use App\Domain\Contact\Entity\ValueObject\PlatformType;
 
 interface LoginResponseInterface
 {
-    public function getMagicId(): string;
+    public function getDelightfulId(): string;
 
-    public function setMagicId(string $magicId): self;
+    public function setDelightfulId(string $magicId): self;
 
-    public function getMagicUserId(): string;
+    public function getDelightfulUserId(): string;
 
-    public function setMagicUserId(string $magicUserId): self;
+    public function setDelightfulUserId(string $magicUserId): self;
 
-    public function getMagicOrganizationCode(): string;
+    public function getDelightfulOrganizationCode(): string;
 
-    public function setMagicOrganizationCode(string $magicOrganizationCode): self;
+    public function setDelightfulOrganizationCode(string $magicOrganizationCode): self;
 
     public function getThirdPlatformOrganizationCode(): string;
 

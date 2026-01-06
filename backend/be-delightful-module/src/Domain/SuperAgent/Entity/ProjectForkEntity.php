@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Domain\SuperAgent\Entity;
+namespace Delightful\SuperDelightful\Domain\SuperAgent\Entity;
 
 use App\Infrastructure\Core\AbstractEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\ForkStatus;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\ForkStatus;
 
 /**
  * Project Fork Entity.

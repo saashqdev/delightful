@@ -4,8 +4,8 @@
 import { Form, Switch, Tooltip } from "antd"
 import { IconHelp } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
-import MagicInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
-import MagicSlider from "@delightful/delightful-flow/dist/common/BaseUI/Slider"
+import DelightfulInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
+import DelightfulSlider from "@delightful/delightful-flow/dist/common/BaseUI/Slider"
 import { useFlowStore } from "@/opensource/stores/flow"
 import { useTranslation } from "react-i18next"
 import { createStyles } from "antd-style"
@@ -184,7 +184,7 @@ export default function LLMParametersV0() {
 				<div className={styles.body}>
 					{/* <div className={styles.preSettings}>
 						<span className={styles.h1Title}>参数</span>
-						<MagicSelect
+						<DelightfulSelect
 							value={LLMAdjust.default}
 							options={addJustOptions}
 							onChange={(value: LLMAdjust) => setAdjustValue(value)}
@@ -209,7 +209,7 @@ export default function LLMParametersV0() {
 								name={["model_config", "temperature"]}
 								className={styles.right}
 							>
-								<MagicSlider
+								<DelightfulSlider
 									min={temperature.extra.min}
 									max={temperature.extra.max}
 									step={temperature.extra.step}
@@ -220,7 +220,7 @@ export default function LLMParametersV0() {
 								name={["model_config", "temperature"]}
 								className={styles.right}
 							>
-								<MagicInput
+								<DelightfulInput
 									className={styles.input}
 									type="number"
 									min={temperature.extra.min}
@@ -249,7 +249,7 @@ export default function LLMParametersV0() {
 							</Tooltip>
 						</div>
 						<Form.Item className={styles.right} name={["model_config", "max_record"]}>
-							<MagicInput className={styles.input} type="number" />
+							<DelightfulInput className={styles.input} type="number" />
 						</Form.Item>
 					</div>
 					{/* {parameterList.map((parameter) => {
@@ -278,7 +278,7 @@ export default function LLMParametersV0() {
 									/>
 								</div>
 								<div className={styles.right}>
-									<MagicSlider
+									<DelightfulSlider
 										min={parameter.extra.min}
 										max={parameter.extra.max}
 										step={parameter.extra.step}
@@ -292,7 +292,7 @@ export default function LLMParametersV0() {
 										}
 										className={styles.slider}
 									/>
-									<MagicInput
+									<DelightfulInput
 										value={_.get(
 											LLMValue,
 											[parameter.key, "value"],
@@ -326,7 +326,7 @@ export default function LLMParametersV0() {
 							/>
 						</div>
 						<div className={styles.right}>
-							<MagicSelect
+							<DelightfulSelect
 								options={[
 									{
 										label: <span className={styles.option}>JSON</span>,

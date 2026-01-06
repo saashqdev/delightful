@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Authentication\Repository\Facade;
 
 use App\Domain\Contact\Entity\AccountEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 
 interface AuthenticationRepositoryInterface
 {
@@ -23,7 +23,7 @@ interface AuthenticationRepositoryInterface
     public function findAccountByPhone(string $stateCode, string $phone): ?AccountEntity;
 
     /**
-     * 通过MagicID和组织编码查找用户.
+     * 通过DelightfulID和组织编码查找用户.
      */
-    public function findUserByMagicIdAndOrganization(string $magicId, ?string $organizationCode = null): ?MagicUserEntity;
+    public function findUserByDelightfulIdAndOrganization(string $magicId, ?string $organizationCode = null): ?DelightfulUserEntity;
 }

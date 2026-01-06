@@ -1,6 +1,6 @@
 import { createStyles } from "antd-style"
 
-export const useMagicEmptyFavorStyle = createStyles(({ css, token }) => {
+export const useDelightfulEmptyFavorStyle = createStyles(({ css, token }) => {
 	// Semi/usage/fill/--color-fill-0
 	// Semi/usage/border/--color-border
 	const textColor = token.magicColorUsages.text[3]

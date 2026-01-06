@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Domain\Organization\Service;
 
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\OrganizationEnvironment\Entity\OrganizationEntity;
 use App\Domain\OrganizationEnvironment\Repository\Persistence\Model\OrganizationModel;
 use App\Domain\OrganizationEnvironment\Service\OrganizationDomainService;
@@ -26,7 +26,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
 
     private OrganizationAdminDomainService $organizationAdminDomainService;
 
-    private MagicUserDomainService $userDomainService;
+    private DelightfulUserDomainService $userDomainService;
 
     private array $testOrganizationCodes = [];
 
@@ -39,7 +39,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
         parent::setUp();
         $this->organizationDomainService = $this->getContainer()->get(OrganizationDomainService::class);
         $this->organizationAdminDomainService = $this->getContainer()->get(OrganizationAdminDomainService::class);
-        $this->userDomainService = $this->getContainer()->get(MagicUserDomainService::class);
+        $this->userDomainService = $this->getContainer()->get(DelightfulUserDomainService::class);
 
         // Generate unique organization codes for each test to avoid data conflicts
         $this->testOrganizationCodes = [
@@ -74,7 +74,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
         $savedOrganization = $this->organizationDomainService->create($organization);
 
         $this->assertNotNull($savedOrganization->getId());
-        $this->assertEquals($this->testOrganizationCodes[0], $savedOrganization->getMagicOrganizationCode());
+        $this->assertEquals($this->testOrganizationCodes[0], $savedOrganization->getDelightfulOrganizationCode());
         $this->assertEquals('Test Organization 0', $savedOrganization->getName());
         $this->assertEquals('Technology', $savedOrganization->getIndustryType());
         $this->assertEquals(1, $savedOrganization->getStatus());
@@ -159,7 +159,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
 
         $this->assertNotNull($foundOrganization);
         $this->assertEquals($savedOrganization->getId(), $foundOrganization->getId());
-        $this->assertEquals($savedOrganization->getMagicOrganizationCode(), $foundOrganization->getMagicOrganizationCode());
+        $this->assertEquals($savedOrganization->getDelightfulOrganizationCode(), $foundOrganization->getDelightfulOrganizationCode());
         $this->assertEquals($savedOrganization->getName(), $foundOrganization->getName());
     }
 
@@ -180,7 +180,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
 
         $this->assertNotNull($foundOrganization);
         $this->assertEquals($savedOrganization->getId(), $foundOrganization->getId());
-        $this->assertEquals($this->testOrganizationCodes[0], $foundOrganization->getMagicOrganizationCode());
+        $this->assertEquals($this->testOrganizationCodes[0], $foundOrganization->getDelightfulOrganizationCode());
     }
 
     public function testGetByNameReturnsCorrectOrganization(): void
@@ -332,7 +332,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
 
             // Verify the creator is granted admin permission (if the user exists)
             $isAdmin = $this->organizationAdminDomainService->isOrganizationAdmin(
-                $savedOrganization->getMagicOrganizationCode(),
+                $savedOrganization->getDelightfulOrganizationCode(),
                 (string) $creatorId
             );
 
@@ -340,7 +340,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
             if ($isAdmin) {
                 // Verify the creator is marked as the organization creator
                 $admin = $this->organizationAdminDomainService->getByUserId(
-                    $savedOrganization->getMagicOrganizationCode(),
+                    $savedOrganization->getDelightfulOrganizationCode(),
                     (string) $creatorId
                 );
                 $this->assertNotNull($admin);
@@ -391,7 +391,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
 
         // Verify no admin records were created
         $allAdmins = $this->organizationAdminDomainService->getAllOrganizationAdmins(
-            $savedOrganization->getMagicOrganizationCode()
+            $savedOrganization->getDelightfulOrganizationCode()
         );
         $this->assertEmpty($allAdmins);
     }
@@ -455,7 +455,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
     private function createTestOrganizationEntity(int $index): OrganizationEntity
     {
         $organization = new OrganizationEntity();
-        $organization->setMagicOrganizationCode($this->testOrganizationCodes[$index]);
+        $organization->setDelightfulOrganizationCode($this->testOrganizationCodes[$index]);
         $organization->setName("Test Organization {$index}");
         $organization->setIndustryType('Technology');
         $organization->setContactUser("Contact User {$index}");

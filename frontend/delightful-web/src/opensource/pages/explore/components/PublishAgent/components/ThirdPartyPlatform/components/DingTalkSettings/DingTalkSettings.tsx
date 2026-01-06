@@ -1,14 +1,14 @@
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import type { FormListOperation } from "antd"
 import { Flex, Form, Input, message, Steps } from "antd"
 import { useMemo } from "react"
 import { useMemoizedFn, useResetState, useUpdateEffect } from "ahooks"
-import MagicEllipseWithTooltip from "@/opensource/components/base/MagicEllipseWithTooltip/MagicEllipseWithTooltip"
+import DelightfulEllipseWithTooltip from "@/opensource/components/base/DelightfulEllipseWithTooltip/DelightfulEllipseWithTooltip"
 import { IconCircleCheckFilled, IconCopy } from "@tabler/icons-react"
 import { cx } from "antd-style"
 import { env } from "@/utils/env"
-import { copyToClipboard } from "@delightful/delightful-flow/dist/MagicFlow/utils"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import { copyToClipboard } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useTranslation } from "react-i18next"
 import { ThirdPartyPlatformType } from "@/types/bot"
 import { useStyles } from "./style"
@@ -113,7 +113,7 @@ export default function DingTalkSettings({ open, onClose, subOpt }: DingTalkSett
 	})
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			width={700}
 			title={t("common.dingTalkSettings", { ns: "flow" })}
 			open={open}
@@ -220,13 +220,13 @@ export default function DingTalkSettings({ open, onClose, subOpt }: DingTalkSett
 				{step === 1 && (
 					<>
 						<div className={styles.infoCard}>
-							<MagicEllipseWithTooltip
+							<DelightfulEllipseWithTooltip
 								text={t("common.intoDingTalkInfo", {
 									ns: "flow",
 								})}
 								maxWidth="580px"
 							/>
-							<MagicEllipseWithTooltip
+							<DelightfulEllipseWithTooltip
 								text={t("common.addAgentInfo", {
 									ns: "flow",
 								})}
@@ -281,7 +281,7 @@ export default function DingTalkSettings({ open, onClose, subOpt }: DingTalkSett
 								})}
 							</span>
 							<Flex className={styles.formInput}>
-								<MagicEllipseWithTooltip
+								<DelightfulEllipseWithTooltip
 									text={dingTalkAddr}
 									maxWidth=""
 									className={styles.url}
@@ -317,7 +317,7 @@ export default function DingTalkSettings({ open, onClose, subOpt }: DingTalkSett
 								ns: "flow",
 							})}
 						</span>
-						<MagicButton
+						<DelightfulButton
 							onClick={onClose}
 							className={styles.backBtn}
 							color="default"
@@ -326,10 +326,10 @@ export default function DingTalkSettings({ open, onClose, subOpt }: DingTalkSett
 							{t("common.backToPublishPage", {
 								ns: "flow",
 							})}
-						</MagicButton>
+						</DelightfulButton>
 					</Flex>
 				)}
 			</Form>
-		</MagicModal>
+		</DelightfulModal>
 	)
 }

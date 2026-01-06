@@ -1,7 +1,7 @@
 /**
  * magic-flow节点业务组件
  */
-import MagicFlow, { MagicFlowInstance } from "@/DelightfulFlow"
+import DelightfulFlow, { DelightfulFlowInstance } from "@/DelightfulFlow"
 import { ExtraNodeConfigProvider } from "@/DelightfulFlow/context/ExtraNodeConfigContext/Provider"
 import { MaterialSourceProvider } from "@/DelightfulFlow/context/MaterialSourceContext/MaterialSourceContext"
 import { NodeChangeListenerProvider } from "@/DelightfulFlow/context/NodeChangeListenerContext/NodeChangeListenerContext"
@@ -62,7 +62,7 @@ if (!i18next.isInitialized) {
 
 installAllNodes()
 export default function BaseFlow() {
-	const flowInstance = useRef(null as null | MagicFlowInstance)
+	const flowInstance = useRef(null as null | DelightfulFlowInstance)
 
 	const [serverFlow, setServerFlow] = useState(null)
 
@@ -149,7 +149,7 @@ export default function BaseFlow() {
 							testingResultMap={testingResultMap}
 							position={false}
 						>
-							<MagicFlow
+							<DelightfulFlow
 								ref={flowInstance}
 								header={flowHeader}
 								// @ts-ignore

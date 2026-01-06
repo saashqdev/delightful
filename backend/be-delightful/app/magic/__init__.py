@@ -1,4 +1,4 @@
-"""Magic for Super Magic."""
+"""Delightful for Super Delightful."""
 
 from app.magic.agent import Agent
 

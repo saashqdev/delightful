@@ -5,52 +5,52 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Application\SuperAgent\Service;
+namespace Delightful\SuperDelightful\Application\SuperAgent\Service;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\Contact\UserSetting\UserSettingKey;
-use App\Domain\Chat\DTO\Message\MagicMessageStruct;
+use App\Domain\Chat\DTO\Message\DelightfulMessageStruct;
 use App\Domain\Chat\DTO\Message\TextContentInterface;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\UserType;
-use App\Domain\Contact\Service\MagicUserSettingDomainService;
+use App\Domain\Contact\Service\DelightfulUserSettingDomainService;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Cron\CronExpression;
 use DateTime;
-use Delightful\SuperMagic\Application\Chat\Service\ChatAppService;
-use Delightful\SuperMagic\Application\SuperAgent\Assembler\TaskConfigAssembler;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\MessageScheduleEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\CreationSource;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\FileType;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\StorageType;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskFileSource;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\MessageScheduleDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectMemberDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\WorkspaceDomainService;
-use Delightful\SuperMagic\ErrorCode\SuperAgentErrorCode;
-use Delightful\SuperMagic\Infrastructure\Utils\WorkDirectoryUtil;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request\CreateMessageScheduleRequestDTO;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request\QueryMessageScheduleLogsRequestDTO;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request\QueryMessageScheduleRequestDTO;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request\TimeConfigDTO;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Request\UpdateMessageScheduleRequestDTO;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Response\MessageScheduleItemDTO;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Response\MessageScheduleListItemDTO;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Response\MessageScheduleLogItemDTO;
+use Delightful\SuperDelightful\Application\Chat\Service\ChatAppService;
+use Delightful\SuperDelightful\Application\SuperAgent\Assembler\TaskConfigAssembler;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\MessageScheduleEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ProjectEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\CreationSource;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\FileType;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\StorageType;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\TaskFileSource;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\MessageScheduleDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\TopicDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\WorkspaceDomainService;
+use Delightful\SuperDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\SuperDelightful\Infrastructure\Utils\WorkDirectoryUtil;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\CreateMessageScheduleRequestDTO;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\QueryMessageScheduleLogsRequestDTO;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\QueryMessageScheduleRequestDTO;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\TimeConfigDTO;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\UpdateMessageScheduleRequestDTO;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Response\MessageScheduleItemDTO;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Response\MessageScheduleListItemDTO;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Response\MessageScheduleLogItemDTO;
 use Delightful\TaskScheduler\Entity\TaskScheduler;
 use Delightful\TaskScheduler\Entity\TaskSchedulerCrontab;
 use Delightful\TaskScheduler\Entity\ValueObject\TaskType;
@@ -73,7 +73,7 @@ class MessageScheduleAppService extends AbstractAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        private readonly MagicChatMessageAppService $chatMessageAppService,
+        private readonly DelightfulChatMessageAppService $chatMessageAppService,
         private readonly ChatAppService $chatAppService,
         private readonly MessageScheduleDomainService $messageScheduleDomainService,
         private readonly UserMessageToAgentAppService $userMessageToAgentAppService,
@@ -83,7 +83,7 @@ class MessageScheduleAppService extends AbstractAppService
         private readonly WorkspaceDomainService $workspaceDomainService,
         private readonly TaskFileDomainService $taskFileDomainService,
         private readonly TaskSchedulerDomainService $taskSchedulerDomainService,
-        private readonly MagicUserSettingDomainService $magicUserSettingDomainService,
+        private readonly DelightfulUserSettingDomainService $magicUserSettingDomainService,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(self::class);
@@ -838,7 +838,7 @@ class MessageScheduleAppService extends AbstractAppService
         );
         $text = '';
         if ($messageStruct instanceof TextContentInterface) {
-            $authorization = new MagicUserAuthorization();
+            $authorization = new DelightfulUserAuthorization();
             $authorization->setId($dataIsolation->getCurrentUserId());
             $authorization->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
             $authorization->setUserType(UserType::Human);
@@ -856,9 +856,9 @@ class MessageScheduleAppService extends AbstractAppService
             $messageContent
         );
 
-        // Cast to MagicMessageStruct to access getExtra() method
+        // Cast to DelightfulMessageStruct to access getExtra() method
         $superAgentExtra = null;
-        if ($messageStruct instanceof MagicMessageStruct) {
+        if ($messageStruct instanceof DelightfulMessageStruct) {
             $superAgentExtra = $messageStruct->getExtra()?->getSuperAgent();
         }
         $mentions = $superAgentExtra?->getMentionsJsonStruct();
@@ -975,7 +975,7 @@ class MessageScheduleAppService extends AbstractAppService
             return $this->topicDomainService->getTopicById($topicId);
         }
         // 1. Initialize chat conversation and topic
-        [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initMagicChatConversation($dataIsolation);
+        [$chatConversationId, $chatConversationTopicId] = $this->chatAppService->initDelightfulChatConversation($dataIsolation);
 
         $topicName = $this->getSummarizeMessageText($dataIsolation, $messageType, $messageContent);
 
@@ -1229,8 +1229,8 @@ class MessageScheduleAppService extends AbstractAppService
             }
 
             // Create user setting entity for project MCP servers
-            $entity = new MagicUserSettingEntity();
-            $entity->setKey(UserSettingKey::genSuperMagicProjectMCPServers((string) $projectId));
+            $entity = new DelightfulUserSettingEntity();
+            $entity->setKey(UserSettingKey::genSuperDelightfulProjectMCPServers((string) $projectId));
             $entity->setValue([
                 'servers' => $plugins['servers'],
             ]);

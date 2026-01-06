@@ -19,7 +19,7 @@ use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\AgentPluginDefin
 use App\Infrastructure\Core\ValueObject\Page;
 use Hyperf\Odin\Mcp\McpServerConfig;
 
-#[AgentPluginDefine(code: 'mcp', name: 'MCP Agent Plugin', description: 'MCP Agent Plugin for Magic Control Panel')]
+#[AgentPluginDefine(code: 'mcp', name: 'MCP Agent Plugin', description: 'MCP Agent Plugin for Delightful Control Panel')]
 class MCPAgentPlugin extends AbstractAgentPlugin
 {
     /**

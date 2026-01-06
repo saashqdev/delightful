@@ -124,10 +124,10 @@ class VariableTest extends TestCase
         $sandbox->execute($execution);
     }
 
-    public function testWhitelistedMagicConsts()
+    public function testWhitelistedDelightfulConsts()
     {
         $options = new SandboxOptions();
-        $options->accessControl()->whitelistMagicConst('__LINE__');
+        $options->accessControl()->whitelistDelightfulConst('__LINE__');
         $execution = '<?php
             return __LINE__;
         ';
@@ -136,12 +136,12 @@ class VariableTest extends TestCase
         $this->assertSame(3, $res);
     }
 
-    public function testBlacklistedMagicConsts()
+    public function testBlacklistedDelightfulConsts()
     {
         $this->expectException(Error::class);
         $this->expectExceptionCode(Error::BLACKLIST_DELIGHTFUL_CONST_ERROR);
         $options = new SandboxOptions();
-        $options->accessControl()->blacklistMagicConst('__LINE__');
+        $options->accessControl()->blacklistDelightfulConst('__LINE__');
         $execution = '<?php
             return __LINE__;
         ';
@@ -149,10 +149,10 @@ class VariableTest extends TestCase
         $sandbox->execute($execution);
     }
 
-    public function testDefinedMagicConst()
+    public function testDefinedDelightfulConst()
     {
         $options = new SandboxOptions();
-        $options->definitions()->defineMagicConst('__LINE__', 999);
+        $options->definitions()->defineDelightfulConst('__LINE__', 999);
         $execution = '<?php
             return __LINE__;
         ';

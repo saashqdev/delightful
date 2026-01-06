@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Constant;
 
-enum MagicAgentVersionStatus: int
+enum DelightfulAgentVersionStatus: int
 {
     // 审批流状态
     case APPROVAL_PENDING = 1; // 待审批

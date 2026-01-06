@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Application\Chat\Event\Subscribe;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
-use App\Application\Chat\Service\MagicControlMessageAppService;
-use App\Application\Chat\Service\MagicSeqAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
+use App\Application\Chat\Service\DelightfulControlMessageAppService;
+use App\Application\Chat\Service\DelightfulSeqAppService;
 use App\Domain\Chat\Entity\ValueObject\AmqpTopicType;
 use App\Domain\Chat\Entity\ValueObject\MessagePriority;
-use App\Domain\Chat\Repository\Facade\MagicChatSeqRepositoryInterface;
-use App\Domain\Chat\Service\MagicSeqDomainService;
-use App\Domain\Contact\Repository\Persistence\MagicUserRepository;
+use App\Domain\Chat\Repository\Facade\DelightfulChatSeqRepositoryInterface;
+use App\Domain\Chat\Service\DelightfulSeqDomainService;
+use App\Domain\Contact\Repository\Persistence\DelightfulUserRepository;
 use App\Infrastructure\Core\Traits\ChatAmqpTrait;
 use App\Infrastructure\Util\Context\CoContext;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
@@ -47,12 +47,12 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
 
     public function __construct(
         protected Redis $redis,
-        protected MagicSeqAppService $magicSeqAppService,
-        protected MagicChatSeqRepositoryInterface $magicChatSeqRepository,
-        protected MagicChatMessageAppService $magicChatMessageAppService,
-        protected MagicControlMessageAppService $magicControlMessageAppService,
-        protected MagicSeqDomainService $magicSeqDomainService,
-        protected MagicUserRepository $magicUserRepository,
+        protected DelightfulSeqAppService $magicSeqAppService,
+        protected DelightfulChatSeqRepositoryInterface $magicChatSeqRepository,
+        protected DelightfulChatMessageAppService $magicChatMessageAppService,
+        protected DelightfulControlMessageAppService $magicControlMessageAppService,
+        protected DelightfulSeqDomainService $magicSeqDomainService,
+        protected DelightfulUserRepository $magicUserRepository,
     ) {
         // 设置列队优先级
         $this->arguments['x-max-priority'] = ['I', $this->priority->value];

@@ -20,7 +20,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $created_at
  * @property string $updated_at
  */
-class MagicChatTopicModel extends Model
+class DelightfulChatTopicModel extends Model
 {
     use SoftDeletes;
 

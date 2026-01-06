@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Repository\Persistence;
 
-use App\Domain\Contact\Repository\Facade\MagicThirdPlatformUserRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulThirdPlatformUserRepositoryInterface;
 use App\Domain\Contact\Repository\Persistence\Model\ThirdPlatformUserModel;
 
-readonly class MagicThirdPlatformUserRepository implements MagicThirdPlatformUserRepositoryInterface
+readonly class DelightfulThirdPlatformUserRepository implements DelightfulThirdPlatformUserRepositoryInterface
 {
     public function __construct(
         protected ThirdPlatformUserModel $userModel,

@@ -1,5 +1,5 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import {
 	IconAlignCenter,
 	IconAlignJustified,
@@ -64,18 +64,18 @@ export default function ToolBar({ editor, ...props }: ToolBarProps) {
 
 	return (
 		<Flex gap={4} wrap="wrap" className={styles.toolbar} {...props}>
-			<MagicButton
+			<DelightfulButton
 				type="link"
 				disabled={!editor?.can().undo()}
 				onClick={() => editor?.chain().focus().undo().run()}
-				icon={<MagicIcon component={IconArrowBackUp} stroke={2} />}
+				icon={<DelightfulIcon component={IconArrowBackUp} stroke={2} />}
 				tip={t("richEditor.undo")}
 			/>
-			<MagicButton
+			<DelightfulButton
 				type="link"
 				disabled={!editor?.can().redo()}
 				onClick={() => editor?.chain().focus().redo().run()}
-				icon={<MagicIcon component={IconArrowForwardUp} stroke={2} />}
+				icon={<DelightfulIcon component={IconArrowForwardUp} stroke={2} />}
 				tip={t("richEditor.redo")}
 			/>
 			<Select
@@ -93,40 +93,40 @@ export default function ToolBar({ editor, ...props }: ToolBarProps) {
 					if (value) editor?.chain().focus().setFontSize(`${value}px`).run()
 				}}
 			/>
-			<MagicButton
+			<DelightfulButton
 				type={editor?.isActive("bold") ? "primary" : "link"}
 				onClick={() => editor?.chain().focus().toggleBold().run()}
-				icon={<MagicIcon component={IconBold} stroke={2} />}
+				icon={<DelightfulIcon component={IconBold} stroke={2} />}
 				tip={t("richEditor.bold")}
 			/>
-			<MagicButton
+			<DelightfulButton
 				type={editor?.isActive("italic") ? "primary" : "link"}
 				onClick={() => editor?.chain().focus().toggleItalic().run()}
-				icon={<MagicIcon component={IconItalic} stroke={2} />}
+				icon={<DelightfulIcon component={IconItalic} stroke={2} />}
 				tip={t("richEditor.italic")}
 			/>
-			<MagicButton
+			<DelightfulButton
 				type={editor?.isActive({ textAlign: "left" }) ? "primary" : "link"}
 				onClick={() => editor?.chain().focus().setTextAlign("left").run()}
-				icon={<MagicIcon component={IconAlignLeft} />}
+				icon={<DelightfulIcon component={IconAlignLeft} />}
 				tip={t("richEditor.leftAlign")}
 			/>
-			<MagicButton
+			<DelightfulButton
 				type={editor?.isActive({ textAlign: "center" }) ? "primary" : "link"}
 				onClick={() => editor?.chain().focus().setTextAlign("center").run()}
-				icon={<MagicIcon component={IconAlignCenter} />}
+				icon={<DelightfulIcon component={IconAlignCenter} />}
 				tip={t("richEditor.centerAlign")}
 			/>
-			<MagicButton
+			<DelightfulButton
 				type={editor?.isActive({ textAlign: "right" }) ? "primary" : "link"}
 				onClick={() => editor?.chain().focus().setTextAlign("right").run()}
-				icon={<MagicIcon component={IconAlignRight} />}
+				icon={<DelightfulIcon component={IconAlignRight} />}
 				tip={t("richEditor.rightAlign")}
 			/>
-			<MagicButton
+			<DelightfulButton
 				type={editor?.isActive({ textAlign: "justify" }) ? "primary" : "link"}
 				onClick={() => editor?.chain().focus().setTextAlign("justify").run()}
-				icon={<MagicIcon component={IconAlignJustified} />}
+				icon={<DelightfulIcon component={IconAlignJustified} />}
 				tip={t("richEditor.justifyAlign")}
 			/>
 		</Flex>

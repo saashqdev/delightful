@@ -54,7 +54,7 @@ const useStyles = createStyles(({ prefixCls,token, css }) => {
 	}
 })
 
-export const MagicSwitch = ({ className, ...props }: SwitchProps) => {
+export const DelightfulSwitch = ({ className, ...props }: SwitchProps) => {
 	const { styles, cx } = useStyles()
 	return <Switch className={cx(styles.magicSwitch, className)} {...props} />
 }

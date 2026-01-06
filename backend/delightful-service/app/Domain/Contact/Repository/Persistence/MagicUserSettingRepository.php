@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Repository\Persistence;
 
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Entity\ValueObject\Query\MagicUserSettingQuery;
-use App\Domain\Contact\Factory\MagicUserSettingFactory;
-use App\Domain\Contact\Repository\Facade\MagicUserSettingRepositoryInterface;
+use App\Domain\Contact\Entity\ValueObject\Query\DelightfulUserSettingQuery;
+use App\Domain\Contact\Factory\DelightfulUserSettingFactory;
+use App\Domain\Contact\Repository\Facade\DelightfulUserSettingRepositoryInterface;
 use App\Domain\Contact\Repository\Persistence\Model\UserSettingModel;
 use App\Infrastructure\Core\ValueObject\Page;
 use DateTime;
 
-class MagicUserSettingRepository extends AbstractMagicContactRepository implements MagicUserSettingRepositoryInterface
+class DelightfulUserSettingRepository extends AbstractDelightfulContactRepository implements DelightfulUserSettingRepositoryInterface
 {
     protected bool $filterOrganizationCode = true;
 
-    public function save(DataIsolation $dataIsolation, MagicUserSettingEntity $magicUserSettingEntity): MagicUserSettingEntity
+    public function save(DataIsolation $dataIsolation, DelightfulUserSettingEntity $magicUserSettingEntity): DelightfulUserSettingEntity
     {
         if (! $magicUserSettingEntity->getId()) {
             $model = new UserSettingModel();
@@ -29,14 +29,14 @@ class MagicUserSettingRepository extends AbstractMagicContactRepository implemen
             $model = $builder->where('id', $magicUserSettingEntity->getId())->first();
         }
 
-        $model->fill(MagicUserSettingFactory::createModel($magicUserSettingEntity));
+        $model->fill(DelightfulUserSettingFactory::createModel($magicUserSettingEntity));
         $model->save();
 
         $magicUserSettingEntity->setId($model->id);
         return $magicUserSettingEntity;
     }
 
-    public function get(DataIsolation $dataIsolation, string $key): ?MagicUserSettingEntity
+    public function get(DataIsolation $dataIsolation, string $key): ?DelightfulUserSettingEntity
     {
         $builder = $this->createContactBuilder($dataIsolation, UserSettingModel::query());
 
@@ -49,13 +49,13 @@ class MagicUserSettingRepository extends AbstractMagicContactRepository implemen
             return null;
         }
 
-        return MagicUserSettingFactory::createEntity($model);
+        return DelightfulUserSettingFactory::createEntity($model);
     }
 
     /**
-     * @return array{total: int, list: array<MagicUserSettingEntity>}
+     * @return array{total: int, list: array<DelightfulUserSettingEntity>}
      */
-    public function queries(DataIsolation $dataIsolation, MagicUserSettingQuery $query, Page $page): array
+    public function queries(DataIsolation $dataIsolation, DelightfulUserSettingQuery $query, Page $page): array
     {
         $builder = $this->createContactBuilder($dataIsolation, UserSettingModel::query());
 
@@ -76,7 +76,7 @@ class MagicUserSettingRepository extends AbstractMagicContactRepository implemen
         $list = [];
         /** @var UserSettingModel $model */
         foreach ($result['list'] as $model) {
-            $list[] = MagicUserSettingFactory::createEntity($model);
+            $list[] = DelightfulUserSettingFactory::createEntity($model);
         }
 
         return [
@@ -88,7 +88,7 @@ class MagicUserSettingRepository extends AbstractMagicContactRepository implemen
     /**
      * 通过 magicId + key 获取用户设置（跨组织）.
      */
-    public function getByMagicId(string $magicId, string $key): ?MagicUserSettingEntity
+    public function getByDelightfulId(string $magicId, string $key): ?DelightfulUserSettingEntity
     {
         /** @var null|UserSettingModel $model */
         $model = UserSettingModel::query()
@@ -96,16 +96,16 @@ class MagicUserSettingRepository extends AbstractMagicContactRepository implemen
             ->where('key', $key)
             ->first();
 
-        return $model ? MagicUserSettingFactory::createEntity($model) : null;
+        return $model ? DelightfulUserSettingFactory::createEntity($model) : null;
     }
 
     /**
      * 通过 magicId 保存用户设置（跨组织），若已存在相同 key 则更新。
      */
-    public function saveByMagicId(string $magicId, MagicUserSettingEntity $magicUserSettingEntity): MagicUserSettingEntity
+    public function saveByDelightfulId(string $magicId, DelightfulUserSettingEntity $magicUserSettingEntity): DelightfulUserSettingEntity
     {
         // 写入 magicId
-        $magicUserSettingEntity->setMagicId($magicId);
+        $magicUserSettingEntity->setDelightfulId($magicId);
 
         // 查找现有记录
         $model = UserSettingModel::query()
@@ -119,7 +119,7 @@ class MagicUserSettingRepository extends AbstractMagicContactRepository implemen
             $magicUserSettingEntity->setId($model->id);
         }
 
-        $model->fill(MagicUserSettingFactory::createModel($magicUserSettingEntity));
+        $model->fill(DelightfulUserSettingFactory::createModel($magicUserSettingEntity));
         $model->save();
 
         $magicUserSettingEntity->setId($model->id);
@@ -129,7 +129,7 @@ class MagicUserSettingRepository extends AbstractMagicContactRepository implemen
     /**
      * 获取全局配置（organization_code/user_id/magic_id 均为 NULL）。
      */
-    public function getGlobal(string $key): ?MagicUserSettingEntity
+    public function getGlobal(string $key): ?DelightfulUserSettingEntity
     {
         /** @var null|UserSettingModel $model */
         $model = UserSettingModel::query()
@@ -139,13 +139,13 @@ class MagicUserSettingRepository extends AbstractMagicContactRepository implemen
             ->where('key', $key)
             ->first();
 
-        return $model ? MagicUserSettingFactory::createEntity($model) : null;
+        return $model ? DelightfulUserSettingFactory::createEntity($model) : null;
     }
 
     /**
      * 保存全局配置.
      */
-    public function saveGlobal(MagicUserSettingEntity $magicUserSettingEntity): MagicUserSettingEntity
+    public function saveGlobal(DelightfulUserSettingEntity $magicUserSettingEntity): DelightfulUserSettingEntity
     {
         // 查找现有记录
         /** @var null|UserSettingModel $model */
@@ -165,10 +165,10 @@ class MagicUserSettingRepository extends AbstractMagicContactRepository implemen
         // 使用工厂生成数据后手动覆盖 NULL 字段
         $magicUserSettingEntity->setOrganizationCode(null);
         $magicUserSettingEntity->setUserId(null);
-        $magicUserSettingEntity->setMagicId(null);
+        $magicUserSettingEntity->setDelightfulId(null);
         $magicUserSettingEntity->setCreatedAt(new DateTime());
         $magicUserSettingEntity->setUpdatedAt(new DateTime());
-        $model->fill(MagicUserSettingFactory::createModel($magicUserSettingEntity));
+        $model->fill(DelightfulUserSettingFactory::createModel($magicUserSettingEntity));
 
         $model->save();
 

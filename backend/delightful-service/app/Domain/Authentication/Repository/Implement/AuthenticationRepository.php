@@ -9,7 +9,7 @@ namespace App\Domain\Authentication\Repository\Implement;
 
 use App\Domain\Authentication\Repository\Facade\AuthenticationRepositoryInterface;
 use App\Domain\Contact\Entity\AccountEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Repository\Persistence\Model\AccountModel;
 use App\Domain\Contact\Repository\Persistence\Model\UserModel;
 use Hyperf\DbConnection\Db;
@@ -64,9 +64,9 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     }
 
     /**
-     * 通过MagicID和组织编码查找用户.
+     * 通过DelightfulID和组织编码查找用户.
      */
-    public function findUserByMagicIdAndOrganization(string $magicId, ?string $organizationCode = null): ?MagicUserEntity
+    public function findUserByDelightfulIdAndOrganization(string $magicId, ?string $organizationCode = null): ?DelightfulUserEntity
     {
         $query = $this->userModel::getQuery()->where('magic_id', $magicId)
             ->where('status', 1); // 已激活状态
@@ -81,6 +81,6 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
             return null;
         }
 
-        return new MagicUserEntity($userData);
+        return new DelightfulUserEntity($userData);
     }
 }

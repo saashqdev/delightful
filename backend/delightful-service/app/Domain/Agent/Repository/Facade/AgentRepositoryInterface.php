@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Repository\Facade;
 
-use App\Domain\Agent\Entity\MagicAgentEntity;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
 use App\Domain\Agent\Entity\ValueObject\AgentDataIsolation;
-use App\Domain\Agent\Entity\ValueObject\Query\MagicAgentQuery;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulAgentQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
 interface AgentRepositoryInterface
@@ -17,7 +17,7 @@ interface AgentRepositoryInterface
     /**
      * 查询 Agent 列表.
      *
-     * @return array{total: int, list: array<MagicAgentEntity>}
+     * @return array{total: int, list: array<DelightfulAgentEntity>}
      */
-    public function queries(AgentDataIsolation $agentDataIsolation, MagicAgentQuery $agentQuery, Page $page): array;
+    public function queries(AgentDataIsolation $agentDataIsolation, DelightfulAgentQuery $agentQuery, Page $page): array;
 }

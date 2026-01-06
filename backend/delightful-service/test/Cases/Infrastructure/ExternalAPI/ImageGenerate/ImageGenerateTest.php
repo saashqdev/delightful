@@ -25,7 +25,7 @@ use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\MidjourneyModelReque
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\MiracleVisionModelRequest;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\QwenImageModelRequest;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\VolcengineModelRequest;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\CloudFile\Kernel\Struct\UploadFile;
 use HyperfTest\Cases\BaseTest;
 
@@ -190,7 +190,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByQwenImage()
     {
         //        $di = di(ProviderConfigDomainService::class);
-        //        $magicUserAuthorization = new MagicUserAuthorization();
+        //        $magicUserAuthorization = new DelightfulUserAuthorization();
         //        $magicUserAuthorization->setOrganizationCode('TGosRaFhvb');
         //
         //        $providerModelsByConfig = $di->getProviderConfig(ProviderDataIsolation::create('TGosRaFhvb'), '814826843393773568');
@@ -227,7 +227,7 @@ class ImageGenerateTest extends BaseTest
     public function testWatermark()
     {
         $di = di(ModeAppService::class);
-        $magicUserAuthorization = new MagicUserAuthorization();
+        $magicUserAuthorization = new DelightfulUserAuthorization();
         $modeByIdentifier = $di->getModeByIdentifier($magicUserAuthorization, '94');
         var_dump($modeByIdentifier);
     }

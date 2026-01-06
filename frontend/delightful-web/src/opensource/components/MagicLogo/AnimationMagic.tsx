@@ -1,4 +1,4 @@
-function AnimationMagic() {
+function AnimationDelightful() {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -30,4 +30,4 @@ function AnimationMagic() {
 	)
 }
 
-export default AnimationMagic
+export default AnimationDelightful

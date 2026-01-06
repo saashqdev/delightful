@@ -12,7 +12,7 @@ use App\Application\KnowledgeBase\Service\Strategy\DocumentFile\DocumentFileStra
 use App\Application\KnowledgeBase\Service\Strategy\KnowledgeBase\KnowledgeBaseStrategyInterface;
 use App\Application\KnowledgeBase\VectorDatabase\Similarity\KnowledgeSimilarityManager;
 use App\Application\Permission\Service\OperationPermissionAppService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\KnowledgeBase\Entity\ValueObject\DocumentFile\Interfaces\DocumentFileInterface;
 use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeBaseDataIsolation;
@@ -34,7 +34,7 @@ abstract class AbstractKnowledgeAppService extends AbstractKernelAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        protected readonly MagicUserDomainService $magicUserDomainService,
+        protected readonly DelightfulUserDomainService $magicUserDomainService,
         protected readonly OperationPermissionAppService $operationPermissionAppService,
         protected readonly KnowledgeBaseDomainService $knowledgeBaseDomainService,
         protected readonly KnowledgeBaseDocumentDomainService $knowledgeBaseDocumentDomainService,

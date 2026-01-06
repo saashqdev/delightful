@@ -1,10 +1,10 @@
 # Environment Variables Configuration Guide
 
-This document provides detailed information about the environment variables used in the Magic project, serving as a reference for development and deployment.
+This document provides detailed information about the environment variables used in the Delightful project, serving as a reference for development and deployment.
 
 ## Overview
 
-The Magic project uses the `.env` file to manage environment variable configurations. During project deployment or development, you need to correctly configure these environment variables to ensure the system operates normally.
+The Delightful project uses the `.env` file to manage environment variable configurations. During project deployment or development, you need to correctly configure these environment variables to ensure the system operates normally.
 
 ## Configuration File
 
@@ -141,7 +141,7 @@ ENABLE_CONSUME=true
 ENABLE_CHAT_MESSAGE=true
 # Enable chat sequence
 ENABLE_CHAT_SEQ=true
-# Enable Magic Watchdog (can be disabled for local development)
+# Enable Delightful Watchdog (can be disabled for local development)
 ENABLE_DELIGHTFUL_WATCHDOG=false
 
 # Common switches
@@ -249,7 +249,7 @@ CODE_WHITE_ACCOUNT_ID=
 # Default magic_environment ID
 DEFAULT_DELIGHTFUL_ENVIRONMENT_ID=
 
-# Magic environment ID
+# Delightful environment ID
 DELIGHTFUL_ENV_ID=1000
 ```
 

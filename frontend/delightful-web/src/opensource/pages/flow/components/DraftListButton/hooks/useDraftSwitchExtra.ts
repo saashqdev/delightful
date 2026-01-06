@@ -4,12 +4,12 @@
 
 import { getCurrentDateTimeString } from "@/opensource/pages/flow/utils/helpers"
 import type { FlowDraft } from "@/types/flow"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { useMemoizedFn } from "ahooks"
 import { FlowApi } from "@/apis"
 
 type UseDraftSwitchExtraProps = {
-	flow?: MagicFlow.Flow
+	flow?: DelightfulFlow.Flow
 	initDraftList: (this: any, flowCode: any) => Promise<FlowDraft.Detail[]>
 }
 

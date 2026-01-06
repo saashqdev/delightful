@@ -30,7 +30,7 @@ class ChatMessageEndpointTest extends OpenDevEndpointBaseTestCase
         $param->setMsgKey('sampleMarkdown');
         $param->setMsgParam(json_encode([
             'title' => 'hello',
-            'text' => 'Search with Magic Ai
+            'text' => 'Search with Delightful Ai
 ![avatar](https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/1922002861/p634074.png)
 
 There are one default supported search engine: Google.

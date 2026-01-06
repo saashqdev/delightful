@@ -9,7 +9,7 @@ namespace Cases\Api\Admin\Agent;
 
 use App\Application\Admin\Agent\Service\AdminAgentAppService;
 use App\Interfaces\Admin\DTO\Request\QueryPageAgentDTO;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use HyperfTest\Cases\BaseTest;
 
 /**
@@ -21,7 +21,7 @@ class AdminAgentTest extends BaseTest
     {
         $userId = '2';
         $organizationCode = 'DT001';
-        $magicUserAuthorization = new MagicUserAuthorization();
+        $magicUserAuthorization = new DelightfulUserAuthorization();
         $magicUserAuthorization->setId($userId);
         $magicUserAuthorization->setOrganizationCode($organizationCode);
         $service = di(AdminAgentAppService::class);

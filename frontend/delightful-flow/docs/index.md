@@ -1,7 +1,7 @@
 ---
 hero:
-  title: Magic
-  description: Core components for the Magic project, including flow-related building blocks
+  title: Delightful
+  description: Core components for the Delightful project, including flow-related building blocks
   actions:
     - text: Expression component
       link: /components/magic-expression-widget

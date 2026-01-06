@@ -5,7 +5,7 @@ import AvatarService from "@/opensource/services/chat/avatar"
 import { createStyles } from "antd-style"
 import { useMemoizedFn } from "ahooks"
 
-export interface MagicAvatarProps extends AvatarProps {
+export interface DelightfulAvatarProps extends AvatarProps {
 	badgeProps?: BadgeProps
 }
 
@@ -20,7 +20,7 @@ const getTextAvatar = (text: string | ReactNode, backgroundColor?: string, color
 	return AvatarService.drawTextAvatar(textString, backgroundColor, color) ?? ""
 }
 
-const MagicAvatar = forwardRef<HTMLSpanElement, MagicAvatarProps>(
+const DelightfulAvatar = forwardRef<HTMLSpanElement, DelightfulAvatarProps>(
 	({ children, src, size = 40, style, badgeProps, className, ...props }, ref) => {
 		const { styles } = useStyles()
 
@@ -91,4 +91,4 @@ const MagicAvatar = forwardRef<HTMLSpanElement, MagicAvatarProps>(
 	},
 )
 
-export default MagicAvatar
+export default DelightfulAvatar

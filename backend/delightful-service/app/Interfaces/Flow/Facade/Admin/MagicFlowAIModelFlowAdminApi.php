@@ -7,23 +7,23 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\Facade\Admin;
 
-use App\Application\Flow\Service\MagicFlowAIModelAppService;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use App\Interfaces\Flow\Assembler\AIModel\MagicFlowAIModelAssembler;
+use App\Application\Flow\Service\DelightfulFlowAIModelAppService;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use App\Interfaces\Flow\Assembler\AIModel\DelightfulFlowAIModelAssembler;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]
-class MagicFlowAIModelFlowAdminApi extends AbstractFlowAdminApi
+class DelightfulFlowAIModelFlowAdminApi extends AbstractFlowAdminApi
 {
     #[Inject]
-    protected MagicFlowAIModelAppService $magicFlowAIModelAppService;
+    protected DelightfulFlowAIModelAppService $magicFlowAIModelAppService;
 
     public function getEnabled()
     {
-        /** @var MagicUserAuthorization $authorization */
+        /** @var DelightfulUserAuthorization $authorization */
         $authorization = $this->getAuthorization();
         $data = $this->magicFlowAIModelAppService->getEnabled($authorization);
-        return MagicFlowAIModelAssembler::createEnabledListDTO($data['list']);
+        return DelightfulFlowAIModelAssembler::createEnabledListDTO($data['list']);
     }
 }

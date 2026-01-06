@@ -1,7 +1,7 @@
 import { Suspense, type AnchorHTMLAttributes } from "react"
 import { useMessageRenderContext } from "@/opensource/components/business/MessageRenderProvider/hooks"
 import { useTranslation } from "react-i18next"
-import MagicFunctionLink from "../MagicFunctionLink"
+import DelightfulFunctionLink from "../DelightfulFunctionLink"
 import ARenderFactory from "../../factories/ARenderFactory"
 export function A({ children, href, ...props }: AnchorHTMLAttributes<HTMLAnchorElement>) {
 	const { hiddenDetail } = useMessageRenderContext()
@@ -19,7 +19,7 @@ export function A({ children, href, ...props }: AnchorHTMLAttributes<HTMLAnchorE
 
 	switch (true) {
 		case uncodeHref.startsWith("magic://"):
-			return <MagicFunctionLink href={uncodeHref}>{children}</MagicFunctionLink>
+			return <DelightfulFunctionLink href={uncodeHref}>{children}</DelightfulFunctionLink>
 		default:
 			const MatchComponent = ARenderFactory.getMatchComponent(props)
 

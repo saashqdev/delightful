@@ -1,13 +1,13 @@
 import { IconClockStop, IconHandClick } from "@tabler/icons-react"
 import { cx } from "antd-style"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { Flex, Form, Switch } from "antd"
-import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
-import MagicInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
+import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
 import { useMemo } from "react"
 import { cloneDeep, set } from "lodash-es"
 import { useMemoizedFn } from "ahooks"
-import { useFlow } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
+import { useFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
 import { useTranslation } from "react-i18next"
 import Common from "../../Start/v0/components/Common"
 import styles from "./WaitForReply.module.less"
@@ -94,14 +94,14 @@ export default function WaitForReplyV0() {
 							style={{ flex: 1 }}
 							normalize={(value) => Number(value)}
 						>
-							<MagicInput
+							<DelightfulInput
 								placeholder={t("common.time", { ns: "flow" })}
 								type="number"
 								className="nodrag"
 							/>
 						</Form.Item>
 						<Form.Item name={["timeout_config", "unit"]} style={{ width: "100px" }}>
-							<MagicSelect
+							<DelightfulSelect
 								options={[
 									{ label: t("common.hours", { ns: "flow" }), value: "hours" },
 									{

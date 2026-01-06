@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Repository\Persistence\Model;
 
 use Hyperf\DbConnection\Model\Model;
 
-class MagicDeviceModel extends Model
+class DelightfulDeviceModel extends Model
 {
     /**
      * The table associated with the model.

@@ -1,7 +1,7 @@
 import { useDebounceFn, useMount } from "ahooks"
 import type { ComponentType, JSX, MemoExoticComponent } from "react"
 import { useState } from "react"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { message } from "antd"
 import type { Login } from "@/types/login"
 import { LoginValueKey } from "@/opensource/pages/login/constants"
@@ -197,13 +197,13 @@ export function withThirdPartyAuth<T extends object>(
 
 		if (isLoading) {
 			return (
-				<MagicSpin
+				<DelightfulSpin
 					spinning={isLoading}
 					tip={t("spin.loadingLogin")}
 					wrapperClassName={styles.spin}
 				>
 					<div style={{ height: "100vh" }} />
-				</MagicSpin>
+				</DelightfulSpin>
 			)
 		}
 

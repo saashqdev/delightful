@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace App\Application\Permission\Event\Subscribe;
 
-use App\Domain\Agent\Entity\MagicAgentEntity;
-use App\Domain\Agent\Event\MagicAgentSavedEvent;
-use App\Domain\Flow\Entity\MagicFlowEntity;
-use App\Domain\Flow\Entity\MagicFlowToolSetEntity;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
+use App\Domain\Agent\Event\DelightfulAgentSavedEvent;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowToolSetEntity;
 use App\Domain\Flow\Entity\ValueObject\Type;
-use App\Domain\Flow\Event\MagicFLowSavedEvent;
-use App\Domain\Flow\Event\MagicFLowToolSetSavedEvent;
+use App\Domain\Flow\Event\DelightfulFLowSavedEvent;
+use App\Domain\Flow\Event\DelightfulFLowToolSetSavedEvent;
 use App\Domain\KnowledgeBase\Entity\KnowledgeBaseEntity;
 use App\Domain\KnowledgeBase\Event\KnowledgeBaseSavedEvent;
 use App\Domain\MCP\Entity\MCPServerEntity;
@@ -38,9 +38,9 @@ readonly class AccessOwnerSubscriber implements ListenerInterface
     public function listen(): array
     {
         return [
-            MagicAgentSavedEvent::class,
-            MagicFLowSavedEvent::class,
-            MagicFLowToolSetSavedEvent::class,
+            DelightfulAgentSavedEvent::class,
+            DelightfulFLowSavedEvent::class,
+            DelightfulFLowToolSetSavedEvent::class,
             KnowledgeBaseSavedEvent::class,
             MCPServerSavedEvent::class,
         ];
@@ -48,13 +48,13 @@ readonly class AccessOwnerSubscriber implements ListenerInterface
 
     public function process(object $event): void
     {
-        if ($event instanceof MagicAgentSavedEvent) {
+        if ($event instanceof DelightfulAgentSavedEvent) {
             $this->handleAgent($event->agentEntity, $event->create);
         }
-        if ($event instanceof MagicFLowSavedEvent) {
+        if ($event instanceof DelightfulFLowSavedEvent) {
             $this->handleFlow($event->flow, $event->create);
         }
-        if ($event instanceof MagicFLowToolSetSavedEvent) {
+        if ($event instanceof DelightfulFLowToolSetSavedEvent) {
             $this->handleToolSet($event->toolSetEntity, $event->create);
         }
         if ($event instanceof KnowledgeBaseSavedEvent) {
@@ -65,7 +65,7 @@ readonly class AccessOwnerSubscriber implements ListenerInterface
         }
     }
 
-    private function handleAgent(MagicAgentEntity $agentEntity, bool $create): void
+    private function handleAgent(DelightfulAgentEntity $agentEntity, bool $create): void
     {
         $permissionDataIsolation = PermissionDataIsolation::create($agentEntity->getOrganizationCode(), $agentEntity->getCreatedUid());
         if ($create) {
@@ -78,7 +78,7 @@ readonly class AccessOwnerSubscriber implements ListenerInterface
         }
     }
 
-    private function handleFlow(MagicFlowEntity $flowEntity, bool $create): void
+    private function handleFlow(DelightfulFlowEntity $flowEntity, bool $create): void
     {
         $permissionDataIsolation = PermissionDataIsolation::create($flowEntity->getOrganizationCode(), $flowEntity->getCreator());
         if ($flowEntity->getType() === Type::Sub && $create) {
@@ -91,7 +91,7 @@ readonly class AccessOwnerSubscriber implements ListenerInterface
         }
     }
 
-    private function handleToolSet(MagicFlowToolSetEntity $toolSetEntity, bool $create): void
+    private function handleToolSet(DelightfulFlowToolSetEntity $toolSetEntity, bool $create): void
     {
         $permissionDataIsolation = PermissionDataIsolation::create($toolSetEntity->getOrganizationCode(), $toolSetEntity->getCreator());
         if ($create) {

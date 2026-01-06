@@ -1,4 +1,4 @@
-import type MagicIcon from "@/opensource/components/base/MagicIcon"
+import type DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import type { ComponentProps, FC } from "react"
 
 export const enum ConversationMessageCollectionType {
@@ -29,7 +29,7 @@ export const enum ExtraSectionKey {
 export interface ExtraSectionInfo {
 	key: ExtraSectionKey
 	title: string
-	icon?: ComponentProps<typeof MagicIcon>["component"]
+	icon?: ComponentProps<typeof DelightfulIcon>["component"]
 	Component: FC<ExtraSectionComponentProps>
 	onClick?: () => void
 }

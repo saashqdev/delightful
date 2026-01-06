@@ -10,7 +10,7 @@ namespace App\Domain\Contact\Service\Facade;
 use App\Domain\Contact\DTO\UserUpdateDTO;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 
-interface MagicUserDomainExtendInterface
+interface DelightfulUserDomainExtendInterface
 {
     public function getUserUpdatePermission(DataIsolation $dataIsolation): array;
 

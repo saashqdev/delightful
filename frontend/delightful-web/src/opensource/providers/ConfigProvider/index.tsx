@@ -1,6 +1,6 @@
 import { type PropsWithChildren, useEffect, useState } from "react"
 import { userService, configService } from "@/services"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { useTranslation } from "react-i18next"
 import { createStyles } from "antd-style"
 
@@ -41,9 +41,9 @@ export default function ConfigProvider({ children }: PropsWithChildren) {
 
 	if (loading) {
 		return (
-			<MagicSpin spinning tip={t("spin.loadingConfig")} wrapperClassName={styles.spin}>
+			<DelightfulSpin spinning tip={t("spin.loadingConfig")} wrapperClassName={styles.spin}>
 				<div style={{ height: "100vh" }} />
-			</MagicSpin>
+			</DelightfulSpin>
 		)
 	}
 

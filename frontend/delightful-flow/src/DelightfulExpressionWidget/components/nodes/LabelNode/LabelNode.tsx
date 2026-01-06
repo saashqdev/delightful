@@ -1,6 +1,6 @@
 import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { getNodeSchema, getNodeVersion, judgeIsVariableNode } from "@/DelightfulFlow/utils"
-import { getFormTypeToTitle } from "@/MagicJsonSchemaEditor/constants"
+import { getFormTypeToTitle } from "@/DelightfulJsonSchemaEditor/constants"
 import { getCurrentTypeFromString } from "@/common/BaseUI/DropdownRenderer/Reference/components/Transformer/helpers"
 import { useNodeMap } from "@/common/context/NodeMap/useResize"
 import { IconClose } from "@douyinfe/semi-icons"

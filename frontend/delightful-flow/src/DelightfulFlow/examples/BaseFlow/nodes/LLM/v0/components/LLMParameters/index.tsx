@@ -2,9 +2,9 @@
  * LLM参数配置器
  */
 import BaseDropdownRenderer from "@/common/BaseUI/DropdownRenderer/Base"
-import MagicInput from "@/common/BaseUI/Input"
-import { default as MagicSelect, default as TsSelect } from "@/common/BaseUI/Select"
-import MagicSlider from "@/common/BaseUI/Slider"
+import DelightfulInput from "@/common/BaseUI/Input"
+import { default as DelightfulSelect, default as TsSelect } from "@/common/BaseUI/Select"
+import DelightfulSlider from "@/common/BaseUI/Slider"
 import { Switch, Tooltip } from "antd"
 import {
 	IconAdjustmentsHorizontal,
@@ -161,7 +161,7 @@ export default function LLMParameters({ LLMValue, onChange, options }: LLMParame
 									/>
 								</div>
 								<div className={styles.right}>
-									<MagicSlider
+									<DelightfulSlider
 										min={parameter.extra.min}
 										max={parameter.extra.max}
 										step={parameter.extra.step}
@@ -175,7 +175,7 @@ export default function LLMParameters({ LLMValue, onChange, options }: LLMParame
 										}
 										className={styles.slider}
 									/>
-									<MagicInput
+									<DelightfulInput
 										value={_.get(
 											LLMValue,
 											[parameter.key, "value"],
@@ -209,7 +209,7 @@ export default function LLMParameters({ LLMValue, onChange, options }: LLMParame
 							/>
 						</div>
 						<div className={styles.right}>
-							<MagicSelect
+							<DelightfulSelect
 								options={[
 									{
 										label: <span className={styles.option}>JSON</span>,

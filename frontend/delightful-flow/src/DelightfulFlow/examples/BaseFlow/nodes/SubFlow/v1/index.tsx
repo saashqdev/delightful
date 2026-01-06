@@ -1,11 +1,11 @@
 import { useNodeConfigActions } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import { ShowColumns } from "@/MagicJsonSchemaEditor/constants"
-import Schema from "@/MagicJsonSchemaEditor/types/Schema"
+import { ShowColumns } from "@/DelightfulJsonSchemaEditor/constants"
+import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import DropdownCard from "@/common/BaseUI/DropdownCard"
 import JSONSchemaRenderer from "@/common/BaseUI/JSONSchemaRenderer"
-import MagicSelect from "@/common/BaseUI/Select"
-import { MagicJsonSchemaEditor } from "@/index"
+import DelightfulSelect from "@/common/BaseUI/Select"
+import { DelightfulJsonSchemaEditor } from "@/index"
 import { Form } from "antd"
 import { useMemoizedFn, useMount, useUpdateEffect } from "ahooks"
 import _ from "lodash"
@@ -79,7 +79,7 @@ export default function SubFlowV1() {
 			initialValues={initialValues}
 		>
 			<Form.Item name="sub_flow_id" className={styles.select} label="选择子流程">
-				<MagicSelect
+				<DelightfulSelect
 					options={subFlowOptions}
 					style={{ width: "100%" }}
 					popupClassName="nowheel"
@@ -89,7 +89,7 @@ export default function SubFlowV1() {
 			</Form.Item>
 			<div className={styles.input}>
 				<DropdownCard title="输入" height="auto">
-					<MagicJsonSchemaEditor
+					<DelightfulJsonSchemaEditor
 						data={input}
 						onChange={setInput}
 						allowExpression

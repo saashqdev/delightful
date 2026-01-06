@@ -1,6 +1,6 @@
-# MagicAppLoader 魔法应用加载器组件
+# DelightfulAppLoader 魔法应用加载器组件
 
-`MagicAppLoader` 是一个用于加载和显示微前端应用的组件，提供了应用加载状态管理、错误处理和加载动画等功能。
+`DelightfulAppLoader` 是一个用于加载和显示微前端应用的组件，提供了应用加载状态管理、错误处理和加载动画等功能。
 
 ## 属性
 
@@ -15,7 +15,7 @@
 ## 基础用法
 
 ```tsx
-import { MagicAppLoader } from '@/components/base/MagicAppLoader';
+import { DelightfulAppLoader } from '@/components/base/DelightfulAppLoader';
 
 // 基础用法
 const appMeta = {
@@ -24,14 +24,14 @@ const appMeta = {
   basename: '/my-app'
 };
 
-<MagicAppLoader
+<DelightfulAppLoader
   appMeta={appMeta}
   onLoad={() => console.log('应用加载成功')}
   onError={(error) => console.error('应用加载失败', error)}
 />
 
 // 自定义加载中和错误状态
-<MagicAppLoader
+<DelightfulAppLoader
   appMeta={appMeta}
   fallback={<div>正在加载应用...</div>}
   errorView={<div>应用加载失败，请刷新重试</div>}
@@ -39,7 +39,7 @@ const appMeta = {
 
 // 在布局中使用
 <div style={{ width: '100%', height: '100vh' }}>
-  <MagicAppLoader appMeta={appMeta} />
+  <DelightfulAppLoader appMeta={appMeta} />
 </div>
 ```
 
@@ -59,4 +59,4 @@ const appMeta = {
 -   需要集成第三方应用到现有系统时
 -   需要构建可扩展的微前端架构时
 
-MagicAppLoader 组件简化了微前端应用的加载和管理过程，提供了完善的状态处理和用户体验，是构建微前端架构的理想选择。
+DelightfulAppLoader 组件简化了微前端应用的加载和管理过程，提供了完善的状态处理和用户体验，是构建微前端架构的理想选择。

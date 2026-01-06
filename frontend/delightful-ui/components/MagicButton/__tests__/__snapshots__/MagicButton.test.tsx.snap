@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MagicButton > 快照测试 > 不同尺寸按钮快照 1`] = `
+exports[`DelightfulButton > 快照测试 > 不同尺寸按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -14,7 +14,7 @@ exports[`MagicButton > 快照测试 > 不同尺寸按钮快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicButton > 快照测试 > 不同尺寸按钮快照 2`] = `
+exports[`DelightfulButton > 快照测试 > 不同尺寸按钮快照 2`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -28,7 +28,7 @@ exports[`MagicButton > 快照测试 > 不同尺寸按钮快照 2`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicButton > 快照测试 > 主要按钮快照 1`] = `
+exports[`DelightfulButton > 快照测试 > 主要按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -42,7 +42,7 @@ exports[`MagicButton > 快照测试 > 主要按钮快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicButton > 快照测试 > 加载状态按钮快照 1`] = `
+exports[`DelightfulButton > 快照测试 > 加载状态按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -79,7 +79,7 @@ exports[`MagicButton > 快照测试 > 加载状态按钮快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicButton > 快照测试 > 带图标按钮快照 1`] = `
+exports[`DelightfulButton > 快照测试 > 带图标按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -100,7 +100,7 @@ exports[`MagicButton > 快照测试 > 带图标按钮快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicButton > 快照测试 > 文本按钮快照 1`] = `
+exports[`DelightfulButton > 快照测试 > 文本按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -114,7 +114,7 @@ exports[`MagicButton > 快照测试 > 文本按钮快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicButton > 快照测试 > 禁用状态按钮快照 1`] = `
+exports[`DelightfulButton > 快照测试 > 禁用状态按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -129,7 +129,7 @@ exports[`MagicButton > 快照测试 > 禁用状态按钮快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicButton > 快照测试 > 虚线按钮快照 1`] = `
+exports[`DelightfulButton > 快照测试 > 虚线按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -143,7 +143,7 @@ exports[`MagicButton > 快照测试 > 虚线按钮快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicButton > 快照测试 > 链接按钮快照 1`] = `
+exports[`DelightfulButton > 快照测试 > 链接按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -157,9 +157,9 @@ exports[`MagicButton > 快照测试 > 链接按钮快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicButton > 快照测试 > 隐藏按钮快照 1`] = `<DocumentFragment />`;
+exports[`DelightfulButton > 快照测试 > 隐藏按钮快照 1`] = `<DocumentFragment />`;
 
-exports[`MagicButton > 快照测试 > 默认按钮快照 1`] = `
+exports[`DelightfulButton > 快照测试 > 默认按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"

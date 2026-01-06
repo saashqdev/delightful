@@ -1,10 +1,10 @@
 import { Form, DatePicker } from "antd"
 import { useMemoizedFn } from "ahooks"
-import MagicInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
-import { useFlow } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
+import DelightfulInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
+import { useFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
 import dayjs, { Dayjs } from "dayjs"
 import { set, get } from "lodash-es"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import styles from "./index.module.less"
@@ -75,7 +75,7 @@ export default function MessageSearchV0() {
 					label={t("messageSearch.maxRecordCount", { ns: "flow" })}
 					name="max_record"
 				>
-					<MagicInput type="number" className="nodrag" />
+					<DelightfulInput type="number" className="nodrag" />
 				</Form.Item>
 
 				<Form.Item label={t("messageSearch.range", { ns: "flow" })} name="time_range">

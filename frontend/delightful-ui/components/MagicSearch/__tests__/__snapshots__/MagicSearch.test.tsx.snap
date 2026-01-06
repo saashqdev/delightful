@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MagicSearch > 快照测试 > 基础搜索框快照 1`] = `
+exports[`DelightfulSearch > 快照测试 > 基础搜索框快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-input-affix-wrapper css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r1 magic-input-css-var"
@@ -38,7 +38,7 @@ exports[`MagicSearch > 快照测试 > 基础搜索框快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSearch > 快照测试 > 大尺寸搜索框快照 1`] = `
+exports[`DelightfulSearch > 快照测试 > 大尺寸搜索框快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-input-affix-wrapper magic-input-affix-wrapper-lg css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r6 magic-input-css-var"
@@ -76,7 +76,7 @@ exports[`MagicSearch > 快照测试 > 大尺寸搜索框快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSearch > 快照测试 > 小尺寸搜索框快照 1`] = `
+exports[`DelightfulSearch > 快照测试 > 小尺寸搜索框快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-input-affix-wrapper magic-input-affix-wrapper-sm css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r7 magic-input-css-var"
@@ -114,7 +114,7 @@ exports[`MagicSearch > 快照测试 > 小尺寸搜索框快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSearch > 快照测试 > 带前缀图标搜索框快照 1`] = `
+exports[`DelightfulSearch > 快照测试 > 带前缀图标搜索框快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-input-affix-wrapper css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r3 magic-input-css-var"
@@ -136,7 +136,7 @@ exports[`MagicSearch > 快照测试 > 带前缀图标搜索框快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSearch > 快照测试 > 带后缀图标搜索框快照 1`] = `
+exports[`DelightfulSearch > 快照测试 > 带后缀图标搜索框快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-input-affix-wrapper css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r4 magic-input-css-var"
@@ -181,7 +181,7 @@ exports[`MagicSearch > 快照测试 > 带后缀图标搜索框快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSearch > 快照测试 > 带边框搜索框快照 1`] = `
+exports[`DelightfulSearch > 快照测试 > 带边框搜索框快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-input-affix-wrapper css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r8 magic-input-css-var"
@@ -219,7 +219,7 @@ exports[`MagicSearch > 快照测试 > 带边框搜索框快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSearch > 快照测试 > 带默认值搜索框快照 1`] = `
+exports[`DelightfulSearch > 快照测试 > 带默认值搜索框快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-input-affix-wrapper css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r2 magic-input-css-var"
@@ -256,7 +256,7 @@ exports[`MagicSearch > 快照测试 > 带默认值搜索框快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSearch > 快照测试 > 禁用状态搜索框快照 1`] = `
+exports[`DelightfulSearch > 快照测试 > 禁用状态搜索框快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-input-affix-wrapper magic-input-disabled magic-input-affix-wrapper-disabled css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r5 magic-input-css-var"

@@ -9,31 +9,31 @@ namespace App\Domain\Group\Repository\Persistence;
 
 use App\Domain\Chat\DTO\Group\GroupDTO;
 use App\Domain\Chat\DTO\PageResponseDTO\GroupsPageResponseDTO;
-use App\Domain\Contact\Repository\Facade\MagicUserRepositoryInterface;
-use App\Domain\Group\Entity\MagicGroupEntity;
+use App\Domain\Contact\Repository\Facade\DelightfulUserRepositoryInterface;
+use App\Domain\Group\Entity\DelightfulGroupEntity;
 use App\Domain\Group\Entity\ValueObject\GroupStatusEnum;
 use App\Domain\Group\Entity\ValueObject\GroupUserRoleEnum;
 use App\Domain\Group\Entity\ValueObject\GroupUserStatusEnum;
-use App\Domain\Group\Repository\Facade\MagicGroupRepositoryInterface;
-use App\Domain\Group\Repository\Persistence\Model\MagicGroupModel;
-use App\Domain\Group\Repository\Persistence\Model\MagicGroupUserModel;
+use App\Domain\Group\Repository\Facade\DelightfulGroupRepositoryInterface;
+use App\Domain\Group\Repository\Persistence\Model\DelightfulGroupModel;
+use App\Domain\Group\Repository\Persistence\Model\DelightfulGroupUserModel;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Interfaces\Chat\Assembler\GroupAssembler;
 use Hyperf\Database\Model\Builder;
 use Hyperf\DbConnection\Annotation\Transactional;
 use Hyperf\DbConnection\Db;
 
-readonly class MagicGroupRepository implements MagicGroupRepositoryInterface
+readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInterface
 {
     public function __construct(
-        private MagicGroupModel $groupModel,
-        private MagicGroupUserModel $groupUserModel,
-        private MagicUserRepositoryInterface $userRepository,
+        private DelightfulGroupModel $groupModel,
+        private DelightfulGroupUserModel $groupUserModel,
+        private DelightfulUserRepositoryInterface $userRepository,
     ) {
     }
 
     // 创建群组
-    public function createGroup(MagicGroupEntity $magicGroupDTO): MagicGroupEntity
+    public function createGroup(DelightfulGroupEntity $magicGroupDTO): DelightfulGroupEntity
     {
         $groupInfo = $magicGroupDTO->toArray();
         if (empty($groupInfo['id'])) {
@@ -47,7 +47,7 @@ readonly class MagicGroupRepository implements MagicGroupRepositoryInterface
     // 批量查询群组信息
 
     /**
-     * @return MagicGroupEntity[]
+     * @return DelightfulGroupEntity[]
      */
     public function getGroupsByIds(array $groupIds): array
     {
@@ -65,7 +65,7 @@ readonly class MagicGroupRepository implements MagicGroupRepositoryInterface
         return $this->groupModel::query()->where('id', $groupId)->update($data);
     }
 
-    public function getGroupInfoById(string $groupId, ?string $organizationCode = null): ?MagicGroupEntity
+    public function getGroupInfoById(string $groupId, ?string $organizationCode = null): ?DelightfulGroupEntity
     {
         $groupInfo = $this->groupModel::query()->where('id', $groupId);
         $groupInfo = Db::select($groupInfo->toSql(), $groupInfo->getBindings())[0] ?? null;
@@ -76,7 +76,7 @@ readonly class MagicGroupRepository implements MagicGroupRepositoryInterface
     }
 
     /**
-     * @return MagicGroupEntity[]
+     * @return DelightfulGroupEntity[]
      */
     public function getGroupsInfoByIds(array $groupIds, ?string $organizationCode = null, bool $keyById = false): array
     {
@@ -98,7 +98,7 @@ readonly class MagicGroupRepository implements MagicGroupRepositoryInterface
         return $groupEntities;
     }
 
-    public function addUsersToGroup(MagicGroupEntity $magicGroupEntity, array $userIds): bool
+    public function addUsersToGroup(DelightfulGroupEntity $magicGroupEntity, array $userIds): bool
     {
         $groupId = $magicGroupEntity->getId();
         $groupOwner = $magicGroupEntity->getGroupOwner();
@@ -177,7 +177,7 @@ readonly class MagicGroupRepository implements MagicGroupRepositoryInterface
 
     public function getGroupIdsByUserIds(array $userIds): array
     {
-        $groupUsers = MagicGroupUserModel::query()->whereIn('user_id', $userIds);
+        $groupUsers = DelightfulGroupUserModel::query()->whereIn('user_id', $userIds);
         $groupUsers = Db::select($groupUsers->toSql(), $groupUsers->getBindings());
         $list = [];
         foreach ($groupUsers as $groupUser) {
@@ -195,7 +195,7 @@ readonly class MagicGroupRepository implements MagicGroupRepositoryInterface
     /**
      * 将用户从群组中移除.
      */
-    public function removeUsersFromGroup(MagicGroupEntity $magicGroupEntity, array $userIds): int
+    public function removeUsersFromGroup(DelightfulGroupEntity $magicGroupEntity, array $userIds): int
     {
         return $this->groupUserModel::query()
             ->where('group_id', $magicGroupEntity->getId())
@@ -203,7 +203,7 @@ readonly class MagicGroupRepository implements MagicGroupRepositoryInterface
             ->delete();
     }
 
-    public function deleteGroup(MagicGroupEntity $magicGroupEntity): int
+    public function deleteGroup(DelightfulGroupEntity $magicGroupEntity): int
     {
         return $this->groupModel::query()
             ->where('id', $magicGroupEntity->getId())

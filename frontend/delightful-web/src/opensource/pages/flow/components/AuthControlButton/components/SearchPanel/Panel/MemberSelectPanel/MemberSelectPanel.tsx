@@ -1,7 +1,7 @@
 import { Checkbox, Flex } from "antd"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
-import MagicLogo from "@/opensource/components/MagicLogo"
-import { LogoType } from "@/opensource/components/MagicLogo/LogoType"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
+import DelightfulLogo from "@/opensource/components/DelightfulLogo"
+import { LogoType } from "@/opensource/components/DelightfulLogo/LogoType"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import { observer } from "mobx-react-lite"
@@ -90,14 +90,14 @@ function MemberSelectPanelComponent() {
 							checked={authIds.includes(member.target_id)}
 							disabled={isDisabledMember(member)}
 						/>
-						<MagicAvatar
+						<DelightfulAvatar
 							src={member.target_info?.icon}
 							alt=""
 							size={29}
 							className={styles.avatar}
 						>
-							<MagicLogo type={LogoType.ICON} />
-						</MagicAvatar>
+							<DelightfulLogo type={LogoType.ICON} />
+						</DelightfulAvatar>
 						<Flex className={styles.memberInfo} vertical>
 							<span className={styles.name}>{member.target_info?.name}</span>
 							<span className={styles.desc}>{member.target_info?.description}</span>

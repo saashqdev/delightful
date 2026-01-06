@@ -20,8 +20,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 清空官方组织的 Magic 服务商配置和模型（放在删除软删除数据之前）
-        $this->cleanOfficialMagicProviderData();
+        // 清空官方组织的 Delightful 服务商配置和模型（放在删除软删除数据之前）
+        $this->cleanOfficialDelightfulProviderData();
 
         // 清理 service_provider 相关四张表中的软删除数据
         $this->cleanSoftDeletedData();
@@ -91,12 +91,12 @@ return new class extends Migration {
     }
 
     /**
-     * 清空官方组织的 Magic 服务商配置和模型.
+     * 清空官方组织的 Delightful 服务商配置和模型.
      */
-    private function cleanOfficialMagicProviderData(): void
+    private function cleanOfficialDelightfulProviderData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('开始清空官方组织的 Magic 服务商配置和模型');
+        $logger->info('开始清空官方组织的 Delightful 服务商配置和模型');
 
         try {
             // 使用事务确保数据一致性
@@ -107,7 +107,7 @@ return new class extends Migration {
 
                 $totalDeleted = 0;
 
-                // 1. 查找官方组织中 Magic 服务商的配置ID
+                // 1. 查找官方组织中 Delightful 服务商的配置ID
                 $magicProviderConfigQuery = Db::table('service_provider_configs as configs')
                     ->join('service_provider as providers', 'configs.service_provider_id', '=', 'providers.id')
                     ->select('configs.id')
@@ -118,25 +118,25 @@ return new class extends Migration {
                 $magicConfigIds = array_column($magicProviderConfigs, 'id');
 
                 if (! empty($magicConfigIds)) {
-                    $logger->info('找到 Magic 服务商配置数量: ' . count($magicConfigIds));
+                    $logger->info('找到 Delightful 服务商配置数量: ' . count($magicConfigIds));
 
-                    // 2. 删除官方组织中 Magic 服务商下的模型
+                    // 2. 删除官方组织中 Delightful 服务商下的模型
                     $deletedModelsCount = Db::table('service_provider_models')
                         ->where('organization_code', $officialOrganizationCode)
                         ->whereIn('service_provider_config_id', $magicConfigIds)
                         ->delete();
                     $totalDeleted += $deletedModelsCount;
-                    $logger->info("删除官方组织 Magic 服务商模型: {$deletedModelsCount} 条");
+                    $logger->info("删除官方组织 Delightful 服务商模型: {$deletedModelsCount} 条");
 
-                    // 3. 删除官方组织的 Magic 服务商配置
+                    // 3. 删除官方组织的 Delightful 服务商配置
                     $deletedConfigsCount = Db::table('service_provider_configs')
                         ->where('organization_code', $officialOrganizationCode)
                         ->whereIn('id', $magicConfigIds)
                         ->delete();
                     $totalDeleted += $deletedConfigsCount;
-                    $logger->info("删除官方组织 Magic 服务商配置: {$deletedConfigsCount} 条");
+                    $logger->info("删除官方组织 Delightful 服务商配置: {$deletedConfigsCount} 条");
                 } else {
-                    $logger->info('未找到需要清理的 Magic 服务商配置');
+                    $logger->info('未找到需要清理的 Delightful 服务商配置');
                 }
 
                 // 4. 额外清理：删除所有 is_office=1 的官方组织模型
@@ -145,12 +145,12 @@ return new class extends Migration {
                     ->where('is_office', 1)
                     ->delete();
                 $totalDeleted += $deletedOfficeModelsCount;
-                $logger->info("删除官方组织 Magic 模型(is_office=1): {$deletedOfficeModelsCount} 条");
+                $logger->info("删除官方组织 Delightful 模型(is_office=1): {$deletedOfficeModelsCount} 条");
 
-                $logger->info("官方组织 Magic 服务商数据清理完成，总共删除: {$totalDeleted} 条记录");
+                $logger->info("官方组织 Delightful 服务商数据清理完成，总共删除: {$totalDeleted} 条记录");
             });
         } catch (Throwable $e) {
-            $logger->error('清理官方组织 Magic 服务商数据过程中发生错误: ' . $e->getMessage());
+            $logger->error('清理官方组织 Delightful 服务商数据过程中发生错误: ' . $e->getMessage());
             throw $e;
         }
     }

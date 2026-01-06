@@ -4,13 +4,13 @@ import type { PropsWithChildren } from "react"
 import { memo } from "react"
 import { useStyles } from "./style"
 
-export type MagicSplitterProps = PropsWithChildren<SplitterProps>
+export type DelightfulSplitterProps = PropsWithChildren<SplitterProps>
 
-const MagicSplitter = memo(function MagicSplitter({
+const DelightfulSplitter = memo(function DelightfulSplitter({
 	className,
 	children,
 	...props
-}: MagicSplitterProps) {
+}: DelightfulSplitterProps) {
 	const { styles, cx } = useStyles()
 
 	return (
@@ -21,10 +21,10 @@ const MagicSplitter = memo(function MagicSplitter({
 })
 
 // @ts-ignore
-MagicSplitter.Panel = Splitter.Panel
+DelightfulSplitter.Panel = Splitter.Panel
 
-type CompoundedComponent = typeof MagicSplitter & {
+type CompoundedComponent = typeof DelightfulSplitter & {
 	Panel: typeof Splitter.Panel
 }
 
-export default MagicSplitter as CompoundedComponent
+export default DelightfulSplitter as CompoundedComponent

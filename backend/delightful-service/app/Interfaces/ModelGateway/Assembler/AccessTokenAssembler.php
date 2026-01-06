@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\ModelGateway\Assembler;
 
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\ModelGateway\Entity\AccessTokenEntity;
 use App\Domain\ModelGateway\Entity\ValueObject\AccessTokenType;
 use App\Infrastructure\Core\PageDTO;
@@ -35,7 +35,7 @@ class AccessTokenAssembler
     }
 
     /**
-     * @param array<string, MagicUserEntity> $users
+     * @param array<string, DelightfulUserEntity> $users
      */
     public static function createDTO(AccessTokenEntity $DO, array $users = []): AccessTokenDTO
     {
@@ -62,7 +62,7 @@ class AccessTokenAssembler
     }
 
     /**
-     * @param array{total: int, list: AccessTokenEntity[], users: array<string, MagicUserEntity>} $data
+     * @param array{total: int, list: AccessTokenEntity[], users: array<string, DelightfulUserEntity>} $data
      */
     public static function createPageDTO(array $data, Page $page): PageDTO
     {

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconDeviceImac } from "@tabler/icons-react"
 import { createStyles } from "antd-style"
 import SettingItem from "../SettingItem"
@@ -56,9 +56,9 @@ function DeviceItem({ name, system, time, isCurrent = false }: DeviceItemProps) 
 				isCurrent ? (
 					t("setting.currentDevices")
 				) : (
-					<MagicButton danger type="link" style={{ padding: 0 }}>
+					<DelightfulButton danger type="link" style={{ padding: 0 }}>
 						{t("setting.exit")}
-					</MagicButton>
+					</DelightfulButton>
 				)
 			}
 		/>

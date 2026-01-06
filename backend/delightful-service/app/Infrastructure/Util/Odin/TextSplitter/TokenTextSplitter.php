@@ -93,7 +93,7 @@ class TokenTextSplitter extends TextSplitter
         $text = str_replace("\x00", "\x00\x00", $text);
 
         // 2. 把标签替换成0x00
-        $text = preg_replace('/<MagicCompressibleContent.*?<\/MagicCompressibleContent>/s', "\x00", $text);
+        $text = preg_replace('/<DelightfulCompressibleContent.*?<\/DelightfulCompressibleContent>/s', "\x00", $text);
 
         // 3. 分割文本
         if ($this->fixedSeparator) {
@@ -119,7 +119,7 @@ class TokenTextSplitter extends TextSplitter
 
         // 4. 还原文本
         // 先获取所有标签
-        preg_match_all('/<MagicCompressibleContent.*?<\/MagicCompressibleContent>/s', $originalText, $matches);
+        preg_match_all('/<DelightfulCompressibleContent.*?<\/DelightfulCompressibleContent>/s', $originalText, $matches);
         $tags = $matches[0];
         $tagIndex = 0;
 

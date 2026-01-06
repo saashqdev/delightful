@@ -7,25 +7,25 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Domain\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowAIModelEntity;
+use App\Domain\Flow\Entity\DelightfulFlowAIModelEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowAIModelQuery;
-use App\Domain\Flow\Repository\Facade\MagicFlowAIModelRepositoryInterface;
-use App\Domain\Flow\Service\MagicFlowAIModelDomainService;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowAIModelQuery;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowAIModelRepositoryInterface;
+use App\Domain\Flow\Service\DelightfulFlowAIModelDomainService;
 use App\Infrastructure\Core\ValueObject\Page;
 use HyperfTest\Cases\BaseTest;
-use HyperfTest\Cases\Domain\Flow\Entity\MockMagicFlowAIModelEntity;
+use HyperfTest\Cases\Domain\Flow\Entity\MockDelightfulFlowAIModelEntity;
 
 /**
  * @internal
  */
-class MagicFlowAIModelDomainServiceTest extends BaseTest
+class DelightfulFlowAIModelDomainServiceTest extends BaseTest
 {
     public function testSave()
     {
         $repository = $this->getRepositoryTemplate();
-        $service = new MagicFlowAIModelDomainService($repository);
-        $entity = MockMagicFlowAIModelEntity::createMockMagicFlowAIModelEntity('glm-4-9b');
+        $service = new DelightfulFlowAIModelDomainService($repository);
+        $entity = MockDelightfulFlowAIModelEntity::createMockDelightfulFlowAIModelEntity('glm-4-9b');
         $entity->setId(null);
         $this->assertNull($entity->getId());
         $entity = $service->save(FlowDataIsolation::create('DT001'), $entity);
@@ -35,7 +35,7 @@ class MagicFlowAIModelDomainServiceTest extends BaseTest
     public function testGetByName()
     {
         $repository = $this->getRepositoryTemplate();
-        $service = new MagicFlowAIModelDomainService($repository);
+        $service = new DelightfulFlowAIModelDomainService($repository);
         $entity = $service->getByName(FlowDataIsolation::create(), 'test');
         $this->assertNull($entity);
 
@@ -46,29 +46,29 @@ class MagicFlowAIModelDomainServiceTest extends BaseTest
     public function testQueries()
     {
         $repository = $this->getRepositoryTemplate();
-        $service = new MagicFlowAIModelDomainService($repository);
-        $query = new MagicFlowAIModelQuery();
+        $service = new DelightfulFlowAIModelDomainService($repository);
+        $query = new DelightfulFlowAIModelQuery();
         $page = new Page();
         $result = $service->queries(FlowDataIsolation::create(), $query, $page);
         $this->assertArrayHasKey('total', $result);
         $this->assertArrayHasKey('list', $result);
     }
 
-    private function getRepositoryTemplate(): MagicFlowAIModelRepositoryInterface
+    private function getRepositoryTemplate(): DelightfulFlowAIModelRepositoryInterface
     {
-        return new class implements MagicFlowAIModelRepositoryInterface {
-            public function save(FlowDataIsolation $dataIsolation, MagicFlowAIModelEntity $magicFlowAIModelEntity): MagicFlowAIModelEntity
+        return new class implements DelightfulFlowAIModelRepositoryInterface {
+            public function save(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelEntity $magicFlowAIModelEntity): DelightfulFlowAIModelEntity
             {
                 $magicFlowAIModelEntity->setId(123);
                 return $magicFlowAIModelEntity;
             }
 
-            public function getByName(FlowDataIsolation $dataIsolation, string $name): ?MagicFlowAIModelEntity
+            public function getByName(FlowDataIsolation $dataIsolation, string $name): ?DelightfulFlowAIModelEntity
             {
-                return MockMagicFlowAIModelEntity::createMockMagicFlowAIModelEntity($name);
+                return MockDelightfulFlowAIModelEntity::createMockDelightfulFlowAIModelEntity($name);
             }
 
-            public function queries(FlowDataIsolation $dataIsolation, MagicFlowAIModelQuery $query, Page $page): array
+            public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelQuery $query, Page $page): array
             {
                 return [
                     'total' => 0,

@@ -1,4 +1,4 @@
-import { EXPRESSION_ITEM } from "@/MagicExpressionWidget/types"
+import { EXPRESSION_ITEM } from "@/DelightfulExpressionWidget/types"
 import type { PropsWithChildren } from "react"
 import React, { useMemo } from "react"
 import { TextareaModeContext } from "./Context"

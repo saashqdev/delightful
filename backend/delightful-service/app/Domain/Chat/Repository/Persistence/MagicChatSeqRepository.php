@@ -10,19 +10,19 @@ namespace App\Domain\Chat\Repository\Persistence;
 use App\Domain\Chat\DTO\MessagesQueryDTO;
 use App\Domain\Chat\DTO\Response\ClientSequenceResponse;
 use App\Domain\Chat\Entity\Items\SeqExtra;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
-use App\Domain\Chat\Entity\ValueObject\MagicMessageStatus;
+use App\Domain\Chat\Entity\ValueObject\DelightfulMessageStatus;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
-use App\Domain\Chat\Repository\Facade\MagicChatConversationRepositoryInterface;
-use App\Domain\Chat\Repository\Facade\MagicChatSeqRepositoryInterface;
-use App\Domain\Chat\Repository\Facade\MagicMessageRepositoryInterface;
-use App\Domain\Chat\Repository\Persistence\Model\MagicChatSequenceModel;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Chat\Repository\Facade\DelightfulChatConversationRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulChatSeqRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulMessageRepositoryInterface;
+use App\Domain\Chat\Repository\Persistence\Model\DelightfulChatSequenceModel;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Repository\Facade\MagicAccountRepositoryInterface;
-use App\Domain\Contact\Repository\Facade\MagicUserRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulAccountRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulUserRepositoryInterface;
 use App\ErrorCode\ChatErrorCode;
 use App\Infrastructure\Core\Constants\Order;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -32,18 +32,18 @@ use Hyperf\Cache\Annotation\Cacheable;
 use Hyperf\Codec\Json;
 use Hyperf\DbConnection\Db;
 
-class MagicChatSeqRepository implements MagicChatSeqRepositoryInterface
+class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterface
 {
     public function __construct(
-        protected MagicChatSequenceModel $magicSeq,
-        protected MagicMessageRepositoryInterface $magicMessageRepository,
-        protected MagicAccountRepositoryInterface $magicAccountRepository,
-        protected MagicUserRepositoryInterface $magicUserRepository,
-        protected MagicChatConversationRepositoryInterface $magicUserConversationRepository,
+        protected DelightfulChatSequenceModel $magicSeq,
+        protected DelightfulMessageRepositoryInterface $magicMessageRepository,
+        protected DelightfulAccountRepositoryInterface $magicAccountRepository,
+        protected DelightfulUserRepositoryInterface $magicUserRepository,
+        protected DelightfulChatConversationRepositoryInterface $magicUserConversationRepository,
     ) {
     }
 
-    public function createSequence(array $message): MagicSeqEntity
+    public function createSequence(array $message): DelightfulSeqEntity
     {
         if (is_array($message['content'])) {
             $message['content'] = Json::encode($message['content'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
@@ -57,8 +57,8 @@ class MagicChatSeqRepository implements MagicChatSeqRepositoryInterface
     }
 
     /**
-     * @param MagicSeqEntity[] $seqList
-     * @return MagicSeqEntity[]
+     * @param DelightfulSeqEntity[] $seqList
+     * @return DelightfulSeqEntity[]
      */
     public function batchCreateSeq(array $seqList): array
     {
@@ -89,7 +89,7 @@ class MagicChatSeqRepository implements MagicChatSeqRepositoryInterface
     {
         $query = $this->magicSeq::query()
             ->where('object_type', $dataIsolation->getUserType())
-            ->where('object_id', $dataIsolation->getCurrentMagicId());
+            ->where('object_id', $dataIsolation->getCurrentDelightfulId());
         if ($userLocalMaxSeqId > 0) {
             $query->where('seq_id', '>', $userLocalMaxSeqId);
         }
@@ -105,11 +105,11 @@ class MagicChatSeqRepository implements MagicChatSeqRepositoryInterface
      * message_id= seq表的主键id,因此不需要单独对 message_id 加索引.
      * @return ClientSequenceResponse[]
      */
-    public function getAccountSeqListByMagicId(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array
+    public function getAccountSeqListByDelightfulId(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array
     {
         $query = $this->magicSeq::query()
             ->where('object_type', $dataIsolation->getUserType())
-            ->where('object_id', $dataIsolation->getCurrentMagicId())
+            ->where('object_id', $dataIsolation->getCurrentDelightfulId())
             ->where('seq_id', '>', $userLocalMaxSeqId)
             ->forceIndex('idx_object_type_id_seq_id')
             ->orderBy('seq_id')
@@ -126,7 +126,7 @@ class MagicChatSeqRepository implements MagicChatSeqRepositoryInterface
     {
         $query = $this->magicSeq::query()
             ->where('object_type', $dataIsolation->getUserType())
-            ->where('object_id', $dataIsolation->getCurrentMagicId())
+            ->where('object_id', $dataIsolation->getCurrentDelightfulId())
             ->where('app_message_id', $appMessageId)
             ->when(! empty($pageToken), function ($query) use ($pageToken) {
                 $query->where('seq_id', '>', $pageToken);
@@ -137,7 +137,7 @@ class MagicChatSeqRepository implements MagicChatSeqRepositoryInterface
         return $this->getClientSequencesResponse($seqInfos);
     }
 
-    public function getSeqByMessageId(string $messageId): ?MagicSeqEntity
+    public function getSeqByMessageId(string $messageId): ?DelightfulSeqEntity
     {
         $seqInfo = $this->getSeq($messageId);
         if ($seqInfo === null) {
@@ -220,7 +220,7 @@ sql;
     /**
      * 获取收件方消息的状态变更流.
      * message_id= seq表的主键id,因此不需要单独对 message_id 加索引.
-     * @return MagicSeqEntity[]
+     * @return DelightfulSeqEntity[]
      */
     public function getReceiveMessagesStatusChange(array $referMessageIds, string $userId): array
     {
@@ -234,7 +234,7 @@ sql;
     /**
      * 获取发件方消息的状态变更流.
      * message_id= seq表的主键id,因此不需要单独对 message_id 加索引.
-     * @return MagicSeqEntity[]
+     * @return DelightfulSeqEntity[]
      */
     public function getSenderMessagesStatusChange(string $senderMessageId, string $userId): array
     {
@@ -284,7 +284,7 @@ sql;
     /**
      * Retrieve the sequence (seq) lists of both the sender and the receiver based on the $magicMessageId (generally used in the message editing scenario).
      */
-    public function getBothSeqListByMagicMessageId(string $magicMessageId): array
+    public function getBothSeqListByDelightfulMessageId(string $magicMessageId): array
     {
         $query = $this->magicSeq::query()->where('magic_message_id', $magicMessageId);
         return Db::select($query->toSql(), $query->getBindings());
@@ -298,7 +298,7 @@ sql;
      * 1. Add composite index: CREATE INDEX idx_magic_message_id_object_id_seq_id ON magic_chat_sequences (magic_message_id, object_id, seq_id)
      * 2. This avoids table lookup queries and completes operations directly on the index
      */
-    public function getMinSeqListByMagicMessageId(string $magicMessageId): array
+    public function getMinSeqListByDelightfulMessageId(string $magicMessageId): array
     {
         // Use window function to group by object_id and select only the minimum seq_id for each user
         $sql = '
@@ -317,9 +317,9 @@ sql;
     /**
      * 获取消息的撤回 seq.
      */
-    public function getMessageRevokedSeq(string $messageId, MagicUserEntity $userEntity, ControlMessageType $controlMessageType): ?MagicSeqEntity
+    public function getMessageRevokedSeq(string $messageId, DelightfulUserEntity $userEntity, ControlMessageType $controlMessageType): ?DelightfulSeqEntity
     {
-        $accountId = $userEntity->getMagicId();
+        $accountId = $userEntity->getDelightfulId();
         $query = $this->magicSeq::query()
             ->where('object_type', $userEntity->getUserType()->value)
             ->where('object_id', $accountId)
@@ -334,7 +334,7 @@ sql;
     }
 
     // todo 移到 magic_chat_topic_messages 处理
-    public function getConversationSeqByType(string $magicId, string $conversationId, ControlMessageType $seqType): ?MagicSeqEntity
+    public function getConversationSeqByType(string $magicId, string $conversationId, ControlMessageType $seqType): ?DelightfulSeqEntity
     {
         $query = $this->magicSeq::query()
             ->where('conversation_id', $conversationId)
@@ -350,7 +350,7 @@ sql;
     }
 
     /**
-     * @return MagicSeqEntity[]
+     * @return DelightfulSeqEntity[]
      */
     public function batchGetSeqByMessageIds(array $messageIds): array
     {
@@ -382,7 +382,7 @@ sql;
     }
 
     // 为了移除脏数据写的方法
-    public function getSeqByMagicId(string $magicId, int $limit): array
+    public function getSeqByDelightfulId(string $magicId, int $limit): array
     {
         $query = $this->magicSeq::query()
             ->where('object_type', ConversationType::User->value)
@@ -402,7 +402,7 @@ sql;
         return Db::select($query->toSql(), $query->getBindings());
     }
 
-    public function batchUpdateSeqStatus(array $seqIds, MagicMessageStatus $status): int
+    public function batchUpdateSeqStatus(array $seqIds, DelightfulMessageStatus $status): int
     {
         $seqIds = array_values(array_unique($seqIds));
         if (empty($seqIds)) {
@@ -413,7 +413,7 @@ sql;
             ->update(['status' => $status->value]);
     }
 
-    public function updateSeqRelation(MagicSeqEntity $seqEntity): bool
+    public function updateSeqRelation(DelightfulSeqEntity $seqEntity): bool
     {
         return (bool) $this->magicSeq::query()
             ->where('id', $seqEntity->getId())
@@ -427,7 +427,7 @@ sql;
     /**
      * 更新消息接收人列表.
      */
-    public function updateReceiveList(MagicSeqEntity $seqEntity): bool
+    public function updateReceiveList(DelightfulSeqEntity $seqEntity): bool
     {
         $receiveList = $seqEntity->getReceiveList();
         $receiveListJson = $receiveList ? Json::encode($receiveList->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : null;
@@ -443,7 +443,7 @@ sql;
      * Get sequences by conversation ID and seq IDs.
      * @param string $conversationId 会话ID
      * @param array $seqIds 序列ID数组
-     * @return MagicSeqEntity[] 序列实体数组
+     * @return DelightfulSeqEntity[] 序列实体数组
      */
     public function getSequencesByConversationIdAndSeqIds(string $conversationId, array $seqIds): array
     {
@@ -462,14 +462,14 @@ sql;
 
     /**
      * 获取消息的状态变更流.
-     * @return MagicSeqEntity[]
+     * @return DelightfulSeqEntity[]
      */
-    private function getMessagesStatusChangeSeq(array $referMessageIds, MagicUserEntity $userEntity): array
+    private function getMessagesStatusChangeSeq(array $referMessageIds, DelightfulUserEntity $userEntity): array
     {
         // 将 orWhereIn 拆分为 2 条查询,避免索引失效
         $query = $this->magicSeq::query()
             ->where('object_type', $userEntity->getUserType()->value)
-            ->where('object_id', $userEntity->getMagicId())
+            ->where('object_id', $userEntity->getDelightfulId())
             ->whereIn('refer_message_id', $referMessageIds)
             ->forceIndex('idx_object_type_id_refer_message_id')
             ->orderBy('seq_id', 'desc');
@@ -477,7 +477,7 @@ sql;
         // 从 refer_message_id 中找出消息的最新状态
         $query = $this->magicSeq::query()
             ->where('object_type', $userEntity->getUserType()->value)
-            ->where('object_id', $userEntity->getMagicId())
+            ->where('object_id', $userEntity->getDelightfulId())
             ->whereIn('seq_id', $referMessageIds)
             ->forceIndex('idx_object_type_id_seq_id')
             ->orderBy('seq_id', 'desc');
@@ -542,14 +542,14 @@ sql;
     }
 
     // 避免 redis 缓存序列化的对象,占用太多内存
-    private function getAccountIdByUserId(string $uid): ?MagicUserEntity
+    private function getAccountIdByUserId(string $uid): ?DelightfulUserEntity
     {
         // 根据uid找到account_id
         return $this->magicUserRepository->getUserById($uid);
     }
 
     /**
-     * @return MagicSeqEntity[]
+     * @return DelightfulSeqEntity[]
      */
     private function getSeqEntities(array $seqList): array
     {

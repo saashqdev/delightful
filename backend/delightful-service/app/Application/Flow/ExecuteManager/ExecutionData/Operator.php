@@ -87,12 +87,12 @@ class Operator
         $this->avatar = $avatar;
     }
 
-    public function getMagicId(): string
+    public function getDelightfulId(): string
     {
         return $this->magicId;
     }
 
-    public function setMagicId(string $magicId): void
+    public function setDelightfulId(string $magicId): void
     {
         $this->magicId = $magicId;
     }

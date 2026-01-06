@@ -12,7 +12,7 @@ import { Connection, Edge, addEdge, applyEdgeChanges, applyNodeChanges } from "r
 import { useNodeChangeListener } from "../context/NodeChangeListenerContext/NodeChangeListenerContext"
 import { defaultEdgeConfig } from "../edges"
 import { nodeManager } from "../register/node"
-import { FlowType, MagicFlow } from "../types/flow"
+import { FlowType, DelightfulFlow } from "../types/flow"
 import {
 	generateStartNode,
 	getExtraEdgeConfigBySourceNode,
@@ -37,8 +37,8 @@ export enum UpdateStepType {
 }
 
 type UseBaseFlowProps = {
-	currentFlow?: MagicFlow.Flow
-	paramsName: MagicFlow.ParamsName
+	currentFlow?: DelightfulFlow.Flow
+	paramsName: DelightfulFlow.ParamsName
 }
 
 export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProps) {
@@ -50,7 +50,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 	const debuggerMode = query.get("debug") === "true"
 
 	// Current flow details
-	const [flow, setFlow] = useState(null as MagicFlow.Flow | null)
+	const [flow, setFlow] = useState(null as DelightfulFlow.Flow | null)
 
 	// 2. Use batch-processing hook
 	const { processNodesBatch, isProcessing, progress, stopProcessing } = useNodeBatchProcessing({
@@ -62,7 +62,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 	const [description, setDescription] = useState("")
 
 	// Current node configuration
-	const [nodeConfig, setNodeConfig] = useState({} as Record<string, MagicFlow.Node>)
+	const [nodeConfig, setNodeConfig] = useState({} as Record<string, DelightfulFlow.Node>)
 
 	// Whether to show the material panel
 	const [showMaterialPanel, setShowMaterialPanel] = useState(true)
@@ -71,14 +71,14 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 
 	const [selectedEdgeId, setSelectedEdgeId] = useState(null as null | string)
 
-	const [nodes, setNodes] = useState([] as MagicFlow.Node[])
+	const [nodes, setNodes] = useState([] as DelightfulFlow.Node[])
 	const [edges, setEdges] = useState([] as Edge[])
 
 	const flowInstance = useRef<HTMLDivElement>(null)
 
 	const { nodeChangeEventListener } = useNodeChangeListener()
 
-	const flowDesignListener = useEventEmitter<MagicFlow.FlowEventListener>()
+	const flowDesignListener = useEventEmitter<DelightfulFlow.FlowEventListener>()
 
 	const { takeSnapshot, undo, redo } = useUndoRedo(debuggerMode)
 
@@ -150,7 +150,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 	// }, [nodes, edges])
 
 	const getDefaultFlow = useMemoizedFn(() => {
-		const defaultNodes = [] as MagicFlow.Node[]
+		const defaultNodes = [] as DelightfulFlow.Node[]
 
 		/** If a start node is registered, add it to the list */
 		if (isRegisteredStartNode()) {
@@ -170,12 +170,12 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 		}
 	})
 
-	const updateInternalDataByFlow = useMemoizedFn((serverFlow: MagicFlow.Flow) => {
+	const updateInternalDataByFlow = useMemoizedFn((serverFlow: DelightfulFlow.Flow) => {
 		setDescription(serverFlow.description)
 
-		const cacheNodes = [] as MagicFlow.Node[]
+		const cacheNodes = [] as DelightfulFlow.Node[]
 		const renderEdges = [] as Edge[]
-		const cacheConfig = {} as Record<string, MagicFlow.Node>
+		const cacheConfig = {} as Record<string, DelightfulFlow.Node>
 		for (let i = 0; i < serverFlow.nodes.length; i++) {
 			const node = serverFlow.nodes[i]
 
@@ -227,7 +227,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 	})
 
 	useAsyncEffect(async () => {
-		const serverFlow = currentFlow || (getDefaultFlow() as MagicFlow.Flow)
+		const serverFlow = currentFlow || (getDefaultFlow() as DelightfulFlow.Flow)
 
 		if (serverFlow?.nodes?.length === 0 && isRegisteredStartNode()) {
 			const startNode = generateStartNode(paramsName)
@@ -249,7 +249,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 		}
 	}, [currentFlow])
 
-	const updateFlow = useMemoizedFn((flowConfig: MagicFlow.Flow) => {
+	const updateFlow = useMemoizedFn((flowConfig: DelightfulFlow.Flow) => {
 		setFlow(flowConfig)
 	})
 
@@ -268,7 +268,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 
 	// Debounce node config updates to reduce churn
 	const { run: debouncedUpdateConfig } = useDebounceFn(
-		(node: MagicFlow.Node, previousConfig: Record<string, MagicFlow.Node>) => {
+		(node: DelightfulFlow.Node, previousConfig: Record<string, DelightfulFlow.Node>) => {
 			// Functional update: only mutate the targeted node
 			setNodeConfig((prevConfig) => {
 				// Create a new config object while preserving other references
@@ -294,7 +294,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 
 	// Update node configuration
 	const updateNodeConfig = useMemoizedFn(
-		(node: MagicFlow.Node, originalNode?: MagicFlow.Node) => {
+		(node: DelightfulFlow.Node, originalNode?: DelightfulFlow.Node) => {
 			const oldNodeIndex = nodes.findIndex((n) => n.id === node.id)
 
 			// Create snapshot
@@ -453,7 +453,7 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 	})
 
 	const addNode = useMemoizedFn(
-		(newNode: MagicFlow.Node | MagicFlow.Node[], newEdges?: Edge[]) => {
+		(newNode: DelightfulFlow.Node | DelightfulFlow.Node[], newEdges?: Edge[]) => {
 			const newNodes = _.castArray(newNode)
 			const cloneNodes = _.cloneDeep(newNodes)
 			cloneNodes.forEach((cloneNode) => {

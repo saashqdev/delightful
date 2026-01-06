@@ -64,11 +64,11 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 1. 结合上下文提炼用户的问题，生成多个关键词，最多不超过 5 个，多个关键词用英文逗号"," 隔开，用于使用不同关键词从知识库中检索最相关的信息；
 2. 结合上下文，分析用户的问题，生成 `names` 参数，用于指定与用户问题可能有关的多个知识库名称，按照相关性排序，相关性需结合上下文、知识库名称和知识库描述进行判断；
 3. 使用关键词和用户问题，调用 `{$this->getName()}` 工具检索知识库中的内容，关键词的参数是 `keyword`，用户问题的参数是 `question`, 请确保参数都被正确填入，工具将返回与用户问题相似度最高的内容片段；
-4. 知识库检索出来的内容里会包含一些自定义的 Magic 标签，你要善于使用它们，有以下几种标签：
-    - <MagicImage></MagicImage> 表示一个图片，如 <MagicImage>cp_xxxxxxx</MagicImage>，每个标签都会在前端消息卡片渲染出一张图片；
-    - <MagicVideo></MagicVideo> 表示一个视频，如 <MagicVideo>cp_xxxxxxx</MagicVideo>，每个标签都会在前端消息卡片渲染出一个视频；
-    - <MagicMention></MagicMention> 表示一个人员信息，如 <MagicMention>cp_xxxxxxx</MagicMention>，每个标签都会在前端消息卡片形成一个 @某某人 的效果；
-5. 优先使用包含 <MagicImage></MagicImage>、<MagicVideo></MagicVideo>、<MagicMention></MagicMention> 等有 Magic 标签的片段；
+4. 知识库检索出来的内容里会包含一些自定义的 Delightful 标签，你要善于使用它们，有以下几种标签：
+    - <DelightfulImage></DelightfulImage> 表示一个图片，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，每个标签都会在前端消息卡片渲染出一张图片；
+    - <DelightfulVideo></DelightfulVideo> 表示一个视频，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，每个标签都会在前端消息卡片渲染出一个视频；
+    - <DelightfulMention></DelightfulMention> 表示一个人员信息，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，每个标签都会在前端消息卡片形成一个 @某某人 的效果；
+5. 优先使用包含 <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> 等有 Delightful 标签的片段；
 6. 结合知识库返回的内容整理后尽可能丰富地回答用户的问题。
 ## 工具中关键的返回值说明
 - fragments: 本次检索到的所有知识库片段
@@ -76,7 +76,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 - fragments.*.metadata.url: 当前片段的原文链接
 - graph.*.content: 来自知识图谱的数据，能增强信息，让你更好回答问题
 ## 限制
-- 回答的内容中不允许出现不是Magic标签的链接。
+- 回答的内容中不允许出现不是Delightful标签的链接。
 MARKDOWN;
     }
 

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\ExecuteManager\NodeRunner\TextSplitter;
 
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
-use App\Application\Flow\ExecuteManager\MagicFlowExecutor;
+use App\Application\Flow\ExecuteManager\DelightfulFlowExecutor;
 use App\Domain\Flow\Entity\ValueObject\Node;
 use App\Domain\Flow\Entity\ValueObject\NodeOutput;
 use App\Domain\Flow\Entity\ValueObject\NodeType;
@@ -100,7 +100,7 @@ JSON, true)));
             $vertexResult->setResult($result);
         });
 
-        $runner = MagicFlowExecutor::getNodeRunner($node);
+        $runner = DelightfulFlowExecutor::getNodeRunner($node);
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $runner->execute($vertexResult, $executionData, []);

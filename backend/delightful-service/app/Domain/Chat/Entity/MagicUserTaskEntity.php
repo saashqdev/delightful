@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Entity;
 
 use App\Infrastructure\Core\AbstractEntity;
 
-class MagicUserTaskEntity extends AbstractEntity
+class DelightfulUserTaskEntity extends AbstractEntity
 {
     protected string $name;
 
@@ -19,7 +19,7 @@ class MagicUserTaskEntity extends AbstractEntity
 
     protected string $time;
 
-    protected MagicUserTaskValueEntity $value;
+    protected DelightfulUserTaskValueEntity $value;
 
     /**
      * Get the value of name.
@@ -96,7 +96,7 @@ class MagicUserTaskEntity extends AbstractEntity
     /**
      * Get the value of value.
      */
-    public function getValue(): MagicUserTaskValueEntity
+    public function getValue(): DelightfulUserTaskValueEntity
     {
         return $this->value;
     }
@@ -104,7 +104,7 @@ class MagicUserTaskEntity extends AbstractEntity
     /**
      * Set the value of value.
      */
-    public function setValue(MagicUserTaskValueEntity $value): self
+    public function setValue(DelightfulUserTaskValueEntity $value): self
     {
         $this->value = $value;
 

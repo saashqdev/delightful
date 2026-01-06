@@ -1,4 +1,4 @@
-import MagicEmpty from "@/opensource/components/base/MagicEmpty"
+import DelightfulEmpty from "@/opensource/components/base/DelightfulEmpty"
 import type { Knowledge } from "@/types/knowledge"
 
 import { IconTrash } from "@tabler/icons-react"
@@ -8,7 +8,7 @@ import type { Dispatch, RefObject, SetStateAction } from "react"
 import { useMemo, createRef } from "react"
 import { useMemoizedFn } from "ahooks"
 import { t } from "i18next"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { hasEditRight } from "@/opensource/pages/flow/components/AuthControlButton/types"
 import { KnowledgeApi } from "@/apis"
 import type { AddFragmentRef } from "../AddFragment"
@@ -122,7 +122,7 @@ export default function Fragments({
 
 	return (
 		<div className={styles.wrapper}>
-			<MagicSpin section spinning={false}>
+			<DelightfulSpin section spinning={false}>
 				{fragments.map((fragment, i) => {
 					return (
 						<FragmentMenu
@@ -156,8 +156,8 @@ export default function Fragments({
 						</FragmentMenu>
 					)
 				})}
-				{fragments.length === 0 && <MagicEmpty className={styles.empty} />}
-			</MagicSpin>
+				{fragments.length === 0 && <DelightfulEmpty className={styles.empty} />}
+			</DelightfulSpin>
 		</div>
 	)
 }

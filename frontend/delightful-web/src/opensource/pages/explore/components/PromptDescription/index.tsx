@@ -10,10 +10,10 @@ import {
 	IconUserPlus,
 	IconX,
 } from "@tabler/icons-react"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicEmpty from "@/opensource/components/base/MagicEmpty"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulEmpty from "@/opensource/components/base/DelightfulEmpty"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import defaultAgentAvatar from "@/assets/logos/agent-avatar.jpg"
 import type { PromptCard as PromptCardType } from "../PromptCard/types"
 import useStyles from "./style"
@@ -37,23 +37,23 @@ const PropmtDescription = memo(
 		if (!data)
 			return (
 				<Flex vertical className={styles.container} align="center" justify="space-between">
-					<MagicEmpty />
+					<DelightfulEmpty />
 				</Flex>
 			)
 
 		return (
 			<Flex vertical className={styles.container} align="center" justify="space-between">
-				<MagicButton
-					icon={<MagicIcon component={IconX} />}
+				<DelightfulButton
+					icon={<DelightfulIcon component={IconX} />}
 					type="text"
 					className={styles.close}
 					onClick={onClose}
 				/>
 				<Flex align="center" vertical gap={12} className={styles.top}>
 					{data.robot_avatar ? (
-						<MagicAvatar src={data.robot_avatar} size={50} style={{ borderRadius: 8 }}>
+						<DelightfulAvatar src={data.robot_avatar} size={50} style={{ borderRadius: 8 }}>
 							{data.robot_name}
-						</MagicAvatar>
+						</DelightfulAvatar>
 					) : (
 						<img src={defaultAgentAvatar} alt="" className={styles.defaultAvatar} />
 					)}
@@ -70,14 +70,14 @@ const PropmtDescription = memo(
 					<Flex align="center" justify="space-around" gap={4} className={styles.nums}>
 						<Flex flex={1} align="center" vertical justify="center" gap={4}>
 							<Flex align="center" className={styles.numLabel}>
-								<MagicIcon component={IconThumbUp} size={14} color="currentColor" />
+								<DelightfulIcon component={IconThumbUp} size={14} color="currentColor" />
 								{t("explore.descriptionPanel.good")}
 							</Flex>
 							<span className={styles.num}>{data.created_info?.like_num}</span>
 						</Flex>
 						<Flex flex={1} align="center" vertical justify="center" gap={4}>
 							<Flex align="center" className={styles.numLabel}>
-								<MagicIcon
+								<DelightfulIcon
 									component={IconUserHeart}
 									size={14}
 									color="currentColor"
@@ -91,21 +91,21 @@ const PropmtDescription = memo(
 				<Flex vertical className={styles.buttons} gap={8}>
 					{!data.is_add ? (
 						<>
-							<MagicButton
+							<DelightfulButton
 								type="primary"
 								className={cx(styles.button)}
 								icon={
-									<MagicIcon component={IconMessagePlus} size={18} color="#fff" />
+									<DelightfulIcon component={IconMessagePlus} size={18} color="#fff" />
 								}
 								onClick={() => onAddFriend?.(data, true, true)}
 							>
 								{t("explore.descriptionPanel.addFriendAndChat")}
-							</MagicButton>
-							<MagicButton
+							</DelightfulButton>
+							<DelightfulButton
 								type="text"
 								className={cx(styles.button, styles.plainButton)}
 								icon={
-									<MagicIcon
+									<DelightfulIcon
 										component={IconUserPlus}
 										color="currentColor"
 										size={18}
@@ -114,16 +114,16 @@ const PropmtDescription = memo(
 								onClick={() => onAddFriend?.(data, true, false)}
 							>
 								{t("explore.descriptionPanel.onlyAddAgent")}
-							</MagicButton>
+							</DelightfulButton>
 						</>
 					) : (
 						<>
-							<MagicButton
+							<DelightfulButton
 								type="text"
 								disabled
 								className={cx(styles.button, styles.disabledButton)}
 								icon={
-									<MagicIcon
+									<DelightfulIcon
 										component={IconUserPlus}
 										size={18}
 										color="currentColor"
@@ -131,15 +131,15 @@ const PropmtDescription = memo(
 								}
 							>
 								{t("explore.descriptionPanel.alreadyAddAgent")}
-							</MagicButton>
-							<MagicButton
+							</DelightfulButton>
+							<DelightfulButton
 								type="text"
 								className={cx(styles.button, styles.plainButton)}
-								icon={<MagicIcon component={IconMessage} size={18} />}
+								icon={<DelightfulIcon component={IconMessage} size={18} />}
 								onClick={() => onAddFriend?.(data, false, true)}
 							>
 								{t("explore.descriptionPanel.initiateAsession")}
-							</MagicButton>
+							</DelightfulButton>
 						</>
 					)}
 				</Flex>

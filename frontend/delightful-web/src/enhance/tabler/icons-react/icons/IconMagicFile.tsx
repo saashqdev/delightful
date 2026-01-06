@@ -1,6 +1,6 @@
 import { memo } from "react"
 
-const IconMagicFile = memo(() => {
+const IconDelightfulFile = memo(() => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -18,4 +18,4 @@ const IconMagicFile = memo(() => {
 	)
 })
 
-export default IconMagicFile
+export default IconDelightfulFile

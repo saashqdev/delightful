@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Infrastructure\Utils;
+namespace Delightful\SuperDelightful\Infrastructure\Utils;
 
 use App\ErrorCode\EventErrorCode;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ValueObject\TaskEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\TaskEvent;
 
 class TaskEventUtil
 {

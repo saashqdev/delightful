@@ -3,9 +3,9 @@
 ## Basic example
 
 ```jsx
-import { MagicConditionEdit } from '@/index';
+import { DelightfulConditionEdit } from '@/index';
 import React,{ useState, useCallback } from "react"
-import { mockDataSource, mockNodeMap } from "@/MagicExpressionWidget/components/dataSource"
+import { mockDataSource, mockNodeMap } from "@/DelightfulExpressionWidget/components/dataSource"
 
 
 export default () => {
@@ -16,17 +16,17 @@ export default () => {
         setExpression(val)
     }, [])
 
-    return <MagicConditionEdit value={expression} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap}/>
+    return <DelightfulConditionEdit value={expression} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap}/>
 }
 ```
 
 
-## MagicConditionEditWrap
+## DelightfulConditionEditWrap
 
 ```jsx
-import MagicConditionEditWrap from '@/common/BaseUI/MagicConditionWrap/index';
+import DelightfulConditionEditWrap from '@/common/BaseUI/DelightfulConditionWrap/index';
 import React,{ useState, useCallback } from "react"
-import { mockDataSource, mockNodeMap } from "@/MagicExpressionWidget/components/dataSource"
+import { mockDataSource, mockNodeMap } from "@/DelightfulExpressionWidget/components/dataSource"
 
 
 export default () => {
@@ -39,7 +39,7 @@ export default () => {
         console.log('value:', val)
     }, [])
 
-    return <MagicConditionEditWrap value={expression.structure} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap}/>
+    return <DelightfulConditionEditWrap value={expression.structure} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap}/>
 }
 ```
 

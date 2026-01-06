@@ -1,6 +1,6 @@
-import FileIcon from "@/opensource/pages/superMagic/assets/svg/file.svg"
-import CommonHeader from "@/opensource/pages/superMagic/components/Detail/components/CommonHeader"
-import { getLanguage } from "@/opensource/pages/superMagic/utils/handleFIle"
+import FileIcon from "@/opensource/pages/superDelightful/assets/svg/file.svg"
+import CommonHeader from "@/opensource/pages/superDelightful/components/Detail/components/CommonHeader"
+import { getLanguage } from "@/opensource/pages/superDelightful/utils/handleFIle"
 // @ts-ignore
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 // @ts-ignore
@@ -9,8 +9,8 @@ import { useStyles } from "./style"
 import CommonFooter from "../../components/CommonFooter"
 import { Flex } from "antd"
 import { useMemo } from "react"
-import MagicFileIcon from "@/opensource/components/base/MagicFileIcon"
-import { useFileData } from "@/opensource/pages/superMagic/hooks/useFileData"
+import DelightfulFileIcon from "@/opensource/components/base/DelightfulFileIcon"
+import { useFileData } from "@/opensource/pages/superDelightful/hooks/useFileData"
 
 export default function CodeViewer({
 	data,
@@ -39,7 +39,7 @@ export default function CodeViewer({
 	}, [fileData, displayContent])
 	const Icon = useMemo(() => {
 		return file_extension ? (
-			<MagicFileIcon type={file_extension} size={20} />
+			<DelightfulFileIcon type={file_extension} size={20} />
 		) : (
 			<img src={FileIcon} width={20} height={20} alt="" />
 		)

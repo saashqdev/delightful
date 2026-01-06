@@ -11,10 +11,10 @@ export default {
     sidebar: {
       '/zh/tutorial/': [
         {
-          text: 'Magic介绍',
+          text: 'Delightful介绍',
           collapsed: false,
           items: [
-            { text: '什么是Magic', link: '/zh/tutorial/magic-info/index' },
+            { text: '什么是Delightful', link: '/zh/tutorial/magic-info/index' },
             { text: '名称解释', link: '/zh/tutorial/magic-info/names' },
             { text: '核心功能', link: '/zh/tutorial/magic-info/core-function' },
             // { text: '开源版和企业版', link: '/zh/tutorial/magic-info/opensource-enterprise' },
@@ -60,7 +60,7 @@ export default {
           ]
         },
         {
-          text: 'Magic API',
+          text: 'Delightful API',
           collapsed: false,
           items: [
             { text: 'Flow API', link: '/zh/tutorial/basic/open-api/flow-open-api' },
@@ -158,7 +158,7 @@ export default {
           collapsed: false,
           items: [
             { text: 'Docker 安装', link: '/zh/development/deploy/docker' },
-            { text: 'Super Magic 安装', link: '/zh/development/deploy/super-magic' },
+            { text: 'Super Delightful 安装', link: '/zh/development/deploy/super-magic' },
           ]
         },
 
@@ -186,7 +186,7 @@ export default {
     },
     footer: {
       message: '基于 Apache 2.0 许可发布',
-      copyright: 'Copyright © 2025-present Magic Docs'
+      copyright: 'Copyright © 2025-present Delightful Docs'
     }
   }
 } 

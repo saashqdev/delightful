@@ -1,6 +1,6 @@
-import type { MagicButtonProps } from "@/opensource/components/base/MagicButton"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import type { DelightfulButtonProps } from "@/opensource/components/base/DelightfulButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconClockPlay } from "@tabler/icons-react"
 import { useTranslation } from "react-i18next"
 import { Popover } from "antd"
@@ -8,7 +8,7 @@ import ConversationTaskService from "@/opensource/services/chat/conversation/Con
 import TaskContent from "./components/TaskContent"
 import { useStyles } from "./styles"
 
-interface TimedTaskButtonProps extends Omit<MagicButtonProps, "onClick"> {
+interface TimedTaskButtonProps extends Omit<DelightfulButtonProps, "onClick"> {
 	conversationId?: string
 	iconSize?: number
 }
@@ -28,9 +28,9 @@ function TimedTaskButton({
 			content={<TaskContent conversationId={conversationId} />}
 			trigger="click"
 		>
-			<MagicButton
+			<DelightfulButton
 				type="text"
-				icon={<MagicIcon color="currentColor" size={iconSize} component={IconClockPlay} />}
+				icon={<DelightfulIcon color="currentColor" size={iconSize} component={IconClockPlay} />}
 				className={className}
 				onClick={() => {
 					ConversationTaskService.getTaskList()
@@ -38,7 +38,7 @@ function TimedTaskButton({
 				{...props}
 			>
 				{t("chat.timedTask.title")}
-			</MagicButton>
+			</DelightfulButton>
 		</Popover>
 	)
 }

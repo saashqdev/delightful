@@ -8,18 +8,18 @@ declare(strict_types=1);
 namespace App\Domain\Token\Item;
 
 use App\Domain\Token\Entity\AbstractEntity;
-use App\Domain\Token\Repository\Facade\MagicTokenExtraInterface;
+use App\Domain\Token\Repository\Facade\DelightfulTokenExtraInterface;
 
-class MagicTokenExtra extends AbstractEntity implements MagicTokenExtraInterface
+class DelightfulTokenExtra extends AbstractEntity implements DelightfulTokenExtraInterface
 {
     protected ?int $magicEnvId = null;
 
-    public function getMagicEnvId(): ?int
+    public function getDelightfulEnvId(): ?int
     {
         return $this->magicEnvId;
     }
 
-    public function setMagicEnvId(?int $magicEnvId): void
+    public function setDelightfulEnvId(?int $magicEnvId): void
     {
         $this->magicEnvId = $magicEnvId;
     }
@@ -27,7 +27,7 @@ class MagicTokenExtra extends AbstractEntity implements MagicTokenExtraInterface
     public function setTokenExtraData(array $extraData): self
     {
         if (isset($extraData['magic_env_id'])) {
-            $this->setMagicEnvId($extraData['magic_env_id']);
+            $this->setDelightfulEnvId($extraData['magic_env_id']);
         }
         return $this;
     }

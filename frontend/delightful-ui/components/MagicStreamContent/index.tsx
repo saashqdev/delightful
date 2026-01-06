@@ -3,16 +3,16 @@ import { useUpdateEffect } from "ahooks"
 import type { HTMLAttributes, ReactNode } from "react"
 import { memo } from "react"
 
-export interface MagicStreamContentProps extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
+export interface DelightfulStreamContentProps extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
 	content: string
 	children?: (content: string) => ReactNode
 }
 
-const MagicStreamContent = memo(function MagicStreamContent({
+const DelightfulStreamContent = memo(function DelightfulStreamContent({
 	content,
 	children,
 	...props
-}: MagicStreamContentProps) {
+}: DelightfulStreamContentProps) {
 	const { content: typingContent, add } = useTyping(content)
 
 	useUpdateEffect(() => {
@@ -22,4 +22,4 @@ const MagicStreamContent = memo(function MagicStreamContent({
 	return <div {...props}>{children ? children(typingContent) : typingContent}</div>
 })
 
-export default MagicStreamContent
+export default DelightfulStreamContent

@@ -1,8 +1,8 @@
 import { Form } from "antd"
-import { ExpressionMode } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
-import type { InputExpressionProps } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
-import type { WidgetExpressionValue } from "@delightful/delightful-flow/dist/common/BaseUI/MagicExpressionWrap"
-import MagicExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicExpressionWrap"
+import { ExpressionMode } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
+import type { InputExpressionProps } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import type { WidgetExpressionValue } from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
+import DelightfulExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
 import { cx } from "antd-style"
 import styles from "./index.module.less"
 
@@ -20,7 +20,7 @@ interface LLMInput extends Partial<InputExpressionProps> {
 	showCustomLabel?: boolean
 }
 
-export default function MagicExpression({
+export default function DelightfulExpression({
 	label,
 	name,
 	value,
@@ -52,7 +52,7 @@ export default function MagicExpression({
 					required={required}
 					label={showCustomLabel ? "" : label}
 				>
-					<MagicExpressionWrap
+					<DelightfulExpressionWrap
 						onlyExpression
 						mode={ExpressionMode.TextArea}
 						placeholder={placeholder}

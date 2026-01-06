@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MagicTag > 快照测试 > 不同样式标签快照 1`] = `
+exports[`DelightfulTag > 快照测试 > 不同样式标签快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-tag magic-tag-success acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r6"
@@ -30,7 +30,7 @@ exports[`MagicTag > 快照测试 > 不同样式标签快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicTag > 快照测试 > 不同样式标签快照 2`] = `
+exports[`DelightfulTag > 快照测试 > 不同样式标签快照 2`] = `
 <DocumentFragment>
   <span
     class="magic-tag magic-tag-warning acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r7"
@@ -60,7 +60,7 @@ exports[`MagicTag > 快照测试 > 不同样式标签快照 2`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicTag > 快照测试 > 不同颜色标签快照 1`] = `
+exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-tag magic-tag-blue acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r2"
@@ -90,7 +90,7 @@ exports[`MagicTag > 快照测试 > 不同颜色标签快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicTag > 快照测试 > 不同颜色标签快照 2`] = `
+exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 2`] = `
 <DocumentFragment>
   <span
     class="magic-tag magic-tag-red acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r3"
@@ -120,7 +120,7 @@ exports[`MagicTag > 快照测试 > 不同颜色标签快照 2`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicTag > 快照测试 > 不同颜色标签快照 3`] = `
+exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 3`] = `
 <DocumentFragment>
   <span
     class="magic-tag magic-tag-green acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r4"
@@ -150,7 +150,7 @@ exports[`MagicTag > 快照测试 > 不同颜色标签快照 3`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicTag > 快照测试 > 可关闭标签快照 1`] = `
+exports[`DelightfulTag > 快照测试 > 可关闭标签快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r5"
@@ -180,7 +180,7 @@ exports[`MagicTag > 快照测试 > 可关闭标签快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicTag > 快照测试 > 图标标签快照 1`] = `
+exports[`DelightfulTag > 快照测试 > 图标标签快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r9"
@@ -215,7 +215,7 @@ exports[`MagicTag > 快照测试 > 图标标签快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicTag > 快照测试 > 边框样式标签快照 1`] = `
+exports[`DelightfulTag > 快照测试 > 边框样式标签快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r8"
@@ -245,7 +245,7 @@ exports[`MagicTag > 快照测试 > 边框样式标签快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicTag > 快照测试 > 默认标签快照 1`] = `
+exports[`DelightfulTag > 快照测试 > 默认标签快照 1`] = `
 <DocumentFragment>
   <span
     class="magic-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r1"

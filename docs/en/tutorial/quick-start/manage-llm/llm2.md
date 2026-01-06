@@ -47,4 +47,4 @@ If you have an organization admin role, click on your avatar in the upper left c
 
 ![FrLzQgYd-R0cPuh-grhOffzgNyLR.png](https://cdn.letsmagic.cn/static/img/FrLzQgYd-R0cPuh-grhOffzgNyLR.png)
 
-- 5.4 After successful debugging, call the Magic interface to modify the embedding model (temporary). Later, it will be moved to the admin configuration panel 
+- 5.4 After successful debugging, call the Delightful interface to modify the embedding model (temporary). Later, it will be moved to the admin configuration panel 

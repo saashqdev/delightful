@@ -11,9 +11,9 @@ use HyperfTest\Cases\Api\AbstractHttpTest;
 
 /**
  * @internal
- * Magic聊天用户API测试
+ * Delightful聊天用户API测试
  */
-class MagicChatUserApiTest extends AbstractHttpTest
+class DelightfulChatUserApiTest extends AbstractHttpTest
 {
     private const string UPDATE_USER_INFO_API = '/api/v1/contact/users/me';
 

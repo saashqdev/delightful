@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace HyperfTest\Cases\Infrastructure\ExternalAPI\MagicAIApi;
+namespace HyperfTest\Cases\Infrastructure\ExternalAPI\DelightfulAIApi;
 
 use App\Application\ModelGateway\Event\Subscribe\OfficialAppTokenCheckSubscriber;
 use App\Application\ModelGateway\Mapper\ModelGatewayMapper;
@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @internal
  */
-class MagicAILocalModelTest extends TestCase
+class DelightfulAILocalModelTest extends TestCase
 {
     public function setUp(): void
     {

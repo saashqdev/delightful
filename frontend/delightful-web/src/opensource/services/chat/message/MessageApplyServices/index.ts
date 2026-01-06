@@ -119,7 +119,7 @@ class MessageApplyService {
 			case ChatMessageApplyService.isChatMessage(message):
 				ChatMessageApplyService.apply(message, { ...options, isFromOtherTab: true })
 				break
-			case message?.message?.type === ConversationMessageType.SuperMagic:
+			case message?.message?.type === ConversationMessageType.SuperDelightful:
 				pubsub.publish("super_magic_new_message", message)
 				break
 			default:

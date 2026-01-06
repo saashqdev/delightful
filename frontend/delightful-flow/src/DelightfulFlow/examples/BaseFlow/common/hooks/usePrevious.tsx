@@ -2,12 +2,12 @@
  * 各节点通用hooks，用于计算前置节点可引用的数据源
  */
 
-import { mockMethodsSource } from "@/MagicExpressionWidget/components/dataSource"
-import { transformDataSource } from "@/MagicExpressionWidget/helpers"
+import { mockMethodsSource } from "@/DelightfulExpressionWidget/components/dataSource"
+import { transformDataSource } from "@/DelightfulExpressionWidget/helpers"
 import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { nodeManager } from "@/DelightfulFlow/register/node"
-import { MagicFlow } from "@/DelightfulFlow/types/flow"
+import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import {
 	getNodeSchema,
 	getNodeVersion,
@@ -15,7 +15,7 @@ import {
 	schemaToDataSource,
 } from "@/DelightfulFlow/utils"
 import { getAllPredecessors } from "@/DelightfulFlow/utils/reactflowUtils"
-import { Schema } from "@/MagicJsonSchemaEditor/components/editor/genson-js"
+import { Schema } from "@/DelightfulJsonSchemaEditor/components/editor/genson-js"
 import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference"
 import { useMemoizedFn } from "ahooks"
 import _ from "lodash"
@@ -29,7 +29,7 @@ export default function usePrevious() {
 	const updateVariableOption = useMemoizedFn(
 		(
 			currentOptions: DataSourceOption[],
-			currentNode: MagicFlow.Node,
+			currentNode: DelightfulFlow.Node,
 			pointerVariables?: Schema,
 		) => {
 			// 暂定有指定变量schema的情况下为全局变量

@@ -4,20 +4,20 @@ declare(strict_types=1);
 /**
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
-use Delightful\SuperMagic\Infrastructure\Utils\Middleware\RequestContextMiddlewareV2;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\AccountApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\FileApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\FileEditingApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\FileKeyCleanupApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\MessageApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\ProjectApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\ProjectInvitationLinkApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\ProjectMemberApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\SandboxApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\SuperAgentMemoryApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\TaskApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\TopicApi;
-use Delightful\SuperMagic\Interfaces\SuperAgent\Facade\WorkspaceApi;
+use Delightful\SuperDelightful\Infrastructure\Utils\Middleware\RequestContextMiddlewareV2;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\AccountApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\FileApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\FileEditingApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\FileKeyCleanupApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\MessageApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\ProjectApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\ProjectInvitationLinkApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\ProjectMemberApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\SandboxApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\SuperAgentMemoryApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\TaskApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\TopicApi;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\WorkspaceApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup(
@@ -163,7 +163,7 @@ Router::addGroup(
 
         // Account related
         Router::addGroup('/accounts', static function () {
-            // Initialize Super Magic account
+            // Initialize Super Delightful account
             Router::post('/init', [AccountApi::class, 'initAccount']);
         });
 

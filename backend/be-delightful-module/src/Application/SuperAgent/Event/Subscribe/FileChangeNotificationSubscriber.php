@@ -5,23 +5,23 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\SuperDelightful\Application\SuperAgent\Event\Subscribe;
 
 use App\Domain\Chat\Entity\ValueObject\SocketEventType;
-use App\Domain\Contact\Repository\Persistence\MagicUserRepository;
+use App\Domain\Contact\Repository\Persistence\DelightfulUserRepository;
 use App\Infrastructure\Util\SocketIO\SocketIOUtil;
 use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\DirectoryDeletedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\FileBatchMoveEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\FileContentSavedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\FileDeletedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\FileMovedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\FileRenamedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\FilesBatchDeletedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\FileUploadedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Response\TaskFileItemDTO;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\DirectoryDeletedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\FileBatchMoveEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\FileContentSavedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\FileDeletedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\FileMovedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\FileRenamedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\FilesBatchDeletedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\FileUploadedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Response\TaskFileItemDTO;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;
@@ -42,7 +42,7 @@ class FileChangeNotificationSubscriber implements ListenerInterface
     public function __construct(
         private readonly ProjectDomainService $projectDomainService,
         private readonly TaskFileDomainService $taskFileDomainService,
-        private readonly MagicUserRepository $magicUserRepository,
+        private readonly DelightfulUserRepository $magicUserRepository,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(self::class);
@@ -419,7 +419,7 @@ class FileChangeNotificationSubscriber implements ListenerInterface
     private function pushNotification(string $userId, array $pushData): void
     {
         // Get user's magicId from userId
-        $magicId = $this->getMagicIdByUserId($userId);
+        $magicId = $this->getDelightfulIdByUserId($userId);
 
         if (empty($magicId)) {
             $this->logger->warning('Cannot get magicId for user', ['user_id' => $userId]);
@@ -444,12 +444,12 @@ class FileChangeNotificationSubscriber implements ListenerInterface
     /**
      * Get magicId by userId.
      */
-    private function getMagicIdByUserId(string $userId): string
+    private function getDelightfulIdByUserId(string $userId): string
     {
         try {
             $userEntity = $this->magicUserRepository->getUserById($userId);
             if ($userEntity) {
-                return (string) $userEntity->getMagicId();
+                return (string) $userEntity->getDelightfulId();
             }
         } catch (Throwable $e) {
             $this->logger->error('Failed to get magicId', [

@@ -1,7 +1,7 @@
 import { memo } from "react"
 import { useStyles } from "./styles"
 
-export default memo(function SuperMagicMobileFiles() {
+export default memo(function SuperDelightfulMobileFiles() {
 	const { styles } = useStyles()
-	return <div>SuperMagicMobileFiles</div>
+	return <div>SuperDelightfulMobileFiles</div>
 })

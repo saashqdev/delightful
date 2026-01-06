@@ -3,7 +3,7 @@
 ## 基本的示例
 
 ```jsx
-import { MagicExpressionWidget } from '@/index';
+import { DelightfulExpressionWidget } from '@/index';
 import React,{ useState, useCallback } from "react"
 import { mockDataSource, mockNodeMap } from "./components/dataSource"
 
@@ -16,14 +16,14 @@ export default () => {
         setExpression(val)
     }, [])
 
-    return <MagicExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap}/>
+    return <DelightfulExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap}/>
 }
 ```
 
 ## 支持函数数据源
 
 ```jsx
-import { MagicExpressionWidget } from '@/index';
+import { DelightfulExpressionWidget } from '@/index';
 import React,{ useState, useCallback } from "react"
 import { mockDataSource, mockNodeMap } from "./components/dataSource"
 
@@ -36,14 +36,14 @@ export default () => {
         setExpression(val)
     }, [])
 
-    return <MagicExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap}/>
+    return <DelightfulExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap}/>
 }
 ```
 
 ## 支持文本域模式
 
 ```jsx
-import { MagicExpressionWidget } from '@/index';
+import { DelightfulExpressionWidget } from '@/index';
 import React,{ useState, useCallback } from "react"
 import { mockDataSource, mockNodeMap } from "./components/dataSource"
 import methodExpressionSource from "./mock/expressionSource"
@@ -58,14 +58,14 @@ export default () => {
         setExpression(val)
     }, [])
 
-    return <MagicExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} mode={ExpressionMode.TextArea} pointedValueType="expression_value" nodeMap={mockNodeMap} methodsDataSource={methodExpressionSource} showExpand/>
+    return <DelightfulExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} mode={ExpressionMode.TextArea} pointedValueType="expression_value" nodeMap={mockNodeMap} methodsDataSource={methodExpressionSource} showExpand/>
 }
 ```
 
 ## 支持修改field字段内容
 
 ```jsx
-import { MagicExpressionWidget } from '@/index';
+import { DelightfulExpressionWidget } from '@/index';
 import React,{ useState, useCallback } from "react"
 import { mockDataSource } from "./components/dataSource"
 import { ExpressionMode } from "./constant"
@@ -104,9 +104,9 @@ export default () => {
     }, [])
 
     return <>
-                <MagicExpressionWidget allowModifyField value={expression1} onChange={onExpression1Change} dataSource={mockDataSource} mode={ExpressionMode.Common} />
+                <DelightfulExpressionWidget allowModifyField value={expression1} onChange={onExpression1Change} dataSource={mockDataSource} mode={ExpressionMode.Common} />
                 <br/>
-                <MagicExpressionWidget allowModifyField value={expression2} onChange={onExpression2Change} dataSource={mockDataSource} mode={ExpressionMode.TextArea} pointedValueType="expression_value"/>
+                <DelightfulExpressionWidget allowModifyField value={expression2} onChange={onExpression2Change} dataSource={mockDataSource} mode={ExpressionMode.TextArea} pointedValueType="expression_value"/>
             </>
 }
 ```
@@ -114,7 +114,7 @@ export default () => {
 ## 禁用
 
 ```jsx
-import { MagicExpressionWidget } from '@/index';
+import { DelightfulExpressionWidget } from '@/index';
 import React,{ useState, useCallback } from "react"
 import { mockDataSource } from "./components/dataSource"
 
@@ -127,14 +127,14 @@ export default () => {
         setExpression(val)
     }, [])
 
-    return <MagicExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} disabled/>
+    return <DelightfulExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} disabled/>
 }
 ```
 
 ## 常量数据源
 
 ```jsx
-import { MagicExpressionWidget } from '@/index';
+import { DelightfulExpressionWidget } from '@/index';
 import React,{ useState, useCallback } from "react"
 import { mockDataSource } from "./components/dataSource"
 
@@ -167,14 +167,14 @@ export default () => {
         setExpression(val)
     }, [])
 
-    return <MagicExpressionWidget value={expression} onChange={onExpressionChange} constantDataSource={constantSource} multiple={false} dataSource={mockDataSource}/>
+    return <DelightfulExpressionWidget value={expression} onChange={onExpressionChange} constantDataSource={constantSource} multiple={false} dataSource={mockDataSource}/>
 }
 ```
 
 ## 支持打开弹窗编辑
 
 ```jsx
-import { MagicExpressionWidget } from '@/index';
+import { DelightfulExpressionWidget } from '@/index';
 import React,{ useState, useCallback } from "react"
 import { mockDataSource, mockNodeMap } from "./components/dataSource"
 
@@ -187,17 +187,17 @@ export default () => {
         setExpression(val)
     }, [])
 
-    return <MagicExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap} allowOpenModal showMultipleLine={false} onlyExpression disabled />
+    return <DelightfulExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap} allowOpenModal showMultipleLine={false} onlyExpression disabled />
 }
 ```
 
 ## 用于适配多维表格不同字段
 
 ```jsx
-import { MagicExpressionWidget } from '@/index';
+import { DelightfulExpressionWidget } from '@/index';
 import React,{ useState, useCallback } from "react"
 import { mockDataSource, mockNodeMap } from "./components/dataSource"
-import { mockMultipleList } from "@/MagicExpressionWidget/components/nodes/LabelMultiple/mock"
+import { mockMultipleList } from "@/DelightfulExpressionWidget/components/nodes/LabelMultiple/mock"
 import DepartmentModal from "./mock/DepartmentModal"
 
 
@@ -263,7 +263,7 @@ export default () => {
 
     return <>
 		<strong>成员</strong>
-		<MagicExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
+		<DelightfulExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
 			type: 'member',
 			props: {
 				options: [],
@@ -279,7 +279,7 @@ export default () => {
 
 
 		<strong>单选</strong>
-		<MagicExpressionWidget value={select} onChange={onSelectChange} dataSource={mockDataSource} nodeMap={mockNodeMap} multiple={false} renderConfig={{
+		<DelightfulExpressionWidget value={select} onChange={onSelectChange} dataSource={mockDataSource} nodeMap={mockNodeMap} multiple={false} renderConfig={{
 			type: 'select',
 			props: {
 				options: mockMultipleList,
@@ -289,7 +289,7 @@ export default () => {
 		}}/>
 
 		<strong>多选</strong>
-		<MagicExpressionWidget value={multiple} onChange={onMultipleChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
+		<DelightfulExpressionWidget value={multiple} onChange={onMultipleChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
 			type: 'multiple',
 			props: {
 				options: mockMultipleList,
@@ -299,7 +299,7 @@ export default () => {
 		}}/>
 		
 		<strong>日期</strong>
-		<MagicExpressionWidget value={datetime} multiple={false} onChange={onDatetimeChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
+		<DelightfulExpressionWidget value={datetime} multiple={false} onChange={onDatetimeChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
 			type: 'datetime',
 			props: {
 				value: [],
@@ -309,7 +309,7 @@ export default () => {
 
 		
 		<strong>Checkbox</strong>
-		<MagicExpressionWidget value={checkbox} multiple={false} onChange={onCheckboxChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
+		<DelightfulExpressionWidget value={checkbox} multiple={false} onChange={onCheckboxChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
 			type: 'checkbox',
 			props: {
 				value: null,
@@ -318,7 +318,7 @@ export default () => {
 		}}/>
 
 		<strong>部门</strong>
-		<MagicExpressionWidget value={departmentNames} multiple={false} onChange={onDepartmentNamesChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
+		<DelightfulExpressionWidget value={departmentNames} multiple={false} onChange={onDepartmentNamesChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
 			type: 'department_names',
 			props: {
 				editComponent: DepartmentModal
@@ -327,7 +327,7 @@ export default () => {
 
 
 		<strong>通用文本块</strong>
-		<MagicExpressionWidget value={names} multiple={true} onChange={onNamesChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
+		<DelightfulExpressionWidget value={names} multiple={true} onChange={onNamesChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
 			type: 'names',
 			props: {
 				value: null,

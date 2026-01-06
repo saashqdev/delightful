@@ -13,8 +13,8 @@ import { userStore } from "@/opensource/models/user"
 import MobilePhonePasswordForm from "../components/MobilePhonePasswordForm"
 import Footer from "../components/Footer"
 import { useUserAgreedPolicy } from "../hooks/useUserAgreedPolicy"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 
 interface AccountModalProps {
 	onClose: () => void
@@ -86,7 +86,7 @@ function AccountModal(props: AccountModalProps) {
 	const dom = <div className={styles.header}>{t("account.create")}</div>
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			title={dom}
 			footer={null}
 			open={open}
@@ -102,13 +102,13 @@ function AccountModal(props: AccountModalProps) {
 			wrapClassName={styles.modal}
 			afterClose={onClose}
 		>
-			<MagicSpin spinning={loading}>
+			<DelightfulSpin spinning={loading}>
 				<div className={cx(styles.layout, loginFormOverrideStyles.container)}>
 					<MobilePhonePasswordForm form={form} onSubmit={onSubmit} />
 					<Footer agree={agree} onAgreeChange={setAgree} tipVisible />
 				</div>
-			</MagicSpin>
-		</MagicModal>
+			</DelightfulSpin>
+		</DelightfulModal>
 	)
 }
 

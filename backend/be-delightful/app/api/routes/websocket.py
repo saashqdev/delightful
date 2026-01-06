@@ -153,7 +153,7 @@ class WebSocketManager:
 @router.websocket("")
 async def websocket_endpoint(websocket: WebSocket):
     """
-    WebSocket endpoint, handles client messages and returns SuperMagic agent replies
+    WebSocket endpoint, handles client messages and returns SuperDelightful agent replies
 
     Supports sync/sync-ack synchronization mechanism to ensure task continues execution and pushes messages to client:
     - Client establishes connection by sending sync action

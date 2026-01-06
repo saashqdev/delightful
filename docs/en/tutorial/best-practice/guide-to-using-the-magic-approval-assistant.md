@@ -1,7 +1,7 @@
-# 🌟 Guide to Using the Magic Approval Assistant 🌟
+# 🌟 Guide to Using the Delightful Approval Assistant 🌟
 
 ## 📌 Product Introduction
-The Magic AI Approval Assistant is an intelligent approval processing tool that uses AI technology to enable fast initiation, intelligent review, and automatic decision-making, greatly improving approval efficiency.
+The Delightful AI Approval Assistant is an intelligent approval processing tool that uses AI technology to enable fast initiation, intelligent review, and automatic decision-making, greatly improving approval efficiency.
 
 ## 🚀 Core Features
 ✅ One-sentence approval initiation: No need to fill out complex forms, simply input your requirements to generate approvals.
@@ -10,8 +10,8 @@ The Magic AI Approval Assistant is an intelligent approval processing tool that 
 
 ## 🎯 Operation Guide
 
-### 1. Open Magic Approval Assistant
-Log in to DingTalk → Click "Workbench" in the navigation bar → Find "Magic Approval Assistant" in "All Lists > Technology Center" (supports quick location via search box)
+### 1. Open Delightful Approval Assistant
+Log in to DingTalk → Click "Workbench" in the navigation bar → Find "Delightful Approval Assistant" in "All Lists > Technology Center" (supports quick location via search box)
 
 ![20250512165849.jpg](https://cdn.letsmagic.cn/static/img/20250512165849.jpg)
 

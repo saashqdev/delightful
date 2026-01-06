@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace HyperfTest\Stub\Domain;
 
-use App\Domain\Chat\Service\MagicLLMDomainService;
+use App\Domain\Chat\Service\DelightfulLLMDomainService;
 
 /**
  * @internal
  */
-class MagicLLMDomainServiceStub extends MagicLLMDomainService
+class DelightfulLLMDomainServiceStub extends DelightfulLLMDomainService
 {
     public function searchWithBing(string $query, null|bool|string $language = false): array
     {

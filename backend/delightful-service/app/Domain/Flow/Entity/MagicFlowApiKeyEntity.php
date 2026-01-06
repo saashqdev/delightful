@@ -14,7 +14,7 @@ use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
-class MagicFlowApiKeyEntity extends AbstractEntity
+class DelightfulFlowApiKeyEntity extends AbstractEntity
 {
     protected ?int $id = null;
 
@@ -85,7 +85,7 @@ class MagicFlowApiKeyEntity extends AbstractEntity
         $this->updatedAt = $this->createdAt;
     }
 
-    public function prepareForModification(MagicFlowApiKeyEntity $magicFlowApiKeyEntity): void
+    public function prepareForModification(DelightfulFlowApiKeyEntity $magicFlowApiKeyEntity): void
     {
         if (empty($this->organizationCode)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow.fields.organization_code']);

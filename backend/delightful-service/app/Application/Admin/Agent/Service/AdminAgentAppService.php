@@ -18,17 +18,17 @@ use App\Domain\Admin\Entity\ValueObject\AgentFilterType;
 use App\Domain\Admin\Entity\ValueObject\Extra\AbstractSettingExtra;
 use App\Domain\Admin\Entity\ValueObject\Extra\DefaultFriendExtra;
 use App\Domain\Admin\Service\AdminGlobalSettingsDomainService;
-use App\Domain\Agent\Entity\MagicAgentEntity;
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
-use App\Domain\Agent\Service\MagicAgentDomainService;
-use App\Domain\Agent\Service\MagicAgentVersionDomainService;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
+use App\Domain\Agent\Service\DelightfulAgentDomainService;
+use App\Domain\Agent\Service\DelightfulAgentVersionDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation as ContactDataIsolation;
-use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\File\Service\FileDomainService;
-use App\Domain\Group\Service\MagicGroupDomainService;
+use App\Domain\Group\Service\DelightfulGroupDomainService;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\ResourceType;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\TargetType;
 use App\Domain\Permission\Service\OperationPermissionDomainService;
@@ -38,7 +38,7 @@ use App\Interfaces\Admin\DTO\Extra\AbstractSettingExtraDTO;
 use App\Interfaces\Admin\DTO\Extra\Item\AgentItemDTO;
 use App\Interfaces\Admin\DTO\Request\QueryPageAgentDTO;
 use App\Interfaces\Admin\DTO\Response\GetPublishedAgentsResponseDTO;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Permission\Assembler\OperationPermissionAssembler;
 use App\Interfaces\Permission\DTO\ResourceAccessDTO;
 use Delightful\CloudFile\Kernel\Struct\FileLink;
@@ -51,21 +51,21 @@ class AdminAgentAppService extends AbstractKernelAppService
 {
     public function __construct(
         private readonly AdminGlobalSettingsDomainService $globalSettingsDomainService,
-        private readonly MagicAgentDomainService $magicAgentDomainService,
-        private readonly MagicAgentVersionDomainService $magicAgentVersionDomainService,
+        private readonly DelightfulAgentDomainService $magicAgentDomainService,
+        private readonly DelightfulAgentVersionDomainService $magicAgentVersionDomainService,
         private readonly FileDomainService $fileDomainService,
-        private readonly MagicUserDomainService $userDomainService,
+        private readonly DelightfulUserDomainService $userDomainService,
         private readonly OperationPermissionDomainService $operationPermissionDomainService,
-        private readonly MagicDepartmentDomainService $magicDepartmentDomainService,
-        private readonly MagicDepartmentUserDomainService $magicDepartmentUserDomainService,
-        private readonly MagicGroupDomainService $magicGroupDomainService,
+        private readonly DelightfulDepartmentDomainService $magicDepartmentDomainService,
+        private readonly DelightfulDepartmentUserDomainService $magicDepartmentUserDomainService,
+        private readonly DelightfulGroupDomainService $magicGroupDomainService,
     ) {
     }
 
     /**
      * 删除助理.
      */
-    public function deleteAgent(MagicUserAuthorization $authenticatable, string $agentId)
+    public function deleteAgent(DelightfulUserAuthorization $authenticatable, string $agentId)
     {
         $this->magicAgentDomainService->deleteAgentById($agentId, $authenticatable->getOrganizationCode());
     }
@@ -73,12 +73,12 @@ class AdminAgentAppService extends AbstractKernelAppService
     /**
      * 获取助理详情.
      */
-    public function getAgentDetail(MagicUserAuthorization $authorization, string $agentId): AdminAgentDetailDTO
+    public function getAgentDetail(DelightfulUserAuthorization $authorization, string $agentId): AdminAgentDetailDTO
     {
         $agentEntity = $this->magicAgentDomainService->getAgentById($agentId);
         $adminAgentDetail = new AdminAgentDetailDTO();
 
-        $agentVersionEntity = new MagicAgentVersionEntity();
+        $agentVersionEntity = new DelightfulAgentVersionEntity();
         if ($agentEntity->getAgentVersionId()) {
             $agentVersionEntity = $this->magicAgentVersionDomainService->getAgentById($agentEntity->getAgentVersionId());
             // 只有发布的助理才会有权限管控
@@ -107,7 +107,7 @@ class AdminAgentAppService extends AbstractKernelAppService
      * 获取企业下的所有助理创建者.
      * @return array<array{user_id:string,nickname:string,avatar:string}>
      */
-    public function getOrganizationAgentsCreators(MagicUserAuthorization $authorization): array
+    public function getOrganizationAgentsCreators(DelightfulUserAuthorization $authorization): array
     {
         // 获取所有助理
         $agentCreators = $this->magicAgentDomainService->getOrganizationAgentsCreators($authorization->getOrganizationCode());
@@ -142,7 +142,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     /**
      * 查询企业下的所有助理,条件查询：状态，创建人，搜索.
      */
-    public function queriesAgents(MagicUserAuthorization $authorization, QueryPageAgentDTO $query): PageDTO
+    public function queriesAgents(DelightfulUserAuthorization $authorization, QueryPageAgentDTO $query): PageDTO
     {
         $magicAgentEntities = $this->magicAgentDomainService->queriesAgents($authorization->getOrganizationCode(), $query);
         if (empty($magicAgentEntities)) {
@@ -204,7 +204,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * @param MagicUserAuthorization $authorization
+     * @param DelightfulUserAuthorization $authorization
      * @return AgentGlobalSettingsDTO[]
      */
     public function getGlobalSettings(Authenticatable $authorization): array
@@ -269,7 +269,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     public function getPublishedAgents(Authenticatable $authorization, string $pageToken, int $pageSize, AgentFilterType $type): GetPublishedAgentsResponseDTO
     {
         // 获取数据隔离对象并获取当前组织的组织代码
-        /** @var MagicUserAuthorization $authorization */
+        /** @var DelightfulUserAuthorization $authorization */
         $organizationCode = $authorization->getOrganizationCode();
 
         // 获取启用的机器人列表
@@ -319,7 +319,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         ]);
     }
 
-    private function getAgentResource(MagicUserAuthorization $authorization, string $agentId): ResourceAccessDTO
+    private function getAgentResource(DelightfulUserAuthorization $authorization, string $agentId): ResourceAccessDTO
     {
         $dataIsolation = $this->createPermissionDataIsolation($authorization);
         $operationPermissionEntities = $this->operationPermissionDomainService->listByResource($dataIsolation, ResourceType::AgentCode, $agentId);
@@ -352,8 +352,8 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * @param array<MagicAgentEntity> $enabledAgents
-     * @return array<MagicAgentEntity>
+     * @param array<DelightfulAgentEntity> $enabledAgents
+     * @return array<DelightfulAgentEntity>
      */
     private function filterEnableAgentsByType(Authenticatable $authorization, array $enabledAgents, AgentFilterType $type): array
     {

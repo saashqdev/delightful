@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next"
 import { memo, useMemo } from "react"
 import { Flex, Popover } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconInfoCircle, IconTooltip } from "@tabler/icons-react"
 import ExampleImg from "@/assets/resources/exampleImg.png"
 import { useBoolean } from "ahooks"
@@ -67,14 +67,14 @@ export const ToolTipButton = memo(({ initialValues, type, onFinish }: TooltipBtn
 			}
 		>
 			{type === "icon" ? (
-				<MagicButton
+				<DelightfulButton
 					type="text"
 					className={styles.button}
 					onClick={setTrue}
 					icon={<IconTooltip size={16} />}
 				/>
 			) : (
-				<MagicButton
+				<DelightfulButton
 					type="text"
 					className={styles.button}
 					onClick={setTrue}
@@ -82,7 +82,7 @@ export const ToolTipButton = memo(({ initialValues, type, onFinish }: TooltipBtn
 					style={{ width: 100 }}
 				>
 					{t("explore.form.instructionExplanation")}
-				</MagicButton>
+				</DelightfulButton>
 			)}
 		</Popover>
 	)

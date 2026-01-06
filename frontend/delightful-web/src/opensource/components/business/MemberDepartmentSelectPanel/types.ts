@@ -1,4 +1,4 @@
-import type { MagicModalProps } from "@/opensource/components/base/MagicModal"
+import type { DelightfulModalProps } from "@/opensource/components/base/DelightfulModal"
 import type { GroupConversationDetailWithConversationId } from "@/types/chat/conversation"
 import type {
 	WithIdAndDataType,
@@ -27,7 +27,7 @@ export type OrganizationSelectItem =
 export type SelectedResult = Record<StructureItemType, OrganizationSelectItem[]>
 
 export interface MemberDepartmentSelectPanelProps
-	extends Omit<MagicModalProps, "onOk" | "onCancel"> {
+	extends Omit<DelightfulModalProps, "onOk" | "onCancel"> {
 	title?: string
 	disabledValues?: OrganizationSelectItem[]
 	selectValue?: OrganizationSelectItem[]

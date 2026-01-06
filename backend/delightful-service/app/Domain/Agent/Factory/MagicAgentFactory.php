@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Factory;
 
-use App\Domain\Agent\Entity\MagicAgentEntity;
-use App\Domain\Agent\Repository\Persistence\Model\MagicAgentModel;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
+use App\Domain\Agent\Repository\Persistence\Model\DelightfulAgentModel;
 
-class MagicAgentFactory
+class DelightfulAgentFactory
 {
-    public static function modelToEntity(MagicAgentModel $model): MagicAgentEntity
+    public static function modelToEntity(DelightfulAgentModel $model): DelightfulAgentEntity
     {
         $entityArray = $model->toArray();
         return self::toEntity($entityArray);
     }
 
-    public static function toEntity(array $bot): MagicAgentEntity
+    public static function toEntity(array $bot): DelightfulAgentEntity
     {
-        $magicAgentEntity = new MagicAgentEntity($bot);
+        $magicAgentEntity = new DelightfulAgentEntity($bot);
         if (isset($bot['last_version_info'])) {
             $lastVersionInfo = $magicAgentEntity->getLastVersionInfo();
             $lastVersionInfo['agent_id'] = $lastVersionInfo['root_id'];
@@ -45,7 +45,7 @@ class MagicAgentFactory
     }
 
     /**
-     * @param $botEntities MagicAgentEntity[]
+     * @param $botEntities DelightfulAgentEntity[]
      */
     public static function toArrays(array $botEntities): array
     {

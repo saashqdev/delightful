@@ -3,7 +3,7 @@ import EmptyConversationFallbackImage from "./image"
 import { Flex } from "antd"
 import { useTranslation } from "react-i18next"
 import { createStyles } from "antd-style"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import useNavigate from "@/opensource/hooks/useNavigate"
 import { useMemoizedFn } from "ahooks"
 import { RoutePath } from "@/const/routes"
@@ -40,9 +40,9 @@ const EmptyConversationFallback = memo(() => {
 			<div className={styles.emptyFallbackText}>
 				{t("chat.emptyConversationFallbackText")}
 			</div>
-			<MagicButton type="primary" style={{ marginTop: 10 }} onClick={navigateToContacts}>
+			<DelightfulButton type="primary" style={{ marginTop: 10 }} onClick={navigateToContacts}>
 				{t("chat.emptyConversationFallbackButtonText")}
-			</MagicButton>
+			</DelightfulButton>
 		</Flex>
 	)
 })

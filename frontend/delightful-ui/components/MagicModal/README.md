@@ -1,6 +1,6 @@
-# MagicModal 魔法对话框组件
+# DelightfulModal 魔法对话框组件
 
-`MagicModal` 是一个基于 Ant Design Modal 组件的增强版对话框，提供了更美观的样式和国际化支持。
+`DelightfulModal` 是一个基于 Ant Design Modal 组件的增强版对话框，提供了更美观的样式和国际化支持。
 
 ## 属性
 
@@ -10,18 +10,18 @@
 
 ## 静态方法
 
-MagicModal 提供了与 Ant Design Modal 相同的静态方法，但增加了国际化支持和样式优化：
+DelightfulModal 提供了与 Ant Design Modal 相同的静态方法，但增加了国际化支持和样式优化：
 
--   `MagicModal.confirm(config)` - 确认对话框
--   `MagicModal.info(config)` - 信息对话框
--   `MagicModal.success(config)` - 成功对话框
--   `MagicModal.error(config)` - 错误对话框
--   `MagicModal.warning(config)` - 警告对话框
+-   `DelightfulModal.confirm(config)` - 确认对话框
+-   `DelightfulModal.info(config)` - 信息对话框
+-   `DelightfulModal.success(config)` - 成功对话框
+-   `DelightfulModal.error(config)` - 错误对话框
+-   `DelightfulModal.warning(config)` - 警告对话框
 
 ## 基础用法
 
 ```tsx
-import { MagicModal } from "@/components/base/MagicModal"
+import { DelightfulModal } from "@/components/base/DelightfulModal"
 import { useState } from "react"
 
 // 基础对话框
@@ -31,21 +31,21 @@ const MyComponent = () => {
 	return (
 		<>
 			<button onClick={() => setIsModalOpen(true)}>打开对话框</button>
-			<MagicModal
+			<DelightfulModal
 				title="对话框标题"
 				open={isModalOpen}
 				onOk={() => setIsModalOpen(false)}
 				onCancel={() => setIsModalOpen(false)}
 			>
 				<p>这是对话框的内容</p>
-			</MagicModal>
+			</DelightfulModal>
 		</>
 	)
 }
 
 // 使用静态方法
 const showConfirm = () => {
-	MagicModal.confirm({
+	DelightfulModal.confirm({
 		title: "确认操作",
 		content: "你确定要执行这个操作吗？",
 		onOk() {
@@ -59,7 +59,7 @@ const showConfirm = () => {
 
 // 信息提示
 const showInfo = () => {
-	MagicModal.info({
+	DelightfulModal.info({
 		title: "信息提示",
 		content: "这是一条重要信息",
 	})
@@ -67,7 +67,7 @@ const showInfo = () => {
 
 // 成功提示
 const showSuccess = () => {
-	MagicModal.success({
+	DelightfulModal.success({
 		title: "操作成功",
 		content: "数据已成功保存",
 	})
@@ -75,7 +75,7 @@ const showSuccess = () => {
 
 // 错误提示
 const showError = () => {
-	MagicModal.error({
+	DelightfulModal.error({
 		title: "操作失败",
 		content: "保存数据时出现错误",
 	})
@@ -83,7 +83,7 @@ const showError = () => {
 
 // 警告提示
 const showWarning = () => {
-	MagicModal.warning({
+	DelightfulModal.warning({
 		title: "警告",
 		content: "此操作可能导致数据丢失",
 	})
@@ -103,4 +103,4 @@ const showWarning = () => {
 -   需要展示对话框形式的反馈信息时
 -   需要进行用户确认操作时
 
-MagicModal 组件让你的对话框更加美观和用户友好，同时提供了完善的国际化支持。
+DelightfulModal 组件让你的对话框更加美观和用户友好，同时提供了完善的国际化支持。

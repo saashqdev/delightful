@@ -1,4 +1,4 @@
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { Flex, message } from "antd"
 import { useMemoizedFn } from "ahooks"
 import { useEffect } from "react"
@@ -80,7 +80,7 @@ export default function AuthManagerModal<T extends ExtraData>({
 			type={type}
 		>
 			<div onClick={(event) => event.stopPropagation()}>
-				<MagicModal
+				<DelightfulModal
 					title={title}
 					open={open}
 					footer={null}
@@ -98,7 +98,7 @@ export default function AuthManagerModal<T extends ExtraData>({
 							<AuthList onOk={handleOk} onCancel={handleCancel} />
 						</Flex>
 					</Flex>
-				</MagicModal>
+				</DelightfulModal>
 			</div>
 		</AuthControlProvider>
 	)

@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Application\Flow\ExecuteManager\ExecutionData;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation as ContactDataIsolation;
-use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
 use JetBrains\PhpStorm\ArrayShape;
 
 class TriggerDataUserExtInfo
@@ -70,7 +70,7 @@ class TriggerDataUserExtInfo
     public function getWorkNumber(): string
     {
         if (is_null($this->workNumber)) {
-            $this->loadMagicUserDepartments();
+            $this->loadDelightfulUserDepartments();
         }
         return $this->workNumber;
     }
@@ -78,7 +78,7 @@ class TriggerDataUserExtInfo
     public function getPosition(): string
     {
         if (is_null($this->position)) {
-            $this->loadMagicUserDepartments();
+            $this->loadDelightfulUserDepartments();
         }
         return $this->position;
     }
@@ -89,7 +89,7 @@ class TriggerDataUserExtInfo
     public function getDepartments(): array
     {
         if (is_null($this->departments)) {
-            $this->loadMagicUserDepartments();
+            $this->loadDelightfulUserDepartments();
         }
         return $this->departments;
     }
@@ -97,10 +97,10 @@ class TriggerDataUserExtInfo
     /**
      * 加载 magic 的用户信息.
      */
-    private function loadMagicUserDepartments(): void
+    private function loadDelightfulUserDepartments(): void
     {
-        $departmentDomain = di(MagicDepartmentDomainService::class);
-        $departmentUserDomain = di(MagicDepartmentUserDomainService::class);
+        $departmentDomain = di(DelightfulDepartmentDomainService::class);
+        $departmentUserDomain = di(DelightfulDepartmentUserDomainService::class);
 
         $contactDataIsolation = ContactDataIsolation::create($this->organizationCode, $this->userId);
         // 获取用户的部门id

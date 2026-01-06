@@ -2,7 +2,7 @@ import type { DefaultOptionType } from "antd/es/select"
 import type { Knowledge } from "@/types/knowledge"
 import { useTranslation } from "react-i18next"
 import { useMemoizedFn } from "ahooks"
-import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
 
 interface UserKnowledgeSelectProps {
 	value?: Knowledge.KnowledgeDatabaseItem
@@ -34,7 +34,7 @@ export default function UserKnowledgeSelect({
 	})
 
 	return (
-		<MagicSelect
+		<DelightfulSelect
 			fieldNames={{
 				label: "name",
 				value: "knowledge_code",

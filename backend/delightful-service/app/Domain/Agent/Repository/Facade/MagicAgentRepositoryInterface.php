@@ -7,27 +7,27 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Repository\Facade;
 
-use App\Domain\Agent\Entity\MagicAgentEntity;
-use App\Domain\Agent\Entity\ValueObject\Query\MagicAgentQuery;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulAgentQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
-interface MagicAgentRepositoryInterface
+interface DelightfulAgentRepositoryInterface
 {
     /**
-     * @return array{total: int, list: array<MagicAgentEntity>}
+     * @return array{total: int, list: array<DelightfulAgentEntity>}
      */
-    public function queries(MagicAgentQuery $query, Page $page): array;
+    public function queries(DelightfulAgentQuery $query, Page $page): array;
 
-    public function getByFlowCode(string $flowCode): ?MagicAgentEntity;
+    public function getByFlowCode(string $flowCode): ?DelightfulAgentEntity;
 
     /**
-     * @return MagicAgentEntity[]
+     * @return DelightfulAgentEntity[]
      */
     public function getByFlowCodes(array $flowCodes): array;
 
-    public function insert(MagicAgentEntity $agentEntity);
+    public function insert(DelightfulAgentEntity $agentEntity);
 
-    public function updateById(MagicAgentEntity $agentEntity): MagicAgentEntity;
+    public function updateById(DelightfulAgentEntity $agentEntity): DelightfulAgentEntity;
 
     public function updateStatus(string $agentId, int $status);
 
@@ -37,5 +37,5 @@ interface MagicAgentRepositoryInterface
 
     public function deleteAgentById(string $id, string $organizationCode);
 
-    public function getAgentById(string $agentId): MagicAgentEntity;
+    public function getAgentById(string $agentId): DelightfulAgentEntity;
 }

@@ -7,24 +7,24 @@ declare(strict_types=1);
 
 namespace App\Application\Chat\Service;
 
-use App\Domain\Agent\Entity\MagicAgentEntity;
-use App\Domain\Agent\Service\MagicAgentDomainService;
-use App\Domain\Chat\Service\MagicConversationDomainService;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
+use App\Domain\Agent\Service\DelightfulAgentDomainService;
+use App\Domain\Chat\Service\DelightfulConversationDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\File\Service\FileDomainService;
 use App\ErrorCode\AgentErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Qbhy\HyperfAuth\Authenticatable;
 
-class MagicAgentAppService extends AbstractAppService
+class DelightfulAgentAppService extends AbstractAppService
 {
     public function __construct(
-        protected readonly MagicUserDomainService $userDomainService,
-        protected readonly MagicAgentDomainService $magicAgentDomainService,
+        protected readonly DelightfulUserDomainService $userDomainService,
+        protected readonly DelightfulAgentDomainService $magicAgentDomainService,
         protected readonly FileDomainService $fileDomainService,
-        protected readonly MagicConversationDomainService $magicConversationDomainService,
+        protected readonly DelightfulConversationDomainService $magicConversationDomainService,
     ) {
     }
 
@@ -53,8 +53,8 @@ class MagicAgentAppService extends AbstractAppService
     }
 
     /**
-     * @param MagicUserAuthorization $authenticatable
-     * @return MagicAgentEntity[]
+     * @param DelightfulUserAuthorization $authenticatable
+     * @return DelightfulAgentEntity[]
      */
     public function getAgentsForAdmin(array $agentIds, Authenticatable $authenticatable): array
     {

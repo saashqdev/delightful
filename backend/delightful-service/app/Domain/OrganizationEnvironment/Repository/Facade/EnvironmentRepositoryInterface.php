@@ -7,27 +7,27 @@ declare(strict_types=1);
 
 namespace App\Domain\OrganizationEnvironment\Repository\Facade;
 
-use App\Domain\OrganizationEnvironment\Entity\MagicEnvironmentEntity;
+use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 
 interface EnvironmentRepositoryInterface
 {
-    public function getEnvById(string $id): ?MagicEnvironmentEntity;
+    public function getEnvById(string $id): ?DelightfulEnvironmentEntity;
 
     /**
-     * @return MagicEnvironmentEntity[]
+     * @return DelightfulEnvironmentEntity[]
      */
-    public function getMagicEnvironments(): array;
+    public function getDelightfulEnvironments(): array;
 
     /**
-     * @return MagicEnvironmentEntity[]
+     * @return DelightfulEnvironmentEntity[]
      */
-    public function getMagicEnvironmentsByIds(array $ids): array;
+    public function getDelightfulEnvironmentsByIds(array $ids): array;
 
-    public function getMagicEnvironmentById(int $envId): ?MagicEnvironmentEntity;
+    public function getDelightfulEnvironmentById(int $envId): ?DelightfulEnvironmentEntity;
 
-    public function createMagicEnvironment(MagicEnvironmentEntity $environmentDTO): MagicEnvironmentEntity;
+    public function createDelightfulEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity;
 
-    public function updateMagicEnvironment(MagicEnvironmentEntity $environmentDTO): MagicEnvironmentEntity;
+    public function updateDelightfulEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity;
 
-    public function getEnvironmentEntityByLoginCode(string $loginCode): ?MagicEnvironmentEntity;
+    public function getEnvironmentEntityByLoginCode(string $loginCode): ?DelightfulEnvironmentEntity;
 }

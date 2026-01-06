@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Facade;
 
-use App\Application\Chat\Service\MagicUserTaskAppService;
+use App\Application\Chat\Service\DelightfulUserTaskAppService;
 use App\ErrorCode\UserTaskErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -21,10 +21,10 @@ use Hyperf\Validation\Contract\ValidatorFactoryInterface;
 use Throwable;
 
 #[ApiResponse('low_code')]
-class MagicUserTaskApi extends AbstractApi
+class DelightfulUserTaskApi extends AbstractApi
 {
     public function __construct(
-        private MagicUserTaskAppService $magicUserTaskAppService,
+        private DelightfulUserTaskAppService $magicUserTaskAppService,
         private ValidatorFactoryInterface $validatorFactory,
     ) {
     }
@@ -55,7 +55,7 @@ class MagicUserTaskApi extends AbstractApi
             $userTaskDTO = new UserTaskDTO($params);
             $creator = $authorization->getId();
             $userTaskDTO->setCreator($creator);
-            $userTaskDTO->setMagicEnvId($authorization->getMagicEnvId());
+            $userTaskDTO->setDelightfulEnvId($authorization->getDelightfulEnvId());
             $userTaskDTO->setNickname($authorization->getNickname());
             $userTaskDTO->setConversationId($params['conversation_id']);
             $userTaskDTO->setTopicId($params['topic_id']);
@@ -116,7 +116,7 @@ class MagicUserTaskApi extends AbstractApi
             $authorization = $this->getAuthorization();
             $creator = $authorization->getId();
             $userTaskDTO->setCreator($creator);
-            $userTaskDTO->setMagicEnvId($authorization->getMagicEnvId());
+            $userTaskDTO->setDelightfulEnvId($authorization->getDelightfulEnvId());
             $userTaskDTO->setConversationId($params['conversation_id']);
             $userTaskDTO->setTopicId($params['topic_id']);
 

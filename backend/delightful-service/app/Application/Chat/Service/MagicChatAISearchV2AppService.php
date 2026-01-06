@@ -9,8 +9,8 @@ namespace App\Application\Chat\Service;
 
 use App\Application\ModelGateway\Mapper\ModelGatewayMapper;
 use App\Application\ModelGateway\Service\ModelConfigAppService;
-use App\Domain\Chat\DTO\AISearch\Request\MagicChatAggregateSearchReqDTO;
-use App\Domain\Chat\DTO\AISearch\Response\MagicAggregateSearchSummaryDTO;
+use App\Domain\Chat\DTO\AISearch\Request\DelightfulChatAggregateSearchReqDTO;
+use App\Domain\Chat\DTO\AISearch\Response\DelightfulAggregateSearchSummaryDTO;
 use App\Domain\Chat\DTO\Message\ChatMessage\AggregateAISearchCardMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\AggregateAISearchCardMessageV2;
 use App\Domain\Chat\DTO\Message\ChatMessage\Item\DeepSearch\QuestionItem;
@@ -20,17 +20,17 @@ use App\Domain\Chat\DTO\Message\StreamMessage\FinishedReasonEnum;
 use App\Domain\Chat\DTO\Message\StreamMessage\StreamMessageStatus;
 use App\Domain\Chat\DTO\Message\StreamMessage\StreamOptions;
 use App\Domain\Chat\DTO\Stream\CreateStreamSeqDTO;
-use App\Domain\Chat\Entity\MagicMessageEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
 use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Chat\Entity\ValueObject\AISearchCommonQueryVo;
 use App\Domain\Chat\Entity\ValueObject\LLMModelEnum;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
-use App\Domain\Chat\Service\MagicChatDomainService;
-use App\Domain\Chat\Service\MagicConversationDomainService;
-use App\Domain\Chat\Service\MagicLLMDomainService;
-use App\Domain\Contact\Entity\MagicUserEntity;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Chat\Service\DelightfulChatDomainService;
+use App\Domain\Chat\Service\DelightfulConversationDomainService;
+use App\Domain\Chat\Service\DelightfulLLMDomainService;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\ModelGateway\Entity\ValueObject\ModelGatewayDataIsolation;
 use App\ErrorCode\ChatErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -56,16 +56,16 @@ use Throwable;
 /**
  * 聊天消息相关.
  */
-class MagicChatAISearchV2AppService extends AbstractAppService
+class DelightfulChatAISearchV2AppService extends AbstractAppService
 {
     protected LoggerInterface $logger;
 
     public function __construct(
-        private readonly MagicLLMDomainService $magicLLMDomainService,
+        private readonly DelightfulLLMDomainService $magicLLMDomainService,
         private readonly IdGeneratorInterface $idGenerator,
-        protected readonly MagicConversationDomainService $magicConversationDomainService,
-        protected readonly MagicUserDomainService $magicUserDomainService,
-        protected readonly MagicChatDomainService $magicChatDomainService,
+        protected readonly DelightfulConversationDomainService $magicConversationDomainService,
+        protected readonly DelightfulUserDomainService $magicUserDomainService,
+        protected readonly DelightfulChatDomainService $magicChatDomainService,
         protected readonly Redis $redis
     ) {
         $this->logger = di()->get(LoggerFactory::class)->get('aggregate_ai_search_card_v2');
@@ -74,7 +74,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
     /**
      * @throws Throwable
      */
-    public function aggregateSearch(MagicChatAggregateSearchReqDTO $dto): void
+    public function aggregateSearch(DelightfulChatAggregateSearchReqDTO $dto): void
     {
         $conversationId = $dto->getConversationId();
         $topicId = $dto->getTopicId();
@@ -110,8 +110,8 @@ class MagicChatAISearchV2AppService extends AbstractAppService
             # 初始化流式消息并发送搜索深度
             $this->initStreamAndSendSearchDeepLevel($dto);
             // 获取 im 中指定会话下某个话题的历史消息，作为 llm 的历史消息
-            $rawHistoryMessages = $this->getMagicChatMessages($dto->getConversationId(), $dto->getTopicId());
-            $dto->setMagicChatMessageHistory($rawHistoryMessages);
+            $rawHistoryMessages = $this->getDelightfulChatMessages($dto->getConversationId(), $dto->getTopicId());
+            $dto->setDelightfulChatMessageHistory($rawHistoryMessages);
 
             # 2.搜索用户问题.这里一定会拆分一次关联问题
             $searchDetailItems = $this->searchUserQuestion($dto);
@@ -166,7 +166,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
      * @throws Throwable
      * @throws RedisException
      */
-    public function easyInternetSearch(MagicChatAggregateSearchReqDTO $dto): ?MagicAggregateSearchSummaryDTO
+    public function easyInternetSearch(DelightfulChatAggregateSearchReqDTO $dto): ?DelightfulAggregateSearchSummaryDTO
     {
         $conversationId = $dto->getConversationId();
         $topicId = $dto->getTopicId();
@@ -216,7 +216,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
      * @param SearchDetailItem[] $noRepeatSearchContexts
      */
     public function simpleSearch(
-        MagicChatAggregateSearchReqDTO $dto,
+        DelightfulChatAggregateSearchReqDTO $dto,
         array $associateQuestions,
         array $noRepeatSearchContexts
     ): void {
@@ -270,7 +270,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
      * @param SearchDetailItem[] $noRepeatSearchContexts
      */
     public function generateAndSendAssociateSubQuestions(
-        MagicChatAggregateSearchReqDTO $dto,
+        DelightfulChatAggregateSearchReqDTO $dto,
         array $noRepeatSearchContexts,
         array $associateQuestions
     ): void {
@@ -332,12 +332,12 @@ class MagicChatAISearchV2AppService extends AbstractAppService
     /**
      * @return array searchDetailItem 对象的二维数组形式，这里为了兼容和方便，不进行对象转换
      */
-    public function searchUserQuestion(MagicChatAggregateSearchReqDTO $dto): array
+    public function searchUserQuestion(DelightfulChatAggregateSearchReqDTO $dto): array
     {
         $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId());
         $start = microtime(true);
         $llmConversationId = (string) IdGenerator::getSnowId();
-        $llmHistoryMessage = MagicChatAggregateSearchReqDTO::generateLLMHistory($dto->getMagicChatMessageHistory(), $llmConversationId);
+        $llmHistoryMessage = DelightfulChatAggregateSearchReqDTO::generateLLMHistory($dto->getDelightfulChatMessageHistory(), $llmConversationId);
         $queryVo = (new AISearchCommonQueryVo())
             ->setUserMessage($dto->getUserMessage())
             ->setSearchEngine($dto->getSearchEngine())
@@ -365,7 +365,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
      * @return QuestionItem[]
      */
     public function generateAndSendAssociateQuestions(
-        MagicChatAggregateSearchReqDTO $dto,
+        DelightfulChatAggregateSearchReqDTO $dto,
         AISearchCommonQueryVo $queryVo,
         string $questionParentId
     ): array {
@@ -411,7 +411,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
      * @return SearchDetailItem[]
      * @throws Throwable
      */
-    public function generateSearchResults(MagicChatAggregateSearchReqDTO $dto, array $associateQuestions): array
+    public function generateSearchResults(DelightfulChatAggregateSearchReqDTO $dto, array $associateQuestions): array
     {
         $start = microtime(true);
         // 根据关联问题，发起简单搜索（不拿网页详情),并过滤掉重复或者与问题关联性不高的网页内容
@@ -463,10 +463,10 @@ class MagicChatAISearchV2AppService extends AbstractAppService
      * @throws Throwable
      */
     public function generateAndSendSummary(
-        MagicChatAggregateSearchReqDTO $dto,
+        DelightfulChatAggregateSearchReqDTO $dto,
         array $noRepeatSearchContexts,
         array $associateQuestions,
-    ): MagicAggregateSearchSummaryDTO {
+    ): DelightfulAggregateSearchSummaryDTO {
         // 由于是流式输出响应，因此让前端判断 ai 引用的搜索 url。
         CoContext::setRequestId($dto->getRequestId());
         // 移除 detail
@@ -488,16 +488,16 @@ class MagicChatAISearchV2AppService extends AbstractAppService
      * @throws Throwable
      */
     public function generateSummary(
-        MagicChatAggregateSearchReqDTO $dto,
+        DelightfulChatAggregateSearchReqDTO $dto,
         array $noRepeatSearchContexts,
         array $associateQuestions
-    ): MagicAggregateSearchSummaryDTO {
+    ): DelightfulAggregateSearchSummaryDTO {
         $searchKeywords = $this->getSearchKeywords($associateQuestions);
         $dto->setRequestId(CoContext::getRequestId());
         $summaryMessageId = (string) $this->idGenerator->generate();
         $start = microtime(true);
         $llmConversationId = (string) IdGenerator::getSnowId();
-        $llmHistoryMessage = MagicChatAggregateSearchReqDTO::generateLLMHistory($dto->getMagicChatMessageHistory(), $llmConversationId);
+        $llmHistoryMessage = DelightfulChatAggregateSearchReqDTO::generateLLMHistory($dto->getDelightfulChatMessageHistory(), $llmConversationId);
         $queryVo = (new AISearchCommonQueryVo())
             ->setUserMessage($dto->getUserMessage())
             ->setMessageHistory($llmHistoryMessage)
@@ -524,7 +524,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
         $messageContent->setStreamOptions($streamOptions);
         // 流式响应
         $summarizeStreamResponse = '';
-        $messageDTO = new MagicMessageEntity();
+        $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setMessageType(ChatMessageType::AggregateAISearchCard)->setSenderId($senderConversationEntity->getUserId());
         $streamOptions->setStatus(StreamMessageStatus::Processing);
         $hasReasoningContent = false;
@@ -564,7 +564,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
             'finished_reason' => FinishedReasonEnum::Finished,
         ]]);
         $this->logger->info(sprintf('getSearchResults 生成总结，结束计时，耗时：%s 秒', microtime(true) - $start));
-        $summaryDTO = new MagicAggregateSearchSummaryDTO();
+        $summaryDTO = new DelightfulAggregateSearchSummaryDTO();
         $summaryDTO->setLlmResponse($summarizeStreamResponse);
         $summaryDTO->setSearchContext($noRepeatSearchContexts);
         return $summaryDTO;
@@ -573,7 +573,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
     /**
      * @param SearchDetailItem[] $noRepeatSearchContexts
      */
-    public function generateAndSendExtra(MagicChatAggregateSearchReqDTO $dto, array $noRepeatSearchContexts, MagicAggregateSearchSummaryDTO $summarize): void
+    public function generateAndSendExtra(DelightfulChatAggregateSearchReqDTO $dto, array $noRepeatSearchContexts, DelightfulAggregateSearchSummaryDTO $summarize): void
     {
         // 生成思维导图和PPT
         $extraContentParallel = new Parallel(3);
@@ -617,12 +617,12 @@ class MagicChatAISearchV2AppService extends AbstractAppService
         }
     }
 
-    public function getUserInfo(string $senderUserId): ?MagicUserEntity
+    public function getUserInfo(string $senderUserId): ?DelightfulUserEntity
     {
         return $this->magicUserDomainService->getUserById($senderUserId);
     }
 
-    protected function sendAssociateQuestions(MagicChatAggregateSearchReqDTO $dto, array $associateQuestions, string $parentQuestionId): void
+    protected function sendAssociateQuestions(DelightfulChatAggregateSearchReqDTO $dto, array $associateQuestions, string $parentQuestionId): void
     {
         // 将关联问题推送给前端
         $questionKey = AggregateAISearchCardMessageV2::QUESTION_DELIMITER . $parentQuestionId;
@@ -650,7 +650,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
         return $associateQuestions;
     }
 
-    protected function streamSendSearchWebPages(MagicChatAggregateSearchReqDTO $dto, QuestionSearchResult $webSearchItem): void
+    protected function streamSendSearchWebPages(DelightfulChatAggregateSearchReqDTO $dto, QuestionSearchResult $webSearchItem): void
     {
         $webSearchItemArray = $webSearchItem->toArray();
         // 去掉 detail 字段
@@ -666,7 +666,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
     /**
      * @throws Throwable
      */
-    protected function generateAndSendPPT(MagicChatAggregateSearchReqDTO $dto, AISearchCommonQueryVo $queryVo, string $mindMap): void
+    protected function generateAndSendPPT(DelightfulChatAggregateSearchReqDTO $dto, AISearchCommonQueryVo $queryVo, string $mindMap): void
     {
         $start = microtime(true);
         $ppt = $this->magicLLMDomainService->generatePPTFromMindMap($queryVo, $mindMap);
@@ -681,7 +681,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
     /**
      * @throws Throwable
      */
-    protected function generateAndSendMindMap(MagicChatAggregateSearchReqDTO $dto, AISearchCommonQueryVo $queryVo): string
+    protected function generateAndSendMindMap(DelightfulChatAggregateSearchReqDTO $dto, AISearchCommonQueryVo $queryVo): string
     {
         $start = microtime(true);
         $mindMap = $this->magicLLMDomainService->generateMindMapFromMessage($queryVo);
@@ -694,7 +694,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
     /**
      * @param SearchDetailItem[] $noRepeatSearchContexts
      */
-    protected function generateAndSendEvent(MagicChatAggregateSearchReqDTO $dto, AISearchCommonQueryVo $queryVo, array $noRepeatSearchContexts): void
+    protected function generateAndSendEvent(DelightfulChatAggregateSearchReqDTO $dto, AISearchCommonQueryVo $queryVo, array $noRepeatSearchContexts): void
     {
         $start = microtime(true);
         $events = $this->magicLLMDomainService->generateEventFromMessage($queryVo, $noRepeatSearchContexts);
@@ -709,7 +709,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
     }
 
     protected function streamSendDeepSearchMessages(
-        MagicChatAggregateSearchReqDTO $dto,
+        DelightfulChatAggregateSearchReqDTO $dto,
         array $messageContent,
         ?StreamMessageStatus $streamMessageStatus = null
     ): void {
@@ -735,7 +735,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
     /**
      * @throws Throwable
      */
-    private function initStreamAndSendSearchDeepLevel(MagicChatAggregateSearchReqDTO $dto): void
+    private function initStreamAndSendSearchDeepLevel(DelightfulChatAggregateSearchReqDTO $dto): void
     {
         $senderConversationEntity = $this->magicConversationDomainService->getConversationByIdWithoutCheck($dto->getConversationId());
         if ($senderConversationEntity === null) {
@@ -751,7 +751,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
             $messageContent,
             $senderConversationEntity
         );
-        $dto->setMagicSeqEntity($senderSeqEntity);
+        $dto->setDelightfulSeqEntity($senderSeqEntity);
 
         // 开始更新 seq 的字段
         $this->streamSendDeepSearchMessages($dto, ['search_deep_level' => $dto->getSearchDeepLevel()->value]);
@@ -762,7 +762,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
      * 完全精读完毕时，最后再推一次
      */
     private function sendLLMResponseForAssociateQuestions(
-        MagicChatAggregateSearchReqDTO $dto,
+        DelightfulChatAggregateSearchReqDTO $dto,
         array $associateQuestionIds,
         ?Channel $readPagesDetailChannel
     ): void {
@@ -846,7 +846,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
      * @param SearchDetailItem[] $noRepeatSearchContexts
      */
     private function getAssociateQuestionsQueryVo(
-        MagicChatAggregateSearchReqDTO $dto,
+        DelightfulChatAggregateSearchReqDTO $dto,
         array $noRepeatSearchContexts,
         string $searchKeyword = ''
     ): AISearchCommonQueryVo {
@@ -854,7 +854,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
             $searchKeyword = $dto->getUserMessage();
         }
         $llmConversationId = (string) IdGenerator::getSnowId();
-        $llmHistoryMessage = MagicChatAggregateSearchReqDTO::generateLLMHistory($dto->getMagicChatMessageHistory(), $llmConversationId);
+        $llmHistoryMessage = DelightfulChatAggregateSearchReqDTO::generateLLMHistory($dto->getDelightfulChatMessageHistory(), $llmConversationId);
         $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId());
         return (new AISearchCommonQueryVo())
             ->setUserMessage($searchKeyword)
@@ -869,10 +869,10 @@ class MagicChatAISearchV2AppService extends AbstractAppService
             ->setOrganizationCode($dto->getOrganizationCode());
     }
 
-    private function getSearchVOByAggregateSearchDTO(MagicChatAggregateSearchReqDTO $dto, MagicAggregateSearchSummaryDTO $summarize): AISearchCommonQueryVo
+    private function getSearchVOByAggregateSearchDTO(DelightfulChatAggregateSearchReqDTO $dto, DelightfulAggregateSearchSummaryDTO $summarize): AISearchCommonQueryVo
     {
         $llmConversationId = (string) IdGenerator::getSnowId();
-        $llmHistoryMessage = MagicChatAggregateSearchReqDTO::generateLLMHistory($dto->getMagicChatMessageHistory(), $llmConversationId);
+        $llmHistoryMessage = DelightfulChatAggregateSearchReqDTO::generateLLMHistory($dto->getDelightfulChatMessageHistory(), $llmConversationId);
         return (new AISearchCommonQueryVo())
             ->setConversationId($llmConversationId)
             ->setUserMessage($dto->getUserMessage())
@@ -887,7 +887,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
      * @param QuestionItem[] $associateQuestions
      * @param SearchDetailItem[] $noRepeatSearchContexts
      */
-    private function deepSearch(MagicChatAggregateSearchReqDTO $dto, array $associateQuestions, array &$noRepeatSearchContexts, Channel $readPagesDetailChannel): void
+    private function deepSearch(DelightfulChatAggregateSearchReqDTO $dto, array $associateQuestions, array &$noRepeatSearchContexts, Channel $readPagesDetailChannel): void
     {
         $timeStart = microtime(true);
         $parallel = new Parallel(2);
@@ -909,7 +909,7 @@ class MagicChatAISearchV2AppService extends AbstractAppService
     /**
      * 获取 im中指定会话下某个话题的历史消息，作为 llm 的历史消息.
      */
-    private function getMagicChatMessages(string $magicChatConversationId, string $topicId): array
+    private function getDelightfulChatMessages(string $magicChatConversationId, string $topicId): array
     {
         $rawHistoryMessages = $this->magicChatDomainService->getLLMContentForAgent($magicChatConversationId, $topicId);
         // 取最后指定条数的对话记录

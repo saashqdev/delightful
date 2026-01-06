@@ -9,10 +9,10 @@ namespace App\Domain\Authentication\Service;
 
 use App\Domain\Authentication\Repository\Facade\AuthenticationRepositoryInterface;
 use App\Domain\Contact\Entity\AccountEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
-use App\Domain\Token\Entity\MagicTokenEntity;
-use App\Domain\Token\Entity\ValueObject\MagicTokenType;
-use App\Domain\Token\Repository\Facade\MagicTokenRepositoryInterface;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
+use App\Domain\Token\Entity\DelightfulTokenEntity;
+use App\Domain\Token\Entity\ValueObject\DelightfulTokenType;
+use App\Domain\Token\Repository\Facade\DelightfulTokenRepositoryInterface;
 use App\ErrorCode\AuthenticationErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
@@ -22,7 +22,7 @@ readonly class AuthenticationDomainService
 {
     public function __construct(
         private AuthenticationRepositoryInterface $authenticationRepository,
-        private MagicTokenRepositoryInterface $magicTokenRepository,
+        private DelightfulTokenRepositoryInterface $magicTokenRepository,
         private PasswordService $passwordService
     ) {
     }
@@ -49,9 +49,9 @@ readonly class AuthenticationDomainService
     /**
      * 在组织中查找用户.
      */
-    public function findUserInOrganization(string $magicId, ?string $organizationCode = null): ?MagicUserEntity
+    public function findUserInOrganization(string $magicId, ?string $organizationCode = null): ?DelightfulUserEntity
     {
-        return $this->authenticationRepository->findUserByMagicIdAndOrganization($magicId, $organizationCode);
+        return $this->authenticationRepository->findUserByDelightfulIdAndOrganization($magicId, $organizationCode);
     }
 
     /**
@@ -64,8 +64,8 @@ readonly class AuthenticationDomainService
     {
         // 写入 token 表
         $authorization = IdGenerator::getUniqueIdSha256();
-        $magicTokenEntity = new MagicTokenEntity();
-        $magicTokenEntity->setType(MagicTokenType::Account);
+        $magicTokenEntity = new DelightfulTokenEntity();
+        $magicTokenEntity->setType(DelightfulTokenType::Account);
         $magicTokenEntity->setTypeRelationValue($magicId);
         $magicTokenEntity->setToken($authorization);
         // 默认 30 天

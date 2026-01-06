@@ -46,7 +46,7 @@ export type BroadcastEventMap = {
  * BroadcastChannel 类用于实现多个 tab 间的通信
  * 基于浏览器原生的 BroadcastChannel API
  */
-export class MagicBroadcastChannel {
+export class DelightfulBroadcastChannel {
 	private channel: BroadcastChannel | null = null
 	private channelName: string
 	private connected: boolean = false

@@ -1,7 +1,7 @@
 import { Flex } from "antd"
-import MagicMemberAvatar from "@/opensource/components/business/MagicMemberAvatar"
+import DelightfulMemberAvatar from "@/opensource/components/business/DelightfulMemberAvatar"
 import { formatFileSize, formatTime } from "@/utils/string"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconBadgeHd, IconDownload, IconMessagePin, IconShare3 } from "@tabler/icons-react"
 import { useTranslation } from "react-i18next"
 import type { ConversationMessage } from "@/types/chat/conversation_message"
@@ -112,7 +112,7 @@ function Header(props: ChatImagePreviewHeader) {
 			onMouseDown={onMouseDown}
 		>
 			<Flex gap={10}>
-				<MagicMemberAvatar uid={message?.message?.sender_id} showPopover={false} />
+				<DelightfulMemberAvatar uid={message?.message?.sender_id} showPopover={false} />
 				<Flex vertical gap={2}>
 					<div className={styles.title}>{title}</div>
 					<div className={styles.subtitle}>{subTitle}</div>
@@ -120,7 +120,7 @@ function Header(props: ChatImagePreviewHeader) {
 			</Flex>
 			<Flex gap={10}>
 				{info?.useHDImage && (
-					<MagicButton
+					<DelightfulButton
 						type="text"
 						className={styles.headerButton}
 						onClick={onHighDefinition}
@@ -130,9 +130,9 @@ function Header(props: ChatImagePreviewHeader) {
 							<IconBadgeHd className={styles.icon} size={20} />
 							<span>{hdText}</span>
 						</Flex>
-					</MagicButton>
+					</DelightfulButton>
 				)}
-				<MagicButton
+				<DelightfulButton
 					hidden={!info?.messageId}
 					type="text"
 					className={styles.headerButton}
@@ -142,19 +142,19 @@ function Header(props: ChatImagePreviewHeader) {
 						<IconMessagePin className={styles.icon} size={20} />
 						<span>{t("chat.imagePreview.navigateToMessage")}</span>
 					</Flex>
-				</MagicButton>
-				<MagicButton type="text" className={styles.headerButton}>
+				</DelightfulButton>
+				<DelightfulButton type="text" className={styles.headerButton}>
 					<Flex vertical align="center" justify="center">
 						<IconShare3 className={styles.icon} size={20} />
 						<span>{t("chat.imagePreview.transpond")}</span>
 					</Flex>
-				</MagicButton>
-				<MagicButton type="text" className={styles.headerButton} onClick={onDownload}>
+				</DelightfulButton>
+				<DelightfulButton type="text" className={styles.headerButton} onClick={onDownload}>
 					<Flex vertical align="center" justify="center">
 						<IconDownload className={styles.icon} size={20} />
 						<span>{t("chat.imagePreview.download")}</span>
 					</Flex>
-				</MagicButton>
+				</DelightfulButton>
 			</Flex>
 		</Flex>
 	)

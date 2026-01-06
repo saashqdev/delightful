@@ -10,7 +10,7 @@ namespace App\Domain\Chat\Entity;
 use App\Domain\Chat\Entity\ValueObject\FriendStatus;
 use App\Domain\Contact\Entity\ValueObject\UserType;
 
-final class MagicFriendEntity extends AbstractEntity
+final class DelightfulFriendEntity extends AbstractEntity
 {
     protected string $id;
 

@@ -1,9 +1,9 @@
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import { ShowColumns } from "@/MagicJsonSchemaEditor/constants"
-import Schema from "@/MagicJsonSchemaEditor/types/Schema"
+import { ShowColumns } from "@/DelightfulJsonSchemaEditor/constants"
+import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import DropdownCard from "@/common/BaseUI/DropdownCard"
 import JSONSchemaRenderer from "@/common/BaseUI/JSONSchemaRenderer"
-import { MagicJsonSchemaEditor } from "@/index"
+import { DelightfulJsonSchemaEditor } from "@/index"
 import { Form } from "antd"
 import { useMount } from "ahooks"
 import _ from "lodash"
@@ -28,7 +28,7 @@ export default function SubFlowV0() {
 		<Form form={form} className={styles.subFlow} layout="vertical">
 			<div className={styles.input}>
 				<DropdownCard title="输入" height="auto">
-					<MagicJsonSchemaEditor
+					<DelightfulJsonSchemaEditor
 						data={input}
 						onChange={setInput}
 						allowExpression

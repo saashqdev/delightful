@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Repository\Persistence;
 
-use App\Domain\Agent\Constant\MagicAgentReleaseStatus;
-use App\Domain\Agent\Constant\MagicAgentVersionStatus;
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
+use App\Domain\Agent\Constant\DelightfulAgentReleaseStatus;
+use App\Domain\Agent\Constant\DelightfulAgentVersionStatus;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
 use App\Domain\Agent\Entity\ValueObject\AgentDataIsolation;
-use App\Domain\Agent\Factory\MagicAgentVersionFactory;
+use App\Domain\Agent\Factory\DelightfulAgentVersionFactory;
 use App\Domain\Agent\Repository\Facade\AgentVersionRepositoryInterface;
-use App\Domain\Agent\Repository\Persistence\Model\MagicAgentModel;
-use App\Domain\Agent\Repository\Persistence\Model\MagicAgentVersionModel;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowVersionQuery;
+use App\Domain\Agent\Repository\Persistence\Model\DelightfulAgentModel;
+use App\Domain\Agent\Repository\Persistence\Model\DelightfulAgentVersionModel;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowVersionQuery;
 use App\Infrastructure\Core\AbstractRepository;
 use App\Infrastructure\Core\ValueObject\Page;
 
@@ -26,16 +26,16 @@ class AgentVersionRepository extends AbstractRepository implements AgentVersionR
     /**
      * 获取组织内可用的 Agent 版本.
      *
-     * @return array{total: int, list: array<MagicAgentVersionEntity>}
+     * @return array{total: int, list: array<DelightfulAgentVersionEntity>}
      */
-    public function getOrgAvailableAgents(AgentDataIsolation $dataIsolation, MagicFLowVersionQuery $query, Page $page): array
+    public function getOrgAvailableAgents(AgentDataIsolation $dataIsolation, DelightfulFLowVersionQuery $query, Page $page): array
     {
-        $builder = $this->createBuilder($dataIsolation, MagicAgentModel::query());
-        $versionBuilder = $this->createBuilder($dataIsolation, MagicAgentVersionModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulAgentModel::query());
+        $versionBuilder = $this->createBuilder($dataIsolation, DelightfulAgentVersionModel::query());
 
         // 查询所有的启用版本 id
         $botVersionIds = $builder
-            ->where('status', '=', MagicAgentVersionStatus::ENTERPRISE_ENABLED->value)
+            ->where('status', '=', DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value)
             ->whereNotNull('bot_version_id')
             ->pluck('bot_version_id')->toArray();
         if (empty($botVersionIds)) {
@@ -43,12 +43,12 @@ class AgentVersionRepository extends AbstractRepository implements AgentVersionR
         }
 
         $versionBuilder->whereIn('id', $botVersionIds);
-        $versionBuilder->where('release_scope', '=', MagicAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value);
+        $versionBuilder->where('release_scope', '=', DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value);
         $data = $this->getByPage($versionBuilder, $page, $query);
         $list = [];
-        /** @var MagicAgentVersionModel $item */
+        /** @var DelightfulAgentVersionModel $item */
         foreach ($data['list'] as $item) {
-            $list[] = MagicAgentVersionFactory::toEntity($item->toArray());
+            $list[] = DelightfulAgentVersionFactory::toEntity($item->toArray());
         }
         $data['list'] = $list;
         return $data;

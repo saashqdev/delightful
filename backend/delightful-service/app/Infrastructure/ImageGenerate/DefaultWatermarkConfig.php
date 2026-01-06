@@ -21,7 +21,7 @@ class DefaultWatermarkConfig implements WatermarkConfigInterface
     {
         // 开源版本默认不启用水印
         return new WatermarkConfig(
-            logoTextContent: 'Magic AI Generated', // 默认水印文字
+            logoTextContent: 'Delightful AI Generated', // 默认水印文字
             position: 3, // 右下角
             opacity: 0.3, // 30% 透明度,
         );

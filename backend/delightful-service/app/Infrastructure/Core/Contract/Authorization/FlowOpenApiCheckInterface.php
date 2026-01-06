@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Core\Contract\Authorization;
 
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
-use App\Interfaces\Flow\DTO\MagicFlowApiChatDTO;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
+use App\Interfaces\Flow\DTO\DelightfulFlowApiChatDTO;
 
 interface FlowOpenApiCheckInterface
 {
-    public function handle(MagicFlowApiChatDTO $magicFlowApiChatDTO): MagicUserAuthorization;
+    public function handle(DelightfulFlowApiChatDTO $magicFlowApiChatDTO): DelightfulUserAuthorization;
 }

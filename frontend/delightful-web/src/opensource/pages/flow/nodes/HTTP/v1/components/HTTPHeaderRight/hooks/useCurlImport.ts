@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import { useState, useCallback } from "react"
-import { useFlow } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
+import { useFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
 import { message } from "antd"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { parseCurlCommand } from "@/opensource/pages/flow/utils/curl/curlParser"
 import {
 	generateComponentId,

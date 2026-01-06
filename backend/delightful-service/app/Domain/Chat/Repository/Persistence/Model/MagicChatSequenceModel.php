@@ -31,7 +31,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $app_message_id
  * @property string $deleted_at
  */
-class MagicChatSequenceModel extends Model
+class DelightfulChatSequenceModel extends Model
 {
     use SoftDeletes;
 

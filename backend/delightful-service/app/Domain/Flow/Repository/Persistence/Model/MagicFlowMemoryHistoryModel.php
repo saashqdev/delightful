@@ -24,7 +24,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $created_uid
  * @property DateTime $created_at
  */
-class MagicFlowMemoryHistoryModel extends AbstractModel
+class DelightfulFlowMemoryHistoryModel extends AbstractModel
 {
     use Snowflake;
 

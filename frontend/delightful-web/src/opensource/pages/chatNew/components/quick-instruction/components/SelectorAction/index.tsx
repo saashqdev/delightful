@@ -1,4 +1,4 @@
-import MagicMenu from "@/opensource/components/base/MagicMenu"
+import DelightfulMenu from "@/opensource/components/base/DelightfulMenu"
 import { InstructionMode, type SelectorQuickInstruction } from "@/types/bot"
 import { Popover } from "antd"
 import type { HTMLAttributes } from "react"
@@ -108,7 +108,7 @@ const SelectorAction = observer(({ instruction, ...rest }: InstructionItemProps)
 			arrow={false}
 			onOpenChange={setOpen}
 			content={
-				<MagicMenu
+				<DelightfulMenu
 					items={menuItems}
 					className={styles.menu}
 					onClick={handleClick}

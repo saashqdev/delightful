@@ -9,7 +9,7 @@ use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 use Hyperf\DbConnection\Db;
 
-class CreateMagicApiAccessTokenTable extends Migration
+class CreateDelightfulApiAccessTokenTable extends Migration
 {
     /**
      * Run the migrations.

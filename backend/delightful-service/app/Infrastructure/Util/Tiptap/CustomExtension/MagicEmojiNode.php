@@ -13,7 +13,7 @@ use Hyperf\Codec\Json;
 /**
  * 富文本的表情解析.
  */
-class MagicEmojiNode extends AbstractCustomNode
+class DelightfulEmojiNode extends AbstractCustomNode
 {
     public static $name = 'magic-emoji';
 

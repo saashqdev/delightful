@@ -1,9 +1,9 @@
 
-export { default as MagicExpressionWidget } from './MagicExpressionWidget/InputExpression';
+export { default as DelightfulExpressionWidget } from './DelightfulExpressionWidget/InputExpression';
 
-export { default as MagicJsonSchemaEditor } from './MagicJsonSchemaEditor';
+export { default as DelightfulJsonSchemaEditor } from './DelightfulJsonSchemaEditor';
 
-export { default as MagicConditionEdit } from './MagicConditionEdit';
+export { default as DelightfulConditionEdit } from './DelightfulConditionEdit';
 
-export { default as MagicFlow } from './DelightfulFlow';
+export { default as DelightfulFlow } from './DelightfulFlow';
 

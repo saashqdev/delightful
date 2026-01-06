@@ -9,16 +9,16 @@ import {
 } from "@/types/chat/conversation_message"
 import type { TimelineProps } from "antd"
 import { ConfigProvider, Flex, Timeline } from "antd"
-import MagicCollapse from "@/opensource/components/base/MagicCollapse"
+import DelightfulCollapse from "@/opensource/components/base/DelightfulCollapse"
 import { useTranslation } from "react-i18next"
 import { resolveToString } from "@dtyq/es6-template-strings"
 
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react"
 import { useBoolean, useMemoizedFn, useSize, useUpdateEffect } from "ahooks"
 import { isEmpty } from "lodash-es"
-import MagicMarkdown from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown"
-import MagicCitationProvider from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown/components/MagicCitation/Provider"
+import DelightfulMarkdown from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown"
+import DelightfulCitationProvider from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown/components/DelightfulCitation/Provider"
 import { observer } from "mobx-react-lite"
 import ErrorContent from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/ErrorContent"
 import TimeLineDot from "./components/TimeLineDot"
@@ -46,7 +46,7 @@ const configProviderTheme = {
 	},
 }
 
-interface MagicAggregateAISearchCardProps {
+interface DelightfulAggregateAISearchCardProps {
 	content?: AggregateAISearchCardContent
 	reasoningContent?: string
 	isStreaming?: boolean
@@ -55,13 +55,13 @@ interface MagicAggregateAISearchCardProps {
 
 const TimelineCollapsePanelKey = "timeline"
 
-const MagicAggregateAISearchCard = observer(
+const DelightfulAggregateAISearchCard = observer(
 	({
 		content,
 		reasoningContent,
 		isStreaming,
 		isReasoningStreaming,
-	}: MagicAggregateAISearchCardProps) => {
+	}: DelightfulAggregateAISearchCardProps) => {
 		const { fontSize } = useFontSize()
 		const { t } = useTranslation("interface")
 		const { magicColorUsages } = useTheme()
@@ -345,7 +345,7 @@ const MagicAggregateAISearchCard = observer(
 										: magicColorUsages.text[2],
 								}}
 							>
-								<MagicMarkdown content={item.title} />
+								<DelightfulMarkdown content={item.title} />
 							</span>
 							<SearchKeywords items={item.search_keywords} />
 							<div className={styles.questionReadCount}>
@@ -408,12 +408,12 @@ const MagicAggregateAISearchCard = observer(
 		}
 
 		return (
-			<MagicCitationProvider sources={content.search?.["0"]}>
+			<DelightfulCitationProvider sources={content.search?.["0"]}>
 				<ConfigProvider theme={configProviderTheme}>
 					<Flex vertical className={styles.container}>
 						<Flex vertical className={styles.timelineContainer}>
 							{/* 顶部问题搜索区域 */}
-							<MagicCollapse
+							<DelightfulCollapse
 								className={styles.questionCollapse}
 								style={{
 									margin: isSearchingFinish ? undefined : "-10px",
@@ -421,7 +421,7 @@ const MagicAggregateAISearchCard = observer(
 									maxWidth: isSearchingFinish ? size?.width : "unset",
 								}}
 								expandIcon={({ isActive }) => (
-									<MagicIcon
+									<DelightfulIcon
 										color="currentColor"
 										component={isActive ? IconChevronUp : IconChevronDown}
 									/>
@@ -450,12 +450,12 @@ const MagicAggregateAISearchCard = observer(
 							) : null}
 						</div>
 						{/* 思维导图、事件、搜索来源 */}
-						<MagicCollapse className={styles.collapse} items={collapseItems} />
+						<DelightfulCollapse className={styles.collapse} items={collapseItems} />
 					</Flex>
 				</ConfigProvider>
-			</MagicCitationProvider>
+			</DelightfulCitationProvider>
 		)
 	},
 )
 
-export default MagicAggregateAISearchCard
+export default DelightfulAggregateAISearchCard

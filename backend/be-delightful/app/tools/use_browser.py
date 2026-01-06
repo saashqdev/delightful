@@ -73,9 +73,9 @@ from app.tools.use_browser_operations.operations_registry import operations_regi
 from app.tools.visual_understanding import VisualUnderstanding, VisualUnderstandingParams
 from app.tools.workspace_guard_tool import WorkspaceGuardTool
 from magic_use.magic_browser import (
-    MagicBrowser,
-    MagicBrowserConfig,
-    MagicBrowserError,
+    DelightfulBrowser,
+    DelightfulBrowserConfig,
+    DelightfulBrowserError,
     PageStateSuccess,
     ScreenshotSuccess,
 )
@@ -269,7 +269,7 @@ class UseBrowser(WorkspaceGuardTool[UseBrowserParams], AbstractFileTool):
             Browser: Newly created browser instance
         """
         # Start with a scraping-friendly base config
-        browser_config = MagicBrowserConfig.create_for_scraping()
+        browser_config = DelightfulBrowserConfig.create_for_scraping()
 
         # Override with non-empty user config values
         if config.get("browser.headless") is not None:
@@ -288,13 +288,13 @@ class UseBrowser(WorkspaceGuardTool[UseBrowserParams], AbstractFileTool):
             browser_config.browser_type = config.get("browser.browser_type")
 
         # Create browser instance
-        browser = MagicBrowser(config=browser_config)
+        browser = DelightfulBrowser(config=browser_config)
         await browser.initialize()
         logger.info("Created new browser instance (multi-instance mode)")
 
         return browser
 
-    async def _take_screenshot_for_show(self, browser: MagicBrowser) -> Optional[str]:
+    async def _take_screenshot_for_show(self, browser: DelightfulBrowser) -> Optional[str]:
         """Capture a screenshot of the current active browser page."""
         try:
             # Get active page id
@@ -378,7 +378,7 @@ class UseBrowser(WorkspaceGuardTool[UseBrowserParams], AbstractFileTool):
             return {"error": error_msg}
         return operation_info
 
-    async def _validate_and_create_op_params(self, browser: MagicBrowser, operation: str,
+    async def _validate_and_create_op_params(self, browser: DelightfulBrowser, operation: str,
                                             params_class: Any, operation_params_dict: Dict[str, Any]) -> Any:
         """Validate and construct operation parameter object."""
         # Default to raw dict
@@ -420,7 +420,7 @@ class UseBrowser(WorkspaceGuardTool[UseBrowserParams], AbstractFileTool):
 
             return {"error": error_msg}
 
-    async def _generate_browser_status_summary(self, browser: MagicBrowser) -> str:
+    async def _generate_browser_status_summary(self, browser: DelightfulBrowser) -> str:
         """Generate a status summary for all browser pages."""
         try:
             # Get active page state
@@ -542,7 +542,7 @@ class UseBrowser(WorkspaceGuardTool[UseBrowserParams], AbstractFileTool):
             logger.error(f"Error generating browser status summary: {e}", exc_info=True)
             return "\n\n---\nBrowser status: failed to retrieve\n---"
 
-    async def _generate_visual_focus_summary(self, browser: MagicBrowser) -> str:
+    async def _generate_visual_focus_summary(self, browser: DelightfulBrowser) -> str:
         """Generate a visual focus summary for the current viewport.
 
         Returns empty string on failure or when no active page.
@@ -581,7 +581,7 @@ class UseBrowser(WorkspaceGuardTool[UseBrowserParams], AbstractFileTool):
                     error_msg = vision_result.content or "Visual model did not return valid content"
                     logger.warning(f"Visual understanding failed or returned no result: {error_msg}")
 
-            elif isinstance(screenshot_result, MagicBrowserError):
+            elif isinstance(screenshot_result, DelightfulBrowserError):
                 logger.warning(f"Screenshot for visual analysis failed: {screenshot_result.error}")
             else:
                  logger.warning(f"take_screenshot returned unexpected type: {type(screenshot_result)}")
@@ -591,7 +591,7 @@ class UseBrowser(WorkspaceGuardTool[UseBrowserParams], AbstractFileTool):
 
         return ""  # Empty string indicates skipped/failed
 
-    async def _process_operation_result(self, browser: MagicBrowser, handler_result: ToolResult) -> ToolResult:
+    async def _process_operation_result(self, browser: DelightfulBrowser, handler_result: ToolResult) -> ToolResult:
         """Post-process an operation result by appending status/vision summaries."""
         if not isinstance(handler_result, ToolResult):
             # Fatal error; code bug
@@ -644,7 +644,7 @@ class UseBrowser(WorkspaceGuardTool[UseBrowserParams], AbstractFileTool):
         try:
             # Get browser instance via resource manager
             agent_context = tool_context.get_extension_typed("agent_context", AgentContext)
-            browser: MagicBrowser = await agent_context.get_resource("browser", self._create_browser)
+            browser: DelightfulBrowser = await agent_context.get_resource("browser", self._create_browser)
 
             # --- Locate handler ---
             operation_info = await self._find_and_validate_operation(operation)
@@ -694,7 +694,7 @@ class UseBrowser(WorkspaceGuardTool[UseBrowserParams], AbstractFileTool):
             try:
                 # Get current page URL/title
                 agent_context = tool_context.get_extension_typed("agent_context", AgentContext)
-                browser: MagicBrowser = await agent_context.get_resource("browser", self._create_browser)
+                browser: DelightfulBrowser = await agent_context.get_resource("browser", self._create_browser)
                 page_id = await browser.get_active_page_id()
                 page = await browser.get_page_by_id(page_id)
                 url = page.url
@@ -716,7 +716,7 @@ class UseBrowser(WorkspaceGuardTool[UseBrowserParams], AbstractFileTool):
         operation = arguments.get("operation", "")
         try:
             agent_context = tool_context.get_extension_typed("agent_context", AgentContext)
-            browser: MagicBrowser = await agent_context.get_resource("browser", self._create_browser)
+            browser: DelightfulBrowser = await agent_context.get_resource("browser", self._create_browser)
             page_id = await browser.get_active_page_id()
             page = await browser.get_page_by_id(page_id)
             url = page.url

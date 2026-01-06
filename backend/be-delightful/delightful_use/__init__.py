@@ -1,10 +1,10 @@
 """
-Magic Browser module
+Delightful Browser module
 
 Provides browser automation functionality for web content scraping and interaction.
 """
 
-from magic_use.magic_browser import MagicBrowser
-from magic_use.magic_browser_config import MagicBrowserConfig
+from magic_use.magic_browser import DelightfulBrowser
+from magic_use.magic_browser_config import DelightfulBrowserConfig
 
-__all__ = ['MagicBrowser', 'MagicBrowserConfig']
+__all__ = ['DelightfulBrowser', 'DelightfulBrowserConfig']

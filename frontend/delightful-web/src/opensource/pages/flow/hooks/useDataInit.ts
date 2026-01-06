@@ -1,15 +1,15 @@
 import { useFlowStore } from "@/opensource/stores/flow"
-import { transformDataSource } from "@delightful/delightful-flow/dist/MagicExpressionWidget/helpers"
+import { transformDataSource } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/helpers"
 import { FlowType } from "@/types/flow"
 import { useMemoizedFn, useMount } from "ahooks"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { useEffect } from "react"
 import { FlowApi } from "@/apis"
 import { customNodeType } from "../constants"
 import type { ToolSelectedItem } from "../components/ToolsSelect/types"
 
 type UseDataInitProps = {
-	currentFlow?: MagicFlow.Flow
+	currentFlow?: DelightfulFlow.Flow
 }
 
 /**
@@ -92,7 +92,7 @@ export default function useDataInit({ currentFlow }: UseDataInitProps) {
 					if (!currentTool?.id) return toolsMap
 					toolsMap[currentTool.id] = currentTool
 					return toolsMap
-				}, {} as Record<string, MagicFlow.Flow>)
+				}, {} as Record<string, DelightfulFlow.Flow>)
 				updateToolInputOutputMap(map)
 			}
 		}

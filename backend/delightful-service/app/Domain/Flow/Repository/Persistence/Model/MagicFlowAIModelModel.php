@@ -38,7 +38,7 @@ use function Hyperf\Config\config;
  * @property DateTime $updated_at
  * @property DateTime $deleted_at
  */
-class MagicFlowAIModelModel extends AbstractModel
+class DelightfulFlowAIModelModel extends AbstractModel
 {
     use Snowflake;
 

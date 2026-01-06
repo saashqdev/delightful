@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Application\SuperAgent\Service;
+namespace Delightful\SuperDelightful\Application\SuperAgent\Service;
 
-use Delightful\SuperMagic\Domain\SuperAgent\Constant\TopicDuplicateConstant;
+use Delightful\SuperDelightful\Domain\SuperAgent\Constant\TopicDuplicateConstant;
 use Hyperf\Codec\Json;
 use Hyperf\Logger\LoggerFactory;
 use Hyperf\Redis\Redis;

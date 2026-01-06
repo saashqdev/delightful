@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Core;
 
-use App\Infrastructure\Core\Traits\MagicCacheTrait;
+use App\Infrastructure\Core\Traits\DelightfulCacheTrait;
 use DateTime;
 use Hyperf\Codec\Exception\InvalidArgumentException;
 use Hyperf\Codec\Json;
@@ -17,7 +17,7 @@ use Throwable;
 
 abstract class UnderlineObjectJsonSerializable implements JsonSerializable, Arrayable
 {
-    use MagicCacheTrait;
+    use DelightfulCacheTrait;
 
     public function jsonSerialize(): array
     {

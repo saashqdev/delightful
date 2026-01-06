@@ -11,11 +11,11 @@ use App\Domain\Permission\Entity\OperationPermissionEntity;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\Operation;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\ResourceType;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\TargetType;
-use App\Domain\Permission\Repository\Persistence\Model\MagicOperationPermissionModel;
+use App\Domain\Permission\Repository\Persistence\Model\DelightfulOperationPermissionModel;
 
-class MagicOperationPermissionFactory
+class DelightfulOperationPermissionFactory
 {
-    public static function createEntity(MagicOperationPermissionModel $model): OperationPermissionEntity
+    public static function createEntity(DelightfulOperationPermissionModel $model): OperationPermissionEntity
     {
         $entity = new OperationPermissionEntity();
         $entity->setId($model->id);

@@ -7,21 +7,21 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Repository\Persistence;
 
-use App\Domain\Agent\Entity\MagicBotThirdPlatformChatEntity;
-use App\Domain\Agent\Entity\ValueObject\Query\MagicBotThirdPlatformChatQuery;
-use App\Domain\Agent\Factory\MagicAgentThirdPlatformChatFactory;
-use App\Domain\Agent\Repository\Facade\MagicBotThirdPlatformChatRepositoryInterface;
-use App\Domain\Agent\Repository\Persistence\Model\MagicBotThirdPlatformChatModel;
+use App\Domain\Agent\Entity\DelightfulBotThirdPlatformChatEntity;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulBotThirdPlatformChatQuery;
+use App\Domain\Agent\Factory\DelightfulAgentThirdPlatformChatFactory;
+use App\Domain\Agent\Repository\Facade\DelightfulBotThirdPlatformChatRepositoryInterface;
+use App\Domain\Agent\Repository\Persistence\Model\DelightfulBotThirdPlatformChatModel;
 use App\Infrastructure\Core\AbstractRepository;
 use App\Infrastructure\Core\ValueObject\Page;
 
-class MagicBotThirdPlatformChatRepository extends AbstractRepository implements MagicBotThirdPlatformChatRepositoryInterface
+class DelightfulBotThirdPlatformChatRepository extends AbstractRepository implements DelightfulBotThirdPlatformChatRepositoryInterface
 {
-    public function save(MagicBotThirdPlatformChatEntity $entity): MagicBotThirdPlatformChatEntity
+    public function save(DelightfulBotThirdPlatformChatEntity $entity): DelightfulBotThirdPlatformChatEntity
     {
         if (! empty($entity->getId())) {
-            /** @var MagicBotThirdPlatformChatModel $model */
-            $model = MagicBotThirdPlatformChatModel::query()->find($entity->getId());
+            /** @var DelightfulBotThirdPlatformChatModel $model */
+            $model = DelightfulBotThirdPlatformChatModel::query()->find($entity->getId());
             $saveData = [
                 // 只允许修改是否启用
                 'identification' => $entity->getIdentification(),
@@ -31,43 +31,43 @@ class MagicBotThirdPlatformChatRepository extends AbstractRepository implements 
                 $saveData = $entity->toArray();
             }
         } else {
-            $model = new MagicBotThirdPlatformChatModel();
+            $model = new DelightfulBotThirdPlatformChatModel();
             $saveData = $entity->toArray();
         }
         $model->fill($saveData);
         $model->save();
-        return MagicAgentThirdPlatformChatFactory::modelToEntity($model);
+        return DelightfulAgentThirdPlatformChatFactory::modelToEntity($model);
     }
 
-    public function getByKey(string $key): ?MagicBotThirdPlatformChatEntity
+    public function getByKey(string $key): ?DelightfulBotThirdPlatformChatEntity
     {
-        $model = MagicBotThirdPlatformChatModel::query()->where('key', $key)->first();
+        $model = DelightfulBotThirdPlatformChatModel::query()->where('key', $key)->first();
         if (empty($model)) {
             return null;
         }
-        return MagicAgentThirdPlatformChatFactory::modelToEntity($model);
+        return DelightfulAgentThirdPlatformChatFactory::modelToEntity($model);
     }
 
-    public function getById(int $id): ?MagicBotThirdPlatformChatEntity
+    public function getById(int $id): ?DelightfulBotThirdPlatformChatEntity
     {
-        /** @var null|MagicBotThirdPlatformChatModel $model */
-        $model = MagicBotThirdPlatformChatModel::query()->find($id);
+        /** @var null|DelightfulBotThirdPlatformChatModel $model */
+        $model = DelightfulBotThirdPlatformChatModel::query()->find($id);
         if (empty($model)) {
             return null;
         }
-        return MagicAgentThirdPlatformChatFactory::modelToEntity($model);
+        return DelightfulAgentThirdPlatformChatFactory::modelToEntity($model);
     }
 
-    public function queries(MagicBotThirdPlatformChatQuery $query, Page $page): array
+    public function queries(DelightfulBotThirdPlatformChatQuery $query, Page $page): array
     {
-        $queryBuilder = MagicBotThirdPlatformChatModel::query();
+        $queryBuilder = DelightfulBotThirdPlatformChatModel::query();
         if (! empty($query->getBotId())) {
             $queryBuilder->where('bot_id', $query->getBotId());
         }
         $data = $this->getByPage($queryBuilder, $page, $query);
         $list = [];
         foreach ($data['list'] ?? [] as $datum) {
-            $entity = MagicAgentThirdPlatformChatFactory::modelToEntity($datum);
+            $entity = DelightfulAgentThirdPlatformChatFactory::modelToEntity($datum);
             if ($query->getKeyBy() === 'key') {
                 $list[$entity->getKey()] = $entity;
             } else {
@@ -78,8 +78,8 @@ class MagicBotThirdPlatformChatRepository extends AbstractRepository implements 
         return $data;
     }
 
-    public function destroy(MagicBotThirdPlatformChatEntity $entity): void
+    public function destroy(DelightfulBotThirdPlatformChatEntity $entity): void
     {
-        MagicBotThirdPlatformChatModel::query()->where('id', $entity->getId())->delete();
+        DelightfulBotThirdPlatformChatModel::query()->where('id', $entity->getId())->delete();
     }
 }

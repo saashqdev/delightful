@@ -8,14 +8,14 @@ declare(strict_types=1);
 namespace App\Application\Flow\Event\Subscribe;
 
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Event\MagicFlowPublishedEvent;
-use App\Domain\Flow\Service\MagicFlowDomainService;
+use App\Domain\Flow\Event\DelightfulFlowPublishedEvent;
+use App\Domain\Flow\Service\DelightfulFlowDomainService;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Psr\Container\ContainerInterface;
 
 #[Listener]
-readonly class MagicFlowCreateRoutineSubscriber implements ListenerInterface
+readonly class DelightfulFlowCreateRoutineSubscriber implements ListenerInterface
 {
     public function __construct(private ContainerInterface $container)
     {
@@ -24,17 +24,17 @@ readonly class MagicFlowCreateRoutineSubscriber implements ListenerInterface
     public function listen(): array
     {
         return [
-            MagicFlowPublishedEvent::class,
+            DelightfulFlowPublishedEvent::class,
         ];
     }
 
     public function process(object $event): void
     {
-        if (! $event instanceof MagicFlowPublishedEvent) {
+        if (! $event instanceof DelightfulFlowPublishedEvent) {
             return;
         }
         $magicFlow = $event->magicFlowEntity;
 
-        $this->container->get(MagicFlowDomainService::class)->createRoutine(FlowDataIsolation::create(), $magicFlow);
+        $this->container->get(DelightfulFlowDomainService::class)->createRoutine(FlowDataIsolation::create(), $magicFlow);
     }
 }

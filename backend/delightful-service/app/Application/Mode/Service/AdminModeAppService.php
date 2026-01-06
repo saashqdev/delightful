@@ -14,7 +14,7 @@ use App\Domain\Mode\Entity\ValueQuery\ModeQuery;
 use App\ErrorCode\ModeErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Mode\DTO\Request\CreateModeRequest;
 use App\Interfaces\Mode\DTO\Request\UpdateModeRequest;
 use Exception;
@@ -25,7 +25,7 @@ class AdminModeAppService extends AbstractModeAppService
     /**
      * 获取模式列表 (管理后台用，包含完整i18n字段).
      */
-    public function getModes(MagicUserAuthorization $authorization, Page $page): array
+    public function getModes(DelightfulUserAuthorization $authorization, Page $page): array
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
         // 管理后台查询：sort降序，不过滤默认模式
@@ -41,7 +41,7 @@ class AdminModeAppService extends AbstractModeAppService
     /**
      * 根据ID获取模式聚合根（包含模式详情、分组、模型关系）.
      */
-    public function getModeById(MagicUserAuthorization $authorization, string $id): AdminModeAggregateDTO
+    public function getModeById(DelightfulUserAuthorization $authorization, string $id): AdminModeAggregateDTO
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
         $modeAggregate = $this->modeDomainService->getModeDetailById($dataIsolation, $id);
@@ -61,7 +61,7 @@ class AdminModeAppService extends AbstractModeAppService
         return $modeAggregateDTO;
     }
 
-    public function getOriginMode(MagicUserAuthorization $authorization, string $id): AdminModeAggregateDTO
+    public function getOriginMode(DelightfulUserAuthorization $authorization, string $id): AdminModeAggregateDTO
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
         $modeAggregate = $this->modeDomainService->getOriginMode($dataIsolation, $id);
@@ -81,7 +81,7 @@ class AdminModeAppService extends AbstractModeAppService
     /**
      * 创建模式 (管理后台用).
      */
-    public function createMode(MagicUserAuthorization $authorization, CreateModeRequest $request): AdminModeDTO
+    public function createMode(DelightfulUserAuthorization $authorization, CreateModeRequest $request): AdminModeDTO
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
 
@@ -106,7 +106,7 @@ class AdminModeAppService extends AbstractModeAppService
     /**
      * 更新模式.
      */
-    public function updateMode(MagicUserAuthorization $authorization, string $modeId, UpdateModeRequest $request): AdminModeAggregateDTO
+    public function updateMode(DelightfulUserAuthorization $authorization, string $modeId, UpdateModeRequest $request): AdminModeAggregateDTO
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
 
@@ -138,7 +138,7 @@ class AdminModeAppService extends AbstractModeAppService
     /**
      * 更新模式状态
      */
-    public function updateModeStatus(MagicUserAuthorization $authorization, string $id, bool $status): bool
+    public function updateModeStatus(DelightfulUserAuthorization $authorization, string $id, bool $status): bool
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
 
@@ -153,7 +153,7 @@ class AdminModeAppService extends AbstractModeAppService
     /**
      * 获取默认模式.
      */
-    public function getDefaultMode(MagicUserAuthorization $authorization): ?AdminModeAggregateDTO
+    public function getDefaultMode(DelightfulUserAuthorization $authorization): ?AdminModeAggregateDTO
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
         $defaultModeAggregate = $this->modeDomainService->getDefaultMode($dataIsolation);
@@ -169,7 +169,7 @@ class AdminModeAppService extends AbstractModeAppService
     /**
      * 保存模式配置.
      */
-    public function saveModeConfig(MagicUserAuthorization $authorization, AdminModeAggregateDTO $modeAggregateDTO): AdminModeAggregateDTO
+    public function saveModeConfig(DelightfulUserAuthorization $authorization, AdminModeAggregateDTO $modeAggregateDTO): AdminModeAggregateDTO
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
 

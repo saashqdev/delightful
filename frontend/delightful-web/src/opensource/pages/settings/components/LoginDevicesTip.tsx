@@ -2,7 +2,7 @@ import { Flex } from "antd"
 import { useTheme, useThemeMode } from "antd-style"
 import { useTranslation } from "react-i18next"
 import { IconShieldLockFilled } from "@tabler/icons-react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 
 export default function LoginDevicesTip() {
 	const { t } = useTranslation("interface")
@@ -20,7 +20,7 @@ export default function LoginDevicesTip() {
 				backgroundColor: isDarkMode ? magicColorUsages.black : magicColorScales.green[0],
 			}}
 		>
-			<MagicIcon component={IconShieldLockFilled} color={magicColorScales.green[5]} size={18} />
+			<DelightfulIcon component={IconShieldLockFilled} color={magicColorScales.green[5]} size={18} />
 			<span>{t("setting.tip.loginDevicesTip")}</span>
 		</Flex>
 	)

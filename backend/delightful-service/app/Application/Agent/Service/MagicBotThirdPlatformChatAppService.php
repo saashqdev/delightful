@@ -14,25 +14,25 @@ use App\Application\Agent\Service\ThirdPlatformChat\ThirdPlatformCreateGroup;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionType;
 use App\Application\Flow\ExecuteManager\ExecutionData\TriggerData;
-use App\Application\Flow\ExecuteManager\MagicFlowExecutor;
+use App\Application\Flow\ExecuteManager\DelightfulFlowExecutor;
 use App\Application\Kernel\EnvManager;
 use App\Application\Kernel\SuperPermissionEnum;
-use App\Domain\Agent\Entity\MagicBotThirdPlatformChatEntity;
-use App\Domain\Agent\Entity\ValueObject\Query\MagicBotThirdPlatformChatQuery;
+use App\Domain\Agent\Entity\DelightfulBotThirdPlatformChatEntity;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulBotThirdPlatformChatQuery;
 use App\Domain\Agent\Entity\ValueObject\ThirdPlatformChat\ThirdPlatformChatType;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
 use App\Domain\Contact\Entity\AccountEntity;
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 use App\Domain\Flow\Entity\ValueObject\ConversationId;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\TriggerType;
-use App\Domain\Flow\Service\MagicFlowMemoryHistoryDomainService;
-use App\Domain\Group\Entity\MagicGroupEntity;
+use App\Domain\Flow\Service\DelightfulFlowMemoryHistoryDomainService;
+use App\Domain\Group\Entity\DelightfulGroupEntity;
 use App\ErrorCode\AgentErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Infrastructure\Util\Context\CoContext;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use DateTime;
 use Hyperf\Coroutine\Coroutine;
 use Hyperf\Coroutine\Parallel;
@@ -40,7 +40,7 @@ use Nyholm\Psr7\Response;
 use Qbhy\HyperfAuth\Authenticatable;
 use Throwable;
 
-class MagicBotThirdPlatformChatAppService extends AbstractAppService
+class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
 {
     public function chat(string $key, array $params): ThirdPlatformChatMessage
     {
@@ -124,7 +124,7 @@ class MagicBotThirdPlatformChatAppService extends AbstractAppService
                             originConversationId: $originConversationId,
                             executionType: ExecutionType::SKApi,
                         );
-                        $executor = new MagicFlowExecutor($magicFlow, $executionData);
+                        $executor = new DelightfulFlowExecutor($magicFlow, $executionData);
                         $executor->execute();
 
                         foreach ($executionData->getReplyMessages() as $message) {
@@ -134,7 +134,7 @@ class MagicBotThirdPlatformChatAppService extends AbstractAppService
                             }
                         }
                     } catch (Throwable $exception) {
-                        simple_logger('MagicBotThirdPlatformChatAppService')->notice('ChatError', [
+                        simple_logger('DelightfulBotThirdPlatformChatAppService')->notice('ChatError', [
                             'exception' => $exception->getMessage(),
                             'file' => $exception->getFile(),
                             'line' => $exception->getLine(),
@@ -150,7 +150,7 @@ class MagicBotThirdPlatformChatAppService extends AbstractAppService
         return $thirdPlatformChatMessage;
     }
 
-    public function save(Authenticatable $authorization, MagicBotThirdPlatformChatEntity $entity): MagicBotThirdPlatformChatEntity
+    public function save(Authenticatable $authorization, DelightfulBotThirdPlatformChatEntity $entity): DelightfulBotThirdPlatformChatEntity
     {
         $this->checkInternalWhite($authorization, SuperPermissionEnum::ASSISTANT_ADMIN);
         $entity->setAllUpdate(true);
@@ -170,7 +170,7 @@ class MagicBotThirdPlatformChatAppService extends AbstractAppService
     }
 
     /**
-     * @return array{total: int, list: MagicBotThirdPlatformChatEntity[]}
+     * @return array{total: int, list: DelightfulBotThirdPlatformChatEntity[]}
      */
     public function listByBotId(Authenticatable $authorization, string $botId, Page $page): array
     {
@@ -179,21 +179,21 @@ class MagicBotThirdPlatformChatAppService extends AbstractAppService
         }
         $permissionDataIsolation = $this->createPermissionDataIsolation($authorization);
         $this->getAgentOperation($permissionDataIsolation, $botId)->validate('r', $botId);
-        $query = new MagicBotThirdPlatformChatQuery();
+        $query = new DelightfulBotThirdPlatformChatQuery();
         $query->setBotId($botId);
         return $this->magicBotThirdPlatformChatDomainService->queries($query, $page);
     }
 
     /**
-     * @return array{total: int, list: MagicBotThirdPlatformChatEntity[]}
+     * @return array{total: int, list: DelightfulBotThirdPlatformChatEntity[]}
      */
-    public function queries(Authenticatable $authorization, MagicBotThirdPlatformChatQuery $query, Page $page): array
+    public function queries(Authenticatable $authorization, DelightfulBotThirdPlatformChatQuery $query, Page $page): array
     {
         $this->checkInternalWhite($authorization, SuperPermissionEnum::ASSISTANT_ADMIN);
         return $this->magicBotThirdPlatformChatDomainService->queries($query, $page);
     }
 
-    public function createChatGroup(string $key, array $groupMemberIds, MagicUserAuthorization $userAuthorization, MagicGroupEntity $magicGroupDTO): string
+    public function createChatGroup(string $key, array $groupMemberIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $magicGroupDTO): string
     {
         // 获取助理配置
         if (empty($key)) {
@@ -211,7 +211,7 @@ class MagicBotThirdPlatformChatAppService extends AbstractAppService
         }
         $magicIds = array_column($users, 'magic_id');
         /** @var array<string, AccountEntity> $accounts */
-        $accounts = $this->magicAccountDomainService->getAccountByMagicIds($magicIds);
+        $accounts = $this->magicAccountDomainService->getAccountByDelightfulIds($magicIds);
         if (count($accounts) === 0) {
             ExceptionBuilder::throw(AgentErrorCode::CREATE_GROUP_USER_ACCOUNT_NOT_EXIST, 'user.not_exist', ['magic_ids' => $magicIds]);
         }
@@ -222,7 +222,7 @@ class MagicBotThirdPlatformChatAppService extends AbstractAppService
         foreach ($accounts as $account) {
             $parallel->add(function () use ($requestId, $thirdPlatformChat, $account) {
                 CoContext::setRequestId($requestId);
-                return ['magic_id' => $account->getMagicId(), 'third_user_id' => $thirdPlatformChat->getThirdPlatformUserIdByMobiles($account->getPhone())];
+                return ['magic_id' => $account->getDelightfulId(), 'third_user_id' => $thirdPlatformChat->getThirdPlatformUserIdByMobiles($account->getPhone())];
             });
         }
         $thirdPlatformUserIds = [];
@@ -230,7 +230,7 @@ class MagicBotThirdPlatformChatAppService extends AbstractAppService
         $result = $parallel->wait();
         // 二位数组转成一维
         foreach ($result as $item) {
-            if ($item['magic_id'] == $userAuthorization->getMagicId()) {
+            if ($item['magic_id'] == $userAuthorization->getDelightfulId()) {
                 $ownerThirdPlatformUserId = $item['third_user_id'];
             }
             $thirdPlatformUserIds[] = $item['third_user_id'];
@@ -257,13 +257,13 @@ class MagicBotThirdPlatformChatAppService extends AbstractAppService
     private function clearMemory(string $conversationId): void
     {
         // 清理 flow 的自身记忆，仅更改原会话为备份会话
-        di(MagicFlowMemoryHistoryDomainService::class)->removeByConversationId(
+        di(DelightfulFlowMemoryHistoryDomainService::class)->removeByConversationId(
             FlowDataIsolation::create('', ''),
             $conversationId
         );
     }
 
-    private function getFlowByBotId(FlowDataIsolation $dataIsolation, string $botId): MagicFlowEntity
+    private function getFlowByBotId(FlowDataIsolation $dataIsolation, string $botId): DelightfulFlowEntity
     {
         $bot = $this->magicAgentDomainService->getAgentById($botId);
         if (! $bot->isAvailable()) {
@@ -272,7 +272,7 @@ class MagicBotThirdPlatformChatAppService extends AbstractAppService
         if ($bot->getAgentVersionId()) {
             $botVersion = $this->magicAgentVersionDomainService->getById($bot->getAgentVersionId());
             $flowVersion = $this->magicFlowVersionDomainService->show($dataIsolation, $bot->getFlowCode(), $botVersion->getFlowVersion());
-            $magicFlow = $flowVersion->getMagicFlow();
+            $magicFlow = $flowVersion->getDelightfulFlow();
             $magicFlow->setVersionCode($flowVersion->getCode());
         } else {
             $magicFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $bot->getFlowCode());

@@ -13,7 +13,7 @@ use App\Domain\Contact\Entity\ValueObject\ThirdPlatformIdMappingType;
 /**
  * 第三方平台与麦吉的部门、用户、组织编码、空间编码等的映射关系记录.
  */
-class MagicThirdPlatformIdMappingEntity extends AbstractEntity
+class DelightfulThirdPlatformIdMappingEntity extends AbstractEntity
 {
     protected string $id;
 
@@ -41,12 +41,12 @@ class MagicThirdPlatformIdMappingEntity extends AbstractEntity
         parent::__construct($data);
     }
 
-    public function getMagicEnvironmentId(): int
+    public function getDelightfulEnvironmentId(): int
     {
         return $this->magicEnvironmentId;
     }
 
-    public function setMagicEnvironmentId(int $magicEnvironmentId): void
+    public function setDelightfulEnvironmentId(int $magicEnvironmentId): void
     {
         $this->magicEnvironmentId = $magicEnvironmentId;
     }
@@ -110,12 +110,12 @@ class MagicThirdPlatformIdMappingEntity extends AbstractEntity
         $this->thirdPlatformType = $thirdPlatformType;
     }
 
-    public function getMagicOrganizationCode(): string
+    public function getDelightfulOrganizationCode(): string
     {
         return $this->magicOrganizationCode;
     }
 
-    public function setMagicOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
     {
         $this->magicOrganizationCode = $magicOrganizationCode;
     }

@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react"
-import MagicThemeProvider from "../../ThemeProvider"
+import DelightfulThemeProvider from "../../ThemeProvider"
 import { describe, it, expect } from "vitest"
-import MagicSelect from "../index"
+import DelightfulSelect from "../index"
 
-describe("MagicSelect", () => {
+describe("DelightfulSelect", () => {
 	it("should render without crashing", () => {
 		const options = [
 			{ label: "选项1", value: "1" },
@@ -12,9 +12,9 @@ describe("MagicSelect", () => {
 		]
 
 		render(
-			<MagicThemeProvider theme="light">
-				<MagicSelect options={options} placeholder="请选择" />
-			</MagicThemeProvider>,
+			<DelightfulThemeProvider theme="light">
+				<DelightfulSelect options={options} placeholder="请选择" />
+			</DelightfulThemeProvider>,
 		)
 
 		// Verify placeholder renders
@@ -28,9 +28,9 @@ describe("MagicSelect", () => {
 		]
 
 		render(
-			<MagicThemeProvider theme="light">
-				<MagicSelect options={options} value="1" />
-			</MagicThemeProvider>,
+			<DelightfulThemeProvider theme="light">
+				<DelightfulSelect options={options} value="1" />
+			</DelightfulThemeProvider>,
 		)
 
 		// Verify selected value displays
@@ -47,9 +47,9 @@ describe("MagicSelect", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSelect options={options} placeholder="请选择" />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSelect options={options} placeholder="请选择" />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
@@ -61,9 +61,9 @@ describe("MagicSelect", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSelect options={options} defaultValue="1" />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSelect options={options} defaultValue="1" />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
@@ -75,9 +75,9 @@ describe("MagicSelect", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSelect options={options} disabled />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSelect options={options} disabled />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
@@ -90,9 +90,9 @@ describe("MagicSelect", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSelect options={options} mode="multiple" />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSelect options={options} mode="multiple" />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
@@ -104,9 +104,9 @@ describe("MagicSelect", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSelect options={options} size="large" />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSelect options={options} size="large" />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
@@ -118,9 +118,9 @@ describe("MagicSelect", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSelect options={options} size="small" />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSelect options={options} size="small" />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
@@ -132,9 +132,9 @@ describe("MagicSelect", () => {
 			]
 
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSelect options={options} allowClear />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSelect options={options} allowClear />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})

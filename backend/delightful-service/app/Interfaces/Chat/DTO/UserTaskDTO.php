@@ -185,7 +185,7 @@ class UserTaskDTO extends AbstractDTO
     /**
      * Get the value of magicEnvId.
      */
-    public function getMagicEnvId(): int
+    public function getDelightfulEnvId(): int
     {
         return $this->magicEnvId;
     }
@@ -193,7 +193,7 @@ class UserTaskDTO extends AbstractDTO
     /**
      * Set the value of magicEnvId.
      */
-    public function setMagicEnvId(int $magicEnvId): self
+    public function setDelightfulEnvId(int $magicEnvId): self
     {
         $this->magicEnvId = $magicEnvId;
 

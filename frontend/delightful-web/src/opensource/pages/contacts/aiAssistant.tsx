@@ -1,12 +1,12 @@
-import MagicInfiniteScrollList from "@/opensource/components/MagicInfiniteScrollList"
-import type { MagicListItemData } from "@/opensource/components/MagicList/types"
+import DelightfulInfiniteScrollList from "@/opensource/components/DelightfulInfiniteScrollList"
+import type { DelightfulListItemData } from "@/opensource/components/DelightfulList/types"
 import { contactStore } from "@/opensource/stores/contact"
 import { MessageReceiveType } from "@/types/chat"
 import type { Friend } from "@/types/contact"
 import { useMemoizedFn } from "ahooks"
 import { createStyles } from "antd-style"
 import { useCallback, useEffect, useState } from "react"
-import MagicScrollBar from "@/opensource/components/base/MagicScrollBar"
+import DelightfulScrollBar from "@/opensource/components/base/DelightfulScrollBar"
 import { useChatWithMember } from "@/opensource/hooks/chat/useChatWithMember"
 import userInfoStore from "@/opensource/stores/userInfo"
 import userInfoService from "@/opensource/services/userInfo"
@@ -81,19 +81,19 @@ const AiAssistant = observer(function AiAssistant() {
 		[],
 	)
 
-	const handleItemClick = useMemoizedFn((item: MagicListItemData) => {
+	const handleItemClick = useMemoizedFn((item: DelightfulListItemData) => {
 		chatWith(item.id, MessageReceiveType.Ai, true)
 	})
 
 	return (
-		<MagicScrollBar className={styles.empty}>
-			<MagicInfiniteScrollList<Friend>
+		<DelightfulScrollBar className={styles.empty}>
+			<DelightfulInfiniteScrollList<Friend>
 				data={data}
 				trigger={fetchFriends}
 				itemsTransform={itemsTransform}
 				onItemClick={handleItemClick}
 			/>
-		</MagicScrollBar>
+		</DelightfulScrollBar>
 	)
 })
 

@@ -49,9 +49,9 @@ class ByteDanceSTSService
     }
 
     /**
-     * 根据用户Magic ID获取JWT Token（带缓存）.
+     * 根据用户Delightful ID获取JWT Token（带缓存）.
      *
-     * @param string $magicId 用户Magic ID
+     * @param string $magicId 用户Delightful ID
      * @param int $duration 有效期（秒），默认7200秒
      * @param bool $refresh 是否强制刷新token，默认false
      * @return array 包含JWT Token和相关信息的数组
@@ -60,7 +60,7 @@ class ByteDanceSTSService
     public function getJwtTokenForUser(string $magicId, int $duration = 7200, bool $refresh = false): array
     {
         if (empty($magicId)) {
-            ExceptionBuilder::throw(AsrErrorCode::InvalidMagicId, 'asr.config_error.invalid_magic_id');
+            ExceptionBuilder::throw(AsrErrorCode::InvalidDelightfulId, 'asr.config_error.invalid_magic_id');
         }
 
         // 检查缓存（如果不是强制刷新）
@@ -214,7 +214,7 @@ class ByteDanceSTSService
     /**
      * 清除用户的JWT Token缓存.
      *
-     * @param string $magicId 用户Magic ID
+     * @param string $magicId 用户Delightful ID
      * @return bool 是否成功清除
      */
     public function clearUserJwtTokenCache(string $magicId): bool
@@ -241,7 +241,7 @@ class ByteDanceSTSService
     /**
      * 生成缓存键.
      *
-     * @param string $magicId 用户Magic ID
+     * @param string $magicId 用户Delightful ID
      * @return string 缓存键
      */
     private function getCacheKey(string $magicId): string

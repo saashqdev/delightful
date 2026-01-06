@@ -9,9 +9,9 @@ namespace App\Application\Agent\Command;
 
 use App\Domain\Agent\Constant\InstructDisplayType;
 use App\Domain\Agent\Constant\InstructType;
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
-use App\Domain\Agent\Repository\Persistence\MagicAgentRepository;
-use App\Domain\Agent\Repository\Persistence\MagicAgentVersionRepository;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
+use App\Domain\Agent\Repository\Persistence\DelightfulAgentRepository;
+use App\Domain\Agent\Repository\Persistence\DelightfulAgentVersionRepository;
 use Hyperf\Codec\Json;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
@@ -22,7 +22,7 @@ use Throwable;
 #[Command]
 class EnsureSwitchResidencyCommand extends HyperfCommand
 {
-    public function __construct(protected ContainerInterface $container, public MagicAgentRepository $agentRepository, public MagicAgentVersionRepository $agentVersionRepository)
+    public function __construct(protected ContainerInterface $container, public DelightfulAgentRepository $agentRepository, public DelightfulAgentVersionRepository $agentVersionRepository)
     {
         parent::__construct('agent:ensure-switch-residency');
     }
@@ -128,7 +128,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                 if ($hasChanges) {
                     if (! $isDryRun) {
                         $this->agentVersionRepository->updateById(
-                            new MagicAgentVersionEntity(array_merge($version, ['instructs' => $instructs]))
+                            new DelightfulAgentVersionEntity(array_merge($version, ['instructs' => $instructs]))
                         );
                     }
                     ++$versionUpdated;

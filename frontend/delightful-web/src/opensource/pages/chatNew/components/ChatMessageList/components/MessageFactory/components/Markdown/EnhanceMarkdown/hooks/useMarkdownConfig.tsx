@@ -11,7 +11,7 @@ import type { MarkdownProps } from "../types"
 import { RuleType } from "markdown-to-jsx"
 import type { MarkdownToJSX } from "markdown-to-jsx"
 import { useMemoizedFn } from "ahooks"
-import MagicCitation from "../components/MagicCitation"
+import DelightfulCitation from "../components/DelightfulCitation"
 import InlineCodeRenderFactory from "../factories/InlineCodeRenderFactory"
 import PreprocessService from "../factories/PreprocessService"
 import CustomComponentService from "../factories/CustomComponentService"
@@ -60,7 +60,7 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 				  }
 				: undefined,
 			// 添加LaTeX组件支持
-			MagicLatexInline: {
+			DelightfulLatexInline: {
 				component: (props: any) => {
 					if (!enableLatex) return <span>{`$${props.math}$`}</span>
 
@@ -75,7 +75,7 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 					return <KaTeX math={decodedMath} inline={true} />
 				},
 			},
-			MagicLatexBlock: {
+			DelightfulLatexBlock: {
 				component: (props: any) => {
 					if (!enableLatex) return <div>{`$$${props.math}$$`}</div>
 
@@ -113,8 +113,8 @@ export const useMarkdownConfig = (props: MarkdownProps) => {
 					return <li {...props} />
 				},
 			},
-			MagicCitation: {
-				component: MagicCitation,
+			DelightfulCitation: {
+				component: DelightfulCitation,
 			},
 			// 添加上标和下标支持
 			sup: {

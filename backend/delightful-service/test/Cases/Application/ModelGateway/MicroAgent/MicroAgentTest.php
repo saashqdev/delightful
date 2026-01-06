@@ -10,7 +10,7 @@ namespace HyperfTest\Cases\Application\ModelGateway\MicroAgent;
 use App\Application\ModelGateway\MicroAgent\AgentParser\AgentParserFactory;
 use App\Application\ModelGateway\MicroAgent\MicroAgent;
 use App\Application\ModelGateway\MicroAgent\MicroAgentFactory;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use HyperfTest\HttpTestCase;
 use ReflectionClass;
@@ -151,7 +151,7 @@ class MicroAgentTest extends HttpTestCase
         );
 
         $this->expectException(BusinessException::class);
-        $this->expectExceptionCode(MagicApiErrorCode::ValidateFailed->value);
+        $this->expectExceptionCode(DelightfulApiErrorCode::ValidateFailed->value);
 
         // Mock the dependencies that would be called via di()
         // Note: In a real test, you'd want to mock these dependencies properly

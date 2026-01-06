@@ -7,11 +7,11 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Event;
 
-use App\Domain\Agent\Entity\MagicAgentEntity;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
 
-class MagicAgentDeletedEvent
+class DelightfulAgentDeletedEvent
 {
-    public function __construct(public MagicAgentEntity $agentEntity)
+    public function __construct(public DelightfulAgentEntity $agentEntity)
     {
     }
 }

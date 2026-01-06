@@ -1,5 +1,5 @@
 import { getPxWidth } from "@/DelightfulFlow/utils"
-import { KEY_CODE_MAP } from "@/MagicJsonSchemaEditor/constants"
+import { KEY_CODE_MAP } from "@/DelightfulJsonSchemaEditor/constants"
 import { useUpdateEffect } from "ahooks"
 import { useCallback, useMemo, useState } from "react"
 

@@ -1,5 +1,5 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicMenu from "@/opensource/components/base/MagicMenu"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulMenu from "@/opensource/components/base/DelightfulMenu"
 import { useAccount } from "@/opensource/stores/authentication"
 import {
 	IconCheck,
@@ -109,7 +109,7 @@ const UserMenus = observer(function UserMenus({ children }: UserMenusProps) {
 					<Flex align="center" justify="space-between">
 						<span className={styles.menuItemTopName}>{label}</span>
 						{item.value === language && (
-							<MagicIcon
+							<DelightfulIcon
 								className={styles.arrow}
 								component={IconCheck}
 								color={magicColorUsages.primary.default}
@@ -143,22 +143,22 @@ const UserMenus = observer(function UserMenus({ children }: UserMenusProps) {
 				label: (
 					<Flex align="center" justify="center" gap={24}>
 						<span>{t("sider.switchLanguage")}</span>
-						<MagicIcon className={styles.arrow} component={IconChevronRight} />
+						<DelightfulIcon className={styles.arrow} component={IconChevronRight} />
 					</Flex>
 				),
 				key: UserMenuKey.SwitchLanguage,
-				icon: <MagicIcon size={20} component={IconWorld} color="currentColor" />,
+				icon: <DelightfulIcon size={20} component={IconWorld} color="currentColor" />,
 				children: languageOptions,
 			},
 			{
 				label: t("sider.accountManagement"),
 				key: UserMenuKey.AccountManagement,
-				icon: <MagicIcon size={20} component={IconUserCog} color="currentColor" />,
+				icon: <DelightfulIcon size={20} component={IconUserCog} color="currentColor" />,
 			},
 			// {
 			// 	label: t("sider.deviceManagement"),
 			// 	key: UserMenuKey.DeviceManagement,
-			// 	icon: <MagicIcon size={20} component={IconDeviceMobile} color="currentColor" />,
+			// 	icon: <DelightfulIcon size={20} component={IconDeviceMobile} color="currentColor" />,
 			// },
 			// isAdmin && {
 			// 	type: "divider",
@@ -166,14 +166,14 @@ const UserMenus = observer(function UserMenus({ children }: UserMenusProps) {
 			// isAdmin && {
 			// 	label: t("sider.admin"),
 			// 	key: UserMenuKey.Admin,
-			// 	icon: <MagicIcon size={20} component={IconDeviceImacCog} color="currentColor" />,
+			// 	icon: <DelightfulIcon size={20} component={IconDeviceImacCog} color="currentColor" />,
 			// },
 			{
 				type: "divider",
 			},
 			{
 				label: t("sider.logout"),
-				icon: <MagicIcon size={20} component={IconLogout} color="currentColor" />,
+				icon: <DelightfulIcon size={20} component={IconLogout} color="currentColor" />,
 				danger: true,
 				key: UserMenuKey.Logout,
 			},
@@ -223,7 +223,7 @@ const UserMenus = observer(function UserMenus({ children }: UserMenusProps) {
 				open={open}
 				onOpenChange={set}
 				content={
-					<MagicMenu
+					<DelightfulMenu
 						rootClassName={cx(styles.menu)}
 						items={menu}
 						expandIcon={null}

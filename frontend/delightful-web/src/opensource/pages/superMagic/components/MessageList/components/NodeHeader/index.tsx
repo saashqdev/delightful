@@ -1,6 +1,6 @@
 import { userStore } from "@/opensource/models/user"
-import MagicAva from "@/opensource/pages/superMagic/assets/image/magic_ava.jpg"
-import UserDefault from "@/opensource/pages/superMagic/assets/svg/user_default.svg"
+import DelightfulAva from "@/opensource/pages/superDelightful/assets/image/magic_ava.jpg"
+import UserDefault from "@/opensource/pages/superDelightful/assets/svg/user_default.svg"
 // eslint-disable-next-line import/order
 import { useStyles } from "./style"
 
@@ -63,7 +63,7 @@ const NodeHeader = ({ isUser, timestamp, isShare }: NodeHeaderProps) => {
 				</>
 			) : (
 				<>
-					<img src={MagicAva} alt="avatar" className={styles.avatar} />
+					<img src={DelightfulAva} alt="avatar" className={styles.avatar} />
 					<span className={styles.timestamp}>{formatTimestamp(timestamp)}</span>
 				</>
 			)}

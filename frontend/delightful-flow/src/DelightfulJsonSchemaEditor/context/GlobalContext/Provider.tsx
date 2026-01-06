@@ -1,5 +1,5 @@
-import { ExpressionSource } from "@/MagicExpressionWidget/types"
-import { CustomFieldsConfig } from "@/MagicJsonSchemaEditor/types/Schema"
+import { ExpressionSource } from "@/DelightfulExpressionWidget/types"
+import { CustomFieldsConfig } from "@/DelightfulJsonSchemaEditor/types/Schema"
 import type { PropsWithChildren } from "react"
 import React, { useMemo } from "react"
 import { AppendPosition, ShowColumns } from "../../constants"

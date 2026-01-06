@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next"
 import type { RadioChangeEvent } from "antd"
 import { Form, Input, message, Flex, Radio, Alert, Modal } from "antd"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { useForm } from "antd/es/form/Form"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { ScopeType, VisibleRangeType, type Bot } from "@/types/bot"
 import type { MutableRefObject } from "react"
 import { useState, useMemo, useEffect } from "react"
@@ -14,7 +14,7 @@ import privateLogo from "@/assets/logos/privateLogo.svg"
 import orgLogo from "@/assets/logos/orgLogo.svg"
 import markLogo from "@/assets/logos/marketLogo.svg"
 import IconWand from "@/enhance/tabler/icons-react/icons/IconWand"
-import type { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
+import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
 import { shadowFlow } from "@/opensource/pages/flow/utils/helpers"
 import { MessageReceiveType } from "@/types/chat"
 import { useNavigate } from "@/opensource/hooks/useNavigate"
@@ -44,7 +44,7 @@ type PublishAgentProps = {
 	open: boolean
 	agentId?: string
 	scope?: ScopeType // 机器人发布的范围
-	flowInstance?: MutableRefObject<MagicFlowInstance | null>
+	flowInstance?: MutableRefObject<DelightfulFlowInstance | null>
 	agent?: Bot.Detail
 	submit?: (this: any, agentId: any) => Promise<void>
 	close?: (scope: number, version: string) => void
@@ -228,19 +228,19 @@ function PublishAgent({
 	const footerRender = useMemo(() => {
 		return (
 			<Flex justify="flex-end" align="center">
-				{/* <MagicButton
+				{/* <DelightfulButton
 					type="default"
 					className={styles.button}
 					onClick={()=>{}}
 				>{t("explore.buttonText.autoGenerate")}
-				</MagicButton> */}
+				</DelightfulButton> */}
 				<Flex gap={10} align="center">
-					<MagicButton type="default" onClick={handleCancel}>
+					<DelightfulButton type="default" onClick={handleCancel}>
 						{t("button.cancel", { ns: "interface" })}
-					</MagicButton>
-					<MagicButton type="primary" onClick={handleOk}>
+					</DelightfulButton>
+					<DelightfulButton type="primary" onClick={handleOk}>
 						{t("button.publish", { ns: "interface" })}
-					</MagicButton>
+					</DelightfulButton>
 				</Flex>
 			</Flex>
 		)
@@ -287,7 +287,7 @@ function PublishAgent({
 	})
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			className={styles.modal}
 			width={600}
 			title={title}
@@ -343,7 +343,7 @@ function PublishAgent({
 											</Flex>
 											{selectScope === radio.scope && (
 												<div className={styles.checkedIcon}>
-													<MagicIcon
+													<DelightfulIcon
 														component={IconCheck}
 														color="white"
 													/>
@@ -370,7 +370,7 @@ function PublishAgent({
 									type="warning"
 									showIcon
 									icon={
-										<MagicIcon
+										<DelightfulIcon
 											component={IconAlertCircleFilled}
 											size={16}
 											color={magicColorScales.orange[5]}
@@ -407,7 +407,7 @@ function PublishAgent({
 									align="center"
 								>
 									<div>{t("explore.form.publishRecord")}</div>
-									<MagicButton
+									<DelightfulButton
 										className={styles.aiButton}
 										type="text"
 										icon={<IconWand size={18} />}
@@ -440,7 +440,7 @@ function PublishAgent({
 					handleCancel={handleCancel}
 				/>
 			)}
-		</MagicModal>
+		</DelightfulModal>
 	)
 }
 

@@ -1,12 +1,12 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import ShareModal from "@/opensource/pages/superMagic/components/Share/Modal"
-import { ResourceType, ShareType } from "@/opensource/pages/superMagic/components/Share/types"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import ShareModal from "@/opensource/pages/superDelightful/components/Share/Modal"
+import { ResourceType, ShareType } from "@/opensource/pages/superDelightful/components/Share/types"
 import {
 	createShareTopic,
 	deleteThread,
 	editThread,
 	getTopicsByWorkspaceId,
-} from "@/opensource/pages/superMagic/utils/api"
+} from "@/opensource/pages/superDelightful/utils/api"
 import { IconChevronDown, IconChevronRight, IconDots, IconPlus } from "@tabler/icons-react"
 import type { InputRef, MenuProps } from "antd"
 import { Button, Dropdown, Input, message, Modal, Tooltip, Typography } from "antd"
@@ -315,7 +315,7 @@ const WorkspacePanel = ({
 								type="text"
 								size="small"
 								icon={
-									<MagicIcon
+									<DelightfulIcon
 										size={18}
 										component={isCollapsed ? IconChevronRight : IconChevronDown}
 										stroke={2}
@@ -348,7 +348,7 @@ const WorkspacePanel = ({
 											handleStartAddThread(selectedWorkspace.id, e)
 										}
 									>
-										<MagicIcon
+										<DelightfulIcon
 											size={18}
 											component={IconPlus}
 											stroke={2}
@@ -427,7 +427,7 @@ const WorkspacePanel = ({
 																		e.stopPropagation()
 																	}
 																>
-																	<MagicIcon
+																	<DelightfulIcon
 																		size={18}
 																		component={IconDots}
 																		stroke={2}

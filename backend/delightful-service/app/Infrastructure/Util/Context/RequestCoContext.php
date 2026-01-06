@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Util\Context;
 
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Hyperf\Context\Context;
 
 class RequestCoContext
@@ -15,12 +15,12 @@ class RequestCoContext
     /**
      * 从父协程获取用户信息。
      */
-    public static function getUserAuthorization(): ?MagicUserAuthorization
+    public static function getUserAuthorization(): ?DelightfulUserAuthorization
     {
         return Context::get('magic-user-authorization');
     }
 
-    public static function setUserAuthorization(MagicUserAuthorization $userAuthorization): void
+    public static function setUserAuthorization(DelightfulUserAuthorization $userAuthorization): void
     {
         Context::set('magic-user-authorization', $userAuthorization);
     }

@@ -1,5 +1,5 @@
-import Schema from "@/MagicJsonSchemaEditor/types/Schema"
-import SchemaDescription from "@/MagicJsonSchemaEditor/types/SchemaDescription"
+import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
+import SchemaDescription from "@/DelightfulJsonSchemaEditor/types/SchemaDescription"
 import { useUpdateEffect } from "ahooks"
 import _ from "lodash"
 import type { PropsWithChildren } from "react"

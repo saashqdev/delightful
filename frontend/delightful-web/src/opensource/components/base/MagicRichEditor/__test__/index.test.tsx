@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 import { render, screen, cleanup } from "@testing-library/react"
 import type { ReactNode } from "react"
-import MagicRichEditor from "../index"
+import DelightfulRichEditor from "../index"
 // 导入测试设置
 import { mockSetup } from "./setup"
 
@@ -193,7 +193,7 @@ const TestWrapper = ({ children }: { children: ReactNode }) => (
 	<div data-testid="test-wrapper">{children}</div>
 )
 
-describe("MagicRichEditor 组件", () => {
+describe("DelightfulRichEditor 组件", () => {
 	beforeEach(() => {
 		// 每个测试前重置模拟函数的调用记录
 		vi.clearAllMocks()
@@ -207,7 +207,7 @@ describe("MagicRichEditor 组件", () => {
 	it("应正确渲染基础编辑器", () => {
 		render(
 			<TestWrapper>
-				<MagicRichEditor />
+				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
@@ -221,7 +221,7 @@ describe("MagicRichEditor 组件", () => {
 	it("当 showToolBar=false 时不应显示工具栏", () => {
 		render(
 			<TestWrapper>
-				<MagicRichEditor showToolBar={false} />
+				<DelightfulRichEditor showToolBar={false} />
 			</TestWrapper>,
 		)
 
@@ -233,7 +233,7 @@ describe("MagicRichEditor 组件", () => {
 		const customPlaceholder = "请输入内容..."
 		render(
 			<TestWrapper>
-				<MagicRichEditor placeholder={customPlaceholder} />
+				<DelightfulRichEditor placeholder={customPlaceholder} />
 			</TestWrapper>,
 		)
 
@@ -246,7 +246,7 @@ describe("MagicRichEditor 组件", () => {
 		const enterCallback = vi.fn()
 		render(
 			<TestWrapper>
-				<MagicRichEditor onEnter={enterCallback} />
+				<DelightfulRichEditor onEnter={enterCallback} />
 			</TestWrapper>,
 		)
 		// Test implementation would go here
@@ -255,7 +255,7 @@ describe("MagicRichEditor 组件", () => {
 	it("should support enterBreak", () => {
 		render(
 			<TestWrapper>
-				<MagicRichEditor enterBreak />
+				<DelightfulRichEditor enterBreak />
 			</TestWrapper>,
 		)
 		// Test implementation would go here

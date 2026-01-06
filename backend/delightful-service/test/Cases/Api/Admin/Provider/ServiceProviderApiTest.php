@@ -201,13 +201,13 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * 测试返回Magic服务商.
+     * 测试返回Delightful服务商.
      */
     public function testGetOfficialProvider()
     {
         $response = $this->get('/org/admin/service-providers/available-llm', [], $this->getCommonHeaders());
         $this->assertEquals(1000, $response['code']);
-        $this->assertEquals(true, in_array('Magic', array_column($response['data'], 'name')));
+        $this->assertEquals(true, in_array('Delightful', array_column($response['data'], 'name')));
 
         $response = $this->get('/org/admin/service-providers?category=llm', [], $this->getCommonHeaders());
         $this->assertEquals(1000, $response['code']);

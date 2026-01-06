@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Repository\Facade;
 
-use App\Domain\Chat\Entity\MagicMessageVersionEntity;
+use App\Domain\Chat\Entity\DelightfulMessageVersionEntity;
 
-interface MagicChatMessageVersionsRepositoryInterface
+interface DelightfulChatMessageVersionsRepositoryInterface
 {
-    public function createMessageVersion(MagicMessageVersionEntity $messageVersionDTO): MagicMessageVersionEntity;
+    public function createMessageVersion(DelightfulMessageVersionEntity $messageVersionDTO): DelightfulMessageVersionEntity;
 
     /**
-     * @return MagicMessageVersionEntity[]
+     * @return DelightfulMessageVersionEntity[]
      */
     public function getMessageVersions(string $magicMessageId): array;
 }

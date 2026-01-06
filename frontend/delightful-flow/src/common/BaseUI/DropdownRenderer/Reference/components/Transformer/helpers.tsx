@@ -1,4 +1,4 @@
-import { FormItemType } from "@/MagicExpressionWidget/types"
+import { FormItemType } from "@/DelightfulExpressionWidget/types"
 import {
 	Icon123,
 	IconAbc,

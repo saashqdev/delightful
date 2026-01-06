@@ -4,7 +4,7 @@ import { Dropdown, Tooltip } from "antd"
 import { useMemo, useRef } from "react"
 import { Flex } from "antd"
 import DefaultToolAvatar from "@/assets/logos/tool-avatar.png"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { IconAdjustmentsHorizontal, IconHelp, IconWindowMaximize } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
 import { replaceRouteParams } from "@/utils/route"
@@ -151,7 +151,7 @@ export default function ToolsSelectedCard({
 							/>
 						</div>
 					)}
-					<MagicButton
+					<DelightfulButton
 						className={styles.deleteBtn}
 						type="default"
 						color="danger"
@@ -162,7 +162,7 @@ export default function ToolsSelectedCard({
 						theme={false}
 					>
 						{t("common.delete", { ns: "flow" })}
-					</MagicButton>
+					</DelightfulButton>
 				</Flex>
 			</Flex>
 		</Dropdown>

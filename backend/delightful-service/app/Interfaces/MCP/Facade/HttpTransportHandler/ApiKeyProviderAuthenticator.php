@@ -13,7 +13,7 @@ use App\Domain\Contact\Entity\ValueObject\UserType;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\TempAuth\TempAuthInterface;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\PhpMcp\Shared\Auth\AuthenticatorInterface;
 use Delightful\PhpMcp\Shared\Exceptions\AuthenticationError;
 use Delightful\PhpMcp\Types\Auth\AuthInfo;
@@ -79,7 +79,7 @@ class ApiKeyProviderAuthenticator implements AuthenticatorInterface
 
     private function createAuthenticatable($organizationCode, string $operator): Authenticatable
     {
-        $authorization = new MagicUserAuthorization();
+        $authorization = new DelightfulUserAuthorization();
         $authorization->setId($operator);
         $authorization->setOrganizationCode($organizationCode);
         $authorization->setUserType(UserType::Human);

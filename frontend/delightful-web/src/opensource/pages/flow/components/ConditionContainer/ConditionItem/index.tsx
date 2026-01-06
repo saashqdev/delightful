@@ -4,8 +4,8 @@ import { get } from "lodash-es"
 import TSIcon from "@delightful/delightful-flow/dist/common/BaseUI/TSIcon"
 import usePrevious from "@/opensource/pages/flow/common/hooks/usePrevious"
 import type { Schema } from "@/types/sheet"
-import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
-import MagicExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicExpressionWrap"
+import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
 import type { ConditionItemProps } from "./types"
 import { getColumnTargetType, getColumnType } from "../helpers"
 import "./index.less"
@@ -107,7 +107,7 @@ const ConditionItem = ({
 			{isShowColumnOption && (
 				<div className="column-container">
 					<div>
-						<MagicSelect
+						<DelightfulSelect
 							value={value?.column_id}
 							onChange={updateColumnId}
 							className="column-option nodrag"
@@ -119,7 +119,7 @@ const ConditionItem = ({
 						>
 							{leftColumnOptions.map((item: any) => {
 								return (
-									<MagicSelect.Option key={item.id}>
+									<DelightfulSelect.Option key={item.id}>
 										<TSIcon
 											style={{ marginRight: "5px" }}
 											type={
@@ -128,15 +128,15 @@ const ConditionItem = ({
 											}
 										/>
 										{item.label}
-									</MagicSelect.Option>
+									</DelightfulSelect.Option>
 								)
 							})}
-						</MagicSelect>
+						</DelightfulSelect>
 					</div>
 					{/* {(!isExistColumn || isShowColumnChangeTip) && <div>字段不存在或字段已变更</div>} */}
 				</div>
 			)}
-			<MagicSelect
+			<DelightfulSelect
 				value={value?.operator}
 				onChange={updateOperator}
 				options={centerConditionOptions}
@@ -151,7 +151,7 @@ const ConditionItem = ({
 			/>
 			{isShowValueOption && (
 				<div className="value-option">
-					<MagicExpressionWrap
+					<DelightfulExpressionWrap
 						value={value?.value}
 						onChange={updateValue}
 						// @ts-ignore

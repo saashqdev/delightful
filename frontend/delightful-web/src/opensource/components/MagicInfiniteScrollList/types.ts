@@ -2,14 +2,14 @@ import type React from "react"
 import type { PaginationResponse } from "@/types/request"
 import type { StructureItemType, WithIdAndDataType } from "@/types/organization"
 import type { Props as InfiniteScrollProps } from "react-infinite-scroll-component"
-import type { MagicListItemData as MagicListItemType } from "../MagicList/types"
+import type { DelightfulListItemData as DelightfulListItemType } from "../DelightfulList/types"
 
 /**
- * MagicInfiniteScrollList 组件的属性类型
+ * DelightfulInfiniteScrollList 组件的属性类型
  */
-export interface MagicInfiniteScrollListProps<
+export interface DelightfulInfiniteScrollListProps<
 	D,
-	ItemR extends MagicListItemType = MagicListItemType,
+	ItemR extends DelightfulListItemType = DelightfulListItemType,
 	DataType extends StructureItemType = StructureItemType,
 > extends Omit<Partial<InfiniteScrollProps>, "children" | "dataLength" | "next" | "hasMore"> {
 	/** 初始数据 */

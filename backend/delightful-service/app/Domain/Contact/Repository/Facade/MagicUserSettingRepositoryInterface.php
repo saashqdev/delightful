@@ -7,34 +7,34 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Repository\Facade;
 
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Entity\ValueObject\Query\MagicUserSettingQuery;
+use App\Domain\Contact\Entity\ValueObject\Query\DelightfulUserSettingQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
-interface MagicUserSettingRepositoryInterface
+interface DelightfulUserSettingRepositoryInterface
 {
-    public function save(DataIsolation $dataIsolation, MagicUserSettingEntity $magicUserSettingEntity): MagicUserSettingEntity;
+    public function save(DataIsolation $dataIsolation, DelightfulUserSettingEntity $magicUserSettingEntity): DelightfulUserSettingEntity;
 
-    public function get(DataIsolation $dataIsolation, string $key): ?MagicUserSettingEntity;
+    public function get(DataIsolation $dataIsolation, string $key): ?DelightfulUserSettingEntity;
 
     // 通过 magicId 维度存取
-    public function saveByMagicId(string $magicId, MagicUserSettingEntity $magicUserSettingEntity): MagicUserSettingEntity;
+    public function saveByDelightfulId(string $magicId, DelightfulUserSettingEntity $magicUserSettingEntity): DelightfulUserSettingEntity;
 
-    public function getByMagicId(string $magicId, string $key): ?MagicUserSettingEntity;
+    public function getByDelightfulId(string $magicId, string $key): ?DelightfulUserSettingEntity;
 
     /**
      * 全局配置：organization_code/user_id/magic_id 全部为 null.
      */
-    public function getGlobal(string $key): ?MagicUserSettingEntity;
+    public function getGlobal(string $key): ?DelightfulUserSettingEntity;
 
     /**
      * 保存全局配置。
      */
-    public function saveGlobal(MagicUserSettingEntity $magicUserSettingEntity): MagicUserSettingEntity;
+    public function saveGlobal(DelightfulUserSettingEntity $magicUserSettingEntity): DelightfulUserSettingEntity;
 
     /**
-     * @return array{total: int, list: array<MagicUserSettingEntity>}
+     * @return array{total: int, list: array<DelightfulUserSettingEntity>}
      */
-    public function queries(DataIsolation $dataIsolation, MagicUserSettingQuery $query, Page $page): array;
+    public function queries(DataIsolation $dataIsolation, DelightfulUserSettingQuery $query, Page $page): array;
 }

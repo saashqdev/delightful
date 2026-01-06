@@ -9,37 +9,37 @@ namespace App\Domain\Chat\Repository\Facade;
 
 use App\Domain\Chat\DTO\ConversationListQueryDTO;
 use App\Domain\Chat\DTO\PageResponseDTO\ConversationsPageResponseDTO;
-use App\Domain\Chat\Entity\MagicConversationEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationStatus;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 
-interface MagicChatConversationRepositoryInterface
+interface DelightfulChatConversationRepositoryInterface
 {
-    public function getConversationsByUserIds(MagicConversationEntity $conversation, ConversationListQueryDTO $queryDTO, array $userIds): ConversationsPageResponseDTO;
+    public function getConversationsByUserIds(DelightfulConversationEntity $conversation, ConversationListQueryDTO $queryDTO, array $userIds): ConversationsPageResponseDTO;
 
-    public function getConversationByUserIdAndReceiveId(MagicConversationEntity $conversation): ?MagicConversationEntity;
+    public function getConversationByUserIdAndReceiveId(DelightfulConversationEntity $conversation): ?DelightfulConversationEntity;
 
-    public function getConversationById(string $conversationId): ?MagicConversationEntity;
+    public function getConversationById(string $conversationId): ?DelightfulConversationEntity;
 
     /**
-     * @return MagicConversationEntity[]
+     * @return DelightfulConversationEntity[]
      */
     public function getConversationByIds(array $conversationIds): array;
 
-    public function addConversation(MagicConversationEntity $conversation): MagicConversationEntity;
+    public function addConversation(DelightfulConversationEntity $conversation): DelightfulConversationEntity;
 
     /**
      * (分组织)获取用户与指定用户的会话窗口信息.
-     * @return array<MagicConversationEntity>
+     * @return array<DelightfulConversationEntity>
      */
     public function getConversationsByReceiveIds(string $userId, array $receiveIds, ?string $userOrganizationCode = null): array;
 
-    public function getReceiveConversationBySenderConversationId(string $senderConversationId): ?MagicConversationEntity;
+    public function getReceiveConversationBySenderConversationId(string $senderConversationId): ?DelightfulConversationEntity;
 
     public function batchAddConversation(array $conversations): bool;
 
     /**
-     * @return MagicConversationEntity[]
+     * @return DelightfulConversationEntity[]
      */
     public function batchGetConversations(array $userIds, string $receiveId, ConversationType $receiveType): array;
 
@@ -54,7 +54,7 @@ interface MagicChatConversationRepositoryInterface
     public function saveInstructs(string $conversationId, array $instructs): void;
 
     /**
-     * @return MagicConversationEntity[]
+     * @return DelightfulConversationEntity[]
      */
     public function getRelatedConversationsWithInstructByUserId(array $userIds): array;
 

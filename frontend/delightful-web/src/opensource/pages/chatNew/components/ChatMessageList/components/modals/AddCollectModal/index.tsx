@@ -1,4 +1,4 @@
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { useTranslation } from "react-i18next"
 import { Checkbox, Flex, Select } from "antd"
 import { useEffect, useState } from "react"
@@ -76,7 +76,7 @@ export const AddCollectModal = ({
 	}
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			open={open}
 			width={320}
 			centered
@@ -112,7 +112,7 @@ export const AddCollectModal = ({
 					))}
 				</Flex>
 			</Flex>
-		</MagicModal>
+		</DelightfulModal>
 	)
 }
 

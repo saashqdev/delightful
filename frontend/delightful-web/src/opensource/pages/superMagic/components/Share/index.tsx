@@ -1,6 +1,6 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { IconCopy, IconUserCog } from "@tabler/icons-react"
 import { Checkbox, message, Space, Switch } from "antd"
 import { cx } from "antd-style"
@@ -9,7 +9,7 @@ import useStyles from "./style"
 import departmentOrMemberIcon from "./svg/department-or-member.svg"
 import internetIcon from "./svg/internet.svg"
 import organizationIcon from "./svg/organization.svg"
-import StopShareIcon from "@/opensource/pages/superMagic/assets/svg/stop_share.svg"
+import StopShareIcon from "@/opensource/pages/superDelightful/assets/svg/stop_share.svg"
 import type { ShareProps } from "./types"
 import { ShareType } from "./types"
 
@@ -68,7 +68,7 @@ export default memo(function Share(props: ShareProps) {
 
 	// 重置密码
 	const handleResetPassword = useCallback(() => {
-		MagicModal.confirm({
+		DelightfulModal.confirm({
 			title: "提示",
 			content: "重置访问密码后，之前生成的密码将失效",
 			onOk: () => {
@@ -122,18 +122,18 @@ export default memo(function Share(props: ShareProps) {
 				description: "指定部门或人员可访问网站",
 				backgroundColor: styles.backgroundDepartmentOrMember,
 				rightContent: (
-					<MagicButton
+					<DelightfulButton
 						size="small"
 						color="primary"
 						variant="outlined"
-						icon={<MagicIcon component={IconUserCog} size={16} color="currentColor" />}
+						icon={<DelightfulIcon component={IconUserCog} size={16} color="currentColor" />}
 						className={styles.departmentOrMemberButton}
 						onClick={(event) => {
 							event.stopPropagation()
 						}}
 					>
 						管理
-					</MagicButton>
+					</DelightfulButton>
 				),
 			},
 			{
@@ -148,15 +148,15 @@ export default memo(function Share(props: ShareProps) {
 							<div className={styles.internetLink}>
 								<span>{extraData?.shareUrl || shareUrl}</span>
 							</div>
-							<MagicButton
+							<DelightfulButton
 								variant="filled"
 								color="default"
-								icon={<MagicIcon component={IconCopy} size={18} />}
+								icon={<DelightfulIcon component={IconCopy} size={18} />}
 								className={styles.copyButton}
 								onClick={handleCopyLink}
 							>
 								复制链接{extraData?.passwordEnabled ? "和密码" : null}
-							</MagicButton>
+							</DelightfulButton>
 						</div>
 						<Space size={8}>
 							<Switch
@@ -170,9 +170,9 @@ export default memo(function Share(props: ShareProps) {
 									<div className={styles.password}>
 										{extraData?.password || ""}
 									</div>
-									<MagicButton size="middle" onClick={handleResetPassword}>
+									<DelightfulButton size="middle" onClick={handleResetPassword}>
 										重置密码
-									</MagicButton>
+									</DelightfulButton>
 								</>
 							)}
 						</Space>

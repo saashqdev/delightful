@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 #[Command]
 class CacheRedisToMysqlCommand extends HyperfCommand
 {
-    private const string REDIS_KEY_PREFIX = 'MagicFlowStringCache';
+    private const string REDIS_KEY_PREFIX = 'DelightfulFlowStringCache';
 
     private const int BATCH_SIZE = 100;
 
@@ -191,13 +191,13 @@ class CacheRedisToMysqlCommand extends HyperfCommand
 
     /**
      * Parse Redis key to extract prefix and key components.
-     * Expected format: magic:MagicFlowStringCache:{prefix}:{key}.
+     * Expected format: magic:DelightfulFlowStringCache:{prefix}:{key}.
      *
      * @return null|array{prefix: string, key: string}
      */
     private function parseRedisKey(string $redisKey): ?array
     {
-        // Expected pattern: magic:MagicFlowStringCache:{prefix}:{key}
+        // Expected pattern: magic:DelightfulFlowStringCache:{prefix}:{key}
         $expectedPrefix = 'magic:' . self::REDIS_KEY_PREFIX . ':';
         if (! str_starts_with($redisKey, $expectedPrefix)) {
             $this->line("Key format mismatch: {$redisKey}", 'error');

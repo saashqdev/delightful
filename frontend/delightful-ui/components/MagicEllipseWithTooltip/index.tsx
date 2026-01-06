@@ -2,12 +2,12 @@ import { Tooltip } from "antd"
 import type { HTMLAttributes } from "react"
 import { useRef, useState } from "react"
 
-export type MagicEllipseWithTooltipProps = HTMLAttributes<HTMLDivElement> & {
+export type DelightfulEllipseWithTooltipProps = HTMLAttributes<HTMLDivElement> & {
 	text: string
 	maxWidth: string // Maximum text width; overflow is truncated with ellipsis
 }
 
-function MagicEllipseWithTooltip({ text, maxWidth, ...props }: MagicEllipseWithTooltipProps) {
+function DelightfulEllipseWithTooltip({ text, maxWidth, ...props }: DelightfulEllipseWithTooltipProps) {
 	const textRef = useRef<HTMLDivElement>(null)
 	const [isOverflowed, setIsOverflowed] = useState(false)
 
@@ -38,4 +38,4 @@ function MagicEllipseWithTooltip({ text, maxWidth, ...props }: MagicEllipseWithT
 	)
 }
 
-export default MagicEllipseWithTooltip
+export default DelightfulEllipseWithTooltip

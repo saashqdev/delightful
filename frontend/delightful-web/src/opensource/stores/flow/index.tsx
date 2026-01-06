@@ -11,7 +11,7 @@ import type {
 	LLMModalOption,
 	Flow,
 } from "@/types/flow"
-import type { MagicFlow } from "@delightful/delightful-flow/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/DelightfulFlow/types/flow"
 import type { SWRResponse } from "swr"
 import useSWR from "swr"
 import { create } from "zustand"
@@ -35,7 +35,7 @@ const defaultState: FlowState = {
 }
 
 export interface FlowStoreState {
-	subFlows: MagicFlow.Flow[]
+	subFlows: DelightfulFlow.Flow[]
 	draftList: FlowDraft.ListItem[]
 	publishList: FlowDraft.ListItem[]
 	useableToolSets: UseableToolSet.Item[]
@@ -43,26 +43,26 @@ export interface FlowStoreState {
 	useableDatabases: Knowledge.KnowledgeItem[]
 	useableTeamshareDatabase: Knowledge.KnowledgeDatabaseItem[]
 	methodsDataSource: DataSourceOption[]
-	toolInputOutputMap: Record<string, MagicFlow.Flow>
+	toolInputOutputMap: Record<string, DelightfulFlow.Flow>
 	visionModels: Flow.VLMProvider[] // 使用Flow命名空间下的类型
 	updateVisionModels: (visionModels: Flow.VLMProvider[]) => void // 使用Flow命名空间下的类型
-	updateToolInputOutputMap: (toolInputOutputMap: Record<string, MagicFlow.Flow>) => void
+	updateToolInputOutputMap: (toolInputOutputMap: Record<string, DelightfulFlow.Flow>) => void
 	updateMethodDataSource: (dataSource: DataSourceOption[]) => void
-	updateSubFlowList: (flows: MagicFlow.Flow[]) => void
+	updateSubFlowList: (flows: DelightfulFlow.Flow[]) => void
 	updateUseableTeamshareDatabase: (databases: Knowledge.KnowledgeDatabaseItem[]) => void
 	updateUseableDatabases: (databases: Knowledge.KnowledgeItem[]) => void
 	updateModels: (models: LLMModalOption[]) => void
 	updateUseableToolSets: (toolSets: UseableToolSet.Item[]) => void
-	useFlowList: (params: GetFlowListParams) => SWRResponse<WithPage<MagicFlow.Flow[]>>
+	useFlowList: (params: GetFlowListParams) => SWRResponse<WithPage<DelightfulFlow.Flow[]>>
 	updateFlowDraftList: (flowList: FlowDraft.ListItem[]) => void
 	updateFlowPublishList: (flowList: FlowDraft.ListItem[]) => void
-	useFlowDetail: (flowId: string) => SWRResponse<MagicFlow.Flow>
+	useFlowDetail: (flowId: string) => SWRResponse<DelightfulFlow.Flow>
 	useTestFlow: (
-		flow: MagicFlow.Flow & { trigger_config: TriggerConfig & { debug: boolean } },
+		flow: DelightfulFlow.Flow & { trigger_config: TriggerConfig & { debug: boolean } },
 	) => SWRResponse<TestResult>
 	useGetOpenApiAccountList: (flowId: string) => SWRResponse<WithPage<PlatformItem[]>>
 	useGetOpenPlatformAccountsOfMine: () => SWRResponse<WithPage<PlatformItem[]>>
-	useFlowToolList: (params: FlowTool.GetToolListParams) => SWRResponse<WithPage<MagicFlow.Flow[]>>
+	useFlowToolList: (params: FlowTool.GetToolListParams) => SWRResponse<WithPage<DelightfulFlow.Flow[]>>
 	isGlobalVariableChanged: boolean
 	updateIsGlobalVariableChanged: (value: boolean) => void
 }
@@ -77,7 +77,7 @@ export const useFlowStore = create<FlowStoreState>((set) => ({
 	},
 
 	useTestFlow: (
-		flow: MagicFlow.Flow & { trigger_config: TriggerConfig & { debug: boolean } },
+		flow: DelightfulFlow.Flow & { trigger_config: TriggerConfig & { debug: boolean } },
 	) => {
 		return useSWR(RequestUrl.testFlow, () => FlowApi.testFlow(flow))
 	},
@@ -142,7 +142,7 @@ export const useFlowStore = create<FlowStoreState>((set) => ({
 		})
 	},
 
-	updateSubFlowList: (flowList: MagicFlow.Flow[]) => {
+	updateSubFlowList: (flowList: DelightfulFlow.Flow[]) => {
 		set({
 			subFlows: flowList,
 		})
@@ -160,7 +160,7 @@ export const useFlowStore = create<FlowStoreState>((set) => ({
 		})
 	},
 
-	updateToolInputOutputMap: (toolInputOutputMap: Record<string, MagicFlow.Flow>) => {
+	updateToolInputOutputMap: (toolInputOutputMap: Record<string, DelightfulFlow.Flow>) => {
 		set({
 			toolInputOutputMap,
 		})

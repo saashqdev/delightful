@@ -1,6 +1,6 @@
 import { createStyles, cx } from "antd-style"
 
-export const useMagicListItemStyles = createStyles(({ css, isDarkMode, token }) => {
+export const useDelightfulListItemStyles = createStyles(({ css, isDarkMode, token }) => {
 	const extra = cx(css`
 		color: ${isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.text[1]};
 		cursor: pointer;

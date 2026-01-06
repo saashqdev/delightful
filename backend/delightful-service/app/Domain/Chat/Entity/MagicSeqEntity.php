@@ -12,7 +12,7 @@ use App\Domain\Chat\DTO\Message\MessageInterface;
 use App\Domain\Chat\Entity\Items\ReceiveList;
 use App\Domain\Chat\Entity\Items\SeqExtra;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
-use App\Domain\Chat\Entity\ValueObject\MagicMessageStatus;
+use App\Domain\Chat\Entity\ValueObject\DelightfulMessageStatus;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 use App\Interfaces\Chat\Assembler\SeqAssembler;
@@ -21,7 +21,7 @@ use Hyperf\Codec\Json;
 /**
  * 账号收件箱的序列号表,每个账号的所有消息必须单调递增.
  */
-final class MagicSeqEntity extends AbstractEntity
+final class DelightfulSeqEntity extends AbstractEntity
 {
     protected string $id = '';
 
@@ -55,7 +55,7 @@ final class MagicSeqEntity extends AbstractEntity
 
     protected string $conversationId = '';
 
-    protected ?MagicMessageStatus $status = null;
+    protected ?DelightfulMessageStatus $status = null;
 
     /**
      * 消息接收人列表.
@@ -129,12 +129,12 @@ final class MagicSeqEntity extends AbstractEntity
         return $this;
     }
 
-    public function getMagicMessageId(): string
+    public function getDelightfulMessageId(): string
     {
         return $this->magicMessageId;
     }
 
-    public function setMagicMessageId(string $magicMessageId): self
+    public function setDelightfulMessageId(string $magicMessageId): self
     {
         $this->magicMessageId = $magicMessageId;
         return $this;
@@ -232,19 +232,19 @@ final class MagicSeqEntity extends AbstractEntity
         return $this;
     }
 
-    public function getStatus(): ?MagicMessageStatus
+    public function getStatus(): ?DelightfulMessageStatus
     {
         return $this->status;
     }
 
-    public function setStatus(null|int|MagicMessageStatus|string $status): self
+    public function setStatus(null|int|DelightfulMessageStatus|string $status): self
     {
-        if ($status instanceof MagicMessageStatus) {
+        if ($status instanceof DelightfulMessageStatus) {
             $this->status = $status;
             return $this;
         }
         if (is_numeric($status)) {
-            $this->status = MagicMessageStatus::tryFrom($status);
+            $this->status = DelightfulMessageStatus::tryFrom($status);
         } else {
             $this->status = null;
         }

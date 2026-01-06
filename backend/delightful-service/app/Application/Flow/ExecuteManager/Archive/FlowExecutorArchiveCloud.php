@@ -34,7 +34,7 @@ class FlowExecutorArchiveCloud
             // 数据大小符合要求，保存到临时文件
             file_put_contents($tmpFile, $serializedData);
 
-            $uploadFile = new UploadFile($tmpFile, dir: 'MagicFlowExecutorArchive', name: $name, rename: false);
+            $uploadFile = new UploadFile($tmpFile, dir: 'DelightfulFlowExecutorArchive', name: $name, rename: false);
             di(FileDomainService::class)->uploadByCredential($organizationCode, $uploadFile, storage: StorageBucketType::Private, autoDir: false);
             return $uploadFile->getKey();
         } finally {
@@ -47,7 +47,7 @@ class FlowExecutorArchiveCloud
     public static function get(string $organizationCode, string $executionId): mixed
     {
         $appId = config('kk_brd_service.app_id', 'open');
-        $name = "{$organizationCode}/{$appId}/MagicFlowExecutorArchive/{$executionId}.log";
+        $name = "{$organizationCode}/{$appId}/DelightfulFlowExecutorArchive/{$executionId}.log";
         $file = di(FileDomainService::class)->getLink($organizationCode, $name, StorageBucketType::Private);
         return unserialize(file_get_contents($file->getUrl()));
     }

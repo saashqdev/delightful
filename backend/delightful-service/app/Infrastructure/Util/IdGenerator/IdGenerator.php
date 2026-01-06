@@ -17,7 +17,7 @@ class IdGenerator
         return ApplicationContext::getContainer()->get(IdGeneratorInterface::class)->generate();
     }
 
-    public static function getMagicOrganizationCode(): string
+    public static function getDelightfulOrganizationCode(): string
     {
         return self::getUniqueId32();
     }

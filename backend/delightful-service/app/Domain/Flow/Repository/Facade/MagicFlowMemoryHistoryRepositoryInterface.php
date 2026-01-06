@@ -7,19 +7,19 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Facade;
 
-use App\Domain\Flow\Entity\MagicFlowMemoryHistoryEntity;
+use App\Domain\Flow\Entity\DelightfulFlowMemoryHistoryEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowMemoryHistoryQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowMemoryHistoryQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
-interface MagicFlowMemoryHistoryRepositoryInterface
+interface DelightfulFlowMemoryHistoryRepositoryInterface
 {
-    public function create(FlowDataIsolation $dataIsolation, MagicFlowMemoryHistoryEntity $magicFlowMemoryHistoryEntity): MagicFlowMemoryHistoryEntity;
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryEntity $magicFlowMemoryHistoryEntity): DelightfulFlowMemoryHistoryEntity;
 
     /**
-     * @return array{total: int, list: array<MagicFlowMemoryHistoryEntity>}
+     * @return array{total: int, list: array<DelightfulFlowMemoryHistoryEntity>}
      */
-    public function queries(FlowDataIsolation $dataIsolation, MagicFlowMemoryHistoryQuery $query, Page $page): array;
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryQuery $query, Page $page): array;
 
     public function removeByConversationId(FlowDataIsolation $dataIsolation, string $conversationId): void;
 }

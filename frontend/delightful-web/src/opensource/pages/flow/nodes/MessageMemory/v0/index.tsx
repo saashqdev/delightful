@@ -1,16 +1,16 @@
 import { Form } from "antd"
 import { useForm } from "antd/lib/form/Form"
-import { ExpressionMode } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
+import { ExpressionMode } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
 import BaseDropdownRenderer from "@delightful/delightful-flow/dist/common/BaseUI/DropdownRenderer/Base"
 import TsSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
 import { useMemo, useState } from "react"
 import { useMemoizedFn, useMount } from "ahooks"
-import { useNodeConfigActions } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useNodeConfigActions } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { set, cloneDeep, get } from "lodash-es"
 import { useTranslation } from "react-i18next"
 import { getExpressionPlaceholder } from "@/opensource/pages/flow/utils/helpers"
-import MagicExpression from "../../../common/Expression"
+import DelightfulExpression from "../../../common/Expression"
 import usePrevious from "../../../common/hooks/usePrevious"
 import { getMessageTypeOptions, MessageType } from "./constants"
 import styles from "./index.module.less"
@@ -89,7 +89,7 @@ export default function MessageMemoryV0() {
 					/>
 				</Form.Item>
 				{messageType === MessageType.Text && (
-					<MagicExpression
+					<DelightfulExpression
 						name="content"
 						label={t("common.messageContent", { ns: "flow" })}
 						mode={ExpressionMode.TextArea}
@@ -101,7 +101,7 @@ export default function MessageMemoryV0() {
 				)}
 				{(messageType === MessageType.Image || messageType === MessageType.File) && (
 					<>
-						<MagicExpression
+						<DelightfulExpression
 							name="link"
 							label={getLinkText(messageType).text.label}
 							mode={ExpressionMode.TextArea}
@@ -110,7 +110,7 @@ export default function MessageMemoryV0() {
 							minHeight="100%"
 							className={styles.link}
 						/>
-						<MagicExpression
+						<DelightfulExpression
 							name="link_desc"
 							label={getLinkText(messageType).desc.label}
 							mode={ExpressionMode.TextArea}

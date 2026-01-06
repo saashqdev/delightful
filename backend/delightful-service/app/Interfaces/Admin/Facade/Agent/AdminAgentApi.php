@@ -8,15 +8,15 @@ declare(strict_types=1);
 namespace App\Interfaces\Admin\Facade\Agent;
 
 use App\Application\Admin\Agent\Service\AdminAgentAppService;
-use App\Application\Chat\Service\MagicAccountAppService;
-use App\Application\Chat\Service\MagicUserContactAppService;
+use App\Application\Chat\Service\DelightfulAccountAppService;
+use App\Application\Chat\Service\DelightfulUserContactAppService;
 use App\Application\Permission\Service\OperationPermissionAppService;
 use App\Domain\Admin\Entity\ValueObject\AgentFilterType;
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Auth\PermissionChecker;
 use App\Interfaces\Admin\DTO\Request\QueryPageAgentDTO;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Qbhy\HyperfAuth\AuthManager;
@@ -55,7 +55,7 @@ class AdminAgentApi extends AbstractApi
     {
         $this->isInWhiteListForOrgization();
         /**
-         * @var MagicUserAuthorization $authenticatable
+         * @var DelightfulUserAuthorization $authenticatable
          */
         $authenticatable = $this->getAuthorization();
         $queryPageAgentDTO = new QueryPageAgentDTO($request->all());
@@ -66,7 +66,7 @@ class AdminAgentApi extends AbstractApi
     {
         $this->isInWhiteListForOrgization();
         /**
-         * @var MagicUserAuthorization $authenticatable
+         * @var DelightfulUserAuthorization $authenticatable
          */
         $authenticatable = $this->getAuthorization();
         return $this->adminAgentAppService->getAgentDetail($authenticatable, $agentId);
@@ -76,7 +76,7 @@ class AdminAgentApi extends AbstractApi
     {
         $this->isInWhiteListForOrgization();
         /**
-         * @var MagicUserAuthorization $authenticatable
+         * @var DelightfulUserAuthorization $authenticatable
          */
         $authenticatable = $this->getAuthorization();
         return $this->adminAgentAppService->getOrganizationAgentsCreators($authenticatable);
@@ -86,7 +86,7 @@ class AdminAgentApi extends AbstractApi
     {
         $this->isInWhiteListForOrgization();
         /**
-         * @var MagicUserAuthorization $authenticatable
+         * @var DelightfulUserAuthorization $authenticatable
          */
         $authenticatable = $this->getAuthorization();
         $this->adminAgentAppService->deleteAgent($authenticatable, $agentId);
@@ -94,17 +94,17 @@ class AdminAgentApi extends AbstractApi
 
     private function getPhone(string $userId)
     {
-        $magicUserContactAppService = di(MagicUserContactAppService::class);
+        $magicUserContactAppService = di(DelightfulUserContactAppService::class);
         $user = $magicUserContactAppService->getByUserId($userId);
-        $magicAccountAppService = di(MagicAccountAppService::class);
-        $accountEntity = $magicAccountAppService->getAccountInfoByMagicId($user->getMagicId());
+        $magicAccountAppService = di(DelightfulAccountAppService::class);
+        $accountEntity = $magicAccountAppService->getAccountInfoByDelightfulId($user->getDelightfulId());
         return $accountEntity->getPhone();
     }
 
     private function isInWhiteListForOrgization(): void
     {
         /**
-         * @var MagicUserAuthorization $authentication
+         * @var DelightfulUserAuthorization $authentication
          */
         $authentication = $this->getAuthorization();
         $phone = $this->getPhone($authentication->getId());

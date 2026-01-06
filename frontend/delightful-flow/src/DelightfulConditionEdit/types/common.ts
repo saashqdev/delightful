@@ -1,8 +1,8 @@
 
 import { ComponentType } from "@/common/constants"
 import type { Expression } from "./expression"
-import { EXPRESSION_VALUE, InputExpressionValue } from "@/MagicExpressionWidget/types"
-import Schema from "@/MagicJsonSchemaEditor/types/Schema"
+import { EXPRESSION_VALUE, InputExpressionValue } from "@/DelightfulExpressionWidget/types"
+import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 
 export namespace Common {
 	/**

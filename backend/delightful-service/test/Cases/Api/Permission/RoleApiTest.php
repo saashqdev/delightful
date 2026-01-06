@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Api\Permission;
 
-use App\Application\Kernel\Enum\MagicOperationEnum;
-use App\Application\Kernel\Enum\MagicResourceEnum;
-use App\Application\Kernel\MagicPermission;
+use App\Application\Kernel\Enum\DelightfulOperationEnum;
+use App\Application\Kernel\Enum\DelightfulResourceEnum;
+use App\Application\Kernel\DelightfulPermission;
 use HyperfTest\Cases\Api\AbstractHttpTest;
 
 /**
@@ -36,11 +36,11 @@ class RoleApiTest extends AbstractHttpTest
     public function testCreateSubAdminSuccess(): void
     {
         // === 测试创建子管理员 ===
-        $magicPermission = new MagicPermission();
+        $magicPermission = new DelightfulPermission();
         $testPermissions = [
-            $magicPermission->buildPermission(MagicResourceEnum::ADMIN_AI_MODEL->value, MagicOperationEnum::EDIT->value),
-            $magicPermission->buildPermission(MagicResourceEnum::ADMIN_AI_IMAGE->value, MagicOperationEnum::QUERY->value),
-            $magicPermission->buildPermission(MagicResourceEnum::SAFE_SUB_ADMIN->value, MagicOperationEnum::EDIT->value),
+            $magicPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_MODEL->value, DelightfulOperationEnum::EDIT->value),
+            $magicPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_IMAGE->value, DelightfulOperationEnum::QUERY->value),
+            $magicPermission->buildPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN->value, DelightfulOperationEnum::EDIT->value),
         ];
         $requestData = [
             'name' => '测试子管理员角色',
@@ -72,8 +72,8 @@ class RoleApiTest extends AbstractHttpTest
         $id = $response['data']['id'];
 
         $testPermissions = [
-            $magicPermission->buildPermission(MagicResourceEnum::SAFE_SUB_ADMIN->value, MagicOperationEnum::EDIT->value),
-            $magicPermission->buildPermission(MagicResourceEnum::ADMIN_AI_MODEL->value, MagicOperationEnum::QUERY->value),
+            $magicPermission->buildPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN->value, DelightfulOperationEnum::EDIT->value),
+            $magicPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_MODEL->value, DelightfulOperationEnum::QUERY->value),
         ];
 
         $requestData = [

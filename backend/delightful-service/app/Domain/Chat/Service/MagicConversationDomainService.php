@@ -15,23 +15,23 @@ use App\Domain\Chat\DTO\Message\ControlMessage\ConversationStartInputMessage;
 use App\Domain\Chat\DTO\Message\ControlMessage\ConversationTopMessage;
 use App\Domain\Chat\DTO\Message\ControlMessage\ConversationWindowOpenMessage;
 use App\Domain\Chat\DTO\PageResponseDTO\ConversationsPageResponseDTO;
-use App\Domain\Chat\Entity\MagicConversationEntity;
-use App\Domain\Chat\Entity\MagicMessageEntity;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationStatus;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
-use App\Domain\Chat\Entity\ValueObject\MagicMessageStatus;
+use App\Domain\Chat\Entity\ValueObject\DelightfulMessageStatus;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 use App\Domain\Chat\Entity\ValueObject\SocketEventType;
 use App\Domain\Chat\Event\ConversationCreatedEvent;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Group\Entity\MagicGroupEntity;
+use App\Domain\Group\Entity\DelightfulGroupEntity;
 use App\ErrorCode\ChatErrorCode;
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Infrastructure\Util\SocketIO\SocketIOUtil;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
 use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Hyperf\Codec\Json;
@@ -40,12 +40,12 @@ use Throwable;
 
 use function Hyperf\Coroutine\co;
 
-class MagicConversationDomainService extends AbstractDomainService
+class DelightfulConversationDomainService extends AbstractDomainService
 {
     /**
      * 创建/更新会话窗口.
      */
-    public function saveConversation(MagicMessageEntity $messageDTO, DataIsolation $dataIsolation): MagicConversationEntity
+    public function saveConversation(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): DelightfulConversationEntity
     {
         // 从messageStruct中解析出来会话窗口详情
         $messageType = $messageDTO->getMessageType();
@@ -54,7 +54,7 @@ class MagicConversationDomainService extends AbstractDomainService
         }
         /** @var ConversationWindowOpenMessage $messageStruct */
         $messageStruct = $messageDTO->getContent();
-        $conversationDTO = new MagicConversationEntity();
+        $conversationDTO = new DelightfulConversationEntity();
         $conversationDTO->setUserId($dataIsolation->getCurrentUserId());
         $conversationDTO->setUserOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $conversationDTO->setReceiveId($messageStruct->getReceiveId());
@@ -94,7 +94,7 @@ class MagicConversationDomainService extends AbstractDomainService
      * 控制消息,只在seq表写入数据,不在message表写.
      * @throws Throwable
      */
-    public function openConversationWindow(MagicMessageEntity $messageDTO, DataIsolation $dataIsolation): array
+    public function openConversationWindow(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
         Db::beginTransaction();
         try {
@@ -112,7 +112,7 @@ class MagicConversationDomainService extends AbstractDomainService
      * 会话窗口：置顶/移除/免打扰.
      * @throws Throwable
      */
-    public function conversationOptionChange(MagicMessageEntity $messageDTO, DataIsolation $dataIsolation): array
+    public function conversationOptionChange(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
         /** @var ConversationHideMessage|ConversationMuteMessage|ConversationTopMessage $messageStruct */
         $messageStruct = $messageDTO->getContent();
@@ -155,7 +155,7 @@ class MagicConversationDomainService extends AbstractDomainService
     /**
      * 正在输入中的状态只需要推送给对方,不需要推给自己的设备.
      */
-    public function clientOperateConversationStatus(MagicMessageEntity $messageDTO, DataIsolation $dataIsolation): array
+    public function clientOperateConversationStatus(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
         // 从messageStruct中解析出来会话窗口详情
         $messageType = $messageDTO->getMessageType();
@@ -208,7 +208,7 @@ class MagicConversationDomainService extends AbstractDomainService
         if (! in_array($controlMessageType, [ControlMessageType::StartConversationInput, ControlMessageType::EndConversationInput], true)) {
             return true;
         }
-        $messageDTO = new MagicMessageEntity();
+        $messageDTO = new DelightfulMessageEntity();
         if ($controlMessageType === ControlMessageType::StartConversationInput) {
             $content = new ConversationStartInputMessage();
         } else {
@@ -246,7 +246,7 @@ class MagicConversationDomainService extends AbstractDomainService
         if (! in_array($controlMessageType, [ControlMessageType::StartConversationInput, ControlMessageType::EndConversationInput], true)) {
             return true;
         }
-        $messageDTO = new MagicMessageEntity();
+        $messageDTO = new DelightfulMessageEntity();
         if ($controlMessageType === ControlMessageType::StartConversationInput) {
             $content = new ConversationStartInputMessage();
         } else {
@@ -265,11 +265,11 @@ class MagicConversationDomainService extends AbstractDomainService
         $seqData = [
             'organization_code' => $receiveConversationEntity->getUserOrganizationCode(),
             'object_type' => $receiveUserEntity->getUserType()->value,
-            'object_id' => $receiveUserEntity->getMagicId(),
+            'object_id' => $receiveUserEntity->getDelightfulId(),
             'seq_type' => $messageDTO->getMessageType()->getName(),
             'content' => $content->toArray(),
             'conversation_id' => $receiveConversationEntity->getId(),
-            'status' => MagicMessageStatus::Read->value, // 控制消息不需要已读回执
+            'status' => DelightfulMessageStatus::Read->value, // 控制消息不需要已读回执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),
@@ -281,20 +281,20 @@ class MagicConversationDomainService extends AbstractDomainService
         // seq 也加上 topicId
         $pushData = SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
         // 直接推送消息给收件方
-        SocketIOUtil::sendIntermediate(SocketEventType::Intermediate, $receiveUserEntity->getMagicId(), $pushData);
+        SocketIOUtil::sendIntermediate(SocketEventType::Intermediate, $receiveUserEntity->getDelightfulId(), $pushData);
         return true;
     }
 
     /**
      * 为指定群成员创建会话窗口.
      */
-    public function batchCreateGroupConversationByUserIds(MagicGroupEntity $groupEntity, array $userIds): array
+    public function batchCreateGroupConversationByUserIds(DelightfulGroupEntity $groupEntity, array $userIds): array
     {
         $users = $this->magicUserRepository->getUserByIds($userIds);
         $users = array_column($users, null, 'user_id');
         // 判断这些用户是否已经存在会话窗口,只是窗口状态被标记为删除
         $conversations = $this->magicConversationRepository->batchGetConversations($userIds, $groupEntity->getId(), ConversationType::Group);
-        /** @var MagicConversationEntity[] $conversations */
+        /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'user_id');
         // 给这些群成员批量生成创建会话窗口消息
         $conversationsCreateDTO = [];
@@ -340,17 +340,17 @@ class MagicConversationDomainService extends AbstractDomainService
     /**
      * 为群主和群成员删除会话窗口.
      */
-    public function batchDeleteGroupConversationByUserIds(MagicGroupEntity $groupEntity, array $userIds): int
+    public function batchDeleteGroupConversationByUserIds(DelightfulGroupEntity $groupEntity, array $userIds): int
     {
         return $this->magicConversationRepository->batchRemoveConversations($userIds, $groupEntity->getId(), ConversationType::Group);
     }
 
-    public function getConversationById(string $conversationId, DataIsolation $dataIsolation): MagicConversationEntity
+    public function getConversationById(string $conversationId, DataIsolation $dataIsolation): DelightfulConversationEntity
     {
         return $this->checkAndGetSelfConversation($conversationId, $dataIsolation);
     }
 
-    public function getConversationByIdWithoutCheck(string $conversationId): ?MagicConversationEntity
+    public function getConversationByIdWithoutCheck(string $conversationId): ?DelightfulConversationEntity
     {
         return $this->magicConversationRepository->getConversationById($conversationId);
     }
@@ -358,7 +358,7 @@ class MagicConversationDomainService extends AbstractDomainService
     /**
      * 获取会话窗口，不存在则创建.支持用户/群聊/ai.
      */
-    public function getOrCreateConversation(string $senderUserId, string $receiveId, ?ConversationType $receiverType = null): MagicConversationEntity
+    public function getOrCreateConversation(string $senderUserId, string $receiveId, ?ConversationType $receiverType = null): DelightfulConversationEntity
     {
         // 根据 $receiverType ，对 receiveId 进行解析，判断是否存在
         $receiverTypeCallable = match ($receiverType) {
@@ -381,7 +381,7 @@ class MagicConversationDomainService extends AbstractDomainService
             }
         };
         $receiverType = $receiverTypeCallable();
-        $conversationDTO = new MagicConversationEntity();
+        $conversationDTO = new DelightfulConversationEntity();
         $conversationDTO->setUserId($senderUserId);
         $conversationDTO->setReceiveId($receiveId);
         $conversationDTO->setReceiveType($receiverType);
@@ -406,25 +406,25 @@ class MagicConversationDomainService extends AbstractDomainService
         return $conversationEntity;
     }
 
-    public function getConversationByUserIdAndReceiveId(MagicConversationEntity $conversation): ?MagicConversationEntity
+    public function getConversationByUserIdAndReceiveId(DelightfulConversationEntity $conversation): ?DelightfulConversationEntity
     {
         return $this->magicConversationRepository->getConversationByUserIdAndReceiveId($conversation);
     }
 
     public function getConversations(DataIsolation $dataIsolation, ConversationListQueryDTO $queryDTO): ConversationsPageResponseDTO
     {
-        $conversationDTO = new MagicConversationEntity();
+        $conversationDTO = new DelightfulConversationEntity();
         $conversationDTO->setUserId($dataIsolation->getCurrentUserId());
         return $this->magicConversationRepository->getConversationsByUserIds($conversationDTO, $queryDTO, [$dataIsolation->getCurrentUserId()]);
     }
 
-    public function saveInstruct(MagicUserAuthorization $authenticatable, array $instruct, string $conversationId): array
+    public function saveInstruct(DelightfulUserAuthorization $authenticatable, array $instruct, string $conversationId): array
     {
         $this->getConversationById($conversationId, DataIsolation::create($authenticatable->getOrganizationCode(), $authenticatable->getId()));
 
         $this->magicConversationRepository->saveInstructs($conversationId, $instruct);
 
-        $magicSeqEntity = new MagicSeqEntity();
+        $magicSeqEntity = new DelightfulSeqEntity();
 
         $magicSeqEntity->setOrganizationCode($authenticatable->getOrganizationCode());
 

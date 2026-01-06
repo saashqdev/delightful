@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconX } from "@tabler/icons-react"
 import { Flex } from "antd"
 import { createStyles } from "antd-style"
@@ -86,7 +86,7 @@ export function FileItem({ data, onRemove }: FileItemProps) {
 			<FileIcon />
 			<span className={styles.name}>{data.name}</span>
 			<span className={styles.size}>{formatFileSize(data.file.size)}</span>
-			<MagicIcon
+			<DelightfulIcon
 				color="currentColor"
 				component={IconX}
 				className={styles.close}

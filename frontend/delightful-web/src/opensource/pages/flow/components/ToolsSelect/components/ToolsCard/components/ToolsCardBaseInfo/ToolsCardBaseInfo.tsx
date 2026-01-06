@@ -1,6 +1,6 @@
 import { Flex } from "antd"
 import { memo, useMemo } from "react"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { useTranslation } from "react-i18next"
 import defaultToolAvatar from "@/assets/logos/tool-avatar.png"
 import type { UseableToolSet } from "@/types/flow"
@@ -88,9 +88,9 @@ const ToolsCardBaseInfo = memo(
 					align={height === 40 ? "center" : "flex-start"}
 				>
 					{icon ? (
-						<MagicAvatar style={{ borderRadius: 8 }} src={icon} size={50}>
+						<DelightfulAvatar style={{ borderRadius: 8 }} src={icon} size={50}>
 							{title}
-						</MagicAvatar>
+						</DelightfulAvatar>
 					) : (
 						defaultAvatar
 					)}

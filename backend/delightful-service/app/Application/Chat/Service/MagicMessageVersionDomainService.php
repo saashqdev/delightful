@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Application\Chat\Service;
 
-use App\Domain\Chat\Entity\MagicMessageVersionEntity;
+use App\Domain\Chat\Entity\DelightfulMessageVersionEntity;
 use App\Domain\Chat\Service\AbstractDomainService;
 
-class MagicMessageVersionDomainService extends AbstractDomainService
+class DelightfulMessageVersionDomainService extends AbstractDomainService
 {
     /**
      * 获取消息的版本列表，按 version_id 升序.
-     * @return null|MagicMessageVersionEntity[]
+     * @return null|DelightfulMessageVersionEntity[]
      */
     public function getMessageVersions(string $magicMessageId): ?array
     {

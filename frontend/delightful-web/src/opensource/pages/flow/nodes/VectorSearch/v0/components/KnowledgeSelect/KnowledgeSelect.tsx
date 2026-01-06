@@ -3,7 +3,7 @@ import usePrevious from "@/opensource/pages/flow/common/hooks/usePrevious"
 import { useFlowStore } from "@/opensource/stores/flow"
 import { replaceRouteParams } from "@/utils/route"
 import { Form, Tooltip } from "antd"
-import MagicExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicExpressionWrap"
+import DelightfulExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
 import { IconWindowMaximize } from "@tabler/icons-react"
 import { useMemo } from "react"
 import {
@@ -73,7 +73,7 @@ export default function KnowledgeSelect({
 
 	return (
 		<Form.Item name={name} label={t("common.selectDatabase", { ns: "flow" })}>
-			<MagicExpressionWrap
+			<DelightfulExpressionWrap
 				multiple={multiple}
 				// @ts-ignore
 				renderConfig={knowledgeSelectRenderConfig}

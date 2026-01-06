@@ -1,6 +1,6 @@
 import { Outlet } from "react-router"
 
-export default function SuperMagicMobile() {
+export default function SuperDelightfulMobile() {
 	// 添加全局未捕获的错误和 Promise reject监听
 	// useEffect(() => {
 	// 	// 处理常规错误

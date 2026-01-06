@@ -5,18 +5,18 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\SuperDelightful\Application\SuperAgent\Event\Subscribe;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\FileBatchCopyEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\SuperMagic\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\SuperMagic\Infrastructure\Utils\FileBatchOperationStatusManager;
-use Delightful\SuperMagic\Infrastructure\Utils\FileTreeUtil;
-use Delightful\SuperMagic\Interfaces\SuperAgent\DTO\Response\TaskFileItemDTO;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ProjectEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\FileBatchCopyEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectDomainService;
+use Delightful\SuperDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
+use Delightful\SuperDelightful\Infrastructure\Utils\FileBatchOperationStatusManager;
+use Delightful\SuperDelightful\Infrastructure\Utils\FileTreeUtil;
+use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Response\TaskFileItemDTO;
 use Hyperf\Amqp\Annotation\Consumer;
 use Hyperf\Amqp\Message\ConsumerMessage;
 use Hyperf\Amqp\Result;

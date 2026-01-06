@@ -84,7 +84,7 @@ class AiImageApplyService {
 			// 如果是 AI 会话，此时消息列表的数量为 2，调用智能重命名
 			if (MessageStore.messages.length === 2 && !isHistoryMessage) {
 				// 调用智能重命名
-				chatTopicService.getAndSetMagicTopicName(message.message.topic_id ?? "")
+				chatTopicService.getAndSetDelightfulTopicName(message.message.topic_id ?? "")
 			}
 		}
 	}

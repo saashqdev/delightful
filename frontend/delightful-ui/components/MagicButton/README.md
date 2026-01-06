@@ -1,6 +1,6 @@
-# MagicButton 魔法按钮组件
+# DelightfulButton 魔法按钮组件
 
-`MagicButton` 是一个基于 Ant Design Button 组件的增强版按钮，提供了更多的自定义选项和样式优化。
+`DelightfulButton` 是一个基于 Ant Design Button 组件的增强版按钮，提供了更多的自定义选项和样式优化。
 
 ## 属性
 
@@ -14,29 +14,29 @@
 ## 基础用法
 
 ```tsx
-import { MagicButton } from '@/components/base/MagicButton';
+import { DelightfulButton } from '@/components/base/DelightfulButton';
 
 // 基础按钮
-<MagicButton>点击我</MagicButton>
+<DelightfulButton>点击我</DelightfulButton>
 
 // 带图标的按钮
-<MagicButton icon={<IconStar />}>收藏</MagicButton>
+<DelightfulButton icon={<IconStar />}>收藏</DelightfulButton>
 
 // 带提示的按钮
-<MagicButton tip="这是一个提示">悬停查看提示</MagicButton>
+<DelightfulButton tip="这是一个提示">悬停查看提示</DelightfulButton>
 
 // 自定义对齐方式
-<MagicButton justify="flex-start">左对齐内容</MagicButton>
+<DelightfulButton justify="flex-start">左对齐内容</DelightfulButton>
 
 // 不使用主题样式
-<MagicButton theme={false}>无主题样式</MagicButton>
+<DelightfulButton theme={false}>无主题样式</DelightfulButton>
 
 // 不同类型的按钮
-<MagicButton type="primary">主要按钮</MagicButton>
-<MagicButton type="default">默认按钮</MagicButton>
-<MagicButton type="dashed">虚线按钮</MagicButton>
-<MagicButton type="link">链接按钮</MagicButton>
-<MagicButton type="text">文本按钮</MagicButton>
+<DelightfulButton type="primary">主要按钮</DelightfulButton>
+<DelightfulButton type="default">默认按钮</DelightfulButton>
+<DelightfulButton type="dashed">虚线按钮</DelightfulButton>
+<DelightfulButton type="link">链接按钮</DelightfulButton>
+<DelightfulButton type="text">文本按钮</DelightfulButton>
 ```
 
 ## 特点
@@ -53,4 +53,4 @@ import { MagicButton } from '@/components/base/MagicButton';
 -   当你需要按钮带有悬停提示时
 -   当你需要按钮内容有特定对齐方式时
 
-MagicButton 组件让你的按钮更加灵活和美观，同时保持了 Ant Design 按钮的所有功能。
+DelightfulButton 组件让你的按钮更加灵活和美观，同时保持了 Ant Design 按钮的所有功能。

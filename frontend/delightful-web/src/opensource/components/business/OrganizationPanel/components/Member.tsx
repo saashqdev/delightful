@@ -1,12 +1,12 @@
 import type { HTMLAttributes, ReactNode } from "react"
 import { memo } from "react"
 import type { StructureUserItem } from "@/types/organization"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { createStyles } from "antd-style"
 import { Flex } from "antd"
 
-import MagicLogo from "@/opensource/components/MagicLogo"
-import { LogoType } from "@/opensource/components/MagicLogo/LogoType"
+import DelightfulLogo from "@/opensource/components/DelightfulLogo"
+import { LogoType } from "@/opensource/components/DelightfulLogo/LogoType"
 import { getUserName } from "@/utils/modules/chat"
 
 interface MemberProps extends HTMLAttributes<HTMLDivElement> {
@@ -57,9 +57,9 @@ const Member = memo(function Member({ extra, data: item, ...props }: MemberProps
 	return (
 		<Flex align="center" justify="space-between" className={styles.container} {...props}>
 			<Flex gap={8} align="center">
-				<MagicAvatar src={(item as StructureUserItem).avatar_url} size={32}>
-					{userName?.length > 0 ? userName : <MagicLogo type={LogoType.ICON} />}
-				</MagicAvatar>
+				<DelightfulAvatar src={(item as StructureUserItem).avatar_url} size={32}>
+					{userName?.length > 0 ? userName : <DelightfulLogo type={LogoType.ICON} />}
+				</DelightfulAvatar>
 				<Flex vertical>
 					<span className={styles.name}>{userName}</span>
 					{item.job_title ? <span className={styles.title}>{item.job_title}</span> : null}

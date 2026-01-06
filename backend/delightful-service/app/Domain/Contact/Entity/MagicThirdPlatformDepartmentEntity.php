@@ -9,7 +9,7 @@ namespace App\Domain\Contact\Entity;
 
 use App\Domain\Contact\Entity\ValueObject\PlatformType;
 
-class MagicThirdPlatformDepartmentEntity extends AbstractEntity
+class DelightfulThirdPlatformDepartmentEntity extends AbstractEntity
 {
     protected string $id;
 
@@ -97,12 +97,12 @@ class MagicThirdPlatformDepartmentEntity extends AbstractEntity
         $this->id = $id;
     }
 
-    public function getMagicDepartmentId(): ?string
+    public function getDelightfulDepartmentId(): ?string
     {
         return $this->magicDepartmentId;
     }
 
-    public function setMagicDepartmentId(null|int|string $magicDepartmentId): void
+    public function setDelightfulDepartmentId(null|int|string $magicDepartmentId): void
     {
         if (is_int($magicDepartmentId)) {
             $magicDepartmentId = (string) $magicDepartmentId;
@@ -110,12 +110,12 @@ class MagicThirdPlatformDepartmentEntity extends AbstractEntity
         $this->magicDepartmentId = $magicDepartmentId;
     }
 
-    public function getMagicOrganizationCode(): string
+    public function getDelightfulOrganizationCode(): string
     {
         return $this->magicOrganizationCode;
     }
 
-    public function setMagicOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
     {
         $this->magicOrganizationCode = $magicOrganizationCode;
     }

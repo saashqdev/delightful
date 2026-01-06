@@ -1,4 +1,4 @@
-import { EXPRESSION_ITEM } from "@/MagicExpressionWidget/types"
+import { EXPRESSION_ITEM } from "@/DelightfulExpressionWidget/types"
 import { Flex } from "antd"
 import { IconPassword } from "@tabler/icons-react"
 import React from "react"

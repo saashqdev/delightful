@@ -4,13 +4,13 @@ import { useMemoizedFn, useMount, useUpdateEffect } from "ahooks"
 import { Checkbox, Flex, List, Spin } from "antd"
 import type { WithIdAndDataType } from "@/types/organization"
 import VirtualList from "rc-virtual-list"
-import type { MagicListItemData as MagicListItemType } from "../MagicList/types"
-import type { MagicListItemProps } from "../MagicList/MagicListItem"
-import MagicListItem from "../MagicList/MagicListItem"
-import MagicEmpty from "@/opensource/components/base/MagicEmpty"
-import type { MagicInfiniteScrollListProps } from "./types"
+import type { DelightfulListItemData as DelightfulListItemType } from "../DelightfulList/types"
+import type { DelightfulListItemProps } from "../DelightfulList/DelightfulListItem"
+import DelightfulListItem from "../DelightfulList/DelightfulListItem"
+import DelightfulEmpty from "@/opensource/components/base/DelightfulEmpty"
+import type { DelightfulInfiniteScrollListProps } from "./types"
 
-function MagicInfiniteScrollListComponent<D, ItemR extends MagicListItemType = MagicListItemType>({
+function DelightfulInfiniteScrollListComponent<D, ItemR extends DelightfulListItemType = DelightfulListItemType>({
 	data,
 	trigger,
 	itemsTransform,
@@ -24,7 +24,7 @@ function MagicInfiniteScrollListComponent<D, ItemR extends MagicListItemType = M
 	itemHeight = 60,
 	scrollThreshold = 50,
 	loadingIndicator,
-}: MagicInfiniteScrollListProps<D, ItemR>) {
+}: DelightfulInfiniteScrollListProps<D, ItemR>) {
 	// 数据和加载状态
 	const [listData, setListData] = useState<D[]>(() => data?.items || [])
 	const pageTokenRef = useRef(data?.page_token || "")
@@ -184,10 +184,10 @@ function MagicInfiniteScrollListComponent<D, ItemR extends MagicListItemType = M
 	})
 
 	// 自定义列表项组件（使用 memo 优化渲染）
-	const CustomListItem = memo(({ data: itemData, ...restProps }: MagicListItemProps<ItemR>) => {
+	const CustomListItem = memo(({ data: itemData, ...restProps }: DelightfulListItemProps<ItemR>) => {
 		// 没有复选框选项时直接渲染普通列表项
 		if (!checkboxOptions) {
-			return <MagicListItem<ItemR> data={itemData} {...restProps} />
+			return <DelightfulListItem<ItemR> data={itemData} {...restProps} />
 		}
 
 		// 获取状态
@@ -224,7 +224,7 @@ function MagicInfiniteScrollListComponent<D, ItemR extends MagicListItemType = M
 					<Checkbox checked={checked} disabled={disabled} />
 				</div>
 				<div style={{ flex: 1 }}>
-					<MagicListItem<ItemR> data={itemData} {...restProps} />
+					<DelightfulListItem<ItemR> data={itemData} {...restProps} />
 				</div>
 			</Flex>
 		)
@@ -257,7 +257,7 @@ function MagicInfiniteScrollListComponent<D, ItemR extends MagicListItemType = M
 	)
 
 	if (noData && (!loading || isTestEnv)) {
-		return noDataFallback || <MagicEmpty data-testid="empty-state" />
+		return noDataFallback || <DelightfulEmpty data-testid="empty-state" />
 	}
 
 	if (noData && loading && !isTestEnv) {
@@ -290,11 +290,11 @@ function MagicInfiniteScrollListComponent<D, ItemR extends MagicListItemType = M
 }
 
 // 使用 memo 优化组件，避免不必要的重新渲染
-const MagicInfiniteScrollList = memo(MagicInfiniteScrollListComponent) as <
+const DelightfulInfiniteScrollList = memo(DelightfulInfiniteScrollListComponent) as <
 	D,
-	ItemR extends MagicListItemType = MagicListItemType,
+	ItemR extends DelightfulListItemType = DelightfulListItemType,
 >(
-	props: MagicInfiniteScrollListProps<D, ItemR>,
+	props: DelightfulInfiniteScrollListProps<D, ItemR>,
 ) => React.ReactElement
 
-export default MagicInfiniteScrollList
+export default DelightfulInfiniteScrollList

@@ -7,7 +7,7 @@ declare(strict_types=1);
 use App\Interfaces\MCP\Facade\Admin\MCPOAuth2BindingApi;
 use App\Interfaces\MCP\Facade\Admin\MCPServerAdminApi;
 use App\Interfaces\MCP\Facade\Admin\MCPServerToolAdminApi;
-use App\Interfaces\MCP\Facade\Admin\MCPSuperMagicProjectSettingAdminApi;
+use App\Interfaces\MCP\Facade\Admin\MCPSuperDelightfulProjectSettingAdminApi;
 use App\Interfaces\MCP\Facade\Admin\MCPUserSettingAdminApi;
 use Delightful\PhpMcp\Server\Framework\Hyperf\HyperfMcpServer;
 use Hyperf\HttpServer\Router\Router;
@@ -28,8 +28,8 @@ Router::addGroup('/api/v1/mcp', function () {
     });
 
     Router::addGroup('/super-magic', function () {
-        Router::put('/project/{projectId}/setting', [MCPSuperMagicProjectSettingAdminApi::class, 'save']);
-        Router::get('/project/{projectId}/setting', [MCPSuperMagicProjectSettingAdminApi::class, 'get']);
+        Router::put('/project/{projectId}/setting', [MCPSuperDelightfulProjectSettingAdminApi::class, 'save']);
+        Router::get('/project/{projectId}/setting', [MCPSuperDelightfulProjectSettingAdminApi::class, 'get']);
     });
 
     Router::post('/available/queries', [MCPServerAdminApi::class, 'availableQueries']);
@@ -45,7 +45,7 @@ Router::addGroup('/api/v1/mcp', function () {
 
     Router::addGroup('/sse', function () {
         Router::addRoute(['POST', 'GET', 'DELETE'], '/{code}', function (string $code) {
-            return di(HyperfMcpServer::class)->handle('MagicMcp-' . $code, '1.0.0', true);
+            return di(HyperfMcpServer::class)->handle('DelightfulMcp-' . $code, '1.0.0', true);
         });
     });
 });

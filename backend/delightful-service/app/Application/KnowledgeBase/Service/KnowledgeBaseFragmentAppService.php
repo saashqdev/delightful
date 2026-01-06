@@ -23,14 +23,14 @@ use Qbhy\HyperfAuth\Authenticatable;
 
 class KnowledgeBaseFragmentAppService extends AbstractKnowledgeAppService
 {
-    public function save(Authenticatable $authorization, KnowledgeBaseFragmentEntity $savingMagicFlowKnowledgeFragmentEntity): KnowledgeBaseFragmentEntity
+    public function save(Authenticatable $authorization, KnowledgeBaseFragmentEntity $savingDelightfulFlowKnowledgeFragmentEntity): KnowledgeBaseFragmentEntity
     {
         $dataIsolation = $this->createKnowledgeBaseDataIsolation($authorization);
-        $this->checkKnowledgeBaseOperation($dataIsolation, 'w', $savingMagicFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingMagicFlowKnowledgeFragmentEntity->getDocumentCode());
-        $savingMagicFlowKnowledgeFragmentEntity->setCreator($dataIsolation->getCurrentUserId());
-        $knowledgeBaseDocumentEntity = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $savingMagicFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingMagicFlowKnowledgeFragmentEntity->getDocumentCode());
-        $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $savingMagicFlowKnowledgeFragmentEntity->getKnowledgeCode());
-        return $this->knowledgeBaseFragmentDomainService->save($dataIsolation, $knowledgeBaseEntity, $knowledgeBaseDocumentEntity, $savingMagicFlowKnowledgeFragmentEntity);
+        $this->checkKnowledgeBaseOperation($dataIsolation, 'w', $savingDelightfulFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingDelightfulFlowKnowledgeFragmentEntity->getDocumentCode());
+        $savingDelightfulFlowKnowledgeFragmentEntity->setCreator($dataIsolation->getCurrentUserId());
+        $knowledgeBaseDocumentEntity = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingDelightfulFlowKnowledgeFragmentEntity->getDocumentCode());
+        $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getKnowledgeCode());
+        return $this->knowledgeBaseFragmentDomainService->save($dataIsolation, $knowledgeBaseEntity, $knowledgeBaseDocumentEntity, $savingDelightfulFlowKnowledgeFragmentEntity);
     }
 
     /**

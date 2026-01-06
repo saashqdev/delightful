@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Service;
 
-use App\Domain\Chat\Entity\MagicSeqEntity;
-use App\Domain\Chat\Entity\ValueObject\MagicMessageStatus;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
+use App\Domain\Chat\Entity\ValueObject\DelightfulMessageStatus;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 use App\ErrorCode\ChatErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -21,12 +21,12 @@ use Throwable;
 /**
  * 处理控制消息相关.
  */
-class MagicControlDomainService extends AbstractDomainService
+class DelightfulControlDomainService extends AbstractDomainService
 {
     /**
      * 返回收件方多条消息最终的阅读状态
      */
-    public function getSenderMessageLatestReadStatus(string $senderMessageId, string $senderUserId): ?MagicSeqEntity
+    public function getSenderMessageLatestReadStatus(string $senderMessageId, string $senderUserId): ?DelightfulSeqEntity
     {
         $senderSeqList = $this->magicSeqRepository->getSenderMessagesStatusChange($senderMessageId, $senderUserId);
         // 对于接收方来说,一个 sender_message_id 由于状态变化,可能会有多条记录,此处需要最后的状态
@@ -37,26 +37,26 @@ class MagicControlDomainService extends AbstractDomainService
     /**
      * 处理 mq 中分发的消息已读/已查看消息. 这些消息需要操作消息发送者的seq.
      */
-    public function handlerMQReceiptSeq(MagicSeqEntity $receiveMagicSeqEntity): void
+    public function handlerMQReceiptSeq(DelightfulSeqEntity $receiveDelightfulSeqEntity): void
     {
-        $controlMessageType = $receiveMagicSeqEntity->getSeqType();
+        $controlMessageType = $receiveDelightfulSeqEntity->getSeqType();
         // 根据已读回执的发送方,解析出来消息发送方的信息
-        $receiveConversationId = $receiveMagicSeqEntity->getConversationId();
+        $receiveConversationId = $receiveDelightfulSeqEntity->getConversationId();
         $receiveConversationEntity = $this->magicConversationRepository->getConversationById($receiveConversationId);
         if ($receiveConversationEntity === null) {
             $this->logger->error(sprintf(
                 'messageDispatch 收件方的会话不存在 $conversation_id:%s $magicSeqEntity:%s',
                 $receiveConversationId,
-                Json::encode($receiveMagicSeqEntity->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
+                Json::encode($receiveDelightfulSeqEntity->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
             ));
             return;
         }
         // 通过回执发送者引用的消息id,找到发送者的消息id. (不可直接使用接收者的 sender_message_id 字段,这是一个不好的设计,随时取消)
-        $senderMessageId = $this->magicSeqRepository->getSeqByMessageId($receiveMagicSeqEntity->getReferMessageId())?->getSenderMessageId();
+        $senderMessageId = $this->magicSeqRepository->getSeqByMessageId($receiveDelightfulSeqEntity->getReferMessageId())?->getSenderMessageId();
         if ($senderMessageId === null) {
             $this->logger->error(sprintf(
                 'messageDispatch 没有找到发送方的消息id $magicSeqEntity:%s $senderMessageId:%s',
-                Json::encode($receiveMagicSeqEntity->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+                Json::encode($receiveDelightfulSeqEntity->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
                 $senderMessageId
             ));
             return;
@@ -71,13 +71,13 @@ class MagicControlDomainService extends AbstractDomainService
         if ($senderConversationId === null || $senderConversationEntity === null) {
             $this->logger->error(sprintf(
                 'messageDispatch 没有找到发送方的会话id $magicSeqEntity:%s',
-                Json::encode($receiveMagicSeqEntity->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
+                Json::encode($receiveDelightfulSeqEntity->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
             ));
             return;
         }
 
         $senderUserId = $senderConversationEntity->getUserId();
-        $senderMessageId = $receiveMagicSeqEntity->getSenderMessageId();
+        $senderMessageId = $receiveDelightfulSeqEntity->getSenderMessageId();
         # 这里加一下分布式行锁,防止并发修改消息接收人列表,造成数据覆盖.
         $spinLockKey = 'chat:seq:lock:' . $senderMessageId;
         $spinLockKeyOwner = random_bytes(8);
@@ -87,20 +87,20 @@ class MagicControlDomainService extends AbstractDomainService
                 $this->logger->error(sprintf(
                     'messageDispatch 获取消息接收人列表的自旋锁超时 $spinLockKey:%s $magicSeqEntity:%s',
                     $spinLockKey,
-                    Json::encode($receiveMagicSeqEntity->toArray())
+                    Json::encode($receiveDelightfulSeqEntity->toArray())
                 ));
                 ExceptionBuilder::throw(ChatErrorCode::DATA_WRITE_FAILED);
             }
             // 获取每条消息的最终状态,解析出来接收人列表,
             $senderLatestSeq = $this->getSenderMessageLatestReadStatus($senderMessageId, $senderUserId);
             $receiveUserEntity = $this->magicUserRepository->getUserByAccountAndOrganization(
-                $receiveMagicSeqEntity->getObjectId(),
-                $receiveMagicSeqEntity->getOrganizationCode()
+                $receiveDelightfulSeqEntity->getObjectId(),
+                $receiveDelightfulSeqEntity->getOrganizationCode()
             );
             if ($receiveUserEntity === null) {
                 $this->logger->error(sprintf(
                     'messageDispatch 回执消息未找到消息发送者 $magicSeqEntity:%s',
-                    Json::encode($receiveMagicSeqEntity->toArray())
+                    Json::encode($receiveDelightfulSeqEntity->toArray())
                 ));
                 return;
             }
@@ -109,11 +109,11 @@ class MagicControlDomainService extends AbstractDomainService
                 $this->logger->error(sprintf(
                     'messageDispatch 回执消息没找到 seq,或者消息已被撤回 $senderLatestSeq:%s $magicSeqEntity:%s',
                     Json::encode($senderLatestSeq?->toArray()),
-                    Json::encode($receiveMagicSeqEntity->toArray())
+                    Json::encode($receiveDelightfulSeqEntity->toArray())
                 ));
                 return;
             }
-            $messageStatus = MagicMessageStatus::getMessageStatusByControlMessageType($controlMessageType);
+            $messageStatus = DelightfulMessageStatus::getMessageStatusByControlMessageType($controlMessageType);
 
             switch ($controlMessageType) {
                 case ControlMessageType::SeenMessages:
@@ -122,7 +122,7 @@ class MagicControlDomainService extends AbstractDomainService
                     if ($senderReceiveList === null) {
                         $this->logger->error(sprintf(
                             'messageDispatch 消息接收人列表为空 $magicSeqEntity:%s',
-                            Json::encode($receiveMagicSeqEntity->toArray())
+                            Json::encode($receiveDelightfulSeqEntity->toArray())
                         ));
                         return;
                     }
@@ -132,7 +132,7 @@ class MagicControlDomainService extends AbstractDomainService
                         $this->logger->error(sprintf(
                             'messageDispatch 用户不在消息未读列表中（可能其他设备已读） $unreadList:%s $magicSeqEntity:%s',
                             Json::encode($unreadList),
-                            Json::encode($receiveMagicSeqEntity->toArray())
+                            Json::encode($receiveDelightfulSeqEntity->toArray())
                         ));
                         return;
                     }
@@ -158,7 +158,7 @@ class MagicControlDomainService extends AbstractDomainService
                     $senderSeenSeqEntity = SeqAssembler::generateStatusChangeSeqEntity($senderSeqData, $senderMessageId);
                     // 由于存在批量写入的情况,这里只生成entity,不调用create方法
                     $seqData = SeqAssembler::getInsertDataByEntity($senderSeenSeqEntity);
-                    $seqData['app_message_id'] = $receiveMagicSeqEntity->getAppMessageId();
+                    $seqData['app_message_id'] = $receiveDelightfulSeqEntity->getAppMessageId();
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
                         // 写数据库,更新消息发送方的已读列表。这是为了复用消息收发通道，通知客户端有新的已读回执。
                         $this->magicSeqRepository->createSequence($seqData);
@@ -192,7 +192,7 @@ class MagicControlDomainService extends AbstractDomainService
      * 处理 mq 中分发的撤回/编辑消息. 这些消息是操作用户自己的seq.
      * @throws Throwable
      */
-    public function handlerMQUserSelfMessageChange(MagicSeqEntity $changeMessageStatusSeqEntity): void
+    public function handlerMQUserSelfMessageChange(DelightfulSeqEntity $changeMessageStatusSeqEntity): void
     {
         $controlMessageType = $changeMessageStatusSeqEntity->getSeqType();
         // 通过回执发送者引用的消息id,找到发送者的消息id. (不可直接使用接收者的 sender_message_id 字段,这是一个不好的设计,随时取消)
@@ -218,7 +218,7 @@ class MagicControlDomainService extends AbstractDomainService
                 ExceptionBuilder::throw(ChatErrorCode::DATA_WRITE_FAILED);
             }
             // 更新原始消息的状态
-            $messageStatus = MagicMessageStatus::getMessageStatusByControlMessageType($controlMessageType);
+            $messageStatus = DelightfulMessageStatus::getMessageStatusByControlMessageType($controlMessageType);
             $this->magicSeqRepository->batchUpdateSeqStatus([$needChangeSeqEntity->getSeqId()], $messageStatus);
             // 根据 magic_message_id 找到所有消息接收者
             $notifyAllReceiveSeqList = $this->batchCreateSeqByRevokeOrEditMessage($needChangeSeqEntity, $controlMessageType);
@@ -232,13 +232,13 @@ class MagicControlDomainService extends AbstractDomainService
 
     /**
      * 分发群聊/私聊中的撤回或者编辑消息.
-     * @return MagicSeqEntity[]
+     * @return DelightfulSeqEntity[]
      */
     #[Transactional]
-    public function batchCreateSeqByRevokeOrEditMessage(MagicSeqEntity $needChangeSeqEntity, ControlMessageType $controlMessageType): array
+    public function batchCreateSeqByRevokeOrEditMessage(DelightfulSeqEntity $needChangeSeqEntity, ControlMessageType $controlMessageType): array
     {
         // 获取所有收件方的seq
-        $receiveSeqList = $this->magicSeqRepository->getBothSeqListByMagicMessageId($needChangeSeqEntity->getMagicMessageId());
+        $receiveSeqList = $this->magicSeqRepository->getBothSeqListByDelightfulMessageId($needChangeSeqEntity->getDelightfulMessageId());
         $receiveSeqList = array_column($receiveSeqList, null, 'object_id');
         // 去掉自己,因为需要及时响应,已经单独生成了seq并推送了
         unset($receiveSeqList[$needChangeSeqEntity->getObjectId()]);
@@ -246,7 +246,7 @@ class MagicControlDomainService extends AbstractDomainService
         foreach ($receiveSeqList as $receiveSeq) {
             // 撤回的都是收件方自己会话窗口中的消息id
             $revokeMessageId = $receiveSeq['message_id'];
-            $receiveSeq['status'] = MagicMessageStatus::Seen;
+            $receiveSeq['status'] = DelightfulMessageStatus::Seen;
             $receiveSeq['seq_type'] = $controlMessageType->value;
             $receiveSeq['content'] = [
                 'refer_message_id' => $revokeMessageId,

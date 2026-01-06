@@ -7,19 +7,19 @@ declare(strict_types=1);
 
 namespace App\Domain\Token\Repository\Facade;
 
-use App\Domain\Token\Entity\MagicTokenEntity;
-use App\Domain\Token\Entity\ValueObject\MagicTokenType;
+use App\Domain\Token\Entity\DelightfulTokenEntity;
+use App\Domain\Token\Entity\ValueObject\DelightfulTokenType;
 
-interface MagicTokenRepositoryInterface
+interface DelightfulTokenRepositoryInterface
 {
     /**
      * Retrieve the entity related to a token (for example, which magic_id a token belongs to).
      */
-    public function getTokenEntity(MagicTokenEntity $tokenDTO): ?MagicTokenEntity;
+    public function getTokenEntity(DelightfulTokenEntity $tokenDTO): ?DelightfulTokenEntity;
 
-    public function createToken(MagicTokenEntity $tokenDTO): void;
+    public function createToken(DelightfulTokenEntity $tokenDTO): void;
 
-    public function getTokenByTypeAndRelationValue(MagicTokenType $type, string $relationValue): ?MagicTokenEntity;
+    public function getTokenByTypeAndRelationValue(DelightfulTokenType $type, string $relationValue): ?DelightfulTokenEntity;
 
-    public function deleteToken(MagicTokenEntity $tokenDTO): void;
+    public function deleteToken(DelightfulTokenEntity $tokenDTO): void;
 }

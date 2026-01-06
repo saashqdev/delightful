@@ -7,19 +7,19 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Facade;
 
-use App\Domain\Flow\Entity\MagicFlowWaitMessageEntity;
+use App\Domain\Flow\Entity\DelightfulFlowWaitMessageEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 
-interface MagicFlowWaitMessageRepositoryInterface
+interface DelightfulFlowWaitMessageRepositoryInterface
 {
-    public function save(MagicFlowWaitMessageEntity $waitMessageEntity): MagicFlowWaitMessageEntity;
+    public function save(DelightfulFlowWaitMessageEntity $waitMessageEntity): DelightfulFlowWaitMessageEntity;
 
-    public function find(FlowDataIsolation $dataIsolation, int $id): ?MagicFlowWaitMessageEntity;
+    public function find(FlowDataIsolation $dataIsolation, int $id): ?DelightfulFlowWaitMessageEntity;
 
     public function handled(FlowDataIsolation $dataIsolation, int $id): void;
 
     /**
-     * @return MagicFlowWaitMessageEntity[]
+     * @return DelightfulFlowWaitMessageEntity[]
      */
     public function listByUnhandledConversationId(FlowDataIsolation $dataIsolation, string $conversationId): array;
 }

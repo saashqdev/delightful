@@ -1,4 +1,4 @@
-import { MagicRichEditorRef } from "@/opensource/components/base/MagicRichEditor"
+import { DelightfulRichEditorRef } from "@/opensource/components/base/DelightfulRichEditor"
 import { debounce } from "lodash-es"
 import { Extension } from "@tiptap/core"
 import { Plugin } from "@tiptap/pm/state"
@@ -29,7 +29,7 @@ export interface AIAutoCompletionExtensionOptions {
  */
 class AiCompletionService {
 	/** 编辑器实例引用 */
-	instance: MagicRichEditorRef | null = null
+	instance: DelightfulRichEditorRef | null = null
 
 	/** 是否正在进行输入法组合输入（如中文输入） */
 	composition: boolean = false
@@ -87,7 +87,7 @@ class AiCompletionService {
 	 * 在组件挂载时调用此方法
 	 * @param instance 富文本编辑器实例
 	 */
-	setInstance = (instance: MagicRichEditorRef) => {
+	setInstance = (instance: DelightfulRichEditorRef) => {
 		this.instance = instance
 	}
 

@@ -7,10 +7,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Token\Repository\Persistence;
 
-use App\Domain\Token\Entity\MagicTokenEntity;
-use App\Domain\Token\Entity\ValueObject\MagicTokenType;
-use App\Domain\Token\Repository\Facade\MagicTokenRepositoryInterface;
-use App\Domain\Token\Repository\Persistence\Model\MagicToken;
+use App\Domain\Token\Entity\DelightfulTokenEntity;
+use App\Domain\Token\Entity\ValueObject\DelightfulTokenType;
+use App\Domain\Token\Repository\Facade\DelightfulTokenRepositoryInterface;
+use App\Domain\Token\Repository\Persistence\Model\DelightfulToken;
 use App\ErrorCode\TokenErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
@@ -18,14 +18,14 @@ use Carbon\Carbon;
 use Hyperf\Codec\Json;
 use Hyperf\DbConnection\Db;
 
-class MagicMagicTokenRepository implements MagicTokenRepositoryInterface
+class DelightfulDelightfulTokenRepository implements DelightfulTokenRepositoryInterface
 {
     public function __construct(
-        protected MagicToken $token
+        protected DelightfulToken $token
     ) {
     }
 
-    public function getTokenEntity(MagicTokenEntity $tokenDTO): ?MagicTokenEntity
+    public function getTokenEntity(DelightfulTokenEntity $tokenDTO): ?DelightfulTokenEntity
     {
         $token = $this->token::query()
             ->where('type', $tokenDTO->getType()->value)
@@ -39,10 +39,10 @@ class MagicMagicTokenRepository implements MagicTokenRepositoryInterface
         if (empty($token['type_relation_value'])) {
             return null;
         }
-        return new MagicTokenEntity($token);
+        return new DelightfulTokenEntity($token);
     }
 
-    public function createToken(MagicTokenEntity $tokenDTO): void
+    public function createToken(DelightfulTokenEntity $tokenDTO): void
     {
         if (empty($tokenDTO->getExpiredAt())) {
             ExceptionBuilder::throw(TokenErrorCode::TokenExpiredAtMustSet);
@@ -70,7 +70,7 @@ class MagicMagicTokenRepository implements MagicTokenRepositoryInterface
         ]);
     }
 
-    public function getTokenByTypeAndRelationValue(MagicTokenType $type, string $relationValue): ?MagicTokenEntity
+    public function getTokenByTypeAndRelationValue(DelightfulTokenType $type, string $relationValue): ?DelightfulTokenEntity
     {
         $token = $this->token::query()
             ->where('type', $type->value)
@@ -82,10 +82,10 @@ class MagicMagicTokenRepository implements MagicTokenRepositoryInterface
         if (empty($token)) {
             return null;
         }
-        return new MagicTokenEntity($token);
+        return new DelightfulTokenEntity($token);
     }
 
-    public function deleteToken(MagicTokenEntity $tokenDTO): void
+    public function deleteToken(DelightfulTokenEntity $tokenDTO): void
     {
         $this->token::query()
             ->where('token', $tokenDTO->getToken())

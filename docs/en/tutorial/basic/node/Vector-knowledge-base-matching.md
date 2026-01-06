@@ -1,7 +1,7 @@
 # Vector Knowledge Base Matching Node
 
 ## What is a Vector Knowledge Base Matching Node?
-The Vector Knowledge Base Matching Node is a specialized node in Magic Flow workflows for retrieving and matching vector knowledge base content. It helps you filter out needed vector knowledge bases based on specific conditions, providing foundational support for subsequent operations (such as similarity search, knowledge Q&A, etc.). Simply put, this node is like filtering out appropriate "bookshelves" from your vector knowledge base, so you can later find relevant information on these "bookshelves".
+The Vector Knowledge Base Matching Node is a specialized node in Delightful Flow workflows for retrieving and matching vector knowledge base content. It helps you filter out needed vector knowledge bases based on specific conditions, providing foundational support for subsequent operations (such as similarity search, knowledge Q&A, etc.). Simply put, this node is like filtering out appropriate "bookshelves" from your vector knowledge base, so you can later find relevant information on these "bookshelves".
 
 **Image Description:**
 

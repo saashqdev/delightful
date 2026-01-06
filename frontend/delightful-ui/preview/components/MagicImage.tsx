@@ -1,6 +1,6 @@
 import React from "react"
 import { Space } from "antd"
-import MagicImage from "../../components/MagicImage"
+import DelightfulImage from "../../components/DelightfulImage"
 import ComponentDemo from "./Container"
 
 const ImageDemo: React.FC = () => {
@@ -12,21 +12,21 @@ const ImageDemo: React.FC = () => {
 				code="src: string"
 			>
 				<Space wrap>
-					<MagicImage
+					<DelightfulImage
 						src="https://picsum.photos/200/150?random=1"
 						alt="随机图片1"
 						width={200}
 						height={150}
 						style={{ borderRadius: "8px" }}
 					/>
-					<MagicImage
+					<DelightfulImage
 						src="https://picsum.photos/200/150?random=2"
 						alt="随机图片2"
 						width={200}
 						height={150}
 						style={{ borderRadius: "8px" }}
 					/>
-					<MagicImage
+					<DelightfulImage
 						src="https://picsum.photos/200/150?random=3"
 						alt="随机图片3"
 						width={200}
@@ -42,7 +42,7 @@ const ImageDemo: React.FC = () => {
 				code="errorSrc: string"
 			>
 				<Space wrap>
-					<MagicImage
+					<DelightfulImage
 						src="invalid-url"
 						errorSrc="https://picsum.photos/200/150?random=fallback"
 						alt="错误回退示例"
@@ -50,7 +50,7 @@ const ImageDemo: React.FC = () => {
 						height={150}
 						style={{ borderRadius: "8px" }}
 					/>
-					<MagicImage
+					<DelightfulImage
 						src="https://picsum.photos/200/150?random=4"
 						errorSrc="https://picsum.photos/200/150?random=fallback2"
 						alt="正常图片"

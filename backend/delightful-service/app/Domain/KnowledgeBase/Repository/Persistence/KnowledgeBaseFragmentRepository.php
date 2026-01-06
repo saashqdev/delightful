@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\KnowledgeBase\Repository\Persistence;
 
-use App\Domain\Flow\Factory\MagicFlowKnowledgeFragmentFactory;
+use App\Domain\Flow\Factory\DelightfulFlowKnowledgeFragmentFactory;
 use App\Domain\KnowledgeBase\Entity\KnowledgeBaseFragmentEntity;
 use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeBaseDataIsolation;
 use App\Domain\KnowledgeBase\Entity\ValueObject\KnowledgeSyncStatus;
@@ -31,7 +31,7 @@ class KnowledgeBaseFragmentRepository extends KnowledgeBaseAbstractRepository im
                 return $builder->lockForUpdate();
             })
             ->find($id);
-        return $model ? MagicFlowKnowledgeFragmentFactory::modelToEntity($model) : null;
+        return $model ? DelightfulFlowKnowledgeFragmentFactory::modelToEntity($model) : null;
     }
 
     public function getByIds(KnowledgeBaseDataIsolation $dataIsolation, array $ids, bool $selectForUpdate = false): array
@@ -52,7 +52,7 @@ class KnowledgeBaseFragmentRepository extends KnowledgeBaseAbstractRepository im
         $builder = $this->createBuilder($dataIsolation, KnowledgeBaseFragmentsModel::query());
         /** @var null|KnowledgeBaseFragmentsModel $model */
         $model = $builder->where('knowledge_code', $knowledgeCode)->where('business_id', $businessId)->first();
-        return $model ? MagicFlowKnowledgeFragmentFactory::modelToEntity($model) : null;
+        return $model ? DelightfulFlowKnowledgeFragmentFactory::modelToEntity($model) : null;
     }
 
     public function getByPointId(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, string $pointId): ?KnowledgeBaseFragmentEntity
@@ -60,7 +60,7 @@ class KnowledgeBaseFragmentRepository extends KnowledgeBaseAbstractRepository im
         $builder = $this->createBuilder($dataIsolation, KnowledgeBaseFragmentsModel::query());
         /** @var null|KnowledgeBaseFragmentsModel $model */
         $model = $builder->where('knowledge_code', $knowledgeCode)->where('point_id', $pointId)->first();
-        return $model ? MagicFlowKnowledgeFragmentFactory::modelToEntity($model) : null;
+        return $model ? DelightfulFlowKnowledgeFragmentFactory::modelToEntity($model) : null;
     }
 
     public function getFragmentsByPointId(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, string $pointId, bool $selectForUpdate = false): array
@@ -127,7 +127,7 @@ class KnowledgeBaseFragmentRepository extends KnowledgeBaseAbstractRepository im
         if (! empty($data['list'])) {
             $list = [];
             foreach ($data['list'] as $model) {
-                $list[] = MagicFlowKnowledgeFragmentFactory::modelToEntity($model);
+                $list[] = DelightfulFlowKnowledgeFragmentFactory::modelToEntity($model);
             }
             $data['list'] = $list;
         }

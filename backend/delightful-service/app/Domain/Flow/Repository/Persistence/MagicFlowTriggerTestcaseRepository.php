@@ -7,23 +7,23 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Persistence;
 
-use App\Domain\Flow\Entity\MagicFlowTriggerTestcaseEntity;
+use App\Domain\Flow\Entity\DelightfulFlowTriggerTestcaseEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowTriggerTestcaseQuery;
-use App\Domain\Flow\Factory\MagicFlowTriggerTestcaseFactory;
-use App\Domain\Flow\Repository\Facade\MagicFlowTriggerTestcaseRepositoryInterface;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowTriggerTestcaseModel;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowTriggerTestcaseQuery;
+use App\Domain\Flow\Factory\DelightfulFlowTriggerTestcaseFactory;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowTriggerTestcaseRepositoryInterface;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowTriggerTestcaseModel;
 use App\Infrastructure\Core\ValueObject\Page;
 
-class MagicFlowTriggerTestcaseRepository extends MagicFlowAbstractRepository implements MagicFlowTriggerTestcaseRepositoryInterface
+class DelightfulFlowTriggerTestcaseRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowTriggerTestcaseRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): MagicFlowTriggerTestcaseEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): DelightfulFlowTriggerTestcaseEntity
     {
         if (! $magicFlowTriggerTestcaseEntity->getId()) {
-            $magicFlowTriggerTestcaseModel = new MagicFlowTriggerTestcaseModel();
+            $magicFlowTriggerTestcaseModel = new DelightfulFlowTriggerTestcaseModel();
         } else {
-            $builder = $this->createBuilder($dataIsolation, MagicFlowTriggerTestcaseModel::query());
-            /** @var MagicFlowTriggerTestcaseModel $magicFlowTriggerTestcaseModel */
+            $builder = $this->createBuilder($dataIsolation, DelightfulFlowTriggerTestcaseModel::query());
+            /** @var DelightfulFlowTriggerTestcaseModel $magicFlowTriggerTestcaseModel */
             $magicFlowTriggerTestcaseModel = $builder->where('id', $magicFlowTriggerTestcaseEntity->getId())->first();
         }
 
@@ -35,31 +35,31 @@ class MagicFlowTriggerTestcaseRepository extends MagicFlowAbstractRepository imp
         return $magicFlowTriggerTestcaseEntity;
     }
 
-    public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?MagicFlowTriggerTestcaseEntity
+    public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowTriggerTestcaseEntity
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowTriggerTestcaseModel::query());
-        /** @var null|MagicFlowTriggerTestcaseModel $model */
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowTriggerTestcaseModel::query());
+        /** @var null|DelightfulFlowTriggerTestcaseModel $model */
         $model = $builder->where('code', $code)->first();
         if (! $model) {
             return null;
         }
-        return MagicFlowTriggerTestcaseFactory::modelToEntity($model);
+        return DelightfulFlowTriggerTestcaseFactory::modelToEntity($model);
     }
 
-    public function getByFlowCodeAndCode(FlowDataIsolation $dataIsolation, string $flowCode, string $code): ?MagicFlowTriggerTestcaseEntity
+    public function getByFlowCodeAndCode(FlowDataIsolation $dataIsolation, string $flowCode, string $code): ?DelightfulFlowTriggerTestcaseEntity
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowTriggerTestcaseModel::query());
-        /** @var null|MagicFlowTriggerTestcaseModel $model */
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowTriggerTestcaseModel::query());
+        /** @var null|DelightfulFlowTriggerTestcaseModel $model */
         $model = $builder->where('flow_code', $flowCode)->where('code', $code)->first();
         if (! $model) {
             return null;
         }
-        return MagicFlowTriggerTestcaseFactory::modelToEntity($model);
+        return DelightfulFlowTriggerTestcaseFactory::modelToEntity($model);
     }
 
-    public function queries(FlowDataIsolation $dataIsolation, MagicFLowTriggerTestcaseQuery $query, Page $page): array
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowTriggerTestcaseQuery $query, Page $page): array
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowTriggerTestcaseModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowTriggerTestcaseModel::query());
         if ($query->flowCode) {
             $builder->where('flow_code', $query->flowCode);
         }
@@ -67,7 +67,7 @@ class MagicFlowTriggerTestcaseRepository extends MagicFlowAbstractRepository imp
         if (! empty($data['list'])) {
             $list = [];
             foreach ($data['list'] as $model) {
-                $list[] = MagicFlowTriggerTestcaseFactory::modelToEntity($model);
+                $list[] = DelightfulFlowTriggerTestcaseFactory::modelToEntity($model);
             }
             $data['list'] = $list;
         }
@@ -75,9 +75,9 @@ class MagicFlowTriggerTestcaseRepository extends MagicFlowAbstractRepository imp
         return $data;
     }
 
-    public function remove(FlowDataIsolation $dataIsolation, MagicFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): void
+    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): void
     {
-        $builder = $this->createBuilder($dataIsolation, MagicFlowTriggerTestcaseModel::query());
+        $builder = $this->createBuilder($dataIsolation, DelightfulFlowTriggerTestcaseModel::query());
         $builder->where('code', $magicFlowTriggerTestcaseEntity->getCode())->delete();
     }
 }

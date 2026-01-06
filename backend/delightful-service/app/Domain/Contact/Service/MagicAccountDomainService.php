@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Service;
 
 use App\Domain\Contact\Entity\AccountEntity;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\GenderType;
 use App\Domain\Contact\Entity\ValueObject\UserIdType;
@@ -32,11 +32,11 @@ use Throwable;
 
 use function Hyperf\Config\config;
 
-class MagicAccountDomainService extends AbstractContactDomainService
+class DelightfulAccountDomainService extends AbstractContactDomainService
 {
-    public function getAccountByMagicIds(array $magicIds): array
+    public function getAccountByDelightfulIds(array $magicIds): array
     {
-        return $this->accountRepository->getAccountByMagicIds($magicIds);
+        return $this->accountRepository->getAccountByDelightfulIds($magicIds);
     }
 
     /**
@@ -109,14 +109,14 @@ class MagicAccountDomainService extends AbstractContactDomainService
         return ['user_id' => $userId];
     }
 
-    public function addUserAndAccount(MagicUserEntity $userDTO, AccountEntity $accountDTO): void
+    public function addUserAndAccount(DelightfulUserEntity $userDTO, AccountEntity $accountDTO): void
     {
         // 判断账号是否存在
-        $magicId = $accountDTO->getMagicId();
+        $magicId = $accountDTO->getDelightfulId();
         if (empty($magicId) || empty($userDTO->getOrganizationCode())) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
-        $existsAccount = $this->accountRepository->getAccountInfoByMagicId($magicId);
+        $existsAccount = $this->accountRepository->getAccountInfoByDelightfulId($magicId);
         if ($existsAccount !== null) {
             $userEntity = $this->userRepository->getUserByAccountAndOrganization($magicId, $userDTO->getOrganizationCode());
             // 账号存在,且在该组织下已经生成了用户信息,直接返回
@@ -142,7 +142,7 @@ class MagicAccountDomainService extends AbstractContactDomainService
                 $accountEntity = $existsAccount;
             }
             // 将生成的账号信息关联到userEntity
-            $userDTO->setMagicId($accountEntity->getMagicId());
+            $userDTO->setDelightfulId($accountEntity->getDelightfulId());
             $userEntity = $this->userRepository->getUserByAccountAndOrganization($magicId, $userDTO->getOrganizationCode());
             if ($userEntity && $userEntity->getUserId()) {
                 $userDTO->setUserId($userEntity->getUserId());
@@ -169,7 +169,7 @@ class MagicAccountDomainService extends AbstractContactDomainService
      * @param AccountEntity $accountDTO 支持启用/禁用智能体
      * @throws Throwable
      */
-    public function aiRegister(MagicUserEntity $userDTO, DataIsolation $dataIsolation, AccountEntity $accountDTO): MagicUserEntity
+    public function aiRegister(DelightfulUserEntity $userDTO, DataIsolation $dataIsolation, AccountEntity $accountDTO): DelightfulUserEntity
     {
         Db::beginTransaction();
         try {
@@ -178,7 +178,7 @@ class MagicAccountDomainService extends AbstractContactDomainService
             }
             $accountEntity = $this->accountRepository->getAccountInfoByAiCode($accountDTO->getAiCode());
             if ($accountEntity) {
-                $userDTO->setMagicId($accountEntity->getMagicId());
+                $userDTO->setDelightfulId($accountEntity->getDelightfulId());
                 // 更新 ai 的昵称
                 $accountEntity->setRealName($userDTO->getNickname());
                 // 更新账号信息
@@ -188,7 +188,7 @@ class MagicAccountDomainService extends AbstractContactDomainService
                 }
                 $this->accountRepository->saveAccount($accountEntity);
                 // 更新账号在该组织下的用户信息
-                $userEntity = $this->userRepository->getUserByAccountAndOrganization($accountEntity->getMagicId(), $dataIsolation->getCurrentOrganizationCode());
+                $userEntity = $this->userRepository->getUserByAccountAndOrganization($accountEntity->getDelightfulId(), $dataIsolation->getCurrentOrganizationCode());
                 if ($userEntity === null) {
                     # 账号存在,但是该组织下没有用户信息. 生成用户信息
                     $userEntity = $this->createUser($userDTO, $dataIsolation);
@@ -217,9 +217,9 @@ class MagicAccountDomainService extends AbstractContactDomainService
             $accountDTO->setType(UserType::Ai);
             # 账号不存在(用户肯定也不存在),生成账号和用户信息
             $magicId = (string) IdGenerator::getSnowId();
-            $accountDTO->setMagicId($magicId);
+            $accountDTO->setDelightfulId($magicId);
             $this->accountRepository->createAccount($accountDTO);
-            $userDTO->setMagicId($magicId);
+            $userDTO->setDelightfulId($magicId);
             // 为账号在当前组织创建用户
             $result = $this->createUser($userDTO, $dataIsolation);
             Db::commit();
@@ -234,9 +234,9 @@ class MagicAccountDomainService extends AbstractContactDomainService
         }
     }
 
-    public function getAccountInfoByMagicId(string $magicId): ?AccountEntity
+    public function getAccountInfoByDelightfulId(string $magicId): ?AccountEntity
     {
-        return $this->accountRepository->getAccountInfoByMagicId($magicId);
+        return $this->accountRepository->getAccountInfoByDelightfulId($magicId);
     }
 
     public function getAccountInfoByAiCode(string $aiCode): ?AccountEntity
@@ -257,14 +257,14 @@ class MagicAccountDomainService extends AbstractContactDomainService
     /**
      * @return AccountEntity[]
      */
-    public function getByMagicIds(array $magicIds): array
+    public function getByDelightfulIds(array $magicIds): array
     {
-        return $this->accountRepository->getAccountByMagicIds($magicIds);
+        return $this->accountRepository->getAccountByDelightfulIds($magicIds);
     }
 
-    public function getByMagicId(string $magicId): ?AccountEntity
+    public function getByDelightfulId(string $magicId): ?AccountEntity
     {
-        return $this->accountRepository->getAccountInfoByMagicId($magicId);
+        return $this->accountRepository->getAccountInfoByDelightfulId($magicId);
     }
 
     /**
@@ -272,7 +272,7 @@ class MagicAccountDomainService extends AbstractContactDomainService
      */
     public function updatePassword(string $magicId, string $plainPassword): bool
     {
-        if (! $this->getAccountInfoByMagicId($magicId)) {
+        if (! $this->getAccountInfoByDelightfulId($magicId)) {
             return false;
         }
 
@@ -287,7 +287,7 @@ class MagicAccountDomainService extends AbstractContactDomainService
         return true;
     }
 
-    private function createUser(MagicUserEntity $userDTO, DataIsolation $dataIsolation): MagicUserEntity
+    private function createUser(DelightfulUserEntity $userDTO, DataIsolation $dataIsolation): DelightfulUserEntity
     {
         $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $dataIsolation->getCurrentOrganizationCode());
         $userDTO->setUserId($userId);

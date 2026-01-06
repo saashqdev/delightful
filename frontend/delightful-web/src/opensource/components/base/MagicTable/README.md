@@ -1,6 +1,6 @@
-# MagicTable 魔法表格组件
+# DelightfulTable 魔法表格组件
 
-`MagicTable` 是一个基于 Ant Design Table 组件的增强版表格，提供了更好的加载状态、滚动行为和样式优化。
+`DelightfulTable` 是一个基于 Ant Design Table 组件的增强版表格，提供了更好的加载状态、滚动行为和样式优化。
 
 ## 属性
 
@@ -13,7 +13,7 @@
 ## 基础用法
 
 ```tsx
-import { MagicTable } from '@/components/base/MagicTable';
+import { DelightfulTable } from '@/components/base/DelightfulTable';
 import type { ColumnsType } from 'antd/es/table';
 
 // 定义数据类型
@@ -60,20 +60,20 @@ const data: DataType[] = [
 ];
 
 // 基础用法
-<MagicTable columns={columns} dataSource={data} />
+<DelightfulTable columns={columns} dataSource={data} />
 
 // 加载状态
-<MagicTable loading columns={columns} dataSource={data} />
+<DelightfulTable loading columns={columns} dataSource={data} />
 
 // 固定高度滚动
-<MagicTable
+<DelightfulTable
   scroll={{ y: 300 }}
   columns={columns}
   dataSource={data}
 />
 
 // 行点击事件
-<MagicTable
+<DelightfulTable
   columns={columns}
   dataSource={data}
   onRow={(record) => ({
@@ -84,7 +84,7 @@ const data: DataType[] = [
 
 ## 特点
 
-1. **优化的加载状态**：使用 MagicSpin 组件提供更美观的加载效果
+1. **优化的加载状态**：使用 DelightfulSpin 组件提供更美观的加载效果
 2. **自动处理滚动**：默认设置 x 滚动为 'max-content'，避免表格内容挤压
 3. **行点击样式**：为表格行添加了指针样式，提示用户可点击
 4. **空状态优化**：在加载状态下隐藏空状态提示，避免闪烁
@@ -98,4 +98,4 @@ const data: DataType[] = [
 -   需要表格内容可滚动时
 -   需要行可点击时
 
-MagicTable 组件让你的表格展示更加美观和易用，同时保持了 Ant Design Table 的所有强大功能。
+DelightfulTable 组件让你的表格展示更加美观和易用，同时保持了 Ant Design Table 的所有强大功能。

@@ -11,9 +11,9 @@ use App\Application\Flow\ExecuteManager\Attachment\AbstractAttachment;
 use App\Domain\Chat\DTO\Message\MessageInterface;
 use Delightful\FlowExprEngine\Component;
 
-class MagicFlowMessage
+class DelightfulFlowMessage
 {
-    private MagicFlowMessageType $type;
+    private DelightfulFlowMessageType $type;
 
     private ?Component $content;
 
@@ -21,7 +21,7 @@ class MagicFlowMessage
 
     private ?Component $linkDesc;
 
-    public function __construct(MagicFlowMessageType $type, ?Component $content = null, ?Component $link = null, ?Component $linkDesc = null)
+    public function __construct(DelightfulFlowMessageType $type, ?Component $content = null, ?Component $link = null, ?Component $linkDesc = null)
     {
         $this->type = $type;
         $this->content = $content;
@@ -29,7 +29,7 @@ class MagicFlowMessage
         $this->linkDesc = $linkDesc;
     }
 
-    public function getType(): MagicFlowMessageType
+    public function getType(): DelightfulFlowMessageType
     {
         return $this->type;
     }

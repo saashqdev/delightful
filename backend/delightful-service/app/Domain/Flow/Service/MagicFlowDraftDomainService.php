@@ -7,27 +7,27 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowDraftEntity;
+use App\Domain\Flow\Entity\DelightfulFlowDraftEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowDraftQuery;
-use App\Domain\Flow\Repository\Facade\MagicFlowDraftRepositoryInterface;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowDraftQuery;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowDraftRepositoryInterface;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 use Hyperf\DbConnection\Annotation\Transactional;
 
-class MagicFlowDraftDomainService extends AbstractDomainService
+class DelightfulFlowDraftDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly MagicFlowDraftRepositoryInterface $magicFlowDraftRepository,
+        private readonly DelightfulFlowDraftRepositoryInterface $magicFlowDraftRepository,
     ) {
     }
 
     /**
      * 查询草稿列表.
-     * @return array{total: int, list: array<MagicFlowDraftEntity>}
+     * @return array{total: int, list: array<DelightfulFlowDraftEntity>}
      */
-    public function queries(FlowDataIsolation $dataIsolation, MagicFLowDraftQuery $query, Page $page): array
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowDraftQuery $query, Page $page): array
     {
         return $this->magicFlowDraftRepository->queries($dataIsolation, $query, $page);
     }
@@ -35,7 +35,7 @@ class MagicFlowDraftDomainService extends AbstractDomainService
     /**
      * 获取草稿详情.
      */
-    public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $draftCode): MagicFlowDraftEntity
+    public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $draftCode): DelightfulFlowDraftEntity
     {
         $draft = $this->magicFlowDraftRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $draftCode);
         if (! $draft) {
@@ -60,27 +60,27 @@ class MagicFlowDraftDomainService extends AbstractDomainService
      * 保存草稿.
      */
     #[Transactional]
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowDraftEntity $savingMagicFlowDraftEntity): MagicFlowDraftEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $savingDelightfulFlowDraftEntity): DelightfulFlowDraftEntity
     {
-        $savingMagicFlowDraftEntity->setCreator($dataIsolation->getCurrentUserId());
-        $savingMagicFlowDraftEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        if ($savingMagicFlowDraftEntity->shouldCreate()) {
-            $magicFlowDraftEntity = clone $savingMagicFlowDraftEntity;
+        $savingDelightfulFlowDraftEntity->setCreator($dataIsolation->getCurrentUserId());
+        $savingDelightfulFlowDraftEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
+        if ($savingDelightfulFlowDraftEntity->shouldCreate()) {
+            $magicFlowDraftEntity = clone $savingDelightfulFlowDraftEntity;
             $magicFlowDraftEntity->prepareForCreation();
         } else {
-            if (empty($savingMagicFlowDraftEntity->getCode())) {
+            if (empty($savingDelightfulFlowDraftEntity->getCode())) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'code 不能为空');
             }
-            $magicFlowDraftEntity = $this->magicFlowDraftRepository->getByFlowCodeAndCode($dataIsolation, $savingMagicFlowDraftEntity->getFlowCode(), $savingMagicFlowDraftEntity->getCode());
+            $magicFlowDraftEntity = $this->magicFlowDraftRepository->getByFlowCodeAndCode($dataIsolation, $savingDelightfulFlowDraftEntity->getFlowCode(), $savingDelightfulFlowDraftEntity->getCode());
             if (! $magicFlowDraftEntity) {
-                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$savingMagicFlowDraftEntity->getCode()} 不存在");
+                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$savingDelightfulFlowDraftEntity->getCode()} 不存在");
             }
-            $savingMagicFlowDraftEntity->prepareForModification($magicFlowDraftEntity);
+            $savingDelightfulFlowDraftEntity->prepareForModification($magicFlowDraftEntity);
         }
 
         $draft = $this->magicFlowDraftRepository->save($dataIsolation, $magicFlowDraftEntity);
         // 仅保留最新的记录
-        $this->magicFlowDraftRepository->clearEarlyRecords($dataIsolation, $savingMagicFlowDraftEntity->getFlowCode());
+        $this->magicFlowDraftRepository->clearEarlyRecords($dataIsolation, $savingDelightfulFlowDraftEntity->getFlowCode());
         return $draft;
     }
 }

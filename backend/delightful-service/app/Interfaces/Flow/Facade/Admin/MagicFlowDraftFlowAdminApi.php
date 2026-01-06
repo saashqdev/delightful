@@ -7,19 +7,19 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\Facade\Admin;
 
-use App\Application\Flow\Service\MagicFlowDraftAppService;
-use App\Domain\Flow\Entity\MagicFlowDraftEntity;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowDraftQuery;
+use App\Application\Flow\Service\DelightfulFlowDraftAppService;
+use App\Domain\Flow\Entity\DelightfulFlowDraftEntity;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowDraftQuery;
 use App\Infrastructure\Core\ValueObject\Page;
-use App\Interfaces\Flow\Assembler\FlowDraft\MagicFlowDraftAssembler;
+use App\Interfaces\Flow\Assembler\FlowDraft\DelightfulFlowDraftAssembler;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]
-class MagicFlowDraftFlowAdminApi extends AbstractFlowAdminApi
+class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
 {
     #[Inject]
-    protected MagicFlowDraftAppService $magicFlowDraftAppService;
+    protected DelightfulFlowDraftAppService $magicFlowDraftAppService;
 
     /**
      * 保存草稿.
@@ -27,14 +27,14 @@ class MagicFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     public function save(string $flowId)
     {
         $authorization = $this->getAuthorization();
-        $magicFlowDraftDTO = MagicFlowDraftAssembler::createFlowDraftDTOByMixed($this->request->all());
+        $magicFlowDraftDTO = DelightfulFlowDraftAssembler::createFlowDraftDTOByMixed($this->request->all());
         $magicFlowDraftDTO->setFlowCode($flowId);
 
-        $magicFlowDraftDO = MagicFlowDraftAssembler::createMagicFlowDraftDO($magicFlowDraftDTO);
+        $magicFlowDraftDO = DelightfulFlowDraftAssembler::createDelightfulFlowDraftDO($magicFlowDraftDTO);
 
         $magicFlowDraft = $this->magicFlowDraftAppService->save($authorization, $magicFlowDraftDO);
-        $icons = $this->magicFlowDraftAppService->getIcons($magicFlowDraft->getOrganizationCode(), [$magicFlowDraft->getMagicFlow()['icon'] ?? '']);
-        return MagicFlowDraftAssembler::createMagicFlowDraftDTO($magicFlowDraft, [], $icons);
+        $icons = $this->magicFlowDraftAppService->getIcons($magicFlowDraft->getOrganizationCode(), [$magicFlowDraft->getDelightfulFlow()['icon'] ?? '']);
+        return DelightfulFlowDraftAssembler::createDelightfulFlowDraftDTO($magicFlowDraft, [], $icons);
     }
 
     /**
@@ -43,16 +43,16 @@ class MagicFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     public function queries(string $flowId)
     {
         $authorization = $this->getAuthorization();
-        $query = new MagicFLowDraftQuery($this->request->all());
+        $query = new DelightfulFLowDraftQuery($this->request->all());
 
         // 仅查询最新的记录
-        $page = new Page(1, MagicFlowDraftEntity::MAX_RECORD);
+        $page = new Page(1, DelightfulFlowDraftEntity::MAX_RECORD);
         $query->setOrder(['id' => 'desc']);
         $query->flowCode = $flowId;
 
         $result = $this->magicFlowDraftAppService->queries($authorization, $query, $page);
 
-        return MagicFlowDraftAssembler::createPageListDTO($result['total'], $result['list'], $page, $result['users']);
+        return DelightfulFlowDraftAssembler::createPageListDTO($result['total'], $result['list'], $page, $result['users']);
     }
 
     /**
@@ -61,8 +61,8 @@ class MagicFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     public function show(string $flowId, string $draftId)
     {
         $magicFlowDraft = $this->magicFlowDraftAppService->show($this->getAuthorization(), $flowId, $draftId);
-        $icons = $this->magicFlowDraftAppService->getIcons($magicFlowDraft->getOrganizationCode(), [$magicFlowDraft->getMagicFlow()['icon'] ?? '']);
-        return MagicFlowDraftAssembler::createMagicFlowDraftDTO($magicFlowDraft, [], $icons);
+        $icons = $this->magicFlowDraftAppService->getIcons($magicFlowDraft->getOrganizationCode(), [$magicFlowDraft->getDelightfulFlow()['icon'] ?? '']);
+        return DelightfulFlowDraftAssembler::createDelightfulFlowDraftDTO($magicFlowDraft, [], $icons);
     }
 
     /**

@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Entity;
 
-use App\Domain\Flow\Factory\MagicFlowAIModelFactory;
+use App\Domain\Flow\Factory\DelightfulFlowAIModelFactory;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Contract\Model\RerankInterface;
@@ -18,7 +18,7 @@ use Hyperf\Odin\Contract\Model\ModelInterface;
 
 use function Hyperf\Support\env;
 
-class MagicFlowAIModelEntity extends AbstractEntity
+class DelightfulFlowAIModelEntity extends AbstractEntity
 {
     protected ?int $id = null;
 
@@ -95,7 +95,7 @@ class MagicFlowAIModelEntity extends AbstractEntity
         if ($this->odinModel) {
             return $this->odinModel;
         }
-        $this->odinModel = MagicFlowAIModelFactory::createOdinModel($this);
+        $this->odinModel = DelightfulFlowAIModelFactory::createOdinModel($this);
         return $this->odinModel;
     }
 
@@ -104,7 +104,7 @@ class MagicFlowAIModelEntity extends AbstractEntity
         if ($this->odinModel) {
             return $this->odinModel;
         }
-        $this->odinModel = MagicFlowAIModelFactory::createOdinModel($this);
+        $this->odinModel = DelightfulFlowAIModelFactory::createOdinModel($this);
         return $this->odinModel;
     }
 
@@ -275,7 +275,7 @@ class MagicFlowAIModelEntity extends AbstractEntity
         return $this->modelName;
     }
 
-    public function setModelName(string $modelName): MagicFlowAIModelEntity
+    public function setModelName(string $modelName): DelightfulFlowAIModelEntity
     {
         $this->modelName = $modelName;
         return $this;

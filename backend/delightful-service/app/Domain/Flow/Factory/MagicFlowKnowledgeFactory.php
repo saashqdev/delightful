@@ -13,7 +13,7 @@ use App\Domain\KnowledgeBase\Entity\ValueObject\RetrieveConfig;
 use App\Domain\KnowledgeBase\Repository\Persistence\Model\KnowledgeBaseModel;
 use Hyperf\Codec\Json;
 
-class MagicFlowKnowledgeFactory
+class DelightfulFlowKnowledgeFactory
 {
     public static function modelToEntity(KnowledgeBaseModel $model): KnowledgeBaseEntity
     {

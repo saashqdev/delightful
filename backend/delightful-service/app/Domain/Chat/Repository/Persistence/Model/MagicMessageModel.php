@@ -10,7 +10,7 @@ namespace App\Domain\Chat\Repository\Persistence\Model;
 use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\DbConnection\Model\Model;
 
-class MagicMessageModel extends Model
+class DelightfulMessageModel extends Model
 {
     use SoftDeletes;
 

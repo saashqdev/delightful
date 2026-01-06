@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { Flex, message } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useMemoizedFn } from "ahooks"
 import type { UserTask } from "@/types/chat/task"
 import conversationStore from "@/opensource/stores/chatNew/conversation"
@@ -34,7 +34,7 @@ const TaskList = observer(({ openEdit, updateTask }: TaskListProps) => {
 	const menuItems = useMemoizedFn((data: UserTask) => {
 		return (
 			<>
-				<MagicButton
+				<DelightfulButton
 					justify="flex-start"
 					size="large"
 					type="text"
@@ -42,8 +42,8 @@ const TaskList = observer(({ openEdit, updateTask }: TaskListProps) => {
 					onClick={() => editTask(data)}
 				>
 					{t("chat.timedTask.editTask")}
-				</MagicButton>
-				<MagicButton
+				</DelightfulButton>
+				<DelightfulButton
 					justify="flex-start"
 					size="large"
 					type="text"
@@ -51,8 +51,8 @@ const TaskList = observer(({ openEdit, updateTask }: TaskListProps) => {
 					onClick={() => chatTopicService.setCurrentConversationTopic(data.topic_id)}
 				>
 					{t("chat.timedTask.changeTopic")}
-				</MagicButton>
-				<MagicButton
+				</DelightfulButton>
+				<DelightfulButton
 					justify="flex-start"
 					size="large"
 					type="text"
@@ -61,7 +61,7 @@ const TaskList = observer(({ openEdit, updateTask }: TaskListProps) => {
 					onClick={() => deleteTask(data.id)}
 				>
 					{t("chat.timedTask.deleteTask")}
-				</MagicButton>
+				</DelightfulButton>
 			</>
 		)
 	})
@@ -74,9 +74,9 @@ const TaskList = observer(({ openEdit, updateTask }: TaskListProps) => {
 					<TaskItem key={task.id} data={task} menuItems={menuItems} />
 				))}
 			</Flex>
-			<MagicButton type="text" block className={styles.button} onClick={openEdit}>
+			<DelightfulButton type="text" block className={styles.button} onClick={openEdit}>
 				{t("chat.timedTask.addTask")}
-			</MagicButton>
+			</DelightfulButton>
 		</Flex>
 	)
 })

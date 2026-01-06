@@ -17,8 +17,8 @@ import { StreamStatus } from "@/types/request"
 
 // UI 组件库
 import { ConfigProvider, Flex, Timeline } from "antd"
-import MagicCollapse from "@/opensource/components/base/MagicCollapse"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulCollapse from "@/opensource/components/base/DelightfulCollapse"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 
 // 图标
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react"
@@ -50,7 +50,7 @@ import MindMap from "./components/MindMap"
 import Reasoning from "./components/title/Reasoning"
 import Markdown from "../Markdown"
 import SourceItem from "./components/SourceItem"
-import MagicCitationProvider from "../Markdown/EnhanceMarkdown/components/MagicCitation/Provider"
+import DelightfulCitationProvider from "../Markdown/EnhanceMarkdown/components/DelightfulCitation/Provider"
 
 const configProviderTheme = {
 	components: {
@@ -60,13 +60,13 @@ const configProviderTheme = {
 	},
 }
 
-interface MagicAggregateAISearchCardV2Props {
+interface DelightfulAggregateAISearchCardV2Props {
 	content?: AggregateAISearchCardContentV2
 }
 
 const TimelineCollapsePanelKey = "timeline"
 
-const MagicAggregateAISearchCardV2 = observer(({ content }: MagicAggregateAISearchCardV2Props) => {
+const DelightfulAggregateAISearchCardV2 = observer(({ content }: DelightfulAggregateAISearchCardV2Props) => {
 	const { fontSize } = useFontSize()
 	const { t } = useTranslation("interface")
 	const { magicColorUsages } = useTheme()
@@ -422,7 +422,7 @@ const MagicAggregateAISearchCardV2 = observer(({ content }: MagicAggregateAISear
 	if (!content) return null
 
 	return (
-		<MagicCitationProvider sources={normalizeSources}>
+		<DelightfulCitationProvider sources={normalizeSources}>
 			<ConfigProvider theme={configProviderTheme}>
 				<Flex vertical className={styles.container}>
 					<Flex
@@ -435,7 +435,7 @@ const MagicAggregateAISearchCardV2 = observer(({ content }: MagicAggregateAISear
 						}}
 					>
 						{/* 顶部问题搜索区域 */}
-						<MagicCollapse
+						<DelightfulCollapse
 							className={styles.questionCollapse}
 							style={
 								finish
@@ -450,7 +450,7 @@ const MagicAggregateAISearchCardV2 = observer(({ content }: MagicAggregateAISear
 									  }
 							}
 							expandIcon={({ isActive }) => (
-								<MagicIcon
+								<DelightfulIcon
 									color="currentColor"
 									component={isActive ? IconChevronUp : IconChevronDown}
 								/>
@@ -483,11 +483,11 @@ const MagicAggregateAISearchCardV2 = observer(({ content }: MagicAggregateAISear
 						) : null}
 					</div>
 					{/* 思维导图、事件、搜索来源 */}
-					<MagicCollapse className={styles.collapse} items={collapseItems} />
+					<DelightfulCollapse className={styles.collapse} items={collapseItems} />
 				</Flex>
 			</ConfigProvider>
-		</MagicCitationProvider>
+		</DelightfulCitationProvider>
 	)
 })
 
-export default MagicAggregateAISearchCardV2
+export default DelightfulAggregateAISearchCardV2

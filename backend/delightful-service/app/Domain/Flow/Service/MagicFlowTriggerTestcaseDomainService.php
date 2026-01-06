@@ -7,37 +7,37 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowTriggerTestcaseEntity;
+use App\Domain\Flow\Entity\DelightfulFlowTriggerTestcaseEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFLowTriggerTestcaseQuery;
-use App\Domain\Flow\Repository\Facade\MagicFlowTriggerTestcaseRepositoryInterface;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFLowTriggerTestcaseQuery;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowTriggerTestcaseRepositoryInterface;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 
-class MagicFlowTriggerTestcaseDomainService extends AbstractDomainService
+class DelightfulFlowTriggerTestcaseDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly MagicFlowTriggerTestcaseRepositoryInterface $magicFlowTriggerTestcaseRepository,
+        private readonly DelightfulFlowTriggerTestcaseRepositoryInterface $magicFlowTriggerTestcaseRepository,
     ) {
     }
 
     /**
      * 保存测试集.
      */
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowTriggerTestcaseEntity $savingMagicFlowTriggerTestcaseEntity): MagicFlowTriggerTestcaseEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $savingDelightfulFlowTriggerTestcaseEntity): DelightfulFlowTriggerTestcaseEntity
     {
-        $savingMagicFlowTriggerTestcaseEntity->setCreator($dataIsolation->getCurrentUserId());
-        $savingMagicFlowTriggerTestcaseEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        if ($savingMagicFlowTriggerTestcaseEntity->shouldCreate()) {
-            $magicFlowTriggerTestcaseEntity = clone $savingMagicFlowTriggerTestcaseEntity;
+        $savingDelightfulFlowTriggerTestcaseEntity->setCreator($dataIsolation->getCurrentUserId());
+        $savingDelightfulFlowTriggerTestcaseEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
+        if ($savingDelightfulFlowTriggerTestcaseEntity->shouldCreate()) {
+            $magicFlowTriggerTestcaseEntity = clone $savingDelightfulFlowTriggerTestcaseEntity;
             $magicFlowTriggerTestcaseEntity->prepareForCreation();
         } else {
-            $magicFlowTriggerTestcaseEntity = $this->magicFlowTriggerTestcaseRepository->getByFlowCodeAndCode($dataIsolation, $savingMagicFlowTriggerTestcaseEntity->getFlowCode(), $savingMagicFlowTriggerTestcaseEntity->getCode());
+            $magicFlowTriggerTestcaseEntity = $this->magicFlowTriggerTestcaseRepository->getByFlowCodeAndCode($dataIsolation, $savingDelightfulFlowTriggerTestcaseEntity->getFlowCode(), $savingDelightfulFlowTriggerTestcaseEntity->getCode());
             if (! $magicFlowTriggerTestcaseEntity) {
-                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$savingMagicFlowTriggerTestcaseEntity->getCode()} 不存在");
+                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$savingDelightfulFlowTriggerTestcaseEntity->getCode()} 不存在");
             }
-            $savingMagicFlowTriggerTestcaseEntity->prepareForModification($magicFlowTriggerTestcaseEntity);
+            $savingDelightfulFlowTriggerTestcaseEntity->prepareForModification($magicFlowTriggerTestcaseEntity);
         }
 
         return $this->magicFlowTriggerTestcaseRepository->save($dataIsolation, $magicFlowTriggerTestcaseEntity);
@@ -45,9 +45,9 @@ class MagicFlowTriggerTestcaseDomainService extends AbstractDomainService
 
     /**
      * 查询测试集.
-     * @return array{total: int, list: array<MagicFlowTriggerTestcaseEntity>}
+     * @return array{total: int, list: array<DelightfulFlowTriggerTestcaseEntity>}
      */
-    public function queries(FlowDataIsolation $dataIsolation, MagicFLowTriggerTestcaseQuery $query, Page $page): array
+    public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowTriggerTestcaseQuery $query, Page $page): array
     {
         return $this->magicFlowTriggerTestcaseRepository->queries($dataIsolation, $query, $page);
     }
@@ -55,7 +55,7 @@ class MagicFlowTriggerTestcaseDomainService extends AbstractDomainService
     /**
      * 删除测试集.
      */
-    public function remove(FlowDataIsolation $dataIsolation, MagicFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): void
+    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): void
     {
         $this->magicFlowTriggerTestcaseRepository->remove($dataIsolation, $magicFlowTriggerTestcaseEntity);
     }
@@ -63,7 +63,7 @@ class MagicFlowTriggerTestcaseDomainService extends AbstractDomainService
     /**
      * 获取测试集详情.
      */
-    public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $testcaseCode): MagicFlowTriggerTestcaseEntity
+    public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $testcaseCode): DelightfulFlowTriggerTestcaseEntity
     {
         $testcase = $this->magicFlowTriggerTestcaseRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $testcaseCode);
         if (! $testcase) {

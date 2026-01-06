@@ -28,7 +28,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $updated_uid
  * @property Carbon $updated_at
  */
-class MagicFlowWaitMessageModel extends AbstractModel
+class DelightfulFlowWaitMessageModel extends AbstractModel
 {
     use Snowflake;
 

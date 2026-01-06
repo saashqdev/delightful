@@ -13,7 +13,7 @@ use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
-class MagicFlowVersionEntity extends AbstractEntity
+class DelightfulFlowVersionEntity extends AbstractEntity
 {
     protected ?int $id = null;
 
@@ -25,7 +25,7 @@ class MagicFlowVersionEntity extends AbstractEntity
 
     protected string $description = '';
 
-    protected MagicFlowEntity $magicFlow;
+    protected DelightfulFlowEntity $magicFlow;
 
     protected string $organizationCode;
 
@@ -99,12 +99,12 @@ class MagicFlowVersionEntity extends AbstractEntity
         $this->description = $description;
     }
 
-    public function getMagicFlow(): MagicFlowEntity
+    public function getDelightfulFlow(): DelightfulFlowEntity
     {
         return $this->magicFlow;
     }
 
-    public function setMagicFlow(MagicFlowEntity $magicFlow): void
+    public function setDelightfulFlow(DelightfulFlowEntity $magicFlow): void
     {
         $this->magicFlow = $magicFlow;
     }
@@ -159,7 +159,7 @@ class MagicFlowVersionEntity extends AbstractEntity
         $this->updatedAt = $updatedAt;
     }
 
-    private function magicFlowPrepareForSave(MagicFlowEntity $magicFlow): void
+    private function magicFlowPrepareForSave(DelightfulFlowEntity $magicFlow): void
     {
         $magicFlow->setCode($this->flowCode);
         $magicFlow->setOrganizationCode($this->organizationCode);

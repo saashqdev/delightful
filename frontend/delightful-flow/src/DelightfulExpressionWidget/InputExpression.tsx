@@ -16,7 +16,7 @@ import { EditWrapper, InputExpressionStyle } from "./style"
 import CascaderDropdown from "@/common/BaseUI/DropdownRenderer/Reference"
 import { multipleTypes } from "@/common/BaseUI/DropdownRenderer/Reference/hooks/useRender"
 import ErrorContent from "@/common/BaseUI/ErrorComponent/ErrorComponent"
-import MagicSelect from "@/common/BaseUI/Select"
+import DelightfulSelect from "@/common/BaseUI/Select"
 import { useNodeMap } from "@/common/context/NodeMap/useResize"
 import { generateSnowFlake } from "@/common/utils/snowflake"
 import { IconChevronDown } from "@douyinfe/semi-icons"
@@ -533,7 +533,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 									maxHeight={parsedMaxHeight}
 								>
 									{showSwitch && (
-										<MagicSelect
+										<DelightfulSelect
 											options={[
 												{
 													label: i18next.t("expression.const", {

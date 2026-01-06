@@ -31,10 +31,10 @@ class InitialEnvironmentSeeder extends Seeder
             'environment' => 'production',
             'open_platform_config' => '{}',
             'private_config' => json_encode([
-                'name' => 'Magic Open Source',
+                'name' => 'Delightful Open Source',
                 'domain' => [
                     [
-                        'type' => PlatformType::Delightful, // token is issued by Magic and validated internally
+                        'type' => PlatformType::Delightful, // token is issued by Delightful and validated internally
                     ],
                 ],
             ], JSON_THROW_ON_ERROR),

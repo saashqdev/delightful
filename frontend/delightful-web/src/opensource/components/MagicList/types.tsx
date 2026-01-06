@@ -1,9 +1,9 @@
 import type { ReactNode } from "react"
-import type { MagicAvatarProps } from "../base/MagicAvatar"
+import type { DelightfulAvatarProps } from "../base/DelightfulAvatar"
 
-export interface MagicListItemData {
+export interface DelightfulListItemData {
 	id: string
-	avatar?: string | MagicAvatarProps | ((isHover: boolean) => ReactNode)
+	avatar?: string | DelightfulAvatarProps | ((isHover: boolean) => ReactNode)
 	title?: string | ReactNode | ((isHover: boolean) => ReactNode)
 	hoverSection?: ReactNode
 	[key: string]: any

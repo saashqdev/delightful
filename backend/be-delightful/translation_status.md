@@ -1,4 +1,4 @@
-# Translation Status - Super-Magic Directory
+# Translation Status - Super-Delightful Directory
 
 ## 🎉 Translation Complete!
 

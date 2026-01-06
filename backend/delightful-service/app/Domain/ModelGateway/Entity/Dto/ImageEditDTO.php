@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\ModelGateway\Entity\Dto;
 
 use App\ErrorCode\ImageGenerateErrorCode;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\ImageGenerateModelType;
 
@@ -65,7 +65,7 @@ class ImageEditDTO extends AbstractRequestDTO
     {
         // Validate model is provided
         if ($this->model === '') {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'model_field']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'model_field']);
         }
 
         // Validate model is supported for image editing
@@ -73,12 +73,12 @@ class ImageEditDTO extends AbstractRequestDTO
 
         // Validate prompt is provided
         if ($this->prompt === '') {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'prompt_field']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'prompt_field']);
         }
 
         // Check if images array exists and is not empty
         if (empty($this->images)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'images_field']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'images_field']);
         }
     }
 

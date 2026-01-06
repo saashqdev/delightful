@@ -1,5 +1,5 @@
 import { Row, RowProps } from "antd";
-import { childFieldGap } from "@/MagicJsonSchemaEditor/constants";
+import { childFieldGap } from "@/DelightfulJsonSchemaEditor/constants";
 import styled from "styled-components";
 
 

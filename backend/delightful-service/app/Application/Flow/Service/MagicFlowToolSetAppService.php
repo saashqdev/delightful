@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowToolSetEntity;
+use App\Domain\Flow\Entity\DelightfulFlowToolSetEntity;
 use App\Domain\Flow\Entity\ValueObject\ConstValue;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowToolSetQuery;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowToolSetQuery;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\Operation;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\ResourceType;
 use App\Domain\Permission\Entity\ValueObject\PermissionDataIsolation;
@@ -20,9 +20,9 @@ use Delightful\CloudFile\Kernel\Struct\FileLink;
 use Hyperf\DbConnection\Annotation\Transactional;
 use Qbhy\HyperfAuth\Authenticatable;
 
-class MagicFlowToolSetAppService extends AbstractFlowAppService
+class DelightfulFlowToolSetAppService extends AbstractFlowAppService
 {
-    public function getByCode(Authenticatable $authorization, string $code): MagicFlowToolSetEntity
+    public function getByCode(Authenticatable $authorization, string $code): DelightfulFlowToolSetEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
@@ -42,35 +42,35 @@ class MagicFlowToolSetAppService extends AbstractFlowAppService
     }
 
     #[Transactional]
-    public function save(Authenticatable $authorization, MagicFlowToolSetEntity $savingMagicFLowToolSetEntity): MagicFlowToolSetEntity
+    public function save(Authenticatable $authorization, DelightfulFlowToolSetEntity $savingDelightfulFLowToolSetEntity): DelightfulFlowToolSetEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
 
         // 默认是创建
         $operation = Operation::Owner;
-        if (! $savingMagicFLowToolSetEntity->shouldCreate()) {
+        if (! $savingDelightfulFLowToolSetEntity->shouldCreate()) {
             // 修改需要检查权限
             $operation = $this->operationPermissionAppService->getOperationByResourceAndUser(
                 $permissionDataIsolation,
                 ResourceType::ToolSet,
-                $savingMagicFLowToolSetEntity->getCode(),
+                $savingDelightfulFLowToolSetEntity->getCode(),
                 $authorization->getId()
             );
             if (! $operation->canEdit()) {
-                ExceptionBuilder::throw(PermissionErrorCode::BusinessException, 'common.access', ['label' => $savingMagicFLowToolSetEntity->getCode()]);
+                ExceptionBuilder::throw(PermissionErrorCode::BusinessException, 'common.access', ['label' => $savingDelightfulFLowToolSetEntity->getCode()]);
             }
         }
 
-        $toolSet = $this->magicFlowToolSetDomainService->save($dataIsolation, $savingMagicFLowToolSetEntity);
+        $toolSet = $this->magicFlowToolSetDomainService->save($dataIsolation, $savingDelightfulFLowToolSetEntity);
         $toolSet->setUserOperation($operation->value);
         return $toolSet;
     }
 
     /**
-     * @return array{total: int, list: array<MagicFlowToolSetEntity>, icons: array<string,FileLink>}
+     * @return array{total: int, list: array<DelightfulFlowToolSetEntity>, icons: array<string,FileLink>}
      */
-    public function queries(Authenticatable $authorization, MagicFlowToolSetQuery $query, Page $page): array
+    public function queries(Authenticatable $authorization, DelightfulFlowToolSetQuery $query, Page $page): array
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = PermissionDataIsolation::create($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());

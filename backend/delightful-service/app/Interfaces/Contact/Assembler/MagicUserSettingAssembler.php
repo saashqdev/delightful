@@ -7,24 +7,24 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Contact\Assembler;
 
-use App\Domain\Contact\Entity\MagicUserSettingEntity;
+use App\Domain\Contact\Entity\DelightfulUserSettingEntity;
 use App\Infrastructure\Core\ValueObject\Page;
-use App\Interfaces\Contact\DTO\MagicUserSettingDTO;
+use App\Interfaces\Contact\DTO\DelightfulUserSettingDTO;
 use App\Interfaces\Kernel\DTO\PageDTO;
 
-class MagicUserSettingAssembler
+class DelightfulUserSettingAssembler
 {
-    public static function createEntity(MagicUserSettingDTO $dto): MagicUserSettingEntity
+    public static function createEntity(DelightfulUserSettingDTO $dto): DelightfulUserSettingEntity
     {
-        $entity = new MagicUserSettingEntity();
+        $entity = new DelightfulUserSettingEntity();
         $entity->setKey($dto->getKey());
         $entity->setValue($dto->getValue());
         return $entity;
     }
 
-    public static function createDTO(MagicUserSettingEntity $entity): MagicUserSettingDTO
+    public static function createDTO(DelightfulUserSettingEntity $entity): DelightfulUserSettingDTO
     {
-        $dto = new MagicUserSettingDTO();
+        $dto = new DelightfulUserSettingDTO();
         $dto->setId($entity->getId());
         $dto->setKey($entity->getKey());
         $dto->setValue($entity->getValue());
@@ -35,12 +35,12 @@ class MagicUserSettingAssembler
     }
 
     /**
-     * @param array<MagicUserSettingEntity> $list
+     * @param array<DelightfulUserSettingEntity> $list
      */
     public static function createPageListDTO(int $total, array $list, Page $page): PageDTO
     {
         $list = array_map(
-            static fn (MagicUserSettingEntity $entity) => self::createDTO($entity),
+            static fn (DelightfulUserSettingEntity $entity) => self::createDTO($entity),
             $list
         );
         return new PageDTO($page->getPage(), $total, $list);

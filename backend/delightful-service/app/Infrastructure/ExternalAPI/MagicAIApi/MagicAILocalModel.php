@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Infrastructure\ExternalAPI\MagicAIApi;
+namespace App\Infrastructure\ExternalAPI\DelightfulAIApi;
 
 use App\Application\ModelGateway\Service\LLMAppService;
 use App\Domain\ModelGateway\Entity\Dto\CompletionDTO;
@@ -28,7 +28,7 @@ use Hyperf\Odin\Model\Embedding;
 use Hyperf\Odin\Utils\ToolUtil;
 use Psr\Log\LoggerInterface;
 
-class MagicAILocalModel extends AbstractModel
+class DelightfulAILocalModel extends AbstractModel
 {
     protected bool $includeBusinessParams = true;
 

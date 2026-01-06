@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Agent\Repository\Persistence;
 
-use App\Domain\Agent\Constant\MagicAgentVersionStatus;
-use App\Domain\Agent\Entity\MagicAgentEntity;
-use App\Domain\Agent\Entity\ValueObject\Query\MagicAgentQuery;
-use App\Domain\Agent\Factory\MagicAgentFactory;
-use App\Domain\Agent\Repository\Facade\MagicAgentRepositoryInterface;
-use App\Domain\Agent\Repository\Persistence\Model\MagicAgentModel;
+use App\Domain\Agent\Constant\DelightfulAgentVersionStatus;
+use App\Domain\Agent\Entity\DelightfulAgentEntity;
+use App\Domain\Agent\Entity\ValueObject\Query\DelightfulAgentQuery;
+use App\Domain\Agent\Factory\DelightfulAgentFactory;
+use App\Domain\Agent\Repository\Facade\DelightfulAgentRepositoryInterface;
+use App\Domain\Agent\Repository\Persistence\Model\DelightfulAgentModel;
 use App\Domain\Agent\Repository\Persistence\Model\UserDefaultAssistantConversationRecordModel;
 use App\ErrorCode\AgentErrorCode;
 use App\Infrastructure\Core\AbstractRepository;
@@ -22,19 +22,19 @@ use App\Interfaces\Admin\DTO\Request\QueryPageAgentDTO;
 use Hyperf\Codec\Json;
 use Hyperf\DbConnection\Db;
 
-class MagicAgentRepository extends AbstractRepository implements MagicAgentRepositoryInterface
+class DelightfulAgentRepository extends AbstractRepository implements DelightfulAgentRepositoryInterface
 {
-    public function __construct(public MagicAgentModel $agentModel)
+    public function __construct(public DelightfulAgentModel $agentModel)
     {
     }
 
     /**
-     * @return array{total: int, list: array<MagicAgentEntity>}
+     * @return array{total: int, list: array<DelightfulAgentEntity>}
      */
-    public function queries(MagicAgentQuery $query, Page $page): array
+    public function queries(DelightfulAgentQuery $query, Page $page): array
     {
         // todo 这里至少需要组织隔离
-        $builder = MagicAgentModel::query();
+        $builder = DelightfulAgentModel::query();
 
         if (! is_null($query->getIds())) {
             $builder->whereIn('id', $query->getIds());
@@ -54,7 +54,7 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
         if (! empty($data['list'])) {
             $list = [];
             foreach ($data['list'] as $model) {
-                $list[] = MagicAgentFactory::modelToEntity($model);
+                $list[] = DelightfulAgentFactory::modelToEntity($model);
             }
             $data['list'] = $list;
         }
@@ -62,13 +62,13 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
         return $data;
     }
 
-    public function insert(MagicAgentEntity $agentEntity): MagicAgentEntity
+    public function insert(DelightfulAgentEntity $agentEntity): DelightfulAgentEntity
     {
         $agentEntity->setCreatedAt(date('Y-m-d H:i:s'));
         $agentEntity->setUpdatedAt(date('Y-m-d H:i:s'));
 
         $toArray = $agentEntity->toArray();
-        /** @var MagicAgentModel $model */
+        /** @var DelightfulAgentModel $model */
         $model = $this->agentModel::query()->create($toArray);
 
         $agentEntity->setId($model->id);
@@ -81,7 +81,7 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
             ->update(['status' => $status]);
     }
 
-    public function updateById(MagicAgentEntity $agentEntity): MagicAgentEntity
+    public function updateById(DelightfulAgentEntity $agentEntity): DelightfulAgentEntity
     {
         $agentEntity->setUpdatedAt(date('Y-m-d H:i:s'));
         $agentArray = $agentEntity->toArray();
@@ -98,7 +98,7 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
     }
 
     /**
-     * @return MagicAgentEntity[]
+     * @return DelightfulAgentEntity[]
      */
     public function getAgentsByUserId(string $userId, int $page, int $pageSize, string $agentName): array
     {
@@ -113,7 +113,7 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
             ->take($pageSize);
 
         $result = Db::select($query->toSql(), $query->getBindings());
-        return MagicAgentFactory::toEntities($result);
+        return DelightfulAgentFactory::toEntities($result);
     }
 
     public function getAgentsByUserIdCount(string $userId, string $agentName): int
@@ -130,7 +130,7 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
         $this->agentModel::query()->where('id', $id)->where('organization_code', $organizationCode)->delete();
     }
 
-    public function getAgentById(string $agentId): MagicAgentEntity
+    public function getAgentById(string $agentId): DelightfulAgentEntity
     {
         // 查询数据库，获取指定 agentId 和 userId 的数据
         $agent = $this->agentModel::query()
@@ -142,7 +142,7 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_not_exist');
         }
 
-        return MagicAgentFactory::toEntity($agent->toArray());
+        return DelightfulAgentFactory::toEntity($agent->toArray());
     }
 
     public function updateDefaultVersion(string $agentId, string $versionId): void
@@ -152,16 +152,16 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
     }
 
     /**
-     * @return MagicAgentEntity[]
+     * @return DelightfulAgentEntity[]
      */
     public function getEnabledAgents(): array
     {
-        $query = $this->agentModel::query()->where('status', MagicAgentVersionStatus::ENTERPRISE_ENABLED->value);
+        $query = $this->agentModel::query()->where('status', DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value);
         $result = Db::select($query->toSql(), $query->getBindings());
-        return MagicAgentFactory::toEntities($result);
+        return DelightfulAgentFactory::toEntities($result);
     }
 
-    public function getById(string $agentId): MagicAgentEntity
+    public function getById(string $agentId): DelightfulAgentEntity
     {
         $result = $this->agentModel::query()
             ->where('id', $agentId)
@@ -171,10 +171,10 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_not_exist');
         }
         $agentArray = $result->toArray();
-        return MagicAgentFactory::toEntity($result->toArray());
+        return DelightfulAgentFactory::toEntity($result->toArray());
     }
 
-    public function getAgentDetail(string $agentId, string $userId): MagicAgentEntity
+    public function getAgentDetail(string $agentId, string $userId): DelightfulAgentEntity
     {
         $result = $this->agentModel::query()
             ->where('id', $agentId)
@@ -184,10 +184,10 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_not_exist');
         }
 
-        return MagicAgentFactory::toEntity($result->toArray());
+        return DelightfulAgentFactory::toEntity($result->toArray());
     }
 
-    public function getByFlowCode(string $flowCode): ?MagicAgentEntity
+    public function getByFlowCode(string $flowCode): ?DelightfulAgentEntity
     {
         $result = $this->agentModel::query()
             ->where('flow_code', $flowCode)
@@ -196,11 +196,11 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
             return null;
         }
 
-        return MagicAgentFactory::toEntity($result->toArray());
+        return DelightfulAgentFactory::toEntity($result->toArray());
     }
 
     /**
-     * @return MagicAgentEntity[]
+     * @return DelightfulAgentEntity[]
      */
     public function getByFlowCodes(array $flowCodes): array
     {
@@ -213,7 +213,7 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
 
         $agents = [];
         foreach ($result as $agent) {
-            $entity = new MagicAgentEntity($agent->toArray());
+            $entity = new DelightfulAgentEntity($agent->toArray());
             $agents[$entity->getId()] = $entity;
         }
         return $agents;
@@ -236,13 +236,13 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
     }
 
     /**
-     * @return MagicAgentEntity[]
+     * @return DelightfulAgentEntity[]
      */
     public function getAgentByIds(array $agentIds): array
     {
         $query = $this->agentModel::query()->whereIn('id', $agentIds);
         $result = Db::select($query->toSql(), $query->getBindings());
-        return MagicAgentFactory::toEntities($result);
+        return DelightfulAgentFactory::toEntities($result);
     }
 
     public function updateInstruct(string $getOrganizationCode, string $agentId, array $instructs, $updatedUid = ''): void
@@ -279,7 +279,7 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
 
     /**
      * 查询企业下的所有助理,条件查询：状态，创建人，搜索.
-     * @return array<MagicAgentEntity>
+     * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
     {
@@ -303,7 +303,7 @@ class MagicAgentRepository extends AbstractRepository implements MagicAgentRepos
             $query->where('status', $queryPageAgentDTO->getStatus());
         }
         $result = Db::select($query->toSql(), $query->getBindings());
-        return MagicAgentFactory::toEntities($result);
+        return DelightfulAgentFactory::toEntities($result);
     }
 
     public function queriesAgentsCount(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): int

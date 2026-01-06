@@ -1,7 +1,7 @@
-# Magic Service
+# Delightful Service
 
 ## Project Overview
-Magic Service is a high-performance PHP microservice built on the Hyperf framework and powered by the Swow coroutine engine for high concurrency. It integrates AI search, chat, file handling, access control, and other modules to provide a comprehensive service solution.
+Delightful Service is a high-performance PHP microservice built on the Hyperf framework and powered by the Swow coroutine engine for high concurrency. It integrates AI search, chat, file handling, access control, and other modules to provide a comprehensive service solution.
 
 ## Features
 - **AI search**: Integrates Google and other search-engine APIs for intelligent search capabilities.

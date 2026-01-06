@@ -1,5 +1,5 @@
 import { DataSourceOption } from '@/common/BaseUI/DropdownRenderer/Reference';
-import { FormItemType, InputExpressionValue } from '@/MagicExpressionWidget/types';
+import { FormItemType, InputExpressionValue } from '@/DelightfulExpressionWidget/types';
 
 export const enum EXPRESSION_ITEM_TYPE {
   normal = 'fields',

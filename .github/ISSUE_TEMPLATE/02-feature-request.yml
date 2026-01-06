@@ -7,12 +7,12 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to suggest a new feature! We value community input in shaping Magic's future.
+        Thanks for taking the time to suggest a new feature! We value community input in shaping Delightful's future.
         
         **Before submitting a feature request:**
         - Check if the feature has already been requested in [existing issues](https://github.com/saashqdev/delightful/magic/issues)
         - Review our [roadmap](https://github.com/saashqdev/delightful/magic/discussions) if available
-        - Consider if this feature aligns with Magic's core philosophy
+        - Consider if this feature aligns with Delightful's core philosophy
 
   - type: dropdown
     id: component
@@ -20,12 +20,12 @@ body:
       label: Component
       description: Which component/module would this feature affect?
       options:
-        - Super Magic
-        - Magic IM (Chat System)
-        - Magic Flow (Workflow System)
-        - Magic Service (Backend API)
-        - Magic Web (Frontend)
-        - Magic Gateway
+        - Super Delightful
+        - Delightful IM (Chat System)
+        - Delightful Flow (Workflow System)
+        - Delightful Service (Backend API)
+        - Delightful Web (Frontend)
+        - Delightful Gateway
         - Agentlang Framework
         - Documentation
         - Deployment/Installation
@@ -123,8 +123,8 @@ body:
       label: User Type
       description: What type of user would benefit from this feature?
       options:
-        - End user (using Magic products)
-        - Developer (integrating/extending Magic)
+        - End user (using Delightful products)
+        - Developer (integrating/extending Delightful)
         - System administrator
         - Enterprise/team admin
         - All users

@@ -1,9 +1,9 @@
 import { useDeepCompareEffect } from "ahooks"
 import { throttle } from "lodash-es"
 import { memo, useRef, useState } from "react"
-import MessageList from "@/opensource/pages/superMagic/components/MessageList/index"
+import MessageList from "@/opensource/pages/superDelightful/components/MessageList/index"
 import type { MessagePanelProps } from "../MessagePanel"
-import MessagePanel from "@/opensource/pages/superMagic/components/MessagePanel/MessagePanel"
+import MessagePanel from "@/opensource/pages/superDelightful/components/MessagePanel/MessagePanel"
 import { useStyles } from "./styles"
 
 interface WorkspaceChatProps extends MessagePanelProps {

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { EXPRESSION_ITEM } from "@/MagicExpressionWidget/types"
+import { EXPRESSION_ITEM } from "@/DelightfulExpressionWidget/types"
 import React from "react"
 import type { TextareaModeContextProviderProps } from "./Provider"
 

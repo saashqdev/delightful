@@ -9,12 +9,12 @@ namespace App\Domain\Chat\Repository\Persistence;
 
 use App\Domain\Chat\DTO\MessagesQueryDTO;
 use App\Domain\Chat\DTO\Response\ClientSequenceResponse;
-use App\Domain\Chat\Entity\MagicTopicEntity;
-use App\Domain\Chat\Entity\MagicTopicMessageEntity;
-use App\Domain\Chat\Repository\Facade\MagicChatSeqRepositoryInterface;
-use App\Domain\Chat\Repository\Facade\MagicChatTopicRepositoryInterface;
-use App\Domain\Chat\Repository\Persistence\Model\MagicChatTopicMessageModel;
-use App\Domain\Chat\Repository\Persistence\Model\MagicChatTopicModel;
+use App\Domain\Chat\Entity\DelightfulTopicEntity;
+use App\Domain\Chat\Entity\DelightfulTopicMessageEntity;
+use App\Domain\Chat\Repository\Facade\DelightfulChatSeqRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulChatTopicRepositoryInterface;
+use App\Domain\Chat\Repository\Persistence\Model\DelightfulChatTopicMessageModel;
+use App\Domain\Chat\Repository\Persistence\Model\DelightfulChatTopicModel;
 use App\ErrorCode\ChatErrorCode;
 use App\Infrastructure\Core\Constants\Order;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -24,18 +24,18 @@ use App\Interfaces\Chat\Assembler\TopicAssembler;
 use Hyperf\Cache\Annotation\Cacheable;
 use Hyperf\DbConnection\Db;
 
-class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
+class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInterface
 {
     public function __construct(
-        protected MagicChatTopicModel $topicModel,
-        protected MagicChatTopicMessageModel $topicMessagesModel,
-        protected MagicChatConversationRepository $conversationRepository,
-        protected MagicChatSeqRepositoryInterface $seqRepository,
+        protected DelightfulChatTopicModel $topicModel,
+        protected DelightfulChatTopicMessageModel $topicMessagesModel,
+        protected DelightfulChatConversationRepository $conversationRepository,
+        protected DelightfulChatSeqRepositoryInterface $seqRepository,
     ) {
     }
 
     // 创建话题
-    public function createTopic(MagicTopicEntity $magicTopicEntity): MagicTopicEntity
+    public function createTopic(DelightfulTopicEntity $magicTopicEntity): DelightfulTopicEntity
     {
         if (empty($magicTopicEntity->getOrganizationCode())) {
             ExceptionBuilder::throw(
@@ -61,7 +61,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
     }
 
     // 更新话题
-    public function updateTopic(MagicTopicEntity $magicTopicEntity): MagicTopicEntity
+    public function updateTopic(DelightfulTopicEntity $magicTopicEntity): DelightfulTopicEntity
     {
         $name = $magicTopicEntity->getName();
         // 长度不能超过 50
@@ -85,7 +85,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
     }
 
     // 删除话题
-    public function deleteTopic(MagicTopicEntity $magicTopicDTO): int
+    public function deleteTopic(DelightfulTopicEntity $magicTopicDTO): int
     {
         $this->checkEntity($magicTopicDTO);
         return (int) $this->topicModel::query()
@@ -97,7 +97,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
     /**
      * 获取会话的会话列表.
      * @param string[] $topicIds
-     * @return array<MagicTopicEntity>
+     * @return array<DelightfulTopicEntity>
      */
     public function getTopicsByConversationId(string $conversationId, array $topicIds): array
     {
@@ -107,7 +107,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
         return TopicAssembler::getTopicEntities($topics);
     }
 
-    public function getTopicEntity(MagicTopicEntity $magicTopicDTO): ?MagicTopicEntity
+    public function getTopicEntity(DelightfulTopicEntity $magicTopicDTO): ?DelightfulTopicEntity
     {
         $this->checkEntity($magicTopicDTO);
         $topic = $this->getTopicArray($magicTopicDTO);
@@ -117,7 +117,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
         return TopicAssembler::getTopicEntity($topic);
     }
 
-    public function createTopicMessage(MagicTopicMessageEntity $topicMessageDTO): MagicTopicMessageEntity
+    public function createTopicMessage(DelightfulTopicMessageEntity $topicMessageDTO): DelightfulTopicMessageEntity
     {
         if (empty($topicMessageDTO->getSeqId())) {
             ExceptionBuilder::throw(ChatErrorCode::TOPIC_MESSAGE_NOT_FOUND);
@@ -136,7 +136,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
     }
 
     /**
-     * @return array<MagicTopicMessageEntity>
+     * @return array<DelightfulTopicMessageEntity>
      */
     public function getTopicMessageByMessageIds(array $messageIds): array
     {
@@ -146,7 +146,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
     }
 
     /**
-     * @return array<MagicTopicMessageEntity>
+     * @return array<DelightfulTopicMessageEntity>
      */
     public function getTopicMessagesByConversationId(string $conversationId): array
     {
@@ -155,7 +155,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
         return TopicAssembler::getTopicMessageEntities($topicMessages);
     }
 
-    public function getTopicByName(string $conversationId, string $topicName): ?MagicTopicEntity
+    public function getTopicByName(string $conversationId, string $topicName): ?DelightfulTopicEntity
     {
         $topic = $this->topicModel::query()
             ->where('conversation_id', $conversationId)
@@ -167,9 +167,9 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
         return TopicAssembler::getTopicEntity($topic);
     }
 
-    public function getPrivateChatReceiveTopicEntity(string $senderTopicId, string $senderConversationId): ?MagicTopicEntity
+    public function getPrivateChatReceiveTopicEntity(string $senderTopicId, string $senderConversationId): ?DelightfulTopicEntity
     {
-        $topicDTO = new MagicTopicEntity();
+        $topicDTO = new DelightfulTopicEntity();
         $topicDTO->setTopicId($senderTopicId);
         $topicDTO->setConversationId($senderConversationId);
         $senderTopicEntity = $this->getTopicEntity($topicDTO);
@@ -180,7 +180,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
         if ($receiveConversationEntity === null) {
             return null;
         }
-        $receiveTopicDTO = new MagicTopicEntity();
+        $receiveTopicDTO = new DelightfulTopicEntity();
         $receiveTopicDTO->setTopicId($senderTopicEntity->getTopicId());
         $receiveTopicDTO->setConversationId($receiveConversationEntity->getId());
         $receiveTopicEntity = $this->getTopicEntity($receiveTopicDTO);
@@ -193,7 +193,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array
     {
-        $magicTopicDTO = new MagicTopicEntity();
+        $magicTopicDTO = new DelightfulTopicEntity();
         $magicTopicDTO->setConversationId($messagesQueryDTO->getConversationId());
         $magicTopicDTO->setTopicId($messagesQueryDTO->getTopicId());
         $this->checkEntity($magicTopicDTO);
@@ -237,7 +237,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
     /**
      * 通过topic_id获取话题信息（不需要conversation_id）.
      */
-    public function getTopicByTopicId(string $topicId): ?MagicTopicEntity
+    public function getTopicByTopicId(string $topicId): ?DelightfulTopicEntity
     {
         if (empty($topicId)) {
             return null;
@@ -266,7 +266,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
     /**
      * Get topics by topic ID.
      * @param string $topicId 话题ID
-     * @return MagicTopicEntity[] 话题实体数组
+     * @return DelightfulTopicEntity[] 话题实体数组
      */
     public function getTopicsByTopicId(string $topicId): array
     {
@@ -280,7 +280,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
      * @param string $conversationId 会话ID
      * @param string $topicId 话题ID
      * @param int $maxSeqId 最大序列ID（包含该ID）
-     * @return MagicTopicMessageEntity[] 话题消息实体数组
+     * @return DelightfulTopicMessageEntity[] 话题消息实体数组
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array
     {
@@ -296,7 +296,7 @@ class MagicChatTopicRepository implements MagicChatTopicRepositoryInterface
 
     // 避免 redis 缓存序列化的对象,占用太多内存
     #[Cacheable(prefix: 'topic:id:conversation', value: '_#{magicTopicDTO.topicId}_#{magicTopicDTO.conversationId}', ttl: 60)]
-    private function getTopicArray(MagicTopicEntity $magicTopicDTO): ?array
+    private function getTopicArray(DelightfulTopicEntity $magicTopicDTO): ?array
     {
         $query = $this->topicModel::query()
             ->where('conversation_id', $magicTopicDTO->getConversationId())

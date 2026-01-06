@@ -27,7 +27,7 @@ import { history, undo, redo } from "@tiptap/pm/history"
 import { Image } from "./extensions/image"
 import ToolBar from "./components/ToolBar"
 import useStyles from "./styles"
-import MagicEmojiNodeExtension from "./extensions/magicEmoji"
+import DelightfulEmojiNodeExtension from "./extensions/magicEmoji"
 import { fileToBase64 } from "./utils"
 import { FileHandler } from "./extensions/file-handler"
 import type { FileError } from "./utils"
@@ -180,7 +180,7 @@ const HardBlockExtension = HardBlock.extend({
 	},
 })
 
-interface MagicRichEditorProps extends Omit<HTMLAttributes<HTMLDivElement>, "content"> {
+interface DelightfulRichEditorProps extends Omit<HTMLAttributes<HTMLDivElement>, "content"> {
 	/** 是否显示工具栏 */
 	showToolBar?: boolean
 	/** 占位符 */
@@ -198,12 +198,12 @@ interface MagicRichEditorProps extends Omit<HTMLAttributes<HTMLDivElement>, "con
 	contentProps?: HTMLAttributes<HTMLDivElement>
 }
 
-export interface MagicRichEditorRef {
+export interface DelightfulRichEditorRef {
 	editor: Editor | null
 }
 
-const MagicRichEditor = memo(
-	forwardRef<MagicRichEditorRef, MagicRichEditorProps>((props, ref) => {
+const DelightfulRichEditor = memo(
+	forwardRef<DelightfulRichEditorRef, DelightfulRichEditorProps>((props, ref) => {
 		const {
 			content,
 			placeholder,
@@ -310,7 +310,7 @@ const MagicRichEditor = memo(
 				// 	suggestion: suggestion(getParentDom),
 				// 	deleteTriggerWithBackspace: true,
 				// }),
-				MagicEmojiNodeExtension.configure({
+				DelightfulEmojiNodeExtension.configure({
 					HTMLAttributes: {
 						className: styles.emoji,
 					},
@@ -570,4 +570,4 @@ const MagicRichEditor = memo(
 	}),
 )
 
-export default MagicRichEditor
+export default DelightfulRichEditor

@@ -1,12 +1,12 @@
-import type { MagicModalProps } from "@/opensource/components/base/MagicModal"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import type { DelightfulModalProps } from "@/opensource/components/base/DelightfulModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import type { OpenableProps } from "@/utils/react"
 import { useMemoizedFn } from "ahooks"
 import { Input } from "antd"
 import { memo, useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 
-export interface UpdateGroupNameModalProps extends MagicModalProps {
+export interface UpdateGroupNameModalProps extends DelightfulModalProps {
 	initialGroupName?: string
 	conversationId: string
 	onSave?: (groupName: string) => Promise<void>
@@ -41,7 +41,7 @@ const UpdateGroupNameModal = memo((props: OpenableProps<UpdateGroupNameModalProp
 	})
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			width={400}
 			title={t("chat.groupSetting.updateGroupName")}
 			open={open}
@@ -57,7 +57,7 @@ const UpdateGroupNameModal = memo((props: OpenableProps<UpdateGroupNameModalProp
 				maxLength={50}
 				onChange={(e) => setGroupName(e.target.value)}
 			/>
-		</MagicModal>
+		</DelightfulModal>
 	)
 })
 

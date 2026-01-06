@@ -13,7 +13,7 @@ export interface NewToken {
 // By extending antd-style CustomToken object type definition, you can add corresponding token object in useTheme
 declare module "antd-style" {
 	// eslint-disable-next-line @typescript-eslint/no-empty-interface
-	export interface MagicToken extends NewToken {}
+	export interface DelightfulToken extends NewToken {}
 }
 
 // Extend antd's token type

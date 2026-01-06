@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MagicSelect > 快照测试 > 基础选择器快照 1`] = `
+exports[`DelightfulSelect > 快照测试 > 基础选择器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-select magic-select-outlined css-var-r4 magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-single magic-select-show-arrow"
@@ -65,7 +65,7 @@ exports[`MagicSelect > 快照测试 > 基础选择器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSelect > 快照测试 > 多选选择器快照 1`] = `
+exports[`DelightfulSelect > 快照测试 > 多选选择器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-select magic-select-outlined css-var-ra magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-multiple magic-select-show-arrow magic-select-show-search"
@@ -144,7 +144,7 @@ exports[`MagicSelect > 快照测试 > 多选选择器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSelect > 快照测试 > 大尺寸选择器快照 1`] = `
+exports[`DelightfulSelect > 快照测试 > 大尺寸选择器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-select magic-select-lg magic-select-outlined css-var-rc magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-single magic-select-show-arrow"
@@ -207,7 +207,7 @@ exports[`MagicSelect > 快照测试 > 大尺寸选择器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSelect > 快照测试 > 小尺寸选择器快照 1`] = `
+exports[`DelightfulSelect > 快照测试 > 小尺寸选择器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-select magic-select-sm magic-select-outlined css-var-re magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-single magic-select-show-arrow"
@@ -270,7 +270,7 @@ exports[`MagicSelect > 快照测试 > 小尺寸选择器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSelect > 快照测试 > 带清除按钮选择器快照 1`] = `
+exports[`DelightfulSelect > 快照测试 > 带清除按钮选择器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-select magic-select-outlined css-var-rg magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-single magic-select-allow-clear magic-select-show-arrow"
@@ -333,7 +333,7 @@ exports[`MagicSelect > 快照测试 > 带清除按钮选择器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSelect > 快照测试 > 带默认值选择器快照 1`] = `
+exports[`DelightfulSelect > 快照测试 > 带默认值选择器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-select magic-select-outlined css-var-r6 magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-single magic-select-show-arrow"
@@ -399,7 +399,7 @@ exports[`MagicSelect > 快照测试 > 带默认值选择器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSelect > 快照测试 > 禁用状态选择器快照 1`] = `
+exports[`DelightfulSelect > 快照测试 > 禁用状态选择器快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-select magic-select-outlined css-var-r8 magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-single magic-select-show-arrow magic-select-disabled"

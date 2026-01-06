@@ -12,7 +12,7 @@ import type {
 	CommonQuickInstruction,
 } from "@/types/bot"
 import { InstructionMode as InstructionModeType, InstructionType } from "@/types/bot"
-import type { MagicRichEditorRef } from "@/opensource/components/base/MagicRichEditor"
+import type { DelightfulRichEditorRef } from "@/opensource/components/base/DelightfulRichEditor"
 import type { UseEditorOptions } from "@tiptap/react"
 import { genTemplateInstructionNode } from "@/opensource/pages/chatNew/components/quick-instruction/extension/utils"
 import { QuickInstructionNodeTemplateExtension } from "@/opensource/pages/chatNew/components/quick-instruction/extension"
@@ -58,7 +58,7 @@ const InstructionForm = memo(
 		const { t } = useTranslation("interface")
 		const { styles } = useStyles()
 
-		const editorRef = useRef<MagicRichEditorRef>(null)
+		const editorRef = useRef<DelightfulRichEditorRef>(null)
 		const [fieldValues, setFieldValues] = useState<InstructionValue[]>([])
 		const [currentInstructionExp, setCurrentInstructionExp] = useState<InstructionExplanation>()
 		const [showInsertLocation, setShowInsertLocation] = useState(true)

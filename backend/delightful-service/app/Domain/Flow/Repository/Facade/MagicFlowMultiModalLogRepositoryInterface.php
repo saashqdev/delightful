@@ -7,22 +7,22 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Facade;
 
-use App\Domain\Flow\Entity\MagicFlowMultiModalLogEntity;
+use App\Domain\Flow\Entity\DelightfulFlowMultiModalLogEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 
-interface MagicFlowMultiModalLogRepositoryInterface
+interface DelightfulFlowMultiModalLogRepositoryInterface
 {
-    public function create(FlowDataIsolation $dataIsolation, MagicFlowMultiModalLogEntity $entity): MagicFlowMultiModalLogEntity;
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMultiModalLogEntity $entity): DelightfulFlowMultiModalLogEntity;
 
-    public function getById(FlowDataIsolation $dataIsolation, int $id): ?MagicFlowMultiModalLogEntity;
+    public function getById(FlowDataIsolation $dataIsolation, int $id): ?DelightfulFlowMultiModalLogEntity;
 
-    public function getByMessageId(FlowDataIsolation $dataIsolation, string $messageId): ?MagicFlowMultiModalLogEntity;
+    public function getByMessageId(FlowDataIsolation $dataIsolation, string $messageId): ?DelightfulFlowMultiModalLogEntity;
 
     /**
      * 批量获取多个消息ID对应的多模态日志记录.
      *
      * @param array<string> $messageIds
-     * @return array<MagicFlowMultiModalLogEntity>
+     * @return array<DelightfulFlowMultiModalLogEntity>
      */
     public function getByMessageIds(FlowDataIsolation $dataIsolation, array $messageIds, bool $keyByMessageId = false): array;
 }

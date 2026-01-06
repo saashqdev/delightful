@@ -1,14 +1,14 @@
 import { useTranslation } from "react-i18next"
 import { Button, Flex, Form, Input, message, Tooltip } from "antd"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useBoolean, useMemoizedFn, useUpdateEffect } from "ahooks"
 import { useForm } from "antd/es/form/Form"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import type { Knowledge } from "@/types/knowledge"
 import type { RefObject } from "react"
 import { forwardRef, useImperativeHandle, useMemo } from "react"
 import { IconEdit, IconWand, IconX } from "@tabler/icons-react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { createStyles } from "antd-style"
 
 import { generateSnowFlake } from "@/opensource/pages/flow/utils/helpers"
@@ -182,11 +182,11 @@ const AddFragment = forwardRef<AddFragmentRef, AddFragmentProps>((props, ref) =>
 					ref={editRefs?.[fragment?.id] as any}
 				/>
 			) : (
-				<MagicButton type="dashed" onClick={setTrue}>
+				<DelightfulButton type="dashed" onClick={setTrue}>
 					{title}
-				</MagicButton>
+				</DelightfulButton>
 			)}
-			<MagicModal
+			<DelightfulModal
 				title={title}
 				open={open}
 				onOk={handleOk}
@@ -262,7 +262,7 @@ const AddFragment = forwardRef<AddFragmentRef, AddFragmentProps>((props, ref) =>
 													placeholder={t("common.value", { ns: "flow" })}
 												/>
 											</Form.Item>
-											<MagicIcon
+											<DelightfulIcon
 												component={IconX}
 												className={styles.iconX}
 												onClick={() => {
@@ -280,7 +280,7 @@ const AddFragment = forwardRef<AddFragmentRef, AddFragmentProps>((props, ref) =>
 						</Form.List>
 					</Form.Item>
 				</Form>
-			</MagicModal>
+			</DelightfulModal>
 		</>
 	)
 })

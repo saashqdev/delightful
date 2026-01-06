@@ -1,4 +1,4 @@
-import { FormItemType } from "@/MagicExpressionWidget/types";
+import { FormItemType } from "@/DelightfulExpressionWidget/types";
 import i18next, { TFunction } from "i18next";
 
 export const JSONPATH_JOIN_CHAR = '.';

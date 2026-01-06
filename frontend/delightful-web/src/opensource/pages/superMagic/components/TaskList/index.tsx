@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { CloseCircleFilled } from "@ant-design/icons"
 import { IconChecks, IconChevronDown, IconChevronUp, IconCircleCheck } from "@tabler/icons-react"
 import { Tooltip } from "antd"
@@ -178,7 +178,7 @@ function TaskList({ taskData, className, style, mode }: TaskListProps) {
 									{completedTasks} / {totalTasks}
 								</span>
 							</div>
-							<MagicIcon
+							<DelightfulIcon
 								size={18}
 								component={expanded ? IconChevronDown : IconChevronUp}
 							/>

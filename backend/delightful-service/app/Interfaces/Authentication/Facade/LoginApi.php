@@ -8,14 +8,14 @@ declare(strict_types=1);
 namespace App\Interfaces\Authentication\Facade;
 
 use App\Application\Authentication\Service\LoginAppService;
-use App\Application\Chat\Service\MagicUserContactAppService;
+use App\Application\Chat\Service\DelightfulUserContactAppService;
 use App\Interfaces\Authentication\DTO\CheckLoginRequest;
 use App\Interfaces\Authentication\DTO\CheckLoginResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 class LoginApi
 {
-    public function __construct(protected LoginAppService $loginAppService, protected MagicUserContactAppService $userAppService)
+    public function __construct(protected LoginAppService $loginAppService, protected DelightfulUserContactAppService $userAppService)
     {
     }
 

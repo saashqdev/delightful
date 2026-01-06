@@ -7,29 +7,29 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Flow\Facade\Admin;
 
-use App\Application\Flow\Service\MagicFlowApiKeyAppService;
+use App\Application\Flow\Service\DelightfulFlowApiKeyAppService;
 use App\Domain\Flow\Entity\ValueObject\ApiKeyType;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowApiKeyQuery;
-use App\Interfaces\Flow\Assembler\ApiKey\MagicFlowApiKeyAssembler;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowApiKeyQuery;
+use App\Interfaces\Flow\Assembler\ApiKey\DelightfulFlowApiKeyAssembler;
 use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]
-class MagicFlowApiKeyFlowAdminApi extends AbstractFlowAdminApi
+class DelightfulFlowApiKeyFlowAdminApi extends AbstractFlowAdminApi
 {
     #[Inject]
-    protected MagicFlowApiKeyAppService $magicFlowApiKeyAppService;
+    protected DelightfulFlowApiKeyAppService $magicFlowApiKeyAppService;
 
     public function save(string $flowId)
     {
         $authorization = $this->getAuthorization();
 
-        $DTO = MagicFlowApiKeyAssembler::createFlowApiKeyDTOByMixed($this->request->all());
+        $DTO = DelightfulFlowApiKeyAssembler::createFlowApiKeyDTOByMixed($this->request->all());
         $DTO->setFlowCode($flowId);
 
-        $DO = MagicFlowApiKeyAssembler::createDO($DTO);
+        $DO = DelightfulFlowApiKeyAssembler::createDO($DTO);
         $entity = $this->magicFlowApiKeyAppService->save($authorization, $DO);
-        return MagicFlowApiKeyAssembler::createDTO($entity);
+        return DelightfulFlowApiKeyAssembler::createDTO($entity);
     }
 
     public function queries(string $flowId)
@@ -37,7 +37,7 @@ class MagicFlowApiKeyFlowAdminApi extends AbstractFlowAdminApi
         $authorization = $this->getAuthorization();
 
         // 获取我创建的个人密钥
-        $query = new MagicFlowApiKeyQuery();
+        $query = new DelightfulFlowApiKeyQuery();
         $query->setFlowCode($flowId);
         $query->setType(ApiKeyType::Personal->value);
         $query->setCreator($authorization->getId());
@@ -45,21 +45,21 @@ class MagicFlowApiKeyFlowAdminApi extends AbstractFlowAdminApi
 
         $page = $this->createPage();
         $result = $this->magicFlowApiKeyAppService->queries($authorization, $query, $page);
-        return MagicFlowApiKeyAssembler::createPageListDTO($result['total'], $result['list'], $page);
+        return DelightfulFlowApiKeyAssembler::createPageListDTO($result['total'], $result['list'], $page);
     }
 
     public function show(string $flowId, string $code)
     {
         $authorization = $this->getAuthorization();
         $entity = $this->magicFlowApiKeyAppService->getByCode($authorization, $flowId, $code);
-        return MagicFlowApiKeyAssembler::createDTO($entity);
+        return DelightfulFlowApiKeyAssembler::createDTO($entity);
     }
 
     public function changeSecretKey(string $flowId, string $code)
     {
         $authorization = $this->getAuthorization();
         $entity = $this->magicFlowApiKeyAppService->changeSecretKey($authorization, $flowId, $code);
-        return MagicFlowApiKeyAssembler::createDTO($entity);
+        return DelightfulFlowApiKeyAssembler::createDTO($entity);
     }
 
     public function destroy(string $flowId, string $code)

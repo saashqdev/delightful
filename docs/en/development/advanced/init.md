@@ -1,6 +1,6 @@
-# Magic Service System Initialization Guide
+# Delightful Service System Initialization Guide
 
-This document briefly describes the initialization steps for the Magic Service system, including account and user data population, environment configuration, and login verification functionality implementation.
+This document briefly describes the initialization steps for the Delightful Service system, including account and user data population, environment configuration, and login verification functionality implementation.
 
 ## 1. Account and User Data Initialization
 

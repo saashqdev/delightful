@@ -33,7 +33,7 @@ use App\Domain\Provider\Service\ProviderModelDomainService;
 use App\ErrorCode\ServiceProviderErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Interfaces\Agent\Assembler\FileAssembler;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Provider\Assembler\ProviderAdminAssembler;
 use App\Interfaces\Provider\DTO\CreateProviderConfigRequest;
 use App\Interfaces\Provider\DTO\SaveProviderModelDTO;
@@ -60,7 +60,7 @@ readonly class AdminProviderAppService
      * 根据服务商配置ID获取服务商详细信息.
      */
     public function getProviderModelsByConfigId(
-        MagicUserAuthorization $authorization,
+        DelightfulUserAuthorization $authorization,
         string $configId
     ): ?ProviderConfigModelsDTO {
         // 构建数据隔离对象
@@ -81,7 +81,7 @@ readonly class AdminProviderAppService
     }
 
     public function updateProvider(
-        MagicUserAuthorization $authorization,
+        DelightfulUserAuthorization $authorization,
         UpdateProviderConfigRequest $updateProviderConfigRequest
     ): ProviderConfigModelsDTO {
         $dataIsolation = ProviderDataIsolation::create(
@@ -103,7 +103,7 @@ readonly class AdminProviderAppService
     }
 
     public function createProvider(
-        MagicUserAuthorization $authorization,
+        DelightfulUserAuthorization $authorization,
         CreateProviderConfigRequest $createProviderConfigRequest
     ): ProviderConfigModelsDTO {
         $dataIsolation = ProviderDataIsolation::create(
@@ -137,7 +137,7 @@ readonly class AdminProviderAppService
      * @throws Exception
      */
     public function deleteProvider(
-        MagicUserAuthorization $authorization,
+        DelightfulUserAuthorization $authorization,
         string $id,
     ): void {
         $dataIsolation = ProviderDataIsolation::create(
@@ -172,7 +172,7 @@ readonly class AdminProviderAppService
      * @throws Exception
      */
     public function deleteModel(
-        MagicUserAuthorization $authorization,
+        DelightfulUserAuthorization $authorization,
         string $id,
     ): void {
         $dataIsolation = ProviderDataIsolation::create(
@@ -211,7 +211,7 @@ readonly class AdminProviderAppService
      * 修改模型状态.
      */
     public function updateModelStatus(
-        MagicUserAuthorization $authorization,
+        DelightfulUserAuthorization $authorization,
         string $id,
         int $status,
     ): void {
@@ -225,7 +225,7 @@ readonly class AdminProviderAppService
     }
 
     // 保存模型
-    public function saveModel(MagicUserAuthorization $authorization, SaveProviderModelDTO $saveProviderModelDTO): array
+    public function saveModel(DelightfulUserAuthorization $authorization, SaveProviderModelDTO $saveProviderModelDTO): array
     {
         $dataIsolation = ProviderDataIsolation::create($authorization->getOrganizationCode(), $authorization->getId());
 
@@ -277,7 +277,7 @@ readonly class AdminProviderAppService
     /**
      * @throws Exception
      */
-    public function connectivityTest(string $serviceProviderConfigId, string $modelVersion, string $modelPrimaryId, MagicUserAuthorization $authorization): ConnectResponse
+    public function connectivityTest(string $serviceProviderConfigId, string $modelVersion, string $modelPrimaryId, DelightfulUserAuthorization $authorization): ConnectResponse
     {
         // 构建数据隔离对象
         $dataIsolation = ProviderDataIsolation::create(
@@ -343,13 +343,13 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * Get super magic display models and Magic provider models visible to current organization.
+     * Get super magic display models and Delightful provider models visible to current organization.
      * @param string $organizationCode Organization code
      * @return ProviderModelDetailDTO[]
      */
-    public function getSuperMagicDisplayModelsForOrganization(string $organizationCode): array
+    public function getSuperDelightfulDisplayModelsForOrganization(string $organizationCode): array
     {
-        $models = $this->adminProviderDomainService->getSuperMagicDisplayModelsForOrganization($organizationCode);
+        $models = $this->adminProviderDomainService->getSuperDelightfulDisplayModelsForOrganization($organizationCode);
 
         if (empty($models)) {
             return [];
@@ -406,7 +406,7 @@ readonly class AdminProviderAppService
      * 获取官方组织下的所有可用模型.
      * @return ProviderModelDetailDTO[]
      */
-    public function queriesModels(MagicUserAuthorization $authorization, ProviderModelQuery $providerModelQuery): array
+    public function queriesModels(DelightfulUserAuthorization $authorization, ProviderModelQuery $providerModelQuery): array
     {
         $dataIsolation = ProviderDataIsolation::create(
             $authorization->getOrganizationCode(),
@@ -422,11 +422,11 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 初始化Magic服务商配置数据.
+     * 初始化Delightful服务商配置数据.
      */
-    public function initializeMagicProviderConfigs(): int
+    public function initializeDelightfulProviderConfigs(): int
     {
-        return $this->adminProviderDomainService->initializeMagicProviderConfigs();
+        return $this->adminProviderDomainService->initializeDelightfulProviderConfigs();
     }
 
     /**
@@ -598,7 +598,7 @@ readonly class AdminProviderAppService
         return NaturalLanguageProcessing::DEFAULT;
     }
 
-    private function embeddingConnectivityTest(string $modelPrimaryId, MagicUserAuthorization $authorization): ConnectResponse
+    private function embeddingConnectivityTest(string $modelPrimaryId, DelightfulUserAuthorization $authorization): ConnectResponse
     {
         $connectResponse = new ConnectResponse();
         $llmAppService = di(LLMAppService::class);
@@ -625,7 +625,7 @@ readonly class AdminProviderAppService
         return $connectResponse;
     }
 
-    private function llmConnectivityTest(string $modelPrimaryId, MagicUserAuthorization $authorization): ConnectResponse
+    private function llmConnectivityTest(string $modelPrimaryId, DelightfulUserAuthorization $authorization): ConnectResponse
     {
         $connectResponse = new ConnectResponse();
         $llmAppService = di(LLMAppService::class);

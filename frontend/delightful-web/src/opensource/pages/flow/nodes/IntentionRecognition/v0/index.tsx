@@ -1,17 +1,17 @@
 import { Form, Tooltip } from "antd"
 import { useForm } from "antd/lib/form/Form"
 import { useMemoizedFn } from "ahooks"
-import { useNodeConfigActions } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useNodeConfigActions } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { set } from "lodash-es"
-import MagicJsonSchemaEditor from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor"
-import { ShowColumns } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/constants"
+import DelightfulJsonSchemaEditor from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor"
+import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
 import DropdownCard from "@delightful/delightful-flow/dist/common/BaseUI/DropdownCard"
-import { DisabledField } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
+import { DisabledField } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import { IconInfoCircle, IconPlus, IconTrash } from "@tabler/icons-react"
-import MagicExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicExpressionWrap"
-import { ExpressionMode } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
-import CustomHandle from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/Handle/Source"
+import DelightfulExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
+import { ExpressionMode } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
+import CustomHandle from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/Handle/Source"
 import { useTranslation } from "react-i18next"
 import { getExpressionPlaceholder } from "@/opensource/pages/flow/utils/helpers"
 import styles from "./index.module.less"
@@ -93,7 +93,7 @@ export default function IntentionRecognitionV0() {
 						className={styles.input}
 						valuePropName="data"
 					>
-						<MagicJsonSchemaEditor
+						<DelightfulJsonSchemaEditor
 							allowExpression
 							expressionSource={expressionDataSource}
 							displayColumns={[ShowColumns.Label, ShowColumns.Value]}
@@ -183,7 +183,7 @@ export default function IntentionRecognitionV0() {
 																		)}
 																		required
 																	>
-																		<MagicExpressionWrap
+																		<DelightfulExpressionWrap
 																			placeholder={t(
 																				"intentionRecognize.intentionNamePlaceholder",
 																				{ ns: "flow" },
@@ -218,7 +218,7 @@ export default function IntentionRecognitionV0() {
 																		)}
 																		required
 																	>
-																		<MagicExpressionWrap
+																		<DelightfulExpressionWrap
 																			placeholder={getExpressionPlaceholder(
 																				t(
 																					"intentionRecognize.intentionDescPlaceholder",

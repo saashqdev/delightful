@@ -1,5 +1,5 @@
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import conversationStore from "@/opensource/stores/chatNew/conversation"
 import conversationService from "@/opensource/services/chat/conversation/ConversationService"
 import { IconMessage2Cancel } from "@tabler/icons-react"
@@ -21,9 +21,9 @@ const MuteConversationButton = observer(({ conversationId }: { conversationId: s
 	if (!conversation) return null
 
 	return (
-		<MagicButton
+		<DelightfulButton
 			justify="flex-start"
-			icon={<MagicIcon component={IconMessage2Cancel} size={20} />}
+			icon={<DelightfulIcon component={IconMessage2Cancel} size={20} />}
 			size="large"
 			type="text"
 			block
@@ -32,7 +32,7 @@ const MuteConversationButton = observer(({ conversationId }: { conversationId: s
 			{conversation.is_not_disturb
 				? t("chat.floatButton.disableNoDisturbing")
 				: t("chat.floatButton.enableNoDisturbing")}
-		</MagicButton>
+		</DelightfulButton>
 	)
 })
 

@@ -102,9 +102,9 @@ return [
         'organization_env_not_found' => 'Platform organization environment not found',
     ],
     'magic' => [
-        'environment_config_error' => 'Magic environment configuration error',
-        'environment_not_found' => 'Magic environment not found',
-        'ticket_not_found' => 'Magic appTicket not found',
+        'environment_config_error' => 'Delightful environment configuration error',
+        'environment_not_found' => 'Delightful environment not found',
+        'ticket_not_found' => 'Delightful appTicket not found',
     ],
     'authorization' => [
         'invalid' => 'authorization is invalid',

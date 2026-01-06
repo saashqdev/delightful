@@ -11,7 +11,7 @@ interface UserSchema {
 		| OrganizationResponse
 		| null
 		| Array<User.UserOrganization>
-		| Record<string, User.MagicOrganization>
+		| Record<string, User.DelightfulOrganization>
 	enabled?: boolean
 	createdAt?: number
 	updatedAt?: number
@@ -55,12 +55,12 @@ export class UserRepository extends GlobalBaseRepository<UserSchema> {
 		})
 	}
 
-	async getOrganizations(): Promise<Record<string, User.MagicOrganization> | null> {
+	async getOrganizations(): Promise<Record<string, User.DelightfulOrganization> | null> {
 		const config = await this.get("organizations")
-		return config?.value as Record<string, User.MagicOrganization>
+		return config?.value as Record<string, User.DelightfulOrganization>
 	}
 
-	async setOrganizations(org: Record<string, User.MagicOrganization> | null): Promise<void> {
+	async setOrganizations(org: Record<string, User.DelightfulOrganization> | null): Promise<void> {
 		return this.put({
 			key: "organizations",
 			value: org,

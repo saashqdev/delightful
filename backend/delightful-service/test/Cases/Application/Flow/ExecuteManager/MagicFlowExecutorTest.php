@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\ExecuteManager;
 
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
-use App\Application\Flow\ExecuteManager\MagicFlowExecutor;
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Application\Flow\ExecuteManager\DelightfulFlowExecutor;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 use App\Domain\Flow\Entity\ValueObject\Node;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\TriggerType;
 use App\Domain\Flow\Entity\ValueObject\NodeType;
@@ -19,7 +19,7 @@ use App\Infrastructure\Core\Dag\VertexResult;
 /**
  * @internal
  */
-class MagicFlowExecutorTest extends ExecuteManagerBaseTest
+class DelightfulFlowExecutorTest extends ExecuteManagerBaseTest
 {
     public function testRun()
     {
@@ -35,11 +35,11 @@ class MagicFlowExecutorTest extends ExecuteManagerBaseTest
             $node->setCallback(function (VertexResult $vertexResult, ExecutionData $executionData, array $frontResults) {});
             $nodes[$i] = $node;
         }
-        $magicFlowEntity = $this->getMagicFlowEntity();
+        $magicFlowEntity = $this->getDelightfulFlowEntity();
         $magicFlowEntity->setNodes($nodes);
 
         $executionData = $this->createExecutionData(TriggerType::ChatMessage);
-        $executor = new MagicFlowExecutor($magicFlowEntity, $executionData);
+        $executor = new DelightfulFlowExecutor($magicFlowEntity, $executionData);
 
         $executor->execute();
         foreach ($nodes as $node) {
@@ -47,9 +47,9 @@ class MagicFlowExecutorTest extends ExecuteManagerBaseTest
         }
     }
 
-    private function getMagicFlowEntity(): MagicFlowEntity
+    private function getDelightfulFlowEntity(): DelightfulFlowEntity
     {
-        $magicFlowEntity = new MagicFlowEntity();
+        $magicFlowEntity = new DelightfulFlowEntity();
         $magicFlowEntity->setCode('unit_test.' . uniqid());
         $magicFlowEntity->setName('unit_test');
         $magicFlowEntity->setType(Type::Main);

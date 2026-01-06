@@ -14,7 +14,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
 /**
  * @property int $id 雪花ID
  * @property string $organization_code 组织编码
- * @property string $magic_id 账号MagicID
+ * @property string $magic_id 账号DelightfulID
  * @property string $user_id 用户ID
  * @property string $key 设置键
  * @property array $value 设置值

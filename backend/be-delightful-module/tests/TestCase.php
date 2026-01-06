@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Tests;
+namespace Delightful\SuperDelightful\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 

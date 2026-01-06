@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\ModelGateway\Entity;
 
 use App\Domain\ModelGateway\Entity\ValueObject\Amount;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\AbstractEntity;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
@@ -69,16 +69,16 @@ class ModelConfigEntity extends AbstractEntity
     public function prepareForSaving(): void
     {
         if (empty($this->model)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'model']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'model']);
         }
         if (empty($this->name)) {
             $this->name = $this->model;
         }
         if (empty($this->implementation)) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'implementation']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.empty', ['label' => 'implementation']);
         }
         if (class_exists($this->implementation) === false) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.not_found', ['label' => 'implementation']);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.not_found', ['label' => 'implementation']);
         }
     }
 

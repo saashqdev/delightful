@@ -1,10 +1,10 @@
-import MagicInfiniteScrollList from "@/opensource/components/MagicInfiniteScrollList"
+import DelightfulInfiniteScrollList from "@/opensource/components/DelightfulInfiniteScrollList"
 import { contactStore } from "@/opensource/stores/contact"
 import type { GroupConversationDetail } from "@/types/chat/conversation"
 import { useMemoizedFn } from "ahooks"
 import { createStyles } from "antd-style"
 import { useCallback, useState, useEffect } from "react"
-import MagicScrollBar from "@/opensource/components/base/MagicScrollBar"
+import DelightfulScrollBar from "@/opensource/components/base/DelightfulScrollBar"
 import { useChatWithMember } from "@/opensource/hooks/chat/useChatWithMember"
 import { MessageReceiveType } from "@/types/chat"
 import { observer } from "mobx-react-lite"
@@ -64,8 +64,8 @@ const MyGroups = observer(function MyGroups() {
 	})
 
 	return (
-		<MagicScrollBar className={styles.empty}>
-			<MagicInfiniteScrollList<
+		<DelightfulScrollBar className={styles.empty}>
+			<DelightfulInfiniteScrollList<
 				GroupConversationDetail & { conversation_id: string },
 				ReturnType<typeof itemsTransform>
 			>
@@ -74,7 +74,7 @@ const MyGroups = observer(function MyGroups() {
 				itemsTransform={itemsTransform}
 				onItemClick={handleItemClick}
 			/>
-		</MagicScrollBar>
+		</DelightfulScrollBar>
 	)
 })
 

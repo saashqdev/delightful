@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Factory;
 
-use App\Domain\Flow\Entity\MagicFlowApiKeyEntity;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowApiKeyModel;
+use App\Domain\Flow\Entity\DelightfulFlowApiKeyEntity;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowApiKeyModel;
 
-class MagicFlowApiKeyFactory
+class DelightfulFlowApiKeyFactory
 {
-    public static function modelToEntity(MagicFlowApiKeyModel $model): MagicFlowApiKeyEntity
+    public static function modelToEntity(DelightfulFlowApiKeyModel $model): DelightfulFlowApiKeyEntity
     {
-        $entity = new MagicFlowApiKeyEntity();
+        $entity = new DelightfulFlowApiKeyEntity();
         $entity->setId($model->id);
         $entity->setOrganizationCode($model->organization_code);
         $entity->setCode($model->code);

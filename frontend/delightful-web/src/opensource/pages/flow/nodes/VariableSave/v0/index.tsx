@@ -1,12 +1,12 @@
 import { Form } from "antd"
 import { useForm } from "antd/lib/form/Form"
 import { useMemoizedFn } from "ahooks"
-import { useNodeConfigActions } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useNodeConfigActions } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { set, cloneDeep } from "lodash-es"
-import MagicJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicJsonSchemaEditorWrap"
-import { ShowColumns } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/constants"
-import { FormItemType } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
+import DelightfulJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulJsonSchemaEditorWrap"
+import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
+import { FormItemType } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import styles from "./index.module.less"
@@ -54,7 +54,7 @@ export default function VariableSaveV0() {
 				onValuesChange={onValuesChange}
 			>
 				<Form.Item name={["variables", "form"]}>
-					<MagicJSONSchemaEditorWrap
+					<DelightfulJSONSchemaEditorWrap
 						allowExpression
 						expressionSource={expressionDataSource}
 						displayColumns={[

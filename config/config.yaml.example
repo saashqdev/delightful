@@ -1,5 +1,5 @@
 # =====================================================
-# Super Magic Configuration File
+# Super Delightful Configuration File
 # =====================================================
 # Important Security Notes:
 # 1. Sensitive model IDs (such as those in ep-xxxxxxxxxx format) should only be defined in the .env file

@@ -7,21 +7,21 @@ declare(strict_types=1);
 
 namespace App\Domain\Chat\Repository\Facade;
 
-use App\Domain\Contact\Entity\MagicThirdPlatformIdMappingEntity;
+use App\Domain\Contact\Entity\DelightfulThirdPlatformIdMappingEntity;
 use App\Domain\Contact\Entity\ValueObject\PlatformType;
 use App\Domain\Contact\Entity\ValueObject\ThirdPlatformIdMappingType;
-use App\Domain\OrganizationEnvironment\Entity\MagicEnvironmentEntity;
+use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 
-interface MagicContactIdMappingRepositoryInterface
+interface DelightfulContactIdMappingRepositoryInterface
 {
     /**
      * 获取第三方平台部门ID的映射关系.
      *
      * @param string[] $thirdDepartmentIds
-     * @return MagicThirdPlatformIdMappingEntity[]
+     * @return DelightfulThirdPlatformIdMappingEntity[]
      */
     public function getThirdDepartmentIdsMapping(
-        MagicEnvironmentEntity $magicEnvironmentEntity,
+        DelightfulEnvironmentEntity $magicEnvironmentEntity,
         array $thirdDepartmentIds,
         string $magicOrganizationCode,
         PlatformType $thirdPlatformType
@@ -31,10 +31,10 @@ interface MagicContactIdMappingRepositoryInterface
      * 获取第三方平台用户ID的映射关系.
      *
      * @param string[] $thirdUserIds
-     * @return MagicThirdPlatformIdMappingEntity[]
+     * @return DelightfulThirdPlatformIdMappingEntity[]
      */
     public function getThirdUserIdsMapping(
-        MagicEnvironmentEntity $magicEnvironmentEntity,
+        DelightfulEnvironmentEntity $magicEnvironmentEntity,
         array $thirdUserIds,
         ?string $magicOrganizationCode,
         PlatformType $thirdPlatformType
@@ -45,20 +45,20 @@ interface MagicContactIdMappingRepositoryInterface
      *
      * @param string[] $magicIds
      */
-    public function getMagicIdsMapping(
+    public function getDelightfulIdsMapping(
         array $magicIds,
         ?string $magicOrganizationCode,
         PlatformType $thirdPlatformType
     ): array;
 
     /**
-     * @param MagicThirdPlatformIdMappingEntity[] $thirdPlatformIdMappingEntities
-     * @return MagicThirdPlatformIdMappingEntity[]
+     * @param DelightfulThirdPlatformIdMappingEntity[] $thirdPlatformIdMappingEntities
+     * @return DelightfulThirdPlatformIdMappingEntity[]
      */
     public function createThirdPlatformIdsMapping(array $thirdPlatformIdMappingEntities): array;
 
     /**
-     * @return MagicThirdPlatformIdMappingEntity[]
+     * @return DelightfulThirdPlatformIdMappingEntity[]
      */
     public function getThirdDepartments(
         array $currentDepartmentIds,
@@ -69,9 +69,9 @@ interface MagicContactIdMappingRepositoryInterface
     public function getDepartmentRootId(string $magicOrganizationCode, PlatformType $platformType): string;
 
     /**
-     * 获取Magic部门ID的映射关系.
+     * 获取Delightful部门ID的映射关系.
      */
-    public function getMagicDepartmentIdsMapping(
+    public function getDelightfulDepartmentIdsMapping(
         array $magicDepartmentIds,
         string $magicOrganizationCode,
         PlatformType $thirdPlatformType

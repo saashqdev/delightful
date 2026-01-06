@@ -5,18 +5,18 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\SuperDelightful\Application\SuperAgent\Event\Subscribe;
 
 use App\Domain\Chat\Entity\ValueObject\SocketEventType;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Infrastructure\Util\SocketIO\SocketIOUtil;
 use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\MessageQueueEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\MessageQueueConsumedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\MessageQueueCreatedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\MessageQueueDeletedEvent;
-use Delightful\SuperMagic\Domain\SuperAgent\Event\MessageQueueUpdatedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\MessageQueueEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\MessageQueueConsumedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\MessageQueueCreatedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\MessageQueueDeletedEvent;
+use Delightful\SuperDelightful\Domain\SuperAgent\Event\MessageQueueUpdatedEvent;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;
@@ -34,7 +34,7 @@ class MessageQueueNotificationSubscriber implements ListenerInterface
     private LoggerInterface $logger;
 
     public function __construct(
-        private readonly MagicUserDomainService $userDomainService,
+        private readonly DelightfulUserDomainService $userDomainService,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(static::class);
@@ -136,7 +136,7 @@ class MessageQueueNotificationSubscriber implements ListenerInterface
      */
     private function pushNotification(string $userId, array $pushData): void
     {
-        $magicId = $this->getMagicIdByUserId($userId);
+        $magicId = $this->getDelightfulIdByUserId($userId);
 
         if (empty($magicId)) {
             $this->logger->warning('Cannot get magicId for user', ['user_id' => $userId]);
@@ -160,11 +160,11 @@ class MessageQueueNotificationSubscriber implements ListenerInterface
     /**
      * Get magicId by userId.
      */
-    private function getMagicIdByUserId(string $userId): string
+    private function getDelightfulIdByUserId(string $userId): string
     {
         try {
             $userEntity = $this->userDomainService->getUserById($userId);
-            return $userEntity?->getMagicId() ?? '';
+            return $userEntity?->getDelightfulId() ?? '';
         } catch (Throwable $e) {
             $this->logger->error('Failed to get magicId by userId', [
                 'user_id' => $userId,

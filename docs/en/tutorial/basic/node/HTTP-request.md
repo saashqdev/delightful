@@ -1,6 +1,6 @@
 # HTTP Request Node
 ## What is an HTTP Request Node?
-The HTTP Request Node is an important node in the Magic Flow workflow used for interacting with external APIs and network services. It acts like a bridge connecting your workflow with the external world, allowing you to send various network requests (such as GET, POST, etc.), obtain external data, or submit information to external systems. Through this node, you can easily integrate external services and data sources into your intelligent applications.
+The HTTP Request Node is an important node in the Delightful Flow workflow used for interacting with external APIs and network services. It acts like a bridge connecting your workflow with the external world, allowing you to send various network requests (such as GET, POST, etc.), obtain external data, or submit information to external systems. Through this node, you can easily integrate external services and data sources into your intelligent applications.
 
 **Image Description:**
 
@@ -20,7 +20,7 @@ When building intelligent applications, you often need to obtain external data o
 Create an application that summarizes information from multiple data sources, such as integrating sales data from different platforms into a single report to provide a comprehensive view for decision-making.
 
 ### 2. Integration with Internal Enterprise Systems
-Integrate Magic Flow workflows with internal enterprise systems (such as CRM, ERP, OA, etc.) to achieve data flow and business collaboration.
+Integrate Delightful Flow workflows with internal enterprise systems (such as CRM, ERP, OA, etc.) to achieve data flow and business collaboration.
 
 ### 3. Enhanced Intelligent Assistants
 Enhance the capabilities of intelligent assistants by calling specialized APIs (such as weather APIs, translation APIs, etc.), providing richer services.

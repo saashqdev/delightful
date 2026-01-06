@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react"
 import { describe, it, expect, vi } from "vitest"
 import "@testing-library/jest-dom"
-import MagicSegmented from "../index"
+import DelightfulSegmented from "../index"
 import type { ReactNode } from "react"
 
 // 模拟antd组件
@@ -63,9 +63,9 @@ vi.mock("../styles", () => ({
 	}),
 }))
 
-describe("MagicSegmented组件", () => {
+describe("DelightfulSegmented组件", () => {
 	it("应该正确渲染基本分段控制器", () => {
-		render(<MagicSegmented options={["每日", "每周", "每月"]} defaultValue="每日" />)
+		render(<DelightfulSegmented options={["每日", "每周", "每月"]} defaultValue="每日" />)
 
 		expect(screen.getByTestId("antd-segmented")).toBeInTheDocument()
 		expect(screen.getByText("每日")).toBeInTheDocument()
@@ -75,7 +75,7 @@ describe("MagicSegmented组件", () => {
 
 	it("应该支持复杂选项格式", () => {
 		render(
-			<MagicSegmented
+			<DelightfulSegmented
 				options={[
 					{ label: "选项一", value: "option1" },
 					{ label: "选项二", value: "option2" },
@@ -94,7 +94,7 @@ describe("MagicSegmented组件", () => {
 	it("应该响应选项点击事件", () => {
 		const handleChange = vi.fn()
 		render(
-			<MagicSegmented
+			<DelightfulSegmented
 				options={["选项一", "选项二", "选项三"]}
 				defaultValue="选项一"
 				onChange={handleChange}
@@ -106,19 +106,19 @@ describe("MagicSegmented组件", () => {
 	})
 
 	it("应该应用圆形样式类", () => {
-		render(<MagicSegmented options={["选项一", "选项二"]} circle={true} />)
+		render(<DelightfulSegmented options={["选项一", "选项二"]} circle={true} />)
 
 		expect(screen.getByTestId("antd-segmented")).toHaveClass("mock-segmented-styles")
 	})
 
 	it("应该应用非圆形样式类", () => {
-		render(<MagicSegmented options={["选项一", "选项二"]} circle={false} />)
+		render(<DelightfulSegmented options={["选项一", "选项二"]} circle={false} />)
 
 		expect(screen.getByTestId("antd-segmented")).toHaveClass("mock-segmented-styles")
 	})
 
 	it("应该支持自定义类名", () => {
-		render(<MagicSegmented options={["选项一", "选项二"]} className="custom-class" />)
+		render(<DelightfulSegmented options={["选项一", "选项二"]} className="custom-class" />)
 
 		const segmentedElement = screen.getByTestId("antd-segmented")
 		expect(segmentedElement.className).toContain("mock-segmented-styles")

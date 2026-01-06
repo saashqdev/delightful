@@ -12,13 +12,13 @@ import { useTranslation } from "react-i18next"
 import type { StructureItem, StructureItemType, WithIdAndDataType } from "@/types/organization"
 import { IconChevronRight } from "@tabler/icons-react"
 import { cx } from "antd-style"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import type { CheckboxChangeEvent } from "antd/es/checkbox"
 import { isArray } from "lodash-es"
-import { useCurrentMagicOrganization } from "@/opensource/models/user/hooks"
-import MagicScrollBar from "@/opensource/components/base/MagicScrollBar"
+import { useCurrentDelightfulOrganization } from "@/opensource/models/user/hooks"
+import DelightfulScrollBar from "@/opensource/components/base/DelightfulScrollBar"
 import { isDepartment, isMember } from "./utils"
 import Member from "./components/Member"
 import Department from "./components/Department"
@@ -94,7 +94,7 @@ const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPan
 		[data.departments, data.users],
 	)
 
-	const organization = useCurrentMagicOrganization()
+	const organization = useCurrentDelightfulOrganization()
 
 	const emptyNode = useMemo(() => {
 		return isLoading ? null : (
@@ -222,13 +222,13 @@ const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPan
 	const Breadcrumb = useMemo(() => {
 		return (
 			<Flex className={styles.breadcrumb} align="center" gap={4} wrap="wrap">
-				<MagicAvatar
+				<DelightfulAvatar
 					src={organization?.organization_logo}
 					size={42}
 					className={styles.avatar}
 				>
 					{organization?.organization_name}
-				</MagicAvatar>
+				</DelightfulAvatar>
 
 				<Flex flex={1} align="center" style={{ flexWrap: "wrap" }}>
 					<span
@@ -242,7 +242,7 @@ const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPan
 						const key = `item-${index}`
 						return (
 							<Fragment key={key}>
-								<MagicIcon component={IconChevronRight} key={arrowKey} size={18} />
+								<DelightfulIcon component={IconChevronRight} key={arrowKey} size={18} />
 								<span
 									key={key}
 									className={styles.breadcrumbItem}
@@ -285,9 +285,9 @@ const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPan
 					</Checkbox>
 				</div>
 			) : null}
-			<MagicSpin section spinning={isLoading}>
+			<DelightfulSpin section spinning={isLoading}>
 				{dataArray && dataArray.length > 0 ? (
-					<MagicScrollBar className={styles.list}>
+					<DelightfulScrollBar className={styles.list}>
 						{dataArray?.map((item) => {
 							const { id } = item
 							return (
@@ -329,11 +329,11 @@ const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPan
 								</Flex>
 							)
 						})}
-					</MagicScrollBar>
+					</DelightfulScrollBar>
 				) : (
 					emptyNode
 				)}
-			</MagicSpin>
+			</DelightfulSpin>
 			{/* {userListReducerState.search ? userListNode() : structureNode()} */}
 			{footer}
 		</Flex>

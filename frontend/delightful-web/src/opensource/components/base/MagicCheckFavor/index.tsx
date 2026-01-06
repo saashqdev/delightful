@@ -10,7 +10,7 @@ type Props = {
 const genRandomId = () => {
 	return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
-export default function MagicCheckFavor({ checked, onChange }: Props) {
+export default function DelightfulCheckFavor({ checked, onChange }: Props) {
 	const checkId = useMemo(() => genRandomId(), [])
 	const [checkedComp, setCheckedComp] = useState(checked)
 	const handleChange = useCallback(

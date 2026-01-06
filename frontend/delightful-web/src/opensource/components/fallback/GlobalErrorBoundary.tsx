@@ -7,8 +7,8 @@ import { isString } from "lodash-es"
 import useVersion from "@/opensource/workers/version-check/useVersion"
 import Logger from "@/utils/log/Logger"
 import { isDev } from "@/utils/env"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 
 const console = new Logger("errorBoundary")
 
@@ -38,13 +38,13 @@ function GlobalErrorBoundary({ children }: PropsWithChildren) {
 						subTitle={
 							<Flex vertical align="center" gap={16}>
 								{error?.message}
-								<MagicButton
+								<DelightfulButton
 									type="primary"
 									style={{ width: "fit-content" }}
 									onClick={() => window.location.reload()}
 								>
 									{t("Reload")}
-								</MagicButton>
+								</DelightfulButton>
 							</Flex>
 						}
 						className={styles.container}

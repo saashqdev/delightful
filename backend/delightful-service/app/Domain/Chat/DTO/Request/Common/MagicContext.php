@@ -9,7 +9,7 @@ namespace App\Domain\Chat\DTO\Request\Common;
 
 use App\Domain\Chat\Entity\AbstractEntity;
 
-class MagicContext extends AbstractEntity
+class DelightfulContext extends AbstractEntity
 {
     /**
      * 用户当前的组织编码
@@ -23,7 +23,7 @@ class MagicContext extends AbstractEntity
 
     protected string $language = '';
 
-    protected string $superMagicAgentUserId = '';
+    protected string $superDelightfulAgentUserId = '';
 
     public function __construct(array $data)
     {
@@ -60,8 +60,8 @@ class MagicContext extends AbstractEntity
         $this->language = $language;
     }
 
-    public function getSuperMagicAgentUserId(): string
+    public function getSuperDelightfulAgentUserId(): string
     {
-        return $this->superMagicAgentUserId;
+        return $this->superDelightfulAgentUserId;
     }
 }

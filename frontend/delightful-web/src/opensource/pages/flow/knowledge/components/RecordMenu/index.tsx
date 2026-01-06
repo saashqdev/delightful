@@ -1,9 +1,9 @@
-import MagicDropdown from "@/opensource/components/base/MagicDropdown"
+import DelightfulDropdown from "@/opensource/components/base/DelightfulDropdown"
 import type { Knowledge } from "@/types/knowledge"
 import { Modal, message, type MenuProps } from "antd"
 import type React from "react"
 import { useMemo } from "react"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconTrash } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
 import { useTranslation } from "react-i18next"
@@ -49,7 +49,7 @@ export default function RecordMenu({
 						{
 							key: MenuKeys.DeleteItem,
 							label: t("common.delete", { ns: "flow" }),
-							icon: <MagicIcon component={IconTrash} size={18} />,
+							icon: <DelightfulIcon component={IconTrash} size={18} />,
 							onClick: deleteItem,
 						},
 				  ]
@@ -58,8 +58,8 @@ export default function RecordMenu({
 	}, [deleteItem, record.user_operation, t])
 
 	return (
-		<MagicDropdown trigger={["contextMenu"]} menu={{ items: menuItems }} {...props}>
+		<DelightfulDropdown trigger={["contextMenu"]} menu={{ items: menuItems }} {...props}>
 			{children}
-		</MagicDropdown>
+		</DelightfulDropdown>
 	)
 }

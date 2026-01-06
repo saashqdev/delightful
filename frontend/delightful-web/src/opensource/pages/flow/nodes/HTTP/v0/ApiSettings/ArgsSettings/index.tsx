@@ -3,15 +3,15 @@ import { useCreation, useMemoizedFn, useUpdateEffect } from "ahooks"
 import { useEffect, useMemo, useState, useRef } from "react"
 import type { Widget } from "@/types/flow"
 import type { EventEmitter } from "ahooks/lib/useEventEmitter"
-import MagicJsonSchemaEditor from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor"
-import type Schema from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
-import type { ExpressionSource } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
-import { FormItemType } from "@delightful/delightful-flow/dist/MagicExpressionWidget/types"
-import { ShowColumns } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/constants"
+import DelightfulJsonSchemaEditor from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor"
+import type Schema from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
+import type { ExpressionSource } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import { FormItemType } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/types"
+import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
 import { cx } from "antd-style"
-import { useFlowNodes } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
+import { useFlowNodes } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
 import { cloneDeep, assignIn } from "lodash-es"
-import { DisabledField } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/types/Schema"
+import { DisabledField } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/types/Schema"
 import { useTranslation } from "react-i18next"
 import { ArgsTabType } from "../types"
 import styles from "./index.module.less"
@@ -144,7 +144,7 @@ export default function ArgsSettings({
 		return (
 			<div className="api-settings-params">
 				<p className="step-title">Query</p>
-				<MagicJsonSchemaEditor
+				<DelightfulJsonSchemaEditor
 					data={
 						value?.params_query?.structure?.properties
 							? value?.params_query?.structure
@@ -160,7 +160,7 @@ export default function ArgsSettings({
 				{hasPath && (
 					<>
 						<p className="step-title no-first">Path</p>
-						<MagicJsonSchemaEditor
+						<DelightfulJsonSchemaEditor
 							data={value.params_path.structure}
 							onChange={(val) => onPathChange(val)}
 							expressionSource={expressionSource}
@@ -210,7 +210,7 @@ export default function ArgsSettings({
 					<div className={styles.selectNone}>{t("http.withoutBody", { ns: "flow" })}</div>
 				)}
 				{bodyType !== "none" && (
-					<MagicJsonSchemaEditor
+					<DelightfulJsonSchemaEditor
 						data={
 							value?.body?.structure?.properties ? value?.body?.structure : undefined
 						}
@@ -247,7 +247,7 @@ export default function ArgsSettings({
 	const HeaderComp = useMemo(() => {
 		return (
 			<div className="api-settings-headers">
-				<MagicJsonSchemaEditor
+				<DelightfulJsonSchemaEditor
 					data={
 						value?.headers?.structure?.properties
 							? value?.headers?.structure

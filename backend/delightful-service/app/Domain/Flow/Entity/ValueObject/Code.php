@@ -9,14 +9,14 @@ namespace App\Domain\Flow\Entity\ValueObject;
 
 enum Code: string
 {
-    case MagicFlow = 'DELIGHTFUL-FLOW';
-    case MagicFlowNode = 'DELIGHTFUL-FLOW-NODE';
-    case MagicFlowDraft = 'DELIGHTFUL-FLOW-DRAFT';
-    case MagicFlowVersion = 'DELIGHTFUL-FLOW-VERSION';
-    case MagicFlowApiKey = 'DELIGHTFUL-FLOW-API-KEY';
+    case DelightfulFlow = 'DELIGHTFUL-FLOW';
+    case DelightfulFlowNode = 'DELIGHTFUL-FLOW-NODE';
+    case DelightfulFlowDraft = 'DELIGHTFUL-FLOW-DRAFT';
+    case DelightfulFlowVersion = 'DELIGHTFUL-FLOW-VERSION';
+    case DelightfulFlowApiKey = 'DELIGHTFUL-FLOW-API-KEY';
     case Knowledge = 'KNOWLEDGE';
     case ApiKeySK = 'api-sk';
-    case MagicFlowToolSet = 'TOOL-SET';
+    case DelightfulFlowToolSet = 'TOOL-SET';
 
     public function gen(): string
     {

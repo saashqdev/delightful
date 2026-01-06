@@ -1,7 +1,7 @@
 import type { IconProps } from "@tabler/icons-react"
 import { memo } from "react"
 
-const IconMagicBots = memo(({ stroke = 1.5, color, size }: IconProps) => {
+const IconDelightfulBots = memo(({ stroke = 1.5, color, size }: IconProps) => {
 	return (
 		<svg width={size} height={size} viewBox="0 0 24 24" fill="none">
 			<path
@@ -14,4 +14,4 @@ const IconMagicBots = memo(({ stroke = 1.5, color, size }: IconProps) => {
 	)
 })
 
-export default IconMagicBots
+export default IconDelightfulBots

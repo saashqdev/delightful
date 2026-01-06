@@ -9,7 +9,7 @@ namespace App\Domain\MCP\Entity\ValueObject;
 
 enum Code: string
 {
-    case MagicMCPService = 'MCP';
+    case DelightfulMCPService = 'MCP';
 
     public function gen(): string
     {

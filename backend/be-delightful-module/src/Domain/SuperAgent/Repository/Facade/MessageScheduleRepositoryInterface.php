@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Domain\SuperAgent\Repository\Facade;
+namespace Delightful\SuperDelightful\Domain\SuperAgent\Repository\Facade;
 
-use Delightful\SuperMagic\Domain\SuperAgent\Entity\MessageScheduleEntity;
+use Delightful\SuperDelightful\Domain\SuperAgent\Entity\MessageScheduleEntity;
 
 /**
  * Message schedule repository interface.

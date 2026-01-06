@@ -7,9 +7,9 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Chat\Facade;
 
-use App\Application\Chat\Service\MagicEnvironmentAppService;
+use App\Application\Chat\Service\DelightfulEnvironmentAppService;
 use App\Application\Kernel\SuperPermissionEnum;
-use App\Domain\OrganizationEnvironment\Entity\MagicEnvironmentEntity;
+use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 use App\ErrorCode\ChatErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Auth\PermissionChecker;
@@ -20,35 +20,35 @@ use Hyperf\HttpServer\Contract\RequestInterface;
  * 处理与天书的组织架构同步.
  */
 #[ApiResponse('low_code')]
-class MagicEnvironmentApi extends AbstractApi
+class DelightfulEnvironmentApi extends AbstractApi
 {
     public function __construct(
-        private readonly MagicEnvironmentAppService $magicEnvironmentAppService,
+        private readonly DelightfulEnvironmentAppService $magicEnvironmentAppService,
     ) {
     }
 
-    public function getMagicEnvironments(RequestInterface $request): array
+    public function getDelightfulEnvironments(RequestInterface $request): array
     {
         $ids = $request->input('ids', []);
         $this->authCheck();
-        return $this->magicEnvironmentAppService->getMagicEnvironments($ids);
+        return $this->magicEnvironmentAppService->getDelightfulEnvironments($ids);
     }
 
-    public function createMagicEnvironment(RequestInterface $request): array
+    public function createDelightfulEnvironment(RequestInterface $request): array
     {
         $data = $request->all();
         $this->authCheck();
-        $magicEnvironmentEntity = new MagicEnvironmentEntity($data);
-        $this->magicEnvironmentAppService->createMagicEnvironment($magicEnvironmentEntity);
+        $magicEnvironmentEntity = new DelightfulEnvironmentEntity($data);
+        $this->magicEnvironmentAppService->createDelightfulEnvironment($magicEnvironmentEntity);
         return $magicEnvironmentEntity->toArray();
     }
 
-    public function updateMagicEnvironment(RequestInterface $request): array
+    public function updateDelightfulEnvironment(RequestInterface $request): array
     {
         $data = $request->all();
         $this->authCheck();
-        $magicEnvironmentEntity = new MagicEnvironmentEntity($data);
-        $this->magicEnvironmentAppService->updateMagicEnvironment($magicEnvironmentEntity);
+        $magicEnvironmentEntity = new DelightfulEnvironmentEntity($data);
+        $this->magicEnvironmentAppService->updateDelightfulEnvironment($magicEnvironmentEntity);
         return $magicEnvironmentEntity->toArray();
     }
 

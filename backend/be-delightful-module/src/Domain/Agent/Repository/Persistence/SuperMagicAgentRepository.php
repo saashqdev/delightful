@@ -5,35 +5,35 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Domain\Agent\Repository\Persistence;
+namespace Delightful\SuperDelightful\Domain\Agent\Repository\Persistence;
 
 use App\Infrastructure\Core\ValueObject\Page;
-use Delightful\SuperMagic\Domain\Agent\Entity\SuperMagicAgentEntity;
-use Delightful\SuperMagic\Domain\Agent\Entity\ValueObject\Query\SuperMagicAgentQuery;
-use Delightful\SuperMagic\Domain\Agent\Entity\ValueObject\SuperMagicAgentDataIsolation;
-use Delightful\SuperMagic\Domain\Agent\Factory\SuperMagicAgentFactory;
-use Delightful\SuperMagic\Domain\Agent\Repository\Facade\SuperMagicAgentRepositoryInterface;
-use Delightful\SuperMagic\Domain\Agent\Repository\Persistence\Model\SuperMagicAgentModel;
+use Delightful\SuperDelightful\Domain\Agent\Entity\SuperDelightfulAgentEntity;
+use Delightful\SuperDelightful\Domain\Agent\Entity\ValueObject\Query\SuperDelightfulAgentQuery;
+use Delightful\SuperDelightful\Domain\Agent\Entity\ValueObject\SuperDelightfulAgentDataIsolation;
+use Delightful\SuperDelightful\Domain\Agent\Factory\SuperDelightfulAgentFactory;
+use Delightful\SuperDelightful\Domain\Agent\Repository\Facade\SuperDelightfulAgentRepositoryInterface;
+use Delightful\SuperDelightful\Domain\Agent\Repository\Persistence\Model\SuperDelightfulAgentModel;
 
-class SuperMagicAgentRepository extends SuperMagicAbstractRepository implements SuperMagicAgentRepositoryInterface
+class SuperDelightfulAgentRepository extends SuperDelightfulAbstractRepository implements SuperDelightfulAgentRepositoryInterface
 {
-    public function getByCode(SuperMagicAgentDataIsolation $dataIsolation, string $code): ?SuperMagicAgentEntity
+    public function getByCode(SuperDelightfulAgentDataIsolation $dataIsolation, string $code): ?SuperDelightfulAgentEntity
     {
-        $builder = $this->createBuilder($dataIsolation, SuperMagicAgentModel::query());
+        $builder = $this->createBuilder($dataIsolation, SuperDelightfulAgentModel::query());
 
-        /** @var null|SuperMagicAgentModel $model */
+        /** @var null|SuperDelightfulAgentModel $model */
         $model = $builder->where('code', $code)->first();
 
         if (! $model) {
             return null;
         }
 
-        return SuperMagicAgentFactory::createEntity($model);
+        return SuperDelightfulAgentFactory::createEntity($model);
     }
 
-    public function queries(SuperMagicAgentDataIsolation $dataIsolation, SuperMagicAgentQuery $query, Page $page): array
+    public function queries(SuperDelightfulAgentDataIsolation $dataIsolation, SuperDelightfulAgentQuery $query, Page $page): array
     {
-        $builder = $this->createBuilder($dataIsolation, SuperMagicAgentModel::query());
+        $builder = $this->createBuilder($dataIsolation, SuperDelightfulAgentModel::query());
 
         if (! is_null($query->getCodes())) {
             if (empty($query->getCodes())) {
@@ -58,9 +58,9 @@ class SuperMagicAgentRepository extends SuperMagicAbstractRepository implements 
 
         $list = [];
 
-        /** @var SuperMagicAgentModel $model */
+        /** @var SuperDelightfulAgentModel $model */
         foreach ($result['list'] as $model) {
-            $entity = SuperMagicAgentFactory::createEntity($model);
+            $entity = SuperDelightfulAgentFactory::createEntity($model);
             $list[] = $entity;
         }
         $result['list'] = $list;
@@ -68,12 +68,12 @@ class SuperMagicAgentRepository extends SuperMagicAbstractRepository implements 
         return $result;
     }
 
-    public function save(SuperMagicAgentDataIsolation $dataIsolation, SuperMagicAgentEntity $entity): SuperMagicAgentEntity
+    public function save(SuperDelightfulAgentDataIsolation $dataIsolation, SuperDelightfulAgentEntity $entity): SuperDelightfulAgentEntity
     {
         if (! $entity->getId()) {
-            $model = new SuperMagicAgentModel();
+            $model = new SuperDelightfulAgentModel();
         } else {
-            $builder = $this->createBuilder($dataIsolation, SuperMagicAgentModel::query());
+            $builder = $this->createBuilder($dataIsolation, SuperDelightfulAgentModel::query());
             $model = $builder->where('id', $entity->getId())->first();
         }
 
@@ -84,15 +84,15 @@ class SuperMagicAgentRepository extends SuperMagicAbstractRepository implements 
         return $entity;
     }
 
-    public function delete(SuperMagicAgentDataIsolation $dataIsolation, string $code): bool
+    public function delete(SuperDelightfulAgentDataIsolation $dataIsolation, string $code): bool
     {
-        $builder = $this->createBuilder($dataIsolation, SuperMagicAgentModel::query());
+        $builder = $this->createBuilder($dataIsolation, SuperDelightfulAgentModel::query());
         return $builder->where('code', $code)->delete() > 0;
     }
 
-    public function countByCreator(SuperMagicAgentDataIsolation $dataIsolation, string $creator): int
+    public function countByCreator(SuperDelightfulAgentDataIsolation $dataIsolation, string $creator): int
     {
-        $builder = $this->createBuilder($dataIsolation, SuperMagicAgentModel::query());
+        $builder = $this->createBuilder($dataIsolation, SuperDelightfulAgentModel::query());
         return $builder->where('creator', $creator)->count();
     }
 }

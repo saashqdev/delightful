@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Space, Button } from "antd"
-import MagicModal from "../../components/MagicModal"
-import MagicButton from "../../components/MagicButton"
+import DelightfulModal from "../../components/DelightfulModal"
+import DelightfulButton from "../../components/DelightfulButton"
 import ComponentDemo from "./Container"
 
 const ModalDemo: React.FC = () => {
@@ -14,13 +14,13 @@ const ModalDemo: React.FC = () => {
 			<ComponentDemo
 				title="基础模态框"
 				description="最基本的模态框组件"
-				code="<MagicModal open={isOpen} onCancel={() => setIsOpen(false)} />"
+				code="<DelightfulModal open={isOpen} onCancel={() => setIsOpen(false)} />"
 			>
 				<Space>
-					<MagicButton type="primary" onClick={() => setIsModalOpen1(true)}>
+					<DelightfulButton type="primary" onClick={() => setIsModalOpen1(true)}>
 						打开基础模态框
-					</MagicButton>
-					<MagicModal
+					</DelightfulButton>
+					<DelightfulModal
 						title="基础模态框"
 						open={isModalOpen1}
 						onCancel={() => setIsModalOpen1(false)}
@@ -28,7 +28,7 @@ const ModalDemo: React.FC = () => {
 					>
 						<p>这是一个基础模态框的内容示例。</p>
 						<p>点击确定或取消按钮可以关闭模态框。</p>
-					</MagicModal>
+					</DelightfulModal>
 				</Space>
 			</ComponentDemo>
 
@@ -38,8 +38,8 @@ const ModalDemo: React.FC = () => {
 				code="width: number | string"
 			>
 				<Space>
-					<MagicButton onClick={() => setIsModalOpen2(true)}>小尺寸模态框</MagicButton>
-					<MagicModal
+					<DelightfulButton onClick={() => setIsModalOpen2(true)}>小尺寸模态框</DelightfulButton>
+					<DelightfulModal
 						title="小尺寸模态框"
 						open={isModalOpen2}
 						width={400}
@@ -47,7 +47,7 @@ const ModalDemo: React.FC = () => {
 						onOk={() => setIsModalOpen2(false)}
 					>
 						<p>这是一个宽度为400px的小尺寸模态框。</p>
-					</MagicModal>
+					</DelightfulModal>
 				</Space>
 			</ComponentDemo>
 
@@ -57,8 +57,8 @@ const ModalDemo: React.FC = () => {
 				code="footer: null"
 			>
 				<Space>
-					<MagicButton onClick={() => setIsModalOpen4(true)}>无按钮模态框</MagicButton>
-					<MagicModal
+					<DelightfulButton onClick={() => setIsModalOpen4(true)}>无按钮模态框</DelightfulButton>
+					<DelightfulModal
 						title="无按钮模态框"
 						open={isModalOpen4}
 						footer={null}
@@ -69,7 +69,7 @@ const ModalDemo: React.FC = () => {
 						<div style={{ textAlign: "right", marginTop: 16 }}>
 							<Button onClick={() => setIsModalOpen4(false)}>自定义关闭按钮</Button>
 						</div>
-					</MagicModal>
+					</DelightfulModal>
 				</Space>
 			</ComponentDemo>
 		</div>

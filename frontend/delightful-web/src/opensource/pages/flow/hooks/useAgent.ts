@@ -18,7 +18,7 @@ export default function useAgent() {
 	const defaultIcon = useBotStore((state) => state.defaultIcon.icons)
 
 	const [data, setData] = useState<Bot.Detail>({} as Bot.Detail)
-	const [magicName, setMagicName] = useState<string>("")
+	const [magicName, setDelightfulName] = useState<string>("")
 
 	const { updatePublishList, updateInstructList } = useBotStore()
 	// const { data: isBotUpdate } = useBotStore((state) => state.useIsBotUpdate)(id!)
@@ -26,7 +26,7 @@ export default function useAgent() {
 	const getBotDetail = useMemoizedFn(async (botId: string) => {
 		if (!isAgent) return
 		const res = await BotApi.getBotDetail(botId)
-		setMagicName(res.botEntity.robot_name)
+		setDelightfulName(res.botEntity.robot_name)
 		setData(res)
 		updateInstructList(res.botEntity.instructs)
 	})

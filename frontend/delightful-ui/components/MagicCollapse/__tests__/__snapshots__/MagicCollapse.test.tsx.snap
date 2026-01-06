@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MagicCollapse > 快照测试 > 基础折叠面板快照 1`] = `
+exports[`DelightfulCollapse > 快照测试 > 基础折叠面板快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r1"
@@ -47,7 +47,7 @@ exports[`MagicCollapse > 快照测试 > 基础折叠面板快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicCollapse > 快照测试 > 多个面板折叠快照 1`] = `
+exports[`DelightfulCollapse > 快照测试 > 多个面板折叠快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r2"
@@ -170,7 +170,7 @@ exports[`MagicCollapse > 快照测试 > 多个面板折叠快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicCollapse > 快照测试 > 小尺寸折叠面板快照 1`] = `
+exports[`DelightfulCollapse > 快照测试 > 小尺寸折叠面板快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost magic-collapse-small acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r7"
@@ -217,7 +217,7 @@ exports[`MagicCollapse > 快照测试 > 小尺寸折叠面板快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicCollapse > 快照测试 > 带图标面板快照 1`] = `
+exports[`DelightfulCollapse > 快照测试 > 带图标面板快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r5"
@@ -271,7 +271,7 @@ exports[`MagicCollapse > 快照测试 > 带图标面板快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicCollapse > 快照测试 > 手风琴模式快照 1`] = `
+exports[`DelightfulCollapse > 快照测试 > 手风琴模式快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r4"
@@ -357,7 +357,7 @@ exports[`MagicCollapse > 快照测试 > 手风琴模式快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicCollapse > 快照测试 > 禁用面板快照 1`] = `
+exports[`DelightfulCollapse > 快照测试 > 禁用面板快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r6"
@@ -405,7 +405,7 @@ exports[`MagicCollapse > 快照测试 > 禁用面板快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicCollapse > 快照测试 > 默认展开面板快照 1`] = `
+exports[`DelightfulCollapse > 快照测试 > 默认展开面板快照 1`] = `
 <DocumentFragment>
   <div
     class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r3"

@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Service;
 
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
-use App\Domain\Chat\Repository\Facade\MagicChatSeqRepositoryInterface;
-use App\Domain\Chat\Repository\Facade\MagicMessageRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulChatSeqRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulMessageRepositoryInterface;
 use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Hyperf\SocketIOServer\Parser\Decoder;
 use Hyperf\SocketIOServer\Parser\Encoder;
@@ -25,8 +25,8 @@ use Throwable;
 class MessageContentProvider implements MessageContentProviderInterface
 {
     public function __construct(
-        protected MagicChatSeqRepositoryInterface $seqRepository,
-        protected MagicMessageRepositoryInterface $messageRepository,
+        protected DelightfulChatSeqRepositoryInterface $seqRepository,
+        protected DelightfulMessageRepositoryInterface $messageRepository,
         protected LoggerInterface $logger
     ) {
     }
@@ -98,13 +98,13 @@ class MessageContentProvider implements MessageContentProviderInterface
 
             // 2. If it's a chat message, need to get complete content from message table
             if ($seqEntity->getSeqType() instanceof ChatMessageType) {
-                $magicMessageId = $seqEntity->getMagicMessageId();
+                $magicMessageId = $seqEntity->getDelightfulMessageId();
                 if (empty($magicMessageId)) {
                     $this->logger->warning("Empty magic_message_id for seq_id: {$seqId}");
                     return null;
                 }
 
-                $messageEntity = $this->messageRepository->getMessageByMagicMessageId($magicMessageId);
+                $messageEntity = $this->messageRepository->getMessageByDelightfulMessageId($magicMessageId);
                 if ($messageEntity === null) {
                     $this->logger->warning("Message not found for magic_message_id: {$magicMessageId}");
                     return null;

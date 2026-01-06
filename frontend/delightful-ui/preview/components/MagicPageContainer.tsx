@@ -1,5 +1,5 @@
 import React from "react"
-import MagicPageContainer from "../../components/MagicPageContainer"
+import DelightfulPageContainer from "../../components/DelightfulPageContainer"
 import ComponentDemo from "./Container"
 import { Button } from "antd"
 
@@ -9,22 +9,22 @@ const PageContainerDemo: React.FC = () => {
 			<ComponentDemo
 				title="基础页面容器"
 				description="最基本的页面容器组件"
-				code="<MagicPageContainer title='页面标题'><div>内容</div></MagicPageContainer>"
+				code="<DelightfulPageContainer title='页面标题'><div>内容</div></DelightfulPageContainer>"
 			>
-				<MagicPageContainer title="页面标题">
+				<DelightfulPageContainer title="页面标题">
 					<p>这是页面容器的内容区域。</p>
 					<p>可以包含任何React组件和内容。</p>
-				</MagicPageContainer>
+				</DelightfulPageContainer>
 			</ComponentDemo>
 
 			<ComponentDemo title="带副标题" description="支持副标题的页面容器" code="subTitle">
-				<MagicPageContainer title="页面标题" extra={<div>页面副标题</div>}>
+				<DelightfulPageContainer title="页面标题" extra={<div>页面副标题</div>}>
 					<p>这是带副标题的页面容器。</p>
-				</MagicPageContainer>
+				</DelightfulPageContainer>
 			</ComponentDemo>
 
 			<ComponentDemo title="带标签页" description="支持标签页的页面容器" code="tabList">
-				<MagicPageContainer
+				<DelightfulPageContainer
 					title="页面标题"
 					tabList={[
 						{ key: "tab1", tab: "标签1" },
@@ -33,11 +33,11 @@ const PageContainerDemo: React.FC = () => {
 					]}
 				>
 					<p>这是带标签页的页面容器。</p>
-				</MagicPageContainer>
+				</DelightfulPageContainer>
 			</ComponentDemo>
 
 			<ComponentDemo title="带操作按钮" description="支持操作按钮的页面容器" code="extra">
-				<MagicPageContainer
+				<DelightfulPageContainer
 					title="页面标题"
 					extra={[
 						<Button key="1" style={{ marginRight: 8 }}>
@@ -49,7 +49,7 @@ const PageContainerDemo: React.FC = () => {
 					]}
 				>
 					<p>这是带操作按钮的页面容器。</p>
-				</MagicPageContainer>
+				</DelightfulPageContainer>
 			</ComponentDemo>
 		</div>
 	)

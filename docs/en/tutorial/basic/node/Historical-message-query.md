@@ -1,7 +1,7 @@
 # Historical Message Query Node
 
 ## What is a Historical Message Query Node?
-The Historical Message Query Node is a functional node in Magic Flow used for retrieving historical conversation records. It acts like an intelligent memory bank that helps you extract important information from past conversations, enabling quick querying and analysis of historical interaction content.
+The Historical Message Query Node is a functional node in Delightful Flow used for retrieving historical conversation records. It acts like an intelligent memory bank that helps you extract important information from past conversations, enabling quick querying and analysis of historical interaction content.
 
 **Image Description:**
 

@@ -9,19 +9,19 @@ namespace App\Domain\Contact\Service;
 
 use App\Domain\Chat\DTO\PageResponseDTO\DepartmentUsersPageResponseDTO;
 use App\Domain\Contact\DTO\UserQueryDTO;
-use App\Domain\Contact\Entity\MagicDepartmentUserEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentUserEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Domain\Contact\Repository\Facade\MagicDepartmentUserRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulDepartmentUserRepositoryInterface;
 
-readonly class MagicDepartmentUserDomainService
+readonly class DelightfulDepartmentUserDomainService
 {
     public function __construct(
-        private MagicDepartmentUserRepositoryInterface $departmentUserRepository,
+        private DelightfulDepartmentUserRepositoryInterface $departmentUserRepository,
     ) {
     }
 
     /**
-     * @return MagicDepartmentUserEntity[]
+     * @return DelightfulDepartmentUserEntity[]
      */
     public function getDepartmentUsersByUserIds(array $userIds, DataIsolation $dataIsolation): array
     {
@@ -29,11 +29,11 @@ readonly class MagicDepartmentUserDomainService
     }
 
     /**
-     * @return MagicDepartmentUserEntity[]
+     * @return DelightfulDepartmentUserEntity[]
      */
-    public function getDepartmentUsersByUserIdsInMagic(array $userIds): array
+    public function getDepartmentUsersByUserIdsInDelightful(array $userIds): array
     {
-        return $this->departmentUserRepository->getDepartmentUsersByUserIdsInMagic($userIds);
+        return $this->departmentUserRepository->getDepartmentUsersByUserIdsInDelightful($userIds);
     }
 
     public function getDepartmentUsersByDepartmentId(UserQueryDTO $contactUserListQueryDTO, DataIsolation $dataIsolation): DepartmentUsersPageResponseDTO
@@ -79,7 +79,7 @@ readonly class MagicDepartmentUserDomainService
     }
 
     /**
-     * @return MagicDepartmentUserEntity[]
+     * @return DelightfulDepartmentUserEntity[]
      */
     public function searchDepartmentUsersByJobTitle(string $keyword, DataIsolation $dataIsolation): array
     {

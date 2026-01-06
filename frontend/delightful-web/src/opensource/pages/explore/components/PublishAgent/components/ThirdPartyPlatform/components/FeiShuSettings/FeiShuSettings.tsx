@@ -1,14 +1,14 @@
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import type { FormListOperation } from "antd"
 import { Flex, Form, Input, message, Steps } from "antd"
 import { useMemo } from "react"
 import { useMemoizedFn, useResetState, useUpdateEffect } from "ahooks"
-import MagicEllipseWithTooltip from "@/opensource/components/base/MagicEllipseWithTooltip/MagicEllipseWithTooltip"
+import DelightfulEllipseWithTooltip from "@/opensource/components/base/DelightfulEllipseWithTooltip/DelightfulEllipseWithTooltip"
 import { IconCircleCheckFilled, IconCopy, IconPointFilled } from "@tabler/icons-react"
 import { cx } from "antd-style"
 import { env } from "@/utils/env"
-import { copyToClipboard } from "@delightful/delightful-flow/dist/MagicFlow/utils"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import { copyToClipboard } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useTranslation } from "react-i18next"
 import { ThirdPartyPlatformType } from "@/types/bot"
 import { useStyles } from "./style"
@@ -135,7 +135,7 @@ export default function FeiShuSettings({ open, onClose, subOpt }: FeiShuSettings
 	})
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			width={700}
 			title={t("common.feiShuSettings", { ns: "flow" })}
 			open={open}
@@ -312,7 +312,7 @@ export default function FeiShuSettings({ open, onClose, subOpt }: FeiShuSettings
 								})}
 							</span>
 							<Flex className={styles.formInput}>
-								<MagicEllipseWithTooltip
+								<DelightfulEllipseWithTooltip
 									text={feiShuAddr}
 									maxWidth=""
 									className={styles.url}
@@ -348,7 +348,7 @@ export default function FeiShuSettings({ open, onClose, subOpt }: FeiShuSettings
 								ns: "flow",
 							})}
 						</span>
-						<MagicButton
+						<DelightfulButton
 							onClick={onClose}
 							className={styles.backBtn}
 							color="default"
@@ -357,10 +357,10 @@ export default function FeiShuSettings({ open, onClose, subOpt }: FeiShuSettings
 							{t("common.backToPublishPage", {
 								ns: "flow",
 							})}
-						</MagicButton>
+						</DelightfulButton>
 					</Flex>
 				)}
 			</Form>
-		</MagicModal>
+		</DelightfulModal>
 	)
 }

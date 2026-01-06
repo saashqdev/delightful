@@ -4,38 +4,38 @@ import { Flex } from "antd"
 import type { ComponentType, ForwardedRef } from "react"
 import { isEqual, omit } from "lodash-es"
 import { cx } from "antd-style"
-import type { MagicListItemData as MagicListItemItemType } from "./types"
-import type { MagicListItemProps } from "./MagicListItem"
-import MagicListItem from "./MagicListItem"
-import MagicEmpty from "@/opensource/components/base/MagicEmpty"
+import type { DelightfulListItemData as DelightfulListItemItemType } from "./types"
+import type { DelightfulListItemProps } from "./DelightfulListItem"
+import DelightfulListItem from "./DelightfulListItem"
+import DelightfulEmpty from "@/opensource/components/base/DelightfulEmpty"
 
-export interface MagicListProps<R extends MagicListItemItemType = MagicListItemItemType>
+export interface DelightfulListProps<R extends DelightfulListItemItemType = DelightfulListItemItemType>
 	extends Omit<FlexProps, "children"> {
 	items?: (string | R)[]
 	emptyProps?: EmptyProps
 	active?: string | ((item: R, index: number) => boolean)
 	onItemClick?: (data: R) => void
 	itemClassName?: string
-	itemClassNames?: MagicListItemProps<R>["classNames"]
-	listItemProps?: Partial<MagicListItemProps<R>>
-	listItemComponent?: ComponentType<MagicListItemProps<R>>
+	itemClassNames?: DelightfulListItemProps<R>["classNames"]
+	listItemProps?: Partial<DelightfulListItemProps<R>>
+	listItemComponent?: ComponentType<DelightfulListItemProps<R>>
 }
 
 // 优化列表项组件，确保只有在必要时才重新渲染
-type MagicListItemWrapperProps<R extends MagicListItemItemType> = {
+type DelightfulListItemWrapperProps<R extends DelightfulListItemItemType> = {
 	item: string | R
 	index: number
 	active: string | ((item: R, index: number) => boolean)
 	onItemClick?: (data: R) => void
 	itemClassName?: string
-	itemClassNames?: MagicListItemProps<R>["classNames"]
-	ListItemComponent: ComponentType<MagicListItemProps<R>>
-	listItemProps?: Partial<MagicListItemProps<R>>
+	itemClassNames?: DelightfulListItemProps<R>["classNames"]
+	ListItemComponent: ComponentType<DelightfulListItemProps<R>>
+	listItemProps?: Partial<DelightfulListItemProps<R>>
 }
 
 // 单独封装列表项组件，实现精细的重渲染控制
-function MagicListItemWrapperComponent<R extends MagicListItemItemType>(
-	props: MagicListItemWrapperProps<R>,
+function DelightfulListItemWrapperComponent<R extends DelightfulListItemItemType>(
+	props: DelightfulListItemWrapperProps<R>,
 ) {
 	const {
 		item: rawItem,
@@ -85,12 +85,12 @@ function MagicListItemWrapperComponent<R extends MagicListItemItemType>(
 }
 
 // 使用类型安全的方式创建 memo 组件
-const MagicListItemWrapper = memo(
-	MagicListItemWrapperComponent,
+const DelightfulListItemWrapper = memo(
+	DelightfulListItemWrapperComponent,
 	// 自定义比较函数，避免不必要的重渲染
-	<R extends MagicListItemItemType>(
-		prevProps: MagicListItemWrapperProps<R>,
-		nextProps: MagicListItemWrapperProps<R>,
+	<R extends DelightfulListItemItemType>(
+		prevProps: DelightfulListItemWrapperProps<R>,
+		nextProps: DelightfulListItemWrapperProps<R>,
 	) => {
 		// 如果item引用相同，直接跳过更新
 		if (prevProps.item === nextProps.item) {
@@ -126,11 +126,11 @@ const MagicListItemWrapper = memo(
 		// 默认情况下，认为组件需要更新
 		return false
 	},
-) as typeof MagicListItemWrapperComponent
+) as typeof DelightfulListItemWrapperComponent
 
-const MagicListBase = forwardRef(
-	<R extends MagicListItemItemType>(
-		props: MagicListProps<R>,
+const DelightfulListBase = forwardRef(
+	<R extends DelightfulListItemItemType>(
+		props: DelightfulListProps<R>,
 		ref: ForwardedRef<HTMLDivElement>,
 	) => {
 		const {
@@ -139,8 +139,8 @@ const MagicListBase = forwardRef(
 			onItemClick,
 			itemClassName,
 			itemClassNames,
-			listItemComponent: ListItemComponent = MagicListItem as ComponentType<
-				MagicListItemProps<R>
+			listItemComponent: ListItemComponent = DelightfulListItem as ComponentType<
+				DelightfulListItemProps<R>
 			>,
 			style,
 			emptyProps,
@@ -156,7 +156,7 @@ const MagicListBase = forwardRef(
 			if (!items || items.length === 0) return null
 
 			return items.map((item, index) => (
-				<MagicListItemWrapper<R>
+				<DelightfulListItemWrapper<R>
 					key={typeof item === "string" ? item : item.id}
 					item={item}
 					index={index}
@@ -183,7 +183,7 @@ const MagicListBase = forwardRef(
 			if (!emptyProps) return null
 
 			return (
-				<MagicEmpty
+				<DelightfulEmpty
 					className={cx(flexProps.className, emptyProps?.className)}
 					{...omit(emptyProps, "className")}
 				/>
@@ -199,6 +199,6 @@ const MagicListBase = forwardRef(
 )
 
 // 使用 memo 包装组件，提供更好的性能
-const MagicListOptimized = memo(MagicListBase) as typeof MagicListBase
+const DelightfulListOptimized = memo(DelightfulListBase) as typeof DelightfulListBase
 
-export default MagicListOptimized
+export default DelightfulListOptimized

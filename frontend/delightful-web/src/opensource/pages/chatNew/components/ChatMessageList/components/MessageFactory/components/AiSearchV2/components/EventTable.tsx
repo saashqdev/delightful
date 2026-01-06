@@ -3,7 +3,7 @@ import { Table } from "antd"
 import { memo, useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import { createStyles } from "antd-style"
-import MagicMarkdown from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown"
+import DelightfulMarkdown from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown"
 
 const useStyles = createStyles(({ css, token }) => ({
 	eventTable: css`
@@ -54,7 +54,7 @@ const EventTable = memo(({ events = [] }: { events?: AggregateAISearchCardEvent[
 				dataIndex: "name",
 				minWidth: 100,
 				render: (_: any, record: AggregateAISearchCardEvent) => {
-					return <MagicMarkdown content={record.name} />
+					return <DelightfulMarkdown content={record.name} />
 				},
 			},
 			{

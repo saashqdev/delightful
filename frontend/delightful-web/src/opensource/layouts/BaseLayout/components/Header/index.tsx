@@ -1,10 +1,10 @@
 import { Flex, Spin } from "antd"
 import { magic } from "@/enhance/magicElectron"
 import useDrag from "@/opensource/hooks/electron/useDrag"
-import { IconMagicTextLogo } from "@/enhance/tabler/icons-react"
+import { IconDelightfulTextLogo } from "@/enhance/tabler/icons-react"
 import { interfaceStore } from "@/opensource/stores/interface"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconReload } from "@tabler/icons-react"
 import { useTranslation } from "react-i18next"
 import { SettingsButton, MenuButton } from "./Button"
@@ -32,17 +32,17 @@ const Header = observer(function Header({ className }: { className?: string }) {
 				})}
 				align="center"
 			>
-				<IconMagicTextLogo size={32} className={styles.magic} />
+				<IconDelightfulTextLogo size={32} className={styles.magic} />
 				{isWebSocketConnecting && <Spin spinning size="small" />}
 				{showReloadButton && (
-					<MagicButton
+					<DelightfulButton
 						danger
 						style={{ border: "none" }}
-						icon={<MagicIcon color="currentColor" component={IconReload} size={18} />}
+						icon={<DelightfulIcon color="currentColor" component={IconReload} size={18} />}
 						onClick={() => window.location.reload()}
 					>
 						{t("networkTip.websocketReloadTip")}
-					</MagicButton>
+					</DelightfulButton>
 				)}
 			</Flex>
 			<div className={styles.wrapper}>

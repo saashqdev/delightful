@@ -1,11 +1,11 @@
-import MagicFileIcon from "@/opensource/components/base/MagicFileIcon"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulFileIcon from "@/opensource/components/base/DelightfulFileIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import UploadAction from "@/opensource/components/base/UploadAction"
 import { useUpload } from "@/opensource/hooks/useUploadFiles"
 import { formatFileSize } from "@/utils/string"
 import { IconFileUpload, IconSend, IconX, IconSchool } from "@tabler/icons-react"
 import { useDebounceFn, useMemoizedFn } from "ahooks"
-import TaskIcon from "@/opensource/pages/superMagic/assets/svg/task_mode.svg"
+import TaskIcon from "@/opensource/pages/superDelightful/assets/svg/task_mode.svg"
 import { Button, Input, message, Tooltip } from "antd"
 import { cx } from "antd-style"
 import type { TextAreaRef } from "antd/es/input/TextArea"
@@ -197,7 +197,7 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 										mouseEnterDelay={0.5}
 									>
 										<div className={styles.fileItemContent}>
-											<MagicFileIcon
+											<DelightfulFileIcon
 												type={getFileType(file?.file_name || "")}
 												size={14}
 											/>
@@ -213,7 +213,7 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 										className={styles.deleteIcon}
 										onClick={() => handleRemoveFile(file.file_key)}
 									>
-										<MagicIcon
+										<DelightfulIcon
 											component={IconX}
 											size={10}
 											stroke={2}
@@ -282,7 +282,7 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 													)}
 													onClick={() => setInputMode("chat")}
 												>
-													<MagicIcon component={IconSchool} size={16} />
+													<DelightfulIcon component={IconSchool} size={16} />
 													{"专业"}
 												</div>
 											</Tooltip>
@@ -311,7 +311,7 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 														styles.modeToggleButtonActive,
 													)}
 												>
-													<MagicIcon component={IconSchool} size={16} />
+													<DelightfulIcon component={IconSchool} size={16} />
 													{"专业"}
 												</div>
 											)}
@@ -352,7 +352,7 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 													styles.modeToggleButtonActive,
 												)}
 											>
-												<MagicIcon component={IconSchool} size={16} />
+												<DelightfulIcon component={IconSchool} size={16} />
 												{"专业"}
 											</div>
 										</Tooltip>
@@ -366,7 +366,7 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 									<Button
 										className={styles.toolBarButton}
 										onClick={trigger}
-										icon={<MagicIcon component={IconFileUpload} size={20} />}
+										icon={<DelightfulIcon component={IconFileUpload} size={20} />}
 										type="text"
 									>
 										文件
@@ -387,7 +387,7 @@ const MessagePanel: React.FC<MessagePanelProps> = ({
 									sendButtonDisabled && styles.sendButtonDisabled,
 								)}
 								type="primary"
-								icon={<MagicIcon component={IconSend} size={20} />}
+								icon={<DelightfulIcon component={IconSend} size={20} />}
 								onClick={handleSend}
 							>
 								发送

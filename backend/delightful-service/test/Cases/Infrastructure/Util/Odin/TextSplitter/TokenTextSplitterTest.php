@@ -218,7 +218,7 @@ EOT;
     {
         $text = <<<'EOT'
 测试word
-<MagicCompressibleContent Type="Image">magic_file_org/open/2c17c6393771ee3048ae34d6b380c5ec/682ea88b4a2b5.png</MagicCompressibleContent>
+<DelightfulCompressibleContent Type="Image">magic_file_org/open/2c17c6393771ee3048ae34d6b380c5ec/682ea88b4a2b5.png</DelightfulCompressibleContent>
 测试缓存
 EOT;
 
@@ -236,8 +236,8 @@ EOT;
 
         // 验证标签内容被完整保留
         $this->assertStringContainsString('测试word', $chunks[0]);
-        $this->assertStringContainsString('<MagicCompressibleContent', $chunks[0]);
-        $this->assertStringContainsString('</MagicCompressibleContent>', $chunks[0]);
+        $this->assertStringContainsString('<DelightfulCompressibleContent', $chunks[0]);
+        $this->assertStringContainsString('</DelightfulCompressibleContent>', $chunks[0]);
         $this->assertStringContainsString('测试缓存', $chunks[1]);
     }
 
@@ -245,9 +245,9 @@ EOT;
     {
         $text = <<<'EOT'
 第一段文本
-<MagicCompressibleContent Type="Image">image1.png</MagicCompressibleContent>
+<DelightfulCompressibleContent Type="Image">image1.png</DelightfulCompressibleContent>
 第二段文本
-<MagicCompressibleContent Type="Image">image2.png</MagicCompressibleContent>
+<DelightfulCompressibleContent Type="Image">image2.png</DelightfulCompressibleContent>
 第三段文本
 EOT;
 
@@ -266,7 +266,7 @@ EOT;
         // 验证所有标签内容都被完整保留
         $this->assertStringContainsString('第一段文本', $chunks[0]);
         $this->assertStringContainsString('第二段文本', $chunks[1]);
-        $this->assertStringContainsString('<MagicCompressibleContent Type="Image">image2.png</MagicCompressibleContent>', $chunks[1]);
+        $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">image2.png</DelightfulCompressibleContent>', $chunks[1]);
         $this->assertStringContainsString('第三段文本', $chunks[2]);
     }
 
@@ -274,7 +274,7 @@ EOT;
     {
         $text = <<<'EOT'
 中文测试
-<MagicCompressibleContent Type="Image">中文路径/图片.png</MagicCompressibleContent>
+<DelightfulCompressibleContent Type="Image">中文路径/图片.png</DelightfulCompressibleContent>
 继续测试
 EOT;
 
@@ -293,7 +293,7 @@ EOT;
 
         // 验证中文内容被正确处理
         $this->assertStringContainsString('中文测试', $chunks[0]);
-        $this->assertStringContainsString('<MagicCompressibleContent Type="Image">中文路径/图片.png</MagicCompressibleContent>', $chunks[0]);
+        $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">中文路径/图片.png</DelightfulCompressibleContent>', $chunks[0]);
         $this->assertStringContainsString('继续测试', $chunks[1]);
     }
 }

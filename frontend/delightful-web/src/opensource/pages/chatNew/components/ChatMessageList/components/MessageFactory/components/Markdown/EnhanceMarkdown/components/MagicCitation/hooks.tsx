@@ -1,6 +1,6 @@
 import { useContext } from "react"
-import { MagicCitationContext } from "./Provider"
+import { DelightfulCitationContext } from "./Provider"
 
-export const useMagicCitationSources = () => {
-	return useContext(MagicCitationContext)
+export const useDelightfulCitationSources = () => {
+	return useContext(DelightfulCitationContext)
 }

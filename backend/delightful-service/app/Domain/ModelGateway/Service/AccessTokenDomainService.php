@@ -11,7 +11,7 @@ use App\Domain\ModelGateway\Entity\AccessTokenEntity;
 use App\Domain\ModelGateway\Entity\ValueObject\LLMDataIsolation;
 use App\Domain\ModelGateway\Entity\ValueObject\Query\AccessTokenQuery;
 use App\Domain\ModelGateway\Repository\Facade\AccessTokenRepositoryInterface;
-use App\ErrorCode\MagicApiErrorCode;
+use App\ErrorCode\DelightfulApiErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\Page;
 
@@ -39,12 +39,12 @@ class AccessTokenDomainService extends AbstractDomainService
                 $savingAccessTokenEntity->getType(),
                 $savingAccessTokenEntity->getRelationId()
             ) > 10) {
-                ExceptionBuilder::throw(MagicApiErrorCode::USER_CREATE_ACCESS_TOKEN_LIMIT);
+                ExceptionBuilder::throw(DelightfulApiErrorCode::USER_CREATE_ACCESS_TOKEN_LIMIT);
             }
         } else {
             $accessTokenEntity = $this->accessTokenRepository->getById($dataIsolation, $savingAccessTokenEntity->getId());
             if (! $accessTokenEntity) {
-                ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.not_found', ['label' => $savingAccessTokenEntity->getId()]);
+                ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.not_found', ['label' => $savingAccessTokenEntity->getId()]);
             }
             $savingAccessTokenEntity->prepareForModification($accessTokenEntity);
         }
@@ -55,7 +55,7 @@ class AccessTokenDomainService extends AbstractDomainService
     {
         $accessTokenEntity = $this->accessTokenRepository->getById($dataIsolation, $id);
         if (! $accessTokenEntity) {
-            ExceptionBuilder::throw(MagicApiErrorCode::ValidateFailed, 'common.not_found', ['label' => $id]);
+            ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.not_found', ['label' => $id]);
         }
         return $accessTokenEntity;
     }

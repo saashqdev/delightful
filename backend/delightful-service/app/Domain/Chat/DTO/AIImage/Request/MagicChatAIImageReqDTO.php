@@ -18,7 +18,7 @@ use Exception;
 /**
  * AI文生图chat请求参数.
  */
-class MagicChatAIImageReqDTO
+class DelightfulChatAIImageReqDTO
 {
     public MessageInterface $userMessage;
 
@@ -98,7 +98,7 @@ class MagicChatAIImageReqDTO
         return $this->appMessageId;
     }
 
-    public function setAppMessageId(string $appMessageId): MagicChatAIImageReqDTO
+    public function setAppMessageId(string $appMessageId): DelightfulChatAIImageReqDTO
     {
         $this->appMessageId = $appMessageId;
         return $this;
@@ -109,7 +109,7 @@ class MagicChatAIImageReqDTO
         return $this->language;
     }
 
-    public function setLanguage(string $language): MagicChatAIImageReqDTO
+    public function setLanguage(string $language): DelightfulChatAIImageReqDTO
     {
         $this->language = $language;
         return $this;
@@ -120,7 +120,7 @@ class MagicChatAIImageReqDTO
         return $this->requestId;
     }
 
-    public function setRequestId(?string $requestId): MagicChatAIImageReqDTO
+    public function setRequestId(?string $requestId): DelightfulChatAIImageReqDTO
     {
         $this->requestId = $requestId;
         return $this;
@@ -131,7 +131,7 @@ class MagicChatAIImageReqDTO
         return $this->params;
     }
 
-    public function setParams(AIImageGenerateParamsVO $params): MagicChatAIImageReqDTO
+    public function setParams(AIImageGenerateParamsVO $params): DelightfulChatAIImageReqDTO
     {
         $this->params = $params;
         return $this;
@@ -142,7 +142,7 @@ class MagicChatAIImageReqDTO
         return $this->referenceImageIds;
     }
 
-    public function setReferenceImageIds(?array $referenceImageIds): MagicChatAIImageReqDTO
+    public function setReferenceImageIds(?array $referenceImageIds): DelightfulChatAIImageReqDTO
     {
         $this->referenceImageIds = $referenceImageIds;
         return $this;
@@ -159,7 +159,7 @@ class MagicChatAIImageReqDTO
     /**
      * @param AbstractAttachment[] $attachments
      */
-    public function setAttachments(array $attachments): MagicChatAIImageReqDTO
+    public function setAttachments(array $attachments): DelightfulChatAIImageReqDTO
     {
         $this->attachments = $attachments;
         return $this;
@@ -171,7 +171,7 @@ class MagicChatAIImageReqDTO
      */
     public function fromAttachments(
         array $attachments
-    ): MagicChatAIImageReqDTO {
+    ): DelightfulChatAIImageReqDTO {
         $referenceImageIds = array_filter(array_map(fn ($attachment) => $attachment->getChatFileId(), $attachments));
         $this->referenceImageIds = array_merge($referenceImageIds, $this->referenceImageIds ?? []);
         return $this;
@@ -182,7 +182,7 @@ class MagicChatAIImageReqDTO
         return $this->referMessageId;
     }
 
-    public function setReferMessageId(string $referMessageId): MagicChatAIImageReqDTO
+    public function setReferMessageId(string $referMessageId): DelightfulChatAIImageReqDTO
     {
         $this->referMessageId = $referMessageId;
         return $this;
@@ -193,7 +193,7 @@ class MagicChatAIImageReqDTO
         return $this->referText;
     }
 
-    public function setReferText(?string $referText): MagicChatAIImageReqDTO
+    public function setReferText(?string $referText): DelightfulChatAIImageReqDTO
     {
         $this->referText = $referText;
         return $this;

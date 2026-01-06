@@ -7,26 +7,26 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Factory;
 
-use App\Domain\Flow\Entity\MagicFlowEntity;
+use App\Domain\Flow\Entity\DelightfulFlowEntity;
 use App\Domain\Flow\Entity\ValueObject\ConstValue;
 use App\Domain\Flow\Entity\ValueObject\Node;
 use App\Domain\Flow\Entity\ValueObject\NodeInput;
 use App\Domain\Flow\Entity\ValueObject\NodeOutput;
 use App\Domain\Flow\Entity\ValueObject\Type;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowModel;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowModel;
 use DateTime;
 use Delightful\FlowExprEngine\ComponentFactory;
 
-class MagicFlowFactory
+class DelightfulFlowFactory
 {
-    public static function modelToEntity(MagicFlowModel $magicFlowModel): MagicFlowEntity
+    public static function modelToEntity(DelightfulFlowModel $magicFlowModel): DelightfulFlowEntity
     {
         return self::arrayToEntity($magicFlowModel->toArray(), 'v0');
     }
 
-    public static function arrayToEntity(array $magicFlowArray, string $defaultNodeVersion = ''): MagicFlowEntity
+    public static function arrayToEntity(array $magicFlowArray, string $defaultNodeVersion = ''): DelightfulFlowEntity
     {
-        $magicFlowEntity = new MagicFlowEntity();
+        $magicFlowEntity = new DelightfulFlowEntity();
 
         $magicFlowEntity->setId($magicFlowArray['id']);
         $magicFlowEntity->setCode($magicFlowArray['code']);

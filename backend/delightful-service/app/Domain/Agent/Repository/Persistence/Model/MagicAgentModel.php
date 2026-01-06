@@ -15,7 +15,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
 /**
  * @property string $id
  */
-class MagicAgentModel extends Model
+class DelightfulAgentModel extends Model
 {
     use Snowflake;
     use SoftDeletes;
@@ -60,6 +60,6 @@ class MagicAgentModel extends Model
 
     public function lastVersionInfo(): HasOne
     {
-        return $this->hasOne(MagicAgentVersionModel::class, 'id', 'bot_version_id');
+        return $this->hasOne(DelightfulAgentVersionModel::class, 'id', 'bot_version_id');
     }
 }

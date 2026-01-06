@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react"
 import { Flex, type TableProps } from "antd"
-import MagicTable from "@/opensource/components/base/MagicTable"
+import DelightfulTable from "@/opensource/components/base/DelightfulTable"
 import type { Knowledge } from "@/types/knowledge"
 import { createStyles } from "antd-style"
-import MagicSearch from "@/opensource/components/base/MagicSearch"
-import MagicSpin from "@/opensource/components/base/MagicSpin"
+import DelightfulSearch from "@/opensource/components/base/DelightfulSearch"
+import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { useMemoizedFn, useMount } from "ahooks"
 import { set, has } from "lodash-es"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconDotsVertical } from "@tabler/icons-react"
 import { useNavigate } from "@/opensource/hooks/useNavigate"
 import { RoutePath } from "@/const/routes"
@@ -135,7 +135,7 @@ export default function FlowKnowledge() {
 							record={record as Knowledge.KnowledgeItem}
 							trigger={["click"]}
 						>
-							<MagicIcon
+							<DelightfulIcon
 								size={18}
 								component={IconDotsVertical}
 								onClick={(e) => e.stopPropagation()}
@@ -181,14 +181,14 @@ export default function FlowKnowledge() {
 			<Flex align="center" justify="space-between" className={styles.top}>
 				<Flex align="center" gap={22}>
 					<h2 className={styles.title}>{t("knowledgeDatabase.mine", { ns: "flow" })}</h2>
-					<MagicSearch className={styles.search} />
+					<DelightfulSearch className={styles.search} />
 				</Flex>
 				<Flex align="center">
 					<UpdateKnowledge initKnowledgeList={initKnowledgeList} />
 				</Flex>
 			</Flex>
-			<MagicSpin section spinning={false} wrapperClassName={styles.wrapper}>
-				<MagicTable<Knowledge.KnowledgeItem>
+			<DelightfulSpin section spinning={false} wrapperClassName={styles.wrapper}>
+				<DelightfulTable<Knowledge.KnowledgeItem>
 					pagination={false}
 					columns={columns}
 					rowKey={(record) => record.id}
@@ -199,7 +199,7 @@ export default function FlowKnowledge() {
 						},
 					}}
 				/>
-			</MagicSpin>
+			</DelightfulSpin>
 		</Flex>
 	)
 }

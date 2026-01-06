@@ -7,20 +7,20 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Application\Flow\ExecuteManager\NodeRunner\ReplyMessage\Struct;
 
-use App\Application\Flow\ExecuteManager\NodeRunner\ReplyMessage\Struct\MagicStreamTextProcessor;
+use App\Application\Flow\ExecuteManager\NodeRunner\ReplyMessage\Struct\DelightfulStreamTextProcessor;
 use HyperfTest\Cases\Application\Flow\ExecuteManager\ExecuteManagerBaseTest;
 
 /**
  * @internal
  */
-class MagicStreamTextProcessorTest extends ExecuteManagerBaseTest
+class DelightfulStreamTextProcessorTest extends ExecuteManagerBaseTest
 {
     public function testNormal()
     {
         $text = '123456';
         $length = strlen($text);
         $result = [];
-        $processor = new MagicStreamTextProcessor(function (string $data) use (&$result) {
+        $processor = new DelightfulStreamTextProcessor(function (string $data) use (&$result) {
             $result[] = $data;
         });
         $processor->start();
@@ -34,10 +34,10 @@ class MagicStreamTextProcessorTest extends ExecuteManagerBaseTest
 
     public function testImage()
     {
-        $text = '12<MagicImage>cp_67b5aac969f26</MagicImage>34';
+        $text = '12<DelightfulImage>cp_67b5aac969f26</DelightfulImage>34';
         $length = strlen($text);
         $result = [];
-        $processor = new MagicStreamTextProcessor(function (string $data, array $compressibleContent) use (&$result) {
+        $processor = new DelightfulStreamTextProcessor(function (string $data, array $compressibleContent) use (&$result) {
             $result[] = $data;
             if (! empty($compressibleContent)) {
                 var_dump($compressibleContent);
@@ -50,15 +50,15 @@ class MagicStreamTextProcessorTest extends ExecuteManagerBaseTest
             $processor->process($current);
         }
         $processor->end();
-        $this->assertEquals(['1', '2', '<MagicImage>cp_67b5aac969f26</MagicImage>', '3', '4'], $result);
+        $this->assertEquals(['1', '2', '<DelightfulImage>cp_67b5aac969f26</DelightfulImage>', '3', '4'], $result);
     }
 
     public function testVideo()
     {
-        $text = '<MagicVideo>cp_67b5aac969f26</MagicVideo>gg';
+        $text = '<DelightfulVideo>cp_67b5aac969f26</DelightfulVideo>gg';
         $length = strlen($text);
         $result = [];
-        $processor = new MagicStreamTextProcessor(function (string $data, array $compressibleContent) use (&$result) {
+        $processor = new DelightfulStreamTextProcessor(function (string $data, array $compressibleContent) use (&$result) {
             $result[] = $data;
             if (! empty($compressibleContent)) {
                 var_dump($compressibleContent);
@@ -71,15 +71,15 @@ class MagicStreamTextProcessorTest extends ExecuteManagerBaseTest
             $processor->process($current);
         }
         $processor->end();
-        $this->assertEquals(['<MagicVideo>cp_67b5aac969f26</MagicVideo>', 'g', 'g'], $result);
+        $this->assertEquals(['<DelightfulVideo>cp_67b5aac969f26</DelightfulVideo>', 'g', 'g'], $result);
     }
 
     public function testError()
     {
-        $text = '<MagicV>v<>xr';
+        $text = '<DelightfulV>v<>xr';
         $length = strlen($text);
         $result = [];
-        $processor = new MagicStreamTextProcessor(function (string $data) use (&$result) {
+        $processor = new DelightfulStreamTextProcessor(function (string $data) use (&$result) {
             $result[] = $data;
         });
         $processor->start();
@@ -88,15 +88,15 @@ class MagicStreamTextProcessorTest extends ExecuteManagerBaseTest
             $processor->process($current);
         }
         $processor->end();
-        $this->assertEquals(['<MagicV>v<>xr'], $result);
+        $this->assertEquals(['<DelightfulV>v<>xr'], $result);
     }
 
     public function testMaxLength()
     {
-        $text = '<MagicVideo>v<>xr111111111112222222333444</MagicVideo>';
+        $text = '<DelightfulVideo>v<>xr111111111112222222333444</DelightfulVideo>';
         $length = strlen($text);
         $result = [];
-        $processor = new MagicStreamTextProcessor(function (string $data) use (&$result) {
+        $processor = new DelightfulStreamTextProcessor(function (string $data) use (&$result) {
             $result[] = $data;
         });
         $processor->start();
@@ -105,15 +105,15 @@ class MagicStreamTextProcessorTest extends ExecuteManagerBaseTest
             $processor->process($current);
         }
         $processor->end();
-        $this->assertEquals(['<MagicVideo>v<>xr111111111112222222333444</Mag', 'i', 'c', 'V', 'i', 'd', 'e', 'o', '>'], $result);
+        $this->assertEquals(['<DelightfulVideo>v<>xr111111111112222222333444</Mag', 'i', 'c', 'V', 'i', 'd', 'e', 'o', '>'], $result);
     }
 
     public function testMixedTags()
     {
-        $text = '1<MagicImage>cp_67b5aac969f26</MagicImage>3<MagicVideo>cp_67b5aac969f26</MagicVideo>5';
+        $text = '1<DelightfulImage>cp_67b5aac969f26</DelightfulImage>3<DelightfulVideo>cp_67b5aac969f26</DelightfulVideo>5';
         $length = strlen($text);
         $result = [];
-        $processor = new MagicStreamTextProcessor(function (string $data) use (&$result) {
+        $processor = new DelightfulStreamTextProcessor(function (string $data) use (&$result) {
             $result[] = $data;
         });
         $processor->start();
@@ -122,14 +122,14 @@ class MagicStreamTextProcessorTest extends ExecuteManagerBaseTest
             $processor->process($current);
         }
         $processor->end();
-        $this->assertEquals(['1', '<MagicImage>cp_67b5aac969f26</MagicImage>', '3', '<MagicVideo>cp_67b5aac969f26</MagicVideo>', '5'], $result);
+        $this->assertEquals(['1', '<DelightfulImage>cp_67b5aac969f26</DelightfulImage>', '3', '<DelightfulVideo>cp_67b5aac969f26</DelightfulVideo>', '5'], $result);
     }
 
     public function testMore()
     {
-        $text = ['1', '2 <M', 'agicImage>cp_67b5aac969f26</MagicImage>', '3', '<MagicVideo>cp_67b5aac969f26</MagicVideo>', '5'];
+        $text = ['1', '2 <M', 'agicImage>cp_67b5aac969f26</DelightfulImage>', '3', '<DelightfulVideo>cp_67b5aac969f26</DelightfulVideo>', '5'];
 
-        $processor = new MagicStreamTextProcessor(function (string $data) use (&$result) {
+        $processor = new DelightfulStreamTextProcessor(function (string $data) use (&$result) {
             $result[] = $data;
         });
         $processor->start();
@@ -137,13 +137,13 @@ class MagicStreamTextProcessorTest extends ExecuteManagerBaseTest
             $processor->process($current);
         }
         $processor->end();
-        $this->assertEquals(['1', '2', ' ', '<MagicImage>cp_67b5aac969f26</MagicImage>', '3', '<MagicVideo>cp_67b5aac969f26</MagicVideo>', '5'], $result);
+        $this->assertEquals(['1', '2', ' ', '<DelightfulImage>cp_67b5aac969f26</DelightfulImage>', '3', '<DelightfulVideo>cp_67b5aac969f26</DelightfulVideo>', '5'], $result);
     }
 
     public function testHtml()
     {
         $text = ['<title>管理', 'bb</title>'];
-        $processor = new MagicStreamTextProcessor(function (string $data) use (&$result) {
+        $processor = new DelightfulStreamTextProcessor(function (string $data) use (&$result) {
             $result[] = $data;
         });
         $processor->start();
@@ -156,9 +156,9 @@ class MagicStreamTextProcessorTest extends ExecuteManagerBaseTest
 
     public function testMultibyteCharacters()
     {
-        $text = ['Hello ', '👋 ', '世界', '<MagicImage>cp_67b5aac969f26</MagicImage>', '🌍'];
+        $text = ['Hello ', '👋 ', '世界', '<DelightfulImage>cp_67b5aac969f26</DelightfulImage>', '🌍'];
         $result = [];
-        $processor = new MagicStreamTextProcessor(function (string $data) use (&$result) {
+        $processor = new DelightfulStreamTextProcessor(function (string $data) use (&$result) {
             $result[] = $data;
         });
         $processor->start();
@@ -170,7 +170,7 @@ class MagicStreamTextProcessorTest extends ExecuteManagerBaseTest
             'Hello ',
             '👋 ',
             '世界',
-            '<MagicImage>cp_67b5aac969f26</MagicImage>',
+            '<DelightfulImage>cp_67b5aac969f26</DelightfulImage>',
             '🌍',
         ], $result);
     }

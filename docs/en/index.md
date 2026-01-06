@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "Magic"
+  name: "Delightful"
   text: "The New Generation Enterprise-level AI Application Innovation Engine"
   tagline: Easily build powerful AI applications
   actions:
@@ -17,7 +17,7 @@ hero:
 # features:
 #   - icon: 🚀
 #     title: Fast and Efficient
-#     details: With performance as its core, Magic Docs provides lightning-fast documentation sites.
+#     details: With performance as its core, Delightful Docs provides lightning-fast documentation sites.
 #   - icon: 🎨
 #     title: Beautiful Design
 #     details: Modern and clean design that displays perfectly on all devices.

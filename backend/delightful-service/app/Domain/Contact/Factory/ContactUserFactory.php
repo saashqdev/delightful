@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Factory;
 
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Contact\Repository\Persistence\Model\UserModel;
 use App\Interfaces\Chat\Assembler\UserAssembler;
 
 class ContactUserFactory
 {
-    public static function createByModel(UserModel $userModel): MagicUserEntity
+    public static function createByModel(UserModel $userModel): DelightfulUserEntity
     {
         $user = $userModel->toArray();
         return UserAssembler::getUserEntity($user);

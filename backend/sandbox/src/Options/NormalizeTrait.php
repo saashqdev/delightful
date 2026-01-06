@@ -66,11 +66,11 @@ trait NormalizeTrait
      *
      * @return array|string Returns the normalized magic constant string or an array of normalized strings
      */
-    protected function normalizeMagicConst($name)
+    protected function normalizeDelightfulConst($name)
     {
         if (is_array($name)) {
             foreach ($name as &$value) {
-                $value = $this->normalizeMagicConst($value);
+                $value = $this->normalizeDelightfulConst($value);
             }
             return $name;
         }

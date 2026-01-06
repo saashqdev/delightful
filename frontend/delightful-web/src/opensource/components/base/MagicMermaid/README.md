@@ -1,6 +1,6 @@
-# MagicMermaid 魔法流程图组件
+# DelightfulMermaid 魔法流程图组件
 
-`MagicMermaid` 是一个基于 mermaid.js 的流程图渲染组件，支持将 mermaid 语法的文本转换为可视化的流程图、时序图、甘特图等图表。
+`DelightfulMermaid` 是一个基于 mermaid.js 的流程图渲染组件，支持将 mermaid 语法的文本转换为可视化的流程图、时序图、甘特图等图表。
 
 ## 属性
 
@@ -11,10 +11,10 @@
 ## 基础用法
 
 ```tsx
-import { MagicMermaid } from '@/components/base/MagicMermaid';
+import { DelightfulMermaid } from '@/components/base/DelightfulMermaid';
 
 // 基础流程图
-<MagicMermaid
+<DelightfulMermaid
   data={`
     graph TD
     A[开始] --> B{判断}
@@ -25,7 +25,7 @@ import { MagicMermaid } from '@/components/base/MagicMermaid';
 />
 
 // 时序图
-<MagicMermaid
+<DelightfulMermaid
   data={`
     sequenceDiagram
     参与者A->>参与者B: 你好，B！
@@ -34,7 +34,7 @@ import { MagicMermaid } from '@/components/base/MagicMermaid';
 />
 
 // 甘特图
-<MagicMermaid
+<DelightfulMermaid
   data={`
     gantt
     title 项目计划
@@ -49,7 +49,7 @@ import { MagicMermaid } from '@/components/base/MagicMermaid';
 />
 
 // 类图
-<MagicMermaid
+<DelightfulMermaid
   data={`
     classDiagram
     类A <|-- 类B
@@ -60,7 +60,7 @@ import { MagicMermaid } from '@/components/base/MagicMermaid';
 />
 
 // 状态图
-<MagicMermaid
+<DelightfulMermaid
   data={`
     stateDiagram-v2
     [*] --> 状态1
@@ -86,4 +86,4 @@ import { MagicMermaid } from '@/components/base/MagicMermaid';
 -   需要在 Markdown 内容中展示复杂图表时
 -   需要创建可交互的图表展示时
 
-MagicMermaid 组件让你的流程图、关系图等可视化内容展示更加直观和专业，适合在各种需要图表可视化的场景下使用。
+DelightfulMermaid 组件让你的流程图、关系图等可视化内容展示更加直观和专业，适合在各种需要图表可视化的场景下使用。

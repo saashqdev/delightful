@@ -15,7 +15,7 @@ use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\MCP\Server\Handler\MCPHandler;
 use App\Infrastructure\Core\MCP\Server\Transport\SSETransport;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Qbhy\HyperfAuth\Authenticatable;
 
@@ -66,7 +66,7 @@ class MCPServerSSEApi
         if ($apiKeyEntity->getRelType() !== ApiKeyProviderType::MCP || $apiKeyEntity->getRelCode() !== $code) {
             ExceptionBuilder::throw(GenericErrorCode::ParameterValidationFailed, 'common.invalid', ['label' => 'api_key']);
         }
-        $authorization = new MagicUserAuthorization();
+        $authorization = new DelightfulUserAuthorization();
         $authorization->setId($apiKeyEntity->getCreator());
         $authorization->setOrganizationCode($apiKeyEntity->getOrganizationCode());
         $authorization->setUserType(UserType::Human);

@@ -8,23 +8,23 @@ declare(strict_types=1);
 namespace App\Application\Chat\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation as ContactDataIsolation;
-use App\Domain\Contact\Service\MagicAccountDomainService;
-use App\Domain\Contact\Service\MagicDepartmentDomainService;
-use App\Domain\Contact\Service\MagicDepartmentUserDomainService;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulAccountDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentDomainService;
+use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 
 /**
- * Magic用户信息应用服务.
+ * Delightful用户信息应用服务.
  *
  * 聚合用户的基本信息、账户信息和部门信息，提供完整的用户信息。
  */
-class MagicUserInfoAppService extends AbstractAppService
+class DelightfulUserInfoAppService extends AbstractAppService
 {
     public function __construct(
-        protected readonly MagicUserDomainService $userDomainService,
-        protected readonly MagicAccountDomainService $accountDomainService,
-        protected readonly MagicDepartmentUserDomainService $departmentUserDomainService,
-        protected readonly MagicDepartmentDomainService $departmentDomainService,
+        protected readonly DelightfulUserDomainService $userDomainService,
+        protected readonly DelightfulAccountDomainService $accountDomainService,
+        protected readonly DelightfulDepartmentUserDomainService $departmentUserDomainService,
+        protected readonly DelightfulDepartmentDomainService $departmentDomainService,
     ) {
     }
 
@@ -45,8 +45,8 @@ class MagicUserInfoAppService extends AbstractAppService
 
         // 获取账户信息
         $accountEntity = null;
-        if ($userEntity->getMagicId()) {
-            $accountEntity = $this->accountDomainService->getAccountInfoByMagicId($userEntity->getMagicId());
+        if ($userEntity->getDelightfulId()) {
+            $accountEntity = $this->accountDomainService->getAccountInfoByDelightfulId($userEntity->getDelightfulId());
         }
 
         // 获取部门用户关联信息

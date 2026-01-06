@@ -8,26 +8,26 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Repository\Facade;
 
 use App\Domain\Chat\DTO\PageResponseDTO\DepartmentsPageResponseDTO;
-use App\Domain\Contact\Entity\MagicDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentEntity;
 use App\Domain\Contact\Entity\ValueObject\DepartmentOption;
 use JetBrains\PhpStorm\ArrayShape;
 
-interface MagicDepartmentRepositoryInterface
+interface DelightfulDepartmentRepositoryInterface
 {
-    public function getDepartmentById(string $departmentId, string $organizationCode): ?MagicDepartmentEntity;
+    public function getDepartmentById(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity;
 
     // 获取父部门下的一个子部门
-    public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?MagicDepartmentEntity;
+    public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity;
 
     /**
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
     public function getDepartmentsByIds(array $departmentIds, string $organizationCode, bool $keyById = false): array;
 
     /**
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
-    public function getDepartmentsByIdsInMagic(array $departmentIds, bool $keyById = false): array;
+    public function getDepartmentsByIdsInDelightful(array $departmentIds, bool $keyById = false): array;
 
     /**
      * 批量获取部门的下n级部门.
@@ -48,13 +48,13 @@ interface MagicDepartmentRepositoryInterface
     public function hasChildDepartment(array $departmentIds, string $organizationCode): array;
 
     /**
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
     public function searchDepartments(string $departmentName, string $organizationCode, string $pageToken = '', ?int $pageSize = null): array;
 
     /**
      * 获取组织的所有部门.
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
     public function getOrganizationDepartments(string $organizationCode, array $fields = ['*'], bool $keyById = false): array;
 
@@ -66,11 +66,11 @@ interface MagicDepartmentRepositoryInterface
     /**
      * 获取部门的所有子部门的成员总数.
      */
-    public function getSelfAndChildrenEmployeeSum(MagicDepartmentEntity $magicDepartmentEntity): int;
+    public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $magicDepartmentEntity): int;
 
     /**
-     * @param MagicDepartmentEntity[] $magicDepartmentsDTO
-     * @return MagicDepartmentEntity[]
+     * @param DelightfulDepartmentEntity[] $magicDepartmentsDTO
+     * @return DelightfulDepartmentEntity[]
      */
     public function createDepartments(array $magicDepartmentsDTO): array;
 
@@ -91,7 +91,7 @@ interface MagicDepartmentRepositoryInterface
     /**
      * 批量获取多个组织的根部门信息.
      * @param array $organizationCodes 组织代码数组
-     * @return MagicDepartmentEntity[] 根部门实体数组
+     * @return DelightfulDepartmentEntity[] 根部门实体数组
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array;
 

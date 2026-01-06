@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Infrastructure\Utils;
+namespace Delightful\SuperDelightful\Infrastructure\Utils;
 
 /**
  * Content-Type utility for file type detection and browser behavior control.

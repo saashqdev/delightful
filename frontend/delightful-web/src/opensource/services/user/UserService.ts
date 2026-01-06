@@ -28,7 +28,7 @@ import { BroadcastChannelSender } from "@/opensource/broadcastChannel"
 const console = new Logger("UserService")
 
 export interface OrganizationResponse {
-	magicOrganizationMap: Record<string, User.MagicOrganization>
+	magicOrganizationMap: Record<string, User.DelightfulOrganization>
 	organizations?: Array<User.UserOrganization>
 	/** magic 生态下的组织Code */
 	organizationCode?: string
@@ -190,7 +190,7 @@ export class UserService {
 		fallbackUserInfo: User.UserInfo,
 	) => {
 		try {
-			this.setMagicOrganizationCode(magic_organization_code)
+			this.setDelightfulOrganizationCode(magic_organization_code)
 
 			// 拉取用户信息
 			const { items } = await this.contactApi.getUserInfos({
@@ -216,12 +216,12 @@ export class UserService {
 		} catch (err) {
 			console.error(err)
 			// 切换失败，恢复当前组织
-			this.setMagicOrganizationCode(fallbackUserInfo?.organization_code)
+			this.setDelightfulOrganizationCode(fallbackUserInfo?.organization_code)
 			this.setUserInfo(fallbackUserInfo)
 		}
 	}
 
-	setMagicOrganizationCode(organizationCode: string) {
+	setDelightfulOrganizationCode(organizationCode: string) {
 		const user = new UserRepository()
 		const { magicOrganizationMap } = userStore.user
 		const teamshareOrgCode =
@@ -299,7 +299,7 @@ export class UserService {
 
 			if (magic_user_id && magic_organization_code) {
 				// 同步用户对应组织
-				this.setMagicOrganizationCode(magic_organization_code)
+				this.setDelightfulOrganizationCode(magic_organization_code)
 				// Step 1: 环境同步
 				await this.service
 					.get<LoginService>("loginService")

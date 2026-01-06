@@ -15,7 +15,7 @@ use App\Domain\KnowledgeBase\Entity\ValueObject\DocumentFile\Interfaces\ThirdPla
 use App\Domain\KnowledgeBase\Entity\ValueObject\DocumentFile\ThirdPlatformDocumentFile;
 use App\ErrorCode\FlowErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\KnowledgeBase\DTO\DocumentFile\DocumentFileDTOInterface;
 use App\Interfaces\KnowledgeBase\DTO\DocumentFile\ExternalDocumentFileDTO;
 use App\Interfaces\KnowledgeBase\DTO\DocumentFile\ThirdPlatformDocumentFileDTO;
@@ -35,7 +35,7 @@ class KnowledgeBaseDocumentAssembler
     /**
      * 从创建DTO创建实体.
      */
-    public static function createDTOToEntity(CreateDocumentRequestDTO $dto, MagicUserAuthorization $auth): KnowledgeBaseDocumentEntity
+    public static function createDTOToEntity(CreateDocumentRequestDTO $dto, DelightfulUserAuthorization $auth): KnowledgeBaseDocumentEntity
     {
         $data = $dto->toArray();
         $data['created_uid'] = $auth->getId();
@@ -48,7 +48,7 @@ class KnowledgeBaseDocumentAssembler
     /**
      * 从更新DTO创建实体.
      */
-    public static function updateDTOToEntity(UpdateDocumentRequestDTO $dto, MagicUserAuthorization $auth): KnowledgeBaseDocumentEntity
+    public static function updateDTOToEntity(UpdateDocumentRequestDTO $dto, DelightfulUserAuthorization $auth): KnowledgeBaseDocumentEntity
     {
         $data = $dto->toArray();
         $data['updated_uid'] = $auth->getId();

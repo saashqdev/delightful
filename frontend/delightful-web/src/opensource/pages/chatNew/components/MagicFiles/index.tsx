@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next"
 import { Flex, Skeleton } from "antd"
 import { IconDownload, IconEye } from "@tabler/icons-react"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { calculateRelativeSize } from "@/utils/styles"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import type { ConversationMessageAttachment } from "@/types/chat/conversation_message"
 import FileIcon from "@/opensource/components/business/FileIcon"
 import { useMemo } from "react"
@@ -14,20 +14,20 @@ import { IMAGE_EXTENSIONS } from "@/const/file"
 import { useConversationMessage } from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageItem/components/ConversationMessageProvider/hooks"
 import useChatFileUrls from "@/opensource/hooks/chat/useChatFileUrls"
 import MessageFilePreviewService from "@/opensource/services/chat/message/MessageFilePreview"
-import ImageWrapper from "@/opensource/components/base/MagicImagePreview/components/ImageWrapper"
+import ImageWrapper from "@/opensource/components/base/DelightfulImagePreview/components/ImageWrapper"
 import ConversationStore from "@/opensource/stores/chatNew/conversation"
 import { useFontSize } from "@/opensource/providers/AppearanceProvider/hooks"
 import { useStyles } from "./style"
 import Attachments from "./Attachments"
 import { observer } from "mobx-react-lite"
 
-interface MagicFileProps {
+interface DelightfulFileProps {
 	data?: ConversationMessageAttachment[]
 	messageId: string
 	display?: boolean // 是否显示
 }
 
-const MagicFiles = observer(({ data, messageId, display = true }: MagicFileProps) => {
+const DelightfulFiles = observer(({ data, messageId, display = true }: DelightfulFileProps) => {
 	const { t } = useTranslation("interface")
 	const { fontSize, buttonSize } = useFontSize()
 	const { isUnReceived } = useConversationMessage()
@@ -131,7 +131,7 @@ const MagicFiles = observer(({ data, messageId, display = true }: MagicFileProps
 				</Flex>
 			</Flex>
 			<Flex className={styles.footer}>
-				<MagicButton
+				<DelightfulButton
 					type="text"
 					block
 					hidden={!MessageFilePreviewService.canPreview(dataFirst)}
@@ -141,15 +141,15 @@ const MagicFiles = observer(({ data, messageId, display = true }: MagicFileProps
 					onClick={() => onPreview(dataFirst)}
 				>
 					<Flex align="center" justify="center" gap={4}>
-						<MagicIcon
+						<DelightfulIcon
 							component={IconEye}
 							color="currentColor"
 							size={calculateRelativeSize(18, fontSize)}
 						/>
 						{t("chat.file.preview")}
 					</Flex>
-				</MagicButton>
-				<MagicButton
+				</DelightfulButton>
+				<DelightfulButton
 					type="text"
 					block
 					className={styles.button}
@@ -158,15 +158,15 @@ const MagicFiles = observer(({ data, messageId, display = true }: MagicFileProps
 					onClick={() => onDownload(dataFirst.file_id)}
 				>
 					<Flex align="center" justify="center" gap={4}>
-						<MagicIcon
+						<DelightfulIcon
 							component={IconDownload}
 							color="currentColor"
 							size={calculateRelativeSize(18, fontSize)}
 						/>
 						{t("chat.file.download")}
 					</Flex>
-				</MagicButton>
-				{/* <MagicButton
+				</DelightfulButton>
+				{/* <DelightfulButton
 					type="text"
 					block
 					className={styles.button}
@@ -174,17 +174,17 @@ const MagicFiles = observer(({ data, messageId, display = true }: MagicFileProps
 					disabled={loading}
 				>
 					<Flex align="center" justify="center" gap={4}>
-						<MagicIcon
+						<DelightfulIcon
 							component={IconDeviceFloppy}
 							color="currentColor"
 							size={calculateRelativeSize(18, fontSize)}
 						/>
 						{t("chat.file.saveTo")}
 					</Flex>
-				</MagicButton> */}
+				</DelightfulButton> */}
 			</Flex>
 		</Flex>
 	)
 })
 
-export default MagicFiles
+export default DelightfulFiles

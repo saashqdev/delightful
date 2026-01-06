@@ -1,6 +1,6 @@
-import { SchemaMobxContext } from "@/MagicJsonSchemaEditor"
-import Schema from "@/MagicJsonSchemaEditor/types/Schema"
-import MagicInput from "@/common/BaseUI/Input"
+import { SchemaMobxContext } from "@/DelightfulJsonSchemaEditor"
+import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
+import DelightfulInput from "@/common/BaseUI/Input"
 import { Cascader, Form, Modal, Select, Tooltip, message } from "antd"
 import { IconFileImport } from "@tabler/icons-react"
 import { useMemoizedFn, useUpdateEffect } from "ahooks"
@@ -161,7 +161,7 @@ export default function IconImport({ onImport }: IconImportProps) {
 						name="content"
 						label={i18next.t("jsonSchema.importContent", { ns: "magicFlow" })}
 					>
-						<MagicInput.TextArea
+						<DelightfulInput.TextArea
 							style={{ minHeight: "138px" }}
 							placeholder={i18next.t("jsonSchema.importContentPlaceholder", {
 								ns: "magicFlow",

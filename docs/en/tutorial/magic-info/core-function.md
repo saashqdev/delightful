@@ -1,8 +1,8 @@
-# Magic - AI Application Development Platform
+# Delightful - AI Application Development Platform
 
 ## 1. Real-time Chat
 
-Magic platform's enterprise internal chat feature supports multiple users online simultaneously, with an intuitive interface similar to WeChat, making it easy for employees to get started. Whether it's one-on-one private communication or group discussions with multiple participants, conversations can be initiated instantly.
+Delightful platform's enterprise internal chat feature supports multiple users online simultaneously, with an intuitive interface similar to WeChat, making it easy for employees to get started. Whether it's one-on-one private communication or group discussions with multiple participants, conversations can be initiated instantly.
 
 In terms of group management, it has powerful permission settings:
 - Set certain members as administrators responsible for daily group management and maintenance

@@ -39,7 +39,7 @@ export const useStyles = createStyles(({ css, prefixCls }, { size }: { size: num
 	}
 })
 
-export function useMagicSpinProps(size?: "small" | "default" | "large") {
+export function useDelightfulSpinProps(size?: "small" | "default" | "large") {
 	const { styles } = useStyles({ size: sizeMap[size ?? "default"] })
 
 	return useMemo(

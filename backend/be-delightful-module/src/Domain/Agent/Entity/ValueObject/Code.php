@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Domain\Agent\Entity\ValueObject;
+namespace Delightful\SuperDelightful\Domain\Agent\Entity\ValueObject;
 
 enum Code: string
 {
-    case SuperMagicAgent = 'SMA';
+    case SuperDelightfulAgent = 'SMA';
 
     public function gen(): string
     {

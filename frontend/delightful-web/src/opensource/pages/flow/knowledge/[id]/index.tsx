@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { RoutePath } from "@/const/routes"
 import { useKnowledgeStore } from "@/opensource/stores/knowledge"
 import { IconSearch } from "@tabler/icons-react"
@@ -163,7 +163,7 @@ export default function KnowledgeDetail() {
 						<Input
 							onChange={(e) => setKeyword(e.target.value)}
 							placeholder={t("common.search", { ns: "flow" })}
-							prefix={<MagicIcon component={IconSearch} size={18} />}
+							prefix={<DelightfulIcon component={IconSearch} size={18} />}
 							value={keyword}
 							className={styles.searchInput}
 						/>

@@ -4,7 +4,7 @@
 
 
 ```jsx
-import { BaseFlow } from '@/MagicFlow/examples';
+import { BaseFlow } from '@/DelightfulFlow/examples';
 import React,{ useState, useCallback } from "react"
 
 
@@ -17,7 +17,7 @@ export default () => {
 
 
 ```jsx
-import { SecondFlow } from '@/MagicFlow/examples';
+import { SecondFlow } from '@/DelightfulFlow/examples';
 import React,{ useState, useCallback } from "react"
 
 
@@ -30,7 +30,7 @@ export default () => {
 
 
 ```jsx
-import { BaseFlowModal } from '@/MagicFlow/examples';
+import { BaseFlowModal } from '@/DelightfulFlow/examples';
 import React,{ useState, useCallback } from "react";
 import { Button } from "antd";
 

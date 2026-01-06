@@ -10,22 +10,22 @@ namespace App\Application\Chat\Service;
 use App\Application\ModelGateway\Service\LLMAppService;
 use App\Application\ModelGateway\Service\ModelConfigAppService;
 use App\Domain\Agent\Constant\InstructType;
-use App\Domain\Agent\Service\MagicAgentDomainService;
+use App\Domain\Agent\Service\DelightfulAgentDomainService;
 use App\Domain\Chat\DTO\ChatCompletionsDTO;
-use App\Domain\Chat\Entity\MagicConversationEntity;
+use App\Domain\Chat\Entity\DelightfulConversationEntity;
 use App\Domain\Chat\Entity\ValueObject\LLMModelEnum;
-use App\Domain\Chat\Service\MagicChatDomainService;
-use App\Domain\Chat\Service\MagicChatFileDomainService;
-use App\Domain\Chat\Service\MagicConversationDomainService;
-use App\Domain\Chat\Service\MagicSeqDomainService;
-use App\Domain\Chat\Service\MagicTopicDomainService;
+use App\Domain\Chat\Service\DelightfulChatDomainService;
+use App\Domain\Chat\Service\DelightfulChatFileDomainService;
+use App\Domain\Chat\Service\DelightfulConversationDomainService;
+use App\Domain\Chat\Service\DelightfulSeqDomainService;
+use App\Domain\Chat\Service\DelightfulTopicDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\ModelGateway\Entity\Dto\CompletionDTO;
 use App\ErrorCode\AgentErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\SlidingWindow\SlidingWindowUtil;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Logger\LoggerFactory;
@@ -38,7 +38,7 @@ use Throwable;
 /**
  * Chat message related.
  */
-class MagicConversationAppService extends AbstractAppService
+class DelightfulConversationAppService extends AbstractAppService
 {
     /**
      * Special character identifier: indicates no completion needed.
@@ -47,13 +47,13 @@ class MagicConversationAppService extends AbstractAppService
 
     public function __construct(
         protected LoggerInterface $logger,
-        protected readonly MagicChatDomainService $magicChatDomainService,
-        protected readonly MagicTopicDomainService $magicTopicDomainService,
-        protected readonly MagicConversationDomainService $magicConversationDomainService,
-        protected readonly MagicChatFileDomainService $magicChatFileDomainService,
-        protected MagicSeqDomainService $magicSeqDomainService,
+        protected readonly DelightfulChatDomainService $magicChatDomainService,
+        protected readonly DelightfulTopicDomainService $magicTopicDomainService,
+        protected readonly DelightfulConversationDomainService $magicConversationDomainService,
+        protected readonly DelightfulChatFileDomainService $magicChatFileDomainService,
+        protected DelightfulSeqDomainService $magicSeqDomainService,
         protected FileDomainService $fileDomainService,
-        protected readonly MagicAgentDomainService $magicAgentDomainService,
+        protected readonly DelightfulAgentDomainService $magicAgentDomainService,
         protected readonly SlidingWindowUtil $slidingWindowUtil,
         protected readonly Redis $redis
     ) {
@@ -71,7 +71,7 @@ class MagicConversationAppService extends AbstractAppService
     public function conversationChatCompletions(
         array $chatHistoryMessages,
         ChatCompletionsDTO $chatCompletionsDTO,
-        MagicUserAuthorization $userAuthorization
+        DelightfulUserAuthorization $userAuthorization
     ): string {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
@@ -82,7 +82,7 @@ class MagicConversationAppService extends AbstractAppService
         }
 
         // Generate a unique throttle key based on user ID and conversation ID
-        $throttleKey = sprintf('chat_completions_throttle:%s', $userAuthorization->getMagicId());
+        $throttleKey = sprintf('chat_completions_throttle:%s', $userAuthorization->getDelightfulId());
 
         // Use the sliding window utility for throttling, accepting only one request per 500ms window
         $canExecute = $this->redis->set($throttleKey, '1', ['NX', 'PX' => (int) (0.5 * 1000)]);
@@ -124,7 +124,7 @@ class MagicConversationAppService extends AbstractAppService
         return '';
     }
 
-    public function saveInstruct(MagicUserAuthorization $authenticatable, array $instructs, string $conversationId, array $agentInstruct): array
+    public function saveInstruct(DelightfulUserAuthorization $authenticatable, array $instructs, string $conversationId, array $agentInstruct): array
     {
         // Collect all available instruction options
         $availableInstructs = [];
@@ -211,7 +211,7 @@ class MagicConversationAppService extends AbstractAppService
     /**
      * Get topic id when agent sends message.
      */
-    public function agentSendMessageGetTopicId(MagicConversationEntity $senderConversationEntity): string
+    public function agentSendMessageGetTopicId(DelightfulConversationEntity $senderConversationEntity): string
     {
         return $this->magicTopicDomainService->agentSendMessageGetTopicId($senderConversationEntity, 0);
     }
@@ -259,7 +259,7 @@ class MagicConversationAppService extends AbstractAppService
      */
     private function buildCompletionRequest(
         array $chatHistoryMessages,
-        MagicUserAuthorization $userAuthorization,
+        DelightfulUserAuthorization $userAuthorization,
         ChatCompletionsDTO $chatCompletionsDTO
     ): CompletionDTO {
         // Get model name

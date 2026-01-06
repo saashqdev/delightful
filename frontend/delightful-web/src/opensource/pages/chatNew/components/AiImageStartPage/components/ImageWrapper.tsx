@@ -1,4 +1,4 @@
-// import MagicSpin from "@/opensource/components/base/MagicSpin"
+// import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { createStyles } from "antd-style"
 import { memo } from "react"

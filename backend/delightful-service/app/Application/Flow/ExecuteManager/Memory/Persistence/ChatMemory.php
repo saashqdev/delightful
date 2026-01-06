@@ -11,14 +11,14 @@ use App\Application\Flow\ExecuteManager\Memory\LLMMemoryMessage;
 use App\Application\Flow\ExecuteManager\Memory\MemoryQuery;
 use App\Domain\Chat\DTO\Message\ChatMessage\AggregateAISearchCardMessage;
 use App\Domain\Chat\DTO\MessagesQueryDTO;
-use App\Domain\Chat\Entity\MagicMessageEntity;
+use App\Domain\Chat\Entity\DelightfulMessageEntity;
 use App\Domain\Chat\Entity\ValueObject\AggregateSearch\AggregateAISearchCardResponseType;
-use App\Domain\Chat\Service\MagicChatDomainService;
-use App\Domain\Flow\Entity\MagicFlowMemoryHistoryEntity;
+use App\Domain\Chat\Service\DelightfulChatDomainService;
+use App\Domain\Flow\Entity\DelightfulFlowMemoryHistoryEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\Flow\Entity\ValueObject\MemoryType;
-use App\Domain\Flow\Entity\ValueObject\Query\MagicFlowMemoryHistoryQuery;
-use App\Domain\Flow\Service\MagicFlowMemoryHistoryDomainService;
+use App\Domain\Flow\Entity\ValueObject\Query\DelightfulFlowMemoryHistoryQuery;
+use App\Domain\Flow\Service\DelightfulFlowMemoryHistoryDomainService;
 use App\Infrastructure\Core\ValueObject\Page;
 use Carbon\Carbon;
 use DateTime;
@@ -26,8 +26,8 @@ use DateTime;
 class ChatMemory implements MemoryPersistenceInterface
 {
     public function __construct(
-        protected MagicChatDomainService $magicChatDomainService,
-        protected MagicFlowMemoryHistoryDomainService $magicFlowMemoryHistoryDomainService,
+        protected DelightfulChatDomainService $magicChatDomainService,
+        protected DelightfulFlowMemoryHistoryDomainService $magicFlowMemoryHistoryDomainService,
     ) {
     }
 
@@ -38,7 +38,7 @@ class ChatMemory implements MemoryPersistenceInterface
         $mountIds = [];
         $messageLists = [];
         foreach ($imMessages as $imMessage) {
-            if (in_array($imMessage->getMagicMessageId(), $ignoreMessageIds)) {
+            if (in_array($imMessage->getDelightfulMessageId(), $ignoreMessageIds)) {
                 continue;
             }
 
@@ -62,7 +62,7 @@ class ChatMemory implements MemoryPersistenceInterface
         }
 
         // 这里存储的是 历史消息存储节点 挂载消息
-        $history = new MagicFlowMemoryHistoryEntity();
+        $history = new DelightfulFlowMemoryHistoryEntity();
         $history->setType(MemoryType::Mount);
         $history->setConversationId($LLMMemoryMessage->getConversationId());
         $history->setTopicId($LLMMemoryMessage->getTopicId());
@@ -79,7 +79,7 @@ class ChatMemory implements MemoryPersistenceInterface
 
     /**
      * 已经是排好序的所有消息.
-     * @return array<MagicMessageEntity>
+     * @return array<DelightfulMessageEntity>
      */
     public function getImChatMessages(MemoryQuery $memoryQuery): array
     {
@@ -114,7 +114,7 @@ class ChatMemory implements MemoryPersistenceInterface
                 }
             }
 
-            $messageId = $seqResponseDTO->getSeq()->getMessage()->getMagicMessageId();
+            $messageId = $seqResponseDTO->getSeq()->getMessage()->getDelightfulMessageId();
             if ($messageId) {
                 $messageIds[] = $messageId;
             }
@@ -128,7 +128,7 @@ class ChatMemory implements MemoryPersistenceInterface
             $imMessages = $this->magicChatDomainService->getMessageEntitiesByMaicMessageIds($messageIds, $memoryQuery->getRangMessageTypes());
             foreach ($imMessages as $imMessage) {
                 // 这里是为了排序正确 根据 seq 的顺序进行排
-                $index = array_search($imMessage->getMagicMessageId(), $messageIds);
+                $index = array_search($imMessage->getDelightfulMessageId(), $messageIds);
                 if ($index !== false) {
                     $messageLists[$index] = $imMessage;
                 }
@@ -148,7 +148,7 @@ class ChatMemory implements MemoryPersistenceInterface
         if (empty($moundIds) || empty($messageLists)) {
             return $messageLists;
         }
-        $mountQuery = new MagicFlowMemoryHistoryQuery();
+        $mountQuery = new DelightfulFlowMemoryHistoryQuery();
         $mountQuery->setMountIds($moundIds);
         $mountQuery->setType(MemoryType::Mount->value);
         $flowDataIsolation = FlowDataIsolation::create()->disabled();

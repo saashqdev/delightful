@@ -7,17 +7,17 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Factory;
 
-use App\Domain\Flow\Entity\MagicFlowCacheEntity;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowCacheModel;
+use App\Domain\Flow\Entity\DelightfulFlowCacheEntity;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowCacheModel;
 
-class MagicFlowCacheFactory
+class DelightfulFlowCacheFactory
 {
     /**
      * Convert model to entity.
      */
-    public static function modelToEntity(MagicFlowCacheModel $model): MagicFlowCacheEntity
+    public static function modelToEntity(DelightfulFlowCacheModel $model): DelightfulFlowCacheEntity
     {
-        $entity = new MagicFlowCacheEntity();
+        $entity = new DelightfulFlowCacheEntity();
         $entity->setId($model->id);
         $entity->setCacheHash($model->cache_hash);
         $entity->setCachePrefix($model->cache_prefix);

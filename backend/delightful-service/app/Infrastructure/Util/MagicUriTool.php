@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Util;
 
-class MagicUriTool
+class DelightfulUriTool
 {
     public static function getImagesGenerationsUri(): string
     {

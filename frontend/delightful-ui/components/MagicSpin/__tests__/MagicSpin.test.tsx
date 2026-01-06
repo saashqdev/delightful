@@ -1,16 +1,16 @@
 import { render, screen } from "@testing-library/react"
-import MagicThemeProvider from "../../ThemeProvider"
+import DelightfulThemeProvider from "../../ThemeProvider"
 import { describe, it, expect } from "vitest"
-import MagicSpin from "../index"
+import DelightfulSpin from "../index"
 
-describe("MagicSpin", () => {
+describe("DelightfulSpin", () => {
 	it("should render with children", () => {
 		render(
-			<MagicThemeProvider theme="light">
-				<MagicSpin>
+			<DelightfulThemeProvider theme="light">
+				<DelightfulSpin>
 					<div>内容区域</div>
-				</MagicSpin>
-			</MagicThemeProvider>,
+				</DelightfulSpin>
+			</DelightfulThemeProvider>,
 		)
 
 		// Verify children render
@@ -21,75 +21,75 @@ describe("MagicSpin", () => {
 	describe("快照测试", () => {
 		it("基础加载器快照", () => {
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSpin>
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSpin>
 						<div>内容区域</div>
-					</MagicSpin>
-				</MagicThemeProvider>,
+					</DelightfulSpin>
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
 		it("加载状态快照", () => {
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSpin spinning>
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSpin spinning>
 						<div>内容区域</div>
-					</MagicSpin>
-				</MagicThemeProvider>,
+					</DelightfulSpin>
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
 		it("带提示文字快照", () => {
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSpin tip="加载中...">
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSpin tip="加载中...">
 						<div>内容区域</div>
-					</MagicSpin>
-				</MagicThemeProvider>,
+					</DelightfulSpin>
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
 		it("小尺寸加载器快照", () => {
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSpin size="small">
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSpin size="small">
 						<div>内容区域</div>
-					</MagicSpin>
-				</MagicThemeProvider>,
+					</DelightfulSpin>
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
 		it("大尺寸加载器快照", () => {
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSpin size="large">
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSpin size="large">
 						<div>内容区域</div>
-					</MagicSpin>
-				</MagicThemeProvider>,
+					</DelightfulSpin>
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
 		it("延迟加载快照", () => {
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSpin delay={500}>
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSpin delay={500}>
 						<div>内容区域</div>
-					</MagicSpin>
-				</MagicThemeProvider>,
+					</DelightfulSpin>
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
 		it("独立加载器快照", () => {
 			const { asFragment } = render(
-				<MagicThemeProvider theme="light">
-					<MagicSpin />
-				</MagicThemeProvider>,
+				<DelightfulThemeProvider theme="light">
+					<DelightfulSpin />
+				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})

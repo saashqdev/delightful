@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 
 import { IconMoon, IconSunHigh } from "@tabler/icons-react"
 import { Flex } from "antd"
@@ -59,10 +59,10 @@ function AppearenceSwitch() {
 			justify="space-between"
 			onClick={onThemeChange}
 		>
-			<MagicIcon className={styles.icon} component={IconSunHigh} size={16} />
-			<MagicIcon className={styles.icon} component={IconMoon} size={16} />
+			<DelightfulIcon className={styles.icon} component={IconSunHigh} size={16} />
+			<DelightfulIcon className={styles.icon} component={IconMoon} size={16} />
 			<div className={styles.handler}>
-				<MagicIcon
+				<DelightfulIcon
 					className={styles.icon}
 					component={prefersColorScheme === "dark" ? IconMoon : IconSunHigh}
 					size={14}

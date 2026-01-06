@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Domain\Contact\Entity;
 
-use App\Domain\Agent\Entity\MagicAgentVersionEntity;
+use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
 use App\Domain\Contact\Entity\Item\UserExtra;
 use App\Domain\Contact\Entity\ValueObject\UserStatus;
 use App\Domain\Contact\Entity\ValueObject\UserType;
 use ArrayAccess;
 use Hyperf\Codec\Json;
 
-class MagicUserEntity extends AbstractEntity implements ArrayAccess
+class DelightfulUserEntity extends AbstractEntity implements ArrayAccess
 {
     protected ?int $id = null;
 
@@ -119,12 +119,12 @@ class MagicUserEntity extends AbstractEntity implements ArrayAccess
         $this->userManual = $userManual;
     }
 
-    public function getMagicId(): string
+    public function getDelightfulId(): string
     {
         return $this->magicId;
     }
 
-    public function setMagicId(int|string $magicId): void
+    public function setDelightfulId(int|string $magicId): void
     {
         if (is_int($magicId)) {
             $magicId = (string) $magicId;
@@ -277,12 +277,12 @@ class MagicUserEntity extends AbstractEntity implements ArrayAccess
         $this->extra = $extra;
     }
 
-    public static function fromMagicAgentVersionEntity(MagicAgentVersionEntity $magicAgentVersionEntity): MagicUserEntity
+    public static function fromDelightfulAgentVersionEntity(DelightfulAgentVersionEntity $magicAgentVersionEntity): DelightfulUserEntity
     {
         $avatarUrl = $magicAgentVersionEntity->getAgentAvatar();
         $nickName = $magicAgentVersionEntity->getAgentName();
         $description = $magicAgentVersionEntity->getAgentDescription();
-        $userDTO = new MagicUserEntity();
+        $userDTO = new DelightfulUserEntity();
         $userDTO->setAvatarUrl($avatarUrl);
         $userDTO->setNickName($nickName);
         $userDTO->setDescription($description);

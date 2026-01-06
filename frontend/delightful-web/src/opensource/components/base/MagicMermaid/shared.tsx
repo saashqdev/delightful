@@ -7,7 +7,7 @@ import { createStyles } from "antd-style"
 import mermaid from "mermaid"
 import { nanoid } from "nanoid"
 import { convertSvgToPng } from "@/utils/image"
-import MagicMermaid from "."
+import DelightfulMermaid from "."
 
 const useStyles = createStyles(({ css }) => ({
 	mindMap: css`
@@ -32,7 +32,7 @@ const getSvgData = (data: string) => {
 	})
 }
 
-const MagicMermaidShared = memo(function MagicMermaidShared() {
+const DelightfulMermaidShared = memo(function DelightfulMermaidShared() {
 	const [mermaidData, setMermaidData] = useState<string>("")
 	const { styles } = useStyles()
 
@@ -67,7 +67,7 @@ const MagicMermaidShared = memo(function MagicMermaidShared() {
 	if (!mermaidData) return null
 
 	return (
-		<MagicMermaid
+		<DelightfulMermaid
 			data={mermaidData}
 			className={styles.mindMap}
 			allowShowCode={false}
@@ -76,4 +76,4 @@ const MagicMermaidShared = memo(function MagicMermaidShared() {
 	)
 })
 
-export default MagicMermaidShared
+export default DelightfulMermaidShared

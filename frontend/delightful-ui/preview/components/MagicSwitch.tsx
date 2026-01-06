@@ -1,15 +1,15 @@
 import React from "react"
 import { Space } from "antd"
-import MagicSwitch from "../../components/MagicSwitch"
+import DelightfulSwitch from "../../components/DelightfulSwitch"
 import ComponentDemo from "./Container"
 
 const SwitchDemo: React.FC = () => {
 	return (
 		<div>
-			<ComponentDemo title="基础开关" description="最基本的开关组件" code="<MagicSwitch />">
+			<ComponentDemo title="基础开关" description="最基本的开关组件" code="<DelightfulSwitch />">
 				<Space>
-					<MagicSwitch />
-					<MagicSwitch defaultChecked />
+					<DelightfulSwitch />
+					<DelightfulSwitch defaultChecked />
 				</Space>
 			</ComponentDemo>
 
@@ -19,8 +19,8 @@ const SwitchDemo: React.FC = () => {
 				code="size: 'default' | 'small'"
 			>
 				<Space>
-					<MagicSwitch size="default" />
-					<MagicSwitch size="small" />
+					<DelightfulSwitch size="default" />
+					<DelightfulSwitch size="small" />
 				</Space>
 			</ComponentDemo>
 
@@ -30,10 +30,10 @@ const SwitchDemo: React.FC = () => {
 				code="loading | disabled"
 			>
 				<Space>
-					<MagicSwitch loading />
-					<MagicSwitch size="small" loading />
-					<MagicSwitch disabled />
-					<MagicSwitch defaultChecked disabled />
+					<DelightfulSwitch loading />
+					<DelightfulSwitch size="small" loading />
+					<DelightfulSwitch disabled />
+					<DelightfulSwitch defaultChecked disabled />
 				</Space>
 			</ComponentDemo>
 
@@ -43,9 +43,9 @@ const SwitchDemo: React.FC = () => {
 				code="checkedChildren | unCheckedChildren"
 			>
 				<Space direction="vertical">
-					<MagicSwitch checkedChildren="开" unCheckedChildren="关" />
-					<MagicSwitch checkedChildren="ON" unCheckedChildren="OFF" />
-					<MagicSwitch checkedChildren="✅" unCheckedChildren="❌" />
+					<DelightfulSwitch checkedChildren="开" unCheckedChildren="关" />
+					<DelightfulSwitch checkedChildren="ON" unCheckedChildren="OFF" />
+					<DelightfulSwitch checkedChildren="✅" unCheckedChildren="❌" />
 				</Space>
 			</ComponentDemo>
 
@@ -55,11 +55,11 @@ const SwitchDemo: React.FC = () => {
 				code="checked | onChange"
 			>
 				<Space>
-					<MagicSwitch
+					<DelightfulSwitch
 						checked={true}
 						onChange={(checked) => console.log("开关状态:", checked)}
 					/>
-					<MagicSwitch
+					<DelightfulSwitch
 						checked={false}
 						onChange={(checked) => console.log("开关状态:", checked)}
 					/>

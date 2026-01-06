@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Application\Flow\ExecuteManager\BuiltIn\ToolSet;
 
-use App\Domain\Flow\Entity\MagicFlowToolSetEntity;
+use App\Domain\Flow\Entity\DelightfulFlowToolSetEntity;
 use App\Domain\Permission\Entity\ValueObject\OperationPermission\Operation;
 use App\Infrastructure\Core\Contract\Flow\BuiltInToolInterface;
 use App\Infrastructure\Core\Contract\Flow\BuiltInToolSetInterface;
@@ -46,9 +46,9 @@ abstract class AbstractBuiltInToolSet implements BuiltInToolSetInterface
         $this->tools[$tool->getCode()] = $tool;
     }
 
-    public function generateToolSet(): MagicFlowToolSetEntity
+    public function generateToolSet(): DelightfulFlowToolSetEntity
     {
-        $toolSet = new MagicFlowToolSetEntity();
+        $toolSet = new DelightfulFlowToolSetEntity();
         $toolSet->setId(0);
         $toolSet->setCode($this->getCode());
         $toolSet->setName($this->getName());

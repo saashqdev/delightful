@@ -7,21 +7,21 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Service;
 
-use App\Domain\Flow\Entity\MagicFlowPermissionEntity;
+use App\Domain\Flow\Entity\DelightfulFlowPermissionEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\Flow\Entity\ValueObject\Permission\ResourceType;
 use App\Domain\Flow\Entity\ValueObject\Permission\TargetType;
-use App\Domain\Flow\Repository\Facade\MagicFlowPermissionRepositoryInterface;
+use App\Domain\Flow\Repository\Facade\DelightfulFlowPermissionRepositoryInterface;
 use App\Infrastructure\Core\ValueObject\Page;
 
-class MagicFlowPermissionDomainService extends AbstractDomainService
+class DelightfulFlowPermissionDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly MagicFlowPermissionRepositoryInterface $magicFlowPermissionRepository,
+        private readonly DelightfulFlowPermissionRepositoryInterface $magicFlowPermissionRepository,
     ) {
     }
 
-    public function save(FlowDataIsolation $dataIsolation, MagicFlowPermissionEntity $permissionEntity): MagicFlowPermissionEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowPermissionEntity $permissionEntity): DelightfulFlowPermissionEntity
     {
         $permissionEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $permissionEntity->setCreator($dataIsolation->getCurrentUserId());
@@ -30,7 +30,7 @@ class MagicFlowPermissionDomainService extends AbstractDomainService
     }
 
     /**
-     * @return array{total: int, list: array<MagicFlowPermissionEntity>}
+     * @return array{total: int, list: array<DelightfulFlowPermissionEntity>}
      */
     public function getByResource(FlowDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, Page $page): array
     {
@@ -43,7 +43,7 @@ class MagicFlowPermissionDomainService extends AbstractDomainService
         $this->magicFlowPermissionRepository->removeByIds($dataIsolation, $ids);
     }
 
-    public function getByResourceAndTarget(FlowDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, TargetType $targetType, string $targetId): ?MagicFlowPermissionEntity
+    public function getByResourceAndTarget(FlowDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, TargetType $targetType, string $targetId): ?DelightfulFlowPermissionEntity
     {
         return $this->magicFlowPermissionRepository->getByResourceAndTarget($dataIsolation, $resourceType, $resourceId, $targetType, $targetId);
     }

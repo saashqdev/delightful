@@ -1,10 +1,10 @@
-import ImageIcon from "@/opensource/components/base/MagicFileIcon/assets/image.svg"
-import CommonHeader from "@/opensource/pages/superMagic/components/Detail/components/CommonHeader"
+import ImageIcon from "@/opensource/components/base/DelightfulFileIcon/assets/image.svg"
+import CommonHeader from "@/opensource/pages/superDelightful/components/Detail/components/CommonHeader"
 import { useState, useEffect, useRef, memo } from "react"
 import { Image } from "antd"
 import { useStyles } from "./style"
 import CommonFooter from "../../components/CommonFooter"
-import { useFileUrl } from "@/opensource/pages/superMagic/hooks/useFileUrl"
+import { useFileUrl } from "@/opensource/pages/superDelightful/hooks/useFileUrl"
 
 function Img(props: any) {
 	const { styles } = useStyles()

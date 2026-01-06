@@ -1,11 +1,11 @@
-import MagicModal from "@/opensource/components/base/MagicModal"
-import AttachmentList from "@/opensource/pages/superMagic/components/AttachmentList"
-import ShareModal from "@/opensource/pages/superMagic/components/Share/Modal"
-import { ResourceType, ShareType } from "@/opensource/pages/superMagic/components/Share/types"
-import { createShareTopic } from "@/opensource/pages/superMagic/utils/api"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
+import AttachmentList from "@/opensource/pages/superDelightful/components/AttachmentList"
+import ShareModal from "@/opensource/pages/superDelightful/components/Share/Modal"
+import { ResourceType, ShareType } from "@/opensource/pages/superDelightful/components/Share/types"
+import { createShareTopic } from "@/opensource/pages/superDelightful/utils/api"
 import { IconEdit, IconFolder, IconShare, IconTrash } from "@tabler/icons-react"
 // import UserMenus from "@/opensource/layouts/BaseLayout/components/Sider/components/UserMenus"
-import { deleteThread, editThread } from "@/opensource/pages/superMagic/utils/api"
+import { deleteThread, editThread } from "@/opensource/pages/superDelightful/utils/api"
 import { message } from "antd"
 import { Input, Popup, SafeArea } from "antd-mobile"
 import { memo, useCallback, useMemo, useState } from "react"
@@ -204,7 +204,7 @@ export default memo(function TopicMenu({
 				</div>
 				<SafeArea position="bottom" />
 			</Popup>
-			<MagicModal
+			<DelightfulModal
 				title="话题重命名"
 				onCancel={() => {
 					setRenameModalVisible(false)
@@ -220,7 +220,7 @@ export default memo(function TopicMenu({
 						autoFocus
 					/>
 				</div>
-			</MagicModal>
+			</DelightfulModal>
 			{/* <Modal
 				visible={renameModalVisible}
 				bodyStyle={{ backgroundColor: "#fff" }}
@@ -257,7 +257,7 @@ export default memo(function TopicMenu({
 					},
 				]}
 			/> */}
-			<MagicModal
+			<DelightfulModal
 				title={`删除话题`}
 				onCancel={() => {
 					setDeleteModalVisible(false)
@@ -267,7 +267,7 @@ export default memo(function TopicMenu({
 				okButtonProps={{ danger: true }}
 			>
 				{`确定要删除话题：${selectedThreadInfo?.topic_name} 吗？`}
-			</MagicModal>
+			</DelightfulModal>
 			{/* <Modal
 				visible={deleteModalVisible}
 				bodyStyle={{ backgroundColor: "#fff" }}

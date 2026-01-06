@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Entity\ValueObject\Query;
 
-class MagicFLowTriggerTestcaseQuery extends Query
+class DelightfulFLowTriggerTestcaseQuery extends Query
 {
     public string $flowCode = '';
 

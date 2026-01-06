@@ -22,7 +22,7 @@ return [
     'original_model_already_exists' => 'Model sudah wujud',
     'load_balancing_weight_range_error' => 'Berat pengimbangan beban mestilah antara 0-100',
     'model_officially_disabled' => 'Model telah dilarang secara rasmi',
-    'magic_provider_not_found' => 'Konfigurasi penyedia perkhidmatan Magic tidak wujud',
+    'magic_provider_not_found' => 'Konfigurasi penyedia perkhidmatan Delightful tidak wujud',
     'original_model_id_already_exists' => 'ID model asal sudah wujud',
     'original_model_not_found' => 'Model asal tidak wujud',
     'invalid_pricing' => 'Harga tidak boleh kurang daripada 0',

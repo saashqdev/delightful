@@ -9,7 +9,7 @@ namespace App\Domain\Chat\DTO\Message\ChatMessage;
 
 use App\Domain\Chat\DTO\Message\TextContentInterface;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
-use App\Domain\Chat\Repository\Facade\MagicChatFileRepositoryInterface;
+use App\Domain\Chat\Repository\Facade\DelightfulChatFileRepositoryInterface;
 use App\Domain\File\Repository\Persistence\Facade\CloudFileRepositoryInterface;
 use App\Domain\Speech\Entity\Dto\FlashSpeechSubmitDTO;
 use App\Domain\Speech\Entity\Dto\SpeechAudioDTO;
@@ -139,7 +139,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
     /**
      * Get message ID.
      */
-    public function getMagicMessageId(): ?string
+    public function getDelightfulMessageId(): ?string
     {
         return $this->magicMessageId;
     }
@@ -147,7 +147,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
     /**
      * Set message ID.
      */
-    public function setMagicMessageId(?string $magicMessageId): self
+    public function setDelightfulMessageId(?string $magicMessageId): self
     {
         $this->magicMessageId = $magicMessageId;
         return $this;
@@ -252,7 +252,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
 
         try {
             $container = ApplicationContext::getContainer();
-            $chatFileRepository = $container->get(MagicChatFileRepositoryInterface::class);
+            $chatFileRepository = $container->get(DelightfulChatFileRepositoryInterface::class);
             $cloudFileRepository = $container->get(CloudFileRepositoryInterface::class);
 
             // 获取文件实体

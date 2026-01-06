@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\DTO;
 
 use App\Domain\Contact\Entity\AbstractEntity;
-use App\Domain\Contact\Entity\MagicDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentEntity;
 use App\Domain\Contact\Entity\ValueObject\UserQueryType;
 
 class UserQueryDTO extends AbstractEntity
@@ -41,7 +41,7 @@ class UserQueryDTO extends AbstractEntity
     protected bool $queryByDepartmentPath = false;
 
     /**
-     * @var null|MagicDepartmentEntity[]
+     * @var null|DelightfulDepartmentEntity[]
      */
     protected ?array $matchedQueryDepartmentIds = null;
 

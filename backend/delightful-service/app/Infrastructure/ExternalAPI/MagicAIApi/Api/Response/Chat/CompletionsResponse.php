@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Infrastructure\ExternalAPI\MagicAIApi\Api\Response\Chat;
+namespace App\Infrastructure\ExternalAPI\DelightfulAIApi\Api\Response\Chat;
 
-use App\Infrastructure\ExternalAPI\MagicAIApi\Kernel\AbstractResponse;
+use App\Infrastructure\ExternalAPI\DelightfulAIApi\Kernel\AbstractResponse;
 
 class CompletionsResponse extends AbstractResponse
 {

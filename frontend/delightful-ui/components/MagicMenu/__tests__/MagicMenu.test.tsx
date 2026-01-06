@@ -1,15 +1,15 @@
 import { render, screen } from "@testing-library/react"
-import MagicThemeProvider from "../../ThemeProvider"
+import DelightfulThemeProvider from "../../ThemeProvider"
 import { describe, it, expect } from "vitest"
-import MagicMenu from "../index"
+import DelightfulMenu from "../index"
 
 const renderWithTheme = (component: React.ReactElement) =>
-	render(<MagicThemeProvider theme="light">{component}</MagicThemeProvider>)
+	render(<DelightfulThemeProvider theme="light">{component}</DelightfulThemeProvider>)
 
-describe("MagicMenu", () => {
+describe("DelightfulMenu", () => {
 	it("应该正常渲染", () => {
 		renderWithTheme(
-			<MagicMenu
+			<DelightfulMenu
 				items={[
 					{
 						key: "1",
@@ -25,7 +25,7 @@ describe("MagicMenu", () => {
 	describe("快照测试", () => {
 		it("基础菜单快照", () => {
 			const { asFragment } = renderWithTheme(
-				<MagicMenu
+				<DelightfulMenu
 					items={[
 						{ key: "1", label: "菜单项1" },
 						{ key: "2", label: "菜单项2" },
@@ -37,7 +37,7 @@ describe("MagicMenu", () => {
 
 		it("带图标菜单快照", () => {
 			const { asFragment } = renderWithTheme(
-				<MagicMenu
+				<DelightfulMenu
 					items={[
 						{ key: "1", label: "菜单项1", icon: <span>🏠</span> },
 						{ key: "2", label: "菜单项2", icon: <span>⚙️</span> },
@@ -49,7 +49,7 @@ describe("MagicMenu", () => {
 
 		it("带子菜单快照", () => {
 			const { asFragment } = renderWithTheme(
-				<MagicMenu
+				<DelightfulMenu
 					items={[
 						{
 							key: "1",
@@ -67,7 +67,7 @@ describe("MagicMenu", () => {
 
 		it("选中状态菜单快照", () => {
 			const { asFragment } = renderWithTheme(
-				<MagicMenu
+				<DelightfulMenu
 					selectedKeys={["1"]}
 					items={[
 						{ key: "1", label: "菜单项1" },
@@ -80,7 +80,7 @@ describe("MagicMenu", () => {
 
 		it("垂直菜单快照", () => {
 			const { asFragment } = renderWithTheme(
-				<MagicMenu
+				<DelightfulMenu
 					mode="vertical"
 					items={[
 						{ key: "1", label: "菜单项1" },
@@ -93,7 +93,7 @@ describe("MagicMenu", () => {
 
 		it("带自定义样式菜单快照", () => {
 			const { asFragment } = renderWithTheme(
-				<MagicMenu
+				<DelightfulMenu
 					style={{ width: "200px" }}
 					items={[
 						{ key: "1", label: "菜单项1" },
@@ -106,7 +106,7 @@ describe("MagicMenu", () => {
 
 		it("带类名菜单快照", () => {
 			const { asFragment } = renderWithTheme(
-				<MagicMenu
+				<DelightfulMenu
 					className="custom-menu"
 					items={[
 						{ key: "1", label: "菜单项1" },

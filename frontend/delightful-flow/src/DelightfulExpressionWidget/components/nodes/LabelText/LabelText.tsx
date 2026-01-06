@@ -1,4 +1,4 @@
-import { EXPRESSION_ITEM } from "@/MagicExpressionWidget/types"
+import { EXPRESSION_ITEM } from "@/DelightfulExpressionWidget/types"
 import _ from "lodash"
 import React, { useMemo } from "react"
 import { useGlobalContext } from "../../../context/GlobalContext/useGlobalContext"

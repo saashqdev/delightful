@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconMessageTopic } from "@/enhance/tabler/icons-react"
 import { IconDots } from "@tabler/icons-react"
 import { Badge, Flex } from "antd"
@@ -36,11 +36,11 @@ const NormalTopicItemComponent = observer((props: NormalTopicItemProps) => {
 				gap={4}
 			>
         <Badge count={ConversationStore.currentConversation?.topic_unread_dots.get(topic.id) ?? 0} style={{flex: 0}}>
-          <MagicIcon component={IconMessageTopic} size={24} />
+          <DelightfulIcon component={IconMessageTopic} size={24} />
         </Badge>
 				<span className={styles.topicTitle}>{topic.name || t("chat.topic.newTopic")}</span>
 				<div className={styles.menu} onClick={(e) => e.stopPropagation()}>
-					<MagicIcon component={IconDots} size={20} onClick={toggle} />
+					<DelightfulIcon component={IconDots} size={20} onClick={toggle} />
 				</div>
 			</Flex>
 		</TopicMenu>

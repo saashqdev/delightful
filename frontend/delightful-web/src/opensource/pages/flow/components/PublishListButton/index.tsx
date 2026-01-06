@@ -1,7 +1,7 @@
 import { Drawer, message, Modal, Timeline } from "antd"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { useFlowStore } from "@/opensource/stores/flow"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { IconArchive } from "@tabler/icons-react"
 import EmptyIcon from "@/assets/logos/empty.svg"
 import { cx } from "antd-style"
@@ -15,11 +15,11 @@ import { useCustomFlow } from "../../context/CustomFlowContext/useCustomFlow"
 import { hasEditRight } from "../AuthControlButton/types"
 import PublishCardItem from "./PublishCardItem"
 import { useStyles } from "./style"
-import MagicButton from "@/opensource/components/base/MagicButton"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 
 type PublishListButtonProps = {
 	isAgent: boolean
-	flow?: MagicFlow.Flow
+	flow?: DelightfulFlow.Flow
 }
 
 export default function PublishListButton({ isAgent, flow }: PublishListButtonProps) {
@@ -136,7 +136,7 @@ export default function PublishListButton({ isAgent, flow }: PublishListButtonPr
 
 	return (
 		<>
-			<MagicButton
+			<DelightfulButton
 				tip={t("common.versionList", { ns: "flow" })}
 				className={styles.copyButton}
 				onClick={setTrue}

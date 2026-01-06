@@ -1,9 +1,9 @@
-import { FormItemType } from "@/MagicExpressionWidget/types"
+import { FormItemType } from "@/DelightfulExpressionWidget/types"
 import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
-import { Schema } from "@/MagicJsonSchemaEditor/components/editor/genson-js"
-import { ShowColumns } from "@/MagicJsonSchemaEditor/constants"
-import { MagicJsonSchemaEditor } from "@/index"
+import { Schema } from "@/DelightfulJsonSchemaEditor/components/editor/genson-js"
+import { ShowColumns } from "@/DelightfulJsonSchemaEditor/constants"
+import { DelightfulJsonSchemaEditor } from "@/index"
 import { Form } from "antd"
 import { useMemoizedFn } from "ahooks"
 import _ from "lodash"
@@ -51,7 +51,7 @@ export default function End() {
 				onValuesChange={onValuesChange}
 			>
 				<Form.Item name={["output"]} className={styles.output} valuePropName="data">
-					<MagicJsonSchemaEditor
+					<DelightfulJsonSchemaEditor
 						allowExpression
 						expressionSource={expressionDataSource}
 						displayColumns={[

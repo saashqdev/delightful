@@ -1,12 +1,12 @@
 import { Button, Drawer, message, Modal, Tooltip } from "antd"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { useFlowStore } from "@/opensource/stores/flow"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { IconHistory } from "@tabler/icons-react"
 import EmptyIcon from "@/assets/logos/empty.svg"
 import { cx } from "antd-style"
 import { useMemo, type MutableRefObject } from "react"
-import type { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
+import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
 import type { FlowDraft } from "@/types/flow"
 import { useTranslation } from "react-i18next"
 import { resolveToString } from "@dtyq/es6-template-strings"
@@ -18,8 +18,8 @@ import { hasEditRight } from "../AuthControlButton/types"
 import { unShadowFlow } from "../../utils/helpers"
 
 type DraftListButtonProps = {
-	flow?: MagicFlow.Flow
-	flowInstance?: MutableRefObject<MagicFlowInstance | null>
+	flow?: DelightfulFlow.Flow
+	flowInstance?: MutableRefObject<DelightfulFlowInstance | null>
 	initDraftList: (this: any, flowCode: any) => Promise<FlowDraft.Detail[]>
 	showFlowIsDraftToast: () => void
 }

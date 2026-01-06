@@ -7,15 +7,15 @@ declare(strict_types=1);
 
 namespace App\Application\Chat\Service;
 
-use App\Domain\Chat\Service\MagicSeqDomainService;
+use App\Domain\Chat\Service\DelightfulSeqDomainService;
 use Throwable;
 
 /**
  * 聊天消息相关.
  */
-class MagicSeqAppService extends AbstractAppService
+class DelightfulSeqAppService extends AbstractAppService
 {
-    public function __construct(protected MagicSeqDomainService $magicSeqDomainService)
+    public function __construct(protected DelightfulSeqDomainService $magicSeqDomainService)
     {
     }
 

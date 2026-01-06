@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Core\Contract\Flow;
 
-use App\Domain\Flow\Entity\MagicFlowToolSetEntity;
+use App\Domain\Flow\Entity\DelightfulFlowToolSetEntity;
 
 interface BuiltInToolSetInterface
 {
@@ -23,7 +23,7 @@ interface BuiltInToolSetInterface
 
     public function addTool(BuiltInToolInterface $tool): void;
 
-    public function generateToolSet(): MagicFlowToolSetEntity;
+    public function generateToolSet(): DelightfulFlowToolSetEntity;
 
     public function getCode(): string;
 

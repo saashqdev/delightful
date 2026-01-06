@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Repository\Persistence;
 
 use App\Domain\Contact\Entity\AccountEntity;
-use App\Domain\Contact\Repository\Facade\MagicAccountRepositoryInterface;
+use App\Domain\Contact\Repository\Facade\DelightfulAccountRepositoryInterface;
 use App\Domain\Contact\Repository\Persistence\Model\AccountModel;
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
@@ -18,14 +18,14 @@ use Hyperf\Cache\Annotation\Cacheable;
 use Hyperf\Cache\Annotation\CacheEvict;
 use Hyperf\DbConnection\Db;
 
-readonly class MagicAccountRepository implements MagicAccountRepositoryInterface
+readonly class DelightfulAccountRepository implements DelightfulAccountRepositoryInterface
 {
     public function __construct(
         protected AccountModel $accountModel,
     ) {
     }
 
-    public function getAccountInfoByMagicId(string $magicId): ?AccountEntity
+    public function getAccountInfoByDelightfulId(string $magicId): ?AccountEntity
     {
         $account = $this->getAccountInfo($magicId);
         if ($account === null) {
@@ -37,14 +37,14 @@ readonly class MagicAccountRepository implements MagicAccountRepositoryInterface
     /**
      * @return AccountEntity[]
      */
-    public function getAccountByMagicIds(array $magicIds): array
+    public function getAccountByDelightfulIds(array $magicIds): array
     {
         $accounts = AccountModel::query()->whereIn('magic_id', $magicIds);
         $accounts = Db::select($accounts->toSql(), $accounts->getBindings());
         $data = [];
         foreach ($accounts as $account) {
             $accountEntity = UserAssembler::getAccountEntity($account);
-            $data[$accountEntity->getMagicId()] = $accountEntity;
+            $data[$accountEntity->getDelightfulId()] = $accountEntity;
         }
         return $data;
     }
@@ -55,7 +55,7 @@ readonly class MagicAccountRepository implements MagicAccountRepositoryInterface
         $accountDTO = $this->createAccountCheck($accountDTO);
         $this->accountModel::query()->create([
             'id' => $accountDTO->getId(),
-            'magic_id' => $accountDTO->getMagicId(),
+            'magic_id' => $accountDTO->getDelightfulId(),
             'type' => $accountDTO->getType()->value,
             'ai_code' => $accountDTO->getAiCode(),
             'status' => $accountDTO->getStatus()->value,
@@ -94,7 +94,7 @@ readonly class MagicAccountRepository implements MagicAccountRepositoryInterface
     /**
      * @return AccountEntity[]
      */
-    public function getAccountInfoByMagicIds(array $magicIds): array
+    public function getAccountInfoByDelightfulIds(array $magicIds): array
     {
         $query = $this->accountModel::query()->whereIn('magic_id', $magicIds);
         $accounts = Db::select($query->toSql(), $query->getBindings());
@@ -128,7 +128,7 @@ readonly class MagicAccountRepository implements MagicAccountRepositoryInterface
         return UserAssembler::getAccountEntities($accounts);
     }
 
-    #[CacheEvict(prefix: 'accountMagicId', value: '_#{magicId}')]
+    #[CacheEvict(prefix: 'accountDelightfulId', value: '_#{magicId}')]
     public function updateAccount(string $magicId, array $updateData): int
     {
         $time = date('Y-m-d H:i:s');
@@ -138,19 +138,19 @@ readonly class MagicAccountRepository implements MagicAccountRepositoryInterface
         return $this->accountModel::query()->where('magic_id', $magicId)->update($updateData);
     }
 
-    #[CacheEvict(prefix: 'accountMagicId', value: '_#{accountDTO.magicId}')]
+    #[CacheEvict(prefix: 'accountDelightfulId', value: '_#{accountDTO.magicId}')]
     public function saveAccount(AccountEntity $accountDTO): AccountEntity
     {
-        $account = $this->getMagicEntityWithoutCache($accountDTO->getMagicId());
+        $account = $this->getDelightfulEntityWithoutCache($accountDTO->getDelightfulId());
         // 不存在则创建
         if (! $account) {
             return $this->createAccount($accountDTO);
         }
         // 更新
         $accountData = $accountDTO->toArray();
-        $this->updateAccount($accountDTO->getMagicId(), $accountData);
+        $this->updateAccount($accountDTO->getDelightfulId(), $accountData);
         # 防止 $accountDTO 中参数不全,再查一次库
-        return $this->getMagicEntityWithoutCache($accountDTO->getMagicId());
+        return $this->getDelightfulEntityWithoutCache($accountDTO->getDelightfulId());
     }
 
     /**
@@ -175,7 +175,7 @@ readonly class MagicAccountRepository implements MagicAccountRepositoryInterface
 
     private function createAccountCheck(AccountEntity $accountDTO): AccountEntity
     {
-        if (empty($accountDTO->getMagicId())) {
+        if (empty($accountDTO->getDelightfulId())) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
         if ($accountDTO->getId() === null) {
@@ -185,7 +185,7 @@ readonly class MagicAccountRepository implements MagicAccountRepositoryInterface
         return $accountDTO;
     }
 
-    private function getMagicEntityWithoutCache(string $magicId): ?AccountEntity
+    private function getDelightfulEntityWithoutCache(string $magicId): ?AccountEntity
     {
         # 防止 $accountDTO 中参数不全,再查一次库
         $account = $this->accountModel::query()->where('magic_id', $magicId);
@@ -197,7 +197,7 @@ readonly class MagicAccountRepository implements MagicAccountRepositoryInterface
     }
 
     // 避免 redis 缓存序列化的对象,占用太多内存
-    #[Cacheable(prefix: 'accountMagicId', ttl: 60)]
+    #[Cacheable(prefix: 'accountDelightfulId', ttl: 60)]
     private function getAccountInfo(string $magicId): ?array
     {
         $query = $this->accountModel::query()->where('magic_id', $magicId);

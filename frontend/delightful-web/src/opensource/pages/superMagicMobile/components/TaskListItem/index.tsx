@@ -1,6 +1,6 @@
 import { memo } from "react"
 import { createStyles, cx, keyframes } from "antd-style"
-import type { TaskProcess } from "@/opensource/pages/superMagic/pages/Workspace/types"
+import type { TaskProcess } from "@/opensource/pages/superDelightful/pages/Workspace/types"
 import { CloseCircleFilled } from "@ant-design/icons"
 import { IconChecks, IconCircleCheck } from "@tabler/icons-react"
 

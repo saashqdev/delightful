@@ -1,6 +1,6 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
-import MagicModal from "@/opensource/components/base/MagicModal"
-import MagicTable from "@/opensource/components/base/MagicTable"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
+import DelightfulTable from "@/opensource/components/base/DelightfulTable"
 import { Flow, type ApiKey } from "@/types/flow"
 import {
 	IconCopy,
@@ -19,7 +19,7 @@ import { useMemo, useState } from "react"
 import { createStyles } from "antd-style"
 import type { Conversation } from "@/types/chat/conversation"
 import { pick } from "lodash-es"
-import { copyToClipboard } from "@delightful/delightful-flow/dist/MagicFlow/utils"
+import { copyToClipboard } from "@delightful/delightful-flow/dist/DelightfulFlow/utils"
 import { FlowApi } from "@/apis"
 import { env } from "@/utils/env"
 import NewKeyButton from "./NewKeyButton"
@@ -266,7 +266,7 @@ export default function KeyManagerButton({
 									onClick={() => toggleKeyVisibility(record.id)}
 									style={{ marginLeft: "8px", cursor: "pointer" }}
 								>
-									<MagicIcon
+									<DelightfulIcon
 										component={isVisible ? IconEyeOff : IconEye}
 										size={18}
 										stroke={1}
@@ -325,7 +325,7 @@ export default function KeyManagerButton({
 												justify="center"
 												onClick={onClick}
 											>
-												<MagicIcon
+												<DelightfulIcon
 													component={IconEdit}
 													size={18}
 													stroke={1}
@@ -348,7 +348,7 @@ export default function KeyManagerButton({
 										align="center"
 										justify="center"
 									>
-										<MagicIcon component={IconTrash} size={18} stroke={1} />
+										<DelightfulIcon component={IconTrash} size={18} stroke={1} />
 									</Flex>
 								</Popconfirm>
 							</Tooltip>
@@ -365,7 +365,7 @@ export default function KeyManagerButton({
 										align="center"
 										justify="center"
 									>
-										<MagicIcon component={IconRefresh} stroke={1} size={18} />
+										<DelightfulIcon component={IconRefresh} stroke={1} size={18} />
 									</Flex>
 								</Popconfirm>
 							</Tooltip>
@@ -378,7 +378,7 @@ export default function KeyManagerButton({
 										justify="center"
 										onClick={() => copyCurl(record)}
 									>
-										<MagicIcon component={IconCopy} stroke={1} size={18} />
+										<DelightfulIcon component={IconCopy} stroke={1} size={18} />
 									</Flex>
 								</Tooltip>
 							)}
@@ -390,7 +390,7 @@ export default function KeyManagerButton({
 										justify="center"
 										onClick={() => copySSEURL(record)}
 									>
-										<MagicIcon component={IconCopy} stroke={1} size={18} />
+										<DelightfulIcon component={IconCopy} stroke={1} size={18} />
 									</Flex>
 								</Tooltip>
 							)}
@@ -432,7 +432,7 @@ export default function KeyManagerButton({
 	}, [open, flowId])
 
 	return (
-		<MagicModal
+		<DelightfulModal
 			title={t("flow.apiKey.keyManager")}
 			open={open}
 			footer={null}
@@ -472,8 +472,8 @@ export default function KeyManagerButton({
 				</Flex>
 			)}
 			{apiKeyList.length !== 0 && (
-				<MagicTable<ApiKey> columns={columns} dataSource={apiKeyList} />
+				<DelightfulTable<ApiKey> columns={columns} dataSource={apiKeyList} />
 			)}
-		</MagicModal>
+		</DelightfulModal>
 	)
 }

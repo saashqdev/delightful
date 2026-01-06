@@ -1,4 +1,4 @@
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconMessageTopic } from "@/enhance/tabler/icons-react"
 import { Flex } from "antd"
 import { useTranslation } from "react-i18next"
@@ -12,7 +12,7 @@ export default memo(function PlaceholderTopicItem() {
 	return (
 		<div className={cx(styles.container, styles.active)}>
 			<Flex align="center" gap={4}>
-				<MagicIcon component={IconMessageTopic} size={24} />
+				<DelightfulIcon component={IconMessageTopic} size={24} />
 				<span className={styles.topicTitle}>{t("chat.topic.newTopic")}</span>
 			</Flex>
 		</div>

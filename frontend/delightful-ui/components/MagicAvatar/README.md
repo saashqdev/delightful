@@ -1,6 +1,6 @@
-# MagicAvatar 魔法头像组件
+# DelightfulAvatar 魔法头像组件
 
-`MagicAvatar` 是一个基于 Ant Design Avatar 组件的增强版头像组件，提供了自动生成颜色、徽章支持等功能。
+`DelightfulAvatar` 是一个基于 Ant Design Avatar 组件的增强版头像组件，提供了自动生成颜色、徽章支持等功能。
 
 ## 属性
 
@@ -15,20 +15,20 @@
 ## 基础用法
 
 ```tsx
-import { MagicAvatar } from '@/components/base/MagicAvatar';
+import { DelightfulAvatar } from '@/components/base/DelightfulAvatar';
 
 // 基础用法 - 使用文字（会自动截取前两个字符）
-<MagicAvatar>用户名</MagicAvatar>
+<DelightfulAvatar>用户名</DelightfulAvatar>
 
 // 使用图片
-<MagicAvatar src="https://example.com/avatar.png" />
+<DelightfulAvatar src="https://example.com/avatar.png" />
 
 // 自定义大小
-<MagicAvatar size={64}>大头像</MagicAvatar>
-<MagicAvatar size={24}>小头像</MagicAvatar>
+<DelightfulAvatar size={64}>大头像</DelightfulAvatar>
+<DelightfulAvatar size={24}>小头像</DelightfulAvatar>
 
 // 使用徽章
-<MagicAvatar
+<DelightfulAvatar
   badgeProps={{
     count: 5,
     dot: true,
@@ -36,10 +36,10 @@ import { MagicAvatar } from '@/components/base/MagicAvatar';
   }}
 >
   用户
-</MagicAvatar>
+</DelightfulAvatar>
 
 // 自定义样式
-<MagicAvatar style={{ border: '2px solid red' }}>自定义</MagicAvatar>
+<DelightfulAvatar style={{ border: '2px solid red' }}>自定义</DelightfulAvatar>
 ```
 
 ## 特点
@@ -57,4 +57,4 @@ import { MagicAvatar } from '@/components/base/MagicAvatar';
 -   需要根据用户名自动生成有颜色的头像时
 -   需要在列表或评论中显示用户标识时
 
-MagicAvatar 组件让你的头像展示更加美观和智能，无需为每个用户准备头像图片，也能呈现出个性化的效果。
+DelightfulAvatar 组件让你的头像展示更加美观和智能，无需为每个用户准备头像图片，也能呈现出个性化的效果。

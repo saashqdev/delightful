@@ -9,8 +9,8 @@ import { resolveToString } from "@dtyq/es6-template-strings"
 import { IconCloudDownload, IconEye } from "@tabler/icons-react"
 
 import FileIcon from "@/opensource/components/business/FileIcon"
-import MagicButton from "@/opensource/components/base/MagicButton"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulButton from "@/opensource/components/base/DelightfulButton"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import useChatFileUrls from "@/opensource/hooks/chat/useChatFileUrls"
 import { useConversationMessage } from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageItem/components/ConversationMessageProvider/hooks"
 import MessageFilePreviewService from "@/opensource/services/chat/message/MessageFilePreview"
@@ -107,26 +107,26 @@ const Attachments = ({
 						</Flex>
 
 						<Flex gap={4}>
-							<MagicButton
+							<DelightfulButton
 								className={styles.controlButton}
 								type="text"
 								size="small"
 								hidden={!MessageFilePreviewService.canPreview(file)}
 								onClick={() => onPreview?.(file)}
 							>
-								<MagicIcon component={IconEye} size={18} />
-							</MagicButton>
-							<MagicButton
+								<DelightfulIcon component={IconEye} size={18} />
+							</DelightfulButton>
+							<DelightfulButton
 								className={styles.controlButton}
 								type="text"
 								size="small"
 								onClick={() => onDownload?.(file.file_id)}
 							>
-								<MagicIcon component={IconCloudDownload} size={18} />
-							</MagicButton>
-							{/* <MagicButton className={styles.controlButton} type="text" size="small">
-								<MagicIcon component={IconDeviceFloppy} size={18} />
-							</MagicButton> */}
+								<DelightfulIcon component={IconCloudDownload} size={18} />
+							</DelightfulButton>
+							{/* <DelightfulButton className={styles.controlButton} type="text" size="small">
+								<DelightfulIcon component={IconDeviceFloppy} size={18} />
+							</DelightfulButton> */}
 						</Flex>
 					</Flex>
 				))}

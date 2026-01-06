@@ -1,21 +1,21 @@
 import { Button, Form, message } from "antd"
-import type { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
+import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
 import { useBoolean, useMemoizedFn, useUpdateEffect } from "ahooks"
 import { useMemo, type MutableRefObject } from "react"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { useFlowStore } from "@/opensource/stores/flow"
-import MagicInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
+import DelightfulInput from "@delightful/delightful-flow/dist/common/BaseUI/Input"
 import antdStyles from "@/opensource/pages/flow/index.module.less"
 import { useTranslation } from "react-i18next"
-import MagicModal from "@/opensource/components/base/MagicModal"
+import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import { FlowApi } from "@/apis"
 import styles from "./index.module.less"
 import { useCustomFlow } from "../../context/CustomFlowContext/useCustomFlow"
 import { shadowFlow } from "../../utils/helpers"
 
 type PublishFlowButtonProps = {
-	flowInstance?: MutableRefObject<MagicFlowInstance | null>
-	flow?: MagicFlow.Flow
+	flowInstance?: MutableRefObject<DelightfulFlowInstance | null>
+	flow?: DelightfulFlow.Flow
 	Icon?: any
 	isMainFlow: boolean
 	initPublishList?: (this: any, flowCode: any) => Promise<void>
@@ -112,7 +112,7 @@ export default function PublishFlowButton({
 			)}
 			{Icon && <Icon onClick={isMainFlow ? handleOk : setTrue} />}
 
-			<MagicModal
+			<DelightfulModal
 				className={antdStyles.antdModal}
 				title="填写版本信息"
 				open={open}
@@ -121,13 +121,13 @@ export default function PublishFlowButton({
 			>
 				<Form form={form} className={styles.form} initialValues={initialValues}>
 					<Form.Item name="name" label="版本名称">
-						<MagicInput />
+						<DelightfulInput />
 					</Form.Item>
 					<Form.Item name="description" label="版本描述">
-						<MagicInput.TextArea />
+						<DelightfulInput.TextArea />
 					</Form.Item>
 				</Form>
-			</MagicModal>
+			</DelightfulModal>
 		</>
 	)
 }

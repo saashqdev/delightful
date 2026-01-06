@@ -3,14 +3,14 @@ import { memo, useMemo, useState } from "react"
 import { IconHeartFilled, IconMoodSmileFilled } from "@tabler/icons-react"
 import { Flex } from "antd"
 import { colorScales } from "@/opensource/providers/ThemeProvider/colors"
-import MagicButton from "../MagicButton"
-import MagicIcon from "../MagicIcon"
+import DelightfulButton from "../DelightfulButton"
+import DelightfulIcon from "../DelightfulIcon"
 
 import emojiJsons from "./emojis.json"
 import EmojiSelect from "./components/EmojiSelect"
 import type { EmojiInfo } from "./types"
 
-interface MagicEmojiPanelProps {
+interface DelightfulEmojiPanelProps {
 	onClick?: (emoji: EmojiInfo) => void
 }
 
@@ -56,7 +56,7 @@ const useStyles = createStyles(({ css, token }) => {
 	}
 })
 
-const MagicEmojiPanel = memo(({ onClick }: MagicEmojiPanelProps) => {
+const DelightfulEmojiPanel = memo(({ onClick }: DelightfulEmojiPanelProps) => {
 	const { styles } = useStyles()
 
 	const [panelKey, setPanelKey] = useState<"emoji" | "like">("emoji")
@@ -84,24 +84,24 @@ const MagicEmojiPanel = memo(({ onClick }: MagicEmojiPanelProps) => {
 				{panelKey === "emoji" ? emojiList : null}
 			</Flex>
 			<Flex className={styles.footer} gap={10}>
-				<MagicButton
+				<DelightfulButton
 					type="text"
 					className={panelKey === "emoji" ? styles.active : ""}
 					onClick={() => setPanelKey("emoji")}
 					icon={
-						<MagicIcon
+						<DelightfulIcon
 							size={20}
 							component={IconMoodSmileFilled}
 							color={colorScales.yellow[5]}
 						/>
 					}
 				/>
-				<MagicButton
+				<DelightfulButton
 					type="text"
 					className={panelKey === "like" ? styles.active : ""}
 					onClick={() => setPanelKey("like")}
 					icon={
-						<MagicIcon
+						<DelightfulIcon
 							size={20}
 							component={IconHeartFilled}
 							color={colorScales.red[5]}
@@ -113,4 +113,4 @@ const MagicEmojiPanel = memo(({ onClick }: MagicEmojiPanelProps) => {
 	)
 })
 
-export default MagicEmojiPanel
+export default DelightfulEmojiPanel

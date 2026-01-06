@@ -11,27 +11,27 @@ use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionData;
 use App\Application\Flow\ExecuteManager\ExecutionData\ExecutionType;
 use App\Application\Flow\ExecuteManager\ExecutionData\Operator;
 use App\Application\Flow\ExecuteManager\ExecutionData\TriggerData;
-use App\Application\Flow\ExecuteManager\MagicFlowExecutor;
+use App\Application\Flow\ExecuteManager\DelightfulFlowExecutor;
 use App\Application\Kernel\EnvManager;
-use App\Domain\Agent\Service\MagicAgentDomainService;
+use App\Domain\Agent\Service\DelightfulAgentDomainService;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
-use App\Domain\Chat\Entity\MagicSeqEntity;
+use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
-use App\Domain\Chat\Service\MagicConversationDomainService;
+use App\Domain\Chat\Service\DelightfulConversationDomainService;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\UserType;
-use App\Domain\Contact\Service\MagicUserDomainService;
+use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Domain\Flow\Entity\ValueObject\ConversationId;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Structure\TriggerType;
 use App\Domain\Flow\Entity\ValueObject\NodeType;
-use App\Domain\Flow\Service\MagicFlowDomainService;
+use App\Domain\Flow\Service\DelightfulFlowDomainService;
 use App\ErrorCode\FlowErrorCode;
 use App\ErrorCode\UserTaskErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Chat\DTO\Response\UserTaskResponseDTO;
 use App\Interfaces\Chat\DTO\UserTaskDTO;
 use App\Interfaces\Chat\DTO\UserTaskValueDTO;
@@ -48,13 +48,13 @@ use Delightful\TaskScheduler\Service\TaskConfigDomainService;
 use Delightful\TaskScheduler\Service\TaskSchedulerDomainService;
 use Hyperf\DbConnection\Annotation\Transactional;
 
-class MagicUserTaskAppService extends AbstractAppService
+class DelightfulUserTaskAppService extends AbstractAppService
 {
     public function __construct(
         private TaskSchedulerDomainService $taskSchedulerDomainService,
-        private MagicAgentDomainService $magicAgentDomainService,
-        private MagicConversationDomainService $magicConversationDomainService,
-        private MagicUserDomainService $magicUserDomainService,
+        private DelightfulAgentDomainService $magicAgentDomainService,
+        private DelightfulConversationDomainService $magicConversationDomainService,
+        private DelightfulUserDomainService $magicUserDomainService,
     ) {
     }
 
@@ -221,7 +221,7 @@ class MagicUserTaskAppService extends AbstractAppService
         $userTaskDTO->setAgentUserId($conversation->getReceiveId());
 
         // 根据agent_id 查询flow_code
-        $flow = di(MagicAgentDomainService::class)->getAgentById($userTaskDTO->getAgentId());
+        $flow = di(DelightfulAgentDomainService::class)->getAgentById($userTaskDTO->getAgentId());
         if (empty($flow->getFlowCode())) {
             ExceptionBuilder::throw(UserTaskErrorCode::PARAMETER_INVALID, 'flow_code not found');
         }
@@ -323,7 +323,7 @@ class MagicUserTaskAppService extends AbstractAppService
     public static function callback(string $flow_code, array $user_task, array $user_task_value)
     {
         $appMessageId = IdGenerator::getUniqueId32();
-        $receiveSeqDTO = new MagicSeqEntity();
+        $receiveSeqDTO = new DelightfulSeqEntity();
         $messageContent = new TextMessage();
         $content = $user_task['name'];
         if (! empty($user_task['description'])) {
@@ -336,7 +336,7 @@ class MagicUserTaskAppService extends AbstractAppService
         $senderUserId = $user_task['creator'];
         $receiveUserId = $user_task['agent_user_id'];
         $topicId = $user_task['topic_id'] ?? '';
-        di(MagicChatMessageAppService::class)->userSendMessageToAgent($receiveSeqDTO, $senderUserId, $receiveUserId, $appMessageId, false, null, ConversationType::Ai, $topicId);
+        di(DelightfulChatMessageAppService::class)->userSendMessageToAgent($receiveSeqDTO, $senderUserId, $receiveUserId, $appMessageId, false, null, ConversationType::Ai, $topicId);
     }
 
     // 后台任务,不会模拟用户发送消息,  预留方法，暂时没有用到
@@ -365,10 +365,10 @@ class MagicUserTaskAppService extends AbstractAppService
     //     ];
 
     //     $dataIsolation = FlowDataIsolation::create();
-    //     $magicFlow = di(MagicFlowDomainService::class)->getByCode($dataIsolation, $flow_code);
+    //     $magicFlow = di(DelightfulFlowDomainService::class)->getByCode($dataIsolation, $flow_code);
 
-    //     $authorization = new MagicUserAuthorization();
-    //     $authorization->setMagicEnvId($user_task['magic_env_id'] ?? 1);
+    //     $authorization = new DelightfulUserAuthorization();
+    //     $authorization->setDelightfulEnvId($user_task['magic_env_id'] ?? 1);
     //     $authorization->setId($user_task['creator']);
     //     $authorization->setOrganizationCode($magicFlow->getOrganizationCode());
     //     $authorization->setUserType(UserType::Ai);
@@ -415,7 +415,7 @@ class MagicUserTaskAppService extends AbstractAppService
     //     $triggerTime = new DateTime();
     //     // }
     //     $nickname = $triggerConfig['trigger_data']['nickname'];
-    //     // if (! $nickname && $authorization instanceof MagicUserAuthorization) {
+    //     // if (! $nickname && $authorization instanceof DelightfulUserAuthorization) {
     //     //     $nickname = $authorization->getNickname();
     //     // }
     //     // $operator = $this->createExecutionOperator($authorization);
@@ -446,7 +446,7 @@ class MagicUserTaskAppService extends AbstractAppService
     //     $executionData->setTopicId($topicId);
     //     $executionData->setDebug($triggerConfig['debug']);
     //     // 运行流程图，检测是否可以运行
-    //     $executor = new MagicFlowExecutor($magicFlow, $executionData);
+    //     $executor = new DelightfulFlowExecutor($magicFlow, $executionData);
     //     $executor->execute();
 
     //     foreach ($magicFlow->getNodes() as $node) {

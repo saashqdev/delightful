@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperMagic\Listener;
+namespace Delightful\SuperDelightful\Listener;
 
 use App\Infrastructure\Core\Router\RouteLoader;
 use Hyperf\Event\Contract\ListenerInterface;

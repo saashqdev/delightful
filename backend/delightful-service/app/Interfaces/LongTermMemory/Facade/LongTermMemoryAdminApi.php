@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\LongTermMemory\Facade;
 
-use App\Application\Chat\Service\MagicChatMessageAppService;
+use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\LongTermMemory\DTO\EvaluateConversationRequestDTO;
 use App\Application\LongTermMemory\Enum\AppCodeEnum;
 use App\Application\LongTermMemory\Service\LongTermMemoryAppService;
@@ -19,10 +19,10 @@ use App\Domain\LongTermMemory\Entity\ValueObject\MemoryStatus;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\AbstractApi;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use App\Infrastructure\Core\Traits\MagicUserAuthorizationTrait;
+use App\Infrastructure\Core\Traits\DelightfulUserAuthorizationTrait;
 use Delightful\ApiResponse\Annotation\ApiResponse;
-use Delightful\SuperMagic\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationAction;
-use Delightful\SuperMagic\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationScenario;
+use Delightful\SuperDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationAction;
+use Delightful\SuperDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationScenario;
 use Exception;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\Logger\LoggerFactory;
@@ -38,7 +38,7 @@ use function Hyperf\Translation\trans;
 #[ApiResponse('low_code')]
 class LongTermMemoryAdminApi extends AbstractApi
 {
-    use MagicUserAuthorizationTrait;
+    use DelightfulUserAuthorizationTrait;
 
     protected LoggerInterface $logger;
 
@@ -47,7 +47,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         protected ValidatorFactoryInterface $validator,
         protected LoggerFactory $loggerFactory,
         protected LongTermMemoryAppService $longTermMemoryAppService,
-        protected MagicChatMessageAppService $magicChatMessageAppService,
+        protected DelightfulChatMessageAppService $magicChatMessageAppService,
         protected ModelGatewayMapper $modelGatewayMapper
     ) {
         parent::__construct($request);

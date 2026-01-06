@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Permission\Facade;
 
-use App\Application\Kernel\Enum\MagicAdminResourceEnum;
-use App\Application\Kernel\Enum\MagicOperationEnum;
+use App\Application\Kernel\Enum\DelightfulAdminResourceEnum;
+use App\Application\Kernel\Enum\DelightfulOperationEnum;
 use App\Application\Permission\Service\OrganizationAdminAppService;
 use App\Infrastructure\Core\Traits\DataIsolationTrait;
 use App\Infrastructure\Core\ValueObject\Page;
@@ -29,7 +29,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     /**
      * 获取组织管理员列表.
      */
-    #[CheckPermission(MagicAdminResourceEnum::ORGANIZATION_ADMIN, MagicOperationEnum::QUERY)]
+    #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::QUERY)]
     public function list(): array
     {
         $authorization = $this->getAuthorization();
@@ -50,7 +50,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     /**
      * 获取组织管理员详情.
      */
-    #[CheckPermission(MagicAdminResourceEnum::ORGANIZATION_ADMIN, MagicOperationEnum::QUERY)]
+    #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::QUERY)]
     public function show(int $id): array
     {
         $authorization = $this->getAuthorization();
@@ -64,7 +64,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     /**
      * 授予用户组织管理员权限.
      */
-    #[CheckPermission(MagicAdminResourceEnum::ORGANIZATION_ADMIN, MagicOperationEnum::EDIT)]
+    #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::EDIT)]
     public function grant(): array
     {
         $authorization = $this->getAuthorization();
@@ -85,7 +85,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     /**
      * 删除组织管理员.
      */
-    #[CheckPermission(MagicAdminResourceEnum::ORGANIZATION_ADMIN, MagicOperationEnum::EDIT)]
+    #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::EDIT)]
     public function destroy(int $id): array
     {
         $authorization = $this->getAuthorization();
@@ -98,7 +98,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     /**
      * 转让组织创建人身份.
      */
-    #[CheckPermission(MagicAdminResourceEnum::ORGANIZATION_ADMIN, MagicOperationEnum::EDIT)]
+    #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::EDIT)]
     public function transferOwner(): array
     {
         $authorization = $this->getAuthorization();

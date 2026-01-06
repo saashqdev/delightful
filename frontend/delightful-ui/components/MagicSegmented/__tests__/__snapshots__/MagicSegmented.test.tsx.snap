@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`MagicSegmented > 快照测试 > 块级分段控制器快照 1`] = `
+exports[`DelightfulSegmented > 快照测试 > 块级分段控制器快照 1`] = `
 <DocumentFragment>
   <div
     aria-label="segmented control"
@@ -49,7 +49,7 @@ exports[`MagicSegmented > 快照测试 > 块级分段控制器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSegmented > 快照测试 > 基础分段控制器快照 1`] = `
+exports[`DelightfulSegmented > 快照测试 > 基础分段控制器快照 1`] = `
 <DocumentFragment>
   <div
     aria-label="segmented control"
@@ -114,7 +114,7 @@ exports[`MagicSegmented > 快照测试 > 基础分段控制器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSegmented > 快照测试 > 大尺寸分段控制器快照 1`] = `
+exports[`DelightfulSegmented > 快照测试 > 大尺寸分段控制器快照 1`] = `
 <DocumentFragment>
   <div
     aria-label="segmented control"
@@ -163,7 +163,7 @@ exports[`MagicSegmented > 快照测试 > 大尺寸分段控制器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSegmented > 快照测试 > 小尺寸分段控制器快照 1`] = `
+exports[`DelightfulSegmented > 快照测试 > 小尺寸分段控制器快照 1`] = `
 <DocumentFragment>
   <div
     aria-label="segmented control"
@@ -212,7 +212,7 @@ exports[`MagicSegmented > 快照测试 > 小尺寸分段控制器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSegmented > 快照测试 > 带图标分段控制器快照 1`] = `
+exports[`DelightfulSegmented > 快照测试 > 带图标分段控制器快照 1`] = `
 <DocumentFragment>
   <div
     aria-label="segmented control"
@@ -277,7 +277,7 @@ exports[`MagicSegmented > 快照测试 > 带图标分段控制器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`MagicSegmented > 快照测试 > 带默认值分段控制器快照 1`] = `
+exports[`DelightfulSegmented > 快照测试 > 带默认值分段控制器快照 1`] = `
 <DocumentFragment>
   <div
     aria-label="segmented control"
@@ -342,7 +342,7 @@ exports[`MagicSegmented > 快照测试 > 带默认值分段控制器快照 1`] =
 </DocumentFragment>
 `;
 
-exports[`MagicSegmented > 快照测试 > 禁用状态分段控制器快照 1`] = `
+exports[`DelightfulSegmented > 快照测试 > 禁用状态分段控制器快照 1`] = `
 <DocumentFragment>
   <div
     aria-label="segmented control"

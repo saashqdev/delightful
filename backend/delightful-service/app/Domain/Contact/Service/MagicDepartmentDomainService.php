@@ -8,21 +8,21 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Service;
 
 use App\Domain\Chat\DTO\PageResponseDTO\DepartmentsPageResponseDTO;
-use App\Domain\Contact\Entity\MagicDepartmentEntity;
+use App\Domain\Contact\Entity\DelightfulDepartmentEntity;
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Entity\ValueObject\DepartmentOption;
 use App\Domain\Contact\Entity\ValueObject\PlatformType;
 
-class MagicDepartmentDomainService extends AbstractContactDomainService
+class DelightfulDepartmentDomainService extends AbstractContactDomainService
 {
-    public function getDepartmentById(DataIsolation $dataIsolation, string $departmentId): ?MagicDepartmentEntity
+    public function getDepartmentById(DataIsolation $dataIsolation, string $departmentId): ?DelightfulDepartmentEntity
     {
         // -1 表示根部门信息.
         return $this->departmentRepository->getDepartmentById($departmentId, $dataIsolation->getCurrentOrganizationCode());
     }
 
     /**
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
     public function getDepartmentByIds(DataIsolation $dataIsolation, array $departmentIds, bool $keyById = false): array
     {
@@ -30,7 +30,7 @@ class MagicDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * @return array<string, MagicDepartmentEntity[]>
+     * @return array<string, DelightfulDepartmentEntity[]>
      */
     public function getDepartmentFullPathByIds(DataIsolation $dataIsolation, array $departmentIds): array
     {
@@ -59,11 +59,11 @@ class MagicDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
-    public function getDepartmentByIdsInMagic(array $departmentIds, bool $keyById = false): array
+    public function getDepartmentByIdsInDelightful(array $departmentIds, bool $keyById = false): array
     {
-        return $this->departmentRepository->getDepartmentsByIdsInMagic($departmentIds, $keyById);
+        return $this->departmentRepository->getDepartmentsByIdsInDelightful($departmentIds, $keyById);
     }
 
     public function updateDepartmentsOptionByIds(array $departmentIds, ?DepartmentOption $departmentOption = null): int
@@ -97,8 +97,8 @@ class MagicDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * @param MagicDepartmentEntity[] $departments
-     * @return MagicDepartmentEntity[]
+     * @param DelightfulDepartmentEntity[] $departments
+     * @return DelightfulDepartmentEntity[]
      */
     public function getDepartmentsHasChild(array $departments, string $organizationCode): array
     {
@@ -116,7 +116,7 @@ class MagicDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
     public function searchDepartment(DataIsolation $dataIsolation, string $departmentName): array
     {
@@ -126,7 +126,7 @@ class MagicDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
     public function searchDepartmentForPage(DataIsolation $dataIsolation, string $departmentName, string $pageToken = '', int $pageSize = 50): array
     {
@@ -137,7 +137,7 @@ class MagicDepartmentDomainService extends AbstractContactDomainService
 
     /**
      * 批量获取部门的所有子部门.
-     * @return MagicDepartmentEntity[]
+     * @return DelightfulDepartmentEntity[]
      */
     public function getAllChildrenByDepartmentIds(array $departmentIds, DataIsolation $dataIsolation): array
     {
@@ -157,7 +157,7 @@ class MagicDepartmentDomainService extends AbstractContactDomainService
         $this->departmentRepository->addDepartmentDocument($departmentId, $documentId);
     }
 
-    public function getDepartmentChildrenEmployeeSum(MagicDepartmentEntity $departmentEntity): int
+    public function getDepartmentChildrenEmployeeSum(DelightfulDepartmentEntity $departmentEntity): int
     {
         return $this->departmentRepository->getSelfAndChildrenEmployeeSum($departmentEntity);
     }
@@ -182,7 +182,7 @@ class MagicDepartmentDomainService extends AbstractContactDomainService
     /**
      * 批量获取多个组织的根部门信息.
      * @param array $organizationCodes 组织代码数组
-     * @return array<string,MagicDepartmentEntity> 以组织代码为键，根部门实体为值的关联数组
+     * @return array<string,DelightfulDepartmentEntity> 以组织代码为键，根部门实体为值的关联数组
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array
     {
@@ -247,7 +247,7 @@ class MagicDepartmentDomainService extends AbstractContactDomainService
 
     /**
      * 获取部门的所有子部门.
-     * @param MagicDepartmentEntity[] $allDepartments
+     * @param DelightfulDepartmentEntity[] $allDepartments
      */
     protected function getChildrenByDepartmentIds(array $allDepartments, array $departmentIds): array
     {

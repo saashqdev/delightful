@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\KnowledgeBase\Service;
 
 use App\Application\ModelGateway\Mapper\ModelGatewayMapper;
-use App\Domain\Contact\Entity\MagicUserEntity;
+use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Domain\Flow\Entity\ValueObject\Code;
 use App\Domain\KnowledgeBase\Entity\KnowledgeBaseEntity;
 use App\Domain\KnowledgeBase\Entity\ValueObject\DocumentFile\Interfaces\DocumentFileInterface;
@@ -172,7 +172,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * @return array{total: int, list: array<KnowledgeBaseEntity>, users: array<MagicUserEntity>}
+     * @return array{total: int, list: array<KnowledgeBaseEntity>, users: array<DelightfulUserEntity>}
      */
     public function queries(Authenticatable $authorization, KnowledgeBaseQuery $query, Page $page): array
     {

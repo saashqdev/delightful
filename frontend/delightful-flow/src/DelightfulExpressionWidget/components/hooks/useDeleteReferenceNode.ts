@@ -2,7 +2,7 @@
  * 特殊渲染组件：如单选、多选、成员等等，支持设置引用值时的公用方法状态
  */
 
-import { EXPRESSION_ITEM, WithReference } from "@/MagicExpressionWidget/types"
+import { EXPRESSION_ITEM, WithReference } from "@/DelightfulExpressionWidget/types"
 import { useMemoizedFn } from "ahooks"
 
 type UseDeleteReferenceNodeProps = {

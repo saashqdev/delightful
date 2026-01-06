@@ -7,21 +7,21 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Factory;
 
-use App\Domain\Flow\Entity\MagicFlowVersionEntity;
-use App\Domain\Flow\Repository\Persistence\Model\MagicFlowVersionModel;
+use App\Domain\Flow\Entity\DelightfulFlowVersionEntity;
+use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowVersionModel;
 
-class MagicFlowVersionFactory
+class DelightfulFlowVersionFactory
 {
-    public static function modelToEntity(MagicFlowVersionModel $magicFlowVersionModel): MagicFlowVersionEntity
+    public static function modelToEntity(DelightfulFlowVersionModel $magicFlowVersionModel): DelightfulFlowVersionEntity
     {
-        $magicFlowDraftEntity = new MagicFlowVersionEntity();
+        $magicFlowDraftEntity = new DelightfulFlowVersionEntity();
         $magicFlowDraftEntity->setId($magicFlowVersionModel->id);
         $magicFlowDraftEntity->setFlowCode($magicFlowVersionModel->flow_code);
         $magicFlowDraftEntity->setCode($magicFlowVersionModel->code);
         $magicFlowDraftEntity->setName($magicFlowVersionModel->name);
         $magicFlowDraftEntity->setDescription($magicFlowVersionModel->description);
         if (! empty($magicFlowVersionModel->magic_flow)) {
-            $magicFlowDraftEntity->setMagicFlow(MagicFlowFactory::arrayToEntity($magicFlowVersionModel->magic_flow, 'v0'));
+            $magicFlowDraftEntity->setDelightfulFlow(DelightfulFlowFactory::arrayToEntity($magicFlowVersionModel->magic_flow, 'v0'));
         }
 
         $magicFlowDraftEntity->setOrganizationCode($magicFlowVersionModel->organization_code);

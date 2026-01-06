@@ -1,19 +1,19 @@
 import { Flex, Form, Tooltip } from "antd"
 import { useForm } from "antd/lib/form/Form"
-import { ExpressionMode } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
+import { ExpressionMode } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
 import { useMemo } from "react"
 import { useMemoizedFn } from "ahooks"
 import {
 	useFlow,
 	useNodeConfigActions,
-} from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+} from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { set, cloneDeep } from "lodash-es"
 import { IconHelp } from "@tabler/icons-react"
-import MagicSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
+import DelightfulSelect from "@delightful/delightful-flow/dist/common/BaseUI/Select"
 import { useTranslation } from "react-i18next"
 import { getExpressionPlaceholder } from "@/opensource/pages/flow/utils/helpers"
-import MagicExpression from "../../../common/Expression"
+import DelightfulExpression from "../../../common/Expression"
 import usePrevious from "../../../common/hooks/usePrevious"
 import styles from "./index.module.less"
 import useCurrentNodeUpdate from "../../../common/hooks/useCurrentNodeUpdate"
@@ -84,7 +84,7 @@ export default function CacheSetter() {
 						</Flex>
 					}
 				>
-					<MagicSelect
+					<DelightfulSelect
 						options={[
 							{ label: t("common.currentAgent", { ns: "flow" }), value: "agent" },
 							{ label: t("common.currentUser", { ns: "flow" }), value: "user" },
@@ -92,7 +92,7 @@ export default function CacheSetter() {
 						]}
 					/>
 				</Form.Item>
-				<MagicExpression
+				<DelightfulExpression
 					name="cache_key"
 					label={t("common.key", { ns: "flow" })}
 					mode={ExpressionMode.TextArea}
@@ -103,7 +103,7 @@ export default function CacheSetter() {
 					minHeight="100%"
 				/>
 
-				<MagicExpression
+				<DelightfulExpression
 					name="cache_value"
 					label={t("common.value", { ns: "flow" })}
 					mode={ExpressionMode.TextArea}
@@ -111,7 +111,7 @@ export default function CacheSetter() {
 					dataSource={expressionDataSource}
 				/>
 
-				<MagicExpression
+				<DelightfulExpression
 					name="cache_ttl"
 					label={t("cacheSetter.timeout", { ns: "flow" })}
 					mode={ExpressionMode.TextArea}

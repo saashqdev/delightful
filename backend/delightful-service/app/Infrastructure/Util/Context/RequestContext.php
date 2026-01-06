@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Util\Context;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use App\Interfaces\Authorization\Web\MagicUserAuthorization;
+use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Qbhy\HyperfAuth\Authenticatable;
@@ -21,7 +21,7 @@ class RequestContext
 
     protected string $authorization = '';
 
-    protected Authenticatable|MagicUserAuthorization $userAuthorization;
+    protected Authenticatable|DelightfulUserAuthorization $userAuthorization;
 
     protected ?DataIsolation $dataIsolation = null;
 
@@ -62,13 +62,13 @@ class RequestContext
         $this->authorization = $authorization;
     }
 
-    public function getUserAuthorization(): MagicUserAuthorization
+    public function getUserAuthorization(): DelightfulUserAuthorization
     {
         /* @phpstan-ignore-next-line */
         return $this->userAuthorization;
     }
 
-    public function setUserAuthorization(MagicUserAuthorization $userAuthorization): void
+    public function setUserAuthorization(DelightfulUserAuthorization $userAuthorization): void
     {
         $this->userAuthorization = $userAuthorization;
     }

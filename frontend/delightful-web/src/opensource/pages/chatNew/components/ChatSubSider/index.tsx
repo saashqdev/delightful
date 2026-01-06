@@ -2,10 +2,10 @@ import type { CollapseProps } from "antd"
 import { Flex } from "antd"
 import { useMemo, useState } from "react"
 import { useTranslation } from "react-i18next"
-import MagicCollapse from "@/opensource/components/base/MagicCollapse"
+import DelightfulCollapse from "@/opensource/components/base/DelightfulCollapse"
 import SubSiderContainer from "@/opensource/layouts/BaseLayout/components/SubSider"
 import { titleWithCount } from "@/utils/modules/chat"
-import MagicSegmented from "@/opensource/components/base/MagicSegmented"
+import DelightfulSegmented from "@/opensource/components/base/DelightfulSegmented"
 import { observer } from "mobx-react-lite"
 import conversationSiderbarStore from "@/opensource/stores/chatNew/conversationSidebar"
 import type Conversation from "@/opensource/models/chat/conversation"
@@ -77,7 +77,7 @@ const ChatSubSider = observer(() => {
 	if (conversationCount === 0) {
 		return (
 			<SubSiderContainer className={styles.container}>
-				<MagicSegmented
+				<DelightfulSegmented
 					className={styles.segmented}
 					value={activeSegmentedKey}
 					options={options}
@@ -102,14 +102,14 @@ const ChatSubSider = observer(() => {
 
 	return (
 		<SubSiderContainer className={styles.container}>
-			<MagicSegmented
+			<DelightfulSegmented
 				className={styles.segmented}
 				value={activeSegmentedKey}
 				options={options}
 				block
 				onChange={setActiveSegmentedKey}
 			/>
-			<MagicCollapse
+			<DelightfulCollapse
 				activeKey={activeKey}
 				onChange={setActiveKey}
 				className={styles.collapse}
@@ -191,7 +191,7 @@ const ChatSubSider = observer(() => {
 				}
 				style={{ display: activeSegmentedKey === SegmentedKey.Message ? "block" : "none" }}
 			/>
-			{/* <MagicList
+			{/* <DelightfulList
 				active={currentConversationId}
 				items={[]}
 				className={styles.list}

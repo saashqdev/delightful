@@ -1,11 +1,11 @@
 import { Button, Drawer, Tooltip, Form, Flex } from "antd"
-import type { MagicFlowInstance } from "@delightful/delightful-flow/dist/MagicFlow"
+import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/DelightfulFlow"
 import { useBoolean, useMemoizedFn } from "ahooks"
 import { useMemo, useState, type MutableRefObject } from "react"
-import type { MagicFlow } from "@delightful/delightful-flow/dist/MagicFlow/types/flow"
+import type { DelightfulFlow } from "@delightful/delightful-flow/dist/DelightfulFlow/types/flow"
 import { pick, cloneDeep, set } from "lodash-es"
-import MagicJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicJsonSchemaEditorWrap"
-import { ShowColumns } from "@delightful/delightful-flow/dist/MagicJsonSchemaEditor/constants"
+import DelightfulJSONSchemaEditorWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulJsonSchemaEditorWrap"
+import { ShowColumns } from "@delightful/delightful-flow/dist/DelightfulJsonSchemaEditor/constants"
 import { useFlowStore } from "@/opensource/stores/flow"
 import { useTranslation } from "react-i18next"
 import styles from "./GlobalVariablesButton.module.less"
@@ -13,8 +13,8 @@ import { useCustomFlow } from "../../context/CustomFlowContext/useCustomFlow"
 import { genDefaultComponent } from "../../utils/helpers"
 
 type GlobalVariablesButtonProps = {
-	flowInstance?: MutableRefObject<MagicFlowInstance | null>
-	flow?: MagicFlow.Flow
+	flowInstance?: MutableRefObject<DelightfulFlowInstance | null>
+	flow?: DelightfulFlow.Flow
 	Icon?: boolean
 	hasEditRight: boolean
 }
@@ -119,7 +119,7 @@ export default function GlobalVariablesButton({
 					onValuesChange={onValuesChange}
 				>
 					<Form.Item name="global_variable">
-						<MagicJSONSchemaEditorWrap
+						<DelightfulJSONSchemaEditorWrap
 							oneChildAtLeast={false}
 							allowExpression
 							expressionSource={[]}

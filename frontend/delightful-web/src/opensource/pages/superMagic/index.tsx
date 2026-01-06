@@ -1,6 +1,6 @@
 import SwitchOrganization from "@/layouts/BaseLayout/components/Sider/components/OrganizationSwitch"
-import MagicAvatar from "@/opensource/components/base/MagicAvatar"
-import MagicIcon from "@/opensource/components/base/MagicIcon"
+import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
+import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import UserMenus from "@/opensource/layouts/BaseLayout/components/Sider/components/UserMenus"
 import { userStore } from "@/opensource/models/user"
 import { IconLayoutGrid } from "@tabler/icons-react"
@@ -10,7 +10,7 @@ import { createStyles, cx } from "antd-style"
 import { observer } from "mobx-react-lite"
 import { useMemo } from "react"
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
-import MagicLogo from "./assets/svg/super_magic_logo.svg"
+import DelightfulLogo from "./assets/svg/super_magic_logo.svg"
 
 const useStyles = createStyles(({ token }) => ({
 	container: {
@@ -94,7 +94,7 @@ const menuKeyToPath = {
 	files: "files",
 }
 
-function SuperMagic() {
+function SuperDelightful() {
 	const { styles } = useStyles()
 	const navigate = useNavigate()
 	const location = useLocation()
@@ -111,30 +111,30 @@ function SuperMagic() {
 		return [
 			{
 				key: "workspace",
-				icon: <MagicIcon component={IconLayoutGrid} size={20} />,
+				icon: <DelightfulIcon component={IconLayoutGrid} size={20} />,
 				label: "工作区",
 			},
 			// {
 			// 	key: "archived",
-			// 	icon: <MagicIcon component={IconArchive} size={20} />,
+			// 	icon: <DelightfulIcon component={IconArchive} size={20} />,
 			// 	label: "归档",
 			// },
 			// {
 			// 	key: "files",
-			// 	icon: <MagicIcon component={IconFolder} size={20} />,
+			// 	icon: <DelightfulIcon component={IconFolder} size={20} />,
 			// 	label: "快捷访问",
 			// },
 		]
 	}, [])
 
-	const isSuperMagicRouter = location?.pathname?.startsWith("/super-magic")
+	const isSuperDelightfulRouter = location?.pathname?.startsWith("/super-magic")
 	const isMobile = useResponsive().md === false
 	return (
 		// <DetailProvider>
 		<div
 			className={cx(
 				styles.container,
-				isSuperMagicRouter ? styles.normalContainer : styles.superContainer,
+				isSuperDelightfulRouter ? styles.normalContainer : styles.superContainer,
 			)}
 		>
 			{isMobile ? null : (
@@ -147,8 +147,8 @@ function SuperMagic() {
 							gap: 10,
 						}}
 					>
-						{isSuperMagicRouter ? null : (
-							<img src={MagicLogo} alt="" className={styles.logo} />
+						{isSuperDelightfulRouter ? null : (
+							<img src={DelightfulLogo} alt="" className={styles.logo} />
 						)}
 
 						{menuItems.map((item) => {
@@ -178,12 +178,12 @@ function SuperMagic() {
 							gap: 10,
 						}}
 					>
-						{isSuperMagicRouter ? null : (
+						{isSuperDelightfulRouter ? null : (
 							<>
 								<UserMenus isPreviewMode>
-									<MagicAvatar src={userInfo?.avatar} size={40}>
+									<DelightfulAvatar src={userInfo?.avatar} size={40}>
 										{userInfo?.nickname}
-									</MagicAvatar>
+									</DelightfulAvatar>
 								</UserMenus>
 								<SwitchOrganization showPopover needRefresh />
 							</>
@@ -199,4 +199,4 @@ function SuperMagic() {
 	)
 }
 
-export default observer(SuperMagic)
+export default observer(SuperDelightful)

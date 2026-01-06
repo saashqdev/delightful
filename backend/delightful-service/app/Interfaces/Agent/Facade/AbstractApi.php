@@ -7,13 +7,13 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Agent\Facade;
 
-use App\Infrastructure\Core\Traits\MagicUserAuthorizationTrait;
+use App\Infrastructure\Core\Traits\DelightfulUserAuthorizationTrait;
 use App\Infrastructure\Core\ValueObject\Page;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 abstract class AbstractApi
 {
-    use MagicUserAuthorizationTrait;
+    use DelightfulUserAuthorizationTrait;
 
     public function __construct(
         protected readonly RequestInterface $request,

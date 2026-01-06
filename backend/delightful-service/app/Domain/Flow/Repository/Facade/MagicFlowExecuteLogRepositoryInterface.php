@@ -7,22 +7,22 @@ declare(strict_types=1);
 
 namespace App\Domain\Flow\Repository\Facade;
 
-use App\Domain\Flow\Entity\MagicFlowExecuteLogEntity;
+use App\Domain\Flow\Entity\DelightfulFlowExecuteLogEntity;
 use App\Domain\Flow\Entity\ValueObject\FlowDataIsolation;
 use App\Infrastructure\Core\ValueObject\Page;
 
-interface MagicFlowExecuteLogRepositoryInterface
+interface DelightfulFlowExecuteLogRepositoryInterface
 {
-    public function create(FlowDataIsolation $dataIsolation, MagicFlowExecuteLogEntity $magicFlowExecuteLogEntity): MagicFlowExecuteLogEntity;
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): DelightfulFlowExecuteLogEntity;
 
-    public function updateStatus(FlowDataIsolation $dataIsolation, MagicFlowExecuteLogEntity $magicFlowExecuteLogEntity): void;
+    public function updateStatus(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void;
 
     /**
-     * @return array<MagicFlowExecuteLogEntity>
+     * @return array<DelightfulFlowExecuteLogEntity>
      */
     public function getRunningTimeoutList(FlowDataIsolation $dataIsolation, int $timeout, Page $page): array;
 
-    public function getByExecuteId(FlowDataIsolation $dataIsolation, string $executeId): ?MagicFlowExecuteLogEntity;
+    public function getByExecuteId(FlowDataIsolation $dataIsolation, string $executeId): ?DelightfulFlowExecuteLogEntity;
 
-    public function incrementRetryCount(FlowDataIsolation $dataIsolation, MagicFlowExecuteLogEntity $magicFlowExecuteLogEntity): void;
+    public function incrementRetryCount(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void;
 }

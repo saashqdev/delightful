@@ -9,12 +9,12 @@ import type {
 	UserSelectItem,
 } from "@/opensource/components/business/MemberDepartmentSelectPanel/types"
 import MemberDepartmentSelectPanel from "@/opensource/components/business/MemberDepartmentSelectPanel"
-import type { MagicModalProps } from "@/opensource/components/base/MagicModal"
+import type { DelightfulModalProps } from "@/opensource/components/base/DelightfulModal"
 import { ChatApi } from "@/apis"
 import { observer } from "mobx-react-lite"
 import { contactStore } from "@/opensource/stores/contact"
 
-interface AddGroupMemberModalProps extends MagicModalProps {
+interface AddGroupMemberModalProps extends DelightfulModalProps {
 	groupId: string
 	extraUserIds?: string[]
 	onClose: () => void

@@ -1,4 +1,4 @@
-import { FormItemType } from "@/MagicExpressionWidget/types"
+import { FormItemType } from "@/DelightfulExpressionWidget/types"
 import { nodeManager } from "@/DelightfulFlow"
 import i18next from "i18next"
 

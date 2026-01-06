@@ -1,19 +1,19 @@
-import { useNodeConfigActions } from "@delightful/delightful-flow/dist/MagicFlow/context/FlowContext/useFlow"
-import { InnerHandleType } from "@delightful/delightful-flow/dist/MagicFlow/nodes"
-import CustomHandle from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/Handle/Source"
-import { useCurrentNode } from "@delightful/delightful-flow/dist/MagicFlow/nodes/common/context/CurrentNode/useCurrentNode"
+import { useNodeConfigActions } from "@delightful/delightful-flow/dist/DelightfulFlow/context/FlowContext/useFlow"
+import { InnerHandleType } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes"
+import CustomHandle from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/Handle/Source"
+import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { useMemoizedFn } from "ahooks"
 import { Form, Tooltip } from "antd"
 import { IconInfoCircle } from "@tabler/icons-react"
-import MagicExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/MagicExpressionWrap"
-import { ExpressionMode } from "@delightful/delightful-flow/dist/MagicExpressionWidget/constant"
+import DelightfulExpressionWrap from "@delightful/delightful-flow/dist/common/BaseUI/DelightfulExpressionWrap"
+import { ExpressionMode } from "@delightful/delightful-flow/dist/DelightfulExpressionWidget/constant"
 import { set } from "lodash-es"
 import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 import styles from "./index.module.less"
 import LoopTypeSelect, { LoopTypes } from "./components/LoopTypeSelect"
 import usePrevious from "../../../common/hooks/usePrevious"
-import MagicConditionWrap from "../../../common/ConditionWrap"
+import DelightfulConditionWrap from "../../../common/ConditionWrap"
 import useCurrentNodeUpdate from "../../../common/hooks/useCurrentNodeUpdate"
 
 export default function LoopV0() {
@@ -64,13 +64,13 @@ export default function LoopV0() {
 							name={["condition"]}
 							extra={t("loop.conditionsDesc", { ns: "flow" })}
 						>
-							<MagicConditionWrap dataSource={expressionDataSource} />
+							<DelightfulConditionWrap dataSource={expressionDataSource} />
 						</Form.Item>
 						<Form.Item
 							name={["max_loop_count"]}
 							label={t("loop.maxLoopCount", { ns: "flow" })}
 						>
-							<MagicExpressionWrap
+							<DelightfulExpressionWrap
 								onlyExpression
 								dataSource={expressionDataSource}
 								mode={ExpressionMode.Common}
@@ -85,7 +85,7 @@ export default function LoopV0() {
 						label={t("loop.setCount", { ns: "flow" })}
 						extra={t("loop.setCountDesc", { ns: "flow" })}
 					>
-						<MagicExpressionWrap
+						<DelightfulExpressionWrap
 							dataSource={expressionDataSource}
 							onlyExpression
 							mode={ExpressionMode.Common}
@@ -98,7 +98,7 @@ export default function LoopV0() {
 						label={t("loop.arrayLoop", { ns: "flow" })}
 						extra={t("loop.arrayLoopDesc", { ns: "flow" })}
 					>
-						<MagicExpressionWrap
+						<DelightfulExpressionWrap
 							dataSource={expressionDataSource}
 							onlyExpression
 							mode={ExpressionMode.Common}

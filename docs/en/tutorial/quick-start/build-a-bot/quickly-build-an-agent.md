@@ -1,6 +1,6 @@
 # Building Your First AI Assistant
 
-Whether you have programming experience or not, you can quickly build an AI assistant on the Magic platform. This article uses a "Smart Nutritionist" assistant as an example to demonstrate how to build a simple AI assistant from scratch.
+Whether you have programming experience or not, you can quickly build an AI assistant on the Delightful platform. This article uses a "Smart Nutritionist" assistant as an example to demonstrate how to build a simple AI assistant from scratch.
 
 ## AI Assistant Demo
 
@@ -10,13 +10,13 @@ Whether you have programming experience or not, you can quickly build an AI assi
 Follow these steps to quickly build an AI assistant.
 
 ### Create AI Assistant
-1. Log in to [Magic](https://www.letsmagic.cn/) and click on "AI Assistant" in the left menu
+1. Log in to [Delightful](https://www.letsmagic.cn/) and click on "AI Assistant" in the left menu
 2. Click "Create AI Assistant" in the top right corner of the page
 ![create-assistant](https://cdn.letsmagic.cn/static/img/20250512164212.jpg)
 
 3. Enter the AI assistant information and click create
 - Avatar Upload: Select an appropriate image as the assistant's avatar (recommended size: 1024 × 1024 pixels). If not uploaded, the default avatar will be used.
-- Name: Magic Nutrition Assistant
+- Name: Delightful Nutrition Assistant
 - Introduction: A personal dietary consultant that can scientifically plan each meal based on users' eating habits and needs, precisely manage every nutrient intake, and help users build a healthy lifestyle.
 
 ![assistant-info](https://cdn.letsmagic.cn/static/img/assistant-info.png)
@@ -24,7 +24,7 @@ Follow these steps to quickly build an AI assistant.
 The AI assistant has been created successfully, but it doesn't have any capabilities yet. Let's start giving it abilities.
 
 ### Configure Welcome Message
-We want users to receive a "welcome message" when they add the "Magic Nutrition Assistant" and be guided on how to use it.
+We want users to receive a "welcome message" when they add the "Delightful Nutrition Assistant" and be guided on how to use it.
 Here's how:
 1. Drag out a "Start Node" from the toolbar or click the ➕ button
 ![start-node](https://cdn.letsmagic.cn/static/img/start-node.png)

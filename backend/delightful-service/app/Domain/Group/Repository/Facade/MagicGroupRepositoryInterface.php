@@ -8,31 +8,31 @@ declare(strict_types=1);
 namespace App\Domain\Group\Repository\Facade;
 
 use App\Domain\Chat\DTO\PageResponseDTO\GroupsPageResponseDTO;
-use App\Domain\Group\Entity\MagicGroupEntity;
+use App\Domain\Group\Entity\DelightfulGroupEntity;
 
-interface MagicGroupRepositoryInterface
+interface DelightfulGroupRepositoryInterface
 {
     // 创建群组
-    public function createGroup(MagicGroupEntity $magicGroupDTO): MagicGroupEntity;
+    public function createGroup(DelightfulGroupEntity $magicGroupDTO): DelightfulGroupEntity;
 
     // 批量查询群组信息
 
     /**
-     * @return MagicGroupEntity[]
+     * @return DelightfulGroupEntity[]
      */
     public function getGroupsByIds(array $groupIds): array;
 
     // 修改群组信息
     public function updateGroupById(string $groupId, array $data): int;
 
-    public function getGroupInfoById(string $groupId, ?string $organizationCode = null): ?MagicGroupEntity;
+    public function getGroupInfoById(string $groupId, ?string $organizationCode = null): ?DelightfulGroupEntity;
 
     /**
-     * @return MagicGroupEntity[]
+     * @return DelightfulGroupEntity[]
      */
     public function getGroupsInfoByIds(array $groupIds, ?string $organizationCode = null, bool $keyById = false): array;
 
-    public function addUsersToGroup(MagicGroupEntity $magicGroupEntity, array $userIds): bool;
+    public function addUsersToGroup(DelightfulGroupEntity $magicGroupEntity, array $userIds): bool;
 
     public function getGroupUserList(string $groupId, string $pageToken, ?string $organizationCode = null, ?array $columns = ['*']): array;
 
@@ -42,9 +42,9 @@ interface MagicGroupRepositoryInterface
 
     public function getGroupUserCount(string $groupId): int;
 
-    public function removeUsersFromGroup(MagicGroupEntity $magicGroupEntity, array $userIds): int;
+    public function removeUsersFromGroup(DelightfulGroupEntity $magicGroupEntity, array $userIds): int;
 
-    public function deleteGroup(MagicGroupEntity $magicGroupEntity): int;
+    public function deleteGroup(DelightfulGroupEntity $magicGroupEntity): int;
 
     // 用户是否在群组中
     public function isUserInGroup(string $groupId, string $userId): bool;

@@ -60,17 +60,11 @@ describe("DelightfulSplitter", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带类名分割器快照", () => {
+		it("splitter with class name snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulSplitter className="custom-splitter">
-					<div>左侧内容</div>
-					<div>右侧内容</div>
-				</DelightfulSplitter>,
-			)
-			expect(asFragment()).toMatchSnapshot()
-		})
-
-		it("Complex content splitter snapshot", () => {
+					<div>Left content</div>
+					<div>Right content</div>
 			const { asFragment } = renderWithTheme(
 				<DelightfulSplitter>
 					<div>

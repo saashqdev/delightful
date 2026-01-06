@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`DelightfulSpin > 快照测试 > 加载状态快照 1`] = `
+exports[`DelightfulSpin > Snapshot tests > Loading state snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r2"
@@ -44,7 +44,7 @@ exports[`DelightfulSpin > 快照测试 > 加载状态快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSpin > 快照测试 > 基础加载器快照 1`] = `
+exports[`DelightfulSpin > Snapshot tests > Basic loader snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r1"
@@ -88,7 +88,7 @@ exports[`DelightfulSpin > 快照测试 > 基础加载器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSpin > 快照测试 > 大尺寸加载器快照 1`] = `
+exports[`DelightfulSpin > Snapshot tests > Large size loader snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r5"
@@ -132,7 +132,7 @@ exports[`DelightfulSpin > 快照测试 > 大尺寸加载器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSpin > 快照测试 > 小尺寸加载器快照 1`] = `
+exports[`DelightfulSpin > Snapshot tests > Small size loader snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r4"
@@ -176,7 +176,7 @@ exports[`DelightfulSpin > 快照测试 > 小尺寸加载器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSpin > 快照测试 > 带提示文字快照 1`] = `
+exports[`DelightfulSpin > Snapshot tests > With tip text snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r3"
@@ -210,7 +210,7 @@ exports[`DelightfulSpin > 快照测试 > 带提示文字快照 1`] = `
         <div
           class="delightful-spin-text"
         >
-          加载中...
+          Loading...
         </div>
       </div>
     </div>
@@ -225,7 +225,7 @@ exports[`DelightfulSpin > 快照测试 > 带提示文字快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSpin > 快照测试 > 延迟加载快照 1`] = `
+exports[`DelightfulSpin > Snapshot tests > Delayed loading snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r6"
@@ -241,7 +241,7 @@ exports[`DelightfulSpin > 快照测试 > 延迟加载快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSpin > 快照测试 > 独立加载器快照 1`] = `
+exports[`DelightfulSpin > Snapshot tests > Standalone loader snapshot 1`] = `
 <DocumentFragment>
   <div
     aria-busy="true"

@@ -8,22 +8,22 @@ describe("DelightfulSpin", () => {
 		render(
 			<DelightfulThemeProvider theme="light">
 				<DelightfulSpin>
-					<div>内容区域</div>
+					<div>Content area</div>
 				</DelightfulSpin>
 			</DelightfulThemeProvider>,
 		)
 
 		// Verify children render
-		expect(screen.getByText("内容区域")).toBeInTheDocument()
+		expect(screen.getByText("Content area")).toBeInTheDocument()
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础加载器快照", () => {
+	describe("Snapshot tests", () => {
+		it("basic loader snapshot", () => {
 			const { asFragment } = render(
 				<DelightfulThemeProvider theme="light">
 					<DelightfulSpin>
-						<div>内容区域</div>
+						<div>Content area</div>
 					</DelightfulSpin>
 				</DelightfulThemeProvider>,
 			)

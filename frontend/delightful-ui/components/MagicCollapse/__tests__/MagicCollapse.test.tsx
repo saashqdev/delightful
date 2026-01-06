@@ -8,102 +8,102 @@ const renderWithTheme = (component: React.ReactElement) =>
 	render(<DelightfulThemeProvider theme="light">{component}</DelightfulThemeProvider>)
 
 describe("DelightfulCollapse", () => {
-	it("应该正常渲染", () => {
+	it("should render normally", () => {
 		renderWithTheme(
 			<DelightfulCollapse>
-				<Collapse.Panel key="1" header="标题1">
-					内容1
+				<Collapse.Panel key="1" header="Title 1">
+					Content 1
 				</Collapse.Panel>
 			</DelightfulCollapse>,
 		)
-		expect(screen.getByText("标题1")).toBeInTheDocument()
+		expect(screen.getByText("Title 1")).toBeInTheDocument()
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础折叠面板快照", () => {
+	describe("Snapshot tests", () => {
+		it("basic collapse panel snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulCollapse>
-					<Collapse.Panel key="1" header="标题1">
-						内容1
+					<Collapse.Panel key="1" header="Title 1">
+						Content 1
 					</Collapse.Panel>
 				</DelightfulCollapse>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("多个面板折叠快照", () => {
+		it("multiple panels collapse snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulCollapse>
-					<Collapse.Panel key="1" header="标题1">
-						内容1
+					<Collapse.Panel key="1" header="Title 1">
+						Content 1
 					</Collapse.Panel>
-					<Collapse.Panel key="2" header="标题2">
-						内容2
+					<Collapse.Panel key="2" header="Title 2">
+						Content 2
 					</Collapse.Panel>
-					<Collapse.Panel key="3" header="标题3">
-						内容3
+					<Collapse.Panel key="3" header="Title 3">
+						Content 3
 					</Collapse.Panel>
 				</DelightfulCollapse>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("默认展开面板快照", () => {
+		it("default expanded panel snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulCollapse defaultActiveKey={["1"]}>
-					<Collapse.Panel key="1" header="标题1">
-						内容1
+					<Collapse.Panel key="1" header="Title 1">
+						Content 1
 					</Collapse.Panel>
-					<Collapse.Panel key="2" header="标题2">
-						内容2
+					<Collapse.Panel key="2" header="Title 2">
+						Content 2
 					</Collapse.Panel>
 				</DelightfulCollapse>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("手风琴模式快照", () => {
+		it("accordion mode snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulCollapse accordion>
-					<Collapse.Panel key="1" header="标题1">
-						内容1
+					<Collapse.Panel key="1" header="Title 1">
+						Content 1
 					</Collapse.Panel>
-					<Collapse.Panel key="2" header="标题2">
-						内容2
+					<Collapse.Panel key="2" header="Title 2">
+						Content 2
 					</Collapse.Panel>
 				</DelightfulCollapse>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带图标面板快照", () => {
+		it("panel with icon snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulCollapse>
-					<Collapse.Panel key="1" header="标题1" extra={<span>📝</span>}>
-						内容1
+					<Collapse.Panel key="1" header="Title 1" extra={<span>📝</span>}>
+						Content 1
 					</Collapse.Panel>
 				</DelightfulCollapse>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("禁用面板快照", () => {
+		it("disabled panel snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulCollapse>
-					<Collapse.Panel key="1" header="标题1" disabled>
-						内容1
+					<Collapse.Panel key="1" header="Title 1" disabled>
+						Content 1
 					</Collapse.Panel>
 				</DelightfulCollapse>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("小尺寸折叠面板快照", () => {
+		it("small size collapse panel snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulCollapse size="small">
-					<Collapse.Panel key="1" header="标题1">
-						内容1
+					<Collapse.Panel key="1" header="Title 1">
+						Content 1
 					</Collapse.Panel>
 				</DelightfulCollapse>,
 			)

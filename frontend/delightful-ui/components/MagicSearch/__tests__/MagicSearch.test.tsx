@@ -43,22 +43,22 @@ describe("DelightfulSearch", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("大尺寸搜索框快照", () => {
+		it("large size search box snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulSearch placeholder="搜索..." size="large" />,
+				<DelightfulSearch placeholder="Search..." size="large" />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("小尺寸搜索框快照", () => {
+		it("small size search box snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulSearch placeholder="搜索..." size="small" />,
+				<DelightfulSearch placeholder="Search..." size="small" />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带边框搜索框快照", () => {
-			const { asFragment } = renderWithTheme(<DelightfulSearch placeholder="搜索..." bordered />)
+		it("search box with border snapshot", () => {
+			const { asFragment } = renderWithTheme(<DelightfulSearch placeholder="Search..." bordered />)
 			expect(asFragment()).toMatchSnapshot()
 		})
 	})

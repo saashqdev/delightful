@@ -21,7 +21,7 @@ export interface FileData {
 	cancel?: () => void
 }
 
-/** 临时创建的知识库 */
+/** Temporarily created knowledge base */
 export interface TemporaryKnowledgeConfig {
 	name: string
 	icon: string
@@ -37,7 +37,7 @@ export interface TemporaryKnowledgeConfig {
 	retrieveConfig?: RetrieveConfig
 }
 
-/** 分段配置 */
+/** Segmentation configuration */
 export interface FragmentConfig {
 	mode: SegmentationMode
 	normal: {
@@ -64,12 +64,12 @@ export interface FragmentConfig {
 	}
 }
 
-/** 嵌入模型配置 */
+/** Embedding model configuration */
 export interface EmbeddingModelConfig {
 	model_id: string | undefined
 }
 
-/** 检索配置 */
+/** Retrieval configuration */
 export interface RetrieveConfig {
 	search_method: RetrievalMethod
 	top_k: number
@@ -83,16 +83,16 @@ export interface RetrieveConfig {
 	reranking_enable: boolean
 }
 
-/** 配置表单数据类型 */
+/** Configuration form data type */
 export interface ConfigFormValues {
 	fragment_config: Omit<FragmentConfig, "normal" | "parent_child"> & {
 		normal: Omit<FragmentConfig["normal"], "text_preprocess_rule"> & {
-			// 使用布尔值替代text_preprocess_rule数组
+			// Use boolean values instead of text_preprocess_rule array
 			replace_spaces: boolean
 			remove_urls: boolean
 		}
 		parent_child: Omit<FragmentConfig["parent_child"], "text_preprocess_rule"> & {
-			// 使用布尔值替代text_preprocess_rule数组
+			// Use boolean values instead of text_preprocess_rule array
 			replace_spaces: boolean
 			remove_urls: boolean
 		}
@@ -101,7 +101,7 @@ export interface ConfigFormValues {
 	retrieve_config: RetrieveConfig
 }
 
-/** 分段预览结果类型 */
+/** Segment preview result type */
 export interface SegmentPreviewType {
 	total: number
 	list: Knowledge.FragmentItem[]

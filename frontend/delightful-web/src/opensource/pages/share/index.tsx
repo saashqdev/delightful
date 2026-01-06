@@ -131,7 +131,7 @@ export default function Share() {
 						// Fetch next page
 						await fetchPage(page + 1)
 					} else {
-						// 在resolve之前对数组进行去重，使用message_id作为唯一标识，保持原有顺序
+						// Deduplicate array before resolve, using message_id as unique identifier, maintaining original order
 						if (allData.list && allData.list.length > 0) {
 							const uniqueIds = new Set()
 							allData.list = allData.list.filter((item: any) => {
@@ -159,7 +159,7 @@ export default function Share() {
 		})
 	}
 
-	// 从URL中删除password参数
+	// Remove password parameter from URL
 	const removePasswordFromUrl = useCallback(() => {
 		const urlSearchParams = new URLSearchParams(search)
 		if (urlSearchParams.has("password")) {
@@ -171,7 +171,7 @@ export default function Share() {
 
 	useEffect(() => {
 		if (data?.temporary_token) {
-			// @ts-ignore 给window添加临时token
+			// @ts-ignore Add temporary token to window
 			window.temporary_token = data.temporary_token
 			updateAttachments()
 		}

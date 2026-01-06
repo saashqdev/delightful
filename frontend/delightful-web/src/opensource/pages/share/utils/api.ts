@@ -1,11 +1,11 @@
 import delightfulFetcher from "@/opensource/apis/clients/delightful"
-// 分享是否需要密码
+// Check if share needs password
 export const getShareIsNeedPassword = async ({ resource_id }: { resource_id: string }) => {
 	const response = await delightfulFetcher.post(`/api/v1/share/resources/${resource_id}/check`)
 	return response
 }
 
-// 获取分享详情
+// Get share details
 export const getShareDetail = async ({
 	resource_id,
 	password,

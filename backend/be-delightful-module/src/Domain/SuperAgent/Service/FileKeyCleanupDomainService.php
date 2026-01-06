@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskFileCleanupRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileCleanupRepositoryInterface;
 use Hyperf\DbConnection\Db;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;

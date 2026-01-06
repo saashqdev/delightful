@@ -24,7 +24,7 @@ use App\Infrastructure\Util\Locker\LockerInterface;
 use DateTime;
 use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationAction;
 use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationScenario;
-use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessage;
+use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessage;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -700,7 +700,7 @@ readonly class LongTermMemoryDomainService
             }
 
             $superAgentMessage = $messageEntity->getContent();
-            if (! $superAgentMessage instanceof SuperAgentMessage) {
+            if (! $superAgentMessage instanceof BeAgentMessage) {
                 return;
             }
 

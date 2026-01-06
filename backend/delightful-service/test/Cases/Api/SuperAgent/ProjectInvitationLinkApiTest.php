@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace HyperfTest\Cases\Api\SuperAgent;
+namespace HyperfTest\Cases\Api\BeAgent;
 
 use Delightful\BeDelightful\Domain\Share\Constant\ResourceType;
 use Delightful\BeDelightful\Domain\Share\Service\ResourceShareDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectMemberDomainService;
 use Hyperf\Context\ApplicationContext;
 use Mockery;
 

@@ -5,24 +5,24 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\SandboxFileNotificationDataValueObject;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileContentSavedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileDeletedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileUploadedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\SandboxFileNotificationDataValueObject;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileContentSavedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileDeletedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileUploadedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\SandboxFileNotificationRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\SandboxFileNotificationRequestDTO;
 use Hyperf\Logger\LoggerFactory;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
@@ -173,12 +173,12 @@ class SandboxFileNotificationAppService extends AbstractAppService
     {
         $taskEntity = $this->taskDomainService->getTaskById((int) $metadata->getBeDelightfulTaskId());
         if (! $taskEntity) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TASK_NOT_FOUND, 'Task not found');
+            ExceptionBuilder::throw(BeAgentErrorCode::TASK_NOT_FOUND, 'Task not found');
         }
 
         $projectId = $taskEntity->getProjectId();
         if (empty($projectId)) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND, 'Project ID not found in metadata');
+            ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND, 'Project ID not found in metadata');
         }
 
         return $this->getAccessibleProject((int) $projectId, $metadata->getUserId(), $metadata->getOrganizationCode());

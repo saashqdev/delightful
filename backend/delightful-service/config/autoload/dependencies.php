@@ -48,7 +48,7 @@ use App\Domain\Authentication\Repository\ApiKeyProviderRepository;
 use App\Domain\Authentication\Repository\Facade\ApiKeyProviderRepositoryInterface;
 use App\Domain\Authentication\Repository\Facade\AuthenticationRepositoryInterface;
 use App\Domain\Authentication\Repository\Implement\AuthenticationRepository;
-use App\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessageInterface;
+use App\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessageInterface;
 use App\Domain\Chat\DTO\Message\ChatMessage\UnknowChatMessage;
 use App\Domain\Chat\Event\Agent\AgentExecuteInterface;
 use App\Domain\Chat\Repository\Facade\DelightfulChatConversationRepositoryInterface;
@@ -182,8 +182,8 @@ use App\Domain\Provider\Service\ModelFilter\DefaultOrganizationModelFilter;
 use App\Domain\Provider\Service\ModelFilter\DefaultPackageFilter;
 use App\Domain\Provider\Service\ModelFilter\OrganizationBasedModelFilterInterface;
 use App\Domain\Provider\Service\ModelFilter\PackageFilterInterface;
-use App\Domain\SuperAgent\Service\UsageCalculator\DefaultUsageCalculator;
-use App\Domain\SuperAgent\Service\UsageCalculator\UsageCalculatorInterface;
+use App\Domain\BeAgent\Service\UsageCalculator\DefaultUsageCalculator;
+use App\Domain\BeAgent\Service\UsageCalculator\UsageCalculatorInterface;
 use App\Domain\Token\Item\DelightfulTokenExtra;
 use App\Domain\Token\Repository\Facade\DelightfulTokenExtraInterface;
 use App\Domain\Token\Repository\Facade\DelightfulTokenRepositoryInterface;
@@ -278,7 +278,7 @@ $dependencies = [
     OrganizationsPlatformRepositoryInterface::class => OrganizationsPlatformRepository::class,
     OpenPlatformConfigInterface::class => OpenPlatformConfigItem::class,
     DelightfulChatMessageVersionsRepositoryInterface::class => DelightfulMessageVersionsRepository::class,
-    SuperAgentMessageInterface::class => UnknowChatMessage::class,
+    BeAgentMessageInterface::class => UnknowChatMessage::class,
     // socket-io的发布订阅改为rabbitmq实现,但是房间还是用redis
     AdapterInterface::class => RedisAdapter::class,
     SidProviderInterface::class => DistributedSidProvider::class,

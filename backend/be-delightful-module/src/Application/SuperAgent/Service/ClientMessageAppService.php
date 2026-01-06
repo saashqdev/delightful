@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Domain\Chat\Entity\Items\SeqExtra;
@@ -13,10 +13,10 @@ use App\Domain\Chat\Entity\DelightfulSeqEntity;
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\SuperAgentTool;
-use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessage;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\BeAgentTool;
+use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessage;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -37,11 +37,11 @@ class ClientMessageAppService extends AbstractAppService
     }
 
     /**
-     * Send SuperAgent message to client
-     * Directly use SuperAgentMessage object to reduce parameter conversion.
+     * Send BeAgent message to client
+     * Directly use BeAgentMessage object to reduce parameter conversion.
      */
-    public function sendSuperAgentMessage(
-        SuperAgentMessage $message,
+    public function sendBeAgentMessage(
+        BeAgentMessage $message,
         string $chatTopicId,
         string $chatConversationId
     ): void {
@@ -49,13 +49,13 @@ class ClientMessageAppService extends AbstractAppService
             $this->doSendMessage($message, $chatTopicId, $chatConversationId);
 
             $this->logger->info(sprintf(
-                'SuperAgent message sent to client, Task ID: %s, Message type: %s',
+                'BeAgent message sent to client, Task ID: %s, Message type: %s',
                 $message->getTaskId(),
                 $message->getType()
             ));
         } catch (Throwable $e) {
             $this->logger->error(sprintf(
-                'Failed to send SuperAgent message to client: %s, Task ID: %s',
+                'Failed to send BeAgent message to client: %s, Task ID: %s',
                 $e->getMessage(),
                 $message->getTaskId()
             ));
@@ -84,7 +84,7 @@ class ClientMessageAppService extends AbstractAppService
         ?array $usage = null,
     ): string {
         try {
-            $message = $this->createSuperAgentMessage(
+            $message = $this->createBeAgentMessage(
                 $messageId,
                 $topicId,
                 $taskId,
@@ -131,7 +131,7 @@ class ClientMessageAppService extends AbstractAppService
     ): void {
         try {
             $messageId = IdGenerator::getSnowId();
-            $message = $this->createSuperAgentMessage(
+            $message = $this->createBeAgentMessage(
                 $messageId,
                 $topicId,
                 $taskId,
@@ -173,7 +173,7 @@ class ClientMessageAppService extends AbstractAppService
     ): void {
         try {
             $messageId = IdGenerator::getSnowId();
-            $message = $this->createSuperAgentMessage(
+            $message = $this->createBeAgentMessage(
                 $messageId,
                 $topicId,
                 $taskId,
@@ -212,7 +212,7 @@ class ClientMessageAppService extends AbstractAppService
     ): void {
         try {
             $messageId = IdGenerator::getSnowId();
-            $message = $this->createSuperAgentMessage(
+            $message = $this->createBeAgentMessage(
                 $messageId,
                 $topicId,
                 $taskId,
@@ -246,7 +246,7 @@ class ClientMessageAppService extends AbstractAppService
      * @return string seq_id
      */
     private function doSendMessage(
-        SuperAgentMessage $message,
+        BeAgentMessage $message,
         string $chatTopicId,
         string $chatConversationId
     ): string {
@@ -254,7 +254,7 @@ class ClientMessageAppService extends AbstractAppService
         $seqDTO = new DelightfulSeqEntity();
         $seqDTO->setObjectType(ConversationType::Ai);
         $seqDTO->setContent($message);
-        $seqDTO->setSeqType(ChatMessageType::SuperAgentCard);
+        $seqDTO->setSeqType(ChatMessageType::BeAgentCard);
 
         $extra = new SeqExtra();
         $extra->setTopicId($chatTopicId);
@@ -265,7 +265,7 @@ class ClientMessageAppService extends AbstractAppService
 
         // Check for duplicate messages to avoid re-sending
         $appMessageId = $message->getMessageId();
-        if ($this->chatMessageAppService->isMessageAlreadySent($appMessageId, ChatMessageType::SuperAgentCard->value)) {
+        if ($this->chatMessageAppService->isMessageAlreadySent($appMessageId, ChatMessageType::BeAgentCard->value)) {
             $this->logger->info(sprintf(
                 'Duplicate message detected, skipping send - App Message ID: %s, Task ID: %s',
                 $appMessageId,
@@ -290,9 +290,9 @@ class ClientMessageAppService extends AbstractAppService
 
     /**
      * Create general agent message
-     * Private method migrated from MessageBuilderDomainService::createSuperAgentMessage.
+     * Private method migrated from MessageBuilderDomainService::createBeAgentMessage.
      */
-    private function createSuperAgentMessage(
+    private function createBeAgentMessage(
         int $messageId,
         int $topicId,
         string $taskId,
@@ -305,8 +305,8 @@ class ClientMessageAppService extends AbstractAppService
         ?array $attachments = null,
         ?string $correlationId = null,
         ?array $usage = null,
-    ): SuperAgentMessage {
-        $message = new SuperAgentMessage();
+    ): BeAgentMessage {
+        $message = new BeAgentMessage();
         $message->setMessageId((string) $messageId);
         $message->setTopicId((string) $topicId);
         $message->setTaskId($taskId);
@@ -322,7 +322,7 @@ class ClientMessageAppService extends AbstractAppService
         }
 
         if ($tool !== null) {
-            $toolObj = new SuperAgentTool([
+            $toolObj = new BeAgentTool([
                 'id' => $tool['id'] ?? '',
                 'name' => $tool['name'] ?? '',
                 'action' => $tool['action'] ?? '',

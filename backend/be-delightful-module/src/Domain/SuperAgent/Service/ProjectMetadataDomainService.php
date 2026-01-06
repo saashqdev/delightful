@@ -5,13 +5,13 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
 use App\Domain\File\Repository\Persistence\Facade\CloudFileRepositoryInterface;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
-use Delightful\BeDelightful\Domain\SuperAgent\Constant\ProjectFileConstant;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TaskFileRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\ProjectFileConstant;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\TaskFileRepositoryInterface;
 use Delightful\BeDelightful\Infrastructure\Utils\FileMetadataUtil;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Throwable;

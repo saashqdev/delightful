@@ -5,18 +5,18 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
 use App\Domain\Chat\Entity\ValueObject\SocketEventType;
 use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Infrastructure\Util\SocketIO\SocketIOUtil;
 use Delightful\AsyncEvent\Kernel\Annotation\AsyncListener;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageQueueEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\MessageQueueConsumedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\MessageQueueCreatedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\MessageQueueDeletedEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\MessageQueueUpdatedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageQueueEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Event\MessageQueueConsumedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\MessageQueueCreatedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\MessageQueueDeletedEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Event\MessageQueueUpdatedEvent;
 use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;

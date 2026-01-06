@@ -5,13 +5,13 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention;
+namespace App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention;
 
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\Agent\AgentData;
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\Directory\DirectoryData;
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\File\FileData;
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\Mcp\McpData;
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\Tool\ToolData;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\Agent\AgentData;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\Directory\DirectoryData;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\File\FileData;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\Mcp\McpData;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\Tool\ToolData;
 use App\Infrastructure\Core\AbstractDTO;
 
 final class MentionAttrs extends AbstractDTO

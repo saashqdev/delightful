@@ -5,13 +5,13 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence;
+namespace Delightful\BeDelightful\Domain\BeAgent\Repository\Persistence;
 
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageQueueEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageQueueStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\MessageQueueRepositoryInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\MessageQueueModel;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageQueueEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageQueueStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Facade\MessageQueueRepositoryInterface;
+use Delightful\BeDelightful\Domain\BeAgent\Repository\Model\MessageQueueModel;
 use Hyperf\DbConnection\Db;
 
 class MessageQueueRepository implements MessageQueueRepositoryInterface

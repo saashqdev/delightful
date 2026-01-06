@@ -17,7 +17,7 @@ use App\Domain\Chat\DTO\Message\ChatMessage\ImagesMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\MarkdownMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\RawMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\RichTextMessage;
-use App\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessageInterface;
+use App\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessageInterface;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextFormMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\TextMessage;
 use App\Domain\Chat\DTO\Message\ChatMessage\UnknowChatMessage;
@@ -215,7 +215,7 @@ class MessageAssembler
             ChatMessageType::Image => new ImagesMessage($messageStructArray),
             ChatMessageType::Video => new VideoMessage($messageStructArray),
             ChatMessageType::Voice => new VoiceMessage($messageStructArray),
-            ChatMessageType::SuperAgentCard => make(SuperAgentMessageInterface::class, ['messageStruct' => $messageStructArray]),
+            ChatMessageType::BeAgentCard => make(BeAgentMessageInterface::class, ['messageStruct' => $messageStructArray]),
             ChatMessageType::TextForm => new TextFormMessage($messageStructArray),
             ChatMessageType::Raw => new RawMessage($messageStructArray),
             default => new UnknowChatMessage()

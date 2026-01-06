@@ -5,14 +5,14 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\BeAgent\Service;
 
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\SuperAgentTool;
-use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessage;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\ChatInstruction;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageType;
+use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\BeAgentTool;
+use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\BeAgentMessage;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\ChatInstruction;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageType;
 
 /**
  * Message Builder Service - Focused on building various message formats.
@@ -131,7 +131,7 @@ class MessageBuilderDomainService
     /**
      * Create super agent message.
      */
-    public function createSuperAgentMessage(
+    public function createBeAgentMessage(
         int $topicId,
         string $taskId,
         ?string $content,
@@ -142,8 +142,8 @@ class MessageBuilderDomainService
         ?array $tool = null,
         ?array $attachments = null,
         ?string $correlationId = null
-    ): SuperAgentMessage {
-        $message = new SuperAgentMessage();
+    ): BeAgentMessage {
+        $message = new BeAgentMessage();
         $message->setMessageId((string) IdGenerator::getSnowId());
         $message->setTopicId((string) $topicId);
         $message->setTaskId($taskId);
@@ -159,7 +159,7 @@ class MessageBuilderDomainService
         }
 
         if ($tool !== null) {
-            $toolObj = new SuperAgentTool([
+            $toolObj = new BeAgentTool([
                 'id' => $tool['id'] ?? '',
                 'name' => $tool['name'] ?? '',
                 'action' => $tool['action'] ?? '',

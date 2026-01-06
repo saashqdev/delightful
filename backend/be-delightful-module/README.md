@@ -69,8 +69,8 @@ return [
 [
     'dependencies_priority' => [
         // 助理执行事件
-        AgentExecuteInterface::class => SuperAgentMessageSubscriberV2::class,
-        SuperAgentMessageInterface::class => SuperAgentMessage::class,
+        AgentExecuteInterface::class => BeAgentMessageSubscriberV2::class,
+        BeAgentMessageInterface::class => BeAgentMessage::class,
     ]
 ]
 ```
@@ -92,16 +92,16 @@ return [
 src/
 ├── Application/      # 应用层，处理业务流程
 │   ├── Share/        # 资源共享服务
-│   └── SuperAgent/   # 超级智能体服务
+│   └── BeAgent/   # 超级智能体服务
 ├── Domain/           # 领域层，包含核心业务逻辑
 │   ├── Share/        # 资源共享领域模型
-│   └── SuperAgent/   # 超级智能体领域模型
+│   └── BeAgent/   # 超级智能体领域模型
 ├── Infrastructure/   # 基础设施层，提供技术实现
 │   ├── ExternalAPI/  # 外部API调用
 │   └── Utils/        # 工具类
 ├── Interfaces/       # 接口层，处理外部交互
 │   ├── Share/        # 资源共享接口
-│   └── SuperAgent/   # 超级智能体接口
+│   └── BeAgent/   # 超级智能体接口
 ├── Listener/         # 事件监听器
 └── ConfigProvider.php # 配置提供者
 ```

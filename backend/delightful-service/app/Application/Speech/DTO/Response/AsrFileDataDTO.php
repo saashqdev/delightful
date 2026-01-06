@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Application\Speech\DTO\Response;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 
 /**
  * ASR 文件数据传输对象

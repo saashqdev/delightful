@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
+namespace Delightful\BeDelightful\Domain\BeAgent\Event;
 
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileVersionEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileVersionEntity;
 
 /**
  * File replaced event.

@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request;
 
 use App\Infrastructure\Core\AbstractRequestDTO;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\SandboxFileNotificationDataValueObject;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MessageMetadata;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\SandboxFileNotificationDataValueObject;
 
 /**
  * Sandbox file notification request DTO.

@@ -15,7 +15,7 @@ use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\ErrorCode\AsrErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
 use Hyperf\Contract\TranslatorInterface;
 use Psr\Log\LoggerInterface;
 use Throwable;

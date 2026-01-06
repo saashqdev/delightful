@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace Delightful\BeDelightful\Infrastructure\Utils;
 
 use App\ErrorCode\EventErrorCode;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskEvent;
 
 class TaskEventUtil
 {

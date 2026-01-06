@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\Facade;
 
 use App\Infrastructure\Util\Context\RequestContext;
-use Delightful\BeDelightful\Application\SuperAgent\DTO\CleanupFileKeysRequestDTO;
-use Delightful\BeDelightful\Application\SuperAgent\Service\FileKeyCleanupAppService;
+use Delightful\BeDelightful\Application\BeAgent\DTO\CleanupFileKeysRequestDTO;
+use Delightful\BeDelightful\Application\BeAgent\Service\FileKeyCleanupAppService;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**

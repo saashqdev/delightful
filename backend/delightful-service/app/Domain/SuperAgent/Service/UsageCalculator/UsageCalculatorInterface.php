@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Domain\SuperAgent\Service\UsageCalculator;
+namespace App\Domain\BeAgent\Service\UsageCalculator;
 
 /**
- * Usage calculator interface for SuperAgent tasks.
+ * Usage calculator interface for BeAgent tasks.
  * Provides usage information calculation for completed tasks.
  */
 interface UsageCalculatorInterface

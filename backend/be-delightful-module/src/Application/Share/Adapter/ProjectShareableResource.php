@@ -11,8 +11,8 @@ use App\Application\Chat\Service\DelightfulUserContactAppService;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Delightful\BeDelightful\Application\Share\DTO\ShareableResourceDTO;
 use Delightful\BeDelightful\Application\Share\Factory\Facade\ResourceFactoryInterface;
-use Delightful\BeDelightful\Application\SuperAgent\Service\ProjectAppService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Application\BeAgent\Service\ProjectAppService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Exception;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
@@ -41,7 +41,7 @@ class ProjectShareableResource implements ResourceFactoryInterface
             // Get project details
             $projectEntity = $this->projectAppService->getProjectNotUserId((int) $resourceId);
             if (! $projectEntity) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.project_access_denied');
+                ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.project_access_denied');
             }
 
             $userInfo = $this->delightfulUserContactAppService->getByUserId($projectEntity->getUserId());
@@ -80,7 +80,7 @@ class ProjectShareableResource implements ResourceFactoryInterface
             // We need to get project without userId check for share scenarios
             $projectEntity = $this->projectAppService->getProjectNotUserId((int) $resourceId);
             if (! $projectEntity) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.project_access_denied');
+                ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.project_access_denied');
             }
             return $projectEntity->getProjectName() ?? 'Unknown Project';
         } catch (Exception $e) {
@@ -98,7 +98,7 @@ class ProjectShareableResource implements ResourceFactoryInterface
             // Check if project exists
             $projectEntity = $this->projectAppService->getProjectNotUserId((int) $resourceId);
             if (! $projectEntity) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.project_access_denied');
+                ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.project_access_denied');
             }
             return true;
         } catch (Exception $e) {

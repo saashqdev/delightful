@@ -7,14 +7,14 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Agent\Assembler;
 
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\Agent\AgentMention;
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\Directory\DirectoryMention;
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\File\ProjectFileMention;
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\File\UploadFileMention;
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\Mcp\McpMention;
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\MentionInterface;
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\MentionType;
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\Tool\ToolMention;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\Agent\AgentMention;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\Directory\DirectoryMention;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\File\ProjectFileMention;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\File\UploadFileMention;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\Mcp\McpMention;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\MentionInterface;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\MentionType;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\Tool\ToolMention;
 
 final class MentionAssembler
 {

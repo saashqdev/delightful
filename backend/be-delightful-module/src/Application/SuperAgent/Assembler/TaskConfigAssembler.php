@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Assembler;
+namespace Delightful\BeDelightful\Application\BeAgent\Assembler;
 
 use DateTime;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\TimeConfigDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\TimeConfigDTO;
 use Delightful\TaskScheduler\Entity\ValueObject\IntervalUnit;
 use Delightful\TaskScheduler\Entity\ValueObject\TaskType;
 use Delightful\TaskScheduler\Service\TaskConfigDomainService;

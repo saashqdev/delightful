@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use Delightful\BeDelightful\Infrastructure\Database\Migration\ProjectArchitectureIntegrityValidator;
 use Hyperf\Logger\LoggerFactory;

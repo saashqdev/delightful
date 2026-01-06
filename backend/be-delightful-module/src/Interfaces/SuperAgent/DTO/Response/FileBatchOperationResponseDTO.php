@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response;
+namespace Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response;
 
 /**
  * File batch operation response DTO.

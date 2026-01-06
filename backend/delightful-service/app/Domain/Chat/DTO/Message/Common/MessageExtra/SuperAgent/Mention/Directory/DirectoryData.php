@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\Directory;
+namespace App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\Directory;
 
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\MentionDataInterface;
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\NormalizePathTrait;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\MentionDataInterface;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\NormalizePathTrait;
 use App\Infrastructure\Core\AbstractDTO;
 
 final class DirectoryData extends AbstractDTO implements MentionDataInterface

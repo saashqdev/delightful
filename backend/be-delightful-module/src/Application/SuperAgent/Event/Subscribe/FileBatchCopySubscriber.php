@@ -5,18 +5,18 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Event\Subscribe;
+namespace Delightful\BeDelightful\Application\BeAgent\Event\Subscribe;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Util\Locker\LockerInterface;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Event\FileBatchCopyEvent;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Event\FileBatchCopyEvent;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
 use Delightful\BeDelightful\Infrastructure\Utils\FileBatchOperationStatusManager;
 use Delightful\BeDelightful\Infrastructure\Utils\FileTreeUtil;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\TaskFileItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\TaskFileItemDTO;
 use Hyperf\Amqp\Annotation\Consumer;
 use Hyperf\Amqp\Message\ConsumerMessage;
 use Hyperf\Amqp\Result;

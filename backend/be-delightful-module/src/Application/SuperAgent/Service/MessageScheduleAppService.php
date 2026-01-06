@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\BeDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\BeAgent\Service;
 
 use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\Contact\UserSetting\UserSettingKey;
@@ -26,31 +26,31 @@ use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Cron\CronExpression;
 use DateTime;
 use Delightful\BeDelightful\Application\Chat\Service\ChatAppService;
-use Delightful\BeDelightful\Application\SuperAgent\Assembler\TaskConfigAssembler;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageScheduleEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\CreationSource;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\FileType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\StorageType;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskFileSource;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\MessageScheduleDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\WorkspaceDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Application\BeAgent\Assembler\TaskConfigAssembler;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\MessageScheduleEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\CreationSource;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\FileType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\StorageType;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskFileSource;
+use Delightful\BeDelightful\Domain\BeAgent\Service\MessageScheduleDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectMemberDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\WorkspaceDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateMessageScheduleRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\QueryMessageScheduleLogsRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\QueryMessageScheduleRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\TimeConfigDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateMessageScheduleRequestDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\MessageScheduleItemDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\MessageScheduleListItemDTO;
-use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\MessageScheduleLogItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\CreateMessageScheduleRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\QueryMessageScheduleLogsRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\QueryMessageScheduleRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\TimeConfigDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Request\UpdateMessageScheduleRequestDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\MessageScheduleItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\MessageScheduleListItemDTO;
+use Delightful\BeDelightful\Interfaces\BeAgent\DTO\Response\MessageScheduleLogItemDTO;
 use Delightful\TaskScheduler\Entity\TaskScheduler;
 use Delightful\TaskScheduler\Entity\TaskSchedulerCrontab;
 use Delightful\TaskScheduler\Entity\ValueObject\TaskType;
@@ -859,7 +859,7 @@ class MessageScheduleAppService extends AbstractAppService
         // Cast to DelightfulMessageStruct to access getExtra() method
         $superAgentExtra = null;
         if ($messageStruct instanceof DelightfulMessageStruct) {
-            $superAgentExtra = $messageStruct->getExtra()?->getSuperAgent();
+            $superAgentExtra = $messageStruct->getExtra()?->getBeAgent();
         }
         $mentions = $superAgentExtra?->getMentionsJsonStruct();
         if (empty($mentions)) {
@@ -1164,7 +1164,7 @@ class MessageScheduleAppService extends AbstractAppService
             // 1. Validate project ID is required
             if (empty($projectId) || $projectId <= 0) {
                 ExceptionBuilder::throw(
-                    SuperAgentErrorCode::PROJECT_ID_REQUIRED_FOR_COLLABORATION,
+                    BeAgentErrorCode::PROJECT_ID_REQUIRED_FOR_COLLABORATION,
                     trans('project.project_id_required_for_collaboration')
                 );
             }
@@ -1177,7 +1177,7 @@ class MessageScheduleAppService extends AbstractAppService
 
             if (! $isProjectMember) {
                 ExceptionBuilder::throw(
-                    SuperAgentErrorCode::NOT_A_COLLABORATION_PROJECT,
+                    BeAgentErrorCode::NOT_A_COLLABORATION_PROJECT,
                     trans('project.not_a_collaboration_project')
                 );
             }
@@ -1196,11 +1196,11 @@ class MessageScheduleAppService extends AbstractAppService
         // 1. Validate workspace access
         $workspace = $this->workspaceDomainService->getWorkspaceDetail($workspaceIdInt);
         if (! $workspace) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_NOT_FOUND, trans('workspace.workspace_not_found'));
+            ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_NOT_FOUND, trans('workspace.workspace_not_found'));
         }
 
         if ($workspace->getUserId() !== $dataIsolation->getCurrentUserId()) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::WORKSPACE_ACCESS_DENIED, trans('workspace.workspace_access_denied'));
+            ExceptionBuilder::throw(BeAgentErrorCode::WORKSPACE_ACCESS_DENIED, trans('workspace.workspace_access_denied'));
         }
 
         // 2. Validate project access (if project_id is provided)

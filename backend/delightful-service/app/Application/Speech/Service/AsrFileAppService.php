@@ -29,14 +29,14 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Context\CoContext;
 use App\Infrastructure\Util\Locker\LockerInterface;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus as SuperAgentTaskStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\MessageQueueDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\WorkspaceDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\TaskStatus as BeAgentTaskStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Service\MessageQueueDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\WorkspaceDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Hyperf\Contract\TranslatorInterface;
 use Hyperf\Engine\Coroutine;
 use Hyperf\Logger\LoggerFactory;
@@ -719,11 +719,11 @@ readonly class AsrFileAppService
     {
         $topicEntity = $this->superAgentTopicDomainService->getTopicById((int) $topicId);
         if ($topicEntity === null) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND);
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND);
         }
 
         $currentStatus = $topicEntity->getCurrentTaskStatus();
-        return $currentStatus !== null && $currentStatus === SuperAgentTaskStatus::RUNNING;
+        return $currentStatus !== null && $currentStatus === BeAgentTaskStatus::RUNNING;
     }
 
     /**

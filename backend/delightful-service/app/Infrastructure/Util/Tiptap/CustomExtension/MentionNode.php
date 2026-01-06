@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Util\Tiptap\CustomExtension;
 
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\MentionInterface;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\MentionInterface;
 use App\Infrastructure\Util\Tiptap\AbstractCustomNode;
 use App\Interfaces\Agent\Assembler\MentionAssembler;
 use Hyperf\Codec\Json;

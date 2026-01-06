@@ -14,12 +14,12 @@ use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
 use App\ErrorCode\AsrErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectMemberDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Throwable;
 
 /**
@@ -51,7 +51,7 @@ readonly class AsrValidationService
             // 获取项目信息
             $projectEntity = $this->projectDomainService->getProjectNotUserId((int) $projectId);
             if ($projectEntity === null) {
-                ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_NOT_FOUND);
+                ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND);
             }
 
             // 校验项目是否属于当前组织
@@ -81,7 +81,7 @@ readonly class AsrValidationService
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessDeniedUser);
         } catch (BusinessException $e) {
             // 处理 ExceptionBuilder::throw 抛出的业务异常
-            if ($e->getCode() === SuperAgentErrorCode::PROJECT_NOT_FOUND->value) {
+            if ($e->getCode() === BeAgentErrorCode::PROJECT_NOT_FOUND->value) {
                 ExceptionBuilder::throw(AsrErrorCode::ProjectNotFound);
             }
             if ($e->getCode() >= 43000 && $e->getCode() < 44000) {
@@ -109,12 +109,12 @@ readonly class AsrValidationService
         $topicEntity = $this->topicDomainService->getTopicById($topicId);
 
         if ($topicEntity === null) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND);
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND);
         }
 
         // 验证话题属于当前用户
         if ($topicEntity->getUserId() !== $userId) {
-            ExceptionBuilder::throw(SuperAgentErrorCode::TOPIC_NOT_FOUND);
+            ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND);
         }
 
         return $topicEntity;

@@ -5,19 +5,19 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 use Delightful\BeDelightful\Infrastructure\Utils\Middleware\RequestContextMiddlewareV2;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\AccountApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\FileApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\FileEditingApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\FileKeyCleanupApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\MessageApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\ProjectApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\ProjectInvitationLinkApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\ProjectMemberApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\SandboxApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\SuperAgentMemoryApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\TaskApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\TopicApi;
-use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\WorkspaceApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\AccountApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\FileApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\FileEditingApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\FileKeyCleanupApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\MessageApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\ProjectApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\ProjectInvitationLinkApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\ProjectMemberApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\SandboxApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\BeAgentMemoryApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\TaskApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\TopicApi;
+use Delightful\BeDelightful\Interfaces\BeAgent\Facade\WorkspaceApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup(
@@ -316,9 +316,9 @@ Router::addGroup('/api/v1/super-agent', static function () {
 
     // Long-term memory management (sandbox token validation moved to API layer)
     Router::addGroup('/memories', static function () {
-        Router::post('', [SuperAgentMemoryApi::class, 'createMemory']);
-        Router::put('/{id}', [SuperAgentMemoryApi::class, 'agentUpdateMemory']);
-        Router::delete('/{id}', [SuperAgentMemoryApi::class, 'deleteMemory']);
+        Router::post('', [BeAgentMemoryApi::class, 'createMemory']);
+        Router::put('/{id}', [BeAgentMemoryApi::class, 'agentUpdateMemory']);
+        Router::delete('/{id}', [BeAgentMemoryApi::class, 'deleteMemory']);
     });
     // File related
     Router::addGroup('/file', static function () {

@@ -5,14 +5,14 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace HyperfTest\Cases\Api\SuperAgent;
+namespace HyperfTest\Cases\Api\BeAgent;
 
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectMemberEntity;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberRole;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberStatus;
-use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MemberType;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ProjectMemberEntity;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberRole;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberStatus;
+use Delightful\BeDelightful\Domain\BeAgent\Entity\ValueObject\MemberType;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectMemberDomainService;
 use Exception;
 use Mockery;
 

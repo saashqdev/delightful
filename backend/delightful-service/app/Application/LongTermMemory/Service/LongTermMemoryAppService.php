@@ -28,7 +28,7 @@ use App\Infrastructure\Util\LLMParse\LLMResponseParseUtil;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationAction;
 use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\ValueObject\MemoryOperationScenario;
-use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectDomainService;
 use Hyperf\Odin\Contract\Model\ModelInterface;
 use Hyperf\Odin\Message\SystemMessage;
 use InvalidArgumentException;

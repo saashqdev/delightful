@@ -5,14 +5,14 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent;
+namespace App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent;
 
-use App\Domain\Chat\DTO\Message\Common\MessageExtra\SuperAgent\Mention\MentionInterface;
+use App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention\MentionInterface;
 use App\Infrastructure\Core\AbstractDTO;
 use App\Interfaces\Agent\Assembler\MentionAssembler;
 use Hyperf\Codec\Json;
 
-class SuperAgentExtra extends AbstractDTO
+class BeAgentExtra extends AbstractDTO
 {
     /**
      * Mention related data for @ references.

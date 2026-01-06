@@ -20,7 +20,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\Locker\LockerInterface;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Kernel\Assembler\FileAssembler;
-use Delightful\BeDelightful\Domain\SuperAgent\Constant\AgentConstant;
+use Delightful\BeDelightful\Domain\BeAgent\Constant\AgentConstant;
 use Random\RandomException;
 use RedisException;
 use Throwable;

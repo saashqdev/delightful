@@ -66,7 +66,7 @@ enum ChatMessageType: string
     case ImageConvertHighCard = 'image_convert_high_card';
 
     // 通用 agent 消息
-    case SuperAgentCard = 'general_agent_card';
+    case BeAgentCard = 'general_agent_card';
 
     /**
      * 未知消息。

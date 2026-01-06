@@ -23,11 +23,11 @@ import { t } from "i18next"
 
 const eventFactory = new EventFactory()
 
-// 注册事件处理器
+// Register event handlers
 
-/****** 消息相关 ******/
+/****** Message related ******/
 
-// 应用消息
+// Add sent message
 eventFactory.on(
 	EVENTS.ADD_SEND_MESSAGE,
 	(data: { renderMessage: FullMessage; message: ConversationMessageSend }) => {
@@ -36,7 +36,7 @@ eventFactory.on(
 	},
 )
 
-// 更新发送消息
+// Update sent message
 eventFactory.on(
 	EVENTS.UPDATE_SEND_MESSAGE,
 	(data: { response: SeqResponse<ConversationMessage>; sendStatus: SendStatus }) => {
@@ -45,7 +45,7 @@ eventFactory.on(
 	},
 )
 
-// 应用消息
+// Apply message
 eventFactory.on(
 	EVENTS.APPLY_MESSAGE,
 	(data: { message: SeqResponse<CMessage>; options: ApplyMessageOptions }) => {
@@ -54,7 +54,7 @@ eventFactory.on(
 	},
 )
 
-// 更新消息状态
+// Update message status
 eventFactory.on(
 	EVENTS.UPDATE_MESSAGE_STATUS,
 	(data: {
@@ -67,31 +67,31 @@ eventFactory.on(
 	},
 )
 
-// 更新消息ID
+// Update message ID
 eventFactory.on(EVENTS.UPDATE_MESSAGE_ID, (data: { tempId: string; messageId: string }) => {
 	console.log("UPDATE_MESSAGE_ID", data)
 	MessageDispatchService.updateMessageId(data.tempId, data.messageId)
 })
 
-// 删除消息
+// Delete message
 eventFactory.on(EVENTS.DELETE_MESSAGE, (data: { conversationId: string; messageId: string }) => {
 	console.log("DELETE_MESSAGE", data)
-	// 处理删除消息事件
+	// Handle delete message event
 })
 
-// 更新消息
+// Update message
 eventFactory.on(EVENTS.UPDATE_MESSAGE, (data) => {
 	console.log("UPDATE_MESSAGE", data)
 })
 
-// 应用多条消息
+// Apply multiple messages
 eventFactory.on(EVENTS.APPLY_MESSAGES, (data) => {
 	console.log("APPLY_MESSAGES", data)
 })
 
-/****** 会话相关 ******/
+/****** Conversation related ******/
 
-// 置顶会话
+// Set top conversation
 eventFactory.on(EVENTS.SET_TOP_CONVERSATION, (data: { conversationId: string }) => {
 	console.log("SET_TOP_CONVERSATION", data)
 	ConversationDsipatchService.setTopConversationStatus(
@@ -100,7 +100,7 @@ eventFactory.on(EVENTS.SET_TOP_CONVERSATION, (data: { conversationId: string }) 
 	)
 })
 
-// 取消置顶会话
+// Cancel top conversation
 eventFactory.on(EVENTS.CANCEL_TOP_CONVERSATION, (data: { conversationId: string }) => {
 	console.log("CANCEL_TOP_CONVERSATION", data)
 	ConversationDsipatchService.setTopConversationStatus(
@@ -109,7 +109,7 @@ eventFactory.on(EVENTS.CANCEL_TOP_CONVERSATION, (data: { conversationId: string 
 	)
 })
 
-// 消息免打扰
+// Message do-not-disturb
 eventFactory.on(EVENTS._NO_DISTURB_STATUS, (data: { conversationId: string }) => {
 	console.log("_NO_DISTURB_STATUS", data)
 	ConversationDsipatchService.setNotDisturbStatus(
@@ -118,7 +118,7 @@ eventFactory.on(EVENTS._NO_DISTURB_STATUS, (data: { conversationId: string }) =>
 	)
 })
 
-// 取消免打扰状态
+// Cancel do-not-disturb status
 eventFactory.on(EVENTS.CANCEL_SET_NO_DISTURB_STATUS, (data: { conversationId: string }) => {
 	console.log("CANCEL_SET_NO_DISTURB_STATUS", data)
 	ConversationDsipatchService.setNotDisturbStatus(
@@ -127,59 +127,59 @@ eventFactory.on(EVENTS.CANCEL_SET_NO_DISTURB_STATUS, (data: { conversationId: st
 	)
 })
 
-// 更新会话红点
+// Update conversation red dot
 eventFactory.on(
 	EVENTS.UPDATE_CONVERSATION_DOT,
 	(data: { conversationId: string; count: number }) => {
 		console.log("UPDATE_CONVERSATION_DOT", data)
-		// 处理更新会话红点事件
+		// Handle update conversation red dot event
 	},
 )
 
-// 更新话题红点
+// Update topic red dot
 eventFactory.on(
 	EVENTS.UPDATE_TOPIC_DOT,
 	(data: { conversationId: string; topicId: string; count: number }) => {
 		console.log("UPDATE_TOPIC_DOT", data)
-		// 处理更新话题红点事件
+		// Handle update topic red dot event
 	},
 )
 
-/****** 用户相关 ******/
+/****** User related ******/
 
-// 登出
+// Logout
 eventFactory.on(EVENTS.LOGOUT, (data) => {
 	console.log("LOGOUT", data)
 })
 
-// 执行登出
+// Execute logout
 eventFactory.on(EVENTS.DO_LOGOUT, (data) => {
 	console.log("DO_LOGOUT", data)
 })
 
-// 登录
+// Login
 eventFactory.on(EVENTS.LOGIN, (data) => {
 	console.log("LOGIN", data)
 })
 
-// 执行登录
+// Execute login
 eventFactory.on(EVENTS.DO_LOGIN, (data) => {
 	console.log("DO_LOGIN", data)
 })
 
-// // 切换用户
+// // Switch user
 // eventFactory.on(EVENTS.SWITCH_USER, (data) => {
 // 	console.log("SWITCH_USER", data)
 // })
 
-// // 执行切换用户
+// // Execute switch user
 // eventFactory.on(EVENTS.DO_SWITCH_USER, (data) => {
 // 	console.log("DO_SWITCH_USER", data)
 // })
 
 let switchOrganizationModal: ReturnType<typeof DelightfulModal.confirm> | null = null
 
-// 切换组织
+// Switch organization
 eventFactory.on(
 	EVENTS.SWITCH_ORGANIZATION,
 	(data: { userInfo: User.UserInfo; delightfulOrganizationCode: string }) => {
@@ -221,12 +221,12 @@ eventFactory.on(
 	},
 )
 
-// 执行切换组织
+// Execute switch organization
 eventFactory.on(EVENTS.DO_SWITCH_ORGANIZATION, (data) => {
 	console.log("DO_SWITCH_ORGANIZATION", data)
 })
 
-// 更新组织红点
+// Update organization red dot
 eventFactory.on(
 	EVENTS.UPDATE_ORGANIZATION_DOT,
 	(data: { delightfulId: string; organizationCode: string; count: number; seqId?: string }) => {
@@ -234,24 +234,24 @@ eventFactory.on(
 	},
 )
 
-// 执行更新组织红点
+// Execute update organization red dot
 eventFactory.on(EVENTS.DO_UPDATE_ORGANIZATION_DOT, (data) => {
 	console.log("DO_UPDATE_ORGANIZATION_DOT", data)
 })
 
-// 更新组织
+// Update organization
 eventFactory.on(EVENTS.UPDATE_ORGANIZATION, (data) => {
 	console.log("UPDATE_ORGANIZATION", data)
 })
 
-// 执行更新组织
+// Execute update organization
 eventFactory.on(EVENTS.DO_UPDATE_ORGANIZATION, (data) => {
 	console.log("DO_UPDATE_ORGANIZATION", data)
 })
 
 let switchAccountModal: ReturnType<typeof DelightfulModal.confirm> | null = null
 
-// 切换账号
+// Switch account
 eventFactory.on(
 	EVENTS.SWITCH_ACCOUNT,
 	(data: { delightfulId: string; delightfulUserId: string; delightfulOrganizationCode: string }) => {
@@ -290,27 +290,27 @@ eventFactory.on(
 	},
 )
 
-// 执行切换账号
+// Execute switch account
 eventFactory.on(EVENTS.DO_SWITCH_ACCOUNT, (data) => {
 	console.log("DO_SWITCH_ACCOUNT", data)
 })
 
-// 添加账号
+// Add account
 eventFactory.on(EVENTS.ADD_ACCOUNT, (data: { userAccount: User.UserAccount }) => {
 	UserDispatchService.addAccount(data)
 })
 
-// 执行添加账号
+// Execute add account
 eventFactory.on(EVENTS.DO_ADD_ACCOUNT, (data) => {
 	console.log("DO_ADD_ACCOUNT", data)
 })
 
-// 删除账号
+// Delete account
 eventFactory.on(EVENTS.DELETE_ACCOUNT, (data: { delightfulId?: string; navigateToLogin?: boolean }) => {
 	UserDispatchService.deleteAccount(data)
 })
 
-// 执行删除账号
+// Execute delete account
 eventFactory.on(EVENTS.DO_DELETE_ACCOUNT, (data) => {
 	console.log("DO_DELETE_ACCOUNT", data)
 })

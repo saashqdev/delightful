@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Domain\SuperAgent\Event;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
 
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
 
 /**
  * Delete topic before event - triggered before topic deletion to handle sandbox termination.

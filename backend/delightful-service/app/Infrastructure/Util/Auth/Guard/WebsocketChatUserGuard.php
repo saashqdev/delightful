@@ -52,7 +52,7 @@ class WebsocketChatUserGuard extends WebUserGuard
         $user = $this->userProvider->retrieveByCredentials([
             'authorization' => $userAuthToken,
             'organizationCode' => $organizationCode,
-            'superDelightfulAgentUserId' => $magicContext->getSuperDelightfulAgentUserId(),
+            'superDelightfulAgentUserId' => $magicContext->getBeDelightfulAgentUserId(),
         ]);
         if (empty($user->getOrganizationCode())) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);

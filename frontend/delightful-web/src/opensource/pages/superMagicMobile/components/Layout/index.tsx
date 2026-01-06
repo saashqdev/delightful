@@ -6,19 +6,19 @@ import type { MobileNavigateMenuItem } from "../MobileNavigatePopup"
 import MobileNavigatePopup from "../MobileNavigatePopup"
 import { useStyles } from "./styles"
 
-export interface SuperDelightfulMobileLayoutRef {
+export interface BeDelightfulMobileLayoutRef {
 	closeNavigatePopup: () => void
 }
 
-interface SuperDelightfulMobileLayoutProps {
+interface BeDelightfulMobileLayoutProps {
 	headerCenter?: React.ReactNode
 	navigateItems?: MobileNavigateMenuItem[]
 	openMenu?: () => void
 }
 
-function SuperDelightfulMobileLayout(
-	props: PropsWithChildren<SuperDelightfulMobileLayoutProps>,
-	ref: Ref<SuperDelightfulMobileLayoutRef>,
+function BeDelightfulMobileLayout(
+	props: PropsWithChildren<BeDelightfulMobileLayoutProps>,
+	ref: Ref<BeDelightfulMobileLayoutRef>,
 ) {
 	const { headerCenter, navigateItems, openMenu, children } = props
 	const { styles } = useStyles()
@@ -69,4 +69,4 @@ function SuperDelightfulMobileLayout(
 	)
 }
 
-export default memo(forwardRef(SuperDelightfulMobileLayout))
+export default memo(forwardRef(BeDelightfulMobileLayout))

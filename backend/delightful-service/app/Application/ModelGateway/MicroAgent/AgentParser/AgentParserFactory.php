@@ -68,7 +68,7 @@ readonly class AgentParserFactory
 
         // Parse agent name to support directory.agent format
         if (str_contains($agent, '.')) {
-            // Directory format: SuperDelightfulAgent.content_generator -> SuperDelightfulAgent/content_generator
+            // Directory format: BeDelightfulAgent.content_generator -> BeDelightfulAgent/content_generator
             $parts = explode('.', $agent, 2);
             $directory = $parts[0];
             $agentName = $parts[1];

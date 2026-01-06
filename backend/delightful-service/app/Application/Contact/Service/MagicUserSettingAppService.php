@@ -37,7 +37,7 @@ class DelightfulUserSettingAppService extends AbstractContactAppService
         /* @phpstan-ignore-next-line */
         $dataIsolation = $this->createDataIsolation($authorization);
         $entity = new DelightfulUserSettingEntity();
-        $entity->setKey(UserSettingKey::genSuperDelightfulProjectTopicModel($topicId));
+        $entity->setKey(UserSettingKey::genBeDelightfulProjectTopicModel($topicId));
         $entity->setValue([
             'model' => $model,
             'image_model' => $imageModel,
@@ -47,7 +47,7 @@ class DelightfulUserSettingAppService extends AbstractContactAppService
 
     public function getProjectTopicModelConfig(Authenticatable $authorization, string $topicId): ?DelightfulUserSettingEntity
     {
-        $key = UserSettingKey::genSuperDelightfulProjectTopicModel($topicId);
+        $key = UserSettingKey::genBeDelightfulProjectTopicModel($topicId);
         /* @phpstan-ignore-next-line */
         return $this->get($authorization, $key);
     }
@@ -57,7 +57,7 @@ class DelightfulUserSettingAppService extends AbstractContactAppService
         /* @phpstan-ignore-next-line */
         $dataIsolation = $this->createDataIsolation($authorization);
         $entity = new DelightfulUserSettingEntity();
-        $entity->setKey(UserSettingKey::genSuperDelightfulProjectMCPServers($projectId));
+        $entity->setKey(UserSettingKey::genBeDelightfulProjectMCPServers($projectId));
         $entity->setValue([
             'servers' => $servers,
         ]);
@@ -66,7 +66,7 @@ class DelightfulUserSettingAppService extends AbstractContactAppService
 
     public function getProjectMcpServerConfig(Authenticatable $authorization, string $projectId): ?DelightfulUserSettingEntity
     {
-        $key = UserSettingKey::genSuperDelightfulProjectMCPServers($projectId);
+        $key = UserSettingKey::genBeDelightfulProjectMCPServers($projectId);
         /* @phpstan-ignore-next-line */
         return $this->get($authorization, $key);
     }

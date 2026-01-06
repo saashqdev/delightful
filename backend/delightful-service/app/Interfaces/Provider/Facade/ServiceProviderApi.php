@@ -9,7 +9,7 @@ namespace App\Interfaces\Provider\Facade;
 
 use App\Application\Kernel\Enum\DelightfulOperationEnum;
 use App\Application\Kernel\Enum\DelightfulResourceEnum;
-use App\Application\Provider\DTO\SuperDelightfulModelDTO;
+use App\Application\Provider\DTO\BeDelightfulModelDTO;
 use App\Application\Provider\Service\AdminOriginModelAppService;
 use App\Application\Provider\Service\AdminProviderAppService;
 use app\Application\Provider\Service\ProviderAppService;
@@ -224,14 +224,14 @@ class ServiceProviderApi extends AbstractApi
 
     /**
      * Get super magic display models and Delightful provider models visible to current organization.
-     * @return SuperDelightfulModelDTO[]
+     * @return BeDelightfulModelDTO[]
      */
-    public function getSuperDelightfulDisplayModels(): array
+    public function getBeDelightfulDisplayModels(): array
     {
         /** @var DelightfulUserAuthorization $authenticatable */
         $authenticatable = $this->getAuthorization();
 
-        return $this->providerAppService->getSuperDelightfulDisplayModelsForOrganization($authenticatable->getOrganizationCode());
+        return $this->providerAppService->getBeDelightfulDisplayModelsForOrganization($authenticatable->getOrganizationCode());
     }
 
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]

@@ -5,14 +5,14 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
 
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\SuperDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\SuperAgentTool;
-use Delightful\SuperDelightful\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessage;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\ChatInstruction;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\MessageType;
+use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\Item\SuperAgentTool;
+use Delightful\BeDelightful\Domain\Chat\DTO\Message\ChatMessage\SuperAgentMessage;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\ChatInstruction;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageMetadata;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageType;
 
 /**
  * Message Builder Service - Focused on building various message formats.

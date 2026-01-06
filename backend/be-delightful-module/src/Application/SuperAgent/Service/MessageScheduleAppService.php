@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
 
 use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Application\Contact\UserSetting\UserSettingKey;
@@ -25,32 +25,32 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Cron\CronExpression;
 use DateTime;
-use Delightful\SuperDelightful\Application\Chat\Service\ChatAppService;
-use Delightful\SuperDelightful\Application\SuperAgent\Assembler\TaskConfigAssembler;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\MessageScheduleEntity;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ProjectEntity;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\CreationSource;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\FileType;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\StorageType;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\TaskFileSource;
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\MessageScheduleDomainService;
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\WorkspaceDomainService;
-use Delightful\SuperDelightful\ErrorCode\SuperAgentErrorCode;
-use Delightful\SuperDelightful\Infrastructure\Utils\WorkDirectoryUtil;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\CreateMessageScheduleRequestDTO;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\QueryMessageScheduleLogsRequestDTO;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\QueryMessageScheduleRequestDTO;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\TimeConfigDTO;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\UpdateMessageScheduleRequestDTO;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Response\MessageScheduleItemDTO;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Response\MessageScheduleListItemDTO;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Response\MessageScheduleLogItemDTO;
+use Delightful\BeDelightful\Application\Chat\Service\ChatAppService;
+use Delightful\BeDelightful\Application\SuperAgent\Assembler\TaskConfigAssembler;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageScheduleEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\CreationSource;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\FileType;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\StorageType;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskFileSource;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\MessageScheduleDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectMemberDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\WorkspaceDomainService;
+use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateMessageScheduleRequestDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\QueryMessageScheduleLogsRequestDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\QueryMessageScheduleRequestDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\TimeConfigDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\UpdateMessageScheduleRequestDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\MessageScheduleItemDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\MessageScheduleListItemDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\MessageScheduleLogItemDTO;
 use Delightful\TaskScheduler\Entity\TaskScheduler;
 use Delightful\TaskScheduler\Entity\TaskSchedulerCrontab;
 use Delightful\TaskScheduler\Entity\ValueObject\TaskType;
@@ -1230,7 +1230,7 @@ class MessageScheduleAppService extends AbstractAppService
 
             // Create user setting entity for project MCP servers
             $entity = new DelightfulUserSettingEntity();
-            $entity->setKey(UserSettingKey::genSuperDelightfulProjectMCPServers((string) $projectId));
+            $entity->setKey(UserSettingKey::genBeDelightfulProjectMCPServers((string) $projectId));
             $entity->setValue([
                 'servers' => $plugins['servers'],
             ]);

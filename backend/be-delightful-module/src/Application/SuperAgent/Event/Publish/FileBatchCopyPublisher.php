@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Application\SuperAgent\Event\Publish;
+namespace Delightful\BeDelightful\Application\SuperAgent\Event\Publish;
 
-use Delightful\SuperDelightful\Domain\SuperAgent\Event\FileBatchCopyEvent;
+use Delightful\BeDelightful\Domain\SuperAgent\Event\FileBatchCopyEvent;
 use Hyperf\Amqp\Annotation\Producer;
 use Hyperf\Amqp\Message\ProducerMessage;
 

@@ -60,7 +60,7 @@ class DelightfulContext extends AbstractEntity
         $this->language = $language;
     }
 
-    public function getSuperDelightfulAgentUserId(): string
+    public function getBeDelightfulAgentUserId(): string
     {
         return $this->superDelightfulAgentUserId;
     }

@@ -67,7 +67,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
         }
 
         match ($messageDTO->getMessageType()) {
-            IntermediateMessageType::SuperDelightfulInstruction => $this->magicIntermediateDomainService->handleSuperDelightfulInstructionMessage(
+            IntermediateMessageType::BeDelightfulInstruction => $this->magicIntermediateDomainService->handleBeDelightfulInstructionMessage(
                 $messageDTO,
                 $dataIsolation,
                 $conversationEntity,

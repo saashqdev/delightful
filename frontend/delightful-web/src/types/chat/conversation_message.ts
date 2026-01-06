@@ -54,7 +54,7 @@ export const enum ConversationMessageType {
 	RecordingSummary = "recording_summary",
 
 	/** 超级麦吉消息 */
-	SuperDelightful = "general_agent_card",
+	BeDelightful = "general_agent_card",
 }
 
 /**
@@ -106,8 +106,8 @@ export interface ConversationMessageBase extends SeqMessageBase {
 	is_local_deleted?: boolean
 }
 
-export interface SuperDelightfulContent {
-	type: ConversationMessageType.SuperDelightful
+export interface BeDelightfulContent {
+	type: ConversationMessageType.BeDelightful
 	content: string
 }
 

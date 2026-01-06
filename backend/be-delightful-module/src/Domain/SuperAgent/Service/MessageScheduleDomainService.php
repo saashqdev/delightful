@@ -5,15 +5,15 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\MessageScheduleEntity;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\MessageScheduleLogEntity;
-use Delightful\SuperDelightful\Domain\SuperAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
-use Delightful\SuperDelightful\Domain\SuperAgent\Repository\Facade\MessageScheduleRepositoryInterface;
-use Delightful\SuperDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageScheduleEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageScheduleLogEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
+use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\MessageScheduleRepositoryInterface;
+use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 

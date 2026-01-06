@@ -194,12 +194,12 @@ class SaveProviderModelDTO extends AbstractDTO
         }
     }
 
-    public function getSuperDelightfulDisplayState(): ?int
+    public function getBeDelightfulDisplayState(): ?int
     {
         return $this->superDelightfulDisplayState ?? null;
     }
 
-    public function setSuperDelightfulDisplayState(null|bool|int|string $superDelightfulDisplayState): void
+    public function setBeDelightfulDisplayState(null|bool|int|string $superDelightfulDisplayState): void
     {
         if ($superDelightfulDisplayState === null) {
             $this->superDelightfulDisplayState = null;

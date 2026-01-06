@@ -12,7 +12,7 @@ use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]
-class MCPSuperDelightfulProjectSettingAdminApi extends AbstractMCPAdminApi
+class MCPBeDelightfulProjectSettingAdminApi extends AbstractMCPAdminApi
 {
     #[Inject]
     protected DelightfulUserSettingAppService $magicUserSettingAppService;

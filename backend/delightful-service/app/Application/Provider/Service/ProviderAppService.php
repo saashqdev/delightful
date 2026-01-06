@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace app\Application\Provider\Service;
 
-use App\Application\Provider\DTO\SuperDelightfulModelDTO;
-use App\Application\Provider\DTO\SuperDelightfulProviderDTO;
+use App\Application\Provider\DTO\BeDelightfulModelDTO;
+use App\Application\Provider\DTO\BeDelightfulProviderDTO;
 use App\Domain\File\Service\FileDomainService;
 use App\Domain\Provider\Entity\ProviderConfigEntity;
 use App\Domain\Provider\Entity\ProviderEntity;
@@ -31,11 +31,11 @@ class ProviderAppService
     /**
      * Get super magic display models and Delightful provider models visible to current organization.
      * @param string $organizationCode Organization code
-     * @return SuperDelightfulModelDTO[]
+     * @return BeDelightfulModelDTO[]
      */
-    public function getSuperDelightfulDisplayModelsForOrganization(string $organizationCode): array
+    public function getBeDelightfulDisplayModelsForOrganization(string $organizationCode): array
     {
-        $models = $this->adminProviderDomainService->getSuperDelightfulDisplayModelsForOrganization($organizationCode);
+        $models = $this->adminProviderDomainService->getBeDelightfulDisplayModelsForOrganization($organizationCode);
 
         if (empty($models)) {
             return [];
@@ -119,7 +119,7 @@ class ProviderAppService
         // 创建DTO并设置图标URL
         $modelDTOs = [];
         foreach ($models as $model) {
-            $modelDTO = new SuperDelightfulModelDTO($model->toArray());
+            $modelDTO = new BeDelightfulModelDTO($model->toArray());
 
             $localizedModelName = $model->getLocalizedName($locale);
             $localizedModelDescription = $model->getLocalizedDescription($locale);
@@ -148,7 +148,7 @@ class ProviderAppService
                 $localizedName = $this->getProviderDisplayName($providerEntity, $configEntity, $isRecommended, $locale);
                 $providerIconUrl = $providerIconUrls[$configId] ?? '';
 
-                $providerDTO = new SuperDelightfulProviderDTO([
+                $providerDTO = new BeDelightfulProviderDTO([
                     'name' => $localizedName,
                     'icon' => $providerIconUrl,
                     'sort' => $model->getSort(),

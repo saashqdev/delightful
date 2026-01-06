@@ -46,7 +46,7 @@ use App\Domain\Chat\DTO\Message\ControlMessage\TopicCreateMessage;
 use App\Domain\Chat\DTO\Message\ControlMessage\TopicDeleteMessage;
 use App\Domain\Chat\DTO\Message\ControlMessage\TopicUpdateMessage;
 use App\Domain\Chat\DTO\Message\ControlMessage\UnknowControlMessage;
-use App\Domain\Chat\DTO\Message\IntermediateMessage\SuperDelightfulInstructionMessage;
+use App\Domain\Chat\DTO\Message\IntermediateMessage\BeDelightfulInstructionMessage;
 use App\Domain\Chat\DTO\Message\MessageInterface;
 use App\Domain\Chat\DTO\Request\ChatRequest;
 use App\Domain\Chat\DTO\Request\ControlRequest;
@@ -262,7 +262,7 @@ class MessageAssembler
     public static function getIntermediateMessageStruct(IntermediateMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
         return match ($messageTypeEnum) {
-            IntermediateMessageType::SuperDelightfulInstruction => new SuperDelightfulInstructionMessage($messageStructArray),
+            IntermediateMessageType::BeDelightfulInstruction => new BeDelightfulInstructionMessage($messageStructArray),
         };
     }
 

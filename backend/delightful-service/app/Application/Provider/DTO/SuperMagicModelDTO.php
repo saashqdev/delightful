@@ -10,9 +10,9 @@ namespace App\Application\Provider\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * SuperDelightful 模型简化 DTO，只包含必要字段.
+ * BeDelightful 模型简化 DTO，只包含必要字段.
  */
-class SuperDelightfulModelDTO extends AbstractDTO
+class BeDelightfulModelDTO extends AbstractDTO
 {
     protected string $id = '';
 
@@ -26,7 +26,7 @@ class SuperDelightfulModelDTO extends AbstractDTO
 
     protected ?int $loadBalancingWeight = null;
 
-    protected ?SuperDelightfulProviderDTO $provider = null;
+    protected ?BeDelightfulProviderDTO $provider = null;
 
     public function getId(): string
     {
@@ -98,12 +98,12 @@ class SuperDelightfulModelDTO extends AbstractDTO
         }
     }
 
-    public function getProvider(): ?SuperDelightfulProviderDTO
+    public function getProvider(): ?BeDelightfulProviderDTO
     {
         return $this->provider;
     }
 
-    public function setProvider(?SuperDelightfulProviderDTO $provider): void
+    public function setProvider(?BeDelightfulProviderDTO $provider): void
     {
         $this->provider = $provider;
     }

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Interfaces\Agent\DTO;
+namespace Delightful\BeDelightful\Interfaces\Agent\DTO;
 
 class BuiltinToolCategoryDTO
 {

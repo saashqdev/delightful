@@ -5,15 +5,15 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Interfaces\SuperAgent\Facade;
+namespace Delightful\BeDelightful\Interfaces\SuperAgent\Facade;
 
 use App\Application\File\Service\FileAppService;
 use App\Domain\Contact\Entity\ValueObject\UserType;
 use App\Infrastructure\Util\Context\RequestContext;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 use Delightful\ApiResponse\Annotation\ApiResponse;
-use Delightful\SuperDelightful\Application\SuperAgent\Service\AccountAppService;
-use Delightful\SuperDelightful\Domain\SuperAgent\Constant\AgentConstant;
+use Delightful\BeDelightful\Application\SuperAgent\Service\AccountAppService;
+use Delightful\BeDelightful\Domain\SuperAgent\Constant\AgentConstant;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 #[ApiResponse('low_code')]

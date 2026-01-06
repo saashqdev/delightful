@@ -94,7 +94,7 @@ const menuKeyToPath = {
 	files: "files",
 }
 
-function SuperDelightful() {
+function BeDelightful() {
 	const { styles } = useStyles()
 	const navigate = useNavigate()
 	const location = useLocation()
@@ -127,14 +127,14 @@ function SuperDelightful() {
 		]
 	}, [])
 
-	const isSuperDelightfulRouter = location?.pathname?.startsWith("/super-magic")
+	const isBeDelightfulRouter = location?.pathname?.startsWith("/super-magic")
 	const isMobile = useResponsive().md === false
 	return (
 		// <DetailProvider>
 		<div
 			className={cx(
 				styles.container,
-				isSuperDelightfulRouter ? styles.normalContainer : styles.superContainer,
+				isBeDelightfulRouter ? styles.normalContainer : styles.superContainer,
 			)}
 		>
 			{isMobile ? null : (
@@ -147,7 +147,7 @@ function SuperDelightful() {
 							gap: 10,
 						}}
 					>
-						{isSuperDelightfulRouter ? null : (
+						{isBeDelightfulRouter ? null : (
 							<img src={DelightfulLogo} alt="" className={styles.logo} />
 						)}
 
@@ -178,7 +178,7 @@ function SuperDelightful() {
 							gap: 10,
 						}}
 					>
-						{isSuperDelightfulRouter ? null : (
+						{isBeDelightfulRouter ? null : (
 							<>
 								<UserMenus isPreviewMode>
 									<DelightfulAvatar src={userInfo?.avatar} size={40}>
@@ -199,4 +199,4 @@ function SuperDelightful() {
 	)
 }
 
-export default observer(SuperDelightful)
+export default observer(BeDelightful)

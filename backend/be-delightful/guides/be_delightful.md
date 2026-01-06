@@ -1,10 +1,10 @@
-# SuperDelightful 类详细文档
+# BeDelightful 类详细文档
 
-SuperDelightful是项目的核心代理(Agent)类，整合了智能代理的关键功能。它负责处理用户查询、调用大语言模型、执行工具、管理状态、以及协调各种资源。本文档详细解析SuperDelightful类的设计、实现与工作流程。
+BeDelightful是项目的核心代理(Agent)类，整合了智能代理的关键功能。它负责处理用户查询、调用大语言模型、执行工具、管理状态、以及协调各种资源。本文档详细解析BeDelightful类的设计、实现与工作流程。
 
 ## 核心功能概述
 
-SuperDelightful实现了一个完整的AI代理系统，其主要功能包括：
+BeDelightful实现了一个完整的AI代理系统，其主要功能包括：
 
 1. 与大语言模型(LLM)的交互
 2. 工具调用管理与执行
@@ -16,7 +16,7 @@ SuperDelightful实现了一个完整的AI代理系统，其主要功能包括：
 
 ## 关键组件
 
-SuperDelightful类与多个组件紧密协作：
+BeDelightful类与多个组件紧密协作：
 
 - **LLMAdapter**：负责与大语言模型(如GPT-4等)的交互
 - **ToolExecutor**：执行各种工具调用
@@ -26,7 +26,7 @@ SuperDelightful类与多个组件紧密协作：
 
 ## 工作流程
 
-SuperDelightful的主要工作流程分为以下几个步骤：
+BeDelightful的主要工作流程分为以下几个步骤：
 
 1. **初始化**：加载配置、初始化组件
 2. **接收用户查询**：处理用户输入
@@ -53,7 +53,7 @@ SuperDelightful的主要工作流程分为以下几个步骤：
 ### 初始化与配置方法
 
 #### `__init__`
-- **用途**：初始化SuperDelightful实例
+- **用途**：初始化BeDelightful实例
 - **实现要点**：
   - 初始化状态、工具执行器、LLM适配器
   - 设置动态提示词标志
@@ -114,7 +114,7 @@ SuperDelightful的主要工作流程分为以下几个步骤：
 ### 执行流程方法
 
 #### `run`
-- **用途**：运行SuperDelightful代理，处理用户查询
+- **用途**：运行BeDelightful代理，处理用户查询
 - **联动方法**：`run_async`
 - **实现要点**：
   - 创建事件循环
@@ -248,7 +248,7 @@ SuperDelightful的主要工作流程分为以下几个步骤：
 
 ## 状态管理
 
-SuperDelightful使用AgentState枚举来管理代理状态：
+BeDelightful使用AgentState枚举来管理代理状态：
 
 - **IDLE**: 空闲状态
 - **RUNNING**: 运行中
@@ -263,7 +263,7 @@ INIT -> IDLE -> RUNNING -> [FINISHED | ERROR]
 
 ## 事件系统
 
-SuperDelightful实现了一个事件系统，允许在关键点触发事件：
+BeDelightful实现了一个事件系统，允许在关键点触发事件：
 
 - **BEFORE_LLM_REQUEST**: LLM请求发送前
 - **AFTER_LLM_REQUEST**: LLM响应接收后
@@ -272,7 +272,7 @@ SuperDelightful实现了一个事件系统，允许在关键点触发事件：
 
 ## 集成与扩展点
 
-SuperDelightful提供了多个扩展点：
+BeDelightful提供了多个扩展点：
 
 1. **工具系统**：通过实现BaseTool接口可以轻松添加新工具
 2. **模型适配**：通过LLMAdapter可以支持不同的大语言模型
@@ -284,16 +284,16 @@ SuperDelightful提供了多个扩展点：
 以下是一个典型的执行流程示例：
 
 1. 用户发送查询："查找关于气候变化的最新研究"
-2. SuperDelightful初始化环境，设置状态为RUNNING
+2. BeDelightful初始化环境，设置状态为RUNNING
 3. 发送请求给LLM，获取包含工具调用的响应
 4. LLM建议使用"bing_search"工具搜索最新研究
-5. SuperDelightful执行"bing_search"工具
+5. BeDelightful执行"bing_search"工具
 6. 将搜索结果添加到聊天历史
 7. 继续向LLM发送请求，包含搜索结果
 8. LLM可能建议使用"browser_use"工具访问特定网页
-9. SuperDelightful执行"browser_use"工具
+9. BeDelightful执行"browser_use"工具
 10. 循环继续，直到LLM调用"finish_task"工具或达到最大迭代次数
-11. SuperDelightful清理资源，返回最终结果
+11. BeDelightful清理资源，返回最终结果
 
 ## 最佳实践与注意事项
 
@@ -304,4 +304,4 @@ SuperDelightful提供了多个扩展点：
 
 ## 总结
 
-SuperDelightful类是项目的核心组件，它通过协调多个子系统实现了一个功能完整的AI代理。其设计考虑了可扩展性、健壮性和性能，能够处理复杂的用户查询并执行多步骤任务。 
+BeDelightful类是项目的核心组件，它通过协调多个子系统实现了一个功能完整的AI代理。其设计考虑了可扩展性、健壮性和性能，能够处理复杂的用户查询并执行多步骤任务。 

@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Domain\SuperAgent\Event;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Event;
 
-use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\TopicTaskMessageDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\TopicTaskMessageDTO;
 
 class RunTaskCallbackEvent extends AbstractEvent
 {

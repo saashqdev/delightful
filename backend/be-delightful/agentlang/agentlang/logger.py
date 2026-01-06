@@ -10,7 +10,7 @@ from agentlang.context.application_context import ApplicationContext
 
 class Logger:
     """
-    SuperDelightful logger built on loguru.
+    BeDelightful logger built on loguru.
     Provides unified log formatting and level control.
     """
     # Class variable to store instance

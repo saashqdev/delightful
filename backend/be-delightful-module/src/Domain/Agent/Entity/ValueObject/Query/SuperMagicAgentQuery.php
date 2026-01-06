@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Domain\Agent\Entity\ValueObject\Query;
+namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\Query;
 
 use App\Infrastructure\Core\AbstractQuery;
 
-class SuperDelightfulAgentQuery extends AbstractQuery
+class BeDelightfulAgentQuery extends AbstractQuery
 {
     protected ?string $name = null;
 

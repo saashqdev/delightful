@@ -56,15 +56,15 @@ export function registerRoutes(): Array<RouteObject> {
 	const Settings = lazy(() => import("../pages/settings/Settings.page"))
 
 	/** 超级麦吉 - 工作区 */
-	const SuperDelightfulWorkspace = lazy(() => import("@/opensource/pages/superDelightful/pages/Workspace"))
+	const BeDelightfulWorkspace = lazy(() => import("@/opensource/pages/superDelightful/pages/Workspace"))
 
 	/** 超级麦吉分享(不需要登录) */
-	const SuperDelightfulShare = lazy(() => import("@/opensource/pages/share"))
+	const BeDelightfulShare = lazy(() => import("@/opensource/pages/share"))
 
 	return [
 		{
-			path: RoutePath.SuperDelightfulShare,
-			element: <SuperDelightfulShare />,
+			path: RoutePath.BeDelightfulShare,
+			element: <BeDelightfulShare />,
 		},
 		{
 			path: "/",
@@ -79,8 +79,8 @@ export function registerRoutes(): Array<RouteObject> {
 					element: <ChatNew />,
 				},
 				{
-					path: RoutePath.SuperDelightful,
-					element: <SuperDelightfulWorkspace />,
+					path: RoutePath.BeDelightful,
+					element: <BeDelightfulWorkspace />,
 				},
 				{
 					path: RoutePath.Contacts,

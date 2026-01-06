@@ -5,13 +5,13 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Domain\SuperAgent\Repository\Persistence;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence;
 
 use App\Infrastructure\Core\AbstractRepository;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ProjectForkEntity;
-use Delightful\SuperDelightful\Domain\SuperAgent\Repository\Facade\ProjectForkRepositoryInterface;
-use Delightful\SuperDelightful\Domain\SuperAgent\Repository\Model\ProjectForkModel;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ProjectForkEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\ProjectForkRepositoryInterface;
+use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\ProjectForkModel;
 use RuntimeException;
 
 /**

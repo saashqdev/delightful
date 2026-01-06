@@ -14,8 +14,8 @@
      * @param AsrErrorCode $failedError Generic error code
      * @return AsrRecordingDirectoryDTO Directory DTO
      */
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
 use Hyperf\Contract\TranslatorInterface;
 use Psr\Log\LoggerInterface;
 use Throwable;

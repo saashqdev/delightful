@@ -15,7 +15,7 @@ use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 use DateTime;
 use stdClass;
 
-class SuperDelightfulModelConfigHandler extends AbstractUserSettingHandler
+class BeDelightfulModelConfigHandler extends AbstractUserSettingHandler
 {
     public function __construct(
         protected ProviderModelDomainService $providerModelDomainService,
@@ -63,7 +63,7 @@ class SuperDelightfulModelConfigHandler extends AbstractUserSettingHandler
     public function generateDefault(): ?DelightfulUserSettingEntity
     {
         $setting = new DelightfulUserSettingEntity();
-        $setting->setKey(UserSettingKey::SuperDelightfulMCPServers->value);
+        $setting->setKey(UserSettingKey::BeDelightfulMCPServers->value);
         $setting->setValue(['model' => new stdClass(), 'image_model' => new stdClass()]);
         $setting->setCreatedAt(new DateTime());
         $setting->setUpdatedAt(new DateTime());

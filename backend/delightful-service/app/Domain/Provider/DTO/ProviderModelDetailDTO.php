@@ -326,12 +326,12 @@ class ProviderModelDetailDTO extends AbstractDTO
         }
     }
 
-    public function getSuperDelightfulDisplayState(): int
+    public function getBeDelightfulDisplayState(): int
     {
         return $this->superDelightfulDisplayState;
     }
 
-    public function setSuperDelightfulDisplayState(null|int|string $superDelightfulDisplayState): void
+    public function setBeDelightfulDisplayState(null|int|string $superDelightfulDisplayState): void
     {
         if ($superDelightfulDisplayState === null) {
             $this->superDelightfulDisplayState = 0;

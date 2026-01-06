@@ -1,8 +1,8 @@
-# SuperDelightful
+# BeDelightful
 
-SuperDelightful is the flagship of the Delightful product family—a general-purpose AGI system built for complex task scenarios. With multi-agent design and a rich toolset, it supports autonomous task understanding, planning, execution, and self-correction. SuperDelightful can follow natural language instructions, execute business workflows, and deliver end results.
+BeDelightful is the flagship of the Delightful product family—a general-purpose AGI system built for complex task scenarios. With multi-agent design and a rich toolset, it supports autonomous task understanding, planning, execution, and self-correction. BeDelightful can follow natural language instructions, execute business workflows, and deliver end results.
 
-As the flagship product, SuperDelightful is open source to enable rapid customization. Teams can quickly build and deploy domain-specific assistants, boosting decision speed and quality.
+As the flagship product, BeDelightful is open source to enable rapid customization. Teams can quickly build and deploy domain-specific assistants, boosting decision speed and quality.
 
 ## Key Features
 
@@ -27,7 +27,7 @@ Required variables:
 
 ## Example Use Cases
 
-SuperDelightful applies to many complex business scenarios. Examples:
+BeDelightful applies to many complex business scenarios. Examples:
 
 - [Warren Buffett 2025 shareholder meeting investment insights](https://www.letsmagic.cn/share/777665156986277889)
 - [Beijing humanoid robot half-marathon stock analysis](https://www.letsmagic.cn/share/774280936479625217)
@@ -39,7 +39,7 @@ Find more cases on the [official site](https://www.letsmagic.cn).
 
 ## Related Projects
 
-SuperDelightful is part of the Delightful suite and works alongside:
+BeDelightful is part of the Delightful suite and works alongside:
 
 - **[Delightful IM](https://github.com/saashqdev/delightful/magic)** – Enterprise IM with AI agent chat and internal comms
 - **[Delightful Flow](https://github.com/saashqdev/delightful/magic-flow)** – Visual AI workflow orchestrator

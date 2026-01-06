@@ -393,7 +393,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
      * @param string $organizationCode Organization code
      * @return ProviderModelEntity[]
      */
-    public function getSuperDelightfulDisplayModelsForOrganization(string $organizationCode): array
+    public function getBeDelightfulDisplayModelsForOrganization(string $organizationCode): array
     {
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
@@ -403,7 +403,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // 按super_magic_display_state过滤
         $models = [];
         foreach ($allModels as $model) {
-            if ($model->isSuperDelightfulDisplayState() === 1) {
+            if ($model->isBeDelightfulDisplayState() === 1) {
                 $models[] = $model;
             }
         }

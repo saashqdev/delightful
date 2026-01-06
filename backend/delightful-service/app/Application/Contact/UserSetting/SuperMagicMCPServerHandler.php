@@ -18,7 +18,7 @@ use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 use App\Infrastructure\Core\ValueObject\Page;
 use DateTime;
 
-class SuperDelightfulMCPServerHandler extends AbstractUserSettingHandler
+class BeDelightfulMCPServerHandler extends AbstractUserSettingHandler
 {
     public function __construct(
         protected OperationPermissionAppService $operationPermissionAppService,
@@ -64,7 +64,7 @@ class SuperDelightfulMCPServerHandler extends AbstractUserSettingHandler
     public function generateDefault(): ?DelightfulUserSettingEntity
     {
         $setting = new DelightfulUserSettingEntity();
-        $setting->setKey(UserSettingKey::SuperDelightfulMCPServers->value);
+        $setting->setKey(UserSettingKey::BeDelightfulMCPServers->value);
         $setting->setValue(['servers' => []]);
         $setting->setCreatedAt(new DateTime());
         $setting->setUpdatedAt(new DateTime());

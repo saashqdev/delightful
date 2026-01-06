@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
 
 use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Domain\Chat\Entity\Items\SeqExtra;
@@ -18,11 +18,11 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Carbon\Carbon;
-use Delightful\SuperDelightful\Domain\SuperAgent\Constant\AgentConstant;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\MessageQueueDomainService;
-use Delightful\SuperDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Domain\SuperAgent\Constant\AgentConstant;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskStatus;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\MessageQueueDomainService;
+use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;

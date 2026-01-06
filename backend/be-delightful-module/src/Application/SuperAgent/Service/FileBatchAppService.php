@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
 
 use App\Application\File\Event\Publish\FileBatchCompressPublisher;
 use App\Application\File\Service\FileAppService;
@@ -15,15 +15,15 @@ use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\ValueObject\StorageBucketType;
 use App\Infrastructure\Util\Context\RequestContext;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\ProjectDomainService;
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\TopicDomainService;
-use Delightful\SuperDelightful\ErrorCode\SuperAgentErrorCode;
-use Delightful\SuperDelightful\Infrastructure\Utils\WorkDirectoryUtil;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Request\CreateBatchDownloadRequestDTO;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Response\CheckBatchDownloadResponseDTO;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Response\CreateBatchDownloadResponseDTO;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\TaskFileEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\ProjectDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\TaskFileDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Request\CreateBatchDownloadRequestDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\CheckBatchDownloadResponseDTO;
+use Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response\CreateBatchDownloadResponseDTO;
 use Hyperf\Amqp\Producer;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;

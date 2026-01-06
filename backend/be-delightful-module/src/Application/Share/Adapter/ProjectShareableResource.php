@@ -5,14 +5,14 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Application\Share\Adapter;
+namespace Delightful\BeDelightful\Application\Share\Adapter;
 
 use App\Application\Chat\Service\DelightfulUserContactAppService;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\SuperDelightful\Application\Share\DTO\ShareableResourceDTO;
-use Delightful\SuperDelightful\Application\Share\Factory\Facade\ResourceFactoryInterface;
-use Delightful\SuperDelightful\Application\SuperAgent\Service\ProjectAppService;
-use Delightful\SuperDelightful\ErrorCode\SuperAgentErrorCode;
+use Delightful\BeDelightful\Application\Share\DTO\ShareableResourceDTO;
+use Delightful\BeDelightful\Application\Share\Factory\Facade\ResourceFactoryInterface;
+use Delightful\BeDelightful\Application\SuperAgent\Service\ProjectAppService;
+use Delightful\BeDelightful\ErrorCode\SuperAgentErrorCode;
 use Exception;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;

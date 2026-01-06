@@ -347,9 +347,9 @@ readonly class AdminProviderAppService
      * @param string $organizationCode Organization code
      * @return ProviderModelDetailDTO[]
      */
-    public function getSuperDelightfulDisplayModelsForOrganization(string $organizationCode): array
+    public function getBeDelightfulDisplayModelsForOrganization(string $organizationCode): array
     {
-        $models = $this->adminProviderDomainService->getSuperDelightfulDisplayModelsForOrganization($organizationCode);
+        $models = $this->adminProviderDomainService->getBeDelightfulDisplayModelsForOrganization($organizationCode);
 
         if (empty($models)) {
             return [];

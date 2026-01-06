@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Infrastructure\ExternalAPI\SandboxOS;
+namespace Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS;
 
 use GuzzleHttp\Client;
 use Hyperf\Context\ApplicationContext;

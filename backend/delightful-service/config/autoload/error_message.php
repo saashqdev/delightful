@@ -24,7 +24,7 @@ use App\ErrorCode\TokenErrorCode;
 use App\ErrorCode\UserErrorCode;
 use App\ErrorCode\UserTaskErrorCode;
 use App\Infrastructure\Core\Exception\BusinessException;
-use Delightful\SuperDelightful\ErrorCode\SuperDelightfulErrorCode;
+use Delightful\BeDelightful\ErrorCode\BeDelightfulErrorCode;
 
 return [
     'exception_class' => BusinessException::class,
@@ -48,6 +48,6 @@ return [
         ServiceProviderErrorCode::class => [44000, 44999],
         LongTermMemoryErrorCode::class => [45000, 45999],
         MCPErrorCode::class => [51500, 51599],
-        SuperDelightfulErrorCode::class => [60000, 60999],
+        BeDelightfulErrorCode::class => [60000, 60999],
     ],
 ];

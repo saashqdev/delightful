@@ -1,8 +1,8 @@
-# SuperDelightful Configuration Management Guide
+# BeDelightful Configuration Management Guide
 
 ## Overview
 
-SuperDelightful uses a flexible configuration system based on YAML files and environment variables. It supports layered config, type validation, a unified access interface, and hot reloading with dynamic updates.
+BeDelightful uses a flexible configuration system based on YAML files and environment variables. It supports layered config, type validation, a unified access interface, and hot reloading with dynamic updates.
 
 ## Components
 
@@ -120,7 +120,7 @@ Load priority from highest to lowest:
 
 ## Using .env Files
 
-SuperDelightful can load env vars from a `.env` file. See [dotenv_configuration.md](dotenv_configuration.md) for details.
+BeDelightful can load env vars from a `.env` file. See [dotenv_configuration.md](dotenv_configuration.md) for details.
 
 ## FAQ
 

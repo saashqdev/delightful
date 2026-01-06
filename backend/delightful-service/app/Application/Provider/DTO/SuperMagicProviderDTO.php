@@ -10,9 +10,9 @@ namespace App\Application\Provider\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * SuperDelightful 服务商简化 DTO.
+ * BeDelightful 服务商简化 DTO.
  */
-class SuperDelightfulProviderDTO extends AbstractDTO
+class BeDelightfulProviderDTO extends AbstractDTO
 {
     protected string $name = '';
 

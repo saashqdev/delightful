@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Application\Chat\Service;
+namespace Delightful\BeDelightful\Application\Chat\Service;
 
 use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use App\Domain\Chat\Service\DelightfulConversationDomainService;
@@ -14,9 +14,9 @@ use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\ErrorCode\GenericErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
-use Delightful\SuperDelightful\Application\SuperAgent\Service\AbstractAppService;
-use Delightful\SuperDelightful\Application\SuperAgent\Service\AccountAppService;
-use Delightful\SuperDelightful\Domain\SuperAgent\Constant\AgentConstant;
+use Delightful\BeDelightful\Application\SuperAgent\Service\AbstractAppService;
+use Delightful\BeDelightful\Application\SuperAgent\Service\AccountAppService;
+use Delightful\BeDelightful\Domain\SuperAgent\Constant\AgentConstant;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -47,7 +47,7 @@ class ChatAppService extends AbstractAppService
      */
     public function initDelightfulChatConversation(DataIsolation $dataIsolation): array
     {
-        $aiUserEntity = $this->getOrCreateSuperDelightfulUser($dataIsolation);
+        $aiUserEntity = $this->getOrCreateBeDelightfulUser($dataIsolation);
         $currentUserId = $dataIsolation->getCurrentUserId();
         $aiUserId = $aiUserEntity->getUserId();
         $this->logger->info(sprintf('Getting or creating conversation for user ID: %s with AI user ID: %s in organization: %s', $currentUserId, $aiUserId, $dataIsolation->getCurrentOrganizationCode()));
@@ -77,9 +77,9 @@ class ChatAppService extends AbstractAppService
      * @return string the agent user ID
      * @throws Throwable if the agent user is not found
      */
-    public function getSuperDelightfulAgentUserId(DataIsolation $dataIsolation): string
+    public function getBeDelightfulAgentUserId(DataIsolation $dataIsolation): string
     {
-        $aiUserEntity = $this->getOrCreateSuperDelightfulUser($dataIsolation);
+        $aiUserEntity = $this->getOrCreateBeDelightfulUser($dataIsolation);
         return $aiUserEntity->getUserId();
     }
 
@@ -91,7 +91,7 @@ class ChatAppService extends AbstractAppService
      * @return object the AI user entity
      * @throws Throwable if the agent user is not found after initialization attempts
      */
-    private function getOrCreateSuperDelightfulUser(DataIsolation $dataIsolation): object
+    private function getOrCreateBeDelightfulUser(DataIsolation $dataIsolation): object
     {
         $this->logger->info(sprintf('Attempting to get AI user with code: %s for organization: %s', AgentConstant::SUPER_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
         $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::SUPER_DELIGHTFUL_CODE);

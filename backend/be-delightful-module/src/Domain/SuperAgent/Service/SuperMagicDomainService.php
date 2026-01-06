@@ -5,16 +5,16 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Domain\SuperAgent\Service;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Service;
 
-use Delightful\SuperDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\SaveFilesRequest;
-use Delightful\SuperDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\SandboxAgentInterface;
-use Delightful\SuperDelightful\Infrastructure\ExternalAPI\SandboxOS\Exception\SandboxOperationException;
-use Delightful\SuperDelightful\Infrastructure\Utils\WorkDirectoryUtil;
+use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\Request\SaveFilesRequest;
+use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Agent\SandboxAgentInterface;
+use Delightful\BeDelightful\Infrastructure\ExternalAPI\SandboxOS\Exception\SandboxOperationException;
+use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 
-class SuperDelightfulDomainService
+class BeDelightfulDomainService
 {
     private LoggerInterface $logger;
 
@@ -27,7 +27,7 @@ class SuperDelightfulDomainService
 
     public function saveFileData(string $sandboxId, array $fileDataList, string $workDir): array
     {
-        $this->logger->info('[SuperDelightful][App] Save file data', [
+        $this->logger->info('[BeDelightful][App] Save file data', [
             'sandbox_id' => $sandboxId,
             'file_data_list' => $fileDataList,
             'work_dir' => $workDir,

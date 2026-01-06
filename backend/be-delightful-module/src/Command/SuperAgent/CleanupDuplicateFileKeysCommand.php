@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Command\SuperAgent;
+namespace Delightful\BeDelightful\Command\SuperAgent;
 
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\FileKeyCleanupDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\FileKeyCleanupDomainService;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
 use Hyperf\Logger\LoggerFactory;

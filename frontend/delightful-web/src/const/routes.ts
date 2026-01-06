@@ -54,7 +54,7 @@ export const enum RoutePath {
 	FlowDetail = "/flow/:type/detail/:id",
 	Calendar = "/calendar",
 	/** 超级麦吉 */
-	SuperDelightful = "/super-magic/workspace",
-	SuperDelightfulWorkspace = "/super-magic/workspace",
-	SuperDelightfulShare = "/share/:shareId",
+	BeDelightful = "/super-magic/workspace",
+	BeDelightfulWorkspace = "/super-magic/workspace",
+	BeDelightfulShare = "/share/:shareId",
 }

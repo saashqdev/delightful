@@ -1,7 +1,7 @@
 import GlobalErrorBoundary from "@/opensource/components/fallback/GlobalErrorBoundary"
 import AuthenticationProvider from "@/opensource/providers/AuthenticationProvider"
 import GlobalChatProvider from "@/opensource/providers/ChatProvider"
-import SuperDelightful from "@/opensource/pages/superDelightful"
+import BeDelightful from "@/opensource/pages/superDelightful"
 import { reportErrorLog } from "@/opensource/pages/superDelightful/utils/api"
 import Logger from "@/utils/log/Logger"
 import { createStyles } from "antd-style"
@@ -91,7 +91,7 @@ function Super() {
 			<GlobalErrorBoundary>
 				<AuthenticationProvider>
 					<GlobalChatProvider>
-						<SuperDelightful />
+						<BeDelightful />
 					</GlobalChatProvider>
 				</AuthenticationProvider>
 			</GlobalErrorBoundary>

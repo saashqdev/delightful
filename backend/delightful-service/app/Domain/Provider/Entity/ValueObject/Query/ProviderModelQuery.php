@@ -39,12 +39,12 @@ class ProviderModelQuery extends Query
         $this->modelIds = $modelIds;
     }
 
-    public function getSuperDelightfulDisplay(): ?bool
+    public function getBeDelightfulDisplay(): ?bool
     {
         return $this->superDelightfulDisplay;
     }
 
-    public function setSuperDelightfulDisplay(?bool $superDelightfulDisplay): void
+    public function setBeDelightfulDisplay(?bool $superDelightfulDisplay): void
     {
         $this->superDelightfulDisplay = $superDelightfulDisplay;
     }

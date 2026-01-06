@@ -29,7 +29,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
     /**
      * @throws Throwable
      */
-    public function handleSuperDelightfulInstructionMessage(
+    public function handleBeDelightfulInstructionMessage(
         DelightfulMessageDTO $messageDTO,
         DataIsolation $dataIsolation,
         DelightfulConversationEntity $userConversationEntity,
@@ -125,7 +125,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             ));
         } catch (Throwable $e) {
             // 记录错误日志，但不阻断处理流程
-            $this->logger?->error('HandleSuperDelightfulInstructionMessage failed', [
+            $this->logger?->error('HandleBeDelightfulInstructionMessage failed', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
                 'messageDTO' => $messageDTO->toArray(),

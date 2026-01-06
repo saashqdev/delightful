@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace HyperfTest\Cases\Application\MCP;
 
-use App\Application\MCP\BuiltInMCP\SuperDelightfulChat\SuperDelightfulChatManager;
+use App\Application\MCP\BuiltInMCP\BeDelightfulChat\BeDelightfulChatManager;
 use App\Domain\MCP\Entity\ValueObject\MCPDataIsolation;
 use Delightful\PhpMcp\Server\FastMcp\Tools\RegisteredTool;
 use HyperfTest\Cases\BaseTest;
@@ -15,7 +15,7 @@ use HyperfTest\Cases\BaseTest;
 /**
  * @internal
  */
-class SuperDelightfulChatManagerTest extends BaseTest
+class BeDelightfulChatManagerTest extends BaseTest
 {
     private const string TEST_MCP_SERVER_CODE = 'test_mcp_server_001';
 
@@ -45,7 +45,7 @@ class SuperDelightfulChatManagerTest extends BaseTest
         $toolIds = [self::BING_TOOL_ID];
 
         // Act
-        SuperDelightfulChatManager::createByChatParams(
+        BeDelightfulChatManager::createByChatParams(
             $this->mcpDataIsolation,
             self::TEST_MCP_SERVER_CODE,
             $agentIds,
@@ -53,7 +53,7 @@ class SuperDelightfulChatManagerTest extends BaseTest
         );
 
         // Assert - Verify data was stored by trying to retrieve it
-        $result = SuperDelightfulChatManager::getRegisteredTools(self::TEST_MCP_SERVER_CODE);
+        $result = BeDelightfulChatManager::getRegisteredTools(self::TEST_MCP_SERVER_CODE);
         $this->assertIsArray($result);
     }
 
@@ -63,7 +63,7 @@ class SuperDelightfulChatManagerTest extends BaseTest
         $agentIds = [];
         $toolIds = [self::BING_TOOL_ID];
 
-        SuperDelightfulChatManager::createByChatParams(
+        BeDelightfulChatManager::createByChatParams(
             $this->mcpDataIsolation,
             self::TEST_MCP_SERVER_CODE,
             $agentIds,
@@ -71,7 +71,7 @@ class SuperDelightfulChatManagerTest extends BaseTest
         );
 
         // Act
-        $result = SuperDelightfulChatManager::getRegisteredTools(self::TEST_MCP_SERVER_CODE);
+        $result = BeDelightfulChatManager::getRegisteredTools(self::TEST_MCP_SERVER_CODE);
 
         // Assert
         $this->assertIsArray($result);
@@ -86,7 +86,7 @@ class SuperDelightfulChatManagerTest extends BaseTest
     public function testReturnsEmptyArrayWhenNoDataInRedis(): void
     {
         // Act - Try to get tools for non-existent server code
-        $result = SuperDelightfulChatManager::getRegisteredTools('non_existent_server_code');
+        $result = BeDelightfulChatManager::getRegisteredTools('non_existent_server_code');
 
         // Assert
         $this->assertIsArray($result);
@@ -100,7 +100,7 @@ class SuperDelightfulChatManagerTest extends BaseTest
         $toolIds = [self::BING_TOOL_ID, 'another_tool_id'];
 
         // Act
-        SuperDelightfulChatManager::createByChatParams(
+        BeDelightfulChatManager::createByChatParams(
             $this->mcpDataIsolation,
             self::TEST_MCP_SERVER_CODE,
             $agentIds,
@@ -108,7 +108,7 @@ class SuperDelightfulChatManagerTest extends BaseTest
         );
 
         // Assert - Verify data was stored by trying to retrieve it
-        $result = SuperDelightfulChatManager::getRegisteredTools(self::TEST_MCP_SERVER_CODE);
+        $result = BeDelightfulChatManager::getRegisteredTools(self::TEST_MCP_SERVER_CODE);
         $this->assertIsArray($result);
     }
 
@@ -121,14 +121,14 @@ class SuperDelightfulChatManagerTest extends BaseTest
         $toolIds = [self::BING_TOOL_ID];
 
         // Act - Store data for two different servers
-        SuperDelightfulChatManager::createByChatParams(
+        BeDelightfulChatManager::createByChatParams(
             $this->mcpDataIsolation,
             $serverCode1,
             $agentIds,
             $toolIds
         );
 
-        SuperDelightfulChatManager::createByChatParams(
+        BeDelightfulChatManager::createByChatParams(
             $this->mcpDataIsolation,
             $serverCode2,
             [],
@@ -136,8 +136,8 @@ class SuperDelightfulChatManagerTest extends BaseTest
         );
 
         // Assert - Verify both servers have data
-        $result1 = SuperDelightfulChatManager::getRegisteredTools($serverCode1);
-        $result2 = SuperDelightfulChatManager::getRegisteredTools($serverCode2);
+        $result1 = BeDelightfulChatManager::getRegisteredTools($serverCode1);
+        $result2 = BeDelightfulChatManager::getRegisteredTools($serverCode2);
 
         $this->assertIsArray($result1);
         $this->assertIsArray($result2);

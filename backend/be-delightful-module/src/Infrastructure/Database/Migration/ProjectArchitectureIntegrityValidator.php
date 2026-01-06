@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Infrastructure\Database\Migration;
+namespace Delightful\BeDelightful\Infrastructure\Database\Migration;
 
 use Exception;
 use Hyperf\DbConnection\Db;

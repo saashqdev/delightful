@@ -5,14 +5,14 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Domain\SuperAgent\Repository\Persistence;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence;
 
 use App\Infrastructure\Core\AbstractRepository;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use Carbon\Carbon;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\MessageScheduleLogEntity;
-use Delightful\SuperDelightful\Domain\SuperAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
-use Delightful\SuperDelightful\Domain\SuperAgent\Repository\Model\MessageScheduleLogModel;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageScheduleLogEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\MessageScheduleLogRepositoryInterface;
+use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\MessageScheduleLogModel;
 
 /**
  * Message schedule log repository implementation.

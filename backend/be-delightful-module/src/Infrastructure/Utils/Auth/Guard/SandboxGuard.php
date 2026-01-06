@@ -5,12 +5,12 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Infrastructure\Utils\Auth\Guard;
+namespace Delightful\BeDelightful\Infrastructure\Utils\Auth\Guard;
 
 use App\ErrorCode\UserErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
-use Delightful\SuperDelightful\Interfaces\Authorization\Web\SandboxAuthorization;
+use Delightful\BeDelightful\Interfaces\Authorization\Web\SandboxAuthorization;
 use Hyperf\Codec\Json;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;

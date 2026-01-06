@@ -5,19 +5,19 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 use App\Infrastructure\Util\Middleware\RequestContextMiddleware;
-use Delightful\SuperDelightful\Infrastructure\Utils\Middleware\SandboxTokenAuthMiddleware;
-use Delightful\SuperDelightful\Interfaces\Agent\Facade\Sandbox\SuperDelightfulAgentSandboxApi;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\InternalApi\FileApi;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\OpenApi\OpenProjectApi;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\OpenApi\OpenTaskApi;
-use Delightful\SuperDelightful\Interfaces\SuperAgent\Facade\SandboxApi;
+use Delightful\BeDelightful\Infrastructure\Utils\Middleware\SandboxTokenAuthMiddleware;
+use Delightful\BeDelightful\Interfaces\Agent\Facade\Sandbox\BeDelightfulAgentSandboxApi;
+use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\InternalApi\FileApi;
+use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\OpenApi\OpenProjectApi;
+use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\OpenApi\OpenTaskApi;
+use Delightful\BeDelightful\Interfaces\SuperAgent\Facade\SandboxApi;
 use Hyperf\HttpServer\Router\Router;
 
 // Sandbox open interface - naming is non-standard, needs to be deprecated
 Router::addGroup('/api/v1/sandbox-openapi', static function () {
     Router::addGroup('/agents', static function () {
-        Router::get('/{code}', [SuperDelightfulAgentSandboxApi::class, 'show']);
-        Router::post('/tool-execute', [SuperDelightfulAgentSandboxApi::class, 'executeTool']);
+        Router::get('/{code}', [BeDelightfulAgentSandboxApi::class, 'show']);
+        Router::post('/tool-execute', [BeDelightfulAgentSandboxApi::class, 'executeTool']);
     });
 });
 
@@ -53,8 +53,8 @@ Router::addGroup(
 // Sandbox open interface
 Router::addGroup('/api/v1/open-api/sandbox', static function () {
     Router::addGroup('/agents', static function () {
-        Router::get('/{code}', [SuperDelightfulAgentSandboxApi::class, 'show']);
-        Router::post('/tool-execute', [SuperDelightfulAgentSandboxApi::class, 'executeTool']);
+        Router::get('/{code}', [BeDelightfulAgentSandboxApi::class, 'show']);
+        Router::post('/tool-execute', [BeDelightfulAgentSandboxApi::class, 'executeTool']);
     });
 });
 

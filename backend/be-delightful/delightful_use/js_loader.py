@@ -121,7 +121,7 @@ class JSLoader:
             load_script = f"""
             () => {{
                 try {{
-                    window.SuperDelightful = window.SuperDelightful || {{
+                    window.BeDelightful = window.BeDelightful || {{
                         'version': '0.0.1',
                     }};
                     window.DelightfulUse = window.DelightfulUse || {{}};

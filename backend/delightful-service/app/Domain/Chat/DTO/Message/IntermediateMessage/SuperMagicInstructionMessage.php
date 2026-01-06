@@ -9,10 +9,10 @@ namespace App\Domain\Chat\DTO\Message\IntermediateMessage;
 
 use App\Domain\Chat\Entity\ValueObject\MessageType\IntermediateMessageType;
 
-class SuperDelightfulInstructionMessage extends AbstractIntermediateMessageStruct
+class BeDelightfulInstructionMessage extends AbstractIntermediateMessageStruct
 {
     protected function setMessageType(): void
     {
-        $this->intermediateMessageType = IntermediateMessageType::SuperDelightfulInstruction;
+        $this->intermediateMessageType = IntermediateMessageType::BeDelightfulInstruction;
     }
 }

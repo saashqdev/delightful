@@ -96,5 +96,5 @@ This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE
 <div align="center">
 <b>AgentLang: Making Natural Language the Core of AI Agent Development</b>
 
-Developed with ❤️ by the SuperDelightful Team
+Developed with ❤️ by the BeDelightful Team
 </div> 

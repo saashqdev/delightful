@@ -14,7 +14,7 @@ import {
 	IconUserSquareRounded,
 } from "@tabler/icons-react"
 import { RoutePath } from "@/const/routes"
-import SuperDelightfulIcon from "@/opensource/pages/superDelightful/assets/svg/tabler-icon-super-magic.svg"
+import BeDelightfulIcon from "@/opensource/pages/superDelightful/assets/svg/tabler-icon-super-magic.svg"
 import { isCommercial } from "@/utils/env"
 import DelightfulLogo from "@/opensource/components/DelightfulLogo"
 import { LogoType } from "@/opensource/components/DelightfulLogo/LogoType"
@@ -44,11 +44,11 @@ export function useSideMenu() {
 			},
 			{
 				icon: (
-					<img src={SuperDelightfulIcon} alt="" className={styles.navIcon} />
+					<img src={BeDelightfulIcon} alt="" className={styles.navIcon} />
 				),
 				hidden: false,
 				label: t("sider.superDelightful"),
-				key: RoutePath.SuperDelightful,
+				key: RoutePath.BeDelightful,
 			},
 			{
 				icon: (

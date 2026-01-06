@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Application\MCP\BuiltInMCP\SuperDelightfulChat;
+namespace App\Application\MCP\BuiltInMCP\BeDelightfulChat;
 
 use App\Application\Flow\ExecuteManager\NodeRunner\LLM\ToolsExecutor;
 use App\Application\Flow\Service\DelightfulFlowExecuteAppService;
@@ -24,7 +24,7 @@ use Delightful\PhpMcp\Types\Tools\Tool;
 use Hyperf\Redis\RedisFactory;
 use Hyperf\Redis\RedisProxy;
 
-class SuperDelightfulChatManager
+class BeDelightfulChatManager
 {
     private const string REDIS_KEY_PREFIX = 'super_magic_chat_manager:';
 

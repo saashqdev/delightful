@@ -5,12 +5,12 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Domain\SuperAgent\Repository\Persistence;
+namespace Delightful\BeDelightful\Domain\SuperAgent\Repository\Persistence;
 
 use App\Domain\Contact\Entity\ValueObject\DataIsolation;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TokenUsageRecordEntity;
-use Delightful\SuperDelightful\Domain\SuperAgent\Repository\Facade\TokenUsageRecordRepositoryInterface;
-use Delightful\SuperDelightful\Domain\SuperAgent\Repository\Model\TokenUsageRecordModel;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\TokenUsageRecordEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Repository\Facade\TokenUsageRecordRepositoryInterface;
+use Delightful\BeDelightful\Domain\SuperAgent\Repository\Model\TokenUsageRecordModel;
 
 class TokenUsageRecordRepository implements TokenUsageRecordRepositoryInterface
 {

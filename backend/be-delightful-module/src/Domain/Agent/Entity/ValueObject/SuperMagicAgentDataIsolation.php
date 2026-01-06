@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Domain\Agent\Entity\ValueObject;
+namespace Delightful\BeDelightful\Domain\Agent\Entity\ValueObject;
 
 use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 
-class SuperDelightfulAgentDataIsolation extends BaseDataIsolation
+class BeDelightfulAgentDataIsolation extends BaseDataIsolation
 {
     public static function create(string $currentOrganizationCode = '', string $userId = ''): self
     {

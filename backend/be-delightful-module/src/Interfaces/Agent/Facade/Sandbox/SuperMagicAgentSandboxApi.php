@@ -5,18 +5,18 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Interfaces\Agent\Facade\Sandbox;
+namespace Delightful\BeDelightful\Interfaces\Agent\Facade\Sandbox;
 
 use Delightful\ApiResponse\Annotation\ApiResponse;
-use Delightful\SuperDelightful\Application\Agent\Service\SuperDelightfulAgentAppService;
-use Delightful\SuperDelightful\Interfaces\Agent\Assembler\SuperDelightfulAgentAssembler;
+use Delightful\BeDelightful\Application\Agent\Service\BeDelightfulAgentAppService;
+use Delightful\BeDelightful\Interfaces\Agent\Assembler\BeDelightfulAgentAssembler;
 use Hyperf\Di\Annotation\Inject;
 
 #[ApiResponse(version: 'low_code')]
-class SuperDelightfulAgentSandboxApi extends AbstractSuperDelightfulSandboxApi
+class BeDelightfulAgentSandboxApi extends AbstractBeDelightfulSandboxApi
 {
     #[Inject]
-    protected SuperDelightfulAgentAppService $superDelightfulAgentAppService;
+    protected BeDelightfulAgentAppService $superDelightfulAgentAppService;
 
     public function show(string $code)
     {
@@ -24,7 +24,7 @@ class SuperDelightfulAgentSandboxApi extends AbstractSuperDelightfulSandboxApi
         $withToolSchema = (bool) $this->request->input('with_tool_schema', false);
         $entity = $this->superDelightfulAgentAppService->show($authorization, $code, $withToolSchema);
         $withPromptString = (bool) $this->request->input('with_prompt_string', false);
-        return SuperDelightfulAgentAssembler::createDTO($entity, [], $withPromptString);
+        return BeDelightfulAgentAssembler::createDTO($entity, [], $withPromptString);
     }
 
     public function executeTool()

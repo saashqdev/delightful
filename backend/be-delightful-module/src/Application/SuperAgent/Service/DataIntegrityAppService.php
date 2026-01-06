@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
 
-use Delightful\SuperDelightful\Infrastructure\Database\Migration\ProjectArchitectureIntegrityValidator;
+use Delightful\BeDelightful\Infrastructure\Database\Migration\ProjectArchitectureIntegrityValidator;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
 

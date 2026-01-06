@@ -42,7 +42,7 @@ configure_logging_intercept()
 # Get the logger named for the current module
 logger = get_logger(__name__)
 
-cli = typer.Typer(help="SuperDelightful CLI", no_args_is_help=True)
+cli = typer.Typer(help="BeDelightful CLI", no_args_is_help=True)
 
 app_cmds = typer.Typer(help="Startup related commands")
 cli.add_typer(app_cmds, name="start")

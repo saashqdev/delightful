@@ -18,9 +18,9 @@ use App\Domain\Provider\Entity\ValueObject\Status;
 use App\Infrastructure\Core\ValueObject\Page;
 use App\Infrastructure\Util\OfficialOrganizationUtil;
 use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
-use Delightful\SuperDelightful\Application\Agent\Service\SuperDelightfulAgentAppService;
-use Delightful\SuperDelightful\Domain\Agent\Entity\SuperDelightfulAgentEntity;
-use Delightful\SuperDelightful\Domain\Agent\Entity\ValueObject\Query\SuperDelightfulAgentQuery;
+use Delightful\BeDelightful\Application\Agent\Service\BeDelightfulAgentAppService;
+use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
+use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\Query\BeDelightfulAgentQuery;
 
 class ModeAppService extends AbstractModeAppService
 {
@@ -30,10 +30,10 @@ class ModeAppService extends AbstractModeAppService
         $modeDataIsolation->disabled();
 
         // 获取目前的所有可用的 agent
-        $superDelightfulAgentAppService = di(SuperDelightfulAgentAppService::class);
-        $agentData = $superDelightfulAgentAppService->queries($authorization, new SuperDelightfulAgentQuery(), Page::createNoPage());
+        $superDelightfulAgentAppService = di(BeDelightfulAgentAppService::class);
+        $agentData = $superDelightfulAgentAppService->queries($authorization, new BeDelightfulAgentQuery(), Page::createNoPage());
         // 合并常用和全部 agent 列表，常用在前
-        /** @var array<SuperDelightfulAgentEntity> $allAgents */
+        /** @var array<BeDelightfulAgentEntity> $allAgents */
         $allAgents = array_merge($agentData['frequent'], $agentData['all']);
         if (empty($allAgents)) {
             return [];

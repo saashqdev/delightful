@@ -388,7 +388,7 @@ class ModeInitializer
                     'zh_CN' => '请输入您的需求，或上传文件，超级麦吉将为您解决问题。 Enter 发送 ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'general',
-                'icon' => 'IconSuperDelightful',
+                'icon' => 'IconBeDelightful',
                 'color' => '#315CEC',
                 'sort' => 10000,
                 'description' => '',

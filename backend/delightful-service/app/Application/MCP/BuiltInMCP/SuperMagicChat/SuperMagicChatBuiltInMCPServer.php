@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace App\Application\MCP\BuiltInMCP\SuperDelightfulChat;
+namespace App\Application\MCP\BuiltInMCP\BeDelightfulChat;
 
 use App\Domain\MCP\Entity\MCPServerEntity;
 use App\Domain\MCP\Entity\ValueObject\MCPDataIsolation;
@@ -14,11 +14,11 @@ use App\Infrastructure\Core\Collector\BuiltInMCP\Annotation\BuiltInMCPServerDefi
 use App\Infrastructure\Core\Contract\MCP\BuiltInMCPServerInterface;
 
 #[BuiltInMCPServerDefine(serverCode: 'super_magic_chat', enabled: true, priority: 1)]
-class SuperDelightfulChatBuiltInMCPServer implements BuiltInMCPServerInterface
+class BeDelightfulChatBuiltInMCPServer implements BuiltInMCPServerInterface
 {
     private static string $codePrefix = 'super-magic-chat-';
 
-    private static string $serverName = 'SuperDelightfulChat';
+    private static string $serverName = 'BeDelightfulChat';
 
     public function __construct()
     {
@@ -30,7 +30,7 @@ class SuperDelightfulChatBuiltInMCPServer implements BuiltInMCPServerInterface
             return null;
         }
         $mcpServerCode = uniqid(self::$codePrefix);
-        SuperDelightfulChatManager::createByChatParams($MCPDataIsolation, $mcpServerCode, $agentIds, $toolIds);
+        BeDelightfulChatManager::createByChatParams($MCPDataIsolation, $mcpServerCode, $agentIds, $toolIds);
         $MCPServerEntity = new MCPServerEntity();
         $MCPServerEntity->setBuiltIn(true);
         $MCPServerEntity->setCode($mcpServerCode);
@@ -58,6 +58,6 @@ class SuperDelightfulChatBuiltInMCPServer implements BuiltInMCPServerInterface
 
     public function getRegisteredTools(string $mcpServerCode): array
     {
-        return SuperDelightfulChatManager::getRegisteredTools($mcpServerCode);
+        return BeDelightfulChatManager::getRegisteredTools($mcpServerCode);
     }
 }

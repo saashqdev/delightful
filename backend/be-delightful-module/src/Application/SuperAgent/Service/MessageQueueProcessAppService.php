@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Application\SuperAgent\Service;
+namespace Delightful\BeDelightful\Application\SuperAgent\Service;
 
 use App\Application\Chat\Service\DelightfulChatMessageAppService;
 use App\Domain\Chat\Entity\Items\SeqExtra;
@@ -17,13 +17,13 @@ use App\Domain\Contact\Service\DelightfulUserDomainService;
 use App\Infrastructure\Util\IdGenerator\IdGenerator;
 use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Carbon\Carbon;
-use Delightful\SuperDelightful\Domain\SuperAgent\Constant\AgentConstant;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\MessageQueueEntity;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\TopicEntity;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\MessageQueueStatus;
-use Delightful\SuperDelightful\Domain\SuperAgent\Event\MessageQueueConsumedEvent;
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\MessageQueueDomainService;
-use Delightful\SuperDelightful\Domain\SuperAgent\Service\TopicDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Constant\AgentConstant;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageQueueEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\TopicEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\MessageQueueStatus;
+use Delightful\BeDelightful\Domain\SuperAgent\Event\MessageQueueConsumedEvent;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\MessageQueueDomainService;
+use Delightful\BeDelightful\Domain\SuperAgent\Service\TopicDomainService;
 use Hyperf\Logger\LoggerFactory;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;

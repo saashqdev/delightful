@@ -5,13 +5,13 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Domain\Agent\Event;
+namespace Delightful\BeDelightful\Domain\Agent\Event;
 
-use Delightful\SuperDelightful\Domain\Agent\Entity\SuperDelightfulAgentEntity;
+use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
 
-class SuperDelightfulAgentDeletedEvent
+class BeDelightfulAgentDeletedEvent
 {
-    public function __construct(public SuperDelightfulAgentEntity $superDelightfulAgentEntity)
+    public function __construct(public BeDelightfulAgentEntity $superDelightfulAgentEntity)
     {
     }
 }

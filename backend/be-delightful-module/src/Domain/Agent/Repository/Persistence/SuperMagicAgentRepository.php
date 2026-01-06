@@ -5,35 +5,35 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Domain\Agent\Repository\Persistence;
+namespace Delightful\BeDelightful\Domain\Agent\Repository\Persistence;
 
 use App\Infrastructure\Core\ValueObject\Page;
-use Delightful\SuperDelightful\Domain\Agent\Entity\SuperDelightfulAgentEntity;
-use Delightful\SuperDelightful\Domain\Agent\Entity\ValueObject\Query\SuperDelightfulAgentQuery;
-use Delightful\SuperDelightful\Domain\Agent\Entity\ValueObject\SuperDelightfulAgentDataIsolation;
-use Delightful\SuperDelightful\Domain\Agent\Factory\SuperDelightfulAgentFactory;
-use Delightful\SuperDelightful\Domain\Agent\Repository\Facade\SuperDelightfulAgentRepositoryInterface;
-use Delightful\SuperDelightful\Domain\Agent\Repository\Persistence\Model\SuperDelightfulAgentModel;
+use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
+use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\Query\BeDelightfulAgentQuery;
+use Delightful\BeDelightful\Domain\Agent\Entity\ValueObject\BeDelightfulAgentDataIsolation;
+use Delightful\BeDelightful\Domain\Agent\Factory\BeDelightfulAgentFactory;
+use Delightful\BeDelightful\Domain\Agent\Repository\Facade\BeDelightfulAgentRepositoryInterface;
+use Delightful\BeDelightful\Domain\Agent\Repository\Persistence\Model\BeDelightfulAgentModel;
 
-class SuperDelightfulAgentRepository extends SuperDelightfulAbstractRepository implements SuperDelightfulAgentRepositoryInterface
+class BeDelightfulAgentRepository extends BeDelightfulAbstractRepository implements BeDelightfulAgentRepositoryInterface
 {
-    public function getByCode(SuperDelightfulAgentDataIsolation $dataIsolation, string $code): ?SuperDelightfulAgentEntity
+    public function getByCode(BeDelightfulAgentDataIsolation $dataIsolation, string $code): ?BeDelightfulAgentEntity
     {
-        $builder = $this->createBuilder($dataIsolation, SuperDelightfulAgentModel::query());
+        $builder = $this->createBuilder($dataIsolation, BeDelightfulAgentModel::query());
 
-        /** @var null|SuperDelightfulAgentModel $model */
+        /** @var null|BeDelightfulAgentModel $model */
         $model = $builder->where('code', $code)->first();
 
         if (! $model) {
             return null;
         }
 
-        return SuperDelightfulAgentFactory::createEntity($model);
+        return BeDelightfulAgentFactory::createEntity($model);
     }
 
-    public function queries(SuperDelightfulAgentDataIsolation $dataIsolation, SuperDelightfulAgentQuery $query, Page $page): array
+    public function queries(BeDelightfulAgentDataIsolation $dataIsolation, BeDelightfulAgentQuery $query, Page $page): array
     {
-        $builder = $this->createBuilder($dataIsolation, SuperDelightfulAgentModel::query());
+        $builder = $this->createBuilder($dataIsolation, BeDelightfulAgentModel::query());
 
         if (! is_null($query->getCodes())) {
             if (empty($query->getCodes())) {
@@ -58,9 +58,9 @@ class SuperDelightfulAgentRepository extends SuperDelightfulAbstractRepository i
 
         $list = [];
 
-        /** @var SuperDelightfulAgentModel $model */
+        /** @var BeDelightfulAgentModel $model */
         foreach ($result['list'] as $model) {
-            $entity = SuperDelightfulAgentFactory::createEntity($model);
+            $entity = BeDelightfulAgentFactory::createEntity($model);
             $list[] = $entity;
         }
         $result['list'] = $list;
@@ -68,12 +68,12 @@ class SuperDelightfulAgentRepository extends SuperDelightfulAbstractRepository i
         return $result;
     }
 
-    public function save(SuperDelightfulAgentDataIsolation $dataIsolation, SuperDelightfulAgentEntity $entity): SuperDelightfulAgentEntity
+    public function save(BeDelightfulAgentDataIsolation $dataIsolation, BeDelightfulAgentEntity $entity): BeDelightfulAgentEntity
     {
         if (! $entity->getId()) {
-            $model = new SuperDelightfulAgentModel();
+            $model = new BeDelightfulAgentModel();
         } else {
-            $builder = $this->createBuilder($dataIsolation, SuperDelightfulAgentModel::query());
+            $builder = $this->createBuilder($dataIsolation, BeDelightfulAgentModel::query());
             $model = $builder->where('id', $entity->getId())->first();
         }
 
@@ -84,15 +84,15 @@ class SuperDelightfulAgentRepository extends SuperDelightfulAbstractRepository i
         return $entity;
     }
 
-    public function delete(SuperDelightfulAgentDataIsolation $dataIsolation, string $code): bool
+    public function delete(BeDelightfulAgentDataIsolation $dataIsolation, string $code): bool
     {
-        $builder = $this->createBuilder($dataIsolation, SuperDelightfulAgentModel::query());
+        $builder = $this->createBuilder($dataIsolation, BeDelightfulAgentModel::query());
         return $builder->where('code', $code)->delete() > 0;
     }
 
-    public function countByCreator(SuperDelightfulAgentDataIsolation $dataIsolation, string $creator): int
+    public function countByCreator(BeDelightfulAgentDataIsolation $dataIsolation, string $creator): int
     {
-        $builder = $this->createBuilder($dataIsolation, SuperDelightfulAgentModel::query());
+        $builder = $this->createBuilder($dataIsolation, BeDelightfulAgentModel::query());
         return $builder->where('creator', $creator)->count();
     }
 }

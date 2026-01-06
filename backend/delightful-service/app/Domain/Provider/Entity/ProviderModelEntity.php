@@ -451,12 +451,12 @@ class ProviderModelEntity extends AbstractEntity
         return $this;
     }
 
-    public function isSuperDelightfulDisplayState(): int
+    public function isBeDelightfulDisplayState(): int
     {
         return $this->superDelightfulDisplayState;
     }
 
-    public function setSuperDelightfulDisplayState(null|int|string $superDelightfulDisplayState): void
+    public function setBeDelightfulDisplayState(null|int|string $superDelightfulDisplayState): void
     {
         if ($superDelightfulDisplayState === null) {
             $this->superDelightfulDisplayState = 0;

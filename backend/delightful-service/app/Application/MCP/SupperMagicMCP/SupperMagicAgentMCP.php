@@ -9,7 +9,7 @@ namespace App\Application\MCP\SupperDelightfulMCP;
 
 use App\Application\Contact\UserSetting\UserSettingKey;
 use App\Application\Flow\ExecuteManager\NodeRunner\LLM\ToolsExecutor;
-use App\Application\MCP\BuiltInMCP\SuperDelightfulChat\SuperDelightfulChatBuiltInMCPServer;
+use App\Application\MCP\BuiltInMCP\BeDelightfulChat\BeDelightfulChatBuiltInMCPServer;
 use App\Application\MCP\Service\MCPServerAppService;
 use App\Application\MCP\Utils\MCPServerConfigUtil;
 use App\Domain\Agent\Entity\ValueObject\AgentDataIsolation;
@@ -28,7 +28,7 @@ use App\ErrorCode\MCPErrorCode;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use App\Infrastructure\Core\TempAuth\TempAuthInterface;
 use App\Infrastructure\Core\ValueObject\Page;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\ValueObject\TaskContext;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\ValueObject\TaskContext;
 use Hyperf\Codec\Json;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Log\LoggerInterface;
@@ -84,11 +84,11 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
             $mcpIds = array_values(array_filter(array_unique($mcpIds)));
             $toolIds = array_values(array_filter(array_unique($toolIds)));
 
-            $builtinSuperDelightfulServer = SuperDelightfulChatBuiltInMCPServer::createByChatParams($dataIsolation, $agentIds, $toolIds);
+            $builtinBeDelightfulServer = BeDelightfulChatBuiltInMCPServer::createByChatParams($dataIsolation, $agentIds, $toolIds);
 
             $serverOptions = [];
-            if ($builtinSuperDelightfulServer) {
-                $serverOptions[$builtinSuperDelightfulServer->getCode()] = $this->createBuiltinSuperDelightfulServerOptions($dataIsolation, $agentIds, $toolIds);
+            if ($builtinBeDelightfulServer) {
+                $serverOptions[$builtinBeDelightfulServer->getCode()] = $this->createBuiltinBeDelightfulServerOptions($dataIsolation, $agentIds, $toolIds);
             }
 
             $projectId = $taskContext->getTask()->getProjectId();
@@ -97,7 +97,7 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
                 $mcpIds = array_merge($mcpIds, $projectMcpIds);
             }
 
-            $mcpServers = $this->createMcpServers($dataIsolation, $mcpIds, [$builtinSuperDelightfulServer], $serverOptions);
+            $mcpServers = $this->createMcpServers($dataIsolation, $mcpIds, [$builtinBeDelightfulServer], $serverOptions);
 
             $mcpServers = [
                 'mcpServers' => $mcpServers,
@@ -189,14 +189,14 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
         $dataIsolation = DataIsolation::create($mcpDataIsolation->getCurrentOrganizationCode(), $mcpDataIsolation->getCurrentUserId());
         $mcpServerIds = [];
 
-        $mcpSettings = $this->magicUserSettingDomainService->get($dataIsolation, UserSettingKey::genSuperDelightfulProjectMCPServers($projectId));
+        $mcpSettings = $this->magicUserSettingDomainService->get($dataIsolation, UserSettingKey::genBeDelightfulProjectMCPServers($projectId));
         if ($mcpSettings) {
             $mcpServerIds = array_filter(array_column($mcpSettings->getValue()['servers'], 'id'));
         }
         return $mcpServerIds;
     }
 
-    private function createBuiltinSuperDelightfulServerOptions(MCPDataIsolation $dataIsolation, array $agentIds = [], array $toolIds = []): array
+    private function createBuiltinBeDelightfulServerOptions(MCPDataIsolation $dataIsolation, array $agentIds = [], array $toolIds = []): array
     {
         $labelNames = [];
 

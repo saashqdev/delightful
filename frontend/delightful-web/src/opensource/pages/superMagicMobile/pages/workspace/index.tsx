@@ -23,8 +23,8 @@ import { Popup, SafeArea } from "antd-mobile"
 import { message } from "antd"
 import { cx } from "antd-style"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import type { SuperDelightfulMobileLayoutRef } from "../../components/Layout"
-import SuperDelightfulMobileLayout from "../../components/Layout"
+import type { BeDelightfulMobileLayoutRef } from "../../components/Layout"
+import BeDelightfulMobileLayout from "../../components/Layout"
 import type { MessagePanelProps } from "../../components/MessagePanel"
 import type { PreviewDetailPopupRef } from "../../components/PreviewDetailPopup"
 import SwitchRoute from "../../components/SwitchRoute"
@@ -40,7 +40,7 @@ import { isEmpty } from "lodash-es"
 import { FileData } from "@/opensource/pages/chatNew/components/MessageEditor/components/InputFiles/types"
 import { genFileData } from "@/opensource/pages/chatNew/components/MessageEditor/components/InputFiles/utils"
 
-export default observer(function SuperDelightfulMobileWorkspace({
+export default observer(function BeDelightfulMobileWorkspace({
 	workspaces,
 	selectedWorkspace,
 	setWorkspaces,
@@ -61,7 +61,7 @@ export default observer(function SuperDelightfulMobileWorkspace({
 }: any) {
 	const { styles } = useStyles()
 	const { userInfo } = userStore.user
-	const layoutRef = useRef<SuperDelightfulMobileLayoutRef>(null)
+	const layoutRef = useRef<BeDelightfulMobileLayoutRef>(null)
 	const workspaceSelectRef = useRef<WorkspaceSelectRef>(null)
 	const previewDetailPopupRef = useRef<PreviewDetailPopupRef>(null)
 	const [popupVisible, setPopupVisible] = useState(false)
@@ -249,7 +249,7 @@ export default observer(function SuperDelightfulMobileWorkspace({
 	return (
 		<>
 			<SafeArea position="top" />
-			<SuperDelightfulMobileLayout
+			<BeDelightfulMobileLayout
 				ref={layoutRef}
 				// navigateItems={navigateItems}
 				headerCenter={
@@ -283,7 +283,7 @@ export default observer(function SuperDelightfulMobileWorkspace({
 						<WorkspaceWelcome {...messagePanelProps} setFileList={setFileList} />
 					)}
 				</div>
-			</SuperDelightfulMobileLayout>
+			</BeDelightfulMobileLayout>
 			<PreviewDetailPopup
 				ref={previewDetailPopupRef}
 				setUserSelectDetail={(detail: any) => {

@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 
-namespace Delightful\SuperDelightful\Interfaces\SuperAgent\DTO\Response;
+namespace Delightful\BeDelightful\Interfaces\SuperAgent\DTO\Response;
 
 use App\Infrastructure\Core\AbstractDTO;
-use Delightful\SuperDelightful\Domain\SuperAgent\Entity\MessageScheduleEntity;
+use Delightful\BeDelightful\Domain\SuperAgent\Entity\MessageScheduleEntity;
 
 /**
  * Message Schedule List Item DTO.

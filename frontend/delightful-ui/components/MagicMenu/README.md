@@ -1,138 +1,138 @@
-# DelightfulMenu 魔法菜单组件
+# DelightfulMenu Magic Menu Component
 
-`DelightfulMenu` 是一个基于 Ant Design Menu 组件的增强版菜单，提供了更简洁的样式和更好的用户体验。
+`DelightfulMenu` is an enhanced menu component based on Ant Design Menu, providing cleaner styles and better user experience.
 
-## 属性
+## Properties
 
-| 属性名       | 类型 | 默认值 | 说明                            |
-| ------------ | ---- | ------ | ------------------------------- |
-| ...MenuProps | -    | -      | 支持所有 Ant Design Menu 的属性 |
+| Property     | Type | Default | Description                              |
+| ------------ | ---- | ------- | ---------------------------------------- |
+| ...MenuProps | -    | -       | All properties of Ant Design Menu are supported |
 
-## 基础用法
+## Basic Usage
 
 ```tsx
 import { DelightfulMenu } from '@/components/base/DelightfulMenu';
 import { IconHome, IconUser, IconSettings } from '@tabler/icons-react';
 
-// 基础用法
+// Basic usage
 <DelightfulMenu
   items={[
     {
       key: 'home',
-      label: '首页',
+      label: 'Home',
       icon: <IconHome size={16} />,
     },
     {
       key: 'profile',
-      label: '个人中心',
+      label: 'Profile',
       icon: <IconUser size={16} />,
     },
     {
       key: 'settings',
-      label: '设置',
+      label: 'Settings',
       icon: <IconSettings size={16} />,
     },
   ]}
 />
 
-// 默认选中项
+// Default selected item
 <DelightfulMenu
   defaultSelectedKeys={['home']}
   items={[
     {
       key: 'home',
-      label: '首页',
+      label: 'Home',
     },
     {
       key: 'profile',
-      label: '个人中心',
+      label: 'Profile',
     },
   ]}
 />
 
-// 垂直菜单
+// Vertical menu
 <DelightfulMenu
   mode="vertical"
   items={[
     {
       key: 'home',
-      label: '首页',
+      label: 'Home',
     },
     {
       key: 'profile',
-      label: '个人中心',
+      label: 'Profile',
     },
   ]}
 />
 
-// 带子菜单
+// Menu with submenus
 <DelightfulMenu
   mode="vertical"
   items={[
     {
       key: 'home',
-      label: '首页',
+      label: 'Home',
     },
     {
       key: 'settings',
-      label: '设置',
+      label: 'Settings',
       children: [
         {
           key: 'general',
-          label: '常规设置',
+          label: 'General Settings',
         },
         {
           key: 'account',
-          label: '账号设置',
+          label: 'Account Settings',
         },
       ],
     },
   ]}
 />
 
-// 危险操作
+// Dangerous operations
 <DelightfulMenu
   items={[
     {
       key: 'profile',
-      label: '个人中心',
+      label: 'Profile',
     },
     {
       key: 'logout',
-      label: '退出登录',
+      label: 'Logout',
       danger: true,
     },
   ]}
 />
 
-// 监听选择事件
+// Listen to selection events
 <DelightfulMenu
-  onClick={({ key }) => console.log('点击了:', key)}
+  onClick={({ key }) => console.log('Clicked:', key)}
   items={[
     {
       key: 'home',
-      label: '首页',
+      label: 'Home',
     },
     {
       key: 'profile',
-      label: '个人中心',
+      label: 'Profile',
     },
   ]}
 />
 ```
 
-## 特点
+## Features
 
-1. **简洁设计**：移除了选中项的背景色和边框，提供更干净的视觉效果
-2. **透明背景**：菜单背景透明，可以更好地融入各种界面
-3. **优化的间距**：菜单项之间有合理的间距，提高可读性
-4. **危险操作优化**：危险操作项有特殊的悬停效果，更加醒目
+1. **Clean Design**: Removes background color and border of selected items, providing a cleaner visual effect
+2. **Transparent Background**: Menu background is transparent, integrating better with various interfaces
+3. **Optimized Spacing**: Reasonable spacing between menu items improves readability
+4. **Dangerous Operation Optimization**: Dangerous operation items have special hover effects, making them more prominent
 
-## 何时使用
+## When to Use
 
--   需要在页面中提供导航功能时
--   需要展示一组相关操作或功能时
--   需要在下拉菜单中展示选项时
--   需要创建上下文菜单（右键菜单）时
+-   When you need to provide navigation functionality in a page
+-   When you need to display a group of related operations or functions
+-   When you need to display options in a dropdown menu
+-   When you need to create a context menu (right-click menu)
 
-DelightfulMenu 组件让你的菜单更加简洁和用户友好，同时保持了 Ant Design Menu 的所有功能特性。
+The DelightfulMenu component makes your menu cleaner and more user-friendly, while maintaining all the features of Ant Design Menu.

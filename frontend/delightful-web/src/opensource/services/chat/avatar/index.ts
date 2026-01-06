@@ -4,7 +4,7 @@ import { textToBackgroundColor, textToDisplayName } from "./utils"
 
 class AvatarService {
 	constructor() {
-		// 初始化文本头像缓存
+		// Initialize text avatar cache from DB
 		chatDb
 			.getTextAvatarTable()
 			?.toArray()
@@ -14,24 +14,24 @@ class AvatarService {
 	}
 
 	/**
-	 * 绘制文本头像
-	 * @param text 文本
-	 * @returns 头像图片
+	 * Draw a text-based avatar.
+	 * @param text Source text
+	 * @returns Avatar image (base64)
 	 */
 	drawTextAvatar(
 		text: string,
 		bgColor: string | undefined,
 		textColor: string | undefined,
 	): string | null {
-		// 检查缓存中是否已存在
+		// Check cache first
 		const cached = AvatarStore.getTextAvatar(text)
 		if (cached) {
 			return cached
 		}
 
-		// 创建Canvas元素
+		// Create canvas element
 		const canvas = document.createElement("canvas")
-		const size = 200 // 高分辨率以确保质量
+		const size = 200 // High resolution to ensure quality
 		canvas.width = size
 		canvas.height = size
 		const ctx = canvas.getContext("2d")
@@ -40,39 +40,39 @@ class AvatarService {
 			return null
 		}
 
-		// 设置背景色
+		// Set background color
 		const backgroundColor = bgColor ?? textToBackgroundColor(text)
 		ctx.fillStyle = backgroundColor
 		ctx.fillRect(0, 0, size, size)
 
-		// 确定显示文本
+		// Determine display text
 		const displayText = textToDisplayName(text)
 
-		// 设置文本样式
-		ctx.fillStyle = textColor ?? "#FFFFFF" // 文本颜色为白色
+		// Configure text style
+		ctx.fillStyle = textColor ?? "#FFFFFF" // White text color
 		ctx.textAlign = "center"
 		ctx.textBaseline = "middle"
 
-		// 根据显示文本长度调整字体大小
+		// Adjust font size based on text length
 		const fontSize = displayText.length > 1 ? size * 0.4 : size * 0.5
 		ctx.font = `bold ${fontSize}px Arial, sans-serif`
 
-		// 添加文本阴影以增强可读性
+		// Add text shadow to improve readability
 		ctx.shadowColor = "rgba(0, 0, 0, 0.3)"
 		ctx.shadowBlur = 4
 		ctx.shadowOffsetX = 0
 		ctx.shadowOffsetY = 1
 
-		// 绘制文本
+		// Render text
 		ctx.fillText(displayText, size / 2, size / 2 + 5)
 
-		// 转换为base64
+		// Convert to base64
 		const base64 = canvas.toDataURL("image/png")
 
-		// 将结果缓存
+		// Cache the result
 		AvatarStore.setTextAvatar(text, base64)
 
-		// 保存到数据库
+		// Persist to DB
 		chatDb.getTextAvatarTable()?.put({ text, base64 })
 
 		return base64

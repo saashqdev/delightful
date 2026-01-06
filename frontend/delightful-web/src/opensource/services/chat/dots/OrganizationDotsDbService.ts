@@ -7,12 +7,12 @@ class OrganizationDotsDbService {
 	delightfulId: string | undefined
 
 	constructor() {
-		// 监听用户信息变化
+		// Observe user info changes
 		observe(userStore.user, "userInfo", (change) => {
 			const newUserInfo = change.newValue
 			if (newUserInfo?.delightful_id && this.delightfulId !== newUserInfo.delightful_id) {
 				this.delightfulId = newUserInfo.delightful_id
-				// 加载持久化数据
+				// Load persisted data
 				OrganizationDotsStore.reset(this.getPersistenceData(), this.getDotSeqIdData())
 			}
 		})
@@ -23,15 +23,15 @@ class OrganizationDotsDbService {
 	}
 
 	/**
-	 * 持久化数据key
+	 * Persistence data key
 	 */
 	get persistence_key() {
 		return platformKey(`organization_dots/${this.delightfulId}`)
 	}
 
 	/**
-	 * 获取持久化数据
-	 * @returns 持久化数据
+	 * Get persisted data
+	 * @returns Persisted data
 	 */
 	getPersistenceData() {
 		const data = localStorage.getItem(this.persistence_key)
@@ -40,16 +40,16 @@ class OrganizationDotsDbService {
 	}
 
 	/**
-	 * 设置持久化数据
-	 * @param data 持久化数据
+	 * Set persisted data
+	 * @param data Persisted data
 	 */
 	setPersistenceData(data: Record<string, number>) {
 		localStorage.setItem(this.persistence_key, JSON.stringify(data))
 	}
 
 	/**
-	 * 获取最后更新红点的seqid数据
-	 * @returns dot_seqid数据
+	 * Get last-updated red-dot seq_id data
+	 * @returns dot_seqid data
 	 */
 	getDotSeqIdData() {
 		const data = localStorage.getItem(this.dot_seqid_key)
@@ -58,8 +58,8 @@ class OrganizationDotsDbService {
 	}
 
 	/**
-	 * 设置最后更新红点的seqid数据
-	 * @param data 最后更新红点的seqid数据
+	 * Set last-updated red-dot seq_id data
+	 * @param data seq_id data
 	 */
 	setDotSeqIdData(data: Record<string, string>) {
 		localStorage.setItem(this.dot_seqid_key, JSON.stringify(data))

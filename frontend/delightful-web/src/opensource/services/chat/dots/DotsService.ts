@@ -2,7 +2,7 @@ import ConversationDotsService from "./ConversationDotsService"
 import OrganizationDotsService from "./OrganizationDotsService"
 
 const DotsService = {
-	// 增加会话未读数量
+	// Increase conversation unread counts
 	addConversationUnreadDots(
 		organizationId: string,
 		conversationId: string,
@@ -13,7 +13,7 @@ const DotsService = {
 		ConversationDotsService.addUnreadDots(conversationId, topicId, dots)
 		OrganizationDotsService.addOrganizationDot(organizationId, seqId, dots)
 	},
-	// 减少话题未读数量
+	// Decrease topic unread counts
 	reduceTopicUnreadDots(
 		organizationId: string,
 		conversationId: string,

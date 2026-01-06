@@ -6,7 +6,7 @@ import { toJS } from "mobx"
 import { count } from "console"
 
 /**
- * 会话红点服务
+ * Conversation red-dot service.
  */
 class ConversationDotsService {
 	get currentConversationId() {
@@ -18,11 +18,11 @@ class ConversationDotsService {
 	}
 
 	/**
-	 * 增加未读消息数量(会话ID和话题ID)
+	 * Increase unread counts (by conversation and topic).
 	 *
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param dots 增加的数量
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param dots Amount to increase
 	 */
 	async addUnreadDots(conversationId: string, topicId: string, dots: number) {
 		if (!conversationId) return
@@ -38,7 +38,7 @@ class ConversationDotsService {
 					const count = conversationStore.getConversationDots(conversationId)
 					console.log(
 						"ConversationDotsService addUnreadDots",
-						conversationId,
+						// Update DB
 						topicId,
 						dots,
 						count,
@@ -47,9 +47,7 @@ class ConversationDotsService {
 					// 更新数据库
 					ConversationDbServices.updateUnreadDots(
 						conversationId,
-						count,
-						Object.fromEntries(
-							toJS(conversationStore.getAllTopicUnreadDots(conversationId)).entries(),
+								console.log("ConversationDotsService addUnreadDots updateUnreadDots success")
 						),
 					)
 						.then(() => {
@@ -77,10 +75,10 @@ class ConversationDotsService {
 							Object.fromEntries(topicUnreadDots.entries()),
 						)
 					}
-				})
-			}
-		}
-	}
+		 * Decrease topic unread counts.
+		 * @param conversationId Conversation ID
+		 * @param topicId Topic ID
+		 * @param dots Amount to decrease
 
 	/**
 	 * 减少话题未读数量
@@ -94,7 +92,7 @@ class ConversationDotsService {
 		conversationStore.reduceTopicUnreadDots(conversationId, topicId, dots)
 		conversationStore.reduceConversationDots(conversationId, dots)
 
-		// 更新数据库
+		// Update DB
 		ConversationDbServices.updateUnreadDots(
 			conversationId,
 			conversationStore.getConversationDots(conversationId),
@@ -105,8 +103,8 @@ class ConversationDotsService {
 	}
 
 	/**
-	 * 重置话题未读数量
-	 * @param conversationId 会话ID
+	 * Reset topic unread counts.
+	 * @param conversationId Conversation ID
 	 */
 	resetUnreadDots(conversationId: string) {
 		if (!conversationId) return
@@ -114,7 +112,7 @@ class ConversationDotsService {
 		conversationStore.resetTopicUnreadDots(conversationId)
 		conversationStore.resetConversationDots(conversationId)
 
-		// 更新数据库
+		// Update DB
 		ConversationDbServices.updateConversation(conversationId, {
 			unread_dots: conversationStore.getConversationDots(conversationId),
 			topic_unread_dots: new Map(),

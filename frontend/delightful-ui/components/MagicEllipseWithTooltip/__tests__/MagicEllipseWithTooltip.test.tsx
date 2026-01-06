@@ -7,41 +7,41 @@ const renderWithTheme = (component: React.ReactElement) =>
 	render(<DelightfulThemeProvider theme="light">{component}</DelightfulThemeProvider>)
 
 describe("DelightfulEllipseWithTooltip", () => {
-	it("应该正常渲染", () => {
-		renderWithTheme(<DelightfulEllipseWithTooltip text="测试内容" maxWidth="100px" />)
-		expect(screen.getByText("测试内容")).toBeInTheDocument()
+	it("should render normally", () => {
+		renderWithTheme(<DelightfulEllipseWithTooltip text="Test content" maxWidth="100px" />)
+		expect(screen.getByText("Test content")).toBeInTheDocument()
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础省略文本快照", () => {
+	describe("Snapshot tests", () => {
+		it("basic ellipsis text snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulEllipseWithTooltip text="测试内容" maxWidth="100px" />,
+				<DelightfulEllipseWithTooltip text="Test content" maxWidth="100px" />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("长文本省略快照", () => {
+		it("long text ellipsis snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulEllipseWithTooltip
-					text="这是一个很长的文本内容，应该会被省略显示"
+					text="This is a very long text content that should be displayed with ellipsis"
 					maxWidth="100px"
 				/>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("自定义最大宽度快照", () => {
+		it("custom max width snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulEllipseWithTooltip text="测试内容" maxWidth="200px" />,
+				<DelightfulEllipseWithTooltip text="Test content" maxWidth="200px" />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带自定义样式快照", () => {
+		it("with custom style snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulEllipseWithTooltip
-					text="测试内容"
+					text="Test content"
 					maxWidth="100px"
 					style={{ color: "red" }}
 				/>,
@@ -49,10 +49,10 @@ describe("DelightfulEllipseWithTooltip", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带类名快照", () => {
+		it("with custom class snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulEllipseWithTooltip
-					text="测试内容"
+					text="Test content"
 					maxWidth="100px"
 					className="custom-ellipse"
 				/>,
@@ -60,7 +60,7 @@ describe("DelightfulEllipseWithTooltip", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("空文本快照", () => {
+		it("empty text snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulEllipseWithTooltip text="" maxWidth="100px" />,
 			)

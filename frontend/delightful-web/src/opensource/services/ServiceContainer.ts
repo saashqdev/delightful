@@ -11,42 +11,42 @@ export class ServiceContainer implements Container {
 
 	private factories: Record<string, ServiceFactory> = {}
 
-	// 注册服务工厂
+	// Register service factory
 	registerFactory<T>(name: string, factory: ServiceFactory<T>): Container {
 		this.factories[name] = factory
 		return this
 	}
 
-	// 直接注册服务实例
+	// Register service instance directly
 	register<T>(name: string, instance: T): Container {
 		this.services[name] = instance
 		return this
 	}
 
-	// 获取服务实例（支持懒加载）
+	// Get service instance (supports lazy loading)
 	get<T>(name: string): T {
 		if (!this.services[name] && this.factories[name]) {
 			this.services[name] = this.factories[name](this)
 		}
 
 		if (!this.services[name]) {
-			throw new Error(`服务 "${name}" 未注册`)
+			throw new Error(`Service "${name}" is not registered`)
 		}
 
 		return this.services[name] as T
 	}
 
-	// 检查服务是否已注册
+	// Check if service is registered
 	has(name: string): boolean {
 		return name in this.services || name in this.factories
 	}
 
-	// 重置容器
+	// Reset container
 	reset(): void {
 		this.services = {}
 	}
 
-	// 移除特定服务
+	// Remove specific service
 	remove(name: string): void {
 		delete this.services[name]
 	}

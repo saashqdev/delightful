@@ -1,7 +1,7 @@
 /**
- * @description 暂时用来做所有服务层的初始化出口，后续在架构更新中需要迁移出口
+ * @description Temporarily serves as the initialization entry point for all service layers, to be migrated in future architecture updates
  */
 import { initializeApp } from "./initializeApp"
 
-// 导出单例
+// Export singletons
 export const { userService, loginService, configService, flowService } = initializeApp()

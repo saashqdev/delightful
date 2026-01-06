@@ -31,7 +31,7 @@ class MessageCache {
 	}
 
 	/**
-	 * 设置会话消息，支持优先级
+	 * Set conversation message with priority support
 	 */
 	public set(
 		conversationId: string,
@@ -55,12 +55,12 @@ class MessageCache {
 	}
 
 	/**
-	 * 获取会话消息
+	 * Get conversation message
 	 */
 	public get(conversationId: string, topicId: string = ""): MessagePage {
 		const conversation = this.cache.get(this.cacheKey(conversationId, topicId))
 		if (conversation) {
-			// 会话被切换为当前会话，更新最后更新时间
+			// Conversation switched to current, update last updated time
 			conversation.lastUpdated = Date.now()
 			return conversation.cacheData
 		}
@@ -69,7 +69,7 @@ class MessageCache {
 	}
 
 	/**
-	 * 分页获取会话消息
+	 * Paginate get conversation message
 	 */
 	public getPage(
 		conversationId: string,
@@ -92,7 +92,7 @@ class MessageCache {
 	}
 
 	/**
-	 * 增加多条消息
+	 * Add multiple messages
 	 */
 	public addMessages(conversationId: string, topicId: string, data: MessagePage) {
 		const conversation = this.cache.get(this.cacheKey(conversationId, topicId))
@@ -104,7 +104,7 @@ class MessageCache {
 	}
 
 	/**
-	 * 添加单条消息
+	 * Add or replace single message
 	 */
 	public addOrReplaceMessage(
 		conversationId: string,
@@ -115,17 +115,17 @@ class MessageCache {
 		if (cache) {
 			const cacheMessages = cache.cacheData.messages
 
-			// 如果消息已存在，则替换
+			// If message exists, replace it
 			const index = cacheMessages.findIndex((item) => item.message_id === message.message_id)
 			if (index !== -1) {
 				cacheMessages[index] = message
 			} else {
-				// 如果消息不存在，则添加
+				// If message doesn't exist, add it
 				cache.cacheData.messages.unshift(message)
 				cache.cacheData.messages = cache.cacheData.messages.slice(0, this.maxMessages)
 			}
 
-			// 更新最后更新时间
+			// Update last updated time
 			cache.lastUpdated = +Date.now()
 		} else {
 			this.set(conversationId, topicId, {

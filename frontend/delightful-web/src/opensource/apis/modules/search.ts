@@ -7,8 +7,8 @@ import type { HttpClient } from "../core/HttpClient"
 
 export const generateSearchApi = (fetch: HttpClient) => ({
 	/**
-	 * 全局搜索
-	 * @param params 搜索参数
+	 * Global search
+	 * @param params Search parameters
 	 */
 	getSearch(params: GlobalSearch.SearchParams): Promise<any> {
 		return fetch.post<WithPage<DelightfulFlow.Flow[]>>(genRequestUrl(RequestUrl.globalSearch), {

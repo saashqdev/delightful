@@ -7,7 +7,7 @@ import { knowledgeType } from "@/opensource/pages/vectorKnowledge/constant"
 
 export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	/**
-	 * 创建知识库
+	 * Create knowledge base
 	 */
 	createKnowledge(params: Knowledge.CreateKnowledgeParams) {
 		return fetch.post<Knowledge.CreateKnowledgeResult>(
@@ -17,7 +17,7 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 更新知识库
+	 * Update knowledge base
 	 */
 	updateKnowledge(params: Knowledge.UpdateKnowledgeParams) {
 		return fetch.put<Knowledge.Detail>(
@@ -27,7 +27,7 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取知识库列表
+	 * Get knowledge base list
 	 */
 	getKnowledgeList({
 		name,
@@ -55,21 +55,21 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取知识库详情
+	 * Get knowledge base details
 	 */
 	getKnowledgeDetail(code: string) {
 		return fetch.get<Knowledge.Detail>(genRequestUrl(RequestUrl.getKnowLedgeDetail, { code }))
 	},
 
 	/**
-	 * 删除知识库
+	 * Delete knowledge base
 	 */
 	deleteKnowledge(code: string) {
 		return fetch.delete<Knowledge.Detail>(genRequestUrl(RequestUrl.deleteKnowledge, { code }))
 	},
 
 	/**
-	 * 获取知识库的文档列表
+	 * Get knowledge base document list
 	 */
 	getKnowledgeDocumentList({
 		code,
@@ -93,7 +93,7 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 添加知识库的文档
+	 * Add knowledge base document
 	 */
 	addKnowledgeDocument(params: Knowledge.AddKnowledgeDocumentParams) {
 		return fetch.post<Knowledge.Detail>(
@@ -105,7 +105,7 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取知识库的文档详情
+	 * Get knowledge base document details
 	 */
 	getKnowledgeDocumentDetail(params: { knowledge_code: string; document_code: string }) {
 		return fetch.get<Knowledge.EmbedDocumentDetail>(
@@ -117,7 +117,7 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 更新知识库的文档
+	 * Update knowledge base document
 	 */
 	updateKnowledgeDocument(params: Knowledge.UpdateKnowledgeDocumentParams) {
 		return fetch.put<Knowledge.EmbedDocumentDetail>(
@@ -134,7 +134,7 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 删除知识库的文档
+	 * Delete knowledge base document
 	 */
 	deleteKnowledgeDocument(params: Knowledge.DeleteKnowledgeDocumentParams) {
 		return fetch.delete<Knowledge.Detail>(
@@ -146,14 +146,14 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 分段预览
+	 * Segment preview
 	 */
 	segmentPreview(params: Knowledge.SegmentPreviewParams) {
 		return fetch.post<WithPage<Knowledge.FragmentItem[]>>(RequestUrl.segmentPreview, params)
 	},
 
 	/**
-	 * 召回测试
+	 * Recall test
 	 */
 	recallTest(params: { knowledge_code: string; query: string }) {
 		return fetch.post<WithPage<Knowledge.FragmentItem[]>>(
@@ -165,7 +165,7 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取文档的片段列表
+	 * Get document fragment list
 	 */
 	getFragmentList(params: Knowledge.GetFragmentListParams) {
 		return fetch.post<WithPage<Knowledge.FragmentItem[]>>(
@@ -181,7 +181,7 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 文档重新向量化
+	 * Revectorize document
 	 */
 	revectorizeDocument(params: { knowledgeBaseCode: string; documentCode: string }) {
 		return fetch.post(
@@ -193,21 +193,21 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取嵌入模型列表
+	 * Get embedding model list
 	 */
 	getEmbeddingModelList() {
 		return fetch.get<Knowledge.ServiceProvider[]>(RequestUrl.getEmbeddingModelList)
 	},
 
 	/**
-	 * 重建知识库
+	 * Rebuild knowledge base
 	 */
 	rebuildKnowledge(id: string) {
 		return fetch.post<Knowledge.Detail>(genRequestUrl(RequestUrl.deleteKnowledge, { id }))
 	},
 
 	/**
-	 * 获取可用的天书知识库列表
+	 * Get available teamshare database list
 	 */
 	getUseableTeamshareDatabaseList() {
 		return fetch.get<WithPage<Knowledge.KnowledgeDatabaseItem[]>>(
@@ -216,7 +216,7 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取有权限的知识库的进度
+	 * Get progress of knowledge base with permissions
 	 */
 	getTeamshareKnowledgeProgress(params: Knowledge.GetTeamshareKnowledgeProgressParams) {
 		return fetch.post<WithPage<Knowledge.KnowledgeDatabaseProgress[]>>(
@@ -226,14 +226,14 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 发起知识库的向量创建
+	 * Initiate knowledge base vector creation
 	 */
 	createTeamshareKnowledgeVector(params: Knowledge.CreateTeamshareKnowledgeVectorParams) {
 		return fetch.post<null>(RequestUrl.createTeamshareKnowledgeVector, params)
 	},
 
 	/**
-	 * 根据类型获取所有激活模型
+	 * Get all active models by category
 	 */
 	getActiveModelByCategory(params: Knowledge.GetActiveModelByCategoryParams) {
 		return fetch.get<Knowledge.ServiceProvider[]>(
@@ -242,7 +242,7 @@ export const generateKnowledgeApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取官方重排模型列表
+	 * Get official rerank model list
 	 */
 	getRerankModels() {
 		return fetch.get<Knowledge.ServiceProvider[]>(RequestUrl.getRerankModels)

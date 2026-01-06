@@ -12,11 +12,11 @@ export class DelightfulHttpClient extends HttpClient {
 	}
 
 	private setupInterceptors() {
-		// 请求拦截器
+		// Request interceptor
 		this.addRequestInterceptor(function request(config) {
 			const headers = new Headers(config.headers)
 
-			// 设置通用请求头
+			// Set common request headers
 			headers.set("Content-Type", "application/json")
 			headers.set("language", getCurrentLang(configStore.i18n.language))
 
@@ -24,9 +24,9 @@ export class DelightfulHttpClient extends HttpClient {
 				headers.set("authorization", userStore.user.authorization ?? "")
 			}
 
-			// 如果请求头中没有组织代码，则设置组织代码
+			// If organization code is not in headers, set organization code
 			if (!headers.get("organization-code")) {
-				// 针对 delightful API请求需要将组织 Code 换成 delightful 生态中的组织 Code，而非 teamshare 的组织 Code
+				// For delightful API requests, organization Code needs to be converted to the organization Code in the delightful ecosystem, not teamshare organization Code
 				const delightfulOrganizationCode = userStore.user.organizationCode
 				headers.set("organization-code", delightfulOrganizationCode ?? "")
 			}
@@ -37,7 +37,7 @@ export class DelightfulHttpClient extends HttpClient {
 			}
 		})
 
-		// 错误拦截器
+		// Error interceptor
 		this.addErrorInterceptor(function errHandler(error) {
 			console.error("Request failed:", error)
 			if (error.code === 2185 && window.location.pathname.startsWith("/admin/")) {

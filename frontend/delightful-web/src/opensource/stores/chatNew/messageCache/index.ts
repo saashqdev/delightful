@@ -138,7 +138,7 @@ class MessageCache {
 	}
 
 	/**
-	 * 删除优先级最低且最久未使用的会话
+	 * Remove conversation with lowest priority and least recently used
 	 */
 	private removeLowestPriorityLRU(): void {
 		let targetId: string | null = null
@@ -179,42 +179,42 @@ class MessageCache {
 	}
 
 	/**
-	 * 清除指定会话的缓存
+	 * Clear cache for specified conversation
 	 */
 	public clear(conversationId: string, topicId: string): void {
 		this.cache.delete(this.cacheKey(conversationId, topicId))
 	}
 
 	/**
-	 * 清除所有缓存
+	 * Clear all cache
 	 */
 	public clearAll(): void {
 		this.cache.clear()
 	}
 
 	/**
-	 * 获取缓存大小
+	 * Get cache size
 	 */
 	public size(): number {
 		return this.cache.size
 	}
 
 	/**
-	 * 检查会话是否在缓存中
+	 * Check if conversation is in cache
 	 */
 	public has(conversationId: string, topicId: string): boolean {
 		return this.cache.has(this.cacheKey(conversationId, topicId))
 	}
 
 	/**
-	 * 获取所有缓存的会话ID
+	 * Get all cached conversation IDs
 	 */
 	public getConversationIds(): string[] {
 		return Array.from(this.cache.keys())
 	}
 
 	/**
-	 * 更新会话优先级
+	 * Update conversation priority
 	 */
 	public updatePriority(conversationId: string, topicId: string, priority: number): void {
 		const conversation = this.cache.get(this.cacheKey(conversationId, topicId))
@@ -225,9 +225,9 @@ class MessageCache {
 	}
 
 	/**
-	 * 根据发送者ID查找消息
-	 * @param senderId 发送者ID
-	 * @returns 找到的第一条消息，如果没有找到则返回 null
+	 * Find message by sender ID
+	 * @param senderId Sender ID
+	 * @returns First message found, or null if not found
 	 */
 	public findMessageBySenderId(senderId: string): FullMessage | null {
 		const allMessages = Array.from(this.cache.values()).flatMap(

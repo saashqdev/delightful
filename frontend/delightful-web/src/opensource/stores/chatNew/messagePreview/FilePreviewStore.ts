@@ -20,8 +20,8 @@ class MessageFilePreviewStore {
 	}
 
 	/**
-	 * 设置预览信息
-	 * @param info 预览信息
+	 * Set preview information
+	 * @param info Preview information
 	 */
 	openPreview(info?: FilePreviewInfo) {
 		if (info) {
@@ -31,7 +31,7 @@ class MessageFilePreviewStore {
 	}
 
 	/**
-	 * 清除预览信息
+	 * Clear preview information
 	 */
 	clearPreviewInfo() {
 		this.previewInfo = undefined

@@ -398,7 +398,7 @@ export const enum RequestUrl {
 	getBotVersionDetail = "/api/v1/agents/versions/${agentVersionId}",
 	/** Update bot status */
 	updateBotStatus = "/api/v1/agents/${agentId}/status",
-	/** 发布机器人 */
+	/** Publish bot */
 	publishBot = "/api/v1/agents/versions",
 	/** Get bot max version */
 	getBotMaxVersion = "/api/v1/agents/${agentId}/max",

@@ -5,30 +5,30 @@ import ComponentDemo from "./Container"
 
 const SelectDemo: React.FC = () => {
 	const options = [
-		{ value: "option1", label: "选项1" },
-		{ value: "option2", label: "选项2" },
-		{ value: "option3", label: "选项3" },
-		{ value: "option4", label: "选项4" },
-		{ value: "option5", label: "选项5" },
+		{ value: "option1", label: "Option 1" },
+		{ value: "option2", label: "Option 2" },
+		{ value: "option3", label: "Option 3" },
+		{ value: "option4", label: "Option 4" },
+		{ value: "option5", label: "Option 5" },
 	]
 
 	return (
 		<div>
 			<ComponentDemo
-				title="基础选择器"
-				description="最基本的选择器组件"
-				code="<DelightfulSelect placeholder='请选择' options={options} />"
+				title="Basic Select"
+				description="Most basic select component"
+				code="<DelightfulSelect placeholder='Please select' options={options} />"
 			>
 				<Space>
-					<DelightfulSelect placeholder="请选择" style={{ width: 200 }} options={options} />
+					<DelightfulSelect placeholder="Please select" style={{ width: 200 }} options={options} />
 				</Space>
 			</ComponentDemo>
 
-			<ComponentDemo title="多选选择器" description="支持多选的选择器" code="mode='multiple'">
+			<ComponentDemo title="Multiple Select" description="Select that supports multiple selections" code="mode='multiple'">
 				<Space>
 					<DelightfulSelect
 						mode="multiple"
-						placeholder="请选择多个选项"
+						placeholder="Please select multiple options"
 						style={{ width: 300 }}
 						options={options}
 					/>
@@ -36,25 +36,25 @@ const SelectDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="不同尺寸"
-				description="支持不同尺寸的选择器"
+				title="Different Sizes"
+				description="Supports different sized selects"
 				code="size: 'large' | 'middle' | 'small'"
 			>
 				<Space direction="vertical">
 					<DelightfulSelect
 						size="large"
-						placeholder="大尺寸选择器"
+						placeholder="Large Size Select"
 						style={{ width: 200 }}
 						options={options}
 					/>
 					<DelightfulSelect
-						placeholder="默认尺寸选择器"
+						placeholder="Default Size Select"
 						style={{ width: 200 }}
 						options={options}
 					/>
 					<DelightfulSelect
 						size="small"
-						placeholder="小尺寸选择器"
+						placeholder="Small Size Select"
 						style={{ width: 200 }}
 						options={options}
 					/>
@@ -62,14 +62,14 @@ const SelectDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="可搜索选择器"
-				description="支持搜索功能的选择器"
+				title="Searchable Select"
+				description="Select with search functionality"
 				code="showSearch"
 			>
 				<Space>
 					<DelightfulSelect
 						showSearch
-						placeholder="可搜索的选择器"
+						placeholder="Searchable Select"
 						style={{ width: 200 }}
 						options={options}
 						filterOption={(input, option) =>
@@ -80,23 +80,23 @@ const SelectDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="事件处理"
-				description="监听选择变化事件"
+				title="Event Handling"
+				description="Listen to selection change events"
 				code="onChange | onSelect | onDeselect"
 			>
 				<Space direction="vertical">
 					<DelightfulSelect
-						placeholder="监听选择变化"
+						placeholder="Listen to selection change"
 						style={{ width: 200 }}
 						options={options}
-						onChange={(value) => console.log("选择的值:", value)}
+						onChange={(value) => console.log("Selected value:", value)}
 					/>
 					<DelightfulSelect
 						mode="multiple"
-						placeholder="监听多选变化"
+						placeholder="Listen to multiple selection change"
 						style={{ width: 300 }}
 						options={options}
-						onChange={(value) => console.log("多选的值:", value)}
+						onChange={(value) => console.log("Multiple selected values:", value)}
 					/>
 				</Space>
 			</ComponentDemo>

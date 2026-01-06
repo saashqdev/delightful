@@ -6,30 +6,30 @@ import ComponentDemo from "./Container"
 
 const DropdownDemo: React.FC = () => {
 	const menuItems = [
-		{ key: "1", label: "菜单项1" },
-		{ key: "2", label: "菜单项2" },
-		{ key: "3", label: "菜单项3" },
+		{ key: "1", label: "Menu Item 1" },
+		{ key: "2", label: "Menu Item 2" },
+		{ key: "3", label: "Menu Item 3" },
 	]
 
 	const nestedMenuItems = [
-		{ key: "1", label: "菜单项1" },
+		{ key: "1", label: "Menu Item 1" },
 		{
 			key: "2",
-			label: "子菜单",
+			label: "Submenu",
 			children: [
-				{ key: "2-1", label: "子菜单项1" },
-				{ key: "2-2", label: "子菜单项2" },
+				{ key: "2-1", label: "Submenu Item 1" },
+				{ key: "2-2", label: "Submenu Item 2" },
 			],
 		},
-		{ key: "3", label: "菜单项3" },
+		{ key: "3", label: "Menu Item 3" },
 	]
 
 	return (
 		<div>
 			<ComponentDemo
-				title="基础下拉菜单"
-				description="最基本的下拉菜单组件"
-				code="<DelightfulDropdown menu={{ items }}><Button>下拉菜单</Button></DelightfulDropdown>"
+				title="Basic Dropdown"
+				description="Most basic dropdown menu component"
+				code="<DelightfulDropdown menu={{ items }}><Button>Dropdown</Button></DelightfulDropdown>"
 			>
 				<Space>
 					<DelightfulDropdown
@@ -37,26 +37,26 @@ const DropdownDemo: React.FC = () => {
 							items: menuItems,
 						}}
 					>
-						<DelightfulButton>下拉菜单</DelightfulButton>
+						<DelightfulButton>Dropdown Menu</DelightfulButton>
 					</DelightfulDropdown>
 				</Space>
 			</ComponentDemo>
 
-			<ComponentDemo title="嵌套菜单" description="支持嵌套子菜单" code="children">
+			<ComponentDemo title="Nested Menu" description="Supports nested submenus" code="children">
 				<Space>
 					<DelightfulDropdown
 						menu={{
 							items: nestedMenuItems,
 						}}
 					>
-						<DelightfulButton>嵌套菜单</DelightfulButton>
+						<DelightfulButton>Nested Menu</DelightfulButton>
 					</DelightfulDropdown>
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="不同触发方式"
-				description="支持不同的触发方式"
+				title="Different Trigger Methods"
+				description="Supports different trigger methods"
 				code="trigger: 'click' | 'hover' | 'contextMenu'"
 			>
 				<Space>
@@ -66,7 +66,7 @@ const DropdownDemo: React.FC = () => {
 							items: menuItems,
 						}}
 					>
-						<DelightfulButton>点击触发</DelightfulButton>
+						<DelightfulButton>Click Trigger</DelightfulButton>
 					</DelightfulDropdown>
 					<DelightfulDropdown
 						trigger={["hover"]}
@@ -74,14 +74,14 @@ const DropdownDemo: React.FC = () => {
 							items: menuItems,
 						}}
 					>
-						<DelightfulButton>悬停触发</DelightfulButton>
+						<DelightfulButton>Hover Trigger</DelightfulButton>
 					</DelightfulDropdown>
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="不同位置"
-				description="支持不同的显示位置"
+				title="Different Positions"
+				description="Supports different display positions"
 				code="placement: 'top' | 'bottom' | 'left' | 'right'"
 			>
 				<Space>
@@ -91,7 +91,7 @@ const DropdownDemo: React.FC = () => {
 							items: menuItems,
 						}}
 					>
-						<DelightfulButton>顶部显示</DelightfulButton>
+						<DelightfulButton>Display at Top</DelightfulButton>
 					</DelightfulDropdown>
 					<DelightfulDropdown
 						placement="bottom"
@@ -99,22 +99,22 @@ const DropdownDemo: React.FC = () => {
 							items: menuItems,
 						}}
 					>
-						<DelightfulButton>底部显示</DelightfulButton>
+						<DelightfulButton>Display at Bottom</DelightfulButton>
 					</DelightfulDropdown>
 				</Space>
 			</ComponentDemo>
 
-			<ComponentDemo title="事件处理" description="监听菜单点击事件" code="onClick">
+			<ComponentDemo title="Event Handling" description="Listen to menu click events" code="onClick">
 				<Space>
 					<DelightfulDropdown
 						menu={{
 							items: menuItems,
 							onClick: ({ key }) => {
-								console.log("点击的菜单项:", key)
+								console.log("Clicked menu item:", key)
 							},
 						}}
 					>
-						<DelightfulButton>事件处理</DelightfulButton>
+						<DelightfulButton>Event Handling</DelightfulButton>
 					</DelightfulDropdown>
 				</Space>
 			</ComponentDemo>

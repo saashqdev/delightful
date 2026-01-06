@@ -7,36 +7,36 @@ const TagDemo: React.FC = () => {
 	return (
 		<div>
 			<ComponentDemo
-				title="基础标签"
-				description="最基本的标签组件"
-				code="<DelightfulTag>默认标签</DelightfulTag>"
+				title="Basic Tag"
+				description="Most basic tag component"
+				code="<DelightfulTag>Default Tag</DelightfulTag>"
 			>
 				<Space wrap>
-					<DelightfulTag>默认标签</DelightfulTag>
-					<DelightfulTag color="blue">蓝色标签</DelightfulTag>
-					<DelightfulTag color="green">绿色标签</DelightfulTag>
-					<DelightfulTag color="red">红色标签</DelightfulTag>
+					<DelightfulTag>Default Tag</DelightfulTag>
+					<DelightfulTag color="blue">Blue Tag</DelightfulTag>
+					<DelightfulTag color="green">Green Tag</DelightfulTag>
+					<DelightfulTag color="red">Red Tag</DelightfulTag>
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="标签颜色"
-				description="支持多种预设颜色"
+				title="Tag Colors"
+				description="Supports multiple preset colors"
 				code="color: 'blue' | 'green' | 'red' | 'orange' | 'purple'"
 			>
 				<Space wrap>
-					<DelightfulTag color="blue">蓝色</DelightfulTag>
-					<DelightfulTag color="green">绿色</DelightfulTag>
-					<DelightfulTag color="red">红色</DelightfulTag>
-					<DelightfulTag color="orange">橙色</DelightfulTag>
-					<DelightfulTag color="purple">紫色</DelightfulTag>
+					<DelightfulTag color="blue">Blue</DelightfulTag>
+					<DelightfulTag color="green">Green</DelightfulTag>
+					<DelightfulTag color="red">Red</DelightfulTag>
+					<DelightfulTag color="orange">Orange</DelightfulTag>
+					<DelightfulTag color="purple">Purple</DelightfulTag>
 				</Space>
 			</ComponentDemo>
 
-			<ComponentDemo title="自定义样式" description="通过style自定义样式" code="style">
+			<ComponentDemo title="Custom Style" description="Customize style through style prop" code="style">
 				<Space wrap>
 					<DelightfulTag style={{ backgroundColor: "#f0f0f0", color: "#333" }}>
-						自定义样式
+						Custom Style
 					</DelightfulTag>
 					<DelightfulTag
 						style={{
@@ -44,7 +44,7 @@ const TagDemo: React.FC = () => {
 							color: "white",
 						}}
 					>
-						渐变背景
+						Gradient Background
 					</DelightfulTag>
 				</Space>
 			</ComponentDemo>

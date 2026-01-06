@@ -8,8 +8,8 @@ const IconDemo: React.FC = () => {
 	return (
 		<div>
 			<ComponentDemo
-				title="基础图标"
-				description="最基本的图标组件"
+				title="Basic Icon"
+				description="Most basic icon component"
 				code="<DelightfulIcon name='IconHome' />"
 			>
 				<Space>
@@ -21,8 +21,8 @@ const IconDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="不同尺寸"
-				description="支持不同尺寸的图标"
+				title="Different Sizes"
+				description="Supports different sized icons"
 				code="size: number | string"
 			>
 				<Space>
@@ -33,7 +33,7 @@ const IconDemo: React.FC = () => {
 				</Space>
 			</ComponentDemo>
 
-			<ComponentDemo title="不同颜色" description="支持不同颜色的图标" code="color: string">
+			<ComponentDemo title="Different Colors" description="Supports different colored icons" code="color: string">
 				<Space>
 					<DelightfulIcon component={IconHome} color="#1890ff" />
 					<DelightfulIcon component={IconHome} color="#52c41a" />
@@ -43,8 +43,8 @@ const IconDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="描边宽度"
-				description="自定义图标的描边宽度"
+				title="Stroke Width"
+				description="Customize icon stroke width"
 				code="stroke: number"
 			>
 				<Space>
@@ -54,7 +54,7 @@ const IconDemo: React.FC = () => {
 				</Space>
 			</ComponentDemo>
 
-			<ComponentDemo title="自定义组件" description="使用自定义的图标组件" code="component">
+			<ComponentDemo title="Custom Component" description="Use custom icon component" code="component">
 				<Space>
 					<DelightfulIcon component={IconSearch} />
 					<DelightfulIcon component={IconFolder} />

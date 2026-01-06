@@ -6,45 +6,45 @@ const TableDemo: React.FC = () => {
 	const dataSource = [
 		{
 			key: "1",
-			name: "张三",
+			name: "Zhang San",
 			age: 32,
-			address: "北京市朝阳区",
-			tags: ["开发", "前端"],
+			address: "Beijing Chaoyang District",
+			tags: ["Development", "Frontend"],
 		},
 		{
 			key: "2",
-			name: "李四",
+			name: "Li Si",
 			age: 42,
-			address: "上海市浦东新区",
-			tags: ["设计", "UI"],
+			address: "Shanghai Pudong New Area",
+			tags: ["Design", "UI"],
 		},
 		{
 			key: "3",
-			name: "王五",
+			name: "Wang Wu",
 			age: 28,
-			address: "广州市天河区",
-			tags: ["测试", "QA"],
+			address: "Guangzhou Tianhe District",
+			tags: ["Testing", "QA"],
 		},
 	]
 
 	const columns = [
 		{
-			title: "姓名",
+			title: "Name",
 			dataIndex: "name",
 			key: "name",
 		},
 		{
-			title: "年龄",
+			title: "Age",
 			dataIndex: "age",
 			key: "age",
 		},
 		{
-			title: "地址",
+			title: "Address",
 			dataIndex: "address",
 			key: "address",
 		},
 		{
-			title: "标签",
+			title: "Tags",
 			key: "tags",
 			dataIndex: "tags",
 			render: (tags: string[]) => (
@@ -62,16 +62,16 @@ const TableDemo: React.FC = () => {
 	return (
 		<div>
 			<ComponentDemo
-				title="基础表格"
-				description="最基本的表格组件"
+				title="Basic Table"
+				description="Most basic table component"
 				code="<DelightfulTable columns={columns} dataSource={dataSource} />"
 			>
 				<DelightfulTable columns={columns} dataSource={dataSource} />
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="带分页的表格"
-				description="支持分页功能的表格"
+				title="Table with Pagination"
+				description="Table with pagination support"
 				code="pagination: { pageSize: 2 }"
 			>
 				<DelightfulTable
@@ -81,28 +81,28 @@ const TableDemo: React.FC = () => {
 				/>
 			</ComponentDemo>
 
-			<ComponentDemo title="可选择的表格" description="支持行选择的表格" code="rowSelection">
+			<ComponentDemo title="Selectable Table" description="Table with row selection support" code="rowSelection">
 				<DelightfulTable
 					columns={columns}
 					dataSource={dataSource}
 					rowSelection={{
 						onChange: (selectedRowKeys, selectedRows) => {
-							console.log("选中的行:", selectedRowKeys, selectedRows)
+							console.log("Selected rows:", selectedRowKeys, selectedRows)
 						},
 					}}
 				/>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="可排序的表格"
-				description="支持列排序的表格"
+				title="Sortable Table"
+				description="Table with column sorting support"
 				code="sorter: (a, b) => a.age - b.age"
 			>
 				<DelightfulTable
 					columns={[
 						...columns.slice(0, 2),
 						{
-							title: "年龄",
+							title: "Age",
 							dataIndex: "age",
 							key: "age",
 							sorter: (a, b) => a.age - b.age,
@@ -114,8 +114,8 @@ const TableDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="加载状态的表格"
-				description="支持加载状态的表格"
+				title="Table with Loading State"
+				description="Table with loading state support"
 				code="loading: true"
 			>
 				<DelightfulTable columns={columns} dataSource={dataSource} loading={true} />

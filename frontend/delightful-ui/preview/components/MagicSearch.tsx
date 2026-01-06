@@ -7,37 +7,37 @@ const SearchDemo: React.FC = () => {
 	return (
 		<div>
 			<ComponentDemo
-				title="基础搜索"
-				description="最基本的搜索组件"
-				code="<DelightfulSearch placeholder='请输入搜索内容' />"
+				title="Basic Search"
+				description="Most basic search component"
+				code="<DelightfulSearch placeholder='Please enter search content' />"
 			>
 				<Space>
-					<DelightfulSearch placeholder="请输入搜索内容" style={{ width: 300 }} />
+					<DelightfulSearch placeholder="Please enter search content" style={{ width: 300 }} />
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="不同尺寸"
-				description="支持不同尺寸的搜索框"
+				title="Different Sizes"
+				description="Supports different sized search boxes"
 				code="size: 'large' | 'middle' | 'small'"
 			>
 				<Space direction="vertical">
-					<DelightfulSearch placeholder="大尺寸搜索框" size="large" style={{ width: 300 }} />
-					<DelightfulSearch placeholder="默认尺寸搜索框" style={{ width: 300 }} />
-					<DelightfulSearch placeholder="小尺寸搜索框" size="small" style={{ width: 300 }} />
+					<DelightfulSearch placeholder="Large Size Search" size="large" style={{ width: 300 }} />
+					<DelightfulSearch placeholder="Default Size Search" style={{ width: 300 }} />
+					<DelightfulSearch placeholder="Small Size Search" size="small" style={{ width: 300 }} />
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="事件处理"
-				description="监听搜索和输入事件"
+				title="Event Handling"
+				description="Listen to search and input events"
 				code="onSearch | onChange"
 			>
 				<Space direction="vertical">
 					<DelightfulSearch
-						placeholder="输入时触发onChange"
+						placeholder="Trigger onChange on input"
 						style={{ width: 300 }}
-						onChange={(e) => console.log("输入内容:", e.target.value)}
+						onChange={(e) => console.log("Input content:", e.target.value)}
 					/>
 				</Space>
 			</ComponentDemo>

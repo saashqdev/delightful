@@ -7,28 +7,28 @@ const ImageDemo: React.FC = () => {
 	return (
 		<div>
 			<ComponentDemo
-				title="基础用法"
-				description="支持所有原生 img 标签的属性，使用方式与普通 img 标签一致"
+				title="Basic Usage"
+				description="Supports all native img tag attributes, usage is the same as normal img tag"
 				code="src: string"
 			>
 				<Space wrap>
 					<DelightfulImage
 						src="https://picsum.photos/200/150?random=1"
-						alt="随机图片1"
+						alt="Random Image 1"
 						width={200}
 						height={150}
 						style={{ borderRadius: "8px" }}
 					/>
 					<DelightfulImage
 						src="https://picsum.photos/200/150?random=2"
-						alt="随机图片2"
+						alt="Random Image 2"
 						width={200}
 						height={150}
 						style={{ borderRadius: "8px" }}
 					/>
 					<DelightfulImage
 						src="https://picsum.photos/200/150?random=3"
-						alt="随机图片3"
+						alt="Random Image 3"
 						width={200}
 						height={150}
 						style={{ borderRadius: "8px" }}
@@ -37,15 +37,15 @@ const ImageDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="错误回退"
-				description="当图片加载失败时，会自动显示 errorSrc 指定的图片"
+				title="Error Fallback"
+				description="When image fails to load, it will automatically display the image specified by errorSrc"
 				code="errorSrc: string"
 			>
 				<Space wrap>
 					<DelightfulImage
 						src="invalid-url"
 						errorSrc="https://picsum.photos/200/150?random=fallback"
-						alt="错误回退示例"
+						alt="Error Fallback Example"
 						width={200}
 						height={150}
 						style={{ borderRadius: "8px" }}
@@ -53,7 +53,7 @@ const ImageDemo: React.FC = () => {
 					<DelightfulImage
 						src="https://picsum.photos/200/150?random=4"
 						errorSrc="https://picsum.photos/200/150?random=fallback2"
-						alt="正常图片"
+						alt="Normal Image"
 						width={200}
 						height={150}
 						style={{ borderRadius: "8px" }}

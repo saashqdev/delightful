@@ -7,28 +7,28 @@ const EllipseDemo: React.FC = () => {
 	return (
 		<div>
 			<ComponentDemo
-				title="基础省略号"
-				description="文本超出最大宽度时显示省略号，悬停显示完整内容"
+				title="Basic Ellipsis"
+				description="Show ellipsis when text exceeds max width, hover to display full content"
 				code="<DelightfulEllipseWithTooltip text='...' maxWidth='200px' />"
 			>
 				<Space direction="vertical">
 					<DelightfulEllipseWithTooltip
-						text="这是一段很长的文本，会被省略号截断并显示在工具提示中"
+						text="This is a very long text that will be truncated with ellipsis and displayed in a tooltip"
 						maxWidth="200px"
 					/>
-					<DelightfulEllipseWithTooltip text="短文本不会显示省略号" maxWidth="200px" />
+					<DelightfulEllipseWithTooltip text="Short text will not show ellipsis" maxWidth="200px" />
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="自定义最大宽度"
-				description="可以通过 maxWidth 属性自定义省略宽度"
+				title="Custom Max Width"
+				description="Can customize ellipsis width through maxWidth property"
 				code="maxWidth: string"
 			>
 				<Space direction="vertical">
-					<DelightfulEllipseWithTooltip text="宽度 100px 的省略效果" maxWidth="100px" />
+					<DelightfulEllipseWithTooltip text="Ellipsis effect with 100px width" maxWidth="100px" />
 					<DelightfulEllipseWithTooltip
-						text="宽度 300px 的省略效果，内容更长也不会被截断"
+						text="Ellipsis effect with 300px width, longer content won't be truncated"
 						maxWidth="300px"
 					/>
 				</Space>

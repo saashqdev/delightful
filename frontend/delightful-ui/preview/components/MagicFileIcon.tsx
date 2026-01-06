@@ -7,8 +7,8 @@ const FileIconDemo: React.FC = () => {
 	return (
 		<div>
 			<ComponentDemo
-				title="基础文件图标"
-				description="最基本的文件图标组件"
+				title="Basic File Icon"
+				description="Most basic file icon component"
 				code="<DelightfulFileIcon type='pdf' />"
 			>
 				<Space>
@@ -20,8 +20,8 @@ const FileIconDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="文档类型"
-				description="支持各种文档类型"
+				title="Document Types"
+				description="Supports various document types"
 				code="type: 'pdf' | 'doc' | 'xls' | 'ppt' | 'txt'"
 			>
 				<Space wrap>
@@ -35,8 +35,8 @@ const FileIconDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="媒体类型"
-				description="支持各种媒体文件类型"
+				title="Media Types"
+				description="Supports various media file types"
 				code="type: 'image' | 'video' | 'audio'"
 			>
 				<Space wrap>
@@ -47,8 +47,8 @@ const FileIconDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="代码类型"
-				description="支持各种代码文件类型"
+				title="Code Types"
+				description="Supports various code file types"
 				code="type: 'code' | 'json' | 'xml' | 'html' | 'css' | 'js'"
 			>
 				<Space wrap>
@@ -62,8 +62,8 @@ const FileIconDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="其他类型"
-				description="支持其他文件类型"
+				title="Other Types"
+				description="Supports other file types"
 				code="type: 'folder' | 'zip' | 'link' | 'other'"
 			>
 				<Space wrap>
@@ -75,8 +75,8 @@ const FileIconDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="不同尺寸"
-				description="支持不同尺寸的文件图标"
+				title="Different Sizes"
+				description="Supports different sized file icons"
 				code="size: number | string"
 			>
 				<Space>

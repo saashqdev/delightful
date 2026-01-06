@@ -4,76 +4,76 @@ import DelightfulSegmented from "../../components/DelightfulSegmented"
 import ComponentDemo from "./Container"
 
 const SegmentedDemo: React.FC = () => {
-	const [value1, setValue1] = useState<string>("选项1")
-	const [value2, setValue2] = useState<string>("选项1")
+	const [value1, setValue1] = useState<string>("Option 1")
+	const [value2, setValue2] = useState<string>("Option 1")
 
 	return (
 		<div>
 			<ComponentDemo
-				title="基础分段控制器"
-				description="最基本的分段控制器组件"
-				code="<DelightfulSegmented options={['选项1', '选项2', '选项3']} />"
+				title="Basic Segmented"
+				description="Most basic segmented control component"
+				code="<DelightfulSegmented options={['Option 1', 'Option 2', 'Option 3']} />"
 			>
 				<Space>
-					<DelightfulSegmented options={["选项1", "选项2", "选项3"]} />
-					<DelightfulSegmented circle={false} options={["选项1", "选项2", "选项3"]} />
+					<DelightfulSegmented options={["Option 1", "Option 2", "Option 3"]} />
+					<DelightfulSegmented circle={false} options={["Option 1", "Option 2", "Option 3"]} />
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="受控分段控制器"
-				description="通过value和onChange控制选中状态"
+				title="Controlled Segmented"
+				description="Control selected state through value and onChange"
 				code="value | onChange"
 			>
 				<Space direction="vertical">
 					<DelightfulSegmented
-						options={["选项1", "选项2", "选项3"]}
+						options={["Option 1", "Option 2", "Option 3"]}
 						value={value1}
 						onChange={setValue1}
 					/>
-					<span>当前选中: {value1}</span>
+					<span>Currently selected: {value1}</span>
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="不同尺寸"
-				description="支持不同尺寸的分段控制器"
+				title="Different Sizes"
+				description="Supports different sized segmented controls"
 				code="size: 'large' | 'default' | 'small'"
 			>
 				<Space direction="vertical">
-					<DelightfulSegmented options={["选项1", "选项2", "选项3"]} size="large" />
-					<DelightfulSegmented options={["选项1", "选项2", "选项3"]} />
-					<DelightfulSegmented options={["选项1", "选项2", "选项3"]} size="small" />
+					<DelightfulSegmented options={["Option 1", "Option 2", "Option 3"]} size="large" />
+					<DelightfulSegmented options={["Option 1", "Option 2", "Option 3"]} />
+					<DelightfulSegmented options={["Option 1", "Option 2", "Option 3"]} size="small" />
 				</Space>
 			</ComponentDemo>
 
-			<ComponentDemo title="禁用状态" description="支持禁用某些选项" code="disabled">
+			<ComponentDemo title="Disabled State" description="Supports disabling certain options" code="disabled">
 				<Space>
 					<DelightfulSegmented
 						options={[
-							{ label: "选项1", value: "选项1" },
-							{ label: "选项2", value: "选项2", disabled: true },
-							{ label: "选项3", value: "选项3" },
+							{ label: "Option 1", value: "Option 1" },
+							{ label: "Option 2", value: "Option 2", disabled: true },
+							{ label: "Option 3", value: "Option 3" },
 						]}
 					/>
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="事件处理"
-				description="监听选择变化事件"
+				title="Event Handling"
+				description="Listen to selection change events"
 				code="onChange: (value) => void"
 			>
 				<Space direction="vertical">
 					<DelightfulSegmented
-						options={["选项1", "选项2", "选项3"]}
+						options={["Option 1", "Option 2", "Option 3"]}
 						value={value2}
 						onChange={(value) => {
 							setValue2(value)
-							console.log("选择变化:", value)
+							console.log("Selection changed:", value)
 						}}
 					/>
-					<span>当前选中: {value2}</span>
+					<span>Currently selected: {value2}</span>
 				</Space>
 			</ComponentDemo>
 		</div>

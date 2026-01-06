@@ -10,8 +10,8 @@ const CheckFavorDemo: React.FC = () => {
 	return (
 		<div>
 			<ComponentDemo
-				title="基础收藏"
-				description="最基本的收藏组件"
+				title="Basic Favor"
+				description="Most basic favor component"
 				code="<DelightfulCheckFavor />"
 			>
 				<Space>
@@ -21,8 +21,8 @@ const CheckFavorDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="受控收藏"
-				description="通过checked和onChange控制收藏状态"
+				title="Controlled Favor"
+				description="Control favor state through checked and onChange"
 				code="checked | onChange"
 			>
 				<Space>
@@ -30,11 +30,11 @@ const CheckFavorDemo: React.FC = () => {
 						checked={checked1}
 						onChange={(checked) => setChecked1(checked as boolean)}
 					/>
-					<span>状态: {checked1 ? "已收藏" : "未收藏"}</span>
+					<span>Status: {checked1 ? "Favored" : "Not Favored"}</span>
 				</Space>
 			</ComponentDemo>
 
-			<ComponentDemo title="默认状态" description="设置默认的收藏状态" code="defaultChecked">
+			<ComponentDemo title="Default State" description="Set default favor state" code="defaultChecked">
 				<Space>
 					<DelightfulCheckFavor defaultChecked={false} />
 					<DelightfulCheckFavor defaultChecked={true} />
@@ -42,8 +42,8 @@ const CheckFavorDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="事件处理"
-				description="监听收藏状态变化"
+				title="Event Handling"
+				description="Listen to favor state changes"
 				code="onChange: (checked: boolean) => void"
 			>
 				<Space direction="vertical">
@@ -51,16 +51,16 @@ const CheckFavorDemo: React.FC = () => {
 						checked={checked2}
 						onChange={(checked) => {
 							setChecked2(checked as boolean)
-							console.log("收藏状态变化:", checked)
+							console.log("Favor state changed:", checked)
 						}}
 					/>
-					<span>当前状态: {checked2 ? "已收藏" : "未收藏"}</span>
+					<span>Current state: {checked2 ? "Favored" : "Not Favored"}</span>
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="自定义样式"
-				description="通过className和style自定义样式"
+				title="Custom Style"
+				description="Customize style through className and style"
 				code="className | style"
 			>
 				<Space>

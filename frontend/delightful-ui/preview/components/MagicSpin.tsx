@@ -6,7 +6,7 @@ import ComponentDemo from "./Container"
 const SpinDemo: React.FC = () => {
 	return (
 		<div>
-			<ComponentDemo title="基础加载" description="最基本的加载组件" code="<DelightfulSpin />">
+			<ComponentDemo title="Basic Loading" description="Most basic loading component" code="<DelightfulSpin />">
 				<Space size={100}>
 					<DelightfulSpin />
 					<DelightfulSpin size="large" />
@@ -15,38 +15,38 @@ const SpinDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="包裹内容的加载"
-				description="将加载状态包裹在内容周围"
-				code="<DelightfulSpin><div>内容</div></DelightfulSpin>"
+				title="Loading with Content Wrapper"
+				description="Wrap loading state around content"
+				code="<DelightfulSpin><div>Content</div></DelightfulSpin>"
 			>
-				<DelightfulSpin tip="加载中...">
-					<Card title="内容卡片" style={{ width: 300 }}>
-						<p>这是被加载组件包裹的内容</p>
-						<p>当loading为true时会显示加载动画</p>
+				<DelightfulSpin tip="Loading...">
+					<Card title="Content Card" style={{ width: 300 }}>
+						<p>This is content wrapped by the loading component</p>
+						<p>When loading is true, the loading animation will be displayed</p>
 					</Card>
 				</DelightfulSpin>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="不同尺寸"
-				description="支持不同尺寸的加载动画"
+				title="Different Sizes"
+				description="Supports different sized loading animations"
 				code="size: 'small' | 'default' | 'large'"
 			>
 				<Space size={100}>
-					<DelightfulSpin size="small" tip="小尺寸" />
-					<DelightfulSpin tip="默认尺寸" />
-					<DelightfulSpin size="large" tip="大尺寸" />
+					<DelightfulSpin size="small" tip="Small Size" />
+					<DelightfulSpin tip="Default Size" />
+					<DelightfulSpin size="large" tip="Large Size" />
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="延迟显示"
-				description="延迟显示加载动画，避免闪烁"
+				title="Delayed Display"
+				description="Delay showing loading animation to avoid flickering"
 				code="delay: 500"
 			>
 				<Space size={100}>
-					<DelightfulSpin delay={500} tip="延迟500ms显示" />
-					<DelightfulSpin delay={1000} tip="延迟1秒显示" />
+					<DelightfulSpin delay={500} tip="Delay 500ms to display" />
+					<DelightfulSpin delay={1000} tip="Delay 1 second to display" />
 				</Space>
 			</ComponentDemo>
 		</div>

@@ -12,62 +12,62 @@ const ModalDemo: React.FC = () => {
 	return (
 		<div>
 			<ComponentDemo
-				title="基础模态框"
-				description="最基本的模态框组件"
+				title="Basic Modal"
+				description="Most basic modal component"
 				code="<DelightfulModal open={isOpen} onCancel={() => setIsOpen(false)} />"
 			>
 				<Space>
 					<DelightfulButton type="primary" onClick={() => setIsModalOpen1(true)}>
-						打开基础模态框
+						Open Basic Modal
 					</DelightfulButton>
 					<DelightfulModal
-						title="基础模态框"
+						title="Basic Modal"
 						open={isModalOpen1}
 						onCancel={() => setIsModalOpen1(false)}
 						onOk={() => setIsModalOpen1(false)}
 					>
-						<p>这是一个基础模态框的内容示例。</p>
-						<p>点击确定或取消按钮可以关闭模态框。</p>
+						<p>This is an example of basic modal content.</p>
+						<p>Click OK or Cancel button to close the modal.</p>
 					</DelightfulModal>
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="不同尺寸的模态框"
-				description="支持不同尺寸的模态框"
+				title="Different Size Modals"
+				description="Supports different sized modals"
 				code="width: number | string"
 			>
 				<Space>
-					<DelightfulButton onClick={() => setIsModalOpen2(true)}>小尺寸模态框</DelightfulButton>
+					<DelightfulButton onClick={() => setIsModalOpen2(true)}>Small Size Modal</DelightfulButton>
 					<DelightfulModal
-						title="小尺寸模态框"
+						title="Small Size Modal"
 						open={isModalOpen2}
 						width={400}
 						onCancel={() => setIsModalOpen2(false)}
 						onOk={() => setIsModalOpen2(false)}
 					>
-						<p>这是一个宽度为400px的小尺寸模态框。</p>
+						<p>This is a small size modal with 400px width.</p>
 					</DelightfulModal>
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="无按钮模态框"
-				description="可以隐藏默认的确定和取消按钮"
+				title="Modal without Buttons"
+				description="Can hide default OK and Cancel buttons"
 				code="footer: null"
 			>
 				<Space>
-					<DelightfulButton onClick={() => setIsModalOpen4(true)}>无按钮模态框</DelightfulButton>
+					<DelightfulButton onClick={() => setIsModalOpen4(true)}>Modal without Buttons</DelightfulButton>
 					<DelightfulModal
-						title="无按钮模态框"
+						title="Modal without Buttons"
 						open={isModalOpen4}
 						footer={null}
 						onCancel={() => setIsModalOpen4(false)}
 					>
-						<p>这个模态框没有默认的按钮。</p>
-						<p>只能通过点击右上角的关闭按钮或遮罩层来关闭。</p>
+						<p>This modal has no default buttons.</p>
+						<p>Can only be closed by clicking the close button in the upper right corner or the mask layer.</p>
 						<div style={{ textAlign: "right", marginTop: 16 }}>
-							<Button onClick={() => setIsModalOpen4(false)}>自定义关闭按钮</Button>
+							<Button onClick={() => setIsModalOpen4(false)}>Custom Close Button</Button>
 						</div>
 					</DelightfulModal>
 				</Space>

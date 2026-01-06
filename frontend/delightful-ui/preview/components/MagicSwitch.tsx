@@ -6,7 +6,7 @@ import ComponentDemo from "./Container"
 const SwitchDemo: React.FC = () => {
 	return (
 		<div>
-			<ComponentDemo title="基础开关" description="最基本的开关组件" code="<DelightfulSwitch />">
+			<ComponentDemo title="Basic Switch" description="Most basic switch component" code="<DelightfulSwitch />">
 				<Space>
 					<DelightfulSwitch />
 					<DelightfulSwitch defaultChecked />
@@ -14,8 +14,8 @@ const SwitchDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="开关尺寸"
-				description="支持不同尺寸的开关"
+				title="Switch Sizes"
+				description="Supports different sized switches"
 				code="size: 'default' | 'small'"
 			>
 				<Space>
@@ -25,8 +25,8 @@ const SwitchDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="开关状态"
-				description="支持加载和禁用状态"
+				title="Switch States"
+				description="Supports loading and disabled states"
 				code="loading | disabled"
 			>
 				<Space>
@@ -38,30 +38,30 @@ const SwitchDemo: React.FC = () => {
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="带文字的开关"
-				description="可以自定义开关两端的文字"
+				title="Switch with Text"
+				description="Can customize text on both ends of the switch"
 				code="checkedChildren | unCheckedChildren"
 			>
 				<Space direction="vertical">
-					<DelightfulSwitch checkedChildren="开" unCheckedChildren="关" />
+					<DelightfulSwitch checkedChildren="On" unCheckedChildren="Off" />
 					<DelightfulSwitch checkedChildren="ON" unCheckedChildren="OFF" />
 					<DelightfulSwitch checkedChildren="✅" unCheckedChildren="❌" />
 				</Space>
 			</ComponentDemo>
 
 			<ComponentDemo
-				title="受控开关"
-				description="通过checked和onChange控制开关状态"
+				title="Controlled Switch"
+				description="Control switch state through checked and onChange"
 				code="checked | onChange"
 			>
 				<Space>
 					<DelightfulSwitch
 						checked={true}
-						onChange={(checked) => console.log("开关状态:", checked)}
+						onChange={(checked) => console.log("Switch state:", checked)}
 					/>
 					<DelightfulSwitch
 						checked={false}
-						onChange={(checked) => console.log("开关状态:", checked)}
+						onChange={(checked) => console.log("Switch state:", checked)}
 					/>
 				</Space>
 			</ComponentDemo>

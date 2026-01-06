@@ -14,41 +14,41 @@ import type { ControlEventMessageType } from "@/types/chat/control_message"
 const console = new Logger("ConversationStore")
 
 /**
- * 会话UI状态管理
+ * Conversation UI state management
  */
 class ConversationStore {
 	/**
-	 * 当前会话
+	 * Current conversation
 	 */
 	currentConversation: Conversation | undefined
 
 	/**
-	 * 会话任务列表
+	 * Conversation task list
 	 */
 	conversationTaskList: UserTask[] = []
 
 	/**
-	 * 话题打开状态
+	 * Topic panel open state
 	 */
 	topicOpen: boolean = false
 
 	/**
-	 * 配置面板打开状态
+	 * Settings panel open state
 	 */
 	settingOpen: boolean = false
 
 	/**
-	 * 会话输入状态
+	 * Conversation input state
 	 */
 	conversationReceiveInputing: boolean = false
 
 	/**
-	 * 会话列表
+	 * Conversation list
 	 */
 	conversations: Record<string, Conversation> = {}
 
 	/**
-	 * 会话输入状态
+	 * Conversation input state
 	 */
 	receive_inputing: boolean = false
 
@@ -63,9 +63,9 @@ class ConversationStore {
 	}
 
 	/**
-	 * 添加新会话
-	 * @param conversation 会话
-	 * @returns 会话
+	 * Add new conversation
+	 * @param conversation Conversation
+	 * @returns Conversation
 	 */
 	addNewConversation(conversation: ConversationFromService) {
 		const c = new Conversation(conversation)
@@ -85,8 +85,8 @@ class ConversationStore {
 	}
 
 	/**
-	 * 设置当前会话
-	 * @param conversation 会话
+	 * Set current conversation
+	 * @param conversation Conversation
 	 */
 	setCurrentConversation(conversation: Conversation | undefined) {
 		this.currentConversation = conversation
@@ -105,32 +105,32 @@ class ConversationStore {
 	}
 
 	/**
-	 * 切换设置面板开关状态
+	 * Toggle settings panel open state
 	 */
 	toggleSettingOpen() {
 		this.settingOpen = !this.settingOpen
 	}
 
 	/**
-	 * 设置会话列表
-	 * @param conversations 会话列表
+	 * Set conversation list
+	 * @param conversations Conversations
 	 */
 	setConversations(conversations: Conversation[]) {
 		this.conversations = keyBy(conversations, "id")
 	}
 
 	/**
-	 * 更新会话主题默认打开状态
-	 * @param open 是否打开
+	 * Update default topic open state
+	 * @param open Whether open
 	 */
 	setTopicOpen(open: boolean) {
 		this.topicOpen = open
 	}
 
 	/**
-	 * 更新会话置顶状态
-	 * @param conversationId 会话ID
-	 * @param isTop 是否置顶 (1: 置顶, 0: 不置顶)
+	 * Update conversation pin status
+	 * @param conversationId Conversation ID
+	 * @param isTop Pinned (1) or not (0)
 	 */
 	updateTopStatus(conversationId: string, isTop: 0 | 1) {
 		const conversation = this.conversations[conversationId]
@@ -140,35 +140,35 @@ class ConversationStore {
 			? ConversationGroupKey.Group
 			: ConversationGroupKey.Single
 
-		// 更新分组
+		// Update group
 		const oldGroupKey = isTop ? conversationGroupKey : ConversationGroupKey.Top
 		const newGroupKey = isTop ? ConversationGroupKey.Top : conversationGroupKey
 
-		// 从旧分组中移除
+		// Remove from old group
 		conversationSiderbarStore.removeConversationFromGroup(oldGroupKey, conversationId)
 
-		// 添加到新分组
+		// Add to new group
 		conversationSiderbarStore.addConversationToGroup(newGroupKey, conversationId)
 
-		// 实际的 GroupKey
+		// Actual GroupKey
 		const actualGroupKey = getConversationGroupKey(conversation)
 
 		if (isTop) {
-			// 将会话移动到分组顶部
+			// Move conversation to top of the group
 			conversationSiderbarStore.moveConversationFirst(conversationId, actualGroupKey)
 		} else {
-			// 将会话移动到所有置顶会话的下面
+			// Move conversation below all pinned conversations
 			conversationSiderbarStore.moveAfterTopConversations(conversationId, actualGroupKey)
 		}
 
-		// 更新置顶状态
+		// Update pinned status
 		conversation.is_top = isTop
 	}
 
 	/**
-	 * 更新会话免打扰状态
-	 * @param conversationId 会话ID
-	 * @param isNotDisturb 是否免打扰 (1: 免打扰, 0: 不免打扰)
+	 * Update conversation do-not-disturb status
+	 * @param conversationId Conversation ID
+	 * @param isNotDisturb Do-not-disturb (1) or not (0)
 	 */
 	updateConversationDisturbStatus(conversationId: string, isNotDisturb: 0 | 1) {
 		const conversation = this.conversations[conversationId]
@@ -177,9 +177,9 @@ class ConversationStore {
 	}
 
 	/**
-	 * 更新会话状态
-	 * @param conversationId 会话ID
-	 * @param status 状态值
+	 * Update conversation status
+	 * @param conversationId Conversation ID
+	 * @param status Status value
 	 */
 	updateConversationStatus(conversationId: string, status: number) {
 		const conversation = this.conversations[conversationId]
@@ -189,9 +189,9 @@ class ConversationStore {
 	}
 
 	/**
-	 * 更新会话主题默认打开状态
-	 * @param conversationId 会话ID
-	 * @param open 是否默认打开
+	 * Update conversation default topic open state
+	 * @param conversationId Conversation ID
+	 * @param open Whether open by default
 	 */
 	updateConversationTopicDefaultOpen(conversationId: string, open: boolean) {
 		const conversation = this.conversations[conversationId]
@@ -201,9 +201,9 @@ class ConversationStore {
 	}
 
 	/**
-	 * 更新会话当前话题ID
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
+	 * Update conversation current topic ID
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
 	 */
 	updateConversationCurrentTopicId(conversationId: string, topicId: string) {
 		const conversation = this.conversations[conversationId]
@@ -216,9 +216,9 @@ class ConversationStore {
 	}
 
 	/**
-	 * 更新会话最后一条消息
-	 * @param conversationId 会话ID
-	 * @param message 最后一条消息
+	 * Update conversation last message
+	 * @param conversationId Conversation ID
+	 * @param message Last message
 	 */
 	updateConversationLastMessage(
 		conversationId: string,
@@ -239,8 +239,8 @@ class ConversationStore {
 	}
 
 	/**
-	 * 初始化会话列表
-	 * @param conversations 会话列表
+	 * Initialize conversation list
+	 * @param conversations Conversations
 	 */
 	initConversations(conversations: Conversation[]) {
 		conversations.forEach((conversation) => {
@@ -252,20 +252,20 @@ class ConversationStore {
 			this.conversations,
 		)
 
-		// 更新侧边栏分组
+		// Update sidebar groups
 		Object.entries(result).forEach(([key, value]) => {
 			this.updateSidebarGroup(key as ConversationGroupKey, value)
 		})
 	}
 
 	/**
-	 * 排序会话
-	 * @param convA 会话A
-	 * @param convB 会话B
-	 * @returns 排序结果
+	 * Sort conversations
+	 * @param convA Conversation A
+	 * @param convB Conversation B
+	 * @returns Sort result
 	 */
 	sortConversations(convA: Conversation, convB: Conversation) {
-		// 置顶会话排在最前面
+		// Pinned conversations go first
 		if (convA.is_top && !convB.is_top) {
 			return -1
 		}
@@ -274,12 +274,12 @@ class ConversationStore {
 			return 1
 		}
 
-		// 没有消息的会话排在最后
+		// Conversations without messages go last
 		if (!convA.last_receive_message && !convB.last_receive_message) {
 			return 0
 		}
 
-		// 没有消息的会话排在最后
+		// Conversations without messages go last
 		if (!convA.last_receive_message) {
 			return 1
 		}
@@ -288,14 +288,14 @@ class ConversationStore {
 			return -1
 		}
 
-		// 按照最后一条消息的时间排序
+		// Sort by the time of the last message
 		return convB.last_receive_message.time - convA.last_receive_message.time
 	}
 
 	/**
-	 * 计算侧边栏会话
-	 * @param conversations 会话列表
-	 * @returns 会话组
+	 * Calculate sidebar conversations
+	 * @param conversations Conversation list
+	 * @returns Conversation groups
 	 */
 	calcSidebarConversations(ids: string[], conversations: Record<string, Conversation>) {
 		const top = new Set<string>()
@@ -342,18 +342,18 @@ class ConversationStore {
 	}
 
 	/**
-	 * 更新会话组
-	 * @param menuKey 菜单组
-	 * @param ids 会话ID列表
+	 * Update conversation group
+	 * @param menuKey Menu group
+	 * @param ids Conversation IDs
 	 */
 	updateSidebarGroup(menuKey: ConversationGroupKey, ids: string[]) {
 		conversationSiderbarStore.updateConversationSiderbarGroups(menuKey, ids)
 	}
 
 	/**
-	 * 从会话组中移除会话
-	 * @param menuKey 菜单组
-	 * @param id 会话ID
+	 * Remove a conversation from a group
+	 * @param menuKey Menu group
+	 * @param id Conversation ID
 	 */
 	removeConversation(id: string): string | undefined {
 		if (!id) return undefined
@@ -378,17 +378,17 @@ class ConversationStore {
 	}
 
 	/**
-	 * 从会话列表中移除会话
-	 * @param ids 会话ID列表
+	 * Remove conversations from list
+	 * @param ids Conversation IDs
 	 */
 	removeConversations(ids: string[]) {
 		ids.forEach((id) => this.removeConversation(id))
 	}
 
 	/**
-	 * 将会话移动到指定分组的开头
-	 * @param targetGroupKey 目标分组
-	 * @param conversationId 会话ID
+	 * Move a conversation to the top of a target group
+	 * @param targetGroupKey Target group key
+	 * @param conversationId Conversation ID
 	 */
 	moveConversationToGroupTop(targetGroupKey: ConversationGroupKey, conversationId: string) {
 		const currentGroup = conversationSiderbarStore
@@ -402,27 +402,27 @@ class ConversationStore {
 	}
 
 	/**
-	 * 将会话从一个分组移动到另一个分组的开头
-	 * @param fromGroupKey 源分组
-	 * @param toGroupKey 目标分组
-	 * @param conversationId 会话ID
+	 * Move a conversation from one group to another group's top
+	 * @param fromGroupKey Source group key
+	 * @param toGroupKey Target group key
+	 * @param conversationId Conversation ID
 	 */
 	moveConversationBetweenGroups(
 		fromGroupKey: ConversationGroupKey,
 		toGroupKey: ConversationGroupKey,
 		conversationId: string,
 	) {
-		// 从源分组中移除
+		// Remove from source group
 		const sourceGroup = conversationSiderbarStore
 			.getConversationSiderbarGroup(fromGroupKey)
 			.filter((id) => id !== conversationId)
 
-		// 准备目标分组
+		// Prepare target group
 		const targetGroup = conversationSiderbarStore
 			.getConversationSiderbarGroup(toGroupKey)
 			.filter((id) => id !== conversationId)
 
-		// 一次性更新所有变化
+		// Update all changes at once
 		conversationSiderbarStore.updateConversationSiderbarGroups(fromGroupKey, sourceGroup)
 		conversationSiderbarStore.updateConversationSiderbarGroups(toGroupKey, [
 			conversationId,
@@ -431,26 +431,26 @@ class ConversationStore {
 	}
 
 	/**
-	 * 从会话列表中移除会话
-	 * @param id 会话ID
+	 * Remove a conversation from list
+	 * @param id Conversation ID
 	 */
 	removeConversationRecord(id: string) {
 		if (this.conversations[id]) {
-			// 如果要删除的是当前会话，清空当前会话
+			// If deleting the current conversation, clear current selection
 			if (this.currentConversation?.id === id) {
 				this.currentConversation = undefined
 				this.receive_inputing = false
 			}
 
-			// 从会话列表中删除
+			// Delete from conversation list
 			const { [id]: removed, ...rest } = this.conversations
 			this.conversations = rest
 		}
 	}
 
 	/**
-	 * 更新会话输入状态
-	 * @param arg1 输入状态
+	 * Update conversation typing state
+	 * @param arg1 Typing state
 	 */
 	updateConversationReceiveInputing(conversationId: string, arg1: boolean) {
 		const conversation = this.conversations[conversationId]
@@ -460,9 +460,9 @@ class ConversationStore {
 	}
 
 	/**
-	 * 增加会话红点
-	 * @param conversationId 会话ID
-	 * @param dots 红点数量
+	 * Increase conversation unread dots
+	 * @param conversationId Conversation ID
+	 * @param dots Dot count
 	 */
 	addConversationDots(conversationId: string, dots: number) {
 		const conversation = this.conversations[conversationId]
@@ -474,9 +474,9 @@ class ConversationStore {
 	}
 
 	/**
-	 * 减少会话红点
-	 * @param conversationId 会话ID
-	 * @param dots 红点数量
+	 * Decrease conversation unread dots
+	 * @param conversationId Conversation ID
+	 * @param dots Dot count
 	 */
 	reduceConversationDots(conversationId: string, dots: number) {
 		const conversation = this.conversations[conversationId]
@@ -486,8 +486,8 @@ class ConversationStore {
 	}
 
 	/**
-	 * 重置会话红点
-	 * @param conversationId 会话ID
+	 * Reset conversation unread dots
+	 * @param conversationId Conversation ID
 	 */
 	resetConversationDots(conversationId: string) {
 		const conversation = this.conversations[conversationId]
@@ -497,9 +497,9 @@ class ConversationStore {
 	}
 
 	/**
-	 * 获取会话红点
-	 * @param conversationId 会话ID
-	 * @returns 红点数量
+	 * Get conversation unread dots
+	 * @param conversationId Conversation ID
+	 * @returns Dot count
 	 */
 	getConversationDots(conversationId: string) {
 		const conversation = this.conversations[conversationId]
@@ -509,9 +509,9 @@ class ConversationStore {
 	}
 
 	/**
-	 * 获取会话所有话题未读数量
-	 * @param conversationId 会话ID
-	 * @returns 所有话题未读数量
+	 * Get total unread dots for all topics in a conversation
+	 * @param conversationId Conversation ID
+	 * @returns Total unread per topics
 	 */
 	getAllTopicUnreadDots(conversationId: string) {
 		const conversation = this.conversations[conversationId]
@@ -520,10 +520,10 @@ class ConversationStore {
 	}
 
 	/**
-	 * 获取会话话题未读数量
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @returns 未读数量
+	 * Get unread dots for a conversation topic
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @returns Unread count
 	 */
 	getTopicUnreadDots(conversationId: string, topicId: string) {
 		const conversation = this.conversations[conversationId]
@@ -533,10 +533,10 @@ class ConversationStore {
 	}
 
 	/**
-	 * 增加会话话题未读数量
-	 * @param conversationId   会话ID
-	 * @param topicId 话题ID
-	 * @param dots 未读数量
+	 * Increase unread dots for a conversation topic
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param dots Unread count
 	 */
 	addTopicUnreadDots(conversationId: string, topicId: string, dots: number) {
 		const conversation = this.conversations[conversationId]
@@ -545,10 +545,10 @@ class ConversationStore {
 	}
 
 	/**
-	 * 减少会话话题未读数量
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param dots 未读数量
+	 * Decrease unread dots for a conversation topic
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param dots Unread count
 	 */
 	reduceTopicUnreadDots(conversationId: string, topicId: string, dots: number) {
 		const conversation = this.conversations[conversationId]
@@ -557,8 +557,8 @@ class ConversationStore {
 	}
 
 	/**
-	 * 重置会话话题未读数量
-	 * @param conversationId 会话ID
+	 * Reset all topic unread dots for a conversation
+	 * @param conversationId Conversation ID
 	 */
 	resetTopicUnreadDots(conversationId: string) {
 		const conversation = this.conversations[conversationId]
@@ -568,9 +568,9 @@ class ConversationStore {
 	}
 
 	/**
-	 * 判断会话是否存在
-	 * @param id 会话ID
-	 * @returns 是否存在
+	 * Check whether a conversation exists
+	 * @param id Conversation ID
+	 * @returns Whether exists
 	 */
 	hasConversation(id: string) {
 		return this.conversations[id]

@@ -10,10 +10,10 @@ class MessageStore {
 
 	topicId: string = ""
 
-	// 消息队列
+	// Message queue
 	messages: FullMessage[] = []
 
-	messageIdMap: Map<string, string> = new Map() // 临时消息id -> 消息id
+	messageIdMap: Map<string, string> = new Map() // temp message id -> message id
 
 	hasMoreHistoryMessage: boolean = true
 
@@ -21,10 +21,10 @@ class MessageStore {
 
 	sendStatusMap: Map<string, SendStatus> = observable.map()
 
-	// 最新一条消息的seq_id
+	// seq_id of the latest message
 	lastSeqId: string = ""
 
-	// 最早一条消息的seq_id
+	// seq_id of the earliest message
 	firstSeqId: string = ""
 
 	page: number = 1
@@ -74,7 +74,7 @@ class MessageStore {
 				)
 			})
 
-			// 确保消息按时间顺序排列，老消息在前
+			// Ensure chronological order, oldest first
 			this.messages = messages.slice().reverse()
 			console.log("setMessages messages ====> ", this.messages)
 			this.lastSeqId = this.messages[messages.length - 1]?.seq_id || ""
@@ -83,17 +83,17 @@ class MessageStore {
 	}
 
 	/**
-	 * 添加发送消息
-	 * @param message 消息
-	 * @param send_status 发送状态
-	 * @param seen_status 已读状态
+	 * Add a locally-sent message
+	 * @param message Message
+	 * @param send_status Send status
+	 * @param seen_status Seen status
 	 */
 	addSendMessage(
 		message: FullMessage,
 		send_status: SendStatus = SendStatus.Pending,
 		seen_status: ConversationMessageStatus = ConversationMessageStatus.Unread,
 	) {
-		// 新消息添加到数组末尾
+		// Append new message to the end
 		this.messages.push(message)
 		console.log("addMessage ====> ", this.messages)
 		this.updateMessageSendStatus(message.message_id || message?.temp_id || "", send_status)
@@ -125,7 +125,7 @@ class MessageStore {
 			this.updateMessageSeenStatus(message?.temp_id || "", message.seen_status)
 			this.updateMessageSeenStatus(message?.message_id || "", message.seen_status)
 		} else {
-			// 新消息添加到数组末尾
+			// Append new message to the end
 			console.log("add new message ====> ", message)
 			this.messages.push(message)
 		}

@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx"
 
 class EditorStore {
-	/** 会话id */
+	/** Conversation ID */
 	conversationId: string | undefined
 	/** Topic ID */
 	topicId: string | undefined

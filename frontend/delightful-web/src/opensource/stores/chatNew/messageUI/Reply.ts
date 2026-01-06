@@ -27,9 +27,9 @@ class ReplyStore {
 	}
 
 	/**
-	 * 设置回复消息
-	 * @param messageId 消息ID
-	 * @param message 消息
+	 * Set reply message
+	 * @param messageId Message ID
+	 * @param message Message
 	 */
 	setReplyMessage(messageId: string, message: FullMessage) {
 		this.replyMessageId = messageId
@@ -38,7 +38,7 @@ class ReplyStore {
 	}
 
 	/**
-	 * 重置回复消息
+	 * Reset reply message
 	 */
 	resetReplyMessage() {
 		this.replyMessageId = undefined
@@ -46,9 +46,9 @@ class ReplyStore {
 	}
 
 	/**
-	 * 设置回复消息文件
-	 * @param fileId 文件ID
-	 * @param referText 引用文本
+	 * Set reply message file
+	 * @param fileId File ID
+	 * @param referText Referenced text
 	 */
 	setReplyFile(fileId: string, referText: string) {
 		this.replyFile = {
@@ -58,7 +58,7 @@ class ReplyStore {
 	}
 
 	/**
-	 * 重置回复消息文件
+	 * Reset reply message file
 	 */
 	resetReplyFile() {
 		this.replyFile = undefined

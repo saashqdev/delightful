@@ -238,5 +238,5 @@ class MessageCache {
 	}
 }
 
-// 单例
+// Singleton
 export default new MessageCache()

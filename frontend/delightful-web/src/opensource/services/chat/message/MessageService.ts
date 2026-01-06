@@ -89,14 +89,14 @@ class MessageService {
 	}
 
 	/**
-	 * 初始化
+	 * Initialize
 	 */
 	init() {
 		this.messagePullService.registerMessagePullLoop()
 	}
 
 	/**
-	 * 注销
+	 * Destroy
 	 */
 	destroy() {
 		this.messagePullService.unregisterMessagePullLoop()
@@ -104,19 +104,19 @@ class MessageService {
 	}
 
 	/**
-	 * 重置数据
+	 * Reset data
 	 */
 	reset() {
-		// 记录到预热缓存
+		// Persist current view to warm cache
 		this.changeConversationCache()
-		// 重置消息数据
+		// Reset message data
 		MessageStore.reset()
 	}
 
 	/**
-	 * 初始化消息
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
+	 * Initialize messages
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
 	 */
 	public async initMessages(conversationId: string, topicId: string = "") {
 		console.log("initMessages ====> ", conversationId, topicId)
@@ -124,7 +124,7 @@ class MessageService {
 			return
 		}
 
-		// 切换会话, 或者切换话题
+		// Switching conversation or topic
 		if (
 			MessageStore.conversationId &&
 			(conversationId !== MessageStore.conversationId || topicId !== MessageStore.topicId)
@@ -132,7 +132,7 @@ class MessageService {
 			this.changeConversationCache()
 		}
 
-		// 重置，避免视图混乱
+		// Reset to avoid UI inconsistency
 		MessageStore.reset()
 
 		console.log("getMessages ====> ", conversationId, topicId)
@@ -143,19 +143,19 @@ class MessageService {
 			messages: [],
 		}
 
-		// 优先读取从缓存中获取
+		// Prefer loading from cache first
 		if (MessageCacheStore.has(conversationId, topicId)) {
 			data = MessageCacheStore.getPage(conversationId, topicId, 1, MessageStore.pageSize)
 			console.log("messages cache ====> ", data)
 		}
 
-		// 没有数据，则从服务器获取
+		// If no data, fetch from server
 		if (!data.messages?.length) {
-			// 缓存中没有，尝试从数据库取
+			// Not in cache, try database
 			data = await this.getMessagesByPage(conversationId, topicId, 1, MessageStore.pageSize)
 			console.log("messages db ====> ", data)
 
-			// 数据库没有，则从服务端获取
+			// Not in DB, fall back to server
 			if (!data.messages?.length) {
 				const serverMessages = await this.messagePullService.pullMessagesFromServer({
 					conversationId,
@@ -164,7 +164,7 @@ class MessageService {
 					withoutSeqId: true,
 				})
 
-				// 如果有远程数据，处理数据
+				// If remote data exists, process it
 				if (serverMessages) {
 					const messages = serverMessages.map((item) =>
 						this.formatMessage(item, userStore.user.userInfo),
@@ -188,7 +188,7 @@ class MessageService {
 		this.checkMessageAttachmentExpired(data.messages)
 		MessageStore.setMessages(conversationId, topicId, data.messages ?? [])
 
-		// 获取未读的消息，发送已读回执
+		// Collect unread messages and send read receipts
 		const unreadMessages = MessageStore.messages.filter(
 			(message) =>
 				!message.is_self &&
@@ -199,13 +199,13 @@ class MessageService {
 			this.sendReadReceipt(unreadMessages)
 		}
 
-		// 设置渲染会话的拉取序列号
+		// Set the render sequence ID for this conversation
 		MessageSeqIdService.updateConversationRenderSeqId(
 			conversationId,
 			data.messages[0]?.seq_id ?? "",
 		)
 
-		// 拉取会话的离线消息
+		// Pull offline messages for the conversation
 		this.messagePullService.pullMessagesFromServer({
 			conversationId,
 			topicId,
@@ -215,7 +215,7 @@ class MessageService {
 	}
 
 	/**
-	 * 发送已读回执
+	 * Send read receipt
 	 */
 	sendReadReceipt(messages: FullMessage[]) {
 		console.log("sendReadReceipt ====> ", messages)
@@ -235,16 +235,16 @@ class MessageService {
 	}
 
 	/**
-	 * 当前会话置入缓存
+	 * Put current conversation into cache
 	 */
 	private changeConversationCache() {
 		if (!MessageStore.conversationId || !MessageStore.messages) {
 			return
 		}
 
-		const messages = toJS(MessageStore.messages).reverse() // 重置排序，避免缓存读取序列乱了
+		const messages = toJS(MessageStore.messages).reverse() // Reset order to avoid cache sequence issues
 
-		// 合并状态
+		// Merge in-memory status maps
 		messages.forEach((message) => {
 			const sendStatus = MessageStore.sendStatusMap.get(message.message_id)
 			if (sendStatus) {
@@ -258,7 +258,7 @@ class MessageService {
 
 		console.log("changeConversationCache messages ======> ", messages)
 
-		// 切换的消息默认最高优先级
+		// Switched conversation cache uses highest priority
 		MessageCacheStore.set(
 			MessageStore.conversationId,
 			MessageStore.topicId,
@@ -273,10 +273,10 @@ class MessageService {
 	}
 
 	/**
-	 * 格式化消息数据
-	 * @param message 原始消息数据
-	 * @param currentUserInfo 当前用户信息
-	 * @returns 格式化后的消息
+	 * Format message data
+	 * @param message Raw message data
+	 * @param currentUserInfo Current user info
+	 * @returns Formatted message
 	 */
 	public formatMessage(
 		message: ConversationMessageSend | SeqResponse<ConversationMessage>,
@@ -305,8 +305,8 @@ class MessageService {
 			send_time: message.message.send_time.toString(),
 			is_self: isSelf,
 			is_unreceived: isUnReceived,
-			name: senderInfo?.nickname ?? "", // 用户名
-			avatar: senderInfo?.avatar ?? "", // 头像
+			name: senderInfo?.nickname ?? "", // Username
+			avatar: senderInfo?.avatar ?? "", // Avatar
 			// @ts-ignore
 			message: message.message,
 			// @ts-ignore
@@ -324,18 +324,18 @@ class MessageService {
 	}
 
 	/**
-	 * 从服务端拉取更多消息
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param loadHistory 是否是加载历史消息
-	 * @returns 消息列表
+	 * Pull more messages from the server
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param loadHistory Whether loading history
+	 * @returns Message page
 	 */
 	private async pullMoreMessages(
 		conversationId: string,
 		topicId: string = "",
 		loadHistory: boolean = true,
 	): Promise<MessagePage | null> {
-		// 尝试从服务器获取下一页的
+		// Try to request the next page from server
 		const messages = await this.messagePullService.pullMessagesFromServer({
 			conversationId,
 			topicId,
@@ -355,10 +355,10 @@ class MessageService {
 	}
 
 	/**
-	 * 获取历史消息
-	 * @param conversationId
-	 * @param topicId
-	 * @returns
+	 * Get historical messages
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @returns void
 	 */
 	public async getHistoryMessages(conversationId: string, topicId: string = "") {
 		if (!MessageStore.hasMoreHistoryMessage) return
@@ -369,7 +369,7 @@ class MessageService {
 		console.log("getHistoryMessages start ====> ", conversationId, topicId)
 
 		let data: MessagePage | null = null
-		// 优先从缓存中获取
+		// Prefer cache data first
 		if (MessageCacheStore.has(conversationId, topicId)) {
 			data = MessageCacheStore.getPage(
 				conversationId,
@@ -379,9 +379,9 @@ class MessageService {
 			)
 		}
 
-		// 缓存没有数据，从其他渠道获取
+		// If cache is empty, try other sources
 		if (!data?.messages?.length) {
-			// 从数据库获取数据
+			// Read from database
 			data = await this.getMessagesByPage(
 				conversationId,
 				topicId,
@@ -395,7 +395,7 @@ class MessageService {
 			}
 		}
 
-		// 会话变化，则不添加消息，增加到缓存区
+		// If view has changed, don't render; append into cache instead
 		if (conversationId !== MessageStore.conversationId || topicId !== MessageStore.topicId) {
 			MessageCacheStore.addMessages(conversationId, topicId, {
 				page: MessageStore.page + 1,
@@ -406,7 +406,7 @@ class MessageService {
 			return
 		}
 		if (data?.messages?.length) {
-			// 获取未读的消息，发送已读回执
+			// Find unread messages and send read receipts
 			const unreadMessages = data.messages.filter((message) => message.unread_count > 0)
 			if (unreadMessages.length) {
 				this.sendReadReceipt(unreadMessages)
@@ -420,7 +420,7 @@ class MessageService {
 	}
 
 	/**
-	 * 检查消息附件是否过期
+	 * Check whether message attachments have expired
 	 */
 	checkMessageAttachmentExpired(messages: FullMessage[]) {
 		const expiredFiles = messages.reduce((prev, cur) => {
@@ -490,15 +490,15 @@ class MessageService {
 			return prev
 		}, [] as { message_id: string; file_id: string }[])
 
-		// 获取过期文件的url
+		// Fetch URLs for expired files
 		if (expiredFiles.length) {
 			ChatFileService.fetchFileUrl(expiredFiles)
 		}
 	}
 
 	/**
-	 * 添加待发送的消息
-	 * @param message 消息
+	 * Add a pending message to memory and DB
+	 * @param message Message
 	 */
 	public async addPendingMessage(message: ConversationMessageSend) {
 		// 已经存在不需重复添加
@@ -507,17 +507,17 @@ class MessageService {
 		}
 
 		this.pendingMessages.set(message.message_id, message)
-		// 增加到数据库
+		// Persist into database
 		setTimeout(() => {
 			this.messageDbService.addPendingMessage(message)
 		})
 	}
 
 	/**
-	 * 发送文本消息
-	 * @param conversationId 会话ID
-	 * @param sendData 发送数据
-	 * @param referMessageId 引用消息ID
+	 * Format and send a message
+	 * @param conversationId Conversation ID
+	 * @param sendData Payload to send
+	 * @param referMessageId Referenced message ID
 	 */
 	public async formatAndSendMessage(
 		conversationId: string,
@@ -555,19 +555,19 @@ class MessageService {
 			is_self: true,
 			is_unreceived: isAppMessageId(sendId),
 			name: userInfo?.nickname ?? "",
-			avatar: userInfo?.avatar ?? "", // 使用新方法处理头像
+			avatar: userInfo?.avatar ?? "", // Avatar URL
 			message: {
 				...message.message,
 				unread_count: 1,
 				status: ConversationMessageStatus.Unread,
 				delightful_message_id: sendId,
 			},
-			send_status: SendStatus.Pending, // 发送中
-			seen_status: ConversationMessageStatus.Unread, // 未读
+			send_status: SendStatus.Pending, // Sending
+			seen_status: ConversationMessageStatus.Unread, // Unread
 			unread_count: 1,
 		}
 
-		// 如果是当前会话，则添加到消息列表中
+		// If current conversation matches, append to in-memory list
 		const { currentConversation } = conversationStore
 
 		if (currentConversation?.id === conversationId) {
@@ -583,17 +583,17 @@ class MessageService {
 				sendId,
 			)
 		}
-		// 发送
+		// Send
 		console.log("发送消息 ========> ", message)
 		this.send(conversationId, referMessageId, message)
-		// 广播
+		// Broadcast
 		BroadcastChannelSender.addSendMessage(renderMessage, message)
-		// 添加消息到数据库中
+		// Add message into DB
 		this.addPendingMessage(message)
 	}
 
 	/**
-	 * 执行发送
+	 * Execute sending
 	 */
 	private async send(
 		conversationId: string,
@@ -636,10 +636,10 @@ class MessageService {
 				}
 			})
 			.catch((err) => {
-				// 发送失败
+				// Sending failed
 				console.log("发送失败 ======> ", message)
 				MessageStore.updateMessageSendStatus(message.message_id, SendStatus.Failed)
-				// 广播
+				// Broadcast
 				BroadcastChannelSender.updateMessageStatus(message.message_id, SendStatus.Failed)
 				this.updatePendingMessageStatus(message.message_id, SendStatus.Failed)
 				if (err?.message) AntdMessage.error(err.message)
@@ -649,20 +649,20 @@ class MessageService {
 	}
 
 	/**
-	 * 发送录音消息
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param referMessageId 引用消息ID
-	 * @param messageBase 消息基础数据
+	 * Send recording message
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param referMessageId Referenced message ID
+	 * @param messageBase Base message payload
 	 */
 	sendRecordMessage(conversationId: string, referMessageId: string, messageBase: SendData) {
 		this.formatAndSendMessage(conversationId, messageBase, referMessageId)
 	}
 
 	/**
-	 * 提取文本
-	 * @param jsonValue 富文本
-	 * @returns 文本
+	 * Extract plain text from rich JSON content
+	 * @param jsonValue Rich text JSON
+	 * @returns Concatenated text
 	 */
 	extractText(jsonValue: JSONContent) {
 		if (!jsonValue) {
@@ -698,10 +698,10 @@ class MessageService {
 	}
 
 	/**
-	 * 判断文本是否超过限制大小
-	 * @param text 文本
-	 * @param limitKB 限制大小，默认20KB
-	 * @returns 是否超过限制
+	 * Check whether text exceeds size limit
+	 * @param text Text
+	 * @param limitKB Size limit in KB (default 20KB)
+	 * @returns Whether it exceeds the limit
 	 */
 	isTextSizeOverLimit(text: string, limitKB = 20) {
 		return getStringSizeInBytes(text) > limitKB
@@ -716,7 +716,7 @@ class MessageService {
 
 		let text = ""
 
-		// 纯文本直接走流程
+		// For pure text, use it directly
 		if (onlyTextContent) {
 			text = normalValue ?? ""
 		} else {
@@ -741,20 +741,20 @@ class MessageService {
 	}
 
 	/**
-	 * 发送消息
-	 * @param conversationId 会话ID
-	 * @param data 消息数据
+	 * Send message
+	 * @param conversationId Conversation ID
+	 * @param data Message data
 	 */
 	public async sendMessage(conversationId: string, data: MessageData, referMessageId?: string) {
 		const isAi = conversationStore.currentConversation?.isAiConversation
 		const instructs = isAi ? ConversationBotDataService.genFlowInstructs() : undefined
 
-		// 发送消息
-		// TODO：识别消息类型
+		// Send message
+		// TODO: Detect message type automatically
 		const { normalValue, onlyTextContent, jsonValue, files } = data
 		if (onlyTextContent) {
 			if (!normalValue) {
-				// 如果只有文件，则只发送文件
+				// If only files present, send files only
 				if (files.length > 0) {
 					console.log("发送文件消息", files)
 					this.formatAndSendMessage(
@@ -776,7 +776,7 @@ class MessageService {
 				return
 			}
 
-			// 文生图引用图片
+			// Text-to-image referencing an image
 			if (MessageReferStore.replyFile?.fileId && MessageReferStore.replyMessageId) {
 				this.formatAndSendMessage(
 					conversationId,
@@ -792,11 +792,11 @@ class MessageService {
 				return
 			}
 
-			// 文本消息
+			// Plain text message
 			this.formatAndSendMessage(
 				conversationId,
 				{
-					type: ConversationMessageType.Text, // 确保类型正确
+					type: ConversationMessageType.Text, // Ensure correct type
 					text: {
 						content: normalValue,
 						attachments: files.map((file) => ({
@@ -808,12 +808,12 @@ class MessageService {
 				referMessageId,
 			)
 		} else {
-			// 富文本消息：图片或表情
+			// Rich text message: images or emojis
 			if (!jsonValue) {
 				throw new Error("has no jsonValue")
 			}
 
-			// 如果只有一个图片
+			// If there's only a single image
 			if (
 				jsonValue.content?.length === 1 &&
 				jsonValue.content[0].type === "paragraph" &&
@@ -841,7 +841,7 @@ class MessageService {
 					referMessageId,
 				)
 			} else {
-				// 文生图引用图片
+				// Text-to-image referencing an image
 				if (MessageReferStore.replyFile?.fileId && MessageReferStore.replyMessageId) {
 					this.formatAndSendMessage(
 						conversationId,
@@ -878,17 +878,17 @@ class MessageService {
 	}
 
 	/**
-	 * 更新待发送的消息
-	 * @param messageId 消息 ID
-	 * @param status 消息状态
-	 * @param updateDb 是否更新数据库
+	 * Update status for a pending message
+	 * @param messageId Message ID
+	 * @param status Message status
+	 * @param updateDb Whether to update the DB
 	 */
 	public async updatePendingMessageStatus(
 		messageId: string,
 		status: SendStatus,
 		updateDb: boolean = true,
 	) {
-		// 更新内存中的pendingMessages对象
+		// Update in-memory pendingMessages map
 		if (this.pendingMessages.has(messageId)) {
 			this.pendingMessages.set(messageId, {
 				...this.pendingMessages.get(messageId),
@@ -898,7 +898,7 @@ class MessageService {
 		}
 
 		if (updateDb) {
-			// 更新数据库
+			// Update database
 			setTimeout(() => {
 				this.messageDbService.updatePendingMessageStatus(messageId, status)
 			})
@@ -906,9 +906,9 @@ class MessageService {
 	}
 
 	/**
-	 * 重发消息
-	 * @param app_message_id 消息请求 ID
-	 * @returns
+	 * Resend a message
+	 * @param app_message_id App message ID
+	 * @returns Promise
 	 */
 	public resendMessage(app_message_id: string) {
 		const target = this.pendingMessages.get(app_message_id)
@@ -921,28 +921,28 @@ class MessageService {
 	}
 
 	/**
-	 * 重发所有未发送的消息
-	 * @param user_id 用户ID
+	 * Resend all pending messages
+	 * @param user_id User ID
 	 */
 	public resendAllPendingMessages(user_id?: string) {
-		// 取出当前用户的所有未发送的消息
+		// Get all unsent messages for current user
 		const messages = Object.values(this.pendingMessages).filter(
 			(message) => message.message.sender_id === user_id,
 		)
 
-		// 并行重发
+		// Resend in parallel
 		messages.forEach((message) => {
 			this.resendMessage(message.message_id)
 		})
 	}
 
 	/**
-	 * 分页获取消息
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param page 页码（从1开始）
-	 * @param pageSize 每页大小
-	 * @returns 分页消息结果
+	 * Get messages by page
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param page Page number (1-based)
+	 * @param pageSize Page size
+	 * @returns Paged result
 	 */
 	public async getMessagesByPage(
 		conversationId: string,
@@ -963,7 +963,7 @@ class MessageService {
 				userInfo = userStore.user.userInfo
 			}
 
-			// 格式化消息数据
+			// Format message data
 			const messages = await Promise.all(
 				res.messages.map((message: SeqResponse<ConversationMessage>) => {
 					return this.checkMessageIntegrity(message)
@@ -985,9 +985,9 @@ class MessageService {
 	}
 
 	/**
-	 * 检查消息完整性
-	 * @param message 消息
-	 * @returns 消息
+	 * Check message integrity
+	 * @param message Message
+	 * @returns Message
 	 */
 	private async checkMessageIntegrity(message: SeqResponse<ConversationMessage>) {
 		const appMessageId = message.message?.app_message_id
@@ -1026,7 +1026,7 @@ class MessageService {
 			case ConversationMessageType.Text:
 				if (
 					appMessageId &&
-					// 如果消息类型为文本，并且有stream_options，并且stream_options的状态不为End
+					// If type is Text with stream_options and status is not End
 					(message as SeqResponse<TextConversationMessage>).message.text
 						?.stream_options &&
 					(message as SeqResponse<TextConversationMessage>).message.text?.stream_options
@@ -1048,7 +1048,7 @@ class MessageService {
 			case ConversationMessageType.Markdown:
 				if (
 					appMessageId &&
-					// 如果消息类型为Markdown，并且有stream_options，并且stream_options的状态不为End
+					// If type is Markdown with stream_options and status is not End
 					(message as SeqResponse<MarkdownConversationMessage>).message.markdown
 						?.stream_options &&
 					(message as SeqResponse<MarkdownConversationMessage>).message.markdown
@@ -1098,28 +1098,28 @@ class MessageService {
 	}
 
 	/**
-	 * 首次加载时拉取消息
-	 * @param delightful_id 魔法ID
-	 * @param organization_code 组织代码
-	 * @returns 消息列表
+	 * Pull messages on first load
+	 * @param delightful_id Delightful ID
+	 * @param organization_code Organization code
+	 * @returns Messages
 	 */
 	public pullMessageOnFirstLoad(delightful_id: string, organization_code: string) {
 		return this.messagePullService.pullMessageOnFirstLoad(delightful_id, organization_code)
 	}
 
 	/**
-	 * 获取用户信息，优先从缓存中获取，如果没有则从 userInfoService 获取
-	 * @param userId 用户ID
-	 * @returns 用户信息
+	 * Get user info, prefer cache, otherwise from userInfoService
+	 * @param userId User ID
+	 * @returns User info
 	 */
 	private getUserInfo(userId: string): User.UserInfo | null {
-		// 1. 先从缓存中查找
+		// 1) Try cache
 		const cachedInfo = this.userInfoCache.get(userId)
 		if (cachedInfo) {
 			return cachedInfo
 		}
 
-		// 2. 从 userInfoService 获取
+		// 2) Fetch from userInfoService
 		const userInfo = userInfoStore.get(userId)
 		if (userInfo) {
 			const info: User.UserInfo = {
@@ -1138,27 +1138,27 @@ class MessageService {
 	}
 
 	/**
-	 * 添加历史消息到数据库
-	 * @param conversationId 会话ID
-	 * @param messages 消息列表
+	 * Add historical messages into DB
+	 * @param conversationId Conversation ID
+	 * @param messages Message list
 	 */
 	addHistoryMessagesToDB(conversationId: string, messages: SeqResponse<ConversationMessage>[]) {
 		this.messageDbService.addMessages(conversationId, messages)
 	}
 
 	/**
-	 * 添加接收到的消息
-	 * @param message 消息
+	 * Add a received message
+	 * @param message Message
 	 */
 	addReceivedMessage(message: SeqResponse<ConversationMessage>) {
-		// 如果当前会话id和topicId与消息的会话id和topicId相同，则添加到消息队列中
+		// If current conversation/topic matches, add into current list
 		if (
 			MessageStore.conversationId === message.conversation_id &&
 			MessageStore.topicId === message.message.topic_id
 		) {
 			const fullMessage = this.formatMessage(message, userStore.user.userInfo)
 
-			// 检查消息附件是否过期
+			// Check whether attachments expired
 			this.checkMessageAttachmentExpired([fullMessage])
 
 			MessageStore.addReceivedMessage(fullMessage)
@@ -1172,22 +1172,22 @@ class MessageService {
 			)
 		}
 
-		// 添加到数据库
+		// Append to database
 		this.messageDbService.addMessage(message.conversation_id, message)
 	}
 
 	/**
-	 * 标记消息已撤回
-	 * @param conversationId 会话ID
-	 * @param messageId 消息ID
-	 * @param topicId 话题ID
+	 * Flag message as revoked
+	 * @param conversationId Conversation ID
+	 * @param messageId Message ID
+	 * @param topicId Topic ID
 	 */
 	flagMessageRevoked(conversationId: string, topicId: string, messageId: string) {
 		if (MessageStore.conversationId === conversationId && MessageStore.topicId === topicId) {
-			// 更新内存中的消息
+			// Update in-memory store message
 			MessageStore.flagMessageRevoked(messageId)
 		}
-		// 更新缓存
+		// Update cache
 		if (MessageCacheService.hasCache(conversationId, topicId)) {
 			MessageCacheService.updateMessage(conversationId, topicId, messageId, (message) => {
 				return {
@@ -1197,7 +1197,7 @@ class MessageService {
 			})
 		}
 
-		// 如果最后一条消息是撤回的消息, 则更新内容
+		// If last message was revoked, update preview content
 		const conversation = conversationStore.getConversation(conversationId)
 		if (conversation && conversation.last_receive_message?.seq_id === messageId) {
 			ConversationService.updateLastReceiveMessage(conversationId, {
@@ -1206,11 +1206,11 @@ class MessageService {
 			})
 		}
 
-		// 获取消息，判断是否需要更新红点
+		// Fetch the message to decide unread dot updates
 		this.getMessageFromDb(conversationId, messageId).then((message) => {
 			if (message) {
 				console.log("flagMessageRevoked ====> ", message)
-				// 如果消息未读，减少未读数量
+				// If it was unread, reduce unread count
 				if (message.message.status === ConversationMessageStatus.Unread) {
 					DotsService.reduceTopicUnreadDots(
 						conversationStore.currentConversation?.user_organization_code ?? "",
@@ -1226,22 +1226,22 @@ class MessageService {
 	}
 
 	/**
-	 * 获取消息
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param messageId 消息ID
-	 * @returns 消息
+	 * Get a message
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param messageId Message ID
+	 * @returns Message or undefined
 	 */
 	getMessage(
 		conversationId: string,
 		topicId: string,
 		messageId: string,
 	): FullMessage | undefined {
-		// 当前视图有没有
+		// Check current in-memory list
 		const message = MessageStore.messages.find((m) => m.message_id === messageId)
 		if (message) return message
 
-		// 缓存有没有
+		// Check cache
 		if (MessageCacheService.hasCache(conversationId, topicId)) {
 			const cacheMessage = MessageCacheService.getMessages(conversationId, topicId)
 			if (cacheMessage) {
@@ -1254,10 +1254,10 @@ class MessageService {
 	}
 
 	/**
-	 * 获取会话消息
-	 * @param conversationId 会话ID
-	 * @param messageId 消息ID
-	 * @returns 会话消息
+	 * Get conversation message from DB
+	 * @param conversationId Conversation ID
+	 * @param messageId Message ID
+	 * @returns DB message
 	 */
 	async getMessageFromDb(
 		conversationId: string,
@@ -1276,20 +1276,20 @@ class MessageService {
 	}
 
 	/**
-	 * 删除消息
-	 * @param conversationId 会话ID
-	 * @param messageId 消息ID
+	 * Delete a message
+	 * @param conversationId Conversation ID
+	 * @param messageId Message ID
 	 */
 	removeMessage(conversationId: string, messageId: string, topicId: string) {
 		if (MessageStore.conversationId === conversationId && MessageStore.topicId === topicId) {
-			// 删除store中的消息
+			// Remove from store
 			MessageStore.removeMessage(messageId)
 		} else if (MessageCacheService.hasCache(conversationId, topicId)) {
-			// 删除缓存中的消息
+			// Remove from cache
 			MessageCacheService.removeMessageInCache(conversationId, messageId, topicId)
 		}
 
-		// 判断当前会话的最后一条消息是否是该消息
+		// If this was the last message preview, update it
 		const lastMessage = conversationStore.getConversationLastMessage(conversationId)
 		if (lastMessage && lastMessage.seq_id === messageId) {
 			const lastMessage = MessageStore.getCurrentConversationLastMessage()
@@ -1305,16 +1305,16 @@ class MessageService {
 			}
 		}
 
-		// 删除数据库中的消息
+		// Soft-delete in database
 		this.messageDbService.removeMessage(conversationId, messageId)
 	}
 
 	/**
-	 * 更新消息
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param messageId 消息ID
-	 * @param replace 替换函数
+	 * Update a message
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param messageId Message ID
+	 * @param replace Replacement or mutator
 	 */
 	updateMessage(
 		conversationId: string,
@@ -1352,8 +1352,8 @@ class MessageService {
 	}
 
 	/**
-	 * 更新消息
-	 * @param message 消息
+	 * Replace a message (store + DB)
+	 * @param message Message
 	 */
 	replaceMessage(message: SeqResponse<ConversationMessage>) {
 		const fullMessage = this.formatMessage(message, userStore.user.userInfo)
@@ -1365,16 +1365,16 @@ class MessageService {
 			fullMessage,
 		)
 
-		// 更新数据库
+		// Update database
 		this.messageDbService.replaceMessage(message.conversation_id, message)
 	}
 
 	/**
-	 * 更新消息状态
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param messageId 消息ID
-	 * @param seenMessage 已读消息
+	 * Update message read/seen status
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param messageId Message ID
+	 * @param seenMessage Seen message payload
 	 */
 	updateMessageStatus(
 		conversationId: string,
@@ -1395,17 +1395,17 @@ class MessageService {
 			})
 		}
 
-		// 更新数据库
+		// Update database
 		this.messageDbService.updateMessageStatus(conversationId, messageId, seenMessage)
 	}
 
 	/**
-	 * 更新消息未读数
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param messageId 消息ID
-	 * @param tempId 临时消息ID
-	 * @param unreadCount 未读数
+	 * Update message unread count
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param messageId Message ID
+	 * @param tempId Temp ID
+	 * @param unreadCount Unread count
 	 */
 	updateMessageUnreadCount(
 		conversationId: string,
@@ -1436,7 +1436,7 @@ class MessageService {
 			})
 		}
 
-		// 更新数据库
+		// Update database
 		this.messageDbService.updateMessageUnreadCount(conversationId, messageId, unreadCount)
 	}
 
@@ -1448,7 +1448,7 @@ class MessageService {
 	}
 
 	focusMessage(messageId: string) {
-		// 是否在当前会话
+		// If the message is in current conversation
 		if (MessageStore.messageIdMap.has(messageId)) {
 			MessageStore.resetFocusMessageId()
 			setTimeout(() => {
@@ -1458,10 +1458,10 @@ class MessageService {
 	}
 
 	/**
-	 * 更新数据库消息
-	 * @param localMessageId 消息ID
-	 * @param conversation_id 会话ID
-	 * @param changes 消息
+	 * Update DB message
+	 * @param localMessageId Message ID
+	 * @param conversation_id Conversation ID
+	 * @param changes Message changes
 	 */
 	updateDbMessage(
 		localMessageId: string,
@@ -1472,18 +1472,18 @@ class MessageService {
 	}
 
 	/**
-	 * 更新消息
-	 * @param tempId 临时消息ID
-	 * @param messsageId 消息ID
+	 * Update message ID mapping
+	 * @param tempId Temp message ID
+	 * @param messsageId Message ID
 	 */
 	updateMessageId(tempId: string, messsageId: string) {
 		MessageStore.updateMessageId(tempId, messsageId)
 	}
 
 	/**
-	 * 删除话题消息
-	 * @param conversationId 会话ID
-	 * @param deleteTopicId 话题ID
+	 * Delete all messages of a topic
+	 * @param conversationId Conversation ID
+	 * @param deleteTopicId Topic ID
 	 */
 	removeTopicMessages(conversationId: string, deleteTopicId: string) {
 		if (
@@ -1492,11 +1492,11 @@ class MessageService {
 		) {
 			MessageStore.reset()
 		} else if (MessageCacheService.hasCache(conversationId, deleteTopicId)) {
-			// 删除缓存中的消息
+			// Remove messages in cache
 			MessageCacheService.removeTopicMessages(conversationId, deleteTopicId)
 		}
 
-		// 删除数据库中的消息
+		// Remove messages in database
 		this.messageDbService.removeTopicMessages(conversationId, deleteTopicId)
 	}
 }

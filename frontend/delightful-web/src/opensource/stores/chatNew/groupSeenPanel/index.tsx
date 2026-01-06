@@ -5,51 +5,51 @@ import { makeAutoObservable } from "mobx"
 export const domClassName = "group-seen-panel"
 
 /**
- * 群组已读面板
+ * Group read receipts panel
  */
 class GroupSeenPanelStore {
 	/**
-	 * 群组已读面板 DOM 类名
+	 * Group read panel DOM class name
 	 */
 	static domClassName = "group-seen-panel"
 
 	/**
-	 * 消息 ID
+	 * Message ID
 	 */
 	messageId: string | null = null
 
 	/**
-	 * 消息接收者列表
+	 * Message recipient list
 	 */
 	messageReceiveList: MessageReceiveListResponse | null = null
 
 	/**
-	 * 边距大小
+	 * Margin size
 	 */
 	marginSize: number = 20
 
 	/**
-	 * 位置
+	 * Position
 	 */
 	position: { x: number; y: number } = { x: 0, y: 0 }
 
 	/**
-	 * 大小
+	 * Size
 	 */
 	size: { width: number; height: number } = { width: 360, height: 300 }
 
 	/**
-	 * 是否打开
+	 * Open state
 	 */
 	open: boolean = false
 
 	/**
-	 * 是否加载中
+	 * Loading state
 	 */
 	loading: boolean = false
 
 	/**
-	 * 是否悬停
+	 * Hover state
 	 */
 	isHover: boolean = false
 
@@ -58,8 +58,8 @@ class GroupSeenPanelStore {
 	}
 
 	/**
-	 * 打开面板
-	 * @param messageId 消息 ID
+	 * Open panel
+	 * @param messageId Message ID
 	 */
 	openPanel(messageId: string, position: { x: number; y: number }) {
 		this.open = true
@@ -72,7 +72,7 @@ class GroupSeenPanelStore {
 	}
 
 	/**
-	 * 获取消息接收者列表
+	 * Fetch message recipients list
 	 * @returns
 	 */
 	async fetchMessageReceiveList(messageId: string) {
@@ -87,7 +87,7 @@ class GroupSeenPanelStore {
 	}
 
 	/**
-	 * 关闭面板
+	 * Close panel
 	 */
 	closePanel(force = false) {
 		if (this.isHover && !force) return
@@ -97,8 +97,8 @@ class GroupSeenPanelStore {
 	}
 
 	/**
-	 * 设置卡片位置
-	 * @param position 卡片位置
+	 * Set card position
+	 * @param position Card position
 	 */
 	setPosition(position: { x: number; y: number }) {
 		this.position.x = position.x - this.size.width - 20
@@ -107,48 +107,48 @@ class GroupSeenPanelStore {
 	}
 
 	/**
-	 * 设置卡片大小
-	 * @param size 卡片大小
+	 * Set card size
+	 * @param size Card size
 	 */
 	setSize(size: { width: number; height: number }) {
 		this.size = size
-		// 调整位置
+		// Adjust position
 		this.adjustPosition()
 	}
 
 	/**
-	 * 设置是否悬停
-	 * @param isHover 是否悬停
+	 * Set hover state
+	 * @param isHover Hover state
 	 */
 	setIsHover(isHover: boolean) {
 		this.isHover = isHover
 	}
 
 	/**
-	 * 调整卡片位置
+	 * Adjust card position
 	 */
 	adjustPosition() {
-		// 调整位置, 防止超出屏幕
+		// Adjust position to prevent overflow
 		if (typeof window !== "undefined") {
 			const windowWidth = window.innerWidth - this.marginSize * 2
 			const windowHeight = window.innerHeight - this.marginSize * 2
 
-			// 确保卡片右边界不超出屏幕
+			// Ensure right edge stays within viewport
 			if (this.position.x + this.size.width + this.marginSize > windowWidth) {
 				this.position.x = windowWidth - this.size.width - this.marginSize
 			}
 
-			// 确保卡片不超出左边界
+			// Ensure left boundary not exceeded
 			if (this.position.x < 0) {
 				this.position.x = this.marginSize
 			}
 
-			// 确保卡片底部不超出屏幕
+			// Ensure bottom edge stays within viewport
 			if (this.position.y + this.size.height > windowHeight) {
 				this.position.y = windowHeight - this.size.height - this.marginSize
 			}
 
-			// 确保卡片不超出顶部边界
+			// Ensure top boundary not exceeded
 			if (this.position.y < 0) {
 				this.position.y = this.marginSize
 			}

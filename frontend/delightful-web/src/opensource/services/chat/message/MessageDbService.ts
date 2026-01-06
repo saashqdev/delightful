@@ -28,35 +28,35 @@ class MessageDbService {
 	messageTableSchema: string = `&seq_id, message.topic_id, [message.topic_id+message.send_time], message.send_time, message.type, [message.type+message.topic_id]`
 
 	/**
-	 * 获取消息表的默认schema
-	 * @param conversationId 会话ID
-	 * @returns 消息表schema
+	 * Get the default schema for the message table
+	 * @param conversationId Conversation ID
+	 * @returns Message table schema
 	 */
 	// getMessageTableSchema() {
 	// 	return `&seq_id, message.topic_id, [message.topic_id+message.send_time], message.send_time, message.type, [message.type+message.topic_id]`
 	// }
 
 	/**
-	 * 生成消息表名
-	 * @param conversationId 会话ID
-	 * @returns 消息表名
+	 * Generate message table name
+	 * @param conversationId Conversation ID
+	 * @returns Message table name
 	 */
 	private genMessageTableName(conversationId: string): string {
 		return `conversation_message/${conversationId}`
 	}
 
 	/**
-	 * 获取待发送消息表
-	 * @returns 待发送消息表
+	 * Get pending messages table
+	 * @returns Pending messages table
 	 */
 	private getPendingMessagesTable() {
 		return chatDb.db.pending_messages
 	}
 
 	/**
-	 * 创建消息表
-	 * @param conversationId 会话ID
-	 * @returns 消息表
+	 * Create message table
+	 * @param conversationId Conversation ID
+	 * @returns Message table
 	 */
 	async createMessageTable(conversationId: string) {
 		const tableName = this.genMessageTableName(conversationId)
@@ -64,7 +64,7 @@ class MessageDbService {
 		try {
 			return chatDb.db.table(tableName)
 		} catch (err) {
-			// 表不存在，创建表
+			// Table does not exist; create it
 			const schema = {
 				[tableName]: this.messageTableSchema,
 			}
@@ -75,8 +75,8 @@ class MessageDbService {
 	}
 
 	/**
-	 * 批量创建消息表
-	 * @param conversationIds 会话ID
+	 * Create message tables in batch
+	 * @param conversationIds Conversation IDs
 	 */
 	async createMessageTables(conversationIds: string[]) {
 		await chatDb.changeSchema(
@@ -88,9 +88,9 @@ class MessageDbService {
 	}
 
 	/**
-	 * 获取消息表
-	 * @param conversationId 会话ID
-	 * @returns 消息表
+	 * Get message table
+	 * @param conversationId Conversation ID
+	 * @returns Message table
 	 */
 	async getMessageTable(conversationId: string) {
 		const tableName = this.genMessageTableName(conversationId)
@@ -99,12 +99,12 @@ class MessageDbService {
 			const table = chatDb.db.table(tableName)
 			return table as Table<SeqResponse<ConversationMessage>>
 		} catch (err) {
-			// 尝试创建表
+			// Try creating the table
 			try {
 				const t = await this.createMessageTable(conversationId)
 				return t
 			} catch (createErr) {
-				// 如果创建失败，可能是索引问题，尝试重建索引
+				// If creation fails, it may be an index issue; consider rebuilding indexes
 				console.warn(`创建消息表失败，尝试重建索引: ${tableName}`, createErr)
 				throw new Error("创建消息表失败")
 				// await this.rebuildMessageTableIndex(conversationId)
@@ -118,9 +118,9 @@ class MessageDbService {
 	}
 
 	/**
-	 * 添加消息
-	 * @param conversationId 会话ID
-	 * @param message 消息
+	 * Add a message
+	 * @param conversationId Conversation ID
+	 * @param message Message
 	 */
 	async addMessage(conversationId: string, message: SeqResponse<CMessage>) {
 		const table = await this.getMessageTable(conversationId)
@@ -138,9 +138,9 @@ class MessageDbService {
 	}
 
 	/**
-	 * 添加多条消息
-	 * @param conversationId 会话ID
-	 * @param messages 消息列表
+	 * Add multiple messages
+	 * @param conversationId Conversation ID
+	 * @param messages Message list
 	 */
 	public async addMessages(conversationId: string, messages: SeqResponse<CMessage>[]) {
 		try {
@@ -162,19 +162,19 @@ class MessageDbService {
 			)
 			return { success: true, count: messageList.length }
 		} catch (error) {
-			// 记录错误信息
+			// Log error information
 			const errorMessage = error instanceof Error ? error.message : "Unknown error"
 			return { success: false, error: errorMessage }
 		}
 	}
 
 	/**
-	 * 获取会话消息分页
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param page 页码
-	 * @param pageSize 每页数量
-	 * @returns 消息分页
+	 * Get paginated messages for a conversation
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param page Page number
+	 * @param pageSize Page size
+	 * @returns Paginated messages
 	 */
 	async getMessagesByPage(
 		conversationId: string,
@@ -184,22 +184,22 @@ class MessageDbService {
 	) {
 		const table = await this.getMessageTable(conversationId)
 
-		// 使用复合索引优化查询性能
+		// Use compound index to optimize query performance
 		const query = table
 			.where("[message.topic_id+message.send_time]")
 			.between([topicId, Dexie.minKey], [topicId, Dexie.maxKey])
-			// 过滤本地删除的消息
+			// Filter out locally deleted messages
 			.filter((message) => !message.message.is_local_deleted)
 
-		// 获取总数
+		// Get total count
 		const total = await query.count()
 
-		// 计算偏移量
+		// Calculate offset
 		const offset = (page - 1) * pageSize
 
-		// 获取分页数据
+		// Get page data
 		const messages = await query
-			.reverse() // 按时间倒序
+			.reverse() // Reverse chronological order
 			.offset(offset)
 			.limit(pageSize)
 			.toArray()
@@ -214,10 +214,10 @@ class MessageDbService {
 	}
 
 	/**
-	 * 获取会话消息(不分页)
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @returns 消息
+	 * Get conversation messages (non-paginated)
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @returns Messages
 	 */
 	async getMessages(conversationId: string, topicId: string = "") {
 		const rows = await this.getMessageList(conversationId, topicId)
@@ -226,10 +226,10 @@ class MessageDbService {
 	}
 
 	/**
-	 * 获取会话消息列表
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @returns 消息列表
+	 * Get conversation message list
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @returns Message list
 	 */
 	private async getMessageList(
 		conversationId: string,
@@ -240,17 +240,17 @@ class MessageDbService {
 
 			try {
 				if (topicId) {
-					// 使用复合索引优化查询性能
+					// Use compound index to optimize query performance
 					return table
 						.where("[message.topic_id+message.send_time]")
 						.between([topicId, Dexie.minKey], [topicId, Dexie.maxKey])
 				}
-				// 使用复合索引优化查询性能
+				// Use compound index to optimize query performance
 				return table
 					.where("[message.topic_id+message.send_time]")
 					.between(["", Dexie.minKey], ["", Dexie.maxKey])
 			} catch (indexError) {
-				// 如果复合索引查询失败，回退到普通索引
+				// If compound index query fails, fall back to simple index
 				console.error("使用复合索引查询失败，回退到普通索引", indexError)
 
 				if (topicId) {
@@ -259,15 +259,15 @@ class MessageDbService {
 				return table.where("message.topic_id").equals("")
 			}
 		} catch (error) {
-			// // 尝试处理索引错误
+			// // Try to handle index error
 			// const handled = await this.handleIndexError(error, conversationId)
 
 			// if (handled) {
-			// 	// 如果成功处理了索引错误，重新尝试查询
+			// 	// If index error handled successfully, retry query
 			// 	return this.getMessages(conversationId, topicId)
 			// }
 
-			// 索引失败使用普通索引
+			// Use simple index when compound index fails
 			console.error("数据库访问错误，无法获取消息", error)
 			const table = await this.getMessageTable(conversationId)
 
@@ -279,9 +279,9 @@ class MessageDbService {
 	}
 
 	/**
-	 * 添加待发送消息
-	 * @param message 待发送消息
-	 * @returns 待发送消息ID
+	 * Add a pending message
+	 * @param message Pending message
+	 * @returns Pending message ID
 	 */
 	async addPendingMessage(message: ConversationMessageSend) {
 		const table = this.getPendingMessagesTable()
@@ -289,9 +289,9 @@ class MessageDbService {
 	}
 
 	/**
-	 * 获取待发送消息
-	 * @param messageId 消息ID
-	 * @returns 待发送消息
+	 * Get a pending message
+	 * @param messageId Message ID
+	 * @returns Pending message
 	 */
 	async getPendingMessage(messageId: string) {
 		const table = this.getPendingMessagesTable()
@@ -299,9 +299,9 @@ class MessageDbService {
 	}
 
 	/**
-	 * 删除待发送消息
-	 * @param messageId 消息ID
-	 * @returns 删除结果
+	 * Delete a pending message
+	 * @param messageId Message ID
+	 * @returns Deletion result
 	 */
 	async deletePendingMessage(messageId: string) {
 		const table = this.getPendingMessagesTable()
@@ -309,17 +309,17 @@ class MessageDbService {
 	}
 
 	/**
-	 * 更新待发送消息状态
-	 * @param messageId 消息ID
-	 * @param status 状态
-	 * @returns 更新结果
+	 * Update status of a pending message
+	 * @param messageId Message ID
+	 * @param status Status
+	 * @returns Update result
 	 */
 	async updatePendingMessageStatus(
 		messageId: string,
 		status: SendStatus,
 	): Promise<string | null> {
 		const table = this.getPendingMessagesTable()
-		// 先获取现有消息，然后更新状态
+		// Retrieve the existing message first, then update status
 		const existingMessage = await table.get(messageId)
 		if (existingMessage) {
 			return table.put({
@@ -332,8 +332,8 @@ class MessageDbService {
 	}
 
 	/**
-	 * 标记消息为已撤回
-	 * @param messageId 消息ID
+	 * Flag a message as revoked
+	 * @param messageId Message ID
 	 */
 	async flagMessageRevoked(conversationId: string, messageId: string) {
 		const table = await this.getMessageTable(conversationId)
@@ -348,9 +348,9 @@ class MessageDbService {
 	}
 
 	/**
-	 * 更新消息
-	 * @param conversationId 会话ID
-	 * @param message 消息
+	 * Replace a message
+	 * @param conversationId Conversation ID
+	 * @param message Message
 	 */
 	async replaceMessage(conversationId: string, message: SeqResponse<ConversationMessage>) {
 		const table = await this.getMessageTable(conversationId)
@@ -360,10 +360,10 @@ class MessageDbService {
 	}
 
 	/**
-	 * 更新消息状态
-	 * @param conversationId 会话ID
-	 * @param messageId 消息ID
-	 * @param message 消息
+	 * Update message status
+	 * @param conversationId Conversation ID
+	 * @param messageId Message ID
+	 * @param message Message
 	 */
 	updateMessageStatus(
 		conversationId: string,
@@ -391,10 +391,10 @@ class MessageDbService {
 	}
 
 	/**
-	 * 更新消息未读数
-	 * @param conversationId 会话ID
-	 * @param messageId 消息ID
-	 * @param unreadCount 未读数
+	 * Update message unread count
+	 * @param conversationId Conversation ID
+	 * @param messageId Message ID
+	 * @param unreadCount Unread count
 	 */
 	updateMessageUnreadCount(conversationId: string, messageId: string, unreadCount: number) {
 		this.getMessageTable(conversationId).then((table) => {
@@ -414,10 +414,10 @@ class MessageDbService {
 	}
 
 	/**
-	 * 更新消息
-	 * @param localMessageId 消息ID
-	 * @param conversation_id 会话ID
-	 * @param changes 消息
+	 * Update message
+	 * @param localMessageId Message ID
+	 * @param conversation_id Conversation ID
+	 * @param changes Message changes
 	 */
 	async updateMessage(
 		localMessageId: string,
@@ -433,9 +433,9 @@ class MessageDbService {
 	}
 
 	/**
-	 * 删除话题消息
-	 * @param conversationId 会话ID
-	 * @param deleteTopicId 话题ID
+	 * Delete messages of a topic
+	 * @param conversationId Conversation ID
+	 * @param deleteTopicId Topic ID to delete
 	 */
 	async removeTopicMessages(conversationId: string, deleteTopicId: string) {
 		const table = await this.getMessageTable(conversationId)

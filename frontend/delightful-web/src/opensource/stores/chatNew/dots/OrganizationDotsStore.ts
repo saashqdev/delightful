@@ -9,7 +9,7 @@ class OrganizationDotsStore {
 	}
 
 	/**
-	 * 重置
+	 * Reset dots and sequence IDs
 	 */
 	reset(data: Record<string, number>, seqId: Record<string, string>) {
 		this.dots = data
@@ -17,9 +17,9 @@ class OrganizationDotsStore {
 	}
 
 	/**
-	 * 设置组织红点
-	 * @param organizationCode 组织编码
-	 * @param dots 红点数量
+	 * Set organization unread dots
+	 * @param organizationCode Organization code
+	 * @param dots Dot count
 	 */
 	setOrganizationDots(organizationCode: string, dots: number) {
 		console.log("setOrganizationDots ====> ", organizationCode, dots)
@@ -27,57 +27,57 @@ class OrganizationDotsStore {
 	}
 
 	/**
-	 * 获取组织红点
-	 * @param organizationCode 组织编码
-	 * @returns 红点数量
+	 * Get organization unread dots
+	 * @param organizationCode Organization code
+	 * @returns Dot count
 	 */
 	getOrganizationDots(organizationCode: string) {
 		return this.dots[organizationCode] || 0
 	}
 
 	/**
-	 * 清除组织红点
-	 * @param organizationCode 组织编码
+	 * Clear organization unread dots
+	 * @param organizationCode Organization code
 	 */
 	clearOrganizationDots(organizationCode: string) {
 		delete this.dots[organizationCode]
 	}
 
 	/**
-	 * 清除所有组织红点
+	 * Clear all organization unread dots
 	 */
 	clearAllOrganizationDots() {
 		this.dots = {}
 	}
 
 	/**
-	 * 设置组织红点seqid
-	 * @param organizationCode 组织编码
-	 * @param seqId seqid
+	 * Set organization dot seq_id
+	 * @param organizationCode Organization code
+	 * @param seqId Sequence ID
 	 */
 	setOrganizationDotSeqId(organizationCode: string, seqId: string) {
 		this.dotSeqId[organizationCode] = seqId
 	}
 
 	/**
-	 * 获取组织红点seqid
-	 * @param organizationCode 组织编码
-	 * @returns seqid
+	 * Get organization dot seq_id
+	 * @param organizationCode Organization code
+	 * @returns Sequence ID
 	 */
 	getOrganizationDotSeqId(organizationCode: string) {
 		return this.dotSeqId[organizationCode] || ""
 	}
 
 	/**
-	 * 清除组织红点seqid
-	 * @param organizationCode 组织编码
+	 * Clear organization dot seq_id
+	 * @param organizationCode Organization code
 	 */
 	clearOrganizationDotSeqId(organizationCode: string) {
 		delete this.dotSeqId[organizationCode]
 	}
 
 	/**
-	 * 清除所有组织红点seqid
+	 * Clear all organization dot seq_ids
 	 */
 	clearAllOrganizationDotSeqId() {
 		this.dotSeqId = {}

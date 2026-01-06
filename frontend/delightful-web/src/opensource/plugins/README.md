@@ -1,7 +1,7 @@
 # Plugins
 
-> 第三方npm包集合，用于对第三方包统一封装、扩展、按需加载。
+> Collection of third-party npm packages for unified encapsulation, extension, and on-demand loading of third-party packages.
 
-* 场景一：`dayjs` 对插件的统一使用。
-* 场景二： `dingtalk-jsapi` 的按需加载，结合拆包构建，只有在使用插件时才加载。
+* Scenario 1: Unified use of `dayjs` plugins.
+* Scenario 2: On-demand loading of `dingtalk-jsapi` with code splitting; only loads when plugin is used.
 

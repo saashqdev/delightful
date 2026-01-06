@@ -8,21 +8,21 @@ const requestAnimationFrame =
 const cancelAnimationFrame = window.cancelAnimationFrame || ((id) => clearTimeout(id))
 
 /**
- * @description electron 中全局拖拽事件
+ * @description Global drag event in electron
  */
 const useDrag = () => {
 	const onMouseDown = useMemoizedFn((event: MouseEvent<HTMLDivElement>) => {
-		// 右击不移动，只有左击的时候触发
+		// Right-click doesn't move, only left-click triggers
 		if (event.button === 2) return
 
 		let draggable = true
 		let animationId: number = 0
 
-		// 记录位置
+		// Record mouse position
 		const mouseX: number = event.clientX
 		const mouseY: number = event.clientY
 
-		// 定义窗口移动
+		// Define window movement
 		const moveWindow = () => {
 			delightful?.view?.setViewPosition({
 				x: mouseX,
@@ -34,17 +34,17 @@ const useDrag = () => {
 		}
 
 		const onMouseUp = () => {
-			// 释放锁
+			// Release lock
 			draggable = false
-			// 移除 mouseup 事件
+			// Remove mouseup event
 			document.removeEventListener("mouseup", onMouseUp)
-			// 清除定时器
+			// Clear timer
 			cancelAnimationFrame(animationId)
 		}
 
-		// 注册 mouseup 事件
+		// Register mouseup event
 		document.addEventListener("mouseup", onMouseUp)
-		// 启动通信
+		// Start communication
 		animationId = requestAnimationFrame(moveWindow)
 	})
 

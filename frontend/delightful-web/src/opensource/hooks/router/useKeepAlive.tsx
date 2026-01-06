@@ -72,7 +72,7 @@ export const useKeepAlive = () => {
 					key={path}
 					style={{
 						display: match ? "block" : "none",
-						// 确保隐藏的元素不会被浏览器优化掉
+						// Ensure hidden elements won't be optimized away by the browser
 						position: match ? "relative" : "absolute",
 						width: match ? "auto" : 0,
 						height: match ? "auto" : 0,

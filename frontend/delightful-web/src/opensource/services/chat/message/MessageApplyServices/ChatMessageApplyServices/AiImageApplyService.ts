@@ -13,9 +13,9 @@ class AiImageApplyService {
 	tempMessageMap: Record<string, SeqResponse<AIImagesMessage | HDImageMessage>> = {}
 
 	/**
-	 * 应用AI图像消息
-	 * @param message AI图像消息对象
-	 * @param options 应用选项
+	 * Apply AI image messages.
+	 * @param message AI image message object.
+	 * @param options Apply options.
 	 */
 	apply(message: SeqResponse<AIImagesMessage>, options: ApplyMessageOptions) {
 		const { isHistoryMessage } = options
@@ -31,41 +31,41 @@ class AiImageApplyService {
 
 		const localMessage = localMessageSeq?.message as AIImagesMessage | undefined
 
-		// 根据消息类型处理
+		// Handle by message type
 		switch (ai_image_card?.type) {
 			case AIImagesDataType.StartGenerate:
 				if (isHistoryMessage) return
-				// 如果是开始生成的消息，且本地没有记录，则添加消息
+				// For start-generate messages with no local record, add the message
 				if (!this.aiImageMessageIdMap[app_message_id] && !isHistoryMessage) {
-					// 添加消息到数据库和内存
+					// Add the message to DB and memory
 					MessageService.addReceivedMessage(message)
-					// 更新消息 ID 映射
+					// Update message ID mapping
 					this.aiImageMessageIdMap[app_message_id] = message_id
 					this.tempMessageMap[app_message_id] = message
 				}
 				break
 
 			case AIImagesDataType.ReferImage:
-				// 引用图片消息直接添加
+				// Referenced image messages are added directly
 				MessageService.addReceivedMessage(message)
 				break
 
 			case AIImagesDataType.Error:
 				if (isHistoryMessage) return
-				// 错误消息处理
+				// Error message handling
 				if (!localMessage?.ai_image_card) {
-					// 如果本地没有消息，直接添加
+					// No local message; add directly
 					MessageService.addReceivedMessage(message)
 				} else if (localMessageSeq) {
-					// 如果本地有消息，则更新消息
+					// Local message exists; update it
 					this.updateOldAiImageMessage(message)
 				}
 				break
 
 			case AIImagesDataType.GenerateComplete:
-				// 生成完成消息处理
+				// Generation complete handling
 				if (!localMessage?.ai_image_card || !localMessageSeq) {
-					// 如果本地没有消息，可能是历史消息应用，直接添加
+					// No local message, likely a history application; add directly
 					if (isHistoryMessage) MessageService.addReceivedMessage(message)
 				} else {
 					this.updateOldAiImageMessage(message)
@@ -81,18 +81,18 @@ class AiImageApplyService {
 			ConversationStore.currentConversation?.id === message.conversation_id &&
 			ConversationStore.currentConversation?.current_topic_id === message.message.topic_id
 		) {
-			// 如果是 AI 会话，此时消息列表的数量为 2，调用智能重命名
+			// If AI conversation and message list length is 2, trigger smart rename
 			if (MessageStore.messages.length === 2 && !isHistoryMessage) {
-				// 调用智能重命名
+				// Call smart renaming
 				chatTopicService.getAndSetDelightfulTopicName(message.message.topic_id ?? "")
 			}
 		}
 	}
 
 	/**
-	 * 应用AI图像消息
-	 * @param message AI图像消息对象
-	 * @param options 应用选项
+	 * Apply HD image messages.
+	 * @param message HD image message object.
+	 * @param options Apply options.
 	 */
 	applyHDImageMessage(message: SeqResponse<HDImageMessage>, options: ApplyMessageOptions) {
 		const { isHistoryMessage } = options
@@ -108,35 +108,35 @@ class AiImageApplyService {
 
 		const localMessage = localMessageSeq?.message as HDImageMessage | undefined
 
-		// 根据消息类型处理
+		// Handle by message type
 		switch (image_convert_high_card?.type) {
 			case HDImageDataType.StartGenerate:
 				if (isHistoryMessage) return
-				// 如果是开始生成的消息，且本地没有记录，则添加消息
+				// For start-generate messages with no local record, add the message
 				if (!this.aiImageMessageIdMap[app_message_id] && !isHistoryMessage) {
-					// 添加消息到数据库和内存
+					// Add the message to DB and memory
 					MessageService.addReceivedMessage(message)
-					// 更新消息 ID 映射
+					// Update message ID mapping
 					this.aiImageMessageIdMap[app_message_id] = message_id
 					this.tempMessageMap[app_message_id] = message
 				}
 				break
 			case HDImageDataType.Error:
 				if (isHistoryMessage) return
-				// 错误消息处理
+				// Error message handling
 				if (!localMessage?.image_convert_high_card) {
-					// 如果本地没有消息，直接添加
+					// No local message; add directly
 					MessageService.addReceivedMessage(message)
 				} else if (localMessageSeq) {
-					// 如果本地有消息，则更新消息
+					// Local message exists; update it
 					this.updateOldAiImageMessage(message)
 				}
 				break
 
 			case HDImageDataType.GenerateComplete:
-				// 生成完成消息处理
+				// Generation complete handling
 				if (!localMessage?.image_convert_high_card || !localMessageSeq) {
-					// 如果本地没有消息，可能是历史消息应用，直接添加
+					// No local message, likely a history application; add directly
 					if (isHistoryMessage) MessageService.addReceivedMessage(message)
 				} else {
 					this.updateOldAiImageMessage(message)
@@ -149,8 +149,8 @@ class AiImageApplyService {
 	}
 
 	/**
-	 * 更新旧的AI图像消息
-	 * @param message 新消息
+	 * Update an existing AI image message with a newer one.
+	 * @param message The new message.
 	 */
 	updateOldAiImageMessage(message: SeqResponse<AIImagesMessage | HDImageMessage>) {
 		const {

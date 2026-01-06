@@ -4,11 +4,11 @@ import {
 } from "@/types/chat/conversation_message"
 
 /**
- * 向对象特定路径追加值
- * @param object 目标对象
- * @param keyPath 键路径数组
- * @param appendValue 要追加的值
- * @returns 更新后的对象
+ * Append a value at a specific path in an object
+ * @param object Target object
+ * @param keyPath Key path array
+ * @param appendValue Value to append
+ * @returns Updated object
  */
 export function appendObject(
 	object: Record<string, any> | null | undefined,
@@ -21,36 +21,36 @@ export function appendObject(
 
 	let current = object
 
-	// 遍历路径直到倒数第二个键
+	// Traverse the path up to the penultimate key
 	for (let i = 0; i < keyPath.length - 1; i++) {
 		const key = keyPath[i]
-		// 如果当前键不存在或为null，则初始化为对象或数组
+		// If current key is missing/null, initialize as object or array
 		if (current[key] === undefined || current[key] === null) {
-			// 检查下一个键是否为数字，如果是则创建数组，否则创建对象
+			// If the next key is numeric, create array; otherwise create object
 			const nextKey = keyPath[i + 1]
 			current[key] = !isNaN(Number(nextKey)) ? [] : {}
 		}
 		current = current[key]
 	}
 
-	// 获取最后一个键
+	// Get the final key
 	const finalKey = keyPath[keyPath.length - 1]
 
-	// 处理最后一个键的值
+	// Handle final key value
 	if (current[finalKey] === undefined || current[finalKey] === null) {
 		current[finalKey] = appendValue
 	} else if (Array.isArray(current[finalKey]) && Array.isArray(appendValue)) {
-		// 如果是数组，则添加到数组中
+		// If both arrays, push elements
 		current[finalKey].push(...appendValue)
 	} else if (
 		typeof appendValue !== "string" &&
 		appendValue !== null &&
 		appendValue !== undefined
 	) {
-		// 如果 appendValue 不是字符串且非空，则直接赋值
+		// For non-string non-empty values, assign directly
 		current[finalKey] = appendValue
 	} else {
-		// 字符串或其他情况执行拼接
+		// Otherwise, concatenate (strings)
 		current[finalKey] = current[finalKey] + appendValue
 	}
 
@@ -58,10 +58,10 @@ export function appendObject(
 }
 
 /**
- * 升级 AI 搜索卡片新版本的状态
- * @param currentStatus 当前状态
- * @param targetStatus 目标状态
- * @returns 升级后的状态
+ * Upgrade status for Aggregate AI Search Card V2
+ * @param currentStatus Current status
+ * @param targetStatus Target status
+ * @returns Upgraded status
  */
 function upgradeAggregateAISearchCardV2Status(
 	currentStatus: AggregateAISearchCardV2Status | undefined,
@@ -79,9 +79,9 @@ function upgradeAggregateAISearchCardV2Status(
 }
 
 /**
- * 更新 AI 搜索卡片新版本的状态
- * @param object 目标对象
- * @param keyPath 键路径
+ * Update status for Aggregate AI Search Card V2
+ * @param object Target object
+ * @param keyPath Key path
  */
 export function updateAggregateAISearchCardV2Status(
 	object: AggregateAISearchCardContentV2 | undefined,
@@ -94,14 +94,14 @@ export function updateAggregateAISearchCardV2Status(
 
 	if (keyPath.startsWith("stream_options.steps_finished")) {
 		switch (true) {
-			// 收到根问题的搜索结果，标记为开始阅读
+			// Root question search results received → mark as reading
 			case keyPath.endsWith("associate_questions.question_0") && value?.finished_reason === 0:
 				object.status = upgradeAggregateAISearchCardV2Status(
 					object.status,
 					AggregateAISearchCardV2Status.isReading,
 				)
 				break
-			// 收到子问题的搜索结果，标记为继续搜索
+			// Child question results received → mark as searching
 			case keyPath.startsWith(
 				"stream_options.steps_finished.associate_questions.question_",
 			) && value?.finished_reason === 0:
@@ -110,14 +110,14 @@ export function updateAggregateAISearchCardV2Status(
 					AggregateAISearchCardV2Status.isSearching,
 				)
 				break
-			// 收到思考结果，标记为总结
+			// Reasoning content received → mark as summarizing
 			case keyPath.endsWith("summary.reasoning_content") && value?.finished_reason === 0:
 				object.status = upgradeAggregateAISearchCardV2Status(
 					object.status,
 					AggregateAISearchCardV2Status.isSummarizing,
 				)
 				break
-			// 收到总结结果，标记为结束
+			// Summary content received → mark as end
 			case keyPath.endsWith("summary.content") && value?.finished_reason === 0:
 				object.status = upgradeAggregateAISearchCardV2Status(
 					object.status,
@@ -128,7 +128,7 @@ export function updateAggregateAISearchCardV2Status(
 				break
 		}
 	}
-	// 收到思考内容，标记为正在思考
+	// Reasoning content streaming → mark as reasoning
 	else if (
 		keyPath.startsWith("summary.reasoning_content") &&
 		(!object.status || object.status < AggregateAISearchCardV2Status.isReasoning)
@@ -138,7 +138,7 @@ export function updateAggregateAISearchCardV2Status(
 			AggregateAISearchCardV2Status.isReasoning,
 		)
 	}
-	// 收到总结内容，标记为正在总结
+	// Summary content streaming → mark as summarizing
 	else if (
 		keyPath.startsWith("summary.content") &&
 		(!object.status || object.status < AggregateAISearchCardV2Status.isSummarizing)

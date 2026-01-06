@@ -3,14 +3,14 @@ import { appendObject } from "../utils"
 
 describe("StreamMessageApplyServiceV2 utils", () => {
 	describe("appendObject", () => {
-		// 基本场景 - 向普通对象追加值
+		// Basic case - append value to a regular object
 		it("should append value to an existing property", () => {
 			const obj = { a: { b: { c: "hello" } } }
 			const result = appendObject(obj, ["a", "b", "c"], " world")
 			expect(result).toEqual({ a: { b: { c: "hello world" } } })
 		})
 
-		// 空值场景 - 当对象中某个键不存在时
+		// Empty case - when a key in the path does not exist
 		it("should create missing properties in the path", () => {
 			const obj = { a: {} }
 			const result = appendObject(obj, ["a", "b", "c"], "value")
@@ -23,7 +23,7 @@ describe("StreamMessageApplyServiceV2 utils", () => {
 			expect(result).toEqual({ a: { b: { c: "value" } } })
 		})
 
-		// 数组场景 - 处理数组索引
+		// Array case - handle array indices
 		it("should create array if next key is numeric", () => {
 			const obj = {}
 			const result = appendObject(obj, ["data", "0", "name"], "John")
@@ -42,7 +42,7 @@ describe("StreamMessageApplyServiceV2 utils", () => {
 			expect(result).toEqual({ users: ["Alice", "Bob"] })
 		})
 
-		// 边界情况
+		// Edge cases
 		it("should return original object if keyPath is empty", () => {
 			const obj = { a: 1 }
 			const result = appendObject(obj, [], "value")
@@ -60,38 +60,38 @@ describe("StreamMessageApplyServiceV2 utils", () => {
 			expect(appendObject(obj, undefined as any, "value")).toBe(obj)
 		})
 
-		// 非字符串类型直接赋值场景
+		// Non-string appendValue: assign directly instead of concatenating
 		it("should directly assign non-string appendValue instead of concatenating", () => {
-			// 数字类型
+			// Number type
 			const objNumber = { value: 10 }
 			const resultNumber = appendObject(objNumber, ["value"], 20)
 			expect(resultNumber).toEqual({ value: 20 })
 
-			// 对象类型
+			// Object type
 			const objObject = { config: { version: "1.0" } }
 			const newConfig = { version: "2.0", features: ["a", "b"] }
 			const resultObject = appendObject(objObject, ["config"], newConfig)
 			expect(resultObject).toEqual({ config: newConfig })
 
-			// 布尔类型
+			// Boolean type
 			const objBoolean = { isActive: false }
 			const resultBoolean = appendObject(objBoolean, ["isActive"], true)
 			expect(resultBoolean).toEqual({ isActive: true })
 		})
 
-		// 复杂场景 - 多层嵌套和混合类型
+		// Complex case - deep nesting and mixed types
 		it("should handle complex nested objects with arrays", () => {
 			const obj = {
 				users: [{ name: "Alice", scores: [10] }],
 			}
 
-			// 第一个操作 - 向数组添加值
+			// First operation - push value into array
 			const result1 = appendObject(obj, ["users", "0", "scores"], 20)
 			expect(result1).toEqual({
 				users: [{ name: "Alice", scores: [10, 20] }],
 			})
 
-			// 嵌套更深的路径 - 使用原始对象（不使用上次操作的结果）
+			// Deeper nested path - use the original object (not previous result)
 			const originalObj = {
 				users: [{ name: "Alice", scores: [10] }],
 			}

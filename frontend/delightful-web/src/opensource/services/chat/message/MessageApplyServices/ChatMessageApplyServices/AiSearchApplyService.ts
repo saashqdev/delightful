@@ -19,14 +19,14 @@ interface RelationInfo {
 
 class AiSearchApplyService {
 	/**
-	 * 存储聚合AI搜索卡片消息ID与实际消息ID的映射关系
-	 * key为app_message_id，value为包含message_id、conversation_id和topic_id的对象
+	 * Map of aggregate AI search card app message ID to actual message info.
+	 * key: app_message_id, value: object containing message_id, conversation_id, topic_id.
 	 */
 	aggregateAISearchCardMessageIdMap: Record<string, RelationInfo> = {}
 
 	/**
-	 * 临时存储聚合AI搜索卡片消息
-	 * key为app_message_id，value为消息对象
+	 * Temporary storage for aggregate AI search card messages.
+	 * key: app_message_id, value: message object.
 	 */
 	tempMessageMapContent: Record<
 		string,
@@ -34,8 +34,8 @@ class AiSearchApplyService {
 	> = {}
 
 	/**
-	 * 存储流式传输的seq_id
-	 * key为app_message_id，value为seq_id
+	 * Map LLM streaming seq_id to app_message_id for lookup during streaming.
+	 * key: seq_id, value: app_message_id.
 	 */
 	llmResponseSeqIdMap: Record<string, string> = {}
 
@@ -46,28 +46,28 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 获取 LLM响应的seq_id 对应的 应用消息ID
-	 * @param llmResponseSeqId 流式传输的seq_id
-	 * @returns 应用消息ID
+	 * Get the app message ID for a given LLM streaming seq_id.
+	 * @param llmResponseSeqId Streaming seq_id from LLM responses.
+	 * @returns The corresponding app message ID.
 	 */
 	getAppMessageIdByLLMResponseSeqId(llmResponseSeqId: string) {
 		return this.llmResponseSeqIdMap[llmResponseSeqId]
 	}
 
 	/**
-	 * 设置 LLM响应的seq_id 对应的 应用消息ID
-	 * @param llmResponseSeqId 流式传输的seq_id
-	 * @param appMessageId 应用消息ID
+	 * Record the mapping from streaming seq_id to app message ID.
+	 * @param llmResponseSeqId Streaming seq_id from LLM responses.
+	 * @param appMessageId The app message ID to associate.
 	 */
 	setLLMResponseSeqId(llmResponseSeqId: string, appMessageId: string) {
 		this.llmResponseSeqIdMap[llmResponseSeqId] = appMessageId
 	}
 
 	/**
-	 * 记录临时消息
-	 * @param appMessageId 应用消息ID
-	 * @param message 原始消息
-	 * @returns 转换后的消息
+	 * Record a temporary message.
+	 * @param appMessageId App message ID.
+	 * @param message Original message.
+	 * @returns Converted message stored in the temporary map.
 	 */
 	recordTempMessage(
 		appMessageId: string,
@@ -79,18 +79,18 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 获取临时消息
-	 * @param appMessageId 应用消息ID
-	 * @returns 临时消息或undefined
+	 * Get a temporary message by app message ID.
+	 * @param appMessageId App message ID.
+	 * @returns The temporary message or undefined if not found.
 	 */
 	getTempMessageContent(appMessageId: string) {
 		return this.tempMessageMapContent[appMessageId]
 	}
 
 	/**
-	 * 应用聚合AI搜索卡片消息
-	 * 根据消息类型更新本地缓存的消息内容
-	 * @param message 接收到的消息
+	 * Apply an Aggregate AI Search Card message.
+	 * Update local cached message content based on the message type.
+	 * @param message The received message.
 	 */
 	apply(message: SeqResponse<AggregateAISearchCardConversationMessage<true>>) {
 		switch (message.message.aggregate_ai_search_card?.type) {
@@ -127,13 +127,13 @@ class AiSearchApplyService {
 
 		if (!this.getTempMessageContent(message.message.app_message_id)) {
 			MessageService.addReceivedMessage(this.generateMessage(message))
-			// 记录应用消息ID与实际消息ID的关系
+			// Record mapping between app message ID and actual message identifiers
 			StreamMessageApplyServiceV2.recordMessageInfo(message)
 		} else {
 			const messageInfo = StreamMessageApplyServiceV2.queryMessageInfo(
 				message.message.app_message_id,
 			)
-			// 更新消息
+			// Update the existing message
 			MessageService.updateMessage(
 				messageInfo.conversationId,
 				messageInfo.topicId,
@@ -153,9 +153,9 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 追加推理内容
-	 * @param appMessageId 应用消息ID
-	 * @param reasoningContent 推理内容
+	 * Append reasoning content during streaming.
+	 * @param appMessageId App message ID.
+	 * @param reasoningContent Reasoning text to append.
 	 */
 	appendReasoningContent(seqId: string, reasoningContent: string) {
 		const appMessageId = this.getAppMessageIdByLLMResponseSeqId(seqId)
@@ -167,7 +167,7 @@ class AiSearchApplyService {
 		const messageInfo = StreamMessageApplyServiceV2.queryMessageInfo(appMessageId)
 		if (!messageInfo) return
 
-		// 更新视图数据
+		// Update view data
 		MessageService.updateMessage(
 			messageInfo.conversationId,
 			messageInfo.topicId,
@@ -184,22 +184,22 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 追加内容
-	 * @param seqId 流式传输的seq_id
-	 * @param content 内容
+	 * Append LLM response content during streaming.
+	 * @param seqId Streaming seq_id.
+	 * @param content Text content chunk to append.
 	 */
 	appendContent(seqId: string, content: string) {
 		const appMessageId = this.getAppMessageIdByLLMResponseSeqId(seqId)
 		const localMessage = this.getTempMessageContent(appMessageId)
 		if (!localMessage) return
-		// 更新缓存
+		// Update local cache
 		localMessage.aggregate_ai_search_card!.llm_response =
 			(localMessage.aggregate_ai_search_card!.llm_response ?? "") + content
 
 		const messageInfo = StreamMessageApplyServiceV2.queryMessageInfo(appMessageId)
 		if (!messageInfo) return
 
-		// 更新视图数据
+		// Update view data
 		MessageService.updateMessage(
 			messageInfo.conversationId,
 			messageInfo.topicId,
@@ -216,9 +216,9 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 生成新消息
-	 * @param message 原始消息
-	 * @returns 转换后的消息
+	 * Generate a new message object, replacing content with the temporary cache if present.
+	 * @param message Original message.
+	 * @returns Converted message.
 	 */
 	generateMessage(
 		message: SeqResponse<AggregateAISearchCardConversationMessage<true>>,
@@ -242,10 +242,10 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 创建聚合 AI 搜索卡片消息
-	 * 将原始消息转换为可以在本地存储和展示的格式
-	 * @param message 原始消息
-	 * @returns 转换后的可本地使用的消息
+	 * Create an Aggregate AI Search Card message.
+	 * Convert the original message into a local-display/storage friendly structure.
+	 * @param message Original message.
+	 * @returns Converted message ready for local usage.
 	 */
 	createAggregateAISearchCardMessage(
 		message: SeqResponse<AggregateAISearchCardConversationMessage<true>>,
@@ -272,9 +272,9 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 更新搜索深度
-	 * 处理类型为SearchDeepLevel的消息，更新搜索深度相关信息
-	 * @param receiveMessage 接收到的消息
+	 * Update search depth.
+	 * Handle messages of type SearchDeepLevel to update depth-related info.
+	 * @param receiveMessage The received message.
 	 */
 	updateSearchDeepLevel(
 		receiveMessage: SeqResponse<AggregateAISearchCardConversationMessage<true>>,
@@ -287,9 +287,9 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 更新关联问题
-	 * 处理类型为AssociateQuestion的消息，更新关联问题列表
-	 * @param message 接收到的消息
+	 * Update associate questions.
+	 * Handle messages of type AssociateQuestion to update the list.
+	 * @param message The received message.
 	 */
 	updateAssociateQuestion(message: SeqResponse<AggregateAISearchCardConversationMessage<true>>) {
 		const { aggregate_ai_search_card: { associate_questions = {} } = {}, app_message_id } =
@@ -322,9 +322,9 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 更新思维导图
-	 * 处理类型为MindMap的消息，更新思维导图数据
-	 * @param message 接收到的消息
+	 * Update mind map.
+	 * Handle messages of type MindMap to update mind map data.
+	 * @param message The received message.
 	 */
 	updateMindMap(message: SeqResponse<AggregateAISearchCardConversationMessage<true>>) {
 		const { aggregate_ai_search_card, app_message_id } = message.message
@@ -335,9 +335,9 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 更新搜索结果
-	 * 处理类型为Search的消息，更新搜索结果及相关元数据
-	 * @param message 接收到的消息
+	 * Update search results.
+	 * Handle messages of type Search to update results and metadata.
+	 * @param message The received message.
 	 */
 	updateSearch(message: SeqResponse<AggregateAISearchCardConversationMessage<true>>) {
 		const { aggregate_ai_search_card, app_message_id } = message.message
@@ -355,7 +355,7 @@ class AiSearchApplyService {
 				aggregate_ai_search_card.search
 		}
 
-		// parentId 为 "0" 时，表示是根问题,不存储
+		// When parentId is "0", it's the root question; do not store as associate.
 		if (parentId !== "0") {
 			if (!localMessage.aggregate_ai_search_card!.associate_questions?.[parentId]) {
 				localMessage.aggregate_ai_search_card!.associate_questions[parentId] = {
@@ -368,25 +368,24 @@ class AiSearchApplyService {
 			localMessage.aggregate_ai_search_card!.associate_questions[parentId].search_keywords =
 				aggregate_ai_search_card.search_keywords ?? []
 
-			// 更新总字数
+			// Update total word count
 			localMessage.aggregate_ai_search_card!.associate_questions[parentId].total_words =
 				aggregate_ai_search_card.total_words ?? 0
 
-			// 更新检索到的页面总数
+			// Update matched page count
 			localMessage.aggregate_ai_search_card!.associate_questions[parentId].match_count =
 				aggregate_ai_search_card.match_count ?? 0
 
-			// 更新阅读的页面总数
+			// Update read page count
 			localMessage.aggregate_ai_search_card!.associate_questions[parentId].page_count =
 				aggregate_ai_search_card.page_count ?? 0
 		}
 	}
 
 	/**
-	 * 更新LLM响应
-	 * 处理类型为LLMResponse的消息，更新AI回答内容
-	 * 对于根问题和关联问题分别进行处理
-	 * @param message 接收到的消息
+	 * Update LLM response.
+	 * Handle messages of type LLMResponse; update AI answer for root and associate questions.
+	 * @param message The received message.
 	 */
 	updateLLMResponse(message: SeqResponse<AggregateAISearchCardConversationMessage<true>>) {
 		const { aggregate_ai_search_card, app_message_id } = message.message
@@ -398,7 +397,7 @@ class AiSearchApplyService {
 
 		if (parentId !== "0") {
 			/**
-			 * 通过关键问题 ID 找到关联问题，并更新关联问题的回答
+			 * Find the associate question by key question ID and update its answer.
 			 */
 			const associateQuestion =
 				localMessage.aggregate_ai_search_card!.associate_questions?.[parentId]
@@ -409,7 +408,7 @@ class AiSearchApplyService {
 			}
 		} else {
 			/**
-			 * 更新根问题的回答
+			 * Update the root question's answer.
 			 */
 			localMessage.aggregate_ai_search_card!.llm_response =
 				aggregate_ai_search_card.llm_response ?? undefined
@@ -421,9 +420,9 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 更新事件
-	 * 处理类型为Event的消息，更新事件列表
-	 * @param message 接收到的消息
+	 * Update events.
+	 * Handle messages of type Event to update the event list.
+	 * @param message The received message.
 	 */
 	updateEvent(message: SeqResponse<AggregateAISearchCardConversationMessage<true>>) {
 		const { aggregate_ai_search_card, app_message_id } = message.message
@@ -433,9 +432,9 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 更新Ping-Pong状态
-	 * 处理类型为PingPong的消息，将消息标记为完成状态
-	 * @param message 接收到的消息
+	 * Update Ping-Pong status.
+	 * Handle messages of type PingPong; mark the message as finished.
+	 * @param message The received message.
 	 */
 	updatePingPong(message: SeqResponse<AggregateAISearchCardConversationMessage<true>>) {
 		const {
@@ -451,9 +450,9 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 更新终止状态
-	 * 处理类型为Terminate的消息，标记错误状态并移除消息
-	 * @param message 接收到的消息
+	 * Update termination state.
+	 * Handle messages of type Terminate; mark error state and remove the message.
+	 * @param message The received message.
 	 */
 	updateTerminate(message: SeqResponse<AggregateAISearchCardConversationMessage<true>>) {
 		const { app_message_id } = message.message
@@ -461,23 +460,23 @@ class AiSearchApplyService {
 		if (!localMessage) return
 		localMessage.aggregate_ai_search_card!.error = true
 
-		// 移除消息
+		// Remove the message
 		MessageService.removeMessage(
 			message.conversation_id,
 			message.message_id,
 			message.conversation_id,
 		)
 
-		// 标记为完成
+		// Mark as finished
 		if (localMessage.aggregate_ai_search_card?.finish === false) {
 			localMessage.aggregate_ai_search_card.finish = true
 		}
 	}
 
 	/**
-	 * 更新PPT
-	 * 处理类型为PPT的消息，更新PPT数据
-	 * @param message 接收到的消息
+	 * Update PPT data.
+	 * Handle messages of type PPT to update slide data.
+	 * @param message The received message.
 	 */
 	updatePPT(message: SeqResponse<AggregateAISearchCardConversationMessage<true>>) {
 		const { aggregate_ai_search_card, app_message_id } = message.message
@@ -487,10 +486,10 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 更新聚合 AI 搜索卡片 LLM 响应
-	 * 根据流式选项更新LLM响应内容，处理流式传输的开始和结束状态
-	 * @param localMessage 本地存储的消息
-	 * @param message 接收到的消息
+	 * Update Aggregate AI Search Card LLM response.
+	 * Update LLM response content based on stream options, handling start/end states.
+	 * @param localMessage The local stored message.
+	 * @param message The received message.
 	 */
 	updateAggregateAISearchCardLlmResponseByStreamOptions(
 		localMessage: SeqResponse<AggregateAISearchCardConversationMessage<false>>["message"],
@@ -499,25 +498,25 @@ class AiSearchApplyService {
 		const { aggregate_ai_search_card } = message.message
 		if (!aggregate_ai_search_card) return
 		const { stream_options } = aggregate_ai_search_card
-		// 如果不是流式传输，则直接更新LLM响应
+		// If not streaming, update the LLM response directly
 		if (!stream_options || !stream_options.stream) {
 			localMessage.aggregate_ai_search_card!.llm_response =
 				message.message.aggregate_ai_search_card?.llm_response ?? ""
 			return
 		}
 
-		// 如果是流式传输，则根据流式传输的状态更新LLM响应
+		// If streaming, update LLM response based on streaming status
 		const { status } = stream_options
 		if (status === StreamStatus.End) {
-			// 流式传输结束，更新LLM响应
+			// Streaming ended; update LLM response
 			localMessage.aggregate_ai_search_card!.llm_response =
 				message.message.aggregate_ai_search_card?.llm_response ?? ""
 		} else if (status === StreamStatus.Start) {
 			this.setLLMResponseSeqId(message.seq_id, message.message.app_message_id)
 
-			// 压到下一轮事件循环，确保流式传输开始时，消息信息已经记录
+			// Defer to next tick to ensure message info has been recorded
 			setTimeout(() => {
-				// 流式传输开始，添加到任务队列
+				// Streaming started; add to task queue
 				StreamMessageApplyServiceV2.apply({
 					target_seq_id: message.seq_id,
 					// @ts-ignore
@@ -536,9 +535,9 @@ class AiSearchApplyService {
 	}
 
 	/**
-	 * 合并AI搜索消息
-	 * @param aiSearchMessages
-	 * @returns
+	 * Combine multiple AI search messages into one consolidated message.
+	 * @param aiSearchMessages The list of AI search messages.
+	 * @returns The combined message (or undefined if input is empty).
 	 */
 	combineAiSearchMessage(
 		aiSearchMessages: SeqResponse<AggregateAISearchCardConversationMessage<true>>[],
@@ -615,17 +614,17 @@ class AiSearchApplyService {
 						].search_keywords =
 							message.message.aggregate_ai_search_card!.search_keywords ?? []
 
-						// 更新总字数
+						// Update total word count
 						combinedMessage.message.aggregate_ai_search_card!.associate_questions[
 							parentId
 						].total_words = message.message.aggregate_ai_search_card!.total_words ?? 0
 
-						// 更新检索到的页面总数
+						// Update matched page count
 						combinedMessage.message.aggregate_ai_search_card!.associate_questions[
 							parentId
 						].match_count = message.message.aggregate_ai_search_card!.match_count ?? 0
 
-						// 更新阅读的页面总数
+						// Update read page count
 						combinedMessage.message.aggregate_ai_search_card!.associate_questions[
 							parentId
 						].page_count = message.message.aggregate_ai_search_card!.page_count ?? 0

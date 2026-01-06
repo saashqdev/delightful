@@ -15,10 +15,10 @@ import {
 import pubsub from "@/utils/pubsub"
 import type { SeqResponse } from "@/types/request"
 
-// 导入新的服务
+// Import message service
 import MessageService from "@/opensource/services/chat/message/MessageService"
 
-// 消息存储和状态管理
+// Message store and state management
 import type { CMessage } from "@/types/chat"
 import ConversationService from "@/opensource/services/chat/conversation/ConversationService"
 import { getSlicedText } from "@/opensource/services/chat/conversation/utils"
@@ -35,24 +35,24 @@ import StreamMessageApplyServiceV2 from "../StreamMessageApplyServiceV2"
 import ConversationDbService from "../../../conversation/ConversationDbService"
 import { ApplyMessageOptions } from "@/types/chat/message"
 
-// 消息事件监听器类型
+// Message event listener type
 type MessageEventListener = (message: SeqResponse<CMessage>, options?: ApplyMessageOptions) => void
 
 /**
- * 聊天消息应用服务
- * 负责处理各种聊天类型的消息并应用相应的业务逻辑
+ * Chat message apply service
+ * Handles various chat message types and applies business logic
  */
 class ChatMessageApplyService {
-	// 事件监听器集合
+	// Event listener collections
 	private eventListeners: Record<string, MessageEventListener[]> = {
-		onApply: [], // 任何消息应用时触发
+		onApply: [], // Fired when any message is applied
 	}
 
 	/**
-	 * 订阅消息应用事件
-	 * @param eventName 事件名称
-	 * @param listener 事件监听器函数
-	 * @returns 取消订阅的函数
+	 * Subscribe to message-apply events
+	 * @param eventName Event name
+	 * @param listener Listener function
+	 * @returns Unsubscribe function
 	 */
 	subscribe(eventName: string, listener: MessageEventListener): () => void {
 		if (!this.eventListeners[eventName]) {
@@ -60,16 +60,16 @@ class ChatMessageApplyService {
 		}
 		this.eventListeners[eventName].push(listener)
 
-		// 返回取消订阅函数
+		// Return unsubscribe function
 		return () => {
 			this.unsubscribe(eventName, listener)
 		}
 	}
 
 	/**
-	 * 取消订阅消息应用事件
-	 * @param eventName 事件名称
-	 * @param listener 要移除的监听器函数
+	 * Unsubscribe from message-apply events
+	 * @param eventName Event name
+	 * @param listener Listener to remove
 	 */
 	unsubscribe(eventName: string, listener: MessageEventListener): void {
 		if (!this.eventListeners[eventName]) return
@@ -80,10 +80,10 @@ class ChatMessageApplyService {
 	}
 
 	/**
-	 * 发布事件
-	 * @param eventName 事件名称
-	 * @param message 消息对象
-	 * @param options 应用选项
+	 * Publish an event
+	 * @param eventName Event name
+	 * @param message Message
+	 * @param options Apply options
 	 */
 	private publish(
 		eventName: string,
@@ -98,9 +98,9 @@ class ChatMessageApplyService {
 	}
 
 	/**
-	 * 判断是否为聊天消息
-	 * @param message 消息对象
-	 * @returns 是否为聊天消息
+	 * Determine whether it is a chat message
+	 * @param message Message
+	 * @returns Whether it is chat type
 	 */
 	isChatMessage(message: SeqResponse<CMessage>) {
 		return [
@@ -121,9 +121,9 @@ class ChatMessageApplyService {
 	}
 
 	/**
-	 * 判断是否为聊天消息
-	 * @param message 消息对象
-	 * @returns 是否为聊天消息
+	 * Determine whether a message should be considered history-displayable
+	 * @param message Message
+	 * @returns Whether it is considered chat history
 	 */
 	isChatHistoryMessage(message: SeqResponse<CMessage>) {
 		if (message.message.type === ConversationMessageType.AiImage) {
@@ -154,15 +154,15 @@ class ChatMessageApplyService {
 	}
 
 	/**
-	 * 应用聊天类消息
-	 * @param message 待应用的消息
-	 * @param options 应用选项
+	 * Apply chat-type messages
+	 * @param message Message to apply
+	 * @param options Apply options
 	 */
 	apply(message: SeqResponse<CMessage>, options: ApplyMessageOptions = {}) {
 		// const { isHistoryMessage = false } = options
 		console.log("ChatMessageApplyService apply message =====> ", message, options)
 
-		// 发布全局消息应用事件
+		// Publish global message-apply event
 		this.publish("onApply", message, options)
 
 		switch (message.message.type) {
@@ -191,7 +191,7 @@ class ChatMessageApplyService {
 
 				const msg = message as SeqResponse<AggregateAISearchCardConversationMessageV2>
 				if (msg.message.aggregate_ai_search_card_v2?.status === undefined) {
-					// 初始化状态
+					// Initialize status
 					msg.message.aggregate_ai_search_card_v2!.status =
 						AggregateAISearchCardV2Status.isSearching
 				}
@@ -221,7 +221,7 @@ class ChatMessageApplyService {
 				this.applyAiImageMessage(message as SeqResponse<AIImagesMessage>, options)
 				break
 			case ConversationMessageType.RecordingSummary:
-				// TODO: 实现录音摘要处理器
+				// TODO: Implement recording summary handler
 				break
 			default:
 				break
@@ -229,8 +229,8 @@ class ChatMessageApplyService {
 	}
 
 	/**
-	 * 应用会话消息
-	 * @param message 会话消息对象
+	 * Apply a conversation message
+	 * @param message Conversation message
 	 */
 	async applyConversationMessage(
 		message: SeqResponse<ConversationMessage>,
@@ -247,14 +247,14 @@ class ChatMessageApplyService {
 
 		MessageService.addReceivedMessage(message)
 
-		// 如果是 AI 会话，并且当前没有话题 Id，自动设置上
+		// For AI conversations, set current topic if absent
 		if (!conversation.current_topic_id && message.message.topic_id) {
 			conversation.setCurrentTopicId(message.message.topic_id ?? "")
 			ConversationDbService.updateConversation(message.conversation_id, {
 				current_topic_id: message.message.topic_id ?? "",
 			})
 
-			// 如果当前会话是当前会话，则切换话题
+			// If the current conversation is active, switch topic
 			if (ConversationStore.currentConversation?.id === message.conversation_id) {
 				ConversationService.switchTopic(message.conversation_id, message.message.topic_id)
 			}
@@ -265,14 +265,14 @@ class ChatMessageApplyService {
 			ConversationStore.currentConversation?.current_topic_id === message.message.topic_id &&
 			conversation?.isAiConversation
 		) {
-			// 如果是 AI 会话，此时消息列表的数量为 2，调用智能重命名
+			// If AI conversation, when list length is 2, trigger smart rename
 			if (MessageStore.messages.length === 2 && !isHistoryMessage) {
-				// 调用智能重命名
+				// Call smart rename
 				chatTopicService.getAndSetDelightfulTopicName(message.message.topic_id ?? "")
 			}
 		}
 
-		// 更新会话最后一条消息
+		// Update conversation last message
 		ConversationService.updateLastReceiveMessage(message.conversation_id, {
 			time: message.message.send_time,
 			seq_id: message.seq_id,
@@ -281,10 +281,10 @@ class ChatMessageApplyService {
 		})
 
 		if (!conversation.is_not_disturb) {
-			// 把会话顶到最上面
+			// Move conversation to the top
 			ConversationService.moveConversationFirst(message.conversation_id)
 
-			// 如果不是自己的消息且消息seqid大于组织红点seqid, 则添加会话红点（通知视图更新）
+			// If not own message and seq_id > organization unread seq_id, add conversation unread dot
 			if (
 				!isHistoryMessage &&
 				message.message.sender_id !== userStore.user.userInfo?.user_id &&
@@ -308,8 +308,8 @@ class ChatMessageApplyService {
 	}
 
 	/**
-	 * 应用聚合AI搜索卡片消息
-	 * @param message 聚合AI搜索卡片消息对象
+	 * Apply Aggregate AI Search Card message
+	 * @param message Aggregate AI search message
 	 */
 	async applyAggregateAISearchCardMessage(
 		message: SeqResponse<AggregateAISearchCardConversationMessage>,
@@ -318,9 +318,9 @@ class ChatMessageApplyService {
 	}
 
 	/**
-	 * 应用AI图像消息
-	 * @param message AI图像消息对象
-	 * @param options 应用选项
+	 * Apply AI image message
+	 * @param message AI image message
+	 * @param options Apply options
 	 */
 	applyAiImageMessage(message: SeqResponse<AIImagesMessage>, options: ApplyMessageOptions = {}) {
 		AiImageApplyService.apply(message, options)

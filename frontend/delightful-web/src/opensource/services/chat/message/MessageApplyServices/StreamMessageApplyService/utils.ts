@@ -1,16 +1,16 @@
 import type { StreamResponse } from "@/types/request"
 
 /**
- * 获取流式消息
- * @param message 消息
- * @returns 流式消息
+ * Slice a streaming message into smaller units for per-character output.
+ * @param message Streaming message.
+ * @returns Array of sliced streaming messages.
  */
 export function sliceMessage(message: StreamResponse) {
 	const { content, reasoning_content, llm_response } = message
 
-	// 定义一个函数来处理字符串分割，将文本分割成更小的单位以实现逐字输出
+	// Split a string into smaller units to enable character-by-character output
 	const sliceString = (str: string) => {
-		// 对于极短的字符串，直接返回
+		// For very short strings, return early
 		if (!str || str.length === 0) {
 			return []
 		}
@@ -19,10 +19,10 @@ export function sliceMessage(message: StreamResponse) {
 			return [str]
 		}
 
-		// 将字符串分割成单个字符
+		// Split the string into single characters
 		const characters: string[] = []
 
-		// 逐字符分割，确保每个字符单独处理
+		// Iterate per character to ensure individual handling
 		for (let i = 0; i < str.length; i++) {
 			const char = str.charAt(i)
 			characters.push(char)

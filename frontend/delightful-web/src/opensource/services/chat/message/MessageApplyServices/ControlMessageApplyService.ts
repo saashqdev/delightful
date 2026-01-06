@@ -3,12 +3,12 @@ import { MessageReceiveType } from "@/types/chat"
 import { ControlEventMessageType } from "@/types/chat/control_message"
 import type { SeqResponse } from "@/types/request"
 
-// 导入新的服务
+// Import conversation/topic/user services
 import ConversationService from "@/opensource/services/chat/conversation/ConversationService"
 import chatTopicService from "@/opensource/services/chat/topic"
 import userInfoService from "@/opensource/services/userInfo"
 
-// 导入存储状态管理
+// Import state stores
 import conversationStore from "@/opensource/stores/chatNew/conversation"
 import groupInfoStore from "@/opensource/stores/groupInfo"
 import type { ConversationMessage } from "@/types/chat/conversation_message"
@@ -33,14 +33,14 @@ import { ChatApi } from "@/apis"
 import { ApplyMessageOptions } from "@/types/chat/message"
 
 /**
- * 控制消息应用服务
- * 负责处理各种控制类型的消息并应用相应的业务逻辑
+ * Control message apply service
+ * Handles control-type messages and applies related business logic
  */
 class ControlMessageApplyService {
 	/**
-	 * 判断是否为控制消息
-	 * @param message 消息对象
-	 * @returns 是否为控制消息
+	 * Determine whether this is a control message
+	 * @param message Message object
+	 * @returns Whether it is a control message
 	 */
 	isControlMessage(message: SeqResponse<CMessage>) {
 		return [
@@ -65,9 +65,9 @@ class ControlMessageApplyService {
 	}
 
 	/**
-	 * 判断控制消息是否需要渲染
-	 * @param message 消息对象
-	 * @returns 是否需要渲染
+	 * Determine whether a control message needs rendering
+	 * @param message Message object
+	 * @returns Whether it should render
 	 */
 	isControlMessageShouldRender(message: SeqResponse<CMessage>) {
 		return [
@@ -80,9 +80,9 @@ class ControlMessageApplyService {
 	}
 
 	/**
-	 * 应用控制类消息
-	 * @param message 待应用的消息
-	 * @param options 应用选项
+	 * Apply control-type message
+	 * @param message Message to apply
+	 * @param options Apply options
 	 */
 	apply(message: SeqResponse<CMessage>, options: ApplyMessageOptions = {}) {
 		const { isHistoryMessage = false } = options
@@ -141,8 +141,8 @@ class ControlMessageApplyService {
 	}
 
 	/**
-	 * 应用添加好友成功消息
-	 * @param message 添加好友成功消息对象
+	 * Apply add-friend-success message
+	 * @param message Message payload
 	 */
 	applyAddFriendSuccessMessage(message: SeqResponse<AddFriendSuccessMessage>) {
 		const {
@@ -162,8 +162,8 @@ class ControlMessageApplyService {
 	}
 
 	/**
-	 * 应用群组基本消息
-	 * @param message 群组基本消息对象
+	 * Apply basic group messages
+	 * @param message Group message
 	 */
 	applyGroupBasicMessage(message: SeqResponse<ConversationMessage>) {
 		MessageService.addReceivedMessage(message)
@@ -185,10 +185,10 @@ class ControlMessageApplyService {
 	}
 
 	/**
-	 * 判断是否是自己退群
-	 * @param message 群组移除用户消息对象
-	 * @param userId 用户 ID
-	 * @returns 是否是自己退群
+	 * Check whether the current user left the group
+	 * @param message Group remove-users message
+	 * @param userId User ID
+	 * @returns Whether self left
 	 */
 	isSelfLeaveGroup(message: GroupUsersRemoveMessage, userId?: string) {
 		return (
@@ -199,21 +199,21 @@ class ControlMessageApplyService {
 	}
 
 	/**
-	 * 应用群组移除用户消息
-	 * @param message 群组移除用户消息对象
+	 * Apply group remove-users message
+	 * @param message Group remove-users message
 	 */
 	async applyGroupUsersRemoveMessage(message: SeqResponse<GroupUsersRemoveMessage>) {
 		const userId = userStore.user.userInfo?.user_id
 		if (this.isSelfLeaveGroup(message.message, userId)) {
-			// 自己退群(处理方式可能待优化)
-			// 直接移除群聊
+			// Self left (handling may be improved)
+			// Remove the conversation directly
 			ConversationService.deleteConversation(message.conversation_id)
 		}
-		// 先获取用户信息，避免用户信息未加载
+		// Fetch user info first to ensure it is loaded
 		await userInfoService.fetchUserInfos(message.message.group_users_remove.user_ids ?? [], 2)
 		MessageService.addReceivedMessage(message)
 
-		// 如果当前会话是群组，移除群组成员
+		// If current conversation is the target group, remove members locally
 		const currentConversation = conversationStore.currentConversation
 		if (
 			currentConversation?.receive_type === MessageReceiveType.Group &&
@@ -224,8 +224,8 @@ class ControlMessageApplyService {
 	}
 
 	/**
-	 * 应用群组解散消息
-	 * @param message 群组解散消息对象
+	 * Apply group disband message
+	 * @param message Disband message
 	 */
 	applyGroupDisbandMessage(message: SeqResponse<ConversationMessage>) {
 		MessageService.addReceivedMessage(message)
@@ -235,18 +235,18 @@ class ControlMessageApplyService {
 			ConversationStatus.Deleted,
 		)
 
-		// 如果当前会话是群组解散的会话，则解散群组
+		// If current conversation is this group, disband it locally
 		if (conversationStore.currentConversation?.id === message.conversation_id) {
 			ConversationService.groupConversationDisband(message.conversation_id)
 		}
 	}
 
 	/**
-	 * 应用撤回消息
-	 * @param message 撤回消息对象
+	 * Apply revoke message
+	 * @param message Revoke message
 	 */
 	applyRevokeMessage(message: SeqResponse<RevokeMessage>) {
-		// 把对应的消息设置为已撤回
+		// Mark the referenced message as revoked
 		MessageService.flagMessageRevoked(
 			message.conversation_id,
 			message.message.topic_id || "",
@@ -255,8 +255,8 @@ class ControlMessageApplyService {
 	}
 
 	/**
-	 * 应用打开会话/创建会话消息
-	 * @param message 消息对象
+	 * Apply open/create conversation message
+	 * @param message Message
 	 */
 	applyOpenConversationMessage(message: SeqResponse<CMessage>) {
 		console.log("applyOpenConversationMessage =====> ", message)
@@ -265,14 +265,14 @@ class ControlMessageApplyService {
 			message.message.type === ControlEventMessageType.CreateConversation
 		) {
 			const conversation = conversationStore.conversations[message.conversation_id]
-			// 如果会话已存在，则不处理
+			// If the conversation already exists, skip
 			if (conversation) return
 
-			// 获取会话列表
+			// Fetch conversation detail
 			ChatApi.getConversationList([message.conversation_id]).then(({ items }) => {
 				if (items.length === 0) return
 				console.log("applyOpenConversationMessage items", items)
-				// 如果是单聊，尝试获取用户信息
+				// If 1:1 chat, fetch user info; if group, fetch group info
 				if (items[0].receive_type === MessageReceiveType.User) {
 					userInfoService.fetchUserInfos([items[0].receive_id], 2)
 				} else if (items[0].receive_type === MessageReceiveType.Group) {
@@ -284,8 +284,8 @@ class ControlMessageApplyService {
 	}
 
 	/**
-	 * 应用已读消息
-	 * @param seenMessage 已读消息对象
+	 * Apply seen/read message
+	 * @param seenMessage Seen message payload
 	 */
 	applySeenMessage(seenMessage: SeqResponse<SeenMessage>) {
 		const targetMessageId = seenMessage.message.seen_messages.refer_message_ids[0]
@@ -298,7 +298,7 @@ class ControlMessageApplyService {
 			MessageService.updateMessageId(tempId, targetMessageId)
 		}
 
-		// 1. 先更新视图状态
+		// 1) First, update view state
 		if (unreadCount === 0) {
 			MessageService.updateMessageStatus(
 				conversationId,
@@ -308,7 +308,7 @@ class ControlMessageApplyService {
 				seenMessage,
 			)
 		}
-		// 更新未读数
+		// 2) Update unread count
 		MessageService.updateMessageUnreadCount(
 			conversationId,
 			topicId,
@@ -319,8 +319,8 @@ class ControlMessageApplyService {
 	}
 
 	/**
-	 * 应用静音会话消息
-	 * @param message 静音消息对象
+	 * Apply mute-conversation message
+	 * @param message Mute message payload
 	 */
 	applyMuteConversationMessage(message: SeqResponse<MuteConversationMessage>) {
 		ConversationService.notDisturbConversation(
@@ -330,8 +330,8 @@ class ControlMessageApplyService {
 	}
 
 	/**
-	 * 应用置顶会话消息
-	 * @param message 置顶消息对象
+	 * Apply pin/top-conversation message
+	 * @param message Top message payload
 	 */
 	applyTopConversationMessage(message: SeqResponse<TopConversationMessage>) {
 		ConversationService.updateTopStatus(
@@ -341,12 +341,12 @@ class ControlMessageApplyService {
 	}
 
 	/**
-	 * 应用隐藏会话消息
-	 * @param message 消息对象
-	 * @param isHistoryMessage 是否为历史消息
+	 * Apply hide-conversation message
+	 * @param message Message payload
+	 * @param isHistoryMessage Whether it is a historical message
 	 */
 	applyHideConversationMessage(message: SeqResponse<CMessage>, isHistoryMessage: boolean) {
-		// 如果是历史消息，忽略隐藏会话消息
+		// Ignore hide operation if this is a historical message
 		if (isHistoryMessage) {
 			return
 		}
@@ -354,24 +354,24 @@ class ControlMessageApplyService {
 	}
 
 	/**
-	 * 应用创建主题消息
-	 * @param message 创建主题消息对象
+	 * Apply create-topic message
+	 * @param message Create-topic payload
 	 */
 	applyCreateTopicMessage(message: SeqResponse<CreateTopicMessage>) {
 		chatTopicService.applyCreateTopicMessage(message)
 	}
 
 	/**
-	 * 应用更新主题消息
-	 * @param message 更新主题消息对象
+	 * Apply update-topic message
+	 * @param message Update-topic payload
 	 */
 	applyUpdateTopicMessage(message: SeqResponse<UpdateTopicMessage>) {
 		chatTopicService.applyUpdateTopicMessage(message)
 	}
 
 	/**
-	 * 应用删除主题消息
-	 * @param message 删除主题消息对象
+	 * Apply delete-topic message
+	 * @param message Delete-topic payload
 	 */
 	applyDeleteTopicMessage(message: SeqResponse<DeleteTopicMessage>) {
 		chatTopicService.applyDeleteTopicMessage(message)

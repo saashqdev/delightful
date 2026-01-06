@@ -4,8 +4,8 @@ import ConversationService from "@/opensource/services/chat/conversation/Convers
 
 class IntermediateMessageApplyService {
 	/**
-	 * 应用消息
-	 * @param message 消息对象
+	 * Apply an intermediate message.
+	 * @param message Intermediate message payload.
 	 */
 	apply(message: IntermediateResponse) {
 		switch (message.seq.message.type) {
@@ -19,16 +19,16 @@ class IntermediateMessageApplyService {
 	}
 
 	/**
-	 * 应用开始会话输入消息
-	 * @param message 消息对象
+	 * Apply "start conversation input" message.
+	 * @param message Message object.
 	 */
 	applyStartConversationInputMessage(message: SeqResponse<IntermediateMessage>) {
 		ConversationService.startConversationInput(message.conversation_id)
 	}
 
 	/**
-	 * 应用结束会话输入消息
-	 * @param message 消息对象
+	 * Apply "end conversation input" message.
+	 * @param message Message object.
 	 */
 	applyEndConversationInputMessage(message: SeqResponse<IntermediateMessage>) {
 		ConversationService.endConversationInput(message.conversation_id)

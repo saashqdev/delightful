@@ -16,32 +16,32 @@ import groupInfoService from "@/opensource/services/groupInfo"
 import { ConversationMessageType } from "@/types/chat/conversation_message"
 
 /**
- * 自定义消息处理器接口
+ * Custom message handler interface.
  */
 export interface ICustomMessageHandler {
-	// 是否匹配
+	// Whether this handler matches the message
 	isMatch: (message: SeqResponse<CMessage>) => boolean
-	// 处理消息
+	// Apply handling logic for the message
 	apply: (message: SeqResponse<CMessage>, options: ApplyMessageOptions) => void
 }
 
 /**
- * 消息应用服务
- * 负责处理和应用各种类型的消息（控制类、聊天类和流式消息）
+ * Message application service.
+ * Responsible for handling and applying various message types (control, chat, streaming).
  */
 class MessageApplyService {
-	// 正在拉取的会话列表
+	// Conversations currently being fetched
 	fetchingPromiseMap: Record<string, Promise<void>> = {}
 
-	// 自定义消息处理器注册表
+	// Registry of custom message handlers
 	private customHandlers: Map<string, ICustomMessageHandler> = new Map()
 
 	/**
-	 * 注册自定义消息处理器
-	 * @param id 处理器唯一标识
-	 * @param handler 自定义消息处理器
-	 * @param overwrite 是否覆盖已存在的处理器，默认为true
-	 * @returns 是否成功注册
+	 * Register a custom message handler.
+	 * @param id Unique handler identifier.
+	 * @param handler Custom message handler.
+	 * @param overwrite Overwrite existing handler if present; default true.
+	 * @returns Whether registration succeeded.
 	 */
 	registerCustomHandler(
 		id: string,
@@ -57,33 +57,33 @@ class MessageApplyService {
 	}
 
 	/**
-	 * 取消注册自定义消息处理器
-	 * @param id 要移除的处理器ID
-	 * @returns 是否成功移除
+	 * Unregister a custom message handler.
+	 * @param id Handler ID to remove.
+	 * @returns Whether removal succeeded.
 	 */
 	unregisterCustomHandler(id: string): boolean {
 		return this.customHandlers.delete(id)
 	}
 
 	/**
-	 * 获取已注册的自定义处理器
-	 * @returns 当前已注册的所有处理器
+	 * Get all registered custom handlers.
+	 * @returns All currently registered handlers.
 	 */
 	getCustomHandlers(): Record<string, ICustomMessageHandler> {
 		return Object.fromEntries(this.customHandlers.entries())
 	}
 
 	/**
-	 * 执行消息应用
-	 * @param message 消息
-	 * @param options 应用选项
+	 * Execute message application.
+	 * @param message Message to apply.
+	 * @param options Apply options.
 	 */
 	async doApplyMessage(message: SeqResponse<CMessage>, options: ApplyMessageOptions) {
 		const conversation = ConversationStore.getConversation(message.conversation_id)
 
 		console.log("applyMessage =====> conversation ====> ", conversation)
 		if (!conversation) {
-			// 如果会话不存在，则拉取会话列表
+			// If conversation is missing, fetch the conversation list
 			if (!this.fetchingPromiseMap[message.conversation_id]) {
 				this.fetchingPromiseMap[message.conversation_id] = ChatApi.getConversationList([
 					message.conversation_id,
@@ -123,7 +123,7 @@ class MessageApplyService {
 				pubsub.publish("be_delightful_new_message", message)
 				break
 			default:
-				// 检查是否有自定义处理器可以处理该消息
+				// Check custom handlers for a match
 				for (const handler of this.customHandlers.values()) {
 					if (handler.isMatch(message)) {
 						handler.apply(message, { ...options, isFromOtherTab: true })
@@ -135,9 +135,9 @@ class MessageApplyService {
 	}
 
 	/**
-	 * 应用一条消息
-	 * @param message 待应用的消息
-	 * @param options 应用选项
+	 * Apply a single message.
+	 * @param message Message to apply.
+	 * @param options Apply options.
 	 */
 	async applyMessage(
 		message: SeqResponse<CMessage>,
@@ -149,7 +149,7 @@ class MessageApplyService {
 	) {
 		const { sortCheck = true } = options
 
-		// 检查消息是否已经被应用过
+		// Check if this message has already been applied
 		if (
 			sortCheck &&
 			bigNumCompare(

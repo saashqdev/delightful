@@ -22,7 +22,7 @@ import { toJS } from "mobx"
 const console = new Logger("StreamMessageApplyServiceV2", "blue", { console: false })
 
 /**
- * 流式消息管理器
+ * Streaming message manager.
  *
  * @class StreamMessageApplyService
  */
@@ -38,13 +38,13 @@ class StreamMessageApplyServiceV2 {
 	> = {}
 
 	/**
-	 * 流式消息暂存区
+	 * Temporary cache for streaming messages.
 	 */
 	streamMessageMap: Record<string, StreamResponseV2[]> = {}
 
 	/**
-	 * 暂存流式消息
-	 * @param streamMessage 流式消息
+	 * Cache a streaming message temporarily.
+	 * @param streamMessage The streaming message.
 	 */
 	addCacheStreamMessage(streamMessage: StreamResponseV2) {
 		if (!this.streamMessageMap[streamMessage.target_seq_id]) {
@@ -54,9 +54,9 @@ class StreamMessageApplyServiceV2 {
 	}
 
 	/**
-	 * 是否存在暂存流式消息
-	 * @param targetSeqId 目标序列ID
-	 * @returns 是否存在暂存流式消息
+	 * Check if a cached streaming message exists for a target seq_id.
+	 * @param targetSeqId Target sequence ID.
+	 * @returns Whether cached streaming messages exist.
 	 */
 	hasCacheStreamMessage(targetSeqId: string) {
 		if (!this.streamMessageMap[targetSeqId]) {
@@ -66,8 +66,8 @@ class StreamMessageApplyServiceV2 {
 	}
 
 	/**
-	 * 应用暂存流式消息
-	 * @param targetSeqId 目标序列ID
+	 * Apply cached streaming messages for a target seq_id.
+	 * @param targetSeqId Target sequence ID.
 	 */
 	applyCacheStreamMessage(
 		targetSeqId: string,
@@ -81,7 +81,7 @@ class StreamMessageApplyServiceV2 {
 		}
 
 		const streamMessages = this.streamMessageMap[targetSeqId].slice()
-		// 移除暂存流式消息
+		// Remove cached streaming messages
 		delete this.streamMessageMap[targetSeqId]
 
 		streamMessages.forEach((streamMessage) => {
@@ -90,8 +90,8 @@ class StreamMessageApplyServiceV2 {
 	}
 
 	/**
-	 * 记录消息信息
-	 * @param message 消息
+	 * Record message info for later lookup during streaming updates.
+	 * @param message Message whose identifiers to record.
 	 */
 	recordMessageInfo(
 		message:
@@ -141,9 +141,9 @@ class StreamMessageApplyServiceV2 {
 	}
 
 	/**
-	 * 查询消息信息
-	 * @param messageId 消息ID
-	 * @returns 消息信息
+	 * Query recorded message info.
+	 * @param messageId Message ID (or target seq_id for some message types).
+	 * @returns Recorded message info.
 	 */
 	queryMessageInfo(messageId: string) {
 		return this.messageConversationMap[messageId]
@@ -206,9 +206,8 @@ class StreamMessageApplyServiceV2 {
 	}
 
 	/**
-	 * 应用文本流式消息
-	 * @param streamMessage 流式消息
-	 * @param message 消息
+	 * Apply streaming updates for Text messages.
+	 * @param streamMessage Streaming payload.
 	 */
 	applyTextStreamMessage = (streamMessage: StreamResponseV2) => {
 		const {
@@ -234,7 +233,7 @@ class StreamMessageApplyServiceV2 {
 		} else if (status === StreamStatus.End) {
 			console.log(`[applyTextStreamMessage] 处理结束状态消息`)
 
-			// 更新消息状态
+			// Update message status
 			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
 				const textMessage = m.message as TextConversationMessage
 				if (textMessage.text) {
@@ -245,7 +244,7 @@ class StreamMessageApplyServiceV2 {
 				return m
 			})
 
-			// 更新最后一条消息
+			// Update conversation last message summary
 			ConversationService.updateLastReceiveMessage(conversationId, {
 				time: Date.now() / 1000,
 				seq_id: messageId,
@@ -254,7 +253,7 @@ class StreamMessageApplyServiceV2 {
 				topic_id: topicId,
 			})
 
-			// 落库
+			// Persist to DB
 			MessageService.updateDbMessage(messageId, conversationId, {
 				"message.text.content": keyPaths.content,
 				"message.text.reasoning_content": keyPaths.reasoning_content,
@@ -265,9 +264,8 @@ class StreamMessageApplyServiceV2 {
 	}
 
 	/**
-	 * 应用markdown流式消息
-	 * @param streamMessage 流式消息
-	 * @param message 消息
+	 * Apply streaming updates for Markdown messages.
+	 * @param streamMessage Streaming payload.
 	 */
 	applyMarkdownStreamMessage = (streamMessage: StreamResponseV2) => {
 		const {
@@ -293,11 +291,11 @@ class StreamMessageApplyServiceV2 {
 			})
 		} else if (status === StreamStatus.End) {
 			console.log(`[applyMarkdownStreamMessage] 处理结束状态消息`)
-			// 更新消息状态
+			// Update message status
 			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
 				const markdownMessage = m.message as MarkdownConversationMessage
 				if (markdownMessage.markdown) {
-					// PS： 这里不更新内容，因为内容是流式消息，由打字机去更新就好了
+					// Note: Do not update content here; typing effect updates during streaming
 					if (markdownMessage.markdown.stream_options) {
 						markdownMessage.markdown.stream_options.status = StreamStatus.End
 					}
@@ -305,7 +303,7 @@ class StreamMessageApplyServiceV2 {
 				return { ...m }
 			})
 
-			// 更新最后一条消息
+			// Update conversation last message summary
 			ConversationService.updateLastReceiveMessage(conversationId, {
 				time: Date.now() / 1000,
 				seq_id: messageId,
@@ -314,7 +312,7 @@ class StreamMessageApplyServiceV2 {
 				topic_id: topicId,
 			})
 
-			// 落库
+			// Persist to DB
 			MessageService.updateDbMessage(messageId, conversationId, {
 				"message.markdown.content": keyPaths.content,
 				"message.markdown.reasoning_content": keyPaths.reasoning_content,
@@ -325,9 +323,8 @@ class StreamMessageApplyServiceV2 {
 	}
 
 	/**
-	 * 应用聚合AI搜索卡片流式消息
-	 * @param streamMessage 流式消息
-	 * @param message 消息
+	 * Apply streaming updates for Aggregate AI Search Card messages.
+	 * @param streamMessage Streaming payload.
 	 */
 	applyAggregateAISearchCardStreamMessage = (message: StreamResponseV2) => {
 		const {
@@ -364,11 +361,11 @@ class StreamMessageApplyServiceV2 {
 		} else if (status === StreamStatus.End) {
 			console.log(`[applyAggregateAISearchCardStreamMessage] 处理结束状态消息`)
 
-			// 更新根问题的回答
+			// Update the root question's answer
 			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
 				const textMessage = m.message as AggregateAISearchCardConversationMessage
 				if (textMessage.aggregate_ai_search_card) {
-					// PS： 这里不更新内容，因为内容是流式消息，由打字机去更新就好了
+					// Note: Do not update content here; typing effect updates during streaming
 					if (textMessage.aggregate_ai_search_card.stream_options) {
 						textMessage.aggregate_ai_search_card.stream_options.status =
 							StreamStatus.End
@@ -377,7 +374,7 @@ class StreamMessageApplyServiceV2 {
 				return { ...m }
 			})
 
-			// 更新最后一条消息
+			// Update conversation last message summary
 			ConversationService.updateLastReceiveMessage(conversationId, {
 				time: Date.now() / 1000,
 				seq_id: messageId,
@@ -386,7 +383,7 @@ class StreamMessageApplyServiceV2 {
 				topic_id: topicId,
 			})
 
-			// 落库
+			// Persist to DB
 			MessageService.updateDbMessage(messageId, conversationId, {
 				"message.aggregate_ai_search_card.llm_response": keyPaths.llm_response,
 				"message.aggregate_ai_search_card.reasoning_content": keyPaths.reasoning_content,
@@ -397,9 +394,8 @@ class StreamMessageApplyServiceV2 {
 	}
 
 	/**
-	 * 应用AI搜索卡片V2流式消息
-	 * @param streamMessage 流式消息
-	 * @param message 消息
+	 * Apply streaming updates for Aggregate AI Search Card V2 messages.
+	 * @param streamMessage Streaming payload.
 	 */
 	applyAggregateAISearchCardV2StreamMessage = (streamMessage: StreamResponseV2) => {
 		const {
@@ -446,11 +442,11 @@ class StreamMessageApplyServiceV2 {
 			console.log(` 更新消息:`, toJS(updated))
 		} else if (status === StreamStatus.End) {
 			console.log(`处理结束状态消息`)
-			// 更新消息状态
+			// Update message status
 			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
 				const textMessage = m.message as AggregateAISearchCardConversationMessageV2
 				if (textMessage.aggregate_ai_search_card_v2) {
-					// PS： 这里不更新内容，因为内容是流式消息，由打字机去更新就好了
+					// Note: Do not update content here; typing effect updates during streaming
 					if (textMessage.aggregate_ai_search_card_v2.stream_options) {
 						textMessage.aggregate_ai_search_card_v2.stream_options.status =
 							StreamStatus.End
@@ -461,7 +457,7 @@ class StreamMessageApplyServiceV2 {
 				return { ...m }
 			})
 
-			// 更新最后一条消息
+			// Update conversation last message summary
 			ConversationService.updateLastReceiveMessage(conversationId, {
 				time: Date.now() / 1000,
 				seq_id: messageId,
@@ -473,7 +469,7 @@ class StreamMessageApplyServiceV2 {
 				topic_id: topicId,
 			})
 
-			// 落库
+			// Persist to DB
 			MessageService.updateDbMessage(messageId, conversationId, {
 				"message.aggregate_ai_search_card_v2": { ...streamMessage.streams },
 			} as Partial<SeqResponse<ConversationMessage>>)

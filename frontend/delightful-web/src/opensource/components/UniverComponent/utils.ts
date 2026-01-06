@@ -1,6 +1,6 @@
 /**
- * Univer组件数据转换工具
- * 负责将不同格式的数据转换为Univer能够识别的格式
+ * Univer component data conversion utilities
+ * Converts various data formats into Univer-compatible structures
  */
 import * as XLSX from "xlsx"
 
@@ -26,9 +26,9 @@ interface ICellMatrix {
 }
 
 /**
- * 检测字符串是否为二进制Excel文件内容
- * @param data 需要检测的字符串
- * @returns 是否为Excel二进制内容
+ * Detect whether a string is binary Excel file content
+ * @param data The string to check
+ * @returns Whether it's Excel binary content
  */
 function isBinaryExcel(data: string): boolean {
 	// Excel file feature detection
@@ -53,11 +53,11 @@ function isBinaryExcel(data: string): boolean {
 }
 
 /**
- * 根据文件类型转换数据为Univer可用格式，支持字符串内容或File对象
- * @param data 原始数据：字符串内容或File对象
- * @param fileType 文件类型 'doc' | 'sheet' | 'slide'
- * @param fileName 文件名
- * @returns 转换后的Univer数据
+ * Convert data to Univer format based on file type; supports string content or File objects
+ * @param data Raw data: string content or File object
+ * @param fileType File type 'doc' | 'sheet' | 'slide'
+ * @param fileName File name
+ * @returns Converted Univer data
  */
 export async function transformData(data: any, fileType: string, fileName: string): Promise<any> {
 	// If it's a File object, read file content first
@@ -110,9 +110,9 @@ export async function transformData(data: any, fileType: string, fileName: strin
 }
 
 /**
- * 使用xlsx库读取Excel文件
- * @param file Excel文件对象
- * @returns Excel数据的二维数组格式(默认返回第一个工作表数据)
+ * Read an Excel file using xlsx
+ * @param file Excel File object
+ * @returns 2D array of Excel data (first worksheet by default)
  */
 async function readExcelFile(file: File): Promise<any[][]> {
 	return new Promise((resolve, reject) => {
@@ -121,14 +121,14 @@ async function readExcelFile(file: File): Promise<any[][]> {
 		reader.onload = (e) => {
 			try {
 				const data = e.target?.result
-				// 读取Excel文件
+				// Read Excel file
 				const workbook = XLSX.read(data, { type: "array" })
 
 				// Get first worksheet
 				const firstSheetName = workbook.SheetNames[0]
 				const worksheet = workbook.Sheets[firstSheetName]
 
-				// 将工作表转换为二维数组
+				// Convert worksheet to 2D array
 				const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as any[][]
 				resolve(jsonData)
 			} catch (error) {
@@ -142,9 +142,9 @@ async function readExcelFile(file: File): Promise<any[][]> {
 }
 
 /**
- * 读取Excel文件中的所有工作表
- * @param file Excel文件对象
- * @returns 包含所有工作表数据的对象，键为工作表名，值为工作表数据
+ * Read all worksheets in an Excel file
+ * @param file Excel File object
+ * @returns An object containing all worksheets keyed by sheet name
  */
 export async function readAllExcelSheets(file: File): Promise<Record<string, any[][]>> {
 	return new Promise((resolve, reject) => {
@@ -153,15 +153,15 @@ export async function readAllExcelSheets(file: File): Promise<Record<string, any
 		reader.onload = (e) => {
 			try {
 				const data = e.target?.result
-				// 读取Excel文件
+				// Read Excel file
 				const workbook = XLSX.read(data, { type: "array" })
 
-				// 读取所有工作表
+				// Read all worksheets
 				const result: Record<string, any[][]> = {}
 
 				workbook.SheetNames.forEach((sheetName) => {
 					const worksheet = workbook.Sheets[sheetName]
-					// 将工作表转换为二维数组
+					// Convert worksheet to 2D array
 					result[sheetName] = XLSX.utils.sheet_to_json(worksheet, {
 						header: 1,
 					}) as any[][]
@@ -179,22 +179,22 @@ export async function readAllExcelSheets(file: File): Promise<Record<string, any
 }
 
 /**
- * 将CSV文本内容转换为工作簿数据
- * @param csvContent CSV文本内容
- * @param fileName 文件名
- * @returns 工作簿数据
+ * Convert CSV text content to workbook data
+ * @param csvContent CSV text content
+ * @param fileName File name
+ * @returns Workbook data
  */
 function transformCsvToWorkbook(csvContent: string, fileName: string): any {
-	// 简单的CSV解析：按行分割，然后按逗号分割
+	// Simple CSV parsing: split by lines, then by comma
 	const rows = csvContent.split("\n").map((row) => row.split(",").map((cell) => cell.trim()))
-	// 使用现有的转换函数处理二维数组
+	// Use the existing conversion function to handle the 2D array
 	return transformToWorkbookData(rows, fileName)
 }
 
 /**
- * 读取文件为文本
- * @param file 文件对象
- * @returns 文件内容字符串
+ * Read a File as text
+ * @param file File object
+ * @returns File content string
  */
 function readFileAsText(file: File): Promise<string> {
 	return new Promise((resolve, reject) => {
@@ -206,31 +206,31 @@ function readFileAsText(file: File): Promise<string> {
 }
 
 /**
- * 将原始数据转换为文档格式
- * @param data 原始文档数据
- * @param fileName 文件名
- * @returns 转换后的文档数据
+ * Transform raw data into document format
+ * @param data Raw document data
+ * @param fileName File name
+ * @returns Transformed document data
  */
 export function transformDataForDoc(data: any, fileName: string): any {
-	// 如果数据已经是正确格式则直接返回
+	// If data is already in the correct format, return as-is
 	if (data && typeof data === "object" && data.id) {
 		return data
 	}
 
-	// 简单文档结构，实际项目中可能需要更复杂的转换逻辑
+	// Simple document structure; real scenarios may require more complex conversion logic
 	return {
 		id: `doc-${Date.now()}`,
 		name: fileName,
 		type: "doc",
 		body: {
 			dataStream: data?.content || data || "",
-			// 更多文档相关配置...
+			// More document-related configurations...
 		},
 		config: {
 			view: {
 				pageSize: {
-					width: 794, // A4宽度
-					height: 1123, // A4高度
+					width: 794, // A4 width
+					height: 1123, // A4 height
 				},
 			},
 		},
@@ -238,34 +238,34 @@ export function transformDataForDoc(data: any, fileName: string): any {
 }
 
 /**
- * 将原始数据转换为表格格式
- * @param data 原始表格数据
- * @param fileName 文件名
- * @returns 转换后的表格数据
+ * Transform raw data into sheet format
+ * @param data Raw sheet data
+ * @param fileName File name
+ * @returns Transformed sheet data
  */
 export function transformDataForSheet(data: any, fileName: string): any {
-	// 如果数据已经是正确格式则直接返回
+	// If data is already in the correct format, return as-is
 	if (data && typeof data === "object" && data.id && data.sheets) {
 		return data
 	}
 
-	// 使用transformToWorkbookData生成标准的工作簿数据
+	// Use transformToWorkbookData to generate a standard workbook
 	return transformToWorkbookData(data, fileName)
 }
 
 /**
- * 将原始数据转换为幻灯片格式
- * @param data 原始幻灯片数据
- * @param fileName 文件名
- * @returns 转换后的幻灯片数据
+ * Transform raw data into slides format
+ * @param data Raw slides data
+ * @param fileName File name
+ * @returns Transformed slides data
  */
 export function transformDataForSlide(data: any, fileName: string): any {
-	// 如果数据已经是正确格式则直接返回
+	// If data is already in the correct format, return as-is
 	if (data && typeof data === "object" && data.id) {
 		return data
 	}
 
-	// 简单幻灯片结构，实际项目中可能需要更复杂的转换逻辑
+	// Simple slides structure; real scenarios may require more complex conversion logic
 	return {
 		id: `slide-${Date.now()}`,
 		name: fileName,
@@ -277,18 +277,18 @@ export function transformDataForSlide(data: any, fileName: string): any {
 				elements: [],
 			},
 		],
-		// 更多幻灯片相关配置...
+		// More slide-related configurations...
 	}
 }
 
 /**
- * 将通用数据转换为Univer表格工作簿格式，符合IWorkbookData接口
- * @param data 原始数据
- * @param fileName 文件名
- * @returns 符合Univer标准的工作簿数据
+ * Convert general data to Univer workbook format (IWorkbookData)
+ * @param data Raw data
+ * @param fileName File name
+ * @returns Univer-standard workbook data
  */
 export function transformToWorkbookData(data: any, fileName?: string): any {
-	// 如果数据已经是标准Univer工作簿格式，直接返回
+	// If data is already in standard Univer workbook format, return as-is
 	if (data && data.id && data.sheets && data.sheetOrder) {
 		return data
 	}
@@ -296,7 +296,7 @@ export function transformToWorkbookData(data: any, fileName?: string): any {
 	const workbookId = `workbook_${Date.now()}`
 	const sheetId = `sheet_${Date.now()}`
 
-	// 如果是字符串，尝试解析JSON
+	// If it's a string, try parsing as JSON
 	if (typeof data === "string") {
 		try {
 			const parsedData = JSON.parse(data)
@@ -304,26 +304,26 @@ export function transformToWorkbookData(data: any, fileName?: string): any {
 				return transformToWorkbookData(parsedData, fileName)
 			}
 		} catch (e) {
-			// 如果不是有效的JSON，将其作为简单文本内容处理
+			// If not valid JSON, treat it as simple text content
 			data = [[data]]
 		}
 	}
 
-	// 处理单元格数据
+	// Prepare cell data
 	const cellData: ICellMatrix = {}
 	let rowCount = 30
 	let columnCount = 10
 
-	// 处理数组格式 (二维数组转为单元格数据)
+	// Handle array format (2D array → cell data)
 	if (Array.isArray(data)) {
 		rowCount = Math.max(rowCount, data.length)
 
 		data.forEach((row, rowIndex) => {
 			if (Array.isArray(row)) {
-				// 更新最大列数
+				// Update max column count
 				columnCount = Math.max(columnCount, row.length)
 
-				// 处理每个单元格
+				// Process each cell
 				row.forEach((cellValue, colIndex) => {
 					const rowKey = rowIndex.toString()
 					const colKey = colIndex.toString()
@@ -333,19 +333,19 @@ export function transformToWorkbookData(data: any, fileName?: string): any {
 					}
 
 					cellData[rowKey][colKey] = {
-						v: cellValue, // 单元格值
+						v: cellValue, // Cell value
 					}
 				})
 			}
 		})
 	} else if (data && typeof data === "object" && data.cellData) {
-		// 如果已经有cellData结构
+		// If there is already a cellData structure
 		Object.assign(cellData, data.cellData)
 		rowCount = data.rowCount || rowCount
 		columnCount = data.columnCount || columnCount
 	}
 
-	// 构建符合IWorksheetData的工作表数据
+	// Build worksheet data conforming to IWorksheetData
 	const worksheetData = {
 		id: sheetId,
 		name: "工作表1",
@@ -377,7 +377,7 @@ export function transformToWorkbookData(data: any, fileName?: string): any {
 		rightToLeft: BooleanNumber.FALSE,
 	}
 
-	// 构建符合IWorkbookData的工作簿数据
+	// Build workbook data conforming to IWorkbookData
 	return {
 		id: workbookId,
 		name: fileName || "工作簿",
@@ -398,24 +398,24 @@ export function transformToWorkbookData(data: any, fileName?: string): any {
 }
 
 /**
- * 将通用数据转换为Univer文档格式
+ * Convert general data to Univer document format
  */
 export function transformToDocumentData(data: any, fileName?: string): any {
-	// 如果数据已经是Univer格式，直接返回
+	// If data is already in Univer format, return as-is
 	if (data && data.id && data.body) {
 		return data
 	}
 
-	// 如果是字符串，将其作为文本内容
+	// If it's a string, treat it as text content
 	if (typeof data === "string") {
 		try {
-			// 尝试解析为JSON
+			// Try parsing as JSON
 			const parsedData = JSON.parse(data)
 			if (parsedData && typeof parsedData === "object") {
 				return transformToDocumentData(parsedData)
 			}
 		} catch (e) {
-			// 如果不是有效的JSON，将其作为文本内容
+			// If not valid JSON, treat it as text content
 			return {
 				id: `doc_${Date.now()}`,
 				name: fileName || "Document",
@@ -433,7 +433,7 @@ export function transformToDocumentData(data: any, fileName?: string): any {
 		}
 	}
 
-	// 默认返回空文档
+	// Default: return an empty document
 	return {
 		id: `doc_${Date.now()}`,
 		name: fileName || "Document",
@@ -446,15 +446,15 @@ export function transformToDocumentData(data: any, fileName?: string): any {
 }
 
 /**
- * 将通用数据转换为Univer幻灯片格式
+ * Convert general data to Univer slides format
  */
 export function transformToSlidesData(data: any, fileName?: string): any {
-	// 如果数据已经是Univer格式，直接返回
+	// If data is already in Univer format, return as-is
 	if (data && data.id && data.slides) {
 		return data
 	}
 
-	// 默认返回空的幻灯片
+	// Default: return empty slides
 	return {
 		id: `slides_${Date.now()}`,
 		name: fileName || "Presentation",

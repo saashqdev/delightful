@@ -133,8 +133,8 @@ class ChatTopicService {
 	}
 
 	/**
-	 * 应用更新话题消息
-	 * @param message 消息
+	 * Apply update-topic message
+	 * @param message Message
 	 */
 	applyUpdateTopicMessage(message: SeqResponse<UpdateTopicMessage>) {
 		logger.log(
@@ -170,8 +170,8 @@ class ChatTopicService {
 	}
 
 	/**
-	 * 应用删除话题消息
-	 * @param message 消息
+	 * Apply delete-topic message
+	 * @param message Message
 	 */
 	applyDeleteTopicMessage(message: SeqResponse<DeleteTopicMessage>) {
 		logger.log(
@@ -300,10 +300,10 @@ class ChatTopicService {
 	}
 
 	/**
-	 * 更新话题
-	 * @param topicId 话题ID
-	 * @param topicName 话题名称
-	 * @returns 话题列表
+	 * Update topic
+	 * @param topicId Topic ID
+	 * @param topicName Topic name
+	 * @returns Topic list
 	 */
 	updateTopic(topicId: string, topicName: string) {
 		const conversationId = conversationStore.currentConversation?.id
@@ -325,10 +325,10 @@ class ChatTopicService {
 	}
 
 	/**
-	 * 获取并设置魔法话题名称
-	 * @param topicId 话题ID
-	 * @param force 是否强制更新
-	 * @returns 魔法话题名称
+	 * Fetch and set delightful topic name
+	 * @param topicId Topic ID
+	 * @param force Force update
+	 * @returns Delightful topic name
 	 */
 	getAndSetDelightfulTopicName(topicId: string, force = false) {
 		const conversationId = conversationStore.currentConversation?.id
@@ -357,8 +357,8 @@ class ChatTopicService {
 	}
 
 	/**
-	 * 设置当前会话话题
-	 * @param topicId 话题ID
+	 * Set current conversation topic
+	 * @param topicId Topic ID
 	 */
 	setCurrentConversationTopic(topicId: string | undefined) {
 		const conversationId = conversationStore.currentConversation?.id
@@ -376,15 +376,15 @@ class ChatTopicService {
 		logger.log(`[setCurrentConversationTopic] 更新会话当前话题ID`)
 		conversationService.switchTopic(conversationId, topicId)
 
-		// 切换话题后，重新初始化渲染消息列表，并在初始化完成后立即滚动到底部
+		// After switching topic, re-initialize rendered message list and scroll to bottom immediately
 		logger.log(`[setCurrentConversationTopic] 开始初始化渲染消息列表`)
 		MessageService.initMessages(conversationId, topicId ?? "")
 	}
 
 	/**
-	 * 生成新话题数据
-	 * @param conversationId 会话ID
-	 * @returns 新话题数据
+	 * Generate new topic data
+	 * @param conversationId Conversation ID
+	 * @returns New topic data
 	 */
 	static genNewTopicData(conversationId: string, id: string): Topic {
 		const now = Date.now()
@@ -418,10 +418,10 @@ class ChatTopicService {
 		const tempId = nanoid()
 		const tempTopic = ChatTopicService.genNewTopicData(conversationId, tempId)
 
-		// 更新 UI 状态
+		// Update UI state
 		topicStore.unshiftTopic(tempTopic)
 
-		// 更新缓存
+		// Update cache
 		TopicCacheServices.addTopicToCache(conversationId, tempTopic)
 
 		return ChatApi.createTopic(topicName, conversationId).then((res) => {

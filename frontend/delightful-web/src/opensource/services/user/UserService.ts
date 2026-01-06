@@ -362,7 +362,7 @@ export class UserService {
 	}
 
 	/**
-	 * @description 帐号同步（同步组织、用户等信息）
+	 * @description Account sync (sync organizations, user info, etc.)
 	 */
 	async fetchAccount() {
 		const { accounts } = userStore.account
@@ -377,16 +377,16 @@ export class UserService {
 			const job = () => {
 				// eslint-disable-next-line no-async-promise-executor
 				return new Promise(async (resolve) => {
-					// 环境同步
+					// Environment sync
 					await loginService.getClusterConfig(account?.deployCode)
-					// delightful 组织同步
+					// Delightful organization sync
 					const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(
 						account?.deployCode,
 					)
 					const { delightfulOrganizationMap } = await delightfulOrgSyncStep({
 						access_token: account?.access_token,
 					} as Login.UserLoginsResponse)
-					// teamshare 组织同步
+					// Teamshare organization sync
 					const { organizations } = await loginService.organizationFetchStep({
 						delightfulOrganizationMap,
 						access_token: account.access_token,
@@ -420,7 +420,7 @@ export class UserService {
 			throw new Error("authorization or organization_code is required")
 		}
 
-		// 如果当前登录的 authorization 与 lastLogin 的 authorization 相同，则返回 lastLogin 的 promise
+		// If current authorization equals lastLogin.authorization, return lastLogin's promise
 		if (authorization === this.lastLogin?.authorization) {
 			console.log("authorization 相同，返回 lastLogin 的 promise", this.lastLogin)
 			return this.lastLogin.promise
@@ -432,14 +432,14 @@ export class UserService {
 				.then(async (res) => {
 					userStore.user.setUserInfo(res.data.user)
 					console.log("ws 登录成功", res)
-					// 切换 chat 数据
+					// Switch chat data
 					await this.loadUserInfo(res.data.user, { showSwitchLoading: showLoginLoading })
 				})
 				.catch(async (err) => {
 					console.log("ws 登录失败", err)
 					if (err.code === 3103) {
 						console.log(err)
-						// accountBusiness.accountLogout() -》 this.deleteAccount()
+						// accountBusiness.accountLogout() -> this.deleteAccount()
 						await this.deleteAccount()
 					}
 					if (this.lastLogin?.authorization === authorization) {
@@ -458,13 +458,13 @@ export class UserService {
 	}
 
 	/*
-	 * @description 清除 lastLogin
+	 * @description Clear lastLogin
 	 */
 	clearLastLogin() {
 		this.lastLogin = null
 	}
 	/**
-	 * @description 切换用户
+	 * @description Switch user
 	 * @param delightfulUser
 	 * @param showSwitchLoading
 	 */
@@ -479,7 +479,7 @@ export class UserService {
 			console.log("切换账户", delightfulId)
 			if (showSwitchLoading) interfaceStore.setIsSwitchingOrganization(true)
 
-			// 如果当前账户ID与传入的账户ID相同，则不进行切换
+			// If current account ID equals the provided account ID, do not switch
 			chatDb.switchDb(delightfulId)
 			ChatFileService.init()
 			EditorDraftService.initDrafts()
@@ -488,17 +488,17 @@ export class UserService {
 			await userInfoService.loadData(db)
 			await groupInfoService.loadData(db)
 
-			// 检查所有组织的渲染序列号
+			// Check render sequence IDs for all organizations
 			MessageSeqIdService.checkAllOrganizationRenderSeqId()
 
-			// 重连情况，不重置视图
+			// For reconnection cases, do not reset the view
 			if (showSwitchLoading) {
-				// 重置消息数据视图
+				// Reset message data views
 				conversationService.reset() // 切换到空会话
 				MessageService.reset()
 			}
 
-			/** 如果是第一次加载，则拉取 消息 */
+			/** If first load, pull messages */
 			if (!MessageSeqIdService.getGlobalPullSeqId()) {
 				await MessageService.pullMessageOnFirstLoad(
 					delightfulUser.delightful_id,
@@ -510,7 +510,7 @@ export class UserService {
 					delightfulUser.organization_code,
 					delightfulUser,
 				)
-				// 拉取离线消息（内部只会应用该组织的信息）
+				// Pull offline messages (only applies info of this organization internally)
 				MessageService.pullOfflineMessages()
 			}
 
@@ -519,12 +519,12 @@ export class UserService {
 			// 	delightfulUser.organization_code,
 			// )
 
-			/** 设置消息拉取 循环 */
+			/** Setup message-pulling loop */
 			MessageService.init()
 			// this.messagePullBusiness.registerMessagePullLoop()
 			if (showSwitchLoading) interfaceStore.setIsSwitchingOrganization(false)
 		} catch (error) {
-			console.error("切换账户失败", error)
+			console.error("Switch account failed", error)
 		}
 	}
 }

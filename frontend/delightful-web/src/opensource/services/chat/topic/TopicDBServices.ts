@@ -12,36 +12,36 @@ class TopicDBServices {
 	}
 
 	/**
-	 * 获取话题缓存key
-	 * @param conversationId 会话ID
-	 * @returns 话题缓存key
+	 * Get topic cache key
+	 * @param conversationId Conversation ID
+	 * @returns Topic cache key
 	 */
 	static getTopicCacheKey(conversationId: string) {
 		return `topic_${conversationId}`
 	}
 
 	/**
-	 * 获取话题缓存
-	 * @param conversationId 会话ID
-	 * @returns 话题列表
+	 * Get topic cache
+	 * @param conversationId Conversation ID
+	 * @returns Topic list
 	 */
 	static getTopicCache(conversationId: string) {
 		return chatDb.getTopicListTable()?.where("conversation_id").equals(conversationId).first()
 	}
 
 	/**
-	 * 设置话题缓存
-	 * @param conversationId 会话ID
-	 * @param topicList 话题列表
+	 * Set topic cache
+	 * @param conversationId Conversation ID
+	 * @param topicList Topic list
 	 */
 	static setTopicCache(conversationId: string, topicList: ConversationTopic[]) {
 		chatDb.getTopicListTable()?.put({ conversation_id: conversationId, topic_list: topicList })
 	}
 
 	/**
-	 * 加载会话的话题列表
-	 * @param conversationId 会话ID
-	 * @returns 话题列表
+	 * Load topic list for a conversation
+	 * @param conversationId Conversation ID
+	 * @returns Topic list
 	 */
 	async loadTopicsFromDB(conversationId: string): Promise<Topic[]> {
 		const result = await this.db
@@ -56,9 +56,9 @@ class TopicDBServices {
 	}
 
 	/**
-	 * 保存话题列表到数据库
-	 * @param conversationId 会话ID
-	 * @param topics 话题列表
+	 * Save topic list to database
+	 * @param conversationId Conversation ID
+	 * @param topics Topic list
 	 */
 	saveTopicsToDB(conversationId: string, topics: Topic[]) {
 		return this.db.getTopicListTable()?.put({
@@ -68,8 +68,8 @@ class TopicDBServices {
 	}
 
 	/**
-	 * 添加单个话题到数据库
-	 * @param topic 话题
+	 * Add a single topic to the database
+	 * @param topic Topic
 	 */
 	async addTopicToDB(topic: Topic) {
 		const topics = await this.loadTopicsFromDB(topic.conversation_id)
@@ -78,10 +78,10 @@ class TopicDBServices {
 	}
 
 	/**
-	 * 更新话题
-	 * @param topicId 话题ID
-	 * @param conversationId 会话ID
-	 * @param data 更新的数据
+	 * Update topic
+	 * @param topicId Topic ID
+	 * @param conversationId Conversation ID
+	 * @param data Data to update
 	 */
 	async updateTopic(topicId: string, conversationId: string, data: Partial<ConversationTopic>) {
 		const topics = await this.loadTopicsFromDB(conversationId)
@@ -95,9 +95,9 @@ class TopicDBServices {
 	}
 
 	/**
-	 * 删除话题
-	 * @param topicId 话题ID
-	 * @param conversationId 会话ID
+	 * Delete topic
+	 * @param topicId Topic ID
+	 * @param conversationId Conversation ID
 	 */
 	async deleteTopic(topicId: string, conversationId: string) {
 		const topics = await this.loadTopicsFromDB(conversationId)
@@ -106,10 +106,10 @@ class TopicDBServices {
 	}
 
 	/**
-	 * 根据ID获取话题
-	 * @param topicId 话题ID
-	 * @param conversationId 会话ID
-	 * @returns 话题
+	 * Get topic by ID
+	 * @param topicId Topic ID
+	 * @param conversationId Conversation ID
+	 * @returns Topic
 	 */
 	async getTopicById(topicId: string, conversationId: string): Promise<Topic | undefined> {
 		const topics = await this.loadTopicsFromDB(conversationId)

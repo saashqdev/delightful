@@ -7,50 +7,50 @@ const renderWithTheme = (component: React.ReactElement) =>
 	render(<DelightfulThemeProvider theme="light">{component}</DelightfulThemeProvider>)
 
 describe("DelightfulStreamContent", () => {
-	it("应该正常渲染", () => {
-		renderWithTheme(<DelightfulStreamContent content="流式内容" />)
-		expect(screen.getByText("流式内容")).toBeInTheDocument()
+	it("Should render normally", () => {
+		renderWithTheme(<DelightfulStreamContent content="Streaming Content" />)
+		expect(screen.getByText("Streaming Content")).toBeInTheDocument()
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础流式内容快照", () => {
-			const { asFragment } = renderWithTheme(<DelightfulStreamContent content="流式内容" />)
+	describe("Snapshot Test", () => {
+		it("Basic Streaming Content Snapshot", () => {
+			const { asFragment } = renderWithTheme(<DelightfulStreamContent content="Streaming Content" />)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("长文本流式内容快照", () => {
+		it("Long Text Streaming Content Snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulStreamContent content="这是一个很长的流式内容，用于测试组件的显示效果" />,
+				<DelightfulStreamContent content="This is a long streaming content for testing component display" />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带自定义样式快照", () => {
+		it("Snapshot with Custom Style", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulStreamContent
-					content="流式内容"
+					content="Streaming Content"
 					style={{ fontSize: "16px", color: "blue" }}
 				/>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带类名快照", () => {
+		it("Snapshot with Class Name", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulStreamContent content="流式内容" className="custom-stream" />,
+				<DelightfulStreamContent content="Streaming Content" className="custom-stream" />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("空内容快照", () => {
+		it("Empty Content Snapshot", () => {
 			const { asFragment } = renderWithTheme(<DelightfulStreamContent content="" />)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带HTML标签内容快照", () => {
+		it("Snapshot with HTML Tag Content", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulStreamContent content="<strong>粗体文本</strong>" />,
+				<DelightfulStreamContent content="<strong>Bold Text</strong>" />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})

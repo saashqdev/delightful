@@ -7,75 +7,75 @@ const renderWithTheme = (component: React.ReactElement) =>
 	render(<DelightfulThemeProvider theme="light">{component}</DelightfulThemeProvider>)
 
 describe("DelightfulPageContainer", () => {
-	it("应该正常渲染", () => {
-		renderWithTheme(<DelightfulPageContainer title="页面标题">页面内容</DelightfulPageContainer>)
-		expect(screen.getByText("页面标题")).toBeInTheDocument()
-		expect(screen.getByText("页面内容")).toBeInTheDocument()
+	it("should render normally", () => {
+		renderWithTheme(<DelightfulPageContainer title="Page Title">Page content</DelightfulPageContainer>)
+		expect(screen.getByText("Page Title")).toBeInTheDocument()
+		expect(screen.getByText("Page content")).toBeInTheDocument()
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础页面容器快照", () => {
+	describe("Snapshot tests", () => {
+		it("basic page container snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulPageContainer title="页面标题">页面内容</DelightfulPageContainer>,
+				<DelightfulPageContainer title="Page Title">Page content</DelightfulPageContainer>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带类名页面容器快照", () => {
+		it("page container with class name snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulPageContainer title="页面标题" className="custom-page">
-					页面内容
+				<DelightfulPageContainer title="Page Title" className="custom-page">
+					Page content
 				</DelightfulPageContainer>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带自定义属性页面容器快照", () => {
+		it("page container with custom attributes snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulPageContainer title="页面标题" data-testid="page-container">
-					页面内容
+				<DelightfulPageContainer title="Page Title" data-testid="page-container">
+					Page content
 				</DelightfulPageContainer>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带操作按钮页面容器快照", () => {
+		it("page container with action button snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulPageContainer title="页面标题" extra={<button>操作按钮</button>}>
-					页面内容
+				<DelightfulPageContainer title="Page Title" extra={<button>Action Button</button>}>
+					Page content
 				</DelightfulPageContainer>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带标签页页面容器快照", () => {
+		it("page container with tabs snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulPageContainer
-					title="页面标题"
+					title="Page Title"
 					tabList={[
-						{ key: "tab1", tab: "标签1" },
-						{ key: "tab2", tab: "标签2" },
+						{ key: "tab1", tab: "Tab 1" },
+						{ key: "tab2", tab: "Tab 2" },
 					]}
 				>
-					页面内容
+					Page content
 				</DelightfulPageContainer>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带自定义样式页面容器快照", () => {
+		it("page container with custom styles snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulPageContainer title="页面标题" style={{ backgroundColor: "#f0f0f0" }}>
-					页面内容
+				<DelightfulPageContainer title="Page Title" style={{ backgroundColor: "#f0f0f0" }}>
+					Page content
 				</DelightfulPageContainer>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("无标题页面容器快照", () => {
+		it("page container without title snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulPageContainer>页面内容</DelightfulPageContainer>,
+				<DelightfulPageContainer>Page content</DelightfulPageContainer>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})

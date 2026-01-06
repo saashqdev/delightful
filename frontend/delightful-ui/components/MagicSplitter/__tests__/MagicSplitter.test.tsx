@@ -7,24 +7,24 @@ const renderWithTheme = (component: React.ReactElement) =>
 	render(<DelightfulThemeProvider theme="light">{component}</DelightfulThemeProvider>)
 
 describe("DelightfulSplitter", () => {
-	it("应该正常渲染", () => {
+	it("Should render normally", () => {
 		renderWithTheme(
 			<DelightfulSplitter>
-				<div>左侧</div>
-				<div>右侧</div>
+				<div>Left side</div>
+				<div>Right side</div>
 			</DelightfulSplitter>,
 		)
-		expect(screen.getByText("左侧")).toBeInTheDocument()
-		expect(screen.getByText("右侧")).toBeInTheDocument()
+		expect(screen.getByText("Left side")).toBeInTheDocument()
+		expect(screen.getByText("Right side")).toBeInTheDocument()
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础分割器快照", () => {
+	describe("Snapshot test", () => {
+		it("Basic splitter snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulSplitter>
-					<div>左侧内容</div>
-					<div>右侧内容</div>
+					<div>Left side content</div>
+					<div>Right side content</div>
 				</DelightfulSplitter>,
 			)
 			expect(asFragment()).toMatchSnapshot()
@@ -70,16 +70,16 @@ describe("DelightfulSplitter", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("复杂内容分割器快照", () => {
+		it("Complex content splitter snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulSplitter>
 					<div>
-						<h3>左侧标题</h3>
-						<p>左侧详细内容</p>
+						<h3>Left side title</h3>
+						<p>Left side detailed content</p>
 					</div>
 					<div>
-						<h3>右侧标题</h3>
-						<p>右侧详细内容</p>
+						<h3>Right side title</h3>
+						<p>Right side detailed content</p>
 					</div>
 				</DelightfulSplitter>,
 			)

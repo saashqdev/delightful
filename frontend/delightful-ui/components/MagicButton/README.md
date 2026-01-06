@@ -1,56 +1,56 @@
-# DelightfulButton 魔法按钮组件
+# DelightfulButton Magic Button Component
 
-`DelightfulButton` 是一个基于 Ant Design Button 组件的增强版按钮，提供了更多的自定义选项和样式优化。
+`DelightfulButton` is an enhanced button based on Ant Design's Button component, providing more customization options and style optimization.
 
-## 属性
+## Properties
 
-| 属性名         | 类型                            | 默认值   | 说明                              |
-| -------------- | ------------------------------- | -------- | --------------------------------- |
-| justify        | CSSProperties["justifyContent"] | "center" | 按钮内容的水平对齐方式            |
-| theme          | boolean                         | true     | 是否应用主题样式                  |
-| tip            | ReactNode                       | -        | 鼠标悬停时显示的提示内容          |
-| ...ButtonProps | -                               | -        | 支持所有 Ant Design Button 的属性 |
+| Property       | Type                            | Default  | Description                                          |
+| -------------- | ------------------------------- | -------- | ---------------------------------------------------- |
+| justify        | CSSProperties["justifyContent"] | "center" | Horizontal alignment of button content               |
+| theme          | boolean                         | true     | Whether to apply theme styles                        |
+| tip            | ReactNode                       | -        | Tooltip content displayed on mouse hover             |
+| ...ButtonProps | -                               | -        | Support all properties of Ant Design Button          |
 
-## 基础用法
+## Basic Usage
 
 ```tsx
 import { DelightfulButton } from '@/components/base/DelightfulButton';
 
-// 基础按钮
-<DelightfulButton>点击我</DelightfulButton>
+// Basic button
+<DelightfulButton>Click me</DelightfulButton>
 
-// 带图标的按钮
-<DelightfulButton icon={<IconStar />}>收藏</DelightfulButton>
+// Button with icon
+<DelightfulButton icon={<IconStar />}>Favorite</DelightfulButton>
 
-// 带提示的按钮
-<DelightfulButton tip="这是一个提示">悬停查看提示</DelightfulButton>
+// Button with tooltip
+<DelightfulButton tip="This is a tooltip">Hover to see tooltip</DelightfulButton>
 
-// 自定义对齐方式
-<DelightfulButton justify="flex-start">左对齐内容</DelightfulButton>
+// Custom alignment
+<DelightfulButton justify="flex-start">Left aligned content</DelightfulButton>
 
-// 不使用主题样式
-<DelightfulButton theme={false}>无主题样式</DelightfulButton>
+// Without theme styles
+<DelightfulButton theme={false}>No theme style</DelightfulButton>
 
-// 不同类型的按钮
-<DelightfulButton type="primary">主要按钮</DelightfulButton>
-<DelightfulButton type="default">默认按钮</DelightfulButton>
-<DelightfulButton type="dashed">虚线按钮</DelightfulButton>
-<DelightfulButton type="link">链接按钮</DelightfulButton>
-<DelightfulButton type="text">文本按钮</DelightfulButton>
+// Different types of buttons
+<DelightfulButton type="primary">Primary button</DelightfulButton>
+<DelightfulButton type="default">Default button</DelightfulButton>
+<DelightfulButton type="dashed">Dashed button</DelightfulButton>
+<DelightfulButton type="link">Link button</DelightfulButton>
+<DelightfulButton type="text">Text button</DelightfulButton>
 ```
 
-## 特点
+## Features
 
-1. **增强的样式控制**：提供了更多的样式自定义选项，如内容对齐方式
-2. **内置提示功能**：通过 `tip` 属性可以轻松添加悬停提示
-3. **主题集成**：可以通过 `theme` 属性控制是否应用主题样式
-4. **灵活的图标支持**：完全兼容 Ant Design 的图标系统
+1. **Enhanced style control**: Provides more style customization options such as content alignment
+2. **Built-in tooltip functionality**: Easily add hover tooltips through the `tip` property
+3. **Theme integration**: Control whether to apply theme styles through the `theme` property
+4. **Flexible icon support**: Fully compatible with Ant Design's icon system
 
-## 何时使用
+## When to Use
 
--   当你需要在页面上放置一个按钮时
--   当你需要按钮有更好的样式控制时
--   当你需要按钮带有悬停提示时
--   当你需要按钮内容有特定对齐方式时
+-   When you need to place a button on a page
+-   When you need better style control for buttons
+-   When you need buttons with hover tooltips
+-   When you need buttons with specific content alignment
 
-DelightfulButton 组件让你的按钮更加灵活和美观，同时保持了 Ant Design 按钮的所有功能。
+DelightfulButton component makes your buttons more flexible and beautiful, while maintaining all the functionality of Ant Design buttons.

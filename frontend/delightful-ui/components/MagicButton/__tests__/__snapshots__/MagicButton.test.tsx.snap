@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`DelightfulButton > 快照测试 > 不同尺寸按钮快照 1`] = `
+exports[`DelightfulButton > Snapshot Test > Different Size Button Snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -8,13 +8,13 @@ exports[`DelightfulButton > 快照测试 > 不同尺寸按钮快照 1`] = `
     type="button"
   >
     <span>
-      小按钮
+      Small Button
     </span>
   </button>
 </DocumentFragment>
 `;
 
-exports[`DelightfulButton > 快照测试 > 不同尺寸按钮快照 2`] = `
+exports[`DelightfulButton > Snapshot Test > Different Size Button Snapshot 2`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -22,13 +22,13 @@ exports[`DelightfulButton > 快照测试 > 不同尺寸按钮快照 2`] = `
     type="button"
   >
     <span>
-      大按钮
+      Large Button
     </span>
   </button>
 </DocumentFragment>
 `;
 
-exports[`DelightfulButton > 快照测试 > 主要按钮快照 1`] = `
+exports[`DelightfulButton > Snapshot Test > Primary Button Snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -36,13 +36,13 @@ exports[`DelightfulButton > 快照测试 > 主要按钮快照 1`] = `
     type="button"
   >
     <span>
-      主要按钮
+      Primary Button
     </span>
   </button>
 </DocumentFragment>
 `;
 
-exports[`DelightfulButton > 快照测试 > 加载状态按钮快照 1`] = `
+exports[`DelightfulButton > Snapshot Test > Loading State Button Snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -73,13 +73,13 @@ exports[`DelightfulButton > 快照测试 > 加载状态按钮快照 1`] = `
       </span>
     </span>
     <span>
-      加载按钮
+      Loading Button
     </span>
   </button>
 </DocumentFragment>
 `;
 
-exports[`DelightfulButton > 快照测试 > 带图标按钮快照 1`] = `
+exports[`DelightfulButton > Snapshot Test > Button with Icon Snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -94,13 +94,13 @@ exports[`DelightfulButton > 快照测试 > 带图标按钮快照 1`] = `
       </span>
     </span>
     <span>
-      带图标按钮
+      Button with Icon
     </span>
   </button>
 </DocumentFragment>
 `;
 
-exports[`DelightfulButton > 快照测试 > 文本按钮快照 1`] = `
+exports[`DelightfulButton > Snapshot Test > Text Button Snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -108,13 +108,13 @@ exports[`DelightfulButton > 快照测试 > 文本按钮快照 1`] = `
     type="button"
   >
     <span>
-      文本按钮
+      Text Button
     </span>
   </button>
 </DocumentFragment>
 `;
 
-exports[`DelightfulButton > 快照测试 > 禁用状态按钮快照 1`] = `
+exports[`DelightfulButton > Snapshot Test > Disabled State Button Snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -123,13 +123,13 @@ exports[`DelightfulButton > 快照测试 > 禁用状态按钮快照 1`] = `
     type="button"
   >
     <span>
-      禁用按钮
+      Disabled Button
     </span>
   </button>
 </DocumentFragment>
 `;
 
-exports[`DelightfulButton > 快照测试 > 虚线按钮快照 1`] = `
+exports[`DelightfulButton > Snapshot test > Dashed button snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -137,13 +137,13 @@ exports[`DelightfulButton > 快照测试 > 虚线按钮快照 1`] = `
     type="button"
   >
     <span>
-      虚线按钮
+      Dashed Button
     </span>
   </button>
 </DocumentFragment>
 `;
 
-exports[`DelightfulButton > 快照测试 > 链接按钮快照 1`] = `
+exports[`DelightfulButton > Snapshot test > Link button snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -151,15 +151,15 @@ exports[`DelightfulButton > 快照测试 > 链接按钮快照 1`] = `
     type="button"
   >
     <span>
-      链接按钮
+      Link Button
     </span>
   </button>
 </DocumentFragment>
 `;
 
-exports[`DelightfulButton > 快照测试 > 隐藏按钮快照 1`] = `<DocumentFragment />`;
+exports[`DelightfulButton > Snapshot test > Hidden button snapshot 1`] = `<DocumentFragment />`;
 
-exports[`DelightfulButton > 快照测试 > 默认按钮快照 1`] = `
+exports[`DelightfulButton > Snapshot test > Default button snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
@@ -167,7 +167,7 @@ exports[`DelightfulButton > 快照测试 > 默认按钮快照 1`] = `
     type="button"
   >
     <span>
-      默认按钮
+      Default Button
     </span>
   </button>
 </DocumentFragment>

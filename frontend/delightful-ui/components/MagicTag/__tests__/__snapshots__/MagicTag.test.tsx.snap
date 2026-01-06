@@ -1,11 +1,11 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`DelightfulTag > 快照测试 > 不同样式标签快照 1`] = `
+exports[`DelightfulTag > Snapshot test > Different styles tag snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-tag delightful-tag-success acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r6"
   >
-    成功标签
+    Success tag
     <svg
       aria-label="Close"
       class="tabler-icon tabler-icon-x delightful-tag-close-icon"
@@ -30,12 +30,12 @@ exports[`DelightfulTag > 快照测试 > 不同样式标签快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulTag > 快照测试 > 不同样式标签快照 2`] = `
+exports[`DelightfulTag > Snapshot test > Different styles tag snapshot 2`] = `
 <DocumentFragment>
   <span
     class="delightful-tag delightful-tag-warning acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r7"
   >
-    警告标签
+    Warning tag
     <svg
       aria-label="Close"
       class="tabler-icon tabler-icon-x delightful-tag-close-icon"
@@ -60,12 +60,12 @@ exports[`DelightfulTag > 快照测试 > 不同样式标签快照 2`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 1`] = `
+exports[`DelightfulTag > Snapshot test > Different colors tag snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-tag delightful-tag-blue acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r2"
   >
-    蓝色标签
+    Blue tag
     <svg
       aria-label="Close"
       class="tabler-icon tabler-icon-x delightful-tag-close-icon"
@@ -90,12 +90,12 @@ exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 2`] = `
+exports[`DelightfulTag > Snapshot test > Different colors tag snapshot 2`] = `
 <DocumentFragment>
   <span
     class="delightful-tag delightful-tag-red acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r3"
   >
-    红色标签
+    Red tag
     <svg
       aria-label="Close"
       class="tabler-icon tabler-icon-x delightful-tag-close-icon"
@@ -120,12 +120,12 @@ exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 2`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 3`] = `
+exports[`DelightfulTag > Snapshot test > Different colors tag snapshot 3`] = `
 <DocumentFragment>
   <span
     class="delightful-tag delightful-tag-green acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r4"
   >
-    绿色标签
+    Green tag
     <svg
       aria-label="Close"
       class="tabler-icon tabler-icon-x delightful-tag-close-icon"
@@ -150,12 +150,12 @@ exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 3`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulTag > 快照测试 > 可关闭标签快照 1`] = `
+exports[`DelightfulTag > Snapshot test > Closable tag snapshot 1`] = `
 <DocumentFragment>
   <span
-    class="delightful-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r5"
+    class="delightful-tag delightful-tag-default acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r8"
   >
-    可关闭标签
+    Closable tag
     <svg
       aria-label="Close"
       class="tabler-icon tabler-icon-x delightful-tag-close-icon"
@@ -180,7 +180,7 @@ exports[`DelightfulTag > 快照测试 > 可关闭标签快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulTag > 快照测试 > 图标标签快照 1`] = `
+exports[`DelightfulTag > Snapshot tests > Icon tag snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r9"
@@ -189,7 +189,7 @@ exports[`DelightfulTag > 快照测试 > 图标标签快照 1`] = `
       🏷️
     </span>
     <span>
-      带图标标签
+      Tag with icon
     </span>
     <svg
       aria-label="Close"
@@ -215,12 +215,12 @@ exports[`DelightfulTag > 快照测试 > 图标标签快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulTag > 快照测试 > 边框样式标签快照 1`] = `
+exports[`DelightfulTag > Snapshot tests > Bordered tag snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r8"
   >
-    边框标签
+    Bordered tag
     <svg
       aria-label="Close"
       class="tabler-icon tabler-icon-x delightful-tag-close-icon"
@@ -245,12 +245,12 @@ exports[`DelightfulTag > 快照测试 > 边框样式标签快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulTag > 快照测试 > 默认标签快照 1`] = `
+exports[`DelightfulTag > Snapshot test > Default tag snapshot 1`] = `
 <DocumentFragment>
   <span
-    class="delightful-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r1"
+    class="delightful-tag delightful-tag-default acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r1"
   >
-    默认标签
+    Default tag
     <svg
       aria-label="Close"
       class="tabler-icon tabler-icon-x delightful-tag-close-icon"

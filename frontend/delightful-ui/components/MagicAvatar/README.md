@@ -1,33 +1,33 @@
-# DelightfulAvatar 魔法头像组件
+# DelightfulAvatar Magic Avatar Component
 
-`DelightfulAvatar` 是一个基于 Ant Design Avatar 组件的增强版头像组件，提供了自动生成颜色、徽章支持等功能。
+`DelightfulAvatar` is an enhanced avatar component based on Ant Design Avatar, providing auto-generated colors, badge support, and more features.
 
-## 属性
+## Properties
 
-| 属性名         | 类型                                      | 默认值   | 说明                              |
-| -------------- | ----------------------------------------- | -------- | --------------------------------- |
-| badgeProps     | BadgeProps                                | -        | 徽章的属性，用于在头像上显示徽章  |
-| size           | number \| 'large' \| 'small' \| 'default' | 40       | 头像的大小                        |
-| shape          | 'circle' \| 'square'                      | 'square' | 头像的形状，默认为方形            |
-| src            | string                                    | -        | 头像图片的地址                    |
-| ...AvatarProps | -                                         | -        | 支持所有 Ant Design Avatar 的属性 |
+| Property Name | Type                                      | Default  | Description                              |
+| ------------- | ----------------------------------------- | -------- | ---------------------------------------- |
+| badgeProps    | BadgeProps                                | -        | Badge properties, used to display badges on avatars |
+| size          | number \| 'large' \| 'small' \| 'default' | 40       | Avatar size                              |
+| shape         | 'circle' \| 'square'                      | 'square' | Avatar shape, default is square          |
+| src           | string                                    | -        | Avatar image URL                         |
+| ...AvatarProps | -                                         | -        | Supports all Ant Design Avatar properties |
 
-## 基础用法
+## Basic Usage
 
 ```tsx
 import { DelightfulAvatar } from '@/components/base/DelightfulAvatar';
 
-// 基础用法 - 使用文字（会自动截取前两个字符）
-<DelightfulAvatar>用户名</DelightfulAvatar>
+// Basic usage - use text (automatically takes the first two characters)
+<DelightfulAvatar>Username</DelightfulAvatar>
 
-// 使用图片
+// Use image
 <DelightfulAvatar src="https://example.com/avatar.png" />
 
-// 自定义大小
-<DelightfulAvatar size={64}>大头像</DelightfulAvatar>
-<DelightfulAvatar size={24}>小头像</DelightfulAvatar>
+// Custom size
+<DelightfulAvatar size={64}>Large Avatar</DelightfulAvatar>
+<DelightfulAvatar size={24}>Small Avatar</DelightfulAvatar>
 
-// 使用徽章
+// Use badge
 <DelightfulAvatar
   badgeProps={{
     count: 5,
@@ -35,26 +35,26 @@ import { DelightfulAvatar } from '@/components/base/DelightfulAvatar';
     status: 'success'
   }}
 >
-  用户
+  User
 </DelightfulAvatar>
 
-// 自定义样式
-<DelightfulAvatar style={{ border: '2px solid red' }}>自定义</DelightfulAvatar>
+// Custom style
+<DelightfulAvatar style={{ border: '2px solid red' }}>Custom</DelightfulAvatar>
 ```
 
-## 特点
+## Features
 
-1. **自动生成颜色**：当没有提供图片时，会根据文本内容自动生成背景色和文本颜色
-2. **徽章支持**：可以通过 `badgeProps` 在头像上添加徽章，显示状态或数字
-3. **文本截取**：自动截取文本的前两个字符作为头像内容
-4. **URL 验证**：自动验证 src 是否为有效的 URL，无效时回退到文本显示
-5. **统一样式**：提供了统一的边框和文本阴影效果
+1. **Auto-generated colors**: When no image is provided, background and text colors are automatically generated based on text content
+2. **Badge support**: Add badges on avatars through `badgeProps` to show status or numbers
+3. **Text truncation**: Automatically truncates text to first two characters for avatar content
+4. **URL validation**: Automatically validates src as a valid URL, falls back to text display if invalid
+5. **Unified style**: Provides unified border and text shadow effects
 
-## 何时使用
+## When to Use
 
--   需要展示用户头像时
--   需要在头像上显示状态或通知数量时
--   需要根据用户名自动生成有颜色的头像时
--   需要在列表或评论中显示用户标识时
+-   When you need to display user avatars
+-   When you need to show status or notification count on avatars
+-   When you need to auto-generate colorful avatars based on usernames
+-   When you need to display user identifiers in lists or comments
 
-DelightfulAvatar 组件让你的头像展示更加美观和智能，无需为每个用户准备头像图片，也能呈现出个性化的效果。
+DelightfulAvatar component makes your avatar display more beautiful and intelligent, without needing to prepare avatar images for each user, while still presenting personalized effects.

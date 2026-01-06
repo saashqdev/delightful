@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`DelightfulSelect > 快照测试 > 基础选择器快照 1`] = `
+exports[`DelightfulSelect > Snapshot Test > Basic Selector Snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-select delightful-select-outlined css-var-r4 delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-single delightful-select-show-arrow"
@@ -34,7 +34,7 @@ exports[`DelightfulSelect > 快照测试 > 基础选择器快照 1`] = `
         <span
           class="delightful-select-selection-placeholder"
         >
-          请选择
+          Please Select
         </span>
       </span>
     </div>
@@ -65,7 +65,7 @@ exports[`DelightfulSelect > 快照测试 > 基础选择器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSelect > 快照测试 > 多选选择器快照 1`] = `
+exports[`DelightfulSelect > Snapshot Test > Multi-select Selector Snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-select delightful-select-outlined css-var-ra delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-multiple delightful-select-show-arrow delightful-select-show-search"
@@ -144,7 +144,7 @@ exports[`DelightfulSelect > 快照测试 > 多选选择器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSelect > 快照测试 > 大尺寸选择器快照 1`] = `
+exports[`DelightfulSelect > Snapshot Test > Large Size Selector Snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-select delightful-select-lg delightful-select-outlined css-var-rc delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-single delightful-select-show-arrow"
@@ -207,7 +207,7 @@ exports[`DelightfulSelect > 快照测试 > 大尺寸选择器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSelect > 快照测试 > 小尺寸选择器快照 1`] = `
+exports[`DelightfulSelect > Snapshot Test > Small Size Selector Snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-select delightful-select-sm delightful-select-outlined css-var-re delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-single delightful-select-show-arrow"
@@ -270,7 +270,7 @@ exports[`DelightfulSelect > 快照测试 > 小尺寸选择器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSelect > 快照测试 > 带清除按钮选择器快照 1`] = `
+exports[`DelightfulSelect > Snapshot Test > Selector Snapshot with Clear Button 1`] = `
 <DocumentFragment>
   <div
     class="delightful-select delightful-select-outlined css-var-rg delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-single delightful-select-allow-clear delightful-select-show-arrow"
@@ -333,7 +333,7 @@ exports[`DelightfulSelect > 快照测试 > 带清除按钮选择器快照 1`] = 
 </DocumentFragment>
 `;
 
-exports[`DelightfulSelect > 快照测试 > 带默认值选择器快照 1`] = `
+exports[`DelightfulSelect > Snapshot Test > Selector Snapshot with Default Value 1`] = `
 <DocumentFragment>
   <div
     class="delightful-select delightful-select-outlined css-var-r6 delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-single delightful-select-show-arrow"
@@ -366,9 +366,9 @@ exports[`DelightfulSelect > 快照测试 > 带默认值选择器快照 1`] = `
         </span>
         <span
           class="delightful-select-selection-item"
-          title="选项1"
+          title="Option 1"
         >
-          选项1
+          Option 1
         </span>
       </span>
     </div>
@@ -399,7 +399,7 @@ exports[`DelightfulSelect > 快照测试 > 带默认值选择器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSelect > 快照测试 > 禁用状态选择器快照 1`] = `
+exports[`DelightfulSelect > Snapshot Test > Disabled Selector Snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-select delightful-select-outlined css-var-r8 delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-single delightful-select-show-arrow delightful-select-disabled"

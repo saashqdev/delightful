@@ -1,22 +1,22 @@
-# DelightfulTable 魔法表格组件
+# DelightfulTable Magic Table Component
 
-`DelightfulTable` 是一个基于 Ant Design Table 组件的增强版表格，提供了更好的加载状态、滚动行为和样式优化。
+`DelightfulTable` is an enhanced table component based on Ant Design Table, providing better loading states, scrolling behavior, and style optimization.
 
-## 属性
+## Properties
 
-| 属性名        | 类型                                                   | 默认值               | 说明                             |
-| ------------- | ------------------------------------------------------ | -------------------- | -------------------------------- |
-| loading       | boolean \| SpinProps                                   | false                | 表格加载状态                     |
-| scroll        | { x?: number \| string \| true; y?: number \| string } | { x: 'max-content' } | 表格滚动配置                     |
-| ...TableProps | -                                                      | -                    | 支持所有 Ant Design Table 的属性 |
+| Property Name | Type                                                   | Default Value       | Description                           |
+| ------------- | ------------------------------------------------------ | -------------------- | ------------------------------------- |
+| loading       | boolean \| SpinProps                                   | false                | Table loading state                   |
+| scroll        | { x?: number \| string \| true; y?: number \| string } | { x: 'max-content' } | Table scroll configuration            |
+| ...TableProps | -                                                      | -                    | Supports all Ant Design Table props   |
 
-## 基础用法
+## Basic Usage
 
 ```tsx
 import { DelightfulTable } from '@/components/base/DelightfulTable';
 import type { ColumnsType } from 'antd/es/table';
 
-// 定义数据类型
+// Define data type
 interface DataType {
   key: string;
   name: string;
@@ -24,78 +24,78 @@ interface DataType {
   address: string;
 }
 
-// 定义列
+// Define columns
 const columns: ColumnsType<DataType> = [
   {
-    title: '姓名',
+    title: 'Name',
     dataIndex: 'name',
     key: 'name',
   },
   {
-    title: '年龄',
+    title: 'Age',
     dataIndex: 'age',
     key: 'age',
   },
   {
-    title: '地址',
+    title: 'Address',
     dataIndex: 'address',
     key: 'address',
   },
 ];
 
-// 定义数据
+// Define data
 const data: DataType[] = [
   {
     key: '1',
-    name: '张三',
+    name: 'Zhang San',
     age: 32,
-    address: '北京市朝阳区',
+    address: 'Chaoyang District, Beijing',
   },
   {
     key: '2',
-    name: '李四',
+    name: 'Li Si',
     age: 42,
-    address: '上海市浦东新区',
+    address: 'Pudong New Area, Shanghai',
   },
 ];
 
-// 基础用法
+// Basic usage
 <DelightfulTable columns={columns} dataSource={data} />
 
-// 加载状态
+// Loading state
 <DelightfulTable loading columns={columns} dataSource={data} />
 
-// 固定高度滚动
+// Fixed height scrolling
 <DelightfulTable
   scroll={{ y: 300 }}
   columns={columns}
   dataSource={data}
 />
 
-// 行点击事件
+// Row click event
 <DelightfulTable
   columns={columns}
   dataSource={data}
   onRow={(record) => ({
-    onClick: () => console.log('点击了行:', record),
+    onClick: () => console.log('Clicked row:', record),
   })}
 />
 ```
 
-## 特点
+## Features
 
-1. **优化的加载状态**：使用 DelightfulSpin 组件提供更美观的加载效果
-2. **自动处理滚动**：默认设置 x 滚动为 'max-content'，避免表格内容挤压
-3. **行点击样式**：为表格行添加了指针样式，提示用户可点击
-4. **空状态优化**：在加载状态下隐藏空状态提示，避免闪烁
-5. **灵活的高度控制**：可以通过 scroll.y 属性控制表格的固定高度
+1. **Optimized loading state**: Uses DelightfulSpin component to provide a more beautiful loading effect
+2. **Auto-handle scrolling**: Default x scroll set to 'max-content', prevents table content compression
+3. **Row click style**: Adds pointer style to table rows, indicating user can click
+4. **Empty state optimization**: Hides empty state prompt during loading to avoid flickering
+5. **Flexible height control**: Control fixed table height through scroll.y property
 
-## 何时使用
+## When to Use
 
--   需要展示大量结构化数据时
--   需要对数据进行排序、筛选、分页等操作时
--   需要表格有更好的加载状态展示时
--   需要表格内容可滚动时
--   需要行可点击时
+-   When you need to display large amounts of structured data
+-   When you need to sort, filter, paginate and perform other operations on data
+-   When you need better loading state display for tables
+-   When you need table content to be scrollable
+-   When you need rows to be clickable
 
-DelightfulTable 组件让你的表格展示更加美观和易用，同时保持了 Ant Design Table 的所有强大功能。
+DelightfulTable component makes your table display more beautiful and user-friendly while maintaining all the powerful features of Ant Design Table.

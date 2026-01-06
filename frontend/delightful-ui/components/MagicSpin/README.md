@@ -1,58 +1,58 @@
-# DelightfulSpin 魔法加载组件
+# DelightfulSpin Magic Loading Component
 
-`DelightfulSpin` 是一个基于 Ant Design Spin 组件的增强版加载组件，提供了品牌化的加载动画和更好的样式控制。
+`DelightfulSpin` is an enhanced loading component based on Ant Design's Spin component, providing branded loading animations and better style control.
 
-## 属性
+## Properties
 
-| 属性名       | 类型    | 默认值 | 说明                            |
-| ------------ | ------- | ------ | ------------------------------- |
-| section      | boolean | false  | 是否使用节段式加载动画          |
-| ...SpinProps | -       | -      | 支持所有 Ant Design Spin 的属性 |
+| Property     | Type    | Default | Description                                          |
+| ------------ | ------- | ------- | ---------------------------------------------------- |
+| section      | boolean | false   | Whether to use segment-style loading animation       |
+| ...SpinProps | -       | -       | Support all properties of Ant Design Spin            |
 
-## 基础用法
+## Basic Usage
 
 ```tsx
 import { DelightfulSpin } from '@/components/base/DelightfulSpin';
 
-// 基础用法
+// Basic usage
 <DelightfulSpin spinning />
 
-// 包裹内容
+// Wrap content
 <DelightfulSpin spinning>
-  <div>加载中的内容</div>
+  <div>Loading content</div>
 </DelightfulSpin>
 
-// 不同尺寸
+// Different sizes
 <DelightfulSpin size="small" spinning />
-<DelightfulSpin spinning /> {/* 默认尺寸 */}
+<DelightfulSpin spinning /> {/* Default size */}
 <DelightfulSpin size="large" spinning />
 
-// 节段式加载动画
+// Segment-style loading animation
 <DelightfulSpin section={true} spinning />
 
-// 在容器中居中显示
+// Center in container
 <div style={{ height: '200px', position: 'relative' }}>
   <DelightfulSpin spinning />
 </div>
 
-// 带提示文本
-<DelightfulSpin tip="加载中..." spinning />
+// With tooltip text
+<DelightfulSpin tip="Loading..." spinning />
 ```
 
-## 特点
+## Features
 
-1. **品牌化动画**：使用 Delightful 品牌的 Lottie 动画作为加载指示器
-2. **自适应尺寸**：提供小、中、大三种预设尺寸
-3. **居中布局**：自动在容器中居中显示
-4. **节段式动画**：可以通过 `section` 属性切换不同的动画风格
-5. **主题适配**：自动适应亮色/暗色主题
+1. **Branded animation**: Uses Delightful brand Lottie animation as loading indicator
+2. **Adaptive sizes**: Provides small, medium, and large preset sizes
+3. **Center layout**: Automatically centers in container
+4. **Segment-style animation**: Switch different animation styles through `section` property
+5. **Theme adaptation**: Automatically adapts to light/dark theme
 
-## 何时使用
+## When to Use
 
--   页面或组件加载时显示加载状态
--   数据请求过程中提供视觉反馈
--   长时间操作时提供等待提示
--   需要阻止用户与正在加载的内容交互时
--   需要品牌化加载体验时
+-   Display loading state when page or component is loading
+-   Provide visual feedback during data requests
+-   Provide wait prompts during long operations
+-   When you need to prevent user interaction with loading content
+-   When you need branded loading experience
 
-DelightfulSpin 组件让你的加载状态展示更加美观和品牌化，适合在各种需要加载提示的场景下使用。
+DelightfulSpin component makes your loading state display more beautiful and branded, suitable for any scenario that requires loading prompts.

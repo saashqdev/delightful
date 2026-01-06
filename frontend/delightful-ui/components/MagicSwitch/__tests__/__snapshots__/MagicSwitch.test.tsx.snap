@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`DelightfulSwitch > 快照测试 > 小尺寸开关快照 1`] = `
+exports[`DelightfulSwitch > Snapshot Test > Small Size Switch Snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-checked="false"
@@ -25,7 +25,7 @@ exports[`DelightfulSwitch > 快照测试 > 小尺寸开关快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSwitch > 快照测试 > 带标签开关快照 1`] = `
+exports[`DelightfulSwitch > Snapshot Test > Switch Snapshot with Labels 1`] = `
 <DocumentFragment>
   <button
     aria-checked="false"
@@ -42,19 +42,19 @@ exports[`DelightfulSwitch > 快照测试 > 带标签开关快照 1`] = `
       <span
         class="delightful-switch-inner-checked"
       >
-        开
+        On
       </span>
       <span
         class="delightful-switch-inner-unchecked"
       >
-        关
+        Off
       </span>
     </span>
   </button>
 </DocumentFragment>
 `;
 
-exports[`DelightfulSwitch > 快照测试 > 开启状态开关快照 1`] = `
+exports[`DelightfulSwitch > Snapshot Test > Enabled Switch Snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-checked="true"
@@ -79,7 +79,7 @@ exports[`DelightfulSwitch > 快照测试 > 开启状态开关快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSwitch > 快照测试 > 禁用且开启状态开关快照 1`] = `
+exports[`DelightfulSwitch > Snapshot Test > Disabled and Enabled Switch Snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-checked="true"
@@ -105,7 +105,7 @@ exports[`DelightfulSwitch > 快照测试 > 禁用且开启状态开关快照 1`]
 </DocumentFragment>
 `;
 
-exports[`DelightfulSwitch > 快照测试 > 禁用状态开关快照 1`] = `
+exports[`DelightfulSwitch > Snapshot Test > Disabled Switch Snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-checked="false"
@@ -131,7 +131,7 @@ exports[`DelightfulSwitch > 快照测试 > 禁用状态开关快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSwitch > 快照测试 > 默认开关快照 1`] = `
+exports[`DelightfulSwitch > Snapshot Test > Default Switch Snapshot 1`] = `
 <DocumentFragment>
   <button
     aria-checked="false"

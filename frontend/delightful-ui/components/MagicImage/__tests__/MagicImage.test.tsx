@@ -7,49 +7,49 @@ const renderWithTheme = (component: React.ReactElement) =>
 	render(<DelightfulThemeProvider theme="light">{component}</DelightfulThemeProvider>)
 
 describe("DelightfulImage", () => {
-	it("应该正常渲染", () => {
-		renderWithTheme(<DelightfulImage src="test.jpg" alt="测试图片" />)
-		expect(screen.getByAltText("测试图片")).toBeInTheDocument()
+	it("Should render image normally", () => {
+		renderWithTheme(<DelightfulImage src="test.jpg" alt="Test image" />
+		expect(screen.getByAltText("Test image")).toBeInTheDocument()
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础图片快照", () => {
-			const { asFragment } = renderWithTheme(<DelightfulImage src="test.jpg" alt="测试图片" />)
+	describe("Snapshot test", () => {
+		it("Basic image snapshot", () => {
+			const { asFragment } = renderWithTheme(<DelightfulImage src="test.jpg" alt="Test image" />)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带类名图片快照", () => {
+		it("Image with class name snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulImage src="test.jpg" alt="测试图片" className="custom-image" />,
+				<DelightfulImage src="test.jpg" alt="Test image" className="custom-image" />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带点击事件图片快照", () => {
+		it("Image with click event snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulImage src="test.jpg" alt="测试图片" onClick={() => {}} />,
+				<DelightfulImage src="test.jpg" alt="Test image" onClick={() => {}} />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("自定义宽度图片快照", () => {
+		it("Custom width image snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulImage src="test.jpg" alt="测试图片" width={200} />,
+				<DelightfulImage src="test.jpg" alt="Test image" width={200} />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("自定义高度图片快照", () => {
+		it("Custom height image snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulImage src="test.jpg" alt="测试图片" height={150} />,
+				<DelightfulImage src="test.jpg" alt="Test image" height={150} />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带样式图片快照", () => {
+		it("Image with styles snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulImage src="test.jpg" alt="测试图片" style={{ borderRadius: "8px" }} />,
+				<DelightfulImage src="test.jpg" alt="Test image" style={{ borderRadius: "8px" }} />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})

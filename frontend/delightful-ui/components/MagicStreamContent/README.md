@@ -1,28 +1,28 @@
-# DelightfulStreamContent 魔法流式内容组件
+# DelightfulStreamContent Magic Stream Content Component
 
-DelightfulStreamContent 是一个用于展示流式内容的组件，它能够模拟打字效果，逐字显示文本内容，为用户提供动态的阅读体验。该组件特别适用于聊天机器人回复、代码生成等需要渐进式展示内容的场景。
+DelightfulStreamContent is a component for displaying streaming content that simulates typing effects and displays text content character by character, providing users with a dynamic reading experience. This component is particularly suitable for scenes like chatbot replies and code generation that require progressive content display.
 
-## 属性
+## Properties
 
-| 属性名   | 类型                              | 默认值 | 描述                                     |
-| -------- | --------------------------------- | ------ | ---------------------------------------- |
-| content  | string                            | -      | 要流式显示的文本内容                     |
-| children | (text: string) => React.ReactNode | -      | 可选的渲染函数，用于自定义内容的渲染方式 |
+| Property | Type                              | Default | Description                                     |
+| -------- | --------------------------------- | ------- | ----------------------------------------------- |
+| content  | string                            | -       | Text content to be displayed in streaming mode |
+| children | (text: string) => React.ReactNode | -       | Optional render function for custom rendering  |
 
-## 基本用法
+## Basic Usage
 
 ```tsx
 import DelightfulStreamContent from '@/components/base/DelightfulStreamContent';
 
-// 基本用法 - 直接显示文本
-<DelightfulStreamContent content="这是一段流式显示的文本内容，会逐字出现，模拟打字效果。" />
+// Basic usage - display text directly
+<DelightfulStreamContent content="This is streaming text content that appears character by character, simulating a typing effect." />
 
-// 使用自定义渲染函数
-<DelightfulStreamContent content="这是一段**带有 Markdown 格式**的文本内容。">
+// Using custom render function
+<DelightfulStreamContent content="This is text **with Markdown formatting**.">
   {(text) => <ReactMarkdown>{text}</ReactMarkdown>}
 </DelightfulStreamContent>
 
-// 在聊天界面中使用
+// Usage in a chat interface
 <div className="chat-message">
   <div className="avatar">
     <img src="/bot-avatar.png" alt="Bot" />
@@ -33,20 +33,20 @@ import DelightfulStreamContent from '@/components/base/DelightfulStreamContent';
 </div>
 ```
 
-## 特性
+## Features
 
--   **打字效果**：模拟真实的打字过程，逐字显示内容
--   **流式更新**：支持内容的增量更新，适用于流式 API 响应
--   **自定义渲染**：通过 children 函数可以自定义内容的渲染方式
--   **平滑过渡**：新增内容时保持平滑的视觉效果
--   **轻量级**：组件实现简洁，性能开销小
+-   **Typing effect**: Simulates real typing process, displays content character by character
+-   **Streaming updates**: Supports incremental content updates, suitable for streaming API responses
+-   **Custom rendering**: Customize content rendering through the children function
+-   **Smooth transitions**: Maintains smooth visual effects when new content is added
+-   **Lightweight**: Clean component implementation with minimal performance overhead
 
-## 使用场景
+## Use Cases
 
--   AI 聊天机器人的回复展示
--   代码生成器的输出展示
--   教程和引导内容的逐步呈现
--   故事和叙述内容的动态展示
--   任何需要吸引用户注意力的渐进式内容展示
+-   AI chatbot reply display
+-   Code generator output display
+-   Step-by-step presentation of tutorials and guidance content
+-   Dynamic display of stories and narrative content
+-   Any progressive content display that needs to attract user attention
 
-DelightfulStreamContent 组件通过模拟打字效果，为应用提供了一种更加生动和引人入胜的内容展示方式，特别适合需要营造实时交互感的场景。
+DelightfulStreamContent component provides a more vivid and engaging content display method for applications through simulating typing effects, especially suitable for scenarios that need to create a sense of real-time interaction.

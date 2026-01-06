@@ -1,87 +1,87 @@
-# PageContainer 页面容器组件
+# PageContainer Page Container Component
 
-`PageContainer` 是一个用于包裹页面内容的容器组件，提供了统一的页面布局、标题栏和关闭功能。
+`PageContainer` is a container component used to wrap page content, providing unified page layout, header bar, and close functionality.
 
-## 属性
+## Properties
 
-| 属性名       | 类型       | 默认值 | 说明                            |
-| ------------ | ---------- | ------ | ------------------------------- |
-| icon         | ReactNode  | -      | 页面标题前的图标                |
-| closeable    | boolean    | false  | 是否显示关闭按钮                |
-| onClose      | () => void | -      | 点击关闭按钮的回调函数          |
-| className    | string     | -      | 容器的自定义类名                |
-| ...CardProps | -          | -      | 支持所有 Ant Design Card 的属性 |
+| Property     | Type       | Default | Description                               |
+| ------------ | ---------- | ------- | ----------------------------------------- |
+| icon         | ReactNode  | -       | Icon before the page title                |
+| closeable    | boolean    | false   | Whether to display the close button       |
+| onClose      | () => void | -       | Callback function when close button clicked |
+| className    | string     | -       | Custom class name of the container        |
+| ...CardProps | -          | -       | All properties of Ant Design Card are supported |
 
-## 基础用法
+## Basic Usage
 
 ```tsx
 import { PageContainer } from '@/components/base/PageContainer';
 import { IconHome } from '@tabler/icons-react';
 
-// 基础用法
-<PageContainer title="页面标题">
-  <div>页面内容</div>
+// Basic usage
+<PageContainer title="Page Title">
+  <div>Page content</div>
 </PageContainer>
 
-// 带图标的页面
+// Page with icon
 <PageContainer
-  title="首页"
+  title="Home"
   icon={<IconHome size={20} />}
 >
-  <div>首页内容</div>
+  <div>Home content</div>
 </PageContainer>
 
-// 可关闭的页面
+// Closeable page
 <PageContainer
-  title="详情页"
+  title="Details Page"
   closeable
-  onClose={() => console.log('页面关闭')}
+  onClose={() => console.log('Page closed')}
 >
-  <div>详情页内容</div>
+  <div>Details page content</div>
 </PageContainer>
 
-// 自定义页头样式
+// Custom header style
 <PageContainer
-  title="自定义页头"
+  title="Custom Header"
   headStyle={{ background: '#f0f2f5' }}
 >
-  <div>页面内容</div>
+  <div>Page content</div>
 </PageContainer>
 
-// 在布局中使用
+// Use in layout
 <Layout>
-  <Layout.Sider>侧边栏</Layout.Sider>
+  <Layout.Sider>Sidebar</Layout.Sider>
   <Layout.Content>
-    <PageContainer title="主内容区">
-      <div>主要内容</div>
+    <PageContainer title="Main Content Area">
+      <div>Main content</div>
     </PageContainer>
   </Layout.Content>
 </Layout>
 
-// 嵌套使用
-<PageContainer title="外层页面">
+// Nested usage
+<PageContainer title="Outer Page">
   <div style={{ padding: '20px' }}>
-    <PageContainer title="内层页面">
-      <div>内层内容</div>
+    <PageContainer title="Inner Page">
+      <div>Inner content</div>
     </PageContainer>
   </div>
 </PageContainer>
 ```
 
-## 特点
+## Features
 
-1. **统一布局**：提供了统一的页面布局结构
-2. **响应式设计**：自动适应不同屏幕尺寸
-3. **主题适配**：自动适应亮色/暗色主题
-4. **标题栏固定**：标题栏会在滚动时保持固定在顶部
-5. **关闭功能**：可以添加关闭按钮，方便在多页面应用中导航
+1. **Unified Layout**: Provides a unified page layout structure
+2. **Responsive Design**: Automatically adapts to different screen sizes
+3. **Theme Adaptation**: Automatically adapts to light/dark theme
+4. **Fixed Header**: The header stays fixed at the top when scrolling
+5. **Close Functionality**: Can add a close button for convenient navigation in multi-page applications
 
-## 何时使用
+## When to Use
 
--   需要为页面提供统一的布局结构时
--   需要页面有标题栏和关闭功能时
--   需要在应用中创建多个具有一致外观的页面时
--   需要页面标题栏在滚动时保持可见时
--   需要在页面中显示图标和标题时
+-   When you need to provide a unified layout structure for pages
+-   When pages need a header bar and close functionality
+-   When you need to create multiple pages with consistent appearance in your application
+-   When the page header needs to remain visible while scrolling
+-   When you need to display icons and titles in pages
 
-PageContainer 组件让你的页面布局更加统一和专业，适合在各种需要结构化页面的场景下使用。
+The PageContainer component makes your page layout more unified and professional, suitable for use in various scenarios requiring structured pages.

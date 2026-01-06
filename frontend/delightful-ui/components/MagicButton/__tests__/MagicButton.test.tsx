@@ -8,137 +8,137 @@ const renderWithTheme = (component: React.ReactElement) => {
 }
 
 describe("DelightfulButton", () => {
-	it("应该正确渲染按钮", () => {
-		renderWithTheme(<DelightfulButton>测试按钮</DelightfulButton>)
-		expect(screen.getByRole("button", { name: "测试按钮" })).toBeInTheDocument()
+	it("Should render button correctly", () => {
+		renderWithTheme(<DelightfulButton>Test Button</DelightfulButton>)
+		expect(screen.getByRole("button", { name: "Test Button" })).toBeInTheDocument()
 	})
 
-	it("应该支持不同的按钮类型", () => {
-		const { rerender } = renderWithTheme(<DelightfulButton type="primary">主要按钮</DelightfulButton>)
+	it("Should support different button types", () => {
+		const { rerender } = renderWithTheme(<DelightfulButton type="primary">Primary Button</DelightfulButton>)
 		expect(screen.getByRole("button")).toHaveClass("delightful-btn-primary")
 
 		rerender(
 			<DelightfulThemeProvider theme="light">
-				<DelightfulButton type="dashed">虚线按钮</DelightfulButton>
+			<DelightfulButton type="dashed">Dashed Button</DelightfulButton>
 			</DelightfulThemeProvider>,
 		)
 		expect(screen.getByRole("button")).toHaveClass("delightful-btn-dashed")
 	})
 
-	it("应该支持点击事件", () => {
+	it("Should support click events", () => {
 		const handleClick = vi.fn()
-		renderWithTheme(<DelightfulButton onClick={handleClick}>点击按钮</DelightfulButton>)
+		renderWithTheme(<DelightfulButton onClick={handleClick}>Click Button</DelightfulButton>)
 
 		fireEvent.click(screen.getByRole("button"))
 		expect(handleClick).toHaveBeenCalledTimes(1)
 	})
 
-	it("应该支持禁用状态", () => {
-		renderWithTheme(<DelightfulButton disabled>禁用按钮</DelightfulButton>)
+	it("Should support disabled state", () => {
+		renderWithTheme(<DelightfulButton disabled>Disabled Button</DelightfulButton>)
 		expect(screen.getByRole("button")).toBeDisabled()
 	})
 
-	it("应该支持加载状态", () => {
-		renderWithTheme(<DelightfulButton loading>加载按钮</DelightfulButton>)
+	it("Should support loading state", () => {
+		renderWithTheme(<DelightfulButton loading>Loading Button</DelightfulButton>)
 		expect(screen.getByRole("button")).toHaveClass("delightful-btn-loading")
 	})
 
-	it("应该支持自定义样式类名", () => {
-		renderWithTheme(<DelightfulButton className="custom-class">自定义按钮</DelightfulButton>)
+	it("Should support custom class name", () => {
+		renderWithTheme(<DelightfulButton className="custom-class">Custom Button</DelightfulButton>)
 		expect(screen.getByRole("button")).toHaveClass("custom-class")
 	})
 
-	it("应该支持图标", () => {
+	it("Should support icon", () => {
 		renderWithTheme(
-			<DelightfulButton icon={<span data-testid="icon">🚀</span>}>带图标按钮</DelightfulButton>,
+			<DelightfulButton icon={<span data-testid="icon">🚀</span>}>Button with Icon</DelightfulButton>,
 		)
 		expect(screen.getByTestId("icon")).toBeInTheDocument()
 	})
 
-	it("应该支持 tooltip", () => {
-		renderWithTheme(<DelightfulButton tip="这是一个提示">带提示按钮</DelightfulButton>)
+	it("Should support tooltip", () => {
+		renderWithTheme(<DelightfulButton tip="This is a tooltip">Button with Tooltip</DelightfulButton>)
 		expect(screen.getByRole("button")).toBeInTheDocument()
 	})
 
-	it("当 hidden 为 true 时应该不渲染", () => {
-		const { container } = renderWithTheme(<DelightfulButton hidden>隐藏按钮</DelightfulButton>)
+	it("Should not render when hidden is true", () => {
+		const { container } = renderWithTheme(<DelightfulButton hidden>Hidden Button</DelightfulButton>)
 		expect(container.firstChild).toBeNull()
 	})
 
-	it("应该支持不同的 justify 属性", () => {
-		renderWithTheme(<DelightfulButton justify="flex-start">左对齐按钮</DelightfulButton>)
+	it("Should support different justify property", () => {
+		renderWithTheme(<DelightfulButton justify="flex-start">Left-aligned Button</DelightfulButton>)
 		const button = screen.getByRole("button")
 		expect(button).toBeInTheDocument()
 	})
 
-	it("应该支持 ref 转发", () => {
+	it("Should support ref forwarding", () => {
 		const ref = vi.fn()
-		renderWithTheme(<DelightfulButton ref={ref}>Ref 按钮</DelightfulButton>)
+		renderWithTheme(<DelightfulButton ref={ref}>Ref Button</DelightfulButton>)
 		expect(ref).toHaveBeenCalled()
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("默认按钮快照", () => {
-			const { asFragment } = renderWithTheme(<DelightfulButton>默认按钮</DelightfulButton>)
+	describe("Snapshot test", () => {
+		it("Default button snapshot", () => {
+			const { asFragment } = renderWithTheme(<DelightfulButton>Default Button</DelightfulButton>)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("主要按钮快照", () => {
+		it("Primary button snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulButton type="primary">主要按钮</DelightfulButton>,
+				<DelightfulButton type="primary">Primary Button</DelightfulButton>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("虚线按钮快照", () => {
+		it("Dashed button snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulButton type="dashed">虚线按钮</DelightfulButton>,
+				<DelightfulButton type="dashed">Dashed Button</DelightfulButton>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("文本按钮快照", () => {
-			const { asFragment } = renderWithTheme(<DelightfulButton type="text">文本按钮</DelightfulButton>)
+		it("Text button snapshot", () => {
+			const { asFragment } = renderWithTheme(<DelightfulButton type="text">Text Button</DelightfulButton>)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("链接按钮快照", () => {
-			const { asFragment } = renderWithTheme(<DelightfulButton type="link">链接按钮</DelightfulButton>)
+		it("Link button snapshot", () => {
+			const { asFragment } = renderWithTheme(<DelightfulButton type="link">Link Button</DelightfulButton>)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("禁用状态按钮快照", () => {
-			const { asFragment } = renderWithTheme(<DelightfulButton disabled>禁用按钮</DelightfulButton>)
+		it("Disabled button snapshot", () => {
+			const { asFragment } = renderWithTheme(<DelightfulButton disabled>Disabled Button</DelightfulButton>)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("加载状态按钮快照", () => {
-			const { asFragment } = renderWithTheme(<DelightfulButton loading>加载按钮</DelightfulButton>)
+		it("Loading button snapshot", () => {
+			const { asFragment } = renderWithTheme(<DelightfulButton loading>Loading Button</DelightfulButton>)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带图标按钮快照", () => {
+		it("Button with icon snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulButton icon={<span>🚀</span>}>带图标按钮</DelightfulButton>,
+				<DelightfulButton icon={<span>🚀</span>}>Button with Icon</DelightfulButton>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("不同尺寸按钮快照", () => {
+		it("Different button size snapshot", () => {
 			const { asFragment: smallFragment } = renderWithTheme(
-				<DelightfulButton size="small">小按钮</DelightfulButton>,
+				<DelightfulButton size="small">Small Button</DelightfulButton>,
 			)
 			expect(smallFragment()).toMatchSnapshot()
 
 			const { asFragment: largeFragment } = renderWithTheme(
-				<DelightfulButton size="large">大按钮</DelightfulButton>,
+				<DelightfulButton size="large">Large Button</DelightfulButton>,
 			)
 			expect(largeFragment()).toMatchSnapshot()
 		})
 
-		it("隐藏按钮快照", () => {
-			const { asFragment } = renderWithTheme(<DelightfulButton hidden>隐藏按钮</DelightfulButton>)
+		it("Hidden button snapshot", () => {
+			const { asFragment } = renderWithTheme(<DelightfulButton hidden>Hidden Button</DelightfulButton>)
 			expect(asFragment()).toMatchSnapshot()
 		})
 	})

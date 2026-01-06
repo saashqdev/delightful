@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`DelightfulTable > 快照测试 > 基础表格快照 1`] = `
+exports[`DelightfulTable > Snapshot Test > Basic Table Snapshot 1`] = `
 <DocumentFragment>
   <div
     class="css-var-r1 delightful-table-css-var delightful-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
@@ -190,7 +190,7 @@ exports[`DelightfulTable > 快照测试 > 基础表格快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulTable > 快照测试 > 带分页表格快照 1`] = `
+exports[`DelightfulTable > Snapshot Test > Table Snapshot with Pagination 1`] = `
 <DocumentFragment>
   <div
     class="css-var-r3 delightful-table-css-var delightful-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
@@ -380,7 +380,7 @@ exports[`DelightfulTable > 快照测试 > 带分页表格快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulTable > 快照测试 > 带排序表格快照 1`] = `
+exports[`DelightfulTable > Snapshot Test > Table Snapshot with Sorting 1`] = `
 <DocumentFragment>
   <div
     class="css-var-r4 delightful-table-css-var delightful-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
@@ -686,7 +686,7 @@ exports[`DelightfulTable > 快照测试 > 带排序表格快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulTable > 快照测试 > 带选择框表格快照 1`] = `
+exports[`DelightfulTable > Snapshot Test > Table Snapshot with Selection 1`] = `
 <DocumentFragment>
   <div
     class="css-var-r9 delightful-table-css-var delightful-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
@@ -952,7 +952,7 @@ exports[`DelightfulTable > 快照测试 > 带选择框表格快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulTable > 快照测试 > 空数据表格快照 1`] = `
+exports[`DelightfulTable > Snapshot Test > Empty Data Table Snapshot 1`] = `
 <DocumentFragment>
   <div
     class="css-var-r2 delightful-table-css-var delightful-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
@@ -1090,7 +1090,7 @@ exports[`DelightfulTable > 快照测试 > 空数据表格快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulTable > 快照测试 > 紧凑型表格快照 1`] = `
+exports[`DelightfulTable > Snapshot Test > Compact Table Snapshot 1`] = `
 <DocumentFragment>
   <div
     class="css-var-ra delightful-table-css-var delightful-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"

@@ -1,106 +1,106 @@
-# DelightfulModal 魔法对话框组件
+# DelightfulModal Magic Dialog Component
 
-`DelightfulModal` 是一个基于 Ant Design Modal 组件的增强版对话框，提供了更美观的样式和国际化支持。
+`DelightfulModal` is an enhanced dialog component based on Ant Design Modal, providing more beautiful styles and internationalization support.
 
-## 属性
+## Properties
 
-| 属性名        | 类型 | 默认值 | 说明                             |
-| ------------- | ---- | ------ | -------------------------------- |
-| ...ModalProps | -    | -      | 支持所有 Ant Design Modal 的属性 |
+| Property      | Type | Default | Description                                  |
+| ------------- | ---- | ------- | -------------------------------------------- |
+| ...ModalProps | -    | -       | All properties of Ant Design Modal are supported |
 
-## 静态方法
+## Static Methods
 
-DelightfulModal 提供了与 Ant Design Modal 相同的静态方法，但增加了国际化支持和样式优化：
+DelightfulModal provides the same static methods as Ant Design Modal, but with added internationalization support and style optimizations:
 
--   `DelightfulModal.confirm(config)` - 确认对话框
--   `DelightfulModal.info(config)` - 信息对话框
--   `DelightfulModal.success(config)` - 成功对话框
--   `DelightfulModal.error(config)` - 错误对话框
--   `DelightfulModal.warning(config)` - 警告对话框
+-   `DelightfulModal.confirm(config)` - Confirmation dialog
+-   `DelightfulModal.info(config)` - Information dialog
+-   `DelightfulModal.success(config)` - Success dialog
+-   `DelightfulModal.error(config)` - Error dialog
+-   `DelightfulModal.warning(config)` - Warning dialog
 
-## 基础用法
+## Basic Usage
 
 ```tsx
 import { DelightfulModal } from "@/components/base/DelightfulModal"
 import { useState } from "react"
 
-// 基础对话框
+// Basic dialog
 const MyComponent = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	return (
 		<>
-			<button onClick={() => setIsModalOpen(true)}>打开对话框</button>
+			<button onClick={() => setIsModalOpen(true)}>Open Dialog</button>
 			<DelightfulModal
-				title="对话框标题"
+				title="Dialog Title"
 				open={isModalOpen}
 				onOk={() => setIsModalOpen(false)}
 				onCancel={() => setIsModalOpen(false)}
 			>
-				<p>这是对话框的内容</p>
+				<p>This is the dialog content</p>
 			</DelightfulModal>
 		</>
 	)
 }
 
-// 使用静态方法
+// Using static methods
 const showConfirm = () => {
 	DelightfulModal.confirm({
-		title: "确认操作",
-		content: "你确定要执行这个操作吗？",
+		title: "Confirm Action",
+		content: "Are you sure you want to perform this action?",
 		onOk() {
-			console.log("用户点击了确认")
+			console.log("User clicked confirm")
 		},
 		onCancel() {
-			console.log("用户点击了取消")
+			console.log("User clicked cancel")
 		},
 	})
 }
 
-// 信息提示
+// Information prompt
 const showInfo = () => {
 	DelightfulModal.info({
-		title: "信息提示",
-		content: "这是一条重要信息",
+		title: "Information",
+		content: "This is an important message",
 	})
 }
 
-// 成功提示
+// Success prompt
 const showSuccess = () => {
 	DelightfulModal.success({
-		title: "操作成功",
-		content: "数据已成功保存",
+		title: "Operation Successful",
+		content: "Data has been saved successfully",
 	})
 }
 
-// 错误提示
+// Error prompt
 const showError = () => {
 	DelightfulModal.error({
-		title: "操作失败",
-		content: "保存数据时出现错误",
+		title: "Operation Failed",
+		content: "An error occurred while saving data",
 	})
 }
 
-// 警告提示
+// Warning prompt
 const showWarning = () => {
 	DelightfulModal.warning({
-		title: "警告",
-		content: "此操作可能导致数据丢失",
+		title: "Warning",
+		content: "This operation may result in data loss",
 	})
 }
 ```
 
-## 特点
+## Features
 
-1. **优化的样式**：头部、内容区、底部都有特定的样式优化
-2. **自定义图标**：为 info 等类型的对话框提供了自定义图标
-3. **按钮样式优化**：对话框按钮有更好的样式和交互体验
+1. **Optimized Styles**: Header, content area, and footer all have specific style optimizations
+2. **Custom Icons**: Provides custom icons for info type dialogs and others
+3. **Button Style Optimization**: Dialog buttons have better styles and interactive experience
 
-## 何时使用
+## When to Use
 
--   需要用户处理事务，又不希望跳转页面以致打断工作流程时
--   需要显示系统的提示信息时
--   需要展示对话框形式的反馈信息时
--   需要进行用户确认操作时
+-   When you need users to handle transactions without wanting to navigate away and interrupt workflow
+-   When you need to display system prompt information
+-   When you need to show feedback information in dialog form
+-   When you need to confirm user actions
 
-DelightfulModal 组件让你的对话框更加美观和用户友好，同时提供了完善的国际化支持。
+The DelightfulModal component makes your dialogs more beautiful and user-friendly, while providing comprehensive internationalization support.

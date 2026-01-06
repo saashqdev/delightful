@@ -1,57 +1,57 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`DelightfulImage > 快照测试 > 基础图片快照 1`] = `
+exports[`DelightfulImage > Snapshot test > Basic image snapshot 1`] = `
 <DocumentFragment>
   <img
-    alt="测试图片"
+    alt="Test image"
     src="test.jpg"
   />
 </DocumentFragment>
 `;
 
-exports[`DelightfulImage > 快照测试 > 带样式图片快照 1`] = `
+exports[`DelightfulImage > Snapshot test > Image with styles snapshot 1`] = `
 <DocumentFragment>
   <img
-    alt="测试图片"
+    alt="Test image"
     src="test.jpg"
     style="border-radius: 8px;"
   />
 </DocumentFragment>
 `;
 
-exports[`DelightfulImage > 快照测试 > 带点击事件图片快照 1`] = `
+exports[`DelightfulImage > Snapshot test > Image with click event snapshot 1`] = `
 <DocumentFragment>
   <img
-    alt="测试图片"
+    alt="Test image"
     src="test.jpg"
   />
 </DocumentFragment>
 `;
 
-exports[`DelightfulImage > 快照测试 > 带类名图片快照 1`] = `
+exports[`DelightfulImage > Snapshot test > Image with class name snapshot 1`] = `
 <DocumentFragment>
   <img
-    alt="测试图片"
+    alt="Test image"
     class="custom-image"
     src="test.jpg"
   />
 </DocumentFragment>
 `;
 
-exports[`DelightfulImage > 快照测试 > 自定义宽度图片快照 1`] = `
+exports[`DelightfulImage > Snapshot test > Custom width image snapshot 1`] = `
 <DocumentFragment>
   <img
-    alt="测试图片"
+    alt="Test image"
     src="test.jpg"
     width="200"
   />
 </DocumentFragment>
 `;
 
-exports[`DelightfulImage > 快照测试 > 自定义高度图片快照 1`] = `
+exports[`DelightfulImage > Snapshot test > Custom height image snapshot 1`] = `
 <DocumentFragment>
   <img
-    alt="测试图片"
+    alt="Test image"
     height="150"
     src="test.jpg"
   />

@@ -7,49 +7,49 @@ const renderWithTheme = (component: React.ReactElement) =>
 	render(<DelightfulThemeProvider theme="light">{component}</DelightfulThemeProvider>)
 
 describe("DelightfulTable", () => {
-	it("应该正常渲染", () => {
+	it("Should render normally", () => {
 		renderWithTheme(
 			<DelightfulTable
 				columns={[
-					{ title: "姓名", dataIndex: "name", key: "name" },
-					{ title: "年龄", dataIndex: "age", key: "age" },
+					{ title: "Name", dataIndex: "name", key: "name" },
+					{ title: "Age", dataIndex: "age", key: "age" },
 				]}
 				dataSource={[
-					{ key: "1", name: "张三", age: 25 },
-					{ key: "2", name: "李四", age: 30 },
+					{ key: "1", name: "Zhang San", age: 25 },
+					{ key: "2", name: "Li Si", age: 30 },
 				]}
 			/>,
 		)
-		expect(screen.getByText("姓名")).toBeInTheDocument()
-		expect(screen.getByText("年龄")).toBeInTheDocument()
-		expect(screen.getByText("张三")).toBeInTheDocument()
-		expect(screen.getByText("李四")).toBeInTheDocument()
+		expect(screen.getByText("Name")).toBeInTheDocument()
+		expect(screen.getByText("Age")).toBeInTheDocument()
+		expect(screen.getByText("Zhang San")).toBeInTheDocument()
+		expect(screen.getByText("Li Si")).toBeInTheDocument()
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础表格快照", () => {
+	describe("Snapshot Test", () => {
+		it("Basic Table Snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulTable
 					columns={[
-						{ title: "姓名", dataIndex: "name", key: "name" },
-						{ title: "年龄", dataIndex: "age", key: "age" },
+						{ title: "Name", dataIndex: "name", key: "name" },
+						{ title: "Age", dataIndex: "age", key: "age" },
 					]}
 					dataSource={[
-						{ key: "1", name: "张三", age: 25 },
-						{ key: "2", name: "李四", age: 30 },
+						{ key: "1", name: "Zhang San", age: 25 },
+						{ key: "2", name: "Li Si", age: 30 },
 					]}
 				/>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("空数据表格快照", () => {
+		it("Empty Data Table Snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulTable
 					columns={[
-						{ title: "姓名", dataIndex: "name", key: "name" },
-						{ title: "年龄", dataIndex: "age", key: "age" },
+						{ title: "Name", dataIndex: "name", key: "name" },
+						{ title: "Age", dataIndex: "age", key: "age" },
 					]}
 					dataSource={[]}
 				/>,
@@ -57,16 +57,16 @@ describe("DelightfulTable", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带分页表格快照", () => {
+		it("Table Snapshot with Pagination", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulTable
 					columns={[
-						{ title: "姓名", dataIndex: "name", key: "name" },
-						{ title: "年龄", dataIndex: "age", key: "age" },
+						{ title: "Name", dataIndex: "name", key: "name" },
+						{ title: "Age", dataIndex: "age", key: "age" },
 					]}
 					dataSource={[
-						{ key: "1", name: "张三", age: 25 },
-						{ key: "2", name: "李四", age: 30 },
+						{ key: "1", name: "Zhang San", age: 25 },
+						{ key: "2", name: "Li Si", age: 30 },
 					]}
 					pagination={{ current: 1, pageSize: 10, total: 2 }}
 				/>,
@@ -74,50 +74,50 @@ describe("DelightfulTable", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带排序表格快照", () => {
+		it("Table Snapshot with Sorting", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulTable
 					columns={[
-						{ title: "姓名", dataIndex: "name", key: "name", sorter: true },
-						{ title: "年龄", dataIndex: "age", key: "age", sorter: true },
+						{ title: "Name", dataIndex: "name", key: "name", sorter: true },
+						{ title: "Age", dataIndex: "age", key: "age", sorter: true },
 					]}
 					dataSource={[
-						{ key: "1", name: "张三", age: 25 },
-						{ key: "2", name: "李四", age: 30 },
+						{ key: "1", name: "Zhang San", age: 25 },
+						{ key: "2", name: "Li Si", age: 30 },
 					]}
 				/>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带选择框表格快照", () => {
+		it("Table Snapshot with Selection", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulTable
 					rowSelection={{}}
 					columns={[
-						{ title: "姓名", dataIndex: "name", key: "name" },
-						{ title: "年龄", dataIndex: "age", key: "age" },
+						{ title: "Name", dataIndex: "name", key: "name" },
+						{ title: "Age", dataIndex: "age", key: "age" },
 					]}
 					dataSource={[
-						{ key: "1", name: "张三", age: 25 },
-						{ key: "2", name: "李四", age: 30 },
+						{ key: "1", name: "Zhang San", age: 25 },
+						{ key: "2", name: "Li Si", age: 30 },
 					]}
 				/>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("紧凑型表格快照", () => {
+		it("Compact Table Snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulTable
 					size="small"
 					columns={[
-						{ title: "姓名", dataIndex: "name", key: "name" },
-						{ title: "年龄", dataIndex: "age", key: "age" },
+						{ title: "Name", dataIndex: "name", key: "name" },
+						{ title: "Age", dataIndex: "age", key: "age" },
 					]}
 					dataSource={[
-						{ key: "1", name: "张三", age: 25 },
-						{ key: "2", name: "李四", age: 30 },
+						{ key: "1", name: "Zhang San", age: 25 },
+						{ key: "2", name: "Li Si", age: 30 },
 					]}
 				/>,
 			)

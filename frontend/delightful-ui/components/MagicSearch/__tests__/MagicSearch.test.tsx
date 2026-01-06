@@ -7,39 +7,39 @@ const renderWithTheme = (component: React.ReactElement) =>
 	render(<DelightfulThemeProvider theme="light">{component}</DelightfulThemeProvider>)
 
 describe("DelightfulSearch", () => {
-	it("应该正常渲染", () => {
-		renderWithTheme(<DelightfulSearch placeholder="搜索..." />)
-		expect(screen.getByPlaceholderText("搜索...")).toBeInTheDocument()
+	it("should render normally", () => {
+		renderWithTheme(<DelightfulSearch placeholder="Search..." />)
+		expect(screen.getByPlaceholderText("Search...")).toBeInTheDocument()
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础搜索框快照", () => {
-			const { asFragment } = renderWithTheme(<DelightfulSearch placeholder="搜索..." />)
+	describe("Snapshot tests", () => {
+		it("basic search box snapshot", () => {
+			const { asFragment } = renderWithTheme(<DelightfulSearch placeholder="Search..." />)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带默认值搜索框快照", () => {
-			const { asFragment } = renderWithTheme(<DelightfulSearch defaultValue="默认搜索词" />)
+		it("search box with default value snapshot", () => {
+			const { asFragment } = renderWithTheme(<DelightfulSearch defaultValue="default search term" />)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带前缀图标搜索框快照", () => {
+		it("search box with prefix icon snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulSearch placeholder="搜索..." prefix={<span>🔍</span>} />,
+				<DelightfulSearch placeholder="Search..." prefix={<span>🔍</span>} />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带后缀图标搜索框快照", () => {
+		it("search box with suffix icon snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulSearch placeholder="搜索..." suffix={<span>📝</span>} />,
+				<DelightfulSearch placeholder="Search..." suffix={<span>📝</span>} />,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("禁用状态搜索框快照", () => {
-			const { asFragment } = renderWithTheme(<DelightfulSearch placeholder="搜索..." disabled />)
+		it("disabled state search box snapshot", () => {
+			const { asFragment } = renderWithTheme(<DelightfulSearch placeholder="Search..." disabled />)
 			expect(asFragment()).toMatchSnapshot()
 		})
 

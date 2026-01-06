@@ -1,14 +1,14 @@
-# DelightfulCollapse 魔法折叠面板组件
+# DelightfulCollapse Magic Collapse Panel Component
 
-`DelightfulCollapse` 是一个基于 Ant Design Collapse 组件的增强版折叠面板，提供了更美观的样式和更好的用户体验。
+`DelightfulCollapse` is an enhanced collapse panel based on Ant Design's Collapse component, providing more aesthetically pleasing styles and better user experience.
 
-## 属性
+## Properties
 
-| 属性名           | 类型 | 默认值 | 说明                                |
-| ---------------- | ---- | ------ | ----------------------------------- |
-| ...CollapseProps | -    | -      | 支持所有 Ant Design Collapse 的属性 |
+| Property          | Type | Default | Description                                      |
+| ----------------- | ---- | ------- | ------------------------------------------------ |
+| ...CollapseProps  | -    | -       | Support all properties of Ant Design Collapse    |
 
-## 基础用法
+## Basic Usage
 
 ```tsx
 import { DelightfulCollapse } from '@/components/base/DelightfulCollapse';
@@ -16,62 +16,62 @@ import { Collapse } from 'antd';
 
 const { Panel } = Collapse;
 
-// 基础用法
+// Basic usage
 <DelightfulCollapse>
-  <Panel header="这是面板标题1" key="1">
-    <p>这是面板内容1</p>
+  <Panel header="This is panel title 1" key="1">
+    <p>This is panel content 1</p>
   </Panel>
-  <Panel header="这是面板标题2" key="2">
-    <p>这是面板内容2</p>
+  <Panel header="This is panel title 2" key="2">
+    <p>This is panel content 2</p>
   </Panel>
-  <Panel header="这是面板标题3" key="3">
-    <p>这是面板内容3</p>
+  <Panel header="This is panel title 3" key="3">
+    <p>This is panel content 3</p>
   </Panel>
 </DelightfulCollapse>
 
-// 默认展开指定面板
+// Default expand specified panel
 <DelightfulCollapse defaultActiveKey={['1']}>
-  <Panel header="默认展开的面板" key="1">
-    <p>这是默认展开的面板内容</p>
+  <Panel header="Default expanded panel" key="1">
+    <p>This is default expanded panel content</p>
   </Panel>
-  <Panel header="默认关闭的面板" key="2">
-    <p>这是默认关闭的面板内容</p>
+  <Panel header="Default collapsed panel" key="2">
+    <p>This is default collapsed panel content</p>
   </Panel>
 </DelightfulCollapse>
 
-// 手风琴模式（一次只能展开一个面板）
+// Accordion mode (only one panel can be expanded at a time)
 <DelightfulCollapse accordion>
-  <Panel header="手风琴面板1" key="1">
-    <p>手风琴面板内容1</p>
+  <Panel header="Accordion panel 1" key="1">
+    <p>Accordion panel content 1</p>
   </Panel>
-  <Panel header="手风琴面板2" key="2">
-    <p>手风琴面板内容2</p>
+  <Panel header="Accordion panel 2" key="2">
+    <p>Accordion panel content 2</p>
   </Panel>
 </DelightfulCollapse>
 
-// 监听展开/折叠事件
-<DelightfulCollapse onChange={(key) => console.log('当前展开的面板:', key)}>
-  <Panel header="可监听的面板1" key="1">
-    <p>面板内容1</p>
+// Listen to expand/collapse events
+<DelightfulCollapse onChange={(key) => console.log('Currently expanded panel:', key)}>
+  <Panel header="Monitored panel 1" key="1">
+    <p>Panel content 1</p>
   </Panel>
-  <Panel header="可监听的面板2" key="2">
-    <p>面板内容2</p>
+  <Panel header="Monitored panel 2" key="2">
+    <p>Panel content 2</p>
   </Panel>
 </DelightfulCollapse>
 ```
 
-## 特点
+## Features
 
-1. **优化的样式**：使用 ghost 模式，去除了边框，更加简洁美观
-2. **自定义展开图标**：使用 DelightfulIcon 组件作为展开图标，视觉效果更统一
-3. **平滑的动画**：展开/折叠时有平滑的旋转动画效果
-4. **灵活布局**：展开图标位于右侧，符合现代设计趋势
+1. **Optimized styles**: Uses ghost mode to remove borders for a cleaner, more beautiful look
+2. **Custom expand icon**: Uses DelightfulIcon component as the expand icon for visual consistency
+3. **Smooth animations**: Smooth rotation animation effect when expanding/collapsing
+4. **Flexible layout**: Expand icon positioned on the right, following modern design trends
 
-## 何时使用
+## When to Use
 
--   需要将复杂内容分组展示时
--   需要节省页面空间，将内容折叠起来时
--   需要创建手风琴效果（一次只展开一个面板）时
--   需要分类展示信息，并允许用户按需查看时
+-   When you need to group and display complex content
+-   When you need to save page space by collapsing content
+-   When you want to create an accordion effect (only one panel expanded at a time)
+-   When you need to categorize information and allow users to view it on demand
 
-DelightfulCollapse 组件让你的折叠面板更加美观和用户友好，同时保持了 Ant Design Collapse 的所有功能特性。
+DelightfulCollapse component makes your collapse panels more beautiful and user-friendly, while maintaining all the functionality of Ant Design Collapse.

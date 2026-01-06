@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`DelightfulSplitter > 快照测试 > 基础分割器快照 1`] = `
+exports[`DelightfulSplitter > Snapshot test > Basic splitter snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-splitter acss-1ms8eiu delightful-splitter-horizontal css-var-r1 delightful-splitter-css-var css-dev-only-do-not-override-yotw4n"
@@ -9,7 +9,7 @@ exports[`DelightfulSplitter > 快照测试 > 基础分割器快照 1`] = `
       class="delightful-splitter-panel"
       style="flex-basis: auto; flex-grow: 1;"
     >
-      左侧内容
+      Left side content
     </div>
     <div
       aria-valuemax="0"
@@ -32,7 +32,7 @@ exports[`DelightfulSplitter > 快照测试 > 基础分割器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSplitter > 快照测试 > 复杂内容分割器快照 1`] = `
+exports[`DelightfulSplitter > Snapshot test > Complex content splitter snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-splitter acss-1ms8eiu delightful-splitter-horizontal css-var-r6 delightful-splitter-css-var css-dev-only-do-not-override-yotw4n"
@@ -42,10 +42,10 @@ exports[`DelightfulSplitter > 快照测试 > 复杂内容分割器快照 1`] = `
       style="flex-basis: auto; flex-grow: 1;"
     >
       <h3>
-        左侧标题
+        Left side title
       </h3>
       <p>
-        左侧详细内容
+        Left side detailed content
       </p>
     </div>
     <div
@@ -64,17 +64,17 @@ exports[`DelightfulSplitter > 快照测试 > 复杂内容分割器快照 1`] = `
       style="flex-basis: auto; flex-grow: 1;"
     >
       <h3>
-        右侧标题
+        Right side title
       </h3>
       <p>
-        右侧详细内容
+        Right side detailed content
       </p>
     </div>
   </div>
 </DocumentFragment>
 `;
 
-exports[`DelightfulSplitter > 快照测试 > 带类名分割器快照 1`] = `
+exports[`DelightfulSplitter > Snapshot tests > Splitter with class name snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-splitter acss-1ms8eiu custom-splitter delightful-splitter-horizontal css-var-r3 delightful-splitter-css-var css-dev-only-do-not-override-yotw4n"
@@ -106,7 +106,7 @@ exports[`DelightfulSplitter > 快照测试 > 带类名分割器快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSplitter > 快照测试 > 带类名分割器快照 2`] = `
+exports[`DelightfulSplitter > Snapshot tests > Splitter with class name snapshot 2`] = `
 <DocumentFragment>
   <div
     class="delightful-splitter acss-1ms8eiu custom-splitter delightful-splitter-horizontal css-var-r5 delightful-splitter-css-var css-dev-only-do-not-override-yotw4n"
@@ -138,7 +138,7 @@ exports[`DelightfulSplitter > 快照测试 > 带类名分割器快照 2`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSplitter > 快照测试 > 带自定义样式分割器快照 1`] = `
+exports[`DelightfulSplitter > Snapshot tests > Splitter with custom styles snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-splitter acss-1ms8eiu delightful-splitter-horizontal css-var-r2 delightful-splitter-css-var css-dev-only-do-not-override-yotw4n"
@@ -171,7 +171,7 @@ exports[`DelightfulSplitter > 快照测试 > 带自定义样式分割器快照 1
 </DocumentFragment>
 `;
 
-exports[`DelightfulSplitter > 快照测试 > 带自定义样式分割器快照 2`] = `
+exports[`DelightfulSplitter > Snapshot tests > Splitter with custom styles snapshot 2`] = `
 <DocumentFragment>
   <div
     class="delightful-splitter acss-1ms8eiu delightful-splitter-horizontal css-var-r4 delightful-splitter-css-var css-dev-only-do-not-override-yotw4n"

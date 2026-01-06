@@ -6,25 +6,25 @@ import DelightfulSelect from "../index"
 describe("DelightfulSelect", () => {
 	it("should render without crashing", () => {
 		const options = [
-			{ label: "选项1", value: "1" },
-			{ label: "选项2", value: "2" },
-			{ label: "选项3", value: "3" },
+			{ label: "Option 1", value: "1" },
+			{ label: "Option 2", value: "2" },
+			{ label: "Option 3", value: "3" },
 		]
 
 		render(
 			<DelightfulThemeProvider theme="light">
-				<DelightfulSelect options={options} placeholder="请选择" />
+				<DelightfulSelect options={options} placeholder="Please Select" />
 			</DelightfulThemeProvider>,
 		)
 
 		// Verify placeholder renders
-		expect(screen.getByText("请选择")).toBeInTheDocument()
+		expect(screen.getByText("Please Select")).toBeInTheDocument()
 	})
 
 	it("should display selected value", () => {
 		const options = [
-			{ label: "选项1", value: "1" },
-			{ label: "选项2", value: "2" },
+			{ label: "Option 1", value: "1" },
+			{ label: "Option 2", value: "2" },
 		]
 
 		render(
@@ -34,30 +34,30 @@ describe("DelightfulSelect", () => {
 		)
 
 		// Verify selected value displays
-		expect(screen.getByText("选项1")).toBeInTheDocument()
+		expect(screen.getByText("Option 1")).toBeInTheDocument()
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础选择器快照", () => {
+	describe("Snapshot Test", () => {
+		it("Basic Selector Snapshot", () => {
 			const options = [
-				{ label: "选项1", value: "1" },
-				{ label: "选项2", value: "2" },
-				{ label: "选项3", value: "3" },
+				{ label: "Option 1", value: "1" },
+				{ label: "Option 2", value: "2" },
+				{ label: "Option 3", value: "3" },
 			]
 
 			const { asFragment } = render(
 				<DelightfulThemeProvider theme="light">
-					<DelightfulSelect options={options} placeholder="请选择" />
+					<DelightfulSelect options={options} placeholder="Please Select" />
 				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带默认值选择器快照", () => {
+		it("Selector Snapshot with Default Value", () => {
 			const options = [
-				{ label: "选项1", value: "1" },
-				{ label: "选项2", value: "2" },
+				{ label: "Option 1", value: "1" },
+				{ label: "Option 2", value: "2" },
 			]
 
 			const { asFragment } = render(
@@ -68,10 +68,10 @@ describe("DelightfulSelect", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("禁用状态选择器快照", () => {
+		it("Disabled Selector Snapshot", () => {
 			const options = [
-				{ label: "选项1", value: "1" },
-				{ label: "选项2", value: "2" },
+				{ label: "Option 1", value: "1" },
+				{ label: "Option 2", value: "2" },
 			]
 
 			const { asFragment } = render(
@@ -82,11 +82,11 @@ describe("DelightfulSelect", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("多选选择器快照", () => {
+		it("Multi-select Selector Snapshot", () => {
 			const options = [
-				{ label: "选项1", value: "1" },
-				{ label: "选项2", value: "2" },
-				{ label: "选项3", value: "3" },
+				{ label: "Option 1", value: "1" },
+				{ label: "Option 2", value: "2" },
+				{ label: "Option 3", value: "3" },
 			]
 
 			const { asFragment } = render(
@@ -97,10 +97,10 @@ describe("DelightfulSelect", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("大尺寸选择器快照", () => {
+		it("Large Size Selector Snapshot", () => {
 			const options = [
-				{ label: "选项1", value: "1" },
-				{ label: "选项2", value: "2" },
+				{ label: "Option 1", value: "1" },
+				{ label: "Option 2", value: "2" },
 			]
 
 			const { asFragment } = render(
@@ -111,10 +111,10 @@ describe("DelightfulSelect", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("小尺寸选择器快照", () => {
+		it("Small Size Selector Snapshot", () => {
 			const options = [
-				{ label: "选项1", value: "1" },
-				{ label: "选项2", value: "2" },
+				{ label: "Option 1", value: "1" },
+				{ label: "Option 2", value: "2" },
 			]
 
 			const { asFragment } = render(
@@ -125,10 +125,10 @@ describe("DelightfulSelect", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带清除按钮选择器快照", () => {
+		it("Selector Snapshot with Clear Button", () => {
 			const options = [
-				{ label: "选项1", value: "1" },
-				{ label: "选项2", value: "2" },
+				{ label: "Option 1", value: "1" },
+				{ label: "Option 2", value: "2" },
 			]
 
 			const { asFragment } = render(

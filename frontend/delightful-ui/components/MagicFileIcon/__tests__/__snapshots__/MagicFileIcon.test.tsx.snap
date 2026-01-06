@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`DelightfulFileIcon > 快照测试 > Excel文件图标快照 1`] = `
+exports[`DelightfulFileIcon > Snapshot Test > Excel File Icon Snapshot 1`] = `
 <DocumentFragment>
   <div
     class="acss-nrs666"
@@ -15,7 +15,7 @@ exports[`DelightfulFileIcon > 快照测试 > Excel文件图标快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulFileIcon > 快照测试 > PDF文件图标快照 1`] = `
+exports[`DelightfulFileIcon > Snapshot Test > PDF File Icon Snapshot 1`] = `
 <DocumentFragment>
   <div
     class="acss-nrs666"
@@ -30,7 +30,7 @@ exports[`DelightfulFileIcon > 快照测试 > PDF文件图标快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulFileIcon > 快照测试 > Word文件图标快照 1`] = `
+exports[`DelightfulFileIcon > Snapshot Test > Word File Icon Snapshot 1`] = `
 <DocumentFragment>
   <div
     class="acss-nrs666"
@@ -45,7 +45,7 @@ exports[`DelightfulFileIcon > 快照测试 > Word文件图标快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulFileIcon > 快照测试 > 图片文件图标快照 1`] = `
+exports[`DelightfulFileIcon > Snapshot Test > Image File Icon Snapshot 1`] = `
 <DocumentFragment>
   <div
     class="acss-nrs666"
@@ -60,7 +60,7 @@ exports[`DelightfulFileIcon > 快照测试 > 图片文件图标快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulFileIcon > 快照测试 > 带类名文件图标快照 1`] = `
+exports[`DelightfulFileIcon > Snapshot Test > File Icon Snapshot with Class Name 1`] = `
 <DocumentFragment>
   <div
     class="acss-nrs666 custom-file-icon"
@@ -75,7 +75,7 @@ exports[`DelightfulFileIcon > 快照测试 > 带类名文件图标快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulFileIcon > 快照测试 > 带自定义样式文件图标快照 1`] = `
+exports[`DelightfulFileIcon > Snapshot Test > File Icon Snapshot with Custom Style 1`] = `
 <DocumentFragment>
   <div
     class="acss-nrs666"
@@ -90,7 +90,7 @@ exports[`DelightfulFileIcon > 快照测试 > 带自定义样式文件图标快�
 </DocumentFragment>
 `;
 
-exports[`DelightfulFileIcon > 快照测试 > 视频文件图标快照 1`] = `
+exports[`DelightfulFileIcon > Snapshot Test > Video File Icon Snapshot 1`] = `
 <DocumentFragment>
   <div
     class="acss-nrs666"

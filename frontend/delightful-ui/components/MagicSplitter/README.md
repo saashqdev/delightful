@@ -1,95 +1,95 @@
-# DelightfulSplitter 魔法分割面板组件
+# DelightfulSplitter Magic Split Panel Component
 
-`DelightfulSplitter` 是一个基于 Ant Design Splitter 组件的增强版分割面板，提供了更简洁的样式和更好的用户体验。
+`DelightfulSplitter` is an enhanced split panel based on Ant Design's Splitter component, providing a cleaner style and better user experience.
 
-## 属性
+## Properties
 
-| 属性名           | 类型 | 默认值 | 说明                                |
-| ---------------- | ---- | ------ | ----------------------------------- |
-| ...SplitterProps | -    | -      | 支持所有 Ant Design Splitter 的属性 |
+| Property         | Type | Default | Description                                      |
+| ---------------- | ---- | ------- | ------------------------------------------------ |
+| ...SplitterProps | -    | -       | Support all properties of Ant Design Splitter    |
 
-## 子组件
+## Sub-components
 
--   `DelightfulSplitter.Panel` - 分割面板的子面板组件，用于定义每个可调整大小的区域
+-   `DelightfulSplitter.Panel` - Sub-panel component of the splitter, used to define each resizable area
 
-## 基础用法
+## Basic Usage
 
 ```tsx
 import { DelightfulSplitter } from '@/components/base/DelightfulSplitter';
 
-// 基础用法 - 水平分割
+// Basic usage - horizontal split
 <DelightfulSplitter>
   <DelightfulSplitter.Panel>
-    <div>左侧面板内容</div>
+    <div>Left panel content</div>
   </DelightfulSplitter.Panel>
   <DelightfulSplitter.Panel>
-    <div>右侧面板内容</div>
+    <div>Right panel content</div>
   </DelightfulSplitter.Panel>
 </DelightfulSplitter>
 
-// 垂直分割
+// Vertical split
 <DelightfulSplitter split="horizontal">
   <DelightfulSplitter.Panel>
-    <div>上方面板内容</div>
+    <div>Top panel content</div>
   </DelightfulSplitter.Panel>
   <DelightfulSplitter.Panel>
-    <div>下方面板内容</div>
+    <div>Bottom panel content</div>
   </DelightfulSplitter.Panel>
 </DelightfulSplitter>
 
-// 设置默认尺寸
+// Set default size
 <DelightfulSplitter defaultSizes={[30, 70]}>
   <DelightfulSplitter.Panel>
-    <div>左侧面板内容 (30%)</div>
+    <div>Left panel content (30%)</div>
   </DelightfulSplitter.Panel>
   <DelightfulSplitter.Panel>
-    <div>右侧面板内容 (70%)</div>
-  </DelightfulSplitter.Panel>
-</DelightfulSplitter>
-
-// 多个面板
-<DelightfulSplitter>
-  <DelightfulSplitter.Panel>
-    <div>第一个面板</div>
-  </DelightfulSplitter.Panel>
-  <DelightfulSplitter.Panel>
-    <div>第二个面板</div>
-  </DelightfulSplitter.Panel>
-  <DelightfulSplitter.Panel>
-    <div>第三个面板</div>
+    <div>Right panel content (70%)</div>
   </DelightfulSplitter.Panel>
 </DelightfulSplitter>
 
-// 嵌套使用
+// Multiple panels
 <DelightfulSplitter>
   <DelightfulSplitter.Panel>
-    <div>左侧面板</div>
+    <div>First panel</div>
+  </DelightfulSplitter.Panel>
+  <DelightfulSplitter.Panel>
+    <div>Second panel</div>
+  </DelightfulSplitter.Panel>
+  <DelightfulSplitter.Panel>
+    <div>Third panel</div>
+  </DelightfulSplitter.Panel>
+</DelightfulSplitter>
+
+// Nested usage
+<DelightfulSplitter>
+  <DelightfulSplitter.Panel>
+    <div>Left panel</div>
   </DelightfulSplitter.Panel>
   <DelightfulSplitter.Panel>
     <DelightfulSplitter split="horizontal">
       <DelightfulSplitter.Panel>
-        <div>右上面板</div>
+        <div>Top-right panel</div>
       </DelightfulSplitter.Panel>
       <DelightfulSplitter.Panel>
-        <div>右下面板</div>
+        <div>Bottom-right panel</div>
       </DelightfulSplitter.Panel>
     </DelightfulSplitter>
   </DelightfulSplitter.Panel>
 </DelightfulSplitter>
 ```
 
-## 特点
+## Features
 
-1. **简洁设计**：移除了默认的拖动条样式，提供更干净的视觉效果
-2. **无缝拖动**：拖动分割线时没有明显的视觉干扰
-3. **灵活布局**：支持水平和垂直分割，以及嵌套使用
-4. **零内边距**：面板默认没有内边距，让内容可以充分利用空间
+1. **Clean design**: Removes default drag handle styles for a cleaner visual effect
+2. **Seamless dragging**: No obvious visual interference when dragging the divider
+3. **Flexible layout**: Supports horizontal and vertical splitting, as well as nested usage
+4. **Zero padding**: Panels have no padding by default, allowing content to make full use of space
 
-## 何时使用
+## When to Use
 
--   需要创建可调整大小的布局时
--   需要分割屏幕为多个可交互区域时
--   需要实现代码编辑器、文件浏览器等需要灵活调整空间的界面时
--   需要用户能够自定义各个区域的大小时
+-   When you need to create a resizable layout
+-   When you need to split the screen into multiple interactive areas
+-   When you need to implement interfaces like code editors, file browsers that require flexible space adjustment
+-   When you want users to be able to customize the size of each area
 
-DelightfulSplitter 组件让你的分割面板更加简洁和用户友好，同时保持了 Ant Design Splitter 的所有功能特性。
+DelightfulSplitter component makes your split panels cleaner and more user-friendly, while maintaining all the functionality of Ant Design Splitter.

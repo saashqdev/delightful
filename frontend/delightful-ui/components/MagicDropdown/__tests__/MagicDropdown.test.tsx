@@ -7,84 +7,84 @@ const renderWithTheme = (component: React.ReactElement) =>
 	render(<DelightfulThemeProvider theme="light">{component}</DelightfulThemeProvider>)
 
 describe("DelightfulDropdown", () => {
-	it("应该正常渲染", () => {
-		renderWithTheme(<DelightfulDropdown menu={{ items: [] }}>下拉</DelightfulDropdown>)
+	it("Should render normally", () => {
+		renderWithTheme(<DelightfulDropdown menu={{ items: [] }}>Dropdown</DelightfulDropdown>)
 		// Pass if no errors are thrown
 		expect(true).toBe(true)
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础下拉菜单快照", () => {
+	describe("Snapshot test", () => {
+		it("Basic dropdown snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulDropdown menu={{ items: [] }}>下拉菜单</DelightfulDropdown>,
+				<DelightfulDropdown menu={{ items: [] }}>Dropdown menu</DelightfulDropdown>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带菜单项下拉菜单快照", () => {
+		it("Dropdown with menu items snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulDropdown
 					menu={{
 						items: [
-							{ key: "1", label: "菜单项1" },
-							{ key: "2", label: "菜单项2" },
+							{ key: "1", label: "Menu item 1" },
+							{ key: "2", label: "Menu item 2" },
 						],
 					}}
 				>
-					下拉菜单
+					Dropdown menu
 				</DelightfulDropdown>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带图标下拉菜单快照", () => {
+		it("Dropdown with icon snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulDropdown
 					menu={{
 						items: [
-							{ key: "1", label: "菜单项1", icon: <span>🏠</span> },
-							{ key: "2", label: "菜单项2", icon: <span>⚙️</span> },
+							{ key: "1", label: "Menu item 1", icon: <span>🏠</span> },
+							{ key: "2", label: "Menu item 2", icon: <span>⚙️</span> },
 						],
 					}}
 				>
-					<div>🏠 下拉菜单</div>
+					<div>🏠 Dropdown menu</div>
 				</DelightfulDropdown>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("禁用状态下拉菜单快照", () => {
+		it("Disabled dropdown snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulDropdown disabled menu={{ items: [] }}>
-					下拉菜单
+					Dropdown menu
 				</DelightfulDropdown>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带自定义属性下拉菜单快照", () => {
+		it("Dropdown with custom attributes snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulDropdown data-testid="custom-dropdown" menu={{ items: [] }}>
-					下拉菜单
+					Dropdown menu
 				</DelightfulDropdown>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带类名下拉菜单快照", () => {
+		it("Dropdown with class name snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulDropdown className="custom-dropdown" menu={{ items: [] }}>
-					下拉菜单
+					Dropdown menu
 				</DelightfulDropdown>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带按钮样式下拉菜单快照", () => {
+		it("Button style dropdown snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulDropdown menu={{ items: [] }}>
-					<button>按钮下拉</button>
+					<button>Button dropdown</button>
 				</DelightfulDropdown>,
 			)
 			expect(asFragment()).toMatchSnapshot()

@@ -1,17 +1,17 @@
-/** 全局搜索命名空间 */
+/** Global search namespace */
 export namespace GlobalSearch {
 	export interface SearchParams {
 		type: number
 		key_word?: string
-		/** es搜索引擎分页标识 */
+		/** ES search engine pagination token */
 		page_token?: string
 		page_size?: number
 		extra?: Record<string, any>
 	}
 
-	/** 联系人类型 */
+	/** Contact type */
 	export interface ContactItem {
-		/** 用户Id */
+		/** User ID */
 		user_id: string
 		delightful_id: string
 		organization_code: string
@@ -28,7 +28,7 @@ export namespace GlobalSearch {
 		like_num: number
 		status: number
 		account_type: number
-		/** 岗位 */
+		/** Job title */
 		job_title: string
 		path_nodes: Array<{
 			department_id: string
@@ -39,7 +39,7 @@ export namespace GlobalSearch {
 		}>
 	}
 
-	/** AI助理 */
+	/** AI assistant */
 	export interface AssistantItem {
 		id: string
 		robot_name: string
@@ -50,7 +50,7 @@ export namespace GlobalSearch {
 		user_id: string
 	}
 
-	/** 群组用户 */
+	/** Group user */
 	interface GroupUser {
 		user_id: string
 		delightful_id: string
@@ -69,7 +69,7 @@ export namespace GlobalSearch {
 		user_manual: string
 	}
 
-	/** 群组 */
+	/** Group */
 	export interface GroupItem {
 		id: string
 		group_owner: string
@@ -84,23 +84,23 @@ export namespace GlobalSearch {
 		users: Array<GroupUser>
 	}
 
-	/** 聊天 */
+	/** Chat */
 	export interface ChatItem {
 		name: string
 	}
 
-	/** 应用 */
+	/** Application */
 	export interface ApplicationItem {
 		id: string
 		name: string
-		/** 应用Code */
+		/** Application code */
 		code: string
-		/** 应用描述 */
+		/** Application description */
 		description?: string
 		logo: string
 	}
 
-	/** 云文档操作者(包括创建人、修改人) */
+	/** Cloud document operator (including creator and modifier) */
 	interface CloudDriveUser {
 		id: string
 		real_name: string
@@ -110,19 +110,19 @@ export namespace GlobalSearch {
 		department: null | string
 	}
 
-	/** 文档类型 */
+	/** Document type */
 	export const enum CloudDriveFileType {
 		ALL = -1,
 
-		/** 文件夹 */
+		/** Folder */
 		FOLDER = 0,
 
-		/** 多维表格 */
+		/** Multi-dimensional table */
 		MULTI_TABLE = 1,
 		WORD = 2,
 		EXCEL = 3,
 
-		/** 思维笔记 */
+		/** Mind notes */
 		MIND_NOTE = 4,
 
 		/** PPT */
@@ -131,34 +131,34 @@ export namespace GlobalSearch {
 		/** PDF  */
 		PDF = 6,
 
-		/** 云文档旧版 */
+		/** Cloud document (old version) */
 		CLOUD_DOC = 7,
 
-		/** 链接 */
+		/** Link */
 		LINK = 8,
 
-		/** 知识库 */
+		/** Knowledge base */
 		KNOWLEDGE_BASE = 9,
 
-		/** 图片 */
+		/** Image */
 		IMAGE = 10,
 
-		/** 视频 */
+		/** Video */
 		VIDEO = 11,
 
-		/** 音频 */
+		/** Audio */
 		AUDIO = 12,
 
-		/** 压缩文件 */
+		/** Compressed file */
 		COMPRESS = 13,
 
-		/** 其他文件类型 */
+		/** Other file type */
 		UNKNOWN = 14,
 
-		/** markdown文件 */
+		/** Markdown file */
 		MARKDOWN = 15,
 
-		/** 云文档 */
+		/** Cloud document */
 		CLOUD_DOCX = 16,
 
 		/** html */
@@ -170,23 +170,23 @@ export namespace GlobalSearch {
 		/** xmind */
 		XMIND = 19,
 
-		/** Keewood 页面 */
+		/** Keewood page */
 		// PAGE = 20,
 
-		/** Keewood 应用 */
+		/** Keewood application */
 		// APPLICATION = 21,
 
-		/** 白板 */
+		/** Whiteboard */
 		WHITEBOARD = 22,
 
 		/** CSV */
 		// CSV = 23,
 
-		/** 神奇应用 */
+		/** Magic application */
 		// DELIGHTFUL_APPLICATION = 24
 	}
 
-	/** 云盘 */
+	/** Cloud drive */
 	export interface CloudDriveItem {
 		is_template: number
 		organization_code: string
@@ -224,7 +224,7 @@ export namespace GlobalSearch {
 		space_type: number
 	}
 
-	/** 日程 */
+	/** Schedule */
 	export interface ScheduleItem {
 		id: string
 		series_id: string
@@ -239,7 +239,7 @@ export namespace GlobalSearch {
 		updated_at: string
 	}
 
-	/** 审批 */
+	/** Approval */
 	export interface ApprovalItem {
 		id: string
 		instance_no: string
@@ -271,7 +271,7 @@ export namespace GlobalSearch {
 		business_id: string
 	}
 
-	/** 任务 */
+	/** Task */
 	export interface TaskItem {
 		id: string
 		creator: {
@@ -318,7 +318,7 @@ export namespace GlobalSearch {
 		}>
 	}
 
-	/** 部门 */
+	/** Department */
 	export interface DepartmentItem {
 		id: string
 		department_id: string
@@ -339,7 +339,7 @@ export namespace GlobalSearch {
 		has_child: boolean
 	}
 
-	/** 知识库 */
+	/** Knowledge base */
 	export interface KnowledgeItem {
 		is_template: number
 		cover_updated_at: string
@@ -350,7 +350,7 @@ export namespace GlobalSearch {
 			target_blank: number
 		}
 		id: string
-		/** 知识库内容，用于展示高亮内容 */
+		/** Knowledge base content for displaying highlighted content */
 		highlights?: {
 			title?: Array<string>
 			content?: Array<string>

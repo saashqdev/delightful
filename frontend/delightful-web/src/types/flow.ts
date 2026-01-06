@@ -7,13 +7,13 @@ import type { DelightfulFlow } from "@delightful/delightful-flow/DelightfulFlow/
 import type Schema from "@delightful/delightful-flow/DelightfulJsonSchemaEditor/types/Schema"
 import type { Dayjs } from "dayjs"
 
-/** 流程类型 */
+/** Flow type */
 export const enum FlowType {
-	/** 主流程 */
+	/** Main flow */
 	Main = 1,
-	/** 子流程 */
+	/** Sub-flow */
 	Sub = 2,
-	/** 工具集 */
+	/** Toolset */
 	Tools = 3,
 }
 
@@ -109,7 +109,7 @@ export type TestNodeParams = Pick<
 }
 
 /**
- * LLM 模型 配置
+ * LLM model configuration
  */
 export interface LLMModalOption {
 	value: string
@@ -139,7 +139,7 @@ export type PlatformItem = {
 	avatar: string
 }
 
-/** 子流程出入参数据格式 */
+/** Sub-flow input/output parameter data format */
 export type SubFlowArgument = Pick<
 	DelightfulFlow.Flow,
 	"id" | "name" | "description" | "enabled" | "type"
@@ -216,7 +216,7 @@ export namespace FlowTool {
 	}
 }
 
-// 可用的工具集
+// Available toolsets
 export namespace UseableToolSet {
 	export type UsableTool = {
 		code: string
@@ -261,32 +261,32 @@ export type ApiKeyRequestParams = Pick<ApiKey, "name" | "description" | "id"> & 
 }
 
 /**
- * 组件类型
+ * Component type
  */
 export enum ComponentTypes {
-	/** 表单组件 */
+	/** Form component */
 	Form = "form",
-	/** 控件组件 */
+	/** Widget component */
 	Widget = "widget",
-	/** 条件组件 */
+	/** Condition component */
 	Condition = "condition",
-	/** api组件 */
+	/** API component */
 	Api = "api",
-	/** value组件 */
+	/** Value component */
 	Value = "value",
 }
 
 /**
- * 单步调试引用值解析规则
+ * Single-step debug reference value resolution rule
  */
 export type ResolveRule = {
-	// 需要解析的类型
+	// Type to resolve
 	type: string // schema | expression
-	// 解析的参数路径
+	// Parameter path for resolution
 	path: string[]
-	// 特殊的解析类型
+	// Special resolution type
 	paramsType?: string
-	// 特殊解析类型的key内部取值
+	// Internal value keys for special resolution type
 	subKeys?: string[]
 }
 
@@ -317,15 +317,15 @@ export namespace Flow {
 	}
 
 	export enum VLMModelType {
-		/** 文生图 */
+		/** Text-to-image */
 		TextToImage = 0,
-		/** 图生图 */
+		/** Image-to-image */
 		ImageToImage = 1,
-		/** 图片增强 */
+		/** Image enhancement */
 		ImageEnhance = 2,
-		/** 大模型 */
+		/** Large language model */
 		LLM = 3,
-		/** 嵌入 */
+		/** Embedding */
 		Embedding = 4,
 	}
 
@@ -373,7 +373,7 @@ export namespace Flow {
 			name: string
 		}
 		export enum ToolSource {
-			/** 工具集 */
+			/** Toolset */
 			Toolset = 1,
 		}
 	}
@@ -394,15 +394,15 @@ export namespace Flow {
 }
 
 /**
- * 向量知识库
+ * Vector knowledge base
  */
 export namespace VectorKnowledge {
 	export enum SearchType {
-		/** 全部 */
+		/** All */
 		All = 1,
-		/** 已启用 */
+		/** Enabled */
 		Enabled = 2,
-		/** 已禁用 */
+		/** Disabled */
 		Disabled = 3,
 	}
 }

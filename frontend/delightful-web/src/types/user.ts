@@ -4,37 +4,37 @@ export const enum UserType {
 }
 
 /**
- * 用户状态
+ * User status
  */
 export const enum UserStatus {
-	// 禁用
+	// Disabled
 	disable = 0,
-	// 正常
+	// Normal
 	normal = 1,
 }
 
 export namespace User {
-	/** delightful 生态下组织（湾镇组织信息需要与 teamshare 中组织信息作映射） */
+	/** Delightful ecosystem organization (organization info needs to be mapped with Teamshare) */
 	export interface DelightfulOrganization {
-		/** delightful 用户UnionID（整个delightful生态下唯一） */
+		/** Delightful user UnionID (unique across entire Delightful ecosystem) */
 		delightful_id: string
-		/** delightful 组织编码 */
+		/** Delightful organization code */
 		delightful_organization_code: string
-		/** delightful 用户OpenId（当前组织下唯一） */
+		/** Delightful user OpenId (unique within current organization) */
 		delightful_user_id: string
-		/** 组织Logo */
+		/** Organization logo */
 		organization_name: string
-		/** 组织名称 */
+		/** Organization name */
 		organization_logo: string | null
-		/** 第三方平台 组织编码 */
+		/** Third-party platform organization code */
 		third_platform_organization_code: string
-		/** 第三方平台 用户Id */
+		/** Third-party platform user ID */
 		third_platform_user_id: string
-		/** 第三方平台类型 */
+		/** Third-party platform type */
 		third_platform_type: string | null
 	}
 
-	/** Teamshare 账号组织 */
+	/** Teamshare account organization */
 	export interface UserOrganization {
 		id: string
 		member_id: string
@@ -56,21 +56,21 @@ export namespace User {
 		identifications: string[]
 	}
 
-	/** 用户账号(包括多环境：每个账号对应使用一个环境) */
+	/** User account (supports multiple environments: each account corresponds to one environment) */
 	export interface UserAccount {
-		/** 当前所在环境 */
+		/** Current environment */
 		deployCode: string
-		/** delightful 用户UnionID（整个delightful生态下唯一） */
+		/** Delightful user UnionID (unique across entire Delightful ecosystem) */
 		delightful_id: string
-		/** delightful 用户OpenId（当前组织下唯一） */
+		/** Delightful user OpenId (unique within current organization) */
 		delightful_user_id: string
-		/** 用户名称 */
+		/** User name */
 		nickname: string
-		/** 当前用户所在组织 */
+		/** Current user organization */
 		organizationCode: string
-		/** 用户头像 */
+		/** User avatar */
 		avatar: string
-		/** 用户 Token */
+		/** User token */
 		access_token: string
 		organizations: Array<DelightfulOrganization>
 		teamshareOrganizations: Array<UserOrganization>
@@ -86,7 +86,7 @@ export namespace User {
 		phone?: string
 	}
 
-	/** 登录设备 */
+	/** Login device */
 	export interface UserDeviceInfo {
 		id: number
 		device_id: string

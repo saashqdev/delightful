@@ -4,20 +4,20 @@ import type { CMessage, EventType } from "./chat"
 import type { IntermediateMessage } from "./chat/intermediate_message"
 
 /**
- * 流式消息状态
+ * Stream message status
  */
 
 export const enum StreamStatus {
-	/** 流式消息开始 */
+	/** Stream message start */
 	Start = 0,
-	/** 流式消息中 */
+	/** Streaming */
 	Streaming = 1,
-	/** 流式消息结束 */
+	/** Stream message end */
 	End = 2,
 }
 
 /**
- * 通用响应
+ * Common response
  */
 export interface CommonResponse<D> {
 	code: number
@@ -26,7 +26,7 @@ export interface CommonResponse<D> {
 }
 
 /**
- * 服务端推送消息
+ * Server push message
  */
 export type WebSocketPayload =
 	| {
@@ -39,8 +39,8 @@ export type WebSocketPayload =
 	  }
 
 /**
- * 流式消息响应
- * @deprecated 请使用 StreamResponseV2 代替
+ * Stream message response
+ * @deprecated Please use StreamResponseV2 instead
  */
 export type StreamResponse = {
 	target_seq_id: string
@@ -51,7 +51,7 @@ export type StreamResponse = {
 }
 
 /**
- * 流式消息响应V2
+ * Stream message response V2
  */
 export type StreamResponseV2 = {
 	streams: {
@@ -63,43 +63,43 @@ export type StreamResponseV2 = {
 }
 
 /**
- * 即时消息响应
+ * Intermediate message response
  */
 export type IntermediateResponse = SeqRecord<IntermediateMessage>
 
 /**
- * 分页响应
+ * Pagination response
  */
 export interface PaginationResponse<D> {
-	/** 数据 */
+	/** Data */
 	items: D[]
-	/** 是否有更多数据 */
+	/** Whether there is more data */
 	has_more: boolean
-	/** 分页 token */
+	/** Pagination token */
 	page_token: string
 }
 
 export type SeqResponse<S = object> = {
-	/** 用户唯一 ID */
+	/** User unique ID */
 	delightful_id: string
-	/** 消息序列 ID */
+	/** Message sequence ID */
 	seq_id: string
-	/** 消息 ID */
+	/** Message ID */
 	message_id: string
-	/** 引用消息 ID */
+	/** Reference message ID */
 	refer_message_id: string
-	/** 发送者消息 ID */
+	/** Sender message ID */
 	sender_message_id: string
-	/** 会话 ID */
+	/** Conversation ID */
 	conversation_id: string
-	/** 组织编码 */
+	/** Organization code */
 	organization_code: string
-	/** 消息内容 */
+	/** Message content */
 	message: S
 }
 
 /**
- * 登录响应
+ * Login response
  */
 export type LoginResponse = {
 	type: "user"
@@ -107,7 +107,7 @@ export type LoginResponse = {
 }
 
 /**
- * WS 连接成功响应
+ * WebSocket connection success response
  */
 export type WebsocketOpenResponse = {
 	sid: string

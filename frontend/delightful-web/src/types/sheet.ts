@@ -1,25 +1,25 @@
 export enum Schema {
-	TEXT = "TEXT", // 多行文本
-	SELECT = "SELECT", // 下拉单选
-	MULTIPLE = "MULTIPLE", // 下拉多选
-	DATE = "DATETIME", // 日期
-	NUMBER = "NUMBER", // 数字
-	CHECKBOX = "CHECKBOX", // 复选框
-	MEMBER = "MEMBER", // 成员（单/多选）
-	LINK = "LINK", // 超链接
-	ATTACHMENT = "ATTACHMENT", // 附件
-	CREATE_AT = "CREATE_AT", // 创建时间
-	UPDATE_AT = "UPDATE_AT", // 更新时间
-	CREATED = "CREATED", // 创建人
-	UPDATED = "UPDATED", // 修改人
-	TODO_STATUS = "TODO_STATUS", // 待办完成状态
-	TODO_FINISHED_AT = "TODO_FINISHED_AT", // 待办完成时间
-	LOOKUP = "LOOKUP", // 查找引用
-	QUOTE_RELATION = "QUOTE_RELATION", // 单向关联
-	MUTUAL_RELATION = "MUTUAL_RELATION", // 双向关联
-	ROW_ID = "ROW_ID", // 唯一ID
+	TEXT = "TEXT", // Multi-line text
+	SELECT = "SELECT", // Single select dropdown
+	MULTIPLE = "MULTIPLE", // Multi-select dropdown
+	DATE = "DATETIME", // Date
+	NUMBER = "NUMBER", // Number
+	CHECKBOX = "CHECKBOX", // Checkbox
+	MEMBER = "MEMBER", // Member (single/multi-select)
+	LINK = "LINK", // Hyperlink
+	ATTACHMENT = "ATTACHMENT", // Attachment
+	CREATE_AT = "CREATE_AT", // Creation time
+	UPDATE_AT = "UPDATE_AT", // Update time
+	CREATED = "CREATED", // Creator
+	UPDATED = "UPDATED", // Modifier
+	TODO_STATUS = "TODO_STATUS", // Todo completion status
+	TODO_FINISHED_AT = "TODO_FINISHED_AT", // Todo completion time
+	LOOKUP = "LOOKUP", // Lookup reference
+	QUOTE_RELATION = "QUOTE_RELATION", // One-way relation
+	MUTUAL_RELATION = "MUTUAL_RELATION", // Two-way relation
+	ROW_ID = "ROW_ID", // Unique ID
 	FORMULA = "FORMULA",
-	BUTTON = "BUTTON", // 按钮
+	BUTTON = "BUTTON", // Button
 }
 
 export namespace Sheet {
@@ -104,10 +104,10 @@ export namespace Sheet {
 
 export namespace File {
 	export enum SpaceType {
-		Personal = 1, // 个人云盘
-		Official = 2, // 企业云盘
+		Personal = 1, // Personal drive
+		Official = 2, // Enterprise drive
 	}
-	// 0 目录；1 多维表格；2 word；3 excel；4 思维笔记；5 ppt；6 pdf；7 旧版云文档；16 新云文档；22 白板；24 神奇应用.
+	// 0 directory; 1 multi-dimensional table; 2 word; 3 excel; 4 mind notes; 5 ppt; 6 pdf; 7 old cloud document; 16 new cloud document; 22 whiteboard; 24 magic app.
 	export enum FileType {
 		Category = 0,
 		MultiTable = 1,

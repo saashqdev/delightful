@@ -1,11 +1,11 @@
 export const enum WebSocketReadyState {
-	/** 正在连接中 */
+	/** Connecting */
 	CONNECTING = 0,
-	/** 连接成功 */
+	/** Connection open */
 	OPEN = 1,
-	/** 正在关闭中 */
+	/** Closing */
 	CLOSING = 2,
-	/** 连接已关闭 */
+	/** Connection closed */
 	CLOSED = 3,
 }
 export type WebSocketMessage = string | ArrayBuffer | SharedArrayBuffer | Blob | ArrayBufferView

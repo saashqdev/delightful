@@ -34,7 +34,7 @@ export default function VectorKnowledgeDetail() {
 	>("document")
 
 	/**
-	 * 更新知识库详情 - 使用防抖处理
+	 * Update knowledge base detail - with debounce processing
 	 */
 	const { run: updateKnowledgeDetail } = useDebounceFn<(code: string) => Promise<void>>(
 		async (code: string) => {
@@ -47,7 +47,7 @@ export default function VectorKnowledgeDetail() {
 	)
 
 	/**
-	 * 上一步 - 返回上一页
+	 * Previous step - return to previous page
 	 */
 	const handleBack = useMemoizedFn(() => {
 		navigate(
@@ -57,14 +57,14 @@ export default function VectorKnowledgeDetail() {
 		)
 	})
 
-	// 获取知识库详情
+	// Get knowledge base detail
 	useEffect(() => {
 		if (knowledgeBaseCode) {
 			updateKnowledgeDetail(knowledgeBaseCode)
 		}
 	}, [knowledgeBaseCode])
 
-	// 根据当前页面显示不同的内容
+	// Display different content based on current page
 	const PageContent = useMemo(() => {
 		if (knowledgeDetail && currentDetailPage === "document") {
 			return (

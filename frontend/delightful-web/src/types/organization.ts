@@ -13,11 +13,11 @@ export const enum PlatformType {
 	DingTalk = "DingTalk",
 }
 
-// 部门成员求和类型
+// Department member sum type
 export const enum SumType {
-	// 计算直属部门成员人数
+	// Calculate direct department member count
 	CountDirectDepartment = 1,
-	// 计算所有子级部门的用户总数
+	// Calculate total user count of all sub-departments
 	CountAll = 2,
 }
 
@@ -27,42 +27,42 @@ export type WithIdAndDataType<D, T extends StructureItemType> = D & {
 }
 
 export interface StructureItem {
-	/** 部门 ID */
+	/** Department ID */
 	department_id: string
-	/** 父部门 ID */
+	/** Parent department ID */
 	parent_department_id: string
-	/** 名称 */
+	/** Name */
 	name: string
-	/** 国际化名称 */
+	/** Internationalized name */
 	i18n_name: string
-	/** 排序 */
+	/** Sort order */
 	order: string
-	/** 领导用户 ID */
+	/** Leader user ID */
 	leader_user_id: string
-	/** 组织编码 */
+	/** Organization code */
 	organization_code: string
-	/** 状态 */
+	/** Status */
 	status: string
-	/** 路径 */
+	/** Path */
 	path: string
-	/** 层级 */
+	/** Level */
 	level: number
-	/** 创建时间 */
+	/** Creation time */
 	created_at: string
-	/** 文档 ID */
+	/** Document ID */
 	document_id: string
-	/** 员工总数 */
+	/** Total employee count */
 	employee_sum: number
-	/** 是否有子部门 */
+	/** Whether has child departments */
 	has_child: boolean
 }
 
 /**
- * 缓存中的部门信息
+ * Department information in cache
  *
  */
 export interface StructureItemOnCache extends StructureItem {
-	/** sum_type 为 2 时的值 */
+	/** Value when sum_type is 2 */
 	employee_sum_deep: number
 }
 
@@ -75,7 +75,7 @@ export interface PathNode {
 }
 
 export const enum StructureUserType {
-	// 未知(比如是个人版用户)
+	// Unknown (e.g., personal edition user)
 	Unknown = 0,
 
 	// 正式员工

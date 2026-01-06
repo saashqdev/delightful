@@ -8,7 +8,7 @@ export interface UpdateTopicMessage extends SeqMessageBase {
 }
 
 /**
- * 创建话题消息
+ * Create topic message
  */
 export interface CreateTopicMessage extends ConversationMessageBase {
 	type: ControlEventMessageType.CreateTopic
@@ -16,7 +16,7 @@ export interface CreateTopicMessage extends ConversationMessageBase {
 }
 
 /**
- * 删除话题消息
+ * Delete topic message
  */
 export interface DeleteTopicMessage extends ConversationMessageBase {
 	type: ControlEventMessageType.DeleteTopic
@@ -24,7 +24,7 @@ export interface DeleteTopicMessage extends ConversationMessageBase {
 }
 
 /**
- * 话题
+ * Topic
  */
 export interface ConversationTopic {
 	id: string
@@ -36,7 +36,7 @@ export interface ConversationTopic {
 }
 
 /**
- * 编辑消息
+ * Edit message
  */
 export interface EditMessage extends ConversationMessageBase {
 	type: ControlEventMessageType.EditMessage

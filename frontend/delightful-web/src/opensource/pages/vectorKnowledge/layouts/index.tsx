@@ -13,7 +13,7 @@ export default function VectorKnowledgeLayout({ children }: VectorKnowledgeLayou
 
 	const { pathname } = useLocation()
 
-	// 如果当前路径不是详情页或创建页，则默认跳转到创建页
+	// If current path is not detail or create page, redirect to create page by default
 	useEffect(() => {
 		if (
 			!pathname.includes(RoutePath.VectorKnowledgeDetail) &&

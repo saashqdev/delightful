@@ -29,5 +29,5 @@ type AppDataType = {
 	is_micro: number
 }
 
-// 如果数据是在一个数组中的形式，如下定义数组类型
+// If the data is in an array format, define array type as follows
 export type AppDataArrayType = AppDataType[]

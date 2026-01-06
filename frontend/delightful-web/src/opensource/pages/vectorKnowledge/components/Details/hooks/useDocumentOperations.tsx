@@ -34,10 +34,10 @@ export const useDocumentOperations = ({
 }: UseDocumentOperationsProps) => {
 	const { t } = useTranslation("flow")
 
-	// 处理单个文档操作
+	// Handle single document operation
 	const handleSingleDocOperation = useMemoizedFn(
 		async (record: Knowledge.EmbedDocumentDetail, operationType: DocumentOperationType) => {
-			// 根据操作类型获取标题和内容
+			// Get title and content based on operation type
 			const getTitleAndContent = () => {
 				switch (operationType) {
 					case DocumentOperationType.ENABLE:
@@ -73,17 +73,17 @@ export const useDocumentOperations = ({
 					try {
 						let success = false
 
-						// 根据操作类型执行不同的API调用
-						if (operationType === DocumentOperationType.DELETE) {
-							// TypeScript类型断言，确保编译通过
-							await (KnowledgeApi as any).deleteKnowledgeDocument({
-								knowledge_code: knowledgeBaseCode,
-								document_code: record.code,
-							})
-							success = true
-						} else {
-							// 启用或禁用操作
-							// TypeScript类型断言，确保编译通过
+					// Execute different API calls based on operation type
+					if (operationType === DocumentOperationType.DELETE) {
+						// TypeScript type assertion to ensure compilation
+						await (KnowledgeApi as any).deleteKnowledgeDocument({
+							knowledge_code: knowledgeBaseCode,
+							document_code: record.code,
+						})
+						success = true
+					} else {
+						// Enable or disable operation
+						// TypeScript type assertion to ensure compilation
 							const data = await (KnowledgeApi as any).updateKnowledgeDocument({
 								knowledge_code: knowledgeBaseCode,
 								document_code: record.code,
@@ -132,14 +132,14 @@ export const useDocumentOperations = ({
 		},
 	)
 
-	// 批量操作文档
+	// Batch operation on documents
 	const handleBatchOperation = useMemoizedFn(async (operationType: DocumentOperationType) => {
 		if (!selectedRowKeys.length) {
 			message.warning(t("knowledgeDatabase.selectDocumentTip"))
 			return
 		}
 
-		// 根据操作类型获取标题和内容
+		// Get title and content based on operation type
 		const getTitleAndContent = () => {
 			switch (operationType) {
 				case DocumentOperationType.ENABLE:
@@ -173,7 +173,7 @@ export const useDocumentOperations = ({
 			content,
 			onOk: async () => {
 				try {
-					// 对所选行执行操作，并追踪结果
+					// Execute operations on selected rows and track results
 					const operationResults = await Promise.allSettled(
 						selectedRowKeys.map(async (code) => {
 							try {
@@ -184,7 +184,7 @@ export const useDocumentOperations = ({
 									})
 									return { success: true, code }
 								} else {
-									// 获取文档名称
+									// Get document name
 									const record = documentList.find((item) => item.code === code)
 									await (KnowledgeApi as any).updateKnowledgeDocument({
 										knowledge_code: knowledgeBaseCode,
@@ -200,10 +200,10 @@ export const useDocumentOperations = ({
 						}),
 					)
 
-					// 更新选中的行
+					// Update selected rows
 					setSelectedRowKeys([])
 
-					// 刷新数据列表
+					// Refresh data list
 					await getKnowledgeDocumentList(
 						knowledgeBaseCode,
 						searchText,
@@ -211,13 +211,13 @@ export const useDocumentOperations = ({
 						pageInfo.pageSize,
 					)
 
-					// 统计成功和失败的操作
+					// Count successful and failed operations
 					const successCount = operationResults.filter(
 						(result) => result.status === "fulfilled" && result.value.success,
 					).length
 					const failedCount = selectedRowKeys.length - successCount
 
-					// 根据操作类型获取提示词
+					// Get message based on operation type
 					let successMessage = ""
 					switch (operationType) {
 						case DocumentOperationType.ENABLE:
@@ -258,46 +258,46 @@ export const useDocumentOperations = ({
 		})
 	})
 
-	// 启用文档
+	// Enable document
 	const handleEnableSingleFile = useMemoizedFn((record: Knowledge.EmbedDocumentDetail) => {
 		handleSingleDocOperation(record, DocumentOperationType.ENABLE)
 	})
 
-	// 禁用文档
+	// Disable document
 	const handleDisableSingleFile = useMemoizedFn((record: Knowledge.EmbedDocumentDetail) => {
 		handleSingleDocOperation(record, DocumentOperationType.DISABLE)
 	})
 
-	// 删除单个文档
+	// Delete single document
 	const handleDeleteSingleFile = useMemoizedFn((record: Knowledge.EmbedDocumentDetail) => {
 		handleSingleDocOperation(record, DocumentOperationType.DELETE)
 	})
 
-	// 批量删除文档
+	// Batch delete documents
 	const handleBatchDelete = useMemoizedFn(() => {
 		handleBatchOperation(DocumentOperationType.DELETE)
 	})
 
-	// 批量启用文档
+	// Batch enable documents
 	const handleBatchEnable = useMemoizedFn(() => {
 		handleBatchOperation(DocumentOperationType.ENABLE)
 	})
 
-	// 批量禁用文档
+	// Batch disable documents
 	const handleBatchDisable = useMemoizedFn(() => {
 		handleBatchOperation(DocumentOperationType.DISABLE)
 	})
 
-	// 重命名文档
+	// Rename document
 	const handleRenameFile = useMemoizedFn((record: Knowledge.EmbedDocumentDetail) => {
 		let newFileName = record.name
 
-		// 分离文件名和扩展名
+		// Separate filename and extension
 		const lastDotIndex = record.name.lastIndexOf(".")
 		const fileName = lastDotIndex > 0 ? record.name.substring(0, lastDotIndex) : record.name
 		const fileExtension = lastDotIndex > 0 ? record.name.substring(lastDotIndex) : ""
 
-		// 初始化为原始文件名（不包含扩展名）
+		// Initialize to original filename (without extension)
 		let inputFileName = fileName
 
 		Modal.confirm({
@@ -327,17 +327,17 @@ export const useDocumentOperations = ({
 				try {
 					if (!inputFileName || inputFileName === "") {
 						message.warning(t("knowledgeDatabase.inputDocumentNamePlaceholder"))
-						return Promise.reject() // 阻止Modal关闭
+						return Promise.reject() // Prevent modal from closing
 					}
 
-					// 合并文件名和扩展名
+					// Merge filename and extension
 					newFileName = inputFileName + fileExtension
 
 					if (newFileName === record.name) {
 						return
 					}
 
-					// 调用API更新文档名称
+					// Call API to update document name
 					const data = await (KnowledgeApi as any).updateKnowledgeDocument({
 						knowledge_code: knowledgeBaseCode,
 						document_code: record.code,
@@ -346,7 +346,7 @@ export const useDocumentOperations = ({
 					})
 
 					if (data) {
-						// 刷新数据列表
+						// Refresh data list
 						await getKnowledgeDocumentList(
 							knowledgeBaseCode,
 							searchText,
@@ -354,7 +354,7 @@ export const useDocumentOperations = ({
 							pageInfo.pageSize,
 						)
 
-						// 显示成功消息
+						// Show success message
 						message.success(
 							t("knowledgeDatabase.renameDocumentSuccess", {
 								name: data.name,
@@ -362,9 +362,9 @@ export const useDocumentOperations = ({
 						)
 					}
 				} catch (error) {
-					console.error("重命名失败:", error)
+					console.error("Rename failed:", error)
 					message.error(t("common.operationFailed"))
-					return Promise.reject() // 发生错误时阻止Modal关闭
+					return Promise.reject() // Prevent modal from closing on error
 				}
 			},
 		})

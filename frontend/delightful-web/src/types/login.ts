@@ -4,44 +4,44 @@ import type { FormInstance } from "antd"
 
 export interface LoginPanelProps<V> {
 	form?: FormInstance<V>
-	/** 下一步之前 */
+	/** Before next step */
 	nextStepBefore?: () => Promise<void>
-	/** 是否禁用 */
+	/** Whether disabled */
 	disabled?: boolean
-	/** 设置登录方式 */
+	/** Set login method */
 	setLoginType?: (loginType: Login.LoginType) => void
-	/** 设置登录环境 */
+	/** Set login environment */
 	setDeployment?: (deployment: LoginDeployment) => void
-	/** 是否显示下一步 */
+	/** Whether to show next step */
 	nextStep?: boolean
-	/** 设置是否显示下一步 */
+	/** Set whether to show next step */
 	setNextStep?: (nextStep: boolean) => void
 }
 
 export namespace Login {
-	/** 登录方式(与API强绑定，禁止修改) */
+	/** Login method (strongly bound to API, do not modify) */
 	export enum LoginType {
-		/** 短信验证码登录 */
+		/** SMS verification code login */
 		SMSVerificationCode = "phone_captcha",
-		/** 手机号+密码登录 */
+		/** Phone number + password login */
 		MobilePhonePassword = "phone_password",
-		/** 账号密码登录 */
+		/** Account password login */
 		// AccountPassword = "username",
-		/** 钉钉扫码登录 */
+		/** DingTalk scan code login */
 		DingTalkScanCode = "DingTalk",
-		/** 钉钉免登 */
+		/** DingTalk auto-login */
 		DingTalkAvoid = "DingTalkAvoid",
-		/** 企业微信 */
+		/** WeCom */
 		WecomScanCode = "WeCom",
-		/** 飞书 */
+		/** Lark */
 		LarkScanCode = "Lark",
-		/** 飞书免登 */
+		/** Lark auto-login */
 		LarkAvoid = "Lark",
-		/** 微信公众号登录 */
+		/** WeChat official account login */
 		WechatOfficialAccount = "wechat_official_account",
 	}
 
-	/** 登录响应（验证码、手机号+密码、钉钉、飞书、企业微信等登录方式） */
+	/** Login response (verification code, phone+password, DingTalk, Lark, WeCom, etc.) */
 	export interface UserLoginsResponse {
 		access_token: string
 		bind_phone: boolean
@@ -57,52 +57,52 @@ export namespace Login {
 		}
 	}
 
-	/** 通用登录表单数据类型 */
+	/** Common login form data type */
 	interface LoginFormCommonValues {
 		device?: Awaited<ReturnType<typeof getDeviceInfo>>
 		redirect: string
 	}
 
-	/** 验证码登录表单 */
+	/** Verification code login form */
 	export interface SMSVerificationCodeFormValues extends LoginFormCommonValues {
 		type: Login.LoginType
-		/** 手机号 */
+		/** Phone number */
 		phone: string
-		/** 国家区号 */
+		/** Country code */
 		state_code: string
-		/** 验证码 */
+		/** Verification code */
 		code: string
-		/** 是否自动注册 */
+		/** Whether to auto-register */
 		auto_register: boolean
 	}
 
-	/** 手机号码+密码 */
+	/** Phone number + password */
 	export interface MobilePhonePasswordFormValues extends LoginFormCommonValues {
 		type: Login.LoginType
-		/** 手机号 */
+		/** Phone number */
 		phone: string
-		/** 国家区号 */
+		/** Country code */
 		state_code: string
-		/** 密码 */
+		/** Password */
 		password: string
 	}
 
-	/** 钉钉扫码登录 */
+	/** DingTalk scan code login */
 	export interface ThirdPartyLoginsFormValues extends LoginFormCommonValues {
-		/** 第三方登录平台（Omit<Login.LoginType, "SMSVerificationCode" | "MobilePhonePassword">） */
+		/** Third-party login platform */
 		platform_type: Login.LoginType
-		/** 第三方平台临时授权Code */
+		/** Third-party platform temporary authorization code */
 		authorization_code: string
 	}
 
-	/** 公众号登录 */
+	/** Official account login */
 	export interface WechatOfficialAccountLoginsFormValues
 		extends Omit<LoginFormCommonValues, "redirect"> {
-		/** 第三方登录平台（Omit<Login.LoginType, "SMSVerificationCode" | "MobilePhonePassword">） */
+		/** Third-party login platform */
 		platform_type: Login.LoginType.WechatOfficialAccount
-		/** 第三方平台临时授权Code */
+		/** Third-party platform temporary authorization code */
 		authorization_code: string
-		/** 场景值 */
+		/** Scene value */
 		scene_value: string
 	}
 }

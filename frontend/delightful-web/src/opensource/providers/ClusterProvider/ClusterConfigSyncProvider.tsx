@@ -52,13 +52,13 @@ export function ClusterConfigSyncProvider(props: PropsWithChildren) {
 				console.error(error)
 			} finally {
 				setLoading(false)
-				// 这里的重定向要移除
+				// Redirect needs to be removed here
 			}
 		},
 		{ wait: 3000, leading: true, trailing: false },
 	)
 
-	// 登录成功时同步所有状态（用户信息、组织信息、环境配置、授权码等）
+	// Sync all states on successful login (user info, organization info, environment config, auth code, etc.)
 	useMount(() => {
 		const { authorization } = userStore.user
 		if (authorization) {

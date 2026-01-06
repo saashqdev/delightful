@@ -107,18 +107,18 @@ class MessageStore {
 	}
 
 	/**
-	 * 添加接收消息
-	 * @param message 消息
+	 * Add received message
+	 * @param message Message
 	 */
 	addReceivedMessage(message: FullMessage) {
-		// 如果消息已存在，则不添加
+		// If message already exists, do not add
 		if (this.messages.find((m) => m.message_id === message.message_id)) {
 			console.log("message already exists ====> ", message)
 			return
 		}
-		// 如果消息存在，则替换
+		// If message exists, replace it
 		const messageIndex = this.messages.findIndex((m) => m.temp_id === message.temp_id)
-		// temp_id 为空，可能是控制消息
+		// Empty temp_id might indicate a control message
 		if (message.temp_id && messageIndex !== -1) {
 			console.log("replace local send message ====> ", message)
 			this.messages.splice(messageIndex, 1, { ...message })
@@ -149,17 +149,17 @@ class MessageStore {
 	}
 
 	/**
-	 * 获取消息发送状态
-	 * @param id 消息ID
-	 * @returns 发送状态
+	 * Get message send status
+	 * @param id Message ID
+	 * @returns Send status
 	 */
 	getMessageSendStatus(id: string) {
 		return this.sendStatusMap.get(id)
 	}
 
 	/**
-	 * 获取当前会话的最后一条消息
-	 * @returns 最后一条消息
+	 * Get the last message of current conversation
+	 * @returns Last message
 	 */
 	getCurrentConversationLastMessage() {
 		if (this.messages.length) {
@@ -169,9 +169,9 @@ class MessageStore {
 	}
 
 	/**
-	 * 更新消息已读状态
-	 * @param messageIdOrTempId 消息ID
-	 * @param status 已读状态
+	 * Update message seen status
+	 * @param messageIdOrTempId Message ID or temp ID
+	 * @param status Seen status
 	 */
 	updateMessageSeenStatus(messageIdOrTempId: string, status: ConversationMessageStatus) {
 		const message = this.messages.find(
@@ -184,17 +184,17 @@ class MessageStore {
 	}
 
 	/**
-	 * 设置是否还有更多历史消息
-	 * @param hasMoreHistoryMessage 是否还有更多历史消息
+	 * Set whether there are more history messages
+	 * @param hasMoreHistoryMessage Whether there are more history messages
 	 */
 	setHasMoreHistoryMessage(hasMoreHistoryMessage: boolean) {
 		this.hasMoreHistoryMessage = hasMoreHistoryMessage
 	}
 
 	/**
-	 * 设置分页配置
-	 * @param page 当前页
-	 * @param totalPages 总页数
+	 * Set pagination config
+	 * @param page Current page
+	 * @param totalPages Total pages
 	 */
 	setPageConfig(page: number, totalPages: number) {
 		this.page = page
@@ -203,21 +203,21 @@ class MessageStore {
 	}
 
 	/**
-	 * 添加消息
-	 * @param messages 消息
+	 * Add messages
+	 * @param messages Messages
 	 */
 	addMessages(messages: FullMessage[]) {
-		// 历史消息添加到数组开头
+		// Add history messages to the beginning of array
 		this.messages.unshift(...messages.slice().reverse())
 		messages.forEach((message) => {
-			// 历史消息没有temp_id，不需要设置id映射
+			// History messages have no temp_id, no need to set id mapping
 			this.sendStatusMap.set(message.message_id || "", message.send_status)
 			this.seenStatusMap.set(message.message_id || "", message.seen_status)
 		})
 		this.firstSeqId = this.messages[0]?.seq_id || ""
 	}
 
-	// 设置消息为已撤回
+	// Flag message as revoked
 	flagMessageRevoked(message_id: string) {
 		const message = this.messages.find((m) => m.message_id === message_id)
 		if (message) {
@@ -227,18 +227,18 @@ class MessageStore {
 	}
 
 	/**
-	 * 删除消息
-	 * @param conversationId 会话ID
-	 * @param messageId 消息ID
-	 * @param topicId 话题ID
+	 * Remove message
+	 * @param conversationId Conversation ID
+	 * @param messageId Message ID
+	 * @param topicId Topic ID
 	 */
 	removeMessage(messageId: string) {
 		this.messages = this.messages.filter((message) => message.message_id !== messageId)
 	}
 
 	/**
-	 * 更新消息
-	 * @param message 消息
+	 * Update message
+	 * @param message Message
 	 */
 	updateMessage(
 		messageId: string,
@@ -254,9 +254,9 @@ class MessageStore {
 	}
 
 	/**
-	 * 更新消息未读数
-	 * @param targetMessageId 目标消息ID
-	 * @param unreadCount 未读数
+	 * Update message unread count
+	 * @param targetMessageId Target message ID
+	 * @param unreadCount Unread count
 	 */
 	updateMessageUnreadCount(targetMessageId: string, unreadCount: number) {
 		const messageIndex = this.messages.findIndex((m) => m.message_id === targetMessageId)

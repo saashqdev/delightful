@@ -32,7 +32,7 @@ function AuthenticationProvider({ children }: PropsWithChildren) {
 	const queryAuthorization = searchParams.get(AuthenticationKey)
 	const latestAuth = queryAuthorization ?? authorization
 
-	// 加载默认图标
+	// Load default icons
 	const { mutate } = useBotStore((state) => state.useDefaultIcon)()
 
 	const defaultIcon = useBotStore((state) => state.defaultIcon.icons)
@@ -46,7 +46,7 @@ function AuthenticationProvider({ children }: PropsWithChildren) {
 		// deployCode 的获取从 账号体系直接获取用作兜底
 		const { accounts } = userStore.account
 		const accountIndex = accounts.findIndex((account) => account.access_token === access_token)
-		// 优先获取外部的 deployCode，再从账号体系获取 deployCode 用作兜底
+		// Priority: get external deployCode first, then use deployCode from account system as fallback
 		const tempToken = clusterCode || accounts?.[accountIndex]?.deployCode
 		const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(tempToken as string)
 		const userSyncStep = loginService.accountSyncStep(tempToken as string)
@@ -63,7 +63,7 @@ function AuthenticationProvider({ children }: PropsWithChildren) {
 				.then(loginService.organizationSyncStep)
 				.then(userSyncStep)
 				.then(() => {
-					// 临时处理
+					// Temporary handling
 					const isSearchRoutePath = window.location.pathname.indexOf("search.html") > -1
 					if (!isSearchRoutePath && ["/", RoutePath.Login].includes(pathname)) {
 						navigate(RoutePath.Chat, { replace: true })
@@ -78,14 +78,14 @@ function AuthenticationProvider({ children }: PropsWithChildren) {
 
 	const [success, { setTrue: loginSuccess, setFalse: loginFail }] = useBoolean(false)
 	useMount(async () => {
-		// 当且仅当登录后，需要每次检查第三方私有化登录授权码、第三方私有化配置
+		// Check third-party private deployment auth code and config only when logged in
 		if (latestAuth) {
 			initial(latestAuth)
 				.then(() => {
 					loginSuccess()
 				})
 				.catch(async (error) => {
-					// 登录异常需要清空缓存
+					// Clear cache on login exception
 					console.error(error)
 					await userService.deleteAccount()
 					loginFail()

@@ -4,7 +4,7 @@ import { ClusterContext } from "../ClusterProvider"
 
 export function useClusterCode() {
 	const store = useContext(ClusterContext)
-	// 当前集群配置
+	// Current cluster configuration
 	const [clusterCode, setClusterConfig] = useState(store.clusterCode)
 
 	useEffect(() => {

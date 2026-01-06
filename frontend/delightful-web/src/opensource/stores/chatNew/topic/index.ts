@@ -3,16 +3,16 @@ import { t } from "i18next"
 import { makeAutoObservable } from "mobx"
 
 /**
- * 话题 UI 状态管理
+ * Topic UI state management
  */
 class TopicStore {
 	/**
-	 * 话题列表
+	 * Topic list
 	 */
 	topicList: Topic[] = []
 
 	/**
-	 * 是否正在加载话题列表
+	 * Whether the topic list is loading
 	 */
 	isLoading: boolean = false
 
@@ -32,24 +32,24 @@ class TopicStore {
 	}
 
 	/**
-	 * 设置话题列表
-	 * @param topicList 话题列表
+	 * Set topic list
+	 * @param topicList Topic list
 	 */
 	setTopicList(topicList: Topic[]) {
 		this.topicList = topicList
 	}
 
 	/**
-	 * 设置加载状态
-	 * @param loading 是否加载中
+	 * Set loading state
+	 * @param loading Whether loading
 	 */
 	setLoading(loading: boolean) {
 		this.isLoading = loading
 	}
 
 	/**
-	 * 添加话题到列表头部
-	 * @param topic 话题
+	 * Add topic to the start of the list
+	 * @param topic Topic
 	 */
 	unshiftTopic(topic: Topic) {
 		if (this.topicList.find((tt) => tt.id === topic.id)) {
@@ -59,8 +59,8 @@ class TopicStore {
 	}
 
 	/**
-	 * 添加话题到列表
-	 * @param topic 话题
+	 * Add topic to the list
+	 * @param topic Topic
 	 */
 	addTopic(topic: Topic) {
 		if (this.topicList.find((tt) => tt.id === topic.id)) {
@@ -70,44 +70,44 @@ class TopicStore {
 	}
 
 	/**
-	 * 更新话题
-	 * @param topicId 话题ID
-	 * @param updates 更新内容
+	 * Update topic
+	 * @param topicId Topic ID
+	 * @param updates Updates
 	 */
 	updateTopic(topicId: string, updates: Partial<Topic>) {
 		const index = this.topicList.findIndex((topic) => topic.id === topicId)
 		console.log("updateTopic ====== ", index, updates)
 
 		if (index !== -1) {
-			// 创建新的话题数组，以触发mobx的响应式更新
+			// Create a new topic array to trigger MobX reactivity
 			const updatedTopicList = [...this.topicList]
 			const topic = updatedTopicList[index]
 
-			// 更新属性
+			// Update properties
 			Object.entries(updates).forEach(([key, value]) => {
 				// @ts-ignore
 				topic[key] = value
 			})
 
-			// 如果包含名称更新，调用专门的方法
+			// If name is updated, call dedicated method
 			if (updates.name) {
 				topic.updateName(updates.name)
 			}
 
-			// 如果包含描述更新，调用专门的方法
+			// If description is updated, call dedicated method
 			if (updates.description) {
 				topic.updateDescription(updates.description)
 			}
 
-			// 替换整个数组以确保视图更新
+			// Replace the entire array to ensure the view updates
 			this.topicList = updatedTopicList
 		}
 	}
 
 	/**
-	 * 替换特定话题
-	 * @param oldTopicId 旧话题ID
-	 * @param newTopic 新话题
+	 * Replace a specific topic
+	 * @param oldTopicId Old topic ID
+	 * @param newTopic New topic
 	 */
 	replaceTopic(oldTopicId: string, newTopic: Topic) {
 		const index = this.topicList.findIndex((topic) => topic.id === oldTopicId)
@@ -117,24 +117,24 @@ class TopicStore {
 	}
 
 	/**
-	 * 删除话题
-	 * @param topicId 话题ID
+	 * Remove a topic
+	 * @param topicId Topic ID
 	 */
 	removeTopic(topicId: string) {
 		this.topicList = this.topicList.filter((topic) => topic.id !== topicId)
 	}
 
 	/**
-	 * 清空话题列表
+	 * Clear topic list
 	 */
 	clearTopicList() {
 		this.topicList = []
 	}
 
 	/**
-	 * 根据ID获取话题
-	 * @param topicId 话题ID
-	 * @returns 话题
+	 * Get a topic by ID
+	 * @param topicId Topic ID
+	 * @returns Topic
 	 */
 	getTopicById(topicId: string): Topic | undefined {
 		return this.topicList.find((topic) => topic.id === topicId)

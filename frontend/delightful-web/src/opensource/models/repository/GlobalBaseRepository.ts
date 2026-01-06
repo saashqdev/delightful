@@ -3,7 +3,7 @@ import { DatabaseManager } from "./DatabaseManager"
 import { AbstractBaseRepository } from "./AbstractBaseRepository"
 
 /**
- * @description 全局repository层基类
+ * @description Global repository base class
  */
 export class GlobalBaseRepository<T> extends AbstractBaseRepository<T> {
 	// eslint-disable-next-line class-methods-use-this

@@ -44,9 +44,9 @@ export interface TeamshareUserInfo {
 
 export const generateUserApi = (fetch: HttpClient) => ({
 	/**
-	 * @description 登录
-	 * @param {Login.LoginType} type 登录类型
-	 * @param {Login.SMSVerificationCodeFormValues | Login.MobilePhonePasswordFormValues} values 登录表单
+	 * @description Login
+	 * @param {Login.LoginType} type Login type
+	 * @param {Login.SMSVerificationCodeFormValues | Login.MobilePhonePasswordFormValues} values Login form values
 	 * @returns
 	 */
 	login(
@@ -60,8 +60,8 @@ export const generateUserApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * @description 第三方登录（钉钉登录、企业微信登录、飞书登录）
-	 * @param {Login.ThirdPartyLoginsFormValues | Login.WechatOfficialAccountLoginsFormValues} values 登录表单
+	 * @description Third-party login (DingTalk, WeCom, Feishu)
+	 * @param {Login.ThirdPartyLoginsFormValues | Login.WechatOfficialAccountLoginsFormValues} values Login form values
 	 */
 	thirdPartyLogins(
 		values: Login.ThirdPartyLoginsFormValues | Login.WechatOfficialAccountLoginsFormValues,
@@ -80,7 +80,7 @@ export const generateUserApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取用户设备
+	 * Get user devices
 	 * @returns
 	 */
 	getUserDevices() {
@@ -88,7 +88,7 @@ export const generateUserApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取用户信息
+	 * Get user info
 	 * @returns
 	 */
 	getUserInfo() {
@@ -96,9 +96,9 @@ export const generateUserApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取用户账户
-	 * @param {Record<string, string>} headers 请求头，由业务层决定携带哪个账号的请求头获取组织
-	 * @param {string} deployCode 私有化部署Code，由业务层决定请求哪个服务
+	 * Get user accounts
+	 * @param {Record<string, string>} headers Request headers; business layer decides which account header to use
+	 * @param {string} deployCode Private deploy code; business layer decides which service to query
 	 */
 	getUserOrganizations(headers?: Record<string, string>, deployCode?: string) {
 		const { clusterConfig } = configStore.cluster
@@ -112,7 +112,7 @@ export const generateUserApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 登出某台设备
+	 * Logout from a specific device
 	 * @param code
 	 * @param id
 	 * @returns
@@ -122,7 +122,7 @@ export const generateUserApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取用户某种类型验证码
+	 * Get verification code by type
 	 * @param type
 	 * @param phone
 	 * @returns
@@ -138,7 +138,7 @@ export const generateUserApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取修改手机号验证码
+	 * Get verification code for changing phone
 	 * @param type
 	 * @param phone
 	 * @param state_code
@@ -155,7 +155,7 @@ export const generateUserApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 修改密码
+	 * Change password
 	 * @param code
 	 * @param new_password
 	 * @param repeat_new_password
@@ -170,7 +170,7 @@ export const generateUserApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 修改手机号
+	 * Change phone number
 	 * @param code
 	 * @param new_phone
 	 * @param new_phone_code
@@ -187,7 +187,7 @@ export const generateUserApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取天书用户信息
+	 * Get Teamshare user info
 	 * @returns
 	 */
 	getTeamshareUserInfo() {

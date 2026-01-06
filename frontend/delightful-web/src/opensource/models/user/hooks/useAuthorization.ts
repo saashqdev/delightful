@@ -5,7 +5,7 @@ import { userService } from "@/services"
 import { useMemoizedFn } from "ahooks"
 
 /**
- * 获取当前用户token
+ * Get current user token
  */
 export function useAuthorization() {
 	const [authorization, setAuthorization] = useState(userStore.user.authorization)

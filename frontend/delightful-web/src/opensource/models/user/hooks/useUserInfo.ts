@@ -7,7 +7,7 @@ import { userTransformer } from "@/opensource/models/user/transformers"
 import type { StructureUserItem } from "@/types/organization"
 
 /**
- * 获取当前用户信息
+ * Get current user info
  */
 export function useUserInfo() {
 	const [userInfo, setUserInfo] = useState(userStore.user.userInfo)

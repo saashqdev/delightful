@@ -3,7 +3,7 @@ import { DatabaseManager } from "./DatabaseManager"
 import { AbstractBaseRepository } from "./AbstractBaseRepository"
 
 /**
- * @description 用户相关的repository层基类
+ * @description User-related repository base class
  */
 export class BaseRepository<T> extends AbstractBaseRepository<T> {
 	constructor(

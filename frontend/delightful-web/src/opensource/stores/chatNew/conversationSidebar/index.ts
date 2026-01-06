@@ -5,7 +5,7 @@ import conversationStore from "../conversation"
 
 class ConversationSiderbarStore {
 	/**
-	 * 侧边栏会话组
+	 * Sidebar conversation groups
 	 */
 	conversationSiderbarGroups: Record<ConversationGroupKey, string[]> = {
 		[ConversationGroupKey.Top]: [],
@@ -21,9 +21,9 @@ class ConversationSiderbarStore {
 	}
 
 	/**
-	 * 添加会话到组
-	 * @param groupKey 组
-	 * @param conversationId 会话ID
+	 * Add a conversation to a group
+	 * @param groupKey Group key
+	 * @param conversationId Conversation ID
 	 */
 	addConversationToGroup(groupKey: ConversationGroupKey, conversationId: string) {
 		if (!this.conversationSiderbarGroups[groupKey]) {
@@ -32,16 +32,16 @@ class ConversationSiderbarStore {
 
 		this.moveConversationFirst(conversationId, groupKey)
 
-		// 如果是在用户组或者AI组, 则需要同时添加到单聊组
+		// If in User or AI group, also add to Single group
 		if ([ConversationGroupKey.User, ConversationGroupKey.AI].includes(groupKey)) {
 			this.moveConversationFirst(conversationId, ConversationGroupKey.Single)
 		}
 	}
 
 	/**
-	 * 移除会话从组
-	 * @param groupKey 组
-	 * @param conversationId 会话ID
+	 * Remove a conversation from a group
+	 * @param groupKey Group key
+	 * @param conversationId Conversation ID
 	 */
 	removeConversationFromGroup(
 		groupKey: ConversationGroupKey,
@@ -60,7 +60,7 @@ class ConversationSiderbarStore {
 			;[nextConversationId] = this.conversationSiderbarGroups[groupKey]
 		}
 
-		// 如果是在用户组或者AI组, 则需要同时移除单聊组
+		// If in User or AI group, also remove from Single group
 		if ([ConversationGroupKey.User, ConversationGroupKey.AI].includes(groupKey)) {
 			const singleIndex =
 				this.conversationSiderbarGroups[ConversationGroupKey.Single].indexOf(conversationId)
@@ -80,7 +80,7 @@ class ConversationSiderbarStore {
 	}
 
 	/**
-	 * 重置会话组
+	 * Reset conversation groups
 	 */
 	resetConversationSidebarGroups() {
 		this.conversationSiderbarGroups = {
@@ -94,35 +94,34 @@ class ConversationSiderbarStore {
 	}
 
 	/**
-	 * 更新会话组
-	 * @param groupKey 组
-	 * @param conversationIds 会话ID列表
+	 * Update a conversation group
+	 * @param groupKey Group key
+	 * @param conversationIds List of conversation IDs
 	 */
 	updateConversationSiderbarGroups(groupKey: ConversationGroupKey, conversationIds: string[]) {
 		this.conversationSiderbarGroups[groupKey] = Array.from(new Set(conversationIds))
 	}
 
 	/**
-	 * 获取会话组
-	 * @param groupKey 组
-	 * @returns 会话ID列表
+	 * Get all conversation groups
+	 * @returns Map of group key to conversation ID list
 	 */
 	getConversationSiderbarGroups() {
 		return this.conversationSiderbarGroups
 	}
 
 	/**
-	 * 获取会话组
-	 * @param groupKey 组
-	 * @returns 会话ID列表
+	 * Get a conversation group
+	 * @param groupKey Group key
+	 * @returns Conversation ID list
 	 */
 	getConversationSiderbarGroup(groupKey: ConversationGroupKey) {
 		return this.conversationSiderbarGroups[groupKey]
 	}
 
 	/**
-	 * 设置会话组
-	 * @param conversationSiderbarGroups 会话组
+	 * Set conversation groups
+	 * @param conversationSiderbarGroups Conversation groups
 	 */
 	setConversationSidebarGroups(
 		conversationSiderbarGroups: Record<ConversationGroupKey, string[]>,
@@ -131,38 +130,38 @@ class ConversationSiderbarStore {
 	}
 
 	/**
-	 * 移动会话到最上面
-	 * @param conversation_id 会话ID
+	 * Move a conversation to the top
+	 * @param conversation_id Conversation ID
 	 */
 	moveConversationFirst(conversation_id: string, menuKey: ConversationGroupKey) {
 		if (!conversation_id) return
 
 		const index = this.conversationSiderbarGroups[menuKey].indexOf(conversation_id)
 
-		// 如果存在，则移除
+		// Remove if it exists
 		if (index !== -1) {
 			this.conversationSiderbarGroups[menuKey].splice(index, 1)
 		}
 
-		// 添加到最上面
+		// Add to the top
 		this.conversationSiderbarGroups[menuKey].unshift(conversation_id)
 	}
 
 	/**
-	 * 移动到所有置顶会话的下面
-	 * @param conversation_id 会话ID
-	 * @param menuKey 组
+	 * Move below all pinned conversations
+	 * @param conversation_id Conversation ID
+	 * @param menuKey Group key
 	 */
 	moveAfterTopConversations(conversation_id: string, menuKey: ConversationGroupKey) {
 		if (!conversation_id) return
 
-		// 移除会话
+		// Remove conversation
 		const index = this.conversationSiderbarGroups[menuKey].findIndex(
 			(id) => id === conversation_id,
 		)
 		this.conversationSiderbarGroups[menuKey].splice(index, 1)
 
-		// 移动到所有置顶会话的下面
+		// Move below all pinned conversations
 		const firstIndexNotTop = this.conversationSiderbarGroups[menuKey].findIndex(
 			(id) => !conversationStore.conversations[id].is_top,
 		)

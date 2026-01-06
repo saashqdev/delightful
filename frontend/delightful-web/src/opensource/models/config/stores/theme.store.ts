@@ -2,11 +2,11 @@ import { makeAutoObservable } from "mobx"
 import type { ThemeMode } from "antd-style"
 
 /**
- * @description 主题配置Store，负责内存状态管理
+ * @description Theme configuration store, manages in-memory state
  */
 export class ThemeStore {
 	
-	// 设置默认值
+	// Set default value
 	theme: ThemeMode = "auto"
 	
 	constructor() {
@@ -14,7 +14,7 @@ export class ThemeStore {
 	}
 	
 	/**
-	 * @description 设置主题
+	 * @description Set theme
 	 */
 	setTheme(theme: ThemeMode) {
 		this.theme = theme

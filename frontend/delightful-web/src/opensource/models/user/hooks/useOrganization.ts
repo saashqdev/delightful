@@ -3,7 +3,7 @@ import { reaction } from "mobx"
 import { userStore } from "@/opensource/models/user"
 
 /**
- * 获取当前用户信息
+ * Get current user organization info
  */
 export function useOrganization() {
 	const [organizationMeta, setOrganizationMeta] = useState({

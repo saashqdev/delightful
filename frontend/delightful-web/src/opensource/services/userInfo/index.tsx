@@ -7,7 +7,7 @@ import userInfoStore from "@/opensource/stores/userInfo"
 import { ContactApi } from "@/apis"
 
 /**
- * 用户信息上下文
+ * User info context
  */
 class UserInfoService {
 	static STORE_NAME = "user_info"
@@ -25,10 +25,10 @@ class UserInfoService {
 	}
 
 	/**
-	 * 拉取用户信息
-	 * @param userIds 用户ID
-	 * @param queryType 查询类型
-	 * @returns 用户信息
+	 * Fetch user info
+	 * @param userIds User IDs
+	 * @param queryType Query type
+	 * @returns User info
 	 */
 	fetchUserInfos(userIds: string[], queryType: 1 | 2) {
 		return fetchPaddingData((params) =>
@@ -46,9 +46,9 @@ class UserInfoService {
 	}
 
 	/**
-	 * 从数据库加载数据
-	 * @param db 数据库
-	 * @returns 数据
+	 * Load data from the database
+	 * @param db Database
+	 * @returns Data
 	 */
 	loadData(db?: DataContextDb) {
 		this.database = db
@@ -64,9 +64,9 @@ class UserInfoService {
 	}
 
 	/**
-	 * 设置用户信息
-	 * @param key 用户ID
-	 * @param value 用户信息
+	 * Set user info
+	 * @param key User ID
+	 * @param value User info
 	 */
 	set(key: string, value: StructureUserItem) {
 		const avatarUrl = getAvatarUrl(value.avatar_url)

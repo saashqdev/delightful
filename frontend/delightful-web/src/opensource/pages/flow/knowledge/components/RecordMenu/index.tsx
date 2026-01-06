@@ -25,7 +25,7 @@ export default function RecordMenu({
 }: RecordMenuProps) {
 	const { t } = useTranslation()
 
-	/** 删除知识库 */
+	/** Delete knowledge base */
 	const deleteItem = useMemoizedFn((e) => {
 		e?.domEvent?.stopPropagation?.()
 		Modal.confirm({

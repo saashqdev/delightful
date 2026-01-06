@@ -81,7 +81,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 		return 10
 	}, [scrollSize?.height])
 
-	// 动态选择接口的 fetcher 函数
+	// Dynamically select the API fetcher function
 	const fetcher = useMemoizedFn(
 		async (key: {
 			type: FlowRouteType
@@ -120,7 +120,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 
 	const getKey = ({ pageIndex, previousPageData, type, name, size }: KeyProp) => {
 		if (previousPageData && !previousPageData.list.length) return null
-		return { page: pageIndex + 1, pageSize: size, type, name, searchType: vkSearchType } // 请求参数
+		return { page: pageIndex + 1, pageSize: size, type, name, searchType: vkSearchType } // Request parameters
 	}
 
 	const usePaginatedData = (value: string, type: FlowRouteType, size: number) => {
@@ -134,7 +134,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 		const items = data ? data.map((page) => page?.list).flat() : []
 		const total = data?.[0]?.total || 0
 
-		// 判断是否还有更多数据
+		// Determine if more data is available
 		const hasMore = items.length < total
 
 		return { items, error, mutate, setSize, hasMore, total, loading: isLoading }
@@ -160,11 +160,11 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 			const updatedData = [...currentData]
 			updatedData[0] = {
 				...updatedData[0],
-				list: [newItem, ...updatedData[0].list], // 将新数据插入到第一页
-				total: updatedData[0].total + 1, // 更新总数
+				list: [newItem, ...updatedData[0].list], // Insert new item into the first page
+				total: updatedData[0].total + 1, // Update total count
 			}
 			return updatedData
-		}, false) // 不重新请求数据
+		}, false) // Do not re-fetch data
 	})
 
 	const [expandPanelOpen, { setTrue: openExpandPanel, setFalse: closeExpandPanel }] =
@@ -246,25 +246,25 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 			onSubmit: async () => {
 				switch (flowType) {
 					case FlowRouteType.Tools:
-						// tool 表示是否为工具,而非工具集
+						// 'tool' indicates a single tool, not a toolset
 						if (tool) {
-							// 删除工具
+							// Delete tool
 							await FlowApi.deleteFlow(flow.code)
 						} else {
-							// 删除工具集
+							// Delete toolset
 							await FlowApi.deleteTool(flow.id)
 						}
 						break
 					case FlowRouteType.Sub:
-						// 删除子流程
+						// Delete subflow
 						await FlowApi.deleteFlow(flow.id)
 						break
 					case FlowRouteType.VectorKnowledge:
-						// 删除知识库
+						// Delete knowledge base
 						await KnowledgeApi.deleteKnowledge(flow.code)
 						break
 					case FlowRouteType.Mcp:
-						// 删除MCP
+						// Delete MCP
 						if (tool) {
 							await FlowApi.deleteMcpTool(flow.id, currentFlow.id ?? "")
 						} else {
@@ -274,7 +274,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 					default:
 						break
 				}
-				// 删除的是MCP的工具时
+				// When deleting an MCP tool
 				if (isMcp && tool) {
 					mutate((currentData: CurrentDataType) => {
 						return currentData?.map((page) => ({
@@ -298,7 +298,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 					})
 					mcpEventListener.emit("updateMcpList")
 				}
-				// 更新工具列表
+				// Update tools list
 				else if (tool) {
 					let { tools = [] } = currentFlow as FlowWithTools
 					tools = tools.filter((n) => n.code !== flow.code)
@@ -308,7 +308,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 							tools,
 						}
 					})
-					// 更新工具集中的工具数量
+						// Update tool count in the toolset
 					mutate((currentData: CurrentDataType) => {
 						const updatedData = currentData?.map((page) => {
 							const list = page?.list.map((item: DelightfulFlow.Flow) => {
@@ -326,14 +326,14 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 						return updatedData
 					}, false)
 				} else {
-					// 更新流程列表
+					// Update flow list
 					mutate((currentData: CurrentDataType) => {
 						if (!currentData) return currentData
 						const updatedData = currentData?.map((page) => ({
 							...page,
 							list: page?.list.filter((item: DelightfulFlow.Flow) => item.id !== flow.id),
 						}))
-						updatedData[0].total -= 1 // 更新总数
+						updatedData[0].total -= 1 // Update total count
 						return updatedData
 					}, false)
 				}
@@ -360,7 +360,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 				})
 				break
 			case FlowRouteType.Tools:
-				// 工具集
+				// Toolset
 				await FlowApi.saveTool({
 					id: flow?.id,
 					name: flow.name,
@@ -370,11 +370,11 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 				})
 				break
 			case FlowRouteType.Sub:
-				// 流程
+				// Flow
 				await FlowApi.changeEnableStatus(flow.id)
 				break
 			case FlowRouteType.VectorKnowledge:
-				// 知识库
+				// Knowledge base
 				await KnowledgeApi.updateKnowledge({
 					code: flow.code,
 					name: flow.name,
@@ -391,26 +391,26 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 			: globalT("common.enabled", { ns: "flow" })
 		message.success(`${flow.name} ${text}`)
 
-		// 更新流程列表
+		// Update flow list
 		mutate((currentData: CurrentDataType) => {
 			return currentData?.map((page) => ({
 				...page,
 				list: page?.list.map(
 					(item: DelightfulFlow.Flow) =>
 						item.id === flow.id
-							? { ...item, enabled: !flow.enabled } // 更新目标项
-							: item, // 保持其他项不变
+							? { ...item, enabled: !flow.enabled } // Update the target item
+							: item, // Keep other items unchanged
 				),
 			}))
 		}, false)
 	})
 
-	// 更新当前卡片及列表信息信息
+		// Update current card and list info
 	const updateFlowOrTool = useMemoizedFn((flow, isTool = false, update = false) => {
-		// 工具
+			// Tools
 		if (isTool) {
 			if (update) {
-				// 更新
+					// Update
 				setCurrentFlow(
 					(prev: FlowWithTools | Knowledge.KnowledgeItem | Flow.Mcp.Detail) => {
 						return {
@@ -429,7 +429,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 					},
 				)
 			} else {
-				// 新增
+				// Add
 				let { tools = [] } = currentFlow as FlowWithTools
 				tools = [...tools, { ...flow, code: flow.id }]
 				setCurrentFlow(() => {
@@ -438,22 +438,22 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 						tools,
 					}
 				})
-				// 新增，工具集的工具数量增加
+				// Added: increase tool count in the toolset
 				mutate((currentData: CurrentDataType) => {
 					return currentData?.map((page) => ({
 						...page,
 						list: page?.list.map(
 							(item: DelightfulFlow.Flow) =>
 								item.id === flow.tool_set_id
-									? { ...item, tools } // 更新目标项
-									: item, // 保持其他项不变
+									? { ...item, tools } // Update the target item
+									: item, // Keep other items unchanged
 						),
 					}))
 				}, false)
 			}
 		} else {
-			// 流程（子流程/工具集）
-			// 更新当前流程
+				// Flows (subflows/toolsets)
+				// Update current flow
 			setCurrentFlow((prev: FlowWithTools | Knowledge.KnowledgeItem | Flow.Mcp.Detail) => {
 				return {
 					...prev,
@@ -462,7 +462,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 					icon: flow.icon,
 				}
 			})
-			// 更新流程列表
+			// Update flow list
 			mutate((currentData: CurrentDataType) => {
 				return currentData?.map((page) => ({
 					...page,
@@ -486,7 +486,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 	// 	message.success(`${t("chat.copy")} ${t("flow.apiKey.success")}`)
 	// })
 
-	/** 跳转向量知识库详情 */
+		/** Go to vector knowledge base details */
 	const goToKnowledgeDetail = useMemoizedFn((code: string) => {
 		navigate(`${RoutePath.VectorKnowledgeDetail}?code=${code}`)
 	})
@@ -631,7 +631,7 @@ export default function useFlowList({ flowType }: FlowListHooksProps) {
 
 	const handleCardClick = useMemoizedFn(
 		(flow: DelightfulFlow.Flow | Knowledge.KnowledgeItem | Flow.Mcp.Detail) => {
-			// 点击向量知识库直接跳转详情
+			// Click vector knowledge base card to go directly to details
 		if (flowType === FlowRouteType.VectorKnowledge && flow.code) {
 			return goToKnowledgeDetail(flow.code)
 		}

@@ -17,14 +17,14 @@ interface DBConfig {
 }
 
 /**
- * ======================== 数据库表定义 ========================
+ * ======================== Database table definitions ========================
  */
 const enum TableName {
 	Message = "message",
 	Rooms = "rooms",
 }
 
-// 数据库配置示例
+// Database configuration example
 // @ts-ignore
 const DEFAULT_DB_CONFIG: DBConfig = {
 	version: 1,
@@ -46,7 +46,7 @@ const DEFAULT_DB_CONFIG: DBConfig = {
 	],
 }
 
-// 数据库配置示例
+// Database configuration example
 // @ts-ignore
 const GLOBAL_DB_CONFIG: DBConfig = {
 	version: 1,
@@ -69,7 +69,7 @@ export class DatabaseManager {
 	// private tableSchemas: Map<string, TableSchema[]> = new Map()
 
 	private constructor() {
-		// 私有构造函数
+		// Private constructor
 	}
 
 	public static getInstance(): DatabaseManager {
@@ -80,15 +80,15 @@ export class DatabaseManager {
 	}
 
 	// /**
-	//  * @description 初始化数据库管理器
-	//  * @param schemas 数据库表结构定义列表
+	//  * @description Initialize database manager
+	//  * @param schemas Database table schema definitions
 	//  */
 	// public initialize(schemas: TableSchema[]): void {
 	// 	if (this.initialized) {
 	// 		return
 	// 	}
 
-	// 	// 注册全局数据库的表结构
+	// 	// Register global database table schemas
 	// 	this.tableSchemas.set("delightful-global", schemas)
 	// 	this.initialized = true
 	// }

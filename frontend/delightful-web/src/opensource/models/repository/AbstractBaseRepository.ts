@@ -2,7 +2,7 @@ import type { IndexableType, Table, UpdateSpec } from "dexie"
 import type Dexie from "dexie"
 
 /**
- * @description repository层抽象基类
+ * @description Repository layer abstract base class
  */
 export abstract class AbstractBaseRepository<T> {
 	protected db: Dexie | undefined
@@ -14,12 +14,12 @@ export abstract class AbstractBaseRepository<T> {
 	}
 
 	/**
-	 * @description 获取数据库实例
+	 * @description Get database instance
 	 */
 	protected abstract getDB(): Promise<Dexie>
 
 	/**
-	 * @description 获取表对象
+	 * @description Get table object
 	 */
 	protected async getTable(): Promise<Table<T, IndexableType>> {
 		const db = await this.getDB()
@@ -27,7 +27,7 @@ export abstract class AbstractBaseRepository<T> {
 	}
 
 	/**
-	 * @description 添加或更新数据
+	 * @description Add or update data
 	 * @param data
 	 */
 	async put(data: T): Promise<void> {
@@ -41,7 +41,7 @@ export abstract class AbstractBaseRepository<T> {
 	}
 
 	/**
-	 * @description 获取单个数据
+	 * @description Get a single record
 	 * @param key
 	 */
 	async get(key: IndexableType): Promise<T | undefined> {
@@ -50,7 +50,7 @@ export abstract class AbstractBaseRepository<T> {
 	}
 
 	/**
-	 * @description 获取所有数据
+	 * @description Get all records
 	 */
 	async getAll(): Promise<T[]> {
 		const table = await this.getTable()
@@ -58,7 +58,7 @@ export abstract class AbstractBaseRepository<T> {
 	}
 
 	/**
-	 * @description 通过索引查询
+	 * @description Query by index
 	 * @param indexName
 	 * @param value
 	 */
@@ -68,7 +68,7 @@ export abstract class AbstractBaseRepository<T> {
 	}
 
 	/**
-	 * @description 删除数据
+	 * @description Delete record
 	 * @param key
 	 */
 	async delete(key: IndexableType): Promise<void> {
@@ -77,7 +77,7 @@ export abstract class AbstractBaseRepository<T> {
 	}
 
 	/**
-	 * @description 清空表
+	 * @description Clear table
 	 */
 	async clear(): Promise<void> {
 		const table = await this.getTable()
@@ -85,9 +85,9 @@ export abstract class AbstractBaseRepository<T> {
 	}
 
 	/**
-	 * @description 更新数据
-	 * @param key 主键
-	 * @param changes 需要更新的字段
+	 * @description Update record
+	 * @param key Primary key
+	 * @param changes Fields to update
 	 */
 	async update(key: IndexableType, changes: UpdateSpec<T>): Promise<number> {
 		const table = await this.getTable()

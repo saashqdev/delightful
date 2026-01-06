@@ -4,61 +4,61 @@ import { RoutePath } from "@/const/routes"
 import BaseLayout from "@/opensource/layouts/BaseLayout"
 
 export function registerRoutes(): Array<RouteObject> {
-	/** 404页面 */
+	/** 404 Page */
 	const NotFound = lazy(() => import("@/opensource/pages/notFound"))
 
-	/** SSO模块 */
+	/** SSO module */
 	const SSOLayout = lazy(() => import("@/opensource/layouts/SSOLayout"))
 	/** SSO */
 	const SignIn = lazy(() => import("@/opensource/pages/login/login"))
 
-	/** 聊天新版 */
+	/** Chat (new) */
 	const ChatNew = lazy(() => import("@/opensource/pages/chatNew"))
 
-	/** 通讯录模块 */
+	/** Contacts module */
 	const ContactsLayout = lazy(() => import("@/opensource/pages/contacts/layouts"))
-	/** 通讯录 */
+	/** Contacts */
 	const ContactsOrganization = lazy(() => import("@/opensource/pages/contacts/organization"))
-	/** 通讯录 */
+	/** Contacts */
 	const ContactsFriend = lazy(() => import("@/opensource/pages/contacts/myFriends"))
-	/** 通讯录 */
+	/** Contacts */
 	const ContactsGroups = lazy(() => import("@/opensource/pages/contacts/myGroups"))
-	/** Ai 助手 */
+	/** AI Assistant */
 	const ContactsAiAssistant = lazy(() => import("@/opensource/pages/contacts/aiAssistant"))
 
-	/** 流程模块 */
+	/** Flow module */
 	const FlowLayout = lazy(() => import("@/opensource/pages/flow/layouts"))
-	/** 详情 */
+	/** Details */
 	const FlowDetail = lazy(() => import("@/opensource/pages/flow"))
-	/** 发现 */
+	/** Explore */
 	const FlowExplore = lazy(() => import("@/opensource/pages/explore"))
-	/** AI助力 */
+	/** AI Assist */
 	const FlowAgent = lazy(() => import("@/opensource/pages/flow/agent"))
-	/** 流程列表(工作流/子流程/工具/知识库) */
+	/** Flow list (Workflows/Subflows/Tools/Knowledge Base) */
 	const FlowList = lazy(() => import("@/opensource/pages/flow/list"))
-	/** 知识库详情 */
+	/** Knowledge base details */
 	const FlowKnowledgeDetail = lazy(() => import("@/opensource/pages/flow/knowledge/[id]"))
 
 	/**
-	 * @description 向量知识库模块
+	 * @description Vector knowledge base module
 	 */
 	const VectorKnowledgeLayout = lazy(() => import("@/opensource/pages/vectorKnowledge/layouts"))
-	/** 创建 */
+	/** Create */
 	const VectorKnowledgeCreate = lazy(
 		() => import("@/opensource/pages/vectorKnowledge/components/Create"),
 	)
-	/** 详情 */
+	/** Details */
 	const VectorKnowledgeDetail = lazy(
 		() => import("@/opensource/pages/vectorKnowledge/components/Details"),
 	)
 
-	/** 全局设置 */
+	/** Global Settings */
 	const Settings = lazy(() => import("../pages/settings/Settings.page"))
 
-	/** 超级麦吉 - 工作区 */
+	/** Super Delightful - Workspace */
 	const BeDelightfulWorkspace = lazy(() => import("@/opensource/pages/superDelightful/pages/Workspace"))
 
-	/** 超级麦吉分享(不需要登录) */
+	/** Super Delightful Share (no login required) */
 	const BeDelightfulShare = lazy(() => import("@/opensource/pages/share"))
 
 	return [

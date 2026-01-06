@@ -12,38 +12,38 @@ export function genFileData(file: File): FileData {
 }
 
 /**
- * 处理字符串中的转义字符，确保保持用户输入的原始形式
- * 例如，将"\n"作为分隔符时，通过JSON后会变成"\\n"，此函数将其还原为"\n"
- * @param {string} str - 需要处理的字符串
- * @returns {string} 处理后的字符串
+ * Process escape characters in strings to preserve original user input
+ * For example, when using "\n" as a separator, after JSON it becomes "\\n"; this function restores it to "\n"
+ * @param {string} str - The string to process
+ * @returns {string} The processed string
  */
 export function processEscapeChars(str: string): string {
 	if (!str) return str
 
-	// 处理常见的转义字符
+	// Handle common escape characters
 	return str.replace(/\\\\n/g, "\\n").replace(/\\\\t/g, "\\t").replace(/\\\\r/g, "\\r")
 }
 
 /**
- * 处理配置对象中所有分隔符字段的转义字符
- * @param {object} config - 配置对象，包含normal和parent_child等子对象
- * @returns {object} 处理后的配置对象
+ * Process escape characters for all delimiter fields in a configuration object
+ * @param {object} config - Configuration object with normal and parent_child subobjects
+ * @returns {object} The processed configuration object
  */
 export function processConfigSeparators(config: any): any {
 	const { normal, parent_child } = config
 
-	// 复制对象，避免直接修改原对象
+	// Copy object to avoid modifying the original
 	const processedNormal = { ...normal }
 	const processedParentChild = { ...parent_child }
 
-	// 处理normal中的分隔符
+	// Handle separators in normal
 	if (processedNormal?.segment_rule?.separator) {
 		processedNormal.segment_rule.separator = processEscapeChars(
 			processedNormal.segment_rule.separator,
 		)
 	}
 
-	// 处理parent_child中的分隔符
+	// Handle separators in parent_child
 	if (processedParentChild?.parent_segment_rule?.separator) {
 		processedParentChild.parent_segment_rule.separator = processEscapeChars(
 			processedParentChild.parent_segment_rule.separator,
@@ -64,35 +64,35 @@ export function processConfigSeparators(config: any): any {
 }
 
 /**
- * 获取文档名称的扩展名
- * 安全地从文件名中提取扩展名，处理多种边缘情况
- * @param {string} fileName - 文件名
- * @returns {string} 文件扩展名（小写），如果没有扩展名或扩展名不符合规则则返回空字符串
+ * Get file name extension
+ * Safely extract extension from filename, handling various edge cases
+ * @param {string} fileName - File name
+ * @returns {string} File extension (lowercase); returns empty string if no extension or extension doesn't match rules
  */
 export function getFileExtension(fileName: string): string {
 	if (!fileName || typeof fileName !== "string") {
 		return ""
 	}
 
-	// 处理路径分隔符，获取实际文件名
+	// Handle path separators to get actual filename
 	const baseName = fileName.split(/[/\\]/).pop() || ""
 
-	// 如果是隐藏文件（以.开头，但没有其他.），不视为扩展名
+	// Hidden files (starting with . but no other . ) don't have extensions
 	if (/^\.[\w-]+$/.test(baseName)) {
 		return ""
 	}
 
-	// 获取最后一个.之后的部分
+	// Get part after the last dot
 	const parts = baseName.split(".")
 
-	// 如果没有.或只有一个.且在开头（隐藏文件），则没有扩展名
+	// No extension if no . or only one . at the beginning (hidden file)
 	if (parts.length <= 1 || (parts.length === 2 && parts[0] === "")) {
 		return ""
 	}
 
 	const extension = parts.pop()?.toLowerCase() || ""
 
-	// 只允许字母数字扩展名
+	// Only allow alphanumeric extensions
 	if (!/^[a-z0-9]+$/.test(extension)) {
 		return ""
 	}

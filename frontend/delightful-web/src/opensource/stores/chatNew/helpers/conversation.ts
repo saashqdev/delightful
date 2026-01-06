@@ -1,7 +1,7 @@
 import { MessageReceiveType } from "@/types/chat"
 
 /**
- * 是否是 AI 会话
+ * Whether it's an AI conversation
  * @param receive_type
  * @returns
  */

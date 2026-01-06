@@ -2,11 +2,11 @@ import { FullMessage } from "@/types/chat/message"
 import { makeAutoObservable } from "mobx"
 
 /**
- * 消息编辑器
+ * Message editor store
  */
 class MessageEditStore {
 	/**
-	 * 编辑消息
+	 * Message being edited
 	 */
 	editMessage: FullMessage | undefined = undefined
 
@@ -15,15 +15,15 @@ class MessageEditStore {
 	}
 
 	/**
-	 * 设置编辑消息
-	 * @param message 消息
+	 * Set message to edit
+	 * @param message Message
 	 */
 	setEditMessage(message: FullMessage) {
 		this.editMessage = message
 	}
 
 	/**
-	 * 重置编辑消息
+	 * Reset message editor
 	 */
 	resetEditMessage() {
 		this.editMessage = undefined

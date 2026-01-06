@@ -9,9 +9,9 @@ import { unique } from "radash"
 import { isAppMessageId } from "@/utils/random"
 
 /**
- * 是否是可撤回的消息
- * @param message 消息
- * @returns 是否是可撤回的消息
+ * Whether the message can be revoked
+ * @param message Message
+ * @returns Whether the message can be revoked
  */
 export function isRevokableMessage(
 	message: SeqResponse<CMessage>,
@@ -22,10 +22,10 @@ export function isRevokableMessage(
 }
 
 /**
- * 是否是自己退群
- * @param message 消息
- * @param userId 用户 ID
- * @returns 是否是自己退群
+ * Whether the user left the group themselves
+ * @param message Message
+ * @param userId User ID
+ * @returns Whether the user left the group themselves
  */
 export function isSelfLeaveGroup(message: GroupUsersRemoveMessage, userId?: string) {
 	return (
@@ -37,9 +37,9 @@ export function isSelfLeaveGroup(message: GroupUsersRemoveMessage, userId?: stri
 }
 
 /**
- * 唯一且排序消息 ID
- * @param messageIds 消息 ID 列表
- * @returns 唯一且排序后的消息 ID 列表
+ * Unique and sorted message IDs
+ * @param messageIds Message ID list
+ * @returns Unique and sorted message ID list
  */
 export function uniqueAndSortMessageIds(messageIds: string[]) {
 	return unique(messageIds).sort((a, b) => {
@@ -61,7 +61,7 @@ export function uniqueAndSortMessageIds(messageIds: string[]) {
 const genMaxSeqInfoKey = (delightful_id: string) => platformKey(`chat/max_seq_info/${delightful_id}`)
 
 /**
- * 获取最大序号
+ * Get maximum sequence number
  * @returns
  */
 export const getChatMaxSeqInfo = (delightful_id: string) =>
@@ -73,17 +73,17 @@ export const getChatMaxSeqInfo = (delightful_id: string) =>
 	) as MessageMaxSeqInfo
 
 /**
- * 设置最大序号
- * @param max_seq_info 最大序号
+ * Set maximum sequence number
+ * @param max_seq_info Maximum sequence number
  * @returns
  */
 export const setChatMaxSeqInfo = (delightful_id: string, max_seq_info: MessageMaxSeqInfo) =>
 	localStorage.setItem(genMaxSeqInfoKey(delightful_id), JSON.stringify(max_seq_info))
 
 /**
- * 添加会话到会话组
- * @param list 会话组
- * @param conversationId 会话 ID
+ * Add conversation to group
+ * @param list Conversation group
+ * @param conversationId Conversation ID
  */
 export function addToConversationGroup(list: string[], conversationId: string) {
 	if (!list.includes(conversationId)) {
@@ -92,8 +92,8 @@ export function addToConversationGroup(list: string[], conversationId: string) {
 }
 
 /**
- * 创建会话分组
- * @returns 会话分组
+ * Create conversation groups
+ * @returns Conversation groups
  */
 export const createConversationGroup = (): Record<ConversationGroupKey, string[]> => ({
 	[ConversationGroupKey.Top]: [],
@@ -105,9 +105,9 @@ export const createConversationGroup = (): Record<ConversationGroupKey, string[]
 })
 
 /**
- * 从会话组中移除会话
- * @param list 会话组
- * @param conversationId 会话 ID
+ * Remove conversation from group
+ * @param list Conversation group
+ * @param conversationId Conversation ID
  */
 export const removeFromConversationGroup = (list: string[], conversationId: string) => {
 	if (list.includes(conversationId)) {

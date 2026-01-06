@@ -31,7 +31,7 @@ const defaultState: FlowState = {
 	useableDatabases: [],
 	useableTeamshareDatabase: [],
 	methodsDataSource: [],
-	visionModels: [], // 添加视觉理解模型数组
+	visionModels: [], // Add visual understanding model array
 }
 
 export interface FlowStoreState {
@@ -44,8 +44,8 @@ export interface FlowStoreState {
 	useableTeamshareDatabase: Knowledge.KnowledgeDatabaseItem[]
 	methodsDataSource: DataSourceOption[]
 	toolInputOutputMap: Record<string, DelightfulFlow.Flow>
-	visionModels: Flow.VLMProvider[] // 使用Flow命名空间下的类型
-	updateVisionModels: (visionModels: Flow.VLMProvider[]) => void // 使用Flow命名空间下的类型
+	visionModels: Flow.VLMProvider[] // Use type from Flow namespace
+	updateVisionModels: (visionModels: Flow.VLMProvider[]) => void // Use type from Flow namespace
 	updateToolInputOutputMap: (toolInputOutputMap: Record<string, DelightfulFlow.Flow>) => void
 	updateMethodDataSource: (dataSource: DataSourceOption[]) => void
 	updateSubFlowList: (flows: DelightfulFlow.Flow[]) => void

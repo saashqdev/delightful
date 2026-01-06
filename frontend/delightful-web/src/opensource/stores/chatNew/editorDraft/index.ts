@@ -1,4 +1,4 @@
-// 消息编辑草稿
+// Message editing drafts
 import { FileData } from "@/opensource/pages/chatNew/components/MessageEditor/components/InputFiles/types"
 import { JSONContent } from "@tiptap/core"
 import { makeAutoObservable } from "mobx"
@@ -29,22 +29,22 @@ class EditorDraftStore {
 		return this.draftMap.has(`${conversationId}-${topicId}`)
 	}
 
-	// 获取草稿
+	// Get draft
 	getDraft(conversationId: string, topicId: string) {
 		return this.draftMap.get(`${conversationId}-${topicId}`)
 	}
 
-	// 设置草稿
+	// Set draft
 	setDraft(conversationId: string, topicId: string, draft: EditorDraft) {
 		this.draftMap.set(`${conversationId}-${topicId}`, draft)
 	}
 
-	// 删除草稿
+	// Delete draft
 	deleteDraft(conversationId: string, topicId: string) {
 		this.draftMap.delete(`${conversationId}-${topicId}`)
 	}
 
-	// 获取所有草稿
+	// Get all drafts
 	getAllDrafts() {
 		return Array.from(this.draftMap.entries())
 	}

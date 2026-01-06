@@ -8,7 +8,7 @@ import {
 	IconOtherFile,
 } from "@/enhance/tabler/icons-react"
 
-// 文件类型与拓展名的映射
+// Mapping between file types and extensions
 export const fileExtensionMap = {
 	TXT: "txt",
 	MD: "md",
@@ -20,7 +20,7 @@ export const fileExtensionMap = {
 	XML: "xml",
 }
 
-// 文件类型与枚举值的映射
+// Mapping between file types and enum values
 export const fileTypeMap = {
 	UNKNOWN: 0,
 	TXT: 1,
@@ -33,10 +33,10 @@ export const fileTypeMap = {
 	XML: 10,
 }
 
-// 支持向量知识库嵌入的文件类型
+// File types supported by vector knowledge base embedding
 export const supportedFileExtensions = Object.values(fileExtensionMap)
 
-// 根据文件扩展名获取文件类型图标
+// Get file type icon by extension
 export const getFileIconByExt = (extension: string, size = 24) => {
 	const map = {
 		[fileExtensionMap.TXT]: <IconTextFile size={size} />,
@@ -51,7 +51,7 @@ export const getFileIconByExt = (extension: string, size = 24) => {
 	return map[extension] || <IconOtherFile size={size} />
 }
 
-// 根据文档类型枚举值获取文件类型图标
+// Get file type icon by document type enum value
 export const getFileIconByType = (type: number, size = 24) => {
 	const map = {
 		[fileTypeMap.UNKNOWN]: <IconOtherFile size={size} />,
@@ -67,75 +67,75 @@ export const getFileIconByType = (type: number, size = 24) => {
 	return map[type] || <IconOtherFile size={size} />
 }
 
-/** 文档同步状态映射 */
+/** Document sync status mapping */
 export enum documentSyncStatusMap {
-	/** 未同步 */
+	/** Not synced */
 	Pending = 0,
-	/** 已同步 */
+	/** Synced */
 	Success = 1,
-	/** 同步失败 */
+	/** Sync failed */
 	Failed = 2,
-	/** 同步中 */
+	/** Syncing */
 	Processing = 3,
-	/** 删除成功 */
+	/** Deleted successfully */
 	Deleted = 4,
-	/** 删除失败 */
+	/** Delete failed */
 	DeleteFailed = 5,
-	/** 重建中 */
+	/** Rebuilding */
 	Rebuilding = 6,
 }
 
-/** 知识库支持嵌入的文件类型 */
+/** File types supported by knowledge base embedding */
 export const SUPPORTED_EMBED_FILE_TYPES =
 	"text/plain,text/markdown,.md,.markdown,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/csv,text/xml"
 
-/** 知识库类型 */
+/** Knowledge base type */
 export enum knowledgeType {
-	/** 用户自建知识库 */
+	/** User-created knowledge base */
 	UserKnowledgeDatabase = 1,
-	/** 天书知识库 */
+	/** Teamshare knowledge base */
 	TeamshareKnowledgeDatabase = 2,
 }
 
-/** 文档操作类型枚举 */
+/** Document operation type enum */
 export enum DocumentOperationType {
 	ENABLE = "enable",
 	DISABLE = "disable",
 	DELETE = "delete",
 }
 
-/** 分段模式 */
+/** Segmentation mode */
 export enum SegmentationMode {
-	/** 通用模式 */
+	/** General mode */
 	General = 1,
-	/** 父子分段 */
+	/** Parent-child segmentation */
 	ParentChild = 2,
 }
 
-/** 父块模式 */
+/** Parent block mode */
 export enum ParentBlockMode {
-	/** 段落 */
+	/** Paragraph */
 	Paragraph = 1,
-	/** 全文 */
+	/** Full text */
 	FullText = 2,
 }
 
-/** 文本预处理规则 */
+/** Text preprocessing rules */
 export enum TextPreprocessingRules {
-	/** 替换掉连续的空格、换行符和制表符 */
+	/** Replace consecutive spaces, newlines, and tabs */
 	ReplaceSpaces = 1,
-	/** 删除所有 URL 和电子邮件地址 */
+	/** Remove all URLs and email addresses */
 	RemoveUrls = 2,
 }
 
-/** 检索方法 */
+/** Retrieval method */
 export enum RetrievalMethod {
-	/** 语义检索 */
+	/** Semantic search */
 	SemanticSearch = "semantic_search",
-	/** 全文检索 */
+	/** Full text search */
 	FullTextSearch = "full_text_search",
-	/** 混合检索 */
+	/** Hybrid search */
 	HybridSearch = "hybrid_search",
-	/** 图检索 */
+	/** Graph search */
 	GraphSearch = "graph_search",
 }

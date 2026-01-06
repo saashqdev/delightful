@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         麦吉 搜狐 超净化
+// @name         Delightful Sohu Ultra Clean
 // @namespace    https://dtyq.com/
 // @version      1.0
-// @description  清理搜狐网站页面，只保留文章内容，移除广告和其他干扰元素
+// @description  Clean Sohu website pages, keep only article content, remove ads and other distracting elements
 // @author       cc, cc@dtyq.com
 // @match        *://www.sohu.com/a/*
 // @grant        none
@@ -11,16 +11,16 @@
 (function() {
   'use strict';
 
-  // 找到具有 data-spm="content" 属性的元素
+  // Find element with data-spm="content" attribute
   const contentElement = document.querySelector('div[data-spm="content"]');
 
-  // 确保元素存在
+  // Ensure element exists
   if (!contentElement) {
-    console.error('未找到 data-spm="content" 的元素');
+    console.error('Failed to find data-spm="content" element');
     return;
   }
 
-  // 创建一个函数检查元素是否应该保留显示
+  // Create a function to check if an element should remain visible
   const shouldKeepVisible = (element) => {
     return element === contentElement ||
            element.contains(contentElement) ||
@@ -29,7 +29,7 @@
            element === document.documentElement;
   };
 
-  // 使用 TreeWalker API 高效遍历 DOM 树
+  // Use TreeWalker API to efficiently traverse DOM tree
   const walker = document.createTreeWalker(
     document.body,
     NodeFilter.SHOW_ELEMENT,
@@ -37,10 +37,10 @@
     false
   );
 
-  // 保存找到的需要隐藏的元素
+  // Save found elements that need to be hidden
   const elementsToHide = [];
 
-  // 开始遍历
+  // Start traversing
   let currentNode = walker.nextNode();
   while (currentNode) {
     if (!shouldKeepVisible(currentNode)) {
@@ -49,15 +49,15 @@
     currentNode = walker.nextNode();
   }
 
-  // 统一隐藏元素，减少重排
+  // Hide elements uniformly, reduce reflow
   elementsToHide.forEach(element => {
     element.style.display = 'none';
   });
 
-  // 确保目标元素可见
+  // Ensure target element is visible
   contentElement.style.display = 'block';
 
-  // 确保从body到目标元素的路径上所有元素可见
+  // Ensure all elements on path from body to target element are visible
   let parent = contentElement.parentElement;
   while (parent) {
     parent.style.display = '';

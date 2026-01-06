@@ -70,7 +70,7 @@ class WidgetTest extends BaseTestCase
         $widgets = $this->builder->build($targetWidgets);
         $widgets->setComponentId('123');
         $this->assertEquals([
-            'field_0' => '实际值',
+            'field_0' => 'Actual value',
             'field_1' => '123',
             'field_2' => false,
             'field_3' => '1',
@@ -131,7 +131,7 @@ class WidgetTest extends BaseTestCase
             "initial_value":null,
             "value":null,
             "display_config":{
-                "label":"动态的字段",
+                "label":"Dynamic field",
                 "widget_type":"object",
                 "tooltips":"",
                 "required":true,
@@ -159,7 +159,7 @@ class WidgetTest extends BaseTestCase
                     "initial_value":null,
                     "value":null,
                     "display_config":{
-                        "label":"人员",
+                        "label":"Person",
                         "widget_type":"object",
                         "tooltips":"",
                         "required":true,
@@ -328,7 +328,7 @@ JSON,
                 "const_value": [
                     {
                         "type": "input",
-                        "value": "默认值",
+                        "value": "Default value",
                         "name": "name",
                         "args": null
                     }
@@ -336,7 +336,7 @@ JSON,
                 "expression_value": null
             },
             "display_config": {
-                "label": "字段0",
+                "label": "Field 0",
                 "widget_type": "input-password",
                 "tooltips": "",
                 "required": true,
@@ -353,7 +353,7 @@ JSON,
                 true
             ))->validate();
         } catch (Throwable $throwable) {
-            if ($throwable->getMessage() === '字段0[field_0] 不能为空') {
+            if ($throwable->getMessage() === 'Field 0[field_0] cannot be empty') {
                 $this->assertTrue(true);
             } else {
                 throw $throwable;
@@ -395,7 +395,7 @@ JSON,
                 "const_value": [
                     {
                         "type": "input",
-                        "value": "默认值",
+                        "value": "Default value",
                         "name": "name",
                         "args": null
                     }
@@ -403,7 +403,7 @@ JSON,
                 "expression_value": null
             },
             "display_config": {
-                "label": "字段0",
+                "label": "Field 0",
                 "widget_type": "input-password",
                 "tooltips": "",
                 "required": true,
@@ -420,7 +420,7 @@ JSON,
                 true
             ))->validate();
         } catch (Throwable $throwable) {
-            if ($throwable->getMessage() === '字段0[field_0] 不允许使用表达式') {
+            if ($throwable->getMessage() === 'Field 0[field_0] expressions not allowed') {
                 $this->assertTrue(true);
             } else {
                 throw $throwable;
@@ -457,7 +457,7 @@ JSON,
                         "const_value": [
                             {
                                 "type": "input",
-                                "value": "默认值",
+                                "value": "Default value",
                                 "name": "name",
                                 "args": null
                             }
@@ -465,7 +465,7 @@ JSON,
                         "expression_value": null
                     },
                     "display_config": {
-                        "label": "字段field_0.field_1",
+                        "label": "Field field_0.field_1",
                         "widget_type": "input-password",
                         "tooltips": "",
                         "required": true,
@@ -487,7 +487,7 @@ JSON,
                 true
             ))->validate();
         } catch (Throwable $throwable) {
-            if ($throwable->getMessage() === '字段field_0.field_1[field_1] 不能为空') {
+            if ($throwable->getMessage() === 'Field field_0.field_1[field_1] cannot be empty') {
                 $this->assertTrue(true);
             } else {
                 throw $throwable;
@@ -521,7 +521,7 @@ JSON,
             "value": null,
             "initial_value": null,
             "display_config": {
-                "label": "字段field_0",
+                "label": "Field field_0",
                 "widget_type": "input-password",
                 "tooltips": "",
                 "required": true,
@@ -538,7 +538,7 @@ JSON,
                 true
             ))->validate();
         } catch (Throwable $throwable) {
-            if ($throwable->getMessage() === '字段field_0[field_0] 不能为空') {
+            if ($throwable->getMessage() === 'Field field_0[field_0] cannot be empty') {
                 $this->assertTrue(true);
             } else {
                 throw $throwable;
@@ -573,7 +573,7 @@ JSON,
                 "const_value": [
                     {
                         "type": "input",
-                        "value": "实际值",
+                        "value": "Actual value",
                         "name": "name",
                         "args": null
                     }
@@ -585,7 +585,7 @@ JSON,
                 "const_value": [
                     {
                         "type": "input",
-                        "value": "默认值",
+                        "value": "Default value",
                         "name": "name",
                         "args": null
                     }
@@ -671,8 +671,8 @@ JSON,
                 "allow_expression": true,
                 "disabled": false,
                 "extra": {
-                    "checked_text": "开启",
-                    "unchecked_text": "关闭"
+                    "checked_text": "On",
+                    "unchecked_text": "Off"
                 },
                 "web_config": null
             }
@@ -710,11 +710,11 @@ JSON,
                     "dynamic_fields": false,
                     "data_source": [
                         {
-                            "label": "选项1",
+                            "label": "Option 1",
                             "value": "1"
                         },
                         {
-                            "label": "选项2",
+                            "label": "Option 2",
                             "value": "2"
                         }
                     ],
@@ -792,7 +792,7 @@ JSON,
                 "const_value": [
                     {
                         "type": "input",
-                        "value": "默认值",
+                        "value": "Default value",
                         "name": "name",
                         "args": null
                     }
@@ -852,7 +852,7 @@ JSON,
             "description": "",
             "items": {
                 "type": "object",
-                "title": "附件",
+                "title": "Attachment",
                 "description": "desc",
                 "key": "",
                 "sort": 0,
@@ -862,7 +862,7 @@ JSON,
                         "type": "string",
                         "key": "key",
                         "sort": 0,
-                        "title": "附件 key",
+                        "title": "Attachment key",
                         "description": "desc",
                         "items": null,
                         "properties": null,
@@ -875,7 +875,7 @@ JSON,
                         "type": "string",
                         "key": "name",
                         "sort": 1,
-                        "title": "附件名称",
+                        "title": "Attachment name",
                         "description": "desc",
                         "items": null,
                         "properties": null,
@@ -944,7 +944,7 @@ JSON;
                 "const_value": [
                     {
                         "type": "input",
-                        "value": "实际值",
+                        "value": "Actual value",
                         "name": "name",
                         "args": null
                     }
@@ -956,7 +956,7 @@ JSON;
                 "const_value": [
                     {
                         "type": "input",
-                        "value": "默认值",
+                        "value": "Default value",
                         "name": "name",
                         "args": null
                     }
@@ -1060,8 +1060,8 @@ JSON;
                 "allow_expression": true,
                 "disabled": false,
                 "extra": {
-                    "checked_text": "开启",
-                    "unchecked_text": "关闭"
+                    "checked_text": "On",
+                    "unchecked_text": "Off"
                 },
                 "web_config": null
             }
@@ -1097,11 +1097,11 @@ JSON;
                     "dynamic_fields": false,
                     "data_source": [
                         {
-                            "label": "选项1",
+                            "label": "Option 1",
                             "value": "1"
                         },
                         {
-                            "label": "选项2",
+                            "label": "Option 2",
                             "value": "2"
                         }
                     ],

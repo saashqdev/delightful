@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 declare(strict_types=1);
 /**
@@ -405,7 +405,7 @@ JSON,
     "sort": 0,
     "type": "object",
     "items": null,
-    "title": "root节点",
+    "title": "root node",
     "value": null,
     "required": [
         "var1"
@@ -417,7 +417,7 @@ JSON,
             "sort": 0,
             "type": "object",
             "items": null,
-            "title": "变量名",
+            "title": "Variable name",
             "value": {
                 "type": "expression",
                 "expression_value": [
@@ -518,7 +518,7 @@ JSON,
     "sort": 0,
     "type": "object",
     "items": null,
-    "title": "root节点",
+    "title": "root node",
     "value": null,
     "required": [
         "var1"
@@ -530,7 +530,7 @@ JSON,
             "sort": 0,
             "type": "string",
             "items": null,
-            "title": "变量名",
+            "title": "Variable name",
             "value": {
                 "type": "const",
                 "expression_value": [],
@@ -586,7 +586,7 @@ JSON,
                             "sort": 0,
                             "type": "object",
                             "items": null,
-                            "title": "root节点",
+    "title": "root node",
                             "value": null,
                             "required": [
                                 "var1"
@@ -598,7 +598,7 @@ JSON,
                                     "sort": 0,
                                     "type": "string",
                                     "items": null,
-                                    "title": "变量名",
+            "title": "Variable name",
                                     "value": {
                                         "type": "const",
                                         "expression_value": [
@@ -644,7 +644,7 @@ JSON,
             "type": "object",
             "key": "root",
             "sort": 0,
-            "title": "列表",
+            "title": "List",
             "description": "",
             "required": null,
             "encryption": false,
@@ -657,7 +657,7 @@ JSON,
                         "uniqueId": "535388129415139328",
                         "type": "fields_6597ca00724e3",
                         "value": "configs",
-                        "name": "配置列表"
+                        "name": "Configuration list"
                     }
                 ],
                 "multiple_const_value": [],
@@ -678,7 +678,7 @@ JSON,
             "type": "array",
             "key": "root",
             "sort": 0,
-            "title": "列表",
+            "title": "List",
             "description": "",
             "required": null,
             "encryption": false,
@@ -691,7 +691,7 @@ JSON,
                         "uniqueId": "535388129415139328",
                         "type": "fields_6597ca00724e3",
                         "value": "configs",
-                        "name": "配置列表"
+                        "name": "Configuration list"
                     }
                 ],
                 "multiple_const_value": [],
@@ -722,7 +722,7 @@ JSON,
     "type":"array",
     "key":"root",
     "sort":0,
-    "title":"列表",
+    "title":"List",
     "description":"",
     "required":null,
     "value":null,
@@ -740,7 +740,7 @@ JSON,
                 "type":"array",
                 "key":"configs",
                 "sort":0,
-                "title":"配置列表",
+                "title":"Configuration list",
                 "description":"",
                 "required":null,
                 "value":{
@@ -751,7 +751,7 @@ JSON,
                             "uniqueId":"535388129415139328",
                             "type":"fields_6597ca00724e3",
                             "value":"configs",
-                            "name":"配置列表"
+                            "name":"Configuration list"
                         }
                     ],
                     "multiple_const_value":null,
@@ -787,7 +787,7 @@ JSON,
                     "type":"array",
                     "key":"configs",
                     "sort":0,
-                    "title":"配置列表",
+                    "title":"Configuration list",
                     "description":"",
                     "required":null,
                     "value":{
@@ -798,7 +798,7 @@ JSON,
                                 "uniqueId":"535388129415139328",
                                 "type":"fields_6597ca00724e3",
                                 "value":"configs1",
-                                "name":"配置列表"
+                                "name":"Configuration list"
                             }
                         ],
                         "multiple_const_value":null,
@@ -833,7 +833,7 @@ JSON,
                     "type":"array",
                     "key":"configs",
                     "sort":0,
-                    "title":"配置列表",
+                    "title":"Configuration list",
                     "description":"",
                     "required":null,
                     "value":{
@@ -844,7 +844,7 @@ JSON,
                                 "uniqueId":"535388129415139328",
                                 "type":"fields_6597ca00724e3",
                                 "value":"configs2",
-                                "name":"配置列表"
+                                "name":"Configuration list"
                             }
                         ],
                         "multiple_const_value":null,
@@ -894,11 +894,11 @@ JSON,
                         "uniqueId":"534651465730363392",
                         "type":"fields_65951bef96b15",
                         "value":"remark",
-                        "name":"info.备注"
+                        "name":"info.remark"
                     }
                 ]
             },
-            "title":"备注信息",
+            "title":"Remark information",
             "description":""
         }
    }
@@ -922,9 +922,9 @@ JSON,
                 'object_key_child_string' => 'object_key_child_string_value1',
                 'object_array_expression' => null,
                 'object_array_const' => [
-                    '嘻嘻2',
-                    '嘿嘿2',
-                    '哈哈2',
+                    'heehee2',
+                    'hehe2',
+                    'haha2',
                 ],
                 'object_object' => [
                     'object_object_key1' => 'object_object_key1_value2',
@@ -1064,11 +1064,11 @@ JSON, true));
             'object_key' => [
                 'object_key_child_string' => 'object_key_child_string_value',
                 'object_array_expression' => [
-                    '哈哈',
+                    'haha',
                 ],
                 'object_array_const' => [
-                    '嘻嘻',
-                    '嘿嘿',
+                    'heehee',
+                    'hehe',
                 ],
                 'object_object' => [
                     'object_object_key1' => 'object_object_key1_value',
@@ -1086,7 +1086,7 @@ JSON, true));
                 ],
             ],
         ];
-        $this->assertEquals($result, $form->getKeyValue(['object_array_expression' => ['哈哈']], true));
+        $this->assertEquals($result, $form->getKeyValue(['object_array_expression' => ['haha']], true));
         $this->assertEquals([
             'string_key' => 'string_key_value',
             'number_key' => '9.9',
@@ -1096,8 +1096,8 @@ JSON, true));
                 'object_key_child_string' => 'object_key_child_string_value',
                 'object_array_expression' => null,
                 'object_array_const' => [
-                    '嘻嘻',
-                    '嘿嘿',
+                    'heehee',
+                    'hehe',
                 ],
                 'object_object' => [
                     'object_object_key1' => 'object_object_key1_value',
@@ -1128,7 +1128,7 @@ JSON, true));
                 ],
             ],
         ];
-        $this->assertEquals($result, $form->getKeyValue(['object_array_expression' => ['哈哈']], true));
+        $this->assertEquals($result, $form->getKeyValue(['object_array_expression' => ['haha']], true));
     }
 
     public function testGeyKeyValueSourceData()
@@ -1139,7 +1139,7 @@ JSON, true));
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "root node",
     "description": "desc",
     "items": null,
     "value": null,
@@ -1153,7 +1153,7 @@ JSON, true));
             "type": "string",
             "key": "string_key",
             "sort": 0,
-            "title": "数据类型为string",
+            "title": "Data type is string",
             "description": "desc",
             "items": null,
             "properties": null,
@@ -1178,7 +1178,7 @@ JSON, true));
             "type": "string",
             "key": "string_key2",
             "sort": 1,
-            "title": "数据类型为string2",
+            "title": "Data type is string 2",
             "description": "desc",
             "items": null,
             "properties": null,
@@ -1203,7 +1203,7 @@ JSON, true));
             "type": "object",
             "key": "object_key",
             "sort": 2,
-            "title": "数据类型为object",
+            "title": "Data type is object",
             "description": "desc",
             "required": [
                 "object_key_child_string",
@@ -1217,7 +1217,7 @@ JSON, true));
                     "type": "string",
                     "key": "object_key_child_string",
                     "sort": 0,
-                    "title": "数据类型为object下的child_string",
+                    "title": "Data type is object child string",
                     "description": "desc",
                     "items": null,
                     "properties": null,
@@ -1242,7 +1242,7 @@ JSON, true));
                     "type": "string",
                     "key": "object_key_child_string2",
                     "sort": 0,
-                    "title": "数据类型为object下的child_string2",
+                    "title": "Data type is object child string 2",
                     "description": "desc",
                     "items": null,
                     "properties": null,
@@ -1286,31 +1286,31 @@ JSON,
     {
         $form = $this->builder->build($this->getFormJsonArray());
         $result = [
-            'string_key' => '数据类型为string',
-            'number_key' => '数据类型为number',
-            'boolean_key' => '数据类型为boolean',
-            'integer_key' => '数据类型为integer',
-            'object_key' => '数据类型为object',
-            'object_key.object_key_child_string' => '数据类型为object.数据类型为object下的child_string',
-            'object_key.object_array_expression' => '数据类型为object.对象下的数组',
-            'object_key.object_array_const' => '数据类型为object.对象下的数组',
-            'object_key.object_object' => '数据类型为object.对象下的对象',
-            'object_key.object_object.object_object_key1' => '数据类型为object.对象下的对象.对象下的对象1',
-            'array_key' => '数据类型为array',
-            'array_key[0].array_key_child1' => '数据类型为array[0].数据类型为array下的child_object_string',
-            'array_key[0].array_array' => '数据类型为array[0].数组下的数组',
-            'array_key[0].array_object' => '数据类型为array[0].数组下的对象',
-            'array_key[0].array_object.array_object_key1' => '数据类型为array[0].数组下的对象.数组下的对象1',
+            'string_key' => 'Data type is string',
+            'number_key' => 'Data type is number',
+            'boolean_key' => 'Data type is boolean',
+            'integer_key' => 'Data type is integer',
+            'object_key' => 'Data type is object',
+            'object_key.object_key_child_string' => 'Data type is object.Data type is object child string',
+            'object_key.object_array_expression' => 'Data type is object.Array under object',
+            'object_key.object_array_const' => 'Data type is object.Array under object',
+            'object_key.object_object' => 'Data type is object.Object under object',
+            'object_key.object_object.object_object_key1' => 'Data type is object.Object under object.Object under object 1',
+            'array_key' => 'Data type is array',
+            'array_key[0].array_key_child1' => 'Data type is array[0].Data type is array child object string',
+            'array_key[0].array_array' => 'Data type is array[0].Array under array',
+            'array_key[0].array_object' => 'Data type is array[0].Object under array',
+            'array_key[0].array_object.array_object_key1' => 'Data type is array[0].Object under array.Object under array 1',
         ];
         $this->assertEquals($result, $form->getTileList());
 
         $form = $this->builder->build($this->getFormJsonArray2());
         $result = [
-            'root' => '数据类型为array',
-            'root[0].array_key_child1' => '数据类型为array[0].数据类型为array下的child_object_string',
-            'root[0].array_array' => '数据类型为array[0].数组下的数组',
-            'root[0].array_object' => '数据类型为array[0].数组下的对象',
-            'root[0].array_object.array_object_key1' => '数据类型为array[0].数组下的对象.数组下的对象1',
+            'root' => 'Data type is array',
+            'root[0].array_key_child1' => 'Data type is array[0].Data type is array child object string',
+            'root[0].array_array' => 'Data type is array[0].Array under array',
+            'root[0].array_object' => 'Data type is array[0].Object under array',
+            'root[0].array_object.array_object_key1' => 'Data type is array[0].Object under array.Object under array 1',
         ];
         $this->assertEquals($result, $form->getTileList());
     }
@@ -1322,70 +1322,70 @@ JSON,
 
         $children = [
             [
-                'label' => '数据类型为string',
+                'label' => 'Data type is string',
                 'value' => '9527.string_key',
             ],
             [
-                'label' => '数据类型为number',
+                'label' => 'Data type is number',
                 'value' => '9527.number_key',
             ],
             [
-                'label' => '数据类型为boolean',
+                'label' => 'Data type is boolean',
                 'value' => '9527.boolean_key',
             ],
             [
-                'label' => '数据类型为integer',
+                'label' => 'Data type is integer',
                 'value' => '9527.integer_key',
             ],
             [
-                'label' => '数据类型为object',
+                'label' => 'Data type is object',
                 'value' => '9527.object_key',
             ],
             [
-                'label' => '数据类型为object.数据类型为object下的child_string',
+                'label' => 'Data type is object.Data type is object child string',
                 'value' => '9527.object_key.object_key_child_string',
             ],
             [
-                'label' => '数据类型为object.对象下的数组',
+                'label' => 'Data type is object.Array under object',
                 'value' => '9527.object_key.object_array_expression',
             ],
             [
-                'label' => '数据类型为object.对象下的数组',
+                'label' => 'Data type is object.Array under object',
                 'value' => '9527.object_key.object_array_const',
             ],
             [
-                'label' => '数据类型为object.对象下的对象',
+                'label' => 'Data type is object.Object under object',
                 'value' => '9527.object_key.object_object',
             ],
             [
-                'label' => '数据类型为object.对象下的对象.对象下的对象1',
+                'label' => 'Data type is object.Object under object.Object under object 1',
                 'value' => '9527.object_key.object_object.object_object_key1',
             ],
             [
-                'label' => '数据类型为array',
+                'label' => 'Data type is array',
                 'value' => '9527.array_key',
             ],
             [
-                'label' => '数据类型为array[0].数据类型为array下的child_object_string',
+                'label' => 'Data type is array[0].Data type is array child object string',
                 'value' => '9527.array_key[0].array_key_child1',
             ],
             [
-                'label' => '数据类型为array[0].数组下的数组',
+                'label' => 'Data type is array[0].Array under array',
                 'value' => '9527.array_key[0].array_array',
             ],
             [
-                'label' => '数据类型为array[0].数组下的对象',
+                'label' => 'Data type is array[0].Object under array',
                 'value' => '9527.array_key[0].array_object',
             ],
             [
-                'label' => '数据类型为array[0].数组下的对象.数组下的对象1',
+                'label' => 'Data type is array[0].Object under array.Object under array 1',
                 'value' => '9527.array_key[0].array_object.array_object_key1',
             ],
         ];
 
-        $dataSource = $form->getKeyNamesDataSource('入参配置');
+        $dataSource = $form->getKeyNamesDataSource('Input config');
         $dataSourceArray = $dataSource->toArray();
-        $this->assertEquals('入参配置', $dataSourceArray['label']);
+        $this->assertEquals('Input config', $dataSourceArray['label']);
         $this->assertEquals($children, $dataSourceArray['children']);
 
         $form = $this->builder->build($this->getFormJsonArray2());
@@ -1393,29 +1393,29 @@ JSON,
 
         $children = [
             [
-                'label' => '数据类型为array',
+                'label' => 'Data type is array',
                 'value' => '9527.root',
             ],
             [
-                'label' => '数据类型为array[0].数据类型为array下的child_object_string',
+                'label' => 'Data type is array[0].Data type is array child object string',
                 'value' => '9527.root[0].array_key_child1',
             ],
             [
-                'label' => '数据类型为array[0].数组下的数组',
+                'label' => 'Data type is array[0].Array under array',
                 'value' => '9527.root[0].array_array',
             ],
             [
-                'label' => '数据类型为array[0].数组下的对象',
+                'label' => 'Data type is array[0].Object under array',
                 'value' => '9527.root[0].array_object',
             ],
             [
-                'label' => '数据类型为array[0].数组下的对象.数组下的对象1',
+                'label' => 'Data type is array[0].Object under array.Object under array 1',
                 'value' => '9527.root[0].array_object.array_object_key1',
             ],
         ];
-        $dataSource = $form->getKeyNamesDataSource('入参配置2');
+        $dataSource = $form->getKeyNamesDataSource('Input config 2');
         $dataSourceArray = $dataSource->toArray();
-        $this->assertEquals('入参配置2', $dataSourceArray['label']);
+        $this->assertEquals('Input config 2', $dataSourceArray['label']);
         $this->assertEquals($children, $dataSourceArray['children']);
     }
 
@@ -1493,7 +1493,7 @@ JSON,
                 "key": "options",
                 "sort": 0,
                 "title": "",
-                "description": "配置",
+                "description": "Configuration",
                 "required": null,
                 "value": null,
                 "encryption": false,
@@ -1532,7 +1532,7 @@ JSON,
                                 "key": "platform",
                                 "sort": 0,
                                 "title": "",
-                                "description": "平台；可选：头条、网易、微博",
+                                "description": "Platform; options: Toutiao, NetEase, Weibo",
                                 "required": null,
                                 "value": null,
                                 "encryption": false,
@@ -1545,7 +1545,7 @@ JSON,
                                 "key": "limit",
                                 "sort": 1,
                                 "title": "",
-                                "description": "条数",
+                                "description": "Count",
                                 "required": null,
                                 "value": null,
                                 "encryption": false,
@@ -1575,7 +1575,7 @@ JSON
         "options": {
             "type": "array",
             "required": [],
-            "description": "配置",
+            "description": "Configuration",
             "items": {
                 "type": "object",
                 "required": [
@@ -1587,12 +1587,12 @@ JSON
                     "platform": {
                         "type": "string",
                         "required": [],
-                        "description": "平台；可选：头条、网易、微博"
+                        "description": "Platform; options: Toutiao, NetEase, Weibo"
                     },
                     "limit": {
                         "type": "string",
                         "required": [],
-                        "description": "条数"
+                        "description": "Count"
                     }
                 }
             }
@@ -1606,11 +1606,11 @@ JSON
         $form->appendConstValue([
             'options' => [
                 [
-                    'platform' => '头条',
+                    'platform' => 'Toutiao',
                     'limit' => '10',
                 ],
                 [
-                    'platform' => '网易',
+                    'platform' => 'NetEase',
                     'limit' => '20',
                 ],
             ],
@@ -1626,7 +1626,7 @@ JSON
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "root node",
     "description": "desc",
     "items": null,
     "value": null,
@@ -1639,7 +1639,7 @@ JSON
             "type": "string",
             "key": "string_key",
             "sort": 0,
-            "title": "数据类型为string",
+            "title": "Data type is string",
             "description": "desc",
             "items": null,
             "properties": null,
@@ -1664,7 +1664,7 @@ JSON
             "type": "object",
             "key": "object_key",
             "sort": 1,
-            "title": "数据类型为object",
+            "title": "Data type is object",
             "description": "desc",
             "required": [
             ],
@@ -1697,7 +1697,7 @@ JSON,
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "root node",
     "description": "desc",
     "items": null,
     "value": null,
@@ -1712,7 +1712,7 @@ JSON,
             "type": "string",
             "key": "string_key",
             "sort": 0,
-            "title": "数据类型为string",
+            "title": "Data type is string",
             "description": "desc",
             "items": null,
             "properties": null,
@@ -1736,7 +1736,7 @@ JSON,
             "type": "array",
             "key": "array_key",
             "sort": 1,
-            "title": "数据类型为array",
+            "title": "Data type is array",
             "description": "desc",
             "required": [
             ],
@@ -1916,7 +1916,7 @@ JSON, true);
     {
         $valueBuilder = new ValueBuilder();
 
-        // 创建一个object类型的form
+        // Create an object-type form
         $form = new Form(
             type: FormType::Object,
             key: 'test_object',
@@ -1925,7 +1925,7 @@ JSON, true);
             description: 'Test object with method expression'
         );
 
-        // 创建一个返回string类型的函数表达式（md5函数返回string）
+        // Create a function expression that returns a string (md5 returns string)
         $methodExpressionData = json_decode(<<<'JSON'
 {
     "type": "expression",
@@ -1953,16 +1953,16 @@ JSON, true);
 }
 JSON, true);
 
-        // 构建Value对象，设置DataType为Array（期望返回数组）
+        // Build Value object and set DataType to Array (expect array)
         $value = $valueBuilder->build($methodExpressionData);
         $value->setDataType(DataType::Array);
 
-        // 设置value到form
+        // Set value onto form
         $form->setValue($value);
 
-        // 测试：调用getKeyValue时应该抛出异常，因为md5函数返回string而不是array
+        // Test: getKeyValue should throw because md5 returns string instead of array
         $this->expectException(FlowExprEngineException::class);
-        $this->expectExceptionMessage('结果为 string，无法被转换为 array');
+        $this->expectExceptionMessage('Result is string and cannot be converted to array');
 
         $form->getKeyValue();
     }
@@ -1971,7 +1971,7 @@ JSON, true);
     {
         $valueBuilder = new ValueBuilder();
 
-        // 创建一个object类型的form
+        // Create an object-type form
         $form = new Form(
             type: FormType::Object,
             key: 'test_object',
@@ -1980,7 +1980,7 @@ JSON, true);
             description: 'Test object with method expression'
         );
 
-        // 创建一个返回string类型的函数表达式（md5函数返回string）
+        // Create a function expression that returns an array (json_decode returns array)
         $methodExpressionData = json_decode(<<<'JSON'
 {
     "type": "expression",
@@ -2019,11 +2019,11 @@ JSON, true);
 }
 JSON, true);
 
-        // 构建Value对象，设置DataType为Array（期望返回数组）
+        // Build Value object and set DataType to Array (expect array)
         $value = $valueBuilder->build($methodExpressionData);
         $value->setDataType(DataType::Array);
 
-        // 设置value到form
+        // Set value onto form
         $form->setValue($value);
 
         $form->getKeyValue();
@@ -2034,7 +2034,7 @@ JSON, true);
     {
         $valueBuilder = new ValueBuilder();
 
-        // 创建一个使用get_rfc1123_date_time方法的表达式
+        // Create an expression using the get_rfc1123_date_time method
         $methodExpressionData = json_decode(<<<'JSON'
 {
     "type": "expression",
@@ -2065,12 +2065,12 @@ JSON, true);
         $value = $valueBuilder->build($methodExpressionData);
         $result = $value->getResult();
 
-        // 验证结果格式符合RFC 1123标准
+        // Verify result format matches RFC 1123
         $this->assertIsString($result);
-        // 验证格式: Thu, 21 Oct 2021 07:28:00 GMT
+        // Verify format: Thu, 21 Oct 2021 07:28:00 GMT
         $this->assertMatchesRegularExpression('/^[A-Za-z]{3}, \d{2} [A-Za-z]{3} \d{4} \d{2}:\d{2}:\d{2} GMT$/', $result);
 
-        // 验证时间戳1634799280对应的UTC时间: Thu, 21 Oct 2021 06:54:40 GMT
+        // Verify timestamp 1634799280 corresponds to UTC time: Thu, 21 Oct 2021 06:54:40 GMT
         $this->assertStringContainsString('21 Oct 2021 06:54:40 GMT', $result);
     }
 
@@ -2081,7 +2081,7 @@ JSON, true);
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "root node",
     "description": "desc",
     "items": null,
     "value": null,
@@ -2100,7 +2100,7 @@ JSON, true);
             "type": "string",
             "key": "string_key",
             "sort": 0,
-            "title": "数据类型为string",
+            "title": "Data type is string",
             "description": "desc",
             "items": null,
             "properties": null,
@@ -2124,7 +2124,7 @@ JSON, true);
             "type": "number",
             "key": "number_key",
             "sort": 1,
-            "title": "数据类型为number",
+            "title": "Data type is number",
             "description": "desc",
             "items": null,
             "properties": null,
@@ -2148,7 +2148,7 @@ JSON, true);
             "type": "boolean",
             "key": "boolean_key",
             "sort": 2,
-            "title": "数据类型为boolean",
+            "title": "Data type is boolean",
             "description": "desc",
             "items": null,
             "properties": null,
@@ -2172,7 +2172,7 @@ JSON, true);
             "type": "integer",
             "key": "integer_key",
             "sort": 3,
-            "title": "数据类型为integer",
+            "title": "Data type is integer",
             "description": "desc",
             "items": null,
             "properties": null,
@@ -2196,7 +2196,7 @@ JSON, true);
             "type": "object",
             "key": "object_key",
             "sort": 4,
-            "title": "数据类型为object",
+            "title": "Data type is object",
             "description": "desc",
             "required": [
                 "object_key_child_string",
@@ -2212,7 +2212,7 @@ JSON, true);
                     "type": "string",
                     "key": "object_key_child_string",
                     "sort": 0,
-                    "title": "数据类型为object下的child_string",
+                    "title": "Data type is object child string",
                     "description": "desc",
                     "items": null,
                     "properties": null,
@@ -2236,11 +2236,11 @@ JSON, true);
                     "type": "array",
                     "key": "object_array_expression",
                     "sort": 1,
-                    "title": "对象下的数组",
+                    "title": "Array under object",
                     "description": "desc",
                     "items": {
                         "type": "string",
-                        "title": "数据类型为object下的array",
+                        "title": "Data type is object array",
                         "description": "desc",
                         "key": "",
                         "sort": 0,
@@ -2272,11 +2272,11 @@ JSON, true);
                     "type": "array",
                     "key": "object_array_const",
                     "sort": 2,
-                    "title": "对象下的数组",
+                    "title": "Array under object",
                     "description": "desc",
                     "items": {
                         "type": "string",
-                        "title": "数据类型为object下的array",
+                        "title": "Data type is object array",
                         "description": "desc",
                         "key": "",
                         "sort": 0,
@@ -2308,7 +2308,7 @@ JSON, true);
                                 "const_value": [
                                     {
                                         "type": "input",
-                                        "value": "嘻嘻",
+                                        "value": "heehee",
                                         "name": "name",
                                         "args": null
                                     }
@@ -2332,7 +2332,7 @@ JSON, true);
                                 "const_value": [
                                     {
                                         "type": "input",
-                                        "value": "嘿嘿",
+                                        "value": "hehe",
                                         "name": "name",
                                         "args": null
                                     }
@@ -2346,7 +2346,7 @@ JSON, true);
                     "type": "object",
                     "key": "object_object",
                     "sort": 3,
-                    "title": "对象下的对象",
+                    "title": "Object under object",
                     "description": "desc",
                     "items": null,
                     "encryption": false,
@@ -2360,7 +2360,7 @@ JSON, true);
                             "type": "string",
                             "key": "object_object_key1",
                             "sort": 0,
-                            "title": "对象下的对象1",
+                            "title": "Object under object 1",
                             "description": "desc",
                             "items": null,
                             "properties": null,
@@ -2388,13 +2388,13 @@ JSON, true);
             "type": "array",
             "key": "array_key",
             "sort": 5,
-            "title": "数据类型为array",
+            "title": "Data type is array",
             "description": "desc",
             "items": {
                 "type": "object",
                 "key": "array_key",
                 "sort": 0,
-                "title": "数据类型为array下的child_object",
+                "title": "Data type is array child object",
                 "description": "desc",
                 "required": [
                     "array_key_child1",
@@ -2410,7 +2410,7 @@ JSON, true);
                         "type": "string",
                         "key": "array_key_child1",
                         "sort": 0,
-                        "title": "数据类型为array下的child_object_string",
+                        "title": "Data type is array child object string",
                         "description": "desc",
                         "items": null,
                         "properties": null,
@@ -2423,11 +2423,11 @@ JSON, true);
                         "type": "array",
                         "key": "array_array",
                         "sort": 1,
-                        "title": "数组下的数组",
+                        "title": "Array under array",
                         "description": "desc",
                         "items": {
                             "type": "string",
-                            "title": "数组下的数组值",
+                            "title": "Array under array value",
                             "description": "desc",
                             "key": "",
                             "sort": 0,
@@ -2448,7 +2448,7 @@ JSON, true);
                         "type": "object",
                         "key": "array_object",
                         "sort": 2,
-                        "title": "数组下的对象",
+                        "title": "Object under array",
                         "description": "desc",
                         "required": [
                             "array_object_key1"
@@ -2459,7 +2459,7 @@ JSON, true);
                         "properties": {
                             "array_object_key1": {
                                 "type": "string",
-                                "title": "数组下的对象1",
+                                "title": "Object under array 1",
                                 "description": "desc",
                                 "key": "array_object_key1",
                                 "sort": 0,
@@ -2491,7 +2491,7 @@ JSON, true);
                     "type": "object",
                     "key": "0",
                     "sort": 0,
-                    "title": "数据类型为array下的child_object",
+                    "title": "Data type is array child object",
                     "description": "desc",
                     "required": [
                         "array_key_child1",
@@ -2507,7 +2507,7 @@ JSON, true);
                             "type": "string",
                             "key": "array_key_child1",
                             "sort": 0,
-                            "title": "数据类型为array下的child_object_string",
+                            "title": "Data type is array child object string",
                             "description": "desc",
                             "items": null,
                             "properties": null,
@@ -2531,7 +2531,7 @@ JSON, true);
                             "type": "array",
                             "key": "array_array",
                             "sort": 1,
-                            "title": "数组下的数组",
+                            "title": "Array under array",
                             "description": "desc",
                             "value": null,
                             "required": null,
@@ -2539,7 +2539,7 @@ JSON, true);
                             "encryption_value": null,
                             "items": {
                                 "type": "string",
-                                "title": "数组下的数组值",
+                                "title": "Array under array value",
                                 "description": "desc",
                                 "key": "",
                                 "sort": 0,
@@ -2581,7 +2581,7 @@ JSON, true);
                             "type": "object",
                             "key": "array_object",
                             "sort": 2,
-                            "title": "数组下的对象",
+                            "title": "Object under array",
                             "description": "desc",
                             "required": [
                                 "array_object_key1"
@@ -2592,7 +2592,7 @@ JSON, true);
                             "properties": {
                                 "array_object_key1": {
                                     "type": "string",
-                                    "title": "数组下的对象1",
+                                    "title": "Object under array 1",
                                     "description": "desc",
                                     "key": "array_object_key1",
                                     "sort": 0,
@@ -2638,13 +2638,13 @@ JSON;
     "type": "array",
     "key": "root",
     "sort": 0,
-    "title": "数据类型为array",
+    "title": "Data type is array",
     "description": "desc",
     "items": {
         "type": "object",
         "key": "array_key",
         "sort": 0,
-        "title": "数据类型为array下的child_object",
+        "title": "Data type is array child object",
         "description": "desc",
         "required": [
             "array_key_child1",
@@ -2660,7 +2660,7 @@ JSON;
                 "type": "string",
                 "key": "array_key_child1",
                 "sort": 0,
-                "title": "数据类型为array下的child_object_string",
+                "title": "Data type is array child object string",
                 "description": "desc",
                 "items": null,
                 "properties": null,
@@ -2673,11 +2673,11 @@ JSON;
                 "type": "array",
                 "key": "array_array",
                 "sort": 1,
-                "title": "数组下的数组",
+                "title": "Array under array",
                 "description": "desc",
                 "items": {
                     "type": "string",
-                    "title": "数组下的数组值",
+                    "title": "Array under array value",
                     "description": "desc",
                     "key": "",
                     "sort": 0,
@@ -2698,7 +2698,7 @@ JSON;
                 "type": "object",
                 "key": "array_object",
                 "sort": 2,
-                "title": "数组下的对象",
+                "title": "Object under array",
                 "description": "desc",
                 "required": [
                     "array_object_key1"
@@ -2709,7 +2709,7 @@ JSON;
                 "properties": {
                     "array_object_key1": {
                         "type": "string",
-                        "title": "数组下的对象1",
+                        "title": "Object under array 1",
                         "description": "desc",
                         "key": "array_object_key1",
                         "sort": 0,
@@ -2741,7 +2741,7 @@ JSON;
             "type": "object",
             "key": "0",
             "sort": 0,
-            "title": "数据类型为array下的child_object",
+            "title": "Data type is array child object",
             "description": "desc",
             "required": [
                 "array_key_child1",
@@ -2757,7 +2757,7 @@ JSON;
                     "type": "string",
                     "key": "array_key_child1",
                     "sort": 0,
-                    "title": "数据类型为array下的child_object_string",
+                    "title": "Data type is array child object string",
                     "description": "desc",
                     "items": null,
                     "properties": null,
@@ -2781,7 +2781,7 @@ JSON;
                     "type": "array",
                     "key": "array_array",
                     "sort": 1,
-                    "title": "数组下的数组",
+                    "title": "Array under array",
                     "description": "desc",
                     "value": null,
                     "required": null,
@@ -2789,7 +2789,7 @@ JSON;
                     "encryption_value": null,
                     "items": {
                         "type": "string",
-                        "title": "数组下的数组值",
+                        "title": "Array under array value",
                         "description": "desc",
                         "key": "",
                         "sort": 0,
@@ -2831,7 +2831,7 @@ JSON;
                     "type": "object",
                     "key": "array_object",
                     "sort": 2,
-                    "title": "数组下的对象",
+                    "title": "Object under array",
                     "description": "desc",
                     "required": [
                         "array_object_key1"
@@ -2842,7 +2842,7 @@ JSON;
                     "properties": {
                         "array_object_key1": {
                             "type": "string",
-                            "title": "数组下的对象1",
+                            "title": "Object under array 1",
                             "description": "desc",
                             "key": "array_object_key1",
                             "sort": 0,
@@ -2879,3 +2879,11 @@ JSON;
         return json_decode($formJson, true);
     }
 }
+
+
+
+
+
+
+
+

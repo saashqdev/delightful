@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         麦吉 东方财富财经 超净化
+// @name         Delightful East Money Finance Ultra Clean
 // @namespace    https://dtyq.com/
 // @version      1.6
-// @description  清理东方财富财经网站页面，聚焦文章内容和标题，移除干扰元素。自动关闭特定弹窗。
+// @description  Clean East Money Finance website pages, focus on article content and title, remove distracting elements. Auto-close specific popups.
 // @author       Gemini & DTYQ
 // @match        *://finance.eastmoney.com/a/*
 // @grant        none
@@ -11,52 +11,52 @@
 (function() {
   'use strict';
 
-  // --- 1. 定位核心元素 ---
-  let titleElement = document.querySelector('#topbox'); // 定位标题区域
-  let mainContentContainer = document.querySelector('div.mainleft'); // **新增：优先定位 .mainleft**
-  let contentElement = null; // 稍后在 mainContentContainer 中查找具体内容元素
+  // --- 1. Locate core element ---
+  let titleElement = document.querySelector('#topbox'); // Locate title area
+  let mainContentContainer = document.querySelector('div.mainleft'); // **New: Prioritize locating .mainleft**
+  let contentElement = null; // Will search for specific content element in mainContentContainer later
 
-  // 如果连 .mainleft 都找不到，则尝试原来的策略寻找内容元素
+  // If .mainleft cannot be found, try original strategy to find content element
   if (!mainContentContainer) {
-      console.warn('麦吉净化脚本：未能找到 .mainleft 容器，尝试查找内部内容元素...');
+      console.warn('Delightful script: Failed to find .mainleft container, trying to find internal content element...');
       contentElement = document.querySelector('div.newsContent') ||
                          document.querySelector('div.article_body') ||
                          document.querySelector('#ContentBody');
   } else {
-      // 如果找到了 .mainleft，就在它内部查找具体的内容元素（可选，主要为了样式）
+      // If .mainleft found, search for specific content element within it (optional, mainly for styling)
       contentElement = mainContentContainer.querySelector('div.newsContent') ||
                          mainContentContainer.querySelector('div.article_body') ||
                          mainContentContainer.querySelector('#ContentBody') ||
-                         mainContentContainer; // 如果内部找不到特定元素，则将 .mainleft 自身作为内容元素
+                         mainContentContainer; // If no specific element found, use .mainleft itself as content element
   }
 
-  // 确定主要的样式目标 (优先 .mainleft)
+  // Determine primary styling target (prioritize .mainleft)
   const primaryContentTarget = mainContentContainer || contentElement;
 
-  // 如果找不到任何形式的内容区域，则退出
+  // If no form of content area found, exit
   if (!primaryContentTarget) {
-    console.error('麦吉净化脚本：未能找到任何目标内容元素 (finance.eastmoney.com)。');
+    console.error('Delightful script: Failed to find any target content element (finance.eastmoney.com).');
     return;
   }
-  // 如果找不到标题，也打印一个信息，但不退出
+  // If title not found, also print info, but don't exit
   if (!titleElement) {
-      console.warn('麦吉净化脚本：未能找到标题元素 #topbox，将只保留文章内容。');
+      console.warn('Delightful script: Failed to find title element #topbox, will only keep article content.');
   }
 
-  // --- 2. 定义保留规则 ---
+  // --- 2. Define retention rules ---
   const shouldKeepVisible = (element) => {
-    // 保留标题区域及其内部元素
+    // Keep title area and internal elements
     if (titleElement && (element === titleElement || titleElement.contains(element))) {
         return true;
     }
-    // **修改：保留主要内容容器及其内部元素**
+    // **Modified: Keep main content container and internal elements**
     if (primaryContentTarget && (element === primaryContentTarget || primaryContentTarget.contains(element))) {
         return true;
     }
     return false;
   };
 
-  // --- 3. 遍历并收集需要隐藏的元素 ---
+  // --- 3. Traverse and collect elements to hide ---
   const walker = document.createTreeWalker(
     document.body,
     NodeFilter.SHOW_ELEMENT,
@@ -67,37 +67,37 @@
   const elementsToHide = [];
   let currentNode = walker.nextNode();
   while (currentNode) {
-    // 排除脚本自身可能注入的元素（虽然本脚本没注入）
+    // Skip elements that might be managed by scripts (although this script doesn't inject)
     if (currentNode.closest && currentNode.closest('[data-userscript-managed]')) {
         currentNode = walker.nextNode();
         continue;
     }
 
-    // 如果当前节点不应保留，则添加到待隐藏列表
+    // If current node should not be kept, add to hide list
     if (!shouldKeepVisible(currentNode)) {
       elementsToHide.push(currentNode);
     }
     currentNode = walker.nextNode();
   }
 
-  // --- 4. 统一执行隐藏 ---
+  // --- 4. Execute hiding uniformly ---
   elementsToHide.forEach(element => {
-    // 再次确认不隐藏 body 和 html
+    // Again confirm not hiding body and html
     if (element !== document.body && element !== document.documentElement) {
-        element.style.setProperty('display', 'none', 'important'); // 使用 !important 提高优先级
+        element.style.setProperty('display', 'none', 'important'); // Use !important to increase priority
         element.style.setProperty('visibility', 'hidden', 'important');
     }
   });
 
-  // --- 5. 确保目标元素及其所有祖先可见 ---
+  // --- 5. Ensure target element and all ancestors are visible ---
   const ensureVisible = (targetElement) => {
-      if (!targetElement) return; // 如果元素不存在则跳过
+      if (!targetElement) return; // Skip if element doesn't exist
       let ancestor = targetElement;
       while (ancestor && ancestor !== document.documentElement) {
-        ancestor.style.setProperty('display', '', ''); // 清除可能存在的 display:none
-        ancestor.style.setProperty('visibility', 'visible', 'important'); // 强制可见
+        ancestor.style.setProperty('display', '', ''); // Clear possible display:none
+        ancestor.style.setProperty('visibility', 'visible', 'important'); // Force visible
 
-        // 恢复 body 和 html 的默认滚动行为
+        // Restore body and html default scroll behavior
         if (ancestor === document.body || ancestor === document.documentElement) {
             ancestor.style.overflow = '';
         }
@@ -105,10 +105,10 @@
       }
   };
 
-  ensureVisible(titleElement); // 确保标题可见
-  ensureVisible(primaryContentTarget); // **修改：确保主要内容容器可见**
+  ensureVisible(titleElement); // Ensure title is visible
+  ensureVisible(primaryContentTarget); // **Modified: Ensure main content container is visible**
 
-  // 单独确保 html 元素可见 (合并到ensureVisible内部逻辑已处理大部分情况，这里再次确认)
+  // Separately ensure html element is visible (most cases already handled by ensureVisible logic)
   if (document.documentElement) {
       document.documentElement.style.setProperty('display', '', '');
       document.documentElement.style.setProperty('visibility', 'visible', 'important');
@@ -116,15 +116,15 @@
   }
 
 
-  // --- 6. 应用样式，美化并居中目标元素 ---
+  // --- 6. Apply styles, beautify and center target element ---
 
-  // **新增：强制重置 body 的关键样式，防止干扰**
+  // **New: Forcefully reset body's critical styles to prevent interference**
   document.body.style.setProperty('width', 'auto', 'important');
   document.body.style.setProperty('margin', '0', 'important');
-  document.body.style.setProperty('position', 'relative', 'important'); // 重置可能存在的 absolute/fixed
-  document.body.style.setProperty('float', 'none', 'important'); // 清除可能的 float
+  document.body.style.setProperty('position', 'relative', 'important'); // Reset possible absolute/fixed
+  document.body.style.setProperty('float', 'none', 'important'); // Clear possible float
 
-  // 应用我们期望的 body 样式作为 flex 容器
+  // Apply our expected body styles as flex container
   const bodyStyle = {
       display: 'flex',
       flexDirection: 'column',
@@ -134,15 +134,15 @@
       boxSizing: 'border-box',
       backgroundColor: '#f0f2f5'
   };
-  // 使用 setProperty 应用样式，提高优先级
+  // Apply styles using setProperty to increase priority
   for (const [key, value] of Object.entries(bodyStyle)) {
-      // 将驼峰命名转换为 kebab-case
+      // Convert camelCase to kebab-case
       const kebabKey = key.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`);
       document.body.style.setProperty(kebabKey, value, 'important');
   }
 
 
-  // 设置标题区域样式
+  // Set title area styles
   if (titleElement) {
       Object.assign(titleElement.style, {
         display: 'block',
@@ -163,47 +163,47 @@
       });
   }
 
-  // **修改：设置 .mainleft 或备用内容容器的样式**
+  // **Modified: Set .mainleft or fallback content container styles**
   Object.assign(primaryContentTarget.style, {
     display: 'block',
     visibility: 'visible',
     width: '90%',
     maxWidth: '850px',
-    margin: '0', // **修改：移除 margin: 0 auto，让 body 的 align-items 生效**
+    margin: '0', // **Modified: Remove margin: 0 auto to let body's align-items take effect**
     padding: '30px 40px',
     backgroundColor: 'white',
     boxShadow: '0 4px 15px rgba(0,0,0,0.12)',
     border: '1px solid #e8e8e8',
     borderRadius: '5px',
     position: 'relative',
-    float: 'none', // **新增：清除 float**
+    float: 'none', // **New: Clear float**
     left: '',
     top: '',
     transform: '',
     zIndex: 'auto',
     height: '',
-    overflow: 'visible' // **修改：允许内容溢出容器（如果需要）或设为 auto**
+    overflow: 'visible' // **Modified: Allow content to overflow container (if needed) or set to auto**
   });
 
-  // 如果 contentElement 是 .mainleft 内部的元素，可能需要重置其 margin/padding
+  // If contentElement is an element inside .mainleft, may need to reset its margin/padding
   if (mainContentContainer && contentElement && contentElement !== mainContentContainer) {
       contentElement.style.margin = '0';
       contentElement.style.padding = '0';
   }
 
-  console.log('麦吉 东方财富财经 超净化脚本 (v1.5) 样式应用完毕');
+  console.log('Delightful East Money Finance Ultra Clean script (v1.5) styles applied');
 
-  // --- 7. 监听并自动关闭特定弹窗 ---
-  // **修改：仅基于 src 包含 close.png 来选择，移除了 onclick 要求。**
-  // **警告：这个选择器可能过于宽泛，如果页面其他地方有 src 含 close.png 的非关闭图片，也可能被误点。**
+  // --- 7. Listen and auto-close specific popups ---
+  // **Modified: Select only based on src contains close.png, removed onclick requirement.**
+  // **Warning: This selector might be too broad, if page elsewhere has non-close image with src containing close.png, it may also be clicked.**
   const closeButtonSelector = 'img[src*="close.png"]';
 
   const observerCallback = function(mutationsList, observer) {
       for(const mutation of mutationsList) {
           if (mutation.type === 'childList') {
-              // 检查是否有新的节点被添加
+              // Check if any new nodes were added
               mutation.addedNodes.forEach(node => {
-                  // 检查添加的节点本身或其子孙节点是否匹配关闭按钮
+                  // Check if added node itself or descendants match close button
                   if (node.nodeType === Node.ELEMENT_NODE) {
                       let closeButton = null;
                       if (node.matches(closeButtonSelector)) {
@@ -212,12 +212,12 @@
                           closeButton = node.querySelector(closeButtonSelector);
                       }
 
-                      if (closeButton && closeButton.offsetParent !== null) { // 检查按钮是否可见 (非 display:none 且有尺寸)
-                          console.log('麦吉净化：检测到弹窗关闭按钮，尝试自动关闭...');
+                      if (closeButton && closeButton.offsetParent !== null) { // Check if button is visible (not display:none and has size)
+                          console.log('Delightful clean: Detected popup close button, attempting auto-close...');
                           closeButton.click();
-                          // 可选：找到后可以断开观察，如果弹窗只出现一次
+                          // Optional: Can disconnect after finding, if popup appears only once
                           // observer.disconnect();
-                          // console.log('麦吉净化：已关闭弹窗并停止监听。');
+                          // console.log('Delightful clean: Popup closed and monitoring stopped.');
                       }
                   }
               });
@@ -225,23 +225,23 @@
       }
   };
 
-  // 创建一个观察器实例并传入回调函数
+  // Create an observer instance and pass callback function
   const observer = new MutationObserver(observerCallback);
 
-  // 配置观察选项:
-  const config = { childList: true, subtree: true }; // 监听子节点变化及所有后代节点变化
+  // Configure observer options:
+  const config = { childList: true, subtree: true }; // Listen to child node changes and all descendant node changes
 
-  // 选择目标节点开始观察 (通常是 body)
+  // Select target node to start observing (usually body)
   const targetNode = document.body;
   if (targetNode) {
       observer.observe(targetNode, config);
-      console.log('麦吉净化：已启动弹窗关闭按钮监听器 (基于 src*="close.png")。');
+      console.log('Delightful clean: Started popup close button listener (based on src*="close.png").');
   }
 
-  // 初始检查一次，以防弹窗在脚本运行前已经加载
+  // Initial check once, in case popup loaded before script ran
   const initialCloseButton = document.querySelector(closeButtonSelector);
   if (initialCloseButton && initialCloseButton.offsetParent !== null) {
-      console.log('麦吉净化：检测到初始弹窗关闭按钮 (基于 src*="close.png")，尝试自动关闭...');
+      console.log('Delightful clean: Detected initial popup close button (based on src*="close.png"), attempting auto-close...');
       initialCloseButton.click();
   }
 

@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function getActiveTab() {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tabs || tabs.length === 0) {
-      throw new Error("无法获取当前活动标签页。");
+      throw new Error("Unable to get current active tab.");
     }
     return tabs[0];
   }
@@ -72,11 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 return retryResponse;
            } catch (injectionError) {
                 console.error("Error injecting content script:", injectionError);
-                throw new Error(`无法注入或连接到内容脚本: ${injectionError.message}`);
+                throw new Error(`Unable to inject or connect to content script: ${injectionError.message}`);
            }
        } else {
           console.error("Error sending message to content script:", error);
-          throw new Error(`与内容脚本通信失败: ${error.message}`);
+          throw new Error(`Failed to communicate with content script: ${error.message}`);
        }
     }
   }

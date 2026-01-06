@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         麦吉 百度搜索 超净化
+// @name         Delightful Baidu Search Ultra Clean
 // @namespace    https://dtyq.com/
 // @version      1.0
-// @description  清理百度搜索页面，移除右侧广告、底部用户信息栏和页脚，提供纯净的搜索体验
+// @description  Clean Baidu search pages, remove right-side ads, bottom user info bar and footer, provide a pure search experience
 // @author       cc, cc@dtyq.com
 // @match        *://www.baidu.com/s*
 // @grant        none
@@ -11,27 +11,27 @@
 (function() {
     'use strict';
 
-    // 创建一个函数来移除特定元素
+    // Create a function to remove specific elements
     function removeElements() {
-        // 移除右侧内容（广告等）
+        // Remove right-side content (ads, etc.)
         const rightContent = document.getElementById('content_right');
         if (rightContent) {
             rightContent.remove();
-            console.log('已移除右侧内容框');
+            console.log('Right-side content box removed');
         }
 
-        // 移除底部用户信息栏
+        // Remove bottom user info bar
         const userBar = document.getElementById('u');
         if (userBar) {
             userBar.remove();
-            console.log('已移除底部用户信息栏');
+            console.log('Bottom user info bar removed');
         }
 
-        // 移除页脚
+        // Remove footer
         const footerElements = document.querySelectorAll('[tpl="app/footer"]');
         footerElements.forEach(element => {
             element.remove();
-            console.log('已移除页脚元素');
+            console.log('Footer element removed');
         });
     }
 

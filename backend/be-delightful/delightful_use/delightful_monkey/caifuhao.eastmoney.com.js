@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         麦吉 东方财富财富号 超净化
+// @name         Maiji DongFang Caifuhao Page Cleaner
 // @namespace    https://dtyq.com/
 // @version      1.1
-// @description  清理东方财富财富号网站页面，聚焦文章内容，移除干扰元素。
+// @description  Clean DongFang Caifuhao website pages, focus on article content, remove distraction elements.
 // @author       cc, cc@dtyq.com
 // @match        *://caifuhao.eastmoney.com/news/*
 // @grant        none
@@ -11,27 +11,27 @@
 (function() {
   'use strict';
 
-  // --- 1. 定位核心内容元素 ---
-  // 优先尝试通用选择器，失败则尝试更精确的选择器
+  // --- 1. Locate core content element ---
+  // Try generic selector first, then try more precise selector if failed
   let contentElement = document.querySelector('div.article.page-article') ||
                        document.querySelector('#main > div.grid_wrapper > div.grid > div.g_content > div.article.page-article');
 
-  // 如果两种方式都找不到，则退出脚本
+  // If both methods cannot find the element, exit the script
   if (!contentElement) {
-    console.error('麦吉净化脚本：未能找到目标文章元素。');
+    console.error('Maiji cleaner script: Failed to find target article element.');
     return;
   }
 
-  // --- 2. 定义保留规则 ---
-  // 判断一个元素是否应该保留：是目标元素本身或其内部元素
+  // --- 2. Define retention rules ---
+  // Check if an element should be kept: is the target element itself or its inner element
   const shouldKeepVisible = (element) => {
     return element === contentElement || contentElement.contains(element);
   };
 
-  // --- 3. 遍历并收集需要隐藏的元素 ---
+  // --- 3. Iterate and collect elements to hide ---
   const walker = document.createTreeWalker(
     document.body,
-    NodeFilter.SHOW_ELEMENT, // 只关心元素节点
+    NodeFilter.SHOW_ELEMENT, // Only care about element nodes
     null,
     false
   );
@@ -39,37 +39,37 @@
   const elementsToHide = [];
   let currentNode = walker.nextNode();
   while (currentNode) {
-    // 如果当前节点不应保留，则添加到待隐藏列表
+    // If current node should not be kept, add to elements to hide list
     if (!shouldKeepVisible(currentNode)) {
       elementsToHide.push(currentNode);
     }
     currentNode = walker.nextNode();
   }
 
-  // --- 4. 统一执行隐藏 ---
-  // 批量隐藏可以略微提高性能，减少页面重绘/重排次数
+  // --- 4. Execute hiding uniformly ---
+  // Batch hiding can slightly improve performance, reduce page repaint/reflow times
   elementsToHide.forEach(element => {
-    // 安全起见，再次确认不隐藏 body 和 html (虽然理论上 shouldKeepVisible 会排除)
+    // For safety, confirm again that body and html are not hidden (although theoretically shouldKeepVisible will exclude them)
     if (element !== document.body && element !== document.documentElement) {
         element.style.display = 'none';
         element.style.visibility = 'hidden';
     }
   });
 
-  // --- 5. 确保目标元素及其所有祖先可见 ---
-  // 由于之前的隐藏操作可能影响到目标元素的祖先，需要强制恢复它们的可见性
+  // --- 5. Ensure target element and all its ancestors are visible ---
+  // Previous hiding operations may affect ancestors of target element, need to forcefully restore their visibility
   let ancestor = contentElement;
-  while (ancestor && ancestor !== document.documentElement) { // 向上遍历直到<html>的父节点(null)
-    ancestor.style.display = ''; // 清除可能存在的 display:none
-    ancestor.style.visibility = 'visible'; // 确保可见
+  while (ancestor && ancestor !== document.documentElement) { // Traverse up until parent of <html> (null)
+    ancestor.style.display = ''; // Clear possible display:none
+    ancestor.style.visibility = 'visible'; // Ensure visible
 
-    // 恢复 body 和 html 的默认滚动行为 (如果之前被隐藏)
+    // Restore default scroll behavior of body and html (if previously hidden)
     if (ancestor === document.body || ancestor === document.documentElement) {
         ancestor.style.overflow = '';
     }
     ancestor = ancestor.parentElement;
   }
-  // 单独确保 html 元素可见 (循环到此结束)
+  // Ensure html element is separately visible (loop ends here)
   if (document.documentElement) {
       document.documentElement.style.display = '';
       document.documentElement.style.visibility = 'visible';
@@ -77,31 +77,31 @@
   }
 
 
-  // --- 6. 应用样式，美化并居中目标元素 ---
-  // 使用 Flexbox 在父元素上进行居中
+  // --- 6. Apply styles, beautify and center target element ---
+  // Use Flexbox to center on parent element
   const parentElement = contentElement.parentElement;
   if (parentElement) {
     parentElement.style.display = 'flex';
-    parentElement.style.justifyContent = 'center'; // 水平居中
-    parentElement.style.alignItems = 'flex-start';  // 垂直顶部对齐
-    parentElement.style.minHeight = '100vh';       // 父元素至少撑满视口高度
-    parentElement.style.padding = '40px 10px';     // 父元素上下内边距40px，左右10px
-    parentElement.style.boxSizing = 'border-box';  // padding 不增加父元素尺寸
-    parentElement.style.width = '100%';          // 父元素占满可用宽度
+    parentElement.style.justifyContent = 'center'; // Horizontal centering
+    parentElement.style.alignItems = 'flex-start';  // Vertical top alignment
+    parentElement.style.minHeight = '100vh';       // Parent element at least fills viewport height
+    parentElement.style.padding = '40px 10px';     // Parent element top/bottom padding 40px, left/right 10px
+    parentElement.style.boxSizing = 'border-box';  // Padding does not increase parent element size
+    parentElement.style.width = '100%';          // Parent element fills available width
   }
 
   // 设置目标元素自身样式
   Object.assign(contentElement.style, {
     display: 'block',
-    width: '90%',            // 稍微加宽一点以适应父元素的左右padding
+    width: '90%',            // Slightly wider to accommodate parent element left/right padding
     maxWidth: '800px',
-    margin: '0',             // 移除外边距，由父 Flexbox 控制
-    padding: '25px 30px',    // 内边距
+    margin: '0',             // Remove margin, controlled by parent Flexbox
+    padding: '25px 30px',    // Inner padding
     backgroundColor: 'white',
-    boxShadow: '0 3px 12px rgba(0,0,0,0.1)', // 调整阴影
-    border: '1px solid #eee', // 加个细边框
-    borderRadius: '4px',      // 轻微圆角
-    // 清理可能残留的定位和尺寸约束
+    boxShadow: '0 3px 12px rgba(0,0,0,0.1)', // Adjust shadow
+    border: '1px solid #eee', // Add thin border
+    borderRadius: '4px',      // Subtle rounded corners
+    // Clean up possible residual positioning and size constraints
     position: '',
     left: '',
     top: '',
@@ -111,5 +111,5 @@
     overflowY: ''
   });
 
-  console.log('麦吉 东方财富财富号 超净化脚本优化版运行完毕');
+  console.log('Maiji DongFang Caifuhao cleaner optimized script completed');
 })();

@@ -1,12 +1,12 @@
 # delightful_use/userscript_manager.py
 import asyncio
-import fnmatch # 引入 fnmatch 用于 URL 模式匹配
+import fnmatch # Import fnmatch for URL pattern matching
 import logging
-import re # 引入 re 模块
+import re # Import re module
 from pathlib import Path
-from typing import List, Optional, Dict, Any # 引入 Dict, Any
+from typing import List, Optional, Dict, Any # Import Dict, Any
 
-import aiofiles # 用于异步文件读取
+import aiofiles # For async file reading
 from delightful_use.userscript import Userscript
 
 logger = logging.getLogger(__name__)
@@ -16,63 +16,63 @@ DELIGHTFUL_MONKEY_DIR = Path(__file__).resolve().parent / "delightful_monkey"
 
 class UserscriptManager:
     """
-    管理油猴脚本 (Userscripts) 的加载、解析、缓存和匹配。
+    Manage loading, parsing, caching and matching of Userscripts (user scripts).
 
-    采用模块级单例模式。
+    Adopts module-level singleton pattern.
     """
     _instance: Optional['UserscriptManager'] = None
-    _lock = asyncio.Lock()  # 类锁，用于保护单例实例化过程
+    _lock = asyncio.Lock()  # Class lock for protecting singleton instantiation process
 
-    # 正则表达式用于解析 Userscript 元数据块
+    # Regular expression for parsing Userscript metadata block
     _METADATA_BLOCK_RE = re.compile(r"// ==UserScript==\s*(.*?)\s*// ==/UserScript==", re.DOTALL)
     _METADATA_LINE_RE = re.compile(r"// @(\S+)\s+(.*)")
 
     def __init__(self, userscript_dir: Path):
         """
-        私有构造函数。
+        Private constructor.
 
         Args:
-            userscript_dir: 存放油猴脚本 .js 文件的目录。
+            userscript_dir: Directory containing userscript .js files.
         """
         if not userscript_dir.exists() or not userscript_dir.is_dir():
-            logger.warning(f"油猴脚本目录不存在或不是一个目录: {userscript_dir}, 将不会加载任何脚本。")
-            # 允许目录不存在，只是不加载脚本
-            self._userscript_dir = None # 标记目录无效
+            logger.warning(f"Userscript directory does not exist or is not a directory: {userscript_dir}, will not load any scripts.")
+            # Allow directory to not exist, just don't load scripts
+            self._userscript_dir = None # Mark directory as invalid
         else:
             self._userscript_dir = userscript_dir
-        self._scripts: List[Userscript] = [] # 缓存解析后的脚本
-        self._load_lock = asyncio.Lock() # 用于保护加载过程的异步锁
-        self._initialized = False # 添加初始化标记
+        self._scripts: List[Userscript] = [] # Cache parsed scripts
+        self._load_lock = asyncio.Lock() # Async lock for protecting load process
+        self._initialized = False # Add initialization flag
 
     @classmethod
     async def get_instance(cls) -> 'UserscriptManager':
         """
-        获取 UserscriptManager 的单例实例。
+        Get singleton instance of UserscriptManager.
 
-        如果实例不存在，则异步创建它。
-        使用类锁确保线程/任务安全。
+        If instance doesn't exist, create it asynchronously.
+        Use class lock to ensure thread/task safety.
         """
         if cls._instance is None:
             async with cls._lock:
-                # 双重检查锁定，防止多个协程同时创建实例
+                # Double-checked locking to prevent multiple coroutines creating instance simultaneously
                 if cls._instance is None:
-                    # 假设 DELIGHTFUL_MONKEY_DIR 是在 app.paths 中定义的 Path 对象
+                    # Assume DELIGHTFUL_MONKEY_DIR is a Path object defined in app.paths
                     instance = cls(DELIGHTFUL_MONKEY_DIR)
-                    # 在实例创建后立即开始加载脚本
-                    # 注意：这里不在构造函数或 get_instance 中直接 await load_scripts
-                    # 而是让调用者决定何时加载，或者在 PageRegistry 初始化时加载
+                    # Start loading scripts immediately after instance creation
+                    # Note: Here we don't directly await load_scripts in constructor or get_instance
+                    # Rather let the caller decide when to load, or load when PageRegistry initializes
                     cls._instance = instance
         return cls._instance
 
     async def _parse_script_file(self, file_path: Path) -> Optional[Userscript]:
         """
-        解析单个油猴脚本文件。
+        Parse a single userscript file.
 
         Args:
-            file_path: .js 文件的路径。
+            file_path: Path to the .js file.
 
         Returns:
-            如果解析成功，返回 Userscript 对象，否则返回 None。
+            Returns Userscript object if parsing succeeds, otherwise returns None.
         """
         try:
             async with aiofiles.open(file_path, mode='r', encoding='utf-8') as f:
@@ -80,14 +80,14 @@ class UserscriptManager:
 
             metadata_match = self._METADATA_BLOCK_RE.search(content)
             if not metadata_match:
-                logger.warning(f"脚本文件缺少元数据块: {file_path}")
+                logger.warning(f"Script file missing metadata block: {file_path}")
                 return None
 
             metadata_content = metadata_match.group(1)
             metadata: Dict[str, Any] = {
                 "match_patterns": [],
                 "exclude_patterns": [],
-                "run_at": "document-end" # 默认值
+                "run_at": "document-end" # Default value
             }
             has_name = False
 
@@ -96,7 +96,7 @@ class UserscriptManager:
                 match = self._METADATA_LINE_RE.match(line)
                 if match:
                     key, value = match.groups()
-                    key = key.lower() # 统一小写处理
+                    key = key.lower() # Unified lowercase processing
                     value = value.strip()
 
                     if key == "match":
@@ -107,22 +107,22 @@ class UserscriptManager:
                         metadata[key] = value
                         has_name = True
                     elif key in ["version", "description", "run-at"]:
-                        # 只记录第一个出现的 tag (对于非列表类型)
-                        if key not in metadata or key in ["run-at"]: # run-at 以最后一个为准
+                        # Record only the first appearing tag (for non-list types)
+                        if key not in metadata or key in ["run-at"]: # run-at use last one
                              metadata[key] = value
-                    # 可以根据需要添加对其他元数据标签（如 @grant, @require）的处理
+                    # Can add processing for other metadata tags (e.g. @grant, @require) as needed
                     else:
-                        logger.debug(f"在 {file_path} 中发现未处理的元数据标签: @{key}")
+                        logger.debug(f"Unhandled metadata tag found in {file_path}: @{key}")
 
             if not has_name:
-                logger.warning(f"脚本文件缺少必需的 @name 标签: {file_path}")
+                logger.warning(f"Script file missing required @name tag: {file_path}")
                 return None
 
-            # 提取脚本主体内容 (元数据块之后的所有内容)
+            # Extract script body content (all content after metadata block)
             script_body = content[metadata_match.end():].strip()
             if not script_body:
-                 logger.warning(f"脚本文件缺少实际执行内容: {file_path}")
-                 # 允许没有脚本体？或者返回None？暂时允许。
+                 logger.warning(f"Script file missing actual execution content: {file_path}")
+                 # Allow no script body? Or return None? Temporarily allow.
                  # return None
 
             return Userscript(
@@ -137,46 +137,46 @@ class UserscriptManager:
             )
 
         except OSError as e:
-            logger.error(f"读取脚本文件失败: {file_path}, Error: {e}")
+            logger.error(f"Failed to read script file: {file_path}, Error: {e}")
             return None
-        except ValueError as e: # Userscript 的 __post_init__ 可能抛出 ValueError
-            logger.error(f"创建 Userscript 对象失败 ({file_path}): {e}")
+        except ValueError as e: # Userscript's __post_init__ might throw ValueError
+            logger.error(f"Failed to create Userscript object ({file_path}): {e}")
             return None
         except Exception as e:
-            logger.error(f"解析脚本文件时发生意外错误: {file_path}, Error: {e}")
+            logger.error(f"Unexpected error when parsing script file: {file_path}, Error: {e}")
             return None
 
     async def load_scripts(self):
         """
-        异步扫描脚本目录，解析所有 .js 文件并缓存结果。
+        Asynchronously scan script directory, parse all .js files and cache results.
 
-        使用锁确保同一时间只有一个加载操作在进行。
+        Use lock to ensure only one load operation at a time.
         """
-        # 如果目录无效，直接返回
+        # If directory is invalid, return directly
         if self._userscript_dir is None:
-            logger.info("油猴脚本目录无效，跳过脚本加载。")
-            self._initialized = True # 标记为已初始化（即使没有加载）
+            logger.info("Userscript directory is invalid, skip script loading.")
+            self._initialized = True # Mark as initialized (even if no load)
             return
 
-        # 防止重复初始化或并发加载
+        # Prevent duplicate initialization or concurrent loading
         async with self._load_lock:
             if self._initialized:
-                logger.debug("Userscripts 已经加载过，跳过。")
+                logger.debug("Userscripts already loaded, skip.")
                 return
 
-            logger.info(f"开始从 {self._userscript_dir} 加载油猴脚本...")
+            logger.info(f"Start loading userscripts from {self._userscript_dir}...")
             loaded_scripts: List[Userscript] = []
             tasks = []
 
-            # 使用 pathlib 的 rglob 查找所有 .js 文件
+            # Use pathlib's rglob to find all .js files
             try:
                  script_files = [f for f in self._userscript_dir.rglob("*.js") if f.is_file()]
             except Exception as e:
-                 logger.error(f"扫描油猴脚本目录失败: {self._userscript_dir}, Error: {e}")
-                 script_files = [] # 出错则不加载
+                 logger.error(f"Failed to scan userscript directory: {self._userscript_dir}, Error: {e}")
+                 script_files = [] # Do not load if error
 
             for file_path in script_files:
-                 # 为每个文件创建一个解析任务
+                 # Create a parsing task for each file
                  tasks.append(asyncio.create_task(self._parse_script_file(file_path)))
 
             if tasks:
@@ -184,82 +184,82 @@ class UserscriptManager:
                  for script in results:
                      if script:
                          loaded_scripts.append(script)
-                 logger.info(f"成功加载 {len(loaded_scripts)} 个油猴脚本。")
+                 logger.info(f"Successfully loaded {len(loaded_scripts)} userscripts.")
             else:
-                 logger.info("在指定目录中未找到油猴脚本文件。")
+                 logger.info("No userscript files found in the specified directory.")
 
 
-            self._scripts = loaded_scripts # 更新缓存
-            self._initialized = True # 标记初始化完成
+            self._scripts = loaded_scripts # Update cache
+            self._initialized = True # Mark initialization complete
 
     async def reload_scripts(self):
-         """强制重新加载所有脚本"""
-         async with self._load_lock: # 获取锁
-             self._initialized = False # 重置初始化标记
-             self._scripts.clear() # 清空缓存
-             logger.info("强制重新加载油猴脚本...")
-         await self.load_scripts() # 重新加载
+         """Force reload all scripts"""
+         async with self._load_lock: # Acquire lock
+             self._initialized = False # Reset initialization flag
+             self._scripts.clear() # Clear cache
+             logger.info("Force reload userscripts...")
+         await self.load_scripts() # Reload
 
     def get_matching_scripts(self, url: str, run_at: str = "document-end") -> List[Userscript]:
         """
-        根据 URL 和注入时机查找匹配的油猴脚本。
+        Find matching userscripts based on URL and injection timing.
 
         Args:
-            url: 当前页面的 URL。
-            run_at: 期望的脚本注入时机 (如 "document-end", "document-start")。
+            url: URL of the current page.
+            run_at: Expected script injection timing (e.g. "document-end", "document-start").
 
         Returns:
-            匹配的 Userscript 对象列表。
+            List of matching Userscript objects.
         """
         if not self._initialized:
-            logger.warning("Userscript manager 尚未初始化，无法获取匹配脚本。请先调用 load_scripts()")
-            # 或者可以在这里触发一次加载？取决于设计决策
-            # await self.load_scripts() # 如果需要自动加载
+            logger.warning("Userscript manager not yet initialized, cannot get matching scripts. Please call load_scripts() first.")
+            # Or trigger a loading here? Depends on design decision
+            # await self.load_scripts() # If auto-loading is needed
             return []
 
-        if not url: # 如果 URL 为空或 None，不进行匹配
+        if not url: # If URL is empty or None, don't match
             return []
 
         matching_scripts: List[Userscript] = []
         for script in self._scripts:
-            # 1. 检查注入时机是否匹配
+            # 1. Check if injection timing matches
             if script.run_at != run_at:
                 continue
 
-            # 2. 检查 URL 是否匹配 @match 规则
+            # 2. Check if URL matches @match rule
             is_matched = False
-            if not script.match_patterns: # 如果没有 @match 规则，默认不匹配任何页面
-                logger.debug(f"脚本 '{script.name}' 没有 @match 规则，跳过 URL: {url}")
+            if not script.match_patterns: # If no @match rule, don't match any page by default
+                logger.debug(f"Script '{script.name}' has no @match rule, skip URL: {url}")
                 continue
             for pattern in script.match_patterns:
-                # 使用 fnmatch 进行简单的通配符匹配
-                # 注意：这可能无法完全覆盖 Tampermonkey 的所有复杂匹配规则
-                # 但能处理常见的 * 通配符
+                # Use fnmatch for simple wildcard matching
+                # Note: This may not fully cover all complex matching rules in Tampermonkey
+                # But can handle common * wildcard
                 if fnmatch.fnmatch(url, pattern):
                     is_matched = True
-                    break # 匹配到任何一个 @match 即可
+                    break # Matching any one @match rule is enough
 
             if not is_matched:
-                continue # 如果没有匹配任何 @match 规则，则跳过此脚本
+                continue # If no @match rule matched, skip this script
 
-            # 3. 检查 URL 是否匹配 @exclude 规则
+            # 3. Check if URL matches @exclude rule
             is_excluded = False
             for pattern in script.exclude_patterns:
                 if fnmatch.fnmatch(url, pattern):
                     is_excluded = True
-                    break # 匹配到任何一个 @exclude 即可排除
+                    break # Matching any one @exclude rule is enough
 
             if is_excluded:
-                continue # 如果匹配了排除规则，则跳过此脚本
+                continue # If matched exclude rule, skip this script
 
-            # 4. 如果通过所有检查，则添加到结果列表
+            # 4. If pass all checks, add to result list
             matching_scripts.append(script)
-            logger.debug(f"URL '{url}' 匹配脚本 '{script.name}' (run_at={run_at})")
+            logger.debug(f"URL '{url}' matches script '{script.name}' (run_at={run_at})")
 
         return matching_scripts
 
-# 可以选择在这里创建单例实例，如果不需要异步获取的话
-# 但异步获取提供了更好的灵活性，特别是如果初始化涉及异步操作
+# Can optionally create singleton instance here if async retrieval is not needed
+# But async retrieval provides better flexibility, especially if initialization involves async operations
 # _userscript_manager_instance = UserscriptManager(DELIGHTFUL_MONKEY_DIR)
 # def get_userscript_manager():
 #     return _userscript_manager_instance

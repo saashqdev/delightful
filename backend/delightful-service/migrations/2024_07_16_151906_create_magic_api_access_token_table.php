@@ -19,27 +19,27 @@ class CreateDelightfulApiAccessTokenTable extends Migration
         Schema::create('delightful_api_access_tokens', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('access_token')->comment('accessToken');
-            $table->string('name')->comment('名称');
-            $table->string('models')->comment('模型id，多个用，分割')->nullable();
-            $table->string('ip_limit')->comment('限制ip，多个用，分割')->nullable();
-            $table->timestamp('expire_time')->comment('过期时间')->nullable();
-            $table->unsignedDecimal('total_amount', 40, 6)->comment('使用额度');
-            $table->unsignedDecimal('use_amount', 40, 6)->comment('使用额度')->default(0);
-            $table->string('organization_code')->comment('组织id');
-            $table->string('user_id')->comment('用户id');
-            $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('创建时间');
-            $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('修改时间')->nullable();
-            $table->timestamp('deleted_at')->comment('逻辑删除')->nullable();
-            $table->string('creator')->comment('创建人')->nullable();
-            $table->string('modifier')->comment('修改人');
-            // 唯一键索引
+            $table->string('name')->comment('Name');
+            $table->string('models')->comment('Model IDs, multiple separated by comma')->nullable();
+            $table->string('ip_limit')->comment('IP restrictions, multiple separated by comma')->nullable();
+            $table->timestamp('expire_time')->comment('Expiration time')->nullable();
+            $table->unsignedDecimal('total_amount', 40, 6)->comment('Total usage amount');
+            $table->unsignedDecimal('use_amount', 40, 6)->comment('Used amount')->default(0);
+            $table->string('organization_code')->comment('Organization ID');
+            $table->string('user_id')->comment('User ID');
+            $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('Created at');
+            $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('Updated at')->nullable();
+            $table->timestamp('deleted_at')->comment('Soft delete')->nullable();
+            $table->string('creator')->comment('Creator')->nullable();
+            $table->string('modifier')->comment('Modifier');
+            // Unique key index
             $table->unique('access_token');
-            // 以下的索引是为了数据统计
-            // userid索引
+            // Following indexes are for data statistics
+            // user_id index
             $table->index('user_id');
-            // creator索引
+            // creator index
             $table->index('creator');
-            // organization_code索引
+            // organization_code index
             $table->index('organization_code');
         });
     }

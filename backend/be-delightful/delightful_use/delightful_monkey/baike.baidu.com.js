@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         麦吉 百度百科 超净化
+// @name         Delightful Baidu Baike Ultra Clean
 // @namespace    https://dtyq.com/
 // @version      1.0
-// @description  清理百度百科页面，只保留主要内容区域，提供干净清爽的阅读体验
+// @description  Clean Baidu Baike pages, keep only main content area, provide a clean and refreshing reading experience
 // @author       cc, cc@dtyq.com
 // @match        *://baike.baidu.com/item/*
 // @grant        none
@@ -11,16 +11,16 @@
 (function() {
   'use strict';
 
-  // 找到目标元素
+  // Find target element
   const contentElement = document.querySelector('div[class^="mainContent_"]');
 
-  // 确保元素存在
+  // Ensure element exists
   if (!contentElement) {
-    console.error('未找到 mainContent_* 的元素');
+    console.error('Failed to find mainContent_* element');
     return;
   }
 
-  // 创建一个函数检查元素是否应该保留显示
+  // Create a function to check if an element should remain visible
   const shouldKeepVisible = (element) => {
     return element === contentElement ||
            element.contains(contentElement) ||
@@ -29,7 +29,7 @@
            element === document.documentElement;
   };
 
-  // 使用 TreeWalker API 高效遍历 DOM 树
+  // Use TreeWalker API to efficiently traverse DOM tree
   const walker = document.createTreeWalker(
     document.body,
     NodeFilter.SHOW_ELEMENT,
@@ -37,10 +37,10 @@
     false
   );
 
-  // 保存找到的需要隐藏的元素
+  // Save found elements that need to be hidden
   const elementsToHide = [];
 
-  // 开始遍历
+  // Start traversing
   let currentNode = walker.nextNode();
   while (currentNode) {
     if (!shouldKeepVisible(currentNode)) {
@@ -49,28 +49,28 @@
     currentNode = walker.nextNode();
   }
 
-  // 统一隐藏元素，减少重排
+  // Hide elements uniformly, reduce reflow
   elementsToHide.forEach(element => {
     element.style.display = 'none';
   });
 
-  // 确保目标元素可见
+  // Ensure target element is visible
   contentElement.style.display = 'block';
 
-  // 确保从body到目标元素的路径上所有元素可见，但不影响滚动
+  // Ensure all elements on path from body to target element are visible, without affecting scrolling
   let parent = contentElement.parentElement;
   while (parent) {
     parent.style.display = '';
     parent = parent.parentElement;
   }
 
-  // 确保 body 和 html 可以正常滚动
+  // Ensure body and html can scroll normally
   document.body.style.overflow = 'auto';
   document.documentElement.style.overflow = 'auto';
   document.body.style.height = 'auto';
   document.documentElement.style.height = 'auto';
 
-  // 创建一个容器来包裹内容
+  // Create a container to wrap content
   const container = document.createElement('div');
   container.style.width = '100%';
   container.style.maxWidth = '800px';
@@ -79,12 +79,12 @@
   container.style.backgroundColor = '#fff';
   container.style.boxSizing = 'border-box';
 
-  // 将内容移动到新容器中
+  // Move content to new container
   const parent2 = contentElement.parentElement;
   parent2.insertBefore(container, contentElement);
   container.appendChild(contentElement);
 
-  // 重置内容样式，使用相对定位而非绝对定位
+  // Reset content styles, use relative positioning rather than absolute
   contentElement.style.position = 'relative';
   contentElement.style.top = 'auto';
   contentElement.style.left = 'auto';
@@ -92,7 +92,7 @@
   contentElement.style.zIndex = '9999';
   contentElement.style.width = '100%';
 
-  // 清理页面其他位置可能干扰滚动的样式
+  // Clean up styles elsewhere on the page that might interfere with scrolling
   const elementsWithFixedPosition = document.querySelectorAll('[style*="position: fixed"]');
   elementsWithFixedPosition.forEach(element => {
     if (!shouldKeepVisible(element)) {

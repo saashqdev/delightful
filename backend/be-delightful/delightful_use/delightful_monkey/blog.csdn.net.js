@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         麦吉 CSDN博客 超净化
+// @name         Delightful CSDN Blog Ultra Clean
 // @namespace    https://dtyq.com/
 // @version      1.0
-// @description  清理CSDN博客页面，去除广告、登录提示等干扰内容，提供纯净的阅读体验
+// @description  Clean up CSDN blog pages, remove ads, login prompts and other distracting content, provide pure reading experience
 // @author       cc, cc@dtyq.com
 // @match        *://blog.csdn.net/*/article/details/*
 // @grant        none
@@ -11,17 +11,17 @@
 (function() {
   'use strict';
 
-  // 定义一个用于清理CSDN博客页面的函数
+  // Define a function to clean up CSDN blog pages
   function cleanupCSDN() {
-    // 获取主要内容区域
+    // Get the main content area
     const mainContent = document.querySelector("#mainBox > main > div.blog-content-box");
 
     if (!mainContent) {
-      console.log("未找到主要内容区域，可能不在CSDN博客页面上");
+      console.log("Main content area not found, may not be on CSDN blog page");
       return;
     }
 
-    // 创建一个函数检查元素是否应该保留显示
+    // Create a function to check if an element should be kept visible
     const shouldKeepVisible = (element) => {
       return element === mainContent ||
              element.contains(mainContent) ||
@@ -30,7 +30,7 @@
              element === document.documentElement;
     };
 
-    // 使用 TreeWalker API 高效遍历 DOM 树
+    // Use TreeWalker API to efficiently traverse the DOM tree
     const walker = document.createTreeWalker(
       document.body,
       NodeFilter.SHOW_ELEMENT,
@@ -38,10 +38,10 @@
       false
     );
 
-    // 保存找到的需要隐藏的元素
+    // Save elements found that need to be hidden
     const elementsToHide = [];
 
-    // 开始遍历
+    // Start traversal
     let currentNode = walker.nextNode();
     while (currentNode) {
       if (!shouldKeepVisible(currentNode)) {
@@ -50,29 +50,29 @@
       currentNode = walker.nextNode();
     }
 
-    // 统一隐藏元素，减少重排
+    // Hide elements uniformly to reduce reflow
     elementsToHide.forEach(element => {
       element.style.display = 'none';
     });
 
-    // 确保目标元素可见
+    // Ensure target element is visible
     mainContent.style.display = 'block';
 
-    // 确保从body到目标元素的路径上所有元素可见
+    // Ensure all elements on the path from body to target element are visible
     let parent = mainContent.parentElement;
     while (parent) {
       parent.style.display = 'block';
       parent = parent.parentElement;
     }
 
-    // 确保 body 和 html 可以正常滚动
+    // Ensure body and html can scroll normally
     document.body.style.overflow = 'auto';
     document.documentElement.style.overflow = 'auto';
     document.body.style.height = 'auto';
     document.documentElement.style.height = 'auto';
     document.body.style.backgroundColor = '#f5f5f5';
 
-    // 创建一个容器来包裹内容
+    // Create a container to wrap the content
     const container = document.createElement('div');
     container.style.width = '100%';
     container.style.maxWidth = '900px';
@@ -82,12 +82,12 @@
     container.style.boxSizing = 'border-box';
     container.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
 
-    // 将内容移动到新容器中
+    // Move content to new container
     const parent2 = mainContent.parentElement;
     parent2.insertBefore(container, mainContent);
     container.appendChild(mainContent);
 
-    // 重置内容样式，使用相对定位而非绝对定位
+    // Reset content styles, use relative positioning instead of absolute
     mainContent.style.position = 'relative';
     mainContent.style.left = 'auto';
     mainContent.style.transform = 'none';
@@ -97,13 +97,13 @@
     mainContent.style.padding = '0';
     mainContent.style.boxShadow = 'none';
 
-    // 确保内容中的所有元素都可见
+    // Ensure all elements in content are visible
     const allContentElements = mainContent.querySelectorAll('*');
     allContentElements.forEach(element => {
       element.style.display = '';
     });
 
-    // 清理页面其他位置可能干扰滚动的样式
+    // Clean up styles that may interfere with scrolling elsewhere on the page
     const elementsWithFixedPosition = document.querySelectorAll('[style*="position: fixed"]');
     elementsWithFixedPosition.forEach(element => {
       if (!shouldKeepVisible(element)) {
@@ -111,16 +111,16 @@
       }
     });
 
-    console.log("CSDN页面已净化，仅显示主要内容");
+    console.log("CSDN page has been cleaned, showing main content only");
   }
 
-  // 在DOM加载完成后执行清理
+  // Execute cleanup after DOM loading is complete
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", cleanupCSDN);
   } else {
     cleanupCSDN();
   }
 
-  // 在页面完全加载后再次执行，以应对延迟加载的元素
+  // Execute again after page fully loads to handle delayed-loaded elements
   window.addEventListener("load", cleanupCSDN);
 })();

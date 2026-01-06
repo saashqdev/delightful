@@ -32,7 +32,7 @@ class ValueMethodTest extends BaseTestCase
                     "const_value": [
                         {
                             "type": "input",
-                            "value": "世界",
+                            "value": "planet",
                             "name": "",
                             "args": null
                         }
@@ -56,7 +56,7 @@ class ValueMethodTest extends BaseTestCase
                     "const_value": [
                         {
                             "type": "input",
-                            "value": "hello 世界",
+                            "value": "hello planet",
                             "name": "",
                             "args": null
                         }
@@ -83,6 +83,6 @@ class ValueMethodTest extends BaseTestCase
 JSON, true);
         $builder = new ValueBuilder();
         $value = $builder->build($array);
-        $this->assertEquals(str_replace('世界', 'world', 'hello 世界'), $value->getResult());
+        $this->assertEquals(str_replace('planet', 'world', 'hello planet'), $value->getResult());
     }
 }

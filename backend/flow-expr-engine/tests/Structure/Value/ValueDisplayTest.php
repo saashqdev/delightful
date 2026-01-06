@@ -30,17 +30,17 @@ class ValueDisplayTest extends BaseTestCase
             "member_value": [
                 {
                     "id": "430379931150888960",
-                    "name": "蔡伦多",
+                    "name": "Cai Lunduo",
                     "avatar": "",
-                    "position": "管培生",
+                    "position": "Management trainee",
                     "user_groups": [],
                     "email": "team@dtyq.cn",
                     "job_number": "",
                     "departments": [
                         {
                             "id": "552075023930417156",
-                            "name": "技术中心",
-                            "path_name": "技术中心"
+                            "name": "Tech Center",
+                            "path_name": "Tech Center"
                         }
                     ]
                 }
@@ -54,7 +54,7 @@ JSON, true);
         $value = $builder->build($array);
 
         $this->assertEquals($array, $value->toArray());
-        $this->assertEquals('蔡伦多', $value->getResult()[0]['name']);
+        $this->assertEquals('Cai Lunduo', $value->getResult()[0]['name']);
     }
 
     public function testMemberWithFields()
@@ -71,7 +71,7 @@ JSON, true);
             "member_value": [
                 {
                     "id": "430379931150888960",
-                    "name": "蔡伦多",
+                    "name": "Cai Lunduo",
                     "type": "user",
                     "avatar": ""
                 },
@@ -83,7 +83,7 @@ JSON, true);
                 },
                 {
                     "id": "430379931150888961",
-                    "name": "蔡伦多",
+                    "name": "Cai Lunduo",
                     "type": "department",
                     "avatar": ""
                 }
@@ -100,19 +100,19 @@ JSON, true);
         $this->assertEquals([
             [
                 'id' => '430379931150888960',
-                'name' => '蔡伦多',
+                'name' => 'Cai Lunduo',
                 'type' => 'user',
                 'avatar' => '',
             ],
             [
                 'id' => '111222',
-                'name' => '蔡伦多',
+                'name' => 'Cai Lunduo',
                 'type' => 'user',
                 'avatar' => 'xx',
             ],
             [
                 'id' => '430379931150888961',
-                'name' => '蔡伦多',
+                'name' => 'Cai Lunduo',
                 'type' => 'department',
                 'avatar' => '',
             ],
@@ -120,7 +120,7 @@ JSON, true);
             '9527' => [
                 'user' => [
                     'id' => '111222',
-                    'name' => '蔡伦多',
+                    'name' => 'Cai Lunduo',
                     'type' => 'user',
                     'avatar' => 'xx',
                 ],
@@ -275,7 +275,7 @@ JSON, true);
             "name": "message",
             "args": null,
             "department_names_value": [
-                "技术中心", "商品中心"
+                "Tech Center", "Product Center"
             ]
         }
     ],
@@ -286,7 +286,7 @@ JSON, true);
         $value = $builder->build($array);
 
         $this->assertEquals($array, $value->toArray());
-        $this->assertEquals(['技术中心', '商品中心'], $value->getResult());
+        $this->assertEquals(['Tech Center', 'Product Center'], $value->getResult());
     }
 
     public function testNames()
@@ -303,11 +303,11 @@ JSON, true);
             "names_value": [
                 {
                     "id": "552075023930417156",
-                    "name": "技术中心"
+                    "name": "Tech Center"
                 },
                 {
                    "id": "552075023930417157",
-                   "name": "技术中心1"
+                   "name": "Tech Center 1"
                 },
                 {
                    "type": "fields",
@@ -324,13 +324,13 @@ JSON, true);
 
         $this->assertEquals($array, $value->toArray());
         $this->assertEquals([
-            ['id' => '552075023930417156', 'name' => '技术中心'],
-            ['id' => '552075023930417157', 'name' => '技术中心1'],
-            ['id' => '552075023930417158', 'name' => '技术中心2'],
+            ['id' => '552075023930417156', 'name' => 'Tech Center'],
+            ['id' => '552075023930417157', 'name' => 'Tech Center 1'],
+            ['id' => '552075023930417158', 'name' => 'Tech Center 2'],
         ], $value->getResult([
             '9527' => [
                 'name' => [
-                    'id' => '552075023930417158', 'name' => '技术中心2',
+                    'id' => '552075023930417158', 'name' => 'Tech Center 2',
                 ],
             ],
         ]));

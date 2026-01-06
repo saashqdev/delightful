@@ -37,11 +37,11 @@ class BaseTestCase extends TestCase
         ApplicationContext::setContainer($container);
 
         if (! ComponentContext::hasSdkContainer()) {
-            // 注册 SdkContainer
+            // Register SdkContainer
             ComponentContext::register($this->createSdkContainer());
         }
 
-        // 注册表达式运行器
+        // Register expression runner
         CodeRunner::register($this->getPHPSandboxRuleEngine());
     }
 
@@ -66,7 +66,7 @@ class BaseTestCase extends TestCase
                 ],
                 'php_sandbox_functions' => [
                     [
-                        'group' => '字符串',
+                        'group' => 'String',
                         'functions' => [
                             'str_contains', 'str_replace', 'mb_strlen', 'mb_str_pad', 'explode',
                             'preg_replace', 'preg_split', 'str_repeat', 'str_split',
@@ -77,7 +77,7 @@ class BaseTestCase extends TestCase
                         ],
                     ],
                     [
-                        'group' => '数组',
+                        'group' => 'Array',
                         'functions' => [
                             'array_count_values', 'array_fill', 'array_fill_keys', 'array_filter', 'array_map', 'array_reduce',
                             'array_replace', 'array_replace_recursive', 'end', 'current', 'key', 'list', 'array_key_exists', 'array_keys',
@@ -88,7 +88,7 @@ class BaseTestCase extends TestCase
                         ],
                     ],
                     [
-                        'group' => '数学运算',
+                        'group' => 'Math Operation',
                         'functions' => [
                             'abs', 'ceil', 'floor', 'round', 'sqrt', 'pow', 'exp', 'log', 'log10', 'sin', 'cos', 'tan', 'asin', 'acos',
                             'atan', 'atan2', 'pi', 'fmod', 'rand', 'mt_rand', 'mt_srand', 'random_int', 'random_bytes', 'min', 'max', 'intdiv',
@@ -96,29 +96,29 @@ class BaseTestCase extends TestCase
                         ],
                     ],
                     [
-                        'group' => '序列化',
+                        'group' => 'Serialization',
                         'functions' => [
                             'json_encode', 'json_decode', 'serialize', 'unserialize',
                         ],
                     ],
                     [
-                        'group' => '加密',
+                        'group' => 'Encryption',
                         'functions' => ['md5', 'sha1', 'hash', 'password_hash', 'password_verify', 'password_needs_rehash', 'hash_hmac'],
                     ],
                     [
-                        'group' => '日期/时间',
+                        'group' => 'Date/Time',
                         'functions' => ['date', 'time', 'strtotime', 'microtime', 'gmdate', 'idate', 'getdate', 'date_default_timezone_set', 'date_default_timezone_get',
                             'mktime', 'localtime', 'checkdate', GetISO8601Date::class, GetISO8601DateTime::class, GetISO8601DateTimeWithOffset::class, GetRFC1123DateTime::class,
                         ],
                     ],
                     [
-                        'group' => '类型判断',
+                        'group' => 'Type Check',
                         'functions' => [
                             'is_array', 'is_numeric', 'is_string', 'is_int', 'is_float', 'is_bool', 'is_object', 'is_null', 'gettype',
                         ],
                     ],
                     [
-                        'group' => 'URL 操作',
+                        'group' => 'URL Operation',
                         'functions' => [
                             'parse_url', 'http_build_query', 'parse_str', 'urlencode', 'urldecode', 'rawurlencode', 'rawurldecode',
                         ],

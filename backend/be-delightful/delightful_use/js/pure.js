@@ -1,124 +1,124 @@
 /**
- * DelightfulPure - 让你的网页变得纯净，自动关闭干扰元素
+ * DelightfulPure - Make your web pages clean by automatically closing disruptive elements
  *
- * 功能说明：
- * 此脚本用于自动检测并关闭网页中的各类弹窗、横幅、通知和Cookie提示等干扰元素。
- * 适用于绝大多数网站的常见弹窗类型，包括但不限于：
- * - Cookie 同意提示
- * - 广告弹窗
- * - 登录提示
- * - 新闻通知
- * - 各类模态窗口
+ * Features:
+ * This script automatically detects and closes various popups, banners, notifications, and cookie prompts on web pages.
+ * Applicable to common popup types on most websites, including but not limited to:
+ * - Cookie consent prompts
+ * - Advertisement popups
+ * - Login prompts
+ * - News notifications
+ * - Various modal windows
  *
- * 工作原理：
- * 1. 在DOM加载完成后，脚本会定期扫描页面元素
- * 2. 通过多种标识符（文本内容、类名、属性值等）识别可能的关闭按钮
- * 3. 对符合条件的元素执行点击操作
- * 4. 包含两次扫描检查，确保处理延迟加载的弹窗
+ * How it works:
+ * 1. After DOM is loaded, the script periodically scans page elements
+ * 2. Identifies possible close buttons through various identifiers (text content, class names, attribute values, etc.)
+ * 3. Performs click operations on qualifying elements
+ * 4. Includes two scan checks to ensure handling of delayed-loading popups
  *
- * 配置与扩展：
- * - 所有检测规则都在 config 对象中定义，可根据需要扩展
- * - 可以调整关键词列表、类名匹配、属性检查等配置项
- * - 检查间隔时间可通过 checkIntervalMs 修改
- * - 支持自定义规则集，针对特定网站设置特殊处理规则
+ * Configuration and Extension:
+ * - All detection rules are defined in the config object and can be extended as needed
+ * - You can adjust keyword lists, class name matching, attribute checking, and other configuration items
+ * - Check interval time can be modified via checkIntervalMs
+ * - Supports custom rule sets for special handling rules for specific websites
  *
- * 使用方法：
- * 1. 将此脚本添加到网页中
- * 2. 脚本会自动运行并处理弹窗
- * 3. 无需用户干预
+ * Usage:
+ * 1. Add this script to the web page
+ * 2. The script will run automatically and handle popups
+ * 3. No user intervention required
  *
- * 注意事项：
- * - 脚本使用自执行函数包装，不会污染全局命名空间
- * - 所有操作都在控制台中记录，便于调试
- * - 设计时考虑了性能和兼容性，避免过度查询DOM
+ * Notes:
+ * - Script uses self-executing function wrapper, won't pollute global namespace
+ * - All operations are logged in the console for easy debugging
+ * - Designed with performance and compatibility in mind, avoiding excessive DOM queries
  */
 
 (function () {
     /**
-     * 配置项：定义用于查找元素的关键词和属性
+     * Configuration: Define keywords and attributes for finding elements
      */
     const config = {
-        // 两次检查之间的延迟时间（毫秒）
+        // Delay time between two checks (milliseconds)
         checkIntervalMs: 200,
 
-        // 文本内容或属性值中表示"关闭"或"跳过"意图的关键词 (小写)
-        closeKeywords: ['skip', '跳过', 'close', '关闭', 'dismiss'],
-        // 文本内容或属性值中表示"接受"或"同意"意图的关键词 (小写)
-        acceptKeywords: ['accept', 'agree', '同意', 'got it', '我知道了'],
-        // 与 acceptKeywords 结合使用的关键词 (例如 "accept cookie", "accept all")
+        // Keywords indicating "close" or "skip" intent in text content or attribute values (lowercase)
+        closeKeywords: ['skip', 'close', 'dismiss'],
+        // Keywords indicating "accept" or "agree" intent in text content or attribute values (lowercase)
+        acceptKeywords: ['accept', 'agree', 'got it'],
+        // Keywords used in combination with acceptKeywords (e.g. "accept cookie", "accept all")
         acceptModifiers: ['cookie', 'all'],
-        // 需要检查的属性列表及其对应的关键词
+        // List of attributes to check and their corresponding keywords
         attributesToCheck: {
-            'value': ['关闭'], // value 属性通常是精确匹配
-            'aria-label': ['关闭', 'close', 'dismiss', '×', 'x'],
-            'title': ['关闭', 'close', 'dismiss', '×', 'x']
+            'value': ['close'], // value attribute is usually exact match
+            'aria-label': ['close', 'dismiss', '×', 'x'],
+            'title': ['close', 'dismiss', '×', 'x']
         },
-        // class 名称中可能包含的指示性关键词 (小写)
+        // Indicative keywords that may be contained in class names (lowercase)
         classKeywords: ['close', 'dismiss', 'accept', 'cookie', 'modal', '__close', '-close', 'overlay-dismiss', 'popup-close', 'popup__close'],
-        // 排除的类名关键词，包含这些关键词的元素会被忽略（避免误点击普通内容）
-        excludeClassKeywords: ['banner-left', 'banner-item', 'banner-info', 'info', 'content', 'navigation', 'menu', 'nav-item', 'article', 'popup-login', 'login', 'register', '登录', '注册'],
-        // 排除的文本内容关键词，包含这些文本的元素会被忽略
-        excludeTextKeywords: ['登录', '注册', 'login', 'register', 'sign in', 'sign up'],
+        // Excluded class name keywords, elements containing these keywords will be ignored (to avoid misclicking normal content)
+        excludeClassKeywords: ['banner-left', 'banner-item', 'banner-info', 'info', 'content', 'navigation', 'menu', 'nav-item', 'article', 'popup-login', 'login', 'register'],
+        // Excluded text content keywords, elements containing these texts will be ignored
+        excludeTextKeywords: ['login', 'register', 'sign in', 'sign up'],
 
-        // 自定义规则集：针对特定网站的专用规则
+        // Custom rule set: Dedicated rules for specific websites
         customRules: [
             {
-                // CSDN博客规则 - 关闭登录弹窗
+                // CSDN blog rule - close login popup
                 domain: 'blog.csdn.net',
                 selectors: [
                     '#passportbox > img',
                     'body > div.passport-login-tip-container.false > span'
                 ],
-                description: 'CSDN博客登录弹窗关闭按钮'
+                description: 'CSDN blog login popup close button'
             }
-            // 可以继续添加更多网站的规则
+            // More website rules can be added
         ]
     };
 
-    // 执行控制变量
-    const maxClicks = 2;            // 最多允许的点击次数
-    const totalDurationMs = 5000;   // 总检查时长 (毫秒)
+    // Execution control variables
+    const maxClicks = 2;            // Maximum number of clicks allowed
+    const totalDurationMs = 5000;   // Total check duration (milliseconds)
 
     /**
-     * 获取当前网站的域名
-     * @returns {string} 当前网站的域名
+     * Get the current website domain
+     * @returns {string} The current website domain
      */
     function getCurrentDomain() {
         return window.location.hostname;
     }
 
     /**
-     * 检查并应用自定义规则
-     * @returns {boolean} 如果成功触发了自定义规则点击，返回true，否则返回false
+     * Check and apply custom rules
+     * @returns {boolean} Returns true if custom rule click was successfully triggered, otherwise returns false
      */
     function applyCustomRules() {
         const currentDomain = getCurrentDomain();
 
-        // 查找匹配当前域名的自定义规则
+        // Find custom rules matching the current domain
         for (const rule of config.customRules) {
             if (currentDomain.includes(rule.domain)) {
-                console.log(`找到匹配当前域名(${currentDomain})的自定义规则:`, rule.description);
+                console.log(`Found custom rule matching current domain (${currentDomain}):`, rule.description);
 
-                // 使用自定义选择器查找元素
+                // Use custom selectors to find elements
                 const elements = rule.selectors.map(selector => {
                     const element = document.querySelector(selector);
                     if (!element) {
-                        console.log(`自定义规则选择器未找到元素:`, selector);
+                        console.log(`Custom rule selector did not find element:`, selector);
                     }
                     return element;
-                }).filter(element => element !== null); // 过滤掉未找到的元素
+                }).filter(element => element !== null); // Filter out elements not found
 
                 if (elements.length === 0) {
-                    console.log(`自定义规则的所有选择器都未找到可用元素`);
-                    continue; // 继续检查下一条规则
+                    console.log(`All selectors for custom rule did not find any available elements`);
+                    continue; // Continue checking the next rule
                 }
 
-                // 遍历找到的元素，尝试点击第一个可见的元素
+                // Iterate through found elements, try to click the first visible element
                 for (const element of elements) {
                     if (typeof element.click === 'function' && isElementVisible(element)) {
-                        console.log(`应用自定义规则，点击元素:`, element);
+                        console.log(`Applying custom rule, clicking element:`, element);
                         try {
-                            // 创建并分发 mousedown 事件
+                            // Create and dispatch mousedown event
                             const mouseDownEvent = new MouseEvent('mousedown', {
                                 bubbles: true,
                                 cancelable: true,
@@ -126,7 +126,7 @@
                             });
                             element.dispatchEvent(mouseDownEvent);
 
-                            // 创建并分发 mouseup 事件
+                            // Create and dispatch mouseup event
                             const mouseUpEvent = new MouseEvent('mouseup', {
                                 bubbles: true,
                                 cancelable: true,
@@ -134,7 +134,7 @@
                             });
                             element.dispatchEvent(mouseUpEvent);
 
-                            // 创建并分发 click 事件
+                            // Create and dispatch click event
                             const clickEvent = new MouseEvent('click', {
                                 bubbles: true,
                                 cancelable: true,
@@ -142,67 +142,67 @@
                             });
                             element.dispatchEvent(clickEvent);
 
-                            console.log(`自定义规则元素点击成功。`);
-                            return true; // 点击成功，返回true
+                            console.log(`Custom rule element click successful.`);
+                            return true; // Click successful, return true
                         } catch (clickError) {
-                            console.error(`应用自定义规则点击元素时出错:`, element, clickError);
+                            console.error(`Error clicking element when applying custom rule:`, element, clickError);
                         }
                     } else {
-                        console.log(`元素找到但不可见或不可点击`);
+                        console.log(`Element found but not visible or clickable`);
                     }
                 }
 
-                console.log(`已尝试所有选择器，但没有找到可见且可点击的元素`);
+                console.log(`Tried all selectors but did not find any visible and clickable element`);
             }
         }
 
-        return false; // 没有找到匹配的规则或没有成功点击任何元素
+        return false; // No matching rules found or no elements successfully clicked
     }
 
     /**
-     * 检查单个元素是否符合自动关闭/接受的条件
-     * @param {Element} element 要检查的元素
-     * @returns {boolean} 如果元素符合条件则返回 true
+     * Check if a single element meets the criteria for auto-close/accept
+     * @param {Element} element The element to check
+     * @returns {boolean} Returns true if the element meets the criteria
      */
     function elementMatchesCriteria(element) {
         const text = (element.textContent || '').trim().toLowerCase();
         const classListStr = Array.from(element.classList).join(' ').toLowerCase();
 
-        // 0. 首先检查是否包含排除类名，如果有则直接排除
+        // 0. First check if it contains exclude class keywords, if so, exclude directly
         if (config.excludeClassKeywords.some(kw => classListStr.includes(kw))) {
             return false;
         }
 
-        // 0.1 检查是否包含排除文本内容，如果有则直接排除
+        // 0.1 Check if it contains exclude text keywords, if so, exclude directly
         if (config.excludeTextKeywords && config.excludeTextKeywords.some(kw => text.includes(kw))) {
             return false;
         }
 
-        // 1. 检查文本内容
+        // 1. Check text content
         if (config.closeKeywords.some(kw => text.includes(kw))) return true;
         const isAcceptKeywordMatch = config.acceptKeywords.some(kw => text.includes(kw));
         if (isAcceptKeywordMatch) {
-            // 检查是否包含修饰词 (cookie/all) 或只是单独的接受词
+            // Check if it contains modifiers (cookie/all) or just a standalone accept word
             if (config.acceptModifiers.some(mod => text.includes(mod)) || !text.includes(' ')) {
                 return true;
             }
-            // 精确匹配单个接受词 (如按钮只有 "Accept")
+            // Exact match for single accept word (e.g., button only has "Accept")
             if (config.acceptKeywords.some(akw => text === akw)) return true;
         }
 
-        // 2. 检查指定属性
+        // 2. Check specified attributes
         for (const attrName in config.attributesToCheck) {
             const attrValue = (element.getAttribute(attrName) || '');
             const keywords = config.attributesToCheck[attrName];
-            const checkValue = (attrName === 'value') ? attrValue : attrValue.toLowerCase(); // value 精确匹配，其他小写比较
+            const checkValue = (attrName === 'value') ? attrValue : attrValue.toLowerCase(); // value exact match, others lowercase comparison
             if (keywords.some(kw => checkValue.includes(kw))) {
                 return true;
             }
         }
 
-        // 3. 检查 Class 列表 - 更精确的匹配以避免误判
+        // 3. Check class list - more precise matching to avoid false positives
         if (config.classKeywords.some(kw => {
-            // 只匹配完整的类名部分，例如 "close" 匹配 "btn-close" 和 "close-btn"，但不匹配 "closeable"
+            // Only match complete class name parts, e.g., "close" matches "btn-close" and "close-btn", but not "closeable"
             const parts = classListStr.split(' ');
             return parts.some(part =>
                 part === kw ||
@@ -216,79 +216,79 @@
     }
 
     /**
-     * 检查元素及其所有祖先元素在DOM中是否实际可见并且尺寸大于0。
-     * 关键点：一个元素只有在其所有祖先元素也都可见（未被CSS隐藏）时，才算真正可见。
-     * @param {Element | null} el 要检查的元素
-     * @returns {boolean} 如果元素及其所有祖先都被认为是可见的，则返回 true
+     * Check if an element and all its ancestor elements are actually visible in the DOM and have size greater than 0.
+     * Key point: An element is only considered truly visible when all its ancestor elements are also visible (not hidden by CSS).
+     * @param {Element | null} el The element to check
+     * @returns {boolean} Returns true if the element and all its ancestors are considered visible
      */
     function isElementVisible(el) {
         if (!el) {
-            return false; // 无效元素
+            return false; // Invalid element
         }
 
-        // 检查元素自身及其祖先
+        // Check the element itself and its ancestors
         let elementToCheck = el;
-        // 向上遍历DOM树，直到document.body或没有父元素为止
+        // Traverse up the DOM tree until document.body or no parent element
         while (elementToCheck && elementToCheck !== document.body) {
             const style = window.getComputedStyle(elementToCheck);
 
-            // 检查 CSS 可见性属性：display, visibility, opacity
-            // 任何一级祖先的这些属性为隐藏状态，则目标元素实际不可见
+            // Check CSS visibility properties: display, visibility, opacity
+            // If any ancestor level has these properties in hidden state, the target element is actually not visible
             if (style.display === 'none' || style.visibility === 'hidden' || parseFloat(style.opacity) === 0) {
-                // 无需在此处打印日志，调用者可以根据需要打印
-                return false; // 元素或其祖先被 CSS 隐藏
+                // No need to print log here, caller can print as needed
+                return false; // Element or its ancestor is hidden by CSS
             }
 
-            // 检查尺寸和offsetParent：只对原始目标元素进行此检查
-            // 原因：父元素的尺寸为0（例如height: 0）不一定意味着子元素不可见（如 overflow: visible）
-            // 但目标元素自身必须有实际尺寸且在布局流中（offsetParent !== null）才算可见
+            // Check size and offsetParent: only perform this check on the original target element
+            // Reason: Parent element having size 0 (e.g., height: 0) doesn't necessarily mean child element is not visible (e.g., overflow: visible)
+            // But the target element itself must have actual size and be in the layout flow (offsetParent !== null) to be considered visible
             if (elementToCheck === el) {
                 const rect = el.getBoundingClientRect();
-                // 检查宽度、高度是否大于0，以及元素是否在渲染树中 (offsetParent不为null)
+                // Check if width, height are greater than 0, and if element is in the render tree (offsetParent not null)
                 if (!(rect.width > 0 && rect.height > 0 && el.offsetParent !== null)) {
-                    // console.log("元素自身不可见 (尺寸/offsetParent):", el, rect); // 调试时可取消注释
+                    // console.log("Element itself not visible (size/offsetParent):", el, rect); // Uncomment when debugging
                     return false;
                 }
             }
 
-            // 移动到父元素继续检查
+            // Move to parent element to continue checking
             elementToCheck = elementToCheck.parentElement;
         }
 
-        // 如果循环完成，说明从元素到body的路径上所有元素CSS可见性OK，且元素自身尺寸OK
+        // If loop completes, it means all elements in the path from element to body have OK CSS visibility, and element itself has OK size
         return true;
     }
 
     /**
-     * 单次检查并尝试关闭干扰元素。
-     * 查找页面上第一个可见且符合条件的关闭/接受按钮/链接，并尝试点击。
-     * @returns {boolean} 如果成功触发了一次点击，则返回 true，否则返回 false。
+     * Single check and attempt to close annoying elements.
+     * Find the first visible and qualifying close/accept button/link on the page and try to click it.
+     * @returns {boolean} Returns true if a click was successfully triggered, otherwise returns false.
      */
     function autoCloseAnnoyances() {
-        // console.log("执行单次检查..."); // 减少日志量
+        // console.log("Executing single check..."); // Reduce log volume
 
         try {
-            // 首先尝试应用自定义规则
+            // First try to apply custom rules
             if (applyCustomRules()) {
-                return true; // 如果自定义规则成功应用，直接返回成功
+                return true; // If custom rule successfully applied, return success directly
             }
 
-            // 1. 选择候选元素 - 更精确的选择器，避免选择登录按钮等
+            // 1. Select candidate elements - more precise selectors to avoid selecting login buttons etc.
             const candidateSelector = 'button, [role="button"], a[class*="close"], a[class*="dismiss"], a[class*="cookie"], a[class*="popup-close"], a[class*="popup__close"], span[class*="close"], span[title*="close"], span[aria-label*="close"], div[class*="close"], div[title*="close"], [class*="close-icon"], [class*="closeButton"]';
             const candidateElements = document.querySelectorAll(candidateSelector);
 
-            // console.log(`找到 ${candidateElements.length} 个候选元素。`); // 减少日志量
+            // console.log(`Found ${candidateElements.length} candidate elements.`); // Reduce log volume
 
-            // 2. 遍历并查找第一个可见且符合条件的元素
+            // 2. Iterate and find the first visible and qualifying element
             for (const element of candidateElements) {
-                // 检查元素是否有效、可见且符合条件
+                // Check if element is valid, visible and meets criteria
                 if (element && typeof element.click === 'function' && isElementVisible(element) && elementMatchesCriteria(element)) {
-                    // 直接打印找到的 DOM 节点
-                    console.log("找到第一个可见且符合条件的元素:", element);
-                    // 3. 模拟鼠标事件点击找到的第一个元素
+                    // Directly print the found DOM node
+                    console.log("Found first visible and qualifying element:", element);
+                    // 3. Simulate mouse event click on the first found element
                     try {
-                        console.log(`正在模拟点击该元素:`, element);
-                        // 创建并分发 mousedown 事件
+                        console.log(`Simulating click on this element:`, element);
+                        // Create and dispatch mousedown event
                         const mouseDownEvent = new MouseEvent('mousedown', {
                             bubbles: true,
                             cancelable: true,
@@ -296,7 +296,7 @@
                         });
                         element.dispatchEvent(mouseDownEvent);
 
-                        // 创建并分发 mouseup 事件
+                        // Create and dispatch mouseup event
                         const mouseUpEvent = new MouseEvent('mouseup', {
                             bubbles: true,
                             cancelable: true,
@@ -304,7 +304,7 @@
                         });
                         element.dispatchEvent(mouseUpEvent);
 
-                        // （可选）再分发一个 click 事件以确保兼容性
+                        // (Optional) Dispatch a click event to ensure compatibility
                         const clickEvent = new MouseEvent('click', {
                             bubbles: true,
                             cancelable: true,
@@ -312,86 +312,86 @@
                         });
                         element.dispatchEvent(clickEvent);
 
-                        console.log(`元素模拟点击成功。`);
+                        console.log(`Element simulated click successful.`);
                     } catch (clickError) {
-                        console.error(`模拟点击元素时出错:`, element, clickError);
+                        console.error(`Error simulating click on element:`, element, clickError);
                     }
-                    // 点击成功后立即返回 true
-                    // console.log("本轮检查成功点击一个元素。"); // 日志已在上层处理
-                    return true; // 表示本次检查执行了点击
+                    // Return true immediately after successful click
+                    // console.log("Successfully clicked an element in this round of checking."); // Log already handled at upper level
+                    return true; // Indicates this check executed a click
                 }
             }
 
-            // 如果循环结束都没有找到符合条件的可见元素
-            // console.log("本轮检查未找到符合条件且可见的可点击元素。");
-            return false; // 表示本次检查未执行点击
+            // If the loop ends without finding any qualifying visible element
+            // console.log("Did not find any qualifying and visible clickable element in this round of checking.");
+            return false; // Indicates this check did not execute a click
 
         } catch (error) {
-            console.error("执行查询或处理元素时出错:", error);
-            return false; // 出错也视为未点击
+            console.error("Error executing query or processing elements:", error);
+            return false; // Error is also considered as not clicked
         }
     }
 
-    // === 执行 ===
+    // === Execution ===
     /**
-     * 启动周期性检查流程
+     * Start periodic checking process
      */
     function startPeriodicChecks() {
-        console.log(`DOM 已加载，开始周期性检查干扰元素... (每 ${config.checkIntervalMs}ms 检查一次, 最多持续 ${totalDurationMs / 1000}s, 最多点击 ${maxClicks} 次)`);
+        console.log(`DOM loaded, starting periodic check for annoying elements... (checking every ${config.checkIntervalMs}ms, lasting up to ${totalDurationMs / 1000}s, clicking up to ${maxClicks} times)`);
 
         let clickCounter = 0;
         const startTime = Date.now();
-        let intervalId = null; // 用于存储 setInterval 返回的 ID
+        let intervalId = null; // Used to store the ID returned by setInterval
 
         /**
-         * 执行单次检查，并根据结果更新状态或停止检查
+         * Execute a single check, and update state or stop checking based on the result
          */
         function performCheck() {
             const elapsedTime = Date.now() - startTime;
 
-            // console.log(`执行检查 #${Math.floor(elapsedTime / config.checkIntervalMs) + 1} (已耗时 ${elapsedTime}ms, 已点击 ${clickCounter} 次)`);
+            // console.log(`Executing check #${Math.floor(elapsedTime / config.checkIntervalMs) + 1} (elapsed time ${elapsedTime}ms, clicked ${clickCounter} times)`);
 
-            // 尝试关闭干扰元素
+            // Try to close annoying elements
             const clickedThisTime = autoCloseAnnoyances();
 
             if (clickedThisTime) {
                 clickCounter++;
-                console.log(`点击计数增加: ${clickCounter}/${maxClicks}`);
+                console.log(`Click count increased: ${clickCounter}/${maxClicks}`);
             }
 
-            // 检查停止条件
+            // Check stop conditions
             const timeLimitReached = elapsedTime >= totalDurationMs;
             const clickLimitReached = clickCounter >= maxClicks;
 
             if (timeLimitReached || clickLimitReached) {
-                clearInterval(intervalId); // 使用 intervalId 停止定时器
+                clearInterval(intervalId); // Use intervalId to stop the timer
                 if (clickLimitReached) {
-                    console.log(`已达到最大点击次数 (${maxClicks}), 停止检查。`);
+                    console.log(`Reached maximum click count (${maxClicks}), stopping checks.`);
                 }
                 if (timeLimitReached) {
-                    console.log(`已达到最大检查时长 (${totalDurationMs / 1000}s), 停止检查。`);
+                    console.log(`Reached maximum check duration (${totalDurationMs / 1000}s), stopping checks.`);
                 }
-                console.log(`总耗时: ${Date.now() - startTime}ms, 总点击次数: ${clickCounter}`);
+                console.log(`Total time: ${Date.now() - startTime}ms, total clicks: ${clickCounter}`);
             }
         }
 
-        // 立即执行第一次检查，避免初始延迟
-        // 并且只有在第一次检查未满足停止条件时才设置定时器
+        // Execute first check immediately to avoid initial delay
+        // And only set the timer if the first check does not meet stop conditions
         performCheck();
         if (clickCounter < maxClicks && (Date.now() - startTime) < totalDurationMs) {
             intervalId = setInterval(performCheck, config.checkIntervalMs);
         } else {
-             // 如果第一次检查就满足了停止条件，也打印最终状态
-             console.log(`首次检查后即停止。总耗时: ${Date.now() - startTime}ms, 总点击次数: ${clickCounter}`);
+             // If the first check meets stop conditions, also print final state
+             console.log(`Stopped after first check. Total time: ${Date.now() - startTime}ms, total clicks: ${clickCounter}`);
         }
     }
 
-    // 检查 DOM 加载状态并安排执行
+    // Check DOM loading state and schedule execution
     if (document.readyState === 'loading') {
-        // 如果 DOM 还在加载，则等待 DOMContentLoaded
+        // If DOM is still loading, wait for DOMContentLoaded
         document.addEventListener('DOMContentLoaded', startPeriodicChecks);
     } else {
-        // 如果 DOM 已经加载完成或交互状态，则直接安排执行
+        // If DOM has already loaded or in interactive state, schedule execution directly
         startPeriodicChecks();
     }
 })();

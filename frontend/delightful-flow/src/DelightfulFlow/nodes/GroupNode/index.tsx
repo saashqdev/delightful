@@ -1,4 +1,4 @@
-import FlowBackground from "@/DelightfulFlow/components/FlowDesign/components/FlowBackground"
+﻿import FlowBackground from "@/DelightfulFlow/components/FlowDesign/components/FlowBackground"
 import { useNodeConfig } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { Tooltip } from "antd"
 import { IconInfoCircle } from "@tabler/icons-react"
@@ -34,7 +34,7 @@ export default function GroupNode({ id, data, isConnectable, position }: NodePro
 	const { onDragOver, onDragLeave, onDrop } = useDrag({ id })
 
 	const canConnect = useMemo(() => {
-		// 这里针对循环体进行处理，只能链接循环节点
+		// Handle loop bodies; only loop nodes can connect
 		if (sourceNode) {
 			return sourceNode?.data?.parentId === connectionNodeId
 		}
@@ -74,3 +74,4 @@ export default function GroupNode({ id, data, isConnectable, position }: NodePro
 		</div>
 	)
 }
+

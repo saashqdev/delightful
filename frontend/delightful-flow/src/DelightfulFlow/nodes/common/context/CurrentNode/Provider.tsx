@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+﻿import React, { useMemo } from "react"
 import { CurrentNodeContext, CurrentNodeCtx } from "./Context"
 
 export const CurrentNodeProvider = ({ currentNode, children }: CurrentNodeCtx) => {
@@ -10,3 +10,4 @@ export const CurrentNodeProvider = ({ currentNode, children }: CurrentNodeCtx) =
 
 	return <CurrentNodeContext.Provider value={value}>{children}</CurrentNodeContext.Provider>
 }
+

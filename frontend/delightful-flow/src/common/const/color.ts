@@ -1,4 +1,4 @@
-export default {
+﻿export default {
 	"palette": {
 		"dark": {
 			"--semi-black": "0, 0, 0",
@@ -826,3 +826,4 @@ export default {
 		}
 	}
 }
+

@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+﻿import { useCallback, useRef } from 'react';
 
 export default function useInput() {
   const isEntering = useRef(false);
@@ -26,3 +26,4 @@ export default function useInput() {
     handleEnterChinese,
   };
 }
+

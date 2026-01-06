@@ -1,4 +1,4 @@
-import clsx from "clsx"
+﻿import clsx from "clsx"
 import React, { memo } from "react"
 import { prefix } from "@/DelightfulFlow/constants"
 import styles from "../index.module.less"
@@ -20,7 +20,7 @@ interface NodeWrapperProps {
 	children: React.ReactNode
 }
 
-// 内部实现组件
+// Internal implementation component
 const NodeWrapperImpl = ({
 	id,
 	isSelected,
@@ -57,13 +57,13 @@ const NodeWrapperImpl = ({
 	)
 }
 
-// 自定义比较函数，忽略children的变化
+// Custom comparator ignoring children changes
 const arePropsEqual = (prevProps: NodeWrapperProps, nextProps: NodeWrapperProps) => {
-	// 提取children之外的props
+	// Extract props other than children
 	const { ...prevRest } = prevProps
 	const { ...nextRest } = nextProps
 
-	// 检查基本属性的变化，优先比较常见变化项提高性能
+	// Check basic prop changes; prioritize common ones for performance
 	if (
 		prevRest.id !== nextRest.id ||
 		prevRest.isSelected !== nextRest.isSelected ||
@@ -72,8 +72,8 @@ const arePropsEqual = (prevProps: NodeWrapperProps, nextProps: NodeWrapperProps)
 		return false
 	}
 
-	// 检查事件处理函数 - 理论上这些应该被useCallback包装，所以可以直接比较引用
-	// 但这里为了安全起见，我们将它们排除在比较之外
+	// Check event handlersideally wrapped with useCallback so compare by reference
+	// Exclude them from comparison for safety
 	const {
 		onNodeWrapperClick: prevClick,
 		onDragLeave: prevLeave,
@@ -90,11 +90,12 @@ const arePropsEqual = (prevProps: NodeWrapperProps, nextProps: NodeWrapperProps)
 		...nextRestWithoutHandlers
 	} = nextRest
 
-	// 深度比较剩余属性
+	// Deep-compare remaining props
 	return _.isEqual(prevRestWithoutHandlers, nextRestWithoutHandlers)
 }
 
-// 使用memo包装组件，使用自定义比较函数
+// Wrap component with memo using a custom comparator
 const NodeWrapper = memo(NodeWrapperImpl, arePropsEqual)
 
 export default NodeWrapper
+

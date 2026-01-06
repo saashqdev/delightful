@@ -1,26 +1,6 @@
-# 表达式组件 v2
+﻿# Expression Component v2
 
-## 基本的示例
-
-```jsx
-import { DelightfulExpressionWidget } from '@/index';
-import React,{ useState, useCallback } from "react"
-import { mockDataSource, mockNodeMap } from "./components/dataSource"
-
-
-export default () => {
-    const [expression, setExpression] = useState(null)
-
-    const onExpressionChange = useCallback((val) => {
-        // console.log('value:', val)
-        setExpression(val)
-    }, [])
-
-    return <DelightfulExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap}/>
-}
-```
-
-## 支持函数数据源
+## Basic example
 
 ```jsx
 import { DelightfulExpressionWidget } from '@/index';
@@ -40,7 +20,27 @@ export default () => {
 }
 ```
 
-## 支持文本域模式
+## Supports function data sources
+
+```jsx
+import { DelightfulExpressionWidget } from '@/index';
+import React,{ useState, useCallback } from "react"
+import { mockDataSource, mockNodeMap } from "./components/dataSource"
+
+
+export default () => {
+    const [expression, setExpression] = useState(null)
+
+    const onExpressionChange = useCallback((val) => {
+        // console.log('value:', val)
+        setExpression(val)
+    }, [])
+
+    return <DelightfulExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap}/>
+}
+```
+
+## Supports textarea mode
 
 ```jsx
 import { DelightfulExpressionWidget } from '@/index';
@@ -62,7 +62,7 @@ export default () => {
 }
 ```
 
-## 支持修改field字段内容
+## Supports editing field content
 
 ```jsx
 import { DelightfulExpressionWidget } from '@/index';
@@ -79,7 +79,7 @@ export default () => {
             {
                 "type": "fields",
                 "value": "token_response.body",
-                "name": "token响应body",
+                "name": "token response body",
                 "args": []
             },
             {
@@ -111,7 +111,7 @@ export default () => {
 }
 ```
 
-## 禁用
+## Disabled
 
 ```jsx
 import { DelightfulExpressionWidget } from '@/index';
@@ -131,7 +131,7 @@ export default () => {
 }
 ```
 
-## 常量数据源
+## Constant data source
 
 ```jsx
 import { DelightfulExpressionWidget } from '@/index';
@@ -171,7 +171,7 @@ export default () => {
 }
 ```
 
-## 支持打开弹窗编辑
+## Supports editing in a modal
 
 ```jsx
 import { DelightfulExpressionWidget } from '@/index';
@@ -191,7 +191,7 @@ export default () => {
 }
 ```
 
-## 用于适配多维表格不同字段
+## Adapts to different fields in a multidimensional table
 
 ```jsx
 import { DelightfulExpressionWidget } from '@/index';
@@ -262,7 +262,7 @@ export default () => {
 
 
     return <>
-		<strong>成员</strong>
+        <strong>Member</strong>
 		<DelightfulExpressionWidget value={expression} onChange={onExpressionChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
 			type: 'member',
 			props: {
@@ -278,7 +278,7 @@ export default () => {
 		}}/>
 
 
-		<strong>单选</strong>
+        <strong>Single select</strong>
 		<DelightfulExpressionWidget value={select} onChange={onSelectChange} dataSource={mockDataSource} nodeMap={mockNodeMap} multiple={false} renderConfig={{
 			type: 'select',
 			props: {
@@ -288,7 +288,7 @@ export default () => {
 			}
 		}}/>
 
-		<strong>多选</strong>
+        <strong>Multi select</strong>
 		<DelightfulExpressionWidget value={multiple} onChange={onMultipleChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
 			type: 'multiple',
 			props: {
@@ -298,7 +298,7 @@ export default () => {
 			}
 		}}/>
 		
-		<strong>日期</strong>
+        <strong>Date</strong>
 		<DelightfulExpressionWidget value={datetime} multiple={false} onChange={onDatetimeChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
 			type: 'datetime',
 			props: {
@@ -317,7 +317,7 @@ export default () => {
 			}
 		}}/>
 
-		<strong>部门</strong>
+        <strong>Department</strong>
 		<DelightfulExpressionWidget value={departmentNames} multiple={false} onChange={onDepartmentNamesChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
 			type: 'department_names',
 			props: {
@@ -326,7 +326,7 @@ export default () => {
 		}}/>
 
 
-		<strong>通用文本块</strong>
+        <strong>Generic text block</strong>
 		<DelightfulExpressionWidget value={names} multiple={true} onChange={onNamesChange} dataSource={mockDataSource} nodeMap={mockNodeMap} renderConfig={{
 			type: 'names',
 			props: {
@@ -335,10 +335,10 @@ export default () => {
 				editComponent: DepartmentModal,
 				options: [{
                     id:"xxx",
-                    label: "测试的知识库"
+                    label: "Test knowledge base"
                 },{
                     id:"yyy",
-                    label: "测试的知识库2"
+                    label: "Test knowledge base 2"
                 }],
                 suffix: (item) => {
                     return <div onClick={() => {
@@ -352,32 +352,33 @@ export default () => {
 ```
 
 
-## 表达式数据源数据结构
+## Expression data source structure
 
-具体看表达式示例
+See the expression examples for context.
 
-| 参数名称    | 描述                                               | 类型   | 是否必填 |
-| ----------- | -------------------------------------------------- | ------ | -------- |
-| label       | 标签                                               | string | 是       |
-| value       | 实际选中值                                         | string | 是       |
-| return_type | 函数块返回值类型，级联选项是函数时才有             | string | -        |
-| args        | 函数块入参，是一个参数块数组，级联选项是函数时才有 | array  | -        |
-| desc        | 函数块描述，级联选项是函数时才有                   | string | -        |
-| children    | 函数块子选项，级联选项是函数时才有                 | array  | -        |
+| Parameter   | Description                                                            | Type   | Required |
+| ----------- | ---------------------------------------------------------------------- | ------ | -------- |
+| label       | Label                                                                 | string | Yes      |
+| value       | Selected value                                                         | string | Yes      |
+| return_type | Return type for function blocks (only present when the option is a fn) | string | -        |
+| args        | Function block arguments (array of argument blocks)                    | array  | -        |
+| desc        | Function block description                                             | string | -        |
+| children    | Function block child options                                           | array  | -        |
 
 ## API
 
-| 参数名称        | 描述                       | 类型                     | 默认值 |
-| --------------- | -------------------------- | ------------------------ | ------ |
-| dataSource      | 表达式数据源                | DataSourceItem[](见上)    | -      |
-| placeholder     | 占位符                      | string                    | -      |
-| mode            | 表达式模式                  | ExpressionMode            | ExpressionMode.Common      |
-| value            | 表达式值           |   InputExpressionValue       | -      |
-| onChange | 表达式变更函数 | (value: InputExpressionValue) => void                  | () => {}  |
-| allowExpression | 是否允许表达式 | boolean                  | false  |
-| pointedValueType | 指定表达式填值类型 | 'const'或'expression'                  | -  |
-| allowModifyField | 是否允许修改field值 | false                  | -  |
-| disabled | 是否禁用 | false                  | -  |
-| multiple | 是否多选 | true                  | -  |
+| Parameter         | Description                                 | Type                          | Default                 |
+| ----------------- | ------------------------------------------- | ----------------------------- | ----------------------- |
+| dataSource        | Expression data source                       | DataSourceItem[] (see above)  | -                       |
+| placeholder       | Placeholder text                             | string                        | -                       |
+| mode              | Expression mode                              | ExpressionMode                | ExpressionMode.Common    |
+| value             | Expression value                             | InputExpressionValue          | -                       |
+| onChange          | Expression change handler                    | (value: InputExpressionValue) => void | () => {}          |
+| allowExpression   | Whether expressions are allowed              | boolean                       | false                   |
+| pointedValueType  | Target value type for expression input       | 'const' or 'expression'       | -                       |
+| allowModifyField  | Whether field values can be edited           | boolean                       | false                   |
+| disabled          | Whether the widget is disabled               | boolean                       | false                   |
+| multiple          | Whether multiple selection is enabled        | boolean                       | true                    |
+
 
 

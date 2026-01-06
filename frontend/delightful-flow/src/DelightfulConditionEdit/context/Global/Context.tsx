@@ -1,4 +1,4 @@
-import React from "react"
+﻿import React from "react"
 import type { GlobalProviderProps } from "./Provider"
 
 export const GlobalContext = React.createContext({
@@ -6,3 +6,4 @@ export const GlobalContext = React.createContext({
 	disabledOperationPos: [] as string[],
 	showTitlePosList: [] as string[],
 } as GlobalProviderProps)
+

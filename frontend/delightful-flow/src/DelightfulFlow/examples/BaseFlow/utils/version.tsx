@@ -1,4 +1,4 @@
-import { NodeSchema, NodeWidget } from "@/DelightfulFlow/register/node"
+﻿import { NodeSchema, NodeWidget } from "@/DelightfulFlow/register/node"
 import { IconArrowLeftFromArc, IconArrowsSplit2, IconBrain, IconRepeat, IconRepeatOff, IconTimeline, IconVariable } from "@tabler/icons-react"
 import _ from "lodash"
 import React from "react"
@@ -179,3 +179,4 @@ export const generateNodeVersionSchema = () => {
 	console.log("versionTemplate", versionTemplate)
 	return versionTemplate
 }
+

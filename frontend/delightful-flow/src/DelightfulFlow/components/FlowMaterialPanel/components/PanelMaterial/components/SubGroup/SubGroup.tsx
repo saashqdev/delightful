@@ -1,4 +1,4 @@
-import { prefix } from "@/DelightfulFlow/constants"
+﻿import { prefix } from "@/DelightfulFlow/constants"
 import { MaterialGroup } from "@/DelightfulFlow/context/MaterialSourceContext/MaterialSourceContext"
 import { BaseNodeType, NodeGroup, NodeWidget } from "@/DelightfulFlow/register/node"
 import { Collapse, Tooltip } from "antd"
@@ -142,3 +142,4 @@ export default React.memo(SubGroup, (prevProps, nextProps) => {
 		prevProps.getGroupNodeList === nextProps.getGroupNodeList
 	)
 })
+

@@ -1,4 +1,4 @@
-import { EXPRESSION_ITEM } from "@/DelightfulExpressionWidget/types"
+﻿import { EXPRESSION_ITEM } from "@/DelightfulExpressionWidget/types"
 import _ from "lodash"
 import React, { useMemo } from "react"
 import { useGlobalContext } from "../../../context/GlobalContext/useGlobalContext"
@@ -7,7 +7,7 @@ interface LabelTextProps {
 	config: EXPRESSION_ITEM
 }
 
-// 转义HTML特殊字符
+// Escape HTML special characters
 function escapeHtml(text: string) {
 	return text.replace(/</g, "&lt;").replace(/>/g, "&gt;")
 }
@@ -15,7 +15,7 @@ function escapeHtml(text: string) {
 export function LabelTextBlock({ config }: LabelTextProps) {
 	const { showMultipleLine } = useGlobalContext()
 
-	// 通过 escapeHtml 转义 HTML 标签
+	// Escape HTML tags to avoid injection
 	const escapedValue = useMemo(() => {
 		let result = _.cloneDeep(config.value)
 		if (!showMultipleLine) {
@@ -35,3 +35,4 @@ export function LabelTextBlock({ config }: LabelTextProps) {
 		/>
 	)
 }
+

@@ -1,4 +1,4 @@
-import { prefix } from "@/DelightfulFlow/constants"
+﻿import { prefix } from "@/DelightfulFlow/constants"
 import { useMaterialSource } from "@/DelightfulFlow/context/MaterialSourceContext/MaterialSourceContext"
 import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import { Empty } from "antd"
@@ -41,3 +41,4 @@ export default function PanelFlow() {
 		</div>
 	)
 }
+

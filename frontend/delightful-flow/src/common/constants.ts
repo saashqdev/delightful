@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Component types
  */
 export enum ComponentType {

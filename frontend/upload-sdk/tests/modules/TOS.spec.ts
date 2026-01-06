@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, afterEach } from "vitest"
+﻿import { describe, it, expect, vi, afterEach } from "vitest"
 import { TOS } from "../../src"
 
 // Mock File object
@@ -118,8 +118,8 @@ describe("TOS module tests", () => {
 	})
 
 	// Test default upload method
-	describe("defaultUpload方法", () => {
-		it("应该成功上传文件并返回预期结果", async () => {
+	describe("defaultUpload method", () => {
+		it("should upload File successfully and return the expected result", async () => {
 			const file = createMockFile("test.txt", 1024)
 			const key = "test/test.txt"
 			const params = {
@@ -150,8 +150,8 @@ describe("TOS module tests", () => {
 	})
 
 	// Test STS upload method
-	describe("STSUpload方法", () => {
-		it("应该成功上传文件并返回预期结果", async () => {
+	describe("STSUpload method", () => {
+		it("should upload File successfully and return the expected result", async () => {
 			const file = createMockFile("test.txt", 1024)
 			const key = "test/test.txt"
 			const params = {
@@ -186,8 +186,8 @@ describe("TOS module tests", () => {
 	})
 
 	// Test multipart upload method
-	describe("MultipartUpload方法", () => {
-		it("应该成功上传文件并返回预期结果", async () => {
+	describe("MultipartUpload method", () => {
+		it("should upload File successfully and return the expected result", async () => {
 			const file = createMockFile("test.txt", 10 * 1024 * 1024) // 10MB file
 			const key = "test/test.txt"
 			const params = {
@@ -262,3 +262,7 @@ describe("TOS module tests", () => {
 		})
 	})
 })
+
+
+
+

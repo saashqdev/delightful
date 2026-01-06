@@ -1,3 +1,4 @@
-module.exports = {
+﻿module.exports = {
 	extends: ["@dtyq/eslint-config/stylelint"],
 }
+

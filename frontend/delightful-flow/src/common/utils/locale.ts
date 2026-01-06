@@ -1,4 +1,4 @@
-import { DEFAULT_LOCALE, SupportLocales } from "../const/locale"
+﻿import { DEFAULT_LOCALE, SupportLocales } from "../const/locale"
 import { languageHelper } from "../provider/LocaleProvider/utils"
 
 
@@ -46,3 +46,4 @@ export const getCurrentLang = <T extends string>(lang: "auto" | T): T => {
 	}
 	return lang
 }
+

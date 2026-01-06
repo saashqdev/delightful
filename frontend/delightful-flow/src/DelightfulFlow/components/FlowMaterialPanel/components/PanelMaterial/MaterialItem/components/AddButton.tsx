@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+﻿import React, { memo } from "react"
 import { IconPlus } from "@tabler/icons-react"
 import clsx from "clsx"
 import { prefix } from "@/DelightfulFlow/constants"
@@ -20,3 +20,4 @@ const AddButton = memo(({ onAddItem }: AddButtonProps) => {
 })
 
 export default AddButton
+

@@ -1,4 +1,4 @@
-.loop .loopBody {
+﻿.loop .loopBody {
   position: relative;
   border-top: 1px solid #1C1D2314;
   border-bottom: 1px solid #1C1D2314;
@@ -10,3 +10,4 @@
 .loop .loopBody span {
   font-weight: 600;
 }
+

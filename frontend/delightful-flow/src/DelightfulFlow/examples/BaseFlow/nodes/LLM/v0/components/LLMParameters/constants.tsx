@@ -1,4 +1,4 @@
-// LLM 调节器
+﻿// LLM 调节器
 export enum LLMAdjust {
 	// 创意
 	Creativity = 1,
@@ -80,3 +80,4 @@ export const LLMAdjustMap = {
 		},
 	},
 }
+

@@ -1,4 +1,4 @@
-import {
+﻿import {
 	CompleteMultipartUploadCommand,
 	CreateMultipartUploadCommand,
 	S3Client,
@@ -71,7 +71,7 @@ function createS3Client(params: MinIO.STSAuthParams): S3Client {
 }
 
 /**
- * @description: Initialize multipart upload to get uploadId from S3
+ * @description: Initialize multipart upload to get UploadId from S3
  * @param {string} name Object key
  * @param {MinIO.STSAuthParams} params Credentials parameters
  * @param {MinIO.InitMultipartUploadOption} option Upload options
@@ -103,7 +103,7 @@ async function initMultipartUpload(
 		return {
 			bucket: response.Bucket || bucket,
 			name: response.Key || name,
-			uploadId: response.UploadId || "",
+			UploadId: response.UploadId || "",
 		}
 	} catch (error: any) {
 		// Handle abort errors
@@ -124,7 +124,7 @@ async function initMultipartUpload(
 /**
  * @description: Complete multipart upload after all parts are uploaded
  * @param {String} name Object key
- * @param {String} uploadId Upload ID
+ * @param {String} UploadId Upload ID
  * @param {Array} parts Part information array
  * @param {MinIO.STSAuthParams} params Credentials parameters
  * @param {MinIO.CompleteMultipartUploadOptions} options Upload options
@@ -134,7 +134,7 @@ async function initMultipartUpload(
  */
 async function completeMultipartUpload(
 	name: string,
-	uploadId: string,
+	UploadId: string,
 	parts: Array<{ number: number; etag: string }>,
 	params: MinIO.STSAuthParams,
 	options: MinIO.CompleteMultipartUploadOptions,
@@ -160,7 +160,7 @@ async function completeMultipartUpload(
 	const command = new CompleteMultipartUploadCommand({
 		Bucket: bucket,
 		Key: name,
-		UploadId: uploadId,
+		UploadId: UploadId,
 		MultipartUpload: {
 			Parts: sortedParts.map((part) => ({
 				PartNumber: part.number,
@@ -200,7 +200,7 @@ async function completeMultipartUpload(
 /**
  * @description: Upload a single part
  * @param {String} name Object key
- * @param {String} uploadId Upload ID
+ * @param {String} UploadId Upload ID
  * @param {number} partNo Part number
  * @param {MinIO.PartInfo} data Part data
  * @param {MinIO.STSAuthParams} params Credentials parameters
@@ -209,7 +209,7 @@ async function completeMultipartUpload(
  */
 async function uploadPart(
 	name: string,
-	uploadId: string,
+	UploadId: string,
 	partNo: number,
 	data: MinIO.PartInfo,
 	params: MinIO.STSAuthParams,
@@ -236,7 +236,7 @@ async function uploadPart(
 	const command = new UploadPartCommand({
 		Bucket: bucket,
 		Key: name,
-		UploadId: uploadId,
+		UploadId: UploadId,
 		PartNumber: partNo,
 		Body: bodyData,
 	})
@@ -292,7 +292,7 @@ async function resumeMultipart(
 	options: MinIO.MultipartUploadOption,
 ) {
 	const taskId = options.taskId
-	const { file, fileSize, partSize, uploadId, doneParts, name } = checkpoint
+	const { file, fileSize, partSize, UploadId, doneParts, name } = checkpoint
 	const internalDoneParts = doneParts.length > 0 ? [...doneParts] : []
 	const partOffs = divideParts(fileSize, partSize)
 	const numParts = partOffs.length
@@ -317,7 +317,7 @@ async function resumeMultipart(
 				// Create abort signal for this upload part if taskId exists
 				const abortSignal = taskId ? createAbortSignal(taskId) : undefined
 
-				const result = await uploadPart(name, uploadId, partNo, data, params, abortSignal, taskId)
+				const result = await uploadPart(name, UploadId, partNo, data, params, abortSignal, taskId)
 
 				if (!multipartFinish) {
 					checkpoint.doneParts.push({
@@ -402,7 +402,7 @@ async function resumeMultipart(
 
 	// Create abort signal for completion if taskId exists
 	const completeAbortSignal = taskId ? createAbortSignal(taskId) : undefined
-	return completeMultipartUpload(name, uploadId, internalDoneParts, params, opt, fileSize, completeAbortSignal, taskId)
+	return completeMultipartUpload(name, UploadId, internalDoneParts, params, opt, fileSize, completeAbortSignal, taskId)
 }
 
 /**
@@ -452,7 +452,7 @@ export const MultipartUpload: PlatformRequest<
 	}
 
 	// Resume from checkpoint if available
-	if (options.checkpoint && options.checkpoint.uploadId) {
+	if (options.checkpoint && options.checkpoint.UploadId) {
 		// Update file reference in checkpoint
 		if (file) options.checkpoint.file = file
 
@@ -483,7 +483,7 @@ export const MultipartUpload: PlatformRequest<
 	// Initialize multipart upload
 	const taskId = options.taskId
 	const initAbortSignal = taskId ? createAbortSignal(taskId) : undefined
-	const { uploadId } = await initMultipartUpload(name, params, {
+	const { UploadId } = await initMultipartUpload(name, params, {
 		headers: { ...options.headers },
 		mime: options.mime,
 	}, initAbortSignal, taskId)
@@ -491,7 +491,7 @@ export const MultipartUpload: PlatformRequest<
 	// Calculate part size
 	const partSize = getPartSize(fileSize, <number>options.partSize, S3_MIN_PART_SIZE)
 
-	const checkpoint: MinIO.Checkpoint = initCheckpoint(file, name, fileSize, partSize, uploadId)
+	const checkpoint: MinIO.Checkpoint = initCheckpoint(file, name, fileSize, partSize, UploadId)
 
 	if (options && options.progress) {
 		options.progress(0, 0, fileSize, checkpoint)
@@ -499,4 +499,8 @@ export const MultipartUpload: PlatformRequest<
 
 	return resumeMultipart(checkpoint, params, options)
 }
+
+
+
+
 

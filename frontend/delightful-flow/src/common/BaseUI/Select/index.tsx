@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Intended for use within flow nodes only
  */
 import { Select } from "antd"
@@ -179,3 +179,4 @@ EnhancedDelightfulSelect.Option = Select.Option
 EnhancedDelightfulSelect.OptGroup = Select.OptGroup
 
 export default EnhancedDelightfulSelect
+

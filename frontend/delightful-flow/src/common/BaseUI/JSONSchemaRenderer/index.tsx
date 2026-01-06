@@ -1,4 +1,4 @@
-/* eslint-disable react/no-array-index-key */
+﻿/* eslint-disable react/no-array-index-key */
 import { FormItemType } from "@/DelightfulExpressionWidget/types"
 import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import { useMemoizedFn } from "ahooks"
@@ -56,3 +56,4 @@ export default function JSONSchemaRenderer({ form }: JSONSchemaRenderer) {
 		</div>
 	)
 }
+

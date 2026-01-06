@@ -1,4 +1,4 @@
-import i18next from "i18next";
+﻿import i18next from "i18next";
 
 // 当前面板 tab枚举
 export enum TabObject {
@@ -14,4 +14,5 @@ export enum TabObject {
     // 助理
     Agent = "3",
 }
+
 

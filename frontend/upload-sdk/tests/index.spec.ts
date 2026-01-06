@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest"
+﻿import { describe, it, expect, vi, beforeEach } from "vitest"
 import { Upload, PlatformType } from "../src"
 import { InitException, InitExceptionCode } from "../src/Exception/InitException"
 import { UploadManger } from "../src/utils/UploadManger"
@@ -304,3 +304,7 @@ describe("Upload class tests", () => {
 		})
 	})
 })
+
+
+
+

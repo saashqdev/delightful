@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeAll, afterAll, afterEach } from "vitest"
+﻿import { describe, it, expect, vi, beforeAll, afterAll, afterEach } from "vitest"
 import { OSS } from "../../src"
 
 // Mock request utility but not OSS module
@@ -232,7 +232,7 @@ describe("OSS module tests", () => {
 			try {
 				// Use await with try/catch to ensure Promise completes
 				await OSS.MultipartUpload(file, key, params, option)
-				expect.fail("应该抛出异常但没有")
+				expect.fail("Should throw an exception but did not")
 			} catch (error) {
 				expect(error).toBeDefined()
 			} finally {
@@ -242,3 +242,7 @@ describe("OSS module tests", () => {
 		})
 	})
 })
+
+
+
+

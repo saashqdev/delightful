@@ -1,4 +1,4 @@
-import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
+﻿import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { ShowColumns } from "@/DelightfulJsonSchemaEditor/constants"
 import DelightfulJSONSchemaEditorWrap from "@/common/BaseUI/DelightfulJsonSchemaEditorWrap"
@@ -58,3 +58,4 @@ export default function VariableSaveV0() {
 		</div>
 	)
 }
+

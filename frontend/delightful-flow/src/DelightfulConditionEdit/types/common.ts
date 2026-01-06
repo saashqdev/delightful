@@ -1,4 +1,4 @@
-
+﻿
 import { ComponentType } from "@/common/constants"
 import type { Expression } from "./expression"
 import { EXPRESSION_VALUE, InputExpressionValue } from "@/DelightfulExpressionWidget/types"
@@ -156,3 +156,4 @@ export namespace Common {
 	export type Options = Array<Option>
 
 }
+

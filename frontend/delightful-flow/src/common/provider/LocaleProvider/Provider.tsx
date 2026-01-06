@@ -1,4 +1,4 @@
-import { getAntdLocale, normalizeLocale } from "@/common/utils/locale"
+﻿import { getAntdLocale, normalizeLocale } from "@/common/utils/locale"
 import { useDeepCompareEffect, useRequest } from "ahooks"
 import { ConfigProvider, Flex, Spin } from "antd"
 import { i18n } from "i18next"
@@ -89,3 +89,4 @@ export function DelightfulFlowLocaleProvider(
 		</LocalesContext.Consumer>
 	)
 }
+

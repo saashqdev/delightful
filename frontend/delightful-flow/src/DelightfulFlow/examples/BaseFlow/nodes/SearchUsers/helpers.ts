@@ -1,4 +1,4 @@
-import { FilterTargetTypes, operator2Label, operatorMap } from "./constants"
+﻿import { FilterTargetTypes, operator2Label, operatorMap } from "./constants"
 
 // 获取默认的筛选项
 export const getDefaultFilter = () => {
@@ -35,3 +35,4 @@ export const getFilterOption = (left: FilterTargetTypes) => {
 		}) || []
 	)
 }
+

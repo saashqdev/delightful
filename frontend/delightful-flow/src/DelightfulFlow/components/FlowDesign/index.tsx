@@ -1,4 +1,4 @@
-import React, { useState, useMemo, memo } from "react"
+﻿import React, { useState, useMemo, memo } from "react"
 import styles from "./index.module.less"
 
 import { useExternalConfig } from "@/DelightfulFlow/context/ExternalContext/useExternal"
@@ -243,3 +243,4 @@ const FlowDesign = memo(function FlowDesign() {
 })
 
 export default FlowDesign
+

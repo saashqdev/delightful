@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 表达式组件的自定义渲染属性
  */
 
@@ -67,3 +67,4 @@ export default function useRenderConfig() {
 		getExtraConfig,
 	}
 }
+

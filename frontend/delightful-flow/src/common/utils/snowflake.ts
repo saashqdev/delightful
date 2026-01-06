@@ -1,4 +1,4 @@
-//@ts-ignore
+﻿//@ts-ignore
 import SnowFlakeId from "snowflake-id"
 
 /**
@@ -43,3 +43,4 @@ export function generateSnowFlake (prefix = "") {
 }
 
 export default snowflake
+

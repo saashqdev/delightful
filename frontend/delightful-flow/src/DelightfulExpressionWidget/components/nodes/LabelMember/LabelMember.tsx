@@ -1,4 +1,4 @@
-import { checkIsReferenceNode } from "@/DelightfulExpressionWidget/helpers"
+﻿import { checkIsReferenceNode } from "@/DelightfulExpressionWidget/helpers"
 import { EXPRESSION_ITEM, WithReference } from "@/DelightfulExpressionWidget/types"
 import { useMemoizedFn } from "ahooks"
 import React, { useState } from "react"
@@ -70,3 +70,4 @@ export default function LabelMember({ config, updateFn, wrapperWidth }: LabelMem
 		</>
 	)
 }
+

@@ -1,4 +1,4 @@
-import { prefix } from "@/DelightfulFlow/constants"
+﻿import { prefix } from "@/DelightfulFlow/constants"
 import { IconDeviceIpadHorizontal, IconMouse } from "@tabler/icons-react"
 import { Flex } from "antd"
 import clsx from "clsx"
@@ -86,3 +86,4 @@ export default function InteractionSelect({
 		</div>
 	)
 }
+

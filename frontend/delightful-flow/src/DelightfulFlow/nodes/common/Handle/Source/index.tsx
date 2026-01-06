@@ -1,4 +1,4 @@
-import FlowPopup from "@/DelightfulFlow/components/FlowPopup"
+﻿import FlowPopup from "@/DelightfulFlow/components/FlowPopup"
 import { useFlowData } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { Popover } from "antd"
 import { useMemoizedFn, useUpdateEffect } from "ahooks"
@@ -16,7 +16,7 @@ type SourceHandleProps = {
 	isSelected: boolean
 	type?: "source" | "target"
 	position?: Position
-	// 当type为target时
+	// When type is target
 	isTarget?: boolean
 	[key: string]: any
 }
@@ -168,3 +168,4 @@ export default function CustomHandle({
 		</PopupProvider>
 	)
 }
+

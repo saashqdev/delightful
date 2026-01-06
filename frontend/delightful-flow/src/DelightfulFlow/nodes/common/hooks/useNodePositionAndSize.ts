@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { useReactFlow } from 'reactflow'
 
 type UseNodeSizeAndPos = {
@@ -9,7 +9,7 @@ export default function useNodePositionAndSize({ id }: UseNodeSizeAndPos) {
 
 	const reactFlowInstance = useReactFlow()
 
-	// 获取当前节点的坐标和尺寸
+	// Get current node position and size
 	const node = reactFlowInstance.getNode(id)
 
 	return {
@@ -19,3 +19,4 @@ export default function useNodePositionAndSize({ id }: UseNodeSizeAndPos) {
 		y: node?.position?.y
 	}
 }
+

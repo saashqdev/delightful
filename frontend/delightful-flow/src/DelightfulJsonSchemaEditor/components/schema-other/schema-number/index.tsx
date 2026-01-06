@@ -1,4 +1,4 @@
-import { QuestionCircleOutlined } from '@ant-design/icons';
+﻿import { QuestionCircleOutlined } from '@ant-design/icons';
 import {
   Checkbox,
   Col,
@@ -263,3 +263,4 @@ const SchemaNumber = (props: SchemaNumberProp): ReactElement => {
 };
 
 export default SchemaNumber;
+

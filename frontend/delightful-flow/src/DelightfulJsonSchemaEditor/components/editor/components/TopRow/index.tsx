@@ -1,4 +1,4 @@
-import { IconEdit } from "@douyinfe/semi-icons"
+﻿import { IconEdit } from "@douyinfe/semi-icons"
 import { Col, Row, Select, Switch, Tooltip } from "antd"
 import { IconCirclePlus } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
@@ -254,3 +254,4 @@ export default function TopRow(props: TopRowProps) {
 		</SchemaObjectWrap>
 	)
 }
+

@@ -1,4 +1,4 @@
-import { BaseException } from "./BaseException"
+﻿import { BaseException } from "./BaseException"
 
 export const enum InitExceptionCode {
 	INIT_UNKNOWN_ERROR = "INIT_UNKNOWN_ERROR",
@@ -54,3 +54,7 @@ export class InitException extends BaseException {
 		super(message)
 	}
 }
+
+
+
+

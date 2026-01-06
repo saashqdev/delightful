@@ -1,4 +1,4 @@
-
+﻿
 import { useMemoizedFn } from "ahooks"
 import { useFlowData, useFlowEdges, useFlowEdgesActions, useFlowNodes, useNodeConfig, useNodeConfigActions } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { generateSnowFlake } from "@/common/utils/snowflake"
@@ -31,7 +31,7 @@ export default function useToolbar () {
 
 	const store = useStoreApi()
 
-	// 删除单个节点
+	// Delete a single node
 	const deleteNode = useMemoizedFn((id: string) => {
         const edges = getEdges()
         const nodes = Object.values(nodeConfig)
@@ -39,17 +39,17 @@ export default function useToolbar () {
 			const n = nodeConfig[nId]
 			// @ts-ignore
 			const nodeType = n[paramsName.nodeType]
-			// 如果删除的是分组节点，则需要把子节点一并删除
+			// If deleting a group node, delete its child nodes too
 			if(judgeIsLoopBody(nodeType)) {
 				const subNodeIds = nodes.filter(_n => _n.parentId === n.id).map(_n => _n.id)
 				const result = [...subNodeIds, n.id]
-				// 如果删除的是循环体，则需要将循环节点一并删除
+				// If deleting a loop body, delete the loop node as well
 				if(n.meta.parent_id) {
 					result.push(n.meta.parent_id)
 				}
 				return result
 			}
-			// 如果删除的是循环节点，则需要把循环体和循环体内节点删除
+			// If deleting a loop node, delete the loop body and its nodes
 			if(judgeLoopNode(nodeType)) {
 				const loopBody = nodes.find(_n => _n.meta.parent_id === n.id)
 				if(loopBody) {
@@ -64,10 +64,10 @@ export default function useToolbar () {
 		const deleteEdges = edges.filter(e => deleteIds.includes(e.target) || deleteIds.includes(e.source))
 		const leaveEdges = edges.filter(e => !deleteIds.includes(e.target) && !deleteIds.includes(e.source))
 
-		// 更新边数据
+		// Update edge data
 		setEdges(leaveEdges)
 
-		// 更新nextNodeIds
+		// Update nextNodeIds
 		deleteEdges.forEach(e => updateNextNodeIdsByDeleteEdge(e))
 
 		setNodes(nodes.filter(n => !deleteIds.includes(n.id)))
@@ -82,7 +82,7 @@ export default function useToolbar () {
         notifyNodeChange?.()
 
 		if (debuggerMode) {
-			console.trace("删除了节点", id)
+			console.trace("Deleted node", id)
 		}
 	})
 
@@ -107,8 +107,8 @@ export default function useToolbar () {
 			...defaultEdgeConfig
 		}
 
-		/** 如果上一个节点是分支，则在分支内部也要添加next_nodes */
-		// TODO 需要改成自定义参数名，支持next_nodes或者nextNodes
+		/** If the previous node is a branch, add next_nodes inside that branch */
+		// TODO Should use configurable param names supporting next_nodes or nextNodes
 		if (nodeManager.branchNodeIds.includes(`${node[paramsName.nodeType]}`)) {
 			config?.content?.branches?.[0]?.nextNodes?.push?.(newId)
 			config?.content?.branches?.[0]?.next_nodes?.push?.(newId)
@@ -141,3 +141,4 @@ export default function useToolbar () {
 		pasteNode
 	}
 }
+

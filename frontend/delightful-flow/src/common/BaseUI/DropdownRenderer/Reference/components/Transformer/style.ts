@@ -1,4 +1,4 @@
-import styled from "styled-components"
+﻿import styled from "styled-components"
 
 export const Wrap = styled.div`
 	width: 400px;
@@ -124,3 +124,4 @@ export const Wrap = styled.div`
 	}
 
 `
+

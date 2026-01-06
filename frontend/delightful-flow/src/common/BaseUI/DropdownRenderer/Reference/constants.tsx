@@ -1,1 +1,2 @@
-export const Splitor = "."
+﻿export const Splitor = "."
+

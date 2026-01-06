@@ -1,4 +1,4 @@
-// @ts-nocheck
+﻿// @ts-nocheck
 import React, { useState, useCallback, useEffect, useRef, useMemo } from "react"
 import ReactFlow, {
 	MiniMap,
@@ -78,7 +78,7 @@ const ComplexNode = ({ data }: NodeProps) => {
 	)
 }
 
-// 注册节点类型
+// 注册Node type
 const nodeTypes: NodeTypes = {
 	simple: SimpleNode,
 	complex: ComplexNode,
@@ -277,7 +277,7 @@ const IsolationTest: React.FC = () => {
 		setCurrentTest("")
 	}, [setNodes, setEdges])
 
-	// 切换节点类型
+	// 切换Node type
 	const toggleNodeType = useCallback(() => {
 		setNodeType((prev) => (prev === "simple" ? "complex" : "simple"))
 	}, [])
@@ -326,7 +326,7 @@ const IsolationTest: React.FC = () => {
 							<strong>当前测试:</strong> {currentTest || "无"}
 						</div>
 						<div>
-							<strong>节点类型:</strong>{" "}
+							<strong>Node type:</strong>{" "}
 							{nodeType === "simple" ? "简单节点" : "复杂节点"}
 						</div>
 						<div>
@@ -402,3 +402,4 @@ const IsolationTest: React.FC = () => {
 }
 
 export default IsolationTest
+

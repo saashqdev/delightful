@@ -1,18 +1,18 @@
-export default [
+﻿export default [
     {
-        "title": "函数",
+        "title": "Functions",
         "key": "methods_67282ed317551",
         "nodeId": "",
         "nodeType": "",
         "children": [
             {
-                "title": "内置函数",
+                "title": "Built-in Functions",
                 "key": "78162069390d96b9230a2f222f902b54",
                 "nodeId": "",
                 "nodeType": "",
                 "children": [
                     {
-                        "title": "计算字符串的 MD5 散列值",
+                        "title": "Calculate the MD5 hash of a string",
                         "key": "md5",
                         "nodeId": "",
                         "nodeType": "",
@@ -21,18 +21,18 @@ export default [
                             {
                                 "name": "string",
                                 "type": "string",
-                                "desc": "要计算的字符串。"
+                                "desc": "String to hash."
                             },
                             {
                                 "name": "binary",
                                 "type": "boolean",
-                                "desc": "如果可选的 binary 被设置为 true，那么 md5 摘要将以 16 字符长度的原始二进制格式返回。"
+                                "desc": "If the optional binary flag is set to true，the MD5 digest is returned as a 16-character raw binary string."
                             }
                         ],
                         "isRoot": false,
                         "isConstant": false,
                         "isGlobal": false,
-                        "desc": "计算字符串的 MD5 散列值",
+                        "desc": "Calculate the MD5 hash of a string",
                         "isMethod": true
                     },
                     {
@@ -89,7 +89,7 @@ export default [
                         "isMethod": true
                     },
                     {
-                        "title": "确定字符串是否包含指定子串",
+                        "title": "Check whether the string contains the given substring",
                         "key": "str_contains",
                         "nodeId": "",
                         "nodeType": "",
@@ -98,18 +98,18 @@ export default [
                             {
                                 "name": "haystack",
                                 "type": "string",
-                                "desc": "在其中搜索的字符串。"
+                                "desc": "String to search in."
                             },
                             {
                                 "name": "needle",
                                 "type": "string",
-                                "desc": "要在 haystack 中搜索的子串。"
+                                "desc": "Substring to search for in haystack."
                             }
                         ],
                         "isRoot": false,
                         "isConstant": false,
                         "isGlobal": false,
-                        "desc": "执行大小写区分的检查，表明 needle 是否包含在 haystack 中。",
+                        "desc": "Performs a case-sensitive check，Indicates whether the needle is contained in the haystack.",
                         "isMethod": true
                     },
                     {
@@ -126,7 +126,7 @@ export default [
                         "isMethod": true
                     },
                     {
-                        "title": "生成一个唯一 ID",
+                        "title": "Generate a unique ID",
                         "key": "uniqid",
                         "nodeId": "",
                         "nodeType": "",
@@ -134,19 +134,19 @@ export default [
                         "arg": [
                             {
                                 "name": "prefix",
-                                "desc": "有用的参数。例如：如果在多台主机上可能在同一微秒生成唯一ID。\\n prefix为空，则返回的字符串长度为 13。more_entropy 为 true，则返回的字符串长度为 23。",
+                                "desc": "Useful when IDs might be generated in the same microsecond across hosts.\\n prefixis empty，Result length is 13 when prefix is empty; if more_entropy is true，the result length is 23.",
                                 "type": "string"
                             },
                             {
                                 "name": "more_entropy",
-                                "desc": "如果设置为 true，uniqid() 会在返回的字符串结尾增加额外的熵（使用线性同余组合发生器）。 使得唯一ID更具唯一性。",
+                                "desc": "If set to true，uniqid() adds extra entropy to the end of the returned string（using a linear congruential generator）。 making the unique ID even more unique.",
                                 "type": "bool"
                             }
                         ],
                         "isRoot": false,
                         "isConstant": false,
                         "isGlobal": false,
-                        "desc": "生成一个唯一 ID",
+                        "desc": "Generate a unique ID",
                         "isMethod": true
                     },
                     {
@@ -2776,3 +2776,4 @@ export default [
         "isMethod": true
     }
 ]
+

@@ -1,6 +1,6 @@
-/* eslint-disable guard-for-in */
+﻿/* eslint-disable guard-for-in */
 /**
- * 管理 表达式组件处于处于Textarea模式时的相关状态
+ * Manage state when the expression widget runs in Textarea mode
  */
 import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference"
 import { Splitor } from "@/common/BaseUI/DropdownRenderer/Reference/constants"
@@ -62,36 +62,36 @@ export default function useTextareaMode({
 }: UseTextareaModeProps) {
 	const selectPanelRef = useRef<SelectPanelRef>({} as SelectPanelRef)
 	const [selectPanelHeight, setSelectPanelHeight] = useState(TextAreaModePanelHeight)
-	/** 是否弹出编辑层map */
+	/** Map of popover visibility per node */
 	const [popVisibleMap, setPopVisibleMap] = useState({} as Record<string, boolean>)
-	/** 动态的inputRef */
+	/** Dynamic map of input refs */
 	const [inputRefMap, setInputRefMap] = useState({} as Record<string, MutableRefObject<InputRef>>)
-	/** 当前正在编辑的节点 */
+	/** Currently edited node */
 	const [currentNode, setCurrentNode] = useState({} as EXPRESSION_ITEM)
 	const [inputValue, setInputValue] = useState("")
-	/** 当前Trigger的标志 */
+	/** Current trigger marker */
 	const [currentTrigger, setCurrentTrigger, resetCurrentTrigger] = useResetState({
 		uniqueId: "",
 		offset: -1,
 	})
 
-	/** 是否打开dropdown */
+	/** Whether the dropdown is open */
 	const [openDropdown, setOpenDropdown] = useState(false)
 
-	/** @后面的文本 */
+	/** User input after the @ symbol */
 	const [userInput, setUserInput] = useState([] as string[])
 
-	/** 关闭当前编辑弹出层 */
+	/** Close the popover for the current node */
 	const closeCurrentNodeEdit = useMemoizedFn(() => {
 		if (!currentNode || !currentNode.uniqueId) return
-		/** 关闭编辑层 */
+		/** Close editor layer */
 		setPopVisibleMap({
 			...popVisibleMap,
 			[currentNode.uniqueId]: false,
 		})
 	})
 
-	/** 监听表达式值变化，判断是否弹出下拉面板 */
+	/** Watch expression value changes to decide whether to show the dropdown */
 	useUpdateEffect(() => {
 		const expressionKey = FIELDS_NAME[valueType] as string
 		const expressionFields = (expressionVal?.[expressionKey] || []) as EXPRESSION_VALUE[]
@@ -104,9 +104,9 @@ export default function useTextareaMode({
 			// console.log("targetTriggerField", targetTriggerField, expressionFields)
 			setCurrentTrigger(targetTriggerField)
 		}
-		// 控制是否打开变量引用框
+		// Toggle reference dropdown visibility
 		setOpenDropdown(!!targetTriggerField)
-		// 处理用户输入
+		// Parse user input
 		if (triggerValue) {
 			const userInputAfterTrigger = triggerValue.value.split("@")[1]
 			const userInputAfterSplit = userInputAfterTrigger.split(Splitor)
@@ -118,17 +118,17 @@ export default function useTextareaMode({
 	// 	console.log("triggerUpdate", currentTrigger)
 	// }, [currentTrigger])
 
-	/** 节点双击 */
+	/** Handle node double-click */
 	const handleDoubleClickNode = useMemoizedFn((config: EXPRESSION_ITEM) => {
 		if (disabled) return
-		/** 将之前的关闭 */
+		/** Close any existing popovers */
 		// eslint-disable-next-line no-restricted-syntax
 		for (const uniqueId in popVisibleMap) {
 			if (popVisibleMap[uniqueId]) _.set(popVisibleMap, uniqueId, false)
 		}
-		/** 打开双击的节点的编辑面板 */
+		/** Open the double-clicked node's editor */
 		_.set(popVisibleMap, config.uniqueId, true)
-		// 第一次打开，缓存inputRef
+		// Cache inputRef the first time it opens
 		if (!inputRefMap[config.uniqueId]) {
 			_.set(inputRefMap, config.uniqueId, React.createRef())
 		}
@@ -137,7 +137,7 @@ export default function useTextareaMode({
 		setPopVisibleMap({ ...popVisibleMap })
 
 		const currentRef = inputRefMap[config.uniqueId]
-		// 已经有ref了，直接focus
+		// Focus immediately if ref already exists
 		if (currentRef && currentRef.current) {
 			setTimeout(() => {
 				currentRef.current.focus()
@@ -145,12 +145,12 @@ export default function useTextareaMode({
 		}
 	})
 
-	/** 打开级联选项面板 */
+	/** Open cascader panel */
 	const openSelectPanel = useMemoizedFn(() => {
 		setOpenDropdown(true)
 	})
 
-	/** 关闭级联选项面板 */
+	/** Close cascader panel */
 	const closeSelectPanel = useMemoizedFn(() => {
 		setOpenDropdown(false)
 	})
@@ -165,7 +165,7 @@ export default function useTextareaMode({
 	}, [])
 	const onPressEnter = useMemoizedFn((evt: any) => {
 		evt.stopPropagation()
-		/** 回车保存，并隐藏 */
+		/** Save on Enter and hide */
 		if ([KeyCodeMap.ENTER].includes(evt.keyCode)) {
 			console.log("currentNode", currentNode)
 			console.log("expressionVal", expressionVal)
@@ -178,22 +178,22 @@ export default function useTextareaMode({
 						(item) => item.uniqueId === currentNode.uniqueId,
 					) as EXPRESSION_VALUE
 					if (!found) {
-						/** 关闭编辑层 */
+						/** Close editor layer */
 						closeCurrentNodeEdit()
 						return
 					}
 					found.value = inputValue
 
-					/** 检查是否命中 */
+					/** Check if input matches a data source */
 					const result = findRootNodeAndValueByValue(options, inputValue)
-					/** 命中了，重新更改Node节点数据 */
+					/** If matched, update node data accordingly */
 					if (result) {
 						// eslint-disable-next-line no-restricted-syntax
 						for (const key in result.value) {
 							_.set(found, key, result.value[key])
 						}
 					} else {
-						/** 没有命中，以key作为value */
+						/** If not matched, fall back to key as value */
 						found.name = getLastName(inputValue)
 					}
 					onChange({
@@ -201,14 +201,14 @@ export default function useTextareaMode({
 						[valueFieldName]: curValues,
 					})
 
-					/** 关闭编辑层 */
+					/** Close editor layer */
 					closeCurrentNodeEdit()
 				}
 			}
 		}
 	})
 
-	/** 弹出层内容 */
+	/** Popover content */
 	const EditContent = useMemoizedFn((id: string) => {
 		return (
 			<Input
@@ -222,7 +222,7 @@ export default function useTextareaMode({
 					e.stopPropagation()
 				}}
 				onBlur={() => {
-					/** 关闭编辑层 */
+					/** Close the editing layer */
 					closeCurrentNodeEdit()
 				}}
 			/>
@@ -230,14 +230,14 @@ export default function useTextareaMode({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	})
 
-	/** 提供给下层节点的高阶组件 */
+	/** HOC to wrap child nodes with popover editing */
 	const withPopOver = useMemoizedFn(
 		(WrappedComponent: React.ReactNode, config: EXPRESSION_ITEM) => {
-			/** common mode 直接返回原组件 */
+			/** In common mode, return the original component */
 			if (!allowModifyField) return WrappedComponent
 			const isPopoverVisible = popVisibleMap[config.uniqueId]
 
-			/** textarea mode 需要有弹出层，修改数据 */
+			/** In textarea mode, show popover to edit data */
 			return (
 				<Popover
 					content={() => EditContent(config.uniqueId)}
@@ -256,16 +256,15 @@ export default function useTextareaMode({
 		withPopOver,
 	}
 
-	/** 新增节点patch函数，用于删除特殊标识符 */
+	/** Patch newly added nodes to strip special markers */
 	const patchToAddLabel = useMemoizedFn((updatedExpressionVal: InputExpressionValue) => {
-		// 由于是Mode=TextArea时是通过输入 「$ 」，选择完字段需要删除 「$ 」并关闭弹出层
+		// In TextArea mode users type "$ " to trigger; remove it after selection and close popover
 		if (valueFieldName) {
 			const curValues = updatedExpressionVal[
 				valueFieldName as keyof InputExpressionValue
 			] as EXPRESSION_VALUE[]
 			if (curValues.length > 0) {
-				// console.log("currentTrigger", currentTrigger, curValues)
-				/** 直接通过正则替换掉「$ 」*/
+				// Strip the "$ " marker directly
 				const triggerItem = curValues.find(
 					(item) => item.uniqueId === currentTrigger.uniqueId,
 				)
@@ -284,7 +283,7 @@ export default function useTextareaMode({
 		}
 	})
 
-	/** 当处于textarea mode时，需要给原来的cascader提供原有的级联选项 */
+	/** In textarea mode, keep cascader expansion state aligned */
 	const extraCascaderProps = useMemo(() => {
 		return { open: openDropdown } as Record<string, any>
 	}, [openDropdown])
@@ -301,3 +300,4 @@ export default function useTextareaMode({
 		userInput,
 	}
 }
+

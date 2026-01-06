@@ -1,4 +1,4 @@
-import type { ErrorType } from "./error"
+﻿import type { ErrorType } from "./error"
 
 /**
  * Log module namespace
@@ -49,7 +49,11 @@ export namespace LogModule {
 		extra?: string
 		/** Record time */
 		time: Date
-		/** SDK名称及版本号 */
+		/** SDK name and version */
 		version: string
 	}
 }
+
+
+
+

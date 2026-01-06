@@ -1,4 +1,4 @@
-import { defineConfig } from "tsup"
+﻿import { defineConfig } from "tsup"
 import type { Options } from "tsup"
 import copy from "esbuild-plugin-copy"
 
@@ -84,3 +84,7 @@ export default defineConfig([
 		outExtension: () => ({ js: ".min.js" }),
 	},
 ])
+
+
+
+

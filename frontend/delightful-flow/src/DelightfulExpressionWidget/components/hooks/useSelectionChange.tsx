@@ -1,4 +1,4 @@
-import { useMemoizedFn } from "ahooks"
+﻿import { useMemoizedFn } from "ahooks"
 import { useEffect } from "react"
 
 export default function useSelectionChange(editRef: any) {
@@ -7,12 +7,12 @@ export default function useSelectionChange(editRef: any) {
 		if (!selection) return
 		if (!selection.rangeCount) return
 
-		// 获取选中的范围
+		// Get selected range
 		const range = selection.getRangeAt(0)
 
 		// console.log("selectionChange", range)
 
-		// 查找选中范围内的表达式块
+		// Find expression blocks within the selected range
 		const expressionBlocks = (editRef?.current?.querySelectorAll?.(".expression-block") ||
 			[]) as NodeListOf<Element>
 		// console.log("expressionBlocks", editRef?.current?.querySelectorAll?.(".expression-block"))
@@ -34,3 +34,4 @@ export default function useSelectionChange(editRef: any) {
 		}
 	}, [])
 }
+

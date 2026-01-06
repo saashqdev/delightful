@@ -1,4 +1,4 @@
-// Default label colors for multi-dimensional table view, used cyclically
+﻿// Default label colors for multi-dimensional table view, used cyclically
 export const DEFAULT_COLOR = [
 	"#E2EBFE",
 	"#FEEAD4",
@@ -87,3 +87,4 @@ export const COLOR_DATA_TEXT_COLOR: Record<string, string> = {
 	"rgb(78, 27, 167)": "#FFF",
 	"rgba(55, 60, 67, 0.95)": "#FFF"
 }
+

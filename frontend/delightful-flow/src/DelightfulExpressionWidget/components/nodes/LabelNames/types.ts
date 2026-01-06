@@ -1,12 +1,12 @@
+﻿
 
-
-// 通用文本块值类型
+// Generic text block value type
 export type Names = {
     id: string
     name: string
 }
 
-// 通用文本块选项类型
+// Generic text block option type
 export type NamesOption = {
     id: string
     label: string,

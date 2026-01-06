@@ -3,24 +3,29 @@ import { convertSvgToPng } from "../image"
 
 describe("image utils", () => {
 	// 模拟浏览器环境
+	// Simulate browser environment
 	let origCreateElement: typeof document.createElement
 	let mockCanvas: HTMLCanvasElement
 	let mockContext: CanvasRenderingContext2D
 	let mockImage: HTMLImageElement
 
 	// 模拟toDataURL方法的返回值
+	// Mock return value for toDataURL
 	const mockPngUrl = "data:image/png;base64,mockPngData"
 
 	beforeEach(() => {
 		// 保存原始方法
+		// Save original method
 		origCreateElement = document.createElement
 
 		// 模拟context
+		// Mock context
 		mockContext = {
 			drawImage: vi.fn(),
 		} as unknown as CanvasRenderingContext2D
 
 		// 模拟canvas
+		// Mock canvas
 		mockCanvas = {
 			getContext: vi.fn().mockReturnValue(mockContext),
 			toDataURL: vi.fn().mockReturnValue(mockPngUrl),
@@ -29,6 +34,7 @@ describe("image utils", () => {
 		} as unknown as HTMLCanvasElement
 
 		// 模拟Image
+		// Mock Image
 		mockImage = {} as HTMLImageElement
 		Object.defineProperties(mockImage, {
 			onload: { value: null, writable: true },
@@ -39,12 +45,13 @@ describe("image utils", () => {
 		})
 
 		// 模拟document.createElement
+		// Mock document.createElement
 		document.createElement = vi.fn().mockImplementation((tagName: string) => {
 			if (tagName === "canvas") {
 				return mockCanvas
 			}
 			if (tagName === "img") {
-				// 使用setTimeout模拟图片异步加载
+				// Use setTimeout to simulate async image load
 				setTimeout(() => {
 					if (mockImage.onload && typeof mockImage.onload === "function") {
 						mockImage.onload.call(mockImage, new Event("load"))
@@ -56,6 +63,7 @@ describe("image utils", () => {
 		})
 
 		// 模拟DOMParser
+		// Mock DOMParser
 		const mockDOMParser = function () {
 			return {
 				parseFromString() {
@@ -80,69 +88,74 @@ describe("image utils", () => {
 		vi.stubGlobal("DOMParser", mockDOMParser)
 
 		// 模拟btoa (Base64编码)
+		// Mock btoa (Base64 encoding)
 		vi.stubGlobal("btoa", () => "mockBase64String")
 
 		// 模拟encodeURIComponent
+		// Mock encodeURIComponent
 		vi.stubGlobal("encodeURIComponent", () => "encodedSvg")
 
 		// 模拟unescape
 		vi.stubGlobal("unescape", () => "unescapedSvg")
+		// Mock unescape
 	})
 
 	afterEach(() => {
 		// 恢复原始方法
+		// Restore original method
 		document.createElement = origCreateElement
 		vi.restoreAllMocks()
 	})
 
 	describe("convertSvgToPng", () => {
-		it("应成功将SVG转换为PNG", async () => {
+		it("converts SVG to PNG successfully", async () => {
 			const svg = "<svg width='100' height='100'></svg>"
 
 			const result = await convertSvgToPng(svg)
 
 			// 验证创建canvas和图片元素
+			// Verify canvas and image elements are created
 			expect(document.createElement).toHaveBeenCalledWith("canvas")
 			expect(document.createElement).toHaveBeenCalledWith("img")
 
-			// 验证canvas的toDataURL被调用
+			// Verify canvas toDataURL is called
 			expect(mockCanvas.toDataURL).toHaveBeenCalledWith("image/png")
 
-			// 验证返回正确的数据URL
+			// Verify correct data URL is returned
 			expect(result).toBe(mockPngUrl)
 		})
 
-		it("应使用指定的宽度并基于SVG原始比例计算高度", async () => {
+		it("uses provided width and original aspect ratio for height", async () => {
 			const svg = "<svg width='300' height='200'></svg>"
 			const width = 600
 
 			await convertSvgToPng(svg, width)
 
-			// 验证canvas尺寸设置正确
+			// Verify canvas dimensions are set correctly
 			expect(mockCanvas.width).toBe(600)
 			expect(mockCanvas.height).toBe(400) // 保持300:200的原始比例
 
-			// 验证drawImage调用正确
+			// Verify drawImage is called with expected args
 			expect(mockContext.drawImage).toHaveBeenCalledWith(mockImage, 0, 0, 600, 400)
 		})
 
-		it("当提供height参数时应限制最大高度", async () => {
+		it("caps height when height parameter is provided", async () => {
 			const svg = "<svg width='300' height='200'></svg>"
 			const width = 600
 			const height = 300 // 比例计算应为400，但我们限制为300
 
 			await convertSvgToPng(svg, width, height)
 
-			// 验证canvas尺寸被正确限制
+			// Verify canvas dimensions are capped
 			expect(mockCanvas.width).toBe(600)
 			expect(mockCanvas.height).toBe(300) // 被限制为300
 
-			// 验证drawImage调用
+			// Verify drawImage call
 			expect(mockContext.drawImage).toHaveBeenCalledWith(mockImage, 0, 0, 600, 300)
 		})
 
-		it("当height小于按比例计算的高度时应限制高度", async () => {
-			// 模拟SVG比例为2:1
+		it("caps height when provided height is below aspect ratio result", async () => {
+			// Mock SVG aspect ratio 2:1
 			const mockParser21 = function () {
 				return {
 					parseFromString() {
@@ -173,7 +186,7 @@ describe("image utils", () => {
 			expect(mockCanvas.height).toBe(200) // 验证被限制为200
 		})
 
-		it("当未指定height时不应限制高度", async () => {
+		it("does not cap height when height is omitted", async () => {
 			// 模拟SVG比例为1:2
 			const mockParser12 = function () {
 				return {
@@ -204,7 +217,7 @@ describe("image utils", () => {
 			expect(mockCanvas.height).toBe(600) // 应保持1:2的原始比例
 		})
 
-		it("当SVG没有宽高属性时应从viewBox获取比例", async () => {
+		it("uses viewBox ratio when width/height are missing", async () => {
 			// 模拟只有viewBox的SVG
 			const mockParserViewBox = function () {
 				return {
@@ -237,7 +250,7 @@ describe("image utils", () => {
 			expect(mockCanvas.height).toBe(600) // 保持400:300的原始比例
 		})
 
-		it("当所有尺寸信息缺失时应使用图像的天然尺寸", async () => {
+		it("falls back to intrinsic image size when no dimensions provided", async () => {
 			// 模拟没有尺寸信息的SVG
 			const mockParserNoSize = function () {
 				return {
@@ -292,10 +305,11 @@ describe("image utils", () => {
 			mockImage = origMockImage
 		})
 
-		it("应处理SVG加载错误", async () => {
+		it("handles SVG load errors", async () => {
 			const svg = "<svg></svg>"
 
 			// 模拟图片加载错误
+			// Simulate image load error
 			document.createElement = vi.fn().mockImplementation((tagName: string) => {
 				if (tagName === "canvas") {
 					return mockCanvas
@@ -311,27 +325,27 @@ describe("image utils", () => {
 				return origCreateElement.call(document, tagName)
 			})
 
-			await expect(convertSvgToPng(svg)).rejects.toThrow("SVG图片加载失败")
+			await expect(convertSvgToPng(svg)).rejects.toThrow("SVG image failed to load")
 		})
 
-		it("应处理canvas上下文获取失败", async () => {
+		it("handles missing canvas context", async () => {
 			const svg = "<svg></svg>"
 
-			// 模拟无法获取canvas上下文
+			// Simulate failing to acquire canvas context
 			mockCanvas.getContext = vi.fn().mockReturnValue(null)
 
-			await expect(convertSvgToPng(svg)).rejects.toThrow("无法获取canvas上下文")
+			await expect(convertSvgToPng(svg)).rejects.toThrow("Unable to acquire canvas context")
 		})
 
-		it("应处理toDataURL转换失败", async () => {
+		it("handles toDataURL conversion failures", async () => {
 			const svg = "<svg></svg>"
 
-			// 模拟toDataURL失败
+			// Simulate toDataURL failure
 			mockCanvas.toDataURL = vi.fn().mockImplementation(() => {
-				throw new Error("转换失败")
+				throw new Error("Conversion failed")
 			})
 
-			await expect(convertSvgToPng(svg)).rejects.toThrow("PNG转换失败")
+			await expect(convertSvgToPng(svg)).rejects.toThrow("PNG conversion failed")
 		})
 	})
 })

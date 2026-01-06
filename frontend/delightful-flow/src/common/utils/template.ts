@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Template string parser that supports ${expression} interpolation.
  *
  * @param template Template string containing ${expression} placeholders

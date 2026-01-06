@@ -1,4 +1,4 @@
-import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
+﻿import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { IconBug } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
@@ -15,3 +15,4 @@ export default function DebuggerToolbar() {
 
 	return <IconBug stroke={1} onClick={toolbarFunc} />
 }
+

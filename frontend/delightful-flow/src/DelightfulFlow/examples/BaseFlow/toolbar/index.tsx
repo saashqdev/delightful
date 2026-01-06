@@ -1,4 +1,4 @@
-import DebuggerToolbar from "./Debugger"
+﻿import DebuggerToolbar from "./Debugger"
 
 export default function useToolbar() {
 	return [
@@ -8,3 +8,4 @@ export default function useToolbar() {
 		},
 	]
 }
+

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react"
+﻿import React, { useMemo, useState } from "react"
 
 import { FormItemType } from "@/DelightfulExpressionWidget/types"
 import TSIcon from "@/common/BaseUI/TSIcon"
@@ -13,44 +13,44 @@ import { Wrap } from "./style"
 import { useReactFlow } from "reactflow"
 
 export type StepOption = {
-	value: string // 实际的值，如 toArray()、toJson()、toNumber()..
-	arguments?: string // 传递的参数，目前只支持string，如str.toArray(',')
+	value: string // Actual value, e.g., toArray(), toJson(), toNumber()
+	arguments?: string // Arguments to pass; currently only string, e.g., str.toArray(',')
 	withArguments?: boolean
-	label: string // 显示的文本，如转数组、转对象
-	icon?: React.ReactElement // 显示的icon，如数组的icon...
+	label: string // Display text, e.g., convert to array/object
+	icon?: React.ReactElement // Display icon, e.g., array icon
 	type: string
 }
 
 type TransformerProps = React.PropsWithChildren<{
-	/** 数据来源 */
+	/** Data source */
 	source: DataSourceOption
-	/** 实际变更函数 */
+	/** Callback invoked when a transform chain is chosen */
 	onSelect: (node: any, trans?: string) => void
 }>
 
 /**
- * Transformer组件
- *
- * 该组件用于在ReactFlow环境中提供数据类型转换功能的悬浮面板。
- * 允许用户从一个数据类型转换到另一个数据类型，支持链式转换操作。
- *
- * 特性:
- * - 基于数据源类型动态生成可用的转换方法
- * - 支持链式调用多个转换方法
- * - 提供参数化转换，允许为特定转换设置参数
- * - 在ReactFlow缩放环境中自适应定位
- * - 提供面包屑导航以展示转换链条
- *
- * 解决方案:
- * - 使用ReactFlow的缩放信息动态调整弹出层的位置
- * - 将弹出层挂载到适当的DOM节点以确保正确的事件传递
- * - 通过动态计算偏移量而非内容缩放来保持UI交互性
- *
- * @param {TransformerProps} props - 组件属性
- * @param {DataSourceOption} props.source - 数据来源，包含类型信息
- * @param {Function} props.onSelect - 数据转换选择回调
- * @param {React.ReactNode} props.children - 触发弹出层的子元素
- * @returns {JSX.Element} 转换器组件
+	 * Transformer component
+	 *
+	 * A floating panel in the ReactFlow canvas that lets users convert one data
+	 * type into another, supporting chained transforms.
+	 *
+	 * Features:
+	 * - Dynamically generates available transforms based on the source type
+	 * - Supports chaining multiple transforms
+	 * - Allows parameterized transforms for specific steps
+	 * - Adapts positioning in the scaled ReactFlow canvas
+	 * - Provides breadcrumb navigation for the transform chain
+	 *
+	 * Implementation notes:
+	 * - Uses ReactFlow scale info to adjust popover positioning
+	 * - Mounts the popover to the correct DOM node for event handling
+	 * - Adjusts offsets (instead of scaling content) to keep interactions crisp
+	 *
+	 * @param {TransformerProps} props - component props
+	 * @param {DataSourceOption} props.source - data source with type metadata
+	 * @param {Function} props.onSelect - transform selection callback
+	 * @param {React.ReactNode} props.children - trigger element
+	 * @returns {JSX.Element} transformer popover
  */
 const Transformer = ({ source, onSelect, children }: TransformerProps) => {
 	const [values, setValues, resetValues] = useResetState([] as StepOption[])
@@ -73,11 +73,11 @@ const Transformer = ({ source, onSelect, children }: TransformerProps) => {
 		return paths || ([] as StepOption[])
 	}, [paths])
 
-	/** 初始化可转换的函数列表 */
+	/** Initialize the list of available transforms */
 	const initStepOptions = useMemoizedFn((type: string) => {
 		if (!type) return
 		let typeArgs = type
-		// 处理对象数组、字符串数组的类型不是array时，统一用array处理
+		// Normalize array-like strings/objects that are not exactly "array"
 		if (type.includes(FormItemType.Array)) {
 			typeArgs = FormItemType.Array
 		}
@@ -175,7 +175,7 @@ const Transformer = ({ source, onSelect, children }: TransformerProps) => {
 
 	const onOpenChange = useMemoizedFn((visible: boolean) => {
 		setOpen(visible)
-		// 关闭时重置值
+		// Reset the chain when closing
 		if (!visible) {
 			resetValues()
 		}
@@ -242,3 +242,4 @@ const Transformer = ({ source, onSelect, children }: TransformerProps) => {
 }
 
 export default Transformer
+

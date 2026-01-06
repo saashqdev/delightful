@@ -1,4 +1,4 @@
-declare module "esdk-obs-browserjs" {
+﻿declare module "esdk-obs-browserjs" {
 	interface ObsClientOptions {
 		access_key_id: string
 		secret_access_key: string
@@ -45,3 +45,7 @@ declare module "esdk-obs-browserjs" {
 
 	export default ObsClient
 }
+
+
+
+

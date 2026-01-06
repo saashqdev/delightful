@@ -1,4 +1,4 @@
-import { EditOutlined } from '@ant-design/icons';
+﻿import { EditOutlined } from '@ant-design/icons';
 import { AutoComplete, Input } from 'antd';
 import React, { ReactElement, useState } from 'react';
 import { MOCK_SOURCE } from '../../constants';
@@ -69,3 +69,4 @@ const MockSelect = (props: MockSelectProp): ReactElement => {
 };
 
 export default MockSelect;
+

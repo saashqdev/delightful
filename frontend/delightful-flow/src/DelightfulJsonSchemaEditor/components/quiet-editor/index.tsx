@@ -1,4 +1,4 @@
-import Editor, { OnChange } from '@monaco-editor/react';
+﻿import Editor, { OnChange } from '@monaco-editor/react';
 import React, { ReactElement } from 'react';
 import { xcodeDefault } from './themes';
 
@@ -71,3 +71,4 @@ const QuietEditor = (props: QuietEditorProp): ReactElement => {
 };
 
 export default QuietEditor;
+

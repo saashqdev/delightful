@@ -1,5 +1,6 @@
-/**
- * 特殊渲染组件：如单选、多选、成员等等，支持设置引用值时的公用方法状态
+﻿/**
+ * Shared helper for special render components (single select, multi select, member, etc.)
+ * to handle removing referenced values
  */
 
 import { EXPRESSION_ITEM, WithReference } from "@/DelightfulExpressionWidget/types"
@@ -10,7 +11,7 @@ type UseDeleteReferenceNodeProps = {
     setValues: React.Dispatch<React.SetStateAction<WithReference<any>[]>>
     config: EXPRESSION_ITEM
     updateFn: (val: EXPRESSION_ITEM) => void
-    // 实际的赋值key
+    // Actual prop key to store values
     valueName: string
 }
 
@@ -22,7 +23,7 @@ export default function useDeleteReferenceNode({
     valueName
 }:UseDeleteReferenceNodeProps) {
   
-    // 在特殊渲染块删除引用值的公用方法
+    // Shared helper to remove referenced values for special render blocks
 	const onDeleteReferenceNode = useMemoizedFn((item: WithReference<EXPRESSION_ITEM>) => {
 		const index = values.findIndex(
 			(multipleItem) =>
@@ -41,3 +42,4 @@ export default function useDeleteReferenceNode({
         onDeleteReferenceNode
     }
 }
+

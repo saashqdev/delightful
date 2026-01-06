@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Check if fileName contains special characters
  * @param fileName
  */
@@ -19,3 +19,7 @@ export function getFileExtension(fileName: string): string {
 	const extension = fileName.substring(lastDotIndex + 1)
 	return extension.toLowerCase() // Return lowercase extension
 }
+
+
+
+

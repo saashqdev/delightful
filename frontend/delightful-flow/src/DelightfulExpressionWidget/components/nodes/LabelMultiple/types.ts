@@ -1,9 +1,9 @@
+﻿
 
-
-// 多选值类型
+// Multi-select value type
 export type Multiple = string
 
-// 多选选项类型
+// Multi-select option type
 export type MultipleOption = {
     id: string
     label: string,

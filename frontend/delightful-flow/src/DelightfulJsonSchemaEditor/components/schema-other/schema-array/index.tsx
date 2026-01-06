@@ -1,4 +1,4 @@
-import { QuestionCircleOutlined } from '@ant-design/icons';
+﻿import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Col, InputNumber, Row, Switch, Tooltip } from 'antd';
 import React, { ReactElement, useContext } from 'react';
 import Schema from '../../../types/Schema';
@@ -86,3 +86,4 @@ const SchemaArray = (props: SchemaArrayProp): ReactElement => {
 };
 
 export default SchemaArray;
+

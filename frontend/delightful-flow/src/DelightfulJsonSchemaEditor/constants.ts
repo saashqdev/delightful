@@ -1,4 +1,4 @@
-import { FormItemType } from "@/DelightfulExpressionWidget/types";
+﻿import { FormItemType } from "@/DelightfulExpressionWidget/types";
 import i18next, { TFunction } from "i18next";
 
 export const JSONPATH_JOIN_CHAR = '.';
@@ -222,4 +222,5 @@ export const DefaultColumnNames = () => ({
     [ShowColumns.Encryption]: i18next.t("jsonSchema.columnEncryptionName", { ns: "delightfulFlow", defaultValue: "Encrypted" }),
     [ShowColumns.Required]: i18next.t("jsonSchema.columnRequiredName", { ns: "delightfulFlow", defaultValue: "Required" })
 })
+
 

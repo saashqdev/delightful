@@ -1,4 +1,4 @@
-import FlowPopup from "@/DelightfulFlow/components/FlowPopup"
+﻿import FlowPopup from "@/DelightfulFlow/components/FlowPopup"
 import { nodeManager } from "@/DelightfulFlow/register/node"
 import { Flex, Popover, Tooltip } from "antd"
 import { IconPencilMinus, IconTransfer } from "@tabler/icons-react"
@@ -139,3 +139,4 @@ function BranchNode({ data, isConnectable, id, position }: NodeProps) {
 }
 
 export default BranchNode
+

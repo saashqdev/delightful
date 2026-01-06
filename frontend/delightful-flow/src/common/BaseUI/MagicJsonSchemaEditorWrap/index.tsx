@@ -1,4 +1,4 @@
-/** Form component with one extra render layer
+﻿/** Form component with one extra render layer
  * {
         "id": "component-66399f15d691c",
         "version": "1",
@@ -44,3 +44,4 @@ function DelightfulJSONSchemaEditorWrap({ ...props }: DelightfulJSONSchemaEditor
 }
 
 export default DelightfulJSONSchemaEditorWrap as any
+

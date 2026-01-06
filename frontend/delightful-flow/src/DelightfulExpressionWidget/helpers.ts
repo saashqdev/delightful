@@ -1,4 +1,4 @@
-// @ts-ignore
+﻿// @ts-ignore
 import Snowflake from "snowflake-id"
 import { TextAreaModeTrigger } from "./constant"
 import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference"

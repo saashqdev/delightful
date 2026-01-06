@@ -1,4 +1,4 @@
-import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference"
+﻿import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference"
 import { BaseNodeType, nodeManager, NodeSchema, NodeVersion, NodeVersionWidget, NodeWidget } from "../register/node"
 import { FormItemType } from "@/DelightfulExpressionWidget/types"
 import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
@@ -551,3 +551,4 @@ export const checkIsLoopStart = (node: DelightfulFlow.Node,paramsName: Delightfu
 export const checkIsInGroup = (node: DelightfulFlow.Node) => {
 	return node?.meta?.parent_id
 }
+

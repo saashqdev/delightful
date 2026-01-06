@@ -1,4 +1,4 @@
-import type { PlatformMultipartUploadOption, PlatformSimpleUploadOption, PlatformType } from "./index"
+﻿import type { PlatformMultipartUploadOption, PlatformSimpleUploadOption, PlatformType } from "./index"
 import type { DataWrapperWithHeaders, Result } from "./request"
 
 /**
@@ -47,7 +47,7 @@ export namespace MinIO {
 		name: string
 		fileSize: number
 		partSize: number
-		uploadId: string
+		UploadId: string
 		doneParts: DonePart[]
 	}
 
@@ -104,4 +104,8 @@ export namespace MinIO {
 
 	export type CompleteMultipartUploadResponseType = Result<OriginResponseData>
 }
+
+
+
+
 

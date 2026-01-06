@@ -1,4 +1,4 @@
-export function isBlob(blob: any) {
+﻿export function isBlob(blob: any) {
 	return typeof Blob !== "undefined" && blob instanceof Blob
 }
 
@@ -39,3 +39,7 @@ export const isJson = (str: any): boolean => {
 }
 
 export const isObject = (obj: any) => Object.prototype.toString.call(obj) === "[object Object]"
+
+
+
+

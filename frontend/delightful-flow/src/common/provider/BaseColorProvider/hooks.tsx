@@ -1,4 +1,4 @@
-import { useContext } from "react"
+﻿import { useContext } from "react"
 import { BaseColorContext } from "./context"
 
 /**
@@ -8,3 +8,4 @@ import { BaseColorContext } from "./context"
 export const useBaseColor = () => {
 	return useContext(BaseColorContext)
 }
+

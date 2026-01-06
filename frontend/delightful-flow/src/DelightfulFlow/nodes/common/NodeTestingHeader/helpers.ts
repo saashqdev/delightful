@@ -1,14 +1,14 @@
-import { NodeTestConfig } from "@/DelightfulFlow/context/NodeTesingContext/Context";
+﻿import { NodeTestConfig } from "@/DelightfulFlow/context/NodeTesingContext/Context";
 import { TestingResultRow } from "./useTesting";
 import _ from "lodash";
 
 
-/** 转化成列表 */
+/** Transform testing result entries into a list */
 export const transformToList = (testConfig: NodeTestConfig, key = 'output' as keyof NodeTestConfig): TestingResultRow[] => {
     if(key === 'input' && !testConfig?.success) {
         return []
     }
-	// 如果失败，则直接取error_message
+	// If the run failed, surface the error message
 	if (!testConfig?.success) {
 		return [
 			{
@@ -27,7 +27,7 @@ export const transformToList = (testConfig: NodeTestConfig, key = 'output' as ke
 	)
 }
 
-/** 生成debug列表 */
+/** Build the debug log list */
 export const generateDebugLogList = (testConfig: NodeTestConfig): TestingResultRow[] => {
 	return (
 		Object.entries(testConfig?.debug_log || {}).map(([key, value]) => {

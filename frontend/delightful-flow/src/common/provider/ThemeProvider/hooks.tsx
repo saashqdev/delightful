@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+﻿import { useMemo } from "react"
 import { useAppearanceStore } from "../AppearanceProvider/context"
 
 export type ThemeMode = "light" | "dark" | "auto"
@@ -22,3 +22,4 @@ export const useGlobalThemeMode = () => {
 
 	return { themeMode, prefersColorScheme, setThemeMode }
 }
+

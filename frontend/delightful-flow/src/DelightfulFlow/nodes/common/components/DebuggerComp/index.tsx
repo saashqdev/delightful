@@ -1,4 +1,4 @@
-import { DefaultNodeVersion } from "@/DelightfulFlow/constants"
+﻿import { DefaultNodeVersion } from "@/DelightfulFlow/constants"
 import { useFlowData, useSingleNodeConfig } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { copyToClipboard } from "@/DelightfulFlow/utils"
 import { message } from "antd"
@@ -11,10 +11,10 @@ type DebuggerCompProps = {
 	id: string
 }
 
-// 使用memo包装组件以防止不必要的重渲染
+// Wrap with memo to avoid unnecessary rerenders
 const DebuggerComp = memo(
 	function DebuggerComp({ id }: DebuggerCompProps) {
-		// 使用单节点配置钩子，只订阅当前节点配置变化
+		// Subscribe only to the current node config
 		const nodeConfig = useSingleNodeConfig(id)
 		const { debuggerMode } = useFlowData()
 		const { currentNode } = useCurrentNode()
@@ -26,7 +26,7 @@ const DebuggerComp = memo(
 			message.success(i18next.t("common.copySuccess", { ns: "delightfulFlow" }))
 		}, [id, nodeConfig])
 
-		// 如果不是调试模式，直接返回null避免渲染
+		// Skip rendering when not in debug mode
 		if (!debuggerMode) {
 			return null
 		}
@@ -52,9 +52,10 @@ const DebuggerComp = memo(
 		)
 	},
 	(prevProps, nextProps) => {
-		// 自定义比较函数，只有当id变化时才重新渲染
+		// Only rerender when id changes
 		return prevProps.id === nextProps.id
 	},
 )
 
 export default DebuggerComp
+

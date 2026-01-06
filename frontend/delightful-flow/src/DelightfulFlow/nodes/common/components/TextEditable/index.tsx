@@ -1,4 +1,4 @@
-import { Input, Tooltip } from "antd"
+﻿import { Input, Tooltip } from "antd"
 import clsx from "clsx"
 import i18next from "i18next"
 import React, { memo, useCallback } from "react"
@@ -15,7 +15,7 @@ type TextEditableProps = {
 	className?: string
 }
 
-// 使用memo包装组件，避免不必要的重渲染
+// Wrap with memo to avoid unnecessary rerenders
 const TextEditable = memo(
 	function TextEditable({
 		isEdit,
@@ -26,11 +26,11 @@ const TextEditable = memo(
 		className,
 	}: TextEditableProps) {
 		const { t } = useTranslation()
-		// 使用自定义hook处理文本编辑逻辑
+		// Use a custom hook for text editing logic
 		const { handleKeyDown, currentTitle, inputTitle, setInputTitle, onInputBlur } =
 			useTextEditable({ title, onChange })
 
-		// 优化文本输入处理函数
+		// Optimize text input handler
 		const handleInputChange = useCallback(
 			(e: React.ChangeEvent<HTMLInputElement>) => {
 				setInputTitle(e.target.value)
@@ -38,12 +38,12 @@ const TextEditable = memo(
 			[setInputTitle],
 		)
 
-		// 优化编辑模式切换
+		// Optimize edit mode toggle
 		const enableEditMode = useCallback(() => {
 			setIsEdit(true)
 		}, [setIsEdit])
 
-		// 根据编辑状态渲染不同内容
+		// Render different content based on edit state
 		return (
 			<div className={clsx(styles.titleEdit, className)}>
 				{!isEdit ? (
@@ -68,7 +68,7 @@ const TextEditable = memo(
 		)
 	},
 	(prevProps, nextProps) => {
-		// 自定义比较函数，只在重要属性变化时重新渲染
+		// Custom comparator; rerender only on important prop changes
 		return (
 			prevProps.isEdit === nextProps.isEdit &&
 			prevProps.title === nextProps.title &&
@@ -79,3 +79,4 @@ const TextEditable = memo(
 )
 
 export default TextEditable
+

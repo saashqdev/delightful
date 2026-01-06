@@ -1,4 +1,4 @@
-import { ExpressionSource } from "@/DelightfulExpressionWidget/types"
+﻿import { ExpressionSource } from "@/DelightfulExpressionWidget/types"
 import { CustomFieldsConfig } from "@/DelightfulJsonSchemaEditor/types/Schema"
 import type { PropsWithChildren } from "react"
 import React, { useMemo } from "react"
@@ -84,3 +84,4 @@ export const GlobalProvider = ({
 
 	return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>
 }
+

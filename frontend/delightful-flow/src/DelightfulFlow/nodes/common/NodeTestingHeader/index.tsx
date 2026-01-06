@@ -1,4 +1,4 @@
-import { copyToClipboard } from "@/DelightfulFlow/utils"
+﻿import { copyToClipboard } from "@/DelightfulFlow/utils"
 import { message } from "antd"
 import { IconX } from "@tabler/icons-react"
 import { useMemoizedFn, useUpdateEffect } from "ahooks"
@@ -13,19 +13,19 @@ import styles from "./index.module.less"
 import useTesting, { TestingResultRow } from "./useTesting"
 import useNodeSelected from "@/DelightfulFlow/hooks/useNodeSelected"
 
-// 定义Tag类型
+// Tag definition
 interface Tag {
 	content: string
 	background: string
 	color: string
 }
 
-// 定义TestingTags组件的Props接口
+// Props for TestingTags component
 interface TestingTagsProps {
 	tags?: Tag[]
 }
 
-// 提取子组件，减少主组件重绘
+// Extracted subcomponent to reduce parent re-renders
 const TestingTags: FC<TestingTagsProps> = memo(({ tags }) => {
 	return (
 		<div className={styles.tags}>
@@ -42,7 +42,7 @@ const TestingTags: FC<TestingTagsProps> = memo(({ tags }) => {
 	)
 })
 
-// 定义ToggleButton组件的Props接口
+// Props for the ToggleButton component
 interface ToggleButtonProps {
 	showBody: boolean
 	isTesting: boolean
@@ -50,7 +50,7 @@ interface ToggleButtonProps {
 	onToggle: () => void
 }
 
-// 提取切换按钮组件
+// Extract toggle button as a memoized subcomponent
 const ToggleButton: FC<ToggleButtonProps> = memo(
 	({ showBody, isTesting, isEmptyTest, onToggle }) => {
 		if (isTesting || isEmptyTest) return null
@@ -157,7 +157,8 @@ const NodeTestingHeaderComponent: FC = () => {
 	)
 }
 
-// 使用memo包装整个组件
+// Memoize the whole component
 const NodeTestingHeader = memo(NodeTestingHeaderComponent)
 
 export default NodeTestingHeader
+

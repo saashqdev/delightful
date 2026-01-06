@@ -1,4 +1,4 @@
-/* eslint-disable no-nested-ternary */
+﻿/* eslint-disable no-nested-ternary */
 import styled, { css } from "styled-components"
 /** eslint-disable @typescript-eslint/consistent-type-imports */
 import { ExpressionMode, TextAreaModePanelHeight } from "./constant"
@@ -457,3 +457,4 @@ export const FuncTipsStyle = styled.div`
 		}
 	}
 `
+

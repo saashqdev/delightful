@@ -1,4 +1,4 @@
-import { InitException, InitExceptionCode } from "../../Exception/InitException"
+﻿import { InitException, InitExceptionCode } from "../../Exception/InitException"
 import type { MethodType, PlatformMultipartUploadOption, PlatformRequest } from "../../types"
 import { PlatformType } from "../../types"
 import type { OSS } from "../../types/OSS"
@@ -7,11 +7,11 @@ import { request } from "../../utils/request"
 import { normalizeSuccessResponse } from "../../utils/response"
 
 /**
- * @description: STS 上传
- * @param {File | Blob} file 文件
- * @param {String} key 文件名
- * @param {OSS.STSAuthParams} params 上传凭证信息
- * @param {PlatformMultipartUploadOption} option 配置字段
+ * @description: STS upload
+ * @param {File | Blob} file File
+ * @param {String} key File name
+ * @param {OSS.STSAuthParams} params Upload credential info
+ * @param {PlatformMultipartUploadOption} option Configuration field
  */
 export const STSUpload: PlatformRequest<OSS.STSAuthParams, PlatformMultipartUploadOption> = async (
 	file,
@@ -43,7 +43,7 @@ export const STSUpload: PlatformRequest<OSS.STSAuthParams, PlatformMultipartUplo
 		)
 	}
 
-	// 阿里云 PostObject 上传限制 5GB
+	// Aliyun PostObject upload limit 5GB
 	if (file?.size > 5 * 1024 * 1024 * 1024) {
 		throw new InitException(InitExceptionCode.UPLOAD_FILE_TO_BIG, key)
 	}
@@ -59,7 +59,7 @@ export const STSUpload: PlatformRequest<OSS.STSAuthParams, PlatformMultipartUplo
 		subRes: "",
 	}
 
-	// 发送请求
+	// Send request
 	return request<OSS.PutResponse>({
 		...createRequest(configParams, option),
 		taskId: option.taskId,
@@ -68,3 +68,7 @@ export const STSUpload: PlatformRequest<OSS.STSAuthParams, PlatformMultipartUplo
 		return normalizeSuccessResponse(path, PlatformType.OSS, headers)
 	})
 }
+
+
+
+

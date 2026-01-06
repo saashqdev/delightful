@@ -1,4 +1,4 @@
-import { BaseNodeType, NodeVersionWidget, NodeWidget } from "@/DelightfulFlow/register/node"
+﻿import { BaseNodeType, NodeVersionWidget, NodeWidget } from "@/DelightfulFlow/register/node"
 import React from "react"
 
 export type NodeVersionMap = Record<BaseNodeType, NodeVersionWidget>
@@ -10,3 +10,4 @@ export type NodeMapCtx = React.PropsWithChildren<{
 export const NodeMapContext = React.createContext({
 	nodeMap: {} as NodeVersionMap
 } as NodeMapCtx)
+

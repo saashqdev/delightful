@@ -1,4 +1,4 @@
-import { checkIsReferenceNode } from "@/DelightfulExpressionWidget/helpers"
+﻿import { checkIsReferenceNode } from "@/DelightfulExpressionWidget/helpers"
 import { EXPRESSION_ITEM, WithReference } from "@/DelightfulExpressionWidget/types"
 import { getColor } from "@/DelightfulExpressionWidget/utils"
 import { useMemoizedFn, useUpdateEffect } from "ahooks"
@@ -98,3 +98,4 @@ export default function LabelDepartmentNames({
 		</div>
 	)
 }
+

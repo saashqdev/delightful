@@ -1,4 +1,4 @@
-// @ts-nocheck
+﻿// @ts-nocheck
 import React from "react"
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 import PerformanceTest from "./PerformanceTest"
@@ -158,3 +158,4 @@ const linkStyle = {
 }
 
 export default TestRoute
+

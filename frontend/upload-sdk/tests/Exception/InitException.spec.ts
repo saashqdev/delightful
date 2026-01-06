@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest"
+﻿import { describe, test, expect } from "vitest"
 import { InitException, InitExceptionCode } from "../../src/Exception/InitException"
 import { BaseException } from "../../src/Exception/BaseException"
 
@@ -73,4 +73,8 @@ describe("InitException", () => {
 		}).toThrow(InitException)
 	})
 })
+
+
+
+
 

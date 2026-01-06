@@ -1,4 +1,4 @@
-import { useMemoizedFn } from 'ahooks'
+﻿import { useMemoizedFn } from 'ahooks'
 import { useState } from 'react'
 import { TabObject } from '../constants'
 import { AgentType, useMaterialSource } from '@/DelightfulFlow/context/MaterialSourceContext/MaterialSourceContext'
@@ -41,3 +41,4 @@ export default function useMaterialSearch({ tab }:UseMaterialSearchProps) {
         agentType
 	}
 }
+

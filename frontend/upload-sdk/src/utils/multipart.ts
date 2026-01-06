@@ -1,4 +1,4 @@
-import * as buffer from "buffer"
+﻿import * as buffer from "buffer"
 import { InitException, InitExceptionCode } from "../Exception/InitException"
 import type { Checkpoint } from "../types"
 import type { ErrorType } from "../types/error"
@@ -161,14 +161,18 @@ export function initCheckpoint(
 	name: string,
 	fileSize: number,
 	partSize: number,
-	uploadId: string,
+	UploadId: string,
 ): Checkpoint {
 	return {
 		file,
 		name,
 		fileSize,
 		partSize,
-		uploadId,
+		UploadId,
 		doneParts: [],
 	}
 }
+
+
+
+

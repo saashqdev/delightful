@@ -1,4 +1,4 @@
-/** Event name */
+﻿/** Event name */
 type EventName = string
 
 export default class EventEmitter<T extends (...args: any[]) => void> {
@@ -31,3 +31,7 @@ export default class EventEmitter<T extends (...args: any[]) => void> {
 		}
 	}
 }
+
+
+
+

@@ -1,4 +1,4 @@
-import { IconPlus } from "@douyinfe/semi-icons"
+﻿import { IconPlus } from "@douyinfe/semi-icons"
 import { Popover } from "antd"
 import { useUpdateEffect } from "ahooks"
 import clsx from "clsx"
@@ -9,7 +9,7 @@ import { prefix } from "../constants"
 import styles from "./index.module.less"
 import useEdgeSelected from "../hooks/useEdgeSelected"
 
-// 自定义边组件属性类型
+// Custom edge component prop types
 export interface CustomEdgeProps extends EdgeProps {
 	data?: {
 		allowAddOnLine?: boolean
@@ -17,7 +17,7 @@ export interface CustomEdgeProps extends EdgeProps {
 	}
 }
 
-// 边组件内部实现
+// Edge component implementation
 function CustomEdgeComponent({
 	id,
 	sourceX,
@@ -33,7 +33,7 @@ function CustomEdgeComponent({
 	style,
 	data,
 }: CustomEdgeProps) {
-	// 使用钩子获取边的选中状态
+	// Track whether the edge is selected
 	const { isSelected } = useEdgeSelected(id)
 	const [popupOpen, setPopupOpen] = React.useState(false)
 	const [isHovered, setIsHovered] = React.useState(false)
@@ -85,7 +85,7 @@ function CustomEdgeComponent({
 
 	return (
 		<>
-			{/* 主要边路径 */}
+			{/* Primary edge path */}
 			<path
 				id={id}
 				d={edgePath}
@@ -106,7 +106,7 @@ function CustomEdgeComponent({
 				onMouseLeave={handleMouseLeave}
 			/>
 
-			{/* 添加节点的图标 */}
+			{/* Icon to add a node */}
 			{allowAddOnLine && (
 				<foreignObject
 					x={iconPosition.x}
@@ -147,12 +147,12 @@ function CustomEdgeComponent({
 	)
 }
 
-// 自定义比较函数，控制何时需要重新渲染边组件
+// Custom comparator controlling when the edge rerenders
 const propsAreEqual = (prevProps: CustomEdgeProps, nextProps: CustomEdgeProps) => {
-	// 如果边的ID变化，需要重新渲染
+	// Rerender when edge id changes
 	if (prevProps.id !== nextProps.id) return false
 
-	// 如果位置信息变化，需要重新渲染
+	// Rerender when position changes
 	if (
 		prevProps.sourceX !== nextProps.sourceX ||
 		prevProps.sourceY !== nextProps.sourceY ||
@@ -163,7 +163,7 @@ const propsAreEqual = (prevProps: CustomEdgeProps, nextProps: CustomEdgeProps) =
 	)
 		return false
 
-	// 如果连接的节点或handle发生变化，需要重新渲染
+	// Rerender when connected nodes or handles change
 	if (
 		prevProps.source !== nextProps.source ||
 		prevProps.target !== nextProps.target ||
@@ -171,21 +171,22 @@ const propsAreEqual = (prevProps: CustomEdgeProps, nextProps: CustomEdgeProps) =
 	)
 		return false
 
-	// 如果样式或markerEnd改变，需要重新渲染
+	// Rerender when style or markerEnd changes
 	if (
 		prevProps.markerEnd !== nextProps.markerEnd ||
 		JSON.stringify(prevProps.style) !== JSON.stringify(nextProps.style)
 	)
 		return false
 
-	// 检查data中的allowAddOnLine属性
+	// Check allowAddOnLine in data
 	if (prevProps.data?.allowAddOnLine !== nextProps.data?.allowAddOnLine) return false
 
-	// 如果以上条件都没有触发，则认为不需要重新渲染
+	// Otherwise no rerender needed
 	return true
 }
 
-// 使用memo包装组件以减少不必要的重新渲染
+// Wrap with memo to avoid unnecessary rerenders
 const CustomEdge = memo(CustomEdgeComponent, propsAreEqual)
 
 export default CustomEdge
+

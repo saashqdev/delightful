@@ -1,4 +1,4 @@
-import mime from "mime"
+﻿import mime from "mime"
 import { InitException, InitExceptionCode } from "../../Exception/InitException"
 import { UploadException, UploadExceptionCode } from "../../Exception/UploadException"
 import type { PlatformRequest, PlatformSimpleUploadOption } from "../../types"
@@ -9,11 +9,11 @@ import { request } from "../../utils/request"
 import { normalizeSuccessResponse } from "../../utils/response"
 
 /**
- * @description: 简单上传 post请求
- * @param {File | Blob} file 文件
- * @param {String} key 文件名
- * @param {TOS.AuthParams} params 上传凭证信息
- * @param {PlatformSimpleUploadOption} option 配置字段
+ * @description: Simple upload POST request
+ * @param {File | Blob} file File
+ * @param {String} key File name
+ * @param {TOS.AuthParams} params Upload credential info
+ * @param {PlatformSimpleUploadOption} option Configuration field
  */
 const defaultUpload: PlatformRequest<TOS.AuthParams, PlatformSimpleUploadOption> = (
 	file,
@@ -45,17 +45,17 @@ const defaultUpload: PlatformRequest<TOS.AuthParams, PlatformSimpleUploadOption>
 		)
 	}
 
-	// 火山引擎 PostObject 上传限制 5GB
+	// Volcengine PostObject upload limit 5GB
 	if (file?.size > 5 * 1024 * 1024 * 1024) {
 		throw new InitException(InitExceptionCode.UPLOAD_FILE_TO_BIG, key)
 	}
 
 	const combinedKey = `${dir}${key}`
-	// 包装 FormData 对象
+	// Wrap the FormData object
 	const formData = new FormData()
-	// 如果后端返回了contentType验证字段，如：'image/' 表示以"image/"开头
+	// If the backend returns a contentType check such as 'image/' meaning it must start with "image/"
 	if (contentType) {
-		// 获取文件mime
+		// Get file mime
 		const fileMimeType = mime.getType(parseExtname(key))
 		formData.append("Content-Type", fileMimeType || contentType)
 	}
@@ -69,7 +69,7 @@ const defaultUpload: PlatformRequest<TOS.AuthParams, PlatformSimpleUploadOption>
 	formData.append("file", file)
 	// formData.append("x-tos-callback", params["x-tos-callback"])
 
-	// 发送请求
+	// Send request
 	return request<TOS.PostResponse>({
 		method: "post",
 		url: host,
@@ -89,3 +89,7 @@ const defaultUpload: PlatformRequest<TOS.AuthParams, PlatformSimpleUploadOption>
 }
 
 export default defaultUpload
+
+
+
+

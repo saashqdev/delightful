@@ -1,4 +1,4 @@
-/**
+﻿/**
  * State management for the department selector
  */
 
@@ -31,3 +31,4 @@ export default function useDepartmentModal({ dropdownOpen }: DepartmentProps) {
 		closeModal,
 	}
 }
+

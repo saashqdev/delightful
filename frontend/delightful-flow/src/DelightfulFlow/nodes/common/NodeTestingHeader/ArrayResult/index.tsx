@@ -1,4 +1,4 @@
-import { NodeTestConfig } from "@/DelightfulFlow/context/NodeTesingContext/Context"
+﻿import { NodeTestConfig } from "@/DelightfulFlow/context/NodeTesingContext/Context"
 import { Pagination } from "antd"
 import { useMemoizedFn } from "ahooks"
 import React, { useMemo, useState } from "react"
@@ -24,7 +24,7 @@ export default function ArrayResult({ arrayTestResult, onCopy }: ArrayResultProp
 	}, [arrayTestResult, currentPage])
 
 	const outputList = useMemo(() => {
-		// 如果失败，则直接取error_message
+		// If testing failed, fall back to error_message
 		return transformToList(curPageTestingResult!, "output")
 	}, [curPageTestingResult])
 
@@ -55,3 +55,4 @@ export default function ArrayResult({ arrayTestResult, onCopy }: ArrayResultProp
 		</div>
 	)
 }
+

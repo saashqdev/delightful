@@ -1,4 +1,4 @@
-import { IconX } from "@tabler/icons-react"
+﻿import { IconX } from "@tabler/icons-react"
 import React from "react"
 import { MultipleOption } from "../../../types"
 
@@ -19,3 +19,4 @@ export default function MultipleBlock({ item, onDelete }: MultipleBlockProps) {
 		</div>
 	)
 }
+

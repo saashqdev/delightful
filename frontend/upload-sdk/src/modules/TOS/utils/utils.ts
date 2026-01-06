@@ -1,4 +1,4 @@
-export const getSortedQueryString = (query: Record<string, any>) => {
+﻿export const getSortedQueryString = (query: Record<string, any>) => {
 	const searchParts: string[] = []
 	Object.keys(query)
 		.sort()
@@ -11,3 +11,7 @@ export const getSortedQueryString = (query: Record<string, any>) => {
 export function isBuffer(obj: unknown): obj is Buffer {
 	return typeof Buffer !== "undefined" && obj instanceof Buffer
 }
+
+
+
+

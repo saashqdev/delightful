@@ -1,4 +1,4 @@
-import { DefaultOptionType } from "antd/lib/select"
+﻿import { DefaultOptionType } from "antd/lib/select"
 
 export enum TimeSelectType {
 	Yesterday = 'yesterday',

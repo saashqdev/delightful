@@ -1,4 +1,4 @@
-/dist/*
+﻿/dist/*
 .local
 /node_modules/**
 .helm/**
@@ -9,3 +9,6 @@ Dockerfile
 **/*.sh
 
 /public/*
+
+
+

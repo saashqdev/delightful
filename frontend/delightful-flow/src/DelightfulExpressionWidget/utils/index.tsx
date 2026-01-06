@@ -1,4 +1,4 @@
-import { EXPRESSION_ITEM, EXPRESSION_VALUE, LabelTypeMap } from "../types"
+﻿import { EXPRESSION_ITEM, EXPRESSION_VALUE, LabelTypeMap } from "../types"
 import { COLOR_DATA, COLOR_DATA_TEXT_COLOR } from "./colors"
 
 /**
@@ -91,3 +91,4 @@ export const parseSizeToNumber = (size: string | number): number => {
 	const parsed = parseInt(size.toString(), 10)
 	return isNaN(parsed) ? 600 : parsed // Default to 600px
 }
+

@@ -1,4 +1,4 @@
-# ReactFlow Helper Lines
+﻿# ReactFlow Helper Lines
 
 The React Flow helper lines component provides alignment guides to help users align nodes precisely while dragging.
 

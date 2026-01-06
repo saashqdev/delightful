@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-shadow */
+﻿/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/naming-convention */
 import { IconArrowLeftFromArc, IconTimeline } from "@tabler/icons-react"
 import React from "react"
@@ -984,3 +984,4 @@ export const nodeSchemaMap = {
 }
 
 export default nodeSchemaMap
+

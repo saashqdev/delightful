@@ -1,4 +1,4 @@
-import { Skeleton } from "antd"
+﻿import { Skeleton } from "antd"
 import clsx from "clsx"
 import React, { memo } from "react"
 import { prefix } from "@/DelightfulFlow/constants"
@@ -29,25 +29,26 @@ const NodeContent = memo(
 		)
 	},
 	(prevProps, nextProps) => {
-		// 自定义比较函数，只在关键属性变化时重新渲染
-		// 比较showParamsComp状态是否变化
+		// Custom comparator; rerender only when key props change
+		// Compare showParamsComp state changes
 		if (prevProps.showParamsComp !== nextProps.showParamsComp) {
-			return false // 不相等，需要重新渲染
+			return false // Not equal, rerender needed
 		}
 
-		// 比较ParamsComp是否变化
-		// 如果其中一个为null而另一个不是，或者两个组件引用不同，则需要重新渲染
+		// Compare ParamsComp changes
+		// If one is null and the other not, or refs differ, rerender
 		if (
 			(!prevProps.ParamsComp && nextProps.ParamsComp) ||
 			(prevProps.ParamsComp && !nextProps.ParamsComp) ||
 			prevProps.ParamsComp !== nextProps.ParamsComp
 		) {
-			return false // 不相等，需要重新渲染
+			return false // Not equal, rerender needed
 		}
 
-		// 所有关键属性都相同，不需要重新渲染
+		// All key props equal, no rerender needed
 		return true
 	},
 )
 
 export default NodeContent
+

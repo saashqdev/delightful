@@ -1,4 +1,4 @@
-// @ts-nocheck
+﻿// @ts-nocheck
 import React, { useState, useCallback, useEffect, useMemo } from "react"
 import ReactFlow, {
 	MiniMap,
@@ -194,3 +194,4 @@ const PerformanceTest: React.FC = () => {
 }
 
 export default PerformanceTest
+

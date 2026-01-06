@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+﻿/* eslint-disable @typescript-eslint/naming-convention */
 import { useMemoizedFn, useMount, useResetState, useUpdateEffect } from "ahooks"
 import clsx from "clsx"
 import { cloneDeep, endsWith, last } from "lodash"
@@ -101,14 +101,14 @@ const ContentEditable = (
 	const cursorRef = useRef({} as CursorRef)
 	const editChangeRef = useRef({} as EditChangeRef) // Provide cross-component communication container methods
 
-	const isResetCursor = useRef(false) // 是否重置光标
-	const isEntering = useRef(false) // 是否正在拼音输入
+	const isResetCursor = useRef(false) // Whether to reset cursor
+	const isEntering = useRef(false) // Whether IME (pinyin) is active
 
-	const isKeyDown = useRef(false) // 是否键按下 长按连续输入的时候用到
-	const isExistNoUpdate = useRef(false) // 是否存在没更新的内容
+	const isKeyDown = useRef(false) // Track key down for long-press input
+	const isExistNoUpdate = useRef(false) // Track pending updates while key is held
 
-	const newValue = useRef([] as EXPRESSION_VALUE[]) // 当前可编辑div里面最新应用的数据
-	const currentNodes = useRef([] as EXPRESSION_VALUE[]) // 当前可编辑div里面所有节点数据
+	const newValue = useRef([] as EXPRESSION_VALUE[]) // Latest applied data inside the editable div
+	const currentNodes = useRef([] as EXPRESSION_VALUE[]) // All node data inside the editable div
 
 	const { extraClassname, makeCanScroll, banScroll } = useExtraClassname()
 
@@ -152,11 +152,11 @@ const ContentEditable = (
 
 	const setCurrentCursor = useMemoizedFn((e?: any) => {
 		if (e) {
-			// 可滚动，才加nowheel
+			// Enable scroll only when container is scrollable
 			if (checkIfScrollable()) makeCanScroll()
 		}
 		handleFocusWhenEncryption()
-		// 处理单击节点时
+		// Handle single node click
 		const sel = window.getSelection && window.getSelection()
 		const { id, type } = e?.target?.dataset || {}
 		const itemType = getItemType(type || "") as LabelTypeMap
@@ -223,7 +223,7 @@ const ContentEditable = (
 			}
 		}
 
-		// 保底光标移到最后
+		// Fallback: move cursor to the end
 		if (!dom) {
 			const { uniqueId } = last(displayValue) || { uniqueId: "" }
 			dom = document.getElementById(uniqueId)
@@ -337,7 +337,7 @@ const ContentEditable = (
 	}, [selectedNode])
 
 	const handleChange = useMemoizedFn((evt: any) => {
-		// 特殊处理，当前模式是Textarea且输入的内容是/时，显示表达式菜单
+		// In textarea mode, typing '/' opens the expression menu
 
 		const { data } = evt.nativeEvent
 		if (data === TextAreaModeTrigger) {
@@ -348,51 +348,51 @@ const ContentEditable = (
 			}
 		}
 
-		// // 检测用户输入 @ 时新增文本块
+		// // When user types '@', insert a new text block
 		// if (data === "@") {
 		// 	evt.stopPropagation()
 
-		// 	// 插入新的文本块
+		// 	// Insert a new text block
 		// 	const newTextBlock = {
-		// 		type: LabelText, // 假设LabelText是文本类型
+		// 		type: LabelText, // Assume LabelText is the text type
 		// 		uniqueId: SnowflakeId(),
-		// 		value: "@", // 新文本块内容初始化为@
+		// 		value: "@", // Initialize the new text block with @
 		// 	}
 
-		// 	// 将新文本块插入到当前的 resultValue 中
+		// 	// Insert the new text block into current resultValue
 		// 	currentNodes.current.push(newTextBlock)
 		// 	changeRef.current.handleChange([...currentNodes.current])
 
-		// 	// 由于插入了新块，需要重置光标
+		// 	// Reset cursor after inserting new block
 		// 	isResetCursor.current = true
 		// 	setCurrentCursor()
 
-		// 	// 阻止原文本更新
+		// 	// Prevent original text update
 		// 	return
 		// }
 
-		// 中文输入法开始输入
+		// IME (Chinese) composition starts
 		if (evt.type === "compositionstart") {
 			isEntering.current = true
 			changeRef.current.hiddenPlaceholder()
 			return
 		}
 
-		// 中文输入法结束输入
+		// IME composition ends
 		if (evt.type === "compositionend") {
 			isEntering.current = false
 		}
 
-		// 中间输入拼音的时候如果还没结束输入那么后面就不用执行
+		// Skip further handling while IME composition is active
 		if (isEntering.current) return
 
-		// 按键按下的状态不更新
+		// Defer updates while key is held down
 		if (isKeyDown.current) {
 			isExistNoUpdate.current = true
 			return
 		}
 		const dom = editRef.current
-		// 获取光标位置
+		// Get cursor position
 		const selection = window.getSelection()
 		const scrollTop =
 			// @ts-ignore
@@ -478,7 +478,7 @@ const ContentEditable = (
 		}
 	})
 
-	// 更具节点类型选择对应的组件
+	// Pick render component based on node type
 	const renderLabel = useMemoizedFn((type: LabelTypeMap) => {
 		const labelMap = {
 			[LabelTypeMap.LabelFunc]: LabelFunc,
@@ -498,7 +498,7 @@ const ContentEditable = (
 		return labelMap[itemType]
 	})
 
-	// 删除当前项
+	// Delete the current item
 	const handleDelete = useMemoizedFn((val: EXPRESSION_ITEM) => {
 		const resultData = cloneDeep(newValue.current)
 		const index = resultData.findIndex((item) => item.uniqueId === val.uniqueId)
@@ -507,7 +507,7 @@ const ContentEditable = (
 		updateDisplayValue(resultData)
 	})
 
-	// 更新当前项
+	// Update the current item
 	const handleUpdate = useMemoizedFn((val: EXPRESSION_ITEM) => {
 		const resultData = cloneDeep(newValue.current)
 		const index = resultData.findIndex((item) => item.uniqueId === val.uniqueId)
@@ -517,7 +517,7 @@ const ContentEditable = (
 	})
 
 	const handleBackspace = useMemoizedFn((e: any) => {
-		// 如果当前有选中节点，则删除这个节点
+		// If a node is selected, delete it
 		if (selectedNode) {
 			handleDelete({ uniqueId: selectedNode } as EXPRESSION_ITEM)
 			return true
@@ -525,7 +525,7 @@ const ContentEditable = (
 
 		// @ts-ignore
 		const dom = document.getSelection().getRangeAt(0)
-		if (!dom.collapsed) return true // 有选择区域则不处理
+		if (!dom.collapsed) return true // Skip when a selection exists
 		// @ts-ignore
 		const { id } = dom?.endContainer?.parentNode?.dataset || {}
 		if (!id) return true
@@ -537,12 +537,12 @@ const ContentEditable = (
 		const offset = dom.endOffset
 		const str = node?.value || ""
 
-		// 如果删的不是第一个空白字符不处理，endOffset偏移没有包括换行符
+		// Only handle deleting the leading zero-width space (endOffset excludes newlines)
 		if (offset !== 1 || str[0] !== "\u200B") return true
 
 		const secondNode = (currentNodes.current || [])[index - 1]
 		const currentType = getItemType((secondNode || {}).type) as LabelTypeMap
-		if (!secondNode || !LabelTypes.includes(currentType)) return true // 前面一个节点不是标签节点不处理
+		if (!secondNode || !LabelTypes.includes(currentType)) return true // Prior node must be a label node
 
 		if (isKeyDown.current) return true
 
@@ -553,18 +553,18 @@ const ContentEditable = (
 		return false
 	})
 
-	// 处理快捷键事件
+	// Handle keyboard shortcuts
 	const handleKeyboardShortcuts = useMemoizedFn((e: React.KeyboardEvent) => {
-		// 处理撤销重做快捷键 (Ctrl+Z, Ctrl+Y, Cmd+Z, Cmd+Shift+Z)
+		// Undo/redo shortcuts (Ctrl/Cmd+Z, Ctrl+Y, Cmd+Shift+Z)
 		if (
 			(e.ctrlKey || e.metaKey) &&
 			(e.key === "z" || e.key === "Z" || e.key === "y" || e.key === "Y")
 		) {
-			// 不阻止事件传播，只返回false以阻止后续处理
+			// Let the event bubble; return false to skip further handling here
 			return false
 		}
 
-		// 处理保存快捷键 (Ctrl+S, Cmd+S)
+		// Save shortcut (Ctrl/Cmd+S)
 		if ((e.ctrlKey || e.metaKey) && (e.key === "s" || e.key === "S")) {
 			e.preventDefault()
 			return false
@@ -575,14 +575,14 @@ const ContentEditable = (
 
 	useEffect(() => {
 		editRef.current.onkeydown = (e) => {
-			// 先处理快捷键
+			// Handle shortcuts first
 			if (!handleKeyboardShortcuts(e)) {
-				// 对于撤销重做快捷键，不阻止事件传播
+				// Let undo/redo bubble
 				if (
 					(e.ctrlKey || e.metaKey) &&
 					(e.key === "z" || e.key === "Z" || e.key === "y" || e.key === "Y")
 				) {
-					return true // 允许事件继续传播
+					return true // Allow event to continue
 				}
 				return false
 			}
@@ -593,8 +593,8 @@ const ContentEditable = (
 			if ([KeyCodeMap.ENTER].includes(e.keyCode)) {
 				const { id, offset } = cursorRef.current
 				const lastNode = last(currentNodes.current)
-				const isEnd = lastNode?.uniqueId === id && lastNode?.value?.length === offset // 判断光标是否在整个末尾
-				const endIsLineBreak = endsWith(lastNode?.value || "", "\n") // 判断倒数第一个字符是不是换行符
+				const isEnd = lastNode?.uniqueId === id && lastNode?.value?.length === offset // Cursor at end?
+				const endIsLineBreak = endsWith(lastNode?.value || "", "\n") // Is last char a newline?
 				const isAddMultiline = isEnd && !endIsLineBreak
 				// if (isAddMultiline) {
 				// 	cursorRef.current = {
@@ -692,7 +692,7 @@ const ContentEditable = (
 				isKeyDown.current = true
 			}}
 			onKeyUp={(e) => {
-				// onkeyup 在 oninput之后执行
+				// onkeyup fires after oninput
 				e.stopPropagation()
 				isKeyDown.current = false
 				if (isExistNoUpdate.current) handleChange(e)
@@ -700,10 +700,10 @@ const ContentEditable = (
 			onPaste={(e) => {
 				e.nativeEvent.stopImmediatePropagation()
 				e.stopPropagation()
-				// 获取剪贴板中的纯文本内容
+				// Read plain text from clipboard
 				let clipboardText = e.clipboardData.getData("text/plain")
 
-				// 将 < 和 > 替换为 HTML 实体，防止作为 HTML 解析
+				// Escape < and > to avoid HTML parsing
 				clipboardText = transferSpecialSign(clipboardText)
 				document.execCommand("insertHtml", true, clipboardText)
 				e.preventDefault()
@@ -739,3 +739,4 @@ const ContentEditable = (
 }
 // @ts-ignore
 export default memo(forwardRef(ContentEditable))
+

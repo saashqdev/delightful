@@ -1,4 +1,4 @@
-import mime from "mime"
+﻿import mime from "mime"
 import urlUtil from "url"
 import { InitException, InitExceptionCode } from "../../../Exception/InitException"
 import { UploadException, UploadExceptionCode } from "../../../Exception/UploadException"
@@ -113,7 +113,7 @@ export function createRequest(params: OSS.CreateRequestParams, option: OSS.Multi
 
 export async function uploadPart(
 	name: string,
-	uploadId: string,
+	UploadId: string,
 	partNo: number,
 	data: OSS.PartInfo,
 	params: OSS.MultipartUploadParams,
@@ -126,7 +126,7 @@ export async function uploadPart(
 		content: data.content,
 		subRes: {
 			partNumber: partNo,
-			uploadId,
+			UploadId,
 		},
 		...params,
 	}
@@ -155,3 +155,7 @@ export function omit(originalObject: {} | undefined, keysToOmit: string[]): {} {
 	}
 	return cloneObject
 }
+
+
+
+

@@ -1,4 +1,4 @@
-import { FuncTipsStyle } from "@/DelightfulExpressionWidget/style"
+﻿import { FuncTipsStyle } from "@/DelightfulExpressionWidget/style"
 import { MethodArgsItem } from "@/DelightfulExpressionWidget/types"
 import { useFlowInteraction } from "@/DelightfulFlow/components/FlowDesign/context/FlowInteraction/useFlowInteraction"
 import { Popover, Tooltip } from "antd"
@@ -85,3 +85,4 @@ const FunctionTips = ({ targetOption, keyword }: FunctionTipsProps) => {
 }
 
 export default FunctionTips
+

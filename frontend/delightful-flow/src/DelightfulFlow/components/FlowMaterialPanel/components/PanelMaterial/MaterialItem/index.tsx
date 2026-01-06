@@ -1,4 +1,4 @@
-import { prefix } from "@/DelightfulFlow/constants"
+﻿import { prefix } from "@/DelightfulFlow/constants"
 import { NodeSchema } from "@/DelightfulFlow/register/node"
 import clsx from "clsx"
 import { memo, useMemo } from "react"
@@ -85,3 +85,4 @@ const MaterialItem = memo(MaterialItemComponent, (prevProps, nextProps) => {
 })
 
 export default MaterialItem
+

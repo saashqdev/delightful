@@ -1,4 +1,4 @@
-import { Expression } from "@/DelightfulConditionEdit/types/expression"
+﻿import { Expression } from "@/DelightfulConditionEdit/types/expression"
 import { WidgetValue } from "../../../common/Output"
 
 
@@ -38,3 +38,4 @@ export default function addBranchTypeIfWithout(branches: Branch[]) {
 		return branch
 	})
 }
+

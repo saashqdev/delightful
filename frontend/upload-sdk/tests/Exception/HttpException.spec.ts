@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest"
+﻿import { describe, test, expect } from "vitest"
 import { HttpException, HttpExceptionCode } from "../../src/Exception/HttpException"
 import { BaseException } from "../../src/Exception/BaseException"
 
@@ -77,4 +77,8 @@ describe("HttpException", () => {
 		}).toThrow(HttpException)
 	})
 })
+
+
+
+
 

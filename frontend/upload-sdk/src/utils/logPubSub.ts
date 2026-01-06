@@ -1,4 +1,4 @@
-import type { LogModule } from "../types/log"
+﻿import type { LogModule } from "../types/log"
 
 /**
  * Log module for publishing and collecting logs
@@ -59,3 +59,7 @@ class LogPubSub {
 }
 
 export default new LogPubSub()
+
+
+
+

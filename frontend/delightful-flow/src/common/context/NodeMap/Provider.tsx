@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+﻿import React, { useMemo } from "react"
 import { NodeMapContext, NodeMapCtx } from "./Context"
 
 export const NodeMapProvider = ({ children, nodeMap }: NodeMapCtx) => {
@@ -10,3 +10,4 @@ export const NodeMapProvider = ({ children, nodeMap }: NodeMapCtx) => {
 
 	return <NodeMapContext.Provider value={value}>{children}</NodeMapContext.Provider>
 }
+

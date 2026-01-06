@@ -1,4 +1,4 @@
-import type { OSS } from "./OSS"
+﻿import type { OSS } from "./OSS"
 import type { ErrorType } from "./error"
 import type { Kodo } from "./Kodo"
 import type { Local } from "./Local"
@@ -135,7 +135,7 @@ export interface Checkpoint {
 	name: string
 	fileSize: number
 	partSize: number
-	uploadId: string
+	UploadId: string
 	doneParts: DonePart[]
 }
 
@@ -215,10 +215,10 @@ export interface PlatformModule {
 	>
 }
 
-/** 上传文件开始会生成一个 TaskId */
+/** A TaskId is generated when a file upload starts */
 export type TaskId = string
 
-/** 上传进度回调参数 */
+/** Upload progress callback parameters */
 export interface ProgressCallbackProps {
 	percent?: number
 	loaded?: number
@@ -226,13 +226,13 @@ export interface ProgressCallbackProps {
 	checkpoint?: OSS.Checkpoint | null
 }
 
-/** 成功钩子毁掉 */
+/** Success hook callback */
 export type SuccessCallback = (response?: NormalSuccessResponse) => void
 
-/** 失败钩子毁掉 */
+/** Failure hook callback */
 export type FailCallback = (err?: ErrorType.UploadError) => void
 
-/** 进度钩子毁掉 */
+/** Progress hook callback */
 export type ProgressCallback = (
 	percent?: ProgressCallbackProps["percent"],
 	loaded?: ProgressCallbackProps["loaded"],
@@ -240,39 +240,43 @@ export type ProgressCallback = (
 	checkpoint?: ProgressCallbackProps["checkpoint"],
 ) => void
 
-/** 上传任务回调 */
+/** Upload task callbacks */
 export interface TaskCallBack {
-	// 上传成功
+	// Upload succeeded
 	success?: (callback: SuccessCallback) => void
-	// 上传出错
+	// Upload errored
 	fail?: (callback: FailCallback) => void
-	// 进度
+	// Progress
 	progress?: (callback: ProgressCallback) => void
-	// 取消
+	// Cancel
 	cancel?: () => void
-	// 暂停
+	// Pause
 	pause?: () => void
-	// 恢复
+	// Resume
 	resume?: () => void
 }
 
-/** 任务对象 */
+/** Task object */
 export interface Task {
-	// 上传成功
+	// Upload succeeded
 	success?: SuccessCallback
-	// 上传出错
+	// Upload errored
 	fail?: FailCallback
-	// 进度
+	// Progress
 	progress?: ProgressCallback
-	// 取消
+	// Cancel
 	cancel?: () => void
-	// 暂停
+	// Pause
 	pause?: () => void
-	// 恢复
+	// Resume
 	resume?: () => void
-	/** 暂停行为中的文件进度信息 */
+	/** File progress info while paused */
 	pauseInfo?: {
 		isPause: boolean
 		checkpoint: OSS.Checkpoint
 	}
 }
+
+
+
+

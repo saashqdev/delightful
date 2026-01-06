@@ -1,4 +1,4 @@
-import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
+﻿import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import React from "react"
 
 export type CurrentNodeCtx = React.PropsWithChildren<{
@@ -8,3 +8,4 @@ export type CurrentNodeCtx = React.PropsWithChildren<{
 export const CurrentNodeContext = React.createContext({
 	currentNode: null
 } as CurrentNodeCtx)
+

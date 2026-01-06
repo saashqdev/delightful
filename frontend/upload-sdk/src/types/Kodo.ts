@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Qiniu cloud namespace
  */
 export namespace Kodo {
@@ -8,3 +8,7 @@ export namespace Kodo {
 		dir: string
 	}
 }
+
+
+
+

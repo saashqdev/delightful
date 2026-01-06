@@ -1,4 +1,4 @@
-// @ts-nocheck
+﻿// @ts-nocheck
 import React, { useRef, useEffect, useState, useMemo } from "react"
 import { Node, Edge } from "reactflow"
 
@@ -303,3 +303,4 @@ const CanvasRenderer: React.FC<CanvasRendererProps> = ({
 }
 
 export default CanvasRenderer
+

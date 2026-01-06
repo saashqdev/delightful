@@ -1,4 +1,4 @@
-import { prefix } from "@/DelightfulFlow/constants"
+﻿import { prefix } from "@/DelightfulFlow/constants"
 import styles from "@/DelightfulFlow/nodes/BaseNode/index.module.less"
 import { nodeManager } from "@/DelightfulFlow/register/node"
 import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
@@ -38,3 +38,4 @@ export default function useAvatar({ icon, color, currentNode }: UseAvatarProps) 
 		AvatarComponent,
 	}
 }
+

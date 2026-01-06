@@ -1,4 +1,4 @@
-import { AgentType } from "@/DelightfulFlow/context/MaterialSourceContext/MaterialSourceContext"
+﻿import { AgentType } from "@/DelightfulFlow/context/MaterialSourceContext/MaterialSourceContext"
 import React from "react"
 
 export type PanelCtx = React.PropsWithChildren<{
@@ -8,3 +8,4 @@ export type PanelCtx = React.PropsWithChildren<{
 
 export const PanelContext = React.createContext({
 } as PanelCtx)
+

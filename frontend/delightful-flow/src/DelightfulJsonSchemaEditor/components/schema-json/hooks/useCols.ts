@@ -1,4 +1,4 @@
-import { ShowColumns } from '@/DelightfulJsonSchemaEditor/constants'
+﻿import { ShowColumns } from '@/DelightfulJsonSchemaEditor/constants'
 import { useGlobal } from '@/DelightfulJsonSchemaEditor/context/GlobalContext/useGlobal'
 import React, { useMemo } from 'react'
 
@@ -35,3 +35,4 @@ export default function useCols() {
 		DescCol
 	}
 }
+

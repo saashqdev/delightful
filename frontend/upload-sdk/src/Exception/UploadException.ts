@@ -1,4 +1,4 @@
-import type { ErrorType } from "../types/error"
+﻿import type { ErrorType } from "../types/error"
 import { BaseException } from "./BaseException"
 
 export const enum UploadExceptionCode {
@@ -52,3 +52,7 @@ export class UploadException extends BaseException {
 		this.status = status
 	}
 }
+
+
+
+

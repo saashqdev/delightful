@@ -1,4 +1,4 @@
-import { Common } from "@/DelightfulConditionEdit/types/common"
+﻿import { Common } from "@/DelightfulConditionEdit/types/common"
 import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import { ComponentType } from "../constants"
 
@@ -51,3 +51,4 @@ export function genConditionComponent() {
 export function genApiComponent(defaultWidget: Common.API_SETTINGS | null = null) {
 	return genDefaultComponent(ComponentType.Api, defaultWidget) as Common.ApiComponent
 }
+

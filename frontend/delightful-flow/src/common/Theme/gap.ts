@@ -1,4 +1,4 @@
-export default {
+﻿export default {
     // Max spacing / node padding
     h1: "12px",
     // Default spacing

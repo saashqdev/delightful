@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 用户偏好设置相关状态和行为管理
  */
 import { localStorageKeyMap } from "@/DelightfulFlow/constants"
@@ -53,3 +53,4 @@ export default function useInteraction() {
 		openInteractionSelect,
 	}
 }
+

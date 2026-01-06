@@ -1,4 +1,4 @@
-import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference"
+﻿import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference"
 import type { PropsWithChildren } from "react"
 import React, { useMemo } from "react"
 import { ExpressionMode } from "../../constant"
@@ -74,3 +74,4 @@ export const GlobalProvider = ({
 
 	return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>
 }
+

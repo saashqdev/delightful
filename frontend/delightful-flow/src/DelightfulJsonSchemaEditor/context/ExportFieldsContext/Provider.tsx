@@ -1,4 +1,4 @@
-import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
+﻿import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import SchemaDescription from "@/DelightfulJsonSchemaEditor/types/SchemaDescription"
 import { useUpdateEffect } from "ahooks"
 import _ from "lodash"
@@ -39,3 +39,4 @@ export const ExportFieldsProvider = ({
 
 	return <ExportFieldsContext.Provider value={value}>{children}</ExportFieldsContext.Provider>
 }
+

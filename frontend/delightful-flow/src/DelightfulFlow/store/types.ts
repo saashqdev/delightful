@@ -1,4 +1,4 @@
-import { BaseNodeType, NodeVersionWidget } from "../register/node"
+﻿import { BaseNodeType, NodeVersionWidget } from "../register/node"
 
 export type GlobalFlowStore = {
 	// Material types allowed to be added to the canvas

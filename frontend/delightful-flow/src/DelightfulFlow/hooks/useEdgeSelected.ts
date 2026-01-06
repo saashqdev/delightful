@@ -1,4 +1,4 @@
-import { FLOW_EVENTS, flowEventBus } from "@/common/BaseUI/Select/constants"
+﻿import { FLOW_EVENTS, flowEventBus } from "@/common/BaseUI/Select/constants"
 import { useEffect, useState } from "react"
 
 export default function useEdgeSelected(id: string) {
@@ -22,3 +22,4 @@ export default function useEdgeSelected(id: string) {
         isSelected
     }
 }
+

@@ -1,4 +1,4 @@
-import 'styled-components';
+﻿import 'styled-components';
 import { ThemeType } from '../Theme';
     
 // and extend them!

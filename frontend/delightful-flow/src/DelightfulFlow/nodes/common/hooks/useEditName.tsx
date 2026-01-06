@@ -1,4 +1,4 @@
-import { useNodeConfig, useNodeConfigActions } from "@/DelightfulFlow/context/FlowContext/useFlow"
+﻿import { useNodeConfig, useNodeConfigActions } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useMemoizedFn } from "ahooks"
 import { useState } from "react"
 
@@ -30,3 +30,4 @@ export default function useEditName({ id }: UseEditName) {
 		onChangeName,
 	}
 }
+

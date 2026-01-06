@@ -1,4 +1,4 @@
-/**
+﻿/**
  * LLM参数配置器
  */
 import BaseDropdownRenderer from "@/common/BaseUI/DropdownRenderer/Base"
@@ -276,3 +276,4 @@ export default function LLMParameters({ LLMValue, onChange, options }: LLMParame
 		/>
 	)
 }
+

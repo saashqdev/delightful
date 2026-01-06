@@ -1,4 +1,4 @@
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
+﻿import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
 import mime from "mime"
 import { InitException, InitExceptionCode } from "../../Exception/InitException"
 import { UploadException, UploadExceptionCode } from "../../Exception/UploadException"
@@ -180,4 +180,8 @@ export const signedUpload: PlatformRequest<MinIO.STSAuthParams, PlatformSimpleUp
 		throw error
 	}
 }
+
+
+
+
 

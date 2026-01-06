@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Error type namespace
  * */
 export namespace ErrorType {
@@ -22,3 +22,7 @@ export namespace ErrorType {
 		partNum: number
 	}
 }
+
+
+
+

@@ -1,4 +1,4 @@
-import { GlobalFlowStoreProps } from "."
+﻿import { GlobalFlowStoreProps } from "."
 
 export const getInitialStates = ({
 	defaultDisplayMaterialTypes,

@@ -1,4 +1,4 @@
-import { useMemoizedFn } from 'ahooks'
+﻿import { useMemoizedFn } from 'ahooks'
 import React, { useState } from 'react'
 
 export default function useExtraClassname() {
@@ -17,3 +17,4 @@ export default function useExtraClassname() {
         makeCanScroll,banScroll,extraClassname
     }
 }
+

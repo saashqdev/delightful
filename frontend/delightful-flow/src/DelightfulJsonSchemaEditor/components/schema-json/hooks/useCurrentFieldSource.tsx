@@ -1,4 +1,4 @@
-/**
+﻿/**
  * State management for the current field's data source
  */
 import i18next from "i18next"
@@ -47,3 +47,4 @@ export default function useCurrentFieldSource({ curFieldKeys }: CurrentFieldSour
 		currentFieldExpressionSource,
 	}
 }
+

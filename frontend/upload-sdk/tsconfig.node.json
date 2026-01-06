@@ -1,4 +1,4 @@
-{
+﻿{
 	"compilerOptions": {
 		"composite": true,
 		"skipLibCheck": true,
@@ -14,3 +14,7 @@
 		".prettierrc.cjs"
 	]
 }
+
+
+
+

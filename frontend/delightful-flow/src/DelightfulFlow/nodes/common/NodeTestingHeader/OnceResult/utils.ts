@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 判断字符串是否可能是JSON
  * @param str 要检查的字符串
  * @returns 是否可能是JSON格式

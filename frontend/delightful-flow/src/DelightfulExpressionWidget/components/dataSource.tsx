@@ -1,4 +1,4 @@
-/** tslint-disable */
+﻿/** tslint-disable */
 import { SchemaValueSplitor } from "@/DelightfulJsonSchemaEditor/constants"
 import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference"
 import TSIcon from "@/common/BaseUI/TSIcon"
@@ -2243,3 +2243,4 @@ export const mockDataSource: DataSourceOption[] = [
 	// @ts-ignore
 	...transformDataSource(mockMethodsSource),
 ]
+

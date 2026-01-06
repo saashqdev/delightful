@@ -1,4 +1,4 @@
-import React from "react"
+﻿import React from "react"
 import { getDefaultService } from "."
 import { ServiceContext } from "./Context"
 import useJSONSchemaDesigner from "./hooks/useJSONSchemaDesigner"
@@ -22,3 +22,4 @@ export const ServiceProvider = ({ baseURL, children }: ServiceProviderProps) => 
 		</ServiceContext.Provider>
 	)
 }
+

@@ -1,4 +1,4 @@
-import { create } from "zustand"
+﻿import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
 import { platformKey } from "@/common/utils/storage"
 
@@ -92,3 +92,4 @@ const createStore = () => {
 
 // Create and export store instance
 export const store = createStore()
+

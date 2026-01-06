@@ -1,4 +1,4 @@
-# Delightful Flow Foundation Package
+﻿# Delightful Flow Foundation Package
 
 <div align="center">
   <img src="https://img.shields.io/badge/Status-Developing-blue" alt="Status: In Development">
@@ -161,3 +161,4 @@ Contributions of code or issues are welcome! Please fork this repository first, 
 ## 📄 License
 
 MIT
+

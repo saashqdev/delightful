@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest"
+﻿import { describe, test, expect } from "vitest"
 import { parseExtname } from "../../src/utils/regExpUtil"
 
 describe("regExpUtil", () => {
@@ -43,3 +43,7 @@ describe("regExpUtil", () => {
 		})
 	})
 })
+
+
+
+

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+﻿import _ from 'lodash';
 import Schema from '../types/Schema';
 
 // Schema defaults shared by all types
@@ -308,3 +308,4 @@ export const canEditField = (parentField: Schema | null): boolean => {
   // Editable in all other cases
   return true;
 };
+

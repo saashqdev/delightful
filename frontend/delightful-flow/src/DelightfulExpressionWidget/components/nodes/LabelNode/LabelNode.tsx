@@ -1,4 +1,4 @@
-import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
+﻿import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { getNodeSchema, getNodeVersion, judgeIsVariableNode } from "@/DelightfulFlow/utils"
 import { getFormTypeToTitle } from "@/DelightfulJsonSchemaEditor/constants"
 import { getCurrentTypeFromString } from "@/common/BaseUI/DropdownRenderer/Reference/components/Transformer/helpers"
@@ -73,8 +73,8 @@ export function LabelNode({ config, selected, deleteFn, wrapperWidth }: LabelNod
 	}, [currentValue, nodeMap])
 
 	/**
-	 * 是否引用正常
-	 * 正常情况是：当引用存在上文节点 & 引用的是常量
+	 * Whether the reference resolves correctly
+	 * Normal: referenced upstream node exists and the reference points to a constant
 	 */
 	const isReferenceSuccess = useMemo(() => {
 		return !!((currentValue && currentNodeSchema) || currentValue?.isConstant)
@@ -172,3 +172,4 @@ export function LabelNode({ config, selected, deleteFn, wrapperWidth }: LabelNod
 
 	return WrappedComponent
 }
+

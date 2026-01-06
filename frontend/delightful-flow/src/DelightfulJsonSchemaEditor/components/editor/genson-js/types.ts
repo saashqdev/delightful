@@ -1,4 +1,4 @@
-import { FormItemType } from "@/DelightfulExpressionWidget/types";
+﻿import { FormItemType } from "@/DelightfulExpressionWidget/types";
 
 // copy from https://github.com/aspecto-io/genson-js
 // export enum FormItemType {
@@ -26,3 +26,4 @@ export type SchemaGenOptions = {
 export type SchemaComparisonOptions = {
   ignoreRequired: boolean;
 };
+

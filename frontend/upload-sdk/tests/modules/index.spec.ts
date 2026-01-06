@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest"
+﻿import { describe, it, expect, vi } from "vitest"
 import { PlatformType } from "../../src"
 import PlatformModules from "../../src/modules"
 
@@ -55,18 +55,18 @@ describe("Upload SDK module integration tests", () => {
 
 	describe("proxy module access", () => {
 		it("should access all platform modules via proxy", async () => {
-			// 检查所有平台代理是否存在
+			// Check that all platform proxies exist
 			expect(PlatformModules[PlatformType.OSS]).toBeDefined()
 			expect(PlatformModules[PlatformType.TOS]).toBeDefined()
 			expect(PlatformModules[PlatformType.Kodo]).toBeDefined()
 			expect(PlatformModules[PlatformType.OBS]).toBeDefined()
 
-			// 验证模块属性可访问
+			// Verify module properties are accessible
 			const mockConsoleWarn = vi.spyOn(console, "warn").mockImplementation(() => {})
 			const property = Object.keys(PlatformModules[PlatformType.OSS])[0]
 
 			if (property) {
-				// 访问属性会触发懒加载
+				// Accessing the property triggers lazy loading
 				const propertyValue = PlatformModules[PlatformType.OSS][property]
 				expect(propertyValue).toBeDefined()
 			}
@@ -75,3 +75,7 @@ describe("Upload SDK module integration tests", () => {
 		})
 	})
 })
+
+
+
+

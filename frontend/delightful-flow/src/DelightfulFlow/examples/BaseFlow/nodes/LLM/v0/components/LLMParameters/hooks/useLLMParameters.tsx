@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+﻿import { useMemo } from "react"
 
 export default function useLLMParameters() {
 	const parameterList = useMemo(() => {
@@ -75,3 +75,4 @@ export default function useLLMParameters() {
 		parameterList,
 	}
 }
+

@@ -1,4 +1,4 @@
-// @ts-nocheck
+﻿// @ts-nocheck
 import React, { useState, useMemo, useCallback } from "react"
 import PerformanceTest from "./PerformanceTest"
 import CanvasRenderer from "./CanvasRenderer"
@@ -192,3 +192,4 @@ const ComparisonTest: React.FC = () => {
 }
 
 export default ComparisonTest
+

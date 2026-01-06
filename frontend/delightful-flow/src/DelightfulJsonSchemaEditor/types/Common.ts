@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-namespace
+﻿// eslint-disable-next-line @typescript-eslint/no-namespace
 export namespace Common {
   export type Options = Array<{
     label: string;
@@ -6,3 +6,4 @@ export namespace Common {
     children?: Options;
   }>;
 }
+

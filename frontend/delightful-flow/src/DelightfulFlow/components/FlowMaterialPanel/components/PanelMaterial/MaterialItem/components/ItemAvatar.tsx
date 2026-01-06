@@ -1,4 +1,4 @@
-import React, { memo, ReactNode } from "react"
+﻿import React, { memo, ReactNode } from "react"
 import useAvatar from "../hooks/useAvatar"
 
 interface ItemAvatarProps {
@@ -21,3 +21,4 @@ const ItemAvatar = memo(({ showIcon, avatar, icon, color }: ItemAvatarProps) => 
 })
 
 export default ItemAvatar
+

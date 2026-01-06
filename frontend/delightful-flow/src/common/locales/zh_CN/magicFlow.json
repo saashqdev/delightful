@@ -1,4 +1,4 @@
-{
+﻿{
     "common": {
         "search": "搜索",
         "real": "真",
@@ -97,10 +97,10 @@
         "searchAgent": "搜索助理",
         "untitledFlow": "未命名流程",
         "defaultDesc": "默认描述",
-        "changeNodeType": "切换节点类型",
+        "changeNodeType": "切换Node type",
         "enableDebug": "开启 debug",
         "disableDebug": "关闭 debug",
-        "modifyNodeName": "修改节点名称",
+        "modifyNodeName": "修改Node name",
         "nodeId": "节点 ID",
         "nodeVersion": "节点版本",
         "click2ModifyName": "单击修改名称",

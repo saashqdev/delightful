@@ -1,4 +1,4 @@
-export default {
+﻿export default {
 	f_default: {
 		"font-weight": "400",
 		"font-size": "14px",
@@ -32,3 +32,4 @@ export default {
         lineHeight: '16px'
     }
 }
+

@@ -1,4 +1,4 @@
-import ErrorContent from "@/common/BaseUI/ErrorComponent/ErrorComponent"
+﻿import ErrorContent from "@/common/BaseUI/ErrorComponent/ErrorComponent"
 import "antd/dist/reset.css"
 import clsx from "clsx"
 import _ from "lodash"
@@ -194,7 +194,7 @@ const DelightfulFlowComponent = React.forwardRef(
 			},
 		}))
 
-		// 使用useMemo缓存flowProviderProps以减少重新渲染
+		// Cache flowProviderProps with useMemo to reduce re-renders
 		const flowProviderProps = useMemo(
 			() => ({
 				flow,
@@ -260,7 +260,7 @@ const DelightfulFlowComponent = React.forwardRef(
 			],
 		)
 
-		// 使用useMemo缓存externalProviderProps以减少重新渲染
+		// Cache externalProviderProps with useMemo to reduce re-renders
 		const externalProviderProps = useMemo(
 			() => ({
 				header,
@@ -288,7 +288,7 @@ const DelightfulFlowComponent = React.forwardRef(
 			],
 		)
 
-		// 使用useMemo缓存wrapper样式类名
+		// Cache wrapper class names with useMemo
 		const wrapperClassName = useMemo(() => clsx(styles.delightfulFlow, `${prefix}delightful-flow`), [])
 
 		return (
@@ -313,10 +313,10 @@ const DelightfulFlowComponent = React.forwardRef(
 												showHeader={showHeader}
 												className={wrapperClassName}
 											/>
-											{/* 分批加载指示器 */}
+											{/* Batch loading indicator */}
 											{isProcessing && (
 												<div className={styles.batchLoadingIndicator}>
-													加载中: {progress.current}/{progress.total} 批次
+													Loading: {progress.current}/{progress.total} batches
 												</div>
 											)}
 										</FlowProvider>
@@ -332,3 +332,4 @@ const DelightfulFlowComponent = React.forwardRef(
 )
 
 export default DelightfulFlowComponent
+

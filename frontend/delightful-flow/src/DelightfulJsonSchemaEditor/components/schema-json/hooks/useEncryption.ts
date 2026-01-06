@@ -1,4 +1,4 @@
-import { FormItemType } from '@/DelightfulExpressionWidget/types'
+﻿import { FormItemType } from '@/DelightfulExpressionWidget/types'
 import { useGlobal } from '@/DelightfulJsonSchemaEditor/context/GlobalContext/useGlobal'
 import { DisabledField } from '@/DelightfulJsonSchemaEditor/types/Schema'
 import i18next, { t } from 'i18next'
@@ -46,3 +46,4 @@ export default function useEncryption({
 		encryptionTooltips
 	}
 }
+

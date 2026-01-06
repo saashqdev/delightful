@@ -1,4 +1,4 @@
-import React, { ReactElement, useContext } from 'react';
+﻿import React, { ReactElement, useContext } from 'react';
 import Schema from '../../types/Schema';
 import { EditorContext } from '../editor';
 import QuietEditor from '../quiet-editor';
@@ -59,3 +59,4 @@ const SchemaOther = (props: SchemaOtherProp): ReactElement => {
 };
 
 export default SchemaOther;
+

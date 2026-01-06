@@ -1,4 +1,4 @@
-import { Col, Row, Select } from 'antd';
+﻿import { Col, Row, Select } from 'antd';
 import _ from 'lodash';
 import React, { ReactElement, useContext } from 'react';
 import Schema from '../../../types/Schema';
@@ -66,3 +66,4 @@ const SchemaBoolean = (props: SchemaBooleanProp): ReactElement => {
 };
 
 export default SchemaBoolean;
+

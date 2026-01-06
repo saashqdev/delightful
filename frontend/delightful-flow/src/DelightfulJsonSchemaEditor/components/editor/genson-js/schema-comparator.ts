@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
+﻿/* eslint-disable @typescript-eslint/no-use-before-define */
 // copy from https://github.com/aspecto-io/genson-js
 import { unwrapSchema } from './schema-builder';
 import { Schema, SchemaComparisonOptions } from './types';
@@ -64,3 +64,4 @@ function arePropsEqual(
   }
   return true;
 }
+

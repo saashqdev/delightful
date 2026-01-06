@@ -1,4 +1,4 @@
-import { FormItemType } from "@/DelightfulExpressionWidget/types"
+﻿import { FormItemType } from "@/DelightfulExpressionWidget/types"
 import {
 	Icon123,
 	IconAbc,
@@ -151,7 +151,7 @@ const getAllMethodMap: () => Record<FormItemType, StepOption[]> = () => ({
 	[FormItemType.Integer]: [],
 })
 
-/** 根据字段类型生成可以转换的函数 */
+/** Generate transformable functions based on field type */
 export const generateStepOptions = (type: string): StepOption[] => {
 	return _.cloneDeep(getAllMethodMap()[type as FormItemType])
 }
@@ -173,11 +173,11 @@ function getUniqueOptions(allMethodMap: Record<FormItemType, StepOption[]>): Ste
 
 export const allMethodOptions = getUniqueOptions(getAllMethodMap())
 
-// 将列表转换为目标字符串 => join(',').toArray().toJson()
+// Convert list to target string => join(',').toArray().toJson()
 export function generateString(list: StepOption[]): string {
 	return list
 		.map((item) => {
-			// 判断是否有 arguments 需要拼接
+			// Append arguments when provided
 			if (item.arguments) {
 				return `${item.value}('${item.arguments}')`
 			}
@@ -186,9 +186,9 @@ export function generateString(list: StepOption[]): string {
 		.join(".")
 }
 
-// 将目标字符串还原为原来的列表
+// Convert the target string back into the original list
 export function reverseStringToList(input: string): StepOption[] {
-	const functionRegex = /(\w+)\(([^)]*)\)/g // 匹配函数和参数
+	const functionRegex = /(\w+)\(([^)]*)\)/g // Match functions and their arguments
 	const list: StepOption[] = []
 
 	let match: RegExpExecArray | null
@@ -198,27 +198,28 @@ export function reverseStringToList(input: string): StepOption[] {
 		list.push({
 			value,
 			arguments: args || undefined,
-			label: `${i18next.t("expression.transformText", { ns: "delightfulFlow" })}: ${value}`, // 这里可以根据 value 映射回 label
-			type: i18next.t("expression.transformType", { ns: "delightfulFlow" }), // 这里可以根据 value 映射回 type
+			label: `${i18next.t("expression.transformText", { ns: "delightfulFlow" })}: ${value}`, // Map value back to label if needed
+			type: i18next.t("expression.transformType", { ns: "delightfulFlow" }), // Map value back to type if needed
 		})
 	}
 
 	return list
 }
 
-// 根据join(',').toArray().toJson() 获取当前最新的类型
+// Derive the latest type from a string like join(',').toArray().toJson()
 export function getCurrentTypeFromString(input: string): string | undefined {
-	// 切割字符串并提取最后一个成员
-	const parts = input.split(".") // 使用 . 切割
-	const lastPart = parts[parts.length - 1] // 取最后一个成员
+	// Split the string and take the last segment
+	const parts = input.split(".")
+	const lastPart = parts[parts.length - 1]
 
-	// 正则匹配提取函数名称
+	// Extract the function name with regex
 	const valueMatch = lastPart.match(/(\w+)(\((.*)\))?/)
 	if (valueMatch) {
-		const value = valueMatch[1] // 提取函数名
-		// 在列表中查找匹配的项
+		const value = valueMatch[1]
+		// Find the matching item in the list
 		const foundItem = allMethodOptions.find((item) => item.value === value)
-		return foundItem ? foundItem.type : undefined // 返回对应的 type
+		return foundItem ? foundItem.type : undefined // Return the matched type if found
 	}
-	return undefined // 如果没有匹配项，返回 undefined
+	return undefined // Return undefined when no match exists
 }
+

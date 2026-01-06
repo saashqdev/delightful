@@ -1,4 +1,4 @@
-import TsSelect from "@/common/BaseUI/Select"
+﻿import TsSelect from "@/common/BaseUI/Select"
 import { SelectProps } from "antd"
 import { IconAdjustmentsHorizontal, IconChevronDown } from "@tabler/icons-react"
 import clsx from "clsx"
@@ -77,3 +77,4 @@ export default function LLMSelect({
 		></TsSelect>
 	)
 }
+

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 处理流程的鼠标事件
  */
 
@@ -297,18 +297,18 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 		const deleteIds = _nodes.reduce((acc, n) => {
 			// @ts-ignore
 			const nodeType = n.node_type
-			// 如果删除的是分组节点，则需要把子节点一并删除
+			// If deleting a group node, delete its child nodes too
 			if(judgeIsLoopBody(nodeType)) {
 				const subNodeIds = nodes.filter(_n => _n.parentId === n.id).map(_n => _n.id)
 				const result = [...acc,...subNodeIds, n.id]
-				// 如果删除的是循环体，则需要将循环节点一并删除
+				// If deleting a loop body, delete the loop node as well
 				// @ts-ignore
 				if(n.meta.parent_id) {
 					result.push(n?.meta?.parent_id)
 				}
 				return result
 			}
-			// 如果删除的是循环节点，则需要把循环体和循环体内节点删除
+			// If deleting a loop node, delete the loop body and its nodes
 			if(judgeLoopNode(nodeType)) {
 				const loopBodyNodeIds = nodes.filter(_n => _n.parentId === n.id || n?.meta?.parent_id === n.id).map(_n => _n.id)
 				return [...acc,...loopBodyNodeIds, n.id]
@@ -332,7 +332,7 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 
 		const leaveEdges = edges.filter(e => !deleteIds.includes(e.target))
 
-		// 更新边数据
+		// Update edge data
 		setEdges(leaveEdges)
 
 		resetLastLayoutData()
@@ -374,3 +374,4 @@ export default function useFlowEvents ({ resetLastLayoutData, resetCanLayout, cu
 		onNodeDrag
 	}
 }
+

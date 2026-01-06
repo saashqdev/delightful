@@ -1,4 +1,4 @@
-import { version } from "../package.json"
+﻿import { version } from "../package.json"
 import { DownloadException, DownloadExceptionCode } from "./Exception/DownloadException"
 import { InitException, InitExceptionCode } from "./Exception/InitException"
 import PlatformModules from "./modules"
@@ -175,3 +175,7 @@ export { default as OBS } from "./modules/OBS"
 export { default as Kodo } from "./modules/Kodo"
 export { default as Local } from "./modules/Local"
 export { default as MinIO } from "./modules/MinIO"
+
+
+
+

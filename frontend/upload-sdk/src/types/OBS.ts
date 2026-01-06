@@ -1,4 +1,4 @@
-import type { DonePart, PlatformMultipartUploadOption } from "./index"
+﻿import type { DonePart, PlatformMultipartUploadOption } from "./index"
 import type { DataWrapperWithHeaders } from "./request"
 
 export const enum OBSUploadFileEventType {
@@ -69,7 +69,7 @@ export namespace OBS {
 		res: unknown
 		bucket: string
 		name: string
-		uploadId: string
+		UploadId: string
 	}
 
 	export type UploadPartResponse = DataWrapperWithHeaders<null>
@@ -99,3 +99,7 @@ export namespace OBS {
 		ETag: '"e00ca89591de6668570981e97c9663ea"'
 	}>
 }
+
+
+
+

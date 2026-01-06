@@ -1,4 +1,4 @@
-import { prefix } from "@/DelightfulFlow/constants"
+﻿import { prefix } from "@/DelightfulFlow/constants"
 import { useExternal } from "@/DelightfulFlow/context/ExternalContext/useExternal"
 import { getPxWidth } from "@/DelightfulFlow/utils"
 import { KEY_CODE_MAP } from "@/DelightfulJsonSchemaEditor/constants"
@@ -21,7 +21,7 @@ export default function TextEditable({ title, onChange }: TextEditableProps) {
 	const { t } = useTranslation()
 	const [isEdit, setIsEdit] = useState(false)
 
-	// 实际title以已经设置得为准，没设置则显示默认title
+	// 实际title以已经设置得为准，没设置则显示Default title
 	const [currentTitle, setCurrentTitle] = useState(title)
 
 	/** Input框的值，默认等于当前的实际标题 */
@@ -89,3 +89,4 @@ export default function TextEditable({ title, onChange }: TextEditableProps) {
 		</div>
 	)
 }
+

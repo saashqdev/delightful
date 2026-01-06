@@ -1,4 +1,4 @@
-import { i18n } from "i18next"
+﻿import { i18n } from "i18next"
 import type { PropsWithChildren } from "react"
 import React from "react"
 import { DelightfulFlowLocaleProvider } from "../LocaleProvider"
@@ -18,3 +18,4 @@ function AppearanceProvider({
 }
 
 export default AppearanceProvider
+

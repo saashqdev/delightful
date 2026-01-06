@@ -1,4 +1,4 @@
-import { TabObject } from "@/DelightfulFlow/components/FlowMaterialPanel/constants"
+﻿import { TabObject } from "@/DelightfulFlow/components/FlowMaterialPanel/constants"
 import {
 	installNodes,
 	registerBranchNodes,
@@ -63,7 +63,7 @@ export const installAllNodes = () => {
 	/** 指定循环体类型 */
 	registerLoopBodyType(customNodeType.LoopBody)
 
-	/** 指定循环起始节点类型 */
+	/** 指定循环起始Node type */
 	registerLoopStartType(customNodeType.Start)
 
 	/** 注册循环起始节点配置 */
@@ -121,3 +121,4 @@ export const installAllNodes = () => {
 	// @ts-ignore
 	installNodes(generateNodeVersionSchema())
 }
+

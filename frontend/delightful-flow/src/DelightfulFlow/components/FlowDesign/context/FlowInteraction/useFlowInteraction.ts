@@ -1,4 +1,4 @@
-import React from "react"
+﻿import React from "react"
 import { 
 	FlowInteractionContext, 
 	FlowInteractionStateContext, 
@@ -21,3 +21,4 @@ export const useFlowInteractionActions = (): FlowInteractionActionsType => {
 export const useFlowInteraction = () => {
 	return React.useContext(FlowInteractionContext)
 }
+

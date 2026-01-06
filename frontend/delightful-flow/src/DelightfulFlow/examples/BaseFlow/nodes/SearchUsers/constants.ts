@@ -1,4 +1,4 @@
-export enum FilterTargetTypes {
+﻿export enum FilterTargetTypes {
 	Username = "username",
 	WorkNumber = "work_number",
 	Position = "position",
@@ -66,3 +66,4 @@ export const operator2Label: Record<string, string> = {
 	empty: "为空",
 	not_empty: "不为空",
 }
+

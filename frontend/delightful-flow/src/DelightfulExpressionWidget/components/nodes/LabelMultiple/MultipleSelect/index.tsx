@@ -1,4 +1,4 @@
-import i18next from "i18next"
+﻿import i18next from "i18next"
 import React from "react"
 import { useTranslation } from "react-i18next"
 import Select, { MultipleSelectProps } from "./Select"
@@ -25,3 +25,4 @@ const MultipleSelect = ({
 }
 
 export default MultipleSelect
+

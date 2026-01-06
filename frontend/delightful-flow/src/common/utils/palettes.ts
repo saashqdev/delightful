@@ -1,4 +1,4 @@
-import config from "@/common/const/color"
+﻿import config from "@/common/const/color"
 import { cloneDeep, isString, isUndefined } from "lodash"
 
 type ColorStep = [string, string, string, string, string, string, string, string, string, string]
@@ -295,3 +295,4 @@ export const darkColorUsages = genColorUsages(
 
 console.log("dark", darkColorScales, darkColorUsages)
 console.log("light", colorScales, colorUsages)
+

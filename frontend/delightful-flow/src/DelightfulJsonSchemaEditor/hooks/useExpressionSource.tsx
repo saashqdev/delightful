@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Manage the data source owned by the current form component
  */
 
@@ -78,3 +78,4 @@ export default function useExpressionSource({
     updateInnerSourceMap,
   };
 }
+

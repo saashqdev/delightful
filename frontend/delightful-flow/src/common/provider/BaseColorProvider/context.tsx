@@ -1,4 +1,4 @@
-import {
+﻿import {
 	colorScales,
 	colorUsages,
 	type ColorScales,
@@ -13,3 +13,4 @@ export const BaseColorContext = createContext<{
 	colorScales,
 	colorUsages,
 })
+

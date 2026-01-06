@@ -1,4 +1,4 @@
-import { WidgetValue } from "@/DelightfulFlow/examples/BaseFlow/common/Output"
+﻿import { WidgetValue } from "@/DelightfulFlow/examples/BaseFlow/common/Output"
 import SourceHandle from "@/DelightfulFlow/nodes/common/Handle/Source"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import DropdownCard from "@/common/BaseUI/DropdownCard"
@@ -60,3 +60,4 @@ export default function Common({
 		</div>
 	)
 }
+

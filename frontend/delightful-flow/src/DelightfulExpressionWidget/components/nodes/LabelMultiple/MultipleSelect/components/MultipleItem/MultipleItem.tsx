@@ -1,4 +1,4 @@
-import { CheckOutlined } from "@ant-design/icons"
+﻿import { CheckOutlined } from "@ant-design/icons"
 import React from "react"
 import { Multiple, MultipleOption } from "../../../types"
 import MultipleBlock from "./MultipleBlock"
@@ -36,3 +36,4 @@ export default function MultipleItem({
 		</div>
 	)
 }
+

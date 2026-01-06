@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Generic dropdown renderer
  */
 import { DefaultOptionType } from "antd/lib/select"
@@ -84,3 +84,4 @@ export default function BaseDropdownRenderer({
 		</RendererWrapper>
 	)
 }
+

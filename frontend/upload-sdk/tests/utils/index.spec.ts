@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest"
+﻿import { describe, test, expect } from "vitest"
 import { checkSpecialCharacters, getFileExtension } from "../../src/utils"
 
 describe("utils utility functions tests", () => {
@@ -64,3 +64,7 @@ describe("utils utility functions tests", () => {
 		})
 	})
 })
+
+
+
+

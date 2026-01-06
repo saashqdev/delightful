@@ -1,4 +1,4 @@
-import { Edge, Node as BaseNode } from "reactflow"
+﻿import { Edge, Node as BaseNode } from "reactflow"
 import { FlowDesignerEvents, FlowStatus } from "../constants"
 import { BaseNodeType } from "../register/node"
 import { WidgetValue } from "../examples/BaseFlow/common/Output"

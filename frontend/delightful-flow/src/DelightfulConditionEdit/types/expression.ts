@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+﻿/* eslint-disable @typescript-eslint/naming-convention */
 import { Common } from "./common"
 import { EXPRESSION_ITEM_TYPE } from "@/DelightfulJsonSchemaEditor/types/Schema"
 import { RELATION_COMP_TYPE, RELATION_LOGICS_MAP } from "../constants"
@@ -46,3 +46,4 @@ export namespace Expression {
 
 	export type ConditionSource = ConditionSourceItem[]
 }
+

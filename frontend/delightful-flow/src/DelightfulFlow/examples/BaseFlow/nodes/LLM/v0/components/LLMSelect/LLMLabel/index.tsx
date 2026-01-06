@@ -1,4 +1,4 @@
-import brandOpenApi from "@/common/assets/brand-openai.png"
+﻿import brandOpenApi from "@/common/assets/brand-openai.png"
 import { IconCheck } from "@tabler/icons-react"
 import clsx from "clsx"
 import React from "react"
@@ -50,3 +50,4 @@ export default function LLMLabel({
 		</div>
 	)
 }
+

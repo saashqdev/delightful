@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest"
+﻿import { describe, test, expect } from "vitest"
 import { BaseException } from "../../src/Exception/BaseException"
 
 describe("BaseException", () => {
@@ -41,4 +41,8 @@ describe("BaseException", () => {
 		expect(exception.stack).toContain("BaseException")
 	})
 })
+
+
+
+
 

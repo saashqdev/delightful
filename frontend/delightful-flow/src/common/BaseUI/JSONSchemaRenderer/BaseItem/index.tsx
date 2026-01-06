@@ -1,4 +1,4 @@
-import { copyToClipboard } from "@/DelightfulFlow/utils"
+﻿import { copyToClipboard } from "@/DelightfulFlow/utils"
 import { SchemaValueSplitor, getFormTypeToTitle } from "@/DelightfulJsonSchemaEditor/constants"
 import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import { Tooltip, message } from "antd"
@@ -61,3 +61,4 @@ export default function BaseItem({ displayKey, field, onExpand, isDisplay }: Bas
 		</Tooltip>
 	)
 }
+

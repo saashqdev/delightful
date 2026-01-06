@@ -1,5 +1,5 @@
-/**
- * 节点的基础样式计算hooks
+﻿/**
+ * Hook to compute base node styles
  */
 import { hexToRgba } from '@/DelightfulFlow/utils'
 import React, { useMemo } from 'react'
@@ -18,3 +18,4 @@ export default function useBaseStyles({ color }: BaseStylesProps) {
 	headerBackgroundColor
   }
 }
+

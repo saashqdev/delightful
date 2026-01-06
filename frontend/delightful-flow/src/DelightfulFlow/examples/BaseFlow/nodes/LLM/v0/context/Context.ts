@@ -1,4 +1,4 @@
-import { BaseDropdownOption } from "@/common/BaseUI/DropdownRenderer/Base";
+﻿import { BaseDropdownOption } from "@/common/BaseUI/DropdownRenderer/Base";
 import React from "react"
 
 export type ToolOptionsCtx = React.PropsWithChildren<{
@@ -10,3 +10,4 @@ export const ToolOptionsContext = React.createContext({
 } as ToolOptionsCtx)
 
 export default null
+

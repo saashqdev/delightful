@@ -1,4 +1,4 @@
-// Simpler testing strategy, only test public API of the class
+﻿// Simpler testing strategy, only test public API of the class
 import { describe, test, expect, beforeEach, vi } from "vitest"
 import { UploadManger } from "../../src/utils/UploadManger"
 import type { Method } from "../../src/types/request"
@@ -26,7 +26,7 @@ describe("UploadManger class tests", () => {
 
 		test("resumeAllTask method should call resume method of each upload task", () => {
 			const mockResume = vi.fn()
-			// @ts-ignore - 访问私有属性进行测试
+			// @ts-ignore - Access private property for testing
 			uploadManger["tasks"] = {
 				"test-id": { resume: mockResume },
 			}
@@ -37,7 +37,7 @@ describe("UploadManger class tests", () => {
 
 		test("cancelAllTask method should call cancel method of each upload task", () => {
 			const mockCancel = vi.fn()
-			// @ts-ignore - 访问私有属性进行测试
+			// @ts-ignore - Access private property for testing
 			uploadManger["tasks"] = {
 				"test-id": { cancel: mockCancel },
 			}
@@ -75,7 +75,7 @@ describe("UploadManger class tests", () => {
 				{},
 			)
 
-			// 验证返回的任务接口包含所有预期的方法
+			// Verify the returned task interface contains all expected methods
 			expect(task).toBeDefined()
 			expect(task.success).toBeInstanceOf(Function)
 			expect(task.fail).toBeInstanceOf(Function)
@@ -86,3 +86,7 @@ describe("UploadManger class tests", () => {
 		})
 	})
 })
+
+
+
+

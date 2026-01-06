@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+﻿import React, { memo } from "react"
 import { NodeToolbar as ReactFlowNodeToolbar, Position } from "reactflow"
 import ToolbarComponent from "../../common/toolbar"
 
@@ -20,3 +20,4 @@ const NodeToolbar = memo(({ isSelected, id, changeable, position }: NodeToolbarP
 })
 
 export default NodeToolbar
+

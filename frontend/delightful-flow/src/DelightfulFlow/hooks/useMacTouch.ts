@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Browser event handling helpers
  */
 
@@ -15,3 +15,4 @@ export default function useMacTouch() {
 		}
 	}, []) // Empty deps ensure this runs only on mount/unmount
 }
+

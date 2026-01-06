@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 处理节点布局相关
  */
 import { fitViewRatio } from "@/DelightfulFlow/constants"
@@ -198,7 +198,7 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 		const currentIsBezier = !isBezier
 		setIsBezier(currentIsBezier)
 
-		// 修改默认配置的type
+		// 修改Default config的type
 		defaultEdgeConfig.type = currentIsBezier
 			? EdgeModelTypes.CommonEdge
 			: EdgeModelTypes.SmoothStep
@@ -748,3 +748,4 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 		helperLinesEnabled,
 	}
 }
+

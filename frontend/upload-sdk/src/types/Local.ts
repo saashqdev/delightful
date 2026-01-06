@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Internal network upload
  */
 export namespace Local {
@@ -8,3 +8,7 @@ export namespace Local {
 		credential: string
 	}
 }
+
+
+
+

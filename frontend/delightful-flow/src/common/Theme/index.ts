@@ -1,4 +1,4 @@
-import color from "./color";
+﻿import color from "./color";
 import font from "./font";
 import gap from "./gap";
 import radius from "./radius";
@@ -12,3 +12,4 @@ export const Theme = {
 }
 
 export type ThemeType = typeof Theme
+

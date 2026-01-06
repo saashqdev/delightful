@@ -1,4 +1,4 @@
-import { FLOW_EVENTS, flowEventBus } from "@/common/BaseUI/Select/constants"
+﻿import { FLOW_EVENTS, flowEventBus } from "@/common/BaseUI/Select/constants"
 import { useEffect, useState } from "react"
 
 export default function useNodeSelected(id: string) {
@@ -20,3 +20,4 @@ export default function useNodeSelected(id: string) {
         isSelected
     }
 }
+

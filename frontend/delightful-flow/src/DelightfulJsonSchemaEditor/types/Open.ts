@@ -1,3 +1,4 @@
-export default interface Open {
+﻿export default interface Open {
   properties: Record<string, boolean> | boolean;
 }
+

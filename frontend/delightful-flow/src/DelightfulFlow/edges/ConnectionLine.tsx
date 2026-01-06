@@ -1,4 +1,4 @@
-import React from "react"
+﻿import React from "react"
 import { ConnectionLineComponentProps } from "reactflow"
 export const ConnectionLine = ({ fromX, fromY, toX, toY }: ConnectionLineComponentProps) => {
 
@@ -22,3 +22,4 @@ export const ConnectionLine = ({ fromX, fromY, toX, toY }: ConnectionLineCompone
 		</g>
 	)
 }
+

@@ -1,4 +1,4 @@
-import type { ColorScales, ColorUsages } from "@/common/utils/palettes"
+﻿import type { ColorScales, ColorUsages } from "@/common/utils/palettes"
 import { merge } from "lodash"
 import type { ThemeAppearance } from "./utils"
 
@@ -132,3 +132,4 @@ export const genComponentTokenMap = (
 			})
 	}
 }
+

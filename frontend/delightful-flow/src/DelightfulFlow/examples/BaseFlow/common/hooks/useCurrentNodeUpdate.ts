@@ -1,4 +1,4 @@
-import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
+﻿import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import type { FormInstance } from "antd"
 import { useUpdateEffect } from "ahooks"
@@ -21,3 +21,4 @@ export default function useCurrentNodeUpdate({ form }: UseCurrentNodeUpdateProps
 		})
 	}, [flow, currentNode])
 }
+

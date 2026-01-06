@@ -1,4 +1,4 @@
-import { Input, Modal } from "antd"
+﻿import { Input, Modal } from "antd"
 import React from "react"
 import { Department } from "../components/nodes/LabelDepartmentNames/LabelDepartmentNames"
 
@@ -15,12 +15,12 @@ const DepartmentModalFC = ({
 		<Modal
 			open={isOpen}
 			onCancel={closeModal}
-			title="部门选择器"
+			title="Department Selector"
 			onOk={() => {
 				onChange([
 					{
 						id: "Department",
-						name: "技术中心",
+						name: "Tech Center",
 					},
 				])
 			}}
@@ -30,3 +30,4 @@ const DepartmentModalFC = ({
 	)
 }
 export default DepartmentModalFC
+

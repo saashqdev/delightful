@@ -1,4 +1,4 @@
-import { HttpException, HttpExceptionCode } from "../Exception/HttpException"
+﻿import { HttpException, HttpExceptionCode } from "../Exception/HttpException"
 import { InitException, InitExceptionCode } from "../Exception/InitException"
 import type { GlobalCache, PlatformParams, Request, UploadSource } from "../types"
 import { request } from "./request"
@@ -103,3 +103,7 @@ export function getUploadConfig<T extends PlatformParams>(
 		}
 	})
 }
+
+
+
+

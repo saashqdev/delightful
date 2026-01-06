@@ -1,4 +1,4 @@
-import React from "react"
+﻿import React from "react"
 import { ViewportTransform } from "./types"
 
 interface HelperLinesProps {
@@ -11,7 +11,7 @@ interface HelperLinesProps {
 }
 
 /**
- * 辅助线组件，用于在React Flow中显示节点对齐参考线
+ * Helper lines used to show alignment guides in React Flow
  */
 export const HelperLines: React.FC<HelperLinesProps> = ({
 	horizontalLines,
@@ -33,7 +33,7 @@ export const HelperLines: React.FC<HelperLinesProps> = ({
 				pointerEvents: "none",
 			}}
 		>
-			{/* 水平辅助线 */}
+			{/* Horizontal guide lines */}
 			{horizontalLines.map((y, i) => (
 				<div
 					key={`h-${i}`}
@@ -50,7 +50,7 @@ export const HelperLines: React.FC<HelperLinesProps> = ({
 				/>
 			))}
 
-			{/* 垂直辅助线 */}
+			{/* Vertical guide lines */}
 			{verticalLines.map((x, i) => (
 				<div
 					key={`v-${i}`}
@@ -71,3 +71,4 @@ export const HelperLines: React.FC<HelperLinesProps> = ({
 }
 
 export default HelperLines
+

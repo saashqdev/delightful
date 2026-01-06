@@ -1,4 +1,4 @@
-import { childFieldGap } from '@/DelightfulJsonSchemaEditor/constants'
+﻿import { childFieldGap } from '@/DelightfulJsonSchemaEditor/constants'
 import { useGlobal } from '@/DelightfulJsonSchemaEditor/context/GlobalContext/useGlobal'
 import React, { useMemo } from 'react'
 
@@ -45,3 +45,4 @@ export default function useSvgLine({ propertiesLength, lastSchemaOffsetTop, chil
 		rowSvgLineProps
 	}
 }
+

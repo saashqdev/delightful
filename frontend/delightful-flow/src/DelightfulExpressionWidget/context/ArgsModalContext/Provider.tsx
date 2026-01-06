@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react"
+﻿import type { PropsWithChildren } from "react"
 import React, { useMemo } from "react"
 import { ArgsModalContext, ArgsModalContextType } from "./Context"
 
@@ -22,3 +22,4 @@ export const ArgsModalProvider = ({
 
 	return <ArgsModalContext.Provider value={value}>{children}</ArgsModalContext.Provider>
 }
+

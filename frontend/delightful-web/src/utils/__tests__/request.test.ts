@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest"
 import { fetchPaddingData } from "../request"
 
 describe("fetchPadingData", () => {
-	it("应该正确处理单次请求", async () => {
+	it("handles a single request", async () => {
 		const mockFetch = vi.fn().mockResolvedValue({
 			items: [1, 2, 3],
 			has_more: false,
@@ -16,7 +16,7 @@ describe("fetchPadingData", () => {
 		expect(result).toEqual([1, 2, 3])
 	})
 
-	it("应该正确处理多次请求", async () => {
+	it("handles multiple requests", async () => {
 		const mockFetch = vi
 			.fn()
 			.mockResolvedValueOnce({
@@ -38,7 +38,7 @@ describe("fetchPadingData", () => {
 		expect(result).toEqual([1, 2, 3, 4, 5, 6])
 	})
 
-	it("应该正确使用resolveArray选项", async () => {
+	it("uses resolveArray option correctly", async () => {
 		const mockFetch = vi.fn().mockResolvedValue({
 			items: [1, 2, 3],
 			has_more: false,
@@ -52,7 +52,7 @@ describe("fetchPadingData", () => {
 		expect(result).toEqual([1, 2, 3])
 	})
 
-	it("应该正确处理prevData参数", async () => {
+	it("handles prevData argument", async () => {
 		const mockFetch = vi.fn().mockResolvedValue({
 			items: [4, 5, 6],
 			has_more: false,
@@ -66,7 +66,7 @@ describe("fetchPadingData", () => {
 		expect(result).toEqual([1, 2, 3, 4, 5, 6])
 	})
 
-	it("应该正确处理空数据", async () => {
+	it("handles empty data", async () => {
 		const mockFetch = vi.fn().mockResolvedValue({
 			items: [],
 			has_more: false,
@@ -79,9 +79,9 @@ describe("fetchPadingData", () => {
 		expect(result).toEqual([])
 	})
 
-	it("应该正确处理请求错误", async () => {
-		const mockFetch = vi.fn().mockRejectedValue(new Error("网络错误"))
+	it("handles request errors", async () => {
+		const mockFetch = vi.fn().mockRejectedValue(new Error("Network error"))
 
-		await expect(fetchPaddingData(mockFetch)).rejects.toThrow("网络错误")
+		await expect(fetchPaddingData(mockFetch)).rejects.toThrow("Network error")
 	})
 })

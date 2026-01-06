@@ -1,4 +1,4 @@
-import { EXPRESSION_ITEM } from "@/DelightfulExpressionWidget/types"
+﻿import { EXPRESSION_ITEM } from "@/DelightfulExpressionWidget/types"
 import type { PropsWithChildren } from "react"
 import React, { useMemo } from "react"
 import { TextareaModeContext } from "./Context"
@@ -37,3 +37,4 @@ export const TextareaModeProvider = ({
 
 	return <TextareaModeContext.Provider value={value}>{children}</TextareaModeContext.Provider>
 }
+

@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest"
+﻿import { describe, test, expect } from "vitest"
 import { DownloadException, DownloadExceptionCode } from "../../src/Exception/DownloadException"
 import { BaseException } from "../../src/Exception/BaseException"
 
@@ -53,4 +53,8 @@ describe("DownloadException", () => {
 		}).toThrow(DownloadException)
 	})
 })
+
+
+
+
 

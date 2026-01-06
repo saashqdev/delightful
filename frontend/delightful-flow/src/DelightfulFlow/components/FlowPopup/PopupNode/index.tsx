@@ -1,4 +1,4 @@
-import { prefix } from "@/DelightfulFlow/constants"
+﻿import { prefix } from "@/DelightfulFlow/constants"
 import { useExternalConfig } from "@/DelightfulFlow/context/ExternalContext/useExternal"
 import { useFlowEdges, useNodeConfig } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { defaultEdgeConfig } from "@/DelightfulFlow/edges"
@@ -193,7 +193,7 @@ export default function PopupNode({ node, showIcon = true, inGroup }: PopupNodeP
 			}, 200)
 		}
 
-		/** 走切换节点类型逻辑 */
+		/** 走切换Node type逻辑 */
 		if (targetNodeId) {
 			toggleType({ key: node.id })
 		}
@@ -227,3 +227,4 @@ export default function PopupNode({ node, showIcon = true, inGroup }: PopupNodeP
 		</div>
 	)
 }
+

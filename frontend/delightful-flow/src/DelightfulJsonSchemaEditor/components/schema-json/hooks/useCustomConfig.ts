@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Return configurable options based on user-supplied field configs and special control types
  */
 import { FormItemType } from '@/DelightfulExpressionWidget/types'
@@ -80,3 +80,4 @@ export default function useCustomConfig({ value, name, type }: CustomConfigProps
 	_allowAdd
   }
 }
+

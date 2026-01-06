@@ -1,4 +1,4 @@
-import Base64 from "crypto-js/enc-base64"
+﻿import Base64 from "crypto-js/enc-base64"
 import hmacSHA1 from "crypto-js/hmac-sha1"
 import type { MethodType } from "../../../types"
 import type { OSS } from "../../../types/OSS"
@@ -106,12 +106,12 @@ export function buildCanonicalString(
 }
 
 /**
- * @description: authorization 加密方法
- * @param {MethodType} method 请求类型
- * @param {string} resource 文件路径
- * @param {string | Object} subRes 携带请求信息
- * @param {OSS.Headers} headers 请求头
- * @param {OSS.Option} option 配置字段
+ * @description: authorization signing method
+ * @param {MethodType} method Request type
+ * @param {string} resource File path
+ * @param {string | Object} subRes Request payload
+ * @param {OSS.Headers} headers Request headers
+ * @param {OSS.Option} option Configuration field
  */
 export function authorization(
 	method: MethodType,
@@ -132,3 +132,7 @@ export function authorization(
 	const { accessKeyId, accessKeySecret } = option
 	return `OSS ${accessKeyId}:${computeSignature(accessKeySecret, stringToSign)}`
 }
+
+
+
+

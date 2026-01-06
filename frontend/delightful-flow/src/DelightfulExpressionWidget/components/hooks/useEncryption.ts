@@ -1,4 +1,4 @@
-import { useGlobalContext } from '@/DelightfulExpressionWidget/context/GlobalContext/useGlobalContext'
+﻿import { useGlobalContext } from '@/DelightfulExpressionWidget/context/GlobalContext/useGlobalContext'
 import { useMemoizedFn, useUpdateEffect } from 'ahooks'
 import React from 'react'
 import { EXPRESSION_ITEM, LabelTypeMap } from '@/DelightfulExpressionWidget/types'
@@ -20,7 +20,7 @@ export default function useEncryption({
 	const { encryption, hasEncryptionValue } = useGlobalContext()
 
 	/**
-	 * 特殊处理加密状态下的focus，需要清空
+	 * Handle focus while encrypted: clear existing values
 	 */
 	const handleFocusWhenEncryption = useMemoizedFn(() => {
 		const hasPasswordValue = displayValue?.find?.(v => v.type === LabelTypeMap.LabelPassword)
@@ -31,7 +31,7 @@ export default function useEncryption({
 
 	
 	useUpdateEffect(() => {
-		// 如果已经加密并且已经有值，则显示password node
+		// When encrypted and a value exists, show the password node
 		if (encryption && hasEncryptionValue) {
 			setDisplayValue([
 				{
@@ -42,7 +42,7 @@ export default function useEncryption({
 			])
 		}
 		
-		// 如果切换为不加密，则清空password node
+		// When encryption is turned off, remove the password node
 		if(!encryption) {
 			setDisplayValue(displayValue.filter(v => v.type !== LabelTypeMap.LabelPassword))
 		}
@@ -52,3 +52,4 @@ export default function useEncryption({
 		handleFocusWhenEncryption
 	}
 }
+

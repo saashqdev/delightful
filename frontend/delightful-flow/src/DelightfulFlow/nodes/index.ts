@@ -1,4 +1,4 @@
-import CommonNode from "./BaseNode"
+﻿import CommonNode from "./BaseNode"
 import IfElseNode from "./BranchNode"
 import GroupNode from "./GroupNode"
 

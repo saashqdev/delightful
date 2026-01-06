@@ -1,4 +1,4 @@
-import { useFlowInteractionActions } from "@/DelightfulFlow/components/FlowDesign/context/FlowInteraction/useFlowInteraction"
+﻿import { useFlowInteractionActions } from "@/DelightfulFlow/components/FlowDesign/context/FlowInteraction/useFlowInteraction"
 import { useFlowNodes } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { IconUploadError } from "@douyinfe/semi-icons"
 import { Button, Popconfirm, Tooltip } from "antd"
@@ -26,7 +26,7 @@ export default function ToolbarComponent({ id, showCopy = true }: ToolbarCompone
 
 	const trashRef = useRef<HTMLElement>()
 
-	// 跟踪确认对话框是否打开
+	// Track whether the confirm dialog is open
 	const [isPopconfirmVisible, setIsPopconfirmVisible] = useState(false)
 
 	const ToolbarItems = useMemo(() => {
@@ -71,10 +71,10 @@ export default function ToolbarComponent({ id, showCopy = true }: ToolbarCompone
 	useUpdateEffect(() => {
 		console.log(DeleteKey, selectedNodeId, EnterKey, isPopconfirmVisible)
 		if (DeleteKey && selectedNodeId) {
-			// 只在未打开确认对话框的情况下点击删除按钮
+			// Only handle delete click when the confirm dialog is closed
 			trashRef?.current?.click()
 		}
-		// 当按下 Enter 键且确认对话框打开时，触发删除节点操作
+		// Trigger node deletion when Enter is pressed and the confirm dialog is open
 		if (EnterKey && isPopconfirmVisible && selectedNodeId) {
 			deleteNode(selectedNodeId)
 			setIsPopconfirmVisible(false)
@@ -101,3 +101,4 @@ export default function ToolbarComponent({ id, showCopy = true }: ToolbarCompone
 		</div>
 	)
 }
+

@@ -1,4 +1,4 @@
-import { IconEdit } from "@douyinfe/semi-icons"
+﻿import { IconEdit } from "@douyinfe/semi-icons"
 import { Checkbox, Col, Row, Select, Switch, Tooltip } from "antd"
 import { IconCircleMinus, IconCirclePlus } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
@@ -268,11 +268,11 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 				beforeKeys.push(curKey)
 				const curFieldSchema = _.get(exportFields.schema, [...beforeKeys], null)
 				if (curKey !== "properties") {
-					/** 如果不是properties时，需要携带上字段的其他参数 */
+					/** For non-properties keys, include the field's additional attributes */
 					if (!curFieldSchema) {
 						const curKeysArguments = _.get(mobxContext.schema, [...beforeKeys], null)
 						if (curKeysArguments) {
-							/** 路径上的不需要properties，最后一个field需要携带上properties属性 */
+							/** Intermediate path nodes skip properties; the final field keeps its properties */
 							const withoutPropertiesArgs =
 								keys.length > 0
 									? (_.omit(curKeysArguments, "properties") as any)
@@ -284,7 +284,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 						}
 					}
 				} else {
-					/** 如果是properties，则需要拿到当前的properties, 变更required属性 */
+					/** For properties, update required with the current properties set */
 
 					// 当前已经存在的properties字段
 					const existSchemaKeys = [...Object.keys(curFieldSchema || {})]
@@ -545,3 +545,4 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 })
 
 export default SchemaItem
+

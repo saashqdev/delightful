@@ -1,4 +1,4 @@
-import { DataSourceOption } from '@/common/BaseUI/DropdownRenderer/Reference';
+﻿import { DataSourceOption } from '@/common/BaseUI/DropdownRenderer/Reference';
 import { FormItemType, InputExpressionValue } from '@/DelightfulExpressionWidget/types';
 
 export const enum EXPRESSION_ITEM_TYPE {

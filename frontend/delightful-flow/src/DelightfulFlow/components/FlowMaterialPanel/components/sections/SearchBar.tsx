@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+﻿import React, { memo } from "react"
 import clsx from "clsx"
 import i18next from "i18next"
 import SearchInput from "@/common/BaseUI/DropdownRenderer/SearchInput"
@@ -23,3 +23,4 @@ const SearchBar = memo(({ keyword, onSearchChange }: SearchBarProps) => {
 })
 
 export default SearchBar
+

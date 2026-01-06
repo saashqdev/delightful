@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars,@typescript-eslint/no-use-before-define */
+﻿/* eslint-disable @typescript-eslint/no-unused-vars,@typescript-eslint/no-use-before-define */
 // copy from https://github.com/aspecto-io/genson-js
 import { FormItemType } from '@/DelightfulExpressionWidget/types';
 import { Schema, SchemaGenOptions } from './types';
@@ -295,3 +295,4 @@ export function createCompoundSchema(
   const schemas = values.map((value) => createSchema(value, options));
   return mergeSchemas(schemas, options);
 }
+

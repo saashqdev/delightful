@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+﻿import React, { useMemo } from "react"
 import type { ToolOptionsCtx } from "./Context"
 import { ToolOptionsContext } from "./Context"
 
@@ -13,3 +13,4 @@ export const ToolOptionsProvider = ({ tools, children }: ToolOptionsCtx) => {
 }
 
 export default null
+

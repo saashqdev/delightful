@@ -1,4 +1,4 @@
-export const OBS_MIN_PART_SIZE = 100 * 1024
+﻿export const OBS_MIN_PART_SIZE = 100 * 1024
 
 export function genCompleteMultipartUploadXMLData(
 	completeParts: { PartNumber: number; ETag: string }[],
@@ -20,3 +20,7 @@ export function genCompleteMultipartUploadXMLData(
 
 	return xmlData.innerHTML
 }
+
+
+
+

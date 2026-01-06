@@ -1,4 +1,4 @@
-import CustomInputExpression from "@/DelightfulExpressionWidget/InputExpression"
+﻿import CustomInputExpression from "@/DelightfulExpressionWidget/InputExpression"
 import { ExpressionMode } from "@/DelightfulExpressionWidget/constant"
 import { InputExpressionProps } from "@/DelightfulExpressionWidget/types"
 import { Modal } from "antd"
@@ -63,3 +63,4 @@ export default function EditInModal({ value, onChange, ...props }: InputExpressi
 		</>
 	)
 }
+

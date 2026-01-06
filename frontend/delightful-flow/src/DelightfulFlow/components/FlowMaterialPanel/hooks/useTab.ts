@@ -1,4 +1,4 @@
-import { useMemoizedFn } from "ahooks"
+﻿import { useMemoizedFn } from "ahooks"
 import { useMemo, useState } from "react"
 import { TabObject } from "../constants"
 import PanelMaterial from "../components/PanelMaterial"
@@ -68,3 +68,4 @@ export default function useTab () {
 		tabContents
 	}
 }
+

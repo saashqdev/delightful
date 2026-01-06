@@ -1,4 +1,4 @@
-import { prefix } from "@/DelightfulFlow/constants"
+﻿import { prefix } from "@/DelightfulFlow/constants"
 import SearchInput from "@/common/BaseUI/DropdownRenderer/SearchInput"
 import { IconSearch } from "@douyinfe/semi-icons"
 import { Tabs } from "antd"
@@ -15,7 +15,7 @@ interface FlowPopupProps {
 	target?: string | null
 	edgeId?: string | null
 	sourceHandle?: string
-	nodeId?: string // 切换节点类型时需要传
+	nodeId?: string // 切换Node type时需要传
 }
 
 export const MaterialPanelWidth = 330
@@ -76,3 +76,4 @@ function FlowPopup({ source, target, edgeId, sourceHandle, nodeId }: FlowPopupPr
 }
 
 export default FlowPopup
+

@@ -1,4 +1,4 @@
-export default {
+﻿export default {
     "id": "DELIGHTFUL-FLOW-677663f1ca9088-26607117",
     "icon": "",
     "name": "测试等待节点",

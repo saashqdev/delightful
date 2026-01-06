@@ -1,4 +1,4 @@
-export const mockMultipleList = [
+﻿export const mockMultipleList = [
     {
         "id": "CMkoeB1712546568666",
         "label": "1",

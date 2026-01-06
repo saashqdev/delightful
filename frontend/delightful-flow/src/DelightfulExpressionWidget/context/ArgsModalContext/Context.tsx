@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+﻿/* eslint-disable no-unused-vars */
 import { EXPRESSION_ITEM, InputExpressionValue } from "@/DelightfulExpressionWidget/types"
 import React from "react"
 
@@ -22,3 +22,4 @@ export const ArgsModalContext = React.createContext({
 	onConfirm: () => {},
 	onPopoverModalClick: () => {},
 } as ArgsModalContextType)
+

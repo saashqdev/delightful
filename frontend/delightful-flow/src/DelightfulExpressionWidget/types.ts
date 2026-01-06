@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+﻿/* eslint-disable @typescript-eslint/naming-convention */
 
 import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference";
 import type { ExpressionMode } from "./constant"

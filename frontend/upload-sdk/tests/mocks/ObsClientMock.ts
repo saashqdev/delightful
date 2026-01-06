@@ -1,4 +1,4 @@
-// Mock OBS client
+﻿// Mock OBS client
 class ObsClientMock {
 	accessKeyId: string
 
@@ -103,3 +103,7 @@ class ObsClientMock {
 }
 
 export default ObsClientMock
+
+
+
+

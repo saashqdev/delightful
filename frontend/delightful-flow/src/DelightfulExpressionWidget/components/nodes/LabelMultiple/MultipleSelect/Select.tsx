@@ -1,4 +1,4 @@
-import _ from "lodash"
+﻿import _ from "lodash"
 import React, { useMemo, useRef } from "react"
 import Options from "./Options"
 
@@ -60,3 +60,4 @@ function MultipleSelect({
 }
 
 export default MultipleSelect
+

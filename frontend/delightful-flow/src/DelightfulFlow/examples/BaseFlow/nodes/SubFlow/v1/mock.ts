@@ -1,4 +1,4 @@
-export const mockServerMethodsSource = [
+﻿export const mockServerMethodsSource = [
     {
         "label": "函数",
         "value": "methods_676fb47d34048",

@@ -1,4 +1,4 @@
-import TsInput from "@/common/BaseUI/Input"
+﻿import TsInput from "@/common/BaseUI/Input"
 import { InputRef } from "antd"
 import React, { ReactElement, ReactNode, useEffect, useRef, useState } from "react"
 
@@ -45,3 +45,4 @@ const FieldInput = (props: FieldInputProp): ReactElement => {
 }
 
 export default FieldInput
+

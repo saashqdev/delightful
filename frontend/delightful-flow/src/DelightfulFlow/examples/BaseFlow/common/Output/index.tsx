@@ -1,4 +1,4 @@
-import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
+﻿import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import DropdownCard from "@/common/BaseUI/DropdownCard"
 import JSONSchemaRenderer from "@/common/BaseUI/JSONSchemaRenderer"
 import React from "react"
@@ -27,3 +27,4 @@ export default function Output({ value, title = "输出" }: WidgetValue) {
 		</div>
 	)
 }
+

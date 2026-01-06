@@ -1,4 +1,4 @@
-import { defineConfig } from "dumi"
+﻿import { defineConfig } from "dumi"
 
 export default defineConfig({
 	outputPath: "docs-dist",
@@ -6,3 +6,4 @@ export default defineConfig({
 		name: "delightful",
 	},
 })
+

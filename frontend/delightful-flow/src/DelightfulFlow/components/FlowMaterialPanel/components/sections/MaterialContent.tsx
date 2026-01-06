@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+﻿import React, { memo } from "react"
 import clsx from "clsx"
 import { prefix } from "@/DelightfulFlow/constants"
 import styles from "../../index.module.less"
@@ -36,3 +36,4 @@ const MaterialContent = memo(({ tabContents, tab, keyword }: MaterialContentProp
 })
 
 export default MaterialContent
+

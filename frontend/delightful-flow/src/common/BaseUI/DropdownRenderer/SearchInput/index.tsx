@@ -1,4 +1,4 @@
-import { IconSearch } from "@tabler/icons-react"
+﻿import { IconSearch } from "@tabler/icons-react"
 import React, { ReactNode } from "react"
 import TsInput from "../../Input"
 import styles from "./index.module.less"
@@ -32,3 +32,4 @@ export default function SearchInput({
 		/>
 	)
 }
+

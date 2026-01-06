@@ -1,15 +1,15 @@
-import { InitException, InitExceptionCode } from "../../Exception/InitException"
+﻿import { InitException, InitExceptionCode } from "../../Exception/InitException"
 import { UploadException, UploadExceptionCode } from "../../Exception/UploadException"
 import type { PlatformRequest, PlatformSimpleUploadOption } from "../../types"
 import type { Kodo } from "../../types/Kodo"
 import { request } from "../../utils/request"
 
 /**
- * @description: 简单上传 post请求
- * @param {File | Blob} file 文件
- * @param {String} key 文件名
- * @param {Kodo.AuthParams} params 上传凭证信息
- * @param {PlatformSimpleUploadOption} option 配置字段
+ * @description: Simple upload POST request
+ * @param {File | Blob} file File
+ * @param {String} key File name
+ * @param {Kodo.AuthParams} params Upload credential info
+ * @param {PlatformSimpleUploadOption} option Configuration field
  */
 export const defaultUpload: PlatformRequest<Kodo.AuthParams, PlatformSimpleUploadOption> = (
 	file,
@@ -28,13 +28,13 @@ export const defaultUpload: PlatformRequest<Kodo.AuthParams, PlatformSimpleUploa
 		)
 	}
 
-	// 包装 FormData 对象
+	// Wrap the FormData object
 	const formData = new FormData()
 	formData.append("key", `${dir}${key}`)
 	formData.append("token", token)
 	formData.append("file", file)
 
-	// 发送请求
+	// Send request
 	return request({
 		method: "post",
 		url: "https://upload.qiniup.com",
@@ -49,3 +49,7 @@ export const defaultUpload: PlatformRequest<Kodo.AuthParams, PlatformSimpleUploa
 		},
 	})
 }
+
+
+
+

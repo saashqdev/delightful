@@ -17,14 +17,14 @@ describe("encoding utilities", () => {
 		})
 
 		it("should handle Unicode characters", () => {
-			const input = "你好世界"
+			const input = "こんにちはせかい"
 			const result = safeBtoa(input)
 			expect(result).toBeTruthy()
 			expect(result).not.toBe("")
 		})
 
 		it("should handle emoji", () => {
-			const input = "🚀 Hello 世界"
+			const input = "🚀 Hello world"
 			const result = safeBtoa(input)
 			expect(result).toBeTruthy()
 			expect(result).not.toBe("")
@@ -54,7 +54,7 @@ describe("encoding utilities", () => {
 		})
 
 		it("should handle Unicode characters", () => {
-			const input = "你好世界"
+			const input = "こんにちはせかい"
 			const encoded = safeBtoa(input)
 			const decoded = safeAtob(encoded)
 			expect(decoded).toBe(input)
@@ -76,8 +76,8 @@ describe("encoding utilities", () => {
 
 		it("should handle object with Unicode properties", () => {
 			const obj = {
-				name: "测试文件.jpg",
-				description: "这是一个测试文件 🚀",
+				name: "test-file.jpg",
+				description: "This is a test file 🚀",
 				emoji: "😀",
 			}
 			const result = safeJsonToBtoa(obj)
@@ -109,8 +109,8 @@ describe("encoding utilities", () => {
 
 		it("should handle Unicode in JSON", () => {
 			const obj = {
-				fileName: "测试文件.jpg",
-				description: "这是一个测试 🚀",
+				fileName: "test-file.jpg",
+				description: "This is a test 🚀",
 			}
 			const encoded = safeJsonToBtoa(obj)
 			const decoded = safeBtoaToJson(encoded)
@@ -183,12 +183,12 @@ describe("encoding utilities", () => {
 	describe("integration tests", () => {
 		it("should handle complete encoding/decoding cycle with Unicode", () => {
 			const originalData = {
-				fileName: "测试文件名.jpg",
-				description: "This is a test file with emoji 🚀 and Chinese 中文",
+				fileName: "test-filename.jpg",
+				description: "This is a test file with emoji 🚀 and multilingual text",
 				metadata: {
 					size: 1024,
 					type: "image/jpeg",
-					tags: ["测试", "test", "🏷️"],
+					tags: ["test", "example", "🏷️"],
 				},
 			}
 

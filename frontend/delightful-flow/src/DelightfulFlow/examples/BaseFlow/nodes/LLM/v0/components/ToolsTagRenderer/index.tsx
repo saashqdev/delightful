@@ -1,4 +1,4 @@
-import { Tag, type SelectProps } from "antd"
+﻿import { Tag, type SelectProps } from "antd"
 import React, { useMemo } from "react"
 import { useToolOptions } from "../../context/useTools"
 import ToolsOptionWrapper from "../ToolsOptionWrapper"
@@ -30,3 +30,4 @@ const ToolsTagRenderer: TagRenderProps = (props: any) => {
 }
 
 export default ToolsTagRenderer
+

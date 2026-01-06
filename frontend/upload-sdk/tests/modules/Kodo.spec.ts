@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeAll, afterAll, afterEach } from "vitest"
+﻿import { describe, it, expect, vi, beforeAll, afterAll, afterEach } from "vitest"
 import { Kodo } from "../../src"
 import { defaultUpload } from "../../src/modules/Kodo/defaultUpload"
 import { request } from "../../src/utils/request"
@@ -8,7 +8,7 @@ vi.mock("../../src/utils/request", () => {
 		request: vi.fn().mockImplementation((options) => {
 			return Promise.resolve({
 				code: 1000,
-				message: "请求成功",
+				message: "Request succeeded",
 				headers: {},
 				data: {
 					key: options.data ? options.data.get("key") : "test/test.txt",
@@ -130,7 +130,7 @@ describe("Kodo module tests", () => {
 						() =>
 							resolve({
 								code: 1000,
-								message: "模拟成功响应",
+								message: "Mock success response",
 								data: { path: "test/test.txt" },
 								headers: {},
 							}),
@@ -155,3 +155,7 @@ describe("Kodo module tests", () => {
 		})
 	})
 })
+
+
+
+

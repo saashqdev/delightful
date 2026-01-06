@@ -1,5 +1,5 @@
-/**
- * 处理节点类型下拉状态和行为
+﻿/**
+ * 处理Node type下拉状态和行为
  */
 
 import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
@@ -52,3 +52,4 @@ export default function usePopup({ currentNode, isSelected }: DropdownProps) {
 		closePopup,
 	}
 }
+

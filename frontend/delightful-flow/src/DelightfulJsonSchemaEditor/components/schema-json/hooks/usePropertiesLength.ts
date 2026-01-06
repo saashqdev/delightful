@@ -1,4 +1,4 @@
-import { useGlobal } from '@/DelightfulJsonSchemaEditor/context/GlobalContext/useGlobal'
+﻿import { useGlobal } from '@/DelightfulJsonSchemaEditor/context/GlobalContext/useGlobal'
 import React, { useMemo } from 'react'
 
 type PropertiesLengthProps = {
@@ -20,3 +20,4 @@ export default function usePropertiesLength({ prefix }: PropertiesLengthProps) {
 	propertiesLength
   }
 }
+

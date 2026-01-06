@@ -1,4 +1,4 @@
-import { CheckOutlined } from "@ant-design/icons"
+﻿import { CheckOutlined } from "@ant-design/icons"
 import React, { useMemo } from "react"
 import { Names, NamesOption } from "../../../types"
 import NamesBlock from "./NamesBlock"
@@ -45,3 +45,4 @@ export default function NamesItem({
 		</div>
 	)
 }
+

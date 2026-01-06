@@ -1,4 +1,4 @@
-import { useNodeConfigActions } from "@/DelightfulFlow/context/FlowContext/useFlow"
+﻿import { useNodeConfigActions } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
 import { ShowColumns } from "@/DelightfulJsonSchemaEditor/constants"
 import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
@@ -117,3 +117,4 @@ export default function SubFlowV1() {
 		</Form>
 	)
 }
+

@@ -1,4 +1,4 @@
-/dist/*
+﻿/dist/*
 .local
 /node_modules/**
 .helm/**
@@ -11,3 +11,7 @@ Dockerfile
 /public/*
 
 README.md
+
+
+
+

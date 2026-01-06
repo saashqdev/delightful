@@ -1,4 +1,4 @@
-import React, { ReactElement, useLayoutEffect, useMemo, useState } from "react"
+﻿import React, { ReactElement, useLayoutEffect, useMemo, useState } from "react"
 import Schema from "../../../types/Schema"
 import SvgLine from "../../svgLine"
 import usePropertiesLength from "../hooks/usePropertiesLength"
@@ -89,3 +89,4 @@ const SchemaObject = (props: SchemaObjectProp): ReactElement => {
 }
 
 export default SchemaObject
+

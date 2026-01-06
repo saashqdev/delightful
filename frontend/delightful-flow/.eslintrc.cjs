@@ -1,4 +1,4 @@
-module.exports = {
+﻿module.exports = {
 	extends: [
 		"@dtyq/eslint-config",
 		"@dtyq/eslint-config/typescript",
@@ -6,3 +6,4 @@ module.exports = {
 		"@dtyq/eslint-config/prettier",
 	],
 }
+

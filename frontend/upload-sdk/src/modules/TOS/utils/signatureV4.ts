@@ -1,4 +1,4 @@
-import { hashSha256, hmacSha256, parse, stringify } from "./universal/crypto.browser"
+﻿import { hashSha256, hmacSha256, parse, stringify } from "./universal/crypto.browser"
 import { getSortedQueryString } from "./utils"
 
 export interface ISign {
@@ -215,7 +215,7 @@ export class SignersV4 implements ISign {
 		}
 
 		const queryString = getSortedQueryString(res)
-		// 保持原有opt的query类型不变
+		// Keep the original opt query type
 		if (typeof opt.query === "string") {
 			opt.query = queryString
 		} else {
@@ -230,7 +230,7 @@ export class SignersV4 implements ISign {
 		opt: ISigPolicyQuery,
 		expiredAt: number,
 	): { [key: string]: any } => {
-		// 添加ISigOptions必要的属性
+		// Add required ISigOptions properties
 		const policyOpt: ISigOptions = {
 			...(opt as any),
 			path: opt.path || "/",
@@ -250,7 +250,7 @@ export class SignersV4 implements ISign {
 			res[SIG_QUERY.v4_security_token] = this.options.securityToken
 		}
 
-		// 确保opt有query属性
+		// Ensure opt has a query property
 		opt.query = getSortedQueryString(res)
 
 		res[SIG_QUERY.v4_signature] = this.authorization(policyOpt, this.credentials, expiredAt)
@@ -393,3 +393,7 @@ export class SignersV4 implements ISign {
 		return tmpPath
 	}
 }
+
+
+
+

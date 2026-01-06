@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo } from "react"
+﻿import React, { memo, useCallback, useMemo } from "react"
 import { SmoothStepEdge, getSmoothStepPath } from "reactflow"
 import { useUpdateEffect } from "ahooks"
 import { IconPlus } from "@douyinfe/semi-icons"
@@ -185,3 +185,4 @@ const propsAreEqual = (prevProps: CustomEdgeProps, nextProps: CustomEdgeProps) =
 const CustomSmoothEdge = memo(CustomSmoothEdgeComponent, propsAreEqual)
 
 export default CustomSmoothEdge
+

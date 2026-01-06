@@ -1,4 +1,4 @@
-import type { ISigCredentials, ISigOptions, SignersV4 } from "./signatureV4"
+﻿import type { ISigCredentials, ISigOptions, SignersV4 } from "./signatureV4"
 
 export const VOLCENGINE_MIN_PART_SIZE = 5 * 1024 * 1024
 
@@ -37,3 +37,7 @@ export function getAuthHeaders(
 
 	return formatHeaders(optionHeaders)
 }
+
+
+
+

@@ -1,4 +1,4 @@
-import { FormItemType } from "@/DelightfulExpressionWidget/types";
+﻿import { FormItemType } from "@/DelightfulExpressionWidget/types";
 
 export const mockDataSource = [
 	{

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+﻿import React, { useMemo } from "react"
 import { PopupContext, PopupCtx } from "./Context"
 
 export const PopupProvider = ({ closePopup, children }: PopupCtx) => {
@@ -10,3 +10,4 @@ export const PopupProvider = ({ closePopup, children }: PopupCtx) => {
 
 	return <PopupContext.Provider value={value}>{children}</PopupContext.Provider>
 }
+

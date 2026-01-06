@@ -1,4 +1,4 @@
-// copy from https://github.com/aspecto-io/genson-js
+﻿// copy from https://github.com/aspecto-io/genson-js
 export {
   createCompoundSchema,
   createSchema,
@@ -7,3 +7,4 @@ export {
 } from './schema-builder';
 export * from './schema-comparator';
 export * from './types';
+

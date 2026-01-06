@@ -1,4 +1,4 @@
-import { observer } from "mobx-react"
+﻿import { observer } from "mobx-react"
 import React, { ReactElement, RefObject, useContext } from "react"
 import { SchemaMobxContext } from "../../index"
 import Schema from "../../types/Schema"
@@ -56,3 +56,4 @@ const SchemaJson = observer((props: SchemaJsonProp): ReactElement => {
 })
 
 export default SchemaJson
+

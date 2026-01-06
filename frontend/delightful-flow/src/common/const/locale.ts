@@ -1,4 +1,4 @@
-export const DEFAULT_LOCALE = "zh_CN"
+﻿export const DEFAULT_LOCALE = "zh_CN"
 
 export const enum SupportLocales {
 	auto = "auto",
@@ -7,3 +7,4 @@ export const enum SupportLocales {
 }
 
 export const SUPPORT_LOCALES = [SupportLocales.enUS, SupportLocales.zhCN]
+

@@ -1,4 +1,4 @@
----
+﻿---
 hero:
   title: Delightful
   description: Core components for the Delightful project, including flow-related building blocks
@@ -13,3 +13,4 @@ hero:
       link: /components/delightful-flow
 features:
 ---
+

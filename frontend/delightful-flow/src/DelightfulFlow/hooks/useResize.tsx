@@ -1,4 +1,4 @@
-import { useMemoizedFn } from "ahooks"
+﻿import { useMemoizedFn } from "ahooks"
 import { useEffect, useState } from "react"
 
 export default function useResize () {
@@ -31,3 +31,4 @@ export default function useResize () {
 		windowSize
 	}
 }
+

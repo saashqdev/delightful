@@ -1,4 +1,4 @@
-import { IconExpand } from "@douyinfe/semi-icons"
+﻿import { IconExpand } from "@douyinfe/semi-icons"
 import { Modal } from "antd"
 import { useMemoizedFn } from "ahooks"
 import i18next from "i18next"
@@ -49,7 +49,7 @@ const ExpandModal: React.FC<ExpandModalProps> = ({ value, onChange, componentPro
 				onCancel={handleExpandViewCancel}
 				title={i18next.t("expression.editContent", {
 					ns: "delightfulFlow",
-					defaultValue: "编辑内容",
+					defaultValue: "Edit content",
 				})}
 				width="80%"
 				style={{ top: 20 }}
@@ -75,3 +75,4 @@ const ExpandModal: React.FC<ExpandModalProps> = ({ value, onChange, componentPro
 }
 
 export default ExpandModal
+

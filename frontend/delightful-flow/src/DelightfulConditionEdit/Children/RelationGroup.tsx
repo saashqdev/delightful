@@ -1,4 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope */
+﻿/* eslint-disable react/react-in-jsx-scope */
 import { PlusCircleFilled } from "@ant-design/icons"
 import classname from "clsx"
 import i18next from "i18next"
@@ -127,3 +127,4 @@ export function RelationGroup({
 		</RelationGroupStyle>
 	)
 }
+

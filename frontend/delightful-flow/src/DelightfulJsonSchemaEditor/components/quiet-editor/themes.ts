@@ -1,4 +1,4 @@
-export const xcodeDefault = {
+﻿export const xcodeDefault = {
   base: 'vs',
   inherit: true,
   rules: [
@@ -96,3 +96,4 @@ export const xcodeDefault = {
     'editorWhitespace.foreground': '#BFBFBF',
   },
 };
+

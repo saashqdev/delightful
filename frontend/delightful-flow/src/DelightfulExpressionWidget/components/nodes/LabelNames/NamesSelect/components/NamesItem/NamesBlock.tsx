@@ -1,4 +1,4 @@
-import { IconX } from "@tabler/icons-react"
+﻿import { IconX } from "@tabler/icons-react"
 import React from "react"
 import { NamesOption } from "../../../types"
 
@@ -13,3 +13,4 @@ export default function NamesBlock({ item, onDelete, suffix }: NamesBlockProps) 
 		</div>
 	)
 }
+

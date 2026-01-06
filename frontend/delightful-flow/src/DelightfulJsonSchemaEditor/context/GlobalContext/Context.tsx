@@ -1,4 +1,4 @@
-import { NodeBaseInfo } from "@/DelightfulExpressionWidget/types"
+﻿import { NodeBaseInfo } from "@/DelightfulExpressionWidget/types"
 import React from "react"
 import { AppendPosition, ShowColumns } from "../../constants"
 import { Common } from "../../types/Common"
@@ -14,3 +14,4 @@ export const GlobalContext = React.createContext({
 	displayColumns: [],
 	columnNames: {} as Record<ShowColumns, string>,
 } as GlobalContextProviderProps)
+

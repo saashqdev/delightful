@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+﻿import React, { useRef } from "react"
 
 import { IconCheck } from "@tabler/icons-react"
 import { useMemoizedFn } from "ahooks"
@@ -11,7 +11,7 @@ const CheckboxSelect = ({ value, onChange }: CheckboxSelectProps) => {
 	const wrapperRef = useRef<HTMLDivElement>(null)
 
 	const onSelectItem = useMemoizedFn((val: any) => {
-		/** 处理单选 */
+		/** Handle single selection */
 		onChange?.(val)
 	})
 
@@ -43,3 +43,4 @@ const CheckboxSelect = ({ value, onChange }: CheckboxSelectProps) => {
 }
 
 export default CheckboxSelect
+

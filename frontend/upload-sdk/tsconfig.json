@@ -1,4 +1,4 @@
-{
+﻿{
 	"references": [{ "path": "./tsconfig.node.json" }, { "path": "./tsconfig.test.json" }],
 	"compilerOptions": {
 		"rootDir": ".",
@@ -28,3 +28,7 @@
 	"include": ["src/**/*", "types/**/*"],
 	"exclude": ["node_modules", "dist"]
 }
+
+
+
+

@@ -1,4 +1,4 @@
-import { normalizeLocale } from "@/common/utils/locale"
+﻿import { normalizeLocale } from "@/common/utils/locale"
 import i18next from "i18next"
 import { useMemo } from "react"
 import { useShallow } from "zustand/react/shallow"
@@ -49,3 +49,4 @@ export function useSupportLanguageOptions(includeAuto = true) {
 		)
 	}, [includeAuto, language, languages])
 }
+

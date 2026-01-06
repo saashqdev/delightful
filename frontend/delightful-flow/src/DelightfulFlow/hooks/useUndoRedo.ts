@@ -1,4 +1,4 @@
-import _ from 'lodash';
+﻿import _ from 'lodash';
 import { useMemo, useRef, useState } from 'react';
 import {  Edge } from 'reactflow';
 import { DelightfulFlow } from '../types/flow';
@@ -52,7 +52,7 @@ const useUndoRedo = (debuggerMode: boolean) => {
   
   
   /**
-   * currentSnapshot：当前快照
+   * currentSnapshot: current flow snapshot
    */
   const undo = useMemoizedFn((currentSnapshot: Snapshot) => {
     if (undoStack.length === 0) return; 

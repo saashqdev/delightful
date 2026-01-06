@@ -1,4 +1,4 @@
-import mime from "mime"
+﻿import mime from "mime"
 import { InitException, InitExceptionCode } from "../../Exception/InitException"
 import { UploadException, UploadExceptionCode } from "../../Exception/UploadException"
 import type {
@@ -55,7 +55,7 @@ export function STSUpload(
 		)
 	}
 
-	// 火山云 PostObject 上传限制 5GB
+	// Volcengine PostObject upload limit 5GB
 	if (file?.size > 5 * 1024 * 1024 * 1024) {
 		throw new InitException(InitExceptionCode.UPLOAD_FILE_TO_BIG, key)
 	}
@@ -72,7 +72,7 @@ export function STSUpload(
 		headers["Content-type"] = mimeType
 	}
 
-	// 签名工具
+	// Signing utility
 	const signV4 = new SignatureV4Credentials(SessionToken, SecretAccessKey, AccessKeyId)
 	const signers = new SignersV4(
 		{
@@ -97,7 +97,7 @@ export function STSUpload(
 		expires,
 	)
 
-	// 发送请求
+	// Send request
 	return request<TOS.PutResponse>({
 		method: "PUT",
 		url: `${host}/${encodeURIComponent(combinedKey)}`,
@@ -114,3 +114,7 @@ export function STSUpload(
 		return normalizeSuccessResponse(combinedKey, PlatformType.TOS, res.headers)
 	})
 }
+
+
+
+

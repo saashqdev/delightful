@@ -1,4 +1,4 @@
-import { Common } from "@/DelightfulConditionEdit/types/common"
+﻿import { Common } from "@/DelightfulConditionEdit/types/common"
 import { useMemoizedFn } from "ahooks"
 import type { AxiosPromise } from "axios"
 import { RequestInstance } from ".."
@@ -54,3 +54,4 @@ export default ({ request }: { request: RequestInstance }) => {
 		getObjectDynamicDefault,
 	}
 }
+

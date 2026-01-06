@@ -1,4 +1,4 @@
-import { EXPRESSION_VALUE, VALUE_TYPE } from "./types"
+﻿import { EXPRESSION_VALUE, VALUE_TYPE } from "./types"
 
 export const JSONPATH_JOIN_CHAR = "."
 

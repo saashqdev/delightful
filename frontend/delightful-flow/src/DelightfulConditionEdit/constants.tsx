@@ -1,4 +1,4 @@
-import { defaultExpressionValue } from "@/DelightfulExpressionWidget/constant"
+﻿import { defaultExpressionValue } from "@/DelightfulExpressionWidget/constant"
 import i18next from "i18next"
 import { Expression } from "./types/expression"
 
@@ -101,3 +101,4 @@ export const DEFAULT_CONDITION_DATA: Expression.LogicNode = {
 		},
 	],
 }
+

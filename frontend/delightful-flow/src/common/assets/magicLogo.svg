@@ -1,4 +1,4 @@
-<svg width="201" height="200" viewBox="0 0 201 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+﻿<svg width="201" height="200" viewBox="0 0 201 200" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M68.3606 107.5C68.3606 124.5 71.2891 145.979 93.3606 160.5C112.361 173 135.861 171.5 151.361 165" stroke="url(#paint0_linear_1182_46167)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M110.861 58.5C122.694 54.6667 151.061 54 169.861 74C193.361 99 184.861 153.5 154.361 137C142.361 126 148.861 93.5 149.861 89" stroke="url(#paint1_linear_1182_46167)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M145.257 115C150.757 92.4999 129.361 82.5 115.361 88C97.1098 95.1699 93.8606 126.555 110.861 136C124.361 143.5 145.861 144 148.861 88.9999" stroke="url(#paint2_linear_1182_46167)" stroke-width="17" stroke-linecap="round"/>
@@ -32,3 +32,4 @@
     </linearGradient>
     </defs>
 </svg>
+

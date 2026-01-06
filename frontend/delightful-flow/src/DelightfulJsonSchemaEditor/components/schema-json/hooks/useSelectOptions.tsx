@@ -1,4 +1,4 @@
-/** Filter available options */
+﻿/** Filter available options */
 import { FormItemType } from "@/DelightfulExpressionWidget/types"
 import { SCHEMA_TYPE } from "@/DelightfulJsonSchemaEditor/constants"
 import { cleanAndFilterArray, getSelectOptions } from "@/DelightfulJsonSchemaEditor/utils/helpers"
@@ -19,3 +19,4 @@ export default function useSelectOptions() {
 		selectOptions,
 	}
 }
+

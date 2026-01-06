@@ -1,4 +1,4 @@
-import type { PlatformRequest, PlatformSimpleUploadOption } from "../../types"
+﻿import type { PlatformRequest, PlatformSimpleUploadOption } from "../../types"
 import type { MinIO } from "../../types/MinIO"
 import { signedUpload } from "./defaultUpload"
 
@@ -18,4 +18,8 @@ export const STSUpload: PlatformRequest<MinIO.STSAuthParams, PlatformSimpleUploa
 ) => {
 	return signedUpload(file, key, params, option)
 }
+
+
+
+
 

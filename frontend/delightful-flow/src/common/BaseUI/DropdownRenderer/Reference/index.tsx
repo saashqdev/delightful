@@ -1,4 +1,4 @@
-import { NodeVersionMap } from "@/common/context/NodeMap/Context"
+﻿import { NodeVersionMap } from "@/common/context/NodeMap/Context"
 import { SnowflakeId } from "@/DelightfulExpressionWidget/helpers"
 import {
 	EditRef,
@@ -67,16 +67,16 @@ export type ReferenceCascaderOnChange = (value: EXPRESSION_VALUE & { schemaType?
 type CascaderDropdownProps = {
 	editRef: React.MutableRefObject<EditRef>
 	dataSource?: DataSourceOption[]
-	// 是否携带参数的schema类型
+	// Whether to include the schema type for argument passing
 	withSchemaType?: boolean
 	onChange: ReferenceCascaderOnChange
 	nodeMap: NodeVersionMap
 	userInput: string[]
-	// 自定义渲染配置（如渲染成员、多选、单选、checkbox等）
+	// Custom render config (rendering members, multi-select, single-select, checkboxes, etc.)
 	renderConfig?: RenderConfig
-	// 当前值类型
+	// Current value type
 	valueType?: VALUE_TYPE
-	// 当前弹层是否打开
+	// Whether the dropdown is open
 	dropdownOpen?: boolean
 }
 
@@ -163,7 +163,8 @@ const CascaderDropdown = ({
 		},
 	)
 
-	// Handle selection
+	// Build the change payload from the selected option
+	const getChangeValuesByOption = useMemoizedFn((option: DataSourceOption, trans?: string) => {
 		const valueKey = getValueKey(option)
 		const valueType = getValueTypeByOption(option)
 		const extraConfig = getExtraConfigByOption(option)
@@ -183,7 +184,7 @@ const CascaderDropdown = ({
 		return option.type ? `${option.title} | ${formTypeToTitle[option.type]}` : option.title
 	})
 
-	// 选中事件
+	// Handle selection
 	const onSelect = useMemoizedFn((node, trans?: string) => {
 		const option = node as DataSourceOption
 		if (!option.selectable) return
@@ -343,3 +344,4 @@ const CascaderDropdown = ({
 }
 
 export default CascaderDropdown
+

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+﻿import React, { useMemo } from "react"
 import { FlowPopupContext, FlowPopupCtx } from "./Context"
 
 export const FlowPopupProvider = ({
@@ -21,3 +21,4 @@ export const FlowPopupProvider = ({
 
 	return <FlowPopupContext.Provider value={value}>{children}</FlowPopupContext.Provider>
 }
+

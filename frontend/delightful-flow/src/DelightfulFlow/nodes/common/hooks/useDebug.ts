@@ -1,4 +1,4 @@
-import { message } from 'antd'
+﻿import { message } from 'antd'
 import { useMemoizedFn } from 'ahooks'
 import i18next from 'i18next'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -37,26 +37,26 @@ export default function useDebug({ id }: DebugProps) {
         const nodes = getNodes()
 		let predecessors = getAllPredecessors(currentNode, nodes, edges)
 		
-		// 如果是循环体内的节点，可引用的数据源为当前节点的上文节点+循环体的上文节点
+		// For nodes inside a loop body, reference sources include current upstream nodes plus the loop body upstream nodes
 		if (checkIsInGroup(currentNode)) {
 			const loopBodyNode = nodeConfig?.[currentNode?.meta?.parent_id]
 			const loopBodyAllPrevNodes = getAllPredecessors(loopBodyNode, nodes, edges)
 			predecessors = [...loopBodyAllPrevNodes, ...predecessors]
 		}
-		// 是否有前置节点处于debug模式，如果有则将当前节点显性设置为debug模式
+		// If a preceding node is in debug mode, set current node explicitly to debug
 		const hasPreNodeDebug = predecessors.find(preNode => preNode.debug)
 		return hasPreNodeDebug
 	})
 
 	useEffect(() => {
         const nodes = getNodes()
-		// 通过节点是否已经挂载尺寸属性，判断是否reactflow渲染完毕
+		// Determine if React Flow finished rendering by checking if size is attached
 		if(!nodes?.[0]?.width) return
 		const hasPreNodeDebug = checkHasPreNodeInDebug()
 		if(hasPreNodeDebug) {
 			setIsDebug(true)
 		}else{
-			// 当前节点是否处于debug模式
+			// Whether current node is in debug mode
 			setIsDebug(!!currentNode?.debug)
 		}
 	}, [nodeConfig])
@@ -81,3 +81,4 @@ export default function useDebug({ id }: DebugProps) {
 		allowDebug
 	}
 }
+

@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+﻿/* eslint-disable no-unused-vars */
 import { EXPRESSION_ITEM } from "@/DelightfulExpressionWidget/types"
 import React from "react"
 import type { TextareaModeContextProviderProps } from "./Provider"
@@ -10,3 +10,4 @@ export const TextareaModeContext = React.createContext({
 	handleDoubleClickNode: (val: EXPRESSION_ITEM) => {},
 	closeCurrentNodeEdit: () => {},
 } as TextareaModeContextProviderProps)
+

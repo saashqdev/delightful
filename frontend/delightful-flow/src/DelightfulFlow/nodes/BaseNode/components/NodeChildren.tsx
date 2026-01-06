@@ -1,10 +1,10 @@
-import React, { memo } from "react"
+﻿import React, { memo } from "react"
 import NodeContent from "./NodeContent"
 import NodeHandles from "./NodeHandles"
 import NodeHeader from "./NodeHeader"
 
 interface NodeChildrenProps {
-	// NodeHeader相关属性
+	// Props passed to NodeHeader
 	id: string
 	headerBackgroundColor: string
 	AvatarComponent: React.ReactNode
@@ -23,7 +23,7 @@ interface NodeChildrenProps {
 	isDebug: boolean
 	onDebugChange: (checked: boolean) => void
 
-	// NodeHandles相关属性
+	// Props passed to NodeHandles
 	showDefaultSourceHandle: boolean
 	withTargetHandle: boolean
 	isConnectable: boolean
@@ -31,11 +31,11 @@ interface NodeChildrenProps {
 	canConnect: boolean
 	isTarget: boolean
 
-	// NodeContent相关属性
+	// Props passed to NodeContent
 	ParamsComp: React.ComponentType<any> | null
 }
 
-// 使用memo包装NodeChildren组件，避免父组件重新渲染时不必要的重渲染
+// Wrap NodeChildren with memo to avoid rerenders when parents update unnecessarily
 const NodeChildren = memo(
 	({
 		// NodeHeader props
@@ -108,3 +108,4 @@ const NodeChildren = memo(
 )
 
 export default NodeChildren
+

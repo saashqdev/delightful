@@ -1,4 +1,4 @@
-/**
+﻿/**
  * delightful-flow节点业务组件
  */
 import { DelightfulFlowInstance } from "@/DelightfulFlow"
@@ -70,3 +70,4 @@ export default function BaseFlow({ open, onClose }: FlowProps) {
 		</NodeMapProvider>
 	)
 }
+

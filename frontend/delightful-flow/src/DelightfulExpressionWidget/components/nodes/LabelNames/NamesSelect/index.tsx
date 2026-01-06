@@ -1,4 +1,4 @@
-import i18next from "i18next"
+﻿import i18next from "i18next"
 import React from "react"
 import { useTranslation } from "react-i18next"
 import Select, { NamesSelectProps } from "./Select"
@@ -27,3 +27,4 @@ const NamesSelect = ({
 }
 
 export default NamesSelect
+

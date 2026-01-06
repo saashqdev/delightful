@@ -1,4 +1,4 @@
-/* eslint-disable import/extensions */
+﻿/* eslint-disable import/extensions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { createContext, useEffect, useImperativeHandle, useMemo, useState } from "react"
@@ -300,3 +300,4 @@ const JsonSchemaObserverEditor = observer(
 )
 
 export default JsonSchemaObserverEditor as React.ComponentType<JsonSchemaEditorProps>
+

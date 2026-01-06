@@ -1,4 +1,4 @@
-import { useExtraNodeConfig } from "@/DelightfulFlow/context/ExtraNodeConfigContext/useExtraNodeConfig"
+﻿import { useExtraNodeConfig } from "@/DelightfulFlow/context/ExtraNodeConfigContext/useExtraNodeConfig"
 import { nodeManager } from "@/DelightfulFlow/register/node"
 import { getNodeVersion } from "@/DelightfulFlow/utils"
 import _ from "lodash"
@@ -214,3 +214,4 @@ const propsAreEqual = (prevProps: NodeProps, nextProps: NodeProps) => {
 const BaseNode = memo(BaseNodeComponent, propsAreEqual)
 
 export default BaseNode
+

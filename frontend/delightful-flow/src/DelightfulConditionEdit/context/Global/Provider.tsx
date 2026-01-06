@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react"
+﻿import type { PropsWithChildren } from "react"
 import React, { useMemo } from "react"
 import { GlobalContext } from "./Context"
 
@@ -20,3 +20,4 @@ export const GlobalProvider = ({
 
 	return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>
 }
+

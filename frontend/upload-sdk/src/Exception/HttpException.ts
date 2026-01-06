@@ -1,4 +1,4 @@
-import type { ErrorType } from "../types/error"
+﻿import type { ErrorType } from "../types/error"
 import { BaseException } from "./BaseException"
 
 export const enum HttpExceptionCode {
@@ -37,8 +37,7 @@ export const HttpExceptionMapping: Record<
 }
 
 /**
- * HTTP 通用请求异常
- * Exceptions Handler.
+ * HTTP general request exceptions handler.
  */
 export class HttpException extends BaseException {
 	public readonly status: number
@@ -52,3 +51,7 @@ export class HttpException extends BaseException {
 		this.status = status
 	}
 }
+
+
+
+

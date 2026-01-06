@@ -1,4 +1,4 @@
-import ObsClient from "esdk-obs-browserjs"
+﻿import ObsClient from "esdk-obs-browserjs"
 import mime from "mime"
 import { InitException, InitExceptionCode } from "../../Exception/InitException"
 import { UploadException, UploadExceptionCode } from "../../Exception/UploadException"
@@ -28,11 +28,11 @@ import type { DataWrapperWithHeaders } from "../../types/request"
 import { request } from "../../utils/request"
 
 /**
- * 复杂上传初始化， 用于获取向OBS服务获取 uploadId
- * @param key 文件名（带路径）
- * @param obsClient OBS 上传实例
- * @param param2 上传凭证信息
- * @param param3 上传配置
+ * Multipart upload initialization to obtain UploadId from OBS
+ * @param key File name (with path)
+ * @param obsClient OBS upload client
+ * @param param2 Upload credential info
+ * @param param3 Upload configuration
  * @returns
  */
 async function initMultipartUpload(
@@ -63,22 +63,22 @@ async function initMultipartUpload(
 		res: InitiateMultipartUploadResult,
 		bucket: InitiateMultipartUploadResult.Bucket,
 		name: InitiateMultipartUploadResult.Key,
-		uploadId: InitiateMultipartUploadResult.UploadId,
+		UploadId: InitiateMultipartUploadResult.UploadId,
 	}
 }
 
 /**
- * 分片上传完毕后，需要调用此方法，完成分片上传
- * @param name 文件名
- * @param uploadId 上传ID
- * @param parts 已上传的分片
- * @param obsClient OBS 上传实例
- * @param param4 上传凭证
+ * After multipart upload is done, call this to complete it
+ * @param name File name
+ * @param UploadId Upload ID
+ * @param parts Uploaded parts
+ * @param obsClient OBS upload client
+ * @param param4 Upload credential
  * @returns
  */
 async function completeMultipartUpload(
 	name: string,
-	uploadId: string,
+	UploadId: string,
 	parts: Array<OBS.UploadPart>,
 	obsClient: ObsClient,
 	{ bucket }: OBS.STSAuthParams,
@@ -98,7 +98,7 @@ async function completeMultipartUpload(
 			{
 				Bucket: bucket,
 				Key: name,
-				UploadId: uploadId,
+				UploadId: UploadId,
 				Parts: completeParts,
 			},
 			(err: unknown, result: OBS.CompleteMultipartUploadResponse) => {
@@ -123,18 +123,18 @@ async function completeMultipartUpload(
 }
 
 /**
- * 用于上传某一部分片段
- * @param key 文件名（带路径）
- * @param uploadId 上传ID
- * @param partNo 分段号
- * @param data 分段内容
- * @param obsClient OBS 上传实例
- * @param param5 上传凭证
+ * Used to upload a specific part
+ * @param key File name (with path)
+ * @param UploadId Upload ID
+ * @param partNo Part number
+ * @param data Part content
+ * @param obsClient OBS upload client
+ * @param param5 Upload credential
  * @returns
  */
 async function uploadPart(
 	key: string,
-	uploadId: string,
+	UploadId: string,
 	partNo: number,
 	data: OBS.PartInfo,
 	obsClient: ObsClient,
@@ -147,7 +147,7 @@ async function uploadPart(
 		Key: key,
 		QueryParams: {
 			partNumber: `${partNo}`,
-			uploadId,
+			UploadId,
 		},
 		Expires: expires,
 	})
@@ -173,11 +173,11 @@ async function uploadPart(
 }
 
 /**
- * 用于分片上传，或恢复断点续传
- * @param checkpoint 断点
- * @param obsClient  obs 上传实例
- * @param params 上传凭证
- * @param options 上传配置
+ * Used for multipart upload or ResumeCheckpoint resume
+ * @param checkpoint Checkpoint
+ * @param obsClient  OBS upload client
+ * @param params Upload credential
+ * @param options Upload configuration
  * @returns
  */
 async function resumeMultipart(
@@ -186,7 +186,7 @@ async function resumeMultipart(
 	params: OBS.STSAuthParams,
 	options: PlatformMultipartUploadOption,
 ) {
-	const { file, fileSize, partSize, uploadId, doneParts, name } = checkpoint
+	const { file, fileSize, partSize, UploadId, doneParts, name } = checkpoint
 	const internalDoneParts = doneParts.length > 0 ? [...doneParts] : []
 	const partOffs = divideParts(fileSize, partSize)
 	const numParts = partOffs.length
@@ -203,7 +203,7 @@ async function resumeMultipart(
 					size: pi.end - pi.start,
 				}
 
-				const result = await uploadPart(name, uploadId, partNo, data, obsClient, params, {
+				const result = await uploadPart(name, UploadId, partNo, data, obsClient, params, {
 					...opt,
 				})
 
@@ -270,7 +270,7 @@ async function resumeMultipart(
 
 	if (jobErr && jobErr.length > 0) {
 		const error = jobErr[0]
-		// 5001 取消上传，5002 暂停上传
+		// 5001 Cancel upload, 5002 Pause upload
 		if (error.status === 5001 || error.status === 5002) {
 			throw error as Error
 		}
@@ -281,15 +281,15 @@ async function resumeMultipart(
 		)
 	}
 
-	return completeMultipartUpload(name, uploadId, internalDoneParts, obsClient, params, opt)
+	return completeMultipartUpload(name, UploadId, internalDoneParts, obsClient, params, opt)
 }
 
 /**
- * 复杂上传接口， 例如分片上传，断点续传
- * @param file 文件
- * @param key 文件名
- * @param params 凭证参数
- * @param option 上传参数
+ * Multipart upload interface, e.g., for part upload or Checkpoint resume
+ * @param file File
+ * @param key File name
+ * @param params Credential parameters
+ * @param option Upload parameters
  * @returns
  */
 export const MultipartUpload: PlatformRequest<
@@ -333,7 +333,7 @@ export const MultipartUpload: PlatformRequest<
 		server: endpoint,
 	})
 
-	// 生成文件类型
+	// Generate File type
 	if (!options.mime) {
 		if (isFile(file)) {
 			options.mime = file.type
@@ -344,7 +344,7 @@ export const MultipartUpload: PlatformRequest<
 		}
 	}
 
-	if (options.checkpoint && options.checkpoint.uploadId) {
+	if (options.checkpoint && options.checkpoint.UploadId) {
 		if (file && isFile(file)) options.checkpoint.file = file
 		if (file) options.checkpoint.file = file
 
@@ -370,16 +370,16 @@ export const MultipartUpload: PlatformRequest<
 		)
 	}
 
-	// 初始化分片上传
-	const { uploadId } = await initMultipartUpload(name, obsClient, params, {
+	// Initialize multipart upload
+	const { UploadId } = await initMultipartUpload(name, obsClient, params, {
 		headers: { ...options.headers },
 		mime: options.mime,
 	})
 
-	// 获取分片大小
+	// Get part size
 	const partSize = getPartSize(fileSize, <number>options.partSize, OBS_MIN_PART_SIZE)
 
-	const checkpoint = initCheckpoint(file, name, fileSize, partSize, uploadId)
+	const checkpoint = initCheckpoint(file, name, fileSize, partSize, UploadId)
 
 	if (options && options.progress) {
 		options.progress(0, 0, fileSize, checkpoint)
@@ -387,3 +387,7 @@ export const MultipartUpload: PlatformRequest<
 
 	return resumeMultipart(checkpoint, obsClient, params, { ...options })
 }
+
+
+
+

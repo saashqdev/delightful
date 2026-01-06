@@ -1,4 +1,4 @@
-import React from "react"
+﻿import React from "react"
 
 export type PopupCtx = React.PropsWithChildren<{
     closePopup: () => void
@@ -7,3 +7,4 @@ export type PopupCtx = React.PropsWithChildren<{
 export const PopupContext = React.createContext({
 	closePopup: () => {}
 } as PopupCtx)
+

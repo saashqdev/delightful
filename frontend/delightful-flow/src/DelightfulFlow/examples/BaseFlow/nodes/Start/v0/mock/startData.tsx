@@ -1,4 +1,4 @@
-export const startData = {
+﻿export const startData = {
 	node_id: "DELIGHTFUL-FLOW-NODE-662ef85bbf58a1-16520272",
 	name: "开始节点",
 	description: "当以下事件被触发时，流程将会从这个模块开始执行",
@@ -155,3 +155,4 @@ export const startData = {
 	input: null,
 	output: null,
 }
+

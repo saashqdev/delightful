@@ -1,4 +1,4 @@
-import type { ErrorType } from "./error"
+﻿import type { ErrorType } from "./error"
 import type { Progress, TaskId } from "./index"
 
 export type Method =
@@ -51,3 +51,7 @@ export interface DataWrapperWithHeaders<T> {
 	data: T
 	headers: Record<string, string>
 }
+
+
+
+

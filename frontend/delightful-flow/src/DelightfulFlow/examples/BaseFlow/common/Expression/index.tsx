@@ -1,4 +1,4 @@
-import { ExpressionMode } from "@/DelightfulExpressionWidget/constant"
+﻿import { ExpressionMode } from "@/DelightfulExpressionWidget/constant"
 import { InputExpressionProps } from "@/DelightfulExpressionWidget/types"
 import DelightfulExpressionWrap, { WidgetExpressionValue } from "@/common/BaseUI/DelightfulExpressionWrap"
 import { Form } from "antd"
@@ -49,3 +49,4 @@ export default function DelightfulExpression({
 		</div>
 	)
 }
+

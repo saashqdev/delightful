@@ -1,4 +1,4 @@
-export enum TriggerType {
+﻿export enum TriggerType {
 	// 发送新消息时
 	Message = 1,
 	// 聊天窗口打开时
@@ -10,3 +10,4 @@ export enum TriggerType {
 	// 循环起始
 	LoopStart = 5,
 }
+

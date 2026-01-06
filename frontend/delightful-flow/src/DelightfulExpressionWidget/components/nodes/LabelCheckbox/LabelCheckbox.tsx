@@ -1,4 +1,4 @@
-import { EXPRESSION_ITEM } from "@/DelightfulExpressionWidget/types"
+﻿import { EXPRESSION_ITEM } from "@/DelightfulExpressionWidget/types"
 import React, { useMemo } from "react"
 import useDatasetProps from "../../hooks/useDatasetProps"
 import { getTargetCheckboxOption } from "./ExpressionCheckbox/constants"
@@ -23,3 +23,4 @@ export default function LabelCheckbox({ config }: LabelCheckboxProps) {
 		</div>
 	)
 }
+

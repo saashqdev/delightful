@@ -1,4 +1,4 @@
-import { useExternalConfig } from '@/DelightfulFlow/context/ExternalContext/useExternal'
+﻿import { useExternalConfig } from '@/DelightfulFlow/context/ExternalContext/useExternal'
 import { useFlowEdges, useNodeConfig, useNodeConfigActions } from '@/DelightfulFlow/context/FlowContext/useFlow'
 import { useMemoizedFn } from 'ahooks'
 import { useFlowInteractionActions } from '../../FlowDesign/context/FlowInteraction/useFlowInteraction'
@@ -105,3 +105,4 @@ export default function usePopupAction({ targetNodeId }: UsePopupActionProps) {
 		toggleType
 	}
 }
+

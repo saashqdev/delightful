@@ -1,4 +1,4 @@
-import { CheckOutlined } from "@ant-design/icons"
+﻿import { CheckOutlined } from "@ant-design/icons"
 import { Tooltip } from "antd"
 import React from "react"
 import { Member } from "../../../types"
@@ -39,3 +39,4 @@ export default function MemberItem({
 		</Tooltip>
 	)
 }
+

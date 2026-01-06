@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+﻿import React, { useMemo } from "react"
 import { PanelContext, PanelCtx } from "./Context"
 
 export const PanelProvider = ({ agentType, setAgentType, children }: PanelCtx) => {
@@ -11,3 +11,4 @@ export const PanelProvider = ({ agentType, setAgentType, children }: PanelCtx) =
 
 	return <PanelContext.Provider value={value}>{children}</PanelContext.Provider>
 }
+

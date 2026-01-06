@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
+﻿import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 import { Upload } from "../src"
 import { InitException, InitExceptionCode } from "../src/Exception/InitException"
 import type { UploadConfig } from "../src/types"
@@ -44,7 +44,7 @@ describe("upload", () => {
 	})
 
 	it("if generated filename contains special characters, should throw exception", () => {
-		uploadConfig.fileName = "工作表 在 司南制作过程遇到的小问题%.txt"
+		uploadConfig.fileName = "Worksheet issues during creation%.txt"
 		uploadConfig.option!.rewriteFileName = false
 		expect(() => {
 			uploadManager.upload(uploadConfig)
@@ -57,7 +57,7 @@ describe("upload", () => {
 	})
 
 	it("if rewriteFileName option is enabled, should generate a new filename", () => {
-		const fileName = "正常的文件名.txt"
+		const fileName = "Normal filename.txt"
 		uploadConfig.fileName = fileName
 		uploadConfig.option!.rewriteFileName = true
 		uploadManager.upload(uploadConfig)
@@ -75,3 +75,7 @@ describe("upload", () => {
 		)
 	})
 })
+
+
+
+

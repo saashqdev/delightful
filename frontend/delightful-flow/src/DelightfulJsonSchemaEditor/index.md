@@ -1,4 +1,4 @@
-# Form Component v2
+﻿# Form Component v2
 
 ```shell
 yarn add @feb/json-schema-editor
@@ -683,4 +683,5 @@ See the expression example for details.
 | contextExpressionSource | Upstream expression data source                            | ExpressionSource                          | -                        |
 | onInnerSourceMapChange  | Callback when internal expression data source changes      | (innerSource: Record<string, Common.Options>) => void | -                        |
 | displayColumns          | Columns to display                                         | ShowColumns[]                             | [1,2,3,4]                |
+
 

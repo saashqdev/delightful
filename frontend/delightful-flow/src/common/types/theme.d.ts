@@ -1,4 +1,4 @@
-// src/theme.d.ts
+﻿// src/theme.d.ts
 import type { ColorScales, ColorUsages } from "@/common/utils/palettes"
 
 // Extend antd provider theme typings
@@ -16,3 +16,4 @@ export interface CustomToken {
 	delightfulColorUsages: ColorUsages
 	[key: string]: any
 }
+

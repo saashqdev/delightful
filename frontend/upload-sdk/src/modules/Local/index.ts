@@ -1,4 +1,4 @@
-import { request } from "../../utils/request"
+﻿import { request } from "../../utils/request"
 import { PlatformRequest, PlatformSimpleUploadOption, PlatformType } from "../../types"
 import { Local } from "../../types/Local"
 import { UploadException, UploadExceptionCode } from "../../Exception/UploadException"
@@ -33,3 +33,7 @@ const upload: PlatformRequest<Local.AuthParams, PlatformSimpleUploadOption> = as
 }
 
 export default { upload }
+
+
+
+

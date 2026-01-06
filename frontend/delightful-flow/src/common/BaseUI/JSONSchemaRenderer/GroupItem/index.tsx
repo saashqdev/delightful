@@ -1,4 +1,4 @@
-/* eslint-disable react/no-array-index-key */
+﻿/* eslint-disable react/no-array-index-key */
 import { FormItemType } from "@/DelightfulExpressionWidget/types"
 import Schema from "@/DelightfulJsonSchemaEditor/types/Schema"
 import _ from "lodash"
@@ -73,3 +73,4 @@ export default function GroupItem({ field, fieldKey, type }: GroupItemProps) {
 		</div>
 	)
 }
+

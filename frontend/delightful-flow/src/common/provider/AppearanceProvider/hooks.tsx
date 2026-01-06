@@ -1,4 +1,4 @@
-import { DEFAULT_FONT_SIZE_BASE } from "@/common/const/style"
+﻿import { DEFAULT_FONT_SIZE_BASE } from "@/common/const/style"
 import type { SizeType } from "antd/es/config-provider/SizeContext"
 import { useMemo } from "react"
 import { useAppearanceStore } from "./context"
@@ -20,3 +20,4 @@ export const useChatFontSize = () => {
 
 export const changeChatFontSize = (size: number) =>
 	useAppearanceStore.setState({ chatFontSize: size })
+

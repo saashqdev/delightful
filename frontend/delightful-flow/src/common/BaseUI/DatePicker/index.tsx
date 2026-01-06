@@ -1,4 +1,4 @@
-// @ts-nocheck
+﻿// @ts-nocheck
 
 import {
 	IconChevronLeft,
@@ -41,3 +41,4 @@ TsDatePicker.RangePicker = forwardRef<HTMLDivElement, RangePickerProps>((props, 
 ))
 
 export default TsDatePicker
+

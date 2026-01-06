@@ -1,4 +1,4 @@
-import { CustomToken } from "@/common/types/theme"
+﻿import { CustomToken } from "@/common/types/theme"
 import { colorScales, colorUsages } from "@/common/utils/palettes"
 import { ConfigProvider } from "antd"
 import React, { useMemo } from "react"
@@ -23,3 +23,4 @@ const BaseColorProvider = ({ children }: BaseColorProviderProps) => {
 }
 
 export default BaseColorProvider
+

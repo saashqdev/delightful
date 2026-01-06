@@ -1,4 +1,4 @@
-{
+﻿{
 	"references": [{ "path": "./tsconfig.node.json" }],
 	"compilerOptions": {
 		"baseUrl": ".",
@@ -35,3 +35,4 @@
 	"include": ["src/**/*", "types/**/*"],
 	"exclude": ["node_modules", "dist"]
 }
+

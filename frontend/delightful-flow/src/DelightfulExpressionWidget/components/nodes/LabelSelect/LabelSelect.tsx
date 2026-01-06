@@ -1,4 +1,4 @@
-import { useGlobalContext } from "@/DelightfulExpressionWidget/context/GlobalContext/useGlobalContext"
+﻿import { useGlobalContext } from "@/DelightfulExpressionWidget/context/GlobalContext/useGlobalContext"
 import { checkIsReferenceNode } from "@/DelightfulExpressionWidget/helpers"
 import { EXPRESSION_ITEM, WithReference } from "@/DelightfulExpressionWidget/types"
 import { useMemoizedFn, useUpdateEffect } from "ahooks"
@@ -73,3 +73,4 @@ export default function LabelSelect({ config, updateFn, wrapperWidth }: LabelSel
 		</>
 	)
 }
+

@@ -1,4 +1,4 @@
-import DelightfulSelect from "@/common/BaseUI/Select"
+﻿import DelightfulSelect from "@/common/BaseUI/Select"
 import { SelectProps } from "antd/lib/select"
 import React, { useState } from "react"
 
@@ -39,3 +39,4 @@ const TagsSelect = ({ ...props }: TagsSelect) => {
 }
 
 export default TagsSelect
+

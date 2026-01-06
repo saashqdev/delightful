@@ -1,4 +1,4 @@
-import type { ISigCredentials } from "./signatureV4"
+﻿import type { ISigCredentials } from "./signatureV4"
 
 export class SignatureV4Credentials implements ISigCredentials {
 	public securityToken: string
@@ -21,3 +21,7 @@ export class SignatureV4Credentials implements ISigCredentials {
 		return this.secretAccessKey
 	}
 }
+
+
+
+

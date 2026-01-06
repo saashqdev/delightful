@@ -1,4 +1,4 @@
-import _ from "lodash"
+﻿import _ from "lodash"
 import { NodeSchema, NodeWidget, nodeManager } from "./register/node"
 import { getLatestNodeVersion } from "./utils"
 
@@ -92,3 +92,4 @@ export const GROUP_MIN_DISTANCE = 30
 export const GROUP_TOP_GAP = 38
 
 export const DefaultNodeVersion = 'v0'
+

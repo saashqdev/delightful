@@ -1,16 +1,16 @@
-# 项目基础颜色管理
+﻿# Base Color Management
 
-## 区分 scales 和 usages
+## Distinguish scales and usages
 
-usages 是基于 scales 业务层面的业务层变量
+`usages` are business-level variables built on top of `scales`.
 
-## 类型
+## Types
 
-详细见 `src/utils/palettes.ts` 文件
+See `src/utils/palettes.ts` for details.
 
-## 如何获取全局基础颜色变量
+## How to read global base colors
 
-### createStyles 中获取
+### Access in createStyles
 
 ```tsx
 const useStyles = createStyles(({ token }) => {
@@ -22,7 +22,7 @@ const useStyles = createStyles(({ token }) => {
 })
 ```
 
-### hook 获取
+### Access via hook
 
 ```tsx
 import { useBaseColor } from "@/components/providers/BaseColorProvider/hooks"
@@ -35,3 +35,4 @@ export default function Comp() {
 	// ...
 }
 ```
+

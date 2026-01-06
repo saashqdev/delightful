@@ -1,4 +1,4 @@
-class TosClientError extends Error {
+﻿class TosClientError extends Error {
 	constructor(message: string) {
 		super(message)
 
@@ -8,3 +8,7 @@ class TosClientError extends Error {
 }
 
 export default TosClientError
+
+
+
+

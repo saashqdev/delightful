@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react"
+﻿import React, { useMemo, useRef, useState } from "react"
 
 import TsDatePicker from "@/common/BaseUI/DatePicker"
 import TSIcon from "@/common/BaseUI/TSIcon"
@@ -45,7 +45,7 @@ const TimeSelect = ({
 	})
 
 	const onSelectItem = useMemoizedFn((val: any) => {
-		/** 处理单选 */
+		/** Handle single selection */
 		onChange?.(val)
 	})
 
@@ -113,3 +113,4 @@ const TimeSelect = ({
 }
 
 export default TimeSelect
+

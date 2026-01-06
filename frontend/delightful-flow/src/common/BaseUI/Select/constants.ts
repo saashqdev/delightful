@@ -1,4 +1,4 @@
-// Custom flow event names
+﻿// Custom flow event names
 export const FLOW_EVENTS = {
   // Node selected event
   NODE_SELECTED: 'flow:node-selected',

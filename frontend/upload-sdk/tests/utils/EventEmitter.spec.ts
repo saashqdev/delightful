@@ -1,4 +1,4 @@
-import { describe, test, expect, beforeEach, vi } from "vitest"
+﻿import { describe, test, expect, beforeEach, vi } from "vitest"
 import EventEmitter from "../../src/utils/EventEmitter"
 
 describe("EventEmitter", () => {
@@ -72,3 +72,7 @@ describe("EventEmitter", () => {
     expect(mockFn2).toHaveBeenCalledWith("world", 2)
   })
 })
+
+
+
+

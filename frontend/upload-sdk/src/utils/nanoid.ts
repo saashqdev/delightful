@@ -1,8 +1,8 @@
-/* eslint-disable */
+﻿/* eslint-disable */
 /**
- * @description: 生成唯一标识，类似 uuid（从 nanoid库搬下来）
- * @param {*} t 字符串长度
- * @return {*} 唯一id
+ * @description: Generate a unique id similar to uuid (borrowed from nanoid)
+ * @param {*} t String length
+ * @return {*} Unique id
  */
 export const nanoid = (t = 21) =>
 	crypto
@@ -19,3 +19,7 @@ export const nanoid = (t = 21) =>
 								: "_"),
 			"",
 		)
+
+
+
+

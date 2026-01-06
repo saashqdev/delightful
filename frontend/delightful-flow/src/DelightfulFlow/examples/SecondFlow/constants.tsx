@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-shadow */
+﻿/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import { IconArrowLeftFromArc } from "@tabler/icons-react"
@@ -30,3 +30,4 @@ export const nodeSchemaMap = {
 }
 
 export default nodeSchemaMap
+

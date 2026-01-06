@@ -1,4 +1,4 @@
-import { isFunction } from "lodash-es"
+﻿import { isFunction } from "lodash-es"
 import { InitException, InitExceptionCode } from "../Exception/InitException"
 import { UploadException, UploadExceptionCode } from "../Exception/UploadException"
 import PlatformModules from "../modules"
@@ -369,3 +369,7 @@ export class UploadManger {
 		})
 	}
 }
+
+
+
+

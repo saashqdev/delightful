@@ -1,4 +1,4 @@
-export const mockTestResult = {
+﻿export const mockTestResult = {
     "success": true,
     "start_time": 1716622231.275889,
     "end_time": 1716622236.037907,

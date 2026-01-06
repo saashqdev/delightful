@@ -1,4 +1,4 @@
-import { NodeSchema } from "@/DelightfulFlow/register/node"
+﻿import { NodeSchema } from "@/DelightfulFlow/register/node"
 import { DelightfulFlow } from "@/DelightfulFlow/types/flow"
 import React from "react"
 import { Edge, Node } from "reactflow"
@@ -78,3 +78,4 @@ export const FlowInteractionContext = React.createContext({
 	selectionNodes: [],
 	selectionEdges: [],
 } as FlowInteractionCtx)
+

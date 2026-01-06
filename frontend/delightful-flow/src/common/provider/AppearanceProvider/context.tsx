@@ -1,4 +1,4 @@
-import { DEFAULT_FONT_SIZE_BASE } from "@/common/const/style"
+﻿import { DEFAULT_FONT_SIZE_BASE } from "@/common/const/style"
 import { platformKey } from "@/common/utils/storage"
 import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
@@ -28,3 +28,4 @@ export const useAppearanceStore = create<AppearanceState>()(
 		},
 	),
 )
+

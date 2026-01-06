@@ -1,4 +1,4 @@
-import { useMemoizedFn, useResetState } from "ahooks"
+﻿import { useMemoizedFn, useResetState } from "ahooks"
 import _ from "lodash"
 import React, { useState } from "react"
 import CustomInputExpression from "../InputExpression"
@@ -18,20 +18,20 @@ type UseArgsModalProps = {
 }
 
 export default function useArgsModal({ value, handleChange }: UseArgsModalProps) {
-	/** 函数参数项弹窗是否打开 */
+	/** Whether the function-argument modal is open */
 	const [isOpenArgsModal, setIsOpenArgsModal] = useState(false)
-	/** 当前修改的是那个函数块的参数 */
+	/** Which function block is being edited */
 	const [config, setConfig, resetConfig] = useResetState({} as EXPRESSION_VALUE)
-	/** 第几个参数 */
+	/** Which argument index is being edited */
 	const [argsIndex, setArgsIndex, resetArgsIndex] = useResetState(-1)
-	/** 当前参数value */
+	/** Current argument value */
 	const [argValue, setArgValue, resetArgsValue] = useResetState(
 		null as InputExpressionValue | null,
 	)
 
-	/** 当前参数项变更函数 */
+	/** Handler for the current argument change */
 	const handleChangeArg = useMemoizedFn((value: InputExpressionValue) => {
-		// console.log("函数参数变更", value)
+		// console.log("Function args changed", value)
 		setArgValue(value)
 	})
 
@@ -62,7 +62,7 @@ export default function useArgsModal({ value, handleChange }: UseArgsModalProps)
 		resetArgs()
 	})
 
-	/** 确认更新当前参数项函数 */
+	/** Confirm and persist the current argument */
 	const onConfirm = useMemoizedFn(() => {
 		const resultValue = { ...config }
 		const curIndex = argsIndex
@@ -127,3 +127,4 @@ export function PopoverModalContent({ onChange, rawProps, ...props }: PopoverMod
 		</PopoverModalStyle>
 	)
 }
+

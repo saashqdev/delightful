@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react"
+﻿import { createContext, useContext } from "react"
 import { JSONSchemaDesignerServiceType } from "./hooks/useJSONSchemaDesigner"
 
 const ServiceStore = {
@@ -14,3 +14,4 @@ export const ServiceContext = createContext(ServiceStore)
 export const useService = () => {
 	return useContext(ServiceContext)
 }
+

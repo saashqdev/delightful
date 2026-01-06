@@ -1,4 +1,4 @@
-import _ from "lodash";
+﻿import _ from "lodash";
 import { TimeSelectType } from "./type";
 import i18next from "i18next";
 
@@ -38,7 +38,7 @@ export const timeSelectOptions = [
 	}
 ]
 
-/** 获取具体的项 */
+/** Get the matching option */
 export const getTargetDateTimeOption = (type:TimeSelectType ) => {
 	return _.cloneDeep(timeSelectOptions.find(o => o.id === type))
 }

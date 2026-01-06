@@ -1,4 +1,4 @@
-import { useFlowUI } from "@/DelightfulFlow/context/FlowContext/useFlow"
+﻿import { useFlowUI } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useMemo } from "react"
 
 export default function useMaterialPanel() {
@@ -17,3 +17,4 @@ export default function useMaterialPanel() {
 		stickyButtonStyle,
 	}
 }
+

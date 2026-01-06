@@ -1,4 +1,4 @@
-import {
+﻿import {
 	type ColorScales,
 	type ColorUsages,
 	colorScales,
@@ -33,3 +33,4 @@ export const genPalettesConfigs = (
 			}
 	}
 }
+

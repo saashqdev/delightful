@@ -1,4 +1,4 @@
-import ObsClient from "esdk-obs-browserjs"
+﻿import ObsClient from "esdk-obs-browserjs"
 import { InitException, InitExceptionCode } from "../../Exception/InitException"
 import { UploadException, UploadExceptionCode } from "../../Exception/UploadException"
 import type {
@@ -11,11 +11,11 @@ import type { OBS } from "../../types/OBS"
 import { normalizeSuccessResponse } from "../../utils/response"
 
 /**
- * 华为云 PUT 上传
- * @param file 文件
- * @param key 文件名
- * @param params 上传凭证参数
- * @param option 上传配置
+ * Huawei Cloud PUT upload
+ * @param file File
+ * @param key File name
+ * @param params Upload credential parameters
+ * @param option Upload configuration
  * @returns
  */
 export function STSUpload(
@@ -48,7 +48,7 @@ export function STSUpload(
 		)
 	}
 
-	// 华为云 PutObject 上传限制 5GB
+	// Huawei Cloud PutObject upload limit 5GB
 	if (file?.size > 5 * 1024 * 1024 * 1024) {
 		throw new InitException(InitExceptionCode.UPLOAD_FILE_TO_BIG, key)
 	}
@@ -89,3 +89,7 @@ export function STSUpload(
 		)
 	})
 }
+
+
+
+

@@ -1,4 +1,4 @@
-import { Flex } from "antd"
+﻿import { Flex } from "antd"
 import i18next from "i18next"
 import React from "react"
 import styles from "./ErrorComponent.module.less"
@@ -14,3 +14,4 @@ function ErrorContent() {
 }
 
 export default ErrorContent
+

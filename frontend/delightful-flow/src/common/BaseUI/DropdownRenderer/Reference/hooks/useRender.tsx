@@ -1,5 +1,5 @@
-/**
- * 根据渲染属性，返回相对应的渲染组件
+﻿/**
+ * Return the render component that matches the provided config
  */
 import ExpressionCheckbox from "@/DelightfulExpressionWidget/components/nodes/LabelCheckbox/ExpressionCheckbox/ExpressionCheckbox"
 import TimeSelect from "@/DelightfulExpressionWidget/components/nodes/LabelDatetime/TimeSelect/TimeSelect"
@@ -112,3 +112,4 @@ export default function useRender({
 		RenderComponent,
 	}
 }
+

@@ -1,4 +1,4 @@
-// @ts-nocheck
+﻿// @ts-nocheck
 import React, { useState, useCallback } from "react"
 import ReactFlow, {
 	Node,
@@ -34,7 +34,7 @@ const CustomNode = ({ data }: { data: { label: string } }) => {
 	)
 }
 
-// 节点类型定义
+// Node type定义
 const nodeTypes: NodeTypes = {
 	custom: CustomNode,
 }
@@ -173,3 +173,4 @@ const ReactFlowBasicTest: React.FC = () => {
 }
 
 export default ReactFlowBasicTest
+

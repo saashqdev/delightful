@@ -1,4 +1,4 @@
-import { ConditionInstance } from "@/DelightfulConditionEdit"
+﻿import { ConditionInstance } from "@/DelightfulConditionEdit"
 import { Expression } from "@/DelightfulConditionEdit/types/expression"
 import { useFlow } from "@/DelightfulFlow/context/FlowContext/useFlow"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
@@ -120,3 +120,4 @@ export default function Branch() {
 
 	return <div className={styles.branch}>{BranchList}</div>
 }
+

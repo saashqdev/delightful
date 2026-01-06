@@ -1,4 +1,4 @@
-.nodeTestResult {
+﻿.nodeTestResult {
 	margin-top: 12px;
 
 	.nodeTestingHeader {
@@ -440,7 +440,7 @@
   display: flex;
   flex: 1;
   position: relative;
-  height: calc(100% - 60px); /* 减去header的高度 */
+  height: calc(100% - 60px); /* Subtract header height */
   overflow: hidden;
 }
 
@@ -451,27 +451,27 @@
   height: 100%;
 }
 
-/* 小地图导航样式 */
+/* Minimap navigation styles */
 .miniMap {
   position: absolute;
   right: 12px;
   top: 24px;
-  width: 80px; /* 增加基础宽度 */
+  width: 80px; /* Increase base width */
   height: calc(100% - 48px);
   background-color: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   cursor: pointer;
   z-index: 10;
   transition: all 0.3s ease;
-  transform: translateX(70px); /* 默认隐藏部分，调整为适合新宽度 */
+  transform: translateX(70px); /* Hide part by default to fit new width */
   opacity: 0.6;
   overflow: hidden;
   
   &:hover, &.miniMapHovered {
-    transform: translateX(0); /* 鼠标悬浮时完全显示 */
+    transform: translateX(0); /* Fully show on hover */
     opacity: 1;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 160px; /* 悬浮时更宽，显示更多内容 */
+    width: 160px; /* Wider on hover to show more */
   }
 }
 
@@ -480,13 +480,13 @@
   width: 100%;
   height: 100%;
   padding: 4px;
-  pointer-events: none; /* 防止内容捕获鼠标事件 */
+  pointer-events: none; /* Prevent content from capturing pointer events */
   display: flex;
   flex-direction: column;
 }
 
 .miniSection {
-  margin-bottom: 0; /* 减少section间距 */
+  margin-bottom: 0; /* Reduce section spacing */
   border-radius: 3px;
   overflow: hidden;
   flex-grow: 1;
@@ -505,14 +505,14 @@
 }
 
 .miniItems {
-  padding: 0; /* 减少内边距 */
+  padding: 0; /* Reduce padding */
   position: relative;
   flex-grow: 1;
-  min-height: 40px; /* 减小最小高度 */
+  min-height: 40px; /* Reduce minimum height */
 }
 
 .miniItem {
-  height: 16px; /* 增加高度 */
+  height: 16px; /* Increase height */
   margin: 1px 0;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 1px;
@@ -522,7 +522,7 @@
   
   &:hover {
     background-color: rgba(0, 0, 0, 0.2);
-    z-index: 6; /* 确保悬停项显示在指示器之上 */
+    z-index: 6; /* Ensure hover item appears above indicator */
   }
   
   &.miniComplex {
@@ -534,13 +534,13 @@
 
 .miniItemKey {
   display: block;
-  font-size: 10px; /* 增加字体大小 */
+  font-size: 10px; /* Increase font size */
   padding: 2px 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: #666;
-  pointer-events: auto; /* 允许点击交互 */
+  pointer-events: auto; /* Allow pointer interactions */
   cursor: pointer;
   
   &:hover {
@@ -571,8 +571,8 @@
   border-right: 2px solid #315CEC;
   backdrop-filter: blur(1px);
   transition: opacity 0.2s;
-  pointer-events: none; /* 指示器不捕获鼠标事件 */
-  z-index: 5; /* 确保指示器显示在内容之上 */
+  pointer-events: none; /* Indicator does not capture pointer events */
+  z-index: 5; /* Ensure indicator appears above content */
   
   &:hover {
     opacity: 0.8 !important;

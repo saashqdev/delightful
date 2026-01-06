@@ -1,4 +1,4 @@
-import React from "react"
+﻿import React from "react"
 import styles from "./index.module.less"
 
 // import useMaterialPanel from "./hooks/useMaterialPanel"
@@ -21,12 +21,12 @@ function FlowMaterialPanel() {
 	const { keyword, onSearchChange, agentType, setAgentType } = useMaterialSearch({ tab })
 	const { show, setShow, stickyButtonStyle } = useMaterialPanel()
 
-	// 使用useMemo缓存Panel Provider的value，避免不必要的重新渲染
+	// Cache Panel Provider value with useMemo to avoid unnecessary rerenders
 	const providerValue = useMemo(() => {
 		return { agentType, setAgentType }
 	}, [agentType, setAgentType])
 
-	// 使用useMemo缓存样式对象，避免每次渲染创建新对象
+	// Cache style object with useMemo to avoid recreating it on every render
 	const panelStyle = useMemo(() => {
 		return { width: show ? "280px" : 0 }
 	}, [show])
@@ -49,3 +49,4 @@ function FlowMaterialPanel() {
 }
 
 export default React.memo(FlowMaterialPanel)
+

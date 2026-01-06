@@ -1,4 +1,4 @@
-export default {
+﻿export default {
     // Primary color (blue)
     primary: "#315CEC",
     // Warning color

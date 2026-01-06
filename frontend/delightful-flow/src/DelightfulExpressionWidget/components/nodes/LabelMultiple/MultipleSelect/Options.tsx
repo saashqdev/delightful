@@ -1,4 +1,4 @@
-import SearchInput from "@/common/BaseUI/DropdownRenderer/SearchInput"
+﻿import SearchInput from "@/common/BaseUI/DropdownRenderer/SearchInput"
 import { InputRef } from "antd"
 import { useMemoizedFn } from "ahooks"
 import i18next from "i18next"
@@ -11,19 +11,18 @@ import MultipleItem from "./components/MultipleItem/MultipleItem"
 import "./styles/options.less"
 
 /**
- *
- * @param {Function} itemClick 点击单个选择调用事件
- * @param {Ref} parent 父级Ref主要用来获取输入框的高度，然后将下拉弹层向下移
- * @param {Array} values 值
- * @param {Array} options 下拉选项
- * @param {Boolean || Function} filterOption 是否允许过滤
- * @param {Function} onSearch 搜索函数
- * @param {Component} footer 组件
- * @param {Object} extraOptions // 选择上一步的配置
+ * @param {Function} itemClick Callback when a single option is selected
+ * @param {Ref} parent Parent ref to measure the input height and offset the dropdown
+ * @param {Array} values Current values
+ * @param {Array} options Dropdown options
+ * @param {Boolean | Function} filterOption Whether filtering is allowed
+ * @param {Function} onSearch Search handler
+ * @param {Component} footer Footer component
+ * @param {Object} extraOptions Config for the previous step selection
  * {
- *		showExtra, //是否显示选择上一步
- * 		step, // 当前是第几步
- * 		fieldTypes // 支持的字段类型
+ *   showExtra, // Whether to show the "previous step" option
+ *   step, // Current step index
+ *   fieldTypes // Supported field types
  * }
  */
 
@@ -133,3 +132,4 @@ const SelectOptions = forwardRef<SelectOptionRef, SelectOptionsProps>((props, re
 })
 
 export default SelectOptions
+

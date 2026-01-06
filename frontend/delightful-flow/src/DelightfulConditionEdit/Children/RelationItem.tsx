@@ -1,4 +1,4 @@
-import { getDataSourceMap, getExpressionFirstItem } from "@/DelightfulExpressionWidget/helpers"
+﻿import { getDataSourceMap, getExpressionFirstItem } from "@/DelightfulExpressionWidget/helpers"
 import { FormItemType } from "@/DelightfulExpressionWidget/types"
 import { getDefaultBooleanConstantSource } from "@/DelightfulJsonSchemaEditor/components/schema-json/schema-item/constants"
 import DelightfulSelect from "@/common/BaseUI/Select"
@@ -236,3 +236,4 @@ export function RelationItem({
 		</RelationItemStyle>
 	)
 }
+

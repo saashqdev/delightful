@@ -1,4 +1,4 @@
-import { MarkerType } from "reactflow"
+﻿import { MarkerType } from "reactflow"
 import CustomEdge from "./CustomEdge"
 import CustomSmoothEdge from "./CustomSmoothEdge"
 
@@ -29,3 +29,4 @@ export const defaultEdgeConfig = {
 		allowAddOnLine: true,
 	}
 }
+

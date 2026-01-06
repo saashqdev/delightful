@@ -1,4 +1,4 @@
-import { describe, test, expect } from "vitest"
+﻿import { describe, test, expect } from "vitest"
 import { UploadException, UploadExceptionCode } from "../../src/Exception/UploadException"
 import { BaseException } from "../../src/Exception/BaseException"
 
@@ -52,4 +52,8 @@ describe("UploadException", () => {
 		}).toThrow(UploadException)
 	})
 })
+
+
+
+
 

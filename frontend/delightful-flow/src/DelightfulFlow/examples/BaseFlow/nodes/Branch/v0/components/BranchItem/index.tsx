@@ -1,4 +1,4 @@
-import DelightfulConditionEdit, { ConditionInstance } from "@/DelightfulConditionEdit"
+﻿import DelightfulConditionEdit, { ConditionInstance } from "@/DelightfulConditionEdit"
 import { Expression } from "@/DelightfulConditionEdit/types/expression"
 import CustomHandle from "@/DelightfulFlow/nodes/common/Handle/Source"
 import { useCurrentNode } from "@/DelightfulFlow/nodes/common/context/CurrentNode/useCurrentNode"
@@ -99,3 +99,4 @@ export default function BranchItem({
 		</div>
 	)
 }
+

@@ -1,4 +1,4 @@
-// @ts-nocheck
+﻿// @ts-nocheck
 import { CLASSNAME_PREFIX } from "@/common/const/style"
 import { ConfigProvider } from "antd"
 import React, { useMemo, type PropsWithChildren } from "react"
@@ -37,3 +37,4 @@ function ThemeProvider({ children }: PropsWithChildren<{}>) {
 }
 
 export default ThemeProvider
+

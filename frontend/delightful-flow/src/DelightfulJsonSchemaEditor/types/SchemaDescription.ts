@@ -1,4 +1,4 @@
-import _ from 'lodash';
+﻿import _ from 'lodash';
 import { makeAutoObservable } from 'mobx';
 import { AppendPosition, JSONPATH_JOIN_CHAR, SchemaValueSplitor } from '../constants';
 import {
@@ -346,3 +346,4 @@ export default class SchemaDescription {
     this.open = _.set(clonedState, [keys], status);
   }
 }
+

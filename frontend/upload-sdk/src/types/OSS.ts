@@ -1,8 +1,8 @@
-import type { Progress, TaskId, PlatformType } from "."
+﻿import type { Progress, TaskId, PlatformType } from "."
 import type { DataWrapperWithHeaders, Method, Result } from "./request"
 
 /**
- * 阿里云对象存储\
+ * Aliyun Object Storage
  */
 export namespace OSS {
 	export interface Option {
@@ -43,7 +43,7 @@ export namespace OSS {
 		"x-oss-user-agent"?: string
 	}
 
-	/** 后端返回-阿里云凭证字段 */
+	/** Credential fields returned by backend for Aliyun */
 	export interface AuthParams {
 		policy: string
 		accessid: string
@@ -53,7 +53,7 @@ export namespace OSS {
 		callback: string
 	}
 
-	/** 后端返回-阿里云凭证字段, 开启STS */
+	/** Credential fields returned by backend when STS is enabled */
 	export interface STSAuthParams {
 		region: string
 		bucket: string
@@ -76,7 +76,7 @@ export namespace OSS {
 		name: string
 		fileSize: number
 		partSize: number
-		uploadId: string
+		UploadId: string
 		doneParts: DonePart[]
 	}
 
@@ -97,7 +97,7 @@ export namespace OSS {
 		xmlResponse?: boolean
 	}
 
-	/** 复杂上传 -- 接口 */
+	/** Multipart upload interface */
 	export interface MultipartUploadOption {
 		/** the number of parts to be uploaded in parallel */
 		parallel?: number
@@ -152,7 +152,7 @@ export namespace OSS {
 
 	export type PutResponse = Result<OriginResponseData>
 
-	/** 复杂上传 -- 初始化请求返回结果 */
+	/** Multipart upload init response */
 	export type InitMultipartUploadResponse = DataWrapperWithHeaders<{
 		InitiateMultipartUploadResult: {
 			Bucket: string
@@ -165,3 +165,7 @@ export namespace OSS {
 
 	export type CompleteMultipartUploadResponse = Result<OriginResponseData>
 }
+
+
+
+

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+﻿import _ from 'lodash';
 // @ts-ignore
 import Snowflake from 'snowflake-id';
 import { SCHEMA_TYPE, SchemaOption, getSchemaToOptionsMap } from '../constants';

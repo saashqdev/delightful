@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+﻿/* eslint-disable no-unused-vars */
 import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference"
 import React from "react"
 import { ExpressionMode } from "../../constant"
@@ -15,3 +15,4 @@ export const GlobalContext = React.createContext({
 	showMultipleLine: true,
 	isInFlow: true,
 } as GlobalContextProviderProps)
+

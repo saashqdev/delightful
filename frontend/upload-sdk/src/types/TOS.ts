@@ -1,4 +1,4 @@
-import type { SignersV4 } from "../modules/TOS/utils/signatureV4"
+﻿import type { SignersV4 } from "../modules/TOS/utils/signatureV4"
 import type { PlatformMultipartUploadOption, PlatformSimpleUploadOption } from "./index"
 import type { DataWrapperWithHeaders } from "./request"
 
@@ -76,7 +76,7 @@ export namespace TOS {
 		name: string
 		fileSize: number
 		partSize: number
-		uploadId: string
+		UploadId: string
 		doneParts: DonePart[]
 	}
 
@@ -111,3 +111,7 @@ export namespace TOS {
 
 	export type PutResponse = DataWrapperWithHeaders<null>
 }
+
+
+
+

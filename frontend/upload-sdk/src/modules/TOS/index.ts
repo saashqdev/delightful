@@ -1,4 +1,4 @@
-import type {
+﻿import type {
 	PlatformMultipartUploadOption,
 	PlatformRequest,
 	PlatformSimpleUploadOption,
@@ -20,3 +20,7 @@ const upload: PlatformRequest<
 }
 
 export default { upload, defaultUpload, MultipartUpload, STSUpload }
+
+
+
+

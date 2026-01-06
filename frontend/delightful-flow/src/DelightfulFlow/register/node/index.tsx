@@ -1,4 +1,4 @@
-import { TabObject } from "@/DelightfulFlow/components/FlowMaterialPanel/constants"
+﻿import { TabObject } from "@/DelightfulFlow/components/FlowMaterialPanel/constants"
 import { WidgetValue } from "@/DelightfulFlow/examples/BaseFlow/common/Output"
 import { CSSProperties, ComponentType, ReactNode } from "react"
 
@@ -7,54 +7,54 @@ export type BaseNodeType = string | number
 export type LoopStartConfig = { height: number; [key: string]: any }
 
 export type NodeSchema = {
-	// 节点名称
+	// Node name
 	label: string
-	// 节点图标
+	// Node icon
 	icon: ReactNode | null
-	// 节点图标背景色
+	// Node icon background color
 	color: string
-	// 节点类型
+	// Node type
 	id: BaseNodeType
-	// 节点描述
+	// Node description
 	desc: string
-	// 节点分组名
+	// Node group name
 	groupName?: string
-	// 节点自定义样式
+	// Node custom styles
 	style?: CSSProperties
-	// 节点的端点处理
+	// Endpoint handlers for the node
 	handle?: {
-		// 携带终点（被链接）
+		// Includes target handles (incoming links)
 		withSourceHandle: boolean
-		// 携带源点
+		// Includes source handles
 		withTargetHandle: boolean
 	}
-	// 当前节点是否可以变更节点类型
+	// Whether the current node can change its Node type
 	changeable?: {
-		// 是否可以删除/复制等
+		// Whether delete/copy is allowed
 		operation: boolean
-		// 是否可以切换节点类型
+		// Whether the Node type can be switched
 		nodeType: boolean
 	}
-	// 默认配置
+	// Default config
 	params?: Record<string, any>
 	output?: WidgetValue["value"] | null
 	input?: WidgetValue["value"] | null
-	// 节点头部右侧自定义组件
+	// Custom component on node header right
 	headerRight?: React.ReactElement
-	// 是否默认可添加
+	// Whether addable by default
 	addable?: boolean
-	// 节点头像取值路径(当不希望节点是图标，而是一个头像时，icon需要设置成null，并传入avatarPath)
+	// Avatar path (set icon to null and pass avatarPath to use an avatar instead of an icon)
 	avatarPath?: string[]
-	// 节点头像取值函数
+	// Avatar accessor function
 	[key: string]: any
 }
 
 export type NodeVersion = string
 
 export type NodeWidget = {
-	// 注册节点所用的dsl
+	// DSL used to register node
 	schema: NodeSchema
-	// 节点自定义参数组件
+	// Node custom params component
 	component: ComponentType<any>
 }
 
@@ -75,48 +75,48 @@ export type NodeGroup = {
 	avatar?: string
 }
 
-// NodeTypes应该传入enum值
+// NodeTypes should be enum values
 class NodeManager {
-	// 实际已经完成注册的节点映射表
+	// Map of registered node types
 	nodesMap = {} as Record<BaseNodeType, NodeVersionWidget>
 
-	// 存在多个出口端点的节点类型
+	// Node types that have multiple outgoing handles
 	branchNodeIds = [] as BaseNodeType[]
 
-	// 可以做为引用类型节点的节点类型列表
+	// Node types that can act as reference nodes
 	canReferenceNodeTypes = [] as BaseNodeType[]
 
-	// 不需要显示到物料面板的节点类型列表
+	// Node types that should be hidden from the material panel
 	notMaterialNodeTypes = [] as BaseNodeType[]
 
-	// 当引用上文节点时，需要显示指定引用值前缀的节点映射表
+	// Mapping of prefixes required when referencing upstream nodes
 	nodeType2ReferenceKey = {} as Record<string, BaseNodeType>
 
-	// 变量节点类型注册，注册完，将会改变引用上下文的取值方式，所有变量类型的数据源都会放在「变量」的分类下
+	// Variable node types; registering them changes reference lookup to group all variable data under "Variables"
 	variableNodeTypes = [] as BaseNodeType[]
 
-	// 当前节点的分组关系列表
+	// Grouping relationships for the current node
 	nodeGroups = [] as NodeGroup[]
 
-	// 起始节点类型
+	// Start node type
 	startNodeType = "startNodeType" as BaseNodeType
 
-	// 循环节点类型
+	// Loop node type
 	loopNodeType = "loopNode" as BaseNodeType
 
-	// 循环体节点类型
+	// Loop-body node type
 	loopBodyType = "loopBody" as BaseNodeType
 
-	// 循环起始节点类型
+	// Loop-start node type
 	loopStartType = "loopStart" as BaseNodeType
 
-	// 左侧物料列表特殊的节点类型注册
+	// Special node types for the left material panel
 	materialNodeTypeMap = {} as Partial<Record<TabObject, BaseNodeType>>
 
-	// 节点的头像存储路径
+	// Node avatar storage path
 	avatarPath = ["params", "avatar"]
 
-	// 循环起始节点日志
+	// Loop start node log
 	loopStartConfig = {
 		height: 0,
 	} as LoopStartConfig
@@ -125,7 +125,7 @@ class NodeManager {
 
 	registerNode({ nodeType, nodeVersionWidget }: RegisterNodeProps) {
 		// if (Reflect.has(this.nodesMap, nodeType)) {
-		// 	console.warn(`已存在类型 ${nodeType}，不能再注册`)
+		// 	console.warn(`Type already exists ${nodeType}，cannot be registered again`)
 		// 	return
 		// }
 		Reflect.set(this.nodesMap, nodeType, nodeVersionWidget)
@@ -187,7 +187,7 @@ class NodeManager {
 export const nodeManager = new NodeManager()
 
 /**
- * 向外暴露注册节点方法
+ * Expose node registration methods
  */
 export const installNodes = (nodesMap: Record<BaseNodeType, NodeVersionWidget>) => {
 	console.log(nodesMap)
@@ -201,63 +201,63 @@ export const installNodes = (nodesMap: Record<BaseNodeType, NodeVersionWidget>) 
 }
 
 /**
- * 向外暴露注册「分支类」节点的方法
+ * Expose registration for branch nodes
  */
 export const registerBranchNodes = (nodeTypes: BaseNodeType[]) => {
 	nodeManager.registerBranchNodes(nodeTypes)
 }
 
 /**
- * 向外暴露注册「可引用类」节点的方法
+ * Expose registration for reference nodes
  */
 export const registerCanReferenceNodeTypes = (nodeTypes: BaseNodeType[]) => {
 	nodeManager.registerCanReferenceNodeTypes(nodeTypes)
 }
 
 /**
- * 向外暴露注册「不需要展示到物料列表」节点的方法
+ * Expose registration for nodes hidden from the palette
  */
 export const registerNotMaterialNodeTypes = (nodeTypes: BaseNodeType[]) => {
 	nodeManager.registerNotMaterialNodeTypes(nodeTypes)
 }
 
 /**
- * 向外暴露注册需要「指定引用上文节点时，固定的前缀」
+ * Expose registration for fixed prefixes when referencing upstream nodes
  */
 export const registerNodeType2ReferenceKey = (nodeTypes: Record<BaseNodeType, string>) => {
 	nodeManager.registerNodeType2ReferenceKey(nodeTypes)
 }
 
 /**
- * 向外暴露注册「变量节点类型列表」
+ * Expose registration for variable node types
  */
 export const registerVariableNodeTypes = (nodeTypes: BaseNodeType[]) => {
 	nodeManager.registerVariableNodeTypes(nodeTypes)
 }
 
 /**
- * 向外暴露注册「触发节点类型」
+ * Expose registration for trigger/start node type
  */
 export const registerStartNodeType = (nodeType: BaseNodeType) => {
 	nodeManager.registerStartNodeType(nodeType)
 }
 
 /**
- * 向外暴露注册「循环节点类型」
+ * Expose registration for loop node type
  */
 export const registerLoopNodeType = (nodeType: BaseNodeType) => {
 	nodeManager.registerLoopNodeType(nodeType)
 }
 
 /**
- * 向外暴露注册「循环体节点类型」
+ * Expose registration for loop-body node type
  */
 export const registerLoopBodyType = (nodeType: BaseNodeType) => {
 	nodeManager.registerLoopBodyType(nodeType)
 }
 
 /**
- * 向外暴露注册「循环体起始类型」
+ * Expose registration for loop body start types
  */
 export const registerLoopStartType = (nodeType: BaseNodeType) => {
 	nodeManager.registerLoopStartType(nodeType)
@@ -268,14 +268,14 @@ export const registerLoopStartConfig = (config: LoopStartConfig) => {
 }
 
 /**
- * 向外暴露注册「节点分组信息」
+ * Expose registration for node group info
  */
 export const registerNodeGroups = (nodeGroups: NodeGroup[]) => {
 	nodeManager.registerNodeGroups(nodeGroups)
 }
 
 /**
- * 向外暴露注册左侧「特殊物料面板节点类型」方法
+ * Expose registration for special material-panel node types (left panel)
  */
 export const registerMaterialNodeTypeMap = (
 	tab2NodeType: Partial<Record<TabObject, BaseNodeType>>,
@@ -284,8 +284,9 @@ export const registerMaterialNodeTypeMap = (
 }
 
 /**
- * 向外暴露注册节点头像读取路径
+ * Expose registration for node avatar path
  */
 export const registerAvatarPath = (avatarPath: string[]) => {
 	nodeManager.registerAvatarPath(avatarPath)
 }
+

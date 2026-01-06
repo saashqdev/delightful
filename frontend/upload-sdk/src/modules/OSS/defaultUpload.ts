@@ -1,4 +1,4 @@
-import { InitException, InitExceptionCode } from "../../Exception/InitException"
+﻿import { InitException, InitExceptionCode } from "../../Exception/InitException"
 import { UploadException, UploadExceptionCode } from "../../Exception/UploadException"
 import type { PlatformRequest, PlatformSimpleUploadOption } from "../../types"
 import { PlatformType } from "../../types"
@@ -7,11 +7,11 @@ import { request } from "../../utils/request"
 import { normalizeSuccessResponse } from "../../utils/response"
 
 /**
- * @description: 默认上传
- * @param {File | Blob} file 文件
- * @param {String} key 文件名
- * @param {OSS.AuthParams} params 上传凭证信息
- * @param {PlatformSimpleUploadOption} option 配置字段
+ * @description: Default upload
+ * @param {File | Blob} file File
+ * @param {String} key File name
+ * @param {OSS.AuthParams} params Upload credential info
+ * @param {PlatformSimpleUploadOption} option Configuration field
  */
 export const defaultUpload: PlatformRequest<OSS.AuthParams, PlatformSimpleUploadOption> = (
 	file,
@@ -34,12 +34,12 @@ export const defaultUpload: PlatformRequest<OSS.AuthParams, PlatformSimpleUpload
 		)
 	}
 
-	// 阿里云 PostObject 上传限制 5GB
+	// Aliyun PostObject upload limit 5GB
 	if (file?.size > 5 * 1024 * 1024 * 1024) {
 		throw new InitException(InitExceptionCode.UPLOAD_FILE_TO_BIG, key)
 	}
 
-	// 包装 FormData 对象
+	// Wrap the FormData object
 	const formData = new FormData()
 	formData.append("key", `${dir}${key}`)
 	formData.append("policy", policy)
@@ -49,7 +49,7 @@ export const defaultUpload: PlatformRequest<OSS.AuthParams, PlatformSimpleUpload
 	formData.append("callback", callback)
 	formData.append("file", file)
 
-	// 发送请求
+	// Send request
 	return request<OSS.PostResponse>({
 		method: "post",
 		url: host,
@@ -66,3 +66,7 @@ export const defaultUpload: PlatformRequest<OSS.AuthParams, PlatformSimpleUpload
 		return normalizeSuccessResponse(path, PlatformType.OSS, headers)
 	})
 }
+
+
+
+

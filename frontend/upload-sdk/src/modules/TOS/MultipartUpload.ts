@@ -1,4 +1,4 @@
-import mime from "mime"
+﻿import mime from "mime"
 import { InitException, InitExceptionCode } from "../../Exception/InitException"
 import { UploadException, UploadExceptionCode } from "../../Exception/UploadException"
 import type { PlatformMultipartUploadOption, PlatformRequest } from "../../types"
@@ -24,7 +24,7 @@ import { STSUpload } from "./STSUpload"
 import { SignatureV4Credentials } from "./utils/signatureV4Credentials"
 
 /**
- * @description: Complex upload initialization, used to get uploadId from TOS service
+ * @description: Complex upload initialization, used to get UploadId from TOS service
  * @param {string} name filename
  * @param {TOS.STSAuthParams} params upload credentials and other fields
  * @param {TOS.InitMultipartUploadOption} option configuration fields
@@ -62,24 +62,24 @@ async function initMultipartUpload(
 		res: data,
 		bucket: data.Bucket,
 		name: data.Key,
-		uploadId: data.UploadId,
+		UploadId: data.UploadId,
 	}
 }
 
 /**
- * @description: 分片上传完毕后，需要调用此方法，完成分片上传
- * @param {String} name 文件路径名称
- * @param {String} uploadId 上传Id
- * @param {Array} parts 分片信息
- *        {Integer} 分片 No 号
- *        {String} 分片 etag
+ * @description: After multipart upload is done, call this to complete it
+ * @param {String} name File path name
+ * @param {String} UploadId Upload ID
+ * @param {Array} parts Part info
+ *        {Integer} Part number
+ *        {String} Part etag
  * @param params
- * @param {TOS.MultipartUploadParams} options 上传凭证等信息
- * @param {TOS.CompleteMultipartUploadOptions} options 配置字段
+ * @param {TOS.MultipartUploadParams} options Upload credential and related info
+ * @param {TOS.CompleteMultipartUploadOptions} options Configuration field
  */
 async function completeMultipartUpload(
 	name: string,
-	uploadId: string,
+	UploadId: string,
 	parts: Array<{ number: number; etag: string }>,
 	{ bucket, host, expires }: TOS.STSAuthParams,
 	{ signers, progress, partSize, ...otherOptions }: TOS.CompleteMultipartUploadOptions,
@@ -97,7 +97,7 @@ async function completeMultipartUpload(
 			method: "POST",
 			headers,
 			path: `/${encodeURIComponent(name)}`,
-			query: getSortedQueryString({ uploadId }),
+			query: getSortedQueryString({ UploadId }),
 			host: removeProtocol(host),
 		},
 		signers,
@@ -108,7 +108,7 @@ async function completeMultipartUpload(
 		url: `${host}/${encodeURIComponent(name)}`,
 		method: "POST",
 		query: {
-			uploadId,
+			UploadId,
 		},
 		headers: { ...headers, ...reqHeaders },
 		data: JSON.stringify({
@@ -127,18 +127,18 @@ async function completeMultipartUpload(
 }
 
 /**
- * @description: 用于上传某一部分片段
- * @param {String} name 文件名
- * @param {String} uploadId 本次上传的Id
- * @param {number} partNo 第几个片段
- * @param {TOS.PartInfo} data 分片数据
+ * @description: Used to upload a specific part
+ * @param {String} name File name
+ * @param {String} UploadId Upload session id
+ * @param {number} partNo Which part number
+ * @param {TOS.PartInfo} data Part data
  * @param params
- * @param {TOS.MultipartUploadOption} options 配置字段
- * @returns 返回异步结果
+ * @param {TOS.MultipartUploadOption} options Configuration field
+ * @returns Return async result
  */
 async function uploadPart(
 	name: string,
-	uploadId: string,
+	UploadId: string,
 	partNo: number,
 	data: TOS.PartInfo,
 	{ bucket, host, expires }: TOS.STSAuthParams,
@@ -152,7 +152,7 @@ async function uploadPart(
 			method: "PUT",
 			headers,
 			path: `/${encodeURIComponent(name)}`,
-			query: getSortedQueryString({ partNumber: partNo, uploadId }),
+			query: getSortedQueryString({ partNumber: partNo, UploadId }),
 			host: removeProtocol(host),
 		},
 		signers,
@@ -161,7 +161,7 @@ async function uploadPart(
 
 	const result = await request<TOS.UploadPartResponse>({
 		url: `${host}/${encodeURIComponent(name)}`,
-		query: { partNumber: `${partNo}`, uploadId },
+		query: { partNumber: `${partNo}`, UploadId },
 		method: "PUT",
 		data: data.content,
 		headers: { ...headers, ...reqHeaders },
@@ -181,17 +181,17 @@ async function uploadPart(
 }
 
 /**
- * @description: 用于分片上传，或恢复断点续传
- * @param {Object} checkpoint the 文件上传检查点信息
- * @param {TOS.MultipartUploadParams} params 上传凭证信息
- * @param {TOS.ResumeMultipartOption} options 配置字段
+ * @description: Used for multipart upload or ResumeCheckpoint resume
+ * @param {Object} checkpoint the File upload checkpoint info
+ * @param {TOS.MultipartUploadParams} params Upload credential info
+ * @param {TOS.ResumeMultipartOption} options Configuration field
  */
 async function resumeMultipart(
 	checkpoint: TOS.Checkpoint,
 	params: TOS.STSAuthParams,
 	options: TOS.MultipartUploadOption,
 ) {
-	const { file, fileSize, partSize, uploadId, doneParts, name } = checkpoint
+	const { file, fileSize, partSize, UploadId, doneParts, name } = checkpoint
 	const internalDoneParts = doneParts.length > 0 ? [...doneParts] : []
 	const partOffs = divideParts(fileSize, partSize)
 	const numParts = partOffs.length
@@ -208,7 +208,7 @@ async function resumeMultipart(
 					size: pi.end - pi.start,
 				}
 
-				const result = await uploadPart(name, uploadId, partNo, data, params, {
+				const result = await uploadPart(name, UploadId, partNo, data, params, {
 					...opt,
 				})
 
@@ -274,7 +274,7 @@ async function resumeMultipart(
 
 	if (jobErr && jobErr.length > 0) {
 		const error = jobErr[0]
-		// 5001 取消上传，5002 暂停上传
+		// 5001 Cancel upload, 5002 Pause upload
 		if (error.status === 5001 || error.status === 5002) {
 			throw error as Error
 		}
@@ -285,15 +285,15 @@ async function resumeMultipart(
 		)
 	}
 
-	return completeMultipartUpload(name, uploadId, internalDoneParts, params, opt)
+	return completeMultipartUpload(name, UploadId, internalDoneParts, params, opt)
 }
 
 /**
- * @description: 复杂上传接口， 例如分片上传，断点续传
- * @param {File | Blob} file 文件上传
- * @param {String} key 文件名
- * @param {TOS.STSAuthParams} params 上传凭证信息
- * @param {TOS.MultipartUploadOption} option 配置字段
+ * @description: Multipart upload interface, e.g., for part upload or Checkpoint resume
+ * @param {File | Blob} file File upload
+ * @param {String} key File name
+ * @param {TOS.STSAuthParams} params Upload credential info
+ * @param {TOS.MultipartUploadOption} option Configuration field
  */
 export const MultipartUpload: PlatformRequest<
 	TOS.STSAuthParams,
@@ -327,7 +327,7 @@ export const MultipartUpload: PlatformRequest<
 
 	const name = `${dir}${key}`
 
-	// 签名工具
+	// Signing utility
 	const signV4 = new SignatureV4Credentials(SessionToken, SecretAccessKey, AccessKeyId)
 	const signers = new SignersV4(
 		{
@@ -345,7 +345,7 @@ export const MultipartUpload: PlatformRequest<
 		signers,
 	}
 
-	// 生成文件类型
+	// Generate File type
 	if (!options.mime) {
 		if (isFile(file)) {
 			options.mime = file.type
@@ -356,7 +356,7 @@ export const MultipartUpload: PlatformRequest<
 		}
 	}
 
-	if (options.checkpoint && options.checkpoint.uploadId) {
+	if (options.checkpoint && options.checkpoint.UploadId) {
 		if (file && isFile(file)) options.checkpoint.file = file
 		if (file) options.checkpoint.file = file
 
@@ -380,17 +380,17 @@ export const MultipartUpload: PlatformRequest<
 		)
 	}
 
-	// 初始化分片上传
-	const { uploadId } = await initMultipartUpload(name, params, {
+	// Initialize multipart upload
+	const { UploadId } = await initMultipartUpload(name, params, {
 		headers: { ...options.headers },
 		mime: options.mime,
 		signers,
 	})
 
-	// 获取分片大小
+	// Get part size
 	const partSize = getPartSize(fileSize, <number>options.partSize, VOLCENGINE_MIN_PART_SIZE)
 
-	const checkpoint: TOS.Checkpoint = initCheckpoint(file, name, fileSize, partSize, uploadId)
+	const checkpoint: TOS.Checkpoint = initCheckpoint(file, name, fileSize, partSize, UploadId)
 
 	if (options && options.progress) {
 		options.progress(0, 0, fileSize, checkpoint)
@@ -398,3 +398,7 @@ export const MultipartUpload: PlatformRequest<
 
 	return resumeMultipart(checkpoint, params, resumeMultipartOptions)
 }
+
+
+
+

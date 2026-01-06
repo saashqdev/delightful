@@ -1,4 +1,4 @@
-/** Condition component with an extra rendering layer
+﻿/** Condition component with an extra rendering layer
  * {
         "id": "component-66399f15d691c",
         "version": "1",
@@ -38,3 +38,4 @@ export default function DelightfulConditionWrap({ ...props }: DelightfulConditio
 
 	return <DelightfulConditionEdit {...props} value={props?.value?.structure} onChange={onChange} />
 }
+

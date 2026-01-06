@@ -1,4 +1,4 @@
-import { installNodes } from "@/DelightfulFlow/register/node"
+﻿import { installNodes } from "@/DelightfulFlow/register/node"
 import { nodeSchemaMap } from "../constants"
 
 export const installAllNodes = () => {
@@ -9,3 +9,4 @@ export const installAllNodes = () => {
 	// @ts-ignore
 	installNodes(nodeSchemaMap)
 }
+

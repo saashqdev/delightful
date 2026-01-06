@@ -1,4 +1,4 @@
-import { FormItemType, InputExpressionValue } from "@/DelightfulExpressionWidget/types"
+﻿import { FormItemType, InputExpressionValue } from "@/DelightfulExpressionWidget/types"
 import { copyToClipboard } from "@/DelightfulFlow/utils"
 import { useExportFields } from "@/DelightfulJsonSchemaEditor/context/ExportFieldsContext/useExportFields"
 import { DataSourceOption } from "@/common/BaseUI/DropdownRenderer/Reference"
@@ -94,7 +94,7 @@ const Editor = observer(
 			itemKey: [],
 			curItemCustomValue: null,
 			checked: true,
-			editorModalName: "", // 弹窗名称 description | mock
+			editorModalName: "", // Modal name: description | mock
 			mock: "",
 		})
 
@@ -113,7 +113,7 @@ const Editor = observer(
 		const [jsonData, setJsonData] = useState<string | undefined>()
 		const [importJsonType, setImportJsonType] = useState<string | null>(null)
 
-		// json 导入弹窗
+		// JSON import modal
 		const showModal = () => {
 			setStateVal((prevState) => {
 				return { ...prevState, visible: true }
@@ -129,7 +129,7 @@ const Editor = observer(
 				try {
 					jsonObject = JSON.parse(jsonData)
 				} catch (ex) {
-					message.error("json 数据格式有误").then(() => {})
+					message.error("Invalid JSON format").then(() => {})
 					return
 				}
 				// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -143,7 +143,7 @@ const Editor = observer(
 				try {
 					jsonObject = JSON.parse(jsonSchemaData)
 				} catch (ex) {
-					message.error("json 数据格式有误").then(() => {})
+					message.error("Invalid JSON format").then(() => {})
 					return
 				}
 				schemaMobx.changeSchema(jsonObject)
@@ -159,7 +159,7 @@ const Editor = observer(
 			})
 		}
 
-		// EditorComponent 中的数据
+		// Data coming from EditorComponent
 		const handleParams = (value: string | undefined) => {
 			if (!value) return
 			let parseData = JSON.parse(value)
@@ -167,7 +167,7 @@ const Editor = observer(
 			schemaMobx.changeSchema(parseData)
 		}
 
-		// 修改数据类型
+		// Update data type
 		const handleChangeType = (key: string, value: string) => {
 			schemaMobx.changeType({ keys: [key], value })
 		}
@@ -188,7 +188,7 @@ const Editor = observer(
 			}
 		}
 
-		// 增加子节点
+		// Add child node
 		const handleAddChildField = (key: string) => {
 			schemaMobx.addChildField({ keys: [key] })
 			setStateVal((prevState) => {
@@ -657,3 +657,4 @@ const Editor = observer(
 )
 
 export default Editor
+

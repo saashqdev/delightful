@@ -1,4 +1,4 @@
-{
+﻿{
 	"compilerOptions": {
 		"rootDir": ".",
 		"baseUrl": ".",
@@ -25,3 +25,7 @@
 	},
 	"include": ["tests/**/*", "src/**/*"]
 }
+
+
+
+

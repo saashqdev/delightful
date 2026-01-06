@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
+﻿/* eslint-disable @typescript-eslint/no-use-before-define */
 import { useArgsModalContext } from "@/DelightfulExpressionWidget/context/ArgsModalContext/useArgsModalContext"
 import { Splitor } from "@/common/BaseUI/DropdownRenderer/Reference/constants"
 import { ExpandAltOutlined } from "@ant-design/icons"
@@ -107,3 +107,4 @@ export function LabelFunc({ config, disabled, selected, deleteFn }: LabelFuncPro
 		</Tooltip>
 	)
 }
+

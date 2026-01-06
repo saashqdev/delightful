@@ -1,4 +1,4 @@
-import { prefix } from "@/DelightfulFlow/constants"
+﻿import { prefix } from "@/DelightfulFlow/constants"
 import clsx from "clsx"
 import React, { useMemo } from "react"
 import styles from "../index.module.less"
@@ -36,3 +36,4 @@ export default function useAvatar({ icon, color, avatar, showIcon }: UseAvatarPr
 		AvatarComponent,
 	}
 }
+

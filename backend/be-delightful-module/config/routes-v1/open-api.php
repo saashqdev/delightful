@@ -59,14 +59,14 @@ Router::addGroup('/api/v1/open-api/sandbox', static function () {
 });
 
 // Project related - public interface
-Router::addGroup('/api/v1/open-api/super-delightful/projects', static function () {
+Router::addGroup('/api/v1/open-api/be-delightful/projects', static function () {
     // Get project basic information (project name, etc.) - no login required
     Router::get('/{id}', [OpenProjectApi::class, 'show']);
 });
 
-// super-delightful open api, note: all subsequent open APIs use super-delightful, not super-agent
+// be-delightful open api, note: all subsequent open APIs use be-delightful, not super-agent
 Router::addGroup(
-    '/api/v1/open-api/super-delightful',
+    '/api/v1/open-api/be-delightful',
     static function () {
         Router::post('/sandbox/init', [SandboxApi::class, 'initSandboxByApiKey']);
         // Create agent task

@@ -1,4 +1,4 @@
-import delightfulBetaSVG from "@/opensource/pages/superDelightful/assets/svg/super_delightful_logo.svg"
+import delightfulBetaSVG from "@/opensource/pages/superDelightful/assets/svg/be_delightful_logo.svg"
 import { IconMenu2 } from "@tabler/icons-react"
 import type { PropsWithChildren, Ref } from "react"
 import { forwardRef, memo, useCallback, useImperativeHandle, useState } from "react"

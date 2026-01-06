@@ -25,7 +25,7 @@ export default function EmptyWorkspacePanel(props: EmptyWorkspacePanelProps) {
 	const [activeGroupKey, setActiveGroupKey] = useState<string>("0")
 
 	useEffect(() => {
-		fetch(`https://super-delightful-v1.tos-cn-guangzhou.volces.com/cases.json?t=${Date.now()}`, {
+		fetch(`https://be-delightful-v1.tos-cn-guangzhou.volces.com/cases.json?t=${Date.now()}`, {
 			mode: "cors",
 		})
 			.then((res) => res.json())

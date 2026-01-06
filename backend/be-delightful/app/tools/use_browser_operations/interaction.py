@@ -31,7 +31,7 @@ logger = get_logger(__name__)
 # System temp directory
 TEMP_DIR = Path(tempfile.gettempdir())
 # Unique subdir per run to avoid conflicts
-SCREENSHOT_CACHE_DIR = TEMP_DIR / f"super_delightful_visual_{uuid.uuid4()}"
+SCREENSHOT_CACHE_DIR = TEMP_DIR / f"be_delightful_visual_{uuid.uuid4()}"
 # Ensure cache directory exists
 SCREENSHOT_CACHE_DIR.mkdir(parents=True, exist_ok=True)
 logger.info(f"Visual interaction screenshots stored at temp dir: {SCREENSHOT_CACHE_DIR}")

@@ -27,10 +27,10 @@ docs/.vitepress/cache/
 docs/.vitepress/cache/deps/*
 volumes/
 node_modules
-.env_super_delightful
+.env_be_delightful
 bin/splitsh-lite
 bin/user_lang
-bin/use_super_delightful
+bin/use_be_delightful
 backend/delightful-service/vendor/
 backend/delightful-service/composer.lock
 backend/delightful-service/runtime/
@@ -38,11 +38,11 @@ backend/delightful-service-go-engine
 
 config/.env_delightful_gateway
 config/.env_sandbox_gateway
-config/.env_super_delightful
+config/.env_be_delightful
 config/config.yaml
 config/.env_delightful_gateway.bak
 config/.env_sandbox_gateway.bak
-config/.env_super_delightful.bak
+config/.env_be_delightful.bak
 .aider*
 
 frontend/upload-sdk/example

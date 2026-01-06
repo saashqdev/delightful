@@ -653,7 +653,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
     public function projectDetail(int $projectId): void
     {
-        $response = $this->get('/api/v1/open-api/super-delightful/projects/' . $projectId, [], []);
+        $response = $this->get('/api/v1/open-api/be-delightful/projects/' . $projectId, [], []);
 
         $this->assertEquals(1000, $response['code'], $response['message'] ?? '');
 

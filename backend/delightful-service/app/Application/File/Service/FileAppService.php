@@ -233,7 +233,7 @@ class FileAppService extends AbstractAppService
         }
 
         // delightful service 服务地址
-        $data['delightful_service_host'] = config('super-delightful.sandbox.callback_host', '');
+        $data['delightful_service_host'] = config('be-delightful.sandbox.callback_host', '');
 
         return $data;
     }
@@ -260,7 +260,7 @@ class FileAppService extends AbstractAppService
         }
 
         // delightful service 服务地址
-        $data['delightful_service_host'] = config('super-delightful.sandbox.callback_host', '');
+        $data['delightful_service_host'] = config('be-delightful.sandbox.callback_host', '');
 
         return $data;
     }

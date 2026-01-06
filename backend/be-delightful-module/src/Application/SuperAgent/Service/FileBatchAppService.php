@@ -264,7 +264,7 @@ class FileBatchAppService extends AbstractAppService
 
         // Create and publish FileBatchCompressEvent
         $event = new FileBatchCompressEvent(
-            'super_delightful',
+            'be_delightful',
             $organizationCode,
             $userId,
             $batchKey,

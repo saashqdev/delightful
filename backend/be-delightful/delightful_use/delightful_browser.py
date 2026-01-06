@@ -135,7 +135,7 @@ class DelightfulBrowser:
         try:
             # Create unique screenshot subdirectory for this browser instance in system temp directory
             temp_dir = Path(tempfile.gettempdir())
-            unique_dir_name = f"super_delightful_browser_screenshots_{uuid.uuid4()}"
+            unique_dir_name = f"be_delightful_browser_screenshots_{uuid.uuid4()}"
             self._TEMP_SCREENSHOT_DIR = temp_dir / unique_dir_name
             self._TEMP_SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
             logger.info(f"Browser temporary screenshot directory created: {self._TEMP_SCREENSHOT_DIR}")

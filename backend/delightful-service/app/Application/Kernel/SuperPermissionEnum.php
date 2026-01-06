@@ -37,11 +37,11 @@ enum SuperPermissionEnum: string
     case SERVICE_PROVIDER_ADMIN = 'service_provider_admin';
 
     // 超级麦吉邀请使用用户
-    case SUPER_INVITE_USER = 'super_delightful_invite_use_user';
+    case SUPER_INVITE_USER = 'be_delightful_invite_use_user';
 
     // 超级麦吉看板管理人员
-    case SUPER_DELIGHTFUL_BOARD_ADMIN = 'super_delightful_board_manager';
+    case SUPER_DELIGHTFUL_BOARD_ADMIN = 'be_delightful_board_manager';
 
     // 超级麦吉看板运营人员
-    case SUPER_DELIGHTFUL_BOARD_OPERATOR = 'super_delightful_board_operator';
+    case SUPER_DELIGHTFUL_BOARD_OPERATOR = 'be_delightful_board_operator';
 }

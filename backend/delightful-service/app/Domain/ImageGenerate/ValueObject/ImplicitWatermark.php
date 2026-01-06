@@ -31,7 +31,7 @@ class ImplicitWatermark
     {
         $this->createdAt = new DateTime();
         // 设置默认签名，在设置用户信息后会自动加密
-        $this->sign = 'super_delightful';
+        $this->sign = 'be_delightful';
     }
 
     public function getUserId(): string

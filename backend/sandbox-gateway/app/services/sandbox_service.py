@@ -45,7 +45,7 @@ class SandboxService:
         """Initialize sandbox service"""
         try:
             self.docker_client = docker.from_env()
-            self.image_name = settings.super_delightful_image_name
+            self.image_name = settings.be_delightful_image_name
             self.qdrant_image_name = settings.qdrant_image_name
             self.running_container_expire_time = settings.running_container_expire_time
             self.exited_container_expire_time = settings.exited_container_expire_time

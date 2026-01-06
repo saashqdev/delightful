@@ -44,7 +44,7 @@ cd delightful
 
 ##### Main Configuration Files
 - .env: Main environment variables configuration file
-- config/.env_super_delightful: Be Delightful service configuration file (if you choose to install)
+- config/.env_be_delightful: Be Delightful service configuration file (if you choose to install)
 - config/.env_delightful_gateway: Delightful Gateway configuration file (if you choose to install Be Delightful)
 - config/.env_sandbox_gateway: Sandbox Gateway configuration file (if you choose to install Be Delightful)
 - For macOS/Linux, missing files will be automatically copied during installation; Windows users need to manually copy and modify them
@@ -60,13 +60,13 @@ https://docs.bedelightful.ai/en/development/deploy/environment.html
 
 ```bash
 ### To use Be Delightful services, copy the following files:
-sudo cp config/.env_super_delightful.example config/.env_super_delightful
+sudo cp config/.env_be_delightful.example config/.env_be_delightful
 sudo cp config/.env_delightful_gateway.example config/.env_delightful_gateway
 sudo cp config/.env_sandbox_gateway.example config/.env_sandbox_gateway
 ```
 
 ##### Be Delightful Environment Variables Configuration Reference:
-https://docs.bedelightful.ai/en/development/deploy/super-delightful.html
+https://docs.bedelightful.ai/en/development/deploy/be-delightful.html
 
 ##### Configure IP (Optional)
 For remote server deployment, edit the .env file and replace localhost with your server IP in the following entries:
@@ -76,11 +76,11 @@ DELIGHTFUL_SERVICE_BASE_URL=http://<server_IP>:9501
 ```
 
 If you choose to install Be Delightful service, ensure the following configuration files exist:
-- config/.env_super_delightful
+- config/.env_be_delightful
 - config/.env_delightful_gateway
 - config/.env_sandbox_gateway
 
-If config/.env_super_delightful doesn't exist but config/.env_super_delightful.example does, follow the prompts to copy and edit the file.
+If config/.env_be_delightful doesn't exist but config/.env_be_delightful.example does, follow the prompts to copy and edit the file.
 
 #### 2.3. Starting Services on macOS/Linux
 
@@ -132,7 +132,7 @@ docker network create delightful-sandbox-network
 ###### Be Delightful Service Installation
 - Choose 1 to install Be Delightful service (requires pre-configuration of files in the config/ directory)
 - Choose 2 to not install Be Delightful service
-![Be Delightful Service Installation](https://public-cdn.letsdelightful.cn/static/img/super_delightful_service_install.png)
+![Be Delightful Service Installation](https://public-cdn.letsdelightful.cn/static/img/be_delightful_service_install.png)
 
 #### 2.5 First Run
 After the first run, the system will create a bin/delightful.lock file (macOS/Linux), and subsequent startups will skip the installation configuration process.
@@ -153,8 +153,8 @@ Available commands:
 - restart: Restart all services
 - status: Display service status
 - logs: Display service logs
-- super-delightful: Start only Be Delightful service (foreground)
-- super-delightful-daemon: Start only Be Delightful service (background)
+- be-delightful: Start only Be Delightful service (foreground)
+- be-delightful-daemon: Start only Be Delightful service (background)
 - help: Display help information
 
 ##### Windows
@@ -307,7 +307,7 @@ sudo systemctl start docker
    - Check if Windows Firewall is blocking Docker network traffic
 
 6. **Log Viewing**
-   - For super-delightful issues, check container logs starting with sandbox-agent
+   - For be-delightful issues, check container logs starting with sandbox-agent
    - For API issues, check delightful-service container logs
    - For frontend UI issues, check delightful-web container logs
    - For cross-origin and other network issues, check delightful-caddy container logs

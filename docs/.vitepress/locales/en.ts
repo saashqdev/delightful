@@ -135,7 +135,7 @@ export default {
           collapsed: false,
           items: [
             { text: 'Quick Introduction', link: '/en/development/quick-start/quick-introduction' },
-            { text: 'Be Delightful Installation', link: '/en/development/deploy/super-delightful' },
+            { text: 'Be Delightful Installation', link: '/en/development/deploy/be-delightful' },
           ]
         },
         {

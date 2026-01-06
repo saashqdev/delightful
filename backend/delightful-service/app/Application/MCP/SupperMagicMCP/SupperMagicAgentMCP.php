@@ -131,7 +131,7 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
             return $item instanceof MCPServerEntity;
         });
 
-        $localHttpUrl = config('super-delightful.sandbox.callback_host', '');
+        $localHttpUrl = config('be-delightful.sandbox.callback_host', '');
 
         foreach ($mcpServers as $mcpServer) {
             if (! $mcpServer->isBuiltIn() && ! in_array($mcpServer->getCode(), $mcpIds, true)) {

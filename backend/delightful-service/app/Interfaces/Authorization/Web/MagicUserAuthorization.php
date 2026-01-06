@@ -100,7 +100,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
         $superDelightfulAgentUserId = $key['superDelightfulAgentUserId'] ?? '';
         if ($superDelightfulAgentUserId) {
             // 处理超级麦吉的 agent 用户
-            $sandboxToken = config('super-delightful.sandbox.token', '');
+            $sandboxToken = config('be-delightful.sandbox.token', '');
             if (empty($sandboxToken) || $sandboxToken !== $authorization) {
                 ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND, 'token error');
             }

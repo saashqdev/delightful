@@ -36,18 +36,18 @@ bilingual() {
 }
 
 # Check if Be Delightful environment file exists
-check_super_delightful_env() {
-    if [ ! -f "config/.env_super_delightful" ]; then
-        if [ -f "config/.env_super_delightful.example" ]; then
-            bilingual "Error: config/.env_super_delightful file does not exist!" "Error: config/.env_super_delightful file does not exist!"
+check_be_delightful_env() {
+    if [ ! -f "config/.env_be_delightful" ]; then
+        if [ -f "config/.env_be_delightful.example" ]; then
+            bilingual "Error: config/.env_be_delightful file does not exist!" "Error: config/.env_be_delightful file does not exist!"
             bilingual "Please follow these steps:" "Please follow these steps:"
-            bilingual "1. Copy the example configuration file: cp config/.env_super_delightful.example config/.env_super_delightful" "1. Copy the example configuration file: cp config/.env_super_delightful.example config/.env_super_delightful"
-            bilingual "2. Edit the configuration file: vim config/.env_super_delightful (or use your preferred editor)" "2. Edit the configuration file: vim config/.env_super_delightful (or use your preferred editor)"
+            bilingual "1. Copy the example configuration file: cp config/.env_be_delightful.example config/.env_be_delightful" "1. Copy the example configuration file: cp config/.env_be_delightful.example config/.env_be_delightful"
+            bilingual "2. Edit the configuration file: vim config/.env_be_delightful (or use your preferred editor)" "2. Edit the configuration file: vim config/.env_be_delightful (or use your preferred editor)"
             bilingual "3. Configure all necessary environment variables" "3. Configure all necessary environment variables"
             bilingual "4. Run this script again" "4. Run this script again"
             return 1
         else
-            bilingual "Error: Both config/.env_super_delightful and config/.env_super_delightful.example files do not exist!" "Error: Both config/.env_super_delightful and config/.env_super_delightful.example files do not exist!"
+            bilingual "Error: Both config/.env_be_delightful and config/.env_be_delightful.example files do not exist!" "Error: Both config/.env_be_delightful and config/.env_be_delightful.example files do not exist!"
             bilingual "Please contact your system administrator for the correct configuration files." "Please contact your system administrator for the correct configuration files."
             return 1
         fi
@@ -80,8 +80,8 @@ if [ -f "bin/delightful.lock" ]; then
     SKIP_LANGUAGE_SELECTION=true
     SKIP_INSTALLATION=true
 
-    # If super-delightful config exists, set DELIGHTFUL_USE_SUPER_DELIGHTFUL automatically
-    if [ -f "bin/use_super_delightful" ]; then
+    # If be-delightful config exists, set DELIGHTFUL_USE_SUPER_DELIGHTFUL automatically
+    if [ -f "bin/use_be_delightful" ]; then
         # Use fixed profile parameters instead of reading from a file
         export DELIGHTFUL_USE_SUPER_DELIGHTFUL=" --profile delightful-gateway --profile sandbox-gateway"
         bilingual "Be Delightful configuration detected, Be Delightful related services will be started automatically" "Be Delightful configuration detected, Be Delightful related services will be started automatically"
@@ -148,7 +148,7 @@ if [ "$SKIP_INSTALLATION" = "true" ]; then
     bilingual "Detected delightful.lock file, skipping installation configuration..." "Detected delightful.lock file, skipping installation configuration..."
 
     # Set default values for required variables
-    if [ -f ".env_super_delightful" ]; then
+    if [ -f ".env_be_delightful" ]; then
         export DELIGHTFUL_USE_SUPER_DELIGHTFUL=""
     else
         export DELIGHTFUL_USE_SUPER_DELIGHTFUL=""
@@ -260,7 +260,7 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
     fi
 
     # Ask if Be Delightful service should be installed
-    ask_super_delightful() {
+    ask_be_delightful() {
         bilingual "Do you want to install Be Delightful service?" "Do you want to install Be Delightful service?"
         bilingual "1. Yes, install Be Delightful service" "1. Yes, install Be Delightful service"
         bilingual "2. No, don't install Be Delightful service" "2. No, don't install Be Delightful service"
@@ -269,8 +269,8 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
         if [ "$SUPER_DELIGHTFUL_OPTION" = "1" ]; then
             bilingual "You have chosen to install Be Delightful service." "You have chosen to install Be Delightful service."
 
-            # Check if .env_super_delightful exists
-            if ! check_super_delightful_env; then
+            # Check if .env_be_delightful exists
+            if ! check_be_delightful_env; then
                 exit 1
             fi
 
@@ -287,18 +287,18 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
                 exit 1
             fi
 
-            # Add profiles for super-delightful, delightful-gateway and sandbox-gateway
+            # Add profiles for be-delightful, delightful-gateway and sandbox-gateway
             export DELIGHTFUL_USE_SUPER_DELIGHTFUL=" --profile delightful-gateway --profile sandbox-gateway"
-            # Record the super-delightful configuration for automatic loading next start
-            echo "$DELIGHTFUL_USE_SUPER_DELIGHTFUL" > bin/use_super_delightful
+            # Record the be-delightful configuration for automatic loading next start
+            echo "$DELIGHTFUL_USE_SUPER_DELIGHTFUL" > bin/use_be_delightful
             bilingual "Be Delightful, Delightful Gateway and Sandbox Gateway services will be started." "Be Delightful, Delightful Gateway and Sandbox Gateway services will be started."
             bilingual "Your choice has been recorded, Be Delightful related services will be loaded automatically next time." "Your choice has been recorded, Be Delightful related services will be loaded automatically next time."
         else
             bilingual "You have chosen not to install Be Delightful service." "You have chosen not to install Be Delightful service."
             export DELIGHTFUL_USE_SUPER_DELIGHTFUL=""
-            # Remove any previous super-delightful configuration file if present
-            if [ -f "bin/use_super_delightful" ]; then
-                rm bin/use_super_delightful
+            # Remove any previous be-delightful configuration file if present
+            if [ -f "bin/use_be_delightful" ]; then
+                rm bin/use_be_delightful
             fi
         fi
     }
@@ -583,7 +583,7 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
     detect_public_ip
 
     # Ask if Be Delightful service should be installed
-    ask_super_delightful
+    ask_be_delightful
 
     # Create lock file to skip installation next time
     touch bin/delightful.lock
@@ -601,8 +601,8 @@ show_help() {
     bilingual "  restart           Restart all services" "  restart           Restart all services"
     bilingual "  status            Show services status" "  status            Show services status"
     bilingual "  logs              Show services logs" "  logs              Show services logs"
-    bilingual "  super-delightful       Start only Be Delightful service (foreground)" "  super-delightful       Start only Be Delightful service (foreground)"
-    bilingual "  super-delightful-daemon Start only Be Delightful service (background)" "  super-delightful-daemon Start only Be Delightful service (background)"
+    bilingual "  be-delightful       Start only Be Delightful service (foreground)" "  be-delightful       Start only Be Delightful service (foreground)"
+    bilingual "  be-delightful-daemon Start only Be Delightful service (background)" "  be-delightful-daemon Start only Be Delightful service (background)"
     echo ""
     bilingual "If no command is provided, 'start' will be used by default." "If no command is provided, 'start' will be used by default."
 }
@@ -613,9 +613,9 @@ start_services() {
     check_sandbox_network
 
     bilingual "Starting services in foreground..." "Starting services in foreground..."
-    if [ -f "bin/use_super_delightful" ]; then
+    if [ -f "bin/use_be_delightful" ]; then
         # Start directly with the profile parameters
-        docker compose  --profile super-delightful --profile  delightful-gateway --profile sandbox-gateway up
+        docker compose  --profile be-delightful --profile  delightful-gateway --profile sandbox-gateway up
     else
         docker compose up
     fi
@@ -624,8 +624,8 @@ start_services() {
 # Stop services
 stop_services() {
     bilingual "Stopping services..." "Stopping services..."
-    if [ -f "bin/use_super_delightful" ]; then
-        docker compose --profile super-delightful --profile  delightful-gateway --profile sandbox-gateway down
+    if [ -f "bin/use_be_delightful" ]; then
+        docker compose --profile be-delightful --profile  delightful-gateway --profile sandbox-gateway down
     else
         docker compose down
     fi
@@ -637,8 +637,8 @@ start_daemon() {
     check_sandbox_network
 
     bilingual "Starting services in background..." "Starting services in background..."
-    if [ -f "bin/use_super_delightful" ]; then
-        docker compose --profile super-delightful --profile  delightful-gateway --profile sandbox-gateway up -d
+    if [ -f "bin/use_be_delightful" ]; then
+        docker compose --profile be-delightful --profile  delightful-gateway --profile sandbox-gateway up -d
     else
         docker compose up -d
     fi
@@ -650,8 +650,8 @@ restart_services() {
     check_sandbox_network
 
     bilingual "Restarting services..." "Restarting services..."
-    if [ -f "bin/use_super_delightful" ]; then
-        docker compose --profile super-delightful --profile  delightful-gateway --profile sandbox-gateway restart
+    if [ -f "bin/use_be_delightful" ]; then
+        docker compose --profile be-delightful --profile  delightful-gateway --profile sandbox-gateway restart
     else
         docker compose restart
     fi
@@ -670,12 +670,12 @@ show_logs() {
 }
 
 # Start only Be Delightful service
-start_super_delightful() {
+start_be_delightful() {
     # Check and update the SANDBOX_NETWORK parameter
     check_sandbox_network
 
-    # Check if .env_super_delightful exists
-    if ! check_super_delightful_env; then
+    # Check if .env_be_delightful exists
+    if ! check_be_delightful_env; then
         exit 1
     fi
 
@@ -697,12 +697,12 @@ start_super_delightful() {
 }
 
 # Start only Be Delightful service in background
-start_super_delightful_daemon() {
+start_be_delightful_daemon() {
     # Check and update SANDBOX_NETWORK parameter
     check_sandbox_network
 
-    # Check if .env_super_delightful exists
-    if ! check_super_delightful_env; then
+    # Check if .env_be_delightful exists
+    if ! check_be_delightful_env; then
         exit 1
     fi
 
@@ -743,11 +743,11 @@ case "$1" in
     logs)
         show_logs
         ;;
-    super-delightful)
-        start_super_delightful
+    be-delightful)
+        start_be_delightful
         ;;
-    super-delightful-daemon)
-        start_super_delightful_daemon
+    be-delightful-daemon)
+        start_be_delightful_daemon
         ;;
     help|--help|-h)
         show_help

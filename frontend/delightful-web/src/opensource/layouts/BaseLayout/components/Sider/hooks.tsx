@@ -14,7 +14,7 @@ import {
 	IconUserSquareRounded,
 } from "@tabler/icons-react"
 import { RoutePath } from "@/const/routes"
-import BeDelightfulIcon from "@/opensource/pages/superDelightful/assets/svg/tabler-icon-super-delightful.svg"
+import BeDelightfulIcon from "@/opensource/pages/superDelightful/assets/svg/tabler-icon-be-delightful.svg"
 import { isCommercial } from "@/utils/env"
 import DelightfulLogo from "@/opensource/components/DelightfulLogo"
 import { LogoType } from "@/opensource/components/DelightfulLogo/LogoType"

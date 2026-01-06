@@ -19,12 +19,12 @@ class TempDirectoryUtil
     /**
      * Base directory for batch compression.
      */
-    private const string BATCH_BASE_DIR = 'tmp/super_delightful/batch/';
+    private const string BATCH_BASE_DIR = 'tmp/be_delightful/batch/';
 
     /**
      * Get compress file temporary directory path (current date).
      *
-     * @return string Compress file temporary directory path, e.g., tmp/super_delightful/batch/20250621/
+     * @return string Compress file temporary directory path, e.g., tmp/be_delightful/batch/20250621/
      */
     public static function getCompressTempDir(): string
     {

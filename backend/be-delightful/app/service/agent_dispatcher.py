@@ -153,9 +153,9 @@ class AgentDispatcher:
         # Extract and set key fields from init_message.metadata
         if init_message.metadata:
             # Set task_id
-            if "super_delightful_task_id" in init_message.metadata:
-                self.agent_context.set_task_id(init_message.metadata["super_delightful_task_id"])
-                logger.info(f"Set task ID from init_message.metadata: {init_message.metadata['super_delightful_task_id']}")
+            if "be_delightful_task_id" in init_message.metadata:
+                self.agent_context.set_task_id(init_message.metadata["be_delightful_task_id"])
+                logger.info(f"Set task ID from init_message.metadata: {init_message.metadata['be_delightful_task_id']}")
             
             # Set sandbox_id
             if "sandbox_id" in init_message.metadata:
@@ -170,7 +170,7 @@ class AgentDispatcher:
         await self.agent_service.init_workspace(agent_context=self.agent_context)
 
         self.agents["delightful"] = await self.agent_service.create_agent("delightful", self.agent_context)
-        self.agents["super-delightful"] = await self.agent_service.create_agent("super-delightful", self.agent_context)
+        self.agents["be-delightful"] = await self.agent_service.create_agent("be-delightful", self.agent_context)
 
         self.is_workspace_initialized = True
         logger.info("Workspace initialization completed")
@@ -188,11 +188,11 @@ class AgentDispatcher:
         if task_mode == TaskMode.CHAT:
             agent_type = "delightful"
         elif task_mode == TaskMode.PLAN:
-            agent_type = "super-delightful"
+            agent_type = "be-delightful"
 
         if agent_type not in self.agents:
-            logger.error(f"Agent type not found: {agent_type}, using default super-delightful")
-            agent_type = "super-delightful"
+            logger.error(f"Agent type not found: {agent_type}, using default be-delightful")
+            agent_type = "be-delightful"
 
         logger.info(f"Selected agent type based on task_mode({task_mode}): {agent_type}")
 

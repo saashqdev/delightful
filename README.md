@@ -3,7 +3,7 @@
   <a href="./README_CN.md"><img alt="简体中文版自述文件" src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
 </div>
 
-![Delightful Open Source Product Matrix](https://public-cdn.bedelightful.ai/static/img/super-delightful-publish-header-en.png?v=20250819)
+![Delightful Open Source Product Matrix](https://public-cdn.bedelightful.ai/static/img/be-delightful-publish-header-en.png?v=20250819)
 
 # 🔥 Delightful - First Open-Source All-in-One AI Productivity Platform
 
@@ -36,9 +36,9 @@ Delightful aims to help enterprises of all sizes quickly build and deploy AI app
 
 Delightful is the first **"open-source all-in-one AI productivity platform"**, not a single AI product, but a comprehensive product matrix with rich capabilities.
 
-![Product Matrix](https://public-cdn.bedelightful.ai/static/img/super-delightful-open-source-projects-en.png?v=20250819)
+![Product Matrix](https://public-cdn.bedelightful.ai/static/img/be-delightful-open-source-projects-en.png?v=20250819)
 
-- **[Be Delightful](https://github.com/saashqdev/delightful/super-delightful)** - A **general-purpose AI Agent** designed for complex task scenarios
+- **[Be Delightful](https://github.com/saashqdev/delightful/be-delightful)** - A **general-purpose AI Agent** designed for complex task scenarios
 - **[Delightful IM](https://github.com/saashqdev/delightful/delightful)** - An enterprise-grade instant messaging system that integrates AI Agent conversations with internal enterprise communication
 - **[Delightful Flow](https://github.com/saashqdev/delightful/delightful)** - A powerful visual AI workflow orchestration system
 - **Teamshare OS** (Coming soon) - An enterprise-grade online collaborative office system
@@ -55,7 +55,7 @@ In addition to the above AI products, we have also open-sourced some of the infr
 
 A powerful **general-purpose AI Agent** specially designed for complex task scenarios. Through a multi-agent design system and rich tool capabilities, Be Delightful supports intelligent abilities such as **autonomous task understanding**, **autonomous task planning**, **autonomous action**, and **autonomous error correction**. It can understand natural language instructions, execute various business processes, and deliver final target results. As the flagship product of the Delightful product matrix, Be Delightful provides powerful secondary development capabilities through open source, allowing enterprises to quickly build and deploy intelligent assistants that meet specific business needs, greatly improving decision-making efficiency and quality.
 
-![Be Delightful](https://public-cdn.bedelightful.ai/static/img/super-delightful-buffett.gif)
+![Be Delightful](https://public-cdn.bedelightful.ai/static/img/be-delightful-buffett.gif)
 
 #### Be Delightful Case Studies
 - [Analysis of Investment Insights from Buffett's 2025 Shareholders Meeting](https://www.letsdelightful.cn/share/777665156986277889)
@@ -80,7 +80,7 @@ Delightful Flow is a powerful visual AI workflow orchestration system that allow
 
 As an important component of the Delightful product matrix, Delightful Flow can be seamlessly integrated with other Delightful products to create a complete enterprise-level AI application ecosystem.
 
-![Delightful Multi-Agents and Events](https://public-cdn.bedelightful.ai/static/img/super-delightful-multi-agents-and-events-en.png?v=20250819)
+![Delightful Multi-Agents and Events](https://public-cdn.bedelightful.ai/static/img/be-delightful-multi-agents-and-events-en.png?v=20250819)
 
 ### Delightful IM
 
@@ -165,7 +165,7 @@ cp .env.example .env
 
 # Configure Be Delightful environment variables, must configure any large language model that supports OpenAI format to use it normally
 ./bin/delightful.sh status
-cp config/.env_super_delightful.example .env_super_delightful
+cp config/.env_be_delightful.example .env_be_delightful
 ```
 
 ##### Access Services

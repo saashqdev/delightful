@@ -1,5 +1,5 @@
 import { memo } from "react"
-import delightfulBetaSVG from "@/opensource/pages/superDelightful/assets/svg/super_delightful_logo.svg"
+import delightfulBetaSVG from "@/opensource/pages/superDelightful/assets/svg/be_delightful_logo.svg"
 import arrowDownSVG from "@/opensource/pages/superDelightfulMobile/assets/svg/arrow-down.svg"
 import { cx } from "antd-style"
 import { useStyles } from "./styles"

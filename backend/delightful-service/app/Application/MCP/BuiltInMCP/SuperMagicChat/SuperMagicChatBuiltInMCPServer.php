@@ -13,10 +13,10 @@ use App\Domain\MCP\Entity\ValueObject\ServiceType;
 use App\Infrastructure\Core\Collector\BuiltInMCP\Annotation\BuiltInMCPServerDefine;
 use App\Infrastructure\Core\Contract\MCP\BuiltInMCPServerInterface;
 
-#[BuiltInMCPServerDefine(serverCode: 'super_delightful_chat', enabled: true, priority: 1)]
+#[BuiltInMCPServerDefine(serverCode: 'be_delightful_chat', enabled: true, priority: 1)]
 class BeDelightfulChatBuiltInMCPServer implements BuiltInMCPServerInterface
 {
-    private static string $codePrefix = 'super-delightful-chat-';
+    private static string $codePrefix = 'be-delightful-chat-';
 
     private static string $serverName = 'BeDelightfulChat';
 
@@ -48,7 +48,7 @@ class BeDelightfulChatBuiltInMCPServer implements BuiltInMCPServerInterface
 
     public function getServerCode(): string
     {
-        return 'super_delightful_chat';
+        return 'be_delightful_chat';
     }
 
     public function getServerName(): string

@@ -33,7 +33,7 @@
         "dtyq/php-mcp": "0.1.*",
         "dtyq/rule-engine-core": "~0.1",
         "dtyq/sdk-base": "~0.1",
-        "dtyq/super-delightful-module": "^v0.0",
+        "dtyq/be-delightful-module": "^v0.0",
         "dtyq/task-scheduler": "~0.1",
         "dtyq/tiptap": "~0.1",
         "facile-it/php-openid-client": "^0.3.5",

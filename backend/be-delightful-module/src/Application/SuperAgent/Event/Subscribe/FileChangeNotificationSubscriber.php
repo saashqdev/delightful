@@ -402,7 +402,7 @@ class FileChangeNotificationSubscriber implements ListenerInterface
                 'conversation_id' => $conversationId,
                 'organization_code' => $organizationCode,
                 'message' => [
-                    'type' => 'super_delightful_file_change',
+                    'type' => 'be_delightful_file_change',
                     'project_id' => $projectId,
                     'workspace_id' => $workspaceId,
                     'topic_id' => $topicId,

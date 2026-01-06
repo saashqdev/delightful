@@ -104,7 +104,7 @@ class ChatAppService extends AbstractAppService
             $aiUserEntity = $this->userDomainService->getByAiCode($dataIsolation, AgentConstant::SUPER_DELIGHTFUL_CODE);
             if (empty($aiUserEntity)) {
                 $this->logger->error(sprintf('AI user with code %s still not found after attempting initialization for organization: %s', AgentConstant::SUPER_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
-                ExceptionBuilder::throw(GenericErrorCode::SystemError, 'workspace.super_delightful_user_not_found');
+                ExceptionBuilder::throw(GenericErrorCode::SystemError, 'workspace.be_delightful_user_not_found');
             }
             $this->logger->info(sprintf('AI user with code %s found after initialization for organization: %s', AgentConstant::SUPER_DELIGHTFUL_CODE, $dataIsolation->getCurrentOrganizationCode()));
         } else {

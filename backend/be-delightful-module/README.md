@@ -43,7 +43,7 @@ Be Delightful Module 作为 delightful-service 的扩展，在整个系统中扮
 通过 Composer 安装：
 
 ```bash
-composer require dtyq/super-delightful-module
+composer require dtyq/be-delightful-module
 ```
 
 ## 基本使用

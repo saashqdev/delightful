@@ -27,7 +27,7 @@ Router::addGroup('/api/v1/mcp', function () {
         Router::delete('/{code}/tool/{id}', [MCPServerToolAdminApi::class, 'destroy']);
     });
 
-    Router::addGroup('/super-delightful', function () {
+    Router::addGroup('/be-delightful', function () {
         Router::put('/project/{projectId}/setting', [MCPBeDelightfulProjectSettingAdminApi::class, 'save']);
         Router::get('/project/{projectId}/setting', [MCPBeDelightfulProjectSettingAdminApi::class, 'get']);
     });

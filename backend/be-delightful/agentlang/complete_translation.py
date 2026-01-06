@@ -305,7 +305,7 @@ def translate_file(file_path):
 
 def main():
     """Main entry point."""
-    base_path = Path(r"c:\Users\kubew\delightful\backend\super-delightful\agentlang\agentlang")
+    base_path = Path(r"c:\Users\kubew\delightful\backend\be-delightful\agentlang\agentlang")
     
     # Files remaining to translate
     files_to_translate = [

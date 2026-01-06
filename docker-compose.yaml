@@ -82,19 +82,19 @@ services:
       - delightful-sandbox-network
 
   # Be Delightful service
-  super-delightful:
-    image: ghcr.io/dtyq/super-delightful:${SUPER_DELIGHTFUL_TAG-latest}
-    container_name: super-delightful
+  be-delightful:
+    image: ghcr.io/dtyq/be-delightful:${SUPER_DELIGHTFUL_TAG-latest}
+    container_name: be-delightful
     #restart: always
     profiles:
-      - super-delightful
+      - be-delightful
     ports:
       - "8002:8002"
     volumes:
       - ./volumes/storage/files:/opt/www/storage/files
       - ./config/config.yaml:/app/config/config.yaml
     env_file:
-      - config/.env_super_delightful
+      - config/.env_be_delightful
     networks:
       - delightful-sandbox-network
 
@@ -134,7 +134,7 @@ services:
     ports:
       - "39003:39003"
     volumes:
-      - ./config/.env_super_delightful:/app/.env.agent
+      - ./config/.env_be_delightful:/app/.env.agent
       - ${SANDBOX_DOCKER_RUNTIME}:/var/run/docker.sock
       - ./config/config.yaml:/app/config/config.yaml
     env_file:

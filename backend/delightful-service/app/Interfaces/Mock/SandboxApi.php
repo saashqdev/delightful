@@ -157,7 +157,7 @@ class SandboxApi
      *     "sandbox_id": "sandbox_001",
      *     "user_id": "user_123",
      *     "organization_code": "org_001",
-     *     "super_delightful_task_id": "",
+     *     "be_delightful_task_id": "",
      *     "language": "zh_CN"
      *   }
      * }

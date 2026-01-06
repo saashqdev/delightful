@@ -26,14 +26,14 @@ The Be Delightful service depends on several key configuration files:
 #### 2.1 Create Be Delightful Configuration File
 
 ```bash
-cp config/.env_super_delightful.example config/.env_super_delightful
+cp config/.env_be_delightful.example config/.env_be_delightful
 ```
 Configure Be Delightful environment variables. You must configure at least one large language model environment variable that supports the OpenAI format for proper functionality.
 
-Edit the `config/.env_super_delightful` file to configure necessary environment variables:
+Edit the `config/.env_be_delightful` file to configure necessary environment variables:
 
 ```bash
-vim config/.env_super_delightful
+vim config/.env_be_delightful
 ```
 
 ### 3. Run the Installation Script
@@ -74,13 +74,13 @@ When prompted "Do you want to install Be Delightful service?", select "1" to ins
 #### Start Only Be Delightful Service (Foreground)
 
 ```bash
-./bin/delightful.sh super-delightful
+./bin/delightful.sh be-delightful
 ```
 
 #### Start Only Be Delightful Service (Background)
 
 ```bash
-./bin/delightful.sh super-delightful-daemon
+./bin/delightful.sh be-delightful-daemon
 ```
 
 ### Managing Services
@@ -113,7 +113,7 @@ When prompted "Do you want to install Be Delightful service?", select "1" to ins
 
 ### Be Delightful Environment Configuration
 
-The `config/.env_super_delightful` file contains the following important configuration items:
+The `config/.env_be_delightful` file contains the following important configuration items:
 
 #### Basic Configuration
 - `APP_ENV`: Application environment setting, possible values include "test", "production", etc.

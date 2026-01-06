@@ -120,7 +120,7 @@ class MessageApplyService {
 				ChatMessageApplyService.apply(message, { ...options, isFromOtherTab: true })
 				break
 			case message?.message?.type === ConversationMessageType.BeDelightful:
-				pubsub.publish("super_delightful_new_message", message)
+				pubsub.publish("be_delightful_new_message", message)
 				break
 			default:
 				// 检查是否有自定义处理器可以处理该消息

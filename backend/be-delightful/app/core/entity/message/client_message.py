@@ -31,7 +31,7 @@ class ContextType(str, Enum):
 class TaskMode(str, Enum):
     """Task mode type enumeration"""
     CHAT = "chat"      # Chat mode, uses delightful.agent
-    PLAN = "plan"      # Planning mode, uses super-delightful.agent
+    PLAN = "plan"      # Planning mode, uses be-delightful.agent
 
 class ChatClientMessage(ClientMessage):
     """

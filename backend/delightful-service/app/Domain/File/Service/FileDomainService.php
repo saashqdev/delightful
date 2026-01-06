@@ -226,12 +226,12 @@ readonly class FileDomainService
         return $this->cloudFileRepository->getFullPrefix($organizationCode);
     }
 
-    public function generateWorkDir(string $userId, int $projectId, string $code = 'super-delightful', string $lastPath = 'project'): string
+    public function generateWorkDir(string $userId, int $projectId, string $code = 'be-delightful', string $lastPath = 'project'): string
     {
         return $this->cloudFileRepository->generateWorkDir($userId, $projectId, $code, $lastPath);
     }
 
-    public function getFullWorkDir(string $organizationCode, string $userId, int $projectId, string $code = 'super-delightful', string $lastPath = 'project'): string
+    public function getFullWorkDir(string $organizationCode, string $userId, int $projectId, string $code = 'be-delightful', string $lastPath = 'project'): string
     {
         $prefix = $this->getFullPrefix($organizationCode);
         # 判断最后一个字符是否是 /,如果是，去掉

@@ -42,13 +42,13 @@ enum SuperPermissionEnum: string
     case SERVICE_PROVIDER_ADMIN = 'service_provider_admin';
 
     // Be Delightful Invite Use User
-    case SUPER_INVITE_USER = 'super_delightful_invite_use_user';
+    case SUPER_INVITE_USER = 'be_delightful_invite_use_user';
 
     // Be Delightful Board Administrator
-    case SUPER_DELIGHTFUL_BOARD_ADMIN = 'super_delightful_board_manager';
+    case SUPER_DELIGHTFUL_BOARD_ADMIN = 'be_delightful_board_manager';
 
     // Be Delightful Board Operator
-    case SUPER_DELIGHTFUL_ BOARD_OPERATOR = 'super_delightful_board_operator';
+    case SUPER_DELIGHTFUL_ BOARD_OPERATOR = 'be_delightful_board_operator';
 }
 ```
 

@@ -42,10 +42,10 @@ const UserMenus = observer(function UserMenus({ children }: UserMenusProps) {
 
 	const [open, { setFalse, set }] = useBoolean(false)
 
-	/** 清除授权 */
+	/** Clear authorization */
 	const { accountLogout, accountSwitch } = useAccount()
 
-	/** 登出 */
+	/** Logout */
 	const handleLogout = useMemoizedFn(async () => {
 		const config = {
 			title: t("sider.exitTitle"),
@@ -55,7 +55,7 @@ const UserMenus = observer(function UserMenus({ children }: UserMenusProps) {
 		if (confirmed) {
 			const accounts = userStore.account.accounts
 
-			// 当且仅当存在多个账号下，优先切换帐号，再移除帐号
+			// When multiple accounts exist, prioritize account switching before account removal
 			if (accounts?.length > 1) {
 				const info = userStore.user.userInfo
 				const otherAccount = accounts.filter(

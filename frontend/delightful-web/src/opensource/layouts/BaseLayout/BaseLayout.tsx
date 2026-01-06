@@ -41,7 +41,7 @@ const BaseLayout = observer(() => {
 				MemberCardStore.openCard(uid, { x: e.clientX, y: e.clientY })
 			}
 		}
-		// 点击卡片外其他区域，关闭成员卡片
+		// Close member card when clicking outside the card
 		else if (MemberCardStore.open) {
 			MemberCardStore.closeCard()
 		}

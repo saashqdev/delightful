@@ -24,7 +24,7 @@ interface SiderProps {
 }
 
 const userSquareRoundedKeys = [
-	RoutePath.ContactsOrganization.replace(":id?", ""), // 替换掉路由的id参数，方便校验
+	RoutePath.ContactsOrganization.replace(":id?", ""), // Replace route id parameter for convenient validation
 	RoutePath.ContactsAiAssistant,
 	RoutePath.ContactsMyFriends,
 	RoutePath.ContactsMyGroups,
@@ -38,18 +38,18 @@ const Sider = observer(
 		const navigate = useNavigate()
 		const { pathname } = useLocation()
 
-		// 判断当前路径是否是通讯录相关路由
+		// Check if current path is contacts-related route
 		const isUserSquareRoundedActive = useMemo(() => {
 			return userSquareRoundedKeys.some((key) => pathname.startsWith(key))
 		}, [pathname])
 
-		// 选中状态计算
+		// Calculate selected state
 		const selectedKeys = useMemo(() => {
-			// 如果是通讯录相关路由，返回通讯录的key
+			// If contacts-related route, return contacts key
 			if (isUserSquareRoundedActive) {
 				return [RoutePath.ContactsOrganization]
 			}
-			// 其他情况返回当前路径
+			// For other cases, return current path
 			return [pathname]
 		}, [pathname, isUserSquareRoundedActive])
 

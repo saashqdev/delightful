@@ -163,7 +163,7 @@ composer test
 
 ## 作者
 
-- **dtyq team** - [team@dtyq.com](mailto:team@dtyq.com)
+- **dtyq team** - [team@delightful.ai](mailto:team@delightful.ai)
 
 ## 许可证
 

@@ -3,7 +3,7 @@
 // @namespace    https://dtyq.com/
 // @version      1.0
 // @description  Clean Sohu website pages, keep only article content, remove ads and other distracting elements
-// @author       cc, cc@dtyq.com
+// @author       cc, cc@delightful.ai
 // @match        *://www.sohu.com/a/*
 // @grant        none
 // ==/UserScript==

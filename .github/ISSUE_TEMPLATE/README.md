@@ -41,7 +41,7 @@ Use this template to report performance problems or suggest optimizations.
 ### 🔒 Security Issue (`05-security.yml`)
 Use this template to report non-critical security issues.
 
-**⚠️ IMPORTANT:** For critical security vulnerabilities, email team@dtyq.com directly instead of creating a public issue.
+**⚠️ IMPORTANT:** For critical security vulnerabilities, email team@delightful.ai directly instead of creating a public issue.
 
 **When to use:**
 - Missing security headers
@@ -84,7 +84,7 @@ If you're unsure which template to use or need help with Delightful:
 - 💬 **Discussions**: [GitHub Discussions](https://github.com/saashqdev/delightful/delightful/discussions)
 - 📖 **Documentation**: [docs.bedelightful.ai](https://docs.bedelightful.ai/en) | [Chinese Documentation](https://docs.bedelightful.ai/zh)
 - 🌐 **Official Website**: [bedelightful.ai](https://www.bedelightful.ai)
-- 📧 **Enterprise Support**: bd@dtyq.com
+- 📧 **Enterprise Support**: bd@delightful.ai
 
 ## Contributing
 

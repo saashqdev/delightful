@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>HTML Messenger</title>
   <script>
-    // 定义事件处理函数，方便重用
+    // Define event handler function for reuse
     function setupMessageListener() {
       window.addEventListener("message", handleMessage);
     }
@@ -12,39 +12,39 @@
     function handleMessage(event) {
       try {
         if (event.data && event.data.type === "setContent") {
-          // 收到内容后，使用document.write写入
+          // Write received content using document.write
           document.open();
           document.write(event.data.content);
           document.close();
           
-          // 重新绑定消息监听器
+          // Rebind the message listener
           setupMessageListener();
           
-          // 通知父窗口内容已加载
+          // Notify parent window that content has loaded
           window.parent.postMessage({ type: "contentLoaded" }, "*");
         }
       } catch (error) {
-        console.error("处理消息时出错:", error);
+        console.error("Error processing message:", error);
       }
     }
 
-    // 全局错误处理
+    // Global error handling
     window.onerror = function(message, source, lineno, colno, error) {
-      console.error("HTML Messenger错误:", message);
-      // 防止浏览器默认的错误处理（可能包括alert）
+      console.error("HTML Messenger error:", message);
+      // Prevent browser default error handling (may include alert)
       return true;
     };
 
-    // 初始设置消息监听器
+    // Initial setup for message listener
     setupMessageListener();
     
-    // 页面加载完成后通知父窗口
+    // Notify parent window after page load
     window.addEventListener("DOMContentLoaded", function() {
       try {
-        // 通知父窗口iframe已准备好接收内容
+        // Notify parent window that iframe is ready to receive content
         window.parent.postMessage({ type: "iframeReady" }, "*");
       } catch (error) {
-        console.error("发送iframeReady消息时出错:", error);
+        console.error("Error sending iframeReady message:", error);
       }
     });
   </script>
@@ -65,7 +65,7 @@
 </head>
 <body>
   <div class="loading">
-    <div>加载中...</div>
+    <div>Loading...</div>
   </div>
 </body>
 </html> 

@@ -3,7 +3,7 @@
 // @namespace    https://dtyq.com/
 // @version      1.0
 // @description  Clean Baidu search pages, remove right-side ads, bottom user info bar and footer, provide a pure search experience
-// @author       cc, cc@dtyq.com
+// @author       cc, cc@delightful.ai
 // @match        *://www.baidu.com/s*
 // @grant        none
 // ==/UserScript==

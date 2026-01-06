@@ -3,7 +3,7 @@
 // @namespace    https://dtyq.com/
 // @version      1.0
 // @description  Clean up CSDN blog pages, remove ads, login prompts and other distracting content, provide pure reading experience
-// @author       cc, cc@dtyq.com
+// @author       cc, cc@delightful.ai
 // @match        *://blog.csdn.net/*/article/details/*
 // @grant        none
 // ==/UserScript==

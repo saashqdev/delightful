@@ -27,7 +27,7 @@
 		/* alias */
 		"paths": {
 			"@/*": ["./src/*"],
-            // 同步开发delightful-flow时开启
+            // Enable when developing delightful-flow synchronously
             // "@delightful/delightful-flow/*": ["../delightful-flow/*"]
 		}
 	},

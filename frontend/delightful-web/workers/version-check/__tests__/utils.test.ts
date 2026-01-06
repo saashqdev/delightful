@@ -5,7 +5,7 @@ describe("version-check utils", () => {
 	describe("generateUUID", () => {
 		it("should generate a valid UUID string", () => {
 			const uuid = generateUUID()
-			// UUID格式：8-4-4-4-12
+			// UUID format: 8-4-4-4-12
 			expect(uuid).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/)
 		})
 
@@ -14,7 +14,7 @@ describe("version-check utils", () => {
 			for (let i = 0; i < 1000; i += 1) {
 				uuids.add(generateUUID())
 			}
-			// 确保生成的1000个UUID都是唯一的
+			// Ensure all 1000 generated UUIDs are unique
 			expect(uuids.size).toBe(1000)
 		})
 	})

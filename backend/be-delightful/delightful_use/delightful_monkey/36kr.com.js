@@ -3,7 +3,7 @@
 // @namespace    https://dtyq.com/
 // @version      1.0
 // @description  Clean 36Kr website pages, keep only article content area, provide a cleaner reading experience
-// @author       cc, cc@dtyq.com
+// @author       cc, cc@delightful.ai
 // @match        *://36kr.com/p/*
 // @grant        none
 // ==/UserScript==

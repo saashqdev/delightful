@@ -188,7 +188,7 @@ Also, please consider supporting Delightful through social media, events, and co
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability in Delightful, please send an email to the Delightful official team at [team@dtyq.com](mailto:team@dtyq.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability in Delightful, please send an email to the Delightful official team at [team@delightful.ai](mailto:team@delightful.ai). All security vulnerabilities will be promptly addressed.
 
 ## 📄 License
 

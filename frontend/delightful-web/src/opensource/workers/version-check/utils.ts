@@ -61,15 +61,15 @@ const VERSION_REGEX = /^\d+\.\d+(\.\d+)?$/
  * @throws Error When version format is invalid
  */
 export const isBreakingVersion = (currentVersion: string, newVersion: string): boolean => {
-	// 验证版本号格式
+	// Validate version format
 	if (!VERSION_REGEX.test(currentVersion) || !VERSION_REGEX.test(newVersion)) {
 		throw new Error("Invalid version format. Expected format: x.y[.z]")
 	}
 
-	// 将版本号分割为数组并转换为数字
+	// Split versions and convert to numbers
 	const [currentMajor = 0, currentMinor = 0] = currentVersion.split(".").map(Number)
 	const [newMajor = 0, newMinor = 0] = newVersion.split(".").map(Number)
 
-	// 只有当新版本大于当前版本时才是破坏性更新
+	// Consider breaking only when new version is greater than current
 	return newMajor > currentMajor || (newMajor === currentMajor && newMinor > currentMinor)
 }

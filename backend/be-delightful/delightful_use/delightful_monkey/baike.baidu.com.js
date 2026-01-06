@@ -3,7 +3,7 @@
 // @namespace    https://dtyq.com/
 // @version      1.0
 // @description  Clean Baidu Baike pages, keep only main content area, provide a clean and refreshing reading experience
-// @author       cc, cc@dtyq.com
+// @author       cc, cc@delightful.ai
 // @match        *://baike.baidu.com/item/*
 // @grant        none
 // ==/UserScript==

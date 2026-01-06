@@ -3,40 +3,40 @@ description:
 globs: 
 alwaysApply: false
 ---
-@rule Todo 开发指南
-@description Todo 组件开发与业务逻辑实现指南
+@rule Todo Development Guide
+@description Guide to Todo component development and business logic implementation
 @priority medium
 @category business
 
-# Todo 开发指南
+# Todo Development Guide
 
-## 组件结构
+## Component Structure
 
-Todo 功能包含以下核心组件：
+The Todo feature includes these core components:
 
-1. **TodoList** - 展示待办事项列表
-2. **TodoItem** - 单个待办事项
-3. **TodoInput** - 新增待办事项输入框
-4. **TodoFilter** - 待办事项过滤器
-5. **TodoStats** - 待办事项统计信息
+1. **TodoList** - Displays the todo list
+2. **TodoItem** - A single todo item
+3. **TodoInput** - Input for adding new todos
+4. **TodoFilter** - Filter for todos
+5. **TodoStats** - Todo statistics
 
-## 数据模型
+## Data Model
 
 ```typescript
 interface Todo {
-  id: string;        // 唯一标识符
-  content: string;   // 待办事项内容
-  completed: boolean; // 是否已完成
-  createdAt: number; // 创建时间戳
-  updatedAt: number; // 更新时间戳
-  priority?: 'low' | 'medium' | 'high'; // 优先级
-  tags?: string[];   // 标签
+  id: string;        // Unique identifier
+  content: string;   // Todo content
+  completed: boolean; // Completed state
+  createdAt: number; // Created timestamp
+  updatedAt: number; // Updated timestamp
+  priority?: 'low' | 'medium' | 'high'; // Priority
+  tags?: string[];   // Tags
 }
 ```
 
-## 状态管理
+## State Management
 
-使用 Zustand 管理 Todo 状态：
+Use Zustand to manage Todo state:
 
 ```typescript
 import { create } from 'zustand';
@@ -46,7 +46,7 @@ interface TodoState {
   todos: Todo[];
   filter: 'all' | 'active' | 'completed';
   
-  // 操作方法
+  // Actions
   addTodo: (content: string) => void;
   toggleTodo: (id: string) => void;
   removeTodo: (id: string) => void;
@@ -70,32 +70,32 @@ export const useTodoStore = create<TodoState>()(
       });
     }),
     
-    // 其他方法实现...
+    // Other method implementations...
   }))
 );
 ```
 
-## 持久化
+## Persistence
 
-使用 IndexedDB 或 localStorage 实现 Todo 数据持久化：
+Persist Todo data using IndexedDB or localStorage:
 
 ```typescript
-// 使用 zustand 中间件实现持久化
+// Use zustand middleware for persistence
 import { persist } from 'zustand/middleware';
 
 export const useTodoStore = create<TodoState>()(
   persist(
     immer((set) => ({
-      // 状态与方法...
+      // State and actions...
     })),
     { name: 'todo-storage' }
   )
 );
 ```
 
-## 样式实现
+## Styling
 
-使用 antd-style 创建样式：
+Create styles using antd-style:
 
 ```typescript
 import { createStyle } from 'antd-style';
@@ -126,14 +126,14 @@ const useStyles = createStyle(({ token }) => ({
 }));
 ```
 
-## 测试策略
+## Testing Strategy
 
-1. **单元测试**：测试 store 中的业务逻辑
-2. **组件测试**：测试各个 Todo 组件的渲染和交互
-3. **集成测试**：测试 Todo 功能的完整流程
+1. **Unit tests**: Test business logic in the store
+2. **Component tests**: Test rendering and interactions
+3. **Integration tests**: Test the full Todo workflow
 
-## 性能考虑
+## Performance Considerations
 
-1. 使用 `useCallback` 优化事件处理函数
-2. 使用 `React.memo` 优化组件渲染
-3. 大量 Todo 时使用虚拟列表优化渲染性能
+1. Use `useCallback` to optimize handlers
+2. Use `React.memo` to optimize rendering
+3. Use virtual lists for many todos to improve performance

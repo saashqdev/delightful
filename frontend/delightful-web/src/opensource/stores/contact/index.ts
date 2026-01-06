@@ -37,7 +37,7 @@ export class ContactStore implements ContactStoreState {
 		makeAutoObservable(this, {}, { autoBind: true })
 	}
 
-	// 数据设置方法
+	// Data setters
 	setOrganizations(organizations: Map<string, OrganizationData>) {
 		this.organizations = organizations
 	}
@@ -51,14 +51,14 @@ export class ContactStore implements ContactStoreState {
 	}
 
 	/**
-	 * 缓存部门信息
+	 * Cache department information
 	 */
 	cacheDepartmentInfos = (data: StructureItem[], sum_type: 1 | 2) => {
 		const map = new Map(this.departmentInfos)
 		const { organizations, organizationCode } = userStore.user
 
 		data.forEach((item) => {
-			// FIXME: 临时处理: 赋值根部门的name, 后续应该由后端修复
+			// FIXME: Temporary handling — assign root department name; should be fixed by backend later
 			if (item.department_id === "-1") {
 				const organization = organizations.find(
 					(i) => i.organization_code === organizationCode,
@@ -86,7 +86,7 @@ export class ContactStore implements ContactStoreState {
 	}
 
 	/**
-	 * 缓存组织信息
+	 * Cache organization information
 	 */
 	cacheOrganization = (parent_id: string, data: OrganizationData) => {
 		const map = new Map(this.organizations)
@@ -97,7 +97,7 @@ export class ContactStore implements ContactStoreState {
 		})
 	}
 
-	// 兼容原有 SWR 钩子
+	// Compatibility with existing SWR hooks
 	getUserSearchAll = (query = "") => {
 		return fetchPaddingData<StructureUserItem>((params) =>
 			ContactApi.searchUser({ query, ...params }),
@@ -130,7 +130,7 @@ export class ContactStore implements ContactStoreState {
 		return ContactApi.getUserGroups(params)
 	}
 
-	// 实际实现 getDepartmentInfos
+	// Actual implementation of getDepartmentInfos
 	getDepartmentInfos = async (
 		ids: string[],
 		sum_type: 1 | 2 = 2,
@@ -181,8 +181,8 @@ export class ContactStore implements ContactStoreState {
 	}
 }
 
-// 创建单例实例
+// Create singleton instance
 export const contactStore = new ContactStore()
 
-// 导出单例实例
+// Export singleton instance
 export default contactStore

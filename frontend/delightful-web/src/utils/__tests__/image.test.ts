@@ -2,29 +2,24 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 import { convertSvgToPng } from "../image"
 
 describe("image utils", () => {
-	// 模拟浏览器环境
 	// Simulate browser environment
 	let origCreateElement: typeof document.createElement
 	let mockCanvas: HTMLCanvasElement
 	let mockContext: CanvasRenderingContext2D
 	let mockImage: HTMLImageElement
 
-	// 模拟toDataURL方法的返回值
 	// Mock return value for toDataURL
 	const mockPngUrl = "data:image/png;base64,mockPngData"
 
 	beforeEach(() => {
-		// 保存原始方法
 		// Save original method
 		origCreateElement = document.createElement
 
-		// 模拟context
 		// Mock context
 		mockContext = {
 			drawImage: vi.fn(),
 		} as unknown as CanvasRenderingContext2D
 
-		// 模拟canvas
 		// Mock canvas
 		mockCanvas = {
 			getContext: vi.fn().mockReturnValue(mockContext),
@@ -33,7 +28,6 @@ describe("image utils", () => {
 			height: 0,
 		} as unknown as HTMLCanvasElement
 
-		// 模拟Image
 		// Mock Image
 		mockImage = {} as HTMLImageElement
 		Object.defineProperties(mockImage, {
@@ -44,7 +38,6 @@ describe("image utils", () => {
 			naturalHeight: { value: 200 },
 		})
 
-		// 模拟document.createElement
 		// Mock document.createElement
 		document.createElement = vi.fn().mockImplementation((tagName: string) => {
 			if (tagName === "canvas") {
@@ -62,7 +55,6 @@ describe("image utils", () => {
 			return origCreateElement.call(document, tagName)
 		})
 
-		// 模拟DOMParser
 		// Mock DOMParser
 		const mockDOMParser = function () {
 			return {
@@ -87,21 +79,17 @@ describe("image utils", () => {
 		}
 		vi.stubGlobal("DOMParser", mockDOMParser)
 
-		// 模拟btoa (Base64编码)
 		// Mock btoa (Base64 encoding)
 		vi.stubGlobal("btoa", () => "mockBase64String")
 
-		// 模拟encodeURIComponent
 		// Mock encodeURIComponent
 		vi.stubGlobal("encodeURIComponent", () => "encodedSvg")
 
-		// 模拟unescape
-		vi.stubGlobal("unescape", () => "unescapedSvg")
 		// Mock unescape
+		vi.stubGlobal("unescape", () => "unescapedSvg")
 	})
 
 	afterEach(() => {
-		// 恢复原始方法
 		// Restore original method
 		document.createElement = origCreateElement
 		vi.restoreAllMocks()
@@ -113,7 +101,6 @@ describe("image utils", () => {
 
 			const result = await convertSvgToPng(svg)
 
-			// 验证创建canvas和图片元素
 			// Verify canvas and image elements are created
 			expect(document.createElement).toHaveBeenCalledWith("canvas")
 			expect(document.createElement).toHaveBeenCalledWith("img")
@@ -133,7 +120,7 @@ describe("image utils", () => {
 
 			// Verify canvas dimensions are set correctly
 			expect(mockCanvas.width).toBe(600)
-			expect(mockCanvas.height).toBe(400) // 保持300:200的原始比例
+			expect(mockCanvas.height).toBe(400) // Preserve original 300:200 ratio
 
 			// Verify drawImage is called with expected args
 			expect(mockContext.drawImage).toHaveBeenCalledWith(mockImage, 0, 0, 600, 400)
@@ -142,13 +129,13 @@ describe("image utils", () => {
 		it("caps height when height parameter is provided", async () => {
 			const svg = "<svg width='300' height='200'></svg>"
 			const width = 600
-			const height = 300 // 比例计算应为400，但我们限制为300
+			const height = 300 // Ratio would be 400, but we cap at 300
 
 			await convertSvgToPng(svg, width, height)
 
 			// Verify canvas dimensions are capped
 			expect(mockCanvas.width).toBe(600)
-			expect(mockCanvas.height).toBe(300) // 被限制为300
+			expect(mockCanvas.height).toBe(300) // Capped at 300
 
 			// Verify drawImage call
 			expect(mockContext.drawImage).toHaveBeenCalledWith(mockImage, 0, 0, 600, 300)
@@ -166,7 +153,7 @@ describe("image utils", () => {
 								},
 								getAttribute: (attr: string) => {
 									if (attr === "width") return "200"
-									if (attr === "height") return "100" // 2:1比例
+									if (attr === "height") return "100" // 2:1 ratio
 									return null
 								},
 							},
@@ -176,18 +163,18 @@ describe("image utils", () => {
 			}
 			vi.stubGlobal("DOMParser", mockParser21)
 
-			const svg = "<svg width='200' height='100'></svg>" // 2:1比例
+			const svg = "<svg width='200' height='100'></svg>" // 2:1 ratio
 			const width = 500
-			const height = 200 // 按比例应为250，但我们限制为200
+			const height = 200 // Ratio would be 250, but we cap at 200
 
 			await convertSvgToPng(svg, width, height)
 
 			expect(mockCanvas.width).toBe(500)
-			expect(mockCanvas.height).toBe(200) // 验证被限制为200
+			expect(mockCanvas.height).toBe(200) // Verify capped at 200
 		})
 
 		it("does not cap height when height is omitted", async () => {
-			// 模拟SVG比例为1:2
+			// Mock SVG ratio as 1:2
 			const mockParser12 = function () {
 				return {
 					parseFromString() {
@@ -198,7 +185,7 @@ describe("image utils", () => {
 								},
 								getAttribute: (attr: string) => {
 									if (attr === "width") return "100"
-									if (attr === "height") return "200" // 1:2比例
+									if (attr === "height") return "200" // 1:2 ratio
 									return null
 								},
 							},
@@ -208,17 +195,17 @@ describe("image utils", () => {
 			}
 			vi.stubGlobal("DOMParser", mockParser12)
 
-			const svg = "<svg width='100' height='200'></svg>" // 1:2比例
+			const svg = "<svg width='100' height='200'></svg>" // 1:2 ratio
 			const width = 300
 
 			await convertSvgToPng(svg, width)
 
 			expect(mockCanvas.width).toBe(300)
-			expect(mockCanvas.height).toBe(600) // 应保持1:2的原始比例
+			expect(mockCanvas.height).toBe(600) // Should preserve 1:2 original ratio
 		})
 
 		it("uses viewBox ratio when width/height are missing", async () => {
-			// 模拟只有viewBox的SVG
+			// Mock SVG with only viewBox
 			const mockParserViewBox = function () {
 				return {
 					parseFromString() {
@@ -247,11 +234,11 @@ describe("image utils", () => {
 			await convertSvgToPng(svg, width)
 
 			expect(mockCanvas.width).toBe(800)
-			expect(mockCanvas.height).toBe(600) // 保持400:300的原始比例
+			expect(mockCanvas.height).toBe(600) // Preserve original 400:300 ratio
 		})
 
 		it("falls back to intrinsic image size when no dimensions provided", async () => {
-			// 模拟没有尺寸信息的SVG
+			// Mock SVG without size information
 			const mockParserNoSize = function () {
 				return {
 					parseFromString() {
@@ -269,7 +256,7 @@ describe("image utils", () => {
 			const svg = "<svg></svg>"
 			const width = 600
 
-			// 使用新的mock图像对象来测试不同的天然尺寸
+			// Use a different mock image object to test intrinsic sizes
 			const tempImage = {} as HTMLImageElement
 			Object.defineProperties(tempImage, {
 				onload: { value: null, writable: true },
@@ -279,7 +266,7 @@ describe("image utils", () => {
 				naturalHeight: { value: 300 },
 			})
 
-			// 临时替换mockImage
+			// Temporarily replace mockImage
 			const origMockImage = mockImage
 			mockImage = tempImage
 
@@ -299,16 +286,15 @@ describe("image utils", () => {
 			await convertSvgToPng(svg, width)
 
 			expect(mockCanvas.width).toBe(600)
-			expect(mockCanvas.height).toBe(450) // 保持400:300的比例
+			expect(mockCanvas.height).toBe(450) // Preserve 400:300 ratio
 
-			// 恢复原始mockImage
+			// Restore original mockImage
 			mockImage = origMockImage
 		})
 
 		it("handles SVG load errors", async () => {
 			const svg = "<svg></svg>"
 
-			// 模拟图片加载错误
 			// Simulate image load error
 			document.createElement = vi.fn().mockImplementation((tagName: string) => {
 				if (tagName === "canvas") {

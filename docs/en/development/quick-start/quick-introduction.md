@@ -350,7 +350,7 @@ We welcome contributions in various forms, including but not limited to:
 
 ## 📞 Contact Us
 
-- Email: bd@dtyq.com
+- Email: bd@delightful.ai
 - Website: https://www.bedelightful.ai
 
 ## 🙏 Acknowledgements

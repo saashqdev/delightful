@@ -10,7 +10,7 @@ body:
         **⚠️ IMPORTANT SECURITY NOTICE ⚠️**
         
         If you believe you have found a **critical security vulnerability**, please **DO NOT** create a public issue.
-        Instead, please send an email to **team@dtyq.com** with the subject line "[SECURITY] Vulnerability Report".
+        Instead, please send an email to **team@delightful.ai** with the subject line "[SECURITY] Vulnerability Report".
         
         This template is for **non-critical security issues** or security enhancement suggestions that can be discussed publicly.
         
@@ -34,7 +34,7 @@ body:
       options:
         - label: This is NOT a critical security vulnerability that could compromise user data or system security
           required: true
-        - label: I understand that critical vulnerabilities should be reported privately to team@dtyq.com
+        - label: I understand that critical vulnerabilities should be reported privately to team@delightful.ai
           required: true
 
   - type: dropdown

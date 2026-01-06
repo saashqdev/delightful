@@ -3,7 +3,7 @@
 // @namespace    https://dtyq.com/
 // @version      1.1
 // @description  Clean DongFang Caifuhao website pages, focus on article content, remove distraction elements.
-// @author       cc, cc@dtyq.com
+// @author       cc, cc@delightful.ai
 // @match        *://caifuhao.eastmoney.com/news/*
 // @grant        none
 // ==/UserScript==

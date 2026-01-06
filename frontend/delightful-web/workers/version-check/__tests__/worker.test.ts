@@ -2,13 +2,13 @@ import { describe, expect, it, vi, beforeEach, afterEach } from "vitest"
 import { getLatestAppVersion } from "../utils"
 import * as worker from "../worker"
 
-// 模拟 utils 模块
+// Mock the utils module
 vi.mock("../utils", () => ({
 	generateUUID: vi.fn().mockReturnValue("test-uuid"),
 	getLatestAppVersion: vi.fn().mockResolvedValue("1.0.0"),
 }))
 
-// 定义 MessagePort 类型
+// Define MessagePort type
 type MockMessagePort = {
 	id: string
 	postMessage: ReturnType<typeof vi.fn>
@@ -16,14 +16,14 @@ type MockMessagePort = {
 }
 
 describe("version-check worker", () => {
-	// 模拟 port 对象
+	// Mock port object
 	const createMockPort = (): MockMessagePort => ({
 		id: "",
 		postMessage: vi.fn(),
 		onmessage: null,
 	})
 
-	// 模拟定时器
+	// Mock timers
 	beforeEach(() => {
 		vi.useFakeTimers()
 		// @ts-ignore
@@ -34,7 +34,7 @@ describe("version-check worker", () => {
 		vi.clearAllMocks()
 		vi.clearAllTimers()
 		vi.useRealTimers()
-		// 重置 worker 状态
+		// Reset worker state
 		worker.portList.length = 0
 		worker.visiblePorts.length = 0
 		if (worker.state.intervalId) {
@@ -48,10 +48,10 @@ describe("version-check worker", () => {
 			const mockPort = createMockPort()
 			const event = { ports: [mockPort] }
 
-			// 触发连接事件
+			// Trigger connection event
 			worker.onconnect(event)
 
-			// 验证端口是否被正确初始化
+			// Verify the port is correctly initialized
 			expect(mockPort.id).toBe("test-uuid")
 			expect(mockPort.onmessage).toBeDefined()
 		})
@@ -63,17 +63,17 @@ describe("version-check worker", () => {
 			const event = { ports: [mockPort] }
 			worker.onconnect(event)
 
-			// 模拟 start 消息
+			// Simulate start message
 			await mockPort.onmessage?.({ data: { type: "start" } })
 
-			// 验证初始版本检查
+			// Verify initial version check
 			expect(getLatestAppVersion).toHaveBeenCalled()
 			expect(mockPort.postMessage).toHaveBeenCalledWith({
 				type: "reflectGetLatestVersion",
 				data: "1.0.0",
 			})
 
-			// 验证定时器是否被设置
+			// Verify the timer is set
 			await vi.advanceTimersByTimeAsync(30000)
 			expect(getLatestAppVersion).toHaveBeenCalledTimes(2)
 		})
@@ -83,13 +83,13 @@ describe("version-check worker", () => {
 			const event = { ports: [mockPort] }
 			worker.onconnect(event)
 
-			// 先发送 start 消息
+			// Send start message first
 			await mockPort.onmessage?.({ data: { type: "start" } })
 
-			// 然后发送 stop 消息
+			// Then send stop message
 			await mockPort.onmessage?.({ data: { type: "stop" } })
 
-			// 验证定时器是否被清除
+			// Verify the timer is cleared
 			await vi.advanceTimersByTimeAsync(30000)
 			expect(getLatestAppVersion).toHaveBeenCalledTimes(1)
 		})
@@ -99,10 +99,10 @@ describe("version-check worker", () => {
 			const event = { ports: [mockPort] }
 			worker.onconnect(event)
 
-			// 发送 close 消息
+			// Send close message
 			mockPort.onmessage?.({ data: { type: "close" } })
 
-			// 验证端口是否被移除
+			// Verify the port is removed
 			expect(worker.portList).toHaveLength(0)
 		})
 
@@ -110,29 +110,29 @@ describe("version-check worker", () => {
 			const mockPort1 = createMockPort()
 			const mockPort2 = createMockPort()
 
-			// 连接两个端口
+			// Connect two ports
 			worker.onconnect({ ports: [mockPort1] })
 			worker.onconnect({ ports: [mockPort2] })
 
-			// 等待异步操作完成
+			// Wait for async operations to complete
 			await Promise.resolve()
 			await vi.advanceTimersByTimeAsync(0)
 
-			// 验证端口是否被正确添加
+			// Verify ports are correctly added
 			expect(worker.portList).toHaveLength(2)
 			expect(worker.portList[0].id).toBe("test-uuid")
 			expect(worker.portList[1].id).toBe("test-uuid")
 
-			// 手动设置不同的 ID
+			// Manually set different IDs
 			worker.portList[0].id = "port1"
 			worker.portList[1].id = "port2"
 
-			// 发送 refresh 消息
+			// Send refresh message
 			await mockPort1.onmessage?.({ data: { type: "refresh" } })
 			await Promise.resolve()
 			await vi.advanceTimersByTimeAsync(0)
 
-			// 验证其他端口是否收到通知
+			// Verify other port receives notification
 			expect(mockPort2.postMessage).toHaveBeenCalledWith({
 				type: "reflectRefresh",
 			})
@@ -144,10 +144,10 @@ describe("version-check worker", () => {
 			const event = { ports: [mockPort] }
 			worker.onconnect(event)
 
-			// 发送未知类型的消息
+			// Send message with unknown type
 			mockPort.onmessage?.({ data: { type: "unknown" } })
 
-			// 验证错误消息是否被广播
+			// Verify error message is broadcast
 			expect(mockPort.postMessage).toHaveBeenCalledWith({
 				type: "error",
 				message: "Unknown message type",
@@ -160,17 +160,17 @@ describe("version-check worker", () => {
 			const mockPort1 = createMockPort()
 			const mockPort2 = createMockPort()
 
-			// 连接两个端口
+			// Connect two ports
 			worker.onconnect({ ports: [mockPort1] })
 			worker.onconnect({ ports: [mockPort2] })
 
-			// 等待异步操作完成
+			// Wait for async operations to complete
 			await Promise.resolve()
 
-			// 发送 start 消息到第一个端口
+			// Send start message to the first port
 			await mockPort1.onmessage?.({ data: { type: "start" } })
 
-			// 验证所有端口是否都收到版本更新
+			// Verify all ports receive version updates
 			expect(mockPort1.postMessage).toHaveBeenCalledWith({
 				type: "reflectGetLatestVersion",
 				data: "1.0.0",
@@ -185,21 +185,21 @@ describe("version-check worker", () => {
 			const mockPort1 = createMockPort()
 			const mockPort2 = createMockPort()
 
-			// 连接两个端口
+			// Connect two ports
 			worker.onconnect({ ports: [mockPort1] })
 			worker.onconnect({ ports: [mockPort2] })
 
-			// 等待异步操作完成
+			// Wait for async operations to complete
 			await Promise.resolve()
 
-			// 两个端口都发送 start 消息
+			// Both ports send start message
 			await mockPort1.onmessage?.({ data: { type: "start" } })
 			await mockPort2.onmessage?.({ data: { type: "start" } })
 
-			// 第一个端口发送 stop 消息
+			// First port sends stop message
 			await mockPort1.onmessage?.({ data: { type: "stop" } })
 
-			// 验证定时器是否仍在运行
+			// Verify the timer is still running
 			await vi.advanceTimersByTimeAsync(30000)
 			expect(getLatestAppVersion).toHaveBeenCalledTimes(2)
 		})
@@ -214,16 +214,16 @@ describe("version-check worker", () => {
 			const event = { ports: [mockPort] }
 			worker.onconnect(event)
 
-			// 等待异步操作完成
+			// Wait for async operations to complete
 			await Promise.resolve()
 			await vi.advanceTimersByTimeAsync(0)
 
-			// 发送 start 消息
+			// Send start message
 			await mockPort.onmessage?.({ data: { type: "start" } })
 			await Promise.resolve()
 			await vi.advanceTimersByTimeAsync(0)
 
-			// 验证错误是否被正确处理
+			// Verify the error is handled correctly
 			expect(mockPort.postMessage).toHaveBeenCalledWith({
 				type: "reflectGetLatestVersion",
 				data: undefined,

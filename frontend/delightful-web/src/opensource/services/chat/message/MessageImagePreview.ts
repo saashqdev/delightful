@@ -23,7 +23,7 @@ class MessageImagePreview {
 	}
 
 	/**
-	 * 复制文件
+	 * Copy file
 	 */
 	copy(dom: HTMLImageElement | HTMLCanvasElement) {
 		const ext = MessageImagePreviewStore.previewInfo?.ext?.ext
@@ -41,8 +41,8 @@ class MessageImagePreview {
 	}
 
 	/**
-	 * 复制图片
-	 * @param imgDom 图片元素
+	 * Copy image
+	 * @param imgDom Image element
 	 */
 	copyImage(dom: HTMLImageElement | HTMLCanvasElement) {
 		try {
@@ -78,15 +78,15 @@ class MessageImagePreview {
 	}
 
 	/**
-	 * 将Canvas内容复制到剪贴板
-	 * @param canvas Canvas元素
+	 * Copy Canvas content to clipboard
+	 * @param canvas Canvas element
 	 */
 	private copyCanvasToClipboard(canvas: HTMLCanvasElement) {
 		// 尝试使用标准Clipboard API
 		canvas.toBlob((blob) => {
 			if (!blob) return
 
-			// 尝试使用标准Clipboard API
+			// Try the standard Clipboard API
 			this.tryClipboardWrite(blob).catch((error) => {
 				console.warn("Standard clipboard API failed:", error)
 			})
@@ -94,10 +94,10 @@ class MessageImagePreview {
 	}
 
 	/**
-	 * 尝试使用标准Clipboard API
+	 * Try the standard Clipboard API
 	 */
 	private async tryClipboardWrite(blob: Blob): Promise<void> {
-		// 确保页面有焦点
+		// Ensure the page has focus
 		if (document.hasFocus()) {
 			await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })])
 			return
@@ -106,11 +106,11 @@ class MessageImagePreview {
 	}
 
 	/**
-	 * 复制 svg
-	 * @param svgDom svg 元素
+	 * Copy SVG
+	 * @param svgDom SVG element
 	 */
 	copySvg(svgText: string) {
-		// 把 svg 转换为 base64
+		// Convert SVG to base64
 		const base64 = safeBtoa(svgText)
 		if (base64) {
 			navigator.clipboard.write([new ClipboardItem({ "image/svg+xml": base64 })])

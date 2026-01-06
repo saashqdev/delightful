@@ -15,7 +15,7 @@ class MessageFileService {
 	private storageType = "private"
 
 	async uploadFileByText(text: string) {
-		// 生成文件，并上传
+		// Generate a file and upload
 		const blob = new Blob([text], {
 			type: LONG_TEXT_FILE_TYPE,
 		})
@@ -54,7 +54,7 @@ class MessageFileService {
 		return new Promise((resolve, reject) => {
 			success?.((res) => {
 				if (res) {
-					// 上报文件
+					// Report file upload
 					return FileApi.reportFileUploads([
 						{
 							file_extension: LONG_TEXT_FILE_EXTENSION,

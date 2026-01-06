@@ -41,19 +41,19 @@ interface PullMessagesFromServerOptions {
 const logger = new Logger("MessagePullService")
 
 class MessagePullService {
-	/** 消息拉取循环 */
+	/** Message pull loop */
 	private pullMessageInterval: NodeJS.Timeout | undefined
 
-	/** 消息拉取频率 */
+	/** Message pull frequency */
 	private messagePullFrequency: number = 1000 * 30
 
-	/** 消息拉取触发次数 */
+	/** Message pull trigger list */
 	private pullTriggerList: string[] = []
 
 	private triggerPromise: Promise<void> | undefined
 
 	/**
-	 * 注册消息拉取循环
+	 * Register the message pull loop.
 	 */
 	public registerMessagePullLoop() {
 		if (this.pullMessageInterval) {
@@ -70,7 +70,7 @@ class MessagePullService {
 	}
 
 	/**
-	 * 注销消息拉取循环
+	 * Unregister the message pull loop.
 	 */
 	public unregisterMessagePullLoop() {
 		if (this.pullMessageInterval) {
@@ -79,12 +79,11 @@ class MessagePullService {
 	}
 
 	/**
-	 * 从服务器拉取指定消息并保存到本地
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param pageSize 每页大小
-	 * @param order 排序方式
-	 * @param withoutSeqId 是否不使用序列号
+	 * Pull messages from server for a conversation and persist locally.
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param pageSize Page size
+	 * @param withoutSeqId Whether to ignore seq_id
 	 */
 	public async pullMessagesFromServer({
 		conversationId,
@@ -96,11 +95,11 @@ class MessagePullService {
 		let pageToken = ""
 
 		if (!withoutSeqId) {
-			// 加载历史消息，列表最早一条消息的seq_id
+			// Load history: use earliest seq_id in the list
 			if (loadHistory) {
 				pageToken = MessageStore.firstSeqId
 			} else {
-				// 加载最新消息，取缓存的seql_id
+				// Load latest: prefer cached seq_id
 				pageToken =
 					MessageSeqIdService.getConversationPullSeqId(conversationId) ||
 					MessageSeqIdService.getConversationRenderSeqId(conversationId) ||
@@ -130,17 +129,17 @@ class MessagePullService {
 				)
 				.map((item) => item.seq)
 
-			// 合并AI搜索消息
+			// Merge AI Search messages
 			conversationMessages = await this.handleCombineAiSearchMessageByFetch(
 				conversationMessages,
 			)
 
-			// 异步写入数据库
+			// Write to DB asynchronously
 			requestIdleCallback(() => {
 				MessageService.addHistoryMessagesToDB(conversationId, conversationMessages)
 			})
 
-			// 更新会话的拉取序列号
+			// Update conversation pull seq_id
 			MessageSeqIdService.updateConversationPullSeqId(
 				conversationId,
 				conversationMessages[0]?.seq_id ?? "",
@@ -152,9 +151,7 @@ class MessagePullService {
 	}
 
 	/**
-	 * 合并AI搜索消息
-	 * @param conversationMessages
-	 * @returns
+	 * Combine AI Search messages in a sequence array.
 	 */
 	handleCombineAiSearchMessage(
 		conversationMessages: SeqResponse<
@@ -168,11 +165,11 @@ class MessagePullService {
 		const array = [] as SeqResponse<ConversationMessage>[]
 
 		if (index > 0) {
-			// 有AI搜索消息
+			// Has AI Search messages
 			const aiSearchMessages = conversationMessages.slice(0, index) as SeqResponse<
 				AggregateAISearchCardConversationMessage<true>
 			>[]
-			// 符合合并条件
+			// Merge when the condition matches
 			if (
 				aiSearchMessages[0].message.aggregate_ai_search_card?.type ===
 				AggregateAISearchCardDataType.PingPong
@@ -227,9 +224,7 @@ class MessagePullService {
 	}
 
 	/**
-	 * 请求后端接口，合并AI搜索消息
-	 * @param conversationMessages
-	 * @returns
+	 * Combine AI Search messages by fetching complete groups from backend.
 	 */
 	async handleCombineAiSearchMessageByFetch(
 		conversationMessages: SeqResponse<
@@ -300,8 +295,7 @@ class MessagePullService {
 	}
 
 	/**
-	 * 获取最近消息列表
-	 * @returns 消息列表
+	 * Get current messages (most recent) with pagination.
 	 */
 	private async fetchCurrentMessages() {
 		return fetchPaddingData(
@@ -316,8 +310,8 @@ class MessagePullService {
 	}
 
 	/**
-	 * 拉取离线消息
-	 * 逐页拉取消息并立即应用，提升消息显示的及时性
+	 * Pull offline messages.
+	 * Pull page-by-page and apply immediately to improve timeliness.
 	 */
 	public async pullOfflineMessages(triggerSeqId?: string) {
 		if (triggerSeqId) {
@@ -326,7 +320,7 @@ class MessagePullService {
 
 		console.log("this.pullTriggerList ====> ", this.pullTriggerList)
 		console.log("this.triggerPromise ====> ", this.triggerPromise)
-		// 如果正在拉取，则不重复拉取
+		// Avoid concurrent pulls
 		if (this.triggerPromise) {
 			logger.log("pullOfflineMessages: 正在拉取，不重复拉取")
 			return
@@ -342,10 +336,10 @@ class MessagePullService {
 	}
 
 	/**
-	 * 执行离线消息拉取的核心逻辑
+	 * Core logic of pulling offline messages.
 	 */
 	private async doPullOfflineMessages() {
-		// 使用循环而不是递归，避免调用栈过深
+		// Use loop instead of recursion to avoid deep call stacks
 		while (this.pullTriggerList.length > 0) {
 			const organizationCode = userStore.user.userInfo?.organization_code ?? ""
 
@@ -360,7 +354,7 @@ class MessagePullService {
 	}
 
 	/**
-	 * 从指定页面令牌开始拉取消息
+	 * Pull messages starting from the specified page token.
 	 */
 	private async pullMessagesFromPageToken(pageToken: string) {
 		let currentPageToken = pageToken
@@ -373,7 +367,7 @@ class MessagePullService {
 
 				logger.log("pullMessagesFromPageToken: 拉取消息", res)
 
-				// 立即处理当前页的消息
+				// Immediately process current page messages
 				if (res.items && res.items.length > 0) {
 					const sorted = res.items
 						.map((item) => item.seq)
@@ -394,17 +388,17 @@ class MessagePullService {
 					)
 				}
 
-				// 检查是否还有更多数据
+				// Check if more data remains
 				hasMore = res.has_more
 				currentPageToken = res.page_token || ""
 
-				// 添加小延迟避免过于频繁的请求
+				// Add small delay to avoid overly frequent requests
 				if (hasMore) {
 					await new Promise((resolve) => setTimeout(resolve, 50))
 				}
 			} catch (error) {
 				logger.error("pullMessagesFromPageToken error:", error)
-				// 出错时中断拉取过程
+				// Break pulling on error
 				throw error
 			}
 		}
@@ -413,8 +407,7 @@ class MessagePullService {
 	}
 
 	/**
-	 * 设备初始化登录，初始化数据
-	 * @returns
+	 * Device/login initialization: load conversations, users/groups, and recent messages.
 	 */
 	public async pullMessageOnFirstLoad(delightfulId: string, organizationCode: string) {
 		if (!organizationCode) {
@@ -423,7 +416,7 @@ class MessagePullService {
 		}
 
 		try {
-			// 步骤 1: 拉取用户所有的会话
+			// Step 1: fetch all user conversations
 			const conversationShouldHandle = await fetchPaddingData(({ page_token }) => {
 				return ChatApi.getConversationList(undefined, {
 					status: ConversationStatus.Normal,
@@ -431,7 +424,7 @@ class MessagePullService {
 				})
 			})
 
-			// 步骤 2: 拉取所有会话的用户信息和群组信息
+			// Step 2: fetch users and groups for all conversations
 			const {
 				[MessageReceiveType.User]: users = [],
 				[MessageReceiveType.Ai]: ais = [],
@@ -440,26 +433,26 @@ class MessagePullService {
 
 			const { userInfoService, groupInfoService } = getDataContext()
 
-			// 步骤 2-1: 拉取用户信息
+			// Step 2-1: fetch user info
 			const user_ids = [...users, ...ais].map((u) => u.receive_id)
 
-			// 添加当前用户Id
+			// Include current user id
 			if (userStore.user.userInfo?.user_id) user_ids.push(userStore.user.userInfo?.user_id)
 
 			if (user_ids.length > 0) {
 				await userInfoService.fetchUserInfos(user_ids, 2)
 			}
 
-			// 步骤 2-2: 拉取群组信息
+			// Step 2-2: fetch group info
 			const group_ids = groups.map((g) => g.receive_id)
 			if (group_ids.length > 0) {
 				await groupInfoService.fetchGroupInfos(group_ids)
 			}
 
-			// 步骤 3: 添加会话, 更新会话列表(先拉完数据再更新视图, 否则数据会重复拉取)
+			// Step 3: init conversations (load data first, then render to avoid duplication)
 			conversationService.initOnFirstLoad(delightfulId, organizationCode, conversationShouldHandle)
 
-			// 步骤 4: 拉取最近消息
+			// Step 4: pull recent messages
 			const items = await this.fetchCurrentMessages()
 
 			if (items.length > 0) {
@@ -469,7 +462,7 @@ class MessagePullService {
 				MessageSeqIdService.checkAllOrganizationRenderSeqId()
 			}
 
-			// 步骤 5: 拉取没有消息的会话历史消息
+			// Step 5: pull history for conversations without messages
 			const conversationIds: string[] = conversationShouldHandle.map((item) => item.id)
 
 			if (conversationIds.length > 0) {
@@ -479,9 +472,9 @@ class MessagePullService {
 				})
 
 				const list = [] as SeqResponse<CMessage>[]
-				// 如果数据不为空，则组合应用消息列表
+				// If data exists, combine and apply message lists
 				if (data && Object.keys(data).length > 0) {
-					// 组合应用消息列表
+					// Combine lists in order
 					const reverseItems = Object.keys(data).reduce((prev, cId) => {
 						const c = data[cId].reverse().map((i) => i.seq)
 						prev.push(...c)
@@ -493,7 +486,7 @@ class MessagePullService {
 					}
 
 					if (list.length > 0) {
-						// 应用消息列表
+						// Apply messages
 						this.applyMessages(list, { isHistoryMessage: true, sortCheck: false })
 					}
 				}
@@ -504,16 +497,16 @@ class MessagePullService {
 	}
 
 	/**
-	 * 应用消息
-	 * @param messages 消息
-	 * @param options 应用选项
+	 * Apply messages to UI/DB.
+	 * @param messages Messages
+	 * @param options Apply options
 	 */
 	private applyMessages(
 		messages: SeqResponse<CMessage> | SeqResponse<CMessage>[],
 		options?: ApplyMessageOptions,
 	) {
 		messages = Array.isArray(messages) ? messages : [messages]
-		// 消息按升序排序
+		// Messages processed in ascending order
 		const currentOrganization = userStore.user.userInfo?.organization_code
 
 		if (!currentOrganization) {
@@ -522,7 +515,7 @@ class MessagePullService {
 		}
 
 		messages.forEach((message) => {
-			// 如果消息的组织编码与当前组织编码不一致，则将消息加入未处理的消息列表
+			// If message org differs from current org, handle as non-current org flow
 			if (message.organization_code !== currentOrganization) {
 				// unhandleMessages.push(message)
 				// let organizationSeqId = OrganizationDotsService.getOrganizationDotSeqId(
@@ -538,7 +531,7 @@ class MessagePullService {
 				// if (bigNumCompare(organizationSeqId, message.seq_id) < 0) {
 				const m = message as SeqResponse<ConversationMessage>
 
-				// FIXME: 需要确认, 后移除
+				// FIXME: Need confirmation, remove later
 				// const delightfulAccount = useUserStore
 				// 	.getState()
 				// 	.accounts.find((account) => account.delightful_id === message.delightful_id)
@@ -548,15 +541,15 @@ class MessagePullService {
 				const isSelf = organization?.delightful_user_id === m.message.sender_id
 
 				if (
-					// 是历史消息（FIXME: AI 搜索消息目前没有处理）
+					// Is history message (FIXME: AI Search not handled yet)
 					ChatMessageApplyServices.isChatHistoryMessage(message) &&
-					// 消息未读
+					// Message is unread
 					m.message.status === ConversationMessageStatus.Unread &&
-					// 不是自己发送的消息
+					// Not sent by self
 					!isSelf
 				) {
 					if (
-						// 消息的seq_id大于这个组织的渲染序列号
+						// Message seq_id is greater than this organization's render seq_id
 						bigNumCompare(
 							message.seq_id,
 							MessageSeqIdService.getOrganizationRenderSeqId(
@@ -581,20 +574,20 @@ class MessagePullService {
 					}
 				}
 
-				// 如果我收到别的组织的消息，可以更新组织的 seq_id
+				// If receiving another organization's message, update that org's seq_id
 				MessageSeqIdService.updateOrganizationRenderSeqId(
 					currentOrganization,
 					message.seq_id,
 				)
 			} else {
 				logger.log("applyMessages: 应用消息", message)
-				// 如果消息的组织编码与当前组织编码一致，则将消息加入数据库
+				// If same org, apply and persist
 				MessageApplyServices.applyMessage(message, options)
 
-				// 更新其他组织的渲染序列号
+				// Update other organizations' render seq_id
 				Object.values(userStore.user.delightfulOrganizationMap).forEach((item) => {
 					if (item.delightful_organization_code !== currentOrganization) {
-						// 如果该组织红点为 0，说明没有未拉取的消息，可以更新组织的 seq_id
+						// If that org has no red dots, update its seq_id
 						if (
 							OrganizationDotsService.getOrganizationDot(
 								item.delightful_organization_code,
@@ -606,7 +599,7 @@ class MessagePullService {
 							)
 						}
 					} else {
-						// 更新渲染序列号
+						// Update render seq_id for current org
 						MessageSeqIdService.updateOrganizationRenderSeqId(
 							message.organization_code,
 							message.seq_id,
@@ -616,8 +609,7 @@ class MessagePullService {
 			}
 		})
 
-		// PS: 这块不处理其他组织的信息，而是在切换组织的时候，再拉取该组织的离线消息，再进行apply
-		// 延后处理非当前组织的会话消息
+		// PS: Skip handling other organizations here; handle on org switch by pulling offline messages.
 		// unhandleMessages.forEach((message) => {
 		// 	MessageApplyServices.applyMessage(message)
 		// })

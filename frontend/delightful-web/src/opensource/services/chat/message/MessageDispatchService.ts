@@ -16,7 +16,7 @@ import { CMessage } from "@/types/chat"
 
 class MessageDispatchService {
 	addSendMessage(renderMessage: FullMessage, message: ConversationMessageSend) {
-		// 如果是当前会话，则添加到消息列表中
+		// If current conversation matches, append to the live list
 		const { currentConversation } = conversationStore
 
 		if (
@@ -36,22 +36,20 @@ class MessageDispatchService {
 			)
 		}
 
-		// 添加到待发送消息队列
+		// Add to pending-send queue
 		MessageService.addPendingMessage(message)
 	}
 
 	/**
-	 * 添加接收到的消息
-	 * @param fullMessage 消息
-	 * @param message 消息
+	 * Add a received message.
 	 */
 	addReceivedMessage(fullMessage: FullMessage) {
-		// 如果当前会话id和topicId与消息的会话id和topicId相同，则添加到消息队列中
+		// If current conversation/topic match, append to live queue
 		if (
 			MessageStore.conversationId === fullMessage.conversation_id &&
 			MessageStore.topicId === fullMessage.message.topic_id
 		) {
-			// 检查消息附件是否过期
+			// Check attachment expiration
 			MessageService.checkMessageAttachmentExpired([fullMessage])
 
 			MessageStore.addReceivedMessage(fullMessage)
@@ -66,14 +64,14 @@ class MessageDispatchService {
 	}
 
 	updateSendMessage(message: SeqResponse<ConversationMessage>, sendStatus: SendStatus) {
-		// 如果当前会话id和topicId与消息的会话id和topicId相同，则添加到消息队列中
+		// If current conversation/topic match, append to live queue
 		if (
 			MessageStore.conversationId === message.conversation_id &&
 			MessageStore.topicId === message.message.topic_id
 		) {
 			const fullMessage = MessageService.formatMessage(message, userStore.user.userInfo)
 
-			// 检查消息附件是否过期
+			// Check attachment expiration
 			MessageService.checkMessageAttachmentExpired([fullMessage])
 
 			MessageStore.addReceivedMessage(fullMessage)
@@ -87,15 +85,15 @@ class MessageDispatchService {
 			)
 		}
 
-		// 更新消息状态
+		// Update message status
 		MessageStore.updateMessageSendStatus(message.message_id, sendStatus)
 	}
 
 	/**
-	 * 更新消息状态
-	 * @param messageId 消息ID
-	 * @param sendStatus 发送状态
-	 * @param seenStatus 已读状态
+	 * Update message status.
+	 * @param messageId Message ID
+	 * @param sendStatus Send status
+	 * @param seenStatus Seen status
 	 */
 	updateMessageStatus(
 		messageId: string,
@@ -113,22 +111,20 @@ class MessageDispatchService {
 	}
 
 	/**
-	 * 更新消息ID
-	 * @param tempId 临时ID
-	 * @param messageId 消息ID
+	 * Update message ID from a temp ID.
+	 * @param tempId Temporary ID
+	 * @param messageId Message ID
 	 */
 	updateMessageId(tempId: string, messageId: string) {
 		MessageStore.updateMessageId(tempId, messageId)
 	}
 
 	/**
-	 * 应用消息
-	 * @param message 消息
-	 * @param options 应用选项
+	 * Apply a message to the system.
 	 */
 	applyMessage(message: SeqResponse<CMessage>, options: ApplyMessageOptions) {
 		console.log("应用消息 ==========", message, options)
-		// 非当前组织或用户的消息不处理
+		// Skip messages not for current organization or delightful account
 		if (
 			message.organization_code !== userStore.user.userInfo?.organization_code ||
 			message.delightful_id !== userStore.user.userInfo?.delightful_id

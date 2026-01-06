@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`DelightfulCollapse > 快照测试 > 基础折叠面板快照 1`] = `
+exports[`DelightfulCollapse > Snapshot tests > basic collapse panel snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r1"
@@ -47,7 +47,7 @@ exports[`DelightfulCollapse > 快照测试 > 基础折叠面板快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulCollapse > 快照测试 > 多个面板折叠快照 1`] = `
+exports[`DelightfulCollapse > Snapshot tests > multiple panel collapse snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r2"
@@ -170,7 +170,7 @@ exports[`DelightfulCollapse > 快照测试 > 多个面板折叠快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulCollapse > 快照测试 > 小尺寸折叠面板快照 1`] = `
+exports[`DelightfulCollapse > Snapshot tests > small size collapse panel snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost delightful-collapse-small acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r7"
@@ -217,7 +217,7 @@ exports[`DelightfulCollapse > 快照测试 > 小尺寸折叠面板快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulCollapse > 快照测试 > 带图标面板快照 1`] = `
+exports[`DelightfulCollapse > Snapshot tests > collapse panel with icon snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r5"
@@ -271,7 +271,7 @@ exports[`DelightfulCollapse > 快照测试 > 带图标面板快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulCollapse > 快照测试 > 手风琴模式快照 1`] = `
+exports[`DelightfulCollapse > Snapshot tests > accordion mode snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r4"
@@ -357,7 +357,7 @@ exports[`DelightfulCollapse > 快照测试 > 手风琴模式快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulCollapse > 快照测试 > 禁用面板快照 1`] = `
+exports[`DelightfulCollapse > Snapshot tests > disabled panel snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r6"
@@ -405,7 +405,7 @@ exports[`DelightfulCollapse > 快照测试 > 禁用面板快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulCollapse > 快照测试 > 默认展开面板快照 1`] = `
+exports[`DelightfulCollapse > Snapshot tests > default expanded panel snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r3"

@@ -45,7 +45,7 @@ describe("DelightfulCheckFavor", () => {
 			expect(container.querySelector('input[type="checkbox"]')).toBeInTheDocument()
 		})
 
-		it("带标签快照", () => {
+		it("with label snapshot", () => {
 			const { container } = renderWithTheme(<DelightfulCheckFavor />)
 			expect(container.querySelector('input[type="checkbox"]')).toBeInTheDocument()
 		})

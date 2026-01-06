@@ -1,21 +1,21 @@
-# DelightfulCheckFavor 魔法复选组件
+# DelightfulCheckFavor Magic Checkbox Component
 
-DelightfulCheckFavor 是一个自定义样式的复选框组件，专为收藏夹和偏好设置等场景设计。该组件提供了一个可选中/取消选中的交互元素，具有特殊的视觉样式，使其在收藏相关功能中更加直观。
+DelightfulCheckFavor is a custom-styled checkbox component designed for favorites and preference settings scenarios. This component provides a selectable/deselectable interactive element with special visual styling, making it more intuitive in favorite-related features.
 
-## 属性
+## Properties
 
-| 属性名   | 类型                       | 默认值 | 描述                     |
-| -------- | -------------------------- | ------ | ------------------------ |
-| checked  | boolean                    | false  | 是否选中                 |
-| onChange | (checked: boolean) => void | -      | 选中状态变更时的回调函数 |
+| Property | Type                       | Default | Description                    |
+| -------- | -------------------------- | ------- | ------------------------------ |
+| checked  | boolean                    | false   | Whether the item is checked    |
+| onChange | (checked: boolean) => void | -       | Callback when checked state changes |
 
-## 基本用法
+## Basic Usage
 
 ```tsx
 import DelightfulCheckFavor from '@/components/base/DelightfulCheckFavor';
 import { useState } from 'react';
 
-// 基本用法
+// Basic usage
 const [isChecked, setIsChecked] = useState(false);
 
 <DelightfulCheckFavor
@@ -23,15 +23,15 @@ const [isChecked, setIsChecked] = useState(false);
   onChange={(checked) => setIsChecked(checked)}
 />
 
-// 默认选中
+// Default checked
 <DelightfulCheckFavor
   checked={true}
-  onChange={(checked) => console.log('选中状态:', checked)}
+  onChange={(checked) => console.log('Checked state:', checked)}
 />
 
-// 在列表项中使用
+// Usage in list items
 <div className="item">
-  <span>收藏项目</span>
+  <span>Favorite item</span>
   <DelightfulCheckFavor
     checked={item.isFavorite}
     onChange={(checked) => handleFavoriteChange(item.id, checked)}
@@ -39,13 +39,13 @@ const [isChecked, setIsChecked] = useState(false);
 </div>
 ```
 
-## 特性
+## Features
 
--   **自定义样式**：区别于传统的复选框，提供更符合收藏场景的外观
--   **简单易用**：API 设计简洁，使用方便
--   **状态管理**：支持受控模式，可以通过外部状态控制选中状态
--   **交互反馈**：提供直观的视觉反馈，增强用户体验
--   **轻量级**：组件实现简单，不引入额外依赖
+-   **Custom Styling**: Differs from traditional checkboxes, provides appearance more suitable for favorites scenarios
+-   **Easy to Use**: Simple API design, convenient to use
+-   **State Management**: Supports controlled mode, allowing external state control of checked state
+-   **Interactive Feedback**: Provides intuitive visual feedback, enhancing user experience
+-   **Lightweight**: Simple component implementation, no additional dependencies
 
 ## 使用场景
 

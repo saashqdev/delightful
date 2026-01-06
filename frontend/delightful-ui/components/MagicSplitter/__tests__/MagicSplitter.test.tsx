@@ -50,11 +50,11 @@ describe("DelightfulSplitter", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带自定义样式分割器快照", () => {
+		it("splitter with custom style snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulSplitter style={{ height: "400px" }}>
-					<div>左侧内容</div>
-					<div>右侧内容</div>
+					<div>Left side content</div>
+					<div>Right side content</div>
 				</DelightfulSplitter>,
 			)
 			expect(asFragment()).toMatchSnapshot()

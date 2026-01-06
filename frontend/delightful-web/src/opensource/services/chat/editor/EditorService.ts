@@ -23,13 +23,13 @@ export interface SendData {
 }
 
 /**
- * 编辑器服务
+ * Editor service
  */
 class EditorService {
 	/**
-	 * 获取AI自动补全
-	 * @param text 文本
-	 * @returns 自动补全结果
+	 * Get AI autocompletion
+	 * @param text Text
+	 * @returns Autocomplete result
 	 */
 	fetchAiAutoCompletion = async (text: string) => {
 		try {
@@ -39,9 +39,9 @@ class EditorService {
 				message: text,
 			})
 			const { conversation_id } = res.request_info
-			// 如果会话id不一致,则返回空字符串
+			// If the conversation ID differs, return empty string
 			if (conversation_id !== EditorStore.conversationId) return ""
-			// 如果输入框没有内容,则返回空字符串
+			// If the input box is empty, return empty string
 			if (!EditorStore.value) return ""
 			return res.choices[0].message.content
 		} catch (error) {
@@ -51,8 +51,8 @@ class EditorService {
 	}
 
 	/**
-	 * 发送消息
-	 * @param data 发送数据
+	 * Send message
+	 * @param data Payload
 	 */
 	send = ({
 		jsonValue,
@@ -62,10 +62,10 @@ class EditorService {
 		isLongMessage = false,
 	}: SendData) => {
 		if (!ConversationStore.currentConversation?.id) {
-			message.error("请先选择一个会话")
+			message.error("Please select a conversation first")
 			return
 		}
-		// 长消息
+		// Long message
 		if (isLongMessage) {
 			MessageService.sendLongMessage(
 				ConversationStore.currentConversation?.id ?? "",
@@ -78,7 +78,7 @@ class EditorService {
 				MessageReplyStore.replyMessageId,
 			)
 		} else {
-			// 短消息
+			// Short message
 			MessageService.sendMessage(
 				ConversationStore.currentConversation?.id ?? "",
 				{
@@ -91,7 +91,7 @@ class EditorService {
 			)
 		}
 
-		// 关闭文生图启动页
+		// Close the text-to-image start page
 		if (ConversationBotDataService.startPage && InterfaceStore.isShowStartPage) {
 			InterfaceStore.closeStartPage()
 		}

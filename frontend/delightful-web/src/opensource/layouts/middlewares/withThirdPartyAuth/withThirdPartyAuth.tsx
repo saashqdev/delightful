@@ -179,7 +179,7 @@ export function withThirdPartyAuth<T extends object>(
 				const url = new URL(window.location.href)
 				const { searchParams } = url
 				const tempAuthorizationCode = searchParams.get(TempAuthorizationCodeKey)
-				const thirdPartyAuthDeployCode = searchParams.get(ThirdPartyAuthDeployCodeKey) // 私有化专属码
+				const thirdPartyAuthDeployCode = searchParams.get(ThirdPartyAuthDeployCodeKey) // Private exclusive code
 
 				// Prohibit the non login process when there is a temporary authorization code
 				if (tempAuthorizationCode) {

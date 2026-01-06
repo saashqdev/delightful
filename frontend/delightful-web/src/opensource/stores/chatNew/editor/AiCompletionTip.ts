@@ -1,9 +1,9 @@
 import { makeAutoObservable } from "mobx"
 
 class AiCompletionTip {
-	/** 是否显示 */
+	/** Whether to show */
 	visible: boolean = false
-	/** 位置 */
+	/** Position */
 	position: { top: number; left: number } = { top: -100, left: -100 }
 
 	constructor() {
@@ -13,8 +13,8 @@ class AiCompletionTip {
 	tip: string = ""
 
 	/**
-	 * 显示
-	 * @param position 位置
+	 * Show
+	 * @param position Position
 	 */
 	show(position: { top: number; left: number }) {
 		this.position = position
@@ -22,7 +22,7 @@ class AiCompletionTip {
 	}
 
 	/**
-	 * 隐藏
+	 * Hide
 	 */
 	hide() {
 		this.visible = false

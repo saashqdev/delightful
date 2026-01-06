@@ -1,5 +1,5 @@
 /**
- * 消息上下文菜单键
+ * Message context menu keys
  */
 export const enum MessageContextMenuKey {
 	Copy = "copy",
@@ -19,7 +19,7 @@ export const enum MessageContextMenuKey {
 }
 
 /**
- * 菜单项
+ * Menu item
  */
 export interface MenuItem {
 	icon?: {

@@ -7,17 +7,17 @@ import { SeqResponse } from "@/types/request"
 
 class MessageImagePreviewStore {
 	/**
-	 * 预览信息
+	 * Preview information
 	 */
 	previewInfo: ImagePreviewInfo | undefined = undefined
 
 	/**
-	 * 预览窗口是否打开
+	 * Whether preview window is open
 	 */
 	open: boolean = false
 
 	/**
-	 * 消息
+	 * Message
 	 */
 	message: FullMessage<ConversationMessage> | SeqResponse<ConversationMessage> | undefined
 
@@ -26,8 +26,8 @@ class MessageImagePreviewStore {
 	}
 
 	/**
-	 * 设置预览信息
-	 * @param info 预览信息
+	 * Set preview information
+	 * @param info Preview information
 	 */
 	setPreviewInfo(info: ImagePreviewInfo) {
 		this.previewInfo = { ...info }
@@ -40,7 +40,7 @@ class MessageImagePreviewStore {
 	}
 
 	/**
-	 * 清除预览信息
+	 * Clear preview information
 	 */
 	clearPreviewInfo() {
 		this.previewInfo = undefined
@@ -48,8 +48,8 @@ class MessageImagePreviewStore {
 	}
 
 	/**
-	 * 设置预览窗口是否打开
-	 * @param open 是否打开
+	 * Set preview window open state
+	 * @param open Whether to open
 	 */
 	setOpen(open: boolean) {
 		this.open = open

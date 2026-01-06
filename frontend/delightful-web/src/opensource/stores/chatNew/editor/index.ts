@@ -3,32 +3,32 @@ import { makeAutoObservable } from "mobx"
 class EditorStore {
 	/** 会话id */
 	conversationId: string | undefined
-	/** 主题id */
+	/** Topic ID */
 	topicId: string | undefined
-	/** 值 */
+	/** Value */
 	value: string = ""
 
 	constructor() {
 		makeAutoObservable(this, {}, { autoBind: true })
 	}
 
-	/** 是否有效内容 */
+	/** Whether has valid content */
 	get isValidContent() {
 		if (this.value === undefined || this.value === null) return false
-		// 简单检查是否有type属性
+		// Simple check for type property
 		if (typeof this.value === "object" && "type" in this.value) return true
 		return false
 	}
 
-	/** 初始化 */
+	/** Initialize */
 	switch(conversationId: string, topicId: string = "") {
 		this.conversationId = conversationId
 		this.topicId = topicId
 	}
 
 	/**
-	 * 设置值
-	 * @param value 值
+	 * Set value
+	 * @param value Value
 	 */
 	setValue = (value: string) => {
 		this.value = value

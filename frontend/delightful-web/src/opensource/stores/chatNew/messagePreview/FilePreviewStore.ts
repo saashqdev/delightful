@@ -2,16 +2,16 @@ import { FilePreviewInfo } from "@/types/chat/preview"
 import { makeAutoObservable } from "mobx"
 
 /**
- * 文件预览 store
+ * File preview store
  */
 class MessageFilePreviewStore {
 	/**
-	 * 预览信息
+	 * Preview information
 	 */
 	previewInfo: FilePreviewInfo | undefined = undefined
 
 	/**
-	 * 预览窗口是否打开
+	 * Whether preview window is open
 	 */
 	open: boolean = false
 

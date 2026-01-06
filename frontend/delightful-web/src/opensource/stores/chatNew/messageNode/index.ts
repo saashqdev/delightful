@@ -6,13 +6,13 @@
 // import { makeAutoObservable } from "mobx"
 
 // interface BaseInfo {
-// 	/** 本地临时id */
+// 	/** Local temporary id */
 // 	temp_id?: string
-// 	/** 用户唯一 ID */
+// 	/** Unique user ID */
 // 	delightful_id: string
-// 	/** 消息序列 ID */
+// 	/** Message sequence ID */
 // 	seq_id?: string
-// 	/** 消息 ID */
+// 	/** Message ID */
 // 	message_id: string
 // }
 
@@ -22,17 +22,17 @@
 // 	delightful_id: string
 // }
 
-// // 消息节点（包含消息的详细内容）
+// // Message node (contains detailed message content)
 // export class MessageNode {
-// 	// 消息体的基础信息
+// 	// Basic message body information
 //   baseInfo: BaseInfo = {
-// 		/** 本地临时id */
+// 		/** Local temporary id */
 // 		temp_id: "",
-// 		/** 用户唯一 ID */
+// 		/** Unique user ID */
 // 		delightful_id: "",
-// 		/** 消息序列 ID */
+// 		/** Message sequence ID */
 // 		seq_id: "",
-// 		/** 消息 ID */
+// 		/** Message ID */
 // 		message_id: "",
 // 	}
 
@@ -42,23 +42,23 @@
 // 		delightful_id: "",
 // 	}
 
-// 	/** 引用消息 ID */
+// 	/** Referenced message ID */
 // 	refer_message_id?: string
-// 	/** 发送者消息 ID */
+// 	/** Sender message ID */
 // 	sender_message_id?: string
-// 	/** 会话 ID */
+// 	/** Conversation ID */
 // 	conversation_id: string = ""
-// 	/** 消息类型 */
+// 	/** Message type */
 // 	type: string = ""
-// 	/** 消息内容 */
+// 	/** Message content */
 // 	message: ConversationMessage = {} as ConversationMessage
-// 	/** 是否已撤回 */
+// 	/** Whether message has been recalled */
 // 	revoked?: boolean = false
-// 	/** 发送时间 */
+// 	/** Send time */
 // 	send_time: string = ""
-// 	/** 发送状态 */
+// 	/** Send status */
 // 	send_status: SendStatus = SendStatus.Pending
-// 	/** 是否已读 */
+// 	/** Whether message has been read */
 // 	seen_status: ConversationMessageStatus = ConversationMessageStatus.Unread
 // 	}
 

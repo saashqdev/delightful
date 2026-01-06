@@ -11,7 +11,7 @@ class AvatarStore {
 	}
 
 	/**
-	 * 获取文本头像
+	 * Get text avatar
 	 * @param text
 	 * @returns
 	 */

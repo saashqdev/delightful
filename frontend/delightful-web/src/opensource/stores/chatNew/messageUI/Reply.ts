@@ -3,17 +3,17 @@ import type { FullMessage } from "@/types/chat/message"
 
 class ReplyStore {
 	/**
-	 * 回复消息ID
+	 * Reply message ID
 	 */
 	replyMessageId: string | undefined = undefined
 
 	/**
-	 * 回复消息
+	 * Reply message
 	 */
 	replyMessage: FullMessage | undefined = undefined
 
 	/**
-	 * 回复消息文件
+	 * Reply message file
 	 */
 	replyFile:
 		| {

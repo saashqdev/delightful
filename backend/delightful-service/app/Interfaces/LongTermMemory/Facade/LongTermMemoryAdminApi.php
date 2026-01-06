@@ -241,7 +241,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $enabled = array_key_exists('enabled', $validatedParams) ? $validatedParams['enabled'] : null;
         $dto = new MemoryQueryDTO([
             'orgId' => $authorization->getOrganizationCode(),
-            'appId' => AppCodeEnum::SUPER_MAGIC->value,
+            'appId' => AppCodeEnum::SUPER_DELIGHTFUL->value,
             'userId' => $authorization->getId(),
             'status' => $status,
             'enabled' => $enabled,

@@ -202,7 +202,7 @@ services:
     profiles: ["disabled"]
 EOF
 
-  ENV=$env PORT=$port MAGIC_GATEWAY_PORT=$port MAGIC_GATEWAY_API_KEY=$api_key JWT_SECRET=$jwt_secret MAGIC_GATEWAY_DEBUG=$debug \
+  ENV=$env PORT=$port DELIGHTFUL_GATEWAY_PORT=$port DELIGHTFUL_GATEWAY_API_KEY=$api_key JWT_SECRET=$jwt_secret DELIGHTFUL_GATEWAY_DEBUG=$debug \
     docker compose -p magic-gateway-$env up -d --build
 
   # 移除临时文件

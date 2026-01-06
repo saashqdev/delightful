@@ -14,6 +14,6 @@ class OrganizationsPlatformRepository implements OrganizationsPlatformRepository
 {
     public function getOrganizationPlatformType(string $magicOrganizationCode): PlatformType
     {
-        return PlatformType::Magic;
+        return PlatformType::Delightful;
     }
 }

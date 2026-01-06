@@ -19,7 +19,7 @@ class KeywordConstants
 
     public const CONSTANTS = 'constants';
 
-    public const MAGIC_CONSTANTS = 'magic_constants';
+    public const DELIGHTFUL_CONSTANTS = 'magic_constants';
 
     public const NAMESPACES = 'namespaces';
 

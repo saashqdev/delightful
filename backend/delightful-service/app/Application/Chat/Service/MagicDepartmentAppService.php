@@ -84,7 +84,7 @@ class MagicDepartmentAppService extends AbstractAppService
         }
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         // departmentId 为-1 表示获取根部门下的第一级部门
-        if ($departmentId === PlatformRootDepartmentId::Magic) {
+        if ($departmentId === PlatformRootDepartmentId::Delightful) {
             $departmentsPageResponseDTO = $this->magicDepartmentDomainService->getSubDepartmentsByLevel($dataIsolation, 0, 1, $pageSize, $offset);
         } else {
             // 获取部门

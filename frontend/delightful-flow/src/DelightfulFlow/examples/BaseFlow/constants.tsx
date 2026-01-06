@@ -51,7 +51,7 @@ export enum customNodeType {
 export const templateMap = {
 	[customNodeType.Start]: {
 		v0: {
-			node_id: "MAGIC-FLOW-NODE-663c385e5a83f4-29733783",
+			node_id: "DELIGHTFUL-FLOW-NODE-663c385e5a83f4-29733783",
 			name: "开始",
 			description: "",
 			node_type: 1,
@@ -291,7 +291,7 @@ export const templateMap = {
 	},
 	[customNodeType.If]: {
 		v0: {
-			node_id: "MAGIC-FLOW-NODE-66c444c8ca1934-29144044",
+			node_id: "DELIGHTFUL-FLOW-NODE-66c444c8ca1934-29144044",
 			name: "条件判断",
 			description: "",
 			node_type: 4,
@@ -325,13 +325,13 @@ export const templateMap = {
 	},
 	[customNodeType.Sub]: {
 		v0: {
-			node_id: "MAGIC-FLOW-NODE-6649da5637d546-69160385",
+			node_id: "DELIGHTFUL-FLOW-NODE-6649da5637d546-69160385",
 			name: "子流程",
 			description: "",
 			node_type: 11,
 			meta: [],
 			params: {
-				sub_flow_id: "MAGIC-FLOW-6629fe3e606e03-15176825",
+				sub_flow_id: "DELIGHTFUL-FLOW-6629fe3e606e03-15176825",
 			},
 			next_nodes: [],
 			input: {
@@ -394,7 +394,7 @@ export const templateMap = {
 									expression_value: [
 										{
 											type: "fields",
-											value: "MAGIC-FLOW-NODE-6629f9ee4d6248-06936049.output",
+											value: "DELIGHTFUL-FLOW-NODE-6629f9ee4d6248-06936049.output",
 											name: "output",
 											args: null,
 										},
@@ -410,13 +410,13 @@ export const templateMap = {
 		},
 
 		v1: {
-			node_id: "MAGIC-FLOW-NODE-6649da5637d546-69160385",
+			node_id: "DELIGHTFUL-FLOW-NODE-6649da5637d546-69160385",
 			name: "子流程版本2",
 			description: "",
 			node_type: 11,
 			meta: [],
 			params: {
-				sub_flow_id: "MAGIC-FLOW-6629fe3e606e03-15176825",
+				sub_flow_id: "DELIGHTFUL-FLOW-6629fe3e606e03-15176825",
 			},
 			next_nodes: [],
 			input: {
@@ -479,7 +479,7 @@ export const templateMap = {
 									expression_value: [
 										{
 											type: "fields",
-											value: "MAGIC-FLOW-NODE-6629f9ee4d6248-06936049.output",
+											value: "DELIGHTFUL-FLOW-NODE-6629f9ee4d6248-06936049.output",
 											name: "output",
 											args: null,
 										},
@@ -497,7 +497,7 @@ export const templateMap = {
 
 	[customNodeType.Loop]: {
 		v0: {
-			node_id: "MAGIC-FLOW-NODE-66a70a8da8ed48-26322039",
+			node_id: "DELIGHTFUL-FLOW-NODE-66a70a8da8ed48-26322039",
 			name: "循环",
 			description: "",
 			node_type: 22,
@@ -540,7 +540,7 @@ export const templateMap = {
 	},
 	[customNodeType.LoopEnd]: {
 		v0: {
-			node_id: "MAGIC-FLOW-NODE-66a70a8da8ed48-2632203d",
+			node_id: "DELIGHTFUL-FLOW-NODE-66a70a8da8ed48-2632203d",
 			name: "循环终止",
 			description: "",
 			node_type: 24,
@@ -553,7 +553,7 @@ export const templateMap = {
 	},
 	[customNodeType.LoopBody]: {
 		v0: {
-			node_id: "MAGIC-FLOW-NODE-66a70a8da8ed48-2632203f",
+			node_id: "DELIGHTFUL-FLOW-NODE-66a70a8da8ed48-2632203f",
 			name: "循环体",
 			description: "",
 			node_type: 23,
@@ -566,7 +566,7 @@ export const templateMap = {
 	},
 	[customNodeType.VariableSave]: {
 		v0: {
-			node_id: "MAGIC-FLOW-NODE-66a2a8453cfd12-52796719",
+			node_id: "DELIGHTFUL-FLOW-NODE-66a2a8453cfd12-52796719",
 			name: "变量设置",
 			description: "",
 			node_type: 21,
@@ -622,7 +622,7 @@ export const templateMap = {
 	},
 	[customNodeType.LLM]: {
 		v0: {
-			node_id: "MAGIC-FLOW-NODE-6753cb5235e676-30935789",
+			node_id: "DELIGHTFUL-FLOW-NODE-6753cb5235e676-30935789",
 			debug: false,
 			name: "LLM Chat",
 			description: "",
@@ -875,7 +875,7 @@ export const templateMap = {
 	},
 	[customNodeType.Tools]: {
 		v0: {
-			node_id: "MAGIC-FLOW-NODE-674c4f70bc3966-92064256",
+			node_id: "DELIGHTFUL-FLOW-NODE-674c4f70bc3966-92064256",
 			debug: false,
 			name: "工具",
 			description: "",

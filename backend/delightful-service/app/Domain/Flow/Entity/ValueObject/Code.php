@@ -9,11 +9,11 @@ namespace App\Domain\Flow\Entity\ValueObject;
 
 enum Code: string
 {
-    case MagicFlow = 'MAGIC-FLOW';
-    case MagicFlowNode = 'MAGIC-FLOW-NODE';
-    case MagicFlowDraft = 'MAGIC-FLOW-DRAFT';
-    case MagicFlowVersion = 'MAGIC-FLOW-VERSION';
-    case MagicFlowApiKey = 'MAGIC-FLOW-API-KEY';
+    case MagicFlow = 'DELIGHTFUL-FLOW';
+    case MagicFlowNode = 'DELIGHTFUL-FLOW-NODE';
+    case MagicFlowDraft = 'DELIGHTFUL-FLOW-DRAFT';
+    case MagicFlowVersion = 'DELIGHTFUL-FLOW-VERSION';
+    case MagicFlowApiKey = 'DELIGHTFUL-FLOW-API-KEY';
     case Knowledge = 'KNOWLEDGE';
     case ApiKeySK = 'api-sk';
     case MagicFlowToolSet = 'TOOL-SET';

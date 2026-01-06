@@ -48,25 +48,25 @@ function setCustomCacheControl(res, p) {
 
 app.get("/config.js", (req, res) => {
 	const envVarWhitelist = [
-		"MAGIC_APP_ENV",
-		"MAGIC_IS_PRIVATE_DEPLOY",
-		"MAGIC_TEAMSHARE_BASE_URL",
-		"MAGIC_SOCKET_BASE_URL",
-		"MAGIC_SERVICE_BASE_URL",
-		"MAGIC_SERVICE_KEEWOOD_BASE_URL",
-		"MAGIC_SERVICE_TEAMSHARE_BASE_URL",
-		"MAGIC_AMAP_KEY",
-		"MAGIC_GATEWAY_ADDRESS",
-		"MAGIC_TEAMSHARE_WEB_URL",
-		"MAGIC_KEEWOOD_WEB_URL",
-		"MAGIC_APP_VERSION",
-		"MAGIC_APP_SHA",
-		"MAGIC_EDITION"
+		"DELIGHTFUL_APP_ENV",
+		"DELIGHTFUL_IS_PRIVATE_DEPLOY",
+		"DELIGHTFUL_TEAMSHARE_BASE_URL",
+		"DELIGHTFUL_SOCKET_BASE_URL",
+		"DELIGHTFUL_SERVICE_BASE_URL",
+		"DELIGHTFUL_SERVICE_KEEWOOD_BASE_URL",
+		"DELIGHTFUL_SERVICE_TEAMSHARE_BASE_URL",
+		"DELIGHTFUL_AMAP_KEY",
+		"DELIGHTFUL_GATEWAY_ADDRESS",
+		"DELIGHTFUL_TEAMSHARE_WEB_URL",
+		"DELIGHTFUL_KEEWOOD_WEB_URL",
+		"DELIGHTFUL_APP_VERSION",
+		"DELIGHTFUL_APP_SHA",
+		"DELIGHTFUL_EDITION"
 	]
 
 	const isSafeEnvironmentVariable = (key) => {
-		// 只暴露以MAGIC_开头且在白名单中的环境变量
-		return key.startsWith("MAGIC_") && envVarWhitelist.includes(key)
+		// 只暴露以DELIGHTFUL_开头且在白名单中的环境变量
+		return key.startsWith("DELIGHTFUL_") && envVarWhitelist.includes(key)
 	}
 
 	res.set("Content-type", "text/javascript")

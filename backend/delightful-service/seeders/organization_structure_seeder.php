@@ -19,8 +19,8 @@ class organizationstructureseeder extends Seeder
             [
                 'name' => '', // Will be replaced by $organizationNames
                 'level' => 0,
-                'department_id' => PlatformRootDepartmentId::Magic,
-                'parent_department_id' => PlatformRootDepartmentId::Magic, // Marks itself as the root department
+                'department_id' => PlatformRootDepartmentId::Delightful,
+                'parent_department_id' => PlatformRootDepartmentId::Delightful, // Marks itself as the root department
                 'children' => [
                     [
                         'name' => 'Technology Department',
@@ -60,7 +60,7 @@ class organizationstructureseeder extends Seeder
             Db::beginTransaction();
 
             // Ensure the environment record exists
-            $environmentId = env('MAGIC_ENV_ID');
+            $environmentId = env('DELIGHTFUL_ENV_ID');
 
             // 1. Create/check the relationship between organization and environment
             foreach ($organizationCodes as $index => $orgCode) {
@@ -123,12 +123,12 @@ class organizationstructureseeder extends Seeder
             $currentParentDepartmentId = isset($dept['parent_department_id']) ? $dept['parent_department_id'] : $parentDepartmentId;
 
             // Build the department path
-            if (isset($dept['department_id']) && $dept['department_id'] === PlatformRootDepartmentId::Magic) {
+            if (isset($dept['department_id']) && $dept['department_id'] === PlatformRootDepartmentId::Delightful) {
                 // If this is the org level (root dept), use the special path
-                $currentPath = PlatformRootDepartmentId::Magic;
+                $currentPath = PlatformRootDepartmentId::Delightful;
             } else {
                 // Otherwise use the regular path logic
-                $currentPath = $path ? $path . '/' . $departmentId : PlatformRootDepartmentId::Magic . '/' . $departmentId;
+                $currentPath = $path ? $path . '/' . $departmentId : PlatformRootDepartmentId::Delightful . '/' . $departmentId;
             }
 
             // Build department data
@@ -242,8 +242,8 @@ class organizationstructureseeder extends Seeder
             // Get the HQ department (root)
             $hqDept = null;
             foreach ($departments as $dept) {
-                if ($dept['parent_department_id'] === PlatformRootDepartmentId::Magic
-                    || $dept['department_id'] === PlatformRootDepartmentId::Magic
+                if ($dept['parent_department_id'] === PlatformRootDepartmentId::Delightful
+                    || $dept['department_id'] === PlatformRootDepartmentId::Delightful
                     || $dept['parent_department_id'] === ''
                     || $dept['parent_department_id'] === null) {
                     $hqDept = $dept;

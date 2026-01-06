@@ -34,14 +34,14 @@ type TargetURLRule struct {
 func loadAllowedTargetURLs() {
 	// First try to get from envVars (for testing), then from system environment variables
 	whitelistEnv := ""
-	if val, exists := envVars["MAGIC_GATEWAY_ALLOWED_TARGET_URLS"]; exists {
+	if val, exists := envVars["DELIGHTFUL_GATEWAY_ALLOWED_TARGET_URLS"]; exists {
 		whitelistEnv = val
 	} else {
-		whitelistEnv = getEnvWithDefault("MAGIC_GATEWAY_ALLOWED_TARGET_URLS", "")
+		whitelistEnv = getEnvWithDefault("DELIGHTFUL_GATEWAY_ALLOWED_TARGET_URLS", "")
 	}
 
 	if whitelistEnv == "" {
-		logger.Println("Warning: MAGIC_GATEWAY_ALLOWED_TARGET_URLS environment variable not set, target parameter will be disabled")
+		logger.Println("Warning: DELIGHTFUL_GATEWAY_ALLOWED_TARGET_URLS environment variable not set, target parameter will be disabled")
 		allowedTargetRules = []*TargetURLRule{}
 		return
 	}
@@ -133,16 +133,16 @@ func loadAllowedTargetURLs() {
 func loadAllowedPrivateIPs() {
 	// First try to get from envVars (for testing), then from system environment variables
 	allowedIPsEnv := ""
-	if val, exists := envVars["MAGIC_GATEWAY_ALLOWED_TARGET_IP"]; exists {
+	if val, exists := envVars["DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP"]; exists {
 		allowedIPsEnv = val
 	} else {
-		allowedIPsEnv = getEnvWithDefault("MAGIC_GATEWAY_ALLOWED_TARGET_IP", "")
+		allowedIPsEnv = getEnvWithDefault("DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP", "")
 	}
 
 	if allowedIPsEnv == "" {
 		allowedPrivateIPs = []*net.IPNet{}
 		if debugMode {
-			logger.Println("MAGIC_GATEWAY_ALLOWED_TARGET_IP environment variable not set, all internal IPs will be blocked")
+			logger.Println("DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP environment variable not set, all internal IPs will be blocked")
 		}
 		return
 	}

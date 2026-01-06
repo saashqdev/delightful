@@ -207,10 +207,10 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.platform.organization_env_not_found')]
     case PLATFORM_ORGANIZATION_ENV_NOT_FOUND = 3042;
 
-    // MAGIC_ENVIRONMENT_CONFIG_ERROR
-        // MAGIC_ENVIRONMENT_CONFIG_ERROR
+    // DELIGHTFUL_ENVIRONMENT_CONFIG_ERROR
+        // DELIGHTFUL_ENVIRONMENT_CONFIG_ERROR
     #[ErrorMessage('chat.magic.environment_config_error')]
-    case MAGIC_ENVIRONMENT_CONFIG_ERROR = 3043;
+    case DELIGHTFUL_ENVIRONMENT_CONFIG_ERROR = 3043;
 
     // USER_SYNC_FAILED
         // USER_SYNC_FAILED
@@ -220,7 +220,7 @@ enum ChatErrorCode: int
     // magicEnv not found
         // magicEnv not found
     #[ErrorMessage('chat.magic.environment_not_found')]
-    case MAGIC_ENVIRONMENT_NOT_FOUND = 3045;
+    case DELIGHTFUL_ENVIRONMENT_NOT_FOUND = 3045;
 
     // appTicket not found
         // appTicket not found

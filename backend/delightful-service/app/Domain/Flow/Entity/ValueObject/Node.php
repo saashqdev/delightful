@@ -285,7 +285,7 @@ class Node extends AbstractValueObject
         if ($nodeType instanceof NodeType) {
             $nodeType = $nodeType->value;
         }
-        $nodeId = Code::MagicFlowNode->gen();
+        $nodeId = Code::DelightfulFlowNode->gen();
         $nodeDefine = FlowNodeCollector::get($nodeType, $nodeVersion);
 
         $node = new self($nodeType, $nodeVersion);

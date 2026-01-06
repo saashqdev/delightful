@@ -211,7 +211,7 @@ class MagicUserContactAppService extends AbstractAppService
     {
         $dataIsolation = $this->createDataIsolation($authorization);
         // 根部门被抽象为 -1，所以这里需要转换
-        if ($dto->getDepartmentId() === PlatformRootDepartmentId::Magic) {
+        if ($dto->getDepartmentId() === PlatformRootDepartmentId::Delightful) {
             $departmentId = $this->departmentChartDomainService->getDepartmentRootId($dataIsolation);
             $dto->setDepartmentId($departmentId);
         }

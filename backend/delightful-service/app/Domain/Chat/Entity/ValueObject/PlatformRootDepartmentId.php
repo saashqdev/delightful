@@ -23,11 +23,11 @@ class PlatformRootDepartmentId
     public static function getRootDepartmentIdByPlatformType(PlatformType $thirdPlatformType): string
     {
         return match ($thirdPlatformType) {
-            PlatformType::Magic => self::Magic,
+            PlatformType::Delightful => self::Delightful,
             PlatformType::DingTalk => self::DingTalk,
             PlatformType::Teamshare => self::TeamShare,
-            PlatformType::FeiShu => self::Magic,
-            PlatformType::WeCom => self::Magic,
+            PlatformType::FeiShu => self::Delightful,
+            PlatformType::WeCom => self::Delightful,
         };
     }
 }

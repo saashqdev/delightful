@@ -240,6 +240,6 @@ class MagicFlowTriggerTestcaseEntity extends AbstractEntity
 
     private function generateCode(): string
     {
-        return 'MAGIC-FLOW-TRIGGER-TESTCASE-' . str_replace('.', '-', uniqid('', true));
+        return 'DELIGHTFUL-FLOW-TRIGGER-TESTCASE-' . str_replace('.', '-', uniqid('', true));
     }
 }

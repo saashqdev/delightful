@@ -335,8 +335,8 @@ class MagicConversationAppService extends AbstractAppService
         $completionDTO->setStop(["\n", "\n\n"]); // Stop tokens to control completion behavior
 
         // Set access token
-        if (defined('MAGIC_ACCESS_TOKEN')) {
-            $completionDTO->setAccessToken(MAGIC_ACCESS_TOKEN);
+        if (defined('DELIGHTFUL_ACCESS_TOKEN')) {
+            $completionDTO->setAccessToken(DELIGHTFUL_ACCESS_TOKEN);
         }
 
         // Set business params in one call

@@ -117,7 +117,7 @@ class MagicUserAuthorization extends AbstractAuthorization
             $magicEnvEntity = $magicEnvDomainService->getCurrentDefaultMagicEnv();
             if ($magicEnvEntity === null) {
                 // token没有绑定环境，且没有默认环境配置
-                ExceptionBuilder::throw(ChatErrorCode::MAGIC_ENVIRONMENT_NOT_FOUND);
+                ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
             }
         }
         // 如果是麦吉自己下发的 Token,就由自己校验
@@ -237,7 +237,7 @@ class MagicUserAuthorization extends AbstractAuthorization
 
     public function getApplicationCode(): string
     {
-        return $this->applicationCode ?: AppCodeEnum::SUPER_MAGIC->value;
+        return $this->applicationCode ?: AppCodeEnum::SUPER_DELIGHTFUL->value;
     }
 
     public function setApplicationCode(string $applicationCode): MagicUserAuthorization

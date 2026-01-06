@@ -46,10 +46,10 @@ class TOSUploader:
         self.uploaded_files = []  # Track uploaded files for batch registration
 
         # Get API base URL from environment
-        self.api_base_url = os.getenv("MAGIC_API_SERVICE_BASE_URL")
+        self.api_base_url = os.getenv("DELIGHTFUL_API_SERVICE_BASE_URL")
 
         if not self.api_base_url:
-            logger.warning("MAGIC_API_SERVICE_BASE_URL is not set; file registration will be unavailable")
+            logger.warning("DELIGHTFUL_API_SERVICE_BASE_URL is not set; file registration will be unavailable")
         else:
             # Add https:// prefix if missing
             if not self.api_base_url.startswith(("http://", "https://")):
@@ -274,14 +274,14 @@ class TOSUploader:
 
         logger.info(f"Preparing to register files to API, count={len(self.uploaded_files)}, sandbox_id={self.sandbox_id}")
 
-        api_url_env = os.getenv("MAGIC_API_SERVICE_BASE_URL", "unset")
+        api_url_env = os.getenv("DELIGHTFUL_API_SERVICE_BASE_URL", "unset")
 
         try:
             import aiohttp
 
             # Ensure API base URL exists
             if not self.api_base_url:
-                logger.error("MAGIC_API_SERVICE_BASE_URL is not set; cannot register files")
+                logger.error("DELIGHTFUL_API_SERVICE_BASE_URL is not set; cannot register files")
                 return False
 
             # API endpoint

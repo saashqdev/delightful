@@ -90,7 +90,7 @@ FILE_PUBLIC_TOS_TRN=         # Optional, Role ARN for STS temporary authorizatio
 
 ### Default Icon Files
 
-The system includes a set of default icon files located in the `storage/files/MAGIC/open/default/` directory. These icons will be uploaded to the configured storage service during system initialization (only required when using cloud storage services).
+The system includes a set of default icon files located in the `storage/files/DELIGHTFUL/open/default/` directory. These icons will be uploaded to the configured storage service during system initialization (only required when using cloud storage services).
 
 ### Initialization Command
 
@@ -114,8 +114,8 @@ Command execution process:
 Example output:
 ```
 Public bucket configuration: {"adapter":"tos","config":{"region":"cn-beijing","endpoint":"tos-cn-beijing.volces.com","ak":"YOUR_AK","sk":"YOUR_SK","bucket":"magic-public","trn":"YOUR_TRN"},"public_read":true}
-Local file path: /path/to/project/storage/files/MAGIC/open/default/icon1.png
-Local file path: /path/to/project/storage/files/MAGIC/open/default/icon2.png
+Local file path: /path/to/project/storage/files/DELIGHTFUL/open/default/icon1.png
+Local file path: /path/to/project/storage/files/DELIGHTFUL/open/default/icon2.png
 ...
 File system initialization completed
 ```

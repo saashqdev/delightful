@@ -71,7 +71,7 @@ class StorageUploaderTool:
         self.uploaded_files_for_registration: list = []
         self.last_upload_time = time.time()  # Record last upload time
 
-        self.api_base_url = os.getenv("MAGIC_API_SERVICE_BASE_URL")
+        self.api_base_url = os.getenv("DELIGHTFUL_API_SERVICE_BASE_URL")
         if self.api_base_url:
             if not self.api_base_url.startswith(("http://", "https://")):
                 self.api_base_url = f"https://{self.api_base_url}"
@@ -79,7 +79,7 @@ class StorageUploaderTool:
                 self.api_base_url += "/"
             logger.info(f"Uploader Tool: API service URL: {self.api_base_url}")
         else:
-            logger.warning("Uploader Tool: MAGIC_API_SERVICE_BASE_URL environment variable not set, unable to perform file registration")
+            logger.warning("Uploader Tool: DELIGHTFUL_API_SERVICE_BASE_URL environment variable not set, unable to perform file registration")
 
     async def _load_credentials(self) -> bool:
         """
@@ -234,7 +234,7 @@ class StorageUploaderTool:
             return True
 
         if not self.api_base_url:
-            logger.error("API base URL not set (MAGIC_API_SERVICE_BASE_URL), unable to register files")
+            logger.error("API base URL not set (DELIGHTFUL_API_SERVICE_BASE_URL), unable to register files")
             return False
 
         api_url = f"{self.api_base_url.strip('/')}/api/v1/super-agent/file/process-attachments"
@@ -430,14 +430,14 @@ async def _run_storage_uploader_watch_async(
 
 @cli_app.command("watch")
 def start_storage_uploader_watcher(
-    sandbox_id: Optional[str] = typer.Option(None, "--sandbox", help="Sandbox ID for building upload path and file registration.", envvar="SUPER_MAGIC_SANDBOX_ID"),
-    workspace_dir: str = typer.Option(".workspace", "--dir", help="Path to workspace directory to monitor for file changes.", envvar="SUPER_MAGIC_WORKSPACE_DIR", show_default=True),
+    sandbox_id: Optional[str] = typer.Option(None, "--sandbox", help="Sandbox ID for building upload path and file registration.", envvar="SUPER_DELIGHTFUL_SANDBOX_ID"),
+    workspace_dir: str = typer.Option(".workspace", "--dir", help="Path to workspace directory to monitor for file changes.", envvar="SUPER_DELIGHTFUL_WORKSPACE_DIR", show_default=True),
     once: bool = typer.Option(False, "--once", help="Perform one-time file scan and upload, then exit without continuous directory monitoring."),
     refresh: bool = typer.Option(False, "--refresh", help="Force re-upload all files, ignoring local file hash cache records."),
-    credentials_file: Optional[str] = typer.Option(None, "--credentials", "-c", help="Specify path to credentials file. If provided, this option takes precedence over '--use-context' and default lookup logic.", envvar="SUPER_MAGIC_CREDENTIALS_FILE"),
+    credentials_file: Optional[str] = typer.Option(None, "--credentials", "-c", help="Specify path to credentials file. If provided, this option takes precedence over '--use-context' and default lookup logic.", envvar="SUPER_DELIGHTFUL_CREDENTIALS_FILE"),
     use_context: bool = typer.Option(False, "--use-context", help="If credentials file not specified via '--credentials', try to use 'config/upload_credentials.json' under project as credentials file."),
     task_id: Optional[str] = typer.Option(None, "--task-id", help="Task ID for registration in backend system after successful file upload."),
-    organization_code: Optional[str] = typer.Option(None, "--organization-code", help="Organization code, can be used for file registration or path building in multi-tenant scenarios.", envvar="SUPER_MAGIC_ORGANIZATION_CODE"),
+    organization_code: Optional[str] = typer.Option(None, "--organization-code", help="Organization code, can be used for file registration or path building in multi-tenant scenarios.", envvar="SUPER_DELIGHTFUL_ORGANIZATION_CODE"),
     log_level: str = typer.Option("INFO", "--log-level", help="Set tool's logging output level (DEBUG, INFO, WARNING, ERROR).")
 ):
     setup_logger(log_name="app", console_level=log_level.upper())

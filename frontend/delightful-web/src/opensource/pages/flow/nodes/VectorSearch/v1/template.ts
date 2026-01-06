@@ -1,5 +1,5 @@
 export const v1Template = {
-	node_id: "MAGIC-FLOW-NODE-676d75ed2a27c6-24690200",
+	node_id: "DELIGHTFUL-FLOW-NODE-676d75ed2a27c6-24690200",
 	debug: false,
 	name: "向量数据库 / 查询",
 	description: "",

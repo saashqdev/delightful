@@ -1,4 +1,4 @@
-const PLATEFORM_PREFIX = "MAGIC"
+const PLATEFORM_PREFIX = "DELIGHTFUL"
 
 export const platformKey = (str: string) => `${PLATEFORM_PREFIX}:${str}`
 

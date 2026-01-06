@@ -7,7 +7,7 @@ import generatorUnionRequest from "@/opensource/apis/core/unionRequest"
 
 export class MagicHttpClient extends HttpClient {
 	constructor() {
-		super(env("MAGIC_SERVICE_BASE_URL"))
+		super(env("DELIGHTFUL_SERVICE_BASE_URL"))
 		this.setupInterceptors()
 	}
 

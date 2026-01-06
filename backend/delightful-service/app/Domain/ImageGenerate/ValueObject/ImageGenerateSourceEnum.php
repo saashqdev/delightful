@@ -10,7 +10,7 @@ namespace App\Domain\ImageGenerate\ValueObject;
 enum ImageGenerateSourceEnum: string
 {
     // 超级麦吉
-    case SUPER_MAGIC = 'super_magic';
+    case SUPER_DELIGHTFUL = 'super_magic';
 
     // agent
     case AGENT = 'agent';

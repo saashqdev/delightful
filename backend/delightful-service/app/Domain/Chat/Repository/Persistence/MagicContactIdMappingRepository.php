@@ -163,7 +163,7 @@ class MagicContactIdMappingRepository implements MagicContactIdMappingRepository
         $time = date('Y-m-d H:i:s');
         foreach ($thirdPlatformIdMappingEntities as $magicThirdPlatformIdMappingEntity) {
             if (empty($magicThirdPlatformIdMappingEntity->getMagicEnvironmentId())) {
-                ExceptionBuilder::throw(ChatErrorCode::MAGIC_ENVIRONMENT_NOT_FOUND);
+                ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
             }
             if (empty($magicThirdPlatformIdMappingEntity->getNewId())) {
                 $newId = (string) IdGenerator::getSnowId();
@@ -202,7 +202,7 @@ class MagicContactIdMappingRepository implements MagicContactIdMappingRepository
             ->where('magic_organization_code', $magicOrganizationCode)
             ->where('mapping_type', ThirdPlatformIdMappingType::Department->value)
             ->where('third_platform_type', $platformType->value)
-            ->where('origin_id', PlatformRootDepartmentId::Magic)
+            ->where('origin_id', PlatformRootDepartmentId::Delightful)
             ->value('new_id');
     }
 

@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     # Application environment
     app_env: str = Field(..., env="APP_ENV")
     # Sandbox image name
-    super_magic_image_name: str = Field(..., env="SUPER_MAGIC_IMAGE_NAME")
+    super_magic_image_name: str = Field(..., env="SUPER_DELIGHTFUL_IMAGE_NAME")
     
     # Running container timeout (seconds), containers will be stopped after this time
     running_container_expire_time: int = Field(3600 * 6, env="CONTAINER_EXPIRE_TIME")
@@ -70,10 +70,10 @@ def load_settings() -> Settings:
     except Exception as e:
         # If loading fails, output error and use default values
         print(f"Configuration loading error: {e}", file=os.sys.stderr)
-        # If SUPER_MAGIC_IMAGE_NAME is not defined, it must be set manually
-        super_magic_image_name = os.environ.get("SUPER_MAGIC_IMAGE_NAME")
+        # If SUPER_DELIGHTFUL_IMAGE_NAME is not defined, it must be set manually
+        super_magic_image_name = os.environ.get("SUPER_DELIGHTFUL_IMAGE_NAME")
         if not super_magic_image_name:
-            raise ValueError("Environment variable SUPER_MAGIC_IMAGE_NAME must be set to specify sandbox image name") from e
+            raise ValueError("Environment variable SUPER_DELIGHTFUL_IMAGE_NAME must be set to specify sandbox image name") from e
         
         # For required environment variable files, throw exception directly to prevent startup
         if "Agent environment file does not exist" in str(e):

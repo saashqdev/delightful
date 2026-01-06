@@ -7,10 +7,10 @@ declare(strict_types=1);
 return [
     // 国内magic
     'domestic_magic_service' => [
-        'host' => env('DOMESTIC_MAGIC_HOST'),
+        'host' => env('DOMESTIC_DELIGHTFUL_HOST'),
     ],
     // 国际magic
     'international_magic_service' => [
-        'host' => env('INTERNATIONAL_MAGIC_HOST'),
+        'host' => env('INTERNATIONAL_DELIGHTFUL_HOST'),
     ],
 ];

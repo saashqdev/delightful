@@ -1,5 +1,5 @@
 export default {
-    "id": "MAGIC-FLOW-677663f1ca9088-26607117",
+    "id": "DELIGHTFUL-FLOW-677663f1ca9088-26607117",
     "icon": "",
     "name": "测试等待节点",
     "type": 1,

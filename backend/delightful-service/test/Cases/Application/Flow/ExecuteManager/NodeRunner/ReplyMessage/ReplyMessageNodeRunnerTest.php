@@ -94,7 +94,7 @@ JSON, true));
         $runner = NodeRunnerFactory::make($node);
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData(executionType: ExecutionType::IMChat);
-        $executionData->setFlowCode('MAGIC-FLOW-678ded052eaee2-19893262', '', '');
+        $executionData->setFlowCode('DELIGHTFUL-FLOW-678ded052eaee2-19893262', '', '');
         $executionData->saveNodeContext('9527', [
             'content' => '你好，你是谁' . time(),
         ]);
@@ -184,7 +184,7 @@ JSON, true));
             ],
         );
         $executionData = $this->createExecutionData(triggerData: $triggerData, executionType: ExecutionType::Routine);
-        $executionData->setFlowCode('MAGIC-FLOW-678ded052eaee2-19893262', '', '');
+        $executionData->setFlowCode('DELIGHTFUL-FLOW-678ded052eaee2-19893262', '', '');
         $executionData->saveNodeContext('9527', [
             'content' => '你好，你是谁' . time(),
             'user' => [
@@ -264,7 +264,7 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'link' => 'https://example.tos-cn-beijing.volces.com/MAGIC/test/986d7512a979a6ae0a773b2f97d42bba.jpeg',
+            'link' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/986d7512a979a6ae0a773b2f97d42bba.jpeg',
             'link_desc' => '你好，你是谁',
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -335,7 +335,7 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'link' => 'http://localhost/MAGIC/test/986d7512a979a6ae0a773b2f97d42bba.jpeg',
+            'link' => 'http://localhost/DELIGHTFUL/test/986d7512a979a6ae0a773b2f97d42bba.jpeg',
             'link_desc' => '你好，你是谁',
         ]);
         $node->getNodeDebugResult()->setThrowException(false);
@@ -408,12 +408,12 @@ JSON, true));
         $executionData = $this->createExecutionData();
         $executionData->addAttachmentRecord(new Attachment(
             name: '986d7512a979a6ae0a773b2f97d42bba.jpeg',
-            url: 'https://example.tos-cn-beijing.volces.com/MAGIC/test/986d7512a979a6ae0a773b2f97d42bba.jpeg',
+            url: 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/986d7512a979a6ae0a773b2f97d42bba.jpeg',
             ext: 'jpeg',
             size: 100
         ));
         $executionData->saveNodeContext('9527', [
-            'link' => 'https://example.tos-cn-beijing.volces.com/MAGIC/test/986d7512a979a6ae0a773b2f97d42bba.jpeg',
+            'link' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/986d7512a979a6ae0a773b2f97d42bba.jpeg',
             'link_desc' => '你好，你是谁',
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -559,7 +559,7 @@ JSON, true));
         $executionData = $this->createExecutionData();
 
         $executionData->saveNodeContext('9527', [
-            'link' => 'https://example.tos-cn-beijing.volces.com/MAGIC/test/986d7512a979a6ae0a773b2f97d42bba.jpeg',
+            'link' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/986d7512a979a6ae0a773b2f97d42bba.jpeg',
             'link_desc' => 'xxx.jpeg',
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -632,10 +632,10 @@ JSON, true));
 
         $executionData->saveNodeContext('9527', [
             'link' => [
-                'https://example.tos-cn-beijing.volces.com/MAGIC/test/986d7512a979a6ae0a773b2f97d42bba.jpeg',
+                'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/986d7512a979a6ae0a773b2f97d42bba.jpeg',
             ],
             'link_desc' => [
-                'https://example.tos-cn-beijing.volces.com/MAGIC/test/986d7512a979a6ae0a773b2f97d42bba.jpeg' => 'xxx1.jpeg',
+                'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/986d7512a979a6ae0a773b2f97d42bba.jpeg' => 'xxx1.jpeg',
             ],
         ]);
         $runner->execute($vertexResult, $executionData, []);

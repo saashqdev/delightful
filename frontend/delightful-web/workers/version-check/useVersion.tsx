@@ -96,7 +96,7 @@ const useVersion = () => {
 	// 开启检测
 	const startPollingPageUpdate = useCallback(() => {
 		// 非生产环境不进行版本更新提示
-		if (window?.CONFIG?.MAGIC_APP_ENV !== AppEnv.Production) return
+		if (window?.CONFIG?.DELIGHTFUL_APP_ENV !== AppEnv.Production) return
 		stopPollingPageUpdate()
 		// 重新计时
 		start()

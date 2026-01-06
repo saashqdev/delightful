@@ -51,7 +51,7 @@ class MagicFlowDraftEntity extends AbstractEntity
     {
         $this->requiredValidate();
 
-        $this->code = Code::MagicFlowDraft->gen();
+        $this->code = Code::DelightfulFlowDraft->gen();
         $this->modifier = $this->creator;
         $this->updatedAt = $this->createdAt;
     }

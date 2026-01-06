@@ -12,5 +12,5 @@ namespace App\Application\LongTermMemory\Enum;
  */
 enum AppCodeEnum: string
 {
-    case SUPER_MAGIC = 'SUPER_MAGIC';
+    case SUPER_DELIGHTFUL = 'SUPER_DELIGHTFUL';
 }

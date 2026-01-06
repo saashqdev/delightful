@@ -179,7 +179,7 @@ class MagicOrganizationEnvDomainService
      */
     public function getCurrentDefaultMagicEnv(): ?MagicEnvironmentEntity
     {
-        $envId = env('MAGIC_ENV_ID');
+        $envId = env('DELIGHTFUL_ENV_ID');
         if (empty($envId)) {
             return null;
         }

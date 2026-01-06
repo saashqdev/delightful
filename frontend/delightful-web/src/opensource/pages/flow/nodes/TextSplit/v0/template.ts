@@ -1,5 +1,5 @@
 export const v0Template = {
-	node_id: "MAGIC-FLOW-NODE-6735bdc8d72e40-41197531",
+	node_id: "DELIGHTFUL-FLOW-NODE-6735bdc8d72e40-41197531",
 	debug: false,
 	name: "文本切割",
 	description: "",

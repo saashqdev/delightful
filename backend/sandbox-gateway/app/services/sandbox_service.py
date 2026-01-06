@@ -209,23 +209,23 @@ class SandboxService:
     @async_handle_exceptions
     async def _get_auth_token(self) -> Optional[str]:
         """
-        Send request to authentication service to get auth token. Returns None if MAGIC_GATEWAY_BASE_URL environment variable is not set
+        Send request to authentication service to get auth token. Returns None if DELIGHTFUL_GATEWAY_BASE_URL environment variable is not set
 
         Returns:
-            Optional[str]: Authentication token, returns None if MAGIC_GATEWAY_BASE_URL environment variable is not set
+            Optional[str]: Authentication token, returns None if DELIGHTFUL_GATEWAY_BASE_URL environment variable is not set
 
         Raises:
-            ContainerOperationError: When request fails, response format doesn't match expectations, or MAGIC_GATEWAY_API_KEY is not set
+            ContainerOperationError: When request fails, response format doesn't match expectations, or DELIGHTFUL_GATEWAY_API_KEY is not set
         """
-        magic_gateway_url = os.environ.get("MAGIC_GATEWAY_BASE_URL")
+        magic_gateway_url = os.environ.get("DELIGHTFUL_GATEWAY_BASE_URL")
 
         if not magic_gateway_url:
-            logger.info("MAGIC_GATEWAY_BASE_URL environment variable not set, skipping authentication step")
+            logger.info("DELIGHTFUL_GATEWAY_BASE_URL environment variable not set, skipping authentication step")
             return None
 
-        magic_gateway_api_key = os.environ.get("MAGIC_GATEWAY_API_KEY")
+        magic_gateway_api_key = os.environ.get("DELIGHTFUL_GATEWAY_API_KEY")
         if not magic_gateway_api_key:
-            error_msg = "MAGIC_GATEWAY_API_KEY environment variable not set, cannot perform authentication"
+            error_msg = "DELIGHTFUL_GATEWAY_API_KEY environment variable not set, cannot perform authentication"
             logger.error(error_msg)
             raise ContainerOperationError(error_msg)
 
@@ -299,7 +299,7 @@ class SandboxService:
 
                 token = await self._get_auth_token()
                 if token:
-                    environment["MAGIC_AUTHORIZATION"] = token
+                    environment["DELIGHTFUL_AUTHORIZATION"] = token
                     logger.info("Successfully obtained auth token and added to container environment variables")
 
                 # Read Agent environment file variables (file must exist as verified during settings load)
@@ -313,7 +313,7 @@ class SandboxService:
 
                 # Create and start container
                 # Mount config file, check if /app/config/config.yaml exists
-                config_file_path = os.environ.get("SUPER_MAGIC_CONFIG_FILE_PATH")
+                config_file_path = os.environ.get("SUPER_DELIGHTFUL_CONFIG_FILE_PATH")
                 if config_file_path:
                     volumes = {
                         config_file_path: {
@@ -323,7 +323,7 @@ class SandboxService:
                     }
                     logger.info(f"Using config file: {config_file_path}")
                 else:
-                    logger.warning(f"SUPER_MAGIC_CONFIG_FILE_PATH config file does not exist: {config_file_path}")
+                    logger.warning(f"SUPER_DELIGHTFUL_CONFIG_FILE_PATH config file does not exist: {config_file_path}")
                     volumes = {}
 
                 # Mount config file

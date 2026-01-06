@@ -43,7 +43,7 @@ export const getLatestAppVersion = async () => {
 		})
 		const jsContent = await response.text()
 		const config = JSON.parse(jsContent.replace("window.CONFIG = ", "")) as ImportMetaEnv
-		return config.MAGIC_APP_VERSION
+		return config.DELIGHTFUL_APP_VERSION
 	} catch (error: any) {
 		console.error(error)
 		return undefined

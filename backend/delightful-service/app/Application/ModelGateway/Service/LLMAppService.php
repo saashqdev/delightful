@@ -1799,7 +1799,7 @@ class LLMAppService extends AbstractLLMAppService
         if ($accessTokenEntity && $accessTokenEntity->getType()->isUser()) {
             $imageGeneratedEvent->setSourceType(ImageGenerateSourceEnum::API_PLATFORM);
         } elseif (! empty($requestDTO->getTopicId())) {
-            $imageGeneratedEvent->setSourceType(ImageGenerateSourceEnum::SUPER_MAGIC);
+            $imageGeneratedEvent->setSourceType(ImageGenerateSourceEnum::SUPER_DELIGHTFUL);
         } else {
             $imageGeneratedEvent->setSourceType(ImageGenerateSourceEnum::API);
         }

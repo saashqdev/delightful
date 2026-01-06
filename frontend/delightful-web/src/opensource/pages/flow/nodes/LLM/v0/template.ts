@@ -1,7 +1,7 @@
 import i18next from "i18next"
 
 export const v0Template = {
-	node_id: "MAGIC-FLOW-NODE-6753cb5235e676-30935789",
+	node_id: "DELIGHTFUL-FLOW-NODE-6753cb5235e676-30935789",
 	debug: false,
 	name: "LLM Chat",
 	description: "",

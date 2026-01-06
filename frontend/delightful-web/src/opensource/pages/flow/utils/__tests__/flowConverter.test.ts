@@ -7,7 +7,7 @@ describe.skip("测试 FlowConverter", () => {
 	// 测试简单案例的JSON和YAML互转
 	describe("简单案例测试", () => {
 		const simpleJson = {
-			id: "MAGIC-FLOW-test",
+			id: "DELIGHTFUL-FLOW-test",
 			name: "简单测试",
 			nodes: [{ id: "node-1", type: "1" }],
 			edges: [],
@@ -16,7 +16,7 @@ describe.skip("测试 FlowConverter", () => {
 		it("应能将简单JSON对象转为YAML字符串", () => {
 			const yaml = FlowConverter.jsonToYamlString(simpleJson)
 			expect(yaml).toBeDefined()
-			expect(yaml.includes("id: MAGIC-FLOW-test")).toBe(true)
+			expect(yaml.includes("id: DELIGHTFUL-FLOW-test")).toBe(true)
 			expect(yaml.includes("name: 简单测试")).toBe(true)
 		})
 

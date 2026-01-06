@@ -36,7 +36,7 @@ readonly class MagicWatchDogSubscriber implements ListenerInterface
      */
     public function process(object $event): void
     {
-        if ((bool) env('ENABLE_MAGIC_WATCHDOG', true) !== true) {
+        if ((bool) env('ENABLE_DELIGHTFUL_WATCHDOG', true) !== true) {
             return;
         }
         $quantum = 10 * 1000 * 1000; // 单位：毫秒

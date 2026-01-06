@@ -93,7 +93,7 @@ describe("version-check utils", () => {
 			const mockVersion = "1.2.3"
 			mockFetch.mockResolvedValueOnce({
 				text: () =>
-					Promise.resolve(`window.CONFIG = {"MAGIC_APP_VERSION": "${mockVersion}"}`),
+					Promise.resolve(`window.CONFIG = {"DELIGHTFUL_APP_VERSION": "${mockVersion}"}`),
 			})
 
 			const version = await getLatestAppVersion()

@@ -145,7 +145,7 @@ class MagicAgentDomainService
         if (! empty($aiCodes)) {
             return explode(',', $aiCodes);
         }
-        return ['MAGIC-FLOW-676e4a53b17378-40076235'];
+        return ['DELIGHTFUL-FLOW-676e4a53b17378-40076235'];
     }
 
     public function insertDefaultAssistantConversation(string $userId, string $aiCode): void

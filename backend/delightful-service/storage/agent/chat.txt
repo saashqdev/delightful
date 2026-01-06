@@ -1,7 +1,7 @@
 {
 
 "flow":{
-         "id": "MAGIC-FLOW-680dd468830e56-11278991",
+         "id": "DELIGHTFUL-FLOW-680dd468830e56-11278991",
          "name": "对话",
          "description": "对话",
          "icon": "",

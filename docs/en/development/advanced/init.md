@@ -18,7 +18,7 @@ The system uses the data seeder `seeders/initial_environment_seeder.php` to init
 - Write production environment configuration, including deployment type, environment type, private configuration, etc.
 - Write test environment configuration for development and testing purposes
 
-> **Important:** The system production environment ID is 10000. Please ensure that `MAGIC_ENV_ID` is set to `10000` in the environment variables.
+> **Important:** The system production environment ID is 10000. Please ensure that `DELIGHTFUL_ENV_ID` is set to `10000` in the environment variables.
 
 ## 4. Execution and Testing Steps
 

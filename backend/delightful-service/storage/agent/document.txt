@@ -1,9 +1,9 @@
 {
 "flow":{
-         "id": "MAGIC-FLOW-67f8ba585b23c1-24584505",
+         "id": "DELIGHTFUL-FLOW-67f8ba585b23c1-24584505",
          "name": "示例 Agent",
          "description": "示例 Agent",
-         "icon": "https://teamshareos-app-public-test.tos-cn-beijing.volces.com/MAGIC/588417216353927169/default/bot.png",
+         "icon": "https://teamshareos-app-public-test.tos-cn-beijing.volces.com/DELIGHTFUL/588417216353927169/default/bot.png",
          "type": 1,
          "tool_set_id": "not_grouped",
          "edges": [

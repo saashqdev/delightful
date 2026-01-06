@@ -13,5 +13,5 @@ return [
         ],
     ],
 
-    'model_aes_key' => env('MAGIC_FLOW_MODEL_AES_KEY'),
+    'model_aes_key' => env('DELIGHTFUL_FLOW_MODEL_AES_KEY'),
 ];

@@ -27,7 +27,7 @@ use Throwable;
 
 class CloudFileRepository implements CloudFileRepositoryInterface
 {
-    public const string DEFAULT_ICON_ORGANIZATION_CODE = 'MAGIC';
+    public const string DEFAULT_ICON_ORGANIZATION_CODE = 'DELIGHTFUL';
 
     protected CloudFile $cloudFile;
 

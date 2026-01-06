@@ -36,7 +36,7 @@ var (
 	ctx         = context.Background()
 
 	// Supported services list
-	supportedServices = []string{"OPENAI", "MAGIC", "DEEPSEEK"}
+	supportedServices = []string{"OPENAI", "DELIGHTFUL", "DEEPSEEK"}
 
 	// Global token version counter (for revocation)
 	tokenVersionCounter int64 = 0
@@ -89,17 +89,17 @@ type ServiceInfo struct {
 	Model   string `json:"default_model,omitempty"`
 }
 
-// Initialize JWT security configuration - Get secret from MAGIC_GATEWAY_API_KEY
+// Initialize JWT security configuration - Get secret from DELIGHTFUL_GATEWAY_API_KEY
 func initJWTSecurity() {
-	// Get JWT secret from MAGIC_GATEWAY_API_KEY
-	apiKey := getEnvWithDefault("MAGIC_GATEWAY_API_KEY", "")
+	// Get JWT secret from DELIGHTFUL_GATEWAY_API_KEY
+	apiKey := getEnvWithDefault("DELIGHTFUL_GATEWAY_API_KEY", "")
 	if apiKey == "" {
-		logger.Fatal("Error: MAGIC_GATEWAY_API_KEY environment variable must be set")
+		logger.Fatal("Error: DELIGHTFUL_GATEWAY_API_KEY environment variable must be set")
 	}
 
 	// Validate API key strength
 	// if len(apiKey) < 32 {
-	// 	logger.Printf("Warning: MAGIC_GATEWAY_API_KEY length insufficient, recommend at least 32 characters")
+	// 	logger.Printf("Warning: DELIGHTFUL_GATEWAY_API_KEY length insufficient, recommend at least 32 characters")
 	// }
 
 	// Use API key as JWT secret
@@ -111,7 +111,7 @@ func initJWTSecurity() {
 
 	lastKeyRotation = time.Now()
 
-	logger.Printf("JWT security configuration initialized, using MAGIC_GATEWAY_API_KEY as secret")
+	logger.Printf("JWT security configuration initialized, using DELIGHTFUL_GATEWAY_API_KEY as secret")
 }
 
 // Generate random number for anti-replay attack
@@ -246,7 +246,7 @@ func init() {
 	}
 
 	// Set debug mode
-	debugMode = getEnvWithDefault("MAGIC_GATEWAY_DEBUG", "false") == "true"
+	debugMode = getEnvWithDefault("DELIGHTFUL_GATEWAY_DEBUG", "false") == "true"
 	if debugMode {
 		logger.Println("Debug mode enabled")
 	}
@@ -277,15 +277,15 @@ func getEnvWithDefault(key, defaultValue string) string {
 func loadSpecialApiKeys() {
 	specialApiKeys = make(map[string]string)
 
-	// Read configuration from MAGIC_GATEWAY_SPECIAL_API_KEYS environment variable
+	// Read configuration from DELIGHTFUL_GATEWAY_SPECIAL_API_KEYS environment variable
 	// Format: BASE_URL_KEY:API_KEY_KEY|BASE_URL_KEY2:API_KEY_KEY2
 	// Example: TEXT_TO_IMAGE_API_BASE_URL:TEXT_TO_IMAGE_ACCESS_KEY|VOICE_UNDERSTANDING_API_BASE_URL:VOICE_UNDERSTANDING_API_KEY
-	configStr := getEnvWithDefault("MAGIC_GATEWAY_SPECIAL_API_KEYS", "")
+	configStr := getEnvWithDefault("DELIGHTFUL_GATEWAY_SPECIAL_API_KEYS", "")
 
 	if configStr == "" {
 		// Special API keys not configured
 		specialApiKeys = make(map[string]string)
-		logger.Printf("No special APIs configured, set MAGIC_GATEWAY_SPECIAL_API_KEYS environment variable to enable")
+		logger.Printf("No special APIs configured, set DELIGHTFUL_GATEWAY_SPECIAL_API_KEYS environment variable to enable")
 		logger.Printf("Format example: BASE_URL_KEY:API_KEY_KEY|BASE_URL_KEY2:API_KEY_KEY2")
 		return
 	}
@@ -326,7 +326,7 @@ func loadSpecialApiKeys() {
 // Main function
 func main() {
 	// Set service port
-	port := getEnvWithDefault("MAGIC_GATEWAY_PORT", "8000")
+	port := getEnvWithDefault("DELIGHTFUL_GATEWAY_PORT", "8000")
 
 	// Initialize GPG sign handler (optional feature)
 	signHandler, err := handler.NewSignHandler(logger)
@@ -730,11 +730,11 @@ func envHandler(w http.ResponseWriter, r *http.Request) {
 
 // getEnvVarBlacklist returns blacklist patterns from environment variable or default values
 func getEnvVarBlacklist() []string {
-	blacklistStr := getEnvWithDefault("MAGIC_GATEWAY_ENV_BLACKLIST", "")
+	blacklistStr := getEnvWithDefault("DELIGHTFUL_GATEWAY_ENV_BLACKLIST", "")
 	if blacklistStr == "" {
 		// Default blacklist patterns
 		return []string{
-			"MAGIC_GATEWAY_API_KEY",
+			"DELIGHTFUL_GATEWAY_API_KEY",
 			"JWT_SECRET",
 			"SECRET",
 			"PASSWORD",
@@ -747,9 +747,9 @@ func getEnvVarBlacklist() []string {
 
 // getEnvVarWhitelistPrefixes returns whitelist prefixes from environment variable
 func getEnvVarWhitelistPrefixes() []string {
-	whitelistStr := getEnvWithDefault("MAGIC_GATEWAY_ENV_WHITELIST_PREFIXES", "")
+	whitelistStr := getEnvWithDefault("DELIGHTFUL_GATEWAY_ENV_WHITELIST_PREFIXES", "")
 	if whitelistStr == "" {
-		logger.Printf("Warning: MAGIC_GATEWAY_ENV_WHITELIST_PREFIXES not configured, environment variable access will be restricted")
+		logger.Printf("Warning: DELIGHTFUL_GATEWAY_ENV_WHITELIST_PREFIXES not configured, environment variable access will be restricted")
 		return []string{}
 	}
 
@@ -769,7 +769,7 @@ func getEnvVarWhitelistPrefixes() []string {
 	}
 
 	if len(result) == 0 {
-		logger.Printf("Warning: MAGIC_GATEWAY_ENV_WHITELIST_PREFIXES configuration is empty or invalid")
+		logger.Printf("Warning: DELIGHTFUL_GATEWAY_ENV_WHITELIST_PREFIXES configuration is empty or invalid")
 	}
 
 	return result

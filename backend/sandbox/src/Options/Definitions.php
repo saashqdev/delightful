@@ -29,7 +29,7 @@ class Definitions
         KeywordConstants::VARIABLES => [],
         KeywordConstants::SUPERGLOBALS => [],
         KeywordConstants::CONSTANTS => [],
-        KeywordConstants::MAGIC_CONSTANTS => [],
+        KeywordConstants::Delightful_CONSTANTS => [],
         KeywordConstants::NAMESPACES => [],
         KeywordConstants::ALIASES => [],
         KeywordConstants::CLASSES => [],
@@ -84,7 +84,7 @@ class Definitions
                     return $this->defineSuperglobal($name, $value);
                 case KeywordConstants::CONSTANTS:
                     return $this->defineConst($name, $value);
-                case KeywordConstants::MAGIC_CONSTANTS:
+                case KeywordConstants::Delightful_CONSTANTS:
                     return $this->defineMagicConst($name, $value);
                 case KeywordConstants::NAMESPACES:
                     return $this->defineNamespace($name);
@@ -139,7 +139,7 @@ class Definitions
                     return $this->undefineSuperglobal($name);
                 case KeywordConstants::CONSTANTS:
                     return $this->undefineConst($name);
-                case KeywordConstants::MAGIC_CONSTANTS:
+                case KeywordConstants::Delightful_CONSTANTS:
                     return $this->undefineMagicConst($name);
                 case KeywordConstants::NAMESPACES:
                     return $this->undefineNamespace($name);
@@ -664,10 +664,10 @@ class Definitions
             return $this->defineMagicConsts($name);
         }
         if (! $name) {
-            $this->error->validationError('Cannot define unnamed magic constant!', Error::DEFINE_MAGIC_CONST_ERROR, null, '');
+            $this->error->validationError('Cannot define unnamed magic constant!', Error::DEFINE_DELIGHTFUL_CONST_ERROR, null, '');
         }
         $name = $this->normalizeMagicConst($name);
-        $this->definitions[KeywordConstants::MAGIC_CONSTANTS][$name] = $value;
+        $this->definitions[KeywordConstants::Delightful_CONSTANTS][$name] = $value;
         return $this;
     }
 
@@ -693,7 +693,7 @@ class Definitions
      */
     public function hasDefinedMagicConsts(): int
     {
-        return count($this->definitions[KeywordConstants::MAGIC_CONSTANTS]);
+        return count($this->definitions[KeywordConstants::Delightful_CONSTANTS]);
     }
 
     /** Check if PHPSandbox instance has $name magic constant defined.
@@ -705,7 +705,7 @@ class Definitions
     public function isDefinedMagicConst($name): bool
     {
         $name = $this->normalizeMagicConst($name);
-        return isset($this->definitions[KeywordConstants::MAGIC_CONSTANTS][$name]);
+        return isset($this->definitions[KeywordConstants::Delightful_CONSTANTS][$name]);
     }
 
     /** Undefine PHPSandbox magic constant.
@@ -722,8 +722,8 @@ class Definitions
             return $this->undefineMagicConsts($name);
         }
         $name = $this->normalizeMagicConst($name);
-        if (isset($this->definitions[KeywordConstants::MAGIC_CONSTANTS][$name])) {
-            unset($this->definitions[KeywordConstants::MAGIC_CONSTANTS][$name]);
+        if (isset($this->definitions[KeywordConstants::Delightful_CONSTANTS][$name])) {
+            unset($this->definitions[KeywordConstants::Delightful_CONSTANTS][$name]);
         }
         return $this;
     }
@@ -743,7 +743,7 @@ class Definitions
                 $this->undefineMagicConst($magic_constant);
             }
         } else {
-            $this->definitions[KeywordConstants::MAGIC_CONSTANTS] = [];
+            $this->definitions[KeywordConstants::Delightful_CONSTANTS] = [];
         }
         return $this;
     }
@@ -751,7 +751,7 @@ class Definitions
     public function getDefinedMagicConst(string $name): mixed
     {
         $name = $this->normalizeMagicConst($name);
-        return $this->definitions[KeywordConstants::MAGIC_CONSTANTS][$name];
+        return $this->definitions[KeywordConstants::Delightful_CONSTANTS][$name];
     }
 
     /** Define PHPSandbox namespace.

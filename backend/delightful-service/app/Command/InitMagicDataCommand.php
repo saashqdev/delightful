@@ -210,7 +210,7 @@ class InitMagicDataCommand extends HyperfCommand
                 'name' => 'Application General Token',
                 'description' => 'API token for applications to access all models',
                 'models' => 'all',
-                'tokenValue' => env('MAGIC_ACCESS_TOKEN', ''),
+                'tokenValue' => env('DELIGHTFUL_ACCESS_TOKEN', ''),
                 'app_code' => 'default_app',
                 'app_name' => 'Default Application',
                 'app_description' => 'Application created by default',

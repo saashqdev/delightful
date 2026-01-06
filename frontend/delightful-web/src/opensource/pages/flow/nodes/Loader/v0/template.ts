@@ -1,7 +1,7 @@
 import i18next from "i18next"
 
 export const v0Template = {
-	node_id: "MAGIC-FLOW-NODE-67483d2676a6d4-83392577",
+	node_id: "DELIGHTFUL-FLOW-NODE-67483d2676a6d4-83392577",
 	debug: false,
 	name: "数据加载",
 	description: "",

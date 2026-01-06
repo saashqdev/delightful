@@ -135,7 +135,7 @@ The `config/.env_super_magic` file contains the following important configuratio
 - `OPENAI_4_1_NANO_MODEL`: OpenAI 4.1 Nano model name
 
 #### Vector Database Configuration
-- `QDRANT_COLLECTION_PREFIX`: Qdrant collection prefix, default is "SUPERMAGIC-"
+- `QDRANT_COLLECTION_PREFIX`: Qdrant collection prefix, default is "SUPERDELIGHTFUL-"
 
 #### Browser Configuration
 - `BROWSER_HEADLESS`: Whether the browser runs in headless mode (True/False)

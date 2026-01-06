@@ -34,7 +34,7 @@ class InitialEnvironmentSeeder extends Seeder
                 'name' => 'Magic Open Source',
                 'domain' => [
                     [
-                        'type' => PlatformType::Magic, // token is issued by Magic and validated internally
+                        'type' => PlatformType::Delightful, // token is issued by Magic and validated internally
                     ],
                 ],
             ], JSON_THROW_ON_ERROR),

@@ -30,7 +30,7 @@ class MessageFileService {
 		const { organizationCode } = userStore.user
 
 		const url = `${
-			env("MAGIC_SERVICE_BASE_URL") + genRequestUrl(RequestUrl.getUploadCredentials)
+			env("DELIGHTFUL_SERVICE_BASE_URL") + genRequestUrl(RequestUrl.getUploadCredentials)
 		}?organization_code=${organizationCode}`
 
 		const { success, fail } = await this.uploader.upload({

@@ -8,7 +8,7 @@ import tsConfig from "vite-tsconfig-paths"
 import vitePluginImp from "vite-plugin-imp"
 
 /** Environment variable prefix */
-const ENV_PREFIX = "MAGIC_"
+const ENV_PREFIX = "DELIGHTFUL_"
 
 /** Is test environment */
 // const isTest = process.env.NODE_ENV === "test"
@@ -35,7 +35,7 @@ export default defineConfig({
 	server: {
 		proxy: {
 			"/server": {
-				target: process.env.MAGIC_DEV_API_HOST ?? "",
+				target: process.env.DELIGHTFUL_DEV_API_HOST ?? "",
 				changeOrigin: true,
 				rewrite: (p) => p.replace(/^\/server/, ""),
 			},

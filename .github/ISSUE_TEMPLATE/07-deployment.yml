@@ -101,7 +101,7 @@ body:
       placeholder: |
         Environment Variables (.env file):
         ```
-        MAGIC_API_URL=http://localhost:9501
+        DELIGHTFUL_API_URL=http://localhost:9501
         DATABASE_HOST=mysql
         # [other relevant configs - please redact API keys and passwords]
         ```

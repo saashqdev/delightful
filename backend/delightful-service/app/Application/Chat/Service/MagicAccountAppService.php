@@ -77,8 +77,8 @@ class MagicAccountAppService extends AbstractAppService
                 $authorization->setOrganizationCode($magicInfo?->getOrganizationCode());
             }
             // 通过 aiCode 查询 magic_flows 表获取所属组织。
-            // 注意超级麦吉当前是作为一个没有写入 magic_flows 数据库的 flow 存在。 SUPER_MAGIC_CODE 写入了 accounts 表。
-            if ($aiCode !== AgentConstant::SUPER_MAGIC_CODE) {
+            // 注意超级麦吉当前是作为一个没有写入 magic_flows 数据库的 flow 存在。 SUPER_DELIGHTFUL_CODE 写入了 accounts 表。
+            if ($aiCode !== AgentConstant::SUPER_DELIGHTFUL_CODE) {
                 $disabledDataIsolation = FlowDataIsolation::create()->disabled();
                 $magicFlowEntity = $this->magicFlowDomainService->getByCode($disabledDataIsolation, $aiCode);
                 if (! $magicFlowEntity) {

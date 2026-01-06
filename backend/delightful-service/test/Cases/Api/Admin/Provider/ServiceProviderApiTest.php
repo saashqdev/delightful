@@ -52,7 +52,7 @@ class ServiceProviderApiTest extends BaseTest
             'model_type' => 3,
             'model_id' => 'test-model-' . time(),
             'model_version' => '测试版本 v1.0',
-            'icon' => 'MAGIC/588417216353927169/default/default.png',
+            'icon' => 'DELIGHTFUL/588417216353927169/default/default.png',
             'config' => [
                 'max_output_tokens' => 64000,
                 'max_tokens' => 128000,
@@ -133,7 +133,7 @@ class ServiceProviderApiTest extends BaseTest
             'model_type' => 3,
             'model_id' => $createRequestData['model_id'],
             'model_version' => '更新版本 v2.0',
-            'icon' => 'MAGIC/588417216353927169/default/default.png',
+            'icon' => 'DELIGHTFUL/588417216353927169/default/default.png',
             'config' => [
                 'max_output_tokens' => 128000,
                 'max_tokens' => 256000,
@@ -294,7 +294,7 @@ class ServiceProviderApiTest extends BaseTest
     public function testCreateAndDeleteModel()
     {
         $providerId = '843847394915074048';
-        $model = Json::decode('{"model_type":3,"model_id":"test-dabai-test","model_version":"测试","icon":"MAGIC/588417216353927169/default/default.png","name":"测试","description":"测试","config":{"max_output_tokens":64000,"max_tokens":128000,"temperature_type":1,"temperature":null,"billing_currency":"CNY","input_pricing":"1","output_pricing":"1","cache_write_pricing":"1","cache_hit_pricing":"1","input_cost":"1","output_cost":"1","cache_write_cost":"1","cache_hit_cost":"1","vector_size":2048,"support_function":false,"support_multi_modal":false,"support_deep_think":false,"creativity":0.7},"category":"llm","service_provider_config_id":"' . $providerId . '","translate":{"name":{"zh_CN":"测试","en_US":"test"},"description":{"zh_CN":"测试","en_US":"test"}}}');
+        $model = Json::decode('{"model_type":3,"model_id":"test-dabai-test","model_version":"测试","icon":"DELIGHTFUL/588417216353927169/default/default.png","name":"测试","description":"测试","config":{"max_output_tokens":64000,"max_tokens":128000,"temperature_type":1,"temperature":null,"billing_currency":"CNY","input_pricing":"1","output_pricing":"1","cache_write_pricing":"1","cache_hit_pricing":"1","input_cost":"1","output_cost":"1","cache_write_cost":"1","cache_hit_cost":"1","vector_size":2048,"support_function":false,"support_multi_modal":false,"support_deep_think":false,"creativity":0.7},"category":"llm","service_provider_config_id":"' . $providerId . '","translate":{"name":{"zh_CN":"测试","en_US":"test"},"description":{"zh_CN":"测试","en_US":"test"}}}');
         $response = $this->post('/org/admin/service-providers/save-model', $model, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
 

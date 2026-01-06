@@ -460,7 +460,7 @@ class ValidatorVisitor extends NodeVisitorAbstract
             }
         } elseif ($name = $this->isMagicConst($node)) {
             if (! $this->validator->checkMagicConst($name)) {
-                $this->sandbox->error->validationError('Magic constant failed custom validation!', Error::VALID_MAGIC_CONST_ERROR, $node, $name);
+                $this->sandbox->error->validationError('Magic constant failed custom validation!', Error::VALID_DELIGHTFUL_CONST_ERROR, $node, $name);
             }
             if ($this->options->definitions()->isDefinedMagicConst($name)) {
                 //                return new Node\Expr\MethodCall(new Node\Expr\Variable($sandboxInnerVariable), '_get_magic_const', [new Node\Arg(new Node\Scalar\String_($name))], $node->getAttributes());

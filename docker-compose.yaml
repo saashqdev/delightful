@@ -3,7 +3,7 @@
 services:
   # API service
   magic-service:
-    image: ghcr.io/dtyq/magic-service:${MAGIC_SERVICE_TAG-latest}
+    image: ghcr.io/dtyq/magic-service:${DELIGHTFUL_SERVICE_TAG-latest}
     platform: ${PLATFORM}
     container_name: magic-service
     #restart: always
@@ -33,7 +33,7 @@ services:
       - magic-sandbox-network
 
   magic-service-daemon:
-    image: ghcr.io/dtyq/magic-service:${MAGIC_SERVICE_TAG-latest}
+    image: ghcr.io/dtyq/magic-service:${DELIGHTFUL_SERVICE_TAG-latest}
     platform: ${PLATFORM}
     container_name: magic-service-daemon
     #restart: always
@@ -65,13 +65,13 @@ services:
 
   # Web application
   magic-web:
-    image: ghcr.io/dtyq/magic-web:${MAGIC_WEB_TAG-latest}
+    image: ghcr.io/dtyq/magic-web:${DELIGHTFUL_WEB_TAG-latest}
     container_name: magic-web
     #restart: always
     environment:
-      MAGIC_SOCKET_BASE_URL: ${MAGIC_SOCKET_BASE_URL}
-      MAGIC_SERVICE_BASE_URL: ${MAGIC_SERVICE_BASE_URL}
-      MAGIC_EDITION: ${MAGIC_EDITION}
+      DELIGHTFUL_SOCKET_BASE_URL: ${DELIGHTFUL_SOCKET_BASE_URL}
+      DELIGHTFUL_SERVICE_BASE_URL: ${DELIGHTFUL_SERVICE_BASE_URL}
+      DELIGHTFUL_EDITION: ${DELIGHTFUL_EDITION}
     ports:
       - "8080:8080"
     # volumes:
@@ -83,7 +83,7 @@ services:
 
   # Super Magic service
   super-magic:
-    image: ghcr.io/dtyq/super-magic:${SUPER_MAGIC_TAG-latest}
+    image: ghcr.io/dtyq/super-magic:${SUPER_DELIGHTFUL_TAG-latest}
     container_name: super-magic
     #restart: always
     profiles:
@@ -100,7 +100,7 @@ services:
 
   # Magic gateway service
   magic-gateway:
-    image: ghcr.io/dtyq/magic-gateway:${MAGIC_GATEWAY_TAG-latest}
+    image: ghcr.io/dtyq/magic-gateway:${DELIGHTFUL_GATEWAY_TAG-latest}
     container_name: magic-gateway
     #restart: always
     profiles:
@@ -125,7 +125,7 @@ services:
     profiles:
       - sandbox-gateway
     environment:
-      SUPER_MAGIC_CONFIG_FILE_PATH: ${SUPER_MAGIC_CONFIG_FILE_PATH:-${PWD}/config/config.yaml}
+      SUPER_DELIGHTFUL_CONFIG_FILE_PATH: ${SUPER_DELIGHTFUL_CONFIG_FILE_PATH:-${PWD}/config/config.yaml}
     depends_on:
       qdrant:
         condition: service_started

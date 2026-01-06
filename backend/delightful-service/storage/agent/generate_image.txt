@@ -244,7 +244,7 @@
                    }
                ],
 "flow":{
-         "id": "MAGIC-FLOW-676b75b6c05ab0-89972724",
+         "id": "DELIGHTFUL-FLOW-676b75b6c05ab0-89972724",
          "name": "麦吉创造",
          "description": "麦吉创造帮你将想象力化为现实！",
          "icon": "",

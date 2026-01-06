@@ -1,5 +1,5 @@
 export const v1Template = {
-	node_id: "MAGIC-FLOW-NODE-676d7459972190-59817722",
+	node_id: "DELIGHTFUL-FLOW-NODE-676d7459972190-59817722",
 	debug: false,
 	name: "人员检索",
 	description: "",

@@ -170,7 +170,7 @@ class MagicDepartmentDomainService extends AbstractContactDomainService
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
         // 获取组织所属的平台类型
         $platformType = $this->organizationsPlatformRepository->getOrganizationPlatformType($organizationCode);
-        if ($platformType === PlatformType::Magic) {
+        if ($platformType === PlatformType::Delightful) {
             // 获取根部门ID
             return $this->departmentRepository->getDepartmentRootId($organizationCode);
         }

@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: api-gateway-${ENV:-dev}
     ports:
-      - "${MAGIC_GATEWAY_PORT}:${MAGIC_GATEWAY_PORT}"
+      - "${DELIGHTFUL_GATEWAY_PORT}:${DELIGHTFUL_GATEWAY_PORT}"
     volumes:
       - ./config/${ENV:-dev}/.env:/app/.env
     restart: unless-stopped

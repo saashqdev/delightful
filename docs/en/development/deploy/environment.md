@@ -26,11 +26,11 @@ Environment variables can be classified into the following categories:
 
 ```
 # Service version tags
-MAGIC_SERVICE_TAG=latest
-MAGIC_WEB_TAG=latest
+DELIGHTFUL_SERVICE_TAG=latest
+DELIGHTFUL_WEB_TAG=latest
 
 # Version type (ENTERPRISE | COMMUNITY)
-MAGIC_EDITION=COMMUNITY
+DELIGHTFUL_EDITION=COMMUNITY
 ```
 
 #### Git Repository Configuration
@@ -123,8 +123,8 @@ APP_NAME=magic_service
 APP_ENV=dev
 APP_HOST=
 
-MAGIC_API_DEFAULT_ACCESS_TOKEN=
-MAGIC_PRIVILEGED_PASSWORD=
+DELIGHTFUL_API_DEFAULT_ACCESS_TOKEN=
+DELIGHTFUL_PRIVILEGED_PASSWORD=
 
 # Super admin permission configuration
 SUPER_WHITELISTS={"privilege_send_message":["13800000000","13900000000"]}
@@ -142,7 +142,7 @@ ENABLE_CHAT_MESSAGE=true
 # Enable chat sequence
 ENABLE_CHAT_SEQ=true
 # Enable Magic Watchdog (can be disabled for local development)
-ENABLE_MAGIC_WATCHDOG=false
+ENABLE_DELIGHTFUL_WATCHDOG=false
 
 # Common switches
 AZURE_OPENAI_GPT4O_ENABLED=false
@@ -247,10 +247,10 @@ APP_CODE=
 CODE_WHITE_ACCOUNT_ID=
 
 # Default magic_environment ID
-DEFAULT_MAGIC_ENVIRONMENT_ID=
+DEFAULT_DELIGHTFUL_ENVIRONMENT_ID=
 
 # Magic environment ID
-MAGIC_ENV_ID=1000
+DELIGHTFUL_ENV_ID=1000
 ```
 
 ### 6. File Storage Configuration
@@ -316,8 +316,8 @@ FILE_PUBLIC_TOS_TRN=         # Optional, for STS temporary authorization role AR
 ```
 # Web application configuration
 PORT=8080
-MAGIC_SOCKET_BASE_URL=ws://localhost:9502
-MAGIC_SERVICE_BASE_URL=http://localhost:9501
+DELIGHTFUL_SOCKET_BASE_URL=ws://localhost:9502
+DELIGHTFUL_SERVICE_BASE_URL=http://localhost:9501
 ```
 
 ## Configuration Recommendations

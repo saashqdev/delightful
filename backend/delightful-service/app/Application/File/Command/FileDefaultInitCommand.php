@@ -73,7 +73,7 @@ class FileDefaultInitCommand extends Command
 
         // 基础文件目录 - 使用新的路径结构
         $baseFileDir = BASE_PATH . '/storage/files';
-        $defaultModulesDir = $baseFileDir . '/MAGIC/open/default';
+        $defaultModulesDir = $baseFileDir . '/DELIGHTFUL/open/default';
 
         // 检查默认模块目录是否存在
         if (! is_dir($defaultModulesDir)) {
@@ -217,7 +217,7 @@ class FileDefaultInitCommand extends Command
             return match (strtolower($moduleName)) {
                 'service_provider', 'serviceprovider', 'service-provider' => DefaultFileBusinessType::SERVICE_PROVIDER,
                 'flow', 'workflow' => DefaultFileBusinessType::FLOW,
-                'magic', 'default' => DefaultFileBusinessType::MAGIC,
+                'magic', 'default' => DefaultFileBusinessType::Delightful,
                 default => null,
             };
         }

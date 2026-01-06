@@ -194,7 +194,7 @@ export default function KeyManagerButton({
 
 		if (isAgent) {
 			curlCommand = `curl --location --request POST "${env(
-				"MAGIC_SERVICE_BASE_URL",
+				"DELIGHTFUL_SERVICE_BASE_URL",
 			)}${endpoint}" \\
 --header 'api-key: ${key.secret_key}' \\
 --header 'Content-Type: application/json' \\
@@ -204,7 +204,7 @@ export default function KeyManagerButton({
 }'`
 		} else {
 			curlCommand = `curl --location --request POST "${env(
-				"MAGIC_SERVICE_BASE_URL",
+				"DELIGHTFUL_SERVICE_BASE_URL",
 			)}${endpoint}" \\
 --header 'api-key: ${key.secret_key}' \\
 --header 'Content-Type: application/json' \\
@@ -220,7 +220,7 @@ export default function KeyManagerButton({
 	})
 
 	const copySSEURL = useMemoizedFn((key: ApiKey) => {
-		const sseURL = `${env("MAGIC_SERVICE_BASE_URL")}/api/v1/mcp/sse/${flowId}?key=${
+		const sseURL = `${env("DELIGHTFUL_SERVICE_BASE_URL")}/api/v1/mcp/sse/${flowId}?key=${
 			key.secret_key
 		}`
 		copyToClipboard(sseURL)

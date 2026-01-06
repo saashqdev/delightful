@@ -19,7 +19,7 @@ class MagicAccessToken
 {
     public static function init(): void
     {
-        if (defined('MAGIC_ACCESS_TOKEN')) {
+        if (defined('DELIGHTFUL_ACCESS_TOKEN')) {
             return;
         }
 
@@ -63,7 +63,7 @@ class MagicAccessToken
         $userAccessToken->prepareForCreation();
         SystemAccessTokenManager::setSystemAccessToken($userAccessToken);
 
-        define('MAGIC_ACCESS_TOKEN', $accessToken->getPlaintextAccessToken());
-        define('MAGIC_OFFICIAL_ACCESS_TOKEN', $userAccessToken->getPlaintextAccessToken());
+        define('DELIGHTFUL_ACCESS_TOKEN', $accessToken->getPlaintextAccessToken());
+        define('DELIGHTFUL_OFFICIAL_ACCESS_TOKEN', $userAccessToken->getPlaintextAccessToken());
     }
 }

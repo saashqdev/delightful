@@ -337,7 +337,7 @@ JSON, true)));
         "temperature": 0.5
     },
     "max_record": 10,
-    "tools": ["MAGIC-FLOW-668247acbde108-54216815"]
+    "tools": ["DELIGHTFUL-FLOW-668247acbde108-54216815"]
 }
 JSON, true));
         $output = new NodeOutput();
@@ -456,7 +456,7 @@ JSON, true)));
     },
     "option_tools":[
       {
-        "tool_id": "MAGIC-FLOW-6735ef22377435-40152226",
+        "tool_id": "DELIGHTFUL-FLOW-6735ef22377435-40152226",
         "tool_set_id": "TOOL-SET-6725c6f73b8485-86291897",
         "async": false,
         "custom_system_input": {
@@ -497,13 +497,13 @@ JSON, true)));
         }
       },
       {
-        "tool_id": "MAGIC-FLOW-6735ef77eb3086-30338119",
+        "tool_id": "DELIGHTFUL-FLOW-6735ef77eb3086-30338119",
         "tool_set_id": "TOOL-SET-6725c6f73b8485-86291897",
         "async": false,
         "custom_system_input": null
       },
       {
-        "tool_id": "MAGIC-FLOW-6735f03845d901-08510986",
+        "tool_id": "DELIGHTFUL-FLOW-6735f03845d901-08510986",
         "tool_set_id": "TOOL-SET-6725c6f73b8485-86291897",
         "async": false,
         "custom_system_input": null
@@ -603,7 +603,7 @@ JSON, true), 'v1');
         $runner = NodeRunnerFactory::make($node);
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
-        $executionData->getTriggerData()->addAttachment(new ExternalAttachment('https://example.tos-cn-beijing.volces.com/MAGIC/test/a8eb01e6fc604e8f30521f7e3b4df449.jpeg'));
+        $executionData->getTriggerData()->addAttachment(new ExternalAttachment('https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/a8eb01e6fc604e8f30521f7e3b4df449.jpeg'));
         $executionData->saveNodeContext('9527', [
             'content' => '这里面有什么颜色',
         ]);
@@ -658,7 +658,7 @@ JSON, true), 'v1');
         $runner = NodeRunnerFactory::make($node);
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
-        $executionData->getTriggerData()->addAttachment(new ExternalAttachment('https://example.tos-cn-beijing.volces.com/MAGIC/test/a8eb01e6fc604e8f30521f7e3b4df449.jpeg'));
+        $executionData->getTriggerData()->addAttachment(new ExternalAttachment('https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/a8eb01e6fc604e8f30521f7e3b4df449.jpeg'));
         $executionData->saveNodeContext('9527', [
             'content' => '这里面有什么颜色',
         ]);

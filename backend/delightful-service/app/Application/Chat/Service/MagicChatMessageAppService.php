@@ -155,7 +155,7 @@ class MagicChatMessageAppService extends MagicSeqAppService
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $result = $this->magicConversationDomainService->getConversations($dataIsolation, $queryDTO);
-        $filterAccountEntity = $this->magicUserDomainService->getByAiCode($dataIsolation, 'SUPER_MAGIC');
+        $filterAccountEntity = $this->magicUserDomainService->getByAiCode($dataIsolation, 'SUPER_DELIGHTFUL');
         if (! empty($filterAccountEntity) && count($result->getItems()) > 0) {
             $filterItems = [];
             foreach ($result->getItems() as $item) {

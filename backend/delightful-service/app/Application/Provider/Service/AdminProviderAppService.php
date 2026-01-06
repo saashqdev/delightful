@@ -603,8 +603,8 @@ readonly class AdminProviderAppService
         $connectResponse = new ConnectResponse();
         $llmAppService = di(LLMAppService::class);
         $proxyModelRequest = new EmbeddingsDTO();
-        if (defined('MAGIC_ACCESS_TOKEN')) {
-            $proxyModelRequest->setAccessToken(MAGIC_ACCESS_TOKEN);
+        if (defined('DELIGHTFUL_ACCESS_TOKEN')) {
+            $proxyModelRequest->setAccessToken(DELIGHTFUL_ACCESS_TOKEN);
         }
         $proxyModelRequest->setModel($modelPrimaryId);
         $proxyModelRequest->setInput('test');
@@ -630,8 +630,8 @@ readonly class AdminProviderAppService
         $connectResponse = new ConnectResponse();
         $llmAppService = di(LLMAppService::class);
         $completionDTO = new CompletionDTO();
-        if (defined('MAGIC_ACCESS_TOKEN')) {
-            $completionDTO->setAccessToken(MAGIC_ACCESS_TOKEN);
+        if (defined('DELIGHTFUL_ACCESS_TOKEN')) {
+            $completionDTO->setAccessToken(DELIGHTFUL_ACCESS_TOKEN);
         }
         $completionDTO->setMessages([['role' => 'user', 'content' => '你好']]);
         $completionDTO->setModel($modelPrimaryId);

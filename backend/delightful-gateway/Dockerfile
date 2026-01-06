@@ -41,8 +41,8 @@ RUN apk add --no-cache tzdata && \
     apk del tzdata
 
 # Environment variables
-ENV MAGIC_GATEWAY_ENV=dev
-ENV MAGIC_GATEWAY_DEBUG=false
+ENV DELIGHTFUL_GATEWAY_ENV=dev
+ENV DELIGHTFUL_GATEWAY_DEBUG=false
 
 # Expose port
 

@@ -31,7 +31,7 @@ class AccountApi extends AbstractApi
     {
         $token = $this->request->input('token', '');
         $organizationCode = $this->request->input('organization_code', '');
-        if ($token !== md5(AgentConstant::SUPER_MAGIC_CODE)) {
+        if ($token !== md5(AgentConstant::SUPER_DELIGHTFUL_CODE)) {
             return ['result' => 'token failed'];
         }
 

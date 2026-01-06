@@ -1,7 +1,7 @@
 import i18next from "i18next"
 
 export const v0Template = {
-	node_id: "MAGIC-FLOW-NODE-674c2a7157e4e7-30880767",
+	node_id: "DELIGHTFUL-FLOW-NODE-674c2a7157e4e7-30880767",
 	debug: false,
 	name: "ExcelLoader",
 	description: "",

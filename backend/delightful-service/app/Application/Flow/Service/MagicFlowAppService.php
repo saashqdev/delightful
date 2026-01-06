@@ -73,7 +73,7 @@ class MagicFlowAppService extends AbstractFlowAppService
         if (! $node->getNodeDefine()->isSingleDebug()) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.single_debug_not_support');
         }
-        $node->setNodeId(Code::MagicFlowNode->gen());
+        $node->setNodeId(Code::DelightfulFlowNode->gen());
         $node->setName("{$node->getNodeTypeName()}_single_debug");
         $node->validate();
 

@@ -31,7 +31,7 @@ enum SuperPermissionEnum: string
     case PRIVILEGE_SEND_MESSAGE = 'privilege_send_message';
 
     // 麦吉多环境管理
-    case MAGIC_ENV_MANAGEMENT = 'magic_env_management';
+    case DELIGHTFUL_ENV_MANAGEMENT = 'magic_env_management';
 
     // 服务商的管理员
     case SERVICE_PROVIDER_ADMIN = 'service_provider_admin';
@@ -40,8 +40,8 @@ enum SuperPermissionEnum: string
     case SUPER_INVITE_USER = 'super_magic_invite_use_user';
 
     // 超级麦吉看板管理人员
-    case SUPER_MAGIC_BOARD_ADMIN = 'super_magic_board_manager';
+    case SUPER_DELIGHTFUL_BOARD_ADMIN = 'super_magic_board_manager';
 
     // 超级麦吉看板运营人员
-    case SUPER_MAGIC_BOARD_OPERATOR = 'super_magic_board_operator';
+    case SUPER_DELIGHTFUL_BOARD_OPERATOR = 'super_magic_board_operator';
 }

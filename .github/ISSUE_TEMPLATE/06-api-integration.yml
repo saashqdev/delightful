@@ -178,7 +178,7 @@ body:
       description: Provide relevant configuration information (redact sensitive data)
       placeholder: |
         Environment Variables:
-        - MAGIC_API_URL=https://api.example.com
+        - DELIGHTFUL_API_URL=https://api.example.com
         - MODEL_PROVIDER=openai
         - [other relevant configs]
         

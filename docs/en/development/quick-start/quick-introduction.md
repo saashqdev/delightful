@@ -71,8 +71,8 @@ https://docs.bedelightful.ai/en/development/deploy/super-magic.html
 ##### Configure IP (Optional)
 For remote server deployment, edit the .env file and replace localhost with your server IP in the following entries:
 ```
-MAGIC_SOCKET_BASE_URL=ws://<server_IP>:9502
-MAGIC_SERVICE_BASE_URL=http://<server_IP>:9501
+DELIGHTFUL_SOCKET_BASE_URL=ws://<server_IP>:9502
+DELIGHTFUL_SERVICE_BASE_URL=http://<server_IP>:9501
 ```
 
 If you choose to install Super Magic service, ensure the following configuration files exist:

@@ -1,5 +1,5 @@
 export const v0Template = {
-	node_id: "MAGIC-FLOW-NODE-6649da5637d546-69160385",
+	node_id: "DELIGHTFUL-FLOW-NODE-6649da5637d546-69160385",
 	name: "子流程",
 	description: "",
 	node_type: 11,
@@ -68,7 +68,7 @@ export const v0Template = {
 							expression_value: [
 								{
 									type: "fields",
-									value: "MAGIC-FLOW-NODE-6629f9ee4d6248-06936049.output",
+									value: "DELIGHTFUL-FLOW-NODE-6629f9ee4d6248-06936049.output",
 									name: "output",
 									args: null,
 								},

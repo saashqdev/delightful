@@ -94,7 +94,7 @@ class MagicFlowToolSetEntity extends AbstractEntity
         }
         $this->modifier = $this->creator;
         $this->updatedAt = $this->createdAt;
-        $this->code = Code::MagicFlowToolSet->gen();
+        $this->code = Code::DelightfulFlowToolSet->gen();
         $this->enabled = $this->enabled ?? true;
         $this->id = null;
     }

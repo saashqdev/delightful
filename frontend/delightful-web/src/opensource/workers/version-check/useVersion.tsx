@@ -96,7 +96,7 @@ const useVersion = () => {
 	// Start polling
 	const startPollingPageUpdate = useCallback(() => {
 		// Skip update prompts outside production
-		if (window?.CONFIG?.MAGIC_APP_ENV !== AppEnv.Production) return
+		if (window?.CONFIG?.DELIGHTFUL_APP_ENV !== AppEnv.Production) return
 		stopPollingPageUpdate()
 		// Reset timer
 		start()

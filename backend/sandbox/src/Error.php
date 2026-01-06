@@ -77,7 +77,7 @@ class Error extends Exception
 
     public const VALID_SUPERGLOBAL_ERROR = 105;
 
-    public const VALID_MAGIC_CONST_ERROR = 106;
+    public const VALID_DELIGHTFUL_CONST_ERROR = 106;
 
     public const VALID_CLASS_ERROR = 107;
 
@@ -108,7 +108,7 @@ class Error extends Exception
 
     public const DEFINE_SUPERGLOBAL_ERROR = 205;
 
-    public const DEFINE_MAGIC_CONST_ERROR = 206;
+    public const DEFINE_DELIGHTFUL_CONST_ERROR = 206;
 
     public const DEFINE_CLASS_ERROR = 207;
 
@@ -139,7 +139,7 @@ class Error extends Exception
 
     public const WHITELIST_SUPERGLOBAL_ERROR = 305;
 
-    public const WHITELIST_MAGIC_CONST_ERROR = 306;
+    public const WHITELIST_DELIGHTFUL_CONST_ERROR = 306;
 
     public const WHITELIST_CLASS_ERROR = 307;
 
@@ -170,7 +170,7 @@ class Error extends Exception
 
     public const BLACKLIST_SUPERGLOBAL_ERROR = 405;
 
-    public const BLACKLIST_MAGIC_CONST_ERROR = 406;
+    public const BLACKLIST_DELIGHTFUL_CONST_ERROR = 406;
 
     public const BLACKLIST_CLASS_ERROR = 407;
 

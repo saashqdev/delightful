@@ -26,7 +26,7 @@ class SubNodeRunnerTest extends ExecuteManagerBaseTest
     {
         $this->markTestSkipped('这里需要数据库存在这个流程，暂时跳过');
         $node = Node::generateTemplate(NodeType::Sub, [
-            'sub_flow_id' => 'MAGIC-FLOW-66d56f57e7b400-71937460',
+            'sub_flow_id' => 'DELIGHTFUL-FLOW-66d56f57e7b400-71937460',
         ]);
         $input = new NodeInput();
         $input->setForm(ComponentFactory::fastCreate(json_decode(
@@ -59,7 +59,7 @@ class SubNodeRunnerTest extends ExecuteManagerBaseTest
                             "expression_value": [
                                 {
                                     "type": "fields",
-                                    "value": "MAGIC-FLOW-NODE-662617c1a07615-9318288811.content",
+                                    "value": "DELIGHTFUL-FLOW-NODE-662617c1a07615-9318288811.content",
                                     "name": "input",
                                     "args": null
                                 }
@@ -118,7 +118,7 @@ JSON,
         $runner = MagicFlowExecutor::getNodeRunner($node);
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
-        $executionData->saveNodeContext('MAGIC-FLOW-NODE-662617c1a07615-9318288811', [
+        $executionData->saveNodeContext('DELIGHTFUL-FLOW-NODE-662617c1a07615-9318288811', [
             'content' => '你好吗',
         ]);
         $runner->execute($vertexResult, $executionData, []);

@@ -51,7 +51,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
             <<<'JSON'
 {
     "id": 1,
-    "code": "MAGIC-FLOW-66ab6425d066a7-xxx",
+    "code": "DELIGHTFUL-FLOW-66ab6425d066a7-xxx",
     "name": "测试循环节点",
     "description": "",
     "icon": "",
@@ -60,7 +60,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
     ],
     "nodes": [
         {
-            "node_id": "MAGIC-FLOW-NODE-66dfe2b8223d85-83130117",
+            "node_id": "DELIGHTFUL-FLOW-NODE-66dfe2b8223d85-83130117",
             "name": "开始节点",
             "description": "",
             "node_type": 1,
@@ -103,14 +103,14 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
                         "output": null,
                         "branch_id": "branch_66a1bd9ea09de",
                         "next_nodes": [
-                            "MAGIC-FLOW-NODE-66dfc283ad6ba2-06103935"
+                            "DELIGHTFUL-FLOW-NODE-66dfc283ad6ba2-06103935"
                         ],
                         "trigger_type": 4
                     }
                 ]
             },
             "next_nodes": [
-                "MAGIC-FLOW-NODE-66dfc283ad6ba2-06103935"
+                "DELIGHTFUL-FLOW-NODE-66dfc283ad6ba2-06103935"
             ],
             "input": {
                 "widget": null,
@@ -122,12 +122,12 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
             }
         },
         {
-            "node_id": "MAGIC-FLOW-NODE-66dfc283ad6ba2-06103935",
+            "node_id": "DELIGHTFUL-FLOW-NODE-66dfc283ad6ba2-06103935",
             "name": "循环",
             "description": "",
             "node_type": 30,
             "meta": {
-                "relation_id": "MAGIC-FLOW-NODE-66dfc3d81b31b1-78900688"
+                "relation_id": "DELIGHTFUL-FLOW-NODE-66dfc3d81b31b1-78900688"
             },
             "params": {
                 "type": "count",
@@ -194,12 +194,12 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
             "output": null
         },
         {
-            "node_id": "MAGIC-FLOW-NODE-66dfc3d81b31b1-78900688",
+            "node_id": "DELIGHTFUL-FLOW-NODE-66dfc3d81b31b1-78900688",
             "name": "循环体",
             "description": "",
             "node_type": 31,
             "meta": {
-                "parent_id": "MAGIC-FLOW-NODE-66dfc283ad6ba2-06103935"
+                "parent_id": "DELIGHTFUL-FLOW-NODE-66dfc283ad6ba2-06103935"
             },
             "params": [],
             "next_nodes": [],
@@ -207,12 +207,12 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
             "output": null
         },
         {
-            "node_id": "MAGIC-FLOW-NODE-66dfc32637e0b5-42629375",
+            "node_id": "DELIGHTFUL-FLOW-NODE-66dfc32637e0b5-42629375",
             "name": "循环开始节点",
             "description": "",
             "node_type": 1,
             "meta": {
-                "parent_id": "MAGIC-FLOW-NODE-66dfc3d81b31b1-78900688"
+                "parent_id": "DELIGHTFUL-FLOW-NODE-66dfc3d81b31b1-78900688"
             },
             "params": {
                 "branches": [
@@ -240,14 +240,14 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
                         "output": null,
                         "branch_id": "branch_66dfc32638192",
                         "next_nodes": [
-                            "MAGIC-FLOW-NODE-66dfddf5198532-03952904"
+                            "DELIGHTFUL-FLOW-NODE-66dfddf5198532-03952904"
                         ],
                         "trigger_type": 5
                     }
                 ]
             },
             "next_nodes": [
-                "MAGIC-FLOW-NODE-66dfddf5198532-03952904"
+                "DELIGHTFUL-FLOW-NODE-66dfddf5198532-03952904"
             ],
             "input": {
                 "widget": null,
@@ -259,12 +259,12 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
             }
         },
         {
-            "node_id": "MAGIC-FLOW-NODE-66dfddf5198532-03952904",
+            "node_id": "DELIGHTFUL-FLOW-NODE-66dfddf5198532-03952904",
             "name": "变量设置",
             "description": "",
             "node_type": 21,
             "meta": {
-                "parent_id": "MAGIC-FLOW-NODE-66dfc3d81b31b1-78900688"
+                "parent_id": "DELIGHTFUL-FLOW-NODE-66dfc3d81b31b1-78900688"
             },
             "params": {
                 "variables": {

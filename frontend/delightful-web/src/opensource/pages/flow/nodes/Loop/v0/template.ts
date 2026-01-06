@@ -1,5 +1,5 @@
 export const v0Template = {
-	node_id: "MAGIC-FLOW-NODE-66a70a8da8ed48-26322039",
+	node_id: "DELIGHTFUL-FLOW-NODE-66a70a8da8ed48-26322039",
 	name: "循环",
 	description: "",
 	node_type: 22,

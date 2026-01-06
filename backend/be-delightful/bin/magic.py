@@ -107,7 +107,7 @@ def print_banner(mode='super'):
     mode_display = "NORMAL" if mode == 'normal' else "SUPER"
     banner = f"""
     ========================================================
-                MAGIC CLI - v6 [{mode_display} MODE]
+                DELIGHTFUL CLI - v6 [{mode_display} MODE]
     ========================================================
     Use this command-line tool to interact with AI agents
     Enter your question, or type 'exit' to quit

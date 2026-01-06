@@ -339,7 +339,7 @@ class MagicUserDomainService extends AbstractContactDomainService
     {
         // 生成缓存键和锁键
         $cacheKey = md5(sprintf('OrganizationUserLogin:auth:%s:env:%s:', $authorization, $magicEnvironmentEntity->getId()));
-        $lockKey = $this->generateLockKey(PlatformType::Magic, $authorization);
+        $lockKey = $this->generateLockKey(PlatformType::Delightful, $authorization);
 
         // 尝试从缓存获取结果
         $cachedResult = $this->getCachedLoginCheckResult($cacheKey);

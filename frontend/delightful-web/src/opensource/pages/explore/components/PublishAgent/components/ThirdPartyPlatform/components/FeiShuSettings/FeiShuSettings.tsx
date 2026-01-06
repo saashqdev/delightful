@@ -88,7 +88,7 @@ export default function FeiShuSettings({ open, onClose, subOpt }: FeiShuSettings
 	})
 
 	const feiShuAddr = useMemo(() => {
-		return `${env("MAGIC_GATEWAY_ADDRESS")}/magic-service/bot/third-platform/chat?key=${
+		return `${env("DELIGHTFUL_GATEWAY_ADDRESS")}/magic-service/bot/third-platform/chat?key=${
 			platformData.key
 		}&platform=${ThirdPartyPlatformType.FeiShu}`
 	}, [platformData])

@@ -38,7 +38,7 @@ export class ChatWebSocket extends EventBus {
 	private socket: WebSocket | null = null
 
 	// WebSocket服务端连接地址
-	private url: string = env("MAGIC_SOCKET_BASE_URL") || ""
+	private url: string = env("DELIGHTFUL_SOCKET_BASE_URL") || ""
 
 	// 当前重连尝试次数计数器
 	private reconnectAttempts = 0

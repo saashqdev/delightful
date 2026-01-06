@@ -49,7 +49,7 @@ class ExecuteManagerBaseTest extends BaseTest
             conversationId: 'unit-test_' . uniqid(),
             executionType: $executionType,
         );
-        $executionData->setFlowCode('MAGIC-FLOW-123456789abcde2-12345601', 'MAGIC-FLOW-VERSION-123456789abcde3-12345602', $operator->getUid());
+        $executionData->setFlowCode('DELIGHTFUL-FLOW-123456789abcde2-12345601', 'DELIGHTFUL-FLOW-VERSION-123456789abcde3-12345602', $operator->getUid());
         $executionData->setDebug(true);
         return $executionData;
     }

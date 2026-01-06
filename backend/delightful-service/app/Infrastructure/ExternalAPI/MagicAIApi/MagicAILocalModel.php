@@ -48,9 +48,9 @@ class MagicAILocalModel extends AbstractModel
         protected ?LoggerInterface $logger = null
     ) {
         if (! empty($this->config['use_official_access_token'])) {
-            $this->accessToken = defined('MAGIC_OFFICIAL_ACCESS_TOKEN') ? MAGIC_OFFICIAL_ACCESS_TOKEN : '';
+            $this->accessToken = defined('DELIGHTFUL_OFFICIAL_ACCESS_TOKEN') ? DELIGHTFUL_OFFICIAL_ACCESS_TOKEN : '';
         } else {
-            $this->accessToken = defined('MAGIC_ACCESS_TOKEN') ? MAGIC_ACCESS_TOKEN : ($this->config['access_token'] ?? '');
+            $this->accessToken = defined('DELIGHTFUL_ACCESS_TOKEN') ? DELIGHTFUL_ACCESS_TOKEN : ($this->config['access_token'] ?? '');
         }
         $this->vectorSize = (int) ($this->config['vector_size'] ?? 2048);
         $this->organizationCode = $this->config['organization_code'] ?? '';

@@ -532,7 +532,7 @@ class Validator
             $name = strval($name);
         }
         if (! $name) {
-            $this->error->validationError('Sandboxed code attempted to call unnamed magic constant!', Error::VALID_MAGIC_CONST_ERROR, null, '');
+            $this->error->validationError('Sandboxed code attempted to call unnamed magic constant!', Error::VALID_DELIGHTFUL_CONST_ERROR, null, '');
         }
         if (is_callable($this->options->validation()->getMagicConstValidator())) {
             return call_user_func_array($this->options->validation()->getMagicConstValidator(), [$name, $this]);
@@ -540,14 +540,14 @@ class Validator
         if (! $this->options->definitions()->isDefinedMagicConst($name)) {
             if ($this->options->accessControl()->hasWhitelistedMagicConsts()) {
                 if (! $this->options->accessControl()->isWhitelistedMagicConst($name)) {
-                    $this->error->validationError("Sandboxed code attempted to call non-whitelisted magic constant: {$original_name}", Error::WHITELIST_MAGIC_CONST_ERROR, null, $original_name);
+                    $this->error->validationError("Sandboxed code attempted to call non-whitelisted magic constant: {$original_name}", Error::WHITELIST_DELIGHTFUL_CONST_ERROR, null, $original_name);
                 }
             } elseif ($this->options->accessControl()->hasBlacklistedMagicConsts()) {
                 if ($this->options->accessControl()->isBlacklistedMagicConst($name)) {
-                    $this->error->validationError("Sandboxed code attempted to call blacklisted magic constant: {$original_name}", Error::BLACKLIST_MAGIC_CONST_ERROR, null, $original_name);
+                    $this->error->validationError("Sandboxed code attempted to call blacklisted magic constant: {$original_name}", Error::BLACKLIST_DELIGHTFUL_CONST_ERROR, null, $original_name);
                 }
             } else {
-                $this->error->validationError("Sandboxed code attempted to call invalid magic constant: {$original_name}", Error::VALID_MAGIC_CONST_ERROR, null, $original_name);
+                $this->error->validationError("Sandboxed code attempted to call invalid magic constant: {$original_name}", Error::VALID_DELIGHTFUL_CONST_ERROR, null, $original_name);
             }
         }
         return true;

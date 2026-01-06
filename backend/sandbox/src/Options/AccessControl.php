@@ -22,7 +22,7 @@ class AccessControl
         KeywordConstants::GLOBALS => [],
         KeywordConstants::SUPERGLOBALS => [],
         KeywordConstants::CONSTANTS => [],
-        KeywordConstants::MAGIC_CONSTANTS => [],
+        KeywordConstants::Delightful_CONSTANTS => [],
         KeywordConstants::NAMESPACES => [],
         KeywordConstants::ALIASES => [],
         KeywordConstants::CLASSES => [],
@@ -43,7 +43,7 @@ class AccessControl
         KeywordConstants::GLOBALS => [],
         KeywordConstants::SUPERGLOBALS => [],
         KeywordConstants::CONSTANTS => [],
-        KeywordConstants::MAGIC_CONSTANTS => [],
+        KeywordConstants::Delightful_CONSTANTS => [],
         KeywordConstants::NAMESPACES => [],
         KeywordConstants::ALIASES => [],
         KeywordConstants::CLASSES => [],
@@ -501,7 +501,7 @@ class AccessControl
      */
     public function hasWhitelistedMagicConsts(): int
     {
-        return count($this->whitelist[KeywordConstants::MAGIC_CONSTANTS]);
+        return count($this->whitelist[KeywordConstants::Delightful_CONSTANTS]);
     }
 
     /** Query whether PHPSandbox instance has blacklisted magic constants.
@@ -510,7 +510,7 @@ class AccessControl
      */
     public function hasBlacklistedMagicConsts(): int
     {
-        return count($this->blacklist[KeywordConstants::MAGIC_CONSTANTS]);
+        return count($this->blacklist[KeywordConstants::Delightful_CONSTANTS]);
     }
 
     /** Check if PHPSandbox instance has whitelisted magic constant name set.
@@ -522,7 +522,7 @@ class AccessControl
     public function isWhitelistedMagicConst(string $name): bool
     {
         $name = $this->normalizeMagicConst($name);
-        return isset($this->whitelist[KeywordConstants::MAGIC_CONSTANTS][$name]);
+        return isset($this->whitelist[KeywordConstants::Delightful_CONSTANTS][$name]);
     }
 
     /** Check if PHPSandbox instance has blacklisted magic constant name set.
@@ -534,7 +534,7 @@ class AccessControl
     public function isBlacklistedMagicConst(string $name): bool
     {
         $name = $this->normalizeMagicConst($name);
-        return isset($this->blacklist[KeywordConstants::MAGIC_CONSTANTS][$name]);
+        return isset($this->blacklist[KeywordConstants::Delightful_CONSTANTS][$name]);
     }
 
     /** Query whether PHPSandbox instance has whitelisted namespaces.
@@ -1467,7 +1467,7 @@ class AccessControl
             return $this->whitelistMagicConst(func_get_args());
         }
         $name = $this->normalizeMagicConst($name);
-        return $this->whitelist(KeywordConstants::MAGIC_CONSTANTS, $name);
+        return $this->whitelist(KeywordConstants::Delightful_CONSTANTS, $name);
     }
 
     /** Blacklist magic constant.
@@ -1484,7 +1484,7 @@ class AccessControl
             return $this->blacklistMagicConst(func_get_args());
         }
         $name = $this->normalizeMagicConst($name);
-        return $this->blacklist(KeywordConstants::MAGIC_CONSTANTS, $name);
+        return $this->blacklist(KeywordConstants::Delightful_CONSTANTS, $name);
     }
 
     /** Remove magic constant from whitelist.
@@ -1501,7 +1501,7 @@ class AccessControl
             return $this->dewhitelistMagicConst(func_get_args());
         }
         $name = $this->normalizeMagicConst($name);
-        return $this->dewhitelist(KeywordConstants::MAGIC_CONSTANTS, $name);
+        return $this->dewhitelist(KeywordConstants::Delightful_CONSTANTS, $name);
     }
 
     /** Remove magic constant from blacklist.
@@ -1518,7 +1518,7 @@ class AccessControl
             return $this->deblacklistMagicConst(func_get_args());
         }
         $name = $this->normalizeMagicConst($name);
-        return $this->deblacklist(KeywordConstants::MAGIC_CONSTANTS, $name);
+        return $this->deblacklist(KeywordConstants::Delightful_CONSTANTS, $name);
     }
 
     /** Whitelist namespace.

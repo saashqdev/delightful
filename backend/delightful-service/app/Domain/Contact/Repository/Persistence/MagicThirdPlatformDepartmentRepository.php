@@ -116,7 +116,7 @@ class MagicThirdPlatformDepartmentRepository implements MagicThirdPlatformDepart
     {
         // 对于前端来说, -1 表示根部门信息.
         $query = $this->model::query()->where('magic_organization_code', $organizationCode);
-        if ($departmentId === PlatformRootDepartmentId::Magic) {
+        if ($departmentId === PlatformRootDepartmentId::Delightful) {
             $query->where(function (Builder $query) {
                 $query->where('third_parent_department_id', '=', '')->orWhereNull('third_parent_department_id');
             });

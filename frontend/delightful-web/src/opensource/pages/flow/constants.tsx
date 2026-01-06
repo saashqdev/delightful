@@ -69,7 +69,7 @@ export enum customNodeType {
 	Instructions = "1001",
 }
 
-export const MAGIC_FLOW_ID_PREFIX = "MAGIC-FLOW-"
+export const DELIGHTFUL_FLOW_ID_PREFIX = "DELIGHTFUL-FLOW-"
 
 // 需要动态生成output的节点
 export const DynamicOutputNodeTypes = [

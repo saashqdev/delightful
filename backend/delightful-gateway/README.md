@@ -116,7 +116,7 @@ chmod +x deploy.sh
 
 #### 目标URL白名单配置
 
-`MAGIC_GATEWAY_ALLOWED_TARGET_URLS` 用于配置允许访问的目标URL白名单规则。
+`DELIGHTFUL_GATEWAY_ALLOWED_TARGET_URLS` 用于配置允许访问的目标URL白名单规则。
 
 **格式说明：**
 - 使用 `|` 分隔多个规则
@@ -130,10 +130,10 @@ chmod +x deploy.sh
 **示例：**
 ```bash
 # 允许特定域名
-MAGIC_GATEWAY_ALLOWED_TARGET_URLS=domain:example.com@示例服务|domain:openai.com@OpenAI API
+DELIGHTFUL_GATEWAY_ALLOWED_TARGET_URLS=domain:example.com@示例服务|domain:openai.com@OpenAI API
 
 # 混合规则
-MAGIC_GATEWAY_ALLOWED_TARGET_URLS=domain:xxxx.cn@内部服务|prefix:https://api.github.com/@GitHub API
+DELIGHTFUL_GATEWAY_ALLOWED_TARGET_URLS=domain:xxxx.cn@内部服务|prefix:https://api.github.com/@GitHub API
 ```
 
 **安全特性：**
@@ -143,7 +143,7 @@ MAGIC_GATEWAY_ALLOWED_TARGET_URLS=domain:xxxx.cn@内部服务|prefix:https://api
 
 #### 允许的内网IP配置
 
-`MAGIC_GATEWAY_ALLOWED_TARGET_IP` 用于在多节点部署场景下，允许部分内网IP通过验证。
+`DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP` 用于在多节点部署场景下，允许部分内网IP通过验证。
 
 **格式说明：**
 - 支持多种分隔符：逗号（`,`）、分号（`;`）、换行符（`\n`）、空格（` `）
@@ -158,22 +158,22 @@ MAGIC_GATEWAY_ALLOWED_TARGET_URLS=domain:xxxx.cn@内部服务|prefix:https://api
 
 ```bash
 # 单节点部署 - 允许特定IP和网段
-MAGIC_GATEWAY_ALLOWED_TARGET_IP=192.168.1.1,10.0.0.0/8
+DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP=192.168.1.1,10.0.0.0/8
 
 # 多节点部署 - 逗号分隔（推荐）
-MAGIC_GATEWAY_ALLOWED_TARGET_IP=10.0.1.0/24,10.0.2.0/24,10.0.3.0/24,192.168.1.0/24
+DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP=10.0.1.0/24,10.0.2.0/24,10.0.3.0/24,192.168.1.0/24
 
 # 多节点部署 - 换行符分隔（适合配置文件）
-MAGIC_GATEWAY_ALLOWED_TARGET_IP="10.0.1.0/24
+DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP="10.0.1.0/24
 10.0.2.0/24
 10.0.3.0/24
 192.168.1.0/24"
 
 # 混合格式
-MAGIC_GATEWAY_ALLOWED_TARGET_IP=192.168.1.1,10.0.0.0/8;172.16.0.0/12 192.168.2.0/24
+DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP=192.168.1.1,10.0.0.0/8;172.16.0.0/12 192.168.2.0/24
 
 # 支持IPv6
-MAGIC_GATEWAY_ALLOWED_TARGET_IP=10.0.0.0/8,2001:db8::/32,::1
+DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP=10.0.0.0/8,2001:db8::/32,::1
 ```
 
 **注意事项：**
@@ -189,7 +189,7 @@ MAGIC_GATEWAY_ALLOWED_TARGET_IP=10.0.0.0/8,2001:db8::/32,::1
 JWT_SECRET=your-secret-key-change-me
 API_GATEWAY_VERSION=1.0.0
 DEFAULT_API_URL=https://api.default-service.com
-MAGIC_GATEWAY_API_KEY=your-gateway-api-key-here
+DELIGHTFUL_GATEWAY_API_KEY=your-gateway-api-key-here
 
 # OpenAI 服务配置
 OPENAI_API_KEY=sk-xxxx
@@ -197,9 +197,9 @@ OPENAI_API_BASE_URL=https://api.openai.com/v1
 OPENAI_MODEL=gpt-4
 
 # Magic 服务配置
-MAGIC_API_KEY=xxx
-MAGIC_API_BASE_URL=https://api.magic.com/v1
-MAGIC_MODEL=gpt-4o-global
+DELIGHTFUL_API_KEY=xxx
+DELIGHTFUL_API_BASE_URL=https://api.magic.com/v1
+DELIGHTFUL_MODEL=gpt-4o-global
 
 # DeepSeek 服务配置
 DEEPSEEK_API_KEY=xxxxx
@@ -214,7 +214,7 @@ AZURE_OPENAI_EMBEDDING_DEPLOYMENT=example-text-embedding
 AZURE_OPENAI_EMBEDDING_API_VERSION=2023-05-15
 ```
 
-**重要：** `MAGIC_GATEWAY_API_KEY` 是一个关键安全凭证，仅用于 `/auth` 接口的认证。只有获取令牌时需要提供此API密钥，获取令牌后的其他请求都使用获得的令牌进行认证，不需要再提供此API密钥。
+**重要：** `DELIGHTFUL_GATEWAY_API_KEY` 是一个关键安全凭证，仅用于 `/auth` 接口的认证。只有获取令牌时需要提供此API密钥，获取令牌后的其他请求都使用获得的令牌进行认证，不需要再提供此API密钥。
 
 ### 容器环境变量
 
@@ -225,9 +225,9 @@ OPENAI_API_KEY="OPENAI_API_KEY"
 OPENAI_API_BASE_URL="OPENAI_API_BASE_URL"
 OPENAI_MODEL="OPENAI_MODEL"
 
-MAGIC_API_KEY="MAGIC_API_KEY"
-MAGIC_API_BASE_URL="MAGIC_API_BASE_URL"
-MAGIC_MODEL="MAGIC_MODEL"
+DELIGHTFUL_API_KEY="DELIGHTFUL_API_KEY"
+DELIGHTFUL_API_BASE_URL="DELIGHTFUL_API_BASE_URL"
+DELIGHTFUL_MODEL="DELIGHTFUL_MODEL"
 ```
 
 ## API 使用说明
@@ -236,7 +236,7 @@ MAGIC_MODEL="MAGIC_MODEL"
 
 **重要提示：**
 1. 获取临时令牌的请求**只能**从宿主机本地（localhost/127.0.0.1）发起，容器内无法直接获取令牌。这是出于安全考虑设计的。
-2. 获取令牌时**必须**提供有效的 `X-Gateway-API-Key` 请求头，其值必须与环境变量中的 `MAGIC_GATEWAY_API_KEY` 匹配。
+2. 获取令牌时**必须**提供有效的 `X-Gateway-API-Key` 请求头，其值必须与环境变量中的 `DELIGHTFUL_GATEWAY_API_KEY` 匹配。
 
 ```bash
 curl -X POST http://localhost:8000/auth \
@@ -271,7 +271,7 @@ curl "http://host.docker.internal:8000/env?vars=OPENAI_API_KEY,OPENAI_MODEL" \
 响应示例：
 ```json
 {
-  "available_vars": ["OPENAI_API_KEY", "OPENAI_MODEL", "OPENAI_API_BASE_URL", "MAGIC_API_KEY", "MAGIC_MODEL", "API_GATEWAY_VERSION"],
+  "available_vars": ["OPENAI_API_KEY", "OPENAI_MODEL", "OPENAI_API_BASE_URL", "DELIGHTFUL_API_KEY", "DELIGHTFUL_MODEL", "API_GATEWAY_VERSION"],
   "message": "不允许直接获取环境变量值，请通过API代理请求使用这些变量"
 }
 ```
@@ -293,7 +293,7 @@ curl http://localhost:8000/services \
       "default_model": "gpt-4"
     },
     {
-      "name": "MAGIC",
+      "name": "DELIGHTFUL",
       "base_url": "api.magic.com",
       "default_model": "gpt-4o-global"
     },
@@ -337,11 +337,11 @@ curl -X POST http://host.docker.internal:8000/OPENAI_API_BASE_URL/v1/chat/comple
   }'
 
 # 使用 Magic 服务
-curl -X POST http://host.docker.internal:8000/MAGIC_API_BASE_URL/v1/chat/completions \
+curl -X POST http://host.docker.internal:8000/DELIGHTFUL_API_BASE_URL/v1/chat/completions \
   -H "Magic-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "MAGIC_MODEL",
+    "model": "DELIGHTFUL_MODEL",
     "messages": [
       {"role": "user", "content": "Hello!"}
     ]
@@ -367,7 +367,7 @@ curl -X POST http://host.docker.internal:8000/magic/v1/chat/completions \
   -H "Magic-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "env:MAGIC_MODEL",
+    "model": "env:DELIGHTFUL_MODEL",
     "messages": [
       {"role": "user", "content": "Hello!"}
     ]

@@ -139,7 +139,7 @@ class VariableTest extends TestCase
     public function testBlacklistedMagicConsts()
     {
         $this->expectException(Error::class);
-        $this->expectExceptionCode(Error::BLACKLIST_MAGIC_CONST_ERROR);
+        $this->expectExceptionCode(Error::BLACKLIST_DELIGHTFUL_CONST_ERROR);
         $options = new SandboxOptions();
         $options->accessControl()->blacklistMagicConst('__LINE__');
         $execution = '<?php

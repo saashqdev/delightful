@@ -62,7 +62,7 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
     {
         $userAuthorization = $this->getAuthorization();
         /* @phpstan-ignore-next-line */
-        $models = $this->llmAppService->models(accessToken: MAGIC_ACCESS_TOKEN, withInfo: true, type: 'embedding', businessParams: [
+        $models = $this->llmAppService->models(accessToken: DELIGHTFUL_ACCESS_TOKEN, withInfo: true, type: 'embedding', businessParams: [
             'organization_code' => $userAuthorization->getOrganizationCode(),
             'user_id' => $userAuthorization->getId(),
         ]);

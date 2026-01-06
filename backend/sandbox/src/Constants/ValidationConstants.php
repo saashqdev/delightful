@@ -19,7 +19,7 @@ class ValidationConstants
 
     public const CONSTANT = 'constant';
 
-    public const MAGIC_CONSTANT = 'magic_constant';
+    public const DELIGHTFUL_CONSTANT = 'magic_constant';
 
     public const NAMESPACE = 'namespace';
 

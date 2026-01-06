@@ -80,13 +80,13 @@ if [ -f "bin/magic.lock" ]; then
     SKIP_LANGUAGE_SELECTION=true
     SKIP_INSTALLATION=true
 
-    # If super-magic config exists, set MAGIC_USE_SUPER_MAGIC automatically
+    # If super-magic config exists, set DELIGHTFUL_USE_SUPER_DELIGHTFUL automatically
     if [ -f "bin/use_super_magic" ]; then
         # Use fixed profile parameters instead of reading from a file
-        export MAGIC_USE_SUPER_MAGIC=" --profile magic-gateway --profile sandbox-gateway"
+        export DELIGHTFUL_USE_SUPER_DELIGHTFUL=" --profile magic-gateway --profile sandbox-gateway"
         bilingual "Super Magic configuration detected, Super Magic related services will be started automatically" "Super Magic configuration detected, Super Magic related services will be started automatically"
     else
-        export MAGIC_USE_SUPER_MAGIC=""
+        export DELIGHTFUL_USE_SUPER_DELIGHTFUL=""
     fi
 else
     SKIP_LANGUAGE_SELECTION=false
@@ -149,9 +149,9 @@ if [ "$SKIP_INSTALLATION" = "true" ]; then
 
     # Set default values for required variables
     if [ -f ".env_super_magic" ]; then
-        export MAGIC_USE_SUPER_MAGIC=""
+        export DELIGHTFUL_USE_SUPER_DELIGHTFUL=""
     else
-        export MAGIC_USE_SUPER_MAGIC=""
+        export DELIGHTFUL_USE_SUPER_DELIGHTFUL=""
     fi
 fi
 
@@ -264,9 +264,9 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
         bilingual "Do you want to install Super Magic service?" "Do you want to install Super Magic service?"
         bilingual "1. Yes, install Super Magic service" "1. Yes, install Super Magic service"
         bilingual "2. No, don't install Super Magic service" "2. No, don't install Super Magic service"
-        read -p "$(bilingual "Please enter option number [1/2]: " "Please enter option number [1/2]: ")" SUPER_MAGIC_OPTION
+        read -p "$(bilingual "Please enter option number [1/2]: " "Please enter option number [1/2]: ")" SUPER_DELIGHTFUL_OPTION
 
-        if [ "$SUPER_MAGIC_OPTION" = "1" ]; then
+        if [ "$SUPER_DELIGHTFUL_OPTION" = "1" ]; then
             bilingual "You have chosen to install Super Magic service." "You have chosen to install Super Magic service."
 
             # Check if .env_super_magic exists
@@ -288,14 +288,14 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
             fi
 
             # Add profiles for super-magic, magic-gateway and sandbox-gateway
-            export MAGIC_USE_SUPER_MAGIC=" --profile magic-gateway --profile sandbox-gateway"
+            export DELIGHTFUL_USE_SUPER_DELIGHTFUL=" --profile magic-gateway --profile sandbox-gateway"
             # Record the super-magic configuration for automatic loading next start
-            echo "$MAGIC_USE_SUPER_MAGIC" > bin/use_super_magic
+            echo "$DELIGHTFUL_USE_SUPER_DELIGHTFUL" > bin/use_super_magic
             bilingual "Super Magic, Magic Gateway and Sandbox Gateway services will be started." "Super Magic, Magic Gateway and Sandbox Gateway services will be started."
             bilingual "Your choice has been recorded, Super Magic related services will be loaded automatically next time." "Your choice has been recorded, Super Magic related services will be loaded automatically next time."
         else
             bilingual "You have chosen not to install Super Magic service." "You have chosen not to install Super Magic service."
-            export MAGIC_USE_SUPER_MAGIC=""
+            export DELIGHTFUL_USE_SUPER_DELIGHTFUL=""
             # Remove any previous super-magic configuration file if present
             if [ -f "bin/use_super_magic" ]; then
                 rm bin/use_super_magic
@@ -382,26 +382,26 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
             if [ -n "$DOMAIN_ADDRESS" ]; then
                 bilingual "Updating environment variables with domain: $DOMAIN_ADDRESS..." "Updating environment variables with domain: $DOMAIN_ADDRESS..."
 
-                # Update MAGIC_SOCKET_BASE_URL and MAGIC_SERVICE_BASE_URL
+                # Update DELIGHTFUL_SOCKET_BASE_URL and DELIGHTFUL_SERVICE_BASE_URL
                 if [ "$(uname -s)" == "Darwin" ]; then
                     # macOS version
-                    sed -i '' "s|^MAGIC_SOCKET_BASE_URL=ws://localhost:9502|MAGIC_SOCKET_BASE_URL=ws://$DOMAIN_ADDRESS|" .env
-                    sed -i '' "s|^MAGIC_SERVICE_BASE_URL=http://localhost|MAGIC_SERVICE_BASE_URL=http://$DOMAIN_ADDRESS|" .env
+                    sed -i '' "s|^DELIGHTFUL_SOCKET_BASE_URL=ws://localhost:9502|DELIGHTFUL_SOCKET_BASE_URL=ws://$DOMAIN_ADDRESS|" .env
+                    sed -i '' "s|^DELIGHTFUL_SERVICE_BASE_URL=http://localhost|DELIGHTFUL_SERVICE_BASE_URL=http://$DOMAIN_ADDRESS|" .env
                     # Update FILE_LOCAL_READ_HOST and FILE_LOCAL_WRITE_HOST
                     sed -i '' "s|^FILE_LOCAL_READ_HOST=http://127.0.0.1/files|FILE_LOCAL_READ_HOST=http://$DOMAIN_ADDRESS/files|" .env
                     sed -i '' "s|^FILE_LOCAL_WRITE_HOST=http://127.0.0.1|FILE_LOCAL_WRITE_HOST=http://$DOMAIN_ADDRESS|" .env
                 else
                     # Linux version
-                    sed -i "s|^MAGIC_SOCKET_BASE_URL=ws://localhost:9502|MAGIC_SOCKET_BASE_URL=ws://$DOMAIN_ADDRESS|" .env
-                    sed -i "s|^MAGIC_SERVICE_BASE_URL=http://localhost|MAGIC_SERVICE_BASE_URL=http://$DOMAIN_ADDRESS|" .env
+                    sed -i "s|^DELIGHTFUL_SOCKET_BASE_URL=ws://localhost:9502|DELIGHTFUL_SOCKET_BASE_URL=ws://$DOMAIN_ADDRESS|" .env
+                    sed -i "s|^DELIGHTFUL_SERVICE_BASE_URL=http://localhost|DELIGHTFUL_SERVICE_BASE_URL=http://$DOMAIN_ADDRESS|" .env
                     # Update FILE_LOCAL_READ_HOST and FILE_LOCAL_WRITE_HOST
                     sed -i "s|^FILE_LOCAL_READ_HOST=http://127.0.0.1/files|FILE_LOCAL_READ_HOST=http://$DOMAIN_ADDRESS/files|" .env
                     sed -i "s|^FILE_LOCAL_WRITE_HOST=http://127.0.0.1|FILE_LOCAL_WRITE_HOST=http://$DOMAIN_ADDRESS|" .env
                 fi
 
                 bilingual "Environment variables updated:" "Environment variables updated:"
-                echo "MAGIC_SOCKET_BASE_URL=ws://$DOMAIN_ADDRESS"
-                echo "MAGIC_SERVICE_BASE_URL=http://$DOMAIN_ADDRESS"
+                echo "DELIGHTFUL_SOCKET_BASE_URL=ws://$DOMAIN_ADDRESS"
+                echo "DELIGHTFUL_SERVICE_BASE_URL=http://$DOMAIN_ADDRESS"
                 echo "FILE_LOCAL_READ_HOST=http://$DOMAIN_ADDRESS/files"
                 echo "FILE_LOCAL_WRITE_HOST=http://$DOMAIN_ADDRESS"
 
@@ -477,26 +477,26 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
             if [[ "$USE_DETECTED_IP" =~ ^[Yy]$ ]]; then
                 bilingual "Updating environment variables..." "Updating environment variables..."
 
-                # Update MAGIC_SOCKET_BASE_URL and MAGIC_SERVICE_BASE_URL
+                # Update DELIGHTFUL_SOCKET_BASE_URL and DELIGHTFUL_SERVICE_BASE_URL
                 if [ "$(uname -s)" == "Darwin" ]; then
                     # macOS version
-                    sed -i '' "s|^MAGIC_SOCKET_BASE_URL=ws://localhost:9502|MAGIC_SOCKET_BASE_URL=ws://$PUBLIC_IP|" .env
-                    sed -i '' "s|^MAGIC_SERVICE_BASE_URL=http://localhost|MAGIC_SERVICE_BASE_URL=http://$PUBLIC_IP|" .env
+                    sed -i '' "s|^DELIGHTFUL_SOCKET_BASE_URL=ws://localhost:9502|DELIGHTFUL_SOCKET_BASE_URL=ws://$PUBLIC_IP|" .env
+                    sed -i '' "s|^DELIGHTFUL_SERVICE_BASE_URL=http://localhost|DELIGHTFUL_SERVICE_BASE_URL=http://$PUBLIC_IP|" .env
                     # Update FILE_LOCAL_READ_HOST and FILE_LOCAL_WRITE_HOST
                     sed -i '' "s|^FILE_LOCAL_READ_HOST=http://127.0.0.1/files|FILE_LOCAL_READ_HOST=http://$PUBLIC_IP/files|" .env
                     sed -i '' "s|^FILE_LOCAL_WRITE_HOST=http://127.0.0.1|FILE_LOCAL_WRITE_HOST=http://$PUBLIC_IP|" .env
                 else
                     # Linux version
-                    sed -i "s|^MAGIC_SOCKET_BASE_URL=ws://localhost:9502|MAGIC_SOCKET_BASE_URL=ws://$PUBLIC_IP|" .env
-                    sed -i "s|^MAGIC_SERVICE_BASE_URL=http://localhost|MAGIC_SERVICE_BASE_URL=http://$PUBLIC_IP|" .env
+                    sed -i "s|^DELIGHTFUL_SOCKET_BASE_URL=ws://localhost:9502|DELIGHTFUL_SOCKET_BASE_URL=ws://$PUBLIC_IP|" .env
+                    sed -i "s|^DELIGHTFUL_SERVICE_BASE_URL=http://localhost|DELIGHTFUL_SERVICE_BASE_URL=http://$PUBLIC_IP|" .env
                     # Update FILE_LOCAL_READ_HOST and FILE_LOCAL_WRITE_HOST
                     sed -i "s|^FILE_LOCAL_READ_HOST=http://127.0.0.1/files|FILE_LOCAL_READ_HOST=http://$PUBLIC_IP/files|" .env
                     sed -i "s|^FILE_LOCAL_WRITE_HOST=http://127.0.0.1|FILE_LOCAL_WRITE_HOST=http://$PUBLIC_IP|" .env
                 fi
 
                 bilingual "Environment variables updated:" "Environment variables updated:"
-                echo "MAGIC_SOCKET_BASE_URL=ws://$PUBLIC_IP"
-                echo "MAGIC_SERVICE_BASE_URL=http://$PUBLIC_IP"
+                echo "DELIGHTFUL_SOCKET_BASE_URL=ws://$PUBLIC_IP"
+                echo "DELIGHTFUL_SERVICE_BASE_URL=http://$PUBLIC_IP"
                 echo "FILE_LOCAL_READ_HOST=http://$PUBLIC_IP/files"
                 echo "FILE_LOCAL_WRITE_HOST=http://$PUBLIC_IP"
 
@@ -531,26 +531,26 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
                 if [ -n "$MANUAL_IP_ADDRESS" ]; then
                     bilingual "Updating environment variables with IP: $MANUAL_IP_ADDRESS..." "Updating environment variables with IP: $MANUAL_IP_ADDRESS..."
 
-                    # Update MAGIC_SOCKET_BASE_URL and MAGIC_SERVICE_BASE_URL
+                    # Update DELIGHTFUL_SOCKET_BASE_URL and DELIGHTFUL_SERVICE_BASE_URL
                     if [ "$(uname -s)" == "Darwin" ]; then
                         # macOS version
-                        sed -i '' "s|^MAGIC_SOCKET_BASE_URL=ws://localhost:9502|MAGIC_SOCKET_BASE_URL=ws://$MANUAL_IP_ADDRESS|" .env
-                        sed -i '' "s|^MAGIC_SERVICE_BASE_URL=http://localhost|MAGIC_SERVICE_BASE_URL=http://$MANUAL_IP_ADDRESS|" .env
+                        sed -i '' "s|^DELIGHTFUL_SOCKET_BASE_URL=ws://localhost:9502|DELIGHTFUL_SOCKET_BASE_URL=ws://$MANUAL_IP_ADDRESS|" .env
+                        sed -i '' "s|^DELIGHTFUL_SERVICE_BASE_URL=http://localhost|DELIGHTFUL_SERVICE_BASE_URL=http://$MANUAL_IP_ADDRESS|" .env
                         # Update FILE_LOCAL_READ_HOST and FILE_LOCAL_WRITE_HOST
                         sed -i '' "s|^FILE_LOCAL_READ_HOST=http://127.0.0.1/files|FILE_LOCAL_READ_HOST=http://$MANUAL_IP_ADDRESS/files|" .env
                         sed -i '' "s|^FILE_LOCAL_WRITE_HOST=http://127.0.0.1|FILE_LOCAL_WRITE_HOST=http://$MANUAL_IP_ADDRESS|" .env
                     else
                         # Linux version
-                        sed -i "s|^MAGIC_SOCKET_BASE_URL=ws://localhost:9502|MAGIC_SOCKET_BASE_URL=ws://$MANUAL_IP_ADDRESS|" .env
-                        sed -i "s|^MAGIC_SERVICE_BASE_URL=http://localhost|MAGIC_SERVICE_BASE_URL=http://$MANUAL_IP_ADDRESS|" .env
+                        sed -i "s|^DELIGHTFUL_SOCKET_BASE_URL=ws://localhost:9502|DELIGHTFUL_SOCKET_BASE_URL=ws://$MANUAL_IP_ADDRESS|" .env
+                        sed -i "s|^DELIGHTFUL_SERVICE_BASE_URL=http://localhost|DELIGHTFUL_SERVICE_BASE_URL=http://$MANUAL_IP_ADDRESS|" .env
                         # Update FILE_LOCAL_READ_HOST and FILE_LOCAL_WRITE_HOST
                         sed -i "s|^FILE_LOCAL_READ_HOST=http://127.0.0.1/files|FILE_LOCAL_READ_HOST=http://$MANUAL_IP_ADDRESS/files|" .env
                         sed -i "s|^FILE_LOCAL_WRITE_HOST=http://127.0.0.1|FILE_LOCAL_WRITE_HOST=http://$MANUAL_IP_ADDRESS|" .env
                     fi
 
                     bilingual "Environment variables updated:" "Environment variables updated:"
-                    echo "MAGIC_SOCKET_BASE_URL=ws://$MANUAL_IP_ADDRESS"
-                    echo "MAGIC_SERVICE_BASE_URL=http://$MANUAL_IP_ADDRESS"
+                    echo "DELIGHTFUL_SOCKET_BASE_URL=ws://$MANUAL_IP_ADDRESS"
+                    echo "DELIGHTFUL_SERVICE_BASE_URL=http://$MANUAL_IP_ADDRESS"
                     echo "FILE_LOCAL_READ_HOST=http://$MANUAL_IP_ADDRESS/files"
                     echo "FILE_LOCAL_WRITE_HOST=http://$MANUAL_IP_ADDRESS"
 
@@ -660,13 +660,13 @@ restart_services() {
 # Show services status
 show_status() {
     bilingual "Services status:" "Services status:"
-    docker compose $MAGIC_USE_SUPER_MAGIC ps
+    docker compose $DELIGHTFUL_USE_SUPER_DELIGHTFUL ps
 }
 
 # Show services logs
 show_logs() {
     bilingual "Showing services logs:" "Showing services logs:"
-    docker compose $MAGIC_USE_SUPER_MAGIC logs -f
+    docker compose $DELIGHTFUL_USE_SUPER_DELIGHTFUL logs -f
 }
 
 # Start only Super Magic service

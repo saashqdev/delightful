@@ -475,7 +475,7 @@ export const yaml2json = (yamlDSL: FlowDSL): Flow => {
 		const flow: Flow = {
 			id:
 				yamlDSL.flow.id ||
-				`MAGIC-FLOW-${uuidv4().replace(/-/g, "")}-${Date.now().toString().slice(-8)}`,
+				`DELIGHTFUL-FLOW-${uuidv4().replace(/-/g, "")}-${Date.now().toString().slice(-8)}`,
 			name: yamlDSL.flow.name,
 			description: yamlDSL.flow.description || "",
 			icon: yamlDSL.flow.icon || "",

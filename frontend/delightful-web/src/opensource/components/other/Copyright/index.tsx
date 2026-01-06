@@ -30,14 +30,14 @@ const Copyright = memo(function Copyright({ className }: HTMLAttributes<HTMLDivE
 	const { t } = useTranslation("login")
 
 	const IcpCode = useMemo(() => {
-		if (!env("MAGIC_ICP_CODE")) {
+		if (!env("DELIGHTFUL_ICP_CODE")) {
 			return null
 		}
 		return (
 			<>
 				<span>|</span>
 				<a href="https://beian.miit.gov.cn" style={{ color: "inherit" }}>
-					{env("MAGIC_ICP_CODE")}
+					{env("DELIGHTFUL_ICP_CODE")}
 				</a>
 			</>
 		)
@@ -45,7 +45,7 @@ const Copyright = memo(function Copyright({ className }: HTMLAttributes<HTMLDivE
 
 	return (
 		<Flex align="center" justify="center" className={cx(styles.brand, className)}>
-			<span>{env("MAGIC_COPYRIGHT") ?? t("copyright")}</span>
+			<span>{env("DELIGHTFUL_COPYRIGHT") ?? t("copyright")}</span>
 			{IcpCode}
 		</Flex>
 	)

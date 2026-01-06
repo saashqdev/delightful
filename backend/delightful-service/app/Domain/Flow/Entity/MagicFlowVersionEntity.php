@@ -41,7 +41,7 @@ class MagicFlowVersionEntity extends AbstractEntity
     {
         $this->requiredValidate();
 
-        $this->code = Code::MagicFlowVersion->gen();
+        $this->code = Code::DelightfulFlowVersion->gen();
         $this->modifier = $this->creator;
         $this->updatedAt = $this->createdAt;
 

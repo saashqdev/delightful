@@ -66,7 +66,7 @@ export const useUpload = <F extends FileUploadData>({
 					 * Ensures correct auth after switching organizations.
 					 */
 					const url = `${
-						env("MAGIC_SERVICE_BASE_URL") +
+						env("DELIGHTFUL_SERVICE_BASE_URL") +
 						genRequestUrl(RequestUrl.getUploadCredentials)
 					}?organization_code=${organizationCode}`
 

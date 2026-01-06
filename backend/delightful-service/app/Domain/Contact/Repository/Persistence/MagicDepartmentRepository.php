@@ -135,7 +135,7 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
     {
         // 对于前端来说, -1 表示根部门信息.
         $query = $this->model->newQuery()->where('organization_code', $organizationCode);
-        if ($departmentId === PlatformRootDepartmentId::Magic) {
+        if ($departmentId === PlatformRootDepartmentId::Delightful) {
             $query->where(function (Builder $query) {
                 $query->where('parent_department_id', '=', '')->orWhereNull('parent_department_id');
             });
@@ -295,7 +295,7 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
     {
         $department = $this->model->newQuery()
             ->where('organization_code', $organizationCode)
-            ->where('department_id', '=', PlatformRootDepartmentId::Magic)
+            ->where('department_id', '=', PlatformRootDepartmentId::Delightful)
             ->first();
 
         return $department?->department_id;
@@ -314,7 +314,7 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
 
         $departments = $this->model->newQuery()
             ->whereIn('organization_code', $organizationCodes)
-            ->where('department_id', '=', PlatformRootDepartmentId::Magic);
+            ->where('department_id', '=', PlatformRootDepartmentId::Delightful);
 
         $departments = Db::select($departments->toSql(), $departments->getBindings());
         return $this->getDepartmentsEntity($departments);
@@ -331,7 +331,7 @@ class MagicDepartmentRepository implements MagicDepartmentRepositoryInterface
     public function getAllOrganizationsRootDepartments(int $page = 1, int $pageSize = 20, string $organizationName = '', array $organizationCodes = []): array
     {
         $query = $this->model->newQuery()
-            ->where('department_id', '=', PlatformRootDepartmentId::Magic)
+            ->where('department_id', '=', PlatformRootDepartmentId::Delightful)
             ->where('parent_department_id', '-1');
 
         // Add organization codes exact match filter if provided

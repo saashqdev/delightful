@@ -620,7 +620,7 @@ token_service:
 qdrant:
   base_uri: "${QDRANT_BASE_URI}"
   api_key: "${QDRANT_API_KEY}"
-  collection_prefix: "${QDRANT_COLLECTION_PREFIX:-SUPERMAGIC-}"
+  collection_prefix: "${QDRANT_COLLECTION_PREFIX:-SUPERDELIGHTFUL-}"
 
 # Storage service configuration
 storage:
@@ -638,7 +638,7 @@ storage:
 sandbox:
   id: "${SANDBOX_ID:-}"
   app_env: "${APP_ENV:-dev}"
-  magic_authorization: "${MAGIC_AUTHORIZATION}"
+  magic_authorization: "${DELIGHTFUL_AUTHORIZATION}"
   fetch_workspace: "${FETCH_WORKSPACE:-True}"
   agent_idle_timeout: "${AGENT_IDLE_TIMEOUT:-600}"
   idle_monitor_interval: "${IDLE_MONITOR_INTERVAL:-60}"

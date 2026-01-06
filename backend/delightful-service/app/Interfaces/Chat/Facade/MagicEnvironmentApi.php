@@ -55,7 +55,7 @@ class MagicEnvironmentApi extends AbstractApi
     private function authCheck(): void
     {
         $authorization = $this->getAuthorization();
-        if (! PermissionChecker::mobileHasPermission($authorization->getMobile(), SuperPermissionEnum::MAGIC_ENV_MANAGEMENT)) {
+        if (! PermissionChecker::mobileHasPermission($authorization->getMobile(), SuperPermissionEnum::Delightful_ENV_MANAGEMENT)) {
             ExceptionBuilder::throw(ChatErrorCode::OPERATION_FAILED);
         }
     }

@@ -22,7 +22,7 @@ class Validation
         ValidationConstants::GLOBAL => null,
         ValidationConstants::SUPERGLOBAL => null,
         ValidationConstants::CONSTANT => null,
-        ValidationConstants::MAGIC_CONSTANT => null,
+        ValidationConstants::Delightful_CONSTANT => null,
         ValidationConstants::NAMESPACE => null,
         ValidationConstants::ALIAS => null,
         ValidationConstants::_CLASS => null,
@@ -253,7 +253,7 @@ class Validation
      */
     public function setMagicConstValidator(callable $callable): self
     {
-        $this->validation[ValidationConstants::MAGIC_CONSTANT] = $callable;
+        $this->validation[ValidationConstants::Delightful_CONSTANT] = $callable;
         return $this;
     }
 
@@ -262,7 +262,7 @@ class Validation
      */
     public function getMagicConstValidator(): ?callable
     {
-        return $this->validation[ValidationConstants::MAGIC_CONSTANT] ?? null;
+        return $this->validation[ValidationConstants::Delightful_CONSTANT] ?? null;
     }
 
     /** Unset validation callable for magic constants.
@@ -271,7 +271,7 @@ class Validation
      */
     public function unsetMagicConstValidator(): self
     {
-        $this->validation[ValidationConstants::MAGIC_CONSTANT] = null;
+        $this->validation[ValidationConstants::Delightful_CONSTANT] = null;
         return $this;
     }
 

@@ -77,7 +77,7 @@ class MagicFlowApiKeyEntity extends AbstractEntity
         if (empty($this->type)) {
             $this->type = ApiKeyType::Personal;
         }
-        $this->code = Code::MagicFlowApiKey->gen();
+        $this->code = Code::DelightfulFlowApiKey->gen();
         $this->secretKey = Code::ApiKeySK->gen();
 
         $this->enabled = true;

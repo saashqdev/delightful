@@ -16,6 +16,6 @@ class BaseTest extends HttpTestCase
 {
     public function testO()
     {
-        $this->assertTrue(defined('MAGIC_ACCESS_TOKEN'));
+        $this->assertTrue(defined('DELIGHTFUL_ACCESS_TOKEN'));
     }
 }

@@ -100,23 +100,23 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					deployCode: "",
 					services: {
 						keewoodAPI: {
-							url: env("MAGIC_SERVICE_KEEWOOD_BASE_URL", true) as string,
+							url: env("DELIGHTFUL_SERVICE_KEEWOOD_BASE_URL", true) as string,
 						},
 						teamshareAPI: {
-							url: env("MAGIC_TEAMSHARE_WEB_URL", true) as string,
+							url: env("DELIGHTFUL_TEAMSHARE_WEB_URL", true) as string,
 						},
 						teamshareWeb: {
-							url: env("MAGIC_SERVICE_TEAMSHARE_BASE_URL", true) as string,
+							url: env("DELIGHTFUL_SERVICE_TEAMSHARE_BASE_URL", true) as string,
 						},
 						keewoodWeb: {
-							url: env("MAGIC_KEEWOOD_WEB_URL", true) as string,
+							url: env("DELIGHTFUL_KEEWOOD_WEB_URL", true) as string,
 						},
 					},
 				},
 			}
 		}
 		return fetch.post<{ config: Common.PrivateConfig }>(
-			env("MAGIC_SERVICE_KEEWOOD_BASE_URL", true) +
+			env("DELIGHTFUL_SERVICE_KEEWOOD_BASE_URL", true) +
 				genRequestUrl(RequestUrl.getPrivateConfigure),
 			{ identifier: code || "" },
 		)

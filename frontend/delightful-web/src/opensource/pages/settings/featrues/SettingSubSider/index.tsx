@@ -95,7 +95,7 @@ const aboutUsItems: (t: TFunction) => MagicListItemData[] = (t) => [
 		}),
 	},
 	{
-		id: SettingSection.ABOUT_MAGIC,
+		id: SettingSection.ABOUT_DELIGHTFUL,
 		avatar: {
 			icon: <MagicLogo type={LogoType.ICON} />,
 			style: { background: colorScales.brand[5], padding: 8 },

@@ -4,7 +4,7 @@
 
 import { useMemo } from "react"
 import { useParams } from "react-router"
-import { MAGIC_FLOW_ID_PREFIX } from "../constants"
+import { DELIGHTFUL_FLOW_ID_PREFIX } from "../constants"
 
 export default function useCheckType() {
 	const { id } = useParams()
@@ -12,7 +12,7 @@ export default function useCheckType() {
 
 	const isAgent = useMemo(() => {
 		// 暂时通过id的前缀进行判断
-		return !agentId.startsWith(MAGIC_FLOW_ID_PREFIX)
+		return !agentId.startsWith(DELIGHTFUL_FLOW_ID_PREFIX)
 	}, [agentId])
 
 	return {

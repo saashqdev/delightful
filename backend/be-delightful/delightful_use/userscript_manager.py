@@ -12,7 +12,7 @@ from magic_use.userscript import Userscript
 logger = logging.getLogger(__name__)
 
 # Define the path to the magic_monkey directory relative to this file
-MAGIC_MONKEY_DIR = Path(__file__).resolve().parent / "magic_monkey"
+DELIGHTFUL_MONKEY_DIR = Path(__file__).resolve().parent / "magic_monkey"
 
 class UserscriptManager:
     """
@@ -56,8 +56,8 @@ class UserscriptManager:
             async with cls._lock:
                 # 双重检查锁定，防止多个协程同时创建实例
                 if cls._instance is None:
-                    # 假设 MAGIC_MONKEY_DIR 是在 app.paths 中定义的 Path 对象
-                    instance = cls(MAGIC_MONKEY_DIR)
+                    # 假设 DELIGHTFUL_MONKEY_DIR 是在 app.paths 中定义的 Path 对象
+                    instance = cls(DELIGHTFUL_MONKEY_DIR)
                     # 在实例创建后立即开始加载脚本
                     # 注意：这里不在构造函数或 get_instance 中直接 await load_scripts
                     # 而是让调用者决定何时加载，或者在 PageRegistry 初始化时加载
@@ -260,6 +260,6 @@ class UserscriptManager:
 
 # 可以选择在这里创建单例实例，如果不需要异步获取的话
 # 但异步获取提供了更好的灵活性，特别是如果初始化涉及异步操作
-# _userscript_manager_instance = UserscriptManager(MAGIC_MONKEY_DIR)
+# _userscript_manager_instance = UserscriptManager(DELIGHTFUL_MONKEY_DIR)
 # def get_userscript_manager():
 #     return _userscript_manager_instance

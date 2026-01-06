@@ -183,7 +183,7 @@ export namespace GlobalSearch {
 		// CSV = 23,
 
 		/** 神奇应用 */
-		// MAGIC_APPLICATION = 24
+		// DELIGHTFUL_APPLICATION = 24
 	}
 
 	/** 云盘 */

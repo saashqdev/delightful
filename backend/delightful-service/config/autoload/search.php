@@ -21,10 +21,10 @@ use function Hyperf\Support\env;
 return [
     'backend' => env('SEARCH_BACKEND', 'bing'),
     'drivers' => [
-        SearchEngineType::Magic->value => [
+        SearchEngineType::Delightful->value => [
             'class_name' => MagicSearchAdapter::class,
-            'base_url' => env('MAGIC_SEARCH_BASE_URL', ''),
-            'api_key' => env('MAGIC_SEARCH_API_KEY', ''),
+            'base_url' => env('DELIGHTFUL_SEARCH_BASE_URL', ''),
+            'api_key' => env('DELIGHTFUL_SEARCH_API_KEY', ''),
         ],
         SearchEngineType::Tavily->value => [
             'class_name' => TavilySearchAdapter::class,

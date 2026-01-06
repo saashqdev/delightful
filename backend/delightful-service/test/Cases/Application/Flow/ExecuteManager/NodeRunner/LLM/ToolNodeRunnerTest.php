@@ -27,7 +27,7 @@ class ToolNodeRunnerTest extends ExecuteManagerBaseTest
     public function testRunByParameter()
     {
         $node = Node::generateTemplate(NodeType::Tool, [
-            'tool_id' => 'MAGIC-FLOW-123456789abcde1-12345678',
+            'tool_id' => 'DELIGHTFUL-FLOW-123456789abcde1-12345678',
             'mode' => 'parameter',
             'async' => false,
             'custom_system_input' => [
@@ -184,7 +184,7 @@ JSON, true)));
     public function testRunByLLM()
     {
         $node = Node::generateTemplate(NodeType::Tool, [
-            'tool_id' => 'MAGIC-FLOW-123456789abcde1-12345678',
+            'tool_id' => 'DELIGHTFUL-FLOW-123456789abcde1-12345678',
             'mode' => 'llm',
             'async' => false,
             'custom_system_input' => [

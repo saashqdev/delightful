@@ -12,5 +12,5 @@ namespace App\Application\Kernel\Enum;
  */
 enum MagicAdminResourceEnum: string
 {
-    case ORGANIZATION_ADMIN = 'MAGIC_ALL_PERMISSIONS';
+    case ORGANIZATION_ADMIN = 'DELIGHTFUL_ALL_PERMISSIONS';
 }

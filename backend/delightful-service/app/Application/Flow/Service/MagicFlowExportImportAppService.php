@@ -302,7 +302,7 @@ class MagicFlowExportImportAppService
         $originalCode = $flowData['code'] ?? '';
 
         // 生成新ID
-        $flowData['code'] = Code::MagicFlow->gen();
+        $flowData['code'] = Code::DelightfulFlow->gen();
 
         // 检查是否存在同名流程，如果存在则重命名
         $flowType = isset($flowData['type']) ? Type::from($flowData['type']) : Type::Main;
@@ -360,7 +360,7 @@ class MagicFlowExportImportAppService
         $originalCode = $toolSetData['code'] ?? '';
 
         // 生成新ID
-        $toolSetData['code'] = Code::MagicFlowToolSet->gen();
+        $toolSetData['code'] = Code::DelightfulFlowToolSet->gen();
 
         // 检查是否存在同名工具集，如果存在则重命名
         $newName = $this->generateUniqueToolSetName($dataIsolation, $originalName);

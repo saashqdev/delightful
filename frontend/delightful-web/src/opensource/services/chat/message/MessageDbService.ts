@@ -109,7 +109,7 @@ class MessageDbService {
 				throw new Error("创建消息表失败")
 				// await this.rebuildMessageTableIndex(conversationId)
 
-				// // 重新获取表
+				// // Re-fetch the table
 				// return ChatBusiness.getChatDb().table(tableName) as Table<
 				// 	SeqResponse<ConversationMessage>
 				// >

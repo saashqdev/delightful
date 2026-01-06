@@ -14,13 +14,13 @@ interface PrewarmItem {
 }
 
 class MessageCacheService {
-	private readonly ADJACENT_COUNT = 5 // 前后各5个会话
+	private readonly ADJACENT_COUNT = 5 // 5 conversations before and after
 
 	/**
-	 * 预热会话
-	 * @param conversationId 会话ID
-	 * @param priority 优先级
-	 * @returns 预热消息列表
+	 * Prewarm a conversation's messages.
+	 * @param conversationId Conversation ID.
+	 * @param priority Priority for prewarming.
+	 * @returns The prewarmed message list.
 	 */
 	private async prewarmMessage(
 		conversationId: string,
@@ -45,8 +45,8 @@ class MessageCacheService {
 	}
 
 	/**
-	 * 收集预热会话
-	 * @returns 预热会话列表
+	 * Collect conversations to prewarm.
+	 * @returns List of conversations to prewarm with priority.
 	 */
 	private collectPrewarmConversationItems(): PrewarmItem[] {
 		const { conversations } = conversationStore
@@ -63,7 +63,7 @@ class MessageCacheService {
 
 		const anchorIndex = conversationList.findIndex((c) => c.id === anchorConversation.id)
 
-		// 不需要预热当前会话
+		// No need to prewarm the current conversation
 		// if (anchorConversation.last_receive_message) {
 		// 	items.push({
 		// 		conversationId: anchorConversation.id,
@@ -72,14 +72,14 @@ class MessageCacheService {
 		// 	})
 		// }
 
-		// 获取前后各5个会话
+		// Get 5 conversations before and after the anchor
 		for (let i = 1; i <= this.ADJACENT_COUNT; i += 1) {
-			// 前面的会话
+			// Previous conversations
 			const prevIndex = anchorIndex - i
 			if (prevIndex >= 0) {
 				const prevConversation = conversationList[prevIndex]
 				if (prevConversation?.last_receive_message) {
-					// 优先级随距离递减
+					// Priority decays with distance
 					const priority = 0.5 * (1 - i / (this.ADJACENT_COUNT + 1))
 					items.push({
 						conversationId: prevConversation.id,
@@ -89,12 +89,12 @@ class MessageCacheService {
 				}
 			}
 
-			// 后面的会话
+			// Next conversations
 			const nextIndex = anchorIndex + i
 			if (nextIndex < conversationList.length) {
 				const nextConversation = conversationList[nextIndex]
 				if (nextConversation?.last_receive_message) {
-					// 优先级随距离递减
+					// Priority decays with distance
 					const priority = 0.5 * (1 - i / (this.ADJACENT_COUNT + 1))
 					items.push({
 						conversationId: nextConversation.id,
@@ -105,7 +105,7 @@ class MessageCacheService {
 			}
 		}
 
-		// 其他会话最后
+		// Put other conversations at the end
 		conversationList.forEach((conversation) => {
 			const isAdjacent =
 				Math.abs(
@@ -125,7 +125,7 @@ class MessageCacheService {
 	}
 
 	/**
-	 * 初始化会话消息
+	 * Initialize conversation messages prewarming.
 	 */
 	initConversationsMessage(userInfo?: User.UserInfo | null) {
 		const items = this.collectPrewarmConversationItems()
@@ -133,12 +133,12 @@ class MessageCacheService {
 			return
 		}
 
-		// 如果用户信息不存在，则不预热
+		// If user info not provided, pull from store to avoid org-switch issues
 		if (!userInfo || !userInfo?.user_id) {
 			userInfo = userStore.user.userInfo
 		}
 
-		// 按优先级排序
+		// Sort by priority (desc)
 		items.sort((a, b) => b.priority - a.priority)
 
 		let currentIndex = 0
@@ -156,8 +156,8 @@ class MessageCacheService {
 	}
 
 	/**
-	 * 收集预热话题
-	 * @returns 预热话题列表
+	 * Collect topics to prewarm for the current conversation.
+	 * @returns List of topics to prewarm with priority.
 	 */
 	private collectPrewarmTopicsItems(): PrewarmItem[] {
 		const { topicList } = topicStore
@@ -175,7 +175,7 @@ class MessageCacheService {
 		}
 
 		const items: PrewarmItem[] = []
-		// 不需要预热当前话题
+		// No need to prewarm the current topic
 		// items.push({
 		// 	conversationId: conversationStore.currentConversation?.id,
 		// 	topicId: currentTopic,
@@ -184,14 +184,14 @@ class MessageCacheService {
 
 		const anchorIndex = topicList.findIndex((t) => t.id === currentTopic)
 
-		// 获取前后各5  个话题
+		// Get 5 topics before and after the anchor
 		for (let i = 1; i <= this.ADJACENT_COUNT; i += 1) {
-			// 前面的会话
+			// Previous topics
 			const prevIndex = anchorIndex - i
 			if (prevIndex >= 0) {
 				const prevTopic = topicList[prevIndex]
 				if (prevTopic) {
-					// 优先级随距离递减
+					// Priority decays with distance
 					const priority = 0.5 * (1 - i / (this.ADJACENT_COUNT + 1))
 					items.push({
 						conversationId: conversationStore.currentConversation?.id,
@@ -201,12 +201,12 @@ class MessageCacheService {
 				}
 			}
 
-			// 后面的会话
+			// Next topics
 			const nextIndex = anchorIndex + i
 			if (nextIndex < topicList.length) {
 				const nextTopic = topicList[nextIndex]
 				if (nextTopic) {
-					// 优先级随距离递减
+					// Priority decays with distance
 					const priority = 0.5 * (1 - i / (this.ADJACENT_COUNT + 1))
 					items.push({
 						conversationId: conversationStore.currentConversation?.id,
@@ -221,7 +221,7 @@ class MessageCacheService {
 	}
 
 	/**
-	 * 初始化话题消息
+	 * Initialize topic messages prewarming for current conversation.
 	 */
 	initTopicsMessage(userInfo?: User.UserInfo | null) {
 		const items = this.collectPrewarmTopicsItems()
@@ -229,7 +229,7 @@ class MessageCacheService {
 			return
 		}
 
-		// 先获取当前用户信息，避免切换组织获取错误的信息
+		// Ensure current user info to avoid mismatched org during switching
 		if (!userInfo || !userInfo?.user_id) {
 			userInfo = userStore.user.userInfo
 		}
@@ -265,20 +265,20 @@ class MessageCacheService {
 	}
 
 	/**
-	 * 判断是否存在缓存
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @returns 是否存在缓存
+	 * Check if cache exists for a conversation/topic.
+	 * @param conversationId Conversation ID.
+	 * @param topicId Topic ID.
+	 * @returns Whether cache exists.
 	 */
 	hasCache(conversationId: string, topicId: string) {
 		return MessageCacheStore.has(conversationId, topicId)
 	}
 
 	/**
-	 * 更新消息为已撤回
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param message_id 消息ID
+	 * Mark a message as revoked in the cache.
+	 * @param conversationId Conversation ID.
+	 * @param topicId Topic ID.
+	 * @param message_id Message ID.
 	 */
 	updateMessageRevoked(conversationId: string, topicId: string, message_id: string) {
 		const cache = MessageCacheStore.get(conversationId, topicId)
@@ -293,10 +293,10 @@ class MessageCacheService {
 	}
 
 	/**
-	 * 删除缓存中的消息
-	 * @param conversationId 会话ID
-	 * @param messageId 消息ID
-	 * @param topicId 话题ID
+	 * Remove a message from the cache.
+	 * @param conversationId Conversation ID.
+	 * @param messageId Message ID.
+	 * @param topicId Topic ID.
 	 */
 	removeMessageInCache(conversationId: string, messageId: string, topicId: string) {
 		const cache = MessageCacheStore.get(conversationId, topicId)
@@ -306,20 +306,20 @@ class MessageCacheService {
 	}
 
 	/**
-	 * 删除话题消息
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
+	 * Remove all messages for a topic from cache.
+	 * @param conversationId Conversation ID.
+	 * @param topicId Topic ID.
 	 */
 	removeTopicMessages(conversationId: string, topicId: string) {
 		MessageCacheStore.clear(conversationId, topicId)
 	}
 
 	/**
-	 * 更新消息
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param messageId 消息ID
-	 * @param replace 替换函数
+	 * Update a message in the cache.
+	 * @param conversationId Conversation ID.
+	 * @param topicId Topic ID.
+	 * @param messageId Message ID.
+	 * @param replace Replacement object or function.
 	 */
 	updateMessage(
 		conversationId: string,

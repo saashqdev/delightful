@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { Button, Typography, Spin } from "antd"
 import "./styles.css"
 
-// 引入预设包
+// Import preset packages
 import { Univer, LocaleType, merge } from "@univerjs/core"
 import { defaultTheme } from "@univerjs/design"
 
@@ -14,9 +14,9 @@ import { UniverDocsPlugin } from "@univerjs/docs"
 import { UniverDocsUIPlugin } from "@univerjs/docs-ui"
 import { FUniver } from "@univerjs/core/facade"
 
-// 引入中文语言包
+// Import Chinese language pack
 
-// 引入CSS样式
+// Import CSS styles
 // import "@univerjs/presets/lib/styles/preset-slides-core.css"
 
 import DesignZhCN from "@univerjs/design/locale/zh-CN"
@@ -25,24 +25,24 @@ import SheetsZhCN from "@univerjs/sheets/locale/zh-CN"
 import SheetsUIZhCN from "@univerjs/sheets-ui/locale/zh-CN"
 import DocsUIZhCN from "@univerjs/docs-ui/locale/zh-CN"
 
-// 工具函数导入
+// Tool function imports
 import { transformData } from "./utils"
 import { useAsyncEffect } from "ahooks"
 import overrideLocales from "./locales"
 
 import "@univerjs/sheets/facade"
-// 核心样式
+// Core styles
 import "@univerjs/design/lib/index.css"
 import "@univerjs/ui/lib/index.css"
 
 // 根据fileType选择导入
-import "@univerjs/sheets-ui/lib/index.css" // 表格样式
-import "@univerjs/docs-ui/lib/index.css" // 文档样式
-// import "@univerjs/slides-ui/lib/index.css"  // 幻灯片样式(如果需要)
+import "@univerjs/sheets-ui/lib/index.css" // Sheet styles
+import "@univerjs/docs-ui/lib/index.css" // Document styles
+// import "@univerjs/slides-ui/lib/index.css"  // Slide styles (if needed)
 
 const { Text } = Typography
 
-// 导出组件接口
+// Export component interface
 export interface UniverComponentProps {
 	data: any
 	fileType: "sheet" | "slide" | "doc"
@@ -53,12 +53,12 @@ export interface UniverComponentProps {
 }
 
 /**
- * UniverComponent - 基于Univer库的文档、表格和幻灯片查看/编辑组件
+ * UniverComponent - Document, spreadsheet, and slide viewing/editing component based on Univer library
  */
 export const UniverComponent: React.FC<UniverComponentProps> = ({
 	data,
 	fileType,
-	fileName = "未命名文件",
+	fileName = "Untitled file",
 	width = "100%",
 	height = "100%",
 }) => {
@@ -68,7 +68,7 @@ export const UniverComponent: React.FC<UniverComponentProps> = ({
 	const [error, setError] = useState<string | null>(null)
 
 	useEffect(() => {
-		// 组件卸载时清理资源
+		// Clean up resources when component unmounts
 		return () => {
 			if (univerAPIRef.current) {
 				univerAPIRef.current.dispose()
@@ -83,14 +83,14 @@ export const UniverComponent: React.FC<UniverComponentProps> = ({
 		setLoading(true)
 		setError(null)
 
-		// 如果已经有实例，先销毁
+		// If instance already exists, destroy it first
 		if (univerAPIRef.current) {
 			univerAPIRef.current.dispose()
 			univerAPIRef.current = null
 		}
 
 		try {
-			// 转换数据为Univer支持的格式
+			// Convert data to Univer supported format
 			const univerData = await transformData(data, fileType, fileName)
 
 			console.log(
@@ -176,13 +176,10 @@ export const UniverComponent: React.FC<UniverComponentProps> = ({
 					break
 
 				default:
-					throw new Error(`不支持的文件类型: ${fileType}`)
-			}
-
-			// 保存API引用
+				throw new Error(`Unsupported file type: ${fileType}`)
 			univerAPIRef.current = univerAPI
 
-			// 创建对应类型的文档实例
+		// Create document instance of corresponding type
 			if (fileType === "sheet") {
 				univerAPI.createWorkbook(univerData)
 
@@ -203,29 +200,29 @@ export const UniverComponent: React.FC<UniverComponentProps> = ({
 				// univerAPI.createPresentation(univerData)
 			}
 
-			// 实例创建完成后，设置初始只读状态
-			setLoading(false)
+		// After instance creation, set initial readonly state
+		setLoading(false)
 
-			// 设置全局标志，表示Univer库已加载
+		// Set global flag indicating Univer library has loaded
 			if (typeof window !== "undefined") {
 				;(window as any).__UNIVER_LIBRARIES_LOADED__ = true
 			}
 		} catch (err: any) {
-			console.error("初始化Univer组件失败:", err)
-			setError(err.message || "加载文件失败")
+		console.error("Failed to initialize Univer component:", err)
+		setError(err.message || "Failed to load file")
 			setLoading(false)
 		}
 	}, [data])
 
 	useEffect(() => {
-		// 组件挂载时添加 overscroll-behavior-x: none
+		// Add overscroll-behavior-x: none when component mounts
 		document.documentElement.style.overscrollBehaviorX = "none"
 
-		// 组件卸载时移除 overscroll-behavior-x
+		// Remove overscroll-behavior-x when component unmounts
 		return () => {
 			document.documentElement.style.overscrollBehaviorX = ""
 		}
-	}, []) // 空依赖数组确保只在组件挂载和卸载时执行
+	}, []) // Empty dependency array ensures execution only on mount and unmount
 
 	// 渲染错误状态
 	if (error) {

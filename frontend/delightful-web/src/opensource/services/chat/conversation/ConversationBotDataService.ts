@@ -40,10 +40,10 @@ export interface ConversationBotDataManagerProps {
 }
 
 /**
- * 会话机器人数据管理器
+ * Conversation bot data manager
  */
 class ConversationBotDataService {
-	// 编辑器相关
+	// Editor related
 	editorRef?: DelightfulRichEditorRef | null
 
 	onSend?: (
@@ -51,34 +51,34 @@ class ConversationBotDataService {
 		onlyTextContent: boolean,
 	) => Promise<void> | undefined
 
-	// BotProvider相关数据
+	// BotProvider related data
 	conversationId?: string
 
-	// 用户ID
+	// User ID
 	userId?: string
 
-	// 机器人ID
+	// Bot ID
 	agentId?: string
 
-	// 获取机器人信息loading
+	// Loading: fetching bot info
 	isfetchBotInfoLoading: boolean = false
 
-	// 快捷指令列表
+	// Quick instruction list
 	instructions?: QuickInstructionList[]
 
-	// 快捷指令配置
+	// Quick instruction config
 	innerInstructConfig?: Record<string, unknown>
 
-	// 临时快捷指令配置, 该配置在用户刷新后失效
+	// Session quick instruction config (lost after refresh)
 	sessionInstructConfig?: Record<string, unknown>
 
-	// 是否展示开始页面
+	// Whether to show the start page
 	startPage?: boolean
 
-	// 更新快捷指令配置loading
+	// Loading: updating quick instruction config
 	isUpdateConversationInstructionConfigLoading: boolean = false
 
-	// 获取快捷指令配置loading
+	// Loading: fetching quick instruction config
 	isFetchConversationInstructionConfigLoading: boolean = false
 
 	get instructConfig() {
@@ -89,16 +89,16 @@ class ConversationBotDataService {
 	}
 
 	/**
-	 * 获取快捷指令
-	 * @param position 位置
-	 * @returns 快捷指令
+	 * Get quick instructions
+	 * @param position Position
+	 * @returns Quick instructions
 	 */
 	getQuickInstructionsByPosition(position: InstructionGroupType) {
 		return this.instructions?.find((instruction) => instruction.position === position)
 	}
 
 	constructor(props?: ConversationBotDataManagerProps) {
-		// 编辑器相关
+		// Editor related
 		this.editorRef = props?.editorRef
 		this.onSend = props?.onSend
 		makeAutoObservable(
@@ -111,7 +111,7 @@ class ConversationBotDataService {
 	}
 
 	/**
-	 * 更新属性
+	 * Update props
 	 */
 	updateProps(props: ConversationBotDataManagerProps) {
 		this.editorRef = props?.editorRef
@@ -119,8 +119,8 @@ class ConversationBotDataService {
 	}
 
 	/**
-	 * 获取常驻内容
-	 * @returns
+	 * Get residency content
+	 * @returns JSONContent list
 	 */
 	get residencyContent() {
 		const result: JSONContent[] = []
@@ -159,15 +159,15 @@ class ConversationBotDataService {
 	 */
 	insertResidencyQuickInstructionWhenInit() {
 		const jsonContent = this.editorRef?.editor?.getText()
-		// 如果内容不为空，则不插入
+		// If content is not empty, do not insert
 		if (jsonContent) return
 		this.editorRef?.editor?.chain().insertContent(this.residencyContent).run()
 		this.editorRef?.editor?.chain().focus().run()
 	}
 
 	/**
-	 * 更新快捷指令配置
-	 * @param instructs 快捷指令配置
+	 * Update quick instruction config
+	 * @param instructs Quick instruction config
 	 */
 	updateRemoteInstructionConfig(instructs: Record<string, unknown>, remove?: boolean) {
 		if (!this.conversationId || !this.userId)
@@ -199,10 +199,10 @@ class ConversationBotDataService {
 	}
 
 	/**
-	 * 清除机器人信息
+	 * Clear bot info
 	 */
 	clearBotInfo() {
-		// 清除机器人信息
+		// Clear bot info
 		this.instructions = []
 		this.startPage = false
 		this.innerInstructConfig = {}
@@ -213,7 +213,7 @@ class ConversationBotDataService {
 	}
 
 	/**
-	 * 更新属性
+	 * Update attributes
 	 */
 	switchConversation(
 		conversationId: string,
@@ -221,10 +221,10 @@ class ConversationBotDataService {
 		botInfo: Bot.Detail["botEntity"],
 		instructConfig?: Record<string, unknown>,
 	) {
-		// 清除旧的机器人信息
+		// Clear previous bot info
 		this.clearBotInfo()
 
-		// 更新新的机器人信息
+		// Update new bot info
 		this.conversationId = conversationId
 		this.userId = userId
 		this.innerInstructConfig = instructConfig
@@ -232,8 +232,8 @@ class ConversationBotDataService {
 	}
 
 	/**
-	 * 初始化机器人信息
-	 * @param data 机器人信息
+	 * Initialize bot info
+	 * @param data Bot info
 	 */
 	initBotInfo(data: Bot.Detail["botEntity"]) {
 		this.instructions = data.instructs
@@ -243,21 +243,21 @@ class ConversationBotDataService {
 	}
 
 	/**
-	 * 更新会话快捷指令配置
+	 * Update conversation quick instruction config
 	 */
 	updateConversationInstructConfig(instructConfig: Record<string, unknown>) {
 		this.innerInstructConfig = instructConfig
 	}
 
 	/**
-	 * 往 JSON 数据中插入开关快捷指令
+	 * Insert switch quick instruction into JSON content
 	 */
 	enhanceJsonContentBaseSwitchInstruction(jsonContent?: JSONContent): JSONContent | undefined {
 		if (!jsonContent) return jsonContent
 		if (isObject(jsonContent)) {
 			const instructMap = this.instructions?.map((item) => item.items).flat()
 
-			// 没有配置快捷指令，直接返回
+			// No quick instructions configured, return directly
 			if (!instructMap) return jsonContent
 
 			let container
@@ -273,7 +273,7 @@ class ConversationBotDataService {
 			}
 
 			if (container) {
-				// 获取默认配置
+				// Get default config
 				const defaultConfig = instructMap.reduce((acc, cur) => {
 					if (cur.type === InstructionType.SWITCH) {
 						acc[cur.id] = cur.default_value
@@ -281,7 +281,7 @@ class ConversationBotDataService {
 					return acc
 				}, {} as Record<string, unknown>)
 
-				// 合并默认配置和用户配置
+				// Merge default config and user config
 				Object.entries({ ...defaultConfig, ...this.instructConfig })
 					.reverse()
 					.forEach(([instructId, value]) => {
@@ -289,10 +289,10 @@ class ConversationBotDataService {
 							| Exclude<QuickInstruction, SystemInstruct>
 							| undefined
 
-						// 如果指令不存在,则不插入
+						// If instruction does not exist, skip
 						if (!ins) return
 
-						// 如果指令是文本指令或状态指令,则不插入
+						// If instruction is text or status, skip
 						if (
 							[
 								InstructionType.TEXT,
@@ -302,13 +302,13 @@ class ConversationBotDataService {
 						)
 							return
 
-						// 如果指令是流程指令,则不插入
+						// If instruction is Flow mode, skip
 						if (ins.instruction_type === InstructionMode.Flow) return
 
-						// 开关指令，只有值为 on 的时候才需要插入
+						// Switch instruction: insert only when value is 'on'
 						if (ins.type === InstructionType.SWITCH && value !== "on") return
 
-						// 开关指令，不拼接 content 内容，由后端拼接
+						// For switch, do not append content; backend will compose
 						const content = [
 							{
 								type: "quick-instruction",
@@ -319,7 +319,7 @@ class ConversationBotDataService {
 							},
 						]
 
-						// 如果指令插入位置为头部，则插入头部
+						// Insert at head/tail based on setting
 						switch (ins.insert_location) {
 							case InsertLocationMap.Behind:
 								container?.push(...content)
@@ -339,8 +339,8 @@ class ConversationBotDataService {
 	}
 
 	/**
-	 * 生成流程指令数据
-	 * @returns
+	 * Generate flow instruction data
+	 * @returns Flow instructions
 	 */
 	genFlowInstructs() {
 		return cloneDeep(
@@ -380,26 +380,26 @@ class ConversationBotDataService {
 	}
 
 	/**
-	 * 根据指定位置插入内容
-	 * @param insertContent 要插入的内容
-	 * @param insertLocation 插入位置
+	 * Insert content at a specified location
+	 * @param insertContent Content to insert
+	 * @param insertLocation Insert location
 	 */
 	insertContentByLocation(insertContent: JSONContent[], insertLocation?: InsertLocationMap) {
 		if (!insertContent.length) return
 
 		switch (insertLocation) {
 			case InsertLocationMap.Before:
-				// 插入到第一个位置，0 会导致换行
+				// Insert at the first position; 0 causes a newline
 				this.editorRef?.editor?.chain().focus().insertContentAt(1, insertContent).run()
 				break
 			case InsertLocationMap.Behind:
-				// 获取文档末尾位置，而不是选择范围的结束位置
+				// Get document end position rather than selection end
 				const docSize = this.editorRef?.editor?.state.doc.content.size
 				if (docSize === undefined) {
-					// 如果无法获取文档大小，直接插入内容
+					// If doc size unknown, insert directly
 					this.editorRef?.editor?.chain().focus().insertContent(insertContent).run()
 				} else {
-					// 根据文档大小计算末尾位置，确保位置有效
+					// Compute end position by doc size to ensure validity
 					const docEndPosition = Math.max(0, docSize - 1)
 					this.editorRef?.editor
 						?.chain()
@@ -421,7 +421,7 @@ class ConversationBotDataService {
 				}
 				break
 			default:
-				// 默认情况下直接在当前位置插入
+				// Default: insert at current cursor position
 				this.editorRef?.editor?.chain().focus().insertContent(insertContent).run()
 				break
 		}
@@ -445,17 +445,17 @@ class ConversationBotDataService {
 		return Promise.resolve()
 	}
 
-	/** 选择类型 */
+	/** Selector type */
 	handleSelectorQuickInstructionClick(targetId: string, instruction: SelectorQuickInstruction) {
-		// 更新快捷指令配置
+		// Update quick instruction config
 		this.updateInstructionConfig(instruction, targetId)
 
-		// 如果是流程指令，则更新值
+		// If Flow instruction, just update value
 		if (instruction.instruction_type === InstructionMode.Flow) {
 			return
 		}
 
-		// 如果需要直接发送, 并且指令不是常驻的, 则发送
+		// If need send directly and not residency, send it
 		if (instruction?.send_directly && !instruction.residency) {
 			const contentWithWrapper = {
 				type: "doc",
@@ -471,7 +471,7 @@ class ConversationBotDataService {
 			return
 		}
 
-		// 替换存在指令
+		// Replace existing instruction
 		const jsonContent = this.editorRef?.editor?.getJSON() ?? {}
 		const replaceStatus = replaceExistQuickInstruction(
 			jsonContent,
@@ -482,7 +482,7 @@ class ConversationBotDataService {
 			targetId,
 		)
 
-		// 替换成功,更新内容
+		// On replace success, update content
 		if (replaceStatus) {
 			this.editorRef?.editor?.chain().clearContent().run()
 			this.editorRef?.editor?.chain().focus().insertContent(jsonContent).run()
@@ -501,14 +501,14 @@ class ConversationBotDataService {
 				insertContent = [insertContent]
 			}
 
-			// 调用统一的插入方法
+			// Use unified insert method
 			this.insertContentByLocation(insertContent, instruction.insert_location)
 		}
 	}
 
 	/**
-	 * 从配置中移除快捷指令的值
-	 * @param instruction 快捷指令
+	 * Remove a quick instruction's value from config
+	 * @param instruction Quick instruction
 	 */
 	removeSelectorValueFromConfig(instruction: SelectorQuickInstruction) {
 		if (instruction.residency) {
@@ -528,22 +528,22 @@ class ConversationBotDataService {
 	}
 
 	/**
-	 * 清除快捷指令配置
+	 * Clear session quick instruction config
 	 */
 	clearSessionInstructConfig() {
 		this.sessionInstructConfig = {}
 	}
 
 	/**
-	 * 开关类型
-	 * @param value 值
-	 * @param instruction 快捷指令
+	 * Switch type
+	 * @param value Value
+	 * @param instruction Quick instruction
 	 */
 	handleSwitchQuickInstructionClick(value: string, instruction: SwitchQuickInstruction) {
 		return this.updateInstructionConfig(instruction, value)
 	}
 
-	/** 文本类型 */
+	/** Text type */
 	handleTextQuickInstructionClick(value: string, instruction: TextQuickInstruction) {
 		try {
 			const content = JSON.parse(value)
@@ -556,7 +556,7 @@ class ConversationBotDataService {
 				}
 				this.onSend?.(this.enhanceJsonContentBaseSwitchInstruction(jsonWithWrapper), false)
 			} else {
-				// 调用统一的插入方法
+				// Use unified insert method
 				this.insertContentByLocation(insertContent, instruction.insert_location)
 			}
 		} catch (err) {
@@ -564,7 +564,7 @@ class ConversationBotDataService {
 		}
 	}
 
-	/** 状态类型 */
+	/** Status type */
 	handleStatusQuickInstructionClick(
 		value: string,
 		instruction: StatusQuickInstruction,

@@ -34,7 +34,7 @@ class RecordSummaryManager {
 
 	addToMessageQueue(message: MessageQueueItem) {
 		this.messageQueue.push(message)
-		// 存到 db 中
+		// Save into DB
 		chatDb.db?.record_summary_message_queue.add(message)
 	}
 }

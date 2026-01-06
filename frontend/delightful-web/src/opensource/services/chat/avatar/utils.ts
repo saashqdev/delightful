@@ -48,7 +48,7 @@ export function textToBackgroundColor(name?: string) {
 	for (let i = 0; i < name.length; i += 1) {
 		hash += name.charCodeAt(i)
 	}
-	const hue = (hash % 360) + 10 // 确保色调在10到360之间
+	const hue = (hash % 360) + 10 // Ensure hue stays between 10 and 360
 	const saturation = 60 + (hash % 20) // Ensure saturation between 60 and 80
 	const lightness = 40 + (hash % 20) // Ensure lightness between 40 and 60
 

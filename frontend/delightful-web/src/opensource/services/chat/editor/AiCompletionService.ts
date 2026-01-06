@@ -9,49 +9,49 @@ import { platformKey } from "@/utils/storage"
 import { userStore } from "@/opensource/models/user"
 
 /**
- * AI自动补全扩展选项接口
+ * AI auto-completion extension options interface.
  */
 export interface AIAutoCompletionExtensionOptions {
 	/**
-	 * 获取建议词的函数，接收当前文本，返回建议
+	 * Function to fetch suggestion text based on current editor content.
 	 */
 	fetchSuggestion?: (value: string) => Promise<string>
 }
 
 /**
- * AI自动补全服务
- * 负责管理编辑器中的AI补全功能，包括显示、隐藏建议词和处理用户交互
+ * AI auto-completion service.
+ * Manages AI suggestions in the editor: show/hide suggestions and handle interactions.
  *
- * 主要工作流程：
- * 1. 用户输入 -> onUpdate 触发 -> triggerFetchSuggestion 获取建议
- * 2. 获取建议成功 -> updateSuggestion 更新UI -> 用户可按Tab接受建议
- * 3. 用户按Tab -> 调用 editor.commands.insertContent 插入建议 -> clearSuggestion 清除建议词理
+ * Flow:
+ * 1. User types -> onUpdate triggers -> triggerFetchSuggestion fetches suggestion
+ * 2. On success -> updateSuggestion updates UI -> user can accept with Tab
+ * 3. User presses Tab -> editor.commands.insertContent inserts suggestion -> clearSuggestion clears state
  */
 class AiCompletionService {
-	/** 编辑器实例引用 */
+	/** Editor instance reference */
 	instance: DelightfulRichEditorRef | null = null
 
-	/** 是否正在进行输入法组合输入（如中文输入） */
+	/** Whether IME composition is active (e.g., Chinese input) */
 	composition: boolean = false
 
-	/** 当前文本内容的缓存，用于比较变化 */
+	/** Cache of current text content for change comparison */
 	valueCache: string = ""
 
-	/** 当前的建议词 */
+	/** Current suggestion text */
 	currentSuggestion: string = ""
 
-	/** 标记是否在执行撤销/重做等历史操作 */
+	/** Flag for undo/redo (history) operations */
 	isHistoryOperation: boolean = false
 
-	/** AI自动补全配置选项 */
+	/** AI auto-completion config options */
 	aiAutoCompletionOptions: AIAutoCompletionExtensionOptions | undefined
 
-	/** 标记是否正在执行清理操作，避免清理过程中触发其他操作 */
+	/** Flag for ongoing clear to avoid triggering other operations during cleanup */
 	isClear: boolean = false
 
 	/**
-	 * 构造函数
-	 * @param aiAutoCompletionOptions AI自动补全配置选项
+	 * Constructor
+	 * @param aiAutoCompletionOptions AI auto-completion options
 	 */
 	constructor(aiAutoCompletionOptions?: AIAutoCompletionExtensionOptions) {
 		this.instance = null
@@ -59,7 +59,7 @@ class AiCompletionService {
 	}
 
 	/**
-	 * 获取本地存储的键名
+	 * Get localStorage key for tracking usage.
 	 */
 	get localStorageKey() {
 		const userId = userStore.user.userInfo?.user_id
@@ -67,7 +67,7 @@ class AiCompletionService {
 	}
 
 	/**
-	 * 获取Tab键点击次数
+	 * Get Tab key pressed count.
 	 */
 	getTabCount() {
 		const tabCount = localStorage.getItem(this.localStorageKey)
@@ -75,7 +75,7 @@ class AiCompletionService {
 	}
 
 	/**
-	 * 增加Tab键点击次数
+	 * Increment Tab key pressed count.
 	 */
 	addTabCount() {
 		const tabCount = this.getTabCount()
@@ -83,85 +83,82 @@ class AiCompletionService {
 	}
 
 	/**
-	 * 设置编辑器实例
-	 * 在组件挂载时调用此方法
-	 * @param instance 富文本编辑器实例
+	 * Set the editor instance. Call on component mount.
+	 * @param instance Rich text editor instance
 	 */
 	setInstance = (instance: DelightfulRichEditorRef) => {
 		this.instance = instance
 	}
 
 	/**
-	 * 判断文本是否为空
-	 * 被 updateSuggestion 调用，用于决定是否显示提示
-	 * @param suggestion 要检查的文本
-	 * @returns 是否为空（null、undefined、空字符串、只包含空白或特殊字符）
+	 * Determine whether suggestion text is effectively empty.
+	 * Used by updateSuggestion to decide visibility.
+	 * @param suggestion Text to check.
+	 * @returns True if empty (null/undefined/empty/only whitespace or invisible chars).
 	 */
 	isEmptyText = (suggestion?: string) => {
-		// 处理null、undefined、空字符串情况
+		// Handle null/undefined/empty string
 		if (!suggestion) return true
 
-		// 处理只包含空白字符的情况
+		// Whitespace-only
 		const trimmed = suggestion.trim()
 		if (trimmed.length === 0) return true
 
-		// 检查是否只包含不可见字符或特殊字符
-		// 通过将所有不可打印字符一个个替换掉，看是否有可见内容
+		// Remove invisible/special characters to check for visible content
 		let visible = trimmed
 
-		// 删除空格和制表符
+		// Remove spaces and tabs
 		visible = visible.replace(/\s+/g, "")
 
-		// 删除常见的零宽字符（一个个单独替换）
-		visible = visible.replace(/\u200B/g, "") // 零宽空格
-		visible = visible.replace(/\u200C/g, "") // 零宽非连接符
-		visible = visible.replace(/\u200D/g, "") // 零宽连接符
-		visible = visible.replace(/\uFEFF/g, "") // 零宽不换行空格
-		visible = visible.replace(/\u200E/g, "") // 零宽非断字空格
+		// Remove common zero-width characters (individually)
+		visible = visible.replace(/\u200B/g, "") // zero-width space
+		visible = visible.replace(/\u200C/g, "") // zero-width non-joiner
+		visible = visible.replace(/\u200D/g, "") // zero-width joiner
+		visible = visible.replace(/\uFEFF/g, "") // zero-width no-break space
+		visible = visible.replace(/\u200E/g, "") // left-to-right mark
 
 		visible = visible.replace(/\uFE0F/g, "")
 
-		// 最终检查是否为空
+		// Final emptiness check
 		return visible.length === 0
 	}
 
 	/**
-	 * 更新建议词并显示提示
-	 * 由 triggerFetchSuggestion 在获取新建议后调用
-	 * 也被 clearSuggestion 调用来清除建议
-	 * @param suggestion 建议词
+	 * Update suggestion text and show hint.
+	 * Called by triggerFetchSuggestion after fetching or by clearSuggestion to reset.
+	 * @param suggestion Suggestion text.
 	 */
 	updateSuggestion = (suggestion?: string) => {
 		const editor = this.instance?.editor
 		if (!editor) return
 
 		const isEmpty = this.isEmptyText(suggestion)
-		// 如果建议为空，隐藏提示并清除属性
+		// If empty, hide hint and clear attributes
 		if (isEmpty) {
-			// 清除段落属性中的建议词
+			// Clear suggestion on paragraph node
 			editor.commands.updateAttributes("paragraph", { suggestion: "" })
 			AiCompletionTip.hide()
 			return
 		}
 
-		// 保存当前建议词以便恢复
+		// Save current suggestion for potential restore
 		this.currentSuggestion = suggestion || ""
 
-		// 创建特殊标记的事务，确保不影响历史记录
+		// Create a specially flagged transaction that does not affect history
 		const { tr } = editor.state
 		tr.setMeta("addToHistory", false)
 		tr.setMeta("suggestionUpdate", true)
 		editor.view.dispatch(tr)
 
-		// 更新段落属性，添加建议词
+		// Update paragraph attribute with suggestion
 		editor.commands.updateAttributes("paragraph", { suggestion: suggestion || "" })
 
-		// 获取文档末尾位置，用于显示提示
+		// Get document end position to place the hint popup
 		const endPosition = this.getDocumentEndPosition()
 
-		// 如果有位置信息且建议不为空，显示提示
+		// If position exists and suggestion is not empty, show hint
 		if (endPosition && !isEmpty) {
-			// 如果Tab键点击次数小于2次，则显示提示
+			// Only show hint for the first two times the user uses Tab
 			if (this.getTabCount() < 2) {
 				AiCompletionTip.show({
 					left: endPosition.left,
@@ -174,33 +171,32 @@ class AiCompletionService {
 	}
 
 	/**
-	 * 获取文档末尾的视图坐标位置
-	 * 被 updateSuggestion 调用，用于定位提示框
-	 * @returns 文档末尾位置的DOMRect，包含坐标和尺寸信息
+	 * Get view coordinates for the end of the document to locate hint popup.
+	 * @returns DOMRect of the end position with coordinates and size.
 	 */
 	getDocumentEndPosition = () => {
 		const editor = this.instance?.editor
 		if (!editor) return
 
-		// 保存当前光标位置
+		// Save current cursor position
 		const currentCursorPosition = editor.state.selection.head
-		// 获取文档末尾位置
+		// Get end position
 		const lastPosition = editor.state.doc.content.size - 1
 
-		// 先将光标移到末尾，获取位置信息
+		// Temporarily move cursor to end to read its position
 		editor.commands.focus(lastPosition, { scrollIntoView: false })
 		const endPosition = this.getCurrentCursorPosition()
 
-		// 恢复光标位置
+		// Restore original cursor position
 		editor.commands.focus(currentCursorPosition, { scrollIntoView: false })
 
 		return endPosition
 	}
 
 	/**
-	 * 获取当前光标的视图坐标位置
-	 * 被 getDocumentEndPosition 调用
-	 * @returns 当前光标的DOMRect，包含坐标和尺寸信息
+	 * Get view coordinates for the current cursor position.
+	 * Used by getDocumentEndPosition.
+	 * @returns DOMRect for current selection.
 	 */
 	getCurrentCursorPosition = () => {
 		const selection = window.getSelection()
@@ -213,25 +209,24 @@ class AiCompletionService {
 	}
 
 	/**
-	 * 触发获取AI建议词（带防抖）
-	 * 由编辑器的 onUpdate 事件触发，当内容变化时调用
-	 * 防抖处理避免频繁请求
+	 * Trigger fetching AI suggestion (debounced).
+	 * Fired by editor onUpdate when content changes; debounced to avoid floods.
 	 */
 	triggerFetchSuggestion = debounce(
 		() => {
 			const text = this.getText()
 
-			// 检查条件：有文本内容、配置了获取函数、不在输入法组合状态
+			// Conditions: has text, fetcher configured, not in IME composition
 			if (!text || !this.aiAutoCompletionOptions || this.composition) return
 
-			// 发起请求获取建议词
+			// Fetch suggestion
 			this.aiAutoCompletionOptions
 				?.fetchSuggestion?.(text)
 				.then((suggestion) => {
-					// 只有满足以下条件才更新建议词：
-					// 1. 编辑器不为空
-					// 2. 不在输入法组合状态
-					// 3. 当前文本内容没有变化（用户没有继续输入）
+					// Only update suggestion when:
+					// 1. Editor is not empty
+					// 2. Not in IME composition
+					// 3. Current text has not changed (user didn’t keep typing)
 					if (
 						!this.instance?.editor?.isEmpty &&
 						!this.composition &&
@@ -252,9 +247,9 @@ class AiCompletionService {
 	)
 
 	/**
-	 * 获取编辑器扩展
-	 * 在初始化编辑器时调用，添加AI补全相关的功能
-	 * @returns 用于TipTap编辑器的扩展
+	 * Get the TipTap extension for AI auto-completion features.
+	 * Call during editor initialization to wire functionality.
+	 * @returns TipTap extension.
 	 */
 	getExtension = () => {
 		// eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -266,10 +261,10 @@ class AiCompletionService {
 		>({
 			name: "ai-auto-completion",
 
-			// 设置高优先级，确保在其他扩展之前处理
+			// High priority so it runs before other extensions
 			priority: 1000,
 
-			// 添加全局属性，用于存储建议词
+			// Add global node attributes to store suggestion text
 			addGlobalAttributes() {
 				return [
 					{
@@ -289,32 +284,32 @@ class AiCompletionService {
 				]
 			},
 
-			// 添加ProseMirror插件，处理事务和状态更新
+			// Add ProseMirror plugin for transaction/state handling
 			addProseMirrorPlugins() {
 				return [
 					new Plugin({
-						// 处理事务并维护历史记录状态
+						// Handle transactions and maintain history flags
 						appendTransaction: (
 							transactions: readonly Transaction[],
 							_: EditorState,
 							newState: EditorState,
 						) => {
-							// 检查是否有历史操作（撤销/重做）
+							// Check for history ops (undo/redo)
 							const hasHistoryOp = transactions.some(
 								(tr) => tr.getMeta("isUndoing") || tr.getMeta("isRedoing"),
 							)
 
 							if (hasHistoryOp) {
-								// 标记为历史操作，稍后恢复建议词
+								// Mark as history op; restore suggestion later
 								self.isHistoryOperation = true
 
-								// 在撤销/重做后，使用异步方式恢复建议词
+								// After undo/redo, restore suggestion asynchronously
 								setTimeout(() => {
-									// 恢复建议词但不参与历史
+									// Restore suggestion without affecting history
 									if (self.isHistoryOperation && self.currentSuggestion) {
 										const editor = self.instance?.editor
 										if (editor) {
-											// 使用不记录历史的方式恢复建议词
+											// Dispatch transaction that doesn't enter history
 											const { tr } = editor.state
 											tr.setMeta("addToHistory", false)
 											tr.setMeta("suggestionUpdate", true)
@@ -329,7 +324,7 @@ class AiCompletionService {
 								}, 0)
 							}
 
-							// 检查是否是建议词更新事务，确保这类事务不影响历史
+							// Ensure suggestion-update transactions do not affect history
 							if (transactions.some((tr) => tr.getMeta("suggestionUpdate"))) {
 								return newState.tr.setMeta("addToHistory", false)
 							}
@@ -340,7 +335,7 @@ class AiCompletionService {
 				]
 			},
 
-			// 监控事务，标记历史操作
+			// Watch transactions to mark history ops
 			onTransaction({ transaction }) {
 				if (transaction.getMeta("isUndoing") || transaction.getMeta("isRedoing")) {
 					self.isHistoryOperation = true
@@ -348,11 +343,10 @@ class AiCompletionService {
 			},
 
 			/**
-			 * 监控编辑器内容更新，触发获取建议
-			 * 当用户输入内容时自动触发
+			 * Observe editor updates to trigger suggestion fetch when user types.
 			 */
 			onUpdate() {
-				// 如果正在执行清理操作，跳过处理
+				// Skip while clearing
 				if (self.isClear) {
 					self.isClear = false
 					return
@@ -363,32 +357,31 @@ class AiCompletionService {
 
 				const text = self.getText()
 
-				// 只有满足以下条件才触发获取建议：
-				// 1. 有文本内容
-				// 2. 文本内容发生变化
-				// 3. 不在输入法组合状态
+				// Conditions to fetch:
+				// 1) Has text
+				// 2) Text changed
+				// 3) Not composing
 				if (text && text !== self.valueCache && !self.composition) {
 					self.triggerFetchSuggestion()
 				}
 			},
 
-			// 编辑器失焦时，清除建议
+			// Clear suggestion when editor blurs
 			onBlur() {
 				if (self.valueCache) {
 					self.clearSuggestion()
 				}
 			},
 
-			// 添加键盘快捷键处理，Tab键接受建议
+			// Add keyboard shortcut: Tab to accept suggestion
 			addKeyboardShortcuts() {
 				return {
 					Tab: ({ editor }) => {
-						// 获取建议词
+						// Retrieve suggestion attribute
 						const attr = editor.getAttributes("paragraph")
 						const { suggestion } = attr
 
-						// 加强检查，确保建议词有效
-						// 只有在有有效建议词的情况下才执行操作
+						// Robust check to ensure suggestion validity
 						if (
 							suggestion &&
 							typeof suggestion === "string" &&
@@ -397,27 +390,27 @@ class AiCompletionService {
 							editor.chain().focus().run()
 
 							const currentPosition = editor.state.selection.head
-							// 获取文档末尾位置
+							// Get end position
 							const endPosition = editor.state.doc.content.size - 1
 							editor.commands.focus(endPosition)
 
-							// 在文档末尾插入建议文本
+							// Insert suggestion at the document end
 							editor.commands.insertContent(suggestion)
 
-							// 增加Tab键点击次数
+							// Increment counter
 							self.addTabCount()
 
-							// 检查光标是否需要恢复
+							// Restore cursor if needed
 							const isNotLastPosition = currentPosition < endPosition
 							if (isNotLastPosition) {
 								editor.commands.focus(currentPosition)
 							}
 
-							// 插入后清除建议
+							// Clear after insertion
 							self.clearSuggestion()
 						}
 
-						// 禁用Tab键默认行为
+						// Disable default Tab behavior
 						return true
 					},
 				}
@@ -426,37 +419,35 @@ class AiCompletionService {
 	}
 
 	/**
-	 * 获取编辑器当前文本内容
-	 * 被多个函数调用，用于获取当前编辑器内容
-	 * @returns 文本内容
+	 * Get current editor text content.
+	 * @returns Text content.
 	 */
 	getText = () => {
 		return this.instance?.editor?.getText()
 	}
 
 	/**
-	 * 清除建议词和相关状态
-	 * 在接受建议、取消建议或编辑器失焦时调用
+	 * Clear suggestion and related state.
+	 * Called when accepting, canceling suggestion, or on blur.
 	 */
 	clearSuggestion = () => {
 		this.isClear = true
 		this.valueCache = ""
 		this.currentSuggestion = ""
 
-		// 确保编辑器存在
+		// Ensure editor exists
 		const editor = this.instance?.editor
 		if (editor) {
-			// 直接清除段落属性中的建议词，确保Tab处理程序不会响应
+			// Clear paragraph attribute directly so Tab handler won’t react
 			editor.commands.updateAttributes("paragraph", { suggestion: "" })
 		}
 
-		// 隐藏提示，不再通过updateSuggestion间接调用
+		// Hide hint (do not route via updateSuggestion)
 		AiCompletionTip.hide()
 	}
 
 	/**
-	 * 处理输入法组合开始事件（如中文输入）
-	 * 当用户开始使用输入法输入时触发
+	 * Handle IME composition start (e.g., Chinese input).
 	 */
 	onCompositionStart = () => {
 		this.composition = true
@@ -464,8 +455,7 @@ class AiCompletionService {
 	}
 
 	/**
-	 * 处理输入法组合结束事件
-	 * 当用户完成输入法输入时触发，重新开始获取建议
+	 * Handle IME composition end; resume suggestion fetching.
 	 */
 	onCompositionEnd = () => {
 		this.composition = false
@@ -473,7 +463,7 @@ class AiCompletionService {
 	}
 }
 
-// 导出单例实例
+// Export singleton
 export default new AiCompletionService({
 	fetchSuggestion: EditorService.fetchAiAutoCompletion,
 })

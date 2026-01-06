@@ -12,7 +12,7 @@ export interface FileCacheData extends ChatFileUrlData {
 }
 
 /**
- * 聊天文件业务
+ * Chat file services
  */
 class ChatFileService {
 	fileInfoCache: Map<string, FileCacheData> = new Map()
@@ -22,7 +22,7 @@ class ChatFileService {
 	}
 
 	/**
-	 * 初始化
+	 * Initialize
 	 */
 	init() {
 		chatDb
@@ -37,7 +37,7 @@ class ChatFileService {
 	}
 
 	/**
-	 * 获取文件信息缓存
+	 * Get file info cache
 	 */
 	getFileInfoCache(fileId?: string) {
 		if (!fileId) return undefined
@@ -45,7 +45,7 @@ class ChatFileService {
 	}
 
 	/**
-	 * 缓存文件信息
+	 * Cache file information
 	 */
 	cacheFileUrl(fileInfo: ChatFileUrlData & { file_id: string; message_id: string }) {
 		this.fileInfoCache.set(fileInfo.file_id, fileInfo)
@@ -53,26 +53,26 @@ class ChatFileService {
 	}
 
 	/**
-	 * 检查文件是否过期
+	 * Check if file has expired
 	 */
 	checkFileExpired(fileId: string, expiredTime: number = 30 * 60 * 1000) {
 		const fileInfo = this.fileInfoCache.get(fileId)
 
 		if (!fileInfo) return true
 
-		// 如果还有半小时过期则认为过期
+		// Consider expired if less than 30 minutes remaining
 		return fileInfo.expires * 1000 < Date.now() + expiredTime
 	}
 
 	/**
-	 * 获取文件信息
+	 * Get file information
 	 */
 	fetchFileUrl(
 		datas?: { file_id: string; message_id: string }[],
 	): Promise<Record<string, FileCacheData>> {
 		if (!datas || !datas.length) return Promise.resolve({})
 
-		// 检测是否过期
+		// Detect if expired
 		const { true: expired = [], false: notExpired = [] } = groupBy(datas, (item) => {
 			return this.checkFileExpired(item.file_id)
 		})
@@ -90,7 +90,7 @@ class ChatFileService {
 					})
 				}
 
-				// 返回文件信息
+				// Return file information
 				return datas.reduce((acc, item) => {
 					acc[item.file_id] = this.fileInfoCache.get(item.file_id)!
 					return acc

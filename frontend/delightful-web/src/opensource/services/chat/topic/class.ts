@@ -14,29 +14,29 @@ import TopicDBServices from "./TopicDBServices"
 import TopicCacheServices from "./TopicCacheServices"
 import MessageService from "../message/MessageService"
 
-// 创建专用的日志记录器
+// Create dedicated logger
 const logger = new Logger("ChatTopic", "blue")
 
 class ChatTopicService {
 	/**
-	 * 魔法ID
+	 * Magic ID (account ID)
 	 */
 	delightfulId: string | undefined
 
 	/**
-	 * 组织编码
+	 * Organization code
 	 */
 	organizationCode: string | undefined
 
 	/**
-	 * 最后初始化的话题列表的会话ID
+	 * Last initialized conversation ID for topic list
 	 */
 	lastConversationId: string | undefined
 
 	/**
-	 * 初始化
-	 * @param delightfulId 账户 ID
-	 * @param organizationCode 组织编码
+	 * Initialize
+	 * @param delightfulId Account ID
+	 * @param organizationCode Organization code
 	 */
 	init(delightfulId: string, organizationCode: string) {
 		this.delightfulId = delightfulId
@@ -44,23 +44,23 @@ class ChatTopicService {
 	}
 
 	/**
-	 * 初始化话题列表
-	 * @param conversation 会话
+	 * Initialize topic list
+	 * @param conversation Conversation
 	 */
 	async initTopicList(conversation: Conversation) {
-		// 如果会话ID相同，则不进行初始化
+		// If conversation ID is the same, skip initialization
 		if (this.lastConversationId === conversation.id) {
 			return
 		}
 
-		// 缓存当前会话列表
+		// Cache current conversation list
 		if (this.lastConversationId) {
 			TopicCacheServices.setTopicCache(this.lastConversationId, topicStore.topicList)
 		}
 
 		this.lastConversationId = conversation.id
 
-		// 如果缓存中存在话题列表，则优先使用缓存
+		// If topic list exists in cache, use cache first
 		if (TopicCacheServices.hasTopicCache(conversation.id)) {
 			const cachedTopics = TopicCacheServices.getTopicCache(conversation.id) || []
 			topicStore.setTopicList(cachedTopics)
@@ -69,10 +69,10 @@ class ChatTopicService {
 				conversationService.switchTopic(conversation.id, cachedTopics[0]?.id)
 			}
 		} else {
-			// 从数据库加载话题列表
+			// Load topic list from database
 			await TopicDBServices.loadTopicsFromDB(conversation.id)
 				.then((topics = []) => {
-					// 如果数据库中有数据，则更新话题列表和缓存
+					// If database has data, update topic list and cache
 					topicStore.setTopicList(topics)
 					TopicCacheServices.setTopicCache(conversation.id, topics)
 
@@ -91,7 +91,7 @@ class ChatTopicService {
 
 		await this.fetchTopicList()
 
-		// 如果没有话题，创建一个话题
+		// If no topics, create one
 		logger.log("topicStore.topicList ====> ", topicStore.topicList)
 		if (!topicStore.topicList.length) {
 			await this.createTopic()
@@ -99,34 +99,34 @@ class ChatTopicService {
 	}
 
 	/**
-	 * 应用创建话题消息
-	 * @param message 消息
+	 * Apply create topic message
+	 * @param message Message
 	 */
 	applyCreateTopicMessage(message: SeqResponse<CreateTopicMessage>) {
 		logger.log(
-			`[applyCreateTopicMessage] 开始应用创建话题消息，会话ID: ${message.conversation_id}`,
+			`[applyCreateTopicMessage] Begin applying create topic message, conversation ID: ${message.conversation_id}`,
 		)
 		try {
 			const newTopic = new Topic(message.message.create_topic)
-			logger.log(`[applyCreateTopicMessage] 新话题信息:`, newTopic)
+			logger.log(`[applyCreateTopicMessage] New topic info:`, newTopic)
 
 			if (conversationStore.currentConversation?.id === message.conversation_id) {
-				logger.log(`[applyCreateTopicMessage] 更新当前会话的UI状态`)
-				// 更新 UI 状态
+				logger.log(`[applyCreateTopicMessage] Update current conversation UI state`)
+				// Update UI state
 				topicStore.unshiftTopic(newTopic)
 				logger.log("topicStore.topicList ====> ", topicStore.topicList)
-				// 更新数据库
+				// Update database
 				TopicDBServices.addTopicToDB(newTopic)
 			} else if (TopicCacheServices.hasTopicCache(message.conversation_id)) {
-				logger.log(`[applyCreateTopicMessage] 更新缓存中的话题列表`)
+				logger.log(`[applyCreateTopicMessage] Update topic list in cache`)
 				const cachedTopics = TopicCacheServices.getTopicCache(message.conversation_id)!
 				const newTopics = [newTopic, ...cachedTopics]
 				TopicCacheServices.setTopicCache(message.conversation_id, newTopics)
 
-				// 更新数据库
+				// Update database
 				TopicDBServices.addTopicToDB(newTopic)
 			}
-			logger.log(`[applyCreateTopicMessage] 应用创建话题消息完成`)
+			logger.log(`[applyCreateTopicMessage] Apply create topic message completed`)
 		} catch (err) {
 			logger.log("applyCreateTopicMessage error", err)
 		}

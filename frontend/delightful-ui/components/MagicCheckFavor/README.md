@@ -47,11 +47,11 @@ const [isChecked, setIsChecked] = useState(false);
 -   **Interactive Feedback**: Provides intuitive visual feedback, enhancing user experience
 -   **Lightweight**: Simple component implementation, no additional dependencies
 
-## 使用场景
+## Use Cases
 
--   收藏夹中的项目选择
--   喜爱/收藏功能的交互元素
--   偏好设置中的开关选项
--   任何需要表示"收藏"或"喜爱"状态的界面元素
+-   Item selection in favorites
+-   Interactive elements for like/favorite features
+-   Toggle options in preference settings
+-   Any interface elements that need to display "favorite" or "like" status
 
-DelightfulCheckFavor 组件通过提供一个视觉上更符合收藏场景的复选框，使得用户在进行收藏操作时能够获得更直观的反馈，提升整体用户体验。
+DelightfulCheckFavor component provides a visually more appropriate checkbox for favorite scenarios, allowing users to get more intuitive feedback when performing favorite operations, improving overall user experience.

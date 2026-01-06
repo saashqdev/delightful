@@ -10,7 +10,7 @@ exports[`DelightfulDropdown > Snapshot tests > Basic dropdown snapshot 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulDropdown > 快照测试 > 带图标下拉菜单快照 1`] = `
+exports[`DelightfulDropdown > Snapshot tests > dropdown menu with icon snapshot 1`] = `
 <DocumentFragment>
   <div
     class="delightful-dropdown-trigger"
@@ -20,7 +20,7 @@ exports[`DelightfulDropdown > 快照测试 > 带图标下拉菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulDropdown > 快照测试 > 带按钮样式下拉菜单快照 1`] = `
+exports[`DelightfulDropdown > Snapshot tests > dropdown menu with button style snapshot 1`] = `
 <DocumentFragment>
   <button
     class="delightful-dropdown-trigger"
@@ -30,7 +30,7 @@ exports[`DelightfulDropdown > 快照测试 > 带按钮样式下拉菜单快照 1
 </DocumentFragment>
 `;
 
-exports[`DelightfulDropdown > 快照测试 > 带类名下拉菜单快照 1`] = `
+exports[`DelightfulDropdown > Snapshot tests > dropdown menu with custom class snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-dropdown-trigger custom-dropdown"
@@ -40,7 +40,7 @@ exports[`DelightfulDropdown > 快照测试 > 带类名下拉菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulDropdown > 快照测试 > 带自定义属性下拉菜单快照 1`] = `
+exports[`DelightfulDropdown > Snapshot tests > dropdown menu with custom attributes snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-dropdown-trigger"
@@ -50,7 +50,7 @@ exports[`DelightfulDropdown > 快照测试 > 带自定义属性下拉菜单快�
 </DocumentFragment>
 `;
 
-exports[`DelightfulDropdown > 快照测试 > 带菜单项下拉菜单快照 1`] = `
+exports[`DelightfulDropdown > Snapshot tests > dropdown menu with menu items snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-dropdown-trigger"
@@ -60,7 +60,7 @@ exports[`DelightfulDropdown > 快照测试 > 带菜单项下拉菜单快照 1`] 
 </DocumentFragment>
 `;
 
-exports[`DelightfulDropdown > 快照测试 > 禁用状态下拉菜单快照 1`] = `
+exports[`DelightfulDropdown > Snapshot tests > disabled state dropdown menu snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-dropdown-trigger"

@@ -7,56 +7,56 @@ const renderWithTheme = (component: React.ReactElement) =>
 	render(<DelightfulThemeProvider theme="light">{component}</DelightfulThemeProvider>)
 
 describe("DelightfulMenu", () => {
-	it("应该正常渲染", () => {
+	it("should render normally", () => {
 		renderWithTheme(
 			<DelightfulMenu
 				items={[
 					{
 						key: "1",
-						label: "菜单项1",
+						label: "Menu Item 1",
 					},
 				]}
 			/>,
 		)
-		expect(screen.getByText("菜单项1")).toBeInTheDocument()
+		expect(screen.getByText("Menu Item 1")).toBeInTheDocument()
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础菜单快照", () => {
+	describe("Snapshot tests", () => {
+		it("basic menu snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulMenu
 					items={[
-						{ key: "1", label: "菜单项1" },
-						{ key: "2", label: "菜单项2" },
+						{ key: "1", label: "Menu Item 1" },
+						{ key: "2", label: "Menu Item 2" },
 					]}
 				/>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带图标菜单快照", () => {
+		it("menu with icon snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulMenu
 					items={[
-						{ key: "1", label: "菜单项1", icon: <span>🏠</span> },
-						{ key: "2", label: "菜单项2", icon: <span>⚙️</span> },
+						{ key: "1", label: "Menu Item 1", icon: <span>🏠</span> },
+						{ key: "2", label: "Menu Item 2", icon: <span>⚙️</span> },
 					]}
 				/>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带子菜单快照", () => {
+		it("menu with submenu snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulMenu
 					items={[
 						{
 							key: "1",
-							label: "父菜单",
+							label: "Parent Menu",
 							children: [
-								{ key: "1-1", label: "子菜单1" },
-								{ key: "1-2", label: "子菜单2" },
+								{ key: "1-1", label: "Submenu 1" },
+								{ key: "1-2", label: "Submenu 2" },
 							],
 						},
 					]}
@@ -65,52 +65,52 @@ describe("DelightfulMenu", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("选中状态菜单快照", () => {
+		it("menu with selected state snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulMenu
 					selectedKeys={["1"]}
 					items={[
-						{ key: "1", label: "菜单项1" },
-						{ key: "2", label: "菜单项2" },
+						{ key: "1", label: "Menu Item 1" },
+						{ key: "2", label: "Menu Item 2" },
 					]}
 				/>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("垂直菜单快照", () => {
+		it("vertical menu snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulMenu
 					mode="vertical"
 					items={[
-						{ key: "1", label: "菜单项1" },
-						{ key: "2", label: "菜单项2" },
+						{ key: "1", label: "Menu Item 1" },
+						{ key: "2", label: "Menu Item 2" },
 					]}
 				/>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带自定义样式菜单快照", () => {
+		it("menu with custom style snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulMenu
 					style={{ width: "200px" }}
 					items={[
-						{ key: "1", label: "菜单项1" },
-						{ key: "2", label: "菜单项2" },
+						{ key: "1", label: "Menu Item 1" },
+						{ key: "2", label: "Menu Item 2" },
 					]}
 				/>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带类名菜单快照", () => {
+		it("menu with custom class snapshot", () => {
 			const { asFragment } = renderWithTheme(
 				<DelightfulMenu
 					className="custom-menu"
 					items={[
-						{ key: "1", label: "菜单项1" },
-						{ key: "2", label: "菜单项2" },
+						{ key: "1", label: "Menu Item 1" },
+						{ key: "2", label: "Menu Item 2" },
 					]}
 				/>,
 			)

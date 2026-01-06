@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`DelightfulMenu > 快照测试 > 垂直菜单快照 1`] = `
+exports[`DelightfulMenu > Snapshot tests > vertical menu snapshot 1`] = `
 <DocumentFragment>
   <ul
     class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rk delightful-menu-css-var"
@@ -42,7 +42,7 @@ exports[`DelightfulMenu > 快照测试 > 垂直菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulMenu > 快照测试 > 基础菜单快照 1`] = `
+exports[`DelightfulMenu > Snapshot tests > basic menu snapshot 1`] = `
 <DocumentFragment>
   <ul
     class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-r3 delightful-menu-css-var"
@@ -84,7 +84,7 @@ exports[`DelightfulMenu > 快照测试 > 基础菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulMenu > 快照测试 > 带图标菜单快照 1`] = `
+exports[`DelightfulMenu > Snapshot tests > menu with icon snapshot 1`] = `
 <DocumentFragment>
   <ul
     class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-r8 delightful-menu-css-var"
@@ -136,7 +136,7 @@ exports[`DelightfulMenu > 快照测试 > 带图标菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulMenu > 快照测试 > 带子菜单快照 1`] = `
+exports[`DelightfulMenu > Snapshot tests > menu with submenu snapshot 1`] = `
 <DocumentFragment>
   <ul
     class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rd delightful-menu-css-var"
@@ -175,7 +175,7 @@ exports[`DelightfulMenu > 快照测试 > 带子菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulMenu > 快照测试 > 带类名菜单快照 1`] = `
+exports[`DelightfulMenu > Snapshot tests > menu with custom class snapshot 1`] = `
 <DocumentFragment>
   <ul
     class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk custom-menu acss-1691gak css-dev-only-do-not-override-yotw4n css-var-ru delightful-menu-css-var"
@@ -217,7 +217,7 @@ exports[`DelightfulMenu > 快照测试 > 带类名菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulMenu > 快照测试 > 带自定义样式菜单快照 1`] = `
+exports[`DelightfulMenu > Snapshot tests > menu with custom style snapshot 1`] = `
 <DocumentFragment>
   <ul
     class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rp delightful-menu-css-var"
@@ -260,7 +260,7 @@ exports[`DelightfulMenu > 快照测试 > 带自定义样式菜单快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulMenu > 快照测试 > 选中状态菜单快照 1`] = `
+exports[`DelightfulMenu > Snapshot tests > menu with selected state snapshot 1`] = `
 <DocumentFragment>
   <ul
     class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rf delightful-menu-css-var"

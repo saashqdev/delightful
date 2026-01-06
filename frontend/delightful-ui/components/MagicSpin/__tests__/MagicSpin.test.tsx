@@ -30,62 +30,62 @@ describe("DelightfulSpin", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("加载状态快照", () => {
+		it("loading state snapshot", () => {
 			const { asFragment } = render(
 				<DelightfulThemeProvider theme="light">
 					<DelightfulSpin spinning>
-						<div>内容区域</div>
+						<div>Content area</div>
 					</DelightfulSpin>
 				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带提示文字快照", () => {
+		it("with tip text snapshot", () => {
 			const { asFragment } = render(
 				<DelightfulThemeProvider theme="light">
-					<DelightfulSpin tip="加载中...">
-						<div>内容区域</div>
+					<DelightfulSpin tip="Loading...">
+						<div>Content area</div>
 					</DelightfulSpin>
 				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("小尺寸加载器快照", () => {
+		it("small size loader snapshot", () => {
 			const { asFragment } = render(
 				<DelightfulThemeProvider theme="light">
 					<DelightfulSpin size="small">
-						<div>内容区域</div>
+						<div>Content area</div>
 					</DelightfulSpin>
 				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("大尺寸加载器快照", () => {
+		it("large size loader snapshot", () => {
 			const { asFragment } = render(
 				<DelightfulThemeProvider theme="light">
 					<DelightfulSpin size="large">
-						<div>内容区域</div>
+						<div>Content area</div>
 					</DelightfulSpin>
 				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("延迟加载快照", () => {
+		it("delayed loading snapshot", () => {
 			const { asFragment } = render(
 				<DelightfulThemeProvider theme="light">
 					<DelightfulSpin delay={500}>
-						<div>内容区域</div>
+						<div>Content area</div>
 					</DelightfulSpin>
 				</DelightfulThemeProvider>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("独立加载器快照", () => {
+		it("standalone loader snapshot", () => {
 			const { asFragment } = render(
 				<DelightfulThemeProvider theme="light">
 					<DelightfulSpin />

@@ -6,9 +6,9 @@ import DelightfulSegmented from "../index"
 describe("DelightfulSegmented", () => {
 	it("should render without crashing", () => {
 		const options = [
-			{ label: "选项1", value: "1" },
-			{ label: "选项2", value: "2" },
-			{ label: "选项3", value: "3" },
+			{ label: "Option 1", value: "1" },
+			{ label: "Option 2", value: "2" },
+			{ label: "Option 3", value: "3" },
 		]
 
 		render(
@@ -18,15 +18,15 @@ describe("DelightfulSegmented", () => {
 		)
 
 		// Verify options render
-		expect(screen.getByText("选项1")).toBeInTheDocument()
-		expect(screen.getByText("选项2")).toBeInTheDocument()
-		expect(screen.getByText("选项3")).toBeInTheDocument()
+		expect(screen.getByText("Option 1")).toBeInTheDocument()
+		expect(screen.getByText("Option 2")).toBeInTheDocument()
+		expect(screen.getByText("Option 3")).toBeInTheDocument()
 	})
 
 	it("should handle value change", () => {
 		const options = [
-			{ label: "选项1", value: "1" },
-			{ label: "选项2", value: "2" },
+			{ label: "Option 1", value: "1" },
+			{ label: "Option 2", value: "2" },
 		]
 		const onChange = vi.fn()
 
@@ -36,19 +36,19 @@ describe("DelightfulSegmented", () => {
 			</DelightfulThemeProvider>,
 		)
 
-		const option2 = screen.getByText("选项2")
+		const option2 = screen.getByText("Option 2")
 		option2.click()
 
 		expect(onChange).toHaveBeenCalledWith("2")
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础分段控制器快照", () => {
+	describe("Snapshot tests", () => {
+		it("basic segmented control snapshot", () => {
 			const options = [
-				{ label: "选项1", value: "1" },
-				{ label: "选项2", value: "2" },
-				{ label: "选项3", value: "3" },
+				{ label: "Option 1", value: "1" },
+				{ label: "Option 2", value: "2" },
+				{ label: "Option 3", value: "3" },
 			]
 
 			const { asFragment } = render(
@@ -59,11 +59,11 @@ describe("DelightfulSegmented", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带默认值分段控制器快照", () => {
+		it("segmented control with default value snapshot", () => {
 			const options = [
-				{ label: "选项1", value: "1" },
-				{ label: "选项2", value: "2" },
-				{ label: "选项3", value: "3" },
+				{ label: "Option 1", value: "1" },
+				{ label: "Option 2", value: "2" },
+				{ label: "Option 3", value: "3" },
 			]
 
 			const { asFragment } = render(
@@ -74,10 +74,10 @@ describe("DelightfulSegmented", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("禁用状态分段控制器快照", () => {
+		it("disabled state segmented control snapshot", () => {
 			const options = [
-				{ label: "选项1", value: "1" },
-				{ label: "选项2", value: "2" },
+				{ label: "Option 1", value: "1" },
+				{ label: "Option 2", value: "2" },
 			]
 
 			const { asFragment } = render(
@@ -88,10 +88,10 @@ describe("DelightfulSegmented", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("大尺寸分段控制器快照", () => {
+		it("large size segmented control snapshot", () => {
 			const options = [
-				{ label: "选项1", value: "1" },
-				{ label: "选项2", value: "2" },
+				{ label: "Option 1", value: "1" },
+				{ label: "Option 2", value: "2" },
 			]
 
 			const { asFragment } = render(
@@ -102,10 +102,10 @@ describe("DelightfulSegmented", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("小尺寸分段控制器快照", () => {
+		it("small size segmented control snapshot", () => {
 			const options = [
-				{ label: "选项1", value: "1" },
-				{ label: "选项2", value: "2" },
+				{ label: "Option 1", value: "1" },
+				{ label: "Option 2", value: "2" },
 			]
 
 			const { asFragment } = render(
@@ -116,10 +116,10 @@ describe("DelightfulSegmented", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带图标分段控制器快照", () => {
+		it("segmented control with icon snapshot", () => {
 			const options = [
-				{ label: "选项1", value: "1", icon: <span>🚀</span> },
-				{ label: "选项2", value: "2", icon: <span>⭐</span> },
+				{ label: "Option 1", value: "1", icon: <span>🚀</span> },
+				{ label: "Option 2", value: "2", icon: <span>⭐</span> },
 			]
 
 			const { asFragment } = render(
@@ -130,10 +130,10 @@ describe("DelightfulSegmented", () => {
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("块级分段控制器快照", () => {
+		it("block level segmented control snapshot", () => {
 			const options = [
-				{ label: "选项1", value: "1" },
-				{ label: "选项2", value: "2" },
+				{ label: "Option 1", value: "1" },
+				{ label: "Option 2", value: "2" },
 			]
 
 			const { asFragment } = render(

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`DelightfulSearch > 快照测试 > 基础搜索框快照 1`] = `
+exports[`DelightfulSearch > Snapshot tests > basic search box snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-input-affix-wrapper css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r1 delightful-input-css-var"
@@ -38,7 +38,7 @@ exports[`DelightfulSearch > 快照测试 > 基础搜索框快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSearch > 快照测试 > 大尺寸搜索框快照 1`] = `
+exports[`DelightfulSearch > Snapshot tests > large size search box snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-input-affix-wrapper delightful-input-affix-wrapper-lg css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r6 delightful-input-css-var"
@@ -76,7 +76,7 @@ exports[`DelightfulSearch > 快照测试 > 大尺寸搜索框快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSearch > 快照测试 > 小尺寸搜索框快照 1`] = `
+exports[`DelightfulSearch > Snapshot tests > small size search box snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-input-affix-wrapper delightful-input-affix-wrapper-sm css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r7 delightful-input-css-var"
@@ -114,7 +114,7 @@ exports[`DelightfulSearch > 快照测试 > 小尺寸搜索框快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSearch > 快照测试 > 带前缀图标搜索框快照 1`] = `
+exports[`DelightfulSearch > Snapshot tests > search box with prefix icon snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-input-affix-wrapper css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r3 delightful-input-css-var"
@@ -136,7 +136,7 @@ exports[`DelightfulSearch > 快照测试 > 带前缀图标搜索框快照 1`] = 
 </DocumentFragment>
 `;
 
-exports[`DelightfulSearch > 快照测试 > 带后缀图标搜索框快照 1`] = `
+exports[`DelightfulSearch > Snapshot tests > search box with suffix icon snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-input-affix-wrapper css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r4 delightful-input-css-var"
@@ -181,7 +181,7 @@ exports[`DelightfulSearch > 快照测试 > 带后缀图标搜索框快照 1`] = 
 </DocumentFragment>
 `;
 
-exports[`DelightfulSearch > 快照测试 > 带边框搜索框快照 1`] = `
+exports[`DelightfulSearch > Snapshot tests > search box with border snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-input-affix-wrapper css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r8 delightful-input-css-var"
@@ -219,7 +219,7 @@ exports[`DelightfulSearch > 快照测试 > 带边框搜索框快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSearch > 快照测试 > 带默认值搜索框快照 1`] = `
+exports[`DelightfulSearch > Snapshot tests > search box with default value snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-input-affix-wrapper css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r2 delightful-input-css-var"
@@ -256,7 +256,7 @@ exports[`DelightfulSearch > 快照测试 > 带默认值搜索框快照 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DelightfulSearch > 快照测试 > 禁用状态搜索框快照 1`] = `
+exports[`DelightfulSearch > Snapshot tests > disabled state search box snapshot 1`] = `
 <DocumentFragment>
   <span
     class="delightful-input-affix-wrapper delightful-input-disabled delightful-input-affix-wrapper-disabled css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r5 delightful-input-css-var"

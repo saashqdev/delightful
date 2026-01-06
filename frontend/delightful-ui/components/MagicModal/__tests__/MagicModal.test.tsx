@@ -7,63 +7,63 @@ const renderWithTheme = (component: React.ReactElement) =>
 	render(<DelightfulThemeProvider theme="light">{component}</DelightfulThemeProvider>)
 
 describe("DelightfulModal", () => {
-	it("应该正常渲染", () => {
+	it("should render normally", () => {
 		renderWithTheme(
-			<DelightfulModal open title="测试标题">
-				测试内容
+			<DelightfulModal open title="Test Title">
+				Test Content
 			</DelightfulModal>,
 		)
-		expect(screen.getByText("测试标题")).toBeInTheDocument()
-		expect(screen.getByText("测试内容")).toBeInTheDocument()
+		expect(screen.getByText("Test Title")).toBeInTheDocument()
+		expect(screen.getByText("Test Content")).toBeInTheDocument()
 	})
 
 	// Snapshot test
-	describe("快照测试", () => {
-		it("基础模态框快照", () => {
+	describe("Snapshot tests", () => {
+		it("basic modal snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulModal open title="基础模态框">
-					这是模态框内容
+				<DelightfulModal open title="Basic Modal">
+					This is modal content
 				</DelightfulModal>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("关闭状态模态框快照", () => {
+		it("closed state modal snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulModal open={false} title="关闭的模态框">
-					这是模态框内容
+				<DelightfulModal open={false} title="Closed Modal">
+					This is modal content
 				</DelightfulModal>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("带确认按钮模态框快照", () => {
+		it("modal with confirm button snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulModal open title="确认模态框" okText="确认" cancelText="取消">
-					确认要执行此操作吗？
+				<DelightfulModal open title="Confirm Modal" okText="Confirm" cancelText="Cancel">
+					Are you sure you want to perform this action?
 				</DelightfulModal>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("自定义宽度模态框快照", () => {
+		it("custom width modal snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulModal open title="宽模态框" width={800}>
-					这是一个较宽的模态框
+				<DelightfulModal open title="Wide Modal" width={800}>
+					This is a wider modal
 				</DelightfulModal>,
 			)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("无标题模态框快照", () => {
-			const { asFragment } = renderWithTheme(<DelightfulModal open>没有标题的模态框</DelightfulModal>)
+		it("modal without title snapshot", () => {
+			const { asFragment } = renderWithTheme(<DelightfulModal open>Modal without title</DelightfulModal>)
 			expect(asFragment()).toMatchSnapshot()
 		})
 
-		it("居中模态框快照", () => {
+		it("centered modal snapshot", () => {
 			const { asFragment } = renderWithTheme(
-				<DelightfulModal open title="居中模态框" centered>
-					这是一个居中的模态框
+				<DelightfulModal open title="Centered Modal" centered>
+					This is a centered modal
 				</DelightfulModal>,
 			)
 			expect(asFragment()).toMatchSnapshot()

@@ -7,7 +7,7 @@ import { cloneDeep } from "lodash-es"
 
 const UserDispatchService = {
 	/**
-	 * @description 切换组织
+	 * @description Switch organization
 	 * @param data
 	 */
 	switchOrganization: async (data: {
@@ -22,14 +22,14 @@ const UserDispatchService = {
 			userService.setDelightfulOrganizationCode(data.delightfulOrganizationCode)
 			await userService.loadUserInfo(data.userInfo, { showSwitchLoading: true })
 		} catch (err) {
-			// 切换失败，恢复当前组织
+			// Switch failed, recover current organization
 			userService.setUserInfo(oldUserInfo)
 			userService.setDelightfulOrganizationCode(oldDelightfulOrganizationCode)
 		}
 	},
 
 	/**
-	 * @description 切换账号
+	 * @description Switch account
 	 * @param data
 	 */
 	switchAccount: async (data: {
@@ -41,15 +41,15 @@ const UserDispatchService = {
 	},
 
 	/**
-	 * @description 添加账号
+	 * @description Add account
 	 * @param data
 	 */
 	addAccount: async (data: { userAccount: User.UserAccount }) => {
-		// 如果当前页面是登录页面，则刷新页面
+		// If current page is login page, refresh page
 		if (location.pathname === RoutePath.Login) {
 			const url = new URL(window.location.href)
 			const { searchParams } = url
-			/** 从定向URL这里，如果是站点外就需要考虑是否需要携带 */
+			/** From redirect URL, need to consider if external site requires it */
 			const redirectURI = searchParams.get(LoginValueKey.REDIRECT_URL)
 			if (redirectURI) {
 				window.location.assign(decodeURIComponent(redirectURI))
@@ -57,7 +57,7 @@ const UserDispatchService = {
 				window.location.assign(RoutePath.Chat)
 			}
 		} else {
-			// 内存状态同步
+			// Sync in-memory state
 			userStore.account.setAccount(data.userAccount)
 
 			await userService.switchAccount(
@@ -69,7 +69,7 @@ const UserDispatchService = {
 	},
 
 	/**
-	 * @description 删除账号
+	 * @description Delete account
 	 * @param data
 	 */
 	deleteAccount: async (data: { delightfulId?: string; navigateToLogin?: boolean }) => {

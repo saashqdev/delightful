@@ -30,7 +30,7 @@ export class LoginService {
 	}
 
 	/**
-	 * @description 统一登录
+	 * @description Unified login
 	 */
 	loginStep = <T extends Login.LoginType>(type: T, values: LoginFormValuesMap[T]) => {
 		return async () => {
@@ -47,12 +47,12 @@ export class LoginService {
 				case Login.LoginType.WechatOfficialAccount:
 					return this.userApi.thirdPartyLogins(values as Login.ThirdPartyLoginsFormValues)
 				default:
-					throw new Error("缺少登录类型")
+					throw new Error("Missing login type")
 			}
 		}
 	}
 
-	/** 同步当前登录帐号的环境配置 */
+	/** Sync current login account environment configuration */
 	syncClusterConfig = async () => {
 		try {
 			const { login_code } = await this.authApi.getAccountDeployCode()
@@ -66,14 +66,14 @@ export class LoginService {
 		}
 	}
 
-	/** 获取集群环境 */
+	/** Get cluster environment */
 	getClusterConfig = async (code: string) => {
 		const { config } = await this.commonApi.getPrivateConfigure(code)
 		await this.service.get<ConfigService>("configService").setClusterConfig(code, config)
 		return Promise.resolve(config)
 	}
 
-	/** Step 2: 根据环境同步 delightful 组织 */
+	/** Step 2: Sync delightful organization by environment */
 	delightfulOrganizationSyncStep = (clusterCode: string) => {
 		return async (
 			params: Login.UserLoginsResponse,
@@ -98,7 +98,7 @@ export class LoginService {
 		}
 	}
 
-	/** Step 4: 账号同步(判断当前) */
+	/** Step 4: Account synchronization (check current) */
 	accountSyncStep = (deployCode: string) => {
 		return async (params: LoginStepResult): Promise<string> => {
 			try {
@@ -121,7 +121,7 @@ export class LoginService {
 						.get<UserService>("userService")
 						.fetchUserInfo(delightfulOrg?.[orgCode]?.delightful_user_id)
 					if (userInfo) {
-						// 登录完成后构造用户信息，维护在账号体系中
+						// Construct user info after login completion, maintain in account system
 						const userAccount: User.UserAccount = {
 							deployCode,
 							nickname: userInfo?.nickname,
@@ -150,20 +150,20 @@ export class LoginService {
 		}
 	}
 
-	/** 账号 Token 同步 */
+	/** Account token synchronization */
 	authorizationSyncStep = (userInfo: Login.UserLoginsResponse) => {
 		this.service.get<UserService>("userService").setAuthorization(userInfo.access_token)
 		return Promise.resolve(userInfo)
 	}
 
-	/** Teamshare 生态组织获取 */
+	/** Teamshare ecosystem organization acquisition */
 	organizationFetchStep = async (
 		params: Omit<LoginStepResult, "organizationCode">,
 	): Promise<LoginStepResult> => {
 		try {
 			const { access_token, delightfulOrganizationMap } = params
 
-			// 获取 teamshare 当前账号下所有组织
+			// Get all organizations under current Teamshare account
 			// const organizations = await this.userApi.getUserOrganizations(
 			// 	{authorization: access_token},
 			// 	deployCode,
@@ -171,7 +171,7 @@ export class LoginService {
 			// debugger
 			// const teamshareOrgsCode = organizations.map((o) => o.organization_code)
 			//
-			// // 获取到 teamshare 的组织后，需要针对上步 delightfulOrganizationMap 进行合法性过滤(因后端没处理 delightfulOrganizationMap 数据的合法性，所以这里需要根据 teamshare 中不存在的组织过滤 delightfulOrganizationMap)
+			// // After obtaining Teamshare organizations, filter delightfulOrganizationMap for validity (since backend doesn't validate delightfulOrganizationMap data, filter delightfulOrganizationMap based on organizations not in Teamshare)
 			// const delightfulOrganizationArray = Object.values(allDelightfulOrganizationMap).filter((o) =>
 			// 	teamshareOrgsCode.includes(o.third_platform_organization_code),
 			// )
@@ -181,19 +181,19 @@ export class LoginService {
 			// )
 			// const teamshareOrgMap = keyBy(delightfulOrganizationArray, "delightful_organization_code")
 
-			// const authorizedOrgsCode = Object.keys(delightfulOrganizationMap) // 已授权组织
+			// const authorizedOrgsCode = Object.keys(delightfulOrganizationMap) // Authorized organizations
 			// const authorizedOrg = organizations.find((org) =>
 			// 	authorizedOrgsCode.includes(org.organization_code),
 			// )
 
-			// delightfulOrganizationCode 处理 (优先判断缓存是否存在)
+			// Handle delightfulOrganizationCode (priority: check cache existence)
 			const delightfulOrgCodeCache = userStore.user?.organizationCode
 			// let delightfulOrgCode = null
 			// if (delightfulOrgCodeCache && teamshareOrgMap?.[delightfulOrgCodeCache]) {
-			// 	// 当且仅当缓存中的 delightfulOrgCode 存在且在当前账号中有效则使用缓存
+			// 	// Use cache only if delightfulOrgCode in cache exists and is valid in current account
 			// 	delightfulOrgCode = delightfulOrgCodeCache
 			// } else {
-			// 	// 当且仅当 delightful 组织 Code 不存在的情况下，重新以第一个作为首选
+			// 	// If delightful organization Code doesn't exist, use the first as preferred choice
 			// 	delightfulOrgCode =
 			// 		delightfulOrganizationMap?.[authorizedOrg?.organization_code ?? ""]
 			// 			?.delightful_organization_code
@@ -215,7 +215,7 @@ export class LoginService {
 		}
 	}
 
-	/** Teamshare 生态组织同步 */
+	/** Teamshare ecosystem organization synchronization */
 	organizationSyncStep = async (params: LoginStepResult) => {
 		const { organizationCode, teamshareOrganizationCode, organizations, delightfulOrganizationMap } =
 			params
@@ -229,7 +229,7 @@ export class LoginService {
 		return Promise.resolve(params)
 	}
 
-	/** Step 6: 用户信息同步(delightful体系的唯一用户Id) */
+	/** Step 6: User information synchronization (delightful system unique user ID) */
 	fetchUserInfoStep = async (unionId: string) => {
 		try {
 			const userInfo = await this.service
@@ -247,7 +247,7 @@ export class LoginService {
 		}
 	}
 
-	/** 获取用户手机号码 */
+	/** Get user phone number verification code */
 	getPhoneVerificationCode = async (
 		type: VerificationCode,
 		phone: string,
@@ -256,7 +256,7 @@ export class LoginService {
 		return this.userApi.getPhoneVerificationCode(type, phone, stateCode)
 	}
 
-	/** 获取用户手机号码 */
+	/** Get user phone number verification code */
 	getUsersVerificationCode = async (type: VerificationCode, phone: string) => {
 		return this.userApi.getUsersVerificationCode(type, phone)
 	}

@@ -57,7 +57,7 @@ composer require dtyq/super-magic-module
 
 return [
     // 加载 ConfigProvider
-    \Dtyq\BeDelightful\ConfigProvider::class,
+    \Delightful\BeDelightful\ConfigProvider::class,
 ];
 ```
 

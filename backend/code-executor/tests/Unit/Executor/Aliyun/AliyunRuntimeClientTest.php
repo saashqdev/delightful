@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Dtyq.
+ * This file is part of Delightful.
  */
 
 namespace Delightful\CodeExecutor\Tests\Unit\Executor\Aliyun;
@@ -22,7 +22,7 @@ use Psr\Http\Message\StreamInterface;
 
 /**
  * @internal
- * @covers \Dtyq\CodeExecutor\Executor\Aliyun\AliyunRuntimeClient
+ * @covers \Delightful\CodeExecutor\Executor\Aliyun\AliyunRuntimeClient
  */
 class AliyunRuntimeClientTest extends TestCase
 {

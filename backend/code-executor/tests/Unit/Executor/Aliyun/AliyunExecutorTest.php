@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Dtyq.
+ * This file is part of Delightful.
  */
 
 namespace Delightful\CodeExecutor\Tests\Unit\Executor\Aliyun;
@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @covers \Dtyq\CodeExecutor\Executor\Aliyun\AliyunExecutor
+ * @covers \Delightful\CodeExecutor\Executor\Aliyun\AliyunExecutor
  */
 class AliyunExecutorTest extends TestCase
 {

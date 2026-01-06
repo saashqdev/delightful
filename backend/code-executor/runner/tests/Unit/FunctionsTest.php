@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Dtyq.
+ * This file is part of Delightful.
  */
 
 namespace Delightful\CodeRunnerBwrap\Tests\Unit;
@@ -10,10 +10,10 @@ namespace Delightful\CodeRunnerBwrap\Tests\Unit;
 use Delightful\CodeRunnerBwrap\StatusCode;
 use Delightful\CodeRunnerBwrap\Tests\TestCase;
 
-use function Dtyq\CodeRunnerBwrap\env;
-use function Dtyq\CodeRunnerBwrap\error;
-use function Dtyq\CodeRunnerBwrap\response;
-use function Dtyq\CodeRunnerBwrap\success;
+use function Delightful\CodeRunnerBwrap\env;
+use function Delightful\CodeRunnerBwrap\error;
+use function Delightful\CodeRunnerBwrap\response;
+use function Delightful\CodeRunnerBwrap\success;
 
 /**
  * @internal

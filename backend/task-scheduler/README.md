@@ -8,7 +8,7 @@ php bin/hyperf.php vendor:publish dtyq/task-scheduler
 
 ## Usage
 ```
-\Dtyq\TaskScheduler\Service\TaskSchedulerDomainService
+\Delightful\TaskScheduler\Service\TaskSchedulerDomainService
 ```
 
 ## Notes

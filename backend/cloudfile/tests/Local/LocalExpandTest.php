@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @covers \Dtyq\CloudFile\Kernel\Driver\Local\LocalExpand
+ * @covers \Delightful\CloudFile\Kernel\Driver\Local\LocalExpand
  */
 class LocalExpandTest extends TestCase
 {

@@ -47,8 +47,8 @@ Add to `config/autoload/dependencies.php`:
 
 ```php
 return [
-    Dtyq\EasyDingTalk\OpenDevFactory::class => function (ContainerInterface $container) {
-        return new Dtyq\EasyDingTalk\OpenDevFactory([
+    Delightful\EasyDingTalk\OpenDevFactory::class => function (ContainerInterface $container) {
+        return new Delightful\EasyDingTalk\OpenDevFactory([
             'app_key' => config('dingtalk.app_key'),
             'app_secret' => config('dingtalk.app_secret'),
         ]);

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Dtyq.
+ * This file is part of Delightful.
  */
 
 namespace Delightful\CodeExecutor\Executor\Aliyun;
@@ -34,7 +34,7 @@ use Delightful\CodeExecutor\Utils\ZipUtils;
 use GuzzleHttp\Psr7\BufferStream;
 use Hyperf\Codec\Json;
 
-use function Dtyq\CodeExecutor\Utils\parseExecutionResult;
+use function Delightful\CodeExecutor\Utils\parseExecutionResult;
 
 class AliyunRuntimeClient
 {

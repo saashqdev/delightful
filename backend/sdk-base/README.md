@@ -9,7 +9,7 @@ $ composer require dtyq/sdk-base -vvv
 
 ## Usage
 
-See \Dtyq\SdkBase\Tests\SdkBaseTest
+See \Delightful\SdkBase\Tests\SdkBaseTest
 
 
 ## License

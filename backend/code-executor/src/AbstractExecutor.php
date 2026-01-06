@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * This file is part of Dtyq.
+ * This file is part of Delightful.
  */
 
 namespace Delightful\CodeExecutor;
@@ -12,7 +12,7 @@ use Delightful\CodeExecutor\Exception\ExecuteException;
 use Delightful\CodeExecutor\Exception\ExecuteFailedException;
 use Delightful\CodeExecutor\Exception\InvalidArgumentException;
 
-use function Dtyq\CodeExecutor\Utils\stripPHPTags;
+use function Delightful\CodeExecutor\Utils\stripPHPTags;
 
 abstract class AbstractExecutor implements ExecutorInterface
 {

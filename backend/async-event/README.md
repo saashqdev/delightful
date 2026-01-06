@@ -1,7 +1,7 @@
 # Async Event
 
 - Events will be placed into a coroutine and then executed in sequence  
-- Core code is `\Dtyq\AsyncEvent\AsyncEventDispatcher::dispatch`
+- Core code is `\Delightful\AsyncEvent\AsyncEventDispatcher::dispatch`
 
 ## Installation
 - Install

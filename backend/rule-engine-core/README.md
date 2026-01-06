@@ -32,7 +32,7 @@ $container = ApplicationContext::getContainer();
 RuleServiceProviderManager::registerRuleServiceProvider(RuleServiceProvider::RULE_SERVICE_PROVIDER, $provider, $container);
 ```
 
-Function and rule group repositories need to implement `\Dtyq\RuleEngineCore\PhpScript\Repository\ExpressionFunctionRepositoryInterface` and `\Dtyq\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface`.
+Function and rule group repositories need to implement `\Delightful\RuleEngineCore\PhpScript\Repository\ExpressionFunctionRepositoryInterface` and `\Delightful\RuleEngineCore\PhpScript\Repository\RuleExecutionSetRepositoryInterface`.
 
 Additionally, it is recommended to register rule services when the framework starts. The following example completes rule service registration by listening to framework events.
 

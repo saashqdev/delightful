@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 /**
- * This file is part of Dtyq.
+ * This file is part of Delightful.
  */
 use Delightful\CodeRunnerBwrap\Server;
 use Hyperf\Codec\Json;
 
-use function Dtyq\CodeRunnerBwrap\env;
+use function Delightful\CodeRunnerBwrap\env;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

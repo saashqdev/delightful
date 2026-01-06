@@ -10,7 +10,7 @@
 
 Delightful is a powerful enterprise-grade AI application innovation engine designed to help developers quickly build and deploy AI applications. It provides a complete development framework, rich toolchain, and best practices, making AI application development simple and efficient.
 
-![flow](https://cdn.letsdelightful.cn/static/img/showdelightful.jpg)
+![flow](https://cdn.bedelightful.ai/static/img/showdelightful.jpg)
 
 ## ✨ Features
 
@@ -38,7 +38,7 @@ git clone git@github.com:dtyq/delightful.git
 cd delightful
 ```
 
-![git clone delightful](https://public-cdn.letsdelightful.cn/static/img/git_clone_delightful.png)
+![git clone delightful](https://public-cdn.bedelightful.ai/static/img/git_clone_delightful.png)
 
 #### 2.2. Configuration Files
 
@@ -117,12 +117,12 @@ The script will guide you through the following steps:
 ###### Language Selection
 - Choose 1 for English
 - Choose 2 for Chinese
-![Language Selection](https://public-cdn.letsdelightful.cn/static/img/chose_langugae.png)
+![Language Selection](https://public-cdn.bedelightful.ai/static/img/chose_langugae.png)
 
 ###### Deployment Method Selection
 - Choose 1 for local computer deployment (using default localhost configuration)
 - Choose 2 for remote server deployment (will detect public IP and ask if you want to use it)
-![Deployment Method Selection](https://public-cdn.letsdelightful.cn/static/img/chose_development_method.png)
+![Deployment Method Selection](https://public-cdn.bedelightful.ai/static/img/chose_development_method.png)
 
 - Note: The script will check if delightful-sandbox-network has been created locally. If not, it will automatically execute:
 ```bash
@@ -132,7 +132,7 @@ docker network create delightful-sandbox-network
 ###### Be Delightful Service Installation
 - Choose 1 to install Be Delightful service (requires pre-configuration of files in the config/ directory)
 - Choose 2 to not install Be Delightful service
-![Be Delightful Service Installation](https://public-cdn.letsdelightful.cn/static/img/be_delightful_service_install.png)
+![Be Delightful Service Installation](https://public-cdn.bedelightful.ai/static/img/be_delightful_service_install.png)
 
 #### 2.5 First Run
 After the first run, the system will create a bin/delightful.lock file (macOS/Linux), and subsequent startups will skip the installation configuration process.
@@ -237,10 +237,10 @@ docker compose logs -f
 ##### macOS
 1. Visit https://docs.docker.com/desktop/install/mac-install/
 2. Download and install Docker Desktop for Mac
-![Download and install Docker Desktop for Mac](https://public-cdn.letsdelightful.cn/static/img/install_docker_desktop_for_mac.png)
+![Download and install Docker Desktop for Mac](https://public-cdn.bedelightful.ai/static/img/install_docker_desktop_for_mac.png)
 
 3. Launch the Docker Desktop application
-![Launch the Docker Desktop application](https://public-cdn.letsdelightful.cn/static/img/start_docker_desktop_application.png)
+![Launch the Docker Desktop application](https://public-cdn.bedelightful.ai/static/img/start_docker_desktop_application.png)
 
 ##### Linux
 1. Visit https://docs.docker.com/engine/install/
@@ -261,11 +261,11 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 ```
-   ![](https://public-cdn.letsdelightful.cn/static/img/ubuntu_system_apt_get_update.png)
+   ![](https://public-cdn.bedelightful.ai/static/img/ubuntu_system_apt_get_update.png)
 ```bash
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
-   ![](https://public-cdn.letsdelightful.cn/static/img/ubuntu_system_apt_get_install_docker.png)
+   ![](https://public-cdn.bedelightful.ai/static/img/ubuntu_system_apt_get_install_docker.png)
 
 3. Start Docker service after installation:
 ```bash
@@ -275,7 +275,7 @@ sudo systemctl start docker
 ##### Windows
 1. Visit https://docs.docker.com/desktop/install/windows-install/
 2. Download and install Docker Desktop for Windows
-![Download and install Docker Desktop for Windows](https://public-cdn.letsdelightful.cn/static/img/download_docker_desktop_for_windows.png)
+![Download and install Docker Desktop for Windows](https://public-cdn.bedelightful.ai/static/img/download_docker_desktop_for_windows.png)
 
 3. Launch the Docker Desktop application
 4. Make sure WSL 2 backend is enabled in settings
@@ -337,7 +337,7 @@ To uninstall Delightful system:
 
 ## 📚 Documentation
 
-For detailed documentation, please visit [Delightful Documentation Center](http://docs.letsdelightful.cn/).
+For detailed documentation, please visit [Delightful Documentation Center](http://docs.bedelightful.ai/).
 
 ## 🤝 Contribution
 
@@ -351,7 +351,7 @@ We welcome contributions in various forms, including but not limited to:
 ## 📞 Contact Us
 
 - Email: bd@dtyq.com
-- Website: https://www.letsdelightful.cn
+- Website: https://www.bedelightful.ai
 
 ## 🙏 Acknowledgements
 

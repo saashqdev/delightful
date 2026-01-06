@@ -58,11 +58,11 @@ A powerful **general-purpose AI Agent** specially designed for complex task scen
 ![Be Delightful](https://public-cdn.bedelightful.ai/static/img/be-delightful-buffett.gif)
 
 #### Be Delightful Case Studies
-- [Analysis of Investment Insights from Buffett's 2025 Shareholders Meeting](https://www.letsdelightful.cn/share/777665156986277889)
-- [Analysis of Stocks Related to Beijing Humanoid Robot Half Marathon](https://www.letsdelightful.cn/share/774280936479625217)
-- [Summary of Key Points from 'Thinking, Fast and Slow](https://www.letsdelightful.cn/share/777461325648195584)
-- [Auntie Jenny IPO Analysis and Investment Recommendations](https://www.letsdelightful.cn/share/777604044873928705)
-- [SKU Sales Forecast Requirements](https://www.letsdelightful.cn/share/771022574397648897)
+- [Analysis of Investment Insights from Buffett's 2025 Shareholders Meeting](https://www.bedelightful.ai/share/777665156986277889)
+- [Analysis of Stocks Related to Beijing Humanoid Robot Half Marathon](https://www.bedelightful.ai/share/774280936479625217)
+- [Summary of Key Points from 'Thinking, Fast and Slow](https://www.bedelightful.ai/share/777461325648195584)
+- [Auntie Jenny IPO Analysis and Investment Recommendations](https://www.bedelightful.ai/share/777604044873928705)
+- [SKU Sales Forecast Requirements](https://www.bedelightful.ai/share/771022574397648897)
 - For more case studies, please visit the [Official Website](https://www.bedelightful.ai)
 
 ### Delightful Flow

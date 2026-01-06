@@ -5,7 +5,7 @@ The Code Execution Node is a powerful tool that allows you to write and execute 
 **Image Description:**
 
 The Code Execution Node interface consists of three main parts: the input area at the top, the code editing area in the middle, and the output configuration area at the bottom. In the code editing area, you can directly write code; at the top and bottom, you can set the input parameters needed by your code and the output parameters generated.
-![Code Execution Node](https://cdn.letsdelightful.cn/static/img/20250408165220.jpg)
+![Code Execution Node](https://cdn.bedelightful.ai/static/img/20250408165220.jpg)
 
 ## Why do you need a Code Execution Node?
 When building workflows, you might encounter these situations:

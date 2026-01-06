@@ -8,7 +8,7 @@ Delightful is an enterprise-grade AI application development platform, providing
 
 The platform offers a clean and intuitive interface similar to WeChat, supporting multiple users communicating simultaneously, including private chats and group discussions. Powerful group management features allow administrators to flexibly assign different permissions to members, improving internal communication efficiency.
 
-![20250512164817.jpg](https://cdn.letsdelightful.cn/static/img/20250512164817.jpg)
+![20250512164817.jpg](https://cdn.bedelightful.ai/static/img/20250512164817.jpg)
 
 ### 2. AI Assistant Creation and Management
 
@@ -16,7 +16,7 @@ The platform offers a clean and intuitive interface similar to WeChat, supportin
 - **Version Management**: Support for assistant version releases, enable/disable status control
 - **Enterprise Internal Publishing**: Easily share AI assistant lists within the enterprise
 
-![AI Assistant Management Interface](https://cdn.letsdelightful.cn/static/img/ai-assistant-1.png)
+![AI Assistant Management Interface](https://cdn.bedelightful.ai/static/img/ai-assistant-1.png)
 
 ### 3. Workflow Orchestration System
 
@@ -25,7 +25,7 @@ The platform offers a clean and intuitive interface similar to WeChat, supportin
 - **Process Control**: Support for start nodes, reply nodes, wait nodes, end nodes, and other basic flow controls
 - **Template Support**: Built-in workflow templates to lower the usage threshold
 
-![Workflow Orchestration Interface](https://cdn.letsdelightful.cn/static/img/workflow-1.png)
+![Workflow Orchestration Interface](https://cdn.bedelightful.ai/static/img/workflow-1.png)
 
 ### 4. Knowledge Base and Memory Functions
 
@@ -33,21 +33,21 @@ The platform offers a clean and intuitive interface similar to WeChat, supportin
 - **Knowledge Base Integration**: Support importing enterprise documents and knowledge bases to enhance AI response accuracy
 - **Database Memory**: Convenient database memory capabilities to persistently remember important content from user conversations
 
-![Memory Function Interface](https://cdn.letsdelightful.cn/static/img/memory-1.png)
+![Memory Function Interface](https://cdn.bedelightful.ai/static/img/memory-1.png)
 
 ### 5. Multimodal Interaction Experience
 
 - **Multiple Interaction Methods**: Support text, voice, images, and other interaction methods
 - **Creative Content**: Users can create content using AI image generation, AI portraits, and other creative tools
 
-![Multimodal Interaction Interface](https://cdn.letsdelightful.cn/static/img/multimodal.png)
+![Multimodal Interaction Interface](https://cdn.bedelightful.ai/static/img/multimodal.png)
 
 ### 6. Multi-platform Application Publishing
 
 - **Cross-platform Deployment**: Support publishing developed AI applications to WeChat Work, DingTalk, and other platforms
 - **API/SDK Publishing**: Publish intelligent agents as APIs or SDKs for secondary use
 
-![Application Publishing Interface](https://cdn.letsdelightful.cn/static/img/app-publishing.png)
+![Application Publishing Interface](https://cdn.bedelightful.ai/static/img/app-publishing.png)
 
 ## Best Practice Cases
 

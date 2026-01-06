@@ -5,7 +5,7 @@ The Selector Node is a conditional judgment node in the Delightful Flow workflow
 **Image Description:**
 
 The Selector Node interface shows the condition setting area, including reference variables, selection conditions (such as equals, conditions, etc.), and comparison value (expression or fixed value) configuration. The interface supports combining multiple conditions through "OR" and "AND" buttons to implement complex judgment logic.
-![Selector Node](https://cdn.letsdelightful.cn/static/img/Selector.png)
+![Selector Node](https://cdn.bedelightful.ai/static/img/Selector.png)
 
 ## Why do you need a Selector Node?
 When building intelligent workflows, the Selector Node plays the role of a "decision maker," providing your application with conditional judgment and path selection capabilities:

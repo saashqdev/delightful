@@ -73,7 +73,7 @@ Use this template to report problems with installing or deploying Delightful.
 ## Before Creating an Issue
 
 1. **Search existing issues** - Check if your issue has already been reported
-2. **Read the documentation** - Visit [docs.letsdelightful.cn](https://docs.bedelightful.ai/en)
+2. **Read the documentation** - Visit [docs.bedelightful.ai](https://docs.bedelightful.ai/en)
 3. **Try the latest version** - Ensure you're using the most recent release
 4. **Gather information** - Collect logs, error messages, and environment details
 
@@ -82,7 +82,7 @@ Use this template to report problems with installing or deploying Delightful.
 If you're unsure which template to use or need help with Delightful:
 
 - 💬 **Discussions**: [GitHub Discussions](https://github.com/saashqdev/delightful/delightful/discussions)
-- 📖 **Documentation**: [docs.letsdelightful.cn](https://docs.bedelightful.ai/en) | [Chinese Documentation](https://docs.letsdelightful.cn/zh)
+- 📖 **Documentation**: [docs.bedelightful.ai](https://docs.bedelightful.ai/en) | [Chinese Documentation](https://docs.bedelightful.ai/zh)
 - 🌐 **Official Website**: [bedelightful.ai](https://www.bedelightful.ai)
 - 📧 **Enterprise Support**: bd@dtyq.com
 

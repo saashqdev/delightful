@@ -1,16 +1,16 @@
 # Create a Flow
 ---
 ## I. Click to Create Flow
-![create-flow-button](https://cdn.letsdelightful.cn/static/img/create-flow-button.png)
+![create-flow-button](https://cdn.bedelightful.ai/static/img/create-flow-button.png)
 
 ## II. Set Flow Name and Description
 
-![flow-settings](https://cdn.letsdelightful.cn/static/img/flow-settings.png)
+![flow-settings](https://cdn.bedelightful.ai/static/img/flow-settings.png)
 
 ## III. Arrange and Publish Flow
 
-![flow-arrange](https://cdn.letsdelightful.cn/static/img/flow-arrange.png)
+![flow-arrange](https://cdn.bedelightful.ai/static/img/flow-arrange.png)
 
 ## IV. Use Flow in Assistant
 
-![use-flow](https://cdn.letsdelightful.cn/static/img/use-flow.png) 
+![use-flow](https://cdn.bedelightful.ai/static/img/use-flow.png) 

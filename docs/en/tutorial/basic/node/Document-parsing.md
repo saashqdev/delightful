@@ -5,7 +5,7 @@ The Document Parsing Node is your "entry point" for processing various files and
 **Image Description:**
 
 The Document Parsing Node interface mainly consists of "Display Name", "Add Parameter" options, "Parameter Value", and "Expression" setting areas. Users can configure data sources, file types, and parsing methods in these parameter settings.
-![Document Parsing Node](https://cdn.letsdelightful.cn/static/img/Document-parsing.png)
+![Document Parsing Node](https://cdn.bedelightful.ai/static/img/Document-parsing.png)
 
 ## Why do you need a Document Parsing Node?
 When building AI applications, we often need to process documents and data in various formats. The Document Parsing Node solves the following problems:

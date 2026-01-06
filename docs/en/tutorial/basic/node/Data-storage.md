@@ -5,7 +5,7 @@ The Data Storage Node is a functional component in the Delightful platform used 
 **Image Description:**
 
 The Data Storage Node interface mainly includes four primary sections: scope selection area, data key input area, data value editing area, and expiration time setting area. Through the configuration of these areas, users can specify the data to be saved and how it is stored.
-![Data Storage Node](https://cdn.letsdelightful.cn/static/img/Data-storage.png)
+![Data Storage Node](https://cdn.bedelightful.ai/static/img/Data-storage.png)
 
 ## Why do you need a Data Storage Node?
 In the process of using AI assistants, we often need to remember some important information for subsequent use, such as:

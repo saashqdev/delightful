@@ -13,7 +13,7 @@ The Delightful AI Approval Assistant is an intelligent approval processing tool 
 ### 1. Open Delightful Approval Assistant
 Log in to DingTalk → Click "Workbench" in the navigation bar → Find "Delightful Approval Assistant" in "All Lists > Technology Center" (supports quick location via search box)
 
-![20250512165849.jpg](https://cdn.letsdelightful.cn/static/img/20250512165849.jpg)
+![20250512165849.jpg](https://cdn.bedelightful.ai/static/img/20250512165849.jpg)
 
 ### 2. Generate Approval Form with One Sentence
 After entering the dialog box, **directly input approval requirements**, suggested format:
@@ -21,17 +21,17 @@ After entering the dialog box, **directly input approval requirements**, suggest
     - Example: "Request Cursor software usage permission for 3 months due to job responsibilities"
 - Supports manual fine-tuning (click form fields to edit directly)
 
-![F20250512171421.jpg](https://cdn.letsdelightful.cn/static/img/20250512171421.jpg)
+![F20250512171421.jpg](https://cdn.bedelightful.ai/static/img/20250512171421.jpg)
 
 Pro tip: The clearer your description, the more accurate the AI-generated form!
 
 ### 3. Confirm and Initiate Approval
 
-![20250512171631.jpg](https://cdn.letsdelightful.cn/static/img/20250512171631.jpg)
+![20250512171631.jpg](https://cdn.bedelightful.ai/static/img/20250512171631.jpg)
 
 Click [**Jump to link**] to expand approval details:
 
-![Fu5EkV5qL7kZvGoO5cUWX1GaJ-lT.png](https://cdn.letsdelightful.cn/static/img/Fu5EkV5qL7kZvGoO5cUWX1GaJ-lT.png)
+![Fu5EkV5qL7kZvGoO5cUWX1GaJ-lT.png](https://cdn.bedelightful.ai/static/img/Fu5EkV5qL7kZvGoO5cUWX1GaJ-lT.png)
 
 ### 4. Intelligent Verification: Risk Avoidance
 Rule Triggering: AI review automatically starts after submission (supports enterprise-customized rules):
@@ -41,7 +41,7 @@ Results feedback has three levels:
 - 🟡 Requires manual intervention: Suspicious risks exist, requiring further confirmation or manual review
 - 🔴 High risk: Serious risks exist, must be rejected
 
-![FqHb3EVycdONpMYH5GY7uPMIquAk.png](https://cdn.letsdelightful.cn/static/img/FqHb3EVycdONpMYH5GY7uPMIquAk.png)
+![FqHb3EVycdONpMYH5GY7uPMIquAk.png](https://cdn.bedelightful.ai/static/img/FqHb3EVycdONpMYH5GY7uPMIquAk.png)
 
 ### 5. Automated Decision-Making: Liberating Approvers
 If the approver enables **Delegate AI Decision-Making** → The system automatically processes based on the following logic: historical data, past habits, approval rules, and preset strategies.
@@ -52,5 +52,5 @@ Decision result types:
 |❌ Reject|Violates rules (e.g., over budget/permission conflict)|Non-technical staff requesting code repository access, excessive travel expenses|
 |❓ Auxiliary questions|Unclear information/supplementary materials needed (AI confidence <80%)|Entertainment expenses without client name, missing contract number|
 
-![FgDB0f8MfADgydzEWEqJL6dpBvJL.png](https://cdn.letsdelightful.cn/static/img/FgDB0f8MfADgydzEWEqJL6dpBvJL.png)
+![FgDB0f8MfADgydzEWEqJL6dpBvJL.png](https://cdn.bedelightful.ai/static/img/FgDB0f8MfADgydzEWEqJL6dpBvJL.png)
 

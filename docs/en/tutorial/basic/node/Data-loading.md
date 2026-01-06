@@ -5,7 +5,7 @@ The Data Loading Node is a tool used to read previously stored data from a persi
 **Image Description:**
 
 The Data Loading Node interface primarily consists of a query condition area, including scope selection, data key input field, and other key elements. Users can retrieve previously stored data from the persistent database by configuring these parameters.
-![Data Loading Node](https://cdn.letsdelightful.cn/static/img/Data-loading.png)
+![Data Loading Node](https://cdn.bedelightful.ai/static/img/Data-loading.png)
 
 ## Why do you need a Data Loading Node?
 **In intelligent workflows, there is often a need to transfer and use data across different times or different sessions. For example:**

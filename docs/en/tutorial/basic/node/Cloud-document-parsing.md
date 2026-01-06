@@ -5,7 +5,7 @@ The Cloud Document Parsing Node is a functional module specifically designed for
 **Image Description:**
 
 The configuration interface of the Cloud Document Parsing Node includes a document selection area, where you can specify the cloud document to be parsed using a selector.
-![Cloud Document Parsing Node](https://cdn.letsdelightful.cn/static/img/Cloud-document-parsing.png)
+![Cloud Document Parsing Node](https://cdn.bedelightful.ai/static/img/Cloud-document-parsing.png)
 
 ## Why do you need a Cloud Document Parsing Node?
 When building intelligent workflows, we often need to reference, analyze, or process existing document materials within the enterprise. The Cloud Document Parsing Node solves the following problems:

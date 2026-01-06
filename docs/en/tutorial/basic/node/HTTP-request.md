@@ -5,7 +5,7 @@ The HTTP Request Node is an important node in the Delightful Flow workflow used 
 **Image Description:**
 
 The HTTP Request Node interface includes configuration areas for request URL, request method, request headers, and request body, as well as response parsing and output settings sections. Through these configurations, users can define how to interact with external APIs.
-![HTTP Request Node](https://cdn.letsdelightful.cn/static/img/HTTP-request.png)
+![HTTP Request Node](https://cdn.bedelightful.ai/static/img/HTTP-request.png)
 
 ## Why do you need an HTTP Request Node?
 When building intelligent applications, you often need to obtain external data or interact with other systems. The HTTP Request Node is designed for this purpose:

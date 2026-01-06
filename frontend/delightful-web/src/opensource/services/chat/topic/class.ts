@@ -145,10 +145,10 @@ class ChatTopicService {
 
 		if (conversationStore.currentConversation?.id === message.conversation_id) {
 			logger.log(`[applyUpdateTopicMessage] 更新当前会话的UI状态`)
-			// 更新 UI 状态
+			// Update UI state
 			topicStore.updateTopic(updatedTopic.id, { name: updatedTopic.name })
 
-			// 更新数据库
+			// Update database
 			TopicDBServices.updateTopic(updatedTopic.id, message.conversation_id, {
 				name: updatedTopic.name,
 				updated_at: Date.now(),
@@ -160,7 +160,7 @@ class ChatTopicService {
 				updated_at: Date.now(),
 			})
 
-			// 更新数据库
+			// Update database
 			TopicDBServices.updateTopic(updatedTopic.id, message.conversation_id, {
 				name: updatedTopic.name,
 				updated_at: Date.now(),
@@ -183,17 +183,17 @@ class ChatTopicService {
 
 		if (conversationId === message.conversation_id) {
 			logger.log(`[applyDeleteTopicMessage] 删除当前会话的话题`)
-			// 获取删除前的索引位置
+			// Get deletion index position
 			const index = topicStore.topicList.findIndex((i) => i.id === deletedTopicId)
 			const topicsList = [...topicStore.topicList]
 			logger.log(
 				`[applyDeleteTopicMessage] 当前话题列表长度: ${topicsList.length}, 删除话题索引: ${index}`,
 			)
 
-			// 从 UI 状态中删除
+			// Delete from UI state
 			topicStore.removeTopic(deletedTopicId)
 
-			// 如果删除的是当前话题，需要切换话题
+			// If deleting current topic, need to switch topic
 			if (
 				deletedTopicId ===
 				conversationStore.currentConversation?.last_receive_message?.topic_id
@@ -208,16 +208,16 @@ class ChatTopicService {
 				}
 			}
 
-			// 更新数据库
+			// Update database
 			TopicDBServices.deleteTopic(deletedTopicId, message.conversation_id)
 		} else if (TopicCacheServices.hasTopicCache(message.conversation_id)) {
 			logger.log(`[applyDeleteTopicMessage] 从缓存中删除话题`)
 			TopicCacheServices.deleteTopicFromCache(message.conversation_id, deletedTopicId)
 
-			// 更新数据库
+			// Update database
 			TopicDBServices.deleteTopic(deletedTopicId, message.conversation_id)
 
-			// 如果删除的是当前话题，需要切换话题
+			// If deleting current topic, need to switch topic
 			if (
 				deletedTopicId ===
 				conversationStore.currentConversation?.last_receive_message?.topic_id
@@ -245,7 +245,7 @@ class ChatTopicService {
 	fetchTopicList() {
 		const conversationId = this.lastConversationId
 
-		// 设置加载状态
+		// Set loading state
 		topicStore.setLoading(true)
 
 		logger.log(`[fetchTopicList] 开始获取话题列表，会话ID=${conversationId}`)
@@ -263,20 +263,20 @@ class ChatTopicService {
 
 		return ChatApi.getTopicList(conversationId)
 			.then((res) => {
-				// 将 API 返回的话题列表转换为 Topic 实例数组
+				// Convert API returned topic list to Topic instance array
 				const topicsData = res?.reverse() ?? []
 				const topics = topicsData.map((topicData) => new Topic(topicData))
 
-				// 更新 UI 状态
+				// Update UI state
 				topicStore.setTopicList(topics)
 
-				// 缓存话题列表
+				// Cache topic list
 				TopicCacheServices.setTopicCache(conversationId, topics)
 
-				// 持久化话题列表到数据库
+				// Persist topic list to database
 				TopicDBServices.saveTopicsToDB(conversationId, topics)
 
-				// 如果当前话题ID不存在，或者当前话题ID不在话题列表中，则更新当前话题ID
+				// If current topic ID doesn't exist, or current topic ID is not in topic list, update current topic ID
 				const conversation = conversationStore.getConversation(conversationId)
 				if (
 					conversation.isAiConversation &&
@@ -314,10 +314,10 @@ class ChatTopicService {
 		}
 
 		return ChatApi.updateTopic(conversationId, topicId, topicName).then(() => {
-			// 更新 UI 状态
+			// Update UI state
 			topicStore.updateTopic(topicId, { name: topicName })
 
-			// 更新数据库
+			// Update database
 			TopicDBServices.updateTopic(topicId, conversationId, { name: topicName })
 
 			return this.fetchTopicList()
@@ -338,12 +338,12 @@ class ChatTopicService {
 
 		const topicName = topicStore.topicList.find((i) => i.id === topicId)?.name
 
-		// 如果话题名称存在，并且不是强制更新，则不自动调用
+		// If topic name exists and not forcing update, don't auto call
 		if (topicName && !force) {
 			return Promise.resolve()
 		}
 
-		// 如果当前会话不是 AI 会话，则不调用
+		// If current conversation is not AI conversation, don't call
 		if (!isAiConversation(conversationStore.currentConversation?.receive_type))
 			return Promise.resolve()
 

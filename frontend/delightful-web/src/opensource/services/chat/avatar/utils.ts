@@ -1,4 +1,4 @@
-// 一个简单的CRC32查找表（完整的CRC32实现会更复杂）
+// A simple CRC32 lookup table (complete CRC32 implementation would be more complex)
 const table: number[] = []
 for (let i = 0; i < 256; i += 1) {
 	let c = i
@@ -27,10 +27,10 @@ export function textToColors(text: string) {
 	// eslint-disable-next-line no-bitwise
 	const b = hash & 0xff
 
-	// 定义一个数组来存储生成的相近颜色值
+	// Define an array to store generated similar color values
 	const colors: string[] = []
 
-	// 生成5个相近颜色值（可根据需要调整数量）
+	// Generate 5 similar color values (can adjust quantity as needed)
 	for (let i = 0; i < 5; i += 1) {
 		const newR = Math.max(0, Math.min(255, r + (i - 5) * 10))
 		const newG = Math.max(0, Math.min(255, g + (i - 1) * 10))
@@ -49,22 +49,22 @@ export function textToBackgroundColor(name?: string) {
 		hash += name.charCodeAt(i)
 	}
 	const hue = (hash % 360) + 10 // 确保色调在10到360之间
-	const saturation = 60 + (hash % 20) // 确保饱和度在60到80之间
-	const lightness = 40 + (hash % 20) // 确保亮度在40到60之间
+	const saturation = 60 + (hash % 20) // Ensure saturation between 60 and 80
+	const lightness = 40 + (hash % 20) // Ensure lightness between 40 and 60
 
-	// 确保生成的颜色柔和舒适
+	// Ensure generated colors are soft and comfortable
 	return `hsl(${hue}, ${saturation}%, ${lightness}%)`
 }
 
 export function textToDisplayName(name?: string) {
 	if (!name) return ""
-	// 判断是中文名还是英文名
+	// Determine if it's a Chinese or English name
 	const isChinese = name.match(/[\u4e00-\u9fa5]/)
 	if (isChinese) {
-		// 截取中文名的后两个有效的中文字符,不包含标点符号
+		// Extract last two valid Chinese characters, excluding punctuation
 		return name.replace(/[^\u4e00-\u9fa5]/g, "").slice(-2)
 	}
-	// 截取英文名的第一个大写字母
+	// Extract first uppercase letter from English name
 	return name[0]?.toUpperCase() ?? ""
 }
 

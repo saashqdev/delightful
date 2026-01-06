@@ -50,7 +50,7 @@ class TopicDBServices {
 			.equals(conversationId)
 			.first()
 
-		// 将 ConversationTopic 数组转换为 Topic 数组
+		// Convert ConversationTopic array to Topic array
 		const topicList = result?.topic_list || []
 		return topicList.map((topic) => new Topic(topic))
 	}
@@ -123,7 +123,7 @@ class TopicDBServices {
 	async bulkAddTopics(topics: Topic[]) {
 		if (topics.length === 0) return
 
-		// 按会话ID分组
+		// Group by conversation ID
 		const topicsByConversation = topics.reduce((acc, topic) => {
 			if (!acc[topic.conversation_id]) {
 				acc[topic.conversation_id] = []
@@ -132,7 +132,7 @@ class TopicDBServices {
 			return acc
 		}, {} as Record<string, Topic[]>)
 
-		// 逐个会话保存话题
+		// Save topics for each conversation
 		await Promise.all(
 			Object.entries(topicsByConversation).map(async ([conversationId, topicsToAdd]) => {
 				const existingTopics = await this.loadTopicsFromDB(conversationId)

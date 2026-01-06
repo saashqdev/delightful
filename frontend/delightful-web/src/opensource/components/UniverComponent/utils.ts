@@ -4,21 +4,21 @@
  */
 import * as XLSX from "xlsx"
 
-// 布尔数字枚举，用于Univer中的布尔值表示
+// Boolean number enum for boolean value representation in Univer
 enum BooleanNumber {
 	FALSE = 0,
 	TRUE = 1,
 }
 
-// 单元格数据接口
+// Cell data interface
 interface ICellData {
-	v?: any // 单元格值
-	f?: string // 公式
-	s?: number // 样式
-	[key: string]: any // 其他属性
+	v?: any // Cell value
+	f?: string // Formula
+	s?: number // Style
+	[key: string]: any // Other properties
 }
 
-// 单元格矩阵类型
+// Cell matrix type
 interface ICellMatrix {
 	[rowKey: string]: {
 		[colKey: string]: ICellData
@@ -31,24 +31,24 @@ interface ICellMatrix {
  * @returns 是否为Excel二进制内容
  */
 function isBinaryExcel(data: string): boolean {
-	// Excel文件特征检测
-	// 1. 文件头检测：XLSX/DOCX都是ZIP文件，以PK开头
+	// Excel file feature detection
+	// 1. File header detection: XLSX/DOCX are ZIP files starting with PK
 	const hasPKHeader = data.startsWith("PK") || data.indexOf("PK") < 20
 
-	// 2. 内部路径检测：检查是否包含Excel文件特有的路径
+	// 2. Internal path detection: check for Excel-specific paths
 	const hasExcelPaths =
 		data.includes("xl/worksheets") ||
 		data.includes("docProps") ||
 		data.includes("sheet.xml") ||
 		data.includes("[Content_Types].xml")
 
-	// 3. Office文档标记检测
+	// 3. Office document marker detection
 	const hasOfficeMark =
 		data.includes("Microsoft Excel") ||
 		data.includes("spreadsheetml") ||
 		data.includes("workbook")
 
-	// 同时满足文件头特征和至少一种内容特征
+	// Must satisfy both file header and at least one content feature
 	return hasPKHeader && (hasExcelPaths || hasOfficeMark)
 }
 
@@ -60,29 +60,29 @@ function isBinaryExcel(data: string): boolean {
  * @returns 转换后的Univer数据
  */
 export async function transformData(data: any, fileType: string, fileName: string): Promise<any> {
-	// 如果是File对象，先读取文件内容
+	// If it's a File object, read file content first
 	if (data instanceof File) {
 		const fileExtension = data.name.split(".").pop()?.toLowerCase()
 
-		// 根据文件类型和扩展名选择适当的读取方式
+		// Choose appropriate reading method based on file type and extension
 		if (fileType === "sheet" && (fileExtension === "xlsx" || fileExtension === "xls")) {
-			// 使用xlsx库读取Excel文件
+			// Use xlsx library to read Excel file
 			try {
 				const excelData = await readExcelFile(data)
 				return transformToWorkbookData(excelData, fileName)
 			} catch (error) {
-				console.error("读取Excel文件失败:", error)
-				throw new Error("Excel文件读取失败")
+				console.error("Failed to read Excel file:", error)
+				throw new Error("Excel file reading failed")
 			}
 		} else if (fileType === "sheet" && fileExtension === "csv") {
-			// 处理CSV文件
+			// Handle CSV files
 			const content = await readFileAsText(data)
 			return transformCsvToWorkbook(content, fileName)
 		} else {
-			// 对于其他文件类型，读取为文本
+			// For other file types, read as text
 			const content = await readFileAsText(data)
 
-			// 根据文件类型调用相应的转换函数
+			// Call corresponding conversion function based on file type
 			switch (fileType) {
 				case "doc":
 					return transformDataForDoc(content, fileName)
@@ -91,12 +91,12 @@ export async function transformData(data: any, fileType: string, fileName: strin
 				case "slide":
 					return transformDataForSlide(content, fileName)
 				default:
-					throw new Error(`不支持的文件类型: ${fileType}`)
+					throw new Error(`Unsupported file type: ${fileType}`)
 			}
 		}
 	}
 
-	// 如果不是File对象，按原逻辑处理
+	// If not a File object, process with original logic
 	switch (fileType) {
 		case "doc":
 			return transformDataForDoc(data, fileName)
@@ -105,7 +105,7 @@ export async function transformData(data: any, fileType: string, fileName: strin
 		case "slide":
 			return transformDataForSlide(data, fileName)
 		default:
-			throw new Error(`不支持的文件类型: ${fileType}`)
+			throw new Error(`Unsupported file type: ${fileType}`)
 	}
 }
 
@@ -124,7 +124,7 @@ async function readExcelFile(file: File): Promise<any[][]> {
 				// 读取Excel文件
 				const workbook = XLSX.read(data, { type: "array" })
 
-				// 获取第一个工作表
+				// Get first worksheet
 				const firstSheetName = workbook.SheetNames[0]
 				const worksheet = workbook.Sheets[firstSheetName]
 

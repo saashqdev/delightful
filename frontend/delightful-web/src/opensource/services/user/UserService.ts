@@ -50,21 +50,21 @@ export class UserService {
 		this.contactApi = dependencies.ContactApi
 		this.service = service
 
-		/** 监听连接成功事件,自动登录 */
+		/** Listen for connection success event, auto login */
 		chatWebSocket.on("open", ({ reconnect }) => {
 			console.log("open", { reconnect })
 			if (reconnect) {
-				console.log("重新连接成功，自动登录")
+				console.log("Reconnected successfully, auto login")
 				this.wsLogin({ showLoginLoading: false })
 			}
 		})
 	}
 
 	/**
-	 * @description 初始化(持久化数据/内存状态)
+	 * @description Initialize (persistent data/memory state)
 	 */
 	async init() {
-		// 同步当前用户状态
+		// Sync current user state
 		const user = new UserRepository()
 		const token = await user.getAuthorization()
 		const userInfo = await user.getUserInfo()
@@ -72,7 +72,7 @@ export class UserService {
 		userStore.user.setAuthorization(token ?? null)
 		userStore.user.setUserInfo(userInfo ?? null)
 
-		// 组织同步
+		// Organization sync
 		const organizations = await user.getOrganizations()
 		const organizationCode = await user.getOrganizationCode()
 		const teamshareOrganizations = await user.getTeamshareOrganizations()
@@ -83,7 +83,7 @@ export class UserService {
 		userStore.user.setTeamshareOrganizations(teamshareOrganizations ?? [])
 		userStore.user.setTeamshareOrganizationCode(teamshareOrganizationCode ?? "")
 
-		// 同步所有帐号
+		// Sync all accounts
 		const account = new AccountRepository()
 		const accounts = await account.getAll()
 
@@ -108,10 +108,10 @@ export class UserService {
 	}
 
 	/**
-	 * @description 移除当前用户token
+	 * @description Remove current user token
 	 */
 	setAuthorization(authorization: string | null) {
-		// 设置内存状态、同步数据持久化
+		// Set memory state, sync persistent data
 		const user = new UserRepository()
 		user.setAuthorization(authorization ?? "")
 
@@ -119,8 +119,8 @@ export class UserService {
 	}
 
 	/**
-	 * @description 获取用户信息
-	 * @param {string} unionId 用户唯一ID
+	 * @description Fetch user info
+	 * @param {string} unionId User unique ID
 	 */
 	fetchUserInfo = async (unionId: string): Promise<StructureUserItem | null> => {
 		if (!unionId) {
@@ -131,19 +131,19 @@ export class UserService {
 	}
 
 	/**
-	 * @description 设置UserStore中的用户信息
+	 * @description Set user info in UserStore
 	 * @param userInfo
 	 */
 	setUserInfo(userInfo: User.UserInfo | null) {
 		const info = userInfo ?? null
-		// 数据持久化同步
+		// Persistent data sync
 		const user = new UserRepository()
 		user.setUserInfo(info)
 
-		// 内存状态同步
+		// Memory state sync
 		userStore.user.setUserInfo(info)
 
-		// 有值才获取
+		// Only fetch if value exists
 		// if (info) {
 		// 	AuthApi.getAdminPermission().then((res) => {
 		// 		userStore.user.isAdmin = res.is_admin
@@ -153,19 +153,19 @@ export class UserService {
 	}
 
 	/**
-	 * @description 组织同步
+	 * @description Organization sync
 	 */
 	setOrganization(params: OrganizationResponse) {
 		const { organizationCode, teamshareOrganizationCode, organizations, delightfulOrganizationMap } =
 			params
-		// 数据持久化同步
+		// Persistent data sync
 		const user = new UserRepository()
 		user.setOrganizations(delightfulOrganizationMap ?? {})
 		user.setOrganizationCode(organizationCode ?? "")
 		user.setTeamshareOrganizations(organizations ?? [])
 		user.setTeamshareOrganizationCode(teamshareOrganizationCode ?? "")
 
-		// 内存状态同步
+		// Memory state sync
 		userStore.user.setOrganizationCode(organizationCode || "")
 		userStore.user.setTeamshareOrganizationCode(teamshareOrganizationCode || "")
 		userStore.user.setOrganizations(delightfulOrganizationMap || {})
@@ -173,7 +173,7 @@ export class UserService {
 	}
 
 	/**
-	 * @description 设置Teamshare组织列表
+	 * @description Set Teamshare organization list
 	 */
 	setTeamshareOrganizations(organizations: Array<User.UserOrganization>) {
 		const user = new UserRepository()
@@ -182,7 +182,7 @@ export class UserService {
 	}
 
 	/**
-	 * @description 组织切换
+	 * @description Switch organization
 	 */
 	switchOrganization = async (
 		delightful_user_id: string,
@@ -192,7 +192,7 @@ export class UserService {
 		try {
 			this.setDelightfulOrganizationCode(delightful_organization_code)
 
-			// 拉取用户信息
+			// Fetch user info
 			const { items } = await this.contactApi.getUserInfos({
 				user_ids: [delightful_user_id],
 				query_type: 2,
@@ -208,14 +208,14 @@ export class UserService {
 			await this.loadUserInfo(userInfo, { showSwitchLoading: true })
 			this.setUserInfo(userInfo)
 
-			/** 广播切换组织 */
+			/** Broadcast organization switch */
 			BroadcastChannelSender.switchOrganization({
 				userInfo,
 				delightfulOrganizationCode: delightful_organization_code,
 			})
 		} catch (err) {
 			console.error(err)
-			// 切换失败，恢复当前组织
+			// Switch failed, restore current organization
 			this.setDelightfulOrganizationCode(fallbackUserInfo?.organization_code)
 			this.setUserInfo(fallbackUserInfo)
 		}
@@ -262,24 +262,24 @@ export class UserService {
 	}
 
 	/**
-	 * @description 账号添加
+	 * @description Add account
 	 * @param userAccount
 	 */
 	setAccount(userAccount: User.UserAccount) {
-		// 数据持久化同步
+		// Persistent data sync
 		const account = new AccountRepository()
 		account.put(userAccount).catch(console.error)
 
-		// 内存状态同步
+		// Memory state sync
 		userStore.account.setAccount(userAccount)
 
-		// 广播添加账号
+		// Broadcast account addition
 		BroadcastChannelSender.addAccount(userAccount)
 	}
 
 	/**
-	 * FIXME: 错误时，恢复当前账号
-	 * @description 账号切换
+	 * FIXME: On error, restore current account
+	 * @description Switch account
 	 * @param unionId
 	 * @param delightfulOrganizationCode
 	 */
@@ -298,9 +298,9 @@ export class UserService {
 			this.setAuthorization(account?.access_token)
 
 			if (delightful_user_id && delightful_organization_code) {
-				// 同步用户对应组织
+				// Sync user's organization
 				this.setDelightfulOrganizationCode(delightful_organization_code)
-				// Step 1: 环境同步
+				// Step 1: Environment sync
 				await this.service
 					.get<LoginService>("loginService")
 					.getClusterConfig(account.deployCode)

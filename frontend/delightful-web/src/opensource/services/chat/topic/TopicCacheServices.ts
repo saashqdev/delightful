@@ -5,61 +5,61 @@ class TopicCacheServices {
 	topicCache: Map<string, Topic[]> = new Map()
 
 	/**
-	 * 获取话题缓存key
-	 * @param conversationId 会话ID
-	 * @returns 话题缓存key
+	 * Get topic cache key
+	 * @param conversationId Conversation ID
+	 * @returns Topic cache key
 	 */
 	static getTopicCacheKey(conversationId: string) {
 		return `topic_${conversationId}`
 	}
 
 	/**
-	 * 获取话题缓存
-	 * @param conversationId 会话ID
-	 * @returns 话题列表
+	 * Get topic cache
+	 * @param conversationId Conversation ID
+	 * @returns Topic list
 	 */
 	getTopicCache(conversationId: string): Topic[] | undefined {
 		return this.topicCache.get(conversationId)
 	}
 
 	/**
-	 * 判断话题缓存是否存在
-	 * @param conversationId 会话ID
-	 * @returns 是否存在
+	 * Check whether topic cache exists
+	 * @param conversationId Conversation ID
+	 * @returns Whether exists
 	 */
 	hasTopicCache(conversationId: string): boolean {
 		return this.topicCache.has(conversationId)
 	}
 
 	/**
-	 * 设置话题缓存
-	 * @param conversationId 会话ID
-	 * @param topicList 话题列表
+	 * Set topic cache
+	 * @param conversationId Conversation ID
+	 * @param topicList Topic list
 	 */
 	setTopicCache(conversationId: string, topicList: Topic[]): void {
 		this.topicCache.set(conversationId, topicList)
 	}
 
 	/**
-	 * 清除指定会话的话题缓存
-	 * @param conversationId 会话ID
+	 * Clear topic cache for a specific conversation
+	 * @param conversationId Conversation ID
 	 */
 	clearTopicCache(conversationId: string): void {
 		this.topicCache.delete(conversationId)
 	}
 
 	/**
-	 * 清除所有话题缓存
+	 * Clear all topic caches
 	 */
 	clearAllTopicCache(): void {
 		this.topicCache.clear()
 	}
 
 	/**
-	 * 更新话题缓存中的特定话题
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param updates 话题更新内容
+	 * Update a specific topic in cache
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param updates Topic updates
 	 */
 	updateTopicInCache(
 		conversationId: string,
@@ -80,9 +80,9 @@ class TopicCacheServices {
 	}
 
 	/**
-	 * 从话题缓存中删除话题
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
+	 * Delete topic from cache
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
 	 */
 	deleteTopicFromCache(conversationId: string, topicId: string): void {
 		const topicList = this.getTopicCache(conversationId)
@@ -93,9 +93,9 @@ class TopicCacheServices {
 	}
 
 	/**
-	 * 添加话题到缓存
-	 * @param conversationId 会话ID
-	 * @param topic 话题
+	 * Add topic to cache
+	 * @param conversationId Conversation ID
+	 * @param topic Topic
 	 */
 	addTopicToCache(conversationId: string, topic: Topic): void {
 		const topicList = this.getTopicCache(conversationId) || []
@@ -103,10 +103,10 @@ class TopicCacheServices {
 	}
 
 	/**
-	 * 根据ID从缓存中获取话题
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @returns 话题
+	 * Get topic by ID from cache
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @returns Topic
 	 */
 	getTopicById(conversationId: string, topicId: string): Topic | undefined {
 		const topicList = this.getTopicCache(conversationId)

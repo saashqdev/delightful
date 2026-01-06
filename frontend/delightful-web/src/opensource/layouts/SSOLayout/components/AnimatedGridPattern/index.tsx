@@ -16,18 +16,18 @@ interface AnimatedGridPatternProps extends React.HTMLAttributes<HTMLDivElement> 
 }
 
 /**
- * 动画网格图案
- * @param width - 宽度
- * @param height - 高度
- * @param x - x坐标
- * @param y - y坐标
- * @param strokeDasharray - 描边虚线数组
- * @param numSquares - 方块数量
- * @param className - 类名
- * @param maxOpacity - 最大透明度
- * @param duration - 动画持续时间
- * @param repeatDelay - 重复延迟时间
- * @param props - 其他属性
+ * Animated grid pattern
+ * @param width - Width
+ * @param height - Height
+ * @param x - X coordinate
+ * @param y - Y coordinate
+ * @param strokeDasharray - Stroke dasharray
+ * @param numSquares - Number of squares
+ * @param className - Class name
+ * @param maxOpacity - Max opacity
+ * @param duration - Animation duration
+ * @param repeatDelay - Repeat delay
+ * @param props - Other props
  */
 export function AnimatedGridPattern({
 	width = 40,

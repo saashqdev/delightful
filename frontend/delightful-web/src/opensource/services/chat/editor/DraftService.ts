@@ -7,7 +7,7 @@ import { cloneDeep, omit } from "lodash-es"
 const console = new Logger("DraftService")
 
 class DraftService {
-	// 持久化草稿的回调
+	// Callback for persisting drafts
 	persistDraftCallback: number | null = null
 
 	initDrafts() {
@@ -19,19 +19,19 @@ class DraftService {
 			})
 	}
 
-	// 写入草稿
+	// Write draft
 	writeDraft(conversationId: string, topicId: string, draft: EditorDraft) {
 		EditorDraftStore.setDraft(conversationId, topicId, draft)
 		this.persistDraft(conversationId, topicId, draft)
 	}
 
-	// 删除草稿
+	// Delete draft
 	deleteDraft(conversationId: string, topicId: string) {
 		EditorDraftStore.deleteDraft(conversationId, topicId)
 		this.persistDraft(conversationId, topicId, undefined)
 	}
 
-	// 持久化草稿
+	// Persist draft
 	persistDraft(conversationId: string, topicId: string, draft: EditorDraft | undefined) {
 		if (this.persistDraftCallback) {
 			clearTimeout(this.persistDraftCallback)
@@ -58,10 +58,10 @@ class DraftService {
 			table
 				?.put(draftWithInfo)
 				.then(() => {
-					console.log("持久化草稿成功")
+					console.log("Persist draft success")
 				})
 				.catch((error) => {
-					console.error("持久化草稿失败", error, draftWithInfo)
+					console.error("Persist draft failed", error, draftWithInfo)
 				})
 
 			this.persistDraftCallback = null

@@ -1,26 +1,26 @@
 /**
- * 判断当前环境是否为APP
- * @returns {boolean} 是否为APP环境
+ * Check if current environment is an APP
+ * @returns {boolean} Whether it's an APP environment
  */
 export function isInApp(): boolean {
-	// 通过用户代理字符串检测是否为APP环境
+	// Detect APP environment via user agent string
 	const userAgent = window.navigator.userAgent.toLowerCase()
 
-	// 检查特定的APP标识符
-	// 这里可以根据实际的APP标识来调整
+	// Check for specific APP identifiers
+	// Can be adjusted based on actual APP identifiers
 	const appIdentifiers = [
-		"delightful-android", // Android App标识
-		"delightful-ios", // iOS App标识
-		// 添加其他可能的APP标识
+		"delightful-android", // Android APP identifier
+		"delightful-ios", // iOS APP identifier
+		// Add other possible APP identifiers
 	]
 
-	// 检查是否存在webview标识
+	// Check for webview identifier
 	const isWebView = userAgent.includes("wv") || userAgent.includes("webview")
 
-	// 检查是否包含APP特定标识符
+	// Check if contains specific APP identifier
 	const hasAppIdentifier = (identifier: string) => userAgent.includes(identifier)
 
-	// 也可以通过自定义协议或全局变量来判断
+	// Can also determine via custom protocols or global variables
 	// 例如：APP可能会在window对象上设置一个特定变量
 	const hasCustomAppFlag =
 		typeof (window as any).isNativeApp !== "undefined" ||

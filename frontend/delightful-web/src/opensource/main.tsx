@@ -1,5 +1,5 @@
 import "./index.css"
-// 初始化 emoji 缓存
+// Initialize emoji cache
 import "@/opensource/components/base/DelightfulEmojiPanel/cache"
 import { enableMapSet } from "immer"
 // import ReactDom from "react-dom"

@@ -19,7 +19,7 @@ use Hyperf\DbConnection\Annotation\Transactional;
 class DelightfulFlowDraftDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly DelightfulFlowDraftRepositoryInterface $magicFlowDraftRepository,
+        private readonly DelightfulFlowDraftRepositoryInterface $delightfulFlowDraftRepository,
     ) {
     }
 
@@ -29,7 +29,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowDraftQuery $query, Page $page): array
     {
-        return $this->magicFlowDraftRepository->queries($dataIsolation, $query, $page);
+        return $this->delightfulFlowDraftRepository->queries($dataIsolation, $query, $page);
     }
 
     /**
@@ -37,7 +37,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
      */
     public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $draftCode): DelightfulFlowDraftEntity
     {
-        $draft = $this->magicFlowDraftRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $draftCode);
+        $draft = $this->delightfulFlowDraftRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $draftCode);
         if (! $draft) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$draftCode} 不存在");
         }
@@ -49,11 +49,11 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
      */
     public function remove(FlowDataIsolation $dataIsolation, string $flowCode, string $draftCode): void
     {
-        $draft = $this->magicFlowDraftRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $draftCode);
+        $draft = $this->delightfulFlowDraftRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $draftCode);
         if (! $draft) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$draftCode} 不存在");
         }
-        $this->magicFlowDraftRepository->remove($dataIsolation, $draft);
+        $this->delightfulFlowDraftRepository->remove($dataIsolation, $draft);
     }
 
     /**
@@ -65,22 +65,22 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
         $savingDelightfulFlowDraftEntity->setCreator($dataIsolation->getCurrentUserId());
         $savingDelightfulFlowDraftEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         if ($savingDelightfulFlowDraftEntity->shouldCreate()) {
-            $magicFlowDraftEntity = clone $savingDelightfulFlowDraftEntity;
-            $magicFlowDraftEntity->prepareForCreation();
+            $delightfulFlowDraftEntity = clone $savingDelightfulFlowDraftEntity;
+            $delightfulFlowDraftEntity->prepareForCreation();
         } else {
             if (empty($savingDelightfulFlowDraftEntity->getCode())) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'code 不能为空');
             }
-            $magicFlowDraftEntity = $this->magicFlowDraftRepository->getByFlowCodeAndCode($dataIsolation, $savingDelightfulFlowDraftEntity->getFlowCode(), $savingDelightfulFlowDraftEntity->getCode());
-            if (! $magicFlowDraftEntity) {
+            $delightfulFlowDraftEntity = $this->delightfulFlowDraftRepository->getByFlowCodeAndCode($dataIsolation, $savingDelightfulFlowDraftEntity->getFlowCode(), $savingDelightfulFlowDraftEntity->getCode());
+            if (! $delightfulFlowDraftEntity) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$savingDelightfulFlowDraftEntity->getCode()} 不存在");
             }
-            $savingDelightfulFlowDraftEntity->prepareForModification($magicFlowDraftEntity);
+            $savingDelightfulFlowDraftEntity->prepareForModification($delightfulFlowDraftEntity);
         }
 
-        $draft = $this->magicFlowDraftRepository->save($dataIsolation, $magicFlowDraftEntity);
+        $draft = $this->delightfulFlowDraftRepository->save($dataIsolation, $delightfulFlowDraftEntity);
         // 仅保留最新的记录
-        $this->magicFlowDraftRepository->clearEarlyRecords($dataIsolation, $savingDelightfulFlowDraftEntity->getFlowCode());
+        $this->delightfulFlowDraftRepository->clearEarlyRecords($dataIsolation, $savingDelightfulFlowDraftEntity->getFlowCode());
         return $draft;
     }
 }

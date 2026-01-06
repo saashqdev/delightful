@@ -35,11 +35,11 @@ class DelightfulFlowExecutorTest extends ExecuteManagerBaseTest
             $node->setCallback(function (VertexResult $vertexResult, ExecutionData $executionData, array $frontResults) {});
             $nodes[$i] = $node;
         }
-        $magicFlowEntity = $this->getDelightfulFlowEntity();
-        $magicFlowEntity->setNodes($nodes);
+        $delightfulFlowEntity = $this->getDelightfulFlowEntity();
+        $delightfulFlowEntity->setNodes($nodes);
 
         $executionData = $this->createExecutionData(TriggerType::ChatMessage);
-        $executor = new DelightfulFlowExecutor($magicFlowEntity, $executionData);
+        $executor = new DelightfulFlowExecutor($delightfulFlowEntity, $executionData);
 
         $executor->execute();
         foreach ($nodes as $node) {
@@ -49,11 +49,11 @@ class DelightfulFlowExecutorTest extends ExecuteManagerBaseTest
 
     private function getDelightfulFlowEntity(): DelightfulFlowEntity
     {
-        $magicFlowEntity = new DelightfulFlowEntity();
-        $magicFlowEntity->setCode('unit_test.' . uniqid());
-        $magicFlowEntity->setName('unit_test');
-        $magicFlowEntity->setType(Type::Main);
-        $magicFlowEntity->setCreator('system_unit');
-        return $magicFlowEntity;
+        $delightfulFlowEntity = new DelightfulFlowEntity();
+        $delightfulFlowEntity->setCode('unit_test.' . uniqid());
+        $delightfulFlowEntity->setName('unit_test');
+        $delightfulFlowEntity->setType(Type::Main);
+        $delightfulFlowEntity->setCreator('system_unit');
+        return $delightfulFlowEntity;
     }
 }

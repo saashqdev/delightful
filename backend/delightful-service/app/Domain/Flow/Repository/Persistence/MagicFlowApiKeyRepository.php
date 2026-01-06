@@ -46,15 +46,15 @@ class DelightfulFlowApiKeyRepository extends DelightfulFlowAbstractRepository im
         return $model ? DelightfulFlowApiKeyFactory::modelToEntity($model) : null;
     }
 
-    public function exist(FlowDataIsolation $dataIsolation, DelightfulFlowApiKeyEntity $magicFlowApiKeyEntity): bool
+    public function exist(FlowDataIsolation $dataIsolation, DelightfulFlowApiKeyEntity $delightfulFlowApiKeyEntity): bool
     {
         $builder = $this->createBuilder($dataIsolation, DelightfulFlowApiKeyModel::query());
-        $builder->where('flow_code', $magicFlowApiKeyEntity->getFlowCode())
-            ->where('conversation_id', $magicFlowApiKeyEntity->getConversationId());
+        $builder->where('flow_code', $delightfulFlowApiKeyEntity->getFlowCode())
+            ->where('conversation_id', $delightfulFlowApiKeyEntity->getConversationId());
         /* @phpstan-ignore-next-line */
-        if ($magicFlowApiKeyEntity->getType() === ApiKeyType::Personal) {
-            $builder->where('type', $magicFlowApiKeyEntity->getType()->value)
-                ->where('created_uid', $magicFlowApiKeyEntity->getCreator());
+        if ($delightfulFlowApiKeyEntity->getType() === ApiKeyType::Personal) {
+            $builder->where('type', $delightfulFlowApiKeyEntity->getType()->value)
+                ->where('created_uid', $delightfulFlowApiKeyEntity->getCreator());
         }
 
         return $builder->exists();
@@ -87,19 +87,19 @@ class DelightfulFlowApiKeyRepository extends DelightfulFlowAbstractRepository im
         return $data;
     }
 
-    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowApiKeyEntity $magicFlowApiKeyEntity): DelightfulFlowApiKeyEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowApiKeyEntity $delightfulFlowApiKeyEntity): DelightfulFlowApiKeyEntity
     {
         $model = $this->createBuilder($dataIsolation, DelightfulFlowApiKeyModel::query())
-            ->where('code', $magicFlowApiKeyEntity->getCode())
+            ->where('code', $delightfulFlowApiKeyEntity->getCode())
             ->first();
         if (! $model) {
             $model = new DelightfulFlowApiKeyModel();
         }
 
-        $model->fill($this->getAttributes($magicFlowApiKeyEntity));
+        $model->fill($this->getAttributes($delightfulFlowApiKeyEntity));
         $model->save();
-        $magicFlowApiKeyEntity->setId($model->id);
-        return $magicFlowApiKeyEntity;
+        $delightfulFlowApiKeyEntity->setId($model->id);
+        return $delightfulFlowApiKeyEntity;
     }
 
     public function destroy(FlowDataIsolation $dataIsolation, string $code): void

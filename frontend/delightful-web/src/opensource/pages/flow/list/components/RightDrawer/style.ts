@@ -6,13 +6,13 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { open }: { open: bo
 			width: ${open ? "320px" : 0};
 			padding: ${open ? "12px" : 0};
 			background-color: ${isDarkMode
-				? token.magicColorScales.grey[9]
-				: token.magicColorUsages.white};
+				? token.delightfulColorScales.grey[9]
+				: token.delightfulColorUsages.white};
 			border-left: 1px solid
-				${isDarkMode ? token.magicColorScales.grey[8] : token.colorBorder};
+				${isDarkMode ? token.delightfulColorScales.grey[8] : token.colorBorder};
 			background-color: ${isDarkMode
-				? token.magicColorScales.grey[9]
-				: token.magicColorScales.grey[0]};
+				? token.delightfulColorScales.grey[9]
+				: token.delightfulColorScales.grey[0]};
 			position: relative;
 			overflow: hidden;
 			transition: width 0.2s;
@@ -20,7 +20,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { open }: { open: bo
 		`,
 		close: css`
 			cursor: pointer;
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
 		`,
 		top: css`
 			width: 100%;
@@ -28,7 +28,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { open }: { open: bo
 		`,
 		title: {
 			overflow: "hidden",
-			color: isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1],
+			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1],
 			textOverflow: "ellipsis",
 			fontSize: 16,
 			fontWeight: 600,
@@ -42,7 +42,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { open }: { open: bo
 			width: "100%",
 			flex: 1,
 			overflow: "hidden",
-			color: isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.text[2],
+			color: isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[2],
 			textOverflow: "ellipsis",
 			fontSize: 12,
 			fontWeight: 400,
@@ -55,19 +55,19 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { open }: { open: bo
 			flex: 1;
 			border: 1px solid ${token.colorBorder};
 			background-color: ${isDarkMode
-				? token.magicColorScales.grey[9]
-				: token.magicColorUsages.white};
+				? token.delightfulColorScales.grey[9]
+				: token.delightfulColorUsages.white};
 		`,
 		subTitle: css`
 			padding-top: 10px;
 			font-size: 14px;
 			font-weight: 600;
-			color: ${isDarkMode ? token.magicColorScales.grey[3] : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorUsages.text[1]};
 		`,
 		emptyTips: css`
 			font-size: 14px;
 			font-weight: 400;
-			color: ${isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.text[2]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[2]};
 		`,
 		drawerContainer: css`
 			width: 100%;

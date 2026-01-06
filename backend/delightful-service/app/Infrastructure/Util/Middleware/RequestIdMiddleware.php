@@ -24,10 +24,10 @@ class RequestIdMiddleware implements MiddlewareInterface
         }
 
         // 处理header的Delightful-User-Id 存在["usi_8","xxxxxxxxx"]问题，合并为"usi_8xxxxxxxxx"
-        $magicUserId = $request->getHeader('magic-user-id');
-        if ($magicUserId && count($magicUserId) > 1) {
-            $magicUserId = implode('', $magicUserId);
-            $request = $request->withHeader('magic-user-id', $magicUserId);
+        $delightfulUserId = $request->getHeader('delightful-user-id');
+        if ($delightfulUserId && count($delightfulUserId) > 1) {
+            $delightfulUserId = implode('', $delightfulUserId);
+            $request = $request->withHeader('delightful-user-id', $delightfulUserId);
         }
         return $handler->handle($request);
     }

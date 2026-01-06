@@ -44,16 +44,16 @@ class DelightfulFlowApiKeyAssembler
     /**
      * @param array<string, DelightfulUserEntity> $users
      */
-    public static function createDTO(DelightfulFlowApiKeyEntity $magicFlowApiKeyEntity, array $users = []): DelightfulFlowApiKeyDTO
+    public static function createDTO(DelightfulFlowApiKeyEntity $delightfulFlowApiKeyEntity, array $users = []): DelightfulFlowApiKeyDTO
     {
-        $DTO = new DelightfulFlowApiKeyDTO($magicFlowApiKeyEntity->toArray());
-        $DTO->setId($magicFlowApiKeyEntity->getCode());
-        $DTO->setCreator($magicFlowApiKeyEntity->getCreator());
-        $DTO->setCreatedAt($magicFlowApiKeyEntity->getCreatedAt());
-        $DTO->setModifier($magicFlowApiKeyEntity->getModifier());
-        $DTO->setUpdatedAt($magicFlowApiKeyEntity->getUpdatedAt());
-        $DTO->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowApiKeyEntity->getCreator()] ?? null, $magicFlowApiKeyEntity->getCreatedAt()));
-        $DTO->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowApiKeyEntity->getModifier()] ?? null, $magicFlowApiKeyEntity->getUpdatedAt()));
+        $DTO = new DelightfulFlowApiKeyDTO($delightfulFlowApiKeyEntity->toArray());
+        $DTO->setId($delightfulFlowApiKeyEntity->getCode());
+        $DTO->setCreator($delightfulFlowApiKeyEntity->getCreator());
+        $DTO->setCreatedAt($delightfulFlowApiKeyEntity->getCreatedAt());
+        $DTO->setModifier($delightfulFlowApiKeyEntity->getModifier());
+        $DTO->setUpdatedAt($delightfulFlowApiKeyEntity->getUpdatedAt());
+        $DTO->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowApiKeyEntity->getCreator()] ?? null, $delightfulFlowApiKeyEntity->getCreatedAt()));
+        $DTO->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowApiKeyEntity->getModifier()] ?? null, $delightfulFlowApiKeyEntity->getUpdatedAt()));
         return $DTO;
     }
 

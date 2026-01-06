@@ -29,10 +29,10 @@ class UserAssembler
     public static function getAgentList(array $agents, array $accounts): array
     {
         /** @var AccountEntity[] $accounts */
-        $accounts = array_column($accounts, null, 'magic_id');
+        $accounts = array_column($accounts, null, 'delightful_id');
         $agentList = [];
         foreach ($agents as $agent) {
-            $agentAccount = $accounts[$agent['magic_id']] ?? null;
+            $agentAccount = $accounts[$agent['delightful_id']] ?? null;
             if ($agentAccount instanceof AccountEntity) {
                 $agentAccount = $agentAccount->toArray();
             } else {
@@ -57,8 +57,8 @@ class UserAssembler
     {
         // 强转用户 id 类型为 string
         foreach ($userInfos as &$user) {
-            // 不返回 magic_id 和 id
-            unset($user['magic_id'], $user['id']);
+            // 不返回 delightful_id 和 id
+            unset($user['delightful_id'], $user['id']);
         }
         return $userInfos;
     }
@@ -100,12 +100,12 @@ class UserAssembler
     {
         $logger = di(LoggerFactory::class)->get('UserAssembler');
         /** @var array<AccountEntity> $accounts */
-        $accounts = array_column($accounts, null, 'magic_id');
+        $accounts = array_column($accounts, null, 'delightful_id');
         $userDetailDTOList = [];
         foreach ($users as $user) {
-            $account = $accounts[$user['magic_id']] ?? null;
+            $account = $accounts[$user['delightful_id']] ?? null;
             if (empty($account)) {
-                $logger->warning("用户[magic_id: {$user['magic_id']} ]不存在, 跳过！");
+                $logger->warning("用户[delightful_id: {$user['delightful_id']} ]不存在, 跳过！");
                 continue;
             }
             // 如果存在手机号，将手机号的中间四位替换为*

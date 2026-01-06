@@ -98,15 +98,15 @@ class MessageContentProvider implements MessageContentProviderInterface
 
             // 2. If it's a chat message, need to get complete content from message table
             if ($seqEntity->getSeqType() instanceof ChatMessageType) {
-                $magicMessageId = $seqEntity->getDelightfulMessageId();
-                if (empty($magicMessageId)) {
-                    $this->logger->warning("Empty magic_message_id for seq_id: {$seqId}");
+                $delightfulMessageId = $seqEntity->getDelightfulMessageId();
+                if (empty($delightfulMessageId)) {
+                    $this->logger->warning("Empty delightful_message_id for seq_id: {$seqId}");
                     return null;
                 }
 
-                $messageEntity = $this->messageRepository->getMessageByDelightfulMessageId($magicMessageId);
+                $messageEntity = $this->messageRepository->getMessageByDelightfulMessageId($delightfulMessageId);
                 if ($messageEntity === null) {
-                    $this->logger->warning("Message not found for magic_message_id: {$magicMessageId}");
+                    $this->logger->warning("Message not found for delightful_message_id: {$delightfulMessageId}");
                     return null;
                 }
             } else {

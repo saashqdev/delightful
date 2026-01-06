@@ -19,7 +19,7 @@ use Hyperf\Di\Annotation\Inject;
 class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
 {
     #[Inject]
-    protected DelightfulFlowDraftAppService $magicFlowDraftAppService;
+    protected DelightfulFlowDraftAppService $delightfulFlowDraftAppService;
 
     /**
      * 保存草稿.
@@ -27,14 +27,14 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     public function save(string $flowId)
     {
         $authorization = $this->getAuthorization();
-        $magicFlowDraftDTO = DelightfulFlowDraftAssembler::createFlowDraftDTOByMixed($this->request->all());
-        $magicFlowDraftDTO->setFlowCode($flowId);
+        $delightfulFlowDraftDTO = DelightfulFlowDraftAssembler::createFlowDraftDTOByMixed($this->request->all());
+        $delightfulFlowDraftDTO->setFlowCode($flowId);
 
-        $magicFlowDraftDO = DelightfulFlowDraftAssembler::createDelightfulFlowDraftDO($magicFlowDraftDTO);
+        $delightfulFlowDraftDO = DelightfulFlowDraftAssembler::createDelightfulFlowDraftDO($delightfulFlowDraftDTO);
 
-        $magicFlowDraft = $this->magicFlowDraftAppService->save($authorization, $magicFlowDraftDO);
-        $icons = $this->magicFlowDraftAppService->getIcons($magicFlowDraft->getOrganizationCode(), [$magicFlowDraft->getDelightfulFlow()['icon'] ?? '']);
-        return DelightfulFlowDraftAssembler::createDelightfulFlowDraftDTO($magicFlowDraft, [], $icons);
+        $delightfulFlowDraft = $this->delightfulFlowDraftAppService->save($authorization, $delightfulFlowDraftDO);
+        $icons = $this->delightfulFlowDraftAppService->getIcons($delightfulFlowDraft->getOrganizationCode(), [$delightfulFlowDraft->getDelightfulFlow()['icon'] ?? '']);
+        return DelightfulFlowDraftAssembler::createDelightfulFlowDraftDTO($delightfulFlowDraft, [], $icons);
     }
 
     /**
@@ -50,7 +50,7 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
         $query->setOrder(['id' => 'desc']);
         $query->flowCode = $flowId;
 
-        $result = $this->magicFlowDraftAppService->queries($authorization, $query, $page);
+        $result = $this->delightfulFlowDraftAppService->queries($authorization, $query, $page);
 
         return DelightfulFlowDraftAssembler::createPageListDTO($result['total'], $result['list'], $page, $result['users']);
     }
@@ -60,9 +60,9 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
      */
     public function show(string $flowId, string $draftId)
     {
-        $magicFlowDraft = $this->magicFlowDraftAppService->show($this->getAuthorization(), $flowId, $draftId);
-        $icons = $this->magicFlowDraftAppService->getIcons($magicFlowDraft->getOrganizationCode(), [$magicFlowDraft->getDelightfulFlow()['icon'] ?? '']);
-        return DelightfulFlowDraftAssembler::createDelightfulFlowDraftDTO($magicFlowDraft, [], $icons);
+        $delightfulFlowDraft = $this->delightfulFlowDraftAppService->show($this->getAuthorization(), $flowId, $draftId);
+        $icons = $this->delightfulFlowDraftAppService->getIcons($delightfulFlowDraft->getOrganizationCode(), [$delightfulFlowDraft->getDelightfulFlow()['icon'] ?? '']);
+        return DelightfulFlowDraftAssembler::createDelightfulFlowDraftDTO($delightfulFlowDraft, [], $icons);
     }
 
     /**
@@ -70,6 +70,6 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
      */
     public function remove(string $flowId, string $draftId)
     {
-        $this->magicFlowDraftAppService->remove($this->getAuthorization(), $flowId, $draftId);
+        $this->delightfulFlowDraftAppService->remove($this->getAuthorization(), $flowId, $draftId);
     }
 }

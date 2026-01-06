@@ -43,7 +43,7 @@ export default function GroupNode({ id, data, isConnectable, position }: NodePro
 
 	return (
 		<div
-			className={clsx("magic-group-node", {
+			className={clsx("delightful-group-node", {
 				[styles.isSelected]: isSelected,
 			})}
 			onDragOver={onDragOver}
@@ -56,7 +56,7 @@ export default function GroupNode({ id, data, isConnectable, position }: NodePro
 				</NodeToolbar>
 			)}
 			<div className="group-title">
-				<span>{i18next.t("flow.loopBody", { ns: "magicFlow" })}</span>
+				<span>{i18next.t("flow.loopBody", { ns: "delightfulFlow" })}</span>
 				<DebuggerComp id={id} />
 				<Tooltip title={data?.description}>
 					<IconInfoCircle stroke={1} width={16} height={16} />

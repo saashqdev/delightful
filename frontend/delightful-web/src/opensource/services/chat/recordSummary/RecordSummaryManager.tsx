@@ -15,7 +15,7 @@ class RecordSummaryManager {
 
 	// eslint-disable-next-line class-methods-use-this
 	get isRecordingKey() {
-		return `${userStore.user.userInfo?.magic_id || "default"}_isRecording`
+		return `${userStore.user.userInfo?.delightful_id || "default"}_isRecording`
 	}
 
 	isRecording: boolean = false

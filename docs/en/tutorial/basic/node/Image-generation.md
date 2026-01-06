@@ -5,7 +5,7 @@ The Image Generation Node is a powerful tool provided by the Delightful Flow pla
 **Image Description:**
 
 The Image Generation Node interface consists of a model selection area at the top and a parameter configuration area at the bottom. The top allows you to select different image generation models; the bottom allows you to set prompts (descriptions of the image you want), image size, aspect ratio, and other parameters.
-![Image Generation Node](https://cdn.letsmagic.cn/static/img/Image-generation.png)
+![Image Generation Node](https://cdn.letsdelightful.cn/static/img/Image-generation.png)
 
 ## Why do you need an Image Generation Node?
 **In an intelligent workflow, you may need to:**

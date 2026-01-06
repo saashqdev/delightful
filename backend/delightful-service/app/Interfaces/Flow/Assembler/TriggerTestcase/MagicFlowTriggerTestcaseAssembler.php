@@ -20,36 +20,36 @@ class DelightfulFlowTriggerTestcaseAssembler
      */
     public static function createPageListDTO(int $total, array $list, Page $page, array $users = []): PageDTO
     {
-        $list = array_map(fn (DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity) => self::createDelightfulFlowTriggerTestcaseDTO($magicFlowTriggerTestcaseEntity, $users), $list);
+        $list = array_map(fn (DelightfulFlowTriggerTestcaseEntity $delightfulFlowTriggerTestcaseEntity) => self::createDelightfulFlowTriggerTestcaseDTO($delightfulFlowTriggerTestcaseEntity, $users), $list);
         return new PageDTO($page->getPage(), $total, $list);
     }
 
-    public static function createDelightfulFlowTriggerTestcaseDO(DelightfulFlowTriggerTestcaseDTO $magicFlowTriggerTestcaseDTO): DelightfulFlowTriggerTestcaseEntity
+    public static function createDelightfulFlowTriggerTestcaseDO(DelightfulFlowTriggerTestcaseDTO $delightfulFlowTriggerTestcaseDTO): DelightfulFlowTriggerTestcaseEntity
     {
         $entity = new DelightfulFlowTriggerTestcaseEntity();
-        $entity->setFlowCode($magicFlowTriggerTestcaseDTO->getFlowCode());
-        $entity->setCode($magicFlowTriggerTestcaseDTO->getId());
-        $entity->setName($magicFlowTriggerTestcaseDTO->getName());
-        $entity->setDescription($magicFlowTriggerTestcaseDTO->getDescription());
-        $entity->setCaseConfig($magicFlowTriggerTestcaseDTO->getCaseConfig());
+        $entity->setFlowCode($delightfulFlowTriggerTestcaseDTO->getFlowCode());
+        $entity->setCode($delightfulFlowTriggerTestcaseDTO->getId());
+        $entity->setName($delightfulFlowTriggerTestcaseDTO->getName());
+        $entity->setDescription($delightfulFlowTriggerTestcaseDTO->getDescription());
+        $entity->setCaseConfig($delightfulFlowTriggerTestcaseDTO->getCaseConfig());
         return $entity;
     }
 
-    public static function createDelightfulFlowTriggerTestcaseDTO(DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity, array $users = []): DelightfulFlowTriggerTestcaseDTO
+    public static function createDelightfulFlowTriggerTestcaseDTO(DelightfulFlowTriggerTestcaseEntity $delightfulFlowTriggerTestcaseEntity, array $users = []): DelightfulFlowTriggerTestcaseDTO
     {
         $dto = new DelightfulFlowTriggerTestcaseDTO();
-        $dto->setId($magicFlowTriggerTestcaseEntity->getCode());
-        $dto->setName($magicFlowTriggerTestcaseEntity->getName());
-        $dto->setDescription($magicFlowTriggerTestcaseEntity->getDescription());
-        $dto->setCreator($magicFlowTriggerTestcaseEntity->getCreator());
-        $dto->setCreatedAt($magicFlowTriggerTestcaseEntity->getCreatedAt());
-        $dto->setModifier($magicFlowTriggerTestcaseEntity->getModifier());
-        $dto->setUpdatedAt($magicFlowTriggerTestcaseEntity->getUpdatedAt());
-        $dto->setFlowCode($magicFlowTriggerTestcaseEntity->getFlowCode());
-        $dto->setCaseConfig($magicFlowTriggerTestcaseEntity->getCaseConfig());
+        $dto->setId($delightfulFlowTriggerTestcaseEntity->getCode());
+        $dto->setName($delightfulFlowTriggerTestcaseEntity->getName());
+        $dto->setDescription($delightfulFlowTriggerTestcaseEntity->getDescription());
+        $dto->setCreator($delightfulFlowTriggerTestcaseEntity->getCreator());
+        $dto->setCreatedAt($delightfulFlowTriggerTestcaseEntity->getCreatedAt());
+        $dto->setModifier($delightfulFlowTriggerTestcaseEntity->getModifier());
+        $dto->setUpdatedAt($delightfulFlowTriggerTestcaseEntity->getUpdatedAt());
+        $dto->setFlowCode($delightfulFlowTriggerTestcaseEntity->getFlowCode());
+        $dto->setCaseConfig($delightfulFlowTriggerTestcaseEntity->getCaseConfig());
 
-        $dto->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowTriggerTestcaseEntity->getCreator()] ?? null, $magicFlowTriggerTestcaseEntity->getCreatedAt()));
-        $dto->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowTriggerTestcaseEntity->getModifier()] ?? null, $magicFlowTriggerTestcaseEntity->getUpdatedAt()));
+        $dto->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowTriggerTestcaseEntity->getCreator()] ?? null, $delightfulFlowTriggerTestcaseEntity->getCreatedAt()));
+        $dto->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowTriggerTestcaseEntity->getModifier()] ?? null, $delightfulFlowTriggerTestcaseEntity->getUpdatedAt()));
 
         return $dto;
     }

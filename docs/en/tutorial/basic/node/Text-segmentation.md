@@ -5,7 +5,7 @@ The Text Segmentation Node is a special data processing node in the Delightful w
 **Image Description:**
 
 The Text Segmentation Node interface mainly consists of input and output areas. In the input area, you can specify the text content to be segmented or reference variables; in the output area, you can select the output format and set the result variable name.
-![Text Segmentation Node](https://cdn.letsmagic.cn/static/img/Text-segmentation.png)
+![Text Segmentation Node](https://cdn.letsdelightful.cn/static/img/Text-segmentation.png)
 
 ## Why do you need a Text Segmentation Node?
 When processing large amounts of text, the entire block of text is often too large for precise analysis and processing. The Text Segmentation Node solves this problem:

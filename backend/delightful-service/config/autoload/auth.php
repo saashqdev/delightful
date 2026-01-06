@@ -14,17 +14,17 @@ use Qbhy\HyperfAuth\Provider\EloquentProvider;
 return [
     'default' => [
         'guard' => 'web',
-        'provider' => 'magic-users',
+        'provider' => 'delightful-users',
     ],
     'guards' => [
         'web' => [
             'driver' => WebUserGuard::class,
-            'provider' => 'magic-users',
+            'provider' => 'delightful-users',
         ],
         // 需要解析 websocket 上下文中的 token 信息，因此跟 WebUserGuard 不同
         'websocket' => [
             'driver' => WebsocketChatUserGuard::class,
-            'provider' => 'magic-users',
+            'provider' => 'delightful-users',
         ],
         'sandbox' => [
             'driver' => SandboxGuard::class,
@@ -33,7 +33,7 @@ return [
     ],
     'providers' => [
         // 麦吉自建用户体系
-        'magic-users' => [
+        'delightful-users' => [
             'driver' => EloquentProvider::class,
             'model' => DelightfulUserAuthorization::class,
         ],

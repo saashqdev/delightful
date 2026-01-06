@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_modes', function (Blueprint $table) {
+        Schema::table('delightful_modes', function (Blueprint $table) {
             $table->json('placeholder_i18n')->nullable()->comment('模式占位符国际化')->after('name_i18n');
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_modes', function (Blueprint $table) {
+        Schema::table('delightful_modes', function (Blueprint $table) {
             $table->dropColumn('placeholder_i18n');
         });
     }

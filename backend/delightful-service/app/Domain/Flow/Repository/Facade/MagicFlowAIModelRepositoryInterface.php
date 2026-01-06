@@ -14,7 +14,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 interface DelightfulFlowAIModelRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelEntity $magicFlowAIModelEntity): DelightfulFlowAIModelEntity;
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelEntity $delightfulFlowAIModelEntity): DelightfulFlowAIModelEntity;
 
     public function getByName(FlowDataIsolation $dataIsolation, string $name): ?DelightfulFlowAIModelEntity;
 

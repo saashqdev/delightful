@@ -9,7 +9,7 @@
 // 	/** 本地临时id */
 // 	temp_id?: string
 // 	/** 用户唯一 ID */
-// 	magic_id: string
+// 	delightful_id: string
 // 	/** 消息序列 ID */
 // 	seq_id?: string
 // 	/** 消息 ID */
@@ -19,7 +19,7 @@
 // interface UserInfo {
 // 	nickname: string
 // 	avatar: string
-// 	magic_id: string
+// 	delightful_id: string
 // }
 
 // // 消息节点（包含消息的详细内容）
@@ -29,7 +29,7 @@
 // 		/** 本地临时id */
 // 		temp_id: "",
 // 		/** 用户唯一 ID */
-// 		magic_id: "",
+// 		delightful_id: "",
 // 		/** 消息序列 ID */
 // 		seq_id: "",
 // 		/** 消息 ID */
@@ -39,7 +39,7 @@
 // 	user: UserInfo = {
 // 		nickname: "",
 // 		avatar: "",
-// 		magic_id: "",
+// 		delightful_id: "",
 // 	}
 
 // 	/** 引用消息 ID */

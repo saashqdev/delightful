@@ -48,8 +48,8 @@ const useStyles = createStyles(
 							width: 100%;
 							&:hover {
 								background: ${isDarkMode
-									? token.magicColorScales.grey[8]
-									: token.magicColorUsages.primaryLight.default};
+									? token.delightfulColorScales.grey[8]
+									: token.delightfulColorUsages.primaryLight.default};
 							}
 					  `
 					: ""}

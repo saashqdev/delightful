@@ -95,7 +95,7 @@ class TriggerDataUserExtInfo
     }
 
     /**
-     * 加载 magic 的用户信息.
+     * 加载 delightful 的用户信息.
      */
     private function loadDelightfulUserDepartments(): void
     {

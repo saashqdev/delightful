@@ -3,22 +3,22 @@
 exports[`DelightfulTable > 快照测试 > 基础表格快照 1`] = `
 <DocumentFragment>
   <div
-    class="css-var-r1 magic-table-css-var magic-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
+    class="css-var-r1 delightful-table-css-var delightful-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
   >
     <div
-      class="magic-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r1"
+      class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r1"
     >
       <div
-        class="magic-spin-container"
+        class="delightful-spin-container"
       >
         <div
-          class="magic-table css-var-r1 magic-table-css-var css-dev-only-do-not-override-yotw4n magic-table-scroll-horizontal"
+          class="delightful-table css-var-r1 delightful-table-css-var css-dev-only-do-not-override-yotw4n delightful-table-scroll-horizontal"
         >
           <div
-            class="magic-table-container"
+            class="delightful-table-container"
           >
             <div
-              class="magic-table-content"
+              class="delightful-table-content"
               style="overflow-x: auto; overflow-y: hidden;"
             >
               <table
@@ -26,17 +26,17 @@ exports[`DelightfulTable > 快照测试 > 基础表格快照 1`] = `
               >
                 <colgroup />
                 <thead
-                  class="magic-table-thead"
+                  class="delightful-table-thead"
                 >
                   <tr>
                     <th
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                       scope="col"
                     >
                       姓名
                     </th>
                     <th
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                       scope="col"
                     >
                       年龄
@@ -44,11 +44,11 @@ exports[`DelightfulTable > 快照测试 > 基础表格快照 1`] = `
                   </tr>
                 </thead>
                 <tbody
-                  class="magic-table-tbody"
+                  class="delightful-table-tbody"
                 >
                   <tr
                     aria-hidden="true"
-                    class="magic-table-measure-row"
+                    class="delightful-table-measure-row"
                     style="height: 0px; font-size: 0px;"
                   >
                     <td
@@ -71,31 +71,31 @@ exports[`DelightfulTable > 快照测试 > 基础表格快照 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="magic-table-row magic-table-row-level-0"
+                    class="delightful-table-row delightful-table-row-level-0"
                     data-row-key="1"
                   >
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       张三
                     </td>
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       25
                     </td>
                   </tr>
                   <tr
-                    class="magic-table-row magic-table-row-level-0"
+                    class="delightful-table-row delightful-table-row-level-0"
                     data-row-key="2"
                   >
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       李四
                     </td>
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       30
                     </td>
@@ -106,15 +106,15 @@ exports[`DelightfulTable > 快照测试 > 基础表格快照 1`] = `
           </div>
         </div>
         <ul
-          class="magic-pagination magic-table-pagination magic-table-pagination-right css-dev-only-do-not-override-yotw4n css-var-r1"
+          class="delightful-pagination delightful-table-pagination delightful-table-pagination-right css-dev-only-do-not-override-yotw4n css-var-r1"
         >
           <li
             aria-disabled="true"
-            class="magic-pagination-prev magic-pagination-disabled"
+            class="delightful-pagination-prev delightful-pagination-disabled"
             title="Previous Page"
           >
             <button
-              class="magic-pagination-item-link"
+              class="delightful-pagination-item-link"
               disabled=""
               tabindex="-1"
               type="button"
@@ -141,7 +141,7 @@ exports[`DelightfulTable > 快照测试 > 基础表格快照 1`] = `
             </button>
           </li>
           <li
-            class="magic-pagination-item magic-pagination-item-1 magic-pagination-item-active"
+            class="delightful-pagination-item delightful-pagination-item-1 delightful-pagination-item-active"
             tabindex="0"
             title="1"
           >
@@ -153,11 +153,11 @@ exports[`DelightfulTable > 快照测试 > 基础表格快照 1`] = `
           </li>
           <li
             aria-disabled="true"
-            class="magic-pagination-next magic-pagination-disabled"
+            class="delightful-pagination-next delightful-pagination-disabled"
             title="Next Page"
           >
             <button
-              class="magic-pagination-item-link"
+              class="delightful-pagination-item-link"
               disabled=""
               tabindex="-1"
               type="button"
@@ -193,22 +193,22 @@ exports[`DelightfulTable > 快照测试 > 基础表格快照 1`] = `
 exports[`DelightfulTable > 快照测试 > 带分页表格快照 1`] = `
 <DocumentFragment>
   <div
-    class="css-var-r3 magic-table-css-var magic-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
+    class="css-var-r3 delightful-table-css-var delightful-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
   >
     <div
-      class="magic-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r3"
+      class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r3"
     >
       <div
-        class="magic-spin-container"
+        class="delightful-spin-container"
       >
         <div
-          class="magic-table css-var-r3 magic-table-css-var css-dev-only-do-not-override-yotw4n magic-table-scroll-horizontal"
+          class="delightful-table css-var-r3 delightful-table-css-var css-dev-only-do-not-override-yotw4n delightful-table-scroll-horizontal"
         >
           <div
-            class="magic-table-container"
+            class="delightful-table-container"
           >
             <div
-              class="magic-table-content"
+              class="delightful-table-content"
               style="overflow-x: auto; overflow-y: hidden;"
             >
               <table
@@ -216,17 +216,17 @@ exports[`DelightfulTable > 快照测试 > 带分页表格快照 1`] = `
               >
                 <colgroup />
                 <thead
-                  class="magic-table-thead"
+                  class="delightful-table-thead"
                 >
                   <tr>
                     <th
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                       scope="col"
                     >
                       姓名
                     </th>
                     <th
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                       scope="col"
                     >
                       年龄
@@ -234,11 +234,11 @@ exports[`DelightfulTable > 快照测试 > 带分页表格快照 1`] = `
                   </tr>
                 </thead>
                 <tbody
-                  class="magic-table-tbody"
+                  class="delightful-table-tbody"
                 >
                   <tr
                     aria-hidden="true"
-                    class="magic-table-measure-row"
+                    class="delightful-table-measure-row"
                     style="height: 0px; font-size: 0px;"
                   >
                     <td
@@ -261,31 +261,31 @@ exports[`DelightfulTable > 快照测试 > 带分页表格快照 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="magic-table-row magic-table-row-level-0"
+                    class="delightful-table-row delightful-table-row-level-0"
                     data-row-key="1"
                   >
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       张三
                     </td>
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       25
                     </td>
                   </tr>
                   <tr
-                    class="magic-table-row magic-table-row-level-0"
+                    class="delightful-table-row delightful-table-row-level-0"
                     data-row-key="2"
                   >
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       李四
                     </td>
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       30
                     </td>
@@ -296,15 +296,15 @@ exports[`DelightfulTable > 快照测试 > 带分页表格快照 1`] = `
           </div>
         </div>
         <ul
-          class="magic-pagination magic-table-pagination magic-table-pagination-right css-dev-only-do-not-override-yotw4n css-var-r3"
+          class="delightful-pagination delightful-table-pagination delightful-table-pagination-right css-dev-only-do-not-override-yotw4n css-var-r3"
         >
           <li
             aria-disabled="true"
-            class="magic-pagination-prev magic-pagination-disabled"
+            class="delightful-pagination-prev delightful-pagination-disabled"
             title="Previous Page"
           >
             <button
-              class="magic-pagination-item-link"
+              class="delightful-pagination-item-link"
               disabled=""
               tabindex="-1"
               type="button"
@@ -331,7 +331,7 @@ exports[`DelightfulTable > 快照测试 > 带分页表格快照 1`] = `
             </button>
           </li>
           <li
-            class="magic-pagination-item magic-pagination-item-1 magic-pagination-item-active"
+            class="delightful-pagination-item delightful-pagination-item-1 delightful-pagination-item-active"
             tabindex="0"
             title="1"
           >
@@ -343,11 +343,11 @@ exports[`DelightfulTable > 快照测试 > 带分页表格快照 1`] = `
           </li>
           <li
             aria-disabled="true"
-            class="magic-pagination-next magic-pagination-disabled"
+            class="delightful-pagination-next delightful-pagination-disabled"
             title="Next Page"
           >
             <button
-              class="magic-pagination-item-link"
+              class="delightful-pagination-item-link"
               disabled=""
               tabindex="-1"
               type="button"
@@ -383,22 +383,22 @@ exports[`DelightfulTable > 快照测试 > 带分页表格快照 1`] = `
 exports[`DelightfulTable > 快照测试 > 带排序表格快照 1`] = `
 <DocumentFragment>
   <div
-    class="css-var-r4 magic-table-css-var magic-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
+    class="css-var-r4 delightful-table-css-var delightful-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
   >
     <div
-      class="magic-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r4"
+      class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r4"
     >
       <div
-        class="magic-spin-container"
+        class="delightful-spin-container"
       >
         <div
-          class="magic-table css-var-r4 magic-table-css-var css-dev-only-do-not-override-yotw4n magic-table-scroll-horizontal"
+          class="delightful-table css-var-r4 delightful-table-css-var css-dev-only-do-not-override-yotw4n delightful-table-scroll-horizontal"
         >
           <div
-            class="magic-table-container"
+            class="delightful-table-container"
           >
             <div
-              class="magic-table-content"
+              class="delightful-table-content"
               style="overflow-x: auto; overflow-y: hidden;"
             >
               <table
@@ -406,34 +406,34 @@ exports[`DelightfulTable > 快照测试 > 带排序表格快照 1`] = `
               >
                 <colgroup />
                 <thead
-                  class="magic-table-thead"
+                  class="delightful-table-thead"
                 >
                   <tr>
                     <th
                       aria-label="姓名"
-                      class="magic-table-cell magic-table-column-has-sorters"
+                      class="delightful-table-cell delightful-table-column-has-sorters"
                       scope="col"
                       tabindex="0"
                     >
                       <div
                         aria-describedby="test-id"
-                        class="magic-table-column-sorters"
+                        class="delightful-table-column-sorters"
                       >
                         <span
-                          class="magic-table-column-title"
+                          class="delightful-table-column-title"
                         >
                           姓名
                         </span>
                         <span
-                          class="magic-table-column-sorter magic-table-column-sorter-full"
+                          class="delightful-table-column-sorter delightful-table-column-sorter-full"
                         >
                           <span
                             aria-hidden="true"
-                            class="magic-table-column-sorter-inner"
+                            class="delightful-table-column-sorter-inner"
                           >
                             <span
                               aria-label="caret-up"
-                              class="anticon anticon-caret-up magic-table-column-sorter-up"
+                              class="anticon anticon-caret-up delightful-table-column-sorter-up"
                               role="img"
                             >
                               <svg
@@ -452,7 +452,7 @@ exports[`DelightfulTable > 快照测试 > 带排序表格快照 1`] = `
                             </span>
                             <span
                               aria-label="caret-down"
-                              class="anticon anticon-caret-down magic-table-column-sorter-down"
+                              class="anticon anticon-caret-down delightful-table-column-sorter-down"
                               role="img"
                             >
                               <svg
@@ -475,29 +475,29 @@ exports[`DelightfulTable > 快照测试 > 带排序表格快照 1`] = `
                     </th>
                     <th
                       aria-label="年龄"
-                      class="magic-table-cell magic-table-column-has-sorters"
+                      class="delightful-table-cell delightful-table-column-has-sorters"
                       scope="col"
                       tabindex="0"
                     >
                       <div
                         aria-describedby="test-id"
-                        class="magic-table-column-sorters"
+                        class="delightful-table-column-sorters"
                       >
                         <span
-                          class="magic-table-column-title"
+                          class="delightful-table-column-title"
                         >
                           年龄
                         </span>
                         <span
-                          class="magic-table-column-sorter magic-table-column-sorter-full"
+                          class="delightful-table-column-sorter delightful-table-column-sorter-full"
                         >
                           <span
                             aria-hidden="true"
-                            class="magic-table-column-sorter-inner"
+                            class="delightful-table-column-sorter-inner"
                           >
                             <span
                               aria-label="caret-up"
-                              class="anticon anticon-caret-up magic-table-column-sorter-up"
+                              class="anticon anticon-caret-up delightful-table-column-sorter-up"
                               role="img"
                             >
                               <svg
@@ -516,7 +516,7 @@ exports[`DelightfulTable > 快照测试 > 带排序表格快照 1`] = `
                             </span>
                             <span
                               aria-label="caret-down"
-                              class="anticon anticon-caret-down magic-table-column-sorter-down"
+                              class="anticon anticon-caret-down delightful-table-column-sorter-down"
                               role="img"
                             >
                               <svg
@@ -540,11 +540,11 @@ exports[`DelightfulTable > 快照测试 > 带排序表格快照 1`] = `
                   </tr>
                 </thead>
                 <tbody
-                  class="magic-table-tbody"
+                  class="delightful-table-tbody"
                 >
                   <tr
                     aria-hidden="true"
-                    class="magic-table-measure-row"
+                    class="delightful-table-measure-row"
                     style="height: 0px; font-size: 0px;"
                   >
                     <td
@@ -567,31 +567,31 @@ exports[`DelightfulTable > 快照测试 > 带排序表格快照 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="magic-table-row magic-table-row-level-0"
+                    class="delightful-table-row delightful-table-row-level-0"
                     data-row-key="1"
                   >
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       张三
                     </td>
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       25
                     </td>
                   </tr>
                   <tr
-                    class="magic-table-row magic-table-row-level-0"
+                    class="delightful-table-row delightful-table-row-level-0"
                     data-row-key="2"
                   >
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       李四
                     </td>
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       30
                     </td>
@@ -602,15 +602,15 @@ exports[`DelightfulTable > 快照测试 > 带排序表格快照 1`] = `
           </div>
         </div>
         <ul
-          class="magic-pagination magic-table-pagination magic-table-pagination-right css-dev-only-do-not-override-yotw4n css-var-r4"
+          class="delightful-pagination delightful-table-pagination delightful-table-pagination-right css-dev-only-do-not-override-yotw4n css-var-r4"
         >
           <li
             aria-disabled="true"
-            class="magic-pagination-prev magic-pagination-disabled"
+            class="delightful-pagination-prev delightful-pagination-disabled"
             title="Previous Page"
           >
             <button
-              class="magic-pagination-item-link"
+              class="delightful-pagination-item-link"
               disabled=""
               tabindex="-1"
               type="button"
@@ -637,7 +637,7 @@ exports[`DelightfulTable > 快照测试 > 带排序表格快照 1`] = `
             </button>
           </li>
           <li
-            class="magic-pagination-item magic-pagination-item-1 magic-pagination-item-active"
+            class="delightful-pagination-item delightful-pagination-item-1 delightful-pagination-item-active"
             tabindex="0"
             title="1"
           >
@@ -649,11 +649,11 @@ exports[`DelightfulTable > 快照测试 > 带排序表格快照 1`] = `
           </li>
           <li
             aria-disabled="true"
-            class="magic-pagination-next magic-pagination-disabled"
+            class="delightful-pagination-next delightful-pagination-disabled"
             title="Next Page"
           >
             <button
-              class="magic-pagination-item-link"
+              class="delightful-pagination-item-link"
               disabled=""
               tabindex="-1"
               type="button"
@@ -689,22 +689,22 @@ exports[`DelightfulTable > 快照测试 > 带排序表格快照 1`] = `
 exports[`DelightfulTable > 快照测试 > 带选择框表格快照 1`] = `
 <DocumentFragment>
   <div
-    class="css-var-r9 magic-table-css-var magic-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
+    class="css-var-r9 delightful-table-css-var delightful-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
   >
     <div
-      class="magic-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r9"
+      class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r9"
     >
       <div
-        class="magic-spin-container"
+        class="delightful-spin-container"
       >
         <div
-          class="magic-table css-var-r9 magic-table-css-var css-dev-only-do-not-override-yotw4n magic-table-scroll-horizontal"
+          class="delightful-table css-var-r9 delightful-table-css-var css-dev-only-do-not-override-yotw4n delightful-table-scroll-horizontal"
         >
           <div
-            class="magic-table-container"
+            class="delightful-table-container"
           >
             <div
-              class="magic-table-content"
+              class="delightful-table-content"
               style="overflow-x: auto; overflow-y: hidden;"
             >
               <table
@@ -712,46 +712,46 @@ exports[`DelightfulTable > 快照测试 > 带选择框表格快照 1`] = `
               >
                 <colgroup>
                   <col
-                    class="magic-table-selection-col"
+                    class="delightful-table-selection-col"
                   />
                 </colgroup>
                 <thead
-                  class="magic-table-thead"
+                  class="delightful-table-thead"
                 >
                   <tr>
                     <th
-                      class="magic-table-cell magic-table-selection-column"
+                      class="delightful-table-cell delightful-table-selection-column"
                       scope="col"
                     >
                       <div
-                        class="magic-table-selection"
+                        class="delightful-table-selection"
                       >
                         <label
-                          class="magic-checkbox-wrapper css-var-r9 magic-checkbox-css-var css-dev-only-do-not-override-yotw4n"
+                          class="delightful-checkbox-wrapper css-var-r9 delightful-checkbox-css-var css-dev-only-do-not-override-yotw4n"
                         >
                           <span
-                            class="magic-checkbox ant-wave-target css-dev-only-do-not-override-yotw4n"
+                            class="delightful-checkbox ant-wave-target css-dev-only-do-not-override-yotw4n"
                           >
                             <input
                               aria-label="Select all"
-                              class="magic-checkbox-input"
+                              class="delightful-checkbox-input"
                               type="checkbox"
                             />
                             <span
-                              class="magic-checkbox-inner"
+                              class="delightful-checkbox-inner"
                             />
                           </span>
                         </label>
                       </div>
                     </th>
                     <th
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                       scope="col"
                     >
                       姓名
                     </th>
                     <th
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                       scope="col"
                     >
                       年龄
@@ -759,11 +759,11 @@ exports[`DelightfulTable > 快照测试 > 带选择框表格快照 1`] = `
                   </tr>
                 </thead>
                 <tbody
-                  class="magic-table-tbody"
+                  class="delightful-table-tbody"
                 >
                   <tr
                     aria-hidden="true"
-                    class="magic-table-measure-row"
+                    class="delightful-table-measure-row"
                     style="height: 0px; font-size: 0px;"
                   >
                     <td
@@ -795,69 +795,69 @@ exports[`DelightfulTable > 快照测试 > 带选择框表格快照 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="magic-table-row magic-table-row-level-0"
+                    class="delightful-table-row delightful-table-row-level-0"
                     data-row-key="1"
                   >
                     <td
-                      class="magic-table-cell magic-table-selection-column"
+                      class="delightful-table-cell delightful-table-selection-column"
                     >
                       <label
-                        class="magic-checkbox-wrapper css-var-r9 magic-checkbox-css-var css-dev-only-do-not-override-yotw4n"
+                        class="delightful-checkbox-wrapper css-var-r9 delightful-checkbox-css-var css-dev-only-do-not-override-yotw4n"
                       >
                         <span
-                          class="magic-checkbox ant-wave-target css-dev-only-do-not-override-yotw4n"
+                          class="delightful-checkbox ant-wave-target css-dev-only-do-not-override-yotw4n"
                         >
                           <input
-                            class="magic-checkbox-input"
+                            class="delightful-checkbox-input"
                             type="checkbox"
                           />
                           <span
-                            class="magic-checkbox-inner"
+                            class="delightful-checkbox-inner"
                           />
                         </span>
                       </label>
                     </td>
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       张三
                     </td>
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       25
                     </td>
                   </tr>
                   <tr
-                    class="magic-table-row magic-table-row-level-0"
+                    class="delightful-table-row delightful-table-row-level-0"
                     data-row-key="2"
                   >
                     <td
-                      class="magic-table-cell magic-table-selection-column"
+                      class="delightful-table-cell delightful-table-selection-column"
                     >
                       <label
-                        class="magic-checkbox-wrapper css-var-r9 magic-checkbox-css-var css-dev-only-do-not-override-yotw4n"
+                        class="delightful-checkbox-wrapper css-var-r9 delightful-checkbox-css-var css-dev-only-do-not-override-yotw4n"
                       >
                         <span
-                          class="magic-checkbox ant-wave-target css-dev-only-do-not-override-yotw4n"
+                          class="delightful-checkbox ant-wave-target css-dev-only-do-not-override-yotw4n"
                         >
                           <input
-                            class="magic-checkbox-input"
+                            class="delightful-checkbox-input"
                             type="checkbox"
                           />
                           <span
-                            class="magic-checkbox-inner"
+                            class="delightful-checkbox-inner"
                           />
                         </span>
                       </label>
                     </td>
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       李四
                     </td>
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       30
                     </td>
@@ -868,15 +868,15 @@ exports[`DelightfulTable > 快照测试 > 带选择框表格快照 1`] = `
           </div>
         </div>
         <ul
-          class="magic-pagination magic-table-pagination magic-table-pagination-right css-dev-only-do-not-override-yotw4n css-var-r9"
+          class="delightful-pagination delightful-table-pagination delightful-table-pagination-right css-dev-only-do-not-override-yotw4n css-var-r9"
         >
           <li
             aria-disabled="true"
-            class="magic-pagination-prev magic-pagination-disabled"
+            class="delightful-pagination-prev delightful-pagination-disabled"
             title="Previous Page"
           >
             <button
-              class="magic-pagination-item-link"
+              class="delightful-pagination-item-link"
               disabled=""
               tabindex="-1"
               type="button"
@@ -903,7 +903,7 @@ exports[`DelightfulTable > 快照测试 > 带选择框表格快照 1`] = `
             </button>
           </li>
           <li
-            class="magic-pagination-item magic-pagination-item-1 magic-pagination-item-active"
+            class="delightful-pagination-item delightful-pagination-item-1 delightful-pagination-item-active"
             tabindex="0"
             title="1"
           >
@@ -915,11 +915,11 @@ exports[`DelightfulTable > 快照测试 > 带选择框表格快照 1`] = `
           </li>
           <li
             aria-disabled="true"
-            class="magic-pagination-next magic-pagination-disabled"
+            class="delightful-pagination-next delightful-pagination-disabled"
             title="Next Page"
           >
             <button
-              class="magic-pagination-item-link"
+              class="delightful-pagination-item-link"
               disabled=""
               tabindex="-1"
               type="button"
@@ -955,22 +955,22 @@ exports[`DelightfulTable > 快照测试 > 带选择框表格快照 1`] = `
 exports[`DelightfulTable > 快照测试 > 空数据表格快照 1`] = `
 <DocumentFragment>
   <div
-    class="css-var-r2 magic-table-css-var magic-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
+    class="css-var-r2 delightful-table-css-var delightful-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
   >
     <div
-      class="magic-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r2"
+      class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r2"
     >
       <div
-        class="magic-spin-container"
+        class="delightful-spin-container"
       >
         <div
-          class="magic-table magic-table-empty css-var-r2 magic-table-css-var css-dev-only-do-not-override-yotw4n magic-table-scroll-horizontal"
+          class="delightful-table delightful-table-empty css-var-r2 delightful-table-css-var css-dev-only-do-not-override-yotw4n delightful-table-scroll-horizontal"
         >
           <div
-            class="magic-table-container"
+            class="delightful-table-container"
           >
             <div
-              class="magic-table-content"
+              class="delightful-table-content"
               style="overflow-x: auto; overflow-y: hidden;"
             >
               <table
@@ -978,17 +978,17 @@ exports[`DelightfulTable > 快照测试 > 空数据表格快照 1`] = `
               >
                 <colgroup />
                 <thead
-                  class="magic-table-thead"
+                  class="delightful-table-thead"
                 >
                   <tr>
                     <th
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                       scope="col"
                     >
                       姓名
                     </th>
                     <th
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                       scope="col"
                     >
                       年龄
@@ -996,11 +996,11 @@ exports[`DelightfulTable > 快照测试 > 空数据表格快照 1`] = `
                   </tr>
                 </thead>
                 <tbody
-                  class="magic-table-tbody"
+                  class="delightful-table-tbody"
                 >
                   <tr
                     aria-hidden="true"
-                    class="magic-table-measure-row"
+                    class="delightful-table-measure-row"
                     style="height: 0px; font-size: 0px;"
                   >
                     <td
@@ -1023,17 +1023,17 @@ exports[`DelightfulTable > 快照测试 > 空数据表格快照 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="magic-table-placeholder"
+                    class="delightful-table-placeholder"
                   >
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                       colspan="2"
                     >
                       <div
-                        class="css-dev-only-do-not-override-yotw4n css-var-r2 magic-empty magic-empty-normal"
+                        class="css-dev-only-do-not-override-yotw4n css-var-r2 delightful-empty delightful-empty-normal"
                       >
                         <div
-                          class="magic-empty-image"
+                          class="delightful-empty-image"
                         >
                           <svg
                             height="41"
@@ -1072,7 +1072,7 @@ exports[`DelightfulTable > 快照测试 > 空数据表格快照 1`] = `
                           </svg>
                         </div>
                         <div
-                          class="magic-empty-description"
+                          class="delightful-empty-description"
                         >
                           No data
                         </div>
@@ -1093,22 +1093,22 @@ exports[`DelightfulTable > 快照测试 > 空数据表格快照 1`] = `
 exports[`DelightfulTable > 快照测试 > 紧凑型表格快照 1`] = `
 <DocumentFragment>
   <div
-    class="css-var-ra magic-table-css-var magic-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
+    class="css-var-ra delightful-table-css-var delightful-table-wrapper acss-x1upb1 css-dev-only-do-not-override-yotw4n"
   >
     <div
-      class="magic-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-ra"
+      class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-ra"
     >
       <div
-        class="magic-spin-container"
+        class="delightful-spin-container"
       >
         <div
-          class="magic-table magic-table-small css-var-ra magic-table-css-var css-dev-only-do-not-override-yotw4n magic-table-scroll-horizontal"
+          class="delightful-table delightful-table-small css-var-ra delightful-table-css-var css-dev-only-do-not-override-yotw4n delightful-table-scroll-horizontal"
         >
           <div
-            class="magic-table-container"
+            class="delightful-table-container"
           >
             <div
-              class="magic-table-content"
+              class="delightful-table-content"
               style="overflow-x: auto; overflow-y: hidden;"
             >
               <table
@@ -1116,17 +1116,17 @@ exports[`DelightfulTable > 快照测试 > 紧凑型表格快照 1`] = `
               >
                 <colgroup />
                 <thead
-                  class="magic-table-thead"
+                  class="delightful-table-thead"
                 >
                   <tr>
                     <th
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                       scope="col"
                     >
                       姓名
                     </th>
                     <th
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                       scope="col"
                     >
                       年龄
@@ -1134,11 +1134,11 @@ exports[`DelightfulTable > 快照测试 > 紧凑型表格快照 1`] = `
                   </tr>
                 </thead>
                 <tbody
-                  class="magic-table-tbody"
+                  class="delightful-table-tbody"
                 >
                   <tr
                     aria-hidden="true"
-                    class="magic-table-measure-row"
+                    class="delightful-table-measure-row"
                     style="height: 0px; font-size: 0px;"
                   >
                     <td
@@ -1161,31 +1161,31 @@ exports[`DelightfulTable > 快照测试 > 紧凑型表格快照 1`] = `
                     </td>
                   </tr>
                   <tr
-                    class="magic-table-row magic-table-row-level-0"
+                    class="delightful-table-row delightful-table-row-level-0"
                     data-row-key="1"
                   >
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       张三
                     </td>
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       25
                     </td>
                   </tr>
                   <tr
-                    class="magic-table-row magic-table-row-level-0"
+                    class="delightful-table-row delightful-table-row-level-0"
                     data-row-key="2"
                   >
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       李四
                     </td>
                     <td
-                      class="magic-table-cell"
+                      class="delightful-table-cell"
                     >
                       30
                     </td>
@@ -1196,15 +1196,15 @@ exports[`DelightfulTable > 快照测试 > 紧凑型表格快照 1`] = `
           </div>
         </div>
         <ul
-          class="magic-pagination magic-pagination-mini magic-table-pagination magic-table-pagination-right css-dev-only-do-not-override-yotw4n css-var-ra"
+          class="delightful-pagination delightful-pagination-mini delightful-table-pagination delightful-table-pagination-right css-dev-only-do-not-override-yotw4n css-var-ra"
         >
           <li
             aria-disabled="true"
-            class="magic-pagination-prev magic-pagination-disabled"
+            class="delightful-pagination-prev delightful-pagination-disabled"
             title="Previous Page"
           >
             <button
-              class="magic-pagination-item-link"
+              class="delightful-pagination-item-link"
               disabled=""
               tabindex="-1"
               type="button"
@@ -1231,7 +1231,7 @@ exports[`DelightfulTable > 快照测试 > 紧凑型表格快照 1`] = `
             </button>
           </li>
           <li
-            class="magic-pagination-item magic-pagination-item-1 magic-pagination-item-active"
+            class="delightful-pagination-item delightful-pagination-item-1 delightful-pagination-item-active"
             tabindex="0"
             title="1"
           >
@@ -1243,11 +1243,11 @@ exports[`DelightfulTable > 快照测试 > 紧凑型表格快照 1`] = `
           </li>
           <li
             aria-disabled="true"
-            class="magic-pagination-next magic-pagination-disabled"
+            class="delightful-pagination-next delightful-pagination-disabled"
             title="Next Page"
           >
             <button
-              class="magic-pagination-item-link"
+              class="delightful-pagination-item-link"
               disabled=""
               tabindex="-1"
               type="button"

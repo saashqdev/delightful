@@ -26,9 +26,9 @@ export class DelightfulHttpClient extends HttpClient {
 
 			// 如果请求头中没有组织代码，则设置组织代码
 			if (!headers.get("organization-code")) {
-				// 针对 magic API请求需要将组织 Code 换成 magic 生态中的组织 Code，而非 teamshare 的组织 Code
-				const magicOrganizationCode = userStore.user.organizationCode
-				headers.set("organization-code", magicOrganizationCode ?? "")
+				// 针对 delightful API请求需要将组织 Code 换成 delightful 生态中的组织 Code，而非 teamshare 的组织 Code
+				const delightfulOrganizationCode = userStore.user.organizationCode
+				headers.set("organization-code", delightfulOrganizationCode ?? "")
 			}
 
 			return {
@@ -49,8 +49,8 @@ export class DelightfulHttpClient extends HttpClient {
 	}
 }
 
-const magicClient = new DelightfulHttpClient()
+const delightfulClient = new DelightfulHttpClient()
 
 const unionRequestDecorator = generatorUnionRequest()
 
-export default unionRequestDecorator(magicClient)
+export default unionRequestDecorator(delightfulClient)

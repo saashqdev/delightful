@@ -3,7 +3,7 @@
   <a href="./README_CN.md"><img alt="简体中文版自述文件" src="https://img.shields.io/badge/简体中文-d9d9d9"></a>
 </div>
 
-![Delightful Open Source Product Matrix](https://public-cdn.bedelightful.ai/static/img/super-magic-publish-header-en.png?v=20250819)
+![Delightful Open Source Product Matrix](https://public-cdn.bedelightful.ai/static/img/super-delightful-publish-header-en.png?v=20250819)
 
 # 🔥 Delightful - First Open-Source All-in-One AI Productivity Platform
 
@@ -12,17 +12,17 @@
     <a href="https://www.bedelightful.ai" target="_blank">
       <img alt="Static Badge" src="https://img.shields.io/badge/Official Website-301AD2">
     </a>
-    <a href="https://github.com/saashqdev/delightful/magic/releases">
-      <img src="https://poser.pugx.org/dtyq/magic/v/stable" alt="Stable Version">
+    <a href="https://github.com/saashqdev/delightful/delightful/releases">
+      <img src="https://poser.pugx.org/dtyq/delightful/v/stable" alt="Stable Version">
     </a>
-    <a href="https://github.com/saashqdev/delightful/magic/graphs/commit-activity" target="_blank">
-      <img alt="Commits last month" src="https://img.shields.io/github/commit-activity/m/dtyq/magic?labelColor=%20%2332b583&color=%20%2312b76a">
+    <a href="https://github.com/saashqdev/delightful/delightful/graphs/commit-activity" target="_blank">
+      <img alt="Commits last month" src="https://img.shields.io/github/commit-activity/m/dtyq/delightful?labelColor=%20%2332b583&color=%20%2312b76a">
     </a>
-    <a href="https://github.com/saashqdev/delightful/magic/" target="_blank">
-      <img alt="Issues closed" src="https://img.shields.io/github/issues-search?query=repo%3Adtyq%2Fmagic%20is%3Aclosed&label=issues%20closed&labelColor=%20%237d89b0&color=%20%235d6b98">
+    <a href="https://github.com/saashqdev/delightful/delightful/" target="_blank">
+      <img alt="Issues closed" src="https://img.shields.io/github/issues-search?query=repo%3Adtyq%2Fdelightful%20is%3Aclosed&label=issues%20closed&labelColor=%20%237d89b0&color=%20%235d6b98">
     </a>
-    <a href="https://github.com/saashqdev/delightful/magic/discussions/" target="_blank">
-      <img alt="Discussion posts" src="https://img.shields.io/github/discussions/dtyq/magic?labelColor=%20%239b8afb&color=%20%237a5af8">
+    <a href="https://github.com/saashqdev/delightful/delightful/discussions/" target="_blank">
+      <img alt="Discussion posts" src="https://img.shields.io/github/discussions/dtyq/delightful?labelColor=%20%239b8afb&color=%20%237a5af8">
     </a>
     <a href="https://www.bedelightful.ai" target="_blank">
       <img alt="Static Badge" src="https://img.shields.io/badge/Build with Delightful 🔮-301AD2">
@@ -36,17 +36,17 @@ Delightful aims to help enterprises of all sizes quickly build and deploy AI app
 
 Delightful is the first **"open-source all-in-one AI productivity platform"**, not a single AI product, but a comprehensive product matrix with rich capabilities.
 
-![Product Matrix](https://public-cdn.bedelightful.ai/static/img/super-magic-open-source-projects-en.png?v=20250819)
+![Product Matrix](https://public-cdn.bedelightful.ai/static/img/super-delightful-open-source-projects-en.png?v=20250819)
 
-- **[Be Delightful](https://github.com/saashqdev/delightful/super-magic)** - A **general-purpose AI Agent** designed for complex task scenarios
-- **[Delightful IM](https://github.com/saashqdev/delightful/magic)** - An enterprise-grade instant messaging system that integrates AI Agent conversations with internal enterprise communication
-- **[Delightful Flow](https://github.com/saashqdev/delightful/magic)** - A powerful visual AI workflow orchestration system
+- **[Be Delightful](https://github.com/saashqdev/delightful/super-delightful)** - A **general-purpose AI Agent** designed for complex task scenarios
+- **[Delightful IM](https://github.com/saashqdev/delightful/delightful)** - An enterprise-grade instant messaging system that integrates AI Agent conversations with internal enterprise communication
+- **[Delightful Flow](https://github.com/saashqdev/delightful/delightful)** - A powerful visual AI workflow orchestration system
 - **Teamshare OS** (Coming soon) - An enterprise-grade online collaborative office system
 
 In addition to the above AI products, we have also open-sourced some of the infrastructure we used to build these products:
 
 - **[Agentlang](https://github.com/saashqdev/delightful/agentlang)** - A language-first AI Agent Framework for building AI agents with natural language (currently available in Python version, TypeScript version coming soon)
-- **[Delightful Lens](https://github.com/saashqdev/delightful/magiclens)** - A powerful and flexible HTML to Markdown conversion tool that uses an extensible rule system to accurately convert complex HTML documents to concise Markdown format
+- **[Delightful Lens](https://github.com/saashqdev/delightful/delightfullens)** - A powerful and flexible HTML to Markdown conversion tool that uses an extensible rule system to accurately convert complex HTML documents to concise Markdown format
 - **Delightful Use** (Coming soon) - A revolutionary browser operation tool specifically designed for AI Agents
 - **Delightful Space** (Coming soon) - A new static content hosting management system specifically designed for AI Agents
 - **Sandbox OS** (Coming soon) - A powerful sandbox system for AI Agent runtime
@@ -55,14 +55,14 @@ In addition to the above AI products, we have also open-sourced some of the infr
 
 A powerful **general-purpose AI Agent** specially designed for complex task scenarios. Through a multi-agent design system and rich tool capabilities, Be Delightful supports intelligent abilities such as **autonomous task understanding**, **autonomous task planning**, **autonomous action**, and **autonomous error correction**. It can understand natural language instructions, execute various business processes, and deliver final target results. As the flagship product of the Delightful product matrix, Be Delightful provides powerful secondary development capabilities through open source, allowing enterprises to quickly build and deploy intelligent assistants that meet specific business needs, greatly improving decision-making efficiency and quality.
 
-![Be Delightful](https://public-cdn.bedelightful.ai/static/img/super-magic-buffett.gif)
+![Be Delightful](https://public-cdn.bedelightful.ai/static/img/super-delightful-buffett.gif)
 
 #### Be Delightful Case Studies
-- [Analysis of Investment Insights from Buffett's 2025 Shareholders Meeting](https://www.letsmagic.cn/share/777665156986277889)
-- [Analysis of Stocks Related to Beijing Humanoid Robot Half Marathon](https://www.letsmagic.cn/share/774280936479625217)
-- [Summary of Key Points from 'Thinking, Fast and Slow](https://www.letsmagic.cn/share/777461325648195584)
-- [Auntie Jenny IPO Analysis and Investment Recommendations](https://www.letsmagic.cn/share/777604044873928705)
-- [SKU Sales Forecast Requirements](https://www.letsmagic.cn/share/771022574397648897)
+- [Analysis of Investment Insights from Buffett's 2025 Shareholders Meeting](https://www.letsdelightful.cn/share/777665156986277889)
+- [Analysis of Stocks Related to Beijing Humanoid Robot Half Marathon](https://www.letsdelightful.cn/share/774280936479625217)
+- [Summary of Key Points from 'Thinking, Fast and Slow](https://www.letsdelightful.cn/share/777461325648195584)
+- [Auntie Jenny IPO Analysis and Investment Recommendations](https://www.letsdelightful.cn/share/777604044873928705)
+- [SKU Sales Forecast Requirements](https://www.letsdelightful.cn/share/771022574397648897)
 - For more case studies, please visit the [Official Website](https://www.bedelightful.ai)
 
 ### Delightful Flow
@@ -76,11 +76,11 @@ Delightful Flow is a powerful visual AI workflow orchestration system that allow
 - **Custom Extensions**: Support for custom tool node development to meet specific business scenario requirements.
 - **Real-time Debugging and Monitoring**: Providing comprehensive debugging and monitoring functions to help quickly identify and solve problems in workflows, ensuring stable operation of AI applications.
 
-![Delightful Flow](https://public-cdn.bedelightful.ai/static/img/magic-flow.png)
+![Delightful Flow](https://public-cdn.bedelightful.ai/static/img/delightful-flow.png)
 
 As an important component of the Delightful product matrix, Delightful Flow can be seamlessly integrated with other Delightful products to create a complete enterprise-level AI application ecosystem.
 
-![Delightful Multi-Agents and Events](https://public-cdn.bedelightful.ai/static/img/super-magic-multi-agents-and-events-en.png?v=20250819)
+![Delightful Multi-Agents and Events](https://public-cdn.bedelightful.ai/static/img/super-delightful-multi-agents-and-events-en.png?v=20250819)
 
 ### Delightful IM
 
@@ -94,7 +94,7 @@ Delightful IM has the following core features:
 - **Multi-organizational Architecture**: Support for multi-organization deployment and strict organizational data isolation, with each organization having independent data space and access permissions.
 - **Data Security**: Strict data isolation and access control mechanisms, multi-level permission management, safeguarding sensitive enterprise information and ensuring no data leakage between organizations.
 
-![Delightful IM](https://public-cdn.bedelightful.ai/static/img/magic-im-group-chat-en.png?v=20250819)
+![Delightful IM](https://public-cdn.bedelightful.ai/static/img/delightful-im-group-chat-en.png?v=20250819)
 
 ## Teamshare OS
 
@@ -137,24 +137,24 @@ We provide more powerful management capabilities and features for teams and ente
 
 ```bash
 # Clone repository
-git clone https://github.com/saashqdev/delightful/magic.git
-cd magic
+git clone https://github.com/saashqdev/delightful/delightful.git
+cd delightful
 
 # Start service in foreground
-./bin/magic.sh start
+./bin/delightful.sh start
 ```
 
 ##### Other Commands
 
 ```bash
 # Start service in background
-./bin/magic.sh daemon
+./bin/delightful.sh daemon
 
 # Check service status
-./bin/magic.sh status
+./bin/delightful.sh status
 
 # View logs
-./bin/magic.sh logs
+./bin/delightful.sh logs
 ```
 
 ##### Configure Environment Variables
@@ -164,8 +164,8 @@ cd magic
 cp .env.example .env
 
 # Configure Be Delightful environment variables, must configure any large language model that supports OpenAI format to use it normally
-./bin/magic.sh status
-cp config/.env_super_magic.example .env_super_magic
+./bin/delightful.sh status
+cp config/.env_super_delightful.example .env_super_delightful
 ```
 
 ##### Access Services
@@ -175,7 +175,7 @@ cp config/.env_super_magic.example .env_super_magic
   - Account `13912345678`：Password `bedelightful.ai`
 - RabbitMQ Management Interface: http://localhost:15672
   - Username: admin
-  - Password: magic123456
+  - Password: delightful123456
 
 
 Official Website: [https://www.bedelightful.ai](https://www.bedelightful.ai)
@@ -183,7 +183,7 @@ Documentation: [https://docs.bedelightful.ai/en](https://docs.bedelightful.ai/en
 
 ## Contribution
 
-For those who want to contribute code, please refer to our [Contribution Guide](https://github.com/saashqdev/delightful/magic/blob/master/CONTRIBUTING.md).
+For those who want to contribute code, please refer to our [Contribution Guide](https://github.com/saashqdev/delightful/delightful/blob/master/CONTRIBUTING.md).
 Also, please consider supporting Delightful through social media, events, and conferences. The development of Delightful relies on your support.
 
 ## Security Vulnerabilities
@@ -198,4 +198,4 @@ This repository follows the [Delightful Open Source License](LICENSE), which is 
 
 Thanks to all developers who have contributed to Delightful!
 
-[![Star History Chart](https://api.star-history.com/svg?repos=dtyq/magic&type=Date)](https://star-history.com/#dtyq/magic&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=dtyq/delightful&type=Date)](https://star-history.com/#dtyq/delightful&Date)

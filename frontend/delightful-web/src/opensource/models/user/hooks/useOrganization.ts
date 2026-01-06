@@ -9,7 +9,7 @@ export function useOrganization() {
 	const [organizationMeta, setOrganizationMeta] = useState({
 		organizations: userStore.user.organizations,
 		organizationCode: userStore.user.organizationCode,
-		magicOrganizationMap: userStore.user.magicOrganizationMap,
+		delightfulOrganizationMap: userStore.user.delightfulOrganizationMap,
 		teamshareOrganizationCode: userStore.user.teamshareOrganizationCode,
 	})
 
@@ -18,7 +18,7 @@ export function useOrganization() {
 			() => ({
 				organizationCode: userStore.user.organizationCode,
 				organizations: userStore.user.organizations,
-				magicOrganizationMap: userStore.user.magicOrganizationMap,
+				delightfulOrganizationMap: userStore.user.delightfulOrganizationMap,
 				teamshareOrganizationCode: userStore.user.teamshareOrganizationCode,
 			}),
 			(org) => setOrganizationMeta(org),
@@ -31,7 +31,7 @@ export function useOrganization() {
 	return {
 		organizationCode: organizationMeta.organizationCode,
 		organizations: organizationMeta.organizations,
-		magicOrganizationMap: organizationMeta.magicOrganizationMap,
+		delightfulOrganizationMap: organizationMeta.delightfulOrganizationMap,
 		teamshareOrganizationCode: organizationMeta.teamshareOrganizationCode,
 	}
 }

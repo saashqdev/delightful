@@ -20,7 +20,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  WEB_IMAGE: dtyq/magic-docs
+  WEB_IMAGE: dtyq/delightful-docs
 
 jobs:
   build:

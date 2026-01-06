@@ -13,7 +13,7 @@ class OrganizationResponseDTO extends AbstractDTO
 {
     public ?int $id = null;
 
-    public string $magicOrganizationCode = '';
+    public string $delightfulOrganizationCode = '';
 
     public string $name = '';
 
@@ -40,9 +40,9 @@ class OrganizationResponseDTO extends AbstractDTO
         $this->id = $id;
     }
 
-    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $delightfulOrganizationCode): void
     {
-        $this->magicOrganizationCode = $magicOrganizationCode;
+        $this->delightfulOrganizationCode = $delightfulOrganizationCode;
     }
 
     public function setName(string $name): void

@@ -122,7 +122,7 @@ class MessageQueueProcessAppService extends AbstractAppService
     public function processTopicMessageQueue(int $topicId): void
     {
         // 1. Check if message queue feature is enabled
-        $enabled = config('super-magic.user_message_queue.enabled', true);
+        $enabled = config('super-delightful.user_message_queue.enabled', true);
         if (! $enabled) {
             $this->logger->debug('Message queue feature is disabled', ['topic_id' => $topicId]);
             return;

@@ -14,16 +14,16 @@ class ThirdPlatformUserModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_contact_third_platform_users';
+    protected ?string $table = 'delightful_contact_third_platform_users';
 
     /**
      * The attributes that are mass assignable.
      */
     protected array $fillable = [
         'id',
-        'magic_id',
-        'magic_user_id',
-        'magic_organization_code',
+        'delightful_id',
+        'delightful_user_id',
+        'delightful_organization_code',
         'third_user_id',
         'third_union_id',
         'third_platform_type',

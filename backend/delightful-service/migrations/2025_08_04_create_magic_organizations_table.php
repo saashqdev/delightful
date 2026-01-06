@@ -14,12 +14,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_organizations')) {
+        if (Schema::hasTable('delightful_organizations')) {
             return;
         }
-        Schema::create('magic_organizations', function (Blueprint $table) {
+        Schema::create('delightful_organizations', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('主键ID');
-            $table->string('magic_organization_code', 100)->unique()->comment('组织编码');
+            $table->string('delightful_organization_code', 100)->unique()->comment('组织编码');
             $table->string('name', 100)->comment('组织名称');
             $table->string('platform_type', 64)->nullable()->comment('平台类型');
             $table->mediumText('logo')->nullable()->comment('组织logo');
@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->softDeletes();
 
             // 索引
-            $table->index('magic_organization_code');
+            $table->index('delightful_organization_code');
         });
     }
 
@@ -44,6 +44,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_organizations');
+        Schema::dropIfExists('delightful_organizations');
     }
 };

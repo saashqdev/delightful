@@ -43,7 +43,7 @@ class RoleModel extends AbstractModel
     /**
      * 与模型关联的表名.
      */
-    protected ?string $table = 'magic_roles';
+    protected ?string $table = 'delightful_roles';
 
     /**
      * 可批量赋值的属性.

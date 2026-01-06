@@ -1,5 +1,5 @@
 {
-    "name": "magic/magic-service",
+    "name": "delightful/delightful-service",
     "type": "project",
     "keywords": [
         "php",
@@ -9,7 +9,7 @@
         "microservice",
         "middleware"
     ],
-    "description": "magic service",
+    "description": "delightful service",
     "license": "MIT",
     "require": {
         "php": ">=8.4",
@@ -33,7 +33,7 @@
         "dtyq/php-mcp": "0.1.*",
         "dtyq/rule-engine-core": "~0.1",
         "dtyq/sdk-base": "~0.1",
-        "dtyq/super-magic-module": "^v0.0",
+        "dtyq/super-delightful-module": "^v0.0",
         "dtyq/task-scheduler": "~0.1",
         "dtyq/tiptap": "~0.1",
         "facile-it/php-openid-client": "^0.3.5",

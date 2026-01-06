@@ -10,7 +10,7 @@ import { createStyles, cx } from "antd-style"
 import { observer } from "mobx-react-lite"
 import { useMemo } from "react"
 import { Outlet, useLocation, useNavigate } from "react-router-dom"
-import DelightfulLogo from "./assets/svg/super_magic_logo.svg"
+import DelightfulLogo from "./assets/svg/super_delightful_logo.svg"
 
 const useStyles = createStyles(({ token }) => ({
 	container: {
@@ -45,23 +45,23 @@ const useStyles = createStyles(({ token }) => ({
 		height: 30,
 		borderRadius: 8,
 		cursor: "pointer",
-		color: token.magicColorUsages.text[2],
+		color: token.delightfulColorUsages.text[2],
 		userSelect: "none",
 		"&:not(:last-child)": {
 			marginBottom: 10,
 		},
 		"&:hover": {
-			color: token.magicColorUsages.text[1],
-			backgroundColor: token.magicColorUsages.fill[0],
+			color: token.delightfulColorUsages.text[1],
+			backgroundColor: token.delightfulColorUsages.fill[0],
 		},
 		"&:active": {
-			color: token.magicColorUsages.text[1],
-			backgroundColor: token.magicColorUsages.fill[1],
+			color: token.delightfulColorUsages.text[1],
+			backgroundColor: token.delightfulColorUsages.fill[1],
 		},
 	},
 	active: {
 		color: `${token.colorPrimary} !important`,
-		backgroundColor: `${token.magicColorUsages.primaryLight.default} !important`,
+		backgroundColor: `${token.delightfulColorUsages.primaryLight.default} !important`,
 	},
 	content: {
 		flex: 1,
@@ -79,7 +79,7 @@ const getMenuKeyFromPath = (pathname: string) => {
 	const lastSegment = pathSegments[pathSegments.length - 1]
 
 	// 默认为workspace
-	if (lastSegment === "super-magic") {
+	if (lastSegment === "super-delightful") {
 		return "workspace"
 	}
 
@@ -103,7 +103,7 @@ function BeDelightful() {
 	const selectedKey = getMenuKeyFromPath(location.pathname)
 	// 处理菜单项选择
 	const handleMenuSelect = ({ key }: { key: string }) => {
-		const basePath = location.pathname.split("/")[1] // 获取基础路径（super 或 super-magic）
+		const basePath = location.pathname.split("/")[1] // 获取基础路径（super 或 super-delightful）
 		navigate(`/${basePath}/${menuKeyToPath[key as keyof typeof menuKeyToPath]}`)
 	}
 
@@ -127,7 +127,7 @@ function BeDelightful() {
 		]
 	}, [])
 
-	const isBeDelightfulRouter = location?.pathname?.startsWith("/super-magic")
+	const isBeDelightfulRouter = location?.pathname?.startsWith("/super-delightful")
 	const isMobile = useResponsive().md === false
 	return (
 		// <DetailProvider>

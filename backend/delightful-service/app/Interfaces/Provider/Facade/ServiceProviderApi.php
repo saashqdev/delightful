@@ -223,7 +223,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * Get super magic display models and Delightful provider models visible to current organization.
+     * Get super delightful display models and Delightful provider models visible to current organization.
      * @return BeDelightfulModelDTO[]
      */
     public function getBeDelightfulDisplayModels(): array

@@ -51,7 +51,7 @@ vi.mock("rc-virtual-list", () => {
 vi.mock("../../DelightfulList/DelightfulListItem", () => {
 	return {
 		default: ({ title, desc, avatar, active, onClick, data }: any) => (
-			<div data-testid="magic-list-item" className={active ? "active" : ""} onClick={onClick}>
+			<div data-testid="delightful-list-item" className={active ? "active" : ""} onClick={onClick}>
 				{avatar && <div data-testid="avatar">{avatar}</div>}
 				<div data-testid="title">
 					{typeof title === "string" ? title : data?.title || "title对象"}
@@ -133,8 +133,8 @@ vi.mock("antd-style", () => {
 		createStyles: (fn: any) => {
 			// 提供在styles.ts中需要的token值
 			const token = {
-				magicColorScales: { grey: [0, 1, 2, 3, 4, 5] },
-				magicColorUsages: {
+				delightfulColorScales: { grey: [0, 1, 2, 3, 4, 5] },
+				delightfulColorUsages: {
 					text: [0, 1, 2, 3, 4, 5],
 					primaryLight: { default: "#e6f7ff" },
 					white: "#ffffff",
@@ -246,7 +246,7 @@ describe("DelightfulInfiniteScrollList", () => {
 			/>,
 		)
 
-		const listItems = screen.getAllByTestId("magic-list-item")
+		const listItems = screen.getAllByTestId("delightful-list-item")
 		expect(listItems).toHaveLength(3)
 		expect(listItems[0]).toHaveTextContent("测试项 0")
 	})
@@ -263,7 +263,7 @@ describe("DelightfulInfiniteScrollList", () => {
 			/>,
 		)
 
-		const listItems = screen.getAllByTestId("magic-list-item")
+		const listItems = screen.getAllByTestId("delightful-list-item")
 		fireEvent.click(listItems[1])
 		expect(onItemClick).toHaveBeenCalledWith(expect.objectContaining({ id: "test-1" }))
 	})
@@ -290,7 +290,7 @@ describe("DelightfulInfiniteScrollList", () => {
 		})
 
 		await waitFor(() => {
-			const listItems = screen.getAllByTestId("magic-list-item")
+			const listItems = screen.getAllByTestId("delightful-list-item")
 			expect(listItems).toHaveLength(6)
 		})
 	})

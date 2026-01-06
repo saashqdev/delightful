@@ -3,10 +3,10 @@ import { createStyles } from "antd-style"
 export const useStyles = createStyles(({ css, prefixCls, token }) => {
 	return {
 		button: css`
-			background-color: ${token.magicColorUsages.fill[1]};
+			background-color: ${token.delightfulColorUsages.fill[1]};
 
 			&.${prefixCls}-popover-open {
-				background-color: ${token.magicColorScales.brand[0]};
+				background-color: ${token.delightfulColorScales.brand[0]};
 			}
 
 			display: flex;
@@ -21,11 +21,11 @@ export const useStyles = createStyles(({ css, prefixCls, token }) => {
 			font-size: 12px;
 
 			&:hover {
-				background-color: ${token.magicColorUsages.fill[0]};
+				background-color: ${token.delightfulColorUsages.fill[0]};
 			}
 
 			&:active {
-				background-color: ${token.magicColorUsages.fill[2]};
+				background-color: ${token.delightfulColorUsages.fill[2]};
 			}
 		`,
 	}
@@ -62,11 +62,11 @@ export const usePopoverStyles = createStyles(({ css, prefixCls, token }) => {
 				margin: 0 0 4px 0;
 
 				&:hover {
-					background-color: ${token.magicColorScales.brand[0]} !important;
+					background-color: ${token.delightfulColorScales.brand[0]} !important;
 				}
 
 				&:active {
-					background-color: ${token.magicColorScales.brand[1]} !important;
+					background-color: ${token.delightfulColorScales.brand[1]} !important;
 				}
 			}
 		`,

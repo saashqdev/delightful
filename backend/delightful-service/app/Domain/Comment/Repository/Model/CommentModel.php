@@ -16,7 +16,7 @@ class CommentModel extends AbstractModel
     use Snowflake;
     use SoftDeletes;
 
-    protected ?string $table = 'magic_comments';
+    protected ?string $table = 'delightful_comments';
 
     /**
      * The attributes that are mass assignable.

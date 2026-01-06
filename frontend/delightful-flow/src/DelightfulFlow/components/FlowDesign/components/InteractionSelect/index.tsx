@@ -35,8 +35,8 @@ export default function InteractionSelect({
 						stroke={1}
 					/>
 				),
-				label: i18next.t("flow.mouseFriendly", { ns: "magicFlow" }),
-				desc: i18next.t("flow.mouseFriendlyDesc", { ns: "magicFlow" }),
+				label: i18next.t("flow.mouseFriendly", { ns: "delightfulFlow" }),
+				desc: i18next.t("flow.mouseFriendlyDesc", { ns: "delightfulFlow" }),
 				value: Interactions.Mouse,
 			},
 			{
@@ -48,8 +48,8 @@ export default function InteractionSelect({
 						stroke={1}
 					/>
 				),
-				label: i18next.t("flow.touchpadFriendly", { ns: "magicFlow" }),
-				desc: i18next.t("flow.touchpadFriendlyDesc", { ns: "magicFlow" }),
+				label: i18next.t("flow.touchpadFriendly", { ns: "delightfulFlow" }),
+				desc: i18next.t("flow.touchpadFriendlyDesc", { ns: "delightfulFlow" }),
 				value: Interactions.TouchPad,
 			},
 		]
@@ -62,7 +62,7 @@ export default function InteractionSelect({
 			onMouseEnter={(e) => e.stopPropagation()}
 		>
 			<div className={clsx(styles.title, `${prefix}title`)}>
-				{i18next.t("flow.interactionMode", { ns: "magicFlow" })}
+				{i18next.t("flow.interactionMode", { ns: "delightfulFlow" })}
 			</div>
 			<Flex className={clsx(styles.list, `${prefix}list`)}>
 				{interactionList.map((item) => {

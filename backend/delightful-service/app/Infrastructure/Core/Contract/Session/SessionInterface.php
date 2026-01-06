@@ -17,9 +17,9 @@ interface SessionInterface
      * 实现流程：前端对非麦吉自建的账号体系进行登录请求,然后再请求麦吉的登录校验接口。
      *
      * @param LoginCheckInterface $loginCheck 登录校验数据
-     * @param DelightfulEnvironmentEntity $magicEnvironmentEntity 要登录的环境
-     * @param null|string $magicOrganizationCode 要登录的组织
+     * @param DelightfulEnvironmentEntity $delightfulEnvironmentEntity 要登录的环境
+     * @param null|string $delightfulOrganizationCode 要登录的组织
      * @return LoginResponseInterface[] 登录响应数据
      */
-    public function loginCheck(LoginCheckInterface $loginCheck, DelightfulEnvironmentEntity $magicEnvironmentEntity, ?string $magicOrganizationCode = null): array;
+    public function loginCheck(LoginCheckInterface $loginCheck, DelightfulEnvironmentEntity $delightfulEnvironmentEntity, ?string $delightfulOrganizationCode = null): array;
 }

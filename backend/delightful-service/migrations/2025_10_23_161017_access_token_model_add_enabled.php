@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_api_access_tokens', function (Blueprint $table) {
+        Schema::table('delightful_api_access_tokens', function (Blueprint $table) {
             $table->boolean('enabled')->default(true)->comment('是否启用');
 
             $table->index(['organization_code', 'type'], 'idx_organization_type');

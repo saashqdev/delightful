@@ -32,7 +32,7 @@ function MemberSelect({
 	options,
 	value,
 	onChange,
-	placeholder = i18next.t("expression.pleaseSelectMembers", { ns: "magicFlow" }),
+	placeholder = i18next.t("expression.pleaseSelectMembers", { ns: "delightfulFlow" }),
 	size,
 	isMultiple = true,
 	filterOption,
@@ -56,7 +56,7 @@ function MemberSelect({
 	})
 
 	return (
-		<div className="magic-member-select">
+		<div className="delightful-member-select">
 			<Options
 				{...{
 					itemClick,

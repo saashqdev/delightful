@@ -42,7 +42,7 @@ class DelightfulFlowAIModelModel extends AbstractModel
 {
     use Snowflake;
 
-    protected ?string $table = 'magic_flow_ai_models';
+    protected ?string $table = 'delightful_flow_ai_models';
 
     protected array $fillable = [
         'id', 'name', 'label', 'icon', 'model_name', 'tags', 'default_configs', 'enabled', 'display', 'implementation', 'implementation_config', 'support_embedding', 'vector_size', 'support_multi_modal', 'max_tokens',
@@ -88,6 +88,6 @@ class DelightfulFlowAIModelModel extends AbstractModel
      */
     private function _getAesKey(string $salt): string
     {
-        return config('magic_flows.model_aes_key', '') . $salt;
+        return config('delightful_flows.model_aes_key', '') . $salt;
     }
 }

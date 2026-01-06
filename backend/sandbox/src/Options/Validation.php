@@ -242,12 +242,12 @@ class Validation
         return $this;
     }
 
-    /** Set validation callable for magic constants.
+    /** Set validation callable for delightful constants.
      *
      * Validator callable must accept two parameters: a string of the normalized name of the checked element,
-     * and the PHPSandbox instance. NOTE: Normalized magic constant names are upper case and trimmed of __
+     * and the PHPSandbox instance. NOTE: Normalized delightful constant names are upper case and trimmed of __
      *
-     * @param callable $callable Callable that validates the passed magic constant name
+     * @param callable $callable Callable that validates the passed delightful constant name
      *
      * @return Validation Returns the Validation instance for fluent querying
      */
@@ -257,7 +257,7 @@ class Validation
         return $this;
     }
 
-    /** Get validation callable for magic constants.
+    /** Get validation callable for delightful constants.
      *
      */
     public function getDelightfulConstValidator(): ?callable
@@ -265,7 +265,7 @@ class Validation
         return $this->validation[ValidationConstants::Delightful_CONSTANT] ?? null;
     }
 
-    /** Unset validation callable for magic constants.
+    /** Unset validation callable for delightful constants.
      *
      * @return Validation Returns the Validation instance for fluent querying
      */

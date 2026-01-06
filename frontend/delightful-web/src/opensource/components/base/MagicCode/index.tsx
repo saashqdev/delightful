@@ -81,7 +81,7 @@ const DelightfulCode = memo((props: DelightfulCodeProps) => {
 			<DelightfulButton
 				hidden={!isHover || isStreaming}
 				type="text"
-				className={cx(styles.copy, "magic-code-copy")}
+				className={cx(styles.copy, "delightful-code-copy")}
 				onClick={setCopied}
 				size="small"
 				icon={

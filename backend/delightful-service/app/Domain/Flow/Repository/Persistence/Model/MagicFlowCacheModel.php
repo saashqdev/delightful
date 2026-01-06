@@ -30,7 +30,7 @@ class DelightfulFlowCacheModel extends AbstractModel
 {
     use Snowflake;
 
-    protected ?string $table = 'magic_flow_cache';
+    protected ?string $table = 'delightful_flow_cache';
 
     protected array $fillable = [
         'id', 'cache_hash', 'cache_prefix', 'cache_key', 'scope_tag', 'cache_value',

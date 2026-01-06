@@ -17,26 +17,26 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 class DelightfulFlowExecuteLogRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowExecuteLogRepositoryInterface
 {
-    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): DelightfulFlowExecuteLogEntity
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $delightfulFlowExecuteLogEntity): DelightfulFlowExecuteLogEntity
     {
         $model = new DelightfulFlowExecuteLogModel();
-        $model->fill($this->getAttributes($magicFlowExecuteLogEntity));
+        $model->fill($this->getAttributes($delightfulFlowExecuteLogEntity));
         $model->save();
-        $magicFlowExecuteLogEntity->setId($model->id);
-        return $magicFlowExecuteLogEntity;
+        $delightfulFlowExecuteLogEntity->setId($model->id);
+        return $delightfulFlowExecuteLogEntity;
     }
 
-    public function updateStatus(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
+    public function updateStatus(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $delightfulFlowExecuteLogEntity): void
     {
         $update = [
-            'status' => $magicFlowExecuteLogEntity->getStatus()->value,
+            'status' => $delightfulFlowExecuteLogEntity->getStatus()->value,
         ];
         // 如果是完成状态，记录结果
-        if ($magicFlowExecuteLogEntity->getStatus()->isFinished()) {
-            $update['result'] = json_encode($magicFlowExecuteLogEntity->getResult(), JSON_UNESCAPED_UNICODE);
+        if ($delightfulFlowExecuteLogEntity->getStatus()->isFinished()) {
+            $update['result'] = json_encode($delightfulFlowExecuteLogEntity->getResult(), JSON_UNESCAPED_UNICODE);
         }
         $builder = $this->createBuilder($dataIsolation, DelightfulFlowExecuteLogModel::query());
-        $builder->where('id', $magicFlowExecuteLogEntity->getId())
+        $builder->where('id', $delightfulFlowExecuteLogEntity->getId())
             ->update($update);
     }
 
@@ -83,11 +83,11 @@ class DelightfulFlowExecuteLogRepository extends DelightfulFlowAbstractRepositor
         return DelightfulFlowExecuteLogFactory::modelToEntity($model);
     }
 
-    public function incrementRetryCount(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
+    public function incrementRetryCount(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $delightfulFlowExecuteLogEntity): void
     {
         $builder = $this->createBuilder($dataIsolation, DelightfulFlowExecuteLogModel::query());
-        $builder->where('id', $magicFlowExecuteLogEntity->getId())
+        $builder->where('id', $delightfulFlowExecuteLogEntity->getId())
             ->increment('retry_count');
-        $magicFlowExecuteLogEntity->setRetryCount($magicFlowExecuteLogEntity->getRetryCount() + 1);
+        $delightfulFlowExecuteLogEntity->setRetryCount($delightfulFlowExecuteLogEntity->getRetryCount() + 1);
     }
 }

@@ -55,7 +55,7 @@ abstract class AbstractSandboxOS
     protected function getBaseUrl(): string
     {
         if (empty($this->baseUrl)) {
-            $this->baseUrl = config('super-magic.sandbox.gateway', '');
+            $this->baseUrl = config('super-delightful.sandbox.gateway', '');
             if (empty($this->baseUrl)) {
                 throw new RuntimeException('SANDBOX_GATEWAY environment variable is not set');
             }
@@ -69,7 +69,7 @@ abstract class AbstractSandboxOS
     protected function getToken(): string
     {
         if (empty($this->token)) {
-            $this->token = config('super-magic.sandbox.token', '');
+            $this->token = config('super-delightful.sandbox.token', '');
         }
         return $this->token;
     }
@@ -79,7 +79,7 @@ abstract class AbstractSandboxOS
      */
     protected function isEnabledSandbox(): bool
     {
-        $this->enableSandbox = config('super-magic.sandbox.enabled', true);
+        $this->enableSandbox = config('super-delightful.sandbox.enabled', true);
         return $this->enableSandbox;
     }
 

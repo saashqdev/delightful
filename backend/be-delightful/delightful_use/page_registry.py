@@ -13,8 +13,8 @@ from typing import Dict, List, Optional, Union
 from pydantic import BaseModel, Field
 from playwright.async_api import Page
 
-from magic_use.js_loader import JSLoader
-from magic_use.userscript_manager import UserscriptManager
+from delightful_use.js_loader import JSLoader
+from delightful_use.userscript_manager import UserscriptManager
 
 # Configure logging
 logger = logging.getLogger(__name__)

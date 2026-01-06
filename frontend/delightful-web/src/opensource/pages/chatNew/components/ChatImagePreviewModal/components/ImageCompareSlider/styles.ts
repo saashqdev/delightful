@@ -62,7 +62,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 		width: 30px;
 		height: 30px;
 		border-radius: 50%;
-		color: ${token.magicColorUsages.black};
+		color: ${token.delightfulColorUsages.black};
 		cursor: ew-resize;
 		background-color: #fff;
 		transform: translate(-50%, -50%);

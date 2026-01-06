@@ -23,7 +23,7 @@ export const useStyles = createStyles(({ token }) => ({
 	},
 	agentNode: {
 		paddingLeft: "20px",
-		borderLeft: `1px dashed ${token.magicColorScales.grey[2]}`,
+		borderLeft: `1px dashed ${token.delightfulColorScales.grey[2]}`,
 		marginLeft: "5px",
 		paddingRight: "20px",
 	},
@@ -34,8 +34,8 @@ export const useStyles = createStyles(({ token }) => ({
 	errorTextContainer: {
 		marginTop: "10px",
 		marginBottom: "10px",
-		backgroundColor: token.magicColorUsages.error,
-		color: token.magicColorUsages.error,
+		backgroundColor: token.delightfulColorUsages.error,
+		color: token.delightfulColorUsages.error,
 		borderRadius: "100px",
 		padding: "3px 8px",
 		fontSize: "12px",

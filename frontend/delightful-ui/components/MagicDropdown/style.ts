@@ -16,30 +16,30 @@ export const useStyles = createStyles(({ css, prefixCls, isDarkMode, token }) =>
 				--${prefixCls}-control-padding-horizontal: 8px;
 				--${prefixCls}-dropdown-padding-block: 10px;
 				--${prefixCls}-border-radius-sm: 10px;
-				--${prefixCls}-control-item-bg-hover: ${token.magicColorUsages.primaryLight.default};
+				--${prefixCls}-control-item-bg-hover: ${token.delightfulColorUsages.primaryLight.default};
 			}
 
 
 			.${prefixCls}-dropdown-menu-item-danger {
 				color: ${
 					isDarkMode
-						? token.magicColorUsages.danger.default
-						: token.magicColorUsages.danger.default
+						? token.delightfulColorUsages.danger.default
+						: token.delightfulColorUsages.danger.default
 				} !important;
 				--${prefixCls}-color-error: ${
-			isDarkMode ? token.magicColorUsages.danger.default : token.magicColorScales.red[0]
+			isDarkMode ? token.delightfulColorUsages.danger.default : token.delightfulColorScales.red[0]
 		};
 
 			&:hover {
 				color: ${
 					isDarkMode
-						? token.magicColorUsages.white
-						: token.magicColorUsages.danger.default
+						? token.delightfulColorUsages.white
+						: token.delightfulColorUsages.danger.default
 				} !important;
 				background-color: ${
 					isDarkMode
-						? token.magicColorUsages.danger.default
-						: token.magicColorScales.red[0]
+						? token.delightfulColorUsages.danger.default
+						: token.delightfulColorScales.red[0]
 				} !important;
 			}
 		}

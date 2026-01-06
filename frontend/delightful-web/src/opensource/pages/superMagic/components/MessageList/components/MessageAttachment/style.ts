@@ -69,7 +69,7 @@ export const useStyles = createStyles(({ token }) => ({
 	},
 	attachmentAction: {
 		fontSize: "16px",
-		stroke: token.magicColorUsages.text[2],
+		stroke: token.delightfulColorUsages.text[2],
 		"&:hover": {
 			color: "rgba(28, 29, 35, 0.8)",
 		},
@@ -79,7 +79,7 @@ export const useStyles = createStyles(({ token }) => ({
 	},
 	attachmentEye: {
 		cursor: "pointer",
-		stroke: token.magicColorUsages.text[2],
+		stroke: token.delightfulColorUsages.text[2],
 	},
 	icon: {
 		width: "18px",

@@ -5,14 +5,14 @@ export const useStyles = createStyles(({ token }) => {
 		container: {
 			height: "100%",
 			overflow: "hidden auto",
-			backgroundColor: token.magicColorScales.grey[0],
+			backgroundColor: token.delightfulColorScales.grey[0],
 		},
 		workspaceItem: {
 			backgroundColor: "white",
 			display: "flex",
 			flexDirection: "column",
 			"&:not(:last-child)": {
-				borderBottom: `1px solid ${token.magicColorUsages.border}`,
+				borderBottom: `1px solid ${token.delightfulColorUsages.border}`,
 			},
 		},
 		workspaceItemActive: {
@@ -30,7 +30,7 @@ export const useStyles = createStyles(({ token }) => {
 			flex: "none",
 			padding: "4px 12px",
 			"&:active": {
-				backgroundColor: token.magicColorUsages.fill[0],
+				backgroundColor: token.delightfulColorUsages.fill[0],
 			},
 		},
 		name: {
@@ -56,11 +56,11 @@ export const useStyles = createStyles(({ token }) => {
 			gap: 4,
 			borderRadius: 8,
 			"&:active": {
-				backgroundColor: token.magicColorUsages.fill[0],
+				backgroundColor: token.delightfulColorUsages.fill[0],
 			},
 		},
 		topicItemActive: {
-			backgroundColor: token.magicColorUsages.primaryLight.default,
+			backgroundColor: token.delightfulColorUsages.primaryLight.default,
 		},
 		topicItemName: {
 			fontSize: 14,
@@ -80,9 +80,9 @@ export const useStyles = createStyles(({ token }) => {
 			fontSize: 14,
 			fontWeight: 400,
 			lineHeight: "20px",
-			backgroundColor: `${token.magicColorUsages.fill[0]} !important`,
+			backgroundColor: `${token.delightfulColorUsages.fill[0]} !important`,
 			"&:active": {
-				backgroundColor: `${token.magicColorUsages.fill[1]} !important`,
+				backgroundColor: `${token.delightfulColorUsages.fill[1]} !important`,
 			},
 			"& > span": {
 				display: "flex",
@@ -93,15 +93,15 @@ export const useStyles = createStyles(({ token }) => {
 		settingsButton: {
 			height: 32,
 			width: 32,
-			backgroundColor: token.magicColorUsages.fill[0],
+			backgroundColor: token.delightfulColorUsages.fill[0],
 			"&:active": {
-				backgroundColor: token.magicColorUsages.fill[1],
+				backgroundColor: token.delightfulColorUsages.fill[1],
 			},
 		},
 		current: {
 			fontSize: 12,
 			fontWeight: 400,
-			color: token.magicColorScales.brand[4],
+			color: token.delightfulColorScales.brand[4],
 		},
 		success: {
 			stroke: token.colorSuccess,

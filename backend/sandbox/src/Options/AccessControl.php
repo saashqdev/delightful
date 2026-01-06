@@ -495,29 +495,29 @@ class AccessControl
         return $this->blacklist[KeywordConstants::CONSTANTS][$name];
     }
 
-    /** Query whether PHPSandbox instance has whitelisted magic constants.
+    /** Query whether PHPSandbox instance has whitelisted delightful constants.
      *
-     * @return int Returns the number of whitelisted magic constants this instance has defined
+     * @return int Returns the number of whitelisted delightful constants this instance has defined
      */
     public function hasWhitelistedDelightfulConsts(): int
     {
         return count($this->whitelist[KeywordConstants::Delightful_CONSTANTS]);
     }
 
-    /** Query whether PHPSandbox instance has blacklisted magic constants.
+    /** Query whether PHPSandbox instance has blacklisted delightful constants.
      *
-     * @return int Returns the number of blacklisted magic constants this instance has defined
+     * @return int Returns the number of blacklisted delightful constants this instance has defined
      */
     public function hasBlacklistedDelightfulConsts(): int
     {
         return count($this->blacklist[KeywordConstants::Delightful_CONSTANTS]);
     }
 
-    /** Check if PHPSandbox instance has whitelisted magic constant name set.
+    /** Check if PHPSandbox instance has whitelisted delightful constant name set.
      *
-     * @param string $name String of magic constant $name to query
+     * @param string $name String of delightful constant $name to query
      *
-     * @return bool Returns true if PHPSandbox instance has whitelisted magic constant $name, false otherwise
+     * @return bool Returns true if PHPSandbox instance has whitelisted delightful constant $name, false otherwise
      */
     public function isWhitelistedDelightfulConst(string $name): bool
     {
@@ -525,11 +525,11 @@ class AccessControl
         return isset($this->whitelist[KeywordConstants::Delightful_CONSTANTS][$name]);
     }
 
-    /** Check if PHPSandbox instance has blacklisted magic constant name set.
+    /** Check if PHPSandbox instance has blacklisted delightful constant name set.
      *
-     * @param string $name String of magic constant $name to query
+     * @param string $name String of delightful constant $name to query
      *
-     * @return bool Returns true if PHPSandbox instance has blacklisted magic constant $name, false otherwise
+     * @return bool Returns true if PHPSandbox instance has blacklisted delightful constant $name, false otherwise
      */
     public function isBlacklistedDelightfulConst(string $name): bool
     {
@@ -1453,11 +1453,11 @@ class AccessControl
         return $this->deblacklist(KeywordConstants::CONSTANTS, $name);
     }
 
-    /** Whitelist magic constant.
+    /** Whitelist delightful constant.
      *
-     * You can pass a string of magic constant name, or pass an array of the magic constant names to whitelist
+     * You can pass a string of delightful constant name, or pass an array of the delightful constant names to whitelist
      *
-     * @param array|string $name String of magic constant name or array of magic constant names to whitelist
+     * @param array|string $name String of delightful constant name or array of delightful constant names to whitelist
      *
      * @return AccessControl Returns the PHPSandbox instance for fluent querying
      */
@@ -1470,11 +1470,11 @@ class AccessControl
         return $this->whitelist(KeywordConstants::Delightful_CONSTANTS, $name);
     }
 
-    /** Blacklist magic constant.
+    /** Blacklist delightful constant.
      *
-     * You can pass a string of magic constant name, or pass an array of the magic constant names to blacklist
+     * You can pass a string of delightful constant name, or pass an array of the delightful constant names to blacklist
      *
-     * @param array|string $name String of magic constant name or array of magic constant names to blacklist
+     * @param array|string $name String of delightful constant name or array of delightful constant names to blacklist
      *
      * @return AccessControl Returns the PHPSandbox instance for fluent querying
      */
@@ -1487,11 +1487,11 @@ class AccessControl
         return $this->blacklist(KeywordConstants::Delightful_CONSTANTS, $name);
     }
 
-    /** Remove magic constant from whitelist.
+    /** Remove delightful constant from whitelist.
      *
-     * You can pass a string of magic constant name, or pass an array of the magic constant names to remove from whitelist
+     * You can pass a string of delightful constant name, or pass an array of the delightful constant names to remove from whitelist
      *
-     * @param array|string $name String of magic constant name or array of magic constant names to remove from whitelist
+     * @param array|string $name String of delightful constant name or array of delightful constant names to remove from whitelist
      *
      * @return AccessControl Returns the PHPSandbox instance for fluent querying
      */
@@ -1504,11 +1504,11 @@ class AccessControl
         return $this->dewhitelist(KeywordConstants::Delightful_CONSTANTS, $name);
     }
 
-    /** Remove magic constant from blacklist.
+    /** Remove delightful constant from blacklist.
      *
-     * You can pass a string of magic constant name, or pass an array of the magic constant names to remove from blacklist
+     * You can pass a string of delightful constant name, or pass an array of the delightful constant names to remove from blacklist
      *
-     * @param array|string $name String of magic constant name or array of magic constant names to remove from blacklist
+     * @param array|string $name String of delightful constant name or array of delightful constant names to remove from blacklist
      *
      * @return AccessControl Returns the PHPSandbox instance for fluent querying
      */

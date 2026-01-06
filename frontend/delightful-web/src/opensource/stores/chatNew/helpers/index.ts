@@ -58,15 +58,15 @@ export function uniqueAndSortMessageIds(messageIds: string[]) {
 	})
 }
 
-const genMaxSeqInfoKey = (magic_id: string) => platformKey(`chat/max_seq_info/${magic_id}`)
+const genMaxSeqInfoKey = (delightful_id: string) => platformKey(`chat/max_seq_info/${delightful_id}`)
 
 /**
  * 获取最大序号
  * @returns
  */
-export const getChatMaxSeqInfo = (magic_id: string) =>
+export const getChatMaxSeqInfo = (delightful_id: string) =>
 	JSON.parse(
-		localStorage.getItem(genMaxSeqInfoKey(magic_id)) ??
+		localStorage.getItem(genMaxSeqInfoKey(delightful_id)) ??
 			JSON.stringify({
 				user_local_seq_id: "",
 			}),
@@ -77,8 +77,8 @@ export const getChatMaxSeqInfo = (magic_id: string) =>
  * @param max_seq_info 最大序号
  * @returns
  */
-export const setChatMaxSeqInfo = (magic_id: string, max_seq_info: MessageMaxSeqInfo) =>
-	localStorage.setItem(genMaxSeqInfoKey(magic_id), JSON.stringify(max_seq_info))
+export const setChatMaxSeqInfo = (delightful_id: string, max_seq_info: MessageMaxSeqInfo) =>
+	localStorage.setItem(genMaxSeqInfoKey(delightful_id), JSON.stringify(max_seq_info))
 
 /**
  * 添加会话到会话组

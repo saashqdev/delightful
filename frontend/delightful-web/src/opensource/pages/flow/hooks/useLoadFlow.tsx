@@ -37,7 +37,7 @@ export default function useLoadFlow({ loadLatestDraft, isAgent, agent, flowId }:
 						className={btnStyles.btn}
 						onClick={() => {
 							loadLatestDraft(
-								isAgent ? agent.magicFlowEntity.id! : flowId,
+								isAgent ? agent.delightfulFlowEntity.id! : flowId,
 								isAgent
 									? {
 											user_operation: agent.botEntity.user_operation,
@@ -69,7 +69,7 @@ export default function useLoadFlow({ loadLatestDraft, isAgent, agent, flowId }:
 		agent?.botEntity?.robot_avatar,
 		agent?.botEntity?.robot_name,
 		agent?.botEntity?.user_operation,
-		agent?.magicFlowEntity?.id,
+		agent?.delightfulFlowEntity?.id,
 		flowId,
 		isAgent,
 		loadLatestDraft,

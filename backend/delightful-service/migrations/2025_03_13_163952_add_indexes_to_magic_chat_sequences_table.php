@@ -15,29 +15,29 @@ return new class extends Migration {
     public function up(): void
     {
         // 只有当表存在时才执行索引操作
-        if (Schema::hasTable('magic_chat_sequences')) {
+        if (Schema::hasTable('delightful_chat_sequences')) {
             // 检查并创建 idx_object_type_id_refer_message_id 索引
             $this->createIndexIfNotExists(
-                'magic_chat_sequences',
+                'delightful_chat_sequences',
                 'idx_object_type_id_refer_message_id',
                 'CREATE INDEX idx_object_type_id_refer_message_id 
-                ON `magic_chat_sequences` (object_type, object_id, refer_message_id, seq_id DESC)'
+                ON `delightful_chat_sequences` (object_type, object_id, refer_message_id, seq_id DESC)'
             );
 
             // 检查并创建 idx_object_type_id_seq_id 索引
             $this->createIndexIfNotExists(
-                'magic_chat_sequences',
+                'delightful_chat_sequences',
                 'idx_object_type_id_seq_id',
                 'CREATE INDEX idx_object_type_id_seq_id
-                ON `magic_chat_sequences` (object_type, object_id, seq_id)'
+                ON `delightful_chat_sequences` (object_type, object_id, seq_id)'
             );
 
             // 检查并创建 idx_conversation_id_seq_id 索引
             $this->createIndexIfNotExists(
-                'magic_chat_sequences',
+                'delightful_chat_sequences',
                 'idx_conversation_id_seq_id',
                 'CREATE INDEX idx_conversation_id_seq_id
-                ON `magic_chat_sequences` (conversation_id, seq_id DESC)'
+                ON `delightful_chat_sequences` (conversation_id, seq_id DESC)'
             );
         }
     }
@@ -47,11 +47,11 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        if (Schema::hasTable('magic_chat_sequences')) {
+        if (Schema::hasTable('delightful_chat_sequences')) {
             // 删除索引
-            $this->dropIndexIfExists('magic_chat_sequences', 'idx_object_type_id_refer_message_id');
-            $this->dropIndexIfExists('magic_chat_sequences', 'idx_object_type_id_seq_id');
-            $this->dropIndexIfExists('magic_chat_sequences', 'idx_conversation_id_seq_id');
+            $this->dropIndexIfExists('delightful_chat_sequences', 'idx_object_type_id_refer_message_id');
+            $this->dropIndexIfExists('delightful_chat_sequences', 'idx_object_type_id_seq_id');
+            $this->dropIndexIfExists('delightful_chat_sequences', 'idx_conversation_id_seq_id');
         }
     }
 

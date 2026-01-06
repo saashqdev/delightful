@@ -16,13 +16,13 @@ use App\Infrastructure\Core\ValueObject\Page;
 class DelightfulFlowAIModelDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly DelightfulFlowAIModelRepositoryInterface $magicFlowAIModelRepository
+        private readonly DelightfulFlowAIModelRepositoryInterface $delightfulFlowAIModelRepository
     ) {
     }
 
     public function getByName(FlowDataIsolation $dataIsolation, string $name): ?DelightfulFlowAIModelEntity
     {
-        return $this->magicFlowAIModelRepository->getByName($dataIsolation, $name);
+        return $this->delightfulFlowAIModelRepository->getByName($dataIsolation, $name);
     }
 
     /**
@@ -30,6 +30,6 @@ class DelightfulFlowAIModelDomainService extends AbstractDomainService
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelQuery $query, Page $page): array
     {
-        return $this->magicFlowAIModelRepository->queries($dataIsolation, $query, $page);
+        return $this->delightfulFlowAIModelRepository->queries($dataIsolation, $query, $page);
     }
 }

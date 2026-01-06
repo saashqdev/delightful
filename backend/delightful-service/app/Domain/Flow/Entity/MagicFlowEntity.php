@@ -135,20 +135,20 @@ class DelightfulFlowEntity extends AbstractEntity
         $this->collectNodes();
     }
 
-    public function prepareForSaveNode(?DelightfulFlowEntity $magicFlowEntity): void
+    public function prepareForSaveNode(?DelightfulFlowEntity $delightfulFlowEntity): void
     {
         $this->nodeValidate();
 
-        if ($magicFlowEntity) {
+        if ($delightfulFlowEntity) {
             $this->requiredValidate();
 
-            $magicFlowEntity->setName($this->name);
-            $magicFlowEntity->setDescription($this->description ?? '');
-            $magicFlowEntity->setIcon($this->icon);
-            $magicFlowEntity->setNodes($this->nodes);
-            $magicFlowEntity->setEdges($this->edges);
-            $magicFlowEntity->setModifier($this->creator);
-            $magicFlowEntity->setUpdatedAt($this->createdAt);
+            $delightfulFlowEntity->setName($this->name);
+            $delightfulFlowEntity->setDescription($this->description ?? '');
+            $delightfulFlowEntity->setIcon($this->icon);
+            $delightfulFlowEntity->setNodes($this->nodes);
+            $delightfulFlowEntity->setEdges($this->edges);
+            $delightfulFlowEntity->setModifier($this->creator);
+            $delightfulFlowEntity->setUpdatedAt($this->createdAt);
         }
     }
 
@@ -164,16 +164,16 @@ class DelightfulFlowEntity extends AbstractEntity
         $this->edges = [];
     }
 
-    public function prepareForModification(DelightfulFlowEntity $magicFlow): void
+    public function prepareForModification(DelightfulFlowEntity $delightfulFlow): void
     {
         $this->requiredValidate();
 
-        $magicFlow->setName($this->name);
-        $magicFlow->setDescription($this->description);
-        $magicFlow->setIcon($this->icon);
-        $magicFlow->setToolSetId($this->toolSetId);
-        $magicFlow->setModifier($this->creator);
-        $magicFlow->setUpdatedAt($this->createdAt);
+        $delightfulFlow->setName($this->name);
+        $delightfulFlow->setDescription($this->description);
+        $delightfulFlow->setIcon($this->icon);
+        $delightfulFlow->setToolSetId($this->toolSetId);
+        $delightfulFlow->setModifier($this->creator);
+        $delightfulFlow->setUpdatedAt($this->createdAt);
     }
 
     public function prepareForChangeEnable(): void
@@ -187,18 +187,18 @@ class DelightfulFlowEntity extends AbstractEntity
         }
     }
 
-    public function prepareForPublish(DelightfulFlowVersionEntity $magicFlowVersionEntity, string $publisher): void
+    public function prepareForPublish(DelightfulFlowVersionEntity $delightfulFlowVersionEntity, string $publisher): void
     {
-        $this->versionCode = $magicFlowVersionEntity->getCode();
+        $this->versionCode = $delightfulFlowVersionEntity->getCode();
 
-        $magicFlow = $magicFlowVersionEntity->getDelightfulFlow();
+        $delightfulFlow = $delightfulFlowVersionEntity->getDelightfulFlow();
 
-        $this->name = $magicFlow->getName();
-        $this->description = $magicFlow->getDescription();
-        $this->icon = $magicFlow->getIcon();
-        $this->edges = $magicFlow->getEdges();
-        $this->nodes = $magicFlow->getNodes();
-        $this->globalVariable = $magicFlow->getGlobalVariable();
+        $this->name = $delightfulFlow->getName();
+        $this->description = $delightfulFlow->getDescription();
+        $this->icon = $delightfulFlow->getIcon();
+        $this->edges = $delightfulFlow->getEdges();
+        $this->nodes = $delightfulFlow->getNodes();
+        $this->globalVariable = $delightfulFlow->getGlobalVariable();
 
         foreach ($this->nodes as $node) {
             $node->getNodeParamsConfig()->setValidateScene('publish');

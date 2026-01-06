@@ -17,7 +17,7 @@ const pulseAnimation = keyframes`
 `
 
 export const useStyles = createStyles(({ token }) => {
-	const textColor = token.magicColorUsages.text[1]
+	const textColor = token.delightfulColorUsages.text[1]
 	return {
 		container: {
 			width: "100%",
@@ -38,7 +38,7 @@ export const useStyles = createStyles(({ token }) => {
 			borderRadius: token.borderRadiusLG,
 		},
 		containerInnerView: {
-			backgroundColor: token.magicColorUsages.bg[1],
+			backgroundColor: token.delightfulColorUsages.bg[1],
 		},
 		containerInnerCollapsed: {
 			width: "56px",
@@ -117,7 +117,7 @@ export const useStyles = createStyles(({ token }) => {
 			flex: 1,
 			fontSize: "12px",
 			// color: token.colorText,
-			color: token.magicColorUsages.text[1],
+			color: token.delightfulColorUsages.text[1],
 			overflow: "hidden",
 			textOverflow: "ellipsis",
 			whiteSpace: "nowrap",
@@ -187,7 +187,7 @@ export const useStyles = createStyles(({ token }) => {
 		},
 		progressText: {
 			fontSize: 12,
-			color: token.magicColorUsages.text[2],
+			color: token.delightfulColorUsages.text[2],
 		},
 		currentTaskText: {
 			fontSize: "14px",

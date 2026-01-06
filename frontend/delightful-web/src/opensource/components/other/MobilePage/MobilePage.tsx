@@ -75,7 +75,7 @@ function MobilePage() {
 				</div>
 				<div className={styles.footer}>
 					<FooterLogo size={1} />
-					<span>Copyright © 2025 Letsmagic.cn All Rights Reserved.</span>
+					<span>Copyright © 2025 Letsdelightful.cn All Rights Reserved.</span>
 					<span>粤ICP备2023088718号</span>
 				</div>
 			</div>

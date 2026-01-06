@@ -20,7 +20,7 @@ export default function LabelDatetime({ config }: LabelDatetimeProps) {
 	const { datasetProps } = useDatasetProps({ config })
 
 	return (
-		<div className="magic-label-datetime" {...datasetProps}>
+		<div className="delightful-label-datetime" {...datasetProps}>
 			{renderBlock}
 		</div>
 	)

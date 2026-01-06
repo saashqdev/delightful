@@ -19,7 +19,7 @@ class Chat extends AbstractApi
         $options = [
             RequestOptions::JSON => $request->toBody(),
         ];
-        $response = $this->post('/api/v2/magic/llm/chatCompletions', $options);
+        $response = $this->post('/api/v2/delightful/llm/chatCompletions', $options);
         $data = $this->getResponseData($response, true);
 
         return new CompletionsResponse($data);

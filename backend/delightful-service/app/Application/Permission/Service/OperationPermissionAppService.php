@@ -32,10 +32,10 @@ class OperationPermissionAppService extends AbstractPermissionAppService
 {
     public function __construct(
         private readonly OperationPermissionDomainService $operationPermissionDomainService,
-        private readonly DelightfulUserDomainService $magicUserDomainService,
-        private readonly DelightfulDepartmentDomainService $magicDepartmentDomainService,
-        private readonly DelightfulDepartmentUserDomainService $magicDepartmentUserDomainService,
-        private readonly DelightfulGroupDomainService $magicGroupDomainService,
+        private readonly DelightfulUserDomainService $delightfulUserDomainService,
+        private readonly DelightfulDepartmentDomainService $delightfulDepartmentDomainService,
+        private readonly DelightfulDepartmentUserDomainService $delightfulDepartmentUserDomainService,
+        private readonly DelightfulGroupDomainService $delightfulGroupDomainService,
     ) {
     }
 
@@ -86,15 +86,15 @@ class OperationPermissionAppService extends AbstractPermissionAppService
         }
         $contactDataIsolation = ContactDataIsolation::simpleMake($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
         // 根据 userid 获取用户信息
-        $users = $this->magicUserDomainService->getByUserIds($contactDataIsolation, $userIds);
+        $users = $this->delightfulUserDomainService->getByUserIds($contactDataIsolation, $userIds);
         // 获取用户的 departmentId
-        $userDepartmentList = $this->magicDepartmentUserDomainService->getDepartmentIdsByUserIds($contactDataIsolation, $userIds);
+        $userDepartmentList = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserIds($contactDataIsolation, $userIds);
         foreach ($userDepartmentList as $userDepartmentIds) {
             $departmentIds = array_merge($departmentIds, $userDepartmentIds);
         }
-        $departments = $this->magicDepartmentDomainService->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
+        $departments = $this->delightfulDepartmentDomainService->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
         // 获取群组信息
-        $groups = $this->magicGroupDomainService->getGroupsInfoByIds($groupIds, $contactDataIsolation, true);
+        $groups = $this->delightfulGroupDomainService->getGroupsInfoByIds($groupIds, $contactDataIsolation, true);
 
         return [
             'list' => $list,

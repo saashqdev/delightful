@@ -18,7 +18,7 @@ from app.tools.purify import Purify
 from app.tools.summarize import Summarize
 from app.tools.use_browser_operations.base import BaseOperationParams, OperationGroup, operation
 from app.tools.visual_understanding import VisualUnderstanding, VisualUnderstandingParams
-from magic_use.magic_browser import (
+from delightful_use.delightful_browser import (
     DelightfulBrowser,
     DelightfulBrowserError,
     MarkdownSuccess,

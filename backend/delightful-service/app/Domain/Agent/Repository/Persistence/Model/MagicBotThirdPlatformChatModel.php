@@ -33,7 +33,7 @@ class DelightfulBotThirdPlatformChatModel extends Model
 
     public bool $timestamps = false;
 
-    protected ?string $table = 'magic_bot_third_platform_chat';
+    protected ?string $table = 'delightful_bot_third_platform_chat';
 
     protected array $fillable = [
         'id',
@@ -72,6 +72,6 @@ class DelightfulBotThirdPlatformChatModel extends Model
      */
     private function _getAesKey(string $salt): string
     {
-        return config('magic_flows.model_aes_key', '') . $salt;
+        return config('delightful_flows.model_aes_key', '') . $salt;
     }
 }

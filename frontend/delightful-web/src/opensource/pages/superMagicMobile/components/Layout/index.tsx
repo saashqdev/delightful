@@ -1,4 +1,4 @@
-import magicBetaSVG from "@/opensource/pages/superDelightful/assets/svg/super_magic_logo.svg"
+import delightfulBetaSVG from "@/opensource/pages/superDelightful/assets/svg/super_delightful_logo.svg"
 import { IconMenu2 } from "@tabler/icons-react"
 import type { PropsWithChildren, Ref } from "react"
 import { forwardRef, memo, useCallback, useImperativeHandle, useState } from "react"
@@ -40,7 +40,7 @@ function BeDelightfulMobileLayout(
 				<div className={styles.header}>
 					<div className={styles.headerContent}>
 						<div className={styles.headerLeft}>
-							<img src={magicBetaSVG} alt="magic" className={styles.logo} />
+							<img src={delightfulBetaSVG} alt="delightful" className={styles.logo} />
 						</div>
 						{headerCenter && <div className={styles.headerCenter}>{headerCenter}</div>}
 						<div className={styles.headerRight} onClick={openMenu}>

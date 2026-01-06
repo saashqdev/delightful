@@ -209,7 +209,7 @@ enum ChatErrorCode: int
 
     // DELIGHTFUL_ENVIRONMENT_CONFIG_ERROR
         // DELIGHTFUL_ENVIRONMENT_CONFIG_ERROR
-    #[ErrorMessage('chat.magic.environment_config_error')]
+    #[ErrorMessage('chat.delightful.environment_config_error')]
     case DELIGHTFUL_ENVIRONMENT_CONFIG_ERROR = 3043;
 
     // USER_SYNC_FAILED
@@ -217,14 +217,14 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.user.sync_failed')]
     case USER_SYNC_FAILED = 3044;
 
-    // magicEnv not found
-        // magicEnv not found
-    #[ErrorMessage('chat.magic.environment_not_found')]
+    // delightfulEnv not found
+        // delightfulEnv not found
+    #[ErrorMessage('chat.delightful.environment_not_found')]
     case DELIGHTFUL_ENVIRONMENT_NOT_FOUND = 3045;
 
     // appTicket not found
         // appTicket not found
-    #[ErrorMessage('chat.magic.ticket_not_found')]
+    #[ErrorMessage('chat.delightful.ticket_not_found')]
     case APP_TICKET_NOT_FOUND = 3046;
 
     // 流式消息不支持该消息

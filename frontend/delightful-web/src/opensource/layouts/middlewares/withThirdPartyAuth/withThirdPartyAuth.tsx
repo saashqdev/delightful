@@ -44,7 +44,7 @@ export function withThirdPartyAuth<T extends object>(
 				const { clusterCode } = await loginService.syncClusterConfig()
 				setClusterCode(clusterCode)
 
-				const magicOrgSyncStep = loginService.magicOrganizationSyncStep(
+				const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(
 					clusterCode as string,
 				)
 				const userSyncStep = loginService.accountSyncStep(clusterCode as string)
@@ -61,7 +61,7 @@ export function withThirdPartyAuth<T extends object>(
 								access_token: teamshare_token,
 							} as Login.UserLoginsResponse)
 						})
-						.then(magicOrgSyncStep)
+						.then(delightfulOrgSyncStep)
 						// @ts-ignore
 						.then(loginService.organizationFetchStep)
 						.then(loginService.organizationSyncStep)
@@ -117,7 +117,7 @@ export function withThirdPartyAuth<T extends object>(
 		/** Submit data and handle the logic of different login methods uniformly */
 		const { run: handleAutoLogin } = useDebounceFn(
 			(deployCode: string) => {
-				const magicOrgSyncStep = loginService.magicOrganizationSyncStep(
+				const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(
 					deployCode as string,
 				)
 				const userSyncStep = loginService.accountSyncStep(deployCode as string)
@@ -156,7 +156,7 @@ export function withThirdPartyAuth<T extends object>(
 							})()
 						})
 						.then(loginService.authorizationSyncStep)
-						.then(magicOrgSyncStep)
+						.then(delightfulOrgSyncStep)
 						// @ts-ignore
 						.then(loginService.organizationFetchStep)
 						.then(loginService.organizationSyncStep)

@@ -13,7 +13,7 @@ class DelightfulUserSettingEntity extends AbstractEntity
 {
     private ?int $id = null;
 
-    private ?string $magicId = '';
+    private ?string $delightfulId = '';
 
     private ?string $organizationCode = '';
 
@@ -43,12 +43,12 @@ class DelightfulUserSettingEntity extends AbstractEntity
 
     public function getDelightfulId(): ?string
     {
-        return $this->magicId;
+        return $this->delightfulId;
     }
 
-    public function setDelightfulId(?string $magicId): void
+    public function setDelightfulId(?string $delightfulId): void
     {
-        $this->magicId = $magicId;
+        $this->delightfulId = $delightfulId;
     }
 
     public function getOrganizationCode(): ?string
@@ -146,7 +146,7 @@ class DelightfulUserSettingEntity extends AbstractEntity
     public function prepareForModification(DelightfulUserSettingEntity $existingEntity): void
     {
         $this->id = $existingEntity->getId();
-        $this->magicId = $existingEntity->getDelightfulId();
+        $this->delightfulId = $existingEntity->getDelightfulId();
         $this->organizationCode = $existingEntity->getOrganizationCode();
         $this->createdAt = $existingEntity->getCreatedAt();
         $this->creator = $existingEntity->getCreator();

@@ -37,7 +37,7 @@ class UserTaskDTO extends AbstractDTO
     protected string $agentUserId = '';
 
     // 当前用户所处的环境id
-    protected int $magicEnvId = 0;
+    protected int $delightfulEnvId = 0;
 
     public function __construct(?array $data = null)
     {
@@ -183,19 +183,19 @@ class UserTaskDTO extends AbstractDTO
     }
 
     /**
-     * Get the value of magicEnvId.
+     * Get the value of delightfulEnvId.
      */
     public function getDelightfulEnvId(): int
     {
-        return $this->magicEnvId;
+        return $this->delightfulEnvId;
     }
 
     /**
-     * Set the value of magicEnvId.
+     * Set the value of delightfulEnvId.
      */
-    public function setDelightfulEnvId(int $magicEnvId): self
+    public function setDelightfulEnvId(int $delightfulEnvId): self
     {
-        $this->magicEnvId = $magicEnvId;
+        $this->delightfulEnvId = $delightfulEnvId;
 
         return $this;
     }

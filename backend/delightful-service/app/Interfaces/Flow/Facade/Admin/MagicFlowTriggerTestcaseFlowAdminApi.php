@@ -18,43 +18,43 @@ use Hyperf\Di\Annotation\Inject;
 class DelightfulFlowTriggerTestcaseFlowAdminApi extends AbstractFlowAdminApi
 {
     #[Inject]
-    protected DelightfulFlowTriggerTestcaseAppService $magicFlowTriggerTestcaseAppService;
+    protected DelightfulFlowTriggerTestcaseAppService $delightfulFlowTriggerTestcaseAppService;
 
     public function save(string $flowId)
     {
         $authorization = $this->getAuthorization();
-        $magicFlowTriggerTestcaseDTO = new DelightfulFlowTriggerTestcaseDTO($this->request->all());
-        $magicFlowTriggerTestcaseDTO->setFlowCode($flowId);
+        $delightfulFlowTriggerTestcaseDTO = new DelightfulFlowTriggerTestcaseDTO($this->request->all());
+        $delightfulFlowTriggerTestcaseDTO->setFlowCode($flowId);
 
-        $magicFlowTriggerTestcaseEntity = DelightfulFlowTriggerTestcaseAssembler::createDelightfulFlowTriggerTestcaseDO($magicFlowTriggerTestcaseDTO);
+        $delightfulFlowTriggerTestcaseEntity = DelightfulFlowTriggerTestcaseAssembler::createDelightfulFlowTriggerTestcaseDO($delightfulFlowTriggerTestcaseDTO);
 
-        $magicFlowTriggerTestcaseEntity = $this->magicFlowTriggerTestcaseAppService->save($authorization, $magicFlowTriggerTestcaseEntity);
+        $delightfulFlowTriggerTestcaseEntity = $this->delightfulFlowTriggerTestcaseAppService->save($authorization, $delightfulFlowTriggerTestcaseEntity);
 
-        return DelightfulFlowTriggerTestcaseAssembler::createDelightfulFlowTriggerTestcaseDTO($magicFlowTriggerTestcaseEntity);
+        return DelightfulFlowTriggerTestcaseAssembler::createDelightfulFlowTriggerTestcaseDTO($delightfulFlowTriggerTestcaseEntity);
     }
 
     public function show(string $flowId, string $testcaseId)
     {
-        $magicFlowTriggerTestcaseEntity = $this->magicFlowTriggerTestcaseAppService->show($this->getAuthorization(), $flowId, $testcaseId);
+        $delightfulFlowTriggerTestcaseEntity = $this->delightfulFlowTriggerTestcaseAppService->show($this->getAuthorization(), $flowId, $testcaseId);
 
-        return DelightfulFlowTriggerTestcaseAssembler::createDelightfulFlowTriggerTestcaseDTO($magicFlowTriggerTestcaseEntity);
+        return DelightfulFlowTriggerTestcaseAssembler::createDelightfulFlowTriggerTestcaseDTO($delightfulFlowTriggerTestcaseEntity);
     }
 
     public function remove(string $flowId, string $testcaseId)
     {
-        $this->magicFlowTriggerTestcaseAppService->remove($this->getAuthorization(), $flowId, $testcaseId);
+        $this->delightfulFlowTriggerTestcaseAppService->remove($this->getAuthorization(), $flowId, $testcaseId);
     }
 
     public function queries(string $flowId)
     {
         $authorization = $this->getAuthorization();
-        $magicFlowTriggerTestcaseQuery = new DelightfulFLowTriggerTestcaseQuery($this->request->all());
-        $magicFlowTriggerTestcaseQuery->flowCode = $flowId;
-        $magicFlowTriggerTestcaseQuery->setOrder(['id' => 'desc']);
+        $delightfulFlowTriggerTestcaseQuery = new DelightfulFLowTriggerTestcaseQuery($this->request->all());
+        $delightfulFlowTriggerTestcaseQuery->flowCode = $flowId;
+        $delightfulFlowTriggerTestcaseQuery->setOrder(['id' => 'desc']);
 
         $page = $this->createPage();
 
-        $result = $this->magicFlowTriggerTestcaseAppService->queries($authorization, $magicFlowTriggerTestcaseQuery, $page);
+        $result = $this->delightfulFlowTriggerTestcaseAppService->queries($authorization, $delightfulFlowTriggerTestcaseQuery, $page);
 
         return DelightfulFlowTriggerTestcaseAssembler::createPageListDTO($result['total'], $result['list'], $page, $result['users']);
     }

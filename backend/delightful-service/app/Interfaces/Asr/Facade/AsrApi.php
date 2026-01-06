@@ -67,12 +67,12 @@ class AsrApi extends AbstractApi
     public function show(RequestInterface $request): array
     {
         $userAuthorization = $this->getAuthorization();
-        $magicId = $userAuthorization->getDelightfulId();
+        $delightfulId = $userAuthorization->getDelightfulId();
 
         $refresh = (bool) $request->input('refresh', false);
         $duration = 60 * 60 * 12; // 12小时
 
-        $tokenData = $this->stsService->getJwtTokenForUser($magicId, $duration, $refresh);
+        $tokenData = $this->stsService->getJwtTokenForUser($delightfulId, $duration, $refresh);
 
         return [
             'token' => $tokenData['jwt_token'],
@@ -82,7 +82,7 @@ class AsrApi extends AbstractApi
             'resource_id' => $tokenData['resource_id'],
             'user' => [
                 'user_id' => $userAuthorization->getId(),
-                'magic_id' => $userAuthorization->getDelightfulId(),
+                'delightful_id' => $userAuthorization->getDelightfulId(),
                 'organization_code' => $userAuthorization->getOrganizationCode(),
             ],
         ];
@@ -95,16 +95,16 @@ class AsrApi extends AbstractApi
     public function destroy(): array
     {
         $userAuthorization = $this->getAuthorization();
-        $magicId = $userAuthorization->getDelightfulId();
+        $delightfulId = $userAuthorization->getDelightfulId();
 
-        $cleared = $this->stsService->clearUserJwtTokenCache($magicId);
+        $cleared = $this->stsService->clearUserJwtTokenCache($delightfulId);
 
         return [
             'cleared' => $cleared,
             'message' => $cleared ? trans('asr.api.token.cache_cleared') : trans('asr.api.token.cache_not_exist'),
             'user' => [
                 'user_id' => $userAuthorization->getId(),
-                'magic_id' => $userAuthorization->getDelightfulId(),
+                'delightful_id' => $userAuthorization->getDelightfulId(),
                 'organization_code' => $userAuthorization->getOrganizationCode(),
             ],
         ];
@@ -736,7 +736,7 @@ class AsrApi extends AbstractApi
             false
         );
 
-        unset($tokenData['magic_service_host']);
+        unset($tokenData['delightful_service_host']);
 
         if (empty($tokenData['temporary_credential']['dir'])) {
             $this->logger->error(trans('asr.api.token.sts_get_failed'), [

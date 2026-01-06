@@ -60,11 +60,11 @@ trait NormalizeTrait
         return strtolower($name);
     }
 
-    /** Normalize magic constant name.  This is an internal PHPSandbox function.
+    /** Normalize delightful constant name.  This is an internal PHPSandbox function.
      *
-     * @param array|string $name String of the magic constant $name, or array of strings to normalize
+     * @param array|string $name String of the delightful constant $name, or array of strings to normalize
      *
-     * @return array|string Returns the normalized magic constant string or an array of normalized strings
+     * @return array|string Returns the normalized delightful constant string or an array of normalized strings
      */
     protected function normalizeDelightfulConst($name)
     {

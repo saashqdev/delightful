@@ -15,13 +15,13 @@ class DelightfulOrganizationEnvDTO extends DelightfulEnvironmentEntity
 
     protected string $loginCode;
 
-    protected string $magicOrganizationCode;
+    protected string $delightfulOrganizationCode;
 
     protected string $originOrganizationCode;
 
     protected int $environmentId;
 
-    protected ?DelightfulEnvironmentEntity $magicEnvironmentEntity = null;
+    protected ?DelightfulEnvironmentEntity $delightfulEnvironmentEntity = null;
 
     public function __construct(array $data = [])
     {
@@ -30,12 +30,12 @@ class DelightfulOrganizationEnvDTO extends DelightfulEnvironmentEntity
 
     public function getDelightfulEnvironmentEntity(): ?DelightfulEnvironmentEntity
     {
-        return $this->magicEnvironmentEntity;
+        return $this->delightfulEnvironmentEntity;
     }
 
-    public function setDelightfulEnvironmentEntity(?DelightfulEnvironmentEntity $magicEnvironmentEntity): void
+    public function setDelightfulEnvironmentEntity(?DelightfulEnvironmentEntity $delightfulEnvironmentEntity): void
     {
-        $this->magicEnvironmentEntity = $magicEnvironmentEntity;
+        $this->delightfulEnvironmentEntity = $delightfulEnvironmentEntity;
     }
 
     public function getOrgEnvId(): string
@@ -60,12 +60,12 @@ class DelightfulOrganizationEnvDTO extends DelightfulEnvironmentEntity
 
     public function getDelightfulOrganizationCode(): string
     {
-        return $this->magicOrganizationCode;
+        return $this->delightfulOrganizationCode;
     }
 
-    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $delightfulOrganizationCode): void
     {
-        $this->magicOrganizationCode = $magicOrganizationCode;
+        $this->delightfulOrganizationCode = $delightfulOrganizationCode;
     }
 
     public function getOriginOrganizationCode(): string

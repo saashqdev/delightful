@@ -19,11 +19,11 @@ export const useUserDevices = () => {
  * @return {User.UserOrganization | undefined}
  */
 export const useCurrentDelightfulOrganization = (): User.DelightfulOrganization | null => {
-	const { organizationCode, magicOrganizationMap } = useOrganization()
+	const { organizationCode, delightfulOrganizationMap } = useOrganization()
 
 	return useMemo(() => {
-		return magicOrganizationMap[organizationCode]
-	}, [organizationCode, magicOrganizationMap])
+		return delightfulOrganizationMap[organizationCode]
+	}, [organizationCode, delightfulOrganizationMap])
 }
 
 export * from "./useAccount"

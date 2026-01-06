@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_environments', function (Blueprint $table) {
+        Schema::create('delightful_environments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('deployment', '32')->comment('部署类型.官方：saas|southeastAsia,私有：private');
             $table->string('environment', '32')->comment('环境类型：test/production');
@@ -29,6 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_environments');
+        Schema::dropIfExists('delightful_environments');
     }
 };

@@ -73,8 +73,8 @@ export class LoginService {
 		return Promise.resolve(config)
 	}
 
-	/** Step 2: 根据环境同步 magic 组织 */
-	magicOrganizationSyncStep = (clusterCode: string) => {
+	/** Step 2: 根据环境同步 delightful 组织 */
+	delightfulOrganizationSyncStep = (clusterCode: string) => {
 		return async (
 			params: Login.UserLoginsResponse,
 			teamshareOrganizationCode?: string,
@@ -86,10 +86,10 @@ export class LoginService {
 					clusterCode,
 					teamshareOrganizationCode,
 				)
-				const magicOrganizationMap = keyBy(result, "magic_organization_code")
-				return { access_token, magicOrganizationMap }
+				const delightfulOrganizationMap = keyBy(result, "delightful_organization_code")
+				return { access_token, delightfulOrganizationMap }
 			} catch (error: any) {
-				const newMessage = `magicOrganizationSyncStep: ${error.message}`
+				const newMessage = `delightfulOrganizationSyncStep: ${error.message}`
 				const newError = new Error(newMessage)
 				newError.stack = error?.stack
 				window.console.error(error)
@@ -104,22 +104,22 @@ export class LoginService {
 			try {
 				const {
 					access_token,
-					magicOrganizationMap,
+					delightfulOrganizationMap,
 					organizations,
 					teamshareOrganizationCode,
 				} = params
 				
-				const magicOrgs = Object.values(magicOrganizationMap)
+				const delightfulOrgs = Object.values(delightfulOrganizationMap)
 				
 				const orgCode =
-					teamshareOrganizationCode ?? magicOrgs?.[0]?.third_platform_organization_code
+					teamshareOrganizationCode ?? delightfulOrgs?.[0]?.third_platform_organization_code
 				
-				const magicOrg = keyBy(Object.values(magicOrganizationMap), "third_platform_organization_code")
+				const delightfulOrg = keyBy(Object.values(delightfulOrganizationMap), "third_platform_organization_code")
 				
 				if (orgCode) {
 					const userInfo = await this.service
 						.get<UserService>("userService")
-						.fetchUserInfo(magicOrg?.[orgCode]?.magic_user_id)
+						.fetchUserInfo(delightfulOrg?.[orgCode]?.delightful_user_id)
 					if (userInfo) {
 						// 登录完成后构造用户信息，维护在账号体系中
 						const userAccount: User.UserAccount = {
@@ -127,11 +127,11 @@ export class LoginService {
 							nickname: userInfo?.nickname,
 							organizationCode: userInfo?.organization_code,
 							avatar: userInfo?.avatar_url,
-							magic_id: userInfo?.magic_id,
-							magic_user_id: userInfo?.user_id,
+							delightful_id: userInfo?.delightful_id,
+							delightful_user_id: userInfo?.user_id,
 							access_token,
 							teamshareOrganizations: organizations ?? [],
-							organizations: magicOrgs,
+							organizations: delightfulOrgs,
 						}
 						this.service
 							.get<UserService>("userService")
@@ -161,7 +161,7 @@ export class LoginService {
 		params: Omit<LoginStepResult, "organizationCode">,
 	): Promise<LoginStepResult> => {
 		try {
-			const { access_token, magicOrganizationMap } = params
+			const { access_token, delightfulOrganizationMap } = params
 
 			// 获取 teamshare 当前账号下所有组织
 			// const organizations = await this.userApi.getUserOrganizations(
@@ -171,41 +171,41 @@ export class LoginService {
 			// debugger
 			// const teamshareOrgsCode = organizations.map((o) => o.organization_code)
 			//
-			// // 获取到 teamshare 的组织后，需要针对上步 magicOrganizationMap 进行合法性过滤(因后端没处理 magicOrganizationMap 数据的合法性，所以这里需要根据 teamshare 中不存在的组织过滤 magicOrganizationMap)
-			// const magicOrganizationArray = Object.values(allDelightfulOrganizationMap).filter((o) =>
+			// // 获取到 teamshare 的组织后，需要针对上步 delightfulOrganizationMap 进行合法性过滤(因后端没处理 delightfulOrganizationMap 数据的合法性，所以这里需要根据 teamshare 中不存在的组织过滤 delightfulOrganizationMap)
+			// const delightfulOrganizationArray = Object.values(allDelightfulOrganizationMap).filter((o) =>
 			// 	teamshareOrgsCode.includes(o.third_platform_organization_code),
 			// )
-			// const magicOrganizationMap = keyBy(
-			// 	magicOrganizationArray,
+			// const delightfulOrganizationMap = keyBy(
+			// 	delightfulOrganizationArray,
 			// 	"third_platform_organization_code",
 			// )
-			// const teamshareOrgMap = keyBy(magicOrganizationArray, "magic_organization_code")
+			// const teamshareOrgMap = keyBy(delightfulOrganizationArray, "delightful_organization_code")
 
-			// const authorizedOrgsCode = Object.keys(magicOrganizationMap) // 已授权组织
+			// const authorizedOrgsCode = Object.keys(delightfulOrganizationMap) // 已授权组织
 			// const authorizedOrg = organizations.find((org) =>
 			// 	authorizedOrgsCode.includes(org.organization_code),
 			// )
 
-			// magicOrganizationCode 处理 (优先判断缓存是否存在)
-			const magicOrgCodeCache = userStore.user?.organizationCode
-			// let magicOrgCode = null
-			// if (magicOrgCodeCache && teamshareOrgMap?.[magicOrgCodeCache]) {
-			// 	// 当且仅当缓存中的 magicOrgCode 存在且在当前账号中有效则使用缓存
-			// 	magicOrgCode = magicOrgCodeCache
+			// delightfulOrganizationCode 处理 (优先判断缓存是否存在)
+			const delightfulOrgCodeCache = userStore.user?.organizationCode
+			// let delightfulOrgCode = null
+			// if (delightfulOrgCodeCache && teamshareOrgMap?.[delightfulOrgCodeCache]) {
+			// 	// 当且仅当缓存中的 delightfulOrgCode 存在且在当前账号中有效则使用缓存
+			// 	delightfulOrgCode = delightfulOrgCodeCache
 			// } else {
-			// 	// 当且仅当 magic 组织 Code 不存在的情况下，重新以第一个作为首选
-			// 	magicOrgCode =
-			// 		magicOrganizationMap?.[authorizedOrg?.organization_code ?? ""]
-			// 			?.magic_organization_code
+			// 	// 当且仅当 delightful 组织 Code 不存在的情况下，重新以第一个作为首选
+			// 	delightfulOrgCode =
+			// 		delightfulOrganizationMap?.[authorizedOrg?.organization_code ?? ""]
+			// 			?.delightful_organization_code
 			// }
 
 			return {
 				access_token,
-				magicOrganizationMap,
+				delightfulOrganizationMap,
 				organizations: [],
 				organizationCode:
-					magicOrgCodeCache ||
-					Object.values(magicOrganizationMap)?.[0]?.magic_organization_code,
+					delightfulOrgCodeCache ||
+					Object.values(delightfulOrganizationMap)?.[0]?.delightful_organization_code,
 			}
 		} catch (error: any) {
 			const newMessage = `organizationFetchStep: ${error.message}`
@@ -217,19 +217,19 @@ export class LoginService {
 
 	/** Teamshare 生态组织同步 */
 	organizationSyncStep = async (params: LoginStepResult) => {
-		const { organizationCode, teamshareOrganizationCode, organizations, magicOrganizationMap } =
+		const { organizationCode, teamshareOrganizationCode, organizations, delightfulOrganizationMap } =
 			params
 
 		this.service.get<UserService>("userService").setOrganization({
 			organizationCode,
 			teamshareOrganizationCode,
 			organizations,
-			magicOrganizationMap,
+			delightfulOrganizationMap,
 		})
 		return Promise.resolve(params)
 	}
 
-	/** Step 6: 用户信息同步(magic体系的唯一用户Id) */
+	/** Step 6: 用户信息同步(delightful体系的唯一用户Id) */
 	fetchUserInfoStep = async (unionId: string) => {
 		try {
 			const userInfo = await this.service

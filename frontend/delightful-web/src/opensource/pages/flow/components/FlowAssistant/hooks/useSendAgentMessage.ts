@@ -44,15 +44,15 @@ export const useSendAgentMessage = () => {
 				}
 
 				// 直接使用fetch API发送请求
-				const apiUrl = `${env("DELIGHTFUL_SERVICE_BASE_URL")}/api/v2/magic/flows/built-chat`
+				const apiUrl = `${env("DELIGHTFUL_SERVICE_BASE_URL")}/api/v2/delightful/flows/built-chat`
 
-				// 针对 magic API请求需要将组织 Code 换成 magic 生态中的组织 Code，而非 teamshare 的组织 Code
-				const magicOrganizationCode = userStore.user.organizationCode
+				// 针对 delightful API请求需要将组织 Code 换成 delightful 生态中的组织 Code，而非 teamshare 的组织 Code
+				const delightfulOrganizationCode = userStore.user.organizationCode
 
 				const headers = {
 					"Content-Type": "application/json",
 					authorization: userStore.user.authorization ?? "",
-					"organization-code": magicOrganizationCode ?? "",
+					"organization-code": delightfulOrganizationCode ?? "",
 					language,
 				}
 

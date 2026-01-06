@@ -28,7 +28,7 @@ readonly class DelightfulUserIdRelationRepository implements DelightfulUserIdRel
         $userIdRelationEntity->setId($id);
         $this->userIdRelationModel::query()->create([
             'id' => $id,
-            'magic_id' => $userIdRelationEntity->getAccountId(),
+            'delightful_id' => $userIdRelationEntity->getAccountId(),
             'id_type' => $userIdRelationEntity->getIdType()->value,
             'id_value' => $userIdRelationEntity->getIdValue(),
             'relation_type' => $userIdRelationEntity->getRelationType(),
@@ -42,7 +42,7 @@ readonly class DelightfulUserIdRelationRepository implements DelightfulUserIdRel
     {
         // 根据 account_id/id_type/relation_value 查询是否已经生成了关联关系
         $userIdRelationModel = $this->userIdRelationModel::query()
-            ->where('magic_id', $userIdRelationEntity->getAccountId())
+            ->where('delightful_id', $userIdRelationEntity->getAccountId())
             ->where('relation_type', $userIdRelationEntity->getRelationType())
             ->where('relation_value', $userIdRelationEntity->getRelationValue())
             ->where('id_type', $userIdRelationEntity->getIdType()->value);

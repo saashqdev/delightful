@@ -65,11 +65,11 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        private readonly DelightfulLLMDomainService $magicLLMDomainService,
+        private readonly DelightfulLLMDomainService $delightfulLLMDomainService,
         private readonly IdGeneratorInterface $idGenerator,
-        protected readonly DelightfulConversationDomainService $magicConversationDomainService,
-        protected readonly DelightfulUserDomainService $magicUserDomainService,
-        protected readonly DelightfulChatDomainService $magicChatDomainService,
+        protected readonly DelightfulConversationDomainService $delightfulConversationDomainService,
+        protected readonly DelightfulUserDomainService $delightfulUserDomainService,
+        protected readonly DelightfulChatDomainService $delightfulChatDomainService,
         protected readonly Redis $redis
     ) {
         $this->logger = di()->get(LoggerFactory::class)->get(get_class($this));
@@ -84,7 +84,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         $topicId = $dto->getTopicId();
         $searchKeyword = $dto->getUserMessage();
         // ai准备开始发消息了,结束输入状态
-        $this->magicConversationDomainService->agentOperateConversationStatusV2(
+        $this->delightfulConversationDomainService->agentOperateConversationStatusV2(
             ControlMessageType::EndConversationInput,
             $conversationId,
             $topicId
@@ -95,8 +95,8 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return;
         }
-        // magic-api 二期要求传入用户 id
-        $agentConversationEntity = $this->magicConversationDomainService->getConversationByIdWithoutCheck($conversationId);
+        // delightful-api 二期要求传入用户 id
+        $agentConversationEntity = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($conversationId);
         if (! $agentConversationEntity) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
@@ -312,7 +312,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 $start = microtime(true);
                 $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $noRepeatSearchContexts, $associateQuestion['title']);
                 $associateQuestionsQueryVo->setMessageHistory(new MessageHistory());
-                $associateSubQuestions = $this->magicLLMDomainService->getRelatedQuestions($associateQuestionsQueryVo, 2, 3);
+                $associateSubQuestions = $this->delightfulLLMDomainService->getRelatedQuestions($associateQuestionsQueryVo, 2, 3);
                 // todo 由于这里是对所有维度汇总后再精读，因此丢失了每个维度的数量，只能随机生成。
                 // 等待前端调整渲染 ui
                 $pageCount = random_int(30, 60);
@@ -378,9 +378,9 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             ->setOrganizationCode($dto->getOrganizationCode())
             ->setModel($modelInterface);
         // 根据用户的上下文，拆解子问题。需要理解用户想问什么，再去拆搜索关键词。
-        $searchKeywords = $this->magicLLMDomainService->generateSearchKeywordsByUserInput($dto, $modelInterface);
+        $searchKeywords = $this->delightfulLLMDomainService->generateSearchKeywordsByUserInput($dto, $modelInterface);
         $queryVo->setSearchKeywords($searchKeywords);
-        $searchResult = $this->magicLLMDomainService->getSearchResults($queryVo);
+        $searchResult = $this->delightfulLLMDomainService->getSearchResults($queryVo);
         $this->logger->info(sprintf(
             'getSearchResults searchUserQuestion 虚空拆解关键词并搜索用户问题 结束计时，耗时 %s 秒',
             microtime(true) - $start
@@ -422,7 +422,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         $start = microtime(true);
         $relatedQuestions = [];
         try {
-            $relatedQuestions = $this->magicLLMDomainService->getRelatedQuestions($queryVo, 3, 5);
+            $relatedQuestions = $this->delightfulLLMDomainService->getRelatedQuestions($queryVo, 3, 5);
         } catch (Throwable $exception) {
             $errMsg = [
                 'function' => 'generateAndSendAssociateQuestionsError',
@@ -461,7 +461,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             ->setSearchKeywords($searchKeywords)
             ->setSearchEngine($dto->getSearchEngine())
             ->setLanguage($dto->getLanguage());
-        $allSearchContexts = $this->magicLLMDomainService->getSearchResults($queryVo)['search'] ?? [];
+        $allSearchContexts = $this->delightfulLLMDomainService->getSearchResults($queryVo)['search'] ?? [];
         // 过滤重复内容
         $noRepeatSearchContexts = [];
         if (! empty($allSearchContexts)) {
@@ -478,7 +478,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 ->setUserId($dto->getUserId())
                 ->setOrganizationCode($dto->getOrganizationCode());
             // 与搜索关键词关联性最高且不重复的搜索结果
-            $noRepeatSearchContexts = $this->magicLLMDomainService->filterSearchContexts($queryVo);
+            $noRepeatSearchContexts = $this->delightfulLLMDomainService->filterSearchContexts($queryVo);
             $costMircoTime = TimeUtil::getMillisecondDiffFromNow($start);
             $this->logger->info(sprintf(
                 'mindSearch getSearchResults filterSearchContexts 清洗搜索结果中的重复项 清洗前：%s 清洗后:%s 结束计时 累计耗时 %s 秒',
@@ -606,9 +606,9 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId());
         }
         $queryVo->setModel($modelInterface);
-        $summarizeCompletionResponse = $this->magicLLMDomainService->summarize($queryVo);
+        $summarizeCompletionResponse = $this->delightfulLLMDomainService->summarize($queryVo);
         // 流式响应
-        $senderConversationEntity = $this->magicConversationDomainService->getConversationByIdWithoutCheck($dto->getConversationId());
+        $senderConversationEntity = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($dto->getConversationId());
         if ($senderConversationEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
@@ -638,13 +638,13 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             if ($index === 0) {
                 $streamOptions->setStatus(StreamMessageStatus::Start);
                 // 创建一个 seq 用于渲染占位
-                $this->magicChatDomainService->createAndSendStreamStartSequence(
+                $this->delightfulChatDomainService->createAndSendStreamStartSequence(
                     (new CreateStreamSeqDTO())->setTopicId($dto->getTopicId())->setAppMessageId($dto->getAppMessageId()),
                     $messageContent,
                     $senderConversationEntity
                 );
                 // 推送一次 parent_id/id/type 数据，用于更新流式缓存，避免最终落库时，parent_id/id/type 数据丢失
-                $this->magicChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [
+                $this->delightfulChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [
                     'parent_id' => '0',
                     'id' => $summaryMessageId,
                     'type' => AggregateAISearchCardResponseType::LLM_RESPONSE,
@@ -655,12 +655,12 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             // 流式内容
             if ($assistantMessage->hasReasoningContent()) {
                 // 发送思考内容
-                $this->magicChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [
+                $this->delightfulChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [
                     'reasoning_content' => $assistantMessage->getReasoningContent(),
                 ]);
             } else {
                 // 总结内容
-                $this->magicChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [
+                $this->delightfulChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [
                     'llm_response' => $assistantMessage->getContent(),
                 ]);
                 // 累加流式内容，用作最后的返回
@@ -668,7 +668,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             }
         }
         // 发送结束
-        $this->magicChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [], StreamMessageStatus::Completed);
+        $this->delightfulChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [], StreamMessageStatus::Completed);
         $this->logger->info(sprintf('getSearchResults 生成总结，结束计时，耗时：%s 秒', microtime(true) - $start));
         $summaryDTO = new DelightfulAggregateSearchSummaryDTO();
         $summaryDTO->setLlmResponse($summarizeStreamResponse);
@@ -729,7 +729,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     public function generateAndSendPPT(DelightfulChatAggregateSearchReqDTO $dto, AISearchCommonQueryVo $queryVo, string $mindMap): void
     {
         $start = microtime(true);
-        $ppt = $this->magicLLMDomainService->generatePPTFromMindMap($queryVo, $mindMap);
+        $ppt = $this->delightfulLLMDomainService->generatePPTFromMindMap($queryVo, $mindMap);
         $this->logger->info(sprintf('getSearchResults 生成PPT，结束计时，耗时: %s 秒', microtime(true) - $start));
         $messageId = (string) $this->idGenerator->generate();
         $messageType = AggregateAISearchCardResponseType::PPT;
@@ -750,7 +750,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     public function generateAndSendMindMap(DelightfulChatAggregateSearchReqDTO $dto, AISearchCommonQueryVo $queryVo): string
     {
         $start = microtime(true);
-        $mindMap = $this->magicLLMDomainService->generateMindMapFromMessage($queryVo);
+        $mindMap = $this->delightfulLLMDomainService->generateMindMapFromMessage($queryVo);
         $this->logger->info(sprintf('getSearchResults 生成思维导图，结束计时，耗时: %s 秒', microtime(true) - $start));
         $messageId = (string) $this->idGenerator->generate();
         $messageType = AggregateAISearchCardResponseType::MIND_MAP;
@@ -773,7 +773,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     public function generateAndSendEvent(DelightfulChatAggregateSearchReqDTO $dto, AISearchCommonQueryVo $queryVo, array $noRepeatSearchContexts): void
     {
         $start = microtime(true);
-        $event = $this->magicLLMDomainService->generateEventFromMessage($queryVo, $noRepeatSearchContexts);
+        $event = $this->delightfulLLMDomainService->generateEventFromMessage($queryVo, $noRepeatSearchContexts);
         $this->logger->info(sprintf('getSearchResults 生成事件，结束计时，耗时: %s 秒', microtime(true) - $start));
         $messageId = (string) $this->idGenerator->generate();
         $messageType = AggregateAISearchCardResponseType::EVENT;
@@ -806,12 +806,12 @@ class DelightfulChatAISearchAppService extends AbstractAppService
 
     public function getOrCreateConversation(string $senderUserId, string $receiveId, ?ConversationType $receiverType = null): DelightfulConversationEntity
     {
-        return $this->magicConversationDomainService->getOrCreateConversation($senderUserId, $receiveId, $receiverType);
+        return $this->delightfulConversationDomainService->getOrCreateConversation($senderUserId, $receiveId, $receiverType);
     }
 
     public function getUserInfo(string $senderUserId): ?DelightfulUserEntity
     {
-        return $this->magicUserDomainService->getUserById($senderUserId);
+        return $this->delightfulUserDomainService->getUserById($senderUserId);
     }
 
     /**
@@ -1020,9 +1020,9 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     /**
      * 获取 im中指定会话下某个话题的历史消息，作为 llm 的历史消息.
      */
-    private function getDelightfulChatMessages(string $magicChatConversationId, string $topicId): array
+    private function getDelightfulChatMessages(string $delightfulChatConversationId, string $topicId): array
     {
-        $rawHistoryMessages = $this->magicChatDomainService->getLLMContentForAgent($magicChatConversationId, $topicId);
+        $rawHistoryMessages = $this->delightfulChatDomainService->getLLMContentForAgent($delightfulChatConversationId, $topicId);
         // 取最后指定条数的对话记录
         return array_slice($rawHistoryMessages, -10);
     }

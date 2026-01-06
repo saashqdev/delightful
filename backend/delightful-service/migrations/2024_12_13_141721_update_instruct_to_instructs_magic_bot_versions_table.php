@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_bot_versions', function (Blueprint $table) {
+        Schema::table('delightful_bot_versions', function (Blueprint $table) {
             // 先将原有的 instruct 字段重命名为 instructs
             $table->renameColumn('instruct', 'instructs');
         });
@@ -25,7 +25,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_bot_versions', function (Blueprint $table) {
+        Schema::table('delightful_bot_versions', function (Blueprint $table) {
             // 回滚操作：将 instructs 改回 instruct
             $table->renameColumn('instructs', 'instruct');
         });

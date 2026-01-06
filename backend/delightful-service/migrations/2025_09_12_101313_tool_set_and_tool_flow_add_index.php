@@ -15,15 +15,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        DB::statement('CREATE INDEX idx_magic_flows_query_optimal ON magic_flows (organization_code(50), type, enabled, tool_set_id(40), updated_at)');
+        DB::statement('CREATE INDEX idx_delightful_flows_query_optimal ON delightful_flows (organization_code(50), type, enabled, tool_set_id(40), updated_at)');
 
-        // Add optimal index for magic_flow_tool_sets table
-        Schema::table('magic_flow_tool_sets', function (Blueprint $table) {
+        // Add optimal index for delightful_flow_tool_sets table
+        Schema::table('delightful_flow_tool_sets', function (Blueprint $table) {
             $table->index([
                 'organization_code',
                 'enabled',
                 'updated_at',
-            ], 'idx_magic_flow_tool_sets_query_optimal');
+            ], 'idx_delightful_flow_tool_sets_query_optimal');
         });
     }
 
@@ -32,12 +32,12 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // Remove optimal index for magic_flows table
-        DB::statement('DROP INDEX idx_magic_flows_query_optimal ON magic_flows');
+        // Remove optimal index for delightful_flows table
+        DB::statement('DROP INDEX idx_delightful_flows_query_optimal ON delightful_flows');
 
-        // Remove optimal index for magic_flow_tool_sets table
-        Schema::table('magic_flow_tool_sets', function (Blueprint $table) {
-            $table->dropIndex('idx_magic_flow_tool_sets_query_optimal');
+        // Remove optimal index for delightful_flow_tool_sets table
+        Schema::table('delightful_flow_tool_sets', function (Blueprint $table) {
+            $table->dropIndex('idx_delightful_flow_tool_sets_query_optimal');
         });
     }
 };

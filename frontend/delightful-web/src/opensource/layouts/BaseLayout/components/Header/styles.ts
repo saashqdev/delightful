@@ -23,14 +23,14 @@ export const useStyles = createStyles(({ token }) => {
 		appWrapper: {
 			paddingLeft: 68,
 		},
-		magic: {
+		delightful: {
 			width: "auto",
 			height: 28,
 			userSelect: "none",
 			pointerEvents: "none",
 		},
 		button: {
-			backgroundColor: token.magicColorUsages.fill[1],
+			backgroundColor: token.delightfulColorUsages.fill[1],
 		},
 		search: {
 			height: 30,

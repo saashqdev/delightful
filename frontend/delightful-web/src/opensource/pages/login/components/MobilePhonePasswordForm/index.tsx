@@ -27,7 +27,7 @@ interface PasswordFormProps extends LoginPanelProps<Login.MobilePhonePasswordFor
 export default function MobilePhonePasswordForm(props: PasswordFormProps) {
 	const { form, onSubmit } = props
 	const { t } = useTranslation("login")
-	const { magicColorUsages } = useTheme()
+	const { delightfulColorUsages } = useTheme()
 
 	const { styles } = useStyles()
 
@@ -77,7 +77,7 @@ export default function MobilePhonePasswordForm(props: PasswordFormProps) {
 								<DelightfulIcon
 									component={visible ? IconEye : IconEyeOff}
 									size={16}
-									color={magicColorUsages.text[2]}
+									color={delightfulColorUsages.text[2]}
 								/>
 							)}
 							onKeyDown={onKeyDown}

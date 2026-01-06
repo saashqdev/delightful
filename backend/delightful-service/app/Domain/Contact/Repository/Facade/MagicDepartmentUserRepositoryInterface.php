@@ -34,9 +34,9 @@ interface DelightfulDepartmentUserRepositoryInterface
 
     public function createDepartmentUsers(array $createDepartmentUserDTOs): bool;
 
-    public function updateDepartmentUser(string $magicDepartmentUserPrimaryId, array $updateData): int;
+    public function updateDepartmentUser(string $delightfulDepartmentUserPrimaryId, array $updateData): int;
 
-    public function deleteDepartmentUsersByDelightfulIds(array $magicIds, string $departmentId, string $magicOrganizationCode): int;
+    public function deleteDepartmentUsersByDelightfulIds(array $delightfulIds, string $departmentId, string $delightfulOrganizationCode): int;
 
-    public function searchDepartmentUsersByJobTitle(string $keyword, string $magicOrganizationCode): array;
+    public function searchDepartmentUsersByJobTitle(string $keyword, string $delightfulOrganizationCode): array;
 }

@@ -12,7 +12,7 @@ export const EditWrapper = styled.div<{ disabled?: boolean; position: any; mode:
 	border: 1px solid transparent;
     display: flex;
 
-	.magic-cascader-dropdown {
+	.delightful-cascader-dropdown {
 		left: ${p => p.mode === ExpressionMode.TextArea ? `${p.position.left}px!important` : `${p.position.left}px`}; 
 		top: ${p => p.mode === ExpressionMode.TextArea ? `${Math.min(p.position.top, p.maxHeight)}px!important` : `${p.position.top}px`};
 		overflow: ${p => p.renderConfig?.type === LabelTypeMap.LabelDateTime ? 'visible': 'hidden'};
@@ -43,7 +43,7 @@ export const EditWrapper = styled.div<{ disabled?: boolean; position: any; mode:
 			}
 		}
 	}
-	.magic-tree-select {
+	.delightful-tree-select {
 		width: 100%;
 		position: absolute;
 		top: 0;
@@ -53,8 +53,8 @@ export const EditWrapper = styled.div<{ disabled?: boolean; position: any; mode:
 `
 
 export const TreeSelectWrapper = styled.div<{ height: number }>`
-	.magic-tree-select {
-		.magic-select-selector {
+	.delightful-tree-select {
+		.delightful-select-selector {
 			height: ${(p) => p.height}px;
 		}
 	}
@@ -95,7 +95,7 @@ export const InputExpressionStyle = styled.div<{
     maxHeight: string
 }>`
 	position: relative;
-    .magic-mobile-cascader {
+    .delightful-mobile-cascader {
         flex: 1;
 		position: relative;
 		display: flex;
@@ -131,7 +131,7 @@ export const InputExpressionStyle = styled.div<{
             overflow: auto;
             top: ${p => p.mode === ExpressionMode.Common ? `100%!important` : 'auto'};
             z-index: 1;
-            .magic-cascader-dropdown {
+            .delightful-cascader-dropdown {
                 left: ${p => p.mode === ExpressionMode.Common && p.showSwitch ? `90px!important` : p.mode === ExpressionMode.Common && !p.showSwitch ? "0!important" : 'auto'};
 				top: ${p => p.mode === ExpressionMode.Common ? `0!important` : 'auto'};
             }

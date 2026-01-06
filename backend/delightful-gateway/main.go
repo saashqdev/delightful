@@ -69,8 +69,8 @@ var (
 type JWTClaims struct {
 	jwt.RegisteredClaims
 	ContainerID           string `json:"container_id"`
-	DelightfulUserID           string `json:"magic_user_id,omitempty"`
-	DelightfulOrganizationCode string `json:"magic_organization_code,omitempty"`
+	DelightfulUserID           string `json:"delightful_user_id,omitempty"`
+	DelightfulOrganizationCode string `json:"delightful_organization_code,omitempty"`
 	// Add token version for revocation
 	TokenVersion int64 `json:"token_version"`
 	// Add creation time
@@ -374,15 +374,15 @@ func servicesHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		containerID := r.Header.Get("X-Container-ID")
-		magicUserID := r.Header.Get("magic-user-id")
-		magicOrganizationCode := r.Header.Get("magic-organization-code")
+		delightfulUserID := r.Header.Get("delightful-user-id")
+		delightfulOrganizationCode := r.Header.Get("delightful-organization-code")
 
-		// If X-Container-ID is empty but magic-user-id exists, use magic-user-id
-		if containerID == "" && magicUserID != "" {
-			containerID = magicUserID
+		// If X-Container-ID is empty but delightful-user-id exists, use delightful-user-id
+		if containerID == "" && delightfulUserID != "" {
+			containerID = delightfulUserID
 		}
 
-		logger.Printf("Services list request from container: %s, user: %s, organization: %s", containerID, magicUserID, magicOrganizationCode)
+		logger.Printf("Services list request from container: %s, user: %s, organization: %s", containerID, delightfulUserID, delightfulOrganizationCode)
 
 		// Get available services list
 		services := []ServiceInfo{}
@@ -471,21 +471,21 @@ func authHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Get user ID
 	userID := r.Header.Get("X-USER-ID")
-	magicUserID := r.Header.Get("magic-user-id")
-	magicOrganizationCode := r.Header.Get("magic-organization-code")
-	if userID == "" && magicUserID != "" {
-		userID = magicUserID
+	delightfulUserID := r.Header.Get("delightful-user-id")
+	delightfulOrganizationCode := r.Header.Get("delightful-organization-code")
+	if userID == "" && delightfulUserID != "" {
+		userID = delightfulUserID
 	}
 
 	if userID == "" {
 		userID = "default-user"
 	}
 
-	if magicOrganizationCode == "" {
-		magicOrganizationCode = ""
+	if delightfulOrganizationCode == "" {
+		delightfulOrganizationCode = ""
 	}
 
-	logger.Printf("Authentication request from local user: %s, organization: %s", userID, magicOrganizationCode)
+	logger.Printf("Authentication request from local user: %s, organization: %s", userID, delightfulOrganizationCode)
 
 	// Check key rotation
 	checkKeyRotation()
@@ -509,8 +509,8 @@ func authHandler(w http.ResponseWriter, r *http.Request) {
 			NotBefore: jwt.NewNumericDate(time.Now()),                          // Effective immediately
 		},
 		ContainerID:           userID, // Keep field name unchanged, but store user ID
-		DelightfulUserID:           magicUserID,
-		DelightfulOrganizationCode: magicOrganizationCode,
+		DelightfulUserID:           delightfulUserID,
+		DelightfulOrganizationCode: delightfulOrganizationCode,
 		TokenVersion:          currentVersion,
 		CreatedAt:             time.Now().Unix(),
 		KeyID:                 jwtSecretID,
@@ -650,8 +650,8 @@ func withAuth(next http.HandlerFunc) http.HandlerFunc {
 
 		// Store token information in request context
 		r.Header.Set("X-User-Id", claims.ContainerID)
-		r.Header.Set("magic-user-id", claims.DelightfulUserID)
-		r.Header.Set("magic-organization-code", claims.DelightfulOrganizationCode)
+		r.Header.Set("delightful-user-id", claims.DelightfulUserID)
+		r.Header.Set("delightful-organization-code", claims.DelightfulOrganizationCode)
 
 		// Store JWT claims in request context for subsequent handlers
 		ctx := context.WithValue(r.Context(), "jwt_claims", claims)
@@ -675,15 +675,15 @@ func envHandler(w http.ResponseWriter, r *http.Request) {
 		// Get requested environment variables
 		varsParam := r.URL.Query().Get("vars")
 		userID := r.Header.Get("X-USER-ID")
-		magicUserID := r.Header.Get("magic-user-id")
-		magicOrganizationCode := r.Header.Get("magic-organization-code")
+		delightfulUserID := r.Header.Get("delightful-user-id")
+		delightfulOrganizationCode := r.Header.Get("delightful-organization-code")
 
-		// If X-USER-ID is empty but magic-user-id exists, use magic-user-id
-		if userID == "" && magicUserID != "" {
-			userID = magicUserID
+		// If X-USER-ID is empty but delightful-user-id exists, use delightful-user-id
+		if userID == "" && delightfulUserID != "" {
+			userID = delightfulUserID
 		}
 
-		logger.Printf("Environment variable request from user %s, organization: %s, variables: %s", userID, magicOrganizationCode, varsParam)
+		logger.Printf("Environment variable request from user %s, organization: %s, variables: %s", userID, delightfulOrganizationCode, varsParam)
 
 		// No longer return actual environment variable values, but return list of available environment variable names
 		allowedVarNames := getAvailableEnvVarNames()
@@ -963,41 +963,41 @@ func proxyHandler(w http.ResponseWriter, r *http.Request) {
 	handler := withAuth(func(w http.ResponseWriter, r *http.Request) {
 		// Get user info from JWT claims
 		userID := r.Header.Get("X-USER-ID")
-		// Get magic-task-id and magic-topic-id from request headers
-		magicTaskID := r.Header.Get("magic-task-id")
-		magicTopicID := r.Header.Get("magic-topic-id")
-		magicChatTopicID := r.Header.Get("magic-chat-topic-id")
-		magicLanguage := r.Header.Get("magic-language")
+		// Get delightful-task-id and delightful-topic-id from request headers
+		delightfulTaskID := r.Header.Get("delightful-task-id")
+		delightfulTopicID := r.Header.Get("delightful-topic-id")
+		delightfulChatTopicID := r.Header.Get("delightful-chat-topic-id")
+		delightfulLanguage := r.Header.Get("delightful-language")
 
 		// Prioritize getting from original request headers to avoid JWT override
-		magicUserID := r.Header.Get("magic-user-id")
-		magicOrganizationCode := r.Header.Get("magic-organization-code")
+		delightfulUserID := r.Header.Get("delightful-user-id")
+		delightfulOrganizationCode := r.Header.Get("delightful-organization-code")
 
 		// Get JWT claims from request context as fallback
 		if claims, ok := r.Context().Value("jwt_claims").(*JWTClaims); ok {
 			// Only use JWT values when original request headers don't have values
-			if magicUserID == "" {
-				magicUserID = claims.DelightfulUserID
+			if delightfulUserID == "" {
+				delightfulUserID = claims.DelightfulUserID
 			}
-			if magicOrganizationCode == "" {
-				magicOrganizationCode = claims.DelightfulOrganizationCode
+			if delightfulOrganizationCode == "" {
+				delightfulOrganizationCode = claims.DelightfulOrganizationCode
 			}
 		}
 
 		if userID != "" {
-			magicUserID = userID
+			delightfulUserID = userID
 		}
 
 		if debugMode {
-			logger.Printf("Original request header magic-user-id: %s", r.Header.Get("magic-user-id"))
-			logger.Printf("Original request header magic-organization-code: %s", r.Header.Get("magic-organization-code"))
-			logger.Printf("Final magicUserID used: %s", magicUserID)
-			logger.Printf("Final magicOrganizationCode used: %s", magicOrganizationCode)
+			logger.Printf("Original request header delightful-user-id: %s", r.Header.Get("delightful-user-id"))
+			logger.Printf("Original request header delightful-organization-code: %s", r.Header.Get("delightful-organization-code"))
+			logger.Printf("Final delightfulUserID used: %s", delightfulUserID)
+			logger.Printf("Final delightfulOrganizationCode used: %s", delightfulOrganizationCode)
 		}
 
 		logger.Printf("Proxy request from user: %s, organization: %s, path: %s",
 			sanitizeLogString(userID),
-			sanitizeLogString(magicOrganizationCode),
+			sanitizeLogString(delightfulOrganizationCode),
 			sanitizeLogString(path))
 
 		// Log full request details in debug mode
@@ -1317,51 +1317,51 @@ func proxyHandler(w http.ResponseWriter, r *http.Request) {
 		// Set request headers
 		proxyReq.Header = proxyHeaders
 
-		// Pass through magic-user-id and magic-organization-code to the target API
+		// Pass through delightful-user-id and delightful-organization-code to the target API
 		// Only set from JWT when the original headers do not include values
-		if proxyReq.Header.Get("magic-user-id") == "" && magicUserID != "" {
-			proxyReq.Header.Set("magic-user-id", magicUserID)
+		if proxyReq.Header.Get("delightful-user-id") == "" && delightfulUserID != "" {
+			proxyReq.Header.Set("delightful-user-id", delightfulUserID)
 			if debugMode {
-				logger.Printf("Set magic-user-id from JWT: %s", magicUserID)
+				logger.Printf("Set delightful-user-id from JWT: %s", delightfulUserID)
 			}
-		} else if debugMode && proxyReq.Header.Get("magic-user-id") != "" {
-			logger.Printf("Preserved original magic-user-id: %s", proxyReq.Header.Get("magic-user-id"))
+		} else if debugMode && proxyReq.Header.Get("delightful-user-id") != "" {
+			logger.Printf("Preserved original delightful-user-id: %s", proxyReq.Header.Get("delightful-user-id"))
 		}
 
-		if proxyReq.Header.Get("magic-organization-code") == "" && magicOrganizationCode != "" {
-			proxyReq.Header.Set("magic-organization-code", magicOrganizationCode)
+		if proxyReq.Header.Get("delightful-organization-code") == "" && delightfulOrganizationCode != "" {
+			proxyReq.Header.Set("delightful-organization-code", delightfulOrganizationCode)
 			if debugMode {
-				logger.Printf("Set magic-organization-code from JWT: %s", magicOrganizationCode)
+				logger.Printf("Set delightful-organization-code from JWT: %s", delightfulOrganizationCode)
 			}
-		} else if debugMode && proxyReq.Header.Get("magic-organization-code") != "" {
-			logger.Printf("Preserved original magic-organization-code: %s", proxyReq.Header.Get("magic-organization-code"))
+		} else if debugMode && proxyReq.Header.Get("delightful-organization-code") != "" {
+			logger.Printf("Preserved original delightful-organization-code: %s", proxyReq.Header.Get("delightful-organization-code"))
 		}
 
-		if magicTaskID != "" {
-			proxyReq.Header.Set("magic-task-id", magicTaskID)
+		if delightfulTaskID != "" {
+			proxyReq.Header.Set("delightful-task-id", delightfulTaskID)
 			if debugMode {
-				logger.Printf("Forward magic-task-id: %s", magicTaskID)
-			}
-		}
-
-		if magicTopicID != "" {
-			proxyReq.Header.Set("magic-topic-id", magicTopicID)
-			if debugMode {
-				logger.Printf("Forward magic-topic-id: %s", magicTopicID)
+				logger.Printf("Forward delightful-task-id: %s", delightfulTaskID)
 			}
 		}
 
-		if magicChatTopicID != "" {
-			proxyReq.Header.Set("magic-chat-topic-id", magicChatTopicID)
+		if delightfulTopicID != "" {
+			proxyReq.Header.Set("delightful-topic-id", delightfulTopicID)
 			if debugMode {
-				logger.Printf("Forward magic-chat-topic-id: %s", magicChatTopicID)
+				logger.Printf("Forward delightful-topic-id: %s", delightfulTopicID)
 			}
 		}
 
-		if magicLanguage != "" {
-			proxyReq.Header.Set("magic-language", magicLanguage)
+		if delightfulChatTopicID != "" {
+			proxyReq.Header.Set("delightful-chat-topic-id", delightfulChatTopicID)
 			if debugMode {
-				logger.Printf("Forward magic-language: %s", magicLanguage)
+				logger.Printf("Forward delightful-chat-topic-id: %s", delightfulChatTopicID)
+			}
+		}
+
+		if delightfulLanguage != "" {
+			proxyReq.Header.Set("delightful-language", delightfulLanguage)
+			if debugMode {
+				logger.Printf("Forward delightful-language: %s", delightfulLanguage)
 			}
 		}
 

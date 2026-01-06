@@ -96,10 +96,10 @@ class DelightfulAgentDomainService
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED);
         }
         Db::transaction(function () use ($id, $organizationCode) {
-            $magicAgentEntity = $this->agentRepository->getAgentById($id);
+            $delightfulAgentEntity = $this->agentRepository->getAgentById($id);
             $this->agentRepository->deleteAgentById($id, $organizationCode);
             $this->agentVersionRepository->deleteByAgentId($id, $organizationCode);
-            AsyncEventUtil::dispatch(new DelightfulAgentDeletedEvent($magicAgentEntity));
+            AsyncEventUtil::dispatch(new DelightfulAgentDeletedEvent($delightfulAgentEntity));
         });
         return true;
     }
@@ -120,9 +120,9 @@ class DelightfulAgentDomainService
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_status_only_enable_or_disable');
         }
 
-        $magicAgentEntity = new DelightfulAgentEntity();
-        $magicAgentEntity->setId($agentId);
-        $magicAgentEntity->setStatus($status);
+        $delightfulAgentEntity = new DelightfulAgentEntity();
+        $delightfulAgentEntity->setId($agentId);
+        $delightfulAgentEntity->setStatus($status);
         $this->agentRepository->updateStatus($agentId, $status);
     }
 

@@ -35,7 +35,7 @@ class DelightfulFlowExecuteLogModel extends AbstractModel
 
     public bool $timestamps = false;
 
-    protected ?string $table = 'magic_flow_execute_logs';
+    protected ?string $table = 'delightful_flow_execute_logs';
 
     protected array $fillable = [
         'id', 'organization_code', 'execute_data_id', 'conversation_id', 'flow_code', 'flow_version_code', 'status', 'ext_params', 'result', 'created_at', 'retry_count', 'flow_type', 'parent_flow_code', 'operator_id', 'level', 'execution_type',

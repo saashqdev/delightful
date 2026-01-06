@@ -16,24 +16,24 @@ use Hyperf\DbConnection\Annotation\Transactional;
 readonly class DelightfulBotThirdPlatformChatDomainService
 {
     public function __construct(
-        private DelightfulBotThirdPlatformChatRepositoryInterface $magicBotThirdPlatformChatRepository
+        private DelightfulBotThirdPlatformChatRepositoryInterface $delightfulBotThirdPlatformChatRepository
     ) {
     }
 
     public function getByKey(string $key): ?DelightfulBotThirdPlatformChatEntity
     {
-        return $this->magicBotThirdPlatformChatRepository->getByKey($key);
+        return $this->delightfulBotThirdPlatformChatRepository->getByKey($key);
     }
 
     public function getById(int $id): ?DelightfulBotThirdPlatformChatEntity
     {
-        return $this->magicBotThirdPlatformChatRepository->getById($id);
+        return $this->delightfulBotThirdPlatformChatRepository->getById($id);
     }
 
     public function save(DelightfulBotThirdPlatformChatEntity $entity): DelightfulBotThirdPlatformChatEntity
     {
         $entity->prepareForSaving();
-        return $this->magicBotThirdPlatformChatRepository->save($entity);
+        return $this->delightfulBotThirdPlatformChatRepository->save($entity);
     }
 
     /**
@@ -41,12 +41,12 @@ readonly class DelightfulBotThirdPlatformChatDomainService
      */
     public function queries(DelightfulBotThirdPlatformChatQuery $query, Page $page): array
     {
-        return $this->magicBotThirdPlatformChatRepository->queries($query, $page);
+        return $this->delightfulBotThirdPlatformChatRepository->queries($query, $page);
     }
 
     public function destroy(DelightfulBotThirdPlatformChatEntity $entity): void
     {
-        $this->magicBotThirdPlatformChatRepository->destroy($entity);
+        $this->delightfulBotThirdPlatformChatRepository->destroy($entity);
     }
 
     /**
@@ -62,7 +62,7 @@ readonly class DelightfulBotThirdPlatformChatDomainService
         $query = new DelightfulBotThirdPlatformChatQuery();
         $query->setBotId($botId);
         $query->setKeyBy('key');
-        $historyList = $this->magicBotThirdPlatformChatRepository->queries($query, Page::createNoPage())['list'];
+        $historyList = $this->delightfulBotThirdPlatformChatRepository->queries($query, Page::createNoPage())['list'];
 
         foreach ($thirdPlatformList as $thirdPlatformChatEntity) {
             $thirdPlatformChatEntity->setBotId($botId);

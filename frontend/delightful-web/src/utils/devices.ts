@@ -1,7 +1,7 @@
 import UAParser from "ua-parser-js"
 import CryptoJS from "@/utils/crypto"
 import type { i18n } from "i18next"
-import { magic } from "@/enhance/magicElectron"
+import { delightful } from "@/enhance/delightfulElectron"
 
 /** * Whether macOS system (including iPhone) * */
 export const isMac = (() => {
@@ -51,8 +51,8 @@ export async function getDeviceInfo(i18n: i18n) {
 	// Build browser info
 	const browserInfo = `${browser.name} ${browser.version}`
 
-	if (magic?.os?.getSystemInfo) {
-		const systemInfo = await magic?.os?.getSystemInfo?.()
+	if (delightful?.os?.getSystemInfo) {
+		const systemInfo = await delightful?.os?.getSystemInfo?.()
 		return {
 			id: systemInfo?.mac,
 			name: systemInfo?.systemVersion,

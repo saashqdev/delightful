@@ -16,7 +16,7 @@ class CreateDelightfulApiModelConfigTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('magic_api_model_configs', function (Blueprint $table) {
+        Schema::create('delightful_api_model_configs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('model')->comment('模型');
             $table->unsignedDecimal('total_amount', 40, 6)->comment('总额度');
@@ -36,6 +36,6 @@ class CreateDelightfulApiModelConfigTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_api_model_config');
+        Schema::dropIfExists('delightful_api_model_config');
     }
 }

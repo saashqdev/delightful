@@ -1,5 +1,5 @@
 # Use Playwright base image
-FROM ghcr.io/dtyq/super-magic-python-base-image:latest
+FROM ghcr.io/dtyq/super-delightful-python-base-image:latest
 
 # Set working directory
 WORKDIR /app

@@ -72,11 +72,11 @@ function check_config_dir {
 
 # 检查并创建外部网络
 function ensure_network_exists {
-  if ! docker network ls | grep -q magic-sandbox-network; then
-    echo -e "${YELLOW}创建外部网络 magic-sandbox-network...${NC}"
-    docker network create magic-sandbox-network
+  if ! docker network ls | grep -q delightful-sandbox-network; then
+    echo -e "${YELLOW}创建外部网络 delightful-sandbox-network...${NC}"
+    docker network create delightful-sandbox-network
   else
-    echo -e "${GREEN}外部网络 magic-sandbox-network 已存在${NC}"
+    echo -e "${GREEN}外部网络 delightful-sandbox-network 已存在${NC}"
   fi
 }
 
@@ -182,7 +182,7 @@ function start_env {
   else
     echo -e "${YELLOW}创建Redis容器...${NC}"
     # 直接启动Redis容器，不通过docker-compose
-    docker run -d --name api-gateway-redis --network magic-sandbox-network -p ${redis_port}:6379 -v $(pwd)/redis_data:/data public.ecr.aws/docker/library/redis:alpine redis-server --appendonly yes
+    docker run -d --name api-gateway-redis --network delightful-sandbox-network -p ${redis_port}:6379 -v $(pwd)/redis_data:/data public.ecr.aws/docker/library/redis:alpine redis-server --appendonly yes
   fi
 
   # 获取Redis容器的IP地址
@@ -192,18 +192,18 @@ function start_env {
   # 创建临时的docker-compose重写文件
   cat > docker-compose.override.yml <<EOF
 services:
-  magic-gateway:
+  delightful-gateway:
     environment:
       - REDIS_HOST=${redis_ip}
       - REDIS_PORT=6379
       - REDIS_DB=${redis_db}
   # 不再通过docker-compose管理redis容器
-  magic-redis:
+  delightful-redis:
     profiles: ["disabled"]
 EOF
 
   ENV=$env PORT=$port DELIGHTFUL_GATEWAY_PORT=$port DELIGHTFUL_GATEWAY_API_KEY=$api_key JWT_SECRET=$jwt_secret DELIGHTFUL_GATEWAY_DEBUG=$debug \
-    docker compose -p magic-gateway-$env up -d --build
+    docker compose -p delightful-gateway-$env up -d --build
 
   # 移除临时文件
   rm docker-compose.override.yml
@@ -216,7 +216,7 @@ EOF
 function stop_env {
   local env=$1
   echo -e "${YELLOW}正在停止 $env 环境...${NC}"
-  docker compose -p magic-gateway-$env down
+  docker compose -p delightful-gateway-$env down
 
   # 如果Redis容器已停止，修复数据目录权限
   if docker ps -a | grep -q "api-gateway-redis" && ! docker ps | grep -q "api-gateway-redis"; then
@@ -231,14 +231,14 @@ function stop_env {
 function view_logs {
   local env=$1
   echo -e "${GREEN}正在查看 $env 环境日志...${NC}"
-  docker compose -p magic-gateway-$env logs -f
+  docker compose -p delightful-gateway-$env logs -f
 }
 
 # 查看指定环境状态
 function check_status {
   local env=$1
   echo -e "${GREEN}$env 环境状态:${NC}"
-  docker compose -p magic-gateway-$env ps
+  docker compose -p delightful-gateway-$env ps
 }
 
 # 处理操作

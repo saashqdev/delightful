@@ -23,14 +23,14 @@ const DropPlus = observer((props: DropPlusProp): ReactElement => {
 	const { relativeAppendPosition } = useGlobal()
 
 	return (
-		<Tooltip placement="top" title={i18next.t("jsonSchema.addField", { ns: "magicFlow" })}>
+		<Tooltip placement="top" title={i18next.t("jsonSchema.addField", { ns: "delightfulFlow" })}>
 			<Dropdown
 				menu={{
 					items: [
 						{
 							label: (
 								<span className="add-sibling">
-									{i18next.t("jsonSchema.addSiblingField", { ns: "magicFlow" })}
+									{i18next.t("jsonSchema.addSiblingField", { ns: "delightfulFlow" })}
 								</span>
 							),
 							key: "sibling_node",
@@ -51,7 +51,7 @@ const DropPlus = observer((props: DropPlusProp): ReactElement => {
 						{
 							label: (
 								<span className="add-child">
-									{i18next.t("jsonSchema.addSubField", { ns: "magicFlow" })}
+									{i18next.t("jsonSchema.addSubField", { ns: "delightfulFlow" })}
 								</span>
 							),
 							key: "child_node",

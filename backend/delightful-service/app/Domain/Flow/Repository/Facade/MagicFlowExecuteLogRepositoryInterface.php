@@ -13,9 +13,9 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 interface DelightfulFlowExecuteLogRepositoryInterface
 {
-    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): DelightfulFlowExecuteLogEntity;
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $delightfulFlowExecuteLogEntity): DelightfulFlowExecuteLogEntity;
 
-    public function updateStatus(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void;
+    public function updateStatus(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $delightfulFlowExecuteLogEntity): void;
 
     /**
      * @return array<DelightfulFlowExecuteLogEntity>
@@ -24,5 +24,5 @@ interface DelightfulFlowExecuteLogRepositoryInterface
 
     public function getByExecuteId(FlowDataIsolation $dataIsolation, string $executeId): ?DelightfulFlowExecuteLogEntity;
 
-    public function incrementRetryCount(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void;
+    public function incrementRetryCount(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $delightfulFlowExecuteLogEntity): void;
 }

@@ -11,7 +11,7 @@ const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) => {
 		modal: css`
 			.${prefixCls}-modal-content {
 				--${prefixCls}-modal-content-bg: ${
-			isDarkMode ? token.magicColorScales.grey[0] : token.magicColorScales.white
+			isDarkMode ? token.delightfulColorScales.grey[0] : token.delightfulColorScales.white
 		} !important;
 			}
 		`,

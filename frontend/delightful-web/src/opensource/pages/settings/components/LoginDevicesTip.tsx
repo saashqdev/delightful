@@ -8,7 +8,7 @@ export default function LoginDevicesTip() {
 	const { t } = useTranslation("interface")
 	const { isDarkMode } = useThemeMode()
 
-	const { magicColorScales, magicColorUsages } = useTheme()
+	const { delightfulColorScales, delightfulColorUsages } = useTheme()
 
 	return (
 		<Flex
@@ -17,10 +17,10 @@ export default function LoginDevicesTip() {
 			style={{
 				padding: "10px 20px",
 				flex: 1,
-				backgroundColor: isDarkMode ? magicColorUsages.black : magicColorScales.green[0],
+				backgroundColor: isDarkMode ? delightfulColorUsages.black : delightfulColorScales.green[0],
 			}}
 		>
-			<DelightfulIcon component={IconShieldLockFilled} color={magicColorScales.green[5]} size={18} />
+			<DelightfulIcon component={IconShieldLockFilled} color={delightfulColorScales.green[5]} size={18} />
 			<span>{t("setting.tip.loginDevicesTip")}</span>
 		</Flex>
 	)

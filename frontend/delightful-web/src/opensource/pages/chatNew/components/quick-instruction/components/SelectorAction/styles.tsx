@@ -22,7 +22,7 @@ export const useStyles = createStyles(({ css, prefixCls, token }) => {
 			}
 
 			.${prefixCls}-menu-item-selected {
-				background-color: ${token.magicColorUsages.primaryLight.default};
+				background-color: ${token.delightfulColorUsages.primaryLight.default};
 			}
 		`,
 		menu: css`

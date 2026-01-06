@@ -34,8 +34,8 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
             $dataIsolation = $executionData->getDataIsolation();
 
             $authorization = new DelightfulUserAuthorization();
-            $magicUserContactAppService = di(DelightfulUserContactAppService::class);
-            $user = $magicUserContactAppService->getByUserId($dataIsolation->getCurrentUserId());
+            $delightfulUserContactAppService = di(DelightfulUserContactAppService::class);
+            $user = $delightfulUserContactAppService->getByUserId($dataIsolation->getCurrentUserId());
 
             $authorization->setDelightfulEnvId($dataIsolation->getEnvId());
             $authorization->setId($dataIsolation->getCurrentUserId());
@@ -61,8 +61,8 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
             if ($userTaskDTO->getValue()['deadline']) {
                 $userTaskValueDTO->setDeadline(new DateTime($userTaskDTO->getValue()['deadline']));
             }
-            $magicUserTaskAppService = di(DelightfulUserTaskAppService::class);
-            $crontab = $magicUserTaskAppService->createTask($userTaskDTO, $userTaskValueDTO);
+            $delightfulUserTaskAppService = di(DelightfulUserTaskAppService::class);
+            $crontab = $delightfulUserTaskAppService->createTask($userTaskDTO, $userTaskValueDTO);
             return [
                 'crontab' => $crontab,
                 'message' => '定时任务创建成功',

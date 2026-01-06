@@ -34,7 +34,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     protected bool $filterOrganizationCode = true;
 
     public function __construct(
-        private readonly DelightfulProviderAndModelsInterface $magicProviderAndModels,
+        private readonly DelightfulProviderAndModelsInterface $delightfulProviderAndModels,
     ) {
     }
 
@@ -149,7 +149,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             if ($this->isOfficialOrganization($modelOrganizationCode)
                 && ! $this->isOfficialOrganization($currentOrganizationCode)) {
                 // 模型属于官方组织且当前组织不是官方组织：走写时复制逻辑
-                $organizationModelId = $this->magicProviderAndModels->updateDelightfulModelStatus($dataIsolation, $model);
+                $organizationModelId = $this->delightfulProviderAndModels->updateDelightfulModelStatus($dataIsolation, $model);
             } else {
                 // 其他情况：无权限操作
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
@@ -186,7 +186,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     {
         // 如果是官方服务商，需要进行数据合并和状态判断
         if ($providerEntity->getProviderCode() === ProviderCode::Official && ! OfficialOrganizationUtil::isOfficialOrganization($dataIsolation->getCurrentOrganizationCode())) {
-            return $this->magicProviderAndModels->getDelightfulEnableModels($dataIsolation->getCurrentOrganizationCode(), $providerEntity->getCategory());
+            return $this->delightfulProviderAndModels->getDelightfulEnableModels($dataIsolation->getCurrentOrganizationCode(), $providerEntity->getCategory());
         }
 
         // 非官方服务商，按原逻辑查询指定配置下的模型
@@ -267,13 +267,13 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         }
 
         // 3. 获取Delightful模型（如果不是官方组织）
-        $magicModels = [];
+        $delightfulModels = [];
         if (! OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
-            $magicModels = $this->magicProviderAndModels->getDelightfulEnableModels($organizationCode, $category);
+            $delightfulModels = $this->delightfulProviderAndModels->getDelightfulEnableModels($organizationCode, $category);
         }
 
         // 4. 直接合并模型列表，不去重
-        $allModels = array_merge($organizationModels, $magicModels);
+        $allModels = array_merge($organizationModels, $delightfulModels);
 
         // 5. 按sort降序排序
         usort($allModels, static function ($a, $b) {

@@ -13,8 +13,8 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 		`,
 		container: css`
 			background-color: ${isDarkMode
-				? token.magicColorUsages.black
-				: token.magicColorUsages.white};
+				? token.delightfulColorUsages.black
+				: token.delightfulColorUsages.white};
 			height: 100vh;
 			width: 100%;
 		`,

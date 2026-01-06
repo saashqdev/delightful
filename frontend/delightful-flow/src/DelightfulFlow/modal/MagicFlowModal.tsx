@@ -27,7 +27,7 @@ export default function DelightfulFlowModal({ ...props }) {
 			width="100%"
 			// @ts-ignore
 			height="100%"
-			wrapClassName={clsx(styles.magicFlowModal, `${prefix}modal`)}
+			wrapClassName={clsx(styles.delightfulFlowModal, `${prefix}modal`)}
 			destroyOnClose
 		>
 			<DelightfulFlow {...props} header={{ ...(props.header || {}), backIcon }} />

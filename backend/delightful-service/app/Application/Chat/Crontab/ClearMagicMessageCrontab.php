@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Hyperf\Crontab\Annotation\Crontab;
 use Psr\Log\LoggerInterface;
 
-// #[Crontab(rule: '*/1 * * * *', name: 'ClearDelightfulMessageCrontab', singleton: true, mutexExpires: 600, onOneServer: true, callback: 'execute', memo: '清理magicMessage')]
+// #[Crontab(rule: '*/1 * * * *', name: 'ClearDelightfulMessageCrontab', singleton: true, mutexExpires: 600, onOneServer: true, callback: 'execute', memo: '清理delightfulMessage')]
 readonly class ClearDelightfulMessageCrontab
 {
     public function __construct(

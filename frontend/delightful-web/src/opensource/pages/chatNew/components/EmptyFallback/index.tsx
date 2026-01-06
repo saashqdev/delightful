@@ -13,10 +13,10 @@ const useStyles = createStyles(({ token, css }) => {
 		emptyFallback: css`
 			width: 100%;
 			height: 100%;
-			background-color: ${token.magicColorUsages.bg[0]};
+			background-color: ${token.delightfulColorUsages.bg[0]};
 		`,
 		emptyFallbackText: css`
-			color: ${token.magicColorUsages.text[3]};
+			color: ${token.delightfulColorUsages.text[3]};
 			text-align: center;
 			font-size: 14px;
 			font-weight: 400;

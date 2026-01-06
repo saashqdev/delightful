@@ -23,7 +23,7 @@ class OrganizationAdminEntity extends AbstractEntity
 
     protected string $organizationCode;
 
-    protected ?string $magicId = null;
+    protected ?string $delightfulId = null;
 
     protected ?string $grantorUserId = null;
 
@@ -129,12 +129,12 @@ class OrganizationAdminEntity extends AbstractEntity
 
     public function getDelightfulId(): ?string
     {
-        return $this->magicId;
+        return $this->delightfulId;
     }
 
-    public function setDelightfulId(?string $magicId): void
+    public function setDelightfulId(?string $delightfulId): void
     {
-        $this->magicId = $magicId;
+        $this->delightfulId = $delightfulId;
     }
 
     public function getGrantorUserId(): ?string

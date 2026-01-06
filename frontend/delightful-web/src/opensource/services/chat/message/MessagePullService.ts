@@ -416,7 +416,7 @@ class MessagePullService {
 	 * 设备初始化登录，初始化数据
 	 * @returns
 	 */
-	public async pullMessageOnFirstLoad(magicId: string, organizationCode: string) {
+	public async pullMessageOnFirstLoad(delightfulId: string, organizationCode: string) {
 		if (!organizationCode) {
 			logger.warn("pullOfflineMessages: 当前组织为空")
 			return
@@ -457,7 +457,7 @@ class MessagePullService {
 			}
 
 			// 步骤 3: 添加会话, 更新会话列表(先拉完数据再更新视图, 否则数据会重复拉取)
-			conversationService.initOnFirstLoad(magicId, organizationCode, conversationShouldHandle)
+			conversationService.initOnFirstLoad(delightfulId, organizationCode, conversationShouldHandle)
 
 			// 步骤 4: 拉取最近消息
 			const items = await this.fetchCurrentMessages()
@@ -539,13 +539,13 @@ class MessagePullService {
 				const m = message as SeqResponse<ConversationMessage>
 
 				// FIXME: 需要确认, 后移除
-				// const magicAccount = useUserStore
+				// const delightfulAccount = useUserStore
 				// 	.getState()
-				// 	.accounts.find((account) => account.magic_id === message.magic_id)
+				// 	.accounts.find((account) => account.delightful_id === message.delightful_id)
 
-				const organization = userStore.user.magicOrganizationMap?.[m.organization_code]
+				const organization = userStore.user.delightfulOrganizationMap?.[m.organization_code]
 
-				const isSelf = organization?.magic_user_id === m.message.sender_id
+				const isSelf = organization?.delightful_user_id === m.message.sender_id
 
 				if (
 					// 是历史消息（FIXME: AI 搜索消息目前没有处理）
@@ -592,16 +592,16 @@ class MessagePullService {
 				MessageApplyServices.applyMessage(message, options)
 
 				// 更新其他组织的渲染序列号
-				Object.values(userStore.user.magicOrganizationMap).forEach((item) => {
-					if (item.magic_organization_code !== currentOrganization) {
+				Object.values(userStore.user.delightfulOrganizationMap).forEach((item) => {
+					if (item.delightful_organization_code !== currentOrganization) {
 						// 如果该组织红点为 0，说明没有未拉取的消息，可以更新组织的 seq_id
 						if (
 							OrganizationDotsService.getOrganizationDot(
-								item.magic_organization_code,
+								item.delightful_organization_code,
 							) <= 0
 						) {
 							MessageSeqIdService.updateOrganizationRenderSeqId(
-								item.magic_organization_code,
+								item.delightful_organization_code,
 								message.seq_id,
 							)
 						}

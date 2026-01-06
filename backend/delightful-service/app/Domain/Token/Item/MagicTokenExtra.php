@@ -12,22 +12,22 @@ use App\Domain\Token\Repository\Facade\DelightfulTokenExtraInterface;
 
 class DelightfulTokenExtra extends AbstractEntity implements DelightfulTokenExtraInterface
 {
-    protected ?int $magicEnvId = null;
+    protected ?int $delightfulEnvId = null;
 
     public function getDelightfulEnvId(): ?int
     {
-        return $this->magicEnvId;
+        return $this->delightfulEnvId;
     }
 
-    public function setDelightfulEnvId(?int $magicEnvId): void
+    public function setDelightfulEnvId(?int $delightfulEnvId): void
     {
-        $this->magicEnvId = $magicEnvId;
+        $this->delightfulEnvId = $delightfulEnvId;
     }
 
     public function setTokenExtraData(array $extraData): self
     {
-        if (isset($extraData['magic_env_id'])) {
-            $this->setDelightfulEnvId($extraData['magic_env_id']);
+        if (isset($extraData['delightful_env_id'])) {
+            $this->setDelightfulEnvId($extraData['delightful_env_id']);
         }
         return $this;
     }

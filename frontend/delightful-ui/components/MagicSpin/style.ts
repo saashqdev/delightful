@@ -29,7 +29,7 @@ export const useStyles = createStyles(({ css, prefixCls }, { size }: { size: num
 			.${prefixCls}-spin-dot {
 				width: ${size}px;
 				height: ${size}px;
-				--magic-spin-dot-size: ${size}px;
+				--delightful-spin-dot-size: ${size}px;
 			}
 
 			&.${prefixCls}-spin-show-text > .${prefixCls}-spin-dot {

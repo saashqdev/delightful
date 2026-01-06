@@ -19,7 +19,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $seq_type
  * @property string $content
  * @property string $receive_list
- * @property string $magic_message_id
+ * @property string $delightful_message_id
  * @property string $message_id
  * @property string $refer_message_id
  * @property string $sender_message_id
@@ -38,7 +38,7 @@ class DelightfulChatSequenceModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_chat_sequences';
+    protected ?string $table = 'delightful_chat_sequences';
 
     /**
      * The connection name for the model.
@@ -57,7 +57,7 @@ class DelightfulChatSequenceModel extends Model
         'seq_type',
         'content',
         'receive_list',
-        'magic_message_id',
+        'delightful_message_id',
         'message_id',
         'refer_message_id',
         'sender_message_id',

@@ -58,12 +58,12 @@ class InternetSearchBuiltInTool extends AbstractBuiltInTool
             $topicId = $executionData->getTopicId();
             $searchKeywordMessage = new TextMessage();
             $searchKeywordMessage->setContent($userQuestion);
-            $magicChatAggregateSearchReqDTO = (new DelightfulChatAggregateSearchReqDTO())
+            $delightfulChatAggregateSearchReqDTO = (new DelightfulChatAggregateSearchReqDTO())
                 ->setConversationId($conversationId)
                 ->setTopicId((string) $topicId)
                 ->setUserMessage($searchKeywordMessage)
                 ->setSearchDeepLevel($useDeepSearch ? SearchDeepLevel::DEEP : SearchDeepLevel::SIMPLE);
-            di(DelightfulChatAISearchV2AppService::class)->aggregateSearch($magicChatAggregateSearchReqDTO);
+            di(DelightfulChatAISearchV2AppService::class)->aggregateSearch($delightfulChatAggregateSearchReqDTO);
             return null;
         };
     }

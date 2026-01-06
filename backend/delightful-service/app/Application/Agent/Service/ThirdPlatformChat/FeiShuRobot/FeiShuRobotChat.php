@@ -258,7 +258,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     {
         $chatMessage->setEvent(ThirdPlatformChatEvent::ChatMessage);
         $messageId = $params['event']['message']['message_id'] ?? '';
-        $organizationCode = $params['magic_system']['organization_code'] ?? '';
+        $organizationCode = $params['delightful_system']['organization_code'] ?? '';
 
         // 设置基本信息
         $this->setMessageBasicInfo($params, $chatMessage);

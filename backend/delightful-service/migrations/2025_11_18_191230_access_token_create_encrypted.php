@@ -15,13 +15,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Db::table('magic_api_access_tokens')->orderBy('id')->chunk(100, function ($tokens) {
+        Db::table('delightful_api_access_tokens')->orderBy('id')->chunk(100, function ($tokens) {
             foreach ($tokens as $token) {
                 if (! empty($token['encrypted_access_token'])) {
                     continue;
                 }
                 $encryptedToken = hash('sha256', $token['access_token']);
-                Db::table('magic_api_access_tokens')
+                Db::table('delightful_api_access_tokens')
                     ->where('id', $token['id'])
                     ->update(['encrypted_access_token' => $encryptedToken]);
             }

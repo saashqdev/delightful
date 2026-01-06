@@ -19,7 +19,7 @@ class ClientSequence extends AbstractEntity
     use EditMessageOptionsTrait;
 
     // 序列号归属账号id
-    protected string $magicId;
+    protected string $delightfulId;
 
     // 序列号，一定不重复，一定增长，但是不保证连续。
     protected string $seqId;
@@ -27,7 +27,7 @@ class ClientSequence extends AbstractEntity
     // 用户的消息id，用户下唯一。
     protected string $messageId;
 
-    // 本条消息指向的magic_message_id。 用于实现已读回执场景。存在引用关系时，send_msg_id字段不再返回，因为发送方的消息id没有改变。
+    // 本条消息指向的delightful_message_id。 用于实现已读回执场景。存在引用关系时，send_msg_id字段不再返回，因为发送方的消息id没有改变。
     protected ?string $referMessageId;
 
     // 发送方的消息id
@@ -48,7 +48,7 @@ class ClientSequence extends AbstractEntity
     public function toArray(bool $filterNull = false): array
     {
         $data = [
-            'magic_id' => $this->getDelightfulId(),
+            'delightful_id' => $this->getDelightfulId(),
             'seq_id' => $this->getSeqId(),
             'message_id' => $this->getMessageId(),
             'refer_message_id' => $this->getReferMessageId(),
@@ -67,12 +67,12 @@ class ClientSequence extends AbstractEntity
 
     public function getDelightfulId(): string
     {
-        return $this->magicId ?? '';
+        return $this->delightfulId ?? '';
     }
 
-    public function setDelightfulId(?string $magicId): void
+    public function setDelightfulId(?string $delightfulId): void
     {
-        $magicId !== null && $this->magicId = $magicId;
+        $delightfulId !== null && $this->delightfulId = $delightfulId;
     }
 
     public function getSeqId(): string

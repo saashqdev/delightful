@@ -15,11 +15,11 @@ const useStyles = createStyles(
 	) => {
 		const isSearchingFinishAndHasLlmResponse = isSearchingFinish && hasLlmResponse
 
-		const successBgColor = token.magicColorUsages.primaryLight.default
+		const successBgColor = token.delightfulColorUsages.primaryLight.default
 
 		return {
 			container: css`
-				background: ${isDarkMode ? token.magicColorUsages.bg[1] : token.colorBgContainer};
+				background: ${isDarkMode ? token.delightfulColorUsages.bg[1] : token.colorBgContainer};
 				border-radius: 8px;
 				overflow: hidden;
 				max-width: 800px;
@@ -38,7 +38,7 @@ const useStyles = createStyles(
 			  --${prefixCls}-timeline-dot-bg: transparent !important;
         --${prefixCls}-timeline-item-padding-bottom: 14px !important;
         --${prefixCls}-control-height-lg: 20px !important;
-        --${prefixCls}-timeline-tail-color: ${token.magicColorUsages.border} !important;
+        --${prefixCls}-timeline-tail-color: ${token.delightfulColorUsages.border} !important;
         margin-top: 10px;
         margin-bottom: -10px;
         padding: 0 4px;
@@ -61,10 +61,10 @@ const useStyles = createStyles(
 				font-size: 14px;
 				font-weight: 400;
 				line-height: 20px;
-				color: ${token.magicColorUsages.text[2]};
+				color: ${token.delightfulColorUsages.text[2]};
 			`,
 			collapsedSummary: css`
-				color: ${token.magicColorUsages.text[2]};
+				color: ${token.delightfulColorUsages.text[2]};
 				text-align: justify;
 				font-size: 14px;
 				font-weight: 400;
@@ -93,23 +93,23 @@ const useStyles = createStyles(
 				border-radius: 8px;
 				overflow: hidden;
 
-				th[class*="magic-table-cell"] {
-					background: ${token.magicColorScales.grey[0]} !important;
+				th[class*="delightful-table-cell"] {
+					background: ${token.delightfulColorScales.grey[0]} !important;
 				}
 
-				td[class*="magic-table-cell"]:not(:last-child),
-				th[class*="magic-table-cell"]:not(:last-child) {
+				td[class*="delightful-table-cell"]:not(:last-child),
+				th[class*="delightful-table-cell"]:not(:last-child) {
 					border-right: 1px solid ${token.colorBorder};
 				}
 
-				th[class*="magic-table-cell"] {
+				th[class*="delightful-table-cell"] {
 					color: ${token.colorTextSecondary};
 					font-size: 12px;
 					font-weight: 600;
 					line-height: 16px;
 				}
 
-				td[class*="magic-table-cell"] {
+				td[class*="delightful-table-cell"] {
 					color: ${token.colorTextSecondary};
 					font-size: 12px;
 					font-weight: 400;
@@ -117,7 +117,7 @@ const useStyles = createStyles(
 				}
 
 				tr:last-child {
-					td[class*="magic-table-cell"] {
+					td[class*="delightful-table-cell"] {
 						border-bottom: none;
 					}
 				}
@@ -128,8 +128,8 @@ const useStyles = createStyles(
 				overflow: visible;
 				word-break: break-all;
 				color: ${isDarkMode
-					? token.magicColorUsages.white
-					: token.magicColorUsages.text[1]};
+					? token.delightfulColorUsages.white
+					: token.delightfulColorUsages.text[1]};
 				text-align: justify;
 				font-size: ${fontSize}px;
 				font-weight: 400;
@@ -143,7 +143,7 @@ const useStyles = createStyles(
 			questionCollapse: css`
 				--${prefixCls}-collapse-content-padding: 10px !important;
 				--${prefixCls}-collapse-header-padding: 10px !important;
-        color: ${token.magicColorUsages.text[2]};
+        color: ${token.delightfulColorUsages.text[2]};
         
         margin: ${isSearchingFinishAndHasLlmResponse ? undefined : "-10px"};
 			`,
@@ -195,7 +195,7 @@ const useStyles = createStyles(
 				line-height: 16px;
 			`,
 			searchKeyword: css`
-				background: ${token.magicColorScales.brand[0]};
+				background: ${token.delightfulColorScales.brand[0]};
 				padding: 2px 8px;
 				border-radius: 4px;
 				color: ${token.colorTextSecondary};

@@ -31,7 +31,7 @@ class DelightfulFlowTriggerTestcaseModel extends AbstractModel
     use Snowflake;
     use SoftDeletes;
 
-    protected ?string $table = 'magic_flow_trigger_testcases';
+    protected ?string $table = 'delightful_flow_trigger_testcases';
 
     protected array $fillable = [
         'id', 'flow_code', 'code', 'name', 'description', 'case_config',

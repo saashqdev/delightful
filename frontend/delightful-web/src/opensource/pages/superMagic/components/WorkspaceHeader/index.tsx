@@ -90,7 +90,7 @@ const useStyles = createStyles(({ token }) => ({
 		borderRadius: "8px",
 		transition: "background-color 0.3s",
 		cursor: "pointer",
-		backgroundColor: token.magicColorUsages.primaryLight.default,
+		backgroundColor: token.delightfulColorUsages.primaryLight.default,
 		whiteSpace: "nowrap",
 		minWidth: "100px",
 	},

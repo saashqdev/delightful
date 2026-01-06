@@ -13,7 +13,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			::-webkit-scrollbar {
 				display: none;
 			}
-			background: ${isDarkMode ? token.magicColorUsages.black : token.magicColorUsages.white};
+			background: ${isDarkMode ? token.delightfulColorUsages.black : token.delightfulColorUsages.white};
 		`,
 		inner: {
 			minWidth: 588,
@@ -24,7 +24,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			padding: "20px 0",
 		},
 		title: {
-			color: isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1],
+			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1],
 			fontSize: 26,
 			fontWeight: 400,
 			flexShrink: 0,
@@ -61,7 +61,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			border: 1px solid ${token.colorBorder};
 			border-radius: 20px;
 		`,
-		magicColor: css`
+		delightfulColor: css`
 			background: linear-gradient(
 				95.14deg,
 				#33d6c0 0%,
@@ -71,11 +71,11 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 				#8d55ed 100%
 			);
 			border: none;
-			color: ${token.magicColorUsages.white};
+			color: ${token.delightfulColorUsages.white};
 
 			&:hover {
 				background: linear-gradient(117deg, #ff0ffa -53.65%, #315cec 163.03%) !important;
-				color: ${token.magicColorUsages.white} !important;
+				color: ${token.delightfulColorUsages.white} !important;
 			}
 		`,
 		sections: css`

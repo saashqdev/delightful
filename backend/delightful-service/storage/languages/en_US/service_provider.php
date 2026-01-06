@@ -25,7 +25,7 @@ return [
     'original_model_already_exists' => 'Original model already exists',
     'load_balancing_weight_range_error' => 'Load balancing weight must be between 0 and 100',
     'model_officially_disabled' => 'Model has been officially disabled',
-    'magic_provider_not_found' => 'Delightful service provider configuration not found',
+    'delightful_provider_not_found' => 'Delightful service provider configuration not found',
     'original_model_id_already_exists' => 'Original model ID already exists',
     'original_model_not_found' => 'Original model not found',
     'invalid_pricing' => 'Pricing cannot be less than 0',

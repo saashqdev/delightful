@@ -68,8 +68,8 @@ class CacheRedisToMysqlCommand extends HyperfCommand
                     break;
                 }
                 // Use cursor-based SCAN for better performance
-                // Account for Redis prefix configuration (magic:)
-                $scanPattern = 'magic:' . self::REDIS_KEY_PREFIX . ':*';
+                // Account for Redis prefix configuration (delightful:)
+                $scanPattern = 'delightful:' . self::REDIS_KEY_PREFIX . ':*';
                 $result = $this->redis->rawCommand('SCAN', $cursor, 'MATCH', $scanPattern, 'COUNT', self::BATCH_SIZE);
 
                 $this->line("Scanning with pattern: {$scanPattern}", 'comment');
@@ -191,14 +191,14 @@ class CacheRedisToMysqlCommand extends HyperfCommand
 
     /**
      * Parse Redis key to extract prefix and key components.
-     * Expected format: magic:DelightfulFlowStringCache:{prefix}:{key}.
+     * Expected format: delightful:DelightfulFlowStringCache:{prefix}:{key}.
      *
      * @return null|array{prefix: string, key: string}
      */
     private function parseRedisKey(string $redisKey): ?array
     {
-        // Expected pattern: magic:DelightfulFlowStringCache:{prefix}:{key}
-        $expectedPrefix = 'magic:' . self::REDIS_KEY_PREFIX . ':';
+        // Expected pattern: delightful:DelightfulFlowStringCache:{prefix}:{key}
+        $expectedPrefix = 'delightful:' . self::REDIS_KEY_PREFIX . ':';
         if (! str_starts_with($redisKey, $expectedPrefix)) {
             $this->line("Key format mismatch: {$redisKey}", 'error');
             $this->line("Expected prefix: {$expectedPrefix}", 'error');

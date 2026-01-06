@@ -4,24 +4,24 @@ export const useStyles = createStyles(({ css, token }) => {
 	return {
 		search: css`
 			width: 276px;
-			background-color: ${token.magicColorUsages.white};
+			background-color: ${token.delightfulColorUsages.white};
 			border-radius: 8px 8px 0 0;
 			border-color: transparent;
 			padding: 8px 12px;
-			border-bottom: 1px solid ${token.magicColorUsages.border};
+			border-bottom: 1px solid ${token.delightfulColorUsages.border};
 
 			&:hover,
 			&:active,
 			&:focus {
 				border-color: transparent;
-				background-color: ${token.magicColorUsages.white};
-				border-bottom: 1px solid ${token.magicColorUsages.border};
+				background-color: ${token.delightfulColorUsages.white};
+				border-bottom: 1px solid ${token.delightfulColorUsages.border};
 			}
 		`,
 		title: css`
 			padding-bottom: 8px;
 			margin-bottom: 8px;
-			border-bottom: 1px solid ${token.magicColorUsages.border};
+			border-bottom: 1px solid ${token.delightfulColorUsages.border};
 		`,
 		list: css`
 			height: 188px;

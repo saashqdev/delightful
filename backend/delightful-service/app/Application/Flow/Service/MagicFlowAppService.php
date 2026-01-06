@@ -62,7 +62,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
      */
     public function getNodeTemplate(Authenticatable $authorization, Node $node): Node
     {
-        return $this->magicFlowDomainService->getNodeTemplate($this->createFlowDataIsolation($authorization), $node);
+        return $this->delightfulFlowDomainService->getNodeTemplate($this->createFlowDataIsolation($authorization), $node);
     }
 
     /**
@@ -127,19 +127,19 @@ class DelightfulFlowAppService extends AbstractFlowAppService
      * 保存基本信息.
      */
     #[Transactional]
-    public function save(Authenticatable $authorization, DelightfulFlowEntity $magicFlowEntity): DelightfulFlowEntity
+    public function save(Authenticatable $authorization, DelightfulFlowEntity $delightfulFlowEntity): DelightfulFlowEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
 
-        $shouldCreate = $magicFlowEntity->shouldCreate();
+        $shouldCreate = $delightfulFlowEntity->shouldCreate();
 
         $operation = Operation::Owner;
         if (! $shouldCreate) {
-            $operation = $this->getFlowOperation($dataIsolation, $magicFlowEntity);
-            $operation->validate('edit', $magicFlowEntity->getCode());
+            $operation = $this->getFlowOperation($dataIsolation, $delightfulFlowEntity);
+            $operation->validate('edit', $delightfulFlowEntity->getCode());
         }
 
-        $flow = $this->magicFlowDomainService->save($dataIsolation, $magicFlowEntity);
+        $flow = $this->delightfulFlowDomainService->save($dataIsolation, $delightfulFlowEntity);
         $flow->setUserOperation($operation->value);
         return $flow;
     }
@@ -147,9 +147,9 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     /**
      * 保存节点.
      */
-    public function saveNode(Authenticatable $authorization, DelightfulFlowEntity $magicFlowEntity): DelightfulFlowEntity
+    public function saveNode(Authenticatable $authorization, DelightfulFlowEntity $delightfulFlowEntity): DelightfulFlowEntity
     {
-        return $this->magicFlowDomainService->saveNode($this->createFlowDataIsolation($authorization), $magicFlowEntity);
+        return $this->delightfulFlowDomainService->saveNode($this->createFlowDataIsolation($authorization), $delightfulFlowEntity);
     }
 
     /**
@@ -197,7 +197,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'type']);
         }
 
-        $result = $this->magicFlowDomainService->queries($dataIsolation, $query, $page);
+        $result = $this->delightfulFlowDomainService->queries($dataIsolation, $query, $page);
         $userIds = [];
         $filePaths = [];
         foreach ($result['list'] as $item) {
@@ -225,7 +225,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             }
         }
 
-        $result['users'] = $this->magicUserDomainService->getByUserIds(
+        $result['users'] = $this->delightfulUserDomainService->getByUserIds(
             ContactDataIsolation::simpleMake($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId()),
             $userIds
         );
@@ -259,7 +259,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $toolSetQuery = new DelightfulFlowToolSetQuery();
         $toolSetQuery->setCodes($toolSetIds);
         $toolSetQuery->setEnabled(true);
-        $toolSetData = $this->magicFlowToolSetDomainService->queries($dataIsolation, $toolSetQuery, $page);
+        $toolSetData = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $toolSetQuery, $page);
         $toolSetIds = [];
         foreach ($toolSetData['list'] as $toolSet) {
             $toolSetIds[] = $toolSet->getCode();
@@ -267,7 +267,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
 
         $query->setToolSetIds($toolSetIds);
         $query->setEnabled(true);
-        $data = $this->magicFlowDomainService->queries($dataIsolation, $query, $page);
+        $data = $this->delightfulFlowDomainService->queries($dataIsolation, $query, $page);
 
         // 增加系统内置工具
         foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
@@ -306,7 +306,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
 
         $toolSetQuery->setCodes($toolSetIds);
         $toolSetQuery->setOrder(['updated_at' => 'desc']);
-        $toolSetData = $this->magicFlowToolSetDomainService->queries($dataIsolation, $toolSetQuery, $page);
+        $toolSetData = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $toolSetQuery, $page);
 
         // 增加系统内置工具集
         $builtInTools = [];
@@ -342,7 +342,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
 
         $toolQuery->setSelect(['id', 'code', 'version_code', 'name', 'description', 'type', 'tool_set_id', 'enabled', 'organization_code', 'created_uid', 'created_at', 'updated_uid', 'updated_at']);
         $toolQuery->setOrder(['updated_at' => 'desc']);
-        $toolResult = $this->magicFlowDomainService->queries($dataIsolation, $toolQuery, $page);
+        $toolResult = $this->delightfulFlowDomainService->queries($dataIsolation, $toolQuery, $page);
 
         // 增加系统内置工具
         /** @var BuiltInToolInterface $builtInTool */
@@ -370,7 +370,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $toolSetData['total'] = count($toolSetData['list']);
 
         $toolSetData['icons'] = $withIcons ? $this->getIcons($dataIsolation->getCurrentOrganizationCode(), $iconPaths) : [];
-        //        $toolSetData['users'] = $this->magicUserDomainService->getByUserIds(
+        //        $toolSetData['users'] = $this->delightfulUserDomainService->getByUserIds(
         //            ContactDataIsolation::simpleMake($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId()),
         //            $userIds
         //        );
@@ -399,7 +399,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         // 目前仅获取自建文本的知识库
         $query->setTypes([KnowledgeType::UserKnowledgeBase->value]);
         $query->setEnabled(true);
-        $knowledgeData = $this->magicFlowKnowledgeDomainService->queries($this->createKnowledgeBaseDataIsolation($dataIsolation), $query, $page);
+        $knowledgeData = $this->delightfulFlowKnowledgeDomainService->queries($this->createKnowledgeBaseDataIsolation($dataIsolation), $query, $page);
 
         $userTopicKnowledge = KnowledgeBaseEntity::createCurrentTopicTemplate($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
         $userConversationKnowledge = KnowledgeBaseEntity::createConversationTemplate($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
@@ -416,7 +416,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             }
             $knowledge->setSourceType($this->knowledgeBaseStrategy->getOrCreateDefaultSourceType($knowledge));
         }
-        $knowledgeData['users'] = $this->magicUserDomainService->getByUserIds($this->createContactDataIsolation($dataIsolation), $userIds);
+        $knowledgeData['users'] = $this->delightfulUserDomainService->getByUserIds($this->createContactDataIsolation($dataIsolation), $userIds);
 
         // 重新计算总数
         $knowledgeData['total'] = count($knowledgeData['list']);
@@ -430,13 +430,13 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     public function getByCode(Authenticatable $authorization, string $flowId): DelightfulFlowEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
-        $magicFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $flowId);
-        if (! $magicFlow) {
+        $delightfulFlow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $flowId);
+        if (! $delightfulFlow) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_found', ['label' => $flowId]);
         }
-        $operation = $this->getFlowOperation($dataIsolation, $magicFlow)->validate('read', $flowId);
-        $magicFlow->setUserOperation($operation->value);
-        return $magicFlow;
+        $operation = $this->getFlowOperation($dataIsolation, $delightfulFlow)->validate('read', $flowId);
+        $delightfulFlow->setUserOperation($operation->value);
+        return $delightfulFlow;
     }
 
     /**
@@ -446,14 +446,14 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     public function changeEnable(Authenticatable $authorization, string $flowId, ?bool $enable = null): void
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
-        $magicFlow = $this->magicFlowDomainService->getByCode($this->createFlowDataIsolation($authorization), $flowId);
-        if (! $magicFlow) {
+        $delightfulFlow = $this->delightfulFlowDomainService->getByCode($this->createFlowDataIsolation($authorization), $flowId);
+        if (! $delightfulFlow) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_found', ['label' => $flowId]);
         }
-        $this->getFlowOperation($dataIsolation, $magicFlow)->validate('edit', $flowId);
+        $this->getFlowOperation($dataIsolation, $delightfulFlow)->validate('edit', $flowId);
 
-        $this->magicFlowDomainService->changeEnable($dataIsolation, $magicFlow, $enable);
-        AsyncEventUtil::dispatch(new DelightfulFlowChangeEnabledEvent($magicFlow));
+        $this->delightfulFlowDomainService->changeEnable($dataIsolation, $delightfulFlow, $enable);
+        AsyncEventUtil::dispatch(new DelightfulFlowChangeEnabledEvent($delightfulFlow));
     }
 
     /**
@@ -463,14 +463,14 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
 
-        $magicFlow = $this->magicFlowDomainService->getByCode($this->createFlowDataIsolation($authorization), $flowId);
-        if (! $magicFlow) {
+        $delightfulFlow = $this->delightfulFlowDomainService->getByCode($this->createFlowDataIsolation($authorization), $flowId);
+        if (! $delightfulFlow) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_found', ['label' => $flowId]);
         }
 
-        $this->getFlowOperation($dataIsolation, $magicFlow)->validate('delete', $flowId);
+        $this->getFlowOperation($dataIsolation, $delightfulFlow)->validate('delete', $flowId);
 
-        $this->magicFlowDomainService->destroy($dataIsolation, $magicFlow);
+        $this->delightfulFlowDomainService->destroy($dataIsolation, $delightfulFlow);
     }
 
     public function expressionDataSource(): array

@@ -30,7 +30,7 @@ class DelightfulFlowMemoryHistoryModel extends AbstractModel
 
     public bool $timestamps = false;
 
-    protected ?string $table = 'magic_flow_memory_histories';
+    protected ?string $table = 'delightful_flow_memory_histories';
 
     protected array $fillable = [
         'id', 'type', 'conversation_id', 'topic_id', 'request_id', 'message_id', 'role', 'content', 'mount_id',

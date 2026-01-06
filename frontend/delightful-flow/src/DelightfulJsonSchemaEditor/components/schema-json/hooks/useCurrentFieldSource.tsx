@@ -34,7 +34,7 @@ export default function useCurrentFieldSource({ curFieldKeys }: CurrentFieldSour
 		// console.log(curFieldKeys.join('.'), innerExpressionSourceMap);
 		if (currentFieldInnerSource.length === 0) return result
 		// result.unshift({
-		// 	label: i18next.t("jsonSchema.currentForm", { ns: "magicFlow" }),
+		// 	label: i18next.t("jsonSchema.currentForm", { ns: "delightfulFlow" }),
 		// 	value: `fields_${uniqueFormId}`,
 		// 	desc: "",
 		// 	children: currentFieldInnerSource as any,

@@ -9,7 +9,7 @@ const useStyles = createStyles(({ css }) => {
 	return {
 		form: css`
 			:global {
-				.magic-form-item {
+				.delightful-form-item {
 					margin-bottom: 10px;
 				}
 			}

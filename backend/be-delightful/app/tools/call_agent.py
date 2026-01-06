@@ -20,7 +20,7 @@ class CallAgentParams(BaseToolParams):
     )
     agent_id: str = Field(
         ...,
-        description="Unique identifier for this task, human-readable and distinctive, must not be repeated, composed of words or phrases, e.g. 'letsmagic-ai-background-research'"
+        description="Unique identifier for this task, human-readable and distinctive, must not be repeated, composed of words or phrases, e.g. 'letsdelightful-ai-background-research'"
     )
     task_background: str = Field(
         ...,
@@ -181,7 +181,7 @@ call_agent(
         try:
             # Instantiate Agent based on agent_name
             from app.core.context.agent_context import AgentContext
-            from app.magic.agent import Agent
+            from app.delightful.agent import Agent
             new_agent_context = AgentContext()
             agent = Agent(params.agent_name, agent_id=params.agent_id, agent_context=new_agent_context)
 

@@ -19,25 +19,25 @@ const getAllMethodMap: () => Record<FormItemType, StepOption[]> = () => ({
 	[FormItemType.String]: [
 		{
 			value: "toNumber",
-			label: i18next.t("expression.toNumber", { ns: "magicFlow" }),
+			label: i18next.t("expression.toNumber", { ns: "delightfulFlow" }),
 			icon: <Icon123 />,
 			type: FormItemType.Number,
 		},
 		{
 			value: "toBoolean",
-			label: i18next.t("expression.toBoolean", { ns: "magicFlow" }),
+			label: i18next.t("expression.toBoolean", { ns: "delightfulFlow" }),
 			icon: <IconToggleLeftFilled />,
 			type: FormItemType.Boolean,
 		},
 		{
 			value: "toArray",
-			label: i18next.t("expression.toArray", { ns: "magicFlow" }),
+			label: i18next.t("expression.toArray", { ns: "delightfulFlow" }),
 			icon: <IconBrackets />,
 			type: FormItemType.Array,
 		},
 		{
 			value: "toObject",
-			label: i18next.t("expression.toObject", { ns: "magicFlow" }),
+			label: i18next.t("expression.toObject", { ns: "delightfulFlow" }),
 			icon: <IconBraces />,
 			type: FormItemType.Object,
 		},
@@ -45,19 +45,19 @@ const getAllMethodMap: () => Record<FormItemType, StepOption[]> = () => ({
 	[FormItemType.Number]: [
 		{
 			value: "toString",
-			label: i18next.t("expression.toString", { ns: "magicFlow" }),
+			label: i18next.t("expression.toString", { ns: "delightfulFlow" }),
 			icon: <IconAbc />,
 			type: FormItemType.String,
 		},
 		{
 			value: "toBoolean",
-			label: i18next.t("expression.toBoolean", { ns: "magicFlow" }),
+			label: i18next.t("expression.toBoolean", { ns: "delightfulFlow" }),
 			icon: <IconToggleLeftFilled />,
 			type: FormItemType.Boolean,
 		},
 		{
 			value: "toArray",
-			label: i18next.t("expression.toArray", { ns: "magicFlow" }),
+			label: i18next.t("expression.toArray", { ns: "delightfulFlow" }),
 			icon: <IconBrackets />,
 			type: FormItemType.Array,
 		},
@@ -65,19 +65,19 @@ const getAllMethodMap: () => Record<FormItemType, StepOption[]> = () => ({
 	[FormItemType.Boolean]: [
 		{
 			value: "toString",
-			label: i18next.t("expression.toString", { ns: "magicFlow" }),
+			label: i18next.t("expression.toString", { ns: "delightfulFlow" }),
 			icon: <IconAbc />,
 			type: FormItemType.String,
 		},
 		{
 			value: "toNumber",
-			label: i18next.t("expression.toNumber", { ns: "magicFlow" }),
+			label: i18next.t("expression.toNumber", { ns: "delightfulFlow" }),
 			icon: <Icon123 />,
 			type: FormItemType.Number,
 		},
 		{
 			value: "toArray",
-			label: i18next.t("expression.toArray", { ns: "magicFlow" }),
+			label: i18next.t("expression.toArray", { ns: "delightfulFlow" }),
 			icon: <IconBrackets />,
 			type: FormItemType.Array,
 		},
@@ -85,37 +85,37 @@ const getAllMethodMap: () => Record<FormItemType, StepOption[]> = () => ({
 	[FormItemType.Array]: [
 		{
 			value: "toString",
-			label: i18next.t("expression.toString", { ns: "magicFlow" }),
+			label: i18next.t("expression.toString", { ns: "delightfulFlow" }),
 			icon: <IconAbc />,
 			type: FormItemType.String,
 		},
 		{
 			value: "toArray",
-			label: i18next.t("expression.toArray", { ns: "magicFlow" }),
+			label: i18next.t("expression.toArray", { ns: "delightfulFlow" }),
 			icon: <IconBrackets />,
 			type: FormItemType.Array,
 		},
 		{
 			value: "toJson",
-			label: i18next.t("expression.toJSON", { ns: "magicFlow" }),
+			label: i18next.t("expression.toJSON", { ns: "delightfulFlow" }),
 			icon: <IconJson />,
 			type: FormItemType.String,
 		},
 		{
 			value: "count",
-			label: i18next.t("expression.count", { ns: "magicFlow" }),
+			label: i18next.t("expression.count", { ns: "delightfulFlow" }),
 			icon: <IconCalculator />,
 			type: FormItemType.Number,
 		},
 		{
 			value: "empty",
-			label: i18next.t("expression.isEmpty", { ns: "magicFlow" }),
+			label: i18next.t("expression.isEmpty", { ns: "delightfulFlow" }),
 			icon: <IconCircle />,
 			type: FormItemType.Boolean,
 		},
 		{
 			value: "join",
-			label: i18next.t("expression.join", { ns: "magicFlow" }),
+			label: i18next.t("expression.join", { ns: "delightfulFlow" }),
 			icon: <IconArrowsJoin2 />,
 			type: FormItemType.String,
 			withArguments: true,
@@ -125,25 +125,25 @@ const getAllMethodMap: () => Record<FormItemType, StepOption[]> = () => ({
 	[FormItemType.Object]: [
 		{
 			value: "toString",
-			label: i18next.t("expression.toString", { ns: "magicFlow" }),
+			label: i18next.t("expression.toString", { ns: "delightfulFlow" }),
 			icon: <IconAbc />,
 			type: FormItemType.String,
 		},
 		{
 			value: "toArray",
-			label: i18next.t("expression.toArray", { ns: "magicFlow" }),
+			label: i18next.t("expression.toArray", { ns: "delightfulFlow" }),
 			icon: <IconBrackets />,
 			type: FormItemType.Array,
 		},
 		{
 			value: "toJson",
-			label: i18next.t("expression.toJSON", { ns: "magicFlow" }),
+			label: i18next.t("expression.toJSON", { ns: "delightfulFlow" }),
 			icon: <IconJson />,
 			type: FormItemType.String,
 		},
 		{
 			value: "empty",
-			label: i18next.t("expression.isEmpty", { ns: "magicFlow" }),
+			label: i18next.t("expression.isEmpty", { ns: "delightfulFlow" }),
 			icon: <IconCircle />,
 			type: FormItemType.Boolean,
 		},
@@ -198,8 +198,8 @@ export function reverseStringToList(input: string): StepOption[] {
 		list.push({
 			value,
 			arguments: args || undefined,
-			label: `${i18next.t("expression.transformText", { ns: "magicFlow" })}: ${value}`, // 这里可以根据 value 映射回 label
-			type: i18next.t("expression.transformType", { ns: "magicFlow" }), // 这里可以根据 value 映射回 type
+			label: `${i18next.t("expression.transformText", { ns: "delightfulFlow" })}: ${value}`, // 这里可以根据 value 映射回 label
+			type: i18next.t("expression.transformType", { ns: "delightfulFlow" }), // 这里可以根据 value 映射回 type
 		})
 	}
 

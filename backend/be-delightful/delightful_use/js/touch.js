@@ -12,7 +12,7 @@
    * maxTextLength: 交互元素 text 字段的最大长度
    */
   const config = {
-    excludeClassPrefixes: ['magic-marker-'], // 例如, 排除所有 class 以 'magic-maker-' 开头的元素
+    excludeClassPrefixes: ['delightful-marker-'], // 例如, 排除所有 class 以 'delightful-maker-' 开头的元素
     filterTinyElements: {
       // 绝对最小面积 (像素平方)，低于此值的元素会被过滤。
       absoluteMinArea: 16,
@@ -829,10 +829,10 @@
     // 5. 最终结果是白名单元素加上过滤后的元素
     const finalNodes = [...whitelisted, ...filteredByOverlap];
 
-    // 在返回前为所有最终确定的节点添加 magic-touch-id
+    // 在返回前为所有最终确定的节点添加 delightful-touch-id
     finalNodes.forEach(element => {
-      const magicId = generateDelightfulId(element);
-      element.setAttribute('magic-touch-id', magicId);
+      const delightfulId = generateDelightfulId(element);
+      element.setAttribute('delightful-touch-id', delightfulId);
     });
 
     return finalNodes;
@@ -861,11 +861,11 @@
       // 确定元素的分类和类型
       const { category, type: elementType } = getCategoryAndType(element);
 
-      // 获取已设置的 magic-touch-id
-      const magicId = element.getAttribute('magic-touch-id');
-      // 如果没有 magicId，则跳过此元素或记录错误
-      if (!magicId) {
-        console.warn("DelightfulTouch: Element missing magic-touch-id.", element);
+      // 获取已设置的 delightful-touch-id
+      const delightfulId = element.getAttribute('delightful-touch-id');
+      // 如果没有 delightfulId，则跳过此元素或记录错误
+      if (!delightfulId) {
+        console.warn("DelightfulTouch: Element missing delightful-touch-id.", element);
         continue; // 跳过这个没有 ID 的元素
       }
 
@@ -874,7 +874,7 @@
         name: getReadableName(element), // 获取可读名称
         name_en: element.id || null,     // 使用元素ID作为英文名，若无则为null
         type: elementType,              // 元素的具体类型
-        selector: `[magic-touch-id="${magicId}"]` // 直接使用属性选择器
+        selector: `[delightful-touch-id="${delightfulId}"]` // 直接使用属性选择器
       };
 
       // 添加文本内容（截断，适用于按钮、链接等）

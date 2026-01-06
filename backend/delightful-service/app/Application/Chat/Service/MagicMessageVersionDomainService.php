@@ -16,9 +16,9 @@ class DelightfulMessageVersionDomainService extends AbstractDomainService
      * 获取消息的版本列表，按 version_id 升序.
      * @return null|DelightfulMessageVersionEntity[]
      */
-    public function getMessageVersions(string $magicMessageId): ?array
+    public function getMessageVersions(string $delightfulMessageId): ?array
     {
-        $messageVersions = $this->magicChatMessageVersionsRepository->getMessageVersions($magicMessageId);
+        $messageVersions = $this->delightfulChatMessageVersionsRepository->getMessageVersions($delightfulMessageId);
         if (empty($messageVersions)) {
             return null;
         }

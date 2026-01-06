@@ -72,7 +72,7 @@ from app.tools.core import BaseToolParams, tool
 from app.tools.use_browser_operations.operations_registry import operations_registry
 from app.tools.visual_understanding import VisualUnderstanding, VisualUnderstandingParams
 from app.tools.workspace_guard_tool import WorkspaceGuardTool
-from magic_use.magic_browser import (
+from delightful_use.delightful_browser import (
     DelightfulBrowser,
     DelightfulBrowserConfig,
     DelightfulBrowserError,

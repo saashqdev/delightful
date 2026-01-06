@@ -25,7 +25,7 @@ export default function MultipleItem({
 	return (
 		<div
 			{...props}
-			className={`magic-multiple-item ${props.className ?? ""}`}
+			className={`delightful-multiple-item ${props.className ?? ""}`}
 			onClick={() => itemClick(item.id)}
 			contentEditable={false}
 		>

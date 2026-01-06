@@ -46,9 +46,9 @@ GIT_REPO_URL=git@github.com:dtyq
 
 ```
 # MySQL Configuration
-MYSQL_USER=magic
-MYSQL_PASSWORD=magic123456
-MYSQL_DATABASE=magic
+MYSQL_USER=delightful
+MYSQL_PASSWORD=delightful123456
+MYSQL_DATABASE=delightful
 MYSQL_DATA=/var/lib/mysql
 MYSQL_MAX_CONNECTIONS=1000
 MYSQL_SHARED_BUFFERS=128MB
@@ -60,9 +60,9 @@ MYSQL_EFFECTIVE_CACHE_SIZE=4096MB
 DB_DRIVER=mysql
 DB_HOST=db
 DB_PORT=3306
-DB_USERNAME=magic
-DB_PASSWORD=magic123456
-DB_DATABASE=magic
+DB_USERNAME=delightful
+DB_PASSWORD=delightful123456
+DB_DATABASE=delightful
 DB_CHARSET=utf8mb4
 DB_COLLATION=utf8mb4_unicode_ci
 DB_PREFIX=
@@ -73,10 +73,10 @@ DB_PREFIX=
 ```
 # Redis Configuration
 REDIS_HOST=redis
-REDIS_AUTH=magic123456
+REDIS_AUTH=delightful123456
 REDIS_PORT=6379
 REDIS_DB=0
-REDIS_PASSWORD=magic123456
+REDIS_PASSWORD=delightful123456
 ```
 
 #### RabbitMQ Configuration
@@ -86,8 +86,8 @@ REDIS_PASSWORD=magic123456
 AMQP_HOST=rabbitmq
 AMQP_PORT=5672
 AMQP_USER=admin
-AMQP_PASSWORD=magic123456
-AMQP_VHOST=magic-chat
+AMQP_PASSWORD=delightful123456
+AMQP_VHOST=delightful-chat
 ```
 
 #### OpenSearch Configuration
@@ -109,7 +109,7 @@ OPENSEARCH_NOFILE_HARD=65536
 
 ```
 # Qdrant Configuration
-QDRANT_API_KEY=magic123456
+QDRANT_API_KEY=delightful123456
 ODIN_QDRANT_BASE_URI=http://qdrant
 ODIN_QDRANT_API_KEY=
 ```
@@ -119,7 +119,7 @@ ODIN_QDRANT_API_KEY=
 #### Application Basic Configuration
 
 ```
-APP_NAME=magic_service
+APP_NAME=delightful_service
 APP_ENV=dev
 APP_HOST=
 
@@ -246,7 +246,7 @@ APP_CODE=
 # CODE whitelist
 CODE_WHITE_ACCOUNT_ID=
 
-# Default magic_environment ID
+# Default delightful_environment ID
 DEFAULT_DELIGHTFUL_ENVIRONMENT_ID=
 
 # Delightful environment ID
@@ -339,6 +339,6 @@ For detailed file driver configuration and usage methods, please refer to [File 
 
 ## First Deployment Notes
 
-1. When deploying for the first time, using the `./bin/magic.sh start` command will automatically copy `.env.example` to `.env`
+1. When deploying for the first time, using the `./bin/delightful.sh start` command will automatically copy `.env.example` to `.env`
 2. If using cloud storage services, you need to execute the file system initialization command: `php bin/hyperf.php file:init`
 3. After modifying environment variables, you need to restart the service for the changes to take effect

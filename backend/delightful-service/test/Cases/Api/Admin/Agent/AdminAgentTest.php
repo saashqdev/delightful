@@ -21,10 +21,10 @@ class AdminAgentTest extends BaseTest
     {
         $userId = '2';
         $organizationCode = 'DT001';
-        $magicUserAuthorization = new DelightfulUserAuthorization();
-        $magicUserAuthorization->setId($userId);
-        $magicUserAuthorization->setOrganizationCode($organizationCode);
+        $delightfulUserAuthorization = new DelightfulUserAuthorization();
+        $delightfulUserAuthorization->setId($userId);
+        $delightfulUserAuthorization->setOrganizationCode($organizationCode);
         $service = di(AdminAgentAppService::class);
-        $queriesAgents = $service->queriesAgents($magicUserAuthorization, new QueryPageAgentDTO());
+        $queriesAgents = $service->queriesAgents($delightfulUserAuthorization, new QueryPageAgentDTO());
     }
 }

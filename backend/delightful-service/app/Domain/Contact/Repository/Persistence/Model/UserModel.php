@@ -14,14 +14,14 @@ class UserModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_contact_users';
+    protected ?string $table = 'delightful_contact_users';
 
     /**
      * The attributes that are mass assignable.
      */
     protected array $fillable = [
         'id',
-        'magic_id',
+        'delightful_id',
         'organization_code',
         'user_id',
         'user_type',

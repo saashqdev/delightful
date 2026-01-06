@@ -1,4 +1,4 @@
-# magic_use/userscript.py
+# delightful_use/userscript.py
 import dataclasses
 from pathlib import Path
 from typing import List, Optional

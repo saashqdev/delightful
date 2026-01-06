@@ -3,8 +3,8 @@ import "antd/es/theme/interface"
 import type { ColorScales, ColorUsages } from "../components/ThemeProvider/types"
 
 export interface NewToken {
-	magicColorScales: ColorScales
-	magicColorUsages: ColorUsages
+	delightfulColorScales: ColorScales
+	delightfulColorUsages: ColorUsages
 }
 
 // Extend antd-style `token` type via declaration merging

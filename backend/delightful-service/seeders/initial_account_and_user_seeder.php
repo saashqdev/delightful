@@ -53,7 +53,7 @@ class InitialAccountAndUserSeeder extends Seeder
             foreach ($specifiedAccounts as $accountInfo) {
                 // Check if this account already exists
                 /** @var array $existingAccount */
-                $existingAccount = Db::table('magic_contact_accounts')
+                $existingAccount = Db::table('delightful_contact_accounts')
                     ->where('type', 1)
                     ->where(function ($query) use ($accountInfo) {
                         $query->where('phone', $accountInfo['phone'])
@@ -62,13 +62,13 @@ class InitialAccountAndUserSeeder extends Seeder
                     ->first();
 
                 if ($existingAccount) {
-                    echo "Account already exists: {$existingAccount['real_name']}, ID: {$existingAccount['id']}, Delightful ID: {$existingAccount['magic_id']}" . PHP_EOL;
-                    $allDelightfulIds[] = $existingAccount['magic_id'];
+                    echo "Account already exists: {$existingAccount['real_name']}, ID: {$existingAccount['id']}, Delightful ID: {$existingAccount['delightful_id']}" . PHP_EOL;
+                    $allDelightfulIds[] = $existingAccount['delightful_id'];
                 } else {
                     // Create a new account
-                    $magicId = IdGenerator::getSnowId();
+                    $delightfulId = IdGenerator::getSnowId();
                     $accountData = [
-                        'magic_id' => $magicId,
+                        'delightful_id' => $delightfulId,
                         'type' => 1, // human account
                         'status' => 0, // active
                         'country_code' => $accountInfo['country_code'],
@@ -81,10 +81,10 @@ class InitialAccountAndUserSeeder extends Seeder
                         'updated_at' => date('Y-m-d H:i:s'),
                     ];
 
-                    $accountId = Db::table('magic_contact_accounts')->insertGetId($accountData);
-                    echo "Created new account: {$accountInfo['real_name']}, ID: {$accountId}, Delightful ID: {$magicId}" . PHP_EOL;
+                    $accountId = Db::table('delightful_contact_accounts')->insertGetId($accountData);
+                    echo "Created new account: {$accountInfo['real_name']}, ID: {$accountId}, Delightful ID: {$delightfulId}" . PHP_EOL;
                     $createdAccountIds[] = $accountId;
-                    $allDelightfulIds[] = $magicId;
+                    $allDelightfulIds[] = $delightfulId;
                 }
             }
 
@@ -97,25 +97,25 @@ class InitialAccountAndUserSeeder extends Seeder
             // Create two users under different organizations for each account
             $organizationCodes = ['test001', 'test002'];
 
-            foreach ($allDelightfulIds as $index => $magicId) {
+            foreach ($allDelightfulIds as $index => $delightfulId) {
                 $name = $index === 0 ? 'Administrator' : 'Standard User';
 
                 foreach ($organizationCodes as $orgIndex => $orgCode) {
                     // Check whether a user record already exists for this account in the organization
-                    $existingUser = Db::table('magic_contact_users')
-                        ->where('magic_id', $magicId)
+                    $existingUser = Db::table('delightful_contact_users')
+                        ->where('delightful_id', $delightfulId)
                         ->where('organization_code', $orgCode)
                         ->first();
 
                     if ($existingUser) {
-                        echo "Account {$magicId} already has a user in org {$orgCode}; skipping" . PHP_EOL;
+                        echo "Account {$delightfulId} already has a user in org {$orgCode}; skipping" . PHP_EOL;
                         continue;
                     }
 
                     // Create the user record
                     $userId = di(DelightfulUserRepositoryInterface::class)->getUserIdByType(UserIdType::UserId, $orgCode);
                     $userData = [
-                        'magic_id' => $magicId,
+                        'delightful_id' => $delightfulId,
                         'organization_code' => $orgCode,
                         'user_id' => $userId,
                         'user_type' => 1, // human user
@@ -128,8 +128,8 @@ class InitialAccountAndUserSeeder extends Seeder
                         'updated_at' => date('Y-m-d H:i:s'),
                     ];
 
-                    Db::table('magic_contact_users')->insert($userData);
-                    echo "Created user for account {$magicId} in org {$orgCode}" . PHP_EOL;
+                    Db::table('delightful_contact_users')->insert($userData);
+                    echo "Created user for account {$delightfulId} in org {$orgCode}" . PHP_EOL;
                 }
             }
 

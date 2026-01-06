@@ -15,7 +15,7 @@ class KnowledgeBaseSavedEvent
 {
     public function __construct(
         public KnowledgeBaseDataIsolation $dataIsolation,
-        public KnowledgeBaseEntity $magicFlowKnowledgeEntity,
+        public KnowledgeBaseEntity $delightfulFlowKnowledgeEntity,
         public bool $create,
         /** @var DocumentFileInterface[] $documentFiles */
         public array $documentFiles = [],

@@ -74,12 +74,12 @@ class ImageGenerateNodeRunner extends NodeRunner
         $agentId = $executionData->getAgentId();
         $data['agent_id'] = $agentId;
         $flowDataIsolation = $executionData->getDataIsolation();
-        $magicUserAuthorization = new DelightfulUserAuthorization();
-        $magicUserAuthorization->setOrganizationCode($flowDataIsolation->getCurrentOrganizationCode());
-        $magicUserAuthorization->setId($flowDataIsolation->getCurrentUserId());
+        $delightfulUserAuthorization = new DelightfulUserAuthorization();
+        $delightfulUserAuthorization->setOrganizationCode($flowDataIsolation->getCurrentOrganizationCode());
+        $delightfulUserAuthorization->setId($flowDataIsolation->getCurrentUserId());
         $data['source_type'] = ImageGenerateSourceEnum::FLOW_NODE;
         $data['source_id'] = $executionData->getAgentId() ?? $executionData->getFlowCode();
-        $images = $this->llmAppService->imageGenerate($magicUserAuthorization, $model, '', $data);
+        $images = $this->llmAppService->imageGenerate($delightfulUserAuthorization, $model, '', $data);
         // 流程只取一个
         $image = $images[0];
         // 这里可能是 url、base64，均记录到流程执行附件中（此时会进行上传到云服务端）。上传失败的文件会直接跳过

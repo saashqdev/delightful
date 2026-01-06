@@ -14,8 +14,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_chat_conversations', function (Blueprint $table) {
-            if (Schema::hasColumn('magic_chat_conversations', 'translate_config')) {
+        Schema::table('delightful_chat_conversations', function (Blueprint $table) {
+            if (Schema::hasColumn('delightful_chat_conversations', 'translate_config')) {
                 return;
             }
             $table->json('translate_config')->nullable()->comment('翻译配置项');

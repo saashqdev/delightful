@@ -24,7 +24,7 @@ function NamesSelect({
 	options,
 	value,
 	onChange,
-	placeholder = i18next.t("common.pleaseSelect", { ns: "magicFlow" }),
+	placeholder = i18next.t("common.pleaseSelect", { ns: "delightfulFlow" }),
 	size,
 	isMultiple = true,
 	filterOption,
@@ -45,7 +45,7 @@ function NamesSelect({
 	})
 
 	return (
-		<div className="magic-names-select">
+		<div className="delightful-names-select">
 			<Options
 				{...{
 					itemClick,

@@ -97,7 +97,7 @@ const SelectOptions = forwardRef<SelectOptionRef, SelectOptionsProps>((props, re
 	)
 
 	return (
-		<div className="magic-names-options" onWheel={(e) => e.stopPropagation()}>
+		<div className="delightful-names-options" onWheel={(e) => e.stopPropagation()}>
 			<ul
 				className="ul"
 				onContextMenu={(e) => e.preventDefault()}

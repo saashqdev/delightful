@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_chat_files', function (Blueprint $table) {
+        Schema::table('delightful_chat_files', function (Blueprint $table) {
             $table->string('external_url', 1024)
                 ->default('')
                 ->comment('外链地址');
@@ -26,7 +26,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_chat_files', function (Blueprint $table) {
+        Schema::table('delightful_chat_files', function (Blueprint $table) {
             $table->dropColumn('external_url');
         });
     }

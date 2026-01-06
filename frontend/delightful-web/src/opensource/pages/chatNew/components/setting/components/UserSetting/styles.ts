@@ -3,7 +3,7 @@ import { createStyles } from "antd-style"
 export default createStyles(({ css, prefixCls, token }) => ({
 	container: css``,
 	memberSection: css`
-		background-color: ${token.magicColorScales.grey[0]};
+		background-color: ${token.delightfulColorScales.grey[0]};
 		padding: 10px;
 		border-radius: 10px;
 		width: 100%;
@@ -14,11 +14,11 @@ export default createStyles(({ css, prefixCls, token }) => ({
 	`,
 	addMember: css`
 		--${prefixCls}-control-height: 45px;
-    color: ${token.magicColorUsages.text[1]};
-    background-color: ${token.magicColorUsages.fill[0]} !important;
+    color: ${token.delightfulColorUsages.text[1]};
+    background-color: ${token.delightfulColorUsages.fill[0]} !important;
 
     &:hover {
-      background-color: ${token.magicColorUsages.fill[1]} !important;
+      background-color: ${token.delightfulColorUsages.fill[1]} !important;
     }
 
     border: none;
@@ -34,7 +34,7 @@ export default createStyles(({ css, prefixCls, token }) => ({
 	`,
 	title: css`
 		padding-left: 10px;
-		color: ${token.magicColorUsages.text[2]};
+		color: ${token.delightfulColorUsages.text[2]};
 		font-size: 14px;
 		font-weight: 400;
 		line-height: 20px;

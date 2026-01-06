@@ -6,4 +6,4 @@ declare(strict_types=1);
  */
 use App\Infrastructure\Core\Router\RouteLoader;
 
-RouteLoader::loadDir(BASE_PATH . '/vendor/dtyq/super-magic-module/config/routes-v1');
+RouteLoader::loadDir(BASE_PATH . '/vendor/dtyq/super-delightful-module/config/routes-v1');

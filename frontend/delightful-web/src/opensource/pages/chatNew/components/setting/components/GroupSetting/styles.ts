@@ -31,7 +31,7 @@ export default createStyles(({ css, isDarkMode, prefixCls, token }) => ({
 		line-height: 16px;
 	`,
 	memberSection: css`
-		background-color: ${isDarkMode ? "#161616" : token.magicColorScales.grey[0]};
+		background-color: ${isDarkMode ? "#161616" : token.delightfulColorScales.grey[0]};
 		padding: 10px;
 		border-radius: 10px;
 		width: 100%;
@@ -43,11 +43,11 @@ export default createStyles(({ css, isDarkMode, prefixCls, token }) => ({
 	`,
 	addMember: css`
 		--${prefixCls}-control-height: 45px;
-    color: ${token.magicColorUsages.text[1]};
-    background-color: ${token.magicColorUsages.fill[0]} !important;
+    color: ${token.delightfulColorUsages.text[1]};
+    background-color: ${token.delightfulColorUsages.fill[0]} !important;
 
     &:hover {
-      background-color: ${token.magicColorUsages.fill[1]} !important;
+      background-color: ${token.delightfulColorUsages.fill[1]} !important;
     }
 
     border: none;
@@ -63,7 +63,7 @@ export default createStyles(({ css, isDarkMode, prefixCls, token }) => ({
 	`,
 	title: css`
 		padding-left: 10px;
-		color: ${token.magicColorUsages.text[2]};
+		color: ${token.delightfulColorUsages.text[2]};
 		font-size: 14px;
 		font-weight: 400;
 		line-height: 20px;
@@ -72,10 +72,10 @@ export default createStyles(({ css, isDarkMode, prefixCls, token }) => ({
 		border-radius: 10px;
 		overflow: hidden;
 		cursor: pointer;
-		background: ${token.magicColorScales.grey[0]};
+		background: ${token.delightfulColorScales.grey[0]};
 	`,
 	groupAdminTip: css`
-		color: ${token.magicColorUsages.text[3]};
+		color: ${token.delightfulColorUsages.text[3]};
 		font-size: 12px;
 		font-weight: 400;
 		line-height: 16px;
@@ -83,7 +83,7 @@ export default createStyles(({ css, isDarkMode, prefixCls, token }) => ({
 	buttonList: css`
 		border-radius: 8px;
 		width: 100%;
-		background: ${token.magicColorScales.grey[0]};
+		background: ${token.delightfulColorScales.grey[0]};
 
 		.${prefixCls}-btn {
 			min-height: 50px;
@@ -94,12 +94,12 @@ export default createStyles(({ css, isDarkMode, prefixCls, token }) => ({
 		}
 
 		.${prefixCls}-btn:not(:last-child) {
-			border-bottom: 1px solid ${token.magicColorUsages.border};
+			border-bottom: 1px solid ${token.delightfulColorUsages.border};
 		}
 	`,
 	viewAllMembersButton: css`
 		margin-top: 8px;
-		color: ${isDarkMode ? token.magicColorUsages.text[2] : token.magicColorUsages.text[1]};
+		color: ${isDarkMode ? token.delightfulColorUsages.text[2] : token.delightfulColorUsages.text[1]};
 	`,
 	groupNameContent: css`
 		overflow: hidden;

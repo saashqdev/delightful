@@ -12,7 +12,7 @@ from agentlang.event.event import EventType
 from app.core.stream.http_subscription_stream import HTTPSubscriptionStream
 from app.core.stream.stdout_stream import StdoutStream
 from agentlang.config.config import config
-from app.magic.agent import Agent
+from app.delightful.agent import Agent
 from app.service.agent_service import AgentService
 from app.service.agent_event.file_storage_listener_service import FileStorageListenerService
 from app.service.agent_event.finish_task_listener_service import FinishTaskListenerService
@@ -81,8 +81,8 @@ class AgentDispatcher:
         RagListenerService.register_standard_listeners(self.agent_context)
         FileListenerService.register_standard_listeners(self.agent_context)
 
-        # Get registered listeners from entry points, group=supermagic.listeners.register
-        group = 'supermagic.agent_dispatcher.listeners.register'
+        # Get registered listeners from entry points, group=superdelightful.listeners.register
+        group = 'superdelightful.agent_dispatcher.listeners.register'
         listeners_entry_points = list(importlib.metadata.entry_points(group=group))
         for entry_point in listeners_entry_points:
             try:
@@ -153,9 +153,9 @@ class AgentDispatcher:
         # Extract and set key fields from init_message.metadata
         if init_message.metadata:
             # Set task_id
-            if "super_magic_task_id" in init_message.metadata:
-                self.agent_context.set_task_id(init_message.metadata["super_magic_task_id"])
-                logger.info(f"Set task ID from init_message.metadata: {init_message.metadata['super_magic_task_id']}")
+            if "super_delightful_task_id" in init_message.metadata:
+                self.agent_context.set_task_id(init_message.metadata["super_delightful_task_id"])
+                logger.info(f"Set task ID from init_message.metadata: {init_message.metadata['super_delightful_task_id']}")
             
             # Set sandbox_id
             if "sandbox_id" in init_message.metadata:
@@ -169,8 +169,8 @@ class AgentDispatcher:
 
         await self.agent_service.init_workspace(agent_context=self.agent_context)
 
-        self.agents["magic"] = await self.agent_service.create_agent("magic", self.agent_context)
-        self.agents["super-magic"] = await self.agent_service.create_agent("super-magic", self.agent_context)
+        self.agents["delightful"] = await self.agent_service.create_agent("delightful", self.agent_context)
+        self.agents["super-delightful"] = await self.agent_service.create_agent("super-delightful", self.agent_context)
 
         self.is_workspace_initialized = True
         logger.info("Workspace initialization completed")
@@ -186,13 +186,13 @@ class AgentDispatcher:
             Agent: Selected Agent instance
         """
         if task_mode == TaskMode.CHAT:
-            agent_type = "magic"
+            agent_type = "delightful"
         elif task_mode == TaskMode.PLAN:
-            agent_type = "super-magic"
+            agent_type = "super-delightful"
 
         if agent_type not in self.agents:
-            logger.error(f"Agent type not found: {agent_type}, using default super-magic")
-            agent_type = "super-magic"
+            logger.error(f"Agent type not found: {agent_type}, using default super-delightful")
+            agent_type = "super-delightful"
 
         logger.info(f"Selected agent type based on task_mode({task_mode}): {agent_type}")
 

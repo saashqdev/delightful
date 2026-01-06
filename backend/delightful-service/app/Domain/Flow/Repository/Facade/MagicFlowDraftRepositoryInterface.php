@@ -14,7 +14,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 interface DelightfulFlowDraftRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $magicFlowDraftEntity): DelightfulFlowDraftEntity;
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $delightfulFlowDraftEntity): DelightfulFlowDraftEntity;
 
     public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowDraftEntity;
 
@@ -25,7 +25,7 @@ interface DelightfulFlowDraftRepositoryInterface
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowDraftQuery $query, Page $page): array;
 
-    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $magicFlowDraftEntity): void;
+    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $delightfulFlowDraftEntity): void;
 
     public function clearEarlyRecords(FlowDataIsolation $dataIsolation, string $flowCode): void;
 }

@@ -28,16 +28,16 @@ class Message extends AbstractEntity
     /**
      * 根据 type 的类型,来确定 DelightfulMessage 的具体类型.
      */
-    protected MessageInterface $magicMessage;
+    protected MessageInterface $delightfulMessage;
 
     public function __construct(array $data)
     {
         parent::__construct($data);
         $messageType = $this->getType();
         if ($data[$messageType] instanceof MessageInterface) {
-            $this->magicMessage = $data[$messageType];
+            $this->delightfulMessage = $data[$messageType];
         } else {
-            $this->magicMessage = MessageAssembler::getMessageStructByArray($messageType, $data[$messageType]);
+            $this->delightfulMessage = MessageAssembler::getMessageStructByArray($messageType, $data[$messageType]);
         }
     }
 
@@ -83,11 +83,11 @@ class Message extends AbstractEntity
 
     public function getDelightfulMessage(): MessageInterface
     {
-        return $this->magicMessage;
+        return $this->delightfulMessage;
     }
 
-    public function setDelightfulMessage(MessageInterface $magicMessage): void
+    public function setDelightfulMessage(MessageInterface $delightfulMessage): void
     {
-        $this->magicMessage = $magicMessage;
+        $this->delightfulMessage = $delightfulMessage;
     }
 }

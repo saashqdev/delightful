@@ -8,14 +8,14 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => ({
 		user-select: none;
 	`,
 	icon: css`
-		background-color: ${token.magicColorScales.brand[5]};
+		background-color: ${token.delightfulColorScales.brand[5]};
 		color: white;
 		border-radius: 4px;
 		padding: 4px;
 		user-select: none;
 	`,
 	search: css`
-		background-color: ${token.magicColorUsages.white};
+		background-color: ${token.delightfulColorUsages.white};
 		border: 1px solid ${token.colorBorder};
 		user-select: none;
 	`,
@@ -38,14 +38,14 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => ({
 		padding: 0 10px 20px 10px;
 		border-radius: 8px;
 		border: 1px solid ${token.colorBorder};
-		background: ${token.magicColorScales.grey[0]};
+		background: ${token.delightfulColorScales.grey[0]};
 		user-select: none;
 	`,
 	tipPicture: css`
 		width: 100%;
 	`,
 	tipTitle: css`
-		color: ${token.magicColorUsages.text[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 		font-size: 14px;
 		font-weight: 600;
 		line-height: 20px;
@@ -53,7 +53,7 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => ({
 	`,
 
 	tipDescription: css`
-		color: ${token.magicColorUsages.text[2]};
+		color: ${token.delightfulColorUsages.text[2]};
 		font-size: 14px;
 		font-weight: 400;
 		line-height: 20px;

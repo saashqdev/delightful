@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_api_applications', function (Blueprint $table) {
+        Schema::create('delightful_api_applications', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code', 32)->default('')->comment('组织编码');
             $table->string('code', 64)->default('')->comment('编码');
@@ -36,6 +36,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_api_applications');
+        Schema::dropIfExists('delightful_api_applications');
     }
 };

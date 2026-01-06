@@ -12,7 +12,7 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
 			gap: 10px;
 			padding-top: 14px;
 			padding-bottom: 14px;
-			border: 1px solid ${token.magicColorUsages.border};
+			border: 1px solid ${token.delightfulColorUsages.border};
 			cursor: pointer;
 			position: relative;
 		`,
@@ -26,7 +26,7 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
 		`,
 		active: css`
 			border-width: 2px;
-			border-color: ${token.magicColorScales.brand[5]};
+			border-color: ${token.delightfulColorScales.brand[5]};
 		`,
 		checkIcon: css`
 			position: absolute;
@@ -34,7 +34,7 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
 			top: -1px;
 			width: 32px;
 			height: 32px;
-			background-color: ${token.magicColorScales.brand[5]};
+			background-color: ${token.delightfulColorScales.brand[5]};
 			border-radius: 0 12px 0 12px;
 		`,
 		img: css`
@@ -45,13 +45,13 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
 		`,
 		disabled: css`
 			.platform-title {
-				color: ${token.magicColorUsages.text[3]};
+				color: ${token.delightfulColorUsages.text[3]};
 			}
 			cursor: not-allowed;
 		`,
 		willSupportBlock: css`
-			background-color: ${token.magicColorScales.grey[2]};
-			color: ${token.magicColorUsages.white};
+			background-color: ${token.delightfulColorScales.grey[2]};
+			color: ${token.delightfulColorUsages.white};
 			border-radius: 3px;
 			height: 20px;
 			padding-top: 2px;
@@ -69,7 +69,7 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
 			.${prefixCls}-form-item-label {
 				padding-bottom: 6px !important;
 				label {
-					color: ${token.magicColorUsages.text[2]};
+					color: ${token.delightfulColorUsages.text[2]};
 				}
 			}
 		`,

@@ -11,8 +11,8 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => ({
 		background-repeat: no-repeat;
 		position: relative;
 		background-color: ${isDarkMode
-			? token.magicColorUsages.bg[0]
-			: token.magicColorScales.grey[0]};
+			? token.delightfulColorUsages.bg[0]
+			: token.delightfulColorScales.grey[0]};
 	`,
 	topMask: css`
 		position: absolute;
@@ -22,7 +22,7 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => ({
 		height: 100%;
 
 		background: ${isDarkMode
-			? `linear-gradient(180deg, ${token.magicColorUsages.bg[0]} 0%, #2E2F3870 90%, ${token.magicColorUsages.bg[0]} 100%)`
+			? `linear-gradient(180deg, ${token.delightfulColorUsages.bg[0]} 0%, #2E2F3870 90%, ${token.delightfulColorUsages.bg[0]} 100%)`
 			: "linear-gradient(180deg, rgba(249, 249, 249, 100%) 0%, rgba(255, 255, 255, 50%) 10%, rgba(255, 255, 255, 100%) 100%)"};
 	`,
 	bottomMask: css`
@@ -32,7 +32,7 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => ({
 		width: 100%;
 		height: 270px;
 		background: ${isDarkMode
-			? `linear-gradient(180deg,rgba(255, 255, 255, 0) 0%,rgba(28, 29, 35, 0.8), 60%, ${token.magicColorUsages.bg[0]} 88.86%)`
+			? `linear-gradient(180deg,rgba(255, 255, 255, 0) 0%,rgba(28, 29, 35, 0.8), 60%, ${token.delightfulColorUsages.bg[0]} 88.86%)`
 			: "linear-gradient(180deg,rgba(255, 255, 255, 0) 0%,rgba(255, 255, 255, 0.8) 24.68%,#fff 88.86%)"};
 	`,
 	header: css`
@@ -43,7 +43,7 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => ({
 	`,
 	desc: css`
 		font-size: 12px;
-		color: ${isDarkMode ? token.magicColorUsages.text[2] : token.magicColorUsages.text[2]};
+		color: ${isDarkMode ? token.delightfulColorUsages.text[2] : token.delightfulColorUsages.text[2]};
 	`,
 	button: css`
 		height: 30px;
@@ -52,7 +52,7 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => ({
 		border: 1px solid ${token.colorBorder};
 		border-radius: 8px;
 	`,
-	magicButton: css`
+	delightfulButton: css`
 		flex-shrink: 0;
 		background: linear-gradient(
 			95.14deg,
@@ -63,11 +63,11 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => ({
 			#8d55ed 100%
 		);
 		border: none;
-		color: ${token.magicColorUsages.white};
+		color: ${token.delightfulColorUsages.white};
 
 		&:hover {
 			background: linear-gradient(117deg, #ff0ffa -53.65%, #315cec 163.03%) !important;
-			color: ${token.magicColorUsages.white} !important;
+			color: ${token.delightfulColorUsages.white} !important;
 		}
 	`,
 	waterfallWrapper: css`
@@ -124,7 +124,7 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => ({
 		-webkit-line-clamp: 3;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-		color: ${token.magicColorUsages.white};
+		color: ${token.delightfulColorUsages.white};
 	`,
 	editor: css`
 		width: 90%;

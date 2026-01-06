@@ -30,7 +30,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
     //     $userTask = [
     //         'conversation_id' => '728277721403252736',
     //         'topic_id' => '749639569880518657',
-    //         'magic_env_id' => 1,
+    //         'delightful_env_id' => 1,
     //         'name' => '查询数据列表',
     //         'creator' => 'usi_3715ce50bc02d7e72ba7891649b7f1da',
     //         'nickname' => 'xxx',

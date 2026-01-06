@@ -12,7 +12,7 @@ interface ReportFileUploadsData {
 export interface ReportFileUploadsResponse {
 	file_id: string
 	user_id: string
-	magic_message_id: string
+	delightful_message_id: string
 	organization_code: string
 	file_extension: string
 	file_key: string

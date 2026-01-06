@@ -79,13 +79,13 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $dataIsolation->setContainOfficialOrganization(true);
         $flowData = $this->getFlow($dataIsolation, $flowId, [Type::Main]);
-        $magicFlow = $flowData['flow'];
+        $delightfulFlow = $flowData['flow'];
 
         $triggerData = new TriggerData(
             triggerTime: new DateTime($messageEntity?->getSendTime() ?? $seqEntity->getCreatedAt()),
             userInfo: ['user_entity' => $senderUserEntity, 'account_entity' => $senderAccountEntity],
             messageInfo: ['message_entity' => $messageEntity, 'seq_entity' => $seqEntity],
-            globalVariable: $magicFlow->getGlobalVariable(),
+            globalVariable: $delightfulFlow->getGlobalVariable(),
             isIgnoreMessageEntity: $seqEntity->canTriggerFlow(),
         );
         $operator = $this->createExecutionOperator($authorization);
@@ -95,7 +95,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             operator: $operator,
             triggerType: $triggerType,
             triggerData: $triggerData,
-            conversationId: ConversationId::ImChat->gen($magicFlow->getCode() . '-' . $seqEntity->getConversationId()),
+            conversationId: ConversationId::ImChat->gen($delightfulFlow->getCode() . '-' . $seqEntity->getConversationId()),
             originConversationId: $seqEntity->getConversationId(),
             executionType: ExecutionType::IMChat,
         );
@@ -107,15 +107,15 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
 
         $executionData->setSenderEntities($senderUserEntity, $seqEntity, $messageEntity);
         $executionData->setTopicId($seqEntity->getExtra()?->getTopicId());
-        $executionData->setAgentId($magicFlow->getAgentId());
+        $executionData->setAgentId($delightfulFlow->getAgentId());
         if ($flowData['agent_version']) {
             $executionData->setInstructionConfigs($flowData['agent_version']->getInstructs());
         }
-        $executor = new DelightfulFlowExecutor($magicFlow, $executionData);
+        $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
         $executor->execute();
 
         // 如果有节点执行失败，抛出异常
-        foreach ($magicFlow->getNodes() as $node) {
+        foreach ($delightfulFlow->getNodes() as $node) {
             $nodeDebugResult = $node->getNodeDebugResult();
             if ($nodeDebugResult && ! $nodeDebugResult->isSuccess()) {
                 ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, $nodeDebugResult->getErrorMessage());
@@ -135,12 +135,12 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         if (! $user instanceof DelightfulUserEntity) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'user not found');
         }
-        $account = $this->magicAccountDomainService->getByDelightfulId($user->getDelightfulId());
+        $account = $this->delightfulAccountDomainService->getByDelightfulId($user->getDelightfulId());
         $operator->setRealName($account?->getRealName());
         $operator->setSourceId($apiChatDTO->getShareOptions('source_id', 'sk_flow'));
 
         $flowData = $this->getFlow($flowDataIsolation, $apiChatDTO->getFlowCode(), [Type::Main]);
-        $magicFlow = $flowData['flow'];
+        $delightfulFlow = $flowData['flow'];
 
         // 设置指令
         $messageEntity = new TextMessage(['content' => $apiChatDTO->getMessage()]);
@@ -152,7 +152,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             triggerTime: new DateTime(),
             userInfo: ['user_entity' => $user, 'account_entity' => $account],
             messageInfo: ['message_entity' => TriggerData::createMessageEntity($messageEntity)],
-            globalVariable: $magicFlow->getGlobalVariable(),
+            globalVariable: $delightfulFlow->getGlobalVariable(),
             attachments: AttachmentUtil::getByApiArray($apiChatDTO->getAttachments()),
         );
         $originConversationId = $apiChatDTO->getConversationId();
@@ -165,12 +165,12 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             originConversationId: $originConversationId,
             executionType: ExecutionType::SKApi,
         );
-        $executionData->setAgentId($magicFlow->getAgentId());
+        $executionData->setAgentId($delightfulFlow->getAgentId());
         if ($flowData['agent_version']) {
             $executionData->setInstructionConfigs($flowData['agent_version']->getInstructs());
         }
         $executionData->setStream($apiChatDTO->isStream(), $apiChatDTO->getVersion());
-        $executor = new DelightfulFlowExecutor($magicFlow, $executionData, async: $apiChatDTO->isAsync());
+        $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData, async: $apiChatDTO->isAsync());
         if ($apiChatDTO->isStream()) {
             FlowEventStreamManager::get();
         }
@@ -200,7 +200,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         if (! $user instanceof DelightfulUserEntity) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'user not found');
         }
-        $account = $this->magicAccountDomainService->getByDelightfulId($user->getDelightfulId());
+        $account = $this->delightfulAccountDomainService->getByDelightfulId($user->getDelightfulId());
         $operator->setRealName($account?->getRealName());
         $operator->setSourceId($apiChatDTO->getShareOptions('source_id', 'sk_flow'));
 
@@ -209,7 +209,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             $operationValidate = '';
         }
         $flowData = $this->getFlow($flowDataIsolation, $apiChatDTO->getFlowCode(), [Type::Sub, Type::Tools], operationValidate: $operationValidate);
-        $magicFlow = $flowData['flow'];
+        $delightfulFlow = $flowData['flow'];
 
         // 设置指令
         $messageEntity = new TextMessage(['content' => $apiChatDTO->getMessage()]);
@@ -219,7 +219,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             userInfo: ['user_entity' => $user, 'account_entity' => $account],
             messageInfo: ['message_entity' => TriggerData::createMessageEntity($messageEntity)],
             params: $apiChatDTO->getParams(),
-            globalVariable: $magicFlow->getGlobalVariable(),
+            globalVariable: $delightfulFlow->getGlobalVariable(),
             attachments: AttachmentUtil::getByApiArray($apiChatDTO->getAttachments()),
         );
         $originConversationId = $apiChatDTO->getConversationId();
@@ -232,7 +232,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             originConversationId: $originConversationId,
             executionType: ExecutionType::SKApi,
         );
-        $executor = new DelightfulFlowExecutor($magicFlow, $executionData, async: $apiChatDTO->isAsync());
+        $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData, async: $apiChatDTO->isAsync());
         $executor->execute();
         if ($apiChatDTO->isAsync()) {
             return [
@@ -243,17 +243,17 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
 
         return [
             'conversation_id' => $executionData->getOriginConversationId(),
-            'result' => $magicFlow->getResult(),
+            'result' => $delightfulFlow->getResult(),
         ];
     }
 
     public function apiChatByMCPTool(FlowDataIsolation $flowDataIsolation, DelightfulFlowApiChatDTO $apiChatDTO): array
     {
-        $user = $this->magicUserDomainService->getByUserId($flowDataIsolation->getCurrentUserId());
+        $user = $this->delightfulUserDomainService->getByUserId($flowDataIsolation->getCurrentUserId());
         if (! $user) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'user not found');
         }
-        $account = $this->magicAccountDomainService->getByDelightfulId($user->getDelightfulId());
+        $account = $this->delightfulAccountDomainService->getByDelightfulId($user->getDelightfulId());
         if (! $account) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'account not found');
         }
@@ -266,7 +266,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             $apiChatDTO->getFlowCode(),
             [Type::Main],
         );
-        $magicFlow = $flowData['flow'];
+        $delightfulFlow = $flowData['flow'];
 
         // Set instruction for chat scenario
         $messageEntity = new TextMessage(['content' => $apiChatDTO->getMessage()]);
@@ -280,7 +280,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             userInfo: ['user_entity' => $user, 'account_entity' => $account],
             messageInfo: ['message_entity' => TriggerData::createMessageEntity($messageEntity)],
             params: $apiChatDTO->getParams(),
-            globalVariable: $magicFlow->getGlobalVariable(),
+            globalVariable: $delightfulFlow->getGlobalVariable(),
             attachments: AttachmentUtil::getByApiArray($apiChatDTO->getAttachments()),
         );
         $originConversationId = $apiChatDTO->getConversationId() ?: IdGenerator::getUniqueId32();
@@ -293,11 +293,11 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             originConversationId: $originConversationId,
             executionType: ExecutionType::SKApi,
         );
-        $executionData->setAgentId($magicFlow->getAgentId());
+        $executionData->setAgentId($delightfulFlow->getAgentId());
         if ($flowData['agent_version']) {
             $executionData->setInstructionConfigs($flowData['agent_version']->getInstructs());
         }
-        $executor = new DelightfulFlowExecutor($magicFlow, $executionData);
+        $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
         $executor->execute();
 
         return [
@@ -308,12 +308,12 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
 
     public function apiParamCallByRemoteTool(FlowDataIsolation $flowDataIsolation, DelightfulFlowApiChatDTO $apiChatDTO, string $sourceId = ''): array
     {
-        $user = $this->magicUserDomainService->getByUserId($flowDataIsolation->getCurrentUserId());
+        $user = $this->delightfulUserDomainService->getByUserId($flowDataIsolation->getCurrentUserId());
         if (! $user) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'user not found');
         }
         EnvManager::initDataIsolationEnv($flowDataIsolation, force: true);
-        $account = $this->magicAccountDomainService->getByDelightfulId($user->getDelightfulId());
+        $account = $this->delightfulAccountDomainService->getByDelightfulId($user->getDelightfulId());
         if (! $account) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'account not found');
         }
@@ -327,7 +327,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             operationValidate: 'read',
             flowVersionCode: $apiChatDTO->getFlowVersionCode()
         );
-        $magicFlow = $flowData['flow'];
+        $delightfulFlow = $flowData['flow'];
 
         $messageEntity = new TextMessage(['content' => $apiChatDTO->getMessage()]);
 
@@ -336,7 +336,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             userInfo: ['user_entity' => $user, 'account_entity' => $account],
             messageInfo: ['message_entity' => TriggerData::createMessageEntity($messageEntity)],
             params: $apiChatDTO->getParams(),
-            globalVariable: $magicFlow->getGlobalVariable(),
+            globalVariable: $delightfulFlow->getGlobalVariable(),
             attachments: AttachmentUtil::getByApiArray($apiChatDTO->getAttachments()),
         );
         $originConversationId = $apiChatDTO->getConversationId() ?: IdGenerator::getUniqueId32();
@@ -349,10 +349,10 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             originConversationId: $originConversationId,
             executionType: ExecutionType::SKApi,
         );
-        $executor = new DelightfulFlowExecutor($magicFlow, $executionData);
+        $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
         $executor->execute();
         return [
-            'result' => $magicFlow->getResult(),
+            'result' => $delightfulFlow->getResult(),
         ];
     }
 
@@ -365,7 +365,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $authorization = di(FlowOpenApiCheckInterface::class)->handle($apiChatDTO);
         $flowDataIsolation = $this->createFlowDataIsolation($authorization);
 
-        $log = $this->magicFlowExecuteLogDomainService->getByExecuteId($flowDataIsolation, $apiChatDTO->getTaskId());
+        $log = $this->delightfulFlowExecuteLogDomainService->getByExecuteId($flowDataIsolation, $apiChatDTO->getTaskId());
         if (! $log) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }
@@ -387,12 +387,12 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
     {
         // 暂时只有系统级别的定时任务
         $dataIsolation = FlowDataIsolation::create();
-        $magicFlow = di(DelightfulFlowDomainService::class)->getByCode($dataIsolation, $flowCode);
-        if (! $magicFlow) {
+        $delightfulFlow = di(DelightfulFlowDomainService::class)->getByCode($dataIsolation, $flowCode);
+        if (! $delightfulFlow) {
             return;
         }
-        $dataIsolation->setCurrentOrganizationCode($magicFlow->getOrganizationCode());
-        $dataIsolation->setCurrentUserId($magicFlow->getCreator());
+        $dataIsolation->setCurrentOrganizationCode($delightfulFlow->getOrganizationCode());
+        $dataIsolation->setCurrentUserId($delightfulFlow->getCreator());
         EnvManager::initDataIsolationEnv($dataIsolation);
 
         $datetime = new DateTime();
@@ -406,32 +406,32 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
                 'branch_id' => $branchId,
                 'routine_config' => $routineConfig,
             ],
-            globalVariable: $magicFlow->getGlobalVariable(),
+            globalVariable: $delightfulFlow->getGlobalVariable(),
         );
 
-        $operator = Operator::createByCrontab($magicFlow->getOrganizationCode());
+        $operator = Operator::createByCrontab($delightfulFlow->getOrganizationCode());
         $operator->setSourceId('routine');
         $executionData = new ExecutionData(
             flowDataIsolation: $dataIsolation,
             operator: $operator,
             triggerType: TriggerType::Routine,
             triggerData: $triggerData,
-            conversationId: ConversationId::Routine->gen($magicFlow->getCode() . '_routine'),
+            conversationId: ConversationId::Routine->gen($delightfulFlow->getCode() . '_routine'),
             executionType: ExecutionType::Routine,
         );
-        if ($magicFlow->getType()->isMain()) {
-            $agent = di(DelightfulAgentDomainService::class)->getByFlowCode($magicFlow->getCode());
+        if ($delightfulFlow->getType()->isMain()) {
+            $agent = di(DelightfulAgentDomainService::class)->getByFlowCode($delightfulFlow->getCode());
             if ($agent) {
                 $executionData->setAgentId($agent->getId());
-                $magicFlow->setAgentId($agent->getId());
+                $delightfulFlow->setAgentId($agent->getId());
             }
         }
-        $executor = new DelightfulFlowExecutor($magicFlow, $executionData);
+        $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
 
         $executor->execute();
 
         // 检查错误
-        foreach ($magicFlow->getNodes() as $node) {
+        foreach ($delightfulFlow->getNodes() as $node) {
             $nodeDebugResult = $node->getNodeDebugResult();
             if ($nodeDebugResult && ! $nodeDebugResult->isSuccess()) {
                 ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, $nodeDebugResult->getErrorMessage());
@@ -442,12 +442,12 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
     /**
      * 试运行.
      */
-    public function testRun(Authenticatable $authorization, DelightfulFlowEntity $magicFlowEntity, array $triggerConfig): array
+    public function testRun(Authenticatable $authorization, DelightfulFlowEntity $delightfulFlowEntity, array $triggerConfig): array
     {
         // 获取助理信息
-        if ($magicFlowEntity->getType() == Type::Main) {
-            $magicAgentEntity = $this->magicAgentDomainService->getByFlowCode($magicFlowEntity->getCode());
-            $magicFlowEntity->setAgentId($magicAgentEntity->getId());
+        if ($delightfulFlowEntity->getType() == Type::Main) {
+            $delightfulAgentEntity = $this->delightfulAgentDomainService->getByFlowCode($delightfulFlowEntity->getCode());
+            $delightfulFlowEntity->setAgentId($delightfulAgentEntity->getId());
         }
 
         $triggerType = TriggerType::tryFrom($triggerConfig['trigger_type'] ?? 0);
@@ -455,7 +455,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_found', ['label' => 'trigger_type']);
         }
         $flowDataIsolation = $this->createFlowDataIsolation($authorization);
-        $magicFlowEntity->setOrganizationCode($flowDataIsolation->getCurrentOrganizationCode());
+        $delightfulFlowEntity->setOrganizationCode($flowDataIsolation->getCurrentOrganizationCode());
 
         $result = [
             'success' => true,
@@ -482,12 +482,12 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             params: $triggerConfig['trigger_data'] ?? [],
             paramsForm: $triggerConfig['trigger_data_form'] ?? [],
             // 试运行时，全局变量为手动传入
-            globalVariable: ComponentFactory::fastCreate($triggerConfig['global_variable'] ?? []) ?? $magicFlowEntity->getGlobalVariable(),
+            globalVariable: ComponentFactory::fastCreate($triggerConfig['global_variable'] ?? []) ?? $delightfulFlowEntity->getGlobalVariable(),
             attachments: AttachmentUtil::getByApiArray($triggerConfig['trigger_data']['files'] ?? []),
         );
 
-        $magicFlowEntity->prepareTestRun();
-        $magicFlowEntity->setCreator($flowDataIsolation->getCurrentUserId());
+        $delightfulFlowEntity->prepareTestRun();
+        $delightfulFlowEntity->setCreator($flowDataIsolation->getCurrentUserId());
 
         $originConversationId = $triggerConfig['conversation_id'] ?? IdGenerator::getUniqueId32();
         $topicId = $triggerConfig['topic_id'] ?? '';
@@ -501,14 +501,14 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             executionType: ExecutionType::Debug,
         );
         $executionData->setTopicId($topicId);
-        $executionData->setAgentId($magicFlowEntity->getAgentId());
+        $executionData->setAgentId($delightfulFlowEntity->getAgentId());
         $executionData->setDebug((bool) ($triggerConfig['debug'] ?? false));
         // 运行流程图，检测是否可以运行
-        $executor = new DelightfulFlowExecutor($magicFlowEntity, $executionData);
+        $executor = new DelightfulFlowExecutor($delightfulFlowEntity, $executionData);
         $executor->execute();
 
         // 获取 node 运行结果
-        foreach ($magicFlowEntity->getNodes() as $node) {
+        foreach ($delightfulFlowEntity->getNodes() as $node) {
             if ($node->getNodeDebugResult()) {
                 // 有一个失败就判定为失败
                 if (! $node->getNodeDebugResult()->isSuccess()) {
@@ -556,11 +556,11 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             ];
         }
 
-        $magicFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $flowId);
-        if (! $magicFlow) {
+        $delightfulFlow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $flowId);
+        if (! $delightfulFlow) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_found', ['label' => $flowId]);
         }
-        if (! is_null($types) && ! in_array($magicFlow->getType(), $types)) {
+        if (! is_null($types) && ! in_array($delightfulFlow->getType(), $types)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.executor.unsupported_flow_type');
         }
 
@@ -568,23 +568,23 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $agent = null;
         $agentVersion = null;
         $agentId = '';
-        switch ($magicFlow->getType()) {
+        switch ($delightfulFlow->getType()) {
             case Type::Main:
-                $agent = $this->magicAgentDomainService->getByFlowCode($magicFlow->getCode());
+                $agent = $this->delightfulAgentDomainService->getByFlowCode($delightfulFlow->getCode());
                 // 仅允许创建人可以在禁用状态下调用
                 if ($agent->getCreatedUid() !== $dataIsolation->getCurrentUserId() && ! $agent->isAvailable()) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.agent_disabled');
                 }
                 $agentVersion = $agent;
                 if ($agent->getAgentVersionId()) {
-                    $agentVersion = $this->magicAgentVersionDomainService->getById($agent->getAgentVersionId());
+                    $agentVersion = $this->delightfulAgentVersionDomainService->getById($agent->getAgentVersionId());
                     $flowVersionCode = $agentVersion->getFlowVersion();
                 }
                 $agentId = $agent->getId();
                 break;
             case Type::Sub:
             case Type::Tools:
-                if (! $magicFlow->isEnabled()) {
+                if (! $delightfulFlow->isEnabled()) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.flow_disabled');
                 }
                 break;
@@ -593,18 +593,18 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         }
 
         if (! empty($flowVersionCode)) {
-            $flowVersion = $this->magicFlowVersionDomainService->show($dataIsolation, $flowId, $flowVersionCode);
-            $magicFlow = $flowVersion->getDelightfulFlow();
-            $magicFlow->setVersionCode($flowVersion->getCode());
+            $flowVersion = $this->delightfulFlowVersionDomainService->show($dataIsolation, $flowId, $flowVersionCode);
+            $delightfulFlow = $flowVersion->getDelightfulFlow();
+            $delightfulFlow->setVersionCode($flowVersion->getCode());
         }
-        $magicFlow->setAgentId((string) $agentId);
+        $delightfulFlow->setAgentId((string) $agentId);
 
         if ($operationValidate) {
-            $this->getFlowOperation($dataIsolation, $magicFlow)->validate($operationValidate, $flowId);
+            $this->getFlowOperation($dataIsolation, $delightfulFlow)->validate($operationValidate, $flowId);
         }
 
         return [
-            'flow' => $magicFlow,
+            'flow' => $delightfulFlow,
             'flow_version' => $flowVersion,
             'agent' => $agent,
             'agent_version' => $agentVersion,

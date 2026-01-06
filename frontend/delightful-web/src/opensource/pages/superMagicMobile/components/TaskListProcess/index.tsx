@@ -19,10 +19,10 @@ const useStyles = createStyles(({ token }) => ({
 		fontSize: 12,
 		fontWeight: 400,
 		lineHeight: "16px",
-		color: token.magicColorUsages.text[2],
+		color: token.delightfulColorUsages.text[2],
 	},
 	icon: {
-		stroke: token.magicColorUsages.text[2],
+		stroke: token.delightfulColorUsages.text[2],
 	},
 }))
 

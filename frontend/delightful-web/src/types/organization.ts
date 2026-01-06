@@ -95,10 +95,10 @@ export const enum StructureUserType {
 }
 
 export interface StructureUserItem {
-	/** magic 生态下的用户 ID */
+	/** delightful 生态下的用户 ID */
 	user_id: string
 	/** 钉钉 ID */
-	magic_id: string
+	delightful_id: string
 	/** 组织编码 */
 	organization_code: string
 	/** 用户类型 */

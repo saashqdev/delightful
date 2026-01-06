@@ -22,8 +22,8 @@ export const useStyles = createStyles(
 				font-size: 14px;
 				font-weight: 600;
 				color: ${isDarkMode
-					? token.magicColorScales.grey[1]
-					: token.magicColorUsages.text[1]};
+					? token.delightfulColorScales.grey[1]
+					: token.delightfulColorUsages.text[1]};
 				margin-bottom: 8px;
 			`,
 			radioBox: css`
@@ -51,26 +51,26 @@ export const useStyles = createStyles(
 				font-size: 12px;
 				position: relative;
 				color: ${isDarkMode
-					? token.magicColorScales.grey[4]
-					: token.magicColorUsages.text[3]};
+					? token.delightfulColorScales.grey[4]
+					: token.delightfulColorUsages.text[3]};
 			`,
 			checked: css`
 				border-width: 2px;
 				border-color: ${isDarkMode
-					? token.magicColorScales.brand[5]
-					: token.magicColorScales.brand[5]};
+					? token.delightfulColorScales.brand[5]
+					: token.delightfulColorScales.brand[5]};
 			`,
 			customRadioTitle: css`
 				font-size: 14px;
 				line-height: 20px;
 				color: ${isDarkMode
-					? token.magicColorScales.grey[1]
-					: token.magicColorUsages.text[1]};
+					? token.delightfulColorScales.grey[1]
+					: token.delightfulColorUsages.text[1]};
 			`,
 			disabled: css`
 				color: ${isDarkMode
-					? token.magicColorScales.grey[4]
-					: token.magicColorUsages.text[3]} !important;
+					? token.delightfulColorScales.grey[4]
+					: token.delightfulColorUsages.text[3]} !important;
 			`,
 			disabledText: css`
 			position: absolute;
@@ -79,8 +79,8 @@ export const useStyles = createStyles(
 			border-radius: 3px;
 			padding: 2px 8px;
 			font-size: 12px;
-			background-color: ${isDarkMode ? token.magicColorScales.grey[2] : token.magicColorScales.grey[2]};
-			color: ${isDarkMode ? token.magicColorScales.grey[1] : token.magicColorUsages.white};
+			background-color: ${isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorScales.grey[2]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[1] : token.delightfulColorUsages.white};
 			}
 		`,
 			checkedIcon: css`
@@ -88,8 +88,8 @@ export const useStyles = createStyles(
 				right: -2px;
 				top: -2px;
 				background-color: ${isDarkMode
-					? token.magicColorScales.brand[5]
-					: token.magicColorScales.brand[5]};
+					? token.delightfulColorScales.brand[5]
+					: token.delightfulColorScales.brand[5]};
 				border-radius: 0 12px 0 12px;
 				display: flex;
 				align-items: center;
@@ -100,10 +100,10 @@ export const useStyles = createStyles(
 			alert: css`
 				border: 0;
 				background: ${isDarkMode
-					? token.magicColorScales.orange[0]
-					: token.magicColorScales.orange[0]};
-				.magic-alert-message {
-					color: ${token.magicColorUsages.warning.default}!important;
+					? token.delightfulColorScales.orange[0]
+					: token.delightfulColorScales.orange[0]};
+				.delightful-alert-message {
+					color: ${token.delightfulColorUsages.warning.default}!important;
 				}
 			`,
 			aiButton: css`
@@ -112,8 +112,8 @@ export const useStyles = createStyles(
 				border-radius: 4px;
 				padding: 0;
 				background-color: ${isDarkMode
-					? token.magicColorScales.grey[2]
-					: token.magicColorUsages.fill[0]};
+					? token.delightfulColorScales.grey[2]
+					: token.delightfulColorUsages.fill[0]};
 				margin-bottom: 6px;
 				border: 0px;
 			`,

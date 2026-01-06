@@ -22,10 +22,10 @@ class AttachmentUtil
         $attachments = [];
         $messageContent = $messageEntity->getContent();
         if ($messageContent instanceof AbstractAttachmentMessage) {
-            $magicChatFileDomainService = di(DelightfulChatFileDomainService::class);
+            $delightfulChatFileDomainService = di(DelightfulChatFileDomainService::class);
             $fileDomainService = di(FileDomainService::class);
 
-            $chatFiles = $magicChatFileDomainService->getFileEntitiesByFileIds($messageContent->getFileIds());
+            $chatFiles = $delightfulChatFileDomainService->getFileEntitiesByFileIds($messageContent->getFileIds());
             $fileOrgPaths = [];
             $chatFilesMaps = [];
             foreach ($chatFiles as $chatFile) {

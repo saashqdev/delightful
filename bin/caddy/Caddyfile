@@ -42,7 +42,7 @@
 
     # Reverse proxy WebSocket requests
     reverse_proxy @websockets {
-        to magic-service:9502
+        to delightful-service:9502
         header_up Host {host}
         header_up X-Real-IP {remote}
         header_up X-Forwarded-For {remote}
@@ -52,7 +52,7 @@
 
     # Reverse proxy API service
     reverse_proxy /api/* {
-        to magic-service:9501
+        to delightful-service:9501
         header_up Host {host}
         header_up X-Real-IP {remote}
         header_up X-Forwarded-For {remote}
@@ -62,7 +62,7 @@
 
     # Reverse proxy API service
     reverse_proxy /v1/* {
-        to magic-service:9501
+        to delightful-service:9501
         header_up Host {host}
         header_up X-Real-IP {remote}
         header_up X-Forwarded-For {remote}
@@ -70,9 +70,9 @@
         header_down Access-Control-Allow-Origin *
     }
 
-    # By default proxy all other requests to the magic-web service
+    # By default proxy all other requests to the delightful-web service
     reverse_proxy {
-        to magic-web:8080
+        to delightful-web:8080
         header_up Host {host}
         header_up X-Real-IP {remote}
         header_up X-Forwarded-For {remote}

@@ -14,19 +14,19 @@ use Delightful\BeDelightful\Domain\SuperAgent\Entity\UserAuthorization;
 class UserDomainService
 {
     public function __construct(
-        protected DelightfulUserDomainService $magicUserDomainService,
+        protected DelightfulUserDomainService $delightfulUserDomainService,
     ) {
     }
 
     public function getUserEntity(string $userId): ?DelightfulUserEntity
     {
-        return $this->magicUserDomainService->getUserById($userId);
+        return $this->delightfulUserDomainService->getUserById($userId);
     }
 
     public function getUserAuthorization(string $userId): ?UserAuthorization
     {
-        $magicUserEntity = $this->getUserEntity($userId);
+        $delightfulUserEntity = $this->getUserEntity($userId);
 
-        return UserAuthorization::fromUserEntity($magicUserEntity);
+        return UserAuthorization::fromUserEntity($delightfulUserEntity);
     }
 }

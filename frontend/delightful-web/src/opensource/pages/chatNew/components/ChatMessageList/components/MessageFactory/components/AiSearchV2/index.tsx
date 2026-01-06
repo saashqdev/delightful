@@ -69,7 +69,7 @@ const TimelineCollapsePanelKey = "timeline"
 const DelightfulAggregateAISearchCardV2 = observer(({ content }: DelightfulAggregateAISearchCardV2Props) => {
 	const { fontSize } = useFontSize()
 	const { t } = useTranslation("interface")
-	const { magicColorUsages } = useTheme()
+	const { delightfulColorUsages } = useTheme()
 
 	const summaryRef = useRef<HTMLDivElement>(null)
 
@@ -347,8 +347,8 @@ const DelightfulAggregateAISearchCardV2 = observer(({ content }: DelightfulAggre
 								style={{
 									fontWeight: isPending ? 600 : 400,
 									color: isPending
-										? magicColorUsages.text[0]
-										: magicColorUsages.text[2],
+										? delightfulColorUsages.text[0]
+										: delightfulColorUsages.text[2],
 								}}
 							>
 								{titleMap[questionId]?.question}
@@ -380,7 +380,7 @@ const DelightfulAggregateAISearchCardV2 = observer(({ content }: DelightfulAggre
 		content?.stream_options?.status,
 		isSearchingFinish,
 		llmResponse,
-		magicColorUsages.text,
+		delightfulColorUsages.text,
 		styles.questionReadCount,
 		styles.questionTitle,
 		styles.timelineItem,
@@ -430,7 +430,7 @@ const DelightfulAggregateAISearchCardV2 = observer(({ content }: DelightfulAggre
 						className={styles.timelineContainer}
 						style={{
 							background: finish
-								? magicColorUsages.primaryLight.default
+								? delightfulColorUsages.primaryLight.default
 								: "transparent",
 						}}
 					>

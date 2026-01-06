@@ -24,7 +24,7 @@ export type ChatWebSocketEventMap = {
 	login: [
 		{
 			type: EventType.Login
-			payload: { authorization: string; magicOrganizationCode: string }
+			payload: { authorization: string; delightfulOrganizationCode: string }
 		},
 	]
 }

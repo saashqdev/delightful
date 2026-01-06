@@ -20,16 +20,16 @@ class DelightfulAgentFactory
 
     public static function toEntity(array $bot): DelightfulAgentEntity
     {
-        $magicAgentEntity = new DelightfulAgentEntity($bot);
+        $delightfulAgentEntity = new DelightfulAgentEntity($bot);
         if (isset($bot['last_version_info'])) {
-            $lastVersionInfo = $magicAgentEntity->getLastVersionInfo();
+            $lastVersionInfo = $delightfulAgentEntity->getLastVersionInfo();
             $lastVersionInfo['agent_id'] = $lastVersionInfo['root_id'];
             $lastVersionInfo['agent_name'] = $lastVersionInfo['robot_name'];
             $lastVersionInfo['agent_description'] = $lastVersionInfo['robot_description'];
             $lastVersionInfo['agent_avatar'] = $lastVersionInfo['robot_avatar'];
-            $magicAgentEntity->setLastVersionInfo($lastVersionInfo);
+            $delightfulAgentEntity->setLastVersionInfo($lastVersionInfo);
         }
-        return $magicAgentEntity;
+        return $delightfulAgentEntity;
     }
 
     public static function toEntities(array $bots): array

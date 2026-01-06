@@ -22,7 +22,7 @@ class MysqlStringCache implements StringCacheInterface
     private LoggerInterface $logger;
 
     public function __construct(
-        private readonly DelightfulFlowCacheDomainService $magicFlowCacheDomainService,
+        private readonly DelightfulFlowCacheDomainService $delightfulFlowCacheDomainService,
         LoggerFactory $loggerFactory,
     ) {
         $this->logger = $loggerFactory->get('MysqlStringCache');
@@ -38,7 +38,7 @@ class MysqlStringCache implements StringCacheInterface
             $entity->setTtlSeconds($ttl);
             $entity->setScopeTag($this->extractScopeFromPrefix($prefix));
 
-            $this->magicFlowCacheDomainService->saveCache($dataIsolation, $entity);
+            $this->delightfulFlowCacheDomainService->saveCache($dataIsolation, $entity);
 
             return true;
         } catch (Exception $e) {
@@ -55,7 +55,7 @@ class MysqlStringCache implements StringCacheInterface
     public function get(FlowDataIsolation $dataIsolation, string $prefix, string $key, string $default = ''): string
     {
         try {
-            $entity = $this->magicFlowCacheDomainService->getCache($dataIsolation, $prefix, $key);
+            $entity = $this->delightfulFlowCacheDomainService->getCache($dataIsolation, $prefix, $key);
 
             return $entity ? $entity->getCacheValue() : $default;
         } catch (Exception $e) {
@@ -72,7 +72,7 @@ class MysqlStringCache implements StringCacheInterface
     public function del(FlowDataIsolation $dataIsolation, string $prefix, string $key): bool
     {
         try {
-            return $this->magicFlowCacheDomainService->deleteCache($dataIsolation, $prefix, $key);
+            return $this->delightfulFlowCacheDomainService->deleteCache($dataIsolation, $prefix, $key);
         } catch (Exception $e) {
             $this->logger->error('MysqlStringCacheDeleteFailed', [
                 'prefix' => $prefix,

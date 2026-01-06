@@ -47,14 +47,14 @@ class ExternalAttachmentUploadSubscriber implements ListenerInterface
             $uploadFile
         );
 
-        $magicChatFileEntity = new DelightfulChatFileEntity();
-        $magicChatFileEntity->setFileId($externalAttachment->getChatFileId());
-        $magicChatFileEntity->setFileType(FileType::getTypeFromFileExtension($uploadFile->getExt()));
-        $magicChatFileEntity->setFileSize($uploadFile->getSize());
-        $magicChatFileEntity->setFileKey($uploadFile->getKey());
-        $magicChatFileEntity->setFileName($uploadFile->getName());
-        $magicChatFileEntity->setFileExtension($uploadFile->getExt());
+        $delightfulChatFileEntity = new DelightfulChatFileEntity();
+        $delightfulChatFileEntity->setFileId($externalAttachment->getChatFileId());
+        $delightfulChatFileEntity->setFileType(FileType::getTypeFromFileExtension($uploadFile->getExt()));
+        $delightfulChatFileEntity->setFileSize($uploadFile->getSize());
+        $delightfulChatFileEntity->setFileKey($uploadFile->getKey());
+        $delightfulChatFileEntity->setFileName($uploadFile->getName());
+        $delightfulChatFileEntity->setFileExtension($uploadFile->getExt());
         $chatFileDomainService = di(DelightfulChatFileDomainService::class);
-        $chatFileDomainService->updateFile($magicChatFileEntity);
+        $chatFileDomainService->updateFile($delightfulChatFileEntity);
     }
 }

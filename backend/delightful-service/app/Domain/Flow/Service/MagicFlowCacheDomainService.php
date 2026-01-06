@@ -17,32 +17,32 @@ use App\Domain\Flow\Repository\Facade\DelightfulFlowCacheRepositoryInterface;
 class DelightfulFlowCacheDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly DelightfulFlowCacheRepositoryInterface $magicFlowCacheRepository,
+        private readonly DelightfulFlowCacheRepositoryInterface $delightfulFlowCacheRepository,
     ) {
     }
 
     public function saveCache(FlowDataIsolation $dataIsolation, DelightfulFlowCacheEntity $entity): DelightfulFlowCacheEntity
     {
         $entity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        $existingEntity = $this->magicFlowCacheRepository->findByPrefixAndKey($dataIsolation, $entity->getCachePrefix(), $entity->getCacheKey());
+        $existingEntity = $this->delightfulFlowCacheRepository->findByPrefixAndKey($dataIsolation, $entity->getCachePrefix(), $entity->getCacheKey());
 
         if ($existingEntity) {
             $existingEntity->refresh($entity->getCacheValue(), $entity->getTtlSeconds());
             $existingEntity->setModifier($dataIsolation->getCurrentUserId());
-            return $this->magicFlowCacheRepository->save($dataIsolation, $existingEntity);
+            return $this->delightfulFlowCacheRepository->save($dataIsolation, $existingEntity);
         }
         $entity->setCreator($dataIsolation->getCurrentUserId());
         $entity->setModifier($dataIsolation->getCurrentUserId());
         $entity->prepareForCreation();
-        return $this->magicFlowCacheRepository->save($dataIsolation, $entity);
+        return $this->delightfulFlowCacheRepository->save($dataIsolation, $entity);
     }
 
     public function getCache(FlowDataIsolation $dataIsolation, string $cachePrefix, string $cacheKey): ?DelightfulFlowCacheEntity
     {
-        $entity = $this->magicFlowCacheRepository->findByPrefixAndKey($dataIsolation, $cachePrefix, $cacheKey);
+        $entity = $this->delightfulFlowCacheRepository->findByPrefixAndKey($dataIsolation, $cachePrefix, $cacheKey);
 
         if ($entity && $entity->isExpired()) {
-            $this->magicFlowCacheRepository->delete($dataIsolation, $entity);
+            $this->delightfulFlowCacheRepository->delete($dataIsolation, $entity);
             return null;
         }
 
@@ -51,6 +51,6 @@ class DelightfulFlowCacheDomainService extends AbstractDomainService
 
     public function deleteCache(FlowDataIsolation $dataIsolation, string $cachePrefix, string $cacheKey): bool
     {
-        return $this->magicFlowCacheRepository->deleteByPrefixAndKey($dataIsolation, $cachePrefix, $cacheKey);
+        return $this->delightfulFlowCacheRepository->deleteByPrefixAndKey($dataIsolation, $cachePrefix, $cacheKey);
     }
 }

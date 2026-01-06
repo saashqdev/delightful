@@ -4,7 +4,7 @@ import { type PropsWithChildren, useLayoutEffect } from "react"
 import { CLASSNAME_PREFIX } from "@/const/style"
 import { GlobalStyle } from "@/styles"
 import { useMemoizedFn, useMount } from "ahooks"
-import { magic } from "@/enhance/magicElectron"
+import { delightful } from "@/enhance/delightfulElectron"
 import { useTheme } from "@/opensource/models/config/hooks"
 import { genComponentTokenMap, genTokenMap } from "./tokenMap"
 import { genPalettesConfigs } from "./utils"
@@ -14,7 +14,7 @@ function ThemeProvider({ children }: PropsWithChildren) {
 	const { theme, prefersColorScheme, setTheme } = useTheme()
 	
 	useLayoutEffect(() => {
-		const unSubscribe = magic?.theme?.subscribe?.((themeConfig) => {
+		const unSubscribe = delightful?.theme?.subscribe?.((themeConfig) => {
 			setTheme?.(themeConfig)
 		})
 		return () => {
@@ -35,14 +35,14 @@ function ThemeProvider({ children }: PropsWithChildren) {
 				prefix: CLASSNAME_PREFIX,
 			},
 			token: {
-				...genTokenMap(config.magicColorScales, config.magicColorUsages, appearance),
+				...genTokenMap(config.delightfulColorScales, config.delightfulColorUsages, appearance),
 				titleBarHeight: 44,
-				magicColorScales: config.magicColorScales,
-				magicColorUsages: config.magicColorUsages,
+				delightfulColorScales: config.delightfulColorScales,
+				delightfulColorUsages: config.delightfulColorUsages,
 			},
 			components: genComponentTokenMap(
-				config.magicColorScales,
-				config.magicColorUsages,
+				config.delightfulColorScales,
+				config.delightfulColorUsages,
 				appearance,
 			),
 		}

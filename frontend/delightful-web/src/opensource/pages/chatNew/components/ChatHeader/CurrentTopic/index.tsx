@@ -16,10 +16,10 @@ const useStyles = createStyles(({ token, css, isDarkMode }) => ({
 	container: css`
 		width: 100%;
 		padding: 4px 10px;
-		background-color: ${isDarkMode ? "#141414" : token.magicColorScales.brand[0]};
+		background-color: ${isDarkMode ? "#141414" : token.delightfulColorScales.brand[0]};
 	`,
 	text: css`
-		color: ${token.magicColorScales.grey[5]};
+		color: ${token.delightfulColorScales.grey[5]};
 		font-size: 14px;
 		font-weight: 400;
 		line-height: 20px;

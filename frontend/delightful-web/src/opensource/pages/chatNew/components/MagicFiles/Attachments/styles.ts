@@ -64,12 +64,12 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
       height: 30px;
       --${prefixCls}-button-padding-inline-sm: 6px !important;
       --${prefixCls}-button-padding-block-sm: 6px !important;
-      background-color: ${token.magicColorUsages.fill[0]};
+      background-color: ${token.delightfulColorUsages.fill[0]};
 
       &:hover,
       &:active,
       &:focus {
-        background-color: ${token.magicColorUsages.fill[1]} !important;
+        background-color: ${token.delightfulColorUsages.fill[1]} !important;
       }
 
     `,

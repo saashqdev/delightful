@@ -42,10 +42,10 @@ readonly class KnowledgeBaseFragmentSyncSubscriber implements ListenerInterface
         if (! $event instanceof KnowledgeBaseFragmentSavedEvent) {
             return;
         }
-        $knowledge = $event->magicFlowKnowledgeEntity;
-        $fragment = $event->magicFlowKnowledgeFragmentEntity;
-        /** @var KnowledgeBaseDomainService $magicFlowKnowledgeDomainService */
-        $magicFlowKnowledgeDomainService = di(KnowledgeBaseDomainService::class);
+        $knowledge = $event->delightfulFlowKnowledgeEntity;
+        $fragment = $event->delightfulFlowKnowledgeFragmentEntity;
+        /** @var KnowledgeBaseDomainService $delightfulFlowKnowledgeDomainService */
+        $delightfulFlowKnowledgeDomainService = di(KnowledgeBaseDomainService::class);
         /** @var KnowledgeBaseVectorAppService $knowledgeBaseVectorService */
         $knowledgeBaseVectorService = di(KnowledgeBaseVectorAppService::class);
 
@@ -57,7 +57,7 @@ readonly class KnowledgeBaseFragmentSyncSubscriber implements ListenerInterface
             // 如果具有向量的，则不重新嵌入
             if (empty($fragment->getVector())) {
                 $fragment->setSyncStatus(KnowledgeSyncStatus::Syncing);
-                $magicFlowKnowledgeDomainService->changeSyncStatus($fragment);
+                $delightfulFlowKnowledgeDomainService->changeSyncStatus($fragment);
 
                 $modelGatewayDataIsolation = ModelGatewayDataIsolation::createByOrganizationCodeWithoutSubscription($knowledge->getOrganizationCode(), $knowledge->getCreator());
                 $model = di(ModelGatewayMapper::class)->getEmbeddingModelProxy($modelGatewayDataIsolation, $knowledge->getModel());
@@ -85,11 +85,11 @@ readonly class KnowledgeBaseFragmentSyncSubscriber implements ListenerInterface
             $knowledge->getVectorDBDriver()->storePoint($knowledge->getCollectionName(), $fragment->getPointId(), $embeddings, $fragment->getPayload());
 
             $fragment->setSyncStatus(KnowledgeSyncStatus::Synced);
-            $magicFlowKnowledgeDomainService->changeSyncStatus($fragment);
+            $delightfulFlowKnowledgeDomainService->changeSyncStatus($fragment);
         } catch (Throwable $throwable) {
             $fragment->setSyncStatus(KnowledgeSyncStatus::SyncFailed);
             $fragment->setSyncStatusMessage($throwable->getMessage());
-            $magicFlowKnowledgeDomainService->changeSyncStatus($fragment);
+            $delightfulFlowKnowledgeDomainService->changeSyncStatus($fragment);
         }
     }
 }

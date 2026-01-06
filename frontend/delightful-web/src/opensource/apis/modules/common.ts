@@ -93,7 +93,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 	 * @param {string} code 私有化部署授权码
 	 */
 	async getPrivateConfigure(code: string): Promise<{ config: Common.PrivateConfig }> {
-		// 当且仅当 code 为空或不存在则返回当前 magic 部署环境的对应相同环境下 teamshare、keewood 配置
+		// 当且仅当 code 为空或不存在则返回当前 delightful 部署环境的对应相同环境下 teamshare、keewood 配置
 		if (!code || code === "") {
 			return {
 				config: {

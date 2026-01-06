@@ -55,8 +55,8 @@ const useChatMessageStyles = createStyles(
 							width: 100%;
 							&:hover {
 								background: ${isDarkMode
-									? token.magicColorScales.grey[8]
-									: token.magicColorUsages.primaryLight.default};
+									? token.delightfulColorScales.grey[8]
+									: token.delightfulColorUsages.primaryLight.default};
 							}
 					  `
 					: ""}
@@ -93,7 +93,7 @@ const useChatMessageStyles = createStyles(
 			messageTop,
 			content,
 			time: css`
-				color: ${token.magicColorUsages.text[3]};
+				color: ${token.delightfulColorUsages.text[3]};
 				text-align: justify;
 				font-size: ${calculateRelativeSize(12, fontSize)}px;
 				font-weight: 400;
@@ -104,7 +104,7 @@ const useChatMessageStyles = createStyles(
 				user-select: none;
 			`,
 			name: css`
-				color: ${token.magicColorUsages.text[2]};
+				color: ${token.delightfulColorUsages.text[2]};
 				text-align: justify;
 				font-size: ${calculateRelativeSize(12, fontSize)}px;
 				font-weight: 400;
@@ -127,24 +127,24 @@ const useChatMessageStyles = createStyles(
 				.${prefixCls}-dropdown-menu-item.${prefixCls}-dropdown-menu-item:hover {
 					background-color: ${
 						isDarkMode
-							? token.magicColorUsages.primaryLight.hover
-							: token.magicColorUsages.primaryLight.default
+							? token.delightfulColorUsages.primaryLight.hover
+							: token.delightfulColorUsages.primaryLight.default
 					};
 				}
 				.${prefixCls}-dropdown-menu-item-divider.${prefixCls}-dropdown-menu-item-divider {
 					background-color: ${
 						isDarkMode
-							? token.magicColorUsages.border
-							: token.magicColorUsages.primaryLight.default
+							? token.delightfulColorUsages.border
+							: token.delightfulColorUsages.primaryLight.default
 					};
 				}
 				.${prefixCls}-dropdown-menu-item-danger.${prefixCls}-dropdown-menu-item-danger:not(.${prefixCls}-dropdown-menu-item-disabled):hover {
 					background-color: ${
 						isDarkMode
-							? token.magicColorUsages.danger.default
-							: token.magicColorScales.red[0]
+							? token.delightfulColorUsages.danger.default
+							: token.delightfulColorScales.red[0]
 					} !important;
-					color: ${isDarkMode ? "white" : token.magicColorUsages.danger.default} !important;
+					color: ${isDarkMode ? "white" : token.delightfulColorUsages.danger.default} !important;
 				}
 			`,
 			contentInnerWrapper: css`
@@ -162,13 +162,13 @@ const useChatMessageStyles = createStyles(
 			`,
 
 			defaultTheme: css`
-				background: ${token.magicColorUsages.bg[1]};
-				color: ${token.magicColorUsages.text[1]};
+				background: ${token.delightfulColorUsages.bg[1]};
+				color: ${token.delightfulColorUsages.text[1]};
 				${isDarkMode ? "" : `border: 1px solid ${token.colorBorder};`}
 			`,
-			magicTheme: css`
-				color: ${token.magicColorUsages.text[1]};
-				background: ${isDarkMode ? token.magicColorUsages.primaryLight.default : "#E6F0FF"};
+			delightfulTheme: css`
+				color: ${token.delightfulColorUsages.text[1]};
+				background: ${isDarkMode ? token.delightfulColorUsages.primaryLight.default : "#E6F0FF"};
 				// background: linear-gradient(99deg, #4768d4 0%, #6c8eff 0.01%, #ca58ff 100%);
 			`,
 			status: css`

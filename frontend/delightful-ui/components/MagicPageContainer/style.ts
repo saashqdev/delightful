@@ -8,7 +8,7 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 			borderRadius: 0,
 			display: "flex",
 			flexDirection: "column",
-			backgroundColor: `${isDarkMode ? "#141414" : token.magicColorUsages.white}`,
+			backgroundColor: `${isDarkMode ? "#141414" : token.delightfulColorUsages.white}`,
 			[`.${prefixCls}-card-body`]: {
 				flex: 1,
 				display: "flex",
@@ -19,13 +19,13 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 			position: "sticky",
 			top: 0,
 			color: `${
-				isDarkMode ? token.magicColorScales.grey[8] : token.magicColorUsages.text[1]
+				isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.text[1]
 			} !important`,
 			zIndex: 10,
 			backdropFilter: "blur(12px)",
 			background: isDarkMode
-				? `${token.magicColorScales.grey[0]} !important`
-				: token.magicColorUsages.white,
+				? `${token.delightfulColorScales.grey[0]} !important`
+				: token.delightfulColorUsages.white,
 			[`--${prefixCls}-padding-lg`]: "20px",
 		},
 		cardBody: css`

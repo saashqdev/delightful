@@ -12,27 +12,27 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			gap: 2px;
 			border: none;
 			background-color: ${isDarkMode
-				? token.magicColorUsages.fill[2]
-				: token.magicColorUsages.fill[0]};
-			color: ${isDarkMode ? token.magicColorUsages.text[3] : token.magicColorUsages.text[2]};
+				? token.delightfulColorUsages.fill[2]
+				: token.delightfulColorUsages.fill[0]};
+			color: ${isDarkMode ? token.delightfulColorUsages.text[3] : token.delightfulColorUsages.text[2]};
 		`,
 		green: css`
 			background-color: ${isDarkMode
-				? token.magicColorScales.green[0]
-				: token.magicColorScales.green[0]};
+				? token.delightfulColorScales.green[0]
+				: token.delightfulColorScales.green[0]};
 			color: ${isDarkMode
-				? token.magicColorScales.green[5]
-				: token.magicColorScales.green[5]};
+				? token.delightfulColorScales.green[5]
+				: token.delightfulColorScales.green[5]};
 		`,
 		orange: css`
 			background-color: ${isDarkMode
-				? token.magicColorUsages.fill[2]
-				: token.magicColorUsages.fill[0]};
+				? token.delightfulColorUsages.fill[2]
+				: token.delightfulColorUsages.fill[0]};
 		`,
 		blue: css`
 			background-color: ${isDarkMode
-				? token.magicColorScales.brand[8]
-				: token.magicColorScales.brand[0]};
+				? token.delightfulColorScales.brand[8]
+				: token.delightfulColorScales.brand[0]};
 		`,
 	}
 })

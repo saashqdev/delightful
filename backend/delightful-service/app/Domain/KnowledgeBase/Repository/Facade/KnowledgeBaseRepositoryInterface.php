@@ -21,14 +21,14 @@ interface KnowledgeBaseRepositoryInterface
      */
     public function getByCodes(KnowledgeBaseDataIsolation $dataIsolation, array $codes): array;
 
-    public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $magicFlowKnowledgeEntity): KnowledgeBaseEntity;
+    public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): KnowledgeBaseEntity;
 
     /**
      * @return array{total: int, list: array<KnowledgeBaseEntity>}
      */
     public function queries(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseQuery $query, Page $page): array;
 
-    public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $magicFlowKnowledgeEntity): void;
+    public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void;
 
     public function changeSyncStatus(KnowledgeBaseEntity $entity): void;
 

@@ -4,7 +4,7 @@ export const useStyles = createStyles(({ token }) => ({
 	item: {
 		display: "flex",
 		flexDirection: "column",
-		border: `1px solid ${token.magicColorUsages.border}`,
+		border: `1px solid ${token.delightfulColorUsages.border}`,
 		borderRadius: 8,
 	},
 	itemHeader: {
@@ -48,7 +48,7 @@ export const useStyles = createStyles(({ token }) => ({
 	itemFooter: {
 		height: 36,
 		flex: "none",
-		borderTop: `1px solid ${token.magicColorUsages.border}`,
+		borderTop: `1px solid ${token.delightfulColorUsages.border}`,
 		display: "flex",
 		alignItems: "center",
 		justifyContent: "center",

@@ -11,16 +11,16 @@ use App\Domain\OrganizationEnvironment\Entity\DelightfulOrganizationEnvEntity;
 
 class DelightfulEnvironmentAssembler
 {
-    public static function getDelightfulOrganizationEnvEntity(array $magicOrganizationEnv): DelightfulOrganizationEnvEntity
+    public static function getDelightfulOrganizationEnvEntity(array $delightfulOrganizationEnv): DelightfulOrganizationEnvEntity
     {
-        $magicOrganizationEnvEntity = new DelightfulOrganizationEnvEntity();
-        $magicOrganizationEnvEntity->setId($magicOrganizationEnv['id']);
-        $magicOrganizationEnvEntity->setLoginCode($magicOrganizationEnv['login_code']);
-        $magicOrganizationEnvEntity->setDelightfulOrganizationCode($magicOrganizationEnv['magic_organization_code']);
-        $magicOrganizationEnvEntity->setOriginOrganizationCode($magicOrganizationEnv['origin_organization_code']);
-        $magicOrganizationEnvEntity->setEnvironmentId($magicOrganizationEnv['environment_id']);
-        $magicOrganizationEnvEntity->setCreatedAt($magicOrganizationEnv['created_at']);
-        $magicOrganizationEnvEntity->setUpdatedAt($magicOrganizationEnv['updated_at']);
-        return $magicOrganizationEnvEntity;
+        $delightfulOrganizationEnvEntity = new DelightfulOrganizationEnvEntity();
+        $delightfulOrganizationEnvEntity->setId($delightfulOrganizationEnv['id']);
+        $delightfulOrganizationEnvEntity->setLoginCode($delightfulOrganizationEnv['login_code']);
+        $delightfulOrganizationEnvEntity->setDelightfulOrganizationCode($delightfulOrganizationEnv['delightful_organization_code']);
+        $delightfulOrganizationEnvEntity->setOriginOrganizationCode($delightfulOrganizationEnv['origin_organization_code']);
+        $delightfulOrganizationEnvEntity->setEnvironmentId($delightfulOrganizationEnv['environment_id']);
+        $delightfulOrganizationEnvEntity->setCreatedAt($delightfulOrganizationEnv['created_at']);
+        $delightfulOrganizationEnvEntity->setUpdatedAt($delightfulOrganizationEnv['updated_at']);
+        return $delightfulOrganizationEnvEntity;
     }
 }

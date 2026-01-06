@@ -41,7 +41,7 @@ interface DataIsolationInterface
 
     public function setEnvId(int $envId): static;
 
-    public function setDelightfulId(string $magicId): static;
+    public function setDelightfulId(string $delightfulId): static;
 
     public function disabled(): static;
 

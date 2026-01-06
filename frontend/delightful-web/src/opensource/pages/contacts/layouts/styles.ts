@@ -9,7 +9,7 @@ export const useStyles = createStyles(({ token, css, prefixCls }) => {
 		topBar: css`
 			height: 50px;
 			padding: 9px 20px;
-			background-color: ${token.magicColorUsages.bg[0]};
+			background-color: ${token.delightfulColorUsages.bg[0]};
 			border-bottom: 1px solid ${token.colorBorderSecondary};
 		`,
 		title: css`

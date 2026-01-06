@@ -138,7 +138,7 @@ function ContactsSubSider() {
 	const { pathname } = useLocation()
 	const { styles } = useStyles()
 	const navigate = useNavigate()
-	const { magicColorScales } = useTheme()
+	const { delightfulColorScales } = useTheme()
 
 	const [collapseKey, setCollapseKey] = useState<string>(pathname)
 
@@ -172,7 +172,7 @@ function ContactsSubSider() {
 							avatar: {
 								src: <DelightfulIcon color="currentColor" component={IconDelightfulBots} />,
 								style: {
-									background: magicColorScales.brand[5],
+									background: delightfulColorScales.brand[5],
 									padding: 8,
 									color: "white",
 								},
@@ -212,7 +212,7 @@ function ContactsSubSider() {
 							avatar: {
 								src: <DelightfulIcon color="currentColor" component={IconUsers} />,
 								style: {
-									background: magicColorScales.lightGreen[5],
+									background: delightfulColorScales.lightGreen[5],
 									padding: 8,
 									color: "white",
 								},

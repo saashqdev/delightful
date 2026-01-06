@@ -174,7 +174,7 @@ export const installAllNodes = (extraData?: BaseFlowProps["extraData"]) => {
 					nodeTypes: [customNodeType.VariableSave],
 				},
 
-				...(extraData?.extraNodeInfos?.dataHandler?.magicTable ?? []),
+				...(extraData?.extraNodeInfos?.dataHandler?.delightfulTable ?? []),
 
 				{
 					groupName: i18next.t("file.name", { ns: "flow" }),

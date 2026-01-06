@@ -9,7 +9,7 @@ use Hyperf\Database\Schema\Blueprint;
 use Hyperf\Database\Schema\Schema;
 
 /*
- * Create magic_super_agent_project_fork table.
+ * Create delightful_super_agent_project_fork table.
  */
 return new class extends Migration {
     /**
@@ -17,7 +17,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_super_agent_project_fork', function (Blueprint $table) {
+        Schema::create('delightful_super_agent_project_fork', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('Primary key');
             $table->unsignedBigInteger('source_project_id')->comment('Source project ID');
             $table->unsignedBigInteger('fork_project_id')->comment('Forked project ID');
@@ -44,6 +44,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_super_agent_project_fork');
+        Schema::dropIfExists('delightful_super_agent_project_fork');
     }
 };

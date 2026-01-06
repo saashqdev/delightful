@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_chat_messages', function (Blueprint $table) {
+        Schema::table('delightful_chat_messages', function (Blueprint $table) {
             $table->string('language')->default('zh_CN')->after('content');
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_chat_messages', function (Blueprint $table) {
+        Schema::table('delightful_chat_messages', function (Blueprint $table) {
         });
     }
 };

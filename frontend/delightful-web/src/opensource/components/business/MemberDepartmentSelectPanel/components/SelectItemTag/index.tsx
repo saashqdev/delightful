@@ -17,7 +17,7 @@ const useStyles = createStyles(({ css, token }) => ({
 		color: white;
 		border-radius: 4.5px;
 		padding: 3px;
-		background: ${token.magicColorScales.brand[5]};
+		background: ${token.delightfulColorScales.brand[5]};
 	`,
 }))
 

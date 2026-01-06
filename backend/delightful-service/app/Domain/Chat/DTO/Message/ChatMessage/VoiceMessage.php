@@ -43,7 +43,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
     /**
      * Message ID (used for updating message content).
      */
-    protected ?string $magicMessageId = null;
+    protected ?string $delightfulMessageId = null;
 
     public function __construct(array $data = [])
     {
@@ -62,8 +62,8 @@ class VoiceMessage extends FileMessage implements TextContentInterface
         if (isset($data['duration'])) {
             $this->duration = $data['duration'];
         }
-        if (isset($data['magic_message_id'])) {
-            $this->magicMessageId = $data['magic_message_id'];
+        if (isset($data['delightful_message_id'])) {
+            $this->delightfulMessageId = $data['delightful_message_id'];
         }
     }
 
@@ -141,15 +141,15 @@ class VoiceMessage extends FileMessage implements TextContentInterface
      */
     public function getDelightfulMessageId(): ?string
     {
-        return $this->magicMessageId;
+        return $this->delightfulMessageId;
     }
 
     /**
      * Set message ID.
      */
-    public function setDelightfulMessageId(?string $magicMessageId): self
+    public function setDelightfulMessageId(?string $delightfulMessageId): self
     {
-        $this->magicMessageId = $magicMessageId;
+        $this->delightfulMessageId = $delightfulMessageId;
         return $this;
     }
 

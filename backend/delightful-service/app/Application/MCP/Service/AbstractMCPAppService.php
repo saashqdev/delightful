@@ -31,8 +31,8 @@ abstract class AbstractMCPAppService extends AbstractKernelAppService
     public function __construct(
         protected readonly MCPServerDomainService $mcpServerDomainService,
         protected readonly MCPServerToolDomainService $mcpServerToolDomainService,
-        protected readonly DelightfulFlowDomainService $magicFlowDomainService,
-        protected readonly DelightfulFlowVersionDomainService $magicFlowVersionDomainService,
+        protected readonly DelightfulFlowDomainService $delightfulFlowDomainService,
+        protected readonly DelightfulFlowVersionDomainService $delightfulFlowVersionDomainService,
         protected readonly OperationPermissionAppService $operationPermissionAppService,
         protected readonly MCPUserSettingDomainService $mcpUserSettingDomainService,
         LoggerFactory $loggerFactory,
@@ -162,7 +162,7 @@ abstract class AbstractMCPAppService extends AbstractKernelAppService
         // Batch get version information
         $versionTools = [];
         if (! empty($versionCodes)) {
-            $versionTools = $this->magicFlowVersionDomainService->getByCodes($flowDataIsolation, array_unique($versionCodes));
+            $versionTools = $this->delightfulFlowVersionDomainService->getByCodes($flowDataIsolation, array_unique($versionCodes));
             $versionToolsMap = [];
             foreach ($versionTools as $versionTool) {
                 $versionToolsMap[$versionTool->getCode()] = $versionTool;

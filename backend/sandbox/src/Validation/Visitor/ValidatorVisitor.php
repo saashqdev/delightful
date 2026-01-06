@@ -463,10 +463,10 @@ class ValidatorVisitor extends NodeVisitorAbstract
                 $this->sandbox->error->validationError('Delightful constant failed custom validation!', Error::VALID_DELIGHTFUL_CONST_ERROR, $node, $name);
             }
             if ($this->options->definitions()->isDefinedDelightfulConst($name)) {
-                //                return new Node\Expr\MethodCall(new Node\Expr\Variable($sandboxInnerVariable), '_get_magic_const', [new Node\Arg(new Node\Scalar\String_($name))], $node->getAttributes());
+                //                return new Node\Expr\MethodCall(new Node\Expr\Variable($sandboxInnerVariable), '_get_delightful_const', [new Node\Arg(new Node\Scalar\String_($name))], $node->getAttributes());
                 return $this->builderFactory->methodCall(
-                    $this->builderFactory->methodCall($this->buildRuntimeContainerNode(), 'magicConstants'),
-                    '_get_magic_const',
+                    $this->builderFactory->methodCall($this->buildRuntimeContainerNode(), 'delightfulConstants'),
+                    '_get_delightful_const',
                     [new Node\Arg(new Node\Scalar\String_($name))]
                 );
             }
@@ -516,11 +516,11 @@ class ValidatorVisitor extends NodeVisitorAbstract
         return null;
     }
 
-    /** Test the current PhpParser_Node node to see if it is a magic constant, and return the name if it is and null if it is not.
+    /** Test the current PhpParser_Node node to see if it is a delightful constant, and return the name if it is and null if it is not.
      *
      * @param Node $node The sandboxed $node to test
      *
-     * @return null|string Return string name of node, or null if it is not a magic constant
+     * @return null|string Return string name of node, or null if it is not a delightful constant
      */
     protected function isDelightfulConst(Node $node): ?string
     {

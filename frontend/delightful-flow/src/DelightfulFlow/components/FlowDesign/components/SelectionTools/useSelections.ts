@@ -76,7 +76,7 @@ export default function useSelections({ flowInstance }:UseSelectionsProps) {
 			}),
 		)
 
-		message.success(i18next.t("common.copySuccess", { ns: "magicFlow" }))   
+		message.success(i18next.t("common.copySuccess", { ns: "delightfulFlow" }))   
 
 		/** 清除当前选框 */
 		store.unselectNodesAndEdges()

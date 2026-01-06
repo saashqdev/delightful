@@ -15,7 +15,7 @@ php "${bin}" shell:locker migrate
 
 # Run one-time initialization if needed
 if [ ! -f "${base_dirname}/.initialized" ]; then
-    echo "Initializing magic-service for the first time..."
+    echo "Initializing delightful-service for the first time..."
     
   # Run composer update
     cd ${base_dirname}
@@ -27,7 +27,7 @@ if [ ! -f "${base_dirname}/.initialized" ]; then
     touch ${base_dirname}/.initialized
     echo "Initialization completed!"
 else
-    echo "magic-service has already been initialized, skipping..."
+    echo "delightful-service has already been initialized, skipping..."
 fi 
 
 # Run additional seeders

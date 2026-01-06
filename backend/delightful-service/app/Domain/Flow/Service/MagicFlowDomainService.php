@@ -31,7 +31,7 @@ use Throwable;
 class DelightfulFlowDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly DelightfulFlowRepositoryInterface $magicFlowRepository,
+        private readonly DelightfulFlowRepositoryInterface $delightfulFlowRepository,
         private readonly TaskSchedulerDomainService $taskSchedulerDomainService,
     ) {
     }
@@ -49,7 +49,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
      */
     public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowEntity
     {
-        return $this->magicFlowRepository->getByCode($dataIsolation, $code);
+        return $this->delightfulFlowRepository->getByCode($dataIsolation, $code);
     }
 
     /**
@@ -58,7 +58,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
      */
     public function getByCodes(FlowDataIsolation $dataIsolation, array $codes): array
     {
-        return $this->magicFlowRepository->getByCodes($dataIsolation, $codes);
+        return $this->delightfulFlowRepository->getByCodes($dataIsolation, $codes);
     }
 
     /**
@@ -66,14 +66,14 @@ class DelightfulFlowDomainService extends AbstractDomainService
      */
     public function getByName(FlowDataIsolation $dataIsolation, string $name, Type $type): ?DelightfulFlowEntity
     {
-        return $this->magicFlowRepository->getByName($dataIsolation, $name, $type);
+        return $this->delightfulFlowRepository->getByName($dataIsolation, $name, $type);
     }
 
     public function createByAgent(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $savingDelightfulFlow): DelightfulFlowEntity
     {
         $savingDelightfulFlow->prepareForCreation();
         $savingDelightfulFlow->setEnabled(true);
-        return $this->magicFlowRepository->save($dataIsolation, $savingDelightfulFlow);
+        return $this->delightfulFlowRepository->save($dataIsolation, $savingDelightfulFlow);
     }
 
     public function create(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $savingDelightfulFlow): DelightfulFlowEntity
@@ -81,7 +81,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
         $dateTime = new DateTime();
         $savingDelightfulFlow->setCreatedAt($dateTime);
         $savingDelightfulFlow->setUpdatedAt($dateTime);
-        $flow = $this->magicFlowRepository->save($dataIsolation, $savingDelightfulFlow);
+        $flow = $this->delightfulFlowRepository->save($dataIsolation, $savingDelightfulFlow);
         AsyncEventUtil::dispatch(new DelightfulFLowSavedEvent($flow, true));
         return $flow;
     }
@@ -94,17 +94,17 @@ class DelightfulFlowDomainService extends AbstractDomainService
         $savingDelightfulFlow->setCreator($dataIsolation->getCurrentUserId());
         $savingDelightfulFlow->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         if ($savingDelightfulFlow->shouldCreate()) {
-            $magicFlow = clone $savingDelightfulFlow;
-            $magicFlow->prepareForCreation();
+            $delightfulFlow = clone $savingDelightfulFlow;
+            $delightfulFlow->prepareForCreation();
         } else {
-            $magicFlow = $this->magicFlowRepository->getByCode($dataIsolation, $savingDelightfulFlow->getCode());
-            if (! $magicFlow) {
+            $delightfulFlow = $this->delightfulFlowRepository->getByCode($dataIsolation, $savingDelightfulFlow->getCode());
+            if (! $delightfulFlow) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $savingDelightfulFlow->getCode()]);
             }
-            $savingDelightfulFlow->prepareForModification($magicFlow);
+            $savingDelightfulFlow->prepareForModification($delightfulFlow);
         }
 
-        $flow = $this->magicFlowRepository->save($dataIsolation, $magicFlow);
+        $flow = $this->delightfulFlowRepository->save($dataIsolation, $delightfulFlow);
         AsyncEventUtil::dispatch(new DelightfulFLowSavedEvent($flow, $savingDelightfulFlow->shouldCreate()));
         return $flow;
     }
@@ -114,18 +114,18 @@ class DelightfulFlowDomainService extends AbstractDomainService
      */
     public function saveNode(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $savingDelightfulFlow): DelightfulFlowEntity
     {
-        $magicFlow = $this->magicFlowRepository->getByCode($dataIsolation, $savingDelightfulFlow->getCode());
-        if (! $magicFlow) {
+        $delightfulFlow = $this->delightfulFlowRepository->getByCode($dataIsolation, $savingDelightfulFlow->getCode());
+        if (! $delightfulFlow) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $savingDelightfulFlow->getCode()]);
         }
-        $savingDelightfulFlow->prepareForSaveNode($magicFlow);
+        $savingDelightfulFlow->prepareForSaveNode($delightfulFlow);
 
         // todo 检测子流程循环调用
 
-        $this->magicFlowRepository->save($dataIsolation, $magicFlow);
+        $this->delightfulFlowRepository->save($dataIsolation, $delightfulFlow);
 
-        AsyncEventUtil::dispatch(new DelightfulFlowPublishedEvent($magicFlow));
-        return $magicFlow;
+        AsyncEventUtil::dispatch(new DelightfulFlowPublishedEvent($delightfulFlow));
+        return $delightfulFlow;
     }
 
     /**
@@ -134,7 +134,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     public function destroy(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $deletingDelightfulFlow): void
     {
         $deletingDelightfulFlow->prepareForDeletion();
-        $this->magicFlowRepository->remove($dataIsolation, $deletingDelightfulFlow);
+        $this->delightfulFlowRepository->remove($dataIsolation, $deletingDelightfulFlow);
     }
 
     /**
@@ -143,42 +143,42 @@ class DelightfulFlowDomainService extends AbstractDomainService
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowQuery $query, Page $page): array
     {
-        return $this->magicFlowRepository->queries($dataIsolation, $query, $page);
+        return $this->delightfulFlowRepository->queries($dataIsolation, $query, $page);
     }
 
     /**
      * 修改流程状态.
      */
-    public function changeEnable(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $magicFlow, ?bool $enable = null): void
+    public function changeEnable(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, ?bool $enable = null): void
     {
         // 如果传入了明确的状态值，则直接设置
         if ($enable !== null) {
             // 如果当前状态与要设置的状态相同，则无需操作
-            if ($magicFlow->isEnabled() === $enable) {
+            if ($delightfulFlow->isEnabled() === $enable) {
                 return;
             }
-            $magicFlow->setEnabled($enable);
+            $delightfulFlow->setEnabled($enable);
         } else {
             // 否则保持原有的自动切换逻辑
-            $magicFlow->prepareForChangeEnable();
+            $delightfulFlow->prepareForChangeEnable();
         }
 
         // 如果启用状态为true，需要进行验证
-        if ($magicFlow->isEnabled() && empty($magicFlow->getNodes())) {
+        if ($delightfulFlow->isEnabled() && empty($delightfulFlow->getNodes())) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
         }
 
-        $this->magicFlowRepository->changeEnable($dataIsolation, $magicFlow->getCode(), $magicFlow->isEnabled());
+        $this->delightfulFlowRepository->changeEnable($dataIsolation, $delightfulFlow->getCode(), $delightfulFlow->isEnabled());
     }
 
     /**
      * 创建定时任务.
      */
-    public function createRoutine(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $magicFlow): void
+    public function createRoutine(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow): void
     {
         // 获取开始节点的定时配置
         /** @var null|StartNodeParamsConfig $startNodeParamsConfig */
-        $startNodeParamsConfig = $magicFlow->getStartNode()?->getNodeParamsConfig();
+        $startNodeParamsConfig = $delightfulFlow->getStartNode()?->getNodeParamsConfig();
         if (! $startNodeParamsConfig) {
             return;
         }
@@ -186,11 +186,11 @@ class DelightfulFlowDomainService extends AbstractDomainService
         $routineConfigs = $startNodeParamsConfig->getRoutineConfigs();
 
         // 使用流程的 code 作为外部 id
-        $externalId = $magicFlow->getCode();
+        $externalId = $delightfulFlow->getCode();
         $retryTimes = 2;
         $callbackMethod = [DelightfulFlowExecuteAppService::class, 'routine'];
         $callbackParams = [
-            'flowCode' => $magicFlow->getCode(),
+            'flowCode' => $delightfulFlow->getCode(),
         ];
 
         // 先清理一下历史定时任务和调度规则
@@ -201,7 +201,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
                 $routineConfig->validate();
             } catch (Throwable $throwable) {
                 simple_logger('CreateRoutine')->notice('无效的定时规则', [
-                    'flowCode' => $magicFlow->getCode(),
+                    'flowCode' => $delightfulFlow->getCode(),
                     'branchId' => $branchId,
                     'routineConfig' => $routineConfig->toConfigArray(),
                     'error' => $throwable->getMessage(),
@@ -214,25 +214,25 @@ class DelightfulFlowDomainService extends AbstractDomainService
             if ($routineConfig->getType() === RoutineType::NoRepeat) {
                 $taskScheduler = new TaskScheduler();
                 $taskScheduler->setExternalId($externalId);
-                $taskScheduler->setName($magicFlow->getCode());
+                $taskScheduler->setName($delightfulFlow->getCode());
                 $taskScheduler->setExpectTime($routineConfig->getDatetime());
                 $taskScheduler->setType(2);
                 $taskScheduler->setRetryTimes($retryTimes);
                 $taskScheduler->setCallbackMethod($callbackMethod);
                 $taskScheduler->setCallbackParams($callbackParams);
-                $taskScheduler->setCreator($magicFlow->getCode());
+                $taskScheduler->setCreator($delightfulFlow->getCode());
                 $this->taskSchedulerDomainService->create($taskScheduler);
             } else {
                 $crontabRule = $routineConfig->getCrontabRule();
                 $taskSchedulerCrontab = new TaskSchedulerCrontab();
                 $taskSchedulerCrontab->setExternalId($externalId);
-                $taskSchedulerCrontab->setName($magicFlow->getCode());
+                $taskSchedulerCrontab->setName($delightfulFlow->getCode());
                 $taskSchedulerCrontab->setCrontab($crontabRule);
                 $taskSchedulerCrontab->setRetryTimes($retryTimes);
                 $taskSchedulerCrontab->setEnabled(true);
                 $taskSchedulerCrontab->setCallbackMethod($callbackMethod);
                 $taskSchedulerCrontab->setCallbackParams($callbackParams);
-                $taskSchedulerCrontab->setCreator($magicFlow->getCode());
+                $taskSchedulerCrontab->setCreator($delightfulFlow->getCode());
                 $taskSchedulerCrontab->setDeadline($routineConfig->getDeadline());
                 $this->taskSchedulerDomainService->createCrontab($taskSchedulerCrontab);
             }

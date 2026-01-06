@@ -190,8 +190,8 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByQwenImage()
     {
         //        $di = di(ProviderConfigDomainService::class);
-        //        $magicUserAuthorization = new DelightfulUserAuthorization();
-        //        $magicUserAuthorization->setOrganizationCode('TGosRaFhvb');
+        //        $delightfulUserAuthorization = new DelightfulUserAuthorization();
+        //        $delightfulUserAuthorization->setOrganizationCode('TGosRaFhvb');
         //
         //        $providerModelsByConfig = $di->getProviderConfig(ProviderDataIsolation::create('TGosRaFhvb'), '814826843393773568');
         //        $config = $providerModelsByConfig->getConfig();
@@ -227,8 +227,8 @@ class ImageGenerateTest extends BaseTest
     public function testWatermark()
     {
         $di = di(ModeAppService::class);
-        $magicUserAuthorization = new DelightfulUserAuthorization();
-        $modeByIdentifier = $di->getModeByIdentifier($magicUserAuthorization, '94');
+        $delightfulUserAuthorization = new DelightfulUserAuthorization();
+        $modeByIdentifier = $di->getModeByIdentifier($delightfulUserAuthorization, '94');
         var_dump($modeByIdentifier);
     }
 }

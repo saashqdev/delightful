@@ -8,7 +8,7 @@ const useStyles = createStyles(({ css, prefixCls, token }) => ({
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-color: ${token.magicColorScales.grey[0]};
+		background-color: ${token.delightfulColorScales.grey[0]};
 	`,
 	imageDragWrapper: css`
     width: 100%;
@@ -79,7 +79,7 @@ const useStyles = createStyles(({ css, prefixCls, token }) => ({
 		}
 		.${prefixCls}-segmented-item-selected {
 			color: ${token.colorWhite};
-			background-color: ${token.magicColorUsages.primary.default};
+			background-color: ${token.delightfulColorUsages.primary.default};
 		}
 		.${prefixCls}-segmented-item-icon {
 			display: flex;
@@ -93,12 +93,12 @@ const useStyles = createStyles(({ css, prefixCls, token }) => ({
 		border-radius: 8px;
 		border: none;
 		color: ${token.colorWhite};
-		background-color: ${token.magicColorUsages.overlay.bg};
+		background-color: ${token.delightfulColorUsages.overlay.bg};
 		padding: 4px 6px;
 		&:hover,
 		&:active {
 			color: ${token.colorWhite} !important;
-			background-color: ${token.magicColorScales.grey[4]} !important;
+			background-color: ${token.delightfulColorScales.grey[4]} !important;
 		}
 	`,
 }))

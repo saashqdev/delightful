@@ -1,5 +1,5 @@
 /**
- * magic-flow节点业务组件
+ * delightful-flow节点业务组件
  */
 import DelightfulFlow, { DelightfulFlowInstance } from "@/DelightfulFlow"
 import { ExtraNodeConfigProvider } from "@/DelightfulFlow/context/ExtraNodeConfigContext/Provider"
@@ -24,8 +24,8 @@ import flow from "./mock/flow"
 import useToolbar from "./toolbar"
 import { installAllNodes } from "./utils"
 import { generateNodeVersionSchema } from "./utils/version"
-import magicFlowEnJson from "@/common/locales/en_US/magicFlow.json"
-import magicFlowZhJson from "@/common/locales/zh_CN/magicFlow.json"
+import delightfulFlowEnJson from "@/common/locales/en_US/delightfulFlow.json"
+import delightfulFlowZhJson from "@/common/locales/zh_CN/delightfulFlow.json"
 
 // const { init, instance } = createI18nNext("en_US")
 // init().catch(console.error)
@@ -39,10 +39,10 @@ if (!i18next.isInitialized) {
 			debug: true,
 			resources: {
 				en: {
-					magicFlow: magicFlowEnJson,
+					delightfulFlow: delightfulFlowEnJson,
 				},
 				zh: {
-					magicFlow: magicFlowZhJson,
+					delightfulFlow: delightfulFlowZhJson,
 				},
 			},
 			interpolation: {

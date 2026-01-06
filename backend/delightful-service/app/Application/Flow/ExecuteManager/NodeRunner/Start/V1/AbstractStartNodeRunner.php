@@ -250,8 +250,8 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
     private function appendInstructions(ExecutionData $executionData, DelightfulMessageEntity $messageEntity): void
     {
-        $magicFlowEntity = $executionData->getDelightfulFlowEntity();
-        if (! $magicFlowEntity || ! $magicFlowEntity->getType()->isMain()) {
+        $delightfulFlowEntity = $executionData->getDelightfulFlowEntity();
+        if (! $delightfulFlowEntity || ! $delightfulFlowEntity->getType()->isMain()) {
             return;
         }
         // 兜底，如果没有 agent 的流程指令，尝试实时获取
@@ -318,7 +318,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
      */
     private function handleVoiceMessage(VoiceMessage $voiceMessage, DelightfulMessageEntity $messageEntity, ExecutionData $executionData): string
     {
-        // Set magicMessageId for subsequent updates
+        // Set delightfulMessageId for subsequent updates
         $voiceMessage->setDelightfulMessageId($messageEntity->getDelightfulMessageId());
 
         // Record start time
@@ -345,7 +345,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
     /**
      * Update voice message content to database.
      */
-    private function updateVoiceMessageContent(string $magicMessageId, VoiceMessage $voiceMessage): void
+    private function updateVoiceMessageContent(string $delightfulMessageId, VoiceMessage $voiceMessage): void
     {
         try {
             $container = ApplicationContext::getContainer();
@@ -354,17 +354,17 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             // 将 VoiceMessage 转换为数组格式用于更新
             $messageContent = $voiceMessage->toArray();
 
-            $messageRepository->updateMessageContent($magicMessageId, $messageContent);
+            $messageRepository->updateMessageContent($delightfulMessageId, $messageContent);
 
             $this->logger->info('Voice message content updated successfully (V1)', [
-                'magic_message_id' => $magicMessageId,
+                'delightful_message_id' => $delightfulMessageId,
                 'has_transcription' => $voiceMessage->hasTranscription(),
                 'transcription_length' => strlen($voiceMessage->getTranscriptionText() ?? ''),
             ]);
         } catch (Throwable $e) {
             // 静默处理更新失败，不影响主要流程
             $this->logger->warning('Failed to update voice message content (V1)', [
-                'magic_message_id' => $magicMessageId,
+                'delightful_message_id' => $delightfulMessageId,
                 'error' => $e->getMessage(),
             ]);
         }

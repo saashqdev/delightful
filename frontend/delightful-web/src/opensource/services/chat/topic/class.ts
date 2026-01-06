@@ -21,7 +21,7 @@ class ChatTopicService {
 	/**
 	 * 魔法ID
 	 */
-	magicId: string | undefined
+	delightfulId: string | undefined
 
 	/**
 	 * 组织编码
@@ -35,11 +35,11 @@ class ChatTopicService {
 
 	/**
 	 * 初始化
-	 * @param magicId 账户 ID
+	 * @param delightfulId 账户 ID
 	 * @param organizationCode 组织编码
 	 */
-	init(magicId: string, organizationCode: string) {
-		this.magicId = magicId
+	init(delightfulId: string, organizationCode: string) {
+		this.delightfulId = delightfulId
 		this.organizationCode = organizationCode
 	}
 

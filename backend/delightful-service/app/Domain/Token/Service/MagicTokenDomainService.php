@@ -13,25 +13,25 @@ use App\Domain\Token\Repository\Facade\DelightfulTokenRepositoryInterface;
 class DelightfulTokenDomainService
 {
     public function __construct(
-        protected DelightfulTokenRepositoryInterface $magicTokenRepository,
+        protected DelightfulTokenRepositoryInterface $delightfulTokenRepository,
     ) {
     }
 
     public function createToken(DelightfulTokenEntity $tokenEntity): DelightfulTokenEntity
     {
-        $this->magicTokenRepository->createToken($tokenEntity);
+        $this->delightfulTokenRepository->createToken($tokenEntity);
         return $tokenEntity;
     }
 
     public function getAccountId(DelightfulTokenEntity $tokenEntity): string
     {
-        $this->magicTokenRepository->getTokenEntity($tokenEntity);
+        $this->delightfulTokenRepository->getTokenEntity($tokenEntity);
         return $tokenEntity->getTypeRelationValue();
     }
 
     public function getUserId(DelightfulTokenEntity $tokenEntity): string
     {
-        $this->magicTokenRepository->getTokenEntity($tokenEntity);
+        $this->delightfulTokenRepository->getTokenEntity($tokenEntity);
         return $tokenEntity->getTypeRelationValue();
     }
 }

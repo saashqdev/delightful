@@ -15,7 +15,7 @@ class UserDepartmentDetailDTO extends AbstractDTO
 {
     protected string $userId;
 
-    protected string $magicId;
+    protected string $delightfulId;
 
     protected string $organizationCode;
 
@@ -98,12 +98,12 @@ class UserDepartmentDetailDTO extends AbstractDTO
 
     public function getDelightfulId(): string
     {
-        return $this->magicId;
+        return $this->delightfulId;
     }
 
-    public function setDelightfulId(string $magicId): UserDepartmentDetailDTO
+    public function setDelightfulId(string $delightfulId): UserDepartmentDetailDTO
     {
-        $this->magicId = $magicId;
+        $this->delightfulId = $delightfulId;
         return $this;
     }
 

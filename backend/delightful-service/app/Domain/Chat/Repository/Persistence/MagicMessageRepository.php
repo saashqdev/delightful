@@ -20,59 +20,59 @@ use Hyperf\DbConnection\Db;
 class DelightfulMessageRepository implements DelightfulMessageRepositoryInterface
 {
     public function __construct(
-        protected DelightfulMessageModel $magicMessage
+        protected DelightfulMessageModel $delightfulMessage
     ) {
     }
 
     public function createMessage(array $message): void
     {
-        $this->magicMessage::query()->create($message);
+        $this->delightfulMessage::query()->create($message);
     }
 
-    public function getMessages(array $magicMessageIds, ?array $rangMessageTypes = null): array
+    public function getMessages(array $delightfulMessageIds, ?array $rangMessageTypes = null): array
     {
         // 去除空值
-        $magicMessageIds = array_filter($magicMessageIds);
-        if (empty($magicMessageIds)) {
+        $delightfulMessageIds = array_filter($delightfulMessageIds);
+        if (empty($delightfulMessageIds)) {
             return [];
         }
-        $query = $this->magicMessage::query()->whereIn('magic_message_id', $magicMessageIds);
+        $query = $this->delightfulMessage::query()->whereIn('delightful_message_id', $delightfulMessageIds);
         if (! is_null($rangMessageTypes)) {
             $query->whereIn('message_type', $rangMessageTypes);
         }
         return Db::select($query->toSql(), $query->getBindings());
     }
 
-    public function getMessageByDelightfulMessageId(string $magicMessageId): ?DelightfulMessageEntity
+    public function getMessageByDelightfulMessageId(string $delightfulMessageId): ?DelightfulMessageEntity
     {
-        $message = $this->getMessageDataByDelightfulMessageId($magicMessageId);
+        $message = $this->getMessageDataByDelightfulMessageId($delightfulMessageId);
         return MessageAssembler::getMessageEntity($message);
     }
 
-    public function deleteByDelightfulMessageIds(array $magicMessageIds)
+    public function deleteByDelightfulMessageIds(array $delightfulMessageIds)
     {
-        $magicMessageIds = array_values(array_unique(array_filter($magicMessageIds)));
-        if (empty($magicMessageIds)) {
+        $delightfulMessageIds = array_values(array_unique(array_filter($delightfulMessageIds)));
+        if (empty($delightfulMessageIds)) {
             return;
         }
-        $this->magicMessage::query()->whereIn('magic_message_id', $magicMessageIds)->delete();
+        $this->delightfulMessage::query()->whereIn('delightful_message_id', $delightfulMessageIds)->delete();
     }
 
-    public function updateMessageContent(string $magicMessageId, array $messageContent): void
+    public function updateMessageContent(string $delightfulMessageId, array $messageContent): void
     {
-        $this->magicMessage::query()->where('magic_message_id', $magicMessageId)->update(
+        $this->delightfulMessage::query()->where('delightful_message_id', $delightfulMessageId)->update(
             [
                 'content' => Json::encode($messageContent),
             ]
         );
     }
 
-    #[CacheEvict(prefix: 'getMessageByDelightfulMessageId', value: '_#{messageEntity.magicMessageId}')]
-    public function updateMessageContentAndVersionId(DelightfulMessageEntity $messageEntity, DelightfulMessageVersionEntity $magicMessageVersionEntity): void
+    #[CacheEvict(prefix: 'getMessageByDelightfulMessageId', value: '_#{messageEntity.delightfulMessageId}')]
+    public function updateMessageContentAndVersionId(DelightfulMessageEntity $messageEntity, DelightfulMessageVersionEntity $delightfulMessageVersionEntity): void
     {
-        $this->magicMessage::query()->where('magic_message_id', $messageEntity->getDelightfulMessageId())->update(
+        $this->delightfulMessage::query()->where('delightful_message_id', $messageEntity->getDelightfulMessageId())->update(
             [
-                'current_version_id' => $magicMessageVersionEntity->getVersionId(),
+                'current_version_id' => $delightfulMessageVersionEntity->getVersionId(),
                 // 编辑消息允许修改消息类型
                 'message_type' => $messageEntity->getMessageType()->value,
                 'content' => Json::encode($messageEntity->getContent()->toArray()),
@@ -92,7 +92,7 @@ class DelightfulMessageRepository implements DelightfulMessageRepositoryInterfac
 
         // Build query to maximize covering index usage
         // Index order: app_message_id, deleted_at, message_type
-        $query = $this->magicMessage::query()
+        $query = $this->delightfulMessage::query()
             ->select(Db::raw('1'))  // Only select constant to ensure index-only scan
             ->where('app_message_id', $appMessageId)
             ->whereNull('deleted_at');
@@ -114,8 +114,8 @@ class DelightfulMessageRepository implements DelightfulMessageRepositoryInterfac
 
         // Build query to maximize covering index usage
         // Index order: app_message_id, deleted_at, message_type
-        $query = $this->magicMessage::query()
-            ->select('magic_message_id')  // Only select magic_message_id field
+        $query = $this->delightfulMessage::query()
+            ->select('delightful_message_id')  // Only select delightful_message_id field
             ->where('app_message_id', $appMessageId)
             ->whereNull('deleted_at');
 
@@ -127,21 +127,21 @@ class DelightfulMessageRepository implements DelightfulMessageRepositoryInterfac
         // Use limit(1) for early termination and get the first result
         $result = $query->limit(1)->first();
 
-        return $result ? $result->magic_message_id : '';
+        return $result ? $result->delightful_message_id : '';
     }
 
     /**
-     * Get messages by magic message IDs.
-     * @param array $magicMessageIds Delightful message ID数组
+     * Get messages by delightful message IDs.
+     * @param array $delightfulMessageIds Delightful message ID数组
      * @return DelightfulMessageEntity[] 消息实体数组
      */
-    public function getMessagesByDelightfulMessageIds(array $magicMessageIds): array
+    public function getMessagesByDelightfulMessageIds(array $delightfulMessageIds): array
     {
-        if (empty($magicMessageIds)) {
+        if (empty($delightfulMessageIds)) {
             return [];
         }
 
-        $query = $this->magicMessage::query()->whereIn('magic_message_id', $magicMessageIds);
+        $query = $this->delightfulMessage::query()->whereIn('delightful_message_id', $delightfulMessageIds);
         $messages = Db::select($query->toSql(), $query->getBindings());
 
         return array_map(function ($message) {
@@ -160,13 +160,13 @@ class DelightfulMessageRepository implements DelightfulMessageRepositoryInterfac
             return true;
         }
 
-        return $this->magicMessage::query()->insert($messagesData);
+        return $this->delightfulMessage::query()->insert($messagesData);
     }
 
-    #[Cacheable(prefix: 'getMessageByDelightfulMessageId', value: '_#{magicMessageId}', ttl: 10)]
-    private function getMessageDataByDelightfulMessageId(string $magicMessageId)
+    #[Cacheable(prefix: 'getMessageByDelightfulMessageId', value: '_#{delightfulMessageId}', ttl: 10)]
+    private function getMessageDataByDelightfulMessageId(string $delightfulMessageId)
     {
-        $query = $this->magicMessage::query()->where('magic_message_id', $magicMessageId);
+        $query = $this->delightfulMessage::query()->where('delightful_message_id', $delightfulMessageId);
         $message = Db::select($query->toSql(), $query->getBindings())[0] ?? null;
         if (empty($message)) {
             return null;

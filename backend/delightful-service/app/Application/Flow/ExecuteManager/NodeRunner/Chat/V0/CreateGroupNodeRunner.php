@@ -66,7 +66,7 @@ class CreateGroupNodeRunner extends NodeRunner
         if (! $groupOwnerInfo) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'common.not_found', ['label' => 'group_owner']);
         }
-        $vertexResult->addDebugLog('group_owner_magic_id', $groupOwnerInfo->getDelightfulId());
+        $vertexResult->addDebugLog('group_owner_delightful_id', $groupOwnerInfo->getDelightfulId());
 
         // 群成员，全是用户 ID
         $groupMembers = $paramsConfig->getGroupMembers()?->getValue()->getResult($executionData->getExpressionFieldData());
@@ -100,13 +100,13 @@ class CreateGroupNodeRunner extends NodeRunner
 
         // 只有 IM 聊天才会创建
         if (! $executionData->getExecutionType()->isImChat()) {
-            $magicGroup = [
+            $delightfulGroup = [
                 'group_id' => 'test_group_id',
                 'name' => $groupName,
                 'type' => $groupType->value,
             ];
 
-            $vertexResult->setResult($magicGroup);
+            $vertexResult->setResult($delightfulGroup);
             return;
         }
 
@@ -117,15 +117,15 @@ class CreateGroupNodeRunner extends NodeRunner
         $ownerAuthorization->setDelightfulId($groupOwnerInfo->getDelightfulId());
         $ownerAuthorization->setUserType($groupOwnerInfo->getUserType());
 
-        $magicGroupDTO = new DelightfulGroupEntity();
-        $magicGroupDTO->setGroupAvatar('');
-        $magicGroupDTO->setGroupName($groupName);
-        $magicGroupDTO->setGroupType($groupType);
-        $magicGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
+        $delightfulGroupDTO = new DelightfulGroupEntity();
+        $delightfulGroupDTO->setGroupAvatar('');
+        $delightfulGroupDTO->setGroupName($groupName);
+        $delightfulGroupDTO->setGroupType($groupType);
+        $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
 
         // 通过 会话ID 获取来源 和 助理 key，并创建群聊
         $agentKey = $executionData->getTriggerData()->getAgentKey();
-        $this->createChatGroup($agentKey, $groupMemberIds, $ownerAuthorization, $magicGroupDTO);
+        $this->createChatGroup($agentKey, $groupMemberIds, $ownerAuthorization, $delightfulGroupDTO);
 
         if (! empty($assistantOpeningSpeech)) {
             // 助手发送群聊消息
@@ -135,7 +135,7 @@ class CreateGroupNodeRunner extends NodeRunner
             $receiveSeqDTO->setContent($assistantMessage);
             $receiveSeqDTO->setSeqType($assistantMessage->getMessageTypeEnum());
 
-            $receiverId = $magicGroupDTO->getId();
+            $receiverId = $delightfulGroupDTO->getId();
             $senderUserId = $executionData->getAgentUserId();
             di(DelightfulChatMessageAppService::class)->agentSendMessage(
                 aiSeqDTO: $receiveSeqDTO,
@@ -145,21 +145,21 @@ class CreateGroupNodeRunner extends NodeRunner
                 receiverType: ConversationType::Group
             );
         }
-        $magicGroup = [
-            'group_id' => $magicGroupDTO->getId(),
-            'name' => $magicGroupDTO->getGroupName(),
-            'type' => $magicGroupDTO->getGroupType()->value,
+        $delightfulGroup = [
+            'group_id' => $delightfulGroupDTO->getId(),
+            'name' => $delightfulGroupDTO->getGroupName(),
+            'type' => $delightfulGroupDTO->getGroupType()->value,
         ];
 
-        $vertexResult->setResult($magicGroup);
+        $vertexResult->setResult($delightfulGroup);
     }
 
-    private function createChatGroup(string $agentKey, array $groupMemberIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $magicGroupDTO): void
+    private function createChatGroup(string $agentKey, array $groupMemberIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $delightfulGroupDTO): void
     {
         if (! empty($agentKey)) {
-            di(DelightfulBotThirdPlatformChatAppService::class)->createChatGroup($agentKey, $groupMemberIds, $userAuthorization, $magicGroupDTO);
+            di(DelightfulBotThirdPlatformChatAppService::class)->createChatGroup($agentKey, $groupMemberIds, $userAuthorization, $delightfulGroupDTO);
         } else {
-            di(DelightfulChatGroupAppService::class)->createChatGroup($groupMemberIds, [], $userAuthorization, $magicGroupDTO);
+            di(DelightfulChatGroupAppService::class)->createChatGroup($groupMemberIds, [], $userAuthorization, $delightfulGroupDTO);
         }
     }
 }

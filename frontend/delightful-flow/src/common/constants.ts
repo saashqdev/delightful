@@ -13,4 +13,4 @@ export enum ComponentType {
 }
 
 
-export const CLASSNAME_PREFIX = "magic"
+export const CLASSNAME_PREFIX = "delightful"

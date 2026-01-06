@@ -1,5 +1,5 @@
 import type Conversation from "@/opensource/models/chat/conversation"
-import magicIconLogo from "@/assets/logos/magic-icon.svg"
+import delightfulIconLogo from "@/assets/logos/delightful-icon.svg"
 import dayjs from "dayjs"
 import { sort } from "radash"
 import { useCallback } from "react"
@@ -60,7 +60,7 @@ export default function useContacts() {
 							target_info: {
 								id: receive_id,
 								icon: userInfo?.avatar_url || {
-									src: magicIconLogo,
+									src: delightfulIconLogo,
 									style: {
 										background: "#ababab70",
 									},

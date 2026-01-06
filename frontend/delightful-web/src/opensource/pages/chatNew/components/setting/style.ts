@@ -15,7 +15,7 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
     }
 	`,
 	icon: css`
-		background-color: ${token.magicColorScales.green[5]};
+		background-color: ${token.delightfulColorScales.green[5]};
 		color: white;
 		border-radius: 4px;
 		padding: 4px;
@@ -24,7 +24,7 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 		--${prefixCls}-color-bg-mask: transparent;
 	`,
 	body: css`
-		background-color: ${isDarkMode ? token.magicColorUsages.bg[2] : token.magicColorScales.white};
+		background-color: ${isDarkMode ? token.delightfulColorUsages.bg[2] : token.delightfulColorScales.white};
 		--${prefixCls}-padding-lg: 12px;
 	`,
 }))

@@ -7,7 +7,7 @@ declare(strict_types=1);
 use Delightful\BeDelightful\Interfaces\Agent\Facade\Admin\BeDelightfulAgentAdminApi;
 use Hyperf\HttpServer\Router\Router;
 
-Router::addGroup('/api/v1/super-magic', function () {
+Router::addGroup('/api/v1/super-delightful', function () {
     Router::addGroup('/agents', function () {
         Router::get('/builtin-tools', [BeDelightfulAgentAdminApi::class, 'tools']);
 

@@ -14,7 +14,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 interface DelightfulFlowToolSetRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowToolSetEntity $magicFlowToolSetEntity): DelightfulFlowToolSetEntity;
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowToolSetEntity $delightfulFlowToolSetEntity): DelightfulFlowToolSetEntity;
 
     public function destroy(FlowDataIsolation $dataIsolation, string $code): void;
 

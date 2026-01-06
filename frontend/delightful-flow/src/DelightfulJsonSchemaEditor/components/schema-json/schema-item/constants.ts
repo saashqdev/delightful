@@ -9,7 +9,7 @@ export const getDefaultBooleanConstantSource = () => {
 	const variableNodeType = nodeManager.variableNodeTypes?.[0]
 
 	return [{
-		"title": i18next.t("common.constants", { ns: "magicFlow" }),
+		"title": i18next.t("common.constants", { ns: "delightfulFlow" }),
 		"key": "",
 		"nodeId": "Wrapper",
 		"nodeType": variableNodeType,
@@ -17,7 +17,7 @@ export const getDefaultBooleanConstantSource = () => {
 		"isRoot": true,
 		"children": [
 			{
-				"title": i18next.t("common.real", { ns: "magicFlow" }),
+				"title": i18next.t("common.real", { ns: "delightfulFlow" }),
 				"key": "true",
 				"nodeId": "",
 				"nodeType": variableNodeType,
@@ -27,7 +27,7 @@ export const getDefaultBooleanConstantSource = () => {
 				"isConstant": true
 			},
 			{
-				"title": i18next.t("common.artifact", { ns: "magicFlow" }),
+				"title": i18next.t("common.artifact", { ns: "delightfulFlow" }),
 				"key": "false",
 				"nodeId": "",
 				"nodeType": variableNodeType,

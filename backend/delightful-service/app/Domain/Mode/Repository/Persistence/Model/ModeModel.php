@@ -37,7 +37,7 @@ class ModeModel extends AbstractModel
 {
     use SoftDeletes;
 
-    protected ?string $table = 'magic_modes';
+    protected ?string $table = 'delightful_modes';
 
     protected array $fillable = [
         'id',

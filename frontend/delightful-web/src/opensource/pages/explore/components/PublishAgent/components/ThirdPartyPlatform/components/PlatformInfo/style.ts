@@ -19,7 +19,7 @@ export const useStyles = createStyles(({ css, token }) => {
 			font-size: 14px;
 			line-height: 20px;
 			letter-spacing: 0px;
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 			margin-right: 12px;
 		`,
 		platformDesc: css`
@@ -27,7 +27,7 @@ export const useStyles = createStyles(({ css, token }) => {
 			font-size: 14px;
 			line-height: 20px;
 			letter-spacing: 0px;
-			color: ${token.magicColorUsages.text[3]};
+			color: ${token.delightfulColorUsages.text[3]};
 		`,
 		checkbox: css`
 			margin-right: 24px;

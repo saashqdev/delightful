@@ -13,7 +13,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { colSpan }: { colSp
 	return {
 		container: {
 			width: "100%",
-			background: token.magicColorScales.grey[0],
+			background: token.delightfulColorScales.grey[0],
 			borderRadius: 12,
 			height: "unset",
 			boxShadow: "none !important",
@@ -26,14 +26,14 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { colSpan }: { colSp
 			padding-top: 20px;
 		`,
 		title: css`
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
 			font-size: 18px;
 			font-weight: 600;
 			line-height: 24px;
 			margin-bottom: 2px;
 		`,
 		desc: css`
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[3]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[3]};
 			font-size: 14px;
 			margin: 0;
 			line-height: 20px;
@@ -49,8 +49,8 @@ const useStyles = createStyles(({ css, isDarkMode, token }, { colSpan }: { colSp
 			cursor: pointer;
 			&:hover {
 				background: ${isDarkMode
-					? token.magicColorUsages.fill[0]
-					: token.magicColorUsages.fill[0]};
+					? token.delightfulColorUsages.fill[0]
+					: token.delightfulColorUsages.fill[0]};
 			}
 		`,
 	}

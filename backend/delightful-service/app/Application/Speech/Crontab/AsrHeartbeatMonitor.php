@@ -42,7 +42,7 @@ class AsrHeartbeatMonitor
     public function __construct(
         private readonly Redis $redis,
         private readonly AsrFileAppService $asrFileAppService,
-        private readonly DelightfulUserDomainService $magicUserDomainService,
+        private readonly DelightfulUserDomainService $delightfulUserDomainService,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get('AsrHeartbeatMonitor');
@@ -229,7 +229,7 @@ class AsrHeartbeatMonitor
             ]);
 
             // 获取用户实体
-            $userEntity = $this->magicUserDomainService->getUserById($taskStatus->userId);
+            $userEntity = $this->delightfulUserDomainService->getUserById($taskStatus->userId);
             if ($userEntity === null) {
                 ExceptionBuilder::throw(AsrErrorCode::UserNotExist);
             }

@@ -12,8 +12,8 @@ export const useModernStyles = createStyles(
 				border-radius: 12px;
 				overflow: hidden;
 				background-color: ${isDarkMode
-					? token.magicColorScales.grey[0]
-					: token.magicColorUsages.white};
+					? token.delightfulColorScales.grey[0]
+					: token.delightfulColorUsages.white};
 				box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.1), 0px 0px 1px 0px rgba(0, 0, 0, 0.3);
 				user-select: none;
 			`,
@@ -31,8 +31,8 @@ export const useModernStyles = createStyles(
 			extra: css`
 				padding: 14px;
 				background-color: ${isDarkMode
-					? token.magicColorScales.grey[6]
-					: token.magicColorScales.grey[0]};
+					? token.delightfulColorScales.grey[6]
+					: token.delightfulColorScales.grey[0]};
 				user-select: none;
 			`,
 			input: css`
@@ -48,8 +48,8 @@ export const useModernStyles = createStyles(
 				align-items: center;
 				letter-spacing: 0.25;
 				color: ${isDarkMode
-					? token.magicColorUsages.white
-					: token.magicColorUsages.text[0]};
+					? token.delightfulColorUsages.white
+					: token.delightfulColorUsages.text[0]};
 				user-select: text;
 			`,
 			sendButton: css`
@@ -58,7 +58,7 @@ export const useModernStyles = createStyles(
 				gap: 4px;
 			`,
 			placeholder: css`
-				color: ${isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.text};
+				color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text};
 				position: absolute;
 				top: 22px;
 				left: 18px;
@@ -87,7 +87,7 @@ export const useStandardStyles = createStyles(
 			`,
 			main: css`
 				padding: 6px 14px 14px 14px;
-				background-color: ${token.magicColorScales.grey[0]};
+				background-color: ${token.delightfulColorScales.grey[0]};
 				height: 100%;
 				border-top: 1px solid ${token.colorBorder};
 				user-select: none;
@@ -99,8 +99,8 @@ export const useStandardStyles = createStyles(
 				outline-style: none;
 				position: relative;
 				color: ${isDarkMode
-					? token.magicColorUsages.white
-					: token.magicColorUsages.text[0]};
+					? token.delightfulColorUsages.white
+					: token.delightfulColorUsages.text[0]};
 				font-size: 14px;
 				font-weight: 400;
 				line-height: 20px;
@@ -111,12 +111,12 @@ export const useStandardStyles = createStyles(
 			`,
 			button: css`
         --${prefixCls}-margin-xs: 2px;
-        --${prefixCls}-button-text-hover-bg: ${token.magicColorUsages.fill[0]} !important;
+        --${prefixCls}-button-text-hover-bg: ${token.delightfulColorUsages.fill[0]} !important;
       `,
 			tip: css`
 				color: ${isDarkMode
-					? token.magicColorScales.grey[4]
-					: token.magicColorUsages.text[3]};
+					? token.delightfulColorScales.grey[4]
+					: token.delightfulColorUsages.text[3]};
 				font-size: 14px;
 				font-weight: 400;
 				line-height: 20px;
@@ -139,16 +139,16 @@ export const useStandardStyles = createStyles(
 			`,
 			extra: css`
 				border-top: 1px solid ${token.colorBorder};
-				background: ${token.magicColorUsages.fill[0]};
+				background: ${token.delightfulColorUsages.fill[0]};
 			`,
 			referMessageSection: css`
-				background: ${token.magicColorUsages.fill[0]};
+				background: ${token.delightfulColorUsages.fill[0]};
 				padding: 8px 12px;
 				width: 100%;
 			`,
 			referMessage: css`
 				opacity: 0.8;
-				color: ${token.magicColorUsages.text[2]};
+				color: ${token.delightfulColorUsages.text[2]};
 				font-size: 12px;
 				font-weight: 400;
 			`,

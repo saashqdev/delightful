@@ -33,7 +33,7 @@ class CleanupDuplicateFileKeysCommand extends HyperfCommand
     public function configure()
     {
         parent::configure();
-        $this->setDescription('Cleanup duplicate file_keys in magic_super_agent_task_files table');
+        $this->setDescription('Cleanup duplicate file_keys in delightful_super_agent_task_files table');
 
         $this->addOption(
             'stage',

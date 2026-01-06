@@ -27,7 +27,7 @@ const RichText = memo(
 		const finalSchema = useMemo(() => new Schema(schemaConfig as any), [])
 
 		const handleClickOn = useMemoizedFn((view, pos, node, nodePos, event, direct) => {
-			if (node.type.name === "image" || node.type.name === "magic-emoji") {
+			if (node.type.name === "image" || node.type.name === "delightful-emoji") {
 				event.preventDefault()
 				// 注释掉：解决点击图片后，图片无法触发点击事件
 				// event.stopPropagation()

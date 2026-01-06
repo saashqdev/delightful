@@ -19,10 +19,10 @@ class OrganizationAppService
     protected OrganizationDomainService $organizationDomainService;
 
     #[Inject]
-    protected DelightfulUserDomainService $magicUserDomainService;
+    protected DelightfulUserDomainService $delightfulUserDomainService;
 
     #[Inject]
-    protected DelightfulAccountDomainService $magicAccountDomainService;
+    protected DelightfulAccountDomainService $delightfulAccountDomainService;
 
     /**
      * @return array{total: int, list: array}
@@ -34,7 +34,7 @@ class OrganizationAppService
 
     /**
      * @param string[] $creatorIds
-     * @return array<string, array{user_id: string, magic_id: ?string, name: string, avatar: string, email: ?string, phone: ?string}>
+     * @return array<string, array{user_id: string, delightful_id: ?string, name: string, avatar: string, email: ?string, phone: ?string}>
      */
     public function getCreators(array $creatorIds): array
     {
@@ -42,13 +42,13 @@ class OrganizationAppService
             return [];
         }
 
-        $users = $this->magicUserDomainService->getUserByIdsWithoutOrganization($creatorIds);
+        $users = $this->delightfulUserDomainService->getUserByIdsWithoutOrganization($creatorIds);
         if ($users === []) {
             return $this->buildFallbackCreators($creatorIds);
         }
 
         $creatorMap = [];
-        $magicIdToUserId = [];
+        $delightfulIdToUserId = [];
 
         foreach ($users as $user) {
             $userId = $user->getUserId();
@@ -57,22 +57,22 @@ class OrganizationAppService
             }
             $creatorMap[$userId] = [
                 'user_id' => $userId,
-                'magic_id' => $user->getDelightfulId(),
+                'delightful_id' => $user->getDelightfulId(),
                 'name' => $user->getNickname(),
                 'avatar' => $user->getAvatarUrl(),
             ];
-            $magicId = $user->getDelightfulId();
-            $magicIdToUserId[$magicId] = $userId;
+            $delightfulId = $user->getDelightfulId();
+            $delightfulIdToUserId[$delightfulId] = $userId;
         }
 
-        if ($magicIdToUserId !== []) {
-            $accounts = $this->magicAccountDomainService->getAccountByDelightfulIds(array_keys($magicIdToUserId));
+        if ($delightfulIdToUserId !== []) {
+            $accounts = $this->delightfulAccountDomainService->getAccountByDelightfulIds(array_keys($delightfulIdToUserId));
             foreach ($accounts as $account) {
-                $magicId = $account->getDelightfulId();
-                if ($magicId === null || $magicId === '') {
+                $delightfulId = $account->getDelightfulId();
+                if ($delightfulId === null || $delightfulId === '') {
                     continue;
                 }
-                $userId = $magicIdToUserId[$magicId] ?? null;
+                $userId = $delightfulIdToUserId[$delightfulId] ?? null;
                 if ($userId === null || ! array_key_exists($userId, $creatorMap)) {
                     continue;
                 }
@@ -90,7 +90,7 @@ class OrganizationAppService
             if (! array_key_exists($creatorId, $creatorMap)) {
                 $creatorMap[$creatorId] = [
                     'user_id' => $creatorId,
-                    'magic_id' => null,
+                    'delightful_id' => null,
                     'name' => '',
                     'avatar' => '',
                     'email' => null,
@@ -104,7 +104,7 @@ class OrganizationAppService
 
     /**
      * @param string[] $creatorIds
-     * @return array<string, array{user_id: string, magic_id: ?string, name: string, avatar: string, email: ?string, phone: ?string}>
+     * @return array<string, array{user_id: string, delightful_id: ?string, name: string, avatar: string, email: ?string, phone: ?string}>
      */
     private function buildFallbackCreators(array $creatorIds): array
     {
@@ -112,7 +112,7 @@ class OrganizationAppService
         foreach ($creatorIds as $creatorId) {
             $fallback[$creatorId] = [
                 'user_id' => $creatorId,
-                'magic_id' => null,
+                'delightful_id' => null,
                 'name' => '',
                 'avatar' => '',
                 'email' => null,

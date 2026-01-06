@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_super_agent_topics')) {
+        if (Schema::hasTable('delightful_super_agent_topics')) {
             return;
         }
-        Schema::create('magic_super_agent_topics', function (Blueprint $table) {
+        Schema::create('delightful_super_agent_topics', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user_id', 64)->default('')->comment('user ID');
             $table->unsignedBigInteger('workspace_id')->default(0)->comment('workspace ID');
@@ -43,6 +43,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_general_agent_topics');
+        Schema::dropIfExists('delightful_general_agent_topics');
     }
 };

@@ -14,8 +14,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_bots', function (Blueprint $table) {
-            if (! Schema::hasColumn('magic_bots', 'start_page')) {
+        Schema::table('delightful_bots', function (Blueprint $table) {
+            if (! Schema::hasColumn('delightful_bots', 'start_page')) {
                 $table->boolean('start_page')->default(false)->comment('启动页开关');
             }
         });
@@ -26,7 +26,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_bots', function (Blueprint $table) {
+        Schema::table('delightful_bots', function (Blueprint $table) {
             $table->dropColumn('start_page');
         });
     }

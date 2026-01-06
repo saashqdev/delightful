@@ -1,12 +1,12 @@
 import "antd-style"
 import "antd/es/theme/interface"
-import type { ColorScales, ColorUsages } from "@dtyq/magic-ui"
+import type { ColorScales, ColorUsages } from "@dtyq/delightful-ui"
 
 export interface NewToken {
 	/** Top menu bar height */
 	titleBarHeight?: number
-	magicColorScales: ColorScales
-	magicColorUsages: ColorUsages
+	delightfulColorScales: ColorScales
+	delightfulColorUsages: ColorUsages
 }
 
 // Extend antd-style `token` type via declaration merging

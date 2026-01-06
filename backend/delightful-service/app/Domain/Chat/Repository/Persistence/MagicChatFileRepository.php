@@ -17,33 +17,33 @@ use Hyperf\DbConnection\Db;
 class DelightfulChatFileRepository implements DelightfulChatFileRepositoryInterface
 {
     public function __construct(
-        protected DelightfulChatFileModel $magicChatFileModel
+        protected DelightfulChatFileModel $delightfulChatFileModel
     ) {
     }
 
-    public function uploadFile(DelightfulChatFileEntity $magicFileDTO): DelightfulChatFileEntity
+    public function uploadFile(DelightfulChatFileEntity $delightfulFileDTO): DelightfulChatFileEntity
     {
-        if (empty($magicFileDTO->getFileId())) {
+        if (empty($delightfulFileDTO->getFileId())) {
             $id = (string) IdGenerator::getSnowId();
-            $magicFileDTO->setFileId($id);
+            $delightfulFileDTO->setFileId($id);
         }
-        $this->magicChatFileModel::query()->create($magicFileDTO->toArray());
-        return $magicFileDTO;
+        $this->delightfulChatFileModel::query()->create($delightfulFileDTO->toArray());
+        return $delightfulFileDTO;
     }
 
-    public function uploadFiles(array $magicFileDTOs): array
+    public function uploadFiles(array $delightfulFileDTOs): array
     {
         $createData = [];
         $fileEntities = [];
-        foreach ($magicFileDTOs as $magicFileDTO) {
-            if (empty($magicFileDTO->getFileId())) {
+        foreach ($delightfulFileDTOs as $delightfulFileDTO) {
+            if (empty($delightfulFileDTO->getFileId())) {
                 $id = (string) IdGenerator::getSnowId();
-                $magicFileDTO->setFileId($id);
+                $delightfulFileDTO->setFileId($id);
             }
-            $createData[] = $magicFileDTO->toArray();
-            $fileEntities[] = $magicFileDTO;
+            $createData[] = $delightfulFileDTO->toArray();
+            $fileEntities[] = $delightfulFileDTO;
         }
-        $this->magicChatFileModel::query()->insert($createData);
+        $this->delightfulChatFileModel::query()->insert($createData);
         return $fileEntities;
     }
 
@@ -55,7 +55,7 @@ class DelightfulChatFileRepository implements DelightfulChatFileRepositoryInterf
         if (empty($fileIds)) {
             return [];
         }
-        $query = $this->magicChatFileModel::query()->whereIn('file_id', $fileIds);
+        $query = $this->delightfulChatFileModel::query()->whereIn('file_id', $fileIds);
         if (! is_null($order)) {
             $query->orderBy('created_at', $order);
         }
@@ -91,7 +91,7 @@ class DelightfulChatFileRepository implements DelightfulChatFileRepositoryInterf
      */
     public function getChatFileByFileKey(string $fileKey): ?DelightfulChatFileEntity
     {
-        $file = $this->magicChatFileModel::query()
+        $file = $this->delightfulChatFileModel::query()
             ->where('file_key', $fileKey)
             ->first();
 
@@ -107,7 +107,7 @@ class DelightfulChatFileRepository implements DelightfulChatFileRepositoryInterf
      */
     public function updateFile(DelightfulChatFileEntity $fileEntity): void
     {
-        $this->magicChatFileModel->newQuery()
+        $this->delightfulChatFileModel->newQuery()
             ->where('file_id', $fileEntity->getFileId())
             ->update([
                 'file_type' => $fileEntity->getFileType(),

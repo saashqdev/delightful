@@ -28,7 +28,7 @@ class MCPUserSettingModel extends AbstractModel
 {
     use Snowflake;
 
-    protected ?string $table = 'magic_mcp_user_settings';
+    protected ?string $table = 'delightful_mcp_user_settings';
 
     protected array $fillable = [
         'id',

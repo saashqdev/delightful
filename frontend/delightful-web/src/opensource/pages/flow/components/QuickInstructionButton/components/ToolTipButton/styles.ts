@@ -7,7 +7,7 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 		`,
 		title: css`
 			font-size: 14px;
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 		`,
 		form: css`
 			display: flex;
@@ -21,22 +21,22 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 						font-size: 12px;
 						font-weight: 400;
 						line-height: 16px;
-						color: ${token.magicColorUsages.text[2]};
+						color: ${token.delightfulColorUsages.text[2]};
 					}
 				}
 			}
 		`,
 		input: css`
 			resize: none;
-			border: 1px solid ${isDarkMode ? token.magicColorUsages.border : token.magicColorUsages.border};
-			background: ${isDarkMode ? token.magicColorUsages.fill[0] : token.magicColorUsages.fill[0]};
+			border: 1px solid ${isDarkMode ? token.delightfulColorUsages.border : token.delightfulColorUsages.border};
+			background: ${isDarkMode ? token.delightfulColorUsages.fill[0] : token.delightfulColorUsages.fill[0]};
 			--${prefixCls}-input-active-shadow: none !important;
 			&::placeholder  {
-				color: ${token.magicColorUsages.text[3]};
+				color: ${token.delightfulColorUsages.text[3]};
 			}
 			&:hover, &:focus{
-				border: 1px solid ${isDarkMode ? token.magicColorUsages.border : token.magicColorUsages.border};
-				background: ${isDarkMode ? token.magicColorUsages.fill[0] : token.magicColorUsages.fill[0]};
+				border: 1px solid ${isDarkMode ? token.delightfulColorUsages.border : token.delightfulColorUsages.border};
+				background: ${isDarkMode ? token.delightfulColorUsages.fill[0] : token.delightfulColorUsages.fill[0]};
 			}
 			.${prefixCls}-input-suffix {
 				position: absolute;
@@ -53,17 +53,17 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 			align-items: center;
 			border-radius: 8px;
 			border: 1px dashed
-				${isDarkMode ? token.magicColorUsages.border : token.magicColorUsages.border};
+				${isDarkMode ? token.delightfulColorUsages.border : token.delightfulColorUsages.border};
 			background: ${isDarkMode
-				? token.magicColorUsages.fill[0]
-				: token.magicColorUsages.fill[0]};
+				? token.delightfulColorUsages.fill[0]
+				: token.delightfulColorUsages.fill[0]};
 			overflow: hidden;
 		`,
 		uploadTip: css`
 			font-size: 12px;
 			font-weight: 400;
 			cursor: default;
-			color: ${isDarkMode ? token.magicColorUsages.text[3] : token.magicColorUsages.text[3]};
+			color: ${isDarkMode ? token.delightfulColorUsages.text[3] : token.delightfulColorUsages.text[3]};
 			width: 280px;
 			height: 160px;
 			display: flex;
@@ -77,11 +77,11 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 			padding: 6px 12px;
 			border: 0;
 			border-radius: 8px;
-			background-color: ${token.magicColorUsages.fill[0]};
-			color: ${isDarkMode ? token.magicColorUsages.text[2] : token.magicColorUsages.text[1]};
+			background-color: ${token.delightfulColorUsages.fill[0]};
+			color: ${isDarkMode ? token.delightfulColorUsages.text[2] : token.delightfulColorUsages.text[1]};
 		`,
 		example: css`
-			color: ${isDarkMode ? token.magicColorUsages.text[0] : token.magicColorUsages.text[0]};
+			color: ${isDarkMode ? token.delightfulColorUsages.text[0] : token.delightfulColorUsages.text[0]};
 		`,
 		exampleImg: css`
 			width: 100%;
@@ -89,10 +89,10 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 		`,
 		exampleTitle: css`
 			font-weight: 600;
-			color: ${isDarkMode ? token.magicColorUsages.text[2] : token.magicColorUsages.text[2]};
+			color: ${isDarkMode ? token.delightfulColorUsages.text[2] : token.delightfulColorUsages.text[2]};
 		`,
 		exampleDesc: css`
-			color: ${isDarkMode ? token.magicColorUsages.text[2] : token.magicColorUsages.text[2]};
+			color: ${isDarkMode ? token.delightfulColorUsages.text[2] : token.delightfulColorUsages.text[2]};
 		`,
 	}
 })

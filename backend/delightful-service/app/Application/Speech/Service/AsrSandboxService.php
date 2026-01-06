@@ -709,7 +709,7 @@ readonly class AsrSandboxService
             isFirstTask: false, // ASR 场景通常不是首次任务
         );
 
-        // 复用 initializeAgent 方法（会自动构建 message_subscription_config 和 magic_service_host）
+        // 复用 initializeAgent 方法（会自动构建 message_subscription_config 和 delightful_service_host）
         // 传入项目组织编码，用于获取正确的 STS Token
         // ASR 场景设置 skip_init_messages = true，让沙箱不发送聊天消息过来
         $initMetadata = (new InitializationMetadataDTO(skipInitMessages: true));

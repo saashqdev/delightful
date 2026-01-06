@@ -16,10 +16,10 @@ class CreateDelightfulChatGroupTable extends Migration
     public function up(): void
     {
         // 判断表是否存在
-        if (Schema::hasTable('magic_chat_groups')) {
+        if (Schema::hasTable('delightful_chat_groups')) {
             return;
         }
-        Schema::create('magic_chat_groups', static function (Blueprint $table) {
+        Schema::create('delightful_chat_groups', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('group_name', 64)->comment('群名称')->default('');
             $table->string('group_avatar', 255)->comment('群头像')->default('');
@@ -43,6 +43,6 @@ class CreateDelightfulChatGroupTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_chat_groups');
+        Schema::dropIfExists('delightful_chat_groups');
     }
 }

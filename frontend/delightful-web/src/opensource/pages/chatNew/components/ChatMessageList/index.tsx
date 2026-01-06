@@ -442,7 +442,7 @@ const ChatMessageList = observer(() => {
 		const messageId = messageElement?.getAttribute("data-message-id")
 
 		// 如果是图片点击，并且不是表情
-		if (target.tagName === "IMG" && target.classList.contains("magic-image")) {
+		if (target.tagName === "IMG" && target.classList.contains("delightful-image")) {
 			const fileInfo = target.getAttribute("data-file-info")
 			if (fileInfo) {
 				try {

@@ -11,11 +11,11 @@ import { FullMessage, ApplyMessageOptions } from "@/types/chat/message"
 import type { CMessage } from "@/types/chat"
 import { User } from "@/types/user"
 
-const magicBroadcastChannel = new DelightfulBroadcastChannel("magic-chat-broadcast-channel")
+const delightfulBroadcastChannel = new DelightfulBroadcastChannel("delightful-chat-broadcast-channel")
 
 export const BroadcastChannelSender = {
 	addSendMessage: (renderMessage: FullMessage, message: ConversationMessageSend) => {
-		magicBroadcastChannel.send({
+		delightfulBroadcastChannel.send({
 			type: EVENTS.ADD_SEND_MESSAGE,
 			payload: {
 				renderMessage,
@@ -25,7 +25,7 @@ export const BroadcastChannelSender = {
 	},
 
 	updateSendMessage: (response: SeqResponse<ConversationMessage>, sendStatus: SendStatus) => {
-		magicBroadcastChannel.send({
+		delightfulBroadcastChannel.send({
 			type: EVENTS.UPDATE_SEND_MESSAGE,
 			payload: {
 				response,
@@ -39,7 +39,7 @@ export const BroadcastChannelSender = {
 		sendStatus?: SendStatus | undefined,
 		seenStatus?: ConversationMessageStatus | undefined,
 	) => {
-		magicBroadcastChannel.send({
+		delightfulBroadcastChannel.send({
 			type: EVENTS.UPDATE_MESSAGE_STATUS,
 			payload: {
 				messageId,
@@ -50,7 +50,7 @@ export const BroadcastChannelSender = {
 	},
 
 	updateMessageId: (tempId: string, messageId: string) => {
-		magicBroadcastChannel.send({
+		delightfulBroadcastChannel.send({
 			type: EVENTS.UPDATE_MESSAGE_ID,
 			payload: {
 				tempId,
@@ -61,7 +61,7 @@ export const BroadcastChannelSender = {
 
 	applyMessage: (message: SeqResponse<CMessage>, options: ApplyMessageOptions) => {
 		console.log("applyMessage ========== ", message, options)
-		magicBroadcastChannel.send({
+		delightfulBroadcastChannel.send({
 			type: EVENTS.APPLY_MESSAGE,
 			payload: {
 				message,
@@ -76,20 +76,20 @@ export const BroadcastChannelSender = {
 	 * @param fallbackUserInfo
 	 */
 	switchAccount: ({
-		magicId,
-		magicUserId,
-		magicOrganizationCode,
+		delightfulId,
+		delightfulUserId,
+		delightfulOrganizationCode,
 	}: {
-		magicId: string
-		magicUserId: string
-		magicOrganizationCode: string
+		delightfulId: string
+		delightfulUserId: string
+		delightfulOrganizationCode: string
 	}) => {
-		magicBroadcastChannel.send({
+		delightfulBroadcastChannel.send({
 			type: EVENTS.SWITCH_ACCOUNT,
 			payload: {
-				magicId,
-				magicUserId,
-				magicOrganizationCode,
+				delightfulId,
+				delightfulUserId,
+				delightfulOrganizationCode,
 			},
 		})
 	},
@@ -102,16 +102,16 @@ export const BroadcastChannelSender = {
 	 */
 	switchOrganization: ({
 		userInfo,
-		magicOrganizationCode,
+		delightfulOrganizationCode,
 	}: {
 		userInfo: User.UserInfo
-		magicOrganizationCode: string
+		delightfulOrganizationCode: string
 	}) => {
-		magicBroadcastChannel.send({
+		delightfulBroadcastChannel.send({
 			type: EVENTS.SWITCH_ORGANIZATION,
 			payload: {
 				userInfo,
-				magicOrganizationCode,
+				delightfulOrganizationCode,
 			},
 		})
 	},
@@ -121,7 +121,7 @@ export const BroadcastChannelSender = {
 	 * @param userAccount
 	 */
 	addAccount: (userAccount: User.UserAccount) => {
-		magicBroadcastChannel.send({
+		delightfulBroadcastChannel.send({
 			type: EVENTS.ADD_ACCOUNT,
 			payload: { userAccount },
 		})
@@ -129,15 +129,15 @@ export const BroadcastChannelSender = {
 
 	/**
 	 * Delete account
-	 * @param magicId
+	 * @param delightfulId
 	 */
 	deleteAccount: (
-		magicId?: string,
+		delightfulId?: string,
 		{ navigateToLogin = true }: { navigateToLogin?: boolean } = {},
 	) => {
-		magicBroadcastChannel.send({
+		delightfulBroadcastChannel.send({
 			type: EVENTS.DELETE_ACCOUNT,
-			payload: { magicId, navigateToLogin },
+			payload: { delightfulId, navigateToLogin },
 		})
 	},
 
@@ -149,12 +149,12 @@ export const BroadcastChannelSender = {
 	 * @param data.seqId Sequence id
 	 */
 	updateOrganizationDot: (data: {
-		magicId: string
+		delightfulId: string
 		organizationCode: string
 		count: number
 		seqId?: string
 	}) => {
-		magicBroadcastChannel.send({
+		delightfulBroadcastChannel.send({
 			type: EVENTS.UPDATE_ORGANIZATION_DOT,
 			payload: data,
 		})

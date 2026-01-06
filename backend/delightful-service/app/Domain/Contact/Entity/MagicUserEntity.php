@@ -18,7 +18,7 @@ class DelightfulUserEntity extends AbstractEntity implements ArrayAccess
 {
     protected ?int $id = null;
 
-    protected string $magicId;
+    protected string $delightfulId;
 
     protected string $organizationCode;
 
@@ -121,15 +121,15 @@ class DelightfulUserEntity extends AbstractEntity implements ArrayAccess
 
     public function getDelightfulId(): string
     {
-        return $this->magicId;
+        return $this->delightfulId;
     }
 
-    public function setDelightfulId(int|string $magicId): void
+    public function setDelightfulId(int|string $delightfulId): void
     {
-        if (is_int($magicId)) {
-            $magicId = (string) $magicId;
+        if (is_int($delightfulId)) {
+            $delightfulId = (string) $delightfulId;
         }
-        $this->magicId = $magicId;
+        $this->delightfulId = $delightfulId;
     }
 
     public function getUserId(): string
@@ -277,11 +277,11 @@ class DelightfulUserEntity extends AbstractEntity implements ArrayAccess
         $this->extra = $extra;
     }
 
-    public static function fromDelightfulAgentVersionEntity(DelightfulAgentVersionEntity $magicAgentVersionEntity): DelightfulUserEntity
+    public static function fromDelightfulAgentVersionEntity(DelightfulAgentVersionEntity $delightfulAgentVersionEntity): DelightfulUserEntity
     {
-        $avatarUrl = $magicAgentVersionEntity->getAgentAvatar();
-        $nickName = $magicAgentVersionEntity->getAgentName();
-        $description = $magicAgentVersionEntity->getAgentDescription();
+        $avatarUrl = $delightfulAgentVersionEntity->getAgentAvatar();
+        $nickName = $delightfulAgentVersionEntity->getAgentName();
+        $description = $delightfulAgentVersionEntity->getAgentDescription();
         $userDTO = new DelightfulUserEntity();
         $userDTO->setAvatarUrl($avatarUrl);
         $userDTO->setNickName($nickName);

@@ -16,7 +16,7 @@ interface CurlImporterProps {
 const CurlImporter: React.FC<CurlImporterProps> = ({ visible, onCancel, onImport, onShow }) => {
 	const { t } = useTranslation()
 	const [curlCommand, setCurlCommand] = useState("")
-	const { magicColorScales } = useTheme()
+	const { delightfulColorScales } = useTheme()
 
 	const handleImport = () => {
 		if (!curlCommand.trim()) {
@@ -39,7 +39,7 @@ const CurlImporter: React.FC<CurlImporterProps> = ({ visible, onCancel, onImport
 				<IconFileUpload
 					size={20}
 					onClick={onShow}
-					color={magicColorScales.brand[5]}
+					color={delightfulColorScales.brand[5]}
 					style={{ cursor: "pointer" }}
 				/>
 			</Tooltip>

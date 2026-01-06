@@ -35,7 +35,7 @@ class DelightfulChatConversationModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_chat_conversations';
+    protected ?string $table = 'delightful_chat_conversations';
 
     /**
      * The attributes that are mass assignable.

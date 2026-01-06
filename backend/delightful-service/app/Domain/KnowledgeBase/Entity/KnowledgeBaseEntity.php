@@ -153,7 +153,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
         $this->updatedAt = $this->createdAt;
     }
 
-    public function prepareForModification(KnowledgeBaseEntity $magicFlowKnowledgeEntity): void
+    public function prepareForModification(KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
     {
         if (empty($this->name)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '知识库名称 不能为空');
@@ -167,23 +167,23 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
         $this->checkModel();
         $this->checkVectorDB();
 
-        $magicFlowKnowledgeEntity->setName($this->name);
-        $magicFlowKnowledgeEntity->setDescription($this->description);
-        $magicFlowKnowledgeEntity->setEnabled($this->enabled);
-        $magicFlowKnowledgeEntity->setVectorDB($this->vectorDB);
-        $magicFlowKnowledgeEntity->setModel($this->model);
-        $magicFlowKnowledgeEntity->setModifier($this->creator);
-        $magicFlowKnowledgeEntity->setUpdatedAt($this->createdAt);
-        $magicFlowKnowledgeEntity->setIcon($this->icon);
-        $magicFlowKnowledgeEntity->setFragmentConfig($this->fragmentConfig);
-        $magicFlowKnowledgeEntity->setEmbeddingConfig($this->embeddingConfig);
-        $magicFlowKnowledgeEntity->setRetrieveConfig($this->retrieveConfig);
+        $delightfulFlowKnowledgeEntity->setName($this->name);
+        $delightfulFlowKnowledgeEntity->setDescription($this->description);
+        $delightfulFlowKnowledgeEntity->setEnabled($this->enabled);
+        $delightfulFlowKnowledgeEntity->setVectorDB($this->vectorDB);
+        $delightfulFlowKnowledgeEntity->setModel($this->model);
+        $delightfulFlowKnowledgeEntity->setModifier($this->creator);
+        $delightfulFlowKnowledgeEntity->setUpdatedAt($this->createdAt);
+        $delightfulFlowKnowledgeEntity->setIcon($this->icon);
+        $delightfulFlowKnowledgeEntity->setFragmentConfig($this->fragmentConfig);
+        $delightfulFlowKnowledgeEntity->setEmbeddingConfig($this->embeddingConfig);
+        $delightfulFlowKnowledgeEntity->setRetrieveConfig($this->retrieveConfig);
         if (! empty($this->version)) {
-            $magicFlowKnowledgeEntity->setVersion($this->version);
+            $delightfulFlowKnowledgeEntity->setVersion($this->version);
         }
     }
 
-    public function prepareForModifyProcess(KnowledgeBaseEntity $magicFlowKnowledgeEntity): void
+    public function prepareForModifyProcess(KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
     {
         if (empty($this->creator)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '创建者 不能为空');
@@ -194,10 +194,10 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
         if ($this->completedNum > $this->expectedNum) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '已完成数量不能大于期望数量');
         }
-        $magicFlowKnowledgeEntity->setExpectedNum($this->expectedNum);
-        $magicFlowKnowledgeEntity->setCompletedNum($this->completedNum);
-        $magicFlowKnowledgeEntity->setModifier($this->creator);
-        $magicFlowKnowledgeEntity->setUpdatedAt($this->createdAt);
+        $delightfulFlowKnowledgeEntity->setExpectedNum($this->expectedNum);
+        $delightfulFlowKnowledgeEntity->setCompletedNum($this->completedNum);
+        $delightfulFlowKnowledgeEntity->setModifier($this->creator);
+        $delightfulFlowKnowledgeEntity->setUpdatedAt($this->createdAt);
     }
 
     public function getVectorDBDriver(): VectorStoreInterface

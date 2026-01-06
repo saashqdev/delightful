@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_api_msg_logs', function (Blueprint $table) {
+        Schema::table('delightful_api_msg_logs', function (Blueprint $table) {
             $table->index('created_at');
         });
     }

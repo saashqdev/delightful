@@ -1,5 +1,5 @@
 /**
- * magic-flow节点业务组件
+ * delightful-flow节点业务组件
  */
 import { DelightfulFlowInstance } from "@/DelightfulFlow"
 import DelightfulFlowModal from "@/DelightfulFlow/modal/DelightfulFlowModal"

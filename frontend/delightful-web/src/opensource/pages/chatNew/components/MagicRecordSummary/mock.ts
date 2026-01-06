@@ -1,5 +1,5 @@
 export const recordingSummarizedMessage = {
-	magic_id: "587942976718376960",
+	delightful_id: "587942976718376960",
 	seq_id: "725662769376071680",
 	message_id: "725662769376071680",
 	refer_message_id: "",
@@ -7,7 +7,7 @@ export const recordingSummarizedMessage = {
 	conversation_id: "716728584665411585",
 	organization_code: "EAVT467",
 	message: {
-		magic_message_id: "", //
+		delightful_message_id: "", //
 		app_message_id: "", // 客户生成的message_id
 		topic_id: "", //
 		type: "recording_summary",
@@ -65,7 +65,7 @@ export const recordingSummarizedMessage = {
 }
 
 export const recordingStartMessage = {
-	magic_id: "587942976718376960",
+	delightful_id: "587942976718376960",
 	seq_id: "725662769376071680",
 	message_id: "725662769376071680",
 	refer_message_id: "",
@@ -73,7 +73,7 @@ export const recordingStartMessage = {
 	conversation_id: "716728584665411585",
 	organization_code: "EAVT467",
 	message: {
-		magic_message_id: "", //
+		delightful_message_id: "", //
 		app_message_id: "", // 客户生成的message_id
 		topic_id: "", //
 		type: "recording_summary",

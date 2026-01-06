@@ -17,7 +17,7 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $file_name
  * @property string $file_extension
  * @property string $user_id
- * @property string $magic_message_id
+ * @property string $delightful_message_id
  * @property string $organization_code
  * @property string $created_at
  * @property string $updated_at
@@ -28,7 +28,7 @@ class DelightfulChatFileModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_chat_files';
+    protected ?string $table = 'delightful_chat_files';
 
     /**
      * The attributes that are mass assignable.
@@ -41,7 +41,7 @@ class DelightfulChatFileModel extends Model
         'file_name',
         'file_extension',
         'user_id',
-        'magic_message_id',
+        'delightful_message_id',
         'organization_code',
         'created_at',
         'updated_at',

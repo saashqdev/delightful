@@ -11,23 +11,23 @@ const useStyles = createStyles(({ css, token }) => ({
 		border-radius: 8px;
 		overflow: hidden;
 
-		th[class*="magic-table-cell"] {
-			background: ${token.magicColorScales.grey[0]} !important;
+		th[class*="delightful-table-cell"] {
+			background: ${token.delightfulColorScales.grey[0]} !important;
 		}
 
-		td[class*="magic-table-cell"]:not(:last-child),
-		th[class*="magic-table-cell"]:not(:last-child) {
+		td[class*="delightful-table-cell"]:not(:last-child),
+		th[class*="delightful-table-cell"]:not(:last-child) {
 			border-right: 1px solid ${token.colorBorder};
 		}
 
-		th[class*="magic-table-cell"] {
+		th[class*="delightful-table-cell"] {
 			color: ${token.colorTextSecondary};
 			font-size: 12px;
 			font-weight: 600;
 			line-height: 16px;
 		}
 
-		td[class*="magic-table-cell"] {
+		td[class*="delightful-table-cell"] {
 			color: ${token.colorTextSecondary};
 			font-size: 12px;
 			font-weight: 400;
@@ -35,7 +35,7 @@ const useStyles = createStyles(({ css, token }) => ({
 		}
 
 		tr:last-child {
-			td[class*="magic-table-cell"] {
+			td[class*="delightful-table-cell"] {
 				border-bottom: none;
 			}
 		}

@@ -36,7 +36,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
             ExceptionBuilder::throw(PermissionErrorCode::BusinessException, 'common.access', ['label' => $code]);
         }
 
-        $toolSet = $this->magicFlowToolSetDomainService->getByCode($dataIsolation, $code);
+        $toolSet = $this->delightfulFlowToolSetDomainService->getByCode($dataIsolation, $code);
         $toolSet->setUserOperation($operation->value);
         return $toolSet;
     }
@@ -62,7 +62,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
             }
         }
 
-        $toolSet = $this->magicFlowToolSetDomainService->save($dataIsolation, $savingDelightfulFLowToolSetEntity);
+        $toolSet = $this->delightfulFlowToolSetDomainService->save($dataIsolation, $savingDelightfulFLowToolSetEntity);
         $toolSet->setUserOperation($operation->value);
         return $toolSet;
     }
@@ -86,7 +86,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         // 其实不太适合的 whereIn 暂时没想到其他好办法
         $query->setCodes($resourceIds);
 
-        $data = $this->magicFlowToolSetDomainService->queries($dataIsolation, $query, $page);
+        $data = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $query, $page);
         $filePaths = [];
         foreach ($data['list'] ?? [] as $item) {
             $filePaths[] = $item->getIcon();
@@ -115,6 +115,6 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         if (! $operation->canDelete()) {
             ExceptionBuilder::throw(PermissionErrorCode::BusinessException, 'common.access', ['label' => $code]);
         }
-        $this->magicFlowToolSetDomainService->destroy($dataIsolation, $code);
+        $this->delightfulFlowToolSetDomainService->destroy($dataIsolation, $code);
     }
 }

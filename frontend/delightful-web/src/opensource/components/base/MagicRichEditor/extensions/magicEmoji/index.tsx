@@ -2,7 +2,7 @@ import { mergeAttributes, Node, nodePasteRule } from "@tiptap/core"
 import { ReactNodeViewRenderer } from "@tiptap/react"
 import type { HTMLAttributes } from "react"
 import { emojiLocaleCache } from "@/opensource/components/base/DelightfulEmojiPanel/cache"
-import { magicEmojiRegex } from "@/opensource/pages/chatNew/components/ChatSubSider/utils"
+import { delightfulEmojiRegex } from "@/opensource/pages/chatNew/components/ChatSubSider/utils"
 import DelightfulEmojiNodeRender from "./DelightfulEmojiNodeRender"
 
 type Options = {
@@ -10,7 +10,7 @@ type Options = {
 	HTMLAttributes: HTMLAttributes<HTMLImageElement>
 }
 
-const ExtensionName = "magic-emoji"
+const ExtensionName = "delightful-emoji"
 
 const DelightfulEmojiNodeExtension = Node.create<Options>({
 	name: ExtensionName,
@@ -40,7 +40,7 @@ const DelightfulEmojiNodeExtension = Node.create<Options>({
 	addPasteRules() {
 		return [
 			nodePasteRule({
-				find: magicEmojiRegex,
+				find: delightfulEmojiRegex,
 				type: this.type,
 				getAttributes: (match) => {
 					return {

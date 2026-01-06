@@ -28,7 +28,7 @@ const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) => {
 
       .${prefixCls}-collapse-header {
         position: sticky !important;
-        background-color: ${isDarkMode ? token.magicColorUsages.bg[0] : token.colorWhite};
+        background-color: ${isDarkMode ? token.delightfulColorUsages.bg[0] : token.colorWhite};
         z-index: 1;
         top: 0;
         user-select: none;
@@ -54,14 +54,14 @@ const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) => {
 			}
 		`,
 		collapseLabel: {
-			color: isDarkMode ? token.magicColorUsages.text[2] : token.magicColorUsages.text[2],
+			color: isDarkMode ? token.delightfulColorUsages.text[2] : token.delightfulColorUsages.text[2],
 			fontSize: 14,
 			fontWeight: 400,
 			lineHeight: "20px",
 			userSelect: "none",
 		},
 		moreButton: css`
-			--${prefixCls}-button-text-hover-bg: ${token.magicColorUsages.fill[0]} !important;
+			--${prefixCls}-button-text-hover-bg: ${token.delightfulColorUsages.fill[0]} !important;
 			user-select: none;
 		`,
 		emptyFallback: css`
@@ -72,7 +72,7 @@ const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) => {
 			align-items: center;
 		`,
 		emptyFallbackText: css`
-			color: ${token.magicColorUsages.text[3]};
+			color: ${token.delightfulColorUsages.text[3]};
 			text-align: center;
 			font-size: 14px;
 			font-weight: 400;

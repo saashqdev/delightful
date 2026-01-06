@@ -27,7 +27,7 @@ export const useStyles = createStyles(({ token }) => ({
 	},
 	tabItemActive: {
 		background: "white",
-		borderColor: token.magicColorUsages.border,
+		borderColor: token.delightfulColorUsages.border,
 		position: "relative",
 		"&::after": {
 			content: '""',
@@ -70,7 +70,7 @@ export const useStyles = createStyles(({ token }) => ({
 		fontSize: 12,
 		fontWeight: 400,
 		marginTop: 10,
-		color: token.magicColorUsages.text[2],
+		color: token.delightfulColorUsages.text[2],
 		padding: "0 20px",
 	},
 	formHeader: {

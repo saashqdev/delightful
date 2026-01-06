@@ -19,7 +19,7 @@ class Operator
 
     public string $avatar = '';
 
-    public string $magicId = '';
+    public string $delightfulId = '';
 
     public string $sourceId = '';
 
@@ -89,12 +89,12 @@ class Operator
 
     public function getDelightfulId(): string
     {
-        return $this->magicId;
+        return $this->delightfulId;
     }
 
-    public function setDelightfulId(string $magicId): void
+    public function setDelightfulId(string $delightfulId): void
     {
-        $this->magicId = $magicId;
+        $this->delightfulId = $delightfulId;
     }
 
     public function getSourceId(): string

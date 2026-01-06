@@ -9,14 +9,14 @@ export const useStyles = createStyles(({ token }) => {
 			paddingBottom: 20,
 			marginTop: 20,
 			"&:not(:last-child)": {
-				borderBottom: `1px solid ${token.magicColorUsages.border}`,
+				borderBottom: `1px solid ${token.delightfulColorUsages.border}`,
 			},
 		},
 		groupName: {
 			fontSize: 12,
 			fontWeight: 400,
 			lineHeight: "16px",
-			color: token.magicColorUsages.text[2],
+			color: token.delightfulColorUsages.text[2],
 		},
 		groupActions: {
 			display: "flex",
@@ -32,7 +32,7 @@ export const useStyles = createStyles(({ token }) => {
 			borderRadius: 8,
 
 			"&:active": {
-				backgroundColor: token.magicColorUsages.fill[0],
+				backgroundColor: token.delightfulColorUsages.fill[0],
 			},
 		},
 		iconWrapper: {

@@ -26,7 +26,7 @@ class ModeGroupRelationModel extends AbstractModel
 {
     use SoftDeletes;
 
-    protected ?string $table = 'magic_mode_group_relations';
+    protected ?string $table = 'delightful_mode_group_relations';
 
     protected array $fillable = [
         'id',

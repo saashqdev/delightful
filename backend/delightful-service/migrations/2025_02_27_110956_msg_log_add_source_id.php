@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_api_msg_logs', function (Blueprint $table) {
+        Schema::table('delightful_api_msg_logs', function (Blueprint $table) {
             $table->dropColumn('msg');
             $table->string('source_id')->default('')->comment('来源ID');
             $table->string('user_name')->default('')->comment('用户姓名');

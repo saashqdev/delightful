@@ -54,10 +54,10 @@ interface DelightfulUserRepositoryInterface
     public function getUserOrganizations(string $userId): array;
 
     /**
-     * 根据 magicId 获取用户所属的组织列表.
+     * 根据 delightfulId 获取用户所属的组织列表.
      * @return string[]
      */
-    public function getUserOrganizationsByDelightfulId(string $magicId): array;
+    public function getUserOrganizationsByDelightfulId(string $delightfulId): array;
 
     public function getUserByAiCode(string $aiCode): array;
 
@@ -96,12 +96,12 @@ interface DelightfulUserRepositoryInterface
     /**
      * @return DelightfulUserEntity[]
      */
-    public function getUsersByDelightfulIdAndOrganizationCode(array $magicIds, string $organizationCode): array;
+    public function getUsersByDelightfulIdAndOrganizationCode(array $delightfulIds, string $organizationCode): array;
 
     /**
      * @return DelightfulUserEntity[]
      */
-    public function getUserByDelightfulIds(array $magicIds): array;
+    public function getUserByDelightfulIds(array $delightfulIds): array;
 
     /**
      * @return DelightfulUserEntity[]

@@ -9,8 +9,8 @@ const useStyles = createStyles(({ css, token, isDarkMode }, { open }: { open: bo
 			width: ${open ? "340px" : 0};
 			padding: ${open ? "20px" : 0};
 			background-color: ${isDarkMode
-				? token.magicColorUsages.fill[0]
-				: token.magicColorUsages.white};
+				? token.delightfulColorUsages.fill[0]
+				: token.delightfulColorUsages.white};
 			border-left: 1px solid ${token.colorBorder};
 			background-image: ${isDarkMode ? `url(${bgDark1})` : `url(${bg})`};
 			background-size: contain;
@@ -28,7 +28,7 @@ const useStyles = createStyles(({ css, token, isDarkMode }, { open }: { open: bo
 			top: 20px;
 			right: 20px;
 			cursor: pointer;
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
 		`,
 		top: css`
 			margin-top: 50px;
@@ -43,14 +43,14 @@ const useStyles = createStyles(({ css, token, isDarkMode }, { open }: { open: bo
 			justifyContent: "center",
 			border: "none",
 			borderRadius: 3,
-			background: isDarkMode ? token.magicColorScales.grey[5] : "rgba(240, 177, 20, 0.15)",
-			color: isDarkMode ? token.magicColorUsages.white : token.magicColorScales.amber[8],
+			background: isDarkMode ? token.delightfulColorScales.grey[5] : "rgba(240, 177, 20, 0.15)",
+			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorScales.amber[8],
 			fontSize: 12,
 			fontWeight: 400,
 			lineHeight: "16px",
 		},
 		title: css`
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
 			text-align: center;
 
 			font-size: 18px;
@@ -58,7 +58,7 @@ const useStyles = createStyles(({ css, token, isDarkMode }, { open }: { open: bo
 			line-height: 24px;
 		`,
 		description: css`
-			color: ${isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.text[3]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[3]};
 			text-align: center;
 
 			font-size: 14px;
@@ -70,17 +70,17 @@ const useStyles = createStyles(({ css, token, isDarkMode }, { open }: { open: bo
 			width: 100%;
 			padding: 10px 0;
 			border-top: 1px solid
-				${isDarkMode ? token.magicColorScales.grey[8] : token.magicColorUsages.border};
+				${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.border};
 		`,
 		numLabel: css`
-			color: ${isDarkMode ? token.magicColorScales.grey[5] : token.magicColorUsages.text[2]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[2]};
 			text-align: center;
 			font-size: 12px;
 			font-weight: 400;
 			line-height: 16px;
 		`,
 		num: css`
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
 			text-align: center;
 			font-family: D-DIN-PRO;
 			font-size: 32px;
@@ -100,16 +100,16 @@ const useStyles = createStyles(({ css, token, isDarkMode }, { open }: { open: bo
 		`,
 		disabledButton: css`
 			border: 1px solid ${token.colorBorder};
-			background-color: ${token.magicColorUsages.fill[0]};
+			background-color: ${token.delightfulColorUsages.fill[0]};
 		`,
-		magicColor: css`
+		delightfulColor: css`
 			background: linear-gradient(117deg, #ea08d3 -53.65%, #315cec 163.03%);
 			border: none;
-			color: ${token.magicColorUsages.white};
+			color: ${token.delightfulColorUsages.white};
 
 			&:hover {
 				background: linear-gradient(117deg, #ff0ffa -53.65%, #315cec 163.03%) !important;
-				color: ${token.magicColorUsages.white} !important;
+				color: ${token.delightfulColorUsages.white} !important;
 			}
 		`,
 		defaultAvatar: {

@@ -2,7 +2,7 @@ import { createStyles } from "antd-style"
 
 export default createStyles(({ prefixCls, css, token }) => ({
 	buttonGroup: css`
-		border: 1px solid ${token.magicColorUsages.border};
+		border: 1px solid ${token.delightfulColorUsages.border};
 		border-radius: 4px;
 	`,
 	button: css`

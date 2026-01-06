@@ -152,7 +152,7 @@ class DocumentFileStrategy
                 }
 
                 // 替换图片链接
-                $content = str_replace($fullMatches[$index], '<DelightfulCompressibleContent Type="Image">![image](magic_knowledge_base_file_' . $fileKey . ')</DelightfulCompressibleContent>', $content);
+                $content = str_replace($fullMatches[$index], '<DelightfulCompressibleContent Type="Image">![image](delightful_knowledge_base_file_' . $fileKey . ')</DelightfulCompressibleContent>', $content);
             } catch (Throwable $e) {
                 $this->logger->error('Failed to process image', [
                     'error' => $e->getMessage(),

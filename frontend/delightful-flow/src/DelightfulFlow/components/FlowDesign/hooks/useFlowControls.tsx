@@ -254,8 +254,8 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 						<Flex justify="space-between" gap={4}>
 							<span>
 								{interaction === Interactions.Mouse
-									? i18next.t("flow.mouseFriendly", { ns: "magicFlow" })
-									: i18next.t("flow.touchpadFriendly", { ns: "magicFlow" })}
+									? i18next.t("flow.mouseFriendly", { ns: "delightfulFlow" })
+									: i18next.t("flow.touchpadFriendly", { ns: "delightfulFlow" })}
 							</span>
 							<div className={styles.shortCutsBlock}>
 								{navigator.platform.indexOf("Mac") > -1 ? "⌘" : "Ctrl"}
@@ -271,7 +271,7 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 					callback: () => onZoomOut(),
 					tooltips: (
 						<Flex justify="space-between" gap={4}>
-							<span>{i18next.t("flow.zoomOut", { ns: "magicFlow" })}</span>
+							<span>{i18next.t("flow.zoomOut", { ns: "delightfulFlow" })}</span>
 							<div className={styles.shortCutsBlock}>
 								{navigator.platform.indexOf("Mac") > -1 ? "⌘" : "Ctrl"}
 							</div>
@@ -290,7 +290,7 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 					callback: () => onZoomIn(),
 					tooltips: (
 						<Flex justify="space-between" gap={4}>
-							<span>{i18next.t("flow.zoomIn", { ns: "magicFlow" })}</span>
+							<span>{i18next.t("flow.zoomIn", { ns: "delightfulFlow" })}</span>
 							<div className={styles.shortCutsBlock}>
 								{navigator.platform.indexOf("Mac") > -1 ? "⌘" : "Ctrl"}
 							</div>
@@ -309,10 +309,10 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 					),
 					callback: () => onLayout("LR"),
 					tooltips: lastLayoutData.undoable ? (
-						i18next.t("flow.recallLayout", { ns: "magicFlow" })
+						i18next.t("flow.recallLayout", { ns: "delightfulFlow" })
 					) : (
 						<Flex justify="space-between" gap={4}>
-							<span>{i18next.t("flow.layout", { ns: "magicFlow" })}</span>
+							<span>{i18next.t("flow.layout", { ns: "delightfulFlow" })}</span>
 							<div className={styles.shortCutsBlock}>
 								{navigator.platform.indexOf("Mac") > -1 ? "⌘" : "Ctrl"}
 							</div>
@@ -325,7 +325,7 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 					callback: () => onFitView(),
 					tooltips: (
 						<Flex justify="space-between" gap={4}>
-							<span>{i18next.t("flow.adaptView", { ns: "magicFlow" })}</span>
+							<span>{i18next.t("flow.adaptView", { ns: "delightfulFlow" })}</span>
 							<div className={styles.shortCutsBlock}>
 								{navigator.platform.indexOf("Mac") > -1 ? "⌘" : "Ctrl"}
 							</div>
@@ -346,8 +346,8 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 						<Flex justify="space-between" gap={4}>
 							<span>
 								{isLock
-									? i18next.t("flow.unlockView", { ns: "magicFlow" })
-									: i18next.t("flow.lockView", { ns: "magicFlow" })}
+									? i18next.t("flow.unlockView", { ns: "delightfulFlow" })
+									: i18next.t("flow.lockView", { ns: "delightfulFlow" })}
 							</span>
 							<div className={styles.shortCutsBlock}>
 								{navigator.platform.indexOf("Mac") > -1 ? "⌘" : "Ctrl"}
@@ -366,8 +366,8 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 						<Flex justify="space-between" gap={4}>
 							<span>
 								{isBezier
-									? i18next.t("flow.changeToPolygonLine", { ns: "magicFlow" })
-									: i18next.t("flow.changeToSmoothLine", { ns: "magicFlow" })}
+									? i18next.t("flow.changeToPolygonLine", { ns: "delightfulFlow" })
+									: i18next.t("flow.changeToSmoothLine", { ns: "delightfulFlow" })}
 							</span>
 							<div className={styles.shortCutsBlock}>
 								{navigator.platform.indexOf("Mac") > -1 ? "⌘" : "Ctrl"}
@@ -387,8 +387,8 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 						<Flex justify="space-between" gap={4}>
 							<span>
 								{showMinMap
-									? i18next.t("flow.closeMinMap", { ns: "magicFlow" })
-									: i18next.t("flow.openMinMap", { ns: "magicFlow" })}
+									? i18next.t("flow.closeMinMap", { ns: "delightfulFlow" })
+									: i18next.t("flow.openMinMap", { ns: "delightfulFlow" })}
 							</span>
 							<div className={styles.shortCutsBlock}>
 								{navigator.platform.indexOf("Mac") > -1 ? "⌘" : "Ctrl"}
@@ -412,11 +412,11 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 							<span>
 								{helperLinesEnabled
 									? i18next.t("flow.disableHelperLines", {
-											ns: "magicFlow",
+											ns: "delightfulFlow",
 											defaultValue: "禁用辅助线",
 									  })
 									: i18next.t("flow.enableHelperLines", {
-											ns: "magicFlow",
+											ns: "delightfulFlow",
 											defaultValue: "启用辅助线",
 									  })}
 							</span>
@@ -710,7 +710,7 @@ export default function useFlowLayout({ setShowParamsComp, flowInstance }: FlowL
 						setNodes([...nodes, ...cacheNodes])
 					}
 					setEdges([...edges, ...pasteEdges])
-					message.success(i18next.t("common.pasteSuccess", { ns: "magicFlow" }))
+					message.success(i18next.t("common.pasteSuccess", { ns: "delightfulFlow" }))
 					notifyNodeChange?.()
 				}
 			} catch (e) {

@@ -3,16 +3,16 @@ import { createStyles } from "antd-style"
 export const useStyles = createStyles(({ token }) => ({
 	header: {
 		padding: "10px",
-		borderBottom: `1px solid ${token.magicColorUsages.border}`,
+		borderBottom: `1px solid ${token.delightfulColorUsages.border}`,
 		flex: "none",
-		backgroundColor: token.magicColorUsages.fill[0],
+		backgroundColor: token.delightfulColorUsages.fill[0],
 	},
 	url: {
-		backgroundColor: token.magicColorUsages.bg[0],
+		backgroundColor: token.delightfulColorUsages.bg[0],
 		borderRadius: 1000,
 		padding: "0 10px",
 		fontSize: 14,
-		color: token.magicColorUsages.text[2],
+		color: token.delightfulColorUsages.text[2],
 		height: 32,
 		display: "flex",
 		alignItems: "center",

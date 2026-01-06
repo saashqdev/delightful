@@ -35,7 +35,7 @@ class RuntimeProxy
 
     protected Superglobals $superglobals;
 
-    protected DelightfulConstants $magicConstants;
+    protected DelightfulConstants $delightfulConstants;
 
     protected ArgFunctions $argFunctions;
 
@@ -58,8 +58,8 @@ class RuntimeProxy
         $this->superglobals = new Superglobals();
         $this->superglobals->setOptions($this->options);
 
-        $this->magicConstants = new DelightfulConstants();
-        $this->magicConstants->setOptions($this->options);
+        $this->delightfulConstants = new DelightfulConstants();
+        $this->delightfulConstants->setOptions($this->options);
 
         $this->argFunctions = new ArgFunctions();
         $this->argFunctions->setOptions($this->options);
@@ -76,9 +76,9 @@ class RuntimeProxy
         return $this->superglobals;
     }
 
-    public function magicConstants(): DelightfulConstants
+    public function delightfulConstants(): DelightfulConstants
     {
-        return $this->magicConstants;
+        return $this->delightfulConstants;
     }
 
     public function argFunctions(): ArgFunctions

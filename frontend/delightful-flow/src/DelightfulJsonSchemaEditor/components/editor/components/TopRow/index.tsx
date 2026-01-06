@@ -122,7 +122,7 @@ export default function TopRow(props: TopRowProps) {
 							<Col span={LabelCol} className="label-col ">
 								<DelightfulInput
 									placeholder={resolveToString(
-										i18next.t("flow.pleaseInputSomething", { ns: "magicFlow" }),
+										i18next.t("flow.pleaseInputSomething", { ns: "delightfulFlow" }),
 										{
 											name: columnNames[ShowColumns.Label],
 										},
@@ -158,7 +158,7 @@ export default function TopRow(props: TopRowProps) {
 							<Col span="50px" className="required-col">
 								<Tooltip
 									placement="top"
-									title={i18next.t("common.selectAll", { ns: "magicFlow" })}
+									title={i18next.t("common.selectAll", { ns: "delightfulFlow" })}
 								>
 									<Switch
 										style={{ paddingRight: 0 }}
@@ -183,7 +183,7 @@ export default function TopRow(props: TopRowProps) {
 										handleChangeValue(["value"], val)
 									}
 									placeholder={resolveToString(
-										i18next.t("flow.pleaseInputSomething", { ns: "magicFlow" }),
+										i18next.t("flow.pleaseInputSomething", { ns: "delightfulFlow" }),
 										{
 											name: columnNames[ShowColumns.Value],
 										},
@@ -212,7 +212,7 @@ export default function TopRow(props: TopRowProps) {
 										/>
 									}
 									placeholder={i18next.t("common.descPlaceholder", {
-										ns: "magicFlow",
+										ns: "delightfulFlow",
 									})}
 									value={value.description}
 									onChange={(event: any) =>
@@ -239,7 +239,7 @@ export default function TopRow(props: TopRowProps) {
 									<Tooltip
 										placement="top"
 										title={i18next.t("jsonSchema.addSubField", {
-											ns: "magicFlow",
+											ns: "delightfulFlow",
 										})}
 									>
 										<IconCirclePlus stroke={1} size={20} color="#315CEC" />

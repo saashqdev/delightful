@@ -73,7 +73,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 $userSeqEntity = null;
                 // 查seq,失败延迟后重试3次
                 retry(3, function () use ($seqId, &$userSeqEntity) {
-                    $userSeqEntity = $this->magicChatSeqRepository->getSeqByMessageId($seqId);
+                    $userSeqEntity = $this->delightfulChatSeqRepository->getSeqByMessageId($seqId);
                     if ($userSeqEntity === null) {
                         // 可能是事务还未提交,mq已经消费,延迟重试
                         ExceptionBuilder::throw(ChatErrorCode::SEQ_NOT_FOUND);
@@ -88,22 +88,22 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 $this->logger->info(sprintf('messageDispatch 开始分发消息 seq:%s seqEntity:%s ', $seqId, Json::encode($userSeqEntity->toArray())));
                 // 如果是控制消息,检查是否是需要分发的控制消息
                 if ($userSeqEntity->getSeqType() instanceof ControlMessageType) {
-                    $this->magicControlMessageAppService->dispatchMQControlMessage($userSeqEntity);
+                    $this->delightfulControlMessageAppService->dispatchMQControlMessage($userSeqEntity);
                     $this->setSeqCanNotRetry($seqRetryKey);
                     if ($userSeqEntity->canTriggerFlow()) {
                         $dataIsolation = new DataIsolation();
                         $dataIsolation->setCurrentOrganizationCode($userSeqEntity->getOrganizationCode());
-                        $userEntity = $this->magicUserRepository->getUserByDelightfulId($dataIsolation, $userSeqEntity->getObjectId());
+                        $userEntity = $this->delightfulUserRepository->getUserByDelightfulId($dataIsolation, $userSeqEntity->getObjectId());
                         if ($userEntity === null) {
                             $this->logger->error('messageDispatch user not found: seqId:' . $seqId);
                             return Result::ACK;
                         }
-                        $this->magicSeqDomainService->pushControlSeq($userSeqEntity, $userEntity);
+                        $this->delightfulSeqDomainService->pushControlSeq($userSeqEntity, $userEntity);
                     }
                 }
                 if ($userSeqEntity->getSeqType() instanceof ChatMessageType) {
                     // 聊天消息分发
-                    $this->magicChatMessageAppService->asyncHandlerChatMessage($userSeqEntity);
+                    $this->delightfulChatMessageAppService->asyncHandlerChatMessage($userSeqEntity);
                 }
                 // seq 处理成功
                 $this->setSeqCanNotRetry($seqRetryKey);

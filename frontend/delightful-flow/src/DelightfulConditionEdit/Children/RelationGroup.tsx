@@ -110,8 +110,8 @@ export function RelationGroup({
 			>
 				<div className="relation-sign" onClick={switchOpsSign}>
 					{ops === RELATION_LOGICS_MAP.AND
-						? i18next.t("common.and", { ns: "magicFlow" })
-						: i18next.t("common.or", { ns: "magicFlow" })}
+						? i18next.t("common.and", { ns: "delightfulFlow" })
+						: i18next.t("common.or", { ns: "delightfulFlow" })}
 				</div>
 				<div className="add">
 					<PlusCircleFilled className="icon" onClick={handleAddConditionItem} />

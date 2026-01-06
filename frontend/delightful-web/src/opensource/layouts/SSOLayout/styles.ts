@@ -5,7 +5,7 @@ export const useStyles = createStyles(({ css, token }) => {
 		layout: css`
 			width: 100vw;
 			height: 100vh;
-			background: ${token.magicColorUsages.bg[0]};
+			background: ${token.delightfulColorUsages.bg[0]};
 			background-size: cover;
 			background-position: center;
 			background-repeat: no-repeat;
@@ -57,8 +57,8 @@ export const useStyles = createStyles(({ css, token }) => {
 
 			border-radius: 12px;
 			z-index: 1;
-			background-color: ${token.magicColorUsages.bg[0]};
-			border: 1px solid ${token.magicColorUsages.border};
+			background-color: ${token.delightfulColorUsages.bg[0]};
+			border: 1px solid ${token.delightfulColorUsages.border};
 
 			@media (max-width: 700px) {
 				width: 100vw;

@@ -13,9 +13,9 @@ class DelightfulThirdPlatformDepartmentEntity extends AbstractEntity
 {
     protected string $id;
 
-    protected ?string $magicDepartmentId = '';
+    protected ?string $delightfulDepartmentId = '';
 
-    protected string $magicOrganizationCode;
+    protected string $delightfulOrganizationCode;
 
     protected string $thirdLeaderUserId = '';
 
@@ -99,25 +99,25 @@ class DelightfulThirdPlatformDepartmentEntity extends AbstractEntity
 
     public function getDelightfulDepartmentId(): ?string
     {
-        return $this->magicDepartmentId;
+        return $this->delightfulDepartmentId;
     }
 
-    public function setDelightfulDepartmentId(null|int|string $magicDepartmentId): void
+    public function setDelightfulDepartmentId(null|int|string $delightfulDepartmentId): void
     {
-        if (is_int($magicDepartmentId)) {
-            $magicDepartmentId = (string) $magicDepartmentId;
+        if (is_int($delightfulDepartmentId)) {
+            $delightfulDepartmentId = (string) $delightfulDepartmentId;
         }
-        $this->magicDepartmentId = $magicDepartmentId;
+        $this->delightfulDepartmentId = $delightfulDepartmentId;
     }
 
     public function getDelightfulOrganizationCode(): string
     {
-        return $this->magicOrganizationCode;
+        return $this->delightfulOrganizationCode;
     }
 
-    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $delightfulOrganizationCode): void
     {
-        $this->magicOrganizationCode = $magicOrganizationCode;
+        $this->delightfulOrganizationCode = $delightfulOrganizationCode;
     }
 
     public function getThirdLeaderUserId(): string

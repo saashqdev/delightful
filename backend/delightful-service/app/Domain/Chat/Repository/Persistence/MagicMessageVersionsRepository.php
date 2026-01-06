@@ -34,10 +34,10 @@ class DelightfulMessageVersionsRepository implements DelightfulChatMessageVersio
     /**
      * @return DelightfulMessageVersionEntity[]
      */
-    public function getMessageVersions(string $magicMessageId): array
+    public function getMessageVersions(string $delightfulMessageId): array
     {
         $data = $this->messageVersionsModel::query()
-            ->where('magic_message_id', $magicMessageId)
+            ->where('delightful_message_id', $delightfulMessageId)
             ->get()
             ->toArray();
         $entities = [];

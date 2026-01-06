@@ -17,13 +17,13 @@ use Hyperf\Di\Annotation\Inject;
 class DelightfulFlowAIModelFlowAdminApi extends AbstractFlowAdminApi
 {
     #[Inject]
-    protected DelightfulFlowAIModelAppService $magicFlowAIModelAppService;
+    protected DelightfulFlowAIModelAppService $delightfulFlowAIModelAppService;
 
     public function getEnabled()
     {
         /** @var DelightfulUserAuthorization $authorization */
         $authorization = $this->getAuthorization();
-        $data = $this->magicFlowAIModelAppService->getEnabled($authorization);
+        $data = $this->delightfulFlowAIModelAppService->getEnabled($authorization);
         return DelightfulFlowAIModelAssembler::createEnabledListDTO($data['list']);
     }
 }

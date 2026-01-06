@@ -113,7 +113,7 @@ class MessageQueueNotificationSubscriber implements ListenerInterface
         return [
             'type' => 'seq',
             'seq' => [
-                'magic_id' => '',
+                'delightful_id' => '',
                 'seq_id' => '',
                 'message_id' => '',
                 'refer_message_id' => '',
@@ -121,7 +121,7 @@ class MessageQueueNotificationSubscriber implements ListenerInterface
                 'conversation_id' => $topicEntity->getChatConversationId(),
                 'organization_code' => $topicEntity->getUserOrganizationCode(),
                 'message' => [
-                    'type' => 'super_magic_message_queue_change',
+                    'type' => 'super_delightful_message_queue_change',
                     'project_id' => (string) $topicEntity->getProjectId(),
                     'topic_id' => (string) $topicEntity->getId(),
                     'chat_topic_id' => $topicEntity->getChatTopicId(),
@@ -136,15 +136,15 @@ class MessageQueueNotificationSubscriber implements ListenerInterface
      */
     private function pushNotification(string $userId, array $pushData): void
     {
-        $magicId = $this->getDelightfulIdByUserId($userId);
+        $delightfulId = $this->getDelightfulIdByUserId($userId);
 
-        if (empty($magicId)) {
-            $this->logger->warning('Cannot get magicId for user', ['user_id' => $userId]);
+        if (empty($delightfulId)) {
+            $this->logger->warning('Cannot get delightfulId for user', ['user_id' => $userId]);
             return;
         }
 
         $this->logger->info('Pushing message queue notification', [
-            'magic_id' => $magicId,
+            'delightful_id' => $delightfulId,
             'topic_id' => $pushData['seq']['message']['topic_id'],
             'message_id' => $pushData['seq']['message']['message_id'],
         ]);
@@ -152,13 +152,13 @@ class MessageQueueNotificationSubscriber implements ListenerInterface
         // Push via WebSocket
         SocketIOUtil::sendIntermediate(
             SocketEventType::Intermediate,
-            $magicId,
+            $delightfulId,
             $pushData
         );
     }
 
     /**
-     * Get magicId by userId.
+     * Get delightfulId by userId.
      */
     private function getDelightfulIdByUserId(string $userId): string
     {
@@ -166,7 +166,7 @@ class MessageQueueNotificationSubscriber implements ListenerInterface
             $userEntity = $this->userDomainService->getUserById($userId);
             return $userEntity?->getDelightfulId() ?? '';
         } catch (Throwable $e) {
-            $this->logger->error('Failed to get magicId by userId', [
+            $this->logger->error('Failed to get delightfulId by userId', [
                 'user_id' => $userId,
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),

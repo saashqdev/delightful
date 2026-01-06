@@ -7,7 +7,7 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) =>
 		return {
 			chat: css`
 				width: 100%;
-				background: ${token.magicColorScales.grey[0]};
+				background: ${token.delightfulColorScales.grey[0]};
 			`,
 			splitter: css`
 				height: calc(100vh - ${token.titleBarHeight}px);
@@ -40,15 +40,15 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) =>
 				height: 100%;
 			`,
 			chatListInner: css``,
-			magicInput: css`
+			delightfulInput: css`
 				width: 100%;
 				height: auto;
 				overflow: visible !important;
 			`,
-			magicInputWrapperShadow: css`
+			delightfulInputWrapperShadow: css`
 				backgroungd: linear-gradient(
 					to top,
-					${isDarkMode ? "#141414" : token.magicColorUsages.white} 50%,
+					${isDarkMode ? "#141414" : token.delightfulColorUsages.white} 50%,
 					rgba(255, 255, 255, 0) 100%
 				);
 			`,
@@ -69,7 +69,7 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) =>
 				backdrop-filter: blur(10px);
 				background-color: ${transparentize(
 					0.2,
-					token.magicColorUsages.primaryLight.default,
+					token.delightfulColorUsages.primaryLight.default,
 				)};
 			`,
 			dragEnteredInnerWrapper: css`
@@ -78,8 +78,8 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) =>
 				justify-content: center;
 				align-items: center;
 				font-size: 12px;
-				color: ${token.magicColorUsages.text[1]};
-				border: 2px dashed ${token.magicColorUsages.text[3]};
+				color: ${token.delightfulColorUsages.text[1]};
+				border: 2px dashed ${token.delightfulColorUsages.text[3]};
 				border-radius: 8px;
 				text-align: center;
 			`,
@@ -89,7 +89,7 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) =>
 				line-height: 28px;
 			`,
 			dragEnteredTip: css`
-				color: ${token.magicColorUsages.text[2]};
+				color: ${token.delightfulColorUsages.text[2]};
 				text-align: center;
 				font-size: 14px;
 				font-weight: 400;

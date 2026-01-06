@@ -11,7 +11,7 @@ use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property string $id
- * @property string $magic_id
+ * @property string $delightful_id
  * @property string $user_id
  * @property string $department_id
  * @property string $job_title
@@ -21,14 +21,14 @@ class DepartmentUserModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_contact_department_users';
+    protected ?string $table = 'delightful_contact_department_users';
 
     /**
      * The attributes that are mass assignable.
      */
     protected array $fillable = [
         'id',
-        'magic_id',
+        'delightful_id',
         'user_id',
         'department_id',
         'is_leader',

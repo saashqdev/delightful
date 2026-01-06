@@ -648,15 +648,15 @@ class Definitions
         return $this->definitions[KeywordConstants::CONSTANTS][$name];
     }
 
-    /** Define PHPSandbox magic constant.
+    /** Define PHPSandbox delightful constant.
      *
-     * You can pass the magic constant $name and $value to define, or an associative array of magic constants to define
+     * You can pass the delightful constant $name and $value to define, or an associative array of delightful constants to define
      *
-     * @param array|string $name String of magic constant $name or associative array to define
-     * @param mixed $value Value to define magic constant to, can be callable
+     * @param array|string $name String of delightful constant $name or associative array to define
+     * @param mixed $value Value to define delightful constant to, can be callable
      *
      * @return Definitions Returns the PHPSandbox instance for fluent querying
-     * @throws Throwable Throws exception if unnamed magic constant is defined
+     * @throws Throwable Throws exception if unnamed delightful constant is defined
      */
     public function defineDelightfulConst($name, $value): self
     {
@@ -664,43 +664,43 @@ class Definitions
             return $this->defineDelightfulConsts($name);
         }
         if (! $name) {
-            $this->error->validationError('Cannot define unnamed magic constant!', Error::DEFINE_DELIGHTFUL_CONST_ERROR, null, '');
+            $this->error->validationError('Cannot define unnamed delightful constant!', Error::DEFINE_DELIGHTFUL_CONST_ERROR, null, '');
         }
         $name = $this->normalizeDelightfulConst($name);
         $this->definitions[KeywordConstants::Delightful_CONSTANTS][$name] = $value;
         return $this;
     }
 
-    /** Define PHPSandbox magic constants by array.
+    /** Define PHPSandbox delightful constants by array.
      *
-     * You can pass an associative array of magic constants to define
+     * You can pass an associative array of delightful constants to define
      *
-     * @param array $magic_constants Associative array of $magic_constants to define
+     * @param array $delightful_constants Associative array of $delightful_constants to define
      *
      * @return Definitions Returns the PHPSandbox instance for fluent querying
      */
-    public function defineDelightfulConsts(array $magic_constants = []): self
+    public function defineDelightfulConsts(array $delightful_constants = []): self
     {
-        foreach ($magic_constants as $name => $value) {
+        foreach ($delightful_constants as $name => $value) {
             $this->defineDelightfulConst($name, $value);
         }
         return $this;
     }
 
-    /** Query whether PHPSandbox instance has defined magic constants.
+    /** Query whether PHPSandbox instance has defined delightful constants.
      *
-     * @return int Returns the number of magic constants this instance has defined
+     * @return int Returns the number of delightful constants this instance has defined
      */
     public function hasDefinedDelightfulConsts(): int
     {
         return count($this->definitions[KeywordConstants::Delightful_CONSTANTS]);
     }
 
-    /** Check if PHPSandbox instance has $name magic constant defined.
+    /** Check if PHPSandbox instance has $name delightful constant defined.
      *
-     * @param string $name String of magic constant $name to query
+     * @param string $name String of delightful constant $name to query
      *
-     * @return bool Returns true if PHPSandbox instance has defined magic constant, false otherwise
+     * @return bool Returns true if PHPSandbox instance has defined delightful constant, false otherwise
      */
     public function isDefinedDelightfulConst($name): bool
     {
@@ -708,11 +708,11 @@ class Definitions
         return isset($this->definitions[KeywordConstants::Delightful_CONSTANTS][$name]);
     }
 
-    /** Undefine PHPSandbox magic constant.
+    /** Undefine PHPSandbox delightful constant.
      *
-     * You can pass an a string of magic constant $name to undefine, or array of magic constant names to undefine
+     * You can pass an a string of delightful constant $name to undefine, or array of delightful constant names to undefine
      *
-     * @param array|string $name String of magic constant name, or array of magic constant names to undefine
+     * @param array|string $name String of delightful constant name, or array of delightful constant names to undefine
      *
      * @return Definitions Returns the PHPSandbox instance for fluent querying
      */
@@ -728,19 +728,19 @@ class Definitions
         return $this;
     }
 
-    /** Undefine PHPSandbox magic constants by array.
+    /** Undefine PHPSandbox delightful constants by array.
      *
-     * You can pass an array of magic constant names to undefine, or an empty array or null argument to undefine all magic constants
+     * You can pass an array of delightful constant names to undefine, or an empty array or null argument to undefine all delightful constants
      *
-     * @param array $magic_constants Array of magic constant names to undefine. Passing an empty array or no argument will result in undefining all magic constants
+     * @param array $delightful_constants Array of delightful constant names to undefine. Passing an empty array or no argument will result in undefining all delightful constants
      *
      * @return Definitions Returns the PHPSandbox instance for fluent querying
      */
-    public function undefineDelightfulConsts(array $magic_constants = []): self
+    public function undefineDelightfulConsts(array $delightful_constants = []): self
     {
-        if (count($magic_constants)) {
-            foreach ($magic_constants as $magic_constant) {
-                $this->undefineDelightfulConst($magic_constant);
+        if (count($delightful_constants)) {
+            foreach ($delightful_constants as $delightful_constant) {
+                $this->undefineDelightfulConst($delightful_constant);
             }
         } else {
             $this->definitions[KeywordConstants::Delightful_CONSTANTS] = [];

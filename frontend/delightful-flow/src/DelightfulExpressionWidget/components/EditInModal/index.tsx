@@ -36,7 +36,7 @@ export default function EditInModal({ value, onChange, ...props }: InputExpressi
 				open={open}
 				onOk={onOk}
 				onCancel={resetState}
-				title={i18next.t("expression.editExpression", { ns: "magicFlow" })}
+				title={i18next.t("expression.editExpression", { ns: "delightfulFlow" })}
 				maskClosable={false}
 			>
 				<CustomInputExpression

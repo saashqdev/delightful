@@ -109,7 +109,7 @@ function SettingPage() {
 						children: (
 							<>
 								<AccountManageTip />
-								<SettingItem title={t("setting.magicId")} extra={info?.magic_id} />
+								<SettingItem title={t("setting.delightfulId")} extra={info?.delightful_id} />
 								<SettingItem
 									title={t("setting.enterprise")}
 									extra={

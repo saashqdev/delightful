@@ -32,7 +32,7 @@ const useStyles = createStyles(({ css, token }) => {
 			width: 14px;
 			height: 14px;
 			border-radius: 50%;
-			background-color: ${token.magicColorScales.brand[0]};
+			background-color: ${token.delightfulColorScales.brand[0]};
 
 			&::before {
 				display: block;

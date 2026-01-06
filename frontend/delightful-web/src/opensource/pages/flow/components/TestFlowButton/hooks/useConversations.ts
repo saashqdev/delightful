@@ -1,6 +1,6 @@
 import { contactStore } from "@/opensource/stores/contact"
 import { useMemo } from "react"
-import magicIconLogo from "@/assets/logos/magic-icon.svg"
+import delightfulIconLogo from "@/assets/logos/delightful-icon.svg"
 import { getUserName } from "@/utils/modules/chat"
 import { useOrganization } from "@/opensource/models/user/hooks"
 import conversationStore from "@/opensource/stores/chatNew/conversation"
@@ -29,7 +29,7 @@ export default function useConversations() {
 				return {
 					value: id,
 					avatar: userInfo?.avatar_url ?? {
-						src: magicIconLogo,
+						src: delightfulIconLogo,
 						style: {
 							background: "#ababab70",
 						},

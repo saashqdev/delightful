@@ -11,16 +11,16 @@ use App\Infrastructure\Core\AbstractDTO;
 
 class SenderExtraDTO extends AbstractDTO
 {
-    protected ?int $magicEnvId = null;
+    protected ?int $delightfulEnvId = null;
 
     public function getDelightfulEnvId(): ?int
     {
-        return $this->magicEnvId;
+        return $this->delightfulEnvId;
     }
 
-    public function setDelightfulEnvId(?int $magicEnvId): self
+    public function setDelightfulEnvId(?int $delightfulEnvId): self
     {
-        $this->magicEnvId = $magicEnvId;
+        $this->delightfulEnvId = $delightfulEnvId;
         return $this;
     }
 }

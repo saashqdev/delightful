@@ -4,7 +4,7 @@ export const useStyles = createStyles(({ css, prefixCls }) => {
 	return {
 		modal: css`
 			.${prefixCls}-modal-content {
-				--magic-modal-content-padding: 0px !important;
+				--delightful-modal-content-padding: 0px !important;
 			}
 		`,
 		modalHeader: css`

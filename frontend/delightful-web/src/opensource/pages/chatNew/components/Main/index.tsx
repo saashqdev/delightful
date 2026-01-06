@@ -16,7 +16,7 @@ const useStyles = createStyles(({ isDarkMode, css, token }, { imStyle }: { imSty
 			width: "100%",
 			minWidth: 420,
 			height: "100%",
-			color: isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.black,
+			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.black,
 			flex: 1,
 			padding: imStyle === IMStyle.Modern ? "0 18px 24px" : 0,
 		},
@@ -27,24 +27,24 @@ const useStyles = createStyles(({ isDarkMode, css, token }, { imStyle }: { imSty
 		},
 
 		title: {
-			color: isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1],
+			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1],
 			fontSize: 50,
 			fontWeight: 600,
 			overflow: "hidden",
 			whiteSpace: "nowrap",
 		},
 
-		magicEn: {
+		delightfulEn: {
 			width: 150,
 			marginTop: 12,
 		},
 
-		magicCN: {
+		delightfulCN: {
 			width: 75,
 		},
 
 		description: css`
-			color: ${isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.text[2]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[2]};
 			font-size: 18px;
 			font-weight: 200;
 			line-height: 24px;
@@ -93,7 +93,7 @@ function Main(props: HTMLAttributes<HTMLDivElement>) {
 				<Flex vertical align="center" gap={10}>
 					<Flex align="center" justify="center" gap={16} className={styles.title}>
 						{t("home.welcomeTo")}
-						<Logo type={LogoType.COLOR_TEXT} className={styles.magicEn} />
+						<Logo type={LogoType.COLOR_TEXT} className={styles.delightfulEn} />
 					</Flex>
 					<div className={styles.description}>{t("home.description")}</div>
 					<Flex className={styles.exampleMessages} vertical gap={10}>

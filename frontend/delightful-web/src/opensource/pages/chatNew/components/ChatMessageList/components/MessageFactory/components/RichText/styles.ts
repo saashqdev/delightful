@@ -20,7 +20,7 @@ const useStyles = createStyles(({ css, token }, { emojiSize }: { emojiSize: numb
 		color: ${token.colorPrimary};
 	`,
 	emoji: css`
-		.magic-emoji {
+		.delightful-emoji {
 			width: ${emojiSize}px !important;
 			height: ${emojiSize}px !important;
 			position: relative;
@@ -34,8 +34,8 @@ const useStyles = createStyles(({ css, token }, { emojiSize }: { emojiSize: numb
 	`,
 	quickInstruction: css`
 		.quick-instruction {
-			background-color: ${token.magicColorUsages.primaryLight.hover};
-			color: ${token.magicColorUsages.primary.default};
+			background-color: ${token.delightfulColorUsages.primaryLight.hover};
+			color: ${token.delightfulColorUsages.primary.default};
 			font-size: 14px;
 			font-weight: 400;
 			line-height: 20px;

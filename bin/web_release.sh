@@ -17,7 +17,7 @@ set +x  # Temporarily disable command echo
 # Get the absolute path to the script directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Get the absolute path to the web directory
-WEB_DIR="$(cd "${SCRIPT_DIR}/../frontend/magic-web" && pwd)"
+WEB_DIR="$(cd "${SCRIPT_DIR}/../frontend/delightful-web" && pwd)"
 # Get the absolute path to the repository root
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 set -x  # Re-enable command echo
@@ -35,7 +35,7 @@ if [ -z "${GIT_REPO_URL}" ]; then
     # Use default value if env var is not set
     GIT_REPO_URL="git@github.com:dtyq"
 fi
-REMOTE_URL="${GIT_REPO_URL}/magic-web.git"
+REMOTE_URL="${GIT_REPO_URL}/delightful-web.git"
 
 # Add a confirmation step to avoid accidental publishing
 echo "Preparing to publish to remote repository: ${REMOTE_URL}"
@@ -73,11 +73,11 @@ fi
 
 # Initialize remote connection
 echo "Initializing remote connection..."
-remote magic-web $REMOTE_URL
+remote delightful-web $REMOTE_URL
 
 # Split the subtree and push
 echo "Splitting and pushing..."
-split "frontend/magic-web" magic-web
+split "frontend/delightful-web" delightful-web
 
 
 TIME=$(echo "$(date +%s) - $NOW" | bc)

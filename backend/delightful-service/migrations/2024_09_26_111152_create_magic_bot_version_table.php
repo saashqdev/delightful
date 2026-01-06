@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_bot_versions', function (Blueprint $table) {
+        Schema::create('delightful_bot_versions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('flow_code')->comment('工作流code');
             $table->string('flow_version')->comment('工作流版本');
@@ -48,6 +48,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_bot_version');
+        Schema::dropIfExists('delightful_bot_version');
     }
 };

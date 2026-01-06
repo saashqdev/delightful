@@ -12,7 +12,7 @@ use Exception;
 class FileMetadataUtil
 {
     /**
-     * Extract window.magicProjectConfig from JavaScript file and convert to PHP array
+     * Extract window.delightfulProjectConfig from JavaScript file and convert to PHP array
      * Supports any JSON object structure without caring about specific content.
      *
      * @param string $jsFilePath Path to the JavaScript file
@@ -27,8 +27,8 @@ class FileMetadataUtil
             throw new Exception('Failed to read file: ' . $jsFilePath);
         }
 
-        // Find window.magicProjectConfig assignment
-        $startPos = strpos($jsContent, 'window.magicProjectConfig');
+        // Find window.delightfulProjectConfig assignment
+        $startPos = strpos($jsContent, 'window.delightfulProjectConfig');
         if ($startPos === false) {
             return null;
         }

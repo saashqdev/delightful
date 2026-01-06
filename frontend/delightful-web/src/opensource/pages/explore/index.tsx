@@ -194,7 +194,7 @@ function ExplorePage() {
 						</DelightfulButton>
 						<DelightfulButton
 							type="text"
-							className={cx(styles.button, styles.magicColor)}
+							className={cx(styles.button, styles.delightfulColor)}
 							icon={<DelightfulIcon component={IconDelightfulBots} size={20} color="white" />}
 							onClick={openAddAgentModal}
 						>

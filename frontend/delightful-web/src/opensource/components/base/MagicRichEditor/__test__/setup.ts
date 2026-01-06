@@ -153,7 +153,7 @@ export const mockSetup = () => {
 	}))
 
 	// 模拟 DelightfulEmoji 扩展
-	vi.mock("../extensions/magicEmoji", () => ({
+	vi.mock("../extensions/delightfulEmoji", () => ({
 		default: {
 			configure: mockEmojiConfigure,
 		},

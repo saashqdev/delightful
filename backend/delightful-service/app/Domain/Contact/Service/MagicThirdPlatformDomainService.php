@@ -22,9 +22,9 @@ readonly class DelightfulThirdPlatformDomainService
      */
     public function getThirdDepartments(
         array $currentDepartmentIds,
-        string $magicOrganizationCode,
+        string $delightfulOrganizationCode,
         PlatformType $thirdPlatformType
     ): array {
-        return $this->thirdPlatformRepository->getThirdDepartments($currentDepartmentIds, $magicOrganizationCode, $thirdPlatformType);
+        return $this->thirdPlatformRepository->getThirdDepartments($currentDepartmentIds, $delightfulOrganizationCode, $thirdPlatformType);
     }
 }

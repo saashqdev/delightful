@@ -18,11 +18,11 @@ use App\Interfaces\Flow\DTO\DelightfulFlowApiChatDTO;
 
 class BaseFlowOpenApiCheck implements FlowOpenApiCheckInterface
 {
-    public function handle(DelightfulFlowApiChatDTO $magicFlowApiChatDTO): DelightfulUserAuthorization
+    public function handle(DelightfulFlowApiChatDTO $delightfulFlowApiChatDTO): DelightfulUserAuthorization
     {
-        $authOptions = $this->getAuthOptions($magicFlowApiChatDTO);
+        $authOptions = $this->getAuthOptions($delightfulFlowApiChatDTO);
         return match ($authOptions['type']) {
-            'api-key' => $this->apiKey($magicFlowApiChatDTO, $authOptions['authorization']),
+            'api-key' => $this->apiKey($delightfulFlowApiChatDTO, $authOptions['authorization']),
             default => ExceptionBuilder::throw(FlowErrorCode::AccessDenied, 'error authorization type'),
         };
     }
@@ -30,20 +30,20 @@ class BaseFlowOpenApiCheck implements FlowOpenApiCheckInterface
     /**
      * @return array{type: string, authorization: string}
      */
-    protected function getAuthOptions(DelightfulFlowApiChatDTO $magicFlowApiChatDTO): array
+    protected function getAuthOptions(DelightfulFlowApiChatDTO $delightfulFlowApiChatDTO): array
     {
         $data = [
             'type' => '',
             'authorization' => '',
         ];
-        if (! empty($magicFlowApiChatDTO->getApiKey())) {
+        if (! empty($delightfulFlowApiChatDTO->getApiKey())) {
             $data['type'] = 'api-key';
-            $data['authorization'] = $magicFlowApiChatDTO->getApiKey();
+            $data['authorization'] = $delightfulFlowApiChatDTO->getApiKey();
             return $data;
         }
-        $authorization = $magicFlowApiChatDTO->getAuthorization();
-        if (str_starts_with($magicFlowApiChatDTO->getAuthorization(), 'Bearer ')) {
-            $authorization = substr(trim($magicFlowApiChatDTO->getAuthorization()), 7);
+        $authorization = $delightfulFlowApiChatDTO->getAuthorization();
+        if (str_starts_with($delightfulFlowApiChatDTO->getAuthorization(), 'Bearer ')) {
+            $authorization = substr(trim($delightfulFlowApiChatDTO->getAuthorization()), 7);
         }
         // 还是 api-key
         if (str_starts_with($authorization, 'api-sk-')) {
@@ -54,22 +54,22 @@ class BaseFlowOpenApiCheck implements FlowOpenApiCheckInterface
         ExceptionBuilder::throw(FlowErrorCode::AccessDenied, 'error authorization');
     }
 
-    protected function apiKey(DelightfulFlowApiChatDTO $magicFlowApiChatDTO, string $authorization): DelightfulUserAuthorization
+    protected function apiKey(DelightfulFlowApiChatDTO $delightfulFlowApiChatDTO, string $authorization): DelightfulUserAuthorization
     {
         $apiKey = di(DelightfulFlowApiKeyDomainService::class)->getBySecretKey(FlowDataIsolation::create()->disabled(), $authorization);
-        $magicUserAuthorization = new DelightfulUserAuthorization();
-        $magicUserAuthorization
+        $delightfulUserAuthorization = new DelightfulUserAuthorization();
+        $delightfulUserAuthorization
             ->setId($apiKey->getCreator())
             ->setOrganizationCode($apiKey->getOrganizationCode())
             ->setUserType(UserType::Human)
             ->setDelightfulEnvId(0);
-        if (empty($magicFlowApiChatDTO->getConversationId())) {
-            $magicFlowApiChatDTO->setConversationId($apiKey->getConversationId());
+        if (empty($delightfulFlowApiChatDTO->getConversationId())) {
+            $delightfulFlowApiChatDTO->setConversationId($apiKey->getConversationId());
         }
-        $magicFlowApiChatDTO->setFlowCode($apiKey->getFlowCode());
+        $delightfulFlowApiChatDTO->setFlowCode($apiKey->getFlowCode());
         $user = di(DelightfulUserDomainService::class)->getByUserId($apiKey->getCreator());
-        $magicFlowApiChatDTO->addShareOptions('user', $user);
-        $magicFlowApiChatDTO->addShareOptions('source_id', 'sk_flow');
-        return $magicUserAuthorization;
+        $delightfulFlowApiChatDTO->addShareOptions('user', $user);
+        $delightfulFlowApiChatDTO->addShareOptions('source_id', 'sk_flow');
+        return $delightfulUserAuthorization;
     }
 }

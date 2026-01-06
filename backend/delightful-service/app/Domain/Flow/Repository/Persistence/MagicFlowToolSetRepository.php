@@ -20,17 +20,17 @@ class DelightfulFlowToolSetRepository extends DelightfulFlowAbstractRepository i
 {
     protected bool $filterOrganizationCode = true;
 
-    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowToolSetEntity $magicFlowToolSetEntity): DelightfulFlowToolSetEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowToolSetEntity $delightfulFlowToolSetEntity): DelightfulFlowToolSetEntity
     {
         /** @var DelightfulFlowToolSetModel $model */
         $model = $this->createBuilder($dataIsolation, DelightfulFlowToolSetModel::query())->firstOrNew([
-            'code' => $magicFlowToolSetEntity->getCode(),
+            'code' => $delightfulFlowToolSetEntity->getCode(),
         ]);
 
-        $model->fill($this->getAttributes($magicFlowToolSetEntity));
+        $model->fill($this->getAttributes($delightfulFlowToolSetEntity));
         $model->save();
-        $magicFlowToolSetEntity->setId($model->id);
-        return $magicFlowToolSetEntity;
+        $delightfulFlowToolSetEntity->setId($model->id);
+        return $delightfulFlowToolSetEntity;
     }
 
     public function destroy(FlowDataIsolation $dataIsolation, string $code): void

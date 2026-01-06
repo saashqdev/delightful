@@ -18,13 +18,13 @@ use Throwable;
 class GlobalConfigApi
 {
     public function __construct(
-        private readonly DelightfulSettingAppService $magicSettingAppService,
+        private readonly DelightfulSettingAppService $delightfulSettingAppService,
     ) {
     }
 
     public function getGlobalConfig(): array
     {
-        $config = $this->magicSettingAppService->get();
+        $config = $this->delightfulSettingAppService->get();
         $result = $config->toArray();
 
         // 合并平台设置
@@ -49,7 +49,7 @@ class GlobalConfigApi
         $config->setIsMaintenance($isMaintenance);
         $config->setMaintenanceDescription($description);
 
-        $this->magicSettingAppService->save($config);
+        $this->delightfulSettingAppService->save($config);
 
         return $config->toArray();
     }

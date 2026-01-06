@@ -46,7 +46,7 @@ export default function PanelAgent() {
 						)
 					})}
 				{(agent?.list || []).length === 0 && (
-					<Empty description={i18next.t("flow.withoutAgentTips", { ns: "magicFlow" })} />
+					<Empty description={i18next.t("flow.withoutAgentTips", { ns: "delightfulFlow" })} />
 				)}
 			</div>
 		</div>

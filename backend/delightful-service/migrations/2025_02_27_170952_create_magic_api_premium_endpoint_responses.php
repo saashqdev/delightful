@@ -15,11 +15,11 @@ return new class extends Migration {
     public function up(): void
     {
         // 表存在就不执行
-        if (Schema::hasTable('magic_api_premium_endpoint_responses')) {
+        if (Schema::hasTable('delightful_api_premium_endpoint_responses')) {
             return;
         }
 
-        Schema::create('magic_api_premium_endpoint_responses', function (Blueprint $table) {
+        Schema::create('delightful_api_premium_endpoint_responses', function (Blueprint $table) {
             $table->bigIncrements('id');
             // request_id
             $table->string('request_id', 128)->nullable()->default(null)->comment('请求id');
@@ -52,6 +52,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_api_premium_endpoint_responses');
+        Schema::dropIfExists('delightful_api_premium_endpoint_responses');
     }
 };

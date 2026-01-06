@@ -73,10 +73,10 @@ export default defineConfig({
 	assetsInclude: ["**/*.md", "**/*.mdx"],
 	resolve: {
 		alias: [
-			// // Enable when developing magic-flow in sync
+			// // Enable when developing delightful-flow in sync
 			// {
 			// 	find: "@delightful/delightful-flow",
-			//     replacement: join(__dirname, "../magic-flow"),
+			//     replacement: join(__dirname, "../delightful-flow"),
 			// },
 		],
 	},
@@ -101,7 +101,7 @@ export default defineConfig({
 		isDev &&
 			mkcert({
 				// Configure this host locally to allow private bucket uploads
-				hosts: ["magic.t.teamshare.cn"],
+				hosts: ["delightful.t.teamshare.cn"],
 			}),
 		// Browser compatibility
 		// legacy({

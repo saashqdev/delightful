@@ -14,7 +14,7 @@ class DelightfulGroupModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_chat_groups';
+    protected ?string $table = 'delightful_chat_groups';
 
     /**
      * The attributes that are mass assignable.

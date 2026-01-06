@@ -21,7 +21,7 @@ class BaseDataIsolation implements DataIsolationInterface
      */
     private string $currentUserId;
 
-    private string $magicId;
+    private string $delightfulId;
 
     /**
      * 当前环境 app_env().
@@ -60,12 +60,12 @@ class BaseDataIsolation implements DataIsolationInterface
 
     private array $lazyFunctions = [];
 
-    public function __construct(string $currentOrganizationCode = '', string $userId = '', string $magicId = '')
+    public function __construct(string $currentOrganizationCode = '', string $userId = '', string $delightfulId = '')
     {
         $this->environment = app_env();
         $this->currentOrganizationCode = $currentOrganizationCode;
         $this->currentUserId = $userId;
-        $this->magicId = $magicId;
+        $this->delightfulId = $delightfulId;
         $this->thirdPlatformDataIsolationManager = \Hyperf\Support\make(ThirdPlatformDataIsolationManagerInterface::class);
         $this->subscriptionManager = \Hyperf\Support\make(SubscriptionManagerInterface::class);
 
@@ -81,7 +81,7 @@ class BaseDataIsolation implements DataIsolationInterface
         $self = new static(
             currentOrganizationCode: $baseDataIsolation->getCurrentOrganizationCode(),
             userId: $baseDataIsolation->getCurrentUserId(),
-            magicId: $baseDataIsolation->getDelightfulId()
+            delightfulId: $baseDataIsolation->getDelightfulId()
         );
         $self->extends($baseDataIsolation);
         return $self;
@@ -96,7 +96,7 @@ class BaseDataIsolation implements DataIsolationInterface
     {
         $this->currentOrganizationCode = $parentDataIsolation->getCurrentOrganizationCode();
         $this->currentUserId = $parentDataIsolation->getCurrentUserId();
-        $this->magicId = $parentDataIsolation->getDelightfulId();
+        $this->delightfulId = $parentDataIsolation->getDelightfulId();
         $this->envId = $parentDataIsolation->getEnvId();
         $this->enabled = $parentDataIsolation->isEnable();
         $this->subscriptionManager = $parentDataIsolation->getSubscriptionManager();
@@ -156,12 +156,12 @@ class BaseDataIsolation implements DataIsolationInterface
 
     public function getDelightfulId(): string
     {
-        return $this->magicId;
+        return $this->delightfulId;
     }
 
-    public function setDelightfulId(string $magicId): static
+    public function setDelightfulId(string $delightfulId): static
     {
-        $this->magicId = $magicId;
+        $this->delightfulId = $delightfulId;
         return $this;
     }
 

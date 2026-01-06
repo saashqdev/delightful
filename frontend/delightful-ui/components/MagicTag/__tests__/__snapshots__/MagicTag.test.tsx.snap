@@ -3,12 +3,12 @@
 exports[`DelightfulTag > 快照测试 > 不同样式标签快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-tag magic-tag-success acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r6"
+    class="delightful-tag delightful-tag-success acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r6"
   >
     成功标签
     <svg
       aria-label="Close"
-      class="tabler-icon tabler-icon-x magic-tag-close-icon"
+      class="tabler-icon tabler-icon-x delightful-tag-close-icon"
       fill="none"
       height="16"
       stroke="rgba(28,29,35, 0.8)"
@@ -33,12 +33,12 @@ exports[`DelightfulTag > 快照测试 > 不同样式标签快照 1`] = `
 exports[`DelightfulTag > 快照测试 > 不同样式标签快照 2`] = `
 <DocumentFragment>
   <span
-    class="magic-tag magic-tag-warning acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r7"
+    class="delightful-tag delightful-tag-warning acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r7"
   >
     警告标签
     <svg
       aria-label="Close"
-      class="tabler-icon tabler-icon-x magic-tag-close-icon"
+      class="tabler-icon tabler-icon-x delightful-tag-close-icon"
       fill="none"
       height="16"
       stroke="rgba(28,29,35, 0.8)"
@@ -63,12 +63,12 @@ exports[`DelightfulTag > 快照测试 > 不同样式标签快照 2`] = `
 exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-tag magic-tag-blue acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r2"
+    class="delightful-tag delightful-tag-blue acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r2"
   >
     蓝色标签
     <svg
       aria-label="Close"
-      class="tabler-icon tabler-icon-x magic-tag-close-icon"
+      class="tabler-icon tabler-icon-x delightful-tag-close-icon"
       fill="none"
       height="16"
       stroke="rgba(28,29,35, 0.8)"
@@ -93,12 +93,12 @@ exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 1`] = `
 exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 2`] = `
 <DocumentFragment>
   <span
-    class="magic-tag magic-tag-red acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r3"
+    class="delightful-tag delightful-tag-red acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r3"
   >
     红色标签
     <svg
       aria-label="Close"
-      class="tabler-icon tabler-icon-x magic-tag-close-icon"
+      class="tabler-icon tabler-icon-x delightful-tag-close-icon"
       fill="none"
       height="16"
       stroke="rgba(28,29,35, 0.8)"
@@ -123,12 +123,12 @@ exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 2`] = `
 exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 3`] = `
 <DocumentFragment>
   <span
-    class="magic-tag magic-tag-green acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r4"
+    class="delightful-tag delightful-tag-green acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r4"
   >
     绿色标签
     <svg
       aria-label="Close"
-      class="tabler-icon tabler-icon-x magic-tag-close-icon"
+      class="tabler-icon tabler-icon-x delightful-tag-close-icon"
       fill="none"
       height="16"
       stroke="rgba(28,29,35, 0.8)"
@@ -153,12 +153,12 @@ exports[`DelightfulTag > 快照测试 > 不同颜色标签快照 3`] = `
 exports[`DelightfulTag > 快照测试 > 可关闭标签快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r5"
+    class="delightful-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r5"
   >
     可关闭标签
     <svg
       aria-label="Close"
-      class="tabler-icon tabler-icon-x magic-tag-close-icon"
+      class="tabler-icon tabler-icon-x delightful-tag-close-icon"
       fill="none"
       height="16"
       stroke="rgba(28,29,35, 0.8)"
@@ -183,7 +183,7 @@ exports[`DelightfulTag > 快照测试 > 可关闭标签快照 1`] = `
 exports[`DelightfulTag > 快照测试 > 图标标签快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r9"
+    class="delightful-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r9"
   >
     <span>
       🏷️
@@ -193,7 +193,7 @@ exports[`DelightfulTag > 快照测试 > 图标标签快照 1`] = `
     </span>
     <svg
       aria-label="Close"
-      class="tabler-icon tabler-icon-x magic-tag-close-icon"
+      class="tabler-icon tabler-icon-x delightful-tag-close-icon"
       fill="none"
       height="16"
       stroke="rgba(28,29,35, 0.8)"
@@ -218,12 +218,12 @@ exports[`DelightfulTag > 快照测试 > 图标标签快照 1`] = `
 exports[`DelightfulTag > 快照测试 > 边框样式标签快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r8"
+    class="delightful-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r8"
   >
     边框标签
     <svg
       aria-label="Close"
-      class="tabler-icon tabler-icon-x magic-tag-close-icon"
+      class="tabler-icon tabler-icon-x delightful-tag-close-icon"
       fill="none"
       height="16"
       stroke="rgba(28,29,35, 0.8)"
@@ -248,12 +248,12 @@ exports[`DelightfulTag > 快照测试 > 边框样式标签快照 1`] = `
 exports[`DelightfulTag > 快照测试 > 默认标签快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r1"
+    class="delightful-tag acss-1mtoqz4 css-dev-only-do-not-override-yotw4n css-var-r1"
   >
     默认标签
     <svg
       aria-label="Close"
-      class="tabler-icon tabler-icon-x magic-tag-close-icon"
+      class="tabler-icon tabler-icon-x delightful-tag-close-icon"
       fill="none"
       height="16"
       stroke="rgba(28,29,35, 0.8)"

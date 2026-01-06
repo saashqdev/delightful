@@ -13,7 +13,7 @@ bin="${base_dirname}/bin/hyperf.php"
 
 # Check whether initialization has already run
 if [ ! -f "${base_dirname}/.initialized" ]; then
-    echo "Initializing magic-service for the first time..."
+    echo "Initializing delightful-service for the first time..."
     
     # Run composer update to install dependencies
     cd ${base_dirname}
@@ -23,7 +23,7 @@ if [ ! -f "${base_dirname}/.initialized" ]; then
     php "${bin}" migrate --force
     
     # Run database seeders
-    php bin/hyperf.php init-magic:data
+    php bin/hyperf.php init-delightful:data
 
   
     
@@ -31,7 +31,7 @@ if [ ! -f "${base_dirname}/.initialized" ]; then
     touch ${base_dirname}/.initialized
     echo "Initialization completed!"
 else
-    echo "magic-service has already been initialized, skipping..."
+    echo "delightful-service has already been initialized, skipping..."
 fi 
 
 

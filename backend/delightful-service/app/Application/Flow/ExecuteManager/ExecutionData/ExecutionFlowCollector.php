@@ -13,14 +13,14 @@ class ExecutionFlowCollector
 {
     protected static array $flows = [];
 
-    public static function getOrCreate(string $key, DelightfulFlowEntity $magicFlowEntity): DelightfulFlowEntity
+    public static function getOrCreate(string $key, DelightfulFlowEntity $delightfulFlowEntity): DelightfulFlowEntity
     {
-        return self::$flows[$key] ??= $magicFlowEntity;
+        return self::$flows[$key] ??= $delightfulFlowEntity;
     }
 
-    public static function add(string $key, DelightfulFlowEntity $magicFlowEntity): void
+    public static function add(string $key, DelightfulFlowEntity $delightfulFlowEntity): void
     {
-        self::$flows[$key] = $magicFlowEntity;
+        self::$flows[$key] = $delightfulFlowEntity;
     }
 
     public static function get(string $key): ?DelightfulFlowEntity

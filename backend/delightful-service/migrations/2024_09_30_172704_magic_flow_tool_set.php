@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_flow_tool_sets', function (Blueprint $table) {
+        Schema::create('delightful_flow_tool_sets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code', 32)->comment('组织编码');
             $table->string('code', 80)->comment('工具集编码');

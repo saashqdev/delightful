@@ -23,7 +23,7 @@ const DebuggerComp = memo(
 		const clickNode = useCallback(() => {
 			console.log("debug node", nodeConfig)
 			copyToClipboard(id)
-			message.success(i18next.t("common.copySuccess", { ns: "magicFlow" }))
+			message.success(i18next.t("common.copySuccess", { ns: "delightfulFlow" }))
 		}, [id, nodeConfig])
 
 		// 如果不是调试模式，直接返回null避免渲染
@@ -37,11 +37,11 @@ const DebuggerComp = memo(
 		return (
 			<p className="debugger-id" onClick={clickNode}>
 				<span>
-					{i18next.t("flow.nodeId", { ns: "magicFlow" })}：{id}
+					{i18next.t("flow.nodeId", { ns: "delightfulFlow" })}：{id}
 				</span>
 				<br />
 				<span>
-					{i18next.t("flow.nodeVersion", { ns: "magicFlow" })}：{nodeVersion}
+					{i18next.t("flow.nodeVersion", { ns: "delightfulFlow" })}：{nodeVersion}
 				</span>
 
 				{/* <br />

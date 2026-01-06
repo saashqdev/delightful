@@ -37,7 +37,7 @@ class ModelConfigModel extends Model
 {
     use Snowflake;
 
-    protected ?string $table = 'magic_api_model_configs';
+    protected ?string $table = 'delightful_api_model_configs';
 
     protected array $fillable = [
         'id',
@@ -108,6 +108,6 @@ class ModelConfigModel extends Model
      */
     private function _getAesKey(string $salt): string
     {
-        return config('magic_flows.model_aes_key', '') . $salt;
+        return config('delightful_flows.model_aes_key', '') . $salt;
     }
 }

@@ -131,7 +131,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     public function getUserByDelightfulId(DataIsolation $dataIsolation, string $id): ?DelightfulUserEntity
     {
         $user = UserModel::query()
-            ->where('magic_id', $id)
+            ->where('delightful_id', $id)
             ->where('organization_code', $dataIsolation->getCurrentOrganizationCode());
         $user = Db::select($user->toSql(), $user->getBindings())[0] ?? null;
         return ! empty($user) ? UserAssembler::getUserEntity($user) : null;
@@ -198,12 +198,12 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             return [];
         }
 
-        $magicId = $userEntity->getDelightfulId();
+        $delightfulId = $userEntity->getDelightfulId();
 
-        // 第二次查询：根据 magic_id 查询所有该账号在不同组织中的用户记录
+        // 第二次查询：根据 delightful_id 查询所有该账号在不同组织中的用户记录
         $query = $this->userModel::query()
             ->select('organization_code')
-            ->where('magic_id', $magicId)
+            ->where('delightful_id', $delightfulId)
             ->where('status', AccountStatus::Normal->value)
             ->distinct();
 
@@ -213,14 +213,14 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     }
 
     /**
-     * 根据 magicId 获取用户所属的组织列表.
+     * 根据 delightfulId 获取用户所属的组织列表.
      * @return string[]
      */
-    public function getUserOrganizationsByDelightfulId(string $magicId): array
+    public function getUserOrganizationsByDelightfulId(string $delightfulId): array
     {
         $query = $this->userModel::query()
             ->select('organization_code')
-            ->where('magic_id', $magicId)
+            ->where('delightful_id', $delightfulId)
             ->where('status', AccountStatus::Normal->value)
             ->distinct();
 
@@ -343,14 +343,14 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     public function getUserByAccountsAndOrganization(array $accountIds, string $organizationCode): array
     {
         $query = $this->userModel::query()
-            ->whereIn('magic_id', $accountIds)
+            ->whereIn('delightful_id', $accountIds)
             ->where('organization_code', $organizationCode);
         return Db::select($query->toSql(), $query->getBindings());
     }
 
     public function getUserByAccountsInDelightful(array $accountIds): array
     {
-        $query = $this->userModel::query()->whereIn('magic_id', $accountIds);
+        $query = $this->userModel::query()->whereIn('delightful_id', $accountIds);
         return Db::select($query->toSql(), $query->getBindings());
     }
 
@@ -419,10 +419,10 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     /**
      * @return DelightfulUserEntity[]
      */
-    public function getUsersByDelightfulIdAndOrganizationCode(array $magicIds, string $organizationCode): array
+    public function getUsersByDelightfulIdAndOrganizationCode(array $delightfulIds, string $organizationCode): array
     {
         $users = $this->userModel::query()
-            ->whereIn('magic_id', $magicIds)
+            ->whereIn('delightful_id', $delightfulIds)
             ->where('organization_code', $organizationCode);
         $users = Db::select($users->toSql(), $users->getBindings());
         $userEntities = [];
@@ -435,9 +435,9 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     /**
      * @return DelightfulUserEntity[]
      */
-    public function getUserByDelightfulIds(array $magicIds): array
+    public function getUserByDelightfulIds(array $delightfulIds): array
     {
-        $users = $this->userModel::query()->whereIn('magic_id', $magicIds);
+        $users = $this->userModel::query()->whereIn('delightful_id', $delightfulIds);
         $users = Db::select($users->toSql(), $users->getBindings());
         $userEntities = [];
         foreach ($users as $user) {
@@ -455,7 +455,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         if ($user === null) {
             return [];
         }
-        $users = $this->userModel::query()->where('magic_id', $user->getDelightfulId());
+        $users = $this->userModel::query()->where('delightful_id', $user->getDelightfulId());
         $users = Db::select($users->toSql(), $users->getBindings());
         $userEntities = [];
         foreach ($users as $user) {
@@ -475,7 +475,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
 
     public function getDelightfulIdsByUserIds(array $userIds): array
     {
-        return UserModel::query()->whereIn('user_id', $userIds)->pluck('magic_id')->toArray();
+        return UserModel::query()->whereIn('user_id', $userIds)->pluck('delightful_id')->toArray();
     }
 
     // 避免 redis 缓存序列化的对象,占用太多内存
@@ -493,7 +493,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     private function getUserArrayByAccountAndOrganization(string $accountId, string $organizationCode): ?array
     {
         $query = $this->userModel::query()
-            ->where('magic_id', $accountId)
+            ->where('delightful_id', $accountId)
             ->where('organization_code', $organizationCode);
         return Db::select($query->toSql(), $query->getBindings())[0] ?? null;
     }

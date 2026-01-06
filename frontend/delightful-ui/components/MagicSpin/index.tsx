@@ -7,12 +7,12 @@ import { cx } from "antd-style"
 export type DelightfulSpinProps = SpinProps
 
 const DelightfulSpin = memo(function DelightfulSpin({ children, size, className, ...props }: DelightfulSpinProps) {
-	const magicSpinProps = useDelightfulSpinProps(size)
+	const delightfulSpinProps = useDelightfulSpinProps(size)
 
 	return (
 		<Spin
-			{...magicSpinProps}
-			wrapperClassName={cx(magicSpinProps.wrapperClassName, className)}
+			{...delightfulSpinProps}
+			wrapperClassName={cx(delightfulSpinProps.wrapperClassName, className)}
 			{...props}
 		>
 			{children}

@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_environments', function (Blueprint $table) {
+        Schema::table('delightful_environments', function (Blueprint $table) {
             // environment_code
             $table->string('environment_code', 64)->comment('环境 code')->default('');
             $table->string('third_platform_type', 64)->comment('第三方平台类型')->default('');

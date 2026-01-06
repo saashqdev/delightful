@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_tokens')) {
+        if (Schema::hasTable('delightful_tokens')) {
             return;
         }
-        Schema::create('magic_tokens', static function (Blueprint $table) {
+        Schema::create('delightful_tokens', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('type')->default(0)->comment('token类型. 0:账号,1:用户,2:组织,3:应用,4:流程');
             $table->string('type_relation_value', 64)->comment(
@@ -35,6 +35,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_tokens');
+        Schema::dropIfExists('delightful_tokens');
     }
 };

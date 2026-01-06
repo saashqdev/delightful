@@ -62,11 +62,11 @@ class DelightfulUserContactAppService extends AbstractAppService
         protected readonly DelightfulDepartmentUserDomainService $departmentUserDomainService,
         protected readonly DelightfulDepartmentDomainService $departmentChartDomainService,
         protected LoggerInterface $logger,
-        protected readonly DelightfulOrganizationEnvDomainService $magicOrganizationEnvDomainService,
+        protected readonly DelightfulOrganizationEnvDomainService $delightfulOrganizationEnvDomainService,
         protected readonly FileDomainService $fileDomainService,
-        protected readonly DelightfulAgentDomainService $magicAgentDomainService,
+        protected readonly DelightfulAgentDomainService $delightfulAgentDomainService,
         protected readonly OperationPermissionDomainService $operationPermissionDomainService,
-        protected readonly DelightfulChatDomainService $magicChatDomainService,
+        protected readonly DelightfulChatDomainService $delightfulChatDomainService,
         protected readonly ContainerInterface $container
     ) {
         try {
@@ -144,7 +144,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $receiverConversationEntity->setUserId($messageStruct->getReceiveId());
         $receiverConversationEntity->setUserOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         // 通用控制消息处理逻辑
-        $this->magicChatDomainService->handleCommonControlMessage($messageDTO, $conversationEntity, $receiverConversationEntity);
+        $this->delightfulChatDomainService->handleCommonControlMessage($messageDTO, $conversationEntity, $receiverConversationEntity);
 
         return true;
     }
@@ -300,7 +300,7 @@ class DelightfulUserContactAppService extends AbstractAppService
 
     public function getEnvByAuthorization(string $authorization): ?DelightfulEnvironmentEntity
     {
-        return $this->magicOrganizationEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
+        return $this->delightfulOrganizationEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
     }
 
     /**
@@ -337,14 +337,14 @@ class DelightfulUserContactAppService extends AbstractAppService
     {
         if (empty($loginCode)) {
             // 如果没有传，那么默认取当前环境
-            $magicEnvironmentEntity = $this->magicOrganizationEnvDomainService->getCurrentDefaultDelightfulEnv();
+            $delightfulEnvironmentEntity = $this->delightfulOrganizationEnvDomainService->getCurrentDefaultDelightfulEnv();
         } else {
-            $magicEnvironmentEntity = $this->magicOrganizationEnvDomainService->getEnvironmentEntityByLoginCode($loginCode);
+            $delightfulEnvironmentEntity = $this->delightfulOrganizationEnvDomainService->getEnvironmentEntityByLoginCode($loginCode);
         }
-        if ($magicEnvironmentEntity === null) {
+        if ($delightfulEnvironmentEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::LOGIN_FAILED);
         }
-        return $magicEnvironmentEntity;
+        return $delightfulEnvironmentEntity;
     }
 
     /**
@@ -381,7 +381,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             }
         }
         // 获取 agentIds
-        $agents = $this->magicAgentDomainService->getByFlowCodes($aiCodes);
+        $agents = $this->delightfulAgentDomainService->getByFlowCodes($aiCodes);
         $flowCodeMapAgentId = [];
         foreach ($agents as $agent) {
             $flowCodeMapAgentId[$agent->getFlowCode()] = $agent->getId();

@@ -48,17 +48,17 @@ class DelightfulFlowAIModelAssembler
         return $entity;
     }
 
-    public static function createDTO(DelightfulFlowAIModelEntity $magicFlowAIModelEntity, array $users = []): DelightfulFlowAIModelDTO
+    public static function createDTO(DelightfulFlowAIModelEntity $delightfulFlowAIModelEntity, array $users = []): DelightfulFlowAIModelDTO
     {
-        $dto = new DelightfulFlowAIModelDTO($magicFlowAIModelEntity->toArray());
-        $dto->setId($magicFlowAIModelEntity->getId());
+        $dto = new DelightfulFlowAIModelDTO($delightfulFlowAIModelEntity->toArray());
+        $dto->setId($delightfulFlowAIModelEntity->getId());
 
-        $dto->setCreator($magicFlowAIModelEntity->getCreatedUid());
-        $dto->setCreatedAt($magicFlowAIModelEntity->getCreatedAt());
-        $dto->setModifier($magicFlowAIModelEntity->getUpdatedUid());
-        $dto->setUpdatedAt($magicFlowAIModelEntity->getUpdatedAt());
-        $dto->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowAIModelEntity->getCreatedUid()] ?? null, $magicFlowAIModelEntity->getCreatedAt()));
-        $dto->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowAIModelEntity->getUpdatedUid()] ?? null, $magicFlowAIModelEntity->getUpdatedAt()));
+        $dto->setCreator($delightfulFlowAIModelEntity->getCreatedUid());
+        $dto->setCreatedAt($delightfulFlowAIModelEntity->getCreatedAt());
+        $dto->setModifier($delightfulFlowAIModelEntity->getUpdatedUid());
+        $dto->setUpdatedAt($delightfulFlowAIModelEntity->getUpdatedAt());
+        $dto->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowAIModelEntity->getCreatedUid()] ?? null, $delightfulFlowAIModelEntity->getCreatedAt()));
+        $dto->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowAIModelEntity->getUpdatedUid()] ?? null, $delightfulFlowAIModelEntity->getUpdatedAt()));
         return $dto;
     }
 
@@ -71,13 +71,13 @@ class DelightfulFlowAIModelAssembler
         return new PageDTO($page->getPage(), $total, $list);
     }
 
-    public static function createEnabledDTO(DelightfulFlowAIModelEntity $magicFlowAIModelEntity): DelightfulFlowEnabledAIModelDTO
+    public static function createEnabledDTO(DelightfulFlowAIModelEntity $delightfulFlowAIModelEntity): DelightfulFlowEnabledAIModelDTO
     {
-        $dto = new DelightfulFlowEnabledAIModelDTO($magicFlowAIModelEntity->toArray());
-        $dto->setValue($magicFlowAIModelEntity->getName());
-        $dto->setIcon($magicFlowAIModelEntity->getIcon());
-        $dto->setVision($magicFlowAIModelEntity->isSupportMultiModal());
-        $dto->setConfigs($magicFlowAIModelEntity->getDefaultConfigs());
+        $dto = new DelightfulFlowEnabledAIModelDTO($delightfulFlowAIModelEntity->toArray());
+        $dto->setValue($delightfulFlowAIModelEntity->getName());
+        $dto->setIcon($delightfulFlowAIModelEntity->getIcon());
+        $dto->setVision($delightfulFlowAIModelEntity->isSupportMultiModal());
+        $dto->setConfigs($delightfulFlowAIModelEntity->getDefaultConfigs());
         return $dto;
     }
 

@@ -7,36 +7,36 @@ class MessageSeqIdService {
 	seqIdMap: Record<string, string | Record<string, string>> = {}
 
 	// eslint-disable-next-line class-methods-use-this
-	get magicId() {
-		return userStore.user.userInfo?.magic_id
+	get delightfulId() {
+		return userStore.user.userInfo?.delightful_id
 	}
 
 	/**
 	 * 获取全局最后拉取消息序列号的存储键
 	 */
 	private get globalPullSeqIdKey() {
-		return platformKey(`pullLastSeqId/${this.magicId}`)
+		return platformKey(`pullLastSeqId/${this.delightfulId}`)
 	}
 
 	/**
 	 * 获取会话级别最后拉取消息序列号的存储键
 	 */
 	private get conversationPullSeqIdKey() {
-		return platformKey(`conversationPullSeqId/${this.magicId}`)
+		return platformKey(`conversationPullSeqId/${this.delightfulId}`)
 	}
 
 	/**
 	 * 获取组织级别最后渲染消息序列号的存储键
 	 */
 	private get renderLastSeqIdKey() {
-		return platformKey(`renderLastSeqId/${this.magicId}`)
+		return platformKey(`renderLastSeqId/${this.delightfulId}`)
 	}
 
 	/**
 	 * 获取会话级别最后拉取消息序列号的存储键
 	 */
 	private get conversationdRenerSeqIdKey() {
-		return platformKey(`conversationRenderSeqId/${this.magicId}`)
+		return platformKey(`conversationRenderSeqId/${this.delightfulId}`)
 	}
 
 	// ========== 全局拉取序列号管理 ==========
@@ -332,16 +332,16 @@ class MessageSeqIdService {
 	 * 初始化所有组织的渲染序列号
 	 */
 	public initAllOrganizationRenderSeqId(seqId: string) {
-		const allOrganization = userStore.user.magicOrganizationMap
+		const allOrganization = userStore.user.delightfulOrganizationMap
 		this.setGlobalOrganizationRenderObject(
 			Object.values(allOrganization).reduce((prev, current) => {
-				prev[current.magic_organization_code] = seqId
+				prev[current.delightful_organization_code] = seqId
 				return prev
 			}, {} as Record<string, string>),
 		)
 		this.setSessionOrganizationRenderObject(
 			Object.values(allOrganization).reduce((prev, current) => {
-				prev[current.magic_organization_code] = seqId
+				prev[current.delightful_organization_code] = seqId
 				return prev
 			}, {} as Record<string, string>),
 		)
@@ -351,12 +351,12 @@ class MessageSeqIdService {
 	 * 检查所有组织的渲染序列号(避免新增组织，导致渲染序列号缺失)
 	 */
 	checkAllOrganizationRenderSeqId() {
-		const allOrganization = userStore.user.magicOrganizationMap
+		const allOrganization = userStore.user.delightfulOrganizationMap
 		const allOrganizationRenderSeqId = this.getOrganizationRenderObject()
 
 		Object.values(allOrganization).forEach((organization) => {
-			if (!allOrganizationRenderSeqId[organization.magic_organization_code]) {
-				allOrganizationRenderSeqId[organization.magic_organization_code] =
+			if (!allOrganizationRenderSeqId[organization.delightful_organization_code]) {
+				allOrganizationRenderSeqId[organization.delightful_organization_code] =
 					this.getGlobalPullSeqId()
 			}
 		})

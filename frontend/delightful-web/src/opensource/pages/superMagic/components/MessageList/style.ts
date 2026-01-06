@@ -1,4 +1,4 @@
-import DelightfulAva from "@/opensource/pages/superDelightful/assets/svg/magicAva.svg"
+import DelightfulAva from "@/opensource/pages/superDelightful/assets/svg/delightfulAva.svg"
 import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ prefixCls }) => ({

@@ -30,7 +30,7 @@ class DelightfulAuthenticationUserModel extends Model
     use Snowflake;
     use SoftDeletes;
 
-    protected ?string $table = 'magic_authentication_user';
+    protected ?string $table = 'delightful_authentication_user';
 
     protected array $fillable = [
         'id', 'organization_code', 'user_id', 'type', 'platform', 'user', 'token',

@@ -22,13 +22,13 @@ use Psr\Container\ContainerInterface;
 #[Crontab(rule: '* * * * *', name: 'FlowBreakpointRetryCrontab', singleton: true, mutexExpires: 60 * 5, onOneServer: true, callback: 'execute', memo: '流程断点重试定时任务', enable: true)]
 class FlowBreakpointRetryCrontab
 {
-    private DelightfulFlowExecuteLogDomainService $magicFlowExecuteLogDomainService;
+    private DelightfulFlowExecuteLogDomainService $delightfulFlowExecuteLogDomainService;
 
     private LockerInterface $locker;
 
     public function __construct(ContainerInterface $container)
     {
-        $this->magicFlowExecuteLogDomainService = $container->get(DelightfulFlowExecuteLogDomainService::class);
+        $this->delightfulFlowExecuteLogDomainService = $container->get(DelightfulFlowExecuteLogDomainService::class);
         $this->locker = $container->get(LockerInterface::class);
     }
 
@@ -42,13 +42,13 @@ class FlowBreakpointRetryCrontab
         while (true) {
             $parallel->clear();
             // 获取所有 10 分钟还在进行中的流程
-            $list = $this->magicFlowExecuteLogDomainService->getRunningTimeoutList($flowDataIsolation, 60 * 10, $page);
+            $list = $this->delightfulFlowExecuteLogDomainService->getRunningTimeoutList($flowDataIsolation, 60 * 10, $page);
             if (empty($list)) {
                 break;
             }
-            foreach ($list as $magicFlowExecuteLogEntity) {
-                $parallel->add(function () use ($magicFlowExecuteLogEntity) {
-                    $this->retry($magicFlowExecuteLogEntity);
+            foreach ($list as $delightfulFlowExecuteLogEntity) {
+                $parallel->add(function () use ($delightfulFlowExecuteLogEntity) {
+                    $this->retry($delightfulFlowExecuteLogEntity);
                 });
             }
             $parallel->wait();
@@ -59,9 +59,9 @@ class FlowBreakpointRetryCrontab
         }
     }
 
-    private function retry(DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
+    private function retry(DelightfulFlowExecuteLogEntity $delightfulFlowExecuteLogEntity): void
     {
-        $lockKey = "FlowBreakpointRetryCrontab-{$magicFlowExecuteLogEntity->getExecuteDataId()}";
+        $lockKey = "FlowBreakpointRetryCrontab-{$delightfulFlowExecuteLogEntity->getExecuteDataId()}";
         $lockOwner = 'FlowBreakpointRetryCrontab';
         if (! $this->locker->mutexLock($lockKey, $lockOwner, 60 * 10)) {
             return;
@@ -71,23 +71,23 @@ class FlowBreakpointRetryCrontab
             $flowDataIsolation = FlowDataIsolation::create()->disabled();
 
             // 实时查询最新
-            $magicFlowExecuteLogEntity = $this->magicFlowExecuteLogDomainService->getByExecuteId($flowDataIsolation, $magicFlowExecuteLogEntity->getExecuteDataId());
-            if ($magicFlowExecuteLogEntity->getRetryCount() >= 1) {
+            $delightfulFlowExecuteLogEntity = $this->delightfulFlowExecuteLogDomainService->getByExecuteId($flowDataIsolation, $delightfulFlowExecuteLogEntity->getExecuteDataId());
+            if ($delightfulFlowExecuteLogEntity->getRetryCount() >= 1) {
                 return;
             }
 
             // 重试次数 +1
-            $this->magicFlowExecuteLogDomainService->incrementRetryCount($flowDataIsolation, $magicFlowExecuteLogEntity);
+            $this->delightfulFlowExecuteLogDomainService->incrementRetryCount($flowDataIsolation, $delightfulFlowExecuteLogEntity);
 
-            $extParams = $magicFlowExecuteLogEntity->getExtParams();
-            $archive = FlowExecutorArchiveCloud::get($extParams['organization_code'], (string) $magicFlowExecuteLogEntity->getExecuteDataId());
-            $flowEntity = $archive['magic_flow'];
+            $extParams = $delightfulFlowExecuteLogEntity->getExtParams();
+            $archive = FlowExecutorArchiveCloud::get($extParams['organization_code'], (string) $delightfulFlowExecuteLogEntity->getExecuteDataId());
+            $flowEntity = $archive['delightful_flow'];
             /** @var ExecutionData $executionData */
             $executionData = $archive['execution_data'];
             // 重置一些记录
             $executionData->rewind();
 
-            $executor = new DelightfulFlowExecutor($flowEntity, $executionData, lastDelightfulFlowExecuteLogEntity: $magicFlowExecuteLogEntity);
+            $executor = new DelightfulFlowExecutor($flowEntity, $executionData, lastDelightfulFlowExecuteLogEntity: $delightfulFlowExecuteLogEntity);
             $executor->execute();
         } finally {
             $this->locker->release($lockKey, $lockOwner);

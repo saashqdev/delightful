@@ -52,7 +52,7 @@ const ConditionContainer = ({
 	}, [value])
 
 	return (
-		<div className="magic-condition-container">
+		<div className="delightful-condition-container">
 			<Form
 				form={form}
 				initialValues={{ conditions: value }}

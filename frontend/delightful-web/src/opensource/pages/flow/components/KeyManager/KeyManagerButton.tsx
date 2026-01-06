@@ -42,8 +42,8 @@ const useKeyManagerStyles = createStyles(({ css, isDarkMode, token }) => {
 			border-radius: 8px;
 			&:hover {
 				background-color: ${isDarkMode
-					? token.magicColorScales.grey[8]
-					: token.magicColorScales.grey[1]};
+					? token.delightfulColorScales.grey[8]
+					: token.delightfulColorScales.grey[1]};
 			}
 		`,
 		iconTrash: css`
@@ -51,8 +51,8 @@ const useKeyManagerStyles = createStyles(({ css, isDarkMode, token }) => {
 			border-radius: 8px;
 			&:hover {
 				background-color: ${isDarkMode
-					? token.magicColorScales.grey[8]
-					: token.magicColorScales.grey[1]};
+					? token.delightfulColorScales.grey[8]
+					: token.delightfulColorScales.grey[1]};
 			}
 		`,
 		apiKey: css`

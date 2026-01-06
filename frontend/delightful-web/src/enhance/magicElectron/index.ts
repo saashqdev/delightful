@@ -1,1 +1,1 @@
-export const { magic, magicSearch, magicMedia } = window
+export const { delightful, delightfulSearch, delightfulMedia } = window

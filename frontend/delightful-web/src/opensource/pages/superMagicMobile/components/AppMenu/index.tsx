@@ -5,7 +5,7 @@ export default function AppMenu() {
 	const { styles, cx } = useStyles()
 
 	const handleOpenAbout = () => {
-		window.location.href = "magic://magic.app/openwith?name=gotoAbout"
+		window.location.href = "delightful://delightful.app/openwith?name=gotoAbout"
 	}
 
 	return (

@@ -8,14 +8,14 @@ const useExampleMessageStyles = createStyles(({ isDarkMode, token }) => {
 			padding: "10px 14px",
 			borderRadius: 100,
 			border: `1px solid ${token.colorBorder}`,
-			background: isDarkMode ? token.magicColorScales.grey[7] : token.colorWhite,
-			color: isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1],
+			background: isDarkMode ? token.delightfulColorScales.grey[7] : token.colorWhite,
+			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1],
 			fontSize: 14,
 			fontWeight: 400,
 			lineHeight: "20px",
 			cursor: "pointer",
 			":hover": {
-				color: isDarkMode ? "rgba(255,255,255,0.9)" : token.magicColorUsages.text[2],
+				color: isDarkMode ? "rgba(255,255,255,0.9)" : token.delightfulColorUsages.text[2],
 			},
 		},
 	}

@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         // 修改表结构，添加新字段
-        Schema::table('magic_flow_knowledge', function (Blueprint $table) {
+        Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
             $table->unsignedBigInteger('word_count')->default(0)->comment('字数统计');
         });
     }
@@ -25,8 +25,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::rename('magic_flow_knowledge', 'magic_flow_knowledge');
-        Schema::table('magic_flow_knowledge', function (Blueprint $table) {
+        Schema::rename('delightful_flow_knowledge', 'delightful_flow_knowledge');
+        Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
             $table->dropColumn('word_count');
         });
     }

@@ -29,7 +29,7 @@ export default function NamesItem({
 	return (
 		<div
 			{...props}
-			className={`magic-names-item ${props.className ?? ""}`}
+			className={`delightful-names-item ${props.className ?? ""}`}
 			onClick={() =>
 				itemClick({
 					id: item.id,

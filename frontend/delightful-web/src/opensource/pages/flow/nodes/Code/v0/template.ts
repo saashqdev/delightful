@@ -60,7 +60,7 @@ export const v0Template = {
 								{
 									type: "input",
 									uniqueId: "671627623276744705",
-									value: "hello,magic",
+									value: "hello,delightful",
 								},
 							],
 							expression_value: [],

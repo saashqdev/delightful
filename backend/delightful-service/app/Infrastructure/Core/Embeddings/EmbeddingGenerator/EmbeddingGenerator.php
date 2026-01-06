@@ -13,6 +13,6 @@ class EmbeddingGenerator
 {
     public static function defaultModel(): string
     {
-        return config('magic_flows.default_embedding_model');
+        return config('delightful_flows.default_embedding_model');
     }
 }

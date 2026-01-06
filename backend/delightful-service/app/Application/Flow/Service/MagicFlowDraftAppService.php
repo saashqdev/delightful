@@ -30,13 +30,13 @@ class DelightfulFlowDraftAppService extends AbstractFlowAppService
         $this->getFlowAndValidateOperation($dataIsolation, $query->getFlowCode(), 'read');
 
         $query->setSelect(['id', 'flow_code', 'code', 'name', 'description', 'organization_code', 'created_uid', 'created_at', 'updated_uid', 'updated_at', 'deleted_at']);
-        $result = $this->magicFlowDraftDomainService->queries($dataIsolation, $query, $page);
+        $result = $this->delightfulFlowDraftDomainService->queries($dataIsolation, $query, $page);
         $userIds = [];
         foreach ($result['list'] as $item) {
             $userIds[] = $item->getCreator();
             $userIds[] = $item->getModifier();
         }
-        $result['users'] = $this->magicUserDomainService->getByUserIds($this->createContactDataIsolation($dataIsolation), $userIds);
+        $result['users'] = $this->delightfulUserDomainService->getByUserIds($this->createContactDataIsolation($dataIsolation), $userIds);
         return $result;
     }
 
@@ -48,7 +48,7 @@ class DelightfulFlowDraftAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $this->getFlowAndValidateOperation($dataIsolation, $flowCode, 'read');
 
-        return $this->magicFlowDraftDomainService->show($dataIsolation, $flowCode, $draftCode);
+        return $this->delightfulFlowDraftDomainService->show($dataIsolation, $flowCode, $draftCode);
     }
 
     /**
@@ -57,8 +57,8 @@ class DelightfulFlowDraftAppService extends AbstractFlowAppService
     public function remove(Authenticatable $authorization, string $flowCode, string $draftCode): void
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
-        $magicFlow = $this->getFlowAndValidateOperation($dataIsolation, $flowCode, 'edit');
-        $this->magicFlowDraftDomainService->remove($dataIsolation, $magicFlow->getCode(), $draftCode);
+        $delightfulFlow = $this->getFlowAndValidateOperation($dataIsolation, $flowCode, 'edit');
+        $this->delightfulFlowDraftDomainService->remove($dataIsolation, $delightfulFlow->getCode(), $draftCode);
     }
 
     /**
@@ -72,6 +72,6 @@ class DelightfulFlowDraftAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $this->getFlowAndValidateOperation($dataIsolation, $savingDelightfulFlowDraftEntity->getFlowCode(), 'edit');
 
-        return $this->magicFlowDraftDomainService->save($dataIsolation, $savingDelightfulFlowDraftEntity);
+        return $this->delightfulFlowDraftDomainService->save($dataIsolation, $savingDelightfulFlowDraftEntity);
     }
 }

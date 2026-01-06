@@ -42,7 +42,7 @@ use Throwable;
 class DelightfulAgentApi extends AbstractApi
 {
     #[Inject]
-    protected DelightfulAgentAppService $magicAgentAppService;
+    protected DelightfulAgentAppService $delightfulAgentAppService;
 
     #[Inject]
     protected DelightfulUserContactAppService $userAppService;
@@ -51,10 +51,10 @@ class DelightfulAgentApi extends AbstractApi
     protected DelightfulAccountAppService $accountAppService;
 
     #[Inject]
-    protected DelightfulAgentAssembler $magicAgentAssembler;
+    protected DelightfulAgentAssembler $delightfulAgentAssembler;
 
     #[Inject]
-    protected DelightfulBotThirdPlatformChatAssembler $magicAgentThirdPlatformChatAssembler;
+    protected DelightfulBotThirdPlatformChatAssembler $delightfulAgentThirdPlatformChatAssembler;
 
     #[Inject]
     protected AgentAppService $agentAppService;
@@ -69,8 +69,8 @@ class DelightfulAgentApi extends AbstractApi
         $query->setOrder(['id' => 'desc']);
         $page = $this->createPage();
         $query->setAgentName($agentName);
-        $data = $this->magicAgentAppService->queries($authentication, $query, $page);
-        return $this->magicAgentAssembler->createPageListAgentDTO($data['total'], $data['list'], $page, $data['avatars']);
+        $data = $this->delightfulAgentAppService->queries($authentication, $query, $page);
+        return $this->delightfulAgentAssembler->createPageListAgentDTO($data['total'], $data['list'], $page, $data['avatars']);
     }
 
     public function queriesAvailable()
@@ -94,31 +94,31 @@ class DelightfulAgentApi extends AbstractApi
 
         $agentId = $agentId ?? $inputs['id'] ?? '';
 
-        $magicAgentDTO = new DelightfulAgentDTO();
+        $delightfulAgentDTO = new DelightfulAgentDTO();
         $userId = $authorization->getId();
         $organizationCode = $authorization->getOrganizationCode();
         $agentName = $inputs['agent_name'] ?? $inputs['robot_name'] ?? '';
         $agentAvatar = $inputs['agent_avatar'] ?? $inputs['robot_avatar'] ?? '';
         $agentDescription = $inputs['agent_description'] ?? $inputs['robot_description'] ?? '';
-        $magicAgentDTO->setCurrentUserId($userId);
-        $magicAgentDTO->setCurrentOrganizationCode($organizationCode);
+        $delightfulAgentDTO->setCurrentUserId($userId);
+        $delightfulAgentDTO->setCurrentOrganizationCode($organizationCode);
 
-        $magicAgentDTO->setAgentAvatar(FileAssembler::formatPath($agentAvatar));
-        $magicAgentDTO->setAgentName($agentName);
-        $magicAgentDTO->setAgentDescription($agentDescription);
+        $delightfulAgentDTO->setAgentAvatar(FileAssembler::formatPath($agentAvatar));
+        $delightfulAgentDTO->setAgentName($agentName);
+        $delightfulAgentDTO->setAgentDescription($agentDescription);
 
-        $magicAgentDTO->setRobotAvatar(FileAssembler::formatPath($agentAvatar));
-        $magicAgentDTO->setRobotName($agentName);
-        $magicAgentDTO->setRobotDescription($agentDescription);
+        $delightfulAgentDTO->setRobotAvatar(FileAssembler::formatPath($agentAvatar));
+        $delightfulAgentDTO->setRobotName($agentName);
+        $delightfulAgentDTO->setRobotDescription($agentDescription);
 
-        $magicAgentDTO->setId($agentId);
+        $delightfulAgentDTO->setId($agentId);
 
-        $magicAgentEntity = $this->magicAgentAppService->saveAgent($authorization, $magicAgentDTO);
-        $entityArray = $magicAgentEntity->toArray();
-        $entityArray['robot_avatar'] = $magicAgentEntity->getAgentAvatar();
-        $entityArray['robot_version_id'] = $magicAgentEntity->getAgentVersionId();
-        $entityArray['robot_name'] = $magicAgentEntity->getAgentName();
-        $entityArray['bot_description'] = $magicAgentEntity->getAgentDescription();
+        $delightfulAgentEntity = $this->delightfulAgentAppService->saveAgent($authorization, $delightfulAgentDTO);
+        $entityArray = $delightfulAgentEntity->toArray();
+        $entityArray['robot_avatar'] = $delightfulAgentEntity->getAgentAvatar();
+        $entityArray['robot_version_id'] = $delightfulAgentEntity->getAgentVersionId();
+        $entityArray['robot_name'] = $delightfulAgentEntity->getAgentName();
+        $entityArray['bot_description'] = $delightfulAgentEntity->getAgentDescription();
         return $entityArray;
     }
 
@@ -128,7 +128,7 @@ class DelightfulAgentApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authorization */
         $authorization = $this->getAuthorization();
         $agentId = $agentId ?? $request->input('bot_id');
-        return $this->magicAgentAppService->deleteAgentById($authorization, $agentId);
+        return $this->delightfulAgentAppService->deleteAgentById($authorization, $agentId);
     }
 
     // 获取当前用户的助理
@@ -145,7 +145,7 @@ class DelightfulAgentApi extends AbstractApi
         $agentName = $request->input('agent_name') ?? $request->input('robot_name') ?? '';
         $queryType = $request->input('query_type', DelightfulAgentQueryStatus::ALL->value);
         $userId = $authenticatable->getId();
-        $agentsByUserIdPage = $this->magicAgentAppService->getAgentsByUserIdPage($userId, $page, $pageSize, $agentName, DelightfulAgentQueryStatus::from($queryType));
+        $agentsByUserIdPage = $this->delightfulAgentAppService->getAgentsByUserIdPage($userId, $page, $pageSize, $agentName, DelightfulAgentQueryStatus::from($queryType));
         foreach ($agentsByUserIdPage['list'] as &$agent) {
             $agent['bot_version_id'] = $agent['agent_version_id'];
             $agent['robot_avatar'] = $agent['agent_avatar'];
@@ -162,9 +162,9 @@ class DelightfulAgentApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authenticatable */
         $authenticatable = $this->getAuthorization();
         $agentVersionId = $agentVersionId ?? $request->input('bot_version_id');
-        $magicAgentVO = $this->magicAgentAppService->getAgentVersionByIdForUser($agentVersionId, $authenticatable);
-        $magicFlowDTO = DelightfulFlowAssembler::createDelightfulFlowDTO($magicAgentVO->getDelightfulFlowEntity());
-        return $this->magicAgentAssembler::createAgentV1Response($magicAgentVO, $magicFlowDTO);
+        $delightfulAgentVO = $this->delightfulAgentAppService->getAgentVersionByIdForUser($agentVersionId, $authenticatable);
+        $delightfulFlowDTO = DelightfulFlowAssembler::createDelightfulFlowDTO($delightfulAgentVO->getDelightfulFlowEntity());
+        return $this->delightfulAgentAssembler::createAgentV1Response($delightfulAgentVO, $delightfulFlowDTO);
     }
 
     // 获取企业内部的助理
@@ -175,7 +175,7 @@ class DelightfulAgentApi extends AbstractApi
         $page = (int) $request->input('page', 1);
         $pageSize = (int) $request->input('page_size', 10);
         $agentName = $request->input('agent_name') ?? $request->input('robot_name') ?? '';
-        return $this->magicAgentAppService->getAgentsByOrganizationPage($authenticatable, $page, $pageSize, $agentName);
+        return $this->delightfulAgentAppService->getAgentsByOrganizationPage($authenticatable, $page, $pageSize, $agentName);
     }
 
     // 获取应用市场助理
@@ -184,7 +184,7 @@ class DelightfulAgentApi extends AbstractApi
         $this->getAuthorization();
         $page = (int) $request->input('page', 1);
         $pageSize = (int) $request->input('page_size', 10);
-        return $this->magicAgentAppService->getAgentsFromMarketplacePage($page, $pageSize);
+        return $this->delightfulAgentAppService->getAgentsFromMarketplacePage($page, $pageSize);
     }
 
     // 发布助理版本
@@ -197,15 +197,15 @@ class DelightfulAgentApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authorization */
         $authorization = $this->getAuthorization();
         $inputs = $request->all();
-        $magicAgentVersionDTO = new DelightfulAgentVersionDTO($inputs);
+        $delightfulAgentVersionDTO = new DelightfulAgentVersionDTO($inputs);
 
         $agentId = $inputs['agent_id'] ?? $inputs['bot_id'];
-        $magicAgentVersionDTO->setAgentId($agentId);
+        $delightfulAgentVersionDTO->setAgentId($agentId);
 
-        $magicFlowDO = null;
-        if (! empty($inputs['magic_flow'])) {
-            $magicFLowDTO = new DelightfulFlowDTO($inputs['magic_flow']);
-            $magicFlowDO = DelightfulFlowAssembler::createDelightfulFlowDO($magicFLowDTO);
+        $delightfulFlowDO = null;
+        if (! empty($inputs['delightful_flow'])) {
+            $delightfulFLowDTO = new DelightfulFlowDTO($inputs['delightful_flow']);
+            $delightfulFlowDO = DelightfulFlowAssembler::createDelightfulFlowDO($delightfulFLowDTO);
         }
 
         $thirdPlatformList = null;
@@ -213,21 +213,21 @@ class DelightfulAgentApi extends AbstractApi
             $thirdPlatformList = [];
             foreach ($inputs['third_platform_list'] as $thirdPlatform) {
                 $thirdPlatformChatDTO = new DelightfulBotThirdPlatformChatDTO($thirdPlatform);
-                $thirdPlatformList[] = $this->magicAgentThirdPlatformChatAssembler->createDO($thirdPlatformChatDTO);
+                $thirdPlatformList[] = $this->delightfulAgentThirdPlatformChatAssembler->createDO($thirdPlatformChatDTO);
             }
         }
 
-        $result = $this->magicAgentAppService->releaseAgentVersion($authorization, $magicAgentVersionDTO, $magicFlowDO, $thirdPlatformList);
+        $result = $this->delightfulAgentAppService->releaseAgentVersion($authorization, $delightfulAgentVersionDTO, $delightfulFlowDO, $thirdPlatformList);
         /**
-         * @var DelightfulAgentVersionEntity $magicAgentVersionEntity
+         * @var DelightfulAgentVersionEntity $delightfulAgentVersionEntity
          */
-        $magicAgentVersionEntity = $result['data'];
+        $delightfulAgentVersionEntity = $result['data'];
 
         $userDTO = new DelightfulUserEntity();
-        $userDTO->setAvatarUrl($magicAgentVersionEntity->getAgentAvatar());
-        $userDTO->setNickName($magicAgentVersionEntity->getAgentName());
-        $userDTO->setDescription($magicAgentVersionEntity->getAgentDescription());
-        $userEntity = $this->accountAppService->aiRegister($userDTO, $authorization, $magicAgentVersionEntity->getFlowCode());
+        $userDTO->setAvatarUrl($delightfulAgentVersionEntity->getAgentAvatar());
+        $userDTO->setNickName($delightfulAgentVersionEntity->getAgentName());
+        $userDTO->setDescription($delightfulAgentVersionEntity->getAgentDescription());
+        $userEntity = $this->accountAppService->aiRegister($userDTO, $authorization, $delightfulAgentVersionEntity->getFlowCode());
         $result['user'] = $userEntity;
 
         if ($result['is_add_friend']) {
@@ -244,7 +244,7 @@ class DelightfulAgentApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authenticatable */
         $authenticatable = $this->getAuthorization();
         $agentId = $agentId ?? $request->input('bot_id');
-        return $this->magicAgentAppService->getReleaseAgentVersions($authenticatable, $agentId);
+        return $this->delightfulAgentAppService->getReleaseAgentVersions($authenticatable, $agentId);
     }
 
     // 获取助理最新版本号
@@ -253,7 +253,7 @@ class DelightfulAgentApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authorization */
         $authorization = $this->getAuthorization();
         $agentId = $agentId ?? $request->input('bot_id');
-        return $this->magicAgentAppService->getAgentMaxVersion($authorization, $agentId);
+        return $this->delightfulAgentAppService->getAgentMaxVersion($authorization, $agentId);
     }
 
     // 启用｜禁用助理
@@ -263,7 +263,7 @@ class DelightfulAgentApi extends AbstractApi
         $authorization = $this->getAuthorization();
         $agentId = $agentId ?? $request->input('bot_id');
         $status = (int) $request->input('status');
-        $this->magicAgentAppService->updateAgentStatus($authorization, $agentId, DelightfulAgentVersionStatus::from($status));
+        $this->delightfulAgentAppService->updateAgentStatus($authorization, $agentId, DelightfulAgentVersionStatus::from($status));
     }
 
     // 改变助理发布到组织的状态
@@ -273,7 +273,7 @@ class DelightfulAgentApi extends AbstractApi
         $authorization = $this->getAuthorization();
         $agentId = $agentId ?? $request->input('bot_id');
         $status = (int) $request->input('status');
-        $this->magicAgentAppService->updateAgentEnterpriseStatus($authorization, $agentId, $status, $authorization->getId());
+        $this->delightfulAgentAppService->updateAgentEnterpriseStatus($authorization, $agentId, $status, $authorization->getId());
     }
 
     // 获取助理详情
@@ -282,10 +282,10 @@ class DelightfulAgentApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authenticatable */
         $authenticatable = $this->getAuthorization();
         $agentId = $agentId ?? $request->input('bot_id');
-        $magicAgentAssembler = new DelightfulAgentAssembler();
-        $magicAgentVO = $this->magicAgentAppService->getAgentDetail($agentId, $authenticatable);
-        $magicFlowDTO = DelightfulFlowAssembler::createDelightfulFlowDTO($magicAgentVO->getDelightfulFlowEntity());
-        return $magicAgentAssembler::createAgentV1Response($magicAgentVO, $magicFlowDTO);
+        $delightfulAgentAssembler = new DelightfulAgentAssembler();
+        $delightfulAgentVO = $this->delightfulAgentAppService->getAgentDetail($agentId, $authenticatable);
+        $delightfulFlowDTO = DelightfulFlowAssembler::createDelightfulFlowDTO($delightfulAgentVO->getDelightfulFlowEntity());
+        return $delightfulAgentAssembler::createAgentV1Response($delightfulAgentVO, $delightfulFlowDTO);
     }
 
     /**
@@ -296,9 +296,9 @@ class DelightfulAgentApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authorization */
         $authorization = $this->getAuthorization();
         $agentVersionId = $agentVersionId ?? $request->input('bot_version_id');
-        $magicAgentVersionEntity = $this->magicAgentAppService->getAgentById($agentVersionId, $authorization);
-        $userDTO = DelightfulUserEntity::fromDelightfulAgentVersionEntity($magicAgentVersionEntity);
-        $aiCode = $magicAgentVersionEntity->getFlowCode();
+        $delightfulAgentVersionEntity = $this->delightfulAgentAppService->getAgentById($agentVersionId, $authorization);
+        $userDTO = DelightfulUserEntity::fromDelightfulAgentVersionEntity($delightfulAgentVersionEntity);
+        $aiCode = $delightfulAgentVersionEntity->getFlowCode();
         $userEntity = $this->accountAppService->aiRegister($userDTO, $authorization, $aiCode);
         $friendId = $userEntity->getUserId();
         // 添加好友，助理默认同意好友
@@ -312,7 +312,7 @@ class DelightfulAgentApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authenticatable */
         $authenticatable = $this->getAuthorization();
         $agentId = $agentId ?? $request->input('bot_id');
-        return $this->magicAgentAppService->isUpdated($authenticatable, $agentId);
+        return $this->delightfulAgentAppService->isUpdated($authenticatable, $agentId);
     }
 
     // 根据 userId 获取发布版本的助理详情
@@ -320,11 +320,11 @@ class DelightfulAgentApi extends AbstractApi
     {
         $this->getAuthorization();
         $userId = $userId ?? $request->input('user_id');
-        $magicAgentVersionEntity = $this->magicAgentAppService->getDetailByUserId($userId);
-        if (! $magicAgentVersionEntity) {
+        $delightfulAgentVersionEntity = $this->delightfulAgentAppService->getDetailByUserId($userId);
+        if (! $delightfulAgentVersionEntity) {
             return [];
         }
-        return $magicAgentVersionEntity->toArray();
+        return $delightfulAgentVersionEntity->toArray();
     }
 
     // 获取交互指令类型
@@ -360,7 +360,7 @@ class DelightfulAgentApi extends AbstractApi
         $authenticatable = $this->getAuthorization();
         $instructs = $request->input('instructs');
         $agentId = $agentId ?? $request->input('bot_id');
-        return $this->magicAgentAppService->saveInstruct($authenticatable, $agentId, $instructs);
+        return $this->delightfulAgentAppService->saveInstruct($authenticatable, $agentId, $instructs);
     }
 
     // 获取聊天模式可用助理列表
@@ -376,7 +376,7 @@ class DelightfulAgentApi extends AbstractApi
         $page = $this->createPage();
 
         // 获取全量数据
-        $data = $this->magicAgentAppService->getChatModeAvailableAgents($authenticatable, $query);
+        $data = $this->delightfulAgentAppService->getChatModeAvailableAgents($authenticatable, $query);
 
         // 在 API 层进行分页处理
         return AgentAssembler::createChatModelAvailableList($page, $data['total'], $data['list']);

@@ -32,7 +32,7 @@ class DelightfulFlowDraftEntity extends AbstractEntity
 
     protected string $description = '';
 
-    protected ?array $magicFlow = null;
+    protected ?array $delightfulFlow = null;
 
     protected string $creator;
 
@@ -56,17 +56,17 @@ class DelightfulFlowDraftEntity extends AbstractEntity
         $this->updatedAt = $this->createdAt;
     }
 
-    public function prepareForModification(DelightfulFlowDraftEntity $magicFlowDraftEntity): void
+    public function prepareForModification(DelightfulFlowDraftEntity $delightfulFlowDraftEntity): void
     {
         $this->requiredValidate();
 
-        $magicFlowDraftEntity->setName($this->name);
-        $magicFlowDraftEntity->setDescription($this->description);
-        $magicFlowDraftEntity->setModifier($this->creator);
-        $magicFlowDraftEntity->setUpdatedAt($this->createdAt);
+        $delightfulFlowDraftEntity->setName($this->name);
+        $delightfulFlowDraftEntity->setDescription($this->description);
+        $delightfulFlowDraftEntity->setModifier($this->creator);
+        $delightfulFlowDraftEntity->setUpdatedAt($this->createdAt);
 
-        if (! is_null($this->magicFlow)) {
-            $magicFlowDraftEntity->setDelightfulFlow($this->magicFlow);
+        if (! is_null($this->delightfulFlow)) {
+            $delightfulFlowDraftEntity->setDelightfulFlow($this->delightfulFlow);
         }
     }
 
@@ -132,12 +132,12 @@ class DelightfulFlowDraftEntity extends AbstractEntity
 
     public function getDelightfulFlow(): ?array
     {
-        return $this->magicFlow;
+        return $this->delightfulFlow;
     }
 
-    public function setDelightfulFlow(?array $magicFlow): void
+    public function setDelightfulFlow(?array $delightfulFlow): void
     {
-        $this->magicFlow = $magicFlow;
+        $this->delightfulFlow = $delightfulFlow;
     }
 
     public function getCreator(): string

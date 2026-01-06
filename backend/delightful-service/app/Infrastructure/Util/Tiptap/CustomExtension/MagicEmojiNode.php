@@ -15,7 +15,7 @@ use Hyperf\Codec\Json;
  */
 class DelightfulEmojiNode extends AbstractCustomNode
 {
-    public static $name = 'magic-emoji';
+    public static $name = 'delightful-emoji';
 
     public function addAttributes(): array
     {
@@ -40,8 +40,8 @@ class DelightfulEmojiNode extends AbstractCustomNode
     public function renderText($node): string
     {
         $nodeForArray = Json::decode(Json::encode($node));
-        $magicEmoji = $nodeForArray['attrs']['code'] ?? '';
-        ! empty($magicEmoji) && $magicEmoji = sprintf('[%s]', $magicEmoji);
-        return $magicEmoji;
+        $delightfulEmoji = $nodeForArray['attrs']['code'] ?? '';
+        ! empty($delightfulEmoji) && $delightfulEmoji = sprintf('[%s]', $delightfulEmoji);
+        return $delightfulEmoji;
     }
 }

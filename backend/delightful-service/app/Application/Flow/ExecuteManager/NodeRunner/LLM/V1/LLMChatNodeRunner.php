@@ -148,11 +148,11 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             }
 
             // 永远处理当前节点的历史附件消息
-            $magicMessageIds = [];
+            $delightfulMessageIds = [];
             foreach ($memoryManager->getMessages() as $message) {
-                $magicMessageIds[] = $message->getIdentifier();
+                $delightfulMessageIds[] = $message->getIdentifier();
             }
-            $multiModalLogs = di(DelightfulFlowMultiModalLogDomainService::class)->getByMessageIds($executionData->getDataIsolation(), $magicMessageIds, true);
+            $multiModalLogs = di(DelightfulFlowMultiModalLogDomainService::class)->getByMessageIds($executionData->getDataIsolation(), $delightfulMessageIds, true);
             foreach ($memoryManager->getMessages() as $message) {
                 if ($message instanceof UserMessage) {
                     $multiModalLog = $multiModalLogs[$message->getIdentifier()] ?? null;

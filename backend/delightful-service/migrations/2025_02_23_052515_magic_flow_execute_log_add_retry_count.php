@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_flow_execute_logs', function (Blueprint $table) {
+        Schema::table('delightful_flow_execute_logs', function (Blueprint $table) {
             $table->integer('retry_count')->default(0)->comment('重试次数');
         });
     }

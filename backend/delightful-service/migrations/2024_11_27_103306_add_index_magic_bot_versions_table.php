@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_bot_versions', function (Blueprint $table) {
+        Schema::table('delightful_bot_versions', function (Blueprint $table) {
             $table->index(['root_id']);
             $table->index(['organization_code']);
         });
@@ -25,7 +25,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_bot_versions', function (Blueprint $table) {
+        Schema::table('delightful_bot_versions', function (Blueprint $table) {
             $table->dropIndex(['root_id']);
             $table->dropIndex(['organization_code']);
         });

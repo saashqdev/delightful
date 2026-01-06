@@ -39,11 +39,11 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
     protected LoggerInterface $logger;
 
     public function __construct(
-        protected DelightfulUserSettingDomainService $magicUserSettingDomainService,
+        protected DelightfulUserSettingDomainService $delightfulUserSettingDomainService,
         protected MCPServerAppService $MCPServerAppService,
         protected TempAuthInterface $tempAuth,
         protected AgentDomainService $agentDomainService,
-        protected DelightfulFlowDomainService $magicFlowDomainService,
+        protected DelightfulFlowDomainService $delightfulFlowDomainService,
         LoggerFactory $loggerFactory,
     ) {
         $this->logger = $loggerFactory->get('SupperDelightfulAgentMCP');
@@ -131,7 +131,7 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
             return $item instanceof MCPServerEntity;
         });
 
-        $localHttpUrl = config('super-magic.sandbox.callback_host', '');
+        $localHttpUrl = config('super-delightful.sandbox.callback_host', '');
 
         foreach ($mcpServers as $mcpServer) {
             if (! $mcpServer->isBuiltIn() && ! in_array($mcpServer->getCode(), $mcpIds, true)) {
@@ -189,7 +189,7 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
         $dataIsolation = DataIsolation::create($mcpDataIsolation->getCurrentOrganizationCode(), $mcpDataIsolation->getCurrentUserId());
         $mcpServerIds = [];
 
-        $mcpSettings = $this->magicUserSettingDomainService->get($dataIsolation, UserSettingKey::genBeDelightfulProjectMCPServers($projectId));
+        $mcpSettings = $this->delightfulUserSettingDomainService->get($dataIsolation, UserSettingKey::genBeDelightfulProjectMCPServers($projectId));
         if ($mcpSettings) {
             $mcpServerIds = array_filter(array_column($mcpSettings->getValue()['servers'], 'id'));
         }
@@ -229,7 +229,7 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
             'label_name' => implode(', ', $labelNames),
             'label_names' => $labelNames,
             'tools' => [
-                'call_magic_agent' => [
+                'call_delightful_agent' => [
                     'label_name' => '',
                     'agents' => $agentInfos,
                 ],

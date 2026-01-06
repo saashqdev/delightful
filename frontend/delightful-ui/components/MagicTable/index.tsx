@@ -11,7 +11,7 @@ function DelightfulTable<D extends AnyObject = AnyObject>({
 	scroll,
 	...props
 }: DelightfulTableProps<D>) {
-	const magicSpinProps = useDelightfulSpinProps()
+	const delightfulSpinProps = useDelightfulSpinProps()
 
 	const { styles } = useStyles({
 		scrollHeight: scroll?.y,
@@ -22,7 +22,7 @@ function DelightfulTable<D extends AnyObject = AnyObject>({
 		<Table<D>
 			className={styles.table}
 			loading={
-				typeof loading === "object" ? loading : { spinning: loading, ...magicSpinProps }
+				typeof loading === "object" ? loading : { spinning: loading, ...delightfulSpinProps }
 			}
 			scroll={{ x: "max-content", ...scroll }}
 			{...props}

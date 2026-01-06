@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_contact_departments')) {
+        if (Schema::hasTable('delightful_contact_departments')) {
             return;
         }
-        Schema::create('magic_contact_departments', static function (Blueprint $table) {
+        Schema::create('delightful_contact_departments', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('department_id', 64)->comment('麦吉部门id');
             $table->string('parent_department_id', 64)->comment('父部门的部门 ID')->nullable();
@@ -48,6 +48,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_contact_departments');
+        Schema::dropIfExists('delightful_contact_departments');
     }
 };

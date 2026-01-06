@@ -41,7 +41,7 @@ export function useSupportLanguageOptions(includeAuto = true) {
 			includeAuto
 				? [
 						{
-							label: i18next.t("setting.languages.auto", { ns: "magicFlow" }),
+							label: i18next.t("setting.languages.auto", { ns: "delightfulFlow" }),
 							value: "auto",
 						},
 				  ]

@@ -49,8 +49,8 @@ export const genTokenMap = (
 				colorTextDisabled: colorScales.grey[5],
 				colorBgElevated: colorUsages.bg[2],
 				// Add custom theme variables
-				magicColorScales: colorScales,
-				magicColorUsages: colorUsages,
+				delightfulColorScales: colorScales,
+				delightfulColorUsages: colorUsages,
 				titleBarHeight: 44,
 			}
 		case "auto":
@@ -74,8 +74,8 @@ export const genTokenMap = (
 				colorTextDisabled: colorScales.grey[5],
 				colorBgElevated: colorUsages.bg[2],
 				// Add custom theme variables
-				magicColorScales: colorScales,
-				magicColorUsages: colorUsages,
+				delightfulColorScales: colorScales,
+				delightfulColorUsages: colorUsages,
 				titleBarHeight: 44,
 			}
 	}

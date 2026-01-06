@@ -15,19 +15,19 @@ use Hyperf\Di\Annotation\Inject;
 class MCPBeDelightfulProjectSettingAdminApi extends AbstractMCPAdminApi
 {
     #[Inject]
-    protected DelightfulUserSettingAppService $magicUserSettingAppService;
+    protected DelightfulUserSettingAppService $delightfulUserSettingAppService;
 
     public function save(string $projectId)
     {
         $authorization = $this->getAuthorization();
-        $userSetting = $this->magicUserSettingAppService->saveProjectMcpServerConfig($authorization, $projectId, $this->request->input('servers', []));
+        $userSetting = $this->delightfulUserSettingAppService->saveProjectMcpServerConfig($authorization, $projectId, $this->request->input('servers', []));
         return $userSetting->getValue();
     }
 
     public function get(string $projectId)
     {
         $authorization = $this->getAuthorization();
-        $userSetting = $this->magicUserSettingAppService->getProjectMcpServerConfig($authorization, $projectId);
+        $userSetting = $this->delightfulUserSettingAppService->getProjectMcpServerConfig($authorization, $projectId);
         if ($userSetting) {
             return $userSetting->getValue();
         }

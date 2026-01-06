@@ -15,14 +15,14 @@ describe("DelightfulButton", () => {
 
 	it("应该支持不同的按钮类型", () => {
 		const { rerender } = renderWithTheme(<DelightfulButton type="primary">主要按钮</DelightfulButton>)
-		expect(screen.getByRole("button")).toHaveClass("magic-btn-primary")
+		expect(screen.getByRole("button")).toHaveClass("delightful-btn-primary")
 
 		rerender(
 			<DelightfulThemeProvider theme="light">
 				<DelightfulButton type="dashed">虚线按钮</DelightfulButton>
 			</DelightfulThemeProvider>,
 		)
-		expect(screen.getByRole("button")).toHaveClass("magic-btn-dashed")
+		expect(screen.getByRole("button")).toHaveClass("delightful-btn-dashed")
 	})
 
 	it("应该支持点击事件", () => {
@@ -40,7 +40,7 @@ describe("DelightfulButton", () => {
 
 	it("应该支持加载状态", () => {
 		renderWithTheme(<DelightfulButton loading>加载按钮</DelightfulButton>)
-		expect(screen.getByRole("button")).toHaveClass("magic-btn-loading")
+		expect(screen.getByRole("button")).toHaveClass("delightful-btn-loading")
 	})
 
 	it("应该支持自定义样式类名", () => {

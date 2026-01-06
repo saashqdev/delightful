@@ -3,38 +3,38 @@
 exports[`DelightfulSpin > 快照测试 > 加载状态快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r2"
+    class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r2"
   >
     <div>
       <div
         aria-busy="true"
         aria-live="polite"
-        class="magic-spin magic-spin-spinning acss-sxthw7 css-dev-only-do-not-override-yotw4n css-var-r2"
+        class="delightful-spin delightful-spin-spinning acss-sxthw7 css-dev-only-do-not-override-yotw4n css-var-r2"
       >
         <span
-          class="magic-spin-dot-holder"
+          class="delightful-spin-dot-holder"
         >
           <span
-            class="magic-spin-dot magic-spin-dot-spin"
+            class="delightful-spin-dot delightful-spin-dot-spin"
           >
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
           </span>
         </span>
       </div>
     </div>
     <div
-      class="magic-spin-container magic-spin-blur"
+      class="delightful-spin-container delightful-spin-blur"
     >
       <div>
         内容区域
@@ -47,38 +47,38 @@ exports[`DelightfulSpin > 快照测试 > 加载状态快照 1`] = `
 exports[`DelightfulSpin > 快照测试 > 基础加载器快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r1"
+    class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r1"
   >
     <div>
       <div
         aria-busy="true"
         aria-live="polite"
-        class="magic-spin magic-spin-spinning acss-sxthw7 css-dev-only-do-not-override-yotw4n css-var-r1"
+        class="delightful-spin delightful-spin-spinning acss-sxthw7 css-dev-only-do-not-override-yotw4n css-var-r1"
       >
         <span
-          class="magic-spin-dot-holder"
+          class="delightful-spin-dot-holder"
         >
           <span
-            class="magic-spin-dot magic-spin-dot-spin"
+            class="delightful-spin-dot delightful-spin-dot-spin"
           >
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
           </span>
         </span>
       </div>
     </div>
     <div
-      class="magic-spin-container magic-spin-blur"
+      class="delightful-spin-container delightful-spin-blur"
     >
       <div>
         内容区域
@@ -91,38 +91,38 @@ exports[`DelightfulSpin > 快照测试 > 基础加载器快照 1`] = `
 exports[`DelightfulSpin > 快照测试 > 大尺寸加载器快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r5"
+    class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r5"
   >
     <div>
       <div
         aria-busy="true"
         aria-live="polite"
-        class="magic-spin magic-spin-spinning acss-znmur6 css-dev-only-do-not-override-yotw4n css-var-r5"
+        class="delightful-spin delightful-spin-spinning acss-znmur6 css-dev-only-do-not-override-yotw4n css-var-r5"
       >
         <span
-          class="magic-spin-dot-holder"
+          class="delightful-spin-dot-holder"
         >
           <span
-            class="magic-spin-dot magic-spin-dot-spin"
+            class="delightful-spin-dot delightful-spin-dot-spin"
           >
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
           </span>
         </span>
       </div>
     </div>
     <div
-      class="magic-spin-container magic-spin-blur"
+      class="delightful-spin-container delightful-spin-blur"
     >
       <div>
         内容区域
@@ -135,38 +135,38 @@ exports[`DelightfulSpin > 快照测试 > 大尺寸加载器快照 1`] = `
 exports[`DelightfulSpin > 快照测试 > 小尺寸加载器快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r4"
+    class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r4"
   >
     <div>
       <div
         aria-busy="true"
         aria-live="polite"
-        class="magic-spin magic-spin-spinning acss-12hgqwl css-dev-only-do-not-override-yotw4n css-var-r4"
+        class="delightful-spin delightful-spin-spinning acss-12hgqwl css-dev-only-do-not-override-yotw4n css-var-r4"
       >
         <span
-          class="magic-spin-dot-holder"
+          class="delightful-spin-dot-holder"
         >
           <span
-            class="magic-spin-dot magic-spin-dot-spin"
+            class="delightful-spin-dot delightful-spin-dot-spin"
           >
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
           </span>
         </span>
       </div>
     </div>
     <div
-      class="magic-spin-container magic-spin-blur"
+      class="delightful-spin-container delightful-spin-blur"
     >
       <div>
         内容区域
@@ -179,43 +179,43 @@ exports[`DelightfulSpin > 快照测试 > 小尺寸加载器快照 1`] = `
 exports[`DelightfulSpin > 快照测试 > 带提示文字快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r3"
+    class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r3"
   >
     <div>
       <div
         aria-busy="true"
         aria-live="polite"
-        class="magic-spin magic-spin-spinning magic-spin-show-text acss-sxthw7 css-dev-only-do-not-override-yotw4n css-var-r3"
+        class="delightful-spin delightful-spin-spinning delightful-spin-show-text acss-sxthw7 css-dev-only-do-not-override-yotw4n css-var-r3"
       >
         <span
-          class="magic-spin-dot-holder"
+          class="delightful-spin-dot-holder"
         >
           <span
-            class="magic-spin-dot magic-spin-dot-spin"
+            class="delightful-spin-dot delightful-spin-dot-spin"
           >
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
             <i
-              class="magic-spin-dot-item"
+              class="delightful-spin-dot-item"
             />
           </span>
         </span>
         <div
-          class="magic-spin-text"
+          class="delightful-spin-text"
         >
           加载中...
         </div>
       </div>
     </div>
     <div
-      class="magic-spin-container magic-spin-blur"
+      class="delightful-spin-container delightful-spin-blur"
     >
       <div>
         内容区域
@@ -228,10 +228,10 @@ exports[`DelightfulSpin > 快照测试 > 带提示文字快照 1`] = `
 exports[`DelightfulSpin > 快照测试 > 延迟加载快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r6"
+    class="delightful-spin-nested-loading acss-1tvuebw css-dev-only-do-not-override-yotw4n css-var-r6"
   >
     <div
-      class="magic-spin-container"
+      class="delightful-spin-container"
     >
       <div>
         内容区域
@@ -246,25 +246,25 @@ exports[`DelightfulSpin > 快照测试 > 独立加载器快照 1`] = `
   <div
     aria-busy="true"
     aria-live="polite"
-    class="magic-spin magic-spin-spinning acss-sxthw7 css-dev-only-do-not-override-yotw4n css-var-r7"
+    class="delightful-spin delightful-spin-spinning acss-sxthw7 css-dev-only-do-not-override-yotw4n css-var-r7"
   >
     <span
-      class="magic-spin-dot-holder"
+      class="delightful-spin-dot-holder"
     >
       <span
-        class="magic-spin-dot magic-spin-dot-spin"
+        class="delightful-spin-dot delightful-spin-dot-spin"
       >
         <i
-          class="magic-spin-dot-item"
+          class="delightful-spin-dot-item"
         />
         <i
-          class="magic-spin-dot-item"
+          class="delightful-spin-dot-item"
         />
         <i
-          class="magic-spin-dot-item"
+          class="delightful-spin-dot-item"
         />
         <i
-          class="magic-spin-dot-item"
+          class="delightful-spin-dot-item"
         />
       </span>
     </span>

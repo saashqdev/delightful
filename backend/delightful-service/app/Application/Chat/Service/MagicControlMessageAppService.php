@@ -32,9 +32,9 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         protected readonly DelightfulTopicDomainService $topicDomainService,
         protected readonly DelightfulConversationDomainService $conversationDomainService,
         protected readonly DelightfulGroupDomainService $groupDomainService,
-        protected DelightfulSeqDomainService $magicSeqDomainService
+        protected DelightfulSeqDomainService $delightfulSeqDomainService
     ) {
-        parent::__construct($magicSeqDomainService);
+        parent::__construct($delightfulSeqDomainService);
     }
 
     /**
@@ -78,25 +78,25 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
      * 比如根据发件方的seq,为收件方生成seq,投递seq.
      * @throws Throwable
      */
-    public function dispatchMQControlMessage(DelightfulSeqEntity $magicSeqEntity): void
+    public function dispatchMQControlMessage(DelightfulSeqEntity $delightfulSeqEntity): void
     {
-        $controlMessageType = $magicSeqEntity->getSeqType();
+        $controlMessageType = $delightfulSeqEntity->getSeqType();
         switch ($controlMessageType) {
             case ControlMessageType::SeenMessages:
             case ControlMessageType::ReadMessage:
                 // 已读回执等场景,根据一条控制消息,生成其他人的seq.
-                $this->controlDomainService->handlerMQReceiptSeq($magicSeqEntity);
+                $this->controlDomainService->handlerMQReceiptSeq($delightfulSeqEntity);
                 break;
             case ControlMessageType::RevokeMessage:
             case ControlMessageType::EditMessage:
                 // 撤回消息,编辑消息等场景
-                $this->controlDomainService->handlerMQUserSelfMessageChange($magicSeqEntity);
+                $this->controlDomainService->handlerMQUserSelfMessageChange($delightfulSeqEntity);
                 break;
             case ControlMessageType::CreateTopic:
             case ControlMessageType::UpdateTopic:
             case ControlMessageType::DeleteTopic:
                 // 话题操作
-                $this->handlerMQTopicControlMessage($magicSeqEntity);
+                $this->handlerMQTopicControlMessage($delightfulSeqEntity);
                 break;
             case ControlMessageType::GroupCreate:
             case ControlMessageType::GroupUsersAdd:
@@ -105,7 +105,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             case ControlMessageType::GroupUpdate:
             case ControlMessageType::GroupOwnerChange:
                 // 群操作
-                $this->groupDomainService->handlerMQGroupUserChangeSeq($magicSeqEntity);
+                $this->groupDomainService->handlerMQGroupUserChangeSeq($delightfulSeqEntity);
                 break;
         }
     }
@@ -133,9 +133,9 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 
-    private function handlerMQTopicControlMessage(DelightfulSeqEntity $magicSeqEntity): void
+    private function handlerMQTopicControlMessage(DelightfulSeqEntity $delightfulSeqEntity): void
     {
-        $receiveSeqEntity = $this->topicDomainService->dispatchMQTopicOperation($magicSeqEntity);
+        $receiveSeqEntity = $this->topicDomainService->dispatchMQTopicOperation($delightfulSeqEntity);
         // 异步推送给收件方,有新的话题
         $receiveSeqEntity && $this->controlDomainService->pushControlSequence($receiveSeqEntity);
     }

@@ -165,12 +165,12 @@ export namespace FlowDraft {
 		created_at: string
 		modifier: string
 		updated_at: string
-		magic_flow: DelightfulFlow.Flow
+		delightful_flow: DelightfulFlow.Flow
 		creator_info: PlatformItem
 		modifier_info: PlatformItem
 	}
 
-	export type RequestArgs = Partial<Pick<Detail, "name" | "description" | "magic_flow" | "id">>
+	export type RequestArgs = Partial<Pick<Detail, "name" | "description" | "delightful_flow" | "id">>
 
 	export type ListItem = Detail
 }

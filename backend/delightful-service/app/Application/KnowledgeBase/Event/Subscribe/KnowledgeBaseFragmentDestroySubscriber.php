@@ -39,9 +39,9 @@ readonly class KnowledgeBaseFragmentDestroySubscriber implements ListenerInterfa
             return;
         }
 
-        $knowledge = $event->magicFlowKnowledgeEntity;
-        $fragment = $event->magicFlowKnowledgeFragmentEntity;
-        $magicFlowKnowledgeDomainService = $this->container->get(KnowledgeBaseDomainService::class);
+        $knowledge = $event->delightfulFlowKnowledgeEntity;
+        $fragment = $event->delightfulFlowKnowledgeFragmentEntity;
+        $delightfulFlowKnowledgeDomainService = $this->container->get(KnowledgeBaseDomainService::class);
         $knowledgeBaseFragmentDomainService = $this->container->get(KnowledgeBaseFragmentDomainService::class);
         $dataIsolation = KnowledgeBaseDataIsolation::create()->disabled();
 
@@ -58,6 +58,6 @@ readonly class KnowledgeBaseFragmentDestroySubscriber implements ListenerInterfa
             $fragment->setSyncStatus(KnowledgeSyncStatus::DeleteFailed);
             $fragment->setSyncStatusMessage($throwable->getMessage());
         }
-        $magicFlowKnowledgeDomainService->changeSyncStatus($fragment);
+        $delightfulFlowKnowledgeDomainService->changeSyncStatus($fragment);
     }
 }

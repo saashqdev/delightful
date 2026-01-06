@@ -23,14 +23,14 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			width: 100%;
 			&:hover {
 				background-color: ${isDarkMode
-					? token.magicColorScales.grey[1]
-					: token.magicColorScales.grey[0]};
+					? token.delightfulColorScales.grey[1]
+					: token.delightfulColorScales.grey[0]};
 			}
 		`,
 		extra: {},
 		name: css`
 			overflow: hidden;
-			color: ${isDarkMode ? token.magicColorScales.grey[8] : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.text[1]};
 			text-overflow: ellipsis;
 
 			font-size: 14px;
@@ -39,7 +39,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		`,
 		title: css`
 			overflow: hidden;
-			color: ${isDarkMode ? token.magicColorScales.grey[5] : token.magicColorUsages.text[2]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[2]};
 			text-overflow: ellipsis;
 
 			font-size: 12px;

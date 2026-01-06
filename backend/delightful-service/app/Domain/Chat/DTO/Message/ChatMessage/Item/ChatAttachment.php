@@ -17,7 +17,7 @@ class ChatAttachment extends AbstractEntity
 {
     /**
      * 聊天文件需要先上传到 chat 文件服务器，然后才能发送消息.
-     * 这个 id 是 magic_chat_file 表的主键.
+     * 这个 id 是 delightful_chat_file 表的主键.
      */
     protected string $fileId = '';
 

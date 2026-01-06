@@ -6,9 +6,9 @@ This document briefly describes the initialization steps for the Delightful Serv
 
 The system uses the data seeder `seeders/initial_account_and_user_seeder.php` to initialize account and user data, mainly accomplishing the following tasks:
 
-- Create at least 2 human account records in the `magic_contact_accounts` table
+- Create at least 2 human account records in the `delightful_contact_accounts` table
 - Create user data for each account under 2 different organizations
-- Use `App\Infrastructure\Util\IdGenerator` to automatically generate magic_id
+- Use `App\Infrastructure\Util\IdGenerator` to automatically generate delightful_id
 - Implement duplicate data checking to avoid duplicate creation
 
 ## 2. Environment Configuration Initialization

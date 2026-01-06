@@ -12,13 +12,13 @@ DelightfulSegmented 是一个基于 Ant Design Segmented 的增强分段控制�
 ## 安装
 
 ```bash
-# 已包含在 @dtyq/magic-ui 中，无需单独安装
+# 已包含在 @dtyq/delightful-ui 中，无需单独安装
 ```
 
 ## 基本用法
 
 ```tsx
-import { DelightfulSegmented } from "@dtyq/magic-ui"
+import { DelightfulSegmented } from "@dtyq/delightful-ui"
 
 const App = () => {
 	return <DelightfulSegmented options={["每日", "每周", "每月"]} defaultValue="每日" />
@@ -28,7 +28,7 @@ const App = () => {
 ## 处理选项变化
 
 ```tsx
-import { DelightfulSegmented } from "@dtyq/magic-ui"
+import { DelightfulSegmented } from "@dtyq/delightful-ui"
 import { useState } from "react"
 
 const App = () => {
@@ -48,7 +48,7 @@ const App = () => {
 ## 对象类型选项
 
 ```tsx
-import { DelightfulSegmented } from "@dtyq/magic-ui"
+import { DelightfulSegmented } from "@dtyq/delightful-ui"
 
 const App = () => {
 	return (
@@ -67,7 +67,7 @@ const App = () => {
 ## 带图标的选项
 
 ```tsx
-import { DelightfulSegmented } from "@dtyq/magic-ui"
+import { DelightfulSegmented } from "@dtyq/delightful-ui"
 import { AppstoreOutlined, BarsOutlined } from "@ant-design/icons"
 
 const App = () => {
@@ -93,7 +93,7 @@ const App = () => {
 ## 非圆角设计
 
 ```tsx
-import { DelightfulSegmented } from "@dtyq/magic-ui"
+import { DelightfulSegmented } from "@dtyq/delightful-ui"
 
 const App = () => {
 	return <DelightfulSegmented options={["选项一", "选项二", "选项三"]} circle={false} />
@@ -103,7 +103,7 @@ const App = () => {
 ## 禁用状态
 
 ```tsx
-import { DelightfulSegmented } from "@dtyq/magic-ui"
+import { DelightfulSegmented } from "@dtyq/delightful-ui"
 
 const App = () => {
 	return <DelightfulSegmented options={["选项一", "选项二", "选项三"]} disabled={true} />

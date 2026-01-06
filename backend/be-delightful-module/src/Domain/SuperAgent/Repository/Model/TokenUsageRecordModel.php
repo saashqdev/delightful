@@ -14,7 +14,7 @@ class TokenUsageRecordModel extends AbstractModel
 {
     use SoftDeletes;
 
-    protected ?string $table = 'magic_super_agent_token_usage_records';
+    protected ?string $table = 'delightful_super_agent_token_usage_records';
 
     protected string $primaryKey = 'id';
 

@@ -66,7 +66,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             return;
         }
 
-        $magicFlowMessage = new DelightfulFlowMessage(
+        $delightfulFlowMessage = new DelightfulFlowMessage(
             $paramsConfig->getType(),
             $paramsConfig->getContent(),
             $paramsConfig->getLink(),
@@ -74,14 +74,14 @@ class ReplyMessageNodeRunner extends NodeRunner
         );
 
         // 如果是资源类的数据，那么需要提前上传了
-        $links = $magicFlowMessage->getLinks($executionData->getExpressionFieldData());
+        $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
         // 由于里面会进行重命名，所以这里直接获取对应的名称传入进去
         $linkPaths = array_map(function (AbstractAttachment $attachment) {
             return $attachment->getPath();
         }, $attachments);
 
-        $IMResponse = MessageUtil::getIMResponse($magicFlowMessage, $executionData, $linkPaths);
+        $IMResponse = MessageUtil::getIMResponse($delightfulFlowMessage, $executionData, $linkPaths);
         if ($IMResponse === null) {
             return;
         }
@@ -133,8 +133,8 @@ class ReplyMessageNodeRunner extends NodeRunner
             $receiveSeqDTO->setExtra($flowSeqEntity->getExtra()?->getExtraCanCopyData());
             $receiveSeqDTO->setReferMessageId($flowSeqEntity->getMessageId());
         }
-        $magicChatMessageAppService = di(DelightfulChatMessageAppService::class);
-        $magicChatMessageAppService->agentSendMessage(
+        $delightfulChatMessageAppService = di(DelightfulChatMessageAppService::class);
+        $delightfulChatMessageAppService->agentSendMessage(
             aiSeqDTO: $receiveSeqDTO,
             senderUserId: $executionData->getAgentUserId(),
             receiverId: $receiverId,
@@ -196,18 +196,18 @@ class ReplyMessageNodeRunner extends NodeRunner
         $topicConfig = new TopicConfig($routineConfig['topic']['type'] ?? '', ComponentFactory::fastCreate($routineConfig['topic']['name'] ?? []));
 
         $aiUserId = $executionData->getAgentUserId();
-        $magicChatMessageAppService = di(DelightfulChatMessageAppService::class);
+        $delightfulChatMessageAppService = di(DelightfulChatMessageAppService::class);
 
         $parallel = new Parallel(10);
         foreach ($userIds as $userId) {
-            $parallel->add(function () use ($IMResponse, $userId, $aiUserId, $magicChatMessageAppService) {
+            $parallel->add(function () use ($IMResponse, $userId, $aiUserId, $delightfulChatMessageAppService) {
                 $receiveSeqDTO = new DelightfulSeqEntity();
                 $receiveSeqDTO->setContent($IMResponse);
                 $receiveSeqDTO->setSeqType($IMResponse->getMessageTypeEnum());
 
                 // todo 根据开始节点配置的话题来选择话题
 
-                $magicChatMessageAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $userId, IdGenerator::getUniqueId32());
+                $delightfulChatMessageAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $userId, IdGenerator::getUniqueId32());
             });
         }
         $parallel->wait();
@@ -253,7 +253,7 @@ class ReplyMessageNodeRunner extends NodeRunner
 
             FlowEventStreamManager::write($messageStruct->toSteamResponse('message'));
         };
-        $magicStreamTextProcessor = new DelightfulStreamTextProcessor($outputCall);
+        $delightfulStreamTextProcessor = new DelightfulStreamTextProcessor($outputCall);
 
         $reasoning = false;
         $lastChoice = null;
@@ -269,13 +269,13 @@ class ReplyMessageNodeRunner extends NodeRunner
                 $reasoning = false;
             }
 
-            $magicStreamTextProcessor->process($streamContent, [
+            $delightfulStreamTextProcessor->process($streamContent, [
                 'reasoning' => $reasoning,
                 'choice' => $choice,
                 'streamResponse' => $streamResponse,
             ]);
         }
-        $magicStreamTextProcessor->end([
+        $delightfulStreamTextProcessor->end([
             'reasoning' => $reasoning,
             'choice' => $lastChoice,
             'streamResponse' => $streamResponse,
@@ -335,7 +335,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $receiveSeqDTO->setContent($messageContent);
             $chatAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $receiveUserId, $appMessageId, receiverType: ConversationType::User);
         };
-        $magicStreamTextProcessor = new DelightfulStreamTextProcessor($outputCall);
+        $delightfulStreamTextProcessor = new DelightfulStreamTextProcessor($outputCall);
 
         $reasoning = false;
         try {
@@ -350,14 +350,14 @@ class ReplyMessageNodeRunner extends NodeRunner
                     $reasoning = false;
                 }
 
-                $magicStreamTextProcessor->process($streamContent, [
+                $delightfulStreamTextProcessor->process($streamContent, [
                     'streamOptions' => $streamOptions,
                     'receiveSeqDTO' => $receiveSeqDTO,
                     'reasoning' => $reasoning,
                     'streamResponse' => $streamResponse,
                 ]);
             }
-            $magicStreamTextProcessor->end([
+            $delightfulStreamTextProcessor->end([
                 'streamOptions' => $streamOptions,
                 'receiveSeqDTO' => $receiveSeqDTO,
                 'reasoning' => $reasoning,
@@ -445,7 +445,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         // 过滤不合法的用户
         $userIds = array_values(array_unique($userIds));
 
-        return Db::table('magic_contact_users')
+        return Db::table('delightful_contact_users')
             ->whereIn('user_id', $userIds)
             ->pluck('user_id')->toArray();
     }
@@ -453,7 +453,7 @@ class ReplyMessageNodeRunner extends NodeRunner
     private function getUserIdsByDepartmentIds(ExecutionData $executionData, array $departmentIds): array
     {
         // 先粗糙的直连 Db
-        $allDepartments = Db::table('magic_contact_departments')
+        $allDepartments = Db::table('delightful_contact_departments')
             ->select(['department_id', 'parent_department_id', 'name', 'path'])
             ->where('organization_code', '=', $executionData->getDataIsolation()->getCurrentOrganizationCode())
             ->get()->keyBy('department_id')->toArray();
@@ -470,7 +470,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             }
         }
 
-        return Db::table('magic_contact_department_users')
+        return Db::table('delightful_contact_department_users')
             ->whereIn('department_id', $list)
             ->pluck('user_id')->toArray();
     }

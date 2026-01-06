@@ -17,7 +17,7 @@ class DelightfulMessageModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_chat_messages';
+    protected ?string $table = 'delightful_chat_messages';
 
     /**
      * The connection name for the model.
@@ -36,7 +36,7 @@ class DelightfulMessageModel extends Model
         'receive_type',
         'receive_organization_code',
         'app_message_id',
-        'magic_message_id',
+        'delightful_message_id',
         'message_type',
         'content',
         'send_time',

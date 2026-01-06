@@ -24,19 +24,19 @@ class DelightfulFlowKnowledgeAssembler
         return new PageDTO($page->getPage(), $total, $list);
     }
 
-    protected static function createListDTO(KnowledgeBaseEntity $magicFlowKnowledgeEntity, array $users): KnowledgeBaseListDTO
+    protected static function createListDTO(KnowledgeBaseEntity $delightfulFlowKnowledgeEntity, array $users): KnowledgeBaseListDTO
     {
-        $listDTO = new KnowledgeBaseListDTO($magicFlowKnowledgeEntity->toArray());
-        $listDTO->setId($magicFlowKnowledgeEntity->getCode());
-        $listDTO->setCreator($magicFlowKnowledgeEntity->getCreator());
-        $listDTO->setCreatedAt($magicFlowKnowledgeEntity->getCreatedAt());
-        $listDTO->setModifier($magicFlowKnowledgeEntity->getModifier());
-        $listDTO->setUpdatedAt($magicFlowKnowledgeEntity->getUpdatedAt());
-        $listDTO->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowKnowledgeEntity->getCreator()] ?? null, $magicFlowKnowledgeEntity->getCreatedAt()));
-        $listDTO->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowKnowledgeEntity->getModifier()] ?? null, $magicFlowKnowledgeEntity->getUpdatedAt()));
-        $listDTO->setUserOperation($magicFlowKnowledgeEntity->getUserOperation());
-        $listDTO->setExpectedNum($magicFlowKnowledgeEntity->getExpectedNum());
-        $listDTO->setCompletedNum($magicFlowKnowledgeEntity->getCompletedNum());
+        $listDTO = new KnowledgeBaseListDTO($delightfulFlowKnowledgeEntity->toArray());
+        $listDTO->setId($delightfulFlowKnowledgeEntity->getCode());
+        $listDTO->setCreator($delightfulFlowKnowledgeEntity->getCreator());
+        $listDTO->setCreatedAt($delightfulFlowKnowledgeEntity->getCreatedAt());
+        $listDTO->setModifier($delightfulFlowKnowledgeEntity->getModifier());
+        $listDTO->setUpdatedAt($delightfulFlowKnowledgeEntity->getUpdatedAt());
+        $listDTO->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowKnowledgeEntity->getCreator()] ?? null, $delightfulFlowKnowledgeEntity->getCreatedAt()));
+        $listDTO->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowKnowledgeEntity->getModifier()] ?? null, $delightfulFlowKnowledgeEntity->getUpdatedAt()));
+        $listDTO->setUserOperation($delightfulFlowKnowledgeEntity->getUserOperation());
+        $listDTO->setExpectedNum($delightfulFlowKnowledgeEntity->getExpectedNum());
+        $listDTO->setCompletedNum($delightfulFlowKnowledgeEntity->getCompletedNum());
         return $listDTO;
     }
 }

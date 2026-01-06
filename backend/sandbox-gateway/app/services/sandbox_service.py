@@ -45,7 +45,7 @@ class SandboxService:
         """Initialize sandbox service"""
         try:
             self.docker_client = docker.from_env()
-            self.image_name = settings.super_magic_image_name
+            self.image_name = settings.super_delightful_image_name
             self.qdrant_image_name = settings.qdrant_image_name
             self.running_container_expire_time = settings.running_container_expire_time
             self.exited_container_expire_time = settings.exited_container_expire_time
@@ -217,14 +217,14 @@ class SandboxService:
         Raises:
             ContainerOperationError: When request fails, response format doesn't match expectations, or DELIGHTFUL_GATEWAY_API_KEY is not set
         """
-        magic_gateway_url = os.environ.get("DELIGHTFUL_GATEWAY_BASE_URL")
+        delightful_gateway_url = os.environ.get("DELIGHTFUL_GATEWAY_BASE_URL")
 
-        if not magic_gateway_url:
+        if not delightful_gateway_url:
             logger.info("DELIGHTFUL_GATEWAY_BASE_URL environment variable not set, skipping authentication step")
             return None
 
-        magic_gateway_api_key = os.environ.get("DELIGHTFUL_GATEWAY_API_KEY")
-        if not magic_gateway_api_key:
+        delightful_gateway_api_key = os.environ.get("DELIGHTFUL_GATEWAY_API_KEY")
+        if not delightful_gateway_api_key:
             error_msg = "DELIGHTFUL_GATEWAY_API_KEY environment variable not set, cannot perform authentication"
             logger.error(error_msg)
             raise ContainerOperationError(error_msg)
@@ -232,10 +232,10 @@ class SandboxService:
         try:
             headers = {
                 "X-USER-ID": "user",
-                "X-Gateway-API-Key": magic_gateway_api_key
+                "X-Gateway-API-Key": delightful_gateway_api_key
             }
 
-            auth_url = f"{magic_gateway_url}/auth"
+            auth_url = f"{delightful_gateway_url}/auth"
             logger.info(f"Requesting authentication service: {auth_url}")
 
             async with aiohttp.ClientSession() as session:

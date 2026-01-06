@@ -9,7 +9,7 @@ export const useStyles = createStyles(({ css, isDarkMode, cx, prefixCls, token }
 	const time = cx(css`
 		max-width: 50px;
 		width: fit-content;
-		color: ${token.magicColorUsages.text[3]};
+		color: ${token.delightfulColorUsages.text[3]};
 		text-align: right;
 		white-space: nowrap;
 		overflow-x: hidden;
@@ -21,7 +21,7 @@ export const useStyles = createStyles(({ css, isDarkMode, cx, prefixCls, token }
 	`)
 
 	const moreButton = css`
-			--${prefixCls}-button-text-hover-bg: ${token.magicColorUsages.fill[0]} !important;
+			--${prefixCls}-button-text-hover-bg: ${token.delightfulColorUsages.fill[0]} !important;
 			user-select: none;
 		`
 
@@ -54,12 +54,12 @@ export const useStyles = createStyles(({ css, isDarkMode, cx, prefixCls, token }
 			width: 0px;
 			height: 0px;
 			border-bottom: 8px solid transparent;
-			border-left: 8px solid ${token.magicColorUsages.fill[1]};
+			border-left: 8px solid ${token.delightfulColorUsages.fill[1]};
 		}
 	`
 
 	const extra = cx(css`
-		color: ${isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.text[1]};
+		color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[1]};
 		cursor: pointer;
 		display: none;
 		flex-shrink: 0;
@@ -74,14 +74,14 @@ export const useStyles = createStyles(({ css, isDarkMode, cx, prefixCls, token }
 			border-radius: 8px;
 
 			&.active {
-				background-color: ${token.magicColorUsages.primaryLight.default};
+				background-color: ${token.delightfulColorUsages.primaryLight.default};
 			}
 
 			&:hover {
 				cursor: pointer;
 
 				&:not(.active) {
-					background-color: ${token.magicColorScales.grey[0]};
+					background-color: ${token.delightfulColorScales.grey[0]};
 				}
 
 				.${time} {

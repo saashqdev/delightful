@@ -3,14 +3,14 @@
 <div align="center">
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-<!-- [![Docker Pulls](https://img.shields.io/docker/pulls/dtyq/magic.svg)](https://hub.docker.com/r/dtyq/magic)
-[![GitHub stars](https://img.shields.io/github/stars/dtyq/magic.svg?style=social&label=Star)](https://github.com/saashqdev/delightful/magic) -->
+<!-- [![Docker Pulls](https://img.shields.io/docker/pulls/dtyq/delightful.svg)](https://hub.docker.com/r/dtyq/delightful)
+[![GitHub stars](https://img.shields.io/github/stars/dtyq/delightful.svg?style=social&label=Star)](https://github.com/saashqdev/delightful/delightful) -->
 
 </div>
 
 Delightful is a powerful enterprise-grade AI application innovation engine designed to help developers quickly build and deploy AI applications. It provides a complete development framework, rich toolchain, and best practices, making AI application development simple and efficient.
 
-![flow](https://cdn.letsmagic.cn/static/img/showmagic.jpg)
+![flow](https://cdn.letsdelightful.cn/static/img/showdelightful.jpg)
 
 ## ✨ Features
 
@@ -34,18 +34,18 @@ Delightful is a powerful enterprise-grade AI application innovation engine desig
 #### 2.1 Clone the Project
 
 ```bash
-git clone git@github.com:dtyq/magic.git
-cd magic
+git clone git@github.com:dtyq/delightful.git
+cd delightful
 ```
 
-![git clone magic](https://public-cdn.letsmagic.cn/static/img/git_clone_magic.png)
+![git clone delightful](https://public-cdn.letsdelightful.cn/static/img/git_clone_delightful.png)
 
 #### 2.2. Configuration Files
 
 ##### Main Configuration Files
 - .env: Main environment variables configuration file
-- config/.env_super_magic: Be Delightful service configuration file (if you choose to install)
-- config/.env_magic_gateway: Delightful Gateway configuration file (if you choose to install Be Delightful)
+- config/.env_super_delightful: Be Delightful service configuration file (if you choose to install)
+- config/.env_delightful_gateway: Delightful Gateway configuration file (if you choose to install Be Delightful)
 - config/.env_sandbox_gateway: Sandbox Gateway configuration file (if you choose to install Be Delightful)
 - For macOS/Linux, missing files will be automatically copied during installation; Windows users need to manually copy and modify them
 
@@ -60,13 +60,13 @@ https://docs.bedelightful.ai/en/development/deploy/environment.html
 
 ```bash
 ### To use Be Delightful services, copy the following files:
-sudo cp config/.env_super_magic.example config/.env_super_magic
-sudo cp config/.env_magic_gateway.example config/.env_magic_gateway
+sudo cp config/.env_super_delightful.example config/.env_super_delightful
+sudo cp config/.env_delightful_gateway.example config/.env_delightful_gateway
 sudo cp config/.env_sandbox_gateway.example config/.env_sandbox_gateway
 ```
 
 ##### Be Delightful Environment Variables Configuration Reference:
-https://docs.bedelightful.ai/en/development/deploy/super-magic.html
+https://docs.bedelightful.ai/en/development/deploy/super-delightful.html
 
 ##### Configure IP (Optional)
 For remote server deployment, edit the .env file and replace localhost with your server IP in the following entries:
@@ -76,11 +76,11 @@ DELIGHTFUL_SERVICE_BASE_URL=http://<server_IP>:9501
 ```
 
 If you choose to install Be Delightful service, ensure the following configuration files exist:
-- config/.env_super_magic
-- config/.env_magic_gateway
+- config/.env_super_delightful
+- config/.env_delightful_gateway
 - config/.env_sandbox_gateway
 
-If config/.env_super_magic doesn't exist but config/.env_super_magic.example does, follow the prompts to copy and edit the file.
+If config/.env_super_delightful doesn't exist but config/.env_super_delightful.example does, follow the prompts to copy and edit the file.
 
 #### 2.3. Starting Services on macOS/Linux
 
@@ -88,16 +88,16 @@ If config/.env_super_magic doesn't exist but config/.env_super_magic.example doe
 Run the installation script:
 
 ```bash
-sudo ./bin/magic.sh start
+sudo ./bin/delightful.sh start
 ```
 
 ##### Windows
-Windows users can skip the magic.sh script and use docker compose commands directly:
+Windows users can skip the delightful.sh script and use docker compose commands directly:
 Alternatively, you can download the Git [GUI tool](https://git-scm.com/downloads/win) for an installation experience similar to Mac/Linux.
 
 ```bash
 # Create necessary network
-docker network create magic-sandbox-network
+docker network create delightful-sandbox-network
 
 # Start basic services
 docker compose up
@@ -106,7 +106,7 @@ docker compose up
 To start Be Delightful related services:
 
 ```bash
-docker compose --profile magic-gateway --profile sandbox-gateway up
+docker compose --profile delightful-gateway --profile sandbox-gateway up
 ```
 
 #### 2.4. Installation Process Guide
@@ -117,25 +117,25 @@ The script will guide you through the following steps:
 ###### Language Selection
 - Choose 1 for English
 - Choose 2 for Chinese
-![Language Selection](https://public-cdn.letsmagic.cn/static/img/chose_langugae.png)
+![Language Selection](https://public-cdn.letsdelightful.cn/static/img/chose_langugae.png)
 
 ###### Deployment Method Selection
 - Choose 1 for local computer deployment (using default localhost configuration)
 - Choose 2 for remote server deployment (will detect public IP and ask if you want to use it)
-![Deployment Method Selection](https://public-cdn.letsmagic.cn/static/img/chose_development_method.png)
+![Deployment Method Selection](https://public-cdn.letsdelightful.cn/static/img/chose_development_method.png)
 
-- Note: The script will check if magic-sandbox-network has been created locally. If not, it will automatically execute:
+- Note: The script will check if delightful-sandbox-network has been created locally. If not, it will automatically execute:
 ```bash
-docker network create magic-sandbox-network
+docker network create delightful-sandbox-network
 ```
 
 ###### Be Delightful Service Installation
 - Choose 1 to install Be Delightful service (requires pre-configuration of files in the config/ directory)
 - Choose 2 to not install Be Delightful service
-![Be Delightful Service Installation](https://public-cdn.letsmagic.cn/static/img/super_magic_service_install.png)
+![Be Delightful Service Installation](https://public-cdn.letsdelightful.cn/static/img/super_delightful_service_install.png)
 
 #### 2.5 First Run
-After the first run, the system will create a bin/magic.lock file (macOS/Linux), and subsequent startups will skip the installation configuration process.
+After the first run, the system will create a bin/delightful.lock file (macOS/Linux), and subsequent startups will skip the installation configuration process.
 
 ### III. Usage
 
@@ -143,7 +143,7 @@ After the first run, the system will create a bin/magic.lock file (macOS/Linux),
 
 ##### macOS/Linux
 ```bash
-sudo ./bin/magic.sh [command]
+sudo ./bin/delightful.sh [command]
 ```
 
 Available commands:
@@ -153,8 +153,8 @@ Available commands:
 - restart: Restart all services
 - status: Display service status
 - logs: Display service logs
-- super-magic: Start only Be Delightful service (foreground)
-- super-magic-daemon: Start only Be Delightful service (background)
+- super-delightful: Start only Be Delightful service (foreground)
+- super-delightful-daemon: Start only Be Delightful service (background)
 - help: Display help information
 
 ##### Windows
@@ -180,10 +180,10 @@ docker compose ps
 docker compose logs -f
 
 # Use Be Delightful service (foreground)
-docker compose --profile magic-gateway --profile sandbox-gateway up
+docker compose --profile delightful-gateway --profile sandbox-gateway up
 
 # Use Be Delightful service (background)
-docker compose --profile magic-gateway --profile sandbox-gateway up -d
+docker compose --profile delightful-gateway --profile sandbox-gateway up -d
 ```
 
 #### 3.2 Examples
@@ -191,7 +191,7 @@ docker compose --profile magic-gateway --profile sandbox-gateway up -d
 ##### Start Services
 macOS/Linux:
 ```bash
-./bin/magic.sh start
+./bin/delightful.sh start
 ```
 
 Windows:
@@ -202,7 +202,7 @@ docker compose up
 ##### Start Services in Background
 macOS/Linux:
 ```bash
-./bin/magic.sh daemon
+./bin/delightful.sh daemon
 ```
 
 Windows:
@@ -213,7 +213,7 @@ docker compose up -d
 ##### Check Service Status
 macOS/Linux:
 ```bash
-./bin/magic.sh status
+./bin/delightful.sh status
 ```
 
 Windows:
@@ -224,7 +224,7 @@ docker compose ps
 ##### View Logs
 macOS/Linux:
 ```bash
-./bin/magic.sh logs
+./bin/delightful.sh logs
 ```
 
 Windows:
@@ -237,10 +237,10 @@ docker compose logs -f
 ##### macOS
 1. Visit https://docs.docker.com/desktop/install/mac-install/
 2. Download and install Docker Desktop for Mac
-![Download and install Docker Desktop for Mac](https://public-cdn.letsmagic.cn/static/img/install_docker_desktop_for_mac.png)
+![Download and install Docker Desktop for Mac](https://public-cdn.letsdelightful.cn/static/img/install_docker_desktop_for_mac.png)
 
 3. Launch the Docker Desktop application
-![Launch the Docker Desktop application](https://public-cdn.letsmagic.cn/static/img/start_docker_desktop_application.png)
+![Launch the Docker Desktop application](https://public-cdn.letsdelightful.cn/static/img/start_docker_desktop_application.png)
 
 ##### Linux
 1. Visit https://docs.docker.com/engine/install/
@@ -261,11 +261,11 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 ```
-   ![](https://public-cdn.letsmagic.cn/static/img/ubuntu_system_apt_get_update.png)
+   ![](https://public-cdn.letsdelightful.cn/static/img/ubuntu_system_apt_get_update.png)
 ```bash
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
-   ![](https://public-cdn.letsmagic.cn/static/img/ubuntu_system_apt_get_install_docker.png)
+   ![](https://public-cdn.letsdelightful.cn/static/img/ubuntu_system_apt_get_install_docker.png)
 
 3. Start Docker service after installation:
 ```bash
@@ -275,7 +275,7 @@ sudo systemctl start docker
 ##### Windows
 1. Visit https://docs.docker.com/desktop/install/windows-install/
 2. Download and install Docker Desktop for Windows
-![Download and install Docker Desktop for Windows](https://public-cdn.letsmagic.cn/static/img/download_docker_desktop_for_windows.png)
+![Download and install Docker Desktop for Windows](https://public-cdn.letsdelightful.cn/static/img/download_docker_desktop_for_windows.png)
 
 3. Launch the Docker Desktop application
 4. Make sure WSL 2 backend is enabled in settings
@@ -307,10 +307,10 @@ sudo systemctl start docker
    - Check if Windows Firewall is blocking Docker network traffic
 
 6. **Log Viewing**
-   - For super-magic issues, check container logs starting with sandbox-agent
-   - For API issues, check magic-service container logs
-   - For frontend UI issues, check magic-web container logs
-   - For cross-origin and other network issues, check magic-caddy container logs
+   - For super-delightful issues, check container logs starting with sandbox-agent
+   - For API issues, check delightful-service container logs
+   - For frontend UI issues, check delightful-web container logs
+   - For cross-origin and other network issues, check delightful-caddy container logs
 
 ### V. Uninstallation
 
@@ -320,7 +320,7 @@ To uninstall Delightful system:
 
    macOS/Linux:
    ```bash
-   ./bin/magic.sh stop
+   ./bin/delightful.sh stop
    ```
 
    Windows:
@@ -330,14 +330,14 @@ To uninstall Delightful system:
 
 2. Remove Docker network (if needed)
    ```bash
-   docker network rm magic-sandbox-network
+   docker network rm delightful-sandbox-network
    ```
 
 3. Delete persistent file directory ./volumes
 
 ## 📚 Documentation
 
-For detailed documentation, please visit [Delightful Documentation Center](http://docs.letsmagic.cn/).
+For detailed documentation, please visit [Delightful Documentation Center](http://docs.letsdelightful.cn/).
 
 ## 🤝 Contribution
 
@@ -351,7 +351,7 @@ We welcome contributions in various forms, including but not limited to:
 ## 📞 Contact Us
 
 - Email: bd@dtyq.com
-- Website: https://www.letsmagic.cn
+- Website: https://www.letsdelightful.cn
 
 ## 🙏 Acknowledgements
 
@@ -359,6 +359,6 @@ Thanks to all developers who have contributed to Delightful!
 
 <div align="center">
 
-[![Star History Chart](https://api.star-history.com/svg?repos=dtyq/magic&type=Date)](https://star-history.com/#dtyq/magic&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=dtyq/delightful&type=Date)](https://star-history.com/#dtyq/delightful&Date)
 
 </div>

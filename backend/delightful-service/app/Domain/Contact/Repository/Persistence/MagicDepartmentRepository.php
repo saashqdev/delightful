@@ -106,12 +106,12 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     public function getSubDepartmentsByLevel(int $level, string $organizationCode, int $depth, int $size, int $offset): DepartmentsPageResponseDTO
     {
         $departments = $this->getSubDepartmentsByLevelCache($level, $organizationCode, $depth, $size, $offset);
-        $magicDepartmentEntities = $this->getDepartmentsEntity($departments);
+        $delightfulDepartmentEntities = $this->getDepartmentsEntity($departments);
         // 下一级子部门有不可预测的数量，因此只要返回数量与limit一致，就认为有下一页
-        $hasMore = count($magicDepartmentEntities) === $size;
+        $hasMore = count($delightfulDepartmentEntities) === $size;
         $pageToken = $hasMore ? (string) ($offset + $size) : '';
         return new DepartmentsPageResponseDTO([
-            'items' => $magicDepartmentEntities,
+            'items' => $delightfulDepartmentEntities,
             'has_more' => $hasMore,
             'page_token' => $pageToken,
         ]);
@@ -187,10 +187,10 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
      * 获取部门的所有子部门的成员总数.
      * 使用自旋锁避免并发，一次性查询所有部门数据并缓存到 Redis.
      */
-    public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $magicDepartmentEntity): int
+    public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int
     {
-        $organizationCode = $magicDepartmentEntity->getOrganizationCode();
-        $departmentId = $magicDepartmentEntity->getDepartmentId();
+        $organizationCode = $delightfulDepartmentEntity->getOrganizationCode();
+        $departmentId = $delightfulDepartmentEntity->getDepartmentId();
 
         // 先尝试从 Redis 缓存获取
         $cacheKey = sprintf('department_employee_sum:%s', $organizationCode);
@@ -232,30 +232,30 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * @param DelightfulDepartmentEntity[] $magicDepartmentsDTO
+     * @param DelightfulDepartmentEntity[] $delightfulDepartmentsDTO
      * @return DelightfulDepartmentEntity[]
      */
-    public function createDepartments(array $magicDepartmentsDTO): array
+    public function createDepartments(array $delightfulDepartmentsDTO): array
     {
         $time = date('Y-m-d H:i:s');
         $departments = [];
-        foreach ($magicDepartmentsDTO as $magicDepartmentDTO) {
-            if (empty($magicDepartmentDTO->getId())) {
+        foreach ($delightfulDepartmentsDTO as $delightfulDepartmentDTO) {
+            if (empty($delightfulDepartmentDTO->getId())) {
                 $department['id'] = (string) IdGenerator::getSnowId();
-                $magicDepartmentDTO->setId($department['id']);
+                $delightfulDepartmentDTO->setId($department['id']);
             }
-            if (empty($magicDepartmentDTO->getCreatedAt())) {
-                $magicDepartmentDTO->setCreatedAt($time);
+            if (empty($delightfulDepartmentDTO->getCreatedAt())) {
+                $delightfulDepartmentDTO->setCreatedAt($time);
             }
-            if (empty($magicDepartmentDTO->getUpdatedAt())) {
-                $magicDepartmentDTO->setUpdatedAt($time);
+            if (empty($delightfulDepartmentDTO->getUpdatedAt())) {
+                $delightfulDepartmentDTO->setUpdatedAt($time);
             }
-            $department = $magicDepartmentDTO->toArray();
+            $department = $delightfulDepartmentDTO->toArray();
             unset($department['has_child']);
             $departments[] = $department;
         }
         $this->model::query()->insert($departments);
-        return $magicDepartmentsDTO;
+        return $delightfulDepartmentsDTO;
     }
 
     public function updateDepartment(string $departmentId, array $data, string $organizationCode): int

@@ -21,8 +21,8 @@ interface AccountActionsProps {
 
 const useStyles = createStyles(({ token, css, isDarkMode }) => {
 	const backgroundColor = isDarkMode
-		? token.magicColorScales.grey[0]
-		: token.magicColorScales.white
+		? token.delightfulColorScales.grey[0]
+		: token.delightfulColorScales.white
 
 	return {
 		container: {
@@ -96,23 +96,23 @@ export default observer(function AccountActions({
 			if (accounts?.length > 1) {
 				const info = userStore.user.userInfo
 				const otherAccount = accounts.filter(
-					(account) => account.magic_id !== info?.magic_id,
+					(account) => account.delightful_id !== info?.delightful_id,
 				)?.[0]
 
 				const targetOrganization = otherAccount?.organizations.find(
-					(org) => org.magic_organization_code === otherAccount?.organizationCode,
+					(org) => org.delightful_organization_code === otherAccount?.organizationCode,
 				)
 
 				accountSwitch(
-					targetOrganization?.magic_id ?? "",
-					targetOrganization?.magic_id ?? "",
-					targetOrganization?.magic_organization_code ?? "",
+					targetOrganization?.delightful_id ?? "",
+					targetOrganization?.delightful_id ?? "",
+					targetOrganization?.delightful_organization_code ?? "",
 				).catch(console.error)
 
-				if (info?.magic_id) {
-					await accountLogout(info?.magic_id)
+				if (info?.delightful_id) {
+					await accountLogout(info?.delightful_id)
 					/** 广播删除账号 */
-					BroadcastChannelSender.deleteAccount(info?.magic_id, { navigateToLogin: false })
+					BroadcastChannelSender.deleteAccount(info?.delightful_id, { navigateToLogin: false })
 				}
 			} else {
 				await accountLogout()

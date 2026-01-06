@@ -15,17 +15,17 @@ export const useStyles = createStyles(
 			line-height: 22px;
 			user-select: none;
 			background-color: ${isDarkMode
-				? token.magicColorUsages.primaryLight.default
-				: token.magicColorScales.brand[1]};
+				? token.delightfulColorUsages.primaryLight.default
+				: token.delightfulColorScales.brand[1]};
 			color: ${token.colorPrimary};
 		`,
 
 		select: css`
-		--${prefixCls}-select-selector-bg: ${isDarkMode ? token.magicColorUsages.primaryLight.default : token.magicColorScales.brand[1]} !important;
+		--${prefixCls}-select-selector-bg: ${isDarkMode ? token.delightfulColorUsages.primaryLight.default : token.delightfulColorScales.brand[1]} !important;
 		${
 			inSubSider
 				? `--${prefixCls}-color-bg-container-disabled: transparent;`
-				: `--${prefixCls}-color-bg-container-disabled: ${isDarkMode ? token.magicColorUsages.primaryLight.default : token.magicColorScales.brand[1]}!important;`
+				: `--${prefixCls}-color-bg-container-disabled: ${isDarkMode ? token.delightfulColorUsages.primaryLight.default : token.delightfulColorScales.brand[1]}!important;`
 		}
     ${
 		inSubSider
@@ -83,8 +83,8 @@ export const useStyles = createStyles(
 			font-weight: 400;
 			line-height: 20px;
 			background-color: ${isDarkMode
-				? token.magicColorUsages.primaryLight.default
-				: token.magicColorScales.brand[1]};
+				? token.delightfulColorUsages.primaryLight.default
+				: token.delightfulColorScales.brand[1]};
 			color: ${token.colorTextPlaceholder};
 			user-select: none;
 		`,
@@ -113,8 +113,8 @@ export const useStyles = createStyles(
 				? ""
 				: `background-color: ${
 						isDarkMode
-							? token.magicColorUsages.primaryLight.default
-							: token.magicColorScales.brand[1]
+							? token.delightfulColorUsages.primaryLight.default
+							: token.delightfulColorScales.brand[1]
 					};`}
 			color: ${inSubSider ? "currentColor" : token.colorPrimary};
 			font-size: 14px;

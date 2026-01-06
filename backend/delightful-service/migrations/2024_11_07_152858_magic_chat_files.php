@@ -14,15 +14,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_chat_files')) {
+        if (Schema::hasTable('delightful_chat_files')) {
             return;
         }
-        Schema::create('magic_chat_files', static function (Blueprint $table) {
+        Schema::create('delightful_chat_files', static function (Blueprint $table) {
             $table->bigIncrements('file_id');
             // 上传者的 user_id
             $table->string('user_id', 128)->comment('上传者的user_id');
             // 消息id
-            $table->string('magic_message_id', 64)->comment('消息id');
+            $table->string('delightful_message_id', 64)->comment('消息id');
             // 组织编码
             $table->string('organization_code', 64)->comment('组织编码');
             // 文件key
@@ -30,7 +30,7 @@ return new class extends Migration {
             // 文件大小
             $table->unsignedBigInteger('file_size')->comment('文件大小');
             // 消息id索引
-            $table->index('magic_message_id', 'idx_magic_message_id');
+            $table->index('delightful_message_id', 'idx_delightful_message_id');
             $table->timestamps();
         });
     }

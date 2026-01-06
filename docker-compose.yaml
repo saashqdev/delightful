@@ -2,10 +2,10 @@
 
 services:
   # API service
-  magic-service:
-    image: ghcr.io/dtyq/magic-service:${DELIGHTFUL_SERVICE_TAG-latest}
+  delightful-service:
+    image: ghcr.io/dtyq/delightful-service:${DELIGHTFUL_SERVICE_TAG-latest}
     platform: ${PLATFORM}
-    container_name: magic-service
+    container_name: delightful-service
     #restart: always
     environment:
       type: main
@@ -30,12 +30,12 @@ services:
         limits:
           memory: 4G
     networks:
-      - magic-sandbox-network
+      - delightful-sandbox-network
 
-  magic-service-daemon:
-    image: ghcr.io/dtyq/magic-service:${DELIGHTFUL_SERVICE_TAG-latest}
+  delightful-service-daemon:
+    image: ghcr.io/dtyq/delightful-service:${DELIGHTFUL_SERVICE_TAG-latest}
     platform: ${PLATFORM}
-    container_name: magic-service-daemon
+    container_name: delightful-service-daemon
     #restart: always
     environment:
       type: daemon
@@ -48,11 +48,11 @@ services:
         condition: service_healthy
       rabbitmq:
         condition: service_started
-      magic-service:
+      delightful-service:
         condition: service_started
     volumes:
        - ./volumes/storage/files:/opt/www/storage/files
-       - ./bin/magic-service/daemon-entrypoint.sh:/opt/www/start.sh
+       - ./bin/delightful-service/daemon-entrypoint.sh:/opt/www/start.sh
     env_file:
       - .env
     deploy:
@@ -60,13 +60,13 @@ services:
         limits:
           memory: 4G
     networks:
-      - magic-sandbox-network
+      - delightful-sandbox-network
 
 
   # Web application
-  magic-web:
-    image: ghcr.io/dtyq/magic-web:${DELIGHTFUL_WEB_TAG-latest}
-    container_name: magic-web
+  delightful-web:
+    image: ghcr.io/dtyq/delightful-web:${DELIGHTFUL_WEB_TAG-latest}
+    container_name: delightful-web
     #restart: always
     environment:
       DELIGHTFUL_SOCKET_BASE_URL: ${DELIGHTFUL_SOCKET_BASE_URL}
@@ -79,43 +79,43 @@ services:
     env_file:
       - .env
     networks:
-      - magic-sandbox-network
+      - delightful-sandbox-network
 
   # Be Delightful service
-  super-magic:
-    image: ghcr.io/dtyq/super-magic:${SUPER_DELIGHTFUL_TAG-latest}
-    container_name: super-magic
+  super-delightful:
+    image: ghcr.io/dtyq/super-delightful:${SUPER_DELIGHTFUL_TAG-latest}
+    container_name: super-delightful
     #restart: always
     profiles:
-      - super-magic
+      - super-delightful
     ports:
       - "8002:8002"
     volumes:
       - ./volumes/storage/files:/opt/www/storage/files
       - ./config/config.yaml:/app/config/config.yaml
     env_file:
-      - config/.env_super_magic
+      - config/.env_super_delightful
     networks:
-      - magic-sandbox-network
+      - delightful-sandbox-network
 
   # Delightful gateway service
-  magic-gateway:
-    image: ghcr.io/dtyq/magic-gateway:${DELIGHTFUL_GATEWAY_TAG-latest}
-    container_name: magic-gateway
+  delightful-gateway:
+    image: ghcr.io/dtyq/delightful-gateway:${DELIGHTFUL_GATEWAY_TAG-latest}
+    container_name: delightful-gateway
     #restart: always
     profiles:
-      - magic-gateway
+      - delightful-gateway
     ports:
       - "8001:8001"
     depends_on:
       redis:
         condition: service_started
     volumes:
-      - ./config/.env_magic_gateway:/app/.env
+      - ./config/.env_delightful_gateway:/app/.env
     env_file:
-      - config/.env_magic_gateway
+      - config/.env_delightful_gateway
     networks:
-      - magic-sandbox-network
+      - delightful-sandbox-network
 
   # Sandbox gateway service
   sandbox-gateway:
@@ -129,23 +129,23 @@ services:
     depends_on:
       qdrant:
         condition: service_started
-      magic-gateway:
+      delightful-gateway:
         condition: service_started
     ports:
       - "39003:39003"
     volumes:
-      - ./config/.env_super_magic:/app/.env.agent
+      - ./config/.env_super_delightful:/app/.env.agent
       - ${SANDBOX_DOCKER_RUNTIME}:/var/run/docker.sock
       - ./config/config.yaml:/app/config/config.yaml
     env_file:
       - config/.env_sandbox_gateway
     networks:
-      - magic-sandbox-network
+      - delightful-sandbox-network
 
  # Caddy file service
   caddy:
     image: caddy:2.7-alpine
-    container_name: magic-caddy
+    container_name: delightful-caddy
     restart: always
     ports:
       - "80:80"
@@ -157,7 +157,7 @@ services:
       - ./volumes/caddy/config:/config
     command: caddy run --config /etc/caddy/Caddyfile
     networks:
-      - magic-sandbox-network
+      - delightful-sandbox-network
 
   # MySQL database service
   db:
@@ -181,12 +181,12 @@ services:
     env_file:
       - .env
     networks:
-      - magic-sandbox-network
+      - delightful-sandbox-network
 
   # Redis cache service
   redis:
     image: redis:6-alpine
-    container_name: magic-redis
+    container_name: delightful-redis
     restart: always
     environment:
       REDISCLI_AUTH: ${REDIS_PASSWORD}
@@ -200,13 +200,13 @@ services:
     env_file:
       - .env
     networks:
-      - magic-sandbox-network
+      - delightful-sandbox-network
 
 
   # RabbitMQ message queue service
   rabbitmq:
     image: rabbitmq:4.1-management-alpine
-    container_name: magic-rabbitmq
+    container_name: delightful-rabbitmq
     restart: always
     environment:
       RABBITMQ_DEFAULT_USER: ${AMQP_USER}
@@ -226,12 +226,12 @@ services:
     env_file:
       - .env
     networks:
-      - magic-sandbox-network
+      - delightful-sandbox-network
 
 
   # OpenSearch search engine service
   # opensearch:
-  #   container_name: magic-opensearch
+  #   container_name: delightful-opensearch
   #   image: opensearchproject/opensearch:latest
   #   restart: always
   #   profiles:
@@ -258,7 +258,7 @@ services:
 
   # OpenSearch Dashboards UI
   # opensearch-dashboards:
-  #   container_name: magic-opensearch-dashboards
+  #   container_name: delightful-opensearch-dashboards
   #   image: opensearchproject/opensearch-dashboards:latest
   #   restart: always
   #   profiles:
@@ -278,7 +278,7 @@ services:
   # Qdrant vector database service
   qdrant:
     image: qdrant/qdrant:latest
-    container_name: magic-qdrant
+    container_name: delightful-qdrant
     restart: always
     ports:
       - "6333:6333"
@@ -290,9 +290,9 @@ services:
     env_file:
       - .env
     networks:
-      - magic-sandbox-network
+      - delightful-sandbox-network
 
 networks:
-  magic-sandbox-network:
+  delightful-sandbox-network:
     external: true
     driver: bridge

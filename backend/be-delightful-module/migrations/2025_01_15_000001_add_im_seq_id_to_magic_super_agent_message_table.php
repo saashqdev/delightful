@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_message', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_message', function (Blueprint $table) {
             // Add im_seq_id field for message sequence tracking
             $table->bigInteger('im_seq_id')->nullable()->comment('message sequence ID for message order tracking');
 
@@ -28,7 +28,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_message', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_message', function (Blueprint $table) {
             // Drop indexes first
             $table->dropIndex('idx_im_seq_id');
             // Drop the column

@@ -48,7 +48,7 @@ function AuthenticationProvider({ children }: PropsWithChildren) {
 		const accountIndex = accounts.findIndex((account) => account.access_token === access_token)
 		// 优先获取外部的 deployCode，再从账号体系获取 deployCode 用作兜底
 		const tempToken = clusterCode || accounts?.[accountIndex]?.deployCode
-		const magicOrgSyncStep = loginService.magicOrganizationSyncStep(tempToken as string)
+		const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(tempToken as string)
 		const userSyncStep = loginService.accountSyncStep(tempToken as string)
 		return (
 			Promise.resolve()
@@ -57,7 +57,7 @@ function AuthenticationProvider({ children }: PropsWithChildren) {
 						access_token,
 					} as Login.UserLoginsResponse)
 				})
-				.then(magicOrgSyncStep)
+				.then(delightfulOrgSyncStep)
 				// @ts-ignore
 				.then(loginService.organizationFetchStep)
 				.then(loginService.organizationSyncStep)

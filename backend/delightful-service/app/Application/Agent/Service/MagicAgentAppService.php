@@ -76,7 +76,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $query->setWithLastVersionInfo(true);
 
         // 查询当前具有权限的
-        $data = $this->magicAgentDomainService->queries($query, $page);
+        $data = $this->delightfulAgentDomainService->queries($query, $page);
         $avatars = [];
         foreach ($data['list'] as $agent) {
             $avatars[] = $agent->getAgentAvatar();
@@ -92,35 +92,35 @@ class DelightfulAgentAppService extends AbstractAppService
     /**
      * @param DelightfulUserAuthorization $authorization
      */
-    public function saveAgent(Authenticatable $authorization, DelightfulAgentDTO $magicAgentDTO): DelightfulAgentEntity
+    public function saveAgent(Authenticatable $authorization, DelightfulAgentDTO $delightfulAgentDTO): DelightfulAgentEntity
     {
-        $magicAgentEntity = $magicAgentDTO->toEntity();
-        $magicAgentEntity->setAgentAvatar(FileAssembler::formatPath($magicAgentEntity->getAgentAvatar()));
-        if (empty($magicAgentEntity->getId())) {
-            $magicFlowEntity = new DelightfulFlowEntity();
-            $magicFlowEntity->setName($magicAgentEntity->getAgentName());
-            $magicFlowEntity->setDescription($magicAgentEntity->getAgentDescription());
-            $magicFlowEntity->setIcon($magicAgentEntity->getAgentAvatar());
-            $magicFlowEntity->setType(Type::Main);
-            $magicFlowEntity->setOrganizationCode($magicAgentEntity->getOrganizationCode());
-            $magicFlowEntity->setCreator($magicAgentEntity->getCreatedUid());
-            $flowDataIsolation = new FlowDataIsolation($magicAgentEntity->getOrganizationCode(), $magicAgentEntity->getCreatedUid());
-            $magicFlowEntity = $this->magicFlowDomainService->createByAgent($flowDataIsolation, $magicFlowEntity);
+        $delightfulAgentEntity = $delightfulAgentDTO->toEntity();
+        $delightfulAgentEntity->setAgentAvatar(FileAssembler::formatPath($delightfulAgentEntity->getAgentAvatar()));
+        if (empty($delightfulAgentEntity->getId())) {
+            $delightfulFlowEntity = new DelightfulFlowEntity();
+            $delightfulFlowEntity->setName($delightfulAgentEntity->getAgentName());
+            $delightfulFlowEntity->setDescription($delightfulAgentEntity->getAgentDescription());
+            $delightfulFlowEntity->setIcon($delightfulAgentEntity->getAgentAvatar());
+            $delightfulFlowEntity->setType(Type::Main);
+            $delightfulFlowEntity->setOrganizationCode($delightfulAgentEntity->getOrganizationCode());
+            $delightfulFlowEntity->setCreator($delightfulAgentEntity->getCreatedUid());
+            $flowDataIsolation = new FlowDataIsolation($delightfulAgentEntity->getOrganizationCode(), $delightfulAgentEntity->getCreatedUid());
+            $delightfulFlowEntity = $this->delightfulFlowDomainService->createByAgent($flowDataIsolation, $delightfulFlowEntity);
 
-            $magicAgentEntity->setFlowCode($magicFlowEntity->getCode());
-            $magicAgentEntity->setStatus(DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value);
+            $delightfulAgentEntity->setFlowCode($delightfulFlowEntity->getCode());
+            $delightfulAgentEntity->setStatus(DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value);
         } else {
             // 修改得检查权限
-            $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $magicAgentEntity->getId())->validate('edit', $magicAgentEntity->getId());
+            $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $delightfulAgentEntity->getId())->validate('edit', $delightfulAgentEntity->getId());
         }
 
-        $magicAgentEntity = $this->magicAgentDomainService->saveAgent($magicAgentEntity);
-        $fileLink = $this->fileDomainService->getLink($magicAgentDTO->getCurrentOrganizationCode(), $magicAgentEntity->getAgentAvatar());
+        $delightfulAgentEntity = $this->delightfulAgentDomainService->saveAgent($delightfulAgentEntity);
+        $fileLink = $this->fileDomainService->getLink($delightfulAgentDTO->getCurrentOrganizationCode(), $delightfulAgentEntity->getAgentAvatar());
         if ($fileLink) {
-            $magicAgentEntity->setAgentAvatar($fileLink->getUrl());
+            $delightfulAgentEntity->setAgentAvatar($fileLink->getUrl());
         }
 
-        return $magicAgentEntity;
+        return $delightfulAgentEntity;
     }
 
     // 删除助理
@@ -131,7 +131,7 @@ class DelightfulAgentAppService extends AbstractAppService
     public function deleteAgentById(Authenticatable $authorization, string $id): bool
     {
         $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $id)->validate('d', $id);
-        return $this->magicAgentDomainService->deleteAgentById($id, $authorization->getOrganizationCode());
+        return $this->delightfulAgentDomainService->deleteAgentById($id, $authorization->getOrganizationCode());
     }
 
     // 获取指定用户的助理
@@ -152,7 +152,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
         $pageObj = new Page($page, $pageSize);
 
-        $data = $this->magicAgentDomainService->queries($query, $pageObj);
+        $data = $this->delightfulAgentDomainService->queries($query, $pageObj);
         if (empty($data['list'])) {
             return [
                 'page' => $page,
@@ -166,7 +166,7 @@ class DelightfulAgentAppService extends AbstractAppService
             return $agent->getAgentVersionId();
         }, $data['list']));
 
-        $agentVersions = empty($agentVersionIds) ? [] : $this->magicAgentVersionDomainService->listAgentVersionsByIds($agentVersionIds);
+        $agentVersions = empty($agentVersionIds) ? [] : $this->delightfulAgentVersionDomainService->listAgentVersionsByIds($agentVersionIds);
 
         $result = array_map(function ($agent) use ($agentVersions) {
             $agentData = $agent->toArray();
@@ -194,74 +194,74 @@ class DelightfulAgentAppService extends AbstractAppService
     {
         try {
             // 首先尝试作为 agent_version_id 从已发布版本中获取
-            $magicAgentVersionEntity = $this->magicAgentVersionDomainService->getAgentById($agentVersionId);
+            $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentById($agentVersionId);
         } catch (Throwable $e) {
-            // 如果失败，从 magic_bots 表获取原始助理数据，并转换为 DelightfulAgentVersionEntity（版本号为 null）
+            // 如果失败，从 delightful_bots 表获取原始助理数据，并转换为 DelightfulAgentVersionEntity（版本号为 null）
             try {
-                $magicAgentEntity = $this->magicAgentDomainService->getById($agentVersionId);
-                $magicAgentVersionEntity = $this->convertAgentToAgentVersion($magicAgentEntity);
+                $delightfulAgentEntity = $this->delightfulAgentDomainService->getById($agentVersionId);
+                $delightfulAgentVersionEntity = $this->convertAgentToAgentVersion($delightfulAgentEntity);
             } catch (Throwable) {
                 // 如果都失败，抛出原始异常
                 throw $e;
             }
         }
 
-        $fileLink = $this->fileDomainService->getLink($authorization->getOrganizationCode(), $magicAgentVersionEntity->getAgentAvatar());
+        $fileLink = $this->fileDomainService->getLink($authorization->getOrganizationCode(), $delightfulAgentVersionEntity->getAgentAvatar());
         if ($fileLink !== null) {
-            $magicAgentVersionEntity->setAgentAvatar($fileLink->getUrl());
+            $delightfulAgentVersionEntity->setAgentAvatar($fileLink->getUrl());
         }
 
-        $magicAgentVersionEntity->setInstructs($this->processInstructionsImages($magicAgentVersionEntity->getInstructs(), $magicAgentVersionEntity->getOrganizationCode()));
+        $delightfulAgentVersionEntity->setInstructs($this->processInstructionsImages($delightfulAgentVersionEntity->getInstructs(), $delightfulAgentVersionEntity->getOrganizationCode()));
 
-        return $magicAgentVersionEntity;
+        return $delightfulAgentVersionEntity;
     }
 
     // 获取发布版本的助理,对于用户的
     public function getAgentVersionByIdForUser(string $agentVersionId, DelightfulUserAuthorization $authorization): DelightfulAgentVO
     {
-        $magicAgentVersionEntity = $this->magicAgentVersionDomainService->getAgentById($agentVersionId);
+        $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentById($agentVersionId);
         $organizationCode = $authorization->getOrganizationCode();
 
-        $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $magicAgentVersionEntity->getAgentId())->validate('r', $magicAgentVersionEntity->getAgentId());
+        $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $delightfulAgentVersionEntity->getAgentId())->validate('r', $delightfulAgentVersionEntity->getAgentId());
 
-        $fileLink = $this->fileDomainService->getLink($organizationCode, $magicAgentVersionEntity->getAgentAvatar());
+        $fileLink = $this->fileDomainService->getLink($organizationCode, $delightfulAgentVersionEntity->getAgentAvatar());
         if ($fileLink !== null) {
-            $magicAgentVersionEntity->setAgentAvatar($fileLink->getUrl());
+            $delightfulAgentVersionEntity->setAgentAvatar($fileLink->getUrl());
         }
 
-        $magicAgentVersionEntity->setInstructs($this->processInstructionsImages($magicAgentVersionEntity->getInstructs(), $magicAgentVersionEntity->getOrganizationCode()));
+        $delightfulAgentVersionEntity->setInstructs($this->processInstructionsImages($delightfulAgentVersionEntity->getInstructs(), $delightfulAgentVersionEntity->getOrganizationCode()));
 
-        $magicAgentEntity = $this->magicAgentDomainService->getById($magicAgentVersionEntity->getAgentId());
+        $delightfulAgentEntity = $this->delightfulAgentDomainService->getById($delightfulAgentVersionEntity->getAgentId());
 
-        $magicAgentEntity->setInstructs($this->processInstructionsImages($magicAgentEntity->getInstructs(), $magicAgentEntity->getOrganizationCode()));
-        if ($magicAgentEntity->getStatus() === DelightfulAgentVersionStatus::ENTERPRISE_DISABLED->value) {
+        $delightfulAgentEntity->setInstructs($this->processInstructionsImages($delightfulAgentEntity->getInstructs(), $delightfulAgentEntity->getOrganizationCode()));
+        if ($delightfulAgentEntity->getStatus() === DelightfulAgentVersionStatus::ENTERPRISE_DISABLED->value) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_does_not_exist');
         }
-        $fileLink = $this->fileDomainService->getLink($organizationCode, $magicAgentEntity->getAgentAvatar());
+        $fileLink = $this->fileDomainService->getLink($organizationCode, $delightfulAgentEntity->getAgentAvatar());
         if ($fileLink !== null) {
-            $magicAgentEntity->setAgentAvatar($fileLink->getUrl());
+            $delightfulAgentEntity->setAgentAvatar($fileLink->getUrl());
         }
-        $magicAgentVO = new DelightfulAgentVO();
-        $magicAgentVO->setAgentEntity($magicAgentEntity);
-        $magicAgentVO->setAgentVersionEntity($magicAgentVersionEntity);
-        $createdUid = $magicAgentVersionEntity->getCreatedUid();
-        $magicUserEntity = $this->magicUserDomainService->getUserById($createdUid);
-        if ($magicUserEntity !== null) {
+        $delightfulAgentVO = new DelightfulAgentVO();
+        $delightfulAgentVO->setAgentEntity($delightfulAgentEntity);
+        $delightfulAgentVO->setAgentVersionEntity($delightfulAgentVersionEntity);
+        $createdUid = $delightfulAgentVersionEntity->getCreatedUid();
+        $delightfulUserEntity = $this->delightfulUserDomainService->getUserById($createdUid);
+        if ($delightfulUserEntity !== null) {
             $userDto = new DelightfulUserEntity();
-            $userDto->setAvatarUrl($magicUserEntity->getAvatarUrl());
-            $userDto->setNickname($magicUserEntity->getNickname());
-            $userDto->setUserId($magicUserEntity->getUserId());
-            $magicAgentVO->setDelightfulUserEntity($userDto);
+            $userDto->setAvatarUrl($delightfulUserEntity->getAvatarUrl());
+            $userDto->setNickname($delightfulUserEntity->getNickname());
+            $userDto->setUserId($delightfulUserEntity->getUserId());
+            $delightfulAgentVO->setDelightfulUserEntity($userDto);
         }
         // 根据工作流id获取工作流信息
         $flowDataIsolation = new FlowDataIsolation($authorization->getOrganizationCode(), $authorization->getId());
-        $magicFlowVersionEntity = $this->magicFlowVersionDomainService->show($flowDataIsolation, $magicAgentVersionEntity->getFlowCode(), $magicAgentVersionEntity->getFlowVersion());
-        $magicFlowEntity = $magicFlowVersionEntity->getDelightfulFlow();
+        $delightfulFlowVersionEntity = $this->delightfulFlowVersionDomainService->show($flowDataIsolation, $delightfulAgentVersionEntity->getFlowCode(), $delightfulAgentVersionEntity->getFlowVersion());
+        $delightfulFlowEntity = $delightfulFlowVersionEntity->getDelightfulFlow();
 
-        $magicFlowEntity->setUserOperation($magicAgentEntity->getUserOperation());
-        $magicAgentVO->setDelightfulFlowEntity($magicFlowEntity);
+        $delightfulFlowEntity->setUserOperation($delightfulAgentEntity->getUserOperation());
+        $delightfulAgentVO->setDelightfulFlowEntity($delightfulFlowEntity);
         $friendQueryDTO = new FriendQueryDTO();
-        $friendQueryDTO->setAiCodes([$magicAgentVersionEntity->getFlowCode()]);
+        $friendQueryDTO->setAiCodes([$delightfulAgentVersionEntity->getFlowCode()]);
 
         // 数据隔离处理
         $friendDataIsolation = new ContactDataIsolation();
@@ -269,14 +269,14 @@ class DelightfulAgentAppService extends AbstractAppService
         $friendDataIsolation->setCurrentOrganizationCode($organizationCode);
 
         // 获取用户代理的好友列表
-        $userAgentFriends = $this->magicUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
+        $userAgentFriends = $this->delightfulUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
 
-        $magicAgentVO->setIsAdd(isset($userAgentFriends[$magicAgentVersionEntity->getFlowCode()]));
+        $delightfulAgentVO->setIsAdd(isset($userAgentFriends[$delightfulAgentVersionEntity->getFlowCode()]));
 
-        $visibilityConfig = $magicAgentVersionEntity->getVisibilityConfig();
+        $visibilityConfig = $delightfulAgentVersionEntity->getVisibilityConfig();
 
         $this->setVisibilityConfigDetails($visibilityConfig, $authorization);
-        return $magicAgentVO;
+        return $delightfulAgentVO;
     }
 
     /**
@@ -397,11 +397,11 @@ class DelightfulAgentAppService extends AbstractAppService
     public function getAgentsFromMarketplacePage(int $page, int $pageSize): array
     {
         // 查出启用的助理
-        $agents = $this->magicAgentDomainService->getEnabledAgents();
+        $agents = $this->delightfulAgentDomainService->getEnabledAgents();
         // 使用 array_column 提取 agent_version_id
         $agentIds = array_column($agents, 'agent_version_id');
-        $agentsFromMarketplace = $this->magicAgentVersionDomainService->getAgentsFromMarketplace($agentIds, $page, $pageSize);
-        $agentsFromMarketplaceCount = $this->magicAgentVersionDomainService->getAgentsFromMarketplaceCount($agentIds);
+        $agentsFromMarketplace = $this->delightfulAgentVersionDomainService->getAgentsFromMarketplace($agentIds, $page, $pageSize);
+        $agentsFromMarketplaceCount = $this->delightfulAgentVersionDomainService->getAgentsFromMarketplaceCount($agentIds);
         return ['page' => $page, 'page_size' => $pageSize, 'total' => $agentsFromMarketplaceCount, 'list' => $agentsFromMarketplace];
     }
 
@@ -441,7 +441,7 @@ class DelightfulAgentAppService extends AbstractAppService
                 $agentVersionDTO->getVisibilityConfig()?->addUser($user);
             }
         }
-        $agent = $this->magicAgentDomainService->getAgentById($agentVersionDTO->getAgentId());
+        $agent = $this->delightfulAgentDomainService->getAgentById($agentVersionDTO->getAgentId());
 
         $isAddFriend = $agent->getAgentVersionId() === null;
 
@@ -449,48 +449,48 @@ class DelightfulAgentAppService extends AbstractAppService
         if ($agent->getStatus() === DelightfulAgentVersionStatus::ENTERPRISE_DISABLED->value) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_status_disabled_cannot_publish');
         }
-        $magicAgentVersionEntity = $this->buildAgentVersion($agent, $agentVersionDTO);
+        $delightfulAgentVersionEntity = $this->buildAgentVersion($agent, $agentVersionDTO);
 
         // 发布最新连接流
         $flowDataIsolation = $this->createFlowDataIsolation($authorization);
         if ($publishDelightfulFlowEntity && ! $publishDelightfulFlowEntity->shouldCreate()) {
             $publishDelightfulFlowEntity->setCode($agent->getFlowCode());
-            $magicFlow = $this->magicFlowDomainService->getByCode($flowDataIsolation, $publishDelightfulFlowEntity->getCode());
-            if (! $magicFlow) {
+            $delightfulFlow = $this->delightfulFlowDomainService->getByCode($flowDataIsolation, $publishDelightfulFlowEntity->getCode());
+            if (! $delightfulFlow) {
                 ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.not_configured_workflow');
             }
-            $magicFlowVersionEntity = new DelightfulFlowVersionEntity();
-            $magicFlowVersionEntity->setName($magicAgentVersionEntity->getVersionNumber());
-            $magicFlowVersionEntity->setFlowCode($magicFlow->getCode());
-            $magicFlowVersionEntity->setDelightfulFlow($publishDelightfulFlowEntity);
-            $magicFlowVersionEntity = $this->magicFlowVersionDomainService->publish($flowDataIsolation, $magicFlow, $magicFlowVersionEntity);
+            $delightfulFlowVersionEntity = new DelightfulFlowVersionEntity();
+            $delightfulFlowVersionEntity->setName($delightfulAgentVersionEntity->getVersionNumber());
+            $delightfulFlowVersionEntity->setFlowCode($delightfulFlow->getCode());
+            $delightfulFlowVersionEntity->setDelightfulFlow($publishDelightfulFlowEntity);
+            $delightfulFlowVersionEntity = $this->delightfulFlowVersionDomainService->publish($flowDataIsolation, $delightfulFlow, $delightfulFlowVersionEntity);
         } else {
-            $magicFlowVersionEntity = $this->magicFlowVersionDomainService->getLastVersion($flowDataIsolation, $magicAgentVersionEntity->getFlowCode());
+            $delightfulFlowVersionEntity = $this->delightfulFlowVersionDomainService->getLastVersion($flowDataIsolation, $delightfulAgentVersionEntity->getFlowCode());
         }
-        if (! $magicFlowVersionEntity) {
+        if (! $delightfulFlowVersionEntity) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.not_configured_workflow');
         }
-        $magicAgentVersionEntity->setFlowVersion($magicFlowVersionEntity->getCode());
+        $delightfulAgentVersionEntity->setFlowVersion($delightfulFlowVersionEntity->getCode());
 
         // 发布助理
-        $result = $this->magicAgentVersionDomainService->releaseAgentVersion($magicAgentVersionEntity);
+        $result = $this->delightfulAgentVersionDomainService->releaseAgentVersion($delightfulAgentVersionEntity);
 
         // 如果发布的是个人，那么不能操作第三方助理
-        if ($magicAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PERSONAL_USE->value) {
+        if ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PERSONAL_USE->value) {
             $thirdPlatformList = null;
         }
         // 同步第三方助理
-        $this->magicBotThirdPlatformChatDomainService->syncBotThirdPlatformList($agent->getId(), $thirdPlatformList);
+        $this->delightfulBotThirdPlatformChatDomainService->syncBotThirdPlatformList($agent->getId(), $thirdPlatformList);
 
         // 首次发布添加为好友
         $result['is_add_friend'] = $isAddFriend;
 
-        $magicAgentVersionEntity = $result['data'];
-        $versionId = $magicAgentVersionEntity->getId();
-        $agentId = $magicAgentVersionEntity->getRootId();
-        $this->magicAgentDomainService->updateDefaultVersion($agentId, $versionId);
+        $delightfulAgentVersionEntity = $result['data'];
+        $versionId = $delightfulAgentVersionEntity->getId();
+        $agentId = $delightfulAgentVersionEntity->getRootId();
+        $this->delightfulAgentDomainService->updateDefaultVersion($agentId, $versionId);
         $this->redisLocker->release($key, $userId);
-        $this->updateWithInstructConversation($magicAgentVersionEntity);
+        $this->updateWithInstructConversation($delightfulAgentVersionEntity);
         return $result;
     }
 
@@ -502,7 +502,7 @@ class DelightfulAgentAppService extends AbstractAppService
     public function getReleaseAgentVersions(Authenticatable $authorization, string $agentId): array
     {
         $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $agentId)->validate('r', $agentId);
-        $releaseAgentVersions = $this->magicAgentVersionDomainService->getReleaseAgentVersions($agentId);
+        $releaseAgentVersions = $this->delightfulAgentVersionDomainService->getReleaseAgentVersions($agentId);
 
         if (empty($releaseAgentVersions)) {
             return $releaseAgentVersions;
@@ -510,7 +510,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $releaseAgentVersions = DelightfulAgentVersionFactory::toArrays($releaseAgentVersions);
         $creatorUids = array_unique(array_column($releaseAgentVersions, 'created_uid'));
         $dataIsolation = ContactDataIsolation::create($authorization->getOrganizationCode(), $authorization->getId());
-        $creators = $this->magicUserDomainService->getUserByIds($creatorUids, $dataIsolation);
+        $creators = $this->delightfulUserDomainService->getUserByIds($creatorUids, $dataIsolation);
         $creatorMap = array_column($creators, null, 'user_id');
 
         $avatarPaths = array_unique(array_filter(array_column($releaseAgentVersions, 'agent_avatar')));
@@ -523,8 +523,8 @@ class DelightfulAgentAppService extends AbstractAppService
         }
 
         foreach ($releaseAgentVersions as &$version) {
-            $version['magicUserEntity'] = $creatorMap[$version['created_uid']] ?? null;
-            $version['magic_user_entity'] = $creatorMap[$version['created_uid']] ?? null;
+            $version['delightfulUserEntity'] = $creatorMap[$version['created_uid']] ?? null;
+            $version['delightful_user_entity'] = $creatorMap[$version['created_uid']] ?? null;
             if (! empty($version['agent_avatar']) && isset($avatarLinks[$version['agent_avatar']])) {
                 $version['agent_avatar'] = $avatarLinks[$version['agent_avatar']];
             }
@@ -541,7 +541,7 @@ class DelightfulAgentAppService extends AbstractAppService
     public function getAgentMaxVersion(Authenticatable $authorization, string $agentId): string
     {
         $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $agentId)->validate('r', $agentId);
-        return $this->magicAgentVersionDomainService->getAgentMaxVersion($agentId);
+        return $this->delightfulAgentVersionDomainService->getAgentMaxVersion($agentId);
     }
 
     /**
@@ -552,7 +552,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $agentId)->validate('w', $agentId);
 
         // 修改助理本身状态
-        $this->magicAgentDomainService->updateAgentStatus($agentId, $status->value);
+        $this->delightfulAgentDomainService->updateAgentStatus($agentId, $status->value);
     }
 
     /**
@@ -567,27 +567,27 @@ class DelightfulAgentAppService extends AbstractAppService
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.status_can_only_be_published_or_unpublished');
         }
         // 获取助理
-        $magicAgentEntity = $this->magicAgentDomainService->getAgentById($agentId);
+        $delightfulAgentEntity = $this->delightfulAgentDomainService->getAgentById($agentId);
 
         // 是否是自己的助理
-        if ($magicAgentEntity->getCreatedUid() !== $userId) {
+        if ($delightfulAgentEntity->getCreatedUid() !== $userId) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.illegal_operation');
         }
 
-        if ($magicAgentEntity->getAgentVersionId() === null) {
+        if ($delightfulAgentEntity->getAgentVersionId() === null) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_not_published_to_enterprise_cannot_operate');
         }
 
         // 获取助理版本
-        $magicAgentVersionEntity = $this->magicAgentVersionDomainService->getById($magicAgentEntity->getAgentVersionId());
+        $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getById($delightfulAgentEntity->getAgentVersionId());
 
         // 校验状态是否允许被修改: APPROVAL_PASSED
-        if ($magicAgentVersionEntity->getApprovalStatus() !== DelightfulAgentVersionStatus::APPROVAL_PASSED->value) {
+        if ($delightfulAgentVersionEntity->getApprovalStatus() !== DelightfulAgentVersionStatus::APPROVAL_PASSED->value) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.approval_not_passed_cannot_modify_status');
         }
 
         // 修改版本
-        $this->magicAgentVersionDomainService->updateAgentEnterpriseStatus($magicAgentVersionEntity->getId(), $status);
+        $this->delightfulAgentVersionDomainService->updateAgentEnterpriseStatus($delightfulAgentVersionEntity->getId(), $status);
     }
 
     /**
@@ -607,34 +607,34 @@ class DelightfulAgentAppService extends AbstractAppService
         );
         $agentOperation->validate('read', $agentId);
 
-        $magicAgentVO = new DelightfulAgentVO();
+        $delightfulAgentVO = new DelightfulAgentVO();
         // 获取助理信息
-        $magicAgentEntity = $this->magicAgentDomainService->getById($agentId);
+        $delightfulAgentEntity = $this->delightfulAgentDomainService->getById($agentId);
 
-        $magicAgentEntity->setInstructs($this->processInstructionsImages($magicAgentEntity->getInstructs(), $authenticatable->getOrganizationCode()));
+        $delightfulAgentEntity->setInstructs($this->processInstructionsImages($delightfulAgentEntity->getInstructs(), $authenticatable->getOrganizationCode()));
 
-        $fileLink = $this->fileDomainService->getLink($magicAgentEntity->getOrganizationCode(), $magicAgentEntity->getAgentAvatar());
+        $fileLink = $this->fileDomainService->getLink($delightfulAgentEntity->getOrganizationCode(), $delightfulAgentEntity->getAgentAvatar());
         if ($fileLink !== null) {
-            $magicAgentEntity->setAgentAvatar($fileLink->getUrl());
+            $delightfulAgentEntity->setAgentAvatar($fileLink->getUrl());
         }
-        $magicAgentEntity->setUserOperation($agentOperation->value);
-        $magicAgentVO->setAgentEntity($magicAgentEntity);
+        $delightfulAgentEntity->setUserOperation($agentOperation->value);
+        $delightfulAgentVO->setAgentEntity($delightfulAgentEntity);
 
         // 根据版本id获取版本信息
-        $agentVersionId = $magicAgentEntity->getAgentVersionId();
-        $magicFlowEntity = null;
+        $agentVersionId = $delightfulAgentEntity->getAgentVersionId();
+        $delightfulFlowEntity = null;
         if (! empty($agentVersionId)) {
-            $magicAgentVersionEntity = $this->magicAgentVersionDomainService->getById($agentVersionId);
+            $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getById($agentVersionId);
 
-            $magicAgentVersionEntity->setInstructs($this->processInstructionsImages($magicAgentVersionEntity->getInstructs(), $authenticatable->getOrganizationCode()));
+            $delightfulAgentVersionEntity->setInstructs($this->processInstructionsImages($delightfulAgentVersionEntity->getInstructs(), $authenticatable->getOrganizationCode()));
 
-            $magicAgentVO->setAgentVersionEntity($magicAgentVersionEntity);
-            $magicFlowVersionEntity = $this->magicFlowVersionDomainService->show($flowDataIsolation, $magicAgentVersionEntity->getFlowCode(), $magicAgentVersionEntity->getFlowVersion());
-            $magicFlowEntity = $magicFlowVersionEntity->getDelightfulFlow();
+            $delightfulAgentVO->setAgentVersionEntity($delightfulAgentVersionEntity);
+            $delightfulFlowVersionEntity = $this->delightfulFlowVersionDomainService->show($flowDataIsolation, $delightfulAgentVersionEntity->getFlowCode(), $delightfulAgentVersionEntity->getFlowVersion());
+            $delightfulFlowEntity = $delightfulFlowVersionEntity->getDelightfulFlow();
 
             // 只有发布了才会有状态
             $friendQueryDTO = new FriendQueryDTO();
-            $friendQueryDTO->setAiCodes([$magicAgentVersionEntity->getFlowCode()]);
+            $friendQueryDTO->setAiCodes([$delightfulAgentVersionEntity->getFlowCode()]);
 
             // 数据隔离处理
             $friendDataIsolation = new ContactDataIsolation();
@@ -642,29 +642,29 @@ class DelightfulAgentAppService extends AbstractAppService
             $friendDataIsolation->setCurrentOrganizationCode($authenticatable->getOrganizationCode());
 
             // 获取用户代理的好友列表
-            $userAgentFriends = $this->magicUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
+            $userAgentFriends = $this->delightfulUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
 
-            $magicAgentVO->setIsAdd(isset($userAgentFriends[$magicAgentVersionEntity->getFlowCode()]));
+            $delightfulAgentVO->setIsAdd(isset($userAgentFriends[$delightfulAgentVersionEntity->getFlowCode()]));
         } else {
-            $magicFlowEntity = $this->magicFlowDomainService->getByCode($flowDataIsolation, $magicAgentEntity->getFlowCode());
+            $delightfulFlowEntity = $this->delightfulFlowDomainService->getByCode($flowDataIsolation, $delightfulAgentEntity->getFlowCode());
         }
 
-        $magicFlowEntity->setUserOperation($magicAgentEntity->getUserOperation());
-        $magicAgentVO->setDelightfulFlowEntity($magicFlowEntity);
-        $createdUid = $magicAgentEntity->getCreatedUid();
-        $magicUserEntity = $this->magicUserDomainService->getUserById($createdUid);
-        if ($magicUserEntity) {
+        $delightfulFlowEntity->setUserOperation($delightfulAgentEntity->getUserOperation());
+        $delightfulAgentVO->setDelightfulFlowEntity($delightfulFlowEntity);
+        $createdUid = $delightfulAgentEntity->getCreatedUid();
+        $delightfulUserEntity = $this->delightfulUserDomainService->getUserById($createdUid);
+        if ($delightfulUserEntity) {
             $userDto = new DelightfulUserEntity();
-            $userDto->setAvatarUrl($magicUserEntity->getAvatarUrl());
-            $userDto->setNickname($magicUserEntity->getNickname());
-            $userDto->setUserId($magicUserEntity->getUserId());
-            $magicAgentVO->setDelightfulUserEntity($userDto);
+            $userDto->setAvatarUrl($delightfulUserEntity->getAvatarUrl());
+            $userDto->setNickname($delightfulUserEntity->getNickname());
+            $userDto->setUserId($delightfulUserEntity->getUserId());
+            $delightfulAgentVO->setDelightfulUserEntity($userDto);
         }
 
-        if ($magicAgentVO->getAgentVersionEntity()) {
-            $this->setVisibilityConfigDetails($magicAgentVO->getAgentVersionEntity()->getVisibilityConfig(), $authenticatable);
+        if ($delightfulAgentVO->getAgentVersionEntity()) {
+            $this->setVisibilityConfigDetails($delightfulAgentVO->getAgentVersionEntity()->getVisibilityConfig(), $authenticatable);
         }
-        return $magicAgentVO;
+        return $delightfulAgentVO;
     }
 
     /**
@@ -673,59 +673,59 @@ class DelightfulAgentAppService extends AbstractAppService
     public function isUpdated(Authenticatable $authenticatable, string $agentId): bool
     {
         // 检查当前助理和版本的助理的信息
-        $magicAgentEntity = $this->magicAgentDomainService->getAgentById($agentId);
+        $delightfulAgentEntity = $this->delightfulAgentDomainService->getAgentById($agentId);
 
-        $agentVersionId = $magicAgentEntity->getAgentVersionId();
+        $agentVersionId = $delightfulAgentEntity->getAgentVersionId();
 
         // 没发布过
         if (empty($agentVersionId)) {
             return false;
         }
 
-        $magicAgentVersionEntity = $this->magicAgentVersionDomainService->getById($agentVersionId);
+        $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getById($agentVersionId);
 
         // 任意一项不同都需要修改
         if (
-            $magicAgentEntity->getAgentAvatar() !== $magicAgentVersionEntity->getAgentAvatar()
-            || $magicAgentEntity->getAgentDescription() !== $magicAgentVersionEntity->getAgentDescription()
-            || $magicAgentEntity->getAgentName() !== $magicAgentVersionEntity->getAgentName()
+            $delightfulAgentEntity->getAgentAvatar() !== $delightfulAgentVersionEntity->getAgentAvatar()
+            || $delightfulAgentEntity->getAgentDescription() !== $delightfulAgentVersionEntity->getAgentDescription()
+            || $delightfulAgentEntity->getAgentName() !== $delightfulAgentVersionEntity->getAgentName()
         ) {
             return true;
         }
 
         $flowDataIsolation = new FlowDataIsolation($authenticatable->getOrganizationCode(), $authenticatable->getId());
         // 判断工作流
-        $magicFlowVersionEntity = $this->magicFlowVersionDomainService->getLastVersion($flowDataIsolation, $magicAgentVersionEntity->getFlowCode());
+        $delightfulFlowVersionEntity = $this->delightfulFlowVersionDomainService->getLastVersion($flowDataIsolation, $delightfulAgentVersionEntity->getFlowCode());
 
-        if ($magicFlowVersionEntity === null) {
+        if ($delightfulFlowVersionEntity === null) {
             return false;
         }
 
-        if ($magicFlowVersionEntity->getCode() !== $magicAgentVersionEntity->getFlowVersion()) {
+        if ($delightfulFlowVersionEntity->getCode() !== $delightfulAgentVersionEntity->getFlowVersion()) {
             return true;
         }
 
         // 判断交互指令,如果不一致则需要返回 true
-        $oldInstruct = $magicAgentVersionEntity->getInstructs();
-        $newInstruct = $magicAgentEntity->getInstructs();
+        $oldInstruct = $delightfulAgentVersionEntity->getInstructs();
+        $newInstruct = $delightfulAgentEntity->getInstructs();
 
         return $oldInstruct !== $newInstruct;
     }
 
     public function getDetailByUserId(string $userId): ?DelightfulAgentVersionEntity
     {
-        $magicUserEntity = $this->magicUserDomainService->getUserById($userId);
-        if ($magicUserEntity === null) {
+        $delightfulUserEntity = $this->delightfulUserDomainService->getUserById($userId);
+        if ($delightfulUserEntity === null) {
             throw new InvalidArgumentException('user is empty');
         }
-        $magicId = $magicUserEntity->getDelightfulId();
-        $accountEntity = $this->magicAccountDomainService->getAccountInfoByDelightfulId($magicId);
+        $delightfulId = $delightfulUserEntity->getDelightfulId();
+        $accountEntity = $this->delightfulAccountDomainService->getAccountInfoByDelightfulId($delightfulId);
         if ($accountEntity === null) {
             throw new InvalidArgumentException('account is empty');
         }
         $aiCode = $accountEntity->getAiCode();
         // 根据 aiCode(flowCode)
-        return $this->magicAgentVersionDomainService->getAgentByFlowCode($aiCode);
+        return $this->delightfulAgentVersionDomainService->getAgentByFlowCode($aiCode);
     }
 
     /**
@@ -734,22 +734,22 @@ class DelightfulAgentAppService extends AbstractAppService
     public function initDefaultAssistantConversation(DelightfulUserEntity $userEntity, ?array $defaultConversationAICodes = null): void
     {
         $dataIsolation = DataIsolation::create($userEntity->getOrganizationCode(), $userEntity->getUserId());
-        $defaultConversationAICodes = $defaultConversationAICodes ?? $this->magicAgentDomainService->getDefaultConversationAICodes();
+        $defaultConversationAICodes = $defaultConversationAICodes ?? $this->delightfulAgentDomainService->getDefaultConversationAICodes();
         foreach ($defaultConversationAICodes as $aiCode) {
-            $aiUserEntity = $this->magicUserDomainService->getByAiCode($dataIsolation, $aiCode);
+            $aiUserEntity = $this->delightfulUserDomainService->getByAiCode($dataIsolation, $aiCode);
             $agentName = $aiUserEntity?->getNickname();
             // 判断会话是否已经初始化，如果已初始化则跳过
-            if ($this->magicAgentDomainService->isDefaultAssistantConversationExist($userEntity->getUserId(), $aiCode)) {
+            if ($this->delightfulAgentDomainService->isDefaultAssistantConversationExist($userEntity->getUserId(), $aiCode)) {
                 continue;
             }
             $this->logger->info("初始化助理会话，aiCode: {$aiCode}, 名称: {$agentName}");
             try {
                 Db::transaction(function () use ($dataIsolation, $aiUserEntity, $aiCode, $userEntity) {
                     // 插入默认会话记录
-                    $this->magicAgentDomainService->insertDefaultAssistantConversation($userEntity->getUserId(), $aiCode);
+                    $this->delightfulAgentDomainService->insertDefaultAssistantConversation($userEntity->getUserId(), $aiCode);
                     // 添加好友，助理默认同意好友
                     $friendId = $aiUserEntity->getUserId();
-                    $this->magicUserDomainService->addFriend($dataIsolation, $friendId);
+                    $this->delightfulUserDomainService->addFriend($dataIsolation, $friendId);
                     // 发送添加好友控制消息
                     $friendUserEntity = new DelightfulUserEntity();
                     $friendUserEntity->setUserId($friendId);
@@ -769,17 +769,17 @@ class DelightfulAgentAppService extends AbstractAppService
         // 助理是否有权限
         $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $agentId)->validate('w', $agentId);
 
-        return $this->magicAgentDomainService->updateInstruct($authorization->getOrganizationCode(), $agentId, $instructs, $authorization->getId());
+        return $this->delightfulAgentDomainService->updateInstruct($authorization->getOrganizationCode(), $agentId, $instructs, $authorization->getId());
     }
 
     public function getInstruct(string $agentId): array
     {
         // 获取助理信息
-        $magicAgentEntity = $this->magicAgentDomainService->getAgentById($agentId);
-        if (empty($magicAgentEntity->getInstructs())) {
+        $delightfulAgentEntity = $this->delightfulAgentDomainService->getAgentById($agentId);
+        if (empty($delightfulAgentEntity->getInstructs())) {
             return [];
         }
-        return $magicAgentEntity->getInstructs();
+        return $delightfulAgentEntity->getInstructs();
     }
 
     /**
@@ -811,7 +811,7 @@ class DelightfulAgentAppService extends AbstractAppService
                 }
             }
             if (! empty($filteredUsers)) {
-                $userEntities = $this->magicUserDomainService->getUserByIds(array_column($filteredUsers, 'id'), $dataIsolation);
+                $userEntities = $this->delightfulUserDomainService->getUserByIds(array_column($filteredUsers, 'id'), $dataIsolation);
                 $userMap = [];
                 foreach ($userEntities as $userEntity) {
                     $userMap[$userEntity->getUserId()] = $userEntity;
@@ -834,7 +834,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $departments = $visibilityConfig->getDepartments();
         if (! empty($departments)) {
             $departmentIds = array_column($departments, 'id');
-            $departmentEntities = $this->magicDepartmentDomainService->getDepartmentByIds($dataIsolation, $departmentIds);
+            $departmentEntities = $this->delightfulDepartmentDomainService->getDepartmentByIds($dataIsolation, $departmentIds);
             $departmentMap = [];
             foreach ($departmentEntities as $department) {
                 $departmentMap[$department->getDepartmentId()] = $department;
@@ -966,33 +966,33 @@ class DelightfulAgentAppService extends AbstractAppService
     public function initAgentFromConfig(DelightfulUserAuthorization $authorization, array $config): DelightfulAgentEntity
     {
         // 创建机器人
-        $magicAgentDTO = new DelightfulAgentDTO();
-        $magicAgentDTO->setAgentName($config['agent_name']);
-        $magicAgentDTO->setAgentDescription($config['agent_description'] ?? '');
-        $magicAgentDTO->setAgentAvatar($config['agent_avatar'] ?? $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '');
-        $magicAgentDTO->setCurrentUserId($authorization->getId());
-        $magicAgentDTO->setCurrentOrganizationCode($authorization->getOrganizationCode());
+        $delightfulAgentDTO = new DelightfulAgentDTO();
+        $delightfulAgentDTO->setAgentName($config['agent_name']);
+        $delightfulAgentDTO->setAgentDescription($config['agent_description'] ?? '');
+        $delightfulAgentDTO->setAgentAvatar($config['agent_avatar'] ?? $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '');
+        $delightfulAgentDTO->setCurrentUserId($authorization->getId());
+        $delightfulAgentDTO->setCurrentOrganizationCode($authorization->getOrganizationCode());
 
-        $magicAgentEntity = $this->saveAgent($authorization, $magicAgentDTO);
+        $delightfulAgentEntity = $this->saveAgent($authorization, $delightfulAgentDTO);
         if (isset($config['instruct'])) {
-            $this->magicAgentDomainService->updateInstruct($authorization->getOrganizationCode(), $magicAgentEntity->getId(), $config['instruct'], $authorization->getId());
+            $this->delightfulAgentDomainService->updateInstruct($authorization->getOrganizationCode(), $delightfulAgentEntity->getId(), $config['instruct'], $authorization->getId());
         }
         // 创建Flow
-        $magicFLowDTO = new DelightfulFlowDTO($config['flow']);
-        $magicFlowAssembler = new DelightfulFlowAssembler();
-        $magicFlowDO = $magicFlowAssembler::createDelightfulFlowDO($magicFLowDTO);
+        $delightfulFLowDTO = new DelightfulFlowDTO($config['flow']);
+        $delightfulFlowAssembler = new DelightfulFlowAssembler();
+        $delightfulFlowDO = $delightfulFlowAssembler::createDelightfulFlowDO($delightfulFLowDTO);
 
         // 创建版本
         $agentVersionDTO = new DelightfulAgentVersionDTO();
-        $agentVersionDTO->setAgentId($magicAgentEntity->getId());
+        $agentVersionDTO->setAgentId($delightfulAgentEntity->getId());
         $agentVersionDTO->setVersionNumber('0.0.1');
         $agentVersionDTO->setVersionDescription('初始版本');
         $agentVersionDTO->setReleaseScope(DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value);
         $agentVersionDTO->setCreatedUid($authorization->getId());
 
-        $this->releaseAgentVersion($authorization, $agentVersionDTO, $magicFlowDO);
+        $this->releaseAgentVersion($authorization, $agentVersionDTO, $delightfulFlowDO);
 
-        return $magicAgentEntity;
+        return $delightfulAgentEntity;
     }
 
     /**
@@ -1035,7 +1035,7 @@ class DelightfulAgentAppService extends AbstractAppService
     private function getEnabledAgentVersions(string $organizationCode, int $page, int $pageSize, string $agentName): array
     {
         // 直接调用领域服务获取该组织下启用的助理版本，避免先获取所有ID再查询
-        return $this->magicAgentVersionDomainService->getEnabledAgentsByOrganization($organizationCode, $page, $pageSize, $agentName);
+        return $this->delightfulAgentVersionDomainService->getEnabledAgentsByOrganization($organizationCode, $page, $pageSize, $agentName);
     }
 
     /**
@@ -1049,7 +1049,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
         // 获取用户部门信息
         $dataIsolation = ContactDataIsolation::create($organizationCode, $currentUserId);
-        $departmentUserEntities = $this->magicDepartmentUserDomainService->getDepartmentUsersByUserIds([$currentUserId], $dataIsolation);
+        $departmentUserEntities = $this->delightfulDepartmentUserDomainService->getDepartmentUsersByUserIds([$currentUserId], $dataIsolation);
         $directDepartmentIds = [];
 
         // 获取用户直接所属的部门ID
@@ -1061,7 +1061,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $userDepartmentIds = [];
         } else {
             // 批量获取所有相关部门信息
-            $departments = $this->magicDepartmentDomainService->getDepartmentByIds($dataIsolation, $directDepartmentIds);
+            $departments = $this->delightfulDepartmentDomainService->getDepartmentByIds($dataIsolation, $directDepartmentIds);
             $departmentsMap = [];
             foreach ($departments as $department) {
                 $departmentsMap[$department->getDepartmentId()] = $department;
@@ -1133,7 +1133,7 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     private function getTotalAgentsCount(string $organizationCode, string $agentName): int
     {
-        return $this->magicAgentVersionDomainService->getEnabledAgentsByOrganizationCount($organizationCode, $agentName);
+        return $this->delightfulAgentVersionDomainService->getEnabledAgentsByOrganizationCount($organizationCode, $agentName);
     }
 
     /**
@@ -1142,8 +1142,8 @@ class DelightfulAgentAppService extends AbstractAppService
     private function enrichCreatorInfo(array &$agentVersions): void
     {
         $agentIds = array_column($agentVersions, 'agent_id');
-        $agents = $this->magicAgentDomainService->getAgentByIds($agentIds);
-        $users = $this->magicUserDomainService->getUserByIdsWithoutOrganization(array_column($agents, 'created_uid'));
+        $agents = $this->delightfulAgentDomainService->getAgentByIds($agentIds);
+        $users = $this->delightfulUserDomainService->getUserByIdsWithoutOrganization(array_column($agents, 'created_uid'));
         $userMap = array_column($users, null, 'user_id');
 
         foreach ($agentVersions as &$agent) {
@@ -1189,7 +1189,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $friendDataIsolation->setCurrentUserId($authorization->getId());
         $friendDataIsolation->setCurrentOrganizationCode($authorization->getOrganizationCode());
 
-        $userAgentFriends = $this->magicUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
+        $userAgentFriends = $this->delightfulUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
 
         foreach ($agentVersions as &$agent) {
             $agent['is_add'] = isset($userAgentFriends[$agent['flow_code']]);
@@ -1306,32 +1306,32 @@ class DelightfulAgentAppService extends AbstractAppService
         return $instructs;
     }
 
-    private function updateWithInstructConversation(DelightfulAgentVersionEntity $magicAgentVersionEntity): void
+    private function updateWithInstructConversation(DelightfulAgentVersionEntity $delightfulAgentVersionEntity): void
     {
-        AsyncEventUtil::dispatch(new DelightfulAgentInstructEvent($magicAgentVersionEntity));
+        AsyncEventUtil::dispatch(new DelightfulAgentInstructEvent($delightfulAgentVersionEntity));
     }
 
     private function buildAgentVersion(DelightfulAgentEntity $agentEntity, DelightfulAgentVersionDTO $agentVersionDTO): DelightfulAgentVersionEntity
     {
-        $magicAgentVersionEntity = new DelightfulAgentVersionEntity();
+        $delightfulAgentVersionEntity = new DelightfulAgentVersionEntity();
 
-        $magicAgentVersionEntity->setFlowCode($agentEntity->getFlowCode());
-        $magicAgentVersionEntity->setAgentId($agentEntity->getId());
-        $magicAgentVersionEntity->setAgentName($agentEntity->getAgentName());
-        $magicAgentVersionEntity->setAgentAvatar($agentEntity->getAgentAvatar());
-        $magicAgentVersionEntity->setAgentDescription($agentEntity->getAgentDescription());
-        $magicAgentVersionEntity->setOrganizationCode($agentEntity->getOrganizationCode());
-        $magicAgentVersionEntity->setCreatedUid($agentVersionDTO->getCreatedUid());
+        $delightfulAgentVersionEntity->setFlowCode($agentEntity->getFlowCode());
+        $delightfulAgentVersionEntity->setAgentId($agentEntity->getId());
+        $delightfulAgentVersionEntity->setAgentName($agentEntity->getAgentName());
+        $delightfulAgentVersionEntity->setAgentAvatar($agentEntity->getAgentAvatar());
+        $delightfulAgentVersionEntity->setAgentDescription($agentEntity->getAgentDescription());
+        $delightfulAgentVersionEntity->setOrganizationCode($agentEntity->getOrganizationCode());
+        $delightfulAgentVersionEntity->setCreatedUid($agentVersionDTO->getCreatedUid());
 
-        $magicAgentVersionEntity->setVersionDescription($agentVersionDTO->getVersionDescription());
-        $magicAgentVersionEntity->setReleaseScope($agentVersionDTO->getReleaseScope());
-        $magicAgentVersionEntity->setVersionNumber($agentVersionDTO->getVersionNumber());
+        $delightfulAgentVersionEntity->setVersionDescription($agentVersionDTO->getVersionDescription());
+        $delightfulAgentVersionEntity->setReleaseScope($agentVersionDTO->getReleaseScope());
+        $delightfulAgentVersionEntity->setVersionNumber($agentVersionDTO->getVersionNumber());
 
-        $magicAgentVersionEntity->setInstructs($agentEntity->getInstructs());
-        $magicAgentVersionEntity->setStartPage($agentEntity->getStartPage());
-        $magicAgentVersionEntity->setVisibilityConfig($agentVersionDTO->getVisibilityConfig());
+        $delightfulAgentVersionEntity->setInstructs($agentEntity->getInstructs());
+        $delightfulAgentVersionEntity->setStartPage($agentEntity->getStartPage());
+        $delightfulAgentVersionEntity->setVisibilityConfig($agentVersionDTO->getVisibilityConfig());
 
-        return $magicAgentVersionEntity;
+        return $delightfulAgentVersionEntity;
     }
 
     /**
@@ -1400,7 +1400,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $officialDataIsolation->setCurrentUserId($authorization->getId());
             $officialDataIsolation->setCurrentOrganizationCode(OfficialOrganizationUtil::getOfficialOrganizationCode());
 
-            $officialUserIdMap = $this->magicUserDomainService->getByAiCodes($officialDataIsolation, $officialFlowCodes);
+            $officialUserIdMap = $this->delightfulUserDomainService->getByAiCodes($officialDataIsolation, $officialFlowCodes);
             $flowCodeToUserIdMap = array_merge($flowCodeToUserIdMap, $officialUserIdMap);
         }
 
@@ -1410,7 +1410,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $userDataIsolation->setCurrentUserId($authorization->getId());
             $userDataIsolation->setCurrentOrganizationCode($authorization->getOrganizationCode());
 
-            $userOrgUserIdMap = $this->magicUserDomainService->getByAiCodes($userDataIsolation, $userOrgFlowCodes);
+            $userOrgUserIdMap = $this->delightfulUserDomainService->getByAiCodes($userDataIsolation, $userOrgFlowCodes);
             $flowCodeToUserIdMap = array_merge($flowCodeToUserIdMap, $userOrgUserIdMap);
         }
 
@@ -1420,7 +1420,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // 6. 查询用户与这些助理的会话ID
         $conversationMap = [];
         if (! empty($agentUserIds)) {
-            $conversationMap = $this->magicConversationDomainService->getConversationIdMappingByReceiveIds(
+            $conversationMap = $this->delightfulConversationDomainService->getConversationIdMappingByReceiveIds(
                 $authorization->getId(),
                 $agentUserIds
             );
@@ -1485,28 +1485,28 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     private function convertAgentToAgentVersion(DelightfulAgentEntity $agentEntity): DelightfulAgentVersionEntity
     {
-        $magicAgentVersionEntity = new DelightfulAgentVersionEntity();
+        $delightfulAgentVersionEntity = new DelightfulAgentVersionEntity();
 
         // 设置基本信息
-        $magicAgentVersionEntity->setFlowCode($agentEntity->getFlowCode());
-        $magicAgentVersionEntity->setAgentId($agentEntity->getId());
-        $magicAgentVersionEntity->setAgentName($agentEntity->getAgentName());
-        $magicAgentVersionEntity->setAgentAvatar($agentEntity->getAgentAvatar());
-        $magicAgentVersionEntity->setAgentDescription($agentEntity->getAgentDescription());
-        $magicAgentVersionEntity->setOrganizationCode($agentEntity->getOrganizationCode());
-        $magicAgentVersionEntity->setCreatedUid($agentEntity->getCreatedUid());
-        $magicAgentVersionEntity->setInstructs($agentEntity->getInstructs());
-        $magicAgentVersionEntity->setStartPage($agentEntity->getStartPage());
+        $delightfulAgentVersionEntity->setFlowCode($agentEntity->getFlowCode());
+        $delightfulAgentVersionEntity->setAgentId($agentEntity->getId());
+        $delightfulAgentVersionEntity->setAgentName($agentEntity->getAgentName());
+        $delightfulAgentVersionEntity->setAgentAvatar($agentEntity->getAgentAvatar());
+        $delightfulAgentVersionEntity->setAgentDescription($agentEntity->getAgentDescription());
+        $delightfulAgentVersionEntity->setOrganizationCode($agentEntity->getOrganizationCode());
+        $delightfulAgentVersionEntity->setCreatedUid($agentEntity->getCreatedUid());
+        $delightfulAgentVersionEntity->setInstructs($agentEntity->getInstructs());
+        $delightfulAgentVersionEntity->setStartPage($agentEntity->getStartPage());
 
         // 版本相关信息设为null，表示没有发布版本
-        $magicAgentVersionEntity->setVersionNumber(null);
-        $magicAgentVersionEntity->setVersionDescription(null);
+        $delightfulAgentVersionEntity->setVersionNumber(null);
+        $delightfulAgentVersionEntity->setVersionDescription(null);
 
         // 设置时间信息
-        $magicAgentVersionEntity->setCreatedAt($agentEntity->getCreatedAt());
-        $magicAgentVersionEntity->setUpdatedUid($agentEntity->getUpdatedUid());
-        $magicAgentVersionEntity->setUpdatedAt($agentEntity->getUpdatedAt());
+        $delightfulAgentVersionEntity->setCreatedAt($agentEntity->getCreatedAt());
+        $delightfulAgentVersionEntity->setUpdatedUid($agentEntity->getUpdatedUid());
+        $delightfulAgentVersionEntity->setUpdatedAt($agentEntity->getUpdatedAt());
 
-        return $magicAgentVersionEntity;
+        return $delightfulAgentVersionEntity;
     }
 }

@@ -44,7 +44,7 @@ abstract class AbstractLLMAppService extends AbstractKernelAppService
         protected readonly OrganizationConfigDomainService $organizationConfigDomainService,
         protected readonly UserConfigDomainService $userConfigDomainService,
         protected readonly MsgLogDomainService $msgLogDomainService,
-        protected readonly DelightfulUserDomainService $magicUserDomainService,
+        protected readonly DelightfulUserDomainService $delightfulUserDomainService,
         protected LoggerFactory $loggerFactory,
         protected AdminProviderDomainService $serviceProviderDomainService,
         protected ModelGatewayMapper $modelGatewayMapper,
@@ -151,14 +151,14 @@ abstract class AbstractLLMAppService extends AbstractKernelAppService
             if (isset($headerConfigs['business_id']) && $key === 'business_id') {
                 return $headerConfigs['business_id'];
             }
-            if (isset($headerConfigs['magic-organization-id']) && ($key === 'organization_id' || $key === 'organization_code')) {
-                return $headerConfigs['magic-organization-id'];
+            if (isset($headerConfigs['delightful-organization-id']) && ($key === 'organization_id' || $key === 'organization_code')) {
+                return $headerConfigs['delightful-organization-id'];
             }
-            if (isset($headerConfigs['magic-organization-code']) && ($key === 'organization_id' || $key === 'organization_code')) {
-                return $headerConfigs['magic-organization-code'];
+            if (isset($headerConfigs['delightful-organization-code']) && ($key === 'organization_id' || $key === 'organization_code')) {
+                return $headerConfigs['delightful-organization-code'];
             }
-            if (isset($headerConfigs['magic-user-id']) && $key === 'user_id') {
-                return $headerConfigs['magic-user-id'];
+            if (isset($headerConfigs['delightful-user-id']) && $key === 'user_id') {
+                return $headerConfigs['delightful-user-id'];
             }
             return $request->input('business_params.' . $key, $default);
         } catch (Throwable $throwable) {

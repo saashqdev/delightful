@@ -288,7 +288,7 @@
 				"submitted": "already"
 			},
 			"loading": "Form loading",
-			"magic_table": {
+			"delightful_table": {
 				"add_row": "New",
 				"cancel": "Cancel",
 				"confirmDelete": "Confirm deletion?",
@@ -545,7 +545,7 @@
 			"files": "[File]",
 			"image": "[Image]",
 			"link": "[Link]",
-			"magic_search_card": "[Search results]"
+			"delightful_search_card": "[Search results]"
 		},
 		"mulitiple": "Multiple choice",
 		"oss_file": {
@@ -800,7 +800,7 @@
 				"cloudDocument": "Cloud documents",
 				"excel": "Excel document",
 				"folder": "folder",
-				"magicTable": "magic form",
+				"delightfulTable": "delightful form",
 				"ppt": "Presentation document",
 				"whiteBoard": "whiteboard",
 				"word": "Word document"
@@ -1169,8 +1169,8 @@
 		"login": {
 			"enterVerificationCode": "Enter the mobile phone verification code"
 		},
-		"magicInput": "Enter to Send | ⌘ + Enter to New Line",
-		"magicInputWindows": "",
+		"delightfulInput": "Enter to Send | ⌘ + Enter to New Line",
+		"delightfulInputWindows": "",
 		"pleaseEnterMessage": "Please enter a message"
 	},
 	"pleaseInput1": "Please enter",
@@ -1244,7 +1244,7 @@
 		"loginDevices": "Device",
 		"loginPassword": "Password",
 		"loginTime": "Last Login",
-		"magicId": "Delightful ID",
+		"delightfulId": "Delightful ID",
 		"modern": "Modern",
 		"newPhone": "New mobile number",
 		"newPhoneCode": "New mobile phone number verification code",

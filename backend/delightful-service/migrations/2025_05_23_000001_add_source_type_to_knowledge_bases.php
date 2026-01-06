@@ -14,9 +14,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_flow_knowledge', function (Blueprint $table) {
+        Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
             // 检查是否已存在字段，避免重复添加
-            if (! Schema::hasColumn('magic_flow_knowledge', 'source_type')) {
+            if (! Schema::hasColumn('delightful_flow_knowledge', 'source_type')) {
                 $table->integer('source_type')->nullable()->comment('数据源类型');
             }
         });
@@ -27,9 +27,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_flow_knowledge', function (Blueprint $table) {
+        Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
             // 检查是否已存在字段，避免重复删除
-            if (Schema::hasColumn('magic_flow_knowledge', 'source_type')) {
+            if (Schema::hasColumn('delightful_flow_knowledge', 'source_type')) {
                 $table->dropColumn('source_type');
             }
         });

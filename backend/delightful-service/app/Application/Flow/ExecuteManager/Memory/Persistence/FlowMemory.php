@@ -21,7 +21,7 @@ use DateTime;
 class FlowMemory implements MemoryPersistenceInterface
 {
     public function __construct(
-        protected DelightfulFlowMemoryHistoryDomainService $magicFlowMemoryHistoryDomainService,
+        protected DelightfulFlowMemoryHistoryDomainService $delightfulFlowMemoryHistoryDomainService,
     ) {
     }
 
@@ -39,7 +39,7 @@ class FlowMemory implements MemoryPersistenceInterface
         $page = new Page(1, $memoryQuery->getLimit());
         $flowDataIsolation = FlowDataIsolation::create()->disabled();
 
-        $historyResult = $this->magicFlowMemoryHistoryDomainService->queries($flowDataIsolation, $query, $page);
+        $historyResult = $this->delightfulFlowMemoryHistoryDomainService->queries($flowDataIsolation, $query, $page);
         /** @var DelightfulFlowMemoryHistoryEntity[] $histories */
         $histories = array_reverse($historyResult['list'], true);
 
@@ -75,6 +75,6 @@ class FlowMemory implements MemoryPersistenceInterface
         $history->setCreatedUid($LLMMemoryMessage->getUid());
         $history->setCreatedAt(new DateTime());
         $flowDataIsolation = FlowDataIsolation::create(userId: $LLMMemoryMessage->getUid());
-        $this->magicFlowMemoryHistoryDomainService->create($flowDataIsolation, $history);
+        $this->delightfulFlowMemoryHistoryDomainService->create($flowDataIsolation, $history);
     }
 }

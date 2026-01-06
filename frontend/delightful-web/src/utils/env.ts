@@ -4,8 +4,8 @@ import { configStore } from "@/opensource/models/config"
 /** Whether development environment */
 export const isDev = process.env.NODE_ENV === "development"
 
-console.log("magic sha: ", window?.CONFIG?.DELIGHTFUL_APP_SHA)
-console.log("magic version: ", window?.CONFIG?.DELIGHTFUL_APP_VERSION)
+console.log("delightful sha: ", window?.CONFIG?.DELIGHTFUL_APP_SHA)
+console.log("delightful version: ", window?.CONFIG?.DELIGHTFUL_APP_VERSION)
 
 /**
  * @description Get environment variables (normalize to current environment using global PrivateDeployment config)

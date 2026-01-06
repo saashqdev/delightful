@@ -10,7 +10,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			z-index: 1;
 			background-color: ${transparentize(
 				1 - 0.9,
-				isDarkMode ? token.magicColorScales.grey[0] : token.magicColorScales.grey[0],
+				isDarkMode ? token.delightfulColorScales.grey[0] : token.delightfulColorScales.grey[0],
 			)};
 			backdrop-filter: blur(5px);
 			border-bottom: 1px solid ${token.colorBorder};
@@ -18,7 +18,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		`,
 		headerTopic: css`
 			overflow: hidden;
-			color: ${isDarkMode ? token.magicColorScales.grey[5] : token.magicColorUsages.text[3]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[3]};
 			text-overflow: ellipsis;
 			white-space: nowrap;
 
@@ -29,7 +29,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			user-select: none;
 		`,
 		headerTitle: css`
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
 			font-size: 16px;
 			font-weight: 600;
 			white-space: nowrap;
@@ -39,8 +39,8 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			user-select: none;
 		`,
 		extraSectionButtonActive: css`
-			background: ${token.magicColorUsages.primaryLight.default};
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorScales.brand[5]};
+			background: ${token.delightfulColorUsages.primaryLight.default};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorScales.brand[5]};
 			user-select: none;
 		`,
 	}

@@ -58,7 +58,7 @@ export default function useFlowDetail({ agent, showFlowIsDraftToast }: FlowDetai
 			if (lastDraft) {
 				const draftDetail = await FlowApi.getFlowDraftDetail(flowCode, lastDraft.id)
 
-				const decodeFlow = unShadowFlow(draftDetail.magic_flow)
+				const decodeFlow = unShadowFlow(draftDetail.delightful_flow)
 				setCurrentFlow({
 					...decodeFlow,
 					...extraProps,
@@ -97,12 +97,12 @@ export default function useFlowDetail({ agent, showFlowIsDraftToast }: FlowDetai
 			setCurrentFlow({ ...data })
 			return
 		}
-		if (agent?.magicFlowEntity?.id) {
-			// initPublishList(agent.magicFlowEntity.id)
-			const latestDraftList = await initDraftList(agent.magicFlowEntity.id)
+		if (agent?.delightfulFlowEntity?.id) {
+			// initPublishList(agent.delightfulFlowEntity.id)
+			const latestDraftList = await initDraftList(agent.delightfulFlowEntity.id)
 			// 当不存在版本时，则说明没有发布过，则加载最新草稿(有草稿的情况下)
 			if (!agent?.botVersionEntity && latestDraftList.length > 0) {
-				loadLatestDraft(agent.magicFlowEntity.id, {
+				loadLatestDraft(agent.delightfulFlowEntity.id, {
 					user_operation: agent.botEntity.user_operation,
 					icon: agent.botEntity.robot_avatar,
 					name: agent.botEntity.robot_name,
@@ -113,8 +113,8 @@ export default function useFlowDetail({ agent, showFlowIsDraftToast }: FlowDetai
 			}
 
 			setCurrentFlow({
-				...agent.magicFlowEntity,
-				id: agent.magicFlowEntity.id,
+				...agent.delightfulFlowEntity,
+				id: agent.delightfulFlowEntity.id,
 				user_operation: agent.botEntity.user_operation,
 				icon: agent.botEntity.robot_avatar,
 				name: agent.botEntity.robot_name,

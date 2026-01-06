@@ -11,8 +11,8 @@ use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 
 class AgentDataIsolation extends BaseDataIsolation
 {
-    public static function create(string $currentOrganizationCode = '', string $userId = '', string $magicId = ''): self
+    public static function create(string $currentOrganizationCode = '', string $userId = '', string $delightfulId = ''): self
     {
-        return new self($currentOrganizationCode, $userId, $magicId);
+        return new self($currentOrganizationCode, $userId, $delightfulId);
     }
 }

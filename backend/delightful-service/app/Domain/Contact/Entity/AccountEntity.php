@@ -15,7 +15,7 @@ class AccountEntity extends AbstractEntity
 {
     protected ?int $id = null;
 
-    protected ?string $magicId = null;
+    protected ?string $delightfulId = null;
 
     /**
      * 账号类型:0:ai 1:人类 2:应用.
@@ -50,7 +50,7 @@ class AccountEntity extends AbstractEntity
 
     protected string $extra = '';
 
-    protected int $magicEnvironmentId = 0;
+    protected int $delightfulEnvironmentId = 0;
 
     /**
      * 密码（SHA256加密）.
@@ -72,25 +72,25 @@ class AccountEntity extends AbstractEntity
 
     public function getDelightfulEnvironmentId(): int
     {
-        return $this->magicEnvironmentId;
+        return $this->delightfulEnvironmentId;
     }
 
-    public function setDelightfulEnvironmentId(int $magicEnvironmentId): void
+    public function setDelightfulEnvironmentId(int $delightfulEnvironmentId): void
     {
-        $this->magicEnvironmentId = $magicEnvironmentId;
+        $this->delightfulEnvironmentId = $delightfulEnvironmentId;
     }
 
     public function getDelightfulId(): ?string
     {
-        return $this->magicId;
+        return $this->delightfulId;
     }
 
-    public function setDelightfulId(null|int|string $magicId): void
+    public function setDelightfulId(null|int|string $delightfulId): void
     {
-        if (is_int($magicId)) {
-            $magicId = (string) $magicId;
+        if (is_int($delightfulId)) {
+            $delightfulId = (string) $delightfulId;
         }
-        $this->magicId = $magicId;
+        $this->delightfulId = $delightfulId;
     }
 
     public function getCountryCode(): ?string

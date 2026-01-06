@@ -26,7 +26,7 @@ class DelightfulFlowMultiModalLogModel extends AbstractModel
 
     public bool $timestamps = true;
 
-    protected ?string $table = 'magic_flow_multi_modal_logs';
+    protected ?string $table = 'delightful_flow_multi_modal_logs';
 
     protected array $fillable = [
         'id', 'message_id', 'type', 'model', 'analysis_result', 'created_at', 'updated_at',

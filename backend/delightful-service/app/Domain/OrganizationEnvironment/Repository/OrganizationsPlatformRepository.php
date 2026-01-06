@@ -12,7 +12,7 @@ use App\Domain\OrganizationEnvironment\Repository\Facade\OrganizationsPlatformRe
 
 class OrganizationsPlatformRepository implements OrganizationsPlatformRepositoryInterface
 {
-    public function getOrganizationPlatformType(string $magicOrganizationCode): PlatformType
+    public function getOrganizationPlatformType(string $delightfulOrganizationCode): PlatformType
     {
         return PlatformType::Delightful;
     }

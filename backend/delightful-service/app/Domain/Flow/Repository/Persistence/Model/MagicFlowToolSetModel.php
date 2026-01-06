@@ -32,7 +32,7 @@ class DelightfulFlowToolSetModel extends AbstractModel
     use Snowflake;
     use SoftDeletes;
 
-    protected ?string $table = 'magic_flow_tool_sets';
+    protected ?string $table = 'delightful_flow_tool_sets';
 
     protected array $fillable = [
         'id', 'code', 'name', 'description', 'icon', 'enabled',

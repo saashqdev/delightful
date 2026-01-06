@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_tenant')) {
+        if (Schema::hasTable('delightful_tenant')) {
             return;
         }
-        Schema::create('magic_tenant', static function (Blueprint $table) {
+        Schema::create('delightful_tenant', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 255)->comment('企业名称');
             $table->string('display_id', 255)->comment('企业编号，平台内唯一');
@@ -37,6 +37,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_tenant');
+        Schema::dropIfExists('delightful_tenant');
     }
 };

@@ -1,7 +1,7 @@
-import magicFetcher from "@/opensource/apis/clients/magic"
+import delightfulFetcher from "@/opensource/apis/clients/delightful"
 // 分享是否需要密码
 export const getShareIsNeedPassword = async ({ resource_id }: { resource_id: string }) => {
-	const response = await magicFetcher.post(`/api/v1/share/resources/${resource_id}/check`)
+	const response = await delightfulFetcher.post(`/api/v1/share/resources/${resource_id}/check`)
 	return response
 }
 
@@ -19,6 +19,6 @@ export const getShareDetail = async ({
 }) => {
 	const url = `/api/v1/share/resources/${resource_id}/detail`
 
-	const response = await magicFetcher.post(url, { pwd: password, page, page_size })
+	const response = await delightfulFetcher.post(url, { pwd: password, page, page_size })
 	return response
 }

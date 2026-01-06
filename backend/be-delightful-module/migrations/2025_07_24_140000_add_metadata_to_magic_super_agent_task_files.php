@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_task_files', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_task_files', function (Blueprint $table) {
             $table->text('metadata')
                 ->nullable()
                 ->after('source')
@@ -27,7 +27,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_task_files', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_task_files', function (Blueprint $table) {
             $table->dropColumn('metadata');
         });
     }

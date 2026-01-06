@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_bot_third_platform_chat', function (Blueprint $table) {
+        Schema::create('delightful_bot_third_platform_chat', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('bot_id', 64)->default('')->comment('机器人ID');
             $table->string('key', 64)->comment('唯一标识')->unique();

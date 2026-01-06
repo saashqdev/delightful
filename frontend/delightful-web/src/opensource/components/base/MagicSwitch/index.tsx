@@ -3,10 +3,10 @@ import { Switch, type SwitchProps } from "antd"
 
 const useStyles = createStyles(({ prefixCls,token, css }) => {
 	return {
-    magicSwitch: css`
+    delightfulSwitch: css`
       width: 40px;
       height: 24px;
-      background-color: ${token.magicColorUsages.fill[0]};
+      background-color: ${token.delightfulColorUsages.fill[0]};
       .${prefixCls}-switch-handle {
         top: 3px;
         left: 3px;
@@ -17,11 +17,11 @@ const useStyles = createStyles(({ prefixCls,token, css }) => {
           box-shadow:
             0px 0px 1px 0px rgba(0, 0, 0, 0.3),
             0px 4px 6px 0px rgba(0, 0, 0, 0.1);
-          border: 1px solid ${token.magicColorUsages.border};
+          border: 1px solid ${token.delightfulColorUsages.border};
         }
       }
       &:hover {
-        background-color: ${token.magicColorScales.grey[1]} !important;
+        background-color: ${token.delightfulColorScales.grey[1]} !important;
       }  
       &.${prefixCls}-switch-loading {
         .${prefixCls}-switch-handle {
@@ -56,5 +56,5 @@ const useStyles = createStyles(({ prefixCls,token, css }) => {
 
 export const DelightfulSwitch = ({ className, ...props }: SwitchProps) => {
 	const { styles, cx } = useStyles()
-	return <Switch className={cx(styles.magicSwitch, className)} {...props} />
+	return <Switch className={cx(styles.delightfulSwitch, className)} {...props} />
 }

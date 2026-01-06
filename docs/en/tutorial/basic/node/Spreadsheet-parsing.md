@@ -5,7 +5,7 @@ The Spreadsheet Parsing Node is a specialized tool for extracting and parsing Ex
 **Image Description:**
 
 The Spreadsheet Parsing Node interface includes two main parts: input and output. The input section allows you to set the file source (file list, single file, etc.), while the output section is the parsed table data structure, including file information and table content.
-![Spreadsheet Parsing Node](https://cdn.letsmagic.cn/static/img/Spreadsheet-parsing.png)
+![Spreadsheet Parsing Node](https://cdn.letsdelightful.cn/static/img/Spreadsheet-parsing.png)
 
 ## Why You Need the Spreadsheet Parsing Node
 In daily work, Excel files are a common format for storing and transferring data. Through the Spreadsheet Parsing Node, you can:

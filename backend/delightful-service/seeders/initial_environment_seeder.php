@@ -16,7 +16,7 @@ class InitialEnvironmentSeeder extends Seeder
         $envId = 10000;
 
         // Check if environment data already exists
-        $existingEnvironment = Db::table('magic_environments')->where('id', $envId)->first();
+        $existingEnvironment = Db::table('delightful_environments')->where('id', $envId)->first();
 
         if ($existingEnvironment) {
             echo "Environment config with ID {$envId} already exists; skipping creation" . PHP_EOL;
@@ -44,7 +44,7 @@ class InitialEnvironmentSeeder extends Seeder
         ];
 
         // Insert environment config
-        Db::table('magic_environments')->insert($productionConfig);
+        Db::table('delightful_environments')->insert($productionConfig);
 
         echo "Created environment config: production ID {$envId}" . PHP_EOL;
     }

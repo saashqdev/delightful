@@ -50,7 +50,7 @@ const TimeSelect = ({
 	})
 
 	return (
-		<div className="magic-time-select" ref={wrapperRef}>
+		<div className="delightful-time-select" ref={wrapperRef}>
 			<div
 				className="time-select"
 				ref={selectContainerRef}
@@ -84,7 +84,7 @@ const TimeSelect = ({
 							}`}
 						>
 							<div className="label">
-								{i18next.t("common.targetDate", { ns: "magicFlow" })}
+								{i18next.t("common.targetDate", { ns: "delightfulFlow" })}
 							</div>
 							{val?.[0] === "designation" && <TSIcon type="ts-check-line" />}
 						</div>

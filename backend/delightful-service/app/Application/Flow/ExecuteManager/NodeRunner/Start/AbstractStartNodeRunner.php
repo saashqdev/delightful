@@ -248,7 +248,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             return '';
         }
 
-        // Set magicMessageId for subsequent updates
+        // Set delightfulMessageId for subsequent updates
         $messageContent->setDelightfulMessageId($messageEntity->getDelightfulMessageId());
 
         // Record start time
@@ -275,7 +275,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
     /**
      * Update voice message content to database.
      */
-    private function updateVoiceMessageContent(string $magicMessageId, VoiceMessage $voiceMessage): void
+    private function updateVoiceMessageContent(string $delightfulMessageId, VoiceMessage $voiceMessage): void
     {
         try {
             $container = ApplicationContext::getContainer();
@@ -284,17 +284,17 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             // Convert VoiceMessage to array format for update
             $messageContent = $voiceMessage->toArray();
 
-            $messageRepository->updateMessageContent($magicMessageId, $messageContent);
+            $messageRepository->updateMessageContent($delightfulMessageId, $messageContent);
 
             $this->logger->info('Voice message content updated successfully', [
-                'magic_message_id' => $magicMessageId,
+                'delightful_message_id' => $delightfulMessageId,
                 'has_transcription' => $voiceMessage->hasTranscription(),
                 'transcription_length' => strlen($voiceMessage->getTranscriptionText() ?? ''),
             ]);
         } catch (Throwable $e) {
             // Silently handle update failure, does not affect main process
             $this->logger->warning('Failed to update voice message content', [
-                'magic_message_id' => $magicMessageId,
+                'delightful_message_id' => $delightfulMessageId,
                 'error' => $e->getMessage(),
             ]);
         }

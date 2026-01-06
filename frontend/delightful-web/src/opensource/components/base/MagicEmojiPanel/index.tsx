@@ -32,7 +32,7 @@ const useStyles = createStyles(({ css, token }) => {
 			}
 		`,
 		active: css`
-			background-color: ${token.magicColorUsages.fill[0]};
+			background-color: ${token.delightfulColorUsages.fill[0]};
 		`,
 		emoji: css`
 			width: 48px;
@@ -41,15 +41,15 @@ const useStyles = createStyles(({ css, token }) => {
 			border-radius: 8px;
 
 			&:hover {
-				background-color: ${token.magicColorUsages.fill[0]};
+				background-color: ${token.delightfulColorUsages.fill[0]};
 				cursor: pointer;
 			}
 		`,
 		footer: css`
 			width: 100%;
 			height: 44px;
-			border-top: 1px solid ${token.magicColorUsages.border};
-			background: ${token.magicColorScales.grey[0]};
+			border-top: 1px solid ${token.delightfulColorUsages.border};
+			background: ${token.delightfulColorScales.grey[0]};
 			padding: 6px 10px;
 			border-radius: 0 0 8px 8px;
 		`,

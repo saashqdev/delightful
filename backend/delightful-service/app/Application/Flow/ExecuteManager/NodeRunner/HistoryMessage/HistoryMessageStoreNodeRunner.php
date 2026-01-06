@@ -37,7 +37,7 @@ class HistoryMessageStoreNodeRunner extends NodeRunner
         /** @var HistoryMessageStoreNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        $magicFlowMessage = new DelightfulFlowMessage(
+        $delightfulFlowMessage = new DelightfulFlowMessage(
             $paramsConfig->getType(),
             $paramsConfig->getContent(),
             $paramsConfig->getLink(),
@@ -45,14 +45,14 @@ class HistoryMessageStoreNodeRunner extends NodeRunner
         );
 
         // 如果是资源类的数据，那么需要提前上传了
-        $links = $magicFlowMessage->getLinks($executionData->getExpressionFieldData());
+        $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
         // 由于里面会进行重命名，所以这里直接获取对应的名称传入进去
         $linkPaths = array_map(function (AbstractAttachment $attachment) {
             return $attachment->getPath();
         }, $attachments);
 
-        $IMResponse = MessageUtil::getIMResponse($magicFlowMessage, $executionData, $linkPaths);
+        $IMResponse = MessageUtil::getIMResponse($delightfulFlowMessage, $executionData, $linkPaths);
         if (empty($IMResponse)) {
             return;
         }

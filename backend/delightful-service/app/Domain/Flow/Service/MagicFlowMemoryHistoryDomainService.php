@@ -16,15 +16,15 @@ use App\Infrastructure\Core\ValueObject\Page;
 class DelightfulFlowMemoryHistoryDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly DelightfulFlowMemoryHistoryRepositoryInterface $magicFlowMemoryHistoryRepository,
+        private readonly DelightfulFlowMemoryHistoryRepositoryInterface $delightfulFlowMemoryHistoryRepository,
     ) {
     }
 
-    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryEntity $magicFlowMemoryHistoryEntity): DelightfulFlowMemoryHistoryEntity
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryEntity $delightfulFlowMemoryHistoryEntity): DelightfulFlowMemoryHistoryEntity
     {
-        $magicFlowMemoryHistoryEntity->prepareForCreation();
+        $delightfulFlowMemoryHistoryEntity->prepareForCreation();
 
-        return $this->magicFlowMemoryHistoryRepository->create($dataIsolation, $magicFlowMemoryHistoryEntity);
+        return $this->delightfulFlowMemoryHistoryRepository->create($dataIsolation, $delightfulFlowMemoryHistoryEntity);
     }
 
     /**
@@ -32,11 +32,11 @@ class DelightfulFlowMemoryHistoryDomainService extends AbstractDomainService
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryQuery $query, Page $page): array
     {
-        return $this->magicFlowMemoryHistoryRepository->queries($dataIsolation, $query, $page);
+        return $this->delightfulFlowMemoryHistoryRepository->queries($dataIsolation, $query, $page);
     }
 
     public function removeByConversationId(FlowDataIsolation $dataIsolation, string $conversationId): void
     {
-        $this->magicFlowMemoryHistoryRepository->removeByConversationId($dataIsolation, $conversationId);
+        $this->delightfulFlowMemoryHistoryRepository->removeByConversationId($dataIsolation, $conversationId);
     }
 }

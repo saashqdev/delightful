@@ -8,22 +8,22 @@ class ConversationCacheServices {
 	 * 获取侧边栏会话组缓存key
 	 * @returns 缓存key
 	 */
-	static getConversationSiderbarGroupsKey(magicId: string, organizationCode: string) {
-		return platformKey(`conversation_siderbar/${magicId}/${organizationCode}`)
+	static getConversationSiderbarGroupsKey(delightfulId: string, organizationCode: string) {
+		return platformKey(`conversation_siderbar/${delightfulId}/${organizationCode}`)
 	}
 
 	/**
 	 * 缓存侧边栏会话组
 	 */
 	static cacheConversationSiderbarGroups(
-		magicId: string | undefined,
+		delightfulId: string | undefined,
 		organizationCode: string | undefined,
 		conversationSiderbarGroups: Record<ConversationGroupKey, string[]>,
 	) {
 		requestIdleCallback(() => {
-			if (!magicId || !organizationCode) return
+			if (!delightfulId || !organizationCode) return
 			const key = ConversationCacheServices.getConversationSiderbarGroupsKey(
-				magicId,
+				delightfulId,
 				organizationCode,
 			)
 			const value = JSON.stringify(
@@ -35,14 +35,14 @@ class ConversationCacheServices {
 
 	/**
 	 * 获取缓存的侧边栏会话组
-	 * @param magicId 魔法ID
+	 * @param delightfulId 魔法ID
 	 * @param organizationCode 组织编码
 	 * @returns 缓存的侧边栏会话组
 	 */
-	static getCacheConversationSiderbarGroups(magicId: string, organizationCode: string) {
-		if (!magicId || !organizationCode) return undefined
+	static getCacheConversationSiderbarGroups(delightfulId: string, organizationCode: string) {
+		if (!delightfulId || !organizationCode) return undefined
 		const key = ConversationCacheServices.getConversationSiderbarGroupsKey(
-			magicId,
+			delightfulId,
 			organizationCode,
 		)
 		const value = localStorage.getItem(key)

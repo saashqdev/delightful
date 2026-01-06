@@ -62,16 +62,16 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
             return $chatMessage;
         }
 
-        $chatEntity = $this->magicBotThirdPlatformChatDomainService->getByKey($key);
+        $chatEntity = $this->delightfulBotThirdPlatformChatDomainService->getByKey($key);
         if (! $chatEntity || ! $chatEntity->isEnabled()) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.invalid', ['label' => $key]);
         }
         $dataIsolation = FlowDataIsolation::create('', '')->setEnabled(false);
-        $magicFlow = $this->getFlowByBotId($dataIsolation, $chatEntity->getBotId());
-        $dataIsolation->setCurrentOrganizationCode($magicFlow->getOrganizationCode());
+        $delightfulFlow = $this->getFlowByBotId($dataIsolation, $chatEntity->getBotId());
+        $dataIsolation->setCurrentOrganizationCode($delightfulFlow->getOrganizationCode());
 
         $thirdPlatformChat = ThirdPlatformChatFactory::make($chatEntity);
-        $params['magic_system'] = [
+        $params['delightful_system'] = [
             'organization_code' => $dataIsolation->getCurrentOrganizationCode(),
         ];
         $thirdPlatformChatMessage = $thirdPlatformChat->parseChatParam($params);
@@ -83,7 +83,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
             case ThirdPlatformChatEvent::ChatMessage:
                 $thirdPlatformChatMessage->validate();
                 $fromCoroutineId = Coroutine::id();
-                Coroutine::defer(function () use ($dataIsolation, $magicFlow, $thirdPlatformChat, $thirdPlatformChatMessage, $chatEntity, $fromCoroutineId) {
+                Coroutine::defer(function () use ($dataIsolation, $delightfulFlow, $thirdPlatformChat, $thirdPlatformChatMessage, $chatEntity, $fromCoroutineId) {
                     CoContext::copy($fromCoroutineId);
                     try {
                         $originConversationId = $thirdPlatformChatMessage->getConversationId();
@@ -96,7 +96,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             return;
                         }
 
-                        // 这里是各个平台的用户 id，不是 magic 的 user_id
+                        // 这里是各个平台的用户 id，不是 delightful 的 user_id
                         $userId = $thirdPlatformChatMessage->getUserId();
                         $dataIsolation->setCurrentUserId($userId);
                         EnvManager::initDataIsolationEnv($dataIsolation);
@@ -110,7 +110,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             triggerTime: new DateTime(),
                             userInfo: ['user_entity' => TriggerData::createUserEntity($operator->getUid(), $operator->getNickname())],
                             messageInfo: ['message_entity' => TriggerData::createMessageEntity($message)],
-                            globalVariable: $magicFlow->getGlobalVariable(),
+                            globalVariable: $delightfulFlow->getGlobalVariable(),
                             attachments: $thirdPlatformChatMessage->getAttachments(),
                             triggerDataUserExtInfo: $thirdPlatformChatMessage->getUserExtInfo(),
                         );
@@ -124,7 +124,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             originConversationId: $originConversationId,
                             executionType: ExecutionType::SKApi,
                         );
-                        $executor = new DelightfulFlowExecutor($magicFlow, $executionData);
+                        $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
                         $executor->execute();
 
                         foreach ($executionData->getReplyMessages() as $message) {
@@ -154,7 +154,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
     {
         $this->checkInternalWhite($authorization, SuperPermissionEnum::ASSISTANT_ADMIN);
         $entity->setAllUpdate(true);
-        $entity = $this->magicBotThirdPlatformChatDomainService->save($entity);
+        $entity = $this->delightfulBotThirdPlatformChatDomainService->save($entity);
         ThirdPlatformChatFactory::remove((string) $entity->getId());
         return $entity;
     }
@@ -162,9 +162,9 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
     public function destroy(Authenticatable $authorization, string $id): void
     {
         $this->checkInternalWhite($authorization, SuperPermissionEnum::ASSISTANT_ADMIN);
-        $entity = $this->magicBotThirdPlatformChatDomainService->getById((int) $id);
+        $entity = $this->delightfulBotThirdPlatformChatDomainService->getById((int) $id);
         if ($entity) {
-            $this->magicBotThirdPlatformChatDomainService->destroy($entity);
+            $this->delightfulBotThirdPlatformChatDomainService->destroy($entity);
             ThirdPlatformChatFactory::remove($id);
         }
     }
@@ -181,7 +181,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         $this->getAgentOperation($permissionDataIsolation, $botId)->validate('r', $botId);
         $query = new DelightfulBotThirdPlatformChatQuery();
         $query->setBotId($botId);
-        return $this->magicBotThirdPlatformChatDomainService->queries($query, $page);
+        return $this->delightfulBotThirdPlatformChatDomainService->queries($query, $page);
     }
 
     /**
@@ -190,30 +190,30 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
     public function queries(Authenticatable $authorization, DelightfulBotThirdPlatformChatQuery $query, Page $page): array
     {
         $this->checkInternalWhite($authorization, SuperPermissionEnum::ASSISTANT_ADMIN);
-        return $this->magicBotThirdPlatformChatDomainService->queries($query, $page);
+        return $this->delightfulBotThirdPlatformChatDomainService->queries($query, $page);
     }
 
-    public function createChatGroup(string $key, array $groupMemberIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $magicGroupDTO): string
+    public function createChatGroup(string $key, array $groupMemberIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $delightfulGroupDTO): string
     {
         // 获取助理配置
         if (empty($key)) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.empty', ['label' => 'key']);
         }
-        $chatEntity = $this->magicBotThirdPlatformChatDomainService->getByKey($key);
+        $chatEntity = $this->delightfulBotThirdPlatformChatDomainService->getByKey($key);
         if (! $chatEntity || ! $chatEntity->isEnabled()) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.invalid', ['label' => $key]);
         }
         // 通过 $groupMemberIds 获取用户信息，可以用户列表
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        $users = $this->magicUserDomainService->getUserByIds($groupMemberIds, $dataIsolation, ['magic_id', 'nickname']);
+        $users = $this->delightfulUserDomainService->getUserByIds($groupMemberIds, $dataIsolation, ['delightful_id', 'nickname']);
         if (count($users) === 0) {
             ExceptionBuilder::throw(AgentErrorCode::CREATE_GROUP_USER_NOT_EXIST, 'user.not_exist', ['user_ids' => $groupMemberIds]);
         }
-        $magicIds = array_column($users, 'magic_id');
+        $delightfulIds = array_column($users, 'delightful_id');
         /** @var array<string, AccountEntity> $accounts */
-        $accounts = $this->magicAccountDomainService->getAccountByDelightfulIds($magicIds);
+        $accounts = $this->delightfulAccountDomainService->getAccountByDelightfulIds($delightfulIds);
         if (count($accounts) === 0) {
-            ExceptionBuilder::throw(AgentErrorCode::CREATE_GROUP_USER_ACCOUNT_NOT_EXIST, 'user.not_exist', ['magic_ids' => $magicIds]);
+            ExceptionBuilder::throw(AgentErrorCode::CREATE_GROUP_USER_ACCOUNT_NOT_EXIST, 'user.not_exist', ['delightful_ids' => $delightfulIds]);
         }
         // 调用接口，换取第三方的用户 id
         $parallel = new Parallel(2);
@@ -222,7 +222,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         foreach ($accounts as $account) {
             $parallel->add(function () use ($requestId, $thirdPlatformChat, $account) {
                 CoContext::setRequestId($requestId);
-                return ['magic_id' => $account->getDelightfulId(), 'third_user_id' => $thirdPlatformChat->getThirdPlatformUserIdByMobiles($account->getPhone())];
+                return ['delightful_id' => $account->getDelightfulId(), 'third_user_id' => $thirdPlatformChat->getThirdPlatformUserIdByMobiles($account->getPhone())];
             });
         }
         $thirdPlatformUserIds = [];
@@ -230,18 +230,18 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         $result = $parallel->wait();
         // 二位数组转成一维
         foreach ($result as $item) {
-            if ($item['magic_id'] == $userAuthorization->getDelightfulId()) {
+            if ($item['delightful_id'] == $userAuthorization->getDelightfulId()) {
                 $ownerThirdPlatformUserId = $item['third_user_id'];
             }
             $thirdPlatformUserIds[] = $item['third_user_id'];
         }
         if (count($thirdPlatformUserIds) == 0) {
-            ExceptionBuilder::throw(AgentErrorCode::GET_THIRD_PLATFORM_USER_ID_FAILED, 'user.not_exist', ['magic_ids' => $magicIds]);
+            ExceptionBuilder::throw(AgentErrorCode::GET_THIRD_PLATFORM_USER_ID_FAILED, 'user.not_exist', ['delightful_ids' => $delightfulIds]);
         }
 
         // 创建群聊
         $createGroupParams = new ThirdPlatformCreateGroup();
-        $createGroupParams->setName($magicGroupDTO->getGroupName());
+        $createGroupParams->setName($delightfulGroupDTO->getGroupName());
         $createGroupParams->setOwner($ownerThirdPlatformUserId);
         $createGroupParams->setUseridlist($thirdPlatformUserIds);
         $createGroupParams->setShowHistoryType(1);
@@ -265,22 +265,22 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
 
     private function getFlowByBotId(FlowDataIsolation $dataIsolation, string $botId): DelightfulFlowEntity
     {
-        $bot = $this->magicAgentDomainService->getAgentById($botId);
+        $bot = $this->delightfulAgentDomainService->getAgentById($botId);
         if (! $bot->isAvailable()) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.invalid', ['label' => 'bot_id']);
         }
         if ($bot->getAgentVersionId()) {
-            $botVersion = $this->magicAgentVersionDomainService->getById($bot->getAgentVersionId());
-            $flowVersion = $this->magicFlowVersionDomainService->show($dataIsolation, $bot->getFlowCode(), $botVersion->getFlowVersion());
-            $magicFlow = $flowVersion->getDelightfulFlow();
-            $magicFlow->setVersionCode($flowVersion->getCode());
+            $botVersion = $this->delightfulAgentVersionDomainService->getById($bot->getAgentVersionId());
+            $flowVersion = $this->delightfulFlowVersionDomainService->show($dataIsolation, $bot->getFlowCode(), $botVersion->getFlowVersion());
+            $delightfulFlow = $flowVersion->getDelightfulFlow();
+            $delightfulFlow->setVersionCode($flowVersion->getCode());
         } else {
-            $magicFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $bot->getFlowCode());
+            $delightfulFlow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $bot->getFlowCode());
         }
-        $magicFlow->setAgentId((string) $bot->getId());
+        $delightfulFlow->setAgentId((string) $bot->getId());
 
         // 使用当前流程的组织编码
-        $dataIsolation->setCurrentOrganizationCode($magicFlow->getOrganizationCode());
-        return $magicFlow;
+        $dataIsolation->setCurrentOrganizationCode($delightfulFlow->getOrganizationCode());
+        return $delightfulFlow;
     }
 }

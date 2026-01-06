@@ -1,4 +1,4 @@
-# magic_use/userscript_manager.py
+# delightful_use/userscript_manager.py
 import asyncio
 import fnmatch # 引入 fnmatch 用于 URL 模式匹配
 import logging
@@ -7,12 +7,12 @@ from pathlib import Path
 from typing import List, Optional, Dict, Any # 引入 Dict, Any
 
 import aiofiles # 用于异步文件读取
-from magic_use.userscript import Userscript
+from delightful_use.userscript import Userscript
 
 logger = logging.getLogger(__name__)
 
-# Define the path to the magic_monkey directory relative to this file
-DELIGHTFUL_MONKEY_DIR = Path(__file__).resolve().parent / "magic_monkey"
+# Define the path to the delightful_monkey directory relative to this file
+DELIGHTFUL_MONKEY_DIR = Path(__file__).resolve().parent / "delightful_monkey"
 
 class UserscriptManager:
     """

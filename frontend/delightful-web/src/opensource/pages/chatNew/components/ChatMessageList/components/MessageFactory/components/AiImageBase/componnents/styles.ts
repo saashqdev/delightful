@@ -6,7 +6,7 @@ export const useStyles = createStyles(({ css, token, isDarkMode }) => ({
 		height: 100%;
 		position: relative;
 		overflow: hidden;
-		background: ${isDarkMode ? token.magicColorUsages.bg[0] : token.magicColorUsages.white};
+		background: ${isDarkMode ? token.delightfulColorUsages.bg[0] : token.delightfulColorUsages.white};
 		border-radius: 6px;
 		max-width: 100% !important;
 		max-height: 100% !important;
@@ -18,7 +18,7 @@ export const useStyles = createStyles(({ css, token, isDarkMode }) => ({
 		max-height: unset;
 	`,
 	text: css`
-		color: ${token.magicColorScales.black};
+		color: ${token.delightfulColorScales.black};
 		text-align: center;
 		font-size: 12px;
 		font-weight: 400;
@@ -42,10 +42,10 @@ export const useStyles = createStyles(({ css, token, isDarkMode }) => ({
 		margin: 0 auto;
 		border-radius: 8px;
 		padding: 4px 8px;
-		color: ${isDarkMode ? token.magicColorUsages.text[1] : token.magicColorUsages.text[1]};
+		color: ${isDarkMode ? token.delightfulColorUsages.text[1] : token.delightfulColorUsages.text[1]};
 		background: ${isDarkMode
-			? token.magicColorUsages.bg[1]
-			: token.magicColorUsages.white} !important;
+			? token.delightfulColorUsages.bg[1]
+			: token.delightfulColorUsages.white} !important;
 		transition: all 0.5s ease;
 	`,
 }))

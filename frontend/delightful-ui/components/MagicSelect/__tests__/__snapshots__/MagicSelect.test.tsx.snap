@@ -3,16 +3,16 @@
 exports[`DelightfulSelect > 快照测试 > 基础选择器快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-select magic-select-outlined css-var-r4 magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-single magic-select-show-arrow"
+    class="delightful-select delightful-select-outlined css-var-r4 delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-single delightful-select-show-arrow"
   >
     <div
-      class="magic-select-selector"
+      class="delightful-select-selector"
     >
       <span
-        class="magic-select-selection-wrap"
+        class="delightful-select-selection-wrap"
       >
         <span
-          class="magic-select-selection-search"
+          class="delightful-select-selection-search"
         >
           <input
             aria-autocomplete="list"
@@ -21,7 +21,7 @@ exports[`DelightfulSelect > 快照测试 > 基础选择器快照 1`] = `
             aria-haspopup="listbox"
             aria-owns="rc_select_TEST_OR_SSR_list"
             autocomplete="off"
-            class="magic-select-selection-search-input"
+            class="delightful-select-selection-search-input"
             id="rc_select_TEST_OR_SSR"
             readonly=""
             role="combobox"
@@ -32,7 +32,7 @@ exports[`DelightfulSelect > 快照测试 > 基础选择器快照 1`] = `
           />
         </span>
         <span
-          class="magic-select-selection-placeholder"
+          class="delightful-select-selection-placeholder"
         >
           请选择
         </span>
@@ -40,7 +40,7 @@ exports[`DelightfulSelect > 快照测试 > 基础选择器快照 1`] = `
     </div>
     <span
       aria-hidden="true"
-      class="magic-select-arrow"
+      class="delightful-select-arrow"
       style="user-select: none;"
       unselectable="on"
     >
@@ -68,23 +68,23 @@ exports[`DelightfulSelect > 快照测试 > 基础选择器快照 1`] = `
 exports[`DelightfulSelect > 快照测试 > 多选选择器快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-select magic-select-outlined css-var-ra magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-multiple magic-select-show-arrow magic-select-show-search"
+    class="delightful-select delightful-select-outlined css-var-ra delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-multiple delightful-select-show-arrow delightful-select-show-search"
   >
     <div
-      class="magic-select-selector"
+      class="delightful-select-selector"
     >
       <span
-        class="magic-select-selection-wrap"
+        class="delightful-select-selection-wrap"
       >
         <div
-          class="magic-select-selection-overflow"
+          class="delightful-select-selection-overflow"
         >
           <div
-            class="magic-select-selection-overflow-item magic-select-selection-overflow-item-suffix"
+            class="delightful-select-selection-overflow-item delightful-select-selection-overflow-item-suffix"
             style="opacity: 1;"
           >
             <div
-              class="magic-select-selection-search"
+              class="delightful-select-selection-search"
               style="width: 0px;"
             >
               <input
@@ -94,7 +94,7 @@ exports[`DelightfulSelect > 快照测试 > 多选选择器快照 1`] = `
                 aria-haspopup="listbox"
                 aria-owns="rc_select_TEST_OR_SSR_list"
                 autocomplete="off"
-                class="magic-select-selection-search-input"
+                class="delightful-select-selection-search-input"
                 id="rc_select_TEST_OR_SSR"
                 readonly=""
                 role="combobox"
@@ -105,7 +105,7 @@ exports[`DelightfulSelect > 快照测试 > 多选选择器快照 1`] = `
               />
               <span
                 aria-hidden="true"
-                class="magic-select-selection-search-mirror"
+                class="delightful-select-selection-search-mirror"
               >
                  
               </span>
@@ -113,13 +113,13 @@ exports[`DelightfulSelect > 快照测试 > 多选选择器快照 1`] = `
           </div>
         </div>
         <span
-          class="magic-select-selection-placeholder"
+          class="delightful-select-selection-placeholder"
         />
       </span>
     </div>
     <span
       aria-hidden="true"
-      class="magic-select-arrow"
+      class="delightful-select-arrow"
       style="user-select: none;"
       unselectable="on"
     >
@@ -147,16 +147,16 @@ exports[`DelightfulSelect > 快照测试 > 多选选择器快照 1`] = `
 exports[`DelightfulSelect > 快照测试 > 大尺寸选择器快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-select magic-select-lg magic-select-outlined css-var-rc magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-single magic-select-show-arrow"
+    class="delightful-select delightful-select-lg delightful-select-outlined css-var-rc delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-single delightful-select-show-arrow"
   >
     <div
-      class="magic-select-selector"
+      class="delightful-select-selector"
     >
       <span
-        class="magic-select-selection-wrap"
+        class="delightful-select-selection-wrap"
       >
         <span
-          class="magic-select-selection-search"
+          class="delightful-select-selection-search"
         >
           <input
             aria-autocomplete="list"
@@ -165,7 +165,7 @@ exports[`DelightfulSelect > 快照测试 > 大尺寸选择器快照 1`] = `
             aria-haspopup="listbox"
             aria-owns="rc_select_TEST_OR_SSR_list"
             autocomplete="off"
-            class="magic-select-selection-search-input"
+            class="delightful-select-selection-search-input"
             id="rc_select_TEST_OR_SSR"
             readonly=""
             role="combobox"
@@ -176,13 +176,13 @@ exports[`DelightfulSelect > 快照测试 > 大尺寸选择器快照 1`] = `
           />
         </span>
         <span
-          class="magic-select-selection-placeholder"
+          class="delightful-select-selection-placeholder"
         />
       </span>
     </div>
     <span
       aria-hidden="true"
-      class="magic-select-arrow"
+      class="delightful-select-arrow"
       style="user-select: none;"
       unselectable="on"
     >
@@ -210,16 +210,16 @@ exports[`DelightfulSelect > 快照测试 > 大尺寸选择器快照 1`] = `
 exports[`DelightfulSelect > 快照测试 > 小尺寸选择器快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-select magic-select-sm magic-select-outlined css-var-re magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-single magic-select-show-arrow"
+    class="delightful-select delightful-select-sm delightful-select-outlined css-var-re delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-single delightful-select-show-arrow"
   >
     <div
-      class="magic-select-selector"
+      class="delightful-select-selector"
     >
       <span
-        class="magic-select-selection-wrap"
+        class="delightful-select-selection-wrap"
       >
         <span
-          class="magic-select-selection-search"
+          class="delightful-select-selection-search"
         >
           <input
             aria-autocomplete="list"
@@ -228,7 +228,7 @@ exports[`DelightfulSelect > 快照测试 > 小尺寸选择器快照 1`] = `
             aria-haspopup="listbox"
             aria-owns="rc_select_TEST_OR_SSR_list"
             autocomplete="off"
-            class="magic-select-selection-search-input"
+            class="delightful-select-selection-search-input"
             id="rc_select_TEST_OR_SSR"
             readonly=""
             role="combobox"
@@ -239,13 +239,13 @@ exports[`DelightfulSelect > 快照测试 > 小尺寸选择器快照 1`] = `
           />
         </span>
         <span
-          class="magic-select-selection-placeholder"
+          class="delightful-select-selection-placeholder"
         />
       </span>
     </div>
     <span
       aria-hidden="true"
-      class="magic-select-arrow"
+      class="delightful-select-arrow"
       style="user-select: none;"
       unselectable="on"
     >
@@ -273,16 +273,16 @@ exports[`DelightfulSelect > 快照测试 > 小尺寸选择器快照 1`] = `
 exports[`DelightfulSelect > 快照测试 > 带清除按钮选择器快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-select magic-select-outlined css-var-rg magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-single magic-select-allow-clear magic-select-show-arrow"
+    class="delightful-select delightful-select-outlined css-var-rg delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-single delightful-select-allow-clear delightful-select-show-arrow"
   >
     <div
-      class="magic-select-selector"
+      class="delightful-select-selector"
     >
       <span
-        class="magic-select-selection-wrap"
+        class="delightful-select-selection-wrap"
       >
         <span
-          class="magic-select-selection-search"
+          class="delightful-select-selection-search"
         >
           <input
             aria-autocomplete="list"
@@ -291,7 +291,7 @@ exports[`DelightfulSelect > 快照测试 > 带清除按钮选择器快照 1`] = 
             aria-haspopup="listbox"
             aria-owns="rc_select_TEST_OR_SSR_list"
             autocomplete="off"
-            class="magic-select-selection-search-input"
+            class="delightful-select-selection-search-input"
             id="rc_select_TEST_OR_SSR"
             readonly=""
             role="combobox"
@@ -302,13 +302,13 @@ exports[`DelightfulSelect > 快照测试 > 带清除按钮选择器快照 1`] = 
           />
         </span>
         <span
-          class="magic-select-selection-placeholder"
+          class="delightful-select-selection-placeholder"
         />
       </span>
     </div>
     <span
       aria-hidden="true"
-      class="magic-select-arrow"
+      class="delightful-select-arrow"
       style="user-select: none;"
       unselectable="on"
     >
@@ -336,16 +336,16 @@ exports[`DelightfulSelect > 快照测试 > 带清除按钮选择器快照 1`] = 
 exports[`DelightfulSelect > 快照测试 > 带默认值选择器快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-select magic-select-outlined css-var-r6 magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-single magic-select-show-arrow"
+    class="delightful-select delightful-select-outlined css-var-r6 delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-single delightful-select-show-arrow"
   >
     <div
-      class="magic-select-selector"
+      class="delightful-select-selector"
     >
       <span
-        class="magic-select-selection-wrap"
+        class="delightful-select-selection-wrap"
       >
         <span
-          class="magic-select-selection-search"
+          class="delightful-select-selection-search"
         >
           <input
             aria-autocomplete="list"
@@ -354,7 +354,7 @@ exports[`DelightfulSelect > 快照测试 > 带默认值选择器快照 1`] = `
             aria-haspopup="listbox"
             aria-owns="rc_select_TEST_OR_SSR_list"
             autocomplete="off"
-            class="magic-select-selection-search-input"
+            class="delightful-select-selection-search-input"
             id="rc_select_TEST_OR_SSR"
             readonly=""
             role="combobox"
@@ -365,7 +365,7 @@ exports[`DelightfulSelect > 快照测试 > 带默认值选择器快照 1`] = `
           />
         </span>
         <span
-          class="magic-select-selection-item"
+          class="delightful-select-selection-item"
           title="选项1"
         >
           选项1
@@ -374,7 +374,7 @@ exports[`DelightfulSelect > 快照测试 > 带默认值选择器快照 1`] = `
     </div>
     <span
       aria-hidden="true"
-      class="magic-select-arrow"
+      class="delightful-select-arrow"
       style="user-select: none;"
       unselectable="on"
     >
@@ -402,16 +402,16 @@ exports[`DelightfulSelect > 快照测试 > 带默认值选择器快照 1`] = `
 exports[`DelightfulSelect > 快照测试 > 禁用状态选择器快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-select magic-select-outlined css-var-r8 magic-select-css-var css-dev-only-do-not-override-yotw4n magic-select-single magic-select-show-arrow magic-select-disabled"
+    class="delightful-select delightful-select-outlined css-var-r8 delightful-select-css-var css-dev-only-do-not-override-yotw4n delightful-select-single delightful-select-show-arrow delightful-select-disabled"
   >
     <div
-      class="magic-select-selector"
+      class="delightful-select-selector"
     >
       <span
-        class="magic-select-selection-wrap"
+        class="delightful-select-selection-wrap"
       >
         <span
-          class="magic-select-selection-search"
+          class="delightful-select-selection-search"
         >
           <input
             aria-autocomplete="list"
@@ -420,7 +420,7 @@ exports[`DelightfulSelect > 快照测试 > 禁用状态选择器快照 1`] = `
             aria-haspopup="listbox"
             aria-owns="rc_select_TEST_OR_SSR_list"
             autocomplete="off"
-            class="magic-select-selection-search-input"
+            class="delightful-select-selection-search-input"
             disabled=""
             id="rc_select_TEST_OR_SSR"
             readonly=""
@@ -432,13 +432,13 @@ exports[`DelightfulSelect > 快照测试 > 禁用状态选择器快照 1`] = `
           />
         </span>
         <span
-          class="magic-select-selection-placeholder"
+          class="delightful-select-selection-placeholder"
         />
       </span>
     </div>
     <span
       aria-hidden="true"
-      class="magic-select-arrow"
+      class="delightful-select-arrow"
       style="user-select: none;"
       unselectable="on"
     >

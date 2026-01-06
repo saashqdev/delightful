@@ -31,13 +31,13 @@ class DelightfulAgentAssembler
 
     public function createPageListAgentDTO(int $total, array $list, Page $page, array $avatars = []): PageDTO
     {
-        $list = array_map(fn (DelightfulAgentEntity $magicAgentEntity) => $this->createAgentDTO($magicAgentEntity, $avatars), $list);
+        $list = array_map(fn (DelightfulAgentEntity $delightfulAgentEntity) => $this->createAgentDTO($delightfulAgentEntity, $avatars), $list);
         return new PageDTO($page->getPage(), $total, $list);
     }
 
-    public static function createAgentV1Response(DelightfulAgentVO $magicAgentVO, DelightfulFlowDTO $magicFlowDTO): array
+    public static function createAgentV1Response(DelightfulAgentVO $delightfulAgentVO, DelightfulFlowDTO $delightfulFlowDTO): array
     {
-        $agentEntity = $magicAgentVO->getAgentEntity();
+        $agentEntity = $delightfulAgentVO->getAgentEntity();
         $agentArray = $agentEntity->toArray();
         $agentArray['bot_version_id'] = $agentEntity->getAgentVersionId();
         $agentArray['robot_avatar'] = $agentEntity->getAgentAvatar();
@@ -46,28 +46,28 @@ class DelightfulAgentAssembler
 
         $result['agent_version_entity'] = [];
 
-        $magicAgentVersionEntity = $magicAgentVO->getAgentVersionEntity();
-        if ($magicAgentVersionEntity) {
-            $agentVersionArray = $magicAgentVersionEntity->toArray();
-            $agentVersionArray['robot_version_id'] = $magicAgentVersionEntity->getAgentName();
-            $agentVersionArray['robot_avatar'] = $magicAgentVersionEntity->getAgentAvatar();
-            $agentVersionArray['robt_name'] = $magicAgentVersionEntity->getAgentName();
-            $agentVersionArray['robot_description'] = $magicAgentVersionEntity->getAgentDescription();
+        $delightfulAgentVersionEntity = $delightfulAgentVO->getAgentVersionEntity();
+        if ($delightfulAgentVersionEntity) {
+            $agentVersionArray = $delightfulAgentVersionEntity->toArray();
+            $agentVersionArray['robot_version_id'] = $delightfulAgentVersionEntity->getAgentName();
+            $agentVersionArray['robot_avatar'] = $delightfulAgentVersionEntity->getAgentAvatar();
+            $agentVersionArray['robt_name'] = $delightfulAgentVersionEntity->getAgentName();
+            $agentVersionArray['robot_description'] = $delightfulAgentVersionEntity->getAgentDescription();
             $result['agent_version_entity'] = $agentVersionArray;
         }
 
         $result = [];
         $result['agent_entity'] = $agentArray;
-        $result['magic_user_entity'] = $magicAgentVO->getDelightfulUserEntity();
-        $result['magic_flow_entity'] = $magicFlowDTO;
-        $result['agent_version_entity'] = $magicAgentVO->getAgentVersionEntity();
-        $result['is_add'] = $magicAgentVO->getIsAdd();
+        $result['delightful_user_entity'] = $delightfulAgentVO->getDelightfulUserEntity();
+        $result['delightful_flow_entity'] = $delightfulFlowDTO;
+        $result['agent_version_entity'] = $delightfulAgentVO->getAgentVersionEntity();
+        $result['is_add'] = $delightfulAgentVO->getIsAdd();
 
-        $result['botVersionEntity'] = $magicAgentVO->getAgentVersionEntity();
+        $result['botVersionEntity'] = $delightfulAgentVO->getAgentVersionEntity();
         $result['botEntity'] = $agentArray;
-        $result['magicUserEntity'] = $magicAgentVO->getDelightfulUserEntity();
-        $result['magicFlowEntity'] = $magicFlowDTO;
-        $result['isAdd'] = $magicAgentVO->getIsAdd();
+        $result['delightfulUserEntity'] = $delightfulAgentVO->getDelightfulUserEntity();
+        $result['delightfulFlowEntity'] = $delightfulFlowDTO;
+        $result['isAdd'] = $delightfulAgentVO->getIsAdd();
         return $result;
     }
 }

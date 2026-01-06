@@ -12,7 +12,7 @@ const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) => {
 			font-size: 16px;
 			height: 50px;
 			width: 100%;
-			color: ${isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.text[3]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[3]};
 			background: transparent;
 
 			.${prefixCls}-select-selector {
@@ -30,8 +30,8 @@ const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) => {
 				.${prefixCls}-select-selection-item {
 					padding-inline-start: 36px;
 					color: ${isDarkMode
-						? token.magicColorScales.grey[4]
-						: token.magicColorUsages.text[0]};
+						? token.delightfulColorScales.grey[4]
+						: token.delightfulColorUsages.text[0]};
 				}
 			}
 		`,
@@ -46,7 +46,7 @@ const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) => {
 			alignItems: "center",
 			borderRadius: "100px",
 			border: `1px solid ${token.colorBorder}`,
-			backgroundColor: token.magicColorScales.grey[0],
+			backgroundColor: token.delightfulColorScales.grey[0],
 		},
 		searchPopup: css`
 			border-radius: 12px;
@@ -57,10 +57,10 @@ const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) => {
 			// 	width: 4px;
 			// }
 			// &::-webkit-scrollbar-button {
-			// 	// background-color: ${token.magicColorUsages.white};
+			// 	// background-color: ${token.delightfulColorUsages.white};
 			// }
 			// &::-webkit-scrollbar-thumb {
-			// 	background: ${token.magicColorScales.grey[2]};
+			// 	background: ${token.delightfulColorScales.grey[2]};
 			// }
 		`,
 		searchList: css`
@@ -69,18 +69,18 @@ const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) => {
 				width: 4px !important;
 			}
 			.rc-virtual-list-scrollbar-thumb {
-				background-color: ${token.magicColorScales.grey[2]} !important;
+				background-color: ${token.delightfulColorScales.grey[2]} !important;
 			}
 		`,
 		searchOption: css`
 			border-radius: 8px;
 			padding: 8px;
 			&:hover {
-				background-color: ${token.magicColorUsages.fill[0]};
+				background-color: ${token.delightfulColorUsages.fill[0]};
 			}
 		`,
 		searchOptionActive: css`
-			background-color: ${token.magicColorUsages.fill[0]};
+			background-color: ${token.delightfulColorUsages.fill[0]};
 		`,
 	}
 })

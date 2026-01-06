@@ -13,7 +13,7 @@ export const useTopicItemStyles = createStyles(({ css, cx, token }) => {
 			cursor: pointer;
 
 			&:hover {
-				background: ${token.magicColorScales.grey[0]};
+				background: ${token.delightfulColorScales.grey[0]};
 
 				.${menu} {
 					visibility: visible;
@@ -28,7 +28,7 @@ export const useTopicItemStyles = createStyles(({ css, cx, token }) => {
 			flex: 1;
 		`,
 		active: css`
-			background: ${token.magicColorUsages.primaryLight.default};
+			background: ${token.delightfulColorUsages.primaryLight.default};
 		`,
 		menu,
 	}

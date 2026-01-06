@@ -46,7 +46,7 @@ use Throwable;
  * @method bool check_global()
  * @method bool check_superglobal()
  * @method bool check_const()
- * @method bool check_magic_const()
+ * @method bool check_delightful_const()
  * @method bool check_namespace()
  * @method bool check_alias()
  * @method bool check_use()
@@ -103,13 +103,13 @@ class PHPSandbox implements IteratorAggregate
     protected array $includes = [];
 
     /**
-     * @var string String of prepended code, will be automagically whitelisted for functions, variables, globals, constants, classes, interfaces and traits if is true
+     * @var string String of prepended code, will be autodelightfulally whitelisted for functions, variables, globals, constants, classes, interfaces and traits if is true
      */
     protected string $prependedCode = '';
 
     /* OUTPUT */
     /**
-     * @var string String of appended code, will be automagically whitelisted for functions, variables, globals, constants, classes, interfaces and traits if is true
+     * @var string String of appended code, will be autodelightfulally whitelisted for functions, variables, globals, constants, classes, interfaces and traits if is true
      */
     protected string $appendedCode = '';
 
@@ -192,7 +192,7 @@ class PHPSandbox implements IteratorAggregate
         $this->cacheItemPool = $options->cache() ?: MemoryCacheItemPool::getInstance(0, true, 0, 200);
     }
 
-    /** PHPSandbox __invoke magic method.
+    /** PHPSandbox __invoke delightful method.
      *
      * Besides the code or closure to be executed, you can also pass additional arguments that will overwrite the default values of their respective arguments defined in the code
      *
@@ -205,7 +205,7 @@ class PHPSandbox implements IteratorAggregate
         return call_user_func([$this, 'execute'], $code);
     }
 
-    /** PHPSandbox __sleep magic method.
+    /** PHPSandbox __sleep delightful method.
      *
      * @return array An array of property keys to be serialized
      */

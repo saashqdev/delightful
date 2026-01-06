@@ -13,7 +13,7 @@ const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) => {
 		select: css`
 			padding: 5px 8px;
 			border-radius: 100px;
-			background: ${isDarkMode ? token.magicColorScales.grey[1] : token.magicColorUsages.white};
+			background: ${isDarkMode ? token.delightfulColorScales.grey[1] : token.delightfulColorUsages.white};
 			box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1), 0 0 1px 0 rgba(0, 0, 0, 0.3);
 			--${prefixCls}-control-height: fit-content;
 			--${prefixCls}-padding-sm: 4px;

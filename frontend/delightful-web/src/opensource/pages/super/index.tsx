@@ -9,7 +9,7 @@ import { isEmpty } from "lodash-es"
 import { observer } from "mobx-react-lite"
 import { useEffect } from "react"
 import useDrag from "@/opensource/hooks/electron/useDrag"
-import { magic } from "@/enhance/magicElectron"
+import { delightful } from "@/enhance/delightfulElectron"
 
 // const console = new Logger("super")
 
@@ -85,7 +85,7 @@ function Super() {
 
 	return (
 		<div className={styles.container}>
-			{magic?.env?.isElectron?.() && (
+			{delightful?.env?.isElectron?.() && (
 				<div className={styles.header} onMouseDown={onMouseDown} />
 			)}
 			<GlobalErrorBoundary>

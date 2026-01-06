@@ -21,7 +21,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			font-weight: 400;
 			padding: 12px;
 			border-radius: 8px;
-			color: ${isDarkMode ? token.magicColorScales.grey[2] : token.magicColorUsages.text[2]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorUsages.text[2]};
 			border: 1px solid ${token.colorBorder};
 			position: relative;
 			cursor: pointer;
@@ -45,25 +45,25 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		`,
 		green: css`
 			background-color: ${isDarkMode
-				? token.magicColorScales.green[0]
-				: token.magicColorScales.green[0]};
+				? token.delightfulColorScales.green[0]
+				: token.delightfulColorScales.green[0]};
 			color: ${isDarkMode
-				? token.magicColorScales.green[5]
-				: token.magicColorScales.green[5]};
+				? token.delightfulColorScales.green[5]
+				: token.delightfulColorScales.green[5]};
 			border: none;
 		`,
 		orange: css`
 			background-color: ${isDarkMode
-				? token.magicColorUsages.fill[2]
-				: token.magicColorUsages.fill[0]};
-			color: ${isDarkMode ? token.magicColorUsages.text[3] : token.magicColorUsages.text[2]};
+				? token.delightfulColorUsages.fill[2]
+				: token.delightfulColorUsages.fill[0]};
+			color: ${isDarkMode ? token.delightfulColorUsages.text[3] : token.delightfulColorUsages.text[2]};
 			border: none;
 		`,
 		blue: css`
 			background-color: ${isDarkMode
-				? token.magicColorScales.brand[8]
-				: token.magicColorScales.brand[0]};
-			color: ${isDarkMode ? token.magicColorUsages.text[3] : token.magicColorUsages.text[2]};
+				? token.delightfulColorScales.brand[8]
+				: token.delightfulColorScales.brand[0]};
+			color: ${isDarkMode ? token.delightfulColorUsages.text[3] : token.delightfulColorUsages.text[2]};
 			border: none;
 		`,
 	}
@@ -120,7 +120,7 @@ function Card({ card, dropdownItems, onCardClick }: AgentCardProps) {
 					</Tag>
 				)
 			default:
-				// return <Tag icon={<IconClockFilled size={12} color={token.magicColorUsages.primary.default} />} className={cx(styles.tag, styles.blue)}>企业内部审批中</Tag>
+				// return <Tag icon={<IconClockFilled size={12} color={token.delightfulColorUsages.primary.default} />} className={cx(styles.tag, styles.blue)}>企业内部审批中</Tag>
 				break
 		}
 		return null

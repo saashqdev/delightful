@@ -26,7 +26,7 @@ export const useStyles = createStyles(
 				text-align: left;
 			}
 
-			[data-type="magic-emoji"] {
+			[data-type="delightful-emoji"] {
 				width: 16px;
 				height: 16px;
 			}

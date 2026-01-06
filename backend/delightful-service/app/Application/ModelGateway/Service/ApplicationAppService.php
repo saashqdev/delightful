@@ -41,7 +41,7 @@ class ApplicationAppService extends AbstractLLMAppService
 
         $LLMApplication = $this->applicationDomainService->save($this->createLLMDataIsolation($authorization), $savingLLMApplicationEntity);
         $data['llm_application'] = $LLMApplication;
-        $data['users'] = $this->magicUserDomainService->getByUserIds(
+        $data['users'] = $this->delightfulUserDomainService->getByUserIds(
             ContactDataIsolation::simpleMake($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId()),
             [$LLMApplication->getCreator(), $LLMApplication->getModifier()]
         );
@@ -67,7 +67,7 @@ class ApplicationAppService extends AbstractLLMAppService
             $iconPaths[] = $LLMApplication->getIcon();
         }
 
-        $data['users'] = $this->magicUserDomainService->getByUserIds(
+        $data['users'] = $this->delightfulUserDomainService->getByUserIds(
             ContactDataIsolation::simpleMake($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId()),
             $userIds
         );
@@ -88,7 +88,7 @@ class ApplicationAppService extends AbstractLLMAppService
             ExceptionBuilder::throw(GenericErrorCode::AccessDenied);
         }
         $data['llm_application'] = $LLMApplication;
-        $data['users'] = $this->magicUserDomainService->getByUserIds(
+        $data['users'] = $this->delightfulUserDomainService->getByUserIds(
             ContactDataIsolation::simpleMake($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId()),
             [$LLMApplication->getCreator(), $LLMApplication->getModifier()]
         );

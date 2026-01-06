@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasColumn('magic_chat_messages', 'current_version_id')) {
+        if (Schema::hasColumn('delightful_chat_messages', 'current_version_id')) {
             return;
         }
-        Schema::table('magic_chat_messages', function (Blueprint $table) {
+        Schema::table('delightful_chat_messages', function (Blueprint $table) {
             $table->bigInteger('current_version_id')->nullable()->comment('当前消息版本id')->default(null);
         });
     }
@@ -27,7 +27,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_chat_messages', function (Blueprint $table) {
+        Schema::table('delightful_chat_messages', function (Blueprint $table) {
             $table->dropColumn('current_version_id');
         });
     }

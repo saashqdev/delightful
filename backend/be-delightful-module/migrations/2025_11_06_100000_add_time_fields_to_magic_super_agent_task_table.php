@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_task', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_task', function (Blueprint $table) {
             $table->timestamp('started_at')->nullable()->comment('Task start time');
             $table->timestamp('finished_at')->nullable()->comment('Task finish time');
         });

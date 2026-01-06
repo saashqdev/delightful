@@ -17,7 +17,7 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) => ({
 		padding: 0 4px;
 	`,
 	name: css`
-		color: ${token.magicColorUsages.text[2]};
+		color: ${token.delightfulColorUsages.text[2]};
 		text-align: justify;
 		font-size: 12px;
 		font-weight: 400;
@@ -72,13 +72,13 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) => ({
 		width: 100%;
 	`,
 	selfMessageStyle: css`
-		color: ${token.magicColorUsages.text[1]};
-		background: ${isDarkMode ? token.magicColorUsages.primaryLight.default : "#E6F0FF"};
+		color: ${token.delightfulColorUsages.text[1]};
+		background: ${isDarkMode ? token.delightfulColorUsages.primaryLight.default : "#E6F0FF"};
 		// background: linear-gradient(99deg, #4768d4 0%, #6c8eff 0.01%, #ca58ff 100%);
 	`,
 	otherMessageStyle: css`
-		background: ${token.magicColorUsages.bg[1]};
-		color: ${token.magicColorUsages.text[1]};
+		background: ${token.delightfulColorUsages.bg[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 		${isDarkMode ? "" : `border: 1px solid ${token.colorBorder};`}
 	`,
 	contentWrapper: css`

@@ -44,7 +44,7 @@ class ModeInitializer
             $insertedCount = 0;
 
             // Step 1: Check if default mode exists for this organization, get its real ID
-            $defaultMode = Db::table('magic_modes')
+            $defaultMode = Db::table('delightful_modes')
                 ->where('identifier', 'default')
                 ->first();
 
@@ -54,7 +54,7 @@ class ModeInitializer
             } else {
                 // Default mode not exists, insert with hardcoded ID
                 $defaultModeData = self::getDefaultModeData($officialOrgCode);
-                $defaultModeId = Db::table('magic_modes')->insertGetId($defaultModeData);
+                $defaultModeId = Db::table('delightful_modes')->insertGetId($defaultModeData);
                 ++$insertedCount;
             }
 
@@ -63,19 +63,19 @@ class ModeInitializer
 
             // Step 3: Insert other modes if not exist
             foreach ($modes as $mode) {
-                $exists = Db::table('magic_modes')
+                $exists = Db::table('delightful_modes')
                     ->where('identifier', $mode['identifier'])
                     ->where('organization_code', $officialOrgCode)
                     ->exists();
 
                 if (! $exists) {
-                    Db::table('magic_modes')->insert($mode);
+                    Db::table('delightful_modes')->insert($mode);
                     ++$insertedCount;
                 }
             }
 
             // Step 4: Initialize default mode groups and models if not exist
-            $defaultGroupExists = Db::table('magic_mode_groups')
+            $defaultGroupExists = Db::table('delightful_mode_groups')
                 ->where('mode_id', $defaultModeId)
                 ->where('organization_code', $officialOrgCode)
                 ->exists();
@@ -131,7 +131,7 @@ class ModeInitializer
         }
 
         // Step 2: Check if default group exists, if not create it
-        $existingGroup = Db::table('magic_mode_groups')
+        $existingGroup = Db::table('delightful_mode_groups')
             ->where('mode_id', $defaultModeId)
             ->where('organization_code', $orgCode)
             ->orderBy('sort', 'desc')
@@ -142,7 +142,7 @@ class ModeInitializer
             $groupId = $existingGroup->id;
         } else {
             // Group does not exist, create default group
-            $groupId = Db::table('magic_mode_groups')->insertGetId([
+            $groupId = Db::table('delightful_mode_groups')->insertGetId([
                 'mode_id' => $defaultModeId,
                 'name_i18n' => json_encode([
                     'en_US' => 'Default Group-1',
@@ -168,7 +168,7 @@ class ModeInitializer
             $providerId = $model['id'];
 
             // Check if model relation already exists
-            $relationExists = Db::table('magic_mode_group_relations')
+            $relationExists = Db::table('delightful_mode_group_relations')
                 ->where('mode_id', $defaultModeId)
                 ->where('group_id', $groupId)
                 ->where('model_id', $modelId)
@@ -177,7 +177,7 @@ class ModeInitializer
 
             if (! $relationExists) {
                 // Model relation does not exist, insert it
-                Db::table('magic_mode_group_relations')->insert([
+                Db::table('delightful_mode_group_relations')->insert([
                     'mode_id' => $defaultModeId,
                     'group_id' => $groupId,
                     'model_id' => $modelId,

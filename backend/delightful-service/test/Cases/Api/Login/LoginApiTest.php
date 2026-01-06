@@ -43,7 +43,7 @@ class LoginApiTest extends AbstractHttpTest
             'code' => 1000,
             'message' => '请求成功',
             'data' => [
-                'access_token' => 'magic:xxx',
+                'access_token' => 'delightful:xxx',
                 'bind_phone' => true,
                 'is_perfect_password' => false,
                 'user_info' => [
@@ -102,9 +102,9 @@ class LoginApiTest extends AbstractHttpTest
             'message' => 'ok',
             'data' => [
                 [
-                    'magic_id' => '1',
-                    'magic_user_id' => '1',
-                    'magic_organization_code' => '1',
+                    'delightful_id' => '1',
+                    'delightful_user_id' => '1',
+                    'delightful_organization_code' => '1',
                     'teamshare_organization_code' => '1',
                     'teamshare_user_id' => '1',
                 ],
@@ -119,7 +119,7 @@ class LoginApiTest extends AbstractHttpTest
     {
         $requestData = [
             'teamshare_login_code' => '',
-            'authorization' => 'magic:invalid_token',
+            'authorization' => 'delightful:invalid_token',
         ];
 
         $response = $this->json('/api/v1/tokens/verify', $requestData);

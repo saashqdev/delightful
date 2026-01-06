@@ -499,12 +499,12 @@ class OrganizationDomainServiceTest extends HttpTestCase
 
             // Delete organizations recorded by code
             foreach ($this->testOrganizationCodes as $code) {
-                OrganizationModel::query()->where('magic_organization_code', $code)->forceDelete();
+                OrganizationModel::query()->where('delightful_organization_code', $code)->forceDelete();
             }
 
             // Remove any remaining test data
             OrganizationModel::query()
-                ->where('magic_organization_code', 'like', 'TEST_ORG_%')
+                ->where('delightful_organization_code', 'like', 'TEST_ORG_%')
                 ->orWhere('name', 'like', 'Test Organization%')
                 ->orWhere('name', 'like', 'Updated Organization%')
                 ->forceDelete();

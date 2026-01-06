@@ -90,16 +90,16 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
         $offset = ($page - 1) * $pageSize;
 
         $query = $this->agentVersionModel::query()
-            ->select('magic_bot_versions.*')
-            ->join('magic_bots', 'magic_bots.bot_version_id', '=', 'magic_bot_versions.id')
-            ->where('magic_bot_versions.organization_code', $organizationCode)
-            ->where('magic_bot_versions.enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value)
-            ->where('magic_bots.organization_code', $organizationCode)
-            ->where('magic_bots.status', DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value)
+            ->select('delightful_bot_versions.*')
+            ->join('delightful_bots', 'delightful_bots.bot_version_id', '=', 'delightful_bot_versions.id')
+            ->where('delightful_bot_versions.organization_code', $organizationCode)
+            ->where('delightful_bot_versions.enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value)
+            ->where('delightful_bots.organization_code', $organizationCode)
+            ->where('delightful_bots.status', DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value)
             ->when(! empty($agentName), function ($query) use ($agentName) {
-                $query->where('magic_bot_versions.robot_name', 'like', "%{$agentName}%");
+                $query->where('delightful_bot_versions.robot_name', 'like', "%{$agentName}%");
             })
-            ->orderByDesc('magic_bot_versions.id')
+            ->orderByDesc('delightful_bot_versions.id')
             ->skip($offset)
             ->take($pageSize);
 
@@ -113,13 +113,13 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {
         return $this->agentVersionModel::query()
-            ->join('magic_bots', 'magic_bots.bot_version_id', '=', 'magic_bot_versions.id')
-            ->where('magic_bot_versions.organization_code', $organizationCode)
-            ->where('magic_bot_versions.enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value)
-            ->where('magic_bots.organization_code', $organizationCode)
-            ->where('magic_bots.status', DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value)
+            ->join('delightful_bots', 'delightful_bots.bot_version_id', '=', 'delightful_bot_versions.id')
+            ->where('delightful_bot_versions.organization_code', $organizationCode)
+            ->where('delightful_bot_versions.enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value)
+            ->where('delightful_bots.organization_code', $organizationCode)
+            ->where('delightful_bots.status', DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value)
             ->when(! empty($agentName), function ($query) use ($agentName) {
-                $query->where('magic_bot_versions.robot_name', 'like', "%{$agentName}%");
+                $query->where('delightful_bot_versions.robot_name', 'like', "%{$agentName}%");
             })
             ->count();
     }

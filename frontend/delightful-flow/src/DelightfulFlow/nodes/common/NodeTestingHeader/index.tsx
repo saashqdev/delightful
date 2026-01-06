@@ -58,8 +58,8 @@ const ToggleButton: FC<ToggleButtonProps> = memo(
 		return (
 			<span className={styles.open} onClick={onToggle}>
 				{showBody
-					? i18next.t("flow.foldTestResult", { ns: "magicFlow" })
-					: i18next.t("flow.expandTestResult", { ns: "magicFlow" })}
+					? i18next.t("flow.foldTestResult", { ns: "delightfulFlow" })
+					: i18next.t("flow.expandTestResult", { ns: "delightfulFlow" })}
 			</span>
 		)
 	},
@@ -87,7 +87,7 @@ const NodeTestingHeaderComponent: FC = () => {
 
 	const onCopy = useMemoizedFn((target: TestingResultRow[]) => {
 		copyToClipboard(JSON.stringify(target))
-		message.success(i18next.t("common.copySuccess", { ns: "magicFlow" }))
+		message.success(i18next.t("common.copySuccess", { ns: "delightfulFlow" }))
 	})
 
 	const handleToggleBody = useCallback(() => {

@@ -12,7 +12,7 @@ from typing import Dict, Optional
 
 from playwright.async_api import Browser, BrowserContext, async_playwright
 
-from magic_use.magic_browser_config import DelightfulBrowserConfig
+from delightful_use.delightful_browser_config import DelightfulBrowserConfig
 
 # Set up logging
 logger = logging.getLogger(__name__)

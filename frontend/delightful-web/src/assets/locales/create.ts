@@ -17,7 +17,7 @@ export function createI18nNext(defaultLang?: string) {
 		.use(LanguageDetector)
 		.use(
 			resourcesToBackend(async (lng: string, namespace: string) => {
-				if (namespace === "magicFlow") {
+				if (namespace === "delightfulFlow") {
 					return import(
 						`../../../node_modules/@delightful/delightful-flow/dist/common/locales/${normalizeLocale(
 							lng,
@@ -38,7 +38,7 @@ export function createI18nNext(defaultLang?: string) {
 					"interface",
 					"message",
 					"flow",
-					"magicFlow",
+					"delightfulFlow",
 					"component",
 				],
 				// the translations

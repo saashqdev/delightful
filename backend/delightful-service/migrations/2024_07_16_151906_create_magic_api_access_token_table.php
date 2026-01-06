@@ -16,7 +16,7 @@ class CreateDelightfulApiAccessTokenTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('magic_api_access_tokens', function (Blueprint $table) {
+        Schema::create('delightful_api_access_tokens', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('access_token')->comment('accessToken');
             $table->string('name')->comment('名称');
@@ -49,6 +49,6 @@ class CreateDelightfulApiAccessTokenTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_api_access_token');
+        Schema::dropIfExists('delightful_api_access_token');
     }
 }

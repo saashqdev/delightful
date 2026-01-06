@@ -94,10 +94,10 @@ class AdminAgentApi extends AbstractApi
 
     private function getPhone(string $userId)
     {
-        $magicUserContactAppService = di(DelightfulUserContactAppService::class);
-        $user = $magicUserContactAppService->getByUserId($userId);
-        $magicAccountAppService = di(DelightfulAccountAppService::class);
-        $accountEntity = $magicAccountAppService->getAccountInfoByDelightfulId($user->getDelightfulId());
+        $delightfulUserContactAppService = di(DelightfulUserContactAppService::class);
+        $user = $delightfulUserContactAppService->getByUserId($userId);
+        $delightfulAccountAppService = di(DelightfulAccountAppService::class);
+        $accountEntity = $delightfulAccountAppService->getAccountInfoByDelightfulId($user->getDelightfulId());
         return $accountEntity->getPhone();
     }
 

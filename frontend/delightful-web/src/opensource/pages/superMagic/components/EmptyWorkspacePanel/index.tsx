@@ -6,7 +6,7 @@ import "swiper/css/scrollbar"
 import { Mousewheel, Scrollbar } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import arrowBottomImage from "../../assets/svg/arrow-bottom.svg"
-import magicBetaImage from "../../assets/svg/magic-beta.svg"
+import delightfulBetaImage from "../../assets/svg/delightful-beta.svg"
 import type { MessagePanelProps } from "../MessagePanel/MessagePanel"
 import MessagePanel from "../MessagePanel/MessagePanel"
 import useStyles from "./style"
@@ -25,7 +25,7 @@ export default function EmptyWorkspacePanel(props: EmptyWorkspacePanelProps) {
 	const [activeGroupKey, setActiveGroupKey] = useState<string>("0")
 
 	useEffect(() => {
-		fetch(`https://super-magic-v1.tos-cn-guangzhou.volces.com/cases.json?t=${Date.now()}`, {
+		fetch(`https://super-delightful-v1.tos-cn-guangzhou.volces.com/cases.json?t=${Date.now()}`, {
 			mode: "cors",
 		})
 			.then((res) => res.json())
@@ -50,7 +50,7 @@ export default function EmptyWorkspacePanel(props: EmptyWorkspacePanelProps) {
 
 	return (
 		<div className={styles.emptyWorkspacePanelContainer}>
-			<img src={magicBetaImage} alt="magic" className={styles.magicBetaImage} />
+			<img src={delightfulBetaImage} alt="delightful" className={styles.delightfulBetaImage} />
 			<div className={styles.emptyWorkspacePanelTitle}>👋 嗨，我的朋友</div>
 			<div className={styles.emptyWorkspacePanelSubTitle}>有什么麦吉可以帮你吗？</div>
 			<div className={styles.emptyWorkspacePanelCaseTitle}>「✨ 百倍生产力案例」</div>

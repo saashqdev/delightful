@@ -205,7 +205,7 @@ export const RelationItemStyle = styled.div`
 		& > .condition_fields-item > .noMarginBottom {
 			margin-bottom: 0 !important;
 		}
-		& > .condition_fields-item > .magic-row > .magic-col-24 {
+		& > .condition_fields-item > .delightful-row > .delightful-col-24 {
 			width: 100% !important;
 			max-width: 100% !important;
 			padding-right: 0 !important;

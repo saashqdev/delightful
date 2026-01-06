@@ -66,13 +66,13 @@ interface DelightfulDepartmentRepositoryInterface
     /**
      * 获取部门的所有子部门的成员总数.
      */
-    public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $magicDepartmentEntity): int;
+    public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int;
 
     /**
-     * @param DelightfulDepartmentEntity[] $magicDepartmentsDTO
+     * @param DelightfulDepartmentEntity[] $delightfulDepartmentsDTO
      * @return DelightfulDepartmentEntity[]
      */
-    public function createDepartments(array $magicDepartmentsDTO): array;
+    public function createDepartments(array $delightfulDepartmentsDTO): array;
 
     public function updateDepartment(string $departmentId, array $data, string $organizationCode): int;
 

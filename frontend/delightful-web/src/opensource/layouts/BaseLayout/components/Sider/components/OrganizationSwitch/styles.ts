@@ -2,8 +2,8 @@ import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) => {
 	const backgroundColor = isDarkMode
-		? token.magicColorScales.grey[0]
-		: token.magicColorScales.white
+		? token.delightfulColorScales.grey[0]
+		: token.delightfulColorScales.white
 	return {
 		popover: css`
 			.${prefixCls}-popover-inner {
@@ -60,10 +60,10 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 				&.${prefixCls}-menu-item-danger:hover {
 					background-color: ${
 						isDarkMode
-							? token.magicColorUsages.danger.default
-							: token.magicColorScales.red[0]
+							? token.delightfulColorUsages.danger.default
+							: token.delightfulColorScales.red[0]
 					} !important;
-					color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.danger} !important;
+					color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.danger} !important;
 				}
 			}
 
@@ -81,7 +81,7 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 		`,
 		avatar: css`
 			color: white !important;
-			border: 1px solid ${token.magicColorUsages.border};
+			border: 1px solid ${token.delightfulColorUsages.border};
 		`,
 		popoverContent: css`
 			width: 300px;
@@ -97,8 +97,8 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 
 export const useOrganizationListStyles = createStyles(({ isDarkMode, css, token }) => {
 	const backgroundColor = isDarkMode
-		? token.magicColorScales.grey[0]
-		: token.magicColorScales.white
+		? token.delightfulColorScales.grey[0]
+		: token.delightfulColorScales.white
 	return {
 		container: css`
 			display: flex;
@@ -144,7 +144,7 @@ export const useOrganizationListStyles = createStyles(({ isDarkMode, css, token 
 			align-items: center;
 			gap: 10px;
 			align-self: stretch;
-			color: ${token.magicColorUsages.text[3]};
+			color: ${token.delightfulColorUsages.text[3]};
 			font-size: 12px;
 			font-style: normal;
 			font-weight: 400;
@@ -153,7 +153,7 @@ export const useOrganizationListStyles = createStyles(({ isDarkMode, css, token 
 			width: 10px;
 			flex: auto;
 			height: 1px;
-			background-color: ${token.magicColorUsages.border};
+			background-color: ${token.delightfulColorUsages.border};
 		`,
 		groupWrapper: css`
 			width: 100%;
@@ -177,14 +177,14 @@ export const useOrganizationListStyles = createStyles(({ isDarkMode, css, token 
 		groupTitle: css`
 			flex: none;
 			margin-right: auto;
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 			font-size: 14px;
 			font-style: normal;
 			font-weight: 400;
 			line-height: 20px; /* 142.857% */
 		`,
 		groupDesc: css`
-			color: ${token.magicColorUsages.text[3]};
+			color: ${token.delightfulColorUsages.text[3]};
 			font-style: normal;
 			font-weight: 400;
 			margin-left: 16px;
@@ -206,7 +206,7 @@ export const useOrganizationListStyles = createStyles(({ isDarkMode, css, token 
 			margin-bottom: 2px;
 
 			&:hover {
-				background-color: ${token.magicColorUsages.fill[0]};
+				background-color: ${token.delightfulColorUsages.fill[0]};
 			}
 
 			&:last-child {
@@ -221,14 +221,14 @@ export const useOrganizationListStyles = createStyles(({ isDarkMode, css, token 
 			}
 		`,
 		itemSelected: css`
-			background-color: ${token.magicColorUsages.primaryLight.default};
+			background-color: ${token.delightfulColorUsages.primaryLight.default};
 
 			&:hover {
-				background-color: ${token.magicColorUsages.primaryLight.default} !important;
+				background-color: ${token.delightfulColorUsages.primaryLight.default} !important;
 			}
 		`,
 		itemActive: css`
-			background: ${token.magicColorUsages.primaryLight.default};
+			background: ${token.delightfulColorUsages.primaryLight.default};
 		`,
 		itemIcon: css`
 			display: flex;
@@ -244,7 +244,7 @@ export const useOrganizationListStyles = createStyles(({ isDarkMode, css, token 
 		`,
 		avatar: css`
 			color: white !important;
-			border: 1px solid ${token.magicColorUsages.border};
+			border: 1px solid ${token.delightfulColorUsages.border};
 		`,
 		avatarDisabled: css`
 			filter: grayscale(100%);
@@ -262,14 +262,14 @@ export const useOrganizationListStyles = createStyles(({ isDarkMode, css, token 
 			border-radius: 8px;
 			border: 0 solid rgba(0, 0, 0, 0);
 			cursor: pointer;
-			background: ${token.magicColorUsages.fill[0]};
+			background: ${token.delightfulColorUsages.fill[0]};
 
 			&:hover {
-				background: ${token.magicColorUsages.fill[1]};
+				background: ${token.delightfulColorUsages.fill[1]};
 			}
 
 			&:active {
-				background: ${token.magicColorUsages.fill[2]};
+				background: ${token.delightfulColorUsages.fill[2]};
 			}
 		`,
 	}

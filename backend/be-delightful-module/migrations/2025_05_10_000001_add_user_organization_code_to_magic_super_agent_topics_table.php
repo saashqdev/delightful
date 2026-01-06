@@ -14,8 +14,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_topics', function (Blueprint $table) {
-            if (! Schema::hasColumn('magic_super_agent_topics', 'user_organization_code')) {
+        Schema::table('delightful_super_agent_topics', function (Blueprint $table) {
+            if (! Schema::hasColumn('delightful_super_agent_topics', 'user_organization_code')) {
                 $table->string('user_organization_code', 64)->default('')->comment('user organization code')->after('user_id');
             }
         });
@@ -26,8 +26,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_topics', function (Blueprint $table) {
-            if (Schema::hasColumn('magic_super_agent_topics', 'user_organization_code')) {
+        Schema::table('delightful_super_agent_topics', function (Blueprint $table) {
+            if (Schema::hasColumn('delightful_super_agent_topics', 'user_organization_code')) {
                 $table->dropColumn('user_organization_code');
             }
         });

@@ -78,21 +78,21 @@ class KnowledgeBaseFragmentRepository extends KnowledgeBaseAbstractRepository im
         return array_map(fn ($item) => new KnowledgeBaseFragmentEntity($item), $res);
     }
 
-    public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseFragmentEntity $magicFlowKnowledgeFragmentEntity): KnowledgeBaseFragmentEntity
+    public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseFragmentEntity $delightfulFlowKnowledgeFragmentEntity): KnowledgeBaseFragmentEntity
     {
         /* @var KnowledgeBaseFragmentsModel $model */
-        if ($magicFlowKnowledgeFragmentEntity->getId()) {
+        if ($delightfulFlowKnowledgeFragmentEntity->getId()) {
             $builder = $this->createBuilder($dataIsolation, KnowledgeBaseFragmentsModel::query());
-            $model = $builder->where('id', $magicFlowKnowledgeFragmentEntity->getId())->first();
+            $model = $builder->where('id', $delightfulFlowKnowledgeFragmentEntity->getId())->first();
         } else {
             $model = new KnowledgeBaseFragmentsModel();
         }
 
-        $model->fill($this->getAttributes($magicFlowKnowledgeFragmentEntity));
+        $model->fill($this->getAttributes($delightfulFlowKnowledgeFragmentEntity));
         $model->save();
 
-        $magicFlowKnowledgeFragmentEntity->setId($model->id);
-        return $magicFlowKnowledgeFragmentEntity;
+        $delightfulFlowKnowledgeFragmentEntity->setId($model->id);
+        return $delightfulFlowKnowledgeFragmentEntity;
     }
 
     public function queries(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseFragmentQuery $query, Page $page): array
@@ -149,13 +149,13 @@ class KnowledgeBaseFragmentRepository extends KnowledgeBaseAbstractRepository im
         return $builder->count();
     }
 
-    public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseFragmentEntity $magicFlowKnowledgeFragmentEntity): void
+    public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseFragmentEntity $delightfulFlowKnowledgeFragmentEntity): void
     {
-        if (empty($magicFlowKnowledgeFragmentEntity->getId())) {
+        if (empty($delightfulFlowKnowledgeFragmentEntity->getId())) {
             return;
         }
         $builder = $this->createBuilder($dataIsolation, KnowledgeBaseFragmentsModel::query());
-        $builder->where('id', $magicFlowKnowledgeFragmentEntity->getId())->delete();
+        $builder->where('id', $delightfulFlowKnowledgeFragmentEntity->getId())->delete();
     }
 
     public function fragmentBatchDestroy(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, array $fragmentIds): void

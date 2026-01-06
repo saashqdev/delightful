@@ -14,12 +14,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_chat_topic_messages')) {
+        if (Schema::hasTable('delightful_chat_topic_messages')) {
             return;
         }
         // 话题的相关消息表
         // 话题包含的 message_id 列表. 不在seq表加话题id字段,避免seq承载的功能太多,需要加太多索引
-        Schema::create('magic_chat_topic_messages', static function (Blueprint $table) {
+        Schema::create('delightful_chat_topic_messages', static function (Blueprint $table) {
             // 消息id
             $table->bigIncrements('seq_id')->comment('消息的序列id.不在seq表加话题id字段,避免seq承载的功能太多,需要加太多索引');
             // 会话id. 冗余字段
@@ -40,6 +40,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_chat_topic_messages');
+        Schema::dropIfExists('delightful_chat_topic_messages');
     }
 };

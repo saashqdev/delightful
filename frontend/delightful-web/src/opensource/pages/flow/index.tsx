@@ -1,5 +1,5 @@
 /**
- * magic-flow节点业务组件
+ * delightful-flow节点业务组件
  */
 import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useTranslation } from "react-i18next"

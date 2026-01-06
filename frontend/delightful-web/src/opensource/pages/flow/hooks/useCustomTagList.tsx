@@ -45,7 +45,7 @@ const useStyles = createStyles(({ css }) => {
 			text-wrap: nowrap;
 		`,
 		spin: css`
-			.magic-spin-dot {
+			.delightful-spin-dot {
 				height: 12px;
 				width: 12px;
 				color: rgba(49, 92, 236, 1);

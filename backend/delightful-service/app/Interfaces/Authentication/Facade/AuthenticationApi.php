@@ -40,8 +40,8 @@ class AuthenticationApi
         $loginCheckDTO->setAuthorization($authorization);
         $loginCheckDTO->setLoginCode($loginCode);
         $loginCheckDTO->setOrganizationCode($organizationCode);
-        $magicEnvironmentEntity = $this->userAppService->getLoginCodeEnv($loginCheckDTO->getLoginCode());
-        return $this->sessionInterface->LoginCheck($loginCheckDTO, $magicEnvironmentEntity, $loginCheckDTO->getOrganizationCode());
+        $delightfulEnvironmentEntity = $this->userAppService->getLoginCodeEnv($loginCheckDTO->getLoginCode());
+        return $this->sessionInterface->LoginCheck($loginCheckDTO, $delightfulEnvironmentEntity, $loginCheckDTO->getOrganizationCode());
     }
 
     /**
@@ -50,9 +50,9 @@ class AuthenticationApi
     public function authEnvironment(RequestInterface $request): array
     {
         $authorization = (string) $request->header('authorization');
-        $magicEnvironmentEntity = $this->userAppService->getEnvByAuthorization($authorization);
+        $delightfulEnvironmentEntity = $this->userAppService->getEnvByAuthorization($authorization);
         return [
-            'login_code' => $magicEnvironmentEntity?->getEnvironmentCode(),
+            'login_code' => $delightfulEnvironmentEntity?->getEnvironmentCode(),
         ];
     }
 }

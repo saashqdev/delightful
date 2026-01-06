@@ -16,7 +16,7 @@ use RuntimeException;
  */
 class DelightfulAIApi
 {
-    public const string NAME = 'magic_ai';
+    public const string NAME = 'delightful_ai';
 
     protected array $routes = [
         'chat' => Api\Chat::class,

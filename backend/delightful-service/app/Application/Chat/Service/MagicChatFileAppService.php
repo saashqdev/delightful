@@ -20,7 +20,7 @@ use App\Domain\File\Service\FileDomainService;
 class DelightfulChatFileAppService extends AbstractAppService
 {
     public function __construct(
-        private readonly DelightfulChatFileDomainService $magicChatFileDomainService,
+        private readonly DelightfulChatFileDomainService $delightfulChatFileDomainService,
         private readonly FileDomainService $fileDomainService
     ) {
     }
@@ -49,7 +49,7 @@ class DelightfulChatFileAppService extends AbstractAppService
         $fileEntity->setFileType($fileType);
 
         // 2. 保存或更新文件
-        $savedFile = $this->magicChatFileDomainService->saveOrUpdateByFileKey($fileEntity, $dataIsolation);
+        $savedFile = $this->delightfulChatFileDomainService->saveOrUpdateByFileKey($fileEntity, $dataIsolation);
 
         // 3. 获取文件URL
         $fileUrl = $this->fileDomainService->getLink(
@@ -78,7 +78,7 @@ class DelightfulChatFileAppService extends AbstractAppService
     public function getFileInfo(string $fileId): ?array
     {
         // 通过ID获取文件实体
-        $fileEntities = $this->magicChatFileDomainService->getFileEntitiesByFileIds([$fileId], null, null, true);
+        $fileEntities = $this->delightfulChatFileDomainService->getFileEntitiesByFileIds([$fileId], null, null, true);
         if (empty($fileEntities)) {
             return null;
         }

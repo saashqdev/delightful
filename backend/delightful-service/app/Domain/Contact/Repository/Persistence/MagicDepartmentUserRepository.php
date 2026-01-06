@@ -121,19 +121,19 @@ class DelightfulDepartmentUserRepository implements DelightfulDepartmentUserRepo
         return $this->departmentUserModel->newQuery()->insert($createDepartmentUserDTOs);
     }
 
-    public function updateDepartmentUser(string $magicDepartmentUserPrimaryId, array $updateData): int
+    public function updateDepartmentUser(string $delightfulDepartmentUserPrimaryId, array $updateData): int
     {
         $updateData['updated_at'] = date('Y-m-d H:i:s');
         return $this->departmentUserModel->newQuery()
-            ->where('id', $magicDepartmentUserPrimaryId)
+            ->where('id', $delightfulDepartmentUserPrimaryId)
             ->update($updateData);
     }
 
-    public function deleteDepartmentUsersByDelightfulIds(array $magicIds, string $departmentId, string $magicOrganizationCode): int
+    public function deleteDepartmentUsersByDelightfulIds(array $delightfulIds, string $departmentId, string $delightfulOrganizationCode): int
     {
         return (int) $this->departmentUserModel->newQuery()
-            ->where('organization_code', $magicOrganizationCode)
-            ->whereIn('magic_id', $magicIds)
+            ->where('organization_code', $delightfulOrganizationCode)
+            ->whereIn('delightful_id', $delightfulIds)
             ->where('department_id', $departmentId)
             ->delete();
     }
@@ -141,11 +141,11 @@ class DelightfulDepartmentUserRepository implements DelightfulDepartmentUserRepo
     /**
      * @return DelightfulDepartmentUserEntity[]
      */
-    public function searchDepartmentUsersByJobTitle(string $keyword, string $magicOrganizationCode): array
+    public function searchDepartmentUsersByJobTitle(string $keyword, string $delightfulOrganizationCode): array
     {
         $res = $this->departmentUserModel::query()
             ->where('job_title', 'like', "%{$keyword}%")
-            ->where('organization_code', $magicOrganizationCode)
+            ->where('organization_code', $delightfulOrganizationCode)
             ->get()
             ->toArray();
         return array_map(fn ($item) => new DelightfulDepartmentUserEntity($item), $res);

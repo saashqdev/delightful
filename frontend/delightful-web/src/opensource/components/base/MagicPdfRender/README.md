@@ -141,7 +141,7 @@ const useCustomStyles = createStyles(({ token }) => ({
 
 ```typescript
 // src/assets/locales/create.ts
-ns: ["translation", "common", "interface", "message", "flow", "magicFlow", "component"]
+ns: ["translation", "common", "interface", "message", "flow", "delightfulFlow", "component"]
 ```
 
 ### 语言文件

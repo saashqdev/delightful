@@ -868,8 +868,8 @@ class Agent(BaseAgent):
                     self.set_agent_state(AgentState.FINISHED)  # Ask user also counts as completing current round
                     finish_task_detected = True
                     raise asyncio.CancelledError()
-                elif result.name == "call_agent" and self.agent_name == "super-magic":
-                    logger.info("Detected super-magic agent performed call_agent tool call, will append task confirmation reminder message")
+                elif result.name == "call_agent" and self.agent_name == "super-delightful":
+                    logger.info("Detected super-delightful agent performed call_agent tool call, will append task confirmation reminder message")
                     await self.chat_history.append_assistant_message(
                         content="Internal thought (user cannot see): I have delegated tasks to other agents, I need to check their work progress and results. If I confirm they have completed their tasks, then I should check if the corresponding tasks in todo.md file are completed. If completed, I need to mark the corresponding task status as done. If not completed, I should think of other methods and continue the task by calling the call_agent tool. Note: Do not let the user know about the existence of other agents.",
                         show_in_ui=False

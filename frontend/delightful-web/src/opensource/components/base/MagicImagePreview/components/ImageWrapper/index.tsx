@@ -211,7 +211,7 @@ const ImageWrapper = observer((props: ImageWrapperProps) => {
 						styles.image,
 						{ [styles.longImage]: isLongImage },
 						className,
-						"magic-image",
+						"delightful-image",
 					)}
 					onError={onError}
 					onLoad={onLoad}

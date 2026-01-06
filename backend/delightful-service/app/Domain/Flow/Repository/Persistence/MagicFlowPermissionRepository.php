@@ -18,29 +18,29 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 class DelightfulFlowPermissionRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowPermissionRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowPermissionEntity $magicFlowPermissionEntity): DelightfulFlowPermissionEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowPermissionEntity $delightfulFlowPermissionEntity): DelightfulFlowPermissionEntity
     {
         $model = $this->createBuilder($dataIsolation, DelightfulFlowPermissionModel::query())
-            ->where('resource_type', $magicFlowPermissionEntity->getResourceType()->value)
-            ->where('resource_id', $magicFlowPermissionEntity->getResourceId())
-            ->where('target_type', $magicFlowPermissionEntity->getTargetType()->value)
-            ->where('target_id', $magicFlowPermissionEntity->getTargetId())
+            ->where('resource_type', $delightfulFlowPermissionEntity->getResourceType()->value)
+            ->where('resource_id', $delightfulFlowPermissionEntity->getResourceId())
+            ->where('target_type', $delightfulFlowPermissionEntity->getTargetType()->value)
+            ->where('target_id', $delightfulFlowPermissionEntity->getTargetId())
             ->first();
         if ($model) {
             $model->fill([
-                'operation' => $magicFlowPermissionEntity->getOperation()->value,
-                'updated_uid' => $magicFlowPermissionEntity->getCreator(),
+                'operation' => $delightfulFlowPermissionEntity->getOperation()->value,
+                'updated_uid' => $delightfulFlowPermissionEntity->getCreator(),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);
         } else {
             $model = new DelightfulFlowPermissionModel();
-            $model->fill($this->getAttributes($magicFlowPermissionEntity));
+            $model->fill($this->getAttributes($delightfulFlowPermissionEntity));
         }
         $model->save();
 
-        $magicFlowPermissionEntity->setId($model->id);
+        $delightfulFlowPermissionEntity->setId($model->id);
 
-        return $magicFlowPermissionEntity;
+        return $delightfulFlowPermissionEntity;
     }
 
     public function getByResourceAndTarget(FlowDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, TargetType $targetType, string $targetId): ?DelightfulFlowPermissionEntity

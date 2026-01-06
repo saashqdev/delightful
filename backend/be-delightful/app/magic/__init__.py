@@ -1,5 +1,5 @@
 """Delightful for Be Delightful."""
 
-from app.magic.agent import Agent
+from app.delightful.agent import Agent
 
 __all__ = ["Agent"]

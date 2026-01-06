@@ -99,7 +99,7 @@ class DelightfulFlowToolSetEntity extends AbstractEntity
         $this->id = null;
     }
 
-    public function prepareForModification(DelightfulFlowToolSetEntity $magicFlowToolSetEntity): void
+    public function prepareForModification(DelightfulFlowToolSetEntity $delightfulFlowToolSetEntity): void
     {
         if (empty($this->organizationCode)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.organization_code.empty');
@@ -110,14 +110,14 @@ class DelightfulFlowToolSetEntity extends AbstractEntity
         if (empty($this->creator)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.creator.empty');
         }
-        $magicFlowToolSetEntity->setName($this->name);
-        $magicFlowToolSetEntity->setDescription($this->description);
-        $magicFlowToolSetEntity->setIcon($this->icon);
-        $magicFlowToolSetEntity->setModifier($this->creator);
+        $delightfulFlowToolSetEntity->setName($this->name);
+        $delightfulFlowToolSetEntity->setDescription($this->description);
+        $delightfulFlowToolSetEntity->setIcon($this->icon);
+        $delightfulFlowToolSetEntity->setModifier($this->creator);
         if (! is_null($this->enabled)) {
-            $magicFlowToolSetEntity->setEnabled($this->enabled);
+            $delightfulFlowToolSetEntity->setEnabled($this->enabled);
         }
-        $magicFlowToolSetEntity->setUpdatedAt(new DateTime());
+        $delightfulFlowToolSetEntity->setUpdatedAt(new DateTime());
     }
 
     public function getId(): ?int

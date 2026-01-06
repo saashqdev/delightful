@@ -33,14 +33,14 @@ class LastConversationService {
 	 * 设置会话ID
 	 */
 	setLastConversation(
-		magicId: string | undefined,
+		delightfulId: string | undefined,
 		organizationCode: string | undefined,
 		conversationId: string | undefined,
 	) {
-		if (!magicId || !organizationCode || !conversationId) {
+		if (!delightfulId || !organizationCode || !conversationId) {
 			return
 		}
-		this.lastConversationMap.set(`${magicId}/${organizationCode}`, conversationId)
+		this.lastConversationMap.set(`${delightfulId}/${organizationCode}`, conversationId)
 		if (this.idleCallback) {
 			cancelIdleCallback(this.idleCallback)
 		}
@@ -53,11 +53,11 @@ class LastConversationService {
 	/**
 	 * 获取会话ID
 	 */
-	getLastConversation(magicId?: string, organizationCode?: string) {
-		if (!magicId || !organizationCode) {
+	getLastConversation(delightfulId?: string, organizationCode?: string) {
+		if (!delightfulId || !organizationCode) {
 			return undefined
 		}
-		return this.lastConversationMap.get(`${magicId}/${organizationCode}`)
+		return this.lastConversationMap.get(`${delightfulId}/${organizationCode}`)
 	}
 }
 

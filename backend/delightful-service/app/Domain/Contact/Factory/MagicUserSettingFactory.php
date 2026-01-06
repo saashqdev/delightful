@@ -16,7 +16,7 @@ class DelightfulUserSettingFactory
     {
         $entity = new DelightfulUserSettingEntity();
         $entity->setId($model->id);
-        $entity->setDelightfulId($model->magic_id);
+        $entity->setDelightfulId($model->delightful_id);
         $entity->setOrganizationCode($model->organization_code);
         $entity->setUserId($model->user_id);
         $entity->setKey($model->key);
@@ -33,7 +33,7 @@ class DelightfulUserSettingFactory
     {
         return [
             'id' => $entity->getId(),
-            'magic_id' => $entity->getDelightfulId(),
+            'delightful_id' => $entity->getDelightfulId(),
             'organization_code' => $entity->getOrganizationCode(),
             'user_id' => $entity->getUserId(),
             'key' => $entity->getKey(),

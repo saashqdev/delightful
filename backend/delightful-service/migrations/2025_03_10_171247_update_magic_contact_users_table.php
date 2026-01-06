@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_contact_users', function (Blueprint $table) {
+        Schema::table('delightful_contact_users', function (Blueprint $table) {
             // 修改 extra 类型为 text
             $table->text('extra')->nullable()->default(null)->comment('用户扩展信息')->change();
         });
@@ -25,7 +25,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_contact_users', function (Blueprint $table) {
+        Schema::table('delightful_contact_users', function (Blueprint $table) {
         });
     }
 };

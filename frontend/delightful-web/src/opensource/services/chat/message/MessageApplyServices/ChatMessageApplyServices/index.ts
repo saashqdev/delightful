@@ -167,7 +167,7 @@ class ChatMessageApplyService {
 
 		switch (message.message.type) {
 			case ConversationMessageType.Text:
-				pubsub.publish("super_magic_new_message", message)
+				pubsub.publish("super_delightful_new_message", message)
 				StreamMessageApplyServiceV2.recordMessageInfo(
 					message as SeqResponse<ConversationMessage>,
 				)

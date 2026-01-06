@@ -42,9 +42,9 @@ class SeqAssembler
     /**
      * 将entity转换为可以直接写入数据库的数据.
      */
-    public static function getInsertDataByEntity(DelightfulSeqEntity $magicSeqEntity): array
+    public static function getInsertDataByEntity(DelightfulSeqEntity $delightfulSeqEntity): array
     {
-        $seqData = $magicSeqEntity->toArray();
+        $seqData = $delightfulSeqEntity->toArray();
         $seqData['content'] = Json::encode($seqData['content'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         $seqData['receive_list'] = Json::encode($seqData['receive_list'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         return $seqData;
@@ -57,11 +57,11 @@ class SeqAssembler
     public static function getClientSeqStructs(array $seqInfos, array $messageInfos): array
     {
         $seqStructs = [];
-        $messageInfos = array_column($messageInfos, null, 'magic_message_id');
+        $messageInfos = array_column($messageInfos, null, 'delightful_message_id');
         foreach ($seqInfos as $seqInfo) {
             $seqEntity = self::getSeqEntity($seqInfo);
             if ($seqEntity->getSeqType() instanceof ChatMessageType) {
-                $messageInfo = $messageInfos[$seqInfo['magic_message_id']] ?? [];
+                $messageInfo = $messageInfos[$seqInfo['delightful_message_id']] ?? [];
                 $messageEntity = MessageAssembler::getMessageEntity($messageInfo);
             } else {
                 // 控制消息没有聊天消息的状态
@@ -170,7 +170,7 @@ class SeqAssembler
         $seqData['refer_message_id'] = $referMessageId;
         $seqData['created_at'] = $time;
         $seqData['updated_at'] = $time;
-        $seqData['magic_message_id'] = ''; // 控制消息没有 magic_message_id
+        $seqData['delightful_message_id'] = ''; // 控制消息没有 delightful_message_id
         $seqData['receive_list'] = Json::encode($seqData['receive_list'] ?: [], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         return self::getSeqEntity($seqData);
     }
@@ -203,7 +203,7 @@ class SeqAssembler
         $extra->setTopicId($topicEntity->getTopicId());
         $seqData['extra'] = Json::encode($extra->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         $seqData['receive_list'] = '';
-        $seqData['magic_message_id'] = ''; // 控制消息没有 magic_message_id
+        $seqData['delightful_message_id'] = ''; // 控制消息没有 delightful_message_id
         return self::getSeqEntity($seqData);
     }
 
@@ -282,8 +282,8 @@ class SeqAssembler
         // 生成客户端消息结构
         $clientMessageData = [
             // 服务端生成的消息唯一id，全局唯一。用于撤回、编辑消息。
-            'magic_message_id' => $seqEntity->getDelightfulMessageId(),
-            // 客户端生成，需要ios/安卓/web三端共同确定一个生成算法。用于告知客户端，magic_message_id的由来
+            'delightful_message_id' => $seqEntity->getDelightfulMessageId(),
+            // 客户端生成，需要ios/安卓/web三端共同确定一个生成算法。用于告知客户端，delightful_message_id的由来
             'app_message_id' => $seqEntity->getAppMessageId(),
             // 发送者
             'sender_id' => (string) $messageEntity?->getSenderId(),
@@ -292,7 +292,7 @@ class SeqAssembler
             'type' => $messageTypeName,
             // 回显未读人数,如果用户点击了详情,再请求具体的消息内容
             'unread_count' => $unreadCount,
-            // 消息发送时间，与 magic_message_id 一起，用于撤回、编辑消息时的唯一性校验。
+            // 消息发送时间，与 delightful_message_id 一起，用于撤回、编辑消息时的唯一性校验。
             'send_time' => $carbon->getTimestamp(),
             // 聊天消息状态:unread | seen | read |revoked  .对应中文释义：未读|已读|已查看（非纯文本的复杂类型消息，用户点击了详情）  | 撤回
             'status' => $messageStatus ?: '',
@@ -303,12 +303,12 @@ class SeqAssembler
         // 生成客户端seq结构
         $clientSequenceData = [
             // 序列号归属账号id
-            'magic_id' => $seqEntity->getObjectId(),
+            'delightful_id' => $seqEntity->getObjectId(),
             // 序列号，一定不重复，一定增长，但是不保证连续。
             'seq_id' => $seqEntity->getSeqId(),
             // 用户的消息id，用户下唯一。
             'message_id' => $seqEntity->getMessageId(),
-            // 本条消息指向的magic_message_id。 用于实现已读回执场景。存在引用关系时，send_msg_id字段不再返回，因为发送方的消息id没有改变。
+            // 本条消息指向的delightful_message_id。 用于实现已读回执场景。存在引用关系时，send_msg_id字段不再返回，因为发送方的消息id没有改变。
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // 发送方的消息id
             'sender_message_id' => $seqEntity->getSenderMessageId(),

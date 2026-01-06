@@ -13,7 +13,7 @@ class OrganizationCreatorResponseDTO extends AbstractDTO
 {
     public string $userId = '';
 
-    public ?string $magicId = null;
+    public ?string $delightfulId = null;
 
     public string $name = '';
 
@@ -28,9 +28,9 @@ class OrganizationCreatorResponseDTO extends AbstractDTO
         $this->userId = $userId ?? '';
     }
 
-    public function setDelightfulId(?string $magicId): void
+    public function setDelightfulId(?string $delightfulId): void
     {
-        $this->magicId = $magicId;
+        $this->delightfulId = $delightfulId;
     }
 
     public function setName(?string $name): void

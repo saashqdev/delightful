@@ -44,7 +44,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         ];
 
         // 发送POST请求到正确的接口路径
-        $response = $this->json('/api/v2/magic/conversation/chatCompletions', $requestData, $headers);
+        $response = $this->json('/api/v2/delightful/conversation/chatCompletions', $requestData, $headers);
 
         // 验证响应码
         $this->assertEquals(1000, $response['code'] ?? 0, '响应码应为1000');
@@ -96,7 +96,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         ];
 
         // 发送POST请求到正确的接口路径
-        $response = $this->json('/api/v2/magic/chat/chatCompletions', $requestData, $headers);
+        $response = $this->json('/api/v2/delightful/chat/chatCompletions', $requestData, $headers);
 
         // 定义期望的错误响应结构
         $expectedErrorStructure = [
@@ -127,7 +127,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         ];
 
         // 发送POST请求到正确的接口路径
-        $response = $this->json('/api/v2/magic/chat/chatCompletions', $requestData, $headers);
+        $response = $this->json('/api/v2/delightful/chat/chatCompletions', $requestData, $headers);
 
         // 定义期望的错误响应结构
         $expectedErrorStructure = [

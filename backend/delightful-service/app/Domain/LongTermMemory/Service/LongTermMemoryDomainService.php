@@ -97,15 +97,15 @@ readonly class LongTermMemoryDomainService
     /**
      * 批量处理记忆建议（接受/拒绝）.
      */
-    public function batchProcessMemorySuggestions(array $memoryIds, MemoryOperationAction $action, MemoryOperationScenario $scenario = MemoryOperationScenario::ADMIN_PANEL, ?string $magicMessageId = null): void
+    public function batchProcessMemorySuggestions(array $memoryIds, MemoryOperationAction $action, MemoryOperationScenario $scenario = MemoryOperationScenario::ADMIN_PANEL, ?string $delightfulMessageId = null): void
     {
         if (empty($memoryIds)) {
             return;
         }
 
-        // 验证当 scenario 是 memory_card_quick 时，magicMessageId 必须提供
-        if ($scenario === MemoryOperationScenario::MEMORY_CARD_QUICK && empty($magicMessageId)) {
-            throw new InvalidArgumentException('magic_message_id is required when scenario is memory_card_quick');
+        // 验证当 scenario 是 memory_card_quick 时，delightfulMessageId 必须提供
+        if ($scenario === MemoryOperationScenario::MEMORY_CARD_QUICK && empty($delightfulMessageId)) {
+            throw new InvalidArgumentException('delightful_message_id is required when scenario is memory_card_quick');
         }
 
         // 生成锁名称和所有者（基于记忆ID排序后生成唯一锁名）
@@ -187,8 +187,8 @@ readonly class LongTermMemoryDomainService
             }
 
             // 如果是 memory_card_quick 场景，需要更新对应的消息内容
-            if ($scenario === MemoryOperationScenario::MEMORY_CARD_QUICK && ! empty($magicMessageId)) {
-                $this->updateMessageWithMemoryOperation($magicMessageId, $action, $memoryIds);
+            if ($scenario === MemoryOperationScenario::MEMORY_CARD_QUICK && ! empty($delightfulMessageId)) {
+                $this->updateMessageWithMemoryOperation($delightfulMessageId, $action, $memoryIds);
             }
         } finally {
             // 确保释放锁
@@ -684,15 +684,15 @@ readonly class LongTermMemoryDomainService
     /**
      * 更新消息内容，设置记忆操作信息.
      */
-    private function updateMessageWithMemoryOperation(string $magicMessageId, MemoryOperationAction $action, array $memoryIds): void
+    private function updateMessageWithMemoryOperation(string $delightfulMessageId, MemoryOperationAction $action, array $memoryIds): void
     {
         try {
-            // 根据 magic_message_id 查询消息数据
-            $messageEntity = $this->messageRepository->getMessageByDelightfulMessageId($magicMessageId);
+            // 根据 delightful_message_id 查询消息数据
+            $messageEntity = $this->messageRepository->getMessageByDelightfulMessageId($delightfulMessageId);
 
             if (! $messageEntity) {
                 $this->logger->warning('Message not found for memory operation update', [
-                    'magic_message_id' => $magicMessageId,
+                    'delightful_message_id' => $delightfulMessageId,
                     'action' => $action->value,
                     'memory_ids' => $memoryIds,
                 ]);
@@ -713,11 +713,11 @@ readonly class LongTermMemoryDomainService
 
             // 更新消息内容
             $updatedContent = $superAgentMessage->toArray();
-            $this->messageRepository->updateMessageContent($magicMessageId, $updatedContent);
+            $this->messageRepository->updateMessageContent($delightfulMessageId, $updatedContent);
         } catch (Throwable $e) {
             // 静默处理更新失败，不影响主要流程
             $this->logger->warning('Failed to update message with memory operation', [
-                'magic_message_id' => $magicMessageId,
+                'delightful_message_id' => $delightfulMessageId,
                 'action' => $action->value,
                 'memory_ids' => $memoryIds,
                 'error' => $e->getMessage(),

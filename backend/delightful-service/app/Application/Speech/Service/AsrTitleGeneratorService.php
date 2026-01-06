@@ -27,9 +27,9 @@ use Throwable;
 readonly class AsrTitleGeneratorService
 {
     public function __construct(
-        private DelightfulChatMessageAppService $magicChatMessageAppService,
+        private DelightfulChatMessageAppService $delightfulChatMessageAppService,
         private TaskFileDomainService $taskFileDomainService,
-        private DelightfulUserDomainService $magicUserDomainService,
+        private DelightfulUserDomainService $delightfulUserDomainService,
         private TranslatorInterface $translator,
         private LoggerInterface $logger
     ) {
@@ -61,7 +61,7 @@ readonly class AsrTitleGeneratorService
             // 场景一：有 asr_stream_content（前端实时录音）
             if (! empty($asrStreamContent)) {
                 $customPrompt = AsrPromptAssembler::getTitlePrompt($asrStreamContent, $note, $language);
-                $title = $this->magicChatMessageAppService->summarizeTextWithCustomPrompt(
+                $title = $this->delightfulChatMessageAppService->summarizeTextWithCustomPrompt(
                     $userAuthorization,
                     $customPrompt
                 );
@@ -96,7 +96,7 @@ readonly class AsrTitleGeneratorService
                     $userRequestMessage,
                     $language
                 );
-                $title = $this->magicChatMessageAppService->summarizeTextWithCustomPrompt(
+                $title = $this->delightfulChatMessageAppService->summarizeTextWithCustomPrompt(
                     $userAuthorization,
                     $customPrompt
                 );
@@ -154,7 +154,7 @@ readonly class AsrTitleGeneratorService
 
                 // 使用自定义提示词生成标题
                 $userAuthorization = $this->getUserAuthorizationFromUserId($taskStatus->userId);
-                $title = $this->magicChatMessageAppService->summarizeTextWithCustomPrompt(
+                $title = $this->delightfulChatMessageAppService->summarizeTextWithCustomPrompt(
                     $userAuthorization,
                     $customPrompt
                 );
@@ -235,7 +235,7 @@ readonly class AsrTitleGeneratorService
                 $language
             );
 
-            $title = $this->magicChatMessageAppService->summarizeTextWithCustomPrompt(
+            $title = $this->delightfulChatMessageAppService->summarizeTextWithCustomPrompt(
                 $userAuthorization,
                 $customPrompt
             );
@@ -289,7 +289,7 @@ readonly class AsrTitleGeneratorService
      */
     private function getUserAuthorizationFromUserId(string $userId): DelightfulUserAuthorization
     {
-        $userEntity = $this->magicUserDomainService->getUserById($userId);
+        $userEntity = $this->delightfulUserDomainService->getUserById($userId);
         if ($userEntity === null) {
             ExceptionBuilder::throw(AsrErrorCode::UserNotExist);
         }

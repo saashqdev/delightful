@@ -14,7 +14,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 interface DelightfulFlowVersionRepositoryInterface
 {
-    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowVersionEntity $magicFlowVersionEntity): DelightfulFlowVersionEntity;
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowVersionEntity $delightfulFlowVersionEntity): DelightfulFlowVersionEntity;
 
     public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowVersionEntity;
 

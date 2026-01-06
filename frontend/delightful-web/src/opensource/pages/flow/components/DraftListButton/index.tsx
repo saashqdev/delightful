@@ -58,7 +58,7 @@ export default function DraftListButton({
 			onOk: async () => {
 				const draftDetail = await FlowApi.getFlowDraftDetail(newId, draft.id)
 
-				const decodeFlow = unShadowFlow(draftDetail.magic_flow)
+				const decodeFlow = unShadowFlow(draftDetail.delightful_flow)
 				// @ts-ignore
 				setCurrentFlow({
 					...decodeFlow,

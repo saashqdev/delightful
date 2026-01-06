@@ -29,8 +29,8 @@ use Psr\SimpleCache\CacheInterface;
 readonly class KnowledgeBaseDomainService
 {
     public function __construct(
-        private KnowledgeBaseRepositoryInterface $magicFlowKnowledgeRepository,
-        private KnowledgeBaseFragmentRepositoryInterface $magicFlowKnowledgeFragmentRepository,
+        private KnowledgeBaseRepositoryInterface $delightfulFlowKnowledgeRepository,
+        private KnowledgeBaseFragmentRepositoryInterface $delightfulFlowKnowledgeFragmentRepository,
         private CacheInterface $cache,
     ) {
     }
@@ -46,30 +46,30 @@ readonly class KnowledgeBaseDomainService
         $create = false;
         if ($savingDelightfulFlowKnowledgeEntity->shouldCreate()) {
             $savingDelightfulFlowKnowledgeEntity->prepareForCreation();
-            $magicFlowKnowledgeEntity = $savingDelightfulFlowKnowledgeEntity;
+            $delightfulFlowKnowledgeEntity = $savingDelightfulFlowKnowledgeEntity;
             $create = true;
 
             // 使用已经提前生成好的 code
-            if (! empty($magicFlowKnowledgeEntity->getBusinessId())) {
-                $tempCode = $this->getTempCodeByBusinessId($magicFlowKnowledgeEntity->getType(), $magicFlowKnowledgeEntity->getBusinessId());
+            if (! empty($delightfulFlowKnowledgeEntity->getBusinessId())) {
+                $tempCode = $this->getTempCodeByBusinessId($delightfulFlowKnowledgeEntity->getType(), $delightfulFlowKnowledgeEntity->getBusinessId());
                 if (! empty($tempCode)) {
-                    $magicFlowKnowledgeEntity->setCode($tempCode);
+                    $delightfulFlowKnowledgeEntity->setCode($tempCode);
                 }
             }
         } else {
-            $magicFlowKnowledgeEntity = $this->magicFlowKnowledgeRepository->getByCode($dataIsolation, $savingDelightfulFlowKnowledgeEntity->getCode());
-            if (empty($magicFlowKnowledgeEntity)) {
+            $delightfulFlowKnowledgeEntity = $this->delightfulFlowKnowledgeRepository->getByCode($dataIsolation, $savingDelightfulFlowKnowledgeEntity->getCode());
+            if (empty($delightfulFlowKnowledgeEntity)) {
                 ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'flow.common.not_found', ['label' => $savingDelightfulFlowKnowledgeEntity->getCode()]);
             }
-            $savingDelightfulFlowKnowledgeEntity->prepareForModification($magicFlowKnowledgeEntity);
+            $savingDelightfulFlowKnowledgeEntity->prepareForModification($delightfulFlowKnowledgeEntity);
         }
 
-        $magicFlowKnowledgeEntity = $this->magicFlowKnowledgeRepository->save($dataIsolation, $magicFlowKnowledgeEntity);
+        $delightfulFlowKnowledgeEntity = $this->delightfulFlowKnowledgeRepository->save($dataIsolation, $delightfulFlowKnowledgeEntity);
 
-        $event = new KnowledgeBaseSavedEvent($dataIsolation, $magicFlowKnowledgeEntity, $create, $files);
+        $event = new KnowledgeBaseSavedEvent($dataIsolation, $delightfulFlowKnowledgeEntity, $create, $files);
         AsyncEventUtil::dispatch($event);
 
-        return $magicFlowKnowledgeEntity;
+        return $delightfulFlowKnowledgeEntity;
     }
 
     /**
@@ -77,12 +77,12 @@ readonly class KnowledgeBaseDomainService
      */
     public function saveProcess(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $savingKnowledgeEntity): KnowledgeBaseEntity
     {
-        $knowledgeEntity = $this->magicFlowKnowledgeRepository->getByCode($dataIsolation, $savingKnowledgeEntity->getCode());
+        $knowledgeEntity = $this->delightfulFlowKnowledgeRepository->getByCode($dataIsolation, $savingKnowledgeEntity->getCode());
         if (empty($knowledgeEntity)) {
             ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'common.not_found', ['label' => $savingKnowledgeEntity->getCode()]);
         }
         $savingKnowledgeEntity->prepareForModifyProcess($knowledgeEntity);
-        return $this->magicFlowKnowledgeRepository->save($dataIsolation, $knowledgeEntity);
+        return $this->delightfulFlowKnowledgeRepository->save($dataIsolation, $knowledgeEntity);
     }
 
     /**
@@ -91,7 +91,7 @@ readonly class KnowledgeBaseDomainService
      */
     public function queries(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseQuery $query, Page $page): array
     {
-        return $this->magicFlowKnowledgeRepository->queries($dataIsolation, $query, $page);
+        return $this->delightfulFlowKnowledgeRepository->queries($dataIsolation, $query, $page);
     }
 
     /**
@@ -103,7 +103,7 @@ readonly class KnowledgeBaseDomainService
         $chunks = array_chunk($codes, 500);
         $entities = [];
         foreach ($chunks as $chunk) {
-            $entities = array_merge($entities, $this->magicFlowKnowledgeRepository->getByCodes($dataIsolation, $chunk));
+            $entities = array_merge($entities, $this->delightfulFlowKnowledgeRepository->getByCodes($dataIsolation, $chunk));
         }
         return $entities;
     }
@@ -113,24 +113,24 @@ readonly class KnowledgeBaseDomainService
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $code, bool $checkCollection = false): KnowledgeBaseEntity
     {
-        $magicFlowKnowledgeEntity = $this->magicFlowKnowledgeRepository->getByCode($dataIsolation, $code);
-        if (empty($magicFlowKnowledgeEntity)) {
+        $delightfulFlowKnowledgeEntity = $this->delightfulFlowKnowledgeRepository->getByCode($dataIsolation, $code);
+        if (empty($delightfulFlowKnowledgeEntity)) {
             ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'flow.common.not_found', ['label' => $code]);
         }
         if ($checkCollection) {
-            $collection = $magicFlowKnowledgeEntity->getVectorDBDriver()->getCollection($magicFlowKnowledgeEntity->getCollectionName());
+            $collection = $delightfulFlowKnowledgeEntity->getVectorDBDriver()->getCollection($delightfulFlowKnowledgeEntity->getCollectionName());
             if ($collection) {
-                $magicFlowKnowledgeEntity->setCompletedCount($collection->pointsCount);
+                $delightfulFlowKnowledgeEntity->setCompletedCount($collection->pointsCount);
             }
             $query = new KnowledgeBaseFragmentQuery();
-            $query->setKnowledgeCode($magicFlowKnowledgeEntity->getCode());
-            $magicFlowKnowledgeEntity->setFragmentCount($this->magicFlowKnowledgeFragmentRepository->count($dataIsolation, $query));
+            $query->setKnowledgeCode($delightfulFlowKnowledgeEntity->getCode());
+            $delightfulFlowKnowledgeEntity->setFragmentCount($this->delightfulFlowKnowledgeFragmentRepository->count($dataIsolation, $query));
 
             $query->setSyncStatus(KnowledgeSyncStatus::Synced->value);
-            $magicFlowKnowledgeEntity->setExpectedCount($this->magicFlowKnowledgeFragmentRepository->count($dataIsolation, $query));
+            $delightfulFlowKnowledgeEntity->setExpectedCount($this->delightfulFlowKnowledgeFragmentRepository->count($dataIsolation, $query));
         }
 
-        return $magicFlowKnowledgeEntity;
+        return $delightfulFlowKnowledgeEntity;
     }
 
     /**
@@ -138,18 +138,18 @@ readonly class KnowledgeBaseDomainService
      */
     public function exist(KnowledgeBaseDataIsolation $dataIsolation, string $code): bool
     {
-        return $this->magicFlowKnowledgeRepository->exist($dataIsolation, $code);
+        return $this->delightfulFlowKnowledgeRepository->exist($dataIsolation, $code);
     }
 
     /**
      * 删除知识库.
      */
     #[Transactional]
-    public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $magicFlowKnowledgeEntity): void
+    public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
     {
-        $this->magicFlowKnowledgeRepository->destroy($dataIsolation, $magicFlowKnowledgeEntity);
-        $this->magicFlowKnowledgeFragmentRepository->destroyByKnowledgeCode($dataIsolation, $magicFlowKnowledgeEntity->getCode());
-        AsyncEventUtil::dispatch(new KnowledgeBaseRemovedEvent($dataIsolation, $magicFlowKnowledgeEntity));
+        $this->delightfulFlowKnowledgeRepository->destroy($dataIsolation, $delightfulFlowKnowledgeEntity);
+        $this->delightfulFlowKnowledgeFragmentRepository->destroyByKnowledgeCode($dataIsolation, $delightfulFlowKnowledgeEntity->getCode());
+        AsyncEventUtil::dispatch(new KnowledgeBaseRemovedEvent($dataIsolation, $delightfulFlowKnowledgeEntity));
     }
 
     /**
@@ -158,10 +158,10 @@ readonly class KnowledgeBaseDomainService
     public function changeSyncStatus(KnowledgeBaseEntity|KnowledgeBaseFragmentEntity $entity): void
     {
         if ($entity instanceof KnowledgeBaseEntity) {
-            $this->magicFlowKnowledgeRepository->changeSyncStatus($entity);
+            $this->delightfulFlowKnowledgeRepository->changeSyncStatus($entity);
         }
         if ($entity instanceof KnowledgeBaseFragmentEntity) {
-            $this->magicFlowKnowledgeFragmentRepository->changeSyncStatus($entity);
+            $this->delightfulFlowKnowledgeFragmentRepository->changeSyncStatus($entity);
         }
     }
 
@@ -170,7 +170,7 @@ readonly class KnowledgeBaseDomainService
         if ($deltaWordCount === 0) {
             return;
         }
-        $this->magicFlowKnowledgeRepository->updateWordCount($dataIsolation, $knowledgeCode, $deltaWordCount);
+        $this->delightfulFlowKnowledgeRepository->updateWordCount($dataIsolation, $knowledgeCode, $deltaWordCount);
     }
 
     public function generateTempCodeByBusinessId(int $knowledgeType, string $businessId): string

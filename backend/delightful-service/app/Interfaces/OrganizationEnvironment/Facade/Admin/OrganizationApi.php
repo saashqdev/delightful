@@ -46,7 +46,7 @@ class OrganizationApi extends AbstractApi
                 foreach ($creatorSummaries as $userId => $summary) {
                     $creator = new OrganizationCreatorResponseDTO();
                     $creator->setUserId($summary['user_id'] ?? '');
-                    $creator->setDelightfulId($summary['magic_id'] ?? null);
+                    $creator->setDelightfulId($summary['delightful_id'] ?? null);
                     $creator->setName($summary['name'] ?? '');
                     $creator->setAvatar($summary['avatar'] ?? '');
                     $creator->setEmail($summary['email'] ?? null);

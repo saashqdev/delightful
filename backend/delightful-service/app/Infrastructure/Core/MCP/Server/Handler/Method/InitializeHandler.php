@@ -30,7 +30,7 @@ class InitializeHandler extends AbstractMethodHandler
             'protocolVersion' => '2025-03-26',
             'capabilities' => $capabilities->jsonSerialize(),
             'serverInfo' => [
-                'name' => 'magic-sse',
+                'name' => 'delightful-sse',
                 'version' => '1.0.0',
             ],
             'instructions' => '',

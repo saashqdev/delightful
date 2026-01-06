@@ -24,7 +24,7 @@ use Throwable;
 class DelightfulUserTaskApi extends AbstractApi
 {
     public function __construct(
-        private DelightfulUserTaskAppService $magicUserTaskAppService,
+        private DelightfulUserTaskAppService $delightfulUserTaskAppService,
         private ValidatorFactoryInterface $validatorFactory,
     ) {
     }
@@ -81,7 +81,7 @@ class DelightfulUserTaskApi extends AbstractApi
                 $userTaskValueDTO->setDeadline(new DateTime($userTaskDTO->getValue()['deadline']));
             }
 
-            $this->magicUserTaskAppService->createTask($userTaskDTO, $userTaskValueDTO);
+            $this->delightfulUserTaskAppService->createTask($userTaskDTO, $userTaskValueDTO);
         } catch (Throwable $exception) {
             ExceptionBuilder::throw(UserTaskErrorCode::TASK_CREATE_FAILED, $exception->getMessage());
         }
@@ -91,7 +91,7 @@ class DelightfulUserTaskApi extends AbstractApi
 
     public function getTask(int $id)
     {
-        return $this->magicUserTaskAppService->getTask($id);
+        return $this->delightfulUserTaskAppService->getTask($id);
     }
 
     public function updateTask(RequestInterface $request, int $id)
@@ -142,7 +142,7 @@ class DelightfulUserTaskApi extends AbstractApi
                 $userTaskValueDTO->setDeadline(new DateTime($userTaskDTO->getValue()['deadline']));
             }
 
-            $this->magicUserTaskAppService->updateTask($id, $userTaskDTO, $userTaskValueDTO);
+            $this->delightfulUserTaskAppService->updateTask($id, $userTaskDTO, $userTaskValueDTO);
         } catch (Throwable $exception) {
             ExceptionBuilder::throw(UserTaskErrorCode::TASK_UPDATE_FAILED, $exception->getMessage());
         }
@@ -152,7 +152,7 @@ class DelightfulUserTaskApi extends AbstractApi
 
     public function deleteTask(int $id)
     {
-        $this->magicUserTaskAppService->deleteTask($id);
+        $this->delightfulUserTaskAppService->deleteTask($id);
     }
 
     public function listTask(RequestInterface $request)
@@ -175,8 +175,8 @@ class DelightfulUserTaskApi extends AbstractApi
         try {
             $authorization = $this->getAuthorization();
             $creator = $authorization->getId();
-            $queryId = $this->magicUserTaskAppService->getQueryId($agentId, $topicId);
-            return $this->magicUserTaskAppService->listTaskByCreator($page, $pageSize, $creator, $queryId);
+            $queryId = $this->delightfulUserTaskAppService->getQueryId($agentId, $topicId);
+            return $this->delightfulUserTaskAppService->listTaskByCreator($page, $pageSize, $creator, $queryId);
         } catch (Throwable $exception) {
             ExceptionBuilder::throw(UserTaskErrorCode::TASK_LIST_FAILED, throwable: $exception);
         }

@@ -265,7 +265,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     {
         $configEntity = new ProviderConfigEntity();
 
-        // 除了 magic 服务商，默认状态都是关闭
+        // 除了 delightful 服务商，默认状态都是关闭
         $defaultStatus = $providerEntity->getProviderCode() === ProviderCode::Official
             ? Status::Enabled
             : Status::Disabled;

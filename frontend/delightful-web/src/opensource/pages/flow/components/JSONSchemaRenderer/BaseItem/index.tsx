@@ -41,7 +41,7 @@ export default function BaseItem({ displayKey, field, onExpand, isDisplay }: Bas
 
 	const copyFieldKey = useMemoizedFn(() => {
 		copyToClipboard(displayKey)
-		message.success(i18next.t("common.copySuccess", { ns: "magicFlow" }))
+		message.success(i18next.t("common.copySuccess", { ns: "delightfulFlow" }))
 	})
 
 	const Icon = useMemo(() => {

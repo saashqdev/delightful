@@ -5,7 +5,7 @@ export default {
   themeConfig: {
     nav: [
       { text: '首页', link: '/zh/' },
-      { text: '使用教程', link: '/zh/tutorial/magic-info/index' },
+      { text: '使用教程', link: '/zh/tutorial/delightful-info/index' },
       { text: '开发文档', link: '/zh/development/quick-start/quick-introduction' }
     ],
     sidebar: {
@@ -14,10 +14,10 @@ export default {
           text: 'Delightful介绍',
           collapsed: false,
           items: [
-            { text: '什么是Delightful', link: '/zh/tutorial/magic-info/index' },
-            { text: '名称解释', link: '/zh/tutorial/magic-info/names' },
-            { text: '核心功能', link: '/zh/tutorial/magic-info/core-function' },
-            // { text: '开源版和企业版', link: '/zh/tutorial/magic-info/opensource-enterprise' },
+            { text: '什么是Delightful', link: '/zh/tutorial/delightful-info/index' },
+            { text: '名称解释', link: '/zh/tutorial/delightful-info/names' },
+            { text: '核心功能', link: '/zh/tutorial/delightful-info/core-function' },
+            // { text: '开源版和企业版', link: '/zh/tutorial/delightful-info/opensource-enterprise' },
           ]
         },
         {
@@ -140,7 +140,7 @@ export default {
           collapsed: false,
           items: [
             { text: '一句话实现复杂任务', link: '/zh/tutorial/best-practice/complex-tasks-in-one-sentence' },
-            { text: '麦吉审批助理使用指南', link: '/zh/tutorial/best-practice/guide-to-using-the-magic-approval-assistant' },
+            { text: '麦吉审批助理使用指南', link: '/zh/tutorial/best-practice/guide-to-using-the-delightful-approval-assistant' },
             { text: '搭建一个门店知识助理', link: '/zh/tutorial/best-practice/build-a-store-knowledge-assistant' },
           ]
         }
@@ -158,7 +158,7 @@ export default {
           collapsed: false,
           items: [
             { text: 'Docker 安装', link: '/zh/development/deploy/docker' },
-            { text: 'Be Delightful 安装', link: '/zh/development/deploy/super-magic' },
+            { text: 'Be Delightful 安装', link: '/zh/development/deploy/super-delightful' },
           ]
         },
 

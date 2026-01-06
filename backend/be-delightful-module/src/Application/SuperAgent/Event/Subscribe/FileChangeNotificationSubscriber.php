@@ -42,7 +42,7 @@ class FileChangeNotificationSubscriber implements ListenerInterface
     public function __construct(
         private readonly ProjectDomainService $projectDomainService,
         private readonly TaskFileDomainService $taskFileDomainService,
-        private readonly DelightfulUserRepository $magicUserRepository,
+        private readonly DelightfulUserRepository $delightfulUserRepository,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(self::class);
@@ -394,7 +394,7 @@ class FileChangeNotificationSubscriber implements ListenerInterface
         return [
             'type' => 'seq',
             'seq' => [
-                'magic_id' => '',
+                'delightful_id' => '',
                 'seq_id' => '',
                 'message_id' => '',
                 'refer_message_id' => '',
@@ -402,7 +402,7 @@ class FileChangeNotificationSubscriber implements ListenerInterface
                 'conversation_id' => $conversationId,
                 'organization_code' => $organizationCode,
                 'message' => [
-                    'type' => 'super_magic_file_change',
+                    'type' => 'super_delightful_file_change',
                     'project_id' => $projectId,
                     'workspace_id' => $workspaceId,
                     'topic_id' => $topicId,
@@ -418,17 +418,17 @@ class FileChangeNotificationSubscriber implements ListenerInterface
      */
     private function pushNotification(string $userId, array $pushData): void
     {
-        // Get user's magicId from userId
-        $magicId = $this->getDelightfulIdByUserId($userId);
+        // Get user's delightfulId from userId
+        $delightfulId = $this->getDelightfulIdByUserId($userId);
 
-        if (empty($magicId)) {
-            $this->logger->warning('Cannot get magicId for user', ['user_id' => $userId]);
+        if (empty($delightfulId)) {
+            $this->logger->warning('Cannot get delightfulId for user', ['user_id' => $userId]);
             return;
         }
 
         $message = $pushData['seq']['message'] ?? [];
         $this->logger->info('Pushing file change notification', [
-            'magic_id' => $magicId,
+            'delightful_id' => $delightfulId,
             'project_id' => $message['project_id'] ?? '',
             'changes_count' => count($message['changes'] ?? []),
         ]);
@@ -436,23 +436,23 @@ class FileChangeNotificationSubscriber implements ListenerInterface
         // Push via WebSocket
         SocketIOUtil::sendIntermediate(
             SocketEventType::Intermediate,
-            $magicId,
+            $delightfulId,
             $pushData
         );
     }
 
     /**
-     * Get magicId by userId.
+     * Get delightfulId by userId.
      */
     private function getDelightfulIdByUserId(string $userId): string
     {
         try {
-            $userEntity = $this->magicUserRepository->getUserById($userId);
+            $userEntity = $this->delightfulUserRepository->getUserById($userId);
             if ($userEntity) {
                 return (string) $userEntity->getDelightfulId();
             }
         } catch (Throwable $e) {
-            $this->logger->error('Failed to get magicId', [
+            $this->logger->error('Failed to get delightfulId', [
                 'user_id' => $userId,
                 'error' => $e->getMessage(),
             ]);

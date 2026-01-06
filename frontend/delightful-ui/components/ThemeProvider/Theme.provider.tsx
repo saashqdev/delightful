@@ -10,8 +10,8 @@ import type { ColorScales, ColorUsages } from "./types"
 export interface NewToken {
 	/** Top menu bar height */
 	titleBarHeight?: number
-	magicColorScales: ColorScales
-	magicColorUsages: ColorUsages
+	delightfulColorScales: ColorScales
+	delightfulColorUsages: ColorUsages
 }
 
 interface ThemeContextState {
@@ -36,17 +36,17 @@ function ThemeProvider({ children, theme }: PropsWithChildren & { theme: Theme }
 		const config = genPalettesConfigs(appearance)
 		return {
 			cssVar: {
-				prefix: "magic",
+				prefix: "delightful",
 			},
 			token: {
-				...genTokenMap(config.magicColorScales, config.magicColorUsages, appearance),
+				...genTokenMap(config.delightfulColorScales, config.delightfulColorUsages, appearance),
 				titleBarHeight: 44,
-				magicColorScales: config.magicColorScales,
-				magicColorUsages: config.magicColorUsages,
+				delightfulColorScales: config.delightfulColorScales,
+				delightfulColorUsages: config.delightfulColorUsages,
 			},
 			components: genComponentTokenMap(
-				config.magicColorScales,
-				config.magicColorUsages,
+				config.delightfulColorScales,
+				config.delightfulColorUsages,
 				appearance,
 			),
 		}
@@ -57,7 +57,7 @@ function ThemeProvider({ children, theme }: PropsWithChildren & { theme: Theme }
 			{(store) => (
 				<ThemeContext.Provider value={store}>
 					<AntdThemeProvider<NewToken>
-						prefixCls="magic"
+						prefixCls="delightful"
 						appearance={prefersColorScheme}
 						themeMode={theme}
 						theme={themeConfig}

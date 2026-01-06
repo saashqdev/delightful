@@ -26,7 +26,7 @@ use Hyperf\Redis\RedisProxy;
 
 class BeDelightfulChatManager
 {
-    private const string REDIS_KEY_PREFIX = 'super_magic_chat_manager:';
+    private const string REDIS_KEY_PREFIX = 'super_delightful_chat_manager:';
 
     private const int REDIS_KEY_TTL = 7200;
 
@@ -164,7 +164,7 @@ MARKDOWN;
 
         $registeredAgent = new RegisteredTool(
             tool: new Tool(
-                name: 'call_magic_agent',
+                name: 'call_delightful_agent',
                 inputSchema: [
                     'type' => 'object',
                     'properties' => [
@@ -377,7 +377,7 @@ MARKDOWN;
                     $apiChatDTO->setFlowCode($toolFlow->getCode());
                     $apiChatDTO->setFlowVersionCode($toolFlow->getVersionCode());
                     $apiChatDTO->setMessage('mcp_tool_call');
-                    return di(DelightfulFlowExecuteAppService::class)->apiParamCallByRemoteTool($flowDataIsolation, $apiChatDTO, 'super_magic_mcp_tool');
+                    return di(DelightfulFlowExecuteAppService::class)->apiParamCallByRemoteTool($flowDataIsolation, $apiChatDTO, 'super_delightful_mcp_tool');
                 },
             );
         }

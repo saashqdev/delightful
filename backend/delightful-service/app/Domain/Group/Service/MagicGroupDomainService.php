@@ -36,52 +36,52 @@ class DelightfulGroupDomainService extends AbstractDomainService
     use DataIsolationTrait;
 
     // 创建群组
-    public function createGroup(DelightfulGroupEntity $magicGroupDTO, DataIsolation $dataIsolation): DelightfulGroupEntity
+    public function createGroup(DelightfulGroupEntity $delightfulGroupDTO, DataIsolation $dataIsolation): DelightfulGroupEntity
     {
-        $magicGroupDTO->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        $magicGroupDTO->setGroupOwner($dataIsolation->getCurrentUserId());
-        $magicGroupDTO->setGroupNotice('');
-        $magicGroupDTO->setGroupTag('');
-        return $this->magicGroupRepository->createGroup($magicGroupDTO);
+        $delightfulGroupDTO->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
+        $delightfulGroupDTO->setGroupOwner($dataIsolation->getCurrentUserId());
+        $delightfulGroupDTO->setGroupNotice('');
+        $delightfulGroupDTO->setGroupTag('');
+        return $this->delightfulGroupRepository->createGroup($delightfulGroupDTO);
     }
 
-    public function addUsersToGroup(DelightfulGroupEntity $magicGroupEntity, array $userIds): bool
+    public function addUsersToGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): bool
     {
-        return $this->magicGroupRepository->addUsersToGroup($magicGroupEntity, $userIds);
+        return $this->delightfulGroupRepository->addUsersToGroup($delightfulGroupEntity, $userIds);
     }
 
     // 减少群成员
-    public function removeUsersFromGroup(DelightfulGroupEntity $magicGroupEntity, array $userIds): int
+    public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {
         // todo 如果是群主离开,需要转移群主
-        return $this->magicGroupRepository->removeUsersFromGroup($magicGroupEntity, $userIds);
+        return $this->delightfulGroupRepository->removeUsersFromGroup($delightfulGroupEntity, $userIds);
     }
 
-    public function GroupUpdateInfo(DelightfulGroupEntity $magicGroupDTO, DataIsolation $dataIsolation): DelightfulGroupEntity
+    public function GroupUpdateInfo(DelightfulGroupEntity $delightfulGroupDTO, DataIsolation $dataIsolation): DelightfulGroupEntity
     {
         $updateData = [];
-        if (! empty($magicGroupDTO->getGroupName())) {
-            $updateData['group_name'] = $magicGroupDTO->getGroupName();
+        if (! empty($delightfulGroupDTO->getGroupName())) {
+            $updateData['group_name'] = $delightfulGroupDTO->getGroupName();
         }
-        if (! empty($magicGroupDTO->getGroupAvatar())) {
-            $updateData['group_avatar'] = $magicGroupDTO->getGroupAvatar();
+        if (! empty($delightfulGroupDTO->getGroupAvatar())) {
+            $updateData['group_avatar'] = $delightfulGroupDTO->getGroupAvatar();
         }
-        $this->magicGroupRepository->updateGroupById($magicGroupDTO->getId(), $updateData);
-        $magicGroupEntity = $this->magicGroupRepository->getGroupInfoById($magicGroupDTO->getId(), $dataIsolation->getCurrentOrganizationCode());
-        if ($magicGroupEntity === null) {
+        $this->delightfulGroupRepository->updateGroupById($delightfulGroupDTO->getId(), $updateData);
+        $delightfulGroupEntity = $this->delightfulGroupRepository->getGroupInfoById($delightfulGroupDTO->getId(), $dataIsolation->getCurrentOrganizationCode());
+        if ($delightfulGroupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        return $magicGroupEntity;
+        return $delightfulGroupEntity;
     }
 
     public function getGroupInfoById(string $groupId, DataIsolation $dataIsolation): ?DelightfulGroupEntity
     {
-        return $this->magicGroupRepository->getGroupInfoById($groupId, $dataIsolation->getCurrentOrganizationCode());
+        return $this->delightfulGroupRepository->getGroupInfoById($groupId, $dataIsolation->getCurrentOrganizationCode());
     }
 
     public function getGroupUserCount($groupId): int
     {
-        return $this->magicGroupRepository->getGroupUserCount($groupId);
+        return $this->delightfulGroupRepository->getGroupUserCount($groupId);
     }
 
     /**
@@ -89,36 +89,36 @@ class DelightfulGroupDomainService extends AbstractDomainService
      */
     public function getGroupsInfoByIds(array $groupIds, DataIsolation $dataIsolation, bool $keyById = false): array
     {
-        return $this->magicGroupRepository->getGroupsInfoByIds($groupIds, $dataIsolation->getCurrentOrganizationCode(), $keyById);
+        return $this->delightfulGroupRepository->getGroupsInfoByIds($groupIds, $dataIsolation->getCurrentOrganizationCode(), $keyById);
     }
 
     public function getGroupUserList(string $groupId, string $pageToken, DataIsolation $dataIsolation, ?array $columns = ['*']): array
     {
-        return $this->magicGroupRepository->getGroupUserList($groupId, $pageToken, $dataIsolation->getCurrentOrganizationCode(), $columns);
+        return $this->delightfulGroupRepository->getGroupUserList($groupId, $pageToken, $dataIsolation->getCurrentOrganizationCode(), $columns);
     }
 
     public function getGroupIdsByUserIds(array $userIds): array
     {
-        return $this->magicGroupRepository->getGroupIdsByUserIds($userIds);
+        return $this->delightfulGroupRepository->getGroupIdsByUserIds($userIds);
     }
 
     public function isUserInGroup(string $groupId, string $userId): bool
     {
-        return $this->magicGroupRepository->isUserInGroup($groupId, $userId);
+        return $this->delightfulGroupRepository->isUserInGroup($groupId, $userId);
     }
 
     public function isUsersInGroup(string $groupId, array $userIds): bool
     {
-        return $this->magicGroupRepository->isUsersInGroup($groupId, $userIds);
+        return $this->delightfulGroupRepository->isUsersInGroup($groupId, $userIds);
     }
 
     public function getUserGroupList(string $pageToken, DataIsolation $dataIsolation, int $pageSize): GroupsPageResponseDTO
     {
-        $groupPageResponseDTO = $this->magicGroupRepository->getUserGroupList($pageToken, $dataIsolation->getCurrentUserId(), $pageSize);
+        $groupPageResponseDTO = $this->delightfulGroupRepository->getUserGroupList($pageToken, $dataIsolation->getCurrentUserId(), $pageSize);
         $groupDTOS = $groupPageResponseDTO->getItems();
         // 用户在这些群聊中的会话id
         $groupIds = array_column($groupDTOS, 'id');
-        $conversations = $this->magicConversationRepository->getConversationsByReceiveIds($dataIsolation->getCurrentUserId(), $groupIds);
+        $conversations = $this->delightfulConversationRepository->getConversationsByReceiveIds($dataIsolation->getCurrentUserId(), $groupIds);
         /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'receive_id');
         $groupList = [];
@@ -144,7 +144,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             /** @var GroupCreateMessage|GroupInfoUpdateMessage|GroupOwnerChangeMessage|GroupUserAddMessage|GroupUserRemoveMessage $content */
             $content = $groupUserChangeSeqEntity->getContent();
             $groupId = $content->getGroupId();
-            $groupEntity = $this->magicGroupRepository->getGroupInfoById($groupId);
+            $groupEntity = $this->delightfulGroupRepository->getGroupInfoById($groupId);
             if ($groupEntity === null) {
                 return;
             }
@@ -157,7 +157,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 }
             }
             $content = $content->toArray();
-            // 通过 protobuf 消息结构,创建magic chat的对象,为弃用 protobuf 做准备
+            // 通过 protobuf 消息结构,创建delightful chat的对象,为弃用 protobuf 做准备
             if (in_array($controlMessageType, [ControlMessageType::GroupUsersRemove, ControlMessageType::GroupDisband], true)) {
                 // 这些用户已经从群成员表中移除,但是他们还未收到被移除的消息
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
@@ -184,29 +184,29 @@ class DelightfulGroupDomainService extends AbstractDomainService
         $userConversations = $this->getGroupUserConversationsByUserIds([$dataIsolation->getCurrentUserId()], $groupEntity->getId());
         $seqContent['conversation_id'] = $userConversations[$dataIsolation->getCurrentUserId()] ?? '';
         $seqEntity = $this->getGroupChangeSeqEntity($dataIsolation, $groupEntity, $seqContent, $controlMessageType);
-        return $this->magicSeqRepository->createSequence($seqEntity->toArray());
+        return $this->delightfulSeqRepository->createSequence($seqEntity->toArray());
     }
 
-    public function deleteGroup(DelightfulGroupEntity $magicGroupEntity): int
+    public function deleteGroup(DelightfulGroupEntity $delightfulGroupEntity): int
     {
-        return $this->magicGroupRepository->deleteGroup($magicGroupEntity);
+        return $this->delightfulGroupRepository->deleteGroup($delightfulGroupEntity);
     }
 
-    public function getGroupControlSeq(DelightfulGroupEntity $magicGroupEntity, DataIsolation $dataIsolation, ControlMessageType $controlMessageType): ?DelightfulSeqEntity
+    public function getGroupControlSeq(DelightfulGroupEntity $delightfulGroupEntity, DataIsolation $dataIsolation, ControlMessageType $controlMessageType): ?DelightfulSeqEntity
     {
         // 群会话信息
-        $conversation = $this->magicConversationRepository->getConversationsByReceiveIds($dataIsolation->getCurrentUserId(), [$magicGroupEntity->getId()])[0] ?? [];
+        $conversation = $this->delightfulConversationRepository->getConversationsByReceiveIds($dataIsolation->getCurrentUserId(), [$delightfulGroupEntity->getId()])[0] ?? [];
         if (empty($conversation)) {
             return null;
         }
-        return $this->magicSeqRepository->getConversationSeqByType(
+        return $this->delightfulSeqRepository->getConversationSeqByType(
             $dataIsolation->getCurrentDelightfulId(),
             $conversation->getId(),
             $controlMessageType
         );
     }
 
-    public function transferGroupOwner(DelightfulGroupEntity $groupEntity, DataIsolation $dataIsolation, DelightfulGroupEntity $magicGroupDTO): bool
+    public function transferGroupOwner(DelightfulGroupEntity $groupEntity, DataIsolation $dataIsolation, DelightfulGroupEntity $delightfulGroupDTO): bool
     {
         // 检查用户是否是群主
         $oldGroupOwner = $groupEntity->getGroupOwner();
@@ -215,12 +215,12 @@ class DelightfulGroupDomainService extends AbstractDomainService
         }
         // 检查被转让的用户是否在群聊中
         $groupId = $groupEntity->getId();
-        $newOwnerUserId = $magicGroupDTO->getGroupOwner();
+        $newOwnerUserId = $delightfulGroupDTO->getGroupOwner();
         if (! $this->isUserInGroup($groupId, $newOwnerUserId)) {
             ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
         }
         // 转让群主
-        return $this->magicGroupRepository->transferGroupOwner($groupId, $oldGroupOwner, $newOwnerUserId);
+        return $this->delightfulGroupRepository->transferGroupOwner($groupId, $oldGroupOwner, $newOwnerUserId);
     }
 
     protected function getGroupChangeSeqEntity(DataIsolation $dataIsolation, DelightfulGroupEntity $groupEntity, array $seqContent, ControlMessageType $controlMessageType): DelightfulSeqEntity
@@ -236,7 +236,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             'seq_type' => $controlMessageType->value,
             'content' => Json::encode($seqContent, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
             'receive_list' => '',
-            'magic_message_id' => '',
+            'delightful_message_id' => '',
             'message_id' => $id,
             'refer_message_id' => '',
             'sender_message_id' => '',
@@ -252,18 +252,18 @@ class DelightfulGroupDomainService extends AbstractDomainService
     private function getGroupUpdateReceiveUsers(string $groupId): array
     {
         // 批量生成群成员变更消息
-        $groupEntity = $this->magicGroupRepository->getGroupInfoById($groupId);
+        $groupEntity = $this->delightfulGroupRepository->getGroupInfoById($groupId);
         if ($groupEntity === null || $groupEntity->getGroupStatus() === GroupStatusEnum::Disband) {
             return [];
         }
         // 找到群成员
-        $groupUsers = $this->magicGroupRepository->getGroupUserList($groupId, '', null, ['user_id']);
+        $groupUsers = $this->delightfulGroupRepository->getGroupUserList($groupId, '', null, ['user_id']);
         return array_column($groupUsers, 'user_id');
     }
 
     private function getGroupUserConversationsByUserIds(array $groupUserIds, string $groupId): array
     {
-        $userConversations = $this->magicConversationRepository->batchGetConversations($groupUserIds, $groupId, ConversationType::Group);
+        $userConversations = $this->delightfulConversationRepository->batchGetConversations($groupUserIds, $groupId, ConversationType::Group);
         return array_column($userConversations, 'id', 'user_id');
     }
 
@@ -271,7 +271,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
     {
         $operateUserId = $content['operate_user_id'] ?? '';
         // 批量获取userEntity
-        $users = $this->magicUserRepository->getUserByIds($userIds);
+        $users = $this->delightfulUserRepository->getUserByIds($userIds);
         $users = array_column($users, null, 'user_id');
         $time = date('Y-m-d H:i:s');
         $seqListCreateDTO = [];
@@ -298,12 +298,12 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 'id' => $seqId,
                 'organization_code' => $user['organization_code'],
                 'object_type' => $user['user_type'],
-                'object_id' => $user['magic_id'],
+                'object_id' => $user['delightful_id'],
                 'seq_id' => $seqId,
                 'seq_type' => $controlMessageType->value,
                 'content' => Json::encode($userContent, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
                 'receive_list' => '',
-                'magic_message_id' => '', // 控制消息不能有 magic_message_id
+                'delightful_message_id' => '', // 控制消息不能有 delightful_message_id
                 'message_id' => $seqId,
                 'refer_message_id' => '',
                 'sender_message_id' => '',
@@ -316,7 +316,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             $seqListCreateDTO[] = SeqAssembler::getSeqEntity($seqData);
         }
         if (! empty($seqListCreateDTO)) {
-            $this->magicSeqRepository->batchCreateSeq($seqListCreateDTO);
+            $this->delightfulSeqRepository->batchCreateSeq($seqListCreateDTO);
             $this->batchPushControlSeqList($seqListCreateDTO);
         }
     }

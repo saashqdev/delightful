@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_bots', function (Blueprint $table) {
+        Schema::table('delightful_bots', function (Blueprint $table) {
             $table->bigInteger('bot_version_id')->nullable()->comment('助理绑定的版本id')->change();
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_bot', function (Blueprint $table) {
+        Schema::table('delightful_bot', function (Blueprint $table) {
         });
     }
 };

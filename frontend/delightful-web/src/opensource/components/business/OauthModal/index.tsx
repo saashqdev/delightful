@@ -5,7 +5,7 @@ import DelightfulModal from "@/opensource/components/base/DelightfulModal"
 import type { OpenableProps } from "@/utils/react"
 import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useMemo } from "react"
-import magicIcon from "@/assets/logos/magic-avatar.svg"
+import delightfulIcon from "@/assets/logos/delightful-avatar.svg"
 import { IconKey } from "@tabler/icons-react"
 import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { useStyles } from "./styles"
@@ -77,7 +77,7 @@ function OAuthModal({
 		>
 			<Flex vertical gap={14}>
 				<Flex align="center" gap={4} className={styles.subTitle}>
-					<img width={20} src={magicIcon} alt="magic" />
+					<img width={20} src={delightfulIcon} alt="delightful" />
 					{t("oauth.title")}
 				</Flex>
 				<ul className={styles.desc}>

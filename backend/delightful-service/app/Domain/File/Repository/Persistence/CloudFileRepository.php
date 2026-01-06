@@ -123,7 +123,7 @@ class CloudFileRepository implements CloudFileRepositoryInterface
         $filesystem = $this->getFilesystem($storage->value);
         $credentialPolicy = new CredentialPolicy([
             'sts' => false,
-            'role_session_name' => 'magic',
+            'role_session_name' => 'delightful',
             // Use configuration name in file path for automatic recognition when getting links later
             'dir' => $autoDir ? $organizationCode . '/open/' . md5($storage->value) : '',
             'content_type' => $contentType,
@@ -145,7 +145,7 @@ class CloudFileRepository implements CloudFileRepositoryInterface
         $filesystem = $this->getFilesystem($storage->value);
         $credentialPolicy = new CredentialPolicy([
             'sts' => true,  // Use STS mode for chunk upload
-            'role_session_name' => 'magic',
+            'role_session_name' => 'delightful',
             // Use organization code + storage hash in path for automatic link recognition
             'dir' => $autoDir ? $organizationCode . '/open/' . md5($storage->value) : '',
             'expires' => 3600, // STS credential valid for 1 hour, sufficient for chunk upload
@@ -233,7 +233,7 @@ class CloudFileRepository implements CloudFileRepositoryInterface
         $filesystem = $this->getFilesystem($storage->value);
         $credentialPolicy = new CredentialPolicy([
             'sts' => $sts,
-            'role_session_name' => 'magic',
+            'role_session_name' => 'delightful',
             // Use configuration name in file path for automatic recognition when getting links later
             'dir' => $autoDir ? $organizationCode . '/open/' . md5($storage->value) : '',
             'content_type' => $contentType,
@@ -262,7 +262,7 @@ class CloudFileRepository implements CloudFileRepositoryInterface
 
         $credentialPolicy = new CredentialPolicy([
             'sts' => true,
-            'role_session_name' => 'magic',
+            'role_session_name' => 'delightful',
             'dir' => $dir,
             'expires' => $expires,
         ]);
@@ -331,7 +331,7 @@ class CloudFileRepository implements CloudFileRepositoryInterface
         return "{$organizationCode}/{$appId}/{$md5Key}" . '/';
     }
 
-    public function generateWorkDir(string $userId, int $projectId, string $code = 'magic', string $lastPath = 'project'): string
+    public function generateWorkDir(string $userId, int $projectId, string $code = 'delightful', string $lastPath = 'project'): string
     {
         return sprintf('/%s/%s/%s_%d', $code, $userId, $lastPath, $projectId);
     }
@@ -415,7 +415,7 @@ class CloudFileRepository implements CloudFileRepositoryInterface
             $credentialPolicy = new CredentialPolicy([
                 'sts' => true,
                 'sts_type' => 'del_objects',
-                'role_session_name' => 'magic',
+                'role_session_name' => 'delightful',
                 'dir' => $prefix,  // No dir restriction for listing
                 'expires' => 3600,
             ]);
@@ -479,7 +479,7 @@ class CloudFileRepository implements CloudFileRepositoryInterface
             $filesystem = $this->getFilesystem($bucketType->value);
             $credentialPolicy = new CredentialPolicy([
                 'sts' => true,
-                'role_session_name' => 'magic',
+                'role_session_name' => 'delightful',
                 'dir' => '',
                 'expires' => 3600,
             ]);
@@ -536,7 +536,7 @@ class CloudFileRepository implements CloudFileRepositoryInterface
             $filesystem = $this->getFilesystem($bucketType->value);
             $credentialPolicy = new CredentialPolicy([
                 'sts' => true,
-                'role_session_name' => 'magic',
+                'role_session_name' => 'delightful',
                 'dir' => '',  // No dir restriction for head object
                 'expires' => 3600,
             ]);
@@ -594,7 +594,7 @@ class CloudFileRepository implements CloudFileRepositoryInterface
             $filesystem = $this->getFilesystem($bucketType->value);
             $credentialPolicy = new CredentialPolicy([
                 'sts' => true,
-                'role_session_name' => 'magic',
+                'role_session_name' => 'delightful',
                 'dir' => '',  // No dir restriction for setting object metadata
                 'expires' => $options['expires'] ?? 3600,
             ]);
@@ -659,7 +659,7 @@ class CloudFileRepository implements CloudFileRepositoryInterface
             $filesystem = $this->getFilesystem($bucketType->value);
             $credentialPolicy = new CredentialPolicy([
                 'sts' => true,
-                'role_session_name' => 'magic',
+                'role_session_name' => 'delightful',
                 'dir' => $prefix,
                 'expires' => 3600,
             ]);
@@ -773,7 +773,7 @@ class CloudFileRepository implements CloudFileRepositoryInterface
             $filesystem = $this->getFilesystem($bucketType->value);
             $credentialPolicy = new CredentialPolicy([
                 'sts' => true,
-                'role_session_name' => 'magic',
+                'role_session_name' => 'delightful',
                 'dir' => '',  // No dir restriction for getting pre-signed URLs
                 'expires' => $options['expires'] ?? 3600,
             ]);
@@ -854,7 +854,7 @@ class CloudFileRepository implements CloudFileRepositoryInterface
             $filesystem = $this->getFilesystem($bucketType->value);
             $credentialPolicy = new CredentialPolicy([
                 'sts' => true,
-                'role_session_name' => 'magic',
+                'role_session_name' => 'delightful',
                 'dir' => $prefix,  // No dir restriction for deleting objects
                 'expires' => $options['expires'] ?? 3600,
             ]);

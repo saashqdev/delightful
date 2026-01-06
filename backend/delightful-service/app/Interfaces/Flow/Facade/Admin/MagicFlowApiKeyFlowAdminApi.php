@@ -18,7 +18,7 @@ use Hyperf\Di\Annotation\Inject;
 class DelightfulFlowApiKeyFlowAdminApi extends AbstractFlowAdminApi
 {
     #[Inject]
-    protected DelightfulFlowApiKeyAppService $magicFlowApiKeyAppService;
+    protected DelightfulFlowApiKeyAppService $delightfulFlowApiKeyAppService;
 
     public function save(string $flowId)
     {
@@ -28,7 +28,7 @@ class DelightfulFlowApiKeyFlowAdminApi extends AbstractFlowAdminApi
         $DTO->setFlowCode($flowId);
 
         $DO = DelightfulFlowApiKeyAssembler::createDO($DTO);
-        $entity = $this->magicFlowApiKeyAppService->save($authorization, $DO);
+        $entity = $this->delightfulFlowApiKeyAppService->save($authorization, $DO);
         return DelightfulFlowApiKeyAssembler::createDTO($entity);
     }
 
@@ -44,27 +44,27 @@ class DelightfulFlowApiKeyFlowAdminApi extends AbstractFlowAdminApi
         $query->setOrder(['id' => 'desc']);
 
         $page = $this->createPage();
-        $result = $this->magicFlowApiKeyAppService->queries($authorization, $query, $page);
+        $result = $this->delightfulFlowApiKeyAppService->queries($authorization, $query, $page);
         return DelightfulFlowApiKeyAssembler::createPageListDTO($result['total'], $result['list'], $page);
     }
 
     public function show(string $flowId, string $code)
     {
         $authorization = $this->getAuthorization();
-        $entity = $this->magicFlowApiKeyAppService->getByCode($authorization, $flowId, $code);
+        $entity = $this->delightfulFlowApiKeyAppService->getByCode($authorization, $flowId, $code);
         return DelightfulFlowApiKeyAssembler::createDTO($entity);
     }
 
     public function changeSecretKey(string $flowId, string $code)
     {
         $authorization = $this->getAuthorization();
-        $entity = $this->magicFlowApiKeyAppService->changeSecretKey($authorization, $flowId, $code);
+        $entity = $this->delightfulFlowApiKeyAppService->changeSecretKey($authorization, $flowId, $code);
         return DelightfulFlowApiKeyAssembler::createDTO($entity);
     }
 
     public function destroy(string $flowId, string $code)
     {
         $authorization = $this->getAuthorization();
-        $this->magicFlowApiKeyAppService->destroy($authorization, $code);
+        $this->delightfulFlowApiKeyAppService->destroy($authorization, $code);
     }
 }

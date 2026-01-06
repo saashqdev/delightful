@@ -28,13 +28,13 @@ const FunctionTips = ({ targetOption, keyword }: FunctionTipsProps) => {
 						<div className="func-title">{headerTitle}</div>
 					</Tooltip>
 					<div className="func-return">
-						{i18next.t("expression.returnValue", { ns: "magicFlow" })}: {return_type}
+						{i18next.t("expression.returnValue", { ns: "delightfulFlow" })}: {return_type}
 					</div>
 					{desc && <div className="func-desc">{desc}</div>}
 				</div>
 				<div className="args-content">
 					<div className="args-title">
-						{i18next.t("expression.argumentsDesc", { ns: "magicFlow" })}
+						{i18next.t("expression.argumentsDesc", { ns: "delightfulFlow" })}
 					</div>
 					{arg?.map?.((argItem: MethodArgsItem) => {
 						const { name, type, desc: argDesc } = argItem

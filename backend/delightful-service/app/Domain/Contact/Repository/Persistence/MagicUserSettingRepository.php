@@ -20,20 +20,20 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
 {
     protected bool $filterOrganizationCode = true;
 
-    public function save(DataIsolation $dataIsolation, DelightfulUserSettingEntity $magicUserSettingEntity): DelightfulUserSettingEntity
+    public function save(DataIsolation $dataIsolation, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
-        if (! $magicUserSettingEntity->getId()) {
+        if (! $delightfulUserSettingEntity->getId()) {
             $model = new UserSettingModel();
         } else {
             $builder = $this->createContactBuilder($dataIsolation, UserSettingModel::query());
-            $model = $builder->where('id', $magicUserSettingEntity->getId())->first();
+            $model = $builder->where('id', $delightfulUserSettingEntity->getId())->first();
         }
 
-        $model->fill(DelightfulUserSettingFactory::createModel($magicUserSettingEntity));
+        $model->fill(DelightfulUserSettingFactory::createModel($delightfulUserSettingEntity));
         $model->save();
 
-        $magicUserSettingEntity->setId($model->id);
-        return $magicUserSettingEntity;
+        $delightfulUserSettingEntity->setId($model->id);
+        return $delightfulUserSettingEntity;
     }
 
     public function get(DataIsolation $dataIsolation, string $key): ?DelightfulUserSettingEntity
@@ -86,13 +86,13 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * 通过 magicId + key 获取用户设置（跨组织）.
+     * 通过 delightfulId + key 获取用户设置（跨组织）.
      */
-    public function getByDelightfulId(string $magicId, string $key): ?DelightfulUserSettingEntity
+    public function getByDelightfulId(string $delightfulId, string $key): ?DelightfulUserSettingEntity
     {
         /** @var null|UserSettingModel $model */
         $model = UserSettingModel::query()
-            ->where('magic_id', $magicId)
+            ->where('delightful_id', $delightfulId)
             ->where('key', $key)
             ->first();
 
@@ -100,34 +100,34 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * 通过 magicId 保存用户设置（跨组织），若已存在相同 key 则更新。
+     * 通过 delightfulId 保存用户设置（跨组织），若已存在相同 key 则更新。
      */
-    public function saveByDelightfulId(string $magicId, DelightfulUserSettingEntity $magicUserSettingEntity): DelightfulUserSettingEntity
+    public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
-        // 写入 magicId
-        $magicUserSettingEntity->setDelightfulId($magicId);
+        // 写入 delightfulId
+        $delightfulUserSettingEntity->setDelightfulId($delightfulId);
 
         // 查找现有记录
         $model = UserSettingModel::query()
-            ->where('magic_id', $magicId)
-            ->where('key', $magicUserSettingEntity->getKey())
+            ->where('delightful_id', $delightfulId)
+            ->where('key', $delightfulUserSettingEntity->getKey())
             ->first();
 
         if (! $model) {
             $model = new UserSettingModel();
         } else {
-            $magicUserSettingEntity->setId($model->id);
+            $delightfulUserSettingEntity->setId($model->id);
         }
 
-        $model->fill(DelightfulUserSettingFactory::createModel($magicUserSettingEntity));
+        $model->fill(DelightfulUserSettingFactory::createModel($delightfulUserSettingEntity));
         $model->save();
 
-        $magicUserSettingEntity->setId($model->id);
-        return $magicUserSettingEntity;
+        $delightfulUserSettingEntity->setId($model->id);
+        return $delightfulUserSettingEntity;
     }
 
     /**
-     * 获取全局配置（organization_code/user_id/magic_id 均为 NULL）。
+     * 获取全局配置（organization_code/user_id/delightful_id 均为 NULL）。
      */
     public function getGlobal(string $key): ?DelightfulUserSettingEntity
     {
@@ -135,7 +135,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
         $model = UserSettingModel::query()
             ->whereNull('organization_code')
             ->whereNull('user_id')
-            ->whereNull('magic_id')
+            ->whereNull('delightful_id')
             ->where('key', $key)
             ->first();
 
@@ -145,34 +145,34 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     /**
      * 保存全局配置.
      */
-    public function saveGlobal(DelightfulUserSettingEntity $magicUserSettingEntity): DelightfulUserSettingEntity
+    public function saveGlobal(DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
         // 查找现有记录
         /** @var null|UserSettingModel $model */
         $model = UserSettingModel::query()
             ->whereNull('organization_code')
             ->whereNull('user_id')
-            ->whereNull('magic_id')
-            ->where('key', $magicUserSettingEntity->getKey())
+            ->whereNull('delightful_id')
+            ->where('key', $delightfulUserSettingEntity->getKey())
             ->first();
 
         if (! $model) {
             $model = new UserSettingModel();
         } else {
-            $magicUserSettingEntity->setId($model->id);
+            $delightfulUserSettingEntity->setId($model->id);
         }
 
         // 使用工厂生成数据后手动覆盖 NULL 字段
-        $magicUserSettingEntity->setOrganizationCode(null);
-        $magicUserSettingEntity->setUserId(null);
-        $magicUserSettingEntity->setDelightfulId(null);
-        $magicUserSettingEntity->setCreatedAt(new DateTime());
-        $magicUserSettingEntity->setUpdatedAt(new DateTime());
-        $model->fill(DelightfulUserSettingFactory::createModel($magicUserSettingEntity));
+        $delightfulUserSettingEntity->setOrganizationCode(null);
+        $delightfulUserSettingEntity->setUserId(null);
+        $delightfulUserSettingEntity->setDelightfulId(null);
+        $delightfulUserSettingEntity->setCreatedAt(new DateTime());
+        $delightfulUserSettingEntity->setUpdatedAt(new DateTime());
+        $model->fill(DelightfulUserSettingFactory::createModel($delightfulUserSettingEntity));
 
         $model->save();
 
-        $magicUserSettingEntity->setId($model->id);
-        return $magicUserSettingEntity;
+        $delightfulUserSettingEntity->setId($model->id);
+        return $delightfulUserSettingEntity;
     }
 }

@@ -14,9 +14,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_contact_users', static function (Blueprint $table) {
-            $table->dropIndex('unq_magic_id_organization_code');
-            $table->unique(['magic_id', 'organization_code'], 'unq_magic_id_organization_code');
+        Schema::table('delightful_contact_users', static function (Blueprint $table) {
+            $table->dropIndex('unq_delightful_id_organization_code');
+            $table->unique(['delightful_id', 'organization_code'], 'unq_delightful_id_organization_code');
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_contact_users', function (Blueprint $table) {
+        Schema::table('delightful_contact_users', function (Blueprint $table) {
         });
     }
 };

@@ -28,7 +28,7 @@ const useStyles = createStyles(({ css, prefixCls, token, isDarkMode }) => ({
     border-radius: 12px;
     overflow: hidden;
     --${prefixCls}-modal-header-margin-bottom: 0px;
-    .magic-modal-header {
+    .delightful-modal-header {
       z-index: 1001;
       position: relative;
     }
@@ -38,11 +38,11 @@ const useStyles = createStyles(({ css, prefixCls, token, isDarkMode }) => ({
     --${prefixCls}-modal-content-bg: ${token.colorBgContainer};
 		max-height: 80vh;
 		background-color: #f5f5f5;
-		background-color: ${token.magicColorUsages.bg[1]};
+		background-color: ${token.delightfulColorUsages.bg[1]};
 	`,
 	title: css`
 		overflow: hidden;
-		color: ${token.magicColorUsages.text[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 		text-overflow: ellipsis;
 		font-size: 14px;
 		line-height: 20px;
@@ -86,13 +86,13 @@ const useStyles = createStyles(({ css, prefixCls, token, isDarkMode }) => ({
 		height: 10px;
 		.${prefixCls}-progress-inner {
 			background-color: ${isDarkMode
-				? token.magicColorScales.grey[0]
-				: token.magicColorScales.grey[0]};
+				? token.delightfulColorScales.grey[0]
+				: token.delightfulColorScales.grey[0]};
 		}
 	`,
 	progressText: css`
 		font-size: 14px;
-		color: ${token.magicColorUsages.text[0]};
+		color: ${token.delightfulColorUsages.text[0]};
 	`,
 }))
 

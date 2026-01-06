@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_mcp_servers', function (Blueprint $table) {
+        Schema::table('delightful_mcp_servers', function (Blueprint $table) {
             $table->string('external_sse_url', 1024)->default('')->comment('外部SSE服务URL')->after('enabled');
         });
     }

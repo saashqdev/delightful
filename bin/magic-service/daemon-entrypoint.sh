@@ -16,6 +16,6 @@ SEED_MARKER="/opt/www/.db_seed_executed"
 # fi
 
 # Start the daemon service
-echo "Starting magic-service daemon..."
+echo "Starting delightful-service daemon..."
 php bin/hyperf.php start
 

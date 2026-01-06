@@ -28,24 +28,24 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
     /**
      * @param array<DocumentFileInterface> $documentFiles
      */
-    public function save(Authenticatable $authorization, KnowledgeBaseEntity $magicFlowKnowledgeEntity, array $documentFiles = []): KnowledgeBaseEntity
+    public function save(Authenticatable $authorization, KnowledgeBaseEntity $delightfulFlowKnowledgeEntity, array $documentFiles = []): KnowledgeBaseEntity
     {
         $dataIsolation = $this->createKnowledgeBaseDataIsolation($authorization);
-        $magicFlowKnowledgeEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        $magicFlowKnowledgeEntity->setCreator($dataIsolation->getCurrentUserId());
+        $delightfulFlowKnowledgeEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
+        $delightfulFlowKnowledgeEntity->setCreator($dataIsolation->getCurrentUserId());
 
         $oldKnowledge = null;
         // 如果具有业务 id，那么就是更新了，需要先查询出来
-        if (! empty($magicFlowKnowledgeEntity->getBusinessId())) {
-            $oldKnowledge = $this->getByBusinessId($authorization, $magicFlowKnowledgeEntity->getBusinessId());
+        if (! empty($delightfulFlowKnowledgeEntity->getBusinessId())) {
+            $oldKnowledge = $this->getByBusinessId($authorization, $delightfulFlowKnowledgeEntity->getBusinessId());
             if ($oldKnowledge) {
-                $magicFlowKnowledgeEntity->setCode($oldKnowledge->getCode());
+                $delightfulFlowKnowledgeEntity->setCode($oldKnowledge->getCode());
             }
         }
 
         // 更新数据 - 查询权限
-        if (! $magicFlowKnowledgeEntity->shouldCreate() && ! $oldKnowledge) {
-            $oldKnowledge = $this->knowledgeBaseDomainService->show($dataIsolation, $magicFlowKnowledgeEntity->getCode(), false);
+        if (! $delightfulFlowKnowledgeEntity->shouldCreate() && ! $oldKnowledge) {
+            $oldKnowledge = $this->knowledgeBaseDomainService->show($dataIsolation, $delightfulFlowKnowledgeEntity->getCode(), false);
         }
         $operation = Operation::None;
         if ($oldKnowledge) {
@@ -53,14 +53,14 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
             $operation->validate('w', $oldKnowledge->getCode());
 
             // 使用原来的模型和向量库
-            $magicFlowKnowledgeEntity->setModel($oldKnowledge->getModel());
-            $magicFlowKnowledgeEntity->setVectorDB($oldKnowledge->getVectorDB());
+            $delightfulFlowKnowledgeEntity->setModel($oldKnowledge->getModel());
+            $delightfulFlowKnowledgeEntity->setVectorDB($oldKnowledge->getVectorDB());
         }
         $modelGatewayMapper = di(ModelGatewayMapper::class);
 
         // 创建的才需要设置
-        if ($magicFlowKnowledgeEntity->shouldCreate()) {
-            $modelId = $magicFlowKnowledgeEntity->getEmbeddingConfig()['model_id'] ?? null;
+        if ($delightfulFlowKnowledgeEntity->shouldCreate()) {
+            $modelId = $delightfulFlowKnowledgeEntity->getEmbeddingConfig()['model_id'] ?? null;
             if (! $modelId) {
                 // 优先使用配置的模型
                 $modelId = EmbeddingGenerator::defaultModel();
@@ -70,37 +70,37 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
                     $modelId = $firstEmbeddingModel?->getKey();
                 }
                 // 更新嵌入配置model_id
-                $embeddingConfig = $magicFlowKnowledgeEntity->getEmbeddingConfig();
+                $embeddingConfig = $delightfulFlowKnowledgeEntity->getEmbeddingConfig();
                 $embeddingConfig['model_id'] = $modelId;
-                $magicFlowKnowledgeEntity->setEmbeddingConfig($embeddingConfig);
+                $delightfulFlowKnowledgeEntity->setEmbeddingConfig($embeddingConfig);
             }
             if (! $modelId) {
                 ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'flow.model.error_config_missing', ['name' => 'embedding_model']);
             }
 
-            $magicFlowKnowledgeEntity->setModel($modelId);
-            $magicFlowKnowledgeEntity->setVectorDB(VectorStoreDriver::default()->value);
+            $delightfulFlowKnowledgeEntity->setModel($modelId);
+            $delightfulFlowKnowledgeEntity->setVectorDB(VectorStoreDriver::default()->value);
         }
 
-        $modelName = $magicFlowKnowledgeEntity->getModel();
-        $magicFlowKnowledgeEntity->setForceCreateCode(Code::Knowledge->gen());
+        $modelName = $delightfulFlowKnowledgeEntity->getModel();
+        $delightfulFlowKnowledgeEntity->setForceCreateCode(Code::Knowledge->gen());
         // 创建知识库前，先对嵌入模型进行连通性测试
         try {
-            $embeddingModel = di(ModelGatewayMapper::class)->getEmbeddingModelProxy($dataIsolation, $magicFlowKnowledgeEntity->getModel());
+            $embeddingModel = di(ModelGatewayMapper::class)->getEmbeddingModelProxy($dataIsolation, $delightfulFlowKnowledgeEntity->getModel());
             $modelName = $embeddingModel->getModelName();
             $embeddingResult = $embeddingModel->embedding(
                 'test.' . uniqid(),
                 businessParams: [
                     'organization_id' => $dataIsolation->getCurrentOrganizationCode(),
                     'user_id' => $dataIsolation->getCurrentUserId(),
-                    'business_id' => $magicFlowKnowledgeEntity->getForceCreateCode(),
+                    'business_id' => $delightfulFlowKnowledgeEntity->getForceCreateCode(),
                     'source_id' => 'knowledge_embedding_test',
                     'knowledge_info' => [
-                        'id' => $magicFlowKnowledgeEntity->getId(),
+                        'id' => $delightfulFlowKnowledgeEntity->getId(),
                         'organization_code' => $dataIsolation->getCurrentOrganizationCode(),
-                        'code' => $magicFlowKnowledgeEntity->getForceCreateCode(),
-                        'name' => $magicFlowKnowledgeEntity->getName(),
-                        'business_id' => $magicFlowKnowledgeEntity->getBusinessId(),
+                        'code' => $delightfulFlowKnowledgeEntity->getForceCreateCode(),
+                        'name' => $delightfulFlowKnowledgeEntity->getName(),
+                        'business_id' => $delightfulFlowKnowledgeEntity->getBusinessId(),
                     ],
                 ]
             );
@@ -127,7 +127,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
             ]);
         }
 
-        $knowledgeBaseEntity = $this->knowledgeBaseDomainService->save($dataIsolation, $magicFlowKnowledgeEntity, $documentFiles);
+        $knowledgeBaseEntity = $this->knowledgeBaseDomainService->save($dataIsolation, $delightfulFlowKnowledgeEntity, $documentFiles);
         $knowledgeBaseEntity->setUserOperation($operation->value);
         $iconFileLink = $this->getFileLink($dataIsolation->getCurrentOrganizationCode(), $knowledgeBaseEntity->getIcon());
         $knowledgeBaseEntity->setIcon($iconFileLink?->getUrl() ?? '');
@@ -192,7 +192,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
             $item->setUserOperation(($resources[$item->getCode()] ?? Operation::None)->value);
             $item->setSourceType($this->knowledgeBaseStrategy->getOrCreateDefaultSourceType($item));
         }
-        $result['users'] = $this->magicUserDomainService->getByUserIds($this->createContactDataIsolationByBase($dataIsolation), $userIds);
+        $result['users'] = $this->delightfulUserDomainService->getByUserIds($this->createContactDataIsolationByBase($dataIsolation), $userIds);
         return $result;
     }
 
@@ -212,7 +212,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
     {
         $dataIsolation = $this->createKnowledgeBaseDataIsolation($authorization);
         $this->checkKnowledgeBaseOperation($dataIsolation, 'del', $code);
-        $magicFlowKnowledgeEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $code);
-        $this->knowledgeBaseDomainService->destroy($dataIsolation, $magicFlowKnowledgeEntity);
+        $delightfulFlowKnowledgeEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $code);
+        $this->knowledgeBaseDomainService->destroy($dataIsolation, $delightfulFlowKnowledgeEntity);
     }
 }

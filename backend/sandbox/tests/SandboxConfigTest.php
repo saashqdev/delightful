@@ -484,7 +484,7 @@ class SandboxConfigTest extends TestCase
     }
 
     /**
-     * Test whether sandbox disallows magic constants by default.
+     * Test whether sandbox disallows delightful constants by default.
      */
     public function testDelightfulConstants()
     {
@@ -493,7 +493,7 @@ class SandboxConfigTest extends TestCase
     }
 
     /*
-     * Test whether sandbox allows whitelisted magic constants.
+     * Test whether sandbox allows whitelisted delightful constants.
      */
     //    public function testWhitelistDelightfulConstants()
     //    {

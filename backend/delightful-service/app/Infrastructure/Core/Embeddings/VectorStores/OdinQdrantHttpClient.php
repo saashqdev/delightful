@@ -22,7 +22,7 @@ class OdinQdrantHttpClient implements ClientInterface
 
     public function __construct()
     {
-        $config = config('magic_flows.vector.odin_qdrant');
+        $config = config('delightful_flows.vector.odin_qdrant');
 
         if (empty($config['base_uri'])) {
             ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, 'qdrant error | base_uri is required');

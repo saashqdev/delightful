@@ -35,12 +35,12 @@ class RequestContextMiddleware implements MiddlewareInterface
         $accessToken = $request->getHeaderLine('api-key');
 
         if (! empty($accessToken)) {
-            $magicUserAuthorization = $this->getOpenPlatformAuthorization($request, $accessToken);
+            $delightfulUserAuthorization = $this->getOpenPlatformAuthorization($request, $accessToken);
         } else {
-            $magicUserAuthorization = $this->getAuthorization();
+            $delightfulUserAuthorization = $this->getAuthorization();
         }
         // 将用户信息存入协程上下文，方便 api 层获取
-        RequestCoContext::setUserAuthorization($magicUserAuthorization);
+        RequestCoContext::setUserAuthorization($delightfulUserAuthorization);
         return $handler->handle($request);
     }
 
@@ -62,26 +62,26 @@ class RequestContextMiddleware implements MiddlewareInterface
     protected function getOpenPlatformAuthorization(ServerRequestInterface $request, string $accessToken): DelightfulUserAuthorization
     {
         try {
-            $magicUserId = $request->getHeaderLine('magic-user-id');
-            $organizationCode = $request->getHeaderLine('magic-organization-code');
+            $delightfulUserId = $request->getHeaderLine('delightful-user-id');
+            $organizationCode = $request->getHeaderLine('delightful-organization-code');
 
             $businessParams = [];
-            if (! empty($organizationCode) && ! empty($magicUserId)) {
+            if (! empty($organizationCode) && ! empty($delightfulUserId)) {
                 $businessParams = [
                     'organization_code' => $organizationCode,
-                    'user_id' => $magicUserId,
+                    'user_id' => $delightfulUserId,
                 ];
             }
             $modelGatewayDataIsolation = $this->llmAppService->createModelGatewayDataIsolationByAccessToken($accessToken, $businessParams);
-            $magicUserAuthorization = new DelightfulUserAuthorization();
-            $magicUserAuthorization->setId($modelGatewayDataIsolation->getCurrentUserId());
-            $magicUserAuthorization->setOrganizationCode($modelGatewayDataIsolation->getCurrentOrganizationCode());
-            $magicUserAuthorization->setDelightfulId($modelGatewayDataIsolation->getDelightfulId());
-            $magicUserAuthorization->setThirdPlatformUserId($modelGatewayDataIsolation->getThirdPlatformUserId());
-            $magicUserAuthorization->setThirdPlatformOrganizationCode($modelGatewayDataIsolation->getThirdPlatformOrganizationCode());
-            $magicUserAuthorization->setDelightfulEnvId($modelGatewayDataIsolation->getEnvId());
-            $magicUserAuthorization->setUserType(UserType::Human);
-            return $magicUserAuthorization;
+            $delightfulUserAuthorization = new DelightfulUserAuthorization();
+            $delightfulUserAuthorization->setId($modelGatewayDataIsolation->getCurrentUserId());
+            $delightfulUserAuthorization->setOrganizationCode($modelGatewayDataIsolation->getCurrentOrganizationCode());
+            $delightfulUserAuthorization->setDelightfulId($modelGatewayDataIsolation->getDelightfulId());
+            $delightfulUserAuthorization->setThirdPlatformUserId($modelGatewayDataIsolation->getThirdPlatformUserId());
+            $delightfulUserAuthorization->setThirdPlatformOrganizationCode($modelGatewayDataIsolation->getThirdPlatformOrganizationCode());
+            $delightfulUserAuthorization->setDelightfulEnvId($modelGatewayDataIsolation->getEnvId());
+            $delightfulUserAuthorization->setUserType(UserType::Human);
+            return $delightfulUserAuthorization;
         } catch (BusinessException $exception) {
             // 如果是业务异常，直接抛出，不改变异常类型
             throw $exception;

@@ -5,7 +5,7 @@ import { IconSunHigh, IconMoon, IconDeviceImac } from "@tabler/icons-react"
 import { memo, useMemo } from "react"
 
 import { useMemoizedFn } from "ahooks"
-import { magic } from "@/enhance/magicElectron"
+import { delightful } from "@/enhance/delightfulElectron"
 import { useTheme } from "@/opensource/models/config/hooks"
 import lightImg from "./assets/appearence-light.svg"
 import darkImg from "./assets/appearence-dark.svg"
@@ -13,7 +13,7 @@ import autoImg from "./assets/appearence-auto.svg"
 
 const useStyles = createStyles(({ token, css, cx, isDarkMode }) => {
 	const text = cx(css`
-		color: ${isDarkMode ? token.magicColorScales.grey[3] : token.magicColorUsages.text[1]};
+		color: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorUsages.text[1]};
 	`)
 
 	const image = cx(css`
@@ -27,7 +27,7 @@ const useStyles = createStyles(({ token, css, cx, isDarkMode }) => {
 		item: {
 			cursor: "pointer",
 			[`&[data-active="true"] .${text}`]: {
-				color: isDarkMode ? token.magicColorUsages.primaryLight.active : token.colorPrimary,
+				color: isDarkMode ? token.delightfulColorUsages.primaryLight.active : token.colorPrimary,
 			},
 			[`&[data-active="true"] .${image}`]: {
 				borderColor: token.colorPrimary,
@@ -46,7 +46,7 @@ const AppearenceSwitch = memo(() => {
 
 	const onThemeChange = useMemoizedFn((themeConfig) => {
 		setTheme(themeConfig)
-		magic?.theme?.setTheme?.(themeConfig)
+		delightful?.theme?.setTheme?.(themeConfig)
 	})
 
 	const items = useMemo(

@@ -49,7 +49,7 @@ export const useStyles = createStyles(({ css, token }, { fontSize }: { fontSize:
 			display: flex;
 			flex-direction: column;
 			width: 100%;
-			background-color: ${token?.magicColorScales.grey[0]};
+			background-color: ${token?.delightfulColorScales.grey[0]};
 			position: relative;
 			user-select: none;
 			padding: 20px 0;
@@ -70,24 +70,24 @@ export const useStyles = createStyles(({ css, token }, { fontSize }: { fontSize:
 			width: 100%;
 			padding: 16px;
 			text-align: center;
-			color: ${token.magicColorUsages.text[2]};
+			color: ${token.delightfulColorUsages.text[2]};
 			font-size: 14px;
 		`,
 		loadMoreButton: css`
 			width: 100%;
 			padding: 12px;
 			text-align: center;
-			color: ${token.magicColorUsages.text[2]};
+			color: ${token.delightfulColorUsages.text[2]};
 			font-size: 14px;
 			cursor: pointer;
-			background-color: ${token.magicColorScales.grey[1]};
+			background-color: ${token.delightfulColorScales.grey[1]};
 			border-radius: 4px;
 			margin: 8px 0;
 			transition: all 0.3s;
 
 			&:hover {
-				background-color: ${token.magicColorScales.grey[2]};
-				color: ${token.magicColorUsages.text[1]};
+				background-color: ${token.delightfulColorScales.grey[2]};
+				color: ${token.delightfulColorUsages.text[1]};
 			}
 		`,
 		loadingMore: css`
@@ -116,7 +116,7 @@ export const useStyles = createStyles(({ css, token }, { fontSize }: { fontSize:
 			height: 200px;
 			color: ${token.colorTextSecondary};
 			font-size: 14px;
-			background-color: ${token.magicColorScales.grey[0]};
+			background-color: ${token.delightfulColorScales.grey[0]};
 		`,
 	}
 })

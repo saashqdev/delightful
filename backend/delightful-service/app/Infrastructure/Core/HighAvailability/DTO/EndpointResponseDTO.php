@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Core\HighAvailability\DTO;
 
-// magic_api_premium_endpoint_responses
+// delightful_api_premium_endpoint_responses
 use App\Infrastructure\Core\AbstractDTO;
 
 class EndpointResponseDTO extends AbstractDTO

@@ -14,7 +14,7 @@ use App\Domain\Flow\Repository\Facade\DelightfulFlowMultiModalLogRepositoryInter
 class DelightfulFlowMultiModalLogDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly DelightfulFlowMultiModalLogRepositoryInterface $magicFlowMultiModalLogRepository,
+        private readonly DelightfulFlowMultiModalLogRepositoryInterface $delightfulFlowMultiModalLogRepository,
     ) {
     }
 
@@ -24,7 +24,7 @@ class DelightfulFlowMultiModalLogDomainService extends AbstractDomainService
     public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMultiModalLogEntity $entity): DelightfulFlowMultiModalLogEntity
     {
         $entity->prepareForCreation();
-        return $this->magicFlowMultiModalLogRepository->create($dataIsolation, $entity);
+        return $this->delightfulFlowMultiModalLogRepository->create($dataIsolation, $entity);
     }
 
     /**
@@ -32,7 +32,7 @@ class DelightfulFlowMultiModalLogDomainService extends AbstractDomainService
      */
     public function getById(FlowDataIsolation $dataIsolation, int $id): ?DelightfulFlowMultiModalLogEntity
     {
-        return $this->magicFlowMultiModalLogRepository->getById($dataIsolation, $id);
+        return $this->delightfulFlowMultiModalLogRepository->getById($dataIsolation, $id);
     }
 
     /**
@@ -40,7 +40,7 @@ class DelightfulFlowMultiModalLogDomainService extends AbstractDomainService
      */
     public function getByMessageId(FlowDataIsolation $dataIsolation, string $messageId): ?DelightfulFlowMultiModalLogEntity
     {
-        return $this->magicFlowMultiModalLogRepository->getByMessageId($dataIsolation, $messageId);
+        return $this->delightfulFlowMultiModalLogRepository->getByMessageId($dataIsolation, $messageId);
     }
 
     /**
@@ -51,6 +51,6 @@ class DelightfulFlowMultiModalLogDomainService extends AbstractDomainService
      */
     public function getByMessageIds(FlowDataIsolation $dataIsolation, array $messageIds, bool $keyByMessageId = false): array
     {
-        return $this->magicFlowMultiModalLogRepository->getByMessageIds($dataIsolation, $messageIds, $keyByMessageId);
+        return $this->delightfulFlowMultiModalLogRepository->getByMessageIds($dataIsolation, $messageIds, $keyByMessageId);
     }
 }

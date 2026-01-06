@@ -18,11 +18,11 @@ const useStyles = createStyles(
 				fontWeight: 400,
 				lineHeight: "16px",
 				border: `1px solid ${token.colorBorder}`,
-				color: isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.text[3],
-				backgroundColor: token.magicColorUsages.nav.bg,
+				color: isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[3],
+				backgroundColor: token.delightfulColorUsages.nav.bg,
 				// background: isDarkMode
-				// 	? token.magicColorScales.grey[6]
-				// 	: token.magicColorUsages.white,
+				// 	? token.delightfulColorScales.grey[6]
+				// 	: token.delightfulColorUsages.white,
 			},
 		}
 	},

@@ -27,7 +27,7 @@ const useStyles = createStyles(({ css, token, prefixCls }) => {
 		`,
 		segmented: css`
 			--${prefixCls}-segmented-item-selected-color: ${token.colorPrimary} !important;
-      --magic-control-padding-horizontal: 18px;
+      --delightful-control-padding-horizontal: 18px;
 			.${prefixCls}-segmented-item-selected .${prefixCls}-segmented-item-label {
 				font-weight: 600;
 			}
@@ -63,7 +63,7 @@ const useStyles = createStyles(({ css, token, prefixCls }) => {
 		`,
 		contentFormItem: css`
 			padding: 0;
-			background-color: ${token.magicColorScales.grey[0]};
+			background-color: ${token.delightfulColorScales.grey[0]};
 		`,
 		formItem: css`
 			border-bottom: 1px solid ${token.colorBorder};

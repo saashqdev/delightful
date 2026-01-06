@@ -3,7 +3,7 @@ import type { User } from "@/types/user"
 
 export function userTransformer(userInfo: StructureUserItem): User.UserInfo {
 	return {
-		magic_id: userInfo?.magic_id,
+		delightful_id: userInfo?.delightful_id,
 		user_id: userInfo?.user_id,
 		status: userInfo?.status,
 		nickname: userInfo?.nickname,

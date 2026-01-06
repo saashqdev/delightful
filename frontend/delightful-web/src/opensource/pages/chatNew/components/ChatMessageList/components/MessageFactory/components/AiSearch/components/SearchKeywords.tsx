@@ -11,7 +11,7 @@ interface SearchKeywordsProps {
 const useStyles = createStyles(({ css, token }) => ({
 	searchKeyword: css`
 		border-radius: 100px;
-		background: ${token.magicColorUsages.fill[1]};
+		background: ${token.delightfulColorUsages.fill[1]};
 		display: flex;
 		padding: 4px 12px;
 		justify-content: center;

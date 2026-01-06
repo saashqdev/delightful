@@ -1189,7 +1189,7 @@ class LLMAppService extends AbstractLLMAppService
             $errorMessage = $e->getMessage();
             $generateImageOpenAIFormat->setProviderErrorMessage($errorMessage);
             $generateImageOpenAIFormat->setProviderErrorCode($e->getCode());
-            $generateImageOpenAIFormat->setProvider('magic');
+            $generateImageOpenAIFormat->setProvider('delightful');
             $this->logger->warning('text generate image error:' . $e->getMessage());
         }
 
@@ -1549,7 +1549,7 @@ class LLMAppService extends AbstractLLMAppService
         defer(function () use ($modelVersion, $userId, $organizationCode) {
             $LLMDataIsolation = LLMDataIsolation::create($userId, $organizationCode);
 
-            $nickname = $this->magicUserDomainService->getUserById($userId)?->getNickname();
+            $nickname = $this->delightfulUserDomainService->getUserById($userId)?->getNickname();
             $msgLog = new MsgLogEntity();
             $msgLog->setModel($modelVersion);
             $msgLog->setUserId($userId);

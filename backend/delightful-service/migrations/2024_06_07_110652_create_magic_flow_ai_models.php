@@ -15,7 +15,7 @@ class CreateDelightfulFlowAIModels extends Migration
      */
     public function up(): void
     {
-        Schema::create('magic_flow_ai_models', function (Blueprint $table) {
+        Schema::create('delightful_flow_ai_models', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code')->default('')->comment('Organization code');
             $table->string('name', 100)->default('')->comment('Model name');
@@ -44,6 +44,6 @@ class CreateDelightfulFlowAIModels extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_flow_ai_models');
+        Schema::dropIfExists('delightful_flow_ai_models');
     }
 }

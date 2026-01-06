@@ -7,20 +7,20 @@ export const useStyles = createStyles(({ isDarkMode, prefixCls, token }) => {
 		position: absolute;
 		right: 6px;
 		top: 6px;
-		border: 1px solid ${token.magicColorUsages.border};
+		border: 1px solid ${token.delightfulColorUsages.border};
 		border-radius: 6px;
-		background: ${isDarkMode ? token.magicColorScales.grey[3] : token.magicColorUsages.white};
+		background: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorUsages.white};
 
 		&:hover {
 			background: ${isDarkMode
-				? token.magicColorScales.grey[4]
-				: token.magicColorScales.grey[1]} !important;
+				? token.delightfulColorScales.grey[4]
+				: token.delightfulColorScales.grey[1]} !important;
 		}
 
 		&:active {
 			background: ${isDarkMode
-				? token.magicColorScales.grey[5]
-				: token.magicColorScales.grey[0]} !important;
+				? token.delightfulColorScales.grey[5]
+				: token.delightfulColorScales.grey[0]} !important;
 		}
 
 		box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.05), 0px 0px 1px 0px rgba(0, 0, 0, 0.15);
@@ -37,10 +37,10 @@ export const useStyles = createStyles(({ isDarkMode, prefixCls, token }) => {
 		container: css`
 			position: relative;
 			border-radius: 8px;
-			border: 1px solid ${token.magicColorUsages.border};
+			border: 1px solid ${token.delightfulColorUsages.border};
 			background: ${isDarkMode
-				? token.magicColorScales.grey[2]
-				: token.magicColorUsages.white};
+				? token.delightfulColorScales.grey[2]
+				: token.delightfulColorUsages.white};
 
 			pre::-webkit-scrollbar {
 				display: none;

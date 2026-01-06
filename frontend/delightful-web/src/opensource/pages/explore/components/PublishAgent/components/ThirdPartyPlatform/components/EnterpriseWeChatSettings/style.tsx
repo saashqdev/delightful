@@ -27,12 +27,12 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
 			.${prefixCls}-form-item {
 				label {
 					font-size: 12px;
-					color: ${token.magicColorUsages.text[2]};
+					color: ${token.delightfulColorUsages.text[2]};
 				}
 			}
 			.${prefixCls}-form-item-explain {
 				font-size: 12px;
-				color: ${token.magicColorUsages.text[3]};
+				color: ${token.delightfulColorUsages.text[3]};
 				margin-top: 4px;
 			}
 			.${prefixCls}-form-item-label {
@@ -43,69 +43,69 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
 			font-weight: 600;
 			font-size: 14px;
 			line-height: 20px;
-			color: ${token.magicColorUsages.text[2]};
+			color: ${token.delightfulColorUsages.text[2]};
 		`,
 		activeTitle: css`
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 		`,
 		desc: css`
 			font-weight: 400;
 			font-size: 12px;
 			line-height: 16px;
-			color: ${token.magicColorUsages.text[2]};
+			color: ${token.delightfulColorUsages.text[2]};
 		`,
 		activeText: css`
-			color: ${token.magicColorUsages.primary.default};
+			color: ${token.delightfulColorUsages.primary.default};
 			cursor: pointer;
 		`,
 		infoItem: css`
-			color: ${token.magicColorUsages.text[2]};
+			color: ${token.delightfulColorUsages.text[2]};
 			padding-left: 10px;
 		`,
 		infoCard: css`
-			border: 1px solid ${token.magicColorUsages.border};
+			border: 1px solid ${token.delightfulColorUsages.border};
 			border-radius: 8px;
 			padding: 10px;
-			background: ${token.magicColorUsages.primaryLight.default};
-			color: ${token.magicColorUsages.text[1]};
+			background: ${token.delightfulColorUsages.primaryLight.default};
+			color: ${token.delightfulColorUsages.text[1]};
 			margin-bottom: 10px;
 		`,
 		infoCardContent: css`
 			padding-bottom: 10px;
 			font-size: 12px;
 			line-height: 16px;
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 		`,
 		configGuideTitle: css`
 			font-weight: 600;
 			font-size: 14px;
 			line-height: 20px;
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 			margin-bottom: 8px;
 		`,
 		noticeBlock: css`
 			border-radius: 8px;
 			padding-top: 10px;
-			border-top: 1px solid ${token.magicColorUsages.border};
+			border-top: 1px solid ${token.delightfulColorUsages.border};
 			font-size: 12px;
 			line-height: 16px;
 		`,
 		noticeTitle: css`
 			font-weight: 500;
 			margin-bottom: 8px;
-			color: ${token.magicColorUsages.primary.default};
+			color: ${token.delightfulColorUsages.primary.default};
 		`,
 		bulletPoint: css`
-			color: ${token.magicColorUsages.text[2]};
+			color: ${token.delightfulColorUsages.text[2]};
 			margin-top: 4px;
 		`,
 		infoActiveText: css`
 			font-size: 12px;
-			color: ${token.magicColorUsages.primary.default};
+			color: ${token.delightfulColorUsages.primary.default};
 			font-weight: 600;
 		`,
 		copy: css`
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 			margin: 0 2px;
 			cursor: pointer;
 			&:hover {
@@ -129,15 +129,15 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
 			}
 		`,
 		formTitle: css`
-			color: ${token.magicColorUsages.text[2]};
+			color: ${token.delightfulColorUsages.text[2]};
 		`,
 		formDesc: css`
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 			font-size: 14px;
 		`,
 		formInput: css`
 			height: 32px;
-			border: 1px solid ${token.magicColorUsages.border};
+			border: 1px solid ${token.delightfulColorUsages.border};
 			border-radius: 8px;
 			max-width: 560px;
 		`,
@@ -148,19 +148,19 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
 		copyBlock: css`
 			width: 100%;
 			height: 100%;
-			background-color: ${token.magicColorUsages.fill[0]};
+			background-color: ${token.delightfulColorUsages.fill[0]};
 			flex: 0 0 72px;
 			cursor: pointer;
 			&:hover {
-				background-color: ${token.magicColorUsages.fill[1]};
+				background-color: ${token.delightfulColorUsages.fill[1]};
 			}
 		`,
 		iconCopyLink: css`
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 		`,
 		apiConfigSection: css`
 			margin-top: 16px;
-			border: 1px solid ${token.magicColorUsages.border};
+			border: 1px solid ${token.delightfulColorUsages.border};
 			border-radius: 8px;
 			padding: 16px;
 		`,
@@ -168,29 +168,29 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
 			font-weight: 600;
 			font-size: 14px;
 			line-height: 20px;
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 			margin-bottom: 12px;
 		`,
 		ipConfigTip: css`
 			margin-top: 12px;
 			font-size: 12px;
-			color: ${token.magicColorUsages.text[2]};
+			color: ${token.delightfulColorUsages.text[2]};
 			line-height: 18px;
 		`,
 		finishBlock: css`
 			height: 282px;
 		`,
 		iconCheck: css`
-			color: ${token.magicColorUsages.success.default};
+			color: ${token.delightfulColorUsages.success.default};
 		`,
 		successText: css`
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 			font-weight: 600;
 			font-size: 14px;
 			line-height: 20px;
 		`,
 		backBtn: css`
-			color: ${token.magicColorUsages.primary.default};
+			color: ${token.delightfulColorUsages.primary.default};
 		`,
 	}
 })

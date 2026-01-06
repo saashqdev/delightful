@@ -36,57 +36,57 @@ class DelightfulFlowAssembler
         return null;
     }
 
-    public static function createDelightfulFlowDO(DelightfulFlowDTO $magicFlowDTO): DelightfulFlowEntity
+    public static function createDelightfulFlowDO(DelightfulFlowDTO $delightfulFlowDTO): DelightfulFlowEntity
     {
-        $magicFlow = new DelightfulFlowEntity();
-        $magicFlow->setCode((string) $magicFlowDTO->getId());
-        $magicFlow->setName($magicFlowDTO->getName());
-        $magicFlow->setDescription($magicFlowDTO->getDescription());
-        $magicFlow->setIcon(FileAssembler::formatPath($magicFlowDTO->getIcon()));
-        $magicFlow->setToolSetId($magicFlowDTO->getToolSetId());
-        $magicFlow->setType(Type::from($magicFlowDTO->getType()));
-        $magicFlow->setEnabled($magicFlowDTO->isEnabled());
-        $magicFlow->setNodes(array_map(fn (NodeDTO $nodeDTO) => DelightfulFlowNodeAssembler::createNodeDO($nodeDTO), $magicFlowDTO->getNodes()));
-        $magicFlow->setEdges($magicFlowDTO->getEdges());
-        $magicFlow->setGlobalVariable($magicFlowDTO->getGlobalVariable());
-        return $magicFlow;
+        $delightfulFlow = new DelightfulFlowEntity();
+        $delightfulFlow->setCode((string) $delightfulFlowDTO->getId());
+        $delightfulFlow->setName($delightfulFlowDTO->getName());
+        $delightfulFlow->setDescription($delightfulFlowDTO->getDescription());
+        $delightfulFlow->setIcon(FileAssembler::formatPath($delightfulFlowDTO->getIcon()));
+        $delightfulFlow->setToolSetId($delightfulFlowDTO->getToolSetId());
+        $delightfulFlow->setType(Type::from($delightfulFlowDTO->getType()));
+        $delightfulFlow->setEnabled($delightfulFlowDTO->isEnabled());
+        $delightfulFlow->setNodes(array_map(fn (NodeDTO $nodeDTO) => DelightfulFlowNodeAssembler::createNodeDO($nodeDTO), $delightfulFlowDTO->getNodes()));
+        $delightfulFlow->setEdges($delightfulFlowDTO->getEdges());
+        $delightfulFlow->setGlobalVariable($delightfulFlowDTO->getGlobalVariable());
+        return $delightfulFlow;
     }
 
     /**
      * @param array<string,FileLink> $icons
      */
-    public static function createDelightfulFlowDTO(DelightfulFlowEntity $magicFlowEntity, array $icons = [], array $users = []): DelightfulFlowDTO
+    public static function createDelightfulFlowDTO(DelightfulFlowEntity $delightfulFlowEntity, array $icons = [], array $users = []): DelightfulFlowDTO
     {
-        $magicFlowDTO = new DelightfulFlowDTO($magicFlowEntity->toArray());
-        $magicFlowDTO->setId($magicFlowEntity->getCode());
-        $magicFlowDTO->setIcon(FileAssembler::getUrl($icons[$magicFlowEntity->getIcon()] ?? null));
-        $magicFlowDTO->setUserOperation($magicFlowEntity->getUserOperation());
+        $delightfulFlowDTO = new DelightfulFlowDTO($delightfulFlowEntity->toArray());
+        $delightfulFlowDTO->setId($delightfulFlowEntity->getCode());
+        $delightfulFlowDTO->setIcon(FileAssembler::getUrl($icons[$delightfulFlowEntity->getIcon()] ?? null));
+        $delightfulFlowDTO->setUserOperation($delightfulFlowEntity->getUserOperation());
 
-        $magicFlowDTO->setCreator($magicFlowEntity->getCreator());
-        $magicFlowDTO->setCreatedAt($magicFlowEntity->getCreatedAt());
-        $magicFlowDTO->setModifier($magicFlowEntity->getModifier());
-        $magicFlowDTO->setUpdatedAt($magicFlowEntity->getUpdatedAt());
-        $magicFlowDTO->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowEntity->getCreator()] ?? null, $magicFlowEntity->getCreatedAt()));
-        $magicFlowDTO->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowEntity->getModifier()] ?? null, $magicFlowEntity->getUpdatedAt()));
-        return $magicFlowDTO;
+        $delightfulFlowDTO->setCreator($delightfulFlowEntity->getCreator());
+        $delightfulFlowDTO->setCreatedAt($delightfulFlowEntity->getCreatedAt());
+        $delightfulFlowDTO->setModifier($delightfulFlowEntity->getModifier());
+        $delightfulFlowDTO->setUpdatedAt($delightfulFlowEntity->getUpdatedAt());
+        $delightfulFlowDTO->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowEntity->getCreator()] ?? null, $delightfulFlowEntity->getCreatedAt()));
+        $delightfulFlowDTO->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowEntity->getModifier()] ?? null, $delightfulFlowEntity->getUpdatedAt()));
+        return $delightfulFlowDTO;
     }
 
-    public static function createDelightfulFlowParamsDTO(DelightfulFlowEntity $magicFlowEntity): DelightfulFlowParamDTO
+    public static function createDelightfulFlowParamsDTO(DelightfulFlowEntity $delightfulFlowEntity): DelightfulFlowParamDTO
     {
-        $magicFlowDTO = new DelightfulFlowParamDTO($magicFlowEntity->toArray());
-        $magicFlowDTO->setId($magicFlowEntity->getCode());
+        $delightfulFlowDTO = new DelightfulFlowParamDTO($delightfulFlowEntity->toArray());
+        $delightfulFlowDTO->setId($delightfulFlowEntity->getCode());
 
         $input = new NodeInputDTO();
-        $input->setForm($magicFlowEntity->getInput()?->getForm());
-        $input->setWidget($magicFlowEntity->getInput()?->getWidget());
-        $magicFlowDTO->setInput($input);
+        $input->setForm($delightfulFlowEntity->getInput()?->getForm());
+        $input->setWidget($delightfulFlowEntity->getInput()?->getWidget());
+        $delightfulFlowDTO->setInput($input);
 
         $output = new NodeOutputDTO();
-        $output->setForm($magicFlowEntity->getOutput()?->getForm());
-        $output->setWidget($magicFlowEntity->getOutput()?->getWidget());
-        $magicFlowDTO->setOutput($output);
+        $output->setForm($delightfulFlowEntity->getOutput()?->getForm());
+        $output->setWidget($delightfulFlowEntity->getOutput()?->getWidget());
+        $delightfulFlowDTO->setOutput($output);
 
-        return $magicFlowDTO;
+        return $delightfulFlowDTO;
     }
 
     /**
@@ -96,7 +96,7 @@ class DelightfulFlowAssembler
      */
     public static function createPageListDTO(int $total, array $list, Page $page, array $users = [], array $icons = []): PageDTO
     {
-        $list = array_map(fn (DelightfulFlowEntity $magicFlowEntity) => self::createDelightfulFlowListDTO($magicFlowEntity, $users, $icons), $list);
+        $list = array_map(fn (DelightfulFlowEntity $delightfulFlowEntity) => self::createDelightfulFlowListDTO($delightfulFlowEntity, $users, $icons), $list);
         return new PageDTO($page->getPage(), $total, $list);
     }
 
@@ -104,39 +104,39 @@ class DelightfulFlowAssembler
      * @param array<string,DelightfulUserEntity> $users
      * @param array<string,FileLink> $icons
      */
-    protected static function createDelightfulFlowListDTO(DelightfulFlowEntity $magicFlowEntity, array $users = [], array $icons = []): DelightfulFlowListDTO
+    protected static function createDelightfulFlowListDTO(DelightfulFlowEntity $delightfulFlowEntity, array $users = [], array $icons = []): DelightfulFlowListDTO
     {
-        $magicFlowDTO = new DelightfulFlowListDTO($magicFlowEntity->toArray());
-        $magicFlowDTO->setId($magicFlowEntity->getCode());
-        $magicFlowDTO->setIcon(FileAssembler::getUrl($icons[$magicFlowEntity->getIcon()] ?? null));
-        $magicFlowDTO->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity(
-            user: $users[$magicFlowEntity->getCreator()] ?? null,
-            dateTime: $magicFlowEntity->getCreatedAt()
+        $delightfulFlowDTO = new DelightfulFlowListDTO($delightfulFlowEntity->toArray());
+        $delightfulFlowDTO->setId($delightfulFlowEntity->getCode());
+        $delightfulFlowDTO->setIcon(FileAssembler::getUrl($icons[$delightfulFlowEntity->getIcon()] ?? null));
+        $delightfulFlowDTO->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity(
+            user: $users[$delightfulFlowEntity->getCreator()] ?? null,
+            dateTime: $delightfulFlowEntity->getCreatedAt()
         ));
-        $magicFlowDTO->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity(
-            user: $users[$magicFlowEntity->getModifier()] ?? null,
-            dateTime: $magicFlowEntity->getUpdatedAt()
+        $delightfulFlowDTO->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity(
+            user: $users[$delightfulFlowEntity->getModifier()] ?? null,
+            dateTime: $delightfulFlowEntity->getUpdatedAt()
         ));
-        $magicFlowDTO->setUserOperation($magicFlowEntity->getUserOperation());
+        $delightfulFlowDTO->setUserOperation($delightfulFlowEntity->getUserOperation());
 
         // 只有工具的时候才显示入参出参
-        if ($magicFlowEntity->getType()->isTools()) {
+        if ($delightfulFlowEntity->getType()->isTools()) {
             $input = new NodeInputDTO();
-            $input->setForm($magicFlowEntity->getInput()?->getForm());
-            $input->setWidget($magicFlowEntity->getInput()?->getWidget());
-            $magicFlowDTO->setInput($input);
+            $input->setForm($delightfulFlowEntity->getInput()?->getForm());
+            $input->setWidget($delightfulFlowEntity->getInput()?->getWidget());
+            $delightfulFlowDTO->setInput($input);
 
             $output = new NodeOutputDTO();
-            $output->setForm($magicFlowEntity->getOutput()?->getForm());
-            $output->setWidget($magicFlowEntity->getOutput()?->getWidget());
-            $magicFlowDTO->setOutput($output);
+            $output->setForm($delightfulFlowEntity->getOutput()?->getForm());
+            $output->setWidget($delightfulFlowEntity->getOutput()?->getWidget());
+            $delightfulFlowDTO->setOutput($output);
 
             $customSystemOutput = new NodeInputDTO();
-            $customSystemOutput->setForm($magicFlowEntity->getCustomSystemInput()?->getForm());
-            $customSystemOutput->setWidget($magicFlowEntity->getCustomSystemInput()?->getWidget());
-            $magicFlowDTO->setCustomSystemInput($customSystemOutput);
+            $customSystemOutput->setForm($delightfulFlowEntity->getCustomSystemInput()?->getForm());
+            $customSystemOutput->setWidget($delightfulFlowEntity->getCustomSystemInput()?->getWidget());
+            $delightfulFlowDTO->setCustomSystemInput($customSystemOutput);
         }
 
-        return $magicFlowDTO;
+        return $delightfulFlowDTO;
     }
 }

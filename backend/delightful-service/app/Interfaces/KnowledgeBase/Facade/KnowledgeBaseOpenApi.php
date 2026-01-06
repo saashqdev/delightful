@@ -24,9 +24,9 @@ class KnowledgeBaseOpenApi extends AbstractOpenApi
     //        $authorization = $this->getAuthorization();
     //        $dto = new DelightfulFlowKnowledgeDTO($this->request->all());
     //
-    //        $magicFlowKnowledgeDO = DelightfulFlowKnowledgeAssembler::creatDO($dto);
-    //        $magicFlowKnowledgeEntity = $this->knowledgeBaseAppService->save($authorization, $magicFlowKnowledgeDO);
-    //        return DelightfulFlowKnowledgeAssembler::createDTO($magicFlowKnowledgeEntity);
+    //        $delightfulFlowKnowledgeDO = DelightfulFlowKnowledgeAssembler::creatDO($dto);
+    //        $delightfulFlowKnowledgeEntity = $this->knowledgeBaseAppService->save($authorization, $delightfulFlowKnowledgeDO);
+    //        return DelightfulFlowKnowledgeAssembler::createDTO($delightfulFlowKnowledgeEntity);
     //    }
     //
     //    public function saveProcess()
@@ -34,9 +34,9 @@ class KnowledgeBaseOpenApi extends AbstractOpenApi
     //        $authorization = $this->getAuthorization();
     //        $dto = new DelightfulFlowKnowledgeDTO($this->request->all());
     //
-    //        $magicFlowKnowledgeDO = DelightfulFlowKnowledgeAssembler::creatDO($dto);
-    //        $magicFlowKnowledgeEntity = $this->knowledgeBaseAppService->saveProcess($authorization, $magicFlowKnowledgeDO);
-    //        return DelightfulFlowKnowledgeAssembler::createDTO($magicFlowKnowledgeEntity);
+    //        $delightfulFlowKnowledgeDO = DelightfulFlowKnowledgeAssembler::creatDO($dto);
+    //        $delightfulFlowKnowledgeEntity = $this->knowledgeBaseAppService->saveProcess($authorization, $delightfulFlowKnowledgeDO);
+    //        return DelightfulFlowKnowledgeAssembler::createDTO($delightfulFlowKnowledgeEntity);
     //    }
     //
     //    public function queries()
@@ -58,17 +58,17 @@ class KnowledgeBaseOpenApi extends AbstractOpenApi
     //            $type = (int) $type;
     //        }
     //        $businessId = (string) $this->request->input('business_id');
-    //        $magicFlowKnowledgeEntity = $this->knowledgeBaseAppService->getByBusinessId($this->getAuthorization(), $businessId, $type);
-    //        if (! $magicFlowKnowledgeEntity) {
+    //        $delightfulFlowKnowledgeEntity = $this->knowledgeBaseAppService->getByBusinessId($this->getAuthorization(), $businessId, $type);
+    //        if (! $delightfulFlowKnowledgeEntity) {
     //            return null;
     //        }
-    //        return DelightfulFlowKnowledgeAssembler::createDTO($magicFlowKnowledgeEntity);
+    //        return DelightfulFlowKnowledgeAssembler::createDTO($delightfulFlowKnowledgeEntity);
     //    }
     //
     //    public function show(string $id)
     //    {
-    //        $magicFlowKnowledgeEntity = $this->knowledgeBaseAppService->show($this->getAuthorization(), $id);
-    //        return DelightfulFlowKnowledgeAssembler::createDTO($magicFlowKnowledgeEntity);
+    //        $delightfulFlowKnowledgeEntity = $this->knowledgeBaseAppService->show($this->getAuthorization(), $id);
+    //        return DelightfulFlowKnowledgeAssembler::createDTO($delightfulFlowKnowledgeEntity);
     //    }
     //
     //    public function destroy(string $id)

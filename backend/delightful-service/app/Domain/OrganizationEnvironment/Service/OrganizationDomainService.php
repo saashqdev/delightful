@@ -104,23 +104,23 @@ readonly class OrganizationDomainService
     /**
      * 根据编码获取组织.
      */
-    public function getByCode(string $magicOrganizationCode): ?OrganizationEntity
+    public function getByCode(string $delightfulOrganizationCode): ?OrganizationEntity
     {
-        return $this->organizationRepository->getByCode($magicOrganizationCode);
+        return $this->organizationRepository->getByCode($delightfulOrganizationCode);
     }
 
     /**
      * 根据编码列表批量获取组织.
-     * @param string[] $magicOrganizationCodes
+     * @param string[] $delightfulOrganizationCodes
      * @return OrganizationEntity[]
      */
-    public function getByCodes(array $magicOrganizationCodes): array
+    public function getByCodes(array $delightfulOrganizationCodes): array
     {
-        if (empty($magicOrganizationCodes)) {
+        if (empty($delightfulOrganizationCodes)) {
             return [];
         }
 
-        $entities = $this->organizationRepository->getByCodes($magicOrganizationCodes);
+        $entities = $this->organizationRepository->getByCodes($delightfulOrganizationCodes);
 
         $codeMapEntity = [];
         foreach ($entities as $entity) {

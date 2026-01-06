@@ -388,7 +388,7 @@ function MainWorkspaceContent() {
 	}, [selectedThreadInfo])
 
 	useEffect(() => {
-		pubsub.subscribe("super_magic_new_message", (data: any) => {
+		pubsub.subscribe("super_delightful_new_message", (data: any) => {
 			const { topic_id: chat_topic_id = "" } = data.message || {}
 			pullMessage({
 				conversation_id: data.conversation_id,
@@ -400,7 +400,7 @@ function MainWorkspaceContent() {
 			})
 		})
 		return () => {
-			pubsub?.unsubscribe("super_magic_new_message")
+			pubsub?.unsubscribe("super_delightful_new_message")
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])

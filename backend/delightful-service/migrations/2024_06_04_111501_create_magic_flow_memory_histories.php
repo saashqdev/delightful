@@ -15,7 +15,7 @@ class CreateDelightfulFlowMemoryHistories extends Migration
      */
     public function up(): void
     {
-        Schema::create('magic_flow_memory_histories', function (Blueprint $table) {
+        Schema::create('delightful_flow_memory_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('conversation_id')->default('')->comment('Conversation ID');
             $table->string('request_id')->default('')->comment('Request ID');
@@ -34,6 +34,6 @@ class CreateDelightfulFlowMemoryHistories extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_flow_memory_histories');
+        Schema::dropIfExists('delightful_flow_memory_histories');
     }
 }

@@ -16,7 +16,7 @@ class CreateDelightfulApiOrganizationConfigTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('magic_api_organization_configs', function (Blueprint $table) {
+        Schema::create('delightful_api_organization_configs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code')->comment('组织编码');
             $table->unsignedDecimal('total_amount', 40, 6)->comment('总额度');
@@ -31,11 +31,11 @@ class CreateDelightfulApiOrganizationConfigTable extends Migration
     }
 
     /**
-     * php bin/hyperf.php gen:migration create_magic_api_msg_log_table
+     * php bin/hyperf.php gen:migration create_delightful_api_msg_log_table
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_api_organization_config');
+        Schema::dropIfExists('delightful_api_organization_config');
     }
 }

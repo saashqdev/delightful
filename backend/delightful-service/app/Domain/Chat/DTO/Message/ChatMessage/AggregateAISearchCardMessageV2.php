@@ -82,7 +82,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
      * 服务端会缓存所有流式的数据，并在流式结束时一次性推送，以减少丢包的概率，提升消息完整性。
      * 例如：
      * [
-     *     'users.0.name' => 'magic',
+     *     'users.0.name' => 'delightful',
      *     'total' => 32,
      * ].
      */

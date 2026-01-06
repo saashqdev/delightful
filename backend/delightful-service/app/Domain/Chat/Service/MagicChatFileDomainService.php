@@ -30,7 +30,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
             $fileUploadDTO->setUpdatedAt($time);
             $fileUploadDTO->setDelightfulMessageId('');
         }
-        return $this->magicFileRepository->uploadFiles($fileUploadDTOs);
+        return $this->delightfulFileRepository->uploadFiles($fileUploadDTOs);
     }
 
     /**
@@ -42,42 +42,42 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     {
         // 检查 message_id 是否有此文件
         $seqIds = array_column($fileDTOs, 'message_id');
-        $seqList = $this->magicSeqRepository->batchGetSeqByMessageIds($seqIds);
-        $magicMessageIdsMap = [];
+        $seqList = $this->delightfulSeqRepository->batchGetSeqByMessageIds($seqIds);
+        $delightfulMessageIdsMap = [];
         // 检查用户是否收到了这些消息
         foreach ($seqList as $seq) {
             if ($seq->getObjectId() !== $dataIsolation->getCurrentDelightfulId()) {
                 continue;
             }
-            // message_id => magic_message_id
-            $magicMessageIdsMap[$seq->getMessageId()] = $seq->getDelightfulMessageId();
+            // message_id => delightful_message_id
+            $delightfulMessageIdsMap[$seq->getMessageId()] = $seq->getDelightfulMessageId();
         }
-        $magicMessageIds = array_values($magicMessageIdsMap);
-        if (empty($magicMessageIds)) {
+        $delightfulMessageIds = array_values($delightfulMessageIdsMap);
+        if (empty($delightfulMessageIds)) {
             return [];
         }
 
-        $tempMessagesEntities = $this->getMessageEntitiesByMaicMessageIds($magicMessageIds);
+        $tempMessagesEntities = $this->getMessageEntitiesByMaicMessageIds($delightfulMessageIds);
         $messageEntities = [];
         foreach ($tempMessagesEntities as $entity) {
             $messageEntities[$entity->getDelightfulMessageId()] = $entity;
         }
 
-        // 给 $fileDTOs 加上 magic_message_id
+        // 给 $fileDTOs 加上 delightful_message_id
         foreach ($fileDTOs as $fileDTO) {
             $messageId = $fileDTO->getMessageId();
             /* @var DelightfulChatFileEntity $fileDTO */
-            if (isset($magicMessageIdsMap[$messageId])) {
-                $magicMessageId = $magicMessageIdsMap[$messageId];
-                $fileDTO->setDelightfulMessageId($magicMessageId);
+            if (isset($delightfulMessageIdsMap[$messageId])) {
+                $delightfulMessageId = $delightfulMessageIdsMap[$messageId];
+                $fileDTO->setDelightfulMessageId($delightfulMessageId);
             }
         }
 
         // 判断用户的消息中，是否包含本次他想下载的文件
         $fileMaps = [];
         foreach ($fileDTOs as $fileDTO) {
-            $magicMessageId = $fileDTO->getDelightfulMessageId();
-            $content = $messageEntities[$magicMessageId]->getContent();
+            $delightfulMessageId = $fileDTO->getDelightfulMessageId();
+            $content = $messageEntities[$delightfulMessageId]->getContent();
             if (! $content instanceof ChatFileInterface) {
                 continue;
             }
@@ -99,7 +99,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     public function getFileEntitiesByFileIds(array $fileIds, ?string $order = null, ?int $limit = null, bool $withUrl = false): array
     {
         // 获取文件路径
-        $entities = $this->magicFileRepository->getChatFileByIds($fileIds, $order, $limit);
+        $entities = $this->delightfulFileRepository->getChatFileByIds($fileIds, $order, $limit);
         if (! $withUrl) {
             return $entities;
         }
@@ -124,7 +124,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     public function saveOrUpdateByFileKey(DelightfulChatFileEntity $fileEntity, DataIsolation $dataIsolation): DelightfulChatFileEntity
     {
         // 通过file_key查找文件是否存在
-        $existingFile = $this->magicFileRepository->getChatFileByFileKey($fileEntity->getFileKey());
+        $existingFile = $this->delightfulFileRepository->getChatFileByFileKey($fileEntity->getFileKey());
 
         // 如果文件存在，更新文件信息
         if ($existingFile) {
@@ -141,7 +141,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
         $fileEntity->setUpdatedAt($time);
         $fileEntity->setDelightfulMessageId('');
 
-        return $this->magicFileRepository->uploadFile($fileEntity);
+        return $this->delightfulFileRepository->uploadFile($fileEntity);
     }
 
     /**
@@ -177,11 +177,11 @@ class DelightfulChatFileDomainService extends AbstractDomainService
 
     public function updateFile(DelightfulChatFileEntity $fileEntity): void
     {
-        $this->magicFileRepository->updateFile($fileEntity);
+        $this->delightfulFileRepository->updateFile($fileEntity);
     }
 
     public function updateFileById(string $fileId, DelightfulChatFileEntity $data): void
     {
-        $this->magicFileRepository->updateFileById($fileId, $data);
+        $this->delightfulFileRepository->updateFileById($fileId, $data);
     }
 }

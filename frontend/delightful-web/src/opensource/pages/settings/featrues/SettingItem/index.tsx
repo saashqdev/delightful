@@ -11,14 +11,14 @@ const useSettingItemStyles = createStyles(({ css, isDarkMode, token }) => {
 			}
 		`,
 		title: css`
-			color: ${isDarkMode ? token.magicColorScales.grey[8] : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.text[1]};
 			font-size: 16px;
 			font-weight: 400;
 			line-height: 22px;
 			min-width: 200px;
 		`,
 		description: css`
-			color: ${isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.text[3]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[3]};
 			font-size: 14px;
 			font-weight: 400;
 			line-height: 20px;

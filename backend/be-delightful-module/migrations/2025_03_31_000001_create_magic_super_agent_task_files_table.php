@@ -14,15 +14,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_super_agent_task_files')) {
+        if (Schema::hasTable('delightful_super_agent_task_files')) {
             return;
         }
-        Schema::create('magic_super_agent_task_files', static function (Blueprint $table) {
+        Schema::create('delightful_super_agent_task_files', static function (Blueprint $table) {
             $table->bigIncrements('file_id')->comment('primary key');
             $table->string('user_id', 128)->comment('user_id');
             $table->string('organization_code', 64)->comment('organization encoding');
-            $table->bigInteger('topic_id')->comment('ID of magic_general_agent_topics');
-            $table->bigInteger('task_id')->comment('ID of magic_general_agent_task');
+            $table->bigInteger('topic_id')->comment('ID of delightful_general_agent_topics');
+            $table->bigInteger('task_id')->comment('ID of delightful_general_agent_task');
             $table->string('file_type', 32)->default('')->comment('file type');
             $table->string('file_name', 256)->default('')->comment('file name');
             $table->string('file_extension', 32)->default('')->comment('file extension');
@@ -44,6 +44,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_general_agent_task_files');
+        Schema::dropIfExists('delightful_general_agent_task_files');
     }
 };

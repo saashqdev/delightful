@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_api_msg_logs', function (Blueprint $table) {
+        Schema::table('delightful_api_msg_logs', function (Blueprint $table) {
             $table->text('msg')->nullable()->change();
             $table->string('app_code', 64)->default('')->comment('应用编码');
             $table->string('business_id', 64)->default('')->comment('业务 id');

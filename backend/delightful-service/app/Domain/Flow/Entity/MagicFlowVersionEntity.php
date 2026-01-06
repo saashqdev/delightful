@@ -25,7 +25,7 @@ class DelightfulFlowVersionEntity extends AbstractEntity
 
     protected string $description = '';
 
-    protected DelightfulFlowEntity $magicFlow;
+    protected DelightfulFlowEntity $delightfulFlow;
 
     protected string $organizationCode;
 
@@ -45,8 +45,8 @@ class DelightfulFlowVersionEntity extends AbstractEntity
         $this->modifier = $this->creator;
         $this->updatedAt = $this->createdAt;
 
-        $magicFlow = $this->magicFlow;
-        $this->magicFlowPrepareForSave($magicFlow);
+        $delightfulFlow = $this->delightfulFlow;
+        $this->delightfulFlowPrepareForSave($delightfulFlow);
     }
 
     public function getId(): ?int
@@ -101,12 +101,12 @@ class DelightfulFlowVersionEntity extends AbstractEntity
 
     public function getDelightfulFlow(): DelightfulFlowEntity
     {
-        return $this->magicFlow;
+        return $this->delightfulFlow;
     }
 
-    public function setDelightfulFlow(DelightfulFlowEntity $magicFlow): void
+    public function setDelightfulFlow(DelightfulFlowEntity $delightfulFlow): void
     {
-        $this->magicFlow = $magicFlow;
+        $this->delightfulFlow = $delightfulFlow;
     }
 
     public function getOrganizationCode(): string
@@ -159,14 +159,14 @@ class DelightfulFlowVersionEntity extends AbstractEntity
         $this->updatedAt = $updatedAt;
     }
 
-    private function magicFlowPrepareForSave(DelightfulFlowEntity $magicFlow): void
+    private function delightfulFlowPrepareForSave(DelightfulFlowEntity $delightfulFlow): void
     {
-        $magicFlow->setCode($this->flowCode);
-        $magicFlow->setOrganizationCode($this->organizationCode);
-        $magicFlow->setCreator($this->creator);
-        $magicFlow->setCreatedAt($this->createdAt);
-        $magicFlow->setModifier($this->creator);
-        $magicFlow->setUpdatedAt($this->createdAt);
+        $delightfulFlow->setCode($this->flowCode);
+        $delightfulFlow->setOrganizationCode($this->organizationCode);
+        $delightfulFlow->setCreator($this->creator);
+        $delightfulFlow->setCreatedAt($this->createdAt);
+        $delightfulFlow->setModifier($this->creator);
+        $delightfulFlow->setUpdatedAt($this->createdAt);
     }
 
     private function requiredValidate(): void
@@ -177,7 +177,7 @@ class DelightfulFlowVersionEntity extends AbstractEntity
         if (empty($this->flowCode)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.flow_code.empty');
         }
-        if (empty($this->magicFlow)) {
+        if (empty($this->delightfulFlow)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.flow_entity.empty');
         }
         if (empty($this->organizationCode)) {

@@ -2,7 +2,7 @@ import { createStyles } from "antd-style"
 
 export const useTipStyles = createStyles(({ css, token }) => ({
 	container: css`
-		color: ${token.magicColorUsages.text[2]};
+		color: ${token.delightfulColorUsages.text[2]};
 		font-size: 12px;
 		font-style: normal;
 		font-weight: 400;

@@ -34,7 +34,7 @@ abstract class AbstractKnowledgeAppService extends AbstractKernelAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        protected readonly DelightfulUserDomainService $magicUserDomainService,
+        protected readonly DelightfulUserDomainService $delightfulUserDomainService,
         protected readonly OperationPermissionAppService $operationPermissionAppService,
         protected readonly KnowledgeBaseDomainService $knowledgeBaseDomainService,
         protected readonly KnowledgeBaseDocumentDomainService $knowledgeBaseDocumentDomainService,

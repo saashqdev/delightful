@@ -103,7 +103,7 @@ const ConditionItem = ({
 
 	// 这是每一项不用Form.Item的原因是因为这三项之间属于联级关系，用Form.Item不好处理数据
 	return (
-		<div className="magic-condition-item">
+		<div className="delightful-condition-item">
 			{isShowColumnOption && (
 				<div className="column-container">
 					<div>

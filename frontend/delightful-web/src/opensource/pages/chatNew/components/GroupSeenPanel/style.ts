@@ -3,9 +3,9 @@ import { createStyles } from "antd-style"
 export const useGroupMessageSeenPopoverStyles = createStyles(({ css, token }) => ({
 	content: css`
 		position: fixed;
-		background-color: ${token.magicColorUsages.bg[0]};
+		background-color: ${token.delightfulColorUsages.bg[0]};
 		border-radius: 4px;
-		border: 1px solid ${token.magicColorUsages.border};
+		border: 1px solid ${token.delightfulColorUsages.border};
 		width: 360px;
 		height: fit-content;
 		max-height: 400px;
@@ -17,10 +17,10 @@ export const useGroupMessageSeenPopoverStyles = createStyles(({ css, token }) =>
 		font-weight: 600;
 		line-height: 20px;
 		padding: 10px 20px;
-		border-bottom: 1px solid ${token.magicColorUsages.border};
+		border-bottom: 1px solid ${token.delightfulColorUsages.border};
 	`,
 	text: css`
-		color: ${token.magicColorUsages.text[0]};
+		color: ${token.delightfulColorUsages.text[0]};
 		font-size: 14px;
 		font-weight: 600;
 		line-height: 20px;
@@ -39,7 +39,7 @@ export const useGroupMessageSeenPopoverStyles = createStyles(({ css, token }) =>
 	divider: css`
 		width: 1px;
 		max-height: 360px;
-		border-left: 1px solid ${token.magicColorUsages.border};
+		border-left: 1px solid ${token.delightfulColorUsages.border};
 	`,
 	close: css`
 		cursor: pointer;
@@ -47,7 +47,7 @@ export const useGroupMessageSeenPopoverStyles = createStyles(({ css, token }) =>
 		border-radius: 4px;
 		height: 28px;
 		&:hover {
-			background-color: ${token.magicColorUsages.fill[0]};
+			background-color: ${token.delightfulColorUsages.fill[0]};
 			transition: background-color 0.3s ease;
 		}
 	`,

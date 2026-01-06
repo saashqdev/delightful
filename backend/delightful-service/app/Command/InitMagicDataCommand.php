@@ -37,10 +37,10 @@ class InitDelightfulDataCommand extends HyperfCommand
         protected ModelConfigRepositoryInterface $modelConfigRepository,
     ) {
         // Normal mode (no model-gateway initialization)
-        // php bin/hyperf.php init-magic:data
+        // php bin/hyperf.php init-delightful:data
         // Unit-test mode (initializes model-gateway data)
-        // php bin/hyperf.php init-magic:data --type=all --unit-test
-        parent::__construct('init-magic:data');
+        // php bin/hyperf.php init-delightful:data --type=all --unit-test
+        parent::__construct('init-delightful:data');
     }
 
     public function configure()
@@ -75,15 +75,15 @@ class InitDelightfulDataCommand extends HyperfCommand
         $continueOnError = $this->input->getOption('continue-on-error');
         $isUnitTest = $this->input->getOption('unit-test');
 
-        // Check whether magic_contact_users already has user data
+        // Check whether delightful_contact_users already has user data
         try {
-            $userCount = Db::table('magic_contact_users')->count();
+            $userCount = Db::table('delightful_contact_users')->count();
             if ($userCount > 0) {
-                $this->logger->info("magic_contact_users already has {$userCount} user records; initialization complete");
+                $this->logger->info("delightful_contact_users already has {$userCount} user records; initialization complete");
                 return;
             }
         } catch (Throwable $e) {
-            $this->logger->error('Failed to check magic_contact_users user data: ' . $e->getMessage());
+            $this->logger->error('Failed to check delightful_contact_users user data: ' . $e->getMessage());
             // If the check fails, continue initialization
         }
 
@@ -469,7 +469,7 @@ class InitDelightfulDataCommand extends HyperfCommand
         foreach ($modelBaseConfigs as $baseConfig) {
             try {
                 // Check whether the model already exists
-                $exists = Db::table('magic_api_model_configs')
+                $exists = Db::table('delightful_api_model_configs')
                     ->where('model', $baseConfig['model'])
                     ->exists();
 

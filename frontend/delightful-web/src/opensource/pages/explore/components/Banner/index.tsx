@@ -14,7 +14,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		},
 		header: css`
 			font-size: 14px;
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[3]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[3]};
 		`,
 		bannerList: css`
 			display: flex;
@@ -37,12 +37,12 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		`,
 		link: css`
 			color: ${isDarkMode
-				? token.magicColorUsages.white
-				: token.magicColorUsages.link.default};
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.link.default};
 			font-size: 12px;
 		`,
 		title: css`
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
 			font-size: 18px;
 			font-weight: 600;
 			line-height: 24px;
@@ -52,15 +52,15 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			width: 500px;
 			height: 204px;
 			background: ${isDarkMode
-				? token.magicColorUsages.tertiary.default
-				: token.magicColorUsages.tertiary.default};
+				? token.delightfulColorUsages.tertiary.default
+				: token.delightfulColorUsages.tertiary.default};
 			border-radius: 12px;
 		`,
 		img: css`
 			width: 100%;
 		`,
 		desc: css`
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[2]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[2]};
 			font-size: 14px;
 			margin: 0;
 			line-height: 20px;

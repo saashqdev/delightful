@@ -121,45 +121,45 @@ class LLMMemoryMessage
         return $images;
     }
 
-    public static function createByChatMemory(DelightfulMessageEntity $magicMessageEntity): ?self
+    public static function createByChatMemory(DelightfulMessageEntity $delightfulMessageEntity): ?self
     {
-        $messageContent = $magicMessageEntity->getContent();
+        $messageContent = $delightfulMessageEntity->getContent();
         $textContent = '';
         if ($messageContent instanceof TextContentInterface) {
             $textContent = $messageContent->getTextContent();
         }
 
         // 获取附件
-        $attachments = AttachmentUtil::getByDelightfulMessageEntity($magicMessageEntity);
+        $attachments = AttachmentUtil::getByDelightfulMessageEntity($delightfulMessageEntity);
         if ($textContent === '' && empty($attachments)) {
             return null;
         }
 
         // 根据消息类型创建对应的消息
-        $messageType = $magicMessageEntity->getSenderType() ?? ConversationType::Ai;
+        $messageType = $delightfulMessageEntity->getSenderType() ?? ConversationType::Ai;
         $role = ($messageType === ConversationType::Ai) ? Role::Assistant : Role::User;
 
-        $customMessage = new LLMMemoryMessage($role, $textContent, $magicMessageEntity->getDelightfulMessageId());
+        $customMessage = new LLMMemoryMessage($role, $textContent, $delightfulMessageEntity->getDelightfulMessageId());
         $customMessage->setAttachments($attachments);
-        $customMessage->setOriginalContent($magicMessageEntity->toArray());
+        $customMessage->setOriginalContent($delightfulMessageEntity->toArray());
         return $customMessage;
     }
 
-    public static function createByFlowMemory(DelightfulFlowMemoryHistoryEntity $magicFlowMemoryHistoryEntity): ?self
+    public static function createByFlowMemory(DelightfulFlowMemoryHistoryEntity $delightfulFlowMemoryHistoryEntity): ?self
     {
-        $role = Role::tryFrom($magicFlowMemoryHistoryEntity->getRole());
+        $role = Role::tryFrom($delightfulFlowMemoryHistoryEntity->getRole());
         if (! $role) {
             return null;
         }
 
-        $content = $magicFlowMemoryHistoryEntity->getContent();
+        $content = $delightfulFlowMemoryHistoryEntity->getContent();
 
         // 获取文本内容
         $textContent = $content['text']['content'] ?? '';
 
         // 创建自定义消息
-        $customMessage = new LLMMemoryMessage($role, $textContent, $magicFlowMemoryHistoryEntity->getMessageId());
-        $customMessage->setConversationId($magicFlowMemoryHistoryEntity->getConversationId());
+        $customMessage = new LLMMemoryMessage($role, $textContent, $delightfulFlowMemoryHistoryEntity->getMessageId());
+        $customMessage->setConversationId($delightfulFlowMemoryHistoryEntity->getConversationId());
         $customMessage->setOriginalContent($content);
 
         // 设置消息类型

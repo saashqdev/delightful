@@ -5,7 +5,7 @@ export const InputGlobalStyle = createGlobalStyle`
     ::placeholder {
         color: #1C1D2359 !important;
     }
-    .magic-input-affix-wrapper,.magic-input {
+    .delightful-input-affix-wrapper,.delightful-input {
 		border-color: #eee;
         height: 32px;
         padding: 0 9px;
@@ -22,7 +22,7 @@ export const InputGlobalStyle = createGlobalStyle`
     }
 
 
-    .magic-input-affix-wrapper:not(.magic-input-affix-wrapper-disabled):hover {
+    .delightful-input-affix-wrapper:not(.delightful-input-affix-wrapper-disabled):hover {
 		background-color: #fff;
     }
 `

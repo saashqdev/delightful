@@ -46,7 +46,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
     {
         $headers = $this->getCommonHeaders();
         $requestData = [
-            'magic_organization_code' => $headers['organization-code'],
+            'delightful_organization_code' => $headers['organization-code'],
         ];
 
         $response = $this->put(self::SET_CURRENT_ORGANIZATION_API, $requestData, $headers);
@@ -58,8 +58,8 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
         if (isset($response['data'])) {
             $this->assertIsArray($response['data']);
             // 验证返回的组织代码
-            if (isset($response['data']['magic_organization_code'])) {
-                $this->assertEquals($requestData['magic_organization_code'], $response['data']['magic_organization_code']);
+            if (isset($response['data']['delightful_organization_code'])) {
+                $this->assertEquals($requestData['delightful_organization_code'], $response['data']['delightful_organization_code']);
             }
         }
     }
@@ -71,7 +71,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
     {
         $headers = $this->getCommonHeaders();
         $requestData = [
-            'magic_organization_code' => '',
+            'delightful_organization_code' => '',
         ];
 
         $response = $this->put(self::SET_CURRENT_ORGANIZATION_API, $requestData, $headers);
@@ -98,7 +98,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
 
         if ($response['data']['items'] !== []) {
             $organization = $response['data']['items'][0];
-            $this->assertArrayHasKey('magic_organization_code', $organization);
+            $this->assertArrayHasKey('delightful_organization_code', $organization);
             $this->assertArrayHasKey('name', $organization);
             $this->assertArrayHasKey('organization_type', $organization);
             $this->assertArrayHasKey('logo', $organization);

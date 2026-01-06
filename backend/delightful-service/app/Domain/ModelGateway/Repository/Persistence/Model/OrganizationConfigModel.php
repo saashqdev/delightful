@@ -28,7 +28,7 @@ class OrganizationConfigModel extends Model
     use Snowflake;
     use SoftDeletes;
 
-    protected ?string $table = 'magic_api_organization_configs';
+    protected ?string $table = 'delightful_api_organization_configs';
 
     protected array $fillable = [
         'id', 'app_code', 'organization_code', 'total_amount', 'use_amount', 'rpm',

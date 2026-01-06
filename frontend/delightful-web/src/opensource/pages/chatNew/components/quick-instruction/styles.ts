@@ -8,9 +8,9 @@ export const useStyles = createStyles(
 				padding: 4px 12px;
 				border-radius: 100px;
 				background: ${isDarkMode
-					? token.magicColorUsages.bg[1]
-					: token.magicColorUsages.white};
-				border: 1px solid ${token.magicColorUsages.border};
+					? token.delightfulColorUsages.bg[1]
+					: token.delightfulColorUsages.white};
+				border: 1px solid ${token.delightfulColorUsages.border};
 			`,
 			[`actionWrapper${InstructionGroupType.TOOL}`]: css`
 				background: transparent;

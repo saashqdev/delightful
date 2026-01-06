@@ -52,7 +52,7 @@ class DelightfulMessageEntity extends AbstractEntity
 
     protected string $appMessageId = '';
 
-    protected string $magicMessageId = '';
+    protected string $delightfulMessageId = '';
 
     protected ChatMessageType|ControlMessageType|IntermediateMessageType $messageType;
 
@@ -309,12 +309,12 @@ class DelightfulMessageEntity extends AbstractEntity
 
     public function getDelightfulMessageId(): ?string
     {
-        return $this->magicMessageId;
+        return $this->delightfulMessageId;
     }
 
     public function setDelightfulMessageId(string $id): static
     {
-        $this->magicMessageId = $id;
+        $this->delightfulMessageId = $id;
         return $this;
     }
 

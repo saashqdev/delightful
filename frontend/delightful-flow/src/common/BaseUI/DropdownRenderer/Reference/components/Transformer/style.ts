@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const Wrap = styled.div`
 	width: 400px;
 	min-height: 320px;
-	.magic-popover-inner-content {
+	.delightful-popover-inner-content {
 		padding: 0;
 	}
 	.title {
@@ -99,7 +99,7 @@ export const Wrap = styled.div`
 			background: rgba(31,35,41, 0.08);
 		}
 	}
-	.magic-icon {
+	.delightful-icon {
 			margin-right: 6px;
 			width: 24px;
 			height: 24px;

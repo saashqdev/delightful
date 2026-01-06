@@ -22,13 +22,13 @@ const useStyles = createStyles(({ css, prefixCls, token }) => {
 			--${prefixCls}-modal-body-padding: 0 20px 10px 20px;
     `,
 		tagList: css`
-			border: 1px solid ${token.magicColorUsages.border};
+			border: 1px solid ${token.delightfulColorUsages.border};
 			width: 100%;
 			min-height: 32px;
 			border-radius: 8px;
 		`,
 		collectTip: css`
-			color: ${token.magicColorUsages.text[3]};
+			color: ${token.delightfulColorUsages.text[3]};
 			font-size: 12px;
 			font-weight: 400;
 			line-height: 16px;

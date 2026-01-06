@@ -10,7 +10,7 @@ const useStyles = createStyles(({ token }) => ({
 		top: 0,
 		left: 0,
 		zIndex: 1,
-		backgroundColor: token.magicColorUsages.bg[1],
+		backgroundColor: token.delightfulColorUsages.bg[1],
 		height: 20,
 		borderRadius: 4,
 	},

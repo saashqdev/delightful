@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_api_model_configs', function (Blueprint $table) {
+        Schema::table('delightful_api_model_configs', function (Blueprint $table) {
             $table->string('model', 80)->default('')->comment('模型')->index()->change();
             $table->string('name', 80)->default('')->comment('自定义名称');
             $table->boolean('enabled')->default(1)->comment('是否启用');

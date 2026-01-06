@@ -217,7 +217,7 @@ class FileDefaultInitCommand extends Command
             return match (strtolower($moduleName)) {
                 'service_provider', 'serviceprovider', 'service-provider' => DefaultFileBusinessType::SERVICE_PROVIDER,
                 'flow', 'workflow' => DefaultFileBusinessType::FLOW,
-                'magic', 'default' => DefaultFileBusinessType::Delightful,
+                'delightful', 'default' => DefaultFileBusinessType::Delightful,
                 default => null,
             };
         }

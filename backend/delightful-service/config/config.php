@@ -16,7 +16,7 @@ return [
     'app_name' => env('APP_NAME', 'skeleton'),
     'app_env' => env('APP_ENV', 'dev'),
     'app_host' => env('APP_HOST', ''),
-    'app_code' => env('APP_CODE', 'magic'),
+    'app_code' => env('APP_CODE', 'delightful'),
     'scan_cacheable' => env('SCAN_CACHEABLE', false),
     'office_organization' => env('OFFICE_ORGANIZATION', ''),
     StdoutLoggerInterface::class => [

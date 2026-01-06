@@ -16,7 +16,7 @@ class CreateDelightfulFileCleanupRecordsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('magic_file_cleanup_records', function (Blueprint $table) {
+        Schema::create('delightful_file_cleanup_records', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code', 50)->comment('组织编码');
             $table->string('file_key', 500)->comment('文件存储key');
@@ -45,6 +45,6 @@ class CreateDelightfulFileCleanupRecordsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_file_cleanup_records');
+        Schema::dropIfExists('delightful_file_cleanup_records');
     }
 }

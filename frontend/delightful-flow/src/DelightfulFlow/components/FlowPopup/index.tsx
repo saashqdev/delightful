@@ -30,7 +30,7 @@ function FlowPopup({ source, target, edgeId, sourceHandle, nodeId }: FlowPopupPr
 		return [
 			{
 				key: TabKey.BaseNode,
-				label: i18next.t("flow.node", { ns: "magicFlow" }),
+				label: i18next.t("flow.node", { ns: "delightfulFlow" }),
 				children: (
 					<div className={clsx(styles.nodeList, `${prefix}node-list`)}>{NodeList}</div>
 				),
@@ -38,7 +38,7 @@ function FlowPopup({ source, target, edgeId, sourceHandle, nodeId }: FlowPopupPr
 
 			{
 				key: TabKey.WorkFlow,
-				label: i18next.t("flow.flow", { ns: "magicFlow" }),
+				label: i18next.t("flow.flow", { ns: "delightfulFlow" }),
 				children: (
 					<div className={clsx(styles.nodeList, `${prefix}node-list`)}>{NodeList}</div>
 				),
@@ -62,7 +62,7 @@ function FlowPopup({ source, target, edgeId, sourceHandle, nodeId }: FlowPopupPr
 				<div className={clsx(styles.searchWrapper, `${prefix}search-wrapper`)}>
 					<SearchInput
 						prefix={<IconSearch />}
-						placeholder={i18next.t("flow.searchNodes", { ns: "magicFlow" })}
+						placeholder={i18next.t("flow.searchNodes", { ns: "delightfulFlow" })}
 						value={keyword}
 						onChange={(e: any) => setKeyword(e.target.value)}
 						ref={inputRef}

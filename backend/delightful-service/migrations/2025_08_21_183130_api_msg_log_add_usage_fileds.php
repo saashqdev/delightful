@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_api_msg_logs', function (Blueprint $table) {
+        Schema::table('delightful_api_msg_logs', function (Blueprint $table) {
             $table->integer('prompt_tokens')->default(0)->comment('提示词token数');
             $table->integer('completion_tokens')->default(0)->comment('完成内容token数');
             $table->integer('cache_write_tokens')->default(0)->comment('写入缓存的token数');
@@ -27,7 +27,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_api_msg_logs', function (Blueprint $table) {
+        Schema::table('delightful_api_msg_logs', function (Blueprint $table) {
             $table->dropColumn([
                 'prompt_tokens',
                 'completion_tokens',

@@ -34,13 +34,13 @@ export default function ToolbarComponent({ id, showCopy = true }: ToolbarCompone
 			{
 				icon: (
 					<Popconfirm
-						title={i18next.t("flow.confirm2DeleteNode", { ns: "magicFlow" })}
+						title={i18next.t("flow.confirm2DeleteNode", { ns: "delightfulFlow" })}
 						onConfirm={() => deleteNode(id)}
 						onOpenChange={(visible) => setIsPopconfirmVisible(visible)}
 						icon={<IconUploadError style={{ color: "rgb(255, 24, 9)" }} />}
 						okButtonProps={{ danger: true }}
-						okText={i18next.t("common.confirm", { ns: "magicFlow" })}
-						cancelText={i18next.t("common.cancel", { ns: "magicFlow" })}
+						okText={i18next.t("common.confirm", { ns: "delightfulFlow" })}
+						cancelText={i18next.t("common.cancel", { ns: "delightfulFlow" })}
 						rootClassName={styles.popconfirm}
 					>
 						{/* @ts-ignore */}
@@ -49,7 +49,7 @@ export default function ToolbarComponent({ id, showCopy = true }: ToolbarCompone
 						</Button>
 					</Popconfirm>
 				),
-				tooltip: i18next.t("common.delete", { ns: "magicFlow" }),
+				tooltip: i18next.t("common.delete", { ns: "delightfulFlow" }),
 				callback: () => {},
 			},
 		]
@@ -57,7 +57,7 @@ export default function ToolbarComponent({ id, showCopy = true }: ToolbarCompone
 		if (showCopy) {
 			resultItems.push({
 				icon: <IconCopy stroke={1} />,
-				tooltip: i18next.t("common.copy", { ns: "magicFlow" }),
+				tooltip: i18next.t("common.copy", { ns: "delightfulFlow" }),
 				callback: () => pasteNode(id),
 			})
 		}

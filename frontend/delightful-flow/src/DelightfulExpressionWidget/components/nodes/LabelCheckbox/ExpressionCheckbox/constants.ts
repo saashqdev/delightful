@@ -4,11 +4,11 @@ import _ from "lodash"
 
 export const checkboxSelectOptions = [
 	{
-		label: i18next.t("common.real", { ns: "magicFlow" }),
+		label: i18next.t("common.real", { ns: "delightfulFlow" }),
 		value: true
 	},
 	{
-		label: i18next.t("common.artifact", { ns: "magicFlow" }),
+		label: i18next.t("common.artifact", { ns: "delightfulFlow" }),
 		value: false
 	},
 ]

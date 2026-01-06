@@ -28,7 +28,7 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
     {
         return function (ExecutionData $executionData) {
             $params = $executionData->getTriggerData()->getParams();
-            // $magicAgentAppService = di(DelightfulAgentAppService::class);
+            // $delightfulAgentAppService = di(DelightfulAgentAppService::class);
             $senderUserId = $executionData->getAgentUserId();
             // 助手发送消息
             $assistantMessage = new TextMessage(['content' => $params['content']]);

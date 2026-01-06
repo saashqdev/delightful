@@ -7,14 +7,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="super-magic",
+    name="super-delightful",
     version="1.0.0",
     author="BeDelightful Team",
     author_email="dev@bedelightful.ai",
     description="BeDelightful General AI System",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/saashqdev/delightful/super-magic",
+    url="https://github.com/saashqdev/delightful/super-delightful",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -40,7 +40,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "super-magic=app.agent.super_magic:main",
+            "super-delightful=app.agent.super_delightful:main",
             "sandbox-gateway=sandbox_gateway.main:start",
             "storage-uploader=app.command.storage_uploader_tool:cli_app"
         ],

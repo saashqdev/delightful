@@ -12,14 +12,14 @@ use App\Interfaces\Flow\DTO\DelightfulFowExecuteResultDTO;
 
 class DelightfulFlowExecuteLogAssembler
 {
-    public function createExecuteResultDTO(DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): DelightfulFowExecuteResultDTO
+    public function createExecuteResultDTO(DelightfulFlowExecuteLogEntity $delightfulFlowExecuteLogEntity): DelightfulFowExecuteResultDTO
     {
         $executeResultDTO = new DelightfulFowExecuteResultDTO();
-        $executeResultDTO->setTaskId((string) $magicFlowExecuteLogEntity->getId());
-        $executeResultDTO->setStatus($magicFlowExecuteLogEntity->getStatus()->value);
-        $executeResultDTO->setStatusLabel($magicFlowExecuteLogEntity->getStatus()->name);
-        $executeResultDTO->setResult($magicFlowExecuteLogEntity->getResult());
-        $executeResultDTO->setCreatedAt($magicFlowExecuteLogEntity->getCreatedAt()->format('Y-m-d H:i:s'));
+        $executeResultDTO->setTaskId((string) $delightfulFlowExecuteLogEntity->getId());
+        $executeResultDTO->setStatus($delightfulFlowExecuteLogEntity->getStatus()->value);
+        $executeResultDTO->setStatusLabel($delightfulFlowExecuteLogEntity->getStatus()->name);
+        $executeResultDTO->setResult($delightfulFlowExecuteLogEntity->getResult());
+        $executeResultDTO->setCreatedAt($delightfulFlowExecuteLogEntity->getCreatedAt()->format('Y-m-d H:i:s'));
         return $executeResultDTO;
     }
 }

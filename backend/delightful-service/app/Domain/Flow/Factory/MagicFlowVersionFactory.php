@@ -12,24 +12,24 @@ use App\Domain\Flow\Repository\Persistence\Model\DelightfulFlowVersionModel;
 
 class DelightfulFlowVersionFactory
 {
-    public static function modelToEntity(DelightfulFlowVersionModel $magicFlowVersionModel): DelightfulFlowVersionEntity
+    public static function modelToEntity(DelightfulFlowVersionModel $delightfulFlowVersionModel): DelightfulFlowVersionEntity
     {
-        $magicFlowDraftEntity = new DelightfulFlowVersionEntity();
-        $magicFlowDraftEntity->setId($magicFlowVersionModel->id);
-        $magicFlowDraftEntity->setFlowCode($magicFlowVersionModel->flow_code);
-        $magicFlowDraftEntity->setCode($magicFlowVersionModel->code);
-        $magicFlowDraftEntity->setName($magicFlowVersionModel->name);
-        $magicFlowDraftEntity->setDescription($magicFlowVersionModel->description);
-        if (! empty($magicFlowVersionModel->magic_flow)) {
-            $magicFlowDraftEntity->setDelightfulFlow(DelightfulFlowFactory::arrayToEntity($magicFlowVersionModel->magic_flow, 'v0'));
+        $delightfulFlowDraftEntity = new DelightfulFlowVersionEntity();
+        $delightfulFlowDraftEntity->setId($delightfulFlowVersionModel->id);
+        $delightfulFlowDraftEntity->setFlowCode($delightfulFlowVersionModel->flow_code);
+        $delightfulFlowDraftEntity->setCode($delightfulFlowVersionModel->code);
+        $delightfulFlowDraftEntity->setName($delightfulFlowVersionModel->name);
+        $delightfulFlowDraftEntity->setDescription($delightfulFlowVersionModel->description);
+        if (! empty($delightfulFlowVersionModel->delightful_flow)) {
+            $delightfulFlowDraftEntity->setDelightfulFlow(DelightfulFlowFactory::arrayToEntity($delightfulFlowVersionModel->delightful_flow, 'v0'));
         }
 
-        $magicFlowDraftEntity->setOrganizationCode($magicFlowVersionModel->organization_code);
-        $magicFlowDraftEntity->setCreator($magicFlowVersionModel->created_uid);
-        $magicFlowDraftEntity->setCreatedAt($magicFlowVersionModel->created_at);
-        $magicFlowDraftEntity->setModifier($magicFlowVersionModel->updated_uid);
-        $magicFlowDraftEntity->setUpdatedAt($magicFlowVersionModel->updated_at);
+        $delightfulFlowDraftEntity->setOrganizationCode($delightfulFlowVersionModel->organization_code);
+        $delightfulFlowDraftEntity->setCreator($delightfulFlowVersionModel->created_uid);
+        $delightfulFlowDraftEntity->setCreatedAt($delightfulFlowVersionModel->created_at);
+        $delightfulFlowDraftEntity->setModifier($delightfulFlowVersionModel->updated_uid);
+        $delightfulFlowDraftEntity->setUpdatedAt($delightfulFlowVersionModel->updated_at);
 
-        return $magicFlowDraftEntity;
+        return $delightfulFlowDraftEntity;
     }
 }

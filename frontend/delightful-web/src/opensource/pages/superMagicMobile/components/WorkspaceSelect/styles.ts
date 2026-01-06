@@ -4,7 +4,7 @@ export const useStyles = createStyles(({ token }) => {
 	return {
 		container: {
 			height: 32,
-			border: `1px solid ${token.magicColorUsages.border}`,
+			border: `1px solid ${token.delightfulColorUsages.border}`,
 			padding: "0 12px",
 			display: "flex",
 			alignItems: "center",
@@ -12,11 +12,11 @@ export const useStyles = createStyles(({ token }) => {
 			backgroundColor: "#fff",
 			gap: 6,
 			"&:active": {
-				backgroundColor: token.magicColorUsages.fill[1],
+				backgroundColor: token.delightfulColorUsages.fill[1],
 			},
 		},
 		icon: {
-			color: token.magicColorUsages.text[1],
+			color: token.delightfulColorUsages.text[1],
 		},
 		name: {
 			flex: "auto",
@@ -40,7 +40,7 @@ export const useStyles = createStyles(({ token }) => {
 			justifyContent: "space-between",
 			alignItems: "center",
 			padding: "10px 12px",
-			borderBottom: `1px solid ${token.magicColorUsages.border}`,
+			borderBottom: `1px solid ${token.delightfulColorUsages.border}`,
 		},
 		popupContentBody: {
 			flex: "auto",
@@ -48,7 +48,7 @@ export const useStyles = createStyles(({ token }) => {
 		},
 		popupContentFooter: {
 			flex: "none",
-			borderTop: `1px solid ${token.magicColorUsages.border}`,
+			borderTop: `1px solid ${token.delightfulColorUsages.border}`,
 		},
 		popupContentFooterContent: {
 			height: 50,
@@ -58,7 +58,7 @@ export const useStyles = createStyles(({ token }) => {
 			gap: 4,
 			lineHeight: "20px",
 			"&:active": {
-				backgroundColor: token.magicColorUsages.fill[1],
+				backgroundColor: token.delightfulColorUsages.fill[1],
 			},
 		},
 		popupContentHeaderTitle: {

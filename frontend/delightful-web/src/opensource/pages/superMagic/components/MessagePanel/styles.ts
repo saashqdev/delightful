@@ -133,7 +133,7 @@ export const useStyles = createStyles(({ token }) => {
 		toolBarButton: {
 			gap: 2,
 			padding: "0 6px",
-			"& .magic-btn-icon": {
+			"& .delightful-btn-icon": {
 				display: "inline-flex",
 				alignItems: "center",
 				justifyContent: "center",
@@ -142,7 +142,7 @@ export const useStyles = createStyles(({ token }) => {
 		sendButton: {
 			gap: 4,
 			padding: "0 12px",
-			"& .magic-btn-icon": {
+			"& .delightful-btn-icon": {
 				display: "inline-flex",
 				alignItems: "center",
 				justifyContent: "center",
@@ -186,7 +186,7 @@ export const useStyles = createStyles(({ token }) => {
 			whiteSpace: "nowrap",
 		},
 		fileSize: {
-			color: token.magicColorUsages.text[3],
+			color: token.delightfulColorUsages.text[3],
 			marginLeft: 4,
 		},
 		deleteIcon: {

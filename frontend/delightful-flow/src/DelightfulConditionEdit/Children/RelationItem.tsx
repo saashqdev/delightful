@@ -114,7 +114,7 @@ export function RelationItem({
 								{showTitle && (
 									<div className="title">
 										{i18next.t("common.referenceVariables", {
-											ns: "magicFlow",
+											ns: "delightfulFlow",
 										})}
 									</div>
 								)}
@@ -131,7 +131,7 @@ export function RelationItem({
 									referencePlaceholder={i18next.t(
 										"common.expressionPlaceholder",
 										{
-											ns: "magicFlow",
+											ns: "delightfulFlow",
 										},
 									)}
 								/>
@@ -141,7 +141,7 @@ export function RelationItem({
 							<div className="condition_fields-item">
 								{showTitle && (
 									<div className="title">
-										{i18next.t("common.selectConditions", { ns: "magicFlow" })}
+										{i18next.t("common.selectConditions", { ns: "delightfulFlow" })}
 									</div>
 								)}
 								<DelightfulSelect
@@ -156,7 +156,7 @@ export function RelationItem({
 							<div className="condition_fields-item" style={computedRightStyle}>
 								{showTitle && (
 									<div className="title">
-										{i18next.t("common.compareValue", { ns: "magicFlow" })}
+										{i18next.t("common.compareValue", { ns: "delightfulFlow" })}
 									</div>
 								)}
 								<DelightfulExpressionWidget
@@ -192,7 +192,7 @@ export function RelationItem({
 					<div className="right-condition_operations">
 						{showTitle && (
 							<div className="title">
-								{i18next.t("common.operation", { ns: "magicFlow" })}
+								{i18next.t("common.operation", { ns: "delightfulFlow" })}
 							</div>
 						)}
 

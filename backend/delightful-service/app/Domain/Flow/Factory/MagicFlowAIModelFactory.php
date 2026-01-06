@@ -44,21 +44,21 @@ class DelightfulFlowAIModelFactory
         return $entity;
     }
 
-    public static function createOdinModel(DelightfulFlowAIModelEntity $magicFlowAIModelEntity): EmbeddingInterface|ModelInterface
+    public static function createOdinModel(DelightfulFlowAIModelEntity $delightfulFlowAIModelEntity): EmbeddingInterface|ModelInterface
     {
-        if (! $magicFlowAIModelEntity->isEnabled()) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.model.disabled', ['model_name' => $magicFlowAIModelEntity->getName()]);
+        if (! $delightfulFlowAIModelEntity->isEnabled()) {
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.model.disabled', ['model_name' => $delightfulFlowAIModelEntity->getName()]);
         }
-        $modelName = $magicFlowAIModelEntity->getModelName() ?: $magicFlowAIModelEntity->getName();
+        $modelName = $delightfulFlowAIModelEntity->getModelName() ?: $delightfulFlowAIModelEntity->getName();
         return ModelFactory::create(
-            $magicFlowAIModelEntity->getImplementation(),
+            $delightfulFlowAIModelEntity->getImplementation(),
             $modelName,
-            $magicFlowAIModelEntity->getActualImplementationConfig(),
+            $delightfulFlowAIModelEntity->getActualImplementationConfig(),
             new ModelOptions([
-                'embedding' => $magicFlowAIModelEntity->isSupportEmbedding(),
-                'multi_modal' => $magicFlowAIModelEntity->isSupportMultiModal(),
+                'embedding' => $delightfulFlowAIModelEntity->isSupportEmbedding(),
+                'multi_modal' => $delightfulFlowAIModelEntity->isSupportMultiModal(),
                 'function_call' => true,
-                'vector_size' => $magicFlowAIModelEntity->getVectorSize(),
+                'vector_size' => $delightfulFlowAIModelEntity->getVectorSize(),
             ])
         );
     }

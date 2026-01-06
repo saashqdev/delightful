@@ -2,7 +2,7 @@ import { useMemo, useEffect, useState } from "react"
 import { reaction } from "mobx"
 import { normalizeLocale } from "@/utils/locale"
 import { useTranslation } from "react-i18next"
-import { magic } from "@/enhance/magicElectron"
+import { delightful } from "@/enhance/delightfulElectron"
 import { configService } from "@/services"
 import { configStore } from "../stores"
 
@@ -67,7 +67,7 @@ export function useSupportLanguageOptions(includeAuto = true) {
  * @param lang
  */
 export function setGlobalLanguage(lang: string) {
-	magic?.language?.setLanguage?.(lang)
+	delightful?.language?.setLanguage?.(lang)
 	configService.setLanguage(lang)
 }
 

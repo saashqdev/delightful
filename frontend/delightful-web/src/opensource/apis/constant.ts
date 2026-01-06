@@ -30,7 +30,7 @@ export const enum RequestUrl {
 	/** Get Teamshare user departments */
 	getTeamshareUserDepartments = "/api/v2/users/department",
 	/** User manual */
-	getUserManual = "/api/v2/magic/contact/user/user-manual",
+	getUserManual = "/api/v2/delightful/contact/user/user-manual",
 
 	/** Get global shared configuration */
 	/** Get application i18n language and country code */
@@ -53,9 +53,9 @@ export const enum RequestUrl {
 
 	/** Contact */
 	/** Get all prompt friends */
-	getSquarePrompts = "/api/v2/magic/friend/square",
+	getSquarePrompts = "/api/v2/delightful/friend/square",
 	/** Search prompt friends square */
-	getSquareFriendsByKeyword = "/api/v2/magic/friend/search",
+	getSquareFriendsByKeyword = "/api/v2/delightful/friend/search",
 	/** Get friend list */
 	getFriends = "/api/v1/contact/friends",
 	/** Add prompt friend */
@@ -85,7 +85,7 @@ export const enum RequestUrl {
 	/** Get conversation list */
 	getConversationList = "/api/v1/im/conversations/queries",
 	/** Conversation window operations (remove, mute, pin, badge, etc.) */
-	handleConversation = "/magic_friend/add",
+	handleConversation = "/delightful_friend/add",
 	/** Create group conversation */
 	createGroupConversation = "/api/v1/contact/groups",
 	/** Get group conversation detail */
@@ -287,7 +287,7 @@ export const enum RequestUrl {
 	/** Knowledge base list */
 	getKnowledgeList = "/api/v1/knowledge-bases/queries",
 	/** Save knowledge base */
-	saveKnowledge = "/api/v2/magic/knowledge",
+	saveKnowledge = "/api/v2/delightful/knowledge",
 	/** Knowledge base detail */
 	getKnowLedgeDetail = "/api/v1/knowledge-bases/${code}",
 	/** Delete knowledge base */
@@ -323,7 +323,7 @@ export const enum RequestUrl {
 	/** Delete fragment */
 	deleteFragment = "/api/v1/knowledge-bases/${knowledge_base_code}/documents/${document_code}/fragments/${id}",
 	/** Knowledge base rebuild - to be deprecated */
-	rebuildKnowledge = "/api/v2/magic/knowledge/${id}/rebuild",
+	rebuildKnowledge = "/api/v2/delightful/knowledge/${id}/rebuild",
 
 	/** Save API key */
 	saveApiKey = "/api/v1/flows/${flowId}/api-key",
@@ -350,7 +350,7 @@ export const enum RequestUrl {
 	/** Get topic list */
 	getTopicList = "/api/v1/im/conversations/${conversationId}/topics/queries",
 	/** Get topic messages */
-	getTopicMessages = "/api/v2/magic/topic/messages",
+	getTopicMessages = "/api/v2/delightful/topic/messages",
 	/** Smart rename topic */
 	getDelightfulTopicName = "/api/v1/im/conversations/${conversationId}/topics/${topicId}/name",
 
@@ -377,7 +377,7 @@ export const enum RequestUrl {
 	/** Get environment code for current account */
 	getDeploymentCode = "/api/v1/auth/environment",
 	/** Get admin console permissions */
-	getAdminPermission = "/api/v1/magic/operation-permissions/organization-admin",
+	getAdminPermission = "/api/v1/delightful/operation-permissions/organization-admin",
 
 	/** bots */
 	/** Get marketplace bots */
@@ -429,11 +429,11 @@ export const enum RequestUrl {
 	/** Create schedule */
 	createCalendar = "/api/v1/schedules",
 	/** Create AI schedule - no v1 */
-	createAiCalendar = "/api/v2/magic/meetingrooms/schedules/ai-create-template",
+	createAiCalendar = "/api/v2/delightful/meetingrooms/schedules/ai-create-template",
 	/** Get schedule detail */
 	getCalendarDetail = "/api/v1/schedules/${id}",
 	/** Get schedule for a specific day */
-	getCalendarByDay = "/api/v2/magic/meetingrooms/schedules/queries",
+	getCalendarByDay = "/api/v2/delightful/meetingrooms/schedules/queries",
 	/** Update schedule */
 	updateCalendar = "/api/v1/schedules",
 	/** Update invite status of schedule */

@@ -65,24 +65,24 @@ class organizationstructureseeder extends Seeder
             // 1. Create/check the relationship between organization and environment
             foreach ($organizationCodes as $index => $orgCode) {
                 // Check if the org-environment association already exists
-                $existingOrgEnv = Db::table('magic_organizations_environment')
-                    ->where('magic_organization_code', $orgCode)
+                $existingOrgEnv = Db::table('delightful_organizations_environment')
+                    ->where('delightful_organization_code', $orgCode)
                     ->first();
 
                 if ($existingOrgEnv) {
-                    echo "Org-environment association already exists: {$existingOrgEnv['magic_organization_code']}, login code: {$existingOrgEnv['login_code']}" . PHP_EOL;
+                    echo "Org-environment association already exists: {$existingOrgEnv['delightful_organization_code']}, login code: {$existingOrgEnv['login_code']}" . PHP_EOL;
                 } else {
                     // Create org-environment association
                     $orgEnvData = [
                         'login_code' => random_int(100000, 999999),
-                        'magic_organization_code' => $orgCode,
+                        'delightful_organization_code' => $orgCode,
                         'origin_organization_code' => $orgCode,
                         'environment_id' => $environmentId,
                         'created_at' => date('Y-m-d H:i:s'),
                         'updated_at' => date('Y-m-d H:i:s'),
                     ];
 
-                    $orgEnvId = Db::table('magic_organizations_environment')->insertGetId($orgEnvData);
+                    $orgEnvId = Db::table('delightful_organizations_environment')->insertGetId($orgEnvData);
                     echo "Created org-environment association: {$orgCode}, ID: {$orgEnvId}" . PHP_EOL;
                 }
 
@@ -153,7 +153,7 @@ class organizationstructureseeder extends Seeder
             ];
 
             // Check if the department already exists
-            $existingDept = Db::table('magic_contact_departments')
+            $existingDept = Db::table('delightful_contact_departments')
                 ->where('organization_code', $orgCode)
                 ->where('name', $dept['name'])
                 ->where('parent_department_id', $currentParentDepartmentId)
@@ -165,7 +165,7 @@ class organizationstructureseeder extends Seeder
                 $currentPath = $existingDept['path'];
             } else {
                 // Create department
-                Db::table('magic_contact_departments')->insert($departmentData);
+                Db::table('delightful_contact_departments')->insert($departmentData);
                 echo "Created department: {$dept['name']}, ID: {$departmentId}, org: {$orgCode}" . PHP_EOL;
             }
 
@@ -205,7 +205,7 @@ class organizationstructureseeder extends Seeder
     private function assignUsersToDepartments(string $orgCode): void
     {
         // Get users under the organization
-        $users = Db::table('magic_contact_users')
+        $users = Db::table('delightful_contact_users')
             ->where('organization_code', $orgCode)
             ->get()
             ->toArray();
@@ -216,7 +216,7 @@ class organizationstructureseeder extends Seeder
         }
 
         // Get departments under the organization
-        $departments = Db::table('magic_contact_departments')
+        $departments = Db::table('delightful_contact_departments')
             ->where('organization_code', $orgCode)
             ->get()
             ->toArray();
@@ -253,7 +253,7 @@ class organizationstructureseeder extends Seeder
 
             if ($hqDept) {
                 // Update HQ department leader
-                Db::table('magic_contact_departments')
+                Db::table('delightful_contact_departments')
                     ->where('id', $hqDept['id'])
                     ->update(['leader_user_id' => $adminUser['user_id']]);
 
@@ -297,7 +297,7 @@ class organizationstructureseeder extends Seeder
 
                         if ($deptLeader) {
                             // Update department leader
-                            Db::table('magic_contact_departments')
+                            Db::table('delightful_contact_departments')
                                 ->where('id', $dept['id'])
                                 ->update(['leader_user_id' => $deptLeader['user_id']]);
 
@@ -357,7 +357,7 @@ class organizationstructureseeder extends Seeder
     private function assignUserToDepartment(array $user, array $department, bool $isLeader = false, ?string $leaderUserId = null, string $orgCode = ''): void
     {
         // Check if already assigned
-        $existingAssignment = Db::table('magic_contact_department_users')
+        $existingAssignment = Db::table('delightful_contact_department_users')
             ->where('user_id', $user['user_id'])
             ->where('department_id', $department['department_id'])
             ->where('organization_code', $orgCode)
@@ -370,7 +370,7 @@ class organizationstructureseeder extends Seeder
 
         // Create department-user relation
         $deptUserData = [
-            'magic_id' => $user['magic_id'],
+            'delightful_id' => $user['delightful_id'],
             'user_id' => $user['user_id'],
             'department_id' => $department['department_id'],
             'is_leader' => $isLeader ? 1 : 0,
@@ -397,10 +397,10 @@ class organizationstructureseeder extends Seeder
             $deptUserData['leader_user_id'] = $leaderUserId;
         }
 
-        Db::table('magic_contact_department_users')->insert($deptUserData);
+        Db::table('delightful_contact_department_users')->insert($deptUserData);
 
         // Update the department headcount
-        Db::table('magic_contact_departments')
+        Db::table('delightful_contact_departments')
             ->where('department_id', $department['department_id'])
             ->increment('employee_sum');
     }

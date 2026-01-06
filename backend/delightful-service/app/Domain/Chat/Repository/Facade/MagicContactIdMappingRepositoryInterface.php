@@ -21,9 +21,9 @@ interface DelightfulContactIdMappingRepositoryInterface
      * @return DelightfulThirdPlatformIdMappingEntity[]
      */
     public function getThirdDepartmentIdsMapping(
-        DelightfulEnvironmentEntity $magicEnvironmentEntity,
+        DelightfulEnvironmentEntity $delightfulEnvironmentEntity,
         array $thirdDepartmentIds,
-        string $magicOrganizationCode,
+        string $delightfulOrganizationCode,
         PlatformType $thirdPlatformType
     ): array;
 
@@ -34,20 +34,20 @@ interface DelightfulContactIdMappingRepositoryInterface
      * @return DelightfulThirdPlatformIdMappingEntity[]
      */
     public function getThirdUserIdsMapping(
-        DelightfulEnvironmentEntity $magicEnvironmentEntity,
+        DelightfulEnvironmentEntity $delightfulEnvironmentEntity,
         array $thirdUserIds,
-        ?string $magicOrganizationCode,
+        ?string $delightfulOrganizationCode,
         PlatformType $thirdPlatformType
     ): array;
 
     /**
      * 获取麦吉平台用户ID的映射关系.
      *
-     * @param string[] $magicIds
+     * @param string[] $delightfulIds
      */
     public function getDelightfulIdsMapping(
-        array $magicIds,
-        ?string $magicOrganizationCode,
+        array $delightfulIds,
+        ?string $delightfulOrganizationCode,
         PlatformType $thirdPlatformType
     ): array;
 
@@ -62,18 +62,18 @@ interface DelightfulContactIdMappingRepositoryInterface
      */
     public function getThirdDepartments(
         array $currentDepartmentIds,
-        string $magicOrganizationCode,
+        string $delightfulOrganizationCode,
         PlatformType $thirdPlatformType
     ): array;
 
-    public function getDepartmentRootId(string $magicOrganizationCode, PlatformType $platformType): string;
+    public function getDepartmentRootId(string $delightfulOrganizationCode, PlatformType $platformType): string;
 
     /**
      * 获取Delightful部门ID的映射关系.
      */
     public function getDelightfulDepartmentIdsMapping(
-        array $magicDepartmentIds,
-        string $magicOrganizationCode,
+        array $delightfulDepartmentIds,
+        string $delightfulOrganizationCode,
         PlatformType $thirdPlatformType
     ): array;
 
@@ -86,7 +86,7 @@ interface DelightfulContactIdMappingRepositoryInterface
      */
     public function deleteThirdPlatformIdsMapping(
         array $originIds,
-        string $magicOrganizationCode,
+        string $delightfulOrganizationCode,
         PlatformType $thirdPlatformType,
         ThirdPlatformIdMappingType $mappingType
     ): int;

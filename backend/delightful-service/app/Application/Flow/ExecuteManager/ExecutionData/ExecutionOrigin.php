@@ -10,6 +10,6 @@ namespace App\Application\Flow\ExecuteManager\ExecutionData;
 enum ExecutionOrigin: string
 {
     // 麦吉
-    case Delightful = 'magic';
+    case Delightful = 'delightful';
     case DingTalk = 'dingTalk';
 }

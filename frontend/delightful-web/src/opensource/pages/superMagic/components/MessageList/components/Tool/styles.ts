@@ -139,8 +139,8 @@ export const useStyles = createStyles(({ token, css }) => {
 			color: ${token.colorTextTertiary};
 			background: linear-gradient(
 				88deg,
-				${token.magicColorUsages.fill[1]} -3.79%,
-				${token.magicColorUsages.fill[0]} 100%
+				${token.delightfulColorUsages.fill[1]} -3.79%,
+				${token.delightfulColorUsages.fill[0]} 100%
 			);
 			border-radius: 100px;
 			gap: 4px;

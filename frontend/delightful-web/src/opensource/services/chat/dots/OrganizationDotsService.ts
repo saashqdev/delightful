@@ -36,7 +36,7 @@ class OrganizationDotsService {
 		OrganizationDotsStore.setOrganizationDotSeqId(organizationCode, seqId)
 
 		BroadcastChannelSender.updateOrganizationDot({
-			magicId: userStore.user.userInfo?.magic_id || "",
+			delightfulId: userStore.user.userInfo?.delightful_id || "",
 			organizationCode,
 			count: newCount,
 			seqId,
@@ -61,7 +61,7 @@ class OrganizationDotsService {
 		OrganizationDotsStore.setOrganizationDots(organizationCode, newCount)
 
 		BroadcastChannelSender.updateOrganizationDot({
-			magicId: userStore.user.userInfo?.magic_id || "",
+			delightfulId: userStore.user.userInfo?.delightful_id || "",
 			organizationCode,
 			count: newCount,
 		})

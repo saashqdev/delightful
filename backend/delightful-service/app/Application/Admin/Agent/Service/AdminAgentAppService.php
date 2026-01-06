@@ -51,14 +51,14 @@ class AdminAgentAppService extends AbstractKernelAppService
 {
     public function __construct(
         private readonly AdminGlobalSettingsDomainService $globalSettingsDomainService,
-        private readonly DelightfulAgentDomainService $magicAgentDomainService,
-        private readonly DelightfulAgentVersionDomainService $magicAgentVersionDomainService,
+        private readonly DelightfulAgentDomainService $delightfulAgentDomainService,
+        private readonly DelightfulAgentVersionDomainService $delightfulAgentVersionDomainService,
         private readonly FileDomainService $fileDomainService,
         private readonly DelightfulUserDomainService $userDomainService,
         private readonly OperationPermissionDomainService $operationPermissionDomainService,
-        private readonly DelightfulDepartmentDomainService $magicDepartmentDomainService,
-        private readonly DelightfulDepartmentUserDomainService $magicDepartmentUserDomainService,
-        private readonly DelightfulGroupDomainService $magicGroupDomainService,
+        private readonly DelightfulDepartmentDomainService $delightfulDepartmentDomainService,
+        private readonly DelightfulDepartmentUserDomainService $delightfulDepartmentUserDomainService,
+        private readonly DelightfulGroupDomainService $delightfulGroupDomainService,
     ) {
     }
 
@@ -67,7 +67,7 @@ class AdminAgentAppService extends AbstractKernelAppService
      */
     public function deleteAgent(DelightfulUserAuthorization $authenticatable, string $agentId)
     {
-        $this->magicAgentDomainService->deleteAgentById($agentId, $authenticatable->getOrganizationCode());
+        $this->delightfulAgentDomainService->deleteAgentById($agentId, $authenticatable->getOrganizationCode());
     }
 
     /**
@@ -75,12 +75,12 @@ class AdminAgentAppService extends AbstractKernelAppService
      */
     public function getAgentDetail(DelightfulUserAuthorization $authorization, string $agentId): AdminAgentDetailDTO
     {
-        $agentEntity = $this->magicAgentDomainService->getAgentById($agentId);
+        $agentEntity = $this->delightfulAgentDomainService->getAgentById($agentId);
         $adminAgentDetail = new AdminAgentDetailDTO();
 
         $agentVersionEntity = new DelightfulAgentVersionEntity();
         if ($agentEntity->getAgentVersionId()) {
-            $agentVersionEntity = $this->magicAgentVersionDomainService->getAgentById($agentEntity->getAgentVersionId());
+            $agentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentById($agentEntity->getAgentVersionId());
             // 只有发布的助理才会有权限管控
             $resourceAccessDTO = $this->getAgentResource($authorization, $agentId);
             $adminAgentDetail->setResourceAccess($resourceAccessDTO);
@@ -97,8 +97,8 @@ class AdminAgentAppService extends AbstractKernelAppService
             $adminAgentDetailDTO->setAgentAvatar($fileLink->getUrl());
         }
 
-        $magicUserEntity = $this->userDomainService->getUserById($agentEntity->getCreatedUid());
-        $adminAgentDetailDTO->setCreatedName($magicUserEntity->getNickname());
+        $delightfulUserEntity = $this->userDomainService->getUserById($agentEntity->getCreatedUid());
+        $adminAgentDetailDTO->setCreatedName($delightfulUserEntity->getNickname());
 
         return $adminAgentDetailDTO;
     }
@@ -110,7 +110,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     public function getOrganizationAgentsCreators(DelightfulUserAuthorization $authorization): array
     {
         // 获取所有助理
-        $agentCreators = $this->magicAgentDomainService->getOrganizationAgentsCreators($authorization->getOrganizationCode());
+        $agentCreators = $this->delightfulAgentDomainService->getOrganizationAgentsCreators($authorization->getOrganizationCode());
         $dataIsolation = DataIsolation::create($authorization->getOrganizationCode(), $authorization->getId());
         $userMap = $this->userDomainService->getByUserIds($dataIsolation, $agentCreators);
 
@@ -144,19 +144,19 @@ class AdminAgentAppService extends AbstractKernelAppService
      */
     public function queriesAgents(DelightfulUserAuthorization $authorization, QueryPageAgentDTO $query): PageDTO
     {
-        $magicAgentEntities = $this->magicAgentDomainService->queriesAgents($authorization->getOrganizationCode(), $query);
-        if (empty($magicAgentEntities)) {
+        $delightfulAgentEntities = $this->delightfulAgentDomainService->queriesAgents($authorization->getOrganizationCode(), $query);
+        if (empty($delightfulAgentEntities)) {
             return new PageDTO();
         }
-        $magicAgentEntityCount = $this->magicAgentDomainService->queriesAgentsCount($authorization->getOrganizationCode(), $query);
+        $delightfulAgentEntityCount = $this->delightfulAgentDomainService->queriesAgentsCount($authorization->getOrganizationCode(), $query);
         // 获取所有的 avatar
-        $avatars = array_filter(array_column($magicAgentEntities, 'agent_avatar'), fn ($avatar) => ! empty($avatar));
+        $avatars = array_filter(array_column($delightfulAgentEntities, 'agent_avatar'), fn ($avatar) => ! empty($avatar));
         $fileLinks = $this->fileDomainService->getLinks($authorization->getOrganizationCode(), $avatars);
         // 获取助理创建人
-        $createdUids = array_column($magicAgentEntities, 'created_uid');
+        $createdUids = array_column($delightfulAgentEntities, 'created_uid');
         $createdUsers = $this->userDomainService->getUserByIdsWithoutOrganization($createdUids);
-        $agentVersionIds = array_filter(array_column($magicAgentEntities, 'agent_version_id'), fn ($agentVersionId) => $agentVersionId !== null);
-        $agentVersions = $this->magicAgentVersionDomainService->getAgentByIds($agentVersionIds);
+        $agentVersionIds = array_filter(array_column($delightfulAgentEntities, 'agent_version_id'), fn ($agentVersionId) => $agentVersionId !== null);
+        $agentVersions = $this->delightfulAgentVersionDomainService->getAgentByIds($agentVersionIds);
 
         // 构建创建人映射
         $createdUserMap = [];
@@ -172,7 +172,7 @@ class AdminAgentAppService extends AbstractKernelAppService
 
         // 聚合数据
         $items = [];
-        foreach ($magicAgentEntities as $agent) {
+        foreach ($delightfulAgentEntities as $agent) {
             $adminAgentDTO = AgentAssembler::entityToDTO($agent);
 
             // 设置头像
@@ -198,7 +198,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         }
         $pageDTO = new PageDTO();
         $pageDTO->setPage($query->getPage());
-        $pageDTO->setTotal($magicAgentEntityCount);
+        $pageDTO->setTotal($delightfulAgentEntityCount);
         $pageDTO->setList($items);
         return $pageDTO;
     }
@@ -273,7 +273,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         $organizationCode = $authorization->getOrganizationCode();
 
         // 获取启用的机器人列表
-        $enabledAgents = $this->magicAgentDomainService->getEnabledAgents();
+        $enabledAgents = $this->delightfulAgentDomainService->getEnabledAgents();
 
         // 根据筛选类型过滤
         $enabledAgents = $this->filterEnableAgentsByType($authorization, $enabledAgents, $type);
@@ -282,7 +282,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
         // 获取指定组织和机器人版本的机器人数据及其总数
-        $agentVersions = $this->magicAgentVersionDomainService->getAgentsByOrganizationWithCursor(
+        $agentVersions = $this->delightfulAgentVersionDomainService->getAgentsByOrganizationWithCursor(
             $organizationCode,
             $agentVersionIds,
             $pageToken,
@@ -341,13 +341,13 @@ class AdminAgentAppService extends AbstractKernelAppService
         // 根据 userid 获取用户信息
         $users = $this->userDomainService->getByUserIds($contactDataIsolation, $userIds);
         // 获取用户的 departmentId
-        $userDepartmentList = $this->magicDepartmentUserDomainService->getDepartmentIdsByUserIds($contactDataIsolation, $userIds);
+        $userDepartmentList = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserIds($contactDataIsolation, $userIds);
         foreach ($userDepartmentList as $userDepartmentIds) {
             $departmentIds = array_merge($departmentIds, $userDepartmentIds);
         }
-        $departments = $this->magicDepartmentDomainService->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
+        $departments = $this->delightfulDepartmentDomainService->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
         // 获取群组信息
-        $groups = $this->magicGroupDomainService->getGroupsInfoByIds($groupIds, $contactDataIsolation, true);
+        $groups = $this->delightfulGroupDomainService->getGroupsInfoByIds($groupIds, $contactDataIsolation, true);
         return OperationPermissionAssembler::createResourceAccessDTO(ResourceType::AgentCode, $agentId, $operationPermissionEntities, $users, $departments, $groups);
     }
 

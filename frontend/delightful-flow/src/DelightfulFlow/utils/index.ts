@@ -378,7 +378,7 @@ export const generateLoopBody = (loopNode: DelightfulFlow.Node, paramsName:Delig
 		id: id,
 		node_id:  id,
 		remark: "",
-		name: i18next.t("flow.loopBody", { ns: "magicFlow" }),
+		name: i18next.t("flow.loopBody", { ns: "delightfulFlow" }),
 		[paramsName.nodeType]: loopBodyType,
 		next_nodes: [],
 		type: NodeModelType.Group,
@@ -388,7 +388,7 @@ export const generateLoopBody = (loopNode: DelightfulFlow.Node, paramsName:Delig
 			parent_id: loopNode.id
 		},
 		data: {
-			description: i18next.t("flow.loopBodyDesc", { ns: "magicFlow" }),
+			description: i18next.t("flow.loopBodyDesc", { ns: "delightfulFlow" }),
 		},
 		position: nodePosition,
 		deletable: false,

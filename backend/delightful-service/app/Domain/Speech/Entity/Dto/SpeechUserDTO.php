@@ -22,7 +22,7 @@ class SpeechUserDTO extends AbstractEntity
 
     public function getUid(): string
     {
-        return $this->uid ?: uniqid('magic_', true);
+        return $this->uid ?: uniqid('delightful_', true);
     }
 
     public function setUid(string $uid): void

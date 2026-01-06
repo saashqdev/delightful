@@ -5,12 +5,12 @@ export const useStyles = createStyles(({ css, token }) => ({
 		width: 24px;
 		height: 24px;
 		padding: 0;
-		color: ${token.magicColorUsages.text[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 	`,
 	title: css`
 		font-size: 16px;
 		font-weight: 600;
-		color: ${token.magicColorUsages.text[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 	`,
 	formItem: css`
 		margin-bottom: 4px;
@@ -23,6 +23,6 @@ export const useStyles = createStyles(({ css, token }) => ({
 	`,
 	custom: css`
 		font-size: 14px;
-		color: ${token.magicColorUsages.text[2]};
+		color: ${token.delightfulColorUsages.text[2]};
 	`,
 }))

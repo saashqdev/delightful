@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_api_model_configs', function (Blueprint $table) {
+        Schema::table('delightful_api_model_configs', function (Blueprint $table) {
             $table->string('type', 80)->default('')->comment('模型类型')->after('model');
             // 给 model 增加注释：实际上代表 endpoint
             $table->string('model')->comment('实际上代表 endpoint')->change();
@@ -27,7 +27,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_api_model_configs', function (Blueprint $table) {
+        Schema::table('delightful_api_model_configs', function (Blueprint $table) {
             $table->dropIndex('idx_type');
             $table->dropColumn('type');
             $table->string('model')->comment('模型名称')->change();

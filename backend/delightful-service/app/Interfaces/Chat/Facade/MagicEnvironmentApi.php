@@ -23,7 +23,7 @@ use Hyperf\HttpServer\Contract\RequestInterface;
 class DelightfulEnvironmentApi extends AbstractApi
 {
     public function __construct(
-        private readonly DelightfulEnvironmentAppService $magicEnvironmentAppService,
+        private readonly DelightfulEnvironmentAppService $delightfulEnvironmentAppService,
     ) {
     }
 
@@ -31,25 +31,25 @@ class DelightfulEnvironmentApi extends AbstractApi
     {
         $ids = $request->input('ids', []);
         $this->authCheck();
-        return $this->magicEnvironmentAppService->getDelightfulEnvironments($ids);
+        return $this->delightfulEnvironmentAppService->getDelightfulEnvironments($ids);
     }
 
     public function createDelightfulEnvironment(RequestInterface $request): array
     {
         $data = $request->all();
         $this->authCheck();
-        $magicEnvironmentEntity = new DelightfulEnvironmentEntity($data);
-        $this->magicEnvironmentAppService->createDelightfulEnvironment($magicEnvironmentEntity);
-        return $magicEnvironmentEntity->toArray();
+        $delightfulEnvironmentEntity = new DelightfulEnvironmentEntity($data);
+        $this->delightfulEnvironmentAppService->createDelightfulEnvironment($delightfulEnvironmentEntity);
+        return $delightfulEnvironmentEntity->toArray();
     }
 
     public function updateDelightfulEnvironment(RequestInterface $request): array
     {
         $data = $request->all();
         $this->authCheck();
-        $magicEnvironmentEntity = new DelightfulEnvironmentEntity($data);
-        $this->magicEnvironmentAppService->updateDelightfulEnvironment($magicEnvironmentEntity);
-        return $magicEnvironmentEntity->toArray();
+        $delightfulEnvironmentEntity = new DelightfulEnvironmentEntity($data);
+        $this->delightfulEnvironmentAppService->updateDelightfulEnvironment($delightfulEnvironmentEntity);
+        return $delightfulEnvironmentEntity->toArray();
     }
 
     private function authCheck(): void

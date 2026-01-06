@@ -13,7 +13,7 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
     }
 	`,
   icon: css`
-		background-color: ${token.magicColorScales.green[5]};
+		background-color: ${token.delightfulColorScales.green[5]};
 		color: white;
 		border-radius: 4px;
 		padding: 4px;
@@ -36,18 +36,18 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 		width: 100%;
 		padding: 12px;
 		&:not(&:last-of-type) {
-			border-bottom: 1px solid ${token.magicColorUsages.border};
+			border-bottom: 1px solid ${token.delightfulColorUsages.border};
 		}
 	`,
   jobTitle: css`
-		color: ${token.magicColorUsages.text[3]};
+		color: ${token.delightfulColorUsages.text[3]};
 		font-size: 12px;
 		line-height: 16px;
 	`,
   removeButton: css`
 		border-radius: 8px;
 		border: none;
-		--${prefixCls}-color-bg-container: ${token.magicColorUsages.fill[0]};
+		--${prefixCls}-color-bg-container: ${token.delightfulColorUsages.fill[0]};
 	`,
   removeCheckedButton: css``,
 }));

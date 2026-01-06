@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_flow_api_keys', function (Blueprint $table) {
+        Schema::create('delightful_flow_api_keys', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code')->default('')->comment('组织编码');
             $table->string('code', 50)->default('')->comment('API Key编码')->index();
@@ -39,6 +39,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_flow_api_keys');
+        Schema::dropIfExists('delightful_flow_api_keys');
     }
 };

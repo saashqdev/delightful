@@ -30,12 +30,12 @@ class InitDefaultAssistantConversationSubscriber extends ConsumerMessage
     private LoggerInterface $logger;
 
     public function __construct(
-        protected DelightfulAgentAppService $magicAgentAppService,
-        protected DelightfulAgentDomainService $magicAgentDomainService,
-        protected DelightfulUserDomainService $magicUserDomainService,
-        protected DelightfulAgentVersionDomainService $magicAgentVersionDomainService,
-        protected DelightfulUserAuthorization $magicUserAuthorization,
-        protected DelightfulAccountAppService $magicAccountAppService,
+        protected DelightfulAgentAppService $delightfulAgentAppService,
+        protected DelightfulAgentDomainService $delightfulAgentDomainService,
+        protected DelightfulUserDomainService $delightfulUserDomainService,
+        protected DelightfulAgentVersionDomainService $delightfulAgentVersionDomainService,
+        protected DelightfulUserAuthorization $delightfulUserAuthorization,
+        protected DelightfulAccountAppService $delightfulAccountAppService,
     ) {
         $this->logger = di(LoggerFactory::class)->get(get_class($this));
     }
@@ -53,7 +53,7 @@ class InitDefaultAssistantConversationSubscriber extends ConsumerMessage
             // 先批量注册，防止组织下没有该助理用户.
             $this->batchAiRegister($userEntity, $defaultConversationAICodes);
             // 初始化默认会话
-            $this->magicAgentAppService->initDefaultAssistantConversation($userEntity, $defaultConversationAICodes);
+            $this->delightfulAgentAppService->initDefaultAssistantConversation($userEntity, $defaultConversationAICodes);
             return Result::ACK;
         } catch (Throwable $exception) {
             $this->logger->error("初始化默认会话失败，错误信息: {$exception->getMessage()}, 堆栈: {$exception->getTraceAsString()}");
@@ -67,14 +67,14 @@ class InitDefaultAssistantConversationSubscriber extends ConsumerMessage
     public function batchAiRegister(DelightfulUserEntity $userEntity, ?array $defaultConversationAICodes = null): void
     {
         $authorization = DelightfulUserAuthorization::fromUserEntity($userEntity);
-        $defaultConversationAICodes = $defaultConversationAICodes ?? $this->magicAgentDomainService->getDefaultConversationAICodes();
+        $defaultConversationAICodes = $defaultConversationAICodes ?? $this->delightfulAgentDomainService->getDefaultConversationAICodes();
         foreach ($defaultConversationAICodes as $aiCode) {
-            $magicAgentVersionEntity = $this->magicAgentVersionDomainService->getAgentByFlowCode($aiCode);
-            $agentName = $magicAgentVersionEntity->getAgentName();
+            $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentByFlowCode($aiCode);
+            $agentName = $delightfulAgentVersionEntity->getAgentName();
             $this->logger->info("注册助理，aiCode: {$aiCode}, 名称: {$agentName}");
             try {
-                $aiUserDTO = DelightfulUserEntity::fromDelightfulAgentVersionEntity($magicAgentVersionEntity);
-                $this->magicAccountAppService->aiRegister($aiUserDTO, $authorization, $aiCode);
+                $aiUserDTO = DelightfulUserEntity::fromDelightfulAgentVersionEntity($delightfulAgentVersionEntity);
+                $this->delightfulAccountAppService->aiRegister($aiUserDTO, $authorization, $aiCode);
                 $this->logger->info("注册助理成功，aiCode: {$aiCode}, 名称: {$agentName}");
             } catch (Throwable $e) {
                 $errorMessage = $e->getMessage();

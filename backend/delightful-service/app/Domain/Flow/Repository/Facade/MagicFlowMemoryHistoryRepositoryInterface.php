@@ -14,7 +14,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 interface DelightfulFlowMemoryHistoryRepositoryInterface
 {
-    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryEntity $magicFlowMemoryHistoryEntity): DelightfulFlowMemoryHistoryEntity;
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryEntity $delightfulFlowMemoryHistoryEntity): DelightfulFlowMemoryHistoryEntity;
 
     /**
      * @return array{total: int, list: array<DelightfulFlowMemoryHistoryEntity>}

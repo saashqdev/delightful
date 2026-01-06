@@ -26,7 +26,7 @@ class MsgLogModel extends Model
 {
     use Snowflake;
 
-    protected ?string $table = 'magic_api_msg_logs';
+    protected ?string $table = 'delightful_api_msg_logs';
 
     protected array $fillable = [
         'id',

@@ -10,13 +10,13 @@ export class UserStore {
 
 	organizations: User.UserOrganization[] = []
 
-	/** magic organization code */
+	/** delightful organization code */
 	organizationCode: string = ""
 
 	/** teamshare organization code */
 	teamshareOrganizationCode: string = ""
 
-	magicOrganizationMap: Record<string, User.DelightfulOrganization> = {}
+	delightfulOrganizationMap: Record<string, User.DelightfulOrganization> = {}
 
 	/** Whether current user is an admin */
 	isAdmin: boolean = false
@@ -42,25 +42,25 @@ export class UserStore {
 	}
 
 	setOrganizations = (organizations: Record<string, User.DelightfulOrganization>) => {
-		this.magicOrganizationMap = organizations
+		this.delightfulOrganizationMap = organizations
 	}
 
 	setTeamshareOrganizations = (organizations: User.UserOrganization[]) => {
 		this.organizations = organizations
 	}
 
-	// Sync magic organization with teamshare and vice versa
+	// Sync delightful organization with teamshare and vice versa
 
 	/**
-	 * @description Get organization object by magic organization code
-	 * @param {string} organizationCode Organization code in the magic system
+	 * @description Get organization object by delightful organization code
+	 * @param {string} organizationCode Organization code in the delightful system
 	 */
 	getOrganizationByDelightful = (organizationCode: string) => {
-		const { organizations, magicOrganizationMap } = this
+		const { organizations, delightfulOrganizationMap } = this
 		const orgMap = keyBy(organizations, "organization_code")
 		// Get teamshare organization code
 		return orgMap?.[
-			magicOrganizationMap?.[organizationCode]?.third_platform_organization_code ?? ""
+			delightfulOrganizationMap?.[organizationCode]?.third_platform_organization_code ?? ""
 		]
 	}
 
@@ -69,16 +69,16 @@ export class UserStore {
 	 * @return {User.UserOrganization | undefined}
 	 */
 	getOrganization = (): User.UserOrganization | null => {
-		const { organizations, organizationCode, magicOrganizationMap, teamshareOrganizationCode } =
+		const { organizations, organizationCode, delightfulOrganizationMap, teamshareOrganizationCode } =
 			this
 		// Build organization map
 		const orgMap = keyBy(organizations, "organization_code")
 		let org = null
-		// Try fetching org by magic organization code
+		// Try fetching org by delightful organization code
 		if (organizationCode) {
 			org =
 				orgMap?.[
-					magicOrganizationMap?.[organizationCode]?.third_platform_organization_code ?? ""
+					delightfulOrganizationMap?.[organizationCode]?.third_platform_organization_code ?? ""
 				]
 		}
 		if (!org && teamshareOrganizationCode) {

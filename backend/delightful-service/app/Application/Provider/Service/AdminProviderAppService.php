@@ -343,7 +343,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * Get super magic display models and Delightful provider models visible to current organization.
+     * Get super delightful display models and Delightful provider models visible to current organization.
      * @param string $organizationCode Organization code
      * @return ProviderModelDetailDTO[]
      */

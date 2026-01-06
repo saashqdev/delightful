@@ -41,7 +41,7 @@ export const useStyles = createStyles(({ css, isDarkMode, token }) => ({
 		width: 100%;
 		line-height: 1.6;
 		word-wrap: break-word;
-		color: ${token.magicColorUsages.text[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 
 		h1,
 		h2,

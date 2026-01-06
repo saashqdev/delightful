@@ -56,7 +56,7 @@ export default function LabelDepartmentNames({
 	})
 
 	return (
-		<div className="magic-label-department-names" {...datasetProps}>
+		<div className="delightful-label-department-names" {...datasetProps}>
 			{departmentNames.map((department: WithReference<Department>) => {
 				const isReference = checkIsReferenceNode(department)
 
@@ -81,7 +81,7 @@ export default function LabelDepartmentNames({
 
 				return (
 					<MultipleItem
-						className="magic-label-department-name"
+						className="delightful-label-department-name"
 						item={targetItem as MultipleOption}
 						itemClick={() => {}}
 						showCheck={false}

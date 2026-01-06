@@ -41,7 +41,7 @@ class ConversationService {
 	/**
 	 * 魔法ID
 	 */
-	magicId: string | undefined
+	delightfulId: string | undefined
 
 	/**
 	 * 组织编码
@@ -55,17 +55,17 @@ class ConversationService {
 
 	/**
 	 * 初始化
-	 * @param magicId 账户 ID
+	 * @param delightfulId 账户 ID
 	 * @param organizationCode 组织编码
 	 * @param userInfo 用户信息
 	 */
-	async init(magicId: string, organizationCode: string, userInfo?: User.UserInfo | null) {
-		this.magicId = magicId
+	async init(delightfulId: string, organizationCode: string, userInfo?: User.UserInfo | null) {
+		this.delightfulId = delightfulId
 		this.organizationCode = organizationCode
 
 		// 获取缓存的侧边栏会话组
 		const cache = ConversationCacheServices.getCacheConversationSiderbarGroups(
-			magicId,
+			delightfulId,
 			organizationCode,
 		)
 
@@ -91,7 +91,7 @@ class ConversationService {
 	reset() {
 		conversationSidebarStore.resetConversationSidebarGroups()
 		conversationStore.reset()
-		this.magicId = undefined
+		this.delightfulId = undefined
 		this.organizationCode = undefined
 	}
 
@@ -137,16 +137,16 @@ class ConversationService {
 
 	/**
 	 * 初始化
-	 * @param magicId 账户 ID
+	 * @param delightfulId 账户 ID
 	 * @param organizationCode 组织编码
 	 * @param conversations 会话列表
 	 */
 	initOnFirstLoad(
-		magicId: string,
+		delightfulId: string,
 		organizationCode: string,
 		conversations: ConversationFromService[],
 	) {
-		this.magicId = magicId
+		this.delightfulId = delightfulId
 		this.organizationCode = organizationCode
 
 		this.initConversations(conversations)
@@ -232,7 +232,7 @@ class ConversationService {
 
 			// 设置最后会话
 			LastConversationService.setLastConversation(
-				this.magicId,
+				this.delightfulId,
 				this.organizationCode,
 				conversation.id,
 			)
@@ -384,7 +384,7 @@ class ConversationService {
 			) {
 				const lastConversation = conversationStore.getConversation(
 					LastConversationService.getLastConversation(
-						this.magicId,
+						this.delightfulId,
 						this.organizationCode,
 					) ?? conversationList?.[0]?.id,
 				)
@@ -413,7 +413,7 @@ class ConversationService {
 
 		conversationSidebarStore.setConversationSidebarGroups(sidebarGroups)
 		ConversationCacheServices.cacheConversationSiderbarGroups(
-			this.magicId,
+			this.delightfulId,
 			this.organizationCode,
 			sidebarGroups,
 		)
@@ -525,7 +525,7 @@ class ConversationService {
 	 */
 	private cacheConversationSiderbarGroups() {
 		ConversationCacheServices.cacheConversationSiderbarGroups(
-			this.magicId,
+			this.delightfulId,
 			this.organizationCode,
 			conversationSidebarStore.getConversationSiderbarGroups(),
 		)

@@ -63,7 +63,7 @@ const useStyles = createStyles(({ token, prefixCls }) => ({
 	},
 	internetLinkWrapper: {
 		display: "flex",
-		backgroundColor: token.magicColorUsages.fill[0],
+		backgroundColor: token.delightfulColorUsages.fill[0],
 		borderRadius: 8,
 	},
 	internetLink: {
@@ -86,16 +86,16 @@ const useStyles = createStyles(({ token, prefixCls }) => ({
 		gap: 4,
 	},
 	backgroundOnlySelf: {
-		backgroundColor: token.magicColorScales.green[5],
+		backgroundColor: token.delightfulColorScales.green[5],
 	},
 	backgroundOrganization: {
-		backgroundColor: token.magicColorScales.brand[5],
+		backgroundColor: token.delightfulColorScales.brand[5],
 	},
 	backgroundDepartmentOrMember: {
-		backgroundColor: token.magicColorScales.teal[5],
+		backgroundColor: token.delightfulColorScales.teal[5],
 	},
 	backgroundInternet: {
-		backgroundColor: token.magicColorScales.amber[5],
+		backgroundColor: token.delightfulColorScales.amber[5],
 	},
 	departmentOrMemberButton: {
 		gap: 2,
@@ -103,12 +103,12 @@ const useStyles = createStyles(({ token, prefixCls }) => ({
 	passwordTitle: {
 		fontSize: 12,
 		fontWeight: 400,
-		color: token.magicColorUsages.text[2],
+		color: token.delightfulColorUsages.text[2],
 	},
 	password: {
 		borderRadius: 8,
-		border: `1px solid ${token.magicColorUsages.border[0]}`,
-		backgroundColor: token.magicColorUsages.fill[0],
+		border: `1px solid ${token.delightfulColorUsages.border[0]}`,
+		backgroundColor: token.delightfulColorUsages.fill[0],
 		height: 30,
 		display: "flex",
 		alignItems: "center",
@@ -118,7 +118,7 @@ const useStyles = createStyles(({ token, prefixCls }) => ({
 	passwordInput: {
 		borderRadius: 8,
 		border: `1px solid var(--semi-color-border)`,
-		backgroundColor: token.magicColorUsages.fill[0],
+		backgroundColor: token.delightfulColorUsages.fill[0],
 		height: 30,
 		padding: "0 12px",
 		width: 100,

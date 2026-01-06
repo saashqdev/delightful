@@ -182,14 +182,14 @@ let switchOrganizationModal: ReturnType<typeof DelightfulModal.confirm> | null =
 // 切换组织
 eventFactory.on(
 	EVENTS.SWITCH_ORGANIZATION,
-	(data: { userInfo: User.UserInfo; magicOrganizationCode: string }) => {
+	(data: { userInfo: User.UserInfo; delightfulOrganizationCode: string }) => {
 		const currentUserInfo = userStore.user.userInfo
 		const currentOrganizationCode = userStore.user.organizationCode
 
 		if (
 			currentUserInfo &&
 			(currentUserInfo?.user_id !== data.userInfo.user_id ||
-				currentOrganizationCode !== data.magicOrganizationCode)
+				currentOrganizationCode !== data.delightfulOrganizationCode)
 		) {
 			switchOrganizationModal?.destroy()
 			switchOrganizationModal = DelightfulModal.confirm({
@@ -201,14 +201,14 @@ eventFactory.on(
 				onOk: () => {
 					UserDispatchService.switchOrganization({
 						userInfo: data.userInfo,
-						magicOrganizationCode: data.magicOrganizationCode,
+						delightfulOrganizationCode: data.delightfulOrganizationCode,
 					})
 					switchOrganizationModal?.destroy()
 				},
 				onCancel: () => {
 					BroadcastChannelSender.switchOrganization({
 						userInfo: toJS(currentUserInfo),
-						magicOrganizationCode: toJS(currentOrganizationCode),
+						delightfulOrganizationCode: toJS(currentOrganizationCode),
 					})
 					switchOrganizationModal?.destroy()
 				},
@@ -229,7 +229,7 @@ eventFactory.on(EVENTS.DO_SWITCH_ORGANIZATION, (data) => {
 // 更新组织红点
 eventFactory.on(
 	EVENTS.UPDATE_ORGANIZATION_DOT,
-	(data: { magicId: string; organizationCode: string; count: number; seqId?: string }) => {
+	(data: { delightfulId: string; organizationCode: string; count: number; seqId?: string }) => {
 		OrganizationDispatchService.updateOrganizationDot(data)
 	},
 )
@@ -254,10 +254,10 @@ let switchAccountModal: ReturnType<typeof DelightfulModal.confirm> | null = null
 // 切换账号
 eventFactory.on(
 	EVENTS.SWITCH_ACCOUNT,
-	(data: { magicId: string; magicUserId: string; magicOrganizationCode: string }) => {
+	(data: { delightfulId: string; delightfulUserId: string; delightfulOrganizationCode: string }) => {
 		const currentUserInfo = userStore.user.userInfo
 
-		if (currentUserInfo && currentUserInfo.magic_id !== data.magicId) {
+		if (currentUserInfo && currentUserInfo.delightful_id !== data.delightfulId) {
 			switchAccountModal?.destroy()
 			switchAccountModal = DelightfulModal.confirm({
 				title: t("broadcastChannel.account.title", { ns: "common" }),
@@ -267,17 +267,17 @@ eventFactory.on(
 				centered: true,
 				onOk: () => {
 					UserDispatchService.switchAccount({
-						magicId: data.magicId,
-						magicUserId: data.magicUserId,
-						magicOrganizationCode: data.magicOrganizationCode,
+						delightfulId: data.delightfulId,
+						delightfulUserId: data.delightfulUserId,
+						delightfulOrganizationCode: data.delightfulOrganizationCode,
 					})
 					switchAccountModal?.destroy()
 				},
 				onCancel: () => {
 					BroadcastChannelSender.switchAccount({
-						magicId: currentUserInfo.magic_id,
-						magicUserId: currentUserInfo.user_id,
-						magicOrganizationCode: currentUserInfo.organization_code,
+						delightfulId: currentUserInfo.delightful_id,
+						delightfulUserId: currentUserInfo.user_id,
+						delightfulOrganizationCode: currentUserInfo.organization_code,
 					})
 					switchAccountModal?.destroy()
 				},
@@ -306,7 +306,7 @@ eventFactory.on(EVENTS.DO_ADD_ACCOUNT, (data) => {
 })
 
 // 删除账号
-eventFactory.on(EVENTS.DELETE_ACCOUNT, (data: { magicId?: string; navigateToLogin?: boolean }) => {
+eventFactory.on(EVENTS.DELETE_ACCOUNT, (data: { delightfulId?: string; navigateToLogin?: boolean }) => {
 	UserDispatchService.deleteAccount(data)
 })
 

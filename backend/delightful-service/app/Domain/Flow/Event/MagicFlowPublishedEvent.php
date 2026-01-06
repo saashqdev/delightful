@@ -12,7 +12,7 @@ use App\Domain\Flow\Entity\DelightfulFlowEntity;
 class DelightfulFlowPublishedEvent
 {
     public function __construct(
-        public DelightfulFlowEntity $magicFlowEntity,
+        public DelightfulFlowEntity $delightfulFlowEntity,
     ) {
     }
 }

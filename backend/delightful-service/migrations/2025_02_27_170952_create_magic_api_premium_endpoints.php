@@ -16,11 +16,11 @@ return new class extends Migration {
     public function up(): void
     {
         // 表存在就不执行
-        if (Schema::hasTable('magic_api_premium_endpoints')) {
+        if (Schema::hasTable('delightful_api_premium_endpoints')) {
             return;
         }
 
-        Schema::create('magic_api_premium_endpoints', function (Blueprint $table) {
+        Schema::create('delightful_api_premium_endpoints', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type', 255)->comment('接入点类型。用户需要自己保证不与其他业务重复');
             $table->string('provider', 255)->comment('提供商')->nullable();
@@ -42,6 +42,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_api_premium_endpoints');
+        Schema::dropIfExists('delightful_api_premium_endpoints');
     }
 };

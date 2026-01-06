@@ -10,7 +10,7 @@ namespace App\Application\Speech\Enum;
 /**
  * ASR 任务状态枚举（内部业务流程）.
  *
- * 【作用域】内部系统 - magic-service 业务层
+ * 【作用域】内部系统 - delightful-service 业务层
  * 【用途】表示 ASR 录音总结任务的全生命周期状态
  * 【使用场景】
  * - 任务状态持久化（Redis/数据库）

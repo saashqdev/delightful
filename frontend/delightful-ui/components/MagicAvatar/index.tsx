@@ -11,7 +11,7 @@ export interface DelightfulAvatarProps extends AvatarProps {
 
 const useStyles = createStyles(({ token }) => ({
 	avatar: {
-		backgroundColor: token.magicColorScales.white,
+		backgroundColor: token.delightfulColorScales.white,
 	},
 }))
 

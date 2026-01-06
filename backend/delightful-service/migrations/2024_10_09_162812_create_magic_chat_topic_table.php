@@ -14,11 +14,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_chat_topics')) {
+        if (Schema::hasTable('delightful_chat_topics')) {
             return;
         }
         // 话题表
-        Schema::create('magic_chat_topics', static function (Blueprint $table) {
+        Schema::create('delightful_chat_topics', static function (Blueprint $table) {
             $table->bigIncrements('id');
             // 话题 id
             $table->string('topic_id', 64)->comment('话题 id. 不同会话窗口中,话题id一致');
@@ -46,6 +46,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_chat_topics');
+        Schema::dropIfExists('delightful_chat_topics');
     }
 };

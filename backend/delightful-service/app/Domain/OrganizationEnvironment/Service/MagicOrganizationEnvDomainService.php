@@ -24,75 +24,75 @@ use Hyperf\Redis\Redis;
 class DelightfulOrganizationEnvDomainService
 {
     public function __construct(
-        protected EnvironmentRepositoryInterface $magicEnvironmentsRepository,
-        protected OrganizationsEnvironmentRepositoryInterface $magicOrganizationsEnvironmentRepository,
+        protected EnvironmentRepositoryInterface $delightfulEnvironmentsRepository,
+        protected OrganizationsEnvironmentRepositoryInterface $delightfulOrganizationsEnvironmentRepository,
         protected LockerInterface $lock,
-        protected DelightfulTokenRepositoryInterface $magicTokenRepository,
+        protected DelightfulTokenRepositoryInterface $delightfulTokenRepository,
         protected Redis $redis
     ) {
     }
 
-    public function getOrCreateOrganizationsEnvironment(string $originOrganizationCode, DelightfulEnvironmentEntity $magicEnvEntity): DelightfulOrganizationEnvEntity
+    public function getOrCreateOrganizationsEnvironment(string $originOrganizationCode, DelightfulEnvironmentEntity $delightfulEnvEntity): DelightfulOrganizationEnvEntity
     {
         // 加自旋锁防并发
-        $spinLockKey = sprintf('getOrCreateOrganizationsEnvironment:envId:%s', $magicEnvEntity->getId());
+        $spinLockKey = sprintf('getOrCreateOrganizationsEnvironment:envId:%s', $delightfulEnvEntity->getId());
         $owner = random_bytes(8);
         $this->lock->spinLock($spinLockKey, $owner);
         try {
             // 组织所在的环境
-            $orgEnvEntity = $this->magicOrganizationsEnvironmentRepository->getOrganizationEnvironmentByOrganizationCode(
+            $orgEnvEntity = $this->delightfulOrganizationsEnvironmentRepository->getOrganizationEnvironmentByOrganizationCode(
                 $originOrganizationCode,
-                $magicEnvEntity
+                $delightfulEnvEntity
             );
             if (! empty($orgEnvEntity)) {
                 return $orgEnvEntity;
             }
             // 创建组织环境:如果是 saas 则不改变组织编码。
-            if ($magicEnvEntity->getDeployment() === DeploymentEnum::SaaS) {
-                $magicOrganizationCode = $originOrganizationCode;
+            if ($delightfulEnvEntity->getDeployment() === DeploymentEnum::SaaS) {
+                $delightfulOrganizationCode = $originOrganizationCode;
             } else {
-                $magicOrganizationCode = IdGenerator::getDelightfulOrganizationCode();
+                $delightfulOrganizationCode = IdGenerator::getDelightfulOrganizationCode();
             }
             $orgEnvEntity = new DelightfulOrganizationEnvEntity(
                 [
-                    'magic_organization_code' => $magicOrganizationCode,
+                    'delightful_organization_code' => $delightfulOrganizationCode,
                     'origin_organization_code' => $originOrganizationCode,
-                    'environment_id' => $magicEnvEntity->getId(),
-                    'login_code' => $magicEnvEntity->getId() . $originOrganizationCode,
+                    'environment_id' => $delightfulEnvEntity->getId(),
+                    'login_code' => $delightfulEnvEntity->getId() . $originOrganizationCode,
                 ]
             );
-            $this->magicOrganizationsEnvironmentRepository->createOrganizationEnvironment($orgEnvEntity);
+            $this->delightfulOrganizationsEnvironmentRepository->createOrganizationEnvironment($orgEnvEntity);
             return $orgEnvEntity;
         } finally {
             $this->lock->release($spinLockKey, $owner);
         }
     }
 
-    public function getOrganizationEnvironmentByThirdPartyOrganizationCode(string $thirdPartyOrganizationCode, DelightfulEnvironmentEntity $magicEnvEntity): ?DelightfulOrganizationEnvEntity
+    public function getOrganizationEnvironmentByThirdPartyOrganizationCode(string $thirdPartyOrganizationCode, DelightfulEnvironmentEntity $delightfulEnvEntity): ?DelightfulOrganizationEnvEntity
     {
-        return $this->magicOrganizationsEnvironmentRepository->getOrganizationEnvironmentByThirdPartyOrganizationCode(
+        return $this->delightfulOrganizationsEnvironmentRepository->getOrganizationEnvironmentByThirdPartyOrganizationCode(
             $thirdPartyOrganizationCode,
-            $magicEnvEntity
+            $delightfulEnvEntity
         );
     }
 
     public function getDelightfulEnvironmentById(int $envId): ?DelightfulEnvironmentEntity
     {
         // 组织所在的环境
-        return $this->magicEnvironmentsRepository->getEnvById((string) $envId);
+        return $this->delightfulEnvironmentsRepository->getEnvById((string) $envId);
     }
 
-    public function getOrganizationsEnvironmentDTO(string $magicOrganizationCode): ?DelightfulOrganizationEnvDTO
+    public function getOrganizationsEnvironmentDTO(string $delightfulOrganizationCode): ?DelightfulOrganizationEnvDTO
     {
         // 组织所在的环境 id
-        $organizationEnvEntity = $this->magicOrganizationsEnvironmentRepository->getOrganizationEnvironmentByDelightfulOrganizationCode(
-            $magicOrganizationCode
+        $organizationEnvEntity = $this->delightfulOrganizationsEnvironmentRepository->getOrganizationEnvironmentByDelightfulOrganizationCode(
+            $delightfulOrganizationCode
         );
         if (! $organizationEnvEntity) {
             return null;
         }
         // 环境的详情
-        $environmentEntity = $this->magicEnvironmentsRepository->getEnvById((string) $organizationEnvEntity->getEnvironmentId());
+        $environmentEntity = $this->delightfulEnvironmentsRepository->getEnvById((string) $organizationEnvEntity->getEnvironmentId());
         if (! $environmentEntity) {
             return null;
         }
@@ -118,7 +118,7 @@ class DelightfulOrganizationEnvDomainService
     public function getEnvironmentEntities(): array
     {
         // 所有存在开放平台的环境
-        return $this->magicEnvironmentsRepository->getDelightfulEnvironments();
+        return $this->delightfulEnvironmentsRepository->getDelightfulEnvironments();
     }
 
     /**
@@ -126,24 +126,24 @@ class DelightfulOrganizationEnvDomainService
      */
     public function getEnvironmentEntitiesByIds(array $ids): array
     {
-        return $this->magicEnvironmentsRepository->getDelightfulEnvironmentsByIds($ids);
+        return $this->delightfulEnvironmentsRepository->getDelightfulEnvironmentsByIds($ids);
     }
 
     // 创建环境
     public function createEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {
-        return $this->magicEnvironmentsRepository->createDelightfulEnvironment($environmentDTO);
+        return $this->delightfulEnvironmentsRepository->createDelightfulEnvironment($environmentDTO);
     }
 
     // 更新环境
     public function updateEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {
-        return $this->magicEnvironmentsRepository->updateDelightfulEnvironment($environmentDTO);
+        return $this->delightfulEnvironmentsRepository->updateDelightfulEnvironment($environmentDTO);
     }
 
     public function getEnvironmentEntityByLoginCode(string $loginCode): ?DelightfulEnvironmentEntity
     {
-        return $this->magicEnvironmentsRepository->getEnvironmentEntityByLoginCode($loginCode);
+        return $this->delightfulEnvironmentsRepository->getEnvironmentEntityByLoginCode($loginCode);
     }
 
     public function getEnvironmentEntityByAuthorization(string $authorization): ?DelightfulEnvironmentEntity
@@ -153,25 +153,25 @@ class DelightfulOrganizationEnvDomainService
         if ($data) {
             return new DelightfulEnvironmentEntity(Json::decode($data));
         }
-        // 查询 token 是否已经绑定 (调用了 magic/auth/check)
+        // 查询 token 是否已经绑定 (调用了 delightful/auth/check)
         $tokenDTO = new DelightfulTokenEntity();
         $tokenDTO->setType(DelightfulTokenType::Account);
         $tokenDTO->setToken($tokenDTO->getDelightfulShortToken($authorization));
-        $magicTokenEntity = $this->magicTokenRepository->getTokenEntity($tokenDTO);
-        if (! $magicTokenEntity) {
+        $delightfulTokenEntity = $this->delightfulTokenRepository->getTokenEntity($tokenDTO);
+        if (! $delightfulTokenEntity) {
             return null;
         }
-        $envId = $magicTokenEntity->getExtra()?->getDelightfulEnvId();
+        $envId = $delightfulTokenEntity->getExtra()?->getDelightfulEnvId();
         if (empty($envId)) {
             return null;
         }
-        $magicEnvironmentEntity = $this->getDelightfulEnvironmentById($envId);
-        if ($magicEnvironmentEntity === null) {
+        $delightfulEnvironmentEntity = $this->getDelightfulEnvironmentById($envId);
+        if ($delightfulEnvironmentEntity === null) {
             return null;
         }
-        $data = Json::encode($magicEnvironmentEntity->toArray());
+        $data = Json::encode($delightfulEnvironmentEntity->toArray());
         $this->redis->setex($redisCacheKey, 300, $data);
-        return $magicEnvironmentEntity;
+        return $delightfulEnvironmentEntity;
     }
 
     /**
@@ -186,18 +186,18 @@ class DelightfulOrganizationEnvDomainService
         return $this->getDelightfulEnvironmentById((int) $envId);
     }
 
-    public function getOrganizationEnvironmentByOriginOrganizationCode(string $originOrganizationCode, DelightfulEnvironmentEntity $magicEnvEntity): ?DelightfulOrganizationEnvEntity
+    public function getOrganizationEnvironmentByOriginOrganizationCode(string $originOrganizationCode, DelightfulEnvironmentEntity $delightfulEnvEntity): ?DelightfulOrganizationEnvEntity
     {
-        return $this->magicOrganizationsEnvironmentRepository->getOrganizationEnvironmentByOrganizationCode(
+        return $this->delightfulOrganizationsEnvironmentRepository->getOrganizationEnvironmentByOrganizationCode(
             $originOrganizationCode,
-            $magicEnvEntity
+            $delightfulEnvEntity
         );
     }
 
-    public function getOrganizationEnvironmentByDelightfulOrganizationCode(string $magicOrganizationCode): ?DelightfulOrganizationEnvEntity
+    public function getOrganizationEnvironmentByDelightfulOrganizationCode(string $delightfulOrganizationCode): ?DelightfulOrganizationEnvEntity
     {
-        return $this->magicOrganizationsEnvironmentRepository->getOrganizationEnvironmentByDelightfulOrganizationCode(
-            $magicOrganizationCode
+        return $this->delightfulOrganizationsEnvironmentRepository->getOrganizationEnvironmentByDelightfulOrganizationCode(
+            $delightfulOrganizationCode
         );
     }
 
@@ -207,6 +207,6 @@ class DelightfulOrganizationEnvDomainService
      */
     public function getAllOrganizationCodes(): array
     {
-        return $this->magicOrganizationsEnvironmentRepository->getAllOrganizationCodes();
+        return $this->delightfulOrganizationsEnvironmentRepository->getAllOrganizationCodes();
     }
 }

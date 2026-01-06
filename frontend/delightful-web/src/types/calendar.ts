@@ -53,7 +53,7 @@ export namespace Calendar {
 		updated_at: string
 		creator: {
 			id: string
-			magic_id: string
+			delightful_id: string
 			user_id: string
 			organization_code: string
 			description: string

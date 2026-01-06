@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_comment_tree_indexes')) {
+        if (Schema::hasTable('delightful_comment_tree_indexes')) {
             return;
         }
-        Schema::create('magic_comment_tree_indexes', function (Blueprint $table) {
+        Schema::create('delightful_comment_tree_indexes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('ancestor_id')->index()->comment('祖先节点id, comments表的主键id');
             $table->unsignedBigInteger('descendant_id')->index()->comment('后代节点id, comments表的主键id');

@@ -87,10 +87,10 @@ export function LabelNode({ config, selected, deleteFn, wrapperWidth }: LabelNod
 		const isVariableNode = judgeIsVariableNode(currentNodeSchema?.id as string)
 
 		if (currentValue?.isConstant) {
-			return i18next.t("common.constants", { ns: "magicFlow" })
+			return i18next.t("common.constants", { ns: "delightfulFlow" })
 		}
 		if (isVariableNode) {
-			return i18next.t("common.variables", { ns: "magicFlow" })
+			return i18next.t("common.variables", { ns: "delightfulFlow" })
 		}
 		const result = node?.name || currentNodeSchema?.label
 
@@ -124,12 +124,12 @@ export function LabelNode({ config, selected, deleteFn, wrapperWidth }: LabelNod
 				</span>
 				<span className="field-type" {...datasetProps}>
 					{formTypeLabel}
-					{config.trans ? `(${i18next.t("common.trans", { ns: "magicFlow" })})` : ""}
+					{config.trans ? `(${i18next.t("common.trans", { ns: "delightfulFlow" })})` : ""}
 				</span>
 			</>
 		) : (
 			<span className="reference-error" {...datasetProps}>
-				{i18next.t("common.dataHasBeenDelete", { ns: "magicFlow" })}
+				{i18next.t("common.dataHasBeenDelete", { ns: "delightfulFlow" })}
 			</span>
 		)
 	}, [datasetProps, currentNodeSchema, currentValue, isReferenceSuccess])

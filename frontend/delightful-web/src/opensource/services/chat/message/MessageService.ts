@@ -299,7 +299,7 @@ class MessageService {
 			// @ts-ignore
 			seq_id: message.seq_id,
 			sender_id: message.message.sender_id,
-			magic_id: message.message.sender_id,
+			delightful_id: message.message.sender_id,
 			conversation_id: message.conversation_id,
 			type: messageType,
 			send_time: message.message.send_time.toString(),
@@ -544,7 +544,7 @@ class MessageService {
 		const renderMessage: FullMessage = {
 			temp_id: sendId,
 			message_id: sendId,
-			magic_id: "",
+			delightful_id: "",
 			seq_id: "",
 			refer_message_id: "",
 			sender_message_id: sendId,
@@ -560,7 +560,7 @@ class MessageService {
 				...message.message,
 				unread_count: 1,
 				status: ConversationMessageStatus.Unread,
-				magic_message_id: sendId,
+				delightful_message_id: sendId,
 			},
 			send_status: SendStatus.Pending, // 发送中
 			seen_status: ConversationMessageStatus.Unread, // 未读
@@ -1099,12 +1099,12 @@ class MessageService {
 
 	/**
 	 * 首次加载时拉取消息
-	 * @param magic_id 魔法ID
+	 * @param delightful_id 魔法ID
 	 * @param organization_code 组织代码
 	 * @returns 消息列表
 	 */
-	public pullMessageOnFirstLoad(magic_id: string, organization_code: string) {
-		return this.messagePullService.pullMessageOnFirstLoad(magic_id, organization_code)
+	public pullMessageOnFirstLoad(delightful_id: string, organization_code: string) {
+		return this.messagePullService.pullMessageOnFirstLoad(delightful_id, organization_code)
 	}
 
 	/**
@@ -1123,7 +1123,7 @@ class MessageService {
 		const userInfo = userInfoStore.get(userId)
 		if (userInfo) {
 			const info: User.UserInfo = {
-				magic_id: userInfo.magic_id,
+				delightful_id: userInfo.delightful_id,
 				user_id: userInfo.user_id,
 				status: userInfo.status,
 				nickname: userInfo.nickname,

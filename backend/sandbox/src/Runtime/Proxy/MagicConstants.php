@@ -17,9 +17,9 @@ class DelightfulConstants implements RuntimeProxyInterface
 {
     /**
      * @static
-     * @var array A static array of magic constant names used for redefining magic constant values
+     * @var array A static array of delightful constant names used for redefining delightful constant values
      */
-    public static array $magic_constants = [
+    public static array $delightful_constants = [
         '__LINE__',
         '__FILE__',
         '__DIR__',
@@ -38,20 +38,20 @@ class DelightfulConstants implements RuntimeProxyInterface
         return $this;
     }
 
-    /** Get PHPSandbox redefined magic constant. This is an internal PHPSandbox function but requires public access to work.
+    /** Get PHPSandbox redefined delightful constant. This is an internal PHPSandbox function but requires public access to work.
      *
-     * @param string $name Requested magic constant name (e.g. __FILE__, __LINE__, etc.)
+     * @param string $name Requested delightful constant name (e.g. __FILE__, __LINE__, etc.)
      *
-     * @return mixed Returns the redefined magic constant
+     * @return mixed Returns the redefined delightful constant
      */
-    public function _get_magic_const(string $name)
+    public function _get_delightful_const(string $name)
     {
         if ($this->options->definitions()->isDefinedDelightfulConst($name)) {
-            $magic_constant = $this->options->definitions()->getDefinedDelightfulConst($name);
-            if (is_callable($magic_constant)) {
-                return call_user_func_array($magic_constant, [$this]);
+            $delightful_constant = $this->options->definitions()->getDefinedDelightfulConst($name);
+            if (is_callable($delightful_constant)) {
+                return call_user_func_array($delightful_constant, [$this]);
             }
-            return $magic_constant;
+            return $delightful_constant;
         }
         return null;
     }

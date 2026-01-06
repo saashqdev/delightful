@@ -31,7 +31,7 @@ class DelightfulChatAggregateSearchReqDTO
 
     public string $appMessageId;
 
-    public array $magicChatMessageHistory = [];
+    public array $delightfulChatMessageHistory = [];
 
     public SearchEngineType $searchEngine = SearchEngineType::Bing;
 
@@ -45,7 +45,7 @@ class DelightfulChatAggregateSearchReqDTO
 
     protected string $organizationCode = '';
 
-    private DelightfulSeqEntity $magicSeqEntity;
+    private DelightfulSeqEntity $delightfulSeqEntity;
 
     public function getOrganizationCode(): string
     {
@@ -145,12 +145,12 @@ class DelightfulChatAggregateSearchReqDTO
 
     public function getDelightfulChatMessageHistory(): array
     {
-        return $this->magicChatMessageHistory;
+        return $this->delightfulChatMessageHistory;
     }
 
-    public function setDelightfulChatMessageHistory(array $magicChatMessageHistory): DelightfulChatAggregateSearchReqDTO
+    public function setDelightfulChatMessageHistory(array $delightfulChatMessageHistory): DelightfulChatAggregateSearchReqDTO
     {
-        $this->magicChatMessageHistory = $magicChatMessageHistory;
+        $this->delightfulChatMessageHistory = $delightfulChatMessageHistory;
         return $this;
     }
 
@@ -212,11 +212,11 @@ class DelightfulChatAggregateSearchReqDTO
 
     public function getDelightfulSeqEntity(): DelightfulSeqEntity
     {
-        return $this->magicSeqEntity ?? new DelightfulSeqEntity();
+        return $this->delightfulSeqEntity ?? new DelightfulSeqEntity();
     }
 
-    public function setDelightfulSeqEntity(DelightfulSeqEntity $magicSeqEntity): void
+    public function setDelightfulSeqEntity(DelightfulSeqEntity $delightfulSeqEntity): void
     {
-        $this->magicSeqEntity = $magicSeqEntity;
+        $this->delightfulSeqEntity = $delightfulSeqEntity;
     }
 }

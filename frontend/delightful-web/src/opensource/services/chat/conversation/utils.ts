@@ -74,7 +74,7 @@ export const getSlicedText = (message: ConversationMessage, revoked: boolean = f
 		case ConversationMessageType.DelightfulSearchCard:
 			return {
 				type: ConversationMessageType.DelightfulSearchCard,
-				text: t("chat.messageTextRender.magic_search_card", { ns: "interface" }),
+				text: t("chat.messageTextRender.delightful_search_card", { ns: "interface" }),
 			}
 		case ConversationMessageType.Files:
 			return {

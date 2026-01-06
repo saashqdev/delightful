@@ -131,7 +131,7 @@ const MessageTextRender = observer(
 					/>
 				)
 			case ConversationMessageType.DelightfulSearchCard:
-				return t("chat.messageTextRender.magic_search_card")
+				return t("chat.messageTextRender.delightful_search_card")
 			case ConversationMessageType.Files:
 				return t("chat.messageTextRender.files")
 			case ConversationMessageType.AiImage:

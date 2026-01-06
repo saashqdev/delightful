@@ -81,7 +81,7 @@ export interface PaginationResponse<D> {
 
 export type SeqResponse<S = object> = {
 	/** 用户唯一 ID */
-	magic_id: string
+	delightful_id: string
 	/** 消息序列 ID */
 	seq_id: string
 	/** 消息 ID */

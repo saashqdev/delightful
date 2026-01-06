@@ -17,7 +17,7 @@ class AttachmentModel extends AbstractModel
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_attachments';
+    protected ?string $table = 'delightful_attachments';
 
     /** php bin/hyperf.php gen:migration create_attachments_table
      * The attributes that are mass assignable.

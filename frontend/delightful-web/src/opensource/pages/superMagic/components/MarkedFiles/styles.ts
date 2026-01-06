@@ -6,7 +6,7 @@ export const useStyles = createStyles(({ token }) => ({
 		gap: 4,
 	},
 	starIcon: {
-		color: token.magicColorScales.yellow[5],
+		color: token.delightfulColorScales.yellow[5],
 	},
 	starIconButton: {
 		display: "inline-flex",
@@ -23,24 +23,24 @@ export const useStyles = createStyles(({ token }) => ({
 		padding: 0,
 	},
 	table: {
-		"& .magic-table-thead > tr > th": {
-			backgroundColor: token.magicColorScales.grey[0],
+		"& .delightful-table-thead > tr > th": {
+			backgroundColor: token.delightfulColorScales.grey[0],
 			height: 48,
 		},
-		"& .magic-table": {
+		"& .delightful-table": {
 			borderRadius: 0,
 		},
-		"& .magic-table-header": {
+		"& .delightful-table-header": {
 			borderRadius: "0px !important",
 		},
 		"& table": {
 			borderRadius: 0,
 		},
-		":where(.css-dev-only-do-not-override-tifxjm).magic-table-wrapper .magic-table-container table>thead>tr:first-child >*:first-child":
+		":where(.css-dev-only-do-not-override-tifxjm).delightful-table-wrapper .delightful-table-container table>thead>tr:first-child >*:first-child":
 			{
 				borderTopLeftRadius: 0,
 			},
-		":where(.css-dev-only-do-not-override-tifxjm).magic-table-wrapper .magic-table-container table>thead>tr:first-child >*:last-child":
+		":where(.css-dev-only-do-not-override-tifxjm).delightful-table-wrapper .delightful-table-container table>thead>tr:first-child >*:last-child":
 			{
 				borderTopRightRadius: 0,
 			},

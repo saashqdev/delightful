@@ -14,7 +14,7 @@ const useStyles = createStyles(({ token }) => ({
 	scrollbar: {
 		height: 5,
 		width: 200,
-		backgroundColor: token.magicColorUsages.fill[2],
+		backgroundColor: token.delightfulColorUsages.fill[2],
 		borderRadius: 1000,
 		position: "relative",
 	},

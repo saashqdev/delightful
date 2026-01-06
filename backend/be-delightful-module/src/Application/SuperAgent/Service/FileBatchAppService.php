@@ -252,7 +252,7 @@ class FileBatchAppService extends AbstractAppService
             return;
         }
 
-        // Prepare file data to pass to magic-service (format: ['file_id' => 'file_key'])
+        // Prepare file data to pass to delightful-service (format: ['file_id' => 'file_key'])
         $fileData = [];
         /** @var TaskFileEntity $file */
         foreach ($files as $file) {
@@ -264,7 +264,7 @@ class FileBatchAppService extends AbstractAppService
 
         // Create and publish FileBatchCompressEvent
         $event = new FileBatchCompressEvent(
-            'super_magic',
+            'super_delightful',
             $organizationCode,
             $userId,
             $batchKey,

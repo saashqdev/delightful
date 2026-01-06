@@ -9,18 +9,18 @@ TASK=${1}
 TAG=${2}
 CHECK=${!#}
 #export TAG="v1.0.2"
-# export WEB_IMAGE="magic_dev/magic-web"
-# export SERVICE_IMAGE="magic_dev/magic-service"
+# export WEB_IMAGE="delightful_dev/delightful-web"
+# export SERVICE_IMAGE="delightful_dev/delightful-service"
 # export REGISTRY="registry.cn-beijing.aliyuncs.com"
 
-export WEB_IMAGE="dtyq/magic-web"
-export SERVICE_IMAGE="dtyq/magic-service"
+export WEB_IMAGE="dtyq/delightful-web"
+export SERVICE_IMAGE="dtyq/delightful-service"
 export REGISTRY="ghcr.io"
 
 # Get the absolute path to the script directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Get the absolute path to the service directory
-SERVICE_DIR="$(cd "${SCRIPT_DIR}/../backend/magic-service" && pwd)"
+SERVICE_DIR="$(cd "${SCRIPT_DIR}/../backend/delightful-service" && pwd)"
 
 function publish() {
     echo "Publishing "$TAG" ..."

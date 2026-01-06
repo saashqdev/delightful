@@ -16,7 +16,7 @@ export const useStyles = createStyles(({ token, css, cx, responsive }) => ({
 		opacity: 0;
 		background: ${token.colorBgContainer};
 
-		--magic-button-default-hover-bg: ${darken(0.05)(token.colorBgContainer)} !important;
+		--delightful-button-default-hover-bg: ${darken(0.05)(token.colorBgContainer)} !important;
 
 		border-color: ${token.colorFillTertiary} !important;
 		border-radius: 16px !important;

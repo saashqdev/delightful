@@ -3,10 +3,10 @@
 exports[`DelightfulSearch > 快照测试 > 基础搜索框快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-input-affix-wrapper css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r1 magic-input-css-var"
+    class="delightful-input-affix-wrapper css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r1 delightful-input-css-var"
   >
     <span
-      class="magic-input-prefix"
+      class="delightful-input-prefix"
     >
       <svg
         class="tabler-icon tabler-icon-search "
@@ -29,7 +29,7 @@ exports[`DelightfulSearch > 快照测试 > 基础搜索框快照 1`] = `
       </svg>
     </span>
     <input
-      class="magic-input css-dev-only-do-not-override-yotw4n"
+      class="delightful-input css-dev-only-do-not-override-yotw4n"
       placeholder="搜索..."
       type="text"
       value=""
@@ -41,10 +41,10 @@ exports[`DelightfulSearch > 快照测试 > 基础搜索框快照 1`] = `
 exports[`DelightfulSearch > 快照测试 > 大尺寸搜索框快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-input-affix-wrapper magic-input-affix-wrapper-lg css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r6 magic-input-css-var"
+    class="delightful-input-affix-wrapper delightful-input-affix-wrapper-lg css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r6 delightful-input-css-var"
   >
     <span
-      class="magic-input-prefix"
+      class="delightful-input-prefix"
     >
       <svg
         class="tabler-icon tabler-icon-search "
@@ -67,7 +67,7 @@ exports[`DelightfulSearch > 快照测试 > 大尺寸搜索框快照 1`] = `
       </svg>
     </span>
     <input
-      class="magic-input magic-input-lg css-dev-only-do-not-override-yotw4n"
+      class="delightful-input delightful-input-lg css-dev-only-do-not-override-yotw4n"
       placeholder="搜索..."
       type="text"
       value=""
@@ -79,10 +79,10 @@ exports[`DelightfulSearch > 快照测试 > 大尺寸搜索框快照 1`] = `
 exports[`DelightfulSearch > 快照测试 > 小尺寸搜索框快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-input-affix-wrapper magic-input-affix-wrapper-sm css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r7 magic-input-css-var"
+    class="delightful-input-affix-wrapper delightful-input-affix-wrapper-sm css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r7 delightful-input-css-var"
   >
     <span
-      class="magic-input-prefix"
+      class="delightful-input-prefix"
     >
       <svg
         class="tabler-icon tabler-icon-search "
@@ -105,7 +105,7 @@ exports[`DelightfulSearch > 快照测试 > 小尺寸搜索框快照 1`] = `
       </svg>
     </span>
     <input
-      class="magic-input magic-input-sm css-dev-only-do-not-override-yotw4n"
+      class="delightful-input delightful-input-sm css-dev-only-do-not-override-yotw4n"
       placeholder="搜索..."
       type="text"
       value=""
@@ -117,17 +117,17 @@ exports[`DelightfulSearch > 快照测试 > 小尺寸搜索框快照 1`] = `
 exports[`DelightfulSearch > 快照测试 > 带前缀图标搜索框快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-input-affix-wrapper css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r3 magic-input-css-var"
+    class="delightful-input-affix-wrapper css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r3 delightful-input-css-var"
   >
     <span
-      class="magic-input-prefix"
+      class="delightful-input-prefix"
     >
       <span>
         🔍
       </span>
     </span>
     <input
-      class="magic-input css-dev-only-do-not-override-yotw4n"
+      class="delightful-input css-dev-only-do-not-override-yotw4n"
       placeholder="搜索..."
       type="text"
       value=""
@@ -139,10 +139,10 @@ exports[`DelightfulSearch > 快照测试 > 带前缀图标搜索框快照 1`] = 
 exports[`DelightfulSearch > 快照测试 > 带后缀图标搜索框快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-input-affix-wrapper css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r4 magic-input-css-var"
+    class="delightful-input-affix-wrapper css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r4 delightful-input-css-var"
   >
     <span
-      class="magic-input-prefix"
+      class="delightful-input-prefix"
     >
       <svg
         class="tabler-icon tabler-icon-search "
@@ -165,13 +165,13 @@ exports[`DelightfulSearch > 快照测试 > 带后缀图标搜索框快照 1`] = 
       </svg>
     </span>
     <input
-      class="magic-input css-dev-only-do-not-override-yotw4n"
+      class="delightful-input css-dev-only-do-not-override-yotw4n"
       placeholder="搜索..."
       type="text"
       value=""
     />
     <span
-      class="magic-input-suffix"
+      class="delightful-input-suffix"
     >
       <span>
         📝
@@ -184,10 +184,10 @@ exports[`DelightfulSearch > 快照测试 > 带后缀图标搜索框快照 1`] = 
 exports[`DelightfulSearch > 快照测试 > 带边框搜索框快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-input-affix-wrapper css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r8 magic-input-css-var"
+    class="delightful-input-affix-wrapper css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r8 delightful-input-css-var"
   >
     <span
-      class="magic-input-prefix"
+      class="delightful-input-prefix"
     >
       <svg
         class="tabler-icon tabler-icon-search "
@@ -210,7 +210,7 @@ exports[`DelightfulSearch > 快照测试 > 带边框搜索框快照 1`] = `
       </svg>
     </span>
     <input
-      class="magic-input css-dev-only-do-not-override-yotw4n"
+      class="delightful-input css-dev-only-do-not-override-yotw4n"
       placeholder="搜索..."
       type="text"
       value=""
@@ -222,10 +222,10 @@ exports[`DelightfulSearch > 快照测试 > 带边框搜索框快照 1`] = `
 exports[`DelightfulSearch > 快照测试 > 带默认值搜索框快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-input-affix-wrapper css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r2 magic-input-css-var"
+    class="delightful-input-affix-wrapper css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r2 delightful-input-css-var"
   >
     <span
-      class="magic-input-prefix"
+      class="delightful-input-prefix"
     >
       <svg
         class="tabler-icon tabler-icon-search "
@@ -248,7 +248,7 @@ exports[`DelightfulSearch > 快照测试 > 带默认值搜索框快照 1`] = `
       </svg>
     </span>
     <input
-      class="magic-input css-dev-only-do-not-override-yotw4n"
+      class="delightful-input css-dev-only-do-not-override-yotw4n"
       type="text"
       value="默认搜索词"
     />
@@ -259,10 +259,10 @@ exports[`DelightfulSearch > 快照测试 > 带默认值搜索框快照 1`] = `
 exports[`DelightfulSearch > 快照测试 > 禁用状态搜索框快照 1`] = `
 <DocumentFragment>
   <span
-    class="magic-input-affix-wrapper magic-input-disabled magic-input-affix-wrapper-disabled css-dev-only-do-not-override-yotw4n magic-input-outlined acss-9dldd5 css-var-r5 magic-input-css-var"
+    class="delightful-input-affix-wrapper delightful-input-disabled delightful-input-affix-wrapper-disabled css-dev-only-do-not-override-yotw4n delightful-input-outlined acss-9dldd5 css-var-r5 delightful-input-css-var"
   >
     <span
-      class="magic-input-prefix"
+      class="delightful-input-prefix"
     >
       <svg
         class="tabler-icon tabler-icon-search "
@@ -285,7 +285,7 @@ exports[`DelightfulSearch > 快照测试 > 禁用状态搜索框快照 1`] = `
       </svg>
     </span>
     <input
-      class="magic-input magic-input-disabled css-dev-only-do-not-override-yotw4n"
+      class="delightful-input delightful-input-disabled css-dev-only-do-not-override-yotw4n"
       disabled=""
       placeholder="搜索..."
       type="text"

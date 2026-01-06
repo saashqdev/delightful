@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_message', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_message', function (Blueprint $table) {
             // add attachments field, place after tool fieldafter
             $table->json('attachments')->nullable()->comment('attachment information')->after('tool');
         });
@@ -25,7 +25,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_message', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_message', function (Blueprint $table) {
             // rollback when removing attachments field
             $table->dropColumn('attachments');
         });

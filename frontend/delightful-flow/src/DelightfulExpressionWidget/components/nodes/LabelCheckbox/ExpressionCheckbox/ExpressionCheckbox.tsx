@@ -16,7 +16,7 @@ const CheckboxSelect = ({ value, onChange }: CheckboxSelectProps) => {
 	})
 
 	return (
-		<div className="magic-checkbox-select" ref={wrapperRef}>
+		<div className="delightful-checkbox-select" ref={wrapperRef}>
 			<div
 				className="checkbox-select"
 				ref={selectContainerRef}

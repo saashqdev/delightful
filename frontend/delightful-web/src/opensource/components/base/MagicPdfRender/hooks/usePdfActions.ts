@@ -145,7 +145,7 @@ export function usePdfActions({
 			link.click()
 			URL.revokeObjectURL(url)
 		} else {
-			message.warning(t("magicPdfRender.status.downloadUnavailable"))
+			message.warning(t("delightfulPdfRender.status.downloadUnavailable"))
 		}
 	}, [file, t])
 
@@ -177,7 +177,7 @@ export function usePdfActions({
 		(err: Error) => {
 			console.error("PDF document load failed:", err)
 			setLoading(false)
-			setError(err.message || t("magicPdfRender.status.loadFailed"))
+			setError(err.message || t("delightfulPdfRender.status.loadFailed"))
 		},
 		[setLoading, setError, t],
 	)

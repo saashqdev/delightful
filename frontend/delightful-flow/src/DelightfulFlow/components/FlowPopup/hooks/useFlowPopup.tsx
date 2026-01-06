@@ -38,7 +38,7 @@ export default function useFlowPopup() {
 			return (
 				<div className={styles.nodeList}>
 					<span className={styles.noContent}>
-						{i18next.t("flow.withoutMatchResult", { ns: "magicFlow" })}
+						{i18next.t("flow.withoutMatchResult", { ns: "delightfulFlow" })}
 					</span>
 				</div>
 			)

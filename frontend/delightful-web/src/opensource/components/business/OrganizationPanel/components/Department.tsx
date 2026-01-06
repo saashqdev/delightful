@@ -27,7 +27,7 @@ export const useStyles = createStyles(({ isDarkMode, css, prefixCls, token }) =>
 		`,
 		count: css`
 			overflow: hidden;
-			color: ${isDarkMode ? token.magicColorScales.grey[6] : token.magicColorUsages.text[2]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[6] : token.delightfulColorUsages.text[2]};
 			text-overflow: ellipsis;
 			font-size: 12px;
 			font-weight: 400;
@@ -35,12 +35,12 @@ export const useStyles = createStyles(({ isDarkMode, css, prefixCls, token }) =>
 		`,
 		arrow: css`
 			color: ${isDarkMode
-				? token.magicColorScales.grey[2]
-				: token.magicColorUsages.text[2]} !important;
+				? token.delightfulColorScales.grey[2]
+				: token.delightfulColorUsages.text[2]} !important;
 		`,
 		departmentIcon: css`
 			color: white;
-			background: ${token.magicColorScales.brand[5]};
+			background: ${token.delightfulColorScales.brand[5]};
 			--${prefixCls}-border-radius: 8px;
 			width: 32px;
 			height: 32px;

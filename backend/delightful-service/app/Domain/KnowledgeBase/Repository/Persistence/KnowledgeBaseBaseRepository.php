@@ -50,22 +50,22 @@ class KnowledgeBaseBaseRepository extends KnowledgeBaseAbstractRepository implem
         return $result;
     }
 
-    public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $magicFlowKnowledgeEntity): KnowledgeBaseEntity
+    public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): KnowledgeBaseEntity
     {
-        if (! $magicFlowKnowledgeEntity->getId()) {
+        if (! $delightfulFlowKnowledgeEntity->getId()) {
             $model = new KnowledgeBaseModel();
         } else {
             $builder = $this->createBuilder($dataIsolation, KnowledgeBaseModel::query());
             /** @var KnowledgeBaseModel $model */
-            $model = $builder->where('id', $magicFlowKnowledgeEntity->getId())->first();
+            $model = $builder->where('id', $delightfulFlowKnowledgeEntity->getId())->first();
         }
 
-        $model->fill(DelightfulFlowKnowledgeFactory::entityToAttributes($magicFlowKnowledgeEntity));
+        $model->fill(DelightfulFlowKnowledgeFactory::entityToAttributes($delightfulFlowKnowledgeEntity));
         $model->save();
 
-        $magicFlowKnowledgeEntity->setId($model->id);
+        $delightfulFlowKnowledgeEntity->setId($model->id);
 
-        return $magicFlowKnowledgeEntity;
+        return $delightfulFlowKnowledgeEntity;
     }
 
     public function queries(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseQuery $query, Page $page): array
@@ -113,13 +113,13 @@ class KnowledgeBaseBaseRepository extends KnowledgeBaseAbstractRepository implem
         return $data;
     }
 
-    public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $magicFlowKnowledgeEntity): void
+    public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
     {
-        if (empty($magicFlowKnowledgeEntity->getId())) {
+        if (empty($delightfulFlowKnowledgeEntity->getId())) {
             return;
         }
         $builder = $this->createBuilder($dataIsolation, KnowledgeBaseModel::query());
-        $builder->where('id', $magicFlowKnowledgeEntity->getId())->delete();
+        $builder->where('id', $delightfulFlowKnowledgeEntity->getId())->delete();
     }
 
     public function changeSyncStatus(KnowledgeBaseEntity $entity): void

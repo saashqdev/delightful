@@ -14,10 +14,10 @@ const BaseColorProvider = ({ children }: BaseColorProviderProps) => {
 
 	const value = useMemo(() => {
 		return {
-			colorScales: token.magicColorScales || colorScales,
-			colorUsages: token.magicColorUsages || colorUsages,
+			colorScales: token.delightfulColorScales || colorScales,
+			colorUsages: token.delightfulColorUsages || colorUsages,
 		}
-	}, [token.magicColorScales, token.magicColorUsages])
+	}, [token.delightfulColorScales, token.delightfulColorUsages])
 
 	return <BaseColorContext.Provider value={value}>{children}</BaseColorContext.Provider>
 }

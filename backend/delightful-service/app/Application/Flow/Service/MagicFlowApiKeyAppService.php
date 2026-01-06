@@ -20,25 +20,25 @@ class DelightfulFlowApiKeyAppService extends AbstractFlowAppService
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
 
-        $magicFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $savingDelightfulFlowApiKeyEntity->getFlowCode());
-        if (! $magicFlow) {
+        $delightfulFlow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $savingDelightfulFlowApiKeyEntity->getFlowCode());
+        if (! $delightfulFlow) {
             ExceptionBuilder::throw(FlowErrorCode::BusinessException, 'flow.common.not_found', ['label' => $savingDelightfulFlowApiKeyEntity->getFlowCode()]);
         }
         // 需要至少能查看，才能维护自己的 API-KEY
-        $this->getFlowOperation($dataIsolation, $magicFlow)->validate('r', $savingDelightfulFlowApiKeyEntity->getFlowCode());
-        return $this->magicFlowApiKeyDomainService->save($dataIsolation, $savingDelightfulFlowApiKeyEntity);
+        $this->getFlowOperation($dataIsolation, $delightfulFlow)->validate('r', $savingDelightfulFlowApiKeyEntity->getFlowCode());
+        return $this->delightfulFlowApiKeyDomainService->save($dataIsolation, $savingDelightfulFlowApiKeyEntity);
     }
 
     public function changeSecretKey(Authenticatable $authorization, string $flowId, string $code): DelightfulFlowApiKeyEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
-        return $this->magicFlowApiKeyDomainService->changeSecretKey($dataIsolation, $code, $authorization->getId());
+        return $this->delightfulFlowApiKeyDomainService->changeSecretKey($dataIsolation, $code, $authorization->getId());
     }
 
     public function getByCode(Authenticatable $authorization, string $flowId, string $code): ?DelightfulFlowApiKeyEntity
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
-        return $this->magicFlowApiKeyDomainService->getByCode($dataIsolation, $code, $authorization->getId());
+        return $this->delightfulFlowApiKeyDomainService->getByCode($dataIsolation, $code, $authorization->getId());
     }
 
     /**
@@ -47,12 +47,12 @@ class DelightfulFlowApiKeyAppService extends AbstractFlowAppService
     public function queries(Authenticatable $authorization, DelightfulFlowApiKeyQuery $query, Page $page): array
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
-        return $this->magicFlowApiKeyDomainService->queries($dataIsolation, $query, $page);
+        return $this->delightfulFlowApiKeyDomainService->queries($dataIsolation, $query, $page);
     }
 
     public function destroy(Authenticatable $authorization, string $code): void
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
-        $this->magicFlowApiKeyDomainService->destroy($dataIsolation, $code, $authorization->getId());
+        $this->delightfulFlowApiKeyDomainService->destroy($dataIsolation, $code, $authorization->getId());
     }
 }

@@ -24,7 +24,7 @@ class OrganizationAdminModel extends AbstractModel
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_organization_admins';
+    protected ?string $table = 'delightful_organization_admins';
 
     /**
      * The attributes that are mass assignable.
@@ -32,7 +32,7 @@ class OrganizationAdminModel extends AbstractModel
     protected array $fillable = [
         'user_id',
         'organization_code',
-        'magic_id',
+        'delightful_id',
         'grantor_user_id',
         'granted_at',
         'status',

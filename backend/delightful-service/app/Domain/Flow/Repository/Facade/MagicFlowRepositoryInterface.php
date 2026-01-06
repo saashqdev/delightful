@@ -15,7 +15,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 interface DelightfulFlowRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $magicFlowEntity): DelightfulFlowEntity;
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlowEntity): DelightfulFlowEntity;
 
     public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowEntity;
 
@@ -26,7 +26,7 @@ interface DelightfulFlowRepositoryInterface
 
     public function getByName(FlowDataIsolation $dataIsolation, string $name, Type $type): ?DelightfulFlowEntity;
 
-    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $magicFlowEntity): void;
+    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlowEntity): void;
 
     /**
      * @return array{total: int, list: array<DelightfulFlowEntity>}

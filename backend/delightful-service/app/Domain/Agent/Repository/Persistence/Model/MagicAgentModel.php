@@ -23,7 +23,7 @@ class DelightfulAgentModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_bots';
+    protected ?string $table = 'delightful_bots';
 
     /**
      * The attributes that are mass assignable.

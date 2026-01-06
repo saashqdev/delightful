@@ -14,12 +14,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_contact_users')) {
+        if (Schema::hasTable('delightful_contact_users')) {
             return;
         }
-        Schema::create('magic_contact_users', static function (Blueprint $table) {
+        Schema::create('delightful_contact_users', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('magic_id', 64)->comment('账号id,冗余字段')->default('');
+            $table->string('delightful_id', 64)->comment('账号id,冗余字段')->default('');
             // 组织编码
             $table->string('organization_code', 64)->comment('组织编码')->default('');
             // user_id
@@ -37,7 +37,7 @@ return new class extends Migration {
             $table->string('user_manual', 64)->comment('用户说明书(云文档)')->default('');
             // 索引设置
             $table->unique(['user_id'], 'unq_user_organization_id');
-            $table->unique(['magic_id', 'organization_code'], 'unq_magic_id_organization_code');
+            $table->unique(['delightful_id', 'organization_code'], 'unq_delightful_id_organization_code');
             $table->index(['organization_code'], 'idx_organization_code');
             $table->timestamps();
             $table->softDeletes();
@@ -50,6 +50,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_contact_users');
+        Schema::dropIfExists('delightful_contact_users');
     }
 };

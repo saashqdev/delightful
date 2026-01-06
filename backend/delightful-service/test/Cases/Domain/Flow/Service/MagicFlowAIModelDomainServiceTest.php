@@ -57,10 +57,10 @@ class DelightfulFlowAIModelDomainServiceTest extends BaseTest
     private function getRepositoryTemplate(): DelightfulFlowAIModelRepositoryInterface
     {
         return new class implements DelightfulFlowAIModelRepositoryInterface {
-            public function save(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelEntity $magicFlowAIModelEntity): DelightfulFlowAIModelEntity
+            public function save(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelEntity $delightfulFlowAIModelEntity): DelightfulFlowAIModelEntity
             {
-                $magicFlowAIModelEntity->setId(123);
-                return $magicFlowAIModelEntity;
+                $delightfulFlowAIModelEntity->setId(123);
+                return $delightfulFlowAIModelEntity;
             }
 
             public function getByName(FlowDataIsolation $dataIsolation, string $name): ?DelightfulFlowAIModelEntity

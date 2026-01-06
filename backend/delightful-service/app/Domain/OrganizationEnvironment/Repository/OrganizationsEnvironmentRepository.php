@@ -18,63 +18,63 @@ use Hyperf\DbConnection\Db;
 
 readonly class OrganizationsEnvironmentRepository implements OrganizationsEnvironmentRepositoryInterface
 {
-    public function __construct(private DelightfulOrganizationsEnvironmentModel $magicEnvironments)
+    public function __construct(private DelightfulOrganizationsEnvironmentModel $delightfulEnvironments)
     {
     }
 
-    public function getOrganizationEnvironmentByDelightfulOrganizationCode(string $magicOrganizationCode): ?DelightfulOrganizationEnvEntity
+    public function getOrganizationEnvironmentByDelightfulOrganizationCode(string $delightfulOrganizationCode): ?DelightfulOrganizationEnvEntity
     {
-        $magicOrganizationEnvData = $this->getOrganizationEnvironmentByDelightfulOrganizationCodeArray($magicOrganizationCode);
-        if ($magicOrganizationEnvData === null) {
+        $delightfulOrganizationEnvData = $this->getOrganizationEnvironmentByDelightfulOrganizationCodeArray($delightfulOrganizationCode);
+        if ($delightfulOrganizationEnvData === null) {
             return null;
         }
-        return DelightfulEnvironmentAssembler::getDelightfulOrganizationEnvEntity($magicOrganizationEnvData);
+        return DelightfulEnvironmentAssembler::getDelightfulOrganizationEnvEntity($delightfulOrganizationEnvData);
     }
 
-    public function getOrganizationEnvironmentByOrganizationCode(string $originOrganizationCode, DelightfulEnvironmentEntity $magicEnvironmentEntity): ?DelightfulOrganizationEnvEntity
+    public function getOrganizationEnvironmentByOrganizationCode(string $originOrganizationCode, DelightfulEnvironmentEntity $delightfulEnvironmentEntity): ?DelightfulOrganizationEnvEntity
     {
-        $magicOrganizationEnv = $this->magicEnvironments->newQuery()
-            ->whereIn('environment_id', $magicEnvironmentEntity->getRelationEnvIds())
+        $delightfulOrganizationEnv = $this->delightfulEnvironments->newQuery()
+            ->whereIn('environment_id', $delightfulEnvironmentEntity->getRelationEnvIds())
             ->where('origin_organization_code', $originOrganizationCode)
             ->first();
 
-        if ($magicOrganizationEnv === null) {
+        if ($delightfulOrganizationEnv === null) {
             return null;
         }
-        return DelightfulEnvironmentAssembler::getDelightfulOrganizationEnvEntity($magicOrganizationEnv->toArray());
+        return DelightfulEnvironmentAssembler::getDelightfulOrganizationEnvEntity($delightfulOrganizationEnv->toArray());
     }
 
-    public function createOrganizationEnvironment(DelightfulOrganizationEnvEntity $magicOrganizationEnvEntity): void
+    public function createOrganizationEnvironment(DelightfulOrganizationEnvEntity $delightfulOrganizationEnvEntity): void
     {
-        if (empty($magicOrganizationEnvEntity->getId())) {
-            $magicOrganizationEnvEntity->setId((string) IdGenerator::getSnowId());
+        if (empty($delightfulOrganizationEnvEntity->getId())) {
+            $delightfulOrganizationEnvEntity->setId((string) IdGenerator::getSnowId());
         }
         $time = date('Y-m-d H:i:s');
-        $magicOrganizationEnvEntity->setCreatedAt($time);
-        $magicOrganizationEnvEntity->setUpdatedAt($time);
-        $this->magicEnvironments->newQuery()->create($magicOrganizationEnvEntity->toArray());
+        $delightfulOrganizationEnvEntity->setCreatedAt($time);
+        $delightfulOrganizationEnvEntity->setUpdatedAt($time);
+        $this->delightfulEnvironments->newQuery()->create($delightfulOrganizationEnvEntity->toArray());
     }
 
     /**
-     * @param string[] $magicOrganizationCodes
+     * @param string[] $delightfulOrganizationCodes
      * @return DelightfulOrganizationEnvEntity[]
      */
-    public function getOrganizationEnvironments(array $magicOrganizationCodes, DelightfulEnvironmentEntity $magicEnvironmentEntity): array
+    public function getOrganizationEnvironments(array $delightfulOrganizationCodes, DelightfulEnvironmentEntity $delightfulEnvironmentEntity): array
     {
-        $magicOrganizationEnvironments = $this->magicEnvironments->newQuery()
-            ->whereIn('magic_organization_code', $magicOrganizationCodes)
-            ->whereIn('environment_id', $magicEnvironmentEntity->getRelationEnvIds())
+        $delightfulOrganizationEnvironments = $this->delightfulEnvironments->newQuery()
+            ->whereIn('delightful_organization_code', $delightfulOrganizationCodes)
+            ->whereIn('environment_id', $delightfulEnvironmentEntity->getRelationEnvIds())
             ->get()
             ->toArray();
 
-        if (empty($magicOrganizationEnvironments)) {
+        if (empty($delightfulOrganizationEnvironments)) {
             return [];
         }
-        $magicOrganizationEnvEntities = [];
-        foreach ($magicOrganizationEnvironments as $magicOrganizationEnvironment) {
-            $magicOrganizationEnvEntities[] = DelightfulEnvironmentAssembler::getDelightfulOrganizationEnvEntity($magicOrganizationEnvironment);
+        $delightfulOrganizationEnvEntities = [];
+        foreach ($delightfulOrganizationEnvironments as $delightfulOrganizationEnvironment) {
+            $delightfulOrganizationEnvEntities[] = DelightfulEnvironmentAssembler::getDelightfulOrganizationEnvEntity($delightfulOrganizationEnvironment);
         }
-        return $magicOrganizationEnvEntities;
+        return $delightfulOrganizationEnvEntities;
     }
 
     /**
@@ -83,34 +83,34 @@ readonly class OrganizationsEnvironmentRepository implements OrganizationsEnviro
      */
     public function getAllOrganizationCodes(): array
     {
-        $query = $this->magicEnvironments->newQuery()->select('magic_organization_code');
+        $query = $this->delightfulEnvironments->newQuery()->select('delightful_organization_code');
         $result = Db::select($query->toSql(), $query->getBindings());
-        return array_column($result, 'magic_organization_code');
+        return array_column($result, 'delightful_organization_code');
     }
 
-    public function getOrganizationEnvironmentByThirdPartyOrganizationCode(string $thirdPartyOrganizationCode, DelightfulEnvironmentEntity $magicEnvironmentEntity): ?DelightfulOrganizationEnvEntity
+    public function getOrganizationEnvironmentByThirdPartyOrganizationCode(string $thirdPartyOrganizationCode, DelightfulEnvironmentEntity $delightfulEnvironmentEntity): ?DelightfulOrganizationEnvEntity
     {
-        $magicOrganizationEnv = $this->magicEnvironments->newQuery()
-            ->whereIn('environment_id', $magicEnvironmentEntity->getRelationEnvIds())
+        $delightfulOrganizationEnv = $this->delightfulEnvironments->newQuery()
+            ->whereIn('environment_id', $delightfulEnvironmentEntity->getRelationEnvIds())
             ->where('origin_organization_code', $thirdPartyOrganizationCode)
             ->first();
 
-        if ($magicOrganizationEnv === null) {
+        if ($delightfulOrganizationEnv === null) {
             return null;
         }
-        return DelightfulEnvironmentAssembler::getDelightfulOrganizationEnvEntity($magicOrganizationEnv->toArray());
+        return DelightfulEnvironmentAssembler::getDelightfulOrganizationEnvEntity($delightfulOrganizationEnv->toArray());
     }
 
-    #[Cacheable(prefix: 'magic_organizations_environment', ttl: 60, value: '_#{magicOrganizationCode}')]
-    private function getOrganizationEnvironmentByDelightfulOrganizationCodeArray(string $magicOrganizationCode): ?array
+    #[Cacheable(prefix: 'delightful_organizations_environment', ttl: 60, value: '_#{delightfulOrganizationCode}')]
+    private function getOrganizationEnvironmentByDelightfulOrganizationCodeArray(string $delightfulOrganizationCode): ?array
     {
-        $magicOrganizationEnv = $this->magicEnvironments->newQuery()
-            ->where('magic_organization_code', $magicOrganizationCode)
+        $delightfulOrganizationEnv = $this->delightfulEnvironments->newQuery()
+            ->where('delightful_organization_code', $delightfulOrganizationCode)
             ->first();
 
-        if ($magicOrganizationEnv === null) {
+        if ($delightfulOrganizationEnv === null) {
             return null;
         }
-        return $magicOrganizationEnv->toArray();
+        return $delightfulOrganizationEnv->toArray();
     }
 }

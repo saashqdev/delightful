@@ -14,8 +14,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::dropIfExists('magic_flow_execute_logs');
-        Schema::create('magic_flow_execute_logs', function (Blueprint $table) {
+        Schema::dropIfExists('delightful_flow_execute_logs');
+        Schema::create('delightful_flow_execute_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('execute_data_id')->default('')->comment('执行数据ID');
             $table->string('conversation_id')->default('')->comment('会话ID');
@@ -33,6 +33,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_flow_execute_logs');
+        Schema::dropIfExists('delightful_flow_execute_logs');
     }
 };

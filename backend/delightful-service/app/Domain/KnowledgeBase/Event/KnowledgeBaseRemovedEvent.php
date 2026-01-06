@@ -14,7 +14,7 @@ class KnowledgeBaseRemovedEvent
 {
     public function __construct(
         public KnowledgeBaseDataIsolation $dataIsolation,
-        public KnowledgeBaseEntity $magicFlowKnowledgeEntity,
+        public KnowledgeBaseEntity $delightfulFlowKnowledgeEntity,
     ) {
     }
 }

@@ -1,4 +1,4 @@
-import { magic } from "@/enhance/magicElectron"
+import { delightful } from "@/enhance/delightfulElectron"
 import { useEffect } from "react"
 
 interface DelightfulElectronViewHookProps {
@@ -10,7 +10,7 @@ export default function useView(props: DelightfulElectronViewHookProps) {
 	const { onShow, onHide } = props
 
 	useEffect(() => {
-		const unSubscribe = magic?.view?.onShow?.(() => {
+		const unSubscribe = delightful?.view?.onShow?.(() => {
 			onShow?.()
 		})
 		window.addEventListener("beforeunload", unSubscribe)
@@ -21,7 +21,7 @@ export default function useView(props: DelightfulElectronViewHookProps) {
 	}, [onShow])
 
 	useEffect(() => {
-		const unSubscribe = magic?.view?.onHide?.(() => {
+		const unSubscribe = delightful?.view?.onHide?.(() => {
 			onHide?.()
 		})
 		window.addEventListener("beforeunload", unSubscribe)

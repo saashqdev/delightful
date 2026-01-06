@@ -14,14 +14,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // Change magic_super_agent_message table fields from text to longtext
-        Schema::table('magic_super_agent_message', function (Blueprint $table) {
+        // Change delightful_super_agent_message table fields from text to longtext
+        Schema::table('delightful_super_agent_message', function (Blueprint $table) {
             $table->longText('content')->change();
             $table->longText('raw_content')->nullable()->change();
         });
 
-        // Change magic_super_agent_task table field from text to longtext
-        Schema::table('magic_super_agent_task', function (Blueprint $table) {
+        // Change delightful_super_agent_task table field from text to longtext
+        Schema::table('delightful_super_agent_task', function (Blueprint $table) {
             $table->longText('prompt')->change();
         });
     }

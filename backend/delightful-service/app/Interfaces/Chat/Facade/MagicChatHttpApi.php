@@ -48,11 +48,11 @@ class DelightfulChatHttpApi extends AbstractApi
     public function __construct(
         private readonly ValidatorFactoryInterface $validatorFactory,
         private readonly StdoutLoggerInterface $logger,
-        private readonly DelightfulChatMessageAppService $magicChatMessageAppService,
-        private readonly DelightfulConversationAppService $magicConversationAppService,
+        private readonly DelightfulChatMessageAppService $delightfulChatMessageAppService,
+        private readonly DelightfulConversationAppService $delightfulConversationAppService,
         private readonly DelightfulChatGroupAppService $chatGroupAppService,
-        protected readonly DelightfulAgentAppService $magicAgentAppService,
-        protected readonly DelightfulControlMessageAppService $magicControlMessageAppService,
+        protected readonly DelightfulAgentAppService $delightfulAgentAppService,
+        protected readonly DelightfulControlMessageAppService $delightfulControlMessageAppService,
         private readonly Redis $redis,
     ) {
     }
@@ -70,7 +70,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $params = $this->checkParams($params, $rules);
         $this->logger->info('pullMessage:' . Json::encode($params));
         $authorization = $this->getAuthorization();
-        return $this->magicChatMessageAppService->pullByPageToken($authorization, $params);
+        return $this->delightfulChatMessageAppService->pullByPageToken($authorization, $params);
     }
 
     public function pullByAppMessageId(RequestInterface $request, string $appMessageId): array
@@ -82,7 +82,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $params = $this->checkParams($params, $rules);
         $this->logger->info('pullMessageByAppMessageId:' . $appMessageId);
         $authorization = $this->getAuthorization();
-        return $this->magicChatMessageAppService->pullByAppMessageId($authorization, $appMessageId, $params['page_token'] ?? '');
+        return $this->delightfulChatMessageAppService->pullByAppMessageId($authorization, $appMessageId, $params['page_token'] ?? '');
     }
 
     /**
@@ -101,7 +101,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $messagesQueryDTO->setOrder(Order::Desc);
         $messagesQueryDTO->setPageToken($params['page_token'] ?? '');
         $authorization = $this->getAuthorization();
-        return $this->magicChatMessageAppService->pullRecentMessage($authorization, $messagesQueryDTO);
+        return $this->delightfulChatMessageAppService->pullRecentMessage($authorization, $messagesQueryDTO);
     }
 
     /**
@@ -132,7 +132,7 @@ class DelightfulChatHttpApi extends AbstractApi
                 'is_mark' => isset($params['is_mark']) ? (int) $params['is_mark'] : null,
             ]
         );
-        return $this->magicChatMessageAppService->getConversations($authorization, $dto)->toArray();
+        return $this->delightfulChatMessageAppService->getConversations($authorization, $dto)->toArray();
     }
 
     /**
@@ -142,7 +142,7 @@ class DelightfulChatHttpApi extends AbstractApi
     {
         $authorization = $this->getAuthorization();
         $topicIds = (array) $request->input('topic_ids', []);
-        return $this->magicChatMessageAppService->getTopicsByConversationId($authorization, $conversationId, $topicIds);
+        return $this->delightfulChatMessageAppService->getTopicsByConversationId($authorization, $conversationId, $topicIds);
     }
 
     /**
@@ -172,7 +172,7 @@ class DelightfulChatHttpApi extends AbstractApi
             ->setLimit($params['limit'] ?? 100)
             ->setOrder($order);
         $authorization = $this->getAuthorization();
-        return $this->magicChatMessageAppService->getMessagesByConversationId($authorization, $conversationId, $conversationMessagesQueryDTO);
+        return $this->delightfulChatMessageAppService->getMessagesByConversationId($authorization, $conversationId, $conversationMessagesQueryDTO);
     }
 
     /**
@@ -192,7 +192,7 @@ class DelightfulChatHttpApi extends AbstractApi
             ->setLimit($limit)
             ->setOrder(Order::Desc);
         $authorization = $this->getAuthorization();
-        return $this->magicChatMessageAppService->getConversationsMessagesGroupById($authorization, $conversationsMessageQueryDTO);
+        return $this->delightfulChatMessageAppService->getConversationsMessagesGroupById($authorization, $conversationsMessageQueryDTO);
     }
 
     /**
@@ -202,7 +202,7 @@ class DelightfulChatHttpApi extends AbstractApi
     {
         try {
             $authorization = $this->getAuthorization();
-            $topicName = $this->magicChatMessageAppService->intelligenceRenameTopicName($authorization, $topicId, $conversationId);
+            $topicName = $this->delightfulChatMessageAppService->intelligenceRenameTopicName($authorization, $topicId, $conversationId);
             return [
                 'conversation_id' => $conversationId,
                 'id' => $topicId,
@@ -232,16 +232,16 @@ class DelightfulChatHttpApi extends AbstractApi
         ];
         $params = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
-        $magicGroupDTO = new DelightfulGroupEntity();
-        $magicGroupDTO->setGroupAvatar($params['group_avatar']);
-        $magicGroupDTO->setGroupName($params['group_name']);
-        $magicGroupDTO->setGroupType(GroupTypeEnum::from($params['group_type']));
-        $magicGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
+        $delightfulGroupDTO = new DelightfulGroupEntity();
+        $delightfulGroupDTO->setGroupAvatar($params['group_avatar']);
+        $delightfulGroupDTO->setGroupName($params['group_name']);
+        $delightfulGroupDTO->setGroupType(GroupTypeEnum::from($params['group_type']));
+        $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
         // 人员和部门不能同时为空
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }
-        return $this->chatGroupAppService->createChatGroup($params['user_ids'], $params['department_ids'], $authorization, $magicGroupDTO);
+        return $this->chatGroupAppService->createChatGroup($params['user_ids'], $params['department_ids'], $authorization, $delightfulGroupDTO);
     }
 
     /**
@@ -256,23 +256,23 @@ class DelightfulChatHttpApi extends AbstractApi
         ];
         $params = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
-        $magicGroupDTO = new DelightfulGroupEntity();
-        $magicGroupDTO->setId($id);
+        $delightfulGroupDTO = new DelightfulGroupEntity();
+        $delightfulGroupDTO->setId($id);
         // 人员和部门不能同时为空
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }
-        return $this->chatGroupAppService->groupAddUsers($params['user_ids'], $params['department_ids'], $authorization, $magicGroupDTO);
+        return $this->chatGroupAppService->groupAddUsers($params['user_ids'], $params['department_ids'], $authorization, $delightfulGroupDTO);
     }
 
     public function leaveGroupConversation(string $id): array
     {
         $authorization = $this->getAuthorization();
-        $magicGroupDTO = new DelightfulGroupEntity();
-        $magicGroupDTO->setId($id);
+        $delightfulGroupDTO = new DelightfulGroupEntity();
+        $delightfulGroupDTO->setId($id);
         return $this->chatGroupAppService->leaveGroupConversation(
             $authorization,
-            $magicGroupDTO,
+            $delightfulGroupDTO,
             [$authorization->getId()],
             ControlMessageType::GroupUsersRemove
         );
@@ -286,11 +286,11 @@ class DelightfulChatHttpApi extends AbstractApi
         ];
         $params = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
-        $magicGroupDTO = new DelightfulGroupEntity();
-        $magicGroupDTO->setId($id);
+        $delightfulGroupDTO = new DelightfulGroupEntity();
+        $delightfulGroupDTO->setId($id);
         return $this->chatGroupAppService->groupKickUsers(
             $authorization,
-            $magicGroupDTO,
+            $delightfulGroupDTO,
             $params['user_ids'],
             ControlMessageType::GroupUsersRemove
         );
@@ -302,9 +302,9 @@ class DelightfulChatHttpApi extends AbstractApi
     public function groupDelete(string $id): array
     {
         $authorization = $this->getAuthorization();
-        $magicGroupDTO = new DelightfulGroupEntity();
-        $magicGroupDTO->setId($id);
-        return $this->chatGroupAppService->deleteGroup($authorization, $magicGroupDTO);
+        $delightfulGroupDTO = new DelightfulGroupEntity();
+        $delightfulGroupDTO->setId($id);
+        return $this->chatGroupAppService->deleteGroup($authorization, $delightfulGroupDTO);
     }
 
     /**
@@ -332,15 +332,15 @@ class DelightfulChatHttpApi extends AbstractApi
         ];
         $params = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
-        $magicGroupDTO = new DelightfulGroupEntity();
-        $magicGroupDTO->setId($id);
-        $magicGroupDTO->setGroupName($params['group_name'] ?? null);
-        $magicGroupDTO->setGroupAvatar($params['group_avatar'] ?? null);
+        $delightfulGroupDTO = new DelightfulGroupEntity();
+        $delightfulGroupDTO->setId($id);
+        $delightfulGroupDTO->setGroupName($params['group_name'] ?? null);
+        $delightfulGroupDTO->setGroupAvatar($params['group_avatar'] ?? null);
         // name 和 avatar 不能同时为空
-        if (empty($magicGroupDTO->getGroupName()) && empty($magicGroupDTO->getGroupAvatar())) {
+        if (empty($delightfulGroupDTO->getGroupName()) && empty($delightfulGroupDTO->getGroupAvatar())) {
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR);
         }
-        return $this->chatGroupAppService->GroupUpdateInfo($authorization, $magicGroupDTO);
+        return $this->chatGroupAppService->GroupUpdateInfo($authorization, $delightfulGroupDTO);
     }
 
     /**
@@ -368,7 +368,7 @@ class DelightfulChatHttpApi extends AbstractApi
     public function getMessageReceiveList(string $messageId): array
     {
         $authorization = $this->getAuthorization();
-        return $this->magicChatMessageAppService->getMessageReceiveList($messageId, $authorization);
+        return $this->delightfulChatMessageAppService->getMessageReceiveList($messageId, $authorization);
     }
 
     public function groupTransferOwner(string $id, RequestInterface $request)
@@ -407,7 +407,7 @@ class DelightfulChatHttpApi extends AbstractApi
             $fileUploadDTO->setFileType($fileType);
             $fileUploadDTOs[] = $fileUploadDTO;
         }
-        return $this->magicChatMessageAppService->fileUpload($fileUploadDTOs, $authorization);
+        return $this->delightfulChatMessageAppService->fileUpload($fileUploadDTOs, $authorization);
     }
 
     public function getFileDownUrl(RequestInterface $request): array
@@ -428,7 +428,7 @@ class DelightfulChatHttpApi extends AbstractApi
             $fileQueryDTO->setMessageId($messageId);
             $fileDTOs[] = $fileQueryDTO;
         }
-        return $this->magicChatMessageAppService->getFileDownUrl($fileDTOs, $authorization);
+        return $this->delightfulChatMessageAppService->getFileDownUrl($fileDTOs, $authorization);
     }
 
     /**
@@ -473,23 +473,23 @@ class DelightfulChatHttpApi extends AbstractApi
         $instructs = $request->input('instructs');
         $receiveId = $request->input('receive_id');
         $authenticatable = $this->getAuthorization();
-        $magicAgentVersionEntity = $this->magicAgentAppService->getDetailByUserId($receiveId);
-        if ($magicAgentVersionEntity === null) {
+        $delightfulAgentVersionEntity = $this->delightfulAgentAppService->getDetailByUserId($receiveId);
+        if ($delightfulAgentVersionEntity === null) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_does_not_exist');
         }
-        $agentInstruct = $magicAgentVersionEntity->getInstructs();
-        $instructResult = $this->magicConversationAppService->saveInstruct($authenticatable, $instructs, $conversationId, $agentInstruct);
+        $agentInstruct = $delightfulAgentVersionEntity->getInstructs();
+        $instructResult = $this->delightfulConversationAppService->saveInstruct($authenticatable, $instructs, $conversationId, $agentInstruct);
 
-        $magicMessageEntity = new DelightfulMessageEntity();
-        $magicMessageEntity->setSenderOrganizationCode($authenticatable->getOrganizationCode());
-        $magicMessageEntity->setSenderType(ConversationType::Ai);
-        $magicMessageEntity->setMessageType(ControlMessageType::AgentInstruct);
-        $magicMessageEntity->setAppMessageId(IdGenerator::getUniqueId32());
-        $magicMessageEntity->setSenderId($authenticatable->getId());
+        $delightfulMessageEntity = new DelightfulMessageEntity();
+        $delightfulMessageEntity->setSenderOrganizationCode($authenticatable->getOrganizationCode());
+        $delightfulMessageEntity->setSenderType(ConversationType::Ai);
+        $delightfulMessageEntity->setMessageType(ControlMessageType::AgentInstruct);
+        $delightfulMessageEntity->setAppMessageId(IdGenerator::getUniqueId32());
+        $delightfulMessageEntity->setSenderId($authenticatable->getId());
         $instructMessage = new InstructMessage();
         $instructMessage->setInstruct($instructResult);
-        $magicMessageEntity->setContent($instructMessage);
-        $this->magicControlMessageAppService->clientOperateInstructMessage($magicMessageEntity, $conversationId);
+        $delightfulMessageEntity->setContent($instructMessage);
+        $this->delightfulControlMessageAppService->clientOperateInstructMessage($delightfulMessageEntity, $conversationId);
         return $instructResult;
     }
 
@@ -537,7 +537,7 @@ class DelightfulChatHttpApi extends AbstractApi
             $historyMessages = $this->getHistoryMessages($authorization, $conversationId, $topicId, $params['history'] ?? []);
 
             // Delegate to app layer for LLM call and fallback, get string content directly
-            $completionContent = $this->magicConversationAppService->conversationChatCompletions($historyMessages ?: [], $chatCompletionsDTO, $authorization);
+            $completionContent = $this->delightfulConversationAppService->conversationChatCompletions($historyMessages ?: [], $chatCompletionsDTO, $authorization);
 
             // Process completion content
             $completionContent = $this->processCompletionContent($completionContent);
@@ -579,7 +579,7 @@ class DelightfulChatHttpApi extends AbstractApi
             return $externalHistory;
         }
 
-        return $this->magicChatMessageAppService->getConversationChatCompletionsHistory(
+        return $this->delightfulChatMessageAppService->getConversationChatCompletionsHistory(
             $authorization,
             $conversationId,
             20,

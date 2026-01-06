@@ -17,7 +17,7 @@ class DelightfulFlowDraftDTO extends AbstractFlowDTO
 
     protected string $flowCode;
 
-    protected ?array $magicFlow = null;
+    protected ?array $delightfulFlow = null;
 
     public function getName(): string
     {
@@ -51,11 +51,11 @@ class DelightfulFlowDraftDTO extends AbstractFlowDTO
 
     public function getDelightfulFlow(): ?array
     {
-        return $this->magicFlow;
+        return $this->delightfulFlow;
     }
 
-    public function setDelightfulFlow(?array $magicFlow): void
+    public function setDelightfulFlow(?array $delightfulFlow): void
     {
-        $this->magicFlow = $magicFlow;
+        $this->delightfulFlow = $delightfulFlow;
     }
 }

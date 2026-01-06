@@ -28,7 +28,7 @@ function ZoomControls({
 
 	return (
 		<Space className={styles.buttonGroup}>
-			<Tooltip title={t("magicPdfRender.toolbar.zoomOut")}>
+			<Tooltip title={t("delightfulPdfRender.toolbar.zoomOut")}>
 				<button className={styles.button} disabled={scale <= minScale} onClick={zoomOut}>
 					<IconZoomOut />
 				</button>
@@ -45,7 +45,7 @@ function ZoomControls({
 				size="small"
 				status=""
 			/>
-			<Tooltip title={t("magicPdfRender.toolbar.zoomIn")}>
+			<Tooltip title={t("delightfulPdfRender.toolbar.zoomIn")}>
 				<button className={styles.button} disabled={scale >= maxScale} onClick={zoomIn}>
 					<IconZoomIn />
 				</button>

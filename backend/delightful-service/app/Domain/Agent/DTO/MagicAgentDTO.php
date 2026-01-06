@@ -56,21 +56,21 @@ class DelightfulAgentDTO extends AbstractEntity
     {
         $this->validateBasicFields();
 
-        $magicAgentEntity = new DelightfulAgentEntity();
-        $magicAgentEntity->setId($this->id);
-        $magicAgentEntity->setAgentName($this->getAgentName());
-        $magicAgentEntity->setAgentAvatar($this->getAgentAvatar());
-        $magicAgentEntity->setAgentDescription($this->getAgentDescription());
+        $delightfulAgentEntity = new DelightfulAgentEntity();
+        $delightfulAgentEntity->setId($this->id);
+        $delightfulAgentEntity->setAgentName($this->getAgentName());
+        $delightfulAgentEntity->setAgentAvatar($this->getAgentAvatar());
+        $delightfulAgentEntity->setAgentDescription($this->getAgentDescription());
 
-        $magicAgentEntity->setRobotName($this->getAgentName());
-        $magicAgentEntity->setRobotDescription($this->getAgentDescription());
-        $magicAgentEntity->setRobotAvatar($this->getAgentAvatar());
+        $delightfulAgentEntity->setRobotName($this->getAgentName());
+        $delightfulAgentEntity->setRobotDescription($this->getAgentDescription());
+        $delightfulAgentEntity->setRobotAvatar($this->getAgentAvatar());
 
-        $magicAgentEntity->setOrganizationCode($this->currentOrganizationCode);
-        $magicAgentEntity->setCreatedUid($this->currentUserId);
-        $magicAgentEntity->setStartPage($this->startPage);
+        $delightfulAgentEntity->setOrganizationCode($this->currentOrganizationCode);
+        $delightfulAgentEntity->setCreatedUid($this->currentUserId);
+        $delightfulAgentEntity->setStartPage($this->startPage);
 
-        return $magicAgentEntity;
+        return $delightfulAgentEntity;
     }
 
     public function getCurrentOrganizationCode(): string

@@ -2,9 +2,9 @@ import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ token, css }) => ({
 	container: css`
-		background-color: ${token.magicColorUsages.bg[0]};
+		background-color: ${token.delightfulColorUsages.bg[0]};
 		height: calc(100vh - ${token.titleBarHeight}px);
-		border-left: 1px solid ${token.magicColorUsages.border};
+		border-left: 1px solid ${token.delightfulColorUsages.border};
 	`,
 	fullscreen: css`
 		position: fixed;
@@ -17,7 +17,7 @@ export const useStyles = createStyles(({ token, css }) => ({
 	`,
 	header: css`
 		height: 40px;
-		border-bottom: 1px solid ${token.magicColorUsages.border};
+		border-bottom: 1px solid ${token.delightfulColorUsages.border};
 		padding: 0 16px;
 		display: flex;
 		align-items: center;

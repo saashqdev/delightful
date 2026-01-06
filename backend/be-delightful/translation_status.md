@@ -49,8 +49,8 @@ All tool modules including:
 
 ## 🔄 Remaining Files (1 file)
 
-### magic_use (1)
-- magic_use/userscript_manager.py - Not part of agentlang modules
+### delightful_use (1)
+- delightful_use/userscript_manager.py - Not part of agentlang modules
 
 ## Translation Statistics
 

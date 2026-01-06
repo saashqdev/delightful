@@ -27,22 +27,22 @@ docs/.vitepress/cache/
 docs/.vitepress/cache/deps/*
 volumes/
 node_modules
-.env_super_magic
+.env_super_delightful
 bin/splitsh-lite
 bin/user_lang
-bin/use_super_magic
-backend/magic-service/vendor/
-backend/magic-service/composer.lock
-backend/magic-service/runtime/
-backend/magic-service-go-engine
+bin/use_super_delightful
+backend/delightful-service/vendor/
+backend/delightful-service/composer.lock
+backend/delightful-service/runtime/
+backend/delightful-service-go-engine
 
-config/.env_magic_gateway
+config/.env_delightful_gateway
 config/.env_sandbox_gateway
-config/.env_super_magic
+config/.env_super_delightful
 config/config.yaml
-config/.env_magic_gateway.bak
+config/.env_delightful_gateway.bak
 config/.env_sandbox_gateway.bak
-config/.env_super_magic.bak
+config/.env_super_delightful.bak
 .aider*
 
 frontend/upload-sdk/example

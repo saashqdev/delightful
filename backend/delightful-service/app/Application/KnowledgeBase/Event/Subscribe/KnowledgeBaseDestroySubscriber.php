@@ -36,9 +36,9 @@ readonly class KnowledgeBaseDestroySubscriber implements ListenerInterface
         if (! $event instanceof KnowledgeBaseRemovedEvent) {
             return;
         }
-        $knowledge = $event->magicFlowKnowledgeEntity;
-        /** @var KnowledgeBaseDomainService $magicFlowKnowledgeDomainService */
-        $magicFlowKnowledgeDomainService = di(KnowledgeBaseDomainService::class);
+        $knowledge = $event->delightfulFlowKnowledgeEntity;
+        /** @var KnowledgeBaseDomainService $delightfulFlowKnowledgeDomainService */
+        $delightfulFlowKnowledgeDomainService = di(KnowledgeBaseDomainService::class);
         /** @var KnowledgeBaseVectorAppService $knowledgeBaseVectorService */
         $knowledgeBaseVectorService = di(KnowledgeBaseVectorAppService::class);
 
@@ -50,6 +50,6 @@ readonly class KnowledgeBaseDestroySubscriber implements ListenerInterface
             $knowledge->setSyncStatus(KnowledgeSyncStatus::DeleteFailed);
             $knowledge->setSyncStatusMessage($throwable->getMessage());
         }
-        $magicFlowKnowledgeDomainService->changeSyncStatus($knowledge);
+        $delightfulFlowKnowledgeDomainService->changeSyncStatus($knowledge);
     }
 }

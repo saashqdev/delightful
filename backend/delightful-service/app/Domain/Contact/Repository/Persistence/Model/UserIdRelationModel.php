@@ -14,14 +14,14 @@ class UserIdRelationModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_user_id_relation';
+    protected ?string $table = 'delightful_user_id_relation';
 
     /**
      * The attributes that are mass assignable.
      */
     protected array $fillable = [
         'id',
-        'magic_id',
+        'delightful_id',
         'type',
         'ai_code',
         'status',

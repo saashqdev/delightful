@@ -19,7 +19,7 @@ const useStyles = createStyles(({ token }) => ({
 			justifyContent: "center",
 		},
 	},
-	magicBetaImage: {
+	delightfulBetaImage: {
 		width: "120px",
 	},
 	emptyWorkspacePanelTitle: {
@@ -50,16 +50,16 @@ const useStyles = createStyles(({ token }) => ({
 	},
 	emptyWorkspacePanelCaseTypeItem: {
 		borderRadius: 1000,
-		border: `1px solid ${token.magicColorUsages.border}`,
+		border: `1px solid ${token.delightfulColorUsages.border}`,
 		backgroundColor: "white",
 		padding: "4px 12px",
 		fontSize: 14,
 		fontWeight: 400,
-		color: token.magicColorUsages.text[1],
+		color: token.delightfulColorUsages.text[1],
 		cursor: "pointer",
 		"&:hover": {
-			color: token.magicColorUsages.text[0],
-			borderColor: token.magicColorUsages.border,
+			color: token.delightfulColorUsages.text[0],
+			borderColor: token.delightfulColorUsages.border,
 		},
 	},
 	emptyWorkspacePanelCaseTypeItemActive: {
@@ -98,7 +98,7 @@ const useStyles = createStyles(({ token }) => ({
 		fontSize: "12px",
 		fontWeight: "400",
 		marginTop: "10px",
-		color: token.magicColorUsages.text[3],
+		color: token.delightfulColorUsages.text[3],
 	},
 	emptyWorkspacePanelCaseItemImage: {
 		width: "181.809px",
@@ -133,7 +133,7 @@ const useStyles = createStyles(({ token }) => ({
 		paddingBottom: "30px !important",
 		padding: "20px !important",
 		[`& .swiper-scrollbar`]: {
-			backgroundColor: token.magicColorUsages.fill[2],
+			backgroundColor: token.delightfulColorUsages.fill[2],
 			height: "5px !important",
 			width: "200px !important",
 			left: "50% !important",

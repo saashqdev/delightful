@@ -1,5 +1,5 @@
 import { Flex, Spin } from "antd"
-import { magic } from "@/enhance/magicElectron"
+import { delightful } from "@/enhance/delightfulElectron"
 import useDrag from "@/opensource/hooks/electron/useDrag"
 import { IconDelightfulTextLogo } from "@/enhance/tabler/icons-react"
 import { interfaceStore } from "@/opensource/stores/interface"
@@ -24,15 +24,15 @@ const Header = observer(function Header({ className }: { className?: string }) {
 			className={cx(styles.header, className)}
 			align="center"
 			onMouseDown={onMouseDown}
-			onDoubleClick={() => magic?.view?.maximize?.()}
+			onDoubleClick={() => delightful?.view?.maximize?.()}
 		>
 			<Flex
 				className={cx(styles.wrapper, {
-					[styles.appWrapper]: magic?.env?.isElectron(),
+					[styles.appWrapper]: delightful?.env?.isElectron(),
 				})}
 				align="center"
 			>
-				<IconDelightfulTextLogo size={32} className={styles.magic} />
+				<IconDelightfulTextLogo size={32} className={styles.delightful} />
 				{isWebSocketConnecting && <Spin spinning size="small" />}
 				{showReloadButton && (
 					<DelightfulButton

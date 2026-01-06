@@ -121,7 +121,7 @@ body:
       placeholder: |
         ```
         [timestamp] ERROR: Container failed to start
-        [timestamp] STDERR: Permission denied accessing /var/lib/magic
+        [timestamp] STDERR: Permission denied accessing /var/lib/delightful
         [timestamp] EXIT CODE: 1
         ```
     validations:
@@ -138,7 +138,7 @@ body:
         $ docker --version
         $ docker-compose --version
         $ docker ps
-        $ docker logs magic-service
+        $ docker logs delightful-service
         ```
         
         System Resources:

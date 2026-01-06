@@ -10,7 +10,7 @@ export const useVectorKnowledgeSubSiderStyles = createStyles(({ css, isDarkMode,
 			padding: 16px 0 10px;
 			margin-bottom: 4px;
 			border-bottom: 1px solid
-				${isDarkMode ? token.magicColorScales.grey[8] : token.magicColorUsages.border};
+				${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.border};
 		`,
 		name: css`
 			font-weight: 600;

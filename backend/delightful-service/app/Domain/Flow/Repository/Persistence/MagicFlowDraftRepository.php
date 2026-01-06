@@ -17,21 +17,21 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 class DelightfulFlowDraftRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowDraftRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $magicFlowDraftEntity): DelightfulFlowDraftEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $delightfulFlowDraftEntity): DelightfulFlowDraftEntity
     {
-        if (! $magicFlowDraftEntity->getId()) {
-            $magicFlowDraftModel = new DelightfulFlowDraftModel();
+        if (! $delightfulFlowDraftEntity->getId()) {
+            $delightfulFlowDraftModel = new DelightfulFlowDraftModel();
         } else {
             $builder = $this->createBuilder($dataIsolation, DelightfulFlowDraftModel::query());
-            $magicFlowDraftModel = $builder->where('id', $magicFlowDraftEntity->getId())->first();
+            $delightfulFlowDraftModel = $builder->where('id', $delightfulFlowDraftEntity->getId())->first();
         }
 
-        $magicFlowDraftModel->fill($this->getAttributes($magicFlowDraftEntity));
-        $magicFlowDraftModel->save();
+        $delightfulFlowDraftModel->fill($this->getAttributes($delightfulFlowDraftEntity));
+        $delightfulFlowDraftModel->save();
 
-        $magicFlowDraftEntity->setId($magicFlowDraftModel->id);
+        $delightfulFlowDraftEntity->setId($delightfulFlowDraftModel->id);
 
-        return $magicFlowDraftEntity;
+        return $delightfulFlowDraftEntity;
     }
 
     public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowDraftEntity
@@ -75,10 +75,10 @@ class DelightfulFlowDraftRepository extends DelightfulFlowAbstractRepository imp
         return $data;
     }
 
-    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $magicFlowDraftEntity): void
+    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $delightfulFlowDraftEntity): void
     {
         $builder = $this->createBuilder($dataIsolation, DelightfulFlowDraftModel::query());
-        $builder->where('code', $magicFlowDraftEntity->getCode())->delete();
+        $builder->where('code', $delightfulFlowDraftEntity->getCode())->delete();
     }
 
     public function clearEarlyRecords(FlowDataIsolation $dataIsolation, string $flowCode): void

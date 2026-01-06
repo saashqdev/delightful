@@ -33,14 +33,14 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
     }
 
     // 创建群组
-    public function createGroup(DelightfulGroupEntity $magicGroupDTO): DelightfulGroupEntity
+    public function createGroup(DelightfulGroupEntity $delightfulGroupDTO): DelightfulGroupEntity
     {
-        $groupInfo = $magicGroupDTO->toArray();
+        $groupInfo = $delightfulGroupDTO->toArray();
         if (empty($groupInfo['id'])) {
             $groupInfo['id'] = IdGenerator::getSnowId();
         }
         $this->groupModel::query()->create($groupInfo);
-        $magicGroupDTO->setId((string) $groupInfo['id']);
+        $delightfulGroupDTO->setId((string) $groupInfo['id']);
         return GroupAssembler::getGroupEntity($groupInfo);
     }
 
@@ -98,10 +98,10 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
         return $groupEntities;
     }
 
-    public function addUsersToGroup(DelightfulGroupEntity $magicGroupEntity, array $userIds): bool
+    public function addUsersToGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): bool
     {
-        $groupId = $magicGroupEntity->getId();
-        $groupOwner = $magicGroupEntity->getGroupOwner();
+        $groupId = $delightfulGroupEntity->getId();
+        $groupOwner = $delightfulGroupEntity->getGroupOwner();
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds, [], ['user_id', 'user_type', 'organization_code']);
         $users = array_column($users, null, 'user_id');
         $time = date('Y-m-d H:i:s');
@@ -195,18 +195,18 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
     /**
      * 将用户从群组中移除.
      */
-    public function removeUsersFromGroup(DelightfulGroupEntity $magicGroupEntity, array $userIds): int
+    public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {
         return $this->groupUserModel::query()
-            ->where('group_id', $magicGroupEntity->getId())
+            ->where('group_id', $delightfulGroupEntity->getId())
             ->whereIn('user_id', $userIds)
             ->delete();
     }
 
-    public function deleteGroup(DelightfulGroupEntity $magicGroupEntity): int
+    public function deleteGroup(DelightfulGroupEntity $delightfulGroupEntity): int
     {
         return $this->groupModel::query()
-            ->where('id', $magicGroupEntity->getId())
+            ->where('id', $delightfulGroupEntity->getId())
             ->update([
                 'group_status' => GroupStatusEnum::Disband->value,
             ]);

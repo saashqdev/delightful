@@ -26,7 +26,7 @@ return [
         ],
         'rollback' => [
             'seq_id_not_found' => '消息序列ID不存在',
-            'magic_message_id_not_found' => '关联的消息ID不存在',
+            'delightful_message_id_not_found' => '关联的消息ID不存在',
         ],
     ],
     'already_exist' => '已存在',
@@ -103,7 +103,7 @@ return [
         'organization_code_not_found' => '平台组织代码未找到',
         'organization_env_not_found' => '平台组织环境未找到',
     ],
-    'magic' => [
+    'delightful' => [
         'environment_config_error' => '麦吉环境配置错误',
         'environment_not_found' => '麦吉环境未找到',
         'ticket_not_found' => '麦吉 appTicket 未找到',

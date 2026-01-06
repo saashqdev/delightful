@@ -16,7 +16,7 @@ usages 是基于 scales 业务层面的业务层变量
 const useStyles = createStyles(({ token }) => {
 	return {
 		main: {
-			color: token.magicColorUsages.white,
+			color: token.delightfulColorUsages.white,
 		},
 	}
 })

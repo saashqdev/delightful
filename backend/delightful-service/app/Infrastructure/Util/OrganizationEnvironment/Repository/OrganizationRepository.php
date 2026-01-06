@@ -28,7 +28,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     public function save(OrganizationEntity $organizationEntity): OrganizationEntity
     {
         $data = [
-            'magic_organization_code' => $organizationEntity->getDelightfulOrganizationCode(),
+            'delightful_organization_code' => $organizationEntity->getDelightfulOrganizationCode(),
             'name' => $organizationEntity->getName(),
             'platform_type' => $organizationEntity->getPlatformType(),
             'logo' => $organizationEntity->getLogo(),
@@ -84,7 +84,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     public function getByCode(string $code): ?OrganizationEntity
     {
         $model = OrganizationModel::query()
-            ->where('magic_organization_code', $code)
+            ->where('delightful_organization_code', $code)
             ->first();
 
         return $model ? $this->mapToEntity($model) : null;
@@ -100,7 +100,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
         }
 
         $models = OrganizationModel::query()
-            ->whereIn('magic_organization_code', $codes)
+            ->whereIn('delightful_organization_code', $codes)
             ->get();
 
         $organizations = [];
@@ -180,7 +180,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
      */
     public function existsByCode(string $code, ?int $excludeId = null): bool
     {
-        $query = OrganizationModel::query()->where('magic_organization_code', $code);
+        $query = OrganizationModel::query()->where('delightful_organization_code', $code);
 
         if ($excludeId) {
             $query->where('id', '!=', $excludeId);
@@ -202,8 +202,8 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             $query->where('name', 'like', '%' . $filters['name'] . '%');
         }
 
-        if (! empty($filters['magic_organization_code'])) {
-            $query->where('magic_organization_code', $filters['magic_organization_code']);
+        if (! empty($filters['delightful_organization_code'])) {
+            $query->where('delightful_organization_code', $filters['delightful_organization_code']);
         }
 
         if (isset($filters['status'])) {
@@ -239,7 +239,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     {
         $entity = new OrganizationEntity();
         $entity->setId($model->id);
-        $entity->setDelightfulOrganizationCode($model->magic_organization_code);
+        $entity->setDelightfulOrganizationCode($model->delightful_organization_code);
         $entity->setName($model->name);
         $entity->setPlatformType($model->platform_type);
         $entity->setLogo($model->logo);

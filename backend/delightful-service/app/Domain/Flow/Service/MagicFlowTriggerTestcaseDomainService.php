@@ -18,7 +18,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 class DelightfulFlowTriggerTestcaseDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly DelightfulFlowTriggerTestcaseRepositoryInterface $magicFlowTriggerTestcaseRepository,
+        private readonly DelightfulFlowTriggerTestcaseRepositoryInterface $delightfulFlowTriggerTestcaseRepository,
     ) {
     }
 
@@ -30,17 +30,17 @@ class DelightfulFlowTriggerTestcaseDomainService extends AbstractDomainService
         $savingDelightfulFlowTriggerTestcaseEntity->setCreator($dataIsolation->getCurrentUserId());
         $savingDelightfulFlowTriggerTestcaseEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         if ($savingDelightfulFlowTriggerTestcaseEntity->shouldCreate()) {
-            $magicFlowTriggerTestcaseEntity = clone $savingDelightfulFlowTriggerTestcaseEntity;
-            $magicFlowTriggerTestcaseEntity->prepareForCreation();
+            $delightfulFlowTriggerTestcaseEntity = clone $savingDelightfulFlowTriggerTestcaseEntity;
+            $delightfulFlowTriggerTestcaseEntity->prepareForCreation();
         } else {
-            $magicFlowTriggerTestcaseEntity = $this->magicFlowTriggerTestcaseRepository->getByFlowCodeAndCode($dataIsolation, $savingDelightfulFlowTriggerTestcaseEntity->getFlowCode(), $savingDelightfulFlowTriggerTestcaseEntity->getCode());
-            if (! $magicFlowTriggerTestcaseEntity) {
+            $delightfulFlowTriggerTestcaseEntity = $this->delightfulFlowTriggerTestcaseRepository->getByFlowCodeAndCode($dataIsolation, $savingDelightfulFlowTriggerTestcaseEntity->getFlowCode(), $savingDelightfulFlowTriggerTestcaseEntity->getCode());
+            if (! $delightfulFlowTriggerTestcaseEntity) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$savingDelightfulFlowTriggerTestcaseEntity->getCode()} 不存在");
             }
-            $savingDelightfulFlowTriggerTestcaseEntity->prepareForModification($magicFlowTriggerTestcaseEntity);
+            $savingDelightfulFlowTriggerTestcaseEntity->prepareForModification($delightfulFlowTriggerTestcaseEntity);
         }
 
-        return $this->magicFlowTriggerTestcaseRepository->save($dataIsolation, $magicFlowTriggerTestcaseEntity);
+        return $this->delightfulFlowTriggerTestcaseRepository->save($dataIsolation, $delightfulFlowTriggerTestcaseEntity);
     }
 
     /**
@@ -49,15 +49,15 @@ class DelightfulFlowTriggerTestcaseDomainService extends AbstractDomainService
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowTriggerTestcaseQuery $query, Page $page): array
     {
-        return $this->magicFlowTriggerTestcaseRepository->queries($dataIsolation, $query, $page);
+        return $this->delightfulFlowTriggerTestcaseRepository->queries($dataIsolation, $query, $page);
     }
 
     /**
      * 删除测试集.
      */
-    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): void
+    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $delightfulFlowTriggerTestcaseEntity): void
     {
-        $this->magicFlowTriggerTestcaseRepository->remove($dataIsolation, $magicFlowTriggerTestcaseEntity);
+        $this->delightfulFlowTriggerTestcaseRepository->remove($dataIsolation, $delightfulFlowTriggerTestcaseEntity);
     }
 
     /**
@@ -65,7 +65,7 @@ class DelightfulFlowTriggerTestcaseDomainService extends AbstractDomainService
      */
     public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $testcaseCode): DelightfulFlowTriggerTestcaseEntity
     {
-        $testcase = $this->magicFlowTriggerTestcaseRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $testcaseCode);
+        $testcase = $this->delightfulFlowTriggerTestcaseRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $testcaseCode);
         if (! $testcase) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$testcaseCode} 不存在");
         }

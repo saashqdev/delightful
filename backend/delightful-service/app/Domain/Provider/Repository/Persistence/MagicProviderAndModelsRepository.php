@@ -55,14 +55,14 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         }
 
         // 2. 先查询 ProviderCode::Official 的服务商 ID
-        $magicProvider = $this->providerRepository->getOfficial($category);
-        if (! $magicProvider) {
+        $delightfulProvider = $this->providerRepository->getOfficial($category);
+        if (! $delightfulProvider) {
             return null;
         }
 
         // 3. 查询当前组织是否已有该服务商的配置
         $configBuilder = $this->createConfigQuery()->where('organization_code', $organizationCode);
-        $configBuilder->where('service_provider_id', $magicProvider->getId());
+        $configBuilder->where('service_provider_id', $delightfulProvider->getId());
 
         // 如果指定了状态，添加状态过滤
         if ($status !== null) {
@@ -74,7 +74,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         // 如果找到现有配置，直接返回
         if (! empty($configResult)) {
             // 批量查询对应的 provider 信息
-            $providerMap = [$magicProvider->getId() => $magicProvider->toArray()];
+            $providerMap = [$delightfulProvider->getId() => $delightfulProvider->toArray()];
             return ProviderConfigAssembler::toDTOWithProvider($configResult[0], $providerMap);
         }
 
@@ -89,21 +89,21 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
 
         $templateData = [
             'id' => $templateId,
-            'service_provider_id' => $magicProvider->getId(),
+            'service_provider_id' => $delightfulProvider->getId(),
             'organization_code' => $organizationCode,
             'config' => [],
             'decryptedConfig' => [],
             'status' => Status::Enabled->value,
             'alias' => '',
-            'translate' => $magicProvider->getTranslate(),
+            'translate' => $delightfulProvider->getTranslate(),
             'created_at' => (new DateTime())->format('Y-m-d H:i:s'),
             'updated_at' => (new DateTime())->format('Y-m-d H:i:s'),
-            'name' => $magicProvider->getName(),
-            'description' => $magicProvider->getDescription(),
-            'icon' => $magicProvider->getIcon(),
-            'provider_type' => $magicProvider->getProviderType()->value,
+            'name' => $delightfulProvider->getName(),
+            'description' => $delightfulProvider->getDescription(),
+            'icon' => $delightfulProvider->getIcon(),
+            'provider_type' => $delightfulProvider->getProviderType()->value,
             'category' => $category->value,
-            'provider_code' => $magicProvider->getProviderCode()->value,
+            'provider_code' => $delightfulProvider->getProviderCode()->value,
             'remark' => '',
         ];
 
@@ -224,7 +224,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     ): string {
         // 构建锁名称和所有者标识
         $lockName = sprintf(
-            'copy_magic_model_%s_%s',
+            'copy_delightful_model_%s_%s',
             $dataIsolation->getCurrentOrganizationCode(),
             $officialModel->getId()
         );

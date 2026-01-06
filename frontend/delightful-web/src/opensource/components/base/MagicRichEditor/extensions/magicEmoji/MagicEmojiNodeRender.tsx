@@ -15,7 +15,7 @@ const DelightfulEmojiNodeRender = memo((props: NodeViewProps) => {
 	return (
 		<NodeViewWrapper
 			as="img"
-			data-type="magic-emoji"
+			data-type="delightful-emoji"
 			src={`${basePath}/${ns}${code}${suffix}`}
 			draggable="false"
 			width={size}

@@ -4,7 +4,7 @@ import { childFieldGap } from "./constants";
 
 
 export const GlobalStyle = createGlobalStyle`
-    .magic-row, .magic-col {
+    .delightful-row, .delightful-col {
         margin-left: 0!important;
         margin-right: 0!important;
         padding: 0!important;

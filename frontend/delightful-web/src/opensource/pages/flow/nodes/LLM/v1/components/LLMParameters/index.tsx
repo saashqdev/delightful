@@ -23,16 +23,16 @@ export type LLMParametersValue = {
 const useStyles = createStyles(({ css, token }) => {
 	return {
 		LLMParameters: css`
-			.magic-switch-checked {
+			.delightful-switch-checked {
 				background-color: ${token.colorPrimary};
 			}
-			.magic-slider-handle {
+			.delightful-slider-handle {
 				margin-top: 0;
 			}
-			.magic-select-dropdown {
+			.delightful-select-dropdown {
 				overflow: visible;
 			}
-			.magic-select-selector {
+			.delightful-select-selector {
 				padding: 0 11px 0 3px !important;
 			}
 		`,
@@ -92,7 +92,7 @@ const useStyles = createStyles(({ css, token }) => {
 		`,
 		formItem: css`
 			padding: 0 12px 12px 12px !important;
-			.magic-form-item-label {
+			.delightful-form-item-label {
 				margin-bottom: 6px;
 			}
 		`,
@@ -119,7 +119,7 @@ const useStyles = createStyles(({ css, token }) => {
 		`,
 		visibleModelSelect: css`
 			margin-left: 100px;
-			.magic-select-selection-item {
+			.delightful-select-selection-item {
 				padding-left: 7px !important;
 			}
 		`,

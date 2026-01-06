@@ -15,25 +15,25 @@ use App\Infrastructure\Core\ValueObject\Page;
 class DelightfulFlowExecuteLogDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly DelightfulFlowExecuteLogRepositoryInterface $magicFlowExecuteLogRepository,
+        private readonly DelightfulFlowExecuteLogRepositoryInterface $delightfulFlowExecuteLogRepository,
     ) {
     }
 
-    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): DelightfulFlowExecuteLogEntity
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $delightfulFlowExecuteLogEntity): DelightfulFlowExecuteLogEntity
     {
-        $magicFlowExecuteLogEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        $magicFlowExecuteLogEntity->prepareForCreation();
-        return $this->magicFlowExecuteLogRepository->create($dataIsolation, $magicFlowExecuteLogEntity);
+        $delightfulFlowExecuteLogEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
+        $delightfulFlowExecuteLogEntity->prepareForCreation();
+        return $this->delightfulFlowExecuteLogRepository->create($dataIsolation, $delightfulFlowExecuteLogEntity);
     }
 
-    public function updateStatus(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
+    public function updateStatus(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $delightfulFlowExecuteLogEntity): void
     {
-        $this->magicFlowExecuteLogRepository->updateStatus($dataIsolation, $magicFlowExecuteLogEntity);
+        $this->delightfulFlowExecuteLogRepository->updateStatus($dataIsolation, $delightfulFlowExecuteLogEntity);
     }
 
-    public function incrementRetryCount(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
+    public function incrementRetryCount(FlowDataIsolation $dataIsolation, DelightfulFlowExecuteLogEntity $delightfulFlowExecuteLogEntity): void
     {
-        $this->magicFlowExecuteLogRepository->incrementRetryCount($dataIsolation, $magicFlowExecuteLogEntity);
+        $this->delightfulFlowExecuteLogRepository->incrementRetryCount($dataIsolation, $delightfulFlowExecuteLogEntity);
     }
 
     /**
@@ -41,11 +41,11 @@ class DelightfulFlowExecuteLogDomainService extends AbstractDomainService
      */
     public function getRunningTimeoutList(FlowDataIsolation $dataIsolation, int $timeout, Page $page): array
     {
-        return $this->magicFlowExecuteLogRepository->getRunningTimeoutList($dataIsolation, $timeout, $page);
+        return $this->delightfulFlowExecuteLogRepository->getRunningTimeoutList($dataIsolation, $timeout, $page);
     }
 
     public function getByExecuteId(FlowDataIsolation $dataIsolation, string $executeId): ?DelightfulFlowExecuteLogEntity
     {
-        return $this->magicFlowExecuteLogRepository->getByExecuteId($dataIsolation, $executeId);
+        return $this->delightfulFlowExecuteLogRepository->getByExecuteId($dataIsolation, $executeId);
     }
 }

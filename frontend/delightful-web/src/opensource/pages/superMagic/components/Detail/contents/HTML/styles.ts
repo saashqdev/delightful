@@ -13,7 +13,7 @@ export const useStyles = createStyles(({ token }) => {
 			backgroundColor: "white",
 		},
 		header: {
-			backgroundColor: token.magicColorUsages.fill[0],
+			backgroundColor: token.delightfulColorUsages.fill[0],
 			paddingRight: "20px",
 		},
 		navigate: {

@@ -17,8 +17,8 @@ use App\Infrastructure\Core\Contract\Session\SessionInterface;
 class SessionAppService implements SessionInterface
 {
     public function __construct(
-        protected DelightfulDepartmentDomainService $magicDepartmentDomainService,
-        protected DelightfulUserDomainService $magicUserDomainService
+        protected DelightfulDepartmentDomainService $delightfulDepartmentDomainService,
+        protected DelightfulUserDomainService $delightfulUserDomainService
     ) {
     }
 
@@ -26,9 +26,9 @@ class SessionAppService implements SessionInterface
      * 登录校验.
      * @return LoginResponseDTO[]
      */
-    public function LoginCheck(LoginCheckInterface $loginCheck, DelightfulEnvironmentEntity $magicEnvironmentEntity, ?string $magicOrganizationCode = null): array
+    public function LoginCheck(LoginCheckInterface $loginCheck, DelightfulEnvironmentEntity $delightfulEnvironmentEntity, ?string $delightfulOrganizationCode = null): array
     {
-        $loginResponses = $this->magicUserDomainService->magicUserLoginCheck($loginCheck->getAuthorization(), $magicEnvironmentEntity, $magicOrganizationCode);
+        $loginResponses = $this->delightfulUserDomainService->delightfulUserLoginCheck($loginCheck->getAuthorization(), $delightfulEnvironmentEntity, $delightfulOrganizationCode);
         // 增加组织name和头像
         if (! empty($loginResponses)) {
             // 收集所有组织代码
@@ -43,7 +43,7 @@ class SessionAppService implements SessionInterface
             // 如果有组织代码，批量获取所有组织的根部门信息
             if (! empty($orgCodes)) {
                 // 一次性批量获取所有组织的根部门信息
-                $rootDepartments = $this->magicDepartmentDomainService->getOrganizationsRootDepartment($orgCodes);
+                $rootDepartments = $this->delightfulDepartmentDomainService->getOrganizationsRootDepartment($orgCodes);
 
                 // 填充登录响应信息
                 foreach ($loginResponses as $loginResponse) {

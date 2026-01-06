@@ -15,7 +15,7 @@ use Hyperf\Redis\Redis;
 
 class PlatformSettingsAppService
 {
-    private const string CACHE_KEY = 'magic:platform_settings_cache';
+    private const string CACHE_KEY = 'delightful:platform_settings_cache';
 
     public function __construct(
         private readonly DelightfulUserSettingDomainService $userSettingDomainService,

@@ -44,11 +44,11 @@ class RoleAppServiceTest extends HttpTestCase
         $roleEntity->setOrganizationCode($this->dataIsolation->getCurrentOrganizationCode());
         $roleEntity->setStatus(1);
 
-        $magicPermission = new DelightfulPermission();
+        $delightfulPermission = new DelightfulPermission();
         // Add test permission data
         $testPermissions = [
-            $magicPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_MODEL->value, DelightfulOperationEnum::EDIT->value),
-            $magicPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_IMAGE->value, DelightfulOperationEnum::QUERY->value),
+            $delightfulPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_MODEL->value, DelightfulOperationEnum::EDIT->value),
+            $delightfulPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_IMAGE->value, DelightfulOperationEnum::QUERY->value),
         ];
         $roleEntity->setPermissions($testPermissions);
 

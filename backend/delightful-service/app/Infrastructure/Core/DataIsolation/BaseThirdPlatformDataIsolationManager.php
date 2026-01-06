@@ -15,7 +15,7 @@ class BaseThirdPlatformDataIsolationManager implements ThirdPlatformDataIsolatio
     {
     }
 
-    public function init(DataIsolationInterface $dataIsolation, DelightfulEnvironmentEntity $magicEnvironmentEntity): void
+    public function init(DataIsolationInterface $dataIsolation, DelightfulEnvironmentEntity $delightfulEnvironmentEntity): void
     {
     }
 

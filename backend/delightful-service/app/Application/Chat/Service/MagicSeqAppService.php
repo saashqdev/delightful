@@ -15,7 +15,7 @@ use Throwable;
  */
 class DelightfulSeqAppService extends AbstractAppService
 {
-    public function __construct(protected DelightfulSeqDomainService $magicSeqDomainService)
+    public function __construct(protected DelightfulSeqDomainService $delightfulSeqDomainService)
     {
     }
 
@@ -25,6 +25,6 @@ class DelightfulSeqAppService extends AbstractAppService
      */
     public function pushSeq(string $seqId): void
     {
-        $this->magicSeqDomainService->pushSeq($seqId);
+        $this->delightfulSeqDomainService->pushSeq($seqId);
     }
 }

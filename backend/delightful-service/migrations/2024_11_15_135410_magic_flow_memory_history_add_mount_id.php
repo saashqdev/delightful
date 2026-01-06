@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_flow_memory_histories', function (Blueprint $table) {
+        Schema::table('delightful_flow_memory_histories', function (Blueprint $table) {
             $table->string('mount_id', 80)->default('')->nullable(false)->comment('挂载ID')->index()->after('content');
         });
     }

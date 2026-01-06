@@ -44,7 +44,7 @@ enum ServiceProviderErrorCode: int
     #[ErrorMessage('service_provider.model_officially_disabled')]
     case ModelOfficiallyDisabled = 44011;
 
-    #[ErrorMessage('service_provider.magic_provider_not_found')]
+    #[ErrorMessage('service_provider.delightful_provider_not_found')]
     case DelightfulProviderNotFound = 44012;
 
     #[ErrorMessage('service_provider.model_operation_locked')]

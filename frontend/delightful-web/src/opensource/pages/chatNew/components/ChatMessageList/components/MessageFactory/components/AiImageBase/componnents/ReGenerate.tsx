@@ -22,7 +22,7 @@ const useStyles = createStyles(({ css, token }) => ({
 		padding: 4px;
 		border-radius: 10px;
 		align-self: flex-end;
-		color: ${token.magicColorUsages.text[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 	`,
 }))
 

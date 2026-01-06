@@ -35,7 +35,7 @@ export default function IconImport({ onImport }: IconImportProps) {
 			setOpen(false)
 			return
 		}
-		message.warning(i18next.t("jsonSchema.invalidValue", { ns: "magicFlow" }))
+		message.warning(i18next.t("jsonSchema.invalidValue", { ns: "delightfulFlow" }))
 	})
 
 	useUpdateEffect(() => {
@@ -87,7 +87,7 @@ export default function IconImport({ onImport }: IconImportProps) {
 
 	return (
 		<>
-			<Tooltip title={i18next.t("common.import", { ns: "magicFlow" })}>
+			<Tooltip title={i18next.t("common.import", { ns: "delightfulFlow" })}>
 				<span
 					className="add-icon"
 					onClick={() => {
@@ -99,12 +99,12 @@ export default function IconImport({ onImport }: IconImportProps) {
 			</Tooltip>
 
 			<Modal
-				title={i18next.t("common.import", { ns: "magicFlow" })}
+				title={i18next.t("common.import", { ns: "delightfulFlow" })}
 				open={open}
 				onCancel={() => setOpen(false)}
 				onOk={onOk}
-				okText={i18next.t("common.confirm", { ns: "magicFlow" })}
-				cancelText={i18next.t("common.cancel", { ns: "magicFlow" })}
+				okText={i18next.t("common.confirm", { ns: "delightfulFlow" })}
+				cancelText={i18next.t("common.cancel", { ns: "delightfulFlow" })}
 			>
 				<Form
 					form={form}
@@ -114,28 +114,28 @@ export default function IconImport({ onImport }: IconImportProps) {
 				>
 					<Form.Item
 						name="type"
-						label={i18next.t("jsonSchema.importMethod", { ns: "magicFlow" })}
+						label={i18next.t("jsonSchema.importMethod", { ns: "delightfulFlow" })}
 					>
 						<Select
 							placeholder={i18next.t("jsonSchema.importMethodPlaceholder", {
-								ns: "magicFlow",
+								ns: "delightfulFlow",
 							})}
 							options={[
 								{
 									label: i18next.t("jsonSchema.importFromTail", {
-										ns: "magicFlow",
+										ns: "delightfulFlow",
 									}),
 									value: ImportType.Push,
 								},
 								{
 									label: i18next.t("jsonSchema.importReplace", {
-										ns: "magicFlow",
+										ns: "delightfulFlow",
 									}),
 									value: ImportType.Replace,
 								},
 								{
 									label: i18next.t("jsonSchema.importInsert", {
-										ns: "magicFlow",
+										ns: "delightfulFlow",
 									}),
 									value: ImportType.Insert,
 								},
@@ -145,11 +145,11 @@ export default function IconImport({ onImport }: IconImportProps) {
 					{formValues.type === ImportType.Insert && (
 						<Form.Item
 							name="fieldKeys"
-							label={i18next.t("jsonSchema.selectField", { ns: "magicFlow" })}
+							label={i18next.t("jsonSchema.selectField", { ns: "delightfulFlow" })}
 						>
 							<Cascader
 								placeholder={i18next.t("jsonSchema.selectField", {
-									ns: "magicFlow",
+									ns: "delightfulFlow",
 								})}
 								options={fieldOptions}
 								changeOnSelect
@@ -159,12 +159,12 @@ export default function IconImport({ onImport }: IconImportProps) {
 					)}
 					<Form.Item
 						name="content"
-						label={i18next.t("jsonSchema.importContent", { ns: "magicFlow" })}
+						label={i18next.t("jsonSchema.importContent", { ns: "delightfulFlow" })}
 					>
 						<DelightfulInput.TextArea
 							style={{ minHeight: "138px" }}
 							placeholder={i18next.t("jsonSchema.importContentPlaceholder", {
-								ns: "magicFlow",
+								ns: "delightfulFlow",
 							})}
 						/>
 					</Form.Item>

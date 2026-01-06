@@ -3,23 +3,23 @@
 exports[`DelightfulCollapse > 快照测试 > 基础折叠面板快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r1"
+    class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r1"
   >
     <div
-      class="magic-collapse-item"
+      class="delightful-collapse-item"
     >
       <div
         aria-disabled="false"
         aria-expanded="false"
-        class="magic-collapse-header"
+        class="delightful-collapse-header"
         role="button"
         tabindex="0"
       >
         <div
-          class="magic-collapse-expand-icon"
+          class="delightful-collapse-expand-icon"
         >
           <svg
-            class="tabler-icon tabler-icon-chevron-right magic-collapse-arrow"
+            class="tabler-icon tabler-icon-chevron-right delightful-collapse-arrow"
             fill="none"
             height="24"
             stroke="rgba(28,29,35, 0.8)"
@@ -37,7 +37,7 @@ exports[`DelightfulCollapse > 快照测试 > 基础折叠面板快照 1`] = `
           </svg>
         </div>
         <span
-          class="magic-collapse-header-text"
+          class="delightful-collapse-header-text"
         >
           标题1
         </span>
@@ -50,23 +50,23 @@ exports[`DelightfulCollapse > 快照测试 > 基础折叠面板快照 1`] = `
 exports[`DelightfulCollapse > 快照测试 > 多个面板折叠快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r2"
+    class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r2"
   >
     <div
-      class="magic-collapse-item"
+      class="delightful-collapse-item"
     >
       <div
         aria-disabled="false"
         aria-expanded="false"
-        class="magic-collapse-header"
+        class="delightful-collapse-header"
         role="button"
         tabindex="0"
       >
         <div
-          class="magic-collapse-expand-icon"
+          class="delightful-collapse-expand-icon"
         >
           <svg
-            class="tabler-icon tabler-icon-chevron-right magic-collapse-arrow"
+            class="tabler-icon tabler-icon-chevron-right delightful-collapse-arrow"
             fill="none"
             height="24"
             stroke="rgba(28,29,35, 0.8)"
@@ -84,27 +84,27 @@ exports[`DelightfulCollapse > 快照测试 > 多个面板折叠快照 1`] = `
           </svg>
         </div>
         <span
-          class="magic-collapse-header-text"
+          class="delightful-collapse-header-text"
         >
           标题1
         </span>
       </div>
     </div>
     <div
-      class="magic-collapse-item"
+      class="delightful-collapse-item"
     >
       <div
         aria-disabled="false"
         aria-expanded="false"
-        class="magic-collapse-header"
+        class="delightful-collapse-header"
         role="button"
         tabindex="0"
       >
         <div
-          class="magic-collapse-expand-icon"
+          class="delightful-collapse-expand-icon"
         >
           <svg
-            class="tabler-icon tabler-icon-chevron-right magic-collapse-arrow"
+            class="tabler-icon tabler-icon-chevron-right delightful-collapse-arrow"
             fill="none"
             height="24"
             stroke="rgba(28,29,35, 0.8)"
@@ -122,27 +122,27 @@ exports[`DelightfulCollapse > 快照测试 > 多个面板折叠快照 1`] = `
           </svg>
         </div>
         <span
-          class="magic-collapse-header-text"
+          class="delightful-collapse-header-text"
         >
           标题2
         </span>
       </div>
     </div>
     <div
-      class="magic-collapse-item"
+      class="delightful-collapse-item"
     >
       <div
         aria-disabled="false"
         aria-expanded="false"
-        class="magic-collapse-header"
+        class="delightful-collapse-header"
         role="button"
         tabindex="0"
       >
         <div
-          class="magic-collapse-expand-icon"
+          class="delightful-collapse-expand-icon"
         >
           <svg
-            class="tabler-icon tabler-icon-chevron-right magic-collapse-arrow"
+            class="tabler-icon tabler-icon-chevron-right delightful-collapse-arrow"
             fill="none"
             height="24"
             stroke="rgba(28,29,35, 0.8)"
@@ -160,7 +160,7 @@ exports[`DelightfulCollapse > 快照测试 > 多个面板折叠快照 1`] = `
           </svg>
         </div>
         <span
-          class="magic-collapse-header-text"
+          class="delightful-collapse-header-text"
         >
           标题3
         </span>
@@ -173,23 +173,23 @@ exports[`DelightfulCollapse > 快照测试 > 多个面板折叠快照 1`] = `
 exports[`DelightfulCollapse > 快照测试 > 小尺寸折叠面板快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost magic-collapse-small acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r7"
+    class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost delightful-collapse-small acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r7"
   >
     <div
-      class="magic-collapse-item"
+      class="delightful-collapse-item"
     >
       <div
         aria-disabled="false"
         aria-expanded="false"
-        class="magic-collapse-header"
+        class="delightful-collapse-header"
         role="button"
         tabindex="0"
       >
         <div
-          class="magic-collapse-expand-icon"
+          class="delightful-collapse-expand-icon"
         >
           <svg
-            class="tabler-icon tabler-icon-chevron-right magic-collapse-arrow"
+            class="tabler-icon tabler-icon-chevron-right delightful-collapse-arrow"
             fill="none"
             height="24"
             stroke="rgba(28,29,35, 0.8)"
@@ -207,7 +207,7 @@ exports[`DelightfulCollapse > 快照测试 > 小尺寸折叠面板快照 1`] = `
           </svg>
         </div>
         <span
-          class="magic-collapse-header-text"
+          class="delightful-collapse-header-text"
         >
           标题1
         </span>
@@ -220,23 +220,23 @@ exports[`DelightfulCollapse > 快照测试 > 小尺寸折叠面板快照 1`] = `
 exports[`DelightfulCollapse > 快照测试 > 带图标面板快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r5"
+    class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r5"
   >
     <div
-      class="magic-collapse-item"
+      class="delightful-collapse-item"
     >
       <div
         aria-disabled="false"
         aria-expanded="false"
-        class="magic-collapse-header"
+        class="delightful-collapse-header"
         role="button"
         tabindex="0"
       >
         <div
-          class="magic-collapse-expand-icon"
+          class="delightful-collapse-expand-icon"
         >
           <svg
-            class="tabler-icon tabler-icon-chevron-right magic-collapse-arrow"
+            class="tabler-icon tabler-icon-chevron-right delightful-collapse-arrow"
             fill="none"
             height="24"
             stroke="rgba(28,29,35, 0.8)"
@@ -254,12 +254,12 @@ exports[`DelightfulCollapse > 快照测试 > 带图标面板快照 1`] = `
           </svg>
         </div>
         <span
-          class="magic-collapse-header-text"
+          class="delightful-collapse-header-text"
         >
           标题1
         </span>
         <div
-          class="magic-collapse-extra"
+          class="delightful-collapse-extra"
         >
           <span>
             📝
@@ -274,24 +274,24 @@ exports[`DelightfulCollapse > 快照测试 > 带图标面板快照 1`] = `
 exports[`DelightfulCollapse > 快照测试 > 手风琴模式快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r4"
+    class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r4"
     role="tablist"
   >
     <div
-      class="magic-collapse-item"
+      class="delightful-collapse-item"
     >
       <div
         aria-disabled="false"
         aria-expanded="false"
-        class="magic-collapse-header"
+        class="delightful-collapse-header"
         role="tab"
         tabindex="0"
       >
         <div
-          class="magic-collapse-expand-icon"
+          class="delightful-collapse-expand-icon"
         >
           <svg
-            class="tabler-icon tabler-icon-chevron-right magic-collapse-arrow"
+            class="tabler-icon tabler-icon-chevron-right delightful-collapse-arrow"
             fill="none"
             height="24"
             stroke="rgba(28,29,35, 0.8)"
@@ -309,27 +309,27 @@ exports[`DelightfulCollapse > 快照测试 > 手风琴模式快照 1`] = `
           </svg>
         </div>
         <span
-          class="magic-collapse-header-text"
+          class="delightful-collapse-header-text"
         >
           标题1
         </span>
       </div>
     </div>
     <div
-      class="magic-collapse-item"
+      class="delightful-collapse-item"
     >
       <div
         aria-disabled="false"
         aria-expanded="false"
-        class="magic-collapse-header"
+        class="delightful-collapse-header"
         role="tab"
         tabindex="0"
       >
         <div
-          class="magic-collapse-expand-icon"
+          class="delightful-collapse-expand-icon"
         >
           <svg
-            class="tabler-icon tabler-icon-chevron-right magic-collapse-arrow"
+            class="tabler-icon tabler-icon-chevron-right delightful-collapse-arrow"
             fill="none"
             height="24"
             stroke="rgba(28,29,35, 0.8)"
@@ -347,7 +347,7 @@ exports[`DelightfulCollapse > 快照测试 > 手风琴模式快照 1`] = `
           </svg>
         </div>
         <span
-          class="magic-collapse-header-text"
+          class="delightful-collapse-header-text"
         >
           标题2
         </span>
@@ -360,24 +360,24 @@ exports[`DelightfulCollapse > 快照测试 > 手风琴模式快照 1`] = `
 exports[`DelightfulCollapse > 快照测试 > 禁用面板快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r6"
+    class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r6"
   >
     <div
-      class="magic-collapse-item magic-collapse-item-disabled"
+      class="delightful-collapse-item delightful-collapse-item-disabled"
       disabled=""
     >
       <div
         aria-disabled="true"
         aria-expanded="false"
-        class="magic-collapse-header magic-collapse-collapsible-disabled"
+        class="delightful-collapse-header delightful-collapse-collapsible-disabled"
         role="button"
         tabindex="-1"
       >
         <div
-          class="magic-collapse-expand-icon"
+          class="delightful-collapse-expand-icon"
         >
           <svg
-            class="tabler-icon tabler-icon-chevron-right magic-collapse-arrow"
+            class="tabler-icon tabler-icon-chevron-right delightful-collapse-arrow"
             fill="none"
             height="24"
             stroke="rgba(28,29,35, 0.8)"
@@ -395,7 +395,7 @@ exports[`DelightfulCollapse > 快照测试 > 禁用面板快照 1`] = `
           </svg>
         </div>
         <span
-          class="magic-collapse-header-text"
+          class="delightful-collapse-header-text"
         >
           标题1
         </span>
@@ -408,23 +408,23 @@ exports[`DelightfulCollapse > 快照测试 > 禁用面板快照 1`] = `
 exports[`DelightfulCollapse > 快照测试 > 默认展开面板快照 1`] = `
 <DocumentFragment>
   <div
-    class="magic-collapse magic-collapse-icon-position-end magic-collapse-borderless magic-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r3"
+    class="delightful-collapse delightful-collapse-icon-position-end delightful-collapse-borderless delightful-collapse-ghost acss-1up74ee css-dev-only-do-not-override-yotw4n css-var-r3"
   >
     <div
-      class="magic-collapse-item magic-collapse-item-active"
+      class="delightful-collapse-item delightful-collapse-item-active"
     >
       <div
         aria-disabled="false"
         aria-expanded="true"
-        class="magic-collapse-header"
+        class="delightful-collapse-header"
         role="button"
         tabindex="0"
       >
         <div
-          class="magic-collapse-expand-icon"
+          class="delightful-collapse-expand-icon"
         >
           <svg
-            class="tabler-icon tabler-icon-chevron-right magic-collapse-arrow"
+            class="tabler-icon tabler-icon-chevron-right delightful-collapse-arrow"
             fill="none"
             height="24"
             stroke="rgba(28,29,35, 0.8)"
@@ -442,36 +442,36 @@ exports[`DelightfulCollapse > 快照测试 > 默认展开面板快照 1`] = `
           </svg>
         </div>
         <span
-          class="magic-collapse-header-text"
+          class="delightful-collapse-header-text"
         >
           标题1
         </span>
       </div>
       <div
-        class="magic-collapse-content magic-collapse-content-active"
+        class="delightful-collapse-content delightful-collapse-content-active"
       >
         <div
-          class="magic-collapse-content-box"
+          class="delightful-collapse-content-box"
         >
           内容1
         </div>
       </div>
     </div>
     <div
-      class="magic-collapse-item"
+      class="delightful-collapse-item"
     >
       <div
         aria-disabled="false"
         aria-expanded="false"
-        class="magic-collapse-header"
+        class="delightful-collapse-header"
         role="button"
         tabindex="0"
       >
         <div
-          class="magic-collapse-expand-icon"
+          class="delightful-collapse-expand-icon"
         >
           <svg
-            class="tabler-icon tabler-icon-chevron-right magic-collapse-arrow"
+            class="tabler-icon tabler-icon-chevron-right delightful-collapse-arrow"
             fill="none"
             height="24"
             stroke="rgba(28,29,35, 0.8)"
@@ -489,7 +489,7 @@ exports[`DelightfulCollapse > 快照测试 > 默认展开面板快照 1`] = `
           </svg>
         </div>
         <span
-          class="magic-collapse-header-text"
+          class="delightful-collapse-header-text"
         >
           标题2
         </span>

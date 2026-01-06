@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Tutorial
-      link: /en/tutorial/magic-info/
+      link: /en/tutorial/delightful-info/
     - theme: alt
       text: Development
       link:  /en/development/quick-start/quick-introduction.md

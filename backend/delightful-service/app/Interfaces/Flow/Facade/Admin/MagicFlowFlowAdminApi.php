@@ -25,10 +25,10 @@ use Hyperf\Di\Annotation\Inject;
 class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
 {
     #[Inject]
-    protected DelightfulFlowAppService $magicFlowAppService;
+    protected DelightfulFlowAppService $delightfulFlowAppService;
 
     #[Inject]
-    protected DelightfulFlowExecuteAppService $magicFlowExecuteAppService;
+    protected DelightfulFlowExecuteAppService $delightfulFlowExecuteAppService;
 
     #[Inject]
     protected MCPServerAppService $mcpServerAppService;
@@ -40,7 +40,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     {
         $this->getAuthorization();
         return [
-            'nodes' => $this->magicFlowAppService->nodeVersions(),
+            'nodes' => $this->delightfulFlowAppService->nodeVersions(),
         ];
     }
 
@@ -54,7 +54,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
         $nodeDTO = DelightfulFlowNodeAssembler::createNodeDTOByMixed($this->request->all());
         $nodeDO = DelightfulFlowNodeAssembler::createNodeDO($nodeDTO);
 
-        $node = $this->magicFlowAppService->getNodeTemplate($this->getAuthorization(), $nodeDO);
+        $node = $this->delightfulFlowAppService->getNodeTemplate($this->getAuthorization(), $nodeDO);
 
         return DelightfulFlowNodeAssembler::createNodeDTO($node);
     }
@@ -67,7 +67,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
         $authorization = $this->getAuthorization();
         $nodeDTO = DelightfulFlowNodeAssembler::createNodeDTOByMixed($this->request->all());
         $nodeDO = DelightfulFlowNodeAssembler::createNodeDO($nodeDTO);
-        return $this->magicFlowAppService->singleDebugNode(
+        return $this->delightfulFlowAppService->singleDebugNode(
             $authorization,
             $nodeDO,
             (array) $this->request->input('node_contexts', []),
@@ -81,13 +81,13 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     public function saveFlow()
     {
         $authorization = $this->getAuthorization();
-        $magicFlowDTO = DelightfulFlowAssembler::createDelightfulFlowDTOByMixed($this->request->all());
-        $magicFlowDO = DelightfulFlowAssembler::createDelightfulFlowDO($magicFlowDTO);
+        $delightfulFlowDTO = DelightfulFlowAssembler::createDelightfulFlowDTOByMixed($this->request->all());
+        $delightfulFlowDO = DelightfulFlowAssembler::createDelightfulFlowDO($delightfulFlowDTO);
 
-        $magicFlow = $this->magicFlowAppService->save($authorization, $magicFlowDO);
-        $icons = $this->magicFlowAppService->getIcons($magicFlow->getOrganizationCode(), [$magicFlow->getIcon()]);
+        $delightfulFlow = $this->delightfulFlowAppService->save($authorization, $delightfulFlowDO);
+        $icons = $this->delightfulFlowAppService->getIcons($delightfulFlow->getOrganizationCode(), [$delightfulFlow->getIcon()]);
 
-        return DelightfulFlowAssembler::createDelightfulFlowDTO($magicFlow, $icons);
+        return DelightfulFlowAssembler::createDelightfulFlowDTO($delightfulFlow, $icons);
     }
 
     /**
@@ -96,14 +96,14 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     public function flowDebug(string $flowId)
     {
         $authorization = $this->getAuthorization();
-        $magicFlowDTO = DelightfulFlowAssembler::createDelightfulFlowDTOByMixed($this->request->all());
-        $magicFlowDO = DelightfulFlowAssembler::createDelightfulFlowDO($magicFlowDTO);
-        $magicFlowDO->setCode($flowId);
+        $delightfulFlowDTO = DelightfulFlowAssembler::createDelightfulFlowDTOByMixed($this->request->all());
+        $delightfulFlowDO = DelightfulFlowAssembler::createDelightfulFlowDO($delightfulFlowDTO);
+        $delightfulFlowDO->setCode($flowId);
 
         // 触发方式、触发数据
         $triggerConfig = $this->request->input('trigger_config', []);
 
-        return $this->magicFlowExecuteAppService->testRun($authorization, $magicFlowDO, $triggerConfig);
+        return $this->delightfulFlowExecuteAppService->testRun($authorization, $delightfulFlowDO, $triggerConfig);
     }
 
     /**
@@ -116,7 +116,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
         $query = new DelightfulFLowQuery($params);
         $query->setOrder(['updated_at' => 'desc']);
         $page = $this->createPage();
-        $result = $this->magicFlowAppService->queries($authorization, $query, $page);
+        $result = $this->delightfulFlowAppService->queries($authorization, $query, $page);
         return DelightfulFlowAssembler::createPageListDTO($result['total'], $result['list'], $page, $result['users'], $result['icons']);
     }
 
@@ -128,7 +128,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
         $authorization = $this->getAuthorization();
         $params = $this->request->all();
         $query = new DelightfulFLowQuery($params);
-        $result = $this->magicFlowAppService->queryTools($authorization, $query);
+        $result = $this->delightfulFlowAppService->queryTools($authorization, $query);
         return DelightfulFlowAssembler::createPageListDTO($result['total'], $result['list'], Page::createNoPage());
     }
 
@@ -138,7 +138,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     public function queryToolSets()
     {
         $withBuiltin = (bool) $this->request->input('with_builtin', true);
-        $result = $this->magicFlowAppService->queryToolSets($this->getAuthorization(), $withBuiltin);
+        $result = $this->delightfulFlowAppService->queryToolSets($this->getAuthorization(), $withBuiltin);
         return DelightfulFlowToolSetAssembler::createPageListDTO($result['total'], $result['list'], Page::createNoPage(), $result['users'], $result['icons']);
     }
 
@@ -167,7 +167,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
      */
     public function queryKnowledge()
     {
-        $result = $this->magicFlowAppService->queryKnowledge($this->getAuthorization());
+        $result = $this->delightfulFlowAppService->queryKnowledge($this->getAuthorization());
         return DelightfulFlowKnowledgeAssembler::createPageListDTO($result['total'], $result['list'], Page::createNoPage(), $result['users']);
     }
 
@@ -176,15 +176,15 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
      */
     public function show(string $flowId)
     {
-        $magicFlow = $this->magicFlowAppService->getByCode($this->getAuthorization(), $flowId);
-        $icons = $this->magicFlowAppService->getIcons($magicFlow->getOrganizationCode(), [$magicFlow->getIcon()]);
-        return DelightfulFlowAssembler::createDelightfulFlowDTO($magicFlow, $icons);
+        $delightfulFlow = $this->delightfulFlowAppService->getByCode($this->getAuthorization(), $flowId);
+        $icons = $this->delightfulFlowAppService->getIcons($delightfulFlow->getOrganizationCode(), [$delightfulFlow->getIcon()]);
+        return DelightfulFlowAssembler::createDelightfulFlowDTO($delightfulFlow, $icons);
     }
 
     public function showParams(string $flowId)
     {
-        $magicFlow = $this->magicFlowAppService->getByCode($this->getAuthorization(), $flowId);
-        return DelightfulFlowAssembler::createDelightfulFlowParamsDTO($magicFlow);
+        $delightfulFlow = $this->delightfulFlowAppService->getByCode($this->getAuthorization(), $flowId);
+        return DelightfulFlowAssembler::createDelightfulFlowParamsDTO($delightfulFlow);
     }
 
     /**
@@ -194,7 +194,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     {
         // 从请求中获取enable参数，如果没有传递则不影响原有逻辑
         $enable = $this->request->has('enable') ? (bool) $this->request->input('enable') : null;
-        $this->magicFlowAppService->changeEnable($this->getAuthorization(), $flowId, $enable);
+        $this->delightfulFlowAppService->changeEnable($this->getAuthorization(), $flowId, $enable);
     }
 
     /**
@@ -202,12 +202,12 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
      */
     public function remove(string $flowId)
     {
-        $this->magicFlowAppService->remove($this->getAuthorization(), $flowId);
+        $this->delightfulFlowAppService->remove($this->getAuthorization(), $flowId);
     }
 
     public function expressionDataSource()
     {
         $this->getAuthorization();
-        return $this->magicFlowAppService->expressionDataSource();
+        return $this->delightfulFlowAppService->expressionDataSource();
     }
 }

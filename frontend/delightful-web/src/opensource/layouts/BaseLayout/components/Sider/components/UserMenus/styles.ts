@@ -10,7 +10,7 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 				padding: 0;
 				width: fit-content;
 				border-radius: 12px;
-				--${prefixCls}-color-bg-elevated: ${token.magicColorScales.grey[0]} !important;
+				--${prefixCls}-color-bg-elevated: ${token.delightfulColorScales.grey[0]} !important;
 			}
 
 			.${prefixCls}-popover-inner-content {
@@ -25,7 +25,7 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 				padding-left: 8px;
 			}
 
-			.${prefixCls}-menu-submenu-title, .magic-menu-item {
+			.${prefixCls}-menu-submenu-title, .delightful-menu-item {
 				--${prefixCls}-menu-item-height: 34px !important;
 			}
 
@@ -35,7 +35,7 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
         	min-width: unset;
 			user-select: none;
 
-			--${prefixCls}-menu-sub-menu-item-selected-color: ${token.magicColorUsages.text[1]} !important;
+			--${prefixCls}-menu-sub-menu-item-selected-color: ${token.delightfulColorUsages.text[1]} !important;
 
 				.${prefixCls}-dropdown-menu-item.${prefixCls}-dropdown-menu-item {
 					margin: 2px 0;
@@ -48,30 +48,30 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 				.${prefixCls}-dropdown-menu-item.${prefixCls}-dropdown-menu-item:hover {
 					background-color: ${
 						isDarkMode
-							? token.magicColorUsages.primaryLight.hover
-							: token.magicColorUsages.primaryLight.default
+							? token.delightfulColorUsages.primaryLight.hover
+							: token.delightfulColorUsages.primaryLight.default
 					};
 				}
 				.${prefixCls}-dropdown-menu-item-divider.${prefixCls}-dropdown-menu-item-divider {
 					background-color: ${
 						isDarkMode
-							? token.magicColorUsages.border
-							: token.magicColorUsages.primaryLight.default
+							? token.delightfulColorUsages.border
+							: token.delightfulColorUsages.primaryLight.default
 					};
 				}
 				.${prefixCls}-dropdown-menu-item-danger.${prefixCls}-dropdown-menu-item-danger:not(.${prefixCls}-dropdown-menu-item-disabled):hover {
 					background-color: ${
 						isDarkMode
-							? token.magicColorUsages.danger.default
-							: token.magicColorScales.red[0]
+							? token.delightfulColorUsages.danger.default
+							: token.delightfulColorScales.red[0]
 					} !important;
-					color: ${isDarkMode ? "white" : token.magicColorUsages.danger.default} !important;
+					color: ${isDarkMode ? "white" : token.delightfulColorUsages.danger.default} !important;
 				}
 
 		`,
 		arrow: css`
 			width: 20px !important;
-			color: ${isDarkMode ? token.magicColorScales.grey[5] : token.magicColorUsages.text[2]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[2]};
 		`,
 		item: css`
 			width: 100%;
@@ -111,7 +111,7 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 			flex: 1 0 0;
 			display: flex;
 			align-items: center;
-			color: ${isDarkMode ? token.magicColorScales.grey[7] : token.magicColorScales.grey[5]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[7] : token.delightfulColorScales.grey[5]};
 			font-size: 12px;
 			height: 16px;
 		`,

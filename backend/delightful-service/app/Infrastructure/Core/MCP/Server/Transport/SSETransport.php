@@ -46,7 +46,7 @@ class SSETransport implements TransportInterface
 
     public function register(string $path, string $serverName, MCPHandler $handler): void
     {
-        $sessionId = uniqid('magic_sse_');
+        $sessionId = uniqid('delightful_sse_');
         /** @var Response $response */
         $response = ApplicationContext::getContainer()->get(ResponseInterface::class);
         $eventStream = new SSEStream($response);

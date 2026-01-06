@@ -19,36 +19,36 @@ use Delightful\FlowExprEngine\ComponentFactory;
 
 class DelightfulFlowFactory
 {
-    public static function modelToEntity(DelightfulFlowModel $magicFlowModel): DelightfulFlowEntity
+    public static function modelToEntity(DelightfulFlowModel $delightfulFlowModel): DelightfulFlowEntity
     {
-        return self::arrayToEntity($magicFlowModel->toArray(), 'v0');
+        return self::arrayToEntity($delightfulFlowModel->toArray(), 'v0');
     }
 
-    public static function arrayToEntity(array $magicFlowArray, string $defaultNodeVersion = ''): DelightfulFlowEntity
+    public static function arrayToEntity(array $delightfulFlowArray, string $defaultNodeVersion = ''): DelightfulFlowEntity
     {
-        $magicFlowEntity = new DelightfulFlowEntity();
+        $delightfulFlowEntity = new DelightfulFlowEntity();
 
-        $magicFlowEntity->setId($magicFlowArray['id']);
-        $magicFlowEntity->setCode($magicFlowArray['code']);
-        $magicFlowEntity->setVersionCode($magicFlowArray['version_code']);
-        $magicFlowEntity->setName($magicFlowArray['name']);
-        $magicFlowEntity->setDescription($magicFlowArray['description']);
-        $magicFlowEntity->setIcon($magicFlowArray['icon'] ?? '');
-        $magicFlowEntity->setToolSetId($magicFlowArray['tool_set_id'] ?? ConstValue::TOOL_SET_DEFAULT_CODE);
-        $magicFlowEntity->setType(Type::from($magicFlowArray['type']));
-        $magicFlowEntity->setEnabled($magicFlowArray['enabled']);
-        $magicFlowEntity->setVersionCode($magicFlowArray['version_code']);
-        $magicFlowEntity->setOrganizationCode($magicFlowArray['organization_code']);
-        $magicFlowEntity->setCreator($magicFlowArray['created_uid'] ?? $magicFlowArray['creator'] ?? '');
-        $magicFlowEntity->setCreatedAt(new DateTime($magicFlowArray['created_at']));
-        $magicFlowEntity->setModifier($magicFlowArray['updated_uid'] ?? $magicFlowArray['modifier'] ?? '');
-        $magicFlowEntity->setUpdatedAt(new DateTime($magicFlowArray['updated_at']));
-        $magicFlowEntity->setEdges($magicFlowArray['edges'] ?? []);
-        if (! empty($magicFlowArray['global_variable'])) {
-            $magicFlowEntity->setGlobalVariable(ComponentFactory::fastCreate($magicFlowArray['global_variable']));
+        $delightfulFlowEntity->setId($delightfulFlowArray['id']);
+        $delightfulFlowEntity->setCode($delightfulFlowArray['code']);
+        $delightfulFlowEntity->setVersionCode($delightfulFlowArray['version_code']);
+        $delightfulFlowEntity->setName($delightfulFlowArray['name']);
+        $delightfulFlowEntity->setDescription($delightfulFlowArray['description']);
+        $delightfulFlowEntity->setIcon($delightfulFlowArray['icon'] ?? '');
+        $delightfulFlowEntity->setToolSetId($delightfulFlowArray['tool_set_id'] ?? ConstValue::TOOL_SET_DEFAULT_CODE);
+        $delightfulFlowEntity->setType(Type::from($delightfulFlowArray['type']));
+        $delightfulFlowEntity->setEnabled($delightfulFlowArray['enabled']);
+        $delightfulFlowEntity->setVersionCode($delightfulFlowArray['version_code']);
+        $delightfulFlowEntity->setOrganizationCode($delightfulFlowArray['organization_code']);
+        $delightfulFlowEntity->setCreator($delightfulFlowArray['created_uid'] ?? $delightfulFlowArray['creator'] ?? '');
+        $delightfulFlowEntity->setCreatedAt(new DateTime($delightfulFlowArray['created_at']));
+        $delightfulFlowEntity->setModifier($delightfulFlowArray['updated_uid'] ?? $delightfulFlowArray['modifier'] ?? '');
+        $delightfulFlowEntity->setUpdatedAt(new DateTime($delightfulFlowArray['updated_at']));
+        $delightfulFlowEntity->setEdges($delightfulFlowArray['edges'] ?? []);
+        if (! empty($delightfulFlowArray['global_variable'])) {
+            $delightfulFlowEntity->setGlobalVariable(ComponentFactory::fastCreate($delightfulFlowArray['global_variable']));
         }
         $nodes = [];
-        foreach ($magicFlowArray['nodes'] ?? [] as $nodeArr) {
+        foreach ($delightfulFlowArray['nodes'] ?? [] as $nodeArr) {
             if (! isset($nodeArr['node_type'])) {
                 continue;
             }
@@ -78,9 +78,9 @@ class DelightfulFlowFactory
             $nodes[] = $node;
         }
 
-        $magicFlowEntity->setNodes($nodes);
-        $magicFlowEntity->collectNodes();
+        $delightfulFlowEntity->setNodes($nodes);
+        $delightfulFlowEntity->collectNodes();
 
-        return $magicFlowEntity;
+        return $delightfulFlowEntity;
     }
 }

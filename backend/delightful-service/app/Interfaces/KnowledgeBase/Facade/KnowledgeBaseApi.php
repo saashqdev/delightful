@@ -67,10 +67,10 @@ class KnowledgeBaseApi extends AbstractKnowledgeBaseApi
     public function show(string $code)
     {
         $userAuthorization = $this->getAuthorization();
-        $magicFlowKnowledgeEntity = $this->knowledgeBaseAppService->show($userAuthorization, $code);
+        $delightfulFlowKnowledgeEntity = $this->knowledgeBaseAppService->show($userAuthorization, $code);
         // 补充文档数量
         $knowledgeBaseDocumentCountMap = $this->knowledgeBaseDocumentAppService->getDocumentCountByKnowledgeBaseCodes($userAuthorization, [$code]);
-        return KnowledgeBaseAssembler::entityToDTO($magicFlowKnowledgeEntity)->setDocumentCount($knowledgeBaseDocumentCountMap[$code] ?? 0);
+        return KnowledgeBaseAssembler::entityToDTO($delightfulFlowKnowledgeEntity)->setDocumentCount($knowledgeBaseDocumentCountMap[$code] ?? 0);
     }
 
     public function destroy(string $code)

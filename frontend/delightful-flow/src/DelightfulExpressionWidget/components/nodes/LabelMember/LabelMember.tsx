@@ -56,7 +56,7 @@ export default function LabelMember({ config, updateFn, wrapperWidth }: LabelMem
 					)
 				return (
 					<MemberItem
-						className="magic-label-member"
+						className="delightful-label-member"
 						item={val as Member}
 						itemClick={() => {}}
 						showCheck={false}

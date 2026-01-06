@@ -15,8 +15,8 @@ class KnowledgeBaseFragmentSavedEvent
 {
     public function __construct(
         public KnowledgeBaseDataIsolation $dataIsolation,
-        public KnowledgeBaseEntity $magicFlowKnowledgeEntity,
-        public KnowledgeBaseFragmentEntity $magicFlowKnowledgeFragmentEntity,
+        public KnowledgeBaseEntity $delightfulFlowKnowledgeEntity,
+        public KnowledgeBaseFragmentEntity $delightfulFlowKnowledgeFragmentEntity,
     ) {
     }
 }

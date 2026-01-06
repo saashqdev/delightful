@@ -21,10 +21,10 @@ class DelightfulThirdPlatformIdMappingEntity extends AbstractEntity
 
     protected string $newId;
 
-    protected string $magicOrganizationCode;
+    protected string $delightfulOrganizationCode;
 
-    // magic_environment_id
-    protected int $magicEnvironmentId = 0;
+    // delightful_environment_id
+    protected int $delightfulEnvironmentId = 0;
 
     protected PlatformType $thirdPlatformType;
 
@@ -43,12 +43,12 @@ class DelightfulThirdPlatformIdMappingEntity extends AbstractEntity
 
     public function getDelightfulEnvironmentId(): int
     {
-        return $this->magicEnvironmentId;
+        return $this->delightfulEnvironmentId;
     }
 
-    public function setDelightfulEnvironmentId(int $magicEnvironmentId): void
+    public function setDelightfulEnvironmentId(int $delightfulEnvironmentId): void
     {
-        $this->magicEnvironmentId = $magicEnvironmentId;
+        $this->delightfulEnvironmentId = $delightfulEnvironmentId;
     }
 
     public function getId(): string
@@ -112,12 +112,12 @@ class DelightfulThirdPlatformIdMappingEntity extends AbstractEntity
 
     public function getDelightfulOrganizationCode(): string
     {
-        return $this->magicOrganizationCode;
+        return $this->delightfulOrganizationCode;
     }
 
-    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $delightfulOrganizationCode): void
     {
-        $this->magicOrganizationCode = $magicOrganizationCode;
+        $this->delightfulOrganizationCode = $delightfulOrganizationCode;
     }
 
     public function getCreatedAt(): string

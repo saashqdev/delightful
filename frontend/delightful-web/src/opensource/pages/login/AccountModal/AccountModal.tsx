@@ -47,19 +47,19 @@ function AccountModal(props: AccountModalProps) {
 		setLoading(true)
 
 		values.device = await getDeviceInfo(i18n)
-		const magicOrgSyncStep = loginService.magicOrganizationSyncStep(clusterCode as string)
+		const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(clusterCode as string)
 		const userSyncStep = loginService.accountSyncStep(clusterCode as string)
 		return Promise.resolve()
 			.then(overrides?.loginStep ?? loginService.loginStep(type, values))
 			.then(async (userInfo) => {
-				// 流程问题要先在 magic 绑定用户token后才能设置token
-				const magicOrgSyncResponse = await magicOrgSyncStep(userInfo)
+				// 流程问题要先在 delightful 绑定用户token后才能设置token
+				const delightfulOrgSyncResponse = await delightfulOrgSyncStep(userInfo)
 				await loginService.authorizationSyncStep(userInfo)
 
 				// 环境同步
 				await loginService.syncClusterConfig()
 				const orgSyncResponse = await loginService.organizationFetchStep({
-					...magicOrgSyncResponse,
+					...delightfulOrgSyncResponse,
 				})
 				await loginService.organizationSyncStep(orgSyncResponse)
 				return userSyncStep(orgSyncResponse)
@@ -75,7 +75,7 @@ function AccountModal(props: AccountModalProps) {
 			.catch((error) => {
 				console.error("login error", error)
 				if (error.code === 3102) {
-					message.error(t("magicOrganizationSyncStep.pleaseBindExistingAccount"))
+					message.error(t("delightfulOrganizationSyncStep.pleaseBindExistingAccount"))
 				}
 			})
 			.finally(() => {

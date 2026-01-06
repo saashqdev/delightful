@@ -15,11 +15,11 @@ const DelightfulSpin = memo(function DelightfulSpin({
 	className,
 	...props
 }: DelightfulSpinProps) {
-	const magicSpinProps = useDelightfulSpinProps(section, size)
+	const delightfulSpinProps = useDelightfulSpinProps(section, size)
 	return (
 		<Spin
-			{...magicSpinProps}
-			wrapperClassName={cx(magicSpinProps.wrapperClassName, className)}
+			{...delightfulSpinProps}
+			wrapperClassName={cx(delightfulSpinProps.wrapperClassName, className)}
 			{...props}
 		>
 			{children}

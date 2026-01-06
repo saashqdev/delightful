@@ -36,11 +36,11 @@ class RoleApiTest extends AbstractHttpTest
     public function testCreateSubAdminSuccess(): void
     {
         // === 测试创建子管理员 ===
-        $magicPermission = new DelightfulPermission();
+        $delightfulPermission = new DelightfulPermission();
         $testPermissions = [
-            $magicPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_MODEL->value, DelightfulOperationEnum::EDIT->value),
-            $magicPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_IMAGE->value, DelightfulOperationEnum::QUERY->value),
-            $magicPermission->buildPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN->value, DelightfulOperationEnum::EDIT->value),
+            $delightfulPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_MODEL->value, DelightfulOperationEnum::EDIT->value),
+            $delightfulPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_IMAGE->value, DelightfulOperationEnum::QUERY->value),
+            $delightfulPermission->buildPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN->value, DelightfulOperationEnum::EDIT->value),
         ];
         $requestData = [
             'name' => '测试子管理员角色',
@@ -72,8 +72,8 @@ class RoleApiTest extends AbstractHttpTest
         $id = $response['data']['id'];
 
         $testPermissions = [
-            $magicPermission->buildPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN->value, DelightfulOperationEnum::EDIT->value),
-            $magicPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_MODEL->value, DelightfulOperationEnum::QUERY->value),
+            $delightfulPermission->buildPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN->value, DelightfulOperationEnum::EDIT->value),
+            $delightfulPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_MODEL->value, DelightfulOperationEnum::QUERY->value),
         ];
 
         $requestData = [

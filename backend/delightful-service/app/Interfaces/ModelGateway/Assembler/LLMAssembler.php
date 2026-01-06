@@ -118,7 +118,7 @@ class LLMAssembler
                 'id' => $modelEntity->getType(),
                 'object' => $modelEntity->getObject(),
                 'created_at' => $modelEntity->getCreatedAt()->getTimestamp(),
-                'owner_by' => $modelEntity->getOwnerBy() ?: 'magic',
+                'owner_by' => $modelEntity->getOwnerBy() ?: 'delightful',
             ];
             if ($withInfo) {
                 $data['info'] = $modelEntity->getInfo();

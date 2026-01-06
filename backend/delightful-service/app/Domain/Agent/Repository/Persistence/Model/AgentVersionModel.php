@@ -19,7 +19,7 @@ class AgentVersionModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_bot_versions';
+    protected ?string $table = 'delightful_bot_versions';
 
     /**
      * The attributes that are mass assignable.

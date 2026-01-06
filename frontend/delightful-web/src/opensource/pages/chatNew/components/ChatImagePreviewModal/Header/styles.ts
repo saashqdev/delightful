@@ -10,13 +10,13 @@ export const useStyles = createStyles(({ css, token }) => ({
 		gap: 10px;
 		flex-shrink: 0;
 		align-self: stretch;
-		background-color: ${token.magicColorUsages.fill[0]};
+		background-color: ${token.delightfulColorUsages.fill[0]};
 		user-select: none;
 		flex: none;
 	`,
 	title: css`
 		overflow: hidden;
-		color: ${token.magicColorUsages.text[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 		text-overflow: ellipsis;
 		font-size: 14px;
 		line-height: 20px;
@@ -24,7 +24,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 	`,
 	subtitle: css`
 		overflow: hidden;
-		color: ${token.magicColorUsages.text[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 		text-overflow: ellipsis;
 		font-size: 12px;
 		line-height: 16px;
@@ -37,7 +37,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 		line-height: 12px;
 		border-radius: 8px;
 		border: 1px solid ${token.colorBorder};
-		background-color: ${token.magicColorUsages.fill[0]};
+		background-color: ${token.delightfulColorUsages.fill[0]};
 		padding: 4px 8px;
 		height: 40px;
 		width: 70px;

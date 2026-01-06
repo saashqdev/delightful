@@ -17,9 +17,9 @@ class DelightfulFlowTriggerTestcaseAppService extends AbstractFlowAppService
     /**
      * 保存触发测试集.
      */
-    public function save(Authenticatable $authorization, DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): DelightfulFlowTriggerTestcaseEntity
+    public function save(Authenticatable $authorization, DelightfulFlowTriggerTestcaseEntity $delightfulFlowTriggerTestcaseEntity): DelightfulFlowTriggerTestcaseEntity
     {
-        return $this->magicFlowTriggerTestcaseDomainService->save($this->createFlowDataIsolation($authorization), $magicFlowTriggerTestcaseEntity);
+        return $this->delightfulFlowTriggerTestcaseDomainService->save($this->createFlowDataIsolation($authorization), $delightfulFlowTriggerTestcaseEntity);
     }
 
     /**
@@ -27,7 +27,7 @@ class DelightfulFlowTriggerTestcaseAppService extends AbstractFlowAppService
      */
     public function show(Authenticatable $authorization, string $flowCode, string $testcaseCode): DelightfulFlowTriggerTestcaseEntity
     {
-        return $this->magicFlowTriggerTestcaseDomainService->show($this->createFlowDataIsolation($authorization), $flowCode, $testcaseCode);
+        return $this->delightfulFlowTriggerTestcaseDomainService->show($this->createFlowDataIsolation($authorization), $flowCode, $testcaseCode);
     }
 
     /**
@@ -36,8 +36,8 @@ class DelightfulFlowTriggerTestcaseAppService extends AbstractFlowAppService
     public function remove(Authenticatable $authorization, string $flowCode, string $testcaseCode): void
     {
         $dataIsolation = $this->createFlowDataIsolation($authorization);
-        $testcaseEntity = $this->magicFlowTriggerTestcaseDomainService->show($dataIsolation, $flowCode, $testcaseCode);
-        $this->magicFlowTriggerTestcaseDomainService->remove($dataIsolation, $testcaseEntity);
+        $testcaseEntity = $this->delightfulFlowTriggerTestcaseDomainService->show($dataIsolation, $flowCode, $testcaseCode);
+        $this->delightfulFlowTriggerTestcaseDomainService->remove($dataIsolation, $testcaseEntity);
     }
 
     /**
@@ -46,13 +46,13 @@ class DelightfulFlowTriggerTestcaseAppService extends AbstractFlowAppService
      */
     public function queries(Authenticatable $authorization, DelightfulFLowTriggerTestcaseQuery $query, Page $page): array
     {
-        $result = $this->magicFlowTriggerTestcaseDomainService->queries($this->createFlowDataIsolation($authorization), $query, $page);
+        $result = $this->delightfulFlowTriggerTestcaseDomainService->queries($this->createFlowDataIsolation($authorization), $query, $page);
         $userIds = [];
         foreach ($result['list'] as $item) {
             $userIds[] = $item->getCreator();
             $userIds[] = $item->getModifier();
         }
-        $result['users'] = $this->magicUserDomainService->getByUserIds($this->createContactDataIsolation($this->createFlowDataIsolation($authorization)), $userIds);
+        $result['users'] = $this->delightfulUserDomainService->getByUserIds($this->createContactDataIsolation($this->createFlowDataIsolation($authorization)), $userIds);
         return $result;
     }
 }

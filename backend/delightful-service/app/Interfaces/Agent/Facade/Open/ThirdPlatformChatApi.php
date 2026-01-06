@@ -15,14 +15,14 @@ readonly class ThirdPlatformChatApi
 {
     public function __construct(
         protected RequestInterface $request,
-        protected DelightfulBotThirdPlatformChatAppService $magicBotThirdPlatformChatAppService
+        protected DelightfulBotThirdPlatformChatAppService $delightfulBotThirdPlatformChatAppService
     ) {
     }
 
     public function chat(): ?ResponseInterface
     {
         $key = $this->request->query('key', '');
-        $message = $this->magicBotThirdPlatformChatAppService->chat($key, $this->request->all());
+        $message = $this->delightfulBotThirdPlatformChatAppService->chat($key, $this->request->all());
         return $message->getResponse();
     }
 }

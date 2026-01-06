@@ -14,53 +14,53 @@ export const STRING_FORMATS = [
 ];
 
 export const MOCK_SOURCE = [
-    { name: i18next.t("jsonSchema.mockString", { ns: "magicFlow", defaultValue: 'String' }), mock: '@string' },
-    { name: i18next.t("jsonSchema.mockNatural", { ns: "magicFlow", defaultValue: 'Natural number' }), mock: '@natural' },
-    { name: i18next.t("jsonSchema.mockFloat", { ns: "magicFlow", defaultValue: 'Float' }), mock: '@float' },
-    { name: i18next.t("jsonSchema.mockCharacter", { ns: "magicFlow", defaultValue: 'Character' }), mock: '@character' },
-    { name: i18next.t("jsonSchema.mockBoolean", { ns: "magicFlow", defaultValue: 'Boolean' }), mock: '@boolean' },
-    { name: i18next.t("jsonSchema.mockUrl", { ns: "magicFlow", defaultValue: 'url' }), mock: '@url' },
-    { name: i18next.t("jsonSchema.mockDomain", { ns: "magicFlow", defaultValue: 'Domain' }), mock: '@domain' },
-    { name: i18next.t("jsonSchema.mockIp", { ns: "magicFlow", defaultValue: 'IP address' }), mock: '@ip' },
-    { name: i18next.t("jsonSchema.mockId", { ns: "magicFlow", defaultValue: 'id' }), mock: '@id' },
-    { name: i18next.t("jsonSchema.mockGuid", { ns: "magicFlow", defaultValue: 'guid' }), mock: '@guid' },
-    { name: i18next.t("jsonSchema.mockNow", { ns: "magicFlow", defaultValue: 'Current time' }), mock: '@now' },
-    { name: i18next.t("jsonSchema.mockTimestamp", { ns: "magicFlow", defaultValue: 'Timestamp' }), mock: '@timestamp' },
-    { name: i18next.t("jsonSchema.mockDate", { ns: "magicFlow", defaultValue: 'Date' }), mock: '@date' },
-    { name: i18next.t("jsonSchema.mockTime", { ns: "magicFlow", defaultValue: 'Time' }), mock: '@time' },
-    { name: i18next.t("jsonSchema.mockDatetime", { ns: "magicFlow", defaultValue: 'Datetime' }), mock: '@datetime' },
-    { name: i18next.t("jsonSchema.mockImage", { ns: "magicFlow", defaultValue: 'Image URL' }), mock: '@image' },
-    { name: i18next.t("jsonSchema.mockImageData", { ns: "magicFlow", defaultValue: 'Image data' }), mock: '@imageData' },
-    { name: i18next.t("jsonSchema.mockColor", { ns: "magicFlow", defaultValue: 'Color' }), mock: '@color' },
-    { name: i18next.t("jsonSchema.mockHex", { ns: "magicFlow", defaultValue: 'Color hex' }), mock: '@hex' },
-    { name: i18next.t("jsonSchema.mockRgba", { ns: "magicFlow", defaultValue: 'Color rgba' }), mock: '@rgba' },
-    { name: i18next.t("jsonSchema.mockRgb", { ns: "magicFlow", defaultValue: 'Color rgb' }), mock: '@rgb' },
-    { name: i18next.t("jsonSchema.mockHsl", { ns: "magicFlow", defaultValue: 'Color hsl' }), mock: '@hsl' },
-    { name: i18next.t("jsonSchema.mockInteger", { ns: "magicFlow", defaultValue: 'Integer' }), mock: '@integer' },
-    { name: i18next.t("jsonSchema.mockEmail", { ns: "magicFlow", defaultValue: 'email' }), mock: '@email' },
-    { name: i18next.t("jsonSchema.mockParagraph", { ns: "magicFlow", defaultValue: 'Long text' }), mock: '@paragraph' },
-    { name: i18next.t("jsonSchema.mockSentence", { ns: "magicFlow", defaultValue: 'Sentence' }), mock: '@sentence' },
-    { name: i18next.t("jsonSchema.mockWord", { ns: "magicFlow", defaultValue: 'Word' }), mock: '@word' },
-    { name: i18next.t("jsonSchema.mockCparagraph", { ns: "magicFlow", defaultValue: 'Long Chinese text' }), mock: '@cparagraph' },
-    { name: i18next.t("jsonSchema.mockCtitle", { ns: "magicFlow", defaultValue: 'Chinese title' }), mock: '@ctitle' },
-    { name: i18next.t("jsonSchema.mockTitle", { ns: "magicFlow", defaultValue: 'Title' }), mock: '@title' },
-    { name: i18next.t("jsonSchema.mockName", { ns: "magicFlow", defaultValue: 'Name' }), mock: '@name' },
-    { name: i18next.t("jsonSchema.mockCname", { ns: "magicFlow", defaultValue: 'Chinese name' }), mock: '@cname' },
-    { name: i18next.t("jsonSchema.mockCfirst", { ns: "magicFlow", defaultValue: 'Chinese surname' }), mock: '@cfirst' },
-    { name: i18next.t("jsonSchema.mockClast", { ns: "magicFlow", defaultValue: 'Chinese given name' }), mock: '@clast' },
-    { name: i18next.t("jsonSchema.mockFirst", { ns: "magicFlow", defaultValue: 'English surname' }), mock: '@first' },
-    { name: i18next.t("jsonSchema.mockLast", { ns: "magicFlow", defaultValue: 'English given name' }), mock: '@last' },
-    { name: i18next.t("jsonSchema.mockCsentence", { ns: "magicFlow", defaultValue: 'Chinese sentence' }), mock: '@csentence' },
-    { name: i18next.t("jsonSchema.mockCword", { ns: "magicFlow", defaultValue: 'Chinese phrase' }), mock: '@cword' },
-    { name: i18next.t("jsonSchema.mockRegion", { ns: "magicFlow", defaultValue: 'Address' }), mock: '@region' },
-    { name: i18next.t("jsonSchema.mockProvince", { ns: "magicFlow", defaultValue: 'Province' }), mock: '@province' },
-    { name: i18next.t("jsonSchema.mockCity", { ns: "magicFlow", defaultValue: 'City' }), mock: '@city' },
-    { name: i18next.t("jsonSchema.mockCounty", { ns: "magicFlow", defaultValue: 'County' }), mock: '@county' },
-    { name: i18next.t("jsonSchema.mockUpper", { ns: "magicFlow", defaultValue: 'Convert to uppercase' }), mock: '@upper' },
-    { name: i18next.t("jsonSchema.mockLower", { ns: "magicFlow", defaultValue: 'Convert to lowercase' }), mock: '@lower' },
-    { name: i18next.t("jsonSchema.mockPick", { ns: "magicFlow", defaultValue: 'Pick (enum)' }), mock: '@pick' },
-    { name: i18next.t("jsonSchema.mockShuffle", { ns: "magicFlow", defaultValue: 'Shuffle array' }), mock: '@shuffle' },
-    { name: i18next.t("jsonSchema.mockProtocol", { ns: "magicFlow", defaultValue: 'Protocol' }), mock: '@protocol' },
+    { name: i18next.t("jsonSchema.mockString", { ns: "delightfulFlow", defaultValue: 'String' }), mock: '@string' },
+    { name: i18next.t("jsonSchema.mockNatural", { ns: "delightfulFlow", defaultValue: 'Natural number' }), mock: '@natural' },
+    { name: i18next.t("jsonSchema.mockFloat", { ns: "delightfulFlow", defaultValue: 'Float' }), mock: '@float' },
+    { name: i18next.t("jsonSchema.mockCharacter", { ns: "delightfulFlow", defaultValue: 'Character' }), mock: '@character' },
+    { name: i18next.t("jsonSchema.mockBoolean", { ns: "delightfulFlow", defaultValue: 'Boolean' }), mock: '@boolean' },
+    { name: i18next.t("jsonSchema.mockUrl", { ns: "delightfulFlow", defaultValue: 'url' }), mock: '@url' },
+    { name: i18next.t("jsonSchema.mockDomain", { ns: "delightfulFlow", defaultValue: 'Domain' }), mock: '@domain' },
+    { name: i18next.t("jsonSchema.mockIp", { ns: "delightfulFlow", defaultValue: 'IP address' }), mock: '@ip' },
+    { name: i18next.t("jsonSchema.mockId", { ns: "delightfulFlow", defaultValue: 'id' }), mock: '@id' },
+    { name: i18next.t("jsonSchema.mockGuid", { ns: "delightfulFlow", defaultValue: 'guid' }), mock: '@guid' },
+    { name: i18next.t("jsonSchema.mockNow", { ns: "delightfulFlow", defaultValue: 'Current time' }), mock: '@now' },
+    { name: i18next.t("jsonSchema.mockTimestamp", { ns: "delightfulFlow", defaultValue: 'Timestamp' }), mock: '@timestamp' },
+    { name: i18next.t("jsonSchema.mockDate", { ns: "delightfulFlow", defaultValue: 'Date' }), mock: '@date' },
+    { name: i18next.t("jsonSchema.mockTime", { ns: "delightfulFlow", defaultValue: 'Time' }), mock: '@time' },
+    { name: i18next.t("jsonSchema.mockDatetime", { ns: "delightfulFlow", defaultValue: 'Datetime' }), mock: '@datetime' },
+    { name: i18next.t("jsonSchema.mockImage", { ns: "delightfulFlow", defaultValue: 'Image URL' }), mock: '@image' },
+    { name: i18next.t("jsonSchema.mockImageData", { ns: "delightfulFlow", defaultValue: 'Image data' }), mock: '@imageData' },
+    { name: i18next.t("jsonSchema.mockColor", { ns: "delightfulFlow", defaultValue: 'Color' }), mock: '@color' },
+    { name: i18next.t("jsonSchema.mockHex", { ns: "delightfulFlow", defaultValue: 'Color hex' }), mock: '@hex' },
+    { name: i18next.t("jsonSchema.mockRgba", { ns: "delightfulFlow", defaultValue: 'Color rgba' }), mock: '@rgba' },
+    { name: i18next.t("jsonSchema.mockRgb", { ns: "delightfulFlow", defaultValue: 'Color rgb' }), mock: '@rgb' },
+    { name: i18next.t("jsonSchema.mockHsl", { ns: "delightfulFlow", defaultValue: 'Color hsl' }), mock: '@hsl' },
+    { name: i18next.t("jsonSchema.mockInteger", { ns: "delightfulFlow", defaultValue: 'Integer' }), mock: '@integer' },
+    { name: i18next.t("jsonSchema.mockEmail", { ns: "delightfulFlow", defaultValue: 'email' }), mock: '@email' },
+    { name: i18next.t("jsonSchema.mockParagraph", { ns: "delightfulFlow", defaultValue: 'Long text' }), mock: '@paragraph' },
+    { name: i18next.t("jsonSchema.mockSentence", { ns: "delightfulFlow", defaultValue: 'Sentence' }), mock: '@sentence' },
+    { name: i18next.t("jsonSchema.mockWord", { ns: "delightfulFlow", defaultValue: 'Word' }), mock: '@word' },
+    { name: i18next.t("jsonSchema.mockCparagraph", { ns: "delightfulFlow", defaultValue: 'Long Chinese text' }), mock: '@cparagraph' },
+    { name: i18next.t("jsonSchema.mockCtitle", { ns: "delightfulFlow", defaultValue: 'Chinese title' }), mock: '@ctitle' },
+    { name: i18next.t("jsonSchema.mockTitle", { ns: "delightfulFlow", defaultValue: 'Title' }), mock: '@title' },
+    { name: i18next.t("jsonSchema.mockName", { ns: "delightfulFlow", defaultValue: 'Name' }), mock: '@name' },
+    { name: i18next.t("jsonSchema.mockCname", { ns: "delightfulFlow", defaultValue: 'Chinese name' }), mock: '@cname' },
+    { name: i18next.t("jsonSchema.mockCfirst", { ns: "delightfulFlow", defaultValue: 'Chinese surname' }), mock: '@cfirst' },
+    { name: i18next.t("jsonSchema.mockClast", { ns: "delightfulFlow", defaultValue: 'Chinese given name' }), mock: '@clast' },
+    { name: i18next.t("jsonSchema.mockFirst", { ns: "delightfulFlow", defaultValue: 'English surname' }), mock: '@first' },
+    { name: i18next.t("jsonSchema.mockLast", { ns: "delightfulFlow", defaultValue: 'English given name' }), mock: '@last' },
+    { name: i18next.t("jsonSchema.mockCsentence", { ns: "delightfulFlow", defaultValue: 'Chinese sentence' }), mock: '@csentence' },
+    { name: i18next.t("jsonSchema.mockCword", { ns: "delightfulFlow", defaultValue: 'Chinese phrase' }), mock: '@cword' },
+    { name: i18next.t("jsonSchema.mockRegion", { ns: "delightfulFlow", defaultValue: 'Address' }), mock: '@region' },
+    { name: i18next.t("jsonSchema.mockProvince", { ns: "delightfulFlow", defaultValue: 'Province' }), mock: '@province' },
+    { name: i18next.t("jsonSchema.mockCity", { ns: "delightfulFlow", defaultValue: 'City' }), mock: '@city' },
+    { name: i18next.t("jsonSchema.mockCounty", { ns: "delightfulFlow", defaultValue: 'County' }), mock: '@county' },
+    { name: i18next.t("jsonSchema.mockUpper", { ns: "delightfulFlow", defaultValue: 'Convert to uppercase' }), mock: '@upper' },
+    { name: i18next.t("jsonSchema.mockLower", { ns: "delightfulFlow", defaultValue: 'Convert to lowercase' }), mock: '@lower' },
+    { name: i18next.t("jsonSchema.mockPick", { ns: "delightfulFlow", defaultValue: 'Pick (enum)' }), mock: '@pick' },
+    { name: i18next.t("jsonSchema.mockShuffle", { ns: "delightfulFlow", defaultValue: 'Shuffle array' }), mock: '@shuffle' },
+    { name: i18next.t("jsonSchema.mockProtocol", { ns: "delightfulFlow", defaultValue: 'Protocol' }), mock: '@protocol' },
 ];
 
 export const SCHEMA_TYPE = [
@@ -127,51 +127,51 @@ export const getSchemaToOptionsMap: () => Record<FormItemType, SchemaOption[]> =
 
     
     [FormItemType.String]: [{
-        label: i18next.t("jsonSchema.typeString", { ns: "magicFlow", defaultValue: "String" }),
+        label: i18next.t("jsonSchema.typeString", { ns: "delightfulFlow", defaultValue: "String" }),
         value: FormItemType.String
     }],
 
     [FormItemType.Boolean]: [{
-        label: i18next.t("jsonSchema.typeBoolean", { ns: "magicFlow", defaultValue: "Boolean" }),
+        label: i18next.t("jsonSchema.typeBoolean", { ns: "delightfulFlow", defaultValue: "Boolean" }),
         value: FormItemType.Boolean
     }],
 
     
     [FormItemType.Number]: [{
-        label: i18next.t("jsonSchema.typeNumber", { ns: "magicFlow", defaultValue: "Number" }),
+        label: i18next.t("jsonSchema.typeNumber", { ns: "delightfulFlow", defaultValue: "Number" }),
         value: FormItemType.Number
     }],
 
     
     [FormItemType.Integer]: [{
-        label: i18next.t("jsonSchema.typeInteger", { ns: "magicFlow", defaultValue: "Integer" }),
+        label: i18next.t("jsonSchema.typeInteger", { ns: "delightfulFlow", defaultValue: "Integer" }),
         value: FormItemType.Integer
     }],
 
     
     [FormItemType.Object]: [{
-        label: i18next.t("jsonSchema.typeObject", { ns: "magicFlow", defaultValue: "Object" }),
+        label: i18next.t("jsonSchema.typeObject", { ns: "delightfulFlow", defaultValue: "Object" }),
         value: FormItemType.Object
     }],
 
     
     [FormItemType.Array]: [{
-        label: i18next.t("jsonSchema.typeStringArray", { ns: "magicFlow", defaultValue: "String array" }),
+        label: i18next.t("jsonSchema.typeStringArray", { ns: "delightfulFlow", defaultValue: "String array" }),
         value: `${FormItemType.Array}${SchemaValueSplitor}${FormItemType.String}`
     },{
-        label: i18next.t("jsonSchema.typeNumberArray", { ns: "magicFlow", defaultValue: "Integer array" }),
+        label: i18next.t("jsonSchema.typeNumberArray", { ns: "delightfulFlow", defaultValue: "Integer array" }),
         value: `${FormItemType.Array}${SchemaValueSplitor}${FormItemType.Number}`
     },{
-        label: i18next.t("jsonSchema.typeBooleanArray", { ns: "magicFlow", defaultValue: "Boolean array" }),
+        label: i18next.t("jsonSchema.typeBooleanArray", { ns: "delightfulFlow", defaultValue: "Boolean array" }),
         value: `${FormItemType.Array}${SchemaValueSplitor}${FormItemType.Boolean}`
     },{
-        label: i18next.t("jsonSchema.typeIntegerArray", { ns: "magicFlow", defaultValue: "Number array" }),
+        label: i18next.t("jsonSchema.typeIntegerArray", { ns: "delightfulFlow", defaultValue: "Number array" }),
         value: `${FormItemType.Array}${SchemaValueSplitor}${FormItemType.Integer}`
     },{
-        label: i18next.t("jsonSchema.typeObjectArray", { ns: "magicFlow", defaultValue: "Object array" }),
+        label: i18next.t("jsonSchema.typeObjectArray", { ns: "delightfulFlow", defaultValue: "Object array" }),
         value: `${FormItemType.Array}${SchemaValueSplitor}${FormItemType.Object}`
     },{
-        label: i18next.t("jsonSchema.typeArray", { ns: "magicFlow", defaultValue: "Array" }),
+        label: i18next.t("jsonSchema.typeArray", { ns: "delightfulFlow", defaultValue: "Array" }),
         value: FormItemType.Array
     }],
 })
@@ -214,12 +214,12 @@ export enum ShowColumns {
 export const DefaultDisplayColumns = Object.values(ShowColumns).filter(value => value !== ShowColumns.Encryption && value !== ShowColumns.Required) as ShowColumns[]
 
 export const DefaultColumnNames = () => ({
-    [ShowColumns.Key]: i18next.t("jsonSchema.columnKeyName", { ns: "magicFlow", defaultValue: "Parameter name" }),
-    [ShowColumns.Label]: i18next.t("jsonSchema.columnLabelName", { ns: "magicFlow", defaultValue: "Display name" }),
-    [ShowColumns.Type]: i18next.t("jsonSchema.columnTypeName", { ns: "magicFlow", defaultValue: "Parameter type" }),
-    [ShowColumns.Value]: i18next.t("jsonSchema.columnValueName", { ns: "magicFlow", defaultValue: "Parameter value" }),
-    [ShowColumns.Description]: i18next.t("jsonSchema.columnDescName", { ns: "magicFlow", defaultValue: "Parameter description" }),
-    [ShowColumns.Encryption]: i18next.t("jsonSchema.columnEncryptionName", { ns: "magicFlow", defaultValue: "Encrypted" }),
-    [ShowColumns.Required]: i18next.t("jsonSchema.columnRequiredName", { ns: "magicFlow", defaultValue: "Required" })
+    [ShowColumns.Key]: i18next.t("jsonSchema.columnKeyName", { ns: "delightfulFlow", defaultValue: "Parameter name" }),
+    [ShowColumns.Label]: i18next.t("jsonSchema.columnLabelName", { ns: "delightfulFlow", defaultValue: "Display name" }),
+    [ShowColumns.Type]: i18next.t("jsonSchema.columnTypeName", { ns: "delightfulFlow", defaultValue: "Parameter type" }),
+    [ShowColumns.Value]: i18next.t("jsonSchema.columnValueName", { ns: "delightfulFlow", defaultValue: "Parameter value" }),
+    [ShowColumns.Description]: i18next.t("jsonSchema.columnDescName", { ns: "delightfulFlow", defaultValue: "Parameter description" }),
+    [ShowColumns.Encryption]: i18next.t("jsonSchema.columnEncryptionName", { ns: "delightfulFlow", defaultValue: "Encrypted" }),
+    [ShowColumns.Required]: i18next.t("jsonSchema.columnRequiredName", { ns: "delightfulFlow", defaultValue: "Required" })
 })
 

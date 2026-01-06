@@ -2,7 +2,7 @@ import _ from "lodash"
 import { NodeSchema, NodeWidget, nodeManager } from "./register/node"
 import { getLatestNodeVersion } from "./utils"
 
-export const prefix = "magic-flow-"
+export const prefix = "delightful-flow-"
 
 /**
 	 * Flow status

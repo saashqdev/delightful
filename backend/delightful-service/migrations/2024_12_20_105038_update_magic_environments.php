@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_environments', function (Blueprint $table) {
+        Schema::table('delightful_environments', function (Blueprint $table) {
             $table->json('private_config')->comment('麦吉自己的一些配置');
             // 重命名 config 字段为 open_platform_config
             $table->renameColumn('config', 'open_platform_config');

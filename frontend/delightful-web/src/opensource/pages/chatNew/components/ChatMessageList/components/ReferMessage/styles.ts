@@ -3,9 +3,9 @@ import { createStyles } from "antd-style"
 export const useStyles = createStyles(
 	({ token, isDarkMode, css }, { isSelf }: { isSelf: boolean }) => {
 		const selfBorderColor = isDarkMode
-			? token.magicColorUsages.fill[1]
-			: token.magicColorUsages.white
-		const otherBorderColor = isDarkMode ? token.magicColorScales.grey[4] : token.colorBorder
+			? token.delightfulColorUsages.fill[1]
+			: token.delightfulColorUsages.white
+		const otherBorderColor = isDarkMode ? token.delightfulColorScales.grey[4] : token.colorBorder
 
 		return {
 			container: {

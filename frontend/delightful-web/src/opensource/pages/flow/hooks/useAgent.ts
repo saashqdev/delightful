@@ -18,7 +18,7 @@ export default function useAgent() {
 	const defaultIcon = useBotStore((state) => state.defaultIcon.icons)
 
 	const [data, setData] = useState<Bot.Detail>({} as Bot.Detail)
-	const [magicName, setDelightfulName] = useState<string>("")
+	const [delightfulName, setDelightfulName] = useState<string>("")
 
 	const { updatePublishList, updateInstructList } = useBotStore()
 	// const { data: isBotUpdate } = useBotStore((state) => state.useIsBotUpdate)(id!)
@@ -45,7 +45,7 @@ export default function useAgent() {
 
 	return {
 		// isBotUpdate,
-		magicName,
+		delightfulName,
 		agent: data,
 		defaultIcon,
 		setAgent: setData,

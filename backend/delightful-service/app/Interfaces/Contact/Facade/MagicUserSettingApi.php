@@ -19,7 +19,7 @@ use Hyperf\Di\Annotation\Inject;
 class DelightfulUserSettingApi extends AbstractApi
 {
     #[Inject]
-    protected DelightfulUserSettingAppService $magicUserSettingAppService;
+    protected DelightfulUserSettingAppService $delightfulUserSettingAppService;
 
     public function save()
     {
@@ -28,7 +28,7 @@ class DelightfulUserSettingApi extends AbstractApi
         $dto = new DelightfulUserSettingDTO($this->request->all());
         $entity = DelightfulUserSettingAssembler::createEntity($dto);
 
-        $savedEntity = $this->magicUserSettingAppService->save($authorization, $entity);
+        $savedEntity = $this->delightfulUserSettingAppService->save($authorization, $entity);
 
         return DelightfulUserSettingAssembler::createDTO($savedEntity);
     }
@@ -37,7 +37,7 @@ class DelightfulUserSettingApi extends AbstractApi
     {
         $authorization = $this->getAuthorization();
 
-        $entity = $this->magicUserSettingAppService->get($authorization, $key);
+        $entity = $this->delightfulUserSettingAppService->get($authorization, $key);
 
         if (! $entity) {
             return null;
@@ -53,7 +53,7 @@ class DelightfulUserSettingApi extends AbstractApi
 
         $query = new DelightfulUserSettingQuery($this->request->all());
 
-        $result = $this->magicUserSettingAppService->queries($authorization, $query, $page);
+        $result = $this->delightfulUserSettingAppService->queries($authorization, $query, $page);
 
         return DelightfulUserSettingAssembler::createPageListDTO(
             total: $result['total'],
@@ -68,14 +68,14 @@ class DelightfulUserSettingApi extends AbstractApi
         $model = $this->request->input('model', []);
         $imageModel = $this->request->input('image_model', []);
 
-        $userSetting = $this->magicUserSettingAppService->saveProjectTopicModelConfig($authorization, $topicId, $model, $imageModel);
+        $userSetting = $this->delightfulUserSettingAppService->saveProjectTopicModelConfig($authorization, $topicId, $model, $imageModel);
         return $userSetting->getValue();
     }
 
     public function getProjectTopicModelConfig(string $topicId)
     {
         $authorization = $this->getAuthorization();
-        $userSetting = $this->magicUserSettingAppService->getProjectTopicModelConfig($authorization, $topicId);
+        $userSetting = $this->delightfulUserSettingAppService->getProjectTopicModelConfig($authorization, $topicId);
         return $userSetting?->getValue() ?? [];
     }
 }

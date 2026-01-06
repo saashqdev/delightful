@@ -18,11 +18,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_modes')) {
+        if (Schema::hasTable('delightful_modes')) {
             return;
         }
 
-        Schema::create('magic_modes', function (Blueprint $table) {
+        Schema::create('delightful_modes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->json('name_i18n')->comment('模式名称国际化');
             $table->string('identifier', 50)->default('')->comment('模式标识，唯一');
@@ -75,6 +75,6 @@ return new class extends Migration {
             'updated_at' => now(),
         ];
 
-        Db::table('magic_modes')->insert($defaultModeData);
+        Db::table('delightful_modes')->insert($defaultModeData);
     }
 };

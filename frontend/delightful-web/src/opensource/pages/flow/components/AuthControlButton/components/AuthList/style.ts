@@ -60,7 +60,7 @@ const useStyles = createStyles(({ css }) => {
 
 			.operation {
 				width: 100px;
-				.magic-select {
+				.delightful-select {
 					width: 100%;
 				}
 			}

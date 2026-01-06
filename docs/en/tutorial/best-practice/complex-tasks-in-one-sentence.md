@@ -19,26 +19,26 @@ The Delightful Project Assistant is designed for enterprise management, helping 
    2. Use the intent node to determine whether to follow task breakdown or task execution
    3. Describe the tools needed and their capabilities
 
-![Main Process](https://cdn.letsmagic.cn/static/img/flow1.png)
+![Main Process](https://cdn.letsdelightful.cn/static/img/flow1.png)
 
 2. Build a task breakdown process to break down steps and tasks according to the inferred user intentions
    1. Create a task breakdown flow
 
-![Task Breakdown Flow](https://cdn.letsmagic.cn/static/img/flow2.png)
+![Task Breakdown Flow](https://cdn.letsdelightful.cn/static/img/flow2.png)
 
    2. Choose GPT4o as the model for task breakdown
 
-![Choose Model](https://cdn.letsmagic.cn/static/img/flow3.png)
+![Choose Model](https://cdn.letsdelightful.cn/static/img/flow3.png)
 
 3. Build a task execution process and load the appropriate tools
    1. Create a task execution flow
 
-![Task Execution Flow](https://cdn.letsmagic.cn/static/img/flow4.png)
+![Task Execution Flow](https://cdn.letsdelightful.cn/static/img/flow4.png)
 
    2. Load the tools needed for task execution
 
-![Load Tools](https://cdn.letsmagic.cn/static/img/flow5.png)
+![Load Tools](https://cdn.letsdelightful.cn/static/img/flow5.png)
 
 4. Observe and verify the results
 
-![Verify Results](https://cdn.letsmagic.cn/static/img/flow5.png) 
+![Verify Results](https://cdn.letsdelightful.cn/static/img/flow5.png) 

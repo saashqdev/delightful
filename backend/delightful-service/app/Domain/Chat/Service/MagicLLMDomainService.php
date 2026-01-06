@@ -313,7 +313,7 @@ class DelightfulLLMDomainService
     public function __construct(
         private readonly Redis $redis,
         public TavilySearch $apiWrapper,
-        protected readonly DelightfulFlowAIModelRepositoryInterface $magicFlowAIModelRepository,
+        protected readonly DelightfulFlowAIModelRepositoryInterface $delightfulFlowAIModelRepository,
         protected LoggerFactory $loggerFactory,
     ) {
         $this->logger = $this->loggerFactory->get(get_class($this));
@@ -692,7 +692,7 @@ class DelightfulLLMDomainService
     public function generateSearchKeywordsByUserInput(DelightfulChatAggregateSearchReqDTO $dto, ModelInterface $modelInterface): array
     {
         $userInputKeyword = $dto->getUserMessage();
-        $magicChatMessageHistory = $dto->getDelightfulChatMessageHistory();
+        $delightfulChatMessageHistory = $dto->getDelightfulChatMessageHistory();
         $queryVo = (new AISearchCommonQueryVo())
             ->setUserMessage($userInputKeyword)
             ->setSearchEngine(SearchEngineType::Bing)
@@ -703,10 +703,10 @@ class DelightfulLLMDomainService
             ->setUserId($dto->getUserId())
             ->setOrganizationCode($dto->getOrganizationCode());
         $start = microtime(true);
-        $subKeywords = Retry::whenThrows()->sleep(200)->max(3)->call(function () use ($queryVo, $magicChatMessageHistory) {
+        $subKeywords = Retry::whenThrows()->sleep(200)->max(3)->call(function () use ($queryVo, $delightfulChatMessageHistory) {
             // 每次重试清空之前的上下文
             $llmConversationId = (string) IdGenerator::getSnowId();
-            $llmHistoryMessage = DelightfulChatAggregateSearchReqDTO::generateLLMHistory($magicChatMessageHistory, $llmConversationId);
+            $llmHistoryMessage = DelightfulChatAggregateSearchReqDTO::generateLLMHistory($delightfulChatMessageHistory, $llmConversationId);
             $queryVo->setMessageHistory($llmHistoryMessage)->setConversationId($llmConversationId);
             return $this->generateSearchKeywords($queryVo);
         });
@@ -1010,7 +1010,7 @@ class DelightfulLLMDomainService
 
     protected function getModelEntity(string $name): DelightfulFlowAIModelEntity
     {
-        $model = $this->magicFlowAIModelRepository->getByName(FlowDataIsolation::create(), $name);
+        $model = $this->delightfulFlowAIModelRepository->getByName(FlowDataIsolation::create(), $name);
         if (! $model) {
             ExceptionBuilder::throw(
                 FlowErrorCode::ExecuteValidateFailed,

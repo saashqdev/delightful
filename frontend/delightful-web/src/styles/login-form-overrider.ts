@@ -11,12 +11,12 @@ const useLoginFormOverrideStyles = createStyles(({ css, prefixCls, token }) => {
 				--${prefixCls}-button-border-color-disabled: transparent;
 
         &:disabled {
-					background-color: ${token.magicColorUsages.disabled.bg};
+					background-color: ${token.delightfulColorUsages.disabled.bg};
 				}
 			}
 
 			.${prefixCls}-form-item {
-        --${prefixCls}-form-label-color: ${token.magicColorUsages.text[2]};
+        --${prefixCls}-form-label-color: ${token.delightfulColorUsages.text[2]};
 
         .${prefixCls}-form-item-additional {
           margin-top: 10px;

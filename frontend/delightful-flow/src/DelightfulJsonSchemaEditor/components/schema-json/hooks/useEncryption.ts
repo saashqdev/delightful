@@ -37,7 +37,7 @@ export default function useEncryption({
 	const encryptionTooltips = useMemo(() => {
 		// If already encrypted, do not allow encrypting again
 		const isEncryption = value?.encryption_value
-		if(isEncryption) return i18next.t("jsonSchema.encryptionDesc", { ns: "magicFlow" })
+		if(isEncryption) return i18next.t("jsonSchema.encryptionDesc", { ns: "delightfulFlow" })
 		return ""
 	}, [value])
 

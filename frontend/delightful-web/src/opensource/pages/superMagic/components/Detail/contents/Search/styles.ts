@@ -30,7 +30,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 		boxShadow: "none !important",
 		padding: "6px 20px 6px 10px",
 		// backgroundColor: `${token.colorFillTertiary} !important`,
-		backgroundColor: token.magicColorUsages.bg[1],
+		backgroundColor: token.delightfulColorUsages.bg[1],
 	},
 
 	searchBody: css`
@@ -50,7 +50,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 		display: "flex",
 		// padding: "10px 0px",
 		// borderBottom: `1px solid ${token.colorBorder}`,
-		backgroundColor: token.magicColorUsages.bg[1],
+		backgroundColor: token.delightfulColorUsages.bg[1],
 		marginBottom: 10,
 		padding: "10px 12px",
 		borderRadius: 8,
@@ -104,7 +104,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 		textOverflow: "ellipsis",
 		overflow: "hidden",
 		whiteSpace: "nowrap",
-		color: token.magicColorUsages.text[1],
+		color: token.delightfulColorUsages.text[1],
 	},
 
 	info: {
@@ -112,7 +112,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 		fontSize: 12,
 		fontWeight: 400,
 		lineHeight: "16px",
-		color: token.magicColorUsages.text[2],
+		color: token.delightfulColorUsages.text[2],
 		display: "-webkit-box",
 		WebkitLineClamp: "2",
 		WebkitBoxOrient: "vertical",
@@ -120,7 +120,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 	},
 
 	searchInfo: {
-		color: token.magicColorUsages.text[3],
+		color: token.delightfulColorUsages.text[3],
 		fontSize: 12,
 	},
 }))

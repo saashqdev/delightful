@@ -30,13 +30,13 @@ class DelightfulFlowVersionAppService extends AbstractFlowAppService
         $this->getFlowAndValidateOperation($dataIsolation, $query->getFlowCode(), 'read');
 
         $query->setSelect(['id', 'flow_code', 'code', 'name', 'description', 'organization_code', 'created_uid', 'created_at', 'updated_uid', 'updated_at', 'deleted_at']);
-        $result = $this->magicFlowVersionDomainService->queries($dataIsolation, $query, $page);
+        $result = $this->delightfulFlowVersionDomainService->queries($dataIsolation, $query, $page);
         $userIds = [];
         foreach ($result['list'] as $item) {
             $userIds[] = $item->getCreator();
             $userIds[] = $item->getModifier();
         }
-        $result['users'] = $this->magicUserDomainService->getByUserIds($this->createContactDataIsolation($dataIsolation), $userIds);
+        $result['users'] = $this->delightfulUserDomainService->getByUserIds($this->createContactDataIsolation($dataIsolation), $userIds);
         return $result;
     }
 
@@ -49,25 +49,25 @@ class DelightfulFlowVersionAppService extends AbstractFlowAppService
         if (empty($flowCode)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow_code']);
         }
-        $magicFlow = $this->getFlowAndValidateOperation($dataIsolation, $flowCode, 'read');
-        $version = $this->magicFlowVersionDomainService->show($dataIsolation, $magicFlow->getCode(), $versionCode);
-        $version->getDelightfulFlow()->setUserOperation($magicFlow->getUserOperation());
+        $delightfulFlow = $this->getFlowAndValidateOperation($dataIsolation, $flowCode, 'read');
+        $version = $this->delightfulFlowVersionDomainService->show($dataIsolation, $delightfulFlow->getCode(), $versionCode);
+        $version->getDelightfulFlow()->setUserOperation($delightfulFlow->getUserOperation());
         return $version;
     }
 
     /**
      * 发布版本.
      */
-    public function publish(Authenticatable $authorization, DelightfulFlowVersionEntity $magicFlowVersionEntity): DelightfulFlowVersionEntity
+    public function publish(Authenticatable $authorization, DelightfulFlowVersionEntity $delightfulFlowVersionEntity): DelightfulFlowVersionEntity
     {
-        if (empty($magicFlowVersionEntity->getFlowCode())) {
+        if (empty($delightfulFlowVersionEntity->getFlowCode())) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow_code']);
         }
         $dataIsolation = $this->createFlowDataIsolation($authorization);
-        $magicFlow = $this->getFlowAndValidateOperation($dataIsolation, $magicFlowVersionEntity->getFlowCode(), 'edit');
+        $delightfulFlow = $this->getFlowAndValidateOperation($dataIsolation, $delightfulFlowVersionEntity->getFlowCode(), 'edit');
 
-        $version = $this->magicFlowVersionDomainService->publish($dataIsolation, $magicFlow, $magicFlowVersionEntity);
-        $version->getDelightfulFlow()->setUserOperation($magicFlow->getUserOperation());
+        $version = $this->delightfulFlowVersionDomainService->publish($dataIsolation, $delightfulFlow, $delightfulFlowVersionEntity);
+        $version->getDelightfulFlow()->setUserOperation($delightfulFlow->getUserOperation());
         return $version;
     }
 
@@ -80,10 +80,10 @@ class DelightfulFlowVersionAppService extends AbstractFlowAppService
         if (empty($flowCode)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow_code']);
         }
-        $magicFlow = $this->getFlowAndValidateOperation($dataIsolation, $flowCode, 'edit');
+        $delightfulFlow = $this->getFlowAndValidateOperation($dataIsolation, $flowCode, 'edit');
 
-        $version = $this->magicFlowVersionDomainService->rollback($dataIsolation, $magicFlow, $versionCode);
-        $version->getDelightfulFlow()->setUserOperation($magicFlow->getUserOperation());
+        $version = $this->delightfulFlowVersionDomainService->rollback($dataIsolation, $delightfulFlow, $versionCode);
+        $version->getDelightfulFlow()->setUserOperation($delightfulFlow->getUserOperation());
         return $version;
     }
 }

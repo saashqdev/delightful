@@ -39,10 +39,10 @@ class DelightfulUserOrganizationApi extends AbstractApi
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
 
-        $magicId = $this->getDelightfulIdByAuthorization($authorization);
+        $delightfulId = $this->getDelightfulIdByAuthorization($authorization);
 
         // 获取当前用户的组织代码
-        return $this->userOrganizationAppService->getCurrentOrganizationCode($magicId);
+        return $this->userOrganizationAppService->getCurrentOrganizationCode($delightfulId);
     }
 
     /**
@@ -56,16 +56,16 @@ class DelightfulUserOrganizationApi extends AbstractApi
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
 
-        $magicId = $this->getDelightfulIdByAuthorization($authorization);
+        $delightfulId = $this->getDelightfulIdByAuthorization($authorization);
 
         // 从请求体获取组织代码
-        $organizationCode = (string) $request->input('magic_organization_code', '');
+        $organizationCode = (string) $request->input('delightful_organization_code', '');
         if (empty($organizationCode)) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
 
         // 设置用户当前组织代码
-        return $this->userOrganizationAppService->setCurrentOrganizationCode($magicId, $organizationCode);
+        return $this->userOrganizationAppService->setCurrentOrganizationCode($delightfulId, $organizationCode);
     }
 
     /**
@@ -87,7 +87,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
         if (empty($userDetails)) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
-        // 同一账号下 magic_id 全局唯一，这里取第一个即可
+        // 同一账号下 delightful_id 全局唯一，这里取第一个即可
         return $userDetails[0]->getDelightfulId();
     }
 }

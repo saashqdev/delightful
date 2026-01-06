@@ -1,5 +1,5 @@
 import { generateContactApi } from "./modules/contact"
-import magicClient from "./clients/magic"
+import delightfulClient from "./clients/delightful"
 import chatWebSocketClient from "./clients/chatWebSocket"
 import { generateUserApi } from "./modules/user"
 import { generateCommonApi } from "./modules/common"
@@ -14,17 +14,17 @@ import { generateSearchApi } from "./modules/search"
 import { generateChatApi } from "./modules/chat"
 
 /** 重置服务 */
-export const UserApi = generateUserApi(magicClient)
-export const CommonApi = generateCommonApi(magicClient)
+export const UserApi = generateUserApi(delightfulClient)
+export const CommonApi = generateCommonApi(delightfulClient)
 
 /** Delightful 服务 */
-export const AuthApi = generateAuthApi(magicClient)
-export const ContactApi = generateContactApi(magicClient)
-export const BotApi = generateBotApi(magicClient)
-export const CalendarApi = generateCalendarApi(magicClient)
-export const FavoritesApi = generateFavoritesApi(magicClient)
-export const FileApi = generateFileApi(magicClient)
-export const FlowApi = generateFlowApi(magicClient)
-export const KnowledgeApi = generateKnowledgeApi(magicClient)
-export const SearchApi = generateSearchApi(magicClient)
-export const ChatApi = generateChatApi(magicClient, chatWebSocketClient)
+export const AuthApi = generateAuthApi(delightfulClient)
+export const ContactApi = generateContactApi(delightfulClient)
+export const BotApi = generateBotApi(delightfulClient)
+export const CalendarApi = generateCalendarApi(delightfulClient)
+export const FavoritesApi = generateFavoritesApi(delightfulClient)
+export const FileApi = generateFileApi(delightfulClient)
+export const FlowApi = generateFlowApi(delightfulClient)
+export const KnowledgeApi = generateKnowledgeApi(delightfulClient)
+export const SearchApi = generateSearchApi(delightfulClient)
+export const ChatApi = generateChatApi(delightfulClient, chatWebSocketClient)

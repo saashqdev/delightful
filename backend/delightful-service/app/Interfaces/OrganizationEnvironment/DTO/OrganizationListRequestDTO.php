@@ -18,7 +18,7 @@ class OrganizationListRequestDTO extends AbstractDTO
 
     public ?string $name = null;
 
-    public ?string $magicOrganizationCode = null;
+    public ?string $delightfulOrganizationCode = null;
 
     public ?int $status = null;
 
@@ -40,7 +40,7 @@ class OrganizationListRequestDTO extends AbstractDTO
         $dto->page = (int) $request->input('page', 1);
         $dto->pageSize = (int) $request->input('page_size', 20);
         $dto->name = $request->input('name');
-        $dto->magicOrganizationCode = $request->input('magic_organization_code');
+        $dto->delightfulOrganizationCode = $request->input('delightful_organization_code');
         $dto->status = ($request->input('status') !== null) ? (int) $request->input('status') : null;
         $dto->type = ($request->input('type') !== null) ? (int) $request->input('type') : null;
         $dto->syncStatus = ($request->input('sync_status') !== null) ? (int) $request->input('sync_status') : null;
@@ -56,7 +56,7 @@ class OrganizationListRequestDTO extends AbstractDTO
     {
         return array_filter([
             'name' => $this->name,
-            'magic_organization_code' => $this->magicOrganizationCode,
+            'delightful_organization_code' => $this->delightfulOrganizationCode,
             'status' => $this->status,
             'type' => $this->type,
             'sync_status' => $this->syncStatus,

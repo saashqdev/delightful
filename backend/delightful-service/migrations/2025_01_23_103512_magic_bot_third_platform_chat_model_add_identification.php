@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_bot_third_platform_chat', function (Blueprint $table) {
+        Schema::table('delightful_bot_third_platform_chat', function (Blueprint $table) {
             $table->string('identification')->default('')->comment('标识')->after('key');
         });
     }

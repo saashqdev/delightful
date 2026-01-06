@@ -20,10 +20,10 @@ trait DelightfulUserAuthorizationTrait
      */
     protected function getAuthorization(): Authenticatable
     {
-        $magicUserAuthorization = RequestCoContext::getUserAuthorization();
-        if (! $magicUserAuthorization) {
+        $delightfulUserAuthorization = RequestCoContext::getUserAuthorization();
+        if (! $delightfulUserAuthorization) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
-        return $magicUserAuthorization;
+        return $delightfulUserAuthorization;
     }
 }

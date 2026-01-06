@@ -25,7 +25,7 @@ class DelightfulChatTopicMessageModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_chat_topic_messages';
+    protected ?string $table = 'delightful_chat_topic_messages';
 
     /**
      * The attributes that are mass assignable.

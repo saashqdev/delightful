@@ -30,7 +30,7 @@
 	"login": "登录",
 	"loginPrivateDeployment": "私有部署登录",
 	"loginPublicDeployment": "公有部署登录",
-	"magicOrganizationSyncStep": {
+	"delightfulOrganizationSyncStep": {
 		"pleaseBindExistingAccount": "请绑定已有账号"
 	},
 	"nextStep": "下一步",

@@ -11,7 +11,7 @@ export const useStyles = createStyles(({ css, token, isDarkMode, prefixCls }) =>
 	title: css`
 		font-size: 16px;
 		font-weight: 600;
-		color: ${token.magicColorUsages.text[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 	`,
 	wrapper: css`
 		flex: 1;
@@ -31,12 +31,12 @@ export const useStyles = createStyles(({ css, token, isDarkMode, prefixCls }) =>
 	`,
 	button: css`
 		height: 42px;
-		border: 1px solid ${token.magicColorUsages.border};
-		color: ${token.magicColorUsages.text[1]};
+		border: 1px solid ${token.delightfulColorUsages.border};
+		color: ${token.delightfulColorUsages.text[1]};
 		flex-shrink: 0;
 	`,
 	icon: css`
-		color: ${token.magicColorUsages.text[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 	`,
 	ellipsis: css`
 		text-overflow: ellipsis;
@@ -47,11 +47,11 @@ export const useStyles = createStyles(({ css, token, isDarkMode, prefixCls }) =>
 	`,
 	subTitle: css`
 		font-size: 14px;
-		color: ${token.magicColorUsages.text[0]};
+		color: ${token.delightfulColorUsages.text[0]};
 	`,
 	desc: css`
 		font-size: 12px;
-		color: ${token.magicColorUsages.text[2]};
+		color: ${token.delightfulColorUsages.text[2]};
 	`,
 	taskItem: css`
 		padding: 8px 0 8px 8px;
@@ -59,8 +59,8 @@ export const useStyles = createStyles(({ css, token, isDarkMode, prefixCls }) =>
 		border-radius: 8px;
 		&:hover {
 			background-color: ${isDarkMode
-				? token.magicColorScales.grey[0]
-				: token.magicColorScales.grey[0]};
+				? token.delightfulColorScales.grey[0]
+				: token.delightfulColorScales.grey[0]};
 		}
 	`,
 	dots: css`

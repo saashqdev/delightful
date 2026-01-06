@@ -19,7 +19,7 @@ const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) => ({
     }
 	`,
 	icon: css`
-		background-color: ${token.magicColorScales.green[5]};
+		background-color: ${token.delightfulColorScales.green[5]};
 		color: white;
 		border-radius: 4px;
 		padding: 4px;

@@ -7,7 +7,7 @@ function ErrorContent() {
 	return (
 		<Flex className={styles.invalidText} justify="space-between" align="center" gap={10}>
 			<div className={styles.invalidText}>
-				{i18next.t("common.renderError", { ns: "magicFlow" })}
+				{i18next.t("common.renderError", { ns: "delightfulFlow" })}
 			</div>
 		</Flex>
 	)

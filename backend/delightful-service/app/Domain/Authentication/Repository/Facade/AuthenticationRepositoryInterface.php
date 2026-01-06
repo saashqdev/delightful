@@ -25,5 +25,5 @@ interface AuthenticationRepositoryInterface
     /**
      * 通过DelightfulID和组织编码查找用户.
      */
-    public function findUserByDelightfulIdAndOrganization(string $magicId, ?string $organizationCode = null): ?DelightfulUserEntity;
+    public function findUserByDelightfulIdAndOrganization(string $delightfulId, ?string $organizationCode = null): ?DelightfulUserEntity;
 }

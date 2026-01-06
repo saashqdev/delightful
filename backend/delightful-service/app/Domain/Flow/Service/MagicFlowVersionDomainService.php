@@ -23,8 +23,8 @@ use Hyperf\DbConnection\Annotation\Transactional;
 class DelightfulFlowVersionDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly DelightfulFlowRepositoryInterface $magicFlowRepository,
-        private readonly DelightfulFlowVersionRepositoryInterface $magicFlowVersionRepository,
+        private readonly DelightfulFlowRepositoryInterface $delightfulFlowRepository,
+        private readonly DelightfulFlowVersionRepositoryInterface $delightfulFlowVersionRepository,
     ) {
     }
 
@@ -33,12 +33,12 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
      */
     public function getByCodes(FlowDataIsolation $dataIsolation, array $versionCodes): array
     {
-        return $this->magicFlowVersionRepository->getByCodes($dataIsolation, $versionCodes);
+        return $this->delightfulFlowVersionRepository->getByCodes($dataIsolation, $versionCodes);
     }
 
     public function getLastVersion(FlowDataIsolation $dataIsolation, string $flowCode): ?DelightfulFlowVersionEntity
     {
-        return $this->magicFlowVersionRepository->getLastVersion($dataIsolation, $flowCode);
+        return $this->delightfulFlowVersionRepository->getLastVersion($dataIsolation, $flowCode);
     }
 
     /**
@@ -47,7 +47,7 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowVersionQuery $query, Page $page): array
     {
-        return $this->magicFlowVersionRepository->queries($dataIsolation, $query, $page);
+        return $this->delightfulFlowVersionRepository->queries($dataIsolation, $query, $page);
     }
 
     /**
@@ -55,7 +55,7 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
      */
     public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $versionCode): DelightfulFlowVersionEntity
     {
-        $version = $this->magicFlowVersionRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $versionCode);
+        $version = $this->delightfulFlowVersionRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $versionCode);
         if (! $version) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$versionCode} 不存在");
         }
@@ -66,41 +66,41 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
      * 发版.
      */
     #[Transactional]
-    public function publish(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $magicFlow, DelightfulFlowVersionEntity $magicFlowVersionEntity): DelightfulFlowVersionEntity
+    public function publish(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, DelightfulFlowVersionEntity $delightfulFlowVersionEntity): DelightfulFlowVersionEntity
     {
-        $magicFlowVersionEntity->setCreator($dataIsolation->getCurrentUserId());
-        $magicFlowVersionEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        $magicFlowVersionEntity->prepareForCreation();
-        if (empty($magicFlow->getVersionCode())) {
-            $magicFlow->setEnabled(true);
-            $magicFlowVersionEntity->getDelightfulFlow()->setEnabled(true);
+        $delightfulFlowVersionEntity->setCreator($dataIsolation->getCurrentUserId());
+        $delightfulFlowVersionEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
+        $delightfulFlowVersionEntity->prepareForCreation();
+        if (empty($delightfulFlow->getVersionCode())) {
+            $delightfulFlow->setEnabled(true);
+            $delightfulFlowVersionEntity->getDelightfulFlow()->setEnabled(true);
         }
-        $magicFlow->prepareForPublish($magicFlowVersionEntity, $dataIsolation->getCurrentUserId());
+        $delightfulFlow->prepareForPublish($delightfulFlowVersionEntity, $dataIsolation->getCurrentUserId());
 
-        $magicFlowVersionEntity = $this->magicFlowVersionRepository->create($dataIsolation, $magicFlowVersionEntity);
-        $this->magicFlowRepository->save($dataIsolation, $magicFlow);
-        AsyncEventUtil::dispatch(new DelightfulFlowPublishedEvent($magicFlowVersionEntity->getDelightfulFlow()));
-        return $magicFlowVersionEntity;
+        $delightfulFlowVersionEntity = $this->delightfulFlowVersionRepository->create($dataIsolation, $delightfulFlowVersionEntity);
+        $this->delightfulFlowRepository->save($dataIsolation, $delightfulFlow);
+        AsyncEventUtil::dispatch(new DelightfulFlowPublishedEvent($delightfulFlowVersionEntity->getDelightfulFlow()));
+        return $delightfulFlowVersionEntity;
     }
 
     /**
      * 回滚版本.
      */
-    public function rollback(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $magicFlow, string $versionCode): DelightfulFlowVersionEntity
+    public function rollback(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, string $versionCode): DelightfulFlowVersionEntity
     {
-        $version = $this->magicFlowVersionRepository->getByFlowCodeAndCode($dataIsolation, $magicFlow->getCode(), $versionCode);
+        $version = $this->delightfulFlowVersionRepository->getByFlowCodeAndCode($dataIsolation, $delightfulFlow->getCode(), $versionCode);
         if (! $version) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$versionCode} 不存在");
         }
 
-        $magicFlow->prepareForPublish($version, $dataIsolation->getCurrentUserId());
-        $this->magicFlowRepository->save($dataIsolation, $magicFlow);
-        AsyncEventUtil::dispatch(new DelightfulFlowPublishedEvent($magicFlow));
+        $delightfulFlow->prepareForPublish($version, $dataIsolation->getCurrentUserId());
+        $this->delightfulFlowRepository->save($dataIsolation, $delightfulFlow);
+        AsyncEventUtil::dispatch(new DelightfulFlowPublishedEvent($delightfulFlow));
         return $version;
     }
 
     public function existVersion(FlowDataIsolation $dataIsolation, string $flowCode): bool
     {
-        return $this->magicFlowVersionRepository->existVersion($dataIsolation, $flowCode);
+        return $this->delightfulFlowVersionRepository->existVersion($dataIsolation, $flowCode);
     }
 }

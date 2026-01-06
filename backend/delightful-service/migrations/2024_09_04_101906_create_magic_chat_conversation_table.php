@@ -15,10 +15,10 @@ return new class extends Migration {
     public function up(): void
     {
         // 判断表是否存在
-        if (Schema::hasTable('magic_chat_conversations')) {
+        if (Schema::hasTable('delightful_chat_conversations')) {
             return;
         }
-        Schema::create('magic_chat_conversations', static function (Blueprint $table) {
+        Schema::create('delightful_chat_conversations', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user_id', 64)->comment('用户id。此会话窗口属于该用户。');
             $table->string('user_organization_code', 64)->comment('用户组织编码');
@@ -50,6 +50,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_chat_conversations');
+        Schema::dropIfExists('delightful_chat_conversations');
     }
 };

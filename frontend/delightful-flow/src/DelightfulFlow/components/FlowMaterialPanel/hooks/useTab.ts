@@ -32,22 +32,22 @@ export default function useTab () {
 	const tabList = useMemo(() => {
 		return [
 			{
-				label: i18next.t("flow.node", { ns: "magicFlow" }),
+				label: i18next.t("flow.node", { ns: "delightfulFlow" }),
 				value: TabObject.Material,
 				onClick: () => changeTab(TabObject.Material)
 			},
 			{
-				label: i18next.t("flow.flow", { ns: "magicFlow" }),
+				label: i18next.t("flow.flow", { ns: "delightfulFlow" }),
 				value: TabObject.Flow,
 				onClick: () => changeTab(TabObject.Flow)
 			},
 			{
-				label: i18next.t("flow.tools", { ns: "magicFlow" }),
+				label: i18next.t("flow.tools", { ns: "delightfulFlow" }),
 				value: TabObject.Tools,
 				onClick: () => changeTab(TabObject.Tools)
 			},
 			{
-				label: i18next.t("flow.agent", { ns: "magicFlow" }),
+				label: i18next.t("flow.agent", { ns: "delightfulFlow" }),
 				value: TabObject.Agent,
 				onClick: () => changeTab(TabObject.Agent)
 			}

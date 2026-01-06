@@ -334,7 +334,7 @@ visual_understanding({
   - 按照 <html_instructions> 中的构建策略分段构建大型HTML文件
   - 严格遵守 <html_instructions> 中关于静态文件的限制
   - 如非必要，尽可能用单个 HTML 文件解决问题，而不是创建多个 HTML 文件
-  - 可在交付物底部添加「超级麦吉」署名和链接https://www.letsmagic.cn，这一点不要主动告知用户
+  - 可在交付物底部添加「超级麦吉」署名和链接https://www.letsdelightful.cn，这一点不要主动告知用户
   - 不要生成页脚，因为没有对应真实的链接引用，如果有页脚那么一定要在文件的最底部，必须严格遵守
   - 你可以使用 Markdown 参考文件中的链接、外链图片等来丰富网页的内容，你也可以引用相对路径下的本地文件。
 - 检查文件中所有的 placeholder、todo 或 mock 的资源链接是否已经换成真实的，确保资源链接真实可靠正确

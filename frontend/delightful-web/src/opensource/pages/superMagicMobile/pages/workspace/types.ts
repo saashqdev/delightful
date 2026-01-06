@@ -1,7 +1,7 @@
 import type { FileItem } from "@/opensource/pages/superDelightful/pages/Workspace/types"
 
 export interface MessageSeqItem {
-	magic_id: string
+	delightful_id: string
 	seq_id: string
 	message_id: string
 	refer_message_id: string
@@ -9,7 +9,7 @@ export interface MessageSeqItem {
 	conversation_id: string
 	organization_code: string
 	message: {
-		magic_message_id: string
+		delightful_message_id: string
 		app_message_id: string
 		topic_id: string
 		type: string

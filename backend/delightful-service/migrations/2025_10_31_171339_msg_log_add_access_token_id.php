@@ -14,8 +14,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_api_msg_logs', function (Blueprint $table) {
-            if (! Schema::hasColumn('magic_api_msg_logs', 'access_token_id')) {
+        Schema::table('delightful_api_msg_logs', function (Blueprint $table) {
+            if (! Schema::hasColumn('delightful_api_msg_logs', 'access_token_id')) {
                 $table->string('access_token_id', 30)->default('')->comment('');
             }
         });

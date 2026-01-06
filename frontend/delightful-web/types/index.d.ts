@@ -14,13 +14,13 @@ import type { Lark } from "./lark"
 declare global {
 	interface Window {
 		/** Main application window */
-		magic: DelightfulElectron.DelightfulElectronAPI
+		delightful: DelightfulElectron.DelightfulElectronAPI
 		/** Media window */
-		magicMedia: DelightfulMediaElectron.DelightfulMediaElectronAPI
+		delightfulMedia: DelightfulMediaElectron.DelightfulMediaElectronAPI
 		/** Global screenshot window */
-		magicScreenshot: DelightfulScreenshotElectron.DelightfulScreenshotElectronAPI
+		delightfulScreenshot: DelightfulScreenshotElectron.DelightfulScreenshotElectronAPI
 		/** Global search window */
-		magicSearch: DelightfulSearchElectron.DelightfulSearchElectronAPI
+		delightfulSearch: DelightfulSearchElectron.DelightfulSearchElectronAPI
 
 		// Temporarily set developer mode
 		setDebug?: (debug: boolean) => void

@@ -18,7 +18,7 @@ class RedisTempAuth implements TempAuthInterface
 {
     protected Redis $redis;
 
-    protected string $keyPrefix = 'magic:temp_auth:';
+    protected string $keyPrefix = 'delightful:temp_auth:';
 
     protected string $prefix = 'TEMP_AUTH';
 

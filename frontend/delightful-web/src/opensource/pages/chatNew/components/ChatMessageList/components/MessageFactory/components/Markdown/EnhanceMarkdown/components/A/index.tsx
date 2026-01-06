@@ -18,7 +18,7 @@ export function A({ children, href, ...props }: AnchorHTMLAttributes<HTMLAnchorE
 	const uncodeHref = decodeURIComponent(href as string)
 
 	switch (true) {
-		case uncodeHref.startsWith("magic://"):
+		case uncodeHref.startsWith("delightful://"):
 			return <DelightfulFunctionLink href={uncodeHref}>{children}</DelightfulFunctionLink>
 		default:
 			const MatchComponent = ARenderFactory.getMatchComponent(props)

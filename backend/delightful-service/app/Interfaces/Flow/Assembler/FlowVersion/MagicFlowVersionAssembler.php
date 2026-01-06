@@ -24,38 +24,38 @@ class DelightfulFlowVersionAssembler
      */
     public static function createPageListDTO(int $total, array $list, Page $page, array $users = []): PageDTO
     {
-        $list = array_map(fn (DelightfulFlowVersionEntity $magicFlowVersionEntity) => self::createDelightfulFlowVersionListDTO($magicFlowVersionEntity, $users), $list);
+        $list = array_map(fn (DelightfulFlowVersionEntity $delightfulFlowVersionEntity) => self::createDelightfulFlowVersionListDTO($delightfulFlowVersionEntity, $users), $list);
         return new PageDTO($page->getPage(), $total, $list);
     }
 
-    public static function createDelightfulFlowVersionDO(DelightfulFlowVersionDTO $magicFlowVersionDTO): DelightfulFlowVersionEntity
+    public static function createDelightfulFlowVersionDO(DelightfulFlowVersionDTO $delightfulFlowVersionDTO): DelightfulFlowVersionEntity
     {
         $entity = new DelightfulFlowVersionEntity();
-        $entity->setFlowCode($magicFlowVersionDTO->getFlowCode());
-        $entity->setCode((string) $magicFlowVersionDTO->getId());
-        $entity->setName($magicFlowVersionDTO->getName());
-        $entity->setDescription($magicFlowVersionDTO->getDescription());
-        $entity->setDelightfulFlow(DelightfulFlowAssembler::createDelightfulFlowDO($magicFlowVersionDTO->getDelightfulFLow()));
+        $entity->setFlowCode($delightfulFlowVersionDTO->getFlowCode());
+        $entity->setCode((string) $delightfulFlowVersionDTO->getId());
+        $entity->setName($delightfulFlowVersionDTO->getName());
+        $entity->setDescription($delightfulFlowVersionDTO->getDescription());
+        $entity->setDelightfulFlow(DelightfulFlowAssembler::createDelightfulFlowDO($delightfulFlowVersionDTO->getDelightfulFLow()));
         $entity->setCreatedAt(new DateTime());
         return $entity;
     }
 
-    public static function createDelightfulFlowVersionDTO(DelightfulFlowVersionEntity $magicFlowVersionEntity, array $icons = []): DelightfulFlowVersionDTO
+    public static function createDelightfulFlowVersionDTO(DelightfulFlowVersionEntity $delightfulFlowVersionEntity, array $icons = []): DelightfulFlowVersionDTO
     {
-        $dto = new DelightfulFlowVersionDTO($magicFlowVersionEntity->toArray());
-        $dto->setId($magicFlowVersionEntity->getCode());
-        $dto->getDelightfulFLow()->setId($magicFlowVersionEntity->getDelightfulFlow()->getCode());
-        $dto->getDelightfulFLow()->setUserOperation($magicFlowVersionEntity->getDelightfulFlow()->getUserOperation());
-        $dto->getDelightfulFLow()->setIcon(FileAssembler::getUrl($icons[$magicFlowVersionEntity->getDelightfulFlow()->getIcon()] ?? null));
+        $dto = new DelightfulFlowVersionDTO($delightfulFlowVersionEntity->toArray());
+        $dto->setId($delightfulFlowVersionEntity->getCode());
+        $dto->getDelightfulFLow()->setId($delightfulFlowVersionEntity->getDelightfulFlow()->getCode());
+        $dto->getDelightfulFLow()->setUserOperation($delightfulFlowVersionEntity->getDelightfulFlow()->getUserOperation());
+        $dto->getDelightfulFLow()->setIcon(FileAssembler::getUrl($icons[$delightfulFlowVersionEntity->getDelightfulFlow()->getIcon()] ?? null));
         return $dto;
     }
 
-    private static function createDelightfulFlowVersionListDTO(DelightfulFlowVersionEntity $magicFlowVersionEntity, array $users = []): DelightfulFlowVersionListDTO
+    private static function createDelightfulFlowVersionListDTO(DelightfulFlowVersionEntity $delightfulFlowVersionEntity, array $users = []): DelightfulFlowVersionListDTO
     {
-        $dto = new DelightfulFlowVersionListDTO($magicFlowVersionEntity->toArray());
-        $dto->setId($magicFlowVersionEntity->getCode());
-        $dto->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowVersionEntity->getCreator()] ?? null, $magicFlowVersionEntity->getCreatedAt()));
-        $dto->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowVersionEntity->getModifier()] ?? null, $magicFlowVersionEntity->getUpdatedAt()));
+        $dto = new DelightfulFlowVersionListDTO($delightfulFlowVersionEntity->toArray());
+        $dto->setId($delightfulFlowVersionEntity->getCode());
+        $dto->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowVersionEntity->getCreator()] ?? null, $delightfulFlowVersionEntity->getCreatedAt()));
+        $dto->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowVersionEntity->getModifier()] ?? null, $delightfulFlowVersionEntity->getUpdatedAt()));
         return $dto;
     }
 }

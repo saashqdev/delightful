@@ -14,7 +14,7 @@ class DelightfulEnvironmentModel extends Model
 {
     use Snowflake;
 
-    protected ?string $table = 'magic_environments';
+    protected ?string $table = 'delightful_environments';
 
     protected array $fillable = [
         'id',

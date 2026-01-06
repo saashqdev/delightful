@@ -314,9 +314,9 @@ class LLMFactory:
         default_headers = {}
 
         # Add Delightful-Authorization authentication header
-        magic_authorization = config.get("sandbox.magic_authorization")
-        if magic_authorization:
-            default_headers["Delightful-Authorization"] = magic_authorization
+        delightful_authorization = config.get("sandbox.delightful_authorization")
+        if delightful_authorization:
+            default_headers["Delightful-Authorization"] = delightful_authorization
 
         # Add custom request headers defined in config file (read from environment variables)
         try:

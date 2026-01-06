@@ -14,11 +14,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_organizations_environment', function (Blueprint $table) {
+        Schema::table('delightful_organizations_environment', function (Blueprint $table) {
             $table->dropIndex('idx_login_code');
-            $table->dropIndex('idx_magic_organization_code');
+            $table->dropIndex('idx_delightful_organization_code');
             $table->unique('login_code', 'unq_login_code');
-            $table->unique('magic_organization_code', 'unq_magic_organization_code');
+            $table->unique('delightful_organization_code', 'unq_delightful_organization_code');
             $table->unique(['environment_id', 'origin_organization_code'], 'unq_environment_organization_code');
         });
     }

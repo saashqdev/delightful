@@ -2,17 +2,17 @@ import { createStyles } from "antd-style"
 
 export const useStyles = createStyles(({ prefixCls, token, css }) => {
 	return {
-		magicSwitch: css`
-			background-color: ${token.magicColorUsages.fill[0]};
+		delightfulSwitch: css`
+			background-color: ${token.delightfulColorUsages.fill[0]};
 			.${prefixCls}-switch-handle {
 				&::before {
 					box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.3),
 						0px 4px 6px 0px rgba(0, 0, 0, 0.1);
-					border: 1px solid ${token.magicColorUsages.border};
+					border: 1px solid ${token.delightfulColorUsages.border};
 				}
 			}
 			&:hover {
-				background-color: ${token.magicColorScales.grey[1]} !important;
+				background-color: ${token.delightfulColorScales.grey[1]} !important;
 			}
 			&.${prefixCls}-switch-loading {
 				.${prefixCls}-switch-handle {

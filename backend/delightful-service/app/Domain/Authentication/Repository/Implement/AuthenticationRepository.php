@@ -66,9 +66,9 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     /**
      * 通过DelightfulID和组织编码查找用户.
      */
-    public function findUserByDelightfulIdAndOrganization(string $magicId, ?string $organizationCode = null): ?DelightfulUserEntity
+    public function findUserByDelightfulIdAndOrganization(string $delightfulId, ?string $organizationCode = null): ?DelightfulUserEntity
     {
-        $query = $this->userModel::getQuery()->where('magic_id', $magicId)
+        $query = $this->userModel::getQuery()->where('delightful_id', $delightfulId)
             ->where('status', 1); // 已激活状态
 
         if (! empty($organizationCode)) {

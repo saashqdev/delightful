@@ -14,11 +14,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_ai_abilities')) {
+        if (Schema::hasTable('delightful_ai_abilities')) {
             return;
         }
 
-        Schema::create('magic_ai_abilities', function (Blueprint $table) {
+        Schema::create('delightful_ai_abilities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('code', 50)->comment('能力唯一标识');
             $table->string('organization_code', 100)->default('')->comment('组织编码');
@@ -39,6 +39,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_ai_abilities');
+        Schema::dropIfExists('delightful_ai_abilities');
     }
 };

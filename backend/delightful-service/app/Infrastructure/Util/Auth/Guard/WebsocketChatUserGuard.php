@@ -26,13 +26,13 @@ class WebsocketChatUserGuard extends WebUserGuard
      */
     public function user(): Authenticatable
     {
-        /** @var DelightfulContext $magicContext */
-        $magicContext = WebSocketContext::get(DelightfulContext::class);
-        $userAuthToken = $magicContext?->getAuthorization();
+        /** @var DelightfulContext $delightfulContext */
+        $delightfulContext = WebSocketContext::get(DelightfulContext::class);
+        $userAuthToken = $delightfulContext?->getAuthorization();
         if (empty($userAuthToken)) {
             ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND);
         }
-        $organizationCode = $magicContext->getOrganizationCode();
+        $organizationCode = $delightfulContext->getOrganizationCode();
         if (empty($organizationCode)) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
@@ -52,7 +52,7 @@ class WebsocketChatUserGuard extends WebUserGuard
         $user = $this->userProvider->retrieveByCredentials([
             'authorization' => $userAuthToken,
             'organizationCode' => $organizationCode,
-            'superDelightfulAgentUserId' => $magicContext->getBeDelightfulAgentUserId(),
+            'superDelightfulAgentUserId' => $delightfulContext->getBeDelightfulAgentUserId(),
         ]);
         if (empty($user->getOrganizationCode())) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);

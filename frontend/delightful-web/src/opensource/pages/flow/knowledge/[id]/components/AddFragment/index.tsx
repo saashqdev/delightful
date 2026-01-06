@@ -35,20 +35,20 @@ const useAddFragmentStyles = createStyles(({ css, isDarkMode, token }) => {
 			border-radius: 4px;
 			cursor: pointer;
 			border: 1px solid transparent;
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorScales.grey[4]};
-			background: ${isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.white};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorScales.grey[4]};
+			background: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.white};
 			box-shadow:${
 				isDarkMode
 					? "none"
 					: "0px 4px 14px 0px rgba(0, 0, 0, 0.1), 0px 0px 1px 0px rgba(0, 0, 0, 0.3);"
 			}
 			&:hover {
-				background: ${isDarkMode ? token.magicColorScales.grey[3] : token.magicColorScales.grey[0]};
+				background: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorScales.grey[0]};
 			}
 		`,
 
 		modal: css`
-			.magic-modal-body {
+			.delightful-modal-body {
 				max-height: 60vh;
 				overflow: auto;
 			}
@@ -62,15 +62,15 @@ const useAddFragmentStyles = createStyles(({ css, isDarkMode, token }) => {
 				padding: 2px;
 				cursor: pointer;
 				border: 1px solid transparent;
-				color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorScales.grey[4]};
-				background: ${isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.white};
+				color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorScales.grey[4]};
+				background: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.white};
 				box-shadow:${
 					isDarkMode
 						? "none"
 						: "0px 4px 14px 0px rgba(0, 0, 0, 0.1), 0px 0px 1px 0px rgba(0, 0, 0, 0.3);"
 				}
 				&:hover {
-					background: ${isDarkMode ? token.magicColorScales.grey[3] : token.magicColorScales.grey[0]};
+					background: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorScales.grey[0]};
 				}
 			}
 

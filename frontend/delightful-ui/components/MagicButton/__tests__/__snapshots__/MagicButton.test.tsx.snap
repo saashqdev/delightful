@@ -4,7 +4,7 @@ exports[`DelightfulButton > 快照测试 > 不同尺寸按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
-    class="magic-btn css-dev-only-do-not-override-yotw4n css-var-r2a magic-btn-default magic-btn-color-default magic-btn-variant-outlined magic-btn-sm acss-1i6z9ln"
+    class="delightful-btn css-dev-only-do-not-override-yotw4n css-var-r2a delightful-btn-default delightful-btn-color-default delightful-btn-variant-outlined delightful-btn-sm acss-1i6z9ln"
     type="button"
   >
     <span>
@@ -18,7 +18,7 @@ exports[`DelightfulButton > 快照测试 > 不同尺寸按钮快照 2`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
-    class="magic-btn css-dev-only-do-not-override-yotw4n css-var-r2e magic-btn-default magic-btn-color-default magic-btn-variant-outlined magic-btn-lg acss-1i6z9ln"
+    class="delightful-btn css-dev-only-do-not-override-yotw4n css-var-r2e delightful-btn-default delightful-btn-color-default delightful-btn-variant-outlined delightful-btn-lg acss-1i6z9ln"
     type="button"
   >
     <span>
@@ -32,7 +32,7 @@ exports[`DelightfulButton > 快照测试 > 主要按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
-    class="magic-btn css-dev-only-do-not-override-yotw4n css-var-r1e magic-btn-primary magic-btn-color-primary magic-btn-variant-solid acss-1i6z9ln"
+    class="delightful-btn css-dev-only-do-not-override-yotw4n css-var-r1e delightful-btn-primary delightful-btn-color-primary delightful-btn-variant-solid acss-1i6z9ln"
     type="button"
   >
     <span>
@@ -46,11 +46,11 @@ exports[`DelightfulButton > 快照测试 > 加载状态按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
-    class="magic-btn css-dev-only-do-not-override-yotw4n css-var-r22 magic-btn-default magic-btn-color-default magic-btn-variant-outlined magic-btn-loading acss-1i6z9ln"
+    class="delightful-btn css-dev-only-do-not-override-yotw4n css-var-r22 delightful-btn-default delightful-btn-color-default delightful-btn-variant-outlined delightful-btn-loading acss-1i6z9ln"
     type="button"
   >
     <span
-      class="magic-btn-icon magic-btn-loading-icon"
+      class="delightful-btn-icon delightful-btn-loading-icon"
     >
       <span
         aria-label="loading"
@@ -83,11 +83,11 @@ exports[`DelightfulButton > 快照测试 > 带图标按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
-    class="magic-btn css-dev-only-do-not-override-yotw4n css-var-r26 magic-btn-default magic-btn-color-default magic-btn-variant-outlined acss-1i6z9ln"
+    class="delightful-btn css-dev-only-do-not-override-yotw4n css-var-r26 delightful-btn-default delightful-btn-color-default delightful-btn-variant-outlined acss-1i6z9ln"
     type="button"
   >
     <span
-      class="magic-btn-icon"
+      class="delightful-btn-icon"
     >
       <span>
         🚀
@@ -104,7 +104,7 @@ exports[`DelightfulButton > 快照测试 > 文本按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
-    class="magic-btn css-dev-only-do-not-override-yotw4n css-var-r1m magic-btn-text magic-btn-color-default magic-btn-variant-text acss-1i6z9ln"
+    class="delightful-btn css-dev-only-do-not-override-yotw4n css-var-r1m delightful-btn-text delightful-btn-color-default delightful-btn-variant-text acss-1i6z9ln"
     type="button"
   >
     <span>
@@ -118,7 +118,7 @@ exports[`DelightfulButton > 快照测试 > 禁用状态按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
-    class="magic-btn css-dev-only-do-not-override-yotw4n css-var-r1u magic-btn-default magic-btn-color-default magic-btn-variant-outlined acss-1i6z9ln"
+    class="delightful-btn css-dev-only-do-not-override-yotw4n css-var-r1u delightful-btn-default delightful-btn-color-default delightful-btn-variant-outlined acss-1i6z9ln"
     disabled=""
     type="button"
   >
@@ -133,7 +133,7 @@ exports[`DelightfulButton > 快照测试 > 虚线按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
-    class="magic-btn css-dev-only-do-not-override-yotw4n css-var-r1i magic-btn-dashed magic-btn-color-default magic-btn-variant-dashed acss-1i6z9ln"
+    class="delightful-btn css-dev-only-do-not-override-yotw4n css-var-r1i delightful-btn-dashed delightful-btn-color-default delightful-btn-variant-dashed acss-1i6z9ln"
     type="button"
   >
     <span>
@@ -147,7 +147,7 @@ exports[`DelightfulButton > 快照测试 > 链接按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
-    class="magic-btn css-dev-only-do-not-override-yotw4n css-var-r1q magic-btn-link magic-btn-color-link magic-btn-variant-link acss-1i6z9ln"
+    class="delightful-btn css-dev-only-do-not-override-yotw4n css-var-r1q delightful-btn-link delightful-btn-color-link delightful-btn-variant-link acss-1i6z9ln"
     type="button"
   >
     <span>
@@ -163,7 +163,7 @@ exports[`DelightfulButton > 快照测试 > 默认按钮快照 1`] = `
 <DocumentFragment>
   <button
     aria-describedby="test-id"
-    class="magic-btn css-dev-only-do-not-override-yotw4n css-var-r1a magic-btn-default magic-btn-color-default magic-btn-variant-outlined acss-1i6z9ln"
+    class="delightful-btn css-dev-only-do-not-override-yotw4n css-var-r1a delightful-btn-default delightful-btn-color-default delightful-btn-variant-outlined acss-1i6z9ln"
     type="button"
   >
     <span>

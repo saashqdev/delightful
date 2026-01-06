@@ -9,17 +9,17 @@ const OrganizationDispatchService = {
 	 * @param seqId 序号
 	 */
 	updateOrganizationDot({
-		magicId,
+		delightfulId,
 		organizationCode,
 		count,
 		seqId,
 	}: {
-		magicId: string
+		delightfulId: string
 		organizationCode: string
 		count: number
 		seqId?: string
 	}) {
-		if (magicId === userStore.user.userInfo?.magic_id) {
+		if (delightfulId === userStore.user.userInfo?.delightful_id) {
 			OrganizationDotsStore.setOrganizationDots(organizationCode, count)
 
 			if (seqId) {

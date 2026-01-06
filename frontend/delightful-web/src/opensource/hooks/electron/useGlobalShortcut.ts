@@ -1,4 +1,4 @@
-import { magic } from "@/enhance/magicElectron"
+import { delightful } from "@/enhance/delightfulElectron"
 import { useAppearanceStore } from "@/opensource/providers/AppearanceProvider/context"
 import { useMount } from "ahooks"
 import { useCallback } from "react"
@@ -10,7 +10,7 @@ import useView from "./useView"
  */
 export default function useGlobalShortcut() {
 	const initGlobalShortcut = useCallback(() => {
-		magic?.config?.globalShortcut?.getRegisterAll?.().then((globalShortcutConfig) => {
+		delightful?.config?.globalShortcut?.getRegisterAll?.().then((globalShortcutConfig) => {
 			useAppearanceStore.setState({
 				shortcutKey: globalShortcutConfig?.reduce((config, item) => {
 					config[item.name] = item.config
@@ -21,7 +21,7 @@ export default function useGlobalShortcut() {
 	}, [])
 
 	const initLocale = useCallback(() => {
-		magic?.language?.getLanguage().then((lang) => {
+		delightful?.language?.getLanguage().then((lang) => {
 			configStore.i18n.setLanguage(lang)
 		})
 	}, [])

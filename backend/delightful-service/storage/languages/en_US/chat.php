@@ -38,7 +38,7 @@ return [
         ],
         'rollback' => [
             'seq_id_not_found' => 'Message sequence ID not found',
-            'magic_message_id_not_found' => 'Associated message ID not found',
+            'delightful_message_id_not_found' => 'Associated message ID not found',
         ],
     ],
     'ai' => [
@@ -101,7 +101,7 @@ return [
         'organization_code_not_found' => 'Platform organization code not found',
         'organization_env_not_found' => 'Platform organization environment not found',
     ],
-    'magic' => [
+    'delightful' => [
         'environment_config_error' => 'Delightful environment configuration error',
         'environment_not_found' => 'Delightful environment not found',
         'ticket_not_found' => 'Delightful appTicket not found',

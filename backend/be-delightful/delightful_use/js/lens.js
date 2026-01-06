@@ -154,9 +154,9 @@
 
   /**
    * @constant {RegExp} 用于匹配应被忽略的标记元素的类名规则。
-   * 当前匹配所有带有 'magic-marker-' 前缀的类名，这些通常是由页面上的标记工具添加的元素。
+   * 当前匹配所有带有 'delightful-marker-' 前缀的类名，这些通常是由页面上的标记工具添加的元素。
    */
-  const IGNORED_CLASS_PATTERN = /magic-marker-/;
+  const IGNORED_CLASS_PATTERN = /delightful-marker-/;
 
   /**
    * @constant {Set<string>} 用于快速判断常见的 HTML 块级元素标签。
@@ -783,7 +783,7 @@
      * 检查条件：
      * 1. 是元素节点。
      * 2. 不是被忽略的标签 (`IGNORED_TAGS`)。
-     * 3. 不带有被忽略的类名模式 (如 `magic-marker-*`)。
+     * 3. 不带有被忽略的类名模式 (如 `delightful-marker-*`)。
      * 4. 包含有意义的直接文本子节点。
      * 5. 或包含有效的直接图片子元素。
      * 6. 或者是常见的容器标签 (如 ARTICLE, P, DIV, LI 等)。

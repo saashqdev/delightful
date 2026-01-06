@@ -16,7 +16,7 @@ export interface WithPage<ListType> {
 export namespace Bot {
 	// User info
 	export interface User {
-		magic_id: string
+		delightful_id: string
 		id: string
 		label: string
 		like_num: number
@@ -50,7 +50,7 @@ export namespace Bot {
 		quote?: number // Reference count
 		user_operation: OperationTypes
 		created_info: {
-			magic_id: string
+			delightful_id: string
 			id: string
 			user_id: string
 			user_type: number
@@ -97,7 +97,7 @@ export namespace Bot {
 		app_market_status: number
 		flow_code: string
 		flow_version: string
-		magicUserEntity: User
+		delightfulUserEntity: User
 		third_platform_list: Bot.ThirdPartyPlatform[]
 		visibility_config: VisibilityConfig
 	}
@@ -135,10 +135,10 @@ export namespace Bot {
 			instructs: QuickInstructionList[]
 			start_page: boolean
 		}
-		magicFlowEntity: DelightfulFlow.Flow & {
+		delightfulFlowEntity: DelightfulFlow.Flow & {
 			updated_at: string
 		}
-		magicUserEntity: User
+		delightfulUserEntity: User
 		botVersionEntity: {
 			id: string
 			flow_code: string
@@ -184,7 +184,7 @@ export namespace Bot {
 		version_number: string
 		version_description: string
 		release_scope: number
-		magic_flow: DelightfulFlow.Flow
+		delightful_flow: DelightfulFlow.Flow
 		third_platform_list: Bot.ThirdPartyPlatform[]
 		visibility_config: VisibilityConfig
 	}
@@ -196,7 +196,7 @@ export namespace Bot {
 		description: string
 		label: string
 		like_num: number
-		magic_id: string
+		delightful_id: string
 		organization_code: string
 		status: number
 		user_id: string

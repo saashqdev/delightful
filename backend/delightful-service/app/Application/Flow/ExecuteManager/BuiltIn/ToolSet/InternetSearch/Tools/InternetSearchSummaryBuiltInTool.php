@@ -74,7 +74,7 @@ class InternetSearchSummaryBuiltInTool extends AbstractBuiltInTool
             $organizationCode = $executionData->getDataIsolation()->getCurrentOrganizationCode();
             $userId = $executionData->getDataIsolation()->getCurrentUserId();
 
-            $magicChatAggregateSearchReqDTO = (new DelightfulChatAggregateSearchReqDTO())
+            $delightfulChatAggregateSearchReqDTO = (new DelightfulChatAggregateSearchReqDTO())
                 ->setConversationId($conversationId)
                 ->setTopicId((string) $topicId)
                 ->setUserMessage($searchKeywordMessage)
@@ -85,10 +85,10 @@ class InternetSearchSummaryBuiltInTool extends AbstractBuiltInTool
             try {
                 if ($useDeepSearch) {
                     // Use deep search tool
-                    $searchResult = di(DelightfulAISearchToolAppService::class)->executeInternetSearch($magicChatAggregateSearchReqDTO, true, 'deepInternetSearchForToolError');
+                    $searchResult = di(DelightfulAISearchToolAppService::class)->executeInternetSearch($delightfulChatAggregateSearchReqDTO, true, 'deepInternetSearchForToolError');
                 } else {
                     // Use simple search tool
-                    $searchResult = di(DelightfulAISearchToolAppService::class)->executeInternetSearch($magicChatAggregateSearchReqDTO, false, 'aggregateSearchError');
+                    $searchResult = di(DelightfulAISearchToolAppService::class)->executeInternetSearch($delightfulChatAggregateSearchReqDTO, false, 'aggregateSearchError');
                 }
 
                 if ($searchResult === null) {

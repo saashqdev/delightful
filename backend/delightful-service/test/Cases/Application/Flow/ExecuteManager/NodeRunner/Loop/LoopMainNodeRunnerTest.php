@@ -24,7 +24,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
 {
     public function testRunCount()
     {
-        $magicFlow = $this->createDelightfulFlowCount();
+        $delightfulFlow = $this->createDelightfulFlowCount();
         $operator = $this->getOperator();
         $triggerData = new TriggerData(
             triggerTime: new DateTime(),
@@ -35,10 +35,10 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
             ],
         );
         $executionData = $this->createExecutionData(TriggerType::ParamCall, $triggerData);
-        $executor = new DelightfulFlowExecutor($magicFlow, $executionData);
+        $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
         $executor->execute();
 
-        foreach ($magicFlow->getNodes() as $node) {
+        foreach ($delightfulFlow->getNodes() as $node) {
             if ($node->getNodeDebugResult()) {
                 $this->assertTrue($node->getNodeDebugResult()->isSuccess());
             }

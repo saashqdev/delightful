@@ -41,7 +41,7 @@ export const useStyles = createStyles(({ token }) => {
 			paddingTop: "42px",
 			border: `1px solid ${token.colorBorder}`,
 			borderRadius: token.borderRadiusLG,
-			backgroundColor: token.magicColorUsages.bg[1],
+			backgroundColor: token.delightfulColorUsages.bg[1],
 			transform: "none",
 			scale: 1,
 			transition: "all 0.8s ease-in-out",
@@ -84,7 +84,7 @@ export const useStyles = createStyles(({ token }) => {
 			height: "42px",
 			fontWeight: 600,
 			fontSize: "16px",
-			color: token.magicColorUsages.text[1],
+			color: token.delightfulColorUsages.text[1],
 			padding: "10px 20px",
 			borderBottom: `1px solid ${token.colorBorder}`,
 		},
@@ -135,7 +135,7 @@ export const useStyles = createStyles(({ token }) => {
 			fontSize: "14px",
 			lineHeight: "20px",
 			letterSpacing: "0px",
-			color: token.magicColorUsages.text[2],
+			color: token.delightfulColorUsages.text[2],
 			textShadow: "0 1px 1px rgba(255, 255, 255, 0.6)",
 			"@media (max-width: 768px)": {
 				fontSize: "13px",
@@ -194,7 +194,7 @@ export const useStyles = createStyles(({ token }) => {
 			right: 0,
 			height: "52px",
 			padding: "6px",
-			backgroundColor: token.magicColorUsages.bg[1],
+			backgroundColor: token.delightfulColorUsages.bg[1],
 			border: `1px solid ${token.colorBorder}`,
 			borderRadius: token.borderRadiusLG,
 			width: `calc(100% - ${token.marginXS * 2}px)`,
@@ -219,11 +219,11 @@ export const useStyles = createStyles(({ token }) => {
 			gap: token.marginXS,
 			fontWeight: 400,
 		},
-		magicIcon: {
+		delightfulIcon: {
 			display: "flex",
 			alignItems: "center",
 			justifyContent: "center",
-			backgroundColor: token.magicColorUsages.bg[1],
+			backgroundColor: token.delightfulColorUsages.bg[1],
 		},
 		attachmentList: {
 			flex: 1,
@@ -233,7 +233,7 @@ export const useStyles = createStyles(({ token }) => {
 		},
 		taskData: {
 			flex: 1,
-			backgroundColor: token.magicColorUsages.bg[1],
+			backgroundColor: token.delightfulColorUsages.bg[1],
 			border: `1px solid ${token.colorBorder}`,
 			borderRadius: token.borderRadiusLG,
 			overflowX: "hidden",
@@ -246,7 +246,7 @@ export const useStyles = createStyles(({ token }) => {
 			gap: 4,
 			borderRadius: 8,
 			padding: 10,
-			color: token.magicColorUsages.text[1],
+			color: token.delightfulColorUsages.text[1],
 		},
 		title: {
 			fontSize: "12px",

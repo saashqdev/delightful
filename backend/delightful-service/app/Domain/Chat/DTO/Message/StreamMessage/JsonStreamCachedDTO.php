@@ -18,12 +18,12 @@ class JsonStreamCachedDTO extends AbstractEntity
     protected string $receiveMessageId;
 
     /**
-     * 收发双方的 message_id 不同，但是 magic_message_id 相同。
+     * 收发双方的 message_id 不同，但是 delightful_message_id 相同。
      */
-    protected string $magicMessageId;
+    protected string $delightfulMessageId;
 
     /**
-     * 收件人的 magic_id.
+     * 收件人的 delightful_id.
      */
     protected string $receiveDelightfulId;
 
@@ -89,15 +89,15 @@ class JsonStreamCachedDTO extends AbstractEntity
 
     public function getDelightfulMessageId(): ?string
     {
-        return $this->magicMessageId ?? null;
+        return $this->delightfulMessageId ?? null;
     }
 
-    public function setDelightfulMessageId(null|int|string $magicMessageId): self
+    public function setDelightfulMessageId(null|int|string $delightfulMessageId): self
     {
-        if (is_numeric($magicMessageId)) {
-            $this->magicMessageId = (string) $magicMessageId;
+        if (is_numeric($delightfulMessageId)) {
+            $this->delightfulMessageId = (string) $delightfulMessageId;
         } else {
-            $this->magicMessageId = $magicMessageId;
+            $this->delightfulMessageId = $delightfulMessageId;
         }
         return $this;
     }

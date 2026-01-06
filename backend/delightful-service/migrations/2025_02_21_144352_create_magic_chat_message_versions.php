@@ -14,14 +14,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_chat_message_versions')) {
+        if (Schema::hasTable('delightful_chat_message_versions')) {
             return;
         }
-        Schema::create('magic_chat_message_versions', function (Blueprint $table) {
+        Schema::create('delightful_chat_message_versions', function (Blueprint $table) {
             $table->bigIncrements('version_id');
-            $table->string('magic_message_id', 64)->comment('magic_chat_message 表的 magic_message_id');
+            $table->string('delightful_message_id', 64)->comment('delightful_chat_message 表的 delightful_message_id');
             $table->longText('message_content')->comment('消息内容');
-            $table->index(['magic_message_id', 'version_id'], 'idx_magic_message_id_version_id');
+            $table->index(['delightful_message_id', 'version_id'], 'idx_delightful_message_id_version_id');
             $table->timestamps();
             $table->comment('消息版本表,记录消息的版本信息');
             $table->softDeletes();
@@ -33,6 +33,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_chat_message_versions');
+        Schema::dropIfExists('delightful_chat_message_versions');
     }
 };

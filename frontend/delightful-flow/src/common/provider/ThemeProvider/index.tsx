@@ -15,10 +15,10 @@ function ThemeProvider({ children }: PropsWithChildren<{}>) {
 		const config = genPalettesConfigs(appearance)
 
 		return {
-			token: genTokenMap(config.magicColorScales, config.magicColorUsages, appearance),
+			token: genTokenMap(config.delightfulColorScales, config.delightfulColorUsages, appearance),
 			components: genComponentTokenMap(
-				config.magicColorScales,
-				config.magicColorUsages,
+				config.delightfulColorScales,
+				config.delightfulColorUsages,
 				appearance,
 			),
 		}

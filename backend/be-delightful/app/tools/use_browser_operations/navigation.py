@@ -12,7 +12,7 @@ from pydantic import Field
 from agentlang.logger import get_logger
 from agentlang.tools.tool_result import ToolResult
 from app.tools.use_browser_operations.base import BaseOperationParams, OperationGroup, operation
-from magic_use.magic_browser import GotoSuccess, DelightfulBrowser, DelightfulBrowserError, ScrollToSuccess
+from delightful_use.delightful_browser import GotoSuccess, DelightfulBrowser, DelightfulBrowserError, ScrollToSuccess
 
 # Logger
 logger = get_logger(__name__)

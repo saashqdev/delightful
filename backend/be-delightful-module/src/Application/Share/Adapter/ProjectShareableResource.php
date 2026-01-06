@@ -26,7 +26,7 @@ class ProjectShareableResource implements ResourceFactoryInterface
 
     public function __construct(
         private readonly ProjectAppService $projectAppService,
-        private readonly DelightfulUserContactAppService $magicUserContactAppService,
+        private readonly DelightfulUserContactAppService $delightfulUserContactAppService,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(self::class);
@@ -44,7 +44,7 @@ class ProjectShareableResource implements ResourceFactoryInterface
                 ExceptionBuilder::throw(SuperAgentErrorCode::PROJECT_ACCESS_DENIED, 'project.project_access_denied');
             }
 
-            $userInfo = $this->magicUserContactAppService->getByUserId($projectEntity->getUserId());
+            $userInfo = $this->delightfulUserContactAppService->getByUserId($projectEntity->getUserId());
             if (! empty($userInfo)) {
                 $creator = $userInfo->getNickname();
             } else {

@@ -360,7 +360,7 @@ const Editor = observer(
 			unFocusSchemaValue(cloneSchema)
 			console.log("schema", JSON.parse(JSON.stringify(cloneSchema)))
 			copyToClipboard(JSON.stringify(cloneSchema))
-			message.success(i18next.t("common.exportSuccess", { ns: "magicFlow" }))
+			message.success(i18next.t("common.exportSuccess", { ns: "delightfulFlow" }))
 			setShowExportCheckbox(!showExportCheckbox)
 		})
 
@@ -405,7 +405,7 @@ const Editor = observer(
 					default:
 						schemaMobx.changeSchema(schema)
 				}
-				message.success(i18next.t("common.importSuccess", { ns: "magicFlow" }))
+				message.success(i18next.t("common.importSuccess", { ns: "delightfulFlow" }))
 
 				return true
 			} catch (err) {
@@ -468,19 +468,19 @@ const Editor = observer(
 
 					<Modal
 						title={
-							<div>{i18next.t("jsonSchema.setDesc", { ns: "magicFlow" })} &nbsp;</div>
+							<div>{i18next.t("jsonSchema.setDesc", { ns: "delightfulFlow" })} &nbsp;</div>
 						}
 						width={750}
 						maskClosable={false}
 						open={editVisible}
 						onOk={() => handleEditOk(editorModalName)}
 						onCancel={handleEditCancel}
-						okText={i18next.t("common.confirm", { ns: "magicFlow" })}
-						cancelText={i18next.t("common.cancel", { ns: "magicFlow" })}
+						okText={i18next.t("common.confirm", { ns: "delightfulFlow" })}
+						cancelText={i18next.t("common.cancel", { ns: "delightfulFlow" })}
 					>
 						<Input.TextArea
 							value={stateVal[editorModalName]}
-							placeholder={i18next.t("common.descPlaceholder", { ns: "magicFlow" })}
+							placeholder={i18next.t("common.descPlaceholder", { ns: "delightfulFlow" })}
 							onChange={(event) => changeDesc(event.target.value, editorModalName)}
 							autoSize={{ minRows: 6, maxRows: 10 }}
 						/>
@@ -586,7 +586,7 @@ const Editor = observer(
 														title={i18next.t(
 															"jsonSchema.selectExportFields",
 															{
-																ns: "magicFlow",
+																ns: "delightfulFlow",
 															},
 														)}
 													>
@@ -606,7 +606,7 @@ const Editor = observer(
 												{showExportCheckbox && (
 													<Tooltip
 														title={i18next.t("common.export", {
-															ns: "magicFlow",
+															ns: "delightfulFlow",
 														})}
 													>
 														<span
@@ -645,7 +645,7 @@ const Editor = observer(
 							{showAdd && (
 								<span className="add-row" onClick={handleAddField}>
 									<IconPlus size={16} stroke={2} color="#1C1D23CC" />
-									{i18next.t("common.addArguments", { ns: "magicFlow" })}
+									{i18next.t("common.addArguments", { ns: "delightfulFlow" })}
 								</span>
 							)}
 						</Row>

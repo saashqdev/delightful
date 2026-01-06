@@ -14,14 +14,14 @@ class AccountModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_contact_accounts';
+    protected ?string $table = 'delightful_contact_accounts';
 
     /**
      * The attributes that are mass assignable.
      */
     protected array $fillable = [
         'id',
-        'magic_id',
+        'delightful_id',
         'type',
         'ai_code',
         'status',
@@ -31,7 +31,7 @@ class AccountModel extends Model
         'real_name',
         'gender',
         'extra',
-        'magic_environment_id',
+        'delightful_environment_id',
         'password',
         'created_at',
         'updated_at',

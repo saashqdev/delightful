@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_task_files', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_task_files', function (Blueprint $table) {
             $table->string('storage_type', 32)->default('workspace')->comment('storage type');
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_task_files', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_task_files', function (Blueprint $table) {
             $table->dropColumn('storage_type');
         });
     }

@@ -15,7 +15,7 @@ class CreateDelightfulFlows extends Migration
      */
     public function up(): void
     {
-        Schema::create('magic_flows', function (Blueprint $table) {
+        Schema::create('delightful_flows', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('Unique identifier');
             $table->string('code')->default('')->comment('Flow code');
             $table->string('version_code')->default('')->comment('Version code');
@@ -43,6 +43,6 @@ class CreateDelightfulFlows extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_flows');
+        Schema::dropIfExists('delightful_flows');
     }
 }

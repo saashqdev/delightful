@@ -26,7 +26,7 @@ function PageNavigation({
 
 	return (
 		<Space className={styles.buttonGroup}>
-			<Tooltip title={t("magicPdfRender.toolbar.prevPage")}>
+			<Tooltip title={t("delightfulPdfRender.toolbar.prevPage")}>
 				<button className={styles.button} disabled={pageNumber <= 1} onClick={goToPrevPage}>
 					<IconChevronLeft />
 				</button>
@@ -44,7 +44,7 @@ function PageNavigation({
 					<span>/ {numPages}</span>
 				</div>
 			)}
-			<Tooltip title={t("magicPdfRender.toolbar.nextPage")}>
+			<Tooltip title={t("delightfulPdfRender.toolbar.nextPage")}>
 				<button
 					className={styles.button}
 					disabled={pageNumber >= numPages}

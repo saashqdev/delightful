@@ -8,7 +8,7 @@ import { svgNode } from "./svgNode"
 
 const useStyles = createStyles(({ css, prefixCls, token }) => ({
 	text: css`
-		color: ${token.magicColorUsages.text[3]};
+		color: ${token.delightfulColorUsages.text[3]};
 		text-align: center;
 		font-size: 14px;
 		font-weight: 400;

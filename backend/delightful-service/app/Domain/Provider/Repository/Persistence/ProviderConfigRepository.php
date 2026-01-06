@@ -235,7 +235,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
         }
         // 5. 最终结果处理：排序和过滤
         $isOfficialOrganization = OfficialOrganizationUtil::isOfficialOrganization($organizationCode);
-        $magicProvider = null;
+        $delightfulProvider = null;
         $otherProviders = [];
 
         foreach ($result as $provider) {
@@ -243,13 +243,13 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
                 continue;
             }
 
-            // 如果是官方组织，过滤掉 Delightful 服务商（Official），因为 magic 服务商就是官方组织配置的模型总和
+            // 如果是官方组织，过滤掉 Delightful 服务商（Official），因为 delightful 服务商就是官方组织配置的模型总和
             /*if ($isOfficialOrganization && $provider->getProviderCode() === ProviderCode::Official) {
                 continue;
             }*/
 
             if ($provider->getProviderCode() === ProviderCode::Official) {
-                $magicProvider = $provider;
+                $delightfulProvider = $provider;
             } else {
                 $otherProviders[] = $provider;
             }
@@ -264,8 +264,8 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
         });
 
         // 如果找到 Delightful 服务商，将其放在第一位（非官方组织才会有 Delightful 服务商）
-        if ($magicProvider !== null) {
-            $result = array_merge([$magicProvider], $otherProviders);
+        if ($delightfulProvider !== null) {
+            $result = array_merge([$delightfulProvider], $otherProviders);
         } else {
             $result = $otherProviders;
         }

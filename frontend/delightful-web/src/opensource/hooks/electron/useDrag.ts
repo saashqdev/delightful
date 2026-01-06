@@ -1,6 +1,6 @@
 import { useMemoizedFn } from "ahooks"
 import type { MouseEvent } from "react"
-import { magic } from "@/enhance/magicElectron"
+import { delightful } from "@/enhance/delightfulElectron"
 
 const requestAnimationFrame =
 	window.requestAnimationFrame ||
@@ -24,7 +24,7 @@ const useDrag = () => {
 
 		// 定义窗口移动
 		const moveWindow = () => {
-			magic?.view?.setViewPosition({
+			delightful?.view?.setViewPosition({
 				x: mouseX,
 				y: mouseY,
 			})

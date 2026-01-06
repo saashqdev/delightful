@@ -67,7 +67,7 @@ export const useStyles = createStyles(({ token }) => {
 		sendButton: {
 			height: "32px !important",
 			padding: "0 12px !important",
-			backgroundColor: `${token.magicColorUsages.primary.default} !important`,
+			backgroundColor: `${token.delightfulColorUsages.primary.default} !important`,
 			color: "white !important",
 			svg: {
 				stroke: "white",
@@ -77,10 +77,10 @@ export const useStyles = createStyles(({ token }) => {
 				gap: 4,
 			},
 			"&.adm-button-disabled": {
-				backgroundColor: `${token.magicColorUsages.disabled.bg} !important`,
-				color: `${token.magicColorUsages.disabled.text} !important`,
+				backgroundColor: `${token.delightfulColorUsages.disabled.bg} !important`,
+				color: `${token.delightfulColorUsages.disabled.text} !important`,
 				svg: {
-					stroke: token.magicColorUsages.disabled.text,
+					stroke: token.delightfulColorUsages.disabled.text,
 				},
 			},
 		},
@@ -91,7 +91,7 @@ export const useStyles = createStyles(({ token }) => {
 			overflow: "hidden",
 			width: "100%",
 			"&:active": {
-				backgroundColor: token.magicColorUsages.fill[0],
+				backgroundColor: token.delightfulColorUsages.fill[0],
 			},
 		},
 		singleTaskItem: {
@@ -125,7 +125,7 @@ export const useStyles = createStyles(({ token }) => {
 			fontWeight: 600,
 			fontSize: 14,
 			lineHeight: "20px",
-			color: token.magicColorUsages.text[1],
+			color: token.delightfulColorUsages.text[1],
 		},
 		stopButton: {
 			width: 32,
@@ -140,7 +140,7 @@ export const useStyles = createStyles(({ token }) => {
 			},
 		},
 		stopShadow: {
-			backgroundColor: token.magicColorUsages.fill[1],
+			backgroundColor: token.delightfulColorUsages.fill[1],
 			position: "absolute",
 			top: "50%",
 			left: "50%",
@@ -157,7 +157,7 @@ export const useStyles = createStyles(({ token }) => {
 				width: 26,
 				height: 26,
 				borderRadius: "50%",
-				backgroundColor: token.magicColorUsages.fill[1],
+				backgroundColor: token.delightfulColorUsages.fill[1],
 				animation: "ripple 2s infinite",
 			},
 			"&::after": {
@@ -178,7 +178,7 @@ export const useStyles = createStyles(({ token }) => {
 			width: 10,
 			height: 10,
 			borderRadius: 2,
-			backgroundColor: token.magicColorUsages.text[2],
+			backgroundColor: token.delightfulColorUsages.text[2],
 		},
 	}
 })

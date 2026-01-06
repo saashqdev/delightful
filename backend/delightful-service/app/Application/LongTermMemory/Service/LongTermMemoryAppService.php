@@ -248,9 +248,9 @@ class LongTermMemoryAppService
     /**
      * Batch process memory suggestions (accept/reject).
      */
-    public function batchProcessMemorySuggestions(array $memoryIds, MemoryOperationAction $action, MemoryOperationScenario $scenario = MemoryOperationScenario::ADMIN_PANEL, ?string $magicMessageId = null): void
+    public function batchProcessMemorySuggestions(array $memoryIds, MemoryOperationAction $action, MemoryOperationScenario $scenario = MemoryOperationScenario::ADMIN_PANEL, ?string $delightfulMessageId = null): void
     {
-        $this->longTermMemoryDomainService->batchProcessMemorySuggestions($memoryIds, $action, $scenario, $magicMessageId);
+        $this->longTermMemoryDomainService->batchProcessMemorySuggestions($memoryIds, $action, $scenario, $delightfulMessageId);
     }
 
     /**

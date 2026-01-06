@@ -20,7 +20,7 @@ const NamesSelect = ({
 			isMultiple={isMultiple}
 			filterOption={false}
 			size={size}
-			placeholder={i18next.t("common.pleaseSelect", { ns: "magicFlow" })}
+			placeholder={i18next.t("common.pleaseSelect", { ns: "delightfulFlow" })}
 			{...props}
 		/>
 	)

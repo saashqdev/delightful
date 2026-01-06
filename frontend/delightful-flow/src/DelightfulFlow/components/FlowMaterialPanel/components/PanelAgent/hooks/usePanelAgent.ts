@@ -23,15 +23,15 @@ export default function usePanelAgent() {
 	const options = useMemo(() => {
 		return [
 			{
-				label: i18next.t("flow.personalAgent", { ns: "magicFlow" }),
+				label: i18next.t("flow.personalAgent", { ns: "delightfulFlow" }),
 				value: AgentType.Person,
 			},
 			{
-				label: i18next.t("flow.enterpriseAgent", { ns: "magicFlow" }),
+				label: i18next.t("flow.enterpriseAgent", { ns: "delightfulFlow" }),
 				value: AgentType.Enterprise,
 			},
 			{
-				label: i18next.t("flow.agentMarket", { ns: "magicFlow" }),
+				label: i18next.t("flow.agentMarket", { ns: "delightfulFlow" }),
 				value: AgentType.Market,
 			},
 		]

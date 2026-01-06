@@ -5,7 +5,7 @@ The Create Group Chat Node is a function node in Delightful Flow specifically de
 **Image Description:**
 
 The Create Group Chat Node interface contains configuration items such as group name, group owner, group members, group type, etc., as well as options to add the current user and assistant to the group chat. You can automatically create various types of group chats that meet business needs through simple configuration.
-![Create Group Chat Node](https://cdn.letsmagic.cn/static/img/Create-group-chat.png)
+![Create Group Chat Node](https://cdn.letsdelightful.cn/static/img/Create-group-chat.png)
 
 ## Why do you need a Create Group Chat Node?
 In intelligent workflows, automatically creating group chats can solve many practical problems:

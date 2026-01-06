@@ -13,13 +13,13 @@ export const useStyles = createStyles(
 				backgroundSize: "cover",
 				backgroundPosition: "center",
 				backgroundRepeat: "no-repeat",
-				backgroundColor: token.magicColorUsages.bg[0],
+				backgroundColor: token.delightfulColorUsages.bg[0],
 				"--sider-width": `${siderSize?.width}px`,
 			},
 			header: {
-				backgroundColor: token.magicColorUsages.bg[0],
+				backgroundColor: token.delightfulColorUsages.bg[0],
 				borderBottom: `1px solid ${
-					isDarkMode ? token.magicColorScales.grey[1] : token.colorBorder
+					isDarkMode ? token.delightfulColorScales.grey[1] : token.colorBorder
 				}`,
 			},
 			globalWrapper: {
@@ -32,9 +32,9 @@ export const useStyles = createStyles(
 			},
 			sider: {
 				height: "100vh",
-				backgroundColor: token.magicColorUsages.bg[0],
+				backgroundColor: token.delightfulColorUsages.bg[0],
 				borderRight: `1px solid ${
-					isDarkMode ? token.magicColorScales.grey[1] : token.colorBorder
+					isDarkMode ? token.delightfulColorScales.grey[1] : token.colorBorder
 				}`,
 			},
 			subSider: {},

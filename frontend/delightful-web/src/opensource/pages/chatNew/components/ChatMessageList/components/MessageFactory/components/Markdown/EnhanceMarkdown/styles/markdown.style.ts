@@ -20,8 +20,8 @@ export const useStyles = createStyles(
 		},
 	) => {
 		const textColor = isDarkMode
-			? token.magicColorScales.grey[8]
-			: token.magicColorUsages.text[1]
+			? token.delightfulColorScales.grey[8]
+			: token.delightfulColorUsages.text[1]
 
 		const markdownColor = hiddenDetail ? token.colorTextQuaternary : textColor
 
@@ -54,13 +54,13 @@ export const useStyles = createStyles(
 			a: css`
 				a {
 					color: ${isDarkMode
-						? token.magicColorScales.brand[6]
-						: token.magicColorUsages.link.default};
+						? token.delightfulColorScales.brand[6]
+						: token.delightfulColorUsages.link.default};
 
 					&:hover {
 						color: ${isDarkMode
-							? token.magicColorScales.brand[5]
-							: token.magicColorUsages.link.hover};
+							? token.delightfulColorScales.brand[5]
+							: token.delightfulColorUsages.link.hover};
 					}
 				}
 			`,
@@ -72,10 +72,10 @@ export const useStyles = createStyles(
 					padding: ${calculateRelativeSize(8, fontSize)}px
 						${calculateRelativeSize(14, fontSize)}px;
 					border-radius: 4px;
-					border-left: 3px solid ${token.magicColorScales.grey[3]};
+					border-left: 3px solid ${token.delightfulColorScales.grey[3]};
 					background: ${isDarkMode
-						? token.magicColorScales.grey[9]
-						: token.magicColorScales.grey[0]};
+						? token.delightfulColorScales.grey[9]
+						: token.delightfulColorScales.grey[0]};
 
 					> p {
 						margin-block-start: 0.5em;
@@ -220,7 +220,7 @@ export const useStyles = createStyles(
 			hr: css`
 				hr {
 					margin-block: 0.6em;
-					border-color: ${token.magicColorUsages.border};
+					border-color: ${token.delightfulColorUsages.border};
 					border-width: 1px;
 					border-block-start: none;
 					border-inline-start: none;
@@ -427,7 +427,7 @@ export const useStyles = createStyles(
 					margin-block: calc(var(--${prefixCls}-markdown-margin-multiple) * 0.6em);
 					border-radius: calc(var(--${prefixCls}-markdown-border-radius) * 1px);
 					box-shadow: 0 0 0 1px var(--${prefixCls}-markdown-border-color);
-					${isDarkMode ? "" : `border: 1px solid ${token.magicColorUsages.border}`};
+					${isDarkMode ? "" : `border: 1px solid ${token.delightfulColorUsages.border}`};
 				}
 
 				table {
@@ -447,8 +447,8 @@ export const useStyles = createStyles(
 					overflow-wrap: anywhere;
 
 					background: ${isDarkMode
-						? token.magicColorScales.grey[2]
-						: token.magicColorUsages.white};
+						? token.delightfulColorScales.grey[2]
+						: token.delightfulColorUsages.white};
 					border-radius: calc(var(--${prefixCls}-markdown-border-radius) * 1px);
 
 					code {
@@ -457,19 +457,19 @@ export const useStyles = createStyles(
 
 					thead {
 						background: ${isDarkMode
-							? token.magicColorScales.grey[1]
-							: token.magicColorScales.grey[0]};
-						border-bottom: 1px solid ${token.magicColorUsages.border};
+							? token.delightfulColorScales.grey[1]
+							: token.delightfulColorScales.grey[0]};
+						border-bottom: 1px solid ${token.delightfulColorUsages.border};
 						display: table-header-group;
 					}
 
 					tr {
-						box-shadow: 0 1px 0 ${token.magicColorUsages.border};
+						box-shadow: 0 1px 0 ${token.delightfulColorUsages.border};
 						display: table-row;
 
 						> th:not(:last-child),
 						> td:not(:last-child) {
-							border-right: 1px solid ${token.magicColorUsages.border};
+							border-right: 1px solid ${token.delightfulColorUsages.border};
 						}
 					}
 
@@ -477,8 +477,8 @@ export const useStyles = createStyles(
 						> td {
 							border-bottom: 1px solid
 								${isDarkMode
-									? token.magicColorScales.grey[0]
-									: token.magicColorUsages.border};
+									? token.delightfulColorScales.grey[0]
+									: token.delightfulColorUsages.border};
 						}
 					}
 
@@ -570,8 +570,8 @@ export const useStyles = createStyles(
 
 					a {
 						color: ${isDarkMode
-							? token.magicColorScales.brand[6]
-							: token.magicColorUsages.link.default};
+							? token.delightfulColorScales.brand[6]
+							: token.delightfulColorUsages.link.default};
 						text-decoration: none;
 
 						&:hover {
@@ -594,8 +594,8 @@ export const useStyles = createStyles(
 
 					.footnote-backref {
 						color: ${isDarkMode
-							? token.magicColorScales.brand[6]
-							: token.magicColorUsages.link.default};
+							? token.delightfulColorScales.brand[6]
+							: token.delightfulColorUsages.link.default};
 						text-decoration: none;
 						margin-left: 0.25em;
 
@@ -614,8 +614,8 @@ export const useStyles = createStyles(
 
 					&:hover {
 						background-color: ${isDarkMode
-							? token.magicColorScales.grey[1]
-							: token.magicColorScales.grey[0]};
+							? token.delightfulColorScales.grey[1]
+							: token.delightfulColorScales.grey[0]};
 					}
 				}
 			`,
@@ -717,15 +717,15 @@ export const useStyles = createStyles(
 					height: 16px;
 					border: 2px solid
 						${isDarkMode
-							? token.magicColorScales.grey[5]
-							: token.magicColorScales.grey[3]};
+							? token.delightfulColorScales.grey[5]
+							: token.delightfulColorScales.grey[3]};
 					background: ${isDarkMode
-						? token.magicColorScales.grey[1]
-						: token.magicColorUsages.white};
+						? token.delightfulColorScales.grey[1]
+						: token.delightfulColorUsages.white};
 
 					&:checked {
-						background: ${token.magicColorUsages.brand};
-						border-color: ${token.magicColorUsages.brand};
+						background: ${token.delightfulColorUsages.brand};
+						border-color: ${token.delightfulColorUsages.brand};
 
 						&::after {
 							content: "✓";
@@ -741,7 +741,7 @@ export const useStyles = createStyles(
 					}
 
 					&:focus {
-						outline: 2px solid ${token.magicColorUsages.brand};
+						outline: 2px solid ${token.delightfulColorUsages.brand};
 						outline-offset: 2px;
 					}
 				}

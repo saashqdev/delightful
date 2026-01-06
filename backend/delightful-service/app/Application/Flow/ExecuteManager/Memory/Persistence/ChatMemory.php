@@ -26,8 +26,8 @@ use DateTime;
 class ChatMemory implements MemoryPersistenceInterface
 {
     public function __construct(
-        protected DelightfulChatDomainService $magicChatDomainService,
-        protected DelightfulFlowMemoryHistoryDomainService $magicFlowMemoryHistoryDomainService,
+        protected DelightfulChatDomainService $delightfulChatDomainService,
+        protected DelightfulFlowMemoryHistoryDomainService $delightfulFlowMemoryHistoryDomainService,
     ) {
     }
 
@@ -74,7 +74,7 @@ class ChatMemory implements MemoryPersistenceInterface
         $history->setCreatedUid($LLMMemoryMessage->getUid());
         $history->setCreatedAt(new DateTime());
         $flowDataIsolation = FlowDataIsolation::create(userId: $LLMMemoryMessage->getUid());
-        $this->magicFlowMemoryHistoryDomainService->create($flowDataIsolation, $history);
+        $this->delightfulFlowMemoryHistoryDomainService->create($flowDataIsolation, $history);
     }
 
     /**
@@ -101,7 +101,7 @@ class ChatMemory implements MemoryPersistenceInterface
             $messagesQueryDTO->setTimeEnd(Carbon::make($memoryQuery->getEndTime()));
         }
 
-        $clientSeq = $this->magicChatDomainService->getConversationChatMessages($memoryQuery->getOriginConversationId(), $messagesQueryDTO);
+        $clientSeq = $this->delightfulChatDomainService->getConversationChatMessages($memoryQuery->getOriginConversationId(), $messagesQueryDTO);
         $messageIds = [];
 
         foreach ($clientSeq as $seqResponseDTO) {
@@ -125,7 +125,7 @@ class ChatMemory implements MemoryPersistenceInterface
         }
         $messageLists = [];
         if (! empty($messageIds)) {
-            $imMessages = $this->magicChatDomainService->getMessageEntitiesByMaicMessageIds($messageIds, $memoryQuery->getRangMessageTypes());
+            $imMessages = $this->delightfulChatDomainService->getMessageEntitiesByMaicMessageIds($messageIds, $memoryQuery->getRangMessageTypes());
             foreach ($imMessages as $imMessage) {
                 // 这里是为了排序正确 根据 seq 的顺序进行排
                 $index = array_search($imMessage->getDelightfulMessageId(), $messageIds);
@@ -154,7 +154,7 @@ class ChatMemory implements MemoryPersistenceInterface
         $flowDataIsolation = FlowDataIsolation::create()->disabled();
 
         $mountMessages = [];
-        $mountLists = $this->magicFlowMemoryHistoryDomainService->queries($flowDataIsolation, $mountQuery, Page::createNoPage())['list'] ?? [];
+        $mountLists = $this->delightfulFlowMemoryHistoryDomainService->queries($flowDataIsolation, $mountQuery, Page::createNoPage())['list'] ?? [];
         foreach ($mountLists as $mountHistoryMessage) {
             $mountMessages[$mountHistoryMessage->getMountId()][] = LLMMemoryMessage::createByFlowMemory($mountHistoryMessage);
         }

@@ -12,7 +12,7 @@ use App\Domain\Chat\Entity\AbstractEntity;
 class EditMessageOptions extends AbstractEntity
 {
     // 被编辑的消息id，用于关联消息的多个版本
-    protected string $magicMessageId;
+    protected string $delightfulMessageId;
 
     // 版本号id，发送方不用填写，服务端自动生成
     protected ?string $messageVersionId;
@@ -24,12 +24,12 @@ class EditMessageOptions extends AbstractEntity
 
     public function getDelightfulMessageId(): ?string
     {
-        return $this->magicMessageId ?? null;
+        return $this->delightfulMessageId ?? null;
     }
 
-    public function setDelightfulMessageId(?string $magicMessageId): static
+    public function setDelightfulMessageId(?string $delightfulMessageId): static
     {
-        isset($magicMessageId) && $this->magicMessageId = $magicMessageId;
+        isset($delightfulMessageId) && $this->delightfulMessageId = $delightfulMessageId;
         return $this;
     }
 

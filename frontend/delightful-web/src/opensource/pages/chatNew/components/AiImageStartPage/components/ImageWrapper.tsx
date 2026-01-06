@@ -13,7 +13,7 @@ const useStyles = createStyles(({ css, token, isDarkMode }) => ({
 	image: css`
 		width: 100%;
 		height: 100%;
-		background: ${token.magicColorUsages.fill[0]};
+		background: ${token.delightfulColorUsages.fill[0]};
 		border-radius: 8px;
 		opacity: 0;
 		transition: opacity 0.3s ease;
@@ -25,8 +25,8 @@ const useStyles = createStyles(({ css, token, isDarkMode }) => ({
 		height: 100%;
 		padding-bottom: 0 !important;
 		border-radius: 8px;
-		border: 1px solid ${token.magicColorUsages.border};
-		background: ${isDarkMode ? token.magicColorUsages.bg[1] : token.magicColorUsages.white};
+		border: 1px solid ${token.delightfulColorUsages.border};
+		background: ${isDarkMode ? token.delightfulColorUsages.bg[1] : token.delightfulColorUsages.white};
 	`,
 }))
 

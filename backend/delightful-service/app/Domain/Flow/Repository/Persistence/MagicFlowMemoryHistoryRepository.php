@@ -17,13 +17,13 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 class DelightfulFlowMemoryHistoryRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowMemoryHistoryRepositoryInterface
 {
-    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryEntity $magicFlowMemoryHistoryEntity): DelightfulFlowMemoryHistoryEntity
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryEntity $delightfulFlowMemoryHistoryEntity): DelightfulFlowMemoryHistoryEntity
     {
         $model = new DelightfulFlowMemoryHistoryModel();
-        $model->fill($this->getAttributes($magicFlowMemoryHistoryEntity));
+        $model->fill($this->getAttributes($delightfulFlowMemoryHistoryEntity));
         $model->save();
-        $magicFlowMemoryHistoryEntity->setId($model->id);
-        return $magicFlowMemoryHistoryEntity;
+        $delightfulFlowMemoryHistoryEntity->setId($model->id);
+        return $delightfulFlowMemoryHistoryEntity;
     }
 
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowMemoryHistoryQuery $query, Page $page): array

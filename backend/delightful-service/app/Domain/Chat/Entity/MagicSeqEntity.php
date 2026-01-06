@@ -29,7 +29,7 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     protected ConversationType $objectType;
 
-    // object_type 为0或者1时,此处代表 magic_id
+    // object_type 为0或者1时,此处代表 delightful_id
     protected string $objectId = '';
 
     protected string $seqId = '';
@@ -42,8 +42,8 @@ final class DelightfulSeqEntity extends AbstractEntity
      */
     protected MessageInterface $content;
 
-    // magic message id
-    protected string $magicMessageId = '';
+    // delightful message id
+    protected string $delightfulMessageId = '';
 
     protected string $messageId = '';
 
@@ -131,12 +131,12 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     public function getDelightfulMessageId(): string
     {
-        return $this->magicMessageId;
+        return $this->delightfulMessageId;
     }
 
-    public function setDelightfulMessageId(string $magicMessageId): self
+    public function setDelightfulMessageId(string $delightfulMessageId): self
     {
-        $this->magicMessageId = $magicMessageId;
+        $this->delightfulMessageId = $delightfulMessageId;
         return $this;
     }
 

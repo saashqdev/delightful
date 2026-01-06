@@ -25,15 +25,15 @@ const useStyles = createStyles(
 				padding: 12px;
 				border-radius: 8px;
 				color: ${isDarkMode
-					? token.magicColorScales.grey[2]
-					: token.magicColorUsages.text[2]};
-				border: 1px solid ${isDarkMode ? token.magicColorScales.grey[4] : token.colorBorder};
+					? token.delightfulColorScales.grey[2]
+					: token.delightfulColorUsages.text[2]};
+				border: 1px solid ${isDarkMode ? token.delightfulColorScales.grey[4] : token.colorBorder};
 				position: relative;
 				cursor: pointer;
 			`,
 			checked: css`
 				border-width: 2px;
-				border-color: ${token.magicColorScales.brand[5]};
+				border-color: ${token.delightfulColorScales.brand[5]};
 			`,
 			moreOperations: css`
 				position: absolute;
@@ -50,29 +50,29 @@ const useStyles = createStyles(
 			`,
 			green: css`
 				background-color: ${isDarkMode
-					? token.magicColorScales.green[0]
-					: token.magicColorScales.green[0]};
+					? token.delightfulColorScales.green[0]
+					: token.delightfulColorScales.green[0]};
 				color: ${isDarkMode
-					? token.magicColorScales.green[5]
-					: token.magicColorScales.green[5]};
+					? token.delightfulColorScales.green[5]
+					: token.delightfulColorScales.green[5]};
 				border: none;
 			`,
 			orange: css`
 				background-color: ${isDarkMode
-					? token.magicColorUsages.fill[2]
-					: token.magicColorUsages.fill[0]};
+					? token.delightfulColorUsages.fill[2]
+					: token.delightfulColorUsages.fill[0]};
 				color: ${isDarkMode
-					? token.magicColorUsages.text[3]
-					: token.magicColorUsages.text[2]};
+					? token.delightfulColorUsages.text[3]
+					: token.delightfulColorUsages.text[2]};
 				border: none;
 			`,
 			blue: css`
 				background-color: ${isDarkMode
-					? token.magicColorScales.brand[8]
-					: token.magicColorScales.brand[0]};
+					? token.delightfulColorScales.brand[8]
+					: token.delightfulColorScales.brand[0]};
 				color: ${isDarkMode
-					? token.magicColorUsages.text[3]
-					: token.magicColorUsages.text[2]};
+					? token.delightfulColorUsages.text[3]
+					: token.delightfulColorUsages.text[2]};
 				border: none;
 			`,
 		}

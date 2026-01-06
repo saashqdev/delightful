@@ -21,7 +21,7 @@ use Delightful\AsyncEvent\AsyncEventUtil;
 class DelightfulFlowToolSetDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly DelightfulFlowToolSetRepositoryInterface $magicFlowToolSetRepository,
+        private readonly DelightfulFlowToolSetRepositoryInterface $delightfulFlowToolSetRepository,
     ) {
     }
 
@@ -30,7 +30,7 @@ class DelightfulFlowToolSetDomainService extends AbstractDomainService
         if ($code === ConstValue::TOOL_SET_DEFAULT_CODE) {
             return DelightfulFlowToolSetEntity::createNotGrouped($dataIsolation->getCurrentOrganizationCode());
         }
-        $toolSet = $this->magicFlowToolSetRepository->getByCode($dataIsolation, $code);
+        $toolSet = $this->delightfulFlowToolSetRepository->getByCode($dataIsolation, $code);
         if (! $toolSet) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_found', ['label' => $code]);
         }
@@ -42,26 +42,26 @@ class DelightfulFlowToolSetDomainService extends AbstractDomainService
         $savingDelightfulFLowToolSetEntity->setCreator($dataIsolation->getCurrentUserId());
         $savingDelightfulFLowToolSetEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         if ($savingDelightfulFLowToolSetEntity->shouldCreate()) {
-            $magicFlowToolSetEntity = clone $savingDelightfulFLowToolSetEntity;
-            $magicFlowToolSetEntity->prepareForCreation();
+            $delightfulFlowToolSetEntity = clone $savingDelightfulFLowToolSetEntity;
+            $delightfulFlowToolSetEntity->prepareForCreation();
         } else {
             if ($savingDelightfulFLowToolSetEntity->getCode() === ConstValue::TOOL_SET_DEFAULT_CODE) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.tool_set.not_edit_default_tool_set');
             }
-            $magicFlowToolSetEntity = $this->magicFlowToolSetRepository->getByCode($dataIsolation, $savingDelightfulFLowToolSetEntity->getCode());
-            if (! $magicFlowToolSetEntity) {
+            $delightfulFlowToolSetEntity = $this->delightfulFlowToolSetRepository->getByCode($dataIsolation, $savingDelightfulFLowToolSetEntity->getCode());
+            if (! $delightfulFlowToolSetEntity) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_found', ['label' => $savingDelightfulFLowToolSetEntity->getCode()]);
             }
-            $savingDelightfulFLowToolSetEntity->prepareForModification($magicFlowToolSetEntity);
+            $savingDelightfulFLowToolSetEntity->prepareForModification($delightfulFlowToolSetEntity);
         }
-        $toolSet = $this->magicFlowToolSetRepository->save($dataIsolation, $magicFlowToolSetEntity);
+        $toolSet = $this->delightfulFlowToolSetRepository->save($dataIsolation, $delightfulFlowToolSetEntity);
         AsyncEventUtil::dispatch(new DelightfulFLowToolSetSavedEvent($toolSet, $savingDelightfulFLowToolSetEntity->shouldCreate()));
         return $toolSet;
     }
 
     public function create(FlowDataIsolation $dataIsolation, DelightfulFlowToolSetEntity $savingDelightfulFLowToolSetEntity): DelightfulFlowToolSetEntity
     {
-        $toolSet = $this->magicFlowToolSetRepository->save($dataIsolation, $savingDelightfulFLowToolSetEntity);
+        $toolSet = $this->delightfulFlowToolSetRepository->save($dataIsolation, $savingDelightfulFLowToolSetEntity);
         $savedEvent = new DelightfulFLowToolSetSavedEvent($toolSet, true);
         AsyncEventUtil::dispatch($savedEvent);
         return $toolSet;
@@ -72,15 +72,15 @@ class DelightfulFlowToolSetDomainService extends AbstractDomainService
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFlowToolSetQuery $query, Page $page): array
     {
-        return $this->magicFlowToolSetRepository->queries($dataIsolation, $query, $page);
+        return $this->delightfulFlowToolSetRepository->queries($dataIsolation, $query, $page);
     }
 
     public function destroy(FlowDataIsolation $dataIsolation, string $code): void
     {
-        $toolSet = $this->magicFlowToolSetRepository->getByCode($dataIsolation, $code);
+        $toolSet = $this->delightfulFlowToolSetRepository->getByCode($dataIsolation, $code);
         if (! $toolSet) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_found', ['label' => $code]);
         }
-        $this->magicFlowToolSetRepository->destroy($dataIsolation, $code);
+        $this->delightfulFlowToolSetRepository->destroy($dataIsolation, $code);
     }
 }

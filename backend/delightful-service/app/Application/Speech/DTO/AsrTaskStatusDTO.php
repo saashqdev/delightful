@@ -26,7 +26,7 @@ class AsrTaskStatusDTO
     public ?string $filePath = null; // 工作区文件路径
 
     // 文件ID（数据库中的实际ID）
-    public ?string $audioFileId = null; // 音频文件ID（写入magic_super_agent_task_files表后返回的ID）
+    public ?string $audioFileId = null; // 音频文件ID（写入delightful_super_agent_task_files表后返回的ID）
 
     // note 文件信息
     public ?string $noteFileName = null; // note文件名（与音频文件在同一目录，为空表示无笔记文件）

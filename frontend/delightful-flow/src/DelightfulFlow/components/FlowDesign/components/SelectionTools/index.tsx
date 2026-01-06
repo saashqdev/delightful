@@ -46,23 +46,23 @@ export default function SelectionTools({
 		<Flex className={clsx(styles.groupWrap, `${prefix}group-wrap`)}>
 			<div className={clsx(styles.controlItem, `${prefix}control-item`)} onClick={onCopy}>
 				<IconCopy stroke={1} />
-				{i18next.t("common.copy", { ns: "magicFlow" })}
+				{i18next.t("common.copy", { ns: "delightfulFlow" })}
 			</div>
 			<svg className={clsx(styles.line, `${prefix}line`)}>
 				<line x1={0} y1={0} x2={0} y2={20} stroke="#1C1D2314" strokeWidth="1" />
 			</svg>
 			<Popconfirm
-				title={i18next.t("flow.confirm2DeleteNodes", { ns: "magicFlow" })}
+				title={i18next.t("flow.confirm2DeleteNodes", { ns: "delightfulFlow" })}
 				onConfirm={() => onDelete()}
 				icon={<IconUploadError style={{ color: "rgb(255, 24, 9)" }} />}
 				okButtonProps={{ danger: true }}
-				okText={i18next.t("common.confirm", { ns: "magicFlow" })}
-				cancelText={i18next.t("common.cancel", { ns: "magicFlow" })}
+				okText={i18next.t("common.confirm", { ns: "delightfulFlow" })}
+				cancelText={i18next.t("common.cancel", { ns: "delightfulFlow" })}
 			>
 				{/* @ts-ignore */}
 				<div className={clsx(styles.controlItem, `${prefix}control-item`)}>
 					<IconTrash stroke={1} />
-					{i18next.t("common.delete", { ns: "magicFlow" })}
+					{i18next.t("common.delete", { ns: "delightfulFlow" })}
 				</div>
 			</Popconfirm>
 		</Flex>

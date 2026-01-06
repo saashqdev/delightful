@@ -18,7 +18,7 @@ use Hyperf\Di\Annotation\Inject;
 class DelightfulFlowToolSetApiFlow extends AbstractFlowAdminApi
 {
     #[Inject]
-    protected DelightfulFlowToolSetAppService $magicFlowToolSetAppService;
+    protected DelightfulFlowToolSetAppService $delightfulFlowToolSetAppService;
 
     public function save()
     {
@@ -27,8 +27,8 @@ class DelightfulFlowToolSetApiFlow extends AbstractFlowAdminApi
         $DTO = new DelightfulFlowToolSetDTO($this->request->all());
 
         $DO = DelightfulFlowToolSetAssembler::createDO($DTO);
-        $entity = $this->magicFlowToolSetAppService->save($authorization, $DO);
-        $icons = $this->magicFlowToolSetAppService->getIcons($entity->getOrganizationCode(), [$entity->getIcon()]);
+        $entity = $this->delightfulFlowToolSetAppService->save($authorization, $DO);
+        $icons = $this->delightfulFlowToolSetAppService->getIcons($entity->getOrganizationCode(), [$entity->getIcon()]);
         return DelightfulFlowToolSetAssembler::createDTO($entity, $icons);
     }
 
@@ -39,7 +39,7 @@ class DelightfulFlowToolSetApiFlow extends AbstractFlowAdminApi
 
         $query = new DelightfulFlowToolSetQuery($this->request->all());
         $query->withToolsSimpleInfo = true;
-        $result = $this->magicFlowToolSetAppService->queries($authorization, $query, $page);
+        $result = $this->delightfulFlowToolSetAppService->queries($authorization, $query, $page);
         return DelightfulFlowToolSetAssembler::createPageListDTO(
             total: $result['total'],
             list: $result['list'],
@@ -52,14 +52,14 @@ class DelightfulFlowToolSetApiFlow extends AbstractFlowAdminApi
     public function show(string $code)
     {
         $authorization = $this->getAuthorization();
-        $entity = $this->magicFlowToolSetAppService->getByCode($authorization, $code);
-        $icons = $this->magicFlowToolSetAppService->getIcons($entity->getOrganizationCode(), [$entity->getIcon()]);
+        $entity = $this->delightfulFlowToolSetAppService->getByCode($authorization, $code);
+        $icons = $this->delightfulFlowToolSetAppService->getIcons($entity->getOrganizationCode(), [$entity->getIcon()]);
         return DelightfulFlowToolSetAssembler::createDTO($entity, $icons);
     }
 
     public function destroy(string $code)
     {
         $authorization = $this->getAuthorization();
-        $this->magicFlowToolSetAppService->destroy($authorization, $code);
+        $this->delightfulFlowToolSetAppService->destroy($authorization, $code);
     }
 }

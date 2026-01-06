@@ -15,10 +15,10 @@ class CreateDelightfulChatFriendTable extends Migration
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_chat_friends')) {
+        if (Schema::hasTable('delightful_chat_friends')) {
             return;
         }
-        Schema::create('magic_chat_friends', static function (Blueprint $table) {
+        Schema::create('delightful_chat_friends', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user_id', 64)->comment('用户id');
             // 用户所属组织
@@ -43,6 +43,6 @@ class CreateDelightfulChatFriendTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_chat_friends');
+        Schema::dropIfExists('delightful_chat_friends');
     }
 }

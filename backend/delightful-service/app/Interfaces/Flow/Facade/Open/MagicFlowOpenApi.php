@@ -17,16 +17,16 @@ use Hyperf\Di\Annotation\Inject;
 class DelightfulFlowOpenApi extends AbstractOpenApi
 {
     #[Inject]
-    protected DelightfulFlowExecuteAppService $magicFlowExecuteAppServiceService;
+    protected DelightfulFlowExecuteAppService $delightfulFlowExecuteAppServiceService;
 
     #[Inject]
-    protected DelightfulFlowExecuteLogAssembler $magicFlowExecuteLogAssembler;
+    protected DelightfulFlowExecuteLogAssembler $delightfulFlowExecuteLogAssembler;
 
     public function chat()
     {
         $apiChatDTO = $this->createApiChatDTO();
         $apiChatDTO->setAsync(false);
-        return $this->magicFlowExecuteAppServiceService->apiChat($apiChatDTO);
+        return $this->delightfulFlowExecuteAppServiceService->apiChat($apiChatDTO);
     }
 
     public function chatWithId(string $botId)
@@ -38,7 +38,7 @@ class DelightfulFlowOpenApi extends AbstractOpenApi
     {
         $apiChatDTO = $this->createApiChatDTO();
         $apiChatDTO->setAsync(true);
-        return $this->magicFlowExecuteAppServiceService->apiChat($apiChatDTO);
+        return $this->delightfulFlowExecuteAppServiceService->apiChat($apiChatDTO);
     }
 
     public function chatCompletions()
@@ -46,14 +46,14 @@ class DelightfulFlowOpenApi extends AbstractOpenApi
         $apiChatDTO = $this->createApiChatDTO();
         $apiChatDTO->setAsync(false);
         $apiChatDTO->setVersion('v1');
-        return $this->magicFlowExecuteAppServiceService->apiChat($apiChatDTO);
+        return $this->delightfulFlowExecuteAppServiceService->apiChat($apiChatDTO);
     }
 
     public function paramCall()
     {
         $apiChatDTO = $this->createApiChatDTO();
         $apiChatDTO->setStream(false);
-        return $this->magicFlowExecuteAppServiceService->apiParamCall($apiChatDTO);
+        return $this->delightfulFlowExecuteAppServiceService->apiParamCall($apiChatDTO);
     }
 
     public function paramCallWithId(string $code)
@@ -66,15 +66,15 @@ class DelightfulFlowOpenApi extends AbstractOpenApi
         $apiChatDTO = $this->createApiChatDTO();
         $apiChatDTO->setAsync(true);
         $apiChatDTO->setStream(false);
-        return $this->magicFlowExecuteAppServiceService->apiParamCall($apiChatDTO);
+        return $this->delightfulFlowExecuteAppServiceService->apiParamCall($apiChatDTO);
     }
 
     public function getExecuteResult(string $taskId)
     {
         $apiChatDTO = $this->createApiChatDTO();
         $apiChatDTO->setTaskId($taskId);
-        $log = $this->magicFlowExecuteAppServiceService->getByExecuteId($apiChatDTO);
-        return $this->magicFlowExecuteLogAssembler->createExecuteResultDTO($log);
+        $log = $this->delightfulFlowExecuteAppServiceService->getByExecuteId($apiChatDTO);
+        return $this->delightfulFlowExecuteLogAssembler->createExecuteResultDTO($log);
     }
 
     private function createApiChatDTO(): DelightfulFlowApiChatDTO

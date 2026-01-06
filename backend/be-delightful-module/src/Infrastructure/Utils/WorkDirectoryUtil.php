@@ -473,7 +473,7 @@ class WorkDirectoryUtil
 
     public static function getLockerKey(int $projectId): string
     {
-        return sprintf('super-magic:workspace:locker:%d', $projectId);
+        return sprintf('super-delightful:workspace:locker:%d', $projectId);
     }
 
     /**

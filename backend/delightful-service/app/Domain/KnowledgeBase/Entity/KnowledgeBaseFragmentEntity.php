@@ -98,7 +98,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
         return $this;
     }
 
-    public function prepareForModification(KnowledgeBaseFragmentEntity $magicFlowKnowledgeFragmentEntity): self
+    public function prepareForModification(KnowledgeBaseFragmentEntity $delightfulFlowKnowledgeFragmentEntity): self
     {
         if (empty($this->content)) {
             ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'flow.content.empty');
@@ -111,14 +111,14 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
         }
         $this->checkMetadata();
 
-        $magicFlowKnowledgeFragmentEntity->setContent($this->content);
-        $magicFlowKnowledgeFragmentEntity->setMetadata($this->metadata);
-        $magicFlowKnowledgeFragmentEntity->setBusinessId($this->businessId);
-        $magicFlowKnowledgeFragmentEntity->setModifier($this->creator);
-        $magicFlowKnowledgeFragmentEntity->setUpdatedAt($this->createdAt);
-        $magicFlowKnowledgeFragmentEntity->setDocumentCode($this->documentCode);
-        $magicFlowKnowledgeFragmentEntity->setWordCount(mb_strlen($this->content));
-        $magicFlowKnowledgeFragmentEntity->setVersion($this->version);
+        $delightfulFlowKnowledgeFragmentEntity->setContent($this->content);
+        $delightfulFlowKnowledgeFragmentEntity->setMetadata($this->metadata);
+        $delightfulFlowKnowledgeFragmentEntity->setBusinessId($this->businessId);
+        $delightfulFlowKnowledgeFragmentEntity->setModifier($this->creator);
+        $delightfulFlowKnowledgeFragmentEntity->setUpdatedAt($this->createdAt);
+        $delightfulFlowKnowledgeFragmentEntity->setDocumentCode($this->documentCode);
+        $delightfulFlowKnowledgeFragmentEntity->setWordCount(mb_strlen($this->content));
+        $delightfulFlowKnowledgeFragmentEntity->setVersion($this->version);
         return $this;
     }
 

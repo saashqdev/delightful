@@ -55,18 +55,18 @@ abstract class AbstractApi
 
     private function getHost(): string
     {
-        $host = $this->sdkContainer->getConfig()->get('magic_ai_api_host', '');
+        $host = $this->sdkContainer->getConfig()->get('delightful_ai_api_host', '');
         if (empty($host)) {
-            throw new RuntimeException('The magic_ai_api_host host must be configured');
+            throw new RuntimeException('The delightful_ai_api_host host must be configured');
         }
         return $host;
     }
 
     private function getAccessToken()
     {
-        $token = $this->sdkContainer->getConfig()->get('magic_ai_api_access_token', '');
+        $token = $this->sdkContainer->getConfig()->get('delightful_ai_api_access_token', '');
         if (empty($token)) {
-            throw new RuntimeException('The magic_ai_api_access_token must be configured');
+            throw new RuntimeException('The delightful_ai_api_access_token must be configured');
         }
         return $token;
     }

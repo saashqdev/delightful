@@ -32,7 +32,7 @@ class DelightfulFlowWaitMessageModel extends AbstractModel
 {
     use Snowflake;
 
-    protected ?string $table = 'magic_flow_wait_messages';
+    protected ?string $table = 'delightful_flow_wait_messages';
 
     protected array $fillable = [
         'id', 'organization_code', 'conversation_id', 'origin_conversation_id', 'message_id', 'wait_node_id', 'flow_code', 'flow_version', 'timeout', 'handled', 'persistent_data',

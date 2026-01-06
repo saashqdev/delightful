@@ -42,7 +42,7 @@ export const enum ConversationMessageType {
 	Voice = "voice",
 
 	/** 魔法搜索卡片消息 */
-	DelightfulSearchCard = "magic_search_card",
+	DelightfulSearchCard = "delightful_search_card",
 
 	/** AI 文生图 */
 	AiImage = "ai_image_card",
@@ -152,7 +152,7 @@ export type ExternalFile = {
 export interface ChatFileInfo {
 	file_id: string
 	user_id: string
-	magic_message_id: string
+	delightful_message_id: string
 	organization_code: string
 	file_extension: string
 	file_key: string
@@ -626,7 +626,7 @@ export interface DelightfulSearchCardContent {
  */
 export interface DelightfulSearchCardConversationMessage extends ConversationMessageBase {
 	type: ConversationMessageType.DelightfulSearchCard
-	magic_search_card?: DelightfulSearchCardContent
+	delightful_search_card?: DelightfulSearchCardContent
 }
 
 export const enum AIImagesDataType {

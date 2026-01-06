@@ -35,7 +35,7 @@ class ToolsExecutor extends AbstractTool
 {
     protected bool $validateParameters = false;
 
-    private DelightfulFlowEntity $magicFlowEntity;
+    private DelightfulFlowEntity $delightfulFlowEntity;
 
     private ExecutionData $executionData;
 
@@ -213,9 +213,9 @@ class ToolsExecutor extends AbstractTool
         return $data;
     }
 
-    public function setDelightfulFlowEntity(DelightfulFlowEntity $magicFlowEntity): void
+    public function setDelightfulFlowEntity(DelightfulFlowEntity $delightfulFlowEntity): void
     {
-        $this->magicFlowEntity = $magicFlowEntity;
+        $this->delightfulFlowEntity = $delightfulFlowEntity;
     }
 
     public function setExecutionData(ExecutionData $executionData): void
@@ -257,16 +257,16 @@ class ToolsExecutor extends AbstractTool
 
     protected function handle(array $parameters): array
     {
-        if (! isset($this->magicFlowEntity) || ! isset($this->executionData)) {
+        if (! isset($this->delightfulFlowEntity) || ! isset($this->executionData)) {
             return [];
         }
         $args = $parameters;
         // 隔离数据
-        $flow = DelightfulFlowFactory::arrayToEntity($this->magicFlowEntity->toArray());
+        $flow = DelightfulFlowFactory::arrayToEntity($this->delightfulFlowEntity->toArray());
         // 内置工具特殊值
-        if ($this->magicFlowEntity->hasCallback()) {
-            $flow->setCallback($this->magicFlowEntity->getCallback());
-            $flow->setEndNode($this->magicFlowEntity->getEndNode());
+        if ($this->delightfulFlowEntity->hasCallback()) {
+            $flow->setCallback($this->delightfulFlowEntity->getCallback());
+            $flow->setEndNode($this->delightfulFlowEntity->getEndNode());
         }
         $executionData = clone $this->executionData;
         $executionData->setId(uniqid('', true));

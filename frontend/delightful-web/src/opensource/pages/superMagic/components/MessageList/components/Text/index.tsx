@@ -1,4 +1,4 @@
-import DelightfulAva from "@/opensource/pages/superDelightful/assets/svg/magicAva.svg"
+import DelightfulAva from "@/opensource/pages/superDelightful/assets/svg/delightfulAva.svg"
 import { userStore } from "@/opensource/models/user"
 import { IconChecks } from "@tabler/icons-react"
 import MarkDown from "react-markdown"

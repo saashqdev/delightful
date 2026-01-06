@@ -113,7 +113,7 @@ Command execution process:
 
 Example output:
 ```
-Public bucket configuration: {"adapter":"tos","config":{"region":"cn-beijing","endpoint":"tos-cn-beijing.volces.com","ak":"YOUR_AK","sk":"YOUR_SK","bucket":"magic-public","trn":"YOUR_TRN"},"public_read":true}
+Public bucket configuration: {"adapter":"tos","config":{"region":"cn-beijing","endpoint":"tos-cn-beijing.volces.com","ak":"YOUR_AK","sk":"YOUR_SK","bucket":"delightful-public","trn":"YOUR_TRN"},"public_read":true}
 Local file path: /path/to/project/storage/files/DELIGHTFUL/open/default/icon1.png
 Local file path: /path/to/project/storage/files/DELIGHTFUL/open/default/icon2.png
 ...

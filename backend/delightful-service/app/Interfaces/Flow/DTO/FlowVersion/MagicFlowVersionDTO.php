@@ -19,7 +19,7 @@ class DelightfulFlowVersionDTO extends AbstractFlowDTO
 
     public string $flowCode;
 
-    public ?DelightfulFlowDTO $magicFlow;
+    public ?DelightfulFlowDTO $delightfulFlow;
 
     public function getName(): string
     {
@@ -53,11 +53,11 @@ class DelightfulFlowVersionDTO extends AbstractFlowDTO
 
     public function getDelightfulFLow(): ?DelightfulFlowDTO
     {
-        return $this->magicFlow;
+        return $this->delightfulFlow;
     }
 
-    public function setDelightfulFLow(mixed $magicFlow): void
+    public function setDelightfulFLow(mixed $delightfulFlow): void
     {
-        $this->magicFlow = DelightfulFlowAssembler::createDelightfulFlowDTOByMixed($magicFlow);
+        $this->delightfulFlow = DelightfulFlowAssembler::createDelightfulFlowDTOByMixed($delightfulFlow);
     }
 }

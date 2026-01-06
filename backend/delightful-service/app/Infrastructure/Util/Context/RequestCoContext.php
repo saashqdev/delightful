@@ -17,11 +17,11 @@ class RequestCoContext
      */
     public static function getUserAuthorization(): ?DelightfulUserAuthorization
     {
-        return Context::get('magic-user-authorization');
+        return Context::get('delightful-user-authorization');
     }
 
     public static function setUserAuthorization(DelightfulUserAuthorization $userAuthorization): void
     {
-        Context::set('magic-user-authorization', $userAuthorization);
+        Context::set('delightful-user-authorization', $userAuthorization);
     }
 }

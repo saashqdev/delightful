@@ -13,7 +13,7 @@ from agentlang.logger import get_logger
 from agentlang.tools.tool_result import ToolResult
 from app.tools.use_browser_operations.base import BaseOperationParams, OperationGroup, operation
 from app.tools.visual_understanding import VisualUnderstanding, VisualUnderstandingParams
-from magic_use.magic_browser import (
+from delightful_use.delightful_browser import (
     ClickSuccess,
     InputSuccess,
     InteractiveElementsSuccess,
@@ -31,7 +31,7 @@ logger = get_logger(__name__)
 # System temp directory
 TEMP_DIR = Path(tempfile.gettempdir())
 # Unique subdir per run to avoid conflicts
-SCREENSHOT_CACHE_DIR = TEMP_DIR / f"super_magic_visual_{uuid.uuid4()}"
+SCREENSHOT_CACHE_DIR = TEMP_DIR / f"super_delightful_visual_{uuid.uuid4()}"
 # Ensure cache directory exists
 SCREENSHOT_CACHE_DIR.mkdir(parents=True, exist_ok=True)
 logger.info(f"Visual interaction screenshots stored at temp dir: {SCREENSHOT_CACHE_DIR}")
@@ -47,7 +47,7 @@ class ClickParams(BaseOperationParams):
     """Parameters for clicking an element."""
     selector: str = Field(
         ...,
-        description="CSS selector of the element to click (e.g., '#element-id', '.class-name', '[attribute=value]', '[magic-touch-id=\"a1b2c\"]')"
+        description="CSS selector of the element to click (e.g., '#element-id', '.class-name', '[attribute=value]', '[delightful-touch-id=\"a1b2c\"]')"
     )
 
 
@@ -55,7 +55,7 @@ class InputTextParams(BaseOperationParams):
     """Parameters for typing text into an element."""
     selector: str = Field(
         ...,
-        description="CSS selector of the input field (e.g., '#input-id', 'input[name=\"username\"]', '[magic-touch-id=\"a1b2c\"]')"
+        description="CSS selector of the input field (e.g., '#input-id', 'input[name=\"username\"]', '[delightful-touch-id=\"a1b2c\"]')"
     )
     text: str = Field(
         ...,
@@ -183,7 +183,7 @@ class InteractionOperations(OperationGroup):
                         markdown_content += f"\n... {total_count - display_count} more elements not shown\n"
 
                     markdown_content += (
-                        "\n**Note**: Use `click` or `input_text` with these elements via their `selector` value (e.g., `[magic-touch-id=\"a1b2c3\"]`).\n"
+                        "\n**Note**: Use `click` or `input_text` with these elements via their `selector` value (e.g., `[delightful-touch-id=\"a1b2c3\"]`).\n"
                     )
                 else:
                     markdown_content += "\n**Note**: No interactive elements found. Try scope 'all' or check if the page has interactive content.\n"
@@ -285,7 +285,7 @@ class InteractionOperations(OperationGroup):
                     }}
 
                     // Query element by touchId
-                    const selector = `[magic-touch-id="${{touchId}}"]`;
+                    const selector = `[delightful-touch-id="${{touchId}}"]`;
                     const element = document.querySelector(selector);
                     if (!element) {{
                         return {{ markerId: markerIdStr, touchId: touchId, error: "Element not found with touchId" }};
@@ -384,7 +384,7 @@ class InteractionOperations(OperationGroup):
         example={
             "operation": "click",
             "operation_params": {
-                "selector": "[magic-touch-id=\"a1b2\"]"
+                "selector": "[delightful-touch-id=\"a1b2\"]"
             }
         }
     )

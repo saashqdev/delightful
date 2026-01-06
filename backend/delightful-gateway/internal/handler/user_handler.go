@@ -33,8 +33,8 @@ func (h *UserHandler) GetUserInfo(w http.ResponseWriter, r *http.Request) {
 
 	// Get user information from withAuth middleware
 	// The withAuth middleware sets these headers after JWT validation
-	userID := r.Header.Get("magic-user-id")
-	orgCode := r.Header.Get("magic-organization-code")
+	userID := r.Header.Get("delightful-user-id")
+	orgCode := r.Header.Get("delightful-organization-code")
 
 	h.logger.Printf("User info request from user: %s, organization: %s", userID, orgCode)
 

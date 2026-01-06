@@ -15,8 +15,8 @@ class CreateDelightfulFlowKnowledge extends Migration
      */
     public function up(): void
     {
-        if (! Schema::hasTable('magic_flow_knowledge')) {
-            Schema::create('magic_flow_knowledge', function (Blueprint $table) {
+        if (! Schema::hasTable('delightful_flow_knowledge')) {
+            Schema::create('delightful_flow_knowledge', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('code')->default('')->unique()->comment('Unique knowledge base code');
                 $table->integer('version')->default(1)->comment('Version');
@@ -39,8 +39,8 @@ class CreateDelightfulFlowKnowledge extends Migration
             });
         }
 
-        if (! Schema::hasTable('magic_flow_knowledge_fragment')) {
-            Schema::create('magic_flow_knowledge_fragment', function (Blueprint $table) {
+        if (! Schema::hasTable('delightful_flow_knowledge_fragment')) {
+            Schema::create('delightful_flow_knowledge_fragment', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('knowledge_code')->default('')->comment('Associated knowledge base code');
                 $table->text('content')->nullable(false)->comment('Content fragment');

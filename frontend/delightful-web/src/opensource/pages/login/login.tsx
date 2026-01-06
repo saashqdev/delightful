@@ -52,7 +52,7 @@ function LoginPage() {
 
 			setLoading(true)
 			values.device = await getDeviceInfo(i18n)
-			const magicOrgSyncStep = loginService.magicOrganizationSyncStep(clusterCode as string)
+			const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(clusterCode as string)
 			const userSyncStep = loginService.accountSyncStep(clusterCode as string)
 			return (
 				Promise.resolve()
@@ -66,7 +66,7 @@ function LoginPage() {
 						console.error("authorizationSyncStep", ...args)
 						return Promise.resolve(...args)
 					})
-					.then(magicOrgSyncStep)
+					.then(delightfulOrgSyncStep)
 					.then(async (userInfo) => {
 						// 环境同步
 						await loginService.syncClusterConfig()

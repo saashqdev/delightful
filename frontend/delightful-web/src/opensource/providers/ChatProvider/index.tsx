@@ -55,9 +55,9 @@ const ChatProvider = observer(function ChatProvider({ children }: ChatServicePro
 								payload?.seq?.message?.type as string,
 								message,
 							)
-							const magicId = userStore.user.userInfo?.magic_id
-							const magicOrganizationCode = userStore.user.organizationCode
-							if (magicId && seqId && magicOrganizationCode) {
+							const delightfulId = userStore.user.userInfo?.delightful_id
+							const delightfulOrganizationCode = userStore.user.organizationCode
+							if (delightfulId && seqId && delightfulOrganizationCode) {
 								const localSeqId = MessageSeqIdService.getGlobalPullSeqId()
 								if (localSeqId && bigNumCompare(localSeqId, seqId) < 0) {
 									MessageService.pullOfflineMessages()
@@ -70,9 +70,9 @@ const ChatProvider = observer(function ChatProvider({ children }: ChatServicePro
 								}
 							} else {
 								console.warn(
-									"接收到消息，但magicId或organizationCode不存在",
-									magicId,
-									magicOrganizationCode,
+									"接收到消息，但delightfulId或organizationCode不存在",
+									delightfulId,
+									delightfulOrganizationCode,
 								)
 							}
 							break
@@ -109,9 +109,9 @@ const ChatProvider = observer(function ChatProvider({ children }: ChatServicePro
 const ParamsCheckWrapper = ({ children }: PropsWithChildren) => {
 	const { authorization } = useAuthorization()
 
-	const { organizationCode: magicOrganizationCode } = useOrganization()
+	const { organizationCode: delightfulOrganizationCode } = useOrganization()
 
-	if (!authorization || !magicOrganizationCode) return children
+	if (!authorization || !delightfulOrganizationCode) return children
 
 	return <ChatProvider>{children}</ChatProvider>
 }

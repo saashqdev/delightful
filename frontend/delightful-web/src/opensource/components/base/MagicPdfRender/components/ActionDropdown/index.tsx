@@ -85,7 +85,7 @@ function ActionDropdown({
 			key: "page-nav",
 			label: (
 				<div className={styles.dropdownInputItem} onClick={handleStopPropagation}>
-					<span className="label">{t("magicPdfRender.dropdown.pageNav")}</span>
+					<span className="label">{t("delightfulPdfRender.dropdown.pageNav")}</span>
 					<InputNumber
 						min={1}
 						max={numPages}
@@ -112,7 +112,7 @@ function ActionDropdown({
 					onClick={handleDropdownInputAction(zoomOut)}
 				>
 					<IconZoomOut />
-					<span className="label">{t("magicPdfRender.dropdown.zoomOut")}</span>
+					<span className="label">{t("delightfulPdfRender.dropdown.zoomOut")}</span>
 					<span className="value">-</span>
 				</button>
 			),
@@ -121,7 +121,7 @@ function ActionDropdown({
 			key: "zoom-input",
 			label: (
 				<div className={styles.dropdownInputItem} onClick={handleStopPropagation}>
-					<span className="label">{t("magicPdfRender.dropdown.zoom")}</span>
+					<span className="label">{t("delightfulPdfRender.dropdown.zoom")}</span>
 					<InputNumber
 						min={minScale * 100}
 						max={maxScale * 100}
@@ -145,7 +145,7 @@ function ActionDropdown({
 					onClick={handleDropdownInputAction(zoomIn)}
 				>
 					<IconZoomIn />
-					<span className="label">{t("magicPdfRender.dropdown.zoomIn")}</span>
+					<span className="label">{t("delightfulPdfRender.dropdown.zoomIn")}</span>
 					<span className="value">+</span>
 				</button>
 			),
@@ -162,7 +162,7 @@ function ActionDropdown({
 					onClick={handleDropdownInputAction(rotateLeft)}
 				>
 					<IconRotate2 />
-					<span className="label">{t("magicPdfRender.dropdown.rotateLeft")}</span>
+					<span className="label">{t("delightfulPdfRender.dropdown.rotateLeft")}</span>
 				</button>
 			),
 		},
@@ -174,7 +174,7 @@ function ActionDropdown({
 					onClick={handleDropdownInputAction(rotateRight)}
 				>
 					<IconRotateClockwise2 />
-					<span className="label">{t("magicPdfRender.dropdown.rotateRight")}</span>
+					<span className="label">{t("delightfulPdfRender.dropdown.rotateRight")}</span>
 				</button>
 			),
 		},
@@ -187,7 +187,7 @@ function ActionDropdown({
 			label: (
 				<button className={styles.dropdownItem} onClick={handleDropdownAction(reload)}>
 					<IconRefresh />
-					<span className="label">{t("magicPdfRender.dropdown.reload")}</span>
+					<span className="label">{t("delightfulPdfRender.dropdown.reload")}</span>
 				</button>
 			),
 		},
@@ -196,7 +196,7 @@ function ActionDropdown({
 			label: (
 				<button className={styles.dropdownItem} onClick={handleDropdownAction(downloadPdf)}>
 					<IconDownload />
-					<span className="label">{t("magicPdfRender.dropdown.download")}</span>
+					<span className="label">{t("delightfulPdfRender.dropdown.download")}</span>
 				</button>
 			),
 		},
@@ -208,7 +208,7 @@ function ActionDropdown({
 					onClick={handleDropdownAction(toggleFullscreen)}
 				>
 					<IconMaximize />
-					<span className="label">{t("magicPdfRender.dropdown.fullscreen")}</span>
+					<span className="label">{t("delightfulPdfRender.dropdown.fullscreen")}</span>
 					<span className="value">F11</span>
 				</button>
 			),
@@ -224,7 +224,7 @@ function ActionDropdown({
 			open={dropdownOpen}
 			onOpenChange={setDropdownOpen}
 		>
-			<Tooltip title={t("magicPdfRender.toolbar.moreActions")}>
+			<Tooltip title={t("delightfulPdfRender.toolbar.moreActions")}>
 				<button className={styles.button}>
 					<IconMenu2 />
 				</button>

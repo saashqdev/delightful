@@ -33,7 +33,7 @@ class MCPServerToolModel extends AbstractModel
 {
     use Snowflake;
 
-    protected ?string $table = 'magic_mcp_server_tools';
+    protected ?string $table = 'delightful_mcp_server_tools';
 
     protected array $fillable = [
         'id',

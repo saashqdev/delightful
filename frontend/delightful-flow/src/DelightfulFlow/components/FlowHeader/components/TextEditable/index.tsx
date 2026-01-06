@@ -78,7 +78,7 @@ export default function TextEditable({ title, onChange }: TextEditableProps) {
 			)}
 			{isEdit && (
 				<TsInput
-					placeholder={i18next.t("flow.pleaseInputFlowName", { ns: "magicFlow" })}
+					placeholder={i18next.t("flow.pleaseInputFlowName", { ns: "delightfulFlow" })}
 					onKeyDown={handleKeyDown}
 					value={inputTitle}
 					onChange={(e: any) => setInputTitle(e.target.value)}

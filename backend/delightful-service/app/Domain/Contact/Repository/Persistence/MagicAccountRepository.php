@@ -25,9 +25,9 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
     ) {
     }
 
-    public function getAccountInfoByDelightfulId(string $magicId): ?AccountEntity
+    public function getAccountInfoByDelightfulId(string $delightfulId): ?AccountEntity
     {
-        $account = $this->getAccountInfo($magicId);
+        $account = $this->getAccountInfo($delightfulId);
         if ($account === null) {
             return null;
         }
@@ -37,9 +37,9 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
     /**
      * @return AccountEntity[]
      */
-    public function getAccountByDelightfulIds(array $magicIds): array
+    public function getAccountByDelightfulIds(array $delightfulIds): array
     {
-        $accounts = AccountModel::query()->whereIn('magic_id', $magicIds);
+        $accounts = AccountModel::query()->whereIn('delightful_id', $delightfulIds);
         $accounts = Db::select($accounts->toSql(), $accounts->getBindings());
         $data = [];
         foreach ($accounts as $account) {
@@ -55,7 +55,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
         $accountDTO = $this->createAccountCheck($accountDTO);
         $this->accountModel::query()->create([
             'id' => $accountDTO->getId(),
-            'magic_id' => $accountDTO->getDelightfulId(),
+            'delightful_id' => $accountDTO->getDelightfulId(),
             'type' => $accountDTO->getType()->value,
             'ai_code' => $accountDTO->getAiCode(),
             'status' => $accountDTO->getStatus()->value,
@@ -94,9 +94,9 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
     /**
      * @return AccountEntity[]
      */
-    public function getAccountInfoByDelightfulIds(array $magicIds): array
+    public function getAccountInfoByDelightfulIds(array $delightfulIds): array
     {
-        $query = $this->accountModel::query()->whereIn('magic_id', $magicIds);
+        $query = $this->accountModel::query()->whereIn('delightful_id', $delightfulIds);
         $accounts = Db::select($query->toSql(), $query->getBindings());
         return UserAssembler::getAccountEntities($accounts);
     }
@@ -128,17 +128,17 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
         return UserAssembler::getAccountEntities($accounts);
     }
 
-    #[CacheEvict(prefix: 'accountDelightfulId', value: '_#{magicId}')]
-    public function updateAccount(string $magicId, array $updateData): int
+    #[CacheEvict(prefix: 'accountDelightfulId', value: '_#{delightfulId}')]
+    public function updateAccount(string $delightfulId, array $updateData): int
     {
         $time = date('Y-m-d H:i:s');
         $updateData['updated_at'] = $time;
         $updateData['deleted_at'] = null;
         unset($updateData['created_at'], $updateData['id']);
-        return $this->accountModel::query()->where('magic_id', $magicId)->update($updateData);
+        return $this->accountModel::query()->where('delightful_id', $delightfulId)->update($updateData);
     }
 
-    #[CacheEvict(prefix: 'accountDelightfulId', value: '_#{accountDTO.magicId}')]
+    #[CacheEvict(prefix: 'accountDelightfulId', value: '_#{accountDTO.delightfulId}')]
     public function saveAccount(AccountEntity $accountDTO): AccountEntity
     {
         $account = $this->getDelightfulEntityWithoutCache($accountDTO->getDelightfulId());
@@ -185,10 +185,10 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
         return $accountDTO;
     }
 
-    private function getDelightfulEntityWithoutCache(string $magicId): ?AccountEntity
+    private function getDelightfulEntityWithoutCache(string $delightfulId): ?AccountEntity
     {
         # 防止 $accountDTO 中参数不全,再查一次库
-        $account = $this->accountModel::query()->where('magic_id', $magicId);
+        $account = $this->accountModel::query()->where('delightful_id', $delightfulId);
         $account = Db::select($account->toSql(), $account->getBindings())[0] ?? null;
         if (empty($account)) {
             return null;
@@ -198,9 +198,9 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
 
     // 避免 redis 缓存序列化的对象,占用太多内存
     #[Cacheable(prefix: 'accountDelightfulId', ttl: 60)]
-    private function getAccountInfo(string $magicId): ?array
+    private function getAccountInfo(string $delightfulId): ?array
     {
-        $query = $this->accountModel::query()->where('magic_id', $magicId);
+        $query = $this->accountModel::query()->where('delightful_id', $delightfulId);
         return Db::select($query->toSql(), $query->getBindings())[0] ?? null;
     }
 

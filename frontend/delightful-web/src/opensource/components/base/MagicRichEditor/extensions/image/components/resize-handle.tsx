@@ -11,8 +11,8 @@ const useStyles = createStyles(({ css, token }) => ({
 		transform: translateY(-50%);
 		cursor: col-resize;
 		border-radius: 0.25rem;
-		border: 1px solid ${token.magicColorUsages.border};
-		background-color: ${token.magicColorUsages.fill[1]};
+		border: 1px solid ${token.delightfulColorUsages.border};
+		background-color: ${token.delightfulColorUsages.fill[1]};
 		padding: 1px;
 		transition: all 0.2s;
 		opacity: 1;

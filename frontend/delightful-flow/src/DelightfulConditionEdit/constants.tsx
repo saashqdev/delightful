@@ -26,51 +26,51 @@ export const SpecialConditionValues = ["empty", "not_empty", "valuable", "no_val
 // Static list of condition options
 export const CONDITION_OPTIONS = [
 	{
-		label: i18next.t("common.equals", { ns: "magicFlow" }),
+		label: i18next.t("common.equals", { ns: "delightfulFlow" }),
 		value: "equals",
 	},
 	{
-		label: i18next.t("common.notEquals", { ns: "magicFlow" }),
+		label: i18next.t("common.notEquals", { ns: "delightfulFlow" }),
 		value: "no_equals",
 	},
 	{
-		label: i18next.t("common.contains", { ns: "magicFlow" }),
+		label: i18next.t("common.contains", { ns: "delightfulFlow" }),
 		value: "contains",
 	},
 	{
-		label: i18next.t("common.notContains", { ns: "magicFlow" }),
+		label: i18next.t("common.notContains", { ns: "delightfulFlow" }),
 		value: "no_contains",
 	},
 	{
-		label: i18next.t("common.greaterThen", { ns: "magicFlow" }),
+		label: i18next.t("common.greaterThen", { ns: "delightfulFlow" }),
 		value: "gt",
 	},
 	{
-		label: i18next.t("common.lessThen", { ns: "magicFlow" }),
+		label: i18next.t("common.lessThen", { ns: "delightfulFlow" }),
 		value: "lt",
 	},
 	{
-		label: i18next.t("common.greaterOrEqualsTo", { ns: "magicFlow" }),
+		label: i18next.t("common.greaterOrEqualsTo", { ns: "delightfulFlow" }),
 		value: "gte",
 	},
 	{
-		label: i18next.t("common.lessOrEqualsTo", { ns: "magicFlow" }),
+		label: i18next.t("common.lessOrEqualsTo", { ns: "delightfulFlow" }),
 		value: "lte",
 	},
 	{
-		label: i18next.t("common.noValue", { ns: "magicFlow" }),
+		label: i18next.t("common.noValue", { ns: "delightfulFlow" }),
 		value: "empty",
 	},
 	{
-		label: i18next.t("common.hasValue", { ns: "magicFlow" }),
+		label: i18next.t("common.hasValue", { ns: "delightfulFlow" }),
 		value: "not_empty",
 	},
 	{
-		label: i18next.t("common.empty", { ns: "magicFlow" }),
+		label: i18next.t("common.empty", { ns: "delightfulFlow" }),
 		value: "valuable",
 	},
 	{
-		label: i18next.t("common.notEmpty", { ns: "magicFlow" }),
+		label: i18next.t("common.notEmpty", { ns: "delightfulFlow" }),
 		value: "no_valuable",
 	},
 ]

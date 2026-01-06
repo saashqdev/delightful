@@ -17,15 +17,15 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 class DelightfulFlowVersionRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowVersionRepositoryInterface
 {
-    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowVersionEntity $magicFlowVersionEntity): DelightfulFlowVersionEntity
+    public function create(FlowDataIsolation $dataIsolation, DelightfulFlowVersionEntity $delightfulFlowVersionEntity): DelightfulFlowVersionEntity
     {
         $model = new DelightfulFlowVersionModel();
 
-        $model->fill($this->getAttributes($magicFlowVersionEntity));
+        $model->fill($this->getAttributes($delightfulFlowVersionEntity));
         $model->save();
 
-        $magicFlowVersionEntity->setId($model->id);
-        return $magicFlowVersionEntity;
+        $delightfulFlowVersionEntity->setId($model->id);
+        return $delightfulFlowVersionEntity;
     }
 
     public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowVersionEntity

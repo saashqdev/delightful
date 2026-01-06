@@ -7,7 +7,7 @@ set +x  # Temporarily disable command echo
 # Get the absolute path to the script directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Get the absolute path to the service directory
-SERVICE_DIR="$(cd "${SCRIPT_DIR}/../backend/magic-service" && pwd)"
+SERVICE_DIR="$(cd "${SCRIPT_DIR}/../backend/delightful-service" && pwd)"
 # Get the absolute path to the repository root
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 set -x  # Re-enable command echo
@@ -25,7 +25,7 @@ if [ -z "${GIT_REPO_URL}" ]; then
     # Use default value if env var is not set
     GIT_REPO_URL="git@github.com:dtyq"
 fi
-REMOTE_URL="${GIT_REPO_URL}/magic-service.git"
+REMOTE_URL="${GIT_REPO_URL}/delightful-service.git"
 
 # Check whether this is a GitHub repo; otherwise treat it as GitLab
 IS_GITHUB=false
@@ -100,18 +100,18 @@ fi
 
 # Initialize remote connection
 echo "Initializing remote connection..."
-remote magic-service $REMOTE_URL
+remote delightful-service $REMOTE_URL
 
 # Split the subtree and push
 echo "Splitting and pushing..."
-split "backend/magic-service" magic-service
+split "backend/delightful-service" delightful-service
 
 # Tag and push the tag
 if [[ $USE_BRANCH == false ]]; then
     echo "Tagging and pushing tag..."
-    git fetch magic-service || true
+    git fetch delightful-service || true
     git tag -a $VERSION -m "Release $VERSION" $CURRENT_BRANCH
-    git push magic-service $VERSION
+    git push delightful-service $VERSION
 fi
 
 TIME=$(echo "$(date +%s) - $NOW" | bc)

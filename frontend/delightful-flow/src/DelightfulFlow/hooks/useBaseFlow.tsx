@@ -161,8 +161,8 @@ export default function useBaseFlow({ currentFlow, paramsName }: UseBaseFlowProp
 		// TODO Load node templates and insert into default nodes list
 
 		return {
-			name: i18next.t("flow.untitledFlow", { ns: "magicFlow" }),
-			description: i18next.t("flow.defaultDesc", { ns: "magicFlow" }),
+			name: i18next.t("flow.untitledFlow", { ns: "delightfulFlow" }),
+			description: i18next.t("flow.defaultDesc", { ns: "delightfulFlow" }),
 			enabled: false,
 			edges: [],
 			nodes: [...defaultNodes],

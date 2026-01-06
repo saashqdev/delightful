@@ -21,7 +21,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => ({
 
 		span,
 		a {
-			color: ${isDarkMode ? token.magicColorScales.grey[6] : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[6] : token.delightfulColorUsages.text[1]};
 			font-weight: 400;
 			line-height: 16px;
 		}

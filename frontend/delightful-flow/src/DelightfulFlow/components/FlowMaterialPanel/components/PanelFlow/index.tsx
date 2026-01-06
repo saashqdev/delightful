@@ -35,7 +35,7 @@ export default function PanelFlow() {
 						)
 					})}
 				{(subFlow?.list || []).length === 0 && (
-					<Empty description={i18next.t("flow.withoutFlowTips", { ns: "magicFlow" })} />
+					<Empty description={i18next.t("flow.withoutFlowTips", { ns: "delightfulFlow" })} />
 				)}
 			</div>
 		</div>

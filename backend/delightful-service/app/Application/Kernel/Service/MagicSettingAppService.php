@@ -16,10 +16,10 @@ use Hyperf\Redis\Redis;
 
 class DelightfulSettingAppService extends AbstractKernelAppService
 {
-    private const string CACHE_KEY = 'magic:global_config_cache';
+    private const string CACHE_KEY = 'delightful:global_config_cache';
 
     public function __construct(
-        private readonly DelightfulUserSettingDomainService $magicUserSettingDomainService,
+        private readonly DelightfulUserSettingDomainService $delightfulUserSettingDomainService,
         private readonly Redis $redis,
     ) {
     }
@@ -34,7 +34,7 @@ class DelightfulSettingAppService extends AbstractKernelAppService
         $entity->setKey(UserSettingKey::GlobalConfig->value);
         $entity->setValue($config->toArray());
 
-        $this->magicUserSettingDomainService->saveGlobal($entity);
+        $this->delightfulUserSettingDomainService->saveGlobal($entity);
 
         // 重置缓存
         $this->redis->del(self::CACHE_KEY);
@@ -53,7 +53,7 @@ class DelightfulSettingAppService extends AbstractKernelAppService
             return GlobalConfig::fromArray($data);
         }
 
-        $entity = $this->magicUserSettingDomainService->getGlobal(UserSettingKey::GlobalConfig->value);
+        $entity = $this->delightfulUserSettingDomainService->getGlobal(UserSettingKey::GlobalConfig->value);
         $config = $entity ? GlobalConfig::fromArray($entity->getValue()) : new GlobalConfig();
 
         $this->redis->set(self::CACHE_KEY, json_encode($config->toArray()));

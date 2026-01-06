@@ -28,7 +28,7 @@ use function Hyperf\Support\retry;
 
 class RedisAdapter implements AdapterInterface, EphemeralInterface
 {
-    protected string $redisPrefix = 'magicChat:SocketIo:RedisAdapter';
+    protected string $redisPrefix = 'delightfulChat:SocketIo:RedisAdapter';
 
     protected int $retryInterval = 1000;
 
@@ -194,7 +194,7 @@ class RedisAdapter implements AdapterInterface, EphemeralInterface
 
         if (! empty($sids)) {
             foreach ($sids as $sid) {
-                // Indicates that the server's redis room has removed the sid or magic_id, trigger disconnection
+                // Indicates that the server's redis room has removed the sid or delightful_id, trigger disconnection
                 event_dispatch(new DeviceDisconnectEvent($sid));
                 $this->del($sid);
             }
@@ -215,7 +215,7 @@ class RedisAdapter implements AdapterInterface, EphemeralInterface
             // Keep alive for sid and rooms
             $rooms = $this->clientRooms($sid);
             if (count($rooms) < 2) {
-                // Indicates that the server's redis room has removed the sid or magic_id, trigger disconnection
+                // Indicates that the server's redis room has removed the sid or delightful_id, trigger disconnection
                 event_dispatch(new DeviceDisconnectEvent($sid));
             }
             ! empty($rooms) && $this->add($sid, ...$rooms);

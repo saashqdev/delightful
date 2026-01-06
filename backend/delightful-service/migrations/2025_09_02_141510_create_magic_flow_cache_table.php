@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_flow_cache', function (Blueprint $table) {
+        Schema::create('delightful_flow_cache', function (Blueprint $table) {
             $table->id();
             $table->string('cache_hash', 32)->unique()->comment('缓存键MD5哈希值(cache_prefix+cache_key)');
             $table->string('cache_prefix')->comment('缓存前缀');
@@ -40,6 +40,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_flow_cache');
+        Schema::dropIfExists('delightful_flow_cache');
     }
 };

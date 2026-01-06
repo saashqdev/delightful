@@ -1,5 +1,5 @@
 import { memo } from "react"
-import magicBetaSVG from "@/opensource/pages/superDelightful/assets/svg/super_magic_logo.svg"
+import delightfulBetaSVG from "@/opensource/pages/superDelightful/assets/svg/super_delightful_logo.svg"
 import arrowDownSVG from "@/opensource/pages/superDelightfulMobile/assets/svg/arrow-down.svg"
 import { cx } from "antd-style"
 import { useStyles } from "./styles"
@@ -23,7 +23,7 @@ export default memo(function WorkspaceWelcome(props: WorkspaceWelcomeProps) {
 		<div className={styles.container}>
 			<div className={styles.containerTop}>
 				<div className={styles.hello}>
-					<img src={magicBetaSVG} alt="magic" className={styles.image} />
+					<img src={delightfulBetaSVG} alt="delightful" className={styles.image} />
 					<div className={styles.title}>👋 嗨，我的朋友</div>
 					<div className={styles.subTitle}>有什么麦吉可以帮你吗？</div>
 				</div>

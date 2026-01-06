@@ -29,7 +29,7 @@ class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlat
     public function getDepartmentById(string $thirdDepartmentId, string $organizationCode, PlatformType $thirdPlatformType): ?DelightfulThirdPlatformDepartmentEntity
     {
         $department = $this->model::query()
-            ->where('magic_organization_code', $organizationCode)
+            ->where('delightful_organization_code', $organizationCode)
             ->where('third_department_id', $thirdDepartmentId)
             ->where('third_platform_type', $thirdPlatformType->value)
             ->first();
@@ -48,7 +48,7 @@ class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlat
             return [];
         }
         $departments = $this->model::query()
-            ->where('magic_organization_code', $organizationCode)
+            ->where('delightful_organization_code', $organizationCode)
             ->whereIn('third_department_id', $departmentIds)
             ->get()
             ->toArray();
@@ -61,7 +61,7 @@ class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlat
     public function getSubDepartmentsById(string $departmentId, string $organizationCode, int $size, int $offset): array
     {
         $departments = $this->model::query()
-            ->where('magic_organization_code', $organizationCode)
+            ->where('delightful_organization_code', $organizationCode)
             ->where('third_parent_department_id', $departmentId)
             ->limit($size)
             ->offset($offset)
@@ -83,7 +83,7 @@ class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlat
             return [];
         }
         $query = $this->model::query()
-            ->where('magic_organization_code', $organizationCode);
+            ->where('delightful_organization_code', $organizationCode);
         if ($minDepth === $maxDepth) {
             $query->where('level', $minDepth);
         } else {
@@ -105,7 +105,7 @@ class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlat
     public function hasChildDepartment(array $departmentIds, string $organizationCode): array
     {
         return $this->model::query()
-            ->where('magic_organization_code', $organizationCode)
+            ->where('delightful_organization_code', $organizationCode)
             ->whereIn('third_parent_department_id', $departmentIds)
             ->groupBy(['third_parent_department_id'])
             ->get(['third_parent_department_id'])
@@ -115,7 +115,7 @@ class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlat
     public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?DelightfulThirdPlatformDepartmentEntity
     {
         // 对于前端来说, -1 表示根部门信息.
-        $query = $this->model::query()->where('magic_organization_code', $organizationCode);
+        $query = $this->model::query()->where('delightful_organization_code', $organizationCode);
         if ($departmentId === PlatformRootDepartmentId::Delightful) {
             $query->where(function (Builder $query) {
                 $query->where('third_parent_department_id', '=', '')->orWhereNull('third_parent_department_id');
@@ -137,7 +137,7 @@ class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlat
     public function getOrganizationDepartments(string $organizationCode, array $fields = ['*']): array
     {
         $departments = $this->model::query()
-            ->where('magic_organization_code', $organizationCode)
+            ->where('delightful_organization_code', $organizationCode)
             ->get($fields)
             ->toArray();
         return $this->getDepartmentsEntity($departments);

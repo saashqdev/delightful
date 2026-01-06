@@ -83,7 +83,7 @@ body:
       placeholder: |
         - API Endpoint: POST /api/v1/chat/messages
         - Integration: OpenAI GPT-4 API
-        - SDK Version: magic-sdk v1.0.0
+        - SDK Version: delightful-sdk v1.0.0
         - Third-party service: [Service name and version]
     validations:
       required: true
@@ -197,7 +197,7 @@ body:
       placeholder: |
         - Delightful Version: [e.g. v1.0.0]
         - Deployment: [e.g. Docker, Cloud, Self-hosted]
-        - Programming Language/SDK: [e.g. Python 3.9, magic-sdk v1.0.0]
+        - Programming Language/SDK: [e.g. Python 3.9, delightful-sdk v1.0.0]
         - Operating System: [e.g. macOS 14.0, Ubuntu 22.04]
         - Network: [e.g. Corporate firewall, VPN, etc.]
     validations:

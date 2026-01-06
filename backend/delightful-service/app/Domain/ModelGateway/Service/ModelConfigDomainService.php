@@ -18,19 +18,19 @@ use App\Infrastructure\Core\ValueObject\Page;
 class ModelConfigDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly ModelConfigRepositoryInterface $magicApiModelConfigRepository,
+        private readonly ModelConfigRepositoryInterface $delightfulApiModelConfigRepository,
     ) {
     }
 
     public function save(LLMDataIsolation $dataIsolation, ModelConfigEntity $modelConfigEntity): ModelConfigEntity
     {
         $modelConfigEntity->prepareForSaving();
-        return $this->magicApiModelConfigRepository->save($dataIsolation, $modelConfigEntity);
+        return $this->delightfulApiModelConfigRepository->save($dataIsolation, $modelConfigEntity);
     }
 
     public function show(LLMDataIsolation $dataIsolation, string $model): ModelConfigEntity
     {
-        $modelConfig = $this->magicApiModelConfigRepository->getByModel($dataIsolation, $model);
+        $modelConfig = $this->delightfulApiModelConfigRepository->getByModel($dataIsolation, $model);
         if (! $modelConfig) {
             ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.not_found', ['label' => $model]);
         }
@@ -42,13 +42,13 @@ class ModelConfigDomainService extends AbstractDomainService
      */
     public function queries(LLMDataIsolation $dataIsolation, Page $page, ModelConfigQuery $modelConfigQuery): array
     {
-        return $this->magicApiModelConfigRepository->queries($dataIsolation, $page, $modelConfigQuery);
+        return $this->delightfulApiModelConfigRepository->queries($dataIsolation, $page, $modelConfigQuery);
     }
 
     public function getByModel(string $model): ?ModelConfigEntity
     {
         $dataIsolation = LLMDataIsolation::create();
-        return $this->magicApiModelConfigRepository->getByModel($dataIsolation, $model);
+        return $this->delightfulApiModelConfigRepository->getByModel($dataIsolation, $model);
     }
 
     /**
@@ -57,7 +57,7 @@ class ModelConfigDomainService extends AbstractDomainService
     public function getByModels(array $models): array
     {
         $dataIsolation = LLMDataIsolation::create();
-        return $this->magicApiModelConfigRepository->getByModels($dataIsolation, $models);
+        return $this->delightfulApiModelConfigRepository->getByModels($dataIsolation, $models);
     }
 
     /**
@@ -66,7 +66,7 @@ class ModelConfigDomainService extends AbstractDomainService
     public function getById(string $id): ?ModelConfigEntity
     {
         $dataIsolation = LLMDataIsolation::create();
-        return $this->magicApiModelConfigRepository->getById($dataIsolation, $id);
+        return $this->delightfulApiModelConfigRepository->getById($dataIsolation, $id);
     }
 
     /**
@@ -75,7 +75,7 @@ class ModelConfigDomainService extends AbstractDomainService
     public function showById(string $id): ModelConfigEntity
     {
         $dataIsolation = LLMDataIsolation::create();
-        $modelConfig = $this->magicApiModelConfigRepository->getById($dataIsolation, $id);
+        $modelConfig = $this->delightfulApiModelConfigRepository->getById($dataIsolation, $id);
         if (! $modelConfig) {
             ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.not_found', ['label' => "ID: {$id}"]);
         }
@@ -88,11 +88,11 @@ class ModelConfigDomainService extends AbstractDomainService
     public function getByEndpointOrType(string $endpointOrType): ?ModelConfigEntity
     {
         $dataIsolation = LLMDataIsolation::create();
-        return $this->magicApiModelConfigRepository->getByEndpointOrType($dataIsolation, $endpointOrType);
+        return $this->delightfulApiModelConfigRepository->getByEndpointOrType($dataIsolation, $endpointOrType);
     }
 
     public function incrementUseAmount(LLMDataIsolation $dataIsolation, ModelConfigEntity $modelConfig, float $amount): void
     {
-        $this->magicApiModelConfigRepository->incrementUseAmount($dataIsolation, $modelConfig, $amount);
+        $this->delightfulApiModelConfigRepository->incrementUseAmount($dataIsolation, $modelConfig, $amount);
     }
 }

@@ -35,8 +35,8 @@ use Throwable;
 class DelightfulIntermediateMessageAppService extends AbstractAppService
 {
     public function __construct(
-        protected readonly DelightfulIntermediateDomainService $magicIntermediateDomainService,
-        protected readonly DelightfulChatDomainService $magicChatDomainService,
+        protected readonly DelightfulIntermediateDomainService $delightfulIntermediateDomainService,
+        protected readonly DelightfulChatDomainService $delightfulChatDomainService,
     ) {
     }
 
@@ -46,11 +46,11 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
      */
     public function dispatchClientIntermediateMessage(ChatRequest $chatRequest, DelightfulUserAuthorization $userAuthorization): ?array
     {
-        $conversationEntity = $this->magicChatDomainService->getConversationById($chatRequest->getData()->getConversationId());
+        $conversationEntity = $this->delightfulChatDomainService->getConversationById($chatRequest->getData()->getConversationId());
         if ($conversationEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
-        $senderUserEntity = $this->magicChatDomainService->getUserInfo($conversationEntity->getUserId());
+        $senderUserEntity = $this->delightfulChatDomainService->getUserInfo($conversationEntity->getUserId());
         $messageDTO = MessageAssembler::getIntermediateMessageDTO(
             $chatRequest,
             $conversationEntity,
@@ -67,7 +67,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
         }
 
         match ($messageDTO->getMessageType()) {
-            IntermediateMessageType::BeDelightfulInstruction => $this->magicIntermediateDomainService->handleBeDelightfulInstructionMessage(
+            IntermediateMessageType::BeDelightfulInstruction => $this->delightfulIntermediateDomainService->handleBeDelightfulInstructionMessage(
                 $messageDTO,
                 $dataIsolation,
                 $conversationEntity,
@@ -91,7 +91,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
 
     private function handleRawMessage(DelightfulMessageDTO $messageDTO, DelightfulConversationEntity $conversationEntity, ChatRequest $chatRequest): void
     {
-        $receiveUserEntity = $this->magicChatDomainService->getUserInfo($conversationEntity->getReceiveId());
+        $receiveUserEntity = $this->delightfulChatDomainService->getUserInfo($conversationEntity->getReceiveId());
 
         $messageEntity = new DelightfulMessageEntity();
         $messageEntity->setMessageType(ChatMessageType::Raw);

@@ -75,14 +75,14 @@ export const useStyles = createStyles(
 				}
 			`,
 			menu: css`
-				--${prefixCls}-menu-item-selected-bg: ${token.magicColorUsages.primaryLight.default} !important;
+				--${prefixCls}-menu-item-selected-bg: ${token.delightfulColorUsages.primaryLight.default} !important;
 
-				--${prefixCls}-menu-item-color: ${token.magicColorUsages.text[1]} !important;
+				--${prefixCls}-menu-item-color: ${token.delightfulColorUsages.text[1]} !important;
 
-				--${prefixCls}-menu-item-selected-color: ${isDarkMode ? token.colorPrimary : token.magicColorUsages.text[1]} !important;
+				--${prefixCls}-menu-item-selected-color: ${isDarkMode ? token.colorPrimary : token.delightfulColorUsages.text[1]} !important;
 
 				.${prefixCls}-menu-item-selected {
-					color: ${isDarkMode ? token.colorPrimary : token.magicColorUsages.text[1]} !important;
+					color: ${isDarkMode ? token.colorPrimary : token.delightfulColorUsages.text[1]} !important;
 				}
 
 				background: transparent;
@@ -111,15 +111,15 @@ export const useStyles = createStyles(
 				justify-content: center;
 				cursor: pointer;
 				flex: none;
-				background-color: ${token.magicColorUsages.fill[1]};
+				background-color: ${token.delightfulColorUsages.fill[1]};
 				border-radius: ${token.borderRadiusLG}px;
 
 				&:hover {
-					background-color: ${token.magicColorUsages.fill[0]};
+					background-color: ${token.delightfulColorUsages.fill[0]};
 				}
 
 				&:active {
-					background-color: ${token.magicColorUsages.fill[2]};
+					background-color: ${token.delightfulColorUsages.fill[2]};
 				}
 			`,
 			organizationSwitchWrapper: css`

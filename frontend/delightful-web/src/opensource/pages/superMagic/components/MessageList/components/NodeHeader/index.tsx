@@ -1,5 +1,5 @@
 import { userStore } from "@/opensource/models/user"
-import DelightfulAva from "@/opensource/pages/superDelightful/assets/image/magic_ava.jpg"
+import DelightfulAva from "@/opensource/pages/superDelightful/assets/image/delightful_ava.jpg"
 import UserDefault from "@/opensource/pages/superDelightful/assets/svg/user_default.svg"
 // eslint-disable-next-line import/order
 import { useStyles } from "./style"

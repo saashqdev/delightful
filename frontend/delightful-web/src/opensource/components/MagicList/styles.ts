@@ -2,7 +2,7 @@ import { createStyles, cx } from "antd-style"
 
 export const useDelightfulListItemStyles = createStyles(({ css, isDarkMode, token }) => {
 	const extra = cx(css`
-		color: ${isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.text[1]};
+		color: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.text[1]};
 		cursor: pointer;
 		display: none;
 		flex-shrink: 0;
@@ -29,19 +29,19 @@ export const useDelightfulListItemStyles = createStyles(({ css, isDarkMode, toke
 					display: block;
 				}
 				background-color: ${isDarkMode
-					? token.magicColorScales.grey[0]
-					: token.magicColorScales.grey[0]};
+					? token.delightfulColorScales.grey[0]
+					: token.delightfulColorScales.grey[0]};
 			}
 			&:active {
 				background-color: ${isDarkMode
-					? token.magicColorScales.grey[1]
-					: token.magicColorScales.grey[0]};
+					? token.delightfulColorScales.grey[1]
+					: token.delightfulColorScales.grey[0]};
 			}
 		`,
 		active: css`
 			background-color: ${isDarkMode
-				? token.magicColorUsages.primaryLight.default
-				: token.magicColorUsages.primaryLight.default};
+				? token.delightfulColorUsages.primaryLight.default
+				: token.delightfulColorUsages.primaryLight.default};
 		`,
 		mainWrapper,
 		avatar: css`
@@ -49,7 +49,7 @@ export const useDelightfulListItemStyles = createStyles(({ css, isDarkMode, toke
 		`,
 		title: css`
 			overflow: hidden;
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
 			text-overflow: ellipsis;
 			font-size: 14px;
 			font-weight: 400;
@@ -59,7 +59,7 @@ export const useDelightfulListItemStyles = createStyles(({ css, isDarkMode, toke
 		content: css`
 			flex-shrink: 1;
 			overflow: hidden;
-			color: ${isDarkMode ? token.magicColorScales.grey[5] : token.magicColorUsages.text[3]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[3]};
 			text-overflow: ellipsis;
 			font-size: 12px;
 			font-weight: 400;
@@ -69,7 +69,7 @@ export const useDelightfulListItemStyles = createStyles(({ css, isDarkMode, toke
 		`,
 		time: css`
 			overflow: hidden;
-			color: ${isDarkMode ? token.magicColorScales.grey[5] : token.magicColorUsages.text[3]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[3]};
 			text-align: right;
 			text-overflow: ellipsis;
 			font-size: 12px;

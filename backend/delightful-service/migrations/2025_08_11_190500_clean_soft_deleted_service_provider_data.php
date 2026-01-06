@@ -108,22 +108,22 @@ return new class extends Migration {
                 $totalDeleted = 0;
 
                 // 1. 查找官方组织中 Delightful 服务商的配置ID
-                $magicProviderConfigQuery = Db::table('service_provider_configs as configs')
+                $delightfulProviderConfigQuery = Db::table('service_provider_configs as configs')
                     ->join('service_provider as providers', 'configs.service_provider_id', '=', 'providers.id')
                     ->select('configs.id')
                     ->where('configs.organization_code', $officialOrganizationCode)
                     ->where('providers.provider_code', 'Official');
 
-                $magicProviderConfigs = Db::select($magicProviderConfigQuery->toSql(), $magicProviderConfigQuery->getBindings());
-                $magicConfigIds = array_column($magicProviderConfigs, 'id');
+                $delightfulProviderConfigs = Db::select($delightfulProviderConfigQuery->toSql(), $delightfulProviderConfigQuery->getBindings());
+                $delightfulConfigIds = array_column($delightfulProviderConfigs, 'id');
 
-                if (! empty($magicConfigIds)) {
-                    $logger->info('找到 Delightful 服务商配置数量: ' . count($magicConfigIds));
+                if (! empty($delightfulConfigIds)) {
+                    $logger->info('找到 Delightful 服务商配置数量: ' . count($delightfulConfigIds));
 
                     // 2. 删除官方组织中 Delightful 服务商下的模型
                     $deletedModelsCount = Db::table('service_provider_models')
                         ->where('organization_code', $officialOrganizationCode)
-                        ->whereIn('service_provider_config_id', $magicConfigIds)
+                        ->whereIn('service_provider_config_id', $delightfulConfigIds)
                         ->delete();
                     $totalDeleted += $deletedModelsCount;
                     $logger->info("删除官方组织 Delightful 服务商模型: {$deletedModelsCount} 条");
@@ -131,7 +131,7 @@ return new class extends Migration {
                     // 3. 删除官方组织的 Delightful 服务商配置
                     $deletedConfigsCount = Db::table('service_provider_configs')
                         ->where('organization_code', $officialOrganizationCode)
-                        ->whereIn('id', $magicConfigIds)
+                        ->whereIn('id', $delightfulConfigIds)
                         ->delete();
                     $totalDeleted += $deletedConfigsCount;
                     $logger->info("删除官方组织 Delightful 服务商配置: {$deletedConfigsCount} 条");

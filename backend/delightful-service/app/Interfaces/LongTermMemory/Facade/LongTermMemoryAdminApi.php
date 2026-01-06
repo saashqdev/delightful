@@ -47,7 +47,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         protected ValidatorFactoryInterface $validator,
         protected LoggerFactory $loggerFactory,
         protected LongTermMemoryAppService $longTermMemoryAppService,
-        protected DelightfulChatMessageAppService $magicChatMessageAppService,
+        protected DelightfulChatMessageAppService $delightfulChatMessageAppService,
         protected ModelGatewayMapper $modelGatewayMapper
     ) {
         parent::__construct($request);
@@ -375,7 +375,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             'memory_ids.*' => 'required|string',
             'action' => 'required|string|in:accept,reject',
             'scenario' => 'nullable|string|in:admin_panel,memory_card_quick',
-            'magic_message_id' => 'nullable|string',
+            'delightful_message_id' => 'nullable|string',
         ];
 
         $validatedParams = $this->checkParams($params, $rules);
@@ -402,18 +402,18 @@ class LongTermMemoryAdminApi extends AbstractApi
         $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // 默认为管理后台
         $scenario = MemoryOperationScenario::from($scenarioString);
 
-        // 验证当 scenario 是 memory_card_quick 时，magic_message_id 必须提供
-        if ($scenarioString === 'memory_card_quick' && empty($validatedParams['magic_message_id'])) {
+        // 验证当 scenario 是 memory_card_quick 时，delightful_message_id 必须提供
+        if ($scenarioString === 'memory_card_quick' && empty($validatedParams['delightful_message_id'])) {
             return [
                 'success' => false,
-                'message' => trans('long_term_memory.api.magic_message_id_required_for_memory_card_quick'),
+                'message' => trans('long_term_memory.api.delightful_message_id_required_for_memory_card_quick'),
             ];
         }
 
         try {
             if ($action === 'accept') {
                 // 批量接受记忆建议：status 改为 accept，enabled 为 true
-                $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::ACCEPT, $scenario, $validatedParams['magic_message_id'] ?? null);
+                $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::ACCEPT, $scenario, $validatedParams['delightful_message_id'] ?? null);
 
                 return [
                     'success' => true,
@@ -424,7 +424,7 @@ class LongTermMemoryAdminApi extends AbstractApi
                 ];
             }
             // 删除记忆或者拒绝更新记忆
-            $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::REJECT, $scenario, $validatedParams['magic_message_id'] ?? null);
+            $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::REJECT, $scenario, $validatedParams['delightful_message_id'] ?? null);
 
             return [
                 'success' => true,

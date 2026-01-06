@@ -158,11 +158,11 @@ const Transformer = ({ source, onSelect, children }: TransformerProps) => {
 							<TSIcon type="ts-more-dot" />
 						</Dropdown>
 						<TSIcon type="ts-arrow-right" />
-						<span>{i18next.t("common.pleaseSelect", { ns: "magicFlow" })}</span>
+						<span>{i18next.t("common.pleaseSelect", { ns: "delightfulFlow" })}</span>
 					</>
 				)}
 				{breadcrumbItems.length === 0 &&
-					i18next.t("expression.transformToNewType", { ns: "magicFlow" })}
+					i18next.t("expression.transformToNewType", { ns: "delightfulFlow" })}
 			</p>
 		)
 	}, [breadcrumbItems, handleBreadcrumb])
@@ -185,7 +185,7 @@ const Transformer = ({ source, onSelect, children }: TransformerProps) => {
 		<Popover
 			placement="right"
 			showArrow={false}
-			classNames={{ root: "magic-type-transformer" }}
+			classNames={{ root: "delightful-type-transformer" }}
 			onOpenChange={onOpenChange}
 			open={open}
 			content={
@@ -196,14 +196,14 @@ const Transformer = ({ source, onSelect, children }: TransformerProps) => {
 							return (
 								<li key={item.value}>
 									<span>
-										{item.icon && <div className="magic-icon">{item.icon}</div>}
+										{item.icon && <div className="delightful-icon">{item.icon}</div>}
 										{item.label}
 									</span>
 
 									{item.withArguments && (
 										<Tooltip
 											title={i18next.t("common.argumentsSetting", {
-												ns: "magicFlow",
+												ns: "delightfulFlow",
 											})}
 										>
 											<Input
@@ -222,7 +222,7 @@ const Transformer = ({ source, onSelect, children }: TransformerProps) => {
 										}}
 										className="select"
 									>
-										{i18next.t("common.select", { ns: "magicFlow" })}
+										{i18next.t("common.select", { ns: "delightfulFlow" })}
 									</span>
 								</li>
 							)
@@ -230,7 +230,7 @@ const Transformer = ({ source, onSelect, children }: TransformerProps) => {
 					</ul>
 					<div className="footer">
 						<Button type="primary" size="small" onClick={onConfirm}>
-							{i18next.t("common.confirm", { ns: "magicFlow" })}
+							{i18next.t("common.confirm", { ns: "delightfulFlow" })}
 						</Button>
 					</div>
 				</Wrap>

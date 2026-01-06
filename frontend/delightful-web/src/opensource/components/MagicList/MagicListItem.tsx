@@ -154,7 +154,7 @@ function DelightfulListItemBase<D extends DelightfulListItemType = DelightfulLis
 			align="center"
 			onClick={handleClick}
 			role="listitem"
-			data-testid="magic-list-item"
+			data-testid="delightful-list-item"
 			{...props}
 		>
 			{data.avatar && (

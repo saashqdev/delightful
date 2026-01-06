@@ -23,7 +23,7 @@ class ChatMessageEndpointTest extends OpenDevEndpointBaseTestCase
 {
     public function testSendOneOnOneChatMessages()
     {
-        $openDev = $this->createOpenDevFactory('magic-flow');
+        $openDev = $this->createOpenDevFactory('delightful-flow');
         $param = new SendOneOnOneChatMessagesParameter($openDev->accessTokenEndpoint->get());
         $param->setRobotCode('dinge6lvoxj27cm6rg0t');
         $param->setUserIds(['246716352326311484']);
@@ -61,7 +61,7 @@ php bin/hyperf.php start
 
     public function testSendGroupMessage()
     {
-        $openDev = $this->createOpenDevFactory('magic-flow');
+        $openDev = $this->createOpenDevFactory('delightful-flow');
         $param = new SendGroupMessageParameter($openDev->accessTokenEndpoint->get());
         $param->setRobotCode('dinge6lvoxj27cm6rg0t');
         $param->setOpenConversationId('cideXwrh5j0nC1U3bf4rDERGQ==');
@@ -77,7 +77,7 @@ php bin/hyperf.php start
 
     public function testDownloadFile()
     {
-        $openDev = $this->createOpenDevFactory('magic-flow');
+        $openDev = $this->createOpenDevFactory('delightful-flow');
         $param = new DownloadFileParameter($openDev->accessTokenEndpoint->get());
         $param->setRobotCode('dinge6lvoxj27cm6rg0t');
         $param->setDownloadCode('mIofN681YE3f/+m+NntqpTt7FQXj2AghbDS/D/xcZmlSKqlfqQ8Fp+dWOg6yh+5+FgiMCaG6l8z7fraG8P7uNDRA90yjO2jF5H+wDR/KQGqzsbiJ3Mg/D02SBddCacTS2L90004aa/jp3cXDJ79NnDzf1T7vqA8jHV3DW3m5IXVmRa02nT5UZ7kzfVaTgmsDsq/dm1DzS38V+Fisxow2aF7JkUrlZ2vw/6y5ybiNJSw=');

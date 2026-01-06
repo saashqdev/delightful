@@ -56,18 +56,18 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         });
         $users = [];
         if (! empty($allUserIds)) {
-            $magicUserDomain = di(DelightfulUserDomainService::class);
-            $magicAccountDomain = di(DelightfulAccountDomainService::class);
+            $delightfulUserDomain = di(DelightfulUserDomainService::class);
+            $delightfulAccountDomain = di(DelightfulAccountDomainService::class);
             $departmentUserDomain = di(DelightfulDepartmentUserDomainService::class);
             $departmentDomain = di(DelightfulDepartmentDomainService::class);
 
             $contactDataIsolation = ContactDataIsolation::create($executionData->getOperator()->getOrganizationCode(), $executionData->getOperator()->getUid());
-            $magicUsers = $magicUserDomain->getByUserIds($contactDataIsolation, $allUserIds);
-            $magicIds = [];
-            foreach ($magicUsers as $magicUser) {
-                $magicIds[] = $magicUser->getDelightfulId();
+            $delightfulUsers = $delightfulUserDomain->getByUserIds($contactDataIsolation, $allUserIds);
+            $delightfulIds = [];
+            foreach ($delightfulUsers as $delightfulUser) {
+                $delightfulIds[] = $delightfulUser->getDelightfulId();
             }
-            $magicAccounts = $magicAccountDomain->getByDelightfulIds($magicIds);
+            $delightfulAccounts = $delightfulAccountDomain->getByDelightfulIds($delightfulIds);
             $departmentUsers = $departmentUserDomain->getDepartmentUsersByUserIds($allUserIds, $contactDataIsolation);
             $departmentIds = array_column($departmentUsers, 'department_id');
 
@@ -87,19 +87,19 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
             }
 
             $phoneDesensitization = false;
-            if (count($magicUsers) > 1) {
+            if (count($delightfulUsers) > 1) {
                 $phoneDesensitization = true;
             }
-            foreach ($magicUsers as $magicUser) {
+            foreach ($delightfulUsers as $delightfulUser) {
                 // 如果不是人类，过滤
-                if ($magicUser->getUserType() !== UserType::Human) {
+                if ($delightfulUser->getUserType() !== UserType::Human) {
                     continue;
                 }
-                if (! $magicAccount = $magicAccounts[$magicUser->getDelightfulId()] ?? null) {
+                if (! $delightfulAccount = $delightfulAccounts[$delightfulUser->getDelightfulId()] ?? null) {
                     continue;
                 }
                 $departmentArray = [];
-                $userDepartment = $userDepartments[$magicUser->getUserId()] ?? [];
+                $userDepartment = $userDepartments[$delightfulUser->getUserId()] ?? [];
                 foreach ($userDepartment as $department) {
                     if (! $departmentEntity = $departments[$department['department_id']] ?? null) {
                         continue;
@@ -119,11 +119,11 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
                 }
 
                 $users[] = [
-                    'user_id' => $magicUser->getUserId(),
-                    'username' => $magicAccount->getRealName(),
+                    'user_id' => $delightfulUser->getUserId(),
+                    'username' => $delightfulAccount->getRealName(),
                     'position' => $userDepartment[0]['job_title'] ?? '',
-                    'country_code' => $magicAccount->getCountryCode(),
-                    'phone' => $magicAccount->getPhone($phoneDesensitization),
+                    'country_code' => $delightfulAccount->getCountryCode(),
+                    'phone' => $delightfulAccount->getPhone($phoneDesensitization),
                     'work_number' => $userDepartment[0]['employee_no'] ?? '',
                     'department' => $departmentArray,
                 ];
@@ -144,7 +144,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         if (! is_string($username) || empty($username)) {
             return [];
         }
-        $db = Db::table('magic_contact_accounts')->where('type', '=', 1);
+        $db = Db::table('delightful_contact_accounts')->where('type', '=', 1);
         switch ($operatorType) {
             case OperatorType::Equals:
                 $db->where('real_name', '=', $username);
@@ -161,12 +161,12 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
             default:
                 return [];
         }
-        $magicIds = $db->pluck('magic_id')->toArray();
-        if (empty($magicIds)) {
+        $delightfulIds = $db->pluck('delightful_id')->toArray();
+        if (empty($delightfulIds)) {
             return [];
         }
-        $userDB = Db::table('magic_contact_users')
-            ->whereIn('magic_id', $magicIds)
+        $userDB = Db::table('delightful_contact_users')
+            ->whereIn('delightful_id', $delightfulIds)
             ->where('organization_code', '=', $operator->getOrganizationCode())
             ->where('user_type', '=', 1);
         if (! empty($filterUserIds)) {
@@ -180,7 +180,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         if (! is_string($workNumber) || empty($workNumber)) {
             return [];
         }
-        $db = Db::table('magic_contact_department_users')->where('organization_code', '=', $operator->getOrganizationCode());
+        $db = Db::table('delightful_contact_department_users')->where('organization_code', '=', $operator->getOrganizationCode());
         switch ($operatorType) {
             case OperatorType::Equals:
                 $db->where('employee_no', '=', $workNumber);
@@ -214,7 +214,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         if (! is_string($position)) {
             return [];
         }
-        $db = Db::table('magic_contact_department_users')->where('organization_code', '=', $operator->getOrganizationCode());
+        $db = Db::table('delightful_contact_department_users')->where('organization_code', '=', $operator->getOrganizationCode());
         switch ($operatorType) {
             case OperatorType::Equals:
                 $db->where('job_title', '=', $position);
@@ -248,7 +248,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         if (! is_string($phone)) {
             return [];
         }
-        $db = Db::table('magic_contact_accounts')->where('type', '=', 1);
+        $db = Db::table('delightful_contact_accounts')->where('type', '=', 1);
         switch ($operatorType) {
             case OperatorType::Equals:
                 $db->where('phone', '=', $phone);
@@ -265,12 +265,12 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
             default:
                 return [];
         }
-        $magicIds = $db->pluck('magic_id')->toArray();
-        if (empty($magicIds)) {
+        $delightfulIds = $db->pluck('delightful_id')->toArray();
+        if (empty($delightfulIds)) {
             return [];
         }
-        $userDB = Db::table('magic_contact_users')
-            ->whereIn('magic_id', $magicIds)
+        $userDB = Db::table('delightful_contact_users')
+            ->whereIn('delightful_id', $delightfulIds)
             ->where('organization_code', '=', $operator->getOrganizationCode())
             ->where('user_type', '=', 1);
         if (! empty($filterUserIds)) {
@@ -281,7 +281,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
 
     private function getUserIdsByGroupName(Operator $operator, OperatorType $operatorType, mixed $groupName, ?array $filterUserIds = null): array
     {
-        $db = Db::table('magic_chat_groups')->where('organization_code', '=', $operator->getOrganizationCode());
+        $db = Db::table('delightful_chat_groups')->where('organization_code', '=', $operator->getOrganizationCode());
         switch ($operatorType) {
             case OperatorType::Equals:
                 if (is_array($groupName)) {
@@ -320,7 +320,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         if (empty($groupIds)) {
             return [];
         }
-        $userDB = Db::table('magic_chat_group_users')
+        $userDB = Db::table('delightful_chat_group_users')
             ->whereIn('group_id', $groupIds)
             ->where('organization_code', '=', $operator->getOrganizationCode());
         if (! empty($filterUserIds)) {
@@ -331,7 +331,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
 
     private function getUserIdsByDepartmentName(Operator $operator, OperatorType $operatorType, mixed $department, ?array $filterUserIds = null): array
     {
-        $db = Db::table('magic_contact_departments')->where('organization_code', '=', $operator->getOrganizationCode());
+        $db = Db::table('delightful_contact_departments')->where('organization_code', '=', $operator->getOrganizationCode());
         switch ($operatorType) {
             case OperatorType::Equals:
                 $departmentName = $department;
@@ -375,7 +375,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         // 获取这些部门的所有下级部门id
         $departmentSubIds = $this->getAllChildrenByDepartmentIds($operator, $departmentPaths);
         $departmentIds = array_merge(array_keys($departmentPaths), $departmentSubIds);
-        $userDB = Db::table('magic_contact_department_users')
+        $userDB = Db::table('delightful_contact_department_users')
             ->whereIn('department_id', $departmentIds)
             ->where('organization_code', '=', $operator->getOrganizationCode());
         if (! empty($filterUserIds)) {
@@ -386,7 +386,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
 
     private function getAllChildrenByDepartmentIds(Operator $operator, array $departmentPaths): array
     {
-        $allDepartments = Db::table('magic_contact_departments')
+        $allDepartments = Db::table('delightful_contact_departments')
             ->select(['department_id', 'parent_department_id', 'name', 'path'])
             ->where('organization_code', '=', $operator->getOrganizationCode())
             ->get()

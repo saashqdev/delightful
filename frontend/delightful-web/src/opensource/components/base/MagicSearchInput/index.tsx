@@ -12,7 +12,7 @@ const useStyles = createStyles(({ token, css, prefixCls }) => ({
 	search: css`
 		border-radius: 8px;
 		border: 1px solid ${token.colorBorderSecondary};
-		background-color: ${token.magicColorScales.grey[0]};
+		background-color: ${token.delightfulColorScales.grey[0]};
 		overflow: hidden;
 
 		.${prefixCls}-input-group-addon {
@@ -22,7 +22,7 @@ const useStyles = createStyles(({ token, css, prefixCls }) => ({
 		.${prefixCls}-input-search-button {
 			display: none;
 		}
-		.magic-input-group-wrapper {
+		.delightful-input-group-wrapper {
 			border-radius: 8px;
 		}
 		.${prefixCls}-input {

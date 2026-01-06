@@ -16,7 +16,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * 组织模型.
  *
  * @property int $id 主键ID
- * @property string $magic_organization_code
+ * @property string $delightful_organization_code
  * @property string $name 组织名称
  * @property null|string $platform_type 平台类型
  * @property null|string $logo 组织logo
@@ -51,14 +51,14 @@ class OrganizationModel extends AbstractModel
     /**
      * 与模型关联的表名.
      */
-    protected ?string $table = 'magic_organizations';
+    protected ?string $table = 'delightful_organizations';
 
     /**
      * 可批量赋值的属性.
      */
     protected array $fillable = [
         'id',
-        'magic_organization_code',
+        'delightful_organization_code',
         'name',
         'platform_type',
         'logo',
@@ -84,7 +84,7 @@ class OrganizationModel extends AbstractModel
      */
     protected array $casts = [
         'id' => 'int',
-        'magic_organization_code' => 'string',
+        'delightful_organization_code' => 'string',
         'name' => 'string',
         'platform_type' => 'string',
         'logo' => 'string',

@@ -47,8 +47,8 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 		disabled = false,
 		dataSource = [],
 		placeholder = "",
-		inputPlaceholder = i18next.t("common.expressionPlaceholder", { ns: "magicFlow" }),
-		referencePlaceholder = i18next.t("common.expressionPlaceholder", { ns: "magicFlow" }),
+		inputPlaceholder = i18next.t("common.expressionPlaceholder", { ns: "delightfulFlow" }),
+		referencePlaceholder = i18next.t("common.expressionPlaceholder", { ns: "delightfulFlow" }),
 		bordered = true,
 		mode = ExpressionMode.Common,
 		pointedValueType,
@@ -537,13 +537,13 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 											options={[
 												{
 													label: i18next.t("expression.const", {
-														ns: "magicFlow",
+														ns: "delightfulFlow",
 													}),
 													value: VALUE_TYPE.CONST,
 												},
 												{
 													label: i18next.t("expression.expression", {
-														ns: "magicFlow",
+														ns: "delightfulFlow",
 													}),
 													value: VALUE_TYPE.EXPRESSION,
 												},
@@ -613,7 +613,7 @@ const CustomInputExpression = (props: InputExpressionProps) => {
 											{isOpenArgsModal && (
 												<Modal
 													title={i18next.t("expression.setArguments", {
-														ns: "magicFlow",
+														ns: "delightfulFlow",
 													})}
 													open={isOpenArgsModal}
 													onOk={onConfirm}

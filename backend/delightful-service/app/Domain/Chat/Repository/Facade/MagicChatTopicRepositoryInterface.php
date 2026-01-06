@@ -15,13 +15,13 @@ use App\Domain\Chat\Entity\DelightfulTopicMessageEntity;
 interface DelightfulChatTopicRepositoryInterface
 {
     // 创建话题
-    public function createTopic(DelightfulTopicEntity $magicTopicEntity): DelightfulTopicEntity;
+    public function createTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity;
 
     // 更新话题
-    public function updateTopic(DelightfulTopicEntity $magicTopicEntity): DelightfulTopicEntity;
+    public function updateTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity;
 
     // 删除话题
-    public function deleteTopic(DelightfulTopicEntity $magicTopicDTO): int;
+    public function deleteTopic(DelightfulTopicEntity $delightfulTopicDTO): int;
 
     /**
      * 获取会话的会话列表.
@@ -30,7 +30,7 @@ interface DelightfulChatTopicRepositoryInterface
      */
     public function getTopicsByConversationId(string $conversationId, array $topicIds): array;
 
-    public function getTopicEntity(DelightfulTopicEntity $magicTopicDTO): ?DelightfulTopicEntity;
+    public function getTopicEntity(DelightfulTopicEntity $delightfulTopicDTO): ?DelightfulTopicEntity;
 
     public function createTopicMessage(DelightfulTopicMessageEntity $topicMessageDTO): DelightfulTopicMessageEntity;
 

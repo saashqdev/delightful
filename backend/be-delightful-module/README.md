@@ -2,15 +2,15 @@
 
 ## 简介
 
-Be Delightful Module 是一个基于 Hyperf 框架的扩展包，专为 magic-service 设计的增强扩展模块。该模块采用领域驱动设计（DDD）架构，为应用程序提供了清晰的分层结构和丰富的功能组件。
+Be Delightful Module 是一个基于 Hyperf 框架的扩展包，专为 delightful-service 设计的增强扩展模块。该模块采用领域驱动设计（DDD）架构，为应用程序提供了清晰的分层结构和丰富的功能组件。
 
-Be Delightful Module 需要结合 magic-service 一起使用，其核心功能是通过接管 magic-service 的消息事件，建立用户与超级麦吉智能体之间的信息传递通道。这种设计使得用户可以无缝地与智能体进行交互，从而获得更加智能化的服务体验。
+Be Delightful Module 需要结合 delightful-service 一起使用，其核心功能是通过接管 delightful-service 的消息事件，建立用户与超级麦吉智能体之间的信息传递通道。这种设计使得用户可以无缝地与智能体进行交互，从而获得更加智能化的服务体验。
 
 作为一个桥接模块，Be Delightful Module 不仅处理消息的传递，还负责转换数据格式、协调事件流程，以及提供必要的上下文信息，确保智能体能够准确理解用户意图并给出恰当的响应。
 
 ## 功能特性
 
-- 基于 Hyperf 3.1 构建，完美适配现有 magic-service 架构
+- 基于 Hyperf 3.1 构建，完美适配现有 delightful-service 架构
 - 遵循领域驱动设计（DDD）架构，代码组织清晰，易于维护
 - 提供资源共享功能，支持跨模块资源访问
 - 作为消息通道，连接用户与超级麦吉智能体
@@ -21,29 +21,29 @@ Be Delightful Module 需要结合 magic-service 一起使用，其核心功能�
 
 ## 系统架构
 
-Be Delightful Module 作为 magic-service 的扩展，在整个系统中扮演以下角色：
+Be Delightful Module 作为 delightful-service 的扩展，在整个系统中扮演以下角色：
 
 ```
-用户请求 → magic-service → Be Delightful Module → 超级麦吉智能体
+用户请求 → delightful-service → Be Delightful Module → 超级麦吉智能体
                  ↑                 |
                  └─────────────────┘
               响应返回
 ```
 
-该模块通过以下方式与 magic-service 集成：
+该模块通过以下方式与 delightful-service 集成：
 
-1. 监听 magic-service 的消息事件
+1. 监听 delightful-service 的消息事件
 2. 处理和转换消息格式
 3. 传递消息至超级麦吉智能体
 4. 接收并处理智能体的响应
-5. 将处理结果返回给 magic-service
+5. 将处理结果返回给 delightful-service
 
 ## 安装
 
 通过 Composer 安装：
 
 ```bash
-composer require dtyq/super-magic-module
+composer require dtyq/super-delightful-module
 ```
 
 ## 基本使用
@@ -61,9 +61,9 @@ return [
 ];
 ```
 
-### 与 magic-service 集成
+### 与 delightful-service 集成
 
-要将 Be Delightful Module 与 magic-service 集成，需要在 magic-service 中依赖进行接管：
+要将 Be Delightful Module 与 delightful-service 集成，需要在 delightful-service 中依赖进行接管：
 
 ```php
 [
@@ -128,14 +128,14 @@ composer start
 
 Be Delightful Module 处理消息的基本流程如下：
 
-1. 用户在 magic-service 发送消息
-2. magic-service 触发消息事件
+1. 用户在 delightful-service 发送消息
+2. delightful-service 触发消息事件
 3. Be Delightful Module 监听到事件，提取消息内容
 4. 消息被转换为超级麦吉智能体可理解的格式
 5. 消息发送给超级麦吉智能体
 6. 智能体处理消息并生成响应
 7. Be Delightful Module 接收响应并转换格式
-8. 响应通过事件传递回 magic-service
+8. 响应通过事件传递回 delightful-service
 9. 用户收到智能体的回应
 
 ## 测试
@@ -159,7 +159,7 @@ composer test
 - [Hyperf 官方文档](https://hyperf.wiki)
 - [PSR 标准](https://www.php-fig.org/psr/)
 - [领域驱动设计参考](https://www.domainlanguage.com/ddd/)
-- [Delightful Service 文档](https://docs.dtyq.com/magic-service/)
+- [Delightful Service 文档](https://docs.dtyq.com/delightful-service/)
 
 ## 作者
 
@@ -171,4 +171,4 @@ composer test
 
 ## 项目状态
 
-该模块正在积极开发中，作为 magic-service 的增强组件，持续提供智能交互能力的升级。我们欢迎团队成员提供反馈和建议，共同完善这一关键模块。
+该模块正在积极开发中，作为 delightful-service 的增强组件，持续提供智能交互能力的升级。我们欢迎团队成员提供反馈和建议，共同完善这一关键模块。

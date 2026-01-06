@@ -131,7 +131,7 @@ class MessageDispatchService {
 		// 非当前组织或用户的消息不处理
 		if (
 			message.organization_code !== userStore.user.userInfo?.organization_code ||
-			message.magic_id !== userStore.user.userInfo?.magic_id
+			message.delightful_id !== userStore.user.userInfo?.delightful_id
 		) {
 			return
 		}

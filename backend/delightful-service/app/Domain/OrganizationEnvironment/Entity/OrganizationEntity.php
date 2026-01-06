@@ -20,7 +20,7 @@ class OrganizationEntity extends AbstractEntity
 {
     protected ?int $id = null;
 
-    protected string $magicOrganizationCode = '';
+    protected string $delightfulOrganizationCode = '';
 
     protected string $name = '';
 
@@ -112,12 +112,12 @@ class OrganizationEntity extends AbstractEntity
 
     public function getDelightfulOrganizationCode(): string
     {
-        return $this->magicOrganizationCode;
+        return $this->delightfulOrganizationCode;
     }
 
-    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $delightfulOrganizationCode): void
     {
-        $this->magicOrganizationCode = $magicOrganizationCode;
+        $this->delightfulOrganizationCode = $delightfulOrganizationCode;
     }
 
     public function getName(): string
@@ -307,7 +307,7 @@ class OrganizationEntity extends AbstractEntity
 
     protected function validate(): void
     {
-        if (empty($this->magicOrganizationCode)) {
+        if (empty($this->delightfulOrganizationCode)) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_REQUIRED);
         }
 

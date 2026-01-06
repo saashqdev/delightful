@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_task_files', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_task_files', function (Blueprint $table) {
             $table->index('file_key', 'idx_file_key');
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_task_files', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_task_files', function (Blueprint $table) {
             $table->dropIndex('idx_file_key');
         });
     }

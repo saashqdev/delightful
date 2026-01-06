@@ -42,7 +42,7 @@ if [ -z "${GIT_REPO_URL}" ]; then
     # Use default value if env var is not set
     GIT_REPO_URL="git@github.com:dtyq"
 fi
-REMOTE_URL="${GIT_REPO_URL}/magic-docs.git"
+REMOTE_URL="${GIT_REPO_URL}/delightful-docs.git"
 
 # Add a confirmation step to avoid accidental publishing
 echo "Preparing to publish to remote repository: ${REMOTE_URL}"
@@ -80,17 +80,17 @@ fi
 
 # Initialize remote connection
 echo "Initializing remote connection..."
-remote magic-docs $REMOTE_URL
+remote delightful-docs $REMOTE_URL
 
 # Split the subtree and push
 echo "Splitting and pushing..."
-split "docs" magic-docs
+split "docs" delightful-docs
 
 # # Tag and push tag
 # echo "Tagging and pushing the tag..."
-# git fetch magic-docs || true
+# git fetch delightful-docs || true
 # git tag -a $VERSION -m "Release $VERSION" $CURRENT_BRANCH
-# git push magic-docs $VERSION
+# git push delightful-docs $VERSION
 
 TIME=$(echo "$(date +%s) - $NOW" | bc)
 

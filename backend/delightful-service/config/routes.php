@@ -9,7 +9,7 @@ use Hyperf\HttpServer\Router\Router;
 
 // Basic routes
 Router::get('/', function () {
-    return 'hello, magic-service!';
+    return 'hello, delightful-service!';
 });
 Router::get('/favicon.ico', function () {
     return '';

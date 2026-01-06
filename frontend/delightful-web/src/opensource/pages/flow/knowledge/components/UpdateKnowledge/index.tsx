@@ -28,8 +28,8 @@ const useUpdateKnowledgeStyles = createStyles(({ css, isDarkMode, token }) => {
 			border-radius: 4px;
 			&:hover {
 				background: ${isDarkMode
-					? token.magicColorScales.grey[8]
-					: token.magicColorScales.grey[0]};
+					? token.delightfulColorScales.grey[8]
+					: token.delightfulColorScales.grey[0]};
 			}
 		`,
 	}

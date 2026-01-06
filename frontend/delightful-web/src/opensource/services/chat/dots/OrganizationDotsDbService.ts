@@ -4,14 +4,14 @@ import { userStore } from "@/opensource/models/user"
 import { observe } from "mobx";
 
 class OrganizationDotsDbService {
-	magicId: string | undefined
+	delightfulId: string | undefined
 
 	constructor() {
 		// 监听用户信息变化
 		observe(userStore.user, "userInfo", (change) => {
 			const newUserInfo = change.newValue
-			if (newUserInfo?.magic_id && this.magicId !== newUserInfo.magic_id) {
-				this.magicId = newUserInfo.magic_id
+			if (newUserInfo?.delightful_id && this.delightfulId !== newUserInfo.delightful_id) {
+				this.delightfulId = newUserInfo.delightful_id
 				// 加载持久化数据
 				OrganizationDotsStore.reset(this.getPersistenceData(), this.getDotSeqIdData())
 			}
@@ -19,14 +19,14 @@ class OrganizationDotsDbService {
 	}
 	
 	get dot_seqid_key() {
-		return platformKey(`organization_dots_seqid/${this.magicId}`)
+		return platformKey(`organization_dots_seqid/${this.delightfulId}`)
 	}
 
 	/**
 	 * 持久化数据key
 	 */
 	get persistence_key() {
-		return platformKey(`organization_dots/${this.magicId}`)
+		return platformKey(`organization_dots/${this.delightfulId}`)
 	}
 
 	/**

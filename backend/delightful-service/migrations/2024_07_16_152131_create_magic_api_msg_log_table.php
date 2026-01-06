@@ -16,7 +16,7 @@ class CreateDelightfulApiMsgLogTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('magic_api_msg_logs', function (Blueprint $table) {
+        Schema::create('delightful_api_msg_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('msg')->comment('消息');
             $table->unsignedDecimal('use_amount', 40, 6)->comment('使用额度');
@@ -34,6 +34,6 @@ class CreateDelightfulApiMsgLogTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_api_msg_log');
+        Schema::dropIfExists('delightful_api_msg_log');
     }
 }

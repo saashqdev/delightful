@@ -320,7 +320,7 @@ return [
      * Temporary chunk storage directory
      * Relative to system temp directory
      */
-    'download_temp_dir' => env('CHUNK_DOWNLOAD_TEMP_DIR', 'magic_chunk_downloads'),
+    'download_temp_dir' => env('CHUNK_DOWNLOAD_TEMP_DIR', 'delightful_chunk_downloads'),
 
     /*
      * Platform-specific download settings

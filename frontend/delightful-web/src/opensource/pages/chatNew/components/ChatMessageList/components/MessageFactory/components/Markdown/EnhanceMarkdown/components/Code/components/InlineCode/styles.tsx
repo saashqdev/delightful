@@ -6,7 +6,7 @@ export const useStyles = createStyles(({ css, token }) => {
 			font-weight: 400;
 			padding: 2px 4px;
 			font-size: inherit;
-			background-color: ${token.magicColorUsages.bg[1]};
+			background-color: ${token.delightfulColorUsages.bg[1]};
 			border-radius: 4px;
 			margin: 0 4px !important;
 

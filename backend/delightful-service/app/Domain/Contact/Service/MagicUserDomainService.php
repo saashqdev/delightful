@@ -98,12 +98,12 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 根据 magicId 获取用户所属的组织列表.
+     * 根据 delightfulId 获取用户所属的组织列表.
      * @return string[]
      */
-    public function getUserOrganizationsByDelightfulId(string $magicId): array
+    public function getUserOrganizationsByDelightfulId(string $delightfulId): array
     {
-        return $this->userRepository->getUserOrganizationsByDelightfulId($magicId);
+        return $this->userRepository->getUserOrganizationsByDelightfulId($delightfulId);
     }
 
     public function getByUserId(string $uid): ?DelightfulUserEntity
@@ -177,34 +177,34 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return [];
         }
 
-        // 2. 收集 magic_ids
-        $magicIds = [];
+        // 2. 收集 delightful_ids
+        $delightfulIds = [];
         $aiCodeToDelightfulIdMap = [];
         foreach ($accounts as $account) {
-            $magicIds[] = $account->getDelightfulId();
+            $delightfulIds[] = $account->getDelightfulId();
             $aiCodeToDelightfulIdMap[$account->getAiCode()] = $account->getDelightfulId();
         }
 
-        // 3. 根据 magic_ids 批量获取用户信息
-        $users = $this->userRepository->getUserByDelightfulIds($magicIds);
+        // 3. 根据 delightful_ids 批量获取用户信息
+        $users = $this->userRepository->getUserByDelightfulIds($delightfulIds);
         if (empty($users)) {
             return [];
         }
 
-        // 4. 过滤组织编码并构建 magicId => userId 映射
-        $magicIdToUserIdMap = [];
+        // 4. 过滤组织编码并构建 delightfulId => userId 映射
+        $delightfulIdToUserIdMap = [];
         foreach ($users as $user) {
             // 只保留当前组织的用户
             if ($user->getOrganizationCode() === $dataIsolation->getCurrentOrganizationCode()) {
-                $magicIdToUserIdMap[$user->getDelightfulId()] = $user->getUserId();
+                $delightfulIdToUserIdMap[$user->getDelightfulId()] = $user->getUserId();
             }
         }
 
         // 5. 构建最终的 aiCode => userId 映射
         $result = [];
-        foreach ($aiCodeToDelightfulIdMap as $aiCode => $magicId) {
-            if (isset($magicIdToUserIdMap[$magicId])) {
-                $result[$aiCode] = $magicIdToUserIdMap[$magicId];
+        foreach ($aiCodeToDelightfulIdMap as $aiCode => $delightfulId) {
+            if (isset($delightfulIdToUserIdMap[$delightfulId])) {
+                $result[$aiCode] = $delightfulIdToUserIdMap[$delightfulId];
             }
         }
 
@@ -259,9 +259,9 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         }
 
         // 解析头像等信息
-        $magicIds = array_column($users, 'magic_id');
+        $delightfulIds = array_column($users, 'delightful_id');
         // 从 account 表拿手机号真名等信息
-        $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($magicIds);
+        $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($delightfulIds);
         return UserAssembler::getUsersDetail($users, $accounts);
     }
 
@@ -274,7 +274,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 搜索用户昵称（全magic平台检索）.
+     * 搜索用户昵称（全delightful平台检索）.
      */
     public function searchUserByNickNameInDelightful(string $query): array
     {
@@ -335,10 +335,10 @@ class DelightfulUserDomainService extends AbstractContactDomainService
      * 麦吉用户体系下的登录校验.
      * @return LoginResponseDTO[]
      */
-    public function magicUserLoginCheck(string $authorization, DelightfulEnvironmentEntity $magicEnvironmentEntity, ?string $magicOrganizationCode = null): array
+    public function delightfulUserLoginCheck(string $authorization, DelightfulEnvironmentEntity $delightfulEnvironmentEntity, ?string $delightfulOrganizationCode = null): array
     {
         // 生成缓存键和锁键
-        $cacheKey = md5(sprintf('OrganizationUserLogin:auth:%s:env:%s:', $authorization, $magicEnvironmentEntity->getId()));
+        $cacheKey = md5(sprintf('OrganizationUserLogin:auth:%s:env:%s:', $authorization, $delightfulEnvironmentEntity->getId()));
         $lockKey = $this->generateLockKey(PlatformType::Delightful, $authorization);
 
         // 尝试从缓存获取结果
@@ -351,34 +351,34 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         $owner = $this->acquireLock($lockKey);
 
         try {
-            // 处理麦吉用户系统的token，获取magicId和userId
+            // 处理麦吉用户系统的token，获取delightfulId和userId
             $tokenDTO = new DelightfulTokenEntity();
             $tokenDTO->setType(DelightfulTokenType::Account);
             $tokenDTO->setToken($authorization);
-            $magicUserToken = $this->magicTokenRepository->getTokenEntity($tokenDTO);
+            $delightfulUserToken = $this->delightfulTokenRepository->getTokenEntity($tokenDTO);
 
-            if ($magicUserToken === null) {
+            if ($delightfulUserToken === null) {
                 ExceptionBuilder::throw(ChatErrorCode::AUTHORIZATION_INVALID);
             }
 
-            $magicId = $magicUserToken->getTypeRelationValue();
+            $delightfulId = $delightfulUserToken->getTypeRelationValue();
 
             // 查询用户并处理组织关系，查询麦吉用户
-            $magicUserEntities = $this->userRepository->getUserByDelightfulIds([$magicId]);
-            if (empty($magicUserEntities)) {
+            $delightfulUserEntities = $this->userRepository->getUserByDelightfulIds([$delightfulId]);
+            if (empty($delightfulUserEntities)) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_CREATE_ACCOUNT);
             }
 
             // 构建返回结果
             $loginResponses = [];
-            foreach ($magicUserEntities as $magicUserEntity) {
-                $currentOrgCode = $magicUserEntity->getOrganizationCode();
+            foreach ($delightfulUserEntities as $delightfulUserEntity) {
+                $currentOrgCode = $delightfulUserEntity->getOrganizationCode();
                 $loginResponseDTO = new LoginResponseDTO();
-                $loginResponseDTO->setDelightfulId($magicUserEntity->getDelightfulId())
-                    ->setDelightfulUserId($magicUserEntity->getUserId())
+                $loginResponseDTO->setDelightfulId($delightfulUserEntity->getDelightfulId())
+                    ->setDelightfulUserId($delightfulUserEntity->getUserId())
                     ->setDelightfulOrganizationCode($currentOrgCode)
                     ->setThirdPlatformOrganizationCode($currentOrgCode)
-                    ->setThirdPlatformUserId($magicId);
+                    ->setThirdPlatformUserId($delightfulId);
 
                 $loginResponses[] = $loginResponseDTO;
             }
@@ -400,9 +400,9 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         // 从 user表拿基本信息
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds);
         // 解析头像等信息
-        $magicIds = array_column($users, 'magic_id');
+        $delightfulIds = array_column($users, 'delightful_id');
         // 从 account 表拿手机号真名等信息
-        $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($magicIds);
+        $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($delightfulIds);
         return UserAssembler::getUsersDetail($users, $accounts);
     }
 
@@ -412,8 +412,8 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         if (empty($accounts)) {
             return [];
         }
-        $magicIds = array_column($accounts, 'magic_id');
-        return $this->userRepository->getUserByAccountsInDelightful($magicIds);
+        $delightfulIds = array_column($accounts, 'delightful_id');
+        return $this->userRepository->getUserByAccountsInDelightful($delightfulIds);
     }
 
     /**
@@ -427,7 +427,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return null;
         }
 
-        // 通过 magic_id 获取账号信息
+        // 通过 delightful_id 获取账号信息
         $account = $this->accountRepository->getAccountInfoByDelightfulId($user->getDelightfulId());
         if ($account === null) {
             return null;
@@ -448,36 +448,36 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return [];
         }
 
-        // 1. Batch get user info to get magic_ids
+        // 1. Batch get user info to get delightful_ids
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds);
         if (empty($users)) {
             return [];
         }
 
-        // 2. Extract magic_ids and create user_id => magic_id mapping
-        $magicIds = [];
+        // 2. Extract delightful_ids and create user_id => delightful_id mapping
+        $delightfulIds = [];
         $userIdToDelightfulIdMap = [];
         foreach ($users as $user) {
-            $magicIds[] = $user->getDelightfulId();
+            $delightfulIds[] = $user->getDelightfulId();
             $userIdToDelightfulIdMap[$user->getUserId()] = $user->getDelightfulId();
         }
 
-        // 3. Batch get account info by magic_ids
-        $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($magicIds);
+        // 3. Batch get account info by delightful_ids
+        $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($delightfulIds);
         if (empty($accounts)) {
             return [];
         }
 
-        // 4. Create magic_id => phone mapping
-        $magicIdToPhoneMap = [];
+        // 4. Create delightful_id => phone mapping
+        $delightfulIdToPhoneMap = [];
         foreach ($accounts as $account) {
-            $magicIdToPhoneMap[$account->getDelightfulId()] = $account->getPhone();
+            $delightfulIdToPhoneMap[$account->getDelightfulId()] = $account->getPhone();
         }
 
         // 5. Build final user_id => phone mapping
         $result = [];
-        foreach ($userIdToDelightfulIdMap as $userId => $magicId) {
-            $result[$userId] = $magicIdToPhoneMap[$magicId] ?? '';
+        foreach ($userIdToDelightfulIdMap as $userId => $delightfulId) {
+            $result[$userId] = $delightfulIdToPhoneMap[$delightfulId] ?? '';
         }
 
         return $result;
@@ -497,36 +497,36 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         $tokenDTO = new DelightfulTokenEntity();
         $tokenDTO->setType(DelightfulTokenType::Account);
         $tokenDTO->setToken($tokenDTO->getDelightfulShortToken($authorization));
-        $magicToken = $this->magicTokenRepository->getTokenEntity($tokenDTO);
+        $delightfulToken = $this->delightfulTokenRepository->getTokenEntity($tokenDTO);
 
-        if ($magicToken === null || $magicToken->getType() !== DelightfulTokenType::Account) {
+        if ($delightfulToken === null || $delightfulToken->getType() !== DelightfulTokenType::Account) {
             ExceptionBuilder::throw(ChatErrorCode::AUTHORIZATION_INVALID);
         }
 
-        // Get account's magic_id
-        $magicId = $magicToken->getTypeRelationValue();
+        // Get account's delightful_id
+        $delightfulId = $delightfulToken->getTypeRelationValue();
 
         // Get users under this account, optionally filtered by organization
         if ($organizationCode) {
             // If organization code is provided, only get users from that organization
-            $magicUserEntities = $this->userRepository->getUsersByDelightfulIdAndOrganizationCode([$magicId], $organizationCode);
+            $delightfulUserEntities = $this->userRepository->getUsersByDelightfulIdAndOrganizationCode([$delightfulId], $organizationCode);
         } else {
             // If no organization code, get users from all organizations
-            $magicUserEntities = $this->userRepository->getUserByDelightfulIds([$magicId]);
+            $delightfulUserEntities = $this->userRepository->getUserByDelightfulIds([$delightfulId]);
         }
 
-        if (empty($magicUserEntities)) {
+        if (empty($delightfulUserEntities)) {
             return [];
         }
 
         // Get account information
-        $accountEntity = $this->accountRepository->getAccountInfoByDelightfulId($magicId);
+        $accountEntity = $this->accountRepository->getAccountInfoByDelightfulId($delightfulId);
         if ($accountEntity === null) {
             return [];
         }
 
         // Use existing UserAssembler to build user details
-        return UserAssembler::getUsersDetail($magicUserEntities, [$accountEntity]);
+        return UserAssembler::getUsersDetail($delightfulUserEntities, [$accountEntity]);
     }
 
     /**
@@ -541,17 +541,17 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     {
         $userIdToFlowCodeMaps = [];
         if (! empty($friendQueryDTO->getAiCodes())) {
-            // 根据 ai code 查询 magic id
+            // 根据 ai code 查询 delightful id
             $accounts = $this->accountRepository->getAccountInfoByAiCodes($friendQueryDTO->getAiCodes());
-            $magicIds = array_column($accounts, 'magic_id');
+            $delightfulIds = array_column($accounts, 'delightful_id');
             // 转用户 Id
-            $users = $this->userRepository->getUserByAccountsAndOrganization($magicIds, $dataIsolation->getCurrentOrganizationCode());
+            $users = $this->userRepository->getUserByAccountsAndOrganization($delightfulIds, $dataIsolation->getCurrentOrganizationCode());
             $userIds = array_column($users, 'user_id');
             $friendQueryDTO->setUserIds($userIds);
-            $accounts = array_column($accounts, null, 'magic_id');
+            $accounts = array_column($accounts, null, 'delightful_id');
             foreach ($users as $user) {
                 /** @var null|AccountEntity $accountEntity */
-                $accountEntity = $accounts[$user['magic_id']] ?? null;
+                $accountEntity = $accounts[$user['delightful_id']] ?? null;
                 if (isset($accountEntity)) {
                     $userIdToFlowCodeMaps[$user['user_id']] = $accountEntity->getAiCode();
                 }
@@ -562,11 +562,11 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
     protected function getAgents(array $popular, array $latest): array
     {
-        // 根据magic_id,查账号详情
-        $magicIds[] = array_column($popular, 'magic_id');
-        $magicIds[] = array_column($latest, 'magic_id');
-        $magicIds = array_values(array_unique(array_merge(...$magicIds)));
-        $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($magicIds);
+        // 根据delightful_id,查账号详情
+        $delightfulIds[] = array_column($popular, 'delightful_id');
+        $delightfulIds[] = array_column($latest, 'delightful_id');
+        $delightfulIds = array_values(array_unique(array_merge(...$delightfulIds)));
+        $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($delightfulIds);
         return [
             'popular' => UserAssembler::getAgentList($popular, $accounts),
             'latest' => UserAssembler::getAgentList($latest, $accounts),

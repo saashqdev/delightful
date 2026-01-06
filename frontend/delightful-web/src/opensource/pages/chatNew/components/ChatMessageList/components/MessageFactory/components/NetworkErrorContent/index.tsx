@@ -14,7 +14,7 @@ const useStyles = createStyles(({ css, token }) => ({
 		height: 108px;
 	`,
 	invalidText: css`
-		color: ${token.magicColorUsages.text[2]};
+		color: ${token.delightfulColorUsages.text[2]};
 		text-align: justify;
 		font-size: 14px;
 		line-height: 20px;

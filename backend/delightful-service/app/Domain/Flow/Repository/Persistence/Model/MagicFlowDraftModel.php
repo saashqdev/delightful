@@ -18,7 +18,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $code
  * @property string $name
  * @property string $description
- * @property array $magic_flow
+ * @property array $delightful_flow
  * @property string $organization_code
  * @property string $created_uid
  * @property DateTime $created_at
@@ -31,10 +31,10 @@ class DelightfulFlowDraftModel extends AbstractModel
     use Snowflake;
     use SoftDeletes;
 
-    protected ?string $table = 'magic_flow_drafts';
+    protected ?string $table = 'delightful_flow_drafts';
 
     protected array $fillable = [
-        'id', 'flow_code', 'code', 'name', 'description', 'magic_flow',
+        'id', 'flow_code', 'code', 'name', 'description', 'delightful_flow',
         'organization_code', 'created_uid', 'created_at', 'updated_uid', 'updated_at', 'deleted_at',
     ];
 
@@ -43,7 +43,7 @@ class DelightfulFlowDraftModel extends AbstractModel
         'code' => 'string',
         'name' => 'string',
         'description' => 'string',
-        'magic_flow' => 'json',
+        'delightful_flow' => 'json',
         'organization_code' => 'string',
         'created_uid' => 'string',
         'created_at' => 'datetime',

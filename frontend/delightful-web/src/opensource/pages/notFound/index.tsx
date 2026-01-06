@@ -8,14 +8,14 @@ import NotFoundImage from "./NotFoundImage"
 
 const useStyles = createStyles(({ css, token }) => ({
 	notFoundText: css`
-		color: ${token.magicColorUsages.text[2]};
+		color: ${token.delightfulColorUsages.text[2]};
 		text-align: center;
 		font-size: 32px;
 		font-weight: 600;
 		line-height: 44px;
 	`,
 	notFoundTip: css`
-		color: ${token.magicColorUsages.text[2]};
+		color: ${token.delightfulColorUsages.text[2]};
 		text-align: center;
 		font-size: 14px;
 		line-height: 20px;

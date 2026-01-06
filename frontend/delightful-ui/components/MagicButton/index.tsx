@@ -27,32 +27,32 @@ const DelightfulButton = memo(
 		) => {
 			const { styles } = useStyles({ justify })
 
-			const { magicColorUsages } = useTheme()
+			const { delightfulColorUsages } = useTheme()
 
 			const themeConfigs = useMemo<ThemeConfig | GetAntdTheme | undefined>(() => {
 				return theme
 					? (appearence) => ({
 							components: {
 								Button: {
-									colorLink: magicColorUsages.primary.default,
-									colorLinkHover: magicColorUsages.primary.hover,
-									colorLinkActive: magicColorUsages.primary.active,
-									colorPrimary: magicColorUsages.primary.default,
-									colorPrimaryHover: magicColorUsages.primary.hover,
-									colorPrimaryActive: magicColorUsages.primary.active,
+									colorLink: delightfulColorUsages.primary.default,
+									colorLinkHover: delightfulColorUsages.primary.hover,
+									colorLinkActive: delightfulColorUsages.primary.active,
+									colorPrimary: delightfulColorUsages.primary.default,
+									colorPrimaryHover: delightfulColorUsages.primary.hover,
+									colorPrimaryActive: delightfulColorUsages.primary.active,
 									textHoverBg:
 										appearence === "dark"
 											? baseColorScales.grey[8]
-											: magicColorUsages.primaryLight.default,
+											: delightfulColorUsages.primaryLight.default,
 								},
 							},
 					  })
 					: undefined
 			}, [
-				magicColorUsages.primary.active,
-				magicColorUsages.primary.default,
-				magicColorUsages.primary.hover,
-				magicColorUsages.primaryLight.default,
+				delightfulColorUsages.primary.active,
+				delightfulColorUsages.primary.default,
+				delightfulColorUsages.primary.hover,
+				delightfulColorUsages.primaryLight.default,
 				theme,
 			])
 
@@ -65,7 +65,7 @@ const DelightfulButton = memo(
 					<Tooltip title={tip}>
 						<Button
 							ref={ref}
-							className={cx(styles.magicButton, className)}
+							className={cx(styles.delightfulButton, className)}
 							{...props}
 						/>
 					</Tooltip>

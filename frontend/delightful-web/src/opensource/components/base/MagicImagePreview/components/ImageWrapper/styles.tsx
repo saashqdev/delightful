@@ -29,7 +29,7 @@ export const useStyles = createStyles(({ css, prefixCls, token }) => {
 			cursor: pointer;
 			border: 1px solid ${token.colorBorderSecondary};
 			border-radius: 4px;
-			background-color: ${token.magicColorUsages.bg[1]};
+			background-color: ${token.delightfulColorUsages.bg[1]};
 			width: fit-content;
 			padding: 2px 4px;
 			gap: 4px;
@@ -47,7 +47,7 @@ export const useStyles = createStyles(({ css, prefixCls, token }) => {
 			}
 
 			&:hover {
-				background-color: ${token.magicColorScales.grey[0]};
+				background-color: ${token.delightfulColorScales.grey[0]};
 			}
 		`,
 		longImage: css`

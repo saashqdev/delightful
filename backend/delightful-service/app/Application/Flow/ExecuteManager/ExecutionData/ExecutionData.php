@@ -140,7 +140,7 @@ class ExecutionData
 
     private string $uniqueParentId = '';
 
-    private ?DelightfulFlowEntity $magicFlowEntity = null;
+    private ?DelightfulFlowEntity $delightfulFlowEntity = null;
 
     /**
      * 当前 agent 的指令配置列表.
@@ -636,12 +636,12 @@ class ExecutionData
 
     public function getDelightfulFlowEntity(): ?DelightfulFlowEntity
     {
-        return $this->magicFlowEntity;
+        return $this->delightfulFlowEntity;
     }
 
-    public function setDelightfulFlowEntity(?DelightfulFlowEntity $magicFlowEntity): void
+    public function setDelightfulFlowEntity(?DelightfulFlowEntity $delightfulFlowEntity): void
     {
-        $this->magicFlowEntity = $magicFlowEntity;
+        $this->delightfulFlowEntity = $delightfulFlowEntity;
     }
 
     public function isThirdPlatformChat(): bool

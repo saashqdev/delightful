@@ -13,7 +13,7 @@ const useStyles = createStyles(({ css, token }) => ({
 		margin-bottom: 37px;
 	`,
 	welcome: css`
-		color: ${token.magicColorUsages.text[0]};
+		color: ${token.delightfulColorUsages.text[0]};
 		font-size: 20px;
 		font-weight: 600;
 		line-height: 28px;

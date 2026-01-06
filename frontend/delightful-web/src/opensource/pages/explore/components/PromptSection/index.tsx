@@ -25,23 +25,23 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		header: css`
 			padding: 12px 12px 0 0 !important;
 			border-bottom: 0 !important;
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
 			font-size: 18px !important;
 		`,
 		title: css`
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
 			font-size: 18px;
 			font-weight: 600;
 		`,
 		desc: css`
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[2]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[2]};
 			font-size: 14px;
 			font-weight: 400;
 		`,
 		more: css`
 			color: ${isDarkMode
-				? token.magicColorUsages.white
-				: token.magicColorUsages.link.default};
+				? token.delightfulColorUsages.white
+				: token.delightfulColorUsages.link.default};
 			font-weight: 400;
 			font-size: 14px;
 			cursor: pointer;

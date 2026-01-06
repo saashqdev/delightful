@@ -6,9 +6,9 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			width: 100%;
 			min-height: 68px;
 			background-color: ${isDarkMode
-				? token.magicColorUsages.fill[2]
-				: token.magicColorUsages.fill[0]};
-			color: ${isDarkMode ? token.magicColorUsages.text[3] : token.magicColorUsages.text[2]};
+				? token.delightfulColorUsages.fill[2]
+				: token.delightfulColorUsages.fill[0]};
+			color: ${isDarkMode ? token.delightfulColorUsages.text[3] : token.delightfulColorUsages.text[2]};
 			border-radius: 12px;
 			padding: 12px;
 			font-size: 12px;
@@ -22,7 +22,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			font-size: 14px;
 			font-weight: 600;
 			overflow: hidden;
-			color: ${isDarkMode ? token.magicColorScales.grey[3] : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorUsages.text[1]};
 			display: -webkit-box;
 			-webkit-box-orient: vertical;
 			-webkit-line-clamp: 1;
@@ -30,8 +30,8 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		`,
 		require: css`
 			color: ${isDarkMode
-				? token.magicColorScales.orange[1]
-				: token.magicColorScales.orange[5]};
+				? token.delightfulColorScales.orange[1]
+				: token.delightfulColorScales.orange[5]};
 		`,
 		moreOperations: css`
 			cursor: pointer;

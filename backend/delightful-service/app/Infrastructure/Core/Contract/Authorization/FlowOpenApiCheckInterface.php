@@ -12,5 +12,5 @@ use App\Interfaces\Flow\DTO\DelightfulFlowApiChatDTO;
 
 interface FlowOpenApiCheckInterface
 {
-    public function handle(DelightfulFlowApiChatDTO $magicFlowApiChatDTO): DelightfulUserAuthorization;
+    public function handle(DelightfulFlowApiChatDTO $delightfulFlowApiChatDTO): DelightfulUserAuthorization;
 }

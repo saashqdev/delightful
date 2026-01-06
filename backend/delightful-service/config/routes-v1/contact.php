@@ -48,8 +48,8 @@ Router::addGroup('/api/v1/contact', static function () {
             Router::post('/queries', [DelightfulUserSettingApi::class, 'queries']);
 
             // 超级麦吉话题模型配置
-            Router::put('/super-magic/topic-model/{topicId}', [DelightfulUserSettingApi::class, 'saveProjectTopicModelConfig']);
-            Router::get('/super-magic/topic-model/{topicId}', [DelightfulUserSettingApi::class, 'getProjectTopicModelConfig']);
+            Router::put('/super-delightful/topic-model/{topicId}', [DelightfulUserSettingApi::class, 'saveProjectTopicModelConfig']);
+            Router::get('/super-delightful/topic-model/{topicId}', [DelightfulUserSettingApi::class, 'getProjectTopicModelConfig']);
         });
     });
 

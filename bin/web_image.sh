@@ -9,13 +9,13 @@ TAG=${2}
 CHECK=${!#}
 
 
-export WEB_IMAGE="dtyq/magic-web"
+export WEB_IMAGE="dtyq/delightful-web"
 export REGISTRY="ghcr.io"
 
 # Get the absolute path to the script directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Get the absolute path to the web directory
-SERVICE_DIR="$(cd "${SCRIPT_DIR}/../frontend/magic-web" && pwd)"
+SERVICE_DIR="$(cd "${SCRIPT_DIR}/../frontend/delightful-web" && pwd)"
 
 function publish() {
     echo "Publishing "$TAG" ..."
@@ -82,7 +82,7 @@ if [[ ${TASK} == "build" ]]; then
     export DOCKER_BUILDKIT=1
 
     echo "Building image: ${REGISTRY}/${WEB_IMAGE}:${TAG}"
-    docker build -t ${REGISTRY}"/"${WEB_IMAGE}":"${TAG} -f ./frontend/magic-web/Dockerfile.web ./frontend/magic-web
+    docker build -t ${REGISTRY}"/"${WEB_IMAGE}":"${TAG} -f ./frontend/delightful-web/Dockerfile.web ./frontend/delightful-web
 fi
 
 if [[ ${TASK} == "publish" ]]; then

@@ -26,7 +26,7 @@ trait DelightfulCacheTrait
     {
         if (! self::$propertyCacheDriver instanceof DriverInterface) {
             self::$propertyCacheDriver = new MemoryDriver(ApplicationContext::getContainer(), [
-                'prefix' => 'magic-field-camelize:',
+                'prefix' => 'delightful-field-camelize:',
                 'skip_cache_results' => [null, '', []],
                 // 128M
                 'size' => 128 * 1024 * 1024,

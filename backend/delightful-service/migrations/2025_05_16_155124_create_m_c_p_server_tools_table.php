@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_mcp_server_tools', function (Blueprint $table) {
+        Schema::create('delightful_mcp_server_tools', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code', 32)->comment('组织编码');
             $table->string('mcp_server_code', 80)->comment('关联的 mcp 服务 code')->index();
@@ -39,6 +39,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_mcp_server_tools');
+        Schema::dropIfExists('delightful_mcp_server_tools');
     }
 };

@@ -1,5 +1,5 @@
 import type { Container } from "@/opensource/services/ServiceContainer"
-import magicClient from "../magic"
+import delightfulClient from "../delightful"
 import {
 	generateInvalidOrgResInterceptor,
 	generateUnauthorizedResInterceptor,
@@ -7,9 +7,9 @@ import {
 } from "./interceptor"
 
 export function initialApi(service: Container) {
-	magicClient.addResponseInterceptor(generateUnauthorizedResInterceptor(service))
-	magicClient.addResponseInterceptor(generateInvalidOrgResInterceptor(service))
-	magicClient.addResponseInterceptor(generateSuccessResInterceptor())
+	delightfulClient.addResponseInterceptor(generateUnauthorizedResInterceptor(service))
+	delightfulClient.addResponseInterceptor(generateInvalidOrgResInterceptor(service))
+	delightfulClient.addResponseInterceptor(generateSuccessResInterceptor())
 }
 
 export {

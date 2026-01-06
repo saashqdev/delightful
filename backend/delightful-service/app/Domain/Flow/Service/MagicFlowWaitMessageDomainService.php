@@ -16,7 +16,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 class DelightfulFlowWaitMessageDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly DelightfulFlowWaitMessageRepositoryInterface $magicFlowWaitMessageRepository,
+        private readonly DelightfulFlowWaitMessageRepositoryInterface $delightfulFlowWaitMessageRepository,
     ) {
     }
 
@@ -32,12 +32,12 @@ class DelightfulFlowWaitMessageDomainService extends AbstractDomainService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'unsupported update');
         }
 
-        return $this->magicFlowWaitMessageRepository->save($waitMessageEntity);
+        return $this->delightfulFlowWaitMessageRepository->save($waitMessageEntity);
     }
 
     public function handled(FlowDataIsolation $dataIsolation, int $id): void
     {
-        $this->magicFlowWaitMessageRepository->handled($dataIsolation, $id);
+        $this->delightfulFlowWaitMessageRepository->handled($dataIsolation, $id);
     }
 
     public function getLastWaitMessage(FlowDataIsolation $dataIsolation, string $conversationId, string $flowCode, string $flowVersion): ?DelightfulFlowWaitMessageEntity
@@ -55,7 +55,7 @@ class DelightfulFlowWaitMessageDomainService extends AbstractDomainService
             if ($isTimeout || $isVersionChanged) {
                 $this->handled($dataIsolation, $waitMessage->getId());
             } else {
-                return $this->magicFlowWaitMessageRepository->find($dataIsolation, $waitMessage->getId());
+                return $this->delightfulFlowWaitMessageRepository->find($dataIsolation, $waitMessage->getId());
             }
         }
         return null;
@@ -66,6 +66,6 @@ class DelightfulFlowWaitMessageDomainService extends AbstractDomainService
      */
     public function listByUnhandledConversationId(FlowDataIsolation $dataIsolation, string $conversationId): array
     {
-        return $this->magicFlowWaitMessageRepository->listByUnhandledConversationId($dataIsolation, $conversationId);
+        return $this->delightfulFlowWaitMessageRepository->listByUnhandledConversationId($dataIsolation, $conversationId);
     }
 }

@@ -52,15 +52,15 @@ class DelightfulFlowTriggerTestcaseEntity extends AbstractEntity
         $this->updatedAt = $this->createdAt;
     }
 
-    public function prepareForModification(DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): void
+    public function prepareForModification(DelightfulFlowTriggerTestcaseEntity $delightfulFlowTriggerTestcaseEntity): void
     {
         $this->requiredValidate();
 
-        $magicFlowTriggerTestcaseEntity->setName($this->name);
-        $magicFlowTriggerTestcaseEntity->setDescription($this->description);
-        $magicFlowTriggerTestcaseEntity->setCaseConfig($this->caseConfig);
-        $magicFlowTriggerTestcaseEntity->setModifier($this->creator);
-        $magicFlowTriggerTestcaseEntity->setUpdatedAt($this->createdAt);
+        $delightfulFlowTriggerTestcaseEntity->setName($this->name);
+        $delightfulFlowTriggerTestcaseEntity->setDescription($this->description);
+        $delightfulFlowTriggerTestcaseEntity->setCaseConfig($this->caseConfig);
+        $delightfulFlowTriggerTestcaseEntity->setModifier($this->creator);
+        $delightfulFlowTriggerTestcaseEntity->setUpdatedAt($this->createdAt);
     }
 
     public function getId(): ?int

@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_attachments')) {
+        if (Schema::hasTable('delightful_attachments')) {
             return;
         }
-        Schema::create('magic_attachments', function (Blueprint $table) {
+        Schema::create('delightful_attachments', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
             $table->unsignedBigInteger('target_id');
             $table->unsignedTinyInteger('target_type')->comment('0-未知1-待办');

@@ -6,7 +6,7 @@ export type DelightfulSwitchProps = SwitchProps
 function DelightfulSwitch({ className, ...props }: DelightfulSwitchProps) {
 	const { styles, cx } = useStyles()
 
-	return <Switch className={cx(styles.magicSwitch, className)} {...props} />
+	return <Switch className={cx(styles.delightfulSwitch, className)} {...props} />
 }
 
 export default DelightfulSwitch

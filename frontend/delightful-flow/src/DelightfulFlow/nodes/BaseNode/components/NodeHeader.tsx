@@ -72,7 +72,7 @@ const NodeHeader = memo(
 						>
 							<Tooltip
 								title={i18next.t("flow.changeNodeType", {
-									ns: "magicFlow",
+									ns: "delightfulFlow",
 								})}
 							>
 								<IconChevronDown
@@ -102,8 +102,8 @@ const NodeHeader = memo(
 						<Tooltip
 							title={
 								isDebug
-									? i18next.t("flow.disableDebug", { ns: "magicFlow" })
-									: i18next.t("flow.enableDebug", { ns: "magicFlow" })
+									? i18next.t("flow.disableDebug", { ns: "delightfulFlow" })
+									: i18next.t("flow.enableDebug", { ns: "delightfulFlow" })
 							}
 						>
 							<IconBugFilled

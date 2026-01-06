@@ -13,7 +13,7 @@ use App\Domain\Token\Entity\ValueObject\DelightfulTokenType;
 interface DelightfulTokenRepositoryInterface
 {
     /**
-     * Retrieve the entity related to a token (for example, which magic_id a token belongs to).
+     * Retrieve the entity related to a token (for example, which delightful_id a token belongs to).
      */
     public function getTokenEntity(DelightfulTokenEntity $tokenDTO): ?DelightfulTokenEntity;
 

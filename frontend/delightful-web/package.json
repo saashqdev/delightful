@@ -1,5 +1,5 @@
 {
-	"name": "magic",
+	"name": "delightful",
 	"version": "1.0.0",
 	"private": true,
 	"license": "Apache License 2.0",
@@ -8,7 +8,7 @@
 		"build": "export NODE_OPTIONS=--max-old-space-size=8192 && vite build",
 		"coverage": "vitest run --coverage",
 		"dev": "vite",
-		"dev:flow": "concurrently \"cd ../magic-flow && npm run build:watch\" \"vite\"",
+		"dev:flow": "concurrently \"cd ../delightful-flow && npm run build:watch\" \"vite\"",
 		"lint": "tsc && eslint ./src --ext ts,tsx --format stylish --report-unused-disable-directives",
 		"lint:fix": "eslint ./src --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
 		"preview": "vite preview",

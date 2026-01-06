@@ -44,10 +44,10 @@ class DelightfulAISearchToolAppService extends AbstractAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        private readonly DelightfulLLMDomainService $magicLLMDomainService,
+        private readonly DelightfulLLMDomainService $delightfulLLMDomainService,
         private readonly IdGeneratorInterface $idGenerator,
-        protected readonly DelightfulUserDomainService $magicUserDomainService,
-        protected readonly DelightfulChatDomainService $magicChatDomainService,
+        protected readonly DelightfulUserDomainService $delightfulUserDomainService,
+        protected readonly DelightfulChatDomainService $delightfulChatDomainService,
         protected readonly Redis $redis
     ) {
         $this->logger = di()->get(LoggerFactory::class)->get('aggregate_ai_search_card_v2');
@@ -104,9 +104,9 @@ class DelightfulAISearchToolAppService extends AbstractAppService
             ->setGenerateSearchKeywords(true);
 
         // Deconstruct sub-questions based on the user's context. Need to understand what the user wants to ask, then deconstruct search keywords.
-        $searchKeywords = $this->magicLLMDomainService->generateSearchKeywordsByUserInput($dto, $modelInterface);
+        $searchKeywords = $this->delightfulLLMDomainService->generateSearchKeywordsByUserInput($dto, $modelInterface);
         $queryVo->setSearchKeywords($searchKeywords);
-        $searchDetailItems = $this->magicLLMDomainService->getSearchResults($queryVo)['search'] ?? [];
+        $searchDetailItems = $this->delightfulLLMDomainService->getSearchResults($queryVo)['search'] ?? [];
         $this->logger->info(sprintf(
             'getSearchResults searchUserQuestion: Deconstructing keywords from user input and searching. End timing, took %s seconds',
             microtime(true) - $start
@@ -123,7 +123,7 @@ class DelightfulAISearchToolAppService extends AbstractAppService
         $start = microtime(true);
         $relatedQuestions = [];
         try {
-            $relatedQuestions = $this->magicLLMDomainService->getRelatedQuestions($queryVo, 3, 5);
+            $relatedQuestions = $this->delightfulLLMDomainService->getRelatedQuestions($queryVo, 3, 5);
         } catch (Throwable $exception) {
             $this->logSearchError($exception, 'generateAndSendAssociateQuestionsError');
         }
@@ -153,7 +153,7 @@ class DelightfulAISearchToolAppService extends AbstractAppService
             ->setSearchKeywords($searchKeywords)
             ->setSearchEngine($dto->getSearchEngine())
             ->setLanguage($dto->getLanguage());
-        $allSearchContexts = $this->magicLLMDomainService->getSearchResults($searchQueryVo)['search'] ?? [];
+        $allSearchContexts = $this->delightfulLLMDomainService->getSearchResults($searchQueryVo)['search'] ?? [];
 
         // Limit to a maximum of 50 results
         if (count($allSearchContexts) > 50) {
@@ -203,7 +203,7 @@ class DelightfulAISearchToolAppService extends AbstractAppService
         $queryVo->setModel($modelInterface);
 
         // Use non-streaming summarization method
-        $summarizeStreamResponse = $this->magicLLMDomainService->summarizeNonStreaming($queryVo);
+        $summarizeStreamResponse = $this->delightfulLLMDomainService->summarizeNonStreaming($queryVo);
 
         $this->logger->info(sprintf('getSearchResults generateSummary: Generated summary. End timing, took: %s seconds', microtime(true) - $start));
 
@@ -273,7 +273,7 @@ class DelightfulAISearchToolAppService extends AbstractAppService
 
     protected function getUserInfo(string $senderUserId): ?DelightfulUserEntity
     {
-        return $this->magicUserDomainService->getUserById($senderUserId);
+        return $this->delightfulUserDomainService->getUserById($senderUserId);
     }
 
     /**

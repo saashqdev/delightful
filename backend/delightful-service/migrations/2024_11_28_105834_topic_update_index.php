@@ -14,9 +14,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_chat_topics', function (Blueprint $table) {
-            Schema::hasIndex('magic_chat_topics', 'idx_conversation_id') && $table->dropIndex('idx_conversation_id');
-            Schema::hasIndex('magic_chat_topics', 'idx_topic_id') && $table->dropIndex('idx_topic_id');
+        Schema::table('delightful_chat_topics', function (Blueprint $table) {
+            Schema::hasIndex('delightful_chat_topics', 'idx_conversation_id') && $table->dropIndex('idx_conversation_id');
+            Schema::hasIndex('delightful_chat_topics', 'idx_topic_id') && $table->dropIndex('idx_topic_id');
             $table->index(['conversation_id', 'topic_id'], 'idx_conversation_topic');
         });
     }

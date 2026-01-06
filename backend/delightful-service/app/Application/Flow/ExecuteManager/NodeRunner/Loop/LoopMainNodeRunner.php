@@ -42,9 +42,9 @@ class LoopMainNodeRunner extends NodeRunner
         if (empty($bodyId)) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.relation_id_empty');
         }
-        $magicFlow = ExecutionFlowCollector::getOrCreate($executionData->getUniqueId(), $executionData->getDelightfulFlowEntity());
+        $delightfulFlow = ExecutionFlowCollector::getOrCreate($executionData->getUniqueId(), $executionData->getDelightfulFlowEntity());
 
-        $loopFlow = $this->createLoopFlow($bodyId, $magicFlow);
+        $loopFlow = $this->createLoopFlow($bodyId, $delightfulFlow);
         if (! $loopFlow) {
             return;
         }
@@ -129,22 +129,22 @@ class LoopMainNodeRunner extends NodeRunner
         }
     }
 
-    private function createLoopFlow(string $bodyId, DelightfulFlowEntity $magicFlow): ?DelightfulFlowEntity
+    private function createLoopFlow(string $bodyId, DelightfulFlowEntity $delightfulFlow): ?DelightfulFlowEntity
     {
-        $loopDelightfulFlow = clone $magicFlow;
+        $loopDelightfulFlow = clone $delightfulFlow;
 
         // 做区分
-        $loopDelightfulFlow->setCode($magicFlow->getCode() . '_loop');
+        $loopDelightfulFlow->setCode($delightfulFlow->getCode() . '_loop');
         $loopDelightfulFlow->setType(Type::Loop);
 
         // 循环体节点
-        $bodyNode = $magicFlow->getNodeById($bodyId);
+        $bodyNode = $delightfulFlow->getNodeById($bodyId);
         if (! $bodyNode) {
             return null;
         }
 
         // 获取所有 父 id 是这个循环体的节点
-        $childNodes = $magicFlow->getNodesByParentId($bodyId);
+        $childNodes = $delightfulFlow->getNodesByParentId($bodyId);
         if (empty($childNodes)) {
             return null;
         }

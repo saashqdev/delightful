@@ -17,7 +17,7 @@ class DelightfulDepartmentUserEntity extends AbstractEntity implements ArrayAcce
 {
     protected string $id = '';
 
-    protected string $magicId = '';
+    protected string $delightfulId = '';
 
     protected string $userId = '';
 
@@ -68,15 +68,15 @@ class DelightfulDepartmentUserEntity extends AbstractEntity implements ArrayAcce
 
     public function getDelightfulId(): string
     {
-        return $this->magicId;
+        return $this->delightfulId;
     }
 
-    public function setDelightfulId(int|string $magicId): void
+    public function setDelightfulId(int|string $delightfulId): void
     {
-        if (is_int($magicId)) {
-            $magicId = (string) $magicId;
+        if (is_int($delightfulId)) {
+            $delightfulId = (string) $delightfulId;
         }
-        $this->magicId = $magicId;
+        $this->delightfulId = $delightfulId;
     }
 
     public function getUserId(): string

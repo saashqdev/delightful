@@ -9,8 +9,8 @@ export function isInApp(): boolean {
 	// 检查特定的APP标识符
 	// 这里可以根据实际的APP标识来调整
 	const appIdentifiers = [
-		"magic-android", // Android App标识
-		"magic-ios", // iOS App标识
+		"delightful-android", // Android App标识
+		"delightful-ios", // iOS App标识
 		// 添加其他可能的APP标识
 	]
 

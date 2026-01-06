@@ -29,7 +29,7 @@ export const generateAuthApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * @description 登录后需要将 授权码 + authorization 在 magic service 进行绑定
+	 * @description 登录后需要将 授权码 + authorization 在 delightful service 进行绑定
 	 * @param {string} authorization 用户token
 	 * @param {string} authCode 登录授权码（私有化部署就有用，非私有化传空字符串）
 	 * @param {string} thirdPlatformOrganizationCode 第一次创建组织时，返回的 第三方平台组织code，后端同步用户账号信息

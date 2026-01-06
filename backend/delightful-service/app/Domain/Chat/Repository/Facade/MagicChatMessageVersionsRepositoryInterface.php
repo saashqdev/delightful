@@ -16,5 +16,5 @@ interface DelightfulChatMessageVersionsRepositoryInterface
     /**
      * @return DelightfulMessageVersionEntity[]
      */
-    public function getMessageVersions(string $magicMessageId): array;
+    public function getMessageVersions(string $delightfulMessageId): array;
 }

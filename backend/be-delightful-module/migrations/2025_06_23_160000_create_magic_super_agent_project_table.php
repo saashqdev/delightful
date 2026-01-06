@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_super_agent_project', function (Blueprint $table) {
+        Schema::create('delightful_super_agent_project', function (Blueprint $table) {
             $table->bigInteger('id')->primary()->comment('Project ID');
             $table->string('user_id', 36)->index()->comment('User ID');
             $table->string('user_organization_code', 64)->index()->comment('User organization code');
@@ -43,6 +43,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_super_agent_project');
+        Schema::dropIfExists('delightful_super_agent_project');
     }
 };

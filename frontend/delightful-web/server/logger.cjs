@@ -3,7 +3,7 @@ const morgan = require("morgan")
 
 // 创建Bunyan日志记录器
 const logger = bunyan.createLogger({
-	name: "magic-web",
+	name: "delightful-web",
 	streams: [
 		// 输出到文件
 		{ level: "info", path: "./error.log" },

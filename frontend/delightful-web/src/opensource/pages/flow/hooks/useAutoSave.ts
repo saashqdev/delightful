@@ -56,7 +56,7 @@ export default function useAutoSave({ flowInstance, isAgent, initDraftList }: Us
 				ns: "flow",
 			})}${getCurrentDateTimeString()}`,
 			description: "",
-			magic_flow: {
+			delightful_flow: {
 				...shadowedFlow,
 				// @ts-ignore
 				global_variable: latestFlow?.global_variable,

@@ -6,10 +6,10 @@ const useStyles = createStyles(({ css }) => {
 			.dropdown-card {
 				margin: 0 12px;
 			}
-			.magic-form-item {
+			.delightful-form-item {
 				margin-bottom: 0;
 			}
-			.magic-form-item-label {
+			.delightful-form-item-label {
 				padding-bottom: 6px !important;
 				& > label {
 					font-size: 12px;
@@ -25,12 +25,12 @@ const useStyles = createStyles(({ css }) => {
 			margin: 12px;
 			height: 20px;
 			line-height: 1;
-			.magic-form-item-control-input-content {
+			.delightful-form-item-control-input-content {
 				height: 16px;
 				display: flex;
 				align-items: center;
 			}
-			.magic-form-item-control-input {
+			.delightful-form-item-control-input {
 				height: 16px;
 				min-height: 16px;
 				display: flex;

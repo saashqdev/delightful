@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_task', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_task', function (Blueprint $table) {
             $table->text('prompt')->comment('user's question')->change();
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_task', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_task', function (Blueprint $table) {
             $table->string('prompt', 5000)->comment('user's question')->change();
         });
     }

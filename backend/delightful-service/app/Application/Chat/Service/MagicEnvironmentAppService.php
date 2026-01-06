@@ -13,7 +13,7 @@ use App\Domain\OrganizationEnvironment\Service\DelightfulOrganizationEnvDomainSe
 class DelightfulEnvironmentAppService extends AbstractAppService
 {
     public function __construct(
-        protected DelightfulOrganizationEnvDomainService $magicOrganizationEnvDomainService,
+        protected DelightfulOrganizationEnvDomainService $delightfulOrganizationEnvDomainService,
     ) {
     }
 
@@ -23,20 +23,20 @@ class DelightfulEnvironmentAppService extends AbstractAppService
     public function getDelightfulEnvironments(array $ids): array
     {
         if (empty($ids)) {
-            return $this->magicOrganizationEnvDomainService->getEnvironmentEntities();
+            return $this->delightfulOrganizationEnvDomainService->getEnvironmentEntities();
         }
-        return $this->magicOrganizationEnvDomainService->getEnvironmentEntitiesByIds($ids);
+        return $this->delightfulOrganizationEnvDomainService->getEnvironmentEntitiesByIds($ids);
     }
 
     // 创建环境
     public function createDelightfulEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {
-        return $this->magicOrganizationEnvDomainService->createEnvironment($environmentDTO);
+        return $this->delightfulOrganizationEnvDomainService->createEnvironment($environmentDTO);
     }
 
     // 更新环境
     public function updateDelightfulEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {
-        return $this->magicOrganizationEnvDomainService->updateEnvironment($environmentDTO);
+        return $this->delightfulOrganizationEnvDomainService->updateEnvironment($environmentDTO);
     }
 }

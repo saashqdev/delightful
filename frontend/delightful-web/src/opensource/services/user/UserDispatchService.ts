@@ -12,14 +12,14 @@ const UserDispatchService = {
 	 */
 	switchOrganization: async (data: {
 		userInfo: User.UserInfo
-		magicOrganizationCode: string
+		delightfulOrganizationCode: string
 	}) => {
 		const oldUserInfo = cloneDeep(userStore.user.userInfo)
 		const oldDelightfulOrganizationCode = userStore.user.organizationCode
 
 		try {
 			userService.setUserInfo(data.userInfo)
-			userService.setDelightfulOrganizationCode(data.magicOrganizationCode)
+			userService.setDelightfulOrganizationCode(data.delightfulOrganizationCode)
 			await userService.loadUserInfo(data.userInfo, { showSwitchLoading: true })
 		} catch (err) {
 			// 切换失败，恢复当前组织
@@ -33,11 +33,11 @@ const UserDispatchService = {
 	 * @param data
 	 */
 	switchAccount: async (data: {
-		magicId: string
-		magicUserId: string
-		magicOrganizationCode: string
+		delightfulId: string
+		delightfulUserId: string
+		delightfulOrganizationCode: string
 	}) => {
-		await userService.switchAccount(data.magicId, data.magicUserId, data.magicOrganizationCode)
+		await userService.switchAccount(data.delightfulId, data.delightfulUserId, data.delightfulOrganizationCode)
 	},
 
 	/**
@@ -61,8 +61,8 @@ const UserDispatchService = {
 			userStore.account.setAccount(data.userAccount)
 
 			await userService.switchAccount(
-				data.userAccount.magic_id,
-				data.userAccount.magic_user_id,
+				data.userAccount.delightful_id,
+				data.userAccount.delightful_user_id,
 				data.userAccount.organizationCode,
 			)
 		}
@@ -72,8 +72,8 @@ const UserDispatchService = {
 	 * @description 删除账号
 	 * @param data
 	 */
-	deleteAccount: async (data: { magicId?: string; navigateToLogin?: boolean }) => {
-		userService.deleteAccount(data.magicId)
+	deleteAccount: async (data: { delightfulId?: string; navigateToLogin?: boolean }) => {
+		userService.deleteAccount(data.delightfulId)
 		if (data.navigateToLogin) {
 			window.location.assign(RoutePath.Login)
 		}

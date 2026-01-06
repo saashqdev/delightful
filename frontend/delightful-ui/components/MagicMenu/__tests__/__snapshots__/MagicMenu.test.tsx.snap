@@ -3,33 +3,33 @@
 exports[`DelightfulMenu > 快照测试 > 垂直菜单快照 1`] = `
 <DocumentFragment>
   <ul
-    class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rk magic-menu-css-var"
+    class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rk delightful-menu-css-var"
     data-menu-list="true"
     role="menu"
     tabindex="0"
   >
     <li
       aria-describedby="test-id"
-      class="magic-menu-item magic-menu-item-only-child"
+      class="delightful-menu-item delightful-menu-item-only-child"
       data-menu-id="rc-menu-uuid-test-1"
       role="menuitem"
       tabindex="-1"
     >
       <span
-        class="magic-menu-title-content"
+        class="delightful-menu-title-content"
       >
         菜单项1
       </span>
     </li>
     <li
       aria-describedby="test-id"
-      class="magic-menu-item magic-menu-item-only-child"
+      class="delightful-menu-item delightful-menu-item-only-child"
       data-menu-id="rc-menu-uuid-test-2"
       role="menuitem"
       tabindex="-1"
     >
       <span
-        class="magic-menu-title-content"
+        class="delightful-menu-title-content"
       >
         菜单项2
       </span>
@@ -45,33 +45,33 @@ exports[`DelightfulMenu > 快照测试 > 垂直菜单快照 1`] = `
 exports[`DelightfulMenu > 快照测试 > 基础菜单快照 1`] = `
 <DocumentFragment>
   <ul
-    class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-r3 magic-menu-css-var"
+    class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-r3 delightful-menu-css-var"
     data-menu-list="true"
     role="menu"
     tabindex="0"
   >
     <li
       aria-describedby="test-id"
-      class="magic-menu-item magic-menu-item-only-child"
+      class="delightful-menu-item delightful-menu-item-only-child"
       data-menu-id="rc-menu-uuid-test-1"
       role="menuitem"
       tabindex="-1"
     >
       <span
-        class="magic-menu-title-content"
+        class="delightful-menu-title-content"
       >
         菜单项1
       </span>
     </li>
     <li
       aria-describedby="test-id"
-      class="magic-menu-item magic-menu-item-only-child"
+      class="delightful-menu-item delightful-menu-item-only-child"
       data-menu-id="rc-menu-uuid-test-2"
       role="menuitem"
       tabindex="-1"
     >
       <span
-        class="magic-menu-title-content"
+        class="delightful-menu-title-content"
       >
         菜单项2
       </span>
@@ -87,43 +87,43 @@ exports[`DelightfulMenu > 快照测试 > 基础菜单快照 1`] = `
 exports[`DelightfulMenu > 快照测试 > 带图标菜单快照 1`] = `
 <DocumentFragment>
   <ul
-    class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-r8 magic-menu-css-var"
+    class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-r8 delightful-menu-css-var"
     data-menu-list="true"
     role="menu"
     tabindex="0"
   >
     <li
       aria-describedby="test-id"
-      class="magic-menu-item"
+      class="delightful-menu-item"
       data-menu-id="rc-menu-uuid-test-1"
       role="menuitem"
       tabindex="-1"
     >
       <span
-        class="magic-menu-item-icon"
+        class="delightful-menu-item-icon"
       >
         🏠
       </span>
       <span
-        class="magic-menu-title-content"
+        class="delightful-menu-title-content"
       >
         菜单项1
       </span>
     </li>
     <li
       aria-describedby="test-id"
-      class="magic-menu-item"
+      class="delightful-menu-item"
       data-menu-id="rc-menu-uuid-test-2"
       role="menuitem"
       tabindex="-1"
     >
       <span
-        class="magic-menu-item-icon"
+        class="delightful-menu-item-icon"
       >
         ⚙️
       </span>
       <span
-        class="magic-menu-title-content"
+        class="delightful-menu-title-content"
       >
         菜单项2
       </span>
@@ -139,31 +139,31 @@ exports[`DelightfulMenu > 快照测试 > 带图标菜单快照 1`] = `
 exports[`DelightfulMenu > 快照测试 > 带子菜单快照 1`] = `
 <DocumentFragment>
   <ul
-    class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rd magic-menu-css-var"
+    class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rd delightful-menu-css-var"
     data-menu-list="true"
     role="menu"
     tabindex="0"
   >
     <li
-      class="magic-menu-submenu magic-menu-submenu-vertical"
+      class="delightful-menu-submenu delightful-menu-submenu-vertical"
       role="none"
     >
       <div
         aria-controls="rc-menu-uuid-test-1-popup"
         aria-expanded="false"
         aria-haspopup="true"
-        class="magic-menu-submenu-title"
+        class="delightful-menu-submenu-title"
         data-menu-id="rc-menu-uuid-test-1"
         role="menuitem"
         tabindex="-1"
       >
         <span
-          class="magic-menu-title-content"
+          class="delightful-menu-title-content"
         >
           父菜单
         </span>
         <i
-          class="magic-menu-submenu-arrow"
+          class="delightful-menu-submenu-arrow"
         />
       </div>
     </li>
@@ -178,33 +178,33 @@ exports[`DelightfulMenu > 快照测试 > 带子菜单快照 1`] = `
 exports[`DelightfulMenu > 快照测试 > 带类名菜单快照 1`] = `
 <DocumentFragment>
   <ul
-    class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk custom-menu acss-1691gak css-dev-only-do-not-override-yotw4n css-var-ru magic-menu-css-var"
+    class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk custom-menu acss-1691gak css-dev-only-do-not-override-yotw4n css-var-ru delightful-menu-css-var"
     data-menu-list="true"
     role="menu"
     tabindex="0"
   >
     <li
       aria-describedby="test-id"
-      class="magic-menu-item magic-menu-item-only-child"
+      class="delightful-menu-item delightful-menu-item-only-child"
       data-menu-id="rc-menu-uuid-test-1"
       role="menuitem"
       tabindex="-1"
     >
       <span
-        class="magic-menu-title-content"
+        class="delightful-menu-title-content"
       >
         菜单项1
       </span>
     </li>
     <li
       aria-describedby="test-id"
-      class="magic-menu-item magic-menu-item-only-child"
+      class="delightful-menu-item delightful-menu-item-only-child"
       data-menu-id="rc-menu-uuid-test-2"
       role="menuitem"
       tabindex="-1"
     >
       <span
-        class="magic-menu-title-content"
+        class="delightful-menu-title-content"
       >
         菜单项2
       </span>
@@ -220,7 +220,7 @@ exports[`DelightfulMenu > 快照测试 > 带类名菜单快照 1`] = `
 exports[`DelightfulMenu > 快照测试 > 带自定义样式菜单快照 1`] = `
 <DocumentFragment>
   <ul
-    class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rp magic-menu-css-var"
+    class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rp delightful-menu-css-var"
     data-menu-list="true"
     role="menu"
     style="width: 200px;"
@@ -228,26 +228,26 @@ exports[`DelightfulMenu > 快照测试 > 带自定义样式菜单快照 1`] = `
   >
     <li
       aria-describedby="test-id"
-      class="magic-menu-item magic-menu-item-only-child"
+      class="delightful-menu-item delightful-menu-item-only-child"
       data-menu-id="rc-menu-uuid-test-1"
       role="menuitem"
       tabindex="-1"
     >
       <span
-        class="magic-menu-title-content"
+        class="delightful-menu-title-content"
       >
         菜单项1
       </span>
     </li>
     <li
       aria-describedby="test-id"
-      class="magic-menu-item magic-menu-item-only-child"
+      class="delightful-menu-item delightful-menu-item-only-child"
       data-menu-id="rc-menu-uuid-test-2"
       role="menuitem"
       tabindex="-1"
     >
       <span
-        class="magic-menu-title-content"
+        class="delightful-menu-title-content"
       >
         菜单项2
       </span>
@@ -263,33 +263,33 @@ exports[`DelightfulMenu > 快照测试 > 带自定义样式菜单快照 1`] = `
 exports[`DelightfulMenu > 快照测试 > 选中状态菜单快照 1`] = `
 <DocumentFragment>
   <ul
-    class="magic-menu magic-menu-root magic-menu-vertical magic-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rf magic-menu-css-var"
+    class="delightful-menu delightful-menu-root delightful-menu-vertical delightful-menu-light acss-sgfakk acss-1691gak css-dev-only-do-not-override-yotw4n css-var-rf delightful-menu-css-var"
     data-menu-list="true"
     role="menu"
     tabindex="0"
   >
     <li
       aria-describedby="test-id"
-      class="magic-menu-item magic-menu-item-selected magic-menu-item-only-child"
+      class="delightful-menu-item delightful-menu-item-selected delightful-menu-item-only-child"
       data-menu-id="rc-menu-uuid-test-1"
       role="menuitem"
       tabindex="-1"
     >
       <span
-        class="magic-menu-title-content"
+        class="delightful-menu-title-content"
       >
         菜单项1
       </span>
     </li>
     <li
       aria-describedby="test-id"
-      class="magic-menu-item magic-menu-item-only-child"
+      class="delightful-menu-item delightful-menu-item-only-child"
       data-menu-id="rc-menu-uuid-test-2"
       role="menuitem"
       tabindex="-1"
     >
       <span
-        class="magic-menu-title-content"
+        class="delightful-menu-title-content"
       >
         菜单项2
       </span>

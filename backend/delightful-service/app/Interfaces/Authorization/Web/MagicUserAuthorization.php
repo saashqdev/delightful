@@ -33,9 +33,9 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected string $id = '';
 
     /**
-     * 用户注册后生成的magic_id,全局唯一
+     * 用户注册后生成的delightful_id,全局唯一
      */
-    protected string $magicId = '';
+    protected string $delightfulId = '';
 
     protected UserType $userType;
 
@@ -70,7 +70,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected array $permissions = [];
 
     // 当前用户所处的环境id
-    protected int $magicEnvId = 0;
+    protected int $delightfulEnvId = 0;
 
     // 第三方平台的原始组织编码
     protected string $thirdPlatformOrganizationCode = '';
@@ -94,28 +94,28 @@ class DelightfulUserAuthorization extends AbstractAuthorization
         }
         $userDomainService = di(DelightfulUserDomainService::class);
         $accountDomainService = di(DelightfulAccountDomainService::class);
-        $magicEnvDomainService = di(DelightfulOrganizationEnvDomainService::class);
+        $delightfulEnvDomainService = di(DelightfulOrganizationEnvDomainService::class);
         $sessionInterface = di(SessionInterface::class);
 
         $superDelightfulAgentUserId = $key['superDelightfulAgentUserId'] ?? '';
         if ($superDelightfulAgentUserId) {
             // 处理超级麦吉的 agent 用户
-            $sandboxToken = config('super-magic.sandbox.token', '');
+            $sandboxToken = config('super-delightful.sandbox.token', '');
             if (empty($sandboxToken) || $sandboxToken !== $authorization) {
                 ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND, 'token error');
             }
-            $magicUserId = $superDelightfulAgentUserId;
-            $magicEnvEntity = null;
+            $delightfulUserId = $superDelightfulAgentUserId;
+            $delightfulEnvEntity = null;
             $loginResponseDTO = null;
             // 直接登录
             goto create_user;
         }
 
         // 多环境下 $authorization 可能重复，会有问题（概率趋近无穷小）
-        $magicEnvEntity = $magicEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
-        if ($magicEnvEntity === null) {
-            $magicEnvEntity = $magicEnvDomainService->getCurrentDefaultDelightfulEnv();
-            if ($magicEnvEntity === null) {
+        $delightfulEnvEntity = $delightfulEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
+        if ($delightfulEnvEntity === null) {
+            $delightfulEnvEntity = $delightfulEnvDomainService->getCurrentDefaultDelightfulEnv();
+            if ($delightfulEnvEntity === null) {
                 // token没有绑定环境，且没有默认环境配置
                 ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
             }
@@ -124,41 +124,41 @@ class DelightfulUserAuthorization extends AbstractAuthorization
         $loginCheckDTO = new LoginCheckDTO();
         $loginCheckDTO->setAuthorization($authorization);
         /** @var LoginResponseDTO[] $currentEnvDelightfulOrganizationUsers */
-        $currentEnvDelightfulOrganizationUsers = $sessionInterface->loginCheck($loginCheckDTO, $magicEnvEntity, $organizationCode);
-        $currentEnvDelightfulOrganizationUsers = array_column($currentEnvDelightfulOrganizationUsers, null, 'magic_organization_code');
+        $currentEnvDelightfulOrganizationUsers = $sessionInterface->loginCheck($loginCheckDTO, $delightfulEnvEntity, $organizationCode);
+        $currentEnvDelightfulOrganizationUsers = array_column($currentEnvDelightfulOrganizationUsers, null, 'delightful_organization_code');
         $loginResponseDTO = $currentEnvDelightfulOrganizationUsers[$organizationCode] ?? null;
         if ($loginResponseDTO === null) {
             ExceptionBuilder::throw(ChatErrorCode::LOGIN_FAILED);
         }
-        $magicUserId = $loginResponseDTO->getDelightfulUserId();
-        if (empty($magicUserId)) {
+        $delightfulUserId = $loginResponseDTO->getDelightfulUserId();
+        if (empty($delightfulUserId)) {
             ExceptionBuilder::throw(ChatErrorCode::LOGIN_FAILED);
         }
 
         create_user:
-        $userEntity = $userDomainService->getUserById($magicUserId);
+        $userEntity = $userDomainService->getUserById($delightfulUserId);
         if ($userEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::LOGIN_FAILED);
         }
-        $magicAccountEntity = $accountDomainService->getAccountInfoByDelightfulId($userEntity->getDelightfulId());
-        if ($magicAccountEntity === null) {
+        $delightfulAccountEntity = $accountDomainService->getAccountInfoByDelightfulId($userEntity->getDelightfulId());
+        if ($delightfulAccountEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::LOGIN_FAILED);
         }
-        $magicUserInfo = new self();
-        $magicUserInfo->setId($userEntity->getUserId());
-        $magicUserInfo->setNickname($userEntity->getNickname());
-        $magicUserInfo->setAvatar($userEntity->getAvatarUrl());
-        $magicUserInfo->setStatus((string) $userEntity->getStatus()->value);
-        $magicUserInfo->setOrganizationCode($userEntity->getOrganizationCode());
-        $magicUserInfo->setDelightfulId($userEntity->getDelightfulId());
-        $magicUserInfo->setDelightfulEnvId($magicEnvEntity?->getId() ?? 0);
-        $magicUserInfo->setMobile($magicAccountEntity->getPhone());
-        $magicUserInfo->setCountryCode($magicAccountEntity->getCountryCode());
-        $magicUserInfo->setRealName($magicAccountEntity->getRealName());
-        $magicUserInfo->setUserType($userEntity->getUserType());
-        $magicUserInfo->setThirdPlatformUserId($loginResponseDTO?->getThirdPlatformUserId() ?? '');
-        $magicUserInfo->setThirdPlatformOrganizationCode($loginResponseDTO?->getThirdPlatformOrganizationCode() ?? '');
-        return $magicUserInfo;
+        $delightfulUserInfo = new self();
+        $delightfulUserInfo->setId($userEntity->getUserId());
+        $delightfulUserInfo->setNickname($userEntity->getNickname());
+        $delightfulUserInfo->setAvatar($userEntity->getAvatarUrl());
+        $delightfulUserInfo->setStatus((string) $userEntity->getStatus()->value);
+        $delightfulUserInfo->setOrganizationCode($userEntity->getOrganizationCode());
+        $delightfulUserInfo->setDelightfulId($userEntity->getDelightfulId());
+        $delightfulUserInfo->setDelightfulEnvId($delightfulEnvEntity?->getId() ?? 0);
+        $delightfulUserInfo->setMobile($delightfulAccountEntity->getPhone());
+        $delightfulUserInfo->setCountryCode($delightfulAccountEntity->getCountryCode());
+        $delightfulUserInfo->setRealName($delightfulAccountEntity->getRealName());
+        $delightfulUserInfo->setUserType($userEntity->getUserType());
+        $delightfulUserInfo->setThirdPlatformUserId($loginResponseDTO?->getThirdPlatformUserId() ?? '');
+        $delightfulUserInfo->setThirdPlatformOrganizationCode($loginResponseDTO?->getThirdPlatformOrganizationCode() ?? '');
+        return $delightfulUserInfo;
     }
 
     public function getUserType(): UserType
@@ -280,22 +280,22 @@ class DelightfulUserAuthorization extends AbstractAuthorization
 
     public function getDelightfulId(): string
     {
-        return $this->magicId;
+        return $this->delightfulId;
     }
 
-    public function setDelightfulId(string $magicId): void
+    public function setDelightfulId(string $delightfulId): void
     {
-        $this->magicId = $magicId;
+        $this->delightfulId = $delightfulId;
     }
 
     public function getDelightfulEnvId(): int
     {
-        return $this->magicEnvId;
+        return $this->delightfulEnvId;
     }
 
-    public function setDelightfulEnvId(int $magicEnvId): void
+    public function setDelightfulEnvId(int $delightfulEnvId): void
     {
-        $this->magicEnvId = $magicEnvId;
+        $this->delightfulEnvId = $delightfulEnvId;
     }
 
     public function getThirdPlatformOrganizationCode(): string

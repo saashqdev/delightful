@@ -15,7 +15,7 @@ class AddCostToDelightfulSuperAgentTopicsTable extends Migration
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_topics', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_topics', function (Blueprint $table) {
             $table->decimal('cost', 10, 4)->default(0.0000)->comment('Topic cost amount')->after('task_mode');
         });
     }
@@ -25,7 +25,7 @@ class AddCostToDelightfulSuperAgentTopicsTable extends Migration
      */
     public function down(): void
     {
-        Schema::table('magic_super_agent_topics', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_topics', function (Blueprint $table) {
             $table->dropColumn('cost');
         });
     }

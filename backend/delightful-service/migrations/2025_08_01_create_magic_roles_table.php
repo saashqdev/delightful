@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_roles')) {
+        if (Schema::hasTable('delightful_roles')) {
             return;
         }
-        Schema::create('magic_roles', static function (Blueprint $table) {
+        Schema::create('delightful_roles', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 255)->comment('角色名称');
             $table->json('permission_key')->nullable()->comment('角色权限列表');
@@ -42,6 +42,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_roles');
+        Schema::dropIfExists('delightful_roles');
     }
 };

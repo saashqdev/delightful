@@ -167,7 +167,7 @@ export default function useFlowOperations({
 				{
 					name: publishData.name || currentFlow.name,
 					description: publishData.description || currentFlow.description,
-					magic_flow: currentFlow,
+					delightful_flow: currentFlow,
 				},
 				flowId,
 			)

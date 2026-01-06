@@ -25,10 +25,10 @@ class DelightfulUserSettingAppService extends AbstractContactAppService
     use DataIsolationTrait;
 
     #[Inject]
-    protected DelightfulUserRepositoryInterface $magicUserRepository;
+    protected DelightfulUserRepositoryInterface $delightfulUserRepository;
 
     public function __construct(
-        private readonly DelightfulUserSettingDomainService $magicUserSettingDomainService
+        private readonly DelightfulUserSettingDomainService $delightfulUserSettingDomainService
     ) {
     }
 
@@ -42,7 +42,7 @@ class DelightfulUserSettingAppService extends AbstractContactAppService
             'model' => $model,
             'image_model' => $imageModel,
         ]);
-        return $this->magicUserSettingDomainService->save($dataIsolation, $entity);
+        return $this->delightfulUserSettingDomainService->save($dataIsolation, $entity);
     }
 
     public function getProjectTopicModelConfig(Authenticatable $authorization, string $topicId): ?DelightfulUserSettingEntity
@@ -61,7 +61,7 @@ class DelightfulUserSettingAppService extends AbstractContactAppService
         $entity->setValue([
             'servers' => $servers,
         ]);
-        return $this->magicUserSettingDomainService->save($dataIsolation, $entity);
+        return $this->delightfulUserSettingDomainService->save($dataIsolation, $entity);
     }
 
     public function getProjectMcpServerConfig(Authenticatable $authorization, string $projectId): ?DelightfulUserSettingEntity
@@ -81,7 +81,7 @@ class DelightfulUserSettingAppService extends AbstractContactAppService
         if (! $key->isValid()) {
             ExceptionBuilder::throw(GenericErrorCode::AccessDenied);
         }
-        return $this->magicUserSettingDomainService->save($dataIsolation, $entity);
+        return $this->delightfulUserSettingDomainService->save($dataIsolation, $entity);
     }
 
     /**
@@ -92,7 +92,7 @@ class DelightfulUserSettingAppService extends AbstractContactAppService
         $dataIsolation = $this->createDataIsolation($authorization);
         $flowDataIsolation = $this->createFlowDataIsolation($authorization);
 
-        $setting = $this->magicUserSettingDomainService->get($dataIsolation, $key);
+        $setting = $this->delightfulUserSettingDomainService->get($dataIsolation, $key);
 
         $key = UserSettingKey::make($key);
         if ($setting) {
@@ -115,31 +115,31 @@ class DelightfulUserSettingAppService extends AbstractContactAppService
         // Force query to only return current user's settings
         $query->setUserId($dataIsolation->getCurrentUserId());
 
-        return $this->magicUserSettingDomainService->queries($dataIsolation, $query, $page);
+        return $this->delightfulUserSettingDomainService->queries($dataIsolation, $query, $page);
     }
 
     /**
-     * 保存当前组织信息（通过 magicId）.
-     * @param string $magicId 账号标识
+     * 保存当前组织信息（通过 delightfulId）.
+     * @param string $delightfulId 账号标识
      * @param array<string, mixed> $organizationData 组织信息数据
      */
-    public function saveCurrentOrganizationDataByDelightfulId(string $magicId, array $organizationData): DelightfulUserSettingEntity
+    public function saveCurrentOrganizationDataByDelightfulId(string $delightfulId, array $organizationData): DelightfulUserSettingEntity
     {
         $entity = new DelightfulUserSettingEntity();
         $entity->setKey(UserSettingKey::CurrentOrganization->value);
         $entity->setValue($organizationData);
 
-        return $this->magicUserSettingDomainService->saveByDelightfulId($magicId, $entity);
+        return $this->delightfulUserSettingDomainService->saveByDelightfulId($delightfulId, $entity);
     }
 
     /**
-     * 获取当前组织信息（通过 magicId）.
-     * @param string $magicId 账号标识
+     * 获取当前组织信息（通过 delightfulId）.
+     * @param string $delightfulId 账号标识
      * @return null|array<string, mixed>
      */
-    public function getCurrentOrganizationDataByDelightfulId(string $magicId): ?array
+    public function getCurrentOrganizationDataByDelightfulId(string $delightfulId): ?array
     {
-        $setting = $this->magicUserSettingDomainService->getByDelightfulId($magicId, UserSettingKey::CurrentOrganization->value);
+        $setting = $this->delightfulUserSettingDomainService->getByDelightfulId($delightfulId, UserSettingKey::CurrentOrganization->value);
         return $setting?->getValue();
     }
 }

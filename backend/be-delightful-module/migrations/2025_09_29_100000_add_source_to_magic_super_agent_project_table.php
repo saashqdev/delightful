@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_project', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_project', function (Blueprint $table) {
             $table->tinyInteger('source')->default(1)->after('project_mode')->comment('Creation source: 1=user_created, 2=scheduled_task');
         });
     }

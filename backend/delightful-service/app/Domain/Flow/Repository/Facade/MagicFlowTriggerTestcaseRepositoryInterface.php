@@ -14,7 +14,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 interface DelightfulFlowTriggerTestcaseRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): DelightfulFlowTriggerTestcaseEntity;
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $delightfulFlowTriggerTestcaseEntity): DelightfulFlowTriggerTestcaseEntity;
 
     public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowTriggerTestcaseEntity;
 
@@ -25,5 +25,5 @@ interface DelightfulFlowTriggerTestcaseRepositoryInterface
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowTriggerTestcaseQuery $query, Page $page): array;
 
-    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): void;
+    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $delightfulFlowTriggerTestcaseEntity): void;
 }

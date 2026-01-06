@@ -76,8 +76,8 @@ export const themeConfig: any = (isDarkMode: ThemeAppearance) => {
 				},
 			},
 			{
-				name: "support.variable.magic.python",
-				scope: "support.variable.magic.python",
+				name: "support.variable.delightful.python",
+				scope: "support.variable.delightful.python",
 				settings: {
 					foreground: colorText,
 				},

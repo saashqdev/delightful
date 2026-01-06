@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_operation_permissions', function (Blueprint $table) {
+        Schema::table('delightful_operation_permissions', function (Blueprint $table) {
             $table->string('organization_code', 80)->default('')->comment('组织')->change();
         });
     }

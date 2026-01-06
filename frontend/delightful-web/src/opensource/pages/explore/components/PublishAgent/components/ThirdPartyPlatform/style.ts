@@ -10,7 +10,7 @@ export const useStyles = createStyles(({ css, token }) => {
 		`,
 		thirdPartyList: css`
 			border-radius: 8px;
-			border: 1px solid ${token.magicColorUsages.border};
+			border: 1px solid ${token.delightfulColorUsages.border};
 			& > last-child {
 				border: none;
 			}
@@ -19,7 +19,7 @@ export const useStyles = createStyles(({ css, token }) => {
 			height: 50px;
 			width: 100%;
 			padding: 0 20px;
-			border-bottom: 1px solid ${token.magicColorUsages.border};
+			border-bottom: 1px solid ${token.delightfulColorUsages.border};
 		`,
 		left: css`
 			flex: 1;
@@ -32,27 +32,27 @@ export const useStyles = createStyles(({ css, token }) => {
 			letter-spacing: 0px;
 		`,
 		delete: css`
-			color: ${token.magicColorUsages.danger.default};
+			color: ${token.delightfulColorUsages.danger.default};
 			cursor: pointer;
 			&:hover {
-				color: ${token.magicColorUsages.danger.hover};
+				color: ${token.delightfulColorUsages.danger.hover};
 			}
 		`,
 		settings: css`
-			color: ${token.magicColorUsages.primary.default};
+			color: ${token.delightfulColorUsages.primary.default};
 			cursor: pointer;
 			&:hover {
-				color: ${token.magicColorUsages.primary.hover};
+				color: ${token.delightfulColorUsages.primary.hover};
 			}
 		`,
 		title: css`
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 			font-weight: 600;
 			font-size: 14px;
 			line-height: 20px;
 		`,
 		desc: css`
-			color: ${token.magicColorUsages.text[2]};
+			color: ${token.delightfulColorUsages.text[2]};
 			font-size: 12px;
 			line-height: 16px;
 		`,

@@ -11,6 +11,6 @@ enum DefaultFileBusinessType: string
 {
     case SERVICE_PROVIDER = 'service_provider';
     case FLOW = 'flow';
-    case DELIGHTFUL = 'magic';
+    case DELIGHTFUL = 'delightful';
     case MODE = 'mode';
 }

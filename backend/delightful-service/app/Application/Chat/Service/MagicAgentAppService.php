@@ -22,9 +22,9 @@ class DelightfulAgentAppService extends AbstractAppService
 {
     public function __construct(
         protected readonly DelightfulUserDomainService $userDomainService,
-        protected readonly DelightfulAgentDomainService $magicAgentDomainService,
+        protected readonly DelightfulAgentDomainService $delightfulAgentDomainService,
         protected readonly FileDomainService $fileDomainService,
-        protected readonly DelightfulConversationDomainService $magicConversationDomainService,
+        protected readonly DelightfulConversationDomainService $delightfulConversationDomainService,
     ) {
     }
 
@@ -36,7 +36,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
     public function getAgentUserId(string $agentId = ''): string
     {
-        $flow = $this->magicAgentDomainService->getAgentById($agentId);
+        $flow = $this->delightfulAgentDomainService->getAgentById($agentId);
         if (empty($flow->getFlowCode())) {
             ExceptionBuilder::throw(AgentErrorCode::AGENT_NOT_FOUND, 'flow_code not found');
         }
@@ -45,11 +45,11 @@ class DelightfulAgentAppService extends AbstractAppService
         $dataIsolation = DataIsolation::create();
         $dataIsolation->setCurrentOrganizationCode($flow->getOrganizationCode());
         // 根据flowCode 查询user_id
-        $magicUserEntity = $this->userDomainService->getByAiCode($dataIsolation, $flowCode);
-        if (empty($magicUserEntity->getUserId())) {
+        $delightfulUserEntity = $this->userDomainService->getByAiCode($dataIsolation, $flowCode);
+        if (empty($delightfulUserEntity->getUserId())) {
             ExceptionBuilder::throw(AgentErrorCode::AGENT_NOT_FOUND, 'agent_user_id not found');
         }
-        return $magicUserEntity->getUserId();
+        return $delightfulUserEntity->getUserId();
     }
 
     /**
@@ -59,15 +59,15 @@ class DelightfulAgentAppService extends AbstractAppService
     public function getAgentsForAdmin(array $agentIds, Authenticatable $authenticatable): array
     {
         // 获取机器人信息
-        $magicAgentEntities = $this->magicAgentDomainService->getAgentByIds($agentIds);
+        $delightfulAgentEntities = $this->delightfulAgentDomainService->getAgentByIds($agentIds);
 
-        $filePaths = array_column($magicAgentEntities, 'agent_avatar');
+        $filePaths = array_column($delightfulAgentEntities, 'agent_avatar');
         $fileLinks = $this->fileDomainService->getLinks($authenticatable->getOrganizationCode(), $filePaths);
 
-        foreach ($magicAgentEntities as $magicAgentEntity) {
-            $fileLink = $fileLinks[$magicAgentEntity->getAgentAvatar()] ?? null;
-            $magicAgentEntity->setAgentAvatar($fileLink?->getUrl() ?? '');
+        foreach ($delightfulAgentEntities as $delightfulAgentEntity) {
+            $fileLink = $fileLinks[$delightfulAgentEntity->getAgentAvatar()] ?? null;
+            $delightfulAgentEntity->setAgentAvatar($fileLink?->getUrl() ?? '');
         }
-        return $magicAgentEntities;
+        return $delightfulAgentEntities;
     }
 }

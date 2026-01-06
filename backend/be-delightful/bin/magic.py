@@ -3,16 +3,16 @@
 Command-line interface for invoking Agent classes
 
 Usage:
-    python -m bin.magic [--agent-name AGENT_NAME] [--clean] [--clean-chat] [--clean-workspace] [--mount DIRECTORY_PATH] [--mode MODE] [query text]
-    or directly execute: ./bin/magic.py [--agent-name AGENT_NAME] [--clean] [--clean-chat] [--clean-workspace] [--mount DIRECTORY_PATH] [--mode MODE] [query text]
+    python -m bin.delightful [--agent-name AGENT_NAME] [--clean] [--clean-chat] [--clean-workspace] [--mount DIRECTORY_PATH] [--mode MODE] [query text]
+    or directly execute: ./bin/delightful.py [--agent-name AGENT_NAME] [--clean] [--clean-chat] [--clean-workspace] [--mount DIRECTORY_PATH] [--mode MODE] [query text]
 
 Arguments:
-    --agent-name: Specify the agent name to use. Default is determined by mode ("magic" for normal mode, "super-magic" for super mode)
+    --agent-name: Specify the agent name to use. Default is determined by mode ("delightful" for normal mode, "super-delightful" for super mode)
     --clean, -c: Clear chat history and workspace files
     --clean-chat, -cc: Clear only chat history files
     --clean-workspace, -cw: Clear only workspace files
     --mount, -m: Mount contents from specified directory to .workspace directory
-    --mode: Execution mode, can be "normal" or "super", default is "super". Normal mode uses magic.agent, super mode uses super-magic.agent
+    --mode: Execution mode, can be "normal" or "super", default is "super". Normal mode uses delightful.agent, super mode uses super-delightful.agent
     query text: Optional, message to send directly to agent. If provided, executes single query and exits; otherwise enters interactive mode.
 """
 # Import base Python libraries first
@@ -129,7 +129,7 @@ def create_agent(agent_name, agent_context=None):
     Returns:
         Agent: Initialized Agent instance
     """
-    from app.magic.agent import Agent
+    from app.delightful.agent import Agent
 
     # Directly instantiate Agent class
     agent = Agent(agent_name, agent_context, "main")
@@ -226,7 +226,7 @@ async def main():
     parser.add_argument('--mount', '-m', type=str,
                         help='Mount contents of specified directory to .workspace directory')
     parser.add_argument('--mode', type=str, choices=['normal', 'super'], default='super',
-                        help='Run mode: normal uses magic.agent, super uses super-magic.agent, defaults to super')
+                        help='Run mode: normal uses delightful.agent, super uses super-delightful.agent, defaults to super')
     parser.add_argument('query', nargs='?', type=str, default=None,
                         help='Query text to send to the agent. If provided, executes a single query and exits')
 
@@ -275,16 +275,16 @@ async def main():
         agent_name = args.agent_name
         if agent_name is None:
             if args.mode == 'normal':
-                agent_name = 'magic'
+                agent_name = 'delightful'
                 logger.info(f"Using normal mode, agent_name set to {agent_name}")
             else:  # args.mode == 'super'
-                agent_name = 'super-magic'
+                agent_name = 'super-delightful'
                 logger.info(f"Using super mode, agent_name set to {agent_name}")
         else:
             logger.info(f"Using specified agent_name: {agent_name}")
 
         agent_context = AgentContext()
-        if agent_name == 'magic' or agent_name == 'super-magic':
+        if agent_name == 'delightful' or agent_name == 'super-delightful':
             agent_context.is_main_agent = True
         agent_context.set_sandbox_id("default_sandbox")
         agent = create_agent(agent_name, agent_context=agent_context)

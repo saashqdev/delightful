@@ -13,7 +13,7 @@ use Hyperf\Di\Annotation\Inject;
 class Permission implements PermissionInterface
 {
     #[Inject]
-    protected DelightfulAccountDomainService $magicAccountDomainService;
+    protected DelightfulAccountDomainService $delightfulAccountDomainService;
 
     /**
      * 判断是否超级管理员.
@@ -38,10 +38,10 @@ class Permission implements PermissionInterface
     /**
      * 获取该用手机号码下所拥有的组织管理员代码.
      */
-    public function getOrganizationAdminList(string $magicId): array
+    public function getOrganizationAdminList(string $delightfulId): array
     {
-        // 通过 magicID 获取手机号码
-        $accountEntity = $this->magicAccountDomainService->getAccountInfoByDelightfulId($magicId);
+        // 通过 delightfulID 获取手机号码
+        $accountEntity = $this->delightfulAccountDomainService->getAccountInfoByDelightfulId($delightfulId);
         if ($accountEntity === null) {
             return [];
         }

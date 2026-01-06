@@ -18,7 +18,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  *
  * @property int $id 主键ID
  * @property int $role_id 角色ID
- * @property string $user_id 用户ID，对应magic_contact_users.user_id
+ * @property string $user_id 用户ID，对应delightful_contact_users.user_id
  * @property string $organization_code 组织编码
  * @property null|string $assigned_by 分配者用户ID
  * @property null|Carbon $assigned_at 分配时间
@@ -34,7 +34,7 @@ class RoleUserModel extends AbstractModel
     /**
      * 与模型关联的表名.
      */
-    protected ?string $table = 'magic_role_users';
+    protected ?string $table = 'delightful_role_users';
 
     /**
      * 可批量赋值的属性.

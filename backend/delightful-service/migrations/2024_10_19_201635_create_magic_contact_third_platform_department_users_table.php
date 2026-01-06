@@ -14,13 +14,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_contact_third_platform_department_users')) {
+        if (Schema::hasTable('delightful_contact_third_platform_department_users')) {
             return;
         }
-        Schema::create('magic_contact_third_platform_department_users', static function (Blueprint $table) {
+        Schema::create('delightful_contact_third_platform_department_users', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('magic_department_id', 64)->comment('部门id');
-            $table->string('magic_organization_code', 32)->comment('麦吉的组织编码');
+            $table->string('delightful_department_id', 64)->comment('部门id');
+            $table->string('delightful_organization_code', 32)->comment('麦吉的组织编码');
             $table->string('third_department_id', 64)->comment('第三方部门id');
             $table->string('third_union_id')->comment('第三方平台用户的union_id');
             $table->string('third_platform_type', 32)->comment('第三方平台类型 dingTalk/lark/weCom/teamShare');
@@ -38,7 +38,7 @@ return new class extends Migration {
             $table->comment('用户服务的部门与第三方平台用户记录表.用于与第三方平台实时数据同步,激活记录等');
             $table->timestamps();
             $table->softDeletes();
-            $table->index(['third_platform_type', 'third_department_id', 'magic_organization_code'], 'org_platform_department_id');
+            $table->index(['third_platform_type', 'third_department_id', 'delightful_organization_code'], 'org_platform_department_id');
         });
     }
 
@@ -47,6 +47,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_contact_third_platform_department_users');
+        Schema::dropIfExists('delightful_contact_third_platform_department_users');
     }
 };

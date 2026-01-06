@@ -2,7 +2,7 @@
 import MessageImagePreviewStore from "@/opensource/stores/chatNew/messagePreview/ImagePreviewStore"
 import ConversationStore from "@/opensource/stores/chatNew/conversation"
 import { isFunction } from "lodash-es"
-import { magic } from "@/enhance/magicElectron"
+import { delightful } from "@/enhance/delightfulElectron"
 import { ImagePreviewInfo } from "@/types/chat/preview"
 import { safeBtoa } from "@/utils/encoding"
 
@@ -11,8 +11,8 @@ class MessageImagePreview {
 		if (!info.messageId || !info.url) return
 		info.conversationId = ConversationStore.currentConversation?.id
 
-		if (isFunction(magic?.media?.previewMedia)) {
-			magic?.media?.previewMedia(info)
+		if (isFunction(delightful?.media?.previewMedia)) {
+			delightful?.media?.previewMedia(info)
 		} else {
 			MessageImagePreviewStore.setPreviewInfo(info)
 		}

@@ -83,7 +83,7 @@ class MessageScheduleAppService extends AbstractAppService
         private readonly WorkspaceDomainService $workspaceDomainService,
         private readonly TaskFileDomainService $taskFileDomainService,
         private readonly TaskSchedulerDomainService $taskSchedulerDomainService,
-        private readonly DelightfulUserSettingDomainService $magicUserSettingDomainService,
+        private readonly DelightfulUserSettingDomainService $delightfulUserSettingDomainService,
         LoggerFactory $loggerFactory
     ) {
         $this->logger = $loggerFactory->get(self::class);
@@ -1236,7 +1236,7 @@ class MessageScheduleAppService extends AbstractAppService
             ]);
 
             // Save through domain service
-            $this->magicUserSettingDomainService->save($dataIsolation, $entity);
+            $this->delightfulUserSettingDomainService->save($dataIsolation, $entity);
 
             $this->logger->info('Set project MCP config from scheduled task', [
                 'project_id' => $projectId,

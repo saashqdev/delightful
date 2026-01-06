@@ -93,7 +93,7 @@ function BranchNode({ data, isConnectable, id, position }: NodeProps) {
 								>
 									<Tooltip
 										title={i18next.t("flow.changeNodeType", {
-											ns: "magicFlow",
+											ns: "delightfulFlow",
 										})}
 									>
 										<IconTransfer
@@ -107,7 +107,7 @@ function BranchNode({ data, isConnectable, id, position }: NodeProps) {
 								</Popover>
 
 								<Tooltip
-									title={i18next.t("flow.modifyNodeName", { ns: "magicFlow" })}
+									title={i18next.t("flow.modifyNodeName", { ns: "delightfulFlow" })}
 								>
 									<IconPencilMinus
 										onClick={(e) => {

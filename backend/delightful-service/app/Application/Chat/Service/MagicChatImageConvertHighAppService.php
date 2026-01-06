@@ -52,12 +52,12 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
     protected LoggerInterface $logger;
 
     public function __construct(
-        protected readonly DelightfulConversationDomainService $magicConversationDomainService,
-        protected readonly DelightfulUserDomainService $magicUserDomainService,
-        protected readonly DelightfulChatDomainService $magicChatDomainService,
-        protected readonly DelightfulAIImageDomainService $magicAIImageDomainService,
+        protected readonly DelightfulConversationDomainService $delightfulConversationDomainService,
+        protected readonly DelightfulUserDomainService $delightfulUserDomainService,
+        protected readonly DelightfulChatDomainService $delightfulChatDomainService,
+        protected readonly DelightfulAIImageDomainService $delightfulAIImageDomainService,
         protected readonly FileDomainService $fileDomainService,
-        protected readonly DelightfulChatFileDomainService $magicChatFileDomainService,
+        protected readonly DelightfulChatFileDomainService $delightfulChatFileDomainService,
         protected readonly AdminProviderDomainService $serviceProviderDomainService,
         protected readonly LLMAppService $llmAppService,
         protected readonly Redis $redis,
@@ -159,7 +159,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $this->fileDomainService->uploadByCredential($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile);
                 // 获取url
                 $url = $this->fileDomainService->getLink($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile->getKey())->getUrl();
-                // 同步文件至magic
+                // 同步文件至delightful
                 $fileUploadDTOs = [];
                 $fileType = FileType::getTypeFromFileExtension($uploadFile->getExt());
                 $fileUploadDTO = new DelightfulChatFileEntity();
@@ -169,9 +169,9 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $fileUploadDTO->setFileName($uploadFile->getName());
                 $fileUploadDTO->setFileType($fileType);
                 $fileUploadDTOs[] = $fileUploadDTO;
-                $magicChatFileEntity = $this->magicChatFileDomainService->fileUpload($fileUploadDTOs, $requestContext->getDataIsolation())[0] ?? null;
+                $delightfulChatFileEntity = $this->delightfulChatFileDomainService->fileUpload($fileUploadDTOs, $requestContext->getDataIsolation())[0] ?? null;
                 $images[] = [
-                    'file_id' => $magicChatFileEntity->getFileId(),
+                    'file_id' => $delightfulChatFileEntity->getFileId(),
                     'url' => $url,
                 ];
             } catch (Throwable $throwable) {

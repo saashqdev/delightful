@@ -24,7 +24,7 @@ readonly class OperationPermissionDomainService
 {
     public function __construct(
         private OperationPermissionRepositoryInterface $operationPermissionRepository,
-        private DelightfulGroupRepositoryInterface $magicGroupRepository,
+        private DelightfulGroupRepositoryInterface $delightfulGroupRepository,
         private DelightfulDepartmentUserRepositoryInterface $departmentUserRepository,
     ) {
     }
@@ -164,7 +164,7 @@ readonly class OperationPermissionDomainService
         $contactDataIsolation = ContactDataIsolation::simpleMake($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
         // Add departments and groups of the users into targets
         $userDepartmentList = $this->departmentUserRepository->getDepartmentIdsByUserIds($contactDataIsolation, $userIds, true);
-        $userGroupIds = $this->magicGroupRepository->getGroupIdsByUserIds($userIds);
+        $userGroupIds = $this->delightfulGroupRepository->getGroupIdsByUserIds($userIds);
         $targetIds = [];
         $targetIds[] = $userIds;
 

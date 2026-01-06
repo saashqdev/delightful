@@ -34,7 +34,7 @@ class DelightfulFlowApiKeyModel extends AbstractModel
     use Snowflake;
     use SoftDeletes;
 
-    protected ?string $table = 'magic_flow_api_keys';
+    protected ?string $table = 'delightful_flow_api_keys';
 
     protected array $fillable = [
         'id',

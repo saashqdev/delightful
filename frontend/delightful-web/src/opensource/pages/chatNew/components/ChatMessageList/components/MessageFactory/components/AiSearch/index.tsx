@@ -64,7 +64,7 @@ const DelightfulAggregateAISearchCard = observer(
 	}: DelightfulAggregateAISearchCardProps) => {
 		const { fontSize } = useFontSize()
 		const { t } = useTranslation("interface")
-		const { magicColorUsages } = useTheme()
+		const { delightfulColorUsages } = useTheme()
 
 		const summaryRef = useRef<HTMLDivElement>(null)
 
@@ -341,8 +341,8 @@ const DelightfulAggregateAISearchCard = observer(
 								style={{
 									fontWeight: isPending ? 600 : 400,
 									color: isPending
-										? magicColorUsages.text[0]
-										: magicColorUsages.text[2],
+										? delightfulColorUsages.text[0]
+										: delightfulColorUsages.text[2],
 								}}
 							>
 								<DelightfulMarkdown content={item.title} />

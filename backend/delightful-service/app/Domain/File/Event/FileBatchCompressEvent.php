@@ -17,7 +17,7 @@ class FileBatchCompressEvent
     /**
      * Constructor.
      *
-     * @param string $source Source of the request (default: super_magic)
+     * @param string $source Source of the request (default: super_delightful)
      * @param string $organizationCode Organization code
      * @param string $userId User ID who initiated the batch compression
      * @param string $cacheKey Cache key for the batch task
@@ -48,7 +48,7 @@ class FileBatchCompressEvent
     public static function fromArray(array $data): self
     {
         return new self(
-            source: $data['source'] ?? 'super_magic',
+            source: $data['source'] ?? 'super_delightful',
             organizationCode: $data['organization_code'] ?? '',
             userId: (string) ($data['user_id'] ?? '0'),
             cacheKey: $data['cache_key'] ?? '',

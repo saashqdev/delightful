@@ -17,7 +17,7 @@ class DelightfulContactThirdPlatformIdMappingModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_contact_third_platform_id_mapping';
+    protected ?string $table = 'delightful_contact_third_platform_id_mapping';
 
     /**
      * The attributes that are mass assignable.
@@ -27,8 +27,8 @@ class DelightfulContactThirdPlatformIdMappingModel extends Model
         'origin_id',
         'new_id',
         'third_platform_type',
-        'magic_organization_code',
-        'magic_environment_id',
+        'delightful_organization_code',
+        'delightful_environment_id',
         'mapping_type',
         'created_at',
         'updated_at',

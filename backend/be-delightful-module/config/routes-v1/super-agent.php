@@ -324,7 +324,7 @@ Router::addGroup('/api/v1/super-agent', static function () {
     Router::addGroup('/file', static function () {
         // Sandbox file change notification
         Router::post('/sandbox/notifications', [FileApi::class, 'handleSandboxNotification']);
-        // Refresh STS Token (for super-magic use, exchange metadata for directory information)
+        // Refresh STS Token (for super-delightful use, exchange metadata for directory information)
         Router::post('/refresh-sts-token', [FileApi::class, 'refreshStsToken']);
         // Batch process attachments
         Router::post('/process-attachments', [FileApi::class, 'processAttachments']);

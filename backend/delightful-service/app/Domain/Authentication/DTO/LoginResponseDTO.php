@@ -13,15 +13,15 @@ use App\Infrastructure\Core\Contract\Session\LoginResponseInterface;
 
 class LoginResponseDTO extends AbstractEntity implements LoginResponseInterface
 {
-    protected string $magicId = '';
+    protected string $delightfulId = '';
 
-    protected string $magicUserId = '';
+    protected string $delightfulUserId = '';
 
     protected string $organizationName = '';
 
     protected ?string $organizationLogo = null;
 
-    protected string $magicOrganizationCode = '';
+    protected string $delightfulOrganizationCode = '';
 
     protected string $thirdPlatformOrganizationCode = '';
 
@@ -31,34 +31,34 @@ class LoginResponseDTO extends AbstractEntity implements LoginResponseInterface
 
     public function getDelightfulId(): string
     {
-        return $this->magicId;
+        return $this->delightfulId;
     }
 
-    public function setDelightfulId(string $magicId): static
+    public function setDelightfulId(string $delightfulId): static
     {
-        $this->magicId = $magicId;
+        $this->delightfulId = $delightfulId;
         return $this;
     }
 
     public function getDelightfulUserId(): string
     {
-        return $this->magicUserId;
+        return $this->delightfulUserId;
     }
 
-    public function setDelightfulUserId(string $magicUserId): static
+    public function setDelightfulUserId(string $delightfulUserId): static
     {
-        $this->magicUserId = $magicUserId;
+        $this->delightfulUserId = $delightfulUserId;
         return $this;
     }
 
     public function getDelightfulOrganizationCode(): string
     {
-        return $this->magicOrganizationCode;
+        return $this->delightfulOrganizationCode;
     }
 
-    public function setDelightfulOrganizationCode(string $magicOrganizationCode): static
+    public function setDelightfulOrganizationCode(string $delightfulOrganizationCode): static
     {
-        $this->magicOrganizationCode = $magicOrganizationCode;
+        $this->delightfulOrganizationCode = $delightfulOrganizationCode;
         return $this;
     }
 

@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_user_id_relation', static function (Blueprint $table) {
+        Schema::create('delightful_user_id_relation', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user_id', 64)->comment('用户id,组织下唯一.其他open_id,union_id需要根据user_id生成')->default('');
             $table->string('id_type', 12)->comment('id类型:open_id/union_id')->default('');
@@ -37,6 +37,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_user_id_relation');
+        Schema::dropIfExists('delightful_user_id_relation');
     }
 };

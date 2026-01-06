@@ -10,7 +10,7 @@ namespace App\ErrorCode;
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
 /**
- * magic api 错误码范围:4000, 4999.
+ * delightful api 错误码范围:4000, 4999.
  */
 enum DelightfulApiErrorCode: int
 {

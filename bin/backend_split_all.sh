@@ -24,8 +24,8 @@ if [[ $# -eq 0 ]]; then
     REPOS=$(ls $BASEPATH)
 fi
 
-# remote github git@github.com:dtyq/super-magic-module.git
-# split "backend/super-magic-module" "git@github.com:dtyq/super-magic-module.git"
+# remote github git@github.com:dtyq/super-delightful-module.git
+# split "backend/super-delightful-module" "git@github.com:dtyq/super-delightful-module.git"
 
 for REPO in $REPOS ; do
     remote $REPO git@github.com:dtyq/$REPO.git

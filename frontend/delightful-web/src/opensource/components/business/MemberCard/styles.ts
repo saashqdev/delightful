@@ -27,14 +27,14 @@ const useStyles = createStyles(
 			box-shadow: ${token.boxShadow};
 			background: url(${isDarkMode ? bgDark : bg}) no-repeat;
 			background-size: 375px 284.473px;
-			background-color: ${token.magicColorUsages.bg[1]};
+			background-color: ${token.delightfulColorUsages.bg[1]};
 			display: ${hidden ? "none" : "block"};
 		`,
 		header: css`
 			margin-top: 38px;
 			border-radius: 8px;
 			padding: 10px 8px;
-			background-color: ${token.magicColorUsages.bg[1]};
+			background-color: ${token.delightfulColorUsages.bg[1]};
 		`,
 		segmented: css`
 			width: 100%;
@@ -63,13 +63,13 @@ const useStyles = createStyles(
 			overflow-y: auto;
 			max-height: 500px;
 			border-radius: 8px;
-			background-color: ${token.magicColorUsages.bg[1]};
+			background-color: ${token.delightfulColorUsages.bg[1]};
 			padding: 10px;
 			.${prefixCls}-descriptions-item-label {
 				min-width: 90px;
 			}
 			.${prefixCls}-descriptions-item {
-				--magic-descriptions-item-padding-bottom: 10px;
+				--delightful-descriptions-item-padding-bottom: 10px;
 			}
 		`,
 		button: css`
@@ -77,9 +77,9 @@ const useStyles = createStyles(
 			padding: 6px 12px;
 			gap: 4px;
 			background-color: ${isDarkMode
-				? token.magicColorUsages.primaryLight.default
-				: token.magicColorScales.brand[0]};
-			color: ${token.magicColorScales.brand[5]};
+				? token.delightfulColorUsages.primaryLight.default
+				: token.delightfulColorScales.brand[0]};
+			color: ${token.delightfulColorScales.brand[5]};
 
 			.${prefixCls}-btn-icon {
 				line-height: 10px;
@@ -90,35 +90,35 @@ const useStyles = createStyles(
 			border: none;
 			border-radius: 4px;
 			gap: 2px;
-			background: ${token.magicColorScales.green[0]};
-			color: ${token.magicColorScales.green[5]};
+			background: ${token.delightfulColorScales.green[0]};
+			color: ${token.delightfulColorScales.green[5]};
 
 			&:hover {
-				background: ${token.magicColorScales.green[1]} !important;
-				color: ${token.magicColorScales.green[5]} !important;
+				background: ${token.delightfulColorScales.green[1]} !important;
+				color: ${token.delightfulColorScales.green[5]} !important;
 			}
 		`,
 		tasksAssociatedWithMeButton: css`
 			border: none;
 			border-radius: 4px;
 			gap: 2px;
-			background: ${token.magicColorScales.lightBlue[0]};
-			color: ${token.magicColorScales.blue[5]};
+			background: ${token.delightfulColorScales.lightBlue[0]};
+			color: ${token.delightfulColorScales.blue[5]};
 
 			&:hover {
-				background: ${token.magicColorScales.lightBlue[1]} !important;
-				color: ${token.magicColorScales.blue[5]} !important;
+				background: ${token.delightfulColorScales.lightBlue[1]} !important;
+				color: ${token.delightfulColorScales.blue[5]} !important;
 			}
 		`,
 
 		shareBusinessCardButton: css`
 			border: none;
-			background: ${token.magicColorUsages.fill[0]};
-			color: ${token.magicColorUsages.text[1]};
+			background: ${token.delightfulColorUsages.fill[0]};
+			color: ${token.delightfulColorUsages.text[1]};
 
 			&:hover {
-				background: ${token.magicColorUsages.fill[1]} !important;
-				color: ${token.magicColorUsages.text[1]} !important;
+				background: ${token.delightfulColorUsages.fill[1]} !important;
+				color: ${token.delightfulColorUsages.text[1]} !important;
 			}
 		`,
 	}),

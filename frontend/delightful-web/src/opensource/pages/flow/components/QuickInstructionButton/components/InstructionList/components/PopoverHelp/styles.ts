@@ -6,7 +6,7 @@ export const useStyles = createStyles(({ css, token }) => {
 			font-size: 16px;
 			font-weight: 600;
 			line-height: 22px;
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 		`,
 		tooltipContent: css`
 			padding-top: 10px;
@@ -35,15 +35,15 @@ export const useStyles = createStyles(({ css, token }) => {
 		tooltipDesc: css`
 			font-size: 12px;
 			line-height: 14px;
-			color: ${token.magicColorUsages.text[3]};
+			color: ${token.delightfulColorUsages.text[3]};
 		`,
 		addButton: css`
 			padding: 0;
-			color: ${token.magicColorScales.brand[5]};
+			color: ${token.delightfulColorScales.brand[5]};
 			cursor: pointer;
 		`,
 		icon: css`
-			color: ${token.magicColorUsages.text[2]};
+			color: ${token.delightfulColorUsages.text[2]};
 		`,
 	}
 })

@@ -23,7 +23,7 @@ function MultipleSelect({
 	options,
 	value,
 	onChange,
-	placeholder = i18next.t("common.pleaseSelect", { ns: "magicFlow" }),
+	placeholder = i18next.t("common.pleaseSelect", { ns: "delightfulFlow" }),
 	size,
 	isMultiple = true,
 	filterOption,
@@ -44,7 +44,7 @@ function MultipleSelect({
 	})
 
 	return (
-		<div className="magic-multiple-select">
+		<div className="delightful-multiple-select">
 			<Options
 				{...{
 					itemClick,

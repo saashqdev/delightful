@@ -11,7 +11,7 @@ return [
     'default' => [
         'driver' => RedisDriver::class,
         'packer' => PhpSerializerPacker::class,
-        'prefix' => 'magic:',
+        'prefix' => 'delightful:',
         // 一些经典为空的数据不缓存
         'skip_cache_results' => [
             null, '', [],

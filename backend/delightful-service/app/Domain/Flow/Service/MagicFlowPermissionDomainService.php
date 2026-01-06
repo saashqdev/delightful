@@ -17,7 +17,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 class DelightfulFlowPermissionDomainService extends AbstractDomainService
 {
     public function __construct(
-        private readonly DelightfulFlowPermissionRepositoryInterface $magicFlowPermissionRepository,
+        private readonly DelightfulFlowPermissionRepositoryInterface $delightfulFlowPermissionRepository,
     ) {
     }
 
@@ -26,7 +26,7 @@ class DelightfulFlowPermissionDomainService extends AbstractDomainService
         $permissionEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $permissionEntity->setCreator($dataIsolation->getCurrentUserId());
         $permissionEntity->prepareForSave();
-        return $this->magicFlowPermissionRepository->save($dataIsolation, $permissionEntity);
+        return $this->delightfulFlowPermissionRepository->save($dataIsolation, $permissionEntity);
     }
 
     /**
@@ -35,16 +35,16 @@ class DelightfulFlowPermissionDomainService extends AbstractDomainService
     public function getByResource(FlowDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, Page $page): array
     {
         /* @phpstan-ignore-next-line */
-        return $this->magicFlowPermissionRepository->getByResource($dataIsolation, $resourceType, $resourceId, $page);
+        return $this->delightfulFlowPermissionRepository->getByResource($dataIsolation, $resourceType, $resourceId, $page);
     }
 
     public function removeByIds(FlowDataIsolation $dataIsolation, array $ids): void
     {
-        $this->magicFlowPermissionRepository->removeByIds($dataIsolation, $ids);
+        $this->delightfulFlowPermissionRepository->removeByIds($dataIsolation, $ids);
     }
 
     public function getByResourceAndTarget(FlowDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, TargetType $targetType, string $targetId): ?DelightfulFlowPermissionEntity
     {
-        return $this->magicFlowPermissionRepository->getByResourceAndTarget($dataIsolation, $resourceType, $resourceId, $targetType, $targetId);
+        return $this->delightfulFlowPermissionRepository->getByResourceAndTarget($dataIsolation, $resourceType, $resourceId, $targetType, $targetId);
     }
 }

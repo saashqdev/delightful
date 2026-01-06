@@ -20,8 +20,8 @@ export const useVectorKnowledgeCreateStyles = createStyles(({ css, token, isDark
 			border-bottom: 1px solid ${token.colorBorder};
 			font-size: 18px;
 			font-weight: 600;
-			color: ${isDarkMode ? token.magicColorScales.grey[9] : token.magicColorUsages.text[1]};
-			background: ${isDarkMode ? "transparent" : token.magicColorUsages.white};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[9] : token.delightfulColorUsages.text[1]};
+			background: ${isDarkMode ? "transparent" : token.delightfulColorUsages.white};
 			height: 50px;
 		`,
 		arrow: css`
@@ -29,8 +29,8 @@ export const useVectorKnowledgeCreateStyles = createStyles(({ css, token, isDark
 			cursor: pointer;
 			&:hover {
 				background: ${isDarkMode
-					? token.magicColorScales.grey[6]
-					: token.magicColorScales.grey[0]};
+					? token.delightfulColorScales.grey[6]
+					: token.delightfulColorScales.grey[0]};
 			}
 		`,
 		title: css`
@@ -39,7 +39,7 @@ export const useVectorKnowledgeCreateStyles = createStyles(({ css, token, isDark
 			padding-bottom: 10px;
 			margin-bottom: 20px;
 			border-bottom: 1px solid
-				${isDarkMode ? token.magicColorScales.grey[8] : token.magicColorUsages.border};
+				${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorUsages.border};
 		`,
 		label: css`
 			font-weight: 600;

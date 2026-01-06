@@ -89,7 +89,7 @@ export class DatabaseManager {
 	// 	}
 
 	// 	// 注册全局数据库的表结构
-	// 	this.tableSchemas.set("magic-global", schemas)
+	// 	this.tableSchemas.set("delightful-global", schemas)
 	// 	this.initialized = true
 	// }
 
@@ -105,7 +105,7 @@ export class DatabaseManager {
 	// }
 
 	public async getDatabase(userId: string): Promise<Dexie> {
-		const dbName = `magic-user-${userId}`
+		const dbName = `delightful-user-${userId}`
 		const existingDb = this.databases.get(dbName)
 		if (existingDb) {
 			return existingDb
@@ -121,11 +121,11 @@ export class DatabaseManager {
 		if (this.globalDatabase) {
 			return this.globalDatabase
 		}
-		const dbName = "magic-global"
+		const dbName = "delightful-global"
 		this.globalDatabase = await this.initDatabase(dbName, 1, [
 			{ name: "config", schema: "&key, value" },
 			{ name: "user", schema: "&key, value" },
-			{ name: "account", schema: "&magic_id, deployCode, magic_user_id, organizationCode" },
+			{ name: "account", schema: "&delightful_id, deployCode, delightful_user_id, organizationCode" },
 			{ name: "cluster", schema: "&deployCode, name"}
 		])
 		return this.globalDatabase

@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_chat_messages', function (Blueprint $table) {
+        Schema::table('delightful_chat_messages', function (Blueprint $table) {
             // Order: high selectivity -> filter condition -> optional filter
             $table->index(['app_message_id', 'message_type'], 'idx_app_message_covered');
         });

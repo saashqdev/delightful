@@ -27,7 +27,7 @@ use Hyperf\Redis\Redis;
 class DelightfulChatConversationRepository implements DelightfulChatConversationRepositoryInterface
 {
     public function __construct(
-        protected DelightfulChatConversationModel $magicChatConversationModel,
+        protected DelightfulChatConversationModel $delightfulChatConversationModel,
         private readonly Redis $redis
     ) {
     }
@@ -37,7 +37,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
         $conversationIds = $queryDTO->getIds();
         $limit = $queryDTO->getLimit() ?: 100;
         $offset = (int) ($queryDTO->getPageToken() ?: 0);
-        $query = $this->magicChatConversationModel::query()->whereIn('user_id', $userIds);
+        $query = $this->delightfulChatConversationModel::query()->whereIn('user_id', $userIds);
         $conversationIds && $query->whereIn('id', $conversationIds);
         if ($queryDTO->getStatus() !== null) {
             $query->where('status', $queryDTO->getStatus());
@@ -72,7 +72,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
      */
     public function getConversationByIds(array $conversationIds): array
     {
-        $query = $this->magicChatConversationModel::query()->whereIn('id', $conversationIds);
+        $query = $this->delightfulChatConversationModel::query()->whereIn('id', $conversationIds);
         $conversations = Db::select($query->toSql(), $query->getBindings());
         return ConversationAssembler::getConversationEntities($conversations);
     }
@@ -101,7 +101,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
             'instructs' => $conversation->getInstructs(),
             'translate_config' => $conversation->getTranslateConfig(),
         ];
-        $this->magicChatConversationModel::query()->create($conversationData);
+        $this->delightfulChatConversationModel::query()->create($conversationData);
         return ConversationAssembler::getConversationEntity($conversationData);
     }
 
@@ -129,7 +129,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
      */
     public function getConversationsByReceiveIds(string $userId, array $receiveIds, ?string $userOrganizationCode = null): array
     {
-        $query = $this->magicChatConversationModel::query()
+        $query = $this->delightfulChatConversationModel::query()
             ->where('user_id', $userId)
             ->whereIn('receive_id', $receiveIds);
 
@@ -183,7 +183,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
                 'status' => ConversationStatus::Normal->value,
             ];
         }
-        return $this->magicChatConversationModel::query()->insert($conversationData);
+        return $this->delightfulChatConversationModel::query()->insert($conversationData);
     }
 
     /**
@@ -191,7 +191,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
      */
     public function batchGetConversations(array $userIds, string $receiveId, ConversationType $receiveType): array
     {
-        $query = $this->magicChatConversationModel::query()
+        $query = $this->delightfulChatConversationModel::query()
             ->whereIn('user_id', $userIds)
             ->where('receive_id', $receiveId)
             ->where('receive_type', $receiveType->value);
@@ -207,7 +207,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
         if (empty($userIds)) {
             return 0;
         }
-        return $this->magicChatConversationModel::query()
+        return $this->delightfulChatConversationModel::query()
             ->whereIn('user_id', $userIds)
             ->where('receive_id', $receiveId)
             ->where('receive_type', $receiveType->value)
@@ -219,20 +219,20 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
     // 批量更新会话窗口
     public function batchUpdateConversations(array $conversationIds, array $updateData): int
     {
-        return $this->magicChatConversationModel::query()
+        return $this->delightfulChatConversationModel::query()
             ->whereIn('id', $conversationIds)
             ->update($updateData);
     }
 
     public function getAllConversationList(): array
     {
-        return $this->magicChatConversationModel::query()->get()->toArray();
+        return $this->delightfulChatConversationModel::query()->get()->toArray();
     }
 
     #[CacheEvict(prefix: 'conversation', value: '_#{conversationId}')]
     public function saveInstructs(string $conversationId, array $instructs): void
     {
-        $this->magicChatConversationModel->newQuery()->where('id', $conversationId)->update(['instructs' => Json::encode($instructs)]);
+        $this->delightfulChatConversationModel->newQuery()->where('id', $conversationId)->update(['instructs' => Json::encode($instructs)]);
     }
 
     /**
@@ -240,7 +240,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
      */
     public function getRelatedConversationsWithInstructByUserId(array $userIds): array
     {
-        $query = $this->magicChatConversationModel->newQuery()
+        $query = $this->delightfulChatConversationModel->newQuery()
             ->whereIn('user_id', $userIds)
             ->orWhereIn('receive_id', $userIds)
             ->whereNotNull('instructs')
@@ -276,12 +276,12 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
 
         $sql = sprintf(
             'UPDATE %s SET instructs = CASE id %s END, updated_at = ? WHERE id IN (%s)',
-            $this->magicChatConversationModel->getTable(),
+            $this->delightfulChatConversationModel->getTable(),
             implode(' ', $cases),
             implode(',', array_fill(0, count($ids), '?'))
         );
 
-        $this->magicChatConversationModel::query()
+        $this->delightfulChatConversationModel::query()
             ->getConnection()
             ->update($sql, $bindings);
     }
@@ -292,7 +292,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
         $time = date('Y-m-d H:i:s');
         $data['updated_at'] = $time;
         unset($data['id']);
-        return $this->magicChatConversationModel::query()
+        return $this->delightfulChatConversationModel::query()
             ->where('id', $id)
             ->update($data);
     }
@@ -300,7 +300,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
     public function updateConversationStatusByIds(array $ids, ConversationStatus $status): int
     {
         $time = date('Y-m-d H:i:s');
-        return $this->magicChatConversationModel::query()
+        return $this->delightfulChatConversationModel::query()
             ->whereIn('id', $ids)
             ->update([
                 'status' => $status->value,
@@ -321,7 +321,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
         if ($conversationData) {
             return Json::decode($conversationData);
         }
-        $query = $this->magicChatConversationModel::query()
+        $query = $this->delightfulChatConversationModel::query()
             ->where('user_id', $conversation->getUserId())
             ->where('receive_id', $conversation->getReceiveId())
             ->when($conversation->hasReceiveType(), function ($query) use ($conversation) {
@@ -345,7 +345,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
     #[Cacheable(prefix: 'conversation', value: '_#{conversationId}', ttl: 10)]
     private function getConversationArrayById(string $conversationId): array
     {
-        $query = $this->magicChatConversationModel::query()->where('id', $conversationId);
+        $query = $this->delightfulChatConversationModel::query()->where('id', $conversationId);
         $conversation = Db::select($query->toSql(), $query->getBindings())[0] ?? [];
         return empty($conversation) ? [] : $conversation;
     }

@@ -14,7 +14,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
 /**
  * @property int $id 雪花ID
  * @property string $organization_code 组织编码
- * @property string $magic_id 账号DelightfulID
+ * @property string $delightful_id 账号DelightfulID
  * @property string $user_id 用户ID
  * @property string $key 设置键
  * @property array $value 设置值
@@ -27,12 +27,12 @@ class UserSettingModel extends AbstractModel
 {
     use Snowflake;
 
-    protected ?string $table = 'magic_user_settings';
+    protected ?string $table = 'delightful_user_settings';
 
     protected array $fillable = [
         'id',
         'organization_code',
-        'magic_id',
+        'delightful_id',
         'user_id',
         'key',
         'value',
@@ -45,7 +45,7 @@ class UserSettingModel extends AbstractModel
     protected array $casts = [
         'id' => 'integer',
         'organization_code' => 'string',
-        'magic_id' => 'string',
+        'delightful_id' => 'string',
         'user_id' => 'string',
         'key' => 'string',
         'value' => 'json',

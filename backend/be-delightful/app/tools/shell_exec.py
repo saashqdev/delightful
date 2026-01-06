@@ -293,7 +293,7 @@ class ShellExec(WorkspaceGuardTool[ShellExecParams]):
         for word in words:
             if word.startswith('/') and not word.startswith(workspace_path):
                 # Check if it's a workspace path
-                if not any(workspace_path in word for workspace_path in ['.workspace', 'super-magic/.workspace']):
+                if not any(workspace_path in word for workspace_path in ['.workspace', 'super-delightful/.workspace']):
                     return False
 
         return True

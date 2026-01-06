@@ -12,7 +12,7 @@ vi.mock("@/opensource/components/base/DelightfulIcon", () => ({
 		component: React.ComponentType<any>
 		[key: string]: any
 	}) => (
-		<div data-testid="mock-magic-icon" {...props}>
+		<div data-testid="mock-delightful-icon" {...props}>
 			{Icon && <Icon data-testid="icon-component" />}
 		</div>
 	),
@@ -20,7 +20,7 @@ vi.mock("@/opensource/components/base/DelightfulIcon", () => ({
 
 vi.mock("@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown", () => ({
 	default: ({ content, ...props }: { content: string; [key: string]: any }) => (
-		<div data-testid="mock-magic-markdown" {...props}>
+		<div data-testid="mock-delightful-markdown" {...props}>
 			{content}
 		</div>
 	),
@@ -87,14 +87,14 @@ describe("ReasoningContent 组件", () => {
 		}
 
 		// 不应该显示内容
-		expect(screen.queryByTestId("mock-magic-markdown")).not.toBeInTheDocument()
+		expect(screen.queryByTestId("mock-delightful-markdown")).not.toBeInTheDocument()
 	})
 
 	it("当 isStreaming=true 时，初始状态应该是展开的", () => {
 		render(<ReasoningContent content={content} isStreaming />)
 
 		// 展开状态应该显示内容
-		expect(screen.getByTestId("mock-magic-markdown")).toBeInTheDocument()
+		expect(screen.getByTestId("mock-delightful-markdown")).toBeInTheDocument()
 
 		// 按钮应该存在于展开状态
 		const titleElement = screen.getByText("思考过程")
@@ -120,15 +120,15 @@ describe("ReasoningContent 组件", () => {
 		}
 
 		// 应该展开显示内容
-		expect(screen.getByTestId("mock-magic-markdown")).toBeInTheDocument()
-		expect(screen.getByTestId("mock-magic-markdown").textContent).toBe(content)
+		expect(screen.getByTestId("mock-delightful-markdown")).toBeInTheDocument()
+		expect(screen.getByTestId("mock-delightful-markdown").textContent).toBe(content)
 	})
 
 	it("点击展开状态的按钮应该折叠内容", () => {
 		render(<ReasoningContent content={content} isStreaming />)
 
 		// 初始状态是展开的
-		expect(screen.getByTestId("mock-magic-markdown")).toBeInTheDocument()
+		expect(screen.getByTestId("mock-delightful-markdown")).toBeInTheDocument()
 
 		// 点击按钮
 		const collapseTitle = screen.getByText("思考过程").closest("div")
@@ -147,14 +147,14 @@ describe("ReasoningContent 组件", () => {
 		}
 
 		// 内容应该不可见
-		expect(screen.queryByTestId("mock-magic-markdown")).not.toBeInTheDocument()
+		expect(screen.queryByTestId("mock-delightful-markdown")).not.toBeInTheDocument()
 	})
 
 	it("当 streaming 停止时，应该自动切换到折叠状态", () => {
 		const { rerender } = render(<ReasoningContent content={content} isStreaming />)
 
 		// 初始是展开状态
-		expect(screen.getByTestId("mock-magic-markdown")).toBeInTheDocument()
+		expect(screen.getByTestId("mock-delightful-markdown")).toBeInTheDocument()
 
 		// 重新渲染，streaming 设为 false
 		rerender(<ReasoningContent content={content} isStreaming={false} />)

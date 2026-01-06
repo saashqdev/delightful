@@ -306,7 +306,7 @@ JSON,
         }
 
         // 排序+数量
-        $magicChatFileDomainService = di(DelightfulChatFileDomainService::class);
-        return $magicChatFileDomainService->getFileEntitiesByFileIds($attachmentIds, $order, $limit);
+        $delightfulChatFileDomainService = di(DelightfulChatFileDomainService::class);
+        return $delightfulChatFileDomainService->getFileEntitiesByFileIds($attachmentIds, $order, $limit);
     }
 }

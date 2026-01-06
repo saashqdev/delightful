@@ -12,7 +12,7 @@ enum UserSettingKey: string
     case None = 'none';
 
     // 全局 mcp 用户配置
-    case BeDelightfulMCPServers = 'super_magic_mcp_servers';
+    case BeDelightfulMCPServers = 'super_delightful_mcp_servers';
 
     // 项目 mcp 用户配置
     case BeDelightfulProjectMCPServers = 'BeDelightfulProjectMCPServers';

@@ -148,7 +148,7 @@ vi.mock("../extensions/file-handler", () => ({
 }))
 
 // 模拟表情符号扩展
-vi.mock("../extensions/magicEmoji", () => ({
+vi.mock("../extensions/delightfulEmoji", () => ({
 	default: {
 		configure: vi.fn().mockReturnValue({}),
 	},

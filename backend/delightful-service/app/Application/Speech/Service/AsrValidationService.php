@@ -31,7 +31,7 @@ readonly class AsrValidationService
     public function __construct(
         private ProjectDomainService $projectDomainService,
         private ProjectMemberDomainService $projectMemberDomainService,
-        private DelightfulDepartmentUserDomainService $magicDepartmentUserDomainService,
+        private DelightfulDepartmentUserDomainService $delightfulDepartmentUserDomainService,
         private TopicDomainService $topicDomainService,
         private AsrTaskDomainService $asrTaskDomainService
     ) {
@@ -71,7 +71,7 @@ readonly class AsrValidationService
 
             // 检查用户所在部门是否有项目权限
             $dataIsolation = DataIsolation::create($organizationCode, $userId);
-            $departmentIds = $this->magicDepartmentUserDomainService->getDepartmentIdsByUserId($dataIsolation, $userId, true);
+            $departmentIds = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserId($dataIsolation, $userId, true);
 
             if (! empty($departmentIds) && $this->projectMemberDomainService->isProjectMemberByDepartments((int) $projectId, $departmentIds)) {
                 return $projectEntity;

@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        $tableName = 'magic_super_agent_task';
+        $tableName = 'delightful_super_agent_task';
         Schema::table($tableName, function (Blueprint $table) use ($tableName) {
             // Add composite index for topic_id and deleted_at
             if (! Schema::hasIndex($tableName, 'idx_topic_deleted')) {

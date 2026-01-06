@@ -14,15 +14,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_contact_department_users')) {
+        if (Schema::hasTable('delightful_contact_department_users')) {
             return;
         }
-        Schema::create('magic_contact_department_users', static function (Blueprint $table) {
+        Schema::create('delightful_contact_department_users', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            // magic_id
-            $table->string('magic_id', 64)->comment('magic_contact_account 表的 magic_id')->default('');
-            // magic_user_id
-            $table->string('user_id', 64)->comment('magic_contact_user 表的 user_id')->default('');
+            // delightful_id
+            $table->string('delightful_id', 64)->comment('delightful_contact_account 表的 delightful_id')->default('');
+            // delightful_user_id
+            $table->string('user_id', 64)->comment('delightful_contact_user 表的 user_id')->default('');
             $table->string('department_id', 64)->comment('部门id');
             $table->tinyInteger('is_leader')->comment('是否是部门领导 0-否 1-是')->default(0);
             $table->string('job_title', 64)->comment('在此部门的职位')->default('');
@@ -39,7 +39,7 @@ return new class extends Migration {
             $table->comment('麦吉部门下的用户信息表');
             $table->timestamps();
             $table->softDeletes();
-            $table->index(['organization_code', 'magic_id'], 'org_magic_id');
+            $table->index(['organization_code', 'delightful_id'], 'org_delightful_id');
             $table->index(['department_id'], 'index_department_id');
             $table->index(['user_id'], 'index_user_id');
         });
@@ -50,6 +50,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_contact_department_users');
+        Schema::dropIfExists('delightful_contact_department_users');
     }
 };

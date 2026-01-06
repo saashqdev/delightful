@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        $tableName = 'magic_super_agent_task_files';
+        $tableName = 'delightful_super_agent_task_files';
         Schema::table($tableName, function (Blueprint $table) use ($tableName) {
             if (! Schema::hasIndex($tableName, 'idx_project_hidden_deleted')) {
                 $table->index(['project_id', 'is_hidden', 'deleted_at'], 'idx_project_hidden_deleted');
@@ -36,7 +36,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        $tableName = 'magic_super_agent_task_files';
+        $tableName = 'delightful_super_agent_task_files';
         Schema::table($tableName, function (Blueprint $table) use ($tableName) {
             if (Schema::hasIndex($tableName, 'idx_project_hidden_deleted')) {
                 $table->dropIndex('idx_project_hidden_deleted');

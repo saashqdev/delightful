@@ -25,7 +25,7 @@ export default function ErrorDisplay({
 					<Button
 						type="primary"
 						onClick={() => {
-							window.location.href = "https://www.letsmagic.cn"
+							window.location.href = "https://www.letsdelightful.cn"
 						}}
 						className={styles.button}
 					>

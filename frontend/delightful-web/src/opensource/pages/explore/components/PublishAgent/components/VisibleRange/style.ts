@@ -5,20 +5,20 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => {
 		title: css`
 			font-size: 14px;
 			font-weight: 600;
-			color: ${isDarkMode ? token.magicColorScales.grey[1] : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[1] : token.delightfulColorUsages.text[1]};
 		`,
 		desc: css`
 			font-size: 12px;
-			color: ${isDarkMode ? token.magicColorScales.grey[2] : token.magicColorUsages.text[2]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[2] : token.delightfulColorUsages.text[2]};
 		`,
 		member: css`
 			padding: 10px;
-			border: 1px solid ${token.magicColorUsages.border};
+			border: 1px solid ${token.delightfulColorUsages.border};
 			border-radius: 8px;
 		`,
 		addButton: css`
-			color: ${token.magicColorUsages.primary.default};
-			border: 1px solid ${token.magicColorUsages.primary.default};
+			color: ${token.delightfulColorUsages.primary.default};
+			border: 1px solid ${token.delightfulColorUsages.primary.default};
 			border-radius: 8px;
 			margin-bottom: 10px;
 		`,
@@ -29,8 +29,8 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => {
 		memberItem: css`
 			padding: 4px;
 			border-radius: 8px;
-			background-color: ${token.magicColorUsages.fill[0]};
-			color: ${token.magicColorUsages.text[1]};
+			background-color: ${token.delightfulColorUsages.fill[0]};
+			color: ${token.delightfulColorUsages.text[1]};
 			font-size: 14px;
 			cursor: pointer;
 		`,
@@ -38,7 +38,7 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => {
 			color: white;
 			border-radius: 4.5px;
 			padding: 3px;
-			background: ${token.magicColorScales.brand[5]};
+			background: ${token.delightfulColorScales.brand[5]};
 		`,
 	}
 })

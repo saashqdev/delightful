@@ -10,7 +10,7 @@ import type { JSONContent, UseEditorOptions } from "@tiptap/react"
 import { cloneDeep, omit } from "lodash-es"
 import type { ReportFileUploadsResponse } from "@/opensource/apis/modules/file"
 import { InstructionGroupType, SystemInstructType } from "@/types/bot"
-import DelightfulEmojiNodeExtension from "@/opensource/components/base/DelightfulRichEditor/extensions/magicEmoji"
+import DelightfulEmojiNodeExtension from "@/opensource/components/base/DelightfulRichEditor/extensions/delightfulEmoji"
 import {
 	FileError,
 	fileToBase64,
@@ -748,7 +748,7 @@ const MessageEditor = observer(function MessageEditor({
 					{footerInstructionsNode}
 				</Flex>
 				<span className={standardStyles.tip}>
-					{isWindows ? t("placeholder.magicInputWindows") : t("placeholder.magicInput")}
+					{isWindows ? t("placeholder.delightfulInputWindows") : t("placeholder.delightfulInput")}
 				</span>
 				<DelightfulButton
 					type="primary"

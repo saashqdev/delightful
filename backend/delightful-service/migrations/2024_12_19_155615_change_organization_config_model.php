@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_api_organization_configs', function (Blueprint $table) {
+        Schema::table('delightful_api_organization_configs', function (Blueprint $table) {
             $table->string('organization_code', 64)->default('')->comment('组织code')->change();
             $table->string('app_code', 64)->default('')->comment('应用code');
 

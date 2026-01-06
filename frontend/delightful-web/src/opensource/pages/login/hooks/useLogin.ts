@@ -16,9 +16,9 @@
 //
 // export interface LoginStepResult {
 // 	access_token: string
-// 	magicOrganizationMap: Record<string, User.DelightfulOrganization>
+// 	delightfulOrganizationMap: Record<string, User.DelightfulOrganization>
 // 	organizations?: Array<User.UserOrganization>
-// 	/** magic 生态下的组织Code */
+// 	/** delightful 生态下的组织Code */
 // 	organizationCode?: string
 // 	/** teamshare 生态下的组织Code */
 // 	teamshareOrganizationCode?: string
@@ -74,7 +74,7 @@
 // 			// })
 // 			return login_code
 // 		} catch (error: any) {
-// 			const newMessage = `magicOrganizationSyncStep: ${error.message}`
+// 			const newMessage = `delightfulOrganizationSyncStep: ${error.message}`
 // 			const newError = new Error(newMessage)
 // 			newError.stack = error?.stack
 // 			return Promise.reject(error)
@@ -91,8 +91,8 @@
 // 		return Promise.resolve(config)
 // 	})
 //
-// 	/** Step 2: 根据环境同步 magic 组织 */
-// 	const magicOrganizationSyncStep = useMemoizedFn(
+// 	/** Step 2: 根据环境同步 delightful 组织 */
+// 	const delightfulOrganizationSyncStep = useMemoizedFn(
 // 		(deployCode: string, inModal: boolean = false) => {
 // 			return async (
 // 				params: Login.UserLoginsResponse | { access_token: string },
@@ -105,19 +105,19 @@
 // 						deployCode,
 // 						teamshareOrganizationCode,
 // 					)
-// 					const magicOrganizationMap = keyBy(result, "third_platform_organization_code")
-// 					return { access_token, magicOrganizationMap }
+// 					const delightfulOrganizationMap = keyBy(result, "third_platform_organization_code")
+// 					return { access_token, delightfulOrganizationMap }
 // 				} catch (error: any) {
 // 					console.log("error", error)
 // 					if (error.code === 3102) {
 // 						if (inModal) {
-// 							message.error(t("magicOrganizationSyncStep.pleaseBindExistingAccount"))
+// 							message.error(t("delightfulOrganizationSyncStep.pleaseBindExistingAccount"))
 // 						} else {
 // 							// 用户未创建账号，跳转邀请界面
 // 							navigate(RoutePath.Invite, { replace: true })
 // 						}
 // 					}
-// 					const newMessage = `magicOrganizationSyncStep: ${error.message}`
+// 					const newMessage = `delightfulOrganizationSyncStep: ${error.message}`
 // 					const newError = new Error(newMessage)
 // 					newError.stack = error?.stack
 // 					return Promise.reject(error)
@@ -133,14 +133,14 @@
 // 				organizationCode,
 // 				teamshareOrganizationCode,
 // 				organizations,
-// 				magicOrganizationMap,
+// 				delightfulOrganizationMap,
 // 			} = params
 //
 // 			useUserStore.setState((preState) => {
 // 				preState.organizationCode = organizationCode
 // 				preState.teamshareOrganizationCode = teamshareOrganizationCode
 // 				preState.organizations = organizations ?? []
-// 				preState.magicOrganizationMap = magicOrganizationMap
+// 				preState.delightfulOrganizationMap = delightfulOrganizationMap
 // 			})
 // 			return Promise.resolve(params)
 // 		},
@@ -152,7 +152,7 @@
 // 			try {
 // 				const {
 // 					access_token,
-// 					magicOrganizationMap: allDelightfulOrganizationMap,
+// 					delightfulOrganizationMap: allDelightfulOrganizationMap,
 // 					deployCode,
 // 				} = params
 //
@@ -163,41 +163,41 @@
 // 				)
 // 				const teamshareOrgsCode = organizations.map((o) => o.organization_code)
 //
-// 				// 获取到 teamshare 的组织后，需要针对上步 magicOrganizationMap 进行合法性过滤(因后端没处理 magicOrganizationMap 数据的合法性，所以这里需要根据 teamshare 中不存在的组织过滤 magicOrganizationMap)
-// 				const magicOrganizationArray = Object.values(allDelightfulOrganizationMap).filter((o) =>
+// 				// 获取到 teamshare 的组织后，需要针对上步 delightfulOrganizationMap 进行合法性过滤(因后端没处理 delightfulOrganizationMap 数据的合法性，所以这里需要根据 teamshare 中不存在的组织过滤 delightfulOrganizationMap)
+// 				const delightfulOrganizationArray = Object.values(allDelightfulOrganizationMap).filter((o) =>
 // 					teamshareOrgsCode.includes(o.third_platform_organization_code),
 // 				)
-// 				const magicOrganizationMap = keyBy(
-// 					magicOrganizationArray,
+// 				const delightfulOrganizationMap = keyBy(
+// 					delightfulOrganizationArray,
 // 					"third_platform_organization_code",
 // 				)
-// 				const teamshareOrgMap = keyBy(magicOrganizationArray, "magic_organization_code")
+// 				const teamshareOrgMap = keyBy(delightfulOrganizationArray, "delightful_organization_code")
 //
-// 				const authorizedOrgsCode = Object.keys(magicOrganizationMap) // 已授权组织
+// 				const authorizedOrgsCode = Object.keys(delightfulOrganizationMap) // 已授权组织
 // 				const authorizedOrg = organizations.find((org) =>
 // 					authorizedOrgsCode.includes(org.organization_code),
 // 				)
 //
-// 				// magicOrganizationCode 处理 (优先判断缓存是否存在)
-// 				const magicOrgCodeCache = useUserStore.getState()?.organizationCode
-// 				let magicOrgCode = null
-// 				if (magicOrgCodeCache && teamshareOrgMap?.[magicOrgCodeCache]) {
-// 					// 当且仅当缓存中的 magicOrgCode 存在且在当前账号中有效则使用缓存
-// 					magicOrgCode = magicOrgCodeCache
+// 				// delightfulOrganizationCode 处理 (优先判断缓存是否存在)
+// 				const delightfulOrgCodeCache = useUserStore.getState()?.organizationCode
+// 				let delightfulOrgCode = null
+// 				if (delightfulOrgCodeCache && teamshareOrgMap?.[delightfulOrgCodeCache]) {
+// 					// 当且仅当缓存中的 delightfulOrgCode 存在且在当前账号中有效则使用缓存
+// 					delightfulOrgCode = delightfulOrgCodeCache
 // 				} else {
-// 					// 当且仅当 magic 组织 Code 不存在的情况下，重新以第一个作为首选
-// 					magicOrgCode =
-// 						magicOrganizationMap?.[authorizedOrg?.organization_code ?? ""]
-// 							?.magic_organization_code
+// 					// 当且仅当 delightful 组织 Code 不存在的情况下，重新以第一个作为首选
+// 					delightfulOrgCode =
+// 						delightfulOrganizationMap?.[authorizedOrg?.organization_code ?? ""]
+// 							?.delightful_organization_code
 // 				}
 //
 // 				return {
 // 					access_token,
-// 					magicOrganizationMap,
+// 					delightfulOrganizationMap,
 // 					organizations,
-// 					organizationCode: magicOrgCode,
+// 					organizationCode: delightfulOrgCode,
 // 					teamshareOrganizationCode:
-// 						teamshareOrgMap[magicOrgCode ?? ""]?.third_platform_organization_code,
+// 						teamshareOrgMap[delightfulOrgCode ?? ""]?.third_platform_organization_code,
 // 				}
 // 			} catch (error: any) {
 // 				const newMessage = `organizationFetchStep: ${error.message}`
@@ -223,18 +223,18 @@
 // 			try {
 // 				const {
 // 					access_token,
-// 					magicOrganizationMap,
+// 					delightfulOrganizationMap,
 // 					organizations,
 // 					teamshareOrganizationCode,
 // 				} = params
 //
-// 				const magicOrgs = Object.values(magicOrganizationMap)
+// 				const delightfulOrgs = Object.values(delightfulOrganizationMap)
 //
 // 				const orgCode =
-// 					teamshareOrganizationCode ?? magicOrgs?.[0]?.third_platform_organization_code
+// 					teamshareOrganizationCode ?? delightfulOrgs?.[0]?.third_platform_organization_code
 // 				if (orgCode) {
 // 					const userInfo = await getUserInfo(
-// 						magicOrganizationMap?.[orgCode]?.magic_user_id,
+// 						delightfulOrganizationMap?.[orgCode]?.delightful_user_id,
 // 					)
 // 					// 登录完成后构造用户信息，维护在账号体系中
 // 					const userAccount: User.UserAccount = {
@@ -242,24 +242,24 @@
 // 						nickname: userInfo?.nickname,
 // 						organizationCode: userInfo?.organization_code,
 // 						avatar: userInfo?.avatar_url,
-// 						magic_id: userInfo?.magic_id,
-// 						magic_user_id: userInfo?.user_id,
+// 						delightful_id: userInfo?.delightful_id,
+// 						delightful_user_id: userInfo?.user_id,
 // 						access_token,
 // 						teamshareOrganizations: organizations ?? [],
-// 						organizations: magicOrgs,
+// 						organizations: delightfulOrgs,
 // 					}
 // 					useUserStore.setState((preState) => {
 // 						if (!Array.isArray(preState.accounts)) {
 // 							preState.accounts = []
 // 						}
 // 						const hasAccount = preState.accounts?.some(
-// 							(account) => account.magic_id === userAccount?.magic_id,
+// 							(account) => account.delightful_id === userAccount?.delightful_id,
 // 						)
 // 						if (!hasAccount) {
 // 							preState.accounts.push(userAccount)
 // 						}
 // 						preState.info = {
-// 							magic_id: userInfo?.magic_id,
+// 							delightful_id: userInfo?.delightful_id,
 // 							user_id: userInfo?.user_id,
 // 							status: userInfo?.status,
 // 							nickname: userInfo?.nickname,
@@ -293,7 +293,7 @@
 // 		}
 // 	})
 //
-// 	/** Step 6: 用户信息同步(magic体系的唯一用户Id) */
+// 	/** Step 6: 用户信息同步(delightful体系的唯一用户Id) */
 // 	const fetchUserInfoStep = useMemoizedFn(async (unionId: string) => {
 // 		try {
 // 			const userInfo = await getUserInfo(unionId)
@@ -312,7 +312,7 @@
 // 		authorizationSyncStep,
 // 		deployCodeSyncStep,
 // 		envSyncStep,
-// 		magicOrganizationSyncStep,
+// 		delightfulOrganizationSyncStep,
 // 		organizationFetchStep,
 // 		organizationSyncStep,
 // 		accountSyncStep,

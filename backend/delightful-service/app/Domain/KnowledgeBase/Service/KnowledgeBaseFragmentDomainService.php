@@ -57,11 +57,11 @@ readonly class KnowledgeBaseFragmentDomainService
 
     public function show(KnowledgeBaseDataIsolation $dataIsolation, int $id, bool $selectForUpdate = false, bool $throw = true): ?KnowledgeBaseFragmentEntity
     {
-        $magicFlowKnowledgeFragmentEntity = $this->knowledgeBaseFragmentRepository->getById($dataIsolation, $id, $selectForUpdate);
-        if (empty($magicFlowKnowledgeFragmentEntity) && $throw) {
+        $delightfulFlowKnowledgeFragmentEntity = $this->knowledgeBaseFragmentRepository->getById($dataIsolation, $id, $selectForUpdate);
+        if (empty($delightfulFlowKnowledgeFragmentEntity) && $throw) {
             ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$id}] 不存在");
         }
-        return $magicFlowKnowledgeFragmentEntity;
+        return $delightfulFlowKnowledgeFragmentEntity;
     }
 
     public function save(
@@ -124,11 +124,11 @@ readonly class KnowledgeBaseFragmentDomainService
 
     public function showByBusinessId(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, string $businessId): KnowledgeBaseFragmentEntity
     {
-        $magicFlowKnowledgeFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $knowledgeCode, $businessId);
-        if (empty($magicFlowKnowledgeFragmentEntity)) {
+        $delightfulFlowKnowledgeFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $knowledgeCode, $businessId);
+        if (empty($delightfulFlowKnowledgeFragmentEntity)) {
             ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$businessId}] 不存在");
         }
-        return $magicFlowKnowledgeFragmentEntity;
+        return $delightfulFlowKnowledgeFragmentEntity;
     }
 
     public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $knowledgeBaseEntity, KnowledgeBaseFragmentEntity $knowledgeBaseFragmentEntity): void

@@ -57,7 +57,7 @@ class AgentContext(BaseAgentContext):
             self.set_chat_history_dir(chat_history_dir)
 
         # Set default agent name
-        self.set_agent_name("magic")
+        self.set_agent_name("delightful")
 
     def _init_shared_fields(self):
         """Initialize shared fields and register to shared_context"""

@@ -28,7 +28,7 @@ export default function DelightfulRadioFavor({ options, onChange, selectedValue,
 		handleChange(changeValue)
 	}
 	return (
-		<div className={styles.magicRadioFavor}>
+		<div className={styles.delightfulRadioFavor}>
 			{options &&
 				options.map((option) => (
 					<div

@@ -35,7 +35,7 @@ class MiracleVisionAPI
     {
         $this->key = $key;
         $this->secret = $secret;
-        $this->baseUrl = 'https://openapi.meitu.com/whee/business/image_magicsr.json';
+        $this->baseUrl = 'https://openapi.meitu.com/whee/business/image_delightfulsr.json';
         $this->queryUrl = 'https://openapi.meitu.com/api/v1/sdk/status';
         $this->signer = new Signer($this->key, $this->secret);
         $this->client = new Client([
@@ -50,7 +50,7 @@ class MiracleVisionAPI
     public function getStyle(): array
     {
         $request = $this->createSignedRequest(
-            'https://openapi.meitu.com/whee/business/magicsr_config.json',
+            'https://openapi.meitu.com/whee/business/delightfulsr_config.json',
             'GET'
         );
 
@@ -94,7 +94,7 @@ class MiracleVisionAPI
     public function submitTask(string $imageUrl, int $styleId): array
     {
         $body = [
-            'task' => '/v1/dlbeautymagicsr_async',
+            'task' => '/v1/dlbeautydelightfulsr_async',
             'task_type' => 'mtlab',
             'init_images' => [['url' => $imageUrl]],
             'sync_timeout' => -1,

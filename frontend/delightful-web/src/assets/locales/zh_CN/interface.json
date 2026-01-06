@@ -288,7 +288,7 @@
 				"submitted": "已"
 			},
 			"loading": "表单加载中",
-			"magic_table": {
+			"delightful_table": {
 				"add_row": "新增",
 				"cancel": "取消",
 				"confirmDelete": "确认删除?",
@@ -545,7 +545,7 @@
 			"files": "[文件]",
 			"image": "[图片]",
 			"link": "[链接]",
-			"magic_search_card": "[AI 搜索卡片]"
+			"delightful_search_card": "[AI 搜索卡片]"
 		},
 		"mulitiple": "多选",
 		"oss_file": {
@@ -800,7 +800,7 @@
 				"cloudDocument": "云文档",
 				"excel": "Excel 文档",
 				"folder": "文件夹",
-				"magicTable": "神奇表格",
+				"delightfulTable": "神奇表格",
 				"ppt": "演示文档",
 				"whiteBoard": "白板",
 				"word": "Word 文档"
@@ -1059,7 +1059,7 @@
 			"description": "我们正处于内测阶段，您可以通过加入候选名单获得邀请码体验我们的服务",
 			"emailInvalid": "邮箱格式有误",
 			"emailLabel": "联系邮箱",
-			"emailPlaceholder": "请提供您的常用联系邮箱，如：mail@letsmagic.cn",
+			"emailPlaceholder": "请提供您的常用联系邮箱，如：mail@letsdelightful.cn",
 			"emailRequired": "请输入联系邮箱",
 			"formDescription": "填写以下资料，申请加入「麦吉·Delightful」候选名单，我们将很快为您发送邀请码",
 			"jobInfoLabel": "职业信息",
@@ -1169,8 +1169,8 @@
 		"login": {
 			"enterVerificationCode": "输入手机验证码"
 		},
-		"magicInput": "Enter 发送 | ⌘ + Enter 换行",
-		"magicInputWindows": "",
+		"delightfulInput": "Enter 发送 | ⌘ + Enter 换行",
+		"delightfulInputWindows": "",
 		"pleaseEnterMessage": "请输入消息"
 	},
 	"pleaseInput1": "请输入",
@@ -1244,7 +1244,7 @@
 		"loginDevices": "登录设备",
 		"loginPassword": "登录密码",
 		"loginTime": "登录时间",
-		"magicId": "Delightful ID",
+		"delightfulId": "Delightful ID",
 		"modern": "现代化",
 		"newPhone": "新手机号",
 		"newPhoneCode": "新手机号验证码",

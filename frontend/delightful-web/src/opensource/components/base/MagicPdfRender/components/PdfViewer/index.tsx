@@ -34,7 +34,7 @@ function PdfViewer({
 	if (!file) {
 		return (
 			<div className={styles.error}>
-				<div>{t("magicPdfRender.status.noFile")}</div>
+				<div>{t("delightfulPdfRender.status.noFile")}</div>
 			</div>
 		)
 	}
@@ -45,8 +45,8 @@ function PdfViewer({
 			file={file}
 			onLoadSuccess={onDocumentLoadSuccess}
 			onLoadError={onDocumentLoadError}
-			loading={<div className={styles.loading}>{t("magicPdfRender.status.loading")}</div>}
-			error={<div className={styles.error}>{t("magicPdfRender.status.loadFailed")}</div>}
+			loading={<div className={styles.loading}>{t("delightfulPdfRender.status.loading")}</div>}
+			error={<div className={styles.error}>{t("delightfulPdfRender.status.loadFailed")}</div>}
 		>
 			{numPages > 0 && (
 				<div className={styles.pagesContainer}>
@@ -72,18 +72,18 @@ function PdfViewer({
 										onLoadError={onPageLoadError}
 										error={
 											<div className={styles.error}>
-												{t("magicPdfRender.status.pageLoadFailed")}
+												{t("delightfulPdfRender.status.pageLoadFailed")}
 											</div>
 										}
 									/>
 								) : (
 									<div className={styles.pagePlaceholder}>
 										<div>
-											{t("magicPdfRender.placeholders.pageNumber", {
+											{t("delightfulPdfRender.placeholders.pageNumber", {
 												number: currentPageNum,
 											})}
 										</div>
-										<div>{t("magicPdfRender.placeholders.scrollToLoad")}</div>
+										<div>{t("delightfulPdfRender.placeholders.scrollToLoad")}</div>
 									</div>
 								)}
 							</div>

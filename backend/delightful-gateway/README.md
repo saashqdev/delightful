@@ -18,7 +18,7 @@
 ## 项目结构
 
 ```
-magic-gateway/
+delightful-gateway/
 ├── main.go            # 主程序入口
 ├── .env               # 环境变量配置文件
 ├── README.md          # 项目说明文档
@@ -198,7 +198,7 @@ OPENAI_MODEL=gpt-4
 
 # Delightful 服务配置
 DELIGHTFUL_API_KEY=xxx
-DELIGHTFUL_API_BASE_URL=https://api.magic.com/v1
+DELIGHTFUL_API_BASE_URL=https://api.delightful.com/v1
 DELIGHTFUL_MODEL=gpt-4o-global
 
 # DeepSeek 服务配置
@@ -240,8 +240,8 @@ DELIGHTFUL_MODEL="DELIGHTFUL_MODEL"
 
 ```bash
 curl -X POST http://localhost:8000/auth \
-  -H "magic-user-id: your-user-id" \
-  -H "magic-organization-code: your-organization-code" \
+  -H "delightful-user-id: your-user-id" \
+  -H "delightful-organization-code: your-organization-code" \
   -H "X-Gateway-API-Key: your-gateway-api-key-here"
 ```
 
@@ -294,7 +294,7 @@ curl http://localhost:8000/services \
     },
     {
       "name": "DELIGHTFUL",
-      "base_url": "api.magic.com",
+      "base_url": "api.delightful.com",
       "default_model": "gpt-4o-global"
     },
     {
@@ -363,7 +363,7 @@ curl -X POST http://host.docker.internal:8000/openai/v1/chat/completions \
   }'
 
 # 调用 Delightful 服务
-curl -X POST http://host.docker.internal:8000/magic/v1/chat/completions \
+curl -X POST http://host.docker.internal:8000/delightful/v1/chat/completions \
   -H "Delightful-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{

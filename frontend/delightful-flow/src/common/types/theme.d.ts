@@ -12,7 +12,7 @@ declare module 'antdg-provider/context' {
 export interface CustomToken {
 	/** Top menu bar height */
 	titleBarHeight?: number
-	magicColorScales: ColorScales
-	magicColorUsages: ColorUsages
+	delightfulColorScales: ColorScales
+	delightfulColorUsages: ColorUsages
 	[key: string]: any
 }

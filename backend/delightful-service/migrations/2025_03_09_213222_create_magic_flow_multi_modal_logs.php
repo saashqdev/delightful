@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_flow_multi_modal_logs', function (Blueprint $table) {
+        Schema::create('delightful_flow_multi_modal_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('message_id', 64)->default('')->comment('消息ID')->index();
             $table->tinyInteger('type')->default(0)->comment('多模态类型。1 图片');
@@ -29,6 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_flow_multi_modal_logs');
+        Schema::dropIfExists('delightful_flow_multi_modal_logs');
     }
 };

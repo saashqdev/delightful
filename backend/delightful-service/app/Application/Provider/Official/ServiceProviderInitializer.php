@@ -87,7 +87,7 @@ class ServiceProviderInitializer
                 'name' => 'Delightful',
                 'provider_code' => 'Official',
                 'description' => '由 Delightful 通过官方部署的 API 来实现 AI 模型的调用，可直接购买积分使用海量的大模型。',
-                'icon' => 'DELIGHTFUL/713471849556451329/default/magic.png',
+                'icon' => 'DELIGHTFUL/713471849556451329/default/delightful.png',
                 'provider_type' => 1, // Official
                 'category' => 'llm',
                 'status' => 1,
@@ -217,7 +217,7 @@ class ServiceProviderInitializer
                 'name' => 'Delightful',
                 'provider_code' => 'Official',
                 'description' => '由 Delightful 通过官方部署的 API 来实现多种热门的文生图、图生图等模型的调用，可直接购买积分使用海量的大模型。',
-                'icon' => 'DELIGHTFUL/713471849556451329/default/magic.png',
+                'icon' => 'DELIGHTFUL/713471849556451329/default/delightful.png',
                 'provider_type' => 1, // Official
                 'category' => 'vlm',
                 'status' => 1,

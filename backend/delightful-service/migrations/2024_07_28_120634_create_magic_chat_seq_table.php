@@ -14,19 +14,19 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_chat_sequences')) {
+        if (Schema::hasTable('delightful_chat_sequences')) {
             return;
         }
-        Schema::create('magic_chat_sequences', static function (Blueprint $table) {
+        Schema::create('delightful_chat_sequences', static function (Blueprint $table) {
             // 根据上面的建表语句，得出以下代码
             $table->bigIncrements('id')->comment('主键id,没啥用');
             $table->string('organization_code', 64)->comment('序列号所属的组织编码.')->default('');
             $table->tinyInteger('object_type')->comment('对象类型,0:ai,1:用户；2：应用;3:文档;4:多维表格');
-            $table->string('object_id', 64)->comment('对象id. 如果是用户时,表示magic_id');
+            $table->string('object_id', 64)->comment('对象id. 如果是用户时,表示delightful_id');
             $table->string('seq_id', 64)->comment('消息序列号 id，每个账号的所有消息必须逐渐增大');
             $table->string('seq_type', 32)->comment('消息大类型:控制消息,聊天消息。');
             $table->text('content')->comment('序列号详情. 一些不可见的控制消息,只在seq表存在详情. 以及写时复制一份message表content到seq表用.');
-            $table->string('magic_message_id', 64)->comment('服务端生成的唯一消息id,用于消息撤回/编辑');
+            $table->string('delightful_message_id', 64)->comment('服务端生成的唯一消息id,用于消息撤回/编辑');
             $table->string('message_id', 64)->comment('序列号关联的用户消息id,实现已读回执,消息撤回/编辑等')->default(0);
             // 引用的消息id
             $table->string('refer_message_id', 64)->comment('引用的消息id,实现已读回执,消息撤回/编辑等');
@@ -41,8 +41,8 @@ return new class extends Migration {
             // app_message_id
             $table->string('app_message_id', 64)->default('')->comment('冗余字段,客户端生成的消息id,用于防客户端重复');
             # 以下是索引设置
-            // magic_message_id 索引
-            $table->index(['magic_message_id'], 'idx_magic_message_id');
+            // delightful_message_id 索引
+            $table->index(['delightful_message_id'], 'idx_delightful_message_id');
             // 因为经常需要按 seq_id 排序，所以增加联合索引
             // 以下索引创建移动到单独的迁移文件中
             $table->timestamps();
@@ -56,6 +56,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_chat_sequences');
+        Schema::dropIfExists('delightful_chat_sequences');
     }
 };

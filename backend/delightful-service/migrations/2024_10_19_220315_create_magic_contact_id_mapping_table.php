@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_contact_id_mapping')) {
+        if (Schema::hasTable('delightful_contact_id_mapping')) {
             return;
         }
-        Schema::create('magic_contact_id_mapping', static function (Blueprint $table) {
+        Schema::create('delightful_contact_id_mapping', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('origin_id', 255)->comment('源id');
             $table->string('new_id', 255)->comment('新id');
@@ -36,6 +36,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_contact_id_mapping');
+        Schema::dropIfExists('delightful_contact_id_mapping');
     }
 };

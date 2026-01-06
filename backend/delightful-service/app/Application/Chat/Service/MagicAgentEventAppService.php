@@ -16,7 +16,7 @@ use App\Domain\Chat\Service\DelightfulConversationDomainService;
 class DelightfulAgentEventAppService implements AgentExecuteInterface
 {
     public function __construct(
-        protected readonly DelightfulConversationDomainService $magicConversationDomainService,
+        protected readonly DelightfulConversationDomainService $delightfulConversationDomainService,
     ) {
     }
 
@@ -27,7 +27,7 @@ class DelightfulAgentEventAppService implements AgentExecuteInterface
 
         // 流程开始执行前,触发开始输入事件
         if ($seqEntity->canTriggerFlow()) {
-            $this->magicConversationDomainService->agentOperateConversationStatusV2(
+            $this->delightfulConversationDomainService->agentOperateConversationStatusV2(
                 ControlMessageType::StartConversationInput,
                 $seqEntity->getConversationId(),
                 $seqEntity->getExtra()?->getTopicId()
@@ -40,7 +40,7 @@ class DelightfulAgentEventAppService implements AgentExecuteInterface
         // 流程执行结束，推送结束输入事件
         // ai准备开始发消息了,结束输入状态
         if ($seqEntity->canTriggerFlow()) {
-            $this->magicConversationDomainService->agentOperateConversationStatusV2(
+            $this->delightfulConversationDomainService->agentOperateConversationStatusV2(
                 ControlMessageType::EndConversationInput,
                 $seqEntity->getConversationId(),
                 $seqEntity->getExtra()?->getTopicId()

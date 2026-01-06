@@ -14,9 +14,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_api_organization_configs', function (Blueprint $table) {
+        Schema::table('delightful_api_organization_configs', function (Blueprint $table) {
             $table->dropIndex('idx_organization');
-            $table->dropIndex('magic_api_organization_configs_app_code_organization_code_index');
+            $table->dropIndex('delightful_api_organization_configs_app_code_organization_code_index');
 
             $table->unique(['app_code', 'organization_code'], 'idx_app_org');
         });

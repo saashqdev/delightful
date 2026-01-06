@@ -14,12 +14,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_contact_accounts')) {
+        if (Schema::hasTable('delightful_contact_accounts')) {
             return;
         }
-        Schema::create('magic_contact_accounts', static function (Blueprint $table) {
+        Schema::create('delightful_contact_accounts', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('magic_id', 64)->comment('账号id,跨租户(组织)唯一. 为了避免与user_id(组织内唯一)的概念混淆,因此起名了magic_id')->default('');
+            $table->string('delightful_id', 64)->comment('账号id,跨租户(组织)唯一. 为了避免与user_id(组织内唯一)的概念混淆,因此起名了delightful_id')->default('');
             // 账号类型
             $table->tinyInteger('type')->comment('账号类型,0:ai,1:人类')->default(0);
             // ai_code
@@ -41,7 +41,7 @@ return new class extends Migration {
 
             // 索引设置
             $table->index(['status', 'type'], 'idx_status_type');
-            $table->unique(['magic_id'], 'unq_magic_id');
+            $table->unique(['delightful_id'], 'unq_delightful_id');
             $table->unique(['country_code', 'phone'], 'unq_country_code_phone');
             $table->timestamps();
             $table->softDeletes();
@@ -54,6 +54,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_contact_accounts');
+        Schema::dropIfExists('delightful_contact_accounts');
     }
 };

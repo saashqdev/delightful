@@ -79,7 +79,7 @@ export default function useFlowHeader() {
 
 		if (existOutOfFlowNode) {
 			Modal.confirm({
-				title: t("flow.withoutTriggerNodeTips", { ns: "magicFlow" }),
+				title: t("flow.withoutTriggerNodeTips", { ns: "delightfulFlow" }),
 				type: "warning",
 				onOk: () => {
 					realSubmitFn(status)
@@ -95,8 +95,8 @@ export default function useFlowHeader() {
 			// [FlowStatus.UnSave]: "未发布",
 			// [FlowStatus.Draft]: "已保存",
 			// [FlowStatus.Enable]: "已发布",
-			true: i18next.t("flow.enabled", { ns: "magicFlow" }),
-			false: i18next.t("flow.baned", { ns: "magicFlow" }),
+			true: i18next.t("flow.enabled", { ns: "delightfulFlow" }),
+			false: i18next.t("flow.baned", { ns: "delightfulFlow" }),
 		}
 	}, [t])
 

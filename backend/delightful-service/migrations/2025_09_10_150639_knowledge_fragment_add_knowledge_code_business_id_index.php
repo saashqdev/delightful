@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_flow_knowledge_fragment', function (Blueprint $table) {
+        Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
             $table->index(['knowledge_code', 'business_id'], 'idx_knowledge_code_business_id');
         });
     }

@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    // Temporarily pin the magic-mind-search AI code; it returns hardcoded search results instead of running through flow logic.
+    // Temporarily pin the delightful-mind-search AI code; it returns hardcoded search results instead of running through flow logic.
     'deep_search' => [
         'ai_code' => env('AGGREGATE_SEARCH_AI_CODE', 'DELIGHTFUL-FLOW-672c6375371f51-29426462'),
     ],

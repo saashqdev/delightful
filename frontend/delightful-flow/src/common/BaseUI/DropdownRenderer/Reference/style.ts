@@ -1,11 +1,11 @@
 import styled, { createGlobalStyle } from "styled-components";
 
 export const RendererGlobalStyle = createGlobalStyle`
-    .magic-select-dropdown {
+    .delightful-select-dropdown {
         padding: 0;
         min-width: 250px!important;
     }
-	.magic-tree-list {
+	.delightful-tree-list {
 		max-height: 350px;
 		overflow: scroll;
 	}
@@ -15,7 +15,7 @@ export const RendererWrapper = styled.div`
     max-width: 250px;
     .search-wrapper {
         padding: 4px;
-		.magic-input {
+		.delightful-input {
 			height: 100%;
 		}
         .title {
@@ -26,22 +26,22 @@ export const RendererWrapper = styled.div`
             border-bottom: none;
         }
     }
-    .magic-popover-inner-content {
+    .delightful-popover-inner-content {
         padding: 0;
     }
     .site-tree-search-value {
         color: #32c436;
     }
 
-    .magic-tree {
+    .delightful-tree {
         color: #1C1D23;
         margin: 0 4px;
-        .magic-tree-switcher {
+        .delightful-tree-switcher {
             width: 12px;
             height: 100%;
             margin-left: 4px;
         }
-        .magic-tree-treenode {
+        .delightful-tree-treenode {
             margin: 0 0 4px 0;
             padding: 0;
             border-radius: 8px;
@@ -52,7 +52,7 @@ export const RendererWrapper = styled.div`
             }
 
             &.is-application {
-                .magic-tree-node-content-wrapper {
+                .delightful-tree-node-content-wrapper {
                     color: #1C1D23;
                 }
             }
@@ -61,19 +61,19 @@ export const RendererWrapper = styled.div`
             }
 
 			&.is-variable {
-                .magic-tree-node-content-wrapper {
+                .delightful-tree-node-content-wrapper {
                     color: #FF7D00;
 				}
 			}
             
-            .magic-tree-node-content-wrapper {
+            .delightful-tree-node-content-wrapper {
                 color: #315CEC;
                 display: flex;
                 padding: 0 2px;
                 align-items: center;
                 font-size: 12px;
                 line-height: 16px;
-                .magic-tree-iconEle  {
+                .delightful-tree-iconEle  {
                     width: 18px;
                     height: 18px;
                     line-height: 1;
@@ -96,7 +96,7 @@ export const RendererWrapper = styled.div`
 						}
 					}
                 }
-                .magic-tree-title {
+                .delightful-tree-title {
 					display: flex;
 					flex: 1;
                     &>span {

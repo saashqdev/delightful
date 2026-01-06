@@ -30,6 +30,6 @@ class AddRouteListener implements ListenerInterface
     {
         // avoid DispatcherFactory not being loaded
         $this->container->get(DispatcherFactory::class);
-        RouteLoader::loadPath(BASE_PATH . '/vendor/dtyq/super-magic-module/config/routes.php');
+        RouteLoader::loadPath(BASE_PATH . '/vendor/dtyq/super-delightful-module/config/routes.php');
     }
 }

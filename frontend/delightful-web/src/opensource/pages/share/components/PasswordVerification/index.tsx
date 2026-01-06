@@ -25,17 +25,17 @@ const useStyles = createStyles(({ token }) => {
 			alignItems: "center",
 			justifyContent: "center",
 			borderRadius: "50%",
-			backgroundColor: token.magicColorUsages.primaryLight.default,
+			backgroundColor: token.delightfulColorUsages.primaryLight.default,
 		},
 		title: {
 			fontSize: "18px",
 			fontWeight: "500",
 			marginBottom: "16px",
-			color: token.magicColorUsages.text[0],
+			color: token.delightfulColorUsages.text[0],
 		},
 		description: {
 			fontSize: "14px",
-			color: token.magicColorUsages.text[1],
+			color: token.delightfulColorUsages.text[1],
 			marginBottom: "24px",
 		},
 		inputContainer: {
@@ -49,11 +49,11 @@ const useStyles = createStyles(({ token }) => {
 			marginRight: "8px",
 		},
 		button: {
-			backgroundColor: token.magicColorUsages.primary.default,
-			borderColor: token.magicColorUsages.primary.default,
+			backgroundColor: token.delightfulColorUsages.primary.default,
+			borderColor: token.delightfulColorUsages.primary.default,
 			"&:hover": {
-				backgroundColor: token.magicColorUsages.primary.hover,
-				borderColor: token.magicColorUsages.primary.hover,
+				backgroundColor: token.delightfulColorUsages.primary.hover,
+				borderColor: token.delightfulColorUsages.primary.hover,
 			},
 		},
 	}

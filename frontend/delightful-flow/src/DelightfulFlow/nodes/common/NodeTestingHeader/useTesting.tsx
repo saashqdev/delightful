@@ -32,17 +32,17 @@ export default function useTesting() {
 		if (isTesting)
 			return {
 				icon: <Spin size="small" className={styles.headerLoading} />,
-				label: `${i18next.t("flow.testing", { ns: "magicFlow" })}...`,
+				label: `${i18next.t("flow.testing", { ns: "delightfulFlow" })}...`,
 				background: "white",
 				tags: [],
 			}
 		const result = {
 			icon: <IconCircleCheckFilled size={24} color="#32C436" />,
-			label: i18next.t("flow.testSuccess", { ns: "magicFlow" }),
+			label: i18next.t("flow.testSuccess", { ns: "delightfulFlow" }),
 			background: "#ECF9EC",
 			tags: [
 				{
-					content: `${i18next.t("flow.testTime", { ns: "magicFlow" })} ${(
+					content: `${i18next.t("flow.testTime", { ns: "delightfulFlow" })} ${(
 						Number(currentNodeTestingResult?.elapsed_time) / 1000
 					).toFixed(2)}s`,
 					background: "#D0F3CF",
@@ -53,7 +53,7 @@ export default function useTesting() {
 		if (!currentNodeTestingResult?.success) {
 			return {
 				icon: <IconCircleXFilled size={24} color="#FF1809" />,
-				label: i18next.t("flow.testError", { ns: "magicFlow" }),
+				label: i18next.t("flow.testError", { ns: "delightfulFlow" }),
 				background: "#FFF0EB",
 				tags: [],
 			}

@@ -14,8 +14,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_chat_sequences', function (Blueprint $table) {
-            if (! Schema::hasIndex('magic_chat_sequences', 'idx_object_type_object_id_app_message_id')) {
+        Schema::table('delightful_chat_sequences', function (Blueprint $table) {
+            if (! Schema::hasIndex('delightful_chat_sequences', 'idx_object_type_object_id_app_message_id')) {
                 $table->index(['object_type', 'object_id', 'app_message_id'], 'idx_object_type_object_id_app_message_id');
             }
         });

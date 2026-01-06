@@ -15,10 +15,10 @@ class CreateDelightfulChatMessageTable extends Migration
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_chat_messages')) {
+        if (Schema::hasTable('delightful_chat_messages')) {
             return;
         }
-        Schema::create('magic_chat_messages', static function (Blueprint $table) {
+        Schema::create('delightful_chat_messages', static function (Blueprint $table) {
             // 根据上面的建表语句，得出以下代码
             $table->bigIncrements('id');
             // 发件方所属组织
@@ -31,7 +31,7 @@ class CreateDelightfulChatMessageTable extends Migration
             $table->string('receive_organization_code', 64)->comment('接收方组织编码,可能为空字符串')->default('');
             // 消息的相关id
             $table->string('app_message_id', 64)->comment('客户端生成的消息id,用于防客户端重复');
-            $table->string('magic_message_id', 64)->comment('服务端生成的唯一消息id,用于消息撤回/编辑');
+            $table->string('delightful_message_id', 64)->comment('服务端生成的唯一消息id,用于消息撤回/编辑');
             # ## 消息结构
             // 消息优先级,由于系统稳定性管理
             $table->tinyInteger('priority')->default(0)->comment('消息优先级,0~255,0最低,255最高');
@@ -40,7 +40,7 @@ class CreateDelightfulChatMessageTable extends Migration
             $table->timestamp('send_time')->comment('消息发送时间');
             $table->index(['sender_id', 'sender_type', 'sender_organization_code'], 'idx_sender_id_type');
             $table->index(['receive_id', 'receive_type', 'receive_organization_code'], 'idx_receive_id_type');
-            $table->unique(['magic_message_id'], 'unq_magic_message_id');
+            $table->unique(['delightful_message_id'], 'unq_delightful_message_id');
             $table->timestamps();
             $table->comment('消息详情表,记录一条消息的根本信息');
             $table->softDeletes();
@@ -52,6 +52,6 @@ class CreateDelightfulChatMessageTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_chat_messages');
+        Schema::dropIfExists('delightful_chat_messages');
     }
 }

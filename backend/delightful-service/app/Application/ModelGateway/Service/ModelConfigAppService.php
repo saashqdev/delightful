@@ -87,7 +87,7 @@ class ModelConfigAppService extends AbstractLLMAppService
         $availableModels = array_flip($chatModelsName);
 
         // 获取系统默认的降级链
-        $systemFallbackChain = config('magic-api.model_fallback_chain.chat', []);
+        $systemFallbackChain = config('delightful-api.model_fallback_chain.chat', []);
 
         // 合并用户传入的降级链与系统默认的降级链
         // 用户传入的降级链优先级更高

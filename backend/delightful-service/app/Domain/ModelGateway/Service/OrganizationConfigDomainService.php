@@ -26,7 +26,7 @@ class OrganizationConfigDomainService extends AbstractDomainService
             $organizationConfig = new OrganizationConfigEntity();
             $organizationConfig->setAppCode($appCode);
             $organizationConfig->setOrganizationCode($organizationCode);
-            $organizationConfig->setTotalAmount(config('magic-api.default_amount_config.organization'));
+            $organizationConfig->setTotalAmount(config('delightful-api.default_amount_config.organization'));
             $organizationConfig->setRpm(0);
             $organizationConfig = $this->organizationConfigRepository->create($dataIsolation, $organizationConfig);
         }

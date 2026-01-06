@@ -12,17 +12,17 @@ use App\Domain\OrganizationEnvironment\Entity\DelightfulOrganizationEnvEntity;
 
 interface OrganizationsEnvironmentRepositoryInterface
 {
-    public function getOrganizationEnvironmentByDelightfulOrganizationCode(string $magicOrganizationCode): ?DelightfulOrganizationEnvEntity;
+    public function getOrganizationEnvironmentByDelightfulOrganizationCode(string $delightfulOrganizationCode): ?DelightfulOrganizationEnvEntity;
 
-    public function getOrganizationEnvironmentByOrganizationCode(string $originOrganizationCode, DelightfulEnvironmentEntity $magicEnvironmentEntity): ?DelightfulOrganizationEnvEntity;
+    public function getOrganizationEnvironmentByOrganizationCode(string $originOrganizationCode, DelightfulEnvironmentEntity $delightfulEnvironmentEntity): ?DelightfulOrganizationEnvEntity;
 
-    public function createOrganizationEnvironment(DelightfulOrganizationEnvEntity $magicOrganizationEnvEntity): void;
+    public function createOrganizationEnvironment(DelightfulOrganizationEnvEntity $delightfulOrganizationEnvEntity): void;
 
     /**
-     * @param string[] $magicOrganizationCodes
+     * @param string[] $delightfulOrganizationCodes
      * @return DelightfulOrganizationEnvEntity[]
      */
-    public function getOrganizationEnvironments(array $magicOrganizationCodes, DelightfulEnvironmentEntity $magicEnvironmentEntity): array;
+    public function getOrganizationEnvironments(array $delightfulOrganizationCodes, DelightfulEnvironmentEntity $delightfulEnvironmentEntity): array;
 
     /**
      * 获取所有组织编码
@@ -30,5 +30,5 @@ interface OrganizationsEnvironmentRepositoryInterface
      */
     public function getAllOrganizationCodes(): array;
 
-    public function getOrganizationEnvironmentByThirdPartyOrganizationCode(string $thirdPartyOrganizationCode, DelightfulEnvironmentEntity $magicEnvironmentEntity): ?DelightfulOrganizationEnvEntity;
+    public function getOrganizationEnvironmentByThirdPartyOrganizationCode(string $thirdPartyOrganizationCode, DelightfulEnvironmentEntity $delightfulEnvironmentEntity): ?DelightfulOrganizationEnvEntity;
 }

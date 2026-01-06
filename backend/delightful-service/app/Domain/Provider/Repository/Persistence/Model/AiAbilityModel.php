@@ -28,7 +28,7 @@ class AiAbilityModel extends AbstractModel
 {
     use Snowflake;
 
-    protected ?string $table = 'magic_ai_abilities';
+    protected ?string $table = 'delightful_ai_abilities';
 
     protected array $fillable = [
         'id',

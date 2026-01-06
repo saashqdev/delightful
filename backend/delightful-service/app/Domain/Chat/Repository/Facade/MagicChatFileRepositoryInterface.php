@@ -12,14 +12,14 @@ use App\Domain\Chat\Entity\DelightfulChatFileEntity;
 interface DelightfulChatFileRepositoryInterface
 {
     // 用户上传了文件
-    public function uploadFile(DelightfulChatFileEntity $magicFileDTO): DelightfulChatFileEntity;
+    public function uploadFile(DelightfulChatFileEntity $delightfulFileDTO): DelightfulChatFileEntity;
 
     /**
      * 批量上传文件.
-     * @param DelightfulChatFileEntity[] $magicFileDTOs
+     * @param DelightfulChatFileEntity[] $delightfulFileDTOs
      * @return DelightfulChatFileEntity[]
      */
-    public function uploadFiles(array $magicFileDTOs): array;
+    public function uploadFiles(array $delightfulFileDTOs): array;
 
     /**
      * @return DelightfulChatFileEntity[]

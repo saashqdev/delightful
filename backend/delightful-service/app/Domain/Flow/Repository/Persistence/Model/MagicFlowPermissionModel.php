@@ -32,7 +32,7 @@ class DelightfulFlowPermissionModel extends AbstractModel
 
     public bool $timestamps = false;
 
-    protected ?string $table = 'magic_flow_permissions';
+    protected ?string $table = 'delightful_flow_permissions';
 
     protected array $fillable = [
         'id', 'organization_code', 'resource_type', 'resource_id', 'target_type', 'target_id', 'operation', 'created_uid', 'created_at', 'updated_uid', 'updated_at',

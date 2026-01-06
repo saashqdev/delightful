@@ -41,9 +41,9 @@ export default function PublishListButton({ isAgent, flow }: PublishListButtonPr
 					name: item.version_number,
 					description: item.version_description,
 					modifier_info: {
-						...item.magicUserEntity,
-						name: item.magicUserEntity?.nickname,
-						avatar: item.magicUserEntity?.avatar_url,
+						...item.delightfulUserEntity,
+						name: item.delightfulUserEntity?.nickname,
+						avatar: item.delightfulUserEntity?.avatar_url,
 					},
 					modifier: item.updated_uid,
 					creator: item.created_uid,
@@ -69,16 +69,16 @@ export default function PublishListButton({ isAgent, flow }: PublishListButtonPr
 					versionDetail = await BotApi.getBotVersionDetail(version.id)
 					updateInstructList(versionDetail.botVersionEntity.instructs)
 					setCurrentFlow({
-						...versionDetail.magicFlowEntity,
+						...versionDetail.delightfulFlowEntity,
 						version_code: version.id,
-						id: versionDetail.magicFlowEntity.id,
+						id: versionDetail.delightfulFlowEntity.id,
 						user_operation: flow?.user_operation,
 						icon: versionDetail.botVersionEntity.robot_avatar,
 						name: versionDetail.botVersionEntity.robot_name,
 					})
 				} else {
 					versionDetail = await FlowApi.getFlowPublishDetail(flow?.id ?? "", version.id)
-					setCurrentFlow({ ...versionDetail.magic_flow, version_code: version.id })
+					setCurrentFlow({ ...versionDetail.delightful_flow, version_code: version.id })
 					await FlowApi.restoreFlow(flow?.id ?? "", version.id)
 				}
 

@@ -32,9 +32,9 @@ use Throwable;
  * Handles asynchronous batch file copy operations when dealing with multiple files.
  */
 #[Consumer(
-    exchange: 'super_magic_file_batch_copy',
-    routingKey: 'super_magic_file_batch_copy',
-    queue: 'super_magic_file_batch_copy',
+    exchange: 'super_delightful_file_batch_copy',
+    routingKey: 'super_delightful_file_batch_copy',
+    queue: 'super_delightful_file_batch_copy',
     nums: 1
 )]
 class FileBatchCopySubscriber extends ConsumerMessage

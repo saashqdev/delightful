@@ -52,9 +52,9 @@ class DelightfulUserTaskAppService extends AbstractAppService
 {
     public function __construct(
         private TaskSchedulerDomainService $taskSchedulerDomainService,
-        private DelightfulAgentDomainService $magicAgentDomainService,
-        private DelightfulConversationDomainService $magicConversationDomainService,
-        private DelightfulUserDomainService $magicUserDomainService,
+        private DelightfulAgentDomainService $delightfulAgentDomainService,
+        private DelightfulConversationDomainService $delightfulConversationDomainService,
+        private DelightfulUserDomainService $delightfulUserDomainService,
     ) {
     }
 
@@ -75,24 +75,24 @@ class DelightfulUserTaskAppService extends AbstractAppService
         $callbackMethod = $this->getCallbackMethod($userTaskDTO, $userTaskValueDTO);
 
         // 根据agent_id 查询flow_code
-        $flow = $this->magicAgentDomainService->getAgentById($userTaskDTO->getAgentId());
+        $flow = $this->delightfulAgentDomainService->getAgentById($userTaskDTO->getAgentId());
         if (empty($flow->getFlowCode())) {
             ExceptionBuilder::throw(UserTaskErrorCode::PARAMETER_INVALID, 'flow_code not found');
         }
         $flowCode = $flow->getFlowCode();
 
         // 根据conversation_id 查询agent_user_id
-        $conversation = $this->magicConversationDomainService->getConversationByIdWithoutCheck($userTaskDTO->getConversationId());
+        $conversation = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($userTaskDTO->getConversationId());
         // 兼容flow 中的conversation_id 跟chat 中的conversation_id 不一致问题
         if (empty($conversation)) {
             $dataIsolation = DataIsolation::create();
             $dataIsolation->setCurrentOrganizationCode($flow->getOrganizationCode());
             // 根据flowCode 查询user_id
-            $magicUserEntity = $this->magicUserDomainService->getByAiCode($dataIsolation, $flowCode);
-            if (empty($magicUserEntity->getUserId())) {
+            $delightfulUserEntity = $this->delightfulUserDomainService->getByAiCode($dataIsolation, $flowCode);
+            if (empty($delightfulUserEntity->getUserId())) {
                 ExceptionBuilder::throw(UserTaskErrorCode::PARAMETER_INVALID, 'agent_user_id not found');
             }
-            $userTaskDTO->setAgentUserId($magicUserEntity->getUserId());
+            $userTaskDTO->setAgentUserId($delightfulUserEntity->getUserId());
         } else {
             $userTaskDTO->setAgentUserId($conversation->getReceiveId());
         }
@@ -216,7 +216,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
         }
 
         // 根据conversation_id 查询agent_user_id
-        $conversation = $this->magicConversationDomainService->getConversationByIdWithoutCheck($userTaskDTO->getConversationId());
+        $conversation = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($userTaskDTO->getConversationId());
 
         $userTaskDTO->setAgentUserId($conversation->getReceiveId());
 
@@ -365,12 +365,12 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     ];
 
     //     $dataIsolation = FlowDataIsolation::create();
-    //     $magicFlow = di(DelightfulFlowDomainService::class)->getByCode($dataIsolation, $flow_code);
+    //     $delightfulFlow = di(DelightfulFlowDomainService::class)->getByCode($dataIsolation, $flow_code);
 
     //     $authorization = new DelightfulUserAuthorization();
-    //     $authorization->setDelightfulEnvId($user_task['magic_env_id'] ?? 1);
+    //     $authorization->setDelightfulEnvId($user_task['delightful_env_id'] ?? 1);
     //     $authorization->setId($user_task['creator']);
-    //     $authorization->setOrganizationCode($magicFlow->getOrganizationCode());
+    //     $authorization->setOrganizationCode($delightfulFlow->getOrganizationCode());
     //     $authorization->setUserType(UserType::Ai);
 
     //     $triggerType = TriggerType::tryFrom($triggerConfig['trigger_type'] ?? 0);
@@ -389,10 +389,10 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //         'node_debug' => [],
     //     ];
 
-    //     $dataIsolation->setCurrentOrganizationCode($magicFlow->getOrganizationCode());
+    //     $dataIsolation->setCurrentOrganizationCode($delightfulFlow->getOrganizationCode());
     //     EnvManager::initDataIsolationEnv($dataIsolation);
 
-    //     $globalVariable = $magicFlow->getGlobalVariable();
+    //     $globalVariable = $delightfulFlow->getGlobalVariable();
 
     //     $datetime = new DateTime();
     //     $messageContent = 'test routine';
@@ -406,7 +406,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //             //  'branch_id' => $branchId,
     //             'routine_config' => $taskConfigDomainService,
     //         ],
-    //         globalVariable: $magicFlow->getGlobalVariable(),
+    //         globalVariable: $delightfulFlow->getGlobalVariable(),
     //     );
 
     //     // if (! empty($triggerConfig['trigger_data']['chat_time']) && strtotime($triggerConfig['trigger_data']['chat_time'])) {
@@ -419,7 +419,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     //     $nickname = $authorization->getNickname();
     //     // }
     //     // $operator = $this->createExecutionOperator($authorization);
-    //     $operator = Operator::createByCrontab($magicFlow->getOrganizationCode());
+    //     $operator = Operator::createByCrontab($delightfulFlow->getOrganizationCode());
     //     $triggerData = new TriggerData(
     //         triggerTime: $triggerTime,
     //         userInfo: ['user_entity' => TriggerData::createUserEntity($authorization->getId(), $nickname, $operator->getOrganizationCode())],
@@ -427,10 +427,10 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //         params: $triggerConfig['trigger_data'],
     //         paramsForm: $triggerConfig['trigger_data_form'],
     //         // 试运行时，全局变量为手动传入
-    //         globalVariable: ComponentFactory::fastCreate($globalVariable) ?? $magicFlow->getGlobalVariable(),
+    //         globalVariable: ComponentFactory::fastCreate($globalVariable) ?? $delightfulFlow->getGlobalVariable(),
     //     );
 
-    //     $magicFlow->prepareTestRun();
+    //     $delightfulFlow->prepareTestRun();
 
     //     $originConversationId = $triggerConfig['conversation_id'] ?? IdGenerator::getUniqueId32();
     //     $topicId = $triggerConfig['topic_id'];
@@ -446,10 +446,10 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     $executionData->setTopicId($topicId);
     //     $executionData->setDebug($triggerConfig['debug']);
     //     // 运行流程图，检测是否可以运行
-    //     $executor = new DelightfulFlowExecutor($magicFlow, $executionData);
+    //     $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
     //     $executor->execute();
 
-    //     foreach ($magicFlow->getNodes() as $node) {
+    //     foreach ($delightfulFlow->getNodes() as $node) {
     //         $nodeDebugResult = $node->getNodeDebugResult();
     //         if ($nodeDebugResult && ! $nodeDebugResult->isSuccess()) {
     //             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, $nodeDebugResult->getErrorMessage());
@@ -457,7 +457,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     }
 
     //     // 获取 node 运行结果
-    //     foreach ($magicFlow->getNodes() as $node) {
+    //     foreach ($delightfulFlow->getNodes() as $node) {
     //         if ($node->getNodeDebugResult()) {
     //             // 有一个失败就判定为失败
     //             if (! $node->getNodeDebugResult()->isSuccess()) {

@@ -52,7 +52,7 @@ export default function LabelNames({ config, updateFn, wrapperWidth }: LabelName
 	})
 
 	return (
-		<div className="magic-label-names" {...datasetProps}>
+		<div className="delightful-label-names" {...datasetProps}>
 			{names.map((nameValue: WithReference<NameValue>) => {
 				const isReference = checkIsReferenceNode(nameValue)
 				const { name } = nameValue
@@ -71,7 +71,7 @@ export default function LabelNames({ config, updateFn, wrapperWidth }: LabelName
 					/>
 				) : (
 					<NamesItem
-						className="magic-label-name"
+						className="delightful-label-name"
 						item={targetItem as MultipleOption}
 						itemClick={() => {}}
 						showCheck={false}

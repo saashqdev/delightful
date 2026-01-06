@@ -15,10 +15,10 @@ class CreateDelightfulChatDeviceTable extends Migration
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_chat_devices')) {
+        if (Schema::hasTable('delightful_chat_devices')) {
             return;
         }
-        Schema::create('magic_chat_devices', static function (Blueprint $table) {
+        Schema::create('delightful_chat_devices', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->default(0)->comment('账户id');
             $table->tinyInteger('type')->comment('设备类型,1:Android；2：IOS；3：Windows; 4：MacOS；5：Web');
@@ -40,6 +40,6 @@ class CreateDelightfulChatDeviceTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_chat_devices');
+        Schema::dropIfExists('delightful_chat_devices');
     }
 }

@@ -47,13 +47,13 @@ class DelightfulConversationAppService extends AbstractAppService
 
     public function __construct(
         protected LoggerInterface $logger,
-        protected readonly DelightfulChatDomainService $magicChatDomainService,
-        protected readonly DelightfulTopicDomainService $magicTopicDomainService,
-        protected readonly DelightfulConversationDomainService $magicConversationDomainService,
-        protected readonly DelightfulChatFileDomainService $magicChatFileDomainService,
-        protected DelightfulSeqDomainService $magicSeqDomainService,
+        protected readonly DelightfulChatDomainService $delightfulChatDomainService,
+        protected readonly DelightfulTopicDomainService $delightfulTopicDomainService,
+        protected readonly DelightfulConversationDomainService $delightfulConversationDomainService,
+        protected readonly DelightfulChatFileDomainService $delightfulChatFileDomainService,
+        protected DelightfulSeqDomainService $delightfulSeqDomainService,
         protected FileDomainService $fileDomainService,
-        protected readonly DelightfulAgentDomainService $magicAgentDomainService,
+        protected readonly DelightfulAgentDomainService $delightfulAgentDomainService,
         protected readonly SlidingWindowUtil $slidingWindowUtil,
         protected readonly Redis $redis
     ) {
@@ -78,7 +78,7 @@ class DelightfulConversationAppService extends AbstractAppService
         // Check if conversation ID belongs to current user (skip if conversation_id is null)
         $conversationId = $chatCompletionsDTO->getConversationId();
         if ($conversationId) {
-            $this->magicConversationDomainService->getConversationById($conversationId, $dataIsolation);
+            $this->delightfulConversationDomainService->getConversationById($conversationId, $dataIsolation);
         }
 
         // Generate a unique throttle key based on user ID and conversation ID
@@ -193,7 +193,7 @@ class DelightfulConversationAppService extends AbstractAppService
             }
         }
 
-        $conversationEntity = $this->magicConversationDomainService->getConversationById($conversationId, DataIsolation::create($authenticatable->getOrganizationCode(), $authenticatable->getId()));
+        $conversationEntity = $this->delightfulConversationDomainService->getConversationById($conversationId, DataIsolation::create($authenticatable->getOrganizationCode(), $authenticatable->getId()));
 
         $oldInstructs = $conversationEntity->getInstructs();
 
@@ -201,7 +201,7 @@ class DelightfulConversationAppService extends AbstractAppService
         $this->logger->info('Merged instructions: ' . json_encode($mergeInstructs, JSON_UNESCAPED_UNICODE));
 
         // Save to conversation window
-        $this->magicConversationDomainService->saveInstruct($authenticatable, $mergeInstructs, $conversationId);
+        $this->delightfulConversationDomainService->saveInstruct($authenticatable, $mergeInstructs, $conversationId);
 
         return [
             'instructs' => $instructs,
@@ -213,12 +213,12 @@ class DelightfulConversationAppService extends AbstractAppService
      */
     public function agentSendMessageGetTopicId(DelightfulConversationEntity $senderConversationEntity): string
     {
-        return $this->magicTopicDomainService->agentSendMessageGetTopicId($senderConversationEntity, 0);
+        return $this->delightfulTopicDomainService->agentSendMessageGetTopicId($senderConversationEntity, 0);
     }
 
     public function deleteTrashMessages(): array
     {
-        return $this->magicChatDomainService->deleteTrashMessages();
+        return $this->delightfulChatDomainService->deleteTrashMessages();
     }
 
     /**

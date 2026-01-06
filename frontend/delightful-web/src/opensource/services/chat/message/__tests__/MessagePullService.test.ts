@@ -105,7 +105,7 @@ vi.mock("@/opensource/models/user", () => ({
 				organization_code: "test-org",
 				user_id: "test-user-id",
 			},
-			magicOrganizationMap: {},
+			delightfulOrganizationMap: {},
 		},
 	},
 }))

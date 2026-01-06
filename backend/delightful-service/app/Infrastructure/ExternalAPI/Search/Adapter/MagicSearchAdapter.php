@@ -21,7 +21,7 @@ class DelightfulSearchAdapter implements SearchEngineAdapterInterface
     private array $providerConfig;
 
     public function __construct(
-        private readonly DelightfulSearch $magicSearch,
+        private readonly DelightfulSearch $delightfulSearch,
         array $providerConfig = []
     ) {
         $this->providerConfig = $providerConfig;
@@ -41,7 +41,7 @@ class DelightfulSearchAdapter implements SearchEngineAdapterInterface
         $apiKey = $this->providerConfig['api_key'] ?? '';
 
         // Call Delightful search API
-        $rawResponse = $this->magicSearch->search(
+        $rawResponse = $this->delightfulSearch->search(
             $query,
             $baseUrl,
             $apiKey,
@@ -57,13 +57,13 @@ class DelightfulSearchAdapter implements SearchEngineAdapterInterface
         return $this->convertToUnifiedFormat($rawResponse);
     }
 
-    public function convertToUnifiedFormat(array $magicResponse): SearchResponseDTO
+    public function convertToUnifiedFormat(array $delightfulResponse): SearchResponseDTO
     {
         $response = new SearchResponseDTO();
 
         // Delightful API returns data in snake_case format, need to convert
-        if (isset($magicResponse['web_pages'])) {
-            $webPagesData = $magicResponse['web_pages'];
+        if (isset($delightfulResponse['web_pages'])) {
+            $webPagesData = $delightfulResponse['web_pages'];
             $webPages = new WebPagesDTO();
             $webPages->setTotalEstimatedMatches($webPagesData['total_estimated_matches'] ?? 0);
 
@@ -86,16 +86,16 @@ class DelightfulSearchAdapter implements SearchEngineAdapterInterface
         }
 
         // Set raw response and metadata
-        if (isset($magicResponse['raw_response'])) {
-            $response->setRawResponse($magicResponse['raw_response']);
+        if (isset($delightfulResponse['raw_response'])) {
+            $response->setRawResponse($delightfulResponse['raw_response']);
         }
 
-        if (isset($magicResponse['warning'])) {
-            $response->setWarning($magicResponse['warning']);
+        if (isset($delightfulResponse['warning'])) {
+            $response->setWarning($delightfulResponse['warning']);
         }
 
-        if (isset($magicResponse['metadata'])) {
-            $response->setMetadata($magicResponse['metadata']);
+        if (isset($delightfulResponse['metadata'])) {
+            $response->setMetadata($delightfulResponse['metadata']);
         }
 
         return $response;
@@ -103,7 +103,7 @@ class DelightfulSearchAdapter implements SearchEngineAdapterInterface
 
     public function getEngineName(): string
     {
-        return 'magic';
+        return 'delightful';
     }
 
     public function isAvailable(): bool

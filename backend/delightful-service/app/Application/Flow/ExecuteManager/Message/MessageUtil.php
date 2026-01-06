@@ -29,12 +29,12 @@ use Delightful\AsyncEvent\AsyncEventUtil;
 
 class MessageUtil
 {
-    public static function getIMResponse(DelightfulFlowMessage $magicFlowMessage, ExecutionData $executionData, array $linkPaths = []): ?MessageInterface
+    public static function getIMResponse(DelightfulFlowMessage $delightfulFlowMessage, ExecutionData $executionData, array $linkPaths = []): ?MessageInterface
     {
-        switch ($magicFlowMessage->getType()) {
+        switch ($delightfulFlowMessage->getType()) {
             case DelightfulFlowMessageType::Text:
             case DelightfulFlowMessageType::Markdown:
-                $content = clone $magicFlowMessage->getContent()?->getValue();
+                $content = clone $delightfulFlowMessage->getContent()?->getValue();
                 if (! $content) {
                     return null;
                 }
@@ -47,7 +47,7 @@ class MessageUtil
                     ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.message.content_error');
                 }
                 $contentString = trim($contentString);
-                if ($magicFlowMessage->getType() === DelightfulFlowMessageType::Markdown) {
+                if ($delightfulFlowMessage->getType() === DelightfulFlowMessageType::Markdown) {
                     return new MarkdownMessage([
                         'content' => $contentString,
                     ]);
@@ -75,7 +75,7 @@ class MessageUtil
                 }
 
                 $message = new FilesMessage([]);
-                $linkDesc = $magicFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
+                $linkDesc = $delightfulFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
                 if (is_string($linkDesc) && $linkDesc !== '') {
                     // 如果具有描述，那么应该是富文本形式
                     $message = new TextMessage([]);
@@ -91,7 +91,7 @@ class MessageUtil
             case DelightfulFlowMessageType::File:
                 $chatAttachments = [];
                 // 这里的描述是用来标记文件名称
-                $linkDesc = $magicFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
+                $linkDesc = $delightfulFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
                 foreach ($linkPaths as $linkPath) {
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
                         continue;
@@ -121,7 +121,7 @@ class MessageUtil
                 $message->setAttachments($chatAttachments);
                 return $message;
             case DelightfulFlowMessageType::AIMessage:
-                $content = clone $magicFlowMessage->getContent()?->getForm();
+                $content = clone $delightfulFlowMessage->getContent()?->getForm();
                 if (! $content) {
                     return null;
                 }
@@ -148,17 +148,17 @@ class MessageUtil
             $executionData->getAgentUserId() ?: $executionData->getDataIsolation()->getCurrentUserId()
         );
 
-        $magicChatFileEntity = new DelightfulChatFileEntity();
+        $delightfulChatFileEntity = new DelightfulChatFileEntity();
 
-        $magicChatFileEntity->setFileType(FileType::getTypeFromFileExtension($attachment->getExt()));
-        $magicChatFileEntity->setFileSize($attachment->getSize());
-        $magicChatFileEntity->setFileKey($attachment->getPath());
-        $magicChatFileEntity->setFileName($attachment->getName());
-        $magicChatFileEntity->setFileExtension($attachment->getExt());
-        $magicChatFileEntity->setExternalUrl($attachment->getUrl());
+        $delightfulChatFileEntity->setFileType(FileType::getTypeFromFileExtension($attachment->getExt()));
+        $delightfulChatFileEntity->setFileSize($attachment->getSize());
+        $delightfulChatFileEntity->setFileKey($attachment->getPath());
+        $delightfulChatFileEntity->setFileName($attachment->getName());
+        $delightfulChatFileEntity->setFileExtension($attachment->getExt());
+        $delightfulChatFileEntity->setExternalUrl($attachment->getUrl());
 
         $chatFileDomainService = di(DelightfulChatFileDomainService::class);
-        $chatFile = $chatFileDomainService->fileUpload([$magicChatFileEntity], $dataIsolation)[0] ?? null;
+        $chatFile = $chatFileDomainService->fileUpload([$delightfulChatFileEntity], $dataIsolation)[0] ?? null;
         if (! $chatFile) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.message.attachment_report_failed');
         }

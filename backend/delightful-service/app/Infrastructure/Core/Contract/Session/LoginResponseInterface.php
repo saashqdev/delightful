@@ -13,15 +13,15 @@ interface LoginResponseInterface
 {
     public function getDelightfulId(): string;
 
-    public function setDelightfulId(string $magicId): self;
+    public function setDelightfulId(string $delightfulId): self;
 
     public function getDelightfulUserId(): string;
 
-    public function setDelightfulUserId(string $magicUserId): self;
+    public function setDelightfulUserId(string $delightfulUserId): self;
 
     public function getDelightfulOrganizationCode(): string;
 
-    public function setDelightfulOrganizationCode(string $magicOrganizationCode): self;
+    public function setDelightfulOrganizationCode(string $delightfulOrganizationCode): self;
 
     public function getThirdPlatformOrganizationCode(): string;
 

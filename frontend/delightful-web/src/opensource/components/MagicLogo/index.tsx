@@ -1,6 +1,6 @@
 import logo from "@/assets/logos/main.svg"
-import magicColorText from "@/assets/text/color-magic.svg"
-import magicColorTextDark from "@/assets/text/color-magic-dark.svg"
+import delightfulColorText from "@/assets/text/color-delightful.svg"
+import delightfulColorTextDark from "@/assets/text/color-delightful-dark.svg"
 import chinese from "@/assets/text/chinese.svg"
 import chineseDark from "@/assets/text/chinese-dark.svg"
 import { DotLottieReact } from "@lottiefiles/dotlottie-react"
@@ -13,9 +13,9 @@ import { createStyles, cx, useThemeMode } from "antd-style"
 import { IconDelightfulTextLogo } from "@/enhance/tabler/icons-react"
 import { LogoType } from "./LogoType"
 
-import magicLogoJson from "./magic-logo.json?raw"
+import delightfulLogoJson from "./delightful-logo.json?raw"
 
-const url = URL.createObjectURL(new Blob([magicLogoJson], { type: "application/json" }))
+const url = URL.createObjectURL(new Blob([delightfulLogoJson], { type: "application/json" }))
 
 interface LogoProps extends HTMLAttributes<HTMLImageElement> {
 	type?: LogoType
@@ -36,10 +36,10 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			font-style: normal;
 			font-weight: 400;
 			line-height: 16px;
-			color: ${isDarkMode ? token.magicColorUsages.black : token.magicColorUsages.white};
+			color: ${isDarkMode ? token.delightfulColorUsages.black : token.delightfulColorUsages.white};
 			background: ${isDarkMode
-				? token.magicColorScales.grey[4]
-				: token.magicColorScales.grey[3]};
+				? token.delightfulColorScales.grey[4]
+				: token.delightfulColorScales.grey[3]};
 		`,
 		blurBg: css`
 			position: absolute;
@@ -189,7 +189,7 @@ const DelightfulLogo = memo(({ type = LogoType.MAIN, beta: isBeta, className, ..
 		// return <AnimationDelightful />
 		return (
 			<img
-				src={appearance === "dark" ? magicColorTextDark : magicColorText}
+				src={appearance === "dark" ? delightfulColorTextDark : delightfulColorText}
 				alt={LogoType.COLOR_TEXT}
 				{...props}
 			/>

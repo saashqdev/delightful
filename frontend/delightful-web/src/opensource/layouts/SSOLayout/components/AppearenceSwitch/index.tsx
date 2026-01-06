@@ -4,7 +4,7 @@ import { IconMoon, IconSunHigh } from "@tabler/icons-react"
 import { Flex } from "antd"
 import { createStyles } from "antd-style"
 import { useMemoizedFn } from "ahooks"
-import { magic } from "@/enhance/magicElectron"
+import { delightful } from "@/enhance/delightfulElectron"
 import { useTheme } from "@/opensource/models/config/hooks"
 
 const useStyles = createStyles(({ css, isDarkMode, token }) => {
@@ -15,13 +15,13 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			border-radius: 100px;
 			width: 56px;
 			height: 28px;
-			background: ${token.magicColorScales.grey[1]};
+			background: ${token.delightfulColorScales.grey[1]};
 			cursor: pointer;
 		`,
 		icon: css`
 			margin: 3px;
 			cursor: pointer;
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorScales.grey[8]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorScales.grey[8]};
 			transition: color 0.3s ease;
 		`,
 		handler: css`
@@ -29,8 +29,8 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			width: 20px;
 			height: 20px;
 			background: ${isDarkMode
-				? token.magicColorScales.grey[8]
-				: token.magicColorUsages.white};
+				? token.delightfulColorScales.grey[8]
+				: token.delightfulColorUsages.white};
 			position: absolute;
 			transform: translateX(${isDarkMode ? "28px" : "0"});
 			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -49,7 +49,7 @@ function AppearenceSwitch() {
 
 	const onThemeChange = useMemoizedFn(() => {
 		setTheme(prefersColorScheme === "dark" ? "light" : "dark")
-		magic?.theme?.setTheme?.(prefersColorScheme === "dark" ? "light" : "dark")
+		delightful?.theme?.setTheme?.(prefersColorScheme === "dark" ? "light" : "dark")
 	})
 
 	return (

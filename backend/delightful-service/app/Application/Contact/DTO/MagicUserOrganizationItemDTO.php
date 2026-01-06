@@ -11,7 +11,7 @@ use App\Infrastructure\Core\AbstractDTO;
 
 class DelightfulUserOrganizationItemDTO extends AbstractDTO
 {
-    protected string $magicOrganizationCode = '';
+    protected string $delightfulOrganizationCode = '';
 
     protected string $name = '';
 
@@ -35,12 +35,12 @@ class DelightfulUserOrganizationItemDTO extends AbstractDTO
 
     public function getDelightfulOrganizationCode(): string
     {
-        return $this->magicOrganizationCode;
+        return $this->delightfulOrganizationCode;
     }
 
-    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $delightfulOrganizationCode): void
     {
-        $this->magicOrganizationCode = $magicOrganizationCode;
+        $this->delightfulOrganizationCode = $delightfulOrganizationCode;
     }
 
     public function getName(): string

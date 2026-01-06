@@ -25,7 +25,7 @@ vi.mock("react-infinite-scroll-component", () => {
 vi.mock("../../DelightfulList/DelightfulListItem", () => {
 	return {
 		default: ({ title, desc, avatar, active, onClick }: any) => (
-			<div data-testid="magic-list-item" className={active ? "active" : ""} onClick={onClick}>
+			<div data-testid="delightful-list-item" className={active ? "active" : ""} onClick={onClick}>
 				{avatar && <div data-testid="avatar">{avatar}</div>}
 				<div data-testid="title">{typeof title === "string" ? title : "title对象"}</div>
 				{desc && <div data-testid="desc">{desc}</div>}
@@ -39,8 +39,8 @@ vi.mock("antd-style", () => {
 		createStyles: (fn: any) => {
 			// 提供在styles.ts中需要的token值
 			const token = {
-				magicColorScales: { grey: [0, 1, 2, 3, 4, 5] },
-				magicColorUsages: {
+				delightfulColorScales: { grey: [0, 1, 2, 3, 4, 5] },
+				delightfulColorUsages: {
 					text: [0, 1, 2, 3, 4, 5],
 					primaryLight: { default: "#e6f7ff" },
 					white: "#ffffff",
@@ -190,7 +190,7 @@ describe("DelightfulInfiniteScrollList性能测试", () => {
 				)
 
 				// 确保所有项目都已渲染
-				const items = screen.getAllByTestId("magic-list-item")
+				const items = screen.getAllByTestId("delightful-list-item")
 				expect(items.length).toBe(size)
 
 				// 卸载组件以便下一次测试
@@ -244,7 +244,7 @@ describe("DelightfulInfiniteScrollList性能测试", () => {
 		)
 
 		// 初始渲染应该有initialSize个项目
-		const initialItems = screen.getAllByTestId("magic-list-item")
+		const initialItems = screen.getAllByTestId("delightful-list-item")
 		expect(initialItems.length).toBe(initialSize)
 
 		// 由于测试环境的限制，我们无法正确模拟加载更多的交互
@@ -369,7 +369,7 @@ describe("DelightfulInfiniteScrollList性能测试", () => {
 		expect(totalRenderTime).toBeLessThan(500) // 初始渲染应该在500ms内完成
 
 		// 这里我们只验证组件是否正确渲染
-		const items = screen.getAllByTestId("magic-list-item")
+		const items = screen.getAllByTestId("delightful-list-item")
 		expect(items.length).toBe(150)
 	})
 })

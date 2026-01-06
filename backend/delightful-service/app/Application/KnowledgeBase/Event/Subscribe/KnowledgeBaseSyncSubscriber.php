@@ -41,7 +41,7 @@ readonly class KnowledgeBaseSyncSubscriber implements ListenerInterface
         if (! $event instanceof KnowledgeBaseSavedEvent) {
             return;
         }
-        $knowledge = $event->magicFlowKnowledgeEntity;
+        $knowledge = $event->delightfulFlowKnowledgeEntity;
         $dataIsolation = $event->dataIsolation;
         // 如果是基础知识库类型，则传知识库创建者，避免权限不足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {

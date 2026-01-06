@@ -105,7 +105,7 @@ const SelectOptions = forwardRef<SelectOptionRef, SelectOptionsProps>((props, re
 	)
 
 	return (
-		<div className="magic-member-options" onWheel={(e) => e.stopPropagation()}>
+		<div className="delightful-member-options" onWheel={(e) => e.stopPropagation()}>
 			<ul
 				className="ul"
 				onContextMenu={(e) => e.preventDefault()}
@@ -114,7 +114,7 @@ const SelectOptions = forwardRef<SelectOptionRef, SelectOptionsProps>((props, re
 				{!onlyMyself && (
 					<li className="search bb1">
 						<SearchInput
-							placeholder={i18next.t("common.searchConstants", { ns: "magicFlow" })}
+							placeholder={i18next.t("common.searchConstants", { ns: "delightfulFlow" })}
 							value={inputValue}
 							onChange={onChange}
 							onPressEnter={(e: any) => {
@@ -138,7 +138,7 @@ const SelectOptions = forwardRef<SelectOptionRef, SelectOptionsProps>((props, re
 					})}
 					{!displayOptions.length && (
 						<li className="empty">
-							{i18next.t("common.searchNone", { ns: "magicFlow" })}
+							{i18next.t("common.searchNone", { ns: "delightfulFlow" })}
 						</li>
 					)}
 				</div>

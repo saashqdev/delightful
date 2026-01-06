@@ -15,7 +15,7 @@ class InitialAgentSeeder extends Seeder
     {
         try {
             // Fetch all users within the organization
-            $users = Db::table('magic_contact_users')
+            $users = Db::table('delightful_contact_users')
                 ->where('user_type', 1)
                 ->get()
                 ->toArray();

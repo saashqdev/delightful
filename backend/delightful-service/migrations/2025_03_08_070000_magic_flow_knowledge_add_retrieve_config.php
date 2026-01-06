@@ -15,7 +15,7 @@ class DelightfulFlowKnowledgeAddRetrieveConfig extends Migration
      */
     public function up(): void
     {
-        Schema::table('magic_flow_knowledge', function (Blueprint $table) {
+        Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
             $table->string('retrieve_config', 2000)->nullable()->comment('检索配置');
         });
 
@@ -27,7 +27,7 @@ class DelightfulFlowKnowledgeAddRetrieveConfig extends Migration
      */
     public function down(): void
     {
-        Schema::table('magic_flow_knowledge', function (Blueprint $table) {
+        Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
             $table->dropColumn('retrieve_config');
         });
     }

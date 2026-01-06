@@ -9,7 +9,7 @@ export const useStyles = createStyles(
 				max-width: 80%;
 				width: fit-content;
 				border-radius: 12px;
-				background: ${isDarkMode ? token.colorBgContainer : token.magicColorUsages.white};
+				background: ${isDarkMode ? token.colorBgContainer : token.delightfulColorUsages.white};
 			`,
 			summary: css`
 				width: 100%;
@@ -17,8 +17,8 @@ export const useStyles = createStyles(
 				white-space: pre-wrap;
 				word-break: break-all;
 				color: ${isDarkMode
-					? token.magicColorUsages.white
-					: token.magicColorUsages.text[1]};
+					? token.delightfulColorUsages.white
+					: token.delightfulColorUsages.text[1]};
 				text-align: justify;
 				font-size: ${fontSize}px;
 				font-weight: 400;
@@ -28,13 +28,13 @@ export const useStyles = createStyles(
 				.${prefixCls}-collapse-header.${prefixCls}-collapse-header {
 					border-top: 1px solid
 						${isDarkMode
-							? token.magicColorScales.grey[6]
-							: token.magicColorUsages.border};
+							? token.delightfulColorScales.grey[6]
+							: token.delightfulColorUsages.border};
 					padding-left: 0;
 					padding-right: 0;
 					color: ${isDarkMode
-						? token.magicColorUsages.white
-						: token.magicColorUsages.text[1]};
+						? token.delightfulColorUsages.white
+						: token.delightfulColorUsages.text[1]};
 					text-align: justify;
 					font-size: ${fontSize}px;
 					font-weight: 600;
@@ -60,14 +60,14 @@ export const useStyles = createStyles(
 				user-select: none;
 
 				color: ${isDarkMode
-					? token.magicColorUsages.text[0]
-					: token.magicColorUsages.text[1]};
+					? token.delightfulColorUsages.text[0]
+					: token.delightfulColorUsages.text[1]};
 				font-weight: 500;
 				text-align: justify;
 
 				--main-color: ${isDarkMode
-					? token.magicColorUsages.primaryLight.active
-					: token.magicColorUsages.fill[2]};
+					? token.delightfulColorUsages.primaryLight.active
+					: token.delightfulColorUsages.fill[2]};
 
 				background-color: var(--main-color);
 				cursor: pointer;
@@ -107,15 +107,15 @@ export const useStyles = createStyles(
 				.${prefixCls}-popover-title {
 					--${prefixCls}-popover-title-margin-bottom: 10px;
 
-					color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[0]};
+					color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[0]};
 					font-family: "PingFang SC";
 					font-size: 16px;
 					font-weight: 600;
 					line-height: 22px;
 				}
 
-        .magic-popover-inner-content {
-					color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[0]};
+        .delightful-popover-inner-content {
+					color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[0]};
 					font-size: 14px;
 					line-height: 20px;
 				}
@@ -136,8 +136,8 @@ export const useStyles = createStyles(
 			`,
 			sourceName: css`
 				color: ${isDarkMode
-					? token.magicColorUsages.white
-					: token.magicColorUsages.text[1]};
+					? token.delightfulColorUsages.white
+					: token.delightfulColorUsages.text[1]};
 			`,
 			sourceButton: css`
 				justify-content: flex-start !important;

@@ -17,12 +17,12 @@ export const useStyles = createStyles(
 				border-radius: 12px;
 				border: 1px solid ${token.colorBorder};
 				background: ${isDarkMode
-					? token.magicColorScales.grey[1]
-					: token.magicColorScales.white};
+					? token.delightfulColorScales.grey[1]
+					: token.delightfulColorScales.white};
 				user-select: none;
 			`,
 			image: css`
-				border: 1px solid ${token.magicColorUsages.border};
+				border: 1px solid ${token.delightfulColorUsages.border};
 				border-radius: 6px;
 				overflow: hidden;
 				width: fit-content;
@@ -33,32 +33,32 @@ export const useStyles = createStyles(
 				padding: 10px 14px;
 			`,
 			name: css`
-				color: ${token.magicColorUsages.text[1]};
+				color: ${token.delightfulColorUsages.text[1]};
 				text-align: justify;
 				font-weight: 400;
 				font-size: ${fontSize}px;
 				line-height: ${calculateRelativeSize(20, fontSize)}px;
 			`,
 			size: css`
-				color: ${token.magicColorUsages.text[3]};
+				color: ${token.delightfulColorUsages.text[3]};
 				font-weight: 400;
 				font-size: ${calculateRelativeSize(12, fontSize)}px;
 				line-height: ${calculateRelativeSize(16, fontSize)}px;
 			`,
 			footer: css`
 				width: 100%;
-				border-top: 1px solid ${token.magicColorUsages.border};
+				border-top: 1px solid ${token.delightfulColorUsages.border};
 				background: ${isDarkMode
-					? token.magicColorScales.grey[1]
-					: token.magicColorScales.white};
+					? token.delightfulColorScales.grey[1]
+					: token.delightfulColorScales.white};
 
 				> button:not(:last-child) {
-					border-right: 1px solid ${token.magicColorUsages.border};
+					border-right: 1px solid ${token.delightfulColorUsages.border};
 				}
 			`,
 			button: css`
 				border-radius: 0;
-				color: ${token.magicColorUsages.text[1]};
+				color: ${token.delightfulColorUsages.text[1]};
 				text-align: justify;
 
 				font-weight: 400;

@@ -11,7 +11,7 @@ class DelightfulMessageVersionEntity extends AbstractEntity
 {
     protected string $versionId;
 
-    protected string $magicMessageId;
+    protected string $delightfulMessageId;
 
     protected string $messageContent;
 
@@ -41,12 +41,12 @@ class DelightfulMessageVersionEntity extends AbstractEntity
 
     public function getDelightfulMessageId(): string
     {
-        return $this->magicMessageId;
+        return $this->delightfulMessageId;
     }
 
-    public function setDelightfulMessageId(string $magicMessageId): static
+    public function setDelightfulMessageId(string $delightfulMessageId): static
     {
-        $this->magicMessageId = $magicMessageId;
+        $this->delightfulMessageId = $delightfulMessageId;
         return $this;
     }
 

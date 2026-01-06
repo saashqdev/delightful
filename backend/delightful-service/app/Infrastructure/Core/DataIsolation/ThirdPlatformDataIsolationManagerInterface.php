@@ -13,7 +13,7 @@ interface ThirdPlatformDataIsolationManagerInterface
 {
     public function extends(DataIsolationInterface $parentDataIsolation): void;
 
-    public function init(DataIsolationInterface $dataIsolation, DelightfulEnvironmentEntity $magicEnvironmentEntity): void;
+    public function init(DataIsolationInterface $dataIsolation, DelightfulEnvironmentEntity $delightfulEnvironmentEntity): void;
 
     public function toArray(): array;
 }

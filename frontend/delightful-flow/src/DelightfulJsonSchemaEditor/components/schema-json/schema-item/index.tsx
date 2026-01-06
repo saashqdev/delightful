@@ -381,7 +381,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 								<DelightfulInput
 									placeholder={resolveToString(
 										i18next.t("flow.pleaseInputSomething", {
-											ns: "magicFlow",
+											ns: "delightfulFlow",
 										}),
 										{
 											name: columnNames[ShowColumns.Label],
@@ -423,7 +423,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 								<Tooltip
 									placement="top"
 									title={i18next.t("common.required", {
-										ns: "magicFlow",
+										ns: "delightfulFlow",
 									})}
 								>
 									<Switch
@@ -463,7 +463,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 									}
 									placeholder={resolveToString(
 										i18next.t("flow.pleaseInputSomething", {
-											ns: "magicFlow",
+											ns: "delightfulFlow",
 										}),
 										{
 											name: columnNames[ShowColumns.Value],
@@ -490,7 +490,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 										/>
 									}
 									placeholder={i18next.t("common.descPlaceholder", {
-										ns: "magicFlow",
+										ns: "delightfulFlow",
 									})}
 									value={value.description}
 									onChange={(event: any) =>
@@ -519,7 +519,7 @@ const SchemaItem = observer((props: SchemaItemProp): ReactElement | null => {
 											<Tooltip
 												placement="top"
 												title={i18next.t("jsonSchema.addSiblingField", {
-													ns: "magicFlow",
+													ns: "delightfulFlow",
 												})}
 											>
 												<IconCirclePlus

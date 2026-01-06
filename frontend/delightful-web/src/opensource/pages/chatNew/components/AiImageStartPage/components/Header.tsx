@@ -36,7 +36,7 @@ const Header = memo(({ tags, currentType, selectType }: HeaderProps) => {
 					</Flex>
 					<DelightfulButton
 						type="text"
-						className={styles.magicButton}
+						className={styles.delightfulButton}
 						style={{ borderRadius: "50px" }}
 						onClick={() => interfaceStore.closeStartPage()}
 					>
@@ -52,7 +52,7 @@ const Header = memo(({ tags, currentType, selectType }: HeaderProps) => {
 								onClick={() => selectType(tag.id)}
 								key={tag.id}
 								className={cx(styles.button, {
-									[styles.magicButton]: tag.id === currentType,
+									[styles.delightfulButton]: tag.id === currentType,
 								})}
 							>
 								{tag.type}

@@ -262,7 +262,7 @@ const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPan
 		styles.breadcrumb,
 		styles.avatar,
 		styles.breadcrumbItem,
-		organization?.magic_organization_code,
+		organization?.delightful_organization_code,
 		t,
 		selectedPath,
 		breadcrumbRightNode,

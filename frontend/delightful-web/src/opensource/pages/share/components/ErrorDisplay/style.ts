@@ -20,20 +20,20 @@ export const useStyles = createStyles(({ token }) => {
 			borderRadius: "8px",
 		},
 		icon: {
-			color: token.magicColorScales.grey[5],
+			color: token.delightfulColorScales.grey[5],
 			paddingBottom: "20px",
 		},
 		message: {
 			fontWeight: 600,
 			fontSize: "32px",
 			textAlign: "center",
-			color: token.magicColorUsages.text[2],
+			color: token.delightfulColorUsages.text[2],
 		},
 		description: {
 			fontSize: "14px",
 			fontWeight: 400,
 			textAlign: "center",
-			color: token.magicColorUsages.text[2],
+			color: token.delightfulColorUsages.text[2],
 			marginTop: "4px",
 			marginBottom: "20px",
 		},

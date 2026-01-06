@@ -34,7 +34,7 @@ class MCPServerModel extends AbstractModel
     use Snowflake;
     use SoftDeletes;
 
-    protected ?string $table = 'magic_mcp_servers';
+    protected ?string $table = 'delightful_mcp_servers';
 
     protected array $fillable = [
         'id',

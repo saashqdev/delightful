@@ -12,7 +12,7 @@ interface DelightfulTokenExtraInterface
 {
     public function getDelightfulEnvId(): ?int;
 
-    public function setDelightfulEnvId(?int $magicEnvId): void;
+    public function setDelightfulEnvId(?int $delightfulEnvId): void;
 
     public function setTokenExtraData(array $extraData): self;
 

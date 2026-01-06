@@ -1,9 +1,9 @@
 // import request from "@/services/base/fetch/superDelightful"
-import magicClient from "@/opensource/apis/clients/magic"
+import delightfulClient from "@/opensource/apis/clients/delightful"
 // import { REMOTE_HTTP_URL } from "../constans"
 
 export const getWorkspaces = async () => {
-	return magicClient.post(
+	return delightfulClient.post(
 		`/api/v1/super-agent/workspaces/queries`,
 		{
 			page: 1,
@@ -18,7 +18,7 @@ export const getWorkspaces = async () => {
 }
 
 export const deleteWorkspace = async ({ id }: { id: string }) => {
-	return magicClient.post(
+	return delightfulClient.post(
 		`/api/v1/super-agent/workspaces/delete`,
 		{ id },
 		{
@@ -37,7 +37,7 @@ export const editWorkspace = async ({
 	id?: string
 	workspace_name: string
 }) => {
-	return magicClient.post(
+	return delightfulClient.post(
 		`/api/v1/super-agent/workspaces/save`,
 		{ id, workspace_name },
 		{
@@ -57,7 +57,7 @@ export const editThread = async ({
 	topic_name: string
 	workspace_id: string
 }) => {
-	return magicClient.post(
+	return delightfulClient.post(
 		`/api/v1/super-agent/topics/save`,
 		{ id, topic_name, workspace_id },
 		{
@@ -69,7 +69,7 @@ export const editThread = async ({
 }
 
 export const deleteThread = async ({ id, workspace_id }: { id: string; workspace_id: string }) => {
-	return magicClient.post(
+	return delightfulClient.post(
 		`/api/v1/super-agent/topics/delete`,
 		{ id, workspace_id },
 		{
@@ -82,11 +82,11 @@ export const deleteThread = async ({ id, workspace_id }: { id: string; workspace
 
 // 通过话题id获取附件列表
 export const getAttachmentsByThreadId = async ({ id }: { id: string }) => {
-	const isDelightfulShare = window?.location?.pathname?.includes("magic-share")
+	const isDelightfulShare = window?.location?.pathname?.includes("delightful-share")
 	const url = isDelightfulShare
 		? "/api/v1/super-agent/admin/topic/user-attachments"
 		: `/api/v1/super-agent/topics/${id}/attachments`
-	return magicClient.post(url, {
+	return delightfulClient.post(url, {
 		page: 1,
 		page_size: 999,
 		file_type: ["user_upload", "process", "system_auto_upload"],
@@ -106,7 +106,7 @@ export const getTopicsByWorkspaceId = async ({
 	page: number
 	page_size: number
 }) => {
-	return magicClient.post(
+	return delightfulClient.post(
 		`/api/v1/super-agent/workspaces/${id}/topics`,
 		{ page, page_size },
 		{
@@ -131,7 +131,7 @@ export const getMessagesByConversationId = async ({
 	order?: "asc" | "desc"
 	page_token?: string
 }): Promise<any> => {
-	return magicClient.post(
+	return delightfulClient.post(
 		`/api/v1/im/conversations/${conversation_id}/messages/queries`,
 		{
 			limit,
@@ -149,12 +149,12 @@ export const getMessagesByConversationId = async ({
 
 // 通过文件id获取临时下载url
 export const getTemporaryDownloadUrl = async ({ file_ids }: { file_ids: string[] }) => {
-	const isDelightfulShare = window?.location?.pathname?.includes("magic-share")
+	const isDelightfulShare = window?.location?.pathname?.includes("delightful-share")
 	const apiPath = isDelightfulShare
 		? "/api/v1/super-agent/admin/topic/user-attachment-url"
 		: "/api/v1/super-agent/tasks/get-file-url"
 
-	return magicClient.post(
+	return delightfulClient.post(
 		apiPath,
 		// @ts-ignore 使用window添加临时的token
 		{ file_ids, token: window.temporary_token || "" },
@@ -194,7 +194,7 @@ export const createShareTopic = async ({
 	share_type: number
 	pwd: string
 }) => {
-	const response = await magicClient.post("/api/v1/share/resources/create", {
+	const response = await delightfulClient.post("/api/v1/share/resources/create", {
 		resource_id,
 		resource_type,
 		share_type,
@@ -205,7 +205,7 @@ export const createShareTopic = async ({
 
 // 通过code获取分享的信息
 export const getShareInfoByCode = async ({ code }: { code: string }) => {
-	const response = await magicClient.get(`/api/v1/share/resources/${code}/setting`)
+	const response = await delightfulClient.get(`/api/v1/share/resources/${code}/setting`)
 	return response
 }
 
@@ -217,7 +217,7 @@ export const smartTopicRename = async ({
 	id: string
 	user_question: string
 }) => {
-	return magicClient.post("/api/v1/super-agent/topics/rename", {
+	return delightfulClient.post("/api/v1/super-agent/topics/rename", {
 		id,
 		user_question,
 	})
@@ -225,12 +225,12 @@ export const smartTopicRename = async ({
 
 // 根据话题id获取话题详情
 export const getTopicDetail = async ({ id }: { id: string }) => {
-	return magicClient.get(`/api/v1/super-agent/topics/${id}`)
+	return delightfulClient.get(`/api/v1/super-agent/topics/${id}`)
 }
 
 // 错误日志上报
 export const reportErrorLog = async ({ log }: { log: any }) => {
-	return magicClient.post("/api/v1/super-agent/log/report", {
+	return delightfulClient.post("/api/v1/super-agent/log/report", {
 		log,
 	})
 }
@@ -265,7 +265,7 @@ export const getUsage = async ({
 			sandbox_id,
 			topic_status,
 		})
-		const response = await magicClient.post("/api/v1/super-agent/admin/statistics/user-usage", {
+		const response = await delightfulClient.post("/api/v1/super-agent/admin/statistics/user-usage", {
 			page,
 			page_size,
 			organization_code,
@@ -285,20 +285,20 @@ export const getUsage = async ({
 
 // 获取用户使用情况的指标
 export const getUsageMetrics = async () => {
-	return magicClient.get("/api/v1/super-agent/admin/statistics/topic-metrics")
+	return delightfulClient.get("/api/v1/super-agent/admin/statistics/topic-metrics")
 }
 
 // 获取所有工作区的组织列表
 export const getUsageList = async () => {
-	return magicClient.get("/api/v1/super-agent/admin/workspace/organization-codes")
+	return delightfulClient.get("/api/v1/super-agent/admin/workspace/organization-codes")
 }
 
 // 获取话题沙箱状态
 export const getTopicSandboxStatus = async ({ id }: { id: string }) => {
-	return magicClient.get(`/api/v1/super-agent/admin/topic/${id}/sandbox`)
+	return delightfulClient.get(`/api/v1/super-agent/admin/topic/${id}/sandbox`)
 }
 
 // 获取话题详情
 export const getTopicDetailByTopicId = async ({ id }: { id: string }) => {
-	return magicClient.get(`/api/v1/super-agent/topics/${id}`)
+	return delightfulClient.get(`/api/v1/super-agent/topics/${id}`)
 }

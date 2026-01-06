@@ -17,8 +17,8 @@ import xmlSVG from "./assets/file-xml.svg"
 import folderSVG from "./assets/folder.svg"
 import imageSVG from "./assets/image.svg"
 import linkSVG from "./assets/link.svg"
-import magicdocSVG from "./assets/magicdoc.svg"
-import magictableSVG from "./assets/magictable.svg"
+import delightfuldocSVG from "./assets/delightfuldoc.svg"
+import delightfultableSVG from "./assets/delightfultable.svg"
 import markdownSVG from "./assets/markdown.svg"
 import mindmapSVG from "./assets/mindmap.svg"
 import olddocSVG from "./assets/olddoc.svg"
@@ -108,10 +108,10 @@ export default memo(function DelightfulFileIcon({
 				return wikiSVG
 			case "whiteboard":
 				return whiteboardSVG
-			case "magictable":
-				return magictableSVG
-			case "magicdoc":
-				return magicdocSVG
+			case "delightfultable":
+				return delightfultableSVG
+			case "delightfuldoc":
+				return delightfuldocSVG
 			case "mindmap":
 				return mindmapSVG
 			case "olddoc":

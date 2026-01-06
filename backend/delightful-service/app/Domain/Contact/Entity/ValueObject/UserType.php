@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * magic_user的类型.
+ * delightful_user的类型.
  */
 enum UserType: int
 {

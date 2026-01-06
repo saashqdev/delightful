@@ -14,14 +14,14 @@ export const enum UserStatus {
 }
 
 export namespace User {
-	/** magic 生态下组织（湾镇组织信息需要与 teamshare 中组织信息作映射） */
+	/** delightful 生态下组织（湾镇组织信息需要与 teamshare 中组织信息作映射） */
 	export interface DelightfulOrganization {
-		/** magic 用户UnionID（整个magic生态下唯一） */
-		magic_id: string
-		/** magic 组织编码 */
-		magic_organization_code: string
-		/** magic 用户OpenId（当前组织下唯一） */
-		magic_user_id: string
+		/** delightful 用户UnionID（整个delightful生态下唯一） */
+		delightful_id: string
+		/** delightful 组织编码 */
+		delightful_organization_code: string
+		/** delightful 用户OpenId（当前组织下唯一） */
+		delightful_user_id: string
 		/** 组织Logo */
 		organization_name: string
 		/** 组织名称 */
@@ -60,10 +60,10 @@ export namespace User {
 	export interface UserAccount {
 		/** 当前所在环境 */
 		deployCode: string
-		/** magic 用户UnionID（整个magic生态下唯一） */
-		magic_id: string
-		/** magic 用户OpenId（当前组织下唯一） */
-		magic_user_id: string
+		/** delightful 用户UnionID（整个delightful生态下唯一） */
+		delightful_id: string
+		/** delightful 用户OpenId（当前组织下唯一） */
+		delightful_user_id: string
 		/** 用户名称 */
 		nickname: string
 		/** 当前用户所在组织 */
@@ -77,7 +77,7 @@ export namespace User {
 	}
 
 	export interface UserInfo {
-		magic_id: string
+		delightful_id: string
 		user_id: string
 		status: string | number
 		nickname: string

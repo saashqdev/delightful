@@ -42,7 +42,7 @@ export namespace Common {
 		deployCode: string
 		/** 当前环境名称 */
 		name?: string
-		/** 微应用/微服务（teamshare、keewood、magic等服务中http、websocket等配置） */
+		/** 微应用/微服务（teamshare、keewood、delightful等服务中http、websocket等配置） */
 		services: Record<string, ServiceConfig>
 		/** 第三方登录 */
 		loginConfig?: Record<Login.LoginType, PrivateConfigSignInValues>

@@ -14,10 +14,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_comments')) {
+        if (Schema::hasTable('delightful_comments')) {
             return;
         }
-        Schema::create('magic_comments', function (Blueprint $table) {
+        Schema::create('delightful_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->tinyInteger('type')->comment('类型，例如评论、动态');
             $table->json('attachments')->comment('附件');

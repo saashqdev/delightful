@@ -23,18 +23,18 @@ class SeqExtra extends AbstractEntity
      * 用户发这条消息时，他所登录的环境 id.（比如在 saas 生产填了某个私有化部署预发布环境的码）
      * 用于请求指定私有化部署的测试/预发布/生产环境.
      */
-    protected ?int $magicEnvId = null;
+    protected ?int $delightfulEnvId = null;
 
     protected ?string $language = null;
 
     public function getDelightfulEnvId(): ?int
     {
-        return $this->magicEnvId;
+        return $this->delightfulEnvId;
     }
 
-    public function setDelightfulEnvId(?int $magicEnvId): self
+    public function setDelightfulEnvId(?int $delightfulEnvId): self
     {
-        $this->magicEnvId = $magicEnvId;
+        $this->delightfulEnvId = $delightfulEnvId;
         return $this;
     }
 
@@ -53,7 +53,7 @@ class SeqExtra extends AbstractEntity
     public function getExtraCanCopyData(): array
     {
         return [
-            'magic_env_id' => $this->getDelightfulEnvId(),
+            'delightful_env_id' => $this->getDelightfulEnvId(),
             'topic_id' => $this->getTopicId(),
         ];
     }

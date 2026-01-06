@@ -144,7 +144,7 @@ function CustomConditionContainer(
 
 	const readonlyCheck = useCallback(() => {
 		if (readonly) {
-			message.warning(i18next.t("common.readonlyTips", { ns: "magicFlow" }))
+			message.warning(i18next.t("common.readonlyTips", { ns: "delightfulFlow" }))
 			return false
 		}
 		return true
@@ -320,7 +320,7 @@ function CustomConditionContainer(
 			const parentPath = path.join(".children.")
 			if (parentPath === "") {
 				if (tempConditionData.children.length === 1) {
-					message.warning(i18next.t("common.cannotDelete", { ns: "magicFlow" }))
+					message.warning(i18next.t("common.cannotDelete", { ns: "delightfulFlow" }))
 					return
 				}
 				// Root node

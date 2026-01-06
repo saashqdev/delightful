@@ -15,8 +15,8 @@ Before getting started, make sure your system has the following software install
 ### 1. Get the Project Code
 
 ```bash
-git clone https://github.com/saashqdev/delightful/magic.git
-cd magic
+git clone https://github.com/saashqdev/delightful/delightful.git
+cd delightful
 ```
 
 ### 2. Configure Environment Files
@@ -26,22 +26,22 @@ The Be Delightful service depends on several key configuration files:
 #### 2.1 Create Be Delightful Configuration File
 
 ```bash
-cp config/.env_super_magic.example config/.env_super_magic
+cp config/.env_super_delightful.example config/.env_super_delightful
 ```
 Configure Be Delightful environment variables. You must configure at least one large language model environment variable that supports the OpenAI format for proper functionality.
 
-Edit the `config/.env_super_magic` file to configure necessary environment variables:
+Edit the `config/.env_super_delightful` file to configure necessary environment variables:
 
 ```bash
-vim config/.env_super_magic
+vim config/.env_super_delightful
 ```
 
 ### 3. Run the Installation Script
 
-Use the `magic.sh` script provided with the project for installation:
+Use the `delightful.sh` script provided with the project for installation:
 
 ```bash
-./bin/magic.sh
+./bin/delightful.sh
 ```
 
 When running for the first time, the installation script will perform the following operations:
@@ -62,25 +62,25 @@ When prompted "Do you want to install Be Delightful service?", select "1" to ins
 #### Start All Services in Foreground
 
 ```bash
-./bin/magic.sh start
+./bin/delightful.sh start
 ```
 
 #### Start All Services in Background
 
 ```bash
-./bin/magic.sh daemon
+./bin/delightful.sh daemon
 ```
 
 #### Start Only Be Delightful Service (Foreground)
 
 ```bash
-./bin/magic.sh super-magic
+./bin/delightful.sh super-delightful
 ```
 
 #### Start Only Be Delightful Service (Background)
 
 ```bash
-./bin/magic.sh super-magic-daemon
+./bin/delightful.sh super-delightful-daemon
 ```
 
 ### Managing Services
@@ -88,32 +88,32 @@ When prompted "Do you want to install Be Delightful service?", select "1" to ins
 #### View Service Status
 
 ```bash
-./bin/magic.sh status
+./bin/delightful.sh status
 ```
 
 #### View Service Logs
 
 ```bash
-./bin/magic.sh logs
+./bin/delightful.sh logs
 ```
 
 #### Restart Services
 
 ```bash
-./bin/magic.sh restart
+./bin/delightful.sh restart
 ```
 
 #### Stop Services
 
 ```bash
-./bin/magic.sh stop
+./bin/delightful.sh stop
 ```
 
 ## Configuration Details
 
 ### Be Delightful Environment Configuration
 
-The `config/.env_super_magic` file contains the following important configuration items:
+The `config/.env_super_delightful` file contains the following important configuration items:
 
 #### Basic Configuration
 - `APP_ENV`: Application environment setting, possible values include "test", "production", etc.
@@ -170,7 +170,7 @@ The `config/.env_super_magic` file contains the following important configuratio
 
    View service logs for detailed error information:
    ```bash
-   ./bin/magic.sh logs
+   ./bin/delightful.sh logs
    ```
 
 3. **Network Connection Issues**
@@ -204,7 +204,7 @@ When you need to update the Be Delightful service, follow these steps:
 
 2. Rebuild and restart services
    ```bash
-   ./bin/magic.sh restart
+   ./bin/delightful.sh restart
    ```
 
 ## Conclusion

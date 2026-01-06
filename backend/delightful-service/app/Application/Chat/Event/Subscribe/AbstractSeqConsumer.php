@@ -47,12 +47,12 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
 
     public function __construct(
         protected Redis $redis,
-        protected DelightfulSeqAppService $magicSeqAppService,
-        protected DelightfulChatSeqRepositoryInterface $magicChatSeqRepository,
-        protected DelightfulChatMessageAppService $magicChatMessageAppService,
-        protected DelightfulControlMessageAppService $magicControlMessageAppService,
-        protected DelightfulSeqDomainService $magicSeqDomainService,
-        protected DelightfulUserRepository $magicUserRepository,
+        protected DelightfulSeqAppService $delightfulSeqAppService,
+        protected DelightfulChatSeqRepositoryInterface $delightfulChatSeqRepository,
+        protected DelightfulChatMessageAppService $delightfulChatMessageAppService,
+        protected DelightfulControlMessageAppService $delightfulControlMessageAppService,
+        protected DelightfulSeqDomainService $delightfulSeqDomainService,
+        protected DelightfulUserRepository $delightfulUserRepository,
     ) {
         // 设置列队优先级
         $this->arguments['x-max-priority'] = ['I', $this->priority->value];

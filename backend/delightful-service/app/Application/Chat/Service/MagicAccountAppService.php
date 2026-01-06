@@ -31,7 +31,7 @@ class DelightfulAccountAppService extends AbstractAppService
         protected readonly DelightfulUserDomainService $userDomainService,
         protected readonly DelightfulAccountDomainService $accountDomainService,
         protected readonly LockerInterface $locker,
-        protected readonly DelightfulFlowDomainService $magicFlowDomainService,
+        protected readonly DelightfulFlowDomainService $delightfulFlowDomainService,
     ) {
     }
 
@@ -72,19 +72,19 @@ class DelightfulAccountAppService extends AbstractAppService
         try {
             $userDTO->setUserType(UserType::Ai);
             if (empty($authorization->getDelightfulId()) && ! empty($authorization->getId())) {
-                $magicInfo = $this->userDomainService->getUserById($authorization->getId());
-                $authorization->setDelightfulId($magicInfo?->getDelightfulId());
-                $authorization->setOrganizationCode($magicInfo?->getOrganizationCode());
+                $delightfulInfo = $this->userDomainService->getUserById($authorization->getId());
+                $authorization->setDelightfulId($delightfulInfo?->getDelightfulId());
+                $authorization->setOrganizationCode($delightfulInfo?->getOrganizationCode());
             }
-            // 通过 aiCode 查询 magic_flows 表获取所属组织。
-            // 注意超级麦吉当前是作为一个没有写入 magic_flows 数据库的 flow 存在。 SUPER_DELIGHTFUL_CODE 写入了 accounts 表。
+            // 通过 aiCode 查询 delightful_flows 表获取所属组织。
+            // 注意超级麦吉当前是作为一个没有写入 delightful_flows 数据库的 flow 存在。 SUPER_DELIGHTFUL_CODE 写入了 accounts 表。
             if ($aiCode !== AgentConstant::SUPER_DELIGHTFUL_CODE) {
                 $disabledDataIsolation = FlowDataIsolation::create()->disabled();
-                $magicFlowEntity = $this->magicFlowDomainService->getByCode($disabledDataIsolation, $aiCode);
-                if (! $magicFlowEntity) {
+                $delightfulFlowEntity = $this->delightfulFlowDomainService->getByCode($disabledDataIsolation, $aiCode);
+                if (! $delightfulFlowEntity) {
                     ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
                 }
-                $authorization->setOrganizationCode($magicFlowEntity->getOrganizationCode());
+                $authorization->setOrganizationCode($delightfulFlowEntity->getOrganizationCode());
             }
 
             $dataIsolation = $this->createDataIsolation($authorization);
@@ -106,8 +106,8 @@ class DelightfulAccountAppService extends AbstractAppService
         // 检查验证码是否正确
     }
 
-    public function getAccountInfoByDelightfulId(string $magicId): ?AccountEntity
+    public function getAccountInfoByDelightfulId(string $delightfulId): ?AccountEntity
     {
-        return $this->accountDomainService->getAccountInfoByDelightfulId($magicId);
+        return $this->accountDomainService->getAccountInfoByDelightfulId($delightfulId);
     }
 }

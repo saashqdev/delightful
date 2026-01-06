@@ -14,11 +14,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_contact_accounts', static function (Blueprint $table) {
-            // magic_environment_id
-            $table->bigInteger('magic_environment_id')->comment('magic_environments 表的 id')->default(0);
+        Schema::table('delightful_contact_accounts', static function (Blueprint $table) {
+            // delightful_environment_id
+            $table->bigInteger('delightful_environment_id')->comment('delightful_environments 表的 id')->default(0);
             $table->dropIndex('unq_country_code_phone');
-            $table->index(['country_code', 'phone', 'magic_environment_id'], 'idx_country_code_phone');
+            $table->index(['country_code', 'phone', 'delightful_environment_id'], 'idx_country_code_phone');
         });
     }
 

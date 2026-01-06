@@ -13,7 +13,7 @@ class CommentTreeIndexModel extends AbstractTreeIndexModel
 {
     use Snowflake;
 
-    protected ?string $table = 'magic_comment_tree_indexes';
+    protected ?string $table = 'delightful_comment_tree_indexes';
 
     /**
      * The attributes that are mass assignable.

@@ -4,7 +4,7 @@ const useCommonStyles = createStyles(({ css, prefixCls, token }) => ({
 	buttonList: css`
 		border-radius: 8px;
 		width: 100%;
-		background: ${token.magicColorScales.grey[0]};
+		background: ${token.delightfulColorScales.grey[0]};
 
 		.${prefixCls}-btn {
 			min-height: 50px;
@@ -15,7 +15,7 @@ const useCommonStyles = createStyles(({ css, prefixCls, token }) => ({
 		}
 
 		.${prefixCls}-btn:not(:last-child) {
-			border-bottom: 1px solid ${token.magicColorUsages.border};
+			border-bottom: 1px solid ${token.delightfulColorUsages.border};
 		}
 	`,
 }))

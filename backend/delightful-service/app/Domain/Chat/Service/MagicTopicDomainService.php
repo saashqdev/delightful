@@ -37,11 +37,11 @@ class DelightfulTopicDomainService extends AbstractDomainService
 {
     public function getDelightfulApiAccessToken(string $modelName)
     {
-        $magicFlowAIModelEntity = $this->magicFlowAIModelRepository->getByName(FlowDataIsolation::create(), $modelName);
-        if ($magicFlowAIModelEntity === null) {
+        $delightfulFlowAIModelEntity = $this->delightfulFlowAIModelRepository->getByName(FlowDataIsolation::create(), $modelName);
+        if ($delightfulFlowAIModelEntity === null) {
             return '';
         }
-        return $magicFlowAIModelEntity->getActualImplementationConfig()['access_token'] ?? '';
+        return $delightfulFlowAIModelEntity->getActualImplementationConfig()['access_token'] ?? '';
     }
 
     /**
@@ -64,7 +64,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                     $conversationId = $senderTopicCreateMessage->getConversationId();
                     // 会话双发的话题 id 保持一致
                     $topicId = $senderTopicCreateMessage->getId();
-                    $receiveConversationEntity = $this->magicConversationRepository->getReceiveConversationBySenderConversationId($conversationId);
+                    $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($conversationId);
                     if ($receiveConversationEntity === null) {
                         return null;
                     }
@@ -72,7 +72,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                     $receiveTopicDTO->setTopicId($topicId);
                     $receiveTopicDTO->setConversationId($receiveConversationEntity->getId());
                     // 查询收件方的话题是否存在
-                    $receiveTopicEntity = $this->magicChatTopicRepository->getTopicEntity($receiveTopicDTO);
+                    $receiveTopicEntity = $this->delightfulChatTopicRepository->getTopicEntity($receiveTopicDTO);
                     // 如果不存在，为收件方创建话题
                     if ($receiveTopicEntity === null) {
                         $receiveTopicEntity = $this->createReceiveTopic($topicId, senderConversationId: $conversationId);
@@ -82,7 +82,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                     // 更新对方的话题
                     /** @var TopicUpdateMessage $senderTopicUpdateMessage */
                     $senderTopicUpdateMessage = $senderSeqEntity->getContent();
-                    $receiveTopicEntity = $this->magicChatTopicRepository->getPrivateChatReceiveTopicEntity(
+                    $receiveTopicEntity = $this->delightfulChatTopicRepository->getPrivateChatReceiveTopicEntity(
                         $senderTopicUpdateMessage->getId(),
                         $senderTopicUpdateMessage->getConversationId()
                     );
@@ -91,37 +91,37 @@ class DelightfulTopicDomainService extends AbstractDomainService
                     }
                     $receiveTopicEntity->setName($senderTopicUpdateMessage->getName());
                     $receiveTopicEntity->setDescription($senderTopicUpdateMessage->getDescription());
-                    $receiveTopicEntity = $this->magicChatTopicRepository->updateTopic($receiveTopicEntity);
+                    $receiveTopicEntity = $this->delightfulChatTopicRepository->updateTopic($receiveTopicEntity);
                     break;
                 case ControlMessageType::DeleteTopic:
                     // 删除双方的话题
                     /** @var TopicDeleteMessage $senderTopicDeleteMessage */
                     $senderTopicDeleteMessage = $senderSeqEntity->getContent();
-                    $receiveTopicEntity = $this->magicChatTopicRepository->getPrivateChatReceiveTopicEntity(
+                    $receiveTopicEntity = $this->delightfulChatTopicRepository->getPrivateChatReceiveTopicEntity(
                         $senderTopicDeleteMessage->getId(),
                         $senderTopicDeleteMessage->getConversationId()
                     );
                     if ($receiveTopicEntity === null) {
                         return null;
                     }
-                    $this->magicChatTopicRepository->deleteTopic($receiveTopicEntity);
+                    $this->delightfulChatTopicRepository->deleteTopic($receiveTopicEntity);
                     break;
                 default:
                     break;
             }
             if ($receiveTopicEntity && $receiveConversationEntity === null) {
-                $receiveConversationEntity = $this->magicConversationRepository->getConversationById($receiveTopicEntity->getConversationId());
+                $receiveConversationEntity = $this->delightfulConversationRepository->getConversationById($receiveTopicEntity->getConversationId());
             }
             if ($receiveTopicEntity && $receiveConversationEntity) {
-                // 获取收件方的 magic_id
+                // 获取收件方的 delightful_id
                 $receiveUserId = $receiveConversationEntity->getUserId();
-                $receiveUserEntity = $this->magicUserRepository->getUserById($receiveUserId);
+                $receiveUserEntity = $this->delightfulUserRepository->getUserById($receiveUserId);
                 if (! $receiveUserEntity?->getDelightfulId()) {
                     return null;
                 }
                 $senderSeqEntity = SeqAssembler::generateTopicChangeSeqEntity($senderSeqEntity, $receiveTopicEntity, $receiveUserEntity);
                 // 为收件方生成一个seq,告知收件方,话题有变动
-                $receiveSeqEntity = $this->magicSeqRepository->createSequence($senderSeqEntity->toArray());
+                $receiveSeqEntity = $this->delightfulSeqRepository->createSequence($senderSeqEntity->toArray());
             }
             return $receiveSeqEntity ?? null;
         } catch (Throwable $exception) {
@@ -175,7 +175,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 $topicDTO->setTopicId($messageStruct->getId());
                 $topicDTO->setConversationId($messageStruct->getConversationId());
                 $this->checkTopicBelong($topicDTO, $dataIsolation);
-                $this->magicChatTopicRepository->deleteTopic($topicDTO);
+                $this->delightfulChatTopicRepository->deleteTopic($topicDTO);
                 $seqContent = [
                     'id' => $messageStruct->getId(),
                     'conversation_id' => $messageStruct->getConversationId(),
@@ -206,10 +206,10 @@ class DelightfulTopicDomainService extends AbstractDomainService
     {
         // 为消息接收方创建话题
         if ($senderConversationId) {
-            $receiveConversationEntity = $this->magicConversationRepository->getReceiveConversationBySenderConversationId($senderConversationId);
+            $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($senderConversationId);
         }
         if ($receiveConversationId) {
-            $receiveConversationEntity = $this->magicConversationRepository->getConversationById($receiveConversationId);
+            $receiveConversationEntity = $this->delightfulConversationRepository->getConversationById($receiveConversationId);
         }
         if (! isset($receiveConversationEntity)) {
             return null;
@@ -221,7 +221,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
         $receiveTopicDTO->setOrganizationCode($receiveConversationEntity->getUserOrganizationCode());
         $receiveTopicDTO->setDescription('');
         // 为收件方创建一个新的话题
-        return $this->magicChatTopicRepository->createTopic($receiveTopicDTO);
+        return $this->delightfulChatTopicRepository->createTopic($receiveTopicDTO);
     }
 
     // 更新话题
@@ -234,7 +234,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
         $topicDTO->setName($messageStruct->getName());
         $topicDTO->setDescription($messageStruct->getDescription());
         $this->checkTopicBelong($topicDTO, $dataIsolation);
-        return $this->magicChatTopicRepository->updateTopic($topicDTO);
+        return $this->delightfulChatTopicRepository->updateTopic($topicDTO);
     }
 
     /**
@@ -244,7 +244,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
      */
     public function agentSendMessageGetTopicId(DelightfulConversationEntity $senderConversationEntity, int $getType): string
     {
-        $receiverConversationEntity = $this->magicConversationRepository->getReceiveConversationBySenderConversationId($senderConversationEntity->getId());
+        $receiverConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($senderConversationEntity->getId());
         // 为收件方创建会话，但是不再触发 ConversationCreatedEvent 事件，避免事件循环
         if (($receiverConversationEntity === null) && in_array($senderConversationEntity->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {
             $conversationDTO = new DelightfulConversationEntity();
@@ -253,7 +253,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
             # 创建会话窗口
             $conversationDTO = $this->parsePrivateChatConversationReceiveType($conversationDTO);
             # 准备生成一个会话窗口
-            $receiverConversationEntity = $this->magicConversationRepository->addConversation($conversationDTO);
+            $receiverConversationEntity = $this->delightfulConversationRepository->addConversation($conversationDTO);
         }
         $senderTopicId = $this->checkDefaultTopicExist($senderConversationEntity);
         $receiverTopicId = $this->checkDefaultTopicExist($receiverConversationEntity);
@@ -282,7 +282,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
     private function checkTopicBelong(DelightfulTopicEntity $topicDTO, DataIsolation $dataIsolation): void
     {
         // 判断话题id所属的会话id是否是当前用户的
-        $topicEntity = $this->magicChatTopicRepository->getTopicEntity($topicDTO);
+        $topicEntity = $this->delightfulChatTopicRepository->getTopicEntity($topicDTO);
         if ($topicEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
         }
@@ -300,7 +300,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
             return null;
         }
         // 判断默认话题被删了没有
-        $topicEntities = $this->magicChatTopicRepository->getTopicsByConversationId($conversationEntity->getId(), [$topicId]);
+        $topicEntities = $this->delightfulChatTopicRepository->getTopicsByConversationId($conversationEntity->getId(), [$topicId]);
         return ($topicEntities[0] ?? null)?->getTopicId();
     }
 
@@ -315,14 +315,14 @@ class DelightfulTopicDomainService extends AbstractDomainService
         $topicDTO->setOrganizationCode($conversationEntity->getUserOrganizationCode());
         $topicDTO->setName(__('chat.topic.system_default_topic'));
         $topicDTO->setDescription('');
-        $this->magicChatTopicRepository->createTopic($topicDTO);
+        $this->delightfulChatTopicRepository->createTopic($topicDTO);
         // 将默认话题id回写进会话窗口
         $senderConversationExtra = $conversationEntity->getExtra();
         if ($senderConversationExtra === null) {
             $senderConversationExtra = new ConversationExtra();
         }
         $senderConversationExtra->setDefaultTopicId($defaultTopicId);
-        $this->magicConversationRepository->updateConversationById($conversationEntity->getId(), [
+        $this->delightfulConversationRepository->updateConversationById($conversationEntity->getId(), [
             'extra' => Json::encode($senderConversationExtra->toArray()),
         ]);
     }

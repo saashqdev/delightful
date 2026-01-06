@@ -15,7 +15,7 @@ class CreateDelightfulFlowTriggerTestcases extends Migration
      */
     public function up(): void
     {
-        Schema::create('magic_flow_trigger_testcases', function (Blueprint $table) {
+        Schema::create('delightful_flow_trigger_testcases', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('flow_code')->default('')->comment('Belonging flow code');
             $table->string('code')->default('')->comment('Test set code');
@@ -38,6 +38,6 @@ class CreateDelightfulFlowTriggerTestcases extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_flow_trigger_testcase');
+        Schema::dropIfExists('delightful_flow_trigger_testcase');
     }
 }

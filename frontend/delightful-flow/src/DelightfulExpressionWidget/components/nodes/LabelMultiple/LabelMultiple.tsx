@@ -65,7 +65,7 @@ export default function LabelMultiple({ config, updateFn, wrapperWidth }: LabelM
 					/>
 				) : (
 					<MultipleItem
-						className="magic-label-multiple"
+						className="delightful-label-multiple"
 						item={targetItem as MultipleOption}
 						itemClick={() => {}}
 						showCheck={false}

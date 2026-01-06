@@ -53,7 +53,7 @@ describe("DelightfulListItem 组件", () => {
 		expect(screen.getByText("测试项目1")).toBeInTheDocument()
 
 		// 验证类名是否正确应用
-		const container = screen.getByTestId("magic-list-item")
+		const container = screen.getByTestId("delightful-list-item")
 		expect(container).toHaveClass("mock-container")
 		expect(container).not.toHaveClass("mock-active")
 	})
@@ -71,7 +71,7 @@ describe("DelightfulListItem 组件", () => {
 		render(<DelightfulListItem data={item} active />)
 
 		// 验证 active 类名是否正确应用
-		const container = screen.getByTestId("magic-list-item")
+		const container = screen.getByTestId("delightful-list-item")
 		expect(container).toHaveClass("mock-container")
 		expect(container).toHaveClass("mock-active")
 	})
@@ -259,7 +259,7 @@ describe("DelightfulListItem 组件", () => {
 		render(<DelightfulListItem data={item} className={customClass} classNames={classNames} />)
 
 		// 验证自定义类名是否被应用
-		const container = screen.getByTestId("magic-list-item")
+		const container = screen.getByTestId("delightful-list-item")
 		expect(container).toHaveClass("custom-container-class")
 		expect(container).toHaveClass("custom-container")
 	})

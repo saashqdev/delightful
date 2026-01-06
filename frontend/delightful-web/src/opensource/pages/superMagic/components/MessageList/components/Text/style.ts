@@ -36,8 +36,8 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => ({
 		},
 	},
 	userText: {
-		backgroundColor: token.magicColorUsages.primaryLight.default,
-		color: token.magicColorUsages.text[1],
+		backgroundColor: token.delightfulColorUsages.primaryLight.default,
+		color: token.delightfulColorUsages.text[1],
 		padding: "8px 8px",
 		maxWidth: "100%",
 	},
@@ -46,8 +46,8 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => ({
 		color: "#333",
 	},
 	finishedText: {
-		backgroundColor: token.magicColorUsages.successLight.default,
-		color: token.magicColorUsages.success.default,
+		backgroundColor: token.delightfulColorUsages.successLight.default,
+		color: token.delightfulColorUsages.success.default,
 		borderRadius: "100px",
 		padding: "3px 8px",
 		fontSize: "12px",
@@ -63,7 +63,7 @@ export const useStyles = createStyles(({ token, css, isDarkMode }) => ({
 		width: 100%;
 		line-height: 1.6;
 		word-wrap: break-word;
-		color: ${token.magicColorUsages.text[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 
 		h1,
 		h2,

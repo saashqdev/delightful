@@ -1,7 +1,7 @@
 import { DotLottieWorkerReact } from "@lottiefiles/dotlottie-react"
 import type { ComponentProps } from "react"
 import { memo } from "react"
-import DelightfulSearchLoading from "./magic-search.json?raw"
+import DelightfulSearchLoading from "./delightful-search.json?raw"
 
 interface SearchAnimationProps extends ComponentProps<typeof DotLottieWorkerReact> {
 	size: number

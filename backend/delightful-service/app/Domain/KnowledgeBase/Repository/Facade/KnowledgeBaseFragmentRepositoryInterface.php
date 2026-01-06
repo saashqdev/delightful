@@ -31,7 +31,7 @@ interface KnowledgeBaseFragmentRepositoryInterface
      */
     public function getFragmentsByPointId(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, string $pointId, bool $selectForUpdate = false): array;
 
-    public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseFragmentEntity $magicFlowKnowledgeFragmentEntity): KnowledgeBaseFragmentEntity;
+    public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseFragmentEntity $delightfulFlowKnowledgeFragmentEntity): KnowledgeBaseFragmentEntity;
 
     /**
      * @return array{total: int, list: array<KnowledgeBaseFragmentEntity>}
@@ -40,7 +40,7 @@ interface KnowledgeBaseFragmentRepositoryInterface
 
     public function count(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseFragmentQuery $query): int;
 
-    public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseFragmentEntity $magicFlowKnowledgeFragmentEntity): void;
+    public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseFragmentEntity $delightfulFlowKnowledgeFragmentEntity): void;
 
     public function fragmentBatchDestroy(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, array $fragmentIds): void;
 

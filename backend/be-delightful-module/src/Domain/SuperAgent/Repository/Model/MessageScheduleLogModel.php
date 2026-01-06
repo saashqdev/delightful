@@ -26,7 +26,7 @@ class MessageScheduleLogModel extends AbstractModel
     /**
      * Table name.
      */
-    protected ?string $table = 'magic_super_agent_message_schedule_log';
+    protected ?string $table = 'delightful_super_agent_message_schedule_log';
 
     /**
      * Fillable fields.

@@ -28,9 +28,9 @@ import { BroadcastChannelSender } from "@/opensource/broadcastChannel"
 const console = new Logger("UserService")
 
 export interface OrganizationResponse {
-	magicOrganizationMap: Record<string, User.DelightfulOrganization>
+	delightfulOrganizationMap: Record<string, User.DelightfulOrganization>
 	organizations?: Array<User.UserOrganization>
-	/** magic 生态下的组织Code */
+	/** delightful 生态下的组织Code */
 	organizationCode?: string
 	/** teamshare 生态下的组织Code */
 	teamshareOrganizationCode?: string
@@ -156,11 +156,11 @@ export class UserService {
 	 * @description 组织同步
 	 */
 	setOrganization(params: OrganizationResponse) {
-		const { organizationCode, teamshareOrganizationCode, organizations, magicOrganizationMap } =
+		const { organizationCode, teamshareOrganizationCode, organizations, delightfulOrganizationMap } =
 			params
 		// 数据持久化同步
 		const user = new UserRepository()
-		user.setOrganizations(magicOrganizationMap ?? {})
+		user.setOrganizations(delightfulOrganizationMap ?? {})
 		user.setOrganizationCode(organizationCode ?? "")
 		user.setTeamshareOrganizations(organizations ?? [])
 		user.setTeamshareOrganizationCode(teamshareOrganizationCode ?? "")
@@ -168,7 +168,7 @@ export class UserService {
 		// 内存状态同步
 		userStore.user.setOrganizationCode(organizationCode || "")
 		userStore.user.setTeamshareOrganizationCode(teamshareOrganizationCode || "")
-		userStore.user.setOrganizations(magicOrganizationMap || {})
+		userStore.user.setOrganizations(delightfulOrganizationMap || {})
 		userStore.user.setTeamshareOrganizations(organizations || [])
 	}
 
@@ -185,16 +185,16 @@ export class UserService {
 	 * @description 组织切换
 	 */
 	switchOrganization = async (
-		magic_user_id: string,
-		magic_organization_code: string,
+		delightful_user_id: string,
+		delightful_organization_code: string,
 		fallbackUserInfo: User.UserInfo,
 	) => {
 		try {
-			this.setDelightfulOrganizationCode(magic_organization_code)
+			this.setDelightfulOrganizationCode(delightful_organization_code)
 
 			// 拉取用户信息
 			const { items } = await this.contactApi.getUserInfos({
-				user_ids: [magic_user_id],
+				user_ids: [delightful_user_id],
 				query_type: 2,
 			})
 
@@ -211,7 +211,7 @@ export class UserService {
 			/** 广播切换组织 */
 			BroadcastChannelSender.switchOrganization({
 				userInfo,
-				magicOrganizationCode: magic_organization_code,
+				delightfulOrganizationCode: delightful_organization_code,
 			})
 		} catch (err) {
 			console.error(err)
@@ -223,9 +223,9 @@ export class UserService {
 
 	setDelightfulOrganizationCode(organizationCode: string) {
 		const user = new UserRepository()
-		const { magicOrganizationMap } = userStore.user
+		const { delightfulOrganizationMap } = userStore.user
 		const teamshareOrgCode =
-			magicOrganizationMap?.[organizationCode]?.third_platform_organization_code ?? ""
+			delightfulOrganizationMap?.[organizationCode]?.third_platform_organization_code ?? ""
 		user.setOrganizationCode(organizationCode)
 		user.setTeamshareOrganizationCode(teamshareOrgCode)
 
@@ -235,12 +235,12 @@ export class UserService {
 
 	setTeamshareOrganizationCode(organizationCode: string) {
 		const user = new UserRepository()
-		const { magicOrganizationMap } = userStore.user
+		const { delightfulOrganizationMap } = userStore.user
 		const orgMap = keyBy(
-			Object.values(magicOrganizationMap),
+			Object.values(delightfulOrganizationMap),
 			"third_platform_organization_code",
 		)
-		const orgCode = orgMap?.[organizationCode]?.magic_organization_code
+		const orgCode = orgMap?.[organizationCode]?.delightful_organization_code
 		user.setOrganizationCode(orgCode)
 		user.setTeamshareOrganizationCode(organizationCode)
 
@@ -281,25 +281,25 @@ export class UserService {
 	 * FIXME: 错误时，恢复当前账号
 	 * @description 账号切换
 	 * @param unionId
-	 * @param magicOrganizationCode
+	 * @param delightfulOrganizationCode
 	 */
 	switchAccount = async (
 		unionId: string,
-		magic_user_id: string,
-		magic_organization_code: string,
+		delightful_user_id: string,
+		delightful_organization_code: string,
 	) => {
 		const { accounts } = userStore.account
-		const account = accounts.find((o) => o.magic_id === unionId)
+		const account = accounts.find((o) => o.delightful_id === unionId)
 		if (account) {
-			const magicOrgSyncStep = this.service
+			const delightfulOrgSyncStep = this.service
 				.get<LoginService>("loginService")
-				.magicOrganizationSyncStep(account?.deployCode as string)
+				.delightfulOrganizationSyncStep(account?.deployCode as string)
 
 			this.setAuthorization(account?.access_token)
 
-			if (magic_user_id && magic_organization_code) {
+			if (delightful_user_id && delightful_organization_code) {
 				// 同步用户对应组织
-				this.setDelightfulOrganizationCode(magic_organization_code)
+				this.setDelightfulOrganizationCode(delightful_organization_code)
 				// Step 1: 环境同步
 				await this.service
 					.get<LoginService>("loginService")
@@ -307,16 +307,16 @@ export class UserService {
 				// Step 2: 同步用户信息
 				await this.service
 					.get<LoginService>("loginService")
-					.fetchUserInfoStep(magic_user_id)
-				// Step 3: magic中组织体系获取
-				const { magicOrganizationMap } = await magicOrgSyncStep({
+					.fetchUserInfoStep(delightful_user_id)
+				// Step 3: delightful中组织体系获取
+				const { delightfulOrganizationMap } = await delightfulOrgSyncStep({
 					access_token: account.access_token,
 				} as Login.UserLoginsResponse)
 				// Step 4: 组织同步(先获取在同步)
 				const response = await this.service
 					.get<LoginService>("loginService")
 					.organizationFetchStep({
-						magicOrganizationMap,
+						delightfulOrganizationMap,
 						access_token: account.access_token,
 						deployCode: account.deployCode,
 					})
@@ -379,27 +379,27 @@ export class UserService {
 				return new Promise(async (resolve) => {
 					// 环境同步
 					await loginService.getClusterConfig(account?.deployCode)
-					// magic 组织同步
-					const magicOrgSyncStep = loginService.magicOrganizationSyncStep(
+					// delightful 组织同步
+					const delightfulOrgSyncStep = loginService.delightfulOrganizationSyncStep(
 						account?.deployCode,
 					)
-					const { magicOrganizationMap } = await magicOrgSyncStep({
+					const { delightfulOrganizationMap } = await delightfulOrgSyncStep({
 						access_token: account?.access_token,
 					} as Login.UserLoginsResponse)
 					// teamshare 组织同步
 					const { organizations } = await loginService.organizationFetchStep({
-						magicOrganizationMap,
+						delightfulOrganizationMap,
 						access_token: account.access_token,
 						deployCode: account?.deployCode,
 					})
 
-					userStore.account.updateAccount(account.magic_id, {
+					userStore.account.updateAccount(account.delightful_id, {
 						...account,
-						organizations: Object.values(magicOrganizationMap),
+						organizations: Object.values(delightfulOrganizationMap),
 						teamshareOrganizations: organizations || [],
 					})
 
-					resolve({ organizations, magicOrganizationMap })
+					resolve({ organizations, delightfulOrganizationMap })
 				})
 			}
 
@@ -465,26 +465,26 @@ export class UserService {
 	}
 	/**
 	 * @description 切换用户
-	 * @param magicUser
+	 * @param delightfulUser
 	 * @param showSwitchLoading
 	 */
 	async loadUserInfo(
-		magicUser: User.UserInfo,
+		delightfulUser: User.UserInfo,
 		{ showSwitchLoading = true }: { showSwitchLoading?: boolean } = {},
 	) {
 		try {
-			const magicId = magicUser.magic_id
-			const userId = magicUser.user_id
+			const delightfulId = delightfulUser.delightful_id
+			const userId = delightfulUser.user_id
 
-			console.log("切换账户", magicId)
+			console.log("切换账户", delightfulId)
 			if (showSwitchLoading) interfaceStore.setIsSwitchingOrganization(true)
 
 			// 如果当前账户ID与传入的账户ID相同，则不进行切换
-			chatDb.switchDb(magicId)
+			chatDb.switchDb(delightfulId)
 			ChatFileService.init()
 			EditorDraftService.initDrafts()
 
-			const db = initDataContextDb(magicId, userId)
+			const db = initDataContextDb(delightfulId, userId)
 			await userInfoService.loadData(db)
 			await groupInfoService.loadData(db)
 
@@ -501,22 +501,22 @@ export class UserService {
 			/** 如果是第一次加载，则拉取 消息 */
 			if (!MessageSeqIdService.getGlobalPullSeqId()) {
 				await MessageService.pullMessageOnFirstLoad(
-					magicUser.magic_id,
-					magicUser.organization_code,
+					delightfulUser.delightful_id,
+					delightfulUser.organization_code,
 				)
 			} else {
 				await conversationService.init(
-					magicUser.magic_id,
-					magicUser.organization_code,
-					magicUser,
+					delightfulUser.delightful_id,
+					delightfulUser.organization_code,
+					delightfulUser,
 				)
 				// 拉取离线消息（内部只会应用该组织的信息）
 				MessageService.pullOfflineMessages()
 			}
 
 			// this.conversationGroupBusiness.initConversationGroups(
-			// 	magicUser.magic_id,
-			// 	magicUser.organization_code,
+			// 	delightfulUser.delightful_id,
+			// 	delightfulUser.organization_code,
 			// )
 
 			/** 设置消息拉取 循环 */

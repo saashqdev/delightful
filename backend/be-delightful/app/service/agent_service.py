@@ -16,7 +16,7 @@ from app.core.context.agent_context import AgentContext
 from app.core.stream.base import Stream
 from app.infrastructure.storage.base import BaseFileProcessor
 from app.infrastructure.storage.factory import StorageFactory
-from app.magic.agent import Agent
+from app.delightful.agent import Agent
 from app.paths import PathManager
 from app.service.agent_event.file_storage_listener_service import FileStorageListenerService
 from app.service.attachment_service import AttachmentService

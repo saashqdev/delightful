@@ -295,16 +295,16 @@ const CascaderDropdown = ({
 					{RenderComponent ? (
 						<>
 							<div className="title">
-								{i18next.t("expression.const", { ns: "magicFlow" })}
+								{i18next.t("expression.const", { ns: "delightfulFlow" })}
 							</div>
 							{RenderComponent}
 							<div className="title">
-								{i18next.t("expression.expression", { ns: "magicFlow" })}
+								{i18next.t("expression.expression", { ns: "delightfulFlow" })}
 							</div>
 						</>
 					) : null}
 					<SearchInput
-						placeholder={i18next.t("expression.searchVariables", { ns: "magicFlow" })}
+						placeholder={i18next.t("expression.searchVariables", { ns: "delightfulFlow" })}
 						value={keyword}
 						onChange={onSearchChange}
 						refInstance={inputRef}

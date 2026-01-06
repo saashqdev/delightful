@@ -82,14 +82,14 @@ class ProjectArchitectureIntegrityValidator
     private function validateProjectTableExists(): void
     {
         try {
-            $tableExists = Db::select("SHOW TABLES LIKE 'magic_super_agent_project'");
+            $tableExists = Db::select("SHOW TABLES LIKE 'delightful_super_agent_project'");
             if (empty($tableExists)) {
                 $this->addValidationResult('project_table_exists', false, 'Project table does not exist');
                 return;
             }
 
             // Check table structure
-            $columns = Db::select('DESCRIBE magic_super_agent_project');
+            $columns = Db::select('DESCRIBE delightful_super_agent_project');
             $requiredColumns = [
                 'id', 'user_id', 'user_organization_code', 'workspace_id',
                 'project_name', 'project_description', 'work_dir', 'project_status',
@@ -122,7 +122,7 @@ class ProjectArchitectureIntegrityValidator
         try {
             // Check if all topics have project_id
             $topicsWithoutProject = Db::select(
-                'SELECT COUNT(*) as count FROM magic_super_agent_topics WHERE project_id = 0 OR project_id IS NULL'
+                'SELECT COUNT(*) as count FROM delightful_super_agent_topics WHERE project_id = 0 OR project_id IS NULL'
             );
 
             $orphanedTopics = $topicsWithoutProject[0]->count ?? 0;
@@ -140,8 +140,8 @@ class ProjectArchitectureIntegrityValidator
             // Validate that all project_ids in topics exist in projects table
             $invalidProjectRefs = Db::select('
                 SELECT COUNT(*) as count 
-                FROM magic_super_agent_topics t 
-                LEFT JOIN magic_super_agent_project p ON t.project_id = p.id 
+                FROM delightful_super_agent_topics t 
+                LEFT JOIN delightful_super_agent_project p ON t.project_id = p.id 
                 WHERE t.project_id > 0 AND p.id IS NULL
             ');
 
@@ -170,8 +170,8 @@ class ProjectArchitectureIntegrityValidator
             // Check if all projects have valid workspace_id
             $invalidWorkspaceRefs = Db::select('
                 SELECT COUNT(*) as count 
-                FROM magic_super_agent_project p 
-                LEFT JOIN magic_super_agent_workspaces w ON p.workspace_id = w.id 
+                FROM delightful_super_agent_project p 
+                LEFT JOIN delightful_super_agent_workspaces w ON p.workspace_id = w.id 
                 WHERE w.id IS NULL
             ');
 
@@ -190,8 +190,8 @@ class ProjectArchitectureIntegrityValidator
             // Check if project users match workspace users
             $userMismatches = Db::select('
                 SELECT COUNT(*) as count 
-                FROM magic_super_agent_project p 
-                JOIN magic_super_agent_workspaces w ON p.workspace_id = w.id 
+                FROM delightful_super_agent_project p 
+                JOIN delightful_super_agent_workspaces w ON p.workspace_id = w.id 
                 WHERE p.user_id != w.user_id
             ');
 
@@ -219,8 +219,8 @@ class ProjectArchitectureIntegrityValidator
         try {
             $workspacesWithoutProjects = Db::select('
                 SELECT COUNT(*) as count 
-                FROM magic_super_agent_workspaces w 
-                LEFT JOIN magic_super_agent_project p ON w.id = p.workspace_id 
+                FROM delightful_super_agent_workspaces w 
+                LEFT JOIN delightful_super_agent_project p ON w.id = p.workspace_id 
                 WHERE p.id IS NULL AND w.deleted_at IS NULL
             ');
 
@@ -247,14 +247,14 @@ class ProjectArchitectureIntegrityValidator
     {
         try {
             // Check if old table doesn't exist
-            $oldTableExists = Db::select("SHOW TABLES LIKE 'magic_super_agent_task_files'");
-            $newTableExists = Db::select("SHOW TABLES LIKE 'magic_super_agent_project_files'");
+            $oldTableExists = Db::select("SHOW TABLES LIKE 'delightful_super_agent_task_files'");
+            $newTableExists = Db::select("SHOW TABLES LIKE 'delightful_super_agent_project_files'");
 
             if (empty($oldTableExists) && ! empty($newTableExists)) {
                 $this->addValidationResult('file_table_rename', true, 'File table successfully renamed from task_files to project_files');
 
                 // Check if new table has project_id column
-                $columns = Db::select('DESCRIBE magic_super_agent_project_files');
+                $columns = Db::select('DESCRIBE delightful_super_agent_project_files');
                 $columnNames = array_column($columns, 'Field');
 
                 if (in_array('project_id', $columnNames)) {
@@ -278,7 +278,7 @@ class ProjectArchitectureIntegrityValidator
         try {
             $invalidStatuses = Db::select("
                 SELECT COUNT(*) as count 
-                FROM magic_super_agent_project 
+                FROM delightful_super_agent_project 
                 WHERE project_status NOT IN ('active', 'archived', 'deleted')
             ");
 

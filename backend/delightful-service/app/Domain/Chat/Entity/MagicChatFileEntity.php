@@ -15,7 +15,7 @@ final class DelightfulChatFileEntity extends AbstractEntity
 
     protected ?string $userId = null;
 
-    protected ?string $magicMessageId = null;
+    protected ?string $delightfulMessageId = null;
 
     protected ?string $organizationCode = null;
 
@@ -91,12 +91,12 @@ final class DelightfulChatFileEntity extends AbstractEntity
 
     public function getDelightfulMessageId(): ?string
     {
-        return $this->magicMessageId;
+        return $this->delightfulMessageId;
     }
 
-    public function setDelightfulMessageId(?string $magicMessageId): void
+    public function setDelightfulMessageId(?string $delightfulMessageId): void
     {
-        $this->magicMessageId = $magicMessageId;
+        $this->delightfulMessageId = $delightfulMessageId;
     }
 
     public function getOrganizationCode(): ?string

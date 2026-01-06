@@ -47,7 +47,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     protected FlowMemoryManager $flowMemoryManager;
 
-    protected DelightfulFlowDomainService $magicFlowDomainService;
+    protected DelightfulFlowDomainService $delightfulFlowDomainService;
 
     protected FileDomainService $fileDomainService;
 
@@ -57,7 +57,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     protected CacheInterface $cache;
 
-    protected DelightfulChatFileDomainService $magicChatFileDomainService;
+    protected DelightfulChatFileDomainService $delightfulChatFileDomainService;
 
     protected MsgLogDomainService $msgLogDomainService;
 
@@ -74,10 +74,10 @@ abstract class NodeRunner implements NodeRunnerInterface
         $this->logger = di(LoggerFactory::class)->get('NodeRunner');
         $this->cache = di(CacheInterface::class);
         $this->flowMemoryManager = di(FlowMemoryManager::class);
-        $this->magicFlowDomainService = di(DelightfulFlowDomainService::class);
+        $this->delightfulFlowDomainService = di(DelightfulFlowDomainService::class);
         $this->fileDomainService = di(FileDomainService::class);
         $this->operationPermissionAppService = di(OperationPermissionAppService::class);
-        $this->magicChatFileDomainService = di(DelightfulChatFileDomainService::class);
+        $this->delightfulChatFileDomainService = di(DelightfulChatFileDomainService::class);
         $this->msgLogDomainService = di(MsgLogDomainService::class);
         $this->userDomainService = di(DelightfulUserDomainService::class);
         $this->modelGatewayMapper = di(ModelGatewayMapper::class);

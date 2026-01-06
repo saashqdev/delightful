@@ -55,11 +55,11 @@ class MultiModalBuilder
             return null;
         }
 
-        $magicFlowMultiModalLogEntity = new DelightfulFlowMultiModalLogEntity();
-        $magicFlowMultiModalLogEntity->setMessageId($executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId());
-        $magicFlowMultiModalLogEntity->setAnalysisResult($visionResult['response']);
-        $magicFlowMultiModalLogEntity->setType(1);
-        $magicFlowMultiModalLogEntity->setModel($visionResult['model']);
-        return di(DelightfulFlowMultiModalLogDomainService::class)->create($executionData->getDataIsolation(), $magicFlowMultiModalLogEntity);
+        $delightfulFlowMultiModalLogEntity = new DelightfulFlowMultiModalLogEntity();
+        $delightfulFlowMultiModalLogEntity->setMessageId($executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId());
+        $delightfulFlowMultiModalLogEntity->setAnalysisResult($visionResult['response']);
+        $delightfulFlowMultiModalLogEntity->setType(1);
+        $delightfulFlowMultiModalLogEntity->setModel($visionResult['model']);
+        return di(DelightfulFlowMultiModalLogDomainService::class)->create($executionData->getDataIsolation(), $delightfulFlowMultiModalLogEntity);
     }
 }

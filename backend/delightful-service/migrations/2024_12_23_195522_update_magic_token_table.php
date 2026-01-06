@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_tokens', static function (Blueprint $table) {
+        Schema::table('delightful_tokens', static function (Blueprint $table) {
             // extra
             $table->text('extra')->nullable()->comment('额外信息');
         });
@@ -25,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_tokens');
+        Schema::dropIfExists('delightful_tokens');
     }
 };

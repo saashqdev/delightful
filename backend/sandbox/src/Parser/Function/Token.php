@@ -81,7 +81,7 @@ class Token implements Serializable
     }
 
     /**
-     * Typical magic getter.
+     * Typical delightful getter.
      *
      * @param string $key the property name
      * @return mixed the property value
@@ -97,7 +97,7 @@ class Token implements Serializable
     }
 
     /**
-     * Typical magic setter.
+     * Typical delightful setter.
      *
      * @param string $key the property name
      * @param mixed $value the property's new value
@@ -113,7 +113,7 @@ class Token implements Serializable
     }
 
     /**
-     * Typical magic isset.
+     * Typical delightful isset.
      *
      * @param string $key the property name
      * @return bool whether or not the property is set
@@ -124,7 +124,7 @@ class Token implements Serializable
     }
 
     /**
-     * Typical magic tostring.
+     * Typical delightful tostring.
      *
      * @return string the code
      */

@@ -3,7 +3,7 @@ import { platformKey } from "@/utils/storage"
 import Dexie from "dexie"
 import { ChatDb } from "./types"
 
-export const ChatDbSchemaStorageKey = (magicId: string) => platformKey(`chat-db-schema/${magicId}`)
+export const ChatDbSchemaStorageKey = (delightfulId: string) => platformKey(`chat-db-schema/${delightfulId}`)
 
 /**
  * 聊天数据库
@@ -11,7 +11,7 @@ export const ChatDbSchemaStorageKey = (magicId: string) => platformKey(`chat-db-
 class ChatDatabase {
 	db: ChatDb
 
-	magicId: string | undefined
+	delightfulId: string | undefined
 
 	constructor() {
 		this.db = new Dexie(this.getLocalSchemaKey("default")) as ChatDb
@@ -19,10 +19,10 @@ class ChatDatabase {
 		this.db.version(version).stores(schema)
 	}
 
-	switchDb(magicId: string) {
-		this.magicId = magicId
-		this.db = new Dexie(this.getLocalSchemaKey(magicId)) as ChatDb
-		const { version, schema } = this.getLocalDbSchema(magicId)
+	switchDb(delightfulId: string) {
+		this.delightfulId = delightfulId
+		this.db = new Dexie(this.getLocalSchemaKey(delightfulId)) as ChatDb
+		const { version, schema } = this.getLocalDbSchema(delightfulId)
 		this.db.version(version).stores(schema)
 	}
 
@@ -32,7 +32,7 @@ class ChatDatabase {
 	 * @returns
 	 */
 	async changeSchema(schemaChanges: Record<string, string>) {
-		if (!this.db || !this.magicId) return undefined
+		if (!this.db || !this.delightfulId) return undefined
 
 		try {
 			const oldDb = this.db
@@ -84,7 +84,7 @@ class ChatDatabase {
 							...schemaChanges,
 						},
 					},
-					this.magicId,
+					this.delightfulId,
 				)
 
 				this.db = newDb as ChatDb
@@ -103,8 +103,8 @@ class ChatDatabase {
 	/**
 	 * 本地数据库 schema 的 key
 	 */
-	getLocalSchemaKey(magicId: string) {
-		return ChatDbSchemaStorageKey(magicId)
+	getLocalSchemaKey(delightfulId: string) {
+		return ChatDbSchemaStorageKey(delightfulId)
 	}
 
 	get defaultSchema() {
@@ -137,9 +137,9 @@ class ChatDatabase {
 	 * 获取本地数据库的 schema
 	 * @returns
 	 */
-	getLocalDbSchema(magicId: string) {
+	getLocalDbSchema(delightfulId: string) {
 		return JSON.parse(
-			localStorage.getItem(this.getLocalSchemaKey(magicId)) ||
+			localStorage.getItem(this.getLocalSchemaKey(delightfulId)) ||
 				JSON.stringify({ version: 1, schema: this.defaultSchema }),
 		)
 	}
@@ -148,8 +148,8 @@ class ChatDatabase {
 	 * 缓存本地数据库的 schema，用于下次打开时恢复
 	 * @param schema
 	 */
-	setLocalDbSchema(schema: { version: number; schema: Record<string, string> }, magicId: string) {
-		localStorage.setItem(this.getLocalSchemaKey(magicId), JSON.stringify(schema))
+	setLocalDbSchema(schema: { version: number; schema: Record<string, string> }, delightfulId: string) {
+		localStorage.setItem(this.getLocalSchemaKey(delightfulId), JSON.stringify(schema))
 	}
 
 	/**

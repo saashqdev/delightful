@@ -389,7 +389,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * Get super magic display models and Delightful provider models visible to current organization.
+     * Get super delightful display models and Delightful provider models visible to current organization.
      * @param string $organizationCode Organization code
      * @return ProviderModelEntity[]
      */
@@ -400,7 +400,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // 获取所有分类的可用模型
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
-        // 按super_magic_display_state过滤
+        // 按super_delightful_display_state过滤
         $models = [];
         foreach ($allModels as $model) {
             if ($model->isBeDelightfulDisplayState() === 1) {

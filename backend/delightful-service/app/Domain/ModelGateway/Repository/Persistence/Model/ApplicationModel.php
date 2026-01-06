@@ -30,7 +30,7 @@ class ApplicationModel extends Model
     use Snowflake;
     use SoftDeletes;
 
-    protected ?string $table = 'magic_api_applications';
+    protected ?string $table = 'delightful_api_applications';
 
     protected array $fillable = [
         'id', 'code', 'name', 'description', 'icon',

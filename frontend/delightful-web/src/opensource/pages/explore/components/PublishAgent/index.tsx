@@ -70,7 +70,7 @@ function PublishAgent({
 	updateAgent,
 }: PublishAgentProps) {
 	const { t } = useTranslation("interface")
-	const { magicColorScales } = useTheme()
+	const { delightfulColorScales } = useTheme()
 
 	const navigate = useNavigate()
 
@@ -139,7 +139,7 @@ function PublishAgent({
 		const data = await BotApi.publishBot({
 			...res,
 			bot_id: agentId,
-			magic_flow: shadowedFlow!,
+			delightful_flow: shadowedFlow!,
 			version_description: res.version_description || "",
 			version_number: selectScope === ScopeType.private ? version : res.version_number,
 			third_platform_list: res.third_platform_list || [],
@@ -373,7 +373,7 @@ function PublishAgent({
 										<DelightfulIcon
 											component={IconAlertCircleFilled}
 											size={16}
-											color={magicColorScales.orange[5]}
+											color={delightfulColorScales.orange[5]}
 										/>
 									}
 								/>

@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_flow_knowledge', function (Blueprint $table) {
+        Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
             $table->integer('expected_num')->default(0)->comment('期望总数');
             $table->integer('completed_num')->default(0)->comment('已完成总数');
         });

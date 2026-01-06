@@ -19,9 +19,9 @@ from pydantic import BaseModel, Field
 from playwright.async_api import Page, Error as PlaywrightError
 
 from agentlang.utils.file import safe_delete
-from magic_use.browser_manager import BrowserManager
-from magic_use.magic_browser_config import DelightfulBrowserConfig
-from magic_use.page_registry import PageRegistry, PageState
+from delightful_use.browser_manager import BrowserManager
+from delightful_use.delightful_browser_config import DelightfulBrowserConfig
+from delightful_use.page_registry import PageRegistry, PageState
 
 # Setup logging
 logger = logging.getLogger(__name__)
@@ -135,7 +135,7 @@ class DelightfulBrowser:
         try:
             # Create unique screenshot subdirectory for this browser instance in system temp directory
             temp_dir = Path(tempfile.gettempdir())
-            unique_dir_name = f"super_magic_browser_screenshots_{uuid.uuid4()}"
+            unique_dir_name = f"super_delightful_browser_screenshots_{uuid.uuid4()}"
             self._TEMP_SCREENSHOT_DIR = temp_dir / unique_dir_name
             self._TEMP_SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
             logger.info(f"Browser temporary screenshot directory created: {self._TEMP_SCREENSHOT_DIR}")

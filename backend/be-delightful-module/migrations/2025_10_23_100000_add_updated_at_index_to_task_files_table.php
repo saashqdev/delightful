@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_super_agent_task_files', function (Blueprint $table) {
+        Schema::table('delightful_super_agent_task_files', function (Blueprint $table) {
             // Add composite index for project_id, storage_type, updated_at, deleted_at
             // This index optimizes queries filtering by project, storage_type and updated_at
             $table->index(['project_id', 'storage_type', 'updated_at', 'deleted_at'], 'idx_project_storage_updated');

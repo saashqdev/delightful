@@ -8,7 +8,7 @@ export const useStyles = createStyles(
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			border: 1px solid ${token.magicColorUsages.border};
+			border: 1px solid ${token.delightfulColorUsages.border};
 			border-radius: 8px;
 			margin: 10px 0;
 			min-height: 55px;

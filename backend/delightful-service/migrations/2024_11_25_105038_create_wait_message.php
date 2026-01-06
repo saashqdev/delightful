@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_flow_wait_messages', function (Blueprint $table) {
+        Schema::create('delightful_flow_wait_messages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code', 32)->comment('组织编码');
             $table->string('conversation_id', 120)->comment('会话ID');
@@ -40,6 +40,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_flow_wait_messages');
+        Schema::dropIfExists('delightful_flow_wait_messages');
     }
 };

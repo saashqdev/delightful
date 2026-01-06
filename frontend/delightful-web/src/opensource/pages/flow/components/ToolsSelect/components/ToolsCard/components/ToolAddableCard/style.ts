@@ -41,7 +41,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 		linearBg,
 		title: {
 			overflow: "hidden",
-			color: token.magicColorUsages.black,
+			color: token.delightfulColorUsages.black,
 			textOverflow: "ellipsis",
 			fontSize: 16,
 			fontWeight: 600,
@@ -61,7 +61,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			width: "100%",
 			flex: 1,
 			overflow: "hidden",
-			color: token.magicColorUsages.text[2],
+			color: token.delightfulColorUsages.text[2],
 			textOverflow: "ellipsis",
 			fontSize: 12,
 			fontWeight: 400,
@@ -83,8 +83,8 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			justifyContent: "center",
 			border: "none",
 			borderRadius: 3,
-			background: isDarkMode ? token.magicColorScales.grey[5] : "rgba(240, 177, 20, 0.15)",
-			color: isDarkMode ? token.magicColorUsages.white : token.magicColorScales.amber[8],
+			background: isDarkMode ? token.delightfulColorScales.grey[5] : "rgba(240, 177, 20, 0.15)",
+			color: isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorScales.amber[8],
 			fontSize: 12,
 			fontWeight: 400,
 			lineHeight: "16px",
@@ -94,7 +94,7 @@ const useStyles = createStyles(({ css, isDarkMode, token }) => {
 			zIndex: 9,
 		},
 		creator: {
-			color: token.magicColorScales.brand[5],
+			color: token.delightfulColorScales.brand[5],
 		},
 		defaultAvatar: {
 			borderRadius: 8,

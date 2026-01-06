@@ -57,7 +57,7 @@ class CoContext
      */
     public static function getSeqId(): string
     {
-        return Context::get('magic-chat-seq-id', '');
+        return Context::get('delightful-chat-seq-id', '');
     }
 
     /**
@@ -65,7 +65,7 @@ class CoContext
      */
     public static function setSeqId(?string $seqId = null)
     {
-        return Context::set('magic-chat-seq-id', $seqId);
+        return Context::set('delightful-chat-seq-id', $seqId);
     }
 
     public static function copy(int $fromCoroutineId): void
@@ -75,12 +75,12 @@ class CoContext
 
     public static function getRequestContext(): ?RequestContext
     {
-        return Context::get('magic-request-context', null);
+        return Context::get('delightful-request-context', null);
     }
 
     public static function setRequestContext(RequestContext $requestContext): void
     {
-        Context::set('magic-request-context', $requestContext);
+        Context::set('delightful-request-context', $requestContext);
     }
 
     private static function generateRequestId(): int

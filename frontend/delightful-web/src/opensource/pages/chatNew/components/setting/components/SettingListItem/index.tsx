@@ -7,8 +7,8 @@ import { memo, useRef } from "react"
 
 const useStyles = createStyles(({ css, token }) => ({
 	container: css`
-		background-color: ${token.magicColorScales.grey[0]};
-		color: ${token.magicColorUsages.text[0]};
+		background-color: ${token.delightfulColorScales.grey[0]};
+		color: ${token.delightfulColorUsages.text[0]};
 		min-height: 50px;
 		padding: 0 12px;
 		font-size: 14px;

@@ -23,7 +23,7 @@ class InitDelightfulProviderCommand extends HyperfCommand
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        parent::__construct('magic-provider:init');
+        parent::__construct('delightful-provider:init');
     }
 
     public function configure(): void

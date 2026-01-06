@@ -22,7 +22,7 @@ class MessageQueueModel extends AbstractModel
     /**
      * Table name.
      */
-    protected ?string $table = 'magic_super_agent_message_queue';
+    protected ?string $table = 'delightful_super_agent_message_queue';
 
     /**
      * Primary key.

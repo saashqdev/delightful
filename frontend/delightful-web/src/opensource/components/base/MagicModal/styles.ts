@@ -7,7 +7,7 @@ export const useStyles = createStyles(({ css, prefixCls, token }) => {
 			--${prefixCls}-modal-header-margin-bottom: 0;
 			--${prefixCls}-modal-header-border-bottom: 1px solid ${token.colorBorder};
 
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 
       font-size: 16px;
       font-weight: 600;
@@ -35,8 +35,8 @@ export const useStyles = createStyles(({ css, prefixCls, token }) => {
       }
 
       button.${prefixCls}-btn-primary {
-        --${prefixCls}-color-primary: ${token.magicColorUsages.primary.default};
-        --${prefixCls}-color-primary-hover: ${token.magicColorUsages.primary.hover};
+        --${prefixCls}-color-primary: ${token.delightfulColorUsages.primary.default};
+        --${prefixCls}-color-primary-hover: ${token.delightfulColorUsages.primary.hover};
       }
 
       .${prefixCls}-btn-default {

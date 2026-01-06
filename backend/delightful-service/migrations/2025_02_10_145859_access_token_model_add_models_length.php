@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_api_access_tokens', function (Blueprint $table) {
+        Schema::table('delightful_api_access_tokens', function (Blueprint $table) {
             $table->string('models', 512)->comment('模型id，多个用，分割')->default('')->change();
         });
     }

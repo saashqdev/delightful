@@ -27,7 +27,7 @@ import { history, undo, redo } from "@tiptap/pm/history"
 import { Image } from "./extensions/image"
 import ToolBar from "./components/ToolBar"
 import useStyles from "./styles"
-import DelightfulEmojiNodeExtension from "./extensions/magicEmoji"
+import DelightfulEmojiNodeExtension from "./extensions/delightfulEmoji"
 import { fileToBase64 } from "./utils"
 import { FileHandler } from "./extensions/file-handler"
 import type { FileError } from "./utils"
@@ -545,7 +545,7 @@ const DelightfulRichEditor = memo(
 		}, [])
 
 		return (
-			<div ref={parentDom} {...otherProps} id="magic-rich-editor">
+			<div ref={parentDom} {...otherProps} id="delightful-rich-editor">
 				{showToolBar && <ToolBar className={styles.toolbar} editor={editor} />}
 				<div style={{ position: "relative" }}>
 					<Placeholder

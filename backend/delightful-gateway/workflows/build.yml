@@ -20,7 +20,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: dtyq/magic-gateway
+  IMAGE: dtyq/delightful-gateway
   BASE_IMAGE:  golang:1.20-alpine
 
 jobs:

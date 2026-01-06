@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_long_term_memories', function (Blueprint $table) {
+        Schema::create('delightful_long_term_memories', function (Blueprint $table) {
             $table->string('id', 36)->primary()->comment('记忆唯一ID');
             $table->text('content')->comment('记忆内容');
             $table->text('pending_content')->nullable()->comment('待变更的记忆内容，等待用户接受变更');
@@ -52,6 +52,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_long_term_memories');
+        Schema::dropIfExists('delightful_long_term_memories');
     }
 };

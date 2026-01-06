@@ -15,7 +15,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_flows', function (Blueprint $table) {
+        Schema::table('delightful_flows', function (Blueprint $table) {
             $table->string('tool_set_id', 80)->default(ConstValue::TOOL_SET_DEFAULT_CODE)->comment('工具集ID')->after('nodes')->index();
         });
     }

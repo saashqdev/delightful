@@ -99,10 +99,10 @@ export default function AgentInfoButton({ agent, isAdminRight }: AgentInfoButton
 						<Flex justify="space-between">
 							<div className={styles.text2}>{t("agent.creator")}</div>
 							<Flex gap={5}>
-								<DelightfulAvatar src={agent.magicUserEntity?.avatar_url} size={22}>
-									{agent.magicUserEntity?.nickname}
+								<DelightfulAvatar src={agent.delightfulUserEntity?.avatar_url} size={22}>
+									{agent.delightfulUserEntity?.nickname}
 								</DelightfulAvatar>
-								<div>{agent.magicUserEntity?.nickname}</div>
+								<div>{agent.delightfulUserEntity?.nickname}</div>
 							</Flex>
 						</Flex>
 						<Flex justify="space-between">

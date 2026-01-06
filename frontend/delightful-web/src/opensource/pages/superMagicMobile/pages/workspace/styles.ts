@@ -25,10 +25,10 @@ export const useStyles = createStyles(({ token }) => {
 			transform: "translate(-50%, -50%)",
 		},
 		menuItemDanger: {
-			color: token.magicColorUsages.danger.default,
+			color: token.delightfulColorUsages.danger.default,
 		},
 		menuItemIconDanger: {
-			stroke: token.magicColorUsages.danger.default,
+			stroke: token.delightfulColorUsages.danger.default,
 		},
 		popupHeader: {
 			padding: "16px",

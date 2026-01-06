@@ -106,7 +106,7 @@ class Logger {
 				return arg
 			}),
 			info: {
-				uId: userStore.user?.userInfo?.magic_id,
+				uId: userStore.user?.userInfo?.delightful_id,
 				tOrgCode: userStore.user?.teamshareOrganizationCode ?? "",
 				mOrgCode: userStore.user?.organizationCode ?? "",
 			},

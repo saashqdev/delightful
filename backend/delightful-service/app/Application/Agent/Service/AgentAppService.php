@@ -98,7 +98,7 @@ class AgentAppService extends AbstractAppService
         $data = $this->agentDomainService->getOrgAvailableAgentIds($agentDataIsolation, $query, $page);
 
         $contactDataIsolation = $this->createContactDataIsolationByBase($agentDataIsolation);
-        $userDepartmentIds = $this->magicDepartmentUserDomainService->getDepartmentIdsByUserId($contactDataIsolation, $agentDataIsolation->getCurrentUserId(), true);
+        $userDepartmentIds = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserId($contactDataIsolation, $agentDataIsolation->getCurrentUserId(), true);
 
         // 如果需要包含官方组织，则将官方组织的助理排在最前面
         if ($containOfficialOrganization) {

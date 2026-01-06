@@ -109,7 +109,7 @@
       if (!shadowHost) {
         // 创建宿主元素
         shadowHost = document.createElement('div');
-        shadowHost.id = 'magic-marker-host';
+        shadowHost.id = 'delightful-marker-host';
 
         // 设置基础样式，确保不影响页面布局
         Object.assign(shadowHost.style, {
@@ -247,7 +247,7 @@
       xElement.style.position = 'absolute';
       xElement.style.visibility = 'hidden';
       xElement.style.pointerEvents = 'none';
-      xElement.id = 'magic-x-marker-' + Date.now();
+      xElement.id = 'delightful-x-marker-' + Date.now();
 
       // 将X字符添加到Shadow DOM中
       const shadow = utils.getShadowRoot();
@@ -343,7 +343,7 @@
      */
     createBorder: (element, rect, color) => {
       const border = document.createElement('div');
-      border.className = 'magic-marker-border';
+      border.className = 'delightful-marker-border';
 
       // 计算z-index
       const borderZIndex = utils.calculateZIndex(element, 'border');
@@ -382,7 +382,7 @@
      */
     createMask: (element, rect, color) => {
       const mask = document.createElement('div');
-      mask.className = 'magic-marker-mask';
+      mask.className = 'delightful-marker-mask';
 
       // 计算z-index
       const maskZIndex = utils.calculateZIndex(element, 'mask');
@@ -485,7 +485,7 @@
      */
     createLabel: (element, rect, index, color) => {
       const label = document.createElement('div');
-      label.className = 'magic-marker-label';
+      label.className = 'delightful-marker-label';
 
       // 生成标签文本 (字母+数字组合)
       const labelText = utils.generateLabelText(index);
@@ -945,10 +945,10 @@
   }
 
   /**
-   * 通过标签文本查找对应元素的 magic-touch-id
+   * 通过标签文本查找对应元素的 delightful-touch-id
    *
    * @param {string} labelText - 标签文本（如"A2"）
-   * @returns {string|null} 找到对应元素则返回其 magic-touch-id，否则返回 null
+   * @returns {string|null} 找到对应元素则返回其 delightful-touch-id，否则返回 null
    */
   function find(labelText) {
     // 直接将查找逻辑放在这里
@@ -964,8 +964,8 @@
       marker.label && marker.label.textContent === normalizedLabelText
     );
 
-    // 如果找到标记，返回其元素的 magic-touch-id，否则返回 null
-    return foundMarker ? foundMarker.element.getAttribute('magic-touch-id') : null;
+    // 如果找到标记，返回其元素的 delightful-touch-id，否则返回 null
+    return foundMarker ? foundMarker.element.getAttribute('delightful-touch-id') : null;
   }
 
   // 暴露公共接口

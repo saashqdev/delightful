@@ -6,9 +6,9 @@ export const useStyles = createStyles(({ css, token }) => {
 			width: 44px !important;
 			padding: 8px;
 			border-radius: 8px;
-			background-color: ${token.magicColorUsages.white};
+			background-color: ${token.delightfulColorUsages.white};
 			&:hover {
-				background-color: ${token.magicColorUsages.white} !important;
+				background-color: ${token.delightfulColorUsages.white} !important;
 			}
 		`,
 		drawer: css`

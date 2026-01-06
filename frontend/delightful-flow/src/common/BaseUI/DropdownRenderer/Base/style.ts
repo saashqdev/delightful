@@ -4,7 +4,7 @@ export const RendererWrapper = styled.div`
     
     .search-wrapper {
         padding: 4px;
-		.magic-input {
+		.delightful-input {
 			height: 100%;
 		}
     }

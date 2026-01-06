@@ -41,11 +41,11 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
             }
 
-            $senderUserEntity = $this->magicUserRepository->getUserById($senderUserId);
+            $senderUserEntity = $this->delightfulUserRepository->getUserById($senderUserId);
             if (! $senderUserEntity) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
             }
-            $senderAccountEntity = $this->magicAccountRepository->getAccountInfoByDelightfulId($senderUserEntity->getDelightfulId());
+            $senderAccountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($senderUserEntity->getDelightfulId());
 
             if (! $senderAccountEntity) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
@@ -53,18 +53,18 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
 
             // 2. 获取超级麦吉（接收者）信息
             $agentUserId = $messageDTO->getReceiveId();
-            $agentUserEntity = $this->magicUserRepository->getUserById($agentUserId);
+            $agentUserEntity = $this->delightfulUserRepository->getUserById($agentUserId);
             if (! $agentUserEntity) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
             }
-            $agentAccountEntity = $this->magicAccountRepository->getAccountInfoByDelightfulId($agentUserEntity->getDelightfulId());
+            $agentAccountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($agentUserEntity->getDelightfulId());
 
             if (! $agentAccountEntity) {
                 ExceptionBuilder::throw(ChatErrorCode::AI_NOT_FOUND);
             }
 
             // 3. 获取 agent 的 conversationId
-            $agentConversationEntity = $this->magicConversationRepository->getReceiveConversationBySenderConversationId(
+            $agentConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId(
                 $userConversationEntity->getId()
             );
 
@@ -145,7 +145,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
         $topicDTO->setConversationId($conversationId);
 
         // 获取话题实体
-        $topicEntity = $this->magicChatTopicRepository->getTopicEntity($topicDTO);
+        $topicEntity = $this->delightfulChatTopicRepository->getTopicEntity($topicDTO);
         if ($topicEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
         }

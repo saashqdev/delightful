@@ -44,28 +44,28 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 abstract class AbstractFlowAppService extends AbstractKernelAppService
 {
     public function __construct(
-        protected readonly DelightfulFlowAIModelDomainService $magicFlowAIModelDomainService,
-        protected readonly DelightfulFlowDomainService $magicFlowDomainService,
+        protected readonly DelightfulFlowAIModelDomainService $delightfulFlowAIModelDomainService,
+        protected readonly DelightfulFlowDomainService $delightfulFlowDomainService,
         protected readonly FileDomainService $fileDomainService,
-        protected readonly DelightfulUserDomainService $magicUserDomainService,
+        protected readonly DelightfulUserDomainService $delightfulUserDomainService,
         protected readonly OperationPermissionAppService $operationPermissionAppService,
-        protected readonly DelightfulFlowToolSetDomainService $magicFlowToolSetDomainService,
-        protected readonly DelightfulFlowDraftDomainService $magicFlowDraftDomainService,
-        protected readonly DelightfulFlowApiKeyDomainService $magicFlowApiKeyDomainService,
-        protected readonly DelightfulAgentDomainService $magicAgentDomainService,
-        protected readonly DelightfulAgentVersionDomainService $magicAgentVersionDomainService,
-        protected readonly DelightfulFlowPermissionDomainService $magicFlowPermissionDomainService,
-        protected readonly DelightfulConversationDomainService $magicConversationDomainService,
-        protected readonly DelightfulChatFileDomainService $magicChatFileDomainService,
-        protected readonly KnowledgeBaseDomainService $magicFlowKnowledgeDomainService,
-        protected readonly DelightfulFlowTriggerTestcaseDomainService $magicFlowTriggerTestcaseDomainService,
-        protected readonly DelightfulFlowVersionDomainService $magicFlowVersionDomainService,
-        protected readonly DelightfulFlowWaitMessageDomainService $magicFlowWaitMessageDomainService,
-        protected readonly DelightfulOrganizationEnvDomainService $magicEnvironmentDomainService,
-        protected readonly DelightfulFlowExecuteLogDomainService $magicFlowExecuteLogDomainService,
-        protected readonly DelightfulAccountDomainService $magicAccountDomainService,
+        protected readonly DelightfulFlowToolSetDomainService $delightfulFlowToolSetDomainService,
+        protected readonly DelightfulFlowDraftDomainService $delightfulFlowDraftDomainService,
+        protected readonly DelightfulFlowApiKeyDomainService $delightfulFlowApiKeyDomainService,
+        protected readonly DelightfulAgentDomainService $delightfulAgentDomainService,
+        protected readonly DelightfulAgentVersionDomainService $delightfulAgentVersionDomainService,
+        protected readonly DelightfulFlowPermissionDomainService $delightfulFlowPermissionDomainService,
+        protected readonly DelightfulConversationDomainService $delightfulConversationDomainService,
+        protected readonly DelightfulChatFileDomainService $delightfulChatFileDomainService,
+        protected readonly KnowledgeBaseDomainService $delightfulFlowKnowledgeDomainService,
+        protected readonly DelightfulFlowTriggerTestcaseDomainService $delightfulFlowTriggerTestcaseDomainService,
+        protected readonly DelightfulFlowVersionDomainService $delightfulFlowVersionDomainService,
+        protected readonly DelightfulFlowWaitMessageDomainService $delightfulFlowWaitMessageDomainService,
+        protected readonly DelightfulOrganizationEnvDomainService $delightfulEnvironmentDomainService,
+        protected readonly DelightfulFlowExecuteLogDomainService $delightfulFlowExecuteLogDomainService,
+        protected readonly DelightfulAccountDomainService $delightfulAccountDomainService,
         protected readonly AdminProviderDomainService $serviceProviderDomainService,
-        protected readonly KnowledgeBaseDocumentDomainService $magicFlowDocumentDomainService,
+        protected readonly KnowledgeBaseDocumentDomainService $delightfulFlowDocumentDomainService,
         protected readonly KnowledgeBaseStrategyInterface $knowledgeBaseStrategy,
     ) {
     }
@@ -80,15 +80,15 @@ abstract class AbstractFlowAppService extends AbstractKernelAppService
         if (empty($flowCode)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow_code']);
         }
-        $magicFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $flowCode);
-        if (! $magicFlow) {
+        $delightfulFlow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $flowCode);
+        if (! $delightfulFlow) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $flowCode]);
         }
-        $operation = $this->getFlowOperation($dataIsolation, $magicFlow);
-        $operation->validate($checkOperation, $magicFlow->getCode());
-        $magicFlow->setUserOperation($operation->value);
+        $operation = $this->getFlowOperation($dataIsolation, $delightfulFlow);
+        $operation->validate($checkOperation, $delightfulFlow->getCode());
+        $delightfulFlow->setUserOperation($operation->value);
 
-        return $magicFlow;
+        return $delightfulFlow;
     }
 
     protected function getFlowOperation(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $flowEntity): Operation
@@ -132,7 +132,7 @@ abstract class AbstractFlowAppService extends AbstractKernelAppService
     {
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
         if (! $agentId = $flowEntity->getAgentId()) {
-            $agentId = $this->magicAgentDomainService->getByFlowCode($flowEntity->getCode())->getId();
+            $agentId = $this->delightfulAgentDomainService->getByFlowCode($flowEntity->getCode())->getId();
         }
         return $this->operationPermissionAppService->getOperationByResourceAndUser(
             $permissionDataIsolation,

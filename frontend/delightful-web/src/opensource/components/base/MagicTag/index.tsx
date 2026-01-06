@@ -5,7 +5,7 @@ import { IconX } from "@tabler/icons-react"
 
 const useStyles = createStyles(({ css, prefixCls, token }) => ({
 	tag: css`
-		--${prefixCls}-tag-default-bg: ${token.magicColorUsages.fill[0]} !important;
+		--${prefixCls}-tag-default-bg: ${token.delightfulColorUsages.fill[0]} !important;
 		--${prefixCls}-color-border: transparent !important;
 		--${prefixCls}-border-radius-sm: 8px;
 		padding-inline: 4px;

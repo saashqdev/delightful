@@ -13,21 +13,21 @@ const useFileItemStyles = createStyles(
 		{ css, isDarkMode, token },
 		{ status, progress }: { status: "init" | "uploading" | "done" | "error"; progress: number },
 	) => {
-		const defaultBg = isDarkMode ? token.magicColorUsages.bg[2] : "white"
+		const defaultBg = isDarkMode ? token.delightfulColorUsages.bg[2] : "white"
 
 		const loadedBg = isDarkMode
-			? token.magicColorScales.grey[8]
-			: darken(0.02)(token.magicColorUsages.primaryLight.default)
+			? token.delightfulColorScales.grey[8]
+			: darken(0.02)(token.delightfulColorUsages.primaryLight.default)
 
 		const progressBg = `linear-gradient(to right, ${loadedBg} 0%, ${loadedBg} ${progress}%, ${defaultBg} ${progress}%, ${defaultBg} 100%)`
 
 		const errorBg = isDarkMode
-			? token.magicColorScales.red[8]
-			: darken(0.02)(token.magicColorUsages.danger.default)
+			? token.delightfulColorScales.red[8]
+			: darken(0.02)(token.delightfulColorUsages.danger.default)
 
 		const successBg = isDarkMode
-			? token.magicColorScales.green[7]
-			: token.magicColorScales.green[1]
+			? token.delightfulColorScales.green[7]
+			: token.delightfulColorScales.green[1]
 
 		const bgMap = {
 			init: defaultBg,
@@ -43,10 +43,10 @@ const useFileItemStyles = createStyles(
 				background: ${bgMap[status]};
 				padding: 8px;
 				border: 1px solid ${token.colorBorder};
-				color: ${token.magicColorUsages.text[1]};
+				color: ${token.delightfulColorUsages.text[1]};
 			`,
 			name: css`
-				color: ${token.magicColorUsages.text[1]};
+				color: ${token.delightfulColorUsages.text[1]};
 				font-size: 12px;
 				font-weight: 400;
 				line-height: 16px;
@@ -56,7 +56,7 @@ const useFileItemStyles = createStyles(
 				white-space: nowrap;
 			`,
 			size: css`
-				color: ${token.magicColorUsages.text[3]};
+				color: ${token.delightfulColorUsages.text[3]};
 				font-size: 12px;
 				font-weight: 400;
 				line-height: 16px;
@@ -65,11 +65,11 @@ const useFileItemStyles = createStyles(
 				cursor: pointer;
 				box-sizing: content-box;
 				padding: 3px;
-				background-color: ${token.magicColorUsages.danger.default};
+				background-color: ${token.delightfulColorUsages.danger.default};
 				border-radius: 50%;
-				color: ${token.magicColorUsages.white};
+				color: ${token.delightfulColorUsages.white};
 				&:hover {
-					background-color: ${lighten(0.1, token.magicColorUsages.danger.default)};
+					background-color: ${lighten(0.1, token.delightfulColorUsages.danger.default)};
 				}
 			`,
 		}

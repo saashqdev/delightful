@@ -97,12 +97,12 @@ class MCPServerToolAppService extends AbstractMCPAppService
         $flowToolSources = $sourceCodes[ToolSource::FlowTool->value] ?? [];
 
         $flowDataIsolation = $this->createFlowDataIsolation($dataIsolation);
-        $flowTools = $this->magicFlowDomainService->getByCodes($flowDataIsolation, $flowToolSources);
+        $flowTools = $this->delightfulFlowDomainService->getByCodes($flowDataIsolation, $flowToolSources);
         $flowVersionCodes = [];
         foreach ($flowTools as $flowTool) {
             $flowVersionCodes[] = $flowTool->getVersionCode();
         }
-        $flowVersionTools = $this->magicFlowVersionDomainService->getByCodes($flowDataIsolation, $flowVersionCodes);
+        $flowVersionTools = $this->delightfulFlowVersionDomainService->getByCodes($flowDataIsolation, $flowVersionCodes);
 
         foreach ($flowVersionTools as $flowVersionTool) {
             $sourcesInfo[ToolSource::FlowTool->value][$flowVersionTool->getFlowCode()] = [

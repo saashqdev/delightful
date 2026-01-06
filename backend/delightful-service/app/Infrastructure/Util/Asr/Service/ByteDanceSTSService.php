@@ -51,20 +51,20 @@ class ByteDanceSTSService
     /**
      * 根据用户Delightful ID获取JWT Token（带缓存）.
      *
-     * @param string $magicId 用户Delightful ID
+     * @param string $delightfulId 用户Delightful ID
      * @param int $duration 有效期（秒），默认7200秒
      * @param bool $refresh 是否强制刷新token，默认false
      * @return array 包含JWT Token和相关信息的数组
      * @throws Exception
      */
-    public function getJwtTokenForUser(string $magicId, int $duration = 7200, bool $refresh = false): array
+    public function getJwtTokenForUser(string $delightfulId, int $duration = 7200, bool $refresh = false): array
     {
-        if (empty($magicId)) {
-            ExceptionBuilder::throw(AsrErrorCode::InvalidDelightfulId, 'asr.config_error.invalid_magic_id');
+        if (empty($delightfulId)) {
+            ExceptionBuilder::throw(AsrErrorCode::InvalidDelightfulId, 'asr.config_error.invalid_delightful_id');
         }
 
         // 检查缓存（如果不是强制刷新）
-        $cacheKey = $this->getCacheKey($magicId);
+        $cacheKey = $this->getCacheKey($delightfulId);
         if (! $refresh) {
             $cachedData = $this->getCachedJwtToken($cacheKey);
 
@@ -74,7 +74,7 @@ class ByteDanceSTSService
                 $cachedData['duration'] = max(0, $remainingDuration);
 
                 $this->logger->info('返回缓存的JWT Token', [
-                    'magic_id' => $magicId,
+                    'delightful_id' => $delightfulId,
                     'cache_expires_at' => $cachedData['expires_at'],
                     'remaining_duration' => $remainingDuration,
                 ]);
@@ -99,7 +99,7 @@ class ByteDanceSTSService
             'duration' => $duration,
             'expires_at' => time() + $duration,
             'resource_id' => 'volc.bigasr.sauc.duration',
-            'magic_id' => $magicId,
+            'delightful_id' => $delightfulId,
         ];
 
         // 缓存JWT Token，提前30秒过期以避免边界问题
@@ -107,7 +107,7 @@ class ByteDanceSTSService
         $this->cacheJwtToken($cacheKey, $tokenData, $cacheExpiry);
 
         $this->logger->info('生成并缓存新的JWT Token', [
-            'magic_id' => $magicId,
+            'delightful_id' => $delightfulId,
             'duration' => $duration,
             'cache_expiry' => $cacheExpiry,
             'refresh' => $refresh,
@@ -214,24 +214,24 @@ class ByteDanceSTSService
     /**
      * 清除用户的JWT Token缓存.
      *
-     * @param string $magicId 用户Delightful ID
+     * @param string $delightfulId 用户Delightful ID
      * @return bool 是否成功清除
      */
-    public function clearUserJwtTokenCache(string $magicId): bool
+    public function clearUserJwtTokenCache(string $delightfulId): bool
     {
         try {
-            $cacheKey = $this->getCacheKey($magicId);
+            $cacheKey = $this->getCacheKey($delightfulId);
             $result = $this->redis->del($cacheKey);
 
             $this->logger->info('清除用户JWT Token缓存', [
-                'magic_id' => $magicId,
+                'delightful_id' => $delightfulId,
                 'result' => $result,
             ]);
 
             return is_int($result) && $result > 0;
         } catch (Exception $e) {
             $this->logger->error('清除JWT Token缓存失败', [
-                'magic_id' => $magicId,
+                'delightful_id' => $delightfulId,
                 'error' => $e->getMessage(),
             ]);
             return false;
@@ -241,12 +241,12 @@ class ByteDanceSTSService
     /**
      * 生成缓存键.
      *
-     * @param string $magicId 用户Delightful ID
+     * @param string $delightfulId 用户Delightful ID
      * @return string 缓存键
      */
-    private function getCacheKey(string $magicId): string
+    private function getCacheKey(string $delightfulId): string
     {
-        return self::JWT_CACHE_PREFIX . md5($magicId);
+        return self::JWT_CACHE_PREFIX . md5($delightfulId);
     }
 
     /**

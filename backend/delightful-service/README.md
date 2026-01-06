@@ -21,8 +21,8 @@ Delightful Service is a high-performance PHP microservice built on the Hyperf fr
 ## Installation & Setup
 ### 1. Clone the project
 ```bash
-git clone https://github.com/saashqdev/delightful/magic.git
-cd magic-service
+git clone https://github.com/saashqdev/delightful/delightful.git
+cd delightful-service
 ```
 
 ### 2. Install dependencies
@@ -93,7 +93,7 @@ composer test
 ## Docker
 Build the image with the provided Dockerfile:
 ```bash
-docker build -t magic-service .
+docker build -t delightful-service .
 ```
 
 ## Contributing

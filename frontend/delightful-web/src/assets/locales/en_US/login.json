@@ -30,7 +30,7 @@
 	"login": "Log in",
 	"loginPrivateDeployment": "Private Service",
 	"loginPublicDeployment": "Public Service",
-	"magicOrganizationSyncStep": {
+	"delightfulOrganizationSyncStep": {
 		"pleaseBindExistingAccount": "Please bind an existing account"
 	},
 	"nextStep": "Step",

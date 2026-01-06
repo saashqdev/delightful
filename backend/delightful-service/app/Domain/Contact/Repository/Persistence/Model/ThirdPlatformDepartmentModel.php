@@ -14,15 +14,15 @@ class ThirdPlatformDepartmentModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_contact_third_platform_departments';
+    protected ?string $table = 'delightful_contact_third_platform_departments';
 
     /**
      * The attributes that are mass assignable.
      */
     protected array $fillable = [
         'id',
-        'magic_department_id',
-        'magic_organization_code',
+        'delightful_department_id',
+        'delightful_organization_code',
         'third_leader_user_id',
         'third_department_id',
         'third_parent_department_id',

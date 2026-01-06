@@ -34,7 +34,7 @@ ignore = [
     "D102",    # Missing docstring in public method
     "D103",    # Missing docstring in public function
     "D104",    # Missing docstring in public package
-    "D105",    # Missing docstring in magic method
+    "D105",    # Missing docstring in delightful method
     "D106",    # Missing docstring in public nested class
     "D107",    # Missing docstring in __init__
     "D200",    # One-line docstring should fit on one line with quotes
@@ -76,7 +76,7 @@ ignore = [
 quote-style = "double"
 
 # Trailing commas
-skip-magic-trailing-comma = false
+skip-delightful-trailing-comma = false
 
 # Indentation style
 indent-style = "space"

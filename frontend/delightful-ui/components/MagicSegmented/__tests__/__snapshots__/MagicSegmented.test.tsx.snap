@@ -4,41 +4,41 @@ exports[`DelightfulSegmented > 快照测试 > 块级分段控制器快照 1`] = 
 <DocumentFragment>
   <div
     aria-label="segmented control"
-    class="magic-segmented acss-1yvjgsk magic-segmented-block css-dev-only-do-not-override-yotw4n css-var-rg"
+    class="delightful-segmented acss-1yvjgsk delightful-segmented-block css-dev-only-do-not-override-yotw4n css-var-rg"
     role="radiogroup"
     tabindex="0"
   >
     <div
-      class="magic-segmented-group"
+      class="delightful-segmented-group"
     >
       <label
-        class="magic-segmented-item magic-segmented-item-selected"
+        class="delightful-segmented-item delightful-segmented-item-selected"
       >
         <input
           checked=""
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="true"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项1"
         >
           选项1
         </div>
       </label>
       <label
-        class="magic-segmented-item"
+        class="delightful-segmented-item"
       >
         <input
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="false"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项2"
         >
           选项2
@@ -53,57 +53,57 @@ exports[`DelightfulSegmented > 快照测试 > 基础分段控制器快照 1`] = 
 <DocumentFragment>
   <div
     aria-label="segmented control"
-    class="magic-segmented acss-1yvjgsk css-dev-only-do-not-override-yotw4n css-var-r4"
+    class="delightful-segmented acss-1yvjgsk css-dev-only-do-not-override-yotw4n css-var-r4"
     role="radiogroup"
     tabindex="0"
   >
     <div
-      class="magic-segmented-group"
+      class="delightful-segmented-group"
     >
       <label
-        class="magic-segmented-item magic-segmented-item-selected"
+        class="delightful-segmented-item delightful-segmented-item-selected"
       >
         <input
           checked=""
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="true"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项1"
         >
           选项1
         </div>
       </label>
       <label
-        class="magic-segmented-item"
+        class="delightful-segmented-item"
       >
         <input
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="false"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项2"
         >
           选项2
         </div>
       </label>
       <label
-        class="magic-segmented-item"
+        class="delightful-segmented-item"
       >
         <input
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="false"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项3"
         >
           选项3
@@ -118,41 +118,41 @@ exports[`DelightfulSegmented > 快照测试 > 大尺寸分段控制器快照 1`]
 <DocumentFragment>
   <div
     aria-label="segmented control"
-    class="magic-segmented acss-1yvjgsk magic-segmented-lg css-dev-only-do-not-override-yotw4n css-var-ra"
+    class="delightful-segmented acss-1yvjgsk delightful-segmented-lg css-dev-only-do-not-override-yotw4n css-var-ra"
     role="radiogroup"
     tabindex="0"
   >
     <div
-      class="magic-segmented-group"
+      class="delightful-segmented-group"
     >
       <label
-        class="magic-segmented-item magic-segmented-item-selected"
+        class="delightful-segmented-item delightful-segmented-item-selected"
       >
         <input
           checked=""
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="true"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项1"
         >
           选项1
         </div>
       </label>
       <label
-        class="magic-segmented-item"
+        class="delightful-segmented-item"
       >
         <input
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="false"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项2"
         >
           选项2
@@ -167,41 +167,41 @@ exports[`DelightfulSegmented > 快照测试 > 小尺寸分段控制器快照 1`]
 <DocumentFragment>
   <div
     aria-label="segmented control"
-    class="magic-segmented acss-1yvjgsk magic-segmented-sm css-dev-only-do-not-override-yotw4n css-var-rc"
+    class="delightful-segmented acss-1yvjgsk delightful-segmented-sm css-dev-only-do-not-override-yotw4n css-var-rc"
     role="radiogroup"
     tabindex="0"
   >
     <div
-      class="magic-segmented-group"
+      class="delightful-segmented-group"
     >
       <label
-        class="magic-segmented-item magic-segmented-item-selected"
+        class="delightful-segmented-item delightful-segmented-item-selected"
       >
         <input
           checked=""
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="true"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项1"
         >
           选项1
         </div>
       </label>
       <label
-        class="magic-segmented-item"
+        class="delightful-segmented-item"
       >
         <input
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="false"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项2"
         >
           选项2
@@ -216,28 +216,28 @@ exports[`DelightfulSegmented > 快照测试 > 带图标分段控制器快照 1`]
 <DocumentFragment>
   <div
     aria-label="segmented control"
-    class="magic-segmented acss-1yvjgsk css-dev-only-do-not-override-yotw4n css-var-re"
+    class="delightful-segmented acss-1yvjgsk css-dev-only-do-not-override-yotw4n css-var-re"
     role="radiogroup"
     tabindex="0"
   >
     <div
-      class="magic-segmented-group"
+      class="delightful-segmented-group"
     >
       <label
-        class="magic-segmented-item magic-segmented-item-selected"
+        class="delightful-segmented-item delightful-segmented-item-selected"
       >
         <input
           checked=""
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="true"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
         >
           <span
-            class="magic-segmented-item-icon"
+            class="delightful-segmented-item-icon"
           >
             <span>
               🚀
@@ -249,19 +249,19 @@ exports[`DelightfulSegmented > 快照测试 > 带图标分段控制器快照 1`]
         </div>
       </label>
       <label
-        class="magic-segmented-item"
+        class="delightful-segmented-item"
       >
         <input
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="false"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
         >
           <span
-            class="magic-segmented-item-icon"
+            class="delightful-segmented-item-icon"
           >
             <span>
               ⭐
@@ -281,57 +281,57 @@ exports[`DelightfulSegmented > 快照测试 > 带默认值分段控制器快照 
 <DocumentFragment>
   <div
     aria-label="segmented control"
-    class="magic-segmented acss-1yvjgsk css-dev-only-do-not-override-yotw4n css-var-r6"
+    class="delightful-segmented acss-1yvjgsk css-dev-only-do-not-override-yotw4n css-var-r6"
     role="radiogroup"
     tabindex="0"
   >
     <div
-      class="magic-segmented-group"
+      class="delightful-segmented-group"
     >
       <label
-        class="magic-segmented-item"
+        class="delightful-segmented-item"
       >
         <input
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="false"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项1"
         >
           选项1
         </div>
       </label>
       <label
-        class="magic-segmented-item magic-segmented-item-selected"
+        class="delightful-segmented-item delightful-segmented-item-selected"
       >
         <input
           checked=""
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="true"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项2"
         >
           选项2
         </div>
       </label>
       <label
-        class="magic-segmented-item"
+        class="delightful-segmented-item"
       >
         <input
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="false"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项3"
         >
           选项3
@@ -346,42 +346,42 @@ exports[`DelightfulSegmented > 快照测试 > 禁用状态分段控制器快照 
 <DocumentFragment>
   <div
     aria-label="segmented control"
-    class="magic-segmented magic-segmented-disabled acss-1yvjgsk css-dev-only-do-not-override-yotw4n css-var-r8"
+    class="delightful-segmented delightful-segmented-disabled acss-1yvjgsk css-dev-only-do-not-override-yotw4n css-var-r8"
     role="radiogroup"
   >
     <div
-      class="magic-segmented-group"
+      class="delightful-segmented-group"
     >
       <label
-        class="magic-segmented-item magic-segmented-item-selected magic-segmented-item-disabled"
+        class="delightful-segmented-item delightful-segmented-item-selected delightful-segmented-item-disabled"
       >
         <input
           checked=""
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           disabled=""
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="true"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项1"
         >
           选项1
         </div>
       </label>
       <label
-        class="magic-segmented-item magic-segmented-item-disabled"
+        class="delightful-segmented-item delightful-segmented-item-disabled"
       >
         <input
-          class="magic-segmented-item-input"
+          class="delightful-segmented-item-input"
           disabled=""
           name="test-id"
           type="radio"
         />
         <div
           aria-selected="false"
-          class="magic-segmented-item-label"
+          class="delightful-segmented-item-label"
           title="选项2"
         >
           选项2

@@ -21,9 +21,9 @@ export const useStyles = createStyles(({ token, css }) => ({
 		align-items: center;
 		padding: 20px;
 		font-size: 12px;
-		color: ${token.magicColorUsages.text[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 		backdrop-filter: blur(10px);
-		background-color: ${transparentize(0.2, token.magicColorUsages.primaryLight.default)};
+		background-color: ${transparentize(0.2, token.delightfulColorUsages.primaryLight.default)};
 		text-align: center;
 		z-index: 1;
 
@@ -34,7 +34,7 @@ export const useStyles = createStyles(({ token, css }) => ({
 			left: 20px;
 			right: 20px;
 			bottom: 20px;
-			border: 2px dashed ${token.magicColorUsages.text[3]};
+			border: 2px dashed ${token.delightfulColorUsages.text[3]};
 			border-radius: 8px;
 			pointer-events: none;
 		}
@@ -47,7 +47,7 @@ export const useStyles = createStyles(({ token, css }) => ({
 		z-index: 1;
 	`,
 	dragEnteredTip: css`
-		color: ${token.magicColorUsages.text[2]};
+		color: ${token.delightfulColorUsages.text[2]};
 		text-align: center;
 		font-size: 14px;
 		font-weight: 400;

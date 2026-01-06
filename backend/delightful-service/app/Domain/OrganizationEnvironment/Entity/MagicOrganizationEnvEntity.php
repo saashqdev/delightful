@@ -15,7 +15,7 @@ class DelightfulOrganizationEnvEntity extends AbstractEntity
 
     protected string $loginCode;
 
-    protected string $magicOrganizationCode;
+    protected string $delightfulOrganizationCode;
 
     protected string $originOrganizationCode;
 
@@ -47,12 +47,12 @@ class DelightfulOrganizationEnvEntity extends AbstractEntity
 
     public function getDelightfulOrganizationCode(): string
     {
-        return $this->magicOrganizationCode;
+        return $this->delightfulOrganizationCode;
     }
 
-    public function setDelightfulOrganizationCode(string $magicOrganizationCode): void
+    public function setDelightfulOrganizationCode(string $delightfulOrganizationCode): void
     {
-        $this->magicOrganizationCode = $magicOrganizationCode;
+        $this->delightfulOrganizationCode = $delightfulOrganizationCode;
     }
 
     public function getOriginOrganizationCode(): string

@@ -12,7 +12,7 @@ export class AccountStore {
 	 * @description Create account record
 	 */
 	setAccount = (account: User.UserAccount) => {
-		const exists = this.accounts.some((acc) => acc.magic_id === account.magic_id)
+		const exists = this.accounts.some((acc) => acc.delightful_id === account.delightful_id)
 		if (!exists) {
 			this.accounts.push(account)
 		}
@@ -22,7 +22,7 @@ export class AccountStore {
 	 * @description Remove account record
 	 */
 	deleteAccount = (unionId: string) => {
-		const index = this.accounts.findIndex((acc) => acc.magic_id === unionId)
+		const index = this.accounts.findIndex((acc) => acc.delightful_id === unionId)
 		if (index !== -1) {
 			this.accounts.splice(index, 1)
 		}
@@ -32,7 +32,7 @@ export class AccountStore {
 	 * @description Update account record
 	 */
 	updateAccount = (unionId: string, updatedAccount: Partial<User.UserAccount>) => {
-		const index = this.accounts.findIndex((acc) => acc.magic_id === unionId)
+		const index = this.accounts.findIndex((acc) => acc.delightful_id === unionId)
 		if (index !== -1) {
 			this.accounts[index] = {
 				...this.accounts[index],

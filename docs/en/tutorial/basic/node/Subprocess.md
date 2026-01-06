@@ -5,7 +5,7 @@ The Subprocess Node is a powerful organizational tool that allows you to separat
 **Image Description:**
 
 The Subprocess Node interface consists of process selection and configuration areas. The configuration area mainly includes input parameter settings and output parameter reception, where you can configure the data exchanged with the subprocess.
-![Subprocess Node](https://cdn.letsmagic.cn/static/img/Subprocess.png)
+![Subprocess Node](https://cdn.letsdelightful.cn/static/img/Subprocess.png)
 
 ## Why do you need a Subprocess Node?
 When designing complex workflows, placing all functionality in a single process can make the flowchart massive and difficult to manage. The Subprocess Node can help you:

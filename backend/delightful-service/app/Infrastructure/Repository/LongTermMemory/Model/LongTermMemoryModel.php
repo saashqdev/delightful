@@ -43,7 +43,7 @@ class LongTermMemoryModel extends Model
 {
     public bool $incrementing = false;
 
-    protected ?string $table = 'magic_long_term_memories';
+    protected ?string $table = 'delightful_long_term_memories';
 
     protected string $keyType = 'string';
 

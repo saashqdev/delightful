@@ -8,7 +8,7 @@ const useStyles = createStyles(({ css }) => {
 			font-weight: 400;
 		`,
 		modalWrap: css`
-			.magic-modal-body {
+			.delightful-modal-body {
 				padding: 0;
 				height: 556px;
 			}

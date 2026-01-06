@@ -14,7 +14,7 @@ class DelightfulToken extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_tokens';
+    protected ?string $table = 'delightful_tokens';
 
     /**
      * The attributes that are mass assignable.

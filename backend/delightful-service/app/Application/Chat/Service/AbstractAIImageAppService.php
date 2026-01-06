@@ -20,15 +20,15 @@ class AbstractAIImageAppService extends AbstractAppService
 {
     protected function getReferContentForAIImage(string $referMessageId): ?MessageInterface
     {
-        $magicChatDomainService = di(DelightfulChatDomainService::class);
+        $delightfulChatDomainService = di(DelightfulChatDomainService::class);
         // 获取消息
-        $referSeq = $magicChatDomainService->getSeqMessageByIds([$referMessageId])[0] ?? [];
+        $referSeq = $delightfulChatDomainService->getSeqMessageByIds([$referMessageId])[0] ?? [];
         // 假如消息有引用，获取引用消息
         if (! empty($referSeq['refer_message_id'])) {
-            $referSeq = $magicChatDomainService->getSeqMessageByIds([$referSeq['refer_message_id']])[0] ?? [];
+            $referSeq = $delightfulChatDomainService->getSeqMessageByIds([$referSeq['refer_message_id']])[0] ?? [];
         }
         // 获取引用消息文本内容
-        $referMessage = $magicChatDomainService->getMessageByDelightfulMessageId($referSeq['magic_message_id'] ?? '');
+        $referMessage = $delightfulChatDomainService->getMessageByDelightfulMessageId($referSeq['delightful_message_id'] ?? '');
         return $referMessage?->getContent();
     }
 

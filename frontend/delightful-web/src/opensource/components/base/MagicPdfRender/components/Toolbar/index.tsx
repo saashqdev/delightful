@@ -90,28 +90,28 @@ function Toolbar({
 							styles={styles}
 						/>
 						<span className="rotation-buttons">
-							<Tooltip title={t("magicPdfRender.toolbar.rotateLeft")}>
+							<Tooltip title={t("delightfulPdfRender.toolbar.rotateLeft")}>
 								<button className={styles.button} onClick={rotateLeft}>
 									<IconRotate2 />
 								</button>
 							</Tooltip>
-							<Tooltip title={t("magicPdfRender.toolbar.rotateRight")}>
+							<Tooltip title={t("delightfulPdfRender.toolbar.rotateRight")}>
 								<button className={styles.button} onClick={rotateRight}>
 									<IconRotateClockwise2 />
 								</button>
 							</Tooltip>
 						</span>
-						<Tooltip title={t("magicPdfRender.toolbar.reload")}>
+						<Tooltip title={t("delightfulPdfRender.toolbar.reload")}>
 							<button className={styles.button} onClick={reload}>
 								<IconRefresh />
 							</button>
 						</Tooltip>
-						<Tooltip title={t("magicPdfRender.toolbar.download")}>
+						<Tooltip title={t("delightfulPdfRender.toolbar.download")}>
 							<button className={styles.button} onClick={downloadPdf}>
 								<IconDownload />
 							</button>
 						</Tooltip>
-						<Tooltip title={t("magicPdfRender.toolbar.fullscreen")}>
+						<Tooltip title={t("delightfulPdfRender.toolbar.fullscreen")}>
 							<button className={styles.button} onClick={toggleFullscreen}>
 								<IconMaximize />
 							</button>

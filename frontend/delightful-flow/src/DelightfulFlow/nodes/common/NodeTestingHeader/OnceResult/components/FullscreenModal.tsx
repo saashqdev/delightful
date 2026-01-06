@@ -80,7 +80,7 @@ export const FullscreenModal = ({
 				<div className={styles.fullscreenModalHeader}>
 					<h3>
 						{i18next.t("flow.testDetail", {
-							ns: "magicFlow",
+							ns: "delightfulFlow",
 							defaultValue: "测试详情",
 						})}
 					</h3>
@@ -91,7 +91,7 @@ export const FullscreenModal = ({
 						{/* 输入部分 */}
 						<div className={styles.fullscreenSection}>
 							<div className={styles.fullscreenSectionHeader}>
-								<h4>{i18next.t("common.input", { ns: "magicFlow" })}</h4>
+								<h4>{i18next.t("common.input", { ns: "delightfulFlow" })}</h4>
 								<div className={styles.copyContainer}>
 									<IconCopy
 										className={styles.fullscreenCopyIcon}
@@ -137,7 +137,7 @@ export const FullscreenModal = ({
 						{/* 输出部分 */}
 						<div className={styles.fullscreenSection}>
 							<div className={styles.fullscreenSectionHeader}>
-								<h4>{i18next.t("common.output", { ns: "magicFlow" })}</h4>
+								<h4>{i18next.t("common.output", { ns: "delightfulFlow" })}</h4>
 								<div className={styles.copyContainer}>
 									<IconCopy
 										className={styles.fullscreenCopyIcon}
@@ -186,7 +186,7 @@ export const FullscreenModal = ({
 						{allowDebug && debugLogs && debugLogs.length > 0 && (
 							<div className={styles.fullscreenSection}>
 								<div className={styles.fullscreenSectionHeader}>
-									<h4>{i18next.t("flow.testDetail", { ns: "magicFlow" })}</h4>
+									<h4>{i18next.t("flow.testDetail", { ns: "delightfulFlow" })}</h4>
 									<div className={styles.copyContainer}>
 										<IconCopy
 											className={styles.fullscreenCopyIcon}

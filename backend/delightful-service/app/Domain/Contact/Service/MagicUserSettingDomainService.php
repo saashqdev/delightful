@@ -16,13 +16,13 @@ use App\Infrastructure\Core\ValueObject\Page;
 readonly class DelightfulUserSettingDomainService
 {
     public function __construct(
-        private DelightfulUserSettingRepositoryInterface $magicUserSettingRepository
+        private DelightfulUserSettingRepositoryInterface $delightfulUserSettingRepository
     ) {
     }
 
     public function get(DataIsolation $dataIsolation, string $key): ?DelightfulUserSettingEntity
     {
-        return $this->magicUserSettingRepository->get($dataIsolation, $key);
+        return $this->delightfulUserSettingRepository->get($dataIsolation, $key);
     }
 
     /**
@@ -30,7 +30,7 @@ readonly class DelightfulUserSettingDomainService
      */
     public function getGlobal(string $key): ?DelightfulUserSettingEntity
     {
-        return $this->magicUserSettingRepository->getGlobal($key);
+        return $this->delightfulUserSettingRepository->getGlobal($key);
     }
 
     /**
@@ -38,7 +38,7 @@ readonly class DelightfulUserSettingDomainService
      */
     public function saveGlobal(DelightfulUserSettingEntity $savingEntity): DelightfulUserSettingEntity
     {
-        return $this->magicUserSettingRepository->saveGlobal($savingEntity);
+        return $this->delightfulUserSettingRepository->saveGlobal($savingEntity);
     }
 
     /**
@@ -46,7 +46,7 @@ readonly class DelightfulUserSettingDomainService
      */
     public function queries(DataIsolation $dataIsolation, DelightfulUserSettingQuery $query, Page $page): array
     {
-        return $this->magicUserSettingRepository->queries($dataIsolation, $query, $page);
+        return $this->delightfulUserSettingRepository->queries($dataIsolation, $query, $page);
     }
 
     public function save(DataIsolation $dataIsolation, DelightfulUserSettingEntity $savingEntity): DelightfulUserSettingEntity
@@ -56,7 +56,7 @@ readonly class DelightfulUserSettingDomainService
         $savingEntity->setDelightfulId($dataIsolation->getCurrentDelightfulId());
         $savingEntity->setUserId($dataIsolation->getCurrentUserId());
 
-        $existingEntity = $this->magicUserSettingRepository->get($dataIsolation, $savingEntity->getKey());
+        $existingEntity = $this->delightfulUserSettingRepository->get($dataIsolation, $savingEntity->getKey());
         if ($existingEntity) {
             $savingEntity->prepareForModification($existingEntity);
             $entity = $savingEntity;
@@ -65,31 +65,31 @@ readonly class DelightfulUserSettingDomainService
             $entity->prepareForCreation();
         }
 
-        return $this->magicUserSettingRepository->save($dataIsolation, $entity);
+        return $this->delightfulUserSettingRepository->save($dataIsolation, $entity);
     }
 
     /**
-     * 通过 magicId 保存用户设置（跨组织）.
+     * 通过 delightfulId 保存用户设置（跨组织）.
      */
-    public function saveByDelightfulId(string $magicId, DelightfulUserSettingEntity $magicUserSettingEntity): DelightfulUserSettingEntity
+    public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
         // 获取现有记录以保持实体完整性
-        $existingEntity = $this->magicUserSettingRepository->getByDelightfulId($magicId, $magicUserSettingEntity->getKey());
+        $existingEntity = $this->delightfulUserSettingRepository->getByDelightfulId($delightfulId, $delightfulUserSettingEntity->getKey());
 
         if ($existingEntity) {
-            $magicUserSettingEntity->prepareForModification($existingEntity);
+            $delightfulUserSettingEntity->prepareForModification($existingEntity);
         } else {
-            $magicUserSettingEntity->prepareForCreation();
+            $delightfulUserSettingEntity->prepareForCreation();
         }
 
-        return $this->magicUserSettingRepository->saveByDelightfulId($magicId, $magicUserSettingEntity);
+        return $this->delightfulUserSettingRepository->saveByDelightfulId($delightfulId, $delightfulUserSettingEntity);
     }
 
     /**
-     * 通过 magicId 获取用户设置（跨组织）.
+     * 通过 delightfulId 获取用户设置（跨组织）.
      */
-    public function getByDelightfulId(string $magicId, string $key): ?DelightfulUserSettingEntity
+    public function getByDelightfulId(string $delightfulId, string $key): ?DelightfulUserSettingEntity
     {
-        return $this->magicUserSettingRepository->getByDelightfulId($magicId, $key);
+        return $this->delightfulUserSettingRepository->getByDelightfulId($delightfulId, $key);
     }
 }

@@ -5,7 +5,7 @@ export default {
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Tutorial', link: '/en/tutorial/magic-info/index' },
+      { text: 'Tutorial', link: '/en/tutorial/delightful-info/index' },
       { text: 'Development', link: '/en/development/quick-start/quick-introduction' }
     ],
     sidebar: {
@@ -14,10 +14,10 @@ export default {
           text: 'Delightful Introduction',
           collapsed: false,
           items: [
-            { text: 'What is Delightful', link: '/en/tutorial/magic-info/index' },
-            { text: 'Terminology', link: '/en/tutorial/magic-info/names' },
-            { text: 'Core Features', link: '/en/tutorial/magic-info/core-function' },
-            // { text: 'Open Source and Enterprise Edition', link: '/en/tutorial/magic-info/opensource-enterprise' },
+            { text: 'What is Delightful', link: '/en/tutorial/delightful-info/index' },
+            { text: 'Terminology', link: '/en/tutorial/delightful-info/names' },
+            { text: 'Core Features', link: '/en/tutorial/delightful-info/core-function' },
+            // { text: 'Open Source and Enterprise Edition', link: '/en/tutorial/delightful-info/opensource-enterprise' },
           ]
         },
         {
@@ -124,7 +124,7 @@ export default {
           collapsed: false,
           items: [
             { text: 'Complex Tasks in One Sentence', link: '/en/tutorial/best-practice/complex-tasks-in-one-sentence' },
-            { text: 'Guide to Using the Delightful Approval Assistant', link: '/en/tutorial/best-practice/guide-to-using-the-magic-approval-assistant' },
+            { text: 'Guide to Using the Delightful Approval Assistant', link: '/en/tutorial/best-practice/guide-to-using-the-delightful-approval-assistant' },
             { text: 'Build a Store Knowledge Assistant', link: '/en/tutorial/best-practice/build-a-store-knowledge-assistant' },
           ]
         }
@@ -135,7 +135,7 @@ export default {
           collapsed: false,
           items: [
             { text: 'Quick Introduction', link: '/en/development/quick-start/quick-introduction' },
-            { text: 'Be Delightful Installation', link: '/en/development/deploy/super-magic' },
+            { text: 'Be Delightful Installation', link: '/en/development/deploy/super-delightful' },
           ]
         },
         {

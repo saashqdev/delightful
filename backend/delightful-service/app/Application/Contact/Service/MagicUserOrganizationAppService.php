@@ -46,37 +46,37 @@ class DelightfulUserOrganizationAppService
     /**
      * 获取用户当前组织代码
      */
-    public function getCurrentOrganizationCode(string $magicId): ?array
+    public function getCurrentOrganizationCode(string $delightfulId): ?array
     {
-        return $this->userSettingAppService->getCurrentOrganizationDataByDelightfulId($magicId);
+        return $this->userSettingAppService->getCurrentOrganizationDataByDelightfulId($delightfulId);
     }
 
     /**
      * 设置用户当前组织代码
      */
-    public function setCurrentOrganizationCode(string $magicId, string $magicOrganizationCode): array
+    public function setCurrentOrganizationCode(string $delightfulId, string $delightfulOrganizationCode): array
     {
         // 1. 查询用户是否在指定组织中
-        $userOrganizations = $this->userDomainService->getUserOrganizationsByDelightfulId($magicId);
-        if (! in_array($magicOrganizationCode, $userOrganizations, true)) {
+        $userOrganizations = $this->userDomainService->getUserOrganizationsByDelightfulId($delightfulId);
+        if (! in_array($delightfulOrganizationCode, $userOrganizations, true)) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
 
-        // 2. 查询这个组织的相关信息：magic_organizations_environment
-        $organizationEnvEntity = $this->organizationEnvDomainService->getOrganizationEnvironmentByDelightfulOrganizationCode($magicOrganizationCode);
+        // 2. 查询这个组织的相关信息：delightful_organizations_environment
+        $organizationEnvEntity = $this->organizationEnvDomainService->getOrganizationEnvironmentByDelightfulOrganizationCode($delightfulOrganizationCode);
         if (! $organizationEnvEntity) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
 
-        // 3. 保存 magic_organization_code，origin_organization_code，environment_id，切换时间
+        // 3. 保存 delightful_organization_code，origin_organization_code，environment_id，切换时间
         $organizationData = [
-            'magic_organization_code' => $magicOrganizationCode,
+            'delightful_organization_code' => $delightfulOrganizationCode,
             'third_organization_code' => $organizationEnvEntity->getOriginOrganizationCode(),
             'environment_id' => $organizationEnvEntity->getEnvironmentId(),
             'switch_time' => time(),
         ];
 
-        $this->userSettingAppService->saveCurrentOrganizationDataByDelightfulId($magicId, $organizationData);
+        $this->userSettingAppService->saveCurrentOrganizationDataByDelightfulId($delightfulId, $organizationData);
         return $organizationData;
     }
 
@@ -93,7 +93,7 @@ class DelightfulUserOrganizationAppService
         }
 
         $organizationUserMap = [];
-        $magicId = null;
+        $delightfulId = null;
         foreach ($userDetails as $detail) {
             $organizationCode = $detail->getOrganizationCode();
             if ($organizationCode === '') {
@@ -104,12 +104,12 @@ class DelightfulUserOrganizationAppService
                 $organizationUserMap[$organizationCode] = $detail->getUserId();
             }
 
-            if ($magicId === null) {
-                $magicId = $detail->getDelightfulId();
+            if ($delightfulId === null) {
+                $delightfulId = $detail->getDelightfulId();
             }
         }
 
-        if ($magicId === null || empty($organizationUserMap)) {
+        if ($delightfulId === null || empty($organizationUserMap)) {
             return new DelightfulUserOrganizationListDTO();
         }
 
@@ -118,8 +118,8 @@ class DelightfulUserOrganizationAppService
             return new DelightfulUserOrganizationListDTO();
         }
 
-        $currentOrganizationData = $this->getCurrentOrganizationCode($magicId) ?? [];
-        $currentOrganizationCode = $currentOrganizationData['magic_organization_code'] ?? null;
+        $currentOrganizationData = $this->getCurrentOrganizationCode($delightfulId) ?? [];
+        $currentOrganizationCode = $currentOrganizationData['delightful_organization_code'] ?? null;
 
         $listDTO = new DelightfulUserOrganizationListDTO();
         foreach ($organizations as $organizationCode => $organizationEntity) {
@@ -139,7 +139,7 @@ class DelightfulUserOrganizationAppService
             $subscriptionInfo = $this->organizationProductResolver->resolveSubscriptionInfo($organizationCode, $userId);
 
             $item = new DelightfulUserOrganizationItemDTO([
-                'magic_organization_code' => $organizationCode,
+                'delightful_organization_code' => $organizationCode,
                 'name' => $organizationEntity->getName(),
                 'organization_type' => $organizationEntity->getType(),
                 'logo' => $organizationEntity->getLogo(),

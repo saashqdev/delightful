@@ -35,9 +35,9 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     // 创建话题
-    public function createTopic(DelightfulTopicEntity $magicTopicEntity): DelightfulTopicEntity
+    public function createTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity
     {
-        if (empty($magicTopicEntity->getOrganizationCode())) {
+        if (empty($delightfulTopicEntity->getOrganizationCode())) {
             ExceptionBuilder::throw(
                 ChatErrorCode::INPUT_PARAM_ERROR,
                 'chat.common.param_error',
@@ -45,25 +45,25 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
             );
         }
         $time = date('Y-m-d H:i:s');
-        $data = $magicTopicEntity->toArray();
+        $data = $delightfulTopicEntity->toArray();
         if (empty($data['id'])) {
             $data['id'] = IdGenerator::getSnowId();
-            $magicTopicEntity->setId((string) $data['id']);
+            $delightfulTopicEntity->setId((string) $data['id']);
         }
         if (empty($data['topic_id'])) {
             $data['topic_id'] = IdGenerator::getSnowId();
-            $magicTopicEntity->setTopicId((string) $data['topic_id']);
+            $delightfulTopicEntity->setTopicId((string) $data['topic_id']);
         }
         $data['created_at'] = $time;
         $data['updated_at'] = $time;
         $this->topicModel::query()->create($data);
-        return $magicTopicEntity;
+        return $delightfulTopicEntity;
     }
 
     // 更新话题
-    public function updateTopic(DelightfulTopicEntity $magicTopicEntity): DelightfulTopicEntity
+    public function updateTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity
     {
-        $name = $magicTopicEntity->getName();
+        $name = $delightfulTopicEntity->getName();
         // 长度不能超过 50
         if (mb_strlen($name) > 50) {
             ExceptionBuilder::throw(
@@ -72,25 +72,25 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
                 ['param' => 'topic_name']
             );
         }
-        $this->checkEntity($magicTopicEntity);
+        $this->checkEntity($delightfulTopicEntity);
         $this->topicModel::query()
-            ->where('conversation_id', $magicTopicEntity->getConversationId())
-            ->where('topic_id', $magicTopicEntity->getTopicId())
+            ->where('conversation_id', $delightfulTopicEntity->getConversationId())
+            ->where('topic_id', $delightfulTopicEntity->getTopicId())
             ->update([
-                'name' => $magicTopicEntity->getName(),
-                'description' => $magicTopicEntity->getDescription(),
+                'name' => $delightfulTopicEntity->getName(),
+                'description' => $delightfulTopicEntity->getDescription(),
                 'updated_at' => date('Y-m-d H:i:s'),
             ]);
-        return $magicTopicEntity;
+        return $delightfulTopicEntity;
     }
 
     // 删除话题
-    public function deleteTopic(DelightfulTopicEntity $magicTopicDTO): int
+    public function deleteTopic(DelightfulTopicEntity $delightfulTopicDTO): int
     {
-        $this->checkEntity($magicTopicDTO);
+        $this->checkEntity($delightfulTopicDTO);
         return (int) $this->topicModel::query()
-            ->where('conversation_id', $magicTopicDTO->getConversationId())
-            ->where('topic_id', $magicTopicDTO->getTopicId())
+            ->where('conversation_id', $delightfulTopicDTO->getConversationId())
+            ->where('topic_id', $delightfulTopicDTO->getTopicId())
             ->delete();
     }
 
@@ -107,10 +107,10 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
         return TopicAssembler::getTopicEntities($topics);
     }
 
-    public function getTopicEntity(DelightfulTopicEntity $magicTopicDTO): ?DelightfulTopicEntity
+    public function getTopicEntity(DelightfulTopicEntity $delightfulTopicDTO): ?DelightfulTopicEntity
     {
-        $this->checkEntity($magicTopicDTO);
-        $topic = $this->getTopicArray($magicTopicDTO);
+        $this->checkEntity($delightfulTopicDTO);
+        $topic = $this->getTopicArray($delightfulTopicDTO);
         if ($topic === null) {
             return null;
         }
@@ -193,11 +193,11 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array
     {
-        $magicTopicDTO = new DelightfulTopicEntity();
-        $magicTopicDTO->setConversationId($messagesQueryDTO->getConversationId());
-        $magicTopicDTO->setTopicId($messagesQueryDTO->getTopicId());
-        $this->checkEntity($magicTopicDTO);
-        $topicEntity = $this->getTopicEntity($magicTopicDTO);
+        $delightfulTopicDTO = new DelightfulTopicEntity();
+        $delightfulTopicDTO->setConversationId($messagesQueryDTO->getConversationId());
+        $delightfulTopicDTO->setTopicId($messagesQueryDTO->getTopicId());
+        $this->checkEntity($delightfulTopicDTO);
+        $topicEntity = $this->getTopicEntity($delightfulTopicDTO);
         if ($topicEntity === null) {
             return [];
         }
@@ -214,8 +214,8 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
             $direction = 'asc';
         }
         $query = $this->topicMessagesModel::query()
-            ->where('conversation_id', $magicTopicDTO->getConversationId())
-            ->where('topic_id', $magicTopicDTO->getTopicId());
+            ->where('conversation_id', $delightfulTopicDTO->getConversationId())
+            ->where('topic_id', $delightfulTopicDTO->getTopicId());
         if ($timeStart !== null) {
             $query->where('created_at', '>=', $timeStart->toDateTimeString());
         }
@@ -295,21 +295,21 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     // 避免 redis 缓存序列化的对象,占用太多内存
-    #[Cacheable(prefix: 'topic:id:conversation', value: '_#{magicTopicDTO.topicId}_#{magicTopicDTO.conversationId}', ttl: 60)]
-    private function getTopicArray(DelightfulTopicEntity $magicTopicDTO): ?array
+    #[Cacheable(prefix: 'topic:id:conversation', value: '_#{delightfulTopicDTO.topicId}_#{delightfulTopicDTO.conversationId}', ttl: 60)]
+    private function getTopicArray(DelightfulTopicEntity $delightfulTopicDTO): ?array
     {
         $query = $this->topicModel::query()
-            ->where('conversation_id', $magicTopicDTO->getConversationId())
-            ->where('topic_id', $magicTopicDTO->getTopicId());
+            ->where('conversation_id', $delightfulTopicDTO->getConversationId())
+            ->where('topic_id', $delightfulTopicDTO->getTopicId());
         return Db::select($query->toSql(), $query->getBindings())[0] ?? null;
     }
 
-    private function checkEntity($magicTopicEntity): void
+    private function checkEntity($delightfulTopicEntity): void
     {
-        if (empty($magicTopicEntity->getTopicId())) {
+        if (empty($delightfulTopicEntity->getTopicId())) {
             ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
         }
-        if (empty($magicTopicEntity->getConversationId())) {
+        if (empty($delightfulTopicEntity->getConversationId())) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
     }

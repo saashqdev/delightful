@@ -13,7 +13,7 @@ use App\Domain\Group\Entity\DelightfulGroupEntity;
 interface DelightfulGroupRepositoryInterface
 {
     // 创建群组
-    public function createGroup(DelightfulGroupEntity $magicGroupDTO): DelightfulGroupEntity;
+    public function createGroup(DelightfulGroupEntity $delightfulGroupDTO): DelightfulGroupEntity;
 
     // 批量查询群组信息
 
@@ -32,7 +32,7 @@ interface DelightfulGroupRepositoryInterface
      */
     public function getGroupsInfoByIds(array $groupIds, ?string $organizationCode = null, bool $keyById = false): array;
 
-    public function addUsersToGroup(DelightfulGroupEntity $magicGroupEntity, array $userIds): bool;
+    public function addUsersToGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): bool;
 
     public function getGroupUserList(string $groupId, string $pageToken, ?string $organizationCode = null, ?array $columns = ['*']): array;
 
@@ -42,9 +42,9 @@ interface DelightfulGroupRepositoryInterface
 
     public function getGroupUserCount(string $groupId): int;
 
-    public function removeUsersFromGroup(DelightfulGroupEntity $magicGroupEntity, array $userIds): int;
+    public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int;
 
-    public function deleteGroup(DelightfulGroupEntity $magicGroupEntity): int;
+    public function deleteGroup(DelightfulGroupEntity $delightfulGroupEntity): int;
 
     // 用户是否在群组中
     public function isUserInGroup(string $groupId, string $userId): bool;

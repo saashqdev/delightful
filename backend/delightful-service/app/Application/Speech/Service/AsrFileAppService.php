@@ -54,10 +54,10 @@ readonly class AsrFileAppService
         private ProjectDomainService $projectDomainService,
         private TaskFileDomainService $taskFileDomainService,
         private WorkspaceDomainService $workspaceDomainService,
-        private DelightfulUserDomainService $magicUserDomainService,
+        private DelightfulUserDomainService $delightfulUserDomainService,
         private ChatMessageAssembler $chatMessageAssembler,
-        private DelightfulChatMessageAppService $magicChatMessageAppService,
-        private DelightfulChatDomainService $magicChatDomainService,
+        private DelightfulChatMessageAppService $delightfulChatMessageAppService,
+        private DelightfulChatDomainService $delightfulChatDomainService,
         private TopicDomainService $superAgentTopicDomainService,
         private MessageQueueDomainService $messageQueueDomainService,
         private TranslatorInterface $translator,
@@ -88,7 +88,7 @@ readonly class AsrFileAppService
             // 1. Validate topic and fetch conversation ID
             $topicEntity = $this->validationService->validateTopicOwnership((int) $summaryRequest->topicId, $userId);
             $chatTopicId = $topicEntity->getChatTopicId();
-            $conversationId = $this->magicChatDomainService->getConversationIdByTopicId($chatTopicId);
+            $conversationId = $this->delightfulChatDomainService->getConversationIdByTopicId($chatTopicId);
 
             // 2. Validate task status (skip when a file_id exists)
             if (! $summaryRequest->hasFileId()) {
@@ -172,7 +172,7 @@ readonly class AsrFileAppService
             // 2. Use topic_id saved in Redis to fetch topic and conversation info
             $topicEntity = $this->validationService->validateTopicOwnership((int) $taskStatus->topicId, $userId);
             $chatTopicId = $topicEntity->getChatTopicId();
-            $conversationId = $this->magicChatDomainService->getConversationIdByTopicId($chatTopicId);
+            $conversationId = $this->delightfulChatDomainService->getConversationIdByTopicId($chatTopicId);
 
             // 3. Continue handling task status
             if (! $summaryRequest->hasFileId()) {
@@ -701,7 +701,7 @@ readonly class AsrFileAppService
             if ($this->shouldQueueMessage($dto->topicId)) {
                 $this->queueChatMessage($dto, $chatRequest, $userAuthorization);
             } else {
-                $this->magicChatMessageAppService->onChatMessage($chatRequest, $userAuthorization);
+                $this->delightfulChatMessageAppService->onChatMessage($chatRequest, $userAuthorization);
             }
         } catch (Throwable $e) {
             $this->logger->error('Failed to send chat message', [
@@ -752,7 +752,7 @@ readonly class AsrFileAppService
      */
     private function getUserAuthorizationFromUserId(string $userId): DelightfulUserAuthorization
     {
-        $userEntity = $this->magicUserDomainService->getUserById($userId);
+        $userEntity = $this->delightfulUserDomainService->getUserById($userId);
         if ($userEntity === null) {
             ExceptionBuilder::throw(AsrErrorCode::UserNotExist);
         }
@@ -1090,7 +1090,7 @@ readonly class AsrFileAppService
         }
 
         $chatTopicId = $topicEntity->getChatTopicId();
-        $conversationId = $this->magicChatDomainService->getConversationIdByTopicId($chatTopicId);
+        $conversationId = $this->delightfulChatDomainService->getConversationIdByTopicId($chatTopicId);
 
         $processSummaryTaskDTO = new ProcessSummaryTaskDTO(
             $taskStatus,

@@ -44,7 +44,7 @@ const useStyles = createStyles(({ token }) => ({
 		whiteSpace: "nowrap",
 	},
 	size: {
-		color: token.magicColorUsages.text[3],
+		color: token.delightfulColorUsages.text[3],
 		marginLeft: 4,
 	},
 	deleteIcon: {

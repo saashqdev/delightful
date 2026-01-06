@@ -48,7 +48,7 @@ const ExpandModal: React.FC<ExpandModalProps> = ({ value, onChange, componentPro
 				onOk={handleExpandViewOk}
 				onCancel={handleExpandViewCancel}
 				title={i18next.t("expression.editContent", {
-					ns: "magicFlow",
+					ns: "delightfulFlow",
 					defaultValue: "编辑内容",
 				})}
 				width="80%"

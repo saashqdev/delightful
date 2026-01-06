@@ -18,7 +18,7 @@ export default function LabelCheckbox({ config }: LabelCheckboxProps) {
 	const { datasetProps } = useDatasetProps({ config })
 
 	return (
-		<div className="magic-label-checkbox" {...datasetProps}>
+		<div className="delightful-label-checkbox" {...datasetProps}>
 			{renderBlock}
 		</div>
 	)

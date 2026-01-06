@@ -30,7 +30,7 @@ class SubNodeRunner extends NodeRunner
         $subFlowId = $this->node->getParams()['sub_flow_id'] ?? '';
 
         // 运行时才获取子流程的数据，这里应该在运行时就加载好，这里为了方便先这样写
-        $subFlow = $this->magicFlowDomainService->getByCode($executionData->getDataIsolation(), $subFlowId);
+        $subFlow = $this->delightfulFlowDomainService->getByCode($executionData->getDataIsolation(), $subFlowId);
         if (! $subFlow || $subFlow->getType() !== Type::Sub) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.sub.flow_not_found', ['flow_code' => $subFlowId]);
         }

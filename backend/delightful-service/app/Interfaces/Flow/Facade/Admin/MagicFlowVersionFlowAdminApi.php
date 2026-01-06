@@ -18,7 +18,7 @@ use Hyperf\Di\Annotation\Inject;
 class DelightfulFlowVersionFlowAdminApi extends AbstractFlowAdminApi
 {
     #[Inject]
-    protected DelightfulFlowVersionAppService $magicFlowVersionAppService;
+    protected DelightfulFlowVersionAppService $delightfulFlowVersionAppService;
 
     /**
      * 版本列表.
@@ -30,7 +30,7 @@ class DelightfulFlowVersionFlowAdminApi extends AbstractFlowAdminApi
         $query->setOrder(['id' => 'desc']);
         $page = $this->createPage();
 
-        $result = $this->magicFlowVersionAppService->queries($this->getAuthorization(), $query, $page);
+        $result = $this->delightfulFlowVersionAppService->queries($this->getAuthorization(), $query, $page);
 
         return DelightfulFlowVersionAssembler::createPageListDTO($result['total'], $result['list'], $page, $result['users']);
     }
@@ -40,8 +40,8 @@ class DelightfulFlowVersionFlowAdminApi extends AbstractFlowAdminApi
      */
     public function show(string $flowId, string $versionId)
     {
-        $version = $this->magicFlowVersionAppService->show($this->getAuthorization(), $flowId, $versionId);
-        $icons = $this->magicFlowVersionAppService->getIcons($version->getOrganizationCode(), [$version->getDelightfulFlow()->getIcon()]);
+        $version = $this->delightfulFlowVersionAppService->show($this->getAuthorization(), $flowId, $versionId);
+        $icons = $this->delightfulFlowVersionAppService->getIcons($version->getOrganizationCode(), [$version->getDelightfulFlow()->getIcon()]);
         return DelightfulFlowVersionAssembler::createDelightfulFlowVersionDTO($version, $icons);
     }
 
@@ -56,9 +56,9 @@ class DelightfulFlowVersionFlowAdminApi extends AbstractFlowAdminApi
 
         $versionDO = DelightfulFlowVersionAssembler::createDelightfulFlowVersionDO($versionDTO);
 
-        $version = $this->magicFlowVersionAppService->publish($authorization, $versionDO);
+        $version = $this->delightfulFlowVersionAppService->publish($authorization, $versionDO);
 
-        $icons = $this->magicFlowVersionAppService->getIcons($version->getOrganizationCode(), [$version->getDelightfulFlow()->getIcon()]);
+        $icons = $this->delightfulFlowVersionAppService->getIcons($version->getOrganizationCode(), [$version->getDelightfulFlow()->getIcon()]);
         return DelightfulFlowVersionAssembler::createDelightfulFlowVersionDTO($version, $icons);
     }
 
@@ -67,8 +67,8 @@ class DelightfulFlowVersionFlowAdminApi extends AbstractFlowAdminApi
      */
     public function rollback(string $flowId, string $versionId)
     {
-        $version = $this->magicFlowVersionAppService->rollback($this->getAuthorization(), $flowId, $versionId);
-        $icons = $this->magicFlowVersionAppService->getIcons($version->getOrganizationCode(), [$version->getDelightfulFlow()->getIcon()]);
+        $version = $this->delightfulFlowVersionAppService->rollback($this->getAuthorization(), $flowId, $versionId);
+        $icons = $this->delightfulFlowVersionAppService->getIcons($version->getOrganizationCode(), [$version->getDelightfulFlow()->getIcon()]);
         return DelightfulFlowVersionAssembler::createDelightfulFlowVersionDTO($version, $icons);
     }
 }

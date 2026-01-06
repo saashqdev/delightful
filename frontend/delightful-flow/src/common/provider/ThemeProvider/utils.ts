@@ -11,25 +11,25 @@ export type ThemeAppearance = 'light' | 'dark' | 'auto'
 
 export const genPalettesConfigs = (
 	themeAppearance: ThemeAppearance,
-): { magicColorScales: ColorScales; magicColorUsages: ColorUsages } => {
+): { delightfulColorScales: ColorScales; delightfulColorUsages: ColorUsages } => {
 	switch (themeAppearance) {
 		case "dark":
 			return {
-				magicColorScales: darkColorScales,
-				magicColorUsages: darkColorUsages,
+				delightfulColorScales: darkColorScales,
+				delightfulColorUsages: darkColorUsages,
 			}
 		case "light":
 			return {
-				magicColorScales: colorScales,
-				magicColorUsages: colorUsages,
+				delightfulColorScales: colorScales,
+				delightfulColorUsages: colorUsages,
 			}
 		case "auto":
 			const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
 			return genPalettesConfigs(isDarkMode ? "dark" : "light")
 		default:
 			return {
-				magicColorScales: colorScales,
-				magicColorUsages: colorUsages,
+				delightfulColorScales: colorScales,
+				delightfulColorUsages: colorUsages,
 			}
 	}
 }

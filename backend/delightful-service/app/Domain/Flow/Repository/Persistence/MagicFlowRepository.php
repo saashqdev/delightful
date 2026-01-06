@@ -20,21 +20,21 @@ class DelightfulFlowRepository extends DelightfulFlowAbstractRepository implemen
 {
     protected bool $filterOrganizationCode = true;
 
-    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $magicFlowEntity): DelightfulFlowEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlowEntity): DelightfulFlowEntity
     {
-        if (! $magicFlowEntity->getId()) {
-            $magicFlowModel = new DelightfulFlowModel();
+        if (! $delightfulFlowEntity->getId()) {
+            $delightfulFlowModel = new DelightfulFlowModel();
         } else {
-            /** @var DelightfulFlowModel $magicFlowModel */
-            $magicFlowModel = DelightfulFlowModel::find($magicFlowEntity->getId());
+            /** @var DelightfulFlowModel $delightfulFlowModel */
+            $delightfulFlowModel = DelightfulFlowModel::find($delightfulFlowEntity->getId());
         }
 
-        $magicFlowModel->fill($this->getAttributes($magicFlowEntity));
-        $magicFlowModel->save();
+        $delightfulFlowModel->fill($this->getAttributes($delightfulFlowEntity));
+        $delightfulFlowModel->save();
 
-        $magicFlowEntity->setId($magicFlowModel->id);
+        $delightfulFlowEntity->setId($delightfulFlowModel->id);
 
-        return $magicFlowEntity;
+        return $delightfulFlowEntity;
     }
 
     public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowEntity
@@ -43,14 +43,14 @@ class DelightfulFlowRepository extends DelightfulFlowAbstractRepository implemen
             return null;
         }
         $builder = $this->createBuilder($dataIsolation, DelightfulFlowModel::query());
-        /** @var null|DelightfulFlowModel $magicFlowModel */
-        $magicFlowModel = $builder->where('code', $code)->first();
+        /** @var null|DelightfulFlowModel $delightfulFlowModel */
+        $delightfulFlowModel = $builder->where('code', $code)->first();
 
-        if (! $magicFlowModel) {
+        if (! $delightfulFlowModel) {
             return null;
         }
 
-        return DelightfulFlowFactory::modelToEntity($magicFlowModel);
+        return DelightfulFlowFactory::modelToEntity($delightfulFlowModel);
     }
 
     public function getByCodes(FlowDataIsolation $dataIsolation, array $codes): array
@@ -59,11 +59,11 @@ class DelightfulFlowRepository extends DelightfulFlowAbstractRepository implemen
             return [];
         }
         $builder = $this->createBuilder($dataIsolation, DelightfulFlowModel::query());
-        $magicFlowModels = $builder->whereIn('code', $codes)->get();
+        $delightfulFlowModels = $builder->whereIn('code', $codes)->get();
 
         $result = [];
-        foreach ($magicFlowModels as $magicFlowModel) {
-            $result[] = DelightfulFlowFactory::modelToEntity($magicFlowModel);
+        foreach ($delightfulFlowModels as $delightfulFlowModel) {
+            $result[] = DelightfulFlowFactory::modelToEntity($delightfulFlowModel);
         }
         return $result;
     }
@@ -71,23 +71,23 @@ class DelightfulFlowRepository extends DelightfulFlowAbstractRepository implemen
     public function getByName(FlowDataIsolation $dataIsolation, string $name, Type $type): ?DelightfulFlowEntity
     {
         $builder = $this->createBuilder($dataIsolation, DelightfulFlowModel::query());
-        /** @var null|DelightfulFlowModel $magicFlowModel */
-        $magicFlowModel = $builder
+        /** @var null|DelightfulFlowModel $delightfulFlowModel */
+        $delightfulFlowModel = $builder
             ->where('name', $name)
             ->where('type', $type->value)
             ->first();
 
-        if (! $magicFlowModel) {
+        if (! $delightfulFlowModel) {
             return null;
         }
 
-        return DelightfulFlowFactory::modelToEntity($magicFlowModel);
+        return DelightfulFlowFactory::modelToEntity($delightfulFlowModel);
     }
 
-    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $magicFlowEntity): void
+    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlowEntity): void
     {
         $builder = $this->createBuilder($dataIsolation, DelightfulFlowModel::query());
-        $builder->where('code', $magicFlowEntity->getCode())->delete();
+        $builder->where('code', $delightfulFlowEntity->getCode())->delete();
     }
 
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowQuery $query, Page $page): array
@@ -115,8 +115,8 @@ class DelightfulFlowRepository extends DelightfulFlowAbstractRepository implemen
 
         if (! empty($data['list'])) {
             $list = [];
-            foreach ($data['list'] as $magicFlowModel) {
-                $list[] = DelightfulFlowFactory::modelToEntity($magicFlowModel);
+            foreach ($data['list'] as $delightfulFlowModel) {
+                $list[] = DelightfulFlowFactory::modelToEntity($delightfulFlowModel);
             }
             $data['list'] = $list;
         }

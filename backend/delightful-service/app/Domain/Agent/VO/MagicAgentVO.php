@@ -22,9 +22,9 @@ class DelightfulAgentVO
 
     public ?DelightfulAgentVersionEntity $botVersionEntity = null;
 
-    public DelightfulUserEntity $magicUserEntity;
+    public DelightfulUserEntity $delightfulUserEntity;
 
-    public ?DelightfulFlowEntity $magicFlowEntity = null;
+    public ?DelightfulFlowEntity $delightfulFlowEntity = null;
 
     public bool $isAdd = false;
 
@@ -52,22 +52,22 @@ class DelightfulAgentVO
 
     public function getDelightfulUserEntity(): DelightfulUserEntity
     {
-        return $this->magicUserEntity;
+        return $this->delightfulUserEntity;
     }
 
-    public function setDelightfulUserEntity(DelightfulUserEntity $magicUserEntity): void
+    public function setDelightfulUserEntity(DelightfulUserEntity $delightfulUserEntity): void
     {
-        $this->magicUserEntity = $magicUserEntity;
+        $this->delightfulUserEntity = $delightfulUserEntity;
     }
 
     public function getDelightfulFlowEntity(): ?DelightfulFlowEntity
     {
-        return $this->magicFlowEntity;
+        return $this->delightfulFlowEntity;
     }
 
-    public function setDelightfulFlowEntity(?DelightfulFlowEntity $magicFlowEntity): void
+    public function setDelightfulFlowEntity(?DelightfulFlowEntity $delightfulFlowEntity): void
     {
-        $this->magicFlowEntity = $magicFlowEntity;
+        $this->delightfulFlowEntity = $delightfulFlowEntity;
     }
 
     public function getIsAdd(): bool

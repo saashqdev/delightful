@@ -75,7 +75,7 @@ class BeDelightfulAgentTool extends AbstractValueObject
         if (is_int($type)) {
             $type = BeDelightfulAgentToolType::tryFrom($type);
             if ($type === null) {
-                ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.invalid', ['label' => 'super_magic.agent.fields.tools']);
+                ExceptionBuilder::throw(BeDelightfulErrorCode::ValidateFailed, 'common.invalid', ['label' => 'super_delightful.agent.fields.tools']);
             }
         }
         $this->type = $type;

@@ -71,10 +71,10 @@ class ImageGenerateNodeRunner extends NodeRunner
             'generate_num' => 1,
         ];
         $flowDataIsolation = $executionData->getDataIsolation();
-        $magicUserAuthorization = new DelightfulUserAuthorization();
-        $magicUserAuthorization->setOrganizationCode($flowDataIsolation->getCurrentOrganizationCode());
-        $magicUserAuthorization->setId($flowDataIsolation->getCurrentUserId());
-        $images = $this->llmAppService->imageGenerate($magicUserAuthorization, '', $modelId, $data);
+        $delightfulUserAuthorization = new DelightfulUserAuthorization();
+        $delightfulUserAuthorization->setOrganizationCode($flowDataIsolation->getCurrentOrganizationCode());
+        $delightfulUserAuthorization->setId($flowDataIsolation->getCurrentUserId());
+        $images = $this->llmAppService->imageGenerate($delightfulUserAuthorization, '', $modelId, $data);
 
         // 这里可能是 url、base64，均记录到流程执行附件中（此时会进行上传到云服务端）。上传失败的文件会直接跳过
         $attachments = $this->recordFlowExecutionAttachments($executionData, $images, true);

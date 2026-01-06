@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_contact_users', static function (Blueprint $table) {
+        Schema::table('delightful_contact_users', static function (Blueprint $table) {
             $table->text('avatar_url')->comment('头像 url')->change();
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_contact_users', function (Blueprint $table) {
+        Schema::table('delightful_contact_users', function (Blueprint $table) {
         });
     }
 };

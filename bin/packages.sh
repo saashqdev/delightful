@@ -33,7 +33,7 @@ fi
 echo ""
 echo ""
 echo "Cloning ${COMPOSE_NAME}";
-TMP_DIR="/tmp/magic-split"
+TMP_DIR="/tmp/delightful-split"
 # Use the env variable for Git repo URL, default to GitHub
 if [ -z "${GIT_REPO_URL}" ]; then
     # Use default value if env var is not set

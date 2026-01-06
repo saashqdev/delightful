@@ -29,20 +29,20 @@ Required variables:
 
 BeDelightful applies to many complex business scenarios. Examples:
 
-- [Warren Buffett 2025 shareholder meeting investment insights](https://www.letsmagic.cn/share/777665156986277889)
-- [Beijing humanoid robot half-marathon stock analysis](https://www.letsmagic.cn/share/774280936479625217)
-- [Summary of Thinking, Fast and Slow](https://www.letsmagic.cn/share/777461325648195584)
-- [Shanghai Ayi IPO analysis and recommendations](https://www.letsmagic.cn/share/777604044873928705)
-- [SKU sales demand forecasting](https://www.letsmagic.cn/share/771022574397648897)
+- [Warren Buffett 2025 shareholder meeting investment insights](https://www.letsdelightful.cn/share/777665156986277889)
+- [Beijing humanoid robot half-marathon stock analysis](https://www.letsdelightful.cn/share/774280936479625217)
+- [Summary of Thinking, Fast and Slow](https://www.letsdelightful.cn/share/777461325648195584)
+- [Shanghai Ayi IPO analysis and recommendations](https://www.letsdelightful.cn/share/777604044873928705)
+- [SKU sales demand forecasting](https://www.letsdelightful.cn/share/771022574397648897)
 
-Find more cases on the [official site](https://www.letsmagic.cn).
+Find more cases on the [official site](https://www.letsdelightful.cn).
 
 ## Related Projects
 
 BeDelightful is part of the Delightful suite and works alongside:
 
-- **[Delightful IM](https://github.com/saashqdev/delightful/magic)** – Enterprise IM with AI agent chat and internal comms
-- **[Delightful Flow](https://github.com/saashqdev/delightful/magic-flow)** – Visual AI workflow orchestrator
+- **[Delightful IM](https://github.com/saashqdev/delightful/delightful)** – Enterprise IM with AI agent chat and internal comms
+- **[Delightful Flow](https://github.com/saashqdev/delightful/delightful-flow)** – Visual AI workflow orchestrator
 - **[Agentlang](https://github.com/saashqdev/delightful/agentlang)** – Language-centric AI agent framework for building agents with natural language
 
 ## Contributing and Support
@@ -51,4 +51,4 @@ Contributions and suggestions are welcome. If you spot an issue, please open an 
 
 ## License
 
-This project follows the [Delightful Open Source License](https://github.com/saashqdev/delightful/magic/blob/main/LICENSE), which is based on Apache 2.0 with additional restrictions.
+This project follows the [Delightful Open Source License](https://github.com/saashqdev/delightful/delightful/blob/main/LICENSE), which is based on Apache 2.0 with additional restrictions.

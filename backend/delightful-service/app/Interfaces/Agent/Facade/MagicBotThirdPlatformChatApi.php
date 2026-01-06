@@ -18,26 +18,26 @@ use Hyperf\Di\Annotation\Inject;
 class DelightfulBotThirdPlatformChatApi extends AbstractApi
 {
     #[Inject]
-    protected DelightfulBotThirdPlatformChatAppService $magicBotThirdPlatformChatAppService;
+    protected DelightfulBotThirdPlatformChatAppService $delightfulBotThirdPlatformChatAppService;
 
     #[Inject]
-    protected DelightfulBotThirdPlatformChatAssembler $magicBotThirdPlatformChatAssembler;
+    protected DelightfulBotThirdPlatformChatAssembler $delightfulBotThirdPlatformChatAssembler;
 
     public function save()
     {
         $authorization = $this->getAuthorization();
         $DTO = new DelightfulBotThirdPlatformChatDTO($this->request->all());
-        $DO = $this->magicBotThirdPlatformChatAssembler->createDO($DTO);
-        $entity = $this->magicBotThirdPlatformChatAppService->save($authorization, $DO);
-        return $this->magicBotThirdPlatformChatAssembler->createDTO($entity);
+        $DO = $this->delightfulBotThirdPlatformChatAssembler->createDO($DTO);
+        $entity = $this->delightfulBotThirdPlatformChatAppService->save($authorization, $DO);
+        return $this->delightfulBotThirdPlatformChatAssembler->createDTO($entity);
     }
 
     public function listByBotId(string $botId)
     {
         $authorization = $this->getAuthorization();
         $page = $this->createPage();
-        $data = $this->magicBotThirdPlatformChatAppService->listByBotId($authorization, $botId, $page);
-        return $this->magicBotThirdPlatformChatAssembler->createPageDTO($data['total'], $data['list'], $page, true);
+        $data = $this->delightfulBotThirdPlatformChatAppService->listByBotId($authorization, $botId, $page);
+        return $this->delightfulBotThirdPlatformChatAssembler->createPageDTO($data['total'], $data['list'], $page, true);
     }
 
     public function queries(string $botId)
@@ -46,13 +46,13 @@ class DelightfulBotThirdPlatformChatApi extends AbstractApi
         $page = $this->createPage();
         $query = new DelightfulBotThirdPlatformChatQuery();
         $query->setBotId($botId);
-        $data = $this->magicBotThirdPlatformChatAppService->queries($authorization, $query, $page);
-        return $this->magicBotThirdPlatformChatAssembler->createPageDTO($data['total'], $data['list'], $page);
+        $data = $this->delightfulBotThirdPlatformChatAppService->queries($authorization, $query, $page);
+        return $this->delightfulBotThirdPlatformChatAssembler->createPageDTO($data['total'], $data['list'], $page);
     }
 
     public function destroy(string $id)
     {
         $authorization = $this->getAuthorization();
-        $this->magicBotThirdPlatformChatAppService->destroy($authorization, $id);
+        $this->delightfulBotThirdPlatformChatAppService->destroy($authorization, $id);
     }
 }

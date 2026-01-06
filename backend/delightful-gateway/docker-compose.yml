@@ -1,6 +1,6 @@
 services:
   # API Gateway Service - Go version
-  magic-gateway:
+  delightful-gateway:
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,19 +11,19 @@ services:
       - ./config/${ENV:-dev}/.env:/app/.env
     restart: unless-stopped
     networks:
-      - magic-sandbox-network
+      - delightful-sandbox-network
     # depends_on:
-    #   - magic-redis
+    #   - delightful-redis
 
   # Redis service
-  magic-redis:
+  delightful-redis:
     image: public.ecr.aws/docker/library/redis:alpine
     container_name: api-gateway-redis
     volumes:
       - ./redis_data:/data
     restart: unless-stopped
     networks:
-      - magic-sandbox-network
+      - delightful-sandbox-network
     command: redis-server --appendonly yes
     labels:
       - "com.docker.compose.skip.create=true"
@@ -33,6 +33,6 @@ volumes:
   caddy_config:
 
 networks:
-  magic-sandbox-network:
+  delightful-sandbox-network:
     external: true
     driver: bridge

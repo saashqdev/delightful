@@ -33,39 +33,39 @@ class DelightfulFlowDraftAssembler
      */
     public static function createPageListDTO(int $total, array $list, Page $page, array $users = []): PageDTO
     {
-        $list = array_map(fn (DelightfulFlowDraftEntity $magicFlowDraftEntity) => self::createDelightfulFlowDraftListDTO($magicFlowDraftEntity, $users), $list);
+        $list = array_map(fn (DelightfulFlowDraftEntity $delightfulFlowDraftEntity) => self::createDelightfulFlowDraftListDTO($delightfulFlowDraftEntity, $users), $list);
         return new PageDTO($page->getPage(), $total, $list);
     }
 
-    public static function createDelightfulFlowDraftDO(DelightfulFlowDraftDTO $magicFlowDraftDTO): DelightfulFlowDraftEntity
+    public static function createDelightfulFlowDraftDO(DelightfulFlowDraftDTO $delightfulFlowDraftDTO): DelightfulFlowDraftEntity
     {
-        $magicFlowDraft = new DelightfulFlowDraftEntity();
-        $magicFlowDraft->setFlowCode($magicFlowDraftDTO->getFlowCode());
-        $magicFlowDraft->setCode((string) $magicFlowDraftDTO->getId());
-        $magicFlowDraft->setName($magicFlowDraftDTO->getName());
-        $magicFlowDraft->setDescription($magicFlowDraftDTO->getDescription());
-        $magicFlowDraft->setDelightfulFlow($magicFlowDraftDTO->getDelightfulFLow());
-        return $magicFlowDraft;
+        $delightfulFlowDraft = new DelightfulFlowDraftEntity();
+        $delightfulFlowDraft->setFlowCode($delightfulFlowDraftDTO->getFlowCode());
+        $delightfulFlowDraft->setCode((string) $delightfulFlowDraftDTO->getId());
+        $delightfulFlowDraft->setName($delightfulFlowDraftDTO->getName());
+        $delightfulFlowDraft->setDescription($delightfulFlowDraftDTO->getDescription());
+        $delightfulFlowDraft->setDelightfulFlow($delightfulFlowDraftDTO->getDelightfulFLow());
+        return $delightfulFlowDraft;
     }
 
-    public static function createDelightfulFlowDraftDTO(DelightfulFlowDraftEntity $magicFlowDraft, array $users = [], array $icons = []): DelightfulFlowDraftDTO
+    public static function createDelightfulFlowDraftDTO(DelightfulFlowDraftEntity $delightfulFlowDraft, array $users = [], array $icons = []): DelightfulFlowDraftDTO
     {
-        $dto = new DelightfulFlowDraftDTO($magicFlowDraft->toArray());
-        $dto->setId($magicFlowDraft->getCode());
-        $dto->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowDraft->getCreator()] ?? null, $magicFlowDraft->getCreatedAt()));
-        $dto->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowDraft->getModifier()] ?? null, $magicFlowDraft->getUpdatedAt()));
+        $dto = new DelightfulFlowDraftDTO($delightfulFlowDraft->toArray());
+        $dto->setId($delightfulFlowDraft->getCode());
+        $dto->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowDraft->getCreator()] ?? null, $delightfulFlowDraft->getCreatedAt()));
+        $dto->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowDraft->getModifier()] ?? null, $delightfulFlowDraft->getUpdatedAt()));
         if (isset($dto->getDelightfulFLow()['icon'])) {
-            $dto->getDelightfulFLow()['icon'] = FileAssembler::getUrl($icons[$magicFlowDraft->getDelightfulFlow()['icon']] ?? null);
+            $dto->getDelightfulFLow()['icon'] = FileAssembler::getUrl($icons[$delightfulFlowDraft->getDelightfulFlow()['icon']] ?? null);
         }
         return $dto;
     }
 
-    protected static function createDelightfulFlowDraftListDTO(DelightfulFlowDraftEntity $magicFlowDraftEntity, array $users = []): DelightfulFlowDraftListDTO
+    protected static function createDelightfulFlowDraftListDTO(DelightfulFlowDraftEntity $delightfulFlowDraftEntity, array $users = []): DelightfulFlowDraftListDTO
     {
-        $dto = new DelightfulFlowDraftListDTO($magicFlowDraftEntity->toArray());
-        $dto->setId($magicFlowDraftEntity->getCode());
-        $dto->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowDraftEntity->getCreator()] ?? null, $magicFlowDraftEntity->getCreatedAt()));
-        $dto->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$magicFlowDraftEntity->getModifier()] ?? null, $magicFlowDraftEntity->getUpdatedAt()));
+        $dto = new DelightfulFlowDraftListDTO($delightfulFlowDraftEntity->toArray());
+        $dto->setId($delightfulFlowDraftEntity->getCode());
+        $dto->setCreatorInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowDraftEntity->getCreator()] ?? null, $delightfulFlowDraftEntity->getCreatedAt()));
+        $dto->setModifierInfo(OperatorAssembler::createOperatorDTOByUserEntity($users[$delightfulFlowDraftEntity->getModifier()] ?? null, $delightfulFlowDraftEntity->getUpdatedAt()));
         return $dto;
     }
 }

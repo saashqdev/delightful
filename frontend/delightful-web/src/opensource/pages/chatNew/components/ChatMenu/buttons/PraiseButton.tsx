@@ -15,10 +15,10 @@ interface PraiseButtonProps {
 const useStyles = createStyles(({ css, isDarkMode, token }) => {
 	return {
 		hasPraise: {
-			color: token.magicColorScales.amber[5],
+			color: token.delightfulColorScales.amber[5],
 		},
 		count: css`
-			color: ${isDarkMode ? token.magicColorScales.grey[5] : token.magicColorUsages.text[3]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[3]};
 
 			font-size: 12px;
 			font-weight: 400;

@@ -25,10 +25,10 @@ export const useStyles = createStyles(({ css, token }) => ({
 		}
 	`,
 	markdown: css`
-		color: ${token.magicColorUsages.text[2]};
+		color: ${token.delightfulColorUsages.text[2]};
 		border-radius: 0;
 		padding-left: 10px;
-		border-left: 4px solid ${token.magicColorUsages.border};
+		border-left: 4px solid ${token.delightfulColorUsages.border};
 		margin-top: 10px;
 		transform: translateY(-10px);
 		transition: transform 0.3s ease-in-out;
@@ -48,13 +48,13 @@ export const useStyles = createStyles(({ css, token }) => ({
 	collapseTitle: css`
 		font-size: 14px;
 		font-weight: 500;
-		color: ${token.magicColorUsages.text[2]};
-		background-color: ${token.magicColorUsages.fill[0]};
+		color: ${token.delightfulColorUsages.text[2]};
+		background-color: ${token.delightfulColorUsages.fill[0]};
 		padding: 5px 10px;
 		border-radius: 8px;
 		width: fit-content;
 		cursor: pointer;
-		color: ${token.magicColorUsages.text[1]};
+		color: ${token.delightfulColorUsages.text[1]};
 		text-align: justify;
 		font-size: 14px;
 		font-weight: 400;
@@ -63,7 +63,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 		position: relative;
 
 		&:hover {
-			background-color: ${token.magicColorUsages.fill[1]};
+			background-color: ${token.delightfulColorUsages.fill[1]};
 		}
 	`,
 }))

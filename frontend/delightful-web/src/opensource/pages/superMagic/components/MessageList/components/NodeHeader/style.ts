@@ -20,7 +20,7 @@ export const useStyles = createStyles(({ token }) => ({
 	timestamp: {
 		fontSize: 12,
 		fontWeight: 400,
-		color: token.magicColorUsages.text[3],
+		color: token.delightfulColorUsages.text[3],
 		margin: "0 10px",
 	},
 }))

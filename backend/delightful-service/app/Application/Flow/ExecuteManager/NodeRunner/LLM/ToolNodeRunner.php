@@ -57,12 +57,12 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         $executionData->saveNodeContext($this->node->getNodeId(), $result);
     }
 
-    private function parseInputByLLM(VertexResult $vertexResult, ExecutionData $executionData, DelightfulFlowEntity $magicFlowEntity, string $userPrompt): array
+    private function parseInputByLLM(VertexResult $vertexResult, ExecutionData $executionData, DelightfulFlowEntity $delightfulFlowEntity, string $userPrompt): array
     {
         /** @var ToolNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        $systemPrompt = $this->buildSystemPrompt($magicFlowEntity);
+        $systemPrompt = $this->buildSystemPrompt($delightfulFlowEntity);
         $paramsConfig->setSystemPrompt($systemPrompt);
 
         // 一定是忽略当前消息
@@ -77,8 +77,8 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         return $this->formatJson($content);
     }
 
-    private function buildSystemPrompt(DelightfulFlowEntity $magicFlowEntity): string
+    private function buildSystemPrompt(DelightfulFlowEntity $delightfulFlowEntity): string
     {
-        return PromptUtil::getToolCallPrompt([':tool' => json_encode($magicFlowEntity->getInput()?->getForm()?->getForm()->toJsonSchema() ?? [], JSON_UNESCAPED_UNICODE)]);
+        return PromptUtil::getToolCallPrompt([':tool' => json_encode($delightfulFlowEntity->getInput()?->getForm()?->getForm()->toJsonSchema() ?? [], JSON_UNESCAPED_UNICODE)]);
     }
 }

@@ -1,7 +1,7 @@
 /** Language helpers */
 export const languageHelper = {
 	/**
-	 * @description Internationalization locale transform: other styles => magic style (zzZZ/zz-ZZ -> zz_ZZ; case length is not constrained)
+	 * @description Internationalization locale transform: other styles => delightful style (zzZZ/zz-ZZ -> zz_ZZ; case length is not constrained)
 	 * @param {string} lang
 	 * @return zh_CN
 	 */
@@ -9,7 +9,7 @@ export const languageHelper = {
 		return lang.replace(/([a-z]{2})([-]?)([A-Z]{2})/g, "$1_$3")
 	},
 	/**
-	 * @description Internationalization locale transform: magic style => other styles (zz_ZZ/zz-ZZ -> zzZZ; case length is not constrained)
+	 * @description Internationalization locale transform: delightful style => other styles (zz_ZZ/zz-ZZ -> zzZZ; case length is not constrained)
 	 * @param {string} lang
 	 * @return zhCN
 	 */

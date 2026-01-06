@@ -74,7 +74,7 @@ export default function OnceResult({
 			<div className={styles.input}>
 				<div className={styles.header}>
 					<span className={styles.inputTitle}>
-						{i18next.t("common.input", { ns: "magicFlow" })}
+						{i18next.t("common.input", { ns: "delightfulFlow" })}
 					</span>
 					<div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
 						<div className={styles.copyContainer}>
@@ -103,7 +103,7 @@ export default function OnceResult({
 						>
 							<IconMaximize size={12} />
 							{i18next.t("flow.fullscreen", {
-								ns: "magicFlow",
+								ns: "delightfulFlow",
 								defaultValue: "全屏查看",
 							})}
 						</button>
@@ -131,7 +131,7 @@ export default function OnceResult({
 			<div className={clsx(styles.output, "nodrag")}>
 				<div className={styles.header}>
 					<span className={styles.inputTitle}>
-						{i18next.t("common.output", { ns: "magicFlow" })}
+						{i18next.t("common.output", { ns: "delightfulFlow" })}
 					</span>
 					<div className={styles.copyContainer}>
 						<IconCopy
@@ -169,7 +169,7 @@ export default function OnceResult({
 				<div className={styles.output}>
 					<div className={styles.header}>
 						<span className={styles.inputTitle}>
-							{i18next.t("flow.testDetail", { ns: "magicFlow" })}
+							{i18next.t("flow.testDetail", { ns: "delightfulFlow" })}
 						</span>
 						<div className={styles.copyContainer}>
 							<IconCopy

@@ -516,10 +516,10 @@ class Validator
         return true;
     }
 
-    /** Check magic constant name against PHPSandbox validation rules. This is an internal PHPSandbox function but requires public access to work.
-     * @param mixed $name of the magic constant name to check
+    /** Check delightful constant name against PHPSandbox validation rules. This is an internal PHPSandbox function but requires public access to work.
+     * @param mixed $name of the delightful constant name to check
      *
-     * @return bool Returns true if magic constant is valid
+     * @return bool Returns true if delightful constant is valid
      * @throws Throwable Throws exception if validation error occurs
      */
     public function checkDelightfulConst($name): bool
@@ -532,7 +532,7 @@ class Validator
             $name = strval($name);
         }
         if (! $name) {
-            $this->error->validationError('Sandboxed code attempted to call unnamed magic constant!', Error::VALID_DELIGHTFUL_CONST_ERROR, null, '');
+            $this->error->validationError('Sandboxed code attempted to call unnamed delightful constant!', Error::VALID_DELIGHTFUL_CONST_ERROR, null, '');
         }
         if (is_callable($this->options->validation()->getDelightfulConstValidator())) {
             return call_user_func_array($this->options->validation()->getDelightfulConstValidator(), [$name, $this]);
@@ -540,14 +540,14 @@ class Validator
         if (! $this->options->definitions()->isDefinedDelightfulConst($name)) {
             if ($this->options->accessControl()->hasWhitelistedDelightfulConsts()) {
                 if (! $this->options->accessControl()->isWhitelistedDelightfulConst($name)) {
-                    $this->error->validationError("Sandboxed code attempted to call non-whitelisted magic constant: {$original_name}", Error::WHITELIST_DELIGHTFUL_CONST_ERROR, null, $original_name);
+                    $this->error->validationError("Sandboxed code attempted to call non-whitelisted delightful constant: {$original_name}", Error::WHITELIST_DELIGHTFUL_CONST_ERROR, null, $original_name);
                 }
             } elseif ($this->options->accessControl()->hasBlacklistedDelightfulConsts()) {
                 if ($this->options->accessControl()->isBlacklistedDelightfulConst($name)) {
-                    $this->error->validationError("Sandboxed code attempted to call blacklisted magic constant: {$original_name}", Error::BLACKLIST_DELIGHTFUL_CONST_ERROR, null, $original_name);
+                    $this->error->validationError("Sandboxed code attempted to call blacklisted delightful constant: {$original_name}", Error::BLACKLIST_DELIGHTFUL_CONST_ERROR, null, $original_name);
                 }
             } else {
-                $this->error->validationError("Sandboxed code attempted to call invalid magic constant: {$original_name}", Error::VALID_DELIGHTFUL_CONST_ERROR, null, $original_name);
+                $this->error->validationError("Sandboxed code attempted to call invalid delightful constant: {$original_name}", Error::VALID_DELIGHTFUL_CONST_ERROR, null, $original_name);
             }
         }
         return true;

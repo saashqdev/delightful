@@ -45,7 +45,7 @@ const useStyles = createStyles(({ css, token }) => {
 			padding-top: 20px;
 			padding-bottom: 20px;
 			border-radius: 12px;
-			border: 1px solid ${token.magicColorUsages.border};
+			border: 1px solid ${token.delightfulColorUsages.border};
 		`,
 		formItem: css`
 			margin-bottom: 10px;

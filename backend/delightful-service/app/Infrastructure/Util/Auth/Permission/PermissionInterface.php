@@ -22,5 +22,5 @@ interface PermissionInterface
     /**
      * 获取用户所拥有的组织管理员代码.
      */
-    public function getOrganizationAdminList(string $magicId): array;
+    public function getOrganizationAdminList(string $delightfulId): array;
 }

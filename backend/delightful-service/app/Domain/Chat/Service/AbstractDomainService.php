@@ -71,19 +71,19 @@ abstract class AbstractDomainService
     protected readonly MemoryDriver $memoryDriver;
 
     public function __construct(
-        protected DelightfulUserRepositoryInterface $magicUserRepository,
-        protected DelightfulMessageRepositoryInterface $magicMessageRepository,
-        protected DelightfulChatSeqRepositoryInterface $magicSeqRepository,
-        protected DelightfulAccountRepositoryInterface $magicAccountRepository,
+        protected DelightfulUserRepositoryInterface $delightfulUserRepository,
+        protected DelightfulMessageRepositoryInterface $delightfulMessageRepository,
+        protected DelightfulChatSeqRepositoryInterface $delightfulSeqRepository,
+        protected DelightfulAccountRepositoryInterface $delightfulAccountRepository,
         protected IdGeneratorInterface $idGenerator,
         protected SocketIO $socketIO,
-        protected DelightfulChatConversationRepositoryInterface $magicConversationRepository,
+        protected DelightfulChatConversationRepositoryInterface $delightfulConversationRepository,
         protected RedisLocker $redisLocker,
         protected Producer $producer,
         protected Redis $redis,
-        protected DelightfulChatTopicRepositoryInterface $magicChatTopicRepository,
-        protected DelightfulGroupRepositoryInterface $magicGroupRepository,
-        protected DelightfulChatFileRepositoryInterface $magicFileRepository,
+        protected DelightfulChatTopicRepositoryInterface $delightfulChatTopicRepository,
+        protected DelightfulGroupRepositoryInterface $delightfulGroupRepository,
+        protected DelightfulChatFileRepositoryInterface $delightfulFileRepository,
         protected LoggerInterface $logger,
         protected readonly DelightfulUserRepositoryInterface $userRepository,
         protected readonly DelightfulFriendRepositoryInterface $friendRepository,
@@ -91,13 +91,13 @@ abstract class AbstractDomainService
         protected readonly DelightfulUserIdRelationRepositoryInterface $userIdRelationRepository,
         protected readonly DelightfulContactIdMappingRepositoryInterface $contactThirdPlatformIdMappingRepository,
         protected readonly DelightfulContactIdMappingRepository $contactIdMappingRepository,
-        protected readonly OrganizationsEnvironmentRepositoryInterface $magicOrganizationsEnvironmentRepository,
-        protected readonly DelightfulTokenRepositoryInterface $magicTokenRepository,
+        protected readonly OrganizationsEnvironmentRepositoryInterface $delightfulOrganizationsEnvironmentRepository,
+        protected readonly DelightfulTokenRepositoryInterface $delightfulTokenRepository,
         protected readonly LockerInterface $locker,
-        protected readonly EnvironmentRepositoryInterface $magicEnvironmentsRepository,
-        protected readonly DelightfulFlowAIModelRepositoryInterface $magicFlowAIModelRepository,
+        protected readonly EnvironmentRepositoryInterface $delightfulEnvironmentsRepository,
+        protected readonly DelightfulFlowAIModelRepositoryInterface $delightfulFlowAIModelRepository,
         protected readonly CloudFileRepositoryInterface $cloudFileRepository,
-        protected readonly DelightfulChatMessageVersionsRepositoryInterface $magicChatMessageVersionsRepository,
+        protected readonly DelightfulChatMessageVersionsRepositoryInterface $delightfulChatMessageVersionsRepository,
         protected ContainerInterface $container
     ) {
         try {
@@ -105,7 +105,7 @@ abstract class AbstractDomainService
         } catch (Throwable) {
         }
         $this->memoryDriver = new MemoryDriver($container, [
-            'prefix' => 'magic-chat:',
+            'prefix' => 'delightful-chat:',
             'skip_cache_results' => [null, '', []],
             // 1GB
             'size' => 1024 * 1024 * 1024,
@@ -127,9 +127,9 @@ abstract class AbstractDomainService
         $this->logger->info('DispatchMessage message:{message}', ['message' => Json::encode($seqCreatedEvent)]);
     }
 
-    public function getMessageByDelightfulMessageId(string $magicMessageId): ?DelightfulMessageEntity
+    public function getMessageByDelightfulMessageId(string $delightfulMessageId): ?DelightfulMessageEntity
     {
-        return $this->magicMessageRepository->getMessageByDelightfulMessageId($magicMessageId);
+        return $this->delightfulMessageRepository->getMessageByDelightfulMessageId($delightfulMessageId);
     }
 
     public function getSeqContent(DelightfulMessageEntity $messageEntity): array
@@ -223,7 +223,7 @@ abstract class AbstractDomainService
             'seq_type' => $messageDTO->getMessageType()->getName(),
             'content' => $content,
             'receive_list' => '',
-            'magic_message_id' => '', // 控制消息不能有 magic_message_id
+            'delightful_message_id' => '', // 控制消息不能有 delightful_message_id
             'message_id' => $seqId,
             'refer_message_id' => '',
             'sender_message_id' => '',
@@ -233,7 +233,7 @@ abstract class AbstractDomainService
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),
         ];
-        return $this->magicSeqRepository->createSequence($seqData);
+        return $this->delightfulSeqRepository->createSequence($seqData);
     }
 
     /**
@@ -244,7 +244,7 @@ abstract class AbstractDomainService
     {
         $time = date('Y-m-d H:i:s');
         // 获取收件方的会话实体
-        $receiveUserEntity = $this->magicUserRepository->getUserById($receiveConversationEntity->getUserId());
+        $receiveUserEntity = $this->delightfulUserRepository->getUserById($receiveConversationEntity->getUserId());
         if ($receiveUserEntity === null) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
@@ -261,7 +261,7 @@ abstract class AbstractDomainService
             'seq_type' => $messageDTO->getMessageType()->getName(),
             'content' => $content,
             'receive_list' => '',
-            'magic_message_id' => '',
+            'delightful_message_id' => '',
             'message_id' => $seqId,
             'refer_message_id' => '',
             'sender_message_id' => '',
@@ -271,7 +271,7 @@ abstract class AbstractDomainService
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),
         ];
-        return $this->magicSeqRepository->createSequence($seqData);
+        return $this->delightfulSeqRepository->createSequence($seqData);
     }
 
     /**
@@ -291,7 +291,7 @@ abstract class AbstractDomainService
         if (! in_array($seqType, ControlMessageType::getMessageStatusChangeType(), true)) {
             return $messagePriority;
         }
-        $conversationEntity = $this->magicConversationRepository->getConversationById($seqEntity->getConversationId());
+        $conversationEntity = $this->delightfulConversationRepository->getConversationById($seqEntity->getConversationId());
         if (! isset($conversationEntity)) {
             return $messagePriority;
         }
@@ -337,10 +337,10 @@ abstract class AbstractDomainService
                     Db::beginTransaction();
                     try {
                         // 批量给自己生成状态变更的消息流序列
-                        $this->magicSeqRepository->batchCreateSeq($userMessageStatusChangeSeqEntities);
+                        $this->delightfulSeqRepository->batchCreateSeq($userMessageStatusChangeSeqEntities);
                         // 更改数据库中消息的状态，避免新设备登录时显示未读
                         if (! empty($needUpdateStatusSeqIds)) {
-                            $this->magicSeqRepository->batchUpdateSeqStatus($needUpdateStatusSeqIds, DelightfulMessageStatus::Seen);
+                            $this->delightfulSeqRepository->batchUpdateSeqStatus($needUpdateStatusSeqIds, DelightfulMessageStatus::Seen);
                         }
                         $messagePriority = $this->getControlMessagePriority($userMessageStatusChangeSeqEntities[0], count($userMessageStatusChangeSeqEntities));
                         // 异步将生成的消息流通知用户的其他设备.
@@ -367,7 +367,7 @@ abstract class AbstractDomainService
                 break;
             case ControlMessageType::ReadMessage:
                 // 如果消息的发送者不是人类,不用处理
-                $messageEntity = $this->magicMessageRepository->getMessageByDelightfulMessageId($messageDTO->getDelightfulMessageId());
+                $messageEntity = $this->delightfulMessageRepository->getMessageByDelightfulMessageId($messageDTO->getDelightfulMessageId());
                 if ($messageEntity === null || $messageEntity->getSenderType() !== ConversationType::User) {
                     return [];
                 }
@@ -378,7 +378,7 @@ abstract class AbstractDomainService
                 if (empty($messageStruct->getReferMessageId())) {
                     ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR);
                 }
-                $userEntity = $this->magicUserRepository->getUserById($dataIsolation->getCurrentUserId());
+                $userEntity = $this->delightfulUserRepository->getUserById($dataIsolation->getCurrentUserId());
                 if ($userEntity === null) {
                     ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
                 }
@@ -387,12 +387,12 @@ abstract class AbstractDomainService
                 $this->redisLocker->mutexLock($mutexLockKey, $messageStruct->getReferMessageId());
                 try {
                     // 只能撤回自己发出的消息
-                    $userSeqEntity = $this->magicSeqRepository->getSeqByMessageId($messageStruct->getReferMessageId());
+                    $userSeqEntity = $this->delightfulSeqRepository->getSeqByMessageId($messageStruct->getReferMessageId());
                     if ($userSeqEntity === null || $userSeqEntity->getObjectId() !== $userEntity->getDelightfulId()) {
                         ExceptionBuilder::throw(ChatErrorCode::MESSAGE_NOT_FOUND);
                     }
                     // 查询消息是否已被撤回
-                    $userRevokedSeqEntity = $this->magicSeqRepository->getMessageRevokedSeq(
+                    $userRevokedSeqEntity = $this->delightfulSeqRepository->getMessageRevokedSeq(
                         $messageStruct->getReferMessageId(),
                         $userEntity,
                         ControlMessageType::RevokeMessage
@@ -405,12 +405,12 @@ abstract class AbstractDomainService
                         Db::beginTransaction();
                         try {
                             // 修改原始 seq，标记已撤回
-                            $this->magicSeqRepository->batchUpdateSeqStatus([$userSeqEntity->getId()], DelightfulMessageStatus::Revoked);
+                            $this->delightfulSeqRepository->batchUpdateSeqStatus([$userSeqEntity->getId()], DelightfulMessageStatus::Revoked);
                             // 批量给自己生成状态变更的消息流序列
-                            $this->magicSeqRepository->batchCreateSeq([$userRevokedSeqEntity]);
+                            $this->delightfulSeqRepository->batchCreateSeq([$userRevokedSeqEntity]);
                             $messagePriority = $this->getControlMessagePriority($userRevokedSeqEntity);
                             // 更改数据库中消息的状态，避免新设备登录时显示未读
-                            $this->magicSeqRepository->batchUpdateSeqStatus([$messageStruct->getReferMessageId()], DelightfulMessageStatus::Revoked);
+                            $this->delightfulSeqRepository->batchUpdateSeqStatus([$messageStruct->getReferMessageId()], DelightfulMessageStatus::Revoked);
                             // 异步将生成的消息流通知用户的其他设备.
                             $seqIds = [$userRevokedSeqEntity->getId()];
                             // 批量分发已读消息,给消息发送者
@@ -458,7 +458,7 @@ abstract class AbstractDomainService
 
     public function getSeqEntityByMessageId(string $messageId): ?DelightfulSeqEntity
     {
-        return $this->magicSeqRepository->getSeqByMessageId($messageId);
+        return $this->delightfulSeqRepository->getSeqByMessageId($messageId);
     }
 
     /**
@@ -480,7 +480,7 @@ abstract class AbstractDomainService
         $topicDTO = new DelightfulTopicEntity();
         $topicDTO->setTopicId($topicId);
         $topicDTO->setConversationId($seqEntity->getConversationId());
-        $topicEntity = $this->magicChatTopicRepository->getTopicEntity($topicDTO);
+        $topicEntity = $this->delightfulChatTopicRepository->getTopicEntity($topicDTO);
         if ($topicEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
         }
@@ -491,7 +491,7 @@ abstract class AbstractDomainService
         $topicMessageDTO->setOrganizationCode($seqEntity->getOrganizationCode());
         $topicMessageDTO->setCreatedAt($seqEntity->getCreatedAt());
         $topicMessageDTO->setUpdatedAt($seqEntity->getUpdatedAt());
-        $this->magicChatTopicRepository->createTopicMessage($topicMessageDTO);
+        $this->delightfulChatTopicRepository->createTopicMessage($topicMessageDTO);
         return $topicMessageDTO;
     }
 
@@ -510,9 +510,9 @@ abstract class AbstractDomainService
             $topicDTO->setConversationId($conversationId);
             $topicDTO->setName($messageStruct->getName());
             $topicDTO->setDescription($messageStruct->getDescription());
-            $senderTopicEntity = $this->magicChatTopicRepository->createTopic($topicDTO);
+            $senderTopicEntity = $this->delightfulChatTopicRepository->createTopic($topicDTO);
             // 为消息接收方创建话题
-            $receiveConversationEntity = $this->magicConversationRepository->getReceiveConversationBySenderConversationId($conversationId);
+            $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($conversationId);
             if ($receiveConversationEntity === null) {
                 // 刚加好友，接收方的会话 id 还未生成
                 return $senderTopicEntity;
@@ -524,7 +524,7 @@ abstract class AbstractDomainService
             $receiveTopicDTO->setOrganizationCode($receiveConversationEntity->getUserOrganizationCode());
             $receiveTopicDTO->setDescription($senderTopicEntity->getDescription());
             // 为收件方创建一个新的话题
-            $this->magicChatTopicRepository->createTopic($receiveTopicDTO);
+            $this->delightfulChatTopicRepository->createTopic($receiveTopicDTO);
             return $senderTopicEntity;
         } catch (Throwable $exception) {
             Db::rollBack();
@@ -545,13 +545,13 @@ abstract class AbstractDomainService
         if ($receiveType === null) {
             ExceptionBuilder::throw(UserErrorCode::RECEIVE_TYPE_ERROR);
         }
-        $senderUserEntity = $this->magicUserRepository->getUserById($senderId);
-        $receiverUserEntity = $this->magicUserRepository->getUserById($receiveId);
+        $senderUserEntity = $this->delightfulUserRepository->getUserById($senderId);
+        $receiverUserEntity = $this->delightfulUserRepository->getUserById($receiveId);
         if ($receiverUserEntity === null || $senderUserEntity === null) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
         // 判断用户是ai还是人类
-        $accountEntity = $this->magicAccountRepository->getAccountInfoByDelightfulId($receiverUserEntity->getDelightfulId());
+        $accountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($receiverUserEntity->getDelightfulId());
         if ($accountEntity === null) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
@@ -582,7 +582,7 @@ abstract class AbstractDomainService
         }
         Db::beginTransaction();
         try {
-            // 根据 appMsgId,给这条消息创建 magicMsgId
+            // 根据 appMsgId,给这条消息创建 delightfulMsgId
             $messageDTO->setReceiveId($conversationEntity->getReceiveId());
             $messageDTO->setReceiveType($conversationEntity->getReceiveType());
             // 将会话id回写进控制消息中,便于客户端处理
@@ -629,12 +629,12 @@ abstract class AbstractDomainService
     }
 
     /**
-     * @param string[] $magicMessageIds
+     * @param string[] $delightfulMessageIds
      * @return DelightfulMessageEntity[]
      */
-    public function getMessageEntitiesByMaicMessageIds(array $magicMessageIds, ?array $rangMessageTypes = null): array
+    public function getMessageEntitiesByMaicMessageIds(array $delightfulMessageIds, ?array $rangMessageTypes = null): array
     {
-        $messages = $this->magicMessageRepository->getMessages($magicMessageIds, $rangMessageTypes);
+        $messages = $this->delightfulMessageRepository->getMessages($delightfulMessageIds, $rangMessageTypes);
         $messageEntities = [];
         foreach ($messages as $message) {
             $messageEntity = MessageAssembler::getMessageEntity($message);
@@ -648,7 +648,7 @@ abstract class AbstractDomainService
      */
     protected function checkAndGetSelfConversation(string $conversationId, DataIsolation $dataIsolation): DelightfulConversationEntity
     {
-        $senderConversation = $this->magicConversationRepository->getConversationById($conversationId);
+        $senderConversation = $this->delightfulConversationRepository->getConversationById($conversationId);
         if ($senderConversation === null) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
@@ -664,7 +664,7 @@ abstract class AbstractDomainService
 
     protected function getAccountId(string $uid): string
     {
-        $receiveEntity = $this->magicUserRepository->getUserById($uid);
+        $receiveEntity = $this->delightfulUserRepository->getUserById($uid);
         if ($receiveEntity === null) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
@@ -673,7 +673,7 @@ abstract class AbstractDomainService
 
     /**
      * 由于一条消息,在2个会话窗口渲染时,会生成2个消息id,因此需要解析出来收件方能看到的消息引用的id.
-     * 根据 magic_message_id + object_id + object_type 找到消息的收件方的refer_message_id.
+     * 根据 delightful_message_id + object_id + object_type 找到消息的收件方的refer_message_id.
      * Support for the message editing function: For multiple sequences (seqs) of the same object_id, only the one with the smallest seq_id is returned.
      */
     protected function getMinSeqListByReferMessageId(DelightfulSeqEntity $senderSeqEntity): array
@@ -684,12 +684,12 @@ abstract class AbstractDomainService
             // 没有消息引用
             return [];
         }
-        $referSeqEntity = $this->magicSeqRepository->getSeqByMessageId($sendReferMessageId);
+        $referSeqEntity = $this->delightfulSeqRepository->getSeqByMessageId($sendReferMessageId);
         if ($referSeqEntity === null) {
             return [];
         }
         // Optimized version: Group by object_id at MySQL level and return only the minimum seq_id record for each user
-        $seqList = $this->magicSeqRepository->getMinSeqListByDelightfulMessageId($referSeqEntity->getDelightfulMessageId());
+        $seqList = $this->delightfulSeqRepository->getMinSeqListByDelightfulMessageId($referSeqEntity->getDelightfulMessageId());
 
         // build referMap
         $referMap = [];
@@ -732,7 +732,7 @@ abstract class AbstractDomainService
      */
     private function getReceiveMessageLatestReadStatus(array $referMessageIds, DataIsolation $dataIsolation): array
     {
-        $referSeqList = $this->magicSeqRepository->getReceiveMessagesStatusChange($referMessageIds, $dataIsolation->getCurrentUserId());
+        $referSeqList = $this->delightfulSeqRepository->getReceiveMessagesStatusChange($referMessageIds, $dataIsolation->getCurrentUserId());
         // 对于接收方来说,一个 sender_message_id 由于状态变化,可能会有多条记录,此处需要最后的状态
         return $this->getMessageLatestStatus($referMessageIds, $referSeqList);
     }

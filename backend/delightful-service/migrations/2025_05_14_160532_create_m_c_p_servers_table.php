@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('magic_mcp_servers', function (Blueprint $table) {
+        Schema::create('delightful_mcp_servers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code', 32)->comment('组织编码');
             $table->string('code', 80)->unique()->comment('唯一编码');
@@ -38,6 +38,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_mcp_servers');
+        Schema::dropIfExists('delightful_mcp_servers');
     }
 };

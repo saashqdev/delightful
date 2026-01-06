@@ -5,6 +5,6 @@ import styles from "./index.module.less"
 
 export default function DelightfulSlider({ ...props }: SliderSingleProps) {
 	return (
-		<Slider {...props} className={clsx("nopan nodrag", styles.magicSlider, props.className)} />
+		<Slider {...props} className={clsx("nopan nodrag", styles.delightfulSlider, props.className)} />
 	)
 }

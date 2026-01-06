@@ -13,7 +13,7 @@ export namespace GlobalSearch {
 	export interface ContactItem {
 		/** 用户Id */
 		user_id: string
-		magic_id: string
+		delightful_id: string
 		organization_code: string
 		user_type: number
 		description: string
@@ -53,7 +53,7 @@ export namespace GlobalSearch {
 	/** 群组用户 */
 	interface GroupUser {
 		user_id: string
-		magic_id: string
+		delightful_id: string
 		organization_code: string
 		user_type: number
 		description: string
@@ -276,7 +276,7 @@ export namespace GlobalSearch {
 		id: string
 		creator: {
 			user_id: string
-			magic_id: string
+			delightful_id: string
 			organization_code: string
 			user_type: number
 			description: string

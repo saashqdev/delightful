@@ -85,7 +85,7 @@ class DelightfulFlowApiKeyEntity extends AbstractEntity
         $this->updatedAt = $this->createdAt;
     }
 
-    public function prepareForModification(DelightfulFlowApiKeyEntity $magicFlowApiKeyEntity): void
+    public function prepareForModification(DelightfulFlowApiKeyEntity $delightfulFlowApiKeyEntity): void
     {
         if (empty($this->organizationCode)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow.fields.organization_code']);
@@ -97,11 +97,11 @@ class DelightfulFlowApiKeyEntity extends AbstractEntity
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow.fields.creator']);
         }
 
-        $magicFlowApiKeyEntity->setName($this->name);
-        $magicFlowApiKeyEntity->setDescription($this->description);
-        $magicFlowApiKeyEntity->setModifier($this->creator);
-        $magicFlowApiKeyEntity->setEnabled($this->enabled);
-        $magicFlowApiKeyEntity->setUpdatedAt(new DateTime());
+        $delightfulFlowApiKeyEntity->setName($this->name);
+        $delightfulFlowApiKeyEntity->setDescription($this->description);
+        $delightfulFlowApiKeyEntity->setModifier($this->creator);
+        $delightfulFlowApiKeyEntity->setEnabled($this->enabled);
+        $delightfulFlowApiKeyEntity->setUpdatedAt(new DateTime());
     }
 
     public function prepareForUpdateSecretKey(): void

@@ -13,7 +13,7 @@ use Hyperf\Snowflake\IdGeneratorInterface;
 class DelightfulDeviceRepository
 {
     public function __construct(
-        protected DelightfulDeviceModel $magicDevice,
+        protected DelightfulDeviceModel $delightfulDevice,
         private readonly IdGeneratorInterface $idGenerator,
     ) {
     }
@@ -32,7 +32,7 @@ class DelightfulDeviceRepository
             'sid' => $sid,
             'client_addr' => '',
         ];
-        $this->magicDevice::query()->create($deviceInfo);
+        $this->delightfulDevice::query()->create($deviceInfo);
         return $deviceInfo['id'];
     }
 }

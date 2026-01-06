@@ -164,7 +164,7 @@ const WaterfallList = memo(({ data, onImageClick, ...rest }: WaterfallListProps)
 							<div className={styles.prompt}>{item.prompt}</div>
 							<DelightfulButton
 								block
-								className={styles.magicButton}
+								className={styles.delightfulButton}
 								icon={<IconWand size={20} />}
 								onClick={() => onImageClick(item.prompt)}
 							>

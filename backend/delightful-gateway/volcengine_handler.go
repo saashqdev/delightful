@@ -62,10 +62,10 @@ func decompressIfNeeded(r *http.Request, bodyBytes []byte) ([]byte, error) {
 	}
 
 	// Try to auto-detect gzip format (even without Content-Encoding header)
-	// gzip file magic number is 0x1f 0x8b
+	// gzip file delightful number is 0x1f 0x8b
 	if len(bodyBytes) >= 2 && bodyBytes[0] == 0x1f && bodyBytes[1] == 0x8b {
 		if debugMode {
-			logger.Printf("Detected gzip magic number, attempting decompression...")
+			logger.Printf("Detected gzip delightful number, attempting decompression...")
 		}
 		reader, err := gzip.NewReader(bytes.NewReader(bodyBytes))
 		if err != nil {

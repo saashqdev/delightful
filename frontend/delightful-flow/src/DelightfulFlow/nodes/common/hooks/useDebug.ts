@@ -65,7 +65,7 @@ export default function useDebug({ id }: DebugProps) {
 	const onDebugChange = useMemoizedFn((debug: boolean) => {
 		const hasPreNodeDebug = checkHasPreNodeInDebug()
 		if(hasPreNodeDebug) {
-			message.warning(resolveToString(i18next.t("flow.hasBeforeNodeDebugTips", { ns: "magicFlow" }), { name: hasPreNodeDebug.name }))
+			message.warning(resolveToString(i18next.t("flow.hasBeforeNodeDebugTips", { ns: "delightfulFlow" }), { name: hasPreNodeDebug.name }))
 			return
 		}
 		updateNodeConfig({

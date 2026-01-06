@@ -14,7 +14,7 @@ const useStyles = createStyles(
 
 				.${prefixCls}-segmented-item-selected {
 					font-weight: 600;
-					color: ${token.magicColorScales.brand[5]};
+					color: ${token.delightfulColorScales.brand[5]};
 					box-shadow:
 						0px 4px 14px 0px rgba(0, 0, 0, 0.1),
 						0px 0px 1px 0px rgba(0, 0, 0, 0.3);
@@ -22,10 +22,10 @@ const useStyles = createStyles(
 
 				${isDarkMode
 					? `
-            background-color:${token.magicColorScales.grey[1]};
-            --${prefixCls}-segmented-item-selected-bg: ${token.magicColorUsages.bg[1]};
-            --${prefixCls}-segmented-item-color: ${token.magicColorUsages.text[2]} !important;
-            --${prefixCls}-segmented-item-hover-color: ${token.magicColorUsages.text[3]} !important;
+            background-color:${token.delightfulColorScales.grey[1]};
+            --${prefixCls}-segmented-item-selected-bg: ${token.delightfulColorUsages.bg[1]};
+            --${prefixCls}-segmented-item-color: ${token.delightfulColorUsages.text[2]} !important;
+            --${prefixCls}-segmented-item-hover-color: ${token.delightfulColorUsages.text[3]} !important;
           `
 					: ""}
 			`,

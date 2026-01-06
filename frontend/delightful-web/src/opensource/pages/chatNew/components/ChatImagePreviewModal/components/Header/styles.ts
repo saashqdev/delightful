@@ -10,7 +10,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 		gap: 10px;
 		flex-shrink: 0;
 		align-self: stretch;
-		background-color: ${token.magicColorScales.grey[0]};
+		background-color: ${token.delightfulColorScales.grey[0]};
 		user-select: none;
 		flex: none;
 	`,
@@ -37,7 +37,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 		line-height: 12px;
 		border-radius: 8px;
 		border: 1px solid ${token.colorBorder};
-		background: ${token.magicColorScales.grey[0]};
+		background: ${token.delightfulColorScales.grey[0]};
 		padding: 4px 8px;
 		height: 40px;
 		width: 70px;

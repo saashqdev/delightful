@@ -2,9 +2,9 @@ import { createStyles } from "antd-style"
 
 export const useDelightfulRadioFavorStyle = createStyles(({ css, token }) => {
 	// Semi/usage/fill/--color-fill-0
-	const containerBG = token.magicColorUsages.fill[0]
+	const containerBG = token.delightfulColorUsages.fill[0]
 	return {
-		magicRadioFavor: css`
+		delightfulRadioFavor: css`
 			display: flex;
 			flex-direction: row;
 			padding: 3px;

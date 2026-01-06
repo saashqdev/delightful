@@ -48,7 +48,7 @@ const TextEditable = memo(
 			<div className={clsx(styles.titleEdit, className)}>
 				{!isEdit ? (
 					<div className={styles.titleView}>
-						<Tooltip title={i18next.t("flow.click2ModifyName", { ns: "magicFlow" })}>
+						<Tooltip title={i18next.t("flow.click2ModifyName", { ns: "delightfulFlow" })}>
 							<span className={styles.title} onClick={enableEditMode}>
 								{currentTitle}
 							</span>

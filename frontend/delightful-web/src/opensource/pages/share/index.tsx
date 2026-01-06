@@ -1,4 +1,4 @@
-import DelightfulIcon from "@/opensource/pages/share/assets/icon/magic_logo.svg"
+import DelightfulIcon from "@/opensource/pages/share/assets/icon/delightful_logo.svg"
 import { getAttachmentsByThreadId } from "@/opensource/pages/superDelightful/utils/api"
 import { IconMenu2 } from "@tabler/icons-react"
 import { useResponsive } from "ahooks"
@@ -18,7 +18,7 @@ const useStyles = createStyles(({ token }) => {
 			width: "100vw",
 			height: "100%",
 			overflow: "hidden",
-			backgroundColor: token.magicColorScales.grey[0],
+			backgroundColor: token.delightfulColorScales.grey[0],
 			display: "flex",
 			flexDirection: "column",
 			boxSizing: "border-box",
@@ -34,7 +34,7 @@ const useStyles = createStyles(({ token }) => {
 			display: "flex",
 			justifyContent: "space-between",
 			alignItems: "center",
-			backgroundColor: token.magicColorScales.grey[0],
+			backgroundColor: token.delightfulColorScales.grey[0],
 		},
 		content: {
 			height: "100%",
@@ -46,7 +46,7 @@ const useStyles = createStyles(({ token }) => {
 				paddingBottom: "52px",
 			},
 		},
-		magicIcon: {
+		delightfulIcon: {
 			width: "140px",
 			height: "32px",
 		},
@@ -54,9 +54,9 @@ const useStyles = createStyles(({ token }) => {
 			height: "32px",
 			padding: "6px 24px",
 			borderRadius: "8px",
-			backgroundColor: token.magicColorUsages.white,
-			color: token.magicColorUsages.text[1],
-			border: `1px solid ${token.magicColorUsages.border[1]}`,
+			backgroundColor: token.delightfulColorUsages.white,
+			color: token.delightfulColorUsages.text[1],
+			border: `1px solid ${token.delightfulColorUsages.border[1]}`,
 			fontWeight: 400,
 			fontSize: "14px",
 		},
@@ -312,7 +312,7 @@ export default function Share() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<img src={DelightfulIcon} alt="" className={isMobile ? "" : styles.magicIcon} />
+				<img src={DelightfulIcon} alt="" className={isMobile ? "" : styles.delightfulIcon} />
 				{isMobile ? (
 					<div className={styles.menuIconContainer}>
 						<IconMenu2

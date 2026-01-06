@@ -12,12 +12,12 @@ use App\Domain\Contact\Entity\AccountEntity;
 interface DelightfulAccountRepositoryInterface
 {
     // 查询账号信息
-    public function getAccountInfoByDelightfulId(string $magicId): ?AccountEntity;
+    public function getAccountInfoByDelightfulId(string $delightfulId): ?AccountEntity;
 
     /**
      * @return AccountEntity[]
      */
-    public function getAccountByDelightfulIds(array $magicIds): array;
+    public function getAccountByDelightfulIds(array $delightfulIds): array;
 
     // 创建账号
     public function createAccount(AccountEntity $accountDTO): AccountEntity;
@@ -31,7 +31,7 @@ interface DelightfulAccountRepositoryInterface
     /**
      * @return AccountEntity[]
      */
-    public function getAccountInfoByDelightfulIds(array $magicIds): array;
+    public function getAccountInfoByDelightfulIds(array $delightfulIds): array;
 
     public function getAccountInfoByAiCode(string $aiCode): ?AccountEntity;
 
@@ -40,7 +40,7 @@ interface DelightfulAccountRepositoryInterface
      */
     public function searchUserByPhoneOrRealName(string $query): array;
 
-    public function updateAccount(string $magicId, array $updateData): int;
+    public function updateAccount(string $delightfulId, array $updateData): int;
 
     public function saveAccount(AccountEntity $accountDTO): AccountEntity;
 

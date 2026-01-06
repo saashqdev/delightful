@@ -10,7 +10,7 @@ export const useStyles = createStyles(({ token }) => {
 			height: "50px",
 			padding: "0px 20px",
 			borderTop: `1px solid ${token.colorBorder}`,
-			backgroundColor: token.magicColorUsages.bg[1],
+			backgroundColor: token.delightfulColorUsages.bg[1],
 			fontSize: "14px",
 		},
 		left: {
@@ -34,12 +34,12 @@ export const useStyles = createStyles(({ token }) => {
 			flex: "none",
 		},
 		tips: {
-			color: token.magicColorUsages.text[1],
+			color: token.delightfulColorUsages.text[1],
 			paddingLeft: "10px",
 			whiteSpace: "nowrap",
 		},
 		remark: {
-			color: token.magicColorUsages.text[1],
+			color: token.delightfulColorUsages.text[1],
 			whiteSpace: "nowrap",
 			overflow: "hidden",
 			textOverflow: "ellipsis",

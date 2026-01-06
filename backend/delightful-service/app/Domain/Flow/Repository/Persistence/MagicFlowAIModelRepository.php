@@ -17,17 +17,17 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 class DelightfulFlowAIModelRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowAIModelRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelEntity $magicFlowAIModelEntity): DelightfulFlowAIModelEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowAIModelEntity $delightfulFlowAIModelEntity): DelightfulFlowAIModelEntity
     {
         $builder = $this->createBuilder($dataIsolation, DelightfulFlowAIModelModel::query());
-        $model = $builder->where('name', $magicFlowAIModelEntity->getName())->first();
+        $model = $builder->where('name', $delightfulFlowAIModelEntity->getName())->first();
         if (! $model) {
             $model = new DelightfulFlowAIModelModel();
         }
-        $model->fill($this->getAttributes($magicFlowAIModelEntity));
+        $model->fill($this->getAttributes($delightfulFlowAIModelEntity));
         $model->save();
-        $magicFlowAIModelEntity->setId($model->id);
-        return $magicFlowAIModelEntity;
+        $delightfulFlowAIModelEntity->setId($model->id);
+        return $delightfulFlowAIModelEntity;
     }
 
     public function getByName(FlowDataIsolation $dataIsolation, string $name): ?DelightfulFlowAIModelEntity

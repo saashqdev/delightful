@@ -20,7 +20,7 @@ export const useStyles = createStyles(({ token }) => ({
 		gap: 4,
 		borderRadius: 8,
 		padding: 10,
-		color: token.magicColorUsages.text[1],
+		color: token.delightfulColorUsages.text[1],
 	},
 	itemActive: {
 		backgroundColor: token.colorPrimaryBg,

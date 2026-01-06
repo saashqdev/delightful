@@ -14,7 +14,7 @@ const SearchBar = memo(({ keyword, onSearchChange }: SearchBarProps) => {
 	return (
 		<div className={clsx(styles.search, `${prefix}search`)}>
 			<SearchInput
-				placeholder={i18next.t("common.search", { ns: "magicFlow" })}
+				placeholder={i18next.t("common.search", { ns: "delightfulFlow" })}
 				value={keyword}
 				onChange={onSearchChange}
 			/>

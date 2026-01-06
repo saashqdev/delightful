@@ -397,7 +397,7 @@ class FilesystemProxy extends Filesystem
     {
         $credentialPolicy = new CredentialPolicy([
             'sts' => true,
-            'role_session_name' => 'magic',
+            'role_session_name' => 'delightful',
             'dir' => '',
         ]);
 

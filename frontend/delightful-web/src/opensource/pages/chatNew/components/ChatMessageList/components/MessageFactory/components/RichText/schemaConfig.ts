@@ -161,7 +161,7 @@ export default {
 				]
 			},
 		},
-		"magic-emoji": {
+		"delightful-emoji": {
 			inline: true,
 			group: "inline",
 			attrs: {
@@ -174,7 +174,7 @@ export default {
 			},
 			parseDOM: [
 				{
-					tag: "img.magic-emoji",
+					tag: "img.delightful-emoji",
 					getAttrs: (dom: HTMLElement) => ({
 						alt: (dom as HTMLElement).getAttribute("alt"),
 						code: (dom as HTMLElement).getAttribute("data-code"),
@@ -190,7 +190,7 @@ export default {
 				return [
 					"img",
 					{
-						class: "magic-emoji",
+						class: "delightful-emoji",
 						src: `${EmojiBasePath}${ns}${code}${suffix}`,
 						width: size,
 						height: size,
@@ -259,7 +259,7 @@ export default {
 					"img",
 					{
 						...node.attrs,
-						class: "magic-image",
+						class: "delightful-image",
 						"data-file-info": dataFileInfo,
 						draggable: false,
 					},
@@ -314,4 +314,4 @@ export default {
 	},
 }
 
-export const richTextNode = ["mention", "magic-emoji", "image", "quick-instruction"]
+export const richTextNode = ["mention", "delightful-emoji", "image", "quick-instruction"]

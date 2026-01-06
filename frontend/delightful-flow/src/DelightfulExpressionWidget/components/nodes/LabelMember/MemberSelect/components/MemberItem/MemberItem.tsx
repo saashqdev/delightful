@@ -27,7 +27,7 @@ export default function MemberItem({
 		<Tooltip title={tooltip}>
 			<div
 				{...props}
-				className={`magic-member-item ${props.className ?? ""}`}
+				className={`delightful-member-item ${props.className ?? ""}`}
 				onClick={() => itemClick(item)}
 				contentEditable={false}
 			>

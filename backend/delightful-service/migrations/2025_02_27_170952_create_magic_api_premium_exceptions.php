@@ -15,11 +15,11 @@ return new class extends Migration {
     public function up(): void
     {
         // 表存在就不执行
-        if (Schema::hasTable('magic_api_premium_exceptions')) {
+        if (Schema::hasTable('delightful_api_premium_exceptions')) {
             return;
         }
 
-        Schema::create('magic_api_premium_exceptions', function (Blueprint $table) {
+        Schema::create('delightful_api_premium_exceptions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('exception_type', 255)->comment('异常类型');
             $table->boolean('can_retry')->comment('是否可以重试')->nullable();
@@ -35,6 +35,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_api_premium_exceptions');
+        Schema::dropIfExists('delightful_api_premium_exceptions');
     }
 };

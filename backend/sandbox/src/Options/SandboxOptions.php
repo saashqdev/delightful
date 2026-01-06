@@ -77,7 +77,7 @@ class SandboxOptions
     protected bool $validateConstants = true;
 
     /**
-     * @var bool Flag to indicate whether the sandbox should validate magic constants
+     * @var bool Flag to indicate whether the sandbox should validate delightful constants
      * @default true
      */
     protected bool $validateDelightfulConstants = true;
@@ -179,49 +179,49 @@ class SandboxOptions
     protected bool $captureOutput = false;
 
     /**
-     * @var bool Should PHPSandbox automagically whitelist prepended and appended code?
+     * @var bool Should PHPSandbox autodelightfulally whitelist prepended and appended code?
      * @default true
      */
     protected bool $autoWhitelistTrustedCode = true;
 
     /**
-     * @var bool Should PHPSandbox automagically whitelist functions created in sandboxed code if is true?
+     * @var bool Should PHPSandbox autodelightfulally whitelist functions created in sandboxed code if is true?
      * @default true
      */
     protected bool $autoWhitelistFunctions = true;
 
     /**
-     * @var bool Should PHPSandbox automagically whitelist constants created in sandboxed code if is true?
+     * @var bool Should PHPSandbox autodelightfulally whitelist constants created in sandboxed code if is true?
      * @default true
      */
     protected bool $autoWhitelistConstants = true;
 
     /**
-     * @var bool Should PHPSandbox automagically whitelist global variables created in sandboxed code if is true? (Used to whitelist them in the variables list)
+     * @var bool Should PHPSandbox autodelightfulally whitelist global variables created in sandboxed code if is true? (Used to whitelist them in the variables list)
      * @default true
      */
     protected bool $autoWhitelistGlobals = true;
 
     /**
-     * @var bool Should PHPSandbox automagically whitelist classes created in sandboxed code if is true?
+     * @var bool Should PHPSandbox autodelightfulally whitelist classes created in sandboxed code if is true?
      * @default true
      */
     protected bool $autoWhitelistClasses = true;
 
     /**
-     * @var bool Should PHPSandbox automagically whitelist interfaces created in sandboxed code if is true?
+     * @var bool Should PHPSandbox autodelightfulally whitelist interfaces created in sandboxed code if is true?
      * @default true
      */
     protected bool $autoWhitelistInterfaces = true;
 
     /**
-     * @var bool Should PHPSandbox automagically whitelist traits created in sandboxed code if is true?
+     * @var bool Should PHPSandbox autodelightfulally whitelist traits created in sandboxed code if is true?
      * @default true
      */
     protected bool $autoWhitelistTraits = true;
 
     /**
-     * @var bool Should PHPSandbox automagically define variables passed to prepended, appended and prepared code closures?
+     * @var bool Should PHPSandbox autodelightfulally define variables passed to prepended, appended and prepared code closures?
      * @default true
      */
     protected bool $autoDefineVars = true;

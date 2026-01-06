@@ -55,7 +55,7 @@ interface DelightfulChatSeqRepositoryInterface
 
     /**
      * @return ClientSequenceResponse[]
-     * @todo 挪到 magic_chat_topic_messages 处理
+     * @todo 挪到 delightful_chat_topic_messages 处理
      * 会话窗口滚动加载历史记录.
      * message_id= seq表的主键id,因此不需要单独对 message_id 加索引.
      */
@@ -83,17 +83,17 @@ interface DelightfulChatSeqRepositoryInterface
      */
     public function getConversationMessagesBySeqIds(array $messageIds, Order $order): array;
 
-    public function getMessageReceiveList(string $messageId, string $magicId, ConversationType $userType): ?array;
+    public function getMessageReceiveList(string $messageId, string $delightfulId, ConversationType $userType): ?array;
 
     /**
-     * Retrieve the sequence (seq) lists of both the sender and the receiver based on the $magicMessageId (generally used in the message editing scenario).
+     * Retrieve the sequence (seq) lists of both the sender and the receiver based on the $delightfulMessageId (generally used in the message editing scenario).
      */
-    public function getBothSeqListByDelightfulMessageId(string $magicMessageId): array;
+    public function getBothSeqListByDelightfulMessageId(string $delightfulMessageId): array;
 
     /**
      * Optimized version: Group by object_id at MySQL level and return only the minimum seq_id record for each user.
      */
-    public function getMinSeqListByDelightfulMessageId(string $magicMessageId): array;
+    public function getMinSeqListByDelightfulMessageId(string $delightfulMessageId): array;
 
     /**
      * 获取消息的撤回 seq.
@@ -101,7 +101,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function getMessageRevokedSeq(string $messageId, DelightfulUserEntity $userEntity, ControlMessageType $controlMessageType): ?DelightfulSeqEntity;
 
     // 按类型获取会话中的seq
-    public function getConversationSeqByType(string $magicId, string $conversationId, ControlMessageType $seqType): ?DelightfulSeqEntity;
+    public function getConversationSeqByType(string $delightfulId, string $conversationId, ControlMessageType $seqType): ?DelightfulSeqEntity;
 
     /**
      * @return DelightfulSeqEntity[]
@@ -113,7 +113,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function deleteSeqMessageByIds(array $seqIds): int;
 
     // 为了移除脏数据写的方法
-    public function getSeqByDelightfulId(string $magicId, int $limit): array;
+    public function getSeqByDelightfulId(string $delightfulId, int $limit): array;
 
     // 为了移除脏数据写的方法
     public function getHasTrashMessageUsers(): array;

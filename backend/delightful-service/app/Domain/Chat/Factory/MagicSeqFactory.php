@@ -21,7 +21,7 @@ class DelightfulSeqFactory
         isset($seq['object_type']) && $entity->setObjectType(ConversationType::tryFrom($seq['object_type']));
         $entity->setObjectId($seq['object_id']);
         $entity->setSeqId($seq['seq_id']);
-        $entity->setDelightfulMessageId($seq['magic_message_id']);
+        $entity->setDelightfulMessageId($seq['delightful_message_id']);
         $entity->setMessageId($seq['message_id']);
         $entity->setReferMessageId($seq['refer_message_id']);
         $entity->setSenderMessageId($seq['sender_message_id']);

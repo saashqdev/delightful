@@ -3,8 +3,8 @@ Supports Mac OS and Linux operating systems. Windows systems can run through doc
 
 ### 1. Clone the Project
 ```bash
-git clone https://github.com/saashqdev/delightful/magic.git
-cd magic
+git clone https://github.com/saashqdev/delightful/delightful.git
+cd delightful
 ```
 
 ### 2. Configure Environment Variables
@@ -18,32 +18,32 @@ cp .env.example .env
 
 ```bash
 # Start the service in foreground
-./bin/magic.sh start
+./bin/delightful.sh start
 ```
 
 ### 4. Other Commands
 
 ```bash
 # Display help information
-./bin/magic.sh help
+./bin/delightful.sh help
 
 # Start the service in foreground
-./bin/magic.sh start
+./bin/delightful.sh start
 
 # Start the service in background
-./bin/magic.sh daemon
+./bin/delightful.sh daemon
 
 # Stop the service
-./bin/magic.sh stop
+./bin/delightful.sh stop
 
 # Restart the service
-./bin/magic.sh restart
+./bin/delightful.sh restart
 
 # Check service status
-./bin/magic.sh status
+./bin/delightful.sh status
 
 # View service logs
-./bin/magic.sh logs
+./bin/delightful.sh logs
 ```
 
 ### 4. Access Services
@@ -53,4 +53,4 @@ cp .env.example .env
   - Account `13912345678`：Password `bedelightful.ai`
 - RabbitMQ Management Interface: http://localhost:15672
   - Username: admin
-  - Password: magic123456
+  - Password: delightful123456

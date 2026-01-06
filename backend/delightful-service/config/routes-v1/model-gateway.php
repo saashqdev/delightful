@@ -30,5 +30,5 @@ Router::addGroup('/v2', function () {
 // 前台模型接口
 Router::addGroup('/api/v1', static function () {
     // 超级麦吉显示模型
-    Router::get('/super-magic-models', [ServiceProviderApi::class, 'getBeDelightfulDisplayModels']);
+    Router::get('/super-delightful-models', [ServiceProviderApi::class, 'getBeDelightfulDisplayModels']);
 }, ['middleware' => [RequestContextMiddleware::class]]);

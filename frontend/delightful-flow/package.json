@@ -4,7 +4,7 @@
 	"description": "An expression component that allows you to set user-defined content, block content, and function blocks",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/saashqdev/delightful/magic-flow"
+		"url": "https://github.com/saashqdev/delightful/delightful-flow"
 	},
 	"license": "Apache License 2.0",
 	"type": "module",

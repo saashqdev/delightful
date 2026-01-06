@@ -14,12 +14,12 @@ class DelightfulOrganizationsEnvironmentModel extends Model
 {
     use Snowflake;
 
-    protected ?string $table = 'magic_organizations_environment';
+    protected ?string $table = 'delightful_organizations_environment';
 
     protected array $fillable = [
         'id',
         'login_code',
-        'magic_organization_code',
+        'delightful_organization_code',
         'origin_organization_code',
         'environment_id',
         'created_at',

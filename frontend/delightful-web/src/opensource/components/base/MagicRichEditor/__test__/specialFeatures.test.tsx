@@ -42,7 +42,7 @@ vi.mock("../extensions/mention", () => {
 	}
 })
 
-vi.mock("../extensions/magicEmoji", () => {
+vi.mock("../extensions/delightfulEmoji", () => {
 	return {
 		default: {
 			configure: mockEmojiConfigure,

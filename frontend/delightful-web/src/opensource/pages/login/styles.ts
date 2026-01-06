@@ -33,18 +33,18 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 				--${prefixCls}-input-padding-block: 8px;
 				--${prefixCls}-input-padding-inline: 8px;
 				padding-left: 16px;
-				color: ${isDarkMode ? token.magicColorScales.grey[6] : token.magicColorUsages.text[0]};
+				color: ${isDarkMode ? token.delightfulColorScales.grey[6] : token.delightfulColorUsages.text[0]};
 				font-size: 14px;
 				font-weight: 400;
 				line-height: 22px;
 			}
 
 			.${prefixCls}-input-password-icon {
-				color: ${isDarkMode ? token.magicColorScales.grey[6] : token.magicColorUsages.text[1]};
+				color: ${isDarkMode ? token.delightfulColorScales.grey[6] : token.delightfulColorUsages.text[1]};
 			}
 		`,
 		phoneInput: css`
-			.magic-input-group {
+			.delightful-input-group {
 				display: flex;
 				align-items: center;
 				gap: 5px;
@@ -56,13 +56,13 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 					justify-content: center;
 					width: fit-content;
 					height: 40px;
-					border: 1px solid ${token.magicColorUsages.border};
+					border: 1px solid ${token.delightfulColorUsages.border};
 				}
 
 				.${prefixCls}-input-group-addon, .${prefixCls}-input {
 					border-radius: 8px;
-					border: 1px solid ${token.magicColorUsages.border};
-					background-color: ${token.magicColorUsages.bg[0]};
+					border: 1px solid ${token.delightfulColorUsages.border};
+					background-color: ${token.delightfulColorUsages.bg[0]};
 				}
 			}
 		`,
@@ -86,8 +86,8 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 			span,
 			a {
 				color: ${isDarkMode
-					? token.magicColorScales.grey[4]
-					: token.magicColorUsages.text[1]};
+					? token.delightfulColorScales.grey[4]
+					: token.delightfulColorUsages.text[1]};
 				font-weight: 400;
 				line-height: 16px;
 			}
@@ -97,7 +97,7 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 			text-underline-offset: 3px;
 		`,
 		autoRegisterTip: css`
-			color: ${isDarkMode ? token.magicColorScales.grey[5] : token.magicColorUsages.text[3]};
+			color: ${isDarkMode ? token.delightfulColorScales.grey[5] : token.delightfulColorUsages.text[3]};
 			font-weight: 400;
 			line-height: 20px;
 		`,
@@ -106,7 +106,7 @@ export const useStyles = createStyles(({ css, isDarkMode, prefixCls, token }) =>
 				padding: 0;
 			}
 
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
 		`,
 		footer: css`
 			margin-top: 24px;

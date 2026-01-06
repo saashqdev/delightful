@@ -17,7 +17,7 @@ class DepartmentModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_contact_departments';
+    protected ?string $table = 'delightful_contact_departments';
 
     /**
      * The attributes that are mass assignable.

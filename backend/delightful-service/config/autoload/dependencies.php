@@ -268,7 +268,7 @@ $dependencies = [
     FlowOpenApiCheckInterface::class => BaseFlowOpenApiCheck::class,
     MessageAttachmentHandlerInterface::class => BaseMessageAttachmentHandler::class,
 
-    // magic-chat
+    // delightful-chat
     DelightfulChatConversationRepositoryInterface::class => DelightfulChatConversationRepository::class,
     DelightfulMessageRepositoryInterface::class => DelightfulMessageRepository::class,
     DelightfulChatSeqRepositoryInterface::class => DelightfulChatSeqRepository::class,
@@ -288,7 +288,7 @@ $dependencies = [
     AgentRepositoryInterface::class => AgentRepository::class,
     AgentVersionRepositoryInterface::class => AgentVersionRepository::class,
 
-    // magic-flow
+    // delightful-flow
     DelightfulFlowRepositoryInterface::class => DelightfulFlowRepository::class,
     DelightfulFlowDraftRepositoryInterface::class => DelightfulFlowDraftRepository::class,
     DelightfulFlowVersionRepositoryInterface::class => DelightfulFlowVersionRepository::class,
@@ -319,7 +319,7 @@ $dependencies = [
     PHPExecutorInterface::class => PHPExecutor::class,
     PythonExecutorInterface::class => PythonExecutor::class,
 
-    // magic-bot
+    // delightful-bot
     DelightfulBotThirdPlatformChatRepositoryInterface::class => DelightfulBotThirdPlatformChatRepository::class,
 
     // provider
@@ -342,7 +342,7 @@ $dependencies = [
     // api-key
     ApiKeyProviderRepositoryInterface::class => ApiKeyProviderRepository::class,
 
-    // magic-api
+    // delightful-api
     ApplicationRepositoryInterface::class => ApplicationRepository::class,
     ModelConfigRepositoryInterface::class => ModelConfigRepository::class,
     AccessTokenRepositoryInterface::class => AccessTokenRepository::class,

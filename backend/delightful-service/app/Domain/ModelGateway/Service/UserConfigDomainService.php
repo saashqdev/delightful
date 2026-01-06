@@ -35,7 +35,7 @@ class UserConfigDomainService extends AbstractDomainService
             $userConfig->setUserId($userId);
             $userConfig->setAppCode($appCode);
             $userConfig->setOrganizationCode($organizationCode);
-            $userConfig->setTotalAmount(config('magic-api.default_amount_config.user'));
+            $userConfig->setTotalAmount(config('delightful-api.default_amount_config.user'));
             $userConfig->setRpm(0);
             $userConfig = $this->userConfigRepository->create($dataIsolation, $userConfig);
         }

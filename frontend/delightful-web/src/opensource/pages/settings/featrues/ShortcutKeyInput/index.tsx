@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 import { useAppearanceStore } from "@/opensource/providers/AppearanceProvider/context"
 import { set } from "lodash-es"
 import { useShallow } from "zustand/react/shallow"
-import { magic } from "@/enhance/magicElectron"
+import { delightful } from "@/enhance/delightfulElectron"
 import { useMemoizedFn } from "ahooks"
 import useKeyCode from "./useKeyCode"
 
@@ -41,14 +41,14 @@ function ShortcutKeyInput() {
 
 	const onBlur = useMemoizedFn(() => {
 		if (shortcutKey) {
-			magic?.config?.globalShortcut?.register?.(shortcutKey)
+			delightful?.config?.globalShortcut?.register?.(shortcutKey)
 			console.log("-shortcutKey-", shortcutKey)
 		}
 	})
 
 	const onFocus = useMemoizedFn(() => {
 		/** 移除所有快捷键 */
-		magic?.config?.globalShortcut?.unregisterAll()
+		delightful?.config?.globalShortcut?.unregisterAll()
 	})
 
 	// 按键处理

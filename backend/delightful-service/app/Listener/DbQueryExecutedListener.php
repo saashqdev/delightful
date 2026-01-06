@@ -27,9 +27,9 @@ class DbQueryExecutedListener implements ListenerInterface
 
     // Sensitive tables
     private array $sensitiveTables = [
-        'magic_chat_messages',
-        'magic_chat_message_versions',
-        'magic_flow_memory_histories',
+        'delightful_chat_messages',
+        'delightful_chat_message_versions',
+        'delightful_flow_memory_histories',
     ];
 
     public function __construct(ContainerInterface $container)

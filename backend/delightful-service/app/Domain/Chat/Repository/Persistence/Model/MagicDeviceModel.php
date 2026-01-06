@@ -14,7 +14,7 @@ class DelightfulDeviceModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_chat_devices';
+    protected ?string $table = 'delightful_chat_devices';
 
     /**
      * The connection name for the model.

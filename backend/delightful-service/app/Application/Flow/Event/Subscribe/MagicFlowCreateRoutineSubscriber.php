@@ -33,8 +33,8 @@ readonly class DelightfulFlowCreateRoutineSubscriber implements ListenerInterfac
         if (! $event instanceof DelightfulFlowPublishedEvent) {
             return;
         }
-        $magicFlow = $event->magicFlowEntity;
+        $delightfulFlow = $event->delightfulFlowEntity;
 
-        $this->container->get(DelightfulFlowDomainService::class)->createRoutine(FlowDataIsolation::create(), $magicFlow);
+        $this->container->get(DelightfulFlowDomainService::class)->createRoutine(FlowDataIsolation::create(), $delightfulFlow);
     }
 }

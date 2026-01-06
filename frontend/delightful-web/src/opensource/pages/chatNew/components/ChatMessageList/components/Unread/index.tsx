@@ -14,8 +14,8 @@ const useUnreadStyles = createStyles(
 		return {
 			text: css`
 				color: ${isDarkMode
-					? token.magicColorScales.grey[6]
-					: token.magicColorUsages.text[3]};
+					? token.delightfulColorScales.grey[6]
+					: token.delightfulColorUsages.text[3]};
 				text-align: justify;
 				font-size: ${calculateRelativeSize(12, fontSize)}px;
 				font-weight: 400;

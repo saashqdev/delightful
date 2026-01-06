@@ -59,7 +59,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
                 // 记录seq尝试推送的次数,用于后续判断是否需要重试
-                $this->magicSeqAppService->pushSeq($seqId);
+                $this->delightfulSeqAppService->pushSeq($seqId);
                 // 未报错,不再重推
                 $this->setSeqCanNotRetry($seqRetryKey);
             }

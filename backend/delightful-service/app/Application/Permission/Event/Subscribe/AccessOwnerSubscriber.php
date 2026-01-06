@@ -58,7 +58,7 @@ readonly class AccessOwnerSubscriber implements ListenerInterface
             $this->handleToolSet($event->toolSetEntity, $event->create);
         }
         if ($event instanceof KnowledgeBaseSavedEvent) {
-            $this->handleKnowledge($event->magicFlowKnowledgeEntity, $event->create);
+            $this->handleKnowledge($event->delightfulFlowKnowledgeEntity, $event->create);
         }
         if ($event instanceof MCPServerSavedEvent) {
             $this->handleMCPServer($event->MCPServerEntity, $event->create);

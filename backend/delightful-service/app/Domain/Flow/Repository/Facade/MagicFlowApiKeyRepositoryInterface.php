@@ -18,9 +18,9 @@ interface DelightfulFlowApiKeyRepositoryInterface
 
     public function getByCode(FlowDataIsolation $dataIsolation, string $code, ?string $creator = null): ?DelightfulFlowApiKeyEntity;
 
-    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowApiKeyEntity $magicFlowApiKeyEntity): DelightfulFlowApiKeyEntity;
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowApiKeyEntity $delightfulFlowApiKeyEntity): DelightfulFlowApiKeyEntity;
 
-    public function exist(FlowDataIsolation $dataIsolation, DelightfulFlowApiKeyEntity $magicFlowApiKeyEntity): bool;
+    public function exist(FlowDataIsolation $dataIsolation, DelightfulFlowApiKeyEntity $delightfulFlowApiKeyEntity): bool;
 
     /**
      * @return array{total: int, list: array<DelightfulFlowApiKeyEntity>}

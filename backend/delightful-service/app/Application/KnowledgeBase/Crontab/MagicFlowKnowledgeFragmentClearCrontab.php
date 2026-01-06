@@ -27,7 +27,7 @@ readonly class DelightfulFlowKnowledgeFragmentClearCrontab
         $lastId = 0;
         while (true) {
             $ids = [];
-            $data = Db::table('magic_flow_knowledge')->where('id', '>', $lastId)->whereNotNull('deleted_at')->limit(200)->get();
+            $data = Db::table('delightful_flow_knowledge')->where('id', '>', $lastId)->whereNotNull('deleted_at')->limit(200)->get();
             foreach ($data as $item) {
                 $diff = time() - strtotime($item['deleted_at']);
                 if ($diff > 86400) {
@@ -37,7 +37,7 @@ readonly class DelightfulFlowKnowledgeFragmentClearCrontab
             if (empty($ids)) {
                 break;
             }
-            Db::table('magic_flow_knowledge')->whereIn('id', $ids)->delete();
+            Db::table('delightful_flow_knowledge')->whereIn('id', $ids)->delete();
             $lastId = end($ids);
         }
     }
@@ -67,7 +67,7 @@ readonly class DelightfulFlowKnowledgeFragmentClearCrontab
         $lastId = 0;
         while (true) {
             $ids = [];
-            $data = Db::table('magic_flow_knowledge_fragment')->where('id', '>', $lastId)->whereNotNull('deleted_at')->limit(200)->get();
+            $data = Db::table('delightful_flow_knowledge_fragment')->where('id', '>', $lastId)->whereNotNull('deleted_at')->limit(200)->get();
             foreach ($data as $item) {
                 $diff = time() - strtotime($item['deleted_at']);
                 if ($diff > 86400) {
@@ -77,7 +77,7 @@ readonly class DelightfulFlowKnowledgeFragmentClearCrontab
             if (empty($ids)) {
                 break;
             }
-            Db::table('magic_flow_knowledge_fragment')->whereIn('id', $ids)->delete();
+            Db::table('delightful_flow_knowledge_fragment')->whereIn('id', $ids)->delete();
             $lastId = end($ids);
         }
     }

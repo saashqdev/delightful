@@ -15,10 +15,10 @@ return new class extends Migration {
     public function up(): void
     {
         // 表存在就不执行
-        if (Schema::hasTable('magic_api_premium_resources')) {
+        if (Schema::hasTable('delightful_api_premium_resources')) {
             return;
         }
-        Schema::create('magic_api_premium_resources', function (Blueprint $table) {
+        Schema::create('delightful_api_premium_resources', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('endpoint_id', 64)->comment('接入点ID');
             $table->string('resource_name', 64)->comment('资源名称');
@@ -37,6 +37,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_api_premium_resources');
+        Schema::dropIfExists('delightful_api_premium_resources');
     }
 };

@@ -26,8 +26,8 @@ class DelightfulAgentVersionDomainService
     public function __construct(
         public DelightfulAgentVersionRepository $agentVersionRepository,
         public DelightfulAgentRepository $agentRepository,
-        public DelightfulUserRepository $magicUserRepository,
-        public DelightfulFlowVersionRepositoryInterface $magicFlowVersionRepository
+        public DelightfulUserRepository $delightfulUserRepository,
+        public DelightfulFlowVersionRepositoryInterface $delightfulFlowVersionRepository
     ) {
     }
 
@@ -74,7 +74,7 @@ class DelightfulAgentVersionDomainService
     /**
      * 发布版本.
      */
-    public function releaseAgentVersion(DelightfulAgentVersionEntity $magicAgentVersionEntity): array
+    public function releaseAgentVersion(DelightfulAgentVersionEntity $delightfulAgentVersionEntity): array
     {
         // 审批开关 todo
         $approvalOpen = false;
@@ -82,39 +82,39 @@ class DelightfulAgentVersionDomainService
 
         $msg = '';
         // 如果旧状态已经是企业或者市场，则不允许回退
-        $oldDelightfulAgentVersionEntity = $this->agentVersionRepository->getNewestAgentVersionEntity($magicAgentVersionEntity->getAgentId());
+        $oldDelightfulAgentVersionEntity = $this->agentVersionRepository->getNewestAgentVersionEntity($delightfulAgentVersionEntity->getAgentId());
         if ($oldDelightfulAgentVersionEntity !== null) {
-            $this->validateVersionNumber($magicAgentVersionEntity->getVersionNumber(), $oldDelightfulAgentVersionEntity->getVersionNumber());
-            $this->validateReleaseScope($magicAgentVersionEntity->getReleaseScope(), $oldDelightfulAgentVersionEntity->getReleaseScope());
+            $this->validateVersionNumber($delightfulAgentVersionEntity->getVersionNumber(), $oldDelightfulAgentVersionEntity->getVersionNumber());
+            $this->validateReleaseScope($delightfulAgentVersionEntity->getReleaseScope(), $oldDelightfulAgentVersionEntity->getReleaseScope());
         }
 
-        if ($magicAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PERSONAL_USE->value) {
+        if ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PERSONAL_USE->value) {
             // 个人使用
             $msg = '发布成功';
-        } elseif ($magicAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
+        } elseif ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
             // 发布到企业内部
             /* @phpstan-ignore-next-line */
             if ($approvalOpen) {
-                $magicAgentVersionEntity->setApprovalStatus(DelightfulAgentVersionStatus::APPROVAL_PENDING->value);
-                $magicAgentVersionEntity->setEnterpriseReleaseStatus(DelightfulAgentVersionStatus::APP_MARKET_LISTED->value);
+                $delightfulAgentVersionEntity->setApprovalStatus(DelightfulAgentVersionStatus::APPROVAL_PENDING->value);
+                $delightfulAgentVersionEntity->setEnterpriseReleaseStatus(DelightfulAgentVersionStatus::APP_MARKET_LISTED->value);
                 $msg = '提交成功';
             } else {
-                $magicAgentVersionEntity->setEnterpriseReleaseStatus(DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value);
+                $delightfulAgentVersionEntity->setEnterpriseReleaseStatus(DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value);
             }
             $msg = '发布成功';
-        } elseif ($magicAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value) {
+        } elseif ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value) {
             // 发布到应用市场
             // 审核开关
             /* @phpstan-ignore-next-line */
             if ($reviewOpen) {
             } else {
-                $magicAgentVersionEntity->setAppMarketStatus(DelightfulAgentVersionStatus::APP_MARKET_LISTED->value);
+                $delightfulAgentVersionEntity->setAppMarketStatus(DelightfulAgentVersionStatus::APP_MARKET_LISTED->value);
             }
         }
 
-        $magicAgentVersionEntity = $this->agentVersionRepository->insert($magicAgentVersionEntity);
+        $delightfulAgentVersionEntity = $this->agentVersionRepository->insert($delightfulAgentVersionEntity);
 
-        return ['msg' => $msg, 'data' => $magicAgentVersionEntity];
+        return ['msg' => $msg, 'data' => $delightfulAgentVersionEntity];
     }
 
     public function getAgentById(string $id): DelightfulAgentVersionEntity

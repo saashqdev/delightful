@@ -17,22 +17,22 @@ use App\Infrastructure\Core\ValueObject\Page;
 
 class DelightfulFlowTriggerTestcaseRepository extends DelightfulFlowAbstractRepository implements DelightfulFlowTriggerTestcaseRepositoryInterface
 {
-    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): DelightfulFlowTriggerTestcaseEntity
+    public function save(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $delightfulFlowTriggerTestcaseEntity): DelightfulFlowTriggerTestcaseEntity
     {
-        if (! $magicFlowTriggerTestcaseEntity->getId()) {
-            $magicFlowTriggerTestcaseModel = new DelightfulFlowTriggerTestcaseModel();
+        if (! $delightfulFlowTriggerTestcaseEntity->getId()) {
+            $delightfulFlowTriggerTestcaseModel = new DelightfulFlowTriggerTestcaseModel();
         } else {
             $builder = $this->createBuilder($dataIsolation, DelightfulFlowTriggerTestcaseModel::query());
-            /** @var DelightfulFlowTriggerTestcaseModel $magicFlowTriggerTestcaseModel */
-            $magicFlowTriggerTestcaseModel = $builder->where('id', $magicFlowTriggerTestcaseEntity->getId())->first();
+            /** @var DelightfulFlowTriggerTestcaseModel $delightfulFlowTriggerTestcaseModel */
+            $delightfulFlowTriggerTestcaseModel = $builder->where('id', $delightfulFlowTriggerTestcaseEntity->getId())->first();
         }
 
-        $magicFlowTriggerTestcaseModel->fill($this->getAttributes($magicFlowTriggerTestcaseEntity));
-        $magicFlowTriggerTestcaseModel->save();
+        $delightfulFlowTriggerTestcaseModel->fill($this->getAttributes($delightfulFlowTriggerTestcaseEntity));
+        $delightfulFlowTriggerTestcaseModel->save();
 
-        $magicFlowTriggerTestcaseEntity->setId($magicFlowTriggerTestcaseModel->id);
+        $delightfulFlowTriggerTestcaseEntity->setId($delightfulFlowTriggerTestcaseModel->id);
 
-        return $magicFlowTriggerTestcaseEntity;
+        return $delightfulFlowTriggerTestcaseEntity;
     }
 
     public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowTriggerTestcaseEntity
@@ -75,9 +75,9 @@ class DelightfulFlowTriggerTestcaseRepository extends DelightfulFlowAbstractRepo
         return $data;
     }
 
-    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $magicFlowTriggerTestcaseEntity): void
+    public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $delightfulFlowTriggerTestcaseEntity): void
     {
         $builder = $this->createBuilder($dataIsolation, DelightfulFlowTriggerTestcaseModel::query());
-        $builder->where('code', $magicFlowTriggerTestcaseEntity->getCode())->delete();
+        $builder->where('code', $delightfulFlowTriggerTestcaseEntity->getCode())->delete();
     }
 }

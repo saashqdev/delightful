@@ -20,28 +20,28 @@ const useFragmentsStyles = createStyles(({ css, isDarkMode, token }) => {
 		wrapper: css`
 			width: 100%;
 			height: 100%;
-			background-color: ${isDarkMode ? token.magicColorScales.grey[9] : token.magicColorUsages.white};
+			background-color: ${isDarkMode ? token.delightfulColorScales.grey[9] : token.delightfulColorUsages.white};
 			border-radius: 8px;
 			padding: 12px 100px;
-			color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorUsages.text[1]};
+			color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorUsages.text[1]};
 			overflow-y: auto;
 			.fragment {
 				border-radius: 4px;
 				padding: 8px;
 				&:hover {
-					background-color: ${isDarkMode ? token.magicColorScales.grey[8] : token.magicColorScales.grey[0]};
+					background-color: ${isDarkMode ? token.delightfulColorScales.grey[8] : token.delightfulColorScales.grey[0]};
 
 					.iconEdit {
 						border: 1px solid transparent;
-						color: ${isDarkMode ? token.magicColorUsages.white : token.magicColorScales.grey[4]};
-						background: ${isDarkMode ? token.magicColorScales.grey[4] : token.magicColorUsages.white};
+						color: ${isDarkMode ? token.delightfulColorUsages.white : token.delightfulColorScales.grey[4]};
+						background: ${isDarkMode ? token.delightfulColorScales.grey[4] : token.delightfulColorUsages.white};
 						box-shadow:${
 							isDarkMode
 								? "none"
 								: "0px 4px 14px 0px rgba(0, 0, 0, 0.1), 0px 0px 1px 0px rgba(0, 0, 0, 0.3);"
 						}
 						&:hover {
-							background: ${isDarkMode ? token.magicColorScales.grey[3] : token.magicColorScales.grey[0]};
+							background: ${isDarkMode ? token.delightfulColorScales.grey[3] : token.delightfulColorScales.grey[0]};
 						}
 					}
 				}

@@ -15,11 +15,11 @@ return new class extends Migration {
     public function up(): void
     {
         // 表存在就不执行
-        if (Schema::hasTable('magic_api_premium_endpoint_statistics')) {
+        if (Schema::hasTable('delightful_api_premium_endpoint_statistics')) {
             return;
         }
 
-        Schema::create('magic_api_premium_endpoint_statistics', function (Blueprint $table) {
+        Schema::create('delightful_api_premium_endpoint_statistics', function (Blueprint $table) {
             $table->bigIncrements('id');
             // 这里可以实现对接入点请求的统计逻辑
             // 例如：记录请求次数、请求类型、资源消耗等
@@ -46,6 +46,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_api_premium_endpoint_statistics');
+        Schema::dropIfExists('delightful_api_premium_endpoint_statistics');
     }
 };

@@ -17,7 +17,7 @@ class ProjectForkModel extends AbstractModel
     /**
      * Table name.
      */
-    protected ?string $table = 'magic_super_agent_project_fork';
+    protected ?string $table = 'delightful_super_agent_project_fork';
 
     /**
      * Fillable fields.

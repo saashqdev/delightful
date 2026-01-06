@@ -25,7 +25,7 @@ export const CONVERSATION_MESSAGE_TYPES: (ConversationMessageType | ControlEvent
 	ConversationMessageType.HDImage,
 ]
 
-/** Confirmation message for magic forms */
+/** Confirmation message for delightful forms */
 export const DELIGHTFUL_FORM_CONFIRM_MESSAGE = "[DELIGHTFUL_FORM_CONFIRM]"
 
 /** Conversation message types that can be revoked */

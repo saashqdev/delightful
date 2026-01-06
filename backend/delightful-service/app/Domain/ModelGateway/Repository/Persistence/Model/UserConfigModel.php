@@ -29,7 +29,7 @@ class UserConfigModel extends Model
     use Snowflake;
     use SoftDeletes;
 
-    protected ?string $table = 'magic_api_user_configs';
+    protected ?string $table = 'delightful_api_user_configs';
 
     protected array $fillable = [
         'id', 'user_id', 'app_code', 'organization_code', 'total_amount', 'use_amount', 'rpm',

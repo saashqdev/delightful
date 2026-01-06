@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_environments', function (Blueprint $table) {
+        Schema::table('delightful_environments', function (Blueprint $table) {
             $table->text('extra')->nullable()->comment('扩展字段，比如记录一下这个环境关联的环境 id。（预发布和生产是关联的）');
         });
     }

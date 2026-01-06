@@ -103,7 +103,7 @@ export const DragItem = ({
 					/>
 					<Flex gap={4} align="center">
 						{isSortable ? (
-							<div className={styles.magicIcon}>
+							<div className={styles.delightfulIcon}>
 								<IconSparkles size={18} color="#fff" />
 							</div>
 						) : (

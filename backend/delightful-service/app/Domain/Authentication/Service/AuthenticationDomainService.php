@@ -22,7 +22,7 @@ readonly class AuthenticationDomainService
 {
     public function __construct(
         private AuthenticationRepositoryInterface $authenticationRepository,
-        private DelightfulTokenRepositoryInterface $magicTokenRepository,
+        private DelightfulTokenRepositoryInterface $delightfulTokenRepository,
         private PasswordService $passwordService
     ) {
     }
@@ -49,9 +49,9 @@ readonly class AuthenticationDomainService
     /**
      * 在组织中查找用户.
      */
-    public function findUserInOrganization(string $magicId, ?string $organizationCode = null): ?DelightfulUserEntity
+    public function findUserInOrganization(string $delightfulId, ?string $organizationCode = null): ?DelightfulUserEntity
     {
-        return $this->authenticationRepository->findUserByDelightfulIdAndOrganization($magicId, $organizationCode);
+        return $this->authenticationRepository->findUserByDelightfulIdAndOrganization($delightfulId, $organizationCode);
     }
 
     /**
@@ -60,18 +60,18 @@ readonly class AuthenticationDomainService
      * 由于麦吉支持其他账号体系的接入，因此前端的流程的是，先去某个账号体系登录，再由麦吉做登录校验。
      * 因此，即使使用麦吉自己的账号体系，也需要遵守这个流程。
      */
-    public function generateAccountToken(string $magicId): string
+    public function generateAccountToken(string $delightfulId): string
     {
         // 写入 token 表
         $authorization = IdGenerator::getUniqueIdSha256();
-        $magicTokenEntity = new DelightfulTokenEntity();
-        $magicTokenEntity->setType(DelightfulTokenType::Account);
-        $magicTokenEntity->setTypeRelationValue($magicId);
-        $magicTokenEntity->setToken($authorization);
+        $delightfulTokenEntity = new DelightfulTokenEntity();
+        $delightfulTokenEntity->setType(DelightfulTokenType::Account);
+        $delightfulTokenEntity->setTypeRelationValue($delightfulId);
+        $delightfulTokenEntity->setToken($authorization);
         // 默认 30 天
         $carbon = Carbon::now()->addDays(30);
-        $magicTokenEntity->setExpiredAt($carbon->toDateTimeString());
-        $this->magicTokenRepository->createToken($magicTokenEntity);
+        $delightfulTokenEntity->setExpiredAt($carbon->toDateTimeString());
+        $this->delightfulTokenRepository->createToken($delightfulTokenEntity);
         return $authorization;
     }
 }

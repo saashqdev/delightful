@@ -14,7 +14,7 @@ class FileCleanupRecordModel extends AbstractModel
 {
     use Snowflake;
 
-    protected ?string $table = 'magic_file_cleanup_records';
+    protected ?string $table = 'delightful_file_cleanup_records';
 
     /**
      * 可批量赋值的属性.

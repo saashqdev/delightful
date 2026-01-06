@@ -6,7 +6,7 @@ import i18next from "i18next";
 export const timeSelectOptions = [
 	{
 		id: TimeSelectType.Today,
-		label: i18next.t("common.today", { ns: "magicFlow" }),
+		label: i18next.t("common.today", { ns: "delightfulFlow" }),
 		value: {
 			type: TimeSelectType.Today,
 			value: ""
@@ -14,7 +14,7 @@ export const timeSelectOptions = [
 	},
 	{
 		id: TimeSelectType.Tomorrow,
-		label: i18next.t("common.tomorrow", { ns: "magicFlow" }),
+		label: i18next.t("common.tomorrow", { ns: "delightfulFlow" }),
 		value: {
 			type: TimeSelectType.Tomorrow,
 			value: ""
@@ -22,7 +22,7 @@ export const timeSelectOptions = [
 	},
 	{
 		id: TimeSelectType.Yesterday,
-		label: i18next.t("common.yesterday", { ns: "magicFlow" }),
+		label: i18next.t("common.yesterday", { ns: "delightfulFlow" }),
 		value: {
 			type: TimeSelectType.Yesterday,
 			value: ""
@@ -30,7 +30,7 @@ export const timeSelectOptions = [
 	},
 	{
 		id: TimeSelectType.TriggerTime,
-		label: i18next.t("common.triggerTime", { ns: "magicFlow" }),
+		label: i18next.t("common.triggerTime", { ns: "delightfulFlow" }),
 		value: {
 			type: TimeSelectType.TriggerTime,
 			value: ""

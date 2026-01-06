@@ -43,7 +43,7 @@ export const SchemaItemWrap = styled.div`
 		align-items: center;
 		padding-top: 10px;
 		padding-left: 6px;
-		.magic-checkbox-inner,input {
+		.delightful-checkbox-inner,input {
 			width: 14px;
 			height: 14px;
 		}
@@ -62,7 +62,7 @@ interface SchemaItemRowProps extends RowProps {
 export const SchemaItemRow = styled(Row)<SchemaItemRowProps>`
     position: relative;
     gap: 10px;
-    >.magic-col {
+    >.delightful-col {
         margin: 0!important;
         &:not(:first-child) {
             padding: 0!important;

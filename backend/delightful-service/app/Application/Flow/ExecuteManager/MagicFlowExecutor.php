@@ -59,26 +59,26 @@ class DelightfulFlowExecutor
 
     private bool $success = true;
 
-    private DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity;
+    private DelightfulFlowExecuteLogEntity $delightfulFlowExecuteLogEntity;
 
-    private DelightfulFlowExecuteLogDomainService $magicFlowExecuteLogDomainService;
+    private DelightfulFlowExecuteLogDomainService $delightfulFlowExecuteLogDomainService;
 
     private LockerInterface $locker;
 
     private bool $inLoop = false;
 
     public function __construct(
-        private readonly DelightfulFlowEntity $magicFlowEntity,
+        private readonly DelightfulFlowEntity $delightfulFlowEntity,
         private readonly ExecutionData $executionData,
         private bool $async = false,
         ?DelightfulFlowExecuteLogEntity $lastDelightfulFlowExecuteLogEntity = null,
     ) {
         if ($lastDelightfulFlowExecuteLogEntity) {
-            $this->magicFlowExecuteLogEntity = $lastDelightfulFlowExecuteLogEntity;
+            $this->delightfulFlowExecuteLogEntity = $lastDelightfulFlowExecuteLogEntity;
         }
         $this->locker = di(LockerInterface::class);
         $this->logger = ApplicationContext::getContainer()->get(LoggerFactory::class)->get('DelightfulFlowExecutor');
-        $this->magicFlowExecuteLogDomainService = di(DelightfulFlowExecuteLogDomainService::class);
+        $this->delightfulFlowExecuteLogDomainService = di(DelightfulFlowExecuteLogDomainService::class);
         $this->init();
     }
 
@@ -91,7 +91,7 @@ class DelightfulFlowExecutor
     {
         // 真正开始执行时，才会产生执行 id
         $this->createExecuteLog();
-        $this->executorId = (string) $this->magicFlowExecuteLogEntity->getId();
+        $this->executorId = (string) $this->delightfulFlowExecuteLogEntity->getId();
 
         if ($this->async) {
             Coroutine::defer(function () use ($appointTriggerType) {
@@ -108,9 +108,9 @@ class DelightfulFlowExecutor
         $args['appoint_trigger_type'] = $appointTriggerType;
         try {
             $this->begin($args);
-            if ($this->magicFlowEntity->hasCallback()) {
+            if ($this->delightfulFlowEntity->hasCallback()) {
                 $result = $this->executeCallback();
-                $this->magicFlowEntity->setCallbackResult($result);
+                $this->delightfulFlowEntity->setCallbackResult($result);
                 return $result;
             }
             return $this->dag->run($args);
@@ -124,9 +124,9 @@ class DelightfulFlowExecutor
         return $this->success;
     }
 
-    public function setDelightfulFlowExecuteLogEntity(DelightfulFlowExecuteLogEntity $magicFlowExecuteLogEntity): void
+    public function setDelightfulFlowExecuteLogEntity(DelightfulFlowExecuteLogEntity $delightfulFlowExecuteLogEntity): void
     {
-        $this->magicFlowExecuteLogEntity = $magicFlowExecuteLogEntity;
+        $this->delightfulFlowExecuteLogEntity = $delightfulFlowExecuteLogEntity;
     }
 
     public function getExecutorId(): string
@@ -141,10 +141,10 @@ class DelightfulFlowExecutor
 
     protected function init(): void
     {
-        if (! $this->magicFlowEntity->hasCallback()) {
+        if (! $this->delightfulFlowEntity->hasCallback()) {
             $this->handleWaitMessage();
             $this->dag = new Dag();
-            $this->addNodes($this->magicFlowEntity);
+            $this->addNodes($this->delightfulFlowEntity);
             $this->addEdges();
             $this->checkCircularDependencies();
         } else {
@@ -159,13 +159,13 @@ class DelightfulFlowExecutor
             $this->executionData->setStream(false, '');
         }
         if (empty($this->executionData->getAgentId())) {
-            $this->executionData->setAgentId($this->magicFlowEntity->getAgentId());
+            $this->executionData->setAgentId($this->delightfulFlowEntity->getAgentId());
         }
         if (empty($this->executionData->getDelightfulFlowEntity())) {
-            $this->executionData->setDelightfulFlowEntity($this->magicFlowEntity);
+            $this->executionData->setDelightfulFlowEntity($this->delightfulFlowEntity);
         }
         if (! ExecutionFlowCollector::get($this->executionData->getUniqueId())) {
-            ExecutionFlowCollector::add($this->executionData->getUniqueId(), $this->magicFlowEntity);
+            ExecutionFlowCollector::add($this->executionData->getUniqueId(), $this->delightfulFlowEntity);
         }
     }
 
@@ -194,9 +194,9 @@ class DelightfulFlowExecutor
         }
 
         $this->executionData->setFlowCode(
-            $this->magicFlowEntity->getCode(),
-            $this->magicFlowEntity->getVersionCode(),
-            $this->magicFlowEntity->getCreator()
+            $this->delightfulFlowEntity->getCode(),
+            $this->delightfulFlowEntity->getVersionCode(),
+            $this->delightfulFlowEntity->getCreator()
         );
 
         // 为了在运行中，给有需要获取当前流程的节点使用
@@ -263,7 +263,7 @@ class DelightfulFlowExecutor
                     'conversation_id' => $this->executionData->getOriginConversationId(),
                 ],
                 TriggerType::ParamCall => [
-                    'result' => $this->magicFlowEntity->getResult(false),
+                    'result' => $this->delightfulFlowEntity->getResult(false),
                     'conversation_id' => $this->executionData->getOriginConversationId(),
                 ],
                 default => [],
@@ -296,7 +296,7 @@ class DelightfulFlowExecutor
                 'elapsed_time' => (string) Functions::calculateElapsedTime($startTime, microtime(true)),
                 'success' => $this->success,
                 'flow_code' => $this->executionData->getFlowCode(),
-                'end_node' => $this->magicFlowEntity->getEndNode()?->getNodeId(),
+                'end_node' => $this->delightfulFlowEntity->getEndNode()?->getNodeId(),
             ]
         );
         $this->locker->release($this->getLockerKey(), $this->executorId);
@@ -338,10 +338,10 @@ class DelightfulFlowExecutor
 
     protected function executeCallback(): array
     {
-        $result = $this->magicFlowEntity->getCallback()($this->executionData);
+        $result = $this->delightfulFlowEntity->getCallback()($this->executionData);
         if (is_array($result)) {
             // 得把结果赋值到结束节点上面
-            $this->executionData->saveNodeContext($this->magicFlowEntity->getEndNode()->getNodeId(), $result);
+            $this->executionData->saveNodeContext($this->delightfulFlowEntity->getEndNode()->getNodeId(), $result);
         }
         if (! is_array($result)) {
             return [];
@@ -355,11 +355,11 @@ class DelightfulFlowExecutor
         $lastWaitMessageEntity = $waitMessageDomainService->getLastWaitMessage(
             $this->executionData->getDataIsolation(),
             $this->executionData->getConversationId(),
-            $this->magicFlowEntity->getCode(),
-            $this->magicFlowEntity->getVersionCode()
+            $this->delightfulFlowEntity->getCode(),
+            $this->delightfulFlowEntity->getVersionCode()
         );
         if ($lastWaitMessageEntity) {
-            $waitNode = $this->magicFlowEntity->getNodeById($lastWaitMessageEntity->getWaitNodeId());
+            $waitNode = $this->delightfulFlowEntity->getNodeById($lastWaitMessageEntity->getWaitNodeId());
             if (! $waitNode) {
                 di(DelightfulFlowWaitMessageDomainService::class)->handled(
                     $this->executionData->getDataIsolation(),
@@ -376,14 +376,14 @@ class DelightfulFlowExecutor
 
     private function createExecuteLog(): void
     {
-        if (! empty($this->magicFlowExecuteLogEntity)) {
+        if (! empty($this->delightfulFlowExecuteLogEntity)) {
             return;
         }
         $executeLog = new DelightfulFlowExecuteLogEntity();
         $executeLog->setExecuteDataId($this->executionData->getId());
         $executeLog->setConversationId($this->executionData->getConversationId());
-        $executeLog->setFlowCode($this->magicFlowEntity->getCode());
-        $executeLog->setFlowVersionCode($this->magicFlowEntity->getVersionCode());
+        $executeLog->setFlowCode($this->delightfulFlowEntity->getCode());
+        $executeLog->setFlowVersionCode($this->delightfulFlowEntity->getVersionCode());
         $executeLog->setExtParams([
             'appoint_root_id' => $this->appointRootId,
             'wait_message_id' => $this->waitMessageId,
@@ -394,34 +394,34 @@ class DelightfulFlowExecutor
         $executeLog->setParentFlowCode($this->executionData->getParentFlowCode());
         $executeLog->setOperatorId($this->executionData->getOperator()->getUid());
         $executeLog->setLevel($this->executionData->getLevel());
-        $executeLog->setFlowType($this->magicFlowEntity->getType()->value);
+        $executeLog->setFlowType($this->delightfulFlowEntity->getType()->value);
         $executeLog->setExecutionType($this->executionData->getExecutionType()->value);
-        $this->magicFlowExecuteLogEntity = $this->magicFlowExecuteLogDomainService->create($this->executionData->getDataIsolation(), $executeLog);
+        $this->delightfulFlowExecuteLogEntity = $this->delightfulFlowExecuteLogDomainService->create($this->executionData->getDataIsolation(), $executeLog);
     }
 
     private function updateStatus(ExecuteLogStatus $status, array $result = []): void
     {
-        if (! isset($this->magicFlowExecuteLogEntity)) {
+        if (! isset($this->delightfulFlowExecuteLogEntity)) {
             return;
         }
-        if ($status === $this->magicFlowExecuteLogEntity->getStatus()) {
+        if ($status === $this->delightfulFlowExecuteLogEntity->getStatus()) {
             return;
         }
-        $this->magicFlowExecuteLogEntity->setStatus($status);
-        $this->magicFlowExecuteLogEntity->setResult($result);
-        $this->magicFlowExecuteLogDomainService->updateStatus($this->executionData->getDataIsolation(), $this->magicFlowExecuteLogEntity);
+        $this->delightfulFlowExecuteLogEntity->setStatus($status);
+        $this->delightfulFlowExecuteLogEntity->setResult($result);
+        $this->delightfulFlowExecuteLogDomainService->updateStatus($this->executionData->getDataIsolation(), $this->delightfulFlowExecuteLogEntity);
     }
 
     private function checkCircularDependencies(): void
     {
         if ($this->dag->checkCircularDependencies()) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.executor.has_circular_dependencies', ['label' => $this->magicFlowEntity->getName()]);
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.executor.has_circular_dependencies', ['label' => $this->delightfulFlowEntity->getName()]);
         }
     }
 
-    private function addNodes(DelightfulFlowEntity $magicFlowEntity): void
+    private function addNodes(DelightfulFlowEntity $delightfulFlowEntity): void
     {
-        foreach ($magicFlowEntity->getNodes() as $node) {
+        foreach ($delightfulFlowEntity->getNodes() as $node) {
             // 跳过在循环体中的节点
             if ($node->getParentId()) {
                 continue;
@@ -458,9 +458,9 @@ class DelightfulFlowExecutor
                 // 默认是要调度下一级的，如果不需要调度，在具体的执行中可以设置为[]
                 $vertexResult->setChildrenIds($childrenIds);
                 // 添加 flow
-                $frontResults['current_flow_entity'] = $this->magicFlowEntity;
+                $frontResults['current_flow_entity'] = $this->delightfulFlowEntity;
                 $frontResults['isThrowException'] = false;
-                Context::set('current_flow_entity.' . $executionData->getUniqueId(), $this->magicFlowEntity);
+                Context::set('current_flow_entity.' . $executionData->getUniqueId(), $this->delightfulFlowEntity);
                 NodeRunnerFactory::make($node)->execute($vertexResult, $executionData, $frontResults);
                 $this->handledNode($node, $vertexResult);
                 return $vertexResult;
@@ -485,7 +485,7 @@ class DelightfulFlowExecutor
             $this->dag->addVertex($vertex);
         }
         if (! $this->rootId) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.executor.no_start_node', ['label' => $magicFlowEntity->getName()]);
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.executor.no_start_node', ['label' => $delightfulFlowEntity->getName()]);
         }
     }
 
@@ -515,22 +515,22 @@ class DelightfulFlowExecutor
         if (! $this->executionData->isTop() || $this->inLoop) {
             return;
         }
-        if (isset($this->magicFlowExecuteLogEntity)) {
+        if (isset($this->delightfulFlowExecuteLogEntity)) {
             $fromCoroutineId = Coroutine::id();
             Coroutine::create(function () use ($fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
 
                 // 利用自旋锁来控制只有一个在保存
-                if (! $this->locker->spinLock($this->getLockerKey() . ':archive', $this->magicFlowExecuteLogEntity->getExecuteDataId(), 20)) {
+                if (! $this->locker->spinLock($this->getLockerKey() . ':archive', $this->delightfulFlowExecuteLogEntity->getExecuteDataId(), 20)) {
                     ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'archive file failed');
                 }
 
                 FlowExecutorArchiveCloud::put(
                     organizationCode: $this->executionData->getDataIsolation()->getCurrentOrganizationCode(),
-                    key: $this->magicFlowExecuteLogEntity->getExecuteDataId(),
+                    key: $this->delightfulFlowExecuteLogEntity->getExecuteDataId(),
                     data: [
                         'execution_data' => $this->executionData,
-                        'magic_flow' => $this->magicFlowEntity,
+                        'delightful_flow' => $this->delightfulFlowEntity,
                     ]
                 );
 

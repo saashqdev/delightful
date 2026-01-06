@@ -114,12 +114,12 @@ abstract class AbstractRequestDTO extends AbstractEntity implements ProxyModelRe
 
     public function getTopicId(): ?string
     {
-        return $this->getHeaderConfig('magic-topic-id') ?? '';
+        return $this->getHeaderConfig('delightful-topic-id') ?? '';
     }
 
     public function getTaskId(): ?string
     {
-        return $this->getHeaderConfig('magic-task-id');
+        return $this->getHeaderConfig('delightful-task-id');
     }
 
     public function isEnableHighAvailability(): bool
@@ -134,29 +134,29 @@ abstract class AbstractRequestDTO extends AbstractEntity implements ProxyModelRe
 
     private function formatHeaderBusinessParams(array $headerConfigs): void
     {
-        if (isset($headerConfigs['magic-organization-id'])) {
-            $this->businessParams['organization_id'] = $headerConfigs['magic-organization-id'];
+        if (isset($headerConfigs['delightful-organization-id'])) {
+            $this->businessParams['organization_id'] = $headerConfigs['delightful-organization-id'];
         }
-        if (isset($headerConfigs['magic-organization-code'])) {
-            $this->businessParams['organization_id'] = $headerConfigs['magic-organization-code'];
+        if (isset($headerConfigs['delightful-organization-code'])) {
+            $this->businessParams['organization_id'] = $headerConfigs['delightful-organization-code'];
         }
-        if (isset($headerConfigs['magic-user-id'])) {
-            $this->businessParams['user_id'] = $headerConfigs['magic-user-id'];
+        if (isset($headerConfigs['delightful-user-id'])) {
+            $this->businessParams['user_id'] = $headerConfigs['delightful-user-id'];
         }
         if (isset($headerConfigs['business_id'])) {
             $this->businessParams['business_id'] = $headerConfigs['business_id'];
         }
-        if (isset($headerConfigs['magic-topic-id'])) {
-            $this->businessParams['magic_topic_id'] = $headerConfigs['magic-topic-id'];
+        if (isset($headerConfigs['delightful-topic-id'])) {
+            $this->businessParams['delightful_topic_id'] = $headerConfigs['delightful-topic-id'];
         }
-        if (isset($headerConfigs['magic-chat-topic-id'])) {
-            $this->businessParams['magic_chat_topic_id'] = $headerConfigs['magic-chat-topic-id'];
+        if (isset($headerConfigs['delightful-chat-topic-id'])) {
+            $this->businessParams['delightful_chat_topic_id'] = $headerConfigs['delightful-chat-topic-id'];
         }
-        if (isset($headerConfigs['magic-task-id'])) {
-            $this->businessParams['magic_task_id'] = $headerConfigs['magic-task-id'];
+        if (isset($headerConfigs['delightful-task-id'])) {
+            $this->businessParams['delightful_task_id'] = $headerConfigs['delightful-task-id'];
         }
-        if (isset($headerConfigs['magic-language'])) {
-            $this->businessParams['language'] = $headerConfigs['magic-language'];
+        if (isset($headerConfigs['delightful-language'])) {
+            $this->businessParams['language'] = $headerConfigs['delightful-language'];
         }
     }
 }

@@ -28,9 +28,9 @@ export const useStyles = createStyles(({css, prefixCls, token, isDarkMode}) => {
 			}
 
 			.${ prefixCls }-collapse-header {
-				background-color: ${ isDarkMode ? token.magicColorScales.grey[1] : token.magicColorScales.grey[0] };
+				background-color: ${ isDarkMode ? token.delightfulColorScales.grey[1] : token.delightfulColorScales.grey[0] };
 				padding: 12px 20px;
-				color: ${ token.magicColorScales.grey[1] };
+				color: ${ token.delightfulColorScales.grey[1] };
 				font-size: 16px;
 				font-weight: 600;
 				line-height: 22px;
@@ -38,7 +38,7 @@ export const useStyles = createStyles(({css, prefixCls, token, isDarkMode}) => {
 
 			.${ prefixCls }-collapse-content-box {
 				padding: 0 !important;
-				background-color: ${ isDarkMode ? token.magicColorScales.grey[0] : token.magicColorUsages.white };
+				background-color: ${ isDarkMode ? token.delightfulColorScales.grey[0] : token.delightfulColorUsages.white };
 			}
 		`,
 	}

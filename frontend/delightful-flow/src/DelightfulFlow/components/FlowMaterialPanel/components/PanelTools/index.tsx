@@ -38,7 +38,7 @@ export default function PanelTools() {
 						)
 					})}
 				{(tools?.groupList || []).length === 0 && (
-					<Empty description={i18next.t("flow.withoutToolsTips", { ns: "magicFlow" })} />
+					<Empty description={i18next.t("flow.withoutToolsTips", { ns: "delightfulFlow" })} />
 				)}
 			</div>
 		</div>

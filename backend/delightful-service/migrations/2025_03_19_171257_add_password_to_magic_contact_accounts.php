@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('magic_contact_accounts', function (Blueprint $table) {
+        Schema::table('delightful_contact_accounts', function (Blueprint $table) {
             $table->string('password', 128)->comment('密码')->default('');
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('magic_contact_accounts', function (Blueprint $table) {
+        Schema::table('delightful_contact_accounts', function (Blueprint $table) {
             $table->dropColumn('password');
         });
     }

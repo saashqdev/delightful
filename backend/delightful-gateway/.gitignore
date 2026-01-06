@@ -5,7 +5,7 @@ config/pre/.env
 config/prod/.env
 config/test/.env
 redis_data
-magic-gateway
+delightful-gateway
 api-gateway
 redis_data
 .cursor/

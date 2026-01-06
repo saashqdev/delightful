@@ -24,14 +24,14 @@ const useStyles = createStyles(
         `}
 
 				&:hover {
-					background: ${token.magicColorUsages.fill[0]};
+					background: ${token.delightfulColorUsages.fill[0]};
 				}
 			`,
 			active: css`
 				color: ${isDarkMode ? token.colorWhite : token.colorPrimary};
 				background: ${isDarkMode
-					? token.magicColorScales.brand[1]
-					: token.magicColorScales.brand[0]};
+					? token.delightfulColorScales.brand[1]
+					: token.delightfulColorScales.brand[0]};
 			`,
 		}
 	},

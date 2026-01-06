@@ -19,9 +19,9 @@ use Throwable;
 class ClientMessage extends AbstractEntity
 {
     // 服务端生成的消息唯一id，全局唯一。用于撤回、编辑消息。
-    protected string $magicMessageId;
+    protected string $delightfulMessageId;
 
-    // 客户端生成，需要ios/安卓/web三端共同确定一个生成算法。用于告知客户端，magic_message_id的由来
+    // 客户端生成，需要ios/安卓/web三端共同确定一个生成算法。用于告知客户端，delightful_message_id的由来
     protected ?string $appMessageId;
 
     // 话题id
@@ -37,7 +37,7 @@ class ClientMessage extends AbstractEntity
     // 消息发送者,自己或者他人
     protected string $senderId;
 
-    // 消息发送时间，与 magic_message_id 一起，用于撤回、编辑消息时的唯一性校验。
+    // 消息发送时间，与 delightful_message_id 一起，用于撤回、编辑消息时的唯一性校验。
     protected int $sendTime;
 
     // 聊天消息状态:unread | seen | read |revoked  .对应中文释义：未读|已读|已查看（非纯文本的复杂类型消息，用户点击了详情）  | 撤回
@@ -61,7 +61,7 @@ class ClientMessage extends AbstractEntity
     public function toArray(bool $filterNull = false): array
     {
         return [
-            'magic_message_id' => $this->getDelightfulMessageId(),
+            'delightful_message_id' => $this->getDelightfulMessageId(),
             'app_message_id' => $this->getAppMessageId(),
             'topic_id' => $this->getTopicId(),
             'type' => $this->getType(),
@@ -76,12 +76,12 @@ class ClientMessage extends AbstractEntity
 
     public function getDelightfulMessageId(): string
     {
-        return $this->magicMessageId ?? '';
+        return $this->delightfulMessageId ?? '';
     }
 
-    public function setDelightfulMessageId(string $magicMessageId): void
+    public function setDelightfulMessageId(string $delightfulMessageId): void
     {
-        $this->magicMessageId = $magicMessageId;
+        $this->delightfulMessageId = $delightfulMessageId;
     }
 
     public function getAppMessageId(): ?string

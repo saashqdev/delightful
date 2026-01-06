@@ -11,7 +11,7 @@ import type { SeqResponse } from "@/types/request"
 import { generateText, generateHTML } from "@tiptap/core"
 import StarterKit from "@tiptap/starter-kit"
 import { memoize } from "lodash-es"
-import DelightfulEmojiNode from "@/opensource/components/base/DelightfulRichEditor/extensions/magicEmoji"
+import DelightfulEmojiNode from "@/opensource/components/base/DelightfulRichEditor/extensions/delightfulEmoji"
 import MentionExtension from "@/opensource/components/base/DelightfulRichEditor/extensions/mention"
 import DelightfulEmoji from "@/opensource/components/base/DelightfulEmoji"
 import { emojiFilePathCache } from "@/opensource/components/base/DelightfulEmojiPanel/cache"
@@ -104,7 +104,7 @@ const createDelightfulEmojiRegex = memoize(() => {
 })
 
 // 使用缓存的正则表达式
-export const magicEmojiRegex = createDelightfulEmojiRegex()
+export const delightfulEmojiRegex = createDelightfulEmojiRegex()
 
 /**
  * 递归查找并替换表情符号
@@ -113,10 +113,10 @@ export const magicEmojiRegex = createDelightfulEmojiRegex()
 const findAndReplaceDelightfulEmoji = (content?: string) => {
 	if (!content) return content
 
-	const splitArray = extractSourcePlaceholders(content, magicEmojiRegex)
+	const splitArray = extractSourcePlaceholders(content, delightfulEmojiRegex)
 	return splitArray.map((item) => {
 		// 检查是否是表情符号格式
-		if (item.match(magicEmojiRegex)) {
+		if (item.match(delightfulEmojiRegex)) {
 			// 提取表情符号代码 (去掉前后的方括号)
 			const code = item.slice(1, -1)
 			// 如果是有效的表情符号代码，返回对应的组件

@@ -6,10 +6,10 @@ export const JsonSchemaEditorWrap = styled.div`
     color: #1C1D2399;
 
 	
-	.magic-input-group-wrapper {
+	.delightful-input-group-wrapper {
 		&:hover {
 			background: transparent;
-			.magic-input-group-addon {
+			.delightful-input-group-addon {
 				background: rgba(46, 47, 56, 0.04);
 				cursor: pointer;
 				&:hover {
@@ -61,7 +61,7 @@ export const JsonSchemaEditorWrap = styled.div`
 			align-items: center;
 			padding-left: 6px;
 			visibility: hidden;
-			.magic-checkbox-inner,input {
+			.delightful-checkbox-inner,input {
 				width: 14px;
 				height: 14px;
 			}

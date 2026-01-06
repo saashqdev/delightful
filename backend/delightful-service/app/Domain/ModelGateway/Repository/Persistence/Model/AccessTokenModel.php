@@ -40,7 +40,7 @@ class AccessTokenModel extends Model
     use Snowflake;
     use SoftDeletes;
 
-    protected ?string $table = 'magic_api_access_tokens';
+    protected ?string $table = 'delightful_api_access_tokens';
 
     protected array $fillable = [
         'id', 'type', 'access_token', 'encrypted_access_token', 'relation_id', 'name', 'description', 'models', 'ip_limit',

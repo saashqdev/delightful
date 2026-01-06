@@ -66,15 +66,15 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     public function __construct(
         Sender $sender,
         SidProviderInterface $sidProvider,
-        private readonly DelightfulChatMessageAppService $magicChatMessageAppService,
+        private readonly DelightfulChatMessageAppService $delightfulChatMessageAppService,
         private readonly ValidatorFactoryInterface $validatorFactory,
         private readonly StdoutLoggerInterface $logger,
         private readonly SocketIOConfig $config,
         private readonly Redis $redis,
         private readonly Timer $timer,
         private readonly AuthManager $authManager,
-        private readonly DelightfulControlMessageAppService $magicControlMessageAppService,
-        private readonly DelightfulIntermediateMessageAppService $magicIntermediateMessageAppService,
+        private readonly DelightfulControlMessageAppService $delightfulControlMessageAppService,
+        private readonly DelightfulIntermediateMessageAppService $delightfulIntermediateMessageAppService,
         private readonly TranslatorInterface $translator
     ) {
         $this->config->setPingTimeout(2000); // ping 超时
@@ -110,17 +110,17 @@ class DelightfulChatWebSocketApi extends BaseNamespace
         }
         $this->setLocale($params['context']['language'] ?? '');
         try {
-            // 使用 magicChatContract 校验参数
+            // 使用 delightfulChatContract 校验参数
             $context = new DelightfulContext($params['context']);
             // 兼容历史版本,从query中获取token
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
-            $this->magicChatMessageAppService->setUserContext($userToken, $context);
+            $this->delightfulChatMessageAppService->setUserContext($userToken, $context);
             // 调用 guard 获取用户信息
             $userAuthorization = $this->getAuthorization();
             // 将账号的所有设备加入同一个房间
-            $this->magicChatMessageAppService->joinRoom($userAuthorization, $socket);
+            $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return ['type' => 'user', 'user' => [
-                'magic_id' => $userAuthorization->getDelightfulId(),
+                'delightful_id' => $userAuthorization->getDelightfulId(),
                 'user_id' => $userAuthorization->getId(),
                 'status' => $userAuthorization->getStatus(),
                 'nickname' => $userAuthorization->getNickname(),
@@ -172,16 +172,16 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->relationAppMsgIdAndRequestId($params['data']['message']['app_message_id'] ?? '');
             $this->checkParams($appendRules, $params);
             $this->setLocale($params['context']['language'] ?? '');
-            // 使用 magicChatContract 校验参数
+            // 使用 delightfulChatContract 校验参数
             $controlRequest = new ControlRequest($params);
             // 兼容历史版本,从query中获取token
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
-            $this->magicChatMessageAppService->setUserContext($userToken, $controlRequest->getContext());
+            $this->delightfulChatMessageAppService->setUserContext($userToken, $controlRequest->getContext());
             // 获取用户信息
             $userAuthorization = $this->getAuthorization();
             // 根据消息类型,分发到对应的处理模块
             $messageDTO = MessageAssembler::getControlMessageDTOByRequest($controlRequest, $userAuthorization, ConversationType::User);
-            return $this->magicControlMessageAppService->dispatchClientControlMessage($messageDTO, $userAuthorization);
+            return $this->delightfulControlMessageAppService->dispatchClientControlMessage($messageDTO, $userAuthorization);
         } catch (BusinessException $exception) {
             $errMsg = [
                 'file' => $exception->getFile(),
@@ -228,16 +228,16 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->relationAppMsgIdAndRequestId($params['data']['message']['app_message_id'] ?? '');
             $this->checkParams($appendRules, $params);
             $this->setLocale($params['context']['language'] ?? '');
-            # 使用 magicChatContract 校验参数
+            # 使用 delightfulChatContract 校验参数
             $chatRequest = new ChatRequest($params);
             // 兼容历史版本,从query中获取token
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
-            $this->magicChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
+            $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
             // 根据消息类型,分发到对应的处理模块
             $userAuthorization = $this->getAuthorization();
             // 将账号的所有设备加入同一个房间
-            $this->magicChatMessageAppService->joinRoom($userAuthorization, $socket);
-            return $this->magicChatMessageAppService->onChatMessage($chatRequest, $userAuthorization);
+            $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
+            return $this->delightfulChatMessageAppService->onChatMessage($chatRequest, $userAuthorization);
         } catch (BusinessException $businessException) {
             throw $businessException;
         } catch (Throwable $exception) {
@@ -282,16 +282,16 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->relationAppMsgIdAndRequestId($params['data']['message']['app_message_id'] ?? '');
             $this->checkParams($appendRules, $params);
             $this->setLocale($params['context']['language'] ?? '');
-            # 使用 magicChatContract 校验参数
+            # 使用 delightfulChatContract 校验参数
             $chatRequest = new ChatRequest($params);
             // 兼容历史版本,从query中获取token
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
-            $this->magicChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
+            $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
             // 根据消息类型,分发到对应的处理模块
             $userAuthorization = $this->getAuthorization();
             // 将账号的所有设备加入同一个房间
-            $this->magicChatMessageAppService->joinRoom($userAuthorization, $socket);
-            return $this->magicIntermediateMessageAppService->dispatchClientIntermediateMessage($chatRequest, $userAuthorization);
+            $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
+            return $this->delightfulIntermediateMessageAppService->dispatchClientIntermediateMessage($chatRequest, $userAuthorization);
         } catch (BusinessException $businessException) {
             throw $businessException;
         } catch (Throwable $exception) {
@@ -321,7 +321,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
 
     private function checkParams(array $appendRules, array $params): void
     {
-        $rules = $this->magicControlMessageAppService->getCommonRules();
+        $rules = $this->delightfulControlMessageAppService->getCommonRules();
         $rules = array_merge($rules, $appendRules);
         $validator = $this->validatorFactory->make($params, $rules);
         if ($validator->fails()) {
@@ -351,10 +351,10 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->timer->tick(
                 5,
                 function () {
-                    if (! $this->redis->set('magic-im:subscribe:keepalive', '1', ['ex' => 5, 'nx'])) {
+                    if (! $this->redis->set('delightful-im:subscribe:keepalive', '1', ['ex' => 5, 'nx'])) {
                         return;
                     }
-                    SocketIOUtil::sendIntermediate(SocketEventType::Chat, 'magic-im:subscribe:keepalive', ControlMessageType::Ping->value);
+                    SocketIOUtil::sendIntermediate(SocketEventType::Chat, 'delightful-im:subscribe:keepalive', ControlMessageType::Ping->value);
 
                     $producer = ApplicationContext::getContainer()->get(Producer::class);
                     // 对所有队列投一条消息,以保活链接/队列
@@ -370,7 +370,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
                         $producer->produce($messagePush);
                     }
                 },
-                'magic-im:subscribe:keepalive'
+                'delightful-im:subscribe:keepalive'
             );
         });
     }

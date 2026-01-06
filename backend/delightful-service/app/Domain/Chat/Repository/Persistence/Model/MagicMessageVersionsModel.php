@@ -17,7 +17,7 @@ class DelightfulMessageVersionsModel extends Model
     /**
      * The table associated with the model.
      */
-    protected ?string $table = 'magic_chat_message_versions';
+    protected ?string $table = 'delightful_chat_message_versions';
 
     /**
      * The connection name for the model.
@@ -29,7 +29,7 @@ class DelightfulMessageVersionsModel extends Model
      */
     protected array $fillable = [
         'version_id',
-        'magic_message_id',
+        'delightful_message_id',
         'message_content',
         'message_type',
         'created_at',

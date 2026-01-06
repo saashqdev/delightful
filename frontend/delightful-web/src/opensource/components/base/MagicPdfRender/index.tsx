@@ -99,7 +99,7 @@ function DelightfulPdfRender({
 		return (
 			<div className={styles.container} style={{ height, width }}>
 				<div className={styles.error}>
-					<div>{t("magicPdfRender.status.noFile")}</div>
+					<div>{t("delightfulPdfRender.status.noFile")}</div>
 				</div>
 			</div>
 		)
@@ -136,7 +136,7 @@ function DelightfulPdfRender({
 					<div className={styles.error}>
 						<div>{pdfState.error}</div>
 						<button className={styles.textButton} onClick={pdfActions.reload}>
-							{t("magicPdfRender.status.retry")}
+							{t("delightfulPdfRender.status.retry")}
 						</button>
 					</div>
 				)}

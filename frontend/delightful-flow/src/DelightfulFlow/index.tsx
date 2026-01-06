@@ -289,7 +289,7 @@ const DelightfulFlowComponent = React.forwardRef(
 		)
 
 		// 使用useMemo缓存wrapper样式类名
-		const wrapperClassName = useMemo(() => clsx(styles.magicFlow, `${prefix}magic-flow`), [])
+		const wrapperClassName = useMemo(() => clsx(styles.delightfulFlow, `${prefix}delightful-flow`), [])
 
 		return (
 			<ErrorBoundary

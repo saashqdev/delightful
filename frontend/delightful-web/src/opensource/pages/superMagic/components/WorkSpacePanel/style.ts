@@ -197,12 +197,12 @@ const useStyles = createStyles(({ token }) => ({
 		marginBottom: 6,
 		cursor: "pointer",
 		color: token.colorTextSecondary,
-		backgroundColor: token.magicColorUsages.fill[0],
+		backgroundColor: token.delightfulColorUsages.fill[0],
 		"&:hover": {
-			backgroundColor: token.magicColorUsages.fill[1],
+			backgroundColor: token.delightfulColorUsages.fill[1],
 		},
 		"&:active": {
-			backgroundColor: token.magicColorUsages.fill[2],
+			backgroundColor: token.delightfulColorUsages.fill[2],
 		},
 	},
 	newTopicButtonIcon: {

@@ -9,7 +9,7 @@ export const useStyles = createStyles(({ token }) => {
 			height: 40,
 			padding: "0 16px",
 			gap: 6,
-			backgroundColor: token.magicColorUsages.fill[1],
+			backgroundColor: token.delightfulColorUsages.fill[1],
 		},
 		dot: {
 			width: 10,
@@ -17,13 +17,13 @@ export const useStyles = createStyles(({ token }) => {
 			borderRadius: "50%",
 		},
 		red: {
-			backgroundColor: token.magicColorScales.red[5],
+			backgroundColor: token.delightfulColorScales.red[5],
 		},
 		yellow: {
-			backgroundColor: token.magicColorScales.yellow[5],
+			backgroundColor: token.delightfulColorScales.yellow[5],
 		},
 		green: {
-			backgroundColor: token.magicColorScales.green[5],
+			backgroundColor: token.delightfulColorScales.green[5],
 		},
 	}
 })

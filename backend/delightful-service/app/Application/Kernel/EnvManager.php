@@ -33,10 +33,10 @@ class EnvManager
             $envId = $baseDataIsolation->getEnvId();
         }
 
-        $magicOrganizationEnvDomainService = di(DelightfulOrganizationEnvDomainService::class);
+        $delightfulOrganizationEnvDomainService = di(DelightfulOrganizationEnvDomainService::class);
 
         if (! $envId) {
-            $envDTO = $magicOrganizationEnvDomainService->getOrganizationsEnvironmentDTO($baseDataIsolation->getCurrentOrganizationCode());
+            $envDTO = $delightfulOrganizationEnvDomainService->getOrganizationsEnvironmentDTO($baseDataIsolation->getCurrentOrganizationCode());
             $env = $envDTO?->getDelightfulEnvironmentEntity();
             $envId = $envDTO?->getEnvironmentId() ?? 0;
             $relationEnvIds = $env?->getRelationEnvIds() ?? [];
@@ -45,7 +45,7 @@ class EnvManager
                     if ($relationEnvId === $envId) {
                         continue;
                     }
-                    $relationEnv = $magicOrganizationEnvDomainService->getDelightfulEnvironmentById((int) $relationEnvId);
+                    $relationEnv = $delightfulOrganizationEnvDomainService->getDelightfulEnvironmentById((int) $relationEnvId);
                     if ($relationEnv?->getEnvironment()?->isProduction()) {
                         $env = $relationEnv;
                         break;
@@ -53,7 +53,7 @@ class EnvManager
                 }
             }
         } else {
-            $env = $magicOrganizationEnvDomainService->getDelightfulEnvironmentById($envId);
+            $env = $delightfulOrganizationEnvDomainService->getDelightfulEnvironmentById($envId);
         }
         if (! $env) {
             return;
@@ -77,9 +77,9 @@ class EnvManager
 
     public static function getDelightfulId(string $userId): ?string
     {
-        $magicUserDomainService = di(DelightfulUserDomainService::class);
-        $magicUser = $magicUserDomainService->getByUserId($userId);
-        return $magicUser?->getDelightfulId();
+        $delightfulUserDomainService = di(DelightfulUserDomainService::class);
+        $delightfulUser = $delightfulUserDomainService->getByUserId($userId);
+        return $delightfulUser?->getDelightfulId();
     }
 
     private static function initSubscription(BaseDataIsolation $baseDataIsolation, bool $lazy = true): void

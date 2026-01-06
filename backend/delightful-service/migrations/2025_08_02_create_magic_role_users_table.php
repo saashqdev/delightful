@@ -14,13 +14,13 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (Schema::hasTable('magic_role_users')) {
+        if (Schema::hasTable('delightful_role_users')) {
             return;
         }
-        Schema::create('magic_role_users', static function (Blueprint $table) {
+        Schema::create('delightful_role_users', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('role_id')->comment('角色ID');
-            $table->string('user_id', 64)->comment('用户ID，对应magic_contact_users.user_id');
+            $table->string('user_id', 64)->comment('用户ID，对应delightful_contact_users.user_id');
             $table->string('organization_code', 64)->comment('组织编码');
             $table->string('assigned_by', 64)->nullable()->comment('分配者用户ID');
             $table->timestamp('assigned_at')->nullable()->comment('分配时间');
@@ -40,6 +40,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('magic_role_users');
+        Schema::dropIfExists('delightful_role_users');
     }
 };

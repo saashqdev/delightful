@@ -46,19 +46,19 @@ const OrganizationItem = observer((props: OrganizationItemProps) => {
 			try {
 				interfaceStore.setIsSwitchingOrganization(true)
 				// 账号不一致下要切换账号
-				if (accountInfo?.magic_id !== userInfo?.magic_id) {
+				if (accountInfo?.delightful_id !== userInfo?.delightful_id) {
 					await accountSwitch(
-						accountInfo?.magic_id,
-						organizationInfo.magic_user_id,
-						organizationInfo.magic_organization_code,
+						accountInfo?.delightful_id,
+						organizationInfo.delightful_user_id,
+						organizationInfo.delightful_organization_code,
 					)
 				} else if (
-					organizationInfo?.magic_organization_code !== userInfo?.organization_code
+					organizationInfo?.delightful_organization_code !== userInfo?.organization_code
 				) {
 					try {
 						await userService.switchOrganization(
-							organizationInfo.magic_user_id,
-							organizationInfo.magic_organization_code,
+							organizationInfo.delightful_user_id,
+							organizationInfo.delightful_organization_code,
 							userInfo,
 						)
 					} catch (err) {
@@ -79,7 +79,7 @@ const OrganizationItem = observer((props: OrganizationItemProps) => {
 
 	return (
 		<div
-			key={organization.magic_organization_code}
+			key={organization.delightful_organization_code}
 			onClick={() => switchOrganization(account, organization)}
 			className={cx(styles.item, {
 				[styles.itemDisabled]: disabled,
@@ -108,7 +108,7 @@ const OrganizationItem = observer((props: OrganizationItemProps) => {
 					/>
 				) : (
 					<Badge
-						count={unreadDotsGroupByOrganization[organization.magic_organization_code]}
+						count={unreadDotsGroupByOrganization[organization.delightful_organization_code]}
 					/>
 				)}
 			</Flex>
@@ -153,7 +153,7 @@ function OrganizationListComponent(props: OrganizationListItemProps) {
 					)
 
 					return (
-						<div className={styles.group} key={account.magic_id}>
+						<div className={styles.group} key={account.delightful_id}>
 							<Affix target={() => ref.current}>
 								<div className={styles.groupHeader}>
 									<div className={styles.groupSection}>
@@ -181,16 +181,16 @@ function OrganizationListComponent(props: OrganizationListItemProps) {
 							{account.organizations?.map((organization) => {
 								return (
 									<OrganizationItem
-										key={organization.magic_organization_code}
+										key={organization.delightful_organization_code}
 										onClick={onClose}
 										account={account}
 										disabled={
 											!validOrgs.includes(
-												organization.magic_organization_code,
+												organization.delightful_organization_code,
 											)
 										}
 										isSelected={
-											userInfo?.user_id === organization?.magic_user_id
+											userInfo?.user_id === organization?.delightful_user_id
 										}
 										organization={organization}
 									/>

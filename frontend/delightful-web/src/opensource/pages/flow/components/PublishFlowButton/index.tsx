@@ -48,7 +48,7 @@ export default function PublishFlowButton({
 		const requestParams = {
 			name: formValues.name,
 			description: formValues.description,
-			magic_flow: {
+			delightful_flow: {
 				...shadowedFlow,
 				// @ts-ignore
 				global_variable: flow?.global_variable,

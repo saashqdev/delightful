@@ -7,13 +7,13 @@ export const useStyles = createStyles(({ css, token }) => {
 			min-width: 240px;
 		`,
 		avatar: css`
-			border: 1px solid ${token.magicColorUsages.border};
+			border: 1px solid ${token.delightfulColorUsages.border};
 		`,
 		innerContainer: css`
 			width: 100%;
 		`,
 		title: css`
-			color: ${token.magicColorUsages.text[2]};
+			color: ${token.delightfulColorUsages.text[2]};
 			font-size: 12px;
 			font-style: normal;
 			font-weight: 400;
@@ -21,7 +21,7 @@ export const useStyles = createStyles(({ css, token }) => {
 		`,
 		organizationName: css`
 			overflow: hidden;
-			color: ${token.magicColorUsages.text[1]};
+			color: ${token.delightfulColorUsages.text[1]};
 			text-overflow: ellipsis;
 			font-size: 14px;
 			font-style: normal;
@@ -33,7 +33,7 @@ export const useStyles = createStyles(({ css, token }) => {
 		`,
 		divider: css`
 			width: 100%;
-			border-bottom: 1px solid ${token.magicColorUsages.border};
+			border-bottom: 1px solid ${token.delightfulColorUsages.border};
 		`,
 		departmentPathName: css`
 			overflow: hidden;

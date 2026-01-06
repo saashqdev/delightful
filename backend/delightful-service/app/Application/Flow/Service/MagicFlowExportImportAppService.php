@@ -30,8 +30,8 @@ use Throwable;
 class DelightfulFlowExportImportAppService
 {
     public function __construct(
-        protected DelightfulFlowDomainService $magicFlowDomainService,
-        protected DelightfulFlowToolSetDomainService $magicFlowToolSetDomainService,
+        protected DelightfulFlowDomainService $delightfulFlowDomainService,
+        protected DelightfulFlowToolSetDomainService $delightfulFlowToolSetDomainService,
         protected ConfigInterface $config
     ) {
     }
@@ -43,7 +43,7 @@ class DelightfulFlowExportImportAppService
     public function exportFlow(FlowDataIsolation $dataIsolation, string $flowCode): array
     {
         // 获取主流程
-        $mainFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $flowCode);
+        $mainFlow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $flowCode);
         if (! $mainFlow) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_found', ['label' => $flowCode]);
         }
@@ -153,7 +153,7 @@ class DelightfulFlowExportImportAppService
         }
 
         // 5. 获取并返回导入后的主流程实体
-        $mainFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $newMainFlowId);
+        $mainFlow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $newMainFlowId);
         if (! $mainFlow) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.import.failed', ['label' => $newMainFlowId]);
         }
@@ -179,7 +179,7 @@ class DelightfulFlowExportImportAppService
         $visited[] = $flowCode;
 
         // 获取流程实体
-        $flow = $this->magicFlowDomainService->getByCode($dataIsolation, $flowCode);
+        $flow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $flowCode);
         if (! $flow) {
             return false; // 流程不存在，不构成循环
         }
@@ -343,7 +343,7 @@ class DelightfulFlowExportImportAppService
         // 确保设置为新建流程
         $flowEntity->setId(0); // 设置ID为0表示新建
         $flowEntity->setId(null);
-        $savedFlow = $this->magicFlowDomainService->create($dataIsolation, $flowEntity);
+        $savedFlow = $this->delightfulFlowDomainService->create($dataIsolation, $flowEntity);
         $importReport['created'][] = "创建流程: {$savedFlow->getName()} (ID: {$savedFlow->getCode()})";
 
         return $savedFlow->getCode();
@@ -386,7 +386,7 @@ class DelightfulFlowExportImportAppService
         $toolSetEntity = DelightfulFlowToolSetFactory::arrayToEntity($toolSetData);
 
         // 保存工具集
-        $savedToolSet = $this->magicFlowToolSetDomainService->create($dataIsolation, $toolSetEntity);
+        $savedToolSet = $this->delightfulFlowToolSetDomainService->create($dataIsolation, $toolSetEntity);
         $importReport['created'][] = "创建工具集: {$savedToolSet->getName()} (ID: {$savedToolSet->getCode()})";
 
         // 记录新旧ID的映射关系
@@ -409,7 +409,7 @@ class DelightfulFlowExportImportAppService
             return $name;
         }
         // 检查是否存在同名流程
-        while ($this->magicFlowDomainService->getByName($dataIsolation, $newName, $type)) {
+        while ($this->delightfulFlowDomainService->getByName($dataIsolation, $newName, $type)) {
             $newName = "{$name}__{$counter}";
             ++$counter;
         }
@@ -430,7 +430,7 @@ class DelightfulFlowExportImportAppService
         while (true) {
             $query = new DelightfulFlowToolSetQuery();
             $query->setName($newName);
-            $result = $this->magicFlowToolSetDomainService->queries($dataIsolation, $query, new Page(1, 100));
+            $result = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $query, new Page(1, 100));
 
             $exists = false;
             foreach ($result['list'] as $toolSet) {
@@ -857,7 +857,7 @@ class DelightfulFlowExportImportAppService
         }
 
         // 获取工具集信息
-        $toolSet = $this->magicFlowToolSetDomainService->getByCode($dataIsolation, $toolSetId);
+        $toolSet = $this->delightfulFlowToolSetDomainService->getByCode($dataIsolation, $toolSetId);
         // 标记为已处理
         $processedToolSetIds[] = $toolSetId;
 
@@ -885,7 +885,7 @@ class DelightfulFlowExportImportAppService
                 }
 
                 // 获取子流程
-                $subFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $subFlowId);
+                $subFlow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $subFlowId);
                 if (! $subFlow || $subFlow->getType() !== Type::Sub) {
                     // 子流程不存在或类型不正确，跳过但不报错
                     continue;
@@ -924,7 +924,7 @@ class DelightfulFlowExportImportAppService
                 }
 
                 // 获取工具流程
-                $toolFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $toolId);
+                $toolFlow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $toolId);
                 if (! $toolFlow) {
                     continue;
                 }
@@ -954,7 +954,7 @@ class DelightfulFlowExportImportAppService
 
                         // 处理工具集引用
                         if (! empty($toolSetId) && $toolSetId !== 'not_grouped' && ! in_array($toolSetId, $processedToolSetIds)) {
-                            $toolSet = $this->magicFlowToolSetDomainService->getByCode($dataIsolation, $toolSetId);
+                            $toolSet = $this->delightfulFlowToolSetDomainService->getByCode($dataIsolation, $toolSetId);
                             $processedToolSetIds[] = $toolSetId;
                             $exportData['tool_sets'][$toolSetId] = $toolSet->toArray();
                         }
@@ -965,7 +965,7 @@ class DelightfulFlowExportImportAppService
                         }
 
                         // 获取工具流程
-                        $toolFlow = $this->magicFlowDomainService->getByCode($dataIsolation, $toolId);
+                        $toolFlow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $toolId);
                         if (! $toolFlow || $toolFlow->getType() !== Type::Tools) {
                             // 工具流程不存在或类型不正确，跳过但不报错
                             continue;

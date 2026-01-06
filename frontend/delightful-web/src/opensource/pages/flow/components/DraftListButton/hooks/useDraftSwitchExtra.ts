@@ -26,8 +26,8 @@ export default function useDraftSwitchExtra({ flow, initDraftList }: UseDraftSwi
 		const requestParams = {
 			name: `${flow?.name}_草稿${getCurrentDateTimeString()}`,
 			description: "",
-			magic_flow: {
-				...draftDetail.magic_flow,
+			delightful_flow: {
+				...draftDetail.delightful_flow,
 				// @ts-ignore
 				global_variable: flow?.global_variable,
 			},

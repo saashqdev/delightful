@@ -70,7 +70,7 @@ function useStreamCursor(
 							lastElement.tagName === "TH" ||
 							lastElement.tagName === "TD" ||
 							lastElement.tagName === "BUTTON" ||
-							lastElement?.className?.includes?.("magic-code-copy")
+							lastElement?.className?.includes?.("delightful-code-copy")
 						) {
 							return
 						}

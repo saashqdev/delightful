@@ -20,7 +20,7 @@ body:
       label: Component
       description: Which component/module is experiencing performance issues?
       options:
-        - Super Delightful
+        - Be Delightful
         - Delightful IM (Chat System)
         - Delightful Flow (Workflow System)
         - Delightful Service (Backend API)

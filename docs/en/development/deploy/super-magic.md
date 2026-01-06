@@ -1,6 +1,6 @@
-# Super Delightful Installation and Usage Guide
+# Be Delightful Installation and Usage Guide
 
-This guide will walk you through how to install, configure, and use the Super Delightful service.
+This guide will walk you through how to install, configure, and use the Be Delightful service.
 
 ## Prerequisites
 
@@ -21,14 +21,14 @@ cd magic
 
 ### 2. Configure Environment Files
 
-The Super Delightful service depends on several key configuration files:
+The Be Delightful service depends on several key configuration files:
 
-#### 2.1 Create Super Delightful Configuration File
+#### 2.1 Create Be Delightful Configuration File
 
 ```bash
 cp config/.env_super_magic.example config/.env_super_magic
 ```
-Configure Super Delightful environment variables. You must configure at least one large language model environment variable that supports the OpenAI format for proper functionality.
+Configure Be Delightful environment variables. You must configure at least one large language model environment variable that supports the OpenAI format for proper functionality.
 
 Edit the `config/.env_super_magic` file to configure necessary environment variables:
 
@@ -51,9 +51,9 @@ When running for the first time, the installation script will perform the follow
 3. Detect system architecture and set appropriate platform parameters
 4. Ask about deployment method (local computer deployment or remote server deployment)
 5. If remote server deployment is selected, detect public IP and update related configurations
-6. Ask whether to install Super Delightful service
+6. Ask whether to install Be Delightful service
 
-When prompted "Do you want to install Super Delightful service?", select "1" to install the Super Delightful service.
+When prompted "Do you want to install Be Delightful service?", select "1" to install the Be Delightful service.
 
 ## Usage Guide
 
@@ -71,13 +71,13 @@ When prompted "Do you want to install Super Delightful service?", select "1" to 
 ./bin/magic.sh daemon
 ```
 
-#### Start Only Super Delightful Service (Foreground)
+#### Start Only Be Delightful Service (Foreground)
 
 ```bash
 ./bin/magic.sh super-magic
 ```
 
-#### Start Only Super Delightful Service (Background)
+#### Start Only Be Delightful Service (Background)
 
 ```bash
 ./bin/magic.sh super-magic-daemon
@@ -111,7 +111,7 @@ When prompted "Do you want to install Super Delightful service?", select "1" to 
 
 ## Configuration Details
 
-### Super Delightful Environment Configuration
+### Be Delightful Environment Configuration
 
 The `config/.env_super_magic` file contains the following important configuration items:
 
@@ -176,7 +176,7 @@ The `config/.env_super_magic` file contains the following important configuratio
 3. **Network Connection Issues**
 
    If using remote deployment, ensure that the configured IP address is correct and relevant ports are open:
-   - Super Delightful service ports
+   - Be Delightful service ports
    - Gateway service ports
 
 ## Advanced Configuration
@@ -195,7 +195,7 @@ If you need to perform more granular configurations manually, you can directly e
 
 ## Updating the Service
 
-When you need to update the Super Delightful service, follow these steps:
+When you need to update the Be Delightful service, follow these steps:
 
 1. Pull the latest code
    ```bash
@@ -209,4 +209,4 @@ When you need to update the Super Delightful service, follow these steps:
 
 ## Conclusion
 
-Through this guide, you should have successfully installed and configured the Super Delightful service. If you have any questions, please refer to the project documentation or contact the technical support team.
+Through this guide, you should have successfully installed and configured the Be Delightful service. If you have any questions, please refer to the project documentation or contact the technical support team.

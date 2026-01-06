@@ -21,7 +21,7 @@ Router::addGroup('/api/v1/sandbox-openapi', static function () {
     });
 });
 
-// Sandbox internal API route group - specifically for sandbox calling Super Delightful, naming is non-standard, needs to be deprecated
+// Sandbox internal API route group - specifically for sandbox calling Be Delightful, naming is non-standard, needs to be deprecated
 Router::addGroup(
     '/open/internal-api',
     static function () {
@@ -37,7 +37,7 @@ Router::addGroup(
     ['middleware' => [SandboxTokenAuthMiddleware::class]]
 );
 
-// Sandbox internal API route group - specifically for sandbox calling Super Delightful
+// Sandbox internal API route group - specifically for sandbox calling Be Delightful
 Router::addGroup(
     '/api/v1/open-api/sandbox',
     static function () {

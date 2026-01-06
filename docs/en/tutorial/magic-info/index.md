@@ -68,6 +68,6 @@ Achieve complex project management tasks with a single user instruction through 
 - **Team Collaboration**: Support team collaboration in developing intelligent agents through team spaces
 - **AI FLOW**: Accelerate FLOW implementation with AI, requiring only 3.2 days on average from concept to deployment, saving 78% of labor costs compared to traditional FLOW development
 - **Professional Version Services**: Provide paid SaaS solutions supporting more advanced features and services
-- **Super Delightful**: Leveraging advanced AI algorithms to deeply understand search intent, quickly retrieve enterprise knowledge bases, documents, and web information, generating in-depth research reports
+- **Be Delightful**: Leveraging advanced AI algorithms to deeply understand search intent, quickly retrieve enterprise knowledge bases, documents, and web information, generating in-depth research reports
 
 The Delightful platform makes AI application development simple and efficient, allowing you to quickly build intelligent applications needed by enterprises, regardless of your programming background, enhancing the digital and intelligent levels of your business. 

@@ -1,12 +1,12 @@
-# Super Delightful Module
+# Be Delightful Module
 
 ## 简介
 
-Super Delightful Module 是一个基于 Hyperf 框架的扩展包，专为 magic-service 设计的增强扩展模块。该模块采用领域驱动设计（DDD）架构，为应用程序提供了清晰的分层结构和丰富的功能组件。
+Be Delightful Module 是一个基于 Hyperf 框架的扩展包，专为 magic-service 设计的增强扩展模块。该模块采用领域驱动设计（DDD）架构，为应用程序提供了清晰的分层结构和丰富的功能组件。
 
-Super Delightful Module 需要结合 magic-service 一起使用，其核心功能是通过接管 magic-service 的消息事件，建立用户与超级麦吉智能体之间的信息传递通道。这种设计使得用户可以无缝地与智能体进行交互，从而获得更加智能化的服务体验。
+Be Delightful Module 需要结合 magic-service 一起使用，其核心功能是通过接管 magic-service 的消息事件，建立用户与超级麦吉智能体之间的信息传递通道。这种设计使得用户可以无缝地与智能体进行交互，从而获得更加智能化的服务体验。
 
-作为一个桥接模块，Super Delightful Module 不仅处理消息的传递，还负责转换数据格式、协调事件流程，以及提供必要的上下文信息，确保智能体能够准确理解用户意图并给出恰当的响应。
+作为一个桥接模块，Be Delightful Module 不仅处理消息的传递，还负责转换数据格式、协调事件流程，以及提供必要的上下文信息，确保智能体能够准确理解用户意图并给出恰当的响应。
 
 ## 功能特性
 
@@ -21,10 +21,10 @@ Super Delightful Module 需要结合 magic-service 一起使用，其核心功�
 
 ## 系统架构
 
-Super Delightful Module 作为 magic-service 的扩展，在整个系统中扮演以下角色：
+Be Delightful Module 作为 magic-service 的扩展，在整个系统中扮演以下角色：
 
 ```
-用户请求 → magic-service → Super Delightful Module → 超级麦吉智能体
+用户请求 → magic-service → Be Delightful Module → 超级麦吉智能体
                  ↑                 |
                  └─────────────────┘
               响应返回
@@ -63,7 +63,7 @@ return [
 
 ### 与 magic-service 集成
 
-要将 Super Delightful Module 与 magic-service 集成，需要在 magic-service 中依赖进行接管：
+要将 Be Delightful Module 与 magic-service 集成，需要在 magic-service 中依赖进行接管：
 
 ```php
 [
@@ -126,15 +126,15 @@ composer start
 
 ## 消息流程
 
-Super Delightful Module 处理消息的基本流程如下：
+Be Delightful Module 处理消息的基本流程如下：
 
 1. 用户在 magic-service 发送消息
 2. magic-service 触发消息事件
-3. Super Delightful Module 监听到事件，提取消息内容
+3. Be Delightful Module 监听到事件，提取消息内容
 4. 消息被转换为超级麦吉智能体可理解的格式
 5. 消息发送给超级麦吉智能体
 6. 智能体处理消息并生成响应
-7. Super Delightful Module 接收响应并转换格式
+7. Be Delightful Module 接收响应并转换格式
 8. 响应通过事件传递回 magic-service
 9. 用户收到智能体的回应
 

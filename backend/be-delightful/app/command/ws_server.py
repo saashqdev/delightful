@@ -50,8 +50,8 @@ def create_app() -> FastAPI:
     """Create and configure FastAPI application instance"""
     # Create FastAPI application
     app = FastAPI(
-        title="Super Delightful API",
-        description="Super Delightful API and WebSocket service",
+        title="Be Delightful API",
+        description="Be Delightful API and WebSocket service",
         version="0.1.0",
         lifespan=lifespan,
     )

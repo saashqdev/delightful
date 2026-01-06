@@ -135,7 +135,7 @@ export default {
           collapsed: false,
           items: [
             { text: 'Quick Introduction', link: '/en/development/quick-start/quick-introduction' },
-            { text: 'Super Delightful Installation', link: '/en/development/deploy/super-magic' },
+            { text: 'Be Delightful Installation', link: '/en/development/deploy/super-magic' },
           ]
         },
         {

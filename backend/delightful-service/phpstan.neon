@@ -19,8 +19,8 @@ parameters:
   ignoreErrors:
     - '#Static call to instance method Hyperf\\HttpServer\\Router\\Router::[a-zA-Z0-9\\_]+\(\)#'
     - '#Static call to instance method Hyperf\\DbConnection\\Db::[a-zA-Z0-9\\_]+\(\)#'
-    - message: '#Static call to instance method Dtyq\\ObjectGenerator\\ObjectGeneratorFactory::dto\(\)\.#'
-    - message: '#Static call to instance method Dtyq\\ObjectGenerator\\ObjectGeneratorFactory::object\(\)\.#'
+    - message: '#Static call to instance method Delightful\\ObjectGenerator\\ObjectGeneratorFactory::dto\(\)\.#'
+    - message: '#Static call to instance method Delightful\\ObjectGenerator\\ObjectGeneratorFactory::object\(\)\.#'
     - message: '#Constant BASE_PATH not found#'
     - message: '#Constant LOCAL_HTTP_URL not found#'
     - message: '#Call to an undefined static method .*::insert\(\)#'

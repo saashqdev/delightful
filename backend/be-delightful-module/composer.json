@@ -3,12 +3,12 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Dtyq\\BeDelightful\\": "src/"
+            "Delightful\\BeDelightful\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Dtyq\\BeDelightful\\Tests\\": "tests/"
+            "Delightful\\BeDelightful\\Tests\\": "tests/"
         }
     },
     "authors": [
@@ -55,7 +55,7 @@
     ],
     "extra": {
         "hyperf": {
-            "config": "Dtyq\\BeDelightful\\ConfigProvider",
+            "config": "Delightful\\BeDelightful\\ConfigProvider",
             "migrate": {
                 "paths": [
                     "migrations"

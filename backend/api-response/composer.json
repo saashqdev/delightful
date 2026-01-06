@@ -4,7 +4,7 @@
     "license": "Apache License 2.0",
     "autoload": {
         "psr-4": {
-            "Dtyq\\ApiResponse\\": "src/"
+            "Delightful\\ApiResponse\\": "src/"
         }
     },
     "require": {
@@ -22,7 +22,7 @@
     },
     "extra": {
         "hyperf": {
-            "config": "Dtyq\\ApiResponse\\ConfigProvider"
+            "config": "Delightful\\ApiResponse\\ConfigProvider"
         },
         "branch-alias": {
             "dev-master": "0.1-dev"

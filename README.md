@@ -38,7 +38,7 @@ Delightful is the first **"open-source all-in-one AI productivity platform"**, n
 
 ![Product Matrix](https://public-cdn.bedelightful.ai/static/img/super-magic-open-source-projects-en.png?v=20250819)
 
-- **[Super Delightful](https://github.com/saashqdev/delightful/super-magic)** - A **general-purpose AI Agent** designed for complex task scenarios
+- **[Be Delightful](https://github.com/saashqdev/delightful/super-magic)** - A **general-purpose AI Agent** designed for complex task scenarios
 - **[Delightful IM](https://github.com/saashqdev/delightful/magic)** - An enterprise-grade instant messaging system that integrates AI Agent conversations with internal enterprise communication
 - **[Delightful Flow](https://github.com/saashqdev/delightful/magic)** - A powerful visual AI workflow orchestration system
 - **Teamshare OS** (Coming soon) - An enterprise-grade online collaborative office system
@@ -51,13 +51,13 @@ In addition to the above AI products, we have also open-sourced some of the infr
 - **Delightful Space** (Coming soon) - A new static content hosting management system specifically designed for AI Agents
 - **Sandbox OS** (Coming soon) - A powerful sandbox system for AI Agent runtime
 
-### Super Delightful
+### Be Delightful
 
-A powerful **general-purpose AI Agent** specially designed for complex task scenarios. Through a multi-agent design system and rich tool capabilities, Super Delightful supports intelligent abilities such as **autonomous task understanding**, **autonomous task planning**, **autonomous action**, and **autonomous error correction**. It can understand natural language instructions, execute various business processes, and deliver final target results. As the flagship product of the Delightful product matrix, Super Delightful provides powerful secondary development capabilities through open source, allowing enterprises to quickly build and deploy intelligent assistants that meet specific business needs, greatly improving decision-making efficiency and quality.
+A powerful **general-purpose AI Agent** specially designed for complex task scenarios. Through a multi-agent design system and rich tool capabilities, Be Delightful supports intelligent abilities such as **autonomous task understanding**, **autonomous task planning**, **autonomous action**, and **autonomous error correction**. It can understand natural language instructions, execute various business processes, and deliver final target results. As the flagship product of the Delightful product matrix, Be Delightful provides powerful secondary development capabilities through open source, allowing enterprises to quickly build and deploy intelligent assistants that meet specific business needs, greatly improving decision-making efficiency and quality.
 
-![Super Delightful](https://public-cdn.bedelightful.ai/static/img/super-magic-buffett.gif)
+![Be Delightful](https://public-cdn.bedelightful.ai/static/img/super-magic-buffett.gif)
 
-#### Super Delightful Case Studies
+#### Be Delightful Case Studies
 - [Analysis of Investment Insights from Buffett's 2025 Shareholders Meeting](https://www.letsmagic.cn/share/777665156986277889)
 - [Analysis of Stocks Related to Beijing Humanoid Robot Half Marathon](https://www.letsmagic.cn/share/774280936479625217)
 - [Summary of Key Points from 'Thinking, Fast and Slow](https://www.letsmagic.cn/share/777461325648195584)
@@ -116,11 +116,11 @@ https://gist.github.com/user-attachments/assets/6ef46e66-292c-4a8a-8a00-a3b9fb7b
 
 https://gist.github.com/user-attachments/assets/7327f331-be7d-4aeb-8e19-0949adde66b2
 
-## 🚀 Using Super Delightful
+## 🚀 Using Be Delightful
 
 ### Cloud Service
 
-We provide [cloud services](https://www.bedelightful.ai) for [Super Delightful](https://www.bedelightful.ai), [Delightful IM](https://www.bedelightful.ai), and [Delightful Flow](https://www.bedelightful.ai), allowing anyone to start trying and using them with zero setup, providing all features of the open-source version.
+We provide [cloud services](https://www.bedelightful.ai) for [Be Delightful](https://www.bedelightful.ai), [Delightful IM](https://www.bedelightful.ai), and [Delightful Flow](https://www.bedelightful.ai), allowing anyone to start trying and using them with zero setup, providing all features of the open-source version.
 *Currently, an invitation code is required for access, which can be applied for online and granted for trial use after approval.*
 
 ### Delightful for Enterprises/Organizations
@@ -163,7 +163,7 @@ cd magic
 # Configure Delightful environment variables, must configure at least one large language model's environment variables to use Delightful normally
 cp .env.example .env
 
-# Configure Super Delightful environment variables, must configure any large language model that supports OpenAI format to use it normally
+# Configure Be Delightful environment variables, must configure any large language model that supports OpenAI format to use it normally
 ./bin/magic.sh status
 cp config/.env_super_magic.example .env_super_magic
 ```

@@ -1,4 +1,4 @@
-# Translation Status - Super-Delightful Directory
+# Translation Status - Be-Delightful Directory
 
 ## 🎉 Translation Complete!
 

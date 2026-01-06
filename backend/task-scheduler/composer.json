@@ -9,12 +9,12 @@
     "description": "",
     "autoload": {
         "psr-4": {
-            "Dtyq\\TaskScheduler\\": "src/"
+            "Delightful\\TaskScheduler\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Dtyq\\TaskScheduler\\Test\\": "tests"
+            "Delightful\\TaskScheduler\\Test\\": "tests"
         }
     },
     "require": {
@@ -51,7 +51,7 @@
     },
     "extra": {
         "hyperf": {
-            "config": "Dtyq\\TaskScheduler\\ConfigProvider"
+            "config": "Delightful\\TaskScheduler\\ConfigProvider"
         },
         "branch-alias": {
             "dev-master": "0.1-dev"

@@ -32,7 +32,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Dtyq\\CodeRunnerBwrap\\": "src/"
+      "Delightful\\CodeRunnerBwrap\\": "src/"
     },
     "files": [
       "src/Functions.php"
@@ -40,7 +40,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Dtyq\\CodeRunnerBwrap\\Tests\\": "tests/"
+      "Delightful\\CodeRunnerBwrap\\Tests\\": "tests/"
     }
   },
   "scripts": {

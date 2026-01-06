@@ -35,7 +35,7 @@ bilingual() {
   fi
 }
 
-# Check if Super Delightful environment file exists
+# Check if Be Delightful environment file exists
 check_super_magic_env() {
     if [ ! -f "config/.env_super_magic" ]; then
         if [ -f "config/.env_super_magic.example" ]; then
@@ -84,7 +84,7 @@ if [ -f "bin/magic.lock" ]; then
     if [ -f "bin/use_super_magic" ]; then
         # Use fixed profile parameters instead of reading from a file
         export DELIGHTFUL_USE_SUPER_DELIGHTFUL=" --profile magic-gateway --profile sandbox-gateway"
-        bilingual "Super Delightful configuration detected, Super Delightful related services will be started automatically" "Super Delightful configuration detected, Super Delightful related services will be started automatically"
+        bilingual "Be Delightful configuration detected, Be Delightful related services will be started automatically" "Be Delightful configuration detected, Be Delightful related services will be started automatically"
     else
         export DELIGHTFUL_USE_SUPER_DELIGHTFUL=""
     fi
@@ -259,15 +259,15 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
         fi
     fi
 
-    # Ask if Super Delightful service should be installed
+    # Ask if Be Delightful service should be installed
     ask_super_magic() {
-        bilingual "Do you want to install Super Delightful service?" "Do you want to install Super Delightful service?"
-        bilingual "1. Yes, install Super Delightful service" "1. Yes, install Super Delightful service"
-        bilingual "2. No, don't install Super Delightful service" "2. No, don't install Super Delightful service"
+        bilingual "Do you want to install Be Delightful service?" "Do you want to install Be Delightful service?"
+        bilingual "1. Yes, install Be Delightful service" "1. Yes, install Be Delightful service"
+        bilingual "2. No, don't install Be Delightful service" "2. No, don't install Be Delightful service"
         read -p "$(bilingual "Please enter option number [1/2]: " "Please enter option number [1/2]: ")" SUPER_DELIGHTFUL_OPTION
 
         if [ "$SUPER_DELIGHTFUL_OPTION" = "1" ]; then
-            bilingual "You have chosen to install Super Delightful service." "You have chosen to install Super Delightful service."
+            bilingual "You have chosen to install Be Delightful service." "You have chosen to install Be Delightful service."
 
             # Check if .env_super_magic exists
             if ! check_super_magic_env; then
@@ -291,10 +291,10 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
             export DELIGHTFUL_USE_SUPER_DELIGHTFUL=" --profile magic-gateway --profile sandbox-gateway"
             # Record the super-magic configuration for automatic loading next start
             echo "$DELIGHTFUL_USE_SUPER_DELIGHTFUL" > bin/use_super_magic
-            bilingual "Super Delightful, Delightful Gateway and Sandbox Gateway services will be started." "Super Delightful, Delightful Gateway and Sandbox Gateway services will be started."
-            bilingual "Your choice has been recorded, Super Delightful related services will be loaded automatically next time." "Your choice has been recorded, Super Delightful related services will be loaded automatically next time."
+            bilingual "Be Delightful, Delightful Gateway and Sandbox Gateway services will be started." "Be Delightful, Delightful Gateway and Sandbox Gateway services will be started."
+            bilingual "Your choice has been recorded, Be Delightful related services will be loaded automatically next time." "Your choice has been recorded, Be Delightful related services will be loaded automatically next time."
         else
-            bilingual "You have chosen not to install Super Delightful service." "You have chosen not to install Super Delightful service."
+            bilingual "You have chosen not to install Be Delightful service." "You have chosen not to install Be Delightful service."
             export DELIGHTFUL_USE_SUPER_DELIGHTFUL=""
             # Remove any previous super-magic configuration file if present
             if [ -f "bin/use_super_magic" ]; then
@@ -582,7 +582,7 @@ if [ "$SKIP_INSTALLATION" = "false" ]; then
 
     detect_public_ip
 
-    # Ask if Super Delightful service should be installed
+    # Ask if Be Delightful service should be installed
     ask_super_magic
 
     # Create lock file to skip installation next time
@@ -601,8 +601,8 @@ show_help() {
     bilingual "  restart           Restart all services" "  restart           Restart all services"
     bilingual "  status            Show services status" "  status            Show services status"
     bilingual "  logs              Show services logs" "  logs              Show services logs"
-    bilingual "  super-magic       Start only Super Delightful service (foreground)" "  super-magic       Start only Super Delightful service (foreground)"
-    bilingual "  super-magic-daemon Start only Super Delightful service (background)" "  super-magic-daemon Start only Super Delightful service (background)"
+    bilingual "  super-magic       Start only Be Delightful service (foreground)" "  super-magic       Start only Be Delightful service (foreground)"
+    bilingual "  super-magic-daemon Start only Be Delightful service (background)" "  super-magic-daemon Start only Be Delightful service (background)"
     echo ""
     bilingual "If no command is provided, 'start' will be used by default." "If no command is provided, 'start' will be used by default."
 }
@@ -669,7 +669,7 @@ show_logs() {
     docker compose $DELIGHTFUL_USE_SUPER_DELIGHTFUL logs -f
 }
 
-# Start only Super Delightful service
+# Start only Be Delightful service
 start_super_magic() {
     # Check and update the SANDBOX_NETWORK parameter
     check_sandbox_network
@@ -692,11 +692,11 @@ start_super_magic() {
         exit 1
     fi
 
-    bilingual "Starting Super Delightful service and Gateway services in foreground..." "Starting Super Delightful service and Gateway services in foreground..."
+    bilingual "Starting Be Delightful service and Gateway services in foreground..." "Starting Be Delightful service and Gateway services in foreground..."
     docker compose  --profile magic-gateway --profile sandbox-gateway up
 }
 
-# Start only Super Delightful service in background
+# Start only Be Delightful service in background
 start_super_magic_daemon() {
     # Check and update SANDBOX_NETWORK parameter
     check_sandbox_network
@@ -719,7 +719,7 @@ start_super_magic_daemon() {
         exit 1
     fi
 
-    bilingual "Starting Super Delightful service and Gateway services in background..." "Starting Super Delightful service and Gateway services in background..."
+    bilingual "Starting Be Delightful service and Gateway services in background..." "Starting Be Delightful service and Gateway services in background..."
     docker compose  --profile magic-gateway --profile sandbox-gateway up -d
 }
 

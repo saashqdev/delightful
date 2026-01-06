@@ -40,7 +40,7 @@ body:
       label: Component
       description: Which Delightful component is involved?
       options:
-        - Super Delightful
+        - Be Delightful
         - Delightful IM (Chat System)
         - Delightful Flow (Workflow System)
         - Delightful Service (Backend API)

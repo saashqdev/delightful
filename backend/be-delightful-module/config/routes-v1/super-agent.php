@@ -163,7 +163,7 @@ Router::addGroup(
 
         // Account related
         Router::addGroup('/accounts', static function () {
-            // Initialize Super Delightful account
+            // Initialize Be Delightful account
             Router::post('/init', [AccountApi::class, 'initAccount']);
         });
 

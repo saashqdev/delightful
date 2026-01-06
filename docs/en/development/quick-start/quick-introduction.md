@@ -44,9 +44,9 @@ cd magic
 
 ##### Main Configuration Files
 - .env: Main environment variables configuration file
-- config/.env_super_magic: Super Delightful service configuration file (if you choose to install)
-- config/.env_magic_gateway: Delightful Gateway configuration file (if you choose to install Super Delightful)
-- config/.env_sandbox_gateway: Sandbox Gateway configuration file (if you choose to install Super Delightful)
+- config/.env_super_magic: Be Delightful service configuration file (if you choose to install)
+- config/.env_magic_gateway: Delightful Gateway configuration file (if you choose to install Be Delightful)
+- config/.env_sandbox_gateway: Sandbox Gateway configuration file (if you choose to install Be Delightful)
 - For macOS/Linux, missing files will be automatically copied during installation; Windows users need to manually copy and modify them
 
 ##### Manually Configure Files and Modify Required Values
@@ -59,13 +59,13 @@ sudo cp .env.example .env
 https://docs.bedelightful.ai/en/development/deploy/environment.html
 
 ```bash
-### To use Super Delightful services, copy the following files:
+### To use Be Delightful services, copy the following files:
 sudo cp config/.env_super_magic.example config/.env_super_magic
 sudo cp config/.env_magic_gateway.example config/.env_magic_gateway
 sudo cp config/.env_sandbox_gateway.example config/.env_sandbox_gateway
 ```
 
-##### Super Delightful Environment Variables Configuration Reference:
+##### Be Delightful Environment Variables Configuration Reference:
 https://docs.bedelightful.ai/en/development/deploy/super-magic.html
 
 ##### Configure IP (Optional)
@@ -75,7 +75,7 @@ DELIGHTFUL_SOCKET_BASE_URL=ws://<server_IP>:9502
 DELIGHTFUL_SERVICE_BASE_URL=http://<server_IP>:9501
 ```
 
-If you choose to install Super Delightful service, ensure the following configuration files exist:
+If you choose to install Be Delightful service, ensure the following configuration files exist:
 - config/.env_super_magic
 - config/.env_magic_gateway
 - config/.env_sandbox_gateway
@@ -103,7 +103,7 @@ docker network create magic-sandbox-network
 docker compose up
 ```
 
-To start Super Delightful related services:
+To start Be Delightful related services:
 
 ```bash
 docker compose --profile magic-gateway --profile sandbox-gateway up
@@ -129,10 +129,10 @@ The script will guide you through the following steps:
 docker network create magic-sandbox-network
 ```
 
-###### Super Delightful Service Installation
-- Choose 1 to install Super Delightful service (requires pre-configuration of files in the config/ directory)
-- Choose 2 to not install Super Delightful service
-![Super Delightful Service Installation](https://public-cdn.letsmagic.cn/static/img/super_magic_service_install.png)
+###### Be Delightful Service Installation
+- Choose 1 to install Be Delightful service (requires pre-configuration of files in the config/ directory)
+- Choose 2 to not install Be Delightful service
+![Be Delightful Service Installation](https://public-cdn.letsmagic.cn/static/img/super_magic_service_install.png)
 
 #### 2.5 First Run
 After the first run, the system will create a bin/magic.lock file (macOS/Linux), and subsequent startups will skip the installation configuration process.
@@ -153,8 +153,8 @@ Available commands:
 - restart: Restart all services
 - status: Display service status
 - logs: Display service logs
-- super-magic: Start only Super Delightful service (foreground)
-- super-magic-daemon: Start only Super Delightful service (background)
+- super-magic: Start only Be Delightful service (foreground)
+- super-magic-daemon: Start only Be Delightful service (background)
 - help: Display help information
 
 ##### Windows
@@ -179,10 +179,10 @@ docker compose ps
 # View logs
 docker compose logs -f
 
-# Use Super Delightful service (foreground)
+# Use Be Delightful service (foreground)
 docker compose --profile magic-gateway --profile sandbox-gateway up
 
-# Use Super Delightful service (background)
+# Use Be Delightful service (background)
 docker compose --profile magic-gateway --profile sandbox-gateway up -d
 ```
 

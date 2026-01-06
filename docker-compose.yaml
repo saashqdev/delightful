@@ -81,7 +81,7 @@ services:
     networks:
       - magic-sandbox-network
 
-  # Super Delightful service
+  # Be Delightful service
   super-magic:
     image: ghcr.io/dtyq/super-magic:${SUPER_DELIGHTFUL_TAG-latest}
     container_name: super-magic

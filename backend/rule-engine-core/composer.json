@@ -9,7 +9,7 @@
     "description": "",
     "autoload": {
         "psr-4": {
-            "Dtyq\\RuleEngineCore\\": "src/"
+            "Delightful\\RuleEngineCore\\": "src/"
         }
     },
     "autoload-dev": {
@@ -52,7 +52,7 @@
     },
     "extra": {
         "hyperf": {
-            "config": "Dtyq\\RuleEngineCore\\ConfigProvider"
+            "config": "Delightful\\RuleEngineCore\\ConfigProvider"
         },
         "branch-alias": {
             "dev-master": "0.1-dev"

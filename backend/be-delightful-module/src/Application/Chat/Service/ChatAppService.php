@@ -37,7 +37,7 @@ class ChatAppService extends AbstractAppService
 
     /**
      * Initializes Delightful Chat conversation and topic.
-     * This method sets up the necessary chat infrastructure for a "Super Delightful" interaction.
+     * This method sets up the necessary chat infrastructure for a "Be Delightful" interaction.
      * It fetches/creates an AI user, then gets/creates a conversation for the current user
      * with this AI user, and finally generates a topic ID for this conversation.
      *
@@ -69,8 +69,8 @@ class ChatAppService extends AbstractAppService
     }
 
     /**
-     * Get the Super Delightful agent user ID for the given organization.
-     * This method retrieves the AI user entity for the Super Delightful agent
+     * Get the Be Delightful agent user ID for the given organization.
+     * This method retrieves the AI user entity for the Be Delightful agent
      * and returns its user ID.
      *
      * @param DataIsolation $dataIsolation data isolation context
@@ -84,7 +84,7 @@ class ChatAppService extends AbstractAppService
     }
 
     /**
-     * Get or create the Super Delightful AI user entity.
+     * Get or create the Be Delightful AI user entity.
      * This is a private method to avoid code duplication between different public methods.
      *
      * @param DataIsolation $dataIsolation data isolation context

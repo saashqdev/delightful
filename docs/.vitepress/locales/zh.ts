@@ -158,7 +158,7 @@ export default {
           collapsed: false,
           items: [
             { text: 'Docker 安装', link: '/zh/development/deploy/docker' },
-            { text: 'Super Delightful 安装', link: '/zh/development/deploy/super-magic' },
+            { text: 'Be Delightful 安装', link: '/zh/development/deploy/super-magic' },
           ]
         },
 

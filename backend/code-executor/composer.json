@@ -22,12 +22,12 @@
       "src/Utils/Functions.php"
     ],
     "psr-4": {
-      "Dtyq\\CodeExecutor\\": "src/"
+      "Delightful\\CodeExecutor\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Dtyq\\CodeExecutor\\Tests\\": "tests/"
+      "Delightful\\CodeExecutor\\Tests\\": "tests/"
     }
   },
   "config": {
@@ -36,7 +36,7 @@
   },
   "extra": {
     "hyperf": {
-      "config": "Dtyq\\CodeExecutor\\ConfigProvider"
+      "config": "Delightful\\CodeExecutor\\ConfigProvider"
     },
     "branch-alias": {
       "dev-master": "0.1-dev"

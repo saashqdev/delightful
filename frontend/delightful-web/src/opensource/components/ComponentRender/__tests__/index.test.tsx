@@ -5,59 +5,59 @@ import ComponentRender from "../index"
 import ComponentFactory from "../ComponentFactory"
 import { DefaultComponents } from "../config/defaultComponents"
 
-// 模拟懒加载的组件
+// Mock lazy loaded component
 vi.mock(
 	"@/opensource/layouts/BaseLayout/components/Sider/components/OrganizationSwitch/OrganizationList",
 	() => ({
-		default: () => <div data-testid="organization-list">组织列表组件</div>,
+		default: () => <div data-testid="organization-list">Organization list component</div>,
 	}),
 )
 
 describe("ComponentRender", () => {
-	// 每个测试后清理注册的测试组件
+	// Clean up registered test components after each test
 	afterEach(() => {
 		vi.restoreAllMocks()
 	})
 
-	it("应该正确渲染已注册的组件", async () => {
+	it("should render registered component correctly", async () => {
 		render(<ComponentRender componentName={DefaultComponents.OrganizationList} />)
 
-		// 由于使用了 Suspense，需要等待懒加载组件渲染完成
+		// Since Suspense is used, wait for lazy loading to complete
 		const organizationList = await screen.findByTestId("organization-list")
 		expect(organizationList).toBeDefined()
-		expect(organizationList.textContent).toBe("组织列表组件")
+		expect(organizationList.textContent).toBe("Organization list component")
 	})
 
-	it("当组件未注册时应该渲染 Fallback 组件", () => {
-		// 使用一个未注册的组件名称
+	it("should render Fallback component when component is unregistered", () => {
+		// Use an unregistered component name
 		render(<ComponentRender componentName={"UnregisteredComponent" as any} />)
 
-		// Fallback 组件的内容是 "Component UnRegistered"
+		// Fallback component content is 'Component UnRegistered'
 		expect(screen.getByText("Component UnRegistered")).toBeDefined()
 	})
 
-	it("应该将传入的 props 传递给渲染的组件", async () => {
-		// 注册一个测试组件
+	it("should pass props to rendered component", async () => {
+		// Register a test component
 		const TestComponent = vi
 			.fn()
 			.mockImplementation(({ testProp }: { testProp: string }) => (
 				<div data-testid="test-component">{testProp}</div>
 			))
 
-		// 注册这个测试组件
+		// Register this test component
 		ComponentFactory.registerComponent("TestComponent" as any, TestComponent as any)
 
-		render(<ComponentRender componentName={"TestComponent" as any} testProp="测试属性值" />)
+		render(<ComponentRender componentName={"TestComponent" as any} testProp="Test property value" />)
 
-		// 验证属性是否正确传递
+		// Verify that props are passed correctly
 		const component = await screen.findByTestId("test-component")
-		expect(component.textContent).toBe("测试属性值")
+		expect(component.textContent).toBe("Test property value")
 		expect(TestComponent).toHaveBeenCalledWith(
-			expect.objectContaining({ testProp: "测试属性值" }),
+			expect.objectContaining({ testProp: "Test property value" }),
 			expect.anything(),
 		)
 
-		// 清理：注销测试组件
+		// Cleanup: Unregister test component
 		ComponentFactory.unregisterComponent("TestComponent")
 	})
 

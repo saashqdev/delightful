@@ -3,18 +3,18 @@ import ComponentFactory from "./ComponentFactory"
 import { DefaultComponentsProps } from "./config/defaultComponents"
 
 /**
- * 组件渲染
- * @param componentName 组件名称
- * @returns 组件
+ * Component render
+ * @param componentName Component name
+ * @returns Component
  */
 type ComponentRenderProps<N extends keyof DefaultComponentsProps> = {
 	componentName: N
 } & DefaultComponentsProps[N]
 
 /**
- * 组件工厂 - 组件渲染
- * @param componentName 组件名称
- * @returns 组件
+ * Component factory - component render
+ * @param componentName Component name
+ * @returns Component
  */
 const ComponentRender = memo(
 	<N extends keyof DefaultComponentsProps>({

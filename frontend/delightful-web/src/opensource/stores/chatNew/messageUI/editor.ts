@@ -6,62 +6,62 @@ class EditorStore {
 
 	lastTopicId = ""
 
-	/** 当前会话id */
+	/** Current conversation id */
 	conversationId = ""
 
-	/** 当前主题id */
+	/** Current topic id */
 	topicId = ""
 
-	/** 值 */
+	/** Value */
 	value: string | Content | undefined = undefined
 
 	constructor() {
 		makeAutoObservable(this, {}, { autoBind: true })
 	}
 
-	/** 是否有效内容 */
+	/** Whether content is valid */
 	get isValidContent() {
 		if (this.value === undefined || this.value === null) return false
-		// 简单检查是否有type属性
+		// Simple check if has type property
 		if (typeof this.value === "object" && "type" in this.value) return true
 		return false
 	}
 
 	/**
-	 * 设置上一次会话id
-	 * @param conversationId 会话id
+	 * Set last conversation id
+	 * @param conversationId Conversation id
 	 */
 	setLastConversationId(conversationId: string) {
 		this.lastConversationId = conversationId
 	}
 
 	/**
-	 * 设置上一次主题id
-	 * @param topicId 主题id
+	 * Set last topic id
+	 * @param topicId Topic id
 	 */
 	setLastTopicId(topicId: string) {
 		this.lastTopicId = topicId
 	}
 
 	/**
-	 * 设置当前会话id
-	 * @param conversationId 会话id
+	 * Set current conversation id
+	 * @param conversationId Conversation id
 	 */
 	setConversationId(conversationId: string) {
 		this.conversationId = conversationId
 	}
 
 	/**
-	 * 设置当前主题id
-	 * @param topicId 主题id
+	 * Set current topic id
+	 * @param topicId Topic id
 	 */
 	setTopicId(topicId: string) {
 		this.topicId = topicId
 	}
 
 	/**
-	 * 设置值
-	 * @param value 值
+	 * Set value
+	 * @param value Value
 	 */
 	setValue = (value: string | Content | undefined) => {
 		this.value = value

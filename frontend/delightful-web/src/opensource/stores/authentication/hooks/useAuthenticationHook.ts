@@ -8,8 +8,8 @@ export function useAccount() {
 	const { setClusterCode } = useClusterCode()
 
 	/**
-	 * @description 账号切换
-	 * @param {string} delightfulId delightful生态下的唯一Id
+	 * @description Account switch
+	 * @param {string} delightfulId Unique ID in delightful ecosystem
 	 */
 	const accountSwitch = useMemoizedFn(
 		async (unionId: string, delightful_user_id: string, delightful_organization_code: string) => {
@@ -19,7 +19,7 @@ export function useAccount() {
 				setClusterCode(account?.deployCode)
 			}
 			await userService.switchAccount(unionId, delightful_user_id, delightful_organization_code)
-			/** 广播切换账号 */
+			/** Broadcast switch account */
 			BroadcastChannelSender.switchAccount({
 				delightfulId: unionId,
 				delightfulUserId: delightful_user_id,
@@ -29,13 +29,13 @@ export function useAccount() {
 	)
 
 	/**
-	 * @description 退出登录，不仅要销毁token，还需要移除帐号管理中的记录 (兼容指定 delightfulId 账号退出，不传则退出当前账号)
+	 * @description Logout, not only destroy token but also remove account records from account management (compatible with specifying delightfulId account logout, if not passed, logout current account)
 	 */
 	const accountLogout = useMemoizedFn(async (delightfulId?: string) => {
 		await userService.deleteAccount(delightfulId)
 	})
 
-	/** 账号初始化，每次应用初始化时都需要重新获取所有登录过账号的组织 */
+	/** Account initialization, need to refetch all organizations of accounts that have logged in during app initialization */
 	const accountFetch = useMemoizedFn(async () => {
 		await userService.fetchAccount()
 	})

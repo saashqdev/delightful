@@ -3,79 +3,79 @@ import type { ControlEventMessageType } from "./control_message"
 import type { SeqMessageBase } from "./base"
 
 export const enum ConversationStatus {
-	/** 正常 */
+	/** Normal */
 	Normal = 0,
-	/** 不显示 */
+	/** Hidden */
 	Hidden = 1,
-	/** 删除 */
+	/** Deleted */
 	Deleted = 2,
 }
 
 /**
- * 会话 (服务端返回)
+ * Conversation (from service)
  */
 export interface ConversationFromService {
-	/** 会话 ID */
+	/** Conversation ID */
 	id: string
-	/** 用户 ID */
+	/** User ID */
 	user_id: string
-	/** 用户组织编码 */
+	/** User organization code */
 	user_organization_code: string
-	/** 接收者类型 */
+	/** Receiver type */
 	receive_type: MessageReceiveType
-	/** 接收者 ID */
+	/** Receiver ID */
 	receive_id: string
-	/** 接收者组织编码 */
+	/** Receiver organization code */
 	receive_organization_code: string
-	/** 是否免打扰 */
+	/** Mute conversation */
 	is_not_disturb: 0 | 1
-	/** 是否置顶 */
+	/** Pin conversation */
 	is_top: 0 | 1
-	/** 是否标记 */
+	/** Mark conversation */
 	is_mark: 0 | 1
-	/** 额外信息 */
+	/** Extra info */
 	extra: string
-	/** 创建时间 */
+	/** Creation time */
 	created_at: string
-	/** 更新时间 */
+	/** Update time */
 	updated_at: string
-	/** 删除时间 */
+	/** Delete time */
 	deleted_at: string | null
-	/** 当前话题 ID, 废弃 */
+	/** Current topic ID (deprecated) */
 	// current_topic_id: string
-	/** 状态 */
+	/** Status */
 	status: ConversationStatus
-	/** 翻译配置 */
+	/** Translation config */
 	translate_config: unknown | null
-	/** 快捷指令配置 */
+	/** Quick command config */
 	instructs?: Record<string, unknown>
 	// instruct?: string
 }
 
 /**
- * 会话
+ * Conversation
  */
 export interface Conversation extends ConversationFromService {
-	/** 消息 ID 列表 */
+	/** Message ID list */
 	messageIds: string[]
-	/** 接收者是否正在输入 */
+	/** Receiver is typing */
 	receive_inputing: boolean
-	/** 当前话题 ID */
+	/** Current topic ID */
 	currentTopicId?: string
-	/** 最后一次收到的会话消息 ID (用于列表展示) */
+	/** Last received conversation message ID (for list display) */
 	lastReceiveMessageId?: string
-	/** 最后一次收到的会话消息 seqId */
+	/** Last received conversation message seqId */
 	lastReceiveSeqId?: string
-	/** 不同话题下的消息 ID */
+	/** Message IDs by topic */
 	topicMessageIds?: Map<string, string[]>
-	/** 不同话题下最后一次收到的会话消息 ID */
+	/** Last received conversation message ID by topic */
 	topicLastReceiveMessageId?: Map<string, string>
-	/** 不同话题下最后一次收到的会话消息 seqId */
+	/** Last received conversation message seqId by topic */
 	topicLastReceiveSeqId?: Map<string, string>
 }
 
 /**
- * 创建/打开会话消息
+ * Create/open conversation message
  */
 
 export interface OpenConversationMessage extends SeqMessageBase {

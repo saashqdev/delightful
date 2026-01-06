@@ -4,7 +4,7 @@ import type {
 } from "@/opensource/components/business/MemberDepartmentSelectPanel/types"
 import type { Operator } from "./other"
 
-// 所有权限类型
+// All permission types
 export const enum UserOperationType {
 	all = "all",
 	edit = "edit",
@@ -13,7 +13,7 @@ export const enum UserOperationType {
 }
 
 /**
- * 空间类型
+ * Space type
  */
 export const enum DriveSpaceType {
 	All = -1,
@@ -22,33 +22,33 @@ export const enum DriveSpaceType {
 }
 
 /**
- * 文件类型
+ * File type
  */
 export const enum DriveItemFileType {
 	ALL = -1,
-	FOLDER = 0, // 文件夹
-	MULTI_TABLE = 1, // 多维表格
+	FOLDER = 0, // Folder
+	MULTI_TABLE = 1, // Multi-dimensional table
 	WORD = 2,
 	EXCEL = 3,
-	MIND_NOTE = 4, // 思维笔记
+	MIND_NOTE = 4, // Mind notes
 	PPT = 5,
 	PDF = 6,
-	CLOUD_DOC = 7, // 云文档旧版
-	LINK = 8, // 链接
-	KNOWLEDGE_BASE = 9, // 知识库
-	IMAGE = 10, // 图片
-	VIDEO = 11, // 视频
-	AUDIO = 12, // 音频
+	CLOUD_DOC = 7, // Cloud document (legacy)
+	LINK = 8, // Link
+	KNOWLEDGE_BASE = 9, // Knowledge base
+	IMAGE = 10, // Image
+	VIDEO = 11, // Video
+	AUDIO = 12, // Audio
 	COMPRESS = 13,
-	UNKNOWN = 14, // 其他文件类型
-	MARKDOWN = 15, // markdown文件
-	CLOUD_DOCX = 16, // 云文档
-	HTML = 17, // html
-	TXT = 18, // txt
-	XMIND = 19, // xmind
-	PAGE = 20, // Keewood 页面
-	APPLICATION = 21, // Keewood 应用
-	WHITEBOARD = 22, // 白板
+	UNKNOWN = 14, // Other file types
+	MARKDOWN = 15, // Markdown file
+	CLOUD_DOCX = 16, // Cloud document
+	HTML = 17, // HTML
+	TXT = 18, // TXT
+	XMIND = 19, // XMind
+	PAGE = 20, // Keewood page
+	APPLICATION = 21, // Keewood application
+	WHITEBOARD = 22, // Whiteboard
 }
 
 interface DriveItemPath {
@@ -156,7 +156,7 @@ export interface FileData extends FileIdentify {
 }
 
 /**
- * 回收站子项
+ * Trash item
  */
 export interface DriveTrashItem {
 	id: string

@@ -8,7 +8,7 @@ import type { EventRefiners } from "@fullcalendar/common"
 export interface CalendarEvent extends EventRefiners {}
 
 export namespace Calendar {
-	// 日程列表
+	// Event list
 	export type ListItem = {
 		id: string
 		title: string
@@ -22,7 +22,7 @@ export namespace Calendar {
 		meeting_room: string | null
 	}
 
-	// 用户闲忙状态
+	// User free/busy status
 	export type UserStatus = {
 		id: string
 		schedule_id: string
@@ -38,7 +38,7 @@ export namespace Calendar {
 		activity_status: string
 	}
 
-	// 评论/动态列表
+	// Comments/activity list
 	export type Comments = {
 		id: string
 		type: number
@@ -70,7 +70,7 @@ export namespace Calendar {
 		}
 	}
 
-	// 提醒规则
+	// Reminder rule
 	export type ReminderRule = {
 		type: string
 		offset: string
@@ -78,7 +78,7 @@ export namespace Calendar {
 		custome_time?: string
 	}
 
-	// 重复规则
+	// Repeat rule
 	export type RepeatRule = {
 		repeat_type: string
 		interval: number
@@ -88,7 +88,7 @@ export namespace Calendar {
 		monthly_day?: number
 	}
 
-	// 附件
+	// Attachments
 	export type Attachments = {
 		file_key: string
 		file_name: string
@@ -96,10 +96,10 @@ export namespace Calendar {
 		file_path?: string
 	}
 
-	// 保存日程
+	// Save event
 	export type SaveCalendarParams = {
 		id?: string
-		// 1:本次，2:所有日程，3:后续的每一次
+		// 1: current, 2: all events, 3: all following
 		type?: EditScope | ChangeScope
 		title: string
 		description?: string
@@ -118,19 +118,19 @@ export namespace Calendar {
 		attachments: Attachments[]
 	}
 
-	// AI 日程
+	// AI event
 	export type SaveAiCalendarParams = {
 		user_input: string
 	}
 
-	// 参与人
+	// Participant
 	export type Participant = {
 		avatar_url: string
 		nickname: string
 		user_id: string
 	}
 
-	// 日程详情
+	// Event details
 	export type CalendarDetail = SaveCalendarParams & {
 		id: string
 		series_id: string
@@ -154,29 +154,29 @@ export namespace Calendar {
 		status: CalendarStatus
 	}
 
-	// 获取用户闲忙状态参数
+	// Get user free/busy status
 	export type GetUserStatusParams = {
 		start_time: string
 		end_time: string
 		user_ids: string[]
 	}
 
-	// 根据日期获取日程
+	// Get event by date
 	export type GetCalendarByDayParams = {
 		dates: string[]
 	}
 
-	// 修改日程邀请状态
+	// Update event invitation status
 	export type UpdateCalendarStatusParams = {
-		// 日程id
+		// Event id
 		schedule_id: string
-		// 日程类型
+		// Event status
 		type: CalendarStatus
-		// 修改范围
+		// Modification scope
 		modification_type: ChangeScope
 	}
 
-	// 评论日程
+	// Comment on event
 	export type CommentCalendarParams = {
 		schedule_id: string
 		message: string
@@ -203,7 +203,7 @@ export namespace Calendar {
 		"15+" = "15+",
 	}
 
-	// 获取会议室筛选条件
+	// Get meeting room filtering criteria
 	export type FilteringCriteria = {
 		location: {
 			id: string
@@ -223,14 +223,14 @@ export namespace Calendar {
 		location_value: string
 	}
 
-	// 可预约时间段
+	// Available time slots
 	export type AvailabelTimeLine = {
 		start_time: string
 		end_time: string
 		time_slots: string
 	}
 
-	// 会议室列表
+	// Meeting room list
 	export type MeetingRoom = {
 		title: MeetingRoom
 		id: string
@@ -256,7 +256,7 @@ export namespace Calendar {
 		}[]
 	}
 
-	// 某个时间段可预约的会议室
+	// Available meeting rooms for time period
 	export type TimeAvailableParams = {
 		start_time?: string
 		end_time?: string
@@ -271,7 +271,7 @@ export namespace Calendar {
 		location?: Location
 	}
 
-	// 获取会议室参数
+	// Get meeting room parameters
 	export type MeetingRoomParams = {
 		date?: string
 		duration?: number | null
@@ -280,28 +280,28 @@ export namespace Calendar {
 		location?: Location
 	}
 
-	// 删除日程参数
+	// Delete event parameters
 	export type DeleteCalendarParams = {
 		schedule_id: string
 		type: ChangeScope
 	}
 
-	// 添加邀请人参数
+	// Add participant parameters
 	export type AddParticipantParams = {
 		id: string
 		participant_ids: string[]
-		// 1:添加到本次日程。2:添加到所有日程
+		// 1: add to current event, 2: add to all events
 		type: number
 	}
 
-	// 转让日程参数
+	// Transfer organizer parameters
 	export type TransferOrganizerParams = {
 		schedule_id: string
 		target_user_id: string
 		is_original_organizer_removed: boolean
 	}
 
-	// 筛选条件参数
+	// Filter option parameters
 	export type Option = {
 		value: string | number
 		label: string

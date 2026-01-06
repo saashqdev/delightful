@@ -15,7 +15,7 @@ export namespace Common {
 		}>
 	}
 
-	/** 私有化登录 - 第三方登录数据（静默登录、扫码登录） */
+	/** Private login - third-party login data (silent login, QR code login) */
 	interface PrivateConfigSignInValues {
 		enable: boolean
 		/** App Id */
@@ -24,27 +24,27 @@ export namespace Common {
 		appKey?: string
 		/** App Secret */
 		appSecret?: string
-		/** 重定向地址 */
+		/** Redirect URL */
 		redirectUrl?: string
-		/** 钉钉组织ID */
+		/** DingTalk organization ID */
 		corpId?: string
 	}
 
-	/** 私有化登录 - 服务配置 */
+	/** Private login - service configuration */
 	interface ServiceConfig {
-		/** 服务地址 */
+		/** Service address */
 		url?: string
 	}
 
-	/** 私有化部署配置 */
+	/** Private deployment configuration */
 	export interface PrivateConfig {
-		/** 私有化部署专属码 */
+		/** Private deployment access code */
 		deployCode: string
-		/** 当前环境名称 */
+		/** Current environment name */
 		name?: string
-		/** 微应用/微服务（teamshare、keewood、delightful等服务中http、websocket等配置） */
+		/** Micro-application/micro-service (http, websocket, etc. config in teamshare, keewood, delightful and other services) */
 		services: Record<string, ServiceConfig>
-		/** 第三方登录 */
+		/** Third-party login */
 		loginConfig?: Record<Login.LoginType, PrivateConfigSignInValues>
 	}
 }

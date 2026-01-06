@@ -2,7 +2,7 @@ import { useEffect, useRef, useCallback } from "react"
 import WorkerJs from "./worker?sharedworker"
 import { MessageType } from "./const"
 
-// 用户消息推送Websocket连接
+// User message push WebSocket connection
 export default function useSharedWorker(options: WorkerOptions) {
 	const workerRef = useRef<SharedWorker>()
 

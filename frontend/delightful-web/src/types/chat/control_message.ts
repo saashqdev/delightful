@@ -6,183 +6,183 @@ import type { SeenMessage } from "./seen_message"
 import type { CreateTopicMessage, UpdateTopicMessage, DeleteTopicMessage } from "./topic"
 
 /**
- * 控制事件类型
+ * Control event type
  */
 
 export const enum ControlEventMessageType {
-	/** 打开（创建）会话 */
+	/** Open (create) conversation */
 	OpenConversation = "open_conversation",
-	/** 创建会话 */
+	/** Create conversation */
 	CreateConversation = "create_conversation",
-	/** 已读回执 */
+	/** Read receipt */
 	SeenMessages = "seen_messages",
-	/** 创建话题 */
+	/** Create topic */
 	CreateTopic = "create_topic",
-	/** 更新话题 */
+	/** Update topic */
 	UpdateTopic = "update_topic",
-	/** 删除话题 */
+	/** Delete topic */
 	DeleteTopic = "delete_topic",
-	/** 设置会话话题 */
+	/** Set conversation topic */
 	SetConversationTopic = "set_conversation_topic",
-	/** 撤回消息 */
+	/** Revoke message */
 	RevokeMessage = "revoke_message",
-	/** 免打扰 */
+	/** Mute conversation */
 	MuteConversation = "mute_conversation",
-	/** 置顶群聊 */
+	/** Pin group chat */
 	TopConversation = "top_conversation",
-	/** 隐藏会话 */
+	/** Hide conversation */
 	HideConversation = "hide_conversation",
-	/** 群聊创建 */
+	/** Group created */
 	GroupCreate = "group_create",
-	/** 群新增成员消息 */
+	/** Group member added */
 	GroupAddMember = "group_users_add",
-	/** 群解散 */
+	/** Group disbanded */
 	GroupDisband = "group_disband",
-	/** 群人员退群 */
+	/** Group member removed */
 	GroupUsersRemove = "group_users_remove",
-	/** 群更新 */
+	/** Group updated */
 	GroupUpdate = "group_update",
-	/** 添加好友成功 */
+	/** Friend request accepted */
 	AddFriendSuccess = "add_friend_success",
 }
 
 export interface AddFriendSuccessMessage extends SeqMessageBase {
 	type: ControlEventMessageType.AddFriendSuccess
-	/** 添加好友成功 */
+	/** Friend request accepted */
 	add_friend_success: {
-		/** 用户 ID */
+		/** User ID */
 		user_id: string
-		/** 接收者 ID */
+		/** Receiver ID */
 		receive_id: string
-		/** 接收者类型 */
+		/** Receiver type */
 		receive_type: MessageReceiveType
 	}
 }
 /**
- * 撤回消息
+ * Revoke message
  */
 
 export interface RevokeMessage extends ConversationMessageBase {
 	type: ControlEventMessageType.RevokeMessage
 	revoke_message: {
-		/** 撤回消息 ID */
+		/** Revoked message ID */
 		refer_message_id: string
 	}
 }
 /**
- * 群创建消息
+ * Group created message
  */
 
 export interface GroupCreateMessage extends ConversationMessageBase {
 	type: ControlEventMessageType.GroupCreate
-	/** 未读数 */
+	/** Unread count */
 	unread_count: number
-	/** 发送时间 */
+	/** Send time */
 	send_time: number
-	/** 状态 */
+	/** Status */
 	status: ConversationMessageStatus
 	group_create: {
-		/** 操作人ID */
+		/** Operator user ID */
 		operate_user_id: string
-		/** 群ID */
+		/** Group ID */
 		group_id: string
-		/** 用户ID列表 */
+		/** User ID list */
 		user_ids: string[]
-		/** 会话ID */
+		/** Conversation ID */
 		conversation_id: string
-		/** 群名称 */
+		/** Group name */
 		group_name: string
-		/** 群主ID */
+		/** Group owner ID */
 		group_owner_id: string
 	}
 }
 /**
- * 群解散消息
+ * Group disbanded message
  */
 
 export interface GroupDisbandMessage extends ConversationMessageBase {
 	type: ControlEventMessageType.GroupDisband
-	/** 未读数 */
+	/** Unread count */
 	unread_count: number
-	/** 发送时间 */
+	/** Send time */
 	send_time: number
-	/** 状态 */
+	/** Status */
 	status: ConversationMessageStatus
 }
 /**
- * 群新增成员消息
+ * Group member added
  */
 
 export interface GroupAddMemberMessage extends ConversationMessageBase {
 	type: ControlEventMessageType.GroupAddMember
-	/** 未读数 */
+	/** Unread count */
 	unread_count: number
-	/** 发送时间 */
+	/** Send time */
 	send_time: number
-	/** 状态 */
+	/** Status */
 	status: ConversationMessageStatus
-	/** 群新增成员 */
+	/** Group members added */
 	group_users_add: {
-		/** 操作人ID */
+		/** Operator user ID */
 		operate_user_id: string
-		/** 群ID */
+		/** Group ID */
 		group_id: string
-		/** 用户ID列表 */
+		/** User ID list */
 		user_ids: string[]
-		/** 会话ID */
+		/** Conversation ID */
 		conversation_id: string
 	}
 }
 /**
- * 群人员退群
+ * Group member removed
  */
 
 export interface GroupUsersRemoveMessage extends ConversationMessageBase {
 	type: ControlEventMessageType.GroupUsersRemove
-	/** 未读数 */
+	/** Unread count */
 	unread_count: number
-	/** 发送时间 */
+	/** Send time */
 	send_time: number
-	/** 状态 */
+	/** Status */
 	status: ConversationMessageStatus
 	group_users_remove: {
-		/** 操作人ID */
+		/** Operator user ID */
 		operate_user_id: string
-		/** 群ID */
+		/** Group ID */
 		group_id: string
-		/** 用户ID列表 */
+		/** User ID list */
 		user_ids: string[]
-		/** 会话ID */
+		/** Conversation ID */
 		conversation_id: string
 	}
 }
 /**
- * 群更新
+ * Group updated
  */
 
 export interface GroupUpdateMessage extends ConversationMessageBase {
 	type: ControlEventMessageType.GroupUpdate
-	/** 未读数 */
+	/** Unread count */
 	unread_count: number
-	/** 发送时间 */
+	/** Send time */
 	send_time: number
-	/** 状态 */
+	/** Status */
 	status: ConversationMessageStatus
 	group_update: {
-		/** 操作人ID */
+		/** Operator user ID */
 		operate_user_id: string
-		/** 群ID */
+		/** Group ID */
 		group_id: string
-		/** 会话ID */
+		/** Conversation ID */
 		conversation_id: string
-		/** 群名称 */
+		/** Group name */
 		group_name: string
-		/** 群头像 */
+		/** Group avatar */
 		group_avatar: string
 	}
 }
 /**
- * 置顶会话
+ * Pin conversation
  */
 
 export interface TopConversationMessage extends ConversationMessageBase {
@@ -193,7 +193,7 @@ export interface TopConversationMessage extends ConversationMessageBase {
 	}
 }
 /**
- * 免打扰消息
+ * Mute conversation
  */
 
 export interface MuteConversationMessage extends ConversationMessageBase {
@@ -204,7 +204,7 @@ export interface MuteConversationMessage extends ConversationMessageBase {
 	}
 }
 /**
- * 隐藏会话
+ * Hide conversation
  */
 
 export interface HideConversationMessage extends ConversationMessageBase {
@@ -214,7 +214,7 @@ export interface HideConversationMessage extends ConversationMessageBase {
 	}
 }
 /**
- * 控制消息类型
+ * Control message type
  */
 
 export type ControlMessage =

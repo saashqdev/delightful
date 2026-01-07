@@ -397,7 +397,7 @@ class ApiTest extends BaseTestCase
 
     public function testPreEncodeUrlWithQueryParams(): void
     {
-        $api = Api::createByUrl(ApiMethod::Get, 'https://api.example.com/users?name=张三&age=25');
+        $api = Api::createByUrl(ApiMethod::Get, 'https://api.example.com/users?name=John&age=25');
 
         $this->assertEquals('https://api.example.com', $api->getDomain());
         $this->assertStringContainsString('name=', $api->getPath());

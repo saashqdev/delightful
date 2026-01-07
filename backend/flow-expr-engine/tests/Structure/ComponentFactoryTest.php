@@ -66,7 +66,7 @@ JSON
         "sort": 0,
         "type": "object",
         "items": null,
-        "title": "root节点",
+        "title": "root node",
         "value": null,
         "required": [
             "var1"
@@ -78,7 +78,7 @@ JSON
                 "sort": 0,
                 "type": "object",
                 "items": null,
-                "title": "变量名",
+                "title": "variable name",
                 "value": {
                     "type": "expression",
                     "expression_value": [

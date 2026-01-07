@@ -80,65 +80,65 @@ export interface Conversation extends ConversationFromService {
 
 export interface OpenConversationMessage extends SeqMessageBase {
 	type: ControlEventMessageType.OpenConversation | ControlEventMessageType.CreateConversation
-	/** 发送时间 */
+	/** Sent time */
 	send_time: number
-	/** 打开会话 */
+	/** Open conversation */
 	open_conversation: {
-		/** 接收者 ID */
+		/** Receiver ID */
 		receive_id: string
-		/** 接收者类型 */
+		/** Receiver type */
 		receive_type: MessageReceiveType
-		/** 会话 ID */
+		/** Conversation ID */
 		id: string
 	}
 }
 
 /**
- * 群聊类型
+ * Group chat type
  */
 export enum GroupConversationType {
-	/** 内部群 */
+	/** Internal group */
 	Internal = 1,
-	/** 内部培训群 */
+	/** Internal training group */
 	InternalTraining = 2,
-	/** 内部会议群 */
+	/** Internal meeting group */
 	InternalMeeting = 3,
-	/** 内部项目群 */
+	/** Internal project group */
 	InternalProject = 4,
-	/** 内部工单群 */
+	/** Internal work order group */
 	InternalWorkOrder = 5,
-	/** 外部群 */
+	/** External group */
 	External = 6,
 }
 
 export enum GroupStatus {
-	/** 正常 */
+	/** Normal */
 	Normal = 1,
-	/** 解散 */
+	/** Dissolved */
 	Dismiss = 2,
 }
 
 /**
- * 群聊详情
+ * Group chat detail
  */
 export interface GroupConversationDetail {
-	/** 群聊ID */
+	/** Group chat ID */
 	id: string
-	/** 群主 */
+	/** Group owner */
 	group_owner: string
-	/** 组织编码 */
+	/** Organization code */
 	organization_code: string
-	/** 群聊名称 */
+	/** Group chat name */
 	group_name: string
-	/** 群聊头像 */
+	/** Group chat avatar */
 	group_avatar: string
-	/** 群聊公告 */
+	/** Group chat announcement */
 	group_tag: string
-	/** 群聊类型 */
+	/** Group chat type */
 	group_type: GroupConversationType
-	/** 群聊状态 */
+	/** Group chat status */
 	group_status: GroupStatus
-	/** 群公告 */
+	/** Group notice */
 	group_notice: string
 }
 

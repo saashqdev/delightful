@@ -10,50 +10,50 @@ import type { ControlMessage } from "./control_message"
 import type { ConversationFromService } from "./conversation"
 import type { IntermediateMessage } from "./intermediate_message"
 
-/** 消息接收方类型 */
+/** Message recipient type */
 export const enum MessageReceiveType {
 	Ai = 0,
-	/** 用户 */
+	/** User */
 	User = 1,
-	/** 群组 */
+	/** Group */
 	Group = 2,
-	/** 系统消息 */
+	/** System message */
 	System = 3,
-	/** 云文档 */
+	/** Cloud document */
 	CloudDocument = 4,
-	/** 多维表格 */
+	/** Multi-dimensional table */
 	MultiTable = 5,
-	/** 话题 */
+	/** Topic */
 	Topic = 6,
-	/** 应用消息 */
+	/** App message */
 	App = 7,
 }
 
-/** 最大序号 */
+/** Maximum sequence number */
 export interface MessageMaxSeqInfo {
 	user_local_seq_id?: string
 }
 
 /**
- * 服务端推送事件类型
+ * Server push event type
  */
 export const enum EventType {
-	/** 登录 */
+	/** Login */
 	Login = "login",
-	/** 聊天 */
+	/** Chat */
 	Chat = "chat",
-	/** 流式聊天 */
+	/** Streaming chat */
 	Stream = "stream",
-	/** 控制 */
+	/** Control */
 	Control = "control",
-	/** 即时消息 */
+	/** Intermediate message */
 	Intermediate = "intermediate",
-	/** 创建会话窗口 */
+	/** Create conversation window */
 	CreateConversationWindow = "create_conversation_window",
 }
 
 /**
- * 服务端推送事件响应
+ * Server push event response
  */
 export interface EventResponseMap {
 	[EventType.Login]: User.UserInfo
@@ -65,7 +65,7 @@ export interface EventResponseMap {
 }
 
 /**
- * 服务端推送事件响应结构
+ * Server push event response structure
  */
 export type EventResponse<E extends EventType> = {
 	type: E
@@ -73,7 +73,7 @@ export type EventResponse<E extends EventType> = {
 }
 
 /**
- * 消息
+ * Message
  */
 export type CMessage =
 	| ControlMessage

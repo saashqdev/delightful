@@ -7,9 +7,9 @@ import type {
 	RetrieveConfig,
 } from "@/opensource/pages/vectorKnowledge/types"
 
-/** 知识库相关类型 */
+/** Knowledge base related types */
 export namespace Knowledge {
-	/** 创建知识库 - 参数 */
+	/** Create knowledge base - parameters */
 	export interface CreateKnowledgeParams {
 		name: string
 		description: string
@@ -24,7 +24,7 @@ export namespace Knowledge {
 		}[]
 	}
 
-	/** 创建知识库 - 响应 */
+	/** Create knowledge base - response */
 	export interface CreateKnowledgeResult {
 		id: string
 		code: string
@@ -47,7 +47,7 @@ export namespace Knowledge {
 		retrieve_config: Record<string, unknown>
 	}
 
-	/** 更新知识库 */
+	/** Update knowledge base */
 	export interface UpdateKnowledgeParams {
 		code: string
 		name: string
@@ -58,7 +58,7 @@ export namespace Knowledge {
 		retrieve_config?: RetrieveConfig
 	}
 
-	/** 单个知识库详情 */
+	/** Single knowledge base detail */
 	export interface Detail {
 		id: string
 		code: string
@@ -86,7 +86,7 @@ export namespace Knowledge {
 		retrieve_config: RetrieveConfig
 	}
 
-	/** 单个知识库列表项 */
+	/** Single knowledge base list item */
 	export interface KnowledgeItem {
 		id: string
 		code: string
@@ -119,16 +119,16 @@ export namespace Knowledge {
 		}
 	}
 
-	/** 知识库嵌入文档的附件 */
+	/** Knowledge base embed document attachment */
 	export interface EmbedDocumentFile {
 		name: string
 		key: string
-		type: 1 | 2 // 文件类型：1-外部文件 2-第三方平台文件
-		platform_type: string // 平台类型：teamshare-天书
-		third_file_id: string // 第三方文件ID
+		type: 1 | 2 // File type: 1-external file 2-third-party platform file
+		platform_type: string // Platform type: teamshare
+		third_file_id: string // Third-party file ID
 	}
 
-	/** 知识库嵌入文档详情 */
+	/** Knowledge base embed document detail */
 	export interface EmbedDocumentDetail {
 		id: string
 		code: string
@@ -164,7 +164,7 @@ export namespace Knowledge {
 		word_count: number
 	}
 
-	/** 添加知识库的文档 */
+	/** Add a knowledge base document */
 	export interface AddKnowledgeDocumentParams {
 		knowledge_code: string
 		enabled: boolean
@@ -174,7 +174,7 @@ export namespace Knowledge {
 		}
 	}
 
-	/** 更新知识库的文档 */
+	/** Update a knowledge base document */
 	export interface UpdateKnowledgeDocumentParams {
 		knowledge_code: string
 		document_code: string
@@ -183,13 +183,13 @@ export namespace Knowledge {
 		fragment_config: FragmentConfig
 	}
 
-	/** 删除知识库的文档 */
+	/** Delete a knowledge base document */
 	export interface DeleteKnowledgeDocumentParams {
 		knowledge_code: string
 		document_code: string
 	}
 
-	/** 分段预览 */
+	/** Segment preview */
 	export interface SegmentPreviewParams {
 		fragment_config: FragmentConfig
 		document_file: {
@@ -198,7 +198,7 @@ export namespace Knowledge {
 		}
 	}
 
-	/** 单个片段 */
+	/** Single fragment */
 	export interface FragmentItem {
 		id: string
 		knowledge_base_code: string
@@ -251,7 +251,7 @@ export namespace Knowledge {
 		business_id: FragmentItem["business_id"]
 	}>
 
-	// 天书知识库单个项
+	// Tianshu knowledge base item
 	export type KnowledgeDatabaseItem = {
 		knowledge_code: string
 		knowledge_type: KnowledgeType
@@ -260,7 +260,7 @@ export namespace Knowledge {
 		description: string
 	}
 
-	// 请求进度的Params
+	// Params for requesting progress
 	export type GetTeamshareKnowledgeProgressParams = {
 		knowledge_codes: string[]
 	}
@@ -275,11 +275,11 @@ export namespace Knowledge {
 		completed_num: number
 	}
 
-	// 0: 文生图
-	// 1: 图生图
-	// 2: 图片增强
-	// 3: LLM大语言模型
-	// 4.嵌入模型
+	// 0: text-to-image
+	// 1: image-to-image
+	// 2: image enhancement
+	// 3: LLM large language model
+	// 4: embedding model
 	export interface GetActiveModelByCategoryParams {
 		category: "vlm" | "llm"
 		model_type: 0 | 1 | 2 | 3 | 4
@@ -307,7 +307,7 @@ export namespace Knowledge {
 		name: string
 		provider_code: string
 		/**
-		 * 1- 普通 2-官方 3-自定义
+		 * Provider type: 1-regular 2-official 3-custom
 		 */
 		provider_type: number
 		service_provider_id: string

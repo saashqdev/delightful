@@ -9,7 +9,7 @@ export interface ListData<T> {
 }
 
 /**
- * 用户任务列表参数
+ * User task list params
  */
 export interface TaskListParams {
 	agent_id: string
@@ -18,35 +18,35 @@ export interface TaskListParams {
 }
 
 /**
- * 用户任务
+ * User task
  */
 export interface UserTask {
 	id: string
-	// 助理id
+	// Assistant ID
 	agent_id: string
-	// 会话id
+	// Conversation ID
 	conversation_id: string
-	// 话题id
+	// Topic ID
 	topic_id: string
-	// 任务名称
+	// Task name
 	name: string
-	// 定时类型
+	// Schedule type
 	type: RepeatTypeMap
-	// 日期
+	// Date
 	day: string
-	// 时间
+	// Time
 	time: string | null
-	// 自定义
+	// Custom
 	value: {
-		// 间隔
+		// Interval
 		interval: number
-		// 单位
+		// Unit
 		unit: Units
-		// 值
+		// Values
 		values: string[]
-		// 截止日期
+		// Deadline
 		deadline: string
-		// 月份
+		// Month
 		month?: string
 	}
 }

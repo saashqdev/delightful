@@ -32,7 +32,7 @@ class ExpressionTest extends BaseTestCase
         $input = [
             [
                 'type' => 'input',
-                'value' => '你是一个有用的助手，能解决',
+                'value' => 'You are a helpful assistant who can solve ',
                 'name' => '',
             ],
             [
@@ -42,7 +42,7 @@ class ExpressionTest extends BaseTestCase
             ],
             [
                 'type' => 'input',
-                'value' => '的问题，并且能够同时帮助',
+                'value' => ' problems and can also help ',
                 'name' => '',
             ],
             [
@@ -52,7 +52,7 @@ class ExpressionTest extends BaseTestCase
             ],
             [
                 'type' => 'input',
-                'value' => '个人。"嘻嘻"',
+                'value' => ' people. "hehe"',
                 'name' => '',
             ],
         ];
@@ -66,7 +66,7 @@ class ExpressionTest extends BaseTestCase
                 'num' => 9527,
             ],
         ]);
-        $this->assertEquals('你是一个有用的助手，能解决PHP的问题，并且能够同时帮助9527个人。"嘻嘻"', $res);
+        $this->assertEquals('You are a helpful assistant who can solve PHP problems and can also help 9527 people. "hehe"', $res);
     }
 
     public function testNumberConst()
@@ -139,7 +139,7 @@ JSON
                 "const_value": [
                     {
                         "type": "input",
-                        "value": "嘻嘻",
+                        "value": "hehe",
                         "name": "name",
                         "args": []
                     }
@@ -152,7 +152,7 @@ JSON
 JSON,
             true
         ));
-        $this->assertEquals('aa068250325852a3478835e3acbd6ccd', $expression->getResult([]));
+        $this->assertEquals('529ca8050a00180790cf88b63468826a', $expression->getResult([]));
 
         $expression = $builder->build(json_decode(
             <<<'JSON'
@@ -180,7 +180,7 @@ JSON,
 JSON,
             true
         ));
-        $this->assertEquals('aa068250325852a3478835e3acbd6ccd', $expression->getResult(['a' => ['b' => '嘻嘻']]));
+        $this->assertEquals('529ca8050a00180790cf88b63468826a', $expression->getResult(['a' => ['b' => 'hehe']]));
 
         $expression = $builder->build(json_decode(
             <<<'JSON'
@@ -399,7 +399,7 @@ JSON,
     {
         "type":"fields",
         "value":"product_qty[0]",
-        "name":"商品数量",
+        "name":"product quantity",
         "args":null
     },
     {
@@ -411,7 +411,7 @@ JSON,
     {
         "type":"methods",
         "value":"round",
-        "name":"四舍五入",
+        "name":"rounding",
         "args":[
             {
                 "type":"const",

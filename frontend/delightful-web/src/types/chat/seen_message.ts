@@ -5,25 +5,25 @@ import type { GroupConversationType } from "./conversation"
 import type { ConversationMessageStatus } from "./conversation_message"
 
 /**
- * 已读回执
+ * Read receipt
  */
 export interface SeenMessage extends SeqMessageBase {
 	type: ControlEventMessageType.SeenMessages
 	seen_messages: {
 		refer_message_ids: string[]
 	}
-	/** 发送时间 */
+	/** Sent time */
 	send_time: number
-	/** 消息状态 */
+	/** Message status */
 	status: ConversationMessageStatus
-	/** 未读消息数 */
+	/** Unread message count */
 	unread_count: number
-	/** 话题ID */
+	/** Topic ID */
 	topic_id: string
 }
 
 /**
- * 创建群组对话参数
+ * Create group conversation params
  */
 export type CreateGroupConversationParams = {
 	[CreateGroupConversationParamKey.group_name]: string

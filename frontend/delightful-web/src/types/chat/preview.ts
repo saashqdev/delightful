@@ -2,7 +2,7 @@ import type { FileTypeResult } from "file-type"
 import { ConversationMessageAttachment } from "./conversation_message"
 
 /**
- * 文件预览信息
+ * File preview info
  */
 export type FilePreviewInfo = {
 	src?: string
@@ -11,15 +11,15 @@ export type FilePreviewInfo = {
 } & Partial<ConversationMessageAttachment>
 
 /**
- * 图片预览信息
+ * Image preview info
  */
 export type ImagePreviewInfo = {
 	messageId: string | undefined
 	conversationId: string | undefined
 	fileId?: string
-	// 原图文件id
+	// Original image file ID
 	oldFileId?: string
-	// 原图文件url
+	// Original image file URL
 	oldUrl?: string
 	fileName?: string
 	fileSize?: number
@@ -29,8 +29,8 @@ export type ImagePreviewInfo = {
 		| Partial<FileTypeResult>
 		| { ext?: "svg"; mime?: "image/svg+xml" }
 		| { ext?: string; mime?: string }
-	/** 是否独立显示 */
+	/** Show as a standalone view */
 	standalone?: boolean
-	/** 是否使用转高清功能 */
+	/** Use the HD conversion feature */
 	useHDImage?: boolean
 }

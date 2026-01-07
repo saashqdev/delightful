@@ -37,7 +37,7 @@ exports[`DelightfulSpin > Snapshot tests > Loading state snapshot 1`] = `
       class="delightful-spin-container delightful-spin-blur"
     >
       <div>
-        内容区域
+        Content area
       </div>
     </div>
   </div>
@@ -81,7 +81,7 @@ exports[`DelightfulSpin > Snapshot tests > Basic loader snapshot 1`] = `
       class="delightful-spin-container delightful-spin-blur"
     >
       <div>
-        内容区域
+        Content area
       </div>
     </div>
   </div>
@@ -125,7 +125,7 @@ exports[`DelightfulSpin > Snapshot tests > Large size loader snapshot 1`] = `
       class="delightful-spin-container delightful-spin-blur"
     >
       <div>
-        内容区域
+        Content area
       </div>
     </div>
   </div>
@@ -169,7 +169,7 @@ exports[`DelightfulSpin > Snapshot tests > Small size loader snapshot 1`] = `
       class="delightful-spin-container delightful-spin-blur"
     >
       <div>
-        内容区域
+        Content area
       </div>
     </div>
   </div>
@@ -218,7 +218,7 @@ exports[`DelightfulSpin > Snapshot tests > With tip text snapshot 1`] = `
       class="delightful-spin-container delightful-spin-blur"
     >
       <div>
-        内容区域
+        Content area
       </div>
     </div>
   </div>
@@ -234,7 +234,7 @@ exports[`DelightfulSpin > Snapshot tests > Delayed loading snapshot 1`] = `
       class="delightful-spin-container"
     >
       <div>
-        内容区域
+        Content area
       </div>
     </div>
   </div>

@@ -47,7 +47,7 @@ class ConditionTest extends BaseTestCase
         $conditionArray = $this->getInput();
         $condition = $this->builder->build($conditionArray);
 
-        $this->assertEquals("((('哈哈哈') > (2)) && ((\$data['success']) || ((2) === ('2'))))", $condition->getCode());
+        $this->assertEquals("((('haha') > (2)) && ((\$data['success']) || ((2) === ('2'))))", $condition->getCode());
         $this->assertTrue($condition->getResult(['success' => true]));
         $this->assertFalse($condition->getResult(['success' => false]));
     }
@@ -440,7 +440,7 @@ JSON,
                                 "const_value":[
                                     {
                                         "type":"input",
-                                        "value":"实际值",
+                                        "value":"actual value",
                                         "name":"name",
                                         "args":null
                                     }
@@ -485,7 +485,7 @@ JSON
         );
 
         $condition = $this->builder->build($array);
-        $this->assertEquals("(((555) > ('实际值')))", $condition->getCode());
+        $this->assertEquals("(((555) > ('actual value')))", $condition->getCode());
         $this->assertFalse($condition->getResult());
     }
 
@@ -509,7 +509,7 @@ JSON
                                 {
                                     "type": "fields",
                                     "value": "component-65963366134af.guzzle.response.http_code",
-                                    "name": "http状态码",
+                                    "name": "http status code",
                                     "args": null
                                 }
                             ]
@@ -548,7 +548,7 @@ JSON
                                 {
                                     "type": "fields",
                                     "value": "component-65963366134af.guzzle.response.body",
-                                    "name": "响应体",
+                                    "name": "response body",
                                     "args": null
                                 },
                                 {
@@ -584,7 +584,7 @@ JSON
                         {
                             "type": "fields",
                             "value": "component-65963366134af.guzzle.response.body",
-                            "name": "响应体",
+                            "name": "response body",
                             "args": null
                         },
                         {
@@ -622,7 +622,7 @@ JSON,
                 "const_value": [
                     {
                         "type": "input",
-                        "value": "哈哈哈",
+                        "value": "haha",
                         "name": "1",
                         "args": null
                     }

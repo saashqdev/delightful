@@ -33,10 +33,10 @@ class ValueDataTypeTransformTest extends BaseTestCase
         $this->assertEquals('123', $target);
 
         try {
-            $source = '123你好';
+            $source = '123hello';
             ValueDataTypeTransform::toNumber($source);
         } catch (Throwable $th) {
-            $this->assertEquals('Cannot convert 123你好 to number', $th->getMessage());
+            $this->assertEquals('Cannot convert 123hello to number', $th->getMessage());
             $this->assertInstanceOf(FlowExprEngineException::class, $th);
         }
     }

@@ -78,77 +78,77 @@ export const enum StructureUserType {
 	// Unknown (e.g., personal edition user)
 	Unknown = 0,
 
-	// 正式员工
+	// Full-time employee
 	Formal = 1,
 
-	// 实习生
+	// Intern
 	Intern = 2,
 
-	// 外包
+	// Outsourcing
 	Outsourcing = 3,
 
-	// 劳务派遣
+	// Labor dispatch
 	LaborDispatch = 4,
 
-	// 顾问
+	// Consultant
 	Consultant = 5,
 }
 
 export interface StructureUserItem {
-	/** delightful 生态下的用户 ID */
+	/** User ID in delightful ecosystem */
 	user_id: string
-	/** 钉钉 ID */
+	/** DingTalk ID */
 	delightful_id: string
-	/** 组织编码 */
+	/** Organization code */
 	organization_code: string
-	/** 用户类型 */
+	/** User type */
 	user_type: UserType
-	/** 描述 */
+	/** Description */
 	description: string
-	/** 点赞数 */
+	/** Like count */
 	like_num: number
-	/** 标签 */
+	/** Label */
 	label: string
-	/** 状态 */
+	/** Status */
 	status: 1 | 0
-	/** 昵称 */
+	/** Nickname */
 	nickname: string
-	/** 头像 */
+	/** Avatar */
 	avatar_url: string
-	/** 国家编码 */
+	/** Country code */
 	country_code: string
-	/** 电话 */
+	/** Phone */
 	phone: string
-	/** 邮箱 */
+	/** Email */
 	email: string
-	/** 真实姓名 */
+	/** Real name */
 	real_name: string
-	/** 员工类型 */
+	/** Employee type */
 	employee_type: StructureUserType
-	/** 员工编号 */
+	/** Employee number */
 	employee_no: string
-	/** 职位 */
+	/** Job title */
 	job_title: string
-	/** 是否是领导 */
+	/** Is leader */
 	is_leader: boolean
-	/** 路径节点 */
+	/** Path nodes */
 	path_nodes: PathNode[]
 	/**
-	 * @deprecated 机器人信息
-	 * 请使用 agent_info 代替
+	 * @deprecated Bot information
+	 * Please use agent_info instead
 	 */
 	bot_info?: {
 		bot_id: string
 		flow_code: string
 		user_operation: OperationTypes
 	}
-	/** 机器人信息 */
+	/** Agent information */
 	agent_info?: {
 		bot_id: string
 		flow_code: string
 		user_operation: OperationTypes
 	}
-	/** 个人说明书url */
+	/** Personal manual URL */
 	user_manual: string
 }
 

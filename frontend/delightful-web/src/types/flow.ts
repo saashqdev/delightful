@@ -43,7 +43,7 @@ export interface TriggerConfig {
 	[key: string]: any
 }
 
-// If节点的单条分直播hi
+// Single branch entry for an If node
 export interface IfBranch {
 	branch_id: string
 	next_nodes: string[]

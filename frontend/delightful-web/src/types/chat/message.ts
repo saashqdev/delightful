@@ -7,27 +7,27 @@ import type {
 import type { ControlEventMessageType } from "./control_message"
 
 export interface Message<M extends ConversationMessage = ConversationMessage> {
-	/** 本地临时id */
+	/** Local temporary ID */
 	temp_id?: string
-	/** 用户唯一 ID */
+	/** Unique user ID */
 	delightful_id: string
-	/** 消息序列 ID */
+	/** Message sequence ID */
 	seq_id?: string
-	/** 消息 ID */
+	/** Message ID */
 	message_id: string
-	/** 引用消息 ID */
+	/** Referenced message ID */
 	refer_message_id?: string
-	/** 发送者消息 ID */
+	/** Sender message ID */
 	sender_message_id?: string
-	/** 会话 ID */
+	/** Conversation ID */
 	conversation_id: string
-	/** 消息类型 */
+	/** Message type */
 	type: ConversationMessageType | ControlEventMessageType
-	/** 消息内容 */
+	/** Message content */
 	message: M
-	/** 是否已撤回 */
+	/** Whether the message is revoked */
 	revoked?: boolean
-	/** 发送时间 */
+	/** Sent time */
 	send_time: string
 }
 

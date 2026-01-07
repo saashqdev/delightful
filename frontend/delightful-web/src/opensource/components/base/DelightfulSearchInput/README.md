@@ -1,4 +1,4 @@
-# DelightfulSearchInput Magic Search Input Component
+# DelightfulSearchInput Delightful Search Input Component
 
 `DelightfulSearchInput` is an enhanced search input based on Ant Design's Input.Search, offering more polished styles and a better user experience.
 

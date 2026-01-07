@@ -15,10 +15,10 @@ export function exportMarkmapToPng(data: string, width: number = 3840, height: n
 		`
 		document.body.appendChild(tempContainer)
 
-		// 克隆SVG到临时容器
+		// Clone SVG to temporary container
 		const tempSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
 
-		// 清空克隆的SVG内容
+		// Clear cloned SVG content
 		while (tempSvg.firstChild) {
 			tempSvg.removeChild(tempSvg.firstChild)
 		}
@@ -29,7 +29,7 @@ export function exportMarkmapToPng(data: string, width: number = 3840, height: n
 		tempSvg.style.height = `${height}px`
 		tempContainer.appendChild(tempSvg)
 
-		// 创建新的 Markmap 实例并设置数据
+		// Create new Markmap instance and set data
 		const mm = Markmap.create(tempSvg, {
 			autoFit: true,
 			pan: false,

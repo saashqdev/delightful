@@ -76,13 +76,13 @@ export const ImageViewBlock: FC<NodeViewProps> = ({ node, selected, updateAttrib
 
 	//     console.log()
 
-	// 		// 已经上传过了
+	// 		// Already uploaded
 	// 		if (uploadAttemptedRef.current) return
 
 	// 		const imageExtension = editor.options.extensions.find((ext) => ext.name === Image.name)
 	// 		const { uploadFn } = imageExtension?.options ?? {}
 
-	// 		// 没有上传函数, 转化为 base64
+	// 		// No upload function, convert to base64
 	// 		if (!uploadFn) {
 	// 			try {
 	// 				const base64 = file_extension?.startsWith("svg")
@@ -97,7 +97,7 @@ export const ImageViewBlock: FC<NodeViewProps> = ({ node, selected, updateAttrib
 	// 			return
 	// 		}
 
-	// 		// 有上传函数
+	// 		// Has upload function
 	// 		try {
 	// 			setImageState((prev) => ({ ...prev, isServerUploading: true }))
 	// 			const response = await fetch(initSrc)

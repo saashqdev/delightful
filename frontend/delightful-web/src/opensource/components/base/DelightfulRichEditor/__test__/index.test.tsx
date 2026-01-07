@@ -2,18 +2,18 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 import { render, screen, cleanup } from "@testing-library/react"
 import type { ReactNode } from "react"
 import DelightfulRichEditor from "../index"
-// 导入测试设置
+// Import test setup
 import { mockSetup } from "./setup"
 
-// 在测试开始前执行设置
+// Execute setup before tests
 mockSetup()
 
-// 在vi.mock之前声明模拟函数
-// 模拟 TipTap 的依赖
+// Declare mock functions before vi.mock
+// Mock TipTap dependencies
 vi.mock("@tiptap/react", async () => {
 	const actual = await vi.importActual("@tiptap/react")
 
-	// 创建一个编辑器模拟对象
+	// Create editor mock object
 	const mockEditor = {
 		commands: {
 			focus: vi.fn(),
@@ -29,7 +29,7 @@ vi.mock("@tiptap/react", async () => {
 			},
 		},
 		destroy: vi.fn(),
-		// 添加缺失的必要属性
+		// Add missing necessary properties
 		commandManager: {
 			createCommands: vi.fn(),
 			callCommand: vi.fn(),
@@ -52,8 +52,8 @@ vi.mock("@tiptap/react", async () => {
 	return {
 		...actual,
 		useEditor: vi.fn().mockImplementation((config) => {
-			// 固定返回同一个编辑器实例，避免重复渲染
-			// 条件性地调用onUpdate回调
+			// Return same editor instance to avoid repeated rendering
+			// Conditionally call onUpdate callback
 			if (config && config.onUpdate && !config.hasCalledUpdate) {
 				config.hasCalledUpdate = true
 				setTimeout(() => {
@@ -78,7 +78,7 @@ vi.mock("@tiptap/react", async () => {
 	}
 })
 
-// 模拟扩展模块
+// Mock extension modules
 vi.mock("../extensions/mention/suggestion", () => ({
 	default: vi.fn().mockReturnValue({}),
 }))
@@ -88,7 +88,7 @@ vi.mock("@tiptap/starter-kit", () => ({
 		configure: vi.fn().mockImplementation(() => {
 			const extensionObj = {
 				extend: vi.fn().mockImplementation((extensions) => {
-					// 合并传入的扩展并返回一个新对象
+					// Merge passed extensions and return new object
 					return {
 						...extensionObj,
 						...extensions,
@@ -119,7 +119,7 @@ vi.mock("tiptap-extension-font-size", () => ({
 	default: {},
 }))
 
-// 模拟组件的样式
+// Mock component styles
 vi.mock("../styles", () => ({
 	default: () => ({
 		styles: {
@@ -132,7 +132,7 @@ vi.mock("../styles", () => ({
 	}),
 }))
 
-// 模拟图片扩展
+// Mock image extension
 vi.mock("../extensions/image", () => ({
 	Image: {
 		configure: vi.fn().mockReturnValue({}),
@@ -140,21 +140,21 @@ vi.mock("../extensions/image", () => ({
 	},
 }))
 
-// 模拟文件处理扩展
+// Mock file handler extension
 vi.mock("../extensions/file-handler", () => ({
 	FileHandler: {
 		configure: vi.fn().mockReturnValue({}),
 	},
 }))
 
-// 模拟表情符号扩展
+// Mock emoji extension
 vi.mock("../extensions/delightfulEmoji", () => ({
 	default: {
 		configure: vi.fn().mockReturnValue({}),
 	},
 }))
 
-// 模拟硬换行扩展
+// Mock hard break extension
 vi.mock("@tiptap/extension-hard-break", () => ({
 	default: {
 		extend: vi.fn().mockReturnValue({
@@ -163,13 +163,13 @@ vi.mock("@tiptap/extension-hard-break", () => ({
 	},
 }))
 
-// 模拟占位符组件
+// Mock placeholder component
 vi.mock("../components/Placeholder", () => ({
 	default: ({ placeholder, show }: { placeholder: string; show: boolean }) =>
 		show ? <div data-testid="placeholder">{placeholder}</div> : null,
 }))
 
-// 模拟工具栏组件
+// Mock toolbar component
 vi.mock("../components/ToolBar", () => ({
 	default: ({ className }: { className: string; editor: any }) => (
 		<div data-testid="toolbar" className={className}>
@@ -178,66 +178,66 @@ vi.mock("../components/ToolBar", () => ({
 	),
 }))
 
-// 模拟 i18n
+// Mock i18n
 vi.mock("react-i18next", () => ({
 	useTranslation: () => ({
 		t: vi.fn().mockImplementation((key) => {
-			if (key === "richEditor.placeholder") return "请输入内容..."
+			if (key === "richEditor.placeholder") return "Please enter content..."
 			return key
 		}),
 	}),
 }))
 
-// 修改包装组件，不使用Ant Design的App组件
+// Modify wrapper component to not use Ant Design's App component
 const TestWrapper = ({ children }: { children: ReactNode }) => (
 	<div data-testid="test-wrapper">{children}</div>
 )
 
-describe("DelightfulRichEditor 组件", () => {
+describe("DelightfulRichEditor Component", () => {
 	beforeEach(() => {
-		// 每个测试前重置模拟函数的调用记录
+		// Reset mock function call records before each test
 		vi.clearAllMocks()
 	})
 
 	afterEach(() => {
-		// 每个测试后清理渲染的组件
+		// Clean up rendered components after each test
 		cleanup()
 	})
 
-	it("应正确渲染基础编辑器", () => {
+	it("should correctly render basic editor", () => {
 		render(
 			<TestWrapper>
 				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
-		// 验证编辑器内容是否渲染
+		// Verify editor content is rendered
 		expect(screen.getByTestId("editor-content")).toBeInTheDocument()
 
-		// 默认应该显示工具栏
+		// Toolbar should be displayed by default
 		expect(screen.getByTestId("toolbar")).toBeInTheDocument()
 	})
 
-	it("当 showToolBar=false 时不应显示工具栏", () => {
+	it("should not display toolbar when showToolBar=false", () => {
 		render(
 			<TestWrapper>
 				<DelightfulRichEditor showToolBar={false} />
 			</TestWrapper>,
 		)
 
-		// 工具栏不应存在
+		// Toolbar should not exist
 		expect(screen.queryByTestId("toolbar")).not.toBeInTheDocument()
 	})
 
-	it("应显示自定义占位符", () => {
-		const customPlaceholder = "请输入内容..."
+	it("should display custom placeholder", () => {
+		const customPlaceholder = "Please enter content..."
 		render(
 			<TestWrapper>
 				<DelightfulRichEditor placeholder={customPlaceholder} />
 			</TestWrapper>,
 		)
 
-		// 验证占位符是否正确显示
+		// Verify placeholder is displayed correctly
 		expect(screen.getByTestId("placeholder")).toBeInTheDocument()
 		expect(screen.getByTestId("placeholder")).toHaveTextContent(customPlaceholder)
 	})

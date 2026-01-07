@@ -1,4 +1,4 @@
-# DelightfulBlock Magic Block Component
+# DelightfulBlock Delightful Block Component
 
 `DelightfulBlock` is a simple editable content block component. It provides a `div` container with the `contentEditable` attribute, allowing users to directly edit its content.
 

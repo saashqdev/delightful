@@ -1,52 +1,52 @@
-# [组件名] 组件
+# [ComponentName] Component
 
-`[组件名]` 是一个[简短描述组件的功能和用途]。
+`[ComponentName]` is a [brief description of the component's functionality and purpose].
 
-## 属性
+## Props
 
-| 属性名  | 类型   | 默认值   | 说明   |
-| ------- | ------ | -------- | ------ |
-| [属性1] | [类型] | [默认值] | [说明] |
-| [属性2] | [类型] | [默认值] | [说明] |
-| ...     | ...    | ...      | ...    |
+| Property   | Type     | Default    | Description   |
+| ---------- | -------- | ---------- | ------------- |
+| [property1] | [type]   | [default]  | [description] |
+| [property2] | [type]   | [default]  | [description] |
+| ...        | ...      | ...        | ...           |
 
-## 基础用法
+## Basic Usage
 
 ```tsx
-import { [组件名] } from '@/components/base/[组件名]';
+import { [ComponentName] } from '@/components/base/[ComponentName]';
 
-// 基础用法
-<[组件名] [基础属性]>[内容]</[组件名]>
+// Basic usage
+<[ComponentName] [basic props]>[content]</[ComponentName]>
 
-// 示例 1：[描述]
-<[组件名] [属性]>[内容]</[组件名]>
+// Example 1: [description]
+<[ComponentName] [props]>[content]</[ComponentName]>
 
-// 示例 2：[描述]
-<[组件名] [属性]>[内容]</[组件名]>
+// Example 2: [description]
+<[ComponentName] [props]>[content]</[ComponentName]>
 
-// 示例 3：[描述]
-<[组件名] [属性]>[内容]</[组件名]>
+// Example 3: [description]
+<[ComponentName] [props]>[content]</[ComponentName]>
 ```
 
-## 特点
+## Features
 
-1. **[特点1]**：[描述]
-2. **[特点2]**：[描述]
-3. **[特点3]**：[描述]
-4. **[特点4]**：[描述]
+1. **[Feature 1]**: [description]
+2. **[Feature 2]**: [description]
+3. **[Feature 3]**: [description]
+4. **[Feature 4]**: [description]
 
-## 何时使用
+## When to Use
 
--   [使用场景1]
--   [使用场景2]
--   [使用场景3]
--   [使用场景4]
+-   [Use case 1]
+-   [Use case 2]
+-   [Use case 3]
+-   [Use case 4]
 
-[组件名] 组件[总结组件的主要优势和适用场景]。
+[ComponentName] component [summarize the main advantages and applicable scenarios].
 
-## 如何使用此模板
+## How to Use This Template
 
-1. 复制此模板到新组件的 README.md 文件中
-2. 将 `[组件名]` 替换为实际组件名
-3. 填写组件的属性、用法示例、特点和使用场景
-4. 删除此"如何使用此模板"部分
+1. Copy this template to the README.md file of a new component
+2. Replace `[ComponentName]` with the actual component name
+3. Fill in the component's props, usage examples, features, and use cases
+4. Delete this "How to Use This Template" section

@@ -1,4 +1,4 @@
-# DelightfulEllipseWithTooltip Magic Ellipsis Tooltip Component
+# DelightfulEllipseWithTooltip Delightful Ellipsis Tooltip Component
 
 `DelightfulEllipseWithTooltip` is an intelligent text ellipsis component that automatically displays ellipsis when text exceeds a specified width, and shows the full text via tooltip on mouse hover.
 

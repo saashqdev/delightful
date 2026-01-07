@@ -1,4 +1,4 @@
-# DelightfulSpin Magic Loading Component
+# DelightfulSpin Delightful Loading Component
 
 `DelightfulSpin` is an enhanced loading component based on Ant Design's Spin component, providing branded loading animations and better style control.
 

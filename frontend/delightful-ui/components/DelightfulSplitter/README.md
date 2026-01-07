@@ -1,4 +1,4 @@
-# DelightfulSplitter Magic Split Panel Component
+# DelightfulSplitter Delightful Split Panel Component
 
 `DelightfulSplitter` is an enhanced split panel based on Ant Design's Splitter component, providing a cleaner style and better user experience.
 

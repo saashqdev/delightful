@@ -21,31 +21,31 @@ import { safeJsonToBtoa } from "@/utils/encoding"
 type HTMLImageElementProps = JSX.IntrinsicElements["img"]
 
 interface ImageWrapperProps extends HTMLImageElementProps {
-	/** 容器 className */
+	/** Container className */
 	containerClassName?: string
-	/** 文件 id */
+	/** File id */
 	fileId?: string
-	/** 旧文件 id */
+	/** Old file id */
 	oldFileId?: string
-	/** 图片在该消息下的索引 */
+	/** Index of image in the message */
 	index?: number
-	/** 消息 id */
+	/** Message id */
 	messageId?: string
-	/** 独立渲染, 不参与上下页切换 */
+	/** Standalone render, not participating in page navigation */
 	standalone?: boolean
-	/** 是否使用高清图   */
+	/** Whether to use HD image */
 	useHDImage?: boolean
-	/** 图片加载失败时的回调 */
+	/** Callback when image fails to load */
 	reload?: () => void
-	/** 图片扩展名 */
+	/** Image extension */
 	imgExtension?: string
-	/** 图片大小 */
+	/** Image size */
 	fileSize?: number
-	/** 图片加载中的占位符 */
+	/** Placeholder during image loading */
 	loader?: (cls?: string) => React.ReactNode
-	/** 是否正在加载 */
+	/** Whether is loading */
 	isLoading?: boolean
-	/** 是否 Error */
+	/** Whether is Error */
 	isError?: boolean
 }
 
@@ -119,7 +119,7 @@ const ImageWrapper = observer((props: ImageWrapperProps) => {
 		} else {
 			setFileInfo({
 				url,
-				ext: { ext: "jpg", mime: "image/jpeg" }, // 默认认为是 jpg, 并不需要具体知道是什么类型的, 暂时不影响判断
+				ext: { ext: "jpg", mime: "image/jpeg" }, // Default to jpg, no need to know exact type, won't affect judgment for now
 				fileId,
 				oldFileId,
 				oldUrl,
@@ -147,7 +147,7 @@ const ImageWrapper = observer((props: ImageWrapperProps) => {
 
 	useUpdateEffect(() => {
 		const { previewInfo, open } = MessageFilePreviewStore
-		// 如果预览弹窗开启状态, 并且旧文件 id 和当前预览文件 id 相同, 并且使用高清图, 重新设置预览信息
+		// If preview modal is open and old file id matches current preview file id and using HD image, reset preview info
 		if (open && previewInfo?.fileId === fileInfo?.oldFileId && fileInfo?.useHDImage) {
 			MessageFilePreviewService.setPreviewInfo(fileInfo)
 		}

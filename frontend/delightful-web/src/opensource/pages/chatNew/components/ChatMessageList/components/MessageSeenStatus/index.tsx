@@ -1,5 +1,5 @@
 import { MessageReceiveType } from "@/types/chat"
-import { resolveToString } from "@dtyq/es6-template-strings"
+import { resolveToString } from "@delightful/es6-template-strings"
 
 import { IconEye, IconEyeCheck } from "@tabler/icons-react"
 import { useTranslation } from "react-i18next"

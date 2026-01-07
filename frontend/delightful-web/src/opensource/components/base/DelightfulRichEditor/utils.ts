@@ -77,11 +77,11 @@ export function isValidImageFile(file: File): boolean {
 }
 
 /**
- * 递归遍历所有节点，获取所有节点的类型
- * @param data
- * @param typeArray
- * @param depth
- * @returns
+ * Recursively traverse all nodes and collect their types
+ * @param data - Root JSONContent node
+ * @param typeArray - Accumulator set of node types
+ * @param depth - Current recursion depth
+ * @returns Set of node types
  */
 export function transformAllNodes(
 	data: JSONContent,
@@ -105,10 +105,11 @@ export function transformAllNodes(
 }
 
 /**
- * 替换快捷指令节点
- * @param content - 内容
- * @param quickInstructionNodeAttrs - 快捷指令节点
- * @returns 替换后的内容
+ * Transform JSON content by visiting nodes that match a condition
+ * @param content - Content to transform
+ * @param matcher - Predicate to determine which nodes to update
+ * @param updateContent - Updater invoked for matched nodes (can be async)
+ * @returns Transformed content
  */
 export async function transformJSONContent(
 	content: JSONContent | JSONContent[] | undefined,
@@ -340,15 +341,15 @@ export const filterFiles = <T extends FileInput>(
 }
 
 /**
- * 检测是否是纯文本
- * @param content 内容
- * @returns 是否是纯文本
+ * Check whether the content contains only plain text
+ * @param content - Content
+ * @returns Whether it is plain text
  */
 export const isOnlyText = (content?: JSONContent) => {
 	if (!content) return true
 
 	const typeArray = transformAllNodes(content)
-	// 如果包含 emoji 或 mention，则认为不是纯文本
-	// TODO: 代码逻辑需要优化
+	// If it contains emoji or mention, consider it not plain text
+	// TODO: Logic can be optimized
 	return richTextNode.every((type) => !typeArray.has(type))
 }

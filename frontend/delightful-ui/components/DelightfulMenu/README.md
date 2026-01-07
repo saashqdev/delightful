@@ -1,4 +1,4 @@
-# DelightfulMenu Magic Menu Component
+# DelightfulMenu Delightful Menu Component
 
 `DelightfulMenu` is an enhanced menu component based on Ant Design Menu, providing cleaner styles and better user experience.
 

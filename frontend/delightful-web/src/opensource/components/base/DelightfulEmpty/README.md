@@ -1,50 +1,50 @@
-# DelightfulEmpty 魔法空状态组件
+# DelightfulEmpty — Empty State Component
 
-`DelightfulEmpty` 是一个基于 Ant Design Empty 组件的简化版空状态组件，提供了国际化支持和简洁的默认样式。
+`DelightfulEmpty` is a simplified empty state component based on Ant Design's Empty, providing internationalization support and clean default styles.
 
-## 属性
+## Props
 
-| 属性名        | 类型 | 默认值 | 说明                             |
-| ------------- | ---- | ------ | -------------------------------- |
-| ...EmptyProps | -    | -      | 支持所有 Ant Design Empty 的属性 |
+| Prop          | Type | Default | Description                     |
+| ------------- | ---- | ------- | ------------------------------- |
+| ...EmptyProps | -    | -       | Supports all Ant Design Empty props |
 
-## 基础用法
+## Basic Usage
 
 ```tsx
 import { DelightfulEmpty } from '@/components/base/DelightfulEmpty';
 
-// 基础用法
+// Basic usage
 <DelightfulEmpty />
 
-// 自定义描述文本（会覆盖国际化文本）
-<DelightfulEmpty description="没有找到数据" />
+// Custom description text (overrides i18n text)
+<DelightfulEmpty description="No data found" />
 
-// 自定义图片
+// Custom image
 <DelightfulEmpty image="/path/to/custom-image.png" />
 
-// 在列表或表格中使用
+// Use in list or table
 <div style={{ textAlign: 'center', padding: '20px 0' }}>
   <DelightfulEmpty />
 </div>
 
-// 带操作按钮
+// With action button
 <DelightfulEmpty>
-  <button>创建新内容</button>
+  <button>Create New Content</button>
 </DelightfulEmpty>
 ```
 
-## 特点
+## Features
 
-1. **国际化支持**：自动使用 i18n 翻译的"无数据"文本
-2. **简洁样式**：默认使用 Empty.PRESENTED_IMAGE_SIMPLE 作为图片，更加简洁
-3. **易于使用**：无需额外配置，开箱即用
-4. **完全可定制**：支持所有 Ant Design Empty 组件的属性
+1. **Internationalization**: Auto uses i18n translated "no data" text
+2. **Minimal styling**: Defaults to `Empty.PRESENTED_IMAGE_SIMPLE` for a clean look
+3. **Easy to use**: No extra configuration, works out of the box
+4. **Fully customizable**: Supports all Ant Design Empty component props
 
-## 何时使用
+## When to Use
 
--   当页面或容器中没有数据时
--   当搜索或筛选结果为空时
--   当列表、表格或结果集为空时
--   当需要提示用户创建首个内容时
+-   When a page or container has no data
+-   When search or filter results are empty
+-   When a list, table, or result set is empty
+-   When prompting users to create their first content
 
-DelightfulEmpty 组件让你的空状态展示更加简洁和国际化，适合在各种场景下使用。
+The `DelightfulEmpty` component makes your empty states clean and internationalized, suitable for any scenario.

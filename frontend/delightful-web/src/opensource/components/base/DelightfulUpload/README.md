@@ -1,4 +1,4 @@
-# DelightfulUpload Magic Upload Component
+# DelightfulUpload Delightful Upload Component
 
 `DelightfulUpload` is a file upload component that provides straightforward upload functionality. It supports single and multiple file uploads and can be integrated with other components like buttons or drag-and-drop areas.
 

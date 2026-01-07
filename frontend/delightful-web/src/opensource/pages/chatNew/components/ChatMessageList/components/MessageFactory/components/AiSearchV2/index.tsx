@@ -26,7 +26,7 @@ import { IconChevronDown, IconChevronUp } from "@tabler/icons-react"
 // 工具函数/Hooks
 import { useBoolean, useMemoizedFn, useSize, useUpdateEffect } from "ahooks"
 import { camelCase, isEmpty, keyBy } from "lodash-es"
-import { resolveToString } from "@dtyq/es6-template-strings"
+import { resolveToString } from "@delightful/es6-template-strings"
 import { useTranslation } from "react-i18next"
 import { useFontSize } from "@/opensource/providers/AppearanceProvider/hooks"
 import { useTheme } from "antd-style"

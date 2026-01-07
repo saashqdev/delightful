@@ -1,4 +1,4 @@
-# DelightfulCheckFavor Magic Checkbox Component
+# DelightfulCheckFavor Delightful Checkbox Component
 
 DelightfulCheckFavor is a custom-styled checkbox component designed for favorites and preference settings scenarios. This component provides a selectable/deselectable interactive element with special visual styling, making it more intuitive in favorite-related features.
 

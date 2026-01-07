@@ -5,7 +5,7 @@ import type { Editor } from "@tiptap/react"
 import * as TiptapReact from "@tiptap/react"
 import DelightfulRichEditor from "../index"
 
-// 提升模拟函数
+// Hoist mock functions
 const mockUndo = vi.hoisted(() => vi.fn())
 const mockRedo = vi.hoisted(() => vi.fn())
 const mockChain = vi.hoisted(() =>
@@ -21,7 +21,7 @@ const mockChain = vi.hoisted(() =>
 	}),
 )
 
-// 创建基础模拟编辑器对象 - 使用 vi.hoisted 确保它在被vi.mock引用前正确初始化
+// Create base mock editor object - use vi.hoisted to ensure it's properly initialized before being referenced by vi.mock
 const baseMockEditor = vi.hoisted(() => ({
 	commands: {
 		focus: vi.fn(),
@@ -61,7 +61,7 @@ const baseMockEditor = vi.hoisted(() => ({
 	isFocused: false,
 }))
 
-// 模拟问题依赖
+// Mock problematic dependencies
 vi.mock("@dtyq/upload-sdk", () => ({
 	default: {
 		MultipartUploader: {
@@ -73,7 +73,7 @@ vi.mock("@dtyq/upload-sdk", () => ({
 	},
 }))
 
-// 确保URL.createObjectURL存在
+// Ensure URL.createObjectURL exists
 if (typeof window.URL.createObjectURL === "undefined") {
 	Object.defineProperty(window.URL, "createObjectURL", {
 		value: vi.fn().mockReturnValue("mock://url"),
@@ -81,7 +81,7 @@ if (typeof window.URL.createObjectURL === "undefined") {
 	})
 }
 
-// 模拟 TipTap 依赖
+// Mock TipTap dependencies
 vi.mock("@tiptap/react", () => {
 	return {
 		useEditor: vi.fn().mockReturnValue(baseMockEditor),
@@ -100,7 +100,7 @@ vi.mock("@tiptap/react", () => {
 	}
 })
 
-// 模拟 StarterKit 扩展
+// Mock StarterKit extension
 vi.mock("@tiptap/starter-kit", () => ({
 	default: {
 		configure: vi.fn().mockImplementation(() => {
@@ -120,7 +120,7 @@ vi.mock("@tiptap/starter-kit", () => ({
 	},
 }))
 
-// 模拟其他扩展
+// Mock other extensions
 vi.mock("@tiptap/extension-highlight", () => ({
 	default: {},
 }))
@@ -137,7 +137,7 @@ vi.mock("tiptap-extension-font-size", () => ({
 	default: {},
 }))
 
-// 模拟图片扩展
+// Mock image extension
 vi.mock("../extensions/image", () => ({
 	Image: {
 		configure: vi.fn().mockReturnValue({}),
@@ -145,21 +145,21 @@ vi.mock("../extensions/image", () => ({
 	},
 }))
 
-// 模拟文件处理扩展
+// Mock file handler extension
 vi.mock("../extensions/file-handler", () => ({
 	FileHandler: {
 		configure: vi.fn().mockReturnValue({}),
 	},
 }))
 
-// 模拟 DelightfulEmoji 扩展
+// Mock DelightfulEmoji extension
 vi.mock("../extensions/delightfulEmoji", () => ({
 	default: {
 		configure: vi.fn().mockReturnValue({}),
 	},
 }))
 
-// 模拟 HardBlock 扩展
+// Mock HardBlock extension
 vi.mock("@tiptap/extension-hard-break", () => ({
 	default: {
 		extend: vi.fn().mockReturnValue({
@@ -168,19 +168,19 @@ vi.mock("@tiptap/extension-hard-break", () => ({
 	},
 }))
 
-// 模拟 Mention 扩展
+// Mock Mention extension
 vi.mock("../extensions/mention", () => ({
 	default: {
 		configure: vi.fn().mockReturnValue({}),
 	},
 }))
 
-// 模拟 suggestion
+// Mock suggestion
 vi.mock("../extensions/mention/suggestion", () => ({
 	default: vi.fn().mockReturnValue({}),
 }))
 
-// 模拟组件的样式
+// Mock component styles
 vi.mock("../styles", () => ({
 	default: () => ({
 		styles: {
@@ -193,13 +193,13 @@ vi.mock("../styles", () => ({
 	}),
 }))
 
-// 模拟组件
+// Mock component
 vi.mock("../components/Placeholder", () => ({
 	default: ({ placeholder, show }: { placeholder: string; show: boolean }) =>
 		show ? <div data-testid="placeholder">{placeholder}</div> : null,
 }))
 
-// 模拟ToolBar组件
+// Mock ToolBar component
 vi.mock("../components/ToolBar", () => ({
 	default: ({ editor, className }: { className: string; editor: any }) => (
 		<div data-testid="toolbar" className={className}>
@@ -214,7 +214,7 @@ vi.mock("../components/ToolBar", () => ({
 					}
 				}}
 			>
-				撤销
+				Undo
 			</button>
 			<button
 				type="button"
@@ -227,110 +227,110 @@ vi.mock("../components/ToolBar", () => ({
 					}
 				}}
 			>
-				重做
+				Redo
 			</button>
 		</div>
 	),
 }))
 
-// 模拟 i18n
+// Mock i18n
 vi.mock("react-i18next", () => ({
 	useTranslation: () => ({
 		t: vi.fn().mockImplementation((key) => {
-			if (key === "richEditor.placeholder") return "请输入内容..."
-			if (key === "richEditor.undo") return "撤销"
-			if (key === "richEditor.redo") return "重做"
+			if (key === "richEditor.placeholder") return "Please enter content..."
+			if (key === "richEditor.undo") return "Undo"
+			if (key === "richEditor.redo") return "Redo"
 			return key
 		}),
 	}),
 }))
 
-// 修改包装组件，不使用Ant Design的App组件
+// Modify wrapper component to not use Ant Design's App component
 const TestWrapper = ({ children }: { children: ReactNode }) => (
 	<div data-testid="test-wrapper">{children}</div>
 )
 
-describe("DelightfulRichEditor 撤销重做功能", () => {
+describe("DelightfulRichEditor Undo Redo Functionality", () => {
 	beforeEach(() => {
-		// 每个测试前重置模拟函数的调用记录
+		// Reset mock function call records before each test
 		vi.clearAllMocks()
 	})
 
 	afterEach(() => {
-		// 每个测试后清理渲染的组件
+		// Clean up rendered components after each test
 		cleanup()
 	})
 
-	it("工具栏应包含撤销和重做按钮", () => {
+	it("toolbar should contain undo and redo buttons", () => {
 		render(
 			<TestWrapper>
 				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
-		// 验证按钮是否存在
+		// Verify buttons exist
 		expect(screen.getByTestId("undo-button")).toBeInTheDocument()
 		expect(screen.getByTestId("redo-button")).toBeInTheDocument()
 	})
 
-	it("点击撤销按钮应触发撤销命令", () => {
+	it("clicking undo button should trigger undo command", () => {
 		render(
 			<TestWrapper>
 				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
-		// 点击撤销按钮
+		// Click undo button
 		fireEvent.click(screen.getByTestId("undo-button"))
 
-		// 验证撤销命令是否被调用
+		// Verify undo command was called
 		expect(mockChain).toHaveBeenCalled()
 		expect(mockUndo).toHaveBeenCalled()
 	})
 
-	it("点击重做按钮应触发重做命令", () => {
+	it("clicking redo button should trigger redo command", () => {
 		render(
 			<TestWrapper>
 				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
-		// 点击重做按钮
+		// Click redo button
 		fireEvent.click(screen.getByTestId("redo-button"))
 
-		// 验证重做命令是否被调用
+		// Verify redo command was called
 		expect(mockChain).toHaveBeenCalled()
 		expect(mockRedo).toHaveBeenCalled()
 	})
 
-	it("快捷键Ctrl+Z/Cmd+Z应触发撤销命令", () => {
+	it("keyboard shortcut Ctrl+Z/Cmd+Z should trigger undo command", () => {
 		render(
 			<TestWrapper>
 				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
-		// 模拟Ctrl+Z/Cmd+Z快捷键
+		// Simulate Ctrl+Z/Cmd+Z shortcut
 		fireEvent.keyDown(screen.getByTestId("editor-content"), {
 			key: "z",
 			code: "KeyZ",
-			ctrlKey: true, // 在Windows/Linux上是Ctrl，在macOS上是Cmd
+			ctrlKey: true, // Ctrl on Windows/Linux, Cmd on macOS
 		})
 
-		// 验证撤销命令是否被调用
-		// 注意：由于快捷键处理是由Tiptap内部处理的，所以这里无法直接验证
-		// 这个测试主要是确保快捷键事件能被正确传递到编辑器
+		// Verify undo command was called
+		// Note: Since keyboard handling is internal to Tiptap, we cannot directly verify here
+		// This test mainly ensures keyboard events are properly passed to the editor
 		expect(screen.getByTestId("editor-content")).toBeInTheDocument()
 	})
 
-	it("快捷键Ctrl+Shift+Z/Cmd+Shift+Z应触发重做命令", () => {
+	it("keyboard shortcut Ctrl+Shift+Z/Cmd+Shift+Z should trigger redo command", () => {
 		render(
 			<TestWrapper>
 				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
-		// 模拟Ctrl+Shift+Z/Cmd+Shift+Z快捷键
+		// Simulate Ctrl+Shift+Z/Cmd+Shift+Z shortcut
 		fireEvent.keyDown(screen.getByTestId("editor-content"), {
 			key: "z",
 			code: "KeyZ",
@@ -338,34 +338,34 @@ describe("DelightfulRichEditor 撤销重做功能", () => {
 			shiftKey: true,
 		})
 
-		// 验证重做命令是否被调用
-		// 同样，这里无法直接验证内部命令
+		// Verify redo command was called
+		// Similarly, we cannot directly verify internal commands here
 		expect(screen.getByTestId("editor-content")).toBeInTheDocument()
 	})
 
-	it("快捷键Ctrl+Y/Cmd+Y应触发重做命令", () => {
+	it("keyboard shortcut Ctrl+Y/Cmd+Y should trigger redo command", () => {
 		render(
 			<TestWrapper>
 				<DelightfulRichEditor />
 			</TestWrapper>,
 		)
 
-		// 模拟Ctrl+Y/Cmd+Y快捷键
+		// Simulate Ctrl+Y/Cmd+Y shortcut
 		fireEvent.keyDown(screen.getByTestId("editor-content"), {
 			key: "y",
 			code: "KeyY",
 			ctrlKey: true,
 		})
 
-		// 验证重做命令是否被调用
+		// Verify redo command was called
 		expect(screen.getByTestId("editor-content")).toBeInTheDocument()
 	})
 
-	it("输入文本后删除部分内容，撤销应该恢复删除的文本而不是清空编辑器", () => {
-		// 创建一个直接的模拟函数用于追踪撤销调用
+	it("after inputting text and deleting part of it, undo should restore the deleted text instead of clearing the editor", () => {
+		// Create a direct mock function to track undo calls
 		const mockUndoFn = vi.fn()
 
-		// 创建一个简化的模拟编辑器
+		// Create a simplified mock editor
 		const mockEditorWithHistory = {
 			...baseMockEditor,
 			chain: () => ({
@@ -378,18 +378,18 @@ describe("DelightfulRichEditor 撤销重做功能", () => {
 					}),
 				}),
 			}),
-			// 模拟一个历史状态
+			// Mock history state
 			history: {
 				stack: [
-					{ content: "初始状态" },
-					{ content: "Hello World" }, // 输入了文本
-					{ content: "Hello" }, // 删除了部分文本
+					{ content: "Initial state" },
+					{ content: "Hello World" }, // Entered text
+					{ content: "Hello" }, // Deleted part of text
 				],
-				index: 2, // 当前在删除后的状态
+				index: 2, // Currently at post-deletion state
 			},
 		} as unknown as Editor
 
-		// 模拟useEditor的返回值
+		// Mock useEditor return value
 		const useEditorSpy = vi.spyOn(TiptapReact, "useEditor")
 		useEditorSpy.mockReturnValue(mockEditorWithHistory)
 
@@ -399,10 +399,10 @@ describe("DelightfulRichEditor 撤销重做功能", () => {
 			</TestWrapper>,
 		)
 
-		// 点击撤销按钮
+		// Click undo button
 		fireEvent.click(screen.getByTestId("undo-button"))
 
-		// 验证撤销命令被调用
+		// Verify undo command was called
 		expect(mockUndoFn).toHaveBeenCalled()
 	})
 })

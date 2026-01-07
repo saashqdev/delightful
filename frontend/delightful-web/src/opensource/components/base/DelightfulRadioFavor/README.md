@@ -1,4 +1,4 @@
-# DelightfulRadioFavor Magic Favorite Radio Component
+# DelightfulRadioFavor Delightful Favorite Radio Component
 
 DelightfulRadioFavor is a custom-styled radio button component designed for favorites and preference settings. It presents a set of options for users to choose from, displaying the currently selected option with a distinctive style.
 

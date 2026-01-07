@@ -1,7 +1,7 @@
 import { vi } from "vitest"
 import React from "react"
 
-// 模拟@dtyq/upload-sdk
+// Mock @dtyq/upload-sdk
 vi.mock("@dtyq/upload-sdk", () => ({
 	default: {
 		MultipartUploader: {
@@ -13,7 +13,7 @@ vi.mock("@dtyq/upload-sdk", () => ({
 	},
 }))
 
-// 模拟URL.createObjectURL
+// Mock URL.createObjectURL
 if (typeof window.URL.createObjectURL === "undefined") {
 	Object.defineProperty(window.URL, "createObjectURL", {
 		value: vi.fn().mockReturnValue("mock://url"),
@@ -21,7 +21,7 @@ if (typeof window.URL.createObjectURL === "undefined") {
 	})
 }
 
-// 创建模拟函数
+// Create mock functions
 export const mockInsertText = vi.fn()
 export const mockSetTextSelection = vi.fn()
 export const mockSetHardBreak = vi.fn()
@@ -35,14 +35,14 @@ export const mockError = vi.fn()
 export const mockFileToBase64 = vi.fn()
 export const mockSuggestion = vi.fn()
 
-// 模拟消息服务
+// Mock message service
 export const mockMessage = {
 	success: mockSuccess,
 	error: mockError,
 	clear: mockClear,
 }
 
-// 模拟编辑器
+// Mock editor
 export const mockEditor = {
 	commands: {
 		focus: mockFocus,
@@ -61,7 +61,7 @@ export const mockEditor = {
 		},
 	},
 	destroy: vi.fn(),
-	// 添加缺失的必要属性
+	// Add missing necessary properties
 	commandManager: {
 		createCommands: vi.fn(),
 		callCommand: vi.fn(),
@@ -81,22 +81,22 @@ export const mockEditor = {
 	isFocused: false,
 }
 
-// 模拟其他全局对象
+// Mock other global objects
 vi.mock("@lottiefiles/dotlottie-react", () => ({
 	DotLottieReact: ({ children }: { children?: React.ReactNode }) => {
 		return React.createElement("div", { "data-testid": "mock-lottie" }, children)
 	},
 }))
 
-// 导出以便在测试文件中使用
+// Export for use in test files
 export const mockSetup = () => {
-	// 重置所有模拟函数
+	// Reset all mock functions
 	vi.resetAllMocks()
 
-	// 模拟 TipTap 的依赖
+	// Mock TipTap dependencies
 	vi.mock("@tiptap/react", () => ({
 		useEditor: vi.fn().mockImplementation((config) => {
-			// 条件性地调用onUpdate回调
+			// Conditionally call onUpdate callback
 			if (config && config.onUpdate && !config.hasCalledUpdate) {
 				config.hasCalledUpdate = true
 				setTimeout(() => {
@@ -124,12 +124,12 @@ export const mockSetup = () => {
 			),
 	}))
 
-	// 模拟工具函数
+	// Mock utility functions
 	vi.mock("../utils", () => ({
 		fileToBase64: mockFileToBase64,
 	}))
 
-	// 模拟组件的样式
+	// Mock component styles
 	vi.mock("../styles", () => ({
 		default: () => ({
 			styles: {
@@ -142,29 +142,29 @@ export const mockSetup = () => {
 		}),
 	}))
 
-	// 模拟消息服务
+	// Mock message service
 	vi.mock("antd/es/message", () => ({
 		default: mockMessage,
 	}))
 
-	// 模拟 Mention 扩展
+	// Mock Mention extension
 	vi.mock("../extensions/mention", () => ({
 		Mention: { configure: mockMentionConfigure },
 	}))
 
-	// 模拟 DelightfulEmoji 扩展
+	// Mock DelightfulEmoji extension
 	vi.mock("../extensions/delightfulEmoji", () => ({
 		default: {
 			configure: mockEmojiConfigure,
 		},
 	}))
 
-	// 模拟 Mention 建议功能
+	// Mock Mention suggestion feature
 	vi.mock("../extensions/mention/suggestion", () => ({
 		default: mockSuggestion,
 	}))
 
-	// 模拟文件处理扩展
+	// Mock file handler extension
 	vi.mock("../extensions/file-handler", () => ({
 		FileHandler: {
 			configure: vi.fn().mockImplementation((options) => ({
@@ -175,7 +175,7 @@ export const mockSetup = () => {
 					const text = file.getData && file.getData("text/plain")
 					if (!text) return false
 
-					// 处理多行文本
+					// Handle multi-line text
 					if (text.includes("\n")) {
 						const lines = text.split("\n")
 						lines.forEach((line: string, index: number) => {
@@ -187,7 +187,7 @@ export const mockSetup = () => {
 						return true
 					}
 
-					// 处理单行文本
+					// Handle single-line text
 					options.editor.commands.insertText(text)
 					return true
 				}),
@@ -195,7 +195,7 @@ export const mockSetup = () => {
 		},
 	}))
 
-	// 模拟图片扩展
+	// Mock image extension
 	vi.mock("../extensions/image", () => ({
 		Image: {
 			configure: vi.fn().mockReturnValue({}),
@@ -203,14 +203,14 @@ export const mockSetup = () => {
 		},
 	}))
 
-	// 模拟扩展模块
+	// Mock extension modules
 	vi.mock("@tiptap/starter-kit", () => ({
 		default: {
 			configure: vi.fn().mockImplementation(() => {
-				// 添加明确类型标注
+				// Add explicit type annotation
 				const extensionObj: Record<string, any> = {
 					extend: vi.fn().mockImplementation((extensions) => {
-						// 合并传入的扩展并返回一个新对象
+						// Merge passed extensions and return new object
 						return {
 							...extensionObj,
 							...extensions,
@@ -241,13 +241,13 @@ export const mockSetup = () => {
 		default: {},
 	}))
 
-	// 模拟占位符组件
+	// Mock placeholder component
 	vi.mock("../components/Placeholder", () => ({
 		default: ({ placeholder, show }: { placeholder: string; show: boolean }) =>
 			show ? React.createElement("div", { "data-testid": "placeholder" }, placeholder) : null,
 	}))
 
-	// 模拟工具栏组件
+	// Mock toolbar component
 	vi.mock("../components/ToolBar", () => ({
 		default: ({ className }: { className: string; editor: any }) =>
 			React.createElement(
@@ -260,12 +260,12 @@ export const mockSetup = () => {
 			),
 	}))
 
-	// 模拟 i18n
+	// Mock i18n
 	vi.mock("react-i18next", () => ({
 		useTranslation: () => ({
 			t: vi.fn().mockImplementation((key) => {
-				if (key === "richEditor.placeholder") return "请输入内容..."
-				if (key === "richEditor.image.sizeExceed") return "图片超过大小限制"
+				if (key === "richEditor.placeholder") return "Please enter content..."
+				if (key === "richEditor.image.sizeExceed") return "Image exceeds size limit"
 				return key
 			}),
 		}),

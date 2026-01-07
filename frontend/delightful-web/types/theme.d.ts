@@ -1,6 +1,6 @@
 import "antd-style"
 import "antd/es/theme/interface"
-import type { ColorScales, ColorUsages } from "@dtyq/delightful-ui"
+import type { ColorScales, ColorUsages } from "@delightful/delightful-ui"
 
 export interface NewToken {
 	/** Top menu bar height */

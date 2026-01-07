@@ -18,7 +18,7 @@ DelightfulSegmented is an enhanced segmented controller component based on Ant D
 ## Basic Usage
 
 ```tsx
-import { DelightfulSegmented } from "@dtyq/delightful-ui"
+import { DelightfulSegmented } from "@delightful/delightful-ui"
 
 const App = () => {
 	return <DelightfulSegmented options={["Daily", "Weekly", "Monthly"]} defaultValue="Daily" />
@@ -28,7 +28,7 @@ const App = () => {
 ## Handling Option Changes
 
 ```tsx
-import { DelightfulSegmented } from "@dtyq/delightful-ui"
+import { DelightfulSegmented } from "@delightful/delightful-ui"
 import { useState } from "react"
 
 const App = () => {
@@ -48,7 +48,7 @@ const App = () => {
 ## Object Type Options
 
 ```tsx
-import { DelightfulSegmented } from "@dtyq/delightful-ui"
+import { DelightfulSegmented } from "@delightful/delightful-ui"
 
 const App = () => {
 	return (
@@ -67,7 +67,7 @@ const App = () => {
 ## Options with Icons
 
 ```tsx
-import { DelightfulSegmented } from "@dtyq/delightful-ui"
+import { DelightfulSegmented } from "@delightful/delightful-ui"
 import { AppstoreOutlined, BarsOutlined } from "@ant-design/icons"
 
 const App = () => {
@@ -93,7 +93,7 @@ const App = () => {
 ## Non-Rounded Design
 
 ```tsx
-import { DelightfulSegmented } from "@dtyq/delightful-ui"
+import { DelightfulSegmented } from "@delightful/delightful-ui"
 
 const App = () => {
 	return <DelightfulSegmented options={["Option 1", "Option 2", "Option 3"]} circle={false} />
@@ -103,7 +103,7 @@ const App = () => {
 ## Disabled State
 
 ```tsx
-import { DelightfulSegmented } from "@dtyq/delightful-ui"
+import { DelightfulSegmented } from "@delightful/delightful-ui"
 
 const App = () => {
 	return <DelightfulSegmented options={["Option 1", "Option 2", "Option 3"]} disabled={true} />

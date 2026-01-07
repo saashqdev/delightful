@@ -118,7 +118,7 @@ const useCustomStyles = createStyles(({ token }) => ({
 
 ## Error Handling
 
-组件提供了完整的错误处理机制：
+The component provides comprehensive error handling:
 
 ```tsx
 <DelightfulPdfRender
@@ -133,7 +133,7 @@ const useCustomStyles = createStyles(({ token }) => ({
 
 ## Internationalization
 
-Supports Chinese and English using `react-i18next`.
+Supports English using `react-i18next`.
 
 ### Setup
 
@@ -146,7 +146,6 @@ ns: ["translation", "common", "interface", "message", "flow", "delightfulFlow", 
 
 ### Language Files
 
-- Chinese: `src/assets/locales/zh_CN/component.json`
 - English: `src/assets/locales/en_US/component.json`
 
 ### Switch Language

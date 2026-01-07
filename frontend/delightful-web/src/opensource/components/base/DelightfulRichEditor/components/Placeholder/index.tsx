@@ -3,25 +3,25 @@ import { useStyles } from "./styles"
 
 export interface PlaceholderProps {
 	/**
-	 * 占位符文本
+	 * Placeholder text
 	 */
 	placeholder: string
 	/**
-	 * 是否显示占位符
+	 * Whether to show the placeholder
 	 */
 	show: boolean
 }
 
 /**
- * 富文本编辑器占位符组件
+	 * Rich text editor placeholder component
  *
- * 用于在编辑器为空时显示提示文本
- * 根据编辑器的焦点状态显示不同的颜色
+	 * Displays hint text when the editor is empty
+	 * Shows different colors based on editor focus state
  */
 const Placeholder = memo(({ placeholder, show }: PlaceholderProps) => {
 	const { styles } = useStyles()
 
-	// 如果不显示占位符则直接返回null
+	// If the placeholder should not be shown, return null
 	if (!show) return null
 
 	return (
@@ -30,9 +30,9 @@ const Placeholder = memo(({ placeholder, show }: PlaceholderProps) => {
 			data-testid="rich-editor-placeholder"
 			style={{
 				position: "absolute",
-				top: -2 /* 微调后的垂直位置 */,
-				left: "0.1em" /* 微调后的水平位置 */,
-				padding: "0.15em" /* 添加内边距 */,
+				top: -2 /* Fine-tuned vertical position */,
+				left: "0.1em" /* Fine-tuned horizontal position */,
+				padding: "0.15em" /* Add padding */,
 				pointerEvents: "none",
 				zIndex: 0,
 				color: "#bfbfbf",

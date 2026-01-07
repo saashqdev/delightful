@@ -8,7 +8,7 @@ import type { DelightfulFlowInstance } from "@delightful/delightful-flow/dist/De
 import { cx } from "antd-style"
 import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { useTranslation } from "react-i18next"
-import { resolveToString } from "@dtyq/es6-template-strings"
+import { resolveToString } from "@delightful/es6-template-strings"
 import styles from "./index.module.less"
 import SaveDraftButton from "../../SaveDraftButton"
 

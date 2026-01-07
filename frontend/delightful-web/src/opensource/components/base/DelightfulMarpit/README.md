@@ -1,74 +1,74 @@
-# DelightfulMarpit 魔法幻灯片组件
+# DelightfulMarpit Enhanced Slide Component
 
-DelightfulMarpit 是一个基于 Marpit 和 Reveal.js 的幻灯片渲染组件，用于将 Markdown 格式的内容转换为交互式幻灯片展示。该组件支持丰富的幻灯片功能，如切换动画、主题设置等。
+DelightfulMarpit is a slide rendering component based on Marpit and Reveal.js, used to convert Markdown-formatted content into interactive slide presentations. This component supports rich slide features such as transition animations and theme settings.
 
-## 属性
+## Properties
 
-| 属性名  | 类型   | 默认值 | 描述                      |
-| ------- | ------ | ------ | ------------------------- |
-| content | string | -      | Markdown 格式的幻灯片内容 |
+| Property | Type   | Default | Description                    |
+| -------- | ------ | ------- | ------------------------------ |
+| content  | string | -       | Slide content in Markdown format |
 
-## 基本用法
+## Basic Usage
 
 ```tsx
 import DelightfulMarpit from "@/components/base/DelightfulMarpit"
 
-// 基本用法
+// Basic usage
 const slideContent = `
 ---
 theme: default
 ---
 
-# 第一张幻灯片
-这是第一张幻灯片的内容
+# First Slide
+This is the content of the first slide
 
 ---
 
-# 第二张幻灯片
-- 项目 1
-- 项目 2
-- 项目 3
+# Second Slide
+- Item 1
+- Item 2
+- Item 3
 
 ---
 
-# 感谢观看
+# Thank You
 `
 
 ;<DelightfulMarpit content={slideContent} />
 ```
 
-## Markdown 语法
+## Markdown Syntax
 
-DelightfulMarpit 使用 Marpit 的语法来定义幻灯片：
+DelightfulMarpit uses Marpit syntax to define slides:
 
-1. 使用 `---` 分隔不同的幻灯片
-2. 在第一个 `---` 前可以设置全局主题和样式
-3. 支持标准的 Markdown 语法，如标题、列表、代码块等
-4. 可以使用 HTML 和 CSS 进行更复杂的布局和样式定制
+1. Use `---` to separate different slides
+2. Global themes and styles can be set before the first `---`
+3. Supports standard Markdown syntax such as headings, lists, code blocks, etc.
+4. HTML and CSS can be used for more complex layouts and style customization
 
-示例：
+Example:
 
 ````markdown
 ---
 theme: default
 ---
 
-# 幻灯片标题
+# Slide Title
 
-内容段落
-
----
-
-## 列表示例
-
--   项目 1
--   项目 2
-    -   子项目 A
-    -   子项目 B
+Content paragraph
 
 ---
 
-## 代码示例
+## List Example
+
+-   Item 1
+-   Item 2
+    -   Sub-item A
+    -   Sub-item B
+
+---
+
+## Code Example
 
 ```javascript
 function hello() {
@@ -77,20 +77,20 @@ function hello() {
 ```
 ````
 
-## 特性
+## Features
 
--   **Markdown 支持**：使用简单的 Markdown 语法创建幻灯片
--   **交互式展示**：基于 Reveal.js 提供交互式幻灯片浏览体验
--   **主题定制**：支持自定义主题和样式
--   **自动清理**：组件卸载时自动清理资源
--   **响应式设计**：适应不同尺寸的容器
+-   **Markdown Support**: Create slides using simple Markdown syntax
+-   **Interactive Display**: Provides interactive slide browsing experience based on Reveal.js
+-   **Theme Customization**: Supports custom themes and styles
+-   **Automatic Cleanup**: Automatically cleans up resources when component unmounts
+-   **Responsive Design**: Adapts to containers of different sizes
 
-## 使用场景
+## Use Cases
 
--   在应用内展示演示文稿
--   教育和培训材料的交互式展示
--   产品演示和功能介绍
--   会议和报告内容的呈现
--   任何需要将 Markdown 内容转换为幻灯片的场景
+-   Displaying presentations within applications
+-   Interactive display of educational and training materials
+-   Product demos and feature introductions
+-   Presenting meeting and report content
+-   Any scenario requiring conversion of Markdown content to slides
 
-DelightfulMarpit 组件为应用提供了一种简单而强大的方式，将文本内容转换为专业的幻灯片展示，特别适合需要频繁更新内容或基于数据生成演示文稿的场景。
+DelightfulMarpit provides a simple yet powerful way for applications to convert text content into professional slide presentations, especially suitable for scenarios that require frequent content updates or data-driven presentation generation.

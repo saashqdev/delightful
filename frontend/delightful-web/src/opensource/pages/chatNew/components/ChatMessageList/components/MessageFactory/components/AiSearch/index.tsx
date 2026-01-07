@@ -11,7 +11,7 @@ import type { TimelineProps } from "antd"
 import { ConfigProvider, Flex, Timeline } from "antd"
 import DelightfulCollapse from "@/opensource/components/base/DelightfulCollapse"
 import { useTranslation } from "react-i18next"
-import { resolveToString } from "@dtyq/es6-template-strings"
+import { resolveToString } from "@delightful/es6-template-strings"
 
 import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react"

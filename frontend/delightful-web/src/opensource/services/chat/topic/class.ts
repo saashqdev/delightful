@@ -19,7 +19,7 @@ const logger = new Logger("ChatTopic", "blue")
 
 class ChatTopicService {
 	/**
-	 * Magic ID (account ID)
+	 * Delightful ID (account ID)
 	 */
 	delightfulId: string | undefined
 

@@ -1,4 +1,4 @@
-# DelightfulStreamContent Magic Streaming Content Component
+# DelightfulStreamContent Delightful Streaming Content Component
 
 DelightfulStreamContent is a component for presenting streaming content. It simulates a typing effect by revealing text character-by-character, providing a dynamic reading experience. This component is especially useful for chatbot replies, code generation, and other scenarios requiring progressive content display.
 

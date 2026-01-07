@@ -1,4 +1,4 @@
-import type { UploadCallBack } from "@dtyq/upload-sdk"
+import type { UploadCallBack } from "@delightful/upload-sdk"
 
 export interface UploadResponse {
 	key: string

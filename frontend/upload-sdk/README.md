@@ -81,7 +81,7 @@ Starting from version x.x.x, upload-sdk supports code splitting and on-demand lo
 Asynchronous import (recommended):
 
 ```typescript
-import { Upload, loadPlatformModule, PlatformType } from "@dtyq/upload-sdk";
+import { Upload, loadPlatformModule, PlatformType } from "@delightful/upload-sdk";
 
 // Preload specific platform modules (optional)
 async function preloadModules() {
@@ -104,7 +104,7 @@ upload.upload({
 Compatibility mode (backward-compatible):
 
 ```typescript
-import { Upload } from "@dtyq/upload-sdk";
+import { Upload } from "@delightful/upload-sdk";
 
 // Continue using the original approach; SDK will lazy-load internally
 const upload = new Upload();

@@ -1,4 +1,4 @@
-# DelightfulAppLoader Magic Application Loader Component
+# DelightfulAppLoader Delightful Application Loader Component
 
 `DelightfulAppLoader` is a component for loading and displaying micro-frontend applications, providing application loading state management, error handling, and loading animations.
 

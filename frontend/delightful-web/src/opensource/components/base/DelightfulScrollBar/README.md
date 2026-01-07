@@ -1,4 +1,4 @@
-# DelightfulScrollBar Magic Scrollbar Component
+# DelightfulScrollBar Delightful Scrollbar Component
 
 `DelightfulScrollBar` is an enhanced scrollbar component based on `simplebar-core`, delivering a more attractive and smoother custom scrollbar experience.
 

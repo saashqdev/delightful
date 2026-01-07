@@ -5,7 +5,7 @@ import { IconMessageTopic } from "@/enhance/tabler/icons-react"
 import { memo, useMemo } from "react"
 import OperateMenu from "@/opensource/pages/flow/components/OperateMenu"
 import type { UserTask } from "@/types/chat/task"
-import { resolveToString } from "@dtyq/es6-template-strings"
+import { resolveToString } from "@delightful/es6-template-strings"
 
 import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 import chatTopicStore from "@/opensource/stores/chatNew/topic"

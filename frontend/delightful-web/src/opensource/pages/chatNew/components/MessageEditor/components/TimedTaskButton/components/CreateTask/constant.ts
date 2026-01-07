@@ -1,5 +1,5 @@
 import i18next, { TFunction } from "i18next"
-import { resolveToString } from "@dtyq/es6-template-strings"
+import { resolveToString } from "@delightful/es6-template-strings"
 
 export const DEFAULT_TOPIC_VALUE = "DEFAULT_TOPIC"
 

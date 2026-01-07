@@ -3,12 +3,12 @@ import { render } from "@testing-library/react"
 import React from "react"
 import "./setup"
 
-// 提升模拟函数
+// Hoist mock functions
 const mockMentionConfigure = vi.hoisted(() => vi.fn().mockReturnValue({}))
 const mockEmojiConfigure = vi.hoisted(() => vi.fn().mockReturnValue({}))
 const mockFileHandlerConfigure = vi.hoisted(() => vi.fn().mockReturnValue({}))
 
-// 模拟依赖
+// Mock dependencies
 vi.mock("@tiptap/react", () => {
 	return {
 		useEditor: vi.fn().mockReturnValue({
@@ -58,29 +58,29 @@ vi.mock("../extensions/file-handler", () => {
 	}
 })
 
-// 模拟组件
+// Mock component
 const DelightfulRichEditor = React.lazy(() => import("../index"))
 
-// 测试包装器
+// Test wrapper
 const TestWrapper = ({ children }: { children: React.ReactNode }) => {
 	return <div>{children}</div>
 }
 
-describe("DelightfulRichEditor 特殊功能", () => {
+describe("DelightfulRichEditor Special Features", () => {
 	beforeEach(() => {
 		vi.clearAllMocks()
 	})
 
-	it("应正确配置@提及功能", async () => {
+	it("should correctly configure @ mention feature", async () => {
 		render(
 			<TestWrapper>
 				<React.Suspense fallback={<div>Loading...</div>}>
-					<DelightfulRichEditor placeholder="测试@提及功能" />
+					<DelightfulRichEditor placeholder="Test @ mention feature" />
 				</React.Suspense>
 			</TestWrapper>,
 		)
 
-		// 手动调用模拟函数，模拟组件渲染时的调用
+		// Manually call mock function to simulate component render invocation
 		mockMentionConfigure({
 			HTMLAttributes: {
 				class: "mock-mention-class",
@@ -89,20 +89,20 @@ describe("DelightfulRichEditor 特殊功能", () => {
 			deleteTriggerWithBackspace: true,
 		})
 
-		// 验证提及扩展配置
+		// Verify mention extension configuration
 		expect(mockMentionConfigure).toHaveBeenCalled()
 	})
 
-	it("应正确配置表情符号功能", async () => {
+	it("should correctly configure emoji feature", async () => {
 		render(
 			<TestWrapper>
 				<React.Suspense fallback={<div>Loading...</div>}>
-					<DelightfulRichEditor placeholder="测试表情符号功能" />
+					<DelightfulRichEditor placeholder="Test emoji feature" />
 				</React.Suspense>
 			</TestWrapper>,
 		)
 
-		// 手动调用模拟函数，模拟组件渲染时的调用
+		// Manually call mock function to simulate component render invocation
 		mockEmojiConfigure({
 			HTMLAttributes: {
 				className: "mock-emoji-class",
@@ -110,27 +110,27 @@ describe("DelightfulRichEditor 特殊功能", () => {
 			basePath: "/emojis",
 		})
 
-		// 验证表情符号扩展配置
+		// Verify emoji extension configuration
 		expect(mockEmojiConfigure).toHaveBeenCalled()
 	})
 
-	it("应处理图片粘贴错误", async () => {
+	it("should handle image paste errors", async () => {
 		render(
 			<TestWrapper>
 				<React.Suspense fallback={<div>Loading...</div>}>
-					<DelightfulRichEditor placeholder="测试图片粘贴错误处理" />
+					<DelightfulRichEditor placeholder="Test image paste error handling" />
 				</React.Suspense>
 			</TestWrapper>,
 		)
 
-		// 手动调用模拟函数，模拟组件渲染时的调用
+		// Manually call mock function to simulate component render invocation
 		mockFileHandlerConfigure({
 			allowedMimeTypes: ["image/*"],
 			maxFileSize: 5 * 1024 * 1024,
 			onPaste: vi.fn(),
 		})
 
-		// 验证文件处理扩展配置
+		// Verify file handler extension configuration
 		expect(mockFileHandlerConfigure).toHaveBeenCalled()
 	})
 })

@@ -1,4 +1,4 @@
-# DelightfulIcon Magic Icon Component
+# DelightfulIcon Delightful Icon Component
 
 `DelightfulIcon` is an icon wrapper component based on Tabler Icons, providing theme adaptation and unified style control.
 

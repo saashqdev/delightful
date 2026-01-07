@@ -10,11 +10,11 @@ const useStyles = createStyles(({ css, token }) => {
 			height: auto;
 			overflow: hidden;
 
-			/* 修复高度问题 */
+			/* Fix height issues */
 			display: flex;
 			flex-direction: column;
 
-			/* 确保编辑器内容区域没有外边框且高度正常 */
+			/* Ensure the editor content area has no outline and correct height */
 			.ProseMirror {
 				outline: none !important;
 				box-shadow: none !important;
@@ -24,19 +24,19 @@ const useStyles = createStyles(({ css, token }) => {
 				height: auto !important;
 				min-height: inherit;
 				max-height: none;
-				caret-color: ${token.colorText}; /* 设置光标颜色 */
+				caret-color: ${token.colorText}; /* Set caret color */
 			}
 
-			/* 确保段落没有多余的边距 */
+			/* Ensure paragraphs have no extra margins */
 			.ProseMirror p {
 				margin: 0;
 				padding: 0;
-				line-height: 1.5em; /* 设置固定行高 */
+				line-height: 1.5em; /* Set fixed line height */
 				min-height: 1em;
 				position: relative;
 			}
 
-			/* 光标样式，确保不会影响布局 */
+			/* Cursor style that doesn't affect layout */
 			.ProseMirror .ProseMirror-cursor {
 				margin: 0;
 				padding: 0;
@@ -44,7 +44,7 @@ const useStyles = createStyles(({ css, token }) => {
 				z-index: 1;
 			}
 
-			/* 确保编辑器内容区域在获取焦点时也没有外边框 */
+			/* Ensure the editor content area has no outline when focused */
 			.ProseMirror:focus,
 			.ProseMirror:focus-visible {
 				outline: none !important;
@@ -52,7 +52,7 @@ const useStyles = createStyles(({ css, token }) => {
 				border: none !important;
 			}
 
-			/* 确保可编辑区域没有外边框 */
+			/* Ensure the contenteditable area has no outline */
 			div[contenteditable="true"] {
 				outline: none !important;
 				box-shadow: none !important;
@@ -61,7 +61,7 @@ const useStyles = createStyles(({ css, token }) => {
 				max-height: none;
 			}
 
-			/* 确保可编辑区域在获取焦点时也没有外边框 */
+			/* Ensure the contenteditable area has no outline when focused */
 			div[contenteditable="true"]:focus,
 			div[contenteditable="true"]:focus-visible {
 				outline: none !important;
@@ -69,7 +69,7 @@ const useStyles = createStyles(({ css, token }) => {
 				border: none !important;
 			}
 
-			/* 恢复占位符样式 */
+			/* Restore placeholder styles */
 			.ProseMirror p.is-editor-empty:first-child::before,
 			.ProseMirror p.is-empty::before {
 				color: ${token.colorTextPlaceholder};
@@ -82,19 +82,19 @@ const useStyles = createStyles(({ css, token }) => {
 				transition: none;
 				transform: translateY(0);
 				z-index: 0;
-				line-height: 1.5em; /* 与段落行高一致 */
+				line-height: 1.5em; /* Match paragraph line height */
 				padding: 0;
 				margin: 0;
 			}
 
-			/* focus状态下占位符样式 */
+			/* Placeholder styles when focused */
 			.ProseMirror:focus p.is-editor-empty:first-child::before,
 			.ProseMirror:focus p.is-empty::before {
 				color: ${token.colorTextQuaternary};
 				transform: translateY(0);
 			}
 
-			/* 恢复自动补全提醒样式 */
+			/* Restore autocomplete suggestion styles */
 			p[data-suggestion]::after {
 				color: ${token.colorTextQuaternary};
 				content: attr(data-suggestion);

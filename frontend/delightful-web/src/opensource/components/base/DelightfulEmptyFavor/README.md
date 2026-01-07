@@ -1,41 +1,41 @@
-# DelightfulEmptyFavor 魔法空收藏组件
+# DelightfulEmptyFavor — Empty Favorites State Component
 
-DelightfulEmptyFavor 是一个用于显示收藏夹为空状态的组件。当用户的收藏列表为空时，该组件会显示一个友好的提示信息和图标，提升用户体验。
+DelightfulEmptyFavor is a component for displaying empty favorites state. When a user's favorites list is empty, it shows a friendly message and icon, improving user experience.
 
-## 属性
+## Props
 
-| 属性名 | 类型   | 默认值 | 描述                                             |
-| ------ | ------ | ------ | ------------------------------------------------ |
-| text   | string | -      | 自定义显示的文本，如不提供则使用默认的国际化文本 |
+| Prop | Type   | Default | Description                                              |
+| ---- | ------ | ------- | -------------------------------------------------------- |
+| text | string | -       | Custom text to display; uses default i18n text if not provided |
 
-## 基本用法
+## Basic Usage
 
 ```tsx
 import DelightfulEmptyFavor from '@/components/base/DelightfulEmptyFavor';
 
-// 基本用法 - 使用默认文本
+// Basic usage — uses default text
 <DelightfulEmptyFavor />
 
-// 自定义文本
-<DelightfulEmptyFavor text="您还没有添加任何收藏项" />
+// Custom text
+<DelightfulEmptyFavor text="You haven't added any favorites yet" />
 
-// 在条件渲染中使用
+// Use in conditional rendering
 {favoritesList.length === 0 && <DelightfulEmptyFavor />}
 ```
 
-## 特性
+## Features
 
--   **友好的空状态提示**：提供视觉反馈，避免空白页面
--   **国际化支持**：默认文本支持多语言
--   **简洁的设计**：使用简单的图标和文字组合
--   **可定制文本**：支持自定义显示文本
--   **轻量级**：组件实现简单，不引入额外依赖
+-   **Friendly empty state message**: Provides visual feedback and avoids blank pages
+-   **Internationalization**: Default text supports multiple languages
+-   **Minimal design**: Simple icon and text combination
+-   **Custom text**: Support for custom display text
+-   **Lightweight**: Simple implementation with no extra dependencies
 
-## 使用场景
+## Use Cases
 
--   收藏夹或喜爱列表为空时的状态展示
--   用户尚未添加任何内容时的提示
--   搜索结果为空时的友好提示
--   任何需要显示"无数据"状态的场景
+-   Display when favorites or likes list is empty
+-   Prompt when user hasn't added any content yet
+-   Show when search results are empty
+-   Any scenario requiring an "no data" state
 
-DelightfulEmptyFavor 组件通过提供一个视觉上吸引人的空状态提示，改善了用户在面对空列表时的体验，同时鼓励用户添加内容到收藏夹中。
+The `DelightfulEmptyFavor` component improves user experience when facing empty lists by providing a visually appealing empty state, encouraging users to add content to their favorites.

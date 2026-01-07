@@ -1,52 +1,52 @@
-# 特朗普近期状况总览
+# Trump Recent Status Overview
 
-## 选举结果
+## Election Results
 
--   2024年美国总统选举中，特朗普获胜
-    -   获得312张选举人票
-    -   击败卡玛拉·哈里斯（226张票）
-    -   赢得七个关键摇摆州（亚利桑那、佐治亚、密歇根等）
-
----
-
-## 法律问题
-
--   面临复杂法律指控
-    -   推翻2020年选举结果
-    -   不当处理政府机密文件
-    -   特别检察官史密斯放弃部分指控
+-   Trump won the 2024 U.S. Presidential Election
+    -   Secured 312 electoral votes
+    -   Defeated Kamala Harris (226 votes)
+    -   Won seven key swing states (Arizona, Georgia, Michigan, etc.)
 
 ---
 
-## 支持率与哈里斯对比
+## Legal Issues
 
--   民意调查中两人支持率接近
-    -   全国范围内哈里斯微弱领先
-    -   关键摇摆州竞争激烈
-
----
-
-## 国际关系动向
-
--   推行“美国优先”政策
-    -   增收外国进口商品关税
-    -   对俄乌冲突持强硬立场
-    -   主张通过谈判结束冲突
+-   Facing complex legal charges
+    -   Attempting to overturn 2020 election results
+    -   Improper handling of classified government documents
+    -   Special Counsel Smith dropped some charges
 
 ---
 
-## 政策主张变化
+## Polling vs Harris
 
--   计划继续减税，加征关税
-    -   对中国商品关税增至60%
--   坚持严格移民政策
-    -   修建美墨边境围栏
-    -   大规模无证移民遣返
--   环境与气候政策放宽
-    -   支持传统能源发展
+-   Polls show close race between the two
+    -   Harris leads slightly nationwide
+    -   Highly competitive in key swing states
 
 ---
 
-# 总体而言
+## International Relations
 
-特朗普延续其第一任期内的核心理念，尤其在经济和移民政策上，并对全球贸易和政治安全问题持续关注。法律问题仍为重要挑战。
+-   Promoting "America First" policy
+    -   Increasing tariffs on foreign imports
+    -   Taking hard stance on Russia-Ukraine conflict
+    -   Advocating for negotiated resolution to conflicts
+
+---
+
+## Policy Agenda Changes
+
+-   Plans to continue tax cuts and increase tariffs
+    -   Raising tariffs on Chinese goods to 60%
+-   Maintaining strict immigration policies
+    -   Building U.S.-Mexico border wall
+    -   Mass deportation of undocumented immigrants
+-   Relaxing environmental and climate policies
+    -   Supporting traditional energy development
+
+---
+
+# Overall
+
+Trump continues his core principles from his first term, especially on economic and immigration policies, while maintaining focus on global trade and political security issues. Legal challenges remain a significant concern.

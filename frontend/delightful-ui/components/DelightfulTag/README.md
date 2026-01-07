@@ -1,4 +1,4 @@
-# DelightfulTag Magic Tag Component
+# DelightfulTag Delightful Tag Component
 
 `DelightfulTag` is an enhanced version of Ant Design's Tag component that provides more aesthetically pleasing styles and better user experience.
 

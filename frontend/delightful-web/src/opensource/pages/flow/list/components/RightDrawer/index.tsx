@@ -12,7 +12,7 @@ import { Flow, FlowTool, FlowRouteType } from "@/types/flow"
 import FlowEmptyImage from "@/assets/logos/empty-flow.png"
 import ToolsEmptyImage from "@/assets/logos/empty-tools.svg"
 import KeyManagerButton from "@/opensource/pages/flow/components/KeyManager/KeyManagerButton"
-import { resolveToString } from "@dtyq/es6-template-strings"
+import { resolveToString } from "@delightful/es6-template-strings"
 import AuthControlButton from "@/opensource/pages/flow/components/AuthControlButton/AuthControlButton"
 import {
 	hasAdminRight,

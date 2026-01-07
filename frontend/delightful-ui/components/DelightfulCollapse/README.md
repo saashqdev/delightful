@@ -1,4 +1,4 @@
-# DelightfulCollapse Magic Collapse Panel Component
+# DelightfulCollapse Delightful Collapse Panel Component
 
 `DelightfulCollapse` is an enhanced collapse panel based on Ant Design's Collapse component, providing more aesthetically pleasing styles and better user experience.
 

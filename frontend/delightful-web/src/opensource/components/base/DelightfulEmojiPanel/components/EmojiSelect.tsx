@@ -44,7 +44,7 @@ const EmojiSelect = memo(
 			if (pressTimeoutRef.current) {
 				clearTimeout(pressTimeoutRef.current)
 			}
-			// 如果 popover 没有打开，说明是短按，触发 click 事件
+			// If popover did not open, it was a short press, trigger click event
 			if (!popverOpen) {
 				onEmojiClick?.({
 					code: config.code,
@@ -84,7 +84,7 @@ const EmojiSelect = memo(
 			</Tooltip>
 		)
 
-		/** 如果 emoji 有 tone，则显示 tone panel */
+		/** If emoji has skin tone, show the tone panel */
 		if (config.skinTones) {
 			return (
 				<Popover

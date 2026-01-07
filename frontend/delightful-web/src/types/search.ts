@@ -182,7 +182,7 @@ export namespace GlobalSearch {
 		/** CSV */
 		// CSV = 23,
 
-		/** Magic application */
+		/** Delightful application */
 		// DELIGHTFUL_APPLICATION = 24
 	}
 

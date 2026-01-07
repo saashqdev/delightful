@@ -1,5 +1,5 @@
 import DelightfulImagePreview from "@/opensource/components/base/DelightfulImagePreview"
-import { resolveToString } from "@dtyq/es6-template-strings"
+import { resolveToString } from "@delightful/es6-template-strings"
 import { Flex, Progress } from "antd"
 import useStyles from "../../styles"
 import ImageCompareSlider from "../ImageCompareSlider"

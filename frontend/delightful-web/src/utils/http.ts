@@ -1,5 +1,5 @@
 import type { RequestUrl } from "@/opensource/apis/constant"
-import { resolveToString } from "@dtyq/es6-template-strings"
+import { resolveToString } from "@delightful/es6-template-strings"
 import { isUndefined } from "lodash-es"
 
 /**

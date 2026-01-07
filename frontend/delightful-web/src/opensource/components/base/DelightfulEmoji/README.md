@@ -1,48 +1,48 @@
-# DelightfulEmoji 魔法表情组件
+# DelightfulEmoji — Emoji Rendering Component
 
-DelightfulEmoji 是一个简单的表情图片渲染组件，用于在界面中显示表情符号。该组件基于 HTML 的 img 标签实现，支持自定义表情代码、命名空间和后缀等属性。
+DelightfulEmoji is a simple emoji image renderer for displaying emoji symbols in the UI. Built on HTML's `img` tag, it supports customizable emoji codes, namespaces, and suffixes.
 
-## 属性
+## Props
 
-| 属性名 | 类型   | 默认值    | 描述                                 |
-| ------ | ------ | --------- | ------------------------------------ |
-| code   | string | -         | 表情的唯一代码，必填                 |
-| ns     | string | "emojis/" | 表情的命名空间，用于构建表情图片路径 |
-| suffix | string | ".png"    | 表情图片的文件后缀                   |
-| size   | number | -         | 表情图片的大小                       |
+| Prop   | Type   | Default   | Description                                      |
+| ------ | ------ | --------- | ------------------------------------------------ |
+| code   | string | -         | Emoji code (required)                            |
+| ns     | string | "emojis/" | Emoji namespace for constructing image path      |
+| suffix | string | ".png"    | File suffix for emoji image                      |
+| size   | number | -         | Emoji image size                                 |
 
-此外，组件还支持除 `src` 和 `alt` 以外的所有 HTML img 标签属性。
+Additionally, supports all HTML `img` tag attributes except `src` and `alt`.
 
-## 基本用法
+## Basic Usage
 
 ```tsx
 import DelightfulEmoji from '@/components/base/DelightfulEmoji';
 
-// 基本用法
+// Basic usage
 <DelightfulEmoji code="smile" />
 
-// 自定义命名空间和后缀
+// Custom namespace and suffix
 <DelightfulEmoji code="heart" ns="custom/" suffix=".svg" />
 
-// 设置表情大小
+// Set emoji size
 <DelightfulEmoji code="thumbs_up" size={24} />
 
-// 添加其他 img 属性
+// Add other img attributes
 <DelightfulEmoji code="star" className="custom-emoji" onClick={handleClick} />
 ```
 
-## 特性
+## Features
 
--   **简单易用**：只需提供表情代码即可渲染表情图片
--   **高度可定制**：支持自定义命名空间、文件后缀和大小
--   **灵活性**：支持所有标准的 img 标签属性
--   **轻量级**：组件实现简洁，不引入额外依赖
+-   **Simple and easy**: Just provide an emoji code to render
+-   **Highly customizable**: Custom namespace, file suffix, and size
+-   **Flexible**: Supports all standard `img` tag attributes
+-   **Lightweight**: Clean implementation with no extra dependencies
 
-## 使用场景
+## Use Cases
 
--   在聊天界面中显示表情符号
--   在富文本编辑器中插入表情
--   在用户界面中添加情感化元素
--   在评论或反馈系统中使用表情表达情感
+-   Display emoji symbols in chat interfaces
+-   Insert emojis in rich text editors
+-   Add emotional elements to the user interface
+-   Use emojis to express feelings in comments and feedback systems
 
-DelightfulEmoji 组件设计简洁，易于集成到各种需要显示表情的场景中。通过提供统一的表情渲染接口，确保应用中表情的一致性和可维护性。
+The `DelightfulEmoji` component has a clean design and integrates easily into any scenario requiring emoji display. It provides a unified emoji rendering interface, ensuring consistency and maintainability.

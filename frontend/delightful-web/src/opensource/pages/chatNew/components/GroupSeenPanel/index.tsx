@@ -1,5 +1,5 @@
 import DelightfulMemberAvatar from "@/opensource/components/business/DelightfulMemberAvatar"
-import { resolveToString } from "@dtyq/es6-template-strings"
+import { resolveToString } from "@delightful/es6-template-strings"
 
 import { Flex } from "antd"
 import { useTranslation } from "react-i18next"

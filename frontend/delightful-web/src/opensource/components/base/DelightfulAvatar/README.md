@@ -1,4 +1,4 @@
-# DelightfulAvatar Magic Avatar Component
+# DelightfulAvatar Delightful Avatar Component
 
 `DelightfulAvatar` is an enhanced avatar component based on Ant Design Avatar, providing automatic color generation, badge support, and other features.
 

@@ -4,7 +4,7 @@ import "@testing-library/jest-dom"
 import DelightfulSegmented from "../index"
 import type { ReactNode } from "react"
 
-// 模拟antd组件
+// Mock antd Segmented component
 vi.mock("antd", () => {
 	const Segmented = ({
 		className,
@@ -54,7 +54,7 @@ vi.mock("antd", () => {
 	}
 })
 
-// 模拟样式
+// Mock styles
 vi.mock("../styles", () => ({
 	default: () => ({
 		styles: {
@@ -63,62 +63,64 @@ vi.mock("../styles", () => ({
 	}),
 }))
 
-describe("DelightfulSegmented组件", () => {
-	it("应该正确渲染基本分段控制器", () => {
-		render(<DelightfulSegmented options={["每日", "每周", "每月"]} defaultValue="每日" />)
+describe("DelightfulSegmented component", () => {
+	it("should render basic segmented control", () => {
+		render(
+			<DelightfulSegmented options={["Daily", "Weekly", "Monthly"]} defaultValue="Daily" />,
+		)
 
 		expect(screen.getByTestId("antd-segmented")).toBeInTheDocument()
-		expect(screen.getByText("每日")).toBeInTheDocument()
-		expect(screen.getByText("每周")).toBeInTheDocument()
-		expect(screen.getByText("每月")).toBeInTheDocument()
+		expect(screen.getByText("Daily")).toBeInTheDocument()
+		expect(screen.getByText("Weekly")).toBeInTheDocument()
+		expect(screen.getByText("Monthly")).toBeInTheDocument()
 	})
 
-	it("应该支持复杂选项格式", () => {
+	it("should support complex option format", () => {
 		render(
 			<DelightfulSegmented
-				options={[
-					{ label: "选项一", value: "option1" },
-					{ label: "选项二", value: "option2" },
-					{ label: "选项三", value: "option3" },
-				]}
+				options=[
+					{ label: "Option One", value: "option1" },
+					{ label: "Option Two", value: "option2" },
+					{ label: "Option Three", value: "option3" },
+				]
 				defaultValue="option1"
 			/>,
 		)
 
 		expect(screen.getByTestId("antd-segmented")).toBeInTheDocument()
-		expect(screen.getByText("选项一")).toBeInTheDocument()
-		expect(screen.getByText("选项二")).toBeInTheDocument()
-		expect(screen.getByText("选项三")).toBeInTheDocument()
+		expect(screen.getByText("Option One")).toBeInTheDocument()
+		expect(screen.getByText("Option Two")).toBeInTheDocument()
+		expect(screen.getByText("Option Three")).toBeInTheDocument()
 	})
 
-	it("应该响应选项点击事件", () => {
+	it("should respond to option click", () => {
 		const handleChange = vi.fn()
 		render(
 			<DelightfulSegmented
-				options={["选项一", "选项二", "选项三"]}
-				defaultValue="选项一"
+				options={["Option One", "Option Two", "Option Three"]}
+				defaultValue="Option One"
 				onChange={handleChange}
 			/>,
 		)
 
-		fireEvent.click(screen.getByText("选项二"))
-		expect(handleChange).toHaveBeenCalledWith("选项二")
+		fireEvent.click(screen.getByText("Option Two"))
+		expect(handleChange).toHaveBeenCalledWith("Option Two")
 	})
 
-	it("应该应用圆形样式类", () => {
-		render(<DelightfulSegmented options={["选项一", "选项二"]} circle={true} />)
+	it("should apply circle style class", () => {
+		render(<DelightfulSegmented options={["Option One", "Option Two"]} circle={true} />)
 
 		expect(screen.getByTestId("antd-segmented")).toHaveClass("mock-segmented-styles")
 	})
 
-	it("应该应用非圆形样式类", () => {
-		render(<DelightfulSegmented options={["选项一", "选项二"]} circle={false} />)
+	it("should apply non-circle style class", () => {
+		render(<DelightfulSegmented options={["Option One", "Option Two"]} circle={false} />)
 
 		expect(screen.getByTestId("antd-segmented")).toHaveClass("mock-segmented-styles")
 	})
 
-	it("应该支持自定义类名", () => {
-		render(<DelightfulSegmented options={["选项一", "选项二"]} className="custom-class" />)
+	it("should support custom className", () => {
+		render(<DelightfulSegmented options={["Option One", "Option Two"]} className="custom-class" />)
 
 		const segmentedElement = screen.getByTestId("antd-segmented")
 		expect(segmentedElement.className).toContain("mock-segmented-styles")

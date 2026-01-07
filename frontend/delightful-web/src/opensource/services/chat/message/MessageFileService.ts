@@ -1,4 +1,4 @@
-import { Upload } from "@dtyq/upload-sdk"
+import { Upload } from "@delightful/upload-sdk"
 import dayjs from "dayjs"
 import { env } from "@/utils/env"
 import { genRequestUrl } from "@/utils/http"

@@ -41,34 +41,34 @@ const CustomHistory = Extension.create({
 	addProseMirrorPlugins() {
 		return [
 			history({
-				// 增加历史记录深度
+					// Increase history depth
 				depth: 100,
-				// 增加新事务组的延迟，确保更连贯的历史记录
-				// 从300ms增加到500ms，让连续操作更容易被合并为一个历史记录
+					// Increase delay for new transaction groups to ensure smoother history
+					// Increased from 300ms to 500ms to better merge consecutive operations
 				newGroupDelay: 500,
 			}),
 		]
 	},
 
-	// 添加撤销/重做的快捷键映射
+		// Add keyboard shortcuts for undo/redo
 	addKeyboardShortcuts() {
 		return {
-			// 撤销 - Ctrl+Z/Cmd+Z
+				// Undo - Ctrl+Z/Cmd+Z
 			"Mod-z": ({ editor }) => {
 				if (editor.can().undo()) {
-					// 使用增强的撤销命令
+						// Use enhanced undo command
 					editor.commands.first(({ commands }) => [
-						// 首先尝试正常撤销
+							// First try normal undo
 						() => commands.undo(),
-						// 检查撤销后的状态
+							// Check editor state after undo
 						() => {
-							// 获取当前文档状态
+								// Get current document state
 							const { isEmpty } = editor
 							const content = editor.getJSON()
 
-							// 如果撤销后编辑器是空的或只有一个内容项，可能是一个中间状态
+								// If editor is empty or has a single node after undo, it may be an intermediate state
 							if (isEmpty || (content.content && content.content.length <= 1)) {
-								// 再次尝试撤销（如果可以）来跳过中间状态
+									// Try undoing again (if possible) to skip intermediate states
 								setTimeout(() => {
 									if (editor.can().undo()) {
 										commands.undo()
@@ -82,22 +82,22 @@ const CustomHistory = Extension.create({
 				}
 				return false
 			},
-			// 重做 - Ctrl+Y/Cmd+Shift+Z
+				// Redo - Ctrl+Y/Cmd+Shift+Z
 			"Mod-y": ({ editor }) => {
 				if (editor.can().redo()) {
-					// 使用增强的重做命令
+						// Use enhanced redo command
 					editor.commands.first(({ commands }) => [
-						// 首先尝试正常重做
+							// First try normal redo
 						() => commands.redo(),
-						// 检查重做后的状态
+							// Check editor state after redo
 						() => {
-							// 获取当前文档状态
+								// Get current document state
 							const { isEmpty } = editor
 							const content = editor.getJSON()
 
-							// 如果重做后编辑器是空的或只有一个内容项，可能是一个中间状态
+								// If editor is empty or has a single node after redo, it may be an intermediate state
 							if (isEmpty || (content.content && content.content.length <= 1)) {
-								// 再次尝试重做（如果可以）来跳过中间状态
+									// Try redoing again (if possible) to skip intermediate states
 								setTimeout(() => {
 									if (editor.can().redo()) {
 										commands.redo()
@@ -111,22 +111,22 @@ const CustomHistory = Extension.create({
 				}
 				return false
 			},
-			// 重做 - Ctrl+Shift+Z/Cmd+Shift+Z (macOS风格)
+				// Redo - Ctrl+Shift+Z/Cmd+Shift+Z (macOS style)
 			"Mod-Shift-z": ({ editor }) => {
 				if (editor.can().redo()) {
-					// 使用增强的重做命令
+						// Use enhanced redo command
 					editor.commands.first(({ commands }) => [
-						// 首先尝试正常重做
+							// First try normal redo
 						() => commands.redo(),
-						// 检查重做后的状态
+							// Check editor state after redo
 						() => {
-							// 获取当前文档状态
+								// Get current document state
 							const { isEmpty } = editor
 							const content = editor.getJSON()
 
-							// 如果重做后编辑器是空的或只有一个内容项，可能是一个中间状态
+								// If editor is empty or has a single node after redo, it may be an intermediate state
 							if (isEmpty || (content.content && content.content.length <= 1)) {
-								// 再次尝试重做（如果可以）来跳过中间状态
+									// Try redoing again (if possible) to skip intermediate states
 								setTimeout(() => {
 									if (editor.can().redo()) {
 										commands.redo()
@@ -143,28 +143,28 @@ const CustomHistory = Extension.create({
 		}
 	},
 
-	// 添加撤销和重做命令
+		// Add undo and redo commands
 	addCommands() {
 		return {
 			undo:
 				() =>
 				({ state, dispatch }) => {
-					// 使用顶层导入的undo命令
+						// Use top-level imported undo command
 					return undo(state, dispatch)
 				},
 			redo:
 				() =>
 				({ state, dispatch }) => {
-					// 使用顶层导入的redo命令
+						// Use top-level imported redo command
 					return redo(state, dispatch)
 				},
 		}
 	},
 
-	// 处理文本输入事务，确保正确添加到历史堆栈
+		// Handle text input transactions, ensuring they are properly added to the history stack
 	addOptions() {
 		return {
-			newGroupDelay: 500, // 增加延迟以匹配上面的配置
+				newGroupDelay: 500, // Increase delay to match the configuration above
 		}
 	},
 })
@@ -181,19 +181,19 @@ const HardBlockExtension = HardBlock.extend({
 })
 
 interface DelightfulRichEditorProps extends Omit<HTMLAttributes<HTMLDivElement>, "content"> {
-	/** 是否显示工具栏 */
+	/** Whether to show the toolbar */
 	showToolBar?: boolean
-	/** 占位符 */
+	/** Placeholder */
 	placeholder?: string
-	/** 内容 */
+	/** Content */
 	content?: Content
-	/** 编辑器配置 */
+	/** Editor configuration */
 	editorProps?: UseEditorOptions
-	/** 回车键回调 */
+	/** Enter key callback */
 	onEnter?: (editor: Editor) => void
-	/** 粘贴失败回调 */
+	/** Paste failure callback */
 	onPasteFileFail?: (error: FileError[]) => void
-	/** 是否移除回车键默认行为 */
+	/** Whether to remove Enter key default behavior */
 	enterBreak?: boolean
 	contentProps?: HTMLAttributes<HTMLDivElement>
 }
@@ -219,24 +219,24 @@ const DelightfulRichEditor = memo(
 
 		const parentDom = useRef<HTMLDivElement>(null)
 
-		// 创建一个 editorRef 来解决循环引用问题
+		// Create an editorRef to resolve circular reference issues
 		const editorRef = useRef<Editor | null>(null)
 
-		// 用于处理自定义占位符
+		// Used to handle custom placeholder
 		const [showPlaceholder, setShowPlaceholder] = useState(!content)
 
-		// 错误状态管理
+		// Error state management
 		const [error, setError] = useState<string | null>(null)
 
-		// 使用 useCallback 优化 onPaste 回调函数
+		// Optimize onPaste callback with useCallback
 		const handlePaste = useCallback(async (editor: Editor, files: File[]) => {
 			try {
 				console.log("FileHandler onPaste", files)
-				// 确保只处理一次
+				// Ensure processing only once
 				if (!files.length) return
 
 				const currentPos = editor.state.selection.$from.pos
-				// 只处理第一个文件，避免重复插入
+				// Only handle the first file to avoid duplicate insertions
 				const file = files[0]
 				const src = await fileToBase64(file)
 				editor.commands.insertContent({
@@ -247,14 +247,14 @@ const DelightfulRichEditor = memo(
 				editor.commands.focus(currentPos + 1)
 			} catch (err) {
 				console.error("Error handling paste:", err)
-				setError("图片粘贴失败，请重试")
+				setError("Image paste failed, please try again")
 			}
 		}, [])
 
-		// 使用 useCallback 优化 onImageRemoved 回调函数
+		// Optimize onImageRemoved callback with useCallback
 		const handleImageRemoved = useCallback((attrs: Record<string, any>) => {
 			console.log("Image removed", attrs)
-			// 如果是 blob URL，需要释放
+			// If the src is a blob URL, revoke it
 			if (attrs.src?.startsWith("blob:")) {
 				try {
 					URL.revokeObjectURL(attrs.src)
@@ -266,9 +266,9 @@ const DelightfulRichEditor = memo(
 
 		const extensions = useMemo(() => {
 			const list = [
-				// 自定义历史管理，取代StarterKit内置的history
+				// Custom history management, replaces StarterKit's built-in history
 				CustomHistory,
-				// 在测试环境中跳过extend方法的调用
+				// Skip calling extend in test environment
 				StarterKit.configure({
 					blockquote: false,
 					codeBlock: false,
@@ -276,12 +276,12 @@ const DelightfulRichEditor = memo(
 					bulletList: false,
 					code: false,
 					hardBreak: false,
-					// 禁用StarterKit内置的history，使用我们的自定义history
+					// Disable StarterKit built-in history, use our custom history
 					history: false,
 				}).extend({
 					addKeyboardShortcuts() {
 						return {
-							// 移除回车键默认行为
+							// Remove Enter key default behavior
 							Enter: () => enterBreak,
 						}
 					},
@@ -326,43 +326,43 @@ const DelightfulRichEditor = memo(
 			size: number
 		} | null>(null)
 
-		// 使用 useCallback 优化 handlePasteText 函数
+		// Optimize handlePasteText with useCallback
 		const handlePasteText = useCallback((view: EditorView, event: ClipboardEvent) => {
-			// 如果有文件，让 FileHandler 处理，直接返回 false 不做任何处理
+			// If files exist, let FileHandler handle them; return false to do nothing here
 			if (event.clipboardData?.files.length) {
 				return false
 			}
 
-			// 获取纯文本内容
+			// Get plain text content
 			const text = event.clipboardData?.getData("text/plain")
 
 			if (text) {
-				// 阻止默认粘贴行为
+				// Prevent default paste behavior
 				event.preventDefault()
 
-				// 创建一个段落序列，每个换行符作为一个新段落
+				// Create a sequence of paragraphs, each newline as a new paragraph
 				const parts = text.split("\n")
 				const transaction = view.state.tr
 				const { selection } = view.state
 
-				// 如果有选中内容，先删除
+				// If there is a selection, delete it first
 				if (!selection.empty) {
 					transaction.delete(selection.from, selection.to)
-					// 注意：我们不在这里设置setMeta("addToHistory", true)，
-					// 这样删除操作就会作为当前事务的一部分，而不是单独的历史记录
+					// Note: We do not set setMeta("addToHistory", true) here,
+					// so the deletion becomes part of the current transaction, not a separate history entry
 				}
 
 				let pos = selection.from
 
-				// 将这些段落逐个插入到文档中
+				// Insert these paragraphs one by one into the document
 				for (let i = 0; i < parts.length; i += 1) {
-					// 插入文本部分
+					// Insert text part
 					if (parts[i].length > 0) {
 						transaction.insertText(parts[i], pos)
 						pos += parts[i].length
 					}
 
-					// 在每个部分之后（除最后一个）插入硬换行
+					// Insert a hard break after each part (except the last)
 					if (i < parts.length - 1) {
 						const hardBreakNode = view.state.schema.nodes.hardBreak.create()
 						transaction.insert(pos, hardBreakNode)
@@ -370,10 +370,10 @@ const DelightfulRichEditor = memo(
 					}
 				}
 
-				// 确保粘贴操作被添加到历史记录中
+				// Ensure the paste operation is added to the history
 				transaction.setMeta("addToHistory", true)
 
-				// 应用事务
+				// Apply the transaction
 				view.dispatch(transaction)
 
 				return true
@@ -382,7 +382,7 @@ const DelightfulRichEditor = memo(
 			return false
 		}, [])
 
-		// 使用 useCallback 优化 handleEditorUpdate 函数
+		// Optimize handleEditorUpdate with useCallback
 		const handleEditorUpdate = useCallback(
 			(updateProps: EditorEvents["update"]) => {
 				const { editor: e } = updateProps
@@ -391,7 +391,7 @@ const DelightfulRichEditor = memo(
 					pasteSize.current = null
 				}
 
-				// 更新占位符状态
+				// Update placeholder state
 				setShowPlaceholder(e.isEmpty)
 
 				editorProps?.onUpdate?.(updateProps)
@@ -399,9 +399,9 @@ const DelightfulRichEditor = memo(
 			[editorProps],
 		)
 
-		// 使用 useCallback 优化 onPaste 函数
+		// Optimize onPaste with useCallback
 		const handleOnPaste = useCallback((_: ClipboardEvent, slice: Slice) => {
-			// 只在处理纯文本粘贴时记录位置
+			// Record position only when handling plain-text paste
 			if (!slice.content.firstChild?.type.name.includes("image")) {
 				pasteSize.current = {
 					originalPosition: editorRef.current?.state.selection.$from.pos ?? 0,
@@ -410,7 +410,7 @@ const DelightfulRichEditor = memo(
 			}
 		}, [])
 
-		// 使用 Memo 优化编辑器配置
+		// Optimize editor configuration with useMemo
 		const editorConfig = useMemo(
 			() => ({
 				onPaste: handleOnPaste,
@@ -431,10 +431,10 @@ const DelightfulRichEditor = memo(
 
 		const editor = useEditor(editorConfig)
 
-		// 更新 editorRef
+		// Update editorRef
 		useEffect(() => {
 			editorRef.current = editor
-			// 初始化后更新占位符状态
+			// After initialization, update placeholder state
 			if (editor) {
 				setShowPlaceholder(editor.isEmpty)
 			}
@@ -444,7 +444,7 @@ const DelightfulRichEditor = memo(
 			editor,
 		}))
 
-		// 清除错误
+		// Clear error message after a delay
 		useEffect(() => {
 			if (error) {
 				const timer = setTimeout(() => {
@@ -455,19 +455,19 @@ const DelightfulRichEditor = memo(
 			return undefined
 		}, [error])
 
-		// 组件卸载时清理资源
+		// Clean up resources when component unmounts
 		useEffect(() => {
 			return () => {
-				// 销毁编辑器
+				// Destroy editor
 				if (editorRef.current) {
 					editorRef.current.destroy()
 				}
 			}
 		}, [])
 
-		// 添加全局样式覆盖，确保没有外边框
+		// Add global style overrides to ensure no outlines/borders
 		useEffect(() => {
-			// 添加全局样式
+			// Add global styles
 			const styleElement = document.createElement("style")
 			styleElement.textContent = `
 				.ProseMirror, .ProseMirror:focus, .ProseMirror:focus-visible,
@@ -477,26 +477,26 @@ const DelightfulRichEditor = memo(
 					border: none !important;
 				}
 				
-				/* 修复高度问题 */
+				/* Fix height issues */
 				.ProseMirror {
 					height: auto !important;
 					min-height: inherit !important;
 					overflow: hidden !important;
 					max-height: none !important;
-					caret-color: inherit !important; /* 使用继承的光标颜色 */
+					caret-color: inherit !important; /* Use inherited caret color */
 				}
 				
-				/* 确保段落没有多余的边距 */
+				/* Ensure paragraphs have no extra margins */
 				.ProseMirror p {
 					margin: 0 !important;
 					padding: 0 !important;
-					line-height: 1.5em !important; /* 设置固定行高 */
+					line-height: 1.5em !important; /* Set fixed line height */
 					min-height: 1em !important;
 					max-height: none !important;
 					position: relative !important;
 				}
 				
-				/* 光标样式，确保不会影响布局 */
+				/* Cursor style to avoid layout impact */
 				.ProseMirror .ProseMirror-cursor {
 					margin: 0 !important;
 					padding: 0 !important;
@@ -504,7 +504,7 @@ const DelightfulRichEditor = memo(
 					z-index: 1 !important;
 				}
 				
-				/* 修复编辑器容器高度 */
+				/* Fix editor container height */
 				.tiptap {
 					height: auto !important;
 					min-height: inherit !important;
@@ -513,7 +513,7 @@ const DelightfulRichEditor = memo(
 					flex-direction: column !important;
 				}
 				
-				/* 添加focus状态下占位符样式 */
+				/* Add placeholder style in focus state */
 				.ProseMirror:focus p.is-editor-empty:first-child::before,
 				.ProseMirror:focus p.is-empty::before {
 					color: #d9d9d9;
@@ -528,7 +528,7 @@ const DelightfulRichEditor = memo(
 					overflow: visible;
 				}
 
-				/* 恢复自动补全提醒样式 */
+				/* Restore autocomplete suggestion style */
 				p[data-suggestion]::after {
 					color: #bfbfbf;
 					content: attr(data-suggestion);
@@ -538,7 +538,7 @@ const DelightfulRichEditor = memo(
 			`
 			document.head.appendChild(styleElement)
 
-			// 清理函数
+			// Cleanup function
 			return () => {
 				document.head.removeChild(styleElement)
 			}

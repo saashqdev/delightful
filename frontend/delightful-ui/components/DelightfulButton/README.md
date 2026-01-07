@@ -1,4 +1,4 @@
-# DelightfulButton Magic Button Component
+# DelightfulButton Delightful Button Component
 
 `DelightfulButton` is an enhanced button based on Ant Design's Button component, providing more customization options and style optimization.
 

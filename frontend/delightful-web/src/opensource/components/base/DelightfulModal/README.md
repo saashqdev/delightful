@@ -1,4 +1,4 @@
-# DelightfulModal Magic Dialog Component
+# DelightfulModal Delightful Dialog Component
 
 `DelightfulModal` is an enhanced dialog component based on Ant Design's Modal, offering more polished styles and internationalization support.
 

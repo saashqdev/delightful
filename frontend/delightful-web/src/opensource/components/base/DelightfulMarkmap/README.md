@@ -1,82 +1,82 @@
-# DelightfulMarkmap 魔法思维导图组件
+# DelightfulMarkmap Enhanced Mind Map Component
 
-`DelightfulMarkmap` 是一个用于渲染和展示思维导图的组件，基于 Markmap 库实现，支持将 Markdown 格式的文本转换为交互式思维导图。
+`DelightfulMarkmap` is a component for rendering and displaying mind maps, implemented based on the Markmap library, supporting conversion of Markdown-formatted text into interactive mind maps.
 
 ## 属性
 
-| 属性名   | 类型    | 默认值 | 说明                             |
-| -------- | ------- | ------ | -------------------------------- |
-| content  | string  | -      | Markdown 格式的思维导图内容      |
-| readonly | boolean | false  | 是否为只读模式，不允许编辑       |
-| ...rest  | -       | -      | 支持传递其他 HTML 属性到容器元素 |
+| Property | Type    | Default | Description                          |
+| -------- | ------- | ------- | ------------------------------------ |
+| content  | string  | -       | Mind map content in Markdown format  |
+| readonly | boolean | false   | Whether in read-only mode, no editing allowed |
+| ...rest  | -       | -       | Support passing other HTML attributes to container |
 
-## 基础用法
+## Basic Usage
 
 ```tsx
 import { DelightfulMarkmap } from '@/components/base/DelightfulMarkmap';
 
-// 基础用法
+// Basic usage
 const markdownContent = `
-# 项目计划
-## 阶段一
-### 需求分析
-### 原型设计
-## 阶段二
-### 开发
-### 测试
-## 阶段三
-### 部署
-### 维护
+# Project Plan
+## Phase One
+### Requirements Analysis
+### Prototype Design
+## Phase Two
+### Development
+### Testing
+## Phase Three
+### Deployment
+### Maintenance
 `;
 
 <DelightfulMarkmap content={markdownContent} />
 
-// 只读模式
+// Read-only mode
 <DelightfulMarkmap content={markdownContent} readonly />
 
-// 自定义样式
+// Custom styles
 <DelightfulMarkmap
   content={markdownContent}
   style={{ height: '500px', width: '100%' }}
 />
 ```
 
-## 思维导图格式
+## Mind Map Format
 
-DelightfulMarkmap 使用 Markdown 的标题层级结构来定义思维导图的节点层级：
+DelightfulMarkmap uses Markdown heading hierarchy to define mind map node hierarchy:
 
 ```markdown
-# 根节点
+# Root Node
 
-## 二级节点1
+## Second Level Node 1
 
-### 三级节点1-1
+### Third Level Node 1-1
 
-### 三级节点1-2
+### Third Level Node 1-2
 
-## 二级节点2
+## Second Level Node 2
 
-### 三级节点2-1
+### Third Level Node 2-1
 
-#### 四级节点2-1-1
+#### Fourth Level Node 2-1-1
 ```
 
-每个标题将成为思维导图中的一个节点，标题的层级决定了节点在思维导图中的层级。
+Each heading becomes a node in the mind map. The heading level determines the node's position in the hierarchy.
 
-## 特点
+## Features
 
-1. **Markdown 支持**：使用熟悉的 Markdown 语法创建思维导图
-2. **交互式体验**：支持缩放、平移和折叠/展开节点
-3. **自动布局**：自动计算节点位置和连线，无需手动排版
-4. **响应式设计**：自动适应容器大小
-5. **轻量级**：加载快速，性能优良
+1. **Markdown Support**: Create mind maps using familiar Markdown syntax
+2. **Interactive Experience**: Support zooming, panning, and collapsing/expanding nodes
+3. **Auto Layout**: Automatically calculates node positions and connections, no manual formatting needed
+4. **Responsive Design**: Automatically adapts to container size
+5. **Lightweight**: Fast loading and excellent performance
 
-## 何时使用
+## When to Use
 
--   需要展示层级结构的信息时
--   需要可视化项目计划或组织结构时
--   需要展示知识体系或概念关系时
--   需要将 Markdown 文档转换为思维导图时
--   需要在对话或文档中嵌入交互式思维导图时
+-   When you need to display hierarchical information
+-   When you need to visualize project plans or organizational structures
+-   When you need to display knowledge systems or concept relationships
+-   When you need to convert Markdown documents to mind maps
+-   When you need to embed interactive mind maps in conversations or documents
 
-DelightfulMarkmap 组件让思维导图的创建和展示变得简单高效，是展示结构化信息的理想选择。
+DelightfulMarkmap makes mind map creation and display simple and efficient, making it an ideal choice for presenting structured information.

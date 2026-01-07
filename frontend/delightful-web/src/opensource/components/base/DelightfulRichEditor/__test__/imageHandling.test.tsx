@@ -3,11 +3,11 @@ import { render } from "@testing-library/react"
 import React from "react"
 import "./setup"
 
-// 提升模拟函数
+// Hoist mock functions
 const mockFileHandlerConfigure = vi.hoisted(() => vi.fn().mockReturnValue({}))
 const mockImageConfigure = vi.hoisted(() => vi.fn().mockReturnValue({}))
 
-// 模拟依赖
+// Mock dependencies
 vi.mock("@tiptap/react", () => {
 	return {
 		useEditor: vi.fn().mockReturnValue({
@@ -50,53 +50,53 @@ vi.mock("../extensions/image", () => {
 	}
 })
 
-// 模拟组件
+// Mock component
 const DelightfulRichEditor = React.lazy(() => import("../index"))
 
-// 测试包装器
+// Test wrapper
 const TestWrapper = ({ children }: { children: React.ReactNode }) => {
 	return <div>{children}</div>
 }
 
-describe("DelightfulRichEditor 图片处理", () => {
+describe("DelightfulRichEditor Image Handling", () => {
 	beforeEach(() => {
 		vi.clearAllMocks()
 	})
 
-	it("应正确处理粘贴的图片", async () => {
+	it("should correctly handle pasted images", async () => {
 		const handlePaste = vi.fn()
 
 		render(
 			<TestWrapper>
 				<React.Suspense fallback={<div>Loading...</div>}>
-					<DelightfulRichEditor placeholder="测试编辑器" />
+					<DelightfulRichEditor placeholder="Test Editor" />
 				</React.Suspense>
 			</TestWrapper>,
 		)
 
-		// 手动调用模拟函数，模拟组件渲染时的调用
+		// Manually call mock function to simulate component render invocation
 		mockFileHandlerConfigure({
 			allowedMimeTypes: ["image/*"],
 			maxFileSize: 5 * 1024 * 1024,
 			onPaste: handlePaste,
 		})
 
-		// 验证文件处理扩展配置
+		// Verify file handler extension configuration
 		expect(mockFileHandlerConfigure).toHaveBeenCalled()
 	})
 
-	it("应处理图片验证错误", async () => {
+	it("should handle image validation errors", async () => {
 		const handleValidationError = vi.fn()
 
 		render(
 			<TestWrapper>
 				<React.Suspense fallback={<div>Loading...</div>}>
-					<DelightfulRichEditor placeholder="测试编辑器" />
+					<DelightfulRichEditor placeholder="Test Editor" />
 				</React.Suspense>
 			</TestWrapper>,
 		)
 
-		// 手动调用模拟函数，模拟组件渲染时的调用
+		// Manually call mock function to simulate component render invocation
 		mockImageConfigure({
 			inline: true,
 			allowedMimeTypes: ["image/*"],
@@ -104,7 +104,7 @@ describe("DelightfulRichEditor 图片处理", () => {
 			onValidationError: handleValidationError,
 		})
 
-		// 验证图片扩展配置
+		// Verify image extension configuration
 		expect(mockImageConfigure).toHaveBeenCalled()
 	})
 })

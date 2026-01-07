@@ -6,7 +6,7 @@ import { MAX_RECURSION_DEPTH } from "@/const/other"
 import type { ImagePreviewInfo } from "@/types/chat/preview"
 
 /**
- * 收集 markdown 中的图片
+ * Collect images from markdown
  */
 export const collectMarkdownImages = memoize((mdText?: string): string[] => {
 	if (!mdText) {
@@ -19,7 +19,7 @@ export const collectMarkdownImages = memoize((mdText?: string): string[] => {
 })
 
 /**
- * 递归遍历所有节点，收集匹配的节点
+ * Recursively traverse all nodes and collect matching nodes
  * @param data
  * @param matchTypes
  * @param matchList
@@ -63,9 +63,9 @@ type MessageImageInfo = Omit<ImagePreviewInfo, "conversationId">
 const map = new Map<string, MessageImageInfo[]>()
 
 /**
- * 根据不同类型的消息，获取消息中的图片
- * @param message 消息
- * @param index 图片索引
+ * Get images from messages by different message types
+ * @param message Message
+ * @param index Image index
  * @returns
  */
 export const getConversationMessageImages = async (
@@ -88,7 +88,7 @@ export const getConversationMessageImages = async (
 				result.push({
 					url: item,
 					messageId,
-					ext: { ext: "jpg", mime: "image/jpeg" }, // 默认认为是 jpg
+					ext: { ext: "jpg", mime: "image/jpeg" }, // Default to jpg
 					index: i,
 				})
 			}
@@ -100,7 +100,7 @@ export const getConversationMessageImages = async (
 				result.push({
 					url: item,
 					messageId,
-					ext: { ext: "jpg", mime: "image/jpeg" }, // 默认认为是 jpg
+					ext: { ext: "jpg", mime: "image/jpeg" }, // Default to jpg
 					index: i,
 				})
 			}

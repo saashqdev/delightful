@@ -1,4 +1,4 @@
-# DelightfulTable Magic Table Component
+# DelightfulTable Delightful Table Component
 
 `DelightfulTable` is an enhanced table component based on Ant Design Table, providing better loading states, scrolling behavior, and style optimization.
 

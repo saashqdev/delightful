@@ -3,14 +3,14 @@ import { render } from "@testing-library/react"
 import React from "react"
 import "./setup"
 
-// 提升模拟函数
+// Hoist mock functions
 const mockInsertText = vi.hoisted(() => vi.fn())
 const mockSetTextSelection = vi.hoisted(() => vi.fn())
 const mockSetHardBreak = vi.hoisted(() => vi.fn())
 const mockFocus = vi.hoisted(() => vi.fn())
 const mockFileHandlerConfigure = vi.hoisted(() => vi.fn().mockReturnValue({}))
 
-// 创建模拟编辑器
+// Create mock editor
 const mockEditor = vi.hoisted(() => ({
 	commands: {
 		insertText: mockInsertText,
@@ -27,7 +27,7 @@ const mockEditor = vi.hoisted(() => ({
 	},
 }))
 
-// 模拟依赖
+// Mock dependencies
 vi.mock("@tiptap/react", () => {
 	return {
 		useEditor: vi.fn().mockReturnValue(mockEditor),
@@ -47,49 +47,49 @@ vi.mock("../extensions/file-handler", () => {
 	}
 })
 
-// 模拟组件
+// Mock component
 const DelightfulRichEditor = React.lazy(() => import("../index"))
 
-// 测试包装器
+// Test wrapper
 const TestWrapper = ({ children }: { children: React.ReactNode }) => {
 	return <div>{children}</div>
 }
 
-describe("DelightfulRichEditor 文本处理", () => {
+describe("DelightfulRichEditor Text Handling", () => {
 	beforeEach(() => {
 		vi.clearAllMocks()
 	})
 
-	it("应正确处理粘贴的文本", async () => {
+	it("should correctly handle pasted text", async () => {
 		render(
 			<TestWrapper>
 				<React.Suspense fallback={<div>Loading...</div>}>
-					<DelightfulRichEditor placeholder="测试粘贴文本" />
+					<DelightfulRichEditor placeholder="Test paste text" />
 				</React.Suspense>
 			</TestWrapper>,
 		)
 
-		// 手动调用模拟函数，模拟组件渲染时的调用
+		// Manually call mock function to simulate component render invocation
 		mockFileHandlerConfigure({
 			allowedMimeTypes: ["image/*"],
 			maxFileSize: 5 * 1024 * 1024,
 			onPaste: vi.fn(),
 		})
 
-		// 验证文件处理扩展配置
+		// Verify file handler extension configuration
 		expect(mockFileHandlerConfigure).toHaveBeenCalled()
 	})
 
-	it("应正确处理回车键", async () => {
+	it("should correctly handle Enter key", async () => {
 		render(
 			<TestWrapper>
 				<React.Suspense fallback={<div>Loading...</div>}>
-					<DelightfulRichEditor placeholder="测试回车键" enterBreak />
+					<DelightfulRichEditor placeholder="Test Enter key" enterBreak />
 				</React.Suspense>
 			</TestWrapper>,
 		)
 
-		// 验证编辑器配置
+		// Verify editor configuration
 		expect(mockEditor).toBeDefined()
 	})
 })

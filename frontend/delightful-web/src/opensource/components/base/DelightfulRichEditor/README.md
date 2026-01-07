@@ -1,98 +1,98 @@
-# DelightfulRichEditor 魔法富文本编辑器组件
+# DelightfulRichEditor — Rich Text Editor Component
 
-`DelightfulRichEditor` 是一个基于 TipTap 的富文本编辑器组件，提供了文本格式化、图片插入、表情符号、提及功能等丰富的编辑功能。
+`DelightfulRichEditor` is a TipTap-based rich text editor component that offers rich features such as text formatting, image insertion, emoji, and mentions.
 
-## 属性
+## Props
 
-| 属性名            | 类型                             | 默认值 | 说明                         |
-| ----------------- | -------------------------------- | ------ | ---------------------------- |
-| showToolBar       | boolean                          | true   | 是否显示工具栏               |
-| placeholder       | string                           | -      | 编辑器占位符文本             |
-| content           | Content                          | -      | 编辑器初始内容               |
-| editorProps       | UseEditorOptions                 | -      | TipTap 编辑器配置选项        |
-| onEnter           | (editor: Editor) => void         | -      | 回车键按下时的回调函数       |
-| enterBreak        | boolean                          | false  | 是否移除回车键的默认换行行为 |
-| contentProps      | HTMLAttributes\<HTMLDivElement\> | -      | 编辑器内容区域的 HTML 属性   |
-| ...HTMLAttributes | -                                | -      | 支持所有 HTML div 元素的属性 |
+| Property          | Type                             | Default | Description                                         |
+| ----------------- | -------------------------------- | ------- | --------------------------------------------------- |
+| showToolBar       | boolean                          | true    | Whether to show the toolbar                         |
+| placeholder       | string                           | -       | Placeholder text for the editor                     |
+| content           | Content                          | -       | Initial editor content                               |
+| editorProps       | UseEditorOptions                 | -       | TipTap editor configuration options                 |
+| onEnter           | (editor: Editor) => void         | -       | Callback when the Enter key is pressed              |
+| enterBreak        | boolean                          | false   | Whether to remove the Enter key’s default line break |
+| contentProps      | HTMLAttributes<HTMLDivElement> | -       | HTML attributes for the editor content area         |
+| ...HTMLAttributes | -                                | -       | Supports all HTML div element attributes            |
 
-## 基础用法
+## Basic Usage
 
 ```tsx
 import { DelightfulRichEditor } from '@/components/base/DelightfulRichEditor';
 import { useRef } from 'react';
 import type { DelightfulRichEditorRef } from '@/components/base/DelightfulRichEditor';
 
-// 基础用法
+// Basic usage
 <DelightfulRichEditor
-  placeholder="请输入内容..."
+  placeholder="Please enter content..."
   style={{ height: '300px' }}
 />
 
-// 带初始内容
+// With initial content
 <DelightfulRichEditor
-  content="<p>这是初始内容</p>"
+  content="<p>This is initial content</p>"
   style={{ height: '300px' }}
 />
 
-// 不显示工具栏
+// Hide toolbar
 <DelightfulRichEditor
   showToolBar={false}
-  placeholder="无工具栏的编辑器"
+  placeholder="Editor without toolbar"
   style={{ height: '200px' }}
 />
 
-// 使用 ref 获取编辑器实例
+// Use ref to access the editor instance
 const editorRef = useRef<DelightfulRichEditorRef>(null);
 
 <DelightfulRichEditor
   ref={editorRef}
-  placeholder="使用 ref 控制的编辑器"
+  placeholder="Editor controlled by ref"
   style={{ height: '300px' }}
 />
 
-// 获取编辑器内容
+// Get editor content
 const getContent = () => {
   const html = editorRef.current?.editor?.getHTML();
-  console.log('编辑器内容:', html);
+  console.log('Editor content:', html);
 };
 
-// 监听内容变化
+// Listen for content updates
 <DelightfulRichEditor
   editorProps={{
     onUpdate: ({ editor }) => {
-      console.log('内容已更新:', editor.getHTML());
+      console.log('Content updated:', editor.getHTML());
     }
   }}
   style={{ height: '300px' }}
 />
 
-// 自定义回车键行为
+// Customize Enter key behavior
 <DelightfulRichEditor
   enterBreak={true}
   onEnter={(editor) => {
-    console.log('回车键被按下');
-    // 执行自定义操作
+    console.log('Enter key pressed');
+    // Perform custom action
   }}
   style={{ height: '200px' }}
 />
 ```
 
-## 特点
+## Features
 
-1. **丰富的文本格式化**：支持粗体、斜体、标题、字体大小、文本对齐等多种格式化选项
-2. **图片处理**：支持图片上传、粘贴、拖放，并提供图片预览和管理功能
-3. **表情符号支持**：内置表情符号选择器，轻松插入表情
-4. **提及功能**：支持 @ 提及用户或其他实体
-5. **可定制工具栏**：可以显示或隐藏工具栏，满足不同场景需求
-6. **占位符支持**：在编辑器为空时显示自定义占位符文本
-7. **自定义回车行为**：可以自定义回车键的行为，适用于特殊交互场景
+1. **Rich text formatting**: Bold, italic, headings, font size, text alignment, and more
+2. **Image handling**: Upload, paste, drag-and-drop images with preview and management
+3. **Emoji support**: Built-in emoji picker for easy insertion
+4. **Mentions**: Support for @-mentioning users or other entities
+5. **Customizable toolbar**: Show or hide the toolbar to fit your scenario
+6. **Placeholder support**: Display a custom placeholder when the editor is empty
+7. **Custom Enter behavior**: Configure Enter key behavior for special interactions
 
-## 何时使用
+## When To Use
 
--   需要在应用中提供富文本编辑功能时
--   需要用户能够格式化文本、插入图片等多媒体内容时
--   需要支持表情符号、提及等社交功能时
--   需要一个功能完善但界面简洁的编辑器时
--   需要自定义编辑器行为以适应特定交互需求时
+- When your app needs rich text editing functionality
+- When users should be able to format text and insert images/media
+- When emoji and mentions are required for social interactions
+- When you need a feature-rich yet clean editor UI
+- When you need to customize editor behavior for specific interactions
 
-DelightfulRichEditor 组件让你的应用拥有专业的富文本编辑能力，适合用于评论系统、内容创作、邮件编辑等多种场景。
+The DelightfulRichEditor component brings professional rich text editing capabilities to your application, suitable for comment systems, content creation, email editing, and many other scenarios.

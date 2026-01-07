@@ -53,7 +53,7 @@ export const enum ConversationMessageType {
 	/** Recording summary */
 	RecordingSummary = "recording_summary",
 
-	/** Super Magic message */
+	/** Super Delightful message */
 	BeDelightful = "general_agent_card",
 }
 
@@ -580,7 +580,7 @@ export interface VoiceConversationMessage extends ConversationMessageBase {
 }
 
 /**
- * Magic search card search result
+ * Delightful search card search result
  */
 
 export interface WikiSearchItem {
@@ -622,7 +622,7 @@ export interface DelightfulSearchCardContent {
 }
 
 /**
- * Magic search card message
+ * Delightful search card message
  */
 export interface DelightfulSearchCardConversationMessage extends ConversationMessageBase {
 	type: ConversationMessageType.DelightfulSearchCard

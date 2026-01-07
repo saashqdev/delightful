@@ -1,4 +1,4 @@
-# DelightfulDropdown Magic Dropdown Menu Component
+# DelightfulDropdown Delightful Dropdown Menu Component
 
 `DelightfulDropdown` is an enhanced dropdown menu based on Ant Design's Dropdown component, providing more aesthetically pleasing styles and better user experience.
 

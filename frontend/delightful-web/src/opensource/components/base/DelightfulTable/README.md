@@ -1,4 +1,4 @@
-# DelightfulTable Magic Table Component
+# DelightfulTable Delightful Table Component
 
 `DelightfulTable` is an enhanced table component based on Ant Design's Table. It offers improved loading states, scrolling behavior, and style optimizations.
 
@@ -47,15 +47,15 @@ const columns: ColumnsType<DataType> = [
 const data: DataType[] = [
   {
     key: '1',
-    name: 'Zhang San',
+    name: 'Marge Simpson',
     age: 32,
-    address: 'Chaoyang District, Beijing',
+    address: 'Fort Erie, Ontario',
   },
   {
     key: '2',
-    name: 'Li Si',
+    name: 'Homer Simpson',
     age: 42,
-    address: 'Pudong New Area, Shanghai',
+    address: 'Fort Erie, Ontario',
   },
 ];
 

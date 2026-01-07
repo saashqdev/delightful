@@ -1,16 +1,16 @@
-# DelightfulDropdown 魔法下拉菜单组件
+# DelightfulDropdown — Enhanced Dropdown Menu Component
 
-`DelightfulDropdown` 是一个基于 Ant Design Dropdown 组件的增强版下拉菜单，提供了更美观的样式和更好的用户体验。
+`DelightfulDropdown` is an enhanced dropdown menu built on Ant Design's Dropdown, offering cleaner styling and a better user experience.
 
-## 属性
+## Props
 
-| 属性名           | 类型      | 默认值 | 说明                                   |
-| ---------------- | --------- | ------ | -------------------------------------- |
-| menu             | MenuProps | -      | 菜单配置，用于定义下拉菜单的内容和行为 |
-| overlayClassName | string    | -      | 下拉菜单的自定义类名                   |
-| ...DropDownProps | -         | -      | 支持所有 Ant Design Dropdown 的属性    |
+| Prop             | Type      | Default | Description                              |
+| ---------------- | --------- | ------- | ---------------------------------------- |
+| menu             | MenuProps | -       | Menu configuration defining content/behavior |
+| overlayClassName | string    | -       | Custom class name for the dropdown       |
+| ...DropDownProps | -         | -       | Supports all Ant Design Dropdown props   |
 
-## 基础用法
+## Basic Usage
 
 ```tsx
 import { DelightfulDropdown } from '@/components/base/DelightfulDropdown';
@@ -18,16 +18,16 @@ import { Button, Space } from 'antd';
 import type { MenuProps } from 'antd';
 import { IconSettings, IconUser, IconLogout } from '@tabler/icons-react';
 
-// 定义菜单项
+// Define menu items
 const items: MenuProps['items'] = [
   {
     key: '1',
-    label: '个人信息',
+    label: 'Profile',
     icon: <IconUser size={16} />,
   },
   {
     key: '2',
-    label: '设置',
+    label: 'Settings',
     icon: <IconSettings size={16} />,
   },
   {
@@ -35,57 +35,57 @@ const items: MenuProps['items'] = [
   },
   {
     key: '3',
-    label: '退出登录',
+    label: 'Log out',
     icon: <IconLogout size={16} />,
     danger: true,
   },
 ];
 
-// 基础用法
+// Basic usage
 <DelightfulDropdown menu={{ items }}>
-  <Button>点击显示下拉菜单</Button>
+  <Button>Click to show dropdown</Button>
 </DelightfulDropdown>
 
-// 带触发方式
+// With trigger
 <DelightfulDropdown menu={{ items }} trigger={['hover']}>
-  <Button>悬停显示下拉菜单</Button>
+  <Button>Hover to show dropdown</Button>
 </DelightfulDropdown>
 
-// 带箭头
+// With arrow
 <DelightfulDropdown menu={{ items }} arrow>
-  <Button>带箭头的下拉菜单</Button>
+  <Button>Dropdown with arrow</Button>
 </DelightfulDropdown>
 
-// 带事件处理
+// With event handling
 <DelightfulDropdown
   menu={{
     items,
-    onClick: (e) => console.log('点击了菜单项:', e.key),
+    onClick: (e) => console.log('Clicked menu item:', e.key),
   }}
 >
-  <Button>点击菜单项触发事件</Button>
+  <Button>Click menu item to trigger event</Button>
 </DelightfulDropdown>
 
-// 禁用状态
+// Disabled state
 <DelightfulDropdown menu={{ items }} disabled>
-  <Button>禁用的下拉菜单</Button>
+  <Button>Disabled dropdown</Button>
 </DelightfulDropdown>
 ```
 
-## 特点
+## Features
 
-1. **优化的样式**：更大的圆角、更合理的间距和更美观的悬停效果
-2. **图标间距优化**：优化了图标与文本之间的间距，使布局更加协调
-3. **危险项样式增强**：为危险操作项提供了更明显的视觉提示
-4. **子菜单位置优化**：调整了子菜单的位置，使其显示更加自然
-5. **主题适配**：自动适应亮色/暗色主题，提供一致的视觉体验
+1. **Optimized styling**: Larger rounded corners, balanced spacing, and polished hover effects
+2. **Icon spacing**: Improved spacing between icons and text for alignment
+3. **Danger item styling**: Clearer visual cues for dangerous actions
+4. **Submenu positioning**: Adjusted submenu placement for natural display
+5. **Theme adaptation**: Auto adapts to light/dark themes for consistent visuals
 
-## 何时使用
+## When to Use
 
--   需要在页面上放置一个下拉菜单时
--   需要为用户提供多个操作选项但不想占用太多空间时
--   需要分组展示相关操作时
--   需要在下拉菜单中包含危险操作时
--   需要更美观的下拉菜单样式时
+-   Provide dropdown menus in a page
+-   Offer multiple actions without consuming much space
+-   Group related actions in a single menu
+-   Include dangerous actions in dropdowns
+-   Use refined dropdown styles for better UX
 
-DelightfulDropdown 组件让你的下拉菜单更加美观和易用，同时保持了 Ant Design Dropdown 的所有功能特性。
+The `DelightfulDropdown` component keeps dropdowns elegant and user-friendly while retaining all features of Ant Design's Dropdown.

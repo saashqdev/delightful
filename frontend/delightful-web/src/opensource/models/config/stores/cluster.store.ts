@@ -2,17 +2,17 @@ import { makeAutoObservable } from "mobx"
 import type { Common } from "@/types/common"
 
 /**
- * @description 部署配置Store，负责内存状态管理
+ * @description Deployment configuration Store, responsible for in-memory state management
  */
 export class ClusterStore {
 	
-	// 当前环境
+	// Current environment
 	clusterCode: string = ""
 	
-	// 缓存中的环境
+	// Cached environment
 	clusterCodeCache: string = ""
 	
-	// 保存deploy配置
+	// Save deploy configuration
 	private config: Map<string, Common.PrivateConfig> = new Map()
 	
 	constructor() {

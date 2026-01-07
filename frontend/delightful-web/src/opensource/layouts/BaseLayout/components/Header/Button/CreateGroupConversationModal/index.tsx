@@ -34,7 +34,7 @@ function CreateGroupConversationModal({ open, close, ...props }: CreateGroupConv
 	const [organizationChecked, setOrganizationChecked] = useState<OrganizationSelectItem[]>([])
 
 	/**
-	 * 关闭弹窗
+	 * Close modal
 	 */
 	const closeModal = useMemoizedFn(() => {
 		form.resetFields()
@@ -43,7 +43,7 @@ function CreateGroupConversationModal({ open, close, ...props }: CreateGroupConv
 	})
 
 	/**
-	 * 确认创建
+	 * Confirm creation
 	 */
 	const onConfirm = useMemoizedFn(() => {
 		form.validateFields().then((values) => {
@@ -52,7 +52,7 @@ function CreateGroupConversationModal({ open, close, ...props }: CreateGroupConv
 
 				ChatApi.getConversationList([conversationId]).then((res) => {
 					const conversation = res.items[0]
-					// 跳转到会话页面
+					// Navigate to conversation page
 					if (conversation) {
 						ConversationService.switchConversation(
 							ConversationService.addNewConversation(conversation),
@@ -66,7 +66,7 @@ function CreateGroupConversationModal({ open, close, ...props }: CreateGroupConv
 	})
 
 	/**
-	 * 组织架构面板选中状态
+	 * Organization panel selected state
 	 */
 	const organizationPanelCheckboxOptions = useMemo(
 		() => ({
@@ -96,7 +96,7 @@ function CreateGroupConversationModal({ open, close, ...props }: CreateGroupConv
 	// const [imageUrl] = useState<string>()
 
 	/**
-	 * 取消创建
+	 * Cancel creation
 	 */
 	const onCancel = useMemoizedFn(() => {
 		closeModal?.()
@@ -156,7 +156,7 @@ function CreateGroupConversationModal({ open, close, ...props }: CreateGroupConv
 							visibility: shouldShowDefaultEmptyFallback ? "visible" : "hidden",
 							position: "absolute",
 							width: "100%",
-							top: "32px", // 搜索框高度
+							top: "32px", // Search box height
 							left: "0",
 							right: "0",
 							bottom: "0",

@@ -19,9 +19,9 @@ use Mockery;
  */
 class ProjectInvitationLinkApiTest extends AbstractApiTest
 {
-    private const BASE_URI = '/api/v1/super-agent/projects';
+    private const BASE_URI = '/api/v1/be-agent/projects';
 
-    private const INVITATION_BASE_URI = '/api/v1/super-agent/invitation';
+    private const INVITATION_BASE_URI = '/api/v1/be-agent/invitation';
 
     private string $projectId = '816065897791012866';
 

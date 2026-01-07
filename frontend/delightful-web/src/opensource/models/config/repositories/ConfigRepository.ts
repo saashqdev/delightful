@@ -26,7 +26,7 @@ export class ConfigRepository extends GlobalBaseRepository<ConfigSchema> {
 	}
 
 	/**
-	 * @description 获取主题配置
+	 * @description Get theme configuration
 	 */
 	public async getThemeConfig(): Promise<ThemeMode | undefined> {
 		const config = await this.get(ConfigType.Theme)
@@ -34,7 +34,7 @@ export class ConfigRepository extends GlobalBaseRepository<ConfigSchema> {
 	}
 
 	/**
-	 * @description 保存主题配置
+	 * @description Save theme configuration
 	 */
 	public async setThemeConfig(theme: ThemeMode): Promise<void> {
 		const themeConfig = await this.get(ConfigType.Theme)
@@ -46,7 +46,7 @@ export class ConfigRepository extends GlobalBaseRepository<ConfigSchema> {
 	}
 	
 	/**
-	 * @description 获取主题配置
+	 * @description Get locale configuration
 	 */
 	public async getLocaleConfig(): Promise<string | undefined> {
 		const config = await this.get(ConfigType.I18n)
@@ -54,7 +54,7 @@ export class ConfigRepository extends GlobalBaseRepository<ConfigSchema> {
 	}
 	
 	/**
-	 * @description 保存国际化语言标识配置
+	 * @description Save internationalization language identifier configuration
 	 */
 	public async setLocaleConfig(locale: string): Promise<void> {
 		const localeConfig = await this.get(ConfigType.I18n)
@@ -66,7 +66,7 @@ export class ConfigRepository extends GlobalBaseRepository<ConfigSchema> {
 	}
 	
 	/**
-	 * @description 获取集群配置
+	 * @description Get cluster configuration
 	 */
 	public async getClusterConfig(): Promise<string | undefined> {
 		const config = await this.get(ConfigType.Cluster)
@@ -74,7 +74,7 @@ export class ConfigRepository extends GlobalBaseRepository<ConfigSchema> {
 	}
 	
 	/**
-	 * @description 保存集群配置
+	 * @description Save cluster configuration
 	 */
 	public async setClusterConfig(cluster: string): Promise<void> {
 		const clusterConfig = await this.get(ConfigType.Cluster)

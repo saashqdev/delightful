@@ -15,7 +15,7 @@ export class ClusterRepository extends GlobalBaseRepository<Common.PrivateConfig
 	}
 	
 	/**
-	 * @description 保存主题配置
+	 * @description Save cluster configuration
 	 */
 	public async setCluster(clusterConfig: Common.PrivateConfig): Promise<void> {
 		return this.put(clusterConfig)

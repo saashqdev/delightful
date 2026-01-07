@@ -27,7 +27,7 @@ class FileKeyCleanupApi extends AbstractApi
     /**
      * Get cleanup statistics.
      *
-     * GET /api/v1/super-agent/file-keys/cleanup/statistics
+     * GET /api/v1/be-agent/file-keys/cleanup/statistics
      * Query parameters:
      *   - project_id (optional): Filter by project ID
      *   - file_key (optional): Filter by specific file key
@@ -49,7 +49,7 @@ class FileKeyCleanupApi extends AbstractApi
     /**
      * Execute cleanup process.
      *
-     * POST /api/v1/super-agent/file-keys/cleanup
+     * POST /api/v1/be-agent/file-keys/cleanup
      * Request body:
      *   - project_id (optional): Filter by project ID
      *   - file_key (optional): Filter by specific file key
@@ -69,7 +69,7 @@ class FileKeyCleanupApi extends AbstractApi
     /**
      * Preview cleanup (dry run mode).
      *
-     * POST /api/v1/super-agent/file-keys/cleanup/preview
+     * POST /api/v1/be-agent/file-keys/cleanup/preview
      * Request body:
      *   - project_id (optional): Filter by project ID
      *   - file_key (optional): Filter by specific file key

@@ -7,92 +7,92 @@ import { cloneDeep } from "lodash-es"
 
 class Conversation {
 	/**
-	 * 会话ID
+	 * Conversation ID
 	 */
 	id: string
 
 	/**
-	 * 用户ID
+	 * User ID
 	 */
 	user_id: string
 
 	/**
-	 * 接收类型
+	 * Receive type
 	 */
 	receive_type: number
 
 	/**
-	 * 接收ID
+	 * Receive ID
 	 */
 	receive_id: string
 
 	/**
-	 * 接收组织编码
+	 * Receive organization code
 	 */
 	receive_organization_code: string
 
 	/**
-	 * 是否免打扰
+	 * Do not disturb
 	 */
 	is_not_disturb: 0 | 1
 
 	/**
-	 * 是否置顶
+	 * Is pinned
 	 */
 	is_top: 0 | 1
 
 	/**
-	 * 是否标记
+	 * Is marked
 	 */
 	is_mark: number
 
 	/**
-	 * 额外信息
+	 * Extra information
 	 */
 	extra: any
 
 	/**
-	 * 状态
+	 * Status
 	 */
 	status: number
 
 	/**
-	 * 最后一条消息
+	 * Last message
 	 */
 	last_receive_message: LastReceiveMessage | undefined
 
 	/**
-	 * 话题面板是否默认打开
+	 * Is topic panel open by default
 	 */
 	topic_default_open: boolean
 
 	/**
-	 * 组织编码
+	 * Organization code
 	 */
 	user_organization_code: string
 
 	/**
-	 * 当前话题ID
+	 * Current topic ID
 	 */
 	current_topic_id: string
 
 	/**
-	 * 未读消息数量
+	 * Unread message count
 	 */
 	unread_dots: number
 
 	/**
-	 * 话题未读数量
+	 * Topic unread count
 	 */
 	topic_unread_dots: Map<string, number>
 
 	/**
-	 * 会话输入状态
+	 * Conversation input state
 	 */
 	receive_inputing: boolean
 
 	/**
-	 * 最后一条消息时间
+	 * Last message time
 	 */
 	last_receive_message_time: number
 
@@ -147,53 +147,53 @@ class Conversation {
 	}
 
 	/**
-	 * 是否是AI会话
+	 * Is AI conversation
 	 */
 	get isAiConversation() {
 		return isAiConversation(this.receive_type)
 	}
 
 	/**
-	 * 是否是群聊
+	 * Is group conversation
 	 */
 	get isGroupConversation() {
 		return this.receive_type === MessageReceiveType.Group
 	}
 
 	/**
-	 * 取消置顶
+	 * Unpin
 	 */
 	unTop() {
 		this.is_top = 0
 	}
 
 	/**
-	 * 置顶
+	 * Pin
 	 */
 	top() {
 		this.is_top = 1
 	}
 
 	/**
-	 * 设置话题面板默认打开
-	 * @param open 是否打开
+	 * Set topic panel default open state
+	 * @param open Whether to open
 	 */
 	setTopicDefaultOpen(open: boolean) {
 		this.topic_default_open = open
 	}
 
 	/**
-	 * 比较消息时间
-	 * @param messageTime 消息时间
-	 * @returns 最大时间
+	 * Compare message time
+	 * @param messageTime Message time
+	 * @returns Maximum time
 	 */
 	getLastMessageTime(messageTime: number) {
 		return Math.max(messageTime, this.last_receive_message_time)
 	}
 
 	/**
-	 * 设置最后一条消息
-	 * @param message 最后一条消息
+	 * Set last received message
+	 * @param message Last received message
 	 */
 	setLastReceiveMessageAndLastReceiveTime(message: LastReceiveMessage | undefined) {
 		this.last_receive_message = message
@@ -204,72 +204,72 @@ class Conversation {
 	}
 
 	/**
-	 * 设置当前话题ID
-	 * @param topicId 话题ID
+	 * Set current topic ID
+	 * @param topicId Topic ID
 	 */
 	setCurrentTopicId(topicId: string) {
 		this.current_topic_id = topicId
 	}
 
 	/**
-	 * 设置会话免打扰
-	 * @param isNotDisturb 是否免打扰
+	 * Set conversation do not disturb
+	 * @param isNotDisturb Whether do not disturb
 	 */
 	setNotDisturb(isNotDisturb: 0 | 1) {
 		this.is_not_disturb = isNotDisturb
 	}
 
 	/**
-	 * 隐藏会话
+	 * Hide conversation
 	 */
 	hidden() {
 		this.status = ConversationStatus.Hidden
 	}
 
 	/**
-	 * 更新未读消息数量
-	 * @param dots 未读消息数量
+	 * Add unread message count
+	 * @param dots Unread message count
 	 */
 	addUnreadDots(dots: number = 1) {
 		this.unread_dots += dots
 	}
 
 	/**
-	 * 减少未读消息数量
-	 * @param dots 未读消息数量
+	 * Reduce unread message count
+	 * @param dots Unread message count
 	 */
 	reduceUnreadDots(dots: number = 1) {
 		this.unread_dots = Math.max(this.unread_dots - dots, 0)
 	}
 
 	/**
-	 * 重置未读消息数量
+	 * Reset unread message count
 	 */
 	resetUnreadDots() {
 		this.unread_dots = 0
 	}
 
 	/**
-	 * 设置会话状态
-	 * @param status 状态
+	 * Set conversation status
+	 * @param status Status
 	 */
 	setStatus(status: number) {
 		this.status = status
 	}
 
 	/**
-	 * 增加话题未读数量
-	 * @param topicId 话题ID
-	 * @param dots 未读数量
+	 * Add topic unread count
+	 * @param topicId Topic ID
+	 * @param dots Unread count
 	 */
 	addTopicUnreadDots(topicId: string, dots: number = 1) {
 		this.topic_unread_dots.set(topicId, (this.topic_unread_dots.get(topicId) || 0) + dots)
 	}
 
 	/**
-	 * 减少话题未读数量
-	 * @param topicId 话题ID
-	 * @param dots 未读数量
+	 * Reduce topic unread count
+	 * @param topicId Topic ID
+	 * @param dots Unread count
 	 */
 	reduceTopicUnreadDots(topicId: string, dots: number = 1) {
 		this.topic_unread_dots.set(
@@ -279,30 +279,30 @@ class Conversation {
 	}
 
 	/**
-	 * 重置话题未读数量
+	 * Reset topic unread count
 	 */
 	resetTopicUnreadDots(topicId: string, num: number = 0) {
 		this.topic_unread_dots.set(topicId, num)
 	}
 
 	/**
-	 * 重置所有未读数量
+	 * Reset all unread counts
 	 */
 	resetAllTopicUnreadDots() {
 		this.topic_unread_dots.clear()
 	}
 
 	/**
-	 * 设置会话输入状态
-	 * @param inputing 输入状态
+	 * Set conversation input state
+	 * @param inputing Input state
 	 */
 	setReceiveInputing(inputing: boolean) {
 		this.receive_inputing = inputing
 	}
 
 	/**
-	 * 更新会话数据
-	 * @param data 会话数据
+	 * Update conversation data
+	 * @param data Conversation data
 	 */
 	updateFromRemote(data: ConversationFromService) {
 		this.id = data.id

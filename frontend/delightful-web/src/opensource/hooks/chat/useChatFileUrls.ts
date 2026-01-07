@@ -3,9 +3,9 @@ import { computed } from "mobx"
 import { useMemo } from "react"
 
 /**
- * 批量获取文件信息
- * @param data 文件信息
- * @returns 文件信息
+ * Batch get file information
+ * @param data File information
+ * @returns File information
  */
 const useChatFileUrls = (data?: { file_id: string; message_id: string }[]) => {
 	const fileUrls = useMemo(() => {

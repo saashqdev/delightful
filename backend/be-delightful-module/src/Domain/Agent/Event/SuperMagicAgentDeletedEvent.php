@@ -11,7 +11,7 @@ use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
 
 class BeDelightfulAgentDeletedEvent
 {
-    public function __construct(public BeDelightfulAgentEntity $superDelightfulAgentEntity)
+    public function __construct(public BeDelightfulAgentEntity $beDelightfulAgentEntity)
     {
     }
 }

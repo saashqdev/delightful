@@ -11,7 +11,7 @@ use Delightful\BeDelightful\Domain\Agent\Entity\BeDelightfulAgentEntity;
 
 class BeDelightfulAgentSavedEvent
 {
-    public function __construct(public BeDelightfulAgentEntity $superDelightfulAgentEntity, public bool $create)
+    public function __construct(public BeDelightfulAgentEntity $beDelightfulAgentEntity, public bool $create)
     {
     }
 }

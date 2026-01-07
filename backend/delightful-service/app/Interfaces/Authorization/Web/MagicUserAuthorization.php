@@ -97,14 +97,14 @@ class DelightfulUserAuthorization extends AbstractAuthorization
         $delightfulEnvDomainService = di(DelightfulOrganizationEnvDomainService::class);
         $sessionInterface = di(SessionInterface::class);
 
-        $superDelightfulAgentUserId = $key['superDelightfulAgentUserId'] ?? '';
-        if ($superDelightfulAgentUserId) {
+        $beDelightfulAgentUserId = $key['beDelightfulAgentUserId'] ?? '';
+        if ($beDelightfulAgentUserId) {
             // 处理超级麦吉的 agent 用户
             $sandboxToken = config('be-delightful.sandbox.token', '');
             if (empty($sandboxToken) || $sandboxToken !== $authorization) {
                 ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND, 'token error');
             }
-            $delightfulUserId = $superDelightfulAgentUserId;
+            $delightfulUserId = $beDelightfulAgentUserId;
             $delightfulEnvEntity = null;
             $loginResponseDTO = null;
             // 直接登录

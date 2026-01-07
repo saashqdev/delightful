@@ -18,7 +18,7 @@ use Throwable;
 #[Command]
 class CleanupDuplicateFileKeysCommand extends HyperfCommand
 {
-    protected ?string $name = 'super-agent:cleanup-duplicate-file-keys';
+    protected ?string $name = 'be-agent:cleanup-duplicate-file-keys';
 
     protected LoggerInterface $logger;
 

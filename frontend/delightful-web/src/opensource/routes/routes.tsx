@@ -55,10 +55,10 @@ export function registerRoutes(): Array<RouteObject> {
 	/** Global Settings */
 	const Settings = lazy(() => import("../pages/settings/Settings.page"))
 
-	/** Super Delightful - Workspace */
-	const BeDelightfulWorkspace = lazy(() => import("@/opensource/pages/superDelightful/pages/Workspace"))
+	/** Be Delightful - Workspace */
+	const BeDelightfulWorkspace = lazy(() => import("@/opensource/pages/beDelightful/pages/Workspace"))
 
-	/** Super Delightful Share (no login required) */
+	/** Be Delightful Share (no login required) */
 	const BeDelightfulShare = lazy(() => import("@/opensource/pages/share"))
 
 	return [

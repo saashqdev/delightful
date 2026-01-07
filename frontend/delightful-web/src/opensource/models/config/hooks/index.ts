@@ -7,8 +7,8 @@ import { configService } from "@/services"
 import { configStore } from "../stores"
 
 /**
- * 获取全局语言
- * @param includeAuto 是否包含自动
+ * Get global language
+ * @param includeAuto Whether to include auto
  */
 export function useGlobalLanguage<T>(includeAuto: T = true as T) {
 	const [language, setLanguage] = useState(configStore.i18n.language)
@@ -25,8 +25,8 @@ export function useGlobalLanguage<T>(includeAuto: T = true as T) {
 }
 
 /**
- * 获取全局列表
- * @param includeAuto 是否包含自动
+ * Get global language list
+ * @param includeAuto Whether to include auto
  */
 export function useSupportLanguageOptions(includeAuto = true) {
 	const {t} = useTranslation("interface")
@@ -63,8 +63,8 @@ export function useSupportLanguageOptions(includeAuto = true) {
 }
 
 /**
- * @description 设置全局国际化语言
- * @param lang
+ * @description Set global internationalization language
+ * @param lang Language code
  */
 export function setGlobalLanguage(lang: string) {
 	delightful?.language?.setLanguage?.(lang)
@@ -72,7 +72,7 @@ export function setGlobalLanguage(lang: string) {
 }
 
 /**
- * @description 获取当前访问集群配置
+ * @description Get current cluster configuration
  */
 export function useClusterConfig() {
 	const [clusterConfig, setClusterConfig] = useState(configStore.cluster.cluster)

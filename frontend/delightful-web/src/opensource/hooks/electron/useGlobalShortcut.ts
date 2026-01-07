@@ -6,7 +6,7 @@ import { configStore } from "@/opensource/models/config"
 import useView from "./useView"
 
 /**
- * @description 结合 electron 对全局的缓存下，暂时只接入快捷键的缓存，后期可扩展为全局的本地存储读写
+ * @description Combined with electron for global caching, currently only integrating shortcut key caching, can be extended to global local storage read/write in the future
  */
 export default function useGlobalShortcut() {
 	const initGlobalShortcut = useCallback(() => {

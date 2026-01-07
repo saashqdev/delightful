@@ -6,7 +6,7 @@ export const useStyles = createStyles(({ token }) => {
 			flex: "none",
 			width: "100%",
 			padding: "0 14px 0 14px",
-			// 桌面端
+			// Desktop
 			// padding: "0 14px 0 90px",
 			height: token.titleBarHeight,
 			background: "transparent",

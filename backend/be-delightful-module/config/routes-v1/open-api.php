@@ -26,7 +26,7 @@ Router::addGroup(
     '/open/internal-api',
     static function () {
         // Super Agent related
-        Router::addGroup('/super-agent', static function () {
+        Router::addGroup('/be-agent', static function () {
             // File management related
             Router::addGroup('/file', static function () {
                 // Create file version
@@ -64,7 +64,7 @@ Router::addGroup('/api/v1/open-api/be-delightful/projects', static function () {
     Router::get('/{id}', [OpenProjectApi::class, 'show']);
 });
 
-// be-delightful open api, note: all subsequent open APIs use be-delightful, not super-agent
+// be-delightful open api, note: all subsequent open APIs use be-delightful, not be-agent
 Router::addGroup(
     '/api/v1/open-api/be-delightful',
     static function () {

@@ -6,8 +6,8 @@ import useSWRImmutable from "swr/immutable"
 import { ChatApi } from "@/opensource/apis"
 
 /**
- * 获取群聊成员
- * @param group_id 群ID
+ * Get group chat members
+ * @param group_id Group ID
  * @returns
  */
 const useGroupConversationMembers = (group_id?: string): SWRResponse<GroupConversationMember[]> => {

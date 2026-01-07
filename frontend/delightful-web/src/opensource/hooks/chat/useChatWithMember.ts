@@ -5,9 +5,9 @@ import { useNavigate } from "@/opensource/hooks/useNavigate"
 import conversationService from "@/opensource/services/chat/conversation/ConversationService"
 
 /**
- * 与成员聊天
- * @param uid 成员id
- * @returns 发送消息
+ * Chat with member
+ * @param uid Member ID
+ * @returns Send message
  */
 export const useChatWithMember = () => {
 	const navigate = useNavigate()

@@ -5,8 +5,8 @@ import type { SWRMutationResponse } from "swr/mutation"
 import useSWRMutation from "swr/mutation"
 
 /**
- * 获取 AI助理对应的机器人信息
- * @param user_id 用户ID
+ * Get the bot information corresponding to the AI assistant
+ * @param user_id User ID
  * @returns
  */
 const useAiAssistantBotInfo = (

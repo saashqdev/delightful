@@ -21,7 +21,7 @@ use Delightful\BeDelightful\Interfaces\BeAgent\Facade\WorkspaceApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup(
-    '/api/v1/super-agent',
+    '/api/v1/be-agent',
     static function () {
         // Workspace management
         Router::addGroup('/workspaces', static function () {
@@ -290,7 +290,7 @@ Router::addGroup(
 );
 
 // Interface types supporting both logged-in and non-logged-in users (compatible with frontend components)
-Router::addGroup('/api/v1/super-agent', static function () {
+Router::addGroup('/api/v1/be-agent', static function () {
     // Get topic attachment list
     Router::addGroup('/topics', static function () {
         Router::post('/{id}/attachments', [TopicApi::class, 'getTopicAttachments']);
@@ -342,7 +342,7 @@ Router::addGroup('/api/v1/super-agent', static function () {
 
 // V2 API Routes
 Router::addGroup(
-    '/api/v2/super-agent',
+    '/api/v2/be-agent',
     static function () {
         // Get project attachment list V2 (does not return tree structure)
         Router::addGroup('/projects', static function () {

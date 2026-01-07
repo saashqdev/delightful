@@ -74,12 +74,12 @@ const UserMenus = observer(function UserMenus({ children }: UserMenusProps) {
 
 				if (info?.delightful_id) {
 					await accountLogout(info?.delightful_id)
-					/** 广播删除账号 */
+					/** Broadcast delete account */
 					BroadcastChannelSender.deleteAccount(info?.delightful_id, { navigateToLogin: false })
 				}
 			} else {
 				await accountLogout()
-				/** 广播删除账号 */
+				/** Broadcast delete account */
 				BroadcastChannelSender.deleteAccount(undefined, { navigateToLogin: true })
 				navigate(RoutePath.Login)
 			}
@@ -94,9 +94,9 @@ const UserMenus = observer(function UserMenus({ children }: UserMenusProps) {
 		navigate(RoutePath.Settings, { state: { type: SettingSection.LOGIN_DEVICES } })
 	})
 
-	/** 当前语言 */
+	/** Current language */
 	const language = useGlobalLanguage(true)
-	/** 语言列表 */
+	/** Language list */
 	const languageList = useSupportLanguageOptions()
 
 	const languageOptions = useMemo(() => {

@@ -1,12 +1,12 @@
 export const enum UserMenuKey {
-	/** 切换语言 */
+	/** Switch language */
 	SwitchLanguage = "switchLanguage",
-	/** 账户管理 */
+	/** Account management */
 	AccountManagement = "accountManagement",
-	/** 设备管理 */
+	/** Device management */
 	DeviceManagement = "deviceManagement",
-	/** 退出登录 */
+	/** Logout */
 	Logout = "logout",
-	/** 管理后台 */
+	/** Admin panel */
 	Admin = "admin",
 }

@@ -2,32 +2,32 @@ import type { ConversationTopic } from "@/types/chat/topic"
 
 class Topic implements ConversationTopic {
 	/**
-	 * 话题ID
+	 * Topic ID
 	 */
 	id: string
 
 	/**
-	 * 话题名称
+	 * Topic name
 	 */
 	name: string
 
 	/**
-	 * 话题描述
+	 * Topic description
 	 */
 	description: string
 
 	/**
-	 * 所属会话ID
+	 * Conversation ID this topic belongs to
 	 */
 	conversation_id: string
 
 	/**
-	 * 创建时间
+	 * Creation time
 	 */
 	created_at?: number
 
 	/**
-	 * 更新时间
+	 * Update time
 	 */
 	updated_at?: number
 
@@ -41,8 +41,8 @@ class Topic implements ConversationTopic {
 	}
 
 	/**
-	 * 更新话题名称
-	 * @param name 新名称
+	 * Update topic name
+	 * @param name New name
 	 */
 	updateName(name: string) {
 		this.name = name
@@ -50,8 +50,8 @@ class Topic implements ConversationTopic {
 	}
 
 	/**
-	 * 更新话题描述
-	 * @param description 新描述
+	 * Update topic description
+	 * @param description New description
 	 */
 	updateDescription(description: string) {
 		this.description = description
@@ -59,8 +59,8 @@ class Topic implements ConversationTopic {
 	}
 
 	/**
-	 * 克隆话题
-	 * @returns 新的话题实例
+	 * Clone topic
+	 * @returns New topic instance
 	 */
 	clone(): Topic {
 		return new Topic({

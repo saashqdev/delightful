@@ -42,7 +42,7 @@ class SaveProviderModelDTO extends AbstractDTO
 
     protected ?Status $status;
 
-    protected ?int $superDelightfulDisplayState;
+    protected ?int $beDelightfulDisplayState;
 
     protected ?int $sort;
 
@@ -196,15 +196,15 @@ class SaveProviderModelDTO extends AbstractDTO
 
     public function getBeDelightfulDisplayState(): ?int
     {
-        return $this->superDelightfulDisplayState ?? null;
+        return $this->beDelightfulDisplayState ?? null;
     }
 
-    public function setBeDelightfulDisplayState(null|bool|int|string $superDelightfulDisplayState): void
+    public function setBeDelightfulDisplayState(null|bool|int|string $beDelightfulDisplayState): void
     {
-        if ($superDelightfulDisplayState === null) {
-            $this->superDelightfulDisplayState = null;
+        if ($beDelightfulDisplayState === null) {
+            $this->beDelightfulDisplayState = null;
         } else {
-            $this->superDelightfulDisplayState = (int) $superDelightfulDisplayState;
+            $this->beDelightfulDisplayState = (int) $beDelightfulDisplayState;
         }
     }
 

@@ -21,7 +21,7 @@ use Mockery;
  */
 class ProjectMemberApiTest extends AbstractApiTest
 {
-    private const BASE_URI = '/api/v1/super-agent/projects';
+    private const BASE_URI = '/api/v1/be-agent/projects';
 
     private string $fileId = '816640336984018944';
 
@@ -158,7 +158,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         ];
 
         // 1. 创建工作区
-        $response = $this->post('/api/v1/super-agent/workspaces', $requestData, $this->getCommonHeaders());
+        $response = $this->post('/api/v1/be-agent/workspaces', $requestData, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $workspaceId = $response['data']['id'];
 
@@ -170,7 +170,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         ];
 
         // 2. 创建工作区
-        $response = $this->post('/api/v1/super-agent/projects', $requestData, $this->getCommonHeaders());
+        $response = $this->post('/api/v1/be-agent/projects', $requestData, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $projectId = $response['data']['project']['id'];*/
 
@@ -316,7 +316,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             $params['name'] = $name;
         }
 
-        $response = $this->client->get('/api/v1/super-agent/collaboration-projects', $params, $this->getCommonHeaders());
+        $response = $this->client->get('/api/v1/be-agent/collaboration-projects', $params, $this->getCommonHeaders());
 
         $this->assertNotNull($response, '响应不应该为null');
         $this->assertEquals(1000, $response['code'], $response['message'] ?? '');
@@ -353,7 +353,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             $params['name'] = $name;
         }
 
-        $response = $this->client->get('/api/v1/super-agent/collaboration-projects?type=shared', $params, $this->getCommonHeaders());
+        $response = $this->client->get('/api/v1/be-agent/collaboration-projects?type=shared', $params, $this->getCommonHeaders());
         $this->assertNotNull($response, '响应不应该为null');
         $this->assertEquals(1000, $response['code'], $response['message'] ?? '');
         $this->assertEquals('ok', $response['message']);
@@ -389,7 +389,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             'topic_name' => '',
         ];
 
-        $response = $this->post('/api/v1/super-agent/topics', $requestData, $this->getCommonHeaders());
+        $response = $this->post('/api/v1/be-agent/topics', $requestData, $this->getCommonHeaders());
         $this->assertEquals(1000, $response['code']);
         $this->assertArrayHasKey('id', $response['data']);
         return $response['data']['id'];
@@ -409,7 +409,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             'workspace_id' => $workspaceId,
             'topic_name' => '4324234',
         ];
-        $response = $this->put('/api/v1/super-agent/topics/' . $topicId, $requestData, $this->getCommonHeaders());
+        $response = $this->put('/api/v1/be-agent/topics/' . $topicId, $requestData, $this->getCommonHeaders());
         $this->assertEquals(1000, $response['code']);
         $this->assertArrayHasKey('id', $response['data']);
         return $response['data']['id'];
@@ -434,7 +434,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             'id' => $topicId,
             'workspace_id' => $workspaceId,
         ];
-        $response = $this->post('/api/v1/super-agent/topics/delete', $requestData, $this->getCommonHeaders());
+        $response = $this->post('/api/v1/be-agent/topics/delete', $requestData, $this->getCommonHeaders());
         $this->assertEquals(1000, $response['code']);
         $this->assertArrayHasKey('id', $response['data']);
     }
@@ -461,7 +461,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             'page_size' => 999,
             'token' => '',
         ];
-        $response = $this->post('/api/v1/super-agent/projects/' . $projectId . '/attachments', $requestData, $this->getCommonHeaders());
+        $response = $this->post('/api/v1/be-agent/projects/' . $projectId . '/attachments', $requestData, $this->getCommonHeaders());
         $this->assertEquals(1000, $response['code']);
         $this->assertGreaterThan('1', $response['data']['total']);
         return $response['data']['tree'][0];
@@ -472,7 +472,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $requestData = [
             'target_name' => 'dsadvfsdfs',
         ];
-        $response = $this->post('/api/v1/super-agent/file/' . $fileId . '/rename', $requestData, $this->getCommonHeaders());
+        $response = $this->post('/api/v1/be-agent/file/' . $fileId . '/rename', $requestData, $this->getCommonHeaders());
         $this->assertEquals(1000, $response['code']);
         $this->assertArrayHasKey('file_id', $response['data']);
     }
@@ -484,13 +484,13 @@ class ProjectMemberApiTest extends AbstractApiTest
             'project_name' => 'test',
             'project_description' => 'test',
         ];
-        $response = $this->put('/api/v1/super-agent/projects/' . $projectId, $requestData, $this->getCommonHeaders());
+        $response = $this->put('/api/v1/be-agent/projects/' . $projectId, $requestData, $this->getCommonHeaders());
         $this->assertEquals($code, $response['code']);
     }
 
     public function deleteProject(string $workspaceId, string $projectId, int $code = 1000): void
     {
-        $response = $this->delete('/api/v1/super-agent/projects/' . $projectId, [], $this->getCommonHeaders());
+        $response = $this->delete('/api/v1/be-agent/projects/' . $projectId, [], $this->getCommonHeaders());
         $this->assertEquals($code, $response['code']);
     }
 
@@ -537,7 +537,7 @@ class ProjectMemberApiTest extends AbstractApiTest
      */
     public function joinFileEditing(string $fileId, int $expectedCode = 1000): array
     {
-        $response = $this->post("/api/v1/super-agent/file/{$fileId}/join-editing", [], $this->getCommonHeaders());
+        $response = $this->post("/api/v1/be-agent/file/{$fileId}/join-editing", [], $this->getCommonHeaders());
 
         $this->assertNotNull($response, '响应不应该为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
@@ -556,7 +556,7 @@ class ProjectMemberApiTest extends AbstractApiTest
      */
     public function leaveFileEditing(string $fileId, int $expectedCode = 1000): array
     {
-        $response = $this->post("/api/v1/super-agent/file/{$fileId}/leave-editing", [], $this->getCommonHeaders());
+        $response = $this->post("/api/v1/be-agent/file/{$fileId}/leave-editing", [], $this->getCommonHeaders());
 
         $this->assertNotNull($response, '响应不应该为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
@@ -575,7 +575,7 @@ class ProjectMemberApiTest extends AbstractApiTest
      */
     public function getEditingUsers(string $fileId, int $expectedCode = 1000): int
     {
-        $response = $this->get("/api/v1/super-agent/file/{$fileId}/editing-users", [], $this->getCommonHeaders());
+        $response = $this->get("/api/v1/be-agent/file/{$fileId}/editing-users", [], $this->getCommonHeaders());
 
         $this->assertNotNull($response, '响应不应该为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
@@ -638,7 +638,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
     public function updateFileContent(int $fileId, string $content, int $expectedCode): void
     {
-        $response = $this->post('/api/v1/super-agent/file/save', [
+        $response = $this->post('/api/v1/be-agent/file/save', [
             [
                 'file_id' => $fileId,
                 'content' => $content,
@@ -699,7 +699,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             'is_pin' => $isPinned,
         ];
 
-        $response = $this->put("/api/v1/super-agent/collaboration-projects/{$projectId}/pin", $requestData, $this->getCommonHeaders());
+        $response = $this->put("/api/v1/be-agent/collaboration-projects/{$projectId}/pin", $requestData, $this->getCommonHeaders());
 
         $this->assertNotNull($response, '响应不应该为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
@@ -718,7 +718,7 @@ class ProjectMemberApiTest extends AbstractApiTest
      */
     public function collaborationProjectsWithPinCheck(): array
     {
-        $response = $this->client->get('/api/v1/super-agent/collaboration-projects', [], $this->getCommonHeaders());
+        $response = $this->client->get('/api/v1/be-agent/collaboration-projects', [], $this->getCommonHeaders());
 
         $this->assertNotNull($response, '响应不应该为null');
         $this->assertEquals(1000, $response['code'], $response['message'] ?? '');
@@ -854,7 +854,7 @@ class ProjectMemberApiTest extends AbstractApiTest
      */
     public function getCollaborationProjectCreators(int $expectedCode = 1000): array
     {
-        $response = $this->client->get('/api/v1/super-agent/collaboration-projects/creators', [], $this->getCommonHeaders());
+        $response = $this->client->get('/api/v1/be-agent/collaboration-projects/creators', [], $this->getCommonHeaders());
 
         $this->assertNotNull($response, '响应不应该为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');

@@ -285,7 +285,7 @@ class TOSUploader:
                 return False
 
             # API endpoint
-            api_url = f"{self.api_base_url}api/v1/super-agent/file/process-attachments"
+            api_url = f"{self.api_base_url}api/v1/be-agent/file/process-attachments"
 
             # Build request payload
             request_data = {

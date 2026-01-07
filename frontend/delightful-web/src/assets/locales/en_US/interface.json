@@ -1310,7 +1310,7 @@
 		"notification": "notify",
 		"orgNotAuthorized": "The organization has not been authorized yet",
 		"setting": "Settings",
-		"superDelightful": "",
+		"beDelightful": "",
 		"switchLanguage": "Switch Language",
 		"switchOrganization": "Change Enterprise",
 		"switchOrganizationConfirm": "The page will refresh automatically after switching. Do you want to continue?",

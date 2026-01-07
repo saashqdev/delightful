@@ -1,5 +1,5 @@
 import DelightfulIcon from "@/opensource/pages/share/assets/icon/delightful_logo.svg"
-import { getAttachmentsByThreadId } from "@/opensource/pages/superDelightful/utils/api"
+import { getAttachmentsByThreadId } from "@/opensource/pages/beDelightful/utils/api"
 import { IconMenu2 } from "@tabler/icons-react"
 import { useResponsive } from "ahooks"
 import DelightfulSpin from "@/opensource/components/base/DelightfulSpin"

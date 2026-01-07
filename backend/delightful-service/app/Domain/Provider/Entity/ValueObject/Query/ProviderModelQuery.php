@@ -19,7 +19,7 @@ class ProviderModelQuery extends Query
 
     protected ?ModelType $modelType = null;
 
-    protected ?bool $superDelightfulDisplay = null;
+    protected ?bool $beDelightfulDisplay = null;
 
     protected ?array $providerConfigIds = null;
 
@@ -41,12 +41,12 @@ class ProviderModelQuery extends Query
 
     public function getBeDelightfulDisplay(): ?bool
     {
-        return $this->superDelightfulDisplay;
+        return $this->beDelightfulDisplay;
     }
 
-    public function setBeDelightfulDisplay(?bool $superDelightfulDisplay): void
+    public function setBeDelightfulDisplay(?bool $beDelightfulDisplay): void
     {
-        $this->superDelightfulDisplay = $superDelightfulDisplay;
+        $this->beDelightfulDisplay = $beDelightfulDisplay;
     }
 
     public function getProviderConfigIds(): ?array

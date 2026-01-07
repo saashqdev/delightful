@@ -70,7 +70,7 @@ class ProviderModelEntity extends AbstractEntity
 
     protected bool $isOffice = false;
 
-    protected int $superDelightfulDisplayState = 0;
+    protected int $beDelightfulDisplayState = 0;
 
     public function getId(): ?int
     {
@@ -453,15 +453,15 @@ class ProviderModelEntity extends AbstractEntity
 
     public function isBeDelightfulDisplayState(): int
     {
-        return $this->superDelightfulDisplayState;
+        return $this->beDelightfulDisplayState;
     }
 
-    public function setBeDelightfulDisplayState(null|int|string $superDelightfulDisplayState): void
+    public function setBeDelightfulDisplayState(null|int|string $beDelightfulDisplayState): void
     {
-        if ($superDelightfulDisplayState === null) {
-            $this->superDelightfulDisplayState = 0;
+        if ($beDelightfulDisplayState === null) {
+            $this->beDelightfulDisplayState = 0;
         } else {
-            $this->superDelightfulDisplayState = (int) $superDelightfulDisplayState;
+            $this->beDelightfulDisplayState = (int) $beDelightfulDisplayState;
         }
     }
 

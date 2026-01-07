@@ -1,4 +1,4 @@
-import Node from "@/opensource/pages/superDelightful/components/MessageList/components/Node"
+import Node from "@/opensource/pages/beDelightful/components/MessageList/components/Node"
 import { memo } from "react"
 function MessageList({
 	messageList,

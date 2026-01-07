@@ -408,18 +408,18 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             }
         }
 
-        $superDelightfulModels = [];
+        $beDelightfulModels = [];
         foreach ($models as $model) {
             $modelConfig = $model->getConfig();
             if (! $modelConfig || ! $modelConfig->isSupportFunction()) {
                 continue;
             }
-            $superDelightfulModels[] = $model;
+            $beDelightfulModels[] = $model;
         }
 
         // 根据 modelId 去重
         $uniqueModels = [];
-        foreach ($superDelightfulModels as $model) {
+        foreach ($beDelightfulModels as $model) {
             $uniqueModels[$model->getModelId()] = $model;
         }
 

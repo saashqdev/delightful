@@ -49,14 +49,14 @@ class MessageBuilderDomainService
             'upload_config' => $uploadCredential,
             'message_subscription_config' => [
                 'method' => 'POST',
-                'url' => config('be-delightful.sandbox.callback_host', '') . '/api/v1/super-agent/tasks/deliver-message',
+                'url' => config('be-delightful.sandbox.callback_host', '') . '/api/v1/be-agent/tasks/deliver-message',
                 'headers' => [
                     'token' => config('be-delightful.sandbox.token', ''),
                 ],
             ],
             'sts_token_refresh' => [
                 'method' => 'POST',
-                'url' => config('be-delightful.sandbox.callback_host', '') . '/api/v1/super-agent/file/refresh-sts-token',
+                'url' => config('be-delightful.sandbox.callback_host', '') . '/api/v1/be-agent/file/refresh-sts-token',
                 'headers' => [
                     'token' => config('be-delightful.sandbox.token', ''),
                 ],

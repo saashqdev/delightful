@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this */
+﻿/* eslint-disable class-methods-use-this */
 import { platformKey } from "@/utils/storage"
 import Dexie from "dexie"
 import { ChatDb } from "./types"
@@ -6,7 +6,7 @@ import { ChatDb } from "./types"
 export const ChatDbSchemaStorageKey = (delightfulId: string) => platformKey(`chat-db-schema/${delightfulId}`)
 
 /**
- * 聊天数据库
+ * Chat database
  */
 class ChatDatabase {
 	db: ChatDb
@@ -27,8 +27,8 @@ class ChatDatabase {
 	}
 
 	/**
-	 * 更新数据库 schema
-	 * @param schemaChanges 数据库 schema 变更
+	 * Update database schema
+	 * @param schemaChanges Database schema changes
 	 * @returns
 	 */
 	async changeSchema(schemaChanges: Record<string, string>) {
@@ -57,7 +57,7 @@ class ChatDatabase {
 				return result
 			}, {})
 
-			// 保存旧的数据库引用，以便回滚
+			// Save the old database reference for rollback
 			const previousDb = this.db
 
 			try {
@@ -69,10 +69,10 @@ class ChatDatabase {
 					...schemaChanges,
 				})
 
-				// 先尝试打开新数据库
+				// Try opening the new database first
 				await newDb.open()
 
-				// 成功后再关闭旧数据库
+				// Close old database after successful opening
 				oldDb.close()
 
 				// set schema
@@ -90,7 +90,7 @@ class ChatDatabase {
 				this.db = newDb as ChatDb
 				return this.db
 			} catch (error) {
-				// 如果升级失败，关闭新数据库并保持使用旧数据库
+				// If upgrade fails, close new database and keep using old database
 				await newDb.close()
 				throw error
 			}
@@ -101,7 +101,7 @@ class ChatDatabase {
 	}
 
 	/**
-	 * 本地数据库 schema 的 key
+	 * Local database schema key
 	 */
 	getLocalSchemaKey(delightfulId: string) {
 		return ChatDbSchemaStorageKey(delightfulId)
@@ -125,16 +125,16 @@ class ChatDatabase {
 	}
 
 	/**
-	 * 获取消息表的默认schema
-	 * @param conversationId 会话ID
-	 * @returns 消息表schema
+	 * Get the default schema for message table
+	 * @param conversationId Conversation ID
+	 * @returns Message table schema
 	 */
 	getMessageTableSchema() {
 		return `&seq_id, message.topic_id, [message.topic_id+message.send_time], message.send_time, message.type, [message.type+message.topic_id]`
 	}
 
 	/**
-	 * 获取本地数据库的 schema
+	 * Get the schema of the local database
 	 * @returns
 	 */
 	getLocalDbSchema(delightfulId: string) {
@@ -145,7 +145,7 @@ class ChatDatabase {
 	}
 
 	/**
-	 * 缓存本地数据库的 schema，用于下次打开时恢复
+	 * Cache the local database schema for recovery when reopened
 	 * @param schema
 	 */
 	setLocalDbSchema(schema: { version: number; schema: Record<string, string> }, delightfulId: string) {
@@ -153,8 +153,8 @@ class ChatDatabase {
 	}
 
 	/**
-	 * 获取会话表
-	 * @returns 会话表
+	 * Get conversation table
+	 * @returns Conversation table
 	 */
 	getConversationTable() {
 		if (!this.db?.conversation) {

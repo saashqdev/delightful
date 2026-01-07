@@ -53,7 +53,7 @@ export const enum ConversationMessageType {
 	/** Recording summary */
 	RecordingSummary = "recording_summary",
 
-	/** Super Delightful message */
+	/** Be Delightful message */
 	BeDelightful = "general_agent_card",
 }
 

@@ -22,7 +22,7 @@ use Mockery;
  */
 class ProjectMemberV2ApiTest extends AbstractApiTest
 {
-    private const BASE_URI = '/api/v1/super-agent/projects';
+    private const BASE_URI = '/api/v1/be-agent/projects';
 
     private string $projectId = '816065897791012866';
 

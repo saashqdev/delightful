@@ -8,11 +8,11 @@ import CreateGroupConversationModal from "./CreateGroupConversationModal"
 import Button from "./Button"
 import { usePopoverStyles } from "./styles"
 
-/** 才单类型 */
+/** Menu type */
 const enum MenuItemType {
-	/** 设置按钮 */
+	/** Settings button */
 	SettingsAction = "SettingsAction",
-	/** 菜单按钮 */
+	/** Menu button */
 	MenuAction = "MenuAction",
 }
 
@@ -49,7 +49,7 @@ function MenuButton() {
 		]
 	}, [t])
 
-	// 处理 Popover 状态改变
+	// Handle Popover state changes
 	const onOpenChange = (newOpen: boolean) => {
 		setPopoverOpen(newOpen)
 	}

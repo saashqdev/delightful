@@ -3,8 +3,8 @@ import userInfoStore from "@/opensource/stores/userInfo"
 import { computed } from "mobx"
 
 /**
- * 获取多个用户信息
- * @param uid 用户ID
+ * Get multiple user information
+ * @param uid User ID
  */
 const useUserInfo = (uid?: string | null) => {
 	const userInfo = useMemo(() => {

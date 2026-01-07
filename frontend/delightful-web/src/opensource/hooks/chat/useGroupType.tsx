@@ -3,8 +3,8 @@ import { useMemo } from "react"
 import { useTranslation } from "react-i18next"
 
 /**
- * 获取群聊类型
- * @returns 群聊类型
+ * Get group chat types
+ * @returns Group chat types
  */
 const useGroupTypes = () => {
 	const { t } = useTranslation("interface")

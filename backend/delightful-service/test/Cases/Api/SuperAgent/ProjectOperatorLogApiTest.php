@@ -16,7 +16,7 @@ use Delightful\BeDelightful\Domain\BeAgent\Service\ProjectOperationLogDomainServ
  */
 class ProjectOperatorLogApiTest extends AbstractApiTest
 {
-    private const string BASE_URI = '/api/v1/super-agent';
+    private const string BASE_URI = '/api/v1/be-agent';
 
     protected ProjectOperationLogDomainService $projectOperationLogDomainService;
 

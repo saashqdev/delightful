@@ -16,13 +16,13 @@ use Hyperf\Di\Annotation\Inject;
 class BeDelightfulAgentSandboxApi extends AbstractBeDelightfulSandboxApi
 {
     #[Inject]
-    protected BeDelightfulAgentAppService $superDelightfulAgentAppService;
+    protected BeDelightfulAgentAppService $beDelightfulAgentAppService;
 
     public function show(string $code)
     {
         $authorization = $this->getAuthorization();
         $withToolSchema = (bool) $this->request->input('with_tool_schema', false);
-        $entity = $this->superDelightfulAgentAppService->show($authorization, $code, $withToolSchema);
+        $entity = $this->beDelightfulAgentAppService->show($authorization, $code, $withToolSchema);
         $withPromptString = (bool) $this->request->input('with_prompt_string', false);
         return BeDelightfulAgentAssembler::createDTO($entity, [], $withPromptString);
     }
@@ -31,6 +31,6 @@ class BeDelightfulAgentSandboxApi extends AbstractBeDelightfulSandboxApi
     {
         $authorization = $this->getAuthorization();
         $params = $this->request->all();
-        return $this->superDelightfulAgentAppService->executeTool($authorization, $params);
+        return $this->beDelightfulAgentAppService->executeTool($authorization, $params);
     }
 }

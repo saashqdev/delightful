@@ -30,8 +30,8 @@ class ModeAppService extends AbstractModeAppService
         $modeDataIsolation->disabled();
 
         // 获取目前的所有可用的 agent
-        $superDelightfulAgentAppService = di(BeDelightfulAgentAppService::class);
-        $agentData = $superDelightfulAgentAppService->queries($authorization, new BeDelightfulAgentQuery(), Page::createNoPage());
+        $beDelightfulAgentAppService = di(BeDelightfulAgentAppService::class);
+        $agentData = $beDelightfulAgentAppService->queries($authorization, new BeDelightfulAgentQuery(), Page::createNoPage());
         // 合并常用和全部 agent 列表，常用在前
         /** @var array<BeDelightfulAgentEntity> $allAgents */
         $allAgents = array_merge($agentData['frequent'], $agentData['all']);

@@ -45,7 +45,7 @@ const OrganizationItem = observer((props: OrganizationItemProps) => {
 
 			try {
 				interfaceStore.setIsSwitchingOrganization(true)
-				// 账号不一致下要切换账号
+			// Account mismatch requires account switch
 				if (accountInfo?.delightful_id !== userInfo?.delightful_id) {
 					await accountSwitch(
 						accountInfo?.delightful_id,
@@ -63,7 +63,7 @@ const OrganizationItem = observer((props: OrganizationItemProps) => {
 						)
 					} catch (err) {
 						console.error(err)
-						// 切换失败，恢复当前组织
+						// Switch failed, restore current organization
 						userService.setDelightfulOrganizationCode(userInfo?.organization_code)
 						userService.setUserInfo(userInfo)
 					}
@@ -157,7 +157,7 @@ function OrganizationListComponent(props: OrganizationListItemProps) {
 							<Affix target={() => ref.current}>
 								<div className={styles.groupHeader}>
 									<div className={styles.groupSection}>
-										<span>账号 {index + 1}</span>
+										<span>Account {index + 1}</span>
 										<span className={styles.groupHeaderLine} />
 									</div>
 									<div className={styles.groupWrapper}>

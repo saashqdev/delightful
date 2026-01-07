@@ -23,7 +23,7 @@ class DelightfulContext extends AbstractEntity
 
     protected string $language = '';
 
-    protected string $superDelightfulAgentUserId = '';
+    protected string $beDelightfulAgentUserId = '';
 
     public function __construct(array $data)
     {
@@ -62,6 +62,6 @@ class DelightfulContext extends AbstractEntity
 
     public function getBeDelightfulAgentUserId(): string
     {
-        return $this->superDelightfulAgentUserId;
+        return $this->beDelightfulAgentUserId;
     }
 }

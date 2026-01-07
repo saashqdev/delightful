@@ -1,45 +1,45 @@
 /**
- * @deprecated 应用配置（国际化语言、主题、国际冠号）
+ * @deprecated Application configuration (internationalization language, theme, area code)
  */
 export namespace Config {
-	/** 全局国际化语言选项 */
+	/** Global internationalization language options */
 	export interface LanguageOption {
-		/** 当前语言标识 */
+		/** Current language identifier */
 		locale: string
-		/** 当前语言名称 */
+		/** Current language name */
 		name: string
-		/** 用于当前语言的枚举各语言的表达 */
+		/** Expressions of each language used for the current language */
 		translations: Record<string, string>
 	}
 
-	/** 全局国际冠号选项 */
+	/** Global area code options */
 	export interface AreaCodeOption {
-		/** 当前语言标识 */
+		/** Current language identifier */
 		locale: string
-		/** 当前冠号识别号 */
+		/** Current area code identifier */
 		code: string
-		/** 当前语言名称 */
+		/** Current language name */
 		name: string
-		/** 用于当前语言的枚举各语言的表达 */
+		/** Expressions of each language used for the current language */
 		translations: Record<string, string>
 	}
 
-	/** 全局语言模块 */
+	/** Global language module */
 	export interface Language {
-		/** 当前语言 */
+		/** Current language */
 		language: string
-		/** 本地语言列表 */
+		/** Local language list */
 		languages: Array<LanguageOption>
-		/** 设置当前语言 */
+		/** Set current language */
 		setLanguage: (language: string) => void
-		/** 设置语言列表 */
+		/** Set language list */
 		setLanguages: (languages: Array<LanguageOption>) => void
-		/** 国际冠号(电话号码地区识别号) */
+		/** Area code (telephone number area identifier) */
 		areaCodes: Array<AreaCodeOption>
 		setAreaCodes: (areaCodes: Array<AreaCodeOption>) => void
-		/** 获取全局国际化配置 */
+		/** Get global internationalization configuration */
 		// useFetchOptions: () => void
-		/** 国际化语言实例 */
+		/** Internationalization language instance */
 		// instance: i18n
 	}
 }

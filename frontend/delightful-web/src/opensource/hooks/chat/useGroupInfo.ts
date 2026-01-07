@@ -3,8 +3,8 @@ import groupInfoStore from "@/opensource/stores/groupInfo"
 import groupInfoService from "@/opensource/services/groupInfo"
 
 /**
- * 获取多个用户信息
- * @param uid 用户ID
+ * Get multiple user information
+ * @param uid User ID
  */
 const useGroupInfo = (uid?: string | null, force: boolean = false) => {
 	const groupInfo = uid ? groupInfoStore.get(uid) : undefined

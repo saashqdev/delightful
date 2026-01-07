@@ -237,7 +237,7 @@ class StorageUploaderTool:
             logger.error("API base URL not set (DELIGHTFUL_API_SERVICE_BASE_URL), unable to register files")
             return False
 
-        api_url = f"{self.api_base_url.strip('/')}/api/v1/super-agent/file/process-attachments"
+        api_url = f"{self.api_base_url.strip('/')}/api/v1/be-agent/file/process-attachments"
 
         request_data = {
             "attachments": self.uploaded_files_for_registration,

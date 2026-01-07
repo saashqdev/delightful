@@ -15,7 +15,7 @@ export const withApp = (WrapperComponent: ComponentType) => {
 
 		if (dingTalk && isMobilePhone) {
 			return (
-				<Suspense fallback="加载中">
+				<Suspense fallback="Loading...">
 					<MobilePage />
 				</Suspense>
 			)

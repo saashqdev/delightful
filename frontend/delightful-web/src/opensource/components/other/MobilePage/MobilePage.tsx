@@ -47,36 +47,36 @@ function MobilePage() {
 					<Text size={size} />
 					<Name size={size} />
 				</div>
-				<div className={styles.desc}>新一代企业级 AI 应用创新引擎</div>
-				<div className={styles.tip}>轻松构建和运营 AI 大模型原生应用</div>
+				<div className={styles.desc}>Next-generation enterprise-grade AI application innovation engine</div>
+				<div className={styles.tip}>Effortlessly build and operate native AI large-model applications</div>
 				<div className={styles.menu}>
 					<div className={styles.item}>
 						<MacIcon />
-						<span>Mac 客户端</span>
+						<span>Mac Client</span>
 						<a href="" className={styles.button}>
-							点击下载
+							Click to Download
 						</a>
 					</div>
 					<div className={cx(styles.item, styles.itemDisabled)}>
 						<WinIcon />
-						<span>Windows 客户端</span>
-						<span className={cx(styles.button, styles.buttonDisabled)}>即将上线</span>
+						<span>Windows Client</span>
+						<span className={cx(styles.button, styles.buttonDisabled)}>Coming soon</span>
 					</div>
 					<div className={cx(styles.item, styles.itemDisabled)}>
 						<IOSIcon />
-						<span>iPhone 客户端</span>
-						<span className={cx(styles.button, styles.buttonDisabled)}>即将上线</span>
+						<span>iPhone Client</span>
+						<span className={cx(styles.button, styles.buttonDisabled)}>Coming soon</span>
 					</div>
 					<div className={cx(styles.item, styles.itemDisabled)}>
 						<AndroidIcon />
-						<span>Android 客户端</span>
-						<span className={cx(styles.button, styles.buttonDisabled)}>即将上线</span>
+						<span>Android Client</span>
+						<span className={cx(styles.button, styles.buttonDisabled)}>Coming soon</span>
 					</div>
 				</div>
 				<div className={styles.footer}>
 					<FooterLogo size={1} />
 					<span>Copyright © 2025 Letsdelightful.cn All Rights Reserved.</span>
-					<span>粤ICP备2023088718号</span>
+					<span>Guangdong ICP No. 2023088718</span>
 				</div>
 			</div>
 

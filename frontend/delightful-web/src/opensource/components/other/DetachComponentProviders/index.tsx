@@ -3,7 +3,7 @@ import AppearanceProvider from "@/opensource/providers/AppearanceProvider"
 import { BrowserRouter } from "react-router-dom"
 
 /**
- * 用于解决部分【函数式调用产】生的React节点获取不到 context 的情况
+ * Used to resolve cases where React nodes from function-based component calls cannot access context
  */
 export const DetachComponentProviders = ({ children }: { children: React.ReactNode }) => {
 	return (

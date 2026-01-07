@@ -35,7 +35,7 @@ import "@univerjs/sheets/facade"
 import "@univerjs/design/lib/index.css"
 import "@univerjs/ui/lib/index.css"
 
-// 根据fileType选择导入
+// Based on fileType selection for importing
 import "@univerjs/sheets-ui/lib/index.css" // Sheet styles
 import "@univerjs/docs-ui/lib/index.css" // Document styles
 // import "@univerjs/slides-ui/lib/index.css"  // Slide styles (if needed)
@@ -224,24 +224,24 @@ export const UniverComponent: React.FC<UniverComponentProps> = ({
 		}
 	}, []) // Empty dependency array ensures execution only on mount and unmount
 
-	// 渲染错误状态
+	// Render error state
 	if (error) {
 		return (
 			<div className="univer-error-container" style={{ width, height }}>
-				<Text type="danger">加载失败: {error}</Text>
+				<Text type="danger">Failed to load: {error}</Text>
 				<Button type="primary" onClick={() => window.location.reload()}>
-					重新加载
+					Reload
 				</Button>
 			</div>
 		)
 	}
 
-	// 渲染加载状态或Univer容器
+	// Render loading state or Univer container
 	return (
 		<div className="univer-component-wrapper" style={{ width, height }}>
 			{loading && (
 				<div className="univer-loading-container">
-					<Spin tip="加载中..." />
+					<Spin tip="Loading..." />
 				</div>
 			)}
 			<div

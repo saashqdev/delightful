@@ -29,7 +29,7 @@ import OrganizationPanelEmpty from "./components/Empty"
 import useOrganizationTree from "../MemberDepartmentSelector/hooks/useOrganizationTree"
 
 /**
- * 组织架构面板
+ * Organization structure panel
  */
 const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPanelProps) {
 	const {
@@ -64,7 +64,7 @@ const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPan
 	}, [props?.defaultSelectedPath, setSelectPath])
 
 	/**
-	 * 增强 setSelectPath, 当选择路径发生变化时，清空已选中的组织架构
+	 * Enhance setSelectPath, clear selected organization structure when selection path changes
 	 */
 	const enchancedSetSelectPath = useMemoizedFn<Exclude<typeof setSelectPath, undefined>>(
 		(path) => {
@@ -166,7 +166,7 @@ const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPan
 	)
 
 	/**
-	 * 点击树节点
+	 * Click tree node
 	 */
 	const handleClick = useMemoizedFn<MouseEventHandler<HTMLSpanElement>>((e) => {
 		const { id } = e.currentTarget.dataset
@@ -177,9 +177,9 @@ const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPan
 				onItemClick?.(node, () => {
 					if (
 						/**
-						 * 什么情况下可以点击进入下一级：
-						 * 1. 是部门节点
-						 * 2. 没有选中该部门
+						 * When can you click to enter the next level:
+						 * 1. It is a department node
+						 * 2. The department is not selected
 						 */
 						isDepartment(node) &&
 						deparmentCanNext(node)
@@ -187,10 +187,10 @@ const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPan
 						enchancedSetSelectPath([...(selectedPath ?? []), node])
 					} else if (
 						/**
-						 * 点击成员节点，更新 Checkbox 选中状态
+						 * Click member node, update Checkbox selection state
 						 */
 						isMember(node) &&
-						/** 被禁用, 不选中 */
+						/** If disabled, do not select */
 						!checkboxOptions?.disabled?.some((item) => item.id === node.id)
 					) {
 						if (checkboxOptions?.checked?.some((item) => item.id === node.id)) {
@@ -207,7 +207,7 @@ const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPan
 	})
 
 	/**
-	 * 点击导航子项，跳转对应的部门成员列表
+	 * Click navigation item, jump to the corresponding department member list
 	 */
 	const handleClickNavigateItem = useMemoizedFn<MouseEventHandler<HTMLSpanElement>>((e) => {
 		const index = e.currentTarget.dataset.layerIndex
@@ -217,7 +217,7 @@ const OrganizationPanel = memo(function OrganizationPanel(props: OrganizationPan
 	})
 
 	/**
-	 * 面包屑导航
+	 * Breadcrumb navigation
 	 */
 	const Breadcrumb = useMemo(() => {
 		return (

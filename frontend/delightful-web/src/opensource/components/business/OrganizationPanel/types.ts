@@ -18,21 +18,21 @@ export type OrganizationPanelProps = FormHTMLAttributes<HTMLDivElement> & {
 	defaultSelectedPath?: { id: string; name: string }[]
 	selectedPath?: { id: string; name: string }[]
 	onChangeSelectedPath?: (path: { id: string; name: string }[]) => void
-	/** 处理点击子项 */
+	/** Handle click on child item */
 	onItemClick?: (node: OrganizationSelectItem, toNextDepartmentLevel: () => void) => void
-	/** 子项箭头区域 - 自定义渲染 */
+	/** Item arrow area - custom render */
 	itemArrow?: boolean | ((item: StructureItem) => ReactNode)
-	/** 尾部区域 */
+	/** Footer area */
 	footer?: ReactNode
-	/** 搜索栏右侧 */
+	/** Search bar right side */
 	topRight?: ReactNode
-	/** 是否显示成员 */
+	/** Whether to show members */
 	showMember?: boolean
-	/** 成员节点扩展区域 */
+	/** Member node extension area */
 	memberExtra?: (node: StructureUserItem) => ReactNode
-	/** 面包屑右侧节点 */
+	/** Breadcrumb right side node */
 	breadcrumbRightNode?: ReactNode
 	checkboxOptions?: CheckboxOptions
-	/** 成员节点包装器 */
+	/** Member node wrapper */
 	memberNodeWrapper?: (node: ReactNode, member: StructureUserItem) => ReactNode
 }

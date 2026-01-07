@@ -85,7 +85,7 @@ const MentionSelect = observer(
 		})
 
 		useEffect(() => {
-			// 成员选择悬浮窗打开时，把选中索引设置到 0
+			// When member selection popover opens, set selected index to 0
 			if (visible) {
 				setUserSelectIndex(0)
 			}

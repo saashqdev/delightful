@@ -32,7 +32,7 @@ export interface MemberSearchProps {
 
 type Data = UserSelectItem & DelightfulListItemData
 
-// 定义搜索结果列表组件的Props
+// Define Props for the search result list component
 interface SearchResultListProps {
 	debounceSearchValue: string
 	listClassName?: string
@@ -45,7 +45,7 @@ interface SearchResultListProps {
 	containerHeight?: number
 }
 
-// 转换搜索结果项为列表项
+// Transform search result items to list items
 const transformUserToListItem = (user: StructureUserItem): Data => {
 	return {
 		...user,
@@ -59,7 +59,7 @@ const transformUserToListItem = (user: StructureUserItem): Data => {
 	}
 }
 
-// 优化：将搜索结果列表拆分为单独的组件
+// Optimization: Split search result list into a separate component
 const SearchResultList = memo(function SearchResultList({
 	debounceSearchValue,
 	listClassName,
@@ -71,27 +71,27 @@ const SearchResultList = memo(function SearchResultList({
 	showSearchResults,
 	containerHeight,
 }: SearchResultListProps) {
-	// 如果没有搜索词，不显示搜索结果
+	// If there's no search term, don't display search results
 	if (!debounceSearchValue) return null
 
-	// 搜索已完成且没有结果才返回null
-	// 初次搜索或正在加载时仍然渲染组件以触发搜索
+	// Only return null when search is complete and there are no results
+	// Still render the component during initial search or loading to trigger the search
 	const hasNoResults = data && data.items && data.items.length === 0
 
-	// 调整容器高度，确保在有搜索结果时占满剩余空间
+	// Adjust container height to ensure it fills remaining space when there are search results
 	const containerStyle = {
-		height: showSearchResults ? "calc(100% - 38px)" : "0", // 38px 是搜索框的高度
+		height: showSearchResults ? "calc(100% - 38px)" : "0", // 38px is the height of the search box
 		opacity: showSearchResults ? 1 : 0,
 		overflow: "hidden",
 		transition: "height 0.3s ease, opacity 0.3s ease",
-		flex: showSearchResults ? 1 : "none", // 让容器在显示时能占满空间
+		flex: showSearchResults ? 1 : "none", // Allow container to fill space when displayed
 		marginBottom: 0,
 		paddingBottom: 0,
-		display: "flex", // 添加flex布局
-		flexDirection: "column" as const, // 使用列方向排列
+		display: "flex", // Add flex layout
+		flexDirection: "column" as const, // Use column direction arrangement
 	}
 
-	// 显示加载状态或搜索结果
+	// Display loading state or search results
 	return (
 		<div style={containerStyle}>
 			<DelightfulScrollBar
@@ -99,7 +99,7 @@ const SearchResultList = memo(function SearchResultList({
 				style={{
 					height: "100%",
 					overflowY: "auto",
-					flex: 1, // 让滚动容器占满空间
+					flex: 1, // Let scroll container fill the space
 					display: "flex",
 					flexDirection: "column",
 				}}
@@ -118,8 +118,8 @@ const SearchResultList = memo(function SearchResultList({
 						trigger={trigger}
 						itemsTransform={transformUserToListItem}
 						onItemClick={onItemClick}
-						// @ts-ignore - DelightfulInfiniteScrollList 组件期望的泛型类型与我们提供的不匹配
-						// 但在运行时会正常工作，因为所需属性都存在
+						// @ts-ignore - The generic type expected by DelightfulInfiniteScrollList doesn't match what we provide
+						// but it will work fine at runtime because all required properties exist
 						checkboxOptions={
 							checkboxOptions
 								? {
@@ -131,8 +131,8 @@ const SearchResultList = memo(function SearchResultList({
 								: undefined
 						}
 						noDataFallback={hasNoResults ? null : undefined}
-						// 不设置固定高度，让列表高度自适应容器
-						style={{ flex: 1 }} // 让列表占满容器空间
+						// Don't set fixed height, let list height adapt to container
+						style={{ flex: 1 }} // Let list fill container space
 						containerHeight={containerHeight}
 					/>
 				)}
@@ -161,27 +161,27 @@ const MemberSearch = (props: MemberSearchProps) => {
 		valuePropName: "searchValue",
 	})
 
-	// 添加焦点状态管理
+	// Add focus state management
 	const [isFocused, setIsFocused] = useState(false)
 
-	// 当焦点状态变化时通知父组件
+	// Notify parent component when focus state changes
 	useEffect(() => {
 		onFocusChange?.(isFocused)
 	}, [isFocused, onFocusChange])
 
-	// 优化：增加防抖时间至800ms，减少搜索请求频率
+	// Optimization: Increase debounce time to 800ms to reduce search request frequency
 	const debounceSearchValue = useDebounce(searchValue, {
 		wait: 800,
 	})
 
-	// 添加搜索状态管理
+	// Add search state management
 	const [isSearching, setIsSearching] = useState(false)
-	// 存储当前搜索结果
+	// Store current search results
 	const [searchResults, setSearchResults] = useState<
 		PaginationResponse<StructureUserItem> | undefined
 	>()
 
-	// 使用 useSWRMutation 但不直接使用其返回的 data
+	// Use useSWRMutation but don't directly use its returned data
 	const { trigger: searchUser } = useSWRMutation<
 		PaginationResponse<StructureUserItem>,
 		any,
@@ -191,12 +191,12 @@ const MemberSearch = (props: MemberSearchProps) => {
 		return ContactApi.searchUser(arg)
 	})
 
-	// 搜索值变化时重置搜索结果并触发新搜索
+	// Reset search results and trigger new search when search value changes
 	useEffect(() => {
 		if (debounceSearchValue) {
-			// 设置搜索状态为正在搜索
+			// Set search state to searching
 			setIsSearching(true)
-			// 清空当前结果，避免显示上次的搜索结果
+			// Clear current results to avoid displaying previous search results
 			setSearchResults(undefined)
 
 			searchUser({
@@ -215,7 +215,7 @@ const MemberSearch = (props: MemberSearchProps) => {
 					setIsSearching(false)
 				})
 		} else {
-			// 无搜索词时清空结果
+			// Clear results when there's no search term
 			setSearchResults(undefined)
 			setIsSearching(false)
 		}
@@ -226,14 +226,14 @@ const MemberSearch = (props: MemberSearchProps) => {
 			if (!debounceSearchValue)
 				return Promise.resolve({ items: [], has_more: false, page_token: "" })
 
-			// 如果请求更多页，不重置当前结果
+			// If requesting more pages, don't reset current results
 			if (page_token) {
 				return searchUser({
 					query: debounceSearchValue,
 					query_type: 1,
 					page_token,
 				}).then((result) => {
-					// 更新搜索结果
+					// Update search results
 					setSearchResults((prev) => {
 						if (!prev) return result
 						return {
@@ -245,7 +245,7 @@ const MemberSearch = (props: MemberSearchProps) => {
 				})
 			}
 
-			// 首页请求逻辑
+			// First page request logic
 			setIsSearching(true)
 			return searchUser({
 				query: debounceSearchValue,
@@ -269,17 +269,17 @@ const MemberSearch = (props: MemberSearchProps) => {
 		setSearchValue(e.target.value)
 	})
 
-	// 处理搜索框焦点事件
+	// Handle search box focus event
 	const handleFocus = useMemoizedFn(() => {
 		setIsFocused(true)
 	})
 
-	// 处理搜索框失焦事件
+	// Handle search box blur event
 	const handleBlur = useMemoizedFn(() => {
 		setIsFocused(false)
 	})
 
-	// 处理点击列表项
+	// Handle list item click
 	const handleItemClick = useMemoizedFn((item: UserSelectItem) => {
 		onSelect?.(item)
 	})

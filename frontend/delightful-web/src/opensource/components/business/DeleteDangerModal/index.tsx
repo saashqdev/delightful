@@ -11,9 +11,9 @@ import { colorScales } from "@/opensource/providers/ThemeProvider/colors"
 import { useStyles } from "./styles"
 
 interface DeleteDangerModalProps {
-	// 删除内容
+	// Content to delete
 	content: string
-	// 是否二次确认
+	// Whether secondary confirmation is required
 	needConfirm?: boolean
 	onSubmit?: () => void
 }

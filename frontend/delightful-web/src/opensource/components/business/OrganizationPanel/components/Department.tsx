@@ -10,10 +10,10 @@ import DelightfulIcon from "@/opensource/components/base/DelightfulIcon"
 
 interface DepartmentProps extends HTMLAttributes<HTMLDivElement> {
 	data: StructureItem
-	/** 是否显示成员数量 */
+	/** Whether to show member count */
 	showMemberCount?: boolean
 
-	/** 子项箭头区域 - 自定义渲染 */
+	/** Item arrow area - custom render */
 	itemArrow?: boolean | ((item: StructureItem) => ReactNode)
 }
 
@@ -53,7 +53,7 @@ export const useStyles = createStyles(({ isDarkMode, css, prefixCls, token }) =>
 })
 
 /**
- * 部门节点
+ * Department node
  */
 const Department = memo(
 	({ showMemberCount, itemArrow = true, data: item, ...props }: DepartmentProps) => {

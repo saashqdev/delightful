@@ -11,7 +11,7 @@ import DelightfulAvatar from "@/opensource/components/base/DelightfulAvatar"
 import { useStyles } from "./styles"
 import { ScopeLabel } from "./constant"
 
-// TODO：oauth授权的弹窗，可用于后续的消息授权卡片
+// TODO: OAuth authorization modal, can be used for message authorization cards in the future
 interface OAuthModalProps {
 	scopes?: string[]
 	onSubmit?: () => void

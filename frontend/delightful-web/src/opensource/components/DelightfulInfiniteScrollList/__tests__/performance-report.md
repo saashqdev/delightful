@@ -25,7 +25,7 @@ Key metrics tracked:
 
 Initial render times for various data sizes (10, 50, 100, 200 items):
 
-| 数据量 | 渲染时间 (ms) |
+| Data Size | Render Time (ms) |
 | ------ | ------------- |
 | 10     | 42.00         |
 | 50     | 10.06         |
@@ -34,7 +34,7 @@ Initial render times for various data sizes (10, 50, 100, 200 items):
 
 Data growth ratio vs render time ratio:
 
-| 数据量变化 | 时间比例 |
+| Data Change | Time Ratio |
 | ---------- | -------- |
 | 10 → 50    | 0.24     |
 | 50 → 100   | 1.16     |
@@ -57,10 +57,10 @@ Load-more response time: ~6.05ms
 
 ### 3. Checkbox Action Performance
 
-| 操作类型 | 响应时间 (ms) |
+| Action Type | Response Time (ms) |
 | -------- | ------------- |
-| 选中     | 24.12         |
-| 取消选中 | 15.98         |
+| Select     | 24.12         |
+| Deselect | 15.98         |
 
 **Analysis:**
 

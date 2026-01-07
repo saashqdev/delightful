@@ -116,7 +116,7 @@ vi.mock("antd", async () => {
 	}
 })
 
-// 模拟i18n
+// Mock i18n
 vi.mock("react-i18next", () => ({
 	useTranslation: () => {
 		return {
@@ -322,7 +322,7 @@ describe("DelightfulInfiniteScrollList", () => {
 
 	test("custom loading indicator", async () => {
 		const mockTrigger = vi.fn().mockImplementation(() => {
-			// 使用setTimeout和Promise.resolve绕过Promise executor警告
+			// Use setTimeout and Promise.resolve to avoid Promise executor warning
 			setTimeout(() => {}, 0)
 			return Promise.resolve(createMockPaginationResponse(createMockData(3, 3), false))
 		})
@@ -398,7 +398,7 @@ describe("DelightfulInfiniteScrollList checkbox support", () => {
 		expect(checkboxes).toHaveLength(3)
 	})
 
-	test("复选框选中/取消选中", () => {
+	test("checkbox select/deselect", () => {
 		const mockData = createMockData(3)
 		const onChange = vi.fn()
 		render(
@@ -425,7 +425,7 @@ describe("DelightfulInfiniteScrollList checkbox support", () => {
 		])
 	})
 
-	test("禁用的复选框", () => {
+	test("disabled checkbox", () => {
 		const mockData = createMockData(3)
 		const onChange = vi.fn()
 		render(

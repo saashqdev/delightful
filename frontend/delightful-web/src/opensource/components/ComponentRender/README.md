@@ -1,18 +1,18 @@
-# ComponentRender 组件
+# ComponentRender
 
-ComponentRender 是一个用于动态渲染组件的工厂模式实现，它允许开发者在运行时动态注册、获取和渲染组件。
+ComponentRender is a factory-pattern implementation for dynamically rendering components. It allows developers to register, retrieve, and render components at runtime.
 
-## 功能特点
+## Features
 
-- 动态组件注册与管理
-- 基于组件名称的组件渲染
-- 支持懒加载组件
-- 提供默认的 Fallback 组件处理未注册情况
-- 类型安全的组件渲染
+- Dynamic component registration and management
+- Component rendering by component name
+- Support for lazy-loaded components
+- Default Fallback component for unregistered components
+- Type-safe component rendering
 
-## 使用方法
+## Usage
 
-### 1. 基本使用
+### 1. Basic usage
 
 ```tsx
 import ComponentRender from '@/opensource/components/ComponentRender';
@@ -21,7 +21,7 @@ function MyPage() {
   return (
     <ComponentRender 
       componentName="OrganizationList"
-      // 可以传递该组件需要的任何 props
+      // You can pass any props required by the component
       prop1="value1"
       prop2="value2"
     />
@@ -29,14 +29,14 @@ function MyPage() {
 }
 ```
 
-### 2. 动态注册组件
+### 2. Dynamically register a component
 
-您可以使用 `ComponentFactory` 动态注册新组件：
+You can use `ComponentFactory` to dynamically register new components:
 
 ```tsx
 import ComponentFactory from '@/opensource/components/ComponentRender/ComponentFactory';
 
-// 定义您的组件
+// Define your component
 const MyCustomComponent = ({ title, content }) => (
   <div>
     <h2>{title}</h2>
@@ -44,10 +44,10 @@ const MyCustomComponent = ({ title, content }) => (
   </div>
 );
 
-// 注册单个组件
+// Register a single component
 ComponentFactory.registerComponent('MyCustomComponent', MyCustomComponent);
 
-// 使用已注册的组件
+// Use the registered component
 function MyPage() {
   return (
     <ComponentRender 
@@ -59,41 +59,41 @@ function MyPage() {
 }
 ```
 
-### 3. 批量注册组件
+### 3. Register multiple components
 
 ```tsx
 import ComponentFactory from '@/opensource/components/ComponentRender/ComponentFactory';
 
-// 准备多个组件
+// Prepare multiple components
 const components = {
-  Component1: () => <div>组件 1</div>,
-  Component2: () => <div>组件 2</div>,
-  Component3: () => <div>组件 3</div>,
+  Component1: () => <div>Component 1</div>,
+  Component2: () => <div>Component 2</div>,
+  Component3: () => <div>Component 3</div>,
 };
 
-// 批量注册组件
+// Register components in bulk
 ComponentFactory.registerComponents(components);
 ```
 
-### 4. 注销组件
+### 4. Unregister components
 
 ```tsx
-// 注销单个组件
+// Unregister a single component
 ComponentFactory.unregisterComponent('MyCustomComponent');
 
-// 注销多个组件
+// Unregister multiple components
 ComponentFactory.unregisterComponents(['Component1', 'Component2']);
 ```
 
-### 5. 自定义组件类型
+### 5. Customize component types
 
-如果需要添加新的组件类型，您需要扩展 `DefaultComponentsProps` 接口：
+If you need to add a new component type, extend the `DefaultComponentsProps` interface:
 
 ```tsx
-// 在您的文件中扩展接口
+// Extend the interface in your file
 declare module '@/opensource/components/ComponentRender/config/defaultComponents' {
   export interface DefaultComponentsProps {
-    // 添加新的组件类型
+    // Add a new component type
     MyNewComponent: {
       title: string;
       description: string;
@@ -102,39 +102,39 @@ declare module '@/opensource/components/ComponentRender/config/defaultComponents
   }
 }
 
-// 然后注册该组件
+// Then register the component
 const MyNewComponent: React.FC<{ title: string; description: string; onClick: () => void }> = (props) => {
-  // 实现
+  // Implementation
 };
 
 ComponentFactory.registerComponent('MyNewComponent', MyNewComponent);
 ```
 
-### 6. 传递子组件
+### 6. Pass children
 
-ComponentRender 也支持传递子组件：
+ComponentRender also supports passing children:
 
 ```tsx
 <ComponentRender componentName="ContainerComponent">
-  <div>这些是子组件内容</div>
-  <button>子按钮</button>
+  <div>These are child contents</div>
+  <button>Child button</button>
 </ComponentRender>
 ```
 
-## 最佳实践
+## Best Practices
 
-1. **组件懒加载**：对于大型组件，建议使用 `React.lazy()` 包装后再注册，以优化初始加载性能
+1. **Component lazy-loading**: For large components, wrap with `React.lazy()` before registering to optimize initial load performance.
 
-2. **类型安全**：始终扩展 `DefaultComponentsProps` 接口以保持类型安全
+2. **Type safety**: Always extend the `DefaultComponentsProps` interface to maintain type safety.
 
-3. **组件注册时机**：在应用初始化阶段（如入口文件或布局组件中）注册全局组件
+3. **Registration timing**: Register global components during app initialization (e.g., in the entry file or layout components).
 
-4. **命名约定**：使用有意义的、唯一的组件名称，避免冲突
+4. **Naming conventions**: Use meaningful, unique component names to avoid conflicts.
 
-5. **错误处理**：为重要组件提供专门的错误边界，而不仅仅依赖默认的 Fallback 组件
+5. **Error handling**: Provide dedicated error boundaries for critical components, not just the default Fallback component.
 
-## 注意事项
+## Notes
 
-- 所有通过 ComponentRender 渲染的组件都被 `<Suspense fallback={null}>` 包装，对于懒加载组件会显示 null，直到组件加载完成
-- 未注册的组件名称将渲染默认的 Fallback 组件（显示 "Component UnRegistered"）
-- 组件注册是全局性的，请确保组件名称在应用中的唯一性 
+- All components rendered via ComponentRender are wrapped with `<Suspense fallback={null}>`. For lazy-loaded components, `null` is displayed until the component finishes loading.
+- Unregistered component names will render the default Fallback component (displaying "Component UnRegistered").
+- Component registration is global; ensure component names are unique across the application.

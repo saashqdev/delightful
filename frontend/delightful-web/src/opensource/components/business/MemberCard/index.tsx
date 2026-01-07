@@ -122,7 +122,7 @@ const MemberCard = observer(() => {
 			onMouseEnter={() => MemberCardStore.setIsHover(true)}
 			onMouseLeave={() => MemberCardStore.setIsHover(false)}
 		>
-			{/* 头部卡片 */}
+			{/* Header card */}
 			<Flex vertical className={styles.header} gap={10}>
 				<Flex className={styles.headerTop} gap={14} align="center">
 					<DelightfulAvatar className={styles.avatar} src={userInfo?.avatar_url} size={80}>
@@ -164,9 +164,9 @@ const MemberCard = observer(() => {
 			{isNormalPerson && (
 				<DelightfulSegmented block className={styles.segmented} options={options} />
 			)}
-			{/* 详情信息 */}
+			{/* Detail information */}
 			<Descriptions colon={false} column={1} items={items} className={styles.descriptions} />
-			{/* 底部按钮 */}
+			{/* Bottom buttons */}
 			<Flex vertical gap={10}>
 				<DelightfulButton
 					hidden={!isNormalPerson}

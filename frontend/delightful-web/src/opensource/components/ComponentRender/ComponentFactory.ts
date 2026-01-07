@@ -4,7 +4,7 @@ import defaultComponents, {
 } from "./config/defaultComponents"
 
 /**
- * 组件工厂
+ * Component Factory
  */
 class ComponentFactory {
 	private components: Map<string, React.ComponentType<any>> = new Map()
@@ -14,9 +14,9 @@ class ComponentFactory {
 	}
 
 	/**
-	 * 注册组件
-	 * @param name 组件名称
-	 * @param component 组件
+	 * Register component
+	 * @param name Component name
+	 * @param component Component
 	 */
 	registerComponent<N extends keyof DefaultComponentsProps>(
 		name: N,
@@ -26,9 +26,9 @@ class ComponentFactory {
 	}
 
 	/**
-	 * 获取未注册组件的默认组件
-	 * @param name 组件名称
-	 * @returns 默认组件
+	 * Get default component for unregistered components
+	 * @param name Component name
+	 * @returns Default component
 	 */
 	getFallbackComponent(): React.ComponentType<
 		DefaultComponentsProps[keyof DefaultComponentsProps]
@@ -37,9 +37,9 @@ class ComponentFactory {
 	}
 
 	/**
-	 * 获取已注册组件
-	 * @param name 组件名称
-	 * @returns 组件
+	 * Get registered component
+	 * @param name Component name
+	 * @returns Component
 	 */
 	getComponent<N extends keyof DefaultComponentsProps>(
 		name: N,
@@ -52,8 +52,8 @@ class ComponentFactory {
 	}
 
 	/**
-	 * 注册组件
-	 * @param components 组件列表
+	 * Register components
+	 * @param components Component list
 	 */
 	registerComponents<N extends keyof DefaultComponentsProps>(
 		components: Record<N, React.ComponentType<DefaultComponentsProps[N]>>,
@@ -67,16 +67,16 @@ class ComponentFactory {
 	}
 
 	/**
-	 * 注销组件
-	 * @param name 组件名称
+	 * Unregister component
+	 * @param name Component name
 	 */
 	unregisterComponent(name: string) {
 		this.components.delete(name)
 	}
 
 	/**
-	 * 注销组件列表
-	 * @param names 组件名称列表
+	 * Unregister components list
+	 * @param names List of component names
 	 */
 	unregisterComponents(names: string[]) {
 		names.forEach((name) => this.unregisterComponent(name))

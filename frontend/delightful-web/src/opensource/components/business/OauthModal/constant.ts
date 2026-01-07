@@ -15,9 +15,9 @@ export const enum OauthScope {
 // }
 
 export const ScopeLabel = {
-	[OauthScope.OPENID]: "获取您的账号",
-	[OauthScope.PROFILE]: "获取您的基础信息（姓名/手机号码/部门等基础信息）",
-	[OauthScope.PHONE]: "获取您的手机号码",
-	[OauthScope.EMAIL]: "获取您的邮箱信息",
-	[OauthScope.ADDRESS]: "获取您的地址信息",
+	[OauthScope.OPENID]: "Get your account",
+	[OauthScope.PROFILE]: "Get your basic information (name/phone/department/etc.)",
+	[OauthScope.PHONE]: "Get your phone number",
+	[OauthScope.EMAIL]: "Get your email",
+	[OauthScope.ADDRESS]: "Get your address",
 }

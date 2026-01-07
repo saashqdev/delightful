@@ -27,7 +27,7 @@ function useOrganizationTree(
 			}
 
 			const promises: [Promise<StructureItem[]>, Promise<StructureUserItem[]>] = [
-				// 获取部门
+				// Get departments
 				fetchPaddingData((params) =>
 					ContactApi.getOrganization({
 						department_id: department_id,
@@ -35,7 +35,7 @@ function useOrganizationTree(
 						...params,
 					}),
 				),
-				// 获取部门成员
+				// Get department members
 				with_member
 					? fetchPaddingData((params) =>
 							ContactApi.getOrganizationMembers({
@@ -48,7 +48,7 @@ function useOrganizationTree(
 
 			const [departments, users] = await Promise.all(promises)
 
-			// 缓存用户信息
+			// Cache user information
 			users.forEach((item) => {
 				userInfoService.set(item.user_id, item)
 			})

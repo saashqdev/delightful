@@ -7,18 +7,18 @@ import type {
 } from "../MemberDepartmentSelectPanel/types"
 
 /**
- * 判断是否是部门
- * @param node 节点数据
- * @returns 是否是部门
+ * Check if the node is a department
+ * @param node Node data
+ * @returns Whether it is a department
  */
 export function isDepartment(node: OrganizationSelectItem): node is DepartmentSelectItem {
 	return node.dataType === StructureItemType.Department
 }
 
 /**
- * 判断是否是成员
- * @param node 节点数据
- * @returns 是否是成员
+ * Check if the node is a member
+ * @param node Node data
+ * @returns Whether it is a member
  */
 export function isMember(
 	node: OrganizationSelectItem,
@@ -37,10 +37,10 @@ export function isPartner(
 }
 
 /**
- * 将组织架构数据扁平化
- * @param data 组织架构数据
- * @param map 存储扁平化数据的map
- * @returns 扁平化的组织架构数据
+ * Flatten organization structure data
+ * @param data Organization structure data
+ * @param map Map to store flattened data
+ * @returns Flattened organization structure data
  */
 // export function flattenTree(
 // 	data:
@@ -75,9 +75,9 @@ export function isPartner(
 // }
 
 /**
- * 获取部门成员总数
- * @param data 部门成员树
- * @returns 部门成员总数
+ * Get total number of department members
+ * @param data Department member tree
+ * @returns Total number of department members
  */
 // export function getDepartmentMemberCount(data: (StructureItem | StructureUserItem)[]) {
 // 	let count = 0
@@ -92,10 +92,10 @@ export function isPartner(
 // }
 
 /**
- * 获取当前渲染的列表数据
- * @param selected 当前选中的节点ID列表
- * @param data 组织架构数据
- * @returns 当前渲染的列表数据
+ * Get current rendered list data
+ * @param selected List of currently selected node IDs
+ * @param data Organization structure data
+ * @returns Current rendered list data
  */
 // export function getCurrentList(
 // 	selected: string[],

@@ -30,9 +30,9 @@ type CheckboxOptions = {
 }
 
 /**
- * 成员混合选择面板
+ * Member mixed selection panel
  *
- * 支持选择成员、部门、群组、合作伙伴
+ * Supports selecting members, departments, groups, and partners
  */
 const MemberDepartmentSelectPanel = memo((props: MemberDepartmentSelectPanelProps) => {
 	const { title, onOk, onCancel, disabledValues, filterResult, withoutGroup, ...modalProps } = props
@@ -129,7 +129,7 @@ const MemberDepartmentSelectPanel = memo((props: MemberDepartmentSelectPanelProp
 						overflow: "hidden",
 						display: "flex",
 						flexDirection: "column",
-						height: "calc(100% - 32px)", // 减去 DelightfulSegmented 的高度
+						height: "calc(100% - 32px)", // Subtract DelightfulSegmented height
 					}}
 				>
 					<DelightfulScrollBar
@@ -216,7 +216,7 @@ const MemberDepartmentSelectPanel = memo((props: MemberDepartmentSelectPanelProp
 							visibility: shouldShowDefaultEmptyFallback ? "visible" : "hidden",
 							position: "absolute",
 							width: "100%",
-							top: "42px", // 搜索框高度
+							top: "42px", // Search input height
 							left: "0",
 							right: "0",
 							bottom: "0",

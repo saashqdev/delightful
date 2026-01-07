@@ -61,8 +61,8 @@ describe("ComponentRender", () => {
 		ComponentFactory.unregisterComponent("TestComponent")
 	})
 
-	it("应该正确渲染子组件", async () => {
-		// 注册一个接收子组件的测试组件
+	it("should render child component correctly", async () => {
+		// Register a test component that accepts children
 		const ChildrenTestComponent = vi
 			.fn()
 			.mockImplementation(({ children }: { children: React.ReactNode }) => (
@@ -76,55 +76,55 @@ describe("ComponentRender", () => {
 
 		render(
 			<ComponentRender componentName={"ChildrenTestComponent" as any}>
-				<span data-testid="child-element">子元素内容</span>
+				<span data-testid="child-element">Child element content</span>
 			</ComponentRender>,
 		)
 
-		// 验证子组件是否正确渲染
+		// Verify that the child component renders correctly
 		const component = await screen.findByTestId("children-test-component")
 		const childElement = within(component).getByTestId("child-element")
-		expect(childElement.textContent).toBe("子元素内容")
+		expect(childElement.textContent).toBe("Child element content")
 
-		// 清理：注销测试组件
+		// Cleanup: unregister test component
 		ComponentFactory.unregisterComponent("ChildrenTestComponent")
 	})
 
-	it("应该在组件出错时渲染 Fallback 组件", async () => {
-		// 注册一个会抛出错误的组件
+	it("should render Fallback component when component errors", async () => {
+		// Register a component that throws an error
 		const ErrorComponent = vi.fn().mockImplementation(() => {
-			throw new Error("测试错误")
+			throw new Error("Test error")
 		})
 
-		// 使用 mock.console.error 来防止错误日志输出
+		// Use mock.console.error to suppress error logs
 		const originalConsoleError = console.error
 		console.error = vi.fn()
 
-		// 注册错误组件
+		// Register error component
 		ComponentFactory.registerComponent("ErrorComponent" as any, ErrorComponent as any)
 
-		// 错误边界不会被直接捕获在测试中，但我们可以验证 Fallback 逻辑
+		// Error boundaries are not directly caught in tests, but we can verify fallback logic
 		try {
 			render(<ComponentRender componentName={"ErrorComponent" as any} />)
 		} catch (error) {
-			// 错误会在渲染时抛出，这是预期行为
+			// Error will be thrown during render; this is expected
 		}
 
-		// 恢复 console.error
+		// Restore console.error
 		console.error = originalConsoleError
 
-		// 清理
+		// Cleanup
 		ComponentFactory.unregisterComponent("ErrorComponent")
 	})
 
-	it("应该正确处理 ComponentFactory 的组件注册和注销", () => {
-		// 创建测试组件
-		const TestComponent = () => <div>测试组件</div>
+	it("should correctly handle ComponentFactory component registration and unregistration", () => {
+		// Create a test component
+		const TestComponent = () => <div>Test component</div>
 
-		// 测试注册单个组件
+		// Test registering a single component
 		ComponentFactory.registerComponent("TestSingleComponent" as any, TestComponent as any)
 		expect(ComponentFactory.getComponent("TestSingleComponent" as any)).toBe(TestComponent)
 
-		// 测试注册多个组件
+		// Test registering multiple components
 		const MultipleComponents = {
 			TestComponent1: TestComponent,
 			TestComponent2: TestComponent,
@@ -133,23 +133,23 @@ describe("ComponentRender", () => {
 		expect(ComponentFactory.getComponent("TestComponent1" as any)).toBe(TestComponent)
 		expect(ComponentFactory.getComponent("TestComponent2" as any)).toBe(TestComponent)
 
-		// 测试注销单个组件
+		// Test unregistering a single component
 		ComponentFactory.unregisterComponent("TestSingleComponent")
 		expect(ComponentFactory.getComponent("TestSingleComponent" as any)).not.toBe(TestComponent)
 
-		// 测试注销多个组件
+		// Test unregistering multiple components
 		ComponentFactory.unregisterComponents(["TestComponent1", "TestComponent2"])
 		expect(ComponentFactory.getComponent("TestComponent1" as any)).not.toBe(TestComponent)
 		expect(ComponentFactory.getComponent("TestComponent2" as any)).not.toBe(TestComponent)
 	})
 
-	it("getFallbackComponent 应该返回默认的 Fallback 组件", () => {
+	it("getFallbackComponent should return the default Fallback component", () => {
 		const FallbackComponent = ComponentFactory.getFallbackComponent()
 
-		// 渲染 Fallback 组件
+		// Render Fallback component
 		render(<FallbackComponent />)
 
-		// 验证 Fallback 组件的内容
+		// Verify Fallback component content
 		expect(screen.getByText("Component UnRegistered")).toBeDefined()
 	})
 })

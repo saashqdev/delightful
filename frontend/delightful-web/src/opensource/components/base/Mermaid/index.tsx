@@ -63,7 +63,7 @@ export const Mermaid = memo(function Mermaid({
 
 	const retryTimes = useRef(0)
 	/**
-	 * 渲染mermaid
+	 * Render mermaid
 	 */
 	const renderMermaid = useMemoizedFn(() => {
 		mermaid
@@ -77,7 +77,7 @@ export const Mermaid = memo(function Mermaid({
 				} else {
 					retryTimes.current++
 					if (retryTimes.current < 3) {
-						console.log("渲染失败，重试", retryTimes.current)
+						console.log("Render failed, retrying", retryTimes.current)
 						renderMermaid()
 					}
 				}
@@ -89,7 +89,7 @@ export const Mermaid = memo(function Mermaid({
 	})
 
 	/**
-	 * 内容加载
+	 * Content loaded
 	 */
 	const contentLoaded = useMemoizedFn(() => {
 		MermaidRenderService.getCache(chart as string).then((res) => {

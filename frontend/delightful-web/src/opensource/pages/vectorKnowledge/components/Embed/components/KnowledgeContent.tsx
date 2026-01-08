@@ -25,7 +25,7 @@ export default function KnowledgeContent({
 	const { styles } = useVectorKnowledgeEmbedStyles()
 	const { t } = useTranslation("flow")
 
-	// 准备知识库配置数据
+	// Prepare knowledge base configuration data
 	const knowledgeConfig = {
 		fragmentConfig: createdKnowledge.fragment_config,
 		embeddingConfig: createdKnowledge.embedding_config,
@@ -57,10 +57,10 @@ export default function KnowledgeContent({
 				</Flex>
 			</div>
 
-			{/* 知识库配置详情区域 */}
+			{/* Knowledge base configuration details area */}
 			<KnowledgeConfigSection knowledgeConfig={knowledgeConfig} />
 
-			{/* 文件列表 */}
+			{/* File list */}
 			<div className={styles.fileList}>
 				<div className={styles.fileListContent}>
 					{documentList.length > 0 ? (

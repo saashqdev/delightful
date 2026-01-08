@@ -22,7 +22,7 @@ const ChatSetting = observer(() => {
 	const onClose = useMemoizedFn(() => {
 		setOpen(false)
 
-		// 保留关闭动画
+		// Preserve close animation
 		setTimeout(() => {
 			conversationStore.toggleSettingOpen()
 		}, 200)
@@ -86,7 +86,7 @@ const ChatSetting = observer(() => {
 			{Render}
 			{/* <DelightfulButton
 				onClick={async () => {
-					// 从网络获取 9 张随机图片，正方形
+					// Get 9 random square images from network
 					const testImageUrls = Array.from({ length: 9 }).map((_, i) => {
 						return `https://picsum.photos/200/200?random=${i}`
 					})

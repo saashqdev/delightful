@@ -1,17 +1,17 @@
-// Tools 调节器
+// Tools adjuster
 export enum ToolsAdjust {
-	// 创意
+	// Creativity
 	Creativity = 1,
-	// 平衡
+	// Balanced
 	Balanced = 2,
-	// 精准
+	// Precise
 	Precise = 3,
 
-	// 加载预设
+	// Load preset
 	default = 4,
 }
 
-// Tools 调节器值映射
+// Tools adjuster value mapping
 export const ToolsAdjustMap = {
 	[ToolsAdjust.Creativity]: {
 		temperature: 0.8,

@@ -26,7 +26,7 @@ type ItemType =
 	  })
 
 /**
- * 话题面板
+ * Topic panel
  */
 const TopicExtraSection = observer(() => {
 	const { styles } = useStyles()

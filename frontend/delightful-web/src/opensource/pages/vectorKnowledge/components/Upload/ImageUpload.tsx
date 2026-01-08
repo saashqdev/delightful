@@ -54,12 +54,12 @@ export default function ImageUpload({
 		storageType: "private",
 	})
 
-	/** 上传图标文件 */
+	/** Upload icon file */
 	const handleIconFileUpload = useMemoizedFn(async (iconFiles: File[]) => {
-		// 创建本地URL用于预览
+		// Create local URL for preview
 		const localPreviewUrl = URL.createObjectURL(iconFiles[0])
 		const newFiles = iconFiles.map(genFileData)
-		// 先上传文件
+		// Upload files first
 		const { fullfilled } = await uploadAndGetFileUrl(newFiles)
 		if (fullfilled.length) {
 			const { path } = fullfilled[0].value
@@ -71,7 +71,7 @@ export default function ImageUpload({
 		}
 	})
 
-	/** 上传图标文件 - 预校验 */
+	/** Upload icon file - pre-validation */
 	const beforeIconUpload = useMemoizedFn((file: File) => {
 		const isJpgOrPng = ["image/jpeg", "image/png"].includes(file.type)
 		if (!isJpgOrPng) {

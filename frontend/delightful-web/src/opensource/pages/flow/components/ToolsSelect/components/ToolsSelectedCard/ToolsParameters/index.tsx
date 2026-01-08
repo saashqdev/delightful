@@ -1,5 +1,5 @@
 /**
- * Tools参数配置器
+ * Tools parameter configurator
  */
 import type { FormListFieldData } from "antd"
 import { Form, Switch, Tooltip, Flex } from "antd"

@@ -105,8 +105,8 @@ class MessageDbService {
 				return t
 			} catch (createErr) {
 				// If creation fails, it may be an index issue; consider rebuilding indexes
-				console.warn(`创建消息表失败，尝试重建索引: ${tableName}`, createErr)
-				throw new Error("创建消息表失败")
+				console.warn(`Failed to create message table, trying to rebuild index: ${tableName}`, createErr)
+				throw new Error("Failed to create message table")
 				// await this.rebuildMessageTableIndex(conversationId)
 
 				// // Re-fetch the table
@@ -251,7 +251,7 @@ class MessageDbService {
 					.between(["", Dexie.minKey], ["", Dexie.maxKey])
 			} catch (indexError) {
 				// If compound index query fails, fall back to simple index
-				console.error("使用复合索引查询失败，回退到普通索引", indexError)
+				console.error("Compound index query failed, falling back to simple index", indexError)
 
 				if (topicId) {
 					return table.where("message.topic_id").equals(topicId)
@@ -268,7 +268,7 @@ class MessageDbService {
 			// }
 
 			// Use simple index when compound index fails
-			console.error("数据库访问错误，无法获取消息", error)
+			console.error("Database access error, unable to get messages", error)
 			const table = await this.getMessageTable(conversationId)
 
 			if (topicId) {

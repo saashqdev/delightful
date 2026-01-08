@@ -404,7 +404,7 @@ class AiSearchApplyService {
 			if (associateQuestion) {
 				associateQuestion.llm_response = aggregate_ai_search_card.llm_response ?? null
 			} else {
-				console.warn("关键问题未找到", parentId, message)
+				console.warn("Key question not found", parentId, message)
 			}
 		} else {
 			/**

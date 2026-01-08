@@ -30,9 +30,9 @@ const console = new Logger("UserService")
 export interface OrganizationResponse {
 	delightfulOrganizationMap: Record<string, User.DelightfulOrganization>
 	organizations?: Array<User.UserOrganization>
-	/** delightful 生态下的组织Code */
+	/** Organization Code under delightful ecosystem */
 	organizationCode?: string
-	/** teamshare 生态下的组织Code */
+	/** Organization Code under teamshare ecosystem */
 	teamshareOrganizationCode?: string
 }
 
@@ -91,22 +91,19 @@ export class UserService {
 	}
 
 	/**
-	 * @description 用户登录态下，同步用户所在环境
+	 * @description Sync user environment when logged in
 	 */
 	loadConfig = async () => {
 		// const { authorization } = userStore.user
 		// if (authorization) {
-		// 	// Step 1: 检查授权码
+		// 	// Step 1: Check authorization code
 		// 	const deployCode = await this.service.get<LoginService>("loginService").deployCodeSyncStep()
 		// 	setClusterCode(deployCode)
-		// 	console.warn("withPrivateDeploy Step 1: 同步当前账号deployCode", deployCode)
-		//
-		// 	// Step 2: 获取环境配置
+		// 	console.warn("withPrivateDeploy Step 1: Sync current account deployCode", deployCode)
+		// 
+		// 	// Step 2: Get environment configuration
 		// 	const config = await loginService.envSyncStep(deployCode)
-		// 	console.warn("withPrivateDeploy Step 2: 获取 deployConfig ", config)
-		// }
-	}
-
+		// 	console.warn("withPrivateDeploy Step 2: Get deployConfig", config)
 	/**
 	 * @description Remove current user token
 	 */
@@ -304,15 +301,15 @@ export class UserService {
 				await this.service
 					.get<LoginService>("loginService")
 					.getClusterConfig(account.deployCode)
-				// Step 2: 同步用户信息
+				// Step 2: Sync user information
 				await this.service
 					.get<LoginService>("loginService")
 					.fetchUserInfoStep(delightful_user_id)
-				// Step 3: delightful中组织体系获取
+				// Step 3: Fetch organization hierarchy in delightful
 				const { delightfulOrganizationMap } = await delightfulOrgSyncStep({
 					access_token: account.access_token,
 				} as Login.UserLoginsResponse)
-				// Step 4: 组织同步(先获取在同步)
+				// Step 4: Organization sync (fetch then sync)
 				const response = await this.service
 					.get<LoginService>("loginService")
 					.organizationFetchStep({
@@ -328,7 +325,7 @@ export class UserService {
 	}
 
 	/**
-	 * @description 账号移除
+	 * @description Account removal
 	 * @param unionId
 	 */
 	deleteAccount = async (unionId?: string) => {
@@ -347,7 +344,7 @@ export class UserService {
 			await account.clear()
 		}
 		if (unionId) {
-			// 移除持久化数据
+			// Remove persistent data
 			const account = new AccountRepository()
 			await account.delete(unionId)
 
@@ -422,7 +419,7 @@ export class UserService {
 
 		// If current authorization equals lastLogin.authorization, return lastLogin's promise
 		if (authorization === this.lastLogin?.authorization) {
-			console.log("authorization 相同，返回 lastLogin 的 promise", this.lastLogin)
+			console.log("authorization is the same, returning lastLogin's promise", this.lastLogin)
 			return this.lastLogin.promise
 		}
 
@@ -431,12 +428,12 @@ export class UserService {
 			promise: ChatApi.login(authorization)
 				.then(async (res) => {
 					userStore.user.setUserInfo(res.data.user)
-					console.log("ws 登录成功", res)
+					console.log("ws login successful", res)
 					// Switch chat data
 					await this.loadUserInfo(res.data.user, { showSwitchLoading: showLoginLoading })
 				})
 				.catch(async (err) => {
-					console.log("ws 登录失败", err)
+					console.log("ws login failed", err)
 					if (err.code === 3103) {
 						console.log(err)
 						// accountBusiness.accountLogout() -> this.deleteAccount()
@@ -447,7 +444,7 @@ export class UserService {
 					}
 				})
 				.finally(() => {
-					console.log("ws 登录结束")
+					console.log("ws login ended")
 					if (this.lastLogin?.authorization === authorization) {
 						this.lastLogin.promise = Promise.resolve()
 					}
@@ -476,7 +473,7 @@ export class UserService {
 			const delightfulId = delightfulUser.delightful_id
 			const userId = delightfulUser.user_id
 
-			console.log("切换账户", delightfulId)
+			console.log("Switching account", delightfulId)
 			if (showSwitchLoading) interfaceStore.setIsSwitchingOrganization(true)
 
 			// If current account ID equals the provided account ID, do not switch
@@ -494,7 +491,7 @@ export class UserService {
 			// For reconnection cases, do not reset the view
 			if (showSwitchLoading) {
 				// Reset message data views
-				conversationService.reset() // 切换到空会话
+				conversationService.reset() // Switch to empty conversation
 				MessageService.reset()
 			}
 

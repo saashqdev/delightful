@@ -1,5 +1,5 @@
 /**
- * 工具面板
+ * Tools panel
  */
 
 import { useBoolean, useMemoizedFn } from "ahooks"

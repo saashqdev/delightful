@@ -27,20 +27,20 @@ interface GroupSelectPanelProps {
 }
 
 /**
- * 群组选择面板
+ * Group selection panel
  */
 const GroupSelectPanel = observer((props: GroupSelectPanelProps) => {
-	// 使用状态管理数据和加载状态
+	// Use state to manage data and loading status
 	const [data, setData] = useState<any>(undefined)
 
-	// 使用useCallback定义获取数据的方法
+	// Use useCallback to define data fetching method
 	const fetchData = useCallback(async (params = {}) => {
 		const result = await contactStore.getUserGroups(params)
 		setData(result)
 		return result
 	}, [])
 
-	// 初始加载
+	// Initial load
 	useEffect(() => {
 		fetchData()
 	}, [fetchData])

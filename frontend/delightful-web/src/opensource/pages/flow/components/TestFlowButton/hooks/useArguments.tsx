@@ -1,5 +1,5 @@
 /**
- * 参数调用相关的状态
+ * State related to argument invocation
  */
 
 import { customNodeType } from "@/opensource/pages/flow/constants"
@@ -55,18 +55,18 @@ export default function useArguments({
 				(branch) => branch.trigger_type === TriggerType.Arguments,
 			)
 
-			// 处理 output
+			// Process output
 			const outputSchema = argumentsBranch?.output?.form?.structure
 			const outputDynamicItems = transformSchemaToDynamicFormItem(outputSchema!)
 
-			// 处理 custom_system_output
+			// Process custom_system_output
 			// @ts-ignore
 			const customSystemOutputSchema = argumentsBranch?.custom_system_output?.form?.structure
 			const customSystemOutputDynamicItems = transformSchemaToDynamicFormItem(
 				customSystemOutputSchema!,
 			)
 
-			// 合并两部分动态表单项
+			// Merge two parts of dynamic form items
 			const combinedDynamicItems = [...outputDynamicItems, ...customSystemOutputDynamicItems]
 			setDynamicFormItems(combinedDynamicItems)
 		}
@@ -93,7 +93,7 @@ export default function useArguments({
 			form?.setFieldsValue?.({
 				trigger_type: TriggerType.Arguments,
 			})
-			// 手动触发 onValuesChange
+			// Manually trigger onValuesChange
 			onValuesChange({
 				trigger_type: TriggerType.Arguments,
 			})

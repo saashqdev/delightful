@@ -8,7 +8,7 @@ export const recordingSummarizedMessage = {
 	organization_code: "EAVT467",
 	message: {
 		delightful_message_id: "", //
-		app_message_id: "", // 客户生成的message_id
+		app_message_id: "", // Client-generated message_id
 		topic_id: "", //
 		type: "recording_summary",
 		unread_count: 0,
@@ -18,7 +18,7 @@ export const recordingSummarizedMessage = {
 		recording_summary: {
 			status: 5,
 			text: "",
-			title: "关于 Delightful 项目的多人会议",
+			title: "Multi-person meeting about Delightful project",
 			ai_result:
 				"本次 Delightful 企业 AI 项目需求对齐会议，全面梳理了项目规划。Delightful 旨在构建企业级 AI 应用，助力企业智能化升级。产品负责人阐述了项目核心需求，包括开发智能数据分析模块，以深度挖掘企业运营数据；构建精准的客户预测模型，提升销售效率；打造智能办公自动化流程，优化企业内部协作。开发团队明确技术方向，如采用先进的 AI 算法确保数据处理精准度与效率。测试团队将依据即将给出的详细文档规划测试策略，着重检测 AI 功能准确性与稳定性。设计团队聚焦打造简洁直观、符合企业使用场景的界面。市场团队提出贴合企业需求的推广方案，且各方需求均已纳入开发考量，后续将每周跟进项目进度，力促项目稳步推进，为企业提供强大的 AI 驱动助力。",
 			duration: "00:20:23",
@@ -74,7 +74,7 @@ export const recordingStartMessage = {
 	organization_code: "EAVT467",
 	message: {
 		delightful_message_id: "", //
-		app_message_id: "", // 客户生成的message_id
+		app_message_id: "", // Client-generated message_id
 		topic_id: "", //
 		type: "recording_summary",
 		unread_count: 0,

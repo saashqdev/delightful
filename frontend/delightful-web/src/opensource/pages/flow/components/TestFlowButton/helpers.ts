@@ -21,7 +21,7 @@ export const getDefaultTestArgs = (type: TriggerType, user: User.UserInfo) => {
 		trigger_data: {
 			nickname: user?.nickname,
 			message_type: ConversationMessageType.Text,
-			content: "默认消息内容",
+			content: "Default message content",
 			// @ts-ignore
 			chat_time: dayjs("00:00:00", "HH:mm:ss"),
 		},
@@ -29,7 +29,7 @@ export const getDefaultTestArgs = (type: TriggerType, user: User.UserInfo) => {
 }
 
 /**
- * 将schema转为动态的form item项
+ * Transform schema to dynamic form item fields
  * @param schema JSON schema
  */
 export const transformSchemaToDynamicFormItem = (schema: Schema): DynamicFormItem[] => {
@@ -41,7 +41,7 @@ export const transformSchemaToDynamicFormItem = (schema: Schema): DynamicFormIte
 			key,
 			required: schema?.required?.includes?.(key) || false,
 		}
-		// TODO Array类型和Object类型的生成
+		// TODO: Generation for Array and Object types
 		result.push(resultItem)
 	})
 

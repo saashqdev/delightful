@@ -2,9 +2,9 @@ import type { ControlEventMessageType } from "@/types/chat/control_message"
 import { ConversationMessageType } from "@/types/chat/conversation_message"
 
 /**
- * 是否可以复制消息
- * @param messageType 消息类型
- * @returns 是否可以复制消息
+ * Check if message can be copied
+ * @param messageType Message type
+ * @returns Whether message can be copied
  */
 export function canCopy(messageType: ConversationMessageType | ControlEventMessageType) {
 	return [
@@ -19,9 +19,9 @@ export function canCopy(messageType: ConversationMessageType | ControlEventMessa
 }
 
 /**
- * 是否可以回复消息
- * @param messageType 消息类型
- * @returns 是否可以回复消息
+ * Check if message can be replied
+ * @param messageType Message type
+ * @returns Whether message can be replied
  */
 export function canReply(messageType: ConversationMessageType | ControlEventMessageType) {
 	return [
@@ -34,9 +34,9 @@ export function canReply(messageType: ConversationMessageType | ControlEventMess
 }
 
 /**
- * 是否可以编辑消息
- * @param messageType 消息类型
- * @returns 是否可以编辑消息
+ * Check if message can be edited
+ * @param messageType Message type
+ * @returns Whether message can be edited
  */
 export function canEdit(messageType: ConversationMessageType | ControlEventMessageType) {
 	return [

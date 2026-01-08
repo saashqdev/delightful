@@ -61,7 +61,7 @@ class MessagePullService {
 		}
 
 		this.pullMessageInterval = setInterval(() => {
-			logger.log("pullMessageInterval: 拉取离线消息")
+			logger.log("pullMessageInterval: Pull offline messages")
 			const organizationSeqId = MessageSeqIdService.getOrganizationRenderSeqId(
 				userStore.user.userInfo?.organization_code ?? "",
 			)
@@ -322,7 +322,7 @@ class MessagePullService {
 		console.log("this.triggerPromise ====> ", this.triggerPromise)
 		// Avoid concurrent pulls
 		if (this.triggerPromise) {
-			logger.log("pullOfflineMessages: 正在拉取，不重复拉取")
+			logger.log("pullOfflineMessages: Currently pulling, skip duplicate pull")
 			return
 		}
 
@@ -330,7 +330,7 @@ class MessagePullService {
 			this.triggerPromise = this.doPullOfflineMessages()
 			await this.triggerPromise
 		} finally {
-			logger.log("pullOfflineMessages: 拉取完成，重置拉取触发列表")
+			logger.log("pullOfflineMessages: Pull completed, reset pull trigger list")
 			this.triggerPromise = undefined
 		}
 	}
@@ -344,7 +344,7 @@ class MessagePullService {
 			const organizationCode = userStore.user.userInfo?.organization_code ?? ""
 
 			if (!organizationCode) {
-				logger.warn("pullOfflineMessages: 当前组织为空")
+				logger.warn("pullOfflineMessages: Current organization is empty")
 				return
 			}
 
@@ -365,7 +365,7 @@ class MessagePullService {
 			try {
 				const res = await ChatApi.messagePull({ page_token: currentPageToken })
 
-				logger.log("pullMessagesFromPageToken: 拉取消息", res)
+				logger.log("pullMessagesFromPageToken: Pull messages", res)
 
 				// Immediately process current page messages
 				if (res.items && res.items.length > 0) {
@@ -411,7 +411,7 @@ class MessagePullService {
 	 */
 	public async pullMessageOnFirstLoad(delightfulId: string, organizationCode: string) {
 		if (!organizationCode) {
-			logger.warn("pullOfflineMessages: 当前组织为空")
+			logger.warn("pullOfflineMessages: Current organization is empty")
 			return
 		}
 
@@ -510,7 +510,7 @@ class MessagePullService {
 		const currentOrganization = userStore.user.userInfo?.organization_code
 
 		if (!currentOrganization) {
-			logger.warn("applyMessages: 当前组织为空")
+			logger.warn("applyMessages: Current organization is empty")
 			return
 		}
 
@@ -557,7 +557,7 @@ class MessagePullService {
 							),
 						) > 0
 					) {
-						logger.log("添加组织未读点", message)
+						logger.log("Add organization unread dot", message)
 						DotsService.addConversationUnreadDots(
 							message.organization_code,
 							message.conversation_id,
@@ -566,7 +566,7 @@ class MessagePullService {
 							1,
 						)
 					} else {
-						logger.log("不是该组织的信息，但已应用", {
+						logger.log("Not this organization's message, but already applied", {
 							seqId: message.seq_id,
 							// organizationSeqId,
 							organizationCode: message.organization_code,
@@ -580,7 +580,7 @@ class MessagePullService {
 					message.seq_id,
 				)
 			} else {
-				logger.log("applyMessages: 应用消息", message)
+				logger.log("applyMessages: Apply message", message)
 				// If same org, apply and persist
 				MessageApplyServices.applyMessage(message, options)
 

@@ -1,7 +1,7 @@
 export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-6788da4d9c3177-24302881",
 	debug: false,
-	name: "变量保存",
+	name: "Variable Save",
 	description: "",
 	node_type: 21,
 	node_version: "",

@@ -7,7 +7,7 @@ import {
 import type { FragmentConfig, ConfigFormValues } from "@/opensource/pages/vectorKnowledge/types"
 import { isEqual, cloneDeep } from "lodash-es"
 
-/** 初始化表单数据 */
+/** Initialize form data */
 export const DEFAULT_FORM_VALUES: ConfigFormValues = {
 	fragment_config: {
 		mode: SegmentationMode.General,
@@ -53,7 +53,7 @@ export const DEFAULT_FORM_VALUES: ConfigFormValues = {
 	},
 }
 
-/** 将表单布尔值转换为API所需的数组格式 */
+/** Convert form boolean values to array format required by API */
 export function convertBooleanToPreprocessingRules(
 	replaceSpaces: boolean,
 	removeUrls: boolean,
@@ -72,36 +72,36 @@ export function convertBooleanToPreprocessingRules(
 }
 
 /**
- * 比较新旧fragment_config配置是否有变化
- * @param oldConfig 旧的fragment_config配置
- * @param newConfig 新的fragment_config配置
- * @returns 是否发生变化
+ * Compare whether new and old fragment_config have changes
+ * @param oldConfig Old fragment_config configuration
+ * @param newConfig New fragment_config configuration
+ * @returns Whether changes occurred
  */
 export function isFragmentConfigChanged(
 	oldConfig: FragmentConfig,
 	newConfig: FragmentConfig,
 ): boolean {
 	if (!oldConfig || !newConfig) {
-		return true // 如果任一配置为空，默认认为有变化
+		return true // If either config is empty, default to having changes
 	}
 
-	// 检查mode是否相同
+	// Check if mode is the same
 	if (oldConfig.mode !== newConfig.mode) {
 		return true
 	}
 
-	// 根据mode决定比较哪部分配置
+	// Determine which part of config to compare based on mode
 	if (newConfig.mode === SegmentationMode.General) {
-		// 普通模式下比较normal部分
+		// Compare normal part in general mode
 		if (!oldConfig.normal || !newConfig.normal) {
 			return true
 		}
 
-		// 深拷贝以避免修改原始对象
+		// Deep copy to avoid modifying original object
 		const oldNormal = cloneDeep(oldConfig.normal)
 		const newNormal = cloneDeep(newConfig.normal)
 
-		// 对text_preprocess_rule排序以忽略顺序差异
+		// Sort text_preprocess_rule to ignore order differences
 		if (oldNormal.text_preprocess_rule && newNormal.text_preprocess_rule) {
 			oldNormal.text_preprocess_rule.sort()
 			newNormal.text_preprocess_rule.sort()
@@ -109,16 +109,16 @@ export function isFragmentConfigChanged(
 
 		return !isEqual(oldNormal, newNormal)
 	} else if (newConfig.mode === SegmentationMode.ParentChild) {
-		// 父子模式下比较parent_child部分
+		// Compare parent_child part in parent-child mode
 		if (!oldConfig.parent_child || !newConfig.parent_child) {
 			return true
 		}
 
-		// 深拷贝以避免修改原始对象
+		// Deep copy to avoid modifying original object
 		const oldParentChild = cloneDeep(oldConfig.parent_child)
 		const newParentChild = cloneDeep(newConfig.parent_child)
 
-		// 对text_preprocess_rule排序以忽略顺序差异
+		// Sort text_preprocess_rule to ignore order differences
 		if (oldParentChild.text_preprocess_rule && newParentChild.text_preprocess_rule) {
 			oldParentChild.text_preprocess_rule.sort()
 			newParentChild.text_preprocess_rule.sort()
@@ -127,6 +127,6 @@ export function isFragmentConfigChanged(
 		return !isEqual(oldParentChild, newParentChild)
 	}
 
-	// 默认认为有变化
+	// Default to having changes
 	return true
 }

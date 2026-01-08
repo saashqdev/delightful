@@ -22,12 +22,12 @@ export default function SubSider({ setCurrentDetailPage, knowledgeDetail }: SubS
 	const location = useLocation()
 	const { t } = useTranslation("flow")
 
-	// 获取当前页面路径
+	// Get current page path
 	const isDocument = location.pathname.includes("/document")
 	const isSetting = location.pathname.includes("/setting")
 	const isRecallTest = location.pathname.includes("/recall-test")
 
-	// 默认选中的菜单项
+	// Default selected menu item
 	let defaultSelectedKey = "document"
 	if (isDocument) {
 		defaultSelectedKey = "document"
@@ -37,7 +37,7 @@ export default function SubSider({ setCurrentDetailPage, knowledgeDetail }: SubS
 		defaultSelectedKey = "recallTest"
 	}
 
-	// 菜单点击处理
+	// Menu click handler
 	const handleMenuClick = useMemoizedFn(({ key }: { key: string }) => {
 		setCurrentDetailPage(key as "document" | "setting" | "recallTest")
 	})

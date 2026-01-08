@@ -15,7 +15,7 @@ interface GeneralSegmentSectionProps {
 }
 
 /**
- * 通用分段模式组件
+ * General segment mode component
  */
 export default function GeneralSegmentSection({
 	disabled,

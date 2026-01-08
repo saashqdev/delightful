@@ -32,7 +32,7 @@ export const useVectorKnowledgeSubSiderStyles = createStyles(({ css, isDarkMode,
 			overflow: hidden;
 			text-overflow: ellipsis;
 			display: -webkit-box;
-			-webkit-line-clamp: 3; /* 限制最多显示3行 */
+			-webkit-line-clamp: 3; /* Limit to maximum 3 lines */
 			-webkit-box-orient: vertical;
 		`,
 		operationBtn: css`

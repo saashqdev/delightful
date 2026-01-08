@@ -107,21 +107,21 @@ export const SYSTEM_DISPLAY_TYPE = "display_type"
 
 export const DEFAULT_ICON = "IconWand"
 
-// 是否是系统指令
+// Check if it's a system instruction
 export const isSystemItem = (item: QuickInstruction): boolean =>
 	SYSTEM_DISPLAY_TYPE in item && item[SYSTEM_DISPLAY_TYPE] === DisplayType.SYSTEM
 
-// 指令插入位置
+// Instruction insertion position
 export enum InsertLocationMap {
-	// 前方
+	// Before
 	Before = 1,
-	// 光标处
+	// At cursor
 	Cursor = 2,
-	// 后方
+	// After
 	Behind = 3,
 }
 
-// 指令插入位置选项
+// Instruction insertion position options
 export const INSERT_OPTIONS = (t: TFunction) => [
 	{ value: InsertLocationMap.Before, label: t("explore.form.insertBefore") },
 	{ value: InsertLocationMap.Cursor, label: t("explore.form.insertCursor") },

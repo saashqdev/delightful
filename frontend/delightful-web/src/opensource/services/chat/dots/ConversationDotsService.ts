@@ -1,4 +1,4 @@
-/* eslint-disable class-methods-use-this */
+﻿/* eslint-disable class-methods-use-this */
 import conversationStore from "@/opensource/stores/chatNew/conversation"
 import ConversationDbServices from "@/opensource/services/chat/conversation/ConversationDbService"
 import MessageStore from "@/opensource/stores/chatNew/message"
@@ -44,7 +44,7 @@ class ConversationDotsService {
 						count,
 					)
 
-					// 更新数据库
+					// Update database
 					ConversationDbServices.updateUnreadDots(
 						conversationId,
 								console.log("ConversationDotsService addUnreadDots updateUnreadDots success")
@@ -81,10 +81,10 @@ class ConversationDotsService {
 		 * @param dots Amount to decrease
 
 	/**
-	 * 减少话题未读数量
-	 * @param conversationId 会话ID
-	 * @param topicId 话题ID
-	 * @param dots 减少的数量
+	 * Reduce topic unread count
+	 * @param conversationId Conversation ID
+	 * @param topicId Topic ID
+	 * @param dots Count to reduce
 	 */
 	reduceUnreadDots(conversationId: string, topicId: string, dots: number) {
 		if (!conversationId) return

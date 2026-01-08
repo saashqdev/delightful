@@ -5,7 +5,7 @@ import { type Container, ServiceContainer } from "@/opensource/services/ServiceC
 import { UserApi as openSourceUserApi, CommonApi as openSourceCommonApi } from "@/apis"
 import { ConfigService } from "@/opensource/services/config/ConfigService"
 /**
- * @description 创建服务实例(在完全新的react根节点实例下，需要重新实例化业务层)
+ * @description Create service instance (when under a completely new React root node instance, need to re-instantiate the business layer)
  */
 function createService() {
 	const UserApi = openSourceUserApi
@@ -19,7 +19,7 @@ function createService() {
 
 	const container = new ServiceContainer()
 
-	// 将 API 初始化延迟到实际创建服务时进行
+	// Defer API initialization to when services are actually created
 	container.registerFactory<UserService>(
 		"userService",
 		(c: Container) => new UserService(apis, c),
@@ -32,7 +32,7 @@ function createService() {
 
 	container.registerFactory<ConfigService>("configService", () => new ConfigService(apis as any))
 
-	// 获取服务实例 - 容器内部会处理异步工厂的情况
+	// Get service instances - the container will handle async factory cases internally
 	const loginService = container.get<LoginService>("loginService")
 	const userService = container.get<UserService>("userService")
 	const configService = container.get<ConfigService>("configService")

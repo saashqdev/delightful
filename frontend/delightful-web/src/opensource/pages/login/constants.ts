@@ -1,8 +1,8 @@
-/** 登录云类型 */
+/** Login cloud type */
 export const enum LoginDeployment {
-	/** 公有云登录 */
+	/** Public cloud login */
 	PublicDeploymentLogin = "public",
-	/** 私有云登录 */
+	/** Private cloud login */
 	PrivateDeploymentLogin = "private",
 }
 

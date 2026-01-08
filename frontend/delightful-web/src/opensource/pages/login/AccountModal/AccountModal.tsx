@@ -38,7 +38,7 @@ function AccountModal(props: AccountModalProps) {
 
 	const [loading, setLoading] = useState(false)
 
-	// 提交数据，统一处理不同登录方式的逻辑
+	// Submit data and uniformly handle the logic for different login methods
 	const onSubmit = useMemoizedFn<OnSubmitFn<Login.LoginType>>(async (type, values, overrides) => {
 		if (!agree) {
 			await triggerUserAgreedPolicy()
@@ -52,11 +52,11 @@ function AccountModal(props: AccountModalProps) {
 		return Promise.resolve()
 			.then(overrides?.loginStep ?? loginService.loginStep(type, values))
 			.then(async (userInfo) => {
-				// 流程问题要先在 delightful 绑定用户token后才能设置token
+				// Due to workflow requirements, need to bind user token in Delightful first before setting token
 				const delightfulOrgSyncResponse = await delightfulOrgSyncStep(userInfo)
 				await loginService.authorizationSyncStep(userInfo)
 
-				// 环境同步
+				// Environment synchronization
 				await loginService.syncClusterConfig()
 				const orgSyncResponse = await loginService.organizationFetchStep({
 					...delightfulOrgSyncResponse,

@@ -1,4 +1,4 @@
-/** 获取当前 keyCode 映射文案 */
+/** Get current keyCode mapping text */
 const getKeyCode = () => {
 	const platform = navigator.platform.toLowerCase()
 

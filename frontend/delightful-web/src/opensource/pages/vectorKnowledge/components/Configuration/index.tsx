@@ -23,9 +23,9 @@ interface Props {
 }
 
 /**
- * 向量知识库配置组件，有两种业务场景：
- * 1. 创建知识库时，用于配置知识库的分段设置、嵌入模型、检索设置；
- * 2. 知识库创建成功后，用于重新编辑文档维度的分段设置。
+ * Vector knowledge base configuration component, has two business scenarios:
+ * 1. When creating knowledge base, used to configure knowledge base segmentation settings, embedding model, retrieval settings;
+ * 2. After knowledge base creation succeeds, used to re-edit document-level segmentation settings.
  */
 export default function VectorKnowledgeConfiguration({
 	documentConfig,
@@ -39,7 +39,7 @@ export default function VectorKnowledgeConfiguration({
 
 	const navigate = useNavigate()
 
-	/** 跳转文档列表 */
+	/** Navigate to document list */
 	const navigateToDocumentList = useMemoizedFn((knowledgeBaseCode: string) => {
 		navigate(`${RoutePath.VectorKnowledgeDetail}?code=${knowledgeBaseCode}`)
 	})
@@ -70,10 +70,10 @@ export default function VectorKnowledgeConfiguration({
 		documentConfig,
 	)
 
-	// 分段列表的每页条数
+	// Number of items per page for segment list
 	const PAGE_SIZE = 20
 
-	// 适配参数接口
+	// Adapt parameter interface
 	const handleGetFragmentList = useMemoizedFn(({ page }: { page: number }) => {
 		if (currentDocumentDetail) {
 			return getFragmentList({
@@ -85,14 +85,14 @@ export default function VectorKnowledgeConfiguration({
 		}
 	})
 
-	// 初始化分段列表
+	// Initialize segment list
 	useEffect(() => {
 		handleGetFragmentList({ page: 1 })
 	}, [currentDocumentDetail])
 
 	return (
 		<Flex className={styles.wrapper}>
-			{/* 左侧 - 知识库配置 */}
+			{/* Left side - Knowledge base configuration */}
 			<Flex vertical justify="space-between" className={styles.leftWrapper}>
 				<div className={styles.container}>
 					<div className={styles.title}>
@@ -107,7 +107,7 @@ export default function VectorKnowledgeConfiguration({
 					</div>
 					<div className={styles.content}>
 						<Form form={form} layout="vertical" initialValues={initialValues}>
-							{/* 分段设置 */}
+							{/* Segment settings */}
 							<SegmentSettingsSection
 								disabled={isOldVersion}
 								segmentMode={segmentMode}
@@ -119,12 +119,12 @@ export default function VectorKnowledgeConfiguration({
 								handleSegmentSettingReset={handleSegmentSettingReset}
 							/>
 
-							{/* Embedding模型 */}
+							{/* Embedding model */}
 							<EmbeddingModelSection
 								isDocumentConfig={!!documentConfig}
 								embeddingModelOptions={embeddingModelOptions}
 							/>
-							{/* 检索设置 */}
+							{/* Search settings */}
 							<div className={styles.configSection}>
 								<div className={styles.configTitle} style={{ marginBottom: 4 }}>
 									{t("knowledgeDatabase.searchSettings")}
@@ -133,7 +133,7 @@ export default function VectorKnowledgeConfiguration({
 									{t("knowledgeDatabase.searchSettingsDesc")}
 								</div>
 
-								{/* 搜索设置组件组 */}
+								{/* Search settings component group */}
 								<SearchSettingsGroup isDocumentConfig={!!documentConfig} />
 							</div>
 						</Form>
@@ -152,7 +152,7 @@ export default function VectorKnowledgeConfiguration({
 				</Flex>
 			</Flex>
 
-			{/* 右侧 - 分段预览 */}
+			{/* Right side - Segment preview */}
 			<Flex vertical className={styles.rightWrapper}>
 				<SegmentPreview
 					segmentPreviewLoading={segmentPreviewLoading}

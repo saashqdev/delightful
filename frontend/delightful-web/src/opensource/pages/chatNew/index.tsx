@@ -1,14 +1,14 @@
-// React 相关
+// React related
 import { observer } from "mobx-react-lite"
 
-// 组件
+// Components
 import EmptyState from "./components/EmptyState"
 import ChatContainer from "./components/ChatContainer"
 
-// Store 和服务
+// Store and services
 import conversationStore from "@/opensource/stores/chatNew/conversation"
 
-// Hooks 和工具
+// Hooks and utilities
 import useNavigateConversationByAgentIdInSearchQuery from "./hooks/navigateConversationByAgentId"
 import { usePanelSizes } from "./hooks/usePanelSizes"
 

@@ -5,15 +5,15 @@ class ConversationCacheServices {
 	static version = 0
 
 	/**
-	 * 获取侧边栏会话组缓存key
-	 * @returns 缓存key
+	 * Get sidebar conversation group cache key
+	 * @returns Cache key
 	 */
 	static getConversationSiderbarGroupsKey(delightfulId: string, organizationCode: string) {
 		return platformKey(`conversation_siderbar/${delightfulId}/${organizationCode}`)
 	}
 
 	/**
-	 * 缓存侧边栏会话组
+	 * Cache sidebar conversation group
 	 */
 	static cacheConversationSiderbarGroups(
 		delightfulId: string | undefined,
@@ -34,10 +34,10 @@ class ConversationCacheServices {
 	}
 
 	/**
-	 * 获取缓存的侧边栏会话组
-	 * @param delightfulId 魔法ID
-	 * @param organizationCode 组织编码
-	 * @returns 缓存的侧边栏会话组
+	 * Get cached sidebar conversation group
+	 * @param delightfulId Delightful ID
+	 * @param organizationCode Organization code
+	 * @returns Cached sidebar conversation group
 	 */
 	static getCacheConversationSiderbarGroups(delightfulId: string, organizationCode: string) {
 		if (!delightfulId || !organizationCode) return undefined

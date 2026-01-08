@@ -24,14 +24,14 @@ class MessageDispatchService {
 			currentConversation.current_topic_id === message.message.topic_id
 		) {
 			MessageStore.addSendMessage(renderMessage)
-			console.log("发送消息到当前会话", message.conversation_id, "消息ID", message.message_id)
+			console.log("Send message to current conversation", message.conversation_id, "Message ID", message.message_id)
 		} else {
 			console.log(
-				"发送消息到非当前会话",
+				"Send message to non-current conversation",
 				message.conversation_id,
-				"当前会话",
+				"Current conversation",
 				currentConversation?.id,
-				"消息ID",
+				"Message ID",
 				message.message_id,
 			)
 		}
@@ -123,7 +123,7 @@ class MessageDispatchService {
 	 * Apply a message to the system.
 	 */
 	applyMessage(message: SeqResponse<CMessage>, options: ApplyMessageOptions) {
-		console.log("应用消息 ==========", message, options)
+		console.log("Apply message ==========", message, options)
 		// Skip messages not for current organization or delightful account
 		if (
 			message.organization_code !== userStore.user.userInfo?.organization_code ||

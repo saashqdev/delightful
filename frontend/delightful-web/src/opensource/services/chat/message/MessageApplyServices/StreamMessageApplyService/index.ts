@@ -94,7 +94,7 @@ class StreamMessageApplyService {
 	 * @param message Message
 	 */
 	addToTaskMap(messageId: string, message: StreamResponse, run: boolean = true) {
-		console.log(`[addToTaskMap] 开始添加任务，消息ID: ${messageId}, 是否立即执行: ${run}`)
+		console.log(`[addToTaskMap] Start adding task, message ID: ${messageId}, execute immediately: ${run}`)
 		const task = this.taskMap[messageId]
 
 		if (task) {
@@ -180,11 +180,11 @@ class StreamMessageApplyService {
 	 * @param messageId Message ID
 	 */
 	executeType(messageId: string) {
-		console.log(`[executeType] 开始执行任务，消息ID: ${messageId}`)
+		console.log(`[executeType] Start executing task, message ID: ${messageId}`)
 		const task = this.taskMap[messageId]
 		if (task) {
 			task.triggeredRender = true
-			console.log(`[executeType] 任务状态: ${task.status}, 剩余任务数: ${task.tasks.length}`)
+			console.log(`[executeType] Task status: ${task.status}, remaining tasks: ${task.tasks.length}`)
 
 			// Create character buffer for smooth output
 			const buffer: StreamResponse[] = []
@@ -251,7 +251,7 @@ class StreamMessageApplyService {
 						outputInterval = Math.max(10, avgInterval * 0.9)
 					} else {
 						// Adjust based on content length and avg rate
-						const targetInterval = 1000 / avgOutputRate // 目标间隔时间
+							const targetInterval = 1000 / avgOutputRate // Target interval time
 						// Smooth transition between avg and target interval
 						outputInterval = avgInterval * 0.7 + targetInterval * 0.3
 						// Content length effect: slightly extend for longer chunks
@@ -282,7 +282,7 @@ class StreamMessageApplyService {
 			// Start processing
 			processNextChunk()
 		} else {
-			console.log(`[executeType] 任务不存在，创建新任务: ${messageId}`)
+			console.log(`[executeType] Task does not exist, creating new task: ${messageId}`)
 			this.taskMap[messageId] = StreamMessageApplyService.createObject()
 		}
 	}
@@ -370,7 +370,7 @@ class StreamMessageApplyService {
 	}
 
 	apply(streamMessage: StreamResponse) {
-		console.log(`[apply] 开始应用流式消息，目标序列ID: ${streamMessage.target_seq_id}`)
+		console.log(`[apply] Start applying stream message, target seq ID: ${streamMessage.target_seq_id}`)
 
 		const targetSeqInfo = this.queryMessageInfo(streamMessage.target_seq_id)
 		const aggregateAISearchCardSeqInfo = this.queryMessageInfo(
@@ -383,21 +383,19 @@ class StreamMessageApplyService {
 
 		switch (type) {
 			case ConversationMessageType.Text:
-				console.log(`[apply] 处理文本类型消息`)
+				console.log(`[apply] Handle text message type`)
 				this.applyTextStreamMessage(streamMessage)
 				break
 			case ConversationMessageType.Markdown:
-				console.log(`[apply] 处理Markdown类型消息`)
+				console.log(`[apply] Handle Markdown message type`)
 				this.applyMarkdownStreamMessage(streamMessage)
 				break
 			case ConversationMessageType.AggregateAISearchCard:
-				console.log(`[apply] 处理AI搜索卡片类型消息`)
+				console.log(`[apply] Handle AI search card message type`)
 				this.applyAggregateAISearchCardStreamMessage(streamMessage)
 				break
 			default:
-				console.log(`[apply] 未知消息类型，使用默认处理方式`)
-				this.applyDefaultStreamMessage(streamMessage)
-				break
+			console.log(`[apply] Unknown message type, using default handler`)
 		}
 	}
 
@@ -406,20 +404,20 @@ class StreamMessageApplyService {
 	 * @param streamMessage Streaming message
 	 */
 	applyTextStreamMessage(streamMessage: StreamResponse) {
-		console.log(`[applyTextStreamMessage] 开始处理文本流式消息，状态: ${streamMessage.status}`)
+		console.log(`[applyTextStreamMessage] Start handling text stream message, status: ${streamMessage.status}`)
 		const { target_seq_id, reasoning_content, status, content } = streamMessage
 		const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)!
 
 		if ([StreamStatus.Start, StreamStatus.Streaming].includes(status)) {
 			if (reasoning_content) {
-				console.log(`[applyTextStreamMessage] 处理推理内容`)
+				console.log(`[applyTextStreamMessage] Handle reasoning content`)
 				this.addToTaskMap(target_seq_id, streamMessage)
 			} else if (content) {
-				console.log(`[applyTextStreamMessage] 处理内容`)
+				console.log(`[applyTextStreamMessage] Handle content`)
 				this.addToTaskMap(target_seq_id, streamMessage)
 			}
 		} else if (status === StreamStatus.End) {
-			console.log(`[applyTextStreamMessage] 处理结束状态消息`)
+			console.log(`[applyTextStreamMessage] Handle end status message`)
 
 			// Update message status
 			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
@@ -449,7 +447,7 @@ class StreamMessageApplyService {
 			} as Partial<SeqResponse<ConversationMessage>>)
 		}
 		this.finishTask(target_seq_id)
-		console.log(`[applyTextStreamMessage] 文本流式消息处理完成`)
+		console.log(`[applyTextStreamMessage] Text stream message handling completed`)
 	}
 
 	/**
@@ -458,21 +456,21 @@ class StreamMessageApplyService {
 	 */
 	applyMarkdownStreamMessage(streamMessage: StreamResponse) {
 		console.log(
-			`[applyMarkdownStreamMessage] 开始处理Markdown流式消息，状态: ${streamMessage.status}`,
+			`[applyMarkdownStreamMessage] Start handling Markdown stream message, status: ${streamMessage.status}`,
 		)
 		const { reasoning_content, content, status, target_seq_id } = streamMessage
 		const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)!
 
 		if ([StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
 			if (reasoning_content) {
-				console.log(`[applyMarkdownStreamMessage] 处理推理内容`)
+				console.log(`[applyMarkdownStreamMessage] Handle reasoning content`)
 				this.addToTaskMap(target_seq_id, streamMessage)
 			} else if (content) {
-				console.log(`[applyMarkdownStreamMessage] 处理内容`)
+				console.log(`[applyMarkdownStreamMessage] Handle content`)
 				this.addToTaskMap(target_seq_id, streamMessage)
 			}
 		} else if (status === StreamStatus.End) {
-			console.log(`[applyMarkdownStreamMessage] 处理结束状态消息`)
+			console.log(`[applyMarkdownStreamMessage] Handle end status message`)
 			// Update message status
 			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
 				const markdownMessage = m.message as MarkdownConversationMessage
@@ -502,7 +500,7 @@ class StreamMessageApplyService {
 			} as Partial<SeqResponse<ConversationMessage>>)
 		}
 		this.finishTask(target_seq_id)
-		console.log(`[applyMarkdownStreamMessage] Markdown流式消息处理完成`)
+		console.log(`[applyMarkdownStreamMessage] Markdown stream message handling completed`)
 	}
 
 	/**
@@ -511,7 +509,7 @@ class StreamMessageApplyService {
 	 */
 	applyAggregateAISearchCardStreamMessage(message: StreamResponse) {
 		console.log(
-			`[applyAggregateAISearchCardStreamMessage] 开始处理AI搜索卡片流式消息，状态: ${message.status}`,
+			`[applyAggregateAISearchCardStreamMessage] Start handling AI search card stream message, status: ${message.status}`,
 		)
 		const { reasoning_content, llm_response } = message
 		const { status, target_seq_id } = message
@@ -521,14 +519,14 @@ class StreamMessageApplyService {
 
 		if (!isUndefined(status) && [StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
 			if (reasoning_content) {
-				console.log(`[applyAggregateAISearchCardStreamMessage] 处理推理内容`)
+				console.log(`[applyAggregateAISearchCardStreamMessage] Handle reasoning content`)
 				this.addToTaskMap(target_seq_id, message)
 			} else if (llm_response) {
-				console.log(`[applyAggregateAISearchCardStreamMessage] 处理LLM响应内容`)
+				console.log(`[applyAggregateAISearchCardStreamMessage] Handle LLM response content`)
 				this.addToTaskMap(target_seq_id, message)
 			}
 		} else if (status === StreamStatus.End) {
-			console.log(`[applyAggregateAISearchCardStreamMessage] 处理结束状态消息`)
+			console.log(`[applyAggregateAISearchCardStreamMessage] Handle end status message`)
 
 			// Update root question answer
 			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
@@ -561,12 +559,7 @@ class StreamMessageApplyService {
 
 			this.finishTask(target_seq_id)
 		}
-		console.log(`[applyAggregateAISearchCardStreamMessage] AI搜索卡片流式消息处理完成`)
-	}
-
-	applyDefaultStreamMessage(streamMessage: StreamResponse) {
-		const { target_seq_id, reasoning_content, status, content } = streamMessage
-
+	console.log(`[applyAggregateAISearchCardStreamMessage] AI search card stream message handling completed`)
 		if ([StreamStatus.Start, StreamStatus.Streaming].includes(status)) {
 			if (reasoning_content) {
 				this.addToTaskMap(target_seq_id, streamMessage, false)

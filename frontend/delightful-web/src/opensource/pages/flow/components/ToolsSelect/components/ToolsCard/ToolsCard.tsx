@@ -9,7 +9,7 @@ import useStyles from "./style"
 import React, { memo } from "react"
 import { ToolSelectedItem } from "../../types"
 
-// 使用React.lazy懒加载ToolsList组件
+// Use React.lazy to lazily load the ToolsList component
 const ToolsList = React.lazy(() => import("./components/ToolsList"))
 
 type ToolsCardProps = {

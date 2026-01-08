@@ -24,7 +24,7 @@ const useStyles = createStyles(({ css, prefixCls }) => {
 })
 
 /**
- * @description 集群配置同步
+ * @description Cluster configuration synchronization
  * @constructor
  */
 export function ClusterConfigSyncProvider(props: PropsWithChildren) {
@@ -38,8 +38,8 @@ export function ClusterConfigSyncProvider(props: PropsWithChildren) {
 	const { setClusterCode } = useClusterCode()
 
 	/**
-	 * @description 同步环境配置
-	 * @param {string|null} authorization 用户token
+	 * @description Sync environment configuration
+	 * @param {string|null} authorization User token
 	 */
 	const { run: onUserLoginChange } = useDebounceFn(
 		async (access_token: string | null) => {

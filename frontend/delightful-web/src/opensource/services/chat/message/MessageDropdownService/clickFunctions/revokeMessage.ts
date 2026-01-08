@@ -3,8 +3,8 @@ import MessageDropdownStore from "@/opensource/stores/chatNew/messageUI/Dropdown
 import { ChatApi } from "@/apis"
 
 /**
- * 撤回消息
- * @param messageId 消息ID
+ * Revoke message
+ * @param messageId Message ID
  */
 function revokeMessage(messageId: string) {
 	console.log("revokeMessage", messageId)
@@ -15,8 +15,8 @@ function revokeMessage(messageId: string) {
 		messageId,
 	)
 	ChatApi.revokeMessage(messageId).then((res) => {
-		console.log("撤回消息成功", res)
-		// 更新数据库
+		console.log("Revoke message success", res)
+		// Update database
 	})
 }
 

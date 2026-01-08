@@ -27,17 +27,17 @@ const useStyles = createStyles(({ css, token }) => {
 const AiAssistant = observer(function AiAssistant() {
 	const { styles } = useStyles()
 
-	// 使用状态管理数据
+	// Use state to manage data
 	const [data, setData] = useState<any>(undefined)
 
-	// 获取好友和用户信息的方法
+	// Method to fetch friends and user info
 	const fetchFriends = useCallback(async (params = {}) => {
 		const result = await contactStore.getFriends(params)
 		setData(result)
 		return result
 	}, [])
 
-	// 初始加载
+	// Initial load
 	useEffect(() => {
 		fetchFriends()
 	}, [fetchFriends])

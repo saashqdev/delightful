@@ -20,7 +20,7 @@ interface ParentChildSegmentSectionProps {
 }
 
 /**
- * 父子分段模式组件
+ * Parent-child segment mode component
  */
 export default function ParentChildSegmentSection({
 	disabled,
@@ -51,7 +51,7 @@ export default function ParentChildSegmentSection({
 			</Form.Item>
 
 			<Flex vertical gap={10}>
-				{/* 段落 */}
+				{/* Paragraph */}
 				<div className={styles.subSection}>
 					<Flex
 						justify="space-between"
@@ -118,7 +118,7 @@ export default function ParentChildSegmentSection({
 					</Flex>
 				</div>
 
-				{/* 全文 */}
+				{/* Full text */}
 				<div className={styles.subSection}>
 					<Flex
 						justify="space-between"

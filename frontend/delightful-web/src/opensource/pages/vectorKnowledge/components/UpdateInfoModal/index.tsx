@@ -92,10 +92,10 @@ function UpdateInfoModal({ details, open, onClose, updateList }: UpdateInfoModal
 	})
 
 	const onFileChange = useMemoizedFn(async (fileList: FileList) => {
-		// 创建本地URL用于预览
+		// Create local URL for preview
 		const localPreviewUrl = URL.createObjectURL(fileList[0])
 		const newFiles = Array.from(fileList).map(genFileData)
-		// 先上传文件
+		// Upload file first
 		const { fullfilled } = await uploadAndGetFileUrl(newFiles)
 		if (fullfilled.length) {
 			const { path } = fullfilled[0].value
@@ -108,7 +108,7 @@ function UpdateInfoModal({ details, open, onClose, updateList }: UpdateInfoModal
 
 	useEffect(() => {
 		if (details) {
-			// requestAnimationFrame 将表单更新推迟到下一个浏览器绘制帧，确保所有 DOM 元素都已完全渲染，表单字段已完成初始化。
+			// requestAnimationFrame defers form update to next browser paint frame, ensuring all DOM elements are fully rendered and form fields are initialized.
 			requestAnimationFrame(() => {
 				form.setFieldsValue({
 					name: details.name,

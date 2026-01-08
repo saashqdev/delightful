@@ -158,9 +158,9 @@ function PublishAgent({
 			if (currentVersionIsOld) {
 				Modal.confirm({
 					centered: true,
-					title: "提示",
+					title: "Warning",
 					content:
-						"当前云端存在更新的流程版本，使用本地流程覆盖可能导致他人的最新修改丢失，建议保存为草稿后刷新检查。是否确认覆盖？",
+						"A newer workflow version exists in the cloud. Overwriting with your local version may cause others' latest changes to be lost. It is recommended to save as draft and refresh to check. Are you sure you want to overwrite?",
 					okText: t("button.confirm", { ns: "interface" }),
 					cancelText: t("button.cancel", { ns: "interface" }),
 					okButtonProps: {
@@ -366,7 +366,7 @@ function PublishAgent({
 							<Form.Item>
 								<Alert
 									className={styles.alert}
-									message="发布至企业内部将自动发起审批，经管理员通过后，企业全员即可使用。"
+								message="Publishing to the organization will automatically initiate an approval process. Once approved by an administrator, it will be available to all members of the organization."
 									type="warning"
 									showIcon
 									icon={

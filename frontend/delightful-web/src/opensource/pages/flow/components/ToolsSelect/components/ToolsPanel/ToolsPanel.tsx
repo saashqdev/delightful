@@ -10,7 +10,7 @@ import React, { Suspense } from "react"
 import styles from "./ToolsPanel.module.less"
 import { ToolsPanelProvider } from "./context/ToolsPanelProvider"
 
-// 使用React.lazy动态导入ToolSetList组件
+// Use React.lazy to dynamically import the ToolSetList component
 const ToolSetList = React.lazy(() => import("./components/ToolSetList"))
 
 type ToolsPanelModalProps = {

@@ -18,7 +18,7 @@ export default function DocumentUpload({
 }: PropsWithChildren<DocumentUploadProps>) {
 	const { t: flowT } = useTranslation("flow")
 
-	/** 上传文件 - 预校验 */
+	/** Upload file - pre-validation */
 	const beforeFileUpload = useMemoizedFn((file: File) => {
 		const fileExtension = getFileExtension(file.name)
 
@@ -27,7 +27,7 @@ export default function DocumentUpload({
 			return false
 		}
 
-		// 验证文件大小
+		// Validate file size
 		const isLt15M = file.size / 1024 / 1024 < 15
 		if (!isLt15M) {
 			message.error(flowT("knowledgeDatabase.fileSizeLimit", { size: "15MB" }))
@@ -35,7 +35,7 @@ export default function DocumentUpload({
 		}
 
 		handleFileUpload(file)
-		// 直接return flase，不进行组件上传，使用自定义上传
+		// Return false directly to prevent component upload and use custom upload
 		return false
 	})
 

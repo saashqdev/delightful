@@ -12,13 +12,13 @@ import { t } from "i18next"
 import { CitationRegexes } from "@/opensource/pages/chatNew/components/ChatMessageList/components/MessageFactory/components/Markdown/EnhanceMarkdown/remarkPlugins/remarkCitation"
 
 /**
- * 选择元素文本
- * @param el 元素
+ * Select element text
+ * @param el Element
  */
 function selectElementText(el: Node) {
 	// @ts-ignore
 	if (document.selection) {
-		// IE8 以下处理
+		// Handle IE8 and below
 		// @ts-ignore
 		const oRange = document.body.createTextRange()
 		oRange.moveToElementText(el)
@@ -33,14 +33,14 @@ function selectElementText(el: Node) {
 }
 
 /**
- * 复制选区
- * @param el 元素
+ * Copy selection
+ * @param el Element
  */
 function copySelection(el: HTMLElement) {
 	selectElementText(el)
 	let copySuccess // var to check whether execCommand successfully executed
 	try {
-		// 复制选区
+		// Copy selection
 		window.navigator.clipboard.write([
 			new ClipboardItem({
 				"text/html": new Blob([el.innerHTML], { type: "text/html" }),
@@ -57,20 +57,20 @@ function copySelection(el: HTMLElement) {
 }
 
 /**
- * 生成 AI 搜索卡片文本
- * @param message 消息
- * @returns 文本
+ * Generate AI search card text
+ * @param message Message
+ * @returns Text
  */
 function genAggregateAISearchCardText(message?: AggregateAISearchCardContent) {
 	if (!message) return ""
 
 	const result = `${message.llm_response}
 
-## 事件
+## Events
 
 ${genMarkdownTableText(message.event)}
 
-## 来源
+## Sources
 
 ${message.search["0"]?.map((item, index) => `${index + 1}. [${item.name}](${item.url})`).join("\n")}
 `
@@ -81,9 +81,9 @@ ${message.search["0"]?.map((item, index) => `${index + 1}. [${item.name}](${item
 }
 
 /**
- * 生成 AI 搜索卡片事件文本
- * @param message 消息
- * @returns 文本
+ * Generate AI search card event text
+ * @param message Message
+ * @returns Text
  */
 function genMarkdownTableText(message?: AggregateAISearchCardEvent[]) {
 	return `
@@ -97,21 +97,20 @@ ${message?.map((item) => `| ${item.name} | ${item.time} | ${item.description} |`
 }
 
 /**
- * 生成 AI 搜索卡片文本
- * @param message 消息
- * @returns 文本
+ * Generate AI search card V2 text
+ * @param message Message
+ * @returns Text
  */
 function genAggregateAISearchCardV2Text(message?: AggregateAISearchCardContentV2) {
 	if (!message) return ""
 
 	const result = `${message.summary?.content}
 
-## 事件
+## Events
 
 ${genMarkdownTableText(message.events)}
 
-## 来源
-
+## Sources
 ${message.no_repeat_search_details
 	?.map((item, index) => `${index + 1}. [${item.name}](${item.url})`)
 	.join("\n")}
@@ -123,9 +122,9 @@ ${message.no_repeat_search_details
 }
 
 /**
- * 获取消息文本
- * @param message 消息
- * @returns 消息文本
+ * Get message text
+ * @param message Message
+ * @returns Message text
  */
 function getMessageText(message: FullMessage) {
 	switch (message?.message.type) {
@@ -145,9 +144,9 @@ function getMessageText(message: FullMessage) {
 }
 
 /**
- * 复制消息
- * @param messageId 消息ID
- * @param e 事件
+ * Copy message
+ * @param messageId Message ID
+ * @param e Event
  */
 function copyMessage(messageId: string, e: EventTarget | null) {
 	console.log("copyMessage", messageId)

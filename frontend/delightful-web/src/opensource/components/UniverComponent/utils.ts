@@ -273,7 +273,7 @@ export function transformDataForSlide(data: any, fileName: string): any {
 		slides: data?.slides || [
 			{
 				id: "slide1",
-				title: "标题幻灯片",
+				title: "Title Slide",
 				elements: [],
 			},
 		],
@@ -348,7 +348,7 @@ export function transformToWorkbookData(data: any, fileName?: string): any {
 	// Build worksheet data conforming to IWorksheetData
 	const worksheetData = {
 		id: sheetId,
-		name: "工作表1",
+		name: "Sheet1",
 		tabColor: "",
 		hidden: BooleanNumber.FALSE,
 		rowCount: rowCount,
@@ -380,7 +380,7 @@ export function transformToWorkbookData(data: any, fileName?: string): any {
 	// Build workbook data conforming to IWorkbookData
 	return {
 		id: workbookId,
-		name: fileName || "工作簿",
+		name: fileName || "Workbook",
 		appVersion: "0.5.0",
 		locale: "zh-CN",
 		styles: {},
@@ -461,7 +461,7 @@ export function transformToSlidesData(data: any, fileName?: string): any {
 		slides: {
 			slide1: {
 				id: "slide1",
-				title: "标题",
+				title: "Title",
 				pageElements: [],
 			},
 		},

@@ -40,10 +40,10 @@ function ExplorePage() {
 	const [expandPanelOpen, { setTrue: openExpandPanel, setFalse: closeExpandPanel }] =
 		useBoolean(false)
 
-	// 市场机器人
+	// Market bots
 	const { data: marketBots } = useBotStore((state) => state.useMarketBotList)()
 
-	// 内部机器人
+	// Internal bots
 	const { data: orgBots, isLoading: orgBotLoading } = useBotStore((state) => state.useOrgBotList)(
 		{ page: 1, pageSize: 100 },
 	)
@@ -70,30 +70,30 @@ function ExplorePage() {
 	// 	() => [
 	// 		{
 	// 			id: "1",
-	// 			link: "时下热门",
-	// 			title: "AI 办公助理集合1",
-	// 			desc: "判断王炸级AI 办公应该",
+	// 			link: "Trending Now",
+	// 			title: "AI Office Assistant Collection 1",
+	// 			desc: "Best-in-class AI Office",
 	// 			img: "",
 	// 		},
 	// 		{
 	// 			id: "2",
-	// 			link: "热门推荐",
-	// 			title: "AI 办公助理集合2",
-	// 			desc: "判断王炸级AI 办公应该",
+	// 			link: "Popular Recommendations",
+	// 			title: "AI Office Assistant Collection 2",
+	// 			desc: "Best-in-class AI Office",
 	// 			img: "",
 	// 		},
 	// 		{
 	// 			id: "3",
-	// 			link: "热门推荐",
-	// 			title: "AI 办公助理集合3",
-	// 			desc: "判断王炸级AI 办公应该",
+	// 			link: "Popular Recommendations",
+	// 			title: "AI Office Assistant Collection 3",
+	// 			desc: "Best-in-class AI Office",
 	// 			img: "",
 	// 		},
 	// 		{
 	// 			id: "4",
-	// 			link: "热门推荐",
-	// 			title: "AI 办公助理集合4",
-	// 			desc: "判断王炸级AI 办公应该",
+	// 			link: "Popular Recommendations",
+	// 			title: "AI Office Assistant Collection 4",
+	// 			desc: "Best-in-class AI Office",
 	// 			img: "",
 	// 		},
 	// 	],
@@ -115,11 +115,11 @@ function ExplorePage() {
 		async (cardData: PromptCardType, addAgent: boolean, isNavigate: boolean) => {
 			if (!cardData.id) return
 
-			// 是否添加助理
+			// Whether to add assistant
 			if (addAgent) {
 				const res = await BotApi.registerAndAddFriend(cardData.id)
 				message.success(`${t("button.add")}${t("flow.apiKey.success")}`)
-				// 是否会话
+				// Whether to chat
 				if (res && isNavigate) {
 					navigateConversation(res.user_id)
 				} else {

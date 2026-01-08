@@ -49,30 +49,30 @@ export default function Topic({
 	const [countdown, setCountdown] = useState(10)
 	// const [userDetail, , setUserDetail] = useState()
 
-	// 初始加载前10条消息
+	// Load first 10 messages initially
 	useEffect(() => {
 		if (data?.list?.length) {
-			// 只加载前10条消息，或者如果总条数少于10则全部加载
+			// Only load first 10 messages, or all if total is less than 10
 			const initialCount = Math.min(10, data.list.length)
 			const initialMessages = data.list.slice(0, initialCount)
 			setMessageList(initialMessages)
 		}
 	}, [data])
 
-	// 处理开始显示消息
+	// Handle starting to show messages
 	const startShowingMessages = useCallback(() => {
 		if (!data?.list?.length || hasStarted) return
 		setHasStarted(true)
 		setIsBottom(false)
-		// 确保清除任何现有的定时器
+		// Ensure clearing any existing timers
 		if (timerRef.current.timer) {
 			clearInterval(timerRef.current.timer)
 		}
 
-		// 清空消息列表，重新开始
+		// Clear message list and start over
 		setMessageList([])
 
-		// 从头开始加载消息
+		// Start loading messages from the beginning
 		let currentIndex = 0
 		timerRef.current.timer = setInterval(() => {
 			if (currentIndex < data.list.length) {
@@ -88,11 +88,11 @@ export default function Topic({
 		}, 400)
 	}, [data, hasStarted])
 
-	// 倒计时自动开始显示
+	// Countdown to auto-start showing
 	useEffect(() => {
 		if (hasStarted || !data?.list?.length) return undefined
 
-		// 清除任何现有的定时器
+		// Clear any existing timers
 		if (timerRef.current.countdownTimer) {
 			clearInterval(timerRef.current.countdownTimer)
 		}
@@ -115,18 +115,18 @@ export default function Topic({
 		}
 	}, [data, hasStarted, startShowingMessages, messageList])
 
-	// 滚动到消息列表的合适位置，确保初始消息可见
+	// Scroll to appropriate position in message list to ensure initial messages are visible
 	useEffect(() => {
 		if (messageList.length > 0 && !hasStarted) {
 			const container = messageContainerRef.current
 			if (container) {
-				// 滚动到50%高度位置，让上半部分消息可见
+				// Scroll to 30% height position to make upper messages visible
 				container.scrollTop = container.scrollHeight * 0.3
 			}
 		}
 	}, [messageList, hasStarted])
 
-	// 清理定时器
+	// Cleanup timers
 	useEffect(() => {
 		return () => {
 			if (timerRef.current.timer) {
@@ -145,7 +145,7 @@ export default function Topic({
 		[attachments],
 	)
 
-	const isAtBottomRef = useRef(true) // 👈 用 ref 保存旧的 isAtBottom 状态
+	const isAtBottomRef = useRef(true) // 👈 Use ref to save old isAtBottom state
 
 	useEffect(() => {
 		const el = messageContainerRef.current
@@ -160,7 +160,7 @@ export default function Topic({
 		return () => el.removeEventListener("scroll", handleScroll)
 	}, [messageList])
 
-	// 👇 2. 在 DOM 完成渲染后再判断要不要滚到底部
+	// 👇 2. After DOM rendering is complete, determine whether to scroll to bottom
 	useLayoutEffect(() => {
 		const el = messageContainerRef.current
 		if (!el) return
@@ -173,7 +173,7 @@ export default function Topic({
 				})
 			})
 		}
-	}, [messageList]) // 👈 注意：这里不能再判断 isScrolledToBottom，而是用之前记录的 isAtBottomRef
+	}, [messageList]) // 👈 Note: Cannot judge isScrolledToBottom here, use previously recorded isAtBottomRef instead
 
 	useEffect(() => {
 		if (messageList.length === data?.list?.length) {
@@ -181,15 +181,15 @@ export default function Topic({
 		}
 	}, [messageList.length, data?.list?.length])
 
-	// 当消息列表变化时，查找最后一条有task且task.process长度不为0的消息
+	// When message list changes, find the last message with task and task.process length not 0
 	useEffect(() => {
 		if (messageList && messageList.length > 0) {
-			// 从后往前遍历找到第一个符合条件的消息
+			// Traverse from back to front to find the first message that meets the condition
 			let foundTaskData = false
 			for (let i = messageList.length - 1; i >= 0; i -= 1) {
 				const message = messageList[i]
 				if (message?.steps && message?.steps?.length > 0) {
-					// 设置为当前任务数据
+					// Set as current task data
 					setTaskData({
 						process: message.steps,
 						topic_id: message.topic_id,
@@ -198,7 +198,7 @@ export default function Topic({
 					break
 				}
 			}
-			// 如果没有找到符合条件的消息，清空TaskData
+			// If no message meeting the condition is found, clear TaskData
 			if (!foundTaskData) {
 				setTaskData(null)
 			}
@@ -211,16 +211,16 @@ export default function Topic({
 				lastMessageWithTaskId?.status === "running" || lastMessage?.text?.content
 			setTaskIsEnd(!isLoading)
 		} else {
-			// 如果消息列表为空，也清空TaskData
+			// If message list is empty, also clear TaskData
 			setTaskData(null)
 		}
 	}, [messageList])
 
-	// 直接显示结果的处理：立即加载所有消息，停止倒计时
+	// Handle showing result directly: load all messages immediately, stop countdown
 	const handleShowResult = useCallback(() => {
 		setUserDetail({})
 		setHasStarted(true)
-		// 查找所有消息中带有详情的最后一条
+		// Find the last message with detail among all messages
 		const lastDetailItem = [...data.list]
 			.reverse()
 			.find((item) => item?.tool?.detail && !isEmpty(item.tool.detail))
@@ -228,7 +228,7 @@ export default function Topic({
 			setAutoDetail(lastDetailItem.tool.detail)
 		}
 
-		// 清除所有定时器
+		// Clear all timers
 		if (timerRef.current.timer) {
 			clearInterval(timerRef.current.timer)
 		}
@@ -236,10 +236,10 @@ export default function Topic({
 			clearInterval(timerRef.current.countdownTimer)
 		}
 
-		// 一次性设置所有消息
+		// Set all messages at once
 		setMessageList(data.list)
 
-		// 滚动到底部
+		// Scroll to bottom
 		requestAnimationFrame(() => {
 			const container = messageContainerRef.current
 			if (container) {
@@ -311,7 +311,7 @@ export default function Topic({
 							: ""
 					} ${!hasStarted ? styles.messageContainerNotStarted : ""}`}
 				>
-					<div className={styles.messageListHeader}>{resource_name || "默认话题"}</div>
+					<div className={styles.messageListHeader}>{resource_name || "Default Topic"}</div>
 					<div className={styles.messageListContainer} ref={messageContainerRef}>
 						<MessageList
 							messageList={messageList}
@@ -332,11 +332,11 @@ export default function Topic({
 					<div className={styles.footerContent}>
 						<div className={styles.footerLeft}>
 							<img src={FooterIcon} alt="" className={styles.footerIcon} />
-							<span>超级麦吉 {taskIsEnd ? "任务完成" : "正在执行任务..."}</span>
+						<span>Super Magi {taskIsEnd ? "Task completed" : "Executing task..."}</span>
 						</div>
 						{!isBottom ? (
 							<Button type="primary" onClick={handleShowResult}>
-								直接显示结果
+							Show results directly
 							</Button>
 						) : null}
 					</div>
@@ -351,18 +351,18 @@ export default function Topic({
 						</div>
 					</div>
 					<div className={styles.watingTitleWrapper}>
-						<div className={styles.watingTitle}>您正在查看任务 「{resource_name}」</div>
-					</div>
-					<div className={styles.waitingTextWrapper}>
-						<div className={styles.waitingText}>回放将在 {countdown} 秒后自动开始</div>
-					</div>
-					<Button
-						type="primary"
-						onClick={startShowingMessages}
-						className={styles.waitingButton}
-					>
-						立即查看
-					</Button>
+					<div className={styles.watingTitle}>You are viewing task 「{resource_name}」</div>
+				</div>
+				<div className={styles.waitingTextWrapper}>
+					<div className={styles.waitingText}>Playback will start automatically in {countdown} seconds</div>
+				</div>
+				<Button
+					type="primary"
+					onClick={startShowingMessages}
+					className={styles.waitingButton}
+				>
+					View now
+				</Button>
 				</div>
 			)}
 			<Popup
@@ -375,23 +375,23 @@ export default function Topic({
 			>
 				<SafeArea position="top" />
 				<div className={styles.menuContainer}>
-					<div className={styles.title}>导航</div>
+					<div className={styles.title}>Navigation</div>
 					{!isLogined ? (
 						<div className={styles.item} onClick={() => navigate("/login")}>
 							<IconLogin className={styles.icon} />
-							登录
+							Login
 						</div>
 					) : (
 						<div className={styles.item} onClick={() => navigate("/super/workspace")}>
 							<IconLayoutGrid className={styles.icon} />
-							进入工作区
+							Enter Workspace
 						</div>
 					)}
 				</div>
 				<div className={styles.menuContainer}>
-					<div className={styles.title}>话题</div>
+					<div className={styles.title}>Topic</div>
 					<div className={styles.item} onClick={() => setAttachmentVisible(true)}>
-						<IconFolder className={styles.icon} /> <span>查看话题文件</span>
+						<IconFolder className={styles.icon} /> <span>View topic files</span>
 					</div>
 				</div>
 				<SafeArea position="bottom" />

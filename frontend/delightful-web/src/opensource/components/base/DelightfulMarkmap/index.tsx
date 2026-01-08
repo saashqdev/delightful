@@ -67,7 +67,7 @@ const DelightfulMarkmap = memo(
 		)
 
 		const [fullScreenOpen, setFullScreenOpen] = useState(false)
-		/** 全屏逻辑 */
+		/** Fullscreen logic */
 		const handleFullScreen = useMemoizedFn(() => {
 			if (fullScreen) {
 				exitFullScreen?.()
@@ -76,7 +76,7 @@ const DelightfulMarkmap = memo(
 			}
 		})
 
-		/** 下载图片 */
+		/** Download image */
 		const handleDownloadPicture = useMemoizedFn(() => {
 			exportMarkmapToPng(data, 1920, 1080).then((blob) => {
 				const url = URL.createObjectURL(blob)

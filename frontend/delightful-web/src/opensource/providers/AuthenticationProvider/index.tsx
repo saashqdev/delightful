@@ -43,7 +43,7 @@ function AuthenticationProvider({ children }: PropsWithChildren) {
 		if (!access_token) {
 			throw new Error("authorization is null")
 		}
-		// deployCode 的获取从 账号体系直接获取用作兜底
+		// Get deployCode from account system to use as fallback
 		const { accounts } = userStore.account
 		const accountIndex = accounts.findIndex((account) => account.access_token === access_token)
 		// Priority: get external deployCode first, then use deployCode from account system as fallback

@@ -54,7 +54,7 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 		total: 0,
 	})
 
-	// 搜索处理 - 使用防抖
+	// Search handler - using debounce
 	const handleSearch = useMemoizedFn((value: string) => {
 		setSearchText(value)
 	})
@@ -63,17 +63,17 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 		storageType: "private",
 	})
 
-	/** 上传文件 */
+	/** Upload file */
 	const handleFileUpload = useMemoizedFn(async (file: File) => {
 		try {
-			// 上传文件
+			// Upload file
 			const newFile = genFileData(file)
-			// 已通过 beforeFileUpload 预校验，故传入 () => true 跳过方法校验
+			// Already passed beforeFileUpload pre-validation, so pass () => true to skip method validation
 			const { fullfilled } = await uploadAndGetFileUrl([newFile], () => true)
-			// 更新上传的文件列表状态
+			// Update uploaded file list state
 			if (fullfilled && fullfilled.length) {
 				const { path } = fullfilled[0].value
-				// 使用类型断言处理API调用
+				// Use type assertion to handle API call
 				const res = await (KnowledgeApi as any).addKnowledgeDocument({
 					knowledge_code: knowledgeBaseCode,
 					enabled: true,
@@ -95,13 +95,13 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 				}
 			}
 		} catch (error) {
-			console.error("上传文件失败:", error)
+			console.error("File upload failed:", error)
 			message.error(t("knowledgeDatabase.uploadFailed"))
 		}
 	})
 
 	/**
-	 * 获取知识库文档列表
+	 * Get knowledge base document list
 	 */
 	const getKnowledgeDocumentList = useMemoizedFn(
 		async (
@@ -115,7 +115,7 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 				if (showLoading) {
 					setLoading(true)
 				}
-				// 使用类型断言处理API调用
+				// Use type assertion to handle API call
 				const res = await (KnowledgeApi as any).getKnowledgeDocumentList({
 					code,
 					name: name || undefined,
@@ -123,37 +123,37 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 					pageSize,
 				})
 				if (res) {
-					// 只更新documentList中已有的文档
-					if (documentList.length > 0 && res.page !== pageInfo.page) {
-						// 创建文档编码映射，用于快速查找
+						// Only update existing documents in documentList
+						if (documentList.length > 0 && res.page !== pageInfo.page) {
+							// Create document code mapping for quick lookup
 						const documentListMap = new Map(
 							documentList.map((item) => [item.code, item]),
 						)
 
-						// 使用映射更新文档
+							// Use mapping to update documents
 						const updatedDocumentList = [...documentList]
 						let hasUpdates = false
 
 						res.list.forEach((newItem: Knowledge.EmbedDocumentDetail) => {
 							if (documentListMap.has(newItem.code)) {
-								// 找到当前文档在数组中的索引
-								const index = updatedDocumentList.findIndex(
-									(item) => item.code === newItem.code,
-								)
-								if (index !== -1) {
-									// 更新文档
+									// Find current document's index in array
+									const index = updatedDocumentList.findIndex(
+										(item) => item.code === newItem.code,
+									)
+									if (index !== -1) {
+										// Update document
 									updatedDocumentList[index] = newItem
 									hasUpdates = true
 								}
 							}
 						})
 
-						// 只有在有更新时才设置状态
+						// Only set state when there are updates
 						if (hasUpdates) {
 							setDocumentList(updatedDocumentList)
 						}
 					} else {
-						// 初始化时直接设置数据
+						// Set data directly on initialization
 						setDocumentList(res.list)
 					}
 
@@ -163,14 +163,14 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 					}))
 				}
 			} catch (error) {
-				console.error("获取知识库文档列表失败:", error)
+				console.error("Failed to get knowledge base document list:", error)
 			} finally {
 				setLoading(false)
 			}
 		},
 	)
 
-	// 使用 ahooks 的 useDebounceFn 替代自定义防抖
+	// Use ahooks' useDebounceFn instead of custom debounce
 	const { run: debouncedGetDocumentList } = useDebounceFn(
 		(
 			code: string,
@@ -184,7 +184,7 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 		{ wait: 300, leading: true, trailing: false },
 	)
 
-	// 使用抽离出来的文档操作hook
+	// Use extracted document operations hook
 	const {
 		handleEnableSingleFile,
 		handleDisableSingleFile,
@@ -200,10 +200,10 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 		setSelectedRowKeys,
 		pageInfo,
 		searchText,
-		getKnowledgeDocumentList: debouncedGetDocumentList, // 使用防抖版本的方法
+		getKnowledgeDocumentList: debouncedGetDocumentList, // Use debounced version of the method
 	})
 
-	// 获取文档状态标签
+	// Get document status tag
 	const getStatusTag = (syncStatus: number, record: Knowledge.EmbedDocumentDetail) => {
 		switch (syncStatus) {
 			case documentSyncStatusMap.Pending:
@@ -241,7 +241,7 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 		}
 	}
 
-	/** 跳转文档配置页面 */
+	/** Navigate to document configuration page */
 	const handleFileConfig = useMemoizedFn((record: Knowledge.EmbedDocumentDetail) => {
 		navigate(
 			`${RoutePath.VectorKnowledgeCreate}?knowledgeBaseCode=${knowledgeBaseCode}&documentCode=${record.code}`,
@@ -249,7 +249,7 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 	})
 
 	/**
-	 * 分页改变
+	 * Pagination change handler
 	 */
 	const handlePageChange = useMemoizedFn((page: number, pageSize: number) => {
 		setPageInfo((prev) => ({
@@ -259,15 +259,15 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 		}))
 	})
 
-	// 计算表格高度
+	// Calculate table height
 	useEffect(() => {
 		const calculateTableHeight = () => {
 			if (rightContainerRef.current && headerRef.current) {
 				const containerHeight = rightContainerRef.current.clientHeight
 				const headerHeight = headerRef.current.clientHeight
-				const tableHeaderHeight = 45 // 表格头部高度，根据实际调整
-				const paginationHeight = 64 // 分页器高度，根据实际调整
-				const padding = 40 // 根据实际内边距调整
+				const tableHeaderHeight = 45 // Table header height, adjust as needed
+				const paginationHeight = 64 // Pagination height, adjust as needed
+				const padding = 40 // Adjust according to actual padding
 				setTableHeight(
 					containerHeight - headerHeight - tableHeaderHeight - paginationHeight - padding,
 				)
@@ -282,7 +282,7 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 		}
 	}, [])
 
-	// 获取知识库文档列表
+	// Get knowledge base document list
 	useEffect(() => {
 		if (knowledgeBaseCode) {
 			debouncedGetDocumentList(
@@ -294,7 +294,7 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 		}
 	}, [knowledgeBaseCode, searchText, pageInfo.page, pageInfo.pageSize])
 
-	// 定时刷新文档列表
+	// Periodically refresh document list
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
 	useEffect(() => {
@@ -306,33 +306,28 @@ export default function Document({ className, knowledgeBaseCode, userOperation }
 				),
 			)
 		) {
-			// 清除之前的timeout
+			// Clear previous timeout
 			if (timeoutRef.current) {
 				clearTimeout(timeoutRef.current)
 			}
 
-			// 设置新的timeout并保存引用
+			// Set new timeout and save reference
 			timeoutRef.current = setTimeout(() => {
-				// 轮询请求不显示loading
+				// Polling request doesn't show loading
 				debouncedGetDocumentList(
 					knowledgeBaseCode,
 					searchText,
 					pageInfo.page,
 					pageInfo.pageSize,
-					false,
-				)
-			}, 5000)
-		}
+				false,
+			)
+		}, 5000)
+	}
 
-		// 组件卸载时清除timeout
-		return () => {
-			if (timeoutRef.current) {
-				clearTimeout(timeoutRef.current)
-			}
-		}
+	// Clear timeout when component unmounts
 	}, [documentList])
 
-	// 表格列定义
+	// Table column definitions
 	const columns = [
 		{
 			title: t("knowledgeDatabase.documentTitle"),

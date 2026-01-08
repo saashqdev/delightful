@@ -16,9 +16,9 @@ export interface AppearanceState {
 	imStyle: IMStyle
 	chatFontSize: number
 	aiCompletion: boolean
-	/** 全局快捷键管理 */
+	/** Global shortcut key management */
 	shortcutKey?: {
-		/** 全局搜索快捷键 */
+		/** Global search shortcut key */
 		globalSearch?: Array<number> | null
 	}
 }

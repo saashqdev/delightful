@@ -160,7 +160,7 @@ function BindOpenApiAccount({ flowId, open, onClose }: BindOpenApiAccountProps) 
 	})
 	return (
 		<DelightfulModal
-			title="授权应用"
+			title="Authorize Application"
 			open={open}
 			onOk={handleOk}
 			onCancel={handleCancel}
@@ -177,8 +177,8 @@ function BindOpenApiAccount({ flowId, open, onClose }: BindOpenApiAccountProps) 
 				className={styles.form}
 			>
 				<Form.Item
-					label="新增应用"
-					extra="选中即新增"
+					label="Add Application"
+					extra="Select to add"
 					required
 					rules={[{ required: true }]}
 				>
@@ -194,7 +194,7 @@ function BindOpenApiAccount({ flowId, open, onClose }: BindOpenApiAccountProps) 
 					</Flex>
 				</Form.Item>
 				<DelightfulSpin section spinning={isLoading}>
-					<Form.Item label="已添加应用">
+					<Form.Item label="Added Applications">
 						<Form.List name="bind">
 							{(subFields) => (
 								<div
@@ -236,7 +236,7 @@ function BindOpenApiAccount({ flowId, open, onClose }: BindOpenApiAccountProps) 
 													)}
 													<span>{fieldData.name}</span>
 												</Flex>
-												<Tooltip title={`移除${fieldData.name}`}>
+											<Tooltip title={`Remove ${fieldData.name}`}>
 													<DelightfulIcon
 														component={IconX}
 														className={styles.iconX}

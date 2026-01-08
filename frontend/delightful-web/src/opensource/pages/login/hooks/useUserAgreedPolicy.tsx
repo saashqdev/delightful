@@ -27,7 +27,7 @@ export function useUserAgreedPolicy() {
 
 	const [agree, setAgree] = useState(false)
 
-	// 下一步之前，需要用户同意协议
+	// Before proceeding to the next step, the user needs to agree to the policy
 	const triggerUserAgreedPolicy = useMemoizedFn(() => {
 		if (agree) {
 			return Promise.resolve()

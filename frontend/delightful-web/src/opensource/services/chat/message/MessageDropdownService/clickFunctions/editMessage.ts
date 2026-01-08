@@ -1,6 +1,6 @@
 /**
- * 编辑消息
- * @param messageId 消息ID
+ * Edit message
+ * @param messageId Message ID
  */
 const editMessage = (messageId: string) => {
 	console.log("editMessage", messageId)

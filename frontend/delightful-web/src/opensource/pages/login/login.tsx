@@ -26,11 +26,11 @@ function LoginPage() {
 
 	const [form] = Form.useForm<LoginFormValuesMap[Login.LoginType.MobilePhonePassword]>()
 
-	// 登录流程
+	// Login flow
 	const redirect = useMemoizedFn(() => {
 		const url = new URL(window.location.href)
 		const { searchParams } = url
-		/** 从定向URL这里，如果是站点外就需要考虑是否需要携带 */
+		/** Redirect URL here, if it's an external site, need to consider whether to carry parameters */
 		const redirectURI = searchParams.get(LoginValueKey.REDIRECT_URL)
 		if (redirectURI) {
 			window.location.assign(decodeURIComponent(redirectURI))
@@ -39,7 +39,7 @@ function LoginPage() {
 		}
 	})
 
-	// 提交数据，统一处理不同登录方式的逻辑
+	// Submit data, uniformly handle logic for different login methods
 	const { run: onSubmit } = useDebounceFn<OnSubmitFn<Login.LoginType.MobilePhonePassword>>(
 		async (
 			type: Login.LoginType.MobilePhonePassword,
@@ -68,7 +68,7 @@ function LoginPage() {
 					})
 					.then(delightfulOrgSyncStep)
 					.then(async (userInfo) => {
-						// 环境同步
+					// Environment synchronization
 						await loginService.syncClusterConfig()
 						return Promise.resolve(userInfo)
 					})
@@ -83,7 +83,7 @@ function LoginPage() {
 					.catch((error) => {
 						console.error("error", error?.message)
 						if (error.code === 3102) {
-							// 用户未创建账号，跳转邀请界面
+						// User has not created an account, redirect to invitation page
 							navigate(RoutePath.Invite, { replace: true })
 						}
 					})

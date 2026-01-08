@@ -46,14 +46,14 @@ class MessageImagePreview {
 	 */
 	copyImage(dom: HTMLImageElement | HTMLCanvasElement) {
 		try {
-			// 处理HTMLImageElement类型
+			// Handle HTMLImageElement type
 			if (dom instanceof HTMLImageElement) {
-				// 创建一个临时canvas
+				// Create a temporary canvas
 				const canvas = document.createElement("canvas")
 				canvas.width = dom.naturalWidth || dom.width
 				canvas.height = dom.naturalHeight || dom.height
 
-				// 创建新图像避免跨域问题
+				// Create new image to avoid cross-origin issues
 				const img = new Image()
 				img.crossOrigin = "anonymous"
 				img.onload = () => {
@@ -67,7 +67,7 @@ class MessageImagePreview {
 				return
 			}
 
-			// 处理HTMLCanvasElement类型
+			// Handle HTMLCanvasElement type
 			if (dom instanceof HTMLCanvasElement) {
 				this.copyCanvasToClipboard(dom)
 				return
@@ -82,7 +82,7 @@ class MessageImagePreview {
 	 * @param canvas Canvas element
 	 */
 	private copyCanvasToClipboard(canvas: HTMLCanvasElement) {
-		// 尝试使用标准Clipboard API
+		// Try using standard Clipboard API
 		canvas.toBlob((blob) => {
 			if (!blob) return
 

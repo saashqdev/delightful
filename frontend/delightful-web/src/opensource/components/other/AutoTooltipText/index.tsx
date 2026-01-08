@@ -36,7 +36,7 @@ function RawAutoTooltipText({
 		}
 	})
 	useEffect(() => {
-		// 第一次进入页面也需要知道文本是否溢出
+		// Need to know if text overflows on first page entry
 		handleEllipsis()
 
 		const windowChange = debounce({ delay: 500 }, handleEllipsis)

@@ -198,7 +198,7 @@ const useStyles = createStyles(({ token }) => ({
 		flex: "auto",
 		overflow: "auto",
 	},
-	// 新建话题按钮样式
+	// New topic button style
 	newTopicButton: {
 		display: "flex",
 		alignItems: "center",

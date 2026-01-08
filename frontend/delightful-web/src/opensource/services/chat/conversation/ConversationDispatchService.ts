@@ -2,15 +2,15 @@ import ConversationStore from "@/opensource/stores/chatNew/conversation"
 
 class ConversationDsipatchService {
 	/**
-	 * 置顶会话
+	 * Pin conversation
 	 */
 	setTopConversationStatus(conversationId: string, isTop: 0 | 1) {
-		// 更新会话状态（包含分组移动逻辑）
+		// Update conversation state (includes group move logic)
 		ConversationStore.updateTopStatus(conversationId, isTop)
 	}
 
 	/**
-	 * 设置会话免打扰状态
+	 * Set conversation do not disturb status
 	 */
 	setNotDisturbStatus(conversationId: string, isNotDisturb: 0 | 1) {
 		ConversationStore.updateConversationDisturbStatus(conversationId, isNotDisturb)

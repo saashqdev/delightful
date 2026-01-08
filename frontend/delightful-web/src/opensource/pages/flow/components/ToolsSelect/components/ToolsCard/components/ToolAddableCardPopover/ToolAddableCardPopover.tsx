@@ -30,7 +30,7 @@ const ToolAddableCardPopover = forwardRef<ToolAddableCardPopoverRef, ToolAddable
 			setVisible(open)
 
 			if (open && !toolInputOutputMap?.[tool.code]) {
-				// 更新inputOutput的map
+				// Update inputOutput map
 				FlowApi.getAvailableTools([tool.code]).then((response) => {
 					if (response.list.length > 0) {
 						const targetTool = response.list[0]

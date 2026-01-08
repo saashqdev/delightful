@@ -88,14 +88,14 @@ export default function PublishFlowButton({
 
 	const initialValues = useMemo(() => {
 		return {
-			name: `${flow?.name}_版本${publishList.length + 1}`,
+			name: `${flow?.name}_version${publishList.length + 1}`,
 			description: "",
 		}
 	}, [publishList.length, flow?.name])
 
 	useUpdateEffect(() => {
 		form.setFieldsValue({
-			name: `${flow?.name}_版本${publishList.length + 1}`,
+			name: `${flow?.name}_version${publishList.length + 1}`,
 		})
 	}, [publishList.length, flow])
 
@@ -114,16 +114,16 @@ export default function PublishFlowButton({
 
 			<DelightfulModal
 				className={antdStyles.antdModal}
-				title="填写版本信息"
+				title="Fill in version information"
 				open={open}
 				onOk={handleOk}
 				onCancel={handleCancel}
 			>
 				<Form form={form} className={styles.form} initialValues={initialValues}>
-					<Form.Item name="name" label="版本名称">
+					<Form.Item name="name" label="Version name">
 						<DelightfulInput />
 					</Form.Item>
-					<Form.Item name="description" label="版本描述">
+					<Form.Item name="description" label="Version description">
 						<DelightfulInput.TextArea />
 					</Form.Item>
 				</Form>

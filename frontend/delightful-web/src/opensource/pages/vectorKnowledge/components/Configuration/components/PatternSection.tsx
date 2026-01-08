@@ -16,7 +16,7 @@ interface PatternSectionProps {
 }
 
 /**
- * 通用模式选择区块组件
+ * Generic pattern selection section component
  */
 export default function PatternSection({
 	title,
@@ -29,7 +29,7 @@ export default function PatternSection({
 }: PatternSectionProps) {
 	const { styles } = useVectorKnowledgeConfigurationStyles()
 
-	// 根据iconColor选择样式
+	// Select style based on iconColor
 	const getIconColorClass = () => {
 		switch (iconColor) {
 			case "blue":

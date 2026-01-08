@@ -22,23 +22,23 @@ export default function VectorKnowledgeEmbed({ knowledgeBaseCode }: VectorKnowle
 	const { t } = useTranslation("flow")
 	const navigate = useNavigate()
 
-	/** 知识库详情 */
+	/** Knowledge base details */
 	const [createdKnowledge, setCreatedKnowledge] = useState<Knowledge.Detail>()
-	/** 是否嵌入完成 */
+	/** Whether embedding is complete */
 	const [isEmbed, setIsEmbed] = useState(false)
-	/** 知识库文档列表 */
+	/** Knowledge base document list */
 	const [documentList, setDocumentList] = useState<Knowledge.EmbedDocumentDetail[]>([])
-	/** 轮询定时器引用 */
+	/** Polling timer reference */
 	const timerRef = useRef<NodeJS.Timeout | null>(null)
-	/** 数据是否已加载 */
+	/** Whether data is loaded */
 	const [isLoading, setIsLoading] = useState(true)
 
-	/** 查看知识库 - 跳转至详情页 */
+	/** View knowledge base - navigate to details page */
 	const handleViewKnowledge = useMemoizedFn(() => {
 		navigate(`${RoutePath.VectorKnowledgeDetail}?code=${knowledgeBaseCode}`)
 	})
 
-	/** 获取文档同步状态图标 */
+	/** Get document sync status icon */
 	const getStatusIcon = (syncStatus: documentSyncStatusMap) => {
 		switch (syncStatus) {
 			case documentSyncStatusMap.Pending:
@@ -51,7 +51,7 @@ export default function VectorKnowledgeEmbed({ knowledgeBaseCode }: VectorKnowle
 		}
 	}
 
-	/** 更新知识库文档列表的嵌入状态 */
+	/** Update knowledge base document list embedding status */
 	const updateKnowledgeDocumentList = useMemoizedFn(async () => {
 		try {
 			const res = await KnowledgeApi.getKnowledgeDocumentList({
@@ -76,42 +76,42 @@ export default function VectorKnowledgeEmbed({ knowledgeBaseCode }: VectorKnowle
 	})
 
 	/**
-	 * 更新知识库详情
+	 * Update knowledge base details
 	 */
 	const getKnowledgeDetail = useMemoizedFn(async (code: string) => {
 		try {
 			const res = await KnowledgeApi.getKnowledgeDetail(code)
 			if (res) {
 				setCreatedKnowledge(res)
-				setIsLoading(false) // 数据加载完成
+				setIsLoading(false) // Data loading complete
 			}
 		} catch (error) {
-			console.error("获取知识库详情失败", error)
-			setIsLoading(false) // 即使出错也标记为加载完成
+			console.error("Failed to get knowledge base details", error)
+			setIsLoading(false) // Mark as loading complete even on error
 		}
 	})
 
-	// 获取知识库详情
+	// Get knowledge base details
 	useEffect(() => {
 		if (knowledgeBaseCode) {
 			getKnowledgeDetail(knowledgeBaseCode)
 		}
 	}, [knowledgeBaseCode])
 
-	/** 开始轮询 */
+	/** Start polling */
 	const startPolling = useMemoizedFn(() => {
-		// 随机2-5秒
+		// Random 2-5 seconds
 		const randomTime = Math.floor(Math.random() * (5000 - 2000 + 1)) + 2000
 		timerRef.current = setTimeout(async () => {
 			await updateKnowledgeDocumentList()
-			// 如果还没嵌入完成，继续轮询
+			// If embedding not complete yet, continue polling
 			if (!isEmbed) {
 				startPolling()
 			}
 		}, randomTime)
 	})
 
-	/** 停止轮询 */
+	/** Stop polling */
 	const stopPolling = useMemoizedFn(() => {
 		if (timerRef.current) {
 			clearTimeout(timerRef.current)
@@ -119,20 +119,20 @@ export default function VectorKnowledgeEmbed({ knowledgeBaseCode }: VectorKnowle
 		}
 	})
 
-	// 组件挂载时开始轮询，组件卸载或isEmbed为true时停止轮询
+	// Start polling when component mounts, stop when component unmounts or isEmbed is true
 	useEffect(() => {
-		// 初始调用一次接口
+		// Initial API call
 		updateKnowledgeDocumentList()
-		// 开始轮询
+		// Start polling
 		startPolling()
 
-		// 组件卸载时清除定时器
+		// Clear timer when component unmounts
 		return () => {
 			stopPolling()
 		}
 	}, [])
 
-	// 当isEmbed状态变为true时，停止轮询
+	// Stop polling when isEmbed status becomes true
 	useEffect(() => {
 		if (isEmbed) {
 			stopPolling()

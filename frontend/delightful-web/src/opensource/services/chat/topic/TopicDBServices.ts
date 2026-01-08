@@ -117,8 +117,8 @@ class TopicDBServices {
 	}
 
 	/**
-	 * 批量添加话题
-	 * @param topics 话题列表
+	 * Batch add topics
+	 * @param topics Topic list
 	 */
 	async bulkAddTopics(topics: Topic[]) {
 		if (topics.length === 0) return

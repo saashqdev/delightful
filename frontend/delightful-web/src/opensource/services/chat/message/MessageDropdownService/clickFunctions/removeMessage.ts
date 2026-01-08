@@ -2,8 +2,8 @@ import MessageService from "../../MessageService"
 import MessageDropdownStore from "@/opensource/stores/chatNew/messageUI/Dropdown"
 
 /**
- * 删除消息
- * @param messageId 消息ID
+ * Remove message
+ * @param messageId Message ID
  */
 function removeMessage(messageId: string) {
 	console.log("removeMessage", messageId)

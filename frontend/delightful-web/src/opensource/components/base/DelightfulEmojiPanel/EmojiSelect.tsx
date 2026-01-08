@@ -44,7 +44,7 @@ const EmojiSelect = memo(
 			if (pressTimeoutRef.current) {
 				clearTimeout(pressTimeoutRef.current)
 			}
-			// 如果 popover 没有打开，说明是短按，触发 click 事件
+			// If popover is not open, it's a short press, trigger click event
 			if (!popverOpen) {
 				onEmojiClick?.({
 					code: config.code,

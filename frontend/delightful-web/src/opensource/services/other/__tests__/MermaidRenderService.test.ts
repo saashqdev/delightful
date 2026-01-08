@@ -173,7 +173,7 @@ describe("MermaidRenderService", () => {
 
 			// Wait for async operation to complete and check error handling
 			await new Promise((resolve) => setTimeout(resolve, 10))
-			expect(consoleSpy).toHaveBeenCalledWith("缓存失败", expect.any(Error))
+			expect(consoleSpy).toHaveBeenCalledWith("Cache failed", expect.any(Error))
 			consoleSpy.mockRestore()
 		})
 	})
@@ -276,24 +276,24 @@ describe("MermaidRenderService", () => {
 
 		it("should replace Chinese punctuation with English punctuation", () => {
 			// Arrange
-			const input = "这是一个测试，包含中文符号：分号；感叹号！问号？"
+			const input = "This is a test, contains Chinese symbols: semicolon; exclamation! question?"
 
 			// Act
 			const result = service.fix(input)
 
 			// Assert
-			expect(result).toBe("这是一个测试, 包含中文符号: 分号; 感叹号! 问号? ")
+			expect(result).toBe("This is a test, contains Chinese symbols: semicolon; exclamation! question? ")
 		})
 
 		it("should replace Chinese brackets and quotes", () => {
 			// Arrange
-			const input = '测试（括号）和"引号"以及【方括号】'
+			const input = 'Test (parentheses) and"quotes"also【square brackets】'
 
 			// Act
 			const result = service.fix(input)
 
 			// Assert
-			expect(result).toBe('测试 (括号) 和"引号"以及 [方括号] ')
+			expect(result).toBe('Test (parentheses) and"quotes"also [square brackets] ')
 		})
 
 		it("should replace Chinese symbols with their equivalents", () => {
@@ -304,18 +304,18 @@ describe("MermaidRenderService", () => {
 			const result = service.fix(input)
 
 			// Assert
-			expect(result).toBe("Temperature: 25度C, Price: 元100")
+			expect(result).toBe("Temperature: 25degrees C, Price: yuan100")
 		})
 
 		it("should handle mixed Chinese and English punctuation", () => {
 			// Arrange
-			const input = "Hello，世界！This is a test。"
+			const input = "Hello, world! This is a test."
 
 			// Act
 			const result = service.fix(input)
 
 			// Assert
-			expect(result).toBe("Hello, 世界! This is a test.")
+			expect(result).toBe("Hello, world! This is a test.")
 		})
 
 		it("should preserve text without Chinese punctuation", () => {
@@ -331,99 +331,99 @@ describe("MermaidRenderService", () => {
 
 		it("should handle special characters correctly", () => {
 			// Arrange
-			const input = "连接符-和波浪号~保持不变"
+			const input = "Hyphen-and tilde~ remain unchanged"
 
 			// Act
 			const result = service.fix(input)
 
 			// Assert
-			expect(result).toBe("连接符-和波浪号~保持不变")
+			expect(result).toBe("Hyphen-and tilde~ remain unchanged")
 		})
 
 		it("should handle multiple occurrences of the same punctuation", () => {
 			// Arrange
-			const input = "多个，逗号，测试，结果。"
+			const input = "Multiple, commas, test, result."
 
 			// Act
 			const result = service.fix(input)
 
 			// Assert
-			expect(result).toBe("多个, 逗号, 测试, 结果.")
+			expect(result).toBe("Multiple, commas, test, result.")
 		})
 
 		it("should fix Chinese punctuation in gantt chart with talent development plan", () => {
 			// Arrange
 			const input = `gantt
-       title 移动端人才梯队建设计划
+       title Mobile Talent Pipeline Development Plan
        dateFormat  YYYY-Q
-       section iOS开发
-       导师制培养        ：active,  des1, 2023-Q3, 2024-Q1
-       外部大牛工作坊    ：         des2, 2024-Q2, 2024-Q3
-       section Flutter架构
-       技术攻关小组      ：         des3, 2023-Q4, 2024-Q2`
+       section iOS Development
+       Mentorship Training        : active,  des1, 2023-Q3, 2024-Q1
+       External Expert Workshop    :          des2, 2024-Q2, 2024-Q3
+       section Flutter Architecture
+       Tech Research Team      :          des3, 2023-Q4, 2024-Q2`
 
 			// Act
 			const result = service.fix(input)
 
 			// Assert
 			expect(result).toBe(`gantt
-       title 移动端人才梯队建设计划
+       title Mobile Talent Pipeline Development Plan
        dateFormat  YYYY-Q
-       section iOS开发
-       导师制培养        : active,  des1, 2023-Q3, 2024-Q1
-       外部大牛工作坊    :          des2, 2024-Q2, 2024-Q3
-       section Flutter架构
-       技术攻关小组      :          des3, 2023-Q4, 2024-Q2`)
+       section iOS Development
+       Mentorship Training        : active,  des1, 2023-Q3, 2024-Q1
+       External Expert Workshop    :          des2, 2024-Q2, 2024-Q3
+       section Flutter Architecture
+       Tech Research Team      :          des3, 2023-Q4, 2024-Q2`)
 		})
 
 		it("should fix Chinese punctuation in pie chart with talent distribution", () => {
 			// Arrange
 			const input = `pie
-    title 人才盘点九宫格分布
-    "超级明星（3%）" ： 6
-    "绩效之星（12%）" ： 22
-    "中坚力量（28%）" ： 52
-    "熟练员工（25%）" ： 47
-    "稳定员工（20%）" ： 37
-    "潜力之星（8%）" ： 15
-    "待发展者（3%）" ： 6
-    "差距员工（1%）" ： 2`
+    title Talent Assessment Grid Distribution
+    "Superstars (3%) " :  6
+    "Performance Stars (12%) " :  22
+    "Core Force (28%) " :  52
+    "Skilled Employees (25%) " :  47
+    "Stable Employees (20%) " :  37
+    "Potential Stars (8%) " :  15
+    "To Develop (3%) " :  6
+    "Gap Employees (1%) " :  2`
 
 			// Act
 			const result = service.fix(input)
 
 			// Assert
 			expect(result).toBe(`pie
-    title 人才盘点九宫格分布
-    "超级明星 (3%) " :  6
-    "绩效之星 (12%) " :  22
-    "中坚力量 (28%) " :  52
-    "熟练员工 (25%) " :  47
-    "稳定员工 (20%) " :  37
-    "潜力之星 (8%) " :  15
-    "待发展者 (3%) " :  6
-    "差距员工 (1%) " :  2`)
+    title Talent Assessment Grid Distribution
+    "Superstars (3%) " :  6
+    "Performance Stars (12%) " :  22
+    "Core Force (28%) " :  52
+    "Skilled Employees (25%) " :  47
+    "Stable Employees (20%) " :  37
+    "Potential Stars (8%) " :  15
+    "To Develop (3%) " :  6
+    "Gap Employees (1%) " :  2`)
 		})
 
 		it("should fix Chinese punctuation in gantt chart with ROI analysis", () => {
 			// Arrange
 			const input = `gantt
-    title 人力ROI分析模型
-    section 关键指标
-    人才留存率 ：a1, 2023-07, 30d
-    高潜投产比 ：a2, after a1, 45d
-    离职成本预警 ：a3, after a2, 20d`
+    title HR ROI Analysis Model
+    section Key Metrics
+    Talent Retention Rate : a1, 2023-07, 30d
+    High Potential ROI : a2, after a1, 45d
+    Turnover Cost Alert : a3, after a2, 20d`
 
 			// Act
 			const result = service.fix(input)
 
 			// Assert
 			expect(result).toBe(`gantt
-    title 人力ROI分析模型
-    section 关键指标
-    人才留存率 : a1, 2023-07, 30d
-    高潜投产比 : a2, after a1, 45d
-    离职成本预警 : a3, after a2, 20d`)
+    title HR ROI Analysis Model
+    section Key Metrics
+    Talent Retention Rate : a1, 2023-07, 30d
+    High Potential ROI : a2, after a1, 45d
+    Turnover Cost Alert : a3, after a2, 20d`)
 		})
 	})
 })

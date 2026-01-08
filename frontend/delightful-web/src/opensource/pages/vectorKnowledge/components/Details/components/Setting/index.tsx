@@ -31,13 +31,10 @@ export default function Setting({ knowledgeBase, updateKnowledgeDetail }: Props)
 		retrieve_config: RetrieveConfig
 	}>()
 
-	// 校验：监听表单name字段，以判断是否可以保存
-	const formName = Form.useWatch(["name"], form)
-
-	const { embeddingModelOptions } = useEmbeddingModels()
+	// Validation: Monitor form name field to determine if saving is allowed
 
 	/**
-	 * 重置
+	 * Reset
 	 */
 	const handleReset = useMemoizedFn(async (showMessage = true) => {
 		form.setFieldsValue({
@@ -52,7 +49,7 @@ export default function Setting({ knowledgeBase, updateKnowledgeDetail }: Props)
 	})
 
 	/**
-	 * 保存
+	 * Save
 	 */
 	const handleSave = useMemoizedFn(async () => {
 		try {
@@ -85,7 +82,7 @@ export default function Setting({ knowledgeBase, updateKnowledgeDetail }: Props)
 		<Form form={form} layout="vertical">
 			<div className={styles.settingTitle}>{t("knowledgeDatabase.setting")}</div>
 			<Flex vertical gap={14} className={styles.settingContent}>
-				{/* 图标 */}
+				{/* Icon */}
 				<Flex align="center" justify="space-between">
 					<div className={cx(styles.required, styles.settingLabel)}>
 						{t("knowledgeDatabase.icon")}
@@ -100,7 +97,7 @@ export default function Setting({ knowledgeBase, updateKnowledgeDetail }: Props)
 					)}
 				</Flex>
 
-				{/* 知识库名称 */}
+				{/* Knowledge base name */}
 				<Flex align="flex-start" justify="space-between">
 					<div className={cx(styles.required, styles.settingLabel)}>
 						{t("knowledgeDatabase.knowledgeName")}
@@ -115,7 +112,7 @@ export default function Setting({ knowledgeBase, updateKnowledgeDetail }: Props)
 					</div>
 				</Flex>
 
-				{/* 描述 */}
+				{/* Description */}
 				<Flex align="flex-start" justify="space-between">
 					<div className={styles.settingLabel}>{t("knowledgeDatabase.description")}</div>
 					<div className={styles.settingValue}>
@@ -129,7 +126,7 @@ export default function Setting({ knowledgeBase, updateKnowledgeDetail }: Props)
 					</div>
 				</Flex>
 
-				{/* Embedding模型 */}
+				{/* Embedding model */}
 				<Flex align="flex-start" justify="space-between">
 					<div className={styles.settingLabel}>
 						{t("knowledgeDatabase.embeddingModel")}
@@ -145,18 +142,18 @@ export default function Setting({ knowledgeBase, updateKnowledgeDetail }: Props)
 					</div>
 				</Flex>
 
-				{/* 检索设置 */}
+				{/* Retrieval settings */}
 				<Flex align="flex-start" justify="space-between">
 					<div className={styles.settingLabel}>
 						{t("knowledgeDatabase.searchSettings")}
 					</div>
 					<div className={styles.settingValue}>
-						{/* 检索设置组 */}
+						{/* Retrieval settings group */}
 						<SearchSettingsGroup />
 					</div>
 				</Flex>
 
-				{/* 重置、保存按钮 */}
+				{/* Reset and save buttons */}
 				{hasEditRight(knowledgeBase.user_operation) && (
 					<Flex justify="end" gap={10}>
 						<Button className={styles.resetButton} onClick={handleReset}>

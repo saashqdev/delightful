@@ -237,7 +237,7 @@ class AiCompletionService {
 					}
 				})
 				.catch((e) => {
-					console.error("获取AI建议词失败:", e)
+					console.error("Failed to get AI suggestions:", e)
 				})
 		},
 		200,

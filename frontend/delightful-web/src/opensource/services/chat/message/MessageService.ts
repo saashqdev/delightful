@@ -183,7 +183,7 @@ class MessageService {
 
 		console.log("messages init ====> ", data)
 
-		// 当前一定是第一页
+		// This must be the first page
 		MessageStore.setPageConfig(1, data.totalPages ?? 1)
 		this.checkMessageAttachmentExpired(data.messages)
 		MessageStore.setMessages(conversationId, topicId, data.messages ?? [])
@@ -222,7 +222,7 @@ class MessageService {
 		const messageIds = messages.map((message) => message.message_id)
 		ChatApi.seenMessages(messageIds).then(({ data: response }) => {
 			response?.forEach(({ seq: item }) => {
-				// 标记为 0，认为该消息已经已读，后续不再发送
+				// Mark as 0, consider this message as read, will not send again
 				this.updateMessageUnreadCount(
 					item.conversation_id,
 					item.message.topic_id ?? "",
@@ -287,7 +287,7 @@ class MessageService {
 
 		let senderInfo = currentUserInfo
 		if (!isSelf) {
-			// 获取发送者信息
+			// Get sender information
 			senderInfo = this.getUserInfo(message.message.sender_id)
 		}
 
@@ -385,7 +385,7 @@ class MessageService {
 			data = await this.getMessagesByPage(
 				conversationId,
 				topicId,
-				MessageStore.page + 1, // 下一页
+				MessageStore.page + 1, // next page
 				MessageStore.pageSize,
 			)
 
@@ -501,7 +501,7 @@ class MessageService {
 	 * @param message Message
 	 */
 	public async addPendingMessage(message: ConversationMessageSend) {
-		// 已经存在不需重复添加
+		// Already exists, no need to add again
 		if (this.pendingMessages.has(message.message_id)) {
 			return
 		}
@@ -572,19 +572,19 @@ class MessageService {
 
 		if (currentConversation?.id === conversationId) {
 			MessageStore.addSendMessage(renderMessage)
-			console.log("发送消息到当前会话", conversationId, "消息ID", sendId)
+			console.log("Sending message to current conversation", conversationId, "message ID", sendId)
 		} else {
 			console.log(
-				"发送消息到非当前会话",
+				"Sending message to non-current conversation",
 				conversationId,
-				"当前会话",
+				"current conversation",
 				currentConversation?.id,
-				"消息ID",
+				"message ID",
 				sendId,
 			)
 		}
 		// Send
-		console.log("发送消息 ========> ", message)
+		console.log("sending message ========> ", message)
 		this.send(conversationId, referMessageId, message)
 		// Broadcast
 		BroadcastChannelSender.addSendMessage(renderMessage, message)
@@ -612,7 +612,7 @@ class MessageService {
 			.then(({ data: response }) => {
 				if (!isUndefined(response)) {
 					console.log(
-						"消息发送成功，更新状态",
+						"Message sent successfully, updating status",
 						"response:",
 						response,
 						"message:",
@@ -620,24 +620,24 @@ class MessageService {
 					)
 					const tempId = message.message_id
 					MessageStore.updateMessageSendStatus(tempId, SendStatus.Success)
-					// 更新数据中pending的状态
+					// Update pending status in data
 					this.updatePendingMessageStatus(tempId, SendStatus.Success)
 					this.addReceivedMessage(response.seq as SeqResponse<ConversationMessage>)
-					console.log("发送成功，更新消息状态", response.seq)
-					// 更新数据库
+					console.log("Sent successfully, update message status", response.seq)
+					// Update database
 					// this.messageDbService.addMessage(message.conversation_id, response.seq)
-					// 广播，更新状态和消息
+					// Broadcast, update status and message
 					BroadcastChannelSender.updateSendMessage(
 						response.seq as SeqResponse<ConversationMessage>,
 						SendStatus.Success,
 					)
-					// 拉取离线消息
+					// Pull offline messages
 					this.messagePullService.pullOfflineMessages(response.seq.seq_id)
 				}
 			})
 			.catch((err) => {
 				// Sending failed
-				console.log("发送失败 ======> ", message)
+				console.log("Send failed ======> ", message)
 				MessageStore.updateMessageSendStatus(message.message_id, SendStatus.Failed)
 				// Broadcast
 				BroadcastChannelSender.updateMessageStatus(message.message_id, SendStatus.Failed)
@@ -753,10 +753,10 @@ class MessageService {
 		// TODO: Detect message type automatically
 		const { normalValue, onlyTextContent, jsonValue, files } = data
 		if (onlyTextContent) {
-			if (!normalValue) {
+				if (!normalValue) {
 				// If only files present, send files only
 				if (files.length > 0) {
-					console.log("发送文件消息", files)
+					console.log("Sending file message", files)
 					this.formatAndSendMessage(
 						conversationId,
 						{
@@ -820,7 +820,7 @@ class MessageService {
 				jsonValue.content[0].content?.length === 1 &&
 				jsonValue.content[0].content[0].type === "image"
 			) {
-				console.log("发送图片消息", jsonValue)
+				console.log("Sending image message", jsonValue)
 				const image = jsonValue.content[0].content[0]
 				this.formatAndSendMessage(
 					conversationId,
@@ -858,7 +858,7 @@ class MessageService {
 					return
 				}
 
-				console.log("发送富文本消息", normalValue, onlyTextContent, jsonValue, files)
+				console.log("Sending rich text message", normalValue, onlyTextContent, jsonValue, files)
 				this.formatAndSendMessage(
 					conversationId,
 					{
@@ -894,7 +894,7 @@ class MessageService {
 				...this.pendingMessages.get(messageId),
 				status,
 			} as ConversationMessageSend)
-			console.log("更新消息状态", messageId, status, this.pendingMessages.get(messageId))
+			console.log("Update message status", messageId, status, this.pendingMessages.get(messageId))
 		}
 
 		if (updateDb) {
@@ -971,7 +971,7 @@ class MessageService {
 							return this.formatMessage(message, userInfo)
 						})
 						.catch((err) => {
-							console.error("消息完整性检查失败", err, message)
+							console.error("Message integrity check failed", err, message)
 							return this.formatMessage(message, userInfo)
 						})
 				}),
@@ -979,7 +979,7 @@ class MessageService {
 
 			return { messages, page: res.page, pageSize: res.pageSize, totalPages: res.totalPages }
 		} catch (error) {
-			console.error("数据库访问错误，无法获取消息", error)
+			console.error("Database access error, cannot get message", error)
 			return { messages: [], page: 1, pageSize: 10, totalPages: 1 }
 		}
 	}
@@ -1270,7 +1270,7 @@ class MessageService {
 				return message
 			})
 			.catch((err: any) => {
-				console.error("获取消息失败", err)
+				console.error("Failed to get message", err)
 				return undefined
 			})
 	}

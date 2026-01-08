@@ -131,7 +131,7 @@ class StreamMessageApplyServiceV2 {
 					type: message.message.type,
 				}
 				console.log(
-					`[recordMessageInfo] 记录AI搜索卡片V2消息信息, messageId: ${message.message_id}, message:`,
+					`[recordMessageInfo] Record AI search card V2 message info, messageId: ${message.message_id}, message:`,
 					this.messageConversationMap[message.message_id],
 				)
 				break
@@ -150,7 +150,7 @@ class StreamMessageApplyServiceV2 {
 	}
 
 	apply(streamMessage: StreamResponseV2) {
-		console.log(`[apply] 开始应用流式消息，目标序列ID: ${streamMessage.target_seq_id}`)
+		console.log(`[apply] Start applying stream message, target seq ID: ${streamMessage.target_seq_id}`)
 
 		const targetSeqInfo = this.queryMessageInfo(streamMessage.target_seq_id)
 		const aggregateAISearchCardSeqInfo = this.queryMessageInfo(
@@ -158,8 +158,8 @@ class StreamMessageApplyServiceV2 {
 		)
 
 		if (!targetSeqInfo && !aggregateAISearchCardSeqInfo) {
-			console.log(`[apply] 未找到消息信息，先暂存, streamMessage:`, streamMessage)
-			// 如果未找到消息信息，先暂存，等待消息信息更新后，再应用
+			console.log(`[apply] Message info not found, caching first, streamMessage:`, streamMessage)
+			// If message info not found, cache first and apply after message info is updated
 			this.addCacheStreamMessage(streamMessage)
 			return
 		}
@@ -168,7 +168,7 @@ class StreamMessageApplyServiceV2 {
 
 		switch (type) {
 			case ConversationMessageType.Text:
-				console.log(`[apply] 处理文本类型消息`)
+				console.log(`[apply] Handle text message type`)
 				this.applyCacheStreamMessage(
 					streamMessage.target_seq_id,
 					this.applyTextStreamMessage,
@@ -176,7 +176,7 @@ class StreamMessageApplyServiceV2 {
 				this.applyTextStreamMessage(streamMessage)
 				break
 			case ConversationMessageType.Markdown:
-				console.log(`[apply] 处理Markdown类型消息`)
+				console.log(`[apply] Handle Markdown message type`)
 				this.applyCacheStreamMessage(
 					streamMessage.target_seq_id,
 					this.applyMarkdownStreamMessage,
@@ -184,7 +184,7 @@ class StreamMessageApplyServiceV2 {
 				this.applyMarkdownStreamMessage(streamMessage)
 				break
 			case ConversationMessageType.AggregateAISearchCard:
-				console.log(`[apply] 处理AI搜索卡片类型消息`)
+				console.log(`[apply] Handle AI search card message type`)
 				this.applyCacheStreamMessage(
 					streamMessage.target_seq_id,
 					this.applyAggregateAISearchCardStreamMessage,
@@ -192,7 +192,7 @@ class StreamMessageApplyServiceV2 {
 				this.applyAggregateAISearchCardStreamMessage(streamMessage)
 				break
 			case ConversationMessageType.AggregateAISearchCardV2:
-				console.log(`[apply] 处理AI搜索卡片V2类型消息`)
+				console.log(`[apply] Handle AI search card V2 message type`)
 				this.applyCacheStreamMessage(
 					streamMessage.target_seq_id,
 					this.applyAggregateAISearchCardV2StreamMessage,
@@ -200,9 +200,7 @@ class StreamMessageApplyServiceV2 {
 				this.applyAggregateAISearchCardV2StreamMessage(streamMessage)
 				break
 			default:
-				console.log(`[apply] 未知消息类型`)
-				break
-		}
+			console.log(`[apply] Unknown message type`)
 	}
 
 	/**
@@ -217,25 +215,21 @@ class StreamMessageApplyServiceV2 {
 			},
 			target_seq_id,
 		} = streamMessage
-		console.log(`[applyTextStreamMessage] 开始处理文本流式消息，状态: ${status}`)
-		const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)!
+	console.log(`[applyTextStreamMessage] Start handling text stream message, status: ${status}`)
+	const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)!
 
-		if ([StreamStatus.Start, StreamStatus.Streaming].includes(status)) {
-			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
-				const textMessage = m.message as TextConversationMessage
+	if ([StreamStatus.Start, StreamStatus.Streaming].includes(status)) {
+		MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
+			const textMessage = m.message as TextConversationMessage
 
-				for (const keyPath of Object.keys(keyPaths)) {
-					appendObject(textMessage.text, keyPath.split("."), keyPaths[keyPath])
-				}
+			for (const keyPath of Object.keys(keyPaths)) {
+				appendObject(textMessage.text, keyPath.split("."), keyPaths[keyPath])
+			}
 
-				return m
-			})
-		} else if (status === StreamStatus.End) {
-			console.log(`[applyTextStreamMessage] 处理结束状态消息`)
-
-			// Update message status
-			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
-				const textMessage = m.message as TextConversationMessage
+			return m
+		})
+	} else if (status === StreamStatus.End) {
+		console.log(`[applyTextStreamMessage] Handle end status message`)
 				if (textMessage.text) {
 					if (textMessage.text.stream_options) {
 						textMessage.text.stream_options.status = StreamStatus.End
@@ -260,10 +254,7 @@ class StreamMessageApplyServiceV2 {
 				"message.text.stream_options.status": StreamStatus.End,
 			} as Partial<SeqResponse<ConversationMessage>>)
 		}
-		console.log(`[applyTextStreamMessage] 文本流式消息处理完成`)
-	}
-
-	/**
+	console.log(`[applyTextStreamMessage] Text stream message handling completed`)
 	 * Apply streaming updates for Markdown messages.
 	 * @param streamMessage Streaming payload.
 	 */
@@ -275,22 +266,22 @@ class StreamMessageApplyServiceV2 {
 			},
 			target_seq_id,
 		} = streamMessage
-		console.log(`[applyMarkdownStreamMessage] 开始处理Markdown流式消息，状态: ${status}`)
+	console.log(`[applyMarkdownStreamMessage] Start handling Markdown stream message, status: ${status}`)
 
-		const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)
+	const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)
 
-		if ([StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
-			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
-				const textMessage = m.message as MarkdownConversationMessage
+	if ([StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
+		MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
+			const textMessage = m.message as MarkdownConversationMessage
 
-				for (const keyPath of Object.keys(keyPaths)) {
-					appendObject(textMessage.markdown, keyPath.split("."), keyPaths[keyPath])
-				}
+			for (const keyPath of Object.keys(keyPaths)) {
+				appendObject(textMessage.markdown, keyPath.split("."), keyPaths[keyPath])
+			}
 
-				return { ...m }
-			})
-		} else if (status === StreamStatus.End) {
-			console.log(`[applyMarkdownStreamMessage] 处理结束状态消息`)
+			return { ...m }
+		})
+	} else if (status === StreamStatus.End) {
+		console.log(`[applyMarkdownStreamMessage] Handle end status message`)
 			// Update message status
 			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
 				const markdownMessage = m.message as MarkdownConversationMessage
@@ -319,10 +310,7 @@ class StreamMessageApplyServiceV2 {
 				"message.markdown.stream_options.status": StreamStatus.End,
 			} as Partial<SeqResponse<ConversationMessage>>)
 		}
-		console.log(`[applyMarkdownStreamMessage] Markdown流式消息处理完成`)
-	}
-
-	/**
+	console.log(`[applyMarkdownStreamMessage] Markdown stream message handling completed`)
 	 * Apply streaming updates for Aggregate AI Search Card messages.
 	 * @param streamMessage Streaming payload.
 	 */
@@ -336,34 +324,30 @@ class StreamMessageApplyServiceV2 {
 		} = message
 
 		console.log(
-			`[applyAggregateAISearchCardStreamMessage] 开始处理AI搜索卡片流式消息，状态: ${status}`,
-		)
+		`[applyAggregateAISearchCardStreamMessage] Start handling AI search card stream message, status: ${status}`,
+	)
 
-		const { messageId, conversationId, topicId } = this.queryMessageInfo(
-			AiSearchApplyService.getAppMessageIdByLLMResponseSeqId(target_seq_id),
-		)
+	const { messageId, conversationId, topicId } = this.queryMessageInfo(
+		AiSearchApplyService.getAppMessageIdByLLMResponseSeqId(target_seq_id),
+	)
 
-		if (!isUndefined(status) && [StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
-			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
-				const textMessage = m.message as AggregateAISearchCardConversationMessage<false>
+	if (!isUndefined(status) && [StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
+		MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
+			const textMessage = m.message as AggregateAISearchCardConversationMessage<false>
 
-				for (const keyPath of Object.keys(keyPaths)) {
-					const keyPathsArray = keyPath.split(".")
-					appendObject(
-						textMessage.aggregate_ai_search_card,
-						keyPathsArray,
-						keyPaths[keyPath],
-					)
-				}
+			for (const keyPath of Object.keys(keyPaths)) {
+				const keyPathsArray = keyPath.split(".")
+				appendObject(
+					textMessage.aggregate_ai_search_card,
+					keyPathsArray,
+					keyPaths[keyPath],
+				)
+			}
 
-				return { ...m }
-			})
-		} else if (status === StreamStatus.End) {
-			console.log(`[applyAggregateAISearchCardStreamMessage] 处理结束状态消息`)
-
-			// Update the root question's answer
-			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
-				const textMessage = m.message as AggregateAISearchCardConversationMessage
+			return { ...m }
+		})
+	} else if (status === StreamStatus.End) {
+		console.log(`[applyAggregateAISearchCardStreamMessage] Handle end status message`)
 				if (textMessage.aggregate_ai_search_card) {
 					// Note: Do not update content here; typing effect updates during streaming
 					if (textMessage.aggregate_ai_search_card.stream_options) {
@@ -390,10 +374,7 @@ class StreamMessageApplyServiceV2 {
 				"message.aggregate_ai_search_card.stream_options.status": StreamStatus.End,
 			} as Partial<SeqResponse<ConversationMessage>>)
 		}
-		console.log(`[applyAggregateAISearchCardStreamMessage] AI搜索卡片流式消息处理完成`)
-	}
-
-	/**
+	console.log(`[applyAggregateAISearchCardStreamMessage] AI search card stream message handling completed`)
 	 * Apply streaming updates for Aggregate AI Search Card V2 messages.
 	 * @param streamMessage Streaming payload.
 	 */
@@ -406,31 +387,28 @@ class StreamMessageApplyServiceV2 {
 			target_seq_id,
 		} = streamMessage
 
-		console.log(`开始处理AI搜索卡片V2流式消息，状态: ${status}`)
+	console.log(`Start handling AI search card V2 stream message, status: ${status}`)
 
-		const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)
+	const { messageId, conversationId, topicId } = this.queryMessageInfo(target_seq_id)
 
-		if ([StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
-			const updated = MessageService.updateMessage(
-				conversationId,
-				topicId,
-				messageId,
-				(m) => {
-					const textMessage = m.message as AggregateAISearchCardConversationMessageV2
+	if ([StreamStatus.Streaming, StreamStatus.Start].includes(status)) {
+		const updated = MessageService.updateMessage(
+			conversationId,
+			topicId,
+			messageId,
+			(m) => {
+				const textMessage = m.message as AggregateAISearchCardConversationMessageV2
 
-					for (const keyPath of Object.keys(keyPaths)) {
-						const keyPathsArray = keyPath.split(".")
+				for (const keyPath of Object.keys(keyPaths)) {
+					const keyPathsArray = keyPath.split(".")
 
-						appendObject(
-							textMessage.aggregate_ai_search_card_v2,
-							keyPathsArray,
-							keyPaths[keyPath],
-						)
+					appendObject(
+						textMessage.aggregate_ai_search_card_v2,
+						keyPathsArray,
+						keyPaths[keyPath],
+					)
 
-						// 更新状态
-						updateAggregateAISearchCardV2Status(
-							textMessage.aggregate_ai_search_card_v2,
-							keyPath,
+					// Update status
 							keyPaths[keyPath],
 						)
 					}
@@ -439,9 +417,9 @@ class StreamMessageApplyServiceV2 {
 				},
 			)
 
-			console.log(` 更新消息:`, toJS(updated))
-		} else if (status === StreamStatus.End) {
-			console.log(`处理结束状态消息`)
+		console.log(` Update message:`, toJS(updated))
+	} else if (status === StreamStatus.End) {
+		console.log(`Handle end status message`)
 			// Update message status
 			MessageService.updateMessage(conversationId, topicId, messageId, (m) => {
 				const textMessage = m.message as AggregateAISearchCardConversationMessageV2

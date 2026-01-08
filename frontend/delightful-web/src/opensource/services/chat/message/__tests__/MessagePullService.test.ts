@@ -178,7 +178,7 @@ class TestableMessagePullService {
 			const organizationCode = this.mockUserStore.user.userInfo?.organization_code ?? ""
 
 			if (!organizationCode) {
-				console.warn("pullOfflineMessages: 当前组织为空")
+				console.warn("pullOfflineMessages: Current organization is empty")
 				return
 			}
 
@@ -325,7 +325,7 @@ describe("MessagePullService", () => {
 
 			await (service as any).doPullOfflineMessages()
 
-			expect(consoleSpy).toHaveBeenCalledWith("pullOfflineMessages: 当前组织为空")
+			expect(consoleSpy).toHaveBeenCalledWith("pullOfflineMessages: Current organization is empty")
 			expect(spy).not.toHaveBeenCalled()
 
 			consoleSpy.mockRestore()

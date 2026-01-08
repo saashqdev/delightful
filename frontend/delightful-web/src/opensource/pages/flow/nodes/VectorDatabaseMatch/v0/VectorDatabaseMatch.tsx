@@ -40,10 +40,10 @@ export default function VectorDatabaseMatchV0() {
 	const onValuesChange = useMemoizedFn((changedValues, allValues) => {
 		if (!currentNode) return
 
-		// 使用深拷贝避免引用问题
+		// Use deep clone to avoid reference issues
 		const updatedParams = cloneDeep(allValues)
 
-		// 将节点参数更新为表单的最新值
+		// Update node parameters to the latest form values
 		set(currentNode, ["params"], {
 			...currentNode.params,
 			...updatedParams,

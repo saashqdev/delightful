@@ -10,12 +10,12 @@ import { genDefaultComponent, generateSnowFlake } from "@/opensource/pages/flow/
 import { useTranslation } from "react-i18next"
 
 /**
- * 针对旧知识库字段的兼容处理
+ * Compatibility handling for old knowledge base fields
  */
 export default function useOldKnowledgeHandle() {
 	const { t } = useTranslation()
 	const { currentNode } = useCurrentNode()
-	// 获取所有可用的知识库
+	// Get all available knowledge bases
 	const { useableDatabases } = useFlowStore()
 
 	const findTargetDatabaseById = useMemoizedFn((id: string) => {
@@ -24,13 +24,13 @@ export default function useOldKnowledgeHandle() {
 		}) as Knowledge.KnowledgeItem
 	})
 
-	// 兼容旧数据处理方法
+	// Compatibility method for old data handling
 	const handleOldKnowledge = useMemoizedFn(
 		(params: Record<string, any>, oldKey = "knowledge_code", newKey = "vector_database_id") => {
 			const cloneParams = cloneDeep(params)
 			const oldValue = castArray(cloneParams?.[oldKey]) || []
 			const newValue = cloneParams[newKey] || []
-			// 如果新知识库列表为空，且旧知识库列表不为空，则取旧知识库列表的值作为新知识库列表的值
+			// If new knowledge base list is empty and old knowledge base list is not empty, use old list value as new list value
 			if (newValue?.length === 0 && oldValue?.length > 0) {
 				// @ts-ignore
 				const newKnowledgeResult = genDefaultComponent("value", {

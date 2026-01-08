@@ -46,39 +46,39 @@ export default function VectorKnowledgeCreate() {
 
 	const navigate = useNavigate()
 
-	// 获取路由参数，用于跳转文档配置页面
+	// Get route params for jumping to document config page
 	const [searchParams] = useSearchParams()
 	const queryKnowledgeBaseCode = searchParams.get("knowledgeBaseCode") || ""
 	const queryDocumentCode = searchParams.get("documentCode") || ""
-	// 是否处于文档配置状态
+	// Whether in document configuration state
 	const [isDocumentConfig, setIsDocumentConfig] = useState(false)
 
 	const [form] = Form.useForm<DataType>()
 
-	// 预览图标URL
+	// Preview icon URL
 	const [previewIconUrl, setPreviewIconUrl] = useState(DEFAULT_KNOWLEDGE_ICON)
-	// 上传图标URL
+	// Upload icon URL
 	const [uploadIconUrl, setUploadIconUrl] = useState("")
-	// 上传文件列表
+	// Upload file list
 	const [fileList, setFileList] = useState<UploadFileItem[]>([])
 
 	const { uploadAndGetFileUrl } = useUpload({
 		storageType: "private",
 	})
 
-	// 是否允许提交
+	// Whether submission is allowed
 	const [allowSubmit, setAllowSubmit] = useState(false)
-	// 临时缓存的知识库配置
+	// Temporarily cached knowledge base configuration
 	const [temporaryConfig, setTemporaryConfig] = useState<TemporaryKnowledgeConfig>()
-	// 创建成功的知识库编码
+	// Successfully created knowledge base code
 	const [createdKnowledgeCode, setCreatedKnowledgeCode] = useState("")
 
-	// 是否处于待配置状态
+	// Whether in pending configuration state
 	const [isPendingConfiguration, setIsPendingConfiguration] = useState(false)
-	// 是否处于待嵌入状态
+	// Whether in pending embed state
 	const [isPendingEmbed, setIsPendingEmbed] = useState(false)
 
-	/** 初始化表单值 */
+	/** Initialize form values */
 	const initialValues = useMemo(() => {
 		return {
 			name: "",
@@ -86,9 +86,9 @@ export default function VectorKnowledgeCreate() {
 		}
 	}, [])
 
-	/** 上传文档 */
+	/** Upload document */
 	const handleFileUpload = useMemoizedFn(async (file: File, uid?: string) => {
-		// 更新上传的文件列表
+		// Update the upload file list
 		const newUid = uid || `${file.name}-${Date.now()}`
 		if (uid) {
 			setFileList((prevFileList) =>
@@ -102,11 +102,11 @@ export default function VectorKnowledgeCreate() {
 				{ uid: newUid, name: file.name, file, status: "uploading" },
 			])
 		}
-		// 上传文件
+		// Upload file
 		const newFile = genFileData(file)
-		// 已通过 beforeFileUpload 预校验，故传入 () => true 跳过方法校验
+		// Pre-validation passed via beforeFileUpload, so pass () => true to skip method validation
 		const { fullfilled } = await uploadAndGetFileUrl([newFile], () => true)
-		// 更新上传的文件列表状态
+		// Update the upload file list status
 		if (fullfilled && fullfilled.length) {
 			const { path } = fullfilled[0].value
 			setFileList((prevFileList) =>
@@ -123,7 +123,7 @@ export default function VectorKnowledgeCreate() {
 		}
 	})
 
-	/** 删除文件 */
+	/** Delete file */
 	const handleFileRemove = useMemoizedFn((e: any, uid: string) => {
 		e?.domEvent?.stopPropagation?.()
 		Modal.confirm({
@@ -139,7 +139,7 @@ export default function VectorKnowledgeCreate() {
 		})
 	})
 
-	/** 获取文件状态图标 */
+	/** Get file status icon */
 	const getFileStatusIcon = useMemoizedFn((file: UploadFileItem) => {
 		if (file.status === "done") {
 			return <IconCircleCheck color="#32C436" size={24} />
@@ -163,9 +163,9 @@ export default function VectorKnowledgeCreate() {
 		return null
 	})
 
-	/** 上一步 - 返回上一页 */
+	/** Previous step - Return to previous page */
 	const handleBack = useMemoizedFn(() => {
-		// 如果处于文档配置状态，则返回至文档列表页面
+		// If in document configuration state, return to document list page
 		if (isDocumentConfig) {
 			navigate(`${RoutePath.VectorKnowledgeDetail}?code=${queryKnowledgeBaseCode}`)
 		} else {
@@ -177,7 +177,7 @@ export default function VectorKnowledgeCreate() {
 		}
 	})
 
-	/** 下一步 - 提交表单 */
+	/** Next step - Submit form */
 	const handleSubmit = async () => {
 		try {
 			const values = await form.validateFields()
@@ -196,16 +196,16 @@ export default function VectorKnowledgeCreate() {
 			})
 			setIsPendingConfiguration(true)
 		} catch (error) {
-			console.error("表单验证失败:", error)
+			console.error("Form validation failed:", error)
 		}
 	}
 
-	/** 必填项检验 */
+	/** Required field validation */
 	const nameValue = Form.useWatch("name", form)
 
-	/** 配置页返回 */
+	/** Configuration page back */
 	const handleConfigurationBack = useMemoizedFn(() => {
-		// 如果处于文档配置状态，则返回至文档列表页面
+		// If in document configuration state, return to document list page
 		if (isDocumentConfig) {
 			navigate(`${RoutePath.VectorKnowledgeDetail}?code=${queryKnowledgeBaseCode}`)
 		} else {
@@ -213,13 +213,13 @@ export default function VectorKnowledgeCreate() {
 		}
 	})
 
-	/** 配置页提交 */
+	/** Configuration page submit */
 	const handleConfigurationSubmit = useMemoizedFn(async (data: TemporaryKnowledgeConfig) => {
 		try {
-			// 调用接口创建知识库
+			// Call API to create knowledge base
 			const res = await KnowledgeApi.createKnowledge(data)
 			if (res) {
-				// 清空表单
+				// Clear form
 				form.resetFields()
 				setUploadIconUrl("")
 				setFileList([])
@@ -229,17 +229,17 @@ export default function VectorKnowledgeCreate() {
 				message.success(t("common.savedSuccess"))
 			}
 		} catch (error) {
-			console.error("创建知识库失败:", error)
+			console.error("Failed to create knowledge base:", error)
 			message.error(t("knowledgeDatabase.saveConfigFailed"))
 		}
 	})
 
-	// 判断是否允许提交
+	// Determine whether submission is allowed
 	useEffect(() => {
 		setAllowSubmit(!!nameValue && fileList.length > 0)
 	}, [nameValue, fileList])
 
-	// 初始化时，通过路由参数，判断是否处于文档配置状态
+	// On initialization, determine whether in document configuration state via route parameters
 	useEffect(() => {
 		setIsDocumentConfig(!!queryKnowledgeBaseCode && !!queryDocumentCode)
 	}, [])

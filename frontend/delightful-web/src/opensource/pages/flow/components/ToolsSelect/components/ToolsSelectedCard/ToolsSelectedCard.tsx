@@ -61,9 +61,9 @@ export default function ToolsSelectedCard({
 	}, [t])
 
 	const onOpenChange = async (open: boolean) => {
-		// 没有自定义输入，则请求一下
+		// If there is no custom input, make a request
 		if (open && !tool?.custom_system_input?.form?.structure) {
-			// 更新inputOutput的map
+			// Update the inputOutput map
 			const response = await FlowApi.getAvailableTools([tool.tool_id])
 			if (response.list.length > 0) {
 				const targetTool = response.list[0]

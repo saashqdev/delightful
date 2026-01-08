@@ -7,9 +7,9 @@ import { ConversationMessageType } from "@/types/chat/conversation_message"
 import { t } from "i18next"
 
 /**
- * 获取会话组
- * @param item 会话
- * @returns 会话组
+ * Get conversation group
+ * @param item Conversation
+ * @returns Conversation group
  */
 export const getConversationGroupKey = (item: Conversation | ConversationFromService) => {
 	switch (item.receive_type) {
@@ -25,8 +25,8 @@ export const getConversationGroupKey = (item: Conversation | ConversationFromSer
 }
 
 /**
- * 获取撤回消息文本
- * @returns 撤回消息文本
+ * Get revoked message text
+ * @returns Revoked message text
  */
 export const getRevokedText = () => {
 	return {
@@ -36,9 +36,9 @@ export const getRevokedText = () => {
 }
 
 /**
- * 获取消息文本
- * @param message 消息
- * @returns 消息文本
+ * Get message text
+ * @param message Message
+ * @returns Message text
  */
 export const getSlicedText = (message: ConversationMessage, revoked: boolean = false) => {
 	if (revoked) {

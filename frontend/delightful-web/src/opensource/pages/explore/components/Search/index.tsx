@@ -45,7 +45,7 @@ const Search = memo(({ handleClickCard }: { handleClickCard: (id: string) => voi
 					setLoading(false)
 				}
 			} else {
-				// 清空关键词时，确保完全重置搜索结果
+				// Ensure complete reset of search results when keyword is cleared
 				setSearchResult([])
 				setKeyword("")
 				setHasMore(false)

@@ -53,7 +53,7 @@ const DelightfulMermaidShared = memo(function DelightfulMermaidShared() {
 				const png = await convertSvgToPng(svg, event?.width, event?.height)
 				getJSBridge()?.callNative(BridgeCallNativeEvent.getMermaidImage, png)
 			} catch (err) {
-				console.error("获取思维导图图片失败", err)
+				console.error("Failed to get mind map image", err)
 			}
 		}
 

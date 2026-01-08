@@ -21,7 +21,7 @@ interface SegmentPreviewProps {
 }
 
 /**
- * 分段预览组件
+ * Segment Preview Component
  */
 export default function SegmentPreview({
 	segmentPreviewLoading,
@@ -36,7 +36,7 @@ export default function SegmentPreview({
 	const { t } = useTranslation("flow")
 	const contentRef = useRef<HTMLDivElement>(null)
 
-	// 滚动加载更多
+	// Scroll to load more
 	useEffect(() => {
 		if (!isOldVersion || !contentRef.current) return
 
@@ -44,17 +44,17 @@ export default function SegmentPreview({
 			const container = contentRef.current
 			if (!container) return
 
-			// 检查加载状态
+			// Check loading status
 			if (segmentPreviewLoading) return
 
 			const { scrollTop, scrollHeight, clientHeight } = container
-			// 当滚动到距离底部100px时触发加载更多
-			// 确保当前数据总量小于total才发起请求
+			// Trigger load more when scrolling to 100px from bottom
+			// Ensure current data total is less than total before making request
 			if (
 				scrollHeight - scrollTop - clientHeight < 100 &&
 				segmentPreviewResult.list.length < segmentPreviewResult.total
 			) {
-				// 加载下一页数据
+				// Load next page data
 				getFragmentList({ page: segmentPreviewResult.page + 1 })
 			}
 		}
@@ -119,7 +119,7 @@ export default function SegmentPreview({
 						</div>
 					))}
 
-					{/* 底部加载状态 */}
+					{/* Bottom loading status */}
 					{segmentPreviewLoading && (
 						<div className={styles.loadingMore}>
 							<Spin size="small" />

@@ -35,9 +35,9 @@ const SingleChoice = memo(({ fieldValues, onFinish }: SingleChoiceProps) => {
 							<span className={cx(styles.labelText, styles.required)}>
 								{`${t("explore.form.option")} 1`}
 							</span>
-							{/* 手动渲染第一个字段 */}
-							<Form.Item
-								name={[0, "name"]} // 第一个字段对应数组的第一个元
+						{/* Manually render the first field */}
+						<Form.Item
+							name={[0, "name"]} // First field corresponds to first element in array
 								style={{ flex: 1 }}
 								rules={[
 									{
@@ -51,9 +51,9 @@ const SingleChoice = memo(({ fieldValues, onFinish }: SingleChoiceProps) => {
 									className={styles.input}
 								/>
 							</Form.Item>
-							{/* 手动渲染第一个字段 */}
+							{/* Manually render the first field */}
 							<Form.Item
-								name={[0, "value"]} // 第一个字段对应数组的第一个元素
+								name={[0, "value"]} // First field corresponds to first element in array
 								style={{ flex: 1 }}
 								rules={[
 									{
@@ -85,9 +85,9 @@ const SingleChoice = memo(({ fieldValues, onFinish }: SingleChoiceProps) => {
 								onClick={() => remove(0)}
 							/>
 						</Flex>
-						{/* 动态渲染其余字段 */}
-						{fields
-							.filter((field) => field.name !== 0) // 过滤掉第一个字段
+					{/* Dynamically render remaining fields */}
+					{fields
+						.filter((field) => field.name !== 0) // Filter out the first field
 							.map((field, index) => (
 								<Flex gap={6} align="center" key={field.key}>
 									<span className={cx(styles.labelText, styles.required)}>

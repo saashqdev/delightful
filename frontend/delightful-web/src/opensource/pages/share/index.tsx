@@ -178,7 +178,7 @@ export default function Share() {
 	}, [data])
 
 	useEffect(() => {
-		// 从URL路径中提取share后面的ID
+		// Extract ID after 'share' from URL path
 		const match = pathname.match(/\/share\/([^/]+)/)
 
 		if (match && match[1]) {
@@ -203,7 +203,7 @@ export default function Share() {
 				.then((res: any) => {
 					setIsNeedPassword(res?.has_password)
 
-					// 获取URL中的password参数
+					// Get password parameter from URL
 					const urlSearchParams = new URLSearchParams(search)
 					const password = urlSearchParams.get("password")
 					setPasswordFromUrl(password || "")
@@ -213,11 +213,11 @@ export default function Share() {
 						setIsLogined(false)
 					}
 					if (!res?.has_password) {
-						console.log("没有密码")
+						console.log("No password")
 						return getShareData({ resource_id: resourceId })
 							.then((newData: any) => {
 								setData(newData)
-								// 删除URL中的password参数
+								// Remove password parameter from URL
 								removePasswordFromUrl()
 								return newData
 							})
@@ -228,15 +228,15 @@ export default function Share() {
 					}
 
 					if (res?.has_password && password) {
-						console.log("有密码")
-						// 如果需要密码且URL中有密码，直接尝试验证
+						console.log("Has password")
+						// If password is required and URL has password, try verifying directly
 						return getShareData({
 							resource_id: resourceId,
 							password,
 						})
 							.then((newData: any) => {
 								setData(newData)
-								// 删除URL中的password参数
+							// Remove password parameter from URL
 								removePasswordFromUrl()
 								return newData
 							})
@@ -257,20 +257,20 @@ export default function Share() {
 		}
 	}, [resourceId, search])
 
-	// 处理密码验证成功
+	// Handle password verification success
 	const handleVerifySuccess = (newData: any) => {
 		setData(newData)
 		setError(null)
-		// 删除URL中的password参数
+		// Remove password parameter from URL
 		removePasswordFromUrl()
 	}
 
-	// 处理密码验证失败
+	// Handle password verification failure
 	const handleVerifyFail = (err: any) => {
 		// setError(err)
 	}
 
-	// 重新加载数据
+	// Reload data
 	const handleRetry = () => {
 		if (resourceId) {
 			setLoading(true)
@@ -296,7 +296,7 @@ export default function Share() {
 				.then((newData: any) => {
 					if (newData) {
 						setData(newData)
-						// 删除URL中的password参数
+						// Remove password parameter from URL
 						removePasswordFromUrl()
 					}
 				})
@@ -322,14 +322,14 @@ export default function Share() {
 					</div>
 				) : !isLogined ? (
 					<Button className={styles.loginButton} onClick={() => navigate("/login")}>
-						登录
+						Login
 					</Button>
 				) : (
 					<Button
 						className={styles.loginButton}
 						onClick={() => navigate("/super/workspace")}
 					>
-						进入工作区
+						Enter Workspace
 					</Button>
 				)}
 			</div>
@@ -349,7 +349,7 @@ export default function Share() {
 					/>
 				)}
 				{error && !loading && (
-					<ErrorDisplay errorMessage="无权限查看回放" onRetry={handleRetry} />
+					<ErrorDisplay errorMessage="No permission to view playback" onRetry={handleRetry} />
 				)}
 				{!isEmpty(data) && !error && (
 					<ShareContent

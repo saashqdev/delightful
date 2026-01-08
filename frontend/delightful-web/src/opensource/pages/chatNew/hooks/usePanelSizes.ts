@@ -7,8 +7,8 @@ import MessageFilePreviewStore from "@/opensource/stores/chatNew/messagePreview/
 import { calculatePanelSizes, LAYOUT_CONSTANTS, PanelIndex } from "../utils/panelSizeCalculator"
 
 /**
- * 面板尺寸管理Hook
- * 负责管理聊天界面的面板尺寸计算和状态更新
+ * Panel size management Hook
+ * Responsible for managing panel size calculation and state updates in chat interface
  */
 export function usePanelSizes() {
 	const totalWidth = useRef(window.innerWidth - LAYOUT_CONSTANTS.WINDOW_MARGIN)
@@ -21,7 +21,7 @@ export function usePanelSizes() {
 		),
 	)
 
-	// 处理侧边栏调整
+	// Handle sidebar resize
 	const handleSiderResize = useMemoizedFn((size: number[]) => {
 		interfaceStore.setChatSiderDefaultWidth(size[0])
 
@@ -35,12 +35,12 @@ export function usePanelSizes() {
 		)
 	})
 
-	// 处理输入框调整
+	// Handle input box resize
 	const handleInputResize = useMemoizedFn((size: number[]) => {
 		interfaceStore.setChatInputDefaultHeight(size[2])
 	})
 
-	// 处理话题面板开关的布局调整
+	// Handle layout adjustment for topic panel toggle
 	useEffect(() => {
 		return autorun(() => {
 			const currentMainMinWidth = calculatePanelSizes.getMainMinWidth(
@@ -49,12 +49,12 @@ export function usePanelSizes() {
 
 			if (conversationStore.topicOpen) {
 				setSizes((prevSizes) => {
-					// 两面板模式，无需调整
+					// Two-panel mode, no adjustment needed
 					if (prevSizes.length < 3) return prevSizes
 
 					const [siderWidth, mainWidth] = prevSizes
 
-					// 话题打开时，确保主面板满足最小宽度要求
+					// When topic is open, ensure main panel meets minimum width requirement
 					const adjustedMainWidth = Math.max(mainWidth ?? 0, currentMainMinWidth)
 					const adjustedFilePreviewWidth =
 						totalWidth.current - (siderWidth ?? 0) - adjustedMainWidth
@@ -63,12 +63,12 @@ export function usePanelSizes() {
 				})
 			} else {
 				setSizes((prevSizes) => {
-					// 两面板模式，无需调整
+					// Two-panel mode, no adjustment needed
 					if (prevSizes.length < 3) return prevSizes
 
 					const [siderWidth, , filePreviewWidth] = prevSizes
 
-					// 话题关闭时，保持原有布局
+					// When topic is closed, maintain original layout
 					return [
 						siderWidth,
 						totalWidth.current - (siderWidth ?? 0) - filePreviewWidth!,
@@ -79,11 +79,11 @@ export function usePanelSizes() {
 		})
 	}, [])
 
-	// 处理文件预览面板开关的布局调整
+	// Handle layout adjustment for file preview panel toggle
 	useEffect(() => {
 		return autorun(() => {
 			if (MessageFilePreviewStore.open) {
-				// 文件预览打开：使用默认比例分配
+				// File preview open: use default ratio allocation
 				setSizes(
 					calculatePanelSizes.getFilePreviewOpenSizes(
 						totalWidth.current,
@@ -91,7 +91,7 @@ export function usePanelSizes() {
 					),
 				)
 			} else {
-				// 文件预览关闭：回到两面板模式
+				// File preview closed: return to two-panel mode
 				setSizes((prevSizes) =>
 					calculatePanelSizes.getTwoPanelSizes(
 						totalWidth.current,

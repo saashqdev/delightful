@@ -80,33 +80,33 @@ export default function PasswordVerification({
 	const [loading, setLoading] = useState(false)
 	const { styles } = useStyles()
 
-	// 处理密码输入变化
+	// Handle password input change
 	const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		// 转换为大写并限制长度为5
+		// Convert to uppercase and limit length to 5
 		const value = e.target.value.toUpperCase().slice(0, 5)
 		setPassword(value)
 	}
 
-	// 存储密码到 sessionStorage
+	// Store password to sessionStorage
 	const savePasswordToStorage = (resourceIdToSave: string, passwordToSave: string) => {
 		try {
 			sessionStorage.setItem(`${STORAGE_KEY_PREFIX}${resourceIdToSave}`, passwordToSave)
 		} catch (e) {
-			console.error("保存密码到 sessionStorage 失败", e)
+			console.error("Failed to save password to sessionStorage", e)
 		}
 	}
 
-	// 从 sessionStorage 获取密码
+	// Get password from sessionStorage
 	const getPasswordFromStorage = (resourceIdToGet: string): string | null => {
 		try {
 			return sessionStorage.getItem(`${STORAGE_KEY_PREFIX}${resourceIdToGet}`)
 		} catch (e) {
-			console.error("从 sessionStorage 获取密码失败", e)
+			console.error("Failed to get password from sessionStorage", e)
 			return null
 		}
 	}
 
-	// 处理验证按钮点击
+	// Handle verification button click
 	const handleVerify = useCallback(async () => {
 		if (!password) return
 
@@ -115,7 +115,7 @@ export default function PasswordVerification({
 			const result = await getShareData({ resource_id: resourceId, password })
 
 			if (result) {
-				// 成功验证后保存密码
+				// Save password after successful verification
 				savePasswordToStorage(resourceId, password)
 				onVerifySuccess(result)
 			}
@@ -126,15 +126,15 @@ export default function PasswordVerification({
 		}
 	}, [password, resourceId, onVerifySuccess, onVerifyFail])
 
-	// 自动验证初始密码或从 sessionStorage 中获取密码进行验证
+	// Auto-verify initial password or get password from sessionStorage to verify
 	useEffect(() => {
 		const tryVerifyWithStoredPassword = async () => {
-			// 如果已有初始密码，则使用初始密码验证
+			// If there is an initial password, use it to verify
 			if (initialPassword) {
 				return
 			}
 
-			// 没有初始密码时，尝试从 sessionStorage 获取
+			// When there's no initial password, try to get from sessionStorage
 			const storedPassword = getPasswordFromStorage(resourceId)
 			if (storedPassword && !password) {
 				setPassword(storedPassword)
@@ -148,8 +148,8 @@ export default function PasswordVerification({
 						onVerifySuccess(result)
 					}
 				} catch (error) {
-					// 验证失败，不做处理，用户需要手动输入密码
-					console.log("使用存储的密码验证失败，需要用户手动输入")
+					// Verification failed, no action taken, user needs to manually enter password
+					console.log("Verification with stored password failed, user needs to manually enter")
 				} finally {
 					setLoading(false)
 				}
@@ -159,14 +159,14 @@ export default function PasswordVerification({
 		tryVerifyWithStoredPassword()
 	}, [resourceId, initialPassword, onVerifySuccess, password])
 
-	// 单独处理初始密码验证
+	// Handle initial password verification separately
 	useEffect(() => {
 		if (initialPassword) {
 			handleVerify()
 		}
 	}, [initialPassword, handleVerify])
 
-	// 处理按下回车键
+	// Handle Enter key press
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === "Enter") {
 			handleVerify()
@@ -178,12 +178,12 @@ export default function PasswordVerification({
 			<div className={styles.icon}>
 				<img src={ShareIcon} alt="" />
 			</div>
-			<div className={styles.title}>该回放已开启密码验证</div>
-			<div className={styles.description}>请输入密码查看回放</div>
+			<div className={styles.title}>This playback has password protection enabled</div>
+			<div className={styles.description}>Please enter password to view playback</div>
 			<div className={styles.inputContainer}>
 				<Input
 					className={styles.input}
-					placeholder="请输入访问密码"
+					placeholder="Please enter access password"
 					value={password}
 					onChange={handlePasswordChange}
 					onKeyDown={handleKeyDown}
@@ -196,7 +196,7 @@ export default function PasswordVerification({
 					onClick={handleVerify}
 					loading={loading}
 				>
-					查看
+					View
 				</Button>
 			</div>
 		</div>

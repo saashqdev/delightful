@@ -10,11 +10,11 @@ export function useFormConfig() {
 	const { t } = useTranslation("flow")
 	const [form] = Form.useForm<ConfigFormValues>()
 
-	// 使用Form.useWatch钩子实时监听表单字段的变化
+	// Use Form.useWatch hook to monitor form field changes in real-time
 	const segmentMode = Form.useWatch(["fragment_config", "mode"], form)
 	const parentBlockType = Form.useWatch(["fragment_config", "parent_child", "parent_mode"], form)
 
-	// 分段模式切换处理
+	// Handle segment mode switching
 	const handleSegmentModeChange = useMemoizedFn((mode: SegmentationMode) => {
 		resetSegmentSettings(
 			mode === SegmentationMode.General
@@ -24,12 +24,12 @@ export function useFormConfig() {
 		form.setFieldValue(["fragment_config", "mode"], mode)
 	})
 
-	// 父块模式切换处理
+	// Handle parent block type switching
 	const handleParentBlockTypeChange = useMemoizedFn((type: ParentBlockMode) => {
 		form.setFieldValue(["fragment_config", "parent_child", "parent_mode"], type)
 	})
 
-	// 分段设置重置
+	// Reset segment settings
 	const resetSegmentSettings = useMemoizedFn((mode: SegmentationMode) => {
 		let newFragmentConfig = {}
 		const fragmentConfig = form.getFieldValue(["fragment_config"])
@@ -49,13 +49,13 @@ export function useFormConfig() {
 		})
 	})
 
-	// 处理表单数据并转换为API所需格式
+	// Process form data and convert to API-required format
 	const processFormData = useMemoizedFn(async () => {
 		try {
-			// 验证表单并获取值
+			// Validate form and get values
 			const formValues = await form.validateFields()
 
-			// 提取布尔值并转换为API所需的数组格式
+			// Extract boolean values and convert to array format required by API
 			const { normal, parent_child, ...restFragmentConfig } = formValues.fragment_config
 			const {
 				replace_spaces: normalReplaceSpaces,
@@ -68,13 +68,13 @@ export function useFormConfig() {
 				...restParentChild
 			} = parent_child || {}
 
-			// 处理所有分隔符中的转义字符
+			// Process escape characters in all separators
 			const processedConfig = processConfigSeparators({
 				normal: restNormal,
 				parent_child: restParentChild,
 			})
 
-			// 构建最终提交的对象
+			// Build final object to submit
 			const fragmentConfig: FragmentConfig = {
 				...restFragmentConfig,
 				normal: {
@@ -98,7 +98,7 @@ export function useFormConfig() {
 				fragment_config: fragmentConfig,
 			}
 		} catch (error) {
-			console.error("处理表单数据失败:", error)
+			console.error("Failed to process form data:", error)
 			message.error(t("knowledgeDatabase.saveConfigFailed"))
 		}
 	})

@@ -14,17 +14,17 @@ interface EmbeddingModel {
 }
 
 /**
- * 嵌入模型Hook，用于获取和处理嵌入模型列表
+ * Embedding model hook for fetching and processing embedding model list
  */
 export function useEmbeddingModels() {
 	const { styles } = useVectorKnowledgeConfigurationStyles()
 
-	// 嵌入模型分组选项
+	// Embedding model group options
 	const [embeddingModelGroup, setEmbeddingModelGroup] = useState<Knowledge.ServiceProvider[]>([])
-	// 铺平的所有嵌入模型
+	// Flattened list of all embedding models
 	const [embeddingModels, setEmbeddingModels] = useState<EmbeddingModel[]>([])
 
-	// 获取嵌入模型列表
+	// Get embedding model list
 	const fetchEmbeddingModelList = useMemoizedFn(async () => {
 		const res = await KnowledgeApi.getEmbeddingModelList()
 		if (res) {
@@ -44,7 +44,7 @@ export function useEmbeddingModels() {
 		}
 	})
 
-	/** 嵌入模型选项 */
+	/** Embedding model options */
 	const embeddingModelOptions = useMemo(() => {
 		return embeddingModelGroup.map((item) => ({
 			label: item.name,
@@ -65,7 +65,7 @@ export function useEmbeddingModels() {
 		}))
 	}, [embeddingModelGroup, styles])
 
-	// 获取嵌入模型列表
+	// Get embedding model list
 	useEffect(() => {
 		fetchEmbeddingModelList()
 	}, [])

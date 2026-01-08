@@ -1,86 +1,86 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 export enum customNodeType {
-	// 开始
+	// Start
 	Start = "1",
-	// 大模型
+	// Large Language Model
 	LLM = "2",
-	// 消息回复
+	// Reply Message
 	ReplyMessage = "3",
-	// 选择器
+	// Selector
 	If = "4",
-	// 代码
+	// Code
 	Code = "5",
-	// 数据加载
+	// Data Loader
 	Loader = "8",
-	// HTTP请求
+	// HTTP Request
 	HTTP = "10",
-	// 子流程
+	// Sub Process
 	Sub = "11",
-	// 结束
+	// End
 	End = "12",
-	// 历史消息查询
+	// Historical Message Query
 	MessageSearch = "13",
-	// 文本切割
+	// Text Split
 	TextSplit = "14",
-	// 意图识别
+	// Intention Recognition
 	IntentionRecognition = "24",
-	// 向量存储（知识库片段存储）
+	// Vector Storage (Knowledge Base Fragment Storage)
 	VectorStorage = "16",
-	// 向量搜索（相似度匹配）
+	// Vector Search (Similarity Matching)
 	VectorSearch = "17",
-	// 向量删除（片段删除）
+	// Vector Delete (Fragment Deletion)
 	VectorDelete = "27",
-	// 数据设置
+	// Data Setter
 	CacheSetter = "18",
-	// 数据读取
+	// Data Getter
 	CacheGetter = "19",
-	// 消息记忆存储
+	// Message Memory Storage
 	MessageMemory = "20",
-	// 变量 - 变量保存
+	// Variable - Save Variable
 	VariableSave = "21",
-	// 变量 - 从数组变量中弹出第一个值
+	// Variable - Pop First Value from Array Variable
 	// VariableArrayPop = "22",
-	// 变量 - 往数组变量中推入一个值
+	// Variable - Push Value into Array Variable
 	// VariableArrayPush = "23",
-	// 循环节点
+	// Loop Node
 	Loop = "30",
-	// 循环体节点
+	// Loop Body Node
 	LoopBody = "31",
-	// 循环结束节点
+	// Loop End Node
 	LoopEnd = "32",
-	// 人员检索
+	// Search Users
 	SearchUsers = "28",
-	// 等待消息节点
+	// Wait For Reply Node
 	WaitForReply = "29",
-	// 委托节点
+	// Agent Node
 	Agent = "50",
-	// 电子表格解析节点
+	// Excel Parsing Node
 	Excel = "51",
-	// 工具节点
+	// Tools Node
 	Tools = "26",
-	// 向量知识库 / 匹配数据库
+	// Vector Knowledge Base / Match Database
 	VectorDatabaseMatch = "52",
-	// 文生图节点
+	// Text to Image Node
 	Text2Image = "53",
-	// 群聊节点
+	// Group Chat Node
 	GroupChat = "54",
-	// 特殊节点：快捷指令节点
+	// Special Node: Quick Instructions Node
 	Instructions = "1001",
 }
 
 export const DELIGHTFUL_FLOW_ID_PREFIX = "DELIGHTFUL-FLOW-"
 
-// 需要动态生成output的节点
+// Nodes that need dynamically generated output
 export const DynamicOutputNodeTypes = [
 	customNodeType.Code,
 	customNodeType.VariableSave,
 	customNodeType.Sub,
 ]
 
-// 当前话题
+// Current Topic
 export const KnowledgeCurrentTopic = "knowledge_user_current_topic"
-// 当前会话
+// Current Conversation
 export const KnowledgeCurrentConversation = "knowledge_user_current_conversation"
 
 export const OmitNodeKeys = [

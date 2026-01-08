@@ -23,11 +23,11 @@ export default function RecallTest({ knowledgeBaseCode }: Props) {
 	const { styles } = useVectorKnowledgeRecallTestStyles()
 	const { t } = useTranslation("flow")
 
-	// 测试文本
+	// Test text
 	const [testText, setTestText] = useState("")
-	// 测试记录
+	// Test records
 	const [records, setRecords] = useState<RecallRecord[]>([])
-	// 测试结果
+	// Test results
 	const [results, setResults] = useState<{
 		total: number
 		list: Knowledge.FragmentItem[]
@@ -35,16 +35,16 @@ export default function RecallTest({ knowledgeBaseCode }: Props) {
 		total: 0,
 		list: [],
 	})
-	// 加载状态
+	// Loading state
 	const [recallLoading, setRecallLoading] = useState(false)
 
-	// 处理输入文本变更
+	// Handle input text change
 	const handleTextChange = useMemoizedFn((e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setTestText(e.target.value)
 	})
 
 	/**
-	 * 执行测试
+	 * Execute test
 	 */
 	const handleTest = useMemoizedFn(async () => {
 		if (!testText.trim()) {
@@ -66,41 +66,41 @@ export default function RecallTest({ knowledgeBaseCode }: Props) {
 			}
 			message.success(t("knowledgeDatabase.testSuccess"))
 		} catch (error) {
-			console.error("测试失败:", error)
+			console.error("Test failed:", error)
 			message.error(t("knowledgeDatabase.testFailed"))
 		} finally {
 			setRecallLoading(false)
 		}
 	})
 
-	// 防抖处理
+	// Debounce handling
 	const { run: debouncedHandleTest } = useDebounceFn(handleTest, {
 		wait: 300,
 		leading: true,
 		trailing: false,
 	})
 
-	// 获取测试记录
+	// Fetch test records
 	useEffect(() => {
 		if (knowledgeBaseCode) {
-			// 模拟获取测试记录
+			// Mock fetching test records
 			const mockRecords: RecallRecord[] = [
 				{
 					key: "1",
 					testTime: "2025-03-25 07:30",
-					testText: "服务",
+					testText: "Service",
 				},
 				{
 					key: "2",
 					testTime: "2025-03-25 07:02",
-					testText: "技术服务",
+					testText: "Technical Service",
 				},
 			]
 			setRecords(mockRecords)
 		}
 	}, [knowledgeBaseCode])
 
-	// 表格列定义
+	// Table column definitions
 	const columns = [
 		{
 			title: t("knowledgeDatabase.testTime"),
@@ -117,7 +117,7 @@ export default function RecallTest({ knowledgeBaseCode }: Props) {
 
 	return (
 		<Flex gap={20} className={styles.container}>
-			{/* 左侧面板 - 测试输入和历史记录 */}
+			{/* Left panel - Test input and history */}
 			<div className={styles.leftPanel}>
 				<div className={styles.title}>{t("knowledgeDatabase.recallTest")}</div>
 				<div className={styles.description}>{t("knowledgeDatabase.recallTestDesc")}</div>
@@ -153,7 +153,7 @@ export default function RecallTest({ knowledgeBaseCode }: Props) {
 				/> */}
 			</div>
 
-			{/* 右侧面板 - 测试结果 */}
+			{/* Right panel - Test results */}
 			<Flex vertical className={styles.rightPanel}>
 				<Flex align="center" gap={4} className={styles.resultsHeader}>
 					<IconLayoutList size={16} color="currentColor" />

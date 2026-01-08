@@ -60,9 +60,9 @@ class MermaidRenderService {
 	}
 
 	/**
-	 * 获取缓存
-	 * @param chart 图表
-	 * @returns 缓存
+	 * Get cache
+	 * @param chart Chart
+	 * @returns Cache
 	 */
 	async getCache(chart: string): Promise<{ data: string; svg: string; png: string } | undefined> {
 		if (this.cacheSvg.get(chart)) {
@@ -77,10 +77,10 @@ class MermaidRenderService {
 	}
 
 	/**
-	 * 修复mermaid数据
-	 * @description 修复mermaid数据中的中文符号，将中文符号转换为英文符号，但跳过中括号内的内容
-	 * @param data 数据
-	 * @returns 修复后的数据
+	 * Fix mermaid data
+	 * @description Fix Chinese punctuation in mermaid data, convert Chinese punctuation to English, but skip content inside square brackets
+	 * @param data Data
+	 * @returns Fixed data
 	 */
 	fix(data: string | undefined): string {
 		if (!data) return ""
@@ -100,8 +100,8 @@ class MermaidRenderService {
 			"\u201d": '"',
 			"【": " [",
 			"】": "] ",
-			"°": "度",
-			"¥": "元",
+			"°": "degrees",
+			"¥": "yuan",
 			"~": "~",
 			"-": "-",
 		}

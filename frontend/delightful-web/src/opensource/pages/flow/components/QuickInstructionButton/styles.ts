@@ -74,7 +74,7 @@ export const useStyles = createStyles(({ prefixCls, css, isDarkMode, token }) =>
 			}
 			.${prefixCls}-form-item-required {
 				&::before {
-					content: "" !important; /* 隐藏原有的星号 */
+					content: "" !important; /* Hide the original asterisk */
 					display: none !important;
 				}
 				&::after {

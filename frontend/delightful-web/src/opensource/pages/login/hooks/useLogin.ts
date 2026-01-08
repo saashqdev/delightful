@@ -59,13 +59,13 @@
 // 							values as Login.ThirdPartyLoginsFormValues,
 // 						)
 // 					default:
-// 						throw new Error("缺少登录类型")
+// 						throw new Error("Missing login type")
 // 				}
 // 			}
 // 		},
 // 	)
 //
-// 	/** 当前账号环境编号获取 */
+// 	/** Get current account deployment code */
 // 	const deployCodeSyncStep = useMemoizedFn(async () => {
 // 		try {
 // 			const { login_code } = await AuthService.getAccountDeployCode()
@@ -81,7 +81,7 @@
 // 		}
 // 	})
 //
-// 	/** Step: 环境同步（私有化环境配置同步） */
+// 	/** Step: Environment synchronization (private deployment environment configuration synchronization) */
 // 	const envSyncStep = useMemoizedFn(async (code: string) => {
 // 		const { config } = await CommonService.getPrivateConfigure(code)
 // 		useDeploymentStore.setState((preState) => {
@@ -91,7 +91,7 @@
 // 		return Promise.resolve(config)
 // 	})
 //
-// 	/** Step 2: 根据环境同步 delightful 组织 */
+// 	/** Step 2: Synchronize delightful organization based on environment */
 // 	const delightfulOrganizationSyncStep = useMemoizedFn(
 // 		(deployCode: string, inModal: boolean = false) => {
 // 			return async (
@@ -113,7 +113,7 @@
 // 						if (inModal) {
 // 							message.error(t("delightfulOrganizationSyncStep.pleaseBindExistingAccount"))
 // 						} else {
-// 							// 用户未创建账号，跳转邀请界面
+// 							// User has not created an account, redirect to invitation page
 // 							navigate(RoutePath.Invite, { replace: true })
 // 						}
 // 					}
@@ -156,7 +156,7 @@
 // 					deployCode,
 // 				} = params
 //
-// 				// 获取 teamshare 当前账号下所有组织
+// 				// Get all organizations under the current teamshare account
 // 				const organizations = await UserService.getUserOrganizations(
 // 					{ authorization: access_token },
 // 					deployCode,
@@ -182,10 +182,10 @@
 // 				const delightfulOrgCodeCache = useUserStore.getState()?.organizationCode
 // 				let delightfulOrgCode = null
 // 				if (delightfulOrgCodeCache && teamshareOrgMap?.[delightfulOrgCodeCache]) {
-// 					// 当且仅当缓存中的 delightfulOrgCode 存在且在当前账号中有效则使用缓存
+// 					// Use cache only when delightfulOrgCode exists in cache and is valid for current account
 // 					delightfulOrgCode = delightfulOrgCodeCache
 // 				} else {
-// 					// 当且仅当 delightful 组织 Code 不存在的情况下，重新以第一个作为首选
+// 					// Only when delightful organization Code doesn't exist, use the first one as preference
 // 					delightfulOrgCode =
 // 						delightfulOrganizationMap?.[authorizedOrg?.organization_code ?? ""]
 // 							?.delightful_organization_code
@@ -210,7 +210,7 @@
 //
 // 	/** 账号 Token 同步 */
 // 	const authorizationSyncStep = useMemoizedFn((userInfo: Login.UserLoginsResponse) => {
-// 		// 更新 useAuthenticationStore 中的 token
+// 		// Update token in useAuthenticationStore
 // 		useAuthenticationStore.setState((preState) => {
 // 			preState.authorization = userInfo.access_token
 // 		})
@@ -236,7 +236,7 @@
 // 					const userInfo = await getUserInfo(
 // 						delightfulOrganizationMap?.[orgCode]?.delightful_user_id,
 // 					)
-// 					// 登录完成后构造用户信息，维护在账号体系中
+// 					// After login completion, construct user information and maintain it in the account system
 // 					const userAccount: User.UserAccount = {
 // 						deployCode,
 // 						nickname: userInfo?.nickname,
@@ -284,7 +284,7 @@
 // 	const redirectUrlStep = useMemoizedFn(() => {
 // 		const url = new URL(window.location.href)
 // 		const { searchParams } = url
-// 		/** 从定向URL这里，如果是站点外就需要考虑是否需要携带 */
+// 		/** Redirect URL here, if it's an external site, need to consider whether to carry parameters */
 // 		const redirectUrl = searchParams.get(LoginValueKey.REDIRECT_URL)
 // 		if (redirectUrl) {
 // 			window.location.assign(decodeURIComponent(redirectUrl))

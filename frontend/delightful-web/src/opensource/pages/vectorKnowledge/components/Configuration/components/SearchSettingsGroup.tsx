@@ -10,11 +10,11 @@ interface SearchSettingsGroupProps {
 	isDocumentConfig: boolean
 }
 
-// 可用的重排序模型列表
+// Available rerank models list
 const RERANK_MODELS: { label: string; value: string }[] = []
 
 /**
- * 检索设置组件组（包含三种搜索模式）
+ * Retrieval settings component group (includes three search modes)
  */
 export default function SearchSettingsGroup({ isDocumentConfig }: SearchSettingsGroupProps) {
 	const { styles } = useVectorKnowledgeConfigurationStyles()
@@ -31,7 +31,7 @@ export default function SearchSettingsGroup({ isDocumentConfig }: SearchSettings
 	})
 
 	/**
-	 * 渲染重排模型设置
+	 * Render rerank model setting
 	 */
 	const renderRerankSetting = () => (
 		<Form.Item
@@ -70,7 +70,7 @@ export default function SearchSettingsGroup({ isDocumentConfig }: SearchSettings
 	)
 
 	/**
-	 * 渲染Top K设置
+	 * Render Top K setting
 	 */
 	const renderTopKSetting = () => (
 		<Form.Item
@@ -111,7 +111,7 @@ export default function SearchSettingsGroup({ isDocumentConfig }: SearchSettings
 	)
 
 	/**
-	 * 渲染分数阈值设置
+	 * Render score threshold setting
 	 */
 	const renderScoreThresholdSetting = () => (
 		<Form.Item
@@ -172,7 +172,7 @@ export default function SearchSettingsGroup({ isDocumentConfig }: SearchSettings
 				<Input type="hidden" />
 			</Form.Item>
 
-			{/* 向量搜索 */}
+			{/* Vector Search */}
 			<PatternSection
 				title={t("knowledgeDatabase.vectorSearch")}
 				description={t("knowledgeDatabase.vectorSearchDesc")}
@@ -189,7 +189,7 @@ export default function SearchSettingsGroup({ isDocumentConfig }: SearchSettings
 				</Flex>
 			</PatternSection>
 
-			{/* 全文搜索 */}
+			{/* Full Text Search */}
 			<PatternSection
 				title={t("knowledgeDatabase.fullTextSearch")}
 				description={t("knowledgeDatabase.fullTextSearchDesc")}
@@ -202,7 +202,7 @@ export default function SearchSettingsGroup({ isDocumentConfig }: SearchSettings
 				{renderTopKSetting()}
 			</PatternSection>
 
-			{/* 混合搜索 */}
+			{/* Hybrid Search */}
 			<PatternSection
 				title={t("knowledgeDatabase.hybridSearch")}
 				description={t("knowledgeDatabase.hybridSearchDesc")}

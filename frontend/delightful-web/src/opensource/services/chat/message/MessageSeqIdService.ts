@@ -12,34 +12,34 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 获取全局最后拉取消息序列号的存储键
+	 * Get storage key for global last pulled message sequence number
 	 */
 	private get globalPullSeqIdKey() {
 		return platformKey(`pullLastSeqId/${this.delightfulId}`)
 	}
 
 	/**
-	 * 获取会话级别最后拉取消息序列号的存储键
+	 * Get storage key for conversation-level last pulled message sequence number
 	 */
 	private get conversationPullSeqIdKey() {
 		return platformKey(`conversationPullSeqId/${this.delightfulId}`)
 	}
 
 	/**
-	 * 获取组织级别最后渲染消息序列号的存储键
+	 * Get storage key for organization-level last rendered message sequence number
 	 */
 	private get renderLastSeqIdKey() {
 		return platformKey(`renderLastSeqId/${this.delightfulId}`)
 	}
 
 	/**
-	 * 获取会话级别最后拉取消息序列号的存储键
+	 * Get storage key for conversation-level last pulled message sequence number
 	 */
 	private get conversationdRenerSeqIdKey() {
 		return platformKey(`conversationRenderSeqId/${this.delightfulId}`)
 	}
 
-	// ========== 全局拉取序列号管理 ==========
+	// ========== Global pull sequence number management ==========
 	private getGlobalPullSeqIdFromLocalStorage(): string {
 		return localstorage.get(this.globalPullSeqIdKey) ?? ""
 	}
@@ -49,36 +49,36 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 获取全局最后拉取的序列号
+	 * Get global last pulled sequence number
 	 */
 	public getGlobalPullSeqId(): string {
-		// 优先从内存中获取
+		// Get from memory first
 		if (this.seqIdMap[this.globalPullSeqIdKey]) {
 			return this.getGlobalPullSeqIdFromMemory()
 		}
-		// 从本地存储中获取
+		// Get from local storage
 		return this.getGlobalPullSeqIdFromLocalStorage()
 	}
 
 	/**
-	 * 更新全局最后拉取的序列号
+	 * Update global last pulled sequence number
 	 */
 	public updateGlobalPullSeqId(seqId: string): void {
-		// 判断seqId
+		// Check seqId
 		const globalSeqId = this.getGlobalPullSeqIdFromLocalStorage()
 		if (bigNumCompare(seqId, globalSeqId) > 0) {
-			// 更新本地存储
+			// Update local storage
 			localstorage.set(this.globalPullSeqIdKey, seqId)
 		}
 
 		const sessionSeqId = this.getGlobalPullSeqIdFromMemory()
 		if (!sessionSeqId || (sessionSeqId && bigNumCompare(seqId, sessionSeqId) > 0)) {
-			// 更新内存
+			// Update memory
 			this.seqIdMap[this.globalPullSeqIdKey] = seqId
 		}
 	}
 
-	// ========== 会话级别拉取序列号管理 ==========
+	// ========== Conversation-level pull sequence number management ==========
 	private getConversationPullSeqIdFromLocalStorage(): Record<string, string> {
 		return localstorage.get(this.conversationPullSeqIdKey, true) ?? {}
 	}
@@ -91,7 +91,7 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 获取所有会话的拉取序列号映射
+	 * Get pull sequence number mapping for all conversations
 	 */
 	public getConversationPullSeqIds(): Record<string, string> {
 		if (this.seqIdMap[this.conversationPullSeqIdKey]) {
@@ -101,7 +101,7 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 获取指定会话的拉取序列号
+	 * Get pull sequence number for specified conversation
 	 */
 	public getConversationPullSeqId(conversationId: string): string {
 		if (this.seqIdMap[this.conversationPullSeqIdKey]) {
@@ -113,10 +113,10 @@ class MessageSeqIdService {
 	}
 
 	// /**
-	//  * 设置所有会话的拉取序列号映射
+	//  * Set pull sequence number mapping for all conversations
 	//  */
 	// public setConversationPullSeqIds(seqIds: Record<string, string>): void {
-	// 	// 判断seqIds
+	// 	// Check seqIds
 	// 	const conversationSeqIds = this.getConversationPullSeqIdFromLocalStorage()
 	// 	Object.entries(seqIds).forEach(([conversationId, seqId]) => {
 	// 		if (bigNumCompare(seqId, conversationSeqIds[conversationId] ?? "0") > 0) {
@@ -124,7 +124,7 @@ class MessageSeqIdService {
 	// 		}
 	// 	})
 
-	// 	// 更新本地存储
+	// 	// Update local storage
 	// 	localstorage.set(this.conversationPullSeqIdKey, conversationSeqIds)
 
 	// 	const sessionSeqIds = this.getConversationPullSeqIdFromMemory()
@@ -136,20 +136,20 @@ class MessageSeqIdService {
 	// 	this.seqIdMap[this.conversationPullSeqIdKey] = sessionSeqIds
 	// }
 	private setGlobalConversationPullSeqIds(seqIds: Record<string, string>): void {
-		// 更新全局缓存
+		// Update global cache
 		localstorage.set(this.conversationPullSeqIdKey, seqIds)
 	}
 
 	private setSessionConversationPullSeqIds(seqIds: Record<string, string>): void {
-		// 更新临时缓存
+		// Update temporary cache
 		this.seqIdMap[this.conversationPullSeqIdKey] = seqIds
 	}
 
 	/**
-	 * 更新指定会话的拉取序列号
+	 * Update pull sequence number for specified conversation
 	 */
 	public updateConversationPullSeqId(conversationId: string, seqId: string): void {
-		// 判断seqId，分开更新
+		// Check seqId, update separately
 		const globalSeqIds = this.getConversationPullSeqIdFromLocalStorage()
 
 		if (bigNumCompare(seqId, globalSeqIds[conversationId] ?? "0") > 0) {
@@ -165,21 +165,21 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 删除指定会话的拉取序列号
+	 * Delete pull sequence number for specified conversation
 	 */
 	public deleteConversationPullSeqId(conversationId: string): void {
-		// 更新全局缓存
+		// Update global cache
 		const globalSeqIds = this.getConversationPullSeqIdFromLocalStorage()
 		delete globalSeqIds[conversationId]
 		this.setGlobalConversationPullSeqIds(globalSeqIds)
 
-		// 更新临时缓存
+		// Update temporary cache
 		const sessionSeqIds = this.getConversationPullSeqIdFromMemory()
 		delete sessionSeqIds[conversationId]
 		this.setSessionConversationPullSeqIds(sessionSeqIds)
 	}
 
-	// ========== 组织级别渲染序列号管理 ==========
+	// ========== Organization-level render sequence number management ==========
 	private getOrganizationRenderObjectFromLocalStorage(): Record<string, string> {
 		return JSON.parse(localstorage.get(this.renderLastSeqIdKey) ?? "{}")
 	}
@@ -192,7 +192,7 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 获取组织级别渲染对象
+	 * Get organization-level render object
 	 */
 	public getOrganizationRenderObject(): Record<string, string> {
 		if (this.seqIdMap[this.renderLastSeqIdKey]) {
@@ -210,7 +210,7 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 获取组织级别渲染序列号
+	 * Get organization-level render sequence number
 	 */
 	public getOrganizationRenderSeqId(organization_code: string) {
 		if (!organization_code) {
@@ -239,7 +239,7 @@ class MessageSeqIdService {
 		}
 	}
 
-	// ========== 会话级别渲染序列号管理 ==========
+	// ========== Conversation-level render sequence number management ==========
 	private getConversationRenderSeqIdFromLocalStorage(): Record<string, string> {
 		return localstorage.get(this.conversationdRenerSeqIdKey, true) ?? {}
 	}
@@ -252,7 +252,7 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 获取所有会话的渲染序列号映射
+	 * Get render sequence number mapping for all conversations
 	 */
 	public getConversationRenderSeqIds(): Record<string, string> {
 		if (this.seqIdMap[this.conversationdRenerSeqIdKey]) {
@@ -262,7 +262,7 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 获取指定会话的渲染序列号
+	 * Get render sequence number for specified conversation
 	 */
 	public getConversationRenderSeqId(conversationId: string): string {
 		if (this.seqIdMap[this.conversationdRenerSeqIdKey]) {
@@ -281,7 +281,7 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 更新指定会话的渲染序列号
+	 * Update render sequence number for specified conversation
 	 */
 	public updateConversationRenderSeqId(conversationId: string, seqId: string): void {
 		const globalSeqIds = this.getConversationRenderSeqIdFromLocalStorage()
@@ -298,7 +298,7 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 删除指定会话的渲染序列号
+	 * Delete render sequence number for specified conversation
 	 */
 	public deleteConversationRenderSeqId(conversationId: string): void {
 		const globalSeqIds = this.getConversationRenderSeqIdFromLocalStorage()
@@ -310,9 +310,9 @@ class MessageSeqIdService {
 		this.setSessionConversationRenderSeqIds(sessionSeqIds)
 	}
 
-	// ========== 批量操作 ==========
+	// ========== Batch operations ==========
 	/**
-	 * 清除指定会话的所有序列号
+	 * Clear all sequence numbers for specified conversation
 	 */
 	public clearConversationSeqIds(conversationId: string): void {
 		this.deleteConversationPullSeqId(conversationId)
@@ -320,7 +320,7 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 清除所有序列号
+	 * Clear all sequence numbers
 	 */
 	public clearAllSeqIds(): void {
 		localstorage.remove(this.globalPullSeqIdKey)
@@ -329,7 +329,7 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 初始化所有组织的渲染序列号
+	 * Initialize render sequence numbers for all organizations
 	 */
 	public initAllOrganizationRenderSeqId(seqId: string) {
 		const allOrganization = userStore.user.delightfulOrganizationMap
@@ -348,7 +348,7 @@ class MessageSeqIdService {
 	}
 
 	/**
-	 * 检查所有组织的渲染序列号(避免新增组织，导致渲染序列号缺失)
+	 * Check render sequence numbers for all organizations (avoid missing render sequence numbers when new organizations are added)
 	 */
 	checkAllOrganizationRenderSeqId() {
 		const allOrganization = userStore.user.delightfulOrganizationMap

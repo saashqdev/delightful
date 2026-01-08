@@ -1,4 +1,4 @@
-// 布局常量
+// Layout constants
 export const LAYOUT_CONSTANTS = {
 	MAIN_MIN_WIDTH_WITH_TOPIC: 600,
 	MAIN_MIN_WIDTH_WITHOUT_TOPIC: 400,
@@ -7,28 +7,28 @@ export const LAYOUT_CONSTANTS = {
 	WINDOW_MARGIN: 100,
 } as const
 
-// 面板索引枚举
+// Panel index enum
 export const enum PanelIndex {
 	Sider = 0,
 	Main = 1,
 	FilePreview = 2,
 }
 
-// 计算面板尺寸的工具函数
+// Utility functions for calculating panel sizes
 export const calculatePanelSizes = {
-	// 计算主面板最小宽度
+	// Calculate main panel minimum width
 	getMainMinWidth: (hasTopicOpen: boolean): number => {
 		return hasTopicOpen
 			? LAYOUT_CONSTANTS.MAIN_MIN_WIDTH_WITH_TOPIC
 			: LAYOUT_CONSTANTS.MAIN_MIN_WIDTH_WITHOUT_TOPIC
 	},
 
-	// 计算两面板布局
+	// Calculate two-panel layout
 	getTwoPanelSizes: (totalWidth: number, siderWidth: number): [number, number] => {
 		return [siderWidth, totalWidth - siderWidth]
 	},
 
-	// 计算三面板布局（包含文件预览）
+	// Calculate three-panel layout (including file preview)
 	getThreePanelSizes: (
 		totalWidth: number,
 		siderWidth: number,
@@ -42,7 +42,7 @@ export const calculatePanelSizes = {
 		return [siderWidth, adjustedMainWidth, adjustedFilePreviewWidth]
 	},
 
-	// 计算文件预览打开时的默认布局
+	// Calculate default layout when file preview is open
 	getFilePreviewOpenSizes: (totalWidth: number, siderWidth: number): [number, number, number] => {
 		const availableWidth = totalWidth - siderWidth
 		const mainWidth = availableWidth * LAYOUT_CONSTANTS.MAIN_PANEL_RATIO
@@ -51,24 +51,24 @@ export const calculatePanelSizes = {
 		return [siderWidth, mainWidth, filePreviewWidth]
 	},
 
-	// 处理侧边栏调整时的尺寸重计算
+	// Handle size recalculation when sidebar is resized
 	handleSiderResize: (
 		prevSizes: (number | undefined)[],
 		newSizes: number[],
 		totalWidth: number,
 		mainMinWidth: number,
 	): (number | undefined)[] => {
-		// 两面板模式
+		// Two-panel mode
 		if (newSizes.length === 2) {
 			return newSizes
 		}
 
-		// 三面板模式
+		// Three-panel mode
 		if (newSizes.length === 3) {
 			const [newSiderWidth, , newFilePreviewWidth] = newSizes
 			const [prevSiderWidth, , prevFilePreviewWidth] = prevSizes
 
-			// 侧边栏宽度未变，调整的是文件预览面板
+			// Sidebar width unchanged, file preview panel is being adjusted
 			if (prevSiderWidth === newSiderWidth) {
 				return calculatePanelSizes.getThreePanelSizes(
 					totalWidth,
@@ -78,7 +78,7 @@ export const calculatePanelSizes = {
 				)
 			}
 
-			// 文件预览宽度未变，调整的是侧边栏
+			// File preview width unchanged, sidebar is being adjusted
 			if (prevFilePreviewWidth === newFilePreviewWidth) {
 				return calculatePanelSizes.getThreePanelSizes(
 					totalWidth,
@@ -88,7 +88,7 @@ export const calculatePanelSizes = {
 				)
 			}
 
-			// 默认重新计算
+			// Default recalculation
 			return calculatePanelSizes.getThreePanelSizes(
 				totalWidth,
 				newSiderWidth,
@@ -101,5 +101,5 @@ export const calculatePanelSizes = {
 	},
 }
 
-// 默认导出，方便使用
+// Default export for convenience
 export default calculatePanelSizes

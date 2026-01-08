@@ -2,7 +2,7 @@ export const enum SettingSection {
 	GENERAL_SETTING = "generalSetting",
 	ACCOUNT_MANAGE = "accountManage",
 	LOGIN_DEVICES = "loginDevices",
-	/** 快捷键 */
+	/** Shortcut key */
 	HOTKEYS_SETTING = "hotkeySetting",
 	FALLBACK = "fallback",
 	UPDATE_LOG = "updateLog",

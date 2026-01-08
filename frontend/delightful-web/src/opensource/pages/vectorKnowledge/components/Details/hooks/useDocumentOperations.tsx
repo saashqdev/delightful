@@ -93,7 +93,7 @@ export const useDocumentOperations = ({
 							success = !!data
 						}
 
-						// 刷新数据列表
+						// Refresh data list
 						await getKnowledgeDocumentList(
 							knowledgeBaseCode,
 							searchText,
@@ -101,7 +101,7 @@ export const useDocumentOperations = ({
 							pageInfo.pageSize,
 						)
 
-						// 显示成功消息
+						// Display success message
 						if (success) {
 							let successMessage = ""
 							switch (operationType) {
@@ -124,7 +124,7 @@ export const useDocumentOperations = ({
 							message.success(successMessage)
 						}
 					} catch (error) {
-						console.error("操作失败:", error)
+						console.error("Operation failed:", error)
 						message.error(t("common.operationFailed"))
 					}
 				},
@@ -237,12 +237,12 @@ export const useDocumentOperations = ({
 							break
 					}
 
-					// 显示成功消息
+					// Display success message
 					if (successCount > 0) {
 						message.success(successMessage)
 					}
 
-					// 如果有失败的操作，显示警告
+					// Display warning if there are failed operations
 					if (failedCount > 0) {
 						message.warning(
 							t("knowledgeDatabase.batchOperationPartialFailed", {
@@ -251,7 +251,7 @@ export const useDocumentOperations = ({
 						)
 					}
 				} catch (error) {
-					console.error("批量操作失败:", error)
+					console.error("Batch operation failed:", error)
 					message.error(t("common.operationFailed"))
 				}
 			},

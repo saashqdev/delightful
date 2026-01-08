@@ -167,7 +167,7 @@ const DelightfulImagePreview = memo((props: Props) => {
 				<DelightfulButton type="link" className={styles.toolButton} onClick={resetImage}>
 					<DelightfulIcon color="currentColor" component={IconRelationOneToOne} size={24} />
 				</DelightfulButton>
-				{/* 旋转 */}
+			{/* Rotate */}
 				<DelightfulButton type="link" className={styles.toolButton} onClick={rotateImage}>
 					<DelightfulIcon color="currentColor" component={IconRotateRectangle} size={24} />
 				</DelightfulButton>

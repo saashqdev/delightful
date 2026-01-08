@@ -38,11 +38,11 @@ interface InstructionListProps {
 	onFinish: (val: QuickInstruction & { switch_on: boolean; switch_off: boolean }) => void
 }
 
-// 使用指令模型的指令类型
+// Instruction types that use instruction model
 const useInstructionModel = [InstructionType.SINGLE_CHOICE, InstructionType.SWITCH]
-// 使用直接发送指令的指令类型
+// Instruction types that use direct send command
 const useSendCommand = [InstructionType.SINGLE_CHOICE, InstructionType.TEXT]
-// 使用指令常驻的指令类型
+// Instruction types that use instruction residency
 const useInstructionResidency = [InstructionType.SINGLE_CHOICE, InstructionType.SWITCH]
 
 const InstructionForm = memo(
@@ -72,7 +72,7 @@ const InstructionForm = memo(
 			[instructionMode],
 		)
 
-		/** 统一处理插入位置显示逻辑 */
+		/** Unified handling of insert location visibility logic */
 		const updateInsertLocationVisibility = useMemoizedFn(
 			(
 				isResidency: boolean = false,
@@ -81,16 +81,16 @@ const InstructionForm = memo(
 			) => {
 				const isFlowMode = mode === InstructionModeType.Flow
 
-				// 以下情况需要隐藏插入位置：
-				// 1. 流程模式
-				// 2. 指令常驻开启
-				// 3. 直接发送指令开启
+				// Hide insert location in the following cases:
+				// 1. Flow mode
+				// 2. Instruction residency enabled
+				// 3. Direct send instruction enabled
 				if (isFlowMode || isResidency || isSendDirectly) {
 					setShowInsertLocation(false)
 					return
 				}
 
-				// 其他情况显示插入位置
+				// Show insert location in other cases
 				setShowInsertLocation(true)
 			},
 		)
@@ -169,7 +169,7 @@ const InstructionForm = memo(
 			}
 		})
 
-		/** 编辑器配置 */
+		/** Editor configuration */
 		const editorOptions = useMemo<UseEditorOptions>(
 			() => ({
 				editable: true,
@@ -182,14 +182,14 @@ const InstructionForm = memo(
 			[form],
 		)
 
-		/** 插入指令值 */
+		/** Insert instruction value */
 		const insertInstruction = useMemoizedFn(() => {
 			editorRef.current?.editor?.commands.insertContent(
 				genTemplateInstructionNode(currentInstruction),
 			)
 		})
 
-		// 保存指令说明
+		// Save instruction explanation
 		const innerSaveInstructionExp = useMemoizedFn(
 			(val: InstructionExplanation, index?: number) => {
 				const type = form.getFieldValue("type")
@@ -211,7 +211,7 @@ const InstructionForm = memo(
 			},
 		)
 
-		/** 指令常驻改变 */
+		/** Instruction residency change */
 		const InstructionResidencyChange = useMemoizedFn((checked: boolean) => {
 			updateSendCommandVisibility(checked, instructionMode)
 			updateInsertLocationVisibility(
@@ -221,7 +221,7 @@ const InstructionForm = memo(
 			)
 		})
 
-		/** 直接发送指令改变 */
+		/** Direct send instruction change */
 		const SendCommandChange = useMemoizedFn((checked: boolean) => {
 			updateInsertLocationVisibility(
 				form.getFieldValue("residency"),
@@ -230,7 +230,7 @@ const InstructionForm = memo(
 			)
 		})
 
-		/* 指令模式改变 */
+		/* Instruction mode change */
 		const InstructionModeChange = useMemoizedFn((mode: InstructionModeType) => {
 			setInstructionMode(mode)
 			updateSendCommandVisibility(form.getFieldValue("residency"), mode)
@@ -241,7 +241,7 @@ const InstructionForm = memo(
 			)
 		})
 
-		/* 指令类型改变 */
+		/* Instruction type change */
 		const InstructionTypeChange = useMemoizedFn((value: InstructionType) => {
 			setSelectedValue(value)
 			switch (value) {
@@ -281,7 +281,7 @@ const InstructionForm = memo(
 				onValuesChange={handleFormChange}
 			>
 				<Form.Item name="id" noStyle />
-				{/* 基础信息 */}
+				{/* Basic information */}
 				<Flex vertical gap={8}>
 					<div className={styles.formSubTitle}>{t("explore.form.baseInfo")}</div>
 					<Form.Item
@@ -303,7 +303,7 @@ const InstructionForm = memo(
 						/>
 					</Form.Item>
 				</Flex>
-				{/* 指令配置 */}
+				{/* Instruction configuration */}
 				<Flex vertical gap={8}>
 					<div className={styles.formSubTitle}>
 						{t("explore.form.instructionSetting")}
@@ -350,15 +350,15 @@ const InstructionForm = memo(
 					{selectedValue === InstructionType.SWITCH && <SwitchOption />}
 					{selectedValue === InstructionType.STATUS && <StatusButton form={form} />}
 				</Flex>
-				{/* 指令常驻 */}
+				{/* Instruction residency */}
 				{useInstructionResidency.includes(selectedValue) && (
 					<InstructionResidency onHiddenInsertLocation={InstructionResidencyChange} />
 				)}
-				{/* 指令模式 */}
+				{/* Instruction mode */}
 				{useInstructionModel.includes(selectedValue) && (
 					<InstructionMode instructionModeChange={InstructionModeChange} />
 				)}
-				{/* 指令内容 */}
+				{/* Instruction content */}
 				{(isChatMode || selectedValue === InstructionType.TEXT) &&
 					selectedValue !== InstructionType.STATUS && (
 						<InstructionContent
@@ -368,7 +368,7 @@ const InstructionForm = memo(
 							editorOptions={editorOptions}
 						/>
 					)}
-				{/* 指令说明 */}
+				{/* Instruction explanation */}
 				{((selectedValue === InstructionType.SWITCH && isChatMode) ||
 					selectedValue === InstructionType.TEXT) && (
 					<Form.Item name="instruction_explanation" noStyle>
@@ -380,12 +380,12 @@ const InstructionForm = memo(
 					</Form.Item>
 				)}
 
-				{/* 直接发送指令 */}
+				{/* Direct send instruction */}
 				{shouldShowSendCommand && (
 					<SendCommand onHiddenInsertLocation={SendCommandChange} />
 				)}
 
-				{/* 指令插入位置 */}
+				{/* Instruction insert location */}
 				{useSendCommand.includes(selectedValue) && showInsertLocation && <InsertLocation />}
 			</Form>
 		)

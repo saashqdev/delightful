@@ -12,9 +12,9 @@ class ConversationTaskService {
 	}
 
 	/**
-	 * 获取任务列表
-	 * @param callback 回调函数
-	 * @returns 任务列表
+	 * Get task list
+	 * @param callback Callback function
+	 * @returns Task list
 	 */
 	getTaskList() {
 		if (!this.agentId) return Promise.resolve()
@@ -27,10 +27,10 @@ class ConversationTaskService {
 	}
 
 	/**
-	 * 创建任务
-	 * @param data 任务数据
-	 * @param callback 回调函数
-	 * @returns 创建后的任务数据
+	 * Create task
+	 * @param data Task data
+	 * @param callback Callback function
+	 * @returns Created task data
 	 */
 	createTask(data: CreateTaskParams, callback?: () => void) {
 		return ChatApi.createTask(data).then(() => {
@@ -40,10 +40,10 @@ class ConversationTaskService {
 	}
 
 	/**
-	 * 更新任务
-	 * @param data 任务数据
-	 * @param callback 回调函数
-	 * @returns 更新后的任务数据
+	 * Update task
+	 * @param data Task data
+	 * @param callback Callback function
+	 * @returns Updated task data
 	 */
 	updateTask(data: UserTask, callback?: () => void) {
 		return ChatApi.updateTask(data).then(() => {
@@ -53,10 +53,10 @@ class ConversationTaskService {
 	}
 
 	/**
-	 * 删除任务
-	 * @param taskId 任务ID
-	 * @param callback 回调函数
-	 * @returns 删除后的任务数据
+	 * Delete task
+	 * @param taskId Task ID
+	 * @param callback Callback function
+	 * @returns Deleted task data
 	 */
 	deleteTask(taskId: string, callback?: () => void) {
 		return ChatApi.deleteTask(taskId).then(() => {
@@ -66,7 +66,7 @@ class ConversationTaskService {
 	}
 
 	/**
-	 * 清除代理信息
+	 * Clear agent information
 	 */
 	clearAgentInfo() {
 		conversationStore.setConversationTaskList([])

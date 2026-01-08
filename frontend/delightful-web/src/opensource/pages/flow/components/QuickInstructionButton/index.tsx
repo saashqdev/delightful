@@ -145,7 +145,7 @@ export default function QuickInstructionButton({ agent, Icon }: QuickInstruction
 			let groupIdx = instructionsList.findIndex((item) => item.position === selectedGroupType)
 
 			const newInstructionsList = [...instructionsList]
-			// 如果 group 不存在且列表为空，创建新的 group
+			// If group doesn't exist and list is empty, create a new group
 			let groupList: QuickInstruction[] = []
 			if (groupIdx === -1) {
 				newInstructionsList.push({
@@ -159,23 +159,19 @@ export default function QuickInstructionButton({ agent, Icon }: QuickInstruction
 				groupList = newInstructionsList[groupIdx].items
 			}
 
-			// 如果是开关，需要设置 default_value
-			if (values.type === InstructionType.SWITCH) {
-				values.default_value = values.switch_on ? "on" : "off"
-			}
-			// 状态指令,需要设置 default_value
-			if (values.type === InstructionType.STATUS) {
-				values.default_value =
-					values.values.findIndex((item: InstructionStatus) => item.switch) + 1
-			}
+		// If it's a switch, set default_value
+		if (values.type === InstructionType.SWITCH) {
+			values.default_value = values.switch_on ? "on" : "off"
+		}
+		// For status instruction, set default_value
 
 			const isEdit = groupList.findIndex((item) => item.id === values.id)
 
-			// 检查是否存在重复名称
+		// Check for duplicate names
 			const isDuplicateName = (name: string, id?: string) =>
 				groupList.some((item) => item.name && item.name === name && (!id || item.id !== id))
 
-			// 编辑
+			// Edit mode
 			if (isEdit !== -1) {
 				if (isDuplicateName(values.name, values.id)) {
 					message.error(t("agent.nameRepeatError"))
@@ -183,7 +179,7 @@ export default function QuickInstructionButton({ agent, Icon }: QuickInstruction
 				}
 				groupList[isEdit] = values
 			} else {
-				// 新增逻辑
+				// Add new logic
 				if (isDuplicateName(values.name)) {
 					message.error(t("agent.nameRepeatError"))
 					return
@@ -200,7 +196,7 @@ export default function QuickInstructionButton({ agent, Icon }: QuickInstruction
 		},
 	)
 
-	// 删除指令
+	// Delete instruction
 	const deleteInstruction = useMemoizedFn(
 		async (type: InstructionGroupType, val: QuickInstructionBase) => {
 			const newList = instructionsList.map((data) => {
@@ -224,7 +220,7 @@ export default function QuickInstructionButton({ agent, Icon }: QuickInstruction
 		},
 	)
 
-	// 选择指令
+	// Select instruction
 	const selectInstruction = useMemoizedFn(
 		(type: InstructionGroupType, val: CommonQuickInstruction) => {
 			setCurrentInstruction(val)
@@ -234,7 +230,7 @@ export default function QuickInstructionButton({ agent, Icon }: QuickInstruction
 		},
 	)
 
-	// 指令数
+	// Instruction count
 	const instructionNum = useMemo(() => {
 		return instructionsList.reduce((prev, curr) => {
 			return prev + curr.items.length

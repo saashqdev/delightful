@@ -31,7 +31,7 @@ export interface InstructUpdateCallback {
 }
 
 export interface ConversationBotDataManagerProps {
-	// 编辑器相关
+	// Editor related
 	editorRef?: DelightfulRichEditorRef | null
 	onSend?: (
 		content: JSONContent | undefined,
@@ -155,7 +155,7 @@ class ConversationBotDataService {
 	}
 
 	/**
-	 * 初始化时，插入常驻快捷指令
+	 * On initialization, insert permanent quick instructions
 	 */
 	insertResidencyQuickInstructionWhenInit() {
 		const jsonContent = this.editorRef?.editor?.getText()
@@ -171,7 +171,7 @@ class ConversationBotDataService {
 	 */
 	updateRemoteInstructionConfig(instructs: Record<string, unknown>, remove?: boolean) {
 		if (!this.conversationId || !this.userId)
-			return Promise.reject(new Error("会话ID或用户ID为空"))
+			return Promise.reject(new Error("Conversation ID or user ID is empty"))
 
 		this.isUpdateConversationInstructionConfigLoading = true
 
@@ -428,9 +428,9 @@ class ConversationBotDataService {
 	}
 
 	/**
-	 * 更新快捷指令配置
-	 * @param instruction 快捷指令
-	 * @param targetId 目标ID
+	 * Update quick instruction configuration
+	 * @param instruction Quick instruction
+	 * @param targetId Target ID
 	 */
 	updateInstructionConfig(instruction: QuickInstruction, targetId: string) {
 		if (instruction.residency) {
@@ -560,7 +560,7 @@ class ConversationBotDataService {
 				this.insertContentByLocation(insertContent, instruction.insert_location)
 			}
 		} catch (err) {
-			console.error("快捷指令内容解析失败", instruction)
+			console.error("Failed to parse quick instruction content", instruction)
 		}
 	}
 
@@ -580,7 +580,7 @@ class ConversationBotDataService {
 				}
 				this.onSend?.(this.enhanceJsonContentBaseSwitchInstruction(jsonWithWrapper), false)
 			} catch (err) {
-				console.error("快捷指令内容解析失败", instruction)
+				console.error("Failed to parse quick instruction content", instruction)
 			}
 		})
 	}

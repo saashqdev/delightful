@@ -2,12 +2,12 @@ import { platformKey } from "@/utils/storage"
 
 class LastConversationService {
 	/**
-	 * 组织编码 -> 会话ID
+	 * Organization code -> Conversation ID
 	 */
 	private lastConversationMap: Map<string, string> = new Map()
 
 	/**
-	 * 空闲回调
+	 * Idle callback
 	 */
 	private idleCallback: number | undefined
 
@@ -20,7 +20,7 @@ class LastConversationService {
 	}
 
 	/**
-	 * 缓存到本地存储
+	 * Cache to local storage
 	 */
 	cacheToLocalStorage() {
 		localStorage.setItem(
@@ -30,7 +30,7 @@ class LastConversationService {
 	}
 
 	/**
-	 * 设置会话ID
+	 * Set conversation ID
 	 */
 	setLastConversation(
 		delightfulId: string | undefined,
@@ -51,7 +51,7 @@ class LastConversationService {
 	}
 
 	/**
-	 * 获取会话ID
+	 * Get conversation ID
 	 */
 	getLastConversation(delightfulId?: string, organizationCode?: string) {
 		if (!delightfulId || !organizationCode) {

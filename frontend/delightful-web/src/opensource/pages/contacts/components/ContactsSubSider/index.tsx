@@ -56,7 +56,7 @@ const CurrentOrganization = observer(({ onItemClick }: CurrentOrganizationProps)
 	const pathNodesState = useMemo(() => {
 		return (
 			userInfo?.path_nodes
-				// 过滤掉根部门
+				// Filter out root department
 				.filter((item) => item.department_id !== "-1")
 				?.map((node) => ({
 					id: node.department_id,

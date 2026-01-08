@@ -180,12 +180,12 @@ class ChatMessageApplyService {
 				this.applyConversationMessage(message as SeqResponse<ConversationMessage>, options)
 				break
 			case ConversationMessageType.AggregateAISearchCardV2:
-				console.log(`[apply] 处理AI搜索卡片V2消息, message:`, message)
+				console.log(`[apply] Handle AI search card V2 message, message:`, message)
 				StreamMessageApplyServiceV2.recordMessageInfo(
 					message as SeqResponse<ConversationMessage>,
 				)
 				console.log(
-					`[apply] 处理AI搜索卡片V2消息, message:`,
+					`[apply] Handle AI search card V2 message, message:`,
 					StreamMessageApplyServiceV2.queryMessageInfo(message.message_id),
 				)
 
@@ -199,7 +199,7 @@ class ChatMessageApplyService {
 				this.applyConversationMessage(msg, options)
 
 				console.log(
-					`[apply] 处理AI搜索卡片V2消息, applied message:`,
+					`[apply] Handle AI search card V2 message, applied message:`,
 					MessageStore.messages.find((m) => m.message_id === message.message_id),
 				)
 				break

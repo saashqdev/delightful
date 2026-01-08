@@ -1,5 +1,5 @@
 /**
- * delightful-flow节点业务组件
+ * delightful-flow node business component
  */
 import DelightfulButton from "@/opensource/components/base/DelightfulButton"
 import { useTranslation } from "react-i18next"
@@ -75,20 +75,20 @@ export type BaseFlowProps = {
 }
 
 export default function BaseFlow({ extraData }: BaseFlowProps) {
-	const navigate = useNavigate() // 在组件内
+	const navigate = useNavigate() // Inside component
 	const location = useLocation()
 	const params = useParams()
 	const { t } = useTranslation()
-	// 是否正在试运行
+	// Whether testing is in progress
 	const [isTesting, setIsTesting] = useState(false)
-	// 是否显示FlowAssistant
+	// Whether to show FlowAssistant
 	const [showFlowAssistant, setShowFlowAssistant] = useState(false)
 
 	const flowInstance = useRef(null as null | DelightfulFlowInstance)
 
 	const flowInteractionRef = useRef(null as any)
 
-	// 监听语言变化，重新安装节点
+	// Listen for language changes and reinstall nodes
 	const language = useGlobalLanguage(true)
 
 	const isCommercial = useMemo(() => {
@@ -99,7 +99,7 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 		installAllNodes(extraData)
 	}, [language, extraData])
 
-	// 浏览器相关事件拦截处理
+	// Browser-related event interception handling
 	useEvent()
 
 	const size = useSize(document.body)
@@ -108,24 +108,24 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 		return size?.width && size.width <= 1500
 	}, [size?.width])
 
-	// AI 助理相关状态
+	// AI assistant related state
 	const { agent, defaultIcon, setAgent, initAgentPublishList } = useAgent()
 
 	const { showFlowIsDraftToast } = useDraftToast()
 
-	// 流程相关状态
+	// Flow related state
 	const { currentFlow, setCurrentFlow, initDraftList, initPublishList } = useFlowDetail({
 		agent,
 		showFlowIsDraftToast,
 	})
 
-	// 收集初次加载依赖的数据并挂载到store
+	// Collect data required on first load and mount to store
 	useDataInit({ currentFlow })
 
-	// 当前是否为Agent详情
+	// Whether current is Agent detail
 	const { isAgent } = useCheckType()
 
-	// 当前的权限
+	// Current permissions
 	const { isEditRight, isAdminRight, isReleasedToMarket } = useRights({
 		flow: currentFlow!,
 		agent,
@@ -140,7 +140,7 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 
 	const { nodeChangeEventListener } = useChangeListener({ saveDraft })
 
-	// Agent编辑弹层
+	// Agent edit modal
 	const { EditAgentModal, openAddAgentModal } = useEditAgentModal({
 		agent,
 		setAgent,
@@ -174,7 +174,7 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 
 	const testFlow = useMemoizedFn(async (triggerConfig: TriggerConfig, closeModal: () => void) => {
 		const flow = flowInstance?.current?.getFlow()
-		// console.log("内部流程", flow, serverFlow)
+		// console.log("Internal flow", flow, serverFlow)
 		if (!flow) return
 		setIsTesting(true)
 		const shadowedFlow = shadowFlow(flow)
@@ -297,7 +297,7 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 							flow={currentFlow}
 							flowInstance={flowInstance}
 						/>
-						{/* 添加AI助手按钮 */}
+					{/* Add AI assistant button */}
 
 						{/* {isEditRight && isCommercial && (
 							<DelightfulButton
@@ -356,25 +356,25 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 	])
 
 	const navigateBack = useMemoizedFn(() => {
-		// 检查历史记录栈中是否有前一页
+		// Check if there is a previous page in the history stack
 		if (window.history.length <= 1 || !window.history.state) {
-			// 从URL或params中获取type
+			// Get type from URL or params
 			const type = params.type || location.pathname.split("/").filter(Boolean)[1]
 
 			if (type) {
-				// 有type参数时，返回对应类型的列表页面
+				// When type parameter exists, return to the corresponding list page
 				navigate(`/flow/${type}/list`)
 			} else {
-				// 没有type参数时，默认返回Agent列表
+				// When no type parameter, default to Agent list
 				navigate(RoutePath.AgentList)
 			}
 		} else {
-			// 有历史记录时，正常返回
+			// When there is history, go back normally
 			window.history.back()
 		}
 	})
 
-	// 自定义tag列表
+	// Custom tag list
 	const { customTags } = useCustomTagList({
 		flow: currentFlow,
 		isMainFlow,
@@ -394,7 +394,7 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 			defaultImage: DefaultImage,
 			editEvent: isAgent
 				? () => {
-						// TODO2 Agent 处理剩余编辑基础信息的相关接口调用和回显处理
+						// TODO2 Agent - handle remaining interface calls and echo processing for editing basic information
 						openAddAgentModal()
 				  }
 				: null,
@@ -455,7 +455,7 @@ export default function BaseFlow({ extraData }: BaseFlowProps) {
 											/>
 										</div>
 
-										{/* 添加FlowAssistant组件 */}
+									{/* Add FlowAssistant component */}
 										{isCommercial && showFlowAssistant && isEditRight && (
 											<FlowAssistant
 												flowInteractionRef={flowInteractionRef}

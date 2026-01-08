@@ -39,7 +39,7 @@ const IMStyleSwitch = memo(() => {
 
 	const imStyle = useAppearanceStore((state) => state.imStyle)
 
-	// 如果不是标准模式，则设置为标准模式
+	// If not in standard mode, set to standard mode
 	useEffect(() => {
 		if (imStyle !== IMStyle.Standard) {
 			useAppearanceStore.setState({ imStyle: IMStyle.Standard })

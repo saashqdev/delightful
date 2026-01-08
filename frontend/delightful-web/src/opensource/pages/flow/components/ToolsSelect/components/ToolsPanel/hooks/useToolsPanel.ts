@@ -1,5 +1,5 @@
 /**
- * 工具集面板选择相关数据及行为管理
+ * Toolset panel selection related data and behavior management
  */
 
 import { useFlowStore } from "@/opensource/stores/flow"
@@ -15,7 +15,7 @@ export default function useToolsPanel({ open }: UseToolPanelProps) {
 
 	const { useableToolSets } = useFlowStore()
 
-	// 使用useMemo缓存过滤结果，避免不必要的重复计算
+	// Use useMemo to cache filtering results and avoid unnecessary recalculations
 	const filteredUseableToolSets = useMemo(() => {
 		if (!keyword.trim()) {
 			return useableToolSets
@@ -39,7 +39,7 @@ export default function useToolsPanel({ open }: UseToolPanelProps) {
 			.filter(Boolean) as UseableToolSet.Item[]
 	}, [useableToolSets, keyword])
 
-	// 在面板打开时重置关键词
+	// Reset keyword when panel opens
 	useEffect(() => {
 		if (open) {
 			setKeyword("")

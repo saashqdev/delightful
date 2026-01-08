@@ -65,7 +65,7 @@ const InstructionList = memo(
 			}
 		}, [instructionsList])
 
-		// 找出 ID 属于哪个容器
+	// Find which container the ID belongs to
 		const findContainer = (id: IdType) => {
 			return list.find((container) => container.items.some((item) => item.id === id))
 				?.position
@@ -79,52 +79,43 @@ const InstructionList = memo(
 			setIsDrag(false)
 		}
 
-		// 开始拖拽
-		const handleDragStart = (event: DragStartEvent) => {
-			const { active } = event
-
-			const activeId = active.id as string
-			const container = findContainer(activeId)
-			if (!container) return
-			setActiveItem(active.data.current?.item)
-			setActiveContainer(container) // 记录原始容器
+	// Start dragging
 			setIsDrag(true)
 		}
 
-		// 拖拽过程中
+		// During drag
 		const handleDragOver = (event: DragOverEvent) => {
 			const { over } = event
 			if (!over) return
 
 			setIsCrossContainer(true)
-			// 目标项id或是目标容器id
-			const overId = over.id as IdType
+		// Target item ID or target container ID
+		const overId = over.id as IdType
 
-			const isZone = over.data.current?.isContainer || false
+		const isZone = over.data.current?.isContainer || false
 
-			// 如果悬停在容器上
-			if (isZone) {
-				// 相同容器，置空
-				if (activeContainer === overId) {
-					setPlaceholderId(null)
-				}
-				// 不是当前移动项所在的容器，则设置占位符为容器id
-				else if (!placeholderId) {
-					setPlaceholderId(overId)
-					return
-				}
+		// If hovering over a container
+		if (isZone) {
+			// Same container, clear
+			if (activeContainer === overId) {
+				setPlaceholderId(null)
 			}
+			// Not the container of current moving item, set placeholder to container id
+			else if (!placeholderId) {
+				setPlaceholderId(overId)
+				return
+			}
+		}
 
-			// 悬停在项上，则设置占位符为项的id
+		// Hovering over an item, set placeholder to item's id
 
-			// 目标容器
-			const overContainer = findContainer(overId)
+		// Target container
 
 			if (!activeContainer || !overContainer) return
 
-			// 拖拽是否跨容器
-			if (overContainer !== activeContainer) {
-				// 如果目标容器是工具栏，需要看目标项是否是系统指令，是则不可移动，否则可以移动
+		// Check if drag crosses containers
+		if (overContainer !== activeContainer) {
+			// If target container is toolbar, check if target item is a system instruction, if yes cannot move, otherwise can move
 				if (overContainer === InstructionGroupType.TOOL) {
 					const overItem = over.data.current?.item
 
@@ -134,12 +125,12 @@ const InstructionList = memo(
 					setPlaceholderId(overId)
 				}
 			} else {
-				// 同一容器内拖拽不设置占位符
+				// Dragging within the same container does not set placeholder
 				setPlaceholderId(null)
 			}
 		}
 
-		// 拖拽结束
+		// Drag end
 		const handleDragEnd = (event: any) => {
 			const { active, over } = event
 			if (!over) {
@@ -160,11 +151,11 @@ const InstructionList = memo(
 
 			const newItems = [...list]
 
-			// 获取源区域和目标区域的数据
+			// Get source zone and target zone data
 			let fromZoneData = newItems.find((item) => item.position === fromZone)
 			let overZoneData = newItems.find((item) => item.position !== fromZone)
 
-			// 初始化为默认值
+			// Initialize to default values
 			if (!fromZoneData) {
 				fromZoneData = { position: fromZone, items: [] }
 				newItems.push(fromZoneData)
@@ -179,7 +170,7 @@ const InstructionList = memo(
 			}
 
 			if (fromZone === overZone) {
-				// **同容器内排序**
+				// **Sort within same container**
 				const newIndex = fromZoneData.items.findIndex((item) => item.id === overId)
 				const newItem = fromZoneData.items[newIndex]
 				if (!newItem) return
@@ -192,19 +183,19 @@ const InstructionList = memo(
 				const oldIndex = fromZoneData.items.findIndex((item) => item.id === activeId)
 				fromZoneData.items = arrayMove(fromZoneData.items, oldIndex, newIndex)
 			} else {
-				// **跨容器移动**
+				// **Move across containers**
 
 				const movedItem = fromZoneData.items.find((item) => item.id === activeId)
 				if (!movedItem) return
 
-				// 目标源不能有重复的指令名称
+				// Target zone cannot have duplicate instruction names
 				if (overZoneData.items.findIndex((i) => i.name === movedItem.name) !== -1) {
 					message.error(t("agent.nameRepeatError"))
 					clear()
 					return
 				}
 
-				// 目标源最多只能有5个指令
+				// Target zone can have at most 5 instructions
 				const filterItems = overZoneData.items.filter((item) => !isSystemItem(item)) || []
 				if (filterItems.length >= 5) {
 					message.error(t("agent.maxInstruction"))
@@ -214,7 +205,7 @@ const InstructionList = memo(
 
 				fromZoneData.items = fromZoneData.items.filter((item) => item.id !== activeId)
 				const overIndex = overZoneData.items.findIndex((item) => item.id === placeholderId)
-				// 没找到位置，则插入到末尾
+				// If position not found, insert at the end
 				if (overIndex !== -1) {
 					overZoneData.items.splice(overIndex, 0, movedItem!)
 				} else {
@@ -222,7 +213,7 @@ const InstructionList = memo(
 				}
 			}
 
-			// 更新数据源
+			// Update data source
 			updateInstructsList(newItems)
 			setList(newItems)
 			clear()
@@ -247,7 +238,7 @@ const InstructionList = memo(
 			]
 		}, [list, t])
 
-		// 系统指令显隐藏
+		// Toggle system instruction visibility
 		const handleShowSystem = useMemoizedFn((itemId?: string) => {
 			if (!itemId) return
 			const newList = instructionsList.map((group) => {

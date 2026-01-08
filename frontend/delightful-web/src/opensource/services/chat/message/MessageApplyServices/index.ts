@@ -49,7 +49,7 @@ class MessageApplyService {
 		overwrite: boolean = true,
 	): boolean {
 		if (this.customHandlers.has(id) && !overwrite) {
-			console.warn(`处理器 ${id} 已存在，无法重复注册`)
+			console.warn(`Handler ${id} already exists, cannot register duplicate`)
 			return false
 		}
 		this.customHandlers.set(id, handler)
@@ -157,10 +157,7 @@ class MessageApplyService {
 				messageSeqIdService.getOrganizationRenderSeqId(message.organization_code) ?? "",
 			) <= 0
 		) {
-			console.warn("此消息已应用", message.seq_id)
-			return
-		}
-
+		console.warn("This message has already been applied", message.seq_id)
 		BroadcastChannelSender.applyMessage(message, options)
 		this.doApplyMessage(message, options)
 	}

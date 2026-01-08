@@ -19,7 +19,7 @@ type SendData =
 	| Pick<AIImagesMessage, "type" | "ai_image_card">
 
 /**
- * 封装发送消息逻辑
+ * Encapsulate send message logic
  * @returns
  */
 const useSendMessage = (referMsgId?: string, conversationId?: string) => {
@@ -28,11 +28,11 @@ const useSendMessage = (referMsgId?: string, conversationId?: string) => {
 		const referMessageId = referMsgId ?? MessageReplyStore.replyMessageId
 
 		if (!currentConversationId) {
-			console.warn("当前会话不存在")
+			console.warn("Current conversation does not exist")
 			return
 		}
 		if (!userStore.user.userInfo?.user_id) {
-			console.warn("当前用户不存在")
+			console.warn("Current user does not exist")
 			return
 		}
 		MessageService.formatAndSendMessage(currentConversationId, data, referMessageId)

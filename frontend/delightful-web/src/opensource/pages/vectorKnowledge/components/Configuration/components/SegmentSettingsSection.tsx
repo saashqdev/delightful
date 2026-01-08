@@ -17,7 +17,7 @@ interface SegmentSettingsSectionProps {
 }
 
 /**
- * 分段设置区域组件
+ * Segment settings section component
  */
 export default function SegmentSettingsSection({
 	disabled,
@@ -48,7 +48,7 @@ export default function SegmentSettingsSection({
 				<Input type="hidden" />
 			</Form.Item>
 
-			{/* 通用模式区块 */}
+			{/* General mode section */}
 			<GeneralSegmentSection
 				disabled={disabled}
 				isActive={segmentMode === SegmentationMode.General}
@@ -58,7 +58,7 @@ export default function SegmentSettingsSection({
 				onReset={() => handleSegmentSettingReset(SegmentationMode.General)}
 			/>
 
-			{/* 父子模式区块 */}
+			{/* Parent-child mode section */}
 			<ParentChildSegmentSection
 				disabled={disabled}
 				isActive={segmentMode === SegmentationMode.ParentChild}

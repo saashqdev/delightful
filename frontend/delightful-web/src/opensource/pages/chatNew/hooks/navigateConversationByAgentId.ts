@@ -6,13 +6,13 @@ import { MessageReceiveType } from "@/types/chat"
 import { useMount } from "ahooks"
 
 /**
- * 在url中携带agent_id参数时，自动创建会话
+ * Auto-create conversation when agent_id parameter is in URL
  */
 const AgentIdKey = "agent_id"
 const UserIdKey = "user_id"
 
 /**
- * 在url中携带agent_id参数时，自动创建会话
+ * Auto-create conversation when agent_id parameter is in URL
  */
 const useNavigateConversationByAgentIdInSearchQuery = () => {
 	const navigate = useNavigate()
@@ -30,7 +30,7 @@ const useNavigateConversationByAgentIdInSearchQuery = () => {
 					if (res?.id) {
 						ConversationService.switchConversation(res)
 						window.sessionStorage.removeItem(AgentIdKey)
-						// 跳转到 Chat 页面
+						// Navigate to Chat page
 						navigate(RoutePath.Chat)
 					}
 				})
@@ -45,7 +45,7 @@ const useNavigateConversationByAgentIdInSearchQuery = () => {
 					if (res?.id) {
 						ConversationService.switchConversation(res)
 						window.sessionStorage.removeItem(UserIdKey)
-						// 跳转到 Chat 页面
+					// Navigate to Chat page
 						navigate(RoutePath.Chat)
 					}
 				})
@@ -57,7 +57,7 @@ const useNavigateConversationByAgentIdInSearchQuery = () => {
 }
 
 /**
- * 记录会话接收id到sessionStorage, 用于在url中携带agent_id或user_id时，自动创建会话
+ * Record conversation receiver id to sessionStorage for auto-creating conversation when agent_id or user_id is in URL
  */
 export const recordConversationReceiveIdInSessionStorage = () => {
 	const url = new URL(window.location.href)
@@ -73,7 +73,7 @@ export const recordConversationReceiveIdInSessionStorage = () => {
 		searchParams.delete(UserIdKey)
 	}
 
-	// 清除url中的agent_id和user_id
+	// Clear agent_id and user_id from URL
 	window.history.replaceState({}, "", url.toString())
 }
 

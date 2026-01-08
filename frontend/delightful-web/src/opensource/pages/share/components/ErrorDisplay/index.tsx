@@ -8,7 +8,7 @@ interface ErrorDisplayProps {
 }
 
 export default function ErrorDisplay({
-	errorMessage = "加载失败，请稍后重试",
+	errorMessage = "Loading failed, please try again later",
 	onRetry,
 }: ErrorDisplayProps) {
 	const { styles } = useStyles()
@@ -20,7 +20,7 @@ export default function ErrorDisplay({
 					<img src={ShareIcon} alt="" />
 				</div>
 				<div className={styles.message}>{errorMessage}</div>
-				<span className={styles.description}>抱歉，该回放暂无权限查看或回放已被删除</span>
+				<span className={styles.description}>Sorry, you don't have permission to view this playback or it has been deleted</span>
 				{onRetry && (
 					<Button
 						type="primary"
@@ -29,7 +29,7 @@ export default function ErrorDisplay({
 						}}
 						className={styles.button}
 					>
-						返回首页
+						Return to Home
 					</Button>
 				)}
 			</div>

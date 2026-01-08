@@ -4,7 +4,7 @@ import { useVectorKnowledgeConfigurationStyles } from "../styles"
 
 interface TextPreprocessRuleProps {
 	disabled: boolean
-	// 表单字段路径前缀，例如 ['fragment_config', 'normal']
+	// Form field path prefix, e.g. ['fragment_config', 'normal']
 	namePathPrefix: string[]
 	allowPreview: boolean
 	onReset: () => void
@@ -12,7 +12,7 @@ interface TextPreprocessRuleProps {
 }
 
 /**
- * 文本预处理规则组件
+ * Text preprocessing rules component
  */
 export default function TextPreprocessRule({
 	disabled,

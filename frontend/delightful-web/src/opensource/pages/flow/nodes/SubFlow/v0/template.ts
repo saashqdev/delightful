@@ -1,6 +1,6 @@
 export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-6649da5637d546-69160385",
-	name: "子流程",
+	name: "Sub Flow",
 	description: "",
 	node_type: 11,
 	meta: [],
@@ -28,7 +28,7 @@ export const v0Template = {
 						type: "string",
 						key: "input",
 						sort: 0,
-						title: "输入",
+						title: "Input",
 						description: "",
 						required: null,
 						value: null,
@@ -59,7 +59,7 @@ export const v0Template = {
 						type: "string",
 						key: "output",
 						sort: 0,
-						title: "输出",
+						title: "Output",
 						description: "",
 						required: null,
 						value: {

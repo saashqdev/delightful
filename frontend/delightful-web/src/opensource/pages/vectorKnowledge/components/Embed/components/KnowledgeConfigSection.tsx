@@ -24,7 +24,7 @@ export default function KnowledgeConfigSection({ knowledgeConfig }: KnowledgeCon
 	const { styles } = useVectorKnowledgeEmbedStyles()
 	const { t } = useTranslation("flow")
 
-	// 预处理规则映射表
+	// Preprocessing rules mapping table
 	const rulesMap = useMemo(
 		() => ({
 			[TextPreprocessingRules.ReplaceSpaces]: t(
@@ -35,7 +35,7 @@ export default function KnowledgeConfigSection({ knowledgeConfig }: KnowledgeCon
 		[t],
 	)
 
-	// 检索方法映射表
+	// Retrieval method mapping table
 	const methodMap = useMemo(
 		() => ({
 			[RetrievalMethod.SemanticSearch]: t("knowledgeDatabase.vectorSearch"),
@@ -46,7 +46,7 @@ export default function KnowledgeConfigSection({ knowledgeConfig }: KnowledgeCon
 		[t],
 	)
 
-	// 将预处理规则ID转换为可读文本
+	// Convert preprocessing rule IDs to readable text
 	const getTextPreprocessingRulesText = useCallback(
 		(rules: TextPreprocessingRules[] = []) => {
 			if (!rules || rules.length === 0) return "-"
@@ -58,7 +58,7 @@ export default function KnowledgeConfigSection({ knowledgeConfig }: KnowledgeCon
 		[rulesMap],
 	)
 
-	// 将检索方法枚举值转换为可读文本
+	// Convert retrieval method enum values to readable text
 	const getRetrievalMethodText = useCallback(
 		(method: RetrievalMethod | undefined) => {
 			if (!method) return "-"
@@ -69,7 +69,7 @@ export default function KnowledgeConfigSection({ knowledgeConfig }: KnowledgeCon
 
 	const { fragmentConfig, embeddingConfig, retrieveConfig } = knowledgeConfig
 
-	// 获取分段模式
+	// Get segment mode
 	const segmentMode =
 		fragmentConfig.mode === SegmentationMode.General
 			? t("knowledgeDatabase.generalPattern")
@@ -96,13 +96,13 @@ export default function KnowledgeConfigSection({ knowledgeConfig }: KnowledgeCon
 		<div className={styles.configSection}>
 			<Divider className={styles.divider} />
 			<div>
-				{/* 分段模式 */}
+				{/* Segment mode */}
 				<div className={styles.configItem}>
 					<div className={styles.configLabel}>{t("knowledgeDatabase.segmentMode")}</div>
 					<div className={styles.configValue}>{segmentMode}</div>
 				</div>
 
-				{/* 通用模式下的配置项 */}
+				{/* Configuration items for general mode */}
 				{fragmentConfig.mode === SegmentationMode.General && (
 					<>
 						<div className={styles.configItem}>
@@ -147,7 +147,7 @@ export default function KnowledgeConfigSection({ knowledgeConfig }: KnowledgeCon
 					</>
 				)}
 
-				{/* 父子分段模式下的配置项 */}
+				{/* Configuration items for parent-child segmentation mode */}
 				{fragmentConfig.mode === SegmentationMode.ParentChild && (
 					<>
 						<div className={styles.configItem}>
@@ -217,7 +217,7 @@ export default function KnowledgeConfigSection({ knowledgeConfig }: KnowledgeCon
 					</>
 				)}
 
-				{/* Embedding模型 */}
+				{/* Embedding model */}
 				<div className={styles.configItem}>
 					<div className={styles.configLabel}>
 						{t("knowledgeDatabase.embeddingModel")}
@@ -229,7 +229,7 @@ export default function KnowledgeConfigSection({ knowledgeConfig }: KnowledgeCon
 					</Flex>
 				</div>
 
-				{/* 检索设置 */}
+				{/* Retrieval settings */}
 				<div className={styles.configItem}>
 					<div className={styles.configLabel}>
 						{t("knowledgeDatabase.searchSettings")}

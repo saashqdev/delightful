@@ -16,7 +16,7 @@ interface EmbeddingModelSectionProps {
 }
 
 /**
- * Embedding模型选择部分组件
+ * Embedding model selection section component
  */
 export default function EmbeddingModelSection({
 	isDocumentConfig,

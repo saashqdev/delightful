@@ -15,7 +15,7 @@ export class ConfigService {
 	}
 	
 	/**
-	 * @description 初始化(持久化数据/内存状态)
+	 * @description Initialize (persistent data/memory state)
 	 */
 	async init() {
 		const config = new ConfigRepository()
@@ -59,7 +59,7 @@ export class ConfigService {
 	}
 
 	/**
-	 * @description 远程同步配置
+	 * @description Remote sync configuration
 	 */
 	loadConfig = async () => {
 		try {
@@ -74,7 +74,7 @@ export class ConfigService {
 	}
 
 	/**
-	 * @description 主题设置
+	 * @description Theme settings
 	 */
 	setThemeConfig(theme: ThemeMode) {
 		try {
@@ -87,7 +87,7 @@ export class ConfigService {
 	}
 
 	/**
-	 * @description 设置国际化语言
+	 * @description Set internationalization language
 	 */
 	setLanguage(lang: string) {
 		const config = new ConfigRepository()
@@ -96,7 +96,7 @@ export class ConfigService {
 	}
 
 	/**
-	 * @description 设置当前访问集群
+	 * @description Set current access cluster
 	 */
 	async setClusterConfig(authCode: string, clusterConfig: Common.PrivateConfig) {
 		try {

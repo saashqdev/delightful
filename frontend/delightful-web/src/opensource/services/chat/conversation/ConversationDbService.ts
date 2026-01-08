@@ -7,10 +7,10 @@ import { cloneDeep } from "lodash-es"
 
 class ConversationDbServices {
 	/**
-	 * 从数据库加载会话
-	 * @param organizationCode 组织编码
-	 * @param userId 用户ID
-	 * @returns 会话列表
+	 * Load conversations from database
+	 * @param organizationCode Organization code
+	 * @param userId User ID
+	 * @returns Conversation list
 	 */
 	loadNormalConversationsFromDB(organizationCode: string, userId: string) {
 		return chatDb
@@ -25,9 +25,9 @@ class ConversationDbServices {
 	}
 
 	/**
-	 * 获取会话
-	 * @param conversationId 会话ID
-	 * @returns 会话
+	 * Get conversation
+	 * @param conversationId Conversation ID
+	 * @returns Conversation
 	 */
 	getConversation(conversationId: string): Promise<ConversationObject | undefined> {
 		return chatDb
@@ -38,8 +38,8 @@ class ConversationDbServices {
 	}
 
 	/**
-	 * 保存会话到数据库
-	 * @param conversation 会话
+	 * Save conversation to database
+	 * @param conversation Conversation
 	 */
 	addConversationsToDB(conversations: Conversation[]) {
 		return chatDb
@@ -54,25 +54,25 @@ class ConversationDbServices {
 	}
 
 	/**
-	 * 更新会话
-	 * @param filteredConversationList 会话列表
+	 * Update conversation
+	 * @param filteredConversationList Conversation list
 	 */
 	updateConversations(filteredConversationList: ConversationObject[]) {
 		return chatDb.getConversationTable()?.bulkPut(filteredConversationList)
 	}
 
 	/**
-	 * 更新会话
-	 * @param id 会话ID
-	 * @param data 更新的数据
+	 * Update conversation
+	 * @param id Conversation ID
+	 * @param data Data to update
 	 */
 	updateConversation(id: string, data: Partial<Conversation>) {
 		return chatDb.getConversationTable()?.update(id, data)
 	}
 
 	/**
-	 * 删除会话
-	 * @param id 会话ID
+	 * Delete conversation
+	 * @param id Conversation ID
 	 */
 	deleteConversation(id: string) {
 		return chatDb.getConversationTable()?.delete(id)
@@ -83,55 +83,55 @@ class ConversationDbServices {
 	}
 
 	/**
-	 * 更新会话当前话题ID
-	 * @param id 会话ID
-	 * @param topicId 话题ID
+	 * Update conversation current topic ID
+	 * @param id Conversation ID
+	 * @param topicId Topic ID
 	 */
 	updateCurrentTopicId(id: string, topicId: string) {
 		return chatDb.getConversationTable()?.update(id, { current_topic_id: topicId })
 	}
 
 	/**
-	 * 更新会话置顶状态
-	 * @param id 会话ID
-	 * @param isTop 是否置顶
+	 * Update conversation pin status
+	 * @param id Conversation ID
+	 * @param isTop Whether to pin
 	 */
 	updateTopStatus(id: string, isTop: 0 | 1) {
 		return chatDb.getConversationTable()?.update(id, { is_top: isTop })
 	}
 
 	/**
-	 * 更新会话免打扰状态
-	 * @param id 会话ID
-	 * @param isNotDisturb 是否免打扰
+	 * Update conversation do not disturb status
+	 * @param id Conversation ID
+	 * @param isNotDisturb Whether to enable do not disturb
 	 */
 	updateNotDisturbStatus(id: string, isNotDisturb: 0 | 1) {
 		return chatDb.getConversationTable()?.update(id, { is_not_disturb: isNotDisturb })
 	}
 
 	/**
-	 * 更新会话话题默认打开状态
-	 * @param id 会话ID
-	 * @param open 是否打开
+	 * Update conversation topic default open status
+	 * @param id Conversation ID
+	 * @param open Whether to open
 	 */
 	updateTopicDefaultOpen(id: string, open: boolean) {
 		return chatDb.getConversationTable()?.update(id, { topic_default_open: open })
 	}
 
 	/**
-	 * 更新会话状态（隐藏/显示）
-	 * @param id 会话ID
-	 * @param status 状态
+	 * Update conversation status (hide/show)
+	 * @param id Conversation ID
+	 * @param status Status
 	 */
 	updateStatus(id: string, status: number) {
 		return chatDb.getConversationTable()?.update(id, { status })
 	}
 
 	/**
-	 * 更新会话未读数量
-	 * @param id 会话ID
-	 * @param unreadDots 未读数量
-	 * @param topicUnreadDots 话题未读数量
+	 * Update conversation unread count
+	 * @param id Conversation ID
+	 * @param unreadDots Unread count
+	 * @param topicUnreadDots Topic unread count
 	 */
 	updateUnreadDots(id: string, unreadDots: number, topicUnreadDots: Record<string, number>) {
 		return chatDb.getConversationTable()?.update(id, {

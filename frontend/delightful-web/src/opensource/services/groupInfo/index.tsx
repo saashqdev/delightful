@@ -8,7 +8,7 @@ import groupInfoStore from "@/opensource/stores/groupInfo"
 import userInfoService from "../userInfo"
 import { DataContextDb } from "@/opensource/database/data-context/types"
 /**
- * 群组信息上下文
+ * Group information context
  */
 class GroupInfoSerivce {
 	static STORE_NAME = "group_info"
@@ -41,9 +41,9 @@ class GroupInfoSerivce {
 	}
 
 	/**
-	 * 拉取群组信息
-	 * @param groupIds 群组ID
-	 * @returns 群组信息
+	 * Fetch group information
+	 * @param groupIds Group IDs
+	 * @returns Group information
 	 */
 	fetchGroupInfos(groupIds: string[]) {
 		return fetchPaddingData((params) =>

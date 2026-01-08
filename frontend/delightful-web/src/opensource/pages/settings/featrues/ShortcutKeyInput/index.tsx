@@ -47,13 +47,13 @@ function ShortcutKeyInput() {
 	})
 
 	const onFocus = useMemoizedFn(() => {
-		/** 移除所有快捷键 */
+		/** Remove all shortcut keys */
 		delightful?.config?.globalShortcut?.unregisterAll()
 	})
 
-	// 按键处理
+	// Key press handling
 	const onKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
-		event.preventDefault() // 防止默认行为
+		event.preventDefault() // Prevent default behavior
 		event?.stopPropagation()
 		if (event?.keyCode === 8) {
 			useAppearanceStore.setState((preState) => {
@@ -75,7 +75,7 @@ function ShortcutKeyInput() {
 		if (event.shiftKey) {
 			code.push(16)
 		}
-		// 当且仅当只有单个辅助键时不生效
+		// Only ineffective when there is only a single modifier key
 		if (![16, 17, 18, 91].includes(event?.keyCode)) {
 			code.push(event?.keyCode)
 		}

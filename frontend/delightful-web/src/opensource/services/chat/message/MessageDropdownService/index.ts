@@ -81,21 +81,21 @@ const Divider = {
 
 class MessageDropdownService {
 	/**
-	 * 点击菜单时事件目标
+	 * Event target when menu is clicked
 	 */
 	eventTarget: EventTarget | null = null
 
 	/**
-	 * 重置菜单
+	 * Reset menu
 	 */
 	resetMenu() {
 		MessageDropdownStore.setMenu([])
 	}
 
 	/**
-	 * 设置菜单
-	 * @param messageId 消息ID
-	 * @param e 事件
+	 * Set menu
+	 * @param messageId Message ID
+	 * @param e Event
 	 */
 	setMenu(messageId: string, e: EventTarget): void {
 		this.eventTarget = e
@@ -122,7 +122,7 @@ class MessageDropdownService {
 			}
 
 			/**
-			 * 非AI对话可以编辑消息
+			 * Non-AI conversations can edit messages
 			 */
 			// if (!isAiConversation && canEdit(message.type)) {
 			// 	menu.push(Items[MessageContextMenuKey.Edit])
@@ -149,14 +149,14 @@ class MessageDropdownService {
 	}
 
 	/**
-	 * 点击菜单项
-	 * @param key 菜单项
+	 * Click menu item
+	 * @param key Menu item key
 	 */
 	clickMenuItem(key: MessageContextMenuKey) {
 		if (clickFunctions[key]) {
 			clickFunctions[key]?.(MessageDropdownStore.currentMessageId || "", this.eventTarget)
 		} else {
-			console.error(`clickMenuItem: ${key} 没有对应的点击函数`)
+			console.error(`clickMenuItem: ${key} has no corresponding click function`)
 		}
 	}
 }

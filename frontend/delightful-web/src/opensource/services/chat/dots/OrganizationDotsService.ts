@@ -6,17 +6,17 @@ import { BroadcastChannelSender } from "@/opensource/broadcastChannel"
 import { userStore } from "@/opensource/models/user"
 
 /**
- * 组织新消息提示服务
+ * Organization new message notification service
  */
 class OrganizationDotsService {
 	/**
-	 * 添加组织新消息提示
-	 * @param organizationCode 组织编码
-	 * @param count 数量
-	 * @param seqId 序列号
+	 * Add organization new message notification
+	 * @param organizationCode Organization code
+	 * @param count Count
+	 * @param seqId Sequence ID
 	 */
 	addOrganizationDot(organizationCode: string, seqId: string, count: number = 1) {
-		console.log("添加组织新消息提示", organizationCode, seqId, count)
+		console.log("Adding organization new message notification", organizationCode, seqId, count)
 
 		if (
 			bigNumCompare(OrganizationDotsStore.getOrganizationDotSeqId(organizationCode), seqId) >=
@@ -50,8 +50,8 @@ class OrganizationDotsService {
 	}
 
 	/**
-	 * 减少组织新消息提示
-	 * @param organizationCode 组织编码
+	 * Reduce organization new message notification
+	 * @param organizationCode Organization code
 	 */
 	reduceOrganizationDot(organizationCode: string, count: number = 1) {
 		const newCount = Math.max(
@@ -72,26 +72,26 @@ class OrganizationDotsService {
 	}
 
 	/**
-	 * 获取组织新消息提示
-	 * @param organizationCode 组织编码
-	 * @returns 新消息提示
+	 * Get organization new message notification
+	 * @param organizationCode Organization code
+	 * @returns New message notification
 	 */
 	getOrganizationDot(organizationCode: string) {
 		return OrganizationDotsStore.getOrganizationDots(organizationCode)
 	}
 
 	/**
-	 * 获取组织新消息提示序列号
-	 * @param organizationCode 组织编码
-	 * @returns 新消息提示序列号
+	 * Get organization new message notification sequence ID
+	 * @param organizationCode Organization code
+	 * @returns New message notification sequence ID
 	 */
 	getOrganizationDotSeqId(organizationCode: string) {
 		return OrganizationDotsStore.getOrganizationDotSeqId(organizationCode)
 	}
 
 	/**
-	 * 清除组织新消息提示
-	 * @param organizationCode 组织编码
+	 * Clear organization new message notification
+	 * @param organizationCode Organization code
 	 */
 	clearOrganizationDot(organizationCode: string) {
 		OrganizationDotsStore.clearOrganizationDots(organizationCode)
@@ -99,7 +99,7 @@ class OrganizationDotsService {
 	}
 
 	/**
-	 * 清除所有组织新消息提示
+	 * Clear all organization new message notifications
 	 */
 	clearAllOrganizationDots() {
 		OrganizationDotsStore.clearAllOrganizationDots()

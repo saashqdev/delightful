@@ -1,6 +1,6 @@
 import { FilterTargetTypes, operator2Label, operatorMap } from "./constants"
 
-// 获取默认的筛选项
+// Get default filter item
 export const getDefaultFilter = () => {
 	return {
 		left: FilterTargetTypes.VectorDatabaseId,

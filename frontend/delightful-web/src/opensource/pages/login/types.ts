@@ -1,7 +1,7 @@
 import type { Login } from "@/types/login"
 import type { User } from "@/types/user"
 
-// 登录方式与表单映射关系
+// Mapping relationship between login methods and forms
 export type LoginFormValuesMap = {
 	[Login.LoginType.SMSVerificationCode]: Login.SMSVerificationCodeFormValues
 	[Login.LoginType.MobilePhonePassword]: Login.MobilePhonePasswordFormValues
@@ -13,7 +13,7 @@ export type LoginFormValuesMap = {
 }
 
 /**
- * 登录提交函数
+ * Login submit function
  */
 export type OnSubmitFn<T extends Login.LoginType> = (
 	type: T,
@@ -27,9 +27,9 @@ export interface LoginStepResult {
 	access_token: string
 	delightfulOrganizationMap: Record<string, User.DelightfulOrganization>
 	organizations?: Array<User.UserOrganization>
-	/** delightful 生态下的组织Code */
+	/** Organization code under delightful ecosystem */
 	organizationCode?: string
-	/** teamshare 生态下的组织Code */
+	/** Organization code under teamshare ecosystem */
 	teamshareOrganizationCode?: string
 	deployCode?: string
 }

@@ -17,11 +17,11 @@ export function useDocumentData(
 ) {
 	const { t } = useTranslation("flow")
 
-	// 当前配置的文档详情
+	// Current configured document details
 	const [currentDocumentDetail, setCurrentDocumentDetail] =
 		useState<Knowledge.EmbedDocumentDetail>()
 
-	// 供分段预览的文档列表
+	// Document list for segment preview
 	const [documentList, setDocumentList] = useState<
 		{
 			name: string
@@ -30,7 +30,7 @@ export function useDocumentData(
 		}[]
 	>([])
 
-	// 基于文档编码获取文档信息
+	// Get document information based on document code
 	const fetchDocumentDetails = useMemoizedFn(
 		async (knowledgeBaseCode: string, documentCode: string) => {
 			try {
@@ -80,12 +80,12 @@ export function useDocumentData(
 					form.setFieldValue("retrieve_config", res.retrieve_config)
 				}
 			} catch (error) {
-				console.error("获取文档信息失败:", error)
+				console.error("Failed to fetch document information:", error)
 			}
 		},
 	)
 
-	// 保存文档配置
+	// Save document configuration
 	const updateDocumentConfig = useMemoizedFn(
 		async (documentConfig: Knowledge.EmbedDocumentDetail, fragmentConfig: FragmentConfig) => {
 			try {
@@ -100,12 +100,12 @@ export function useDocumentData(
 					message.success(t("knowledgeDatabase.savedSuccess"))
 				}
 			} catch (error) {
-				console.error("保存文档配置失败:", error)
+				console.error("Failed to save document configuration:", error)
 			}
 		},
 	)
 
-	// 初始化文档数据
+	// Initialize document data
 	const initDocumentData = useMemoizedFn((knowledgeBase?: TemporaryKnowledgeConfig) => {
 		if (documentConfig) {
 			fetchDocumentDetails(documentConfig.knowledgeBaseCode, documentConfig.documentCode)
@@ -114,10 +114,10 @@ export function useDocumentData(
 		}
 	})
 
-	// 由于后端在旧版本的知识库未对文档信息进行持久化，故需要做旧版本的兼容处理：
-	// 根据文档的 document_file 字段是否为null，来判断是否为旧版本知识库的文档
-	// 旧版本的文档不支持重新编辑分段设置，只能基于原先的分段设置查看分段列表
-	// （注：查看分段列表的接口 与创建知识库时的 分段预览接口 不是同一个）
+	// Since the backend did not persist document information in older knowledge base versions, compatibility handling is needed:
+	// Determine if it's an old version knowledge base document by checking if document_file field is null
+	// Old version documents do not support re-editing segment settings, can only view segment list based on original settings
+	// (Note: The API for viewing segment list is different from the segment preview API when creating knowledge base)
 	const isOldVersion = useMemo(() => {
 		return Boolean(currentDocumentDetail && !currentDocumentDetail.document_file)
 	}, [currentDocumentDetail])

@@ -13,7 +13,7 @@ export function useSegmentPreview(
 ) {
 	const { t } = useTranslation("flow")
 
-	// 分段预览相关状态
+	// Segment preview related state
 	const [segmentDocument, setSegmentDocument] = useState<string>()
 	const [segmentPreviewResult, setSegmentPreviewResult] = useState<SegmentPreviewType>({
 		total: 0,
@@ -22,14 +22,14 @@ export function useSegmentPreview(
 	})
 	const [segmentPreviewLoading, setSegmentPreviewLoading] = useState(false)
 
-	// 获取分段预览
+	// Get segment preview
 	const fetchSegmentPreview = useMemoizedFn(async (document: { name: string; key: string }) => {
 		const { fragment_config } = await form.validateFields(["fragment_config"], {
 			recursive: true,
 		})
 		setSegmentPreviewLoading(true)
 		try {
-			// 转换布尔值为数组
+			// Convert boolean values to array
 			const apiFragmentConfig = {
 				...fragment_config,
 				normal:
@@ -44,7 +44,7 @@ export function useSegmentPreview(
 										? [TextPreprocessingRules.RemoveUrls]
 										: []),
 								],
-								// 移除boolean属性
+								// Remove boolean properties
 								replace_spaces: undefined,
 								remove_urls: undefined,
 						  }
@@ -61,7 +61,7 @@ export function useSegmentPreview(
 										? [TextPreprocessingRules.RemoveUrls]
 										: []),
 								],
-								// 移除boolean属性
+// Remove boolean properties
 								replace_spaces: undefined,
 								remove_urls: undefined,
 						  }
@@ -86,10 +86,10 @@ export function useSegmentPreview(
 		}
 	})
 
-	// 点击分段预览按钮
+	// Click segment preview button
 	const handlePreviewButtonClick = useMemoizedFn(
 		(documentList: { name: string; key: string }[]) => async () => {
-			// 重置分段预览结果
+			// Reset segment preview result
 			setSegmentPreviewResult({
 				total: 0,
 				list: [],
@@ -112,7 +112,7 @@ export function useSegmentPreview(
 		},
 	)
 
-	// 当选择的文档变更时触发预览
+	// Trigger preview when selected document changes
 	const handleDocumentSelection = useMemoizedFn(
 		(documentList: { name: string; key: string }[]) => {
 			return (docKey: string) => {
@@ -127,7 +127,7 @@ export function useSegmentPreview(
 		},
 	)
 
-	// 查看已向量化的文档的分段列表
+	// View segment list of vectorized documents
 	const fetchFragmentList = useMemoizedFn(
 		async ({
 			knowledgeBaseCode,
@@ -149,7 +149,7 @@ export function useSegmentPreview(
 					page,
 					pageSize,
 				})
-				// 分页处理
+				// Handle pagination
 				if (res && res.page === 1) {
 					setSegmentPreviewResult({
 						total: res.total,
@@ -173,7 +173,7 @@ export function useSegmentPreview(
 	)
 
 	useEffect(() => {
-		// 对于单个文档的配置场景，直接将该文档设置为预览文档
+		// For single document configuration scenario, directly set it as preview document
 		if (currentDocumentDetail) {
 			setSegmentDocument(
 				currentDocumentDetail.document_file

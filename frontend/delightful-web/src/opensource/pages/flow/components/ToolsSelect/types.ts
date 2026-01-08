@@ -1,7 +1,7 @@
 import type { WidgetValue } from "../../common/Output"
 
 /**
- * 选中的工具数据结构
+ * Selected tool data structure
  */
 export type ToolSelectedItem = {
 	tool_id: string

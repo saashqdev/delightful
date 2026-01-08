@@ -44,17 +44,17 @@ export const useStyles = createStyles(({ token, css, prefixCls }) => ({
 		flex: 1;
 		min-width: 0;
 
-		/* 中等屏幕 */
+		/* Medium screen */
 		@media (max-width: 1024px) {
 			gap: 10px;
 		}
 
-		/* 小屏幕 */
+		/* Small screen */
 		@media (max-width: 800px) {
 			gap: 8px;
 		}
 
-		/* 超小屏幕 */
+		/* Extra small screen */
 		@media (max-width: 480px) {
 			gap: 6px;
 		}
@@ -65,22 +65,22 @@ export const useStyles = createStyles(({ token, css, prefixCls }) => ({
 		gap: 8px;
 		flex-shrink: 0;
 
-		/* 中等屏幕 */
+		/* Medium screen */
 		@media (max-width: 1024px) {
 			gap: 6px;
 		}
 
-		/* 小屏幕 */
+		/* Small screen */
 		@media (max-width: 800px) {
 			gap: 8px;
 		}
 
-		/* 超小屏幕 */
+		/* Extra small screen */
 		@media (max-width: 480px) {
 			gap: 4px;
 		}
 
-		/* 旋转按钮容器 */
+		/* Rotate button container */
 		.rotation-buttons {
 			display: flex;
 			align-items: center;
@@ -119,7 +119,7 @@ export const useStyles = createStyles(({ token, css, prefixCls }) => ({
 		width: 100%;
 		box-sizing: border-box;
 
-		/* 自定义滚动条样式 */
+		/* Custom scrollbar style */
 		&::-webkit-scrollbar {
 			width: 8px;
 			height: 8px;
@@ -153,7 +153,7 @@ export const useStyles = createStyles(({ token, css, prefixCls }) => ({
 		min-height: fit-content;
 		box-sizing: border-box;
 		padding: 0;
-		margin: 0 auto; /* 居中显示 */
+		margin: 0 auto; /* Center display */
 	`,
 	pageContainer: css`
 		background: white;
@@ -163,13 +163,13 @@ export const useStyles = createStyles(({ token, css, prefixCls }) => ({
 		transition: box-shadow 0.3s ease;
 		width: fit-content;
 		box-sizing: border-box;
-		max-width: none; /* 移除宽度限制，允许缩放 */
+		max-width: none; /* Remove width limit, allow scaling */
 
 		&:hover {
 			box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 		}
 
-		/* 确保PDF页面正确显示 */
+		/* Ensure PDF pages display correctly */
 		.react-pdf__Page {
 			display: block;
 		}
@@ -282,17 +282,17 @@ export const useStyles = createStyles(({ token, css, prefixCls }) => ({
 			}
 		}
 
-		/* 中等屏幕 */
+		/* Medium screen */
 		@media (max-width: 1024px) {
 			width: 60px;
 		}
 
-		/* 小屏幕 */
+		/* Small screen */
 		@media (max-width: 800px) {
 			width: 52px;
 		}
 
-		/* 超小屏幕 */
+		/* Extra small screen */
 		@media (max-width: 480px) {
 			width: 44px;
 		}
@@ -322,17 +322,17 @@ export const useStyles = createStyles(({ token, css, prefixCls }) => ({
 			}
 		}
 
-		/* 中等屏幕 */
+		/* Medium screen */
 		@media (max-width: 1024px) {
 			width: 80px;
 		}
 
-		/* 小屏幕 */
+		/* Small screen */
 		@media (max-width: 800px) {
 			width: 70px;
 		}
 
-		/* 超小屏幕 */
+		/* Extra small screen */
 		@media (max-width: 480px) {
 			width: 60px;
 		}
@@ -396,7 +396,7 @@ export const useStyles = createStyles(({ token, css, prefixCls }) => ({
 			height: 16px;
 		}
 
-		/* 中等屏幕 */
+		/* Medium screen */
 		@media (max-width: 1024px) {
 			padding: 4px 8px;
 			min-width: 32px;
@@ -408,7 +408,7 @@ export const useStyles = createStyles(({ token, css, prefixCls }) => ({
 			}
 		}
 
-		/* 小屏幕 - 更紧凑的尺寸 */
+		/* Small screen - more compact size */
 		@media (max-width: 800px) {
 			padding: 3px 5px;
 			min-width: 26px;
@@ -420,7 +420,7 @@ export const useStyles = createStyles(({ token, css, prefixCls }) => ({
 			}
 		}
 
-		/* 超小屏幕 */
+		/* Extra small screen */
 		@media (max-width: 480px) {
 			padding: 2px 4px;
 			min-width: 22px;

@@ -27,13 +27,13 @@ export const LoginServiceContext = createContext<LoginServiceStore>({
 })
 
 /**
- * @description 登录下根据多环境需要切换对应的服务请求
+ * @description Login service provider that switches corresponding service requests according to multi-environment requirements
  */
 export const LoginServiceProvider = (props: PropsWithChildren<LoginServiceProviderProps>) => {
 	const { service } = props
 	const { clusterCode, setClusterCode } = useClusterCode()
 
-	// 私有化部署环境名称
+	// Private deployment environment name
 	const [deployment, setDeployment] = useImmer(LoginDeployment.PublicDeploymentLogin)
 
 	const setDeployCode = useMemoizedFn((code: string) => {

@@ -24,7 +24,7 @@ function SettingPage() {
 
 	useEffect(() => {
 		if (state?.type) {
-			// 滚动到指定位置
+			// Scroll to specified position
 			const target = document.getElementById(state.type)
 			if (target) {
 				target.scrollIntoView({ behavior: "smooth" })

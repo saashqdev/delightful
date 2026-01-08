@@ -23,11 +23,11 @@ const useStyles = createStyles(({ css, token }) => {
 const MyGroups = observer(function MyGroups() {
 	const { styles } = useStyles()
 
-	// 使用状态管理数据和加载状态
+	// Use state to manage data and loading status
 	const [data, setData] = useState<any>(undefined)
 	const [isLoading, setIsLoading] = useState(false)
 
-	// 初始加载和刷新函数
+	// Initial load and refresh function
 	const fetchData = useCallback(async (params = {}) => {
 		setIsLoading(true)
 		try {
@@ -39,7 +39,7 @@ const MyGroups = observer(function MyGroups() {
 		}
 	}, [])
 
-	// 初始加载
+	// Initial load
 	useEffect(() => {
 		fetchData()
 	}, [fetchData])

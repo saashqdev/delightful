@@ -7,7 +7,7 @@ interface CheckboxItemProps {
 }
 
 /**
- * 自定义勾选框组件
+ * Custom checkbox component
  */
 export default function CheckboxItem({ checked }: CheckboxItemProps) {
 	const { styles } = useVectorKnowledgeConfigurationStyles()

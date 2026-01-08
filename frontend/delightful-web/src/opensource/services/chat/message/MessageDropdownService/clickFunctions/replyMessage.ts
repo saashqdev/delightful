@@ -1,8 +1,8 @@
 import MessageReplyService from "@/opensource/services/chat/message/MessageReplyService"
 
 /**
- * 回复消息
- * @param messageId 消息ID
+ * Reply message
+ * @param messageId Message ID
  */
 function replyMessage(messageId: string) {
 	// console.log("replyMessage", messageId)

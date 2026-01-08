@@ -57,7 +57,7 @@ export default function SubFlowV0() {
 
 	const { expressionDataSource } = usePrevious()
 
-	// 处理直接从左侧物料面板拉子流程出来时
+	// Handle when sub-flow is dragged directly from the left material panel
 	useMount(() => {
 		if (!currentNode) return
 		const subFlowId = get(currentNode, ["params", "sub_flow_id"])
@@ -82,7 +82,7 @@ export default function SubFlowV0() {
 		}
 	})
 
-	/** 下游同步上游 */
+	/** Sync upstream from downstream */
 	const onValuesChange = useMemoizedFn(async (changeValues) => {
 		if (!currentNode) return
 		if (Reflect.has(changeValues, "sub_flow_id")) {
@@ -98,13 +98,13 @@ export default function SubFlowV0() {
 		}
 	})
 
-	/** 上游同步下游 */
+	/** Sync downstream from upstream */
 	useMount(() => {
 		const serverInput = get(currentNode, ["input", "form", "structure"])
 		setInput(serverInput)
 	})
 
-	/** input更新时同步到节点 */
+	/** Sync to node when input updates */
 	useUpdateEffect(() => {
 		if (!currentNode) return
 		set(currentNode, ["input", "form", "structure"], input)

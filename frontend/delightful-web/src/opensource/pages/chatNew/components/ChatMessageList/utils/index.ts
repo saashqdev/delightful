@@ -5,7 +5,7 @@ export function isMessageInView(messageId: string, parentElement: HTMLElement | 
 	if (!element) return false
 
 	const rect = element.getBoundingClientRect()
-	// 元素的顶部进入视图，判断为true
+	// Element's top enters viewport, judged as true
 	return (
 		(rect.top >= 0 && rect.top <= (parentElement.clientHeight || parentElement.scrollHeight)) ||
 		(rect.bottom >= 0 &&

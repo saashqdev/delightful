@@ -4,28 +4,28 @@ import { ConversationMessageAttachment } from "@/types/chat/conversation_message
 import { FilePreviewInfo } from "@/types/chat/preview"
 
 /**
- * 文件预览服务
+ * File preview service
  */
 class MessageFilePreviewService {
 	/**
-	 * 设置预览信息
-	 * @param info 预览信息
+	 * Set preview info
+	 * @param info Preview info
 	 */
 	openPreview(info?: FilePreviewInfo) {
 		MessageFilePreviewStore.openPreview(info)
 	}
 
 	/**
-	 * 清除预览信息
+	 * Clear preview info
 	 */
 	clearPreviewInfo() {
 		MessageFilePreviewStore.clearPreviewInfo()
 	}
 
 	/**
-	 * 是否可以预览
-	 * @param info 预览信息
-	 * @returns 是否可以预览
+	 * Check if can preview
+	 * @param info Preview info
+	 * @returns Whether can preview
 	 */
 	canPreview(info?: FilePreviewInfo | ConversationMessageAttachment) {
 		if (!info) return false

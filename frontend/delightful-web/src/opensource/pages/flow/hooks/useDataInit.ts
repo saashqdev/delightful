@@ -13,7 +13,7 @@ type UseDataInitProps = {
 }
 
 /**
- * 初次加载流程就需要初始化的数据
+ * Data that needs to be initialized when the flow is first loaded
  */
 export default function useDataInit({ currentFlow }: UseDataInitProps) {
 	const {
@@ -27,7 +27,7 @@ export default function useDataInit({ currentFlow }: UseDataInitProps) {
 
 	const initMethodsDataSource = useMemoizedFn(async () => {
 		const { expression_data_source } = await FlowApi.getMethodsDataSource()
-		// 将数据源进一步转换为流程可识别的数据源结构
+		// Further transform the data source into a structure recognizable by the flow
 		const methodsOptions = transformDataSource(expression_data_source)
 		updateMethodDataSource(methodsOptions)
 	})
@@ -65,9 +65,9 @@ export default function useDataInit({ currentFlow }: UseDataInitProps) {
 		updateModels(models)
 	})
 
-	// 初始化已配置的工具的相关模板
+	// Initialize templates for configured tools
 	const initToolInputOutputMap = useMemoizedFn(async () => {
-		// 所有大模型节点配置的工具
+		// Tools configured in all LLM nodes
 		const llmNodeToolIds =
 			currentFlow?.nodes
 				?.filter?.((node) => node.node_type === customNodeType.LLM)
@@ -76,7 +76,7 @@ export default function useDataInit({ currentFlow }: UseDataInitProps) {
 					const currentNodeToolIds = optionTools?.map?.((tool) => tool.tool_id)
 					return [...new Set([...ids, ...currentNodeToolIds])]
 				}, [] as string[]) || []
-		// 工具节点配置的工具
+		// Tools configured in tool nodes
 		const toolsNodeToolIds =
 			currentFlow?.nodes
 				?.filter?.((node) => node.node_type === customNodeType.Tools)

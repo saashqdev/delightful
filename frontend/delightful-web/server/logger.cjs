@@ -1,18 +1,18 @@
 const bunyan = require("node-bunyan")
 const morgan = require("morgan")
 
-// 创建Bunyan日志记录器
+// Create Bunyan logger
 const logger = bunyan.createLogger({
 	name: "delightful-web",
 	streams: [
-		// 输出到文件
+		// Output to file
 		{ level: "info", path: "./error.log" },
-		// 输出到控制台
+		// Output to console
 		{ level: "error", stream: process.stdout },
 	],
 })
 
-// 创建Morgan日志中间件
+// Create Morgan logging middleware
 const morganMiddleware = morgan("combined", {
 	stream: { write: (message) => logger.error(message) },
 })

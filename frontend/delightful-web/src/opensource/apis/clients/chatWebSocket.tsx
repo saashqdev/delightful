@@ -30,43 +30,43 @@ export type ChatWebSocketEventMap = {
 }
 
 /**
- * 聊天 Websocket 连接类
- * 负责管理WebSocket连接、心跳检测和自动重连
+ * Chat WebSocket Connection Class
+ * Manages WebSocket connections, heartbeat detection, and automatic reconnection
  */
 export class ChatWebSocket extends EventBus {
-	// WebSocket 实例，用于维护与服务器的连接
+	// WebSocket instance for maintaining connection with the server
 	private socket: WebSocket | null = null
 
-	// WebSocket服务端连接地址
+	// WebSocket server connection URL
 	private url: string = env("DELIGHTFUL_SOCKET_BASE_URL") || ""
 
-	// 当前重连尝试次数计数器
+	// Current reconnection attempt counter
 	private reconnectAttempts = 0
 
-	// 最大重连尝试次数，超过此次数将停止重连
+	// Maximum reconnection attempts, will stop reconnecting after exceeding this number
 	private maxReconnectAttempts = 10
 
-	// 重连间隔时间（毫秒），每次重连之间的等待时间
+	// Reconnection interval time (milliseconds), wait time between each reconnection
 	private reconnectInterval = 3000
 
-	// 心跳检测间隔时间（毫秒），定期发送ping维持连接
+	// Heartbeat detection interval time (milliseconds), periodically send ping to maintain connection
 	private heartbeatInterval = 10000
 
-	// 心跳超时时间（毫秒），超过此时间将关闭连接
+	// Heartbeat timeout time (milliseconds), connection will be closed if timeout is exceeded
 	private heartbeatTimeout = 2000
 
-	// 最后一次心跳时间
+	// Last heartbeat time
 	private lastHeartbeatTime = 0
 
-	// 心跳检测定时器引用，用于清理资源
+	// Heartbeat detection timer reference, used for resource cleanup
 	private heartbeatTimer: NodeJS.Timeout | null = null
 
-	// 重连定时器引用，用于清理资源
+	// Reconnection timer reference, used for resource cleanup
 	private reconnectTimer: NodeJS.Timeout | null = null
 
 	/**
-	 * 初始化WebSocket连接
-	 * @param url WebSocket服务端地址
+	 * Initialize WebSocket connection
+	 * @param url WebSocket server address
 	 */
 	constructor(url?: string) {
 		super()
@@ -74,9 +74,9 @@ export class ChatWebSocket extends EventBus {
 	}
 
 	/**
-	 * 建立WebSocket连接
-	 * 初始化事件监听和心跳检测
-	 * 连接失败时触发重连机制
+	 * Establish WebSocket connection
+	 * Initialize event listeners and heartbeat detection
+	 * Trigger reconnection mechanism when connection fails
 	 */
 	public connect(reconnect: boolean = false) {
 		const that = this
@@ -114,30 +114,30 @@ export class ChatWebSocket extends EventBus {
 	openCallback(event: Event) {
 		this.emit("open", event)
 
-		// 重置重连计数
+		// Reset reconnection counter
 		this.reconnectAttempts = 0
-		// 如果有重连定时器，清除
+		// Clear reconnection timer if exists
 		if (this.reconnectTimer) {
 			clearTimeout(this.reconnectTimer)
 			this.reconnectTimer = null
 		}
-		logger.log("连接成功", event)
+		logger.log("Connection successful", event)
 
-		// 触发连接恢复事件，以便处理离线期间的消息队列
+		// Trigger connection recovery event to handle message queue during offline period
 		if (this.reconnectAttempts > 0) {
-			// 如果是重连成功，则触发连接恢复事件
+			// If reconnection is successful, trigger connection recovery event
 			window.dispatchEvent(new CustomEvent("websocket:reconnected"))
 		}
 	}
 
 	closeCallback(event: CloseEvent) {
-		logger.log("连接关闭", event)
+		logger.log("Connection closed", event)
 		this.reconnect()
 		this.emit("close", event)
 	}
 
 	errorCallback(error: Event) {
-		logger.error("连接错误", error)
+		logger.error("Connection error", error)
 		this.emit("error", error)
 	}
 
@@ -164,8 +164,8 @@ export class ChatWebSocket extends EventBus {
 	}
 
 	/**
-	 * 初始化WebSocket事件处理器
-	 * 包括连接成功、断开、错误和消息接收的处理逻辑
+	 * Initialize WebSocket event handlers
+	 * Includes handling logic for connection success, disconnection, errors, and message reception
 	 */
 	private initEventHandlers(reconnect: boolean) {
 		if (!this.socket) return
@@ -175,27 +175,27 @@ export class ChatWebSocket extends EventBus {
 		this.socket.addEventListener("open", (event: Event) => {
 			this.emit("open", { ...event, reconnect })
 
-			// 重置重连计数
+			// Reset reconnection counter
 			this.reconnectAttempts = 0
-			// 如果有重连定时器，清除
+			// Clear reconnection timer if exists
 			if (this.reconnectTimer) {
 				clearTimeout(this.reconnectTimer)
 				this.reconnectTimer = null
 			}
-			logger.log("连接成功", event)
+			logger.log("Connection successful", event)
 		})
-		// 连接关闭回调：更新状态并尝试重连
+		// Connection closed callback: update state and attempt reconnection
 		this.socket.addEventListener("close", (event: CloseEvent) => {
-			logger.log("连接关闭", event)
+			logger.log("Connection closed", event)
 			this.reconnect()
 			this.emit("close", event)
 		})
-		// 错误处理回调：记录错误并更新状态
+		// Error handler callback: log error and update state
 		this.socket.addEventListener("error", (error: Event) => {
-			logger.error("连接错误", error)
+			logger.error("Connection error", error)
 			this.emit("error", error)
 		})
-		// 消息接收处理：解析消息并分发到对应处理器
+		// Message reception handler: parse message and dispatch to corresponding handler
 		this.socket.addEventListener("message", (event: MessageEvent<any>) => {
 			this.emit("message", event)
 			try {
@@ -227,8 +227,8 @@ export class ChatWebSocket extends EventBus {
 	// }
 
 	/**
-	 * 处理消息
-	 * @param event 消息事件
+	 * Handle message
+	 * @param event Message event
 	 */
 	private receiveMessagePacket(event: MessageEvent<any>) {
 		decodeSocketIoMessage(event.data.slice(1)).then((packet) => {
@@ -242,13 +242,13 @@ export class ChatWebSocket extends EventBus {
 	}
 
 	/**
-	 * 处理心跳响应消息
+	 * Handle heartbeat response message
 	 */
 	private handlePongPacket() {
 		if (this.lastHeartbeatTime) {
 			const timeout = Date.now() - this.lastHeartbeatTime
 			if (this.heartbeatTimeout && timeout > this.heartbeatTimeout) {
-				logger.log("心跳超时", timeout)
+				logger.log("Heartbeat timeout", timeout)
 				// this.socket?.close()
 			}
 			this.lastHeartbeatTime = 0
@@ -256,8 +256,8 @@ export class ChatWebSocket extends EventBus {
 	}
 
 	/**
-	 * 处理连接成功包
-	 * @param event 消息事件
+	 * Handle connection success packet
+	 * @param event Message event
 	 */
 	private handleOpenPacket(event: MessageEvent<any>) {
 		const data = JSON.parse(event.data.slice(1)) as WebsocketOpenResponse
@@ -267,19 +267,19 @@ export class ChatWebSocket extends EventBus {
 	}
 
 	/**
-	 * 发送心跳包
+	 * Send heartbeat packet
 	 */
 	private sendHeartbeatPacket() {
 		if (this.socket?.readyState === WebSocketReadyState.OPEN) {
-			this.socket.send(EngineIoPacketType.PING) // 发送心跳包
+			this.socket.send(EngineIoPacketType.PING) // Send heartbeat packet
 			this.lastHeartbeatTime = Date.now()
 		}
 	}
 
 	/**
-	 * 启动心跳检测机制
-	 * 定期发送ping消息维持连接活性
-	 * 间隔时间由heartbeatInterval配置项控制
+	 * Start heartbeat detection mechanism
+	 * Periodically send ping messages to maintain connection activity
+	 * Interval time is controlled by heartbeatInterval configuration
 	 */
 	private startHeartbeat() {
 		if (this.heartbeatTimer) {
@@ -294,66 +294,66 @@ export class ChatWebSocket extends EventBus {
 	}
 
 	/**
-	 * 停止心跳检测
-	 * 清理心跳定时器资源，防止内存泄漏
+	 * Stop heartbeat detection
+	 * Clean up heartbeat timer resources to prevent memory leaks
 	 */
 	private stopHeartbeat() {
 		if (this.heartbeatTimer) {
 			clearInterval(this.heartbeatTimer)
-			this.heartbeatTimer = null // 释放定时器引用
+			this.heartbeatTimer = null // Release timer reference
 		}
 	}
 
 	/**
-	 * 执行自动重连策略
-	 * 当连接异常断开时，按照配置的间隔和次数进行重连
-	 * 重连次数达到上限后将停止尝试
+	 * Execute automatic reconnection strategy
+	 * When connection is abnormally disconnected, reconnect according to configured interval and count
+	 * Stop attempting after reconnection count reaches the limit
 	 */
 	private reconnect() {
 		return new Promise<WebSocket | null>((resolve, reject) => {
 			userService.clearLastLogin()
 
 			if (this.reconnectAttempts >= this.maxReconnectAttempts) {
-				logger.log("达到最大重连次数")
-				interfaceStore.setShowReloadButton(true)
-				interfaceStore.setIsConnecting(false)
-				reject(new Error("达到最大重连次数"))
+			logger.log("Maximum reconnection attempts reached")
+			interfaceStore.setShowReloadButton(true)
+			interfaceStore.setIsConnecting(false)
+			reject(new Error("Maximum reconnection attempts reached"))
 				return
 			}
 
-			// 清理已有定时器避免重复
+			// Clear existing timer to avoid duplication
 			if (this.reconnectTimer) {
 				clearTimeout(this.reconnectTimer)
 			}
 
 			const that = this
 
-			// 设置新的重连定时器
+			// Set new reconnection timer
 			this.reconnectTimer = setTimeout(() => {
-				logger.log(`尝试重连 (${that.reconnectAttempts + 1}/${that.maxReconnectAttempts})`)
+				logger.log(`Attempting to reconnect (${that.reconnectAttempts + 1}/${that.maxReconnectAttempts})`)
 				that.reconnectAttempts += 1
-				resolve(that.connect(true)) // 执行实际连接操作
+				resolve(that.connect(true)) // Execute actual connection operation
 			}, this.reconnectInterval)
 		})
 	}
 
 	/**
-	 * 发送消息方法
-	 * @param message 需要发送的消息对象（会自动序列化为JSON）
+	 * Send message method
+	 * @param message Message object to be sent (will be automatically serialized to JSON)
 	 */
 	public send(message: any) {
 		if (this.isConnected) {
 			this.socket!.send(message)
 		} else {
-			throw new Error("WebSocket未连接")
+			throw new Error("WebSocket not connected")
 		}
 	}
 
 	/**
-	 * 发送消息并等待响应
-	 * @param message 消息内容
-	 * @param ackId 响应ID
-	 * @returns 响应数据
+	 * Send message and wait for response
+	 * @param message Message content
+	 * @param ackId Response ID
+	 * @returns Response data
 	 */
 	public async sendAsync<D>(message: WebSocketMessage, ackId?: number) {
 		const that = this
@@ -377,7 +377,7 @@ export class ChatWebSocket extends EventBus {
 							reponse.length === 1 &&
 							(!isUndefined(ackId) ? ackId === ackIdResponse : true)
 						) {
-							// 主动发送后的响应
+							// Response after active send
 							const data = reponse[0] as CommonResponse<D>
 							if (data.code === 1000) {
 								resolve({
@@ -401,9 +401,9 @@ export class ChatWebSocket extends EventBus {
 	}
 
 	/**
-	 * 主动关闭连接
-	 * 清理所有定时器资源并终止WebSocket连接
-	 * 用于页面卸载或用户主动断开场景
+	 * Actively close connection
+	 * Clean up all timer resources and terminate WebSocket connection
+	 * Used for page unload or user active disconnection scenarios
 	 */
 	public close() {
 		this.stopHeartbeat()
@@ -411,16 +411,16 @@ export class ChatWebSocket extends EventBus {
 			clearTimeout(this.reconnectTimer)
 			this.reconnectTimer = null
 		}
-		this.socket?.close() // 安全关闭连接
+		this.socket?.close() // Safely close connection
 		this.socket = null
 	}
 
 	/**
-	 * 获取WebSocket连接状态
-	 * 如果WebSocket实例不存在，则返回false
-	 * 如果WebSocket实例存在，则返回WebSocket实例的readyState
-	 * 如果结果为 true，TypeScript 会认为 this.socket 是 WebSocket 类型
-	 * @returns 连接状态
+	 * Get WebSocket connection status
+	 * Returns false if WebSocket instance does not exist
+	 * Returns the readyState of WebSocket instance if it exists
+	 * If result is true, TypeScript will consider this.socket as WebSocket type
+	 * @returns Connection status
 	 */
 	public get isConnected(): boolean {
 		return !!this.socket && this.socket.readyState === WebSocketReadyState.OPEN
@@ -434,7 +434,7 @@ export class ChatWebSocket extends EventBus {
 		if (!this.isConnected) {
 			await Promise.race([
 				this.connect(),
-				new Promise((reject) => setTimeout(() => reject("websocket 连接超时"), 3000)),
+				new Promise((reject) => setTimeout(() => reject("websocket connection timeout"), 3000)),
 			])
 		}
 
@@ -450,7 +450,7 @@ export class ChatWebSocket extends EventBus {
 						event.data.slice(1),
 					)
 
-					// 只处理对应的响应消息
+					// Only handle corresponding response messages
 					if (!ackId || (ackId && ackIdResponse === ackId)) {
 						try {
 							if (
@@ -481,10 +481,10 @@ export class ChatWebSocket extends EventBus {
 
 			this.send(message)
 
-			// 设置超时计时器
+			// Set timeout timer
 			timeoutId = setTimeout(() => {
 				socket?.removeEventListener("message", handler)
-				reject(new Error("发送超时，请求未得到响应"))
+				reject(new Error("Send timeout, request did not receive response"))
 			}, 3000)
 		})
 	}

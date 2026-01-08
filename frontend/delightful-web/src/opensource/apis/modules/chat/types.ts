@@ -2,12 +2,12 @@ import type { SeqResponse } from "@/types/request"
 
 export const enum SeqRecordType {
 	seq = "seq",
-	/** 流式类型消息 */
+	/** Stream type message */
 	stream_seq = "stream_seq",
 }
 
 /**
- * seq 消息
+ * seq message
  */
 export type SeqRecord<M> = DefaultSeqRecord<M>
 
@@ -17,7 +17,7 @@ export interface DefaultSeqRecord<M> {
 }
 
 /**
- * 获取会话名称 - 响应
+ * Get conversation name - Response
  */
 export type GetDelightfulTopicNameResponse = {
 	conversation_id: string
@@ -26,7 +26,7 @@ export type GetDelightfulTopicNameResponse = {
 }
 
 /**
- * 创建群聊 - 参数
+ * Create group chat - Parameters
  */
 export enum CreateGroupConversationParamKey {
 	group_name = "group_name",
@@ -37,7 +37,7 @@ export enum CreateGroupConversationParamKey {
 }
 
 /**
- * 消息接收者列表 - 响应
+ * Message receiver list - Response
  */
 export type MessageReceiveListResponse = {
 	unseen_list: string[]
@@ -46,7 +46,7 @@ export type MessageReceiveListResponse = {
 }
 
 /**
- * 获取会话AI自动补全 - 响应
+ * Get conversation AI auto-completion - Response
  */
 export type GetConversationAiAutoCompletionResponse = {
 	choices: [
@@ -64,7 +64,7 @@ export type GetConversationAiAutoCompletionResponse = {
 }
 
 /**
- * 获取会话消息 - 参数
+ * Get conversation messages - Parameters
  */
 export type GetConversationMessagesParams = {
 	topic_id?: string

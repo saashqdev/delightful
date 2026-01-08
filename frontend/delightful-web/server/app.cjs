@@ -12,12 +12,12 @@ const history = require("connect-history-api-fallback")
 const { logger, morganMiddleware } = require("./logger.cjs")
 const throttleMiddleware = require("./middleware/throttleMiddleware")
 
-// 当且仅当为线上环境时禁用默认的 x-powered-by 响应头
+// Disable default x-powered-by response header only in production environment
 if (process.env.NODE_ENV === "production") {
 	app.disable("x-powered-by")
 }
 
-// 日志上报 API 端点
+// Log reporting API endpoint
 app.post("/log-report", throttleMiddleware, (req, res) => {
 	const logs = req.body
 	if (Array.isArray(logs)) {
@@ -35,7 +35,7 @@ app.post("/log-report", throttleMiddleware, (req, res) => {
 
 function setCustomCacheControl(res, p) {
 	const excludeReg = [/service-worker\.js$/, /\.html$/]
-	// 不缓存的页面
+	// Pages not to cache
 	if (excludeReg.some((v) => v.test(p))) {
 		// Custom Cache-Control for HTML files
 		res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate")
@@ -65,7 +65,7 @@ app.get("/config.js", (req, res) => {
 	]
 
 	const isSafeEnvironmentVariable = (key) => {
-		// 只暴露以DELIGHTFUL_开头且在白名单中的环境变量
+		// Only expose environment variables that start with DELIGHTFUL_ and are in the whitelist
 		return key.startsWith("DELIGHTFUL_") && envVarWhitelist.includes(key)
 	}
 
@@ -95,10 +95,10 @@ app.use(
 	}),
 )
 
-// 静态资源请求关闭日志写入
+// Disable log writing for static resource requests
 // app.use(morganMiddleware)
 
-// - 最后兜底的容错中间件 -
+// - Last fallback error handling middleware -
 app.use((req, res) => {
 	res.setHeader("Content-Type", "text/html")
 	res.status(404)
@@ -108,11 +108,11 @@ app.use((req, res) => {
 // 5xx
 app.use((err, req, res, next) => {
 	logger.error({
-		url: req.url, // 当前访问的URL
-		message: err?.message, // 错误信息
-		memoryUsage: process.memoryUsage(), // 内存使用情况
-		cpuUsage: process.cpuUsage(), // 吞吐量
-		stack: err?.stack, // 错误堆栈 (pid、time等信息插件中已处理)
+		url: req.url, // Current URL being accessed
+		message: err?.message, // Error message
+		memoryUsage: process.memoryUsage(), // Memory usage
+		cpuUsage: process.cpuUsage(), // CPU usage
+		stack: err?.stack, // Error stack (pid, time and other info already handled in plugin)
 	})
 
 	res.setHeader("Content-Type", "text/html")
@@ -126,5 +126,5 @@ app.listen(PORT, "0.0.0.0", (err) => {
 		console.log(err)
 		return
 	}
-	console.log(`访问链接:http://localhost:${PORT} --服务已启动`)
+	console.log(`Access link: http://localhost:${PORT} -- Server started`)
 })

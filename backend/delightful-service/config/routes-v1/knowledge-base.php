@@ -12,7 +12,7 @@ use App\Interfaces\KnowledgeBase\Facade\KnowledgeBaseProviderApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/api/v1/knowledge-bases', static function () {
-    // 知识库
+    // Knowledge base
     Router::addGroup('', function () {
         Router::post('', [KnowledgeBaseApi::class, 'create']);
         Router::put('/{code}', [KnowledgeBaseApi::class, 'update']);
@@ -21,7 +21,7 @@ Router::addGroup('/api/v1/knowledge-bases', static function () {
         Router::delete('/{code}', [KnowledgeBaseApi::class, 'destroy']);
     });
 
-    // 文档
+    // Document
     Router::addGroup('/{knowledgeBaseCode}/documents', function () {
         Router::post('', [KnowledgeBaseDocumentApi::class, 'create']);
         Router::put('/{code}', [KnowledgeBaseDocumentApi::class, 'update']);
@@ -31,7 +31,7 @@ Router::addGroup('/api/v1/knowledge-bases', static function () {
         Router::post('/{code}/re-vectorized', [KnowledgeBaseDocumentApi::class, 'reVectorized']);
     });
 
-    // 片段
+    // Fragment
     Router::addGroup('/{knowledgeBaseCode}/documents/{documentCode}/fragments', function () {
         Router::post('', [KnowledgeBaseFragmentApi::class, 'create']);
         Router::put('/{id}', [KnowledgeBaseFragmentApi::class, 'update']);
@@ -42,15 +42,15 @@ Router::addGroup('/api/v1/knowledge-bases', static function () {
     Router::post('/fragments/preview', [KnowledgeBaseFragmentApi::class, 'fragmentPreview']);
     Router::post('/{code}/fragments/similarity', [KnowledgeBaseFragmentApi::class, 'similarity']);
 
-    // 模型提供商
+    // Model provider
     Router::addGroup('/providers', function () {
         Router::get('/rerank/list', [KnowledgeBaseProviderApi::class, 'getOfficialRerankProviderList']);
         Router::get('/embedding/list', [KnowledgeBaseProviderApi::class, 'getEmbeddingProviderList']);
     });
 
-    // 文件
+    // File
     Router::addGroup('/files', function () {
-        // 获取文件链接
+        // Get file link
         Router::get('/link', [KnowledgeBaseApi::class, 'getFileLink']);
     });
 }, ['middleware' => [RequestContextMiddleware::class]]);

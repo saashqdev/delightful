@@ -21,7 +21,7 @@ return [
             'driver' => WebUserGuard::class,
             'provider' => 'delightful-users',
         ],
-        // 需要解析 websocket 上下文中的 token 信息，因此跟 WebUserGuard 不同
+        // Need to parse token information in websocket context, therefore different from WebUserGuard
         'websocket' => [
             'driver' => WebsocketChatUserGuard::class,
             'provider' => 'delightful-users',
@@ -32,7 +32,7 @@ return [
         ],
     ],
     'providers' => [
-        // 麦吉自建用户体系
+        // Delightful self-built user system
         'delightful-users' => [
             'driver' => EloquentProvider::class,
             'model' => DelightfulUserAuthorization::class,

@@ -9,10 +9,10 @@ use App\Interfaces\Chat\Facade\DelightfulEnvironmentApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/api/v1/environments', static function () {
-    // 创建环境
+    // Create environment
     Router::post('', [DelightfulEnvironmentApi::class, 'createDelightfulEnvironment']);
-    // 更新环境
+    // Update environment
     Router::put('', [DelightfulEnvironmentApi::class, 'updateDelightfulEnvironment']);
-    // 批量获取环境
+    // Batch get environments
     Router::post('/queries', [DelightfulEnvironmentApi::class, 'getDelightfulEnvironments']);
 }, ['middleware' => [RequestContextMiddleware::class]]);

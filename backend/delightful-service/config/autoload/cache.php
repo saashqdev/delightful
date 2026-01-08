@@ -12,7 +12,7 @@ return [
         'driver' => RedisDriver::class,
         'packer' => PhpSerializerPacker::class,
         'prefix' => 'delightful:',
-        // 一些经典为空的数据不缓存
+        // Skip caching some classic empty data
         'skip_cache_results' => [
             null, '', [],
         ],

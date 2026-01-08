@@ -19,8 +19,8 @@ return [
             HttpExceptionHandler::class,
             AppExceptionHandler::class,
         ],
-        // ws的异常只对 ON_HAND_SHAKE 有效.
-        // ON_MESSAGE 不会触发异常处理分发
+        // WebSocket exceptions are only effective for ON_HAND_SHAKE.
+        // ON_MESSAGE will not trigger exception handler dispatch
         'socket-io' => [
             BusinessExceptionHandler::class,
             InvalidArgumentExceptionHandler::class,

@@ -5,45 +5,45 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    // Token相关错误
+    // Token related errors
     'token' => [
-        'not_exist' => 'API令牌不存在',
-        'disabled' => 'API令牌已被禁用',
-        'expired' => 'API令牌已过期',
-        'model_not_support' => '令牌不支持此模型',
-        'organization_not_support' => '令牌不支持此组织',
-        'ip_not_in_white_list' => 'IP地址不在白名单中',
-        'quota_not_enough' => '令牌配额不足',
-        'calculate_error' => '令牌计算错误',
-        'create_error' => '创建令牌失败',
+        'not_exist' => 'API token does not exist',
+        'disabled' => 'API token is disabled',
+        'expired' => 'API token has expired',
+        'model_not_support' => 'Token does not support this model',
+        'organization_not_support' => 'Token does not support this organization',
+        'ip_not_in_white_list' => 'IP address not in whitelist',
+        'quota_not_enough' => 'Token quota insufficient',
+        'calculate_error' => 'Token calculation error',
+        'create_error' => 'Failed to create token',
     ],
 
-    // 模型相关错误
+    // Model related errors
     'model' => [
-        'not_support' => '不支持该模型',
-        'response_fail' => '模型响应失败',
+        'not_support' => 'Model not supported',
+        'response_fail' => 'Model response failed',
     ],
 
-    // 组织相关错误
+    // Organization related errors
     'organization' => [
-        'quota_not_enough' => '组织配额不足',
+        'quota_not_enough' => 'Organization quota insufficient',
     ],
 
-    // 消息相关错误
+    // Message related errors
     'message' => [
-        'empty' => '消息不能为空',
+        'empty' => 'Message cannot be empty',
     ],
 
-    // 用户相关错误
+    // User related errors
     'user' => [
-        'create_access_token_limit' => '用户创建访问令牌数量超过限制',
-        'use_access_token_limit' => '用户使用访问令牌数量超过限制',
-        'create_access_token_rate_limit' => '用户创建访问令牌频率受限',
+        'create_access_token_limit' => 'User exceeded access token creation limit',
+        'use_access_token_limit' => 'User exceeded access token usage limit',
+        'create_access_token_rate_limit' => 'User access token creation rate limited',
     ],
 
-    // 通用错误
-    'rate_limit' => '请求频率超限',
-    'msg_empty' => '消息为空',
-    'user_id_not_exist' => '用户ID不存在',
-    'validate_failed' => '验证失败',
+    // General errors
+    'rate_limit' => 'Request rate limit exceeded',
+    'msg_empty' => 'Message is empty',
+    'user_id_not_exist' => 'User ID does not exist',
+    'validate_failed' => 'Validation failed',
 ];

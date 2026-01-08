@@ -279,7 +279,7 @@ $dependencies = [
     OpenPlatformConfigInterface::class => OpenPlatformConfigItem::class,
     DelightfulChatMessageVersionsRepositoryInterface::class => DelightfulMessageVersionsRepository::class,
     BeAgentMessageInterface::class => UnknowChatMessage::class,
-    // socket-io的发布订阅改为rabbitmq实现,但是房间还是用redis
+    // Socket.io pub/sub changed to RabbitMQ implementation, but rooms still use Redis
     AdapterInterface::class => RedisAdapter::class,
     SidProviderInterface::class => DistributedSidProvider::class,
     NamespaceInterface::class => BaseNamespace::class,
@@ -375,42 +375,42 @@ $dependencies = [
     DelightfulUserSettingRepositoryInterface::class => DelightfulUserSettingRepository::class,
     DelightfulUserDomainExtendInterface::class => DelightfulUserDomainExtendService::class,
 
-    // 认证体系
+    // Authentication system
 
     EnvironmentRepositoryInterface::class => DelightfulEnvironmentsRepository::class,
     OrganizationsEnvironmentRepositoryInterface::class => OrganizationsEnvironmentRepository::class,
 
-    // 组织管理
+    // Organization management
     OrganizationRepositoryInterface::class => OrganizationRepository::class,
 
-    // 群组
+    // Groups
     DelightfulGroupRepositoryInterface::class => DelightfulGroupRepository::class,
 
-    // 聊天文件
+    // Chat files
     DelightfulChatFileRepositoryInterface::class => DelightfulChatFileRepository::class,
 
     AuthenticationRepositoryInterface::class => AuthenticationRepository::class,
     CloudFileRepositoryInterface::class => CloudFileRepository::class,
 
-    // 登录校验
+    // Login verification
     SessionInterface::class => SessionAppService::class,
 
-    // token 扩展字段
+    // Token extension fields
     DelightfulTokenExtraInterface::class => DelightfulTokenExtra::class,
-    // 助理执行事件
+    // Agent execution events
     AgentExecuteInterface::class => DelightfulAgentEventAppService::class,
 
     // mock-http-service
     'mock-http-service' => Server::class,
 
-    // 文件解析
+    // File parsing
     OcrFileParserDriverInterface::class => OcrFileParserDriver::class,
     TextFileParserDriverInterface::class => TextFileParserDriver::class,
     ExcelFileParserDriverInterface::class => ExcelFileParserDriver::class,
     WordFileParserDriverInterface::class => WordFileParserDriver::class,
     PdfFileParserDriverInterface::class => PdfFileParserDriver::class,
 
-    // 知识库
+    // Knowledge base
     KnowledgeBaseStrategyInterface::class => BaseKnowledgeBaseStrategy::class,
     ExternalFileDocumentFileStrategyInterface::class => ExternalFileDocumentFileStrategyDriver::class,
     ThirdPlatformDocumentFileStrategyInterface::class => ThirdPlatformDocumentFileStrategyDriver::class,
@@ -420,7 +420,7 @@ $dependencies = [
     // admin
     AdminGlobalSettingsRepositoryInterface::class => AdminGlobalSettingsRepository::class,
 
-    // 权限
+    // Permission
     PermissionInterface::class => Permission::class,
     DelightfulPermissionInterface::class => DelightfulPermission::class,
 

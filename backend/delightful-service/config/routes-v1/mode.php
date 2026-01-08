@@ -12,37 +12,37 @@ use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/api/v1', static function () {
     Router::addGroup('/official/admin', static function () {
-        // 模式管理
+        // Mode management
         Router::addGroup('/modes', static function () {
-            // 获取模式列表
+            // Get mode list
             Router::get('', [AdminModeApi::class, 'getModes']);
-            // 获取默认模式
+            // Get default mode
             Router::get('/default', [AdminModeApi::class, 'getDefaultMode']);
-            // 创建模式
+            // Create mode
             Router::post('', [AdminModeApi::class, 'createMode']);
-            // 获取模式详情
+            // Get mode detail
             Router::get('/{id}', [AdminModeApi::class, 'getMode']);
-            // 获取模式详情（不跟随）
+            // Get mode detail (unlinked)
             Router::get('/origin/{id}', [AdminModeApi::class, 'getOriginMode']);
-            // 更新模式
+            // Update mode
             Router::put('/{id}', [AdminModeApi::class, 'updateMode']);
-            // 更新模式状态
+            // Update mode status
             Router::put('/{id}/status', [AdminModeApi::class, 'updateModeStatus']);
-            // 保存模式配置
+            // Save mode configuration
             Router::put('/{id}/config', [AdminModeApi::class, 'saveModeConfig']);
         });
 
-        // 模式分组管理
+        // Mode group management
         Router::addGroup('/mode-groups', static function () {
-            // 根据模式ID获取分组列表
+            // Get group list by mode ID
             Router::get('/mode/{modeId}', [AdminModeGroupApi::class, 'getGroupsByModeId']);
-            // 获取分组详情
+            // Get group detail
             Router::get('/{groupId}', [AdminModeGroupApi::class, 'getGroupDetail']);
-            // 创建分组
+            // Create group
             Router::post('', [AdminModeGroupApi::class, 'createGroup']);
-            // 更新分组
+            // Update group
             Router::put('/{groupId}', [AdminModeGroupApi::class, 'updateGroup']);
-            // 删除分组
+            // Delete group
             Router::delete('/{groupId}', [AdminModeGroupApi::class, 'deleteGroup']);
         });
     });

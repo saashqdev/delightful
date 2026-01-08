@@ -5,19 +5,19 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    // 定时生成未来 n 天的数据
-    // 判断一下，如果是生产环境，则设置为3，如果是测试环境，则设置为365*2
+    // Periodically generate data for the next n days
+    // If production environment, set to 3; if test environment, set to 365*2
     'crontab_days' => env('APP_ENV') == 'saas-test' ? 365 * 2 : 3,
-    // 超过 n 天的数据会被清理
+    // Data older than n days will be cleaned up
     'clear_days' => 10,
 
-    // 关闭环境隔离
+    // Disable environment isolation
     'environment_enabled' => false,
 
-    // 同时执行的定时任务数量，协程数量控制
+    // Number of concurrent scheduled tasks, coroutine count control
     'concurrency' => 500,
 
-    // 锁超时时间
+    // Lock timeout
     'lock_timeout' => 600,
 
     // 是否私有化部署

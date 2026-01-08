@@ -10,30 +10,30 @@ use Hyperf\Codec\Json;
 use function Hyperf\Support\env;
 
 return [
-    // rpm配置
+    // RPM configuration
     'rpm_config' => [
-        // 组织RPM限流
+        // Organization RPM rate limiting
         'organization' => 1000,
-        // 用户限流
+        // User rate limiting
         'user' => 100,
-        // 应用限流
+        // App rate limiting
         'app' => 100,
     ],
-    // 默认额度配置
+    // Default quota configuration
     'default_amount_config' => [
-        // 组织默认额度
+        // Organization default quota
         'organization' => 500000,
-        // 个人默认额度
+        // Personal default quota
         'user' => 1000,
     ],
-    // 全局的模型降级链
+    // Global model fallback chain
     'model_fallback_chain' => [
-        // 聊天模型
+        // Chat model
         'chat' => Json::decode(env('CHAT_MODEL_FALLBACK_CHAIN', '{}')) ?: [LLMModelEnum::GPT_41->value, LLMModelEnum::GPT_4O->value, LLMModelEnum::DEEPSEEK_V3->value],
-        // 嵌入
+        // Embedding
         'embedding' => [],
     ],
-    // 访问国外的代理配置
+    // Proxy configuration for accessing foreign services
     'http' => [
         'proxy' => env('HTTP_PROXY'),
     ],

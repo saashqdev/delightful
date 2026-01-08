@@ -163,7 +163,7 @@ class ProjectOperatorLogApiTest extends AbstractApiTest
 
     public function testBatchMoveFile(): void
     {
-        // 创建文件
+        // Create file
         $requestData = [
             'is_directory' => false,
             'file_name' => 'test1.txt',
@@ -177,7 +177,7 @@ class ProjectOperatorLogApiTest extends AbstractApiTest
         $this->assertEquals(ResourceType::FILE, $logEntity->getResourceType());
         $file1Id = $response['data']['file_id'];
 
-        // 创建文件
+        // Create file
         $requestData = [
             'is_directory' => false,
             'file_name' => 'test2.txt',
@@ -191,7 +191,7 @@ class ProjectOperatorLogApiTest extends AbstractApiTest
         $this->assertEquals(ResourceType::FILE, $logEntity->getResourceType());
         $file2Id = $response['data']['file_id'];
 
-        // 创建目录
+        // Create directory
         $requestData = [
             'is_directory' => true,
             'file_name' => 'test',
@@ -227,7 +227,7 @@ class ProjectOperatorLogApiTest extends AbstractApiTest
 
     public function testCreateFile(): void
     {
-        // 创建文件
+        // Create file
         $requestData = [
             'is_directory' => false,
             'file_name' => 'test.txt',
@@ -241,7 +241,7 @@ class ProjectOperatorLogApiTest extends AbstractApiTest
         $this->assertEquals(ResourceType::FILE, $logEntity->getResourceType());
         $fileId = $response['data']['file_id'];
 
-        // 重命名
+        // Rename
         $requestData = [
             'target_name' => 'test1.txt',
         ];
@@ -251,7 +251,7 @@ class ProjectOperatorLogApiTest extends AbstractApiTest
         $logEntity = $this->projectOperationLogDomainService->getProjectActionOperationLogs((int) $this->project_id, OperationAction::RENAME_FILE)[0];
         $this->assertEquals(ResourceType::FILE, $logEntity->getResourceType());
 
-        // 创建目录
+        // Create directory
         $requestData = [
             'is_directory' => true,
             'file_name' => 'test',
@@ -265,7 +265,7 @@ class ProjectOperatorLogApiTest extends AbstractApiTest
         $this->assertEquals(ResourceType::FILE, $logEntity->getResourceType());
         $directoryId = $response['data']['file_id'];
 
-        // 重命名
+        // Rename
         $requestData = [
             'target_name' => 'test1',
         ];
@@ -275,7 +275,7 @@ class ProjectOperatorLogApiTest extends AbstractApiTest
         $logEntity = $this->projectOperationLogDomainService->getProjectActionOperationLogs((int) $this->project_id, OperationAction::RENAME_FILE)[0];
         $this->assertEquals(ResourceType::FILE, $logEntity->getResourceType());
 
-        // 移动文件
+        // Move file
         $requestData = [
             'target_parent_id' => $directoryId,
         ];
@@ -284,7 +284,7 @@ class ProjectOperatorLogApiTest extends AbstractApiTest
         $logEntity = $this->projectOperationLogDomainService->getProjectActionOperationLogs((int) $this->project_id, OperationAction::MOVE_FILE)[0];
         $this->assertEquals(ResourceType::FILE, $logEntity->getResourceType());
 
-        // 修改文件内容
+        // Modify file content
         /*$requestData = [
             [
                 'content' => 'SHADOWED_M|?M?bMMMMMM',
@@ -297,14 +297,14 @@ class ProjectOperatorLogApiTest extends AbstractApiTest
         $logEntity = $this->projectOperationLogDomainService->getProjectActionOperationLogs((int) $this->project_id, OperationAction::SAVE_FILE_CONTENT)[0];
         $this->assertEquals(ResourceType::FILE, $logEntity->getResourceType());*/
 
-        // 删除文件
+        // Delete file
         $requestData = [];
         $response = $this->delete(self::BASE_URI . '/file/' . $fileId, $requestData, $this->getCommonHeaders());
         $this->assertEquals(1000, $response['code']);
         $logEntity = $this->projectOperationLogDomainService->getProjectActionOperationLogs((int) $this->project_id, OperationAction::DELETE_FILE)[0];
         $this->assertEquals(ResourceType::FILE, $logEntity->getResourceType());
 
-        // 删除目录
+        // Delete directory
         $requestData = [];
         $response = $this->delete(self::BASE_URI . '/file/' . $directoryId, $requestData, $this->getCommonHeaders());
         $this->assertEquals(1000, $response['code']);

@@ -7,12 +7,12 @@ declare(strict_types=1);
 return [
     'name' => [
         'system' => [
-            'untag' => '未标签',
-            'important' => '重要',
-            'common' => '常用',
+            'untag' => 'Untagged',
+            'important' => 'Important',
+            'common' => 'Common',
         ],
     ],
     'error' => [
-        'relation_tag_empty' => '关联标签不能为空',
+        'relation_tag_empty' => 'Associated tag cannot be empty',
     ],
 ];

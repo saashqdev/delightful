@@ -5,8 +5,8 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    'login_type_not_support' => '登录类型不支持',
-    'register_failed' => '账号注册失败',
-    'request_too_frequent' => '请求太频繁',
-    'login_env_not_support' => '不支持当前环境的登录',
+    'login_type_not_support' => 'Login type not supported',
+    'register_failed' => 'Account registration failed',
+    'request_too_frequent' => 'Request too frequent',
+    'login_env_not_support' => 'Login not supported in current environment',
 ];

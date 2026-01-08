@@ -33,11 +33,11 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     public function configure()
     {
         parent::configure();
-        $this->setDescription('同步历史服务商模型配置数据到版本表');
+        $this->setDescription('Sync historical provider model config data to version table');
 
-        $this->addOption('dry-run', 'd', InputOption::VALUE_NONE, '试运行模式，不实际写入数据库');
-        $this->addOption('force', 'f', InputOption::VALUE_NONE, '强制同步，即使已存在版本也会创建新版本');
-        $this->addOption('limit', 'l', InputOption::VALUE_OPTIONAL, '限制处理的数量，用于测试', 0);
+        $this->addOption('dry-run', 'd', InputOption::VALUE_NONE, 'Dry run mode, do not actually write to database');
+        $this->addOption('force', 'f', InputOption::VALUE_NONE, 'Force sync, create new version even if version already exists');
+        $this->addOption('limit', 'l', InputOption::VALUE_OPTIONAL, 'Limit the number to process, for testing', 0);
     }
 
     public function handle()

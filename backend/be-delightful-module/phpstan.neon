@@ -13,7 +13,7 @@ parameters:
     - src
   excludePaths: []
   reportUnmatchedIgnoredErrors: false
-  # 信任PHPDoc中声明的类型，并根据类型做静态分析
+  # Trust types declared in PHPDoc and perform static analysis based on types
   treatPhpDocTypesAsCertain: true
   ignoreErrors:
     - '#Static call to instance method Hyperf\\HttpServer\\Router\\Router::[a-zA-Z0-9\\_]+\(\)#'

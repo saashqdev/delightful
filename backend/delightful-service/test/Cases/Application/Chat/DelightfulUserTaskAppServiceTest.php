@@ -60,7 +60,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
     //     $this->assertTrue(true);
     // }
 
-    // 测试创建自定义重复任务 day 场景
+    // Test creating custom repeat task - day scenario
     public function testCreateCustomRepeatTaskDay()
     {
         $service = make(DelightfulUserTaskAppService::class);
@@ -69,7 +69,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $userTask->setTopicId('749639569880518657');
         $userTask->setCreator('usi_3715ce50bc02d7e72ba7891649b7f1da');
         $userTask->setNickname('xxxx');
-        $userTask->setName('测试自定义重复任务');
+        $userTask->setName('Test custom repeat task');
         $userTask->setAgentId('737330322528899073');
         $userTask->setDay('');
         $userTask->setTime('22:00');

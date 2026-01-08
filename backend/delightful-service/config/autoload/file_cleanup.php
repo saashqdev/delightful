@@ -5,38 +5,38 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    // 默认过期时间(秒) - 2小时
+    // Default expiration time (seconds) - 2 hours
     'default_expire_seconds' => 7200,
 
-    // 定时任务配置
+    // Crontab configuration
     'crontab' => [
-        'batch_size' => 50,           // 每批处理文件数量
-        'retry_batch_size' => 30,     // 重试记录每批处理数量
-        'max_batches' => 20,          // 最多处理批次数
-        'max_retry_batches' => 10,    // 最多重试批次数
+        'batch_size' => 50,           // Files per batch
+        'retry_batch_size' => 30,     // Retry records per batch
+        'max_batches' => 20,          // Maximum batches to process
+        'max_retry_batches' => 10,    // Maximum retry batches
     ],
 
-    // 重试配置
+    // Retry configuration
     'retry' => [
-        'max_retries' => 3,           // 最大重试次数
-        'retry_delay' => 300,         // 重试间隔(秒) - 5分钟
+        'max_retries' => 3,           // Maximum retry attempts
+        'retry_delay' => 300,         // Retry interval (seconds) - 5 minutes
     ],
 
-    // 维护配置
+    // Maintenance configuration
     'maintenance' => [
-        'success_days_to_keep' => 7,  // 成功记录保留天数
-        'failed_days_to_keep' => 7,   // 失败记录保留天数
-        'enable_auto_maintenance' => true, // 是否启用自动维护
+        'success_days_to_keep' => 7,  // Days to keep successful records
+        'failed_days_to_keep' => 7,   // Days to keep failed records
+        'enable_auto_maintenance' => true, // Whether to enable auto maintenance
     ],
 
-    // 监控配置
+    // Monitoring configuration
     'monitoring' => [
-        'enable_detailed_logs' => true,     // 是否启用详细日志
-        'warn_failed_threshold' => 100,     // 失败记录告警阈值
-        'warn_pending_threshold' => 500,    // 待处理记录告警阈值
+        'enable_detailed_logs' => true,     // Whether to enable detailed logs
+        'warn_failed_threshold' => 100,     // Failed records warning threshold
+        'warn_pending_threshold' => 500,    // Pending records warning threshold
     ],
 
-    // 不同来源类型的默认配置
+    // Default configuration for different source types
     'source_types' => [
         'batch_compress' => [
             'expire_seconds' => 7200,        // 2小时

@@ -10,7 +10,7 @@ use App\Interfaces\Kernel\Facade\GlobalConfigApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/api/v1/settings', static function () {
-    // 获取全局配置
+    // Get global configuration
     Router::get('/global', [GlobalConfigApi::class, 'getGlobalConfig']);
     Router::put('/global', [GlobalConfigApi::class, 'updateGlobalConfig'], ['middleware' => [RequestContextMiddleware::class]]);
 });

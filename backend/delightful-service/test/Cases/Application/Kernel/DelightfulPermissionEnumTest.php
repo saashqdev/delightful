@@ -33,7 +33,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $this->assertCount(2, $operations);
         $this->assertContains('query', $operations);
         $this->assertContains('manage', $operations);
-        $this->assertNotContains('export', $operations); // export不在operations列表中
+        $this->assertNotContains('export', $operations); // export is not in operations list
     }
 
     public function testParsePermissionWithValidKey()

@@ -10,7 +10,7 @@ namespace HyperfTest\Cases\Api;
 use HyperfTest\HttpTestCase;
 
 /**
- * 本文件属于灯塔引擎版权所有，泄漏必究。
+ * This file is proprietary to Lighthouse Engine, disclosure is prohibited.
  * @internal
  */
 class AbstractHttpTest extends HttpTestCase
@@ -22,7 +22,7 @@ class AbstractHttpTest extends HttpTestCase
 
     protected function getApiKey(): string
     {
-        // 优先使用单元测试指定的token，如果不存在则使用默认token
+        // Prioritize unit test specified token, use default token if not exists
         return \Hyperf\Support\env('UNIT_TEST_USER_TOKEN') ?: \Hyperf\Support\env('DELIGHTFUL_API_DEFAULT_ACCESS_TOKEN', 'unit_test_user_token');
     }
 }

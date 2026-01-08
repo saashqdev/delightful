@@ -5,12 +5,12 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    'not_found' => 'token不存在',
-    'expired' => 'token已过期',
-    'type_error' => 'token类型不正确',
-    'relation_not_found' => '未检测到 token 关联的数据',
-    'expired_at_must_set' => 'token必须设置一个有效期',
-    'relation_value_must_set' => 'token必须关联一个值',
-    'not_unique' => 'token不唯一',
-    'type_exception' => 'token类型异常',
+    'not_found' => 'Token does not exist',
+    'expired' => 'Token has expired',
+    'type_error' => 'Token type incorrect',
+    'relation_not_found' => 'Token associated data not detected',
+    'expired_at_must_set' => 'Token must have an expiration date set',
+    'relation_value_must_set' => 'Token must be associated with a value',
+    'not_unique' => 'Token not unique',
+    'type_exception' => 'Token type exception',
 ];

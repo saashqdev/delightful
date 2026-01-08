@@ -33,31 +33,31 @@ Router::addGroup('/api/v1', static function () {
         Router::post('/{flowId}/change-enable', [DelightfulFlowFlowAdminApi::class, 'changeEnable']);
         Router::post('/expression-data-source', [DelightfulFlowFlowAdminApi::class, 'expressionDataSource']);
 
-        // 草稿箱
+        // Draft box
         Router::post('/{flowId}/draft', [DelightfulFlowDraftFlowAdminApi::class, 'save']);
         Router::post('/{flowId}/draft/queries', [DelightfulFlowDraftFlowAdminApi::class, 'queries']);
         Router::get('/{flowId}/draft/{draftId}', [DelightfulFlowDraftFlowAdminApi::class, 'show']);
         Router::delete('/{flowId}/draft/{draftId}', [DelightfulFlowDraftFlowAdminApi::class, 'remove']);
 
-        // 版本
+        // Version
         Router::post('/{flowId}/version/publish', [DelightfulFlowVersionFlowAdminApi::class, 'publish']);
         Router::post('/{flowId}/version/queries', [DelightfulFlowVersionFlowAdminApi::class, 'queries']);
         Router::get('/{flowId}/version/{versionId}', [DelightfulFlowVersionFlowAdminApi::class, 'show']);
         Router::post('/{flowId}/version/{versionId}/rollback', [DelightfulFlowVersionFlowAdminApi::class, 'rollback']);
 
-        // 测试集
+        // Test set
         Router::post('/{flowId}/testcase', [DelightfulFlowTriggerTestcaseFlowAdminApi::class, 'save']);
         Router::post('/{flowId}/testcase/queries', [DelightfulFlowTriggerTestcaseFlowAdminApi::class, 'queries']);
         Router::get('/{flowId}/testcase/{testcaseId}', [DelightfulFlowTriggerTestcaseFlowAdminApi::class, 'show']);
         Router::delete('/{flowId}/testcase/{testcaseId}', [DelightfulFlowTriggerTestcaseFlowAdminApi::class, 'remove']);
 
-        // 工具集
+        // Tool set
         Router::post('/tool-set', [DelightfulFlowToolSetApiFlow::class, 'save']);
         Router::post('/tool-set/queries', [DelightfulFlowToolSetApiFlow::class, 'queries']);
         Router::get('/tool-set/{code}', [DelightfulFlowToolSetApiFlow::class, 'show']);
         Router::delete('/tool-set/{code}', [DelightfulFlowToolSetApiFlow::class, 'destroy']);
 
-        // API_KEY 管理
+        // API key management
         Router::post('/{flowId}/api-key', [DelightfulFlowApiKeyFlowAdminApi::class, 'save']);
         Router::post('/{flowId}/api-key/queries', [DelightfulFlowApiKeyFlowAdminApi::class, 'queries']);
         Router::get('/{flowId}/api-key/{code}', [DelightfulFlowApiKeyFlowAdminApi::class, 'show']);

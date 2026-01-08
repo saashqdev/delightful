@@ -5,56 +5,56 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    // 投递
-    'delivery_failed' => '事件投递失败',
-    'publisher_not_found' => '事件发布器未找到',
-    'exchange_not_found' => '事件交换机未找到',
-    'routing_key_invalid' => '事件路由键无效',
+    // Delivery
+    'delivery_failed' => 'Event delivery failed',
+    'publisher_not_found' => 'Event publisher not found',
+    'exchange_not_found' => 'Event exchange not found',
+    'routing_key_invalid' => 'Event routing key invalid',
 
-    // 消费
-    'consumer_execution_failed' => '事件消费执行失败',
-    'consumer_not_found' => '事件消费者未找到',
-    'consumer_timeout' => '事件消费超时',
-    'consumer_retry_exceeded' => '事件消费重试次数超限',
-    'consumer_validation_failed' => '事件消费参数校验失败',
+    // Consumption
+    'consumer_execution_failed' => 'Event consumption execution failed',
+    'consumer_not_found' => 'Event consumer not found',
+    'consumer_timeout' => 'Event consumption timeout',
+    'consumer_retry_exceeded' => 'Event consumption retry limit exceeded',
+    'consumer_validation_failed' => 'Event consumption parameter validation failed',
 
-    // 数据
-    'data_serialization_failed' => '事件数据序列化失败',
-    'data_deserialization_failed' => '事件数据反序列化失败',
-    'data_validation_failed' => '事件数据校验失败',
-    'data_format_invalid' => '事件数据格式无效',
+    // Data
+    'data_serialization_failed' => 'Event data serialization failed',
+    'data_deserialization_failed' => 'Event data deserialization failed',
+    'data_validation_failed' => 'Event data validation failed',
+    'data_format_invalid' => 'Event data format invalid',
 
-    // 队列
-    'queue_connection_failed' => '事件队列连接失败',
-    'queue_not_found' => '事件队列未找到',
-    'queue_full' => '事件队列已满',
-    'queue_permission_denied' => '事件队列无权限',
+    // Queue
+    'queue_connection_failed' => 'Event queue connection failed',
+    'queue_not_found' => 'Event queue not found',
+    'queue_full' => 'Event queue is full',
+    'queue_permission_denied' => 'Event queue permission denied',
 
-    // 处理
-    'processing_interrupted' => '事件处理被中断',
-    'processing_deadlock' => '事件处理发生死锁',
-    'processing_resource_exhausted' => '事件处理资源耗尽',
-    'processing_dependency_failed' => '事件处理依赖失败',
+    // Processing
+    'processing_interrupted' => 'Event processing interrupted',
+    'processing_deadlock' => 'Event processing deadlock occurred',
+    'processing_resource_exhausted' => 'Event processing resources exhausted',
+    'processing_dependency_failed' => 'Event processing dependency failed',
 
-    // 配置
-    'configuration_invalid' => '事件配置无效',
-    'handler_not_registered' => '事件处理器未注册',
-    'listener_registration_failed' => '事件监听器注册失败',
+    // Configuration
+    'configuration_invalid' => 'Event configuration invalid',
+    'handler_not_registered' => 'Event handler not registered',
+    'listener_registration_failed' => 'Event listener registration failed',
 
-    // 系统
-    'system_unavailable' => '事件系统不可用',
-    'system_overloaded' => '事件系统过载',
-    'system_maintenance' => '事件系统维护中',
+    // System
+    'system_unavailable' => 'Event system unavailable',
+    'system_overloaded' => 'Event system overloaded',
+    'system_maintenance' => 'Event system under maintenance',
 
-    // 业务
+    // Business
     'points' => [
-        'insufficient' => '积分不足',
+        'insufficient' => 'Insufficient points',
     ],
     'task' => [
-        'pending' => '任务待处理',
-        'stop' => '任务已停止',
+        'pending' => 'Task pending',
+        'stop' => 'Task stopped',
     ],
     'credit' => [
-        'insufficient_limit' => '信用额度不足',
+        'insufficient_limit' => 'Insufficient credit limit',
     ],
 ];

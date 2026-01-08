@@ -42,8 +42,8 @@ class ExportAgentWithFlowCommand extends HyperfCommand
         $this->agentDomainService = $this->container->get(DelightfulAgentDomainService::class);
         $this->fileDomainService = $this->container->get(FileDomainService::class);
         parent::__construct('agent:export');
-        $this->setDescription('导出助理到OSS（包含主流程、工具、子流程等）');
-        $this->addArgument('agent_id', InputArgument::REQUIRED, '助理ID');
+        $this->setDescription('Export agent to OSS (including main flow, tools, sub-flows, etc.)');
+        $this->addArgument('agent_id', InputArgument::REQUIRED, 'Agent ID');
     }
 
     /**

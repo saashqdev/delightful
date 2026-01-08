@@ -9,15 +9,15 @@ use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/api/v1', static function () {
     Router::addGroup('/speech', static function () {
-        // 普通语音识别
+        // Standard speech recognition
         Router::post('/submit', [SpeechToTextStandardApi::class, 'submit']);
         Router::post('/query/{taskId}', [SpeechToTextStandardApi::class, 'query']);
 
-        // 大模型语音识别
+        // Large model speech recognition
         Router::post('/large-model/submit', [SpeechToTextStandardApi::class, 'submitLargeModel']);
         Router::post('/large-model/query/{requestId}', [SpeechToTextStandardApi::class, 'queryLargeModel']);
 
-        // 极速版语音识别
+        // Flash speech recognition
         Router::post('/flash', [SpeechToTextStandardApi::class, 'flash']);
     });
 });

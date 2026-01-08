@@ -11,14 +11,14 @@ use Hyperf\HttpServer\Router\Router;
 Router::addGroup('/api/v1', static function () {
     Router::addGroup('/file', static function () {
         Router::post('/temporary-credential', [FileApi::class, 'getUploadTemporaryCredential']);
-        // 公有桶下载
+        // Public bucket download
         Router::post('/publicFileDownload', [FileApi::class, 'publicFileDownload']);
-        // 可能不同的业务下会有默认的文件以及组织也可以上传，供TA人使用，因此单独开路由
-        // 根据不同的业务，获取指定业务下的文件
+        // Different businesses may have default files and organizations can also upload for their users, so separate route
+        // Get files for specified business according to different business types
         Router::get('/business-file', [FileApi::class, 'getFileByBusinessType']);
-        // 上传到业务中
+        // Upload to business
         Router::post('/upload-business-file', [FileApi::class, 'uploadBusinessType']);
-        // 删除
+        // Delete
         Router::post('/delete-business-file', [FileApi::class, 'deleteBusinessFile']);
     });
 }, ['middleware' => [RequestContextMiddleware::class]]);
@@ -27,7 +27,7 @@ Router::addGroup('/api/v1', static function () {
     Router::addGroup('/file', static function () {
         Router::get('/default-icons', [FileApi::class, 'getDefaultIcons']);
 
-        // 本地文件上传
+        // Local file upload
         Router::post('/upload', [FileApi::class, 'fileUpload']);
     });
 });

@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    'not_found' => '任务未找到',
-    'work_dir_not_found' => '工作目录未找到',
-    'continue' => '继续',
-    'initialize_error' => '当前系统繁忙，请稍后重试。',
-    'agent_stopped' => '任务已终止',
-    'finished_task_action' => '已完成结果文件的输出',
-    'access_token_not_found' => '访问令牌未找到',
+    'not_found' => 'Task not found',
+    'work_dir_not_found' => 'Work directory not found',
+    'continue' => 'Continue',
+    'initialize_error' => 'System is currently busy, please try again later.',
+    'agent_stopped' => 'Task has been terminated',
+    'finished_task_action' => 'Result file output completed',
+    'access_token_not_found' => 'Access token not found',
 ];

@@ -9,7 +9,7 @@ use App\Interfaces\ModelGateway\Facade\Open\OpenAIProxyApi;
 use App\Interfaces\Provider\Facade\ServiceProviderApi;
 use Hyperf\HttpServer\Router\Router;
 
-// OpenAI 兼容接口 - 一定是 openai 模式，不要修改这里
+// OpenAI compatible interface - must be openai mode, do not modify this
 Router::addGroup('/v1', function () {
     Router::post('/chat/completions', [OpenAIProxyApi::class, 'chatCompletions']);
     Router::post('/embeddings', [OpenAIProxyApi::class, 'embeddings']);
@@ -27,8 +27,8 @@ Router::addGroup('/v2', function () {
     Router::get('/search', [OpenAIProxyApi::class, 'unifiedSearch']);
 });
 
-// 前台模型接口
+// Frontend model interface
 Router::addGroup('/api/v1', static function () {
-    // 超级麦吉显示模型
+    // Super Delightful display models
     Router::get('/be-delightful-models', [ServiceProviderApi::class, 'getBeDelightfulDisplayModels']);
 }, ['middleware' => [RequestContextMiddleware::class]]);

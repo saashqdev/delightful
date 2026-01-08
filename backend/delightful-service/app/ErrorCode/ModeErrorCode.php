@@ -10,7 +10,7 @@ namespace App\ErrorCode;
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
 /**
- * 模式管理错误码范围:34000-34999.
+ * Mode management error code range: 34000-34999.
  */
 enum ModeErrorCode: int
 {

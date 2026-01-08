@@ -9,14 +9,14 @@ use App\Interfaces\Chat\Facade\DelightfulUserTaskApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/api/v1/user', static function () {
-    // 获取任务列表
+    // Get task list
     Router::get('/task', [DelightfulUserTaskApi::class, 'listTask']);
-    // 创建任务
+    // Create task
     Router::post('/task', [DelightfulUserTaskApi::class, 'createTask']);
-    // 获取单个任务
+    // Get single task
     Router::get('/task/{id}', [DelightfulUserTaskApi::class, 'getTask']);
-    // 更新任务
+    // Update task
     Router::put('/task/{id}', [DelightfulUserTaskApi::class, 'updateTask']);
-    // 删除任务
+    // Delete task
     Router::delete('/task/{id}', [DelightfulUserTaskApi::class, 'deleteTask']);
 }, ['middleware' => [RequestContextMiddleware::class]]);

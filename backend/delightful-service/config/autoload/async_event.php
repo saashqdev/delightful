@@ -5,21 +5,21 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    // 重试配置
+    // Retry configuration
     'retry' => [
-        // 重试间隔 秒
+        // Retry interval in seconds
         'interval' => 600,
-        // 重试最大次数
+        // Maximum retry times
 
         'times' => 3,
     ],
 
-    // 最大重试后的回调，如可以发送钉钉消息
+    // Callback after maximum retry reached, such as sending DingTalk message
     'max_retry_callback' => [null],
 
-    // 协程上下文复制keys
+    // Coroutine context copy keys
     'context_copy_keys' => ['request-id'],
 
-    // 是否清理历史事件
+    // Whether to clear historical events
     'clear_history' => env('ASYNC_EVENT_CLEAR_HISTORY', true),
 ];

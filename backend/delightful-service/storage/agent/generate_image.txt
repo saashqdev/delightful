@@ -5,17 +5,17 @@
                        "items": [
                            {
                                "id": "735145931530702848",
-                               "name": "大模型",
+                               "name": "LLM",
                                "type": 1,
                                "values": [
                                    {
                                        "id": "735145931530702849",
-                                       "name": "文生图 3.0",
+                                       "name": "Text-to-Image 3.0",
                                        "value": "high_aes_general_v30l_zt2i"
                                    },
                                    {
                                        "id": "735145931530702850",
-                                       "name": "文生图 2.0",
+                                       "name": "Text-to-Image 2.0",
                                        "value": "high_aes_general_v21_L"
                                    },
                                    {
@@ -55,7 +55,7 @@
                                    },
                                    {
                                        "id": "775055114758365189",
-                                       "name": "通用2.0Pro-指令编辑（SeedEdit）",
+                                       "name": "General 2.0 Pro - Instruction Edit (SeedEdit)",
                                        "value": "byteedit_v2"
                                    }
                                ],
@@ -65,131 +65,131 @@
                            },
                            {
                                "id": "735146339808428032",
-                               "name": "风格",
+                               "name": "Style",
                                "type": 1,
                                "values": [
                                    {
                                        "id": "735146339808428033",
-                                       "name": "人物摄影",
-                                       "value": "人物摄影"
+                                       "name": "Portrait Photography",
+                                       "value": "Portrait Photography"
                                    },
                                    {
                                        "id": "735146339808428034",
-                                       "name": "电影写真",
-                                       "value": "电影写真"
+                                       "name": "Cinematic Portrait",
+                                       "value": "Cinematic Portrait"
                                    },
                                    {
                                        "id": "735146339808428035",
-                                       "name": "中国风",
-                                       "value": "中国风"
+                                       "name": "Chinese Style",
+                                       "value": "Chinese Style"
                                    },
                                    {
                                        "id": "735146339808428036",
-                                       "name": "动漫",
-                                       "value": "动漫"
+                                       "name": "Anime",
+                                       "value": "Anime"
                                    },
                                    {
                                        "id": "735146339808428037",
-                                       "name": "3D渲染",
-                                       "value": "3D渲染"
+                                       "name": "3D Rendering",
+                                       "value": "3D Rendering"
                                    },
                                    {
                                        "id": "735146339808428038",
-                                       "name": "水墨画",
-                                       "value": "水墨画"
+                                       "name": "Ink Wash Painting",
+                                       "value": "Ink Wash Painting"
                                    },
                                    {
                                        "id": "735146339808428039",
-                                       "name": "油画",
-                                       "value": "油画"
+                                       "name": "Oil Painting",
+                                       "value": "Oil Painting"
                                    },
                                    {
                                        "id": "735146339808428040",
-                                       "name": "古典",
-                                       "value": "古典"
+                                       "name": "Classical",
+                                       "value": "Classical"
                                    },
                                    {
                                        "id": "735146339808428041",
-                                       "name": "水彩画",
-                                       "value": "水彩画"
+                                       "name": "Watercolor",
+                                       "value": "Watercolor"
                                    },
                                    {
                                        "id": "735146339808428042",
-                                       "name": "卡通",
-                                       "value": "卡通"
+                                       "name": "Cartoon",
+                                       "value": "Cartoon"
                                    },
                                    {
                                        "id": "735146339808428043",
-                                       "name": "平面插画",
-                                       "value": "平面插画"
+                                       "name": "Flat Illustration",
+                                       "value": "Flat Illustration"
                                    },
                                    {
                                        "id": "735146339808428044",
-                                       "name": "风景",
-                                       "value": "风景"
+                                       "name": "Landscape",
+                                       "value": "Landscape"
                                    },
                                    {
                                        "id": "735146339808428045",
-                                       "name": "手办",
-                                       "value": "手办"
+                                       "name": "Figure",
+                                       "value": "Figure"
                                    },
                                    {
                                        "id": "735146339808428046",
-                                       "name": "抽象",
-                                       "value": "抽象"
+                                       "name": "Abstract",
+                                       "value": "Abstract"
                                    },
                                    {
                                        "id": "735146339808428047",
-                                       "name": "油墨印刷",
-                                       "value": "油墨印刷"
+                                       "name": "Ink Print",
+                                       "value": "Ink Print"
                                    },
                                    {
                                        "id": "735146339808428048",
-                                       "name": "毕加索",
-                                       "value": "毕加索"
+                                       "name": "Picasso",
+                                       "value": "Picasso"
                                    },
                                    {
                                        "id": "735146339808428049",
-                                       "name": "赛博朋克",
-                                       "value": "赛博朋克"
+                                       "name": "Cyberpunk",
+                                       "value": "Cyberpunk"
                                    }
                                ],
-                               "content": "[{\"type\":\"text\",\"text\":\"风格为：\"},{\"type\":\"quick-instruction\",\"attrs\":{\"value\":\"\",\"instruction\":null}},{\"type\":\"text\",\"text\":\" \"}]",
+                               "content": "[{\"type\":\"text\",\"text\":\"Style:\"},{\"type\":\"quick-instruction\",\"attrs\":{\"value\":\"\",\"instruction\":null}},{\"type\":\"text\",\"text\":\" \"}]",
                                "residency": false,
                                "send_directly": false
                            },
                            {
                                "id": "735146473908731904",
-                               "name": "比例",
+                               "name": "Ratio",
                                "type": 1,
                                "values": [
                                    {
                                        "id": "735146473908731905",
-                                       "name": "1比1正方形",
+                                       "name": "1:1 Square",
                                        "value": "1:1"
                                    },
                                    {
                                        "id": "735146473908731906",
-                                       "name": "2比3自拍",
+                                       "name": "2:3 Selfie",
                                        "value": "2:3"
                                    },
                                    {
                                        "id": "735146473908731907",
-                                       "name": "4比3 文章配图",
+                                       "name": "4:3 Article Image",
                                        "value": "4:3"
                                    },
                                    {
                                        "id": "735146473908731908",
-                                       "name": "9比16 手机壁纸",
+                                       "name": "9:16 Phone Wallpaper",
                                        "value": "9:16"
                                    },
                                    {
                                        "id": "735146473908731909",
-                                       "name": "16比9 桌面壁纸",
+                                       "name": "16:9 Desktop Wallpaper",
                                        "value": "16:9"
                                    }
                                ],
-                               "content": "[{\"type\":\"text\",\"text\":\"比例为：\"},{\"type\":\"quick-instruction\",\"attrs\":{\"value\":\"\",\"instruction\":null}},{\"type\":\"text\",\"text\":\" \"}]",
+                               "content": "[{\"type\":\"text\",\"text\":\"Ratio:\"},{\"type\":\"quick-instruction\",\"attrs\":{\"value\":\"\",\"instruction\":null}},{\"type\":\"text\",\"text\":\" \"}]",
                                "residency": false,
                                "send_directly": false
                            }
@@ -245,8 +245,8 @@
                ],
 "flow":{
          "id": "DELIGHTFUL-FLOW-676b75b6c05ab0-89972724",
-         "name": "麦吉创造",
-         "description": "麦吉创造帮你将想象力化为现实！",
+         "name": "Delightful Creation",
+         "description": "Delightful Creation helps turn your imagination into reality!",
          "icon": "",
          "type": 1,
          "tool_set_id": "not_grouped",
@@ -341,7 +341,7 @@
            {
              "node_id": "536938651453906944",
              "debug": false,
-             "name": "大模型调用",
+             "name": "LLM Invocation",
              "description": "",
              "node_type": 2,
              "node_version": "v1",
@@ -363,7 +363,7 @@
                    "expression_value": [
                      {
                        "type": "input",
-                       "value": "# 定义\n\n你必须使用 `ai_image` 工具生成图片，使用且仅使用一次。\n\n## 上下文\n附件：",
+                       "value": "# Definition\n\nYou must use the `ai_image` tool to generate images, use it once and only once.\n\n## Context\nAttachments:",
                        "name": "",
                        "args": null
                      },
@@ -376,7 +376,7 @@
                      },
                      {
                        "type": "input",
-                       "value": "\n用户消息内容：",
+                       "value": "\nUser message content:",
                        "name": "",
                        "args": null
                      },
@@ -388,7 +388,7 @@
                      },
                      {
                        "type": "input",
-                       "value": "\n\n## 重要\n- 如果用户消息内容中有指定比例，传入对应值到radio。\n- 如果用户消息内容中有指定模型，传入对应值到model。\n- 传入model的值是:",
+                       "value": "\n\n## Important\n- If the user message content specifies a ratio, pass the corresponding value to radio.\n- If the user message content specifies a model, pass the corresponding value to model.\n- The value passed to model is:",
                        "name": "",
                        "args": null
                      },
@@ -400,7 +400,7 @@
                      },
                      {
                        "type": "input",
-                       "value": "\n   - 如果 model 没有值，则默认是 high_aes_general_v30l_zt2i",
+                       "value": "\n   - If model has no value, the default is high_aes_general_v30l_zt2i",
                        "name": "",
                        "args": null
                      }
@@ -463,7 +463,7 @@
                    "type": "array",
                    "key": "root",
                    "sort": 0,
-                   "title": "历史消息",
+                   "title": "Message History",
                    "description": "",
                    "required": null,
                    "value": null,
@@ -473,7 +473,7 @@
                      "type": "object",
                      "key": "messages",
                      "sort": 0,
-                     "title": "历史消息",
+                     "title": "Message History",
                      "description": "",
                      "required": [
                        "role",
@@ -488,7 +488,7 @@
                          "type": "string",
                          "key": "role",
                          "sort": 0,
-                         "title": "角色",
+                         "title": "Role",
                          "description": "",
                          "required": null,
                          "value": null,
@@ -501,7 +501,7 @@
                          "type": "string",
                          "key": "content",
                          "sort": 1,
-                         "title": "内容",
+                         "title": "Content",
                          "description": "",
                          "required": null,
                          "value": null,
@@ -529,7 +529,7 @@
                    "sort": 0,
                    "type": "object",
                    "items": null,
-                   "title": "root节点",
+                   "title": "root node",
                    "value": null,
                    "required": [
                      "response",
@@ -542,7 +542,7 @@
                        "sort": 0,
                        "type": "string",
                        "items": null,
-                       "title": "大模型响应",
+                       "title": "LLM Response",
                        "value": null,
                        "required": null,
                        "encryption": false,
@@ -559,7 +559,7 @@
                          "sort": 0,
                          "type": "object",
                          "items": null,
-                         "title": "调用过的工具",
+                         "title": "Invoked Tools",
                          "value": null,
                          "required": [],
                          "encryption": false,
@@ -569,7 +569,7 @@
                              "sort": 0,
                              "type": "string",
                              "items": null,
-                             "title": "工具名称",
+                             "title": "Tool Name",
                              "value": null,
                              "required": null,
                              "encryption": false,
@@ -582,7 +582,7 @@
                              "sort": 1,
                              "type": "boolean",
                              "items": null,
-                             "title": "是否成功",
+                             "title": "Success",
                              "value": null,
                              "required": null,
                              "encryption": false,
@@ -595,7 +595,7 @@
                              "sort": 3,
                              "type": "object",
                              "items": null,
-                             "title": "工具参数",
+                             "title": "Tool Parameters",
                              "value": null,
                              "required": [],
                              "encryption": false,
@@ -608,7 +608,7 @@
                              "sort": 4,
                              "type": "string",
                              "items": null,
-                             "title": "调用结果",
+                             "title": "Invocation Result",
                              "value": null,
                              "required": null,
                              "encryption": false,
@@ -621,7 +621,7 @@
                              "sort": 5,
                              "type": "string",
                              "items": null,
-                             "title": "耗时",
+                             "title": "Duration",
                              "value": null,
                              "required": null,
                              "encryption": false,
@@ -634,7 +634,7 @@
                              "sort": 2,
                              "type": "string",
                              "items": null,
-                             "title": "错误信息",
+                             "title": "Error Message",
                              "value": null,
                              "required": null,
                              "encryption": false,
@@ -646,7 +646,7 @@
                          "description": "",
                          "encryption_value": null
                        },
-                       "title": "调用过的工具",
+                       "title": "Invoked Tools",
                        "value": null,
                        "required": null,
                        "encryption": false,
@@ -668,7 +668,7 @@
            {
              "node_id": "537202790173282304",
              "debug": false,
-             "name": "回复消息",
+             "name": "Reply Message",
              "description": "",
              "node_type": 3,
              "node_version": "v0",
@@ -690,7 +690,7 @@
                    "expression_value": [
                      {
                        "type": "input",
-                       "value": "嘿，",
+                       "value": "Hey, ",
                        "name": "",
                        "args": null
                      },
@@ -702,7 +702,7 @@
                      },
                      {
                        "type": "input",
-                       "value": " ，来玩一场文字变魔术吧！只需告诉我你脑中的画面，文生图就能像变戏法一样，把你的文字描述变成一幅幅美图。想看什么就来什么，风景、人物、抽象画，统统不在话下，让你的创意瞬间“活”起来！比如：店铺名为KKV，明黄色集装箱设计，店内商品成列整齐划一。",
+                       "value": " ，let's play a game of text-to-magic! Just tell me the image in your mind, and text-to-image can turn your text description into beautiful pictures like magic. Whatever you want to see - Landscape、characters, abstract paintings，统统不在话下，让你的创意瞬间“活”起来！For example: A store named KKV，with bright yellow container design and neatly arranged merchandise inside.",
                        "name": "",
                        "args": null
                      }
@@ -756,7 +756,7 @@
            {
              "node_id": "542304424285290496",
              "debug": false,
-             "name": "大模型调用",
+             "name": "LLM Invocation",
              "description": "",
              "node_type": 2,
              "node_version": "v1",
@@ -778,7 +778,7 @@
                    "expression_value": [
                      {
                        "type": "input",
-                       "value": "# 定义\n\n你必须使用 `image_convert_high` 工具生成高清图片，使用且仅使用一次。\n\n## 上下文\n附件：",
+                       "value": "# Definition\n\nYou must use the `image_convert_high` tool to generate high-definition images, use it once and only once.\n\n## Context\nAttachments:",
                        "name": "",
                        "args": null
                      },
@@ -847,7 +847,7 @@
                    "type": "array",
                    "key": "root",
                    "sort": 0,
-                   "title": "历史消息",
+                   "title": "Message History",
                    "description": "",
                    "required": null,
                    "value": null,
@@ -857,7 +857,7 @@
                      "type": "object",
                      "key": "messages",
                      "sort": 0,
-                     "title": "历史消息",
+                     "title": "Message History",
                      "description": "",
                      "required": [
                        "role",
@@ -872,7 +872,7 @@
                          "type": "string",
                          "key": "role",
                          "sort": 0,
-                         "title": "角色",
+                         "title": "Role",
                          "description": "",
                          "required": null,
                          "value": null,
@@ -885,7 +885,7 @@
                          "type": "string",
                          "key": "content",
                          "sort": 1,
-                         "title": "内容",
+                         "title": "Content",
                          "description": "",
                          "required": null,
                          "value": null,
@@ -913,7 +913,7 @@
                    "sort": 0,
                    "type": "object",
                    "items": null,
-                   "title": "root节点",
+                   "title": "root node",
                    "value": null,
                    "required": [
                      "response",
@@ -926,7 +926,7 @@
                        "sort": 0,
                        "type": "string",
                        "items": null,
-                       "title": "大模型响应",
+                       "title": "LLM Response",
                        "value": null,
                        "required": null,
                        "encryption": false,
@@ -943,7 +943,7 @@
                          "sort": 0,
                          "type": "object",
                          "items": null,
-                         "title": "调用过的工具",
+                         "title": "Invoked Tools",
                          "value": null,
                          "required": [],
                          "encryption": false,
@@ -953,7 +953,7 @@
                              "sort": 0,
                              "type": "string",
                              "items": null,
-                             "title": "工具名称",
+                             "title": "Tool Name",
                              "value": null,
                              "required": null,
                              "encryption": false,
@@ -966,7 +966,7 @@
                              "sort": 1,
                              "type": "boolean",
                              "items": null,
-                             "title": "是否成功",
+                             "title": "Success",
                              "value": null,
                              "required": null,
                              "encryption": false,
@@ -979,7 +979,7 @@
                              "sort": 3,
                              "type": "object",
                              "items": null,
-                             "title": "工具参数",
+                             "title": "Tool Parameters",
                              "value": null,
                              "required": [],
                              "encryption": false,
@@ -992,7 +992,7 @@
                              "sort": 4,
                              "type": "string",
                              "items": null,
-                             "title": "调用结果",
+                             "title": "Invocation Result",
                              "value": null,
                              "required": null,
                              "encryption": false,
@@ -1005,7 +1005,7 @@
                              "sort": 5,
                              "type": "string",
                              "items": null,
-                             "title": "耗时",
+                             "title": "Duration",
                              "value": null,
                              "required": null,
                              "encryption": false,
@@ -1018,7 +1018,7 @@
                              "sort": 2,
                              "type": "string",
                              "items": null,
-                             "title": "错误信息",
+                             "title": "Error Message",
                              "value": null,
                              "required": null,
                              "encryption": false,
@@ -1030,7 +1030,7 @@
                          "description": "",
                          "encryption_value": null
                        },
-                       "title": "调用过的工具",
+                       "title": "Invoked Tools",
                        "value": null,
                        "required": null,
                        "encryption": false,
@@ -1052,7 +1052,7 @@
            {
              "node_id": "542305748087324672",
              "debug": false,
-             "name": "开始节点",
+             "name": "Start Node",
              "description": "",
              "node_type": 1,
              "node_version": "",
@@ -1082,7 +1082,7 @@
                          "type": "object",
                          "key": "root",
                          "sort": 0,
-                         "title": "root节点",
+                         "title": "root node",
                          "description": "",
                          "required": [
                            "user_id",
@@ -1103,7 +1103,7 @@
                              "type": "string",
                              "key": "user_id",
                              "sort": 0,
-                             "title": " 用户ID",
+                             "title": " User ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1116,7 +1116,7 @@
                              "type": "string",
                              "key": "nickname",
                              "sort": 1,
-                             "title": " 用户昵称",
+                             "title": " User Nickname",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1129,7 +1129,7 @@
                              "type": "string",
                              "key": "chat_time",
                              "sort": 2,
-                             "title": "发送时间",
+                             "title": "Send Time",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1142,7 +1142,7 @@
                              "type": "string",
                              "key": "message_type",
                              "sort": 3,
-                             "title": "消息类型",
+                             "title": "Message Type",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1155,7 +1155,7 @@
                              "type": "string",
                              "key": "message_content",
                              "sort": 4,
-                             "title": "消息内容",
+                             "title": "Message Content",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1168,7 +1168,7 @@
                              "type": "array",
                              "key": "files",
                              "sort": 5,
-                             "title": "文件列表",
+                             "title": "File List",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1178,7 +1178,7 @@
                                "type": "object",
                                "key": "files",
                                "sort": 0,
-                               "title": "文件",
+                               "title": "File",
                                "description": "",
                                "required": [
                                  "file_name",
@@ -1193,7 +1193,7 @@
                                    "type": "string",
                                    "key": "file_name",
                                    "sort": 0,
-                                   "title": "文件名称",
+                                   "title": "File Name",
                                    "description": "",
                                    "required": null,
                                    "value": null,
@@ -1206,7 +1206,7 @@
                                    "type": "string",
                                    "key": "file_url",
                                    "sort": 1,
-                                   "title": "文件地址",
+                                   "title": "File Address",
                                    "description": "",
                                    "required": null,
                                    "value": null,
@@ -1219,7 +1219,7 @@
                                    "type": "string",
                                    "key": "file_ext",
                                    "sort": 2,
-                                   "title": "文件后缀",
+                                   "title": "File Extension",
                                    "description": "",
                                    "required": null,
                                    "value": null,
@@ -1232,7 +1232,7 @@
                                    "type": "number",
                                    "key": "file_size",
                                    "sort": 3,
-                                   "title": "文件大小",
+                                   "title": "File Size",
                                    "description": "",
                                    "required": null,
                                    "value": null,
@@ -1249,7 +1249,7 @@
                              "type": "string",
                              "key": "organization_code",
                              "sort": 6,
-                             "title": "组织编码",
+                             "title": "Organization Code",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1262,7 +1262,7 @@
                              "type": "string",
                              "key": "conversation_id",
                              "sort": 7,
-                             "title": "会话 ID",
+                             "title": "Conversation ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1275,7 +1275,7 @@
                              "type": "string",
                              "key": "topic_id",
                              "sort": 8,
-                             "title": "话题 ID",
+                             "title": "Topic ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1298,7 +1298,7 @@
                          "type": "object",
                          "key": "root",
                          "sort": 0,
-                         "title": "root节点",
+                         "title": "root node",
                          "description": "",
                          "required": [
                            "user_id",
@@ -1319,7 +1319,7 @@
                              "type": "string",
                              "key": "user_id",
                              "sort": 0,
-                             "title": " 用户ID",
+                             "title": " User ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1332,7 +1332,7 @@
                              "type": "string",
                              "key": "nickname",
                              "sort": 1,
-                             "title": " 用户昵称",
+                             "title": " User Nickname",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1345,7 +1345,7 @@
                              "type": "string",
                              "key": "chat_time",
                              "sort": 2,
-                             "title": "发送时间",
+                             "title": "Send Time",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1358,7 +1358,7 @@
                              "type": "string",
                              "key": "message_type",
                              "sort": 3,
-                             "title": "消息类型",
+                             "title": "Message Type",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1371,7 +1371,7 @@
                              "type": "string",
                              "key": "message_content",
                              "sort": 4,
-                             "title": "消息内容",
+                             "title": "Message Content",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1384,7 +1384,7 @@
                              "type": "array",
                              "key": "files",
                              "sort": 5,
-                             "title": "文件列表",
+                             "title": "File List",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1394,7 +1394,7 @@
                                "type": "object",
                                "key": "files",
                                "sort": 0,
-                               "title": "文件",
+                               "title": "File",
                                "description": "",
                                "required": [
                                  "file_name",
@@ -1409,7 +1409,7 @@
                                    "type": "string",
                                    "key": "file_name",
                                    "sort": 0,
-                                   "title": "文件名称",
+                                   "title": "File Name",
                                    "description": "",
                                    "required": null,
                                    "value": null,
@@ -1422,7 +1422,7 @@
                                    "type": "string",
                                    "key": "file_url",
                                    "sort": 1,
-                                   "title": "文件地址",
+                                   "title": "File Address",
                                    "description": "",
                                    "required": null,
                                    "value": null,
@@ -1435,7 +1435,7 @@
                                    "type": "string",
                                    "key": "file_ext",
                                    "sort": 2,
-                                   "title": "文件后缀",
+                                   "title": "File Extension",
                                    "description": "",
                                    "required": null,
                                    "value": null,
@@ -1448,7 +1448,7 @@
                                    "type": "number",
                                    "key": "file_size",
                                    "sort": 3,
-                                   "title": "文件大小",
+                                   "title": "File Size",
                                    "description": "",
                                    "required": null,
                                    "value": null,
@@ -1465,7 +1465,7 @@
                              "type": "string",
                              "key": "organization_code",
                              "sort": 6,
-                             "title": "组织编码",
+                             "title": "Organization Code",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1478,7 +1478,7 @@
                              "type": "string",
                              "key": "conversation_id",
                              "sort": 7,
-                             "title": "会话 ID",
+                             "title": "Conversation ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1491,7 +1491,7 @@
                              "type": "string",
                              "key": "topic_id",
                              "sort": 8,
-                             "title": "话题 ID",
+                             "title": "Topic ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1525,7 +1525,7 @@
                          "type": "object",
                          "key": "root",
                          "sort": 0,
-                         "title": "root节点",
+                         "title": "root node",
                          "description": "",
                          "required": [
                            "user_id",
@@ -1544,7 +1544,7 @@
                              "type": "string",
                              "key": "user_id",
                              "sort": 0,
-                             "title": " 用户ID",
+                             "title": " User ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1557,7 +1557,7 @@
                              "type": "string",
                              "key": "nickname",
                              "sort": 1,
-                             "title": " 用户昵称",
+                             "title": " User Nickname",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1570,7 +1570,7 @@
                              "type": "string",
                              "key": "open_time",
                              "sort": 2,
-                             "title": "打开时间",
+                             "title": "Open Time",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1583,7 +1583,7 @@
                              "type": "string",
                              "key": "organization_code",
                              "sort": 3,
-                             "title": "组织编码",
+                             "title": "Organization Code",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1596,7 +1596,7 @@
                              "type": "string",
                              "key": "conversation_id",
                              "sort": 4,
-                             "title": "会话 ID",
+                             "title": "Conversation ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1609,7 +1609,7 @@
                              "type": "string",
                              "key": "topic_id",
                              "sort": 5,
-                             "title": "话题 ID",
+                             "title": "Topic ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1632,7 +1632,7 @@
                          "type": "object",
                          "key": "root",
                          "sort": 0,
-                         "title": "root节点",
+                         "title": "root node",
                          "description": "",
                          "required": [
                            "user_id",
@@ -1651,7 +1651,7 @@
                              "type": "string",
                              "key": "user_id",
                              "sort": 0,
-                             "title": " 用户ID",
+                             "title": " User ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1664,7 +1664,7 @@
                              "type": "string",
                              "key": "nickname",
                              "sort": 1,
-                             "title": " 用户昵称",
+                             "title": " User Nickname",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1677,7 +1677,7 @@
                              "type": "string",
                              "key": "open_time",
                              "sort": 2,
-                             "title": "打开时间",
+                             "title": "Open Time",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1690,7 +1690,7 @@
                              "type": "string",
                              "key": "organization_code",
                              "sort": 3,
-                             "title": "组织编码",
+                             "title": "Organization Code",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1703,7 +1703,7 @@
                              "type": "string",
                              "key": "conversation_id",
                              "sort": 4,
-                             "title": "会话 ID",
+                             "title": "Conversation ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1716,7 +1716,7 @@
                              "type": "string",
                              "key": "topic_id",
                              "sort": 5,
-                             "title": "话题 ID",
+                             "title": "Topic ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1789,7 +1789,7 @@
                          "type": "object",
                          "key": "root",
                          "sort": 0,
-                         "title": "root节点",
+                         "title": "root node",
                          "description": "",
                          "required": [
                            "user_id",
@@ -1810,7 +1810,7 @@
                              "type": "string",
                              "key": "user_id",
                              "sort": 0,
-                             "title": " 用户ID",
+                             "title": " User ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1823,7 +1823,7 @@
                              "type": "string",
                              "key": "nickname",
                              "sort": 1,
-                             "title": " 用户昵称",
+                             "title": " User Nickname",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1836,7 +1836,7 @@
                              "type": "string",
                              "key": "chat_time",
                              "sort": 2,
-                             "title": "发送时间",
+                             "title": "Send Time",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1849,7 +1849,7 @@
                              "type": "string",
                              "key": "message_type",
                              "sort": 3,
-                             "title": "消息类型",
+                             "title": "Message Type",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1862,7 +1862,7 @@
                              "type": "string",
                              "key": "message_content",
                              "sort": 4,
-                             "title": "消息内容",
+                             "title": "Message Content",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1875,7 +1875,7 @@
                              "type": "array",
                              "key": "files",
                              "sort": 5,
-                             "title": "文件列表",
+                             "title": "File List",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1885,7 +1885,7 @@
                                "type": "object",
                                "key": "files",
                                "sort": 0,
-                               "title": "文件",
+                               "title": "File",
                                "description": "",
                                "required": [
                                  "file_name",
@@ -1900,7 +1900,7 @@
                                    "type": "string",
                                    "key": "file_name",
                                    "sort": 0,
-                                   "title": "文件名称",
+                                   "title": "File Name",
                                    "description": "",
                                    "required": null,
                                    "value": null,
@@ -1913,7 +1913,7 @@
                                    "type": "string",
                                    "key": "file_url",
                                    "sort": 1,
-                                   "title": "文件地址",
+                                   "title": "File Address",
                                    "description": "",
                                    "required": null,
                                    "value": null,
@@ -1926,7 +1926,7 @@
                                    "type": "string",
                                    "key": "file_ext",
                                    "sort": 2,
-                                   "title": "文件后缀",
+                                   "title": "File Extension",
                                    "description": "",
                                    "required": null,
                                    "value": null,
@@ -1939,7 +1939,7 @@
                                    "type": "number",
                                    "key": "file_size",
                                    "sort": 3,
-                                   "title": "文件大小",
+                                   "title": "File Size",
                                    "description": "",
                                    "required": null,
                                    "value": null,
@@ -1956,7 +1956,7 @@
                              "type": "string",
                              "key": "organization_code",
                              "sort": 6,
-                             "title": "组织编码",
+                             "title": "Organization Code",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1969,7 +1969,7 @@
                              "type": "string",
                              "key": "conversation_id",
                              "sort": 7,
-                             "title": "会话 ID",
+                             "title": "Conversation ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -1982,7 +1982,7 @@
                              "type": "string",
                              "key": "topic_id",
                              "sort": 8,
-                             "title": "话题 ID",
+                             "title": "Topic ID",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -2048,7 +2048,7 @@
                          "type": "object",
                          "key": "root",
                          "sort": 0,
-                         "title": "root节点",
+                         "title": "root node",
                          "description": "",
                          "required": [
                            "add_time",
@@ -2063,7 +2063,7 @@
                              "type": "object",
                              "key": "user",
                              "sort": 0,
-                             "title": " 用户ID",
+                             "title": " User ID",
                              "description": "",
                              "required": [
                                "id",
@@ -2079,7 +2079,7 @@
                                  "type": "string",
                                  "key": "id",
                                  "sort": 0,
-                                 "title": "用户 ID",
+                                 "title": "User ID",
                                  "description": "",
                                  "required": null,
                                  "value": null,
@@ -2092,7 +2092,7 @@
                                  "type": "string",
                                  "key": "nickname",
                                  "sort": 1,
-                                 "title": "用户昵称",
+                                 "title": "User Nickname",
                                  "description": "",
                                  "required": null,
                                  "value": null,
@@ -2105,7 +2105,7 @@
                                  "type": "string",
                                  "key": "real_name",
                                  "sort": 2,
-                                 "title": "真实姓名",
+                                 "title": "Real Name",
                                  "description": "",
                                  "required": null,
                                  "value": null,
@@ -2120,7 +2120,7 @@
                              "type": "string",
                              "key": "add_time",
                              "sort": 1,
-                             "title": "添加时间",
+                             "title": "Add Time",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -2143,7 +2143,7 @@
                          "type": "object",
                          "key": "root",
                          "sort": 0,
-                         "title": "root节点",
+                         "title": "root node",
                          "description": "",
                          "required": [
                            "add_time",
@@ -2158,7 +2158,7 @@
                              "type": "object",
                              "key": "user",
                              "sort": 0,
-                             "title": " 用户ID",
+                             "title": " User ID",
                              "description": "",
                              "required": [
                                "id",
@@ -2174,7 +2174,7 @@
                                  "type": "string",
                                  "key": "id",
                                  "sort": 0,
-                                 "title": "用户 ID",
+                                 "title": "User ID",
                                  "description": "",
                                  "required": null,
                                  "value": null,
@@ -2187,7 +2187,7 @@
                                  "type": "string",
                                  "key": "nickname",
                                  "sort": 1,
-                                 "title": "用户昵称",
+                                 "title": "User Nickname",
                                  "description": "",
                                  "required": null,
                                  "value": null,
@@ -2200,7 +2200,7 @@
                                  "type": "string",
                                  "key": "real_name",
                                  "sort": 2,
-                                 "title": "真实姓名",
+                                 "title": "Real Name",
                                  "description": "",
                                  "required": null,
                                  "value": null,
@@ -2215,7 +2215,7 @@
                              "type": "string",
                              "key": "add_time",
                              "sort": 1,
-                             "title": "添加时间",
+                             "title": "Add Time",
                              "description": "",
                              "required": null,
                              "value": null,
@@ -2247,7 +2247,7 @@
            {
              "node_id": "542306019462987776",
              "debug": false,
-             "name": "选择器",
+             "name": "Selector",
              "description": "",
              "node_type": 4,
              "node_version": "v0",
@@ -2293,7 +2293,7 @@
                              "const_value": [
                                {
                                  "type": "input",
-                                 "value": "转超清",
+                                 "value": "Convert to Ultra HD",
                                  "name": "",
                                  "args": null
                                }
@@ -2322,7 +2322,7 @@
                              "const_value": [
                                {
                                  "type": "input",
-                                 "value": "转高清",
+                                 "value": "Convert to HD",
                                  "name": "",
                                  "args": null
                                }

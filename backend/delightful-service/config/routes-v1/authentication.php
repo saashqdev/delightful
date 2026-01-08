@@ -8,7 +8,7 @@ use App\Interfaces\Authentication\Facade\Admin\ApiKeyProviderAdminApi;
 use Hyperf\HttpServer\Router\Router;
 
 Router::addGroup('/api/v1/authentication', function () {
-    // API密钥管理
+    // API key management
     Router::addGroup('/api-key', function () {
         Router::post('', [ApiKeyProviderAdminApi::class, 'save']);
         Router::post('/queries', [ApiKeyProviderAdminApi::class, 'queries']);

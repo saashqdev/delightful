@@ -5,6 +5,6 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    'disable_web_search_constraint' => '（基于工作区的内容进行检索，不使用互联网搜索工具）',
-    'image_model_constraint' => '（调用 generate_image 工具时，使用 :model_id 模型作为首选模型）',
+    'disable_web_search_constraint' => '(Search based on workspace content, do not use web search tools)',
+    'image_model_constraint' => '(When calling the generate_image tool, use :model_id model as the preferred model)',
 ];

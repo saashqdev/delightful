@@ -5,11 +5,11 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    'default_topic_name' => '新话题',
-    'not_found' => '话题未找到',
-    'topic_not_found' => '话题未找到',
-    'create_topic_failed' => '创建话题失败',
-    'concurrent_operation_failed' => '并发操作失败',
-    'topic_access_denied' => '访问话题被拒绝',
-    'topic_not_running' => '话题未处于运行状态',
+    'default_topic_name' => 'New Topic',
+    'not_found' => 'Topic not found',
+    'topic_not_found' => 'Topic not found',
+    'create_topic_failed' => 'Failed to create topic',
+    'concurrent_operation_failed' => 'Concurrent operation failed',
+    'topic_access_denied' => 'Topic access denied',
+    'topic_not_running' => 'Topic is not in running state',
 ];

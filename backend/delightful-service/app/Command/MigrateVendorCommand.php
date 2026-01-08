@@ -18,7 +18,7 @@ class MigrateVendorCommand extends HyperfCommand
     public function __construct(protected ContainerInterface $container)
     {
         parent::__construct('migrate:vendor');
-        $this->description = 'vendor 迁移';
+        $this->description = 'Vendor migration';
     }
 
     public function handle(): void

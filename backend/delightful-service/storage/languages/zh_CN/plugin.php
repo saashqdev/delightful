@@ -5,32 +5,32 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    'param_error' => '参数错误',
-    'not_found' => '插件未找到',
+    'param_error' => 'Parameter error',
+    'not_found' => 'Plugin not found',
     'name' => [
-        'required' => '插件名称是必填项',
+        'required' => 'Plugin name is required',
     ],
     'description' => [
-        'required' => '插件描述是必填项',
+        'required' => 'Plugin description is required',
     ],
     'type' => [
-        'required' => '插件类型是必填项',
-        'modification_not_allowed' => '插件类型不允许修改',
+        'required' => 'Plugin type is required',
+        'modification_not_allowed' => 'Plugin type modification not allowed',
     ],
     'creator' => [
-        'required' => '创建者是必填项',
+        'required' => 'Creator is required',
     ],
     'api_config' => [
-        'required' => '接口配置是必填项',
+        'required' => 'API configuration is required',
         'api_url' => [
-            'required' => 'API地址是必填项',
-            'invalid' => 'API地址无效',
+            'required' => 'API address is required',
+            'invalid' => 'API address invalid',
         ],
         'auth_type' => [
-            'required' => '认证类型是必填项',
+            'required' => 'Authentication type is required',
         ],
         'auth_config' => [
-            'invalid' => '认证配置无效',
+            'invalid' => 'Authentication configuration invalid',
         ],
     ],
 ];

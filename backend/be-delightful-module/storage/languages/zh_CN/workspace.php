@@ -5,9 +5,9 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    'default_workspace_name' => '新工作区',
-    'parameter_check_failure' => '参数校验失败',
-    'access_denied' => '访问被拒绝',
-    'workspace_not_found' => '工作区未找到',
-    'workspace_access_denied' => '无权访问该工作区',
+    'default_workspace_name' => 'New Workspace',
+    'parameter_check_failure' => 'Parameter validation failed',
+    'access_denied' => 'Access denied',
+    'workspace_not_found' => 'Workspace not found',
+    'workspace_access_denied' => 'No permission to access this workspace',
 ];

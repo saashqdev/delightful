@@ -16,7 +16,7 @@ return [
     'default' => [
         'version' => 'standard',
     ],
-    // AOP处理器会自动捕获此处配置的异常,并返回错误结构体(实现类必须继承Exception).
+    // AOP handler will automatically catch exceptions configured here and return error structure (implementation class must inherit Exception).
     'error_exception' => [
         BusinessException::class,
         UnauthorizedException::class => static function (UnauthorizedException $exception) {

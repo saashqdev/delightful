@@ -27,7 +27,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     protected function setUp(): void
     {
         $this->clearTestKnowledgeBaseData();
-        // 测试环境自测时候打开，会删除用户所有知识库
+        // Open during test environment self-test, will delete all user knowledge bases
         $this->deleteAllKnowledgeBase();
         parent::setUp();
     }
@@ -35,8 +35,8 @@ class KnowledgeBaseApiTest extends HttpTestCase
     public function testCreateKnowledgeBase()
     {
         $data = [
-            'name' => '测试知识库',
-            'description' => '这是一个测试知识库描述',
+            'name' => 'Test Knowledge Base',
+            'description' => 'This is a test knowledge base description',
             'icon' => 'DT001/588417216353927169/4c9184f37cff01bcdc32dc486ec36961/Oz_iUDWyjYwLxME31WwFn.jpg',
             'enabled' => true,
             'is_draft' => true,
@@ -70,8 +70,8 @@ class KnowledgeBaseApiTest extends HttpTestCase
 
         $this->assertIsString($knowledgeBase['id']);
         $this->assertIsString($knowledgeBase['code']);
-        $this->assertSame('测试知识库', $knowledgeBase['name']);
-        $this->assertSame('这是一个测试知识库描述', $knowledgeBase['description']);
+        $this->assertSame('Test Knowledge Base', $knowledgeBase['name']);
+        $this->assertSame('This is a test knowledge base description', $knowledgeBase['description']);
         $this->assertTrue($knowledgeBase['enabled']);
         $this->assertIsString($knowledgeBase['organization_code']);
         $this->assertSame(KnowledgeType::UserKnowledgeBase->value, $knowledgeBase['type']);
@@ -83,7 +83,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * 测试搜素知识库名字.
+     * Test searching knowledge base by name.
      */
     public function testGetKnowledgeBaseList1()
     {
@@ -104,7 +104,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * 测试按搜索状态为启用的知识库.
+     * Test searching for enabled knowledge bases.
      */
     public function testGetKnowledgeBaseList2()
     {
@@ -119,7 +119,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * 测试搜索状态为禁用知识库.
+     * Test searching for disabled knowledge bases.
      */
     public function testGetKnowledgeBaseList3()
     {
@@ -130,7 +130,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $this->assertSame(1000, $res['code'], $res['message']);
         $this->assertCount(0, $res['data']['list']);
 
-        // 状态改为禁用后，能查到列表
+        // After changing status to disabled, can find in list
         $this->updateKnowledgeBase($knowledgeBaseCode, ['name' => $name, 'description' => '1', 'enabled' => false]);
         $res = $this->post(self::API . '/queries', ['name' => $name, 'search_type' => SearchType::DISABLED->value], $this->getCommonHeaders());
         $this->assertSame(1000, $res['code'], $res['message']);
@@ -143,8 +143,8 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $knowledgeBase = $this->createKnowledgeBase();
         $code = $knowledgeBase['code'];
         $data = [
-            'name' => '更新后的知识库',
-            'description' => '这是更新后的知识库描述',
+            'name' => 'Updated Knowledge Base',
+            'description' => 'This is the updated knowledge base description',
             'enabled' => false,
             'retrieve_config' => [
                 'top_k' => 4,
@@ -178,8 +178,8 @@ class KnowledgeBaseApiTest extends HttpTestCase
 
         $res = $this->get(self::API . '/' . $code, [], $this->getCommonHeaders());
         $knowledgeBase = $res['data'];
-        $this->assertSame('更新后的知识库', $knowledgeBase['name']);
-        $this->assertSame('这是更新后的知识库描述', $knowledgeBase['description']);
+        $this->assertSame('Updated Knowledge Base', $knowledgeBase['name']);
+        $this->assertSame('This is the updated knowledge base description', $knowledgeBase['description']);
         $this->assertFalse($knowledgeBase['enabled']);
         $this->assertSame([
             'search_method' => 'graph_search',
@@ -296,7 +296,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         ];
 
         $updateData = [
-            'name' => '更新后的文档名称',
+            'name' => 'Updated Document Name',
             'enabled' => false,
             'doc_metadata' => ['source' => 'updated'],
             'fragment_config' => $newFragmentConfig,
@@ -353,11 +353,11 @@ class KnowledgeBaseApiTest extends HttpTestCase
 
     public function testGetDocumentList()
     {
-        // 创建几个测试文档
+        // Create several test documents
         $knowledgeBase = $this->createKnowledgeBase();
         $knowledgeBaseCode = $knowledgeBase['code'];
         $this->createDocument(knowledgeBaseCode: $knowledgeBaseCode);
-        $this->createDocument(['name' => '测试文档2'], $knowledgeBaseCode);
+        $this->createDocument(['name' => 'Test Document 2'], $knowledgeBaseCode);
 
         $params = [
             'page' => 1,
@@ -388,14 +388,14 @@ class KnowledgeBaseApiTest extends HttpTestCase
         );
         $this->assertSame(1000, $res['code'], $res['message']);
 
-        // 验证文档已被删除
+        // Verify document has been deleted
         $res = $this->get(
             sprintf('%s/%s/documents/%s', self::API, $document['knowledge_base_code'], $document['code']),
             [],
             $this->getCommonHeaders()
         );
         $this->assertSame(FlowErrorCode::KnowledgeValidateFailed->value, $res['code']);
-        // 验证知识库字符数变为0
+        // Verify knowledge base word count becomes 0
         $res = $this->get(self::API . '/' . $document['knowledge_base_code'], [], $this->getCommonHeaders());
         $this->assertSame(1000, $res['code'], $res['message']);
         $this->assertSame(0, $res['data']['word_count']);
@@ -412,7 +412,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $this->assertIsString($fragment['id']);
         $this->assertIsString($fragment['knowledge_base_code']);
         $this->assertIsString($fragment['document_code']);
-        $this->assertSame('这是一个测试片段内容', $fragment['content']);
+        $this->assertSame('This is a test fragment content', $fragment['content']);
         $this->assertSame(['page' => 1], $fragment['metadata']);
         $this->assertSame('', $fragment['business_id']);
         $this->assertSame(0, $fragment['sync_status']);
@@ -425,7 +425,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $fragment = $this->createFragment();
 
         $updateData = [
-            'content' => '更新后的片段内容',
+            'content' => 'Updated fragment content',
             'metadata' => ['page' => 2],
         ];
 
@@ -450,9 +450,9 @@ class KnowledgeBaseApiTest extends HttpTestCase
     public function testGetFragmentList()
     {
         $document = $this->createDocument();
-        // 创建多个片段
-        $this->createFragment(['content' => '片段1'], $document['code'], $document['knowledge_base_code']);
-        $this->createFragment(['content' => '片段2'], $document['code'], $document['knowledge_base_code']);
+        // Create multiple fragments
+        $this->createFragment(['content' => 'Fragment 1'], $document['code'], $document['knowledge_base_code']);
+        $this->createFragment(['content' => 'Fragment 2'], $document['code'], $document['knowledge_base_code']);
 
         $params = [
             'page' => 1,
@@ -518,7 +518,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         );
         $this->assertSame(1000, $res['code'], $res['message']);
 
-        // 验证片段已被删除
+        // Verify fragment has been deleted
         $res = $this->get(
             sprintf(
                 '%s/%s/documents/%s/fragments/%s',
@@ -534,8 +534,8 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * 测试知识库片段预览功能.
-     * document_file传外部文件.
+     * Test knowledge base fragment preview function.
+     * Pass external file via document_file.
      */
     public function testFragmentPreview1()
     {
@@ -587,16 +587,16 @@ class KnowledgeBaseApiTest extends HttpTestCase
 
     public function testSimilarity()
     {
-        // 创建测试知识库
+        // Create test knowledge base
         $knowledgeBase = $this->createKnowledgeBase();
         $code = $knowledgeBase['code'];
 
-        // 创建测试文档
+        // Create test document
         $document = $this->createDocument([], $code);
 
-        // 创建测试片段
+        // Create test fragment
         $fragment = $this->createFragment([
-            'content' => '这是一个测试片段内容，用于测试相似度查询功能',
+            'content' => 'This is a test fragment content for testing similarity query functionality',
         ], $document['code'], $code);
 
         // 执行相似度查询

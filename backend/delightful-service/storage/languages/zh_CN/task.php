@@ -5,15 +5,15 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    'invalid' => '参数不合法',
-    'not_found' => '任务不存在',
-    'already_exists' => '相同名字和类型的任务已存在',
-    'create_failed' => '任务创建失败',
-    'update_failed' => '任务更新失败',
-    'delete_failed' => '任务删除失败',
-    'list_failed' => '任务列表获取失败',
-    'get_failed' => '任务获取失败',
-    'task_not_found' => '任务不存在',
-    'agent_id_required' => 'agentId 不能为空',
-    'topic_id_required' => 'topicId 不能为空',
+    'invalid' => 'Parameter invalid',
+    'not_found' => 'Task does not exist',
+    'already_exists' => 'Task with same name and type already exists',
+    'create_failed' => 'Task creation failed',
+    'update_failed' => 'Task update failed',
+    'delete_failed' => 'Task deletion failed',
+    'list_failed' => 'Task list retrieval failed',
+    'get_failed' => 'Task retrieval failed',
+    'task_not_found' => 'Task does not exist',
+    'agent_id_required' => 'agentId cannot be empty',
+    'topic_id_required' => 'topicId cannot be empty',
 ];

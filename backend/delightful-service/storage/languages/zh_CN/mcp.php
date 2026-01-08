@@ -6,104 +6,104 @@ declare(strict_types=1);
  */
 return [
     'fields' => [
-        'code' => '代码',
-        'name' => '名称',
-        'description' => '描述',
-        'status' => '状态',
-        'external_sse_url' => 'MCP 服务地址',
+        'code' => 'Code',
+        'name' => 'Name',
+        'description' => 'Description',
+        'status' => 'Status',
+        'external_sse_url' => 'MCP service address',
         'url' => 'URL',
-        'command' => '命令',
-        'arguments' => '参数',
-        'headers' => '请求头',
-        'env' => '环境变量',
-        'oauth2_config' => 'OAuth2配置',
-        'client_id' => '客户端ID',
-        'client_secret' => '客户端密钥',
-        'client_url' => '客户端URL',
-        'scope' => '授权范围',
-        'authorization_url' => '授权URL',
-        'authorization_content_type' => '授权内容类型',
-        'issuer_url' => '发行方URL',
-        'redirect_uri' => '重定向URI',
-        'use_pkce' => '使用PKCE',
-        'response_type' => '响应类型',
-        'grant_type' => '授权类型',
-        'additional_params' => '附加参数',
-        'created_at' => '创建时间',
-        'updated_at' => '更新时间',
+        'command' => 'Command',
+        'arguments' => 'Arguments',
+        'headers' => 'Request headers',
+        'env' => 'Environment variables',
+        'oauth2_config' => 'OAuth2 configuration',
+        'client_id' => 'Client ID',
+        'client_secret' => 'Client secret',
+        'client_url' => 'Client URL',
+        'scope' => 'Authorization scope',
+        'authorization_url' => 'Authorization URL',
+        'authorization_content_type' => 'Authorization content type',
+        'issuer_url' => 'Issuer URL',
+        'redirect_uri' => 'Redirect URI',
+        'use_pkce' => 'Use PKCE',
+        'response_type' => 'Response type',
+        'grant_type' => 'Grant type',
+        'additional_params' => 'Additional parameters',
+        'created_at' => 'Creation time',
+        'updated_at' => 'Update time',
     ],
     'auth_type' => [
-        'none' => '无认证',
-        'oauth2' => 'OAuth2认证',
+        'none' => 'No authentication',
+        'oauth2' => 'OAuth2 authentication',
     ],
 
-    // 错误消息
-    'validate_failed' => '验证失败',
-    'not_found' => '数据不存在',
+    // Error messages
+    'validate_failed' => 'Validation failed',
+    'not_found' => 'Data does not exist',
 
-    // 服务相关错误
+    // Service related errors
     'service' => [
-        'already_exists' => 'MCP服务已存在',
-        'not_enabled' => 'MCP服务未启用',
+        'already_exists' => 'MCP service already exists',
+        'not_enabled' => 'MCP service not enabled',
     ],
 
-    // 服务器相关错误
+    // Server related errors
     'server' => [
-        'not_support_check_status' => '不支持此类型的服务器状态检查',
+        'not_support_check_status' => 'Server status check not supported for this type',
     ],
 
-    // 资源关联错误
+    // Resource relation errors
     'rel' => [
-        'not_found' => '关联资源不存在',
-        'not_enabled' => '关联资源未启用',
+        'not_found' => 'Related resource not found',
+        'not_enabled' => 'Related resource not enabled',
     ],
     'rel_version' => [
-        'not_found' => '关联资源版本不存在',
+        'not_found' => 'Related resource version not found',
     ],
 
-    // 工具错误
+    // Tool errors
     'tool' => [
-        'execute_failed' => '工具执行失败',
+        'execute_failed' => 'Tool execution failed',
     ],
 
-    // OAuth2认证错误
+    // OAuth2 authentication errors
     'oauth2' => [
-        'authorization_url_generation_failed' => '生成OAuth2授权URL失败',
-        'callback_handling_failed' => '处理OAuth2回调失败',
-        'token_refresh_failed' => '刷新OAuth2令牌失败',
-        'invalid_response' => 'OAuth2提供商响应无效',
-        'provider_error' => 'OAuth2提供商返回错误',
-        'missing_access_token' => '未从OAuth2提供商获得访问令牌',
-        'invalid_service_configuration' => '无效的OAuth2服务配置',
-        'missing_configuration' => '缺少OAuth2配置',
-        'not_authenticated' => '此服务未找到OAuth2身份验证',
-        'no_refresh_token' => '没有可用于令牌刷新的刷新令牌',
+        'authorization_url_generation_failed' => 'Failed to generate OAuth2 authorization URL',
+        'callback_handling_failed' => 'Failed to handle OAuth2 callback',
+        'token_refresh_failed' => 'Failed to refresh OAuth2 token',
+        'invalid_response' => 'Invalid OAuth2 provider response',
+        'provider_error' => 'OAuth2 provider returned error',
+        'missing_access_token' => 'No access token received from OAuth2 provider',
+        'invalid_service_configuration' => 'Invalid OAuth2 service configuration',
+        'missing_configuration' => 'Missing OAuth2 configuration',
+        'not_authenticated' => 'No OAuth2 authentication found for this service',
+        'no_refresh_token' => 'No refresh token available for token refresh',
         'binding' => [
-            'code_empty' => '授权码不能为空',
-            'state_empty' => '状态参数不能为空',
-            'mcp_server_code_empty' => 'MCP服务代码不能为空',
+            'code_empty' => 'Authorization code cannot be empty',
+            'state_empty' => 'State parameter cannot be empty',
+            'mcp_server_code_empty' => 'MCP service code cannot be empty',
         ],
     ],
 
-    // 命令验证错误
+    // Command validation errors
     'command' => [
-        'not_allowed' => '不支持的命令 ":command"，当前仅支持: :allowed_commands',
+        'not_allowed' => 'Unsupported command ":command", currently only supports: :allowed_commands',
     ],
 
-    // 必填字段验证错误
+    // Required field validation errors
     'required_fields' => [
-        'missing' => '必填字段缺失: :fields',
-        'empty' => '必填字段不能为空: :fields',
+        'missing' => 'Required fields missing: :fields',
+        'empty' => 'Required fields cannot be empty: :fields',
     ],
 
-    // STDIO执行器相关错误
+    // STDIO executor related errors
     'executor' => [
         'stdio' => [
-            'connection_failed' => 'STDIO执行器连接失败',
-            'access_denied' => '暂时不支持STDIO执行器功能',
+            'connection_failed' => 'STDIO executor connection failed',
+            'access_denied' => 'STDIO executor functionality temporarily not supported',
         ],
         'http' => [
-            'connection_failed' => 'HTTP执行器连接失败',
+            'connection_failed' => 'HTTP executor connection failed',
         ],
     ],
 ];

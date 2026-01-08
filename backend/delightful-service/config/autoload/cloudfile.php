@@ -145,8 +145,8 @@ switch ($fileDriver) {
         ];
         break;
     default:
-        // 这里需要警告一下用户，不需要中断执行，仅仅输出警告
-        echo "\033[33m警告：未配置文件驱动，将无法使用项目中的文件相关功能，请检查 .env 文件中的 FILE_DRIVER 配置\033[0m" . PHP_EOL;
+        // Warning: no interruption needed, just output warning
+        echo "\033[33mWarning: File driver not configured. File-related functions will not be available. Please check FILE_DRIVER configuration in .env file\033[0m" . PHP_EOL;
         break;
 }
 

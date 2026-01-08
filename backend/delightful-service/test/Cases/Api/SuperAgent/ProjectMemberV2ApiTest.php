@@ -18,7 +18,7 @@ use Mockery;
 
 /**
  * @internal
- * 项目团队邀请API测试
+ * Project team invitation API test
  */
 class ProjectMemberV2ApiTest extends AbstractApiTest
 {
@@ -26,7 +26,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
     private string $projectId = '816065897791012866';
 
-    // 测试用户ID和部门ID
+    // Test user IDs and department IDs
     private string $testUserId1 = 'usi_7839078ce6af2d3249b82e7aaed643b8';
 
     private string $testUserId2 = 'usi_e9d64db5b986d062a342793013f682e8';
@@ -38,10 +38,10 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     protected function setUp(): void
     {
         parent::setUp();
-        // 确保测试环境干净，重置协作状态为关闭
+        // Ensure clean test environment, reset collaboration status to disabled
         $this->switchUserTest1();
         $this->disableCollaboration($this->projectId);
-        // 清理项目成员数据，避免唯一键冲突
+        // Clean up project member data to avoid unique key conflicts
         $this->cleanupProjectMembers($this->projectId);
     }
 
@@ -52,58 +52,58 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试团队邀请功能完整流程.
+     * Test complete team invitation workflow.
      */
     public function testTeamInvitationCompleteFlow(): void
     {
         $projectId = $this->projectId;
 
-        // 0. 清理测试数据，确保环境干净
+        // 0. Clean up test data, ensure clean environment
         $this->switchUserTest1();
         $this->cleanupProjectMembers($projectId);
 
-        // 1. 项目创建者开启协作功能
+        // 1. Project creator enables collaboration
         $this->enableCollaboration($projectId);
 
-        // 2. 测试获取协作设置
+        // 2. Test getting collaboration settings
         $this->getCollaborationSettings($projectId);
 
-        // 3. 添加团队成员
+        // 3. Add team members
         $this->addTeamMembers($projectId);
 
-        // 4. 验证成员已添加
+        // 4. Verify members added
         $this->verifyMembersAdded($projectId);
 
-        // 5. 批量更新成员权限
+        // 5. Batch update member permissions
         $this->batchUpdateMemberPermissions($projectId);
 
-        // 6. 验证权限更新
+        // 6. Verify permissions updated
         $this->verifyPermissionsUpdated($projectId);
 
-        // 7. 批量删除部分成员
+        // 7. Batch delete some members
         $this->batchDeleteMembers($projectId);
 
-        // 8. 验证成员已删除
+        // 8. Verify members deleted
         $this->verifyMembersDeleted($projectId);
 
-        // 9. 关闭协作功能
+        // 9. Disable collaboration
         $this->disableCollaboration($projectId);
     }
 
     /**
-     * 测试权限控制 - 只有管理者和所有者可以添加成员.
+     * Test permission control - only managers and owners can add members.
      */
     public function testCreateMembersPermissionControl(): void
     {
         $projectId = $this->projectId;
 
-        // 1. 项目创建者开启协作
+        // 1. Project creator enables collaboration
         $this->switchUserTest1();
         $this->enableCollaboration($projectId);
 
-        // 2. 非项目成员尝试添加成员 - 应该失败
+        // 2. Non-project member tries to add members - should fail
         $this->switchUserTest2();
-        $this->addTeamMembers($projectId, 51202); // 无权限错误
+        $this->addTeamMembers($projectId, 51202); // No permission error
 
         // 3. 项目创建者添加成员 - 应该成功
         $this->switchUserTest1();

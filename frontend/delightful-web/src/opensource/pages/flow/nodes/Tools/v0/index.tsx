@@ -42,7 +42,7 @@ export default function ToolsV0() {
 
 	const { asyncCall } = useToolsParameters()
 
-	// 处理直接从左侧物料面板工具出来时
+	// Handle when directly coming from the left material panel tool
 	useMount(() => {
 		if (!currentNode) return
 		const toolId = get(currentNode, ["params", "tool_id"])
@@ -132,7 +132,7 @@ export default function ToolsV0() {
 				)
 				set(currentNode, ["params", "tool_id"], toolId)
 				set(currentNode, ["params", "avatar"], targetToolDetail.icon)
-				// 需要先重置，避免缓存数据
+				// Need to reset first to avoid cached data
 				form.setFieldsValue({
 					input: null,
 					custom_system_input: null,
@@ -196,7 +196,7 @@ export default function ToolsV0() {
 						showSearch
 						// 搜索key
 						optionFilterProp="realLabel"
-						// 排序
+					// Sort
 						filterSort={(optionA, optionB) => {
 							return (optionA?.realLabel ?? "")
 								.toLowerCase()

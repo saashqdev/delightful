@@ -11,7 +11,7 @@ import MessageFilePreviewStore from "@/opensource/stores/chatNew/messagePreview/
 import { ChatDomId } from "../../constants"
 import { useStyles } from "../../styles"
 
-// 懒加载组件
+// Lazy loaded components
 const ChatFilePreviewPanel = lazy(() => import("../ChatFilePreviewPanel"))
 const GroupSeenPanel = lazy(() => import("../GroupSeenPanel"))
 
@@ -24,8 +24,8 @@ interface ChatContainerProps {
 }
 
 /**
- * 聊天容器组件
- * 包含完整的聊天界面布局
+ * Chat container component
+ * Contains complete chat interface layout
  */
 const ChatContainer = observer(function ChatContainer({
 	sizes,

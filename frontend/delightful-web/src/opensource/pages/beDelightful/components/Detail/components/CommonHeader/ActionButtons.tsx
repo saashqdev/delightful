@@ -49,19 +49,19 @@ export default memo(function ActionButtons(props: ActionButtonsProps) {
 
 	const isMobile = useResponsive().md === false
 
-	// 如果是从Node点击打开的，则不显示按钮
+	// If opened from Node, do not show buttons
 	if (isFromNode) {
 		return null
 	}
 
-	// 判断是否可以导航
+	// Check if navigation is possible
 	const canNavigatePrev = currentAttachmentIndex > 0
 	const canNavigateNext = currentAttachmentIndex < totalFiles - 1 && totalFiles > 0
 
-	// 判断当前文件类型是否可以下载
+	// Check if current file type is downloadable
 	const isDownloadable = () => {
 		if (isFromNode) return false
-		// 判断是否为可下载的文件类型：pdf、html、md、文本或代码文件
+		// Check if file type is downloadable: pdf, html, md, text or code files
 		return (
 			type &&
 			(type === DetailType.Pdf ||
@@ -74,7 +74,7 @@ export default memo(function ActionButtons(props: ActionButtonsProps) {
 		)
 	}
 
-	// 处理左右切换
+	// Handle navigation
 	const handlePrevious = () => {
 		if (onPrevious) {
 			onPrevious()
@@ -87,21 +87,21 @@ export default memo(function ActionButtons(props: ActionButtonsProps) {
 		}
 	}
 
-	// 处理全屏
+	// Handle fullscreen
 	const handleFullscreen = () => {
 		if (onFullscreen) {
 			onFullscreen()
 		}
 	}
 
-	// 处理下载
+	// Handle download
 	const handleDownload = () => {
 		if (onDownload) {
 			onDownload()
 		}
 	}
 
-	// 处理关闭
+	// Handle close
 	const handleClose = () => {
 		if (onClose) {
 			onClose()
@@ -131,7 +131,7 @@ export default memo(function ActionButtons(props: ActionButtonsProps) {
 				/>
 			)}
 
-			{/* 移动端不显示全屏按钮 */}
+			{/* Mobile devices do not show fullscreen button */}
 			{!isMobile && !isFullscreen && (
 				<DelightfulIcon
 					size={28}

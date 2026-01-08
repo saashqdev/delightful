@@ -1,17 +1,17 @@
 /**
- * 浏览器的一些事件控制
+ * Browser event controls
  */
 
 import { useEffect } from "react"
 
 export default function useEvent() {
 	useEffect(() => {
-		// 组件挂载时添加 overscroll-behavior-x: none
+		// Add overscroll-behavior-x: none when component mounts
 		document.documentElement.style.overscrollBehaviorX = "none"
 
-		// 组件卸载时移除 overscroll-behavior-x
+		// Remove overscroll-behavior-x when component unmounts
 		return () => {
 			document.documentElement.style.overscrollBehaviorX = ""
 		}
-	}, []) // 空依赖数组确保只在组件挂载和卸载时执行
+	}, []) // Empty dependency array ensures this only executes on component mount and unmount
 }

@@ -1,7 +1,7 @@
 export const v1Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-676d736eca7d69-15945310",
 	debug: false,
-	name: "HTTP 请求",
+	name: "HTTP Request",
 	description: "",
 	node_type: 10,
 	node_version: "v1",

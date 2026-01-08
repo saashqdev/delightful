@@ -103,7 +103,7 @@ function Banner({ data }: BannerProps) {
 		e.preventDefault()
 		if (bannersRef.current) {
 			const x = e.clientX - bannersRef.current.offsetLeft
-			const walk = (x - startX) * 1.5 // 滑动速度因子
+			const walk = (x - startX) * 1.5 // Scroll speed factor
 			bannersRef.current.scrollLeft = scrollLeft - walk
 		}
 	})

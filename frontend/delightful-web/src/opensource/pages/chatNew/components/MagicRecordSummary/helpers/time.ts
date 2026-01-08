@@ -1,16 +1,16 @@
-// 定义语言类型
-type LanguageCode = "en" // 支持的语言代码
+// Define language type
+type LanguageCode = "en" // Supported language codes
 
-// 定义语言映射对象的结构
+// Define structure of language mapping object
 interface Language {
-	months: string[] // 月份数组
-	format: (month: string, day: number) => string // 格式化日期的函数
+	months: string[] // Array of months
+	format: (month: string, day: number) => string // Function to format date
 }
 
-// 语言映射对象
+// Language mapping object
 const languages: Record<LanguageCode, Language> = {
 	en: {
-		// 英文
+		// English
 		months: [
 			"January",
 			"February",
@@ -27,36 +27,36 @@ const languages: Record<LanguageCode, Language> = {
 		],
 		format: (month, day) => `${month} ${day}`,
 	},
-	//   th: { // 泰语
+	//   th: { // Thai
 	//     months: [
 	//       "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
 	//       "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
 	//     ],
 	//     format: (month, day) => `${day} ${month}`
 	//   },
-	//   vi: { // 越南语
+	//   vi: { // Vietnamese
 	//     months: [
 	//       "Tháng một", "Tháng hai", "Tháng ba", "Tháng tư", "Tháng năm", "Tháng sáu",
 	//       "Tháng bảy", "Tháng tám", "Tháng chín", "Tháng mười", "Tháng mười một", "Tháng mười hai"
 	//     ],
 	//     format: (month, day) => `${month} ${day}`
 	//   }
-	// 可以根据需要继续添加更多语言...
+	// Can continue to add more languages as needed...
 }
 
-// 定义转换日期的函数，接受中文日期和目标语言代码，返回对应语言格式的日期
+// Define function to convert date, accepts Chinese date and target language code, returns date in corresponding language format
 export function getTranslatedDate(chineseDate: string, language: LanguageCode = "en"): string {
-	// 从日期字符串中提取月份和日期
+	// Extract month and day from date string
 	const match = chineseDate.match(/(\d{1,2})月(\d{1,2})日/)
 
 	if (match) {
-		const month = parseInt(match[1], 10) // 获取月份
-		const day = parseInt(match[2], 10) // 获取日期
+		const month = parseInt(match[1], 10) // Get month
+		const day = parseInt(match[2], 10) // Get day
 
-		// 获取选择的语言对象，如果没有指定语言，默认选择英语
+		// Get selected language object, defaults to English if no language specified
 		const selectedLanguage = languages[language]
 
-		// 使用语言对应的月份和格式
+		// Use language-specific months and format
 		return selectedLanguage.format(selectedLanguage.months[month - 1], day)
 	}
 	return "Invalid date format"

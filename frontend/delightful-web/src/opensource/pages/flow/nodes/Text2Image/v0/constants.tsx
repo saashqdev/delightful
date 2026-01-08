@@ -165,9 +165,9 @@ export const voRatioOptions = [
 	},
 
 	{
-		label: "自定义",
+		label: "Custom",
 		id: "custom",
-		suffixText: "宽高最大512",
+		suffixText: "Max width/height 512",
 	},
 ]
 
@@ -222,7 +222,7 @@ export const getDefaultSelfDefineRatio = () => {
 					names_value: [
 						{
 							id: "custom",
-							name: "自定义",
+							name: "Custom",
 						},
 					],
 					value: "",

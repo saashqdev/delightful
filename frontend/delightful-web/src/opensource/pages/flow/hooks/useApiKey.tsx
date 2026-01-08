@@ -10,7 +10,7 @@ type UseApiKeyProps = {
 }
 
 /**
- * ApiKey 管理组件及其相关状态
+ * ApiKey management component and related state
  */
 export default function useApiKey({ agent }: UseApiKeyProps) {
 	const [keyManagerOpen, { setTrue: openKeyManager, setFalse: closeKeyManager }] =

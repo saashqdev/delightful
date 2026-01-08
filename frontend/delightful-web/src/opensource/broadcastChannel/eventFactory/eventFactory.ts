@@ -1,74 +1,74 @@
 import type { BroadcastMessage } from "../broadcastChannel"
 
 /**
- * 事件数据接口
+ * Event data interface
  */
 export interface EventData<T = any> {
 	/**
-	 * 事件类型
+	 * Event type
 	 */
 	type: string
 	/**
-	 * 事件数据
+	 * Event data
 	 */
 	data: T
 	/**
-	 * 元数据
+	 * Metadata
 	 */
 	meta?: Record<string, any>
 }
 
 /**
- * 事件处理器类型
+ * Event handler type
  */
 export type EventHandler<T = any> = (data: T, meta?: Record<string, any>) => void
 
 /**
- * 事件监听器类型
+ * Event listener type
  */
 export interface EventListener<T = any> {
 	/**
-	 * 事件处理器
+	 * Event handler
 	 */
 	handler: EventHandler<T>
 	/**
-	 * 是否只触发一次
+	 * Whether to trigger only once
 	 */
 	once?: boolean
 }
 
 /**
- * 事件工厂类
- * 用于标准化事件创建和处理
+ * Event factory class
+ * Used to standardize event creation and handling
  */
 export class EventFactory {
 	/**
-	 * 事件处理器集合
+	 * Event handler collection
 	 */
 	private eventHandlers: Map<string, EventListener[]> = new Map()
 
 	/**
-	 * 创建事件工厂实例
+	 * Create event factory instance
 	 */
 	constructor() {
-		// 无须事件类型前缀相关参数
+		// No need for event type prefix parameters
 	}
 
 	/**
-	 * 判断事件处理器是否已注册
-	 * @param type 事件类型
-	 * @returns 是否已注册事件处理器
+	 * Check if event handler is registered
+	 * @param type Event type
+	 * @returns Whether the event handler is registered
 	 */
 	public hasEventHandler(type: string): boolean {
 		return this.eventHandlers.has(type) && this.eventHandlers.get(type)!.length > 0
 	}
 
 	/**
-	 * 创建事件对象
-	 * @param type 事件类型
-	 * @param data 事件数据
-	 * @param meta 事件元数据
-	 * @returns 事件对象
+	 * Create event object
+	 * @param type Event type
+	 * @param data Event data
+	 * @param meta Event metadata
+	 * @returns Event object
 	 */
 	public createEvent<T>(type: string, data: T, meta?: Record<string, any>): EventData<T> {
 		return {
@@ -79,9 +79,9 @@ export class EventFactory {
 	}
 
 	/**
-	 * 转换为广播消息
-	 * @param event 事件对象
-	 * @returns 广播消息
+	 * Convert to broadcast message
+	 * @param event Event object
+	 * @returns Broadcast message
 	 */
 	public toBroadcastMessage<T>(event: EventData<T>): BroadcastMessage<T> {
 		return {
@@ -91,11 +91,11 @@ export class EventFactory {
 	}
 
 	/**
-	 * 创建并转换为广播消息
-	 * @param type 事件类型
-	 * @param data 事件数据
-	 * @param meta 事件元数据
-	 * @returns 广播消息
+	 * Create and convert to broadcast message
+	 * @param type Event type
+	 * @param data Event data
+	 * @param meta Event metadata
+	 * @returns Broadcast message
 	 */
 	public createBroadcastMessage<T>(
 		type: string,
@@ -107,9 +107,9 @@ export class EventFactory {
 	}
 
 	/**
-	 * 处理接收到的广播消息
-	 * @param message 广播消息
-	 * @returns 处理后的事件对象，如果不属于该工厂则返回null
+	 * Handle received broadcast message
+	 * @param message Broadcast message
+	 * @returns Processed event object, returns null if not belonging to this factory
 	 */
 	public handleBroadcastMessage<T>(message: BroadcastMessage<T>): EventData<T> {
 		return {
@@ -124,20 +124,20 @@ export class EventFactory {
 	}
 
 	/**
-	 * 判断消息是否属于指定子类型
-	 * @param message 广播消息
-	 * @param type 子类型
-	 * @returns 是否属于指定子类型
+	 * Check if message belongs to specified subtype
+	 * @param message Broadcast message
+	 * @param type Subtype
+	 * @returns Whether it belongs to the specified subtype
 	 */
 	public isEventType(message: BroadcastMessage, type: string): boolean {
 		return message.type === type
 	}
 
 	/**
-	 * 注册事件处理器
-	 * @param type 事件类型
-	 * @param handler 事件处理器
-	 * @param options 选项
+	 * Register event handler
+	 * @param type Event type
+	 * @param handler Event handler
+	 * @param options Options
 	 */
 	public on<T>(type: string, handler: EventHandler<T>, options: { once?: boolean } = {}): void {
 		if (!this.eventHandlers.has(type)) {
@@ -151,18 +151,18 @@ export class EventFactory {
 	}
 
 	/**
-	 * 注册一次性事件处理器
-	 * @param type 事件类型
-	 * @param handler 事件处理器
+	 * Register one-time event handler
+	 * @param type Event type
+	 * @param handler Event handler
 	 */
 	public once<T>(type: string, handler: EventHandler<T>): void {
 		this.on(type, handler, { once: true })
 	}
 
 	/**
-	 * 移除事件处理器
-	 * @param type 事件类型
-	 * @param handler 事件处理器
+	 * Remove event handler
+	 * @param type Event type
+	 * @param handler Event handler
 	 */
 	public off<T>(type: string, handler?: EventHandler<T>): void {
 		if (!this.eventHandlers.has(type)) {
@@ -186,18 +186,18 @@ export class EventFactory {
 	}
 
 	/**
-	 * 清除所有事件处理器
+	 * Clear all event handlers
 	 */
 	public clearAllHandlers(): void {
 		this.eventHandlers.clear()
 	}
 
 	/**
-	 * 分发事件
-	 * @param type 事件类型
-	 * @param data 事件数据
-	 * @param meta 事件元数据
-	 * @returns 是否成功分发事件
+	 * Dispatch event
+	 * @param type Event type
+	 * @param data Event data
+	 * @param meta Event metadata
+	 * @returns Whether the event was successfully dispatched
 	 */
 	public dispatch<T>(type: string, data: T, meta?: Record<string, any>): boolean {
 		if (!this.eventHandlers.has(type)) {
@@ -224,9 +224,9 @@ export class EventFactory {
 	}
 
 	/**
-	 * 处理广播消息并分发给事件处理器
-	 * @param message 广播消息
-	 * @returns 是否成功处理广播消息
+	 * Process broadcast message and dispatch to event handlers
+	 * @param message Broadcast message
+	 * @returns Whether the broadcast message was successfully processed
 	 */
 	public processMessage<T>(message: BroadcastMessage<T>): boolean {
 		const event = this.handleBroadcastMessage(message)
@@ -234,8 +234,8 @@ export class EventFactory {
 	}
 
 	/**
-	 * 获取已注册的事件类型
-	 * @returns 已注册的事件类型数组
+	 * Get registered event types
+	 * @returns Array of registered event types
 	 */
 	public getRegisteredEventTypes(): string[] {
 		return Array.from(this.eventHandlers.keys())

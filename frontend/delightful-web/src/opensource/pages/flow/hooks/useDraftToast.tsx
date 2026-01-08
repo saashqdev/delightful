@@ -1,5 +1,5 @@
 /**
- * 针对当前流程为草稿状态时的提示状态和行为
+ * Toast notification state and behavior when the current flow is in draft status
  */
 
 import { Button, Flex } from "antd"

@@ -1,27 +1,27 @@
 /**
- * Flow工具集统一入口
- * 提供DSL和Flow相关工具的统一访问点
+ * Flow toolset unified entry point
+ * Provides unified access point for DSL and Flow related tools
  */
 
 import * as dsl from './dsl';
 import * as flow from './flow';
 
-// 直接导出常用工具
+// Directly export commonly used tools
 import { DSLConverter } from './dsl/dslConverter';
 
-// 导出工具模块
+// Export tool modules
 export {
-  // DSL相关工具
+  // DSL related tools
   dsl,
   
-  // Flow相关工具
+  // Flow related tools
   flow,
   
-  // 直接导出常用工具
+  // Directly export commonly used tools
   DSLConverter
 };
 
-// 导出默认接口
+// Export default interface
 export default {
   dsl,
   flow,

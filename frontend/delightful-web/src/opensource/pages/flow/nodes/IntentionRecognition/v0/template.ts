@@ -2,7 +2,7 @@ import i18next from "i18next"
 
 export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-66d7cba1867399-04413238",
-	name: "意图识别",
+	name: "Intention Recognition",
 	description: "",
 	node_type: 101,
 	meta: [],
@@ -74,7 +74,7 @@ export const v0Template = {
 				type: "object",
 				key: "root",
 				sort: 0,
-				title: "root节点",
+				title: "root node",
 				description: "",
 				required: ["intent"],
 				value: null,

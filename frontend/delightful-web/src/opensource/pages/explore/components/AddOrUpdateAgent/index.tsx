@@ -100,12 +100,12 @@ function AddOrUpdateAgent({ agent, open, close, submit }: AddOrUpdateAgentProps)
 				})
 				message.success(globalT("common.savedSuccess", { ns: "flow" }))
 
-				// 更新
+				// Update
 				if (agent?.id) {
-					// 更新
+					// Update
 					submit?.(data)
 				} else {
-					// 跳转详情
+					// Navigate to details
 					navigate(
 						replaceRouteParams(RoutePath.FlowDetail, {
 							id: data.id,
@@ -131,7 +131,7 @@ function AddOrUpdateAgent({ agent, open, close, submit }: AddOrUpdateAgentProps)
 
 	const onFileChange = useMemoizedFn(async (fileList: FileList) => {
 		const newFiles = Array.from(fileList).map(genFileData)
-		// 先上传文件
+		// Upload file first
 		const { fullfilled } = await uploadAndGetFileUrl(newFiles)
 		if (fullfilled.length) {
 			const { url, path: key } = fullfilled[0].value

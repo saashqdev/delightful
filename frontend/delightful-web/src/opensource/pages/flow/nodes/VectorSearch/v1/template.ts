@@ -61,7 +61,7 @@ export const v1Template = {
 				type: "object",
 				key: "root",
 				sort: 0,
-				title: "root节点",
+				title: "root node",
 				description: "",
 				required: ["similarities"],
 				value: null,

@@ -3,7 +3,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable prefer-destructuring */
 /**
- * curl 解析相关函数
+ * curl parsing related functions
  */
 
 interface ParsedCurl {
@@ -19,10 +19,10 @@ interface ParsedCurl {
 }
 
 export function parseCurlCommand(curlCommand: string): ParsedCurl {
-	// 预处理 curl 命令：移除行尾反斜杠并合并行
+	// Preprocess curl command: remove trailing backslashes and merge lines
 	curlCommand = curlCommand.replace(/\\\s*\n/g, " ")
 
-	// 默认值
+	// Default values
 	const result: ParsedCurl = {
 		method: "GET",
 		url: "",
@@ -35,64 +35,64 @@ export function parseCurlCommand(curlCommand: string): ParsedCurl {
 		bodyType: "none",
 	}
 
-	// 提取 URL - 改进正则表达式以处理带引号和不带引号的URL
+	// Extract URL - improved regex to handle URLs with and without quotes
 	const urlMatch = curlCommand.match(
 		/curl\s+(?:--location|-L)?\s*(?:--request|-X)?\s*[A-Z]*\s*['"]([^'"]+)['"]|curl\s+(?:--location|-L)?\s*(?:--request|-X)?\s*[A-Z]*\s*([^\s'"]+)/,
 	)
 	if (urlMatch) {
 		result.url = urlMatch[1] || urlMatch[2] || ""
 		try {
-			// 处理URL
+			// Process URL
 			const urlObj = new URL(result.url)
 			result.domain = urlObj.origin
 			result.path = urlObj.pathname
 
-			// 提取查询参数
+			// Extract query parameters
 			const searchParams = urlObj.searchParams
 			searchParams.forEach((value, key) => {
 				result.queryParams[key] = value
 			})
 		} catch (e) {
 			console.error("Invalid URL in curl command", e)
-			// 尝试手动解析URL
+			// Try to manually parse URL
 			const urlParts = result.url.split("/")
 			if (urlParts.length >= 3) {
-				// 提取域名部分
+				// Extract domain part
 				const protocolAndDomain = urlParts.slice(0, 3).join("/")
 				result.domain = protocolAndDomain
-				// 提取路径部分
+				// Extract path part
 				result.path = `/${urlParts.slice(3).join("/")}`
 			}
 		}
 	}
 
-	// 提取请求方法 - 支持 --request/-X 格式，并处理引号包围的方法名和多种空格情况
+	// Extract request method - supports --request/-X format, handles quoted method names and various spacing
 	const methodMatch = curlCommand.match(/(?:--request|-X)\s+['"]?\s*([A-Z]+)\s*['"]?/i)
 	if (methodMatch && methodMatch[1]) {
 		result.method = methodMatch[1].toUpperCase()
 	}
 
-	// 检查是否存在请求体数据（--data-raw、--data或-d），如果存在且没有明确指定请求方法，则默认为POST
+	// Check if request body data exists (--data-raw, --data or -d), if exists and no explicit method specified, default to POST
 	const hasDataParam = /(?:--data-raw|-d|--data)\s+['"]/.test(curlCommand)
 	if (hasDataParam && result.method === "GET") {
 		result.method = "POST"
 	}
 
-	// 提取请求头 - 兼容 -H 和 --header 两种格式
+	// Extract request headers - compatible with both -H and --header formats
 	const headerRegex = /(?:--header|-H)\s+['"]([^:;]+)(?::|\s*;\s*)([^'"]*)['"]/g
 	const headerMatches = Array.from(curlCommand.matchAll(headerRegex))
 	for (const match of headerMatches) {
 		if (match[1]) {
 			const headerName = match[1].trim()
 			const headerValue = match[2] ? match[2].trim() : ""
-			// 只添加有效的请求头（有名称的）
+			// Only add valid headers (with names)
 			if (headerName) {
 				result.headers[headerName] = headerValue
 			}
 		}
 	}
 
-	// 提取请求体 - 支持多种格式，兼容短格式和长格式
+	// Extract request body - supports multiple formats, compatible with short and long formats
 	const dataRawMatch = curlCommand.match(/--data-raw\s+['"]((.|[\r\n])*?)['"](?:\s|$)/s)
 	const dataMatch = curlCommand.match(/(?:--data|-d)\s+['"]((.|[\r\n])*?)['"](?:\s|$)/s)
 	const formMatch = curlCommand.match(/(?:--data-urlencode|-d)\s+['"]((.|[\r\n])*?)['"](?:\s|$)/s)
@@ -105,7 +105,7 @@ export function parseCurlCommand(curlCommand: string): ParsedCurl {
 	console.log("Extracted body content:", bodyContent)
 
 	if (bodyContent) {
-		// 检查内容类型
+		// Check content type
 		const contentTypeHeader = Object.entries(result.headers).find(
 			([key]) => key.toLowerCase() === "content-type",
 		)
@@ -115,12 +115,12 @@ export function parseCurlCommand(curlCommand: string): ParsedCurl {
 			if (contentType.includes("application/json")) {
 				result.bodyType = "json"
 				try {
-					// 尝试直接解析 JSON
+					// Try to parse JSON directly
 					result.body = JSON.parse(bodyContent)
 				} catch (e) {
 					console.error("Failed to parse JSON body, trying to clean it first", e)
 					try {
-						// 清理JSON字符串：移除转义字符和额外的换行符
+						// Clean JSON string: remove escape characters and extra newlines
 						const cleanedBody = bodyContent
 							.replace(/\\n/g, " ")
 							.replace(/\\"/g, '"')
@@ -133,7 +133,7 @@ export function parseCurlCommand(curlCommand: string): ParsedCurl {
 					} catch (e2) {
 						console.error("Failed to parse cleaned JSON body", e2)
 
-						// 最后尝试：提取JSON部分
+						// Final attempt: extract JSON part
 						try {
 							const jsonRegex = /{[\s\S]*}/s
 							const jsonMatch = bodyContent.match(jsonRegex)
@@ -151,7 +151,7 @@ export function parseCurlCommand(curlCommand: string): ParsedCurl {
 				}
 			} else if (contentType.includes("application/x-www-form-urlencoded")) {
 				result.bodyType = "x-www-form-urlencoded"
-				// 解析表单数据
+				// Parse form data
 				const formData: Record<string, string> = {}
 				bodyContent.split("&").forEach((pair) => {
 					const [key, value] = pair.split("=")
@@ -160,7 +160,7 @@ export function parseCurlCommand(curlCommand: string): ParsedCurl {
 				result.body = formData
 			} else if (contentType.includes("multipart/form-data")) {
 				result.bodyType = "form-data"
-				// 解析多部分表单数据
+				// Parse multipart form data
 				const formData: Record<string, string> = {}
 				bodyContent.split("&").forEach((pair) => {
 					const [key, value] = pair.split("=")
@@ -169,11 +169,11 @@ export function parseCurlCommand(curlCommand: string): ParsedCurl {
 				result.body = formData
 			}
 		} else {
-			// 没有Content-Type头，尝试推断类型
+			// No Content-Type header, try to infer type
 			if (bodyContent.trim().startsWith("{") && bodyContent.trim().endsWith("}")) {
 				result.bodyType = "json"
 				try {
-					// 尝试直接解析JSON
+					// Try to parse JSON directly
 					result.body = JSON.parse(bodyContent)
 				} catch (e) {
 					console.error(
@@ -181,7 +181,7 @@ export function parseCurlCommand(curlCommand: string): ParsedCurl {
 						e,
 					)
 					try {
-						// 清理JSON字符串
+						// Clean JSON string
 						const cleanedBody = bodyContent
 							.replace(/\\n/g, " ")
 							.replace(/\\"/g, '"')
@@ -194,7 +194,7 @@ export function parseCurlCommand(curlCommand: string): ParsedCurl {
 					} catch (e2) {
 						console.error("Failed to parse cleaned JSON body without content-type", e2)
 
-						// 最后尝试：提取JSON部分
+						// Final attempt: extract JSON part
 						try {
 							const jsonRegex = /{[\s\S]*}/s
 							const jsonMatch = bodyContent.match(jsonRegex)
@@ -205,7 +205,7 @@ export function parseCurlCommand(curlCommand: string): ParsedCurl {
 								)
 								result.body = JSON.parse(jsonMatch[0])
 							} else {
-								// 如果是表单格式，则解析为表单
+								// If it's form format, parse as form
 								if (bodyContent.includes("&") && bodyContent.includes("=")) {
 									result.bodyType = "x-www-form-urlencoded"
 									const formData: Record<string, string> = {}
@@ -236,14 +236,14 @@ export function parseCurlCommand(curlCommand: string): ParsedCurl {
 				})
 				result.body = formData
 			} else {
-				// 默认为纯文本
+				// Default to plain text
 				result.bodyType = "json"
 				result.body = bodyContent
 			}
 		}
 	}
 
-	// 如果有请求体但没有设置类型，默认为JSON
+	// If has request body but no type set, default to JSON
 	if (Object.keys(result.body).length > 0 && result.bodyType === "none") {
 		result.bodyType = "json"
 	}

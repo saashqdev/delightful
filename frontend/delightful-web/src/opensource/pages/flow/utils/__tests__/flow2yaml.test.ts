@@ -274,7 +274,7 @@ describe.skip("Test flow2yaml module", () => {
 
 			// Check variable information
 			expect(yamlString.includes("variables:")).toBe(true)
-			expect(yamlString.includes("  - name: 测试变量")).toBe(true)
+		expect(yamlString.includes("  - name: Test Variable")).toBe(true)
 		})
 	})
 })

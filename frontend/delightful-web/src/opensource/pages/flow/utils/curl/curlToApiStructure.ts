@@ -3,17 +3,17 @@
 import { generateSnowFlake } from "../helpers"
 import { parseCurlCommand } from "./curlParser"
 
-// 生成唯一ID
+// Generate unique ID
 export function generateComponentId() {
 	return `component-${generateSnowFlake().replace(/-/g, "").substring(0, 12)}`
 }
 
-// 将普通值转换为InputExpressionValue格式
+// Convert regular value to InputExpressionValue format
 function convertToExpressionValue(value: any) {
 	const valueType = typeof value
 	let stringValue = String(value)
 
-	// 如果是对象，转为JSON字符串
+	// If it's an object, convert to JSON string
 	if (valueType === "object" && value !== null) {
 		try {
 			stringValue = JSON.stringify(value)
@@ -35,7 +35,7 @@ function convertToExpressionValue(value: any) {
 	}
 }
 
-// 将对象转换为API结构中的form结构
+// Convert object to form structure in API structure
 export function objectToFormStructure(obj: Record<string, any> = {}) {
 	const properties: Record<string, any> = {}
 
@@ -49,7 +49,7 @@ export function objectToFormStructure(obj: Record<string, any> = {}) {
 			title: null,
 			description: null,
 			required: [],
-			// 将值转换为InputExpressionValue格式
+			// Convert value to InputExpressionValue format
 			value: isObject ? null : convertToExpressionValue(value),
 			encryption: false,
 			encryption_value: null,
@@ -76,7 +76,7 @@ export function objectToFormStructure(obj: Record<string, any> = {}) {
 export function curlToApiStructure(curlCommand: string) {
 	const parsedCurl = parseCurlCommand(curlCommand)
 
-	// 创建API结构
+	// Create API structure
 	const apiStructure = {
 		id: generateComponentId(),
 		version: "1",

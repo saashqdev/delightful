@@ -3,11 +3,11 @@ import fs from "fs"
 import path from "path"
 import FlowConverter from "../flowConverter"
 
-// 因为这个测试处理大型JSON，可能会超时，所以增加超时时间
-describe.skip("大型JSON转换测试", () => {
+// Because this test processes large JSON, it may timeout, so increase the timeout
+describe.skip("Large JSON conversion test", () => {
 	let allFlowNodesJson: any
 
-	// 读取大型测试数据
+	// Read large test data
 	beforeAll(() => {
 		const filePath = path.resolve(
 			__dirname,
@@ -15,50 +15,50 @@ describe.skip("大型JSON转换测试", () => {
 		)
 		const fileContent = fs.readFileSync(filePath, "utf-8")
 		allFlowNodesJson = JSON.parse(fileContent)
-	}, 10000) // 10秒超时
+	}, 10000) // 10 seconds timeout
 
-	it("应能够将大型Flow JSON转换为YAML并保持结构完整", () => {
+	it("should be able to convert large Flow JSON to YAML and maintain structure integrity", () => {
 		// JSON -> YAML
 		const yaml = FlowConverter.jsonToYamlString(allFlowNodesJson)
 
-		// 基本检查YAML字符串格式
+		// Basic check of YAML string format
 		expect(yaml).toBeDefined()
 		expect(typeof yaml).toBe("string")
 		expect(yaml.includes("flow:")).toBe(true)
 		expect(yaml.includes(`  id: ${allFlowNodesJson.id}`)).toBe(true)
 		expect(yaml.includes(`  name: ${allFlowNodesJson.name}`)).toBe(true)
 
-		// 写入文件以便手动检查
+		// Write to file for manual inspection
 		const yamlOutputPath = path.resolve(
 			__dirname,
 			"../../components/FlowAssistant/all_flow_nodes.yaml",
 		)
 		fs.writeFileSync(yamlOutputPath, yaml)
 
-		// YAML -> JSON (转换回来)
+		// YAML -> JSON (convert back)
 		const convertedJson = FlowConverter.yamlToJson(yaml)
 
-		// 将转换后的JSON写入文件以便手动比较
+		// Write converted JSON to file for manual comparison
 		const jsonOutputPath = path.resolve(
 			__dirname,
 			"../../components/FlowAssistant/all_flow_nodes_converted.json",
 		)
 		fs.writeFileSync(jsonOutputPath, JSON.stringify(convertedJson, null, 2))
 
-		// 基本信息比较
+		// Basic information comparison
 		expect(convertedJson.id).toBe(allFlowNodesJson.id)
 		expect(convertedJson.name).toBe(allFlowNodesJson.name)
 		expect(convertedJson.description).toBe(allFlowNodesJson.description)
 		expect(convertedJson.type).toBe(allFlowNodesJson.type)
 
-		// 检查节点数量
+		// Check node count
 		expect(convertedJson.nodes.length).toBe(allFlowNodesJson.nodes.length)
 
-		// 检查边数量
+		// Check edge count
 		expect(convertedJson.edges.length).toBe(allFlowNodesJson.edges.length)
 
-		// 深入检查一些关键节点
-		// 确保节点类型和ID都正确
+		// Deep check of some key nodes
+		// Ensure node types and IDs are all correct
 		allFlowNodesJson.nodes.forEach((originalNode: any, index: number) => {
 			const convertedNode = convertedJson.nodes.find((n: any) => n.id === originalNode.id)
 			expect(convertedNode).toBeDefined()
@@ -66,50 +66,50 @@ describe.skip("大型JSON转换测试", () => {
 			expect(convertedNode.name).toBe(originalNode.name)
 		})
 
-		// 检查边的连接关系
+		// Check edge connections
 		allFlowNodesJson.edges.forEach((originalEdge: any, index: number) => {
 			const convertedEdge = convertedJson.edges.find((e: any) => e.id === originalEdge.id)
 			expect(convertedEdge).toBeDefined()
 			expect(convertedEdge.source).toBe(originalEdge.source)
 			expect(convertedEdge.target).toBe(originalEdge.target)
 		})
-	}, 30000) // 30秒超时
+	}, 30000) // 30 seconds timeout
 
-	it("转换结果应能成功运行", () => {
-		// 完整转换流程: JSON -> YAML -> JSON
+	it("conversion result should run successfully", () => {
+		// Complete conversion flow: JSON -> YAML -> JSON
 		const yaml = FlowConverter.jsonToYamlString(allFlowNodesJson)
 		const convertedJson = FlowConverter.yamlToJson(yaml)
 
-		// 验证是否能进行多次转换: JSON -> YAML -> JSON -> YAML -> JSON
-		// 这个测试确保转换逻辑可以应用于转换后的结果
+		// Verify if multiple conversions can be performed: JSON -> YAML -> JSON -> YAML -> JSON
+		// This test ensures the conversion logic can be applied to converted results
 		const secondYaml = FlowConverter.jsonToYamlString(convertedJson)
 		expect(secondYaml).toBeDefined()
 
 		const secondJson = FlowConverter.yamlToJson(secondYaml)
 		expect(secondJson).toBeDefined()
 
-		// 验证二次转换后的关键信息
+		// Verify key information after second conversion
 		expect(secondJson.id).toBe(allFlowNodesJson.id)
 		expect(secondJson.name).toBe(allFlowNodesJson.name)
 		expect(secondJson.nodes.length).toBe(allFlowNodesJson.nodes.length)
 		expect(secondJson.edges.length).toBe(allFlowNodesJson.edges.length)
-	}, 30000) // 30秒超时
+	}, 30000) // 30 seconds timeout
 
-	it("应能够处理节点中的复杂参数结构", () => {
+	it("should be able to handle complex parameter structures in nodes", () => {
 		// JSON -> YAML -> JSON
 		const yaml = FlowConverter.jsonToYamlString(allFlowNodesJson)
 		const convertedJson = FlowConverter.yamlToJson(yaml)
 
-		// 找一个具有复杂结构的节点进行比较
+		// Find a node with complex structure for comparison
 		const complexNodes = allFlowNodesJson.nodes.filter(
 			(n: any) =>
 				n.params &&
-				((n.params.branches && n.params.branches.length > 0) || // 带分支的节点
-					(n.params.model_config && Object.keys(n.params.model_config).length > 0)), // 带模型配置的节点
+				((n.params.branches && n.params.branches.length > 0) || // Nodes with branches
+					(n.params.model_config && Object.keys(n.params.model_config).length > 0)), // Nodes with model configuration
 		)
 
 		if (complexNodes.length > 0) {
-			// 测试第一个复杂节点
+			// Test the first complex node
 			const originalComplexNode = complexNodes[0]
 			const convertedComplexNode = convertedJson.nodes.find(
 				(n: any) => n.id === originalComplexNode.id,
@@ -117,9 +117,9 @@ describe.skip("大型JSON转换测试", () => {
 
 			expect(convertedComplexNode).toBeDefined()
 
-			// 检查节点结构
+			// Check node structure
 			// function compareObjects(original: any, converted: any, path = "") {
-			// 	// 检查对象类型
+			// 	// Check object type
 			// 	expect(typeof converted).toBe(typeof original)
 
 			// 	if (original === null || typeof original !== "object") {
@@ -127,7 +127,7 @@ describe.skip("大型JSON转换测试", () => {
 			// 		return
 			// 	}
 
-			// 	// 对于数组
+			// 	// For arrays
 			// 	if (Array.isArray(original)) {
 			// 		expect(Array.isArray(converted)).toBe(true)
 			// 		expect(converted.length).toBe(original.length)
@@ -137,13 +137,13 @@ describe.skip("大型JSON转换测试", () => {
 			// 		return
 			// 	}
 
-			// 	// 对于对象
+			// 	// For objects
 			// 	const originalKeys = Object.keys(original)
 			// 	const convertedKeys = Object.keys(converted)
 
-			// 	// 检查关键属性
+			// 	// Check key properties
 			// 	originalKeys.forEach((key) => {
-			// 		// 只比较重要属性，忽略边缘情况
+			// 		// Only compare important properties, ignore edge cases
 			// 		if (
 			// 			original[key] !== undefined &&
 			// 			original[key] !== null &&
@@ -151,8 +151,8 @@ describe.skip("大型JSON转换测试", () => {
 			// 		) {
 			// 			const keyPath = path ? `${path}.${key}` : key
 
-			// 			// 对于某些特定的属性，可能结构会不同，但核心信息应该保持一致
-			// 			// 例如，当转换后的对象可能有些额外属性或缺少某些非关键属性
+			// 			// For certain specific properties, the structure may differ, but core information should remain consistent
+			// 			// For example, when the converted object may have some extra properties or be missing some non-critical properties
 			// 			if (convertedKeys.includes(key)) {
 			// 				compareObjects(original[key], converted[key], keyPath)
 			// 			}
@@ -160,14 +160,14 @@ describe.skip("大型JSON转换测试", () => {
 			// 	})
 			// }
 
-			// 比较params结构中的关键部分
+			// Compare key parts of params structure
 			if (originalComplexNode.params.branches) {
 				expect(convertedComplexNode.params.branches).toBeDefined()
 				expect(convertedComplexNode.params.branches.length).toBe(
 					originalComplexNode.params.branches.length,
 				)
 
-				// 检查第一个分支的关键属性
+				// Check key properties of the first branch
 				if (originalComplexNode.params.branches.length > 0) {
 					const originalBranch = originalComplexNode.params.branches[0]
 					const convertedBranch = convertedComplexNode.params.branches[0]
@@ -179,7 +179,7 @@ describe.skip("大型JSON转换测试", () => {
 
 			if (originalComplexNode.params.model_config) {
 				expect(convertedComplexNode.params.model_config).toBeDefined()
-				// 检查模型配置的关键参数
+				// Check key parameters of model configuration
 				Object.keys(originalComplexNode.params.model_config).forEach((key) => {
 					expect(convertedComplexNode.params.model_config[key]).toBe(
 						originalComplexNode.params.model_config[key],
@@ -187,5 +187,5 @@ describe.skip("大型JSON转换测试", () => {
 				})
 			}
 		}
-	}, 30000) // 30秒超时
+	}, 30000) // 30 seconds timeout
 })

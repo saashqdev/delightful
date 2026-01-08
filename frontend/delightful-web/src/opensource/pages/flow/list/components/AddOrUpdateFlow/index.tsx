@@ -206,7 +206,7 @@ function AddOrUpdateFlow({
 
 	const onFileChange = useMemoizedFn(async (fileList: FileList) => {
 		const newFiles = Array.from(fileList).map(genFileData)
-		// 先上传文件
+		// Upload files first
 		const { fullfilled } = await uploadAndGetFileUrl(newFiles)
 		if (fullfilled.length) {
 			const { url, path: key } = fullfilled[0].value

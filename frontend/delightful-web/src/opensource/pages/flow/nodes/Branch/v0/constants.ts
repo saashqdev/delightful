@@ -1,5 +1,5 @@
 export const defaultBranches = [
-	// 默认的如果
+	// Default if
 	{
 		branch_id: "branch_66483eaf04714",
 		next_nodes: [],
@@ -10,7 +10,7 @@ export const defaultBranches = [
 			structure: undefined,
 		},
 	},
-	// 默认的否则
+	// Default else
 	{
 		branch_id: "branch_66483eaf04715",
 		next_nodes: [],

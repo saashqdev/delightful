@@ -1,7 +1,7 @@
 // @ts-nocheck
 /**
- * Flow转换服务
- * 提供Flow YAML和JSON格式之间的互相转换功能
+ * Flow Conversion Service
+ * Provides conversion functionality between Flow YAML and JSON formats
  */
 
 import { json2yaml, json2yamlString } from "./flow2yaml"
@@ -9,46 +9,46 @@ import { yamlString2json, yamlString2jsonString } from "./yaml2json"
 import * as yaml from "js-yaml"
 
 /**
- * Flow转换器类
+ * Flow Converter Class
  */
 export class FlowConverter {
 	/**
-	 * 将YAML字符串转换为Flow JSON对象
-	 * @param yamlString YAML字符串
-	 * @returns Flow JSON对象
+	 * Convert YAML string to Flow JSON object
+	 * @param yamlString YAML string
+	 * @returns Flow JSON object
 	 */
 	static yamlToJson(yamlString: string) {
 		return yamlString2json(yamlString)
 	}
 
 	/**
-	 * 将YAML字符串转换为Flow JSON字符串
-	 * @param yamlString YAML字符串
-	 * @returns Flow JSON字符串
+	 * Convert YAML string to Flow JSON string
+	 * @param yamlString YAML string
+	 * @returns Flow JSON string
 	 */
 	static yamlToJsonString(yamlString: string) {
 		return yamlString2jsonString(yamlString)
 	}
 
 	/**
-	 * 将Flow JSON对象转换为YAML对象
-	 * @param json Flow JSON对象
-	 * @returns YAML对象
+	 * Convert Flow JSON object to YAML object
+	 * @param json Flow JSON object
+	 * @returns YAML object
 	 */
 	static jsonToYaml(json: any) {
 		return json2yaml(json)
 	}
 
 	/**
-	 * 将Flow JSON对象转换为YAML字符串
-	 * @param json Flow JSON对象
-	 * @returns YAML字符串
+	 * Convert Flow JSON object to YAML string
+	 * @param json Flow JSON object
+	 * @returns YAML string
 	 */
 	static jsonToYamlString(json: any) {
 		try {
-			// 处理空对象或缺少必要字段的对象
+			// Handle empty objects or objects missing required fields
 			if (!json || Object.keys(json).length === 0) {
-				// 返回基本空结构
+				// Return basic empty structure
 				return yaml.dump({
 					flow: {
 						id: "",
@@ -63,7 +63,7 @@ export class FlowConverter {
 				})
 			}
 
-			// 处理缺少必要字段的对象
+			// Handle objects missing required fields
 			if (!json.nodes || !json.edges) {
 				const defaultJson = {
 					flow: {
@@ -96,8 +96,8 @@ export class FlowConverter {
 
 			return json2yamlString(json)
 		} catch (error) {
-			console.error("转换JSON到YAML字符串失败:", error)
-			// 返回基本空结构而不是抛出错误
+			console.error("Failed to convert JSON to YAML string:", error)
+			// Return basic empty structure instead of throwing error
 			return yaml.dump({
 				flow: {
 					id: "",
@@ -114,17 +114,17 @@ export class FlowConverter {
 	}
 
 	/**
-	 * 将Flow JSON字符串转换为YAML字符串
-	 * @param jsonString Flow JSON字符串
-	 * @returns YAML字符串
+	 * Convert Flow JSON string to YAML string
+	 * @param jsonString Flow JSON string
+	 * @returns YAML string
 	 */
 	static jsonStringToYamlString(jsonString: string) {
 		try {
 			const json = JSON.parse(jsonString)
 			return this.jsonToYamlString(json)
 		} catch (error) {
-			console.error("将JSON字符串转换为YAML字符串时发生错误:", error)
-			// 返回基本空结构而不是抛出错误
+			console.error("Error converting JSON string to YAML string:", error)
+			// Return basic empty structure instead of throwing error
 			return yaml.dump({
 				flow: {
 					id: "",
@@ -141,9 +141,9 @@ export class FlowConverter {
 	}
 
 	/**
-	 * 将Flow JSON字符串转换为Flow JSON对象
-	 * @param jsonString Flow JSON字符串
-	 * @returns Flow JSON对象
+	 * Convert Flow JSON string to Flow JSON object
+	 * @param jsonString Flow JSON string
+	 * @returns Flow JSON object
 	 */
 	static jsonStringToJson(jsonString: string) {
 		return JSON.parse(jsonString)

@@ -19,7 +19,7 @@ export interface RequestOptions {
 	enableRequestUnion?: boolean
 }
 
-/** 请求响应体 */
+/** Request Response Body */
 export interface ResponseData {
 	status: number
 	statusText: string
@@ -28,11 +28,11 @@ export interface ResponseData {
 	options: RequestOptions
 }
 
-/** 请求拦截器 */
+/** Request Interceptor */
 export type RequestInterceptor = (config: RequestConfig) => RequestConfig | Promise<RequestConfig>
-/** 响应拦截器 */
+/** Response Interceptor */
 export type ResponseInterceptor = (response: ResponseData) => Promise<any>
-/** 异常拦截器 */
+/** Error Interceptor */
 export type ErrorInterceptor = (error: any) => any
 
 export interface RequestConfig extends RequestOptions, RequestInit {}
@@ -154,9 +154,9 @@ export class HttpClient {
 	}
 
 	/**
-	 * 获取请求配置
-	 * @param config 请求配置
-	 * @returns 请求配置
+	 * Get request configuration
+	 * @param config Request configuration
+	 * @returns Request configuration
 	 */
 	public genRequestOptions(config: RequestConfig): RequestOptions {
 		return {
@@ -176,10 +176,10 @@ export class HttpClient {
 	}
 
 	/**
-	 * get 请求
-	 * @param url 请求URL
-	 * @param config 请求配置
-	 * @returns unwrapData 为 true 时，返回数据为 T，否则返回 ResponseData
+	 * GET request
+	 * @param url Request URL
+	 * @param config Request configuration
+	 * @returns When unwrapData is true, returns data as T, otherwise returns ResponseData
 	 */
 	public async get<T = any>(url: string, config?: Omit<RequestConfig, "url">): Promise<T> {
 		return this.request({
@@ -229,7 +229,7 @@ export class HttpClient {
 	}
 
 	/**
-	 * @description 取消请求队列中的所有请求
+	 * @description Cancel all requests in the request queue
 	 */
 	public async abort(callback?: () => Promise<void>): Promise<void> {
 		this.controller?.abort?.()

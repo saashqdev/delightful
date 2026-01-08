@@ -168,27 +168,27 @@ const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
 	const { styles } = useStyles()
 	const inputRef = useRef<InputRef>(null)
 
-	// 聚焦输入框
+	// Focus input box
 	React.useEffect(() => {
 		if (inputRef.current && editingWorkspaceId) {
 			inputRef.current.focus()
 		}
 	}, [editingWorkspaceId])
 
-	// 获取工作区菜单
+	// Get workspace menu
 	const getWorkspaceMenu = React.useCallback(
 		(workspace: Workspace): MenuProps["items"] => [
 			// {
 			// 	key: "archive",
-			// 	label: "归档",
+			// 	label: "Archive",
 			// 	onClick: (info) => {
 			// 		info?.domEvent?.stopPropagation()
-			// 		console.log("归档", workspace)
+			// 		console.log("Archive", workspace)
 			// 	},
 			// },
 			{
 				key: "rename",
-				label: "重命名",
+				label: "Rename",
 				onClick: (info) => {
 					info?.domEvent?.stopPropagation()
 					onStartEditWorkspace(workspace, info.domEvent as React.MouseEvent)
@@ -196,7 +196,7 @@ const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
 			},
 			{
 				key: "delete",
-				label: "删除",
+				label: "Delete",
 				danger: true,
 				onClick: (info) => {
 					info?.domEvent?.stopPropagation()
@@ -284,7 +284,7 @@ const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
 			</Space>
 			<div className={styles.tips}>
 				<IconAlertCircle className={styles.tipsIcon} />
-				最大同时执行的任务 3 个
+				Maximum 3 concurrent tasks
 			</div>
 		</div>
 	)

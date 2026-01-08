@@ -24,14 +24,14 @@ export interface ReportFileUploadsResponse {
 
 export const generateFileApi = (fetch: HttpClient) => ({
 	/**
-	 * 检查文件上传状态
+	 * Check file upload status
 	 */
 	checkFileUploadStatus(params: any) {
 		return fetch.post(genRequestUrl(RequestUrl.checkFileUploadStatus), params)
 	},
 
 	/**
-	 * 上报文件上传
+	 * Report file uploads
 	 */
 	reportFileUploads(data: ReportFileUploadsData[]) {
 		return fetch.post<ReportFileUploadsResponse[]>(
@@ -41,7 +41,7 @@ export const generateFileApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 文件链接下载
+	 * Download file by link
 	 */
 	getFileUrl(file_key: string) {
 		return fetch.post(genRequestUrl(RequestUrl.getFileDownloadLink), { file_key })

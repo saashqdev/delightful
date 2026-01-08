@@ -60,7 +60,7 @@ export const v0Template = {
 				type: "object",
 				key: "root",
 				sort: 0,
-				title: "root节点",
+				title: "root node",
 				description: "",
 				required: ["similarity_contents", "similarity_content"],
 				value: null,

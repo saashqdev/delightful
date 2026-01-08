@@ -1,4 +1,4 @@
-/** 多增加了一层渲染结构的条件组件
+/** Condition component with an additional rendering layer
  * {
         "id": "component-66399f15d691c",
         "version": "1",
@@ -27,7 +27,7 @@ interface DelightfulConditionWrapProps {
 }
 
 export default function DelightfulConditionWrap({ ...props }: DelightfulConditionWrapProps) {
-	// 暂时不需要外层的结构，只需要更改structure的数据即可
+	// No need for outer structure for now, just change the structure data
 	const onChange = useMemoizedFn((value: Expression.Condition) => {
 		if (!props.onChange || !props.value) return
 		props.onChange({
@@ -36,7 +36,7 @@ export default function DelightfulConditionWrap({ ...props }: DelightfulConditio
 		})
 	})
 
-	// 避免每次因为Form.Item onChange导致重新渲染
+	// Avoid re-rendering caused by Form.Item onChange each time
 	const MemoComponent = useMemo(() => {
 		return <DelightfulConditionEdit {...props} value={props?.value?.structure} onChange={onChange} />
 		// eslint-disable-next-line react-hooks/exhaustive-deps

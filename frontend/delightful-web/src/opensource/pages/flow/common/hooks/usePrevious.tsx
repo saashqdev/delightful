@@ -1,5 +1,5 @@
 /**
- * 各节点通用hooks，用于计算前置节点可引用的数据源
+ * Common hooks for all nodes, used to calculate data sources that can be referenced by preceding nodes
  */
 
 import { cloneDeep, get, set, uniqBy } from "lodash-es"
@@ -49,7 +49,7 @@ export default function usePrevious() {
 			curNode: DelightfulFlow.Node | any,
 			pointerVariables?: Schema,
 		) => {
-			// 暂定有指定变量schema的情况下为环境变量
+			// Temporarily treat cases with specified variable schema as environment variables
 			const isGlobalVariable = !!pointerVariables
 
 			const cloneOptions = cloneDeep(currentOptions)
@@ -78,22 +78,22 @@ export default function usePrevious() {
 				isGlobalVariable,
 			)
 
-			/** 如果不存在变量选项了，则新增一个 */
+			/** If variable option doesn't exist, create a new one */
 			if (!variableOption) {
 				variableOption = {
 					...option,
-					title: "变量",
+					title: "Variables",
 				}
-				// 推到第一个
+				// Push to the beginning
 				cloneOptions.unshift(variableOption as DataSourceOption)
 			} else {
 				// console.log("option", option)
-				/** 针对相同变量名去重后的结果 */
+				/** Result after deduplicating same variable names */
 				const uniqOptions = uniqBy(
 					[...(variableOption.children || []), ...(option.children || [])],
 					"key",
 				)
-				/** 否则往变量选项新增值 */
+				/** Otherwise add new values to variable options */
 				set(variableOption, ["children"], uniqOptions)
 			}
 
@@ -108,7 +108,7 @@ export default function usePrevious() {
 		})
 	})
 
-	// 动态生成数据源
+	// Dynamically generate data sources
 	const generateDynamicSource = useMemoizedFn(
 		(outputs: Schema[], currentNodeSchema: NodeSchema, cur: DelightfulFlow.Node, suffix: string) => {
 			return outputs.map((output) => {
@@ -125,12 +125,12 @@ export default function usePrevious() {
 		},
 	)
 
-	// 处理流程指令，生成数据源
+	// Process flow instructions and generate data sources
 	const generateInstructionsDataSource = useMemoizedFn(() => {
-		// 如果没有指令数据或者当前节点不存在，则返回空数组
+		// If there's no instruction data or current node doesn't exist, return empty array
 		if (!instructList?.length || !currentNode) return []
 
-		// 获取流程指令（instruction_type为1的指令）
+		// Get flow instructions (instructions with instruction_type 1)
 		const flowInstructions = instructList.flatMap((group) => {
 			return group.items.filter(
 				(item) => "instruction_type" in item && item.instruction_type === 1,
@@ -139,7 +139,7 @@ export default function usePrevious() {
 
 		if (!flowInstructions.length) return []
 
-		// 创建指令数据源，使用any类型绕过类型检查
+		// Create instruction data source, use any type to bypass type checking
 		const instructionsSchema: any = {
 			type: "object",
 			key: "instructs",
@@ -154,15 +154,15 @@ export default function usePrevious() {
 			properties: {},
 		}
 
-		// 针对不同类型的指令构建不同的schema
+		// Build different schemas for different instruction types
 		flowInstructions.forEach((instruction) => {
 			if ("type" in instruction) {
-				// 根据指令类型创建不同的schema
+				// Create different schemas based on instruction type
 				switch (instruction.type) {
 					case InstructionType.SINGLE_CHOICE: {
-						// 单选指令
+						// Single choice instruction
 						if ("values" in instruction) {
-							// 创建一个对象，包含name和value两个属性
+							// Create an object containing name and value properties
 							const instructionObj: any = {
 								type: "object",
 								key: instruction.id,
@@ -212,7 +212,7 @@ export default function usePrevious() {
 						break
 					}
 					case InstructionType.SWITCH: {
-						// 开关指令 - 同样包含name和value两个属性
+						// Switch instruction - also contains name and value properties
 						const instructionObj: any = {
 							type: "object",
 							key: instruction.id,
@@ -257,16 +257,16 @@ export default function usePrevious() {
 						break
 					}
 					default:
-						// 默认情况下不处理其他类型
+						// By default, don't handle other types
 						break
 				}
 			}
 		})
 
-		// 只有当存在有效的流程指令时才生成数据源
+		// Only generate data source when valid flow instructions exist
 		if (Object.keys(instructionsSchema.properties!).length === 0) return []
 
-		// 生成指令数据源
+		// Generate instruction data source
 		const instructionsDataSource = schemaToDataSource(
 			{
 				...nodeSchemaMap[customNodeType.Instructions]?.v0?.schema,
@@ -276,7 +276,7 @@ export default function usePrevious() {
 			},
 			instructionsSchema,
 			true,
-			true, // 全局级别
+			true, // Global level
 		)
 
 		return [instructionsDataSource]
@@ -286,15 +286,15 @@ export default function usePrevious() {
 		if (!currentNode) return []
 		const nodes = Object.values(nodeConfig)
 		let allPreNodes = getAllPredecessors(currentNode, nodes, edges)
-		// 如果是循环体内的节点，可引用的数据源为当前节点的上文节点+循环体的上文节点
+		// If it's a node in loop body, referenceable data sources are the preceding nodes of current node + preceding nodes of loop body
 		if (checkIsInLoop(currentNode)) {
 			const loopBodyNode = nodeConfig?.[currentNode?.meta?.parent_id]
 			const loopBodyAllPrevNodes = getAllPredecessors(loopBodyNode, nodes, edges)
 			allPreNodes = [...loopBodyAllPrevNodes, ...allPreNodes]
 		}
-		// 过滤出不需要被引用的节点
+		// Filter out nodes that don't need to be referenced
 		allPreNodes = filterCanReferenceNodes(allPreNodes)
-		// 根据id去重
+		// Deduplicate by id
 		const uniquePreNodes = uniqBy(allPreNodes, "node_id")
 		// console.log(currentNode?.node_id, allPreNodes)
 		let expressionSources = uniquePreNodes.reduce((acc, cur) => {
@@ -302,25 +302,25 @@ export default function usePrevious() {
 			let systemOutputs = [cur?.system_output?.form?.structure]
 			let customSystemOutputs = [cur?.custom_system_output?.form?.structure]
 
-			// 如果是分支节点，则需要从branches拿output
+			// If it's a branch node, need to get output from branches
 			if (nodeManager.branchNodeIds.includes(`${cur.node_type}`)) {
-				// getAllPredecessors计算了outputBranchIds，也就是A->B，A的分支id列表
+				// getAllPredecessors calculated outputBranchIds, i.e., A->B, list of branch ids from A
 				output = cur?.params?.outputBranchIds?.map((branchId: string) => {
 					const targetBranch = cur?.params?.branches?.find(
 						(branch: any) => branch.branch_id === branchId,
 					)
-					// 处理分支级别的系统输出
+					// Handle branch-level system output
 					// @ts-ignore
 					systemOutputs.push(targetBranch?.system_output?.form?.structure)
 					// @ts-ignore
 					customSystemOutputs.push(targetBranch?.custom_system_output?.form?.structure)
-					// 过滤掉空的输出
+					// Filter out empty outputs
 					return targetBranch?.output?.form
 				})
 			}
-			// 过滤掉空的系统输出
+			// Filter out empty system outputs
 			systemOutputs = systemOutputs.filter((systemOutput) => !!systemOutput)
-			// 过滤掉空的自定义系统输出
+			// Filter out empty custom system outputs
 			customSystemOutputs = customSystemOutputs.filter((systemOutput) => !!systemOutput)
 			const nodeVersion = getNodeVersion(cur)
 			const currentNodeSchema = get(
@@ -331,18 +331,18 @@ export default function usePrevious() {
 
 			if (output.length === 0 || !currentNodeSchema) return acc
 
-			//  A多个端点连线到B，需要通过分支进行分类
+			// A with multiple endpoints connecting to B, need to classify by branches
 			if (output.length > 1) {
 				const options = [] as DataSourceOption[]
 				output?.forEach((branchOutput) => {
 					let schema = branchOutput?.structure
 
-					// 如果是动态生成output的节点，则取其output
+					// If it's a node with dynamically generated output, get its output
 					if (DynamicOutputNodeTypes.includes(cur?.node_type as customNodeType)) {
 						schema = cur?.output?.form?.structure
 					}
 					if (!schema) return
-					// 增加系统级输出
+					// Add system-level outputs
 					if (systemOutputs.length > 0) {
 						options.push(
 							...generateDynamicSource(
@@ -354,7 +354,7 @@ export default function usePrevious() {
 						)
 					}
 
-					// 增加自定义系统级输出
+					// Add custom system-level outputs
 					if (customSystemOutputs.length > 0) {
 						options.push(
 							...generateDynamicSource(
@@ -368,31 +368,31 @@ export default function usePrevious() {
 
 					options.push(...generateDynamicSource([schema!], currentNodeSchema, cur, ""))
 				})
-				// 将多个A的分支输出合并后的结果
+				// Merged result of multiple branch outputs from A
 				const resultOption = mergeOptionsIntoOne(options)
 				acc = [...acc, resultOption]
 			}
-			// A -> B只有一个端点的情况，不需要区分分支
+			// Case where A -> B has only one endpoint, no need to distinguish branches
 			else {
 				const options = [] as DataSourceOption[]
 				let schema = output[0]?.structure
-				/** 特殊处理变量类型节点，不再进行转换，而是统一归类到「变量下」 */
+				/** Special handling for variable type nodes, don't convert, instead categorize under "Variables" */
 				const isVariableNode = judgeIsVariableNode(currentNodeSchema.id)
 
 				if (!schema && !isVariableNode) return acc
-				// 如果是动态生成output的节点，则取其output
+				// If it's a node with dynamically generated output, get its output
 				if (DynamicOutputNodeTypes.includes(cur?.node_type as customNodeType)) {
 					schema = cur?.output?.form?.structure
 				}
 				if (!schema && !isVariableNode) return acc
 
-				// 增加系统级输出数据源
+				// Add system-level output data sources
 				if (systemOutputs.length > 0) {
 					options.push(
 						...generateDynamicSource(systemOutputs, currentNodeSchema, cur, "_system"),
 					)
 				}
-				// 增加自定义系统级输出
+				// Add custom system-level outputs
 				if (customSystemOutputs.length > 0) {
 					options.push(
 						...generateDynamicSource(
@@ -416,11 +416,11 @@ export default function usePrevious() {
 			return [...acc]
 		}, [] as DataSourceOption[])
 
-		// 如果是循环体内的节点，则需要手动在最前面新增硬编码的可饮用项item和index
+		// If it's a node in loop body, need to manually add hardcoded referenceable items like item and index at the beginning
 		if (checkIsInLoop(currentNode)) {
 			const loopBodyNode = nodeConfig?.[currentNode?.meta?.parent_id]
 			const loopNode = nodeConfig?.[loopBodyNode?.meta?.parent_id]
-			// 且循环类型为「循环数组」时
+			// And when loop type is "Loop Array"
 			const isLoopArrayType = loopNode?.params?.type === LoopTypes.Array
 			if (loopNode && isLoopArrayType) {
 				const extraLoopDataSource = generateLoopItemOptions(loopNode, nodeSchemaMap)
@@ -428,14 +428,14 @@ export default function usePrevious() {
 			}
 		}
 
-		// 如果存在环境变量，则需要重新更新数据源
+		// If environment variables exist, need to update data sources
 		if (flow?.global_variable) {
 			const variableSchema = get(
 				nodeManager,
 				["nodesMap", customNodeType.VariableSave, DefaultNodeVersion, "schema"],
 				null,
 			)
-			// 确保variableSchema不为undefined再传入updateVariableOption
+			// Ensure variableSchema is not undefined before passing to updateVariableOption
 			if (variableSchema) {
 				expressionSources = updateVariableOption(
 					expressionSources,
@@ -446,7 +446,7 @@ export default function usePrevious() {
 			}
 		}
 
-		// 加入流程指令数据源
+		// Add flow instruction data sources
 		const instructionsDataSource = generateInstructionsDataSource()
 		if (instructionsDataSource.length > 0) {
 			expressionSources.unshift(...instructionsDataSource)
@@ -454,7 +454,7 @@ export default function usePrevious() {
 
 		// console.log("expressionDataSource", expressionSources)
 
-		// 在最后把函数数据源添加进去
+		// Add function data sources at the end
 		expressionSources.push(...methodsDataSource)
 
 		return expressionSources

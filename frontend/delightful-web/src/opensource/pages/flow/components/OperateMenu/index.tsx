@@ -24,7 +24,7 @@ function OperateMenu({
 	const [open, setOpen] = useState(false)
 
 	const handleContextMenu = (event: React.MouseEvent) => {
-		event.preventDefault() // 阻止默认右键菜单
+		event.preventDefault() // Prevent default context menu
 	}
 
 	const handleClick = (event: React.MouseEvent) => {

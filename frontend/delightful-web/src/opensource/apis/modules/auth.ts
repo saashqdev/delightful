@@ -9,12 +9,12 @@ import { isCommercial } from "@/utils/env"
 import type { HttpClient } from "../core/HttpClient"
 
 export const generateAuthApi = (fetch: HttpClient) => ({
-	/** 更新资源授权 */
+	/** Update resource access */
 	updateResourceAccess(params: AuthRequestParams) {
 		return fetch.post<null>(genRequestUrl(RequestUrl.updateResourceAccess), params)
 	},
 
-	/** 查询资源授权 */
+	/** Query resource access */
 	getResourceAccess(resource_type: ResourceTypes, resource_id: string) {
 		return fetch.get<AuthRequestParams>(
 			genRequestUrl(
@@ -29,10 +29,10 @@ export const generateAuthApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * @description 登录后需要将 授权码 + authorization 在 delightful service 进行绑定
-	 * @param {string} authorization 用户token
-	 * @param {string} authCode 登录授权码（私有化部署就有用，非私有化传空字符串）
-	 * @param {string} thirdPlatformOrganizationCode 第一次创建组织时，返回的 第三方平台组织code，后端同步用户账号信息
+	 * @description After login, need to bind authorization code + authorization in delightful service
+	 * @param {string} authorization User token
+	 * @param {string} authCode Login authorization code (useful for private deployment, pass empty string for non-private)
+	 * @param {string} thirdPlatformOrganizationCode Third-party platform organization code returned when creating organization for the first time, backend synchronizes user account information
 	 */
 	bindDelightfulAuthorization(
 		authorization: string,
@@ -60,7 +60,7 @@ export const generateAuthApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * @description 获取当前账号所归属的环境 code
+	 * @description Get the environment code to which the current account belongs
 	 */
 	getAccountDeployCode() {
 		if (!isCommercial()) {
@@ -72,14 +72,14 @@ export const generateAuthApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * @description 用户 Token 换取一次性临时授权 Token
+	 * @description Exchange user token for one-time temporary authorization token
 	 */
 	getTempTokenFromUserToken() {
 		return fetch.get<{ temp_token: string }>(genRequestUrl(RequestUrl.userTokenToTempToken))
 	},
 
 	/**
-	 * @description 临时授权 Token 换取用户 Token
+	 * @description Exchange temporary authorization token for user token
 	 */
 	getUserTokenFromTempToken(tempToken: string) {
 		return fetch.get<{ teamshare_token: string }>(
@@ -93,7 +93,7 @@ export const generateAuthApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * @description 获取管理后台用户信息
+	 * @description Get admin console user information
 	 * @returns {Promise<User.UserInfo>}
 	 */
 	getAdminPermission() {

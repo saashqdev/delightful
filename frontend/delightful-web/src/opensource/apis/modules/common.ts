@@ -6,7 +6,7 @@ import type { HttpClient } from "@/opensource/apis/core/HttpClient"
 
 export const generateCommonApi = (fetch: HttpClient) => ({
 	/**
-	 * 获取应用国际化语言、国际冠号等配置(开源版本本地获取)
+	 * Get application internationalization language, country codes, and other configurations (obtained locally for open source version)
 	 * @returns
 	 */
 	getInternationalizedSettings() {
@@ -14,7 +14,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 			phone_area_codes: [
 				{
 					code: "+86",
-					name: "中国",
+					name: "China",
 					locale: "zh_CN",
 					translations: {
 						zh_CN: "中国",
@@ -23,7 +23,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 				},
 				{
 					code: "+60",
-					name: "马来西亚",
+					name: "Malaysia",
 					locale: "ms_MY",
 					translations: {
 						zh_CN: "马来西亚",
@@ -32,7 +32,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 				},
 				{
 					code: "+84",
-					name: "越南",
+					name: "Vietnam",
 					locale: "vi_VN",
 					translations: {
 						zh_CN: "越南",
@@ -41,7 +41,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 				},
 				{
 					code: "+66",
-					name: "泰国",
+					name: "Thailand",
 					locale: "th_TH",
 					translations: {
 						zh_CN: "泰国",
@@ -50,7 +50,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 				},
 				{
 					code: "+63",
-					name: "菲律宾",
+					name: "Philippines",
 					locale: "fil_PH",
 					translations: {
 						zh_CN: "菲律宾",
@@ -59,7 +59,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 				},
 				{
 					code: "+65",
-					name: "新加坡",
+					name: "Singapore",
 					locale: "en_SG",
 					translations: {
 						zh_CN: "新加坡",
@@ -69,7 +69,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 			],
 			languages: [
 				{
-					name: "简体中文",
+					name: "Simplified Chinese",
 					locale: "zh_CN",
 					translations: {
 						zh_CN: "简体中文",
@@ -77,7 +77,7 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 					},
 				},
 				{
-					name: "英文",
+					name: "English",
 					locale: "en_US",
 					translations: {
 						zh_CN: "英文",
@@ -89,11 +89,11 @@ export const generateCommonApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * @description 获取私有化登录环境配置
-	 * @param {string} code 私有化部署授权码
+	 * @description Get private deployment login environment configuration
+	 * @param {string} code Private deployment authorization code
 	 */
 	async getPrivateConfigure(code: string): Promise<{ config: Common.PrivateConfig }> {
-		// 当且仅当 code 为空或不存在则返回当前 delightful 部署环境的对应相同环境下 teamshare、keewood 配置
+		// When and only when code is empty or does not exist, return the teamshare and keewood configuration in the same environment as the current delightful deployment environment
 		if (!code || code === "") {
 			return {
 				config: {

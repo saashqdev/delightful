@@ -1,5 +1,5 @@
 /**
- * 模式相关的数据
+ * Mode-related data
  */
 
 import { useMemo } from "react"

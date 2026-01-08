@@ -70,7 +70,7 @@ function FlowListPage() {
 		flowType,
 	})
 
-	/** 向量知识库搜索类型 */
+	/** Vector knowledge search type */
 	const vkSearchTypeOptions = useMemo(() => {
 		return [
 			{
@@ -88,12 +88,12 @@ function FlowListPage() {
 		]
 	}, [globalT])
 
-	/** 创建知识库 */
+	/** Create knowledge base */
 	const handleCreateKnowledge = useMemoizedFn(() => {
 		navigate(RoutePath.VectorKnowledgeCreate)
 	})
 
-	/** 创建工作流 */
+	/** Create workflow */
 	const createHandler = useMemoizedFn(() => {
 		if (flowType === FlowRouteType.VectorKnowledge) {
 			handleCreateKnowledge()

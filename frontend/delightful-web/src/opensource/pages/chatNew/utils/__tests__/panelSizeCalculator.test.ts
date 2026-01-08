@@ -48,7 +48,7 @@ describe("calculatePanelSizes", () => {
 		it("should enforce main panel minimum width", () => {
 			const totalWidth = 800
 			const siderWidth = 200
-			const filePreviewWidth = 500 // 这会导致主面板小于最小宽度
+			const filePreviewWidth = 500 // This would cause main panel to be smaller than minimum width
 			const mainMinWidth = 400
 
 			const result = calculatePanelSizes.getThreePanelSizes(
@@ -58,7 +58,7 @@ describe("calculatePanelSizes", () => {
 				mainMinWidth,
 			)
 
-			// 主面板应该保持最小宽度，文件预览面板被压缩
+			// Main panel should maintain minimum width, file preview panel is compressed
 			expect(result).toEqual([200, 400, 200])
 		})
 
@@ -66,7 +66,7 @@ describe("calculatePanelSizes", () => {
 			const totalWidth = 700
 			const siderWidth = 200
 			const filePreviewWidth = 200
-			const mainMinWidth = 600 // 超过可用空间
+			const mainMinWidth = 600 // Exceeds available space
 
 			const result = calculatePanelSizes.getThreePanelSizes(
 				totalWidth,
@@ -75,7 +75,7 @@ describe("calculatePanelSizes", () => {
 				mainMinWidth,
 			)
 
-			expect(result).toEqual([200, 600, -100]) // 文件预览被压缩为负数，实际应用中需要进一步处理
+			expect(result).toEqual([200, 600, -100]) // File preview compressed to negative value, requires further handling in actual use
 		})
 	})
 
@@ -86,9 +86,9 @@ describe("calculatePanelSizes", () => {
 
 			const result = calculatePanelSizes.getFilePreviewOpenSizes(totalWidth, siderWidth)
 
-			// 可用宽度: 1200 - 240 = 960
-			// 主面板: 960 * 0.6 = 576
-			// 文件预览: 960 * 0.4 = 384
+			// Available width: 1200 - 240 = 960
+			// Main panel: 960 * 0.6 = 576
+			// File preview: 960 * 0.4 = 384
 			expect(result).toEqual([240, 576, 384])
 		})
 
@@ -98,9 +98,9 @@ describe("calculatePanelSizes", () => {
 
 			const result = calculatePanelSizes.getFilePreviewOpenSizes(totalWidth, siderWidth)
 
-			// 可用宽度: 600 - 200 = 400
-			// 主面板: 400 * 0.6 = 240
-			// 文件预览: 400 * 0.4 = 160
+			// Available width: 600 - 200 = 400
+			// Main panel: 400 * 0.6 = 240
+			// File preview: 400 * 0.4 = 160
 			expect(result).toEqual([200, 240, 160])
 		})
 	})
@@ -135,7 +135,7 @@ describe("calculatePanelSizes", () => {
 				mainMinWidth,
 			)
 
-			// 侧边栏宽度未变，应该重新计算主面板和文件预览面板
+			// Sidebar width unchanged, should recalculate main and file preview panels
 			expect(result).toEqual([240, 560, 400])
 		})
 
@@ -152,15 +152,15 @@ describe("calculatePanelSizes", () => {
 				mainMinWidth,
 			)
 
-			// 文件预览宽度未变，应该重新计算
+			// File preview width unchanged, should recalculate
 			expect(result).toEqual([280, 620, 300])
 		})
 
 		it("should handle edge case with insufficient space", () => {
 			const prevSizes = [200, 400, 200]
-			const newSizes = [400, 200, 200] // 侧边栏变得很宽
+			const newSizes = [400, 200, 200] // Sidebar becomes very wide
 			const totalWidth = 800
-			const mainMinWidth = 500 // 主面板需要更多空间
+			const mainMinWidth = 500 // Main panel needs more space
 
 			const result = calculatePanelSizes.handleSiderResize(
 				prevSizes,
@@ -169,13 +169,13 @@ describe("calculatePanelSizes", () => {
 				mainMinWidth,
 			)
 
-			// 应该保证主面板最小宽度
+			// Should ensure main panel minimum width
 			expect(result).toEqual([400, 500, -100])
 		})
 
 		it("should return previous sizes for invalid input", () => {
 			const prevSizes = [240, 660, 300]
-			const newSizes: number[] = [] // 空数组
+			const newSizes: number[] = [] // Empty array
 			const totalWidth = 1200
 			const mainMinWidth = 400
 
@@ -195,18 +195,18 @@ describe("calculatePanelSizes", () => {
 			const totalWidth = 1200
 			const siderWidth = 240
 
-			// 1. 初始两面板布局
+			// 1. Initial two-panel layout
 			const initialSizes = calculatePanelSizes.getTwoPanelSizes(totalWidth, siderWidth)
 			expect(initialSizes).toEqual([240, 960])
 
-			// 2. 打开文件预览
+			// 2. Open file preview
 			let threePanelSizes = calculatePanelSizes.getFilePreviewOpenSizes(
 				totalWidth,
 				siderWidth,
 			)
 			expect(threePanelSizes).toEqual([240, 576, 384])
 
-			// 3. 调整侧边栏
+			// 3. Adjust sidebar
 			const newSizes = [300, 540, 360]
 			threePanelSizes = calculatePanelSizes.handleSiderResize(
 				threePanelSizes,
@@ -216,7 +216,7 @@ describe("calculatePanelSizes", () => {
 			) as [number, number, number]
 			expect(threePanelSizes).toEqual([300, 540, 360])
 
-			// 4. 关闭文件预览
+			// 4. Close file preview
 			const finalSizes = calculatePanelSizes.getTwoPanelSizes(totalWidth, threePanelSizes[0])
 			expect(finalSizes).toEqual([300, 900])
 		})
@@ -226,7 +226,7 @@ describe("calculatePanelSizes", () => {
 			const siderWidth = 240
 			const filePreviewWidth = 300
 
-			// 话题关闭时的最小宽度
+			// Minimum width when topic is closed
 			let minWidth = calculatePanelSizes.getMainMinWidth(false)
 			expect(minWidth).toBe(400)
 
@@ -238,7 +238,7 @@ describe("calculatePanelSizes", () => {
 			)
 			expect(sizes).toEqual([240, 660, 300])
 
-			// 话题打开时的最小宽度
+			// Minimum width when topic is open
 			minWidth = calculatePanelSizes.getMainMinWidth(true)
 			expect(minWidth).toBe(600)
 
@@ -248,7 +248,7 @@ describe("calculatePanelSizes", () => {
 				filePreviewWidth,
 				minWidth,
 			)
-			expect(sizes).toEqual([240, 660, 300]) // 已经满足最小宽度要求
+			expect(sizes).toEqual([240, 660, 300]) // Already meets minimum width requirement
 		})
 	})
 })

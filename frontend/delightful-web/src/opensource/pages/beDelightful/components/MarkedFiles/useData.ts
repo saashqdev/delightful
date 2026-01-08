@@ -105,7 +105,7 @@ export default ({ searchKeywords }: UseDataProps) => {
 				setLoading(false)
 			}, 500)
 		} catch (error) {
-			message.error("获取标记文件列表失败")
+			message.error("Failed to fetch marked files list")
 			console.error("Failed to fetch starred files:", error)
 			setLoading(false)
 		}

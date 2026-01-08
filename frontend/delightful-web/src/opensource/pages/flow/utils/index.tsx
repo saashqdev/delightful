@@ -28,7 +28,7 @@ import { BaseFlowProps } from ".."
 
 export const installAllNodes = (extraData?: BaseFlowProps["extraData"]) => {
 	/**
-	 * 注册分支节点，为了走分支相关的路径，next_nodes会加在branches里面
+	 * Register branch nodes, to follow branch-related paths, next_nodes will be added to branches
 	 */
 	registerBranchNodes([
 		customNodeType.Start,
@@ -37,8 +37,8 @@ export const installAllNodes = (extraData?: BaseFlowProps["extraData"]) => {
 	])
 
 	/**
-	 * 注册可引用的类型节点，计算上文节点可引用数据源时，会以此为依据：
-	 *  不在此列的，不做为可以引用类型的节点
+	 * Register referenceable node types, used as basis when calculating upstream node referenceable data sources:
+	 *  Nodes not in this list will not be treated as referenceable node types
 	 */
 	registerCanReferenceNodeTypes([
 		customNodeType.Start,
@@ -62,28 +62,28 @@ export const installAllNodes = (extraData?: BaseFlowProps["extraData"]) => {
 		...(extraData?.canReferenceNodeTypes || []),
 	])
 
-	/** 指定引用大语言模型时，不再是node_id.value  而是LLM.value */
+	/** When referencing LLM, use LLM.value instead of node_id.value */
 	registerVariableNodeTypes([customNodeType.VariableSave])
 
-	/** 指定引用变量时，不再是[node_id].xxx  而是variable.xxx */
+	/** When referencing variables, use variable.xxx instead of [node_id].xxx */
 	registerNodeType2ReferenceKey({
 		[customNodeType.VariableSave]: "variables",
 		[customNodeType.Instructions]: "instructions",
 	})
 
-	/** 指定开始节点时，空白画布默认会新增一个开始节点 */
+	/** When specifying start node, a start node will be added by default on blank canvas */
 	// registerStartNodeType(customNodeType.Start)
 
-	/** 指定循环节点，会默认携带一个循环体 */
+	/** Specify loop node, will carry a loop body by default */
 	registerLoopNodeType(customNodeType.Loop)
 
-	/** 指定循环体类型 */
+	/** Specify loop body type */
 	registerLoopBodyType(customNodeType.LoopBody)
 
-	/** 指定循环起始节点类型 */
+	/** Specify loop start node type */
 	registerLoopStartType(customNodeType.Start)
 
-	/** 注册循环起始节点配置 */
+	/** Register loop start node configuration */
 	registerLoopStartConfig({
 		height: 128,
 	})
@@ -206,7 +206,7 @@ export const installAllNodes = (extraData?: BaseFlowProps["extraData"]) => {
 	})
 
 	/**
-	 * 注册所有节点schema
+	 * Register all node schemas
 	 */
 	installNodes(
 		generateNodeVersionSchema(

@@ -172,7 +172,7 @@ const WorkspacePanel = ({
 						onWorkspacesChange(updatedWorkspaces)
 					})
 					.catch((err) => {
-						console.error("获取话题列表失败:", err)
+						console.error("Failed to get topic list:", err)
 					})
 			})
 			.catch((err) => {

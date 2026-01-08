@@ -40,7 +40,7 @@ export default function Text2ImageV1() {
 			return []
 		}
 
-		// 生成二级菜单选项
+		// Generate secondary menu options
 		return visionModels.map((provider) => ({
 			label: provider.name,
 			options: provider.models.map((model) => ({
@@ -91,10 +91,10 @@ export default function Text2ImageV1() {
 
 		if (Reflect.has(changeValues, "model_id")) {
 			const newModel = changeValues.model_id
-			// 使用数组方法替代for...of循环
+			// Use array methods instead of for...of loop
 			const selectedModel = getSelectModel(newModel)
 
-			// 根据模型类型设置默认尺寸
+			// Set default size based on model type
 			if (selectedModel && selectedModel?.name?.includes?.("flux")) {
 				setSize({
 					width: 1024,

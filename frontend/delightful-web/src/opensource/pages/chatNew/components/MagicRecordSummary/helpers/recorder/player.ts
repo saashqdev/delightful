@@ -1,24 +1,24 @@
 declare let window: any
 
 let source: any = null
-let playTime: number = 0 // 相对时间，记录暂停位置
-let playStamp: number = 0 // 开始或暂停后开始的时间戳(绝对)
+let playTime: number = 0 // Relative time, records pause position
+let playStamp: number = 0 // Timestamp (absolute) at start or after pause
 let context: any = null
 let analyser: any = null
 
 let audioData: any = null
-// let hasInit: boolean = false;           // 是否已经初始化了
+// let hasInit: boolean = false;           // Whether already initialized
 let isPaused: boolean = false
 let totalTime: number = 0
 let endplayFn: any = () => {}
 
 /**
- * 初始化
+ * Initialize
  */
 function init(): void {
 	context = new (window.AudioContext || window.webkitAudioContext)()
 	analyser = context.createAnalyser()
-	analyser.fftSize = 2048 // 表示存储频域的大小
+	analyser.fftSize = 2048 // Represents the size of the frequency domain storage
 }
 
 /**
@@ -33,24 +33,24 @@ function playAudio(): Promise<{}> {
 		(buffer: any) => {
 			source = context.createBufferSource()
 
-			// 播放结束的事件绑定
+			// Bind event for playback end
 			source.onended = () => {
 				if (!isPaused) {
-					// 暂停的时候也会触发该事件
-					// 计算音频总时长
+					// This event is also triggered when paused
+					// Calculate total audio duration
 					totalTime = context.currentTime - playStamp + playTime
 					endplayFn()
 				}
 			}
 
-			// 设置数据
+			// Set data
 			source.buffer = buffer
-			// connect到分析器，还是用录音的，因为播放时不能录音的
+			// Connect to analyser, still use the recording one, because playback cannot record simultaneously
 			source.connect(analyser)
 			analyser.connect(context.destination)
 			source.start(0, playTime)
 
-			// 记录当前的时间戳，以备暂停时使用
+			// Record current timestamp for use when pausing
 			playStamp = context.currentTime
 		},
 		(e: any) => {
@@ -59,7 +59,7 @@ function playAudio(): Promise<{}> {
 	)
 }
 
-// 销毁source, 由于 decodeAudioData 产生的source每次停止后就不能使用，所以暂停也意味着销毁，下次需重新启动。
+// Destroy source, since the source produced by decodeAudioData cannot be used after each stop, pausing also means destroying, and needs to restart next time.
 function destroySource() {
 	if (source) {
 		source.stop()
@@ -76,11 +76,11 @@ export default class Player {
 	 */
 	static play(arraybuffer: any): Promise<{}> {
 		if (!context) {
-			// 第一次播放要初始化
+			// Initialize on first playback
 			init()
 		}
 		this.stopPlay()
-		// 缓存播放数据
+		// Cache playback data
 		audioData = arraybuffer
 		totalTime = 0
 
@@ -88,18 +88,18 @@ export default class Player {
 	}
 
 	/**
-	 * 暂停播放录音
+	 * Pause playback of recording
 	 * @memberof Player
 	 */
 	static pausePlay(): void {
 		destroySource()
-		// 多次暂停需要累加
+		// Multiple pauses need to be accumulated
 		playTime += context.currentTime - playStamp
 		isPaused = true
 	}
 
 	/**
-	 * 恢复播放录音
+	 * Resume playback of recording
 	 * @memberof Player
 	 */
 	static resumePlay(): Promise<{}> {
@@ -107,7 +107,7 @@ export default class Player {
 	}
 
 	/**
-	 * 停止播放
+	 * Stop playback
 	 * @memberof Player
 	 */
 	static stopPlay() {
@@ -123,14 +123,14 @@ export default class Player {
 
 	static getAnalyseData() {
 		const dataArray = new Uint8Array(analyser.frequencyBinCount)
-		// 将数据拷贝到dataArray中。
+		// Copy data into dataArray.
 		analyser.getByteTimeDomainData(dataArray)
 
 		return dataArray
 	}
 
 	/**
-	 * 增加录音播放完成的事件绑定
+	 * Add event binding for recording playback completion
 	 *
 	 * @static
 	 * @param {*} [fn=function() {}]
@@ -140,7 +140,7 @@ export default class Player {
 		endplayFn = fn
 	}
 
-	// 获取已经播放的时长
+	// Get the duration already played
 	static getPlayTime(): number {
 		const pTime = isPaused ? playTime : context.currentTime - playStamp + playTime
 

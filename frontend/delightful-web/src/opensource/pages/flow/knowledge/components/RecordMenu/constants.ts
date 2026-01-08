@@ -1,10 +1,10 @@
 /**
- * 知识库可操作项
+ * Knowledge base actionable items
  */
 export const MenuKeys = {
-	/** 删除知识库 */
+	/** Delete knowledge base */
 	DeleteItem: 1,
-	/** 管理知识库权限 */
+	/** Manage knowledge base permissions */
 	Operation: 2,
 }
 

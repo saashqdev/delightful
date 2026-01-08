@@ -18,15 +18,15 @@
 // 	access_token: string
 // 	delightfulOrganizationMap: Record<string, User.DelightfulOrganization>
 // 	organizations?: Array<User.UserOrganization>
-// 	/** delightful 生态下的组织Code */
+// 	/** Organization code under delightful ecosystem */
 // 	organizationCode?: string
-// 	/** teamshare 生态下的组织Code */
+// 	/** Organization code under teamshare ecosystem */
 // 	teamshareOrganizationCode?: string
 // 	deployCode?: string
 // }
 //
 // /**
-//  * @description 登录流程（登录类型一：验证码/手机号+密码，登录类型二：第三方登录钉钉/飞书/企微）
+//  * @description Login flow (Login type 1: verification code/phone number+password, Login type 2: third-party login DingTalk/Lark/WeCom)
 //  */
 // export function useLogin() {
 // 	const { getUserInfo, setUserInfo } = useFetchUserInfo()
@@ -34,7 +34,7 @@
 // 	const navigate = useNavigate()
 // 	const { i18n, t } = useTranslation("login")
 //
-// 	/** Step 1: 登录 */
+// 	/** Step 1: Login */
 // 	const loginStep = useMemoizedFn(
 // 		<T extends Login.LoginType>(type: T, values: LoginFormValuesMap[T]) => {
 // 			return async () => {
@@ -126,7 +126,7 @@
 // 		},
 // 	)
 //
-// 	/** Teamshare 生态组织同步 */
+// 	/** Teamshare ecosystem organization synchronization */
 // 	const organizationSyncStep = useMemoizedFn(
 // 		async (params: LoginStepResult): Promise<LoginStepResult> => {
 // 			const {
@@ -146,7 +146,7 @@
 // 		},
 // 	)
 //
-// 	/** Teamshare 生态组织获取 */
+// 	/** Teamshare ecosystem organization retrieval */
 // 	const organizationFetchStep = useMemoizedFn(
 // 		async (params: Omit<LoginStepResult, "organizationCode">): Promise<LoginStepResult> => {
 // 			try {
@@ -163,7 +163,7 @@
 // 				)
 // 				const teamshareOrgsCode = organizations.map((o) => o.organization_code)
 //
-// 				// 获取到 teamshare 的组织后，需要针对上步 delightfulOrganizationMap 进行合法性过滤(因后端没处理 delightfulOrganizationMap 数据的合法性，所以这里需要根据 teamshare 中不存在的组织过滤 delightfulOrganizationMap)
+// 				// After getting teamshare organizations, need to filter delightfulOrganizationMap for validity (because backend doesn't handle delightfulOrganizationMap data validity, so here we need to filter delightfulOrganizationMap based on organizations that don't exist in teamshare)
 // 				const delightfulOrganizationArray = Object.values(allDelightfulOrganizationMap).filter((o) =>
 // 					teamshareOrgsCode.includes(o.third_platform_organization_code),
 // 				)
@@ -173,12 +173,12 @@
 // 				)
 // 				const teamshareOrgMap = keyBy(delightfulOrganizationArray, "delightful_organization_code")
 //
-// 				const authorizedOrgsCode = Object.keys(delightfulOrganizationMap) // 已授权组织
+// 				const authorizedOrgsCode = Object.keys(delightfulOrganizationMap) // Authorized organizations
 // 				const authorizedOrg = organizations.find((org) =>
 // 					authorizedOrgsCode.includes(org.organization_code),
 // 				)
 //
-// 				// delightfulOrganizationCode 处理 (优先判断缓存是否存在)
+// 				// delightfulOrganizationCode handling (prioritize checking if cache exists)
 // 				const delightfulOrgCodeCache = useUserStore.getState()?.organizationCode
 // 				let delightfulOrgCode = null
 // 				if (delightfulOrgCodeCache && teamshareOrgMap?.[delightfulOrgCodeCache]) {
@@ -208,7 +208,7 @@
 // 		},
 // 	)
 //
-// 	/** 账号 Token 同步 */
+// 	/** Account Token synchronization */
 // 	const authorizationSyncStep = useMemoizedFn((userInfo: Login.UserLoginsResponse) => {
 // 		// Update token in useAuthenticationStore
 // 		useAuthenticationStore.setState((preState) => {
@@ -217,7 +217,7 @@
 // 		return Promise.resolve(userInfo)
 // 	})
 //
-// 	/** Step 4: 账号同步(判断当前) */
+// 	/** Step 4: Account synchronization (check current) */
 // 	const accountSyncStep = useMemoizedFn((deployCode: string) => {
 // 		return async (params: LoginStepResult): Promise<string> => {
 // 			try {
@@ -280,7 +280,7 @@
 // 		}
 // 	})
 //
-// 	/** Step 5: 路由重定向 */
+// 	/** Step 5: Route redirection */
 // 	const redirectUrlStep = useMemoizedFn(() => {
 // 		const url = new URL(window.location.href)
 // 		const { searchParams } = url
@@ -293,7 +293,7 @@
 // 		}
 // 	})
 //
-// 	/** Step 6: 用户信息同步(delightful体系的唯一用户Id) */
+// 	/** Step 6: User information synchronization (unique user ID in delightful system) */
 // 	const fetchUserInfoStep = useMemoizedFn(async (unionId: string) => {
 // 		try {
 // 			const userInfo = await getUserInfo(unionId)

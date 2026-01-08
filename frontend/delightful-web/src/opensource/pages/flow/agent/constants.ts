@@ -1,77 +1,77 @@
-// 状态
+// Status
 export const Status = {
   enable: 7,
   disable: 8
 }
 
-// 审批流状态
+// Approval flow status
 export const Approvaltatus = {
-  // 待审批
+  // Pending approval
   pending: 1,
-  // 审批中
+  // In progress
   inprogress: 2,
-  // 已通过
+  // Approved
   pass: 3,
-  // 已拒绝
+  // Rejected
   reject: 4
 }
 
-// 审批流状态
+// Approval flow status
 export const ApprovalStatusMap = {
-  [Approvaltatus.pending]: '待审批',
-  [Approvaltatus.inprogress]: '审批中',
-  [Approvaltatus.pass]: '已通过',
-  [Approvaltatus.reject]: '不通过'
+  [Approvaltatus.pending]: 'Pending',
+  [Approvaltatus.inprogress]: 'In Progress',
+  [Approvaltatus.pass]: 'Approved',
+  [Approvaltatus.reject]: 'Rejected'
 }
 
 
 
-// 企业发布状态
+// Enterprise publish status
 export const EntrepriseStatus = {
-  // 未发布
+  // Not published
   unrelease: 5,
-  // 已发布
+  // Published
   release: 6,
 }
 
-// 企业发布状态
+// Enterprise publish status
 export const EntrepriseStatusMap = {
-  [EntrepriseStatus.unrelease]: '未发布',
-  [EntrepriseStatus.release]: '已发布',
+  [EntrepriseStatus.unrelease]: 'Not Published',
+  [EntrepriseStatus.release]: 'Published',
 }
 
 
 
-// 平台发布状态
+// Platform publish status
 export const PlatformStatus = {
-  // 未上架
+  // Not listed
   unrelease: 9,
-  // 审核中
+  // Under review
   audit: 10,
-  // 已上架
+  // Listed
   release: 11,
 
 }
 
 
-// 平台发布状态
+// Platform publish status
 export const PlatformStatusMap = {
-  [PlatformStatus.unrelease]: '未上架',
-  [PlatformStatus.audit]: '审核中',
-  [PlatformStatus.release]: '已上架'
+  [PlatformStatus.unrelease]: 'Not Listed',
+  [PlatformStatus.audit]: 'Under Review',
+  [PlatformStatus.release]: 'Listed'
 }
 
 
 /**
- * AI助理可操作项
+ * AI assistant actionable items
  */
 export const MenuKeys = {
-	/** 查看版本记录 */
+	/** View version history */
 	VersionRecord: 0,
-	/** 修改 */
+	/** Edit */
 	UpdateItem: 1,
-	/** 发布 */
+	/** Publish */
 	PublishItem: 2,
-	/** 删除 */
+	/** Delete */
 	DeleteItem: 3,
 }

@@ -67,7 +67,7 @@ export default memo(function CommonFooter(props: CommonFooterProps) {
 					type="primary"
 					className={styles.goTheLatestButton}
 				>
-					返回最新
+					Return to Latest
 				</Button>
 			)}
 		</Flex>

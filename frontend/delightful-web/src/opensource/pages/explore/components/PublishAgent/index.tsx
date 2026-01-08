@@ -43,7 +43,7 @@ export type PublishAgentType = Pick<
 type PublishAgentProps = {
 	open: boolean
 	agentId?: string
-	scope?: ScopeType // 机器人发布的范围
+	scope?: ScopeType // Agent publishing scope
 	flowInstance?: MutableRefObject<DelightfulFlowInstance | null>
 	agent?: Bot.Detail
 	submit?: (this: any, agentId: any) => Promise<void>
@@ -93,13 +93,13 @@ function PublishAgent({
 	}, [success, t])
 
 	const handleCancel = useMemoizedFn(() => {
-		// 回显版本发布范围/版本号
+		// Recall version publish scope/version number
 		close?.(selectScope, form.getFieldValue("version_number"))
 		form.resetFields()
 		SuccessFalse()
 	})
 
-	// 获取下一个版本号
+	// Get next version number
 	const getNextVersion = useMemoizedFn(async () => {
 		const data = await BotApi.getMaxVersion(agentId!)
 		setVersion(data)
@@ -246,7 +246,7 @@ function PublishAgent({
 		)
 	}, [handleOk, handleCancel, t])
 
-	// 会话
+	// Conversation
 	const navaigateCoversation = useMemoizedFn(async () => {
 		const conversation = await ConversationService.createConversation(
 			MessageReceiveType.Ai,
@@ -267,7 +267,7 @@ function PublishAgent({
 
 	useEffect(() => {
 		if (open && agentId) {
-			// 获取下个版本号
+			// Get next version number
 			getNextVersion()
 			form.setFieldValue("version_number", version)
 			if (scope) {

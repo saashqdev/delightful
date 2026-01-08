@@ -1,5 +1,5 @@
 /**
- * 管理Agent相关数据状态
+ * Manage Agent-related data state
  */
 import type { Bot } from "@/types/bot"
 import { useMemoizedFn, useMount } from "ahooks"

@@ -25,13 +25,13 @@ import { getDefaultSchema } from "@delightful/delightful-flow/dist/DelightfulJso
 import { ContactApi } from "@/apis"
 import { UserType } from "@/types/user"
 
-// 雪花id生成
+// Snowflake ID generation
 const snowflake = new SnowFlakeId({
 	mid: Math.floor(Math.random() * 1e10),
 	offset: (2021 - 1970) * 365 * 24 * 3600 * 1000,
 })
 
-/** 获取某个节点类型的节点schema */
+/** Get node schema for a specific node type */
 export const getNodeSchema = (nodeType: string | number): NodeSchema => {
 	const { nodeVersionSchema } = flowStore.getState()
 	const version = getLatestNodeVersion(nodeType) as string
@@ -44,7 +44,7 @@ export const findFieldInDataSource = (
 ): DataSourceOption => {
 	const [curKey, ...restKeys] = [...fieldKeys]
 	const foundField = dataSourceOptions.find((option) => {
-		// 拿到切割后的最后一个key，作为匹配值
+		// Get the last key after splitting, use as match value
 		const lastKey = last((option?.key as string)?.split?.("."))
 		return lastKey === curKey
 	})
@@ -58,7 +58,7 @@ export function generateSnowFlake() {
 	return snowflake.generate()
 }
 
-/** 检查是否在循环体内 */
+/** Check if inside a loop */
 export const checkIsInLoop = (node: DelightfulFlow.Node) => {
 	return node?.meta?.parent_id
 }
@@ -69,14 +69,14 @@ export const getComponent = (type: string) => {
 		[FormItemType.String]: <DelightfulInput.TextArea />,
 		[FormItemType.Boolean]: <Switch />,
 		[FormItemType.Integer]: <DelightfulInput type="number" />,
-		[FormItemType.Array]: <div>暂不支持选择数组</div>,
-		[FormItemType.Object]: <div>暂不支持选择对象</div>,
+		[FormItemType.Array]: <div>Array selection not supported yet</div>,
+		[FormItemType.Object]: <div>Object selection not supported yet</div>,
 	}
 	return componentMap?.[type as FormItemType]
 }
 
 /**
- * 根据schema,转换为动态form item
+ * Convert schema to dynamic form item
  * @param schema json schema
  * @param namePrefix
  * @returns
@@ -91,7 +91,7 @@ export const getComponent = (type: string) => {
 
 // 	if (type === FormItemType.Object && properties) {
 // 		const objectLabel = namePrefix ? "" : formTitle
-// 		// 递归处理对象类型，嵌套的对象也会被正确处理
+// 		// Recursively process object types, nested objects will also be handled correctly
 // 		return (
 // 			<Form.Item label={objectLabel} className="object-wrapper" name={schemaKey}>
 // 				{Object.keys(properties).map((key) => {
@@ -108,7 +108,7 @@ export const getComponent = (type: string) => {
 // 	}
 
 // 	if (type === FormItemType.Array && items) {
-// 		// 使用 Form.List 来处理数组，数组中的元素可能是对象或数组
+// 		// Use Form.List to handle arrays, array elements can be objects or arrays
 // 		return (
 // 			<Form.Item label={formTitle} className="array-wrapper">
 // 				<Form.List name={namePrefix || schemaKey}>
@@ -127,7 +127,7 @@ export const getComponent = (type: string) => {
 // 											label={`${index}`}
 // 											style={{ flex: 1 }}
 // 										>
-// 											{/* 对数组项进行递归处理 */}
+// 											{/* Recursively process array items */}
 // 											{generateFormItems(items, `${name}`)}
 // 										</Form.Item>
 // 										<IconTrash
@@ -139,22 +139,22 @@ export const getComponent = (type: string) => {
 // 								))}
 // 								<div className="add-btn" onClick={() => add()}>
 // 									<IconPlus />
-// 									<span className="text">新增一项</span>
+// 									<span className="text">Add one item</span>
 // 								</div>
 // 							</div>
-// 						)
+// 						)}
 // 					}}
 // 				</Form.List>
 // 			</Form.Item>
 // 		)
 // 	}
 
-// 	// 处理基本类型 (string, number, boolean 等)
+// 	// Handle basic types (string, number, boolean etc)
 // 	return componentMap?.[type as FormItemType]
 // }
 
 /**
- * 在schema里面寻找表达式块
+ * Search for expression blocks in schema
  * @param properties
  * @param result
  * @returns
@@ -175,14 +175,14 @@ export const searchExpressionFieldsInSchema = (
 	return result.flat()
 }
 
-// 将多个数据源项合并同类项，因为都属于同个节点
+// Merge multiple data source items into one, as they all belong to the same node
 export const mergeOptionsIntoOne = (options: DataSourceOption[]): DataSourceOption => {
 	return options.reduce((mergeResult, currentOption) => {
 		const newChildren = [
 			...(mergeResult.children || []),
 			...(currentOption.children || []),
 		] as DataSourceOption[]
-		// 根据节点id和key进行去重后的结果
+		// Result after deduplication based on node id and key
 		const uniqueChildren = uniqBy(newChildren, (obj) => `${obj.nodeId}_${obj.key}`)
 		mergeResult = {
 			...mergeResult,
@@ -206,7 +206,7 @@ export const getCurrentDateTimeString = () => {
 }
 
 /**
- * 将flow的所有代码节点值都进行混淆处理
+ * Obfuscate all code node values in the flow
  */
 export const shadowFlow = (flow: DelightfulFlow.Flow) => {
 	const cloneFlow = cloneDeep(flow)
@@ -225,7 +225,7 @@ export const shadowFlow = (flow: DelightfulFlow.Flow) => {
 }
 
 /**
- * 将flow的所有代码节点值都进行解码处理
+ * Decode all code node values in the flow
  */
 export const unShadowFlow = (flow: DelightfulFlow.Flow) => {
 	const cloneFlow = cloneDeep(flow)
@@ -244,7 +244,7 @@ export const unShadowFlow = (flow: DelightfulFlow.Flow) => {
 }
 
 /**
- * 将代码节点进行混淆处理
+ * Obfuscate code node
  */
 export const shadowNode = (node: DelightfulFlow.Node) => {
 	const cloneNode = cloneDeep(node)
@@ -264,7 +264,7 @@ export const getExpressionPlaceholder = (str: string) => {
 	return `${str}${i18next.t("common.allowExpressionPlaceholder", { ns: "flow" })}`
 }
 
-// 根据id查找到工具集对应的工具
+// Find the corresponding tool in the toolset by id
 export const findTargetTool = (id: string) => {
 	const { useableToolSets } = useFlowStore.getState()
 	const allTools = useableToolSets.reduce((tools, currentToolSet) => {
@@ -279,7 +279,7 @@ export const findTargetTool = (id: string) => {
 }
 
 /**
- * 生成组件默认数据
+ * Generate default component data
  * @param componentType
  * @returns
  */
@@ -299,7 +299,7 @@ export function genDefaultComponent<ResultType extends Common.ComponentTypes>(
 	return result
 }
 
-/** 根据类型生成默认的schema，可以通过defaultProps新增一些其他属性或者覆盖默认属性 */
+/** Generate default schema based on type, can add or override default properties via defaultProps */
 export const getDefaultSchemaWithDefaultProps = (
 	type: string,
 	defaultProps: Partial<JsonSchemaEditorProps>,
@@ -311,7 +311,7 @@ export const getDefaultSchemaWithDefaultProps = (
 	}
 }
 
-// 根据字段类型，获取表达式组件渲染属性
+// Get expression component render properties based on field type
 export const getExpressionRenderConfig = (column: Sheet.Column) => {
 	switch (column?.columnType) {
 		case Schema.CHECKBOX:
@@ -386,16 +386,16 @@ export const getPlaceholder = (
 		case Schema.TEXT:
 		case Schema.NUMBER:
 		case Schema.LINK:
-			return "请输入"
+			return "Please enter"
 		case Schema.MEMBER:
 		case Schema.CREATED:
 		case Schema.UPDATED:
-			return "选择成员"
+			return "Select member"
 		case Schema.QUOTE_RELATION:
 		case Schema.MUTUAL_RELATION:
 		case Schema.SELECT:
 		case Schema.MULTIPLE:
-			return "请选择"
+			return "Please select"
 		case Schema.DATE:
 		case Schema.CREATE_AT:
 		case Schema.UPDATE_AT:

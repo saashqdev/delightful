@@ -36,7 +36,7 @@ export default function FeiShuSettings({ open, onClose, subOpt }: FeiShuSettings
 
 	const onNext = useMemoizedFn(async () => {
 		form.validateFields().then((values) => {
-			// 保证 http 结构的正确性
+			// Ensure http structure correctness
 			if (step === 0) {
 				const options = {
 					...values.options,

@@ -3,7 +3,7 @@ import type { DelightfulFlow } from "@delightful/delightful-flow/dist/Delightful
 import type { NodeVersionMap } from "@delightful/delightful-flow/dist/common/context/NodeMap/Context"
 import { customNodeType } from "../../constants"
 
-/** 生成循环体内特殊可引用项数据源 */
+/** Generate data source for special referenceable items within loop body */
 export const generateLoopItemOptions = (
 	loopNode: DelightfulFlow.Node,
 	nodeSchemaMap: NodeVersionMap,
@@ -14,7 +14,7 @@ export const generateLoopItemOptions = (
 		type: "object",
 		key: "root",
 		sort: 0,
-		title: "root节点",
+		title: "root node",
 		description: "",
 		required: ["item", "index"],
 		value: null,
@@ -24,7 +24,7 @@ export const generateLoopItemOptions = (
 				type: "",
 				key: "item",
 				sort: 0,
-				title: "当前项",
+				title: "Current Item",
 				description: "",
 				required: null,
 				value: null,
@@ -35,7 +35,7 @@ export const generateLoopItemOptions = (
 				type: "number",
 				key: "index",
 				sort: 1,
-				title: "当前索引",
+				title: "Current Index",
 				description: "",
 				required: null,
 				value: null,

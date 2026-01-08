@@ -21,7 +21,7 @@ export const operatorMap = {
 	[FilterTargetTypes.VectorDatabaseName]: ["equals", "no_equals", "contains", "no_contains"],
 }
 
-// 值映射
+// Value mapping
 export const operator2Label: Record<string, string> = {
 	equals: i18next.t("common.equals", { ns: "flow" }),
 	no_equals: i18next.t("common.notEquals", { ns: "flow" }),

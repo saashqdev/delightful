@@ -18,7 +18,7 @@ export type WidgetValue = {
 	wrapperClassName?: string
 }
 
-export default function Output({ value, title = "输出", wrapperClassName }: WidgetValue) {
+export default function Output({ value, title = "Output", wrapperClassName }: WidgetValue) {
 	return (
 		<div className={cx(styles.output, wrapperClassName)}>
 			<DropdownCard title={title}>

@@ -1,8 +1,8 @@
 /**
- * 消息相关事件
+ * Message-related events
  */
 export enum EVENTS {
-	// 消息相关
+	// Message-related
 	APPLY_MESSAGE = "applyMessage",
 	APPLY_MESSAGES = "applyMessages",
 	ADD_SEND_MESSAGE = "addSendMessage",
@@ -13,7 +13,7 @@ export enum EVENTS {
 	UPDATE_MESSAGE_ID = "updateMessageId",
 	UPDATE_SEND_MESSAGE = "updateSendMessage",
 
-	// 会话、话题相关
+	// Conversation and topic-related
 	SET_TOP_CONVERSATION = "setTopConversation",
 	CANCEL_TOP_CONVERSATION = "cancelTopConversation",
 	CANCEL_SET_NO_DISTURB_STATUS = "cancelNotDisturbStatus",
@@ -27,11 +27,11 @@ export enum EVENTS {
 	CREATE_TOPIC = "createTopic",
 	UPDATE_TOPIC = "updateTopic",
 
-	// 用户相关
+	// User-related
 	LOGOUT = "logout",
 	DO_LOGOUT = "doLogout",
 	LOGIN = "login",
-	DO_LOGIN = "login", // 注意这里与LOGIN相同
+	DO_LOGIN = "login", // Note: Same as LOGIN
 	// SWITCH_USER = "switchUser",
 	// DO_SWITCH_USER = "doSwitchUser",
 	SWITCH_ORGANIZATION = "switchOrganization",

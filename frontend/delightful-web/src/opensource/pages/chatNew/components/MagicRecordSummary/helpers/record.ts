@@ -2,10 +2,10 @@ import Recorder from "./recorder/recorder"
 import { safeBinaryToBtoa } from "@/utils/encoding"
 
 export const recorder = new Recorder({
-	sampleBits: 16, // 采样位数，支持 8 或 16，默认是16
-	sampleRate: 16000, // 采样率，支持 11025、16000、22050、24000、44100、48000，根据浏览器默认值，我的chrome是48000
-	numChannels: 1, // 声道，支持 1 或 2， 默认是1
-	// compiling: false,(0.x版本中生效,1.x增加中)  // 是否边录边转换，默认是false
+	sampleBits: 16, // Sample bits, supports 8 or 16, default is 16
+	sampleRate: 16000, // Sample rate, supports 11025, 16000, 22050, 24000, 44100, 48000, browser default, my Chrome is 48000
+	numChannels: 1, // Number of channels, supports 1 or 2, default is 1
+	// compiling: false,(works in 0.x version, adding in 1.x)  // Whether to convert while recording, default is false
 })
 
 export async function startRecording() {
@@ -16,24 +16,24 @@ export function stopRecording() {
 	recorder.stop()
 }
 
-// 补充零，确保两位数
+// Pad with zero to ensure two digits
 function pad(num: number): string {
 	return num < 10 ? `0${num}` : `${num}`
 }
 
 export function formatTime(seconds: number): string {
-	const hours = Math.floor(seconds / 3600) // 计算小时
-	const minutes = Math.floor((seconds % 3600) / 60) // 计算分钟
-	const remainingSeconds = Math.floor(seconds % 60) // 剩余的秒数
+	const hours = Math.floor(seconds / 3600) // Calculate hours
+	const minutes = Math.floor((seconds % 3600) / 60) // Calculate minutes
+	const remainingSeconds = Math.floor(seconds % 60) // Remaining seconds
 
-	// 格式化为 HH:MM:SS 的形式，确保每个部分都是两位数
+	// Format as HH:MM:SS, ensuring each part is two digits
 	return `${pad(hours)}:${pad(minutes)}:${pad(remainingSeconds)}`
 }
 
 /**
- * 将 Blob 或 Uint8Array 转换为 Base64 字符串
- * @param input - 需要转换的 Blob 或 Uint8Array 对象
- * @returns Promise<string> - Base64 字符串
+ * Convert Blob or Uint8Array to Base64 string
+ * @param input - Blob or Uint8Array object to be converted
+ * @returns Promise<string> - Base64 string
  */
 export async function blobToBase64Async(input: Blob | Uint8Array): Promise<string> {
 	if (input instanceof Blob) {
@@ -42,7 +42,7 @@ export async function blobToBase64Async(input: Blob | Uint8Array): Promise<strin
 
 			reader.onloadend = () => {
 				if (reader.result && typeof reader.result === "string") {
-					// 从 DataURL 中提取 Base64 部分
+					// Extract Base64 part from DataURL
 					resolve(reader.result.split(",")[1])
 				} else {
 					reject(new Error("Failed to convert Blob to Base64"))
@@ -55,7 +55,7 @@ export async function blobToBase64Async(input: Blob | Uint8Array): Promise<strin
 		})
 	}
 	if (input instanceof Uint8Array) {
-		// Uint8Array 转 Base64
+		// Convert Uint8Array to Base64
 		return new Promise((resolve) => {
 			const base64Result = safeBinaryToBtoa(input)
 			resolve(base64Result)

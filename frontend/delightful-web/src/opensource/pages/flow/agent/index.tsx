@@ -69,7 +69,7 @@ function AgentPage() {
 
 	const getKey = ({ pageIndex, previousPageData, name, size }: KeyProp) => {
 		if (previousPageData && !previousPageData.list.length) return null
-		return { page: pageIndex + 1, pageSize: size, keyword: name } // 请求参数
+		return { page: pageIndex + 1, pageSize: size, keyword: name } // Request parameters
 	}
 
 	const usePaginatedData = (value: string, size: number) => {
@@ -82,7 +82,7 @@ function AgentPage() {
 		const items = data ? data.map((page) => page?.list).flat() : []
 		const total = data?.[0]?.total || 0
 
-		// 判断是否还有更多数据
+		// Check if there's more data
 		const hasMore = items.length < total
 
 		return { items, error, mutate, setSize, hasMore, total, isLoading }
@@ -103,7 +103,7 @@ function AgentPage() {
 	})
 
 	const handleClickBot = useMemoizedFn((bot, type) => {
-		// 打开编辑助理弹窗
+		// Open edit assistant modal
 		if (type === "update") {
 			openAddAgentModal()
 		} else {
@@ -149,7 +149,7 @@ function AgentPage() {
 		)
 	}, [botList.length, openAddAgentModal, styles.EmptyImage, styles.emptyTips, t])
 
-	/** 删除 */
+	/** Delete */
 	const deleteItem = useMemoizedFn((bot: Bot.BotItem) => {
 		openModal(DeleteDangerModal, {
 			content: bot.robot_name,
@@ -161,9 +161,9 @@ function AgentPage() {
 					if (!currentData) return currentData
 					const updatedData = currentData?.map((page) => ({
 						...page,
-						list: page?.list.filter((item) => item.id !== bot.id),
-					}))
-					updatedData[0].total -= 1 // 更新总数
+							list: page?.list.filter((item) => item.id !== bot.id),
+						}))
+					updatedData[0].total -= 1 // Update total
 					return updatedData
 				}, false)
 			},

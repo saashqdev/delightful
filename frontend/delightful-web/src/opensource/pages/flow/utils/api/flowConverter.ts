@@ -1,68 +1,68 @@
 //@ts-nocheck
 /**
- * Flow转换器API
- * 提供YAML和JSON之间转换的API
+ * Flow Converter API
+ * Provides API for converting between YAML and JSON
  */
 
 import { message } from "antd"
 import { FlowConverter } from "../flowConverter"
 
 /**
- * 转换YAML到JSON
- * @param yamlString YAML字符串
- * @returns JSON对象或null
+ * Convert YAML to JSON
+ * @param yamlString YAML string
+ * @returns JSON object or null
  */
 export const convertYAMLToJSON = (yamlString: string) => {
 	try {
 		return FlowConverter.yamlToJson(yamlString)
 	} catch (error) {
-		message.error(`YAML转JSON失败: ${error.message}`)
-		console.error("YAML转JSON失败:", error)
+		message.error(`YAML to JSON conversion failed: ${error.message}`)
+		console.error("YAML to JSON conversion failed:", error)
 		return null
 	}
 }
 
 /**
- * 转换JSON到YAML
- * @param jsonObj JSON对象
- * @returns YAML字符串或null
+ * Convert JSON to YAML
+ * @param jsonObj JSON object
+ * @returns YAML string or null
  */
 export const convertJSONToYAML = (jsonObj: any) => {
 	try {
 		return FlowConverter.jsonToYamlString(jsonObj)
 	} catch (error) {
-		message.error(`JSON转YAML失败: ${error.message}`)
-		console.error("JSON转YAML失败:", error)
+		message.error(`JSON to YAML conversion failed: ${error.message}`)
+		console.error("JSON to YAML conversion failed:", error)
 		return null
 	}
 }
 
 /**
- * 转换JSON字符串到YAML
- * @param jsonString JSON字符串
- * @returns YAML字符串或null
+ * Convert JSON string to YAML
+ * @param jsonString JSON string
+ * @returns YAML string or null
  */
 export const convertJSONStringToYAML = (jsonString: string) => {
 	try {
 		return FlowConverter.jsonStringToYamlString(jsonString)
 	} catch (error) {
-		message.error(`JSON字符串转YAML失败: ${error.message}`)
-		console.error("JSON字符串转YAML失败:", error)
+		message.error(`JSON string to YAML conversion failed: ${error.message}`)
+		console.error("JSON string to YAML conversion failed:", error)
 		return null
 	}
 }
 
 /**
- * 转换YAML到JSON字符串
- * @param yamlString YAML字符串
- * @returns JSON字符串或null
+ * Convert YAML to JSON string
+ * @param yamlString YAML string
+ * @returns JSON string or null
  */
 export const convertYAMLToJSONString = (yamlString: string) => {
 	try {
 		return FlowConverter.yamlToJsonString(yamlString)
 	} catch (error) {
-		message.error(`YAML转JSON字符串失败: ${error.message}`)
-		console.error("YAML转JSON字符串失败:", error)
+		message.error(`YAML to JSON string conversion failed: ${error.message}`)
+		console.error("YAML to JSON string conversion failed:", error)
 		return null
 	}
 }

@@ -513,7 +513,7 @@ export const generateNodeVersionSchema = (
 				!nodeComponentVersionMap[nodeType] &&
 				!enterpriseNodeComponentVersionMap[nodeType]
 			) {
-				console.error(`nodeComponentVersionMap 不存在 ${nodeType}`)
+				console.error(`nodeComponentVersionMap does not exist for ${nodeType}`)
 				return accVersionTemplate
 			}
 			const nodeVersionMap =
@@ -521,17 +521,14 @@ export const generateNodeVersionSchema = (
 			return {
 				[nodeType]: Object.entries(nodeVersionMap).reduce(
 					(versionTemplate, [nodeVersion, nodeMap]) => {
-						/** 需要进行版本化的配置 */
-						const versionConfig = pick(nodeMap.template, [
-							"input",
-							"output",
-							"params",
-							"system_output",
-						])
-						/** 拿到具体版本的组件 */
-						const versionComp = nodeMap
-
-						const commonSchemaConfigMap = getCommonSchemaConfigMap()
+							/** Configuration that needs to be versioned */
+							const versionConfig = pick(nodeMap.template, [
+								"input",
+								"output",
+								"params",
+								"system_output",
+							])
+							/** Get the component for the specific version */
 
 						const enterpriseSchemaConfigMap = getEnterpriseSchemaConfigMap()
 

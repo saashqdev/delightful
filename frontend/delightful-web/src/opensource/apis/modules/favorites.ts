@@ -8,7 +8,7 @@ export interface FavoritesListRequest {
 	page_size?: number
 	tag_id?: string
 	/**
-	 * 默认为全部，-1-全部 1-消息记录 2-群聊 3-联系人 4-云盘
+	 * Default is all, -1: All, 1: Message records, 2: Group chats, 3: Contacts, 4: Cloud drive
 	 */
 	type?: number
 }
@@ -22,9 +22,9 @@ export interface SearchFavoritesRequest {
 }
 
 export interface RelationLabelRequest {
-	// 文件id
+	// File ID
 	target_ids: Array<string>
-	// 默认是1 收藏
+	// Default is 1: Favorites
 	target_type: number | string
 	tag_ids: Array<string>
 }
@@ -32,70 +32,70 @@ export interface RelationLabelRequest {
 export interface AddLabelRequest {
 	name: string
 	/**
-	 * 标签类型：1-收藏
+	 * Tag type: 1-Favorites
 	 */
 	type: number
 }
 
 export const generateFavoritesApi = (fetch: HttpClient) => ({
 	/**
-	 * 获取收藏列表
+	 * Get favorites list
 	 */
 	getFavoritesList(data: FavoritesListRequest): Promise<any> {
 		return fetch.post<DriveItem[]>(genRequestUrl(RequestUrl.getFavorites), data)
 	},
 
 	/**
-	 * 删除收藏
+	 * Delete favorites
 	 */
 	deleteFavorites(data: DeleteFavoritesRequest) {
 		return fetch.delete<DriveItem[]>(genRequestUrl(RequestUrl.deleteFavorites), data)
 	},
 
 	/**
-	 * 搜索收藏
+	 * Search favorites
 	 */
 	searchFavorites(data: SearchFavoritesRequest) {
 		return fetch.post<DriveItem[]>(genRequestUrl(RequestUrl.searchFavorites), data)
 	},
 
 	/**
-	 * 添加收藏
+	 * Add favorites
 	 */
 	addFavorites(data: SearchFavoritesRequest) {
 		return fetch.post<DriveItem[]>(genRequestUrl(RequestUrl.addFavorites), data)
 	},
 
 	/**
-	 * 关联标签
+	 * Associate label
 	 */
 	relationLabel(data: RelationLabelRequest) {
 		return fetch.put<DriveItem[]>(genRequestUrl(RequestUrl.relationLabel), data)
 	},
 
 	/**
-	 * 添加标签
+	 * Add label
 	 */
 	addLabel(data: AddLabelRequest[]) {
 		return fetch.post<DriveItem[]>(genRequestUrl(RequestUrl.addLabel), data)
 	},
 
 	/**
-	 * 编辑标签
+	 * Edit label
 	 */
 	editLabel(id: string, data: Record<"name", string>) {
 		return fetch.put<DriveItem[]>(genRequestUrl(RequestUrl.editLabel, { id }), data)
 	},
 
 	/**
-	 * 删除标签
+	 * Delete label
 	 */
 	deleteLabel(data: Record<"ids", Array<string>>) {
 		return fetch.delete<DriveItem[]>(genRequestUrl(RequestUrl.deleteLabel), data)
 	},
 
 	/**
-	 * 获取标签列表
+	 * Get label list
 	 */
 	getLabelList(): any {
 		return fetch.get<DriveItem[]>(genRequestUrl(RequestUrl.getLabelList))

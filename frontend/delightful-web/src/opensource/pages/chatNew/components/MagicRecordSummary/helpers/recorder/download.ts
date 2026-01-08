@@ -1,11 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/naming-convention */
 /**
- * 下载录音文件
+ * Download audio recording file
  * @private
- * @param {*} blob      blob数据
- * @param {string} name 下载的文件名
- * @param {string} type 下载的文件后缀
+ * @param {*} blob      blob data
+ * @param {string} name filename for download
+ * @param {string} type file extension for download
  */
 function _download(blob: Blob | MediaSource, name: string, type: string): void {
 	const oA = document.createElement("a")
@@ -16,27 +16,27 @@ function _download(blob: Blob | MediaSource, name: string, type: string): void {
 }
 
 /**
- * 下载录音的wav数据
+ * Download WAV data of the recording
  *
- * @param {blob}   需要下载的blob数据类型
- * @param {string} [name='recorder']    重命名的名字
+ * @param {blob}   blob data type to download
+ * @param {string} [name='recorder']    renamed filename
  */
 export function downloadWAV(wavblob: any, name: string = "recorder"): void {
 	_download(wavblob, name, "wav")
 }
 
 /**
- * 下载录音pcm数据
+ * Download PCM data of the recording
  *
- * @param {blob}   需要下载的blob数据类型
- * @param {string} [name='recorder']    重命名的名字
+ * @param {blob}   blob data type to download
+ * @param {string} [name='recorder']    renamed filename
  * @memberof Recorder
  */
 export function downloadPCM(pcmBlob: any, name: string = "recorder"): void {
 	_download(pcmBlob, name, "pcm")
 }
 
-// 通用下载接口
+// Generic download interface
 export function download(blob: any, name: string, type: string) {
 	return _download(blob, name, type)
 }

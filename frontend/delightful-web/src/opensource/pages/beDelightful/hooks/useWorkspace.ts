@@ -152,7 +152,7 @@ export function useWorkspace() {
 							const workspaceList = workspacesData.list || []
 							// Update workspace list
 							setWorkspaces(workspaceList)
-							// 不再自动选中新建的工作区
+							// No longer auto-select the newly created workspace
 						})
 						.catch((err) => {
 							console.log(err, "Failed to get workspace list")

@@ -1,5 +1,5 @@
 /**
- * 存放各节点单步调试相关的公共方法和状态
+ * Stores common methods and state for single-step debugging of each node
  */
 
 import type { ReactNode } from "react"
@@ -68,13 +68,13 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 
 	const { expressionDataSource } = usePrevious()
 
-	// 获取所有引用块(包括固定值和表达式)
+	// Get all reference blocks (including constant values and expressions)
 	const getAllExpressionLabelFields = useMemoizedFn((expression: InputExpressionValue) => {
 		const result = [...(expression?.const_value || []), ...(expression?.expression_value || [])]
 		return result.filter((node) => node.type === LabelTypeMap.LabelNode)
 	})
 
-	// 通过labelNode获取对应的数据源项
+	// Get corresponding data source item through labelNode
 	const getDataSourceOption = useMemoizedFn((labelNode: EXPRESSION_VALUE) => {
 		const [nodeId, ...fieldKeys] = labelNode?.value?.split?.(".") || []
 		const pickNodeId = nodeId.split(SystemNodeSuffix)?.[0]
@@ -95,7 +95,7 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 		return foundField
 	})
 
-	// 根据数据源项，生成对应的schema字段
+	// Generate corresponding schema field based on data source item
 	const generateSchemaFromSource = useMemoizedFn((sourceOption: DataSourceOption) => {
 		const { rawSchema } = sourceOption
 		const cloneSchema = cloneDeep(rawSchema)
@@ -106,7 +106,7 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 		return mergeSchema as Schema
 	})
 
-	// 查找schema里面所有的表达式组件值，塞到result
+	// Find all expression component values in schema and push to result
 	const searchExpressionFields = useMemoizedFn(
 		(
 			properties: Record<string, Schema>,
@@ -141,13 +141,13 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 		return result
 	})
 
-	// 根据解析路径和解析类型对数据源进行动态计算，生成动态的schema
+	// Dynamically calculate data source based on resolve path and type, generate dynamic schema
 	const generateExpressionSourceForm = useMemoizedFn((resolveRules: ResolveRule[]) => {
 		const defaultProps = {
 			key: "root",
 			title: "root",
 		}
-		// 普通的引用表单
+		// Regular reference form
 		const referenceForm = genDefaultComponent(
 			ComponentTypes.Form,
 			// @ts-ignore
@@ -155,7 +155,7 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 				...defaultProps,
 			}),
 		)
-		// 环境变量的引用表单
+		// Environment variable reference form
 		const globalVariableForm = genDefaultComponent(
 			ComponentTypes.Form,
 			// @ts-ignore
@@ -174,18 +174,18 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 				const list = Object.values(obj) as object[]
 				allReferenceFields = generateListOrObjectFields(currentRule, list)
 			} else if (currentRule.type === "expression") {
-				// 获取当前节点某个表达式组件的值
-				const expressionValue = get(currentNode, currentRule.path) as InputExpressionValue
-				// 获取当前节点某个表达式值里面的引用块
-				allReferenceFields = getAllExpressionLabelFields(expressionValue)
-			} else {
-				// 获取schema
-				const schema = get(currentNode, currentRule.path) as Schema
-				// 获取当前节点某个表达式值里面的引用块
+			// Get current node's expression component value
+			const expressionValue = get(currentNode, currentRule.path) as InputExpressionValue
+			// Get reference blocks in a certain expression value of current node
+			allReferenceFields = getAllExpressionLabelFields(expressionValue)
+		} else {
+			// Get schema
+			const schema = get(currentNode, currentRule.path) as Schema
+			// Get reference blocks in a certain expression value of current node
 				allReferenceFields = searchExpressionFields(schema?.properties || {})
 			}
 
-			// 遍历引用块，生成schema字段并设置到对应的schema
+		// Iterate reference blocks, generate schema fields and set to corresponding schema
 			allReferenceFields.forEach((referenceField) => {
 				const dataSourceOption = getDataSourceOption(referenceField)
 				if (!dataSourceOption) return
@@ -350,16 +350,16 @@ export default function useHeaderRight({ rules, extraComponent }: UseHeaderRight
 						)}
 
 						{debuggerMode && (
-							<Form.Item name="debug_data" label="调试">
-								<Input.TextArea
-									className={styles.debug}
-									placeholder="假设你引用了开始节点.username，AI聊天节点.text,且开始节点id为xxx，AI聊天节点id为yyy，则请输入：
+						<Form.Item name="debug_data" label="Debug">
+							<Input.TextArea
+								className={styles.debug}
+								placeholder="If you referenced start node.username and AI chat node.text, and start node id is xxx, AI chat node id is yyy, then please input:
 {
 	xxx: {
-		username: '自定义内容'
+		username: 'custom content'
 	},
 	yyy: {
-		text: '自定义内容2'
+		text: 'custom content 2'
 	}
 }
 									"

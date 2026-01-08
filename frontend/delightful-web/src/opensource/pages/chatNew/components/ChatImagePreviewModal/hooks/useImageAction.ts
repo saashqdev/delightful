@@ -105,7 +105,7 @@ const useImageAction = (info?: ImagePreviewInfo) => {
 	})
 
 	const onDownload = useMemoizedFn(async () => {
-		// 如果是svg，需要转成 png再下载
+		// If it's an SVG, convert to PNG before downloading
 		const isSvg = info?.ext?.ext === "svg" || info?.ext?.ext === "svg+xml"
 		if (isSvg && currentImage) {
 			const png = await convertSvgToPng(currentImage, 2000, 2000)
@@ -126,7 +126,7 @@ const useImageAction = (info?: ImagePreviewInfo) => {
 					sendMessage({
 						type: ConversationMessageType.Text,
 						text: {
-							content: "转超清",
+							content: "Enhance to HD",
 							attachments: info?.fileId
 								? [
 										{

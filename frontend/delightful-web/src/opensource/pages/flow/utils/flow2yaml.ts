@@ -1,7 +1,7 @@
 //@ts-nocheck
 /**
- * JSON转YAML转换工具
- * 将Flow格式的JSON转换为YAML DSL格式
+ * JSON to YAML Conversion Tool
+ * Converts Flow format JSON to YAML DSL format
  */
 
 import yaml from "js-yaml"
@@ -78,9 +78,9 @@ interface FlowDSL {
 }
 
 /**
- * 获取可读的节点类型名称
- * @param flowNodeType Flow节点类型数字
- * @returns 节点类型名称
+ * Get readable node type name
+ * @param flowNodeType Flow node type number
+ * @returns Node type name
  */
 const getNodeTypeName = (flowNodeType: string): string => {
 	switch (flowNodeType) {
@@ -164,9 +164,9 @@ const getNodeTypeName = (flowNodeType: string): string => {
 }
 
 /**
- * 获取流程类型名称
- * @param type Flow类型数字
- * @returns 流程类型名称
+ * Get flow type name
+ * @param type Flow type number
+ * @returns Flow type name
  */
 const getFlowTypeName = (type: number): string => {
 	switch (type) {
@@ -180,16 +180,16 @@ const getFlowTypeName = (type: number): string => {
 }
 
 /**
- * 将Flow全局变量转换为DSL变量数组
- * @param globalVariable Flow全局变量
- * @returns DSL变量数组
+ * Convert Flow global variables to DSL variable array
+ * @param globalVariable Flow global variables
+ * @returns DSL variable array
  */
 const convertGlobalVariables = (globalVariable: any): any[] => {
 	const variables = []
 
 	if (!globalVariable) return variables
 
-	// 处理全局变量
+	// Handle global variables
 	if (globalVariable.variables && Array.isArray(globalVariable.variables)) {
 		globalVariable.variables.forEach((variable: any) => {
 			variables.push({
@@ -205,12 +205,12 @@ const convertGlobalVariables = (globalVariable: any): any[] => {
 }
 
 /**
- * 简化表单结构，大幅减少YAML数据量
- * @param formData 原始表单数据对象
- * @returns 简化后的表单结构
+ * Simplify form structure, significantly reducing YAML data size
+ * @param formData Original form data object
+ * @returns Simplified form structure
  */
 const simplifyFormStructure = (formData: any): any => {
-	// 如果无表单数据或没有结构体，直接返回
+	// If no form data or no structure, return directly
 	if (!formData || !formData.structure) return formData
 
 	const result = {
@@ -218,7 +218,7 @@ const simplifyFormStructure = (formData: any): any => {
 		version: formData.version,
 	}
 
-	// 处理结构体
+	// Process structure
 	if (formData.structure) {
 		result["fields"] = simplifySchema(formData.structure)
 	}
@@ -227,18 +227,18 @@ const simplifyFormStructure = (formData: any): any => {
 }
 
 /**
- * 简化Schema结构，递归处理对象和数组
- * @param schema Schema对象
- * @returns 简化后的字段列表
+ * Simplify Schema structure, recursively process objects and arrays
+ * @param schema Schema object
+ * @returns Simplified field list
  */
 const simplifySchema = (schema: any): any => {
 	if (!schema) return null
 
-	// 处理对象类型
+	// Handle object type
 	if (schema.type === "object" && schema.properties) {
 		const fields = []
 
-		// 处理所有属性
+		// Process all properties
 		for (const [key, prop] of Object.entries(schema.properties)) {
 			if (!prop) continue
 
@@ -247,33 +247,33 @@ const simplifySchema = (schema: any): any => {
 				type: prop.type,
 			}
 
-			// 只保留有值的字段
+			// Only keep fields with values
 			if (prop.title && prop.title !== key) field["title"] = prop.title
 			if (prop.description && prop.description.trim()) field["desc"] = prop.description
 
-			// 处理必填
+			// Handle required fields
 			if (schema.required && schema.required.includes(key)) {
 				field["required"] = true
 			}
 
-			// 处理默认值
+			// Handle default values
 			if (prop.value !== null && prop.value !== undefined) {
 				field["value"] = prop.value
 			}
 
-			// 处理子属性
+			// Handle child properties
 			if (prop.type === "object" && prop.properties) {
 				field["fields"] = simplifySchema(prop)
 			}
 
-			// 处理数组项
+			// Handle array items
 			if (prop.type === "array" && prop.items) {
 				if (prop.items.type === "object" && prop.items.properties) {
 					field["type"] = `array:object`
 					field["fields"] = simplifySchema(prop.items)
 				} else {
 					field["type"] = `array:${prop.items.type}`
-					// 如果数组项有额外属性
+					// If array items have extra properties
 					if (prop.items.title) field["itemTitle"] = prop.items.title
 				}
 			}
@@ -283,7 +283,7 @@ const simplifySchema = (schema: any): any => {
 		return fields
 	}
 
-	// 数组类型
+	// Array type
 	if (schema.type === "array" && schema.items) {
 		if (schema.items.type === "object" && schema.items.properties) {
 			return simplifySchema(schema.items)
@@ -294,9 +294,9 @@ const simplifySchema = (schema: any): any => {
 }
 
 /**
- * 将Flow节点转换为DSL节点
- * @param flowNode Flow节点
- * @returns DSL节点
+ * Convert Flow node to DSL node
+ * @param flowNode Flow node
+ * @returns DSL node
  */
 const convertNode = (flowNode: Node): any => {
 	const nodeType = getNodeTypeName(flowNode.node_type)
@@ -311,9 +311,9 @@ const convertNode = (flowNode: Node): any => {
 		next_nodes: flowNode.next_nodes,
 	}
 
-	// 处理和简化表单结构
+	// Process and simplify form structure
 	if (flowNode.params) {
-		// 简化输入表单
+		// Simplify input form
 		if (flowNode.params.input && flowNode.params.input.form) {
 			result.params.input = {
 				...flowNode.params.input,
@@ -321,7 +321,7 @@ const convertNode = (flowNode: Node): any => {
 			}
 		}
 
-		// 简化输出表单
+		// Simplify output form
 		if (flowNode.params.output && flowNode.params.output.form) {
 			result.params.output = {
 				...flowNode.params.output,
@@ -329,7 +329,7 @@ const convertNode = (flowNode: Node): any => {
 			}
 		}
 
-		// 简化系统输出表单
+		// Simplify system output form
 		if (flowNode.params.system_output && flowNode.params.system_output.form) {
 			result.params.system_output = {
 				...flowNode.params.system_output,
@@ -337,12 +337,12 @@ const convertNode = (flowNode: Node): any => {
 			}
 		}
 
-		// 递归处理分支中的表单
+		// Recursively process forms in branches
 		if (flowNode.params.branches && Array.isArray(flowNode.params.branches)) {
 			result.params.branches = flowNode.params.branches.map((branch) => {
 				const newBranch = { ...branch }
 
-				// 处理分支输入
+				// Handle branch input
 				if (branch.input && branch.input.form) {
 					newBranch.input = {
 						...branch.input,
@@ -350,7 +350,7 @@ const convertNode = (flowNode: Node): any => {
 					}
 				}
 
-				// 处理分支输出
+				// Handle branch output
 				if (branch.output && branch.output.form) {
 					newBranch.output = {
 						...branch.output,
@@ -358,7 +358,7 @@ const convertNode = (flowNode: Node): any => {
 					}
 				}
 
-				// 处理分支系统输出
+				// Handle branch system output
 				if (branch.system_output && branch.system_output.form) {
 					newBranch.system_output = {
 						...branch.system_output,
@@ -366,7 +366,7 @@ const convertNode = (flowNode: Node): any => {
 					}
 				}
 
-				// 处理分支自定义系统输出
+				// Handle branch custom system output
 				if (branch.custom_system_output && branch.custom_system_output.form) {
 					newBranch.custom_system_output = {
 						...branch.custom_system_output,
@@ -383,9 +383,9 @@ const convertNode = (flowNode: Node): any => {
 }
 
 /**
- * 将Flow边转换为DSL边
- * @param flowEdge Flow边
- * @returns DSL边
+ * Convert Flow edge to DSL edge
+ * @param flowEdge Flow edge
+ * @returns DSL edge
  */
 const convertEdge = (flowEdge: Edge): any => {
 	return {
@@ -398,13 +398,13 @@ const convertEdge = (flowEdge: Edge): any => {
 }
 
 /**
- * 将Flow JSON转换为YAML DSL
- * @param flow Flow JSON对象
- * @returns FlowDSL对象
+ * Convert Flow JSON to YAML DSL
+ * @param flow Flow JSON object
+ * @returns FlowDSL object
  */
 export const json2yaml = (flow: Flow): FlowDSL => {
 	try {
-		// 转换基本信息
+		// Convert basic information
 		const dsl: FlowDSL = {
 			flow: {
 				id: flow.id,
@@ -422,82 +422,82 @@ export const json2yaml = (flow: Flow): FlowDSL => {
 
 		return dsl
 	} catch (error) {
-		console.error("转换JSON到YAML失败:", error)
-		throw new Error(`转换JSON到YAML失败: ${error.message}`)
+		console.error("Failed to convert JSON to YAML:", error)
+		throw new Error(`Failed to convert JSON to YAML: ${error.message}`)
 	}
 }
 
 /**
- * 将Flow JSON转换为YAML字符串
- * @param flow Flow JSON对象
- * @returns YAML字符串
+ * Convert Flow JSON to YAML string
+ * @param flow Flow JSON object
+ * @returns YAML string
  */
 export const json2yamlString = (flow: Flow): string => {
 	try {
 		const dsl = json2yaml(flow)
 		return yaml.dump(dsl, { lineWidth: -1, noRefs: true })
 	} catch (error) {
-		console.error("转换JSON到YAML字符串失败:", error)
-		throw new Error(`转换JSON到YAML字符串失败: ${error.message}`)
+		console.error("Failed to convert JSON to YAML string:", error)
+		throw new Error(`Failed to convert JSON to YAML string: ${error.message}`)
 	}
 }
 
 /**
- * 从JSON字符串转换为YAML字符串
- * @param jsonString JSON字符串
- * @returns YAML字符串
+ * Convert from JSON string to YAML string
+ * @param jsonString JSON string
+ * @returns YAML string
  */
 export const jsonStr2yamlString = (jsonString: string): string => {
 	try {
 		const flow = JSON.parse(jsonString) as Flow
 		return json2yamlString(flow)
 	} catch (error) {
-		console.error("转换JSON字符串到YAML字符串失败:", error)
-		throw new Error(`转换JSON字符串到YAML字符串失败: ${error.message}`)
+		console.error("Failed to convert JSON string to YAML string:", error)
+		throw new Error(`Failed to convert JSON string to YAML string: ${error.message}`)
 	}
 }
 
 /**
- * 将单个节点从Flow格式转换为DSL格式
- * @param node Flow格式的节点
- * @returns DSL格式的节点
+ * Convert a single node from Flow format to DSL format
+ * @param node Node in Flow format
+ * @returns Node in DSL format
  */
 export const nodeJson2yaml = (node: Node): any => {
 	try {
 		return convertNode(node)
 	} catch (error) {
-		console.error("转换节点JSON到YAML失败:", error)
-		throw new Error(`转换节点JSON到YAML失败: ${error.message}`)
+		console.error("Failed to convert node JSON to YAML:", error)
+		throw new Error(`Failed to convert node JSON to YAML: ${error.message}`)
 	}
 }
 
 /**
- * 将单个节点从Flow格式转换为YAML字符串
- * @param node Flow格式的节点
- * @returns YAML字符串
+ * Convert a single node from Flow format to YAML string
+ * @param node Node in Flow format
+ * @returns YAML string
  */
 export const nodeJson2yamlString = (node: Node): string => {
 	try {
 		const dslNode = nodeJson2yaml(node)
 		return yaml.dump(dslNode, { lineWidth: -1, noRefs: true })
 	} catch (error) {
-		console.error("转换节点JSON到YAML字符串失败:", error)
-		throw new Error(`转换节点JSON到YAML字符串失败: ${error.message}`)
+		console.error("Failed to convert node JSON to YAML string:", error)
+		throw new Error(`Failed to convert node JSON to YAML string: ${error.message}`)
 	}
 }
 
 /**
- * 从节点JSON字符串转换为节点YAML字符串
- * @param jsonString 表示节点的JSON字符串
- * @returns 节点的YAML字符串
+ * Convert node JSON string to node YAML string
+ * @param jsonString JSON string representing the node
+ * @returns YAML string of the node
  */
 export const nodeJsonStr2yamlString = (jsonString: string): string => {
 	try {
 		const node = JSON.parse(jsonString) as Node
 		return nodeJson2yamlString(node)
 	} catch (error) {
-		console.error("转换节点JSON字符串到YAML字符串失败:", error)
-		throw new Error(`转换节点JSON字符串到YAML字符串失败: ${error.message}`)
+		console.error("Failed to convert node JSON string to YAML string:", error)
+		throw new Error(`Failed to convert node JSON string to YAML string: ${error.message}`)
 	}
 }
 

@@ -9,7 +9,7 @@ import type { HttpClient } from "../core/HttpClient"
 
 export const generateContactApi = (fetch: HttpClient) => ({
 	/**
-	 * 添加好友
+	 * Add friend
 	 * @param friend_id
 	 * @returns
 	 */
@@ -20,7 +20,7 @@ export const generateContactApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取好友列表
+	 * Get friends list
 	 * @param data
 	 * @returns
 	 */
@@ -31,11 +31,11 @@ export const generateContactApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取组织架构
+	 * Get organization structure
 	 * @param data
-	 * @param data.department_id 部门 ID，-1 表示根部门
-	 * @param data.sum_type 1：返回部门直属用户总数 2：返回本部门 + 所有子部门用户总数
-	 * @param data.page_token 分页 token
+	 * @param data.department_id Department ID, -1 represents root department
+	 * @param data.sum_type 1: Return direct users count of department 2: Return users count of this department + all sub-departments
+	 * @param data.page_token Pagination token
 	 * @returns
 	 */
 	getOrganization(data: { department_id?: string; sum_type?: 1 | 2; page_token?: string }) {
@@ -52,7 +52,7 @@ export const generateContactApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取组织架构成员
+	 * Get organization members
 	 * @param data
 	 * @returns
 	 */
@@ -81,7 +81,7 @@ export const generateContactApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 搜索用户
+	 * Search user
 	 * @param data
 	 * @returns
 	 */
@@ -100,7 +100,7 @@ export const generateContactApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 模糊搜索部门列表
+	 * Fuzzy search department list
 	 * @param data
 	 * @returns
 	 */
@@ -124,7 +124,7 @@ export const generateContactApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 根据 IDs 获取所有类型用户信息
+	 * Get all types of user info by IDs
 	 * @param data
 	 * @param init
 	 * @returns
@@ -143,7 +143,7 @@ export const generateContactApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 根据 IDs 获取所有类型会话信息
+	 * Get all types of conversation info by IDs
 	 * @param data
 	 * @returns
 	 */
@@ -155,7 +155,7 @@ export const generateContactApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取用户群组
+	 * Get user groups
 	 * @returns
 	 */
 	getUserGroups(params: { page_token?: string }) {
@@ -171,7 +171,7 @@ export const generateContactApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取部门信息
+	 * Get department info
 	 * @param data
 	 * @returns
 	 */
@@ -182,7 +182,7 @@ export const generateContactApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取用户说明书
+	 * Get user manual
 	 * @param data
 	 * @returns
 	 */
@@ -191,7 +191,7 @@ export const generateContactApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取部门说明书
+	 * Get department document
 	 * @param data
 	 * @returns
 	 */
@@ -202,7 +202,7 @@ export const generateContactApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * @description 获取广场提示词
+	 * @description Get square prompts
 	 */
 	getSquarePrompts() {
 		return fetch.get<SquareData>(genRequestUrl(RequestUrl.getSquarePrompts))

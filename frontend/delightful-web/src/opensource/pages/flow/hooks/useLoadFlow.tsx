@@ -1,5 +1,5 @@
 /**
- * 加载草稿的相关弱提示行为及其状态
+ * Subtle notification behavior and state related to loading drafts
  */
 
 import { useMemoizedFn } from "ahooks"
@@ -13,7 +13,7 @@ import styles from "../index.module.less"
 import btnStyles from "../components/TestFlowButton/index.module.less"
 
 type UseLoadFlowProps = {
-	// 加载最新草稿
+	// Load the latest draft
 	loadLatestDraft: (flowCode: string, extraProps?: Record<string, any>) => Promise<void>
 	isAgent: boolean
 	agent: Bot.Detail
@@ -95,11 +95,11 @@ export default function useLoadFlow({ loadLatestDraft, isAgent, agent, flowId }:
 	})
 
 	const loadConfirmUI = useMemoizedFn((latestDraftList: FlowDraft.Detail[]) => {
-		// agent已经发布过且草稿不为空的情况下
+		// When agent has been published and draft is not empty
 		if (isAgent && latestDraftList?.length > 0 && agent.botVersionEntity) {
 			toastToNotifyMember(latestDraftList)
 		}
-		// 非 agent 且 流程未发布 且 草稿不为空的情况下
+		// When not an agent, flow is unpublished, and draft is not empty
 		if (!isAgent && latestDraftList?.length > 0) {
 			toastToNotifyMember(latestDraftList)
 		}

@@ -26,7 +26,7 @@ import type { HttpClient } from "../core/HttpClient"
 
 export const generateFlowApi = (fetch: HttpClient) => ({
 	/**
-	 * 查询流程列表
+	 * Query flow list
 	 */
 	getFlowList({ type = FlowType.Main, page = 1, pageSize = 100, name }: GetFlowListParams) {
 		return fetch.post<WithPage<DelightfulFlow.Flow[]>>(genRequestUrl(RequestUrl.getFlowList), {
@@ -38,14 +38,14 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 查询流程详情
+	 * Query flow details
 	 */
 	getFlow(flowId: string) {
 		return fetch.get<DelightfulFlow.Flow>(genRequestUrl(RequestUrl.getFlow, { flowId }))
 	},
 
 	/**
-	 * 流程试运行
+	 * Test run flow
 	 */
 	testFlow(flow: DelightfulFlow.Flow & { trigger_config: TriggerConfig }) {
 		return fetch.post<TestResult>(
@@ -55,28 +55,28 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 新增或修改流程基本信息
+	 * Add or update flow basic information
 	 */
 	addOrUpdateFlowBaseInfo(flow: Partial<DelightfulFlow.Flow> & { type?: FlowType }) {
 		return fetch.post<DelightfulFlow.Flow>(genRequestUrl(RequestUrl.addOrUpdateFlowBaseInfo), flow)
 	},
 
 	/**
-	 * 删除流程
+	 * Delete flow
 	 */
 	deleteFlow(flowId: string) {
 		return fetch.delete<null>(genRequestUrl(RequestUrl.deleteFlow, { flowId }))
 	},
 
 	/**
-	 * 保存流程详情
+	 * Save flow details
 	 */
 	saveFlow(flow: DelightfulFlow.Flow) {
 		return fetch.post<null>(genRequestUrl(RequestUrl.saveFlow, { flowId: flow.id! }), flow)
 	},
 
 	/**
-	 * 保存流程为草稿
+	 * Save flow as draft
 	 */
 	saveFlowDraft(draftDetail: FlowDraft.RequestArgs, flowId: string) {
 		return fetch.post<FlowDraft.Detail>(
@@ -86,7 +86,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 查询流程草稿列表
+	 * Query flow draft list
 	 */
 	getFlowDraftList(flowId: string) {
 		return fetch.post<WithPage<FlowDraft.ListItem[]>>(
@@ -95,7 +95,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 查询流程草稿详情
+	 * Query flow draft details
 	 */
 	getFlowDraftDetail(flowId: string, draftId: string) {
 		return fetch.get<FlowDraft.Detail>(
@@ -104,7 +104,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 删除流程草稿
+	 * Delete flow draft
 	 */
 	deleteFlowDraft(flowId: string, draftId: string) {
 		return fetch.delete<FlowDraft.Detail>(
@@ -113,7 +113,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 查询流程版本列表
+	 * Query flow version list
 	 */
 	getFlowPublishList(flowId: string, page = 1, pageSize = 200) {
 		return fetch.post<WithPage<FlowDraft.ListItem[]>>(
@@ -122,7 +122,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 查询流程版本详情
+	 * Query flow version details
 	 */
 	getFlowPublishDetail(flowId: string, versionId: string) {
 		return fetch.get<FlowDraft.Detail>(
@@ -131,7 +131,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 发布流程版本
+	 * Publish flow version
 	 */
 	publishFlow(publishDetail: FlowDraft.RequestArgs, flowId: string) {
 		return fetch.post<FlowDraft.Detail>(
@@ -141,35 +141,35 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 回滚流程版本
+	 * Rollback flow version
 	 */
 	restoreFlow(flowId: string, versionId: string) {
 		return fetch.post<null>(genRequestUrl(RequestUrl.restoreFlow, { flowId, versionId }))
 	},
 
 	/**
-	 * 修改流程启用状态
+	 * Change flow enable status
 	 */
 	changeEnableStatus(id: string) {
 		return fetch.post<null>(genRequestUrl(RequestUrl.changeEnableStatus, { flowId: id }))
 	},
 
 	/**
-	 * 单点调试
+	 * Single node debugging
 	 */
 	testNode(params: TestNodeParams) {
 		return fetch.post<NodeTestingResult>(genRequestUrl(RequestUrl.testNode), params)
 	},
 
 	/**
-	 * 获取可用 LLM 模型
+	 * Get available LLM models
 	 */
 	getLLMModal() {
 		return fetch.get<{ models: LLMModalOption[] }>(genRequestUrl(RequestUrl.getLLMModal))
 	},
 
 	/**
-	 * 给指定工作流添加开放平台应用
+	 * Add open platform application to specified workflow
 	 */
 	bindOpenApiAccount(flowId: string, openPlatformAppIds: string[]) {
 		return fetch.post(genRequestUrl(RequestUrl.bindOpenApiAccount, { flowId }), {
@@ -178,7 +178,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 移除指定工作流的开放平台应用
+	 * Remove open platform application from specified workflow
 	 */
 	removeOpenApiAccount(flowId: string, openPlatformAppIds: string[]) {
 		return fetch.delete(genRequestUrl(RequestUrl.removeOpenApiAccount, { flowId }), {
@@ -187,7 +187,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取指定工作流绑定的开放平台应用列表
+	 * Get list of open platform applications bound to specified workflow
 	 */
 	getOpenApiAccountList(flowId: string, page = 1, pageSize = 100) {
 		return fetch.post<WithPage<PlatformItem[]>>(
@@ -200,7 +200,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取我的开放平台应用列表
+	 * Get my open platform application list
 	 */
 	getOpenPlatformOfMine(page = 1, pageSize = 100) {
 		return fetch.post<WithPage<PlatformItem[]>>(
@@ -213,21 +213,21 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取子流程参数
+	 * Get sub-flow arguments
 	 */
 	getSubFlowArguments(flowId: string) {
 		return fetch.get<SubFlowArgument>(genRequestUrl(RequestUrl.getSubFlowArgument, { flowId }))
 	},
 
 	/**
-	 * 保存 API Key
+	 * Save API Key
 	 */
 	saveApiKey(params: ApiKeyRequestParams, flowId: string) {
 		return fetch.post<ApiKey>(genRequestUrl(RequestUrl.saveApiKey, { flowId }), params)
 	},
 
 	/**
-	 * 获取 API Key 列表
+	 * Get API Key list
 	 */
 	getApiKeyList(flowId: string, page = 1, pageSize = 100) {
 		return fetch.post<WithPage<ApiKey[]>>(genRequestUrl(RequestUrl.getApiKeyList, { flowId }), {
@@ -237,63 +237,63 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取 API Key 详情
+	 * Get API Key details
 	 */
 	getApiKeyDetail(id: string, flowId: string) {
 		return fetch.get<ApiKey>(genRequestUrl(RequestUrl.getApiKeyDetail, { id, flowId }))
 	},
 
 	/**
-	 * 删除 API Key
+	 * Delete API Key
 	 */
 	deleteApiKey(id: string, flowId: string) {
 		return fetch.delete<null>(genRequestUrl(RequestUrl.deleteApiKey, { id, flowId }))
 	},
 
 	/**
-	 * 重建 API Key
+	 * Rebuild API Key
 	 */
 	rebuildApiKey(id: string, flowId: string) {
 		return fetch.post<ApiKey>(genRequestUrl(RequestUrl.rebuildApiKey, { id, flowId }))
 	},
 
 	/**
-	 * 保存 API Key v1
+	 * Save API Key v1
 	 */
 	saveApiKeyV1(params: Flow.ApiKeyRequestParamsV1) {
 		return fetch.post<ApiKey>(genRequestUrl(RequestUrl.saveApiKeyV1), params)
 	},
 
 	/**
-	 * 获取 API Key v1 列表
+	 * Get API Key v1 list
 	 */
 	getApiKeyListV1(params: Pick<Flow.ApiKeyRequestParamsV1, "rel_type" | "rel_code">) {
 		return fetch.post<WithPage<ApiKey[]>>(genRequestUrl(RequestUrl.getApiKeyListV1), params)
 	},
 
 	/**
-	 * 获取 API Key v1 详情
+	 * Get API Key v1 details
 	 */
 	getApiKeyDetailV1(code: string) {
 		return fetch.get<ApiKey>(genRequestUrl(RequestUrl.getApiKeyDetailV1, { code }))
 	},
 
 	/**
-	 * 删除 API Key v1
+	 * Delete API Key v1
 	 */
 	deleteApiKeyV1(code: string) {
 		return fetch.delete<null>(genRequestUrl(RequestUrl.deleteApiKeyV1, { code }))
 	},
 
 	/**
-	 * 重建 API Key v1
+	 * Rebuild API Key v1
 	 */
 	rebuildApiKeyV1(code: string) {
 		return fetch.post<ApiKey>(genRequestUrl(RequestUrl.rebuildApiKeyV1, { code }))
 	},
 
 	/**
-	 * 获取表格列表
+	 * Get sheet list
 	 */
 	getSheets(fileId: string) {
 		return fetch.get<{ sheets: Record<string, Sheet.Detail> }>(
@@ -302,21 +302,21 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取文件列表
+	 * Get file list
 	 */
 	getFiles(params: File.RequestParams) {
 		return fetch.post<WithPage<File.Detail[]>>(genRequestUrl(RequestUrl.getFiles), params)
 	},
 
 	/**
-	 * 获取文件详情
+	 * Get file details
 	 */
 	getFile(fileId: string) {
 		return fetch.get<File.Detail>(genRequestUrl(RequestUrl.getFile, { fileId }))
 	},
 
 	/**
-	 * 获取工具列表
+	 * Get tool list
 	 */
 	getToolList({ page = 1, pageSize = 10, name }: FlowTool.GetToolListParams) {
 		return fetch.post<WithPage<DelightfulFlow.Flow[]>>(genRequestUrl(RequestUrl.getToolList), {
@@ -327,7 +327,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取可用工具列表
+	 * Get useable tool list
 	 */
 	getUseableToolList() {
 		return fetch.post<WithPage<UseableToolSet.Item[]>>(
@@ -336,7 +336,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取可用数据库列表
+	 * Get useable database list
 	 */
 	getUseableDatabaseList() {
 		return fetch.post<WithPage<Knowledge.KnowledgeItem[]>>(
@@ -345,28 +345,28 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取工具详情
+	 * Get tool details
 	 */
 	getToolDetail(id: string) {
 		return fetch.get<FlowTool.Detail>(genRequestUrl(RequestUrl.getTool, { id }))
 	},
 
 	/**
-	 * 删除工具
+	 * Delete tool
 	 */
 	deleteTool(id: string) {
 		return fetch.delete<null>(genRequestUrl(RequestUrl.deleteTool, { id }))
 	},
 
 	/**
-	 * 保存工具
+	 * Save tool
 	 */
 	saveTool(params: FlowTool.SaveToolParams) {
 		return fetch.post<FlowTool.Detail>(genRequestUrl(RequestUrl.saveTool), params)
 	},
 
 	/**
-	 * 获取可用工具
+	 * Get available tools
 	 */
 	getAvailableTools(toolIds: string[]) {
 		return fetch.post<WithPage<DelightfulFlow.Flow[]>>(genRequestUrl(RequestUrl.getAvailableTools), {
@@ -375,7 +375,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取方法数据源
+	 * Get methods data source
 	 */
 	getMethodsDataSource() {
 		return fetch.post<{
@@ -384,7 +384,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取视觉模型
+	 * Get vision models
 	 */
 	getVisionModels(category: string = "vlm") {
 		return fetch.post<Flow.VLMProvider[]>(genRequestUrl(RequestUrl.getVisionModels), {
@@ -392,7 +392,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 		})
 	},
 
-	/** Api Key 调用工具或流程 */
+	/** Call tool or flow with API Key */
 	callToolOrFlow(apiKey: string, params: object) {
 		return fetch.post<any>(genRequestUrl(RequestUrl.callToolOrFlow), {
 			params,
@@ -402,7 +402,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 		})
 	},
 
-	/** 调用Agent进行对话 */
+	/** Call agent for conversation */
 	callAgent(apiKey: string, params: { message: string; conversation_id: string }) {
 		return fetch.post<any>(genRequestUrl(RequestUrl.callAgent), {
 			params,
@@ -413,7 +413,7 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 	},
 
 	/**
-	 * 获取节点模板
+	 * Get node template
 	 */
 	getNodeTemplate(nodeType: string) {
 		return fetch.post<DelightfulFlow.Node>(genRequestUrl(RequestUrl.getNodeTemplate), {
@@ -423,12 +423,12 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 		})
 	},
 
-	/** 创建 / 更新 MCP */
+	/** Create / update MCP */
 	saveMcp(params: Flow.Mcp.SaveParams) {
 		return fetch.post<Flow.Mcp.Detail>(genRequestUrl(RequestUrl.saveMcp), params)
 	},
 
-	/** 获取 MCP 列表 */
+	/** Get MCP list */
 	getMcpList(params: Flow.Mcp.GetListParams) {
 		return fetch.post<WithPage<Flow.Mcp.ListItem[]>>(genRequestUrl(RequestUrl.getMcpList), {
 			page: params.page,
@@ -437,34 +437,34 @@ export const generateFlowApi = (fetch: HttpClient) => ({
 		})
 	},
 
-	/** 获取 MCP 详情 */
+	/** Get MCP details */
 	getMcp(id: string) {
 		return fetch.get<Flow.Mcp.Detail>(genRequestUrl(RequestUrl.getMcp, { id }))
 	},
 
-	/** 删除 MCP */
+	/** Delete MCP */
 	deleteMcp(id: string) {
 		return fetch.delete<null>(genRequestUrl(RequestUrl.deleteMcp, { id }))
 	},
 
-	/** 获取 MCP 的工具列表 */
+	/** Get MCP tool list */
 	getMcpToolList(code: string) {
 		return fetch.post<WithPage<Flow.Mcp.ListItem[]>>(
 			genRequestUrl(RequestUrl.getMcpToolList, { code }),
 		)
 	},
 
-	/** 保存 MCP 的工具（新增，更新，更新版本） */
+	/** Save MCP tool (add, update, update version) */
 	saveMcpTool(params: Flow.Mcp.SaveParams, code: string) {
 		return fetch.post<Flow.Mcp.Detail>(genRequestUrl(RequestUrl.saveMcpTool, { code }), params)
 	},
 
-	/** 删除 MCP 的工具 */
+	/** Delete MCP tool */
 	deleteMcpTool(id: string, code: string) {
 		return fetch.delete<null>(genRequestUrl(RequestUrl.deleteMcpTool, { id, code }))
 	},
 
-	/** 获取 MCP 的工具详情 */
+	/** Get MCP tool details */
 	getMcpToolDetail(id: string, code: string) {
 		return fetch.get<Flow.Mcp.Detail>(genRequestUrl(RequestUrl.getMcpToolDetail, { id, code }))
 	},

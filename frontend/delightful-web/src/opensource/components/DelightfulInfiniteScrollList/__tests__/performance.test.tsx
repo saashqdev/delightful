@@ -224,7 +224,7 @@ describe("DelightfulInfiniteScrollList performance", () => {
 	})
 
 	// Interaction performance: load-more path (skipped due to env limits)
-	test.skip("交互性能：加载更多数据的响应时间", async () => {
+	test.skip("Interaction performance: Response time for loading more data", async () => {
 		const initialSize = 10
 		const mockData = createMockData(initialSize)
 		const mockTrigger = vi
@@ -287,10 +287,10 @@ describe("DelightfulInfiniteScrollList performance", () => {
 		// Pretend 50 checkboxes are preselected
 		const initialChecked = Array.from({ length: 50 }).map((_, i) => ({
 			id: `item-${i}`,
-			name: `测试项 ${i}`,
-			title: `测试项 ${i}`,
+			name: `Test Item ${i}`,
+			title: `Test Item ${i}`,
 			avatar: "",
-			desc: `描述 item-${i}`,
+			desc: `Description item-${i}`,
 			dataType: "user" as StructureItemType,
 		}))
 
@@ -336,7 +336,7 @@ describe("DelightfulInfiniteScrollList performance", () => {
 			name: item.name,
 			title: item.name,
 			avatar: "",
-			desc: `描述 ${item.id}`,
+			desc: `Description ${item.id}`,
 			dataType: "user" as StructureItemType,
 		}))
 

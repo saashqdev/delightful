@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-// 搜索防抖
+// Search debounce
 export const useDebounceSearch = (search: string, delay: number) => {
 	const [debouncedSearch, setDebouncedSearch] = useState(search)
 

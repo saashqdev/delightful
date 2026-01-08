@@ -5,43 +5,43 @@ import { useCurrentNode } from "@delightful/delightful-flow/dist/DelightfulFlow/
 import { useMemoizedFn } from "ahooks"
 
 /**
- * 用于处理 Form.List 删除项的 hook
- * 绕过 Form.List 的 remove 方法，直接操作数组并更新表单值
+ * Hook for handling Form.List item removal
+ * Bypasses Form.List's remove method, directly manipulates array and updates form values
  */
 export default function useFormListRemove() {
 	const { currentNode } = useCurrentNode()
 	const { updateNodeConfig } = useNodeConfigActions()
 
 	/**
-	 * 删除 Form.List 中的项
-	 * @param form Form 实例
-	 * @param fieldName 字段名数组，如 ['filters'] 或 ['knowledge_config', 'knowledge_list']
-	 * @param index 要删除的索引
+	 * Remove item from Form.List
+	 * @param form Form instance
+	 * @param fieldName Field name array, e.g. ['filters'] or ['knowledge_config', 'knowledge_list']
+	 * @param index Index to remove
 	 */
 	const removeFormListItem = useMemoizedFn(
 		(form: FormInstance, fieldName: string[], index: number) => {
-			// 先获取当前字段的值（数组）
+			// First get current field value (array)
 			const currentList = [...(get(form.getFieldsValue(), fieldName) || [])]
 
-			// 移除指定索引的项
+			// Remove item at specified index
 			currentList.splice(index, 1)
 
-			// 创建要设置的表单值对象
+			// Create form value object to be set
 			const fieldValueObj: any = {}
 			set(fieldValueObj, fieldName, currentList)
 
-			// 更新表单值
+			// Update form values
 			form.setFieldsValue(fieldValueObj)
 
-			// 如果有当前节点，则更新节点配置
+			// If current node exists, update node configuration
 			if (currentNode) {
-				// 构建路径数组，添加 params 前缀
+				// Build path array, add params prefix
 				const paramsPath = ["params", ...fieldName]
 
-				// 更新当前节点的参数
+				// Update current node parameters
 				set(currentNode, paramsPath, currentList)
 
-				// 更新节点配置
+				// Update node configuration
 				updateNodeConfig({ ...currentNode })
 			}
 		},

@@ -62,7 +62,7 @@ export const YEAR_OPTION = (t: TFunction) =>
 		}),
 	}))
 
-// 每X类型
+// Every X type
 export const EVERY_OPTION = (t: TFunction) => [
 	{
 		label: t("calendar.newEvent.repeatOptions.day", { ns: "interface" }),

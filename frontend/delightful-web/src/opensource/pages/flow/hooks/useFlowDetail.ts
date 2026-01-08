@@ -1,5 +1,5 @@
 /**
- * 流程相关状态
+ * Flow-related states
  */
 import { useFlowStore } from "@/opensource/stores/flow"
 import type { Bot } from "@/types/bot"
@@ -37,7 +37,7 @@ export default function useFlowDetail({ agent, showFlowIsDraftToast }: FlowDetai
 	const [currentFlow, setCurrentFlow] = useState<DelightfulFlow.Flow>()
 
 	useMount(() => {
-		// 初次加载先重置版本和草稿数据，避免脏数据影响
+		// Reset version and draft data on initial load to avoid dirty data impact
 		updateFlowPublishList([])
 		updateFlowDraftList([])
 	})
@@ -50,7 +50,7 @@ export default function useFlowDetail({ agent, showFlowIsDraftToast }: FlowDetai
 	})
 
 	/**
-	 * 加载最新草稿
+	 * Load the latest draft
 	 */
 	const loadLatestDraft = useMemoizedFn(
 		async (flowCode: string, extraProps?: Record<string, any>) => {
@@ -62,7 +62,7 @@ export default function useFlowDetail({ agent, showFlowIsDraftToast }: FlowDetai
 				setCurrentFlow({
 					...decodeFlow,
 					...extraProps,
-					// 旧数据可能是id也可能是code，因此做一下兼容
+					// Old data might be id or code, so make it compatible
 					id: decodeFlow.code || decodeFlow.id,
 				})
 				showFlowIsDraftToast()
@@ -79,15 +79,15 @@ export default function useFlowDetail({ agent, showFlowIsDraftToast }: FlowDetai
 		return draftData.list
 	})
 
-	// 初始化版本列表和草稿列表
+	// Initialize version list and draft list
 	const initFlowData = useMemoizedFn(async () => {
-		// 如果有值说明初始化过了，不必再走下面代码
+		// If there's a value, it means it's already initialized, no need to proceed
 		if (currentFlow) return
 		if (!isAgent) {
 			initPublishList(flowId)
 			const latestDraftList = await initDraftList(flowId)
 			const data = await FlowApi.getFlow(flowId)
-			// 未发布过，自动加载最新草稿
+			// If never published, automatically load the latest draft
 			if (!data.enabled && latestDraftList.length > 0) {
 				loadLatestDraft(flowId, {
 					enabled: data.enabled,
@@ -100,7 +100,7 @@ export default function useFlowDetail({ agent, showFlowIsDraftToast }: FlowDetai
 		if (agent?.delightfulFlowEntity?.id) {
 			// initPublishList(agent.delightfulFlowEntity.id)
 			const latestDraftList = await initDraftList(agent.delightfulFlowEntity.id)
-			// 当不存在版本时，则说明没有发布过，则加载最新草稿(有草稿的情况下)
+			// When version doesn't exist, it means never published, load the latest draft (if draft exists)
 			if (!agent?.botVersionEntity && latestDraftList.length > 0) {
 				loadLatestDraft(agent.delightfulFlowEntity.id, {
 					user_operation: agent.botEntity.user_operation,

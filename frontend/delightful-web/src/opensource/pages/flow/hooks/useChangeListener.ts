@@ -1,5 +1,5 @@
 /**
- * 节点变更监听
+ * Node change listener
  */
 
 import { useEventEmitter, useMemoizedFn } from "ahooks"
@@ -14,7 +14,7 @@ export default function useChangeListener({ saveDraft }: UseChangeListener) {
 
 	const handleNodeConfigChange = useMemoizedFn(
 		debounce(() => {
-			// console.log("配置变更，触发保存")
+			// console.log("Configuration changed, triggering save")
 			saveDraft()
 		}, 2500),
 	)

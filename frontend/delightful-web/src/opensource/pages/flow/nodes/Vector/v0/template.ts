@@ -1,7 +1,7 @@
 export const v0Template = {
 	node_id: "DELIGHTFUL-FLOW-NODE-674eb95296a950-98353554",
 	debug: false,
-	name: "知识库片段存储",
+	name: "Knowledge Base Fragment Storage",
 	description: "",
 	node_type: 16,
 	meta: [],

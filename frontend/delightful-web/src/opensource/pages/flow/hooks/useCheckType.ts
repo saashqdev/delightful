@@ -1,5 +1,5 @@
 /**
- * 检查当前流程还是Agent
+ * Check if current is Flow or Agent
  */
 
 import { useMemo } from "react"
@@ -11,7 +11,7 @@ export default function useCheckType() {
 	const agentId = id as string
 
 	const isAgent = useMemo(() => {
-		// 暂时通过id的前缀进行判断
+		// Temporarily determine by ID prefix
 		return !agentId.startsWith(DELIGHTFUL_FLOW_ID_PREFIX)
 	}, [agentId])
 

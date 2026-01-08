@@ -83,7 +83,7 @@ export class DelightfulBroadcastChannel {
 				this.dispatchEvent("error", event)
 			}
 
-			// 发送连接事件，通知其他标签页
+			// Send connection event to notify other tabs
 			this.send({
 				type: "system:connected",
 				payload: {

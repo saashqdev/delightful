@@ -13,11 +13,11 @@ import { generateKnowledgeApi } from "./modules/knowledge"
 import { generateSearchApi } from "./modules/search"
 import { generateChatApi } from "./modules/chat"
 
-/** 重置服务 */
+/** Reset Service */
 export const UserApi = generateUserApi(delightfulClient)
 export const CommonApi = generateCommonApi(delightfulClient)
 
-/** Delightful 服务 */
+/** Delightful Service */
 export const AuthApi = generateAuthApi(delightfulClient)
 export const ContactApi = generateContactApi(delightfulClient)
 export const BotApi = generateBotApi(delightfulClient)

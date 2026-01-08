@@ -1,5 +1,5 @@
 /**
- * 实时向后端推需要进行「翻译」的流，相关状态和行为
+ * Real-time streaming to backend for 'translation' processing, related state and behaviors
  */
 
 import { useState } from "react"
@@ -33,7 +33,7 @@ export default function useTranslate({ status, message }: UseTranslateProps) {
 	const [intervalId, setIntervalId] = useState<NodeJS.Timeout>()
 	const { online } = useNetwork()
 
-	// 当前发送识别数据的计数数据
+	// Current count for sending recognition data
 	const [count, setCount, resetCount] = useResetState(0)
 	const countRef = useLatest(count)
 
@@ -64,8 +64,8 @@ export default function useTranslate({ status, message }: UseTranslateProps) {
 
 		if (isRecognize) resetCount()
 
-		// 网络在线并且ws连接正常，就直接推送，否则推到消息队列，等到恢复网络且ws连接正常后再进行消费
-		// FIXME: 暂时使用不到
+		// If network is online and ws connection is normal, push directly; otherwise add to message queue and consume after network and ws connection are restored
+		// FIXME: Currently not in use
 		// @ts-ignore
 		if (online && ChatWebSocket.getWebSocket()?.readyState === WebSocket.OPEN) {
 			MessageService.sendRecordMessage(

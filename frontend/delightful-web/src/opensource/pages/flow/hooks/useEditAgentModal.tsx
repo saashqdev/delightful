@@ -1,5 +1,5 @@
 /**
- * 编辑Agent基础信息的弹层及其相关数据状态
+ * Modal for editing Agent basic information and its related data state
  */
 
 import AddOrUpdateAgent from "@/opensource/pages/explore/components/AddOrUpdateAgent"

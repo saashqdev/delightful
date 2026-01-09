@@ -152,9 +152,9 @@ class DelightfulLLMDomainService
     handlestep:
     1.1 actualbodyidentify
        - displaypropertynamingactualbodyextract,identifyactualbodybetweenclosesystemandproperty
-       - deduceuserhiddenpropertyrequirementand潜inintentiongraph,especiallycloseimplicittimeelement
+       - deduceuserhiddenpropertyrequirementandpotentialinintentiongraph,especiallycloseimplicittimeelement
     1.2 dimensiondecompose
-       - according toidentifyoutactualbodyandrequirement,choosesuitableanalyzedimension,for example:policyinterpret,datavalidate,caseresearch,impactevaluate,technologyprinciple,marketfrontscene,userbody验etc
+       - according toidentifyoutactualbodyandrequirement,choosesuitableanalyzedimension,for example:policyinterpret,datavalidate,caseresearch,impactevaluate,technologyprinciple,marketfrontscene,userbodyverifyetc
     1.3 childquestiongenerate
        - generatejustintersectionquestioncollection(Jaccardsimilardegree<0.25),ensureeachchildquestioncanfromdifferentangledegreeexploreuserrequirement,avoidgeneratepassatwide rangeorsimilarquestion
     
@@ -207,8 +207,8 @@ class DelightfulLLMDomainService
     - todaydayis{date_now}.
     - andnonsearchresult havecontentallanduserquestionclosely relatedclose,youneedcombinequestion,tosearchresultconductdistinguish,filter.
     - toatcolumnraisecategoryquestion(likecolumnraise haveflightinformation),exhaustedquantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcomesource,obtaincompleteinformation.priorityprovideinformationcomplete,mostrelatedclosecolumnraiseitem;likenonrequiredwant,notwantactivetellusersearchresultnotprovidecontent.
-    - toatcreateascategoryquestion(like writing paper),please be sureinjusttextsegmentfallmiddlequotetoshouldreferencecodenumber,for example[citation:3][citation:5],notcanonlyintextchapterendtailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,fillminuteprofitusesearchresultanddrawreloadwantinformation,generatematchuserrequire,very thoughtfuldegree,richhavecreatecapabilityandprofessionalpropertyanswer.youcreateaslengthneedexhaustedmaybeextendlong,toateachonewantpointdiscussionwantspeculateduserintentiongraph,giveoutexhaustedmaybemultipleangledegreereturnanswerwantpoint,and务requiredinformationquantitybig,detailed discussion.
-    - ifreturnanswerverylong,please盡quantitystructureization,minutesegmentfallsummary.ifneedminutepointasanswer,exhaustedquantitycontrolin5pointbyinside,andmergerelatedclosecontent.
+    - toatcreateascategoryquestion(like writing paper),please be sureinjusttextsegmentfallmiddlequotetoshouldreferencecodenumber,for example[citation:3][citation:5],notcanonlyintextchapterendtailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,fillminuteprofitusesearchresultanddrawreloadwantinformation,generatematchuserrequire,very thoughtfuldegree,richhavecreatecapabilityandprofessionalpropertyanswer.youcreateaslengthneedexhaustedmaybeextendlong,toateachonewantpointdiscussionwantspeculateduserintentiongraph,giveoutexhaustedmaybemultipleangledegreereturnanswerwantpoint,andaffairrequiredinformationquantitybig,detailed discussion.
+    - ifreturnanswerverylong,pleaseexhaustquantitystructureization,minutesegmentfallsummary.ifneedminutepointasanswer,exhaustedquantitycontrolin5pointbyinside,andmergerelatedclosecontent.
     - toatobjectivecategoryQ&A,ifquestionanswernonoften simpleshort,canfitwhensupplementonetotwosentencerelatedcloseinformation,byrichcontent.
     - youneedaccording touserrequireandreturnanswercontentchoosesuitable,beautifulreturnanswerformat,ensurecanreadpropertystrong.
     - youreturnanswershouldcomprehensivemultiple aspectsclosewebpagecomereturnanswer,notcanduplicatequoteonewebpage.
@@ -247,7 +247,7 @@ class DelightfulLLMDomainService
     4. **outputrequire**:
        - by JSON formatreturn,eventbytimereverse orderrowcolumn(fromlatetoearly).
        - eacheventcontain "name","time","description" threefield.
-       - ifsearchcontentnotenoughbygenerateevent,returnnullarray `[]`,avoid凭nullfabricate.
+       - ifsearchcontentnotenoughbygenerateevent,returnnullarray `[]`,avoidbased onnullfabricate.
     
     ## outputexample:
     ```json

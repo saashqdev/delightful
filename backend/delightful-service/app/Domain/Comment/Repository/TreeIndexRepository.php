@@ -40,7 +40,7 @@ class TreeIndexRepository
     }
 
     /**
-     * false設現inparent-childlevelclosesystemis1 -> 2 -> 3 -> 4,showinneedin4backsurfaceinsert5,thatwhatneeddo operationasis:
+     * falsesetupinparent-childlevelclosesystemis1 -> 2 -> 3 -> 4,showinneedin4backsurfaceinsert5,thatwhatneeddo operationasis:
      * getto4 haveancestorsectionpoint,thenuse4 haveancestorsectionpointgoupdate5ancestorsectionpoint,thenagaincreateoneitem5 -> 5closesystem.
      * 1->4
      * 2->4

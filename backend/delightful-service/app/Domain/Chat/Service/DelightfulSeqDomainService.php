@@ -337,7 +337,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         // getmessageEntity
         $messageEntity = $this->delightfulMessageRepository->getMessageByDelightfulMessageId($seqEntity->getDelightfulMessageId());
 
-        // onlychatmessageandalreadyreadreturnexecuteonly觸hairflow
+        // onlychatmessageandalreadyreadreturnexecuteonlytouchhairflow
         $messageType = $messageEntity?->getMessageType();
         if ($messageType instanceof ChatMessageType || $seqEntity->canTriggerFlow()) {
             // getusertruename

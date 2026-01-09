@@ -49,7 +49,7 @@ class CheckPermissionAspect extends AbstractAspect
             ExceptionBuilder::throw(PermissionErrorCode::AccessDenied, 'permission.error.access_denied');
         }
 
-        // buildpermissionkey(supportmultiple,任onefullenoughimmediatelypass)
+        // buildpermissionkey(supportmultiple,responsibilityonefullenoughimmediatelypass)
         $permissionKeys = method_exists($permissionAnnotation, 'getPermissionKeys')
             ? $permissionAnnotation->getPermissionKeys()
             : [$permissionAnnotation->getPermissionKey()];

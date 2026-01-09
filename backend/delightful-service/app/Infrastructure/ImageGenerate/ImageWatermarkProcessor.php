@@ -227,7 +227,7 @@ class ImageWatermarkProcessor
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
             $bbox = imagettfbbox($ttfFontSize, 0, $fontFile, $text);
             $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // increase20%securitysidedistance
-            $textHeight = (int) abs($bbox[1] - $bbox[7]); // use绝tovalueensureheightforjust
+            $textHeight = (int) abs($bbox[1] - $bbox[7]); // useabsolutetovalueensureheightforjust
 
             // TTFfieldbodydowndowngrademinute(descender)
             $descender = (int) abs($bbox[1]); // baselinebydowndepartmentminute

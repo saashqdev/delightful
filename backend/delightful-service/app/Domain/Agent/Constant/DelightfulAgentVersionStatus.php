@@ -22,7 +22,7 @@ enum DelightfulAgentVersionStatus: int
     case ENTERPRISE_DISABLED = 8; // disable
 
     // AI Agentpublish (platform)
-    case APP_MARKET_UNLISTED = 9; // notup架
+    case APP_MARKET_UNLISTED = 9; // notupframework
     case APP_MARKET_REVIEW = 10; // reviewmiddle
-    case APP_MARKET_LISTED = 11; // alreadyup架
+    case APP_MARKET_LISTED = 11; // alreadyupframework
 }

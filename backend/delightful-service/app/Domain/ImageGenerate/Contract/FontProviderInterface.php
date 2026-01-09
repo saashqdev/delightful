@@ -16,7 +16,7 @@ interface FontProviderInterface
     /**
      * getTTFfieldbodyfilepath.
      *
-     * @return null|string fieldbodyfile绝topath,iffornullthennot supportedTTFfieldbody
+     * @return null|string fieldbodyfileabsolutetopath,iffornullthennot supportedTTFfieldbody
      */
     public function getFontPath(): ?string;
 

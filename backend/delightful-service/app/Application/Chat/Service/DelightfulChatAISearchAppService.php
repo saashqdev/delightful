@@ -820,7 +820,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     private function getSearchData(array $noRepeatSearchContexts): array
     {
         $searchList = [];
-        foreach ($noRepeatSearchContexts as $search) { // $search alreadyalreadyis切slicebackyuanelement
+        foreach ($noRepeatSearchContexts as $search) { // $search alreadyalreadyisallslicebackyuanelement
             // compatiblehistorydata,key usesmallcamel case
             $searchList[] = [
                 'id' => $search->getId(),
@@ -836,7 +836,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 'language' => $search->getLanguage(),
                 'isNavigational' => $search->isNavigational(),
                 'noCache' => $search->isNoCache(),
-                'detail' => '', // section省streamquantity,givefrontclient pushmessagenotpass detail
+                'detail' => '', // sectionsavestreamquantity,givefrontclient pushmessagenotpass detail
             ];
         }
         return $searchList;

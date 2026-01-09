@@ -54,7 +54,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 // ifisanyitemitemfullenough,thatwhatwillthistime id andalreadyhave id conductmerge
                 $allIds = array_merge($allIds ?? [], $currentIds);
             } else {
-                // ifis haveitemitemfullenough,thatwhatwillthistime id andalreadyhave id conduct交collection
+                // ifis haveitemitemfullenough,thatwhatwillthistime id andalreadyhave id conductexchangecollection
                 $allIds = $allIds === null ? $currentIds : array_intersect($allIds, $currentIds);
             }
         }

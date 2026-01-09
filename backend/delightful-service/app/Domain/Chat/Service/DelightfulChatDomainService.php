@@ -749,7 +749,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                 $this->updateCacheStreamData($cachedStreamMessageKey, $newJsonStreamCachedDTO);
 
                 if ($needUpdateDatabase) {
-                    // 省pointthing,decreasedatamerge,onlyoffrontdatafalllibrary
+                    // savepointthing,decreasedatamerge,onlyoffrontdatafalllibrary
                     $this->updateDatabaseMessageContent($jsonStreamCachedData->getDelightfulMessageId(), $jsonStreamCachedData->getContent());
                 }
                 // prepareWebSocketpushdataandsend
@@ -871,7 +871,7 @@ class DelightfulChatDomainService extends AbstractDomainService
      */
     public function createDelightfulMessageByAppClient(DelightfulMessageEntity $messageDTO, DelightfulConversationEntity $senderConversationEntity): DelightfulMessageEntity
     {
-        // byatdatabasedesignhaveissue,conversationtablenothaverecord user  type,thereforethiswithinneedqueryone遍hairitemsideuserinfo
+        // byatdatabasedesignhaveissue,conversationtablenothaverecord user  type,thereforethiswithinneedqueryoneiteratehairitemsideuserinfo
         // todo conversationtableshouldrecord user  type
         $senderUserEntity = $this->delightfulUserRepository->getUserById($senderConversationEntity->getUserId());
         if ($senderUserEntity === null) {
@@ -915,7 +915,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             if (! $messageStruct instanceof StreamMessageInterface || $messageStruct->getStreamOptions() === null) {
                 ExceptionBuilder::throw(ChatErrorCode::STREAM_MESSAGE_NOT_FOUND);
             }
-            // byatdatabasedesignhaveissue,conversationtablenothaverecord user  type,thereforethiswithinneedqueryone遍hairitemsideuserinfo
+            // byatdatabasedesignhaveissue,conversationtablenothaverecord user  type,thereforethiswithinneedqueryoneiteratehairitemsideuserinfo
             // todo conversationtableshouldrecord user  type
             $senderUserEntity = $this->delightfulUserRepository->getUserById($senderConversationEntity->getUserId());
             if ($senderUserEntity === null) {

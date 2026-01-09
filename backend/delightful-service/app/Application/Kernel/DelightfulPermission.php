@@ -411,7 +411,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 }
                 return $translated;
             }
-            // compatible:ifnotimplement label/translationKey,then退returncommonuse getOperationLabel logic
+            // compatible:ifnotimplement label/translationKey,thenexitreturncommonuse getOperationLabel logic
         }
         return $this->getOperationLabel($operation);
     }

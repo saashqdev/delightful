@@ -13,7 +13,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
- * temporaryo clocknotwhatuse,留whentemplate
+ * temporaryo clocknotwhatuse,keepwhentemplate
  */
 class WebSocketAuthMiddleware implements MiddlewareInterface
 {

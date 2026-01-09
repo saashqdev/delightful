@@ -64,7 +64,7 @@ class AccountEntity extends AbstractEntity
 
     protected ?string $createdAt = null;
 
-    // fortracewhichwithincreateaccountnumber,留downthisconstructfunction
+    // fortracewhichwithincreateaccountnumber,keepdownthisconstructfunction
     public function __construct(array $data = [])
     {
         parent::__construct($data);

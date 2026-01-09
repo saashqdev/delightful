@@ -497,7 +497,7 @@ class DelightfulFlowExecutor
         foreach ($this->nextNodeIds as $nodeId => $nextNodeIds) {
             foreach ($nextNodeIds as $nextNodeId) {
                 if ($nextNodeId === $this->rootId) {
-                    // root sectionpointnotallowhaveparentsectionpoint连line
+                    // root sectionpointnotallowhaveparentsectionpointconnectline
                     continue;
                 }
                 $this->dag->addEdgeByKey((string) $nodeId, (string) $nextNodeId);

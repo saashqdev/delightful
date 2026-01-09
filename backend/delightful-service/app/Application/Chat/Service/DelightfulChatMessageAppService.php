@@ -266,7 +266,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             }
         }
 
-        // todo checkwhetherhavehairmessagepermission(needhavegoodfriendclosesystem,enterpriseclosesystem,collection团closesystem,combineaspartnerclosesystemetc)
+        // todo checkwhetherhavehairmessagepermission(needhavegoodfriendclosesystem,enterpriseclosesystem,collectiongroupclosesystem,combineaspartnerclosesystemetc)
     }
 
     /**

@@ -889,7 +889,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // preparebasicconfiguration
         $config = [
             'agent_name' => 'Magicassistant',
-            'agent_description' => 'Iwillreturnansweryouone切',
+            'agent_description' => 'Iwillreturnansweryouoneall',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
         ];

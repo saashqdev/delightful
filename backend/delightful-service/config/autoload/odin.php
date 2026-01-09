@@ -280,7 +280,7 @@ return [
                     'usage.total_tokens',          // totaltokenquantity
 
                     // requestparameter(rowexceptsensitivecontent)
-                    'args.temperature',            // 温degreeparameter
+                    'args.temperature',            // warmdegreeparameter
                     'args.max_tokens',             // mostbigtokenlimit
                     'args.max_completion_tokens',             // mostbigtokenlimit
                     'args.top_p',                  // Top-pparameter

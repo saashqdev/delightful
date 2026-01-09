@@ -32,7 +32,7 @@ return new class extends Migration {
             $table->tinyInteger('third_gender')->default(0)->comment('employeepropertyother 0-unknown 1-male 2-female');
             $table->string('third_email', 128)->nullable()->default('')->comment('mailbox');
             $table->string('third_mobile', 64)->nullable()->default('')->comment('thethreesideplatformemployeehandmachinenumber');
-            $table->string('third_id_number', 64)->nullable()->default('')->comment('employeebodyshare证');
+            $table->string('third_id_number', 64)->nullable()->default('')->comment('employeebodyshareverify');
             $table->text('third_platform_users_extra')->comment('quotaoutsideinfo');
             $table->index('delightful_user_id', 'delightful_user_id');
             $table->unique(['third_union_id', 'third_platform_type', 'delightful_organization_code'], 'unique_third_id');

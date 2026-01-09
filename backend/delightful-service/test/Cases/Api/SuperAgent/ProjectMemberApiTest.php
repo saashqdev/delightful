@@ -796,7 +796,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $emptyResponse = $this->getCollaborationProjectCreators();
         $this->verifyEmptyCreatorListResponse($emptyResponse);
 
-        // 3. restoreprojectmemberstatus,by免impactbackcontinuetest
+        // 3. restoreprojectmemberstatus,byavoidimpactbackcontinuetest
         $this->switchUserTest1();
         $this->updateMembers($this->projectId);
     }

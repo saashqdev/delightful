@@ -24,7 +24,7 @@ return new class extends Migration {
 
             $table->decimal('creativity', 3, 2)->default(0.5)->comment('createcapabilityparameter');
             $table->integer('max_tokens')->nullable()->comment('mostbigtokencount');
-            $table->decimal('temperature', 3, 2)->nullable()->comment('温degreeparameter');
+            $table->decimal('temperature', 3, 2)->nullable()->comment('warmdegreeparameter');
             $table->integer('vector_size')->default(2048)->comment('toquantitydimensiondegree');
             $table->string('billing_type', 50)->nullable()->comment('billingtype');
             $table->decimal('time_pricing', 10, 4)->nullable()->comment('timepricing');

@@ -87,7 +87,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     break;
                 case TriggerType::OpenChatWindow:
                     $output = $this->getOpenChatWindowOutputTemplate();
-                    // ifhavedown游sectionpoint,thatwhatbetweenseparatortimethennotcanforempty
+                    // ifhavedowntravelsectionpoint,thatwhatbetweenseparatortimethennotcanforempty
                     if (! empty($nextNodes) && ! empty($branch['config'])) {
                         // second
                         $interval = $branch['config']['interval'] ?? 0;
@@ -155,7 +155,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
             $list[] = $branchStructure->toArray();
         }
 
-        // this俩parameternothaveuse
+        // thisbothparameternothaveuse
         $this->node->setInput(null);
         $this->node->setOutput(null);
 

@@ -164,7 +164,7 @@ class ServiceProviderInitializer
                 'id' => '759115881155366912',
                 'name' => 'Volcanoengine',
                 'provider_code' => 'Volcengine',
-                'description' => 'providemultipletypeintelligencecandrawgraphbigmodel,generategraphstylediverse,securitypropertyextremehigh,canwidespreadapplicationeducation,entertainment,officeetc场quantity.',
+                'description' => 'providemultipletypeintelligencecandrawgraphbigmodel,generategraphstylediverse,securitypropertyextremehigh,canwidespreadapplicationeducation,entertainment,officeetcfieldquantity.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/volcengine Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -180,7 +180,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Provides a variety of intelligent drawing models, with diverse image generation styles, extremely high security, and can be widely applied to education, entertainment, office and other scenarios.',
-                        'zh_CN' => 'providemultipletypeintelligencecandrawgraphbigmodel,generategraphstylediverse,securitypropertyextremehigh,canwidespreadapplicationeducation,entertainment,officeetc场quantity.',
+                        'zh_CN' => 'providemultipletypeintelligencecandrawgraphbigmodel,generategraphstylediverse,securitypropertyextremehigh,canwidespreadapplicationeducation,entertainment,officeetcfieldquantity.',
                     ],
                 ]),
                 'remark' => '',

@@ -10,7 +10,7 @@ namespace App\Infrastructure\Util\SSRF;
 class SSRFDefenseOptions
 {
     private array $blackList = [
-        '169.254.169.254',  // 华forcloudyuandata
+        '169.254.169.254',  // splendidforcloudyuandata
         '100.100.100.200',  // prefixwithincloudyuandata
         '100.96.0.96',      // Volcanocloudyuandata
     ];

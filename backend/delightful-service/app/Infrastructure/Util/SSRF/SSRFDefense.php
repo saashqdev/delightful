@@ -170,7 +170,7 @@ class SSRFDefense
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);         // connecttimeout3second
         curl_setopt($ch, CURLOPT_MAXREDIRS, 0);              // not跟随重定to
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);      // verifySSL证书
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);         // verifySSL主机
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);         // verifySSLhost
         try {
             curl_exec($ch);
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);

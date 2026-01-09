@@ -100,7 +100,7 @@ enum NodeType: int
     case TextSplitter = 14;
 
     /*
-     * text嵌入
+     * textembedding
      */
     case TextEmbedding = 15;
 

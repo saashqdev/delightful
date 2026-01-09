@@ -12,12 +12,12 @@ namespace App\Domain\Chat\DTO\Message;
  */
 interface LLMMessageInterface extends TextContentInterface
 {
-    // 推理content
+    // inferencecontent
     public function getReasoningContent(): ?string;
 
     public function setReasoningContent(?string $reasoningContent): static;
 
-    // notcontain推理contentbigmodelresponse
+    // notcontaininferencecontentbigmodelresponse
     public function getContent(): string;
 
     public function setContent(string $content): static;

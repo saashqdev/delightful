@@ -54,7 +54,7 @@ readonly class KnowledgeBaseFragmentSyncSubscriber implements ListenerInterface
         try {
             $knowledgeBaseVectorService->checkCollectionExists($knowledge);
 
-            // if具havetoquantity,thennot重new嵌入
+            // if具havetoquantity,thennot重newembedding
             if (empty($fragment->getVector())) {
                 $fragment->setSyncStatus(KnowledgeSyncStatus::Syncing);
                 $delightfulFlowKnowledgeDomainService->changeSyncStatus($fragment);

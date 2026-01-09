@@ -45,9 +45,9 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         empty($knowledgeBaseEntity->getFragmentConfig()) && $documentEntity->setFragmentConfig($knowledgeBaseEntity->getFragmentConfig());
         empty($documentEntity->getRetrieveConfig()) && $documentEntity->setRetrieveConfig($knowledgeBaseEntity->getRetrieveConfig());
 
-        // 嵌入configurationnotcanedit
+        // embeddingconfigurationnotcanedit
         $documentEntity->setEmbeddingConfig($knowledgeBaseEntity->getEmbeddingConfig());
-        // setdefault嵌入modelandtoquantitydatabase
+        // setdefaultembeddingmodelandtoquantitydatabase
         $documentEntity->setEmbeddingModel($knowledgeBaseEntity->getModel());
         $documentEntity->setVectorDb(VectorStoreDriver::default()->value);
         if (! $documentEntity->getCode()) {

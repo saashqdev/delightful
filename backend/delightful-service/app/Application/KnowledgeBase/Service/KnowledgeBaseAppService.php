@@ -69,7 +69,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
                     $firstEmbeddingModel = $modelGatewayMapper->getEmbeddingModels($dataIsolation)[0] ?? null;
                     $modelId = $firstEmbeddingModel?->getKey();
                 }
-                // update嵌入configurationmodel_id
+                // updateembeddingconfigurationmodel_id
                 $embeddingConfig = $delightfulFlowKnowledgeEntity->getEmbeddingConfig();
                 $embeddingConfig['model_id'] = $modelId;
                 $delightfulFlowKnowledgeEntity->setEmbeddingConfig($embeddingConfig);
@@ -84,7 +84,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
 
         $modelName = $delightfulFlowKnowledgeEntity->getModel();
         $delightfulFlowKnowledgeEntity->setForceCreateCode(Code::Knowledge->gen());
-        // createknowledge basefront,先to嵌入modelconduct连通propertytest
+        // createknowledge basefront,先toembeddingmodelconduct连通propertytest
         try {
             $embeddingModel = di(ModelGatewayMapper::class)->getEmbeddingModelProxy($dataIsolation, $delightfulFlowKnowledgeEntity->getModel());
             $modelName = $embeddingModel->getModelName();

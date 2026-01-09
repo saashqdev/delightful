@@ -36,11 +36,11 @@ return new class extends Migration {
             $table->unsignedBigInteger('word_count')->default(0)->comment('word countstatistics');
 
             // configurationinfo
-            $table->string('embedding_model', 255)->comment('嵌入model');
+            $table->string('embedding_model', 255)->comment('embeddingmodel');
             $table->string('vector_db', 255)->comment('toquantitydatabase');
             $table->json('retrieve_config')->nullable()->comment('retrieveconfiguration');
             $table->json('fragment_config')->nullable()->comment('minutesegmentconfiguration');
-            $table->json('embedding_config')->nullable()->comment('嵌入configuration');
+            $table->json('embedding_config')->nullable()->comment('embeddingconfiguration');
             $table->json('vector_db_config')->nullable()->comment('toquantitydatabaseconfiguration');
 
             // 操asrecord

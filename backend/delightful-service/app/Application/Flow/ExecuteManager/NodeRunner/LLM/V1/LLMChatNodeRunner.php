@@ -250,7 +250,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
      * @param Agent $agent proxyobject
      * @param VertexResult $vertexResult sectionpointexecuteresult
      * @param ExecutionData $executionData executedata
-     * @return array [推理text, responsetext]
+     * @return array [inferencetext, responsetext]
      */
     private function executeAgent(Agent $agent, VertexResult $vertexResult, ExecutionData $executionData): array
     {

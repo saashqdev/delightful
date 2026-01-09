@@ -29,11 +29,11 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property int $sync_status syncstatus
  * @property int $sync_times synccount
  * @property string $sync_status_message syncstatusmessage
- * @property string $embedding_model 嵌入model
+ * @property string $embedding_model embeddingmodel
  * @property string $vector_db toquantitydatabase
  * @property array $retrieve_config retrieveconfiguration
  * @property array $fragment_config slicesegmentconfiguration
- * @property array $embedding_config 嵌入configuration
+ * @property array $embedding_config embeddingconfiguration
  * @property array $vector_db_config toquantitydatabaseconfiguration
  * @property string $created_uid create者UID
  * @property string $updated_uid update者UID

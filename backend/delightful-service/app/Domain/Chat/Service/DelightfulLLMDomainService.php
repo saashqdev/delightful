@@ -186,8 +186,8 @@ class DelightfulLLMDomainService
       "Z领域典型application",  // application/案例category
       "closeatABfinger标",    // finger标/propertycategory
       "导致Mhair生mainreasonis什么?", // reason/机制category
-      "什么isN?it核core特征is什么?", // definition/解释category
-      "notcomefiveyearP领域hair展trendis什么?", // trend/预测category
+      "什么isN?it核corefeatureis什么?", // definition/解释category
+      "notcomefiveyearP领域hair展trendis什么?", // trend/predictioncategory
       "针toQquestion,have哪thesecanlineresolvesolution?" // resolvesolution/suggestioncategory
     ]
     

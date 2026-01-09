@@ -103,7 +103,7 @@ abstract class AbstractKnowledgeNodeRunner extends NodeRunner
 
         $knowledgeBaseDataIsolation = KnowledgeBaseDataIsolation::create($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId(), $dataIsolation->getDelightfulId());
         if ($create && ! $knowledgeDomainService->exist($knowledgeBaseDataIsolation, $knowledgeEntity->getForceCreateCode())) {
-            // select合适嵌入andtoquantity
+            // select合适embeddingandtoquantity
             $knowledgeEntity->setModel($knowledgeEntity->getEmbeddingConfig()['model_id'] ?? EmbeddingGenerator::defaultModel());
             $knowledgeEntity->setVectorDB(VectorStoreDriver::default()->value);
             $knowledgeDomainService->save($knowledgeBaseDataIsolation, $knowledgeEntity);

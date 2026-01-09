@@ -33,8 +33,8 @@ class SSRFUtil
      * getSSRF防御securitylink.
      *
      * @param string $url needcheckURL
-     * @param array $blackList blacklistIPor域名
-     * @param array $whiteList 白名singleIPor域名
+     * @param array $blackList blacklistIPordomain
+     * @param array $whiteList 白名singleIPordomain
      * @param array $allowProtocols allowagreement
      * @param bool $replaceIp whetherreplaceforIPaccess
      * @param bool $allowRedirect whetherallow重定to
@@ -65,8 +65,8 @@ class SSRFUtil
      * checkURLwhethersecurity(not抛exception,returnbooleanvalue).
      *
      * @param string $url needcheckURL
-     * @param array $blackList blacklistIPor域名
-     * @param array $whiteList 白名singleIPor域名
+     * @param array $blackList blacklistIPordomain
+     * @param array $whiteList 白名singleIPordomain
      * @param array $allowProtocols allowagreement
      * @param bool $replaceIp whetherreplaceforIPaccess
      * @param bool $allowRedirect whetherallow重定to

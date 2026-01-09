@@ -112,7 +112,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * vlm 连通propertytest. llm/嵌入in app layer.
+     * vlm 连通propertytest. llm/embeddingin app layer.
      * @throws Exception
      */
     public function vlmConnectivityTest(string $serviceProviderConfigId, string $modelVersion, string $organizationCode): ConnectResponse

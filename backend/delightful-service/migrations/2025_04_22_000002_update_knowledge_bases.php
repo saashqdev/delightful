@@ -21,7 +21,7 @@ return new class extends Migration {
                 $table->string('fragment_config', 2000)->nullable()->comment('minutesegmentconfiguration');
             }
             if (! Schema::hasColumn('delightful_flow_knowledge', 'embedding_config')) {
-                $table->string('embedding_config', 2000)->nullable()->comment('嵌入configuration');
+                $table->string('embedding_config', 2000)->nullable()->comment('embeddingconfiguration');
             }
             if (! Schema::hasColumn('delightful_flow_knowledge', 'is_draft')) {
                 $table->tinyInteger('is_draft')->default(0)->comment('whetherfordraft');

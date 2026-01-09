@@ -10,6 +10,6 @@ namespace App\Domain\Provider\Entity\ValueObject;
 enum NaturalLanguageProcessing: string
 {
     case DEFAULT = 'default';
-    case EMBEDDING = 'embedding'; // 嵌入
+    case EMBEDDING = 'embedding'; // embedding
     case LLM = 'llm'; // biglanguage
 }

@@ -169,7 +169,7 @@ JSON,
             "reasoning": {
                 "type": "string",
                 "key": "reasoning",
-                "title": "bigmodel推理",
+                "title": "bigmodelinference",
                 "description": "",
                 "items": null,
                 "properties": null,

@@ -107,7 +107,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     {
         $departments = $this->getSubDepartmentsByLevelCache($level, $organizationCode, $depth, $size, $offset);
         $delightfulDepartmentEntities = $this->getDepartmentsEntity($departments);
-        // downonelevel子departmenthavenotcan预测quantity,thereforeas long asreturnquantityandlimitone致,then认forhavedownone页
+        // downonelevel子departmenthavenotcanpredictionquantity,thereforeas long asreturnquantityandlimitone致,then认forhavedownone页
         $hasMore = count($delightfulDepartmentEntities) === $size;
         $pageToken = $hasMore ? (string) ($offset + $size) : '';
         return new DepartmentsPageResponseDTO([

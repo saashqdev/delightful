@@ -13,7 +13,7 @@ enum ModelType: int
     case IMAGE_TO_IMAGE = 1; // graph生graph
     case IMAGE_ENHANCE = 2; // imageenhance
     case LLM = 3; // bigmodel
-    case EMBEDDING = 4; // 嵌入
+    case EMBEDDING = 4; // embedding
 
     public function label(): string
     {
@@ -22,7 +22,7 @@ enum ModelType: int
             self::IMAGE_TO_IMAGE => 'graph生graph',
             self::IMAGE_ENHANCE => 'imageenhance',
             self::LLM => 'bigmodel',
-            self::EMBEDDING => '嵌入',
+            self::EMBEDDING => 'embedding',
         };
     }
 

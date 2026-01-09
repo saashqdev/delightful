@@ -44,7 +44,7 @@ class EndpointRequestDTO extends AbstractDTO
     protected ?string $lastSelectedEndpointId = null;
 
     /**
-     * 负载均衡type.
+     * load balancingtype.
      */
     protected LoadBalancingType $balancingType = LoadBalancingType::RANDOM;
 

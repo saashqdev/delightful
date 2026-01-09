@@ -55,7 +55,7 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * get嵌入providequotientcolumntable.
+     * getembeddingprovidequotientcolumntable.
      * @return array<ProviderConfigModelsDTO>
      */
     public function getEmbeddingProviderList(): array

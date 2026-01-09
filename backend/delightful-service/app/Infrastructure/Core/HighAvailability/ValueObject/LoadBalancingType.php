@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\HighAvailability\ValueObject;
 
 /**
- * 负载均衡strategytype枚举.
+ * load balancingstrategytype枚举.
  */
 enum LoadBalancingType: int
 {
@@ -33,7 +33,7 @@ enum LoadBalancingType: int
     case HASH = 4;
 
     /**
-     * get负载均衡typedescriptiontext.
+     * getload balancingtypedescriptiontext.
      *
      * @return string descriptiontext
      */
@@ -48,7 +48,7 @@ enum LoadBalancingType: int
     }
 
     /**
-     * checkcurrent负载均衡typewhethersupportweight.
+     * checkcurrentload balancingtypewhethersupportweight.
      *
      * @return bool whethersupportweight
      */
@@ -58,9 +58,9 @@ enum LoadBalancingType: int
     }
 
     /**
-     * get所havecanuse负载均衡type.
+     * get所havecanuseload balancingtype.
      *
-     * @return array<LoadBalancingType> 负载均衡typearray
+     * @return array<LoadBalancingType> load balancingtypearray
      */
     public static function getAvailableTypes(): array
     {

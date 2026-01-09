@@ -29,7 +29,7 @@ class MiscEmbeddingModel extends OpenAIModel
      */
     public function embeddings(array|string $input, ?string $encoding_format = 'float', ?string $user = null, array $businessParams = []): EmbeddingResponse
     {
-        // checkmodelwhethersupport嵌入feature
+        // checkmodelwhethersupportembeddingfeature
         $this->checkEmbeddingSupport();
 
         $client = $this->getClient();

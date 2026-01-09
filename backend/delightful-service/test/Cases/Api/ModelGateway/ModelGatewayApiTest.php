@@ -159,7 +159,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
      */
     public function testEmbeddings(): void
     {
-        // constructtoquantity嵌入requestparameter
+        // constructtoquantityembeddingrequestparameter
         $requestData = [
             'model' => self::DEFAULT_MODEL,
             'input' => 'thisisoneuseattesttext',

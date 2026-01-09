@@ -105,7 +105,7 @@ class ChatMemory implements MemoryPersistenceInterface
         $messageIds = [];
 
         foreach ($clientSeq as $seqResponseDTO) {
-            // cardinfoonly取bigmodelreturn,bigmodelreturn特征have type = 1, parent_id = 0
+            // cardinfoonly取bigmodelreturn,bigmodelreturnfeaturehave type = 1, parent_id = 0
             if ($seqResponseDTO->getSeq()?->getMessage()?->getContent() instanceof AggregateAISearchCardMessage) {
                 /** @var AggregateAISearchCardMessage $aggregateAISearchCardMessage */
                 $aggregateAISearchCardMessage = $seqResponseDTO->getSeq()?->getMessage()?->getContent();

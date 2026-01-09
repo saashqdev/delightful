@@ -45,7 +45,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 保存organization管理员.
+     * saveorganization管理员.
      */
     public function save(DataIsolation $dataIsolation, OrganizationAdminEntity $savingOrganizationAdminEntity): OrganizationAdminEntity
     {
@@ -97,7 +97,7 @@ class OrganizationAdminDomainService
     {
         // 在deleteorganization管理员record之前，先移除其在permission系统中的 role_user 关联
         try {
-            // createpermission隔离object，用于操作角色service
+            // createpermission隔离object，用于操作roleservice
             $permissionIsolation = PermissionDataIsolation::create(
                 $dataIsolation->getCurrentOrganizationCode(),
                 $dataIsolation->getCurrentUserId() ?? ''
@@ -152,7 +152,7 @@ class OrganizationAdminDomainService
         // 授予organization管理员实体
         $organizationAdmin = $this->organizationAdminRepository->grant($dataIsolation, $userId, $grantorUserId, $remarks, $isOrganizationCreator);
 
-        // synccreate / updateorganization管理员角色
+        // synccreate / updateorganization管理员role
         try {
             $permissionIsolation = PermissionDataIsolation::create(
                 $dataIsolation->getCurrentOrganizationCode(),
@@ -188,7 +188,7 @@ class OrganizationAdminDomainService
 
         $this->organizationAdminRepository->revoke($dataIsolation, $userId);
 
-        // sync移除organization管理员角色
+        // sync移除organization管理员role
         try {
             $permissionIsolation = PermissionDataIsolation::create(
                 $dataIsolation->getCurrentOrganizationCode(),
@@ -238,7 +238,7 @@ class OrganizationAdminDomainService
             $newCreator = $this->grant($dataIsolation, $newCreatorUserId, $operatorUserId, '转让organizationcreate人身份时自动授予管理员permission');
         }
 
-        // 取消当前create人的create人身份
+        // cancel当前create人的create人身份
         $currentCreator->unmarkAsOrganizationCreator();
         $currentCreator->prepareForModification();
         $this->organizationAdminRepository->save($dataIsolation, $currentCreator);

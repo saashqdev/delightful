@@ -222,8 +222,8 @@ abstract class NodeRunner implements NodeRunnerInterface
     abstract protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void;
 
     /**
-     * todo 这里暂不implement重复上传的issue，均当做新文件上传
-     * record流程所产生的文件，均会同时上传到云端，后续节点需要use时从执行流程数据中优先匹配.
+     * todo 这里暂不implement重复upload的issue，均当做新fileupload
+     * recordprocess所产生的file，均会同时upload到云端，后续节点需要use时从执行process数据中优先匹配.
      * @return AbstractAttachment[]
      * @throws SSRFException
      */

@@ -18,6 +18,6 @@ enum InstructionComponentType: int
     // 文本类型
     case Text = 3;
 
-    // 状态类型
+    // status类型
     case Status = 4;
 }

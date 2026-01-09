@@ -210,10 +210,10 @@ class VoiceMessage extends FileMessage implements TextContentInterface
         $container = ApplicationContext::getContainer();
         $speechClient = $container->get(VolcengineStandardClient::class);
 
-        // buildFlash语音识别请求
+        // buildFlashvoice识别请求
         $submitDTO = new FlashSpeechSubmitDTO();
 
-        // setting音频information
+        // settingaudioinformation
         $audioDTO = new SpeechAudioDTO([
             'url' => $fileUrl,
         ]);
@@ -227,7 +227,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
         $submitDTO->setUser($userDTO);
         $submitDTO->setRequest(['model_name' => 'bigmodel']);
 
-        // 调用Flash语音识别并get响应
+        // 调用Flashvoice识别并get响应
         $flashResponse = $speechClient->submitFlashTask($submitDTO);
 
         // If response contains audio duration info, set it to current object (convert to seconds)
@@ -255,7 +255,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
             $chatFileRepository = $container->get(DelightfulChatFileRepositoryInterface::class);
             $cloudFileRepository = $container->get(CloudFileRepositoryInterface::class);
 
-            // get文件实体
+            // getfile实体
             $fileEntities = $chatFileRepository->getChatFileByIds([$fileId]);
             if (empty($fileEntities)) {
                 return '';

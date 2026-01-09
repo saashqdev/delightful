@@ -91,7 +91,7 @@ class BeDelightfulChatManager
 
         // 2. 生成一份大modelcall工具可阅读的description
         $description = <<<'MARKDOWN'
-call麦吉 AI 助理进行对话
+call麦吉 AI 助理进行conversation
 
 可用的 AI 助理list：
 
@@ -122,7 +122,7 @@ MARKDOWN;
         $usageInstructions = <<<'MARKDOWN'
 use说明：
 • 必须提供 agent_id 和 message parameter
-• conversation_id 用于保持对话连续性，相同ID的message会共享上下文
+• conversation_id 用于保持conversation连续性，相同ID的message会共享上下文
 
 MARKDOWN;
 

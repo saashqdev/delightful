@@ -123,7 +123,7 @@ readonly class LongTermMemoryDomainService
                 // 批量query记忆
                 $memories = $this->repository->findByIds($memoryIds);
 
-                // 批量接受记忆建议：将pending_content移动到content，设置status为已接受，启用记忆
+                // 批量接受记忆建议：将pending_content移动到content，settingstatus为已接受，启用记忆
                 foreach ($memories as $memory) {
                     // 如果有pending_content，则将其移动到content
                     if ($memory->getPendingContent() !== null) {
@@ -133,7 +133,7 @@ readonly class LongTermMemoryDomainService
                         $memory->setPendingContent(null);
                     }
 
-                    // 设置status为已生效
+                    // settingstatus为已生效
                     $memory->setStatus(MemoryStatus::ACTIVE);
 
                     // 启用记忆
@@ -145,7 +145,7 @@ readonly class LongTermMemoryDomainService
                     ExceptionBuilder::throw(LongTermMemoryErrorCode::UPDATE_FAILED);
                 }
             } elseif ($action === MemoryOperationAction::REJECT) {
-                // 批量拒绝记忆建议：according to记忆status决定删除还是清nullpending_content
+                // 批量拒绝记忆建议：according to记忆status决定delete还是清nullpending_content
                 $memories = $this->repository->findByIds($memoryIds);
 
                 $memoriesToDelete = [];
@@ -155,27 +155,27 @@ readonly class LongTermMemoryDomainService
                     $content = $memory->getContent();
                     $pendingContent = $memory->getPendingContent();
 
-                    // 如果content为null且PendingContent不为null，直接删除记忆
+                    // 如果content为null且PendingContent不为null，直接delete记忆
                     if (empty($content) && ! empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
-                    // 如果content和PendingContent都不为null，则清nullPendingContent即可，不要删除记忆
+                    // 如果content和PendingContent都不为null，则清nullPendingContent即可，不要delete记忆
                     elseif (! empty($content) && ! empty($pendingContent)) {
                         $memory->setPendingContent(null);
                         $memory->setStatus(MemoryStatus::ACTIVE);
                         $memoriesToUpdate[] = $memory;
                     }
-                    // 如果content不为null但PendingContent为null，也直接删除记忆（原有逻辑保持）
+                    // 如果content不为null但PendingContent为null，也直接delete记忆（原有逻辑保持）
                     elseif (! empty($content) && empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
-                    // 如果content为null且PendingContent也为null，直接删除记忆（原有逻辑保持）
+                    // 如果content为null且PendingContent也为null，直接delete记忆（原有逻辑保持）
                     elseif (empty($content) && empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
                 }
 
-                // 批量删除需要删除的记忆
+                // 批量delete需要delete的记忆
                 if (! empty($memoriesToDelete) && ! $this->repository->deleteBatch($memoriesToDelete)) {
                     ExceptionBuilder::throw(LongTermMemoryErrorCode::DELETION_FAILED);
                 }
@@ -368,12 +368,12 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * according to项目ID列表批量删除记忆.
+     * according to项目ID列表批量delete记忆.
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
      * @param array $projectIds 项目ID列表
-     * @return int 删除的记录数量
+     * @return int delete的记录数量
      */
     public function deleteMemoriesByProjectIds(string $orgId, string $appId, string $userId, array $projectIds): int
     {
@@ -387,12 +387,12 @@ readonly class LongTermMemoryDomainService
             return 0;
         }
 
-        // 一条SQL批量删除
+        // 一条SQL批量delete
         return $this->repository->deleteByProjectIds($orgId, $appId, $userId, $validProjectIds);
     }
 
     /**
-     * 获取user的有效记忆并build提示词string.
+     * 获取user的有效记忆并buildhint词string.
      */
     public function getEffectiveMemoriesForPrompt(string $orgId, string $appId, string $userId, ?string $projectId, int $maxLength = 4000): string
     {
@@ -441,7 +441,7 @@ readonly class LongTermMemoryDomainService
         $memoryIds = array_map(static fn ($memory) => $memory->getId(), $selectedMemories);
         $this->accessMemories($memoryIds);
 
-        // build记忆提示词string
+        // build记忆hint词string
         if (empty($selectedMemories)) {
             return '';
         }
@@ -460,7 +460,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 获取记忆statistics信息.
+     * 获取记忆statisticsinfo.
      */
     public function getMemoryStats(string $orgId, string $appId, string $userId): array
     {
@@ -682,7 +682,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 更新message内容，设置记忆操作信息.
+     * 更新message内容，setting记忆操作info.
      */
     private function updateMessageWithMemoryOperation(string $delightfulMessageId, MemoryOperationAction $action, array $memoryIds): void
     {
@@ -704,7 +704,7 @@ readonly class LongTermMemoryDomainService
                 return;
             }
 
-            // 设置 MemoryOperation
+            // setting MemoryOperation
             $superAgentMessage->setMemoryOperation([
                 'action' => $action->value,
                 'memory_id' => $memoryIds[0] ?? null,
@@ -715,7 +715,7 @@ readonly class LongTermMemoryDomainService
             $updatedContent = $superAgentMessage->toArray();
             $this->messageRepository->updateMessageContent($delightfulMessageId, $updatedContent);
         } catch (Throwable $e) {
-            // 静默handle更新fail，不影响主要流程
+            // 静默handle更新fail，不影响主要process
             $this->logger->warning('Failed to update message with memory operation', [
                 'delightful_message_id' => $delightfulMessageId,
                 'action' => $action->value,

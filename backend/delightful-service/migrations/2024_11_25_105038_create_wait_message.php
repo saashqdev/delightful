@@ -21,8 +21,8 @@ return new class extends Migration {
             $table->string('origin_conversation_id', 80)->comment('原始conversationID');
             $table->string('message_id', 80)->comment('messageID');
             $table->string('wait_node_id', 80)->comment('等待节点ID');
-            $table->string('flow_code', 80)->comment('流程编码');
-            $table->string('flow_version', 80)->comment('流程version');
+            $table->string('flow_code', 80)->comment('process编码');
+            $table->string('flow_version', 80)->comment('processversion');
             $table->integer('timeout')->default(0)->comment('超时时间戳');
             $table->boolean('handled')->default(false)->comment('是否已处理');
             $table->json('persistent_data')->nullable()->comment('持久化data');

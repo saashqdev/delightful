@@ -125,7 +125,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * get提示管理器实例.
+     * gethint管理器实例.
      */
     public function getPromptManager(): MCPPromptManager
     {
@@ -133,7 +133,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * set提示管理器实例.
+     * sethint管理器实例.
      */
     public function setPromptManager(MCPPromptManager $promptManager): self
     {

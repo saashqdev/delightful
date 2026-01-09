@@ -23,7 +23,7 @@ class DelightfulFlowTriggerTestcaseDomainService extends AbstractDomainService
     }
 
     /**
-     * 保存测试集.
+     * savetest集.
      */
     public function save(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $savingDelightfulFlowTriggerTestcaseEntity): DelightfulFlowTriggerTestcaseEntity
     {
@@ -44,7 +44,7 @@ class DelightfulFlowTriggerTestcaseDomainService extends AbstractDomainService
     }
 
     /**
-     * query测试集.
+     * querytest集.
      * @return array{total: int, list: array<DelightfulFlowTriggerTestcaseEntity>}
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowTriggerTestcaseQuery $query, Page $page): array
@@ -53,7 +53,7 @@ class DelightfulFlowTriggerTestcaseDomainService extends AbstractDomainService
     }
 
     /**
-     * delete测试集.
+     * deletetest集.
      */
     public function remove(FlowDataIsolation $dataIsolation, DelightfulFlowTriggerTestcaseEntity $delightfulFlowTriggerTestcaseEntity): void
     {
@@ -61,7 +61,7 @@ class DelightfulFlowTriggerTestcaseDomainService extends AbstractDomainService
     }
 
     /**
-     * get测试集详情.
+     * gettest集详情.
      */
     public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $testcaseCode): DelightfulFlowTriggerTestcaseEntity
     {

@@ -16,7 +16,7 @@ enum NodeType: int
 {
     /*
      * Start Node
-     * 用作触发器。窗口打开时、有新message时、定时;parametercall（仅子流程可用）
+     * 用作触发器。窗口打开时、有新message时、定时;parametercall（仅子process可用）
      */
     case Start = 1;
 
@@ -28,7 +28,7 @@ enum NodeType: int
 
     /*
      * Reply Message
-     * 回复message节点
+     * replymessage节点
      */
     case ReplyMessage = 3;
 
@@ -61,7 +61,7 @@ enum NodeType: int
 
     /*
      * Loader
-     * 数据加载。来源：向量database、文件、网络
+     * 数据加载。来源：向量database、file、网络
      */
     case Loader = 8;
 
@@ -78,7 +78,7 @@ enum NodeType: int
     case Http = 10;
 
     /*
-     * 子流程
+     * 子process
      */
     case Sub = 11;
 
@@ -190,7 +190,7 @@ enum NodeType: int
     case LoopStop = 32;
 
     /**
-     * Excel 文件加载器.
+     * Excel file加载器.
      */
     case ExcelLoader = 51;
 
@@ -205,7 +205,7 @@ enum NodeType: int
     case ImageGenerate = 53;
 
     /**
-     * create群聊.
+     * creategroup chat.
      */
     case CreateGroup = 54;
 }

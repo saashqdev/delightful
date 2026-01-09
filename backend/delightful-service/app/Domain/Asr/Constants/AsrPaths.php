@@ -9,7 +9,7 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR 路径常量
- * 统一管理 ASR 相关的目录和文件路径.
+ * 统一管理 ASR 相关的目录和file路径.
  */
 class AsrPaths
 {
@@ -31,7 +31,7 @@ class AsrPaths
     /**
      * 生成隐藏目录相对路径.
      *
-     * @param string $taskKey 任务键
+     * @param string $taskKey task键
      * @return string 格式：.asr_recordings/{task_key}
      */
     public static function getHiddenDirPath(string $taskKey): string

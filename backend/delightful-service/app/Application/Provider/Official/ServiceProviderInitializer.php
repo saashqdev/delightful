@@ -112,7 +112,7 @@ class ServiceProviderInitializer
                 'id' => '759109912413282304',
                 'name' => 'Microsoft Azure',
                 'provider_code' => 'MicrosoftAzure',
-                'description' => 'Azure 提供多种先进的AI模型、includeGPT-3.5和最新的GPT-4系列、支持多种数据type和复杂任务，致力于安全、可靠和可持续的AI解决方案,',
+                'description' => 'Azure 提供多种先进的AI模型、includeGPT-3.5和最新的GPT-4系列、支持多种数据type和复杂task，致力于安全、可靠和可持续的AIresolve方案,',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/azure Avatars.png',
                 'provider_type' => 0, // Normal
                 'category' => 'llm',
@@ -128,7 +128,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Azure provides a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, committed to safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure 提供多种先进的AI模型、includeGPT-3.5和最新的GPT-4系列、支持多种数据type和复杂任务，致力于安全、可靠和可持续的AI解决方案,',
+                        'zh_CN' => 'Azure 提供多种先进的AI模型、includeGPT-3.5和最新的GPT-4系列、支持多种数据type和复杂task，致力于安全、可靠和可持续的AIresolve方案,',
                     ],
                 ]),
                 'remark' => '',
@@ -138,7 +138,7 @@ class ServiceProviderInitializer
                 'id' => '759110465734258688',
                 'name' => '火山引擎',
                 'provider_code' => 'Volcengine',
-                'description' => '字节跳动旗下的云服务平台，有自主研发的豆包大模型系列。涵盖豆包通用模型 Pro、lite，具备不同文本handle和综合能力，还有角色扮演、语音合成等多种模型。',
+                'description' => '字节跳动旗下的云服务平台，有自主研发的豆包大模型系列。涵盖豆包通用模型 Pro、lite，具备不同文本handle和综合能力，还有role扮演、voice合成等多种模型。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/volcengine Avatars.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -154,7 +154,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'A cloud service platform under ByteDance, with independently developed Doubao large model series. Includes Doubao general models Pro and lite with different text processing and comprehensive capabilities, as well as various models for role-playing, speech synthesis, etc.',
-                        'zh_CN' => '字节跳动旗下的云服务平台，有自主研发的豆包大模型系列。涵盖豆包通用模型 Pro、lite，具备不同文本handle和综合能力，还有角色扮演、语音合成等多种模型。',
+                        'zh_CN' => '字节跳动旗下的云服务平台，有自主研发的豆包大模型系列。涵盖豆包通用模型 Pro、lite，具备不同文本handle和综合能力，还有role扮演、voice合成等多种模型。',
                     ],
                 ]),
                 'remark' => '',
@@ -242,7 +242,7 @@ class ServiceProviderInitializer
                 'id' => '759145734546132992',
                 'name' => 'TTAPI.io',
                 'provider_code' => 'TTAPI',
-                'description' => '整合多平台文生图、文生视频能力，Midjourney API、DALL·E 3、Luma文生视频、Flux API服务等等。',
+                'description' => '整合多平台文生图、文生video能力，Midjourney API、DALL·E 3、Luma文生video、Flux API服务等等。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/TTAPI.io Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -258,7 +258,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Integrates multi-platform text-to-image, text-to-video capabilities, Midjourney API, DALL·E 3, Luma text-to-video, Flux API service, etc.',
-                        'zh_CN' => '整合多平台文生图、文生视频能力，Midjourney API、DALL·E 3、Luma文生视频、Flux API服务等等。',
+                        'zh_CN' => '整合多平台文生图、文生video能力，Midjourney API、DALL·E 3、Luma文生video、Flux API服务等等。',
                     ],
                 ]),
                 'remark' => '',
@@ -266,7 +266,7 @@ class ServiceProviderInitializer
             // Custom OpenAI - LLM
             [
                 'id' => '764067503220973568',
-                'name' => '自定义服务商',
+                'name' => 'customize服务商',
                 'provider_code' => 'OpenAI',
                 'description' => '请use接口与 OpenAI API 相同形式的服务商',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/默认图标.png',
@@ -280,7 +280,7 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Custom service provider',
-                        'zh_CN' => '自定义服务商',
+                        'zh_CN' => 'customize服务商',
                     ],
                     'description' => [
                         'en_US' => 'Use a service provider with the same form of interface as the OpenAI API',
@@ -294,7 +294,7 @@ class ServiceProviderInitializer
                 'id' => '771078297613344768',
                 'name' => 'Amazon Bedrock',
                 'provider_code' => 'AWSBedrock',
-                'description' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项服务，专注于为企业提供先进的 AI 语言模型和视觉模型。其模型家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高性能的多种选择，支持文本generate、对话、图像handle等多种任务，适用于不同规模和需求的企业application。',
+                'description' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项服务，专注于为企业提供先进的 AI 语言模型和视觉模型。其模型家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高performance的多种选择，支持文本generate、conversation、图像handle等多种task，适用于不同规模和需求的企业application。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/awsAvatars.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -310,7 +310,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => "Amazon Bedrock is a service offered by Amazon AWS that focuses on advanced AI language models and visual models for businesses. Its model family, including Anthropic's Claude series and Meta's Llama 3.1 series, covers a variety of options from lightweight to high-performance, supporting a variety of tasks such as text generation, dialogue, image processing, and suitable for enterprise applications of different sizes and needs.",
-                        'zh_CN' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项服务，专注于为企业提供先进的 AI 语言模型和视觉模型。其模型家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高性能的多种选择，支持文本generate、对话、图像handle等多种任务，适用于不同规模和需求的企业application。',
+                        'zh_CN' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项服务，专注于为企业提供先进的 AI 语言模型和视觉模型。其模型家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高performance的多种选择，支持文本generate、conversation、图像handle等多种task，适用于不同规模和需求的企业application。',
                     ],
                 ]),
                 'remark' => '',
@@ -320,7 +320,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920384',
                 'name' => 'Microsoft Azure',
                 'provider_code' => 'MicrosoftAzure',
-                'description' => '提供多种先进的AI模型、includeGPT-3.5和最新的GPT-4系列、支持多种数据type和复杂任务，致力于安全、可靠和可持续的AI解决方案。',
+                'description' => '提供多种先进的AI模型、includeGPT-3.5和最新的GPT-4系列、支持多种数据type和复杂task，致力于安全、可靠和可持续的AIresolve方案。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/azure Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -336,7 +336,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Azure offers a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, and is committed to providing safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure 提供多种先进的AI模型，includeGPT-3.5和最新的GPT-4系列，支持多种数据type和复杂任务，致力于安全、可靠和可持续的AI解决方案。',
+                        'zh_CN' => 'Azure 提供多种先进的AI模型，includeGPT-3.5和最新的GPT-4系列，支持多种数据type和复杂task，致力于安全、可靠和可持续的AIresolve方案。',
                     ],
                 ]),
                 'remark' => '',
@@ -372,7 +372,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920386',
                 'name' => 'Google Cloud',
                 'provider_code' => 'Google-Image',
-                'description' => '提供 Gemini 2.5 Flash Image (Nano Banana) 图像generate模型，具备角色一致性高、精准图像编辑等。',
+                'description' => '提供 Gemini 2.5 Flash Image (Nano Banana) 图像generate模型，具备role一致性高、精准图像edit等。',
                 'icon' => $orgCode . '/713471849556451329/2c17c6393771ee3048ae34d6b380c5ec/Q-2terxwePTElOJ_ONtrw.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -388,7 +388,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Gemini 2.5 Flash Image (Nano Banana) image generation model is provided, featuring high character consistency and precise image editing, etc.',
-                        'zh_CN' => '提供 Gemini 2.5 Flash Image (Nano Banana) 图像generate模型，具备角色一致性高、精准图像编辑等。',
+                        'zh_CN' => '提供 Gemini 2.5 Flash Image (Nano Banana) 图像generate模型，具备role一致性高、精准图像edit等。',
                     ],
                 ]),
                 'remark' => '',

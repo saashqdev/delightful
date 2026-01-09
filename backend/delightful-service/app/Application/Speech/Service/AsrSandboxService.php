@@ -44,7 +44,7 @@ use function Hyperf\Translation\trans;
 
 /**
  * ASR 沙箱服务
- * 负责沙箱任务启动、merge、轮询和文件记录create.
+ * 负责沙箱task启动、merge、轮询和file记录create.
  */
 readonly class AsrSandboxService
 {
@@ -65,9 +65,9 @@ readonly class AsrSandboxService
     }
 
     /**
-     * 启动录音任务.
+     * 启动录音task.
      *
-     * @param AsrTaskStatusDTO $taskStatus 任务status
+     * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $userId userID
      * @param string $organizationCode organization编码
      */
@@ -83,7 +83,7 @@ readonly class AsrSandboxService
         );
         $taskStatus->sandboxId = $sandboxId;
 
-        // 设置user上下文
+        // settinguser上下文
         $this->sandboxGateway->setUserContext($userId, $organizationCode);
 
         // 获取完整工作目录路径
@@ -108,7 +108,7 @@ readonly class AsrSandboxService
             'full_workdir' => $fullWorkdir,
         ]);
 
-        // build文件配置object（复用公共method）
+        // buildfileconfigurationobject（复用公共method）
         $noteFileConfig = $this->buildNoteFileConfig($taskStatus);
         $transcriptFileConfig = $this->buildTranscriptFileConfig($taskStatus);
 
@@ -121,7 +121,7 @@ readonly class AsrSandboxService
             'transcript_file_config' => $transcriptFileConfig?->toArray(),
         ]);
 
-        // call沙箱启动任务
+        // call沙箱启动task
         // 注意：沙箱 API 只接受工作区相对路径 (如: .asr_recordings/session_xxx)
         $response = $this->asrRecorder->startTask(
             $actualSandboxId,
@@ -138,7 +138,7 @@ readonly class AsrSandboxService
 
         $taskStatus->sandboxTaskCreated = true;
 
-        $this->logger->info('ASR 录音：沙箱任务已create', [
+        $this->logger->info('ASR 录音：沙箱task已create', [
             'task_key' => $taskStatus->taskKey,
             'sandbox_id' => $actualSandboxId,
             'status' => $response->getStatus(),
@@ -146,9 +146,9 @@ readonly class AsrSandboxService
     }
 
     /**
-     * 取消录音任务.
+     * cancel录音task.
      *
-     * @param AsrTaskStatusDTO $taskStatus 任务status
+     * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @return AsrRecorderResponse 响应结果
      */
     public function cancelRecordingTask(AsrTaskStatusDTO $taskStatus): AsrRecorderResponse
@@ -159,12 +159,12 @@ readonly class AsrSandboxService
             ExceptionBuilder::throw(AsrErrorCode::SandboxIdNotExist);
         }
 
-        $this->logger->info('ASR 录音：准备取消沙箱任务', [
+        $this->logger->info('ASR 录音：准备cancel沙箱task', [
             'task_key' => $taskStatus->taskKey,
             'sandbox_id' => $sandboxId,
         ]);
 
-        // call沙箱取消任务
+        // call沙箱canceltask
         $response = $this->asrRecorder->cancelTask(
             $sandboxId,
             $taskStatus->taskKey
@@ -174,7 +174,7 @@ readonly class AsrSandboxService
             ExceptionBuilder::throw(AsrErrorCode::SandboxCancelFailed, '', ['message' => $response->message]);
         }
 
-        $this->logger->info('ASR 录音：沙箱任务已取消', [
+        $this->logger->info('ASR 录音：沙箱task已cancel', [
             'task_key' => $taskStatus->taskKey,
             'sandbox_id' => $sandboxId,
             'status' => $response->getStatus(),
@@ -184,10 +184,10 @@ readonly class AsrSandboxService
     }
 
     /**
-     * merge音频文件.
+     * mergeaudiofile.
      *
-     * @param AsrTaskStatusDTO $taskStatus 任务status
-     * @param string $fileTitle 文件标题（不含扩展名）
+     * @param AsrTaskStatusDTO $taskStatus taskstatus
+     * @param string $fileTitle file标题（不含extension名）
      * @param string $organizationCode organization编码
      * @return AsrSandboxMergeResultDTO merge结果
      */
@@ -196,7 +196,7 @@ readonly class AsrSandboxService
         string $fileTitle,
         string $organizationCode
     ): AsrSandboxMergeResultDTO {
-        $this->logger->info('start沙箱音频handle流程', [
+        $this->logger->info('start沙箱audiohandleprocess', [
             'task_key' => $taskStatus->taskKey,
             'project_id' => $taskStatus->projectId,
             'hidden_directory' => $taskStatus->tempHiddenDirectory,
@@ -213,7 +213,7 @@ readonly class AsrSandboxService
             $taskStatus->sandboxId = $sandboxId;
         }
 
-        // 设置user上下文
+        // settinguser上下文
         $this->sandboxGateway->setUserContext($taskStatus->userId, $organizationCode);
 
         // 获取完整工作目录路径
@@ -246,20 +246,20 @@ readonly class AsrSandboxService
             'full_workdir' => $fullWorkdir,
         ]);
 
-        // call沙箱 finish 并轮询等待complete（会通过响应handle器自动create/更新文件记录）
+        // call沙箱 finish 并轮询等待complete（会通过响应handle器自动create/更新file记录）
         $mergeResult = $this->callSandboxFinishAndWait($taskStatus, $fileTitle);
 
-        $this->logger->info('沙箱return的文件信息', [
+        $this->logger->info('沙箱return的fileinfo', [
             'task_key' => $taskStatus->taskKey,
             'sandbox_file_path' => $mergeResult->filePath,
             'audio_file_id' => $taskStatus->audioFileId,
             'note_file_id' => $taskStatus->noteFileId,
         ]);
 
-        // 更新任务status（文件记录已由响应handle器create）
+        // 更新taskstatus（file记录已由响应handle器create）
         $taskStatus->updateStatus(AsrTaskStatusEnum::COMPLETED);
 
-        $this->logger->info('沙箱音频handlecomplete', [
+        $this->logger->info('沙箱audiohandlecomplete', [
             'task_key' => $taskStatus->taskKey,
             'sandbox_id' => $taskStatus->sandboxId,
             'file_id' => $taskStatus->audioFileId,
@@ -272,7 +272,7 @@ readonly class AsrSandboxService
     /**
      * call沙箱 finish 并轮询等待complete.
      *
-     * @param AsrTaskStatusDTO $taskStatus 任务status
+     * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $intelligentTitle 智能标题（用于重命名）
      * @return AsrSandboxMergeResultDTO merge结果
      */
@@ -286,21 +286,21 @@ readonly class AsrSandboxService
             ExceptionBuilder::throw(AsrErrorCode::SandboxIdNotExist);
         }
 
-        // build音频配置object
+        // buildaudioconfigurationobject
         $audioConfig = new AsrAudioConfig(
             sourceDir: $taskStatus->tempHiddenDirectory,  // 如: .asr_recordings/session_xxx
             targetDir: $taskStatus->displayDirectory,     // 如: 录音总结_20251027_230949
             outputFilename: $intelligentTitle              // 如: 被讨厌的勇气
         );
 
-        // build笔记文件配置object（需要重命名）
+        // build笔记fileconfigurationobject（需要重命名）
         $noteFileConfig = $this->buildNoteFileConfig(
             $taskStatus,
             $taskStatus->displayDirectory,
             $intelligentTitle
         );
 
-        // buildstream识别文件配置object
+        // buildstream识别fileconfigurationobject
         $transcriptFileConfig = $this->buildTranscriptFileConfig($taskStatus);
 
         $this->logger->info('准备call沙箱 finish', [
@@ -324,7 +324,7 @@ readonly class AsrSandboxService
             $transcriptFileConfig
         );
 
-        // 轮询等待complete（based on预设时间与休眠间隔）
+        // 轮询等待complete（based onpreset时间与休眠间隔）
         $timeoutSeconds = AsrConfig::SANDBOX_MERGE_TIMEOUT;
         $pollingInterval = AsrConfig::POLLING_INTERVAL;
         $attempt = 0;
@@ -361,7 +361,7 @@ readonly class AsrSandboxService
             $elapsedSeconds = (int) ($currentTime - $finishStartTime);
             if ($attempt % AsrConfig::SANDBOX_MERGE_LOG_FREQUENCY === 0 || ($currentTime - $lastLogTime) >= $logInterval) {
                 $remainingSeconds = max(0, $timeoutSeconds - $elapsedSeconds);
-                $this->logger->info('等待沙箱音频merge', [
+                $this->logger->info('等待沙箱audiomerge', [
                     'task_key' => $taskStatus->taskKey,
                     'sandbox_id' => $sandboxId,
                     'attempt' => $attempt,
@@ -408,7 +408,7 @@ readonly class AsrSandboxService
 
         // 超时记录
         $totalElapsedTime = (int) (microtime(true) - $finishStartTime);
-        $this->logger->error('沙箱音频merge超时', [
+        $this->logger->error('沙箱audiomerge超时', [
             'task_key' => $taskStatus->taskKey,
             'sandbox_id' => $sandboxId,
             'total_attempts' => $attempt,
@@ -425,7 +425,7 @@ readonly class AsrSandboxService
      *
      * @param AsrRecorderResponse $response 沙箱响应
      * @param SandboxAsrStatusEnum $status status枚举
-     * @param AsrTaskStatusDTO $taskStatus 任务status
+     * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $sandboxId 沙箱ID
      * @param float $finishStartTime start时间
      * @param int $attempt 尝试次数
@@ -446,7 +446,7 @@ readonly class AsrSandboxService
             $finishEndTime = microtime(true);
             $totalElapsedTime = round($finishEndTime - $finishStartTime);
 
-            $this->logger->info('沙箱音频mergecomplete', [
+            $this->logger->info('沙箱audiomergecomplete', [
                 'task_key' => $taskStatus->taskKey,
                 'sandbox_id' => $sandboxId,
                 'attempt' => $attempt,
@@ -455,7 +455,7 @@ readonly class AsrSandboxService
                 'total_elapsed_time_seconds' => $totalElapsedTime,
             ]);
 
-            // handle沙箱响应，更新文件和目录记录
+            // handle沙箱响应，更新file和目录记录
             $responseData = $response->getData();
             $this->responseHandler->handleFinishResponse(
                 $taskStatus,
@@ -483,7 +483,7 @@ readonly class AsrSandboxService
      * ASR 功能不需要工作区initialize，只需要沙箱能够响应 getWorkspaceStatus 接口即可.
      *
      * @param string $sandboxId 沙箱ID
-     * @param string $taskKey 任务Key（用于日志）
+     * @param string $taskKey taskKey（用于log）
      * @throws BusinessException 当超时时抛出exception
      */
     private function waitForSandboxStartup(
@@ -646,9 +646,9 @@ readonly class AsrSandboxService
 
     /**
      * initialize工作区.
-     * 复用 AgentDomainService::initializeAgent method，确保initialize配置一致.
+     * 复用 AgentDomainService::initializeAgent method，确保initializeconfiguration一致.
      *
-     * @param AsrTaskStatusDTO $taskStatus 任务status
+     * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $actualSandboxId 实际沙箱ID
      * @param string $userId userID
      * @param string $organizationCode organization编码
@@ -668,7 +668,7 @@ readonly class AsrSandboxService
         // 获取或create Task Entity（用于build TaskContext）
         $taskEntity = $this->getOrCreateTaskEntity($taskStatus, $userId, $organizationCode);
 
-        $this->logger->info('获取到 ASR 任务 Entity', [
+        $this->logger->info('获取到 ASR task Entity', [
             'task_key' => $taskStatus->taskKey,
             'topic_id' => $taskStatus->topicId,
             'task_id' => $taskEntity->getId(),
@@ -677,7 +677,7 @@ readonly class AsrSandboxService
         // create DataIsolation
         $dataIsolation = DataIsolation::simpleMake($organizationCode, $userId);
 
-        // 获取 topic 实体（用于获取 workspaceId 等信息）
+        // 获取 topic 实体（用于获取 workspaceId 等info）
         $topicEntity = $this->topicDomainService->getTopicById((int) $taskStatus->topicId);
         if (! $topicEntity) {
             ExceptionBuilder::throw(
@@ -698,20 +698,20 @@ readonly class AsrSandboxService
         $taskContext = new TaskContext(
             task: $taskEntity,
             dataIsolation: $dataIsolation,
-            chatConversationId: '', // ASR 场景不需要聊天conversationID
-            chatTopicId: '', // ASR 场景不需要聊天主题ID
+            chatConversationId: '', // ASR 场景不需要chatconversationID
+            chatTopicId: '', // ASR 场景不需要chatthemeID
             agentUserId: $agentUserId, // use topic 的create者ID或userID
             sandboxId: $actualSandboxId,
             taskId: (string) $taskEntity->getId(),
             instruction: ChatInstruction::Normal,
             agentMode: $topicEntity->getTaskMode() ?: 'general',
             workspaceId: (string) $topicEntity->getWorkspaceId(),
-            isFirstTask: false, // ASR 场景通常不是首次任务
+            isFirstTask: false, // ASR 场景通常不是首次task
         );
 
         // 复用 initializeAgent method（会自动build message_subscription_config 和 delightful_service_host）
         // 传入项目organization编码，用于获取正确的 STS Token
-        // ASR 场景设置 skip_init_messages = true，让沙箱不send聊天message过来
+        // ASR 场景setting skip_init_messages = true，让沙箱不sendchatmessage过来
         $initMetadata = (new InitializationMetadataDTO(skipInitMessages: true));
         $this->agentDomainService->initializeAgent($dataIsolation, $taskContext, null, $projectOrganizationCode, $initMetadata);
 
@@ -721,14 +721,14 @@ readonly class AsrSandboxService
             'task_id' => $taskEntity->getId(),
         ]);
 
-        // 等待工作区initializecomplete（include文件sync）
+        // 等待工作区initializecomplete（includefilesync）
         $this->agentDomainService->waitForWorkspaceReady(
             $actualSandboxId,
             AsrConfig::WORKSPACE_INIT_TIMEOUT,
             AsrConfig::POLLING_INTERVAL
         );
 
-        $this->logger->info('沙箱工作区已initializecomplete，文件已sync，可以startuse', [
+        $this->logger->info('沙箱工作区已initializecomplete，file已sync，可以startuse', [
             'task_key' => $taskStatus->taskKey,
             'actual_sandbox_id' => $actualSandboxId,
             'task_id' => $taskEntity->getId(),
@@ -749,9 +749,9 @@ readonly class AsrSandboxService
     }
 
     /**
-     * build笔记文件配置object.
+     * build笔记fileconfigurationobject.
      *
-     * @param AsrTaskStatusDTO $taskStatus 任务status
+     * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param null|string $targetDirectory 目标目录（可选，默认与源目录相同）
      * @param null|string $intelligentTitle 智能标题（可选，用于重命名）
      */
@@ -786,9 +786,9 @@ readonly class AsrSandboxService
     }
 
     /**
-     * buildstream识别文件配置object.
+     * buildstream识别fileconfigurationobject.
      *
-     * @param AsrTaskStatusDTO $taskStatus 任务status
+     * @param AsrTaskStatusDTO $taskStatus taskstatus
      */
     private function buildTranscriptFileConfig(AsrTaskStatusDTO $taskStatus): ?AsrTranscriptFileConfig
     {
@@ -808,7 +808,7 @@ readonly class AsrSandboxService
     /**
      * 获取或create Task Entity（用于build TaskContext）.
      *
-     * @param AsrTaskStatusDTO $taskStatus 任务status
+     * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $userId userID
      * @param string $organizationCode organization编码
      * @return TaskEntity Task Entity
@@ -820,21 +820,21 @@ readonly class AsrSandboxService
     ): TaskEntity {
         // 检查 topicId 是否存在
         if (empty($taskStatus->topicId)) {
-            $this->logger->error('ASR 任务缺少 topicId，无法获取或create task', [
+            $this->logger->error('ASR task缺少 topicId，无法获取或create task', [
                 'task_key' => $taskStatus->taskKey,
                 'project_id' => $taskStatus->projectId,
             ]);
             ExceptionBuilder::throw(
                 AsrErrorCode::SandboxTaskCreationFailed,
                 '',
-                ['message' => 'Topic ID 为null，无法create沙箱任务']
+                ['message' => 'Topic ID 为null，无法create沙箱task']
             );
         }
 
         // 获取 topic 实体
         $topicEntity = $this->topicDomainService->getTopicById((int) $taskStatus->topicId);
         if (! $topicEntity) {
-            $this->logger->error('ASR 任务关联的 topic 不存在', [
+            $this->logger->error('ASR task关联的 topic 不存在', [
                 'task_key' => $taskStatus->taskKey,
                 'topic_id' => $taskStatus->topicId,
             ]);
@@ -845,12 +845,12 @@ readonly class AsrSandboxService
             );
         }
 
-        // 检查 topic 是否有当前任务
+        // 检查 topic 是否有当前task
         $currentTaskId = $topicEntity->getCurrentTaskId();
         if ($currentTaskId !== null && $currentTaskId > 0) {
             $taskEntity = $this->taskDomainService->getTaskById($currentTaskId);
             if ($taskEntity) {
-                $this->logger->info('ASR 任务use topic 的当前任务 Entity', [
+                $this->logger->info('ASR taskuse topic 的当前task Entity', [
                     'task_key' => $taskStatus->taskKey,
                     'topic_id' => $taskStatus->topicId,
                     'current_task_id' => $currentTaskId,
@@ -859,8 +859,8 @@ readonly class AsrSandboxService
             }
         }
 
-        // topic 没有当前任务，为 ASR 场景create一个新任务
-        $this->logger->info('ASR 任务关联的 topic 没有当前任务，准备create新任务', [
+        // topic 没有当前task，为 ASR 场景create一个新task
+        $this->logger->info('ASR task关联的 topic 没有当前task，准备create新task', [
             'task_key' => $taskStatus->taskKey,
             'topic_id' => $taskStatus->topicId,
             'project_id' => $taskStatus->projectId,
@@ -876,7 +876,7 @@ readonly class AsrSandboxService
             'task_id' => '', // 数据库会自动generate
             'task_mode' => $topicEntity->getTaskMode() ?: 'general',
             'sandbox_id' => $topicEntity->getSandboxId() ?: '',
-            'prompt' => 'ASR Recording Task', // ASR 任务标识
+            'prompt' => 'ASR Recording Task', // ASR task标识
             'task_status' => 'waiting',
             'work_dir' => $topicEntity->getWorkDir() ?? '',
             'created_at' => date('Y-m-d H:i:s'),
@@ -885,10 +885,10 @@ readonly class AsrSandboxService
 
         $taskEntity = TaskEntity::fromArray($taskData);
 
-        // create任务并更新 topic
+        // createtask并更新 topic
         $createdTask = $this->taskDomainService->initTopicTask($dataIsolation, $topicEntity, $taskEntity);
 
-        $this->logger->info('为 ASR 任务create了新的 task', [
+        $this->logger->info('为 ASR taskcreate了新的 task', [
             'task_key' => $taskStatus->taskKey,
             'topic_id' => $taskStatus->topicId,
             'created_task_id' => $createdTask->getId(),

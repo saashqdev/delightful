@@ -20,7 +20,7 @@ class AvailableAgentDTO extends AbstractDTO
     public string $name;
 
     /**
-     * 助理头像.
+     * 助理avatar.
      */
     public string $avatar;
 

@@ -20,8 +20,8 @@ use Hyperf\Redis\RedisFactory;
 use Psr\Log\LoggerInterface;
 
 /**
- * 字节跳动语音serviceSTS令牌service
- * 用于get语音service的JWT token.
+ * 字节跳动voiceserviceSTS令牌service
+ * 用于getvoiceservice的JWT token.
  */
 class ByteDanceSTSService
 {

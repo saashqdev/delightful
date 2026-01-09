@@ -76,7 +76,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * query任务status
+     * querytaskstatus
      */
     public function queryTask(string $taskId): array
     {
@@ -89,7 +89,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * 提交image转换任务
+     * submitimage转换task
      */
     public function submitTask(string $imageUrl, int $styleId): array
     {
@@ -115,7 +115,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * create带签名的请求
+     * create带signature的请求
      */
     private function createSignedRequest(string $url, string $method, array $headers = [], string $body = ''): Request
     {

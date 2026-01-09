@@ -22,7 +22,7 @@ class GoogleSearch
 
     private const int DEFAULT_SEARCH_ENGINE_TIMEOUT = 5;
 
-    private const int REFERENCE_COUNT = 8; // 替换为你need的引用数量
+    private const int REFERENCE_COUNT = 8; // 替换为你need的quote数量
 
     public function __construct(protected readonly StdoutLoggerInterface $logger, protected readonly ConfigInterface $config)
     {
@@ -120,7 +120,7 @@ class GoogleSearch
 
             return Json::decode($response->getBody()->getContents());
         } catch (BadResponseException|RequestException $e) {
-            // 记录error日志
+            // 记录errorlog
             $this->logger->error(sprintf(
                 '谷歌search遇到error:%s,file:%s,line:%s trace:%s, will generate again.',
                 $e->getResponse()?->getBody(), /* @phpstan-ignore-line */

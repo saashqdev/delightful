@@ -14,12 +14,12 @@ use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
  * @property int $id primary keyID
- * @property int $business_type 模块type，文件属于哪个模块
- * @property int $file_type 文件type：0:官方添加，1:organization添加
- * @property string $key 文件key
- * @property int $file_size 文件大小
+ * @property int $business_type 模块type，file属于哪个模块
+ * @property int $file_type filetype：0:官方添加，1:organization添加
+ * @property string $key filekey
+ * @property int $file_size file大小
  * @property string $organization organization编码
- * @property string $file_extension 文件后缀
+ * @property string $file_extension file后缀
  * @property string $user_id upload者ID
  * @property DateTime $created_at creation time
  * @property DateTime $updated_at update time

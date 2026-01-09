@@ -18,7 +18,7 @@ use Throwable;
  */
 class ClientMessage extends AbstractEntity
 {
-    // service端生成的message唯一id，全局唯一。用于撤回、编辑message。
+    // service端生成的message唯一id，全局唯一。用于withdraw、editmessage。
     protected string $delightfulMessageId;
 
     // 客户端生成，需要ios/安卓/web三端共同确定一个生成算法。用于告知客户端，delightful_message_id的由来
@@ -27,7 +27,7 @@ class ClientMessage extends AbstractEntity
     // 话题id
     protected ?string $topicId;
 
-    // message的小类。控制message的小类：已读回执；撤回；编辑；入群/退群；organization架构变动; 。 展示message：text,voice,img,file,video等
+    // message的小类。控制message的小类：已读回执；withdraw；edit；入群/退群；organization架构变动; 。 展示message：text,voice,img,file,video等
 
     protected string $type;
 
@@ -37,10 +37,10 @@ class ClientMessage extends AbstractEntity
     // message发送者,自己或者他人
     protected string $senderId;
 
-    // message发送time，与 delightful_message_id 一起，用于撤回、编辑message时的唯一性校验。
+    // message发送time，与 delightful_message_id 一起，用于withdraw、editmessage时的唯一性校验。
     protected int $sendTime;
 
-    // 聊天messagestatus:unread | seen | read |revoked  .对应中文释义：未读|已读|已查看（非纯文本的复杂typemessage，user点击了详情）  | 撤回
+    // chatmessagestatus:unread | seen | read |revoked  .对应中文释义：未读|已读|已查看（非纯文本的复杂typemessage，user点击了详情）  | withdraw
     protected ?string $status;
 
     protected MessageInterface $content;

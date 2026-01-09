@@ -70,7 +70,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * 保存AI能力实体.
+     * saveAI能力实体.
      */
     public function save(AiAbilityEntity $entity): bool
     {
@@ -116,7 +116,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
         $model->sort_order = $entity->getSortOrder();
         $model->status = $entity->getStatus()->value;
 
-        // 加密config后再保存
+        // 加密config后再save
         $model->config = AiAbilityAssembler::encodeConfig($entity->getConfig(), (string) $model->id);
 
         return $model->save();

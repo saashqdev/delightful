@@ -52,7 +52,7 @@ interface ProviderModelRepositoryInterface
     /**
      * getorganization可用modellist（包含organization自己的model和Delightfulmodel）.
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
-     * @param null|Category $category model分类，为空时return所有分类model
+     * @param null|Category $category modelcategory，为空时return所有categorymodel
      * @return ProviderModelEntity[] 按sort降序sort的modellist，包含organizationmodel和Delightfulmodel（不去重）
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, Status $status = Status::Enabled): array;

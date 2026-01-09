@@ -62,7 +62,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
             }
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
-                // 用redis检测seq是否已经尝试多次,如果超过 n 次,则不再推送
+                // 用redis检测seq是否已经尝试多次,如果超过 n 次,则不再push
                 $seqRetryKey = sprintf('messageDispatch:seqRetry:%s', $seqId);
                 $seqRetryCount = $this->redis->get($seqRetryKey);
                 if ($seqRetryCount >= 3) {
@@ -75,7 +75,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 retry(3, function () use ($seqId, &$userSeqEntity) {
                     $userSeqEntity = $this->delightfulChatSeqRepository->getSeqByMessageId($seqId);
                     if ($userSeqEntity === null) {
-                        // 可能是事务还未提交,mq已经消费,延迟重试
+                        // 可能是事务还未submit,mq已经消费,延迟重试
                         ExceptionBuilder::throw(ChatErrorCode::SEQ_NOT_FOUND);
                     }
                 }, 100);
@@ -102,7 +102,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                     }
                 }
                 if ($userSeqEntity->getSeqType() instanceof ChatMessageType) {
-                    // 聊天message分发
+                    // chatmessage分发
                     $this->delightfulChatMessageAppService->asyncHandlerChatMessage($userSeqEntity);
                 }
                 // seq 处理success
@@ -116,7 +116,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessage质量保证模块,如果是service器压力大导致的fail,则放入延迟重试队列,并指数级延长重试time间隔
+            // todo callmessage质量保证模块,如果是service器stress大导致的fail,则放入延迟重试queue,并指数级延长重试time间隔
             return Result::REQUEUE;
         } finally {
             if (isset($lockKey, $owner)) {

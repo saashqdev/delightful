@@ -149,7 +149,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         $executionData->saveNodeContext($this->node->getSystemNodeId(), $systemOutputResult);
         $vertexResult->addDebugLog('system_response', $executionData->getNodeContext($this->node->getSystemNodeId()));
 
-        // 增加自定义的系统输出
+        // 增加customize的系统输出
         $customSystemOutput = $triggerBranch->getCustomSystemOutput()?->getFormComponent()?->getForm();
         if ($customSystemOutput) {
             $customSystemOutput->appendConstValue($executionData->getTriggerData()->getSystemParams());
@@ -254,7 +254,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         if (! $delightfulFlowEntity || ! $delightfulFlowEntity->getType()->isMain()) {
             return;
         }
-        // 兜底，如果没有 agent 的流程指令，尝试实时get
+        // 兜底，如果没有 agent 的process指令，尝试实时get
         if (empty($executionData->getInstructionConfigs())) {
             $instructs = di(DelightfulAgentDomainService::class)->getAgentById($executionData->getAgentId())->getInstructs();
             $executionData->setInstructionConfigs($instructs);
@@ -274,7 +274,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         }
 
         $instructions = [];
-        // 只放当前 agent configuration的流程指令
+        // 只放当前 agent configuration的process指令
         foreach ($executionData->getInstructionConfigs() as $instructionConfig) {
             if (! $instructionConfig->isFlowInstructionType()) {
                 continue;
@@ -362,7 +362,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
                 'transcription_length' => strlen($voiceMessage->getTranscriptionText() ?? ''),
             ]);
         } catch (Throwable $e) {
-            // 静默处理updatefail，不影响主要流程
+            // 静默处理updatefail，不影响主要process
             $this->logger->warning('Failed to update voice message content (V1)', [
                 'delightful_message_id' => $delightfulMessageId,
                 'error' => $e->getMessage(),

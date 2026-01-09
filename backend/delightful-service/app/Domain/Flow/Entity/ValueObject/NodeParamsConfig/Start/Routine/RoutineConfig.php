@@ -23,9 +23,9 @@ class RoutineConfig
         private ?string $day = null,
         // 具体time
         private readonly ?string $time = null,
-        // 自定义周期的时候，间隔单位 day / week / month / year
+        // customize周期的时候，间隔单位 day / week / month / year
         private ?IntervalUnit $unit = null,
-        // 自定义周期的时候，间隔频率，如每天，每周，每月，每年
+        // customize周期的时候，间隔频率，如每天，每周，每月，每年
         private ?int $interval = null,
         // unit=week时为[1~7]，unit=month时为[1~31]
         private ?array $values = null,
@@ -34,7 +34,7 @@ class RoutineConfig
         // 话题configuration
         private readonly ?TopicConfig $topicConfig = null
     ) {
-        // 保存configuration时不再强行检测，放到生成规则处检测
+        // saveconfiguration时不再强行检测，放到生成规则处检测
     }
 
     public function toConfigArray(): array
@@ -133,40 +133,40 @@ class RoutineConfig
         }
         if ($this->type === RoutineType::CustomRepeat) {
             if (empty($this->unit)) {
-                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '自定义周期间隔单位 不能为空');
+                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔单位 不能为空');
             }
             if (empty($this->interval)) {
-                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '自定义周期间隔频率 不能为空');
+                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 不能为空');
             }
-            // 只有每天的时候，才能自定义 interval，其余都是 1
+            // 只有每天的时候，才能customize interval，其余都是 1
             if (in_array($this->unit, [IntervalUnit::Week, IntervalUnit::Month, IntervalUnit::Year])) {
                 $this->interval = 1;
             }
             if ($this->interval < 1 || $this->interval > 30) {
-                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '自定义周期间隔频率 只能在1~30之间');
+                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 只能在1~30之间');
             }
             // 只有是周或者月的时候，才能有 values
             if (in_array($this->unit, [IntervalUnit::Week, IntervalUnit::Month])) {
                 if (empty($this->values)) {
-                    ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '自定义周期间隔频率 不能为空');
+                    ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 不能为空');
                 }
                 if ($this->unit === IntervalUnit::Week) {
                     foreach ($this->values as $value) {
                         if (! is_int($value)) {
-                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '自定义周期间隔频率 只能是整数');
+                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 只能是整数');
                         }
                         if ($value < 0 || $value > 6) {
-                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '自定义周期间隔频率 只能在0~6之间');
+                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 只能在0~6之间');
                         }
                     }
                 }
                 if ($this->unit === IntervalUnit::Month) {
                     foreach ($this->values as $value) {
                         if (! is_int($value)) {
-                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '自定义周期间隔频率 只能是整数');
+                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 只能是整数');
                         }
                         if ($value < 1 || $value > 31) {
-                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, '自定义周期间隔频率 只能在1~31之间');
+                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customize周期间隔频率 只能在1~31之间');
                         }
                     }
                 }

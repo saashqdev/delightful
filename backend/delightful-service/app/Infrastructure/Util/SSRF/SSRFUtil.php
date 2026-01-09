@@ -16,7 +16,7 @@ use Throwable;
  * // 简单use，默认configuration
  * $safeUrl = SSRFUtil::getSafeUrl('https://example.com');
  *
- * // 自定义parameter
+ * // customizeparameter
  * $safeUrl = SSRFUtil::getSafeUrl('https://example.com', replaceIp: false, allowRedirect: true);
  *
  * // 高级configuration
@@ -33,7 +33,7 @@ class SSRFUtil
      * getSSRF防御安全链接.
      *
      * @param string $url 需要check的URL
-     * @param array $blackList 黑名单IP或域名
+     * @param array $blackList blacklistIP或域名
      * @param array $whiteList 白名单IP或域名
      * @param array $allowProtocols 允许的协议
      * @param bool $replaceIp 是否替换为IP访问
@@ -65,7 +65,7 @@ class SSRFUtil
      * checkURL是否安全（不抛exception，return布尔value）.
      *
      * @param string $url 需要check的URL
-     * @param array $blackList 黑名单IP或域名
+     * @param array $blackList blacklistIP或域名
      * @param array $whiteList 白名单IP或域名
      * @param array $allowProtocols 允许的协议
      * @param bool $replaceIp 是否替换为IP访问

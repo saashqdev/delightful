@@ -47,6 +47,6 @@ class InitDelightfulProviderCommand extends HyperfCommand
             return;
         }
 
-        $this->info('Delightful服务商configurationdatainitialize完成');
+        $this->info('Delightful服务商configurationdatainitializecomplete');
     }
 }

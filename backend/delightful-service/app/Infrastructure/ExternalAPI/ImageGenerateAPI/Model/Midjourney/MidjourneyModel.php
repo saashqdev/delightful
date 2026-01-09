@@ -83,10 +83,10 @@ class MidjourneyModel extends AbstractImageGenerate
             $result = $this->generateImageRawInternal($imageGenerateRequest);
             $this->validateMidjourneyResponse($result);
 
-            // success：设置图片数据到响应object
+            // success：settingimage数据到响应object
             $this->addImageDataToResponse($response, $result, $imageGenerateRequest);
         } catch (Exception $e) {
-            // fail：设置error信息到响应object
+            // fail：settingerrorinfo到响应object
             $response->setProviderErrorCode($e->getCode());
             $response->setProviderErrorMessage($e->getMessage());
 
@@ -98,7 +98,7 @@ class MidjourneyModel extends AbstractImageGenerate
 
         // 4. 记录最终结果
         $this->logger->info('Midjourney OpenAI格式生图：handlecomplete', [
-            'success图片数' => count($response->getData()),
+            'successimage数' => count($response->getData()),
             '是否有error' => $response->hasError(),
             'error码' => $response->getProviderErrorCode(),
             'errormessage' => $response->getProviderErrorMessage(),
@@ -116,7 +116,7 @@ class MidjourneyModel extends AbstractImageGenerate
     {
         $rawResult = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // 从原生结果中提取图片URL
+        // 从原生结果中提取imageURL
         if (! empty($rawResult['data']['images']) && is_array($rawResult['data']['images'])) {
             return new ImageGenerateResponse(ImageGenerateType::URL, $rawResult['data']['images']);
         }
@@ -126,14 +126,14 @@ class MidjourneyModel extends AbstractImageGenerate
             return new ImageGenerateResponse(ImageGenerateType::URL, [$rawResult['data']['cdnImage']]);
         }
 
-        $this->logger->error('MJ文生图：未获取到图片URL', [
+        $this->logger->error('MJ文生图：未获取到imageURL', [
             'rawResult' => $rawResult,
         ]);
         ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
     }
 
     /**
-     * 轮询任务结果并return原生数据.
+     * 轮询task结果并return原生数据.
      * @throws Exception
      */
     protected function pollTaskResultForRaw(string $jobId): array
@@ -164,7 +164,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 }
 
                 if ($result['status'] === 'FAILED') {
-                    $this->logger->error('MJ文生图：任务executefail', [
+                    $this->logger->error('MJ文生图：taskexecutefail', [
                         'jobId' => $jobId,
                         'message' => $result['message'] ?? '未知error',
                     ]);
@@ -175,7 +175,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 ++$retryCount;
                 sleep(self::RETRY_INTERVAL);
             } catch (Exception $e) {
-                $this->logger->error('MJ文生图：轮询任务结果fail', [
+                $this->logger->error('MJ文生图：轮询task结果fail', [
                     'jobId' => $jobId,
                     'error' => $e->getMessage(),
                     'retryCount' => $retryCount,
@@ -184,7 +184,7 @@ class MidjourneyModel extends AbstractImageGenerate
             }
         }
 
-        $this->logger->error('MJ文生图：任务execute超时', [
+        $this->logger->error('MJ文生图：taskexecute超时', [
             'jobId' => $jobId,
             'maxRetries' => self::MAX_RETRIES,
             'totalTime' => self::MAX_RETRIES * self::RETRY_INTERVAL,
@@ -205,26 +205,26 @@ class MidjourneyModel extends AbstractImageGenerate
             }
 
             if ($result['status'] !== 'SUCCESS') {
-                $this->logger->error('MJ文生图：提交fail', [
+                $this->logger->error('MJ文生图：submitfail', [
                     'message' => $result['message'] ?? '未知error',
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
             }
 
             if (empty($result['data']['jobId'])) {
-                $this->logger->error('MJ文生图：缺少任务ID', [
+                $this->logger->error('MJ文生图：缺少taskID', [
                     'response' => $result,
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
             }
 
             $jobId = $result['data']['jobId'];
-            $this->logger->info('MJ文生图：提交任务success', [
+            $this->logger->info('MJ文生图：submittasksuccess', [
                 'jobId' => $jobId,
             ]);
             return $jobId;
         } catch (Exception $e) {
-            $this->logger->error('MJ文生图：提交任务exception', [
+            $this->logger->error('MJ文生图：submittaskexception', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -265,7 +265,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 检查账户余额.
+     * 检查account余额.
      * @return float 余额
      * @throws Exception
      */
@@ -285,7 +285,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 获取告警message前缀
+     * 获取alertmessage前缀
      */
     protected function getAlertPrefix(): string
     {
@@ -368,8 +368,8 @@ class MidjourneyModel extends AbstractImageGenerate
                 $rawData['data']['cdnImage'] = $this->watermarkProcessor->addWatermarkToUrl($rawData['data']['cdnImage'], $imageGenerateRequest);
             }
         } catch (Exception $e) {
-            // 水印handlefail时，记录error但不影响图片return
-            $this->logger->error('Midjourney图片水印handlefail', [
+            // 水印handlefail时，记录error但不影响imagereturn
+            $this->logger->error('Midjourneyimage水印handlefail', [
                 'error' => $e->getMessage(),
             ]);
             // return原始数据
@@ -397,7 +397,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 将Midjourney图片数据添加到OpenAI响应object中（仅handleimages字段）.
+     * 将Midjourneyimage数据添加到OpenAI响应object中（仅handleimages字段）.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
@@ -420,7 +420,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 try {
                     $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($imageUrl, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    $this->logger->error('Midjourney添加图片数据：水印handlefail', [
+                    $this->logger->error('Midjourney添加image数据：水印handlefail', [
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);
@@ -433,7 +433,7 @@ class MidjourneyModel extends AbstractImageGenerate
             }
         }
 
-        // 累计usage信息
+        // 累计usageinfo
         $imageCount = count($midjourneyResult['data']['images']);
         $currentUsage->addGeneratedImages($imageCount);
 

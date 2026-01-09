@@ -35,7 +35,7 @@ interface ModeRepositoryInterface
     public function queries(ModeDataIsolation $dataIsolation, ModeQuery $query, Page $page): array;
 
     /**
-     * 保存mode.
+     * savemode.
      */
     public function save(ModeDataIsolation $dataIsolation, ModeEntity $modeEntity): ModeEntity;
 

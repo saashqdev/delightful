@@ -70,7 +70,7 @@ class GoogleGeminiAPI
     public function editLocalImage(string $imagePath, string $instructions): array
     {
         if (! file_exists($imagePath)) {
-            throw new Exception("图像文件不存在: {$imagePath}");
+            throw new Exception("图像file不存在: {$imagePath}");
         }
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -96,7 +96,7 @@ class GoogleGeminiAPI
             ],
         ];
 
-        // 为图像编辑setting正确的生成configuration
+        // 为图像editsetting正确的生成configuration
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
@@ -150,7 +150,7 @@ class GoogleGeminiAPI
             ],
         ];
 
-        // 为图像编辑setting正确的生成configuration
+        // 为图像editsetting正确的生成configuration
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,

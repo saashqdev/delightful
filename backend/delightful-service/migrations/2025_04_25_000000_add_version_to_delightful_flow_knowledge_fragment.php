@@ -49,7 +49,7 @@ return new class extends Migration {
                 $table->dropIndex('idx_knowledge_document_version');
             }
 
-            // 恢复原有的索引
+            // restore原有的索引
             if (! Schema::hasIndex('delightful_flow_knowledge_fragment', 'knowledge_base_fragments_document_code_index')) {
                 $table->index(['document_code'], 'knowledge_base_fragments_document_code_index');
             }

@@ -20,7 +20,7 @@ enum DelightfulMessageStatus: int
     // 已查看（非纯文本的复杂typemessage，user点击了详情）
     case Read = 2;
 
-    // 已撤回
+    // 已withdraw
     case Revoked = 3;
 
     public function getStatusName(): string

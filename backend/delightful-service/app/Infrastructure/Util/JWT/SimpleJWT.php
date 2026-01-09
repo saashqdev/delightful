@@ -31,7 +31,7 @@ class SimpleJWT
             'iss' => app_name(), // 签发者 可选
             'aud' => '', // 接收该JWT的一方，可选
             'exp' => time() + $expires, // 过期时间
-            'data' => $data, // 自定义数据
+            'data' => $data, // customize数据
         ];
         return [
             'access_token' => JWT::encode($token, $this->key, 'HS256'),

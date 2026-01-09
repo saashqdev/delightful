@@ -19,7 +19,7 @@ use Hyperf\Coroutine\Parallel;
 use Hyperf\Crontab\Annotation\Crontab;
 use Psr\Container\ContainerInterface;
 
-#[Crontab(rule: '* * * * *', name: 'FlowBreakpointRetryCrontab', singleton: true, mutexExpires: 60 * 5, onOneServer: true, callback: 'execute', memo: '流程断点重试定时任务', enable: true)]
+#[Crontab(rule: '* * * * *', name: 'FlowBreakpointRetryCrontab', singleton: true, mutexExpires: 60 * 5, onOneServer: true, callback: 'execute', memo: 'process断点重试定时task', enable: true)]
 class FlowBreakpointRetryCrontab
 {
     private DelightfulFlowExecuteLogDomainService $delightfulFlowExecuteLogDomainService;
@@ -41,7 +41,7 @@ class FlowBreakpointRetryCrontab
         $parallel = new Parallel(50);
         while (true) {
             $parallel->clear();
-            // get所有 10 分钟还在进行中的流程
+            // get所有 10 分钟还在进行中的process
             $list = $this->delightfulFlowExecuteLogDomainService->getRunningTimeoutList($flowDataIsolation, 60 * 10, $page);
             if (empty($list)) {
                 break;
@@ -84,7 +84,7 @@ class FlowBreakpointRetryCrontab
             $flowEntity = $archive['delightful_flow'];
             /** @var ExecutionData $executionData */
             $executionData = $archive['execution_data'];
-            // 重置一些记录
+            // reset一些记录
             $executionData->rewind();
 
             $executor = new DelightfulFlowExecutor($flowEntity, $executionData, lastDelightfulFlowExecuteLogEntity: $delightfulFlowExecuteLogEntity);

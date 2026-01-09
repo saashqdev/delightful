@@ -47,7 +47,7 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         }
         $vertexResult->setInput($inputResult);
 
-        //  自定义systeminput
+        //  customizesysteminput
         $customSystemInput = $paramsConfig->getCustomSystemInput()?->getFormComponent()?->getForm()?->getKeyValue($executionData->getExpressionFieldData()) ?? [];
         $vertexResult->addDebugLog('custom_system_input', $customSystemInput);
 

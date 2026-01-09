@@ -117,7 +117,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * initializeAI能力数据（从configuration文件sync到database）.
+     * initializeAI能力数据（从configurationfilesync到database）.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @return int initialize的数量
@@ -142,7 +142,7 @@ class AiAbilityAppService extends AbstractKernelAppService
 
         // 遍历前端configuration的所有field
         foreach ($frontendConfig as $key => $value) {
-            // 如果是 api_key field且包含脱敏标记 ***
+            // 如果是 api_key field且包含脱敏mark ***
             if ($key === 'api_key' && is_string($value) && str_contains($value, '*')) {
                 // usedatabase中的原始value
                 $result[$key] = $dbConfig[$key] ?? $value;

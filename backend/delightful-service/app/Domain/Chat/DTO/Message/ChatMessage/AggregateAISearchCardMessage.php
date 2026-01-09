@@ -17,7 +17,7 @@ use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * 聚合AIsearch的响应卡片message.
+ * 聚合AIsearch的响应cardmessage.
  */
 class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements TextContentInterface, StreamMessageInterface, LLMMessageInterface
 {

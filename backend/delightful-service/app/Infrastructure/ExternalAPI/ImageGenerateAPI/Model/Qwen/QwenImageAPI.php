@@ -38,7 +38,7 @@ class QwenImageAPI
     }
 
     /**
-     * 提交文生图任务
+     * submit文生图task
      */
     public function submitTask(array $params): array
     {
@@ -87,7 +87,7 @@ class QwenImageAPI
     }
 
     /**
-     * 提交图像编辑任务 - 同调用.
+     * submit图像edittask - 同调用.
      */
     public function submitEditTask(array $params): array
     {
@@ -145,7 +145,7 @@ class QwenImageAPI
     }
 
     /**
-     * query任务结果.
+     * querytask结果.
      */
     public function getTaskResult(string $taskId): array
     {

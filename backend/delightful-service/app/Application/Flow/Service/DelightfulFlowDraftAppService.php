@@ -62,7 +62,7 @@ class DelightfulFlowDraftAppService extends AbstractFlowAppService
     }
 
     /**
-     * 保存草稿.
+     * save草稿.
      */
     public function save(Authenticatable $authorization, DelightfulFlowDraftEntity $savingDelightfulFlowDraftEntity): DelightfulFlowDraftEntity
     {

@@ -105,10 +105,10 @@ readonly class FileDomainService
     }
 
     /**
-     * 批量get文件链接（自动从路径提取organization编码并分组处理）.
-     * @param string[] $filePaths 包含organization编码的文件路径array，格式：orgCode/path/file.ext
+     * 批量getfile链接（自动从路径提取organization编码并分组处理）.
+     * @param string[] $filePaths 包含organization编码的file路径array，格式：orgCode/path/file.ext
      * @param null|StorageBucketType $bucketType 存储桶type，默认为Public
-     * @return array<string,FileLink> 文件路径到FileLink的映射
+     * @return array<string,FileLink> file路径到FileLink的映射
      */
     public function getBatchLinksByOrgPaths(array $filePaths, ?StorageBucketType $bucketType = null): array
     {
@@ -119,7 +119,7 @@ readonly class FileDomainService
             return [];
         }
 
-        // 按organization代码分组文件路径
+        // 按organization代码分组file路径
         $pathsByOrg = [];
         foreach ($validPaths as $filePath) {
             $orgCode = explode('/', $filePath, 2)[0] ?? '';
@@ -128,7 +128,7 @@ readonly class FileDomainService
             }
         }
 
-        // 批量get文件链接
+        // 批量getfile链接
         $allLinks = [];
         foreach ($pathsByOrg as $orgCode => $paths) {
             $orgLinks = $this->getLinks($orgCode, $paths, $bucketType);
@@ -253,19 +253,19 @@ readonly class FileDomainService
     }
 
     /**
-     * 从云存储get文件list.
+     * 从云存储getfilelist.
      *
      * @param string $organizationCode organization编码
      * @param string $directoryPrefix 目录前缀
      * @param StorageBucketType $bucketType 存储桶type
-     * @return CloudFileInfoDTO[] 文件DTOobjectarray
+     * @return CloudFileInfoDTO[] fileDTOobjectarray
      */
     public function getFilesFromCloudStorage(
         string $organizationCode,
         string $directoryPrefix,
         StorageBucketType $bucketType = StorageBucketType::Private
     ): array {
-        // uselistObjectsByCredential列出目录文件
+        // uselistObjectsByCredential列出目录file
         $objectsResponse = $this->cloudFileRepository->listObjectsByCredential(
             $organizationCode,
             $directoryPrefix,

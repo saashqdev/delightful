@@ -38,10 +38,10 @@ class ImageGenerateRequest
     // 有效期
     protected ?int $validityPeriod = null;
 
-    // userID（用于PGP签名）
+    // userID（用于PGPsignature）
     protected ?string $userId = null;
 
-    // organization编码（用于PGP签名）
+    // organization编码（用于PGPsignature）
     protected ?string $organizationCode = null;
 
     public function __construct(

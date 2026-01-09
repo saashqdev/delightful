@@ -124,7 +124,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
                 $senderExtraDTO
             ));
         } catch (Throwable $e) {
-            // recorderrorlog，但不阻断处理流程
+            // recorderrorlog，但不阻断处理process
             $this->logger?->error('HandleBeDelightfulInstructionMessage failed', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),

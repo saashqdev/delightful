@@ -11,16 +11,16 @@ enum Type: int
 {
     case None = 0;
 
-    // 主流程（直接用作助理）
+    // 主process（直接用作助理）
     case Main = 1;
 
-    // 子流程
+    // 子process
     case Sub = 2;
 
     // tool
     case Tools = 3;
 
-    // 组合节点，运行方式有点类似于子流程
+    // 组合节点，运行方式有点类似于子process
     case CombinedNode = 4;
 
     // 循环节点

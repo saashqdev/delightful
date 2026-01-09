@@ -28,7 +28,7 @@ class VectorProgress
     }
 
     /**
-     * 追加完成数.
+     * 追加complete数.
      */
     public function additionalComplete(string $key, int $num): void
     {

@@ -109,7 +109,7 @@ class SocketIO implements OnMessageInterface, OnOpenInterface, OnCloseInterface
     /* @phpstan-ignore-next-line */
     public function onMessage($server, $frame): void
     {
-        // 链接不可用时，不再尝试推送message
+        // 链接不可用时，不再尝试pushmessage
         if (! $server->isAvailable()) {
             return;
         }

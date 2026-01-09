@@ -88,17 +88,17 @@ JSON, true));
         $currentDateTime = date('Y-m-d H:i:s');
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
-# 角色
+# role
 你是一个可以帮助user快速createuser级别定时task的助手
 
 
-## 流程
+## process
 1、call `create_user_crontab` 工具createuser级别定时task
 2、当前time是:{$currentDateTime}
 -topic_id是：750436587206451201
 -agent_id是：725682656757252096
-​​3、你需要checkday+time  是否比当前time大，如果不大，需要提醒usertime只能是未来的time
-4、你需要保证user输入的提示词中，有day, time和name的value
+​​3、你需要checkday+time  是否比当前time大，如果不大，需要reminderusertime只能是未来的time
+4、你需要保证user输入的hint词中，有day, time和name的value
 
 # 上下文
 
@@ -108,8 +108,8 @@ user的昵称是：当前user的昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一个定时task，taskname：提醒我做饭，从明天开始，每天早上9点执行，显示一条提醒我做饭的message',
-            'user_prompt' => '帮我create一个定时task，taskname：提醒我做饭，明天10点提醒我，显示一条提醒我做饭的message',
+            // 'user_prompt' => '帮我create一个定时task，taskname：reminder我做饭，从明天开始，每天早上9点执行，显示一条reminder我做饭的message',
+            'user_prompt' => '帮我create一个定时task，taskname：reminder我做饭，明天10点reminder我，显示一条reminder我做饭的message',
         ]);
 
         $runner->execute($vertexResult, $executionData);

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\Volcengine\ValueObject;
 
 /**
- * 火山引擎语音识别status码枚举.
+ * 火山引擎voice识别status码枚举.
  */
 enum VolcengineStatusCode: string
 {
@@ -23,12 +23,12 @@ enum VolcengineStatusCode: string
     case PROCESSING = '20000001';
 
     /**
-     * task在队列中 - 响应body为空.
+     * task在queue中 - 响应body为空.
      */
     case QUEUED = '20000002';
 
     /**
-     * 静音音频 - 无需重新query，直接重新submit.
+     * 静音audio - 无需重新query，直接重新submit.
      */
     case SILENT_AUDIO = '20000003';
 
@@ -38,12 +38,12 @@ enum VolcengineStatusCode: string
     case INVALID_PARAMS = '45000001';
 
     /**
-     * 空音频.
+     * 空audio.
      */
     case EMPTY_AUDIO = '45000002';
 
     /**
-     * 音频格式不正确.
+     * audio格式不正确.
      */
     case INVALID_AUDIO_FORMAT = '45000151';
 
@@ -85,7 +85,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否需要重新提交task
+     * 判断是否需要重新submittask
      */
     public function needsResubmit(): bool
     {
@@ -100,11 +100,11 @@ enum VolcengineStatusCode: string
         return match ($this) {
             self::SUCCESS => '识别success',
             self::PROCESSING => '正在处理中',
-            self::QUEUED => 'task在队列中',
-            self::SILENT_AUDIO => '静音音频',
+            self::QUEUED => 'task在queue中',
+            self::SILENT_AUDIO => '静音audio',
             self::INVALID_PARAMS => '请求parameter无效',
-            self::EMPTY_AUDIO => '空音频',
-            self::INVALID_AUDIO_FORMAT => '音频格式不正确',
+            self::EMPTY_AUDIO => '空audio',
+            self::INVALID_AUDIO_FORMAT => 'audio格式不正确',
             self::SERVER_BUSY => 'service器繁忙',
         };
     }

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Token\Entity\ValueObject;
 
 /**
- * tokentype:0:账号,1:user,2:organization,3:应用,4:流程.
+ * tokentype:0:账号,1:user,2:organization,3:应用,4:process.
  */
 enum DelightfulTokenType: int
 {
@@ -24,7 +24,7 @@ enum DelightfulTokenType: int
     // 应用,type_relation_value为应用id
     case App = 3;
 
-    // 流程,type_relation_value为流程id
+    // process,type_relation_value为processid
     case Flow = 4;
 
     // 天书开放平台

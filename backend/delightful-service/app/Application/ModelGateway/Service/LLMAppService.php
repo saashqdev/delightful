@@ -255,7 +255,7 @@ class LLMAppService extends AbstractLLMAppService
         $this->logger->info('images', $images);
         $this->recordImageGenerateMessageLog($modelVersion, $authorization->getId(), $authorization->getOrganizationCode());
 
-        // publish图片生成event
+        // publishimage生成event
         $imageGeneratedEvent = new ImageGeneratedEvent();
         $imageGeneratedEvent->setOrganizationCode($authorization->getOrganizationCode());
         $imageGeneratedEvent->setUserId($authorization->getId());
@@ -1110,7 +1110,7 @@ class LLMAppService extends AbstractLLMAppService
     }
 
     /**
-     * call图片生成model.
+     * callimage生成model.
      */
     protected function callImageModel(ModelGatewayDataIsolation $modelGatewayDataIsolation, ImageModel $imageModel, TextGenerateImageDTO $proxyModelRequest): OpenAIFormatResponse
     {
@@ -1130,7 +1130,7 @@ class LLMAppService extends AbstractLLMAppService
             $imageGenerateType = ImageGenerateModelType::fromModel($modelVersion, false);
         }
 
-        // build图片生成parameter
+        // buildimage生成parameter
         $imageGenerateParamsVO = new AIImageGenerateParamsVO();
         $imageGenerateParamsVO->setModel($modelVersion);
         $imageGenerateParamsVO->setUserPrompt($proxyModelRequest->getPrompt());
@@ -1707,12 +1707,12 @@ class LLMAppService extends AbstractLLMAppService
     }
 
     /**
-     * 统一触发图片生成event.
+     * 统一触发image生成event.
      *
      * @param string $creator create者ID
      * @param string $organizationCode organization编码
      * @param AbstractRequestDTO $requestDTO 请求DTO
-     * @param int $imageCount 图片数量
+     * @param int $imageCount image数量
      * @param string $providerModelId service商modelID
      * @param string $callTime calltime
      * @param float $startTime 开始time（微秒）

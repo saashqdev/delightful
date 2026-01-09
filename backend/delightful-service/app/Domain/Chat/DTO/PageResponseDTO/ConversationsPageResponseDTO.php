@@ -10,7 +10,7 @@ namespace App\Domain\Chat\DTO\PageResponseDTO;
 use App\Domain\Chat\Entity\DelightfulConversationEntity;
 
 /**
- * 分页响应DTO.
+ * pagination响应DTO.
  */
 class ConversationsPageResponseDTO extends PageResponseDTO
 {

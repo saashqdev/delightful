@@ -73,7 +73,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                 // check并修复开关指令的 residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
-                // 如果指令有变化，保存update
+                // 如果指令有变化，saveupdate
                 if ($hasChanges) {
                     if (! $isDryRun) {
                         $this->agentRepository->updateInstruct(
@@ -92,7 +92,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         $this->output->writeln(sprintf(
-            '处理完成！共处理 %d 个助理，%s %d 个助理的开关指令',
+            '处理complete！共处理 %d 个助理，%s %d 个助理的开关指令',
             $total,
             $isDryRun ? '发现需要update' : 'update了',
             $updated
@@ -124,7 +124,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                 // check并修复开关指令的 residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
-                // 如果指令有变化，保存update
+                // 如果指令有变化，saveupdate
                 if ($hasChanges) {
                     if (! $isDryRun) {
                         $this->agentVersionRepository->updateById(
@@ -141,7 +141,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         $this->output->writeln(sprintf(
-            '处理完成！共处理 %d 个助理版本，%s %d 个助理版本的开关指令',
+            '处理complete！共处理 %d 个助理版本，%s %d 个助理版本的开关指令',
             $versionTotal,
             $isDryRun ? '发现需要update' : 'update了',
             $versionUpdated
@@ -179,7 +179,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $this->output->writeln(Json::encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         $this->output->writeln(sprintf(
-            '处理完成！指令集%supdate',
+            '处理complete！指令集%supdate',
             $hasChanges ? '已' : '无需'
         ));
 

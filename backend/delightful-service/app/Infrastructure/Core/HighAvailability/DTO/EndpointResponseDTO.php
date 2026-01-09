@@ -73,7 +73,7 @@ class EndpointResponseDTO extends AbstractDTO
     protected string $updatedAt;
 
     /**
-     * 方便 debug 时追踪哪里 new 了它.
+     * 方便 debug 时trace哪里 new 了它.
      * @param mixed $data
      */
     public function __construct($data = [])

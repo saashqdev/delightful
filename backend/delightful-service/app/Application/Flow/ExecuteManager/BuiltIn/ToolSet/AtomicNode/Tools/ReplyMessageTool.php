@@ -36,7 +36,7 @@ class ReplyMessageTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '回复一段指定content给user';
+        return 'reply一段指定content给user';
     }
 
     public function getCallback(): ?Closure

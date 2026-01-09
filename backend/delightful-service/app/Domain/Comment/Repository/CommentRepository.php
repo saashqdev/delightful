@@ -22,10 +22,10 @@ class CommentRepository
     }
 
     /**
-     * create一个新的评论并维护相关的索引和附件。
+     * create一个新的comment并维护相关的索引和attachment。
      *
-     * @param CommentEntity $commentEntity 评论实体
-     * @return CommentEntity create后的评论实体
+     * @param CommentEntity $commentEntity comment实体
+     * @return CommentEntity create后的comment实体
      */
     public function create(string $organizationCode, CommentEntity $commentEntity): CommentEntity
     {
@@ -57,10 +57,10 @@ class CommentRepository
     }
 
     /**
-     * update指定的评论content和附件。
+     * update指定的commentcontent和attachment。
      *
      * @param RequestContext $requestContext 请求上下文
-     * @param CommentEntity $commentEntity 要update的评论实体
+     * @param CommentEntity $commentEntity 要update的comment实体
      */
     public function updateComment(
         RequestContext $requestContext,
@@ -81,11 +81,11 @@ class CommentRepository
     }
 
     /**
-     * according to条件get评论list。
+     * according to条件getcommentlist。
      *
      * @param RequestContext $requestContext 请求上下文
      * @param GetCommentsWhereVo $whereVo query条件valueobject
-     * @return array<CommentEntity> 评论实体array
+     * @return array<CommentEntity> comment实体array
      */
     public function getCommentsByConditions(
         RequestContext $requestContext,
@@ -104,11 +104,11 @@ class CommentRepository
     }
 
     /**
-     * according to评论IDarrayget对应的评论list。
+     * according tocommentIDarrayget对应的commentlist。
      *
      * @param RequestContext $requestContext 请求上下文
-     * @param array $commentIds 评论IDarray
-     * @return array<CommentEntity> 评论实体array
+     * @param array $commentIds commentIDarray
+     * @return array<CommentEntity> comment实体array
      */
     public function getCommentsByIds(
         RequestContext $requestContext,
@@ -120,11 +120,11 @@ class CommentRepository
     }
 
     /**
-     * according to评论IDget单个评论实体。
+     * according tocommentIDget单个comment实体。
      *
      * @param RequestContext $requestContext 请求上下文
-     * @param int $commentId 评论ID
-     * @return ?CommentEntity 评论实体，如果不存在则returnnull
+     * @param int $commentId commentID
+     * @return ?CommentEntity comment实体，如果不存在则returnnull
      */
     public function getCommentById(
         RequestContext $requestContext,
@@ -145,11 +145,11 @@ class CommentRepository
     }
 
     /**
-     * delete指定的评论。
+     * delete指定的comment。
      *
      * @param RequestContext $requestContext 请求上下文
-     * @param int $commentId 评论ID
-     * @return array delete的评论IDarray
+     * @param int $commentId commentID
+     * @return array delete的commentIDarray
      */
     public function delete(RequestContext $requestContext, int $commentId): array
     {
@@ -157,17 +157,17 @@ class CommentRepository
     }
 
     /**
-     * 批量delete指定的评论及其所有子评论。
+     * 批量delete指定的comment及其所有子comment。
      *
      * @param RequestContext $requestContext 请求上下文
-     * @param array $commentIds 要delete的评论IDarray
-     * @return array delete的评论IDarray
+     * @param array $commentIds 要delete的commentIDarray
+     * @return array delete的commentIDarray
      */
     public function batchDelete(
         RequestContext $requestContext,
         array $commentIds
     ): array {
-        // get这条评论下的所有子评论
+        // get这条comment下的所有子comment
         $descendantIds = $this->treeIndexRepository->getDescendantIdsByAncestorIds(
             $requestContext,
             CommentTreeIndexModel::query(),
@@ -176,7 +176,7 @@ class CommentRepository
 
         $deletedCommentIds = array_unique([...$commentIds, ...$descendantIds]);
 
-        // delete这条评论以及所有子评论
+        // delete这条comment以及所有子comment
         CommentModel::query()->whereIn('id', $deletedCommentIds)
             ->where('organization_code', $requestContext->getOrganizationCode())
             ->delete();
@@ -185,10 +185,10 @@ class CommentRepository
     }
 
     /**
-     * 批量恢复已delete的评论。
+     * 批量restore已delete的comment。
      *
      * @param RequestContext $requestContext 请求上下文
-     * @param array $commentIds 要恢复的评论IDarray
+     * @param array $commentIds 要restore的commentIDarray
      */
     public function batchRestore(
         RequestContext $requestContext,
@@ -200,10 +200,10 @@ class CommentRepository
     }
 
     /**
-     * according to资源IDget所有相关的评论。
+     * according to资源IDget所有相关的comment。
      *
      * @param int $resourceId 资源ID
-     * @return array<CommentEntity> 评论实体array
+     * @return array<CommentEntity> comment实体array
      */
     public function getCommentsByResourceId(string $organizationCode, int $resourceId): array
     {
@@ -215,11 +215,11 @@ class CommentRepository
     }
 
     /**
-     * according toquery条件get评论list。
+     * according toquery条件getcommentlist。
      *
      * @param RequestContext $requestContext 请求上下文
      * @param GetCommentsWhereVo $commentsWhereVo query条件valueobject
-     * @return array<CommentEntity> 评论实体array
+     * @return array<CommentEntity> comment实体array
      */
     public function query(RequestContext $requestContext, GetCommentsWhereVo $commentsWhereVo): array
     {
@@ -267,8 +267,8 @@ class CommentRepository
     /**
      * 将CommentModel转换为CommentEntity。
      *
-     * @param CommentModel $model 评论model
-     * @return CommentEntity 转换后的评论实体
+     * @param CommentModel $model commentmodel
+     * @return CommentEntity 转换后的comment实体
      */
     private function modelToEntity(CommentModel $model): CommentEntity
     {
@@ -294,8 +294,8 @@ class CommentRepository
     /**
      * 将多个CommentModel转换为CommentEntityarray。
      *
-     * @param mixed $models 评论model集合
-     * @return array<CommentEntity> 评论实体array
+     * @param mixed $models commentmodel集合
+     * @return array<CommentEntity> comment实体array
      */
     private function modelsToEntities(mixed $models): array
     {

@@ -10,22 +10,22 @@ namespace App\Application\Speech\Assembler;
 use App\Application\Speech\DTO\NoteDTO;
 
 /**
- * ASR提示词装配器
- * 负责buildASR相关的提示词模板.
+ * ASRhint词装配器
+ * 负责buildASR相关的hint词template.
  */
 class AsrPromptAssembler
 {
     /**
-     * generate录音总结标题的提示词.
+     * generate录音总结标题的hint词.
      *
-     * @param string $asrStreamContent 语音识别内容
+     * @param string $asrStreamContent voice识别内容
      * @param null|NoteDTO $note 笔记内容（可选）
      * @param string $language 输出语言（如：zh_CN, en_US）
-     * @return string 完整的提示词
+     * @return string 完整的hint词
      */
     public static function getTitlePrompt(string $asrStreamContent, ?NoteDTO $note, string $language): string
     {
-        // build内容：use XML 标签格式明确区分语音识别内容和笔记内容
+        // build内容：use XML tag格式明确区分voice识别内容和笔记内容
         $contentParts = [];
 
         // 如果有笔记，先添加笔记内容
@@ -33,8 +33,8 @@ class AsrPromptAssembler
             $contentParts[] = sprintf('<笔记内容>%s</笔记内容>', $note->content);
         }
 
-        // 添加语音识别内容
-        $contentParts[] = sprintf('<语音识别内容>%s</语音识别内容>', $asrStreamContent);
+        // 添加voice识别内容
+        $contentParts[] = sprintf('<voice识别内容>%s</voice识别内容>', $asrStreamContent);
 
         $textContent = implode("\n\n", $contentParts);
 
@@ -42,24 +42,24 @@ class AsrPromptAssembler
 你是一个专业的录音内容标题generate助手。
 
 ## 背景说明
-user提交了一段录音内容，录音内容经过语音识别转为文字，user可能还会提供手写的笔记作为补充说明。现在需要你according to这些内容generate一个简洁准确的标题。
+usersubmit了一段录音内容，录音内容经过voice识别转为文字，user可能还会提供手写的笔记作为补充说明。现在需要你according to这些内容generate一个简洁准确的标题。
 
 ## 内容来源说明
-- <笔记内容>：user手写的笔记内容，是对录音的重点记录和总结，通常contain关键信息
-- <语音识别内容>：通过语音识别技术将录音convert成的文字，反映录音的实际内容
+- <笔记内容>：user手写的笔记内容，是对录音的重点记录和总结，通常contain关键info
+- <voice识别内容>：通过voice识别技术将录音convert成的文字，反映录音的实际内容
 
 ## 标题generate要求
 
 ### 优先级原则（重要）
 1. **笔记优先**：如果存在<笔记内容>，标题应该侧重笔记内容
 2. **重视笔记标题**：如果笔记是 Markdown 格式且contain标题（# 开头的行），优先采用笔记中的标题内容
-3. **综合考虑**：同时参考语音识别内容，确保标题完整准确
-4. **关键词提取**：从笔记和语音识别内容中提取最核心的关键词
+3. **综合考虑**：同时参考voice识别内容，确保标题完整准确
+4. **关键词提取**：从笔记和voice识别内容中提取最核心的关键词
 
 ### 格式要求
 1. **长度限制**：不超过 20 个字符（汉字按 1 个字符计算）
 2. **语言风格**：use陈述性语句，避免疑问句
-3. **简洁明确**：直接概括核心主题，不要添加修饰词
+3. **简洁明确**：直接概括核心theme，不要添加修饰词
 4. **纯文本输出**：只输出标题内容，不要添加任何标点符号、引号或其他修饰
 
 ### 禁止行为
@@ -82,11 +82,11 @@ PROMPT;
     }
 
     /**
-     * generate文件上传场景的录音标题提示词（强调文件名的重要性）.
+     * generatefileupload场景的录音标题hint词（强调file名的重要性）.
      *
-     * @param string $userRequestMessage user在聊天框send的请求message
+     * @param string $userRequestMessage user在chat框send的请求message
      * @param string $language 输出语言（如：zh_CN, en_US）
-     * @return string 完整的提示词
+     * @return string 完整的hint词
      */
     public static function getTitlePromptForUploadedFile(
         string $userRequestMessage,
@@ -96,9 +96,9 @@ PROMPT;
 你是一个专业的录音内容标题generate助手。
 
 ## 背景说明
-user上传了一个音频文件到系统中，并在聊天框中send了总结请求。现在需要你according touser的请求message（其中contain文件名），为这次录音总结generate一个简洁准确的标题。
+userupload了一个audiofile到系统中，并在chat框中send了总结请求。现在需要你according touser的请求message（其中containfile名），为这次录音总结generate一个简洁准确的标题。
 
-## user在聊天框的请求
+## user在chat框的请求
 usersend的原始message如下：
 ```
 {userRequestMessage}
@@ -107,20 +107,20 @@ usersend的原始message如下：
 ## 标题generate要求
 
 ### 优先级原则（非常重要）
-1. **文件名优先**：文件名通常是user精心命名的，contain了最核心的主题信息，请重点参考usermessage中 @ 后面的文件名
+1. **file名优先**：file名通常是user精心命名的，contain了最核心的themeinfo，请重点参考usermessage中 @ 后面的file名
 2. **智能判断**：
-   - 如果文件名语义清晰（如"2024年Q4产品规划会议.mp3"、"客户需求讨论.wav"），优先based on文件名generate标题
-   - 如果文件名是日期时间戳（如"20241112_143025.mp3"）或无意义字符（如"录音001.mp3"），则use通用描述
-3. **提取关键词**：从文件名中提取最核心的关键词和主题
+   - 如果file名语义清晰（如"2024年Q4产品规划会议.mp3"、"客户需求discussion.wav"），优先based onfile名generate标题
+   - 如果file名是日期时间戳（如"20241112_143025.mp3"）或无意义字符（如"录音001.mp3"），则use通用描述
+3. **提取关键词**：从file名中提取最核心的关键词和theme
 
 ### 格式要求
 1. **长度限制**：不超过 20 个字符（汉字按 1 个字符计算）
 2. **语言风格**：use陈述性语句，避免疑问句
-3. **简洁明确**：直接概括核心主题，不要添加修饰词
+3. **简洁明确**：直接概括核心theme，不要添加修饰词
 4. **纯文本输出**：只输出标题内容，不要添加任何标点符号、引号或其他修饰
 
 ### 禁止行为
-- 不要保留文件扩展名（.mp3、.wav、.webm 等）
+- 不要保留fileextension名（.mp3、.wav、.webm 等）
 - 不要输出标题以外的任何内容
 - 不要添加引号、书名号等标点符号
 

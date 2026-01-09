@@ -177,7 +177,7 @@ class ProviderAppService
             return $this->translator->trans('common.recommended');
         }
 
-        // 2. 自定义service商且有别名
+        // 2. customizeservice商且有别名
         if ($this->isCustomProvider($providerEntity)
             && $configEntity
             && ! empty($configEntity->getAlias())) {
@@ -189,7 +189,7 @@ class ProviderAppService
     }
 
     /**
-     * 判断是否为自定义service商.
+     * 判断是否为customizeservice商.
      */
     private function isCustomProvider(ProviderEntity $providerEntity): bool
     {

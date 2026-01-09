@@ -18,7 +18,7 @@ enum ResourceType: int
     case AgentCode = 1;
 
     /**
-     * 子流程.
+     * 子process.
      */
     case SubFlowCode = 2;
 

@@ -46,7 +46,7 @@ use Throwable;
 
 use function Hyperf\Translation\__;
 
-#[FlowNodeDefine(type: NodeType::ReplyMessage->value, code: NodeType::ReplyMessage->name, name: '回复message', paramsConfig: ReplyMessageNodeParamsConfig::class, version: 'v0', singleDebug: false, needInput: false, needOutput: false)]
+#[FlowNodeDefine(type: NodeType::ReplyMessage->value, code: NodeType::ReplyMessage->name, name: 'replymessage', paramsConfig: ReplyMessageNodeParamsConfig::class, version: 'v0', singleDebug: false, needInput: false, needOutput: false)]
 class ReplyMessageNodeRunner extends NodeRunner
 {
     /**
@@ -57,7 +57,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         /** @var ReplyMessageNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        // 如果具有 大model的流式响应体，那么直接开始
+        // 如果具有 大model的stream响应体，那么直接开始
         if ($executionData->getExecutionType()->isSupportStream() && ! empty($frontResults['chat_completion_choice_generator'])) {
             $streamResponse = $this->sendMessageForStream($executionData, $frontResults);
             // 生成大model节点的响应给回去
@@ -73,7 +73,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $paramsConfig->getLinkDesc()
         );
 
-        // 如果是资源类的数据，那么需要提前上传了
+        // 如果是资源类的数据，那么需要提前upload了
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
         // 由于里面会进行重命名，所以这里直接get对应的name传入进去
@@ -108,7 +108,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $this->sendMessageForStreamApi($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }
 
-        // Chat call，每次流式都是一条新message
+        // Chat call，每次stream都是一条新message
         if ($executionData->getExecutionType()->isImChat()) {
             $this->sendMessageForStreamIMChat($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }
@@ -306,7 +306,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $receiveSeqDTO->setReferMessageId($flowSeqEntity->getMessageId());
         }
 
-        // 发送开始标记
+        // 发送开始mark
         $chatAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $receiveUserId, $appMessageId, receiverType: ConversationType::User);
 
         $outputCall = function (string $data, array $compressibleContent, array $params) use ($chatAppService, $appMessageId, $aiUserId, $receiveUserId) {
@@ -371,7 +371,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                 'line' => $throwable->getLine(),
                 'trace' => $throwable->getTraceAsString(),
             ]);
-            // 报错推送兜底message
+            // 报错push兜底message
             $streamOptions->setStatus(StreamMessageStatus::Processing);
             $messageContent = new TextMessage();
             $messageContent->setStreamOptions($streamOptions);
@@ -379,7 +379,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $receiveSeqDTO->setContent($messageContent);
             $chatAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $receiveUserId, $appMessageId, receiverType: ConversationType::User);
         } finally {
-            // 发送结束标记
+            // 发送结束mark
             $streamOptions->setStatus(StreamMessageStatus::Completed);
             $messageContent->setContent('end');
             $messageContent->setStreamOptions($streamOptions);

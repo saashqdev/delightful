@@ -82,7 +82,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * 优化版本：直接通过JOINqueryget启用的助理版本，避免传入大量ID.
+     * optimize版本：直接通过JOINqueryget启用的助理版本，避免传入大量ID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -108,7 +108,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * 优化版本：get启用助理的总数.
+     * optimize版本：get启用助理的总数.
      */
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {

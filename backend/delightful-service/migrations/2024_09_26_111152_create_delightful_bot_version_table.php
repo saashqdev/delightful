@@ -16,8 +16,8 @@ return new class extends Migration {
     {
         Schema::create('delightful_bot_versions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('flow_code')->comment('工作流code');
-            $table->string('flow_version')->comment('工作流version');
+            $table->string('flow_code')->comment('workflowcode');
+            $table->string('flow_version')->comment('workflowversion');
             $table->json('instruct')->comment('交互instruction');
             $table->bigInteger('root_id')->comment('根id');
             $table->string('robot_name')->comment('assistant name');
@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->string('version_number')->nullable()->comment('version number');
             $table->integer('release_scope')->nullable()->comment('publish范围.1:publish到企业内部 2:publish到应用市场');
 
-            $table->integer('approval_status')->default(3)->nullable(false)->comment('审批status');
+            $table->integer('approval_status')->default(3)->nullable(false)->comment('approvalstatus');
             $table->integer('review_status')->default(0)->nullable(false)->comment('审核status');
             $table->integer('enterprise_release_status')->default(0)->nullable(false)->comment('publish到企业内部status');
             $table->integer('app_market_status')->default(0)->nullable(false)->comment('publish到应用市场status');

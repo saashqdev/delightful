@@ -17,7 +17,7 @@ use Mockery;
 
 /**
  * @internal
- * 项目成员管理API测试
+ * 项目成员管理APItest
  */
 class ProjectMemberApiTest extends AbstractApiTest
 {
@@ -51,7 +51,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateEmptyMembers($projectId);
         $this->updateFileContent($fileId, 'test1', 51154);
 
-        // 没权限
+        // 没permission
         $this->switchUserTest2();
         $this->updateFileContent($fileId, 'test2', 51202);
 
@@ -59,45 +59,45 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 有权限
+        // 有permission
         $this->switchUserTest2();
         $this->updateFileContent($fileId, 'test2', 51154);
     }
 
     public function testFile()
     {
-        // use现有的项目和文件ID进行测试
-        $fileId = $this->fileId; // 测试文件ID
+        // use现有的项目和fileID进行test
+        $fileId = $this->fileId; // testfileID
         $projectId = $this->projectId;
 
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
-        // 测试没权限
+        // test没permission
         $this->fileEditingPermissionControl($fileId);
 
         $this->switchUserTest1();
 
         $this->updateMembers($projectId);
 
-        // 10. 测试文件编辑status管理功能
+        // 10. testfileeditstatus管理功能
         $this->fileEditingStatusManagement($fileId);
 
         $this->fileEditingEdgeCases($fileId);
     }
 
     /**
-     * 测试项目置顶权限控制.
+     * test项目置顶permission控制.
      */
     public function testProjectPinPermission(): void
     {
         $projectId = $this->projectId;
 
-        // 1. 先设置项目成员，确保测试2user有权限
+        // 1. 先setting项目成员，确保test2user有permission
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 2. 切换到有权限的user测试置顶success
+        // 2. 切换到有permission的usertest置顶success
         $this->switchUserTest2();
         $this->pinProject($projectId, true);
 
@@ -105,24 +105,24 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
-        // 4. 清null项目成员，使当前user没有权限
+        // 4. 清null项目成员，使当前user没有permission
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
-        // 5. 切换到没有权限的user测试权限控制
+        // 5. 切换到没有permission的usertestpermission控制
         $this->switchUserTest2();
-        // 测试非项目成员不能置顶 - 应该return权限error
-        $this->pinProject($projectId, true, 51202); // 假设51202是权限error码
+        // test非项目成员不能置顶 - 应该returnpermissionerror
+        $this->pinProject($projectId, true, 51202); // 假设51202是permissionerror码
     }
 
     /**
-     * 测试置顶功能边界情况.
+     * test置顶功能边界情况.
      */
     public function testProjectPinEdgeCases(): void
     {
         $projectId = $this->projectId;
 
-        // 确保user有权限
+        // 确保user有permission
         $this->switchUserTest1();
         $this->updateMembers($projectId);
         $this->switchUserTest2();
@@ -135,9 +135,9 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
-        // 2. 重复取消置顶 - 应该正常handle
+        // 2. 重复cancel置顶 - 应该正常handle
         $this->pinProject($projectId, false);
-        $this->pinProject($projectId, false); // 重复取消置顶
+        $this->pinProject($projectId, false); // 重复cancel置顶
 
         // validate项目不是置顶status
         $response = $this->collaborationProjectsWithPinCheck();
@@ -145,7 +145,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试更新项目成员 - success场景.
+     * test更新项目成员 - success场景.
      */
     public function testUpdateProjectMembersSuccess(): void
     {
@@ -188,16 +188,16 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->topicList($workspaceId, $projectId);
         // 更新话题
         $this->renameTopic($workspaceId, $projectId, $topicId);
-        // 分享话题
+        // share话题
         $this->createTopicShare($workspaceId, $projectId, $topicId);
-        // 项目文件
+        // 项目file
         $this->attachments($workspaceId, $projectId, $topicId);
-        // 删除话题
+        // delete话题
         $this->deleteTopic($workspaceId, $projectId, $topicId);
 
         $this->updateEmptyMembers($projectId);
 
-        // 3. 没有权限
+        // 3. 没有permission
         $this->switchUserTest2();
         $this->updateEmptyMembers($projectId, 51202);
         $this->updateProject($workspaceId, $projectId, 51202);
@@ -230,22 +230,22 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->topicList($workspaceId, $projectId);
         // 更新话题
         $this->renameTopic($workspaceId, $projectId, $topicId);
-        // 分享话题
+        // share话题
         $this->createTopicShare($workspaceId, $projectId, $topicId);
         // sendmessage
         //        $this->sendMessage($workspaceId, $projectId, $topicId);
-        // 项目文件
+        // 项目file
         $file = $this->attachments($workspaceId, $projectId, $topicId);
-        // 重命名项目文件
+        // 重命名项目file
         //        $this->renameAttachments((string) $file['file_id']);
 
-        // 删除话题
+        // delete话题
         $this->deleteTopic($workspaceId, $projectId, $topicId);
 
-        // 9. 测试项目置顶功能
+        // 9. test项目置顶功能
         $this->projectPinFeature($projectId);
 
-        // 10. 测试协作项目create者列表功能
+        // 10. test协作项目create者列表功能
         //        $this->collaborationProjectCreatorFeature();
 
         // 11. 清nullnull成员
@@ -495,45 +495,45 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试文件编辑status管理 - 完整流程测试.
+     * testfileeditstatus管理 - 完整processtest.
      */
     public function fileEditingStatusManagement(string $fileId): void
     {
         $this->switchUserTest1();
 
-        // 1. 测试加入编辑
+        // 1. test加入edit
         $this->joinFileEditing($fileId);
 
-        // 2. 测试获取编辑user数量 - 应该有1个user在编辑
+        // 2. test获取edituser数量 - 应该有1个user在edit
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 3. 切换到另一个user，测试多user编辑
+        // 3. 切换到另一个user，test多useredit
         $this->switchUserTest2();
         $this->joinFileEditing($fileId);
 
-        // 4. 再次获取编辑user数量 - 应该有2个user在编辑
+        // 4. 再次获取edituser数量 - 应该有2个user在edit
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(2, $editingCount);
 
-        // 5. 测试离开编辑
+        // 5. test离开edit
         $this->leaveFileEditing($fileId);
 
-        // 6. 获取编辑user数量 - 应该只剩1个user
+        // 6. 获取edituser数量 - 应该只剩1个user
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 7. 切换回第一个user，测试权限
+        // 7. 切换回第一个user，testpermission
         $this->switchUserTest1();
         $this->leaveFileEditing($fileId);
 
-        // 8. 最终validate没有user在编辑
+        // 8. 最终validate没有user在edit
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(0, $editingCount);
     }
 
     /**
-     * 测试加入文件编辑.
+     * test加入fileedit.
      */
     public function joinFileEditing(string $fileId, int $expectedCode = 1000): array
     {
@@ -552,7 +552,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试离开文件编辑.
+     * test离开fileedit.
      */
     public function leaveFileEditing(string $fileId, int $expectedCode = 1000): array
     {
@@ -571,7 +571,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试获取编辑user数量.
+     * test获取edituser数量.
      */
     public function getEditingUsers(string $fileId, int $expectedCode = 1000): int
     {
@@ -592,30 +592,30 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试文件编辑权限控制.
+     * testfileeditpermission控制.
      */
     public function fileEditingPermissionControl(string $unauthorizedFileId): void
     {
         $this->switchUserTest2();
 
-        // 测试无权限加入编辑 - 应该returnerror
-        $this->joinFileEditing($unauthorizedFileId, 51202); // 假设51200是无权限error码
+        // test无permission加入edit - 应该returnerror
+        $this->joinFileEditing($unauthorizedFileId, 51202); // 假设51200是无permissionerror码
 
-        // 测试无权限离开编辑 - 应该returnerror
+        // test无permission离开edit - 应该returnerror
         $this->leaveFileEditing($unauthorizedFileId, 51202);
 
-        // 测试无权限query编辑user - 应该returnerror
+        // test无permissionqueryedituser - 应该returnerror
         $this->getEditingUsers($unauthorizedFileId, 51202);
     }
 
     /**
-     * 测试文件编辑边界情况.
+     * testfileedit边界情况.
      */
     public function fileEditingEdgeCases(string $fileId): void
     {
         $this->switchUserTest1();
 
-        // 1. 重复加入编辑 - 应该正常handle
+        // 1. 重复加入edit - 应该正常handle
         $this->joinFileEditing($fileId);
         $this->joinFileEditing($fileId); // 重复加入
 
@@ -623,7 +623,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 2. 重复离开编辑 - 应该正常handle
+        // 2. 重复离开edit - 应该正常handle
         $this->leaveFileEditing($fileId);
         $this->leaveFileEditing($fileId); // 重复离开
 
@@ -631,7 +631,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(0, $editingCount);
 
-        // 3. 测试无效文件ID格式
+        // 3. test无效fileID格式
         $invalidFileId = 'invalid_file_id';
         $this->joinFileEditing($invalidFileId, 51202); // 假设400是parametererror
     }
@@ -661,28 +661,28 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试项目置顶功能 - 完整流程测试.
+     * test项目置顶功能 - 完整processtest.
      */
     public function projectPinFeature(string $projectId): void
     {
         // 确保当前user是项目成员
         $this->switchUserTest2();
 
-        // 1. 测试置顶项目
+        // 1. test置顶项目
         $this->pinProject($projectId, true);
 
         // 2. validate协作项目列表中项目被置顶
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
-        // 3. 测试取消置顶
+        // 3. testcancel置顶
         $this->pinProject($projectId, false);
 
         // 4. validate协作项目列表中项目不再置顶
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, false);
 
-        // 5. 重新置顶项目以测试sort
+        // 5. 重新置顶项目以testsort
         $this->pinProject($projectId, true);
 
         // 6. validate置顶项目排在前面
@@ -691,7 +691,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 置顶或取消置顶项目.
+     * 置顶或cancel置顶项目.
      */
     public function pinProject(string $projectId, bool $isPinned, int $expectedCode = 1000): array
     {
@@ -779,60 +779,60 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试协作项目create者列表功能 - 完整流程测试.
+     * test协作项目create者列表功能 - 完整processtest.
      */
     public function collaborationProjectCreatorFeature(): void
     {
-        // 1. 测试有权限user获取create者列表
-        $this->switchUserTest2(); // 确保是有权限的协作user
+        // 1. test有permissionuser获取create者列表
+        $this->switchUserTest2(); // 确保是有permission的协作user
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
-        // 2. 测试权限控制 - 清null成员后无权限
+        // 2. testpermission控制 - 清null成员后无permission
         $this->switchUserTest1(); // 切换到项目所有者
         $this->updateEmptyMembers($this->projectId); // 清null项目成员
 
-        $this->switchUserTest2(); // 切换到无权限user
+        $this->switchUserTest2(); // 切换到无permissionuser
         $emptyResponse = $this->getCollaborationProjectCreators();
         $this->verifyEmptyCreatorListResponse($emptyResponse);
 
-        // 3. 恢复项目成员status，以免影响后续测试
+        // 3. restore项目成员status，以免影响后续test
         $this->switchUserTest1();
         $this->updateMembers($this->projectId);
     }
 
     /**
-     * 测试协作项目create者列表权限控制.
+     * test协作项目create者列表permission控制.
      */
     public function testCollaborationProjectCreatorsPermission(): void
     {
         $projectId = $this->projectId;
 
-        // 1. 先设置项目成员，确保测试2user有权限
+        // 1. 先setting项目成员，确保test2user有permission
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 2. 切换到有权限的user测试获取create者列表success
+        // 2. 切换到有permission的usertest获取create者列表success
         $this->switchUserTest2();
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
-        // 3. 清null项目成员，使当前user没有权限
+        // 3. 清null项目成员，使当前user没有permission
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
-        // 4. 切换到没有权限的user测试权限控制
+        // 4. 切换到没有permission的usertestpermission控制
         $this->switchUserTest2();
         $emptyResponse = $this->getCollaborationProjectCreators();
         //        $this->verifyEmptyCreatorListResponse($emptyResponse);
     }
 
     /**
-     * 测试协作项目create者列表边界情况.
+     * test协作项目create者列表边界情况.
      */
     public function testCollaborationProjectCreatorsEdgeCases(): void
     {
-        // 确保user有权限
+        // 确保user有permission
         $this->switchUserTest1();
         $this->updateMembers($this->projectId);
         $this->switchUserTest2();
@@ -905,7 +905,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals(1000, $response['code']);
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data'], '响应数据应该是array');
-        $this->assertEquals(0, count($response['data']), '无权限时应该returnnullarray');
+        $this->assertEquals(0, count($response['data']), '无permission时应该returnnullarray');
     }
 
     /**
@@ -925,7 +925,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 清理项目成员数据（直接数据库删除）.
+     * 清理项目成员数据（直接数据库delete）.
      */
     private function cleanupProjectMembers(string $projectId): void
     {

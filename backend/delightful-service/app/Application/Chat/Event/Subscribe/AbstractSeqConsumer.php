@@ -37,10 +37,10 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
     protected LoggerInterface $logger;
 
     /**
-     * setting队列优先级parameter.
+     * settingqueue优先级parameter.
      */
     protected AMQPTable|array $arguments = [
-        'x-ha-policy' => ['S', 'all'], // 将队列镜像到所有节点,hyperf 默认configuration
+        'x-ha-policy' => ['S', 'all'], // 将queue镜像到所有节点,hyperf 默认configuration
     ];
 
     protected MessagePriority $priority;
@@ -63,7 +63,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
     }
 
     /**
-     * 继承以implementsetting队列相关parameter.
+     * 继承以implementsettingqueue相关parameter.
      */
     public function getQueueBuilder(): QueueBuilder
     {

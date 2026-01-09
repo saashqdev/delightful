@@ -10,17 +10,17 @@ namespace App\Interfaces\Permission\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * create子管理员角色请求DTO.
+ * create子管理员role请求DTO.
  */
 class CreateSubAdminRequestDTO extends AbstractDTO
 {
     /**
-     * 角色name（必填）.
+     * rolename（必填）.
      */
     public string $name = '';
 
     /**
-     * 角色status：0=禁用, 1=启用（默认启用）.
+     * rolestatus：0=禁用, 1=启用（默认启用）.
      */
     public int $status = 1;
 
@@ -79,12 +79,12 @@ class CreateSubAdminRequestDTO extends AbstractDTO
      */
     public function validate(): bool
     {
-        // 验证角色name不能为空
+        // 验证rolename不能为空
         if (empty(trim($this->name))) {
             return false;
         }
 
-        // 验证角色name长度不超过255字符
+        // 验证rolename长度不超过255字符
         if (strlen($this->name) > 255) {
             return false;
         }
@@ -124,15 +124,15 @@ class CreateSubAdminRequestDTO extends AbstractDTO
         $errors = [];
 
         if (empty(trim($this->name))) {
-            $errors[] = '角色name不能为空';
+            $errors[] = 'rolename不能为空';
         }
 
         if (strlen($this->name) > 255) {
-            $errors[] = '角色name长度不能超过255个字符';
+            $errors[] = 'rolename长度不能超过255个字符';
         }
 
         if (! in_array($this->status, [0, 1])) {
-            $errors[] = '角色statusvalue无效，只能是0或1';
+            $errors[] = 'rolestatusvalue无效，只能是0或1';
         }
 
         if (! empty($this->permissions)) {

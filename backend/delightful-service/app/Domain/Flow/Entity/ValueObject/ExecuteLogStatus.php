@@ -15,13 +15,13 @@ enum ExecuteLogStatus: int
     // 运行中
     case Running = 2;
 
-    // 完成
+    // complete
     case Completed = 3;
 
-    // 失败
+    // fail
     case Failed = 4;
 
-    // 取消
+    // cancel
     case Canceled = 5;
 
     public function isFinished(): bool

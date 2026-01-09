@@ -57,7 +57,7 @@ use RedisException;
 use Throwable;
 
 /**
- * 聊天message相关.
+ * chatmessage相关.
  * @deprecated use DelightfulChatAISearchV2AppService 代替
  */
 class DelightfulChatAISearchAppService extends AbstractAppService
@@ -91,7 +91,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         );
         $this->logger->info(sprintf('mindSearch aggregateSearch startaggregatesearch  searchKeyword：%s searchtype：%s', $searchKeyword, $dto->getSearchDeepLevel()->name));
         $antiRepeatKey = md5($conversationId . $topicId . $searchKeyword);
-        // 防重(不知道哪来的bug):如果同一conversation同一话题下,2秒内有重复的message,不触发流程
+        // 防重(不知道哪来的bug):如果同一conversation同一话题下,2秒内有重复的message,不触发process
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return;
         }
@@ -137,7 +137,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 $readPagesDetailChannel = null;
                 $this->simpleSearch($dto, $associateQuestions, $noRepeatSearchContexts);
             }
-            // use channel 通信，精读过程中就推送message给前端
+            // use channel 通信，精读过程中就pushmessage给前端
             $associateQuestionIds = array_keys($associateQuestions);
             $this->sendLLMResponseForAssociateQuestions($dto, $associateQuestionIds, $readPagesDetailChannel);
             $this->sleepToFixBug(0.3);
@@ -173,7 +173,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     }
 
     /**
-     * 麦吉互联网search简单版，适配流程，仅支持简单search.
+     * 麦吉互联网search简单版，适配process，仅支持简单search.
      * @throws Throwable
      * @throws RedisException
      */
@@ -183,7 +183,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         $topicId = $dto->getTopicId();
         $searchKeyword = $dto->getUserMessage();
         $antiRepeatKey = md5($conversationId . $topicId . $searchKeyword);
-        // 防重(不知道哪来的bug):如果同一conversation同一话题下,2秒内有重复的message,不触发流程
+        // 防重(不知道哪来的bug):如果同一conversation同一话题下,2秒内有重复的message,不触发process
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return null;
         }
@@ -259,7 +259,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     AggregateAISearchCardResponseType::SEARCH,
                     [
                         'search_keywords' => [],
-                        // 推送前 5 个search结果。 且兼容历史数据，key use小驼峰
+                        // push前 5 个search结果。 且兼容历史数据，key use小驼峰
                         'search' => $this->getSearchData($currentContextChunk),
                         'total_words' => $totalWords,
                         // 全网资料总计
@@ -271,7 +271,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     $dto->getTopicId()
                 );
                 $this->logger->info(sprintf(
-                    'getSearchResults 关联问题：%s 的null白子问题generate并推送完毕 end计时，耗时 %s 秒',
+                    'getSearchResults 关联问题：%s 的null白子问题generate并push完毕 end计时，耗时 %s 秒',
                     $associateQuestion['title'],
                     TimeUtil::getMillisecondDiffFromNow($start) / 1000
                 ));
@@ -280,7 +280,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         }
         $parallel->wait();
         $this->logger->info(sprintf(
-            'getSearchResults 所有关联问题的null白子问题推送完毕 end计时，耗时：%s 秒',
+            'getSearchResults 所有关联问题的null白子问题push完毕 end计时，耗时：%s 秒',
             TimeUtil::getMillisecondDiffFromNow($start) / 1000
         ));
     }
@@ -338,7 +338,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     $dto->getTopicId()
                 );
                 $this->logger->info(sprintf(
-                    'getSearchResults 关联问题：%s 的子问题 %s generate并推送完毕 end计时，耗时 %s 秒',
+                    'getSearchResults 关联问题：%s 的子问题 %s generate并push完毕 end计时，耗时 %s 秒',
                     $associateQuestion['title'],
                     Json::encode($associateSubQuestions, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
                     TimeUtil::getMillisecondDiffFromNow($start) / 1000
@@ -348,7 +348,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         }
         $parallel->wait();
         $this->logger->info(sprintf(
-            'getSearchResults 所有关联问题的子问题 generate并推送完毕 end计时，耗时：%s 秒',
+            'getSearchResults 所有关联问题的子问题 generate并push完毕 end计时，耗时：%s 秒',
             TimeUtil::getMillisecondDiffFromNow($start) / 1000
         ));
     }
@@ -399,7 +399,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     ): array {
         // generate关联问题
         $associateQuestions = $this->generateAssociateQuestions($queryVo);
-        // 将关联问题推送给前端
+        // 将关联问题push给前端
         $this->aiSendMessage(
             $dto->getConversationId(),
             (string) $this->idGenerator->generate(),
@@ -440,7 +440,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             ];
         }
         $this->logger->info(sprintf(
-            'getSearchResults 问题：%s 关联问题: %s .according to原始问题 + search结果，按多个维度拆解关联问题并推送完毕 end计时，耗时 %s 秒',
+            'getSearchResults 问题：%s 关联问题: %s .according to原始问题 + search结果，按多个维度拆解关联问题并push完毕 end计时，耗时 %s 秒',
             $queryVo->getUserMessage(),
             Json::encode($relatedQuestions, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
             TimeUtil::getMillisecondDiffFromNow($start) / 1000
@@ -515,7 +515,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     }
 
     /**
-     * 推送最后一个关联问题的 llm 响应end标识.
+     * push最后一个关联问题的 llm 响应end标识.
      * @throws Throwable
      */
     public function sendAssociateQuestionResponse(DelightfulChatAggregateSearchReqDTO $dto, string $associateQuestionId): void
@@ -533,7 +533,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     }
 
     /**
-     * 精读的过程中，隔随机时间推送一次关联问题search完毕给前端。
+     * 精读的过程中，隔随机时间push一次关联问题search完毕给前端。
      * 完全精读完毕时，最后再推一次
      * @throws Throwable
      */
@@ -557,7 +557,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         array $noRepeatSearchContexts,
         array $associateQuestions,
     ): DelightfulAggregateSearchSummaryDTO {
-        // 由于是stream输出响应，因此让前端判断 ai 引用的search url。
+        // 由于是stream输出响应，因此让前端判断 ai quote的search url。
         Coroutine::create(function () use ($dto, $noRepeatSearchContexts) {
             CoContext::setRequestId($dto->getRequestId());
             $messageId = (string) $this->idGenerator->generate();
@@ -643,7 +643,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     $messageContent,
                     $senderConversationEntity
                 );
-                // 推送一次 parent_id/id/type 数据，用于更新stream缓存，避免最终落库时，parent_id/id/type 数据丢失
+                // push一次 parent_id/id/type 数据，用于更新streamcache，避免最终落库时，parent_id/id/type 数据丢失
                 $this->delightfulChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [
                     'parent_id' => '0',
                     'id' => $summaryMessageId,
@@ -873,10 +873,10 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     $content = mb_substr($content, 0, 2048);
                     $context->setDetail($content);
                     ++$currentDetailReadCount;
-                    // according to精读进度，推送关联问题search完毕给前端
+                    // according to精读进度，push关联问题search完毕给前端
                     if (($currentDetailReadCount % $perReadResponseNum === 0) && $readPagesDetailChannel->isAvailable()) {
                         $readPagesDetailChannel->push(1, 5);
-                        // 需要推送的次数减少
+                        // 需要push的次数减少
                         --$questionsNum;
                     }
                 } catch (Throwable $e) {
@@ -891,7 +891,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             });
         }
         $parallel->wait();
-        // 如果还有需要推送的次数，循环推送
+        // 如果还有需要push的次数，循环push
         while ($questionsNum > 0 && $readPagesDetailChannel->isAvailable()) {
             $readPagesDetailChannel->push(1, 5);
             --$questionsNum;
@@ -1013,7 +1013,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             ->setSeqType($messageInterface->getMessageTypeEnum())
             ->setAppMessageId($appMessageId)
             ->setExtra($extra);
-        // 设置话题 id
+        // setting话题 id
         $this->getDelightfulChatMessageAppService()->aiSendMessage($seqDTO, $appMessageId);
     }
 
@@ -1023,7 +1023,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     private function getDelightfulChatMessages(string $delightfulChatConversationId, string $topicId): array
     {
         $rawHistoryMessages = $this->delightfulChatDomainService->getLLMContentForAgent($delightfulChatConversationId, $topicId);
-        // 取最后指定条数的对话记录
+        // 取最后指定条数的conversation记录
         return array_slice($rawHistoryMessages, -10);
     }
 

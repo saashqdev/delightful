@@ -55,7 +55,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             ControlMessageType::HideConversation,
             ControlMessageType::MuteConversation,
             ControlMessageType::TopConversation => $this->conversationDomainService->conversationOptionChange($messageDTO, $dataIsolation),
-            // 撤回,已读,已读回执,编辑message
+            // withdraw,已读,已读回执,editmessage
             ControlMessageType::SeenMessages,
             ControlMessageType::ReadMessage,
             ControlMessageType::RevokeMessage,
@@ -74,7 +74,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * 分发asyncmessage队列中的seq.
+     * 分发asyncmessagequeue中的seq.
      * such asaccording to发件方的seq,为收件方生成seq,投递seq.
      * @throws Throwable
      */
@@ -89,7 +89,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
                 break;
             case ControlMessageType::RevokeMessage:
             case ControlMessageType::EditMessage:
-                // 撤回message,编辑message等场景
+                // withdrawmessage,editmessage等场景
                 $this->controlDomainService->handlerMQUserSelfMessageChange($delightfulSeqEntity);
                 break;
             case ControlMessageType::CreateTopic:
@@ -116,7 +116,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageEntity, $conversationId);
         // async将生成的message流notifyuser的其他设备.
         $this->controlDomainService->pushControlSequence($seqEntity);
-        // 将message流return给当前客户端! 但是还是会async推送给user的所有在线客户端.
+        // 将message流return给当前客户端! 但是还是会asyncpush给user的所有online客户端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 
@@ -129,14 +129,14 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         $seqCreatedEvent = $this->controlDomainService->pushControlSequence($seqEntity);
         // async分发控制message,对方操作了session的话题
         $this->controlDomainService->dispatchSeq($seqCreatedEvent);
-        // 将message流return给当前客户端! 但是还是会async推送给user的所有在线客户端.
+        // 将message流return给当前客户端! 但是还是会asyncpush给user的所有online客户端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 
     private function handlerMQTopicControlMessage(DelightfulSeqEntity $delightfulSeqEntity): void
     {
         $receiveSeqEntity = $this->topicDomainService->dispatchMQTopicOperation($delightfulSeqEntity);
-        // async推送给收件方,有新的话题
+        // asyncpush给收件方,有新的话题
         $receiveSeqEntity && $this->controlDomainService->pushControlSequence($receiveSeqEntity);
     }
 }

@@ -16,9 +16,9 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 interface AuthenticationInterface
 {
     /**
-     * 验证请求的身份信息.
+     * 验证请求的身份info.
      *
-     * @throws InvalidParamsException when验证失败时抛出
+     * @throws InvalidParamsException when验证fail时抛出
      */
     public function authenticate(MessageInterface $request): void;
 }

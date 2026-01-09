@@ -9,13 +9,13 @@ namespace App\Interfaces\Flow\DTO;
 
 class StartApprovalDTO extends AbstractFlowDTO
 {
-    // 审批模板编码
+    // approvaltemplate编码
     public string $templateCode = '';
 
-    // 审批table单data
+    // approvaltable单data
     public array $formData = [];
 
-    // 审批流data
+    // approval流data
     public array $approvalData = [];
 
     // departmentID

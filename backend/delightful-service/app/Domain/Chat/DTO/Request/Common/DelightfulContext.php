@@ -17,7 +17,7 @@ class DelightfulContext extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 登录成功后下发的token.
+     * 登录success后下发的token.
      */
     protected string $authorization;
 

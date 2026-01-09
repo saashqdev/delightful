@@ -9,6 +9,6 @@ return [
     'locale' => 'zh_CN',
     // 回退语言，when默认语言的语言文本没有提供时，就会use回退语言的对应语言文本
     'fallback_locale' => 'en_US',
-    // 语言文件存放的文件夹
+    // 语言file存放的file夹
     'path' => BASE_PATH . '/storage/languages',
 ];

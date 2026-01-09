@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
- * 服务商模板ID枚举
+ * 服务商templateID枚举
  * 将ProviderCode和Category的组合映射为固定的数值型string.
  */
 enum ProviderTemplateId: string
@@ -57,7 +57,7 @@ enum ProviderTemplateId: string
     case Gemini = '22';
 
     /**
-     * according toProviderCode和Categoryget对应的模板ID.
+     * according toProviderCode和Categoryget对应的templateID.
      */
     public static function fromProviderCodeAndCategory(ProviderCode $providerCode, Category $category): ?self
     {
@@ -90,7 +90,7 @@ enum ProviderTemplateId: string
     }
 
     /**
-     * 解析模板ID，return对应的ProviderCode和Category.
+     * 解析templateID，return对应的ProviderCode和Category.
      *
      * @return array{providerCode: ProviderCode, category: Category}
      */
@@ -124,7 +124,7 @@ enum ProviderTemplateId: string
     }
 
     /**
-     * get模板的description名称.
+     * gettemplate的description名称.
      */
     public function getDescription(): string
     {

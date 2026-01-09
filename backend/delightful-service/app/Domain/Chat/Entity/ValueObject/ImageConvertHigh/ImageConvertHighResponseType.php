@@ -12,7 +12,7 @@ enum ImageConvertHighResponseType: int
     // 开始生成
     case START_GENERATE = 1;
 
-    // 生成完成
+    // 生成complete
     case GENERATED = 2;
 
     // exception终止
@@ -22,7 +22,7 @@ enum ImageConvertHighResponseType: int
     {
         return match ($type) {
             self::START_GENERATE => '开始生成',
-            self::GENERATED => '生成完成',
+            self::GENERATED => '生成complete',
             self::TERMINATE => 'exception终止',
             default => '未知类型',
         };

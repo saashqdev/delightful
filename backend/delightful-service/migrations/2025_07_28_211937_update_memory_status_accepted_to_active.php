@@ -13,7 +13,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 将现有的 'accepted' 状态update为 'active' 状态
+        // 将现有的 'accepted' statusupdate为 'active' status
         Db::table('delightful_long_term_memories')
             ->where('status', 'accepted')
             ->update(['status' => 'active']);
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // 回滚：将 'active' 状态改回 'accepted' 状态
+        // 回滚：将 'active' status改回 'accepted' status
         Db::table('delightful_long_term_memories')
             ->where('status', 'active')
             ->update(['status' => 'accepted']);

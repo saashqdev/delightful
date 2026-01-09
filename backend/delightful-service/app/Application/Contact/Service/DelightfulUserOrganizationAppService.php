@@ -68,7 +68,7 @@ class DelightfulUserOrganizationAppService
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
 
-        // 3. 保存 delightful_organization_code，origin_organization_code，environment_id，切换时间
+        // 3. save delightful_organization_code，origin_organization_code，environment_id，切换时间
         $organizationData = [
             'delightful_organization_code' => $delightfulOrganizationCode,
             'third_organization_code' => $organizationEnvEntity->getOriginOrganizationCode(),

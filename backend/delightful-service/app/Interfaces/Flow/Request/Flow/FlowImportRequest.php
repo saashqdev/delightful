@@ -35,14 +35,14 @@ class FlowImportRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'import_data' => '导入data',
-            'import_data.main_flow' => '主流程',
-            'import_data.main_flow.code' => '主流程编码',
-            'import_data.main_flow.name' => '主流程名称',
-            'import_data.main_flow.nodes' => '主流程节点',
-            'import_data.main_flow.edges' => '主流程边缘',
-            'import_data.sub_flows' => '子流程',
-            'import_data.tool_flows' => 'tool流程',
+            'import_data' => 'importdata',
+            'import_data.main_flow' => '主process',
+            'import_data.main_flow.code' => '主process编码',
+            'import_data.main_flow.name' => '主process名称',
+            'import_data.main_flow.nodes' => '主process节点',
+            'import_data.main_flow.edges' => '主process边缘',
+            'import_data.sub_flows' => '子process',
+            'import_data.tool_flows' => 'toolprocess',
             'import_data.tool_sets' => 'tool集',
         ];
     }

@@ -14,9 +14,9 @@ namespace App\Domain\ImageGenerate\Contract;
 interface FontProviderInterface
 {
     /**
-     * getTTF字体文件路径.
+     * getTTF字体file路径.
      *
-     * @return null|string 字体文件的绝对路径，如果为null则不支持TTF字体
+     * @return null|string 字体file的绝对路径，如果为null则不支持TTF字体
      */
     public function getFontPath(): ?string;
 

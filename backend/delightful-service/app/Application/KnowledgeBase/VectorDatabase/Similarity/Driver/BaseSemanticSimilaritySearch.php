@@ -72,7 +72,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
             }
         }
 
-        // todo 优化
+        // todo optimize
         //        // 进行重sort
         //        if (count($result) > 1 && $retrieveConfig->isRerankingEnable() && container()->has(RerankGeneratorInterface::class)) {
         //            $rerankModelName = $retrieveConfig->getRerankingModel()["reranking_model_name'"];
@@ -94,7 +94,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         //                $sortedResult[] = $result[$item['index']];
         //            }
         //            $result = $sortedResult;
-        //            // 恢复到原始的 limit value
+        //            // restore到原始的 limit value
         //            if (count($result) > $filter->getLimit()) {
         //                $result = array_slice($result, 0, $filter->getLimit());
         //            }

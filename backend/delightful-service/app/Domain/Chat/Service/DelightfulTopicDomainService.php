@@ -160,7 +160,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 $messageStruct = $messageDTO->getContent();
                 // 判断session是否存在,是否属于当前user
                 $this->checkAndGetSelfConversation($messageStruct->getConversationId(), $dataIsolation);
-                // todo 话题namecreate时允许为空,后续 ai 总结话题name,推送给客户端
+                // todo 话题namecreate时允许为空,后续 ai 总结话题name,push给客户端
                 $topicEntity = $this->userCreateTopicHandler($messageStruct, $dataIsolation);
                 break;
             case ControlMessageType::UpdateTopic:
@@ -294,7 +294,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
      */
     private function checkDefaultTopicExist(DelightfulConversationEntity $conversationEntity): ?string
     {
-        // 判断有没有默认话题的标签
+        // 判断有没有默认话题的tag
         $topicId = $conversationEntity->getExtra()?->getDefaultTopicId();
         if (empty($topicId)) {
             return null;

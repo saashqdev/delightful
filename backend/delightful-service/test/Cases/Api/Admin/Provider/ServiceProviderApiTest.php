@@ -25,9 +25,9 @@ class ServiceProviderApiTest extends BaseTest
         $uri = $this->baseUri . '?category=llm';
         $response = $this->get($uri, [], $this->getCommonHeaders());
 
-        // 如果return认证或权限相关error，跳过测试（仅validate路由可用）
+        // 如果returnauthentication或permission相关error，跳过test（仅validate路由可用）
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003], true)) {
-            $this->markTestSkipped('接口认证fail或无权限，路由校验通过');
+            $this->markTestSkipped('接口authenticationfail或无permission，路由校验通过');
             return;
         }
 
@@ -40,7 +40,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * 测试模型create和更新的完整流程，include配置版本validate.
+     * test模型create和更新的完整process，includeconfiguration版本validate.
      */
     public function testSaveModelToServiceProviderCreate(): void
     {
@@ -51,7 +51,7 @@ class ServiceProviderApiTest extends BaseTest
         $createRequestData = [
             'model_type' => 3,
             'model_id' => 'test-model-' . time(),
-            'model_version' => '测试版本 v1.0',
+            'model_version' => 'test版本 v1.0',
             'icon' => 'DELIGHTFUL/588417216353927169/default/default.png',
             'config' => [
                 'max_output_tokens' => 64000,
@@ -80,11 +80,11 @@ class ServiceProviderApiTest extends BaseTest
             'service_provider_config_id' => $serviceProviderConfigId,
             'translate' => [
                 'name' => [
-                    'zh_CN' => '测试模型',
+                    'zh_CN' => 'test模型',
                     'en_US' => 'Test Model',
                 ],
                 'description' => [
-                    'zh_CN' => '这是一个测试模型',
+                    'zh_CN' => '这是一个test模型',
                     'en_US' => 'This is a test model',
                 ],
             ],
@@ -124,7 +124,7 @@ class ServiceProviderApiTest extends BaseTest
             'time_cost' => 50,
         ]);
 
-        // ========== 步骤3: validate配置版本（version=1） ==========
+        // ========== 步骤3: validateconfiguration版本（version=1） ==========
         $this->verifyConfigVersion((int) $modelId, $createRequestData['config'], 1);
 
         // ========== 步骤4: 更新模型 ==========
@@ -159,11 +159,11 @@ class ServiceProviderApiTest extends BaseTest
             'service_provider_config_id' => $serviceProviderConfigId,
             'translate' => [
                 'name' => [
-                    'zh_CN' => '更新后的测试模型',
+                    'zh_CN' => '更新后的test模型',
                     'en_US' => 'Updated Test Model',
                 ],
                 'description' => [
-                    'zh_CN' => '这是更新后的测试模型',
+                    'zh_CN' => '这是更新后的test模型',
                     'en_US' => 'This is an updated test model',
                 ],
             ],
@@ -196,12 +196,12 @@ class ServiceProviderApiTest extends BaseTest
             'cache_hit_cost' => 0.0003,
         ]);
 
-        // ========== 步骤6: validate更新后的配置版本（version=2） ==========
+        // ========== 步骤6: validate更新后的configuration版本（version=2） ==========
         $this->verifyConfigVersion((int) $modelId, $updateRequestData['config'], 2);
     }
 
     /**
-     * 测试returnDelightful服务商.
+     * testreturnDelightful服务商.
      */
     public function testGetOfficialProvider()
     {
@@ -224,7 +224,7 @@ class ServiceProviderApiTest extends BaseTest
     public function testCreateLLMOfficialProvider(): void
     {
         $provider = [
-            'alias' => '官方服务商单元测试',
+            'alias' => '官方服务商单元test',
             'config' => [
                 // 国际接入点
                 'url' => 'international_access_point',
@@ -237,7 +237,7 @@ class ServiceProviderApiTest extends BaseTest
             'status' => 1,
             'translate' => [
                 'alias' => [
-                    'zh_CN' => '官方服务商单元测试',
+                    'zh_CN' => '官方服务商单元test',
                 ],
             ],
         ];
@@ -247,7 +247,7 @@ class ServiceProviderApiTest extends BaseTest
         $response = $this->get('/org/admin/service-providers/detail?service_provider_config_id=' . $response['data']['id'], [], $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $detail = $response['data'];
-        $this->assertEquals('官方服务商单元测试', $detail['alias']);
+        $this->assertEquals('官方服务商单元test', $detail['alias']);
         $this->assertEquals('international_access_point', $detail['config']['proxy_url']);
         $this->assertEquals('****', $detail['config']['api_key']);
         $this->assertEquals('100', $detail['config']['priority']);
@@ -259,7 +259,7 @@ class ServiceProviderApiTest extends BaseTest
     public function testCreateVLMOfficialProvider(): void
     {
         $provider = [
-            'alias' => '官方服务商单元测试',
+            'alias' => '官方服务商单元test',
             'config' => [
                 // 国际接入点
                 'proxy_url' => 'international_access_point',
@@ -272,7 +272,7 @@ class ServiceProviderApiTest extends BaseTest
             'status' => 1,
             'translate' => [
                 'alias' => [
-                    'zh_CN' => '官方服务商单元测试',
+                    'zh_CN' => '官方服务商单元test',
                 ],
             ],
         ];
@@ -282,19 +282,19 @@ class ServiceProviderApiTest extends BaseTest
         $response = $this->get('/org/admin/service-providers/detail?service_provider_config_id=' . $response['data']['id'], [], $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $detail = $response['data'];
-        $this->assertEquals('官方服务商单元测试', $detail['alias']);
+        $this->assertEquals('官方服务商单元test', $detail['alias']);
         $this->assertEquals('international_access_point', $detail['config']['proxy_url']);
         $this->assertEquals('sk-*****************************bab', $detail['config']['api_key']);
         $this->assertEquals('100', $detail['config']['priority']);
     }
 
     /**
-     * 测试create和删除模型.
+     * testcreate和delete模型.
      */
     public function testCreateAndDeleteModel()
     {
         $providerId = '843847394915074048';
-        $model = Json::decode('{"model_type":3,"model_id":"test-dabai-test","model_version":"测试","icon":"DELIGHTFUL/588417216353927169/default/default.png","name":"测试","description":"测试","config":{"max_output_tokens":64000,"max_tokens":128000,"temperature_type":1,"temperature":null,"billing_currency":"CNY","input_pricing":"1","output_pricing":"1","cache_write_pricing":"1","cache_hit_pricing":"1","input_cost":"1","output_cost":"1","cache_write_cost":"1","cache_hit_cost":"1","vector_size":2048,"support_function":false,"support_multi_modal":false,"support_deep_think":false,"creativity":0.7},"category":"llm","service_provider_config_id":"' . $providerId . '","translate":{"name":{"zh_CN":"测试","en_US":"test"},"description":{"zh_CN":"测试","en_US":"test"}}}');
+        $model = Json::decode('{"model_type":3,"model_id":"test-dabai-test","model_version":"test","icon":"DELIGHTFUL/588417216353927169/default/default.png","name":"test","description":"test","config":{"max_output_tokens":64000,"max_tokens":128000,"temperature_type":1,"temperature":null,"billing_currency":"CNY","input_pricing":"1","output_pricing":"1","cache_write_pricing":"1","cache_hit_pricing":"1","input_cost":"1","output_cost":"1","cache_write_cost":"1","cache_hit_cost":"1","vector_size":2048,"support_function":false,"support_multi_modal":false,"support_deep_think":false,"creativity":0.7},"category":"llm","service_provider_config_id":"' . $providerId . '","translate":{"name":{"zh_CN":"test","en_US":"test"},"description":{"zh_CN":"test","en_US":"test"}}}');
         $response = $this->post('/org/admin/service-providers/save-model', $model, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
 
@@ -330,9 +330,9 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * validate配置中的4个成本字段.
+     * validateconfiguration中的4个成本字段.
      *
-     * @param array $config 配置数据
+     * @param array $config configuration数据
      * @param array $expectedCosts 期望的成本value
      */
     private function verifyConfigCostFields(array $config, array $expectedCosts): void
@@ -373,10 +373,10 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * validate配置版本是否正确落库.
+     * validateconfiguration版本是否正确落库.
      *
      * @param int $modelId 模型ID
-     * @param array $expectedConfig 期望的配置数据
+     * @param array $expectedConfig 期望的configuration数据
      * @param int $expectedVersion 期望的版本号
      */
     private function verifyConfigVersion(int $modelId, array $expectedConfig, int $expectedVersion): void
@@ -388,10 +388,10 @@ class ServiceProviderApiTest extends BaseTest
         $organizationCode = env('TEST_ORGANIZATION_CODE');
         $dataIsolation = new ProviderDataIsolation($organizationCode, '', '');
 
-        // 获取最新配置版本
+        // 获取最新configuration版本
         $versionEntity = $domainService->getLatestConfigVersionEntity($dataIsolation, $modelId);
 
-        $this->assertNotNull($versionEntity, '配置版本应该存在');
+        $this->assertNotNull($versionEntity, 'configuration版本应该存在');
 
         // validate int type字段（string应该被convert为 int）
         if (isset($expectedConfig['max_output_tokens'])) {
@@ -556,7 +556,7 @@ class ServiceProviderApiTest extends BaseTest
             );
         }
 
-        // validate版本号和当前版本标记
+        // validate版本号和当前版本mark
         $this->assertSame($expectedVersion, $versionEntity->getVersion(), "版本号应该是 {$expectedVersion}");
         $this->assertTrue($versionEntity->isCurrentVersion(), '应该是当前版本');
     }

@@ -37,7 +37,7 @@ class MCPServerToolAdminApi extends AbstractMCPAdminApi
     }
 
     /**
-     * 保存MCP服务tool.
+     * saveMCP服务tool.
      */
     public function save(string $code)
     {

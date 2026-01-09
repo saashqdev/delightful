@@ -13,7 +13,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
 /**
- * RBAC角色实体.
+ * RBACrole实体.
  */
 class RoleEntity extends AbstractEntity
 {
@@ -23,7 +23,7 @@ class RoleEntity extends AbstractEntity
 
     protected string $organizationCode;
 
-    protected ?array $permissionTag = null; // permission标签，用于前端展示分类
+    protected ?array $permissionTag = null; // permissiontag，用于前端展示category
 
     /**
      * 是否在前端列表中展示：1=是 0=否.
@@ -41,12 +41,12 @@ class RoleEntity extends AbstractEntity
     protected ?DateTime $updatedAt = null;
 
     /**
-     * 角色关联的permission键列表.
+     * role关联的permission键列表.
      */
     protected array $permissions = [];
 
     /**
-     * 角色关联的userID列表.
+     * role关联的userID列表.
      */
     protected array $userIds = [];
 

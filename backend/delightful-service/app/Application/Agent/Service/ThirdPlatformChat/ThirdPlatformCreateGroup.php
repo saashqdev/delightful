@@ -21,7 +21,7 @@ class ThirdPlatformCreateGroup
     // 新成员是否可查看历史message：1（默认）：可查看，0：不可查看
     private int $showHistoryType = 1;
 
-    // 是否可search群聊, 0（默认）：不可search 1：可search
+    // 是否可searchgroup chat, 0（默认）：不可search 1：可search
     private int $searchable = 0;
 
     // 入群是否需要验证：0（默认）：不验证 1：入群验证

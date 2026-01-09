@@ -50,11 +50,11 @@ class ModeDomainService
             return null;
         }
 
-        // 如果是跟随模式，获取被跟随模式的group配置
+        // 如果是跟随模式，获取被跟随模式的groupconfiguration
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // use当前模式的基本信息 + 被跟随模式的group配置
+                // use当前模式的基本info + 被跟随模式的groupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -73,7 +73,7 @@ class ModeDomainService
     }
 
     /**
-     * according toID获取模式实体（仅获取模式基本信息）.
+     * according toID获取模式实体（仅获取模式基本info）.
      */
     public function getModeById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeEntity
     {
@@ -90,11 +90,11 @@ class ModeDomainService
             return null;
         }
 
-        // 如果是跟随模式，获取被跟随模式的group配置
+        // 如果是跟随模式，获取被跟随模式的groupconfiguration
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // use当前模式的基本信息 + 被跟随模式的group配置
+                // use当前模式的基本info + 被跟随模式的groupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -166,7 +166,7 @@ class ModeDomainService
     }
 
     /**
-     * save模式配置.
+     * save模式configuration.
      */
     public function saveModeConfig(ModeDataIsolation $dataIsolation, ModeAggregate $modeAggregate): ModeAggregate
     {
@@ -180,18 +180,18 @@ class ModeDomainService
 
         $this->updateMode($dataIsolation, $modeEntity);
 
-        // 如果是inherit配置模式
+        // 如果是inheritconfiguration模式
         if ($mode->getDistributionType() === DistributionTypeEnum::INHERITED) {
             return $this->getModeDetailById($dataIsolation, $id);
         }
 
-        // 直接删除该模式的所有现有配置
+        // 直接delete该模式的所有现有configuration
         $this->relationRepository->deleteByModeId($dataIsolation, $id);
 
-        // 删除该模式的所有现有group
+        // delete该模式的所有现有group
         $this->groupRepository->deleteByModeId($dataIsolation, $id);
 
-        // save模式基本信息
+        // save模式基本info
         $this->modeRepository->save($dataIsolation, $mode);
 
         // 批量creategroup副本
@@ -214,7 +214,7 @@ class ModeDomainService
 
             $newGroupEntities[] = $newGroup;
 
-            // 更新aggregate中的group引用
+            // 更新aggregate中的groupquote
             $groupAggregate->setGroup($newGroup);
         }
 
@@ -231,7 +231,7 @@ class ModeDomainService
                 $relation->setModeId((string) $id);
                 $relation->setOrganizationCode($mode->getOrganizationCode());
 
-                // 设置为新create的groupID
+                // setting为新create的groupID
                 $relation->setGroupId($groupAggregate->getGroup()->getId());
 
                 $relationEntities[] = $relation;
@@ -248,7 +248,7 @@ class ModeDomainService
     }
 
     /**
-     * 批量build模式aggregate根（优化版本，避免N+1query）.
+     * 批量build模式aggregate根（optimize版本，避免N+1query）.
      * @param ModeEntity[] $modes
      * @return ModeAggregate[]
      */

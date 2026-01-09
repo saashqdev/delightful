@@ -57,7 +57,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * according to服务商配置ID获取服务商详细信息.
+     * according to服务商configurationID获取服务商详细info.
      */
     public function getProviderModelsByConfigId(
         DelightfulUserAuthorization $authorization,
@@ -69,7 +69,7 @@ readonly class AdminProviderAppService
             $authorization->getId(),
         );
 
-        // 通过领域层method一次性获取服务商、配置和模型信息
+        // 通过领域层method一次性获取服务商、configuration和模型info
         $providerModels = $this->providerConfigDomainService->getProviderModelsByConfigId($dataIsolation, $configId);
         if ($providerModels === null) {
             return null;
@@ -92,7 +92,7 @@ readonly class AdminProviderAppService
 
         $providerConfigEntity = $this->providerConfigDomainService->updateProviderConfig($dataIsolation, $providerConfigEntity);
 
-        // 触发服务商配置更新事件
+        // 触发服务商configuration更新事件
         $this->eventDispatcher->dispatch(new ProviderConfigUpdatedEvent(
             $providerConfigEntity,
             $authorization->getOrganizationCode(),
@@ -114,7 +114,7 @@ readonly class AdminProviderAppService
 
         $providerConfigEntity = $this->providerConfigDomainService->createProviderConfig($dataIsolation, $providerConfigEntity);
 
-        // 触发服务商配置create事件
+        // 触发服务商configurationcreate事件
         $this->eventDispatcher->dispatch(new ProviderConfigCreatedEvent(
             $providerConfigEntity,
             $authorization->getOrganizationCode(),
@@ -131,7 +131,7 @@ readonly class AdminProviderAppService
         return $providerModelsDTO;
     }
 
-    // 删除服务商
+    // delete服务商
 
     /**
      * @throws Exception
@@ -166,7 +166,7 @@ readonly class AdminProviderAppService
         }
     }
 
-    // 删除模型
+    // delete模型
 
     /**
      * @throws Exception
@@ -180,7 +180,7 @@ readonly class AdminProviderAppService
             $authorization->getId(),
         );
 
-        // 获取模型信息，用于触发事件
+        // 获取模型info，用于触发事件
         $modelEntity = $this->providerModelDomainService->getById($dataIsolation, $id);
 
         Db::beginTransaction();
@@ -192,7 +192,7 @@ readonly class AdminProviderAppService
             }
             $this->providerModelDomainService->deleteById($dataIsolation, $id);
 
-            // 触发模型删除事件
+            // 触发模型delete事件
             $this->eventDispatcher->dispatch(new ProviderModelDeletedEvent(
                 $id,
                 $modelEntity->getServiceProviderConfigId(),
@@ -201,7 +201,7 @@ readonly class AdminProviderAppService
 
             Db::commit();
         } catch (Exception $e) {
-            $this->logger->error('删除模型fail', ['error' => $e->getMessage()]);
+            $this->logger->error('delete模型fail', ['error' => $e->getMessage()]);
             Db::rollBack();
             throw $e;
         }
@@ -258,9 +258,9 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * according toorganization编码和服务商分类获取活跃的服务商配置.
+     * according toorganization编码和服务商category获取活跃的服务商configuration.
      * @param string $organizationCode organization编码
-     * @param Category $category 服务商分类
+     * @param Category $category 服务商category
      * @return ProviderConfigDTO[]
      */
     public function getOrganizationProvidersModelsByCategory(string $organizationCode, Category $category): array
@@ -285,12 +285,12 @@ readonly class AdminProviderAppService
             $authorization->getId(),
         );
 
-        // 通过领域层method获取完整的模型详情信息
+        // 通过领域层method获取完整的模型详情info
         $providerModelEntity = $this->providerModelDomainService->getById(
             $dataIsolation,
             $modelPrimaryId
         );
-        // according to服务商type和模型type进行连通性测试
+        // according to服务商type和模型type进行连通性test
         return match ($this->getConnectivityTestType($providerModelEntity->getCategory()->value, $providerModelEntity->getModelType()->value)) {
             NaturalLanguageProcessing::EMBEDDING => $this->embeddingConnectivityTest($modelPrimaryId, $authorization),
             NaturalLanguageProcessing::LLM => $this->llmConnectivityTest($modelPrimaryId, $authorization),
@@ -301,7 +301,7 @@ readonly class AdminProviderAppService
     /**
      * 获取所有非官方服务商列表，不依赖于organization.
      *
-     * @param Category $category 服务商分类
+     * @param Category $category 服务商category
      * @param string $organizationCode organization编码
      * @return ProviderConfigModelsDTO[] 非官方服务商列表
      */
@@ -323,7 +323,7 @@ readonly class AdminProviderAppService
     /**
      * 获取所有可用的服务商列表（include官方服务商），不依赖于organization.
      *
-     * @param Category $category 服务商分类
+     * @param Category $category 服务商category
      * @param string $organizationCode organization编码
      * @return ProviderConfigModelsDTO[] 所有可用服务商列表
      */
@@ -383,7 +383,7 @@ readonly class AdminProviderAppService
             $iconUrlMap[] = $links;
         }
         ! empty($iconUrlMap) && $iconUrlMap = array_merge(...$iconUrlMap);
-        // createDTO并设置图标URL
+        // createDTO并setting图标URL
         $modelDTOs = [];
         foreach ($models as $model) {
             $modelDTO = new ProviderModelDetailDTO($model->toArray());
@@ -422,7 +422,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * initializeDelightful服务商配置数据.
+     * initializeDelightful服务商configuration数据.
      */
     public function initializeDelightfulProviderConfigs(): int
     {
@@ -469,7 +469,7 @@ readonly class AdminProviderAppService
             $iconUrlMap = array_merge($iconUrlMap, $links);
         }
 
-        // 设置图标URL
+        // setting图标URL
         foreach ($iconUrlMap as $icon => $fileLink) {
             if (isset($iconToModelMap[$icon])) {
                 $url = $fileLink ? $fileLink->getUrl() : '';
@@ -481,13 +481,13 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 填充 provider 信息并handle icon.
+     * 填充 provider info并handle icon.
      */
     private function fillProviderInfoAndIcon(
         ProviderEntity $provider,
         ProviderConfigModelsDTO $providerModelsDTO
     ): void {
-        // 填充 provider 基本信息
+        // 填充 provider 基本info
         $providerModelsDTO->setName($provider->getName());
         $providerModelsDTO->setDescription($provider->getDescription());
         $providerModelsDTO->setServiceProviderId((string) $provider->getId());
@@ -561,16 +561,16 @@ readonly class AdminProviderAppService
         foreach ($iconsByOrg as $organizationCode => $icons) {
             $iconUrlMap = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
 
-            // 设置图标URL
+            // setting图标URL
             foreach ($iconUrlMap as $icon => $fileLink) {
                 $url = $fileLink ? $fileLink->getUrl() : '';
 
-                // 设置 provider 图标URL
+                // setting provider 图标URL
                 if (isset($providerIconMap[$icon])) {
                     $providerIconMap[$icon]->setIcon($url);
                 }
 
-                // 设置模型图标URL
+                // setting模型图标URL
                 if (isset($modelIconMap[$icon])) {
                     foreach ($modelIconMap[$icon] as $modelEntity) {
                         $modelEntity->setIcon($url);
@@ -588,7 +588,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 获取联通测试type.
+     * 获取联通testtype.
      */
     private function getConnectivityTestType(string $category, int $modelType): NaturalLanguageProcessing
     {
@@ -608,7 +608,7 @@ readonly class AdminProviderAppService
         }
         $proxyModelRequest->setModel($modelPrimaryId);
         $proxyModelRequest->setInput('test');
-        $proxyModelRequest->setEnableHighAvailability(false); // 连通性测试时不启用高可用
+        $proxyModelRequest->setEnableHighAvailability(false); // 连通性test时不启用高可用
         $proxyModelRequest->setBusinessParams([
             'organization_id' => $authorization->getOrganizationCode(),
             'user_id' => $authorization->getId(),
@@ -635,7 +635,7 @@ readonly class AdminProviderAppService
         }
         $completionDTO->setMessages([['role' => 'user', 'content' => '你好']]);
         $completionDTO->setModel($modelPrimaryId);
-        $completionDTO->setEnableHighAvailability(false); // 连通性测试时不启用高可用
+        $completionDTO->setEnableHighAvailability(false); // 连通性test时不启用高可用
         $completionDTO->setBusinessParams([
             'organization_id' => $authorization->getOrganizationCode(),
             'user_id' => $authorization->getId(),
@@ -683,9 +683,9 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * handle服务商配置图标.
+     * handle服务商configuration图标.
      *
-     * @param ProviderConfigDTO[] $providerConfigs 服务商配置DTO列表
+     * @param ProviderConfigDTO[] $providerConfigs 服务商configurationDTO列表
      */
     private function processProviderConfigIcons(array $providerConfigs): void
     {
@@ -705,7 +705,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 收集服务商图标信息.
+     * 收集服务商图标info.
      */
     private function collectProviderIcon(ProviderConfigDTO|ProviderConfigModelsDTO $provider, array &$iconMappings): void
     {
@@ -746,7 +746,7 @@ readonly class AdminProviderAppService
                 /** @var string $icon */
                 $url = $fileLink ? $fileLink->getUrl() : '';
 
-                // 设置服务商图标URL
+                // setting服务商图标URL
                 $providerMap = $mapping['providerMap'];
                 if (isset($providerMap[$icon])) {
                     $providers = $providerMap[$icon];
@@ -756,7 +756,7 @@ readonly class AdminProviderAppService
                     }
                 }
 
-                // 设置模型图标URL
+                // setting模型图标URL
                 $modelMap = $mapping['modelMap'];
                 if (isset($modelMap[$icon])) {
                     $models = $modelMap[$icon];

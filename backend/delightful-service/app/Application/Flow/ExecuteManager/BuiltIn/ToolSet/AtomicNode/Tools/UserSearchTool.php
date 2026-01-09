@@ -126,7 +126,7 @@ class UserSearchTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "field",
                         "title": "filterfield",
-                        "description": "filterfield。可选枚举有：username、work_number、position、position、department_name、group_name。分别代table  user姓名、user工号、user岗位、user手机号、departmentname、群聊name",
+                        "description": "filterfield。可选枚举有：username、work_number、position、position、department_name、group_name。分别代table  user姓名、user工号、user岗位、user手机号、departmentname、group chatname",
                         "required": null,
                         "value": null,
                         "encryption": false,

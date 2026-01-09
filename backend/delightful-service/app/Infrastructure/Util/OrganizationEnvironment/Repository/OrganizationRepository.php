@@ -23,7 +23,7 @@ use function Hyperf\Support\now;
 class OrganizationRepository implements OrganizationRepositoryInterface
 {
     /**
-     * 保存organization.
+     * saveorganization.
      */
     public function save(OrganizationEntity $organizationEntity): OrganizationEntity
     {

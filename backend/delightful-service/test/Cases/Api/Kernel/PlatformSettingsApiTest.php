@@ -157,7 +157,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         ];
         $this->put($this->putUrl, $initialPayload, $this->getCommonHeaders());
 
-        // 尝试清空 favicon (传入空string不会update，所以不应该fail)
+        // 尝试clear favicon (传入空string不会update，所以不应该fail)
         $payload = [
             'favicon_url' => '', // 空string
             'default_language' => 'zh_CN',

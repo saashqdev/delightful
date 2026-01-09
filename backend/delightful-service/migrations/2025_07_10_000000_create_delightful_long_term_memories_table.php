@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->unsignedInteger('access_count')->default(0)->comment('访问次数');
             $table->unsignedInteger('reinforcement_count')->default(0)->comment('强化次数');
             $table->decimal('decay_factor', 3, 2)->unsigned()->default(1.0)->comment('衰减因子(0-1)');
-            $table->json('tags')->nullable()->comment('标签list');
+            $table->json('tags')->nullable()->comment('taglist');
             $table->json('metadata')->nullable()->comment('元数据');
             $table->string('org_id', 36)->comment('organizationID');
             $table->string('app_id', 36)->comment('应用ID');

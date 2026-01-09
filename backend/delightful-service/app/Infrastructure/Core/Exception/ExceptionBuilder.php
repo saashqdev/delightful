@@ -44,7 +44,7 @@ class ExceptionBuilder
     }
 
     /**
-     * @param string $message 允许传入自定义的errorinformation
+     * @param string $message 允许传入customize的errorinformation
      * @return never-return // 为了phpstan检测
      */
     public static function throw(BackedEnum $error, string $message = '', array $replace = [], ?string $locale = null, ?Throwable $throwable = null): void

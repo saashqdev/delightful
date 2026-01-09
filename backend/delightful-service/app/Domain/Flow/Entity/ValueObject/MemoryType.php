@@ -14,10 +14,10 @@ enum MemoryType: int
     // 大语言模型记录 暂时不记录了 无用
     case LLM = 1;
 
-    // Flow 聊天记录
+    // Flow chat记录
     case Chat = 2;
 
-    // IM 的聊天记录
+    // IM 的chat记录
     case IMChat = 3;
 
     // 挂载记忆

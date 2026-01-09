@@ -100,7 +100,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * 通过 delightfulId 保存usersetting（跨organization），若已存在相同 key 则update。
+     * 通过 delightfulId saveusersetting（跨organization），若已存在相同 key 则update。
      */
     public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
@@ -143,7 +143,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * 保存全局configuration.
+     * save全局configuration.
      */
     public function saveGlobal(DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {

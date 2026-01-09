@@ -13,13 +13,13 @@ use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
- * 角色model.
+ * rolemodel.
  *
  * @property int $id primary keyID
- * @property string $name 角色name
- * @property array $permission_key 角色permissionlist
+ * @property string $name rolename
+ * @property array $permission_key rolepermissionlist
  * @property string $organization_code organization编码
- * @property null|array $permission_tag permission标签，用于前端展示分类
+ * @property null|array $permission_tag permissiontag，用于前端展示category
  * @property int $is_display 是否显示
  * @property int $status status: 0=禁用, 1=启用
  * @property null|string $created_uid create者userID
@@ -98,7 +98,7 @@ class RoleModel extends AbstractModel
     }
 
     /**
-     * getpermission标签.
+     * getpermissiontag.
      */
     public function getPermissionTag(): ?array
     {
@@ -106,7 +106,7 @@ class RoleModel extends AbstractModel
     }
 
     /**
-     * setpermission标签.
+     * setpermissiontag.
      */
     public function setPermissionTag(?array $permissionTag): void
     {
@@ -114,7 +114,7 @@ class RoleModel extends AbstractModel
     }
 
     /**
-     * check角色是否启用.
+     * checkrole是否启用.
      */
     public function isEnabled(): bool
     {
@@ -122,7 +122,7 @@ class RoleModel extends AbstractModel
     }
 
     /**
-     * 启用角色.
+     * 启用role.
      */
     public function enable(): void
     {
@@ -130,7 +130,7 @@ class RoleModel extends AbstractModel
     }
 
     /**
-     * 禁用角色.
+     * 禁用role.
      */
     public function disable(): void
     {

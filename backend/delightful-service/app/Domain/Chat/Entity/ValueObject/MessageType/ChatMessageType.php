@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject\MessageType;
 
 /**
- * 聊天messagecontent的type.
+ * chatmessagecontent的type.
  * value从0开始.
  */
 enum ChatMessageType: string
@@ -16,23 +16,23 @@ enum ChatMessageType: string
     // 文本
     case Text = 'text';
 
-    // 图片
+    // image
     case Image = 'image';
 
-    // 视频
+    // video
     case Video = 'video';
 
-    // 文件
+    // file
     case File = 'file';
     case Files = 'files';
 
-    // 附件
+    // attachment
     case Attachment = 'attachment';
 
-    // 语音
+    // voice
     case Voice = 'voice';
 
-    // 文本卡片
+    // 文本card
     case TextCard = 'text_card';
 
     // markdown
@@ -42,27 +42,27 @@ enum ChatMessageType: string
     case Location = 'location';
 
     /**
-     * 比较 low 的推送多次 seq，前端合并成一个渲染.
+     * 比较 low 的push多次 seq，前端合并成一个渲染.
      */
     case AggregateAISearchCard = 'aggregate_ai_search_card';
 
     /**
-     * 多次流式响应后，最终合并成一条message入库.
+     * 多次stream响应后，最终合并成一条message入库.
      */
     case AggregateAISearchCardV2 = 'aggregate_ai_search_card_v2';
 
     /**
-     * 流式响应.
+     * stream响应.
      */
     case StreamAggregateAISearchCard = 'stream_aggregate_ai_search_card';
 
-    // 富文本
+    // rich text
     case RichText = 'rich_text';
 
-    // AI文生图卡片
+    // AI文生图card
     case AIImageCard = 'ai_image_card';
 
-    // 图片转高清
+    // image转高清
     case ImageConvertHighCard = 'image_convert_high_card';
 
     // 通用 agent message

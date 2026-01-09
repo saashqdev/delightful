@@ -113,7 +113,7 @@ class StartInputTemplate
             "files": {
                 "type": "array",
                 "key": "files",
-                "title": "文件列表",
+                "title": "file列表",
                 "description": "",
                 "required": null,
                 "value": null,
@@ -122,7 +122,7 @@ class StartInputTemplate
                 "items": {
                     "type": "object",
                     "key": "files",
-                    "title": "文件",
+                    "title": "file",
                     "description": "",
                     "required": [
                         "name",
@@ -138,7 +138,7 @@ class StartInputTemplate
                         "name": {
                             "type": "string",
                             "key": "name",
-                            "title": "文件名称",
+                            "title": "file名称",
                             "description": "",
                             "required": null,
                             "value": null,
@@ -150,7 +150,7 @@ class StartInputTemplate
                         "url": {
                             "type": "string",
                             "key": "url",
-                            "title": "文件链接",
+                            "title": "file链接",
                             "description": "",
                             "required": null,
                             "value": null,
@@ -162,7 +162,7 @@ class StartInputTemplate
                         "extension": {
                             "type": "string",
                             "key": "extension",
-                            "title": "文件扩展名",
+                            "title": "fileextension名",
                             "description": "",
                             "required": null,
                             "value": null,
@@ -174,7 +174,7 @@ class StartInputTemplate
                         "size": {
                             "type": "number",
                             "key": "size",
-                            "title": "文件大小",
+                            "title": "file大小",
                             "description": "",
                             "required": null,
                             "value": null,
@@ -327,7 +327,7 @@ class StartInputTemplate
             "bot_key": {
                 "type": "string",
                 "key": "bot_key",
-                "title": "第third-party聊天机器人编码",
+                "title": "第third-partychat机器人编码",
                 "description": "",
                 "items": null,
                 "properties": null,

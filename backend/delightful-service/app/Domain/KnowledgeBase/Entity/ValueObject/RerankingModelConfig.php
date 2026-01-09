@@ -69,14 +69,14 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * 批处理大小.
      *
-     * 批量处理文档的大小，用于提高性能
+     * 批量处理文档的大小，用于提高performance
      */
     private int $batchSize = 16;
 
     /**
      * 是否usecache.
      *
-     * 是否cache重sortresult，用于提高性能
+     * 是否cache重sortresult，用于提高performance
      */
     private bool $useCache = true;
 

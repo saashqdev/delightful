@@ -96,7 +96,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function getMinSeqListByDelightfulMessageId(string $delightfulMessageId): array;
 
     /**
-     * getmessage的撤回 seq.
+     * getmessage的withdraw seq.
      */
     public function getMessageRevokedSeq(string $messageId, DelightfulUserEntity $userEntity, ControlMessageType $controlMessageType): ?DelightfulSeqEntity;
 

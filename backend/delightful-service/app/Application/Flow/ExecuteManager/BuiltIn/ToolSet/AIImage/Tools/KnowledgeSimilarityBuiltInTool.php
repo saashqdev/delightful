@@ -60,23 +60,23 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 ## 知识库列表
 > 知识库名称：知识库描述
 {$knowledgePrompt}
-## 流程
-1. 结合上下文提炼user的问题，generate多个关键词，最多不超过 5 个，多个关键词用英文逗号"," 隔开，用于use不同关键词从知识库中检索最相关的信息；
+## process
+1. 结合上下文提炼user的问题，generate多个关键词，最多不超过 5 个，多个关键词用英文逗号"," 隔开，用于use不同关键词从知识库中检索最相关的info；
 2. 结合上下文，分析user的问题，generate `names` parameter，用于指定与user问题可能有关的多个知识库名称，按照相关性sort，相关性需结合上下文、知识库名称和知识库描述进行判断；
 3. use关键词和user问题，call `{$this->getName()}` 工具检索知识库中的内容，关键词的parameter是 `keyword`，user问题的parameter是 `question`, 请确保parameter都被正确填入，工具将return与user问题相似度最高的内容片段；
-4. 知识库检索出来的内容里会contain一些自定义的 Delightful 标签，你要善于use它们，有以下几种标签：
-    - <DelightfulImage></DelightfulImage> 表示一个图片，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，每个标签都会在前端message卡片渲染出一张图片；
-    - <DelightfulVideo></DelightfulVideo> 表示一个视频，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，每个标签都会在前端message卡片渲染出一个视频；
-    - <DelightfulMention></DelightfulMention> 表示一个人员信息，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，每个标签都会在前端message卡片形成一个 @某某人 的效果；
-5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> 等有 Delightful 标签的片段；
+4. 知识库检索出来的内容里会contain一些customize的 Delightful tag，你要善于use它们，有以下几种tag：
+    - <DelightfulImage></DelightfulImage> 表示一个image，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，每个tag都会在前端messagecard渲染出一张image；
+    - <DelightfulVideo></DelightfulVideo> 表示一个video，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，每个tag都会在前端messagecard渲染出一个video；
+    - <DelightfulMention></DelightfulMention> 表示一个人员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，每个tag都会在前端messagecard形成一个 @某某人 的效果；
+5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> 等有 Delightful tag的片段；
 6. 结合知识库return的内容整理后尽可能丰富地回答user的问题。
 ## 工具中关键的returnvalue说明
 - fragments: 本次检索到的所有知识库片段
 - fragments.*.content: 片段内容
 - fragments.*.metadata.url: 当前片段的原文链接
-- graph.*.content: 来自知识图谱的数据，能增强信息，让你更好回答问题
+- graph.*.content: 来自知识图谱的数据，能增强info，让你更好回答问题
 ## 限制
-- 回答的内容中不允许出现不是Delightful标签的链接。
+- 回答的内容中不允许出现不是Delightfultag的链接。
 MARKDOWN;
     }
 

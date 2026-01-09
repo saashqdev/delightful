@@ -61,7 +61,7 @@ class VolcengineArkAPI
 
         if ($response->getStatusCode() !== 200) {
             $errorMessage = $result['error']['message'] ?? "HTTP error: {$response->getStatusCode()}";
-            throw new Exception("VolcengineArk API 请求失败: {$errorMessage}");
+            throw new Exception("VolcengineArk API 请求fail: {$errorMessage}");
         }
 
         if (isset($result['error'])) {

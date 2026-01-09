@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Entity\ValueObject;
 
 enum FileType: int
 {
-    // 文件
+    // file
     case File = 0;
 
     // 链接
@@ -27,10 +27,10 @@ enum FileType: int
     // image
     case Image = 5;
 
-    // 视频
+    // video
     case Video = 6;
 
-    // 音频
+    // audio
     case Audio = 7;
 
     // 压缩包
@@ -38,7 +38,7 @@ enum FileType: int
 
     public static function getTypeFromFileExtension(string $fileExtension): self
     {
-        // 从文件的扩展名，推理出文件type
+        // 从file的extension名，推理出filetype
         return match (strtolower($fileExtension)) {
             // 网址
             'http', 'https' => self::Link,
@@ -50,9 +50,9 @@ enum FileType: int
             'xls', 'xlsx', 'xlsm', 'xlsb' => self::Excel,
             // image
             'jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp' => self::Image,
-            // 视频
+            // video
             'mp4', 'avi', 'rmvb', 'rm', 'mpg', 'mpeg', 'mpe', 'wmv', 'mkv', 'vob', 'mov', 'qt', 'flv', 'f4v', 'swf' => self::Video,
-            // 音频
+            // audio
             'mp3', 'wma', 'wav', 'mod', 'ra', 'cd', 'md', 'asf', 'aac', 'ape', 'mid', 'ogg', 'm4a', 'vqf' => self::Audio,
             // 压缩包
             'zip', 'rar', '7z', 'tar', 'gz', 'bz2', 'cab', 'iso', 'lzh', 'ace', 'arj', 'uue', 'jar' => self::Compress,

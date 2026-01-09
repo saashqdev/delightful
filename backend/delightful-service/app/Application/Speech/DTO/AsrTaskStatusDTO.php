@@ -11,8 +11,8 @@ use App\Application\Speech\Enum\AsrRecordingStatusEnum;
 use App\Application\Speech\Enum\AsrTaskStatusEnum;
 
 /**
- * ASR任务statusDTO - 管理Redis Hash字段映射.
- * 这不是从 JSON 响应结构来的，而是用于管理任务status
+ * ASRtaskstatusDTO - 管理Redis Hash字段映射.
+ * 这不是从 JSON 响应结构来的，而是用于管理taskstatus
  */
 class AsrTaskStatusDTO
 {
@@ -22,39 +22,39 @@ class AsrTaskStatusDTO
 
     public ?string $organizationCode = null; // organization编码（用于自动总结）
 
-    // 类似：project_821749697183776769/workspace/录音总结_20250910_174251/原始录音文件.webm
-    public ?string $filePath = null; // 工作区文件路径
+    // 类似：project_821749697183776769/workspace/录音总结_20250910_174251/原始录音file.webm
+    public ?string $filePath = null; // 工作区file路径
 
-    // 文件ID（数据库中的实际ID）
-    public ?string $audioFileId = null; // 音频文件ID（写入delightful_super_agent_task_files表后return的ID）
+    // fileID（数据库中的实际ID）
+    public ?string $audioFileId = null; // audiofileID（写入delightful_super_agent_task_files表后return的ID）
 
-    // note 文件信息
-    public ?string $noteFileName = null; // note文件名（与音频文件在同一目录，为null表示无笔记文件）
+    // note fileinfo
+    public ?string $noteFileName = null; // notefile名（与audiofile在同一目录，为null表示无笔记file）
 
-    public ?string $noteFileId = null; // note文件ID（用于聊天message中的文件引用）
+    public ?string $noteFileId = null; // notefileID（用于chatmessage中的filequote）
 
-    // 预设文件信息（用于前端写入）
-    public ?string $presetNoteFileId = null; // 预设笔记文件ID
+    // presetfileinfo（用于前端写入）
+    public ?string $presetNoteFileId = null; // preset笔记fileID
 
-    public ?string $presetTranscriptFileId = null; // 预设stream识别文件ID
+    public ?string $presetTranscriptFileId = null; // presetstream识别fileID
 
-    public ?string $presetNoteFilePath = null; // 预设笔记文件相对路径
+    public ?string $presetNoteFilePath = null; // preset笔记file相对路径
 
-    public ?string $presetTranscriptFilePath = null; // 预设stream识别文件相对路径
+    public ?string $presetTranscriptFilePath = null; // presetstream识别file相对路径
 
-    // 项目和话题信息
+    // 项目和话题info
     public ?string $projectId = null; // 项目ID
 
     public ?string $topicId = null; // 话题ID
 
-    // 录音目录信息
-    public ?string $tempHiddenDirectory = null; // 隐藏目录路径（存放分片文件）
+    // 录音目录info
+    public ?string $tempHiddenDirectory = null; // 隐藏目录路径（存放分片file）
 
     public ?string $displayDirectory = null; // 显示目录路径（存放stream文本和笔记）
 
-    public ?int $tempHiddenDirectoryId = null; // 隐藏目录的文件ID
+    public ?int $tempHiddenDirectoryId = null; // 隐藏目录的fileID
 
-    public ?int $displayDirectoryId = null; // 显示目录的文件ID
+    public ?int $displayDirectoryId = null; // 显示目录的fileID
 
     public AsrTaskStatusEnum $status = AsrTaskStatusEnum::FAILED;
 
@@ -63,7 +63,7 @@ class AsrTaskStatusDTO
 
     public ?string $recordingStatus = null; // 录音status：start|recording|paused|stopped
 
-    public bool $sandboxTaskCreated = false; // 沙箱任务是否已create
+    public bool $sandboxTaskCreated = false; // 沙箱task是否已create
 
     public bool $isPaused = false; // 是否处于暂停status（用于超时判断）
 
@@ -80,7 +80,7 @@ class AsrTaskStatusDTO
 
     public ?string $noteContent = null; // 笔记内容
 
-    public ?string $noteFileType = null; // 笔记文件type（md、txt、json）
+    public ?string $noteFileType = null; // 笔记filetype（md、txt、json）
 
     public ?string $language = null; // 语种（zh_CN、en_US等），用于generate标题时use
 
@@ -98,11 +98,11 @@ class AsrTaskStatusDTO
         $this->noteFileName = self::getStringValue($data, ['note_file_name', 'noteFileName']);
         $this->noteFileId = self::getStringValue($data, ['note_file_id', 'noteFileId']);
 
-        // 项目和话题信息
+        // 项目和话题info
         $this->projectId = self::getStringValue($data, ['project_id', 'projectId']);
         $this->topicId = self::getStringValue($data, ['topic_id', 'topicId']);
 
-        // 录音目录信息（自动清洗为相对路径）
+        // 录音目录info（自动清洗为相对路径）
         $this->tempHiddenDirectory = self::extractRelativePath(
             self::getStringValue($data, ['temp_hidden_directory', 'tempHiddenDirectory'])
         );
@@ -122,7 +122,7 @@ class AsrTaskStatusDTO
         $this->serverSummaryRetryCount = self::getIntValue($data, ['server_summary_retry_count', 'serverSummaryRetryCount'], 0);
         $this->serverSummaryLocked = self::getBoolValue($data, ['server_summary_locked', 'serverSummaryLocked']);
 
-        // 预设文件信息
+        // presetfileinfo
         $this->presetNoteFileId = self::getStringValue($data, ['preset_note_file_id', 'presetNoteFileId']);
         $this->presetTranscriptFileId = self::getStringValue($data, ['preset_transcript_file_id', 'presetTranscriptFileId']);
         $this->presetNoteFilePath = self::getStringValue($data, ['preset_note_file_path', 'presetNoteFilePath']);
@@ -204,7 +204,7 @@ class AsrTaskStatusDTO
 
     /**
      * 检查总结是否已complete（幂等性判断）.
-     * 判断标准：音频文件已merge（audioFileId 存在）且录音已停止.
+     * 判断标准：audiofile已merge（audioFileId 存在）且录音已停止.
      */
     public function isSummaryCompleted(): bool
     {

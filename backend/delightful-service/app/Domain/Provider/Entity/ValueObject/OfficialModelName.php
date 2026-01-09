@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
- * 为了解决有些模型是没有 model.
+ * 为了resolve有些模型是没有 model.
  */
 enum OfficialModelName: string
 {

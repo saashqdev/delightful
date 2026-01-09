@@ -15,9 +15,9 @@ class DelightfulStreamTextProcessor
 {
     private const int STATE_NORMAL = 0;    // 普通文本status
 
-    private const int STATE_TAG_START = 1; // 可能是标签开始
+    private const int STATE_TAG_START = 1; // 可能是tag开始
 
-    private const int STATE_IN_TAG = 2;    // 确认在标签内
+    private const int STATE_IN_TAG = 2;    // confirm在tag内
 
     private Closure $outputCall;
 
@@ -26,7 +26,7 @@ class DelightfulStreamTextProcessor
     private string $buffer = '';
 
     /**
-     * @var int status 0 普通文本，1 标签开始，2 在标签内
+     * @var int status 0 普通文本，1 tag开始，2 在tag内
      */
     private int $state = 0;
 
@@ -114,7 +114,7 @@ class DelightfulStreamTextProcessor
 
     private function isValidTagContent(): array
     {
-        // 正则挺费性能的，先采用固定的string长度吧
+        // 正则挺费performance的，先采用固定的string长度吧
         if (! in_array(mb_strlen($this->buffer), $this->successLengths)) {
             return [];
         }

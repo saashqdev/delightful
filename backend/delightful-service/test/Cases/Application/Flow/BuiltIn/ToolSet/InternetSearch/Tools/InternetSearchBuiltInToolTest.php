@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\BuiltIn\ToolSet\InternetSearch\Tools;
 
 /*
- * 本文件属于灯塔引擎版权所有，泄漏必究。
+ * 本file属于灯塔引擎版权所有，泄漏必究。
  */
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunnerFactory;
 use App\Domain\Flow\Entity\ValueObject\Node;
@@ -187,11 +187,11 @@ JSON, true));
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
-# 角色
+# role
 互联网search助手
 
-## 流程
-call`internet_search`进行search，如果user提示词有`深度search`四个字，则use_deep_searchset为true，否则set为false
+## process
+call`internet_search`进行search，如果userhint词有`深度search`四个字，则use_deep_searchset为true，否则set为false
 
 MARKDOWN,
 

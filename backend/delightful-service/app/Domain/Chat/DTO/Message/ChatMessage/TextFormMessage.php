@@ -10,7 +10,7 @@ namespace App\Domain\Chat\DTO\Message\ChatMessage;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * 文本结构的表单message，存在自动下载 url then再次upload的业务场景，如审批表单。
+ * 文本结构的formmessage，存在自动download url then再次upload的业务场景，如approvalform。
  */
 class TextFormMessage extends TextMessage
 {

@@ -56,7 +56,7 @@ interface KnowledgeBaseDocumentRepositoryInterface
     public function queries(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentQuery $query, Page $page): array;
 
     /**
-     * 通过第third-party文件idquery知识库document列表.
+     * 通过第third-partyfileidquery知识库document列表.
      *
      * @return array<KnowledgeBaseDocumentEntity>
      */

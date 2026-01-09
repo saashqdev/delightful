@@ -167,7 +167,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 保存模式configuration.
+     * save模式configuration.
      */
     public function saveModeConfig(DelightfulUserAuthorization $authorization, AdminModeAggregateDTO $modeAggregateDTO): AdminModeAggregateDTO
     {

@@ -69,7 +69,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.context.lost')]
     case CONTEXT_LOST = 3014;
 
-    // 引用message不存在
+    // quotemessage不存在
         // Referenced message not found
     #[ErrorMessage('chat.refer_message.not_found')]
     case REFER_MESSAGE_NOT_FOUND = 3015;
@@ -89,22 +89,22 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.seq.not_found')]
     case SEQ_NOT_FOUND = 3018;
 
-    // 群聊人员选择exception
+    // group chat人员选择exception
         // Group member selection error
     #[ErrorMessage('chat.group.user_select_error')]
     case GROUP_USER_SELECT_ERROR = 3019;
 
-    // 群聊人数超出限制
+    // group chat人数超出限制
         // Group size exceeds limit
     #[ErrorMessage('chat.group.user_num_limit_error')]
     case GROUP_USER_NUM_LIMIT_ERROR = 3020;
 
-    // 群聊createfail
+    // group chatcreatefail
         // Group creation failed
     #[ErrorMessage('chat.group.create_error')]
     case GROUP_CREATE_ERROR = 3021;
 
-    // 群聊不存在
+    // group chat不存在
         // Group not found
     #[ErrorMessage('chat.group.not_found')]
     case GROUP_NOT_FOUND = 3022;
@@ -134,7 +134,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.update_error')]
     case GROUP_UPDATE_ERROR = 3027;
 
-    // 没有user可以从群聊中移除
+    // 没有user可以从group chat中移除
         // No users can be removed from the group
     #[ErrorMessage('chat.group.no_user_to_remove')]
     case GROUP_NO_USER_TO_REMOVE = 3028;
@@ -144,17 +144,17 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.group_cannot_kick_owner')]
     case GROUP_CANNOT_KICK_OWNER = 3029;
 
-    // 请先转让群主再退出群聊
+    // 请先转让群主再退出group chat
         // Transfer ownership before leaving the group
     #[ErrorMessage('chat.group.transfer_owner_before_leave')]
     case GROUP_TRANSFER_OWNER_BEFORE_LEAVE = 3030;
 
-    // 只有群主才能解散群聊
+    // 只有群主才能解散group chat
         // Only the owner can disband the group
     #[ErrorMessage('chat.group.only_owner_can_disband')]
     case GROUP_ONLY_OWNER_CAN_DISBAND = 3031;
 
-    // 只有群主才能转让群组
+    // 只有群主才能转让group
         // Only the owner can transfer the group
     #[ErrorMessage('chat.group.only_owner_can_transfer')]
     case GROUP_ONLY_OWNER_CAN_TRANSFER = 3032;
@@ -179,7 +179,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.operation.failed')]
     case OPERATION_FAILED = 3036;
 
-    // message中的文件不存在
+    // message中的file不存在
         // File in message not found
     #[ErrorMessage('chat.file.not_found')]
     case FILE_NOT_FOUND = 3037;
@@ -227,7 +227,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.delightful.ticket_not_found')]
     case APP_TICKET_NOT_FOUND = 3046;
 
-    // 流式message不支持该message
+    // streammessage不支持该message
         // Streaming messages do not support this message type
     #[ErrorMessage('chat.message.stream.type_not_support')]
     case STREAM_TYPE_NOT_SUPPORT = 3100;

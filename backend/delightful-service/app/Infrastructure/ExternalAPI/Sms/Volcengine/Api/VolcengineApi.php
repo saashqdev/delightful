@@ -68,7 +68,7 @@ abstract class VolcengineApi
     protected string $secretKey = '';
 
     /**
-     * 短信签名. such as[灯塔引擎].
+     * 短信signature. such as[灯塔引擎].
      */
     protected string $sign = '';
 
@@ -78,7 +78,7 @@ abstract class VolcengineApi
     protected string $messageGroupId = '';
 
     /**
-     * 短信模板Id.
+     * 短信templateId.
      */
     protected string $templateId = '';
 
@@ -118,10 +118,10 @@ abstract class VolcengineApi
      */
     protected function sendRequest()
     {
-        // set请求的签名和X-Date请求头
+        // set请求的signature和X-Date请求头
         $this->setAuth();
         try {
-            // 请求头追加签名
+            // 请求头追加signature
             $options = [
                 RequestOptions::QUERY => $this->getQuery(),
                 RequestOptions::HEADERS => $this->getHeaders(),
@@ -165,7 +165,7 @@ abstract class VolcengineApi
 
     protected function addHeader(string $key, $value): void
     {
-        // 字节方的请求头的value是array,才能参与后续的签名
+        // 字节方的请求头的value是array,才能参与后续的signature
         $value = is_array($value) ? $value : [$value];
         $this->headers[$key] = $value;
     }
@@ -176,7 +176,7 @@ abstract class VolcengineApi
     }
 
     /**
-     * setparameter的签名和公共请求头parameterX-Date.
+     * setparameter的signature和公共请求头parameterX-Date.
      */
     protected function setAuth(): void
     {
@@ -195,14 +195,14 @@ abstract class VolcengineApi
         $req->setIsSignUrl(false);
         $req->setMethod($this->getMethod());
         $req->setQueryList($this->getQuery());
-        // !!! 注意,这里不能加上 JSON_UNESCAPED_UNICODE,加了会导致body有中文时签名不正确!
+        // !!! 注意,这里不能加上 JSON_UNESCAPED_UNICODE,加了会导致body有中文时signature不正确!
         $bodyStream = Utils::streamFor(Json::encode($this->getBody(), JSON_THROW_ON_ERROR));
         $req->setPayloadHash(Utils::hash($bodyStream, 'sha256'));
         $result = $sign->signOnly($req, $credentials);
         // 请求头加上X-Date
         $this->addHeader('X-Date', $result->getXDate());
         $auth = $result->getAuthorization();
-        // 加上签名
+        // 加上signature
         $this->addHeader('Authorization', $auth);
     }
 

@@ -139,7 +139,7 @@ class ProviderConfigEntity extends AbstractEntity
         if (! empty($this->alias)) {
             return $this->alias;
         }
-        return $locale === 'zh_CN' ? '自定义服务商' : 'Custom Provider';
+        return $locale === 'zh_CN' ? 'customize服务商' : 'Custom Provider';
     }
 
     public function setAlias(null|int|string $alias): void

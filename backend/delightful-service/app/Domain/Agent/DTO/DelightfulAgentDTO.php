@@ -27,7 +27,7 @@ class DelightfulAgentDTO extends AbstractEntity
     private ?string $robotName = '';
 
     /**
-     * 助理头像.
+     * 助理avatar.
      */
     private ?string $agentAvatar = '';
 

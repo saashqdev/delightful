@@ -51,12 +51,12 @@ interface DelightfulPermissionInterface
     public function isValidPermission(string $permissionKey): bool;
 
     /**
-     * get资源标签.
+     * get资源tag.
      */
     public function getResourceLabel(string $resource): string;
 
     /**
-     * get操作标签.
+     * get操作tag.
      */
     public function getOperationLabel(string $operation): string;
 

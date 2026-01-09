@@ -363,7 +363,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->saveInstruct($authenticatable, $agentId, $instructs);
     }
 
-    // get聊天模式可用助理list
+    // getchat模式可用助理list
     public function getChatModeAvailableAgents()
     {
         /** @var DelightfulUserAuthorization $authenticatable */

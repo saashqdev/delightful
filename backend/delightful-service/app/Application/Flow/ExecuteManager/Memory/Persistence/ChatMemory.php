@@ -85,7 +85,7 @@ class ChatMemory implements MemoryPersistenceInterface
     {
         $seqLimit = $memoryQuery->getLimit();
 
-        // todo 后续在query侧优化
+        // todo 后续在query侧optimize
         // 当为 ai_card 的message，相同message有 20 条，需要去重，但是在query的时候，是不知道有重复的
         // 在这里先放量query，最多query 200 条，然后再进行重。
         $seqLimit = ($seqLimit * 20 <= 200) ? $seqLimit * 20 : 200;
@@ -105,7 +105,7 @@ class ChatMemory implements MemoryPersistenceInterface
         $messageIds = [];
 
         foreach ($clientSeq as $seqResponseDTO) {
-            // 卡片info只取大modelreturn，大modelreturn的特征有 type = 1, parent_id = 0
+            // cardinfo只取大modelreturn，大modelreturn的特征有 type = 1, parent_id = 0
             if ($seqResponseDTO->getSeq()?->getMessage()?->getContent() instanceof AggregateAISearchCardMessage) {
                 /** @var AggregateAISearchCardMessage $aggregateAISearchCardMessage */
                 $aggregateAISearchCardMessage = $seqResponseDTO->getSeq()?->getMessage()?->getContent();
@@ -162,7 +162,7 @@ class ChatMemory implements MemoryPersistenceInterface
             return $messageLists;
         }
 
-        // 重置挂载顺序
+        // reset挂载顺序
         $messages = [];
         foreach ($messageLists as $customMessage) {
             $messages[] = $customMessage;

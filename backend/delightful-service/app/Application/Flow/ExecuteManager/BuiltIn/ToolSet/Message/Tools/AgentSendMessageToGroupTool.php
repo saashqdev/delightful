@@ -64,7 +64,7 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '发送message给群组';
+        return '发送message给group';
     }
 
     public function getInput(): ?NodeInput
@@ -127,8 +127,8 @@ JSON,
 /* "value": {
      "type": "object",
      "key": "value",
-     "title": "自定义重复parameter",
-     "description": "自定义重复parameter",
+     "title": "customize重复parameter",
+     "description": "customize重复parameter",
      "required": [
    "unit",
    "deadline",

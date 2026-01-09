@@ -11,7 +11,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
  * 无限制的速率限制器implement.
- * 对任何请求都不进行限制，适用于对性能要求较高或处于开发阶段的system.
+ * 对任何请求都不进行限制，适用于对performance要求较高或处于开发阶段的system.
  */
 class NoRateLimiter extends AbstractRateLimiter
 {

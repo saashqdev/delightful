@@ -47,7 +47,7 @@ class VolcengineAPI
     }
 
     /**
-     * 提交异任务
+     * submit异task
      */
     public function submitTask(array $body): array
     {
@@ -61,7 +61,7 @@ class VolcengineAPI
     }
 
     /**
-     * query任务结果.
+     * querytask结果.
      */
     public function getTaskResult(array $params): array
     {

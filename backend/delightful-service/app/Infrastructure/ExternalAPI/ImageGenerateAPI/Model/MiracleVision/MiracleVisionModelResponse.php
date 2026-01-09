@@ -11,7 +11,7 @@ use App\Infrastructure\ExternalAPI\ImageGenerateAPI\AbstractEntity;
 
 class MiracleVisionModelResponse extends AbstractEntity
 {
-    // 完成状态
+    // completestatus
     protected bool $finishStatus = false;
 
     // image

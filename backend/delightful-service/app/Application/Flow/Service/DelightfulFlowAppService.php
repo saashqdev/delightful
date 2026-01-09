@@ -58,7 +58,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * get节点configuration模板.
+     * get节点configurationtemplate.
      */
     public function getNodeTemplate(Authenticatable $authorization, Node $node): Node
     {
@@ -124,7 +124,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 保存基本info.
+     * save基本info.
      */
     #[Transactional]
     public function save(Authenticatable $authorization, DelightfulFlowEntity $delightfulFlowEntity): DelightfulFlowEntity
@@ -145,7 +145,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 保存节点.
+     * save节点.
      */
     public function saveNode(Authenticatable $authorization, DelightfulFlowEntity $delightfulFlowEntity): DelightfulFlowEntity
     {
@@ -153,7 +153,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * query流程.
+     * queryprocess.
      * @return array{total: int, list: array<DelightfulFlowEntity>, users: array<string, DelightfulUserEntity>, icons: array<string, FileLink>}
      */
     public function queries(Authenticatable $authorization, DelightfulFLowQuery $query, Page $page): array
@@ -162,11 +162,11 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
         switch (Type::tryFrom($query->getType())) {
             case Type::Main:
-                // 不支持主流程的query
+                // 不支持主process的query
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_support', ['label' => 'type']);
                 // no break
             case Type::Sub:
-                // 仅get具有permission的子流程
+                // 仅get具有permission的子process
                 $subResources = $this->operationPermissionAppService->getResourceOperationByUserIds(
                     $permissionDataIsolation,
                     ResourceType::SubFlowCode,
@@ -425,7 +425,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * get流程.
+     * getprocess.
      */
     public function getByCode(Authenticatable $authorization, string $flowId): DelightfulFlowEntity
     {
@@ -457,7 +457,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * delete流程.
+     * deleteprocess.
      */
     public function remove(Authenticatable $authorization, string $flowId): void
     {

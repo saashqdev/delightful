@@ -21,7 +21,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * query角色列表.
+     * queryrole列表.
      * @return array{total: int, list: RoleEntity[]}
      */
     public function queries(PermissionDataIsolation $dataIsolation, Page $page, ?array $filters = null): array
@@ -30,7 +30,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * create角色.
+     * createrole.
      */
     public function createRole(PermissionDataIsolation $dataIsolation, RoleEntity $roleEntity): RoleEntity
     {
@@ -38,7 +38,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * update角色.
+     * updaterole.
      */
     public function updateRole(PermissionDataIsolation $dataIsolation, RoleEntity $roleEntity): RoleEntity
     {
@@ -46,7 +46,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * get角色详情.
+     * getrole详情.
      */
     public function show(PermissionDataIsolation $dataIsolation, int $id): RoleEntity
     {
@@ -54,7 +54,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * according to名称get角色.
+     * according to名称getrole.
      */
     public function getByName(PermissionDataIsolation $dataIsolation, string $name): ?RoleEntity
     {
@@ -62,7 +62,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * delete角色.
+     * deleterole.
      */
     public function destroy(PermissionDataIsolation $dataIsolation, int $id): void
     {
@@ -71,7 +71,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * getuser角色列表.
+     * getuserrole列表.
      */
     public function getUserRoles(PermissionDataIsolation $dataIsolation, string $userId): array
     {

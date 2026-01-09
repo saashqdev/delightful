@@ -43,7 +43,7 @@ return new class extends Migration {
             }
         });
 
-        // 恢复表名
+        // restore表名
         Schema::rename('delightful_flow_knowledge_fragment', 'delightful_flow_knowledge_fragment');
     }
 };

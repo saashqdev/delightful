@@ -53,7 +53,7 @@ class DelightfulChatUserApi extends AbstractApi
     }
 
     /**
-     * return ai 的头像昵称等information.
+     * return ai 的avatar昵称等information.
      * @throws Throwable
      */
     #[ArrayShape([
@@ -140,7 +140,7 @@ class DelightfulChatUserApi extends AbstractApi
     /**
      * updateuserinformation
      * 支持update字段：
-     * 1. avatar_url: 头像
+     * 1. avatar_url: avatar
      * 2. nickname:   昵称.
      */
     public function updateUserInfo(RequestInterface $request): array

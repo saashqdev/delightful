@@ -44,7 +44,7 @@ class ServiceProviderApi extends AbstractApi
 
     /**
      * 不需要判断管理员permission。
-     * according to分类getservice商list.
+     * according tocategorygetservice商list.
      */
     public function getServiceProviders(RequestInterface $request)
     {
@@ -53,7 +53,7 @@ class ServiceProviderApi extends AbstractApi
 
     /**
      * 不需要判断管理员permission。
-     * according to分类getservice商list.
+     * according tocategorygetservice商list.
      */
     public function getOrganizationProvidersByCategory(RequestInterface $request)
     {
@@ -103,7 +103,7 @@ class ServiceProviderApi extends AbstractApi
         ];
     }
 
-    // 保存model
+    // savemodel
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function saveModelToServiceProvider(RequestInterface $request)
     {
@@ -243,7 +243,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * according to分类getservice商通用逻辑.
+     * according tocategorygetservice商通用逻辑.
      * @param RequestInterface $request 请求object
      * @return array service商list
      */

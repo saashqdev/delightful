@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\DTO\Message;
 
 /**
- * 大模型回复的message.
+ * 大模型reply的message.
  */
 interface LLMMessageInterface extends TextContentInterface
 {

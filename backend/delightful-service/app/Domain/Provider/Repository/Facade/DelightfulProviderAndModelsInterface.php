@@ -27,7 +27,7 @@ interface DelightfulProviderAndModelsInterface
      * according toorganization编码和类别get Delightful service商modellist.
      *
      * @param string $organizationCode organization编码
-     * @param null|Category $category service商类别，为空时return所有分类model
+     * @param null|Category $category service商类别，为空时return所有categorymodel
      * @return array<ProviderModelEntity> Delightful service商model实体array
      */
     public function getDelightfulEnableModels(string $organizationCode, ?Category $category = null): array;

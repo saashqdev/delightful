@@ -41,7 +41,7 @@ interface DelightfulMessageRepositoryInterface
     /**
      * Batch create messages.
      * @param array $messagesData messagedataarray
-     * @return bool 是否create成功
+     * @return bool 是否createsuccess
      */
     public function batchCreateMessages(array $messagesData): bool;
 }

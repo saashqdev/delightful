@@ -49,7 +49,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
         "radio": {
             "type": "string",
             "key": "radio",
-            "title": "生成图片的比例",
+            "title": "生成image的比例",
             "description": "可选：\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",默认\"1:1\"",
             "required": null,
             "value": null,
@@ -61,8 +61,8 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
         "user_prompt": {
             "type": "string",
             "key": "user_prompt",
-            "title": "user提示词",
-            "description": "user提示词",
+            "title": "userhint词",
+            "description": "userhint词",
             "required": null,
             "value": null,
             "encryption": false,
@@ -73,8 +73,8 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
         "reference_image_ids": {
             "type": "array",
             "key": "reference_image_ids",
-            "title": "引用的图片idlist",
-            "description": "引用的图片idlist",
+            "title": "quote的imageidlist",
+            "description": "quote的imageidlist",
             "required": null,
             "value": null,
             "encryption": false,
@@ -97,8 +97,8 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
         "attachments": {
             "type": "array",
             "key": "attachments",
-            "title": "附件array",
-            "description": "传入文件listarray",
+            "title": "attachmentarray",
+            "description": "传入filelistarray",
             "required": null,
             "value": null,
             "encryption": false,
@@ -107,7 +107,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
                 "type": "object",
                 "key": "files",
                 "sort": 0,
-                "title": "文件",
+                "title": "file",
                 "description": "",
                 "required": [
                 ],
@@ -120,7 +120,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "file_name",
                         "sort": 0,
-                        "title": "文件name",
+                        "title": "filename",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -133,7 +133,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "file_url",
                         "sort": 1,
-                        "title": "文件地址",
+                        "title": "file地址",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -146,7 +146,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "file_ext",
                         "sort": 2,
-                        "title": "文件后缀",
+                        "title": "file后缀",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -159,7 +159,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
                         "type": "number",
                         "key": "file_size",
                         "sort": 3,
-                        "title": "文件大小",
+                        "title": "file大小",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -220,7 +220,7 @@ JSON,
 
     protected function getAssistantAuthorization(string $assistantUserId): DelightfulUserAuthorization
     {
-        // get助理的userinfo。生成的图片上传者是助理自己。
+        // get助理的userinfo。生成的imageupload者是助理自己。
         $assistantInfoEntity = $this->getDelightfulUserDomainService()->getUserById($assistantUserId);
         if ($assistantInfoEntity === null) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'assistant_not_found');

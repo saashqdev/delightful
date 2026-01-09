@@ -14,10 +14,10 @@ use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
- * 角色user关联模型.
+ * roleuser关联模型.
  *
  * @property int $id primary keyID
- * @property int $role_id 角色ID
+ * @property int $role_id roleID
  * @property string $user_id userID，对应delightful_contact_users.user_id
  * @property string $organization_code organization编码
  * @property null|string $assigned_by 分配者userID
@@ -67,7 +67,7 @@ class RoleUserModel extends AbstractModel
     ];
 
     /**
-     * 角色关联.
+     * role关联.
      */
     public function role(): BelongsTo
     {

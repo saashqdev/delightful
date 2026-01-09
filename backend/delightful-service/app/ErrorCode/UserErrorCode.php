@@ -90,7 +90,7 @@ enum UserErrorCode: int
     #[ErrorMessage('user.user_type_error')]
     case USER_TYPE_ERROR = 2184;
 
-    // organization没有授权
+    // organization没有authorization
     #[ErrorMessage('user.organization_not_authorize')]
     case ORGANIZATION_NOT_AUTHORIZE = 2185;
 }

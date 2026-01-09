@@ -70,7 +70,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     {
         $referContent = $this->getReferContentForAIImage($reqDTO->getReferMessageId());
         $referText = $this->getReferTextByContentForAIImage($referContent);
-        // 如果是图生图，则尺寸保持和原始图片尺寸一致
+        // 如果是图生图，则尺寸保持和原始image尺寸一致
         if ($referContent instanceof AIImageCardMessage || $referContent instanceof ImageConvertHighCardMessage) {
             // set实际请求的尺寸和比例
             $radio = $referContent->getRadio() ?? Radio::OneToOne->value;
@@ -99,7 +99,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
             if (! empty($reqDTO->getAttachments())) {
-                // 对引用content重新文生图
+                // 对quotecontent重新文生图
                 $this->handleGenerateImageByReference($requestContext, $reqDTO);
             } else {
                 // 文生图
@@ -112,12 +112,12 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     }
 
     /**
-     * 对引用content重新文生图.
+     * 对quotecontent重新文生图.
      */
     private function handleGenerateImageByReference(RequestContext $requestContext, DelightfulChatAIImageReqDTO $reqDTO): void
     {
         $reqDTO->getParams()->setGenerateNum(1);
-        // 清空空value
+        // clear空value
         $urls = array_filter(array_map(fn ($attachment) => $attachment->getUrl(), $reqDTO->getAttachments()));
         $reqDTO->getParams()->setReferenceImages($urls);
         $this->handleGenerateImage($requestContext, $reqDTO);
@@ -169,7 +169,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     }
 
     /**
-     * 将文件上传到云端.
+     * 将fileupload到云端.
      */
     #[ArrayShape([['file_id' => 'string', 'url' => 'string']])]
     private function uploadFiles(RequestContext $requestContext, array $attachments): array
@@ -180,12 +180,12 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 continue;
             }
             try {
-                // 上传OSS
+                // uploadOSS
                 $uploadFile = new UploadFile($attachment);
                 $this->fileDomainService->uploadByCredential($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile);
                 // geturl
                 $url = $this->fileDomainService->getLink($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile->getKey())->getUrl();
-                // sync文件至delightful
+                // syncfile至delightful
                 $fileUploadDTOs = [];
                 $fileType = FileType::getTypeFromFileExtension($uploadFile->getExt());
                 $fileUploadDTO = new DelightfulChatFileEntity();
@@ -201,7 +201,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                     'url' => $url,
                 ];
             } catch (Throwable $throwable) {
-                // 提交图片fail
+                // submitimagefail
                 $this->logger->error('upload_attachment_error', [
                     'error' => $throwable->getMessage(),
                     'file' => $attachment,
@@ -244,7 +244,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
         ?string $id,
         AIImageCardResponseType $type,
         array $content,
-        // 流式响应，拿到客户端传来的 app_message_id ，作为响应时候的唯一标识
+        // stream响应，拿到客户端传来的 app_message_id ，作为响应时候的唯一标识
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

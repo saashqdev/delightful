@@ -102,7 +102,7 @@ class LLMChatNodeParamsConfig extends AbstractLLMNodeParamsConfig
                 "type": "string",
                 "key": "role",
                 "sort": 0,
-                "title": "角色",
+                "title": "role",
                 "description": "",
                 "items": null,
                 "properties": null,

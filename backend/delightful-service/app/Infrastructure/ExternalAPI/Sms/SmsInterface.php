@@ -10,7 +10,7 @@ namespace App\Infrastructure\ExternalAPI\Sms;
 interface SmsInterface
 {
     /**
-     * get短信的模板id. 并不一定存在模板id.
+     * get短信的templateid. 并不一定存在templateid.
      */
     public function getTemplateId(SmsStruct $smsStruct): ?string;
 
@@ -25,12 +25,12 @@ interface SmsInterface
     public function getContent(SmsStruct $smsStruct): string;
 
     /**
-     * get短信文案的语种,与签名无关. 可能短信content是印尼语,签名是英文.
+     * get短信文案的语种,与signature无关. 可能短信content是印尼语,signature是英文.
      */
     public function getContentLanguage(SmsStruct $smsStruct): string;
 
     /**
-     * get短信签名. need多语种适配,语种兜底!
+     * get短信signature. need多语种适配,语种兜底!
      */
     public function getSign(SmsStruct $smsStruct): string;
 }

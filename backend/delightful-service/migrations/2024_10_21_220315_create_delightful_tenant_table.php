@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('display_id', 255)->comment('企业编号，平台内唯一');
             $table->tinyInteger('tenant_tag')->default(0)->comment('个人版/团队版标志. 1：团队版 2：个人版');
             $table->string('tenant_key', 32)->comment('企业标识');
-            $table->text('avatar')->comment('企业头像');
+            $table->text('avatar')->comment('企业avatar');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['tenant_key'], 'index_tenant_key');

@@ -24,7 +24,7 @@ class Misc extends AbstractApi
 
     public function getClient(OpenAIConfig $config, ?ApiOptions $requestOptions = null, ?LoggerInterface $logger = null): Client
     {
-        // 检查API Key，除非配置为跳过验证
+        // 检查API Key，除非configuration为跳过验证
         if (empty($config->getApiKey()) && ! $config->shouldSkipApiKeyValidation()) {
             throw new LLMInvalidApiKeyException('API密钥cannot为null', null, 'OpenAI');
         }

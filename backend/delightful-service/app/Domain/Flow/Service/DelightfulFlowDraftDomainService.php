@@ -57,7 +57,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
     }
 
     /**
-     * 保存草稿.
+     * save草稿.
      */
     #[Transactional]
     public function save(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $savingDelightfulFlowDraftEntity): DelightfulFlowDraftEntity

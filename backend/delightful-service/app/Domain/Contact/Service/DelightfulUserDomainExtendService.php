@@ -45,7 +45,7 @@ class DelightfulUserDomainExtendService implements DelightfulUserDomainExtendInt
         $userId = $dataIsolation->getCurrentUserId();
         $updateFilter = [];
 
-        // 处理头像URL
+        // 处理avatarURL
         if (in_array('avatar_url', $permission) && $userUpdateDTO->getAvatarUrl() !== null) {
             $updateFilter['avatar_url'] = $userUpdateDTO->getAvatarUrl();
         }

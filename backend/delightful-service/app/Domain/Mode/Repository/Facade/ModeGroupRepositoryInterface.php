@@ -24,7 +24,7 @@ interface ModeGroupRepositoryInterface
     public function findByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
 
     /**
-     * 保存分组.
+     * save分组.
      */
     public function save(ModeDataIsolation $dataIsolation, ModeGroupEntity $groupEntity): ModeGroupEntity;
 

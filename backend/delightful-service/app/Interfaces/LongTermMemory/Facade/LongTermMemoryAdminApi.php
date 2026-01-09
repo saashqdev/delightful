@@ -497,7 +497,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * get记忆提示词.
+     * get记忆hint词.
      */
     public function getMemoryPrompt(RequestInterface $request): array
     {
@@ -525,7 +525,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 评估对话content以create记忆.
+     * 评估conversationcontent以create记忆.
      */
     public function evaluateConversation(RequestInterface $request): array
     {
@@ -652,7 +652,7 @@ class LongTermMemoryAdminApi extends AbstractApi
      */
     private function buildUpdateMemoryDTO(?string $inputContent, ?string $inputPendingContent = null): UpdateMemoryDTO
     {
-        // buildDTO（长度check已在parameter验证阶段完成，且至少有一个field不为空）
+        // buildDTO（长度check已在parameter验证阶段complete，且至少有一个field不为空）
         $status = null;
         $explanation = null;
 

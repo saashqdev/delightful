@@ -19,7 +19,7 @@ use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * 聚合AIsearch的响应卡片message.
+ * 聚合AIsearch的响应cardmessage.
  */
 class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implements TextContentInterface, StreamMessageInterface
 {
@@ -77,9 +77,9 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected string $ppt;
 
     /**
-     * get本次需要流式推送的field。
-     * 支持一次推送多个field的流式message，如果 json 层级较深，use field_1.*.field_2 作为 key。 其中 * 是指array的下标。
-     * service端会cache所有流式的数据，并在流式结束时一次性推送，以减少丢包的概率，提升message完整性。
+     * get本次需要streampush的field。
+     * 支持一次push多个field的streammessage，如果 json 层级较深，use field_1.*.field_2 作为 key。 其中 * 是指array的下标。
+     * service端会cache所有stream的数据，并在stream结束时一次性push，以减少丢包的概率，提升message完整性。
      * for example：
      * [
      *     'users.0.name' => 'delightful',

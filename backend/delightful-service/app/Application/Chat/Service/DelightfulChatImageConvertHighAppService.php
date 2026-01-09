@@ -102,7 +102,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             );
             // 计时开始
             $start = microtime(true);
-            // 轮询600次，直到拿到图片
+            // 轮询600次，直到拿到image
             $count = 600;
             $response = null;
 
@@ -113,14 +113,14 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 }
                 sleep(2);
             }
-            // 如果未完成，则报错超时
+            // 如果未complete，则报错超时
             if (! $response?->isFinishStatus() || empty($response?->getUrls())) {
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.task_timeout');
             }
             // 计时结束，输出秒级time
             $end = microtime(true);
             $this->logger->info(sprintf('转高清结束，耗时: %s秒。', $end - $start));
-            // 将新旧图片存入附件
+            // 将新旧image存入attachment
             $newFile = $this->upLoadFiles($requestContext, [$response->getUrls()[0]])[0] ?? [];
             $this->aiSendMessage(
                 $reqDTO->getConversationId(),
@@ -143,7 +143,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
     }
 
     /**
-     * 将文件上传到云端.
+     * 将fileupload到云端.
      */
     #[ArrayShape([['file_id' => 'string', 'url' => 'string']])]
     private function upLoadFiles(RequestContext $requestContext, array $attachments): array
@@ -154,12 +154,12 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 continue;
             }
             try {
-                // 上传OSS
+                // uploadOSS
                 $uploadFile = new UploadFile($attachment);
                 $this->fileDomainService->uploadByCredential($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile);
                 // geturl
                 $url = $this->fileDomainService->getLink($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile->getKey())->getUrl();
-                // sync文件至delightful
+                // syncfile至delightful
                 $fileUploadDTOs = [];
                 $fileType = FileType::getTypeFromFileExtension($uploadFile->getExt());
                 $fileUploadDTO = new DelightfulChatFileEntity();
@@ -175,7 +175,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                     'url' => $url,
                 ];
             } catch (Throwable $throwable) {
-                // 提交图片fail
+                // submitimagefail
                 $this->logger->error('upload_attachment_error', [
                     'error' => $throwable->getMessage(),
                     'file' => $attachment,
@@ -242,7 +242,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
         ?string $id,
         ImageConvertHighResponseType $type,
         array $content,
-        // 流式响应，拿到客户端传来的 app_message_id ，作为响应时候的唯一标识
+        // stream响应，拿到客户端传来的 app_message_id ，作为响应时候的唯一标识
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

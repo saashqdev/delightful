@@ -45,7 +45,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * 优化版本：直接get启用的助理版本，避免传入大量ID.
+     * optimize版本：直接get启用的助理版本，避免传入大量ID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -54,7 +54,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * 优化版本：get启用助理的总数.
+     * optimize版本：get启用助理的总数.
      */
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {
@@ -76,7 +76,7 @@ class DelightfulAgentVersionDomainService
      */
     public function releaseAgentVersion(DelightfulAgentVersionEntity $delightfulAgentVersionEntity): array
     {
-        // 审批开关 todo
+        // approval开关 todo
         $approvalOpen = false;
         $reviewOpen = false;
 
@@ -97,7 +97,7 @@ class DelightfulAgentVersionDomainService
             if ($approvalOpen) {
                 $delightfulAgentVersionEntity->setApprovalStatus(DelightfulAgentVersionStatus::APPROVAL_PENDING->value);
                 $delightfulAgentVersionEntity->setEnterpriseReleaseStatus(DelightfulAgentVersionStatus::APP_MARKET_LISTED->value);
-                $msg = '提交success';
+                $msg = 'submitsuccess';
             } else {
                 $delightfulAgentVersionEntity->setEnterpriseReleaseStatus(DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value);
             }
@@ -148,7 +148,7 @@ class DelightfulAgentVersionDomainService
 
         $approvalOpen = false;
 
-        // 审批开关
+        // approval开关
         /* @phpstan-ignore-next-line */
         if ($approvalOpen) {
             // 校验status
@@ -198,7 +198,7 @@ class DelightfulAgentVersionDomainService
 
         // 如果 MINOR 达到 10，进位到 MAJOR（可以according to需求调整此规则）
         if ($minor > 99) {
-            // 不重置minor，而是直接增大major，避免不必要的重置
+            // 不resetminor，而是直接增大major，避免不必要的reset
             $minor = 0;
             $major = (int) $major + 1;
         }

@@ -10,22 +10,22 @@ namespace App\Interfaces\Permission\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * update子管理员角色请求DTO.
+ * update子管理员role请求DTO.
  */
 class UpdateSubAdminRequestDTO extends AbstractDTO
 {
     /**
-     * 角色name（可选，仅在需要update时提供）.
+     * rolename（可选，仅在需要update时提供）.
      */
     public ?string $name = null;
 
     /**
-     * 角色status：0=禁用, 1=启用（可选，仅在需要update时提供）.
+     * rolestatus：0=禁用, 1=启用（可选，仅在需要update时提供）.
      */
     public ?int $status = null;
 
     /**
-     * permission标签，用于前端展示分类（可选，仅在需要update时提供）.
+     * permissiontag，用于前端展示category（可选，仅在需要update时提供）.
      */
     public ?array $permissionTag = null;
 
@@ -108,7 +108,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
      */
     public function validate(): bool
     {
-        // 验证角色name（如果提供）
+        // 验证rolename（如果提供）
         if ($this->name !== null) {
             if (empty(trim($this->name))) {
                 return false;
@@ -154,16 +154,16 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
 
         if ($this->name !== null) {
             if (empty(trim($this->name))) {
-                $errors[] = '角色name不能为空';
+                $errors[] = 'rolename不能为空';
             }
 
             if (strlen($this->name) > 255) {
-                $errors[] = '角色name长度不能超过255个字符';
+                $errors[] = 'rolename长度不能超过255个字符';
             }
         }
 
         if ($this->status !== null && ! in_array($this->status, [0, 1])) {
-            $errors[] = '角色statusvalue无效，只能是0或1';
+            $errors[] = 'rolestatusvalue无效，只能是0或1';
         }
 
         if ($this->permissions !== null) {

@@ -78,7 +78,7 @@ class ExecutionData
     private array $variables = [];
 
     /**
-     * 附件。流程执行时产生的所有文件record.
+     * attachment。process执行时产生的所有filerecord.
      * @var array<string, AbstractAttachment>
      */
     private array $attachmentRecords = [];

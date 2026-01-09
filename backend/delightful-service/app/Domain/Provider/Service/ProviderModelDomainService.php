@@ -53,7 +53,7 @@ readonly class ProviderModelDomainService
      */
     public function getByIdOrModelId(ProviderDataIsolation $dataIsolation, string $id): ?ProviderModelEntity
     {
-        // get所有分类的可用model
+        // get所有category的可用model
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
         // 循环判断 id 等于 $id 或者 model_id 等于 $id
@@ -107,7 +107,7 @@ readonly class ProviderModelDomainService
             }
         }
 
-        // 目前保存model的接口只有大modeluse，因此强制type是 llm
+        // 目前savemodel的接口只有大modeluse，因此强制type是 llm
         $providerModelDTO->setCategory(Category::LLM);
         $modelEntity = $this->providerModelRepository->saveModel($dataIsolation, $providerModelDTO);
 
@@ -206,7 +206,7 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 保存modelconfiguration版本.
+     * savemodelconfiguration版本.
      */
     private function saveConfigVersion(ProviderDataIsolation $dataIsolation, ProviderModelEntity $modelEntity): void
     {
@@ -215,7 +215,7 @@ readonly class ProviderModelDomainService
             return;
         }
 
-        // 转换为configuration版本实体并保存（事务、版本号递增、标记当前版本都在 Repository 内完成）
+        // 转换为configuration版本实体并save（事务、版本号递增、mark当前版本都在 Repository 内complete）
         $versionEntity = ProviderModelAssembler::toConfigVersionEntity($modelEntity);
         $this->providerModelConfigVersionRepository->saveVersionWithTransaction($dataIsolation, $versionEntity);
     }

@@ -65,7 +65,7 @@ class DelightfulChatHttpApi extends AbstractApi
     {
         $params = $request->all();
         $rules = [
-            'page_token' => 'string', // 私聊的本地最大 seq_id
+            'page_token' => 'string', // private chat的本地最大 seq_id
         ];
         $params = $this->checkParams($params, $rules);
         $this->logger->info('pullMessage:' . Json::encode($params));
@@ -77,7 +77,7 @@ class DelightfulChatHttpApi extends AbstractApi
     {
         $params = $request->all();
         $rules = [
-            'page_token' => 'string', // 私聊的本地最大 seq_id
+            'page_token' => 'string', // private chat的本地最大 seq_id
         ];
         $params = $this->checkParams($params, $rules);
         $this->logger->info('pullMessageByAppMessageId:' . $appMessageId);
@@ -176,7 +176,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * （前端性能有issue的临时方案）按session id 分组get几条最新message.
+     * （前端performance有issue的临时方案）按session id 分组get几条最新message.
      */
     public function conversationsMessagesGroupQueries(RequestInterface $request): array
     {
@@ -218,7 +218,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * create聊天群组.
+     * createchatgroup.
      */
     public function createChatGroup(RequestInterface $request): array
     {
@@ -297,7 +297,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 解散群聊.
+     * 解散group chat.
      */
     public function groupDelete(string $id): array
     {
@@ -355,7 +355,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * user所在群组list.
+     * user所在grouplist.
      */
     public function getUserGroupList(RequestInterface $request): array
     {
@@ -466,7 +466,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * session保存交互指令.
+     * sessionsave交互指令.
      */
     public function saveInstruct(string $conversationId, RequestInterface $request)
     {
@@ -509,7 +509,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 处理聊天补全的共同逻辑.
+     * 处理chat补全的共同逻辑.
      */
     protected function handleChatCompletions(array $params, ?string $conversationId, ?string $topicId): array
     {

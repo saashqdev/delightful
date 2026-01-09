@@ -46,7 +46,7 @@ class ModeAppService extends AbstractModeAppService
         // 批量build模式聚合根
         $modeAggregates = $this->modeDomainService->batchBuildModeAggregates($modeDataIsolation, $modeEnabledList);
 
-        // ===== 性能优化：批量预query =====
+        // ===== performanceoptimize：批量预query =====
 
         // 步骤1：预收集所有需要的modelId
         $allModelIds = [];
@@ -174,7 +174,7 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 批量getmodel和service商status（性能优化版本）.
+     * 批量getmodel和service商status（performanceoptimize版本）.
      * @param array $allModelIds 所有需要query的modelId
      * @return array<string, ProviderModelEntity> 已通过级联status筛选的可用model
      */
@@ -219,7 +219,7 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 为批量query优化的model选择method.
+     * 为批量queryoptimize的model选择method.
      * @param ProviderModelEntity[] $models modellist
      * @param array $providerStatuses service商status映射
      */

@@ -12,10 +12,10 @@ enum AIImageCardResponseType: int
     // 开始生成
     case START_GENERATE = 1;
 
-    // 生成完成
+    // 生成complete
     case GENERATED = 2;
 
-    // 引用image
+    // quoteimage
     case REFERENCE_IMAGE = 3;
 
     // exception终止
@@ -25,8 +25,8 @@ enum AIImageCardResponseType: int
     {
         return match ($type) {
             self::START_GENERATE => '开始生成',
-            self::GENERATED => '生成完成',
-            self::REFERENCE_IMAGE => '引用image',
+            self::GENERATED => '生成complete',
+            self::REFERENCE_IMAGE => 'quoteimage',
             default => '未知type',
         };
     }

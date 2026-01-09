@@ -237,7 +237,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     private function logSummary(array $result): void
     {
         $this->logger->info('=================================');
-        $this->logger->info('sync完成！统计info:');
+        $this->logger->info('synccomplete！统计info:');
         $this->logger->info(sprintf('  总model数: %d', $result['total']));
         $this->logger->info(sprintf('  已有版本: %d', $result['skipped']));
         $this->logger->info(sprintf('  新增版本: %d', $result['created']));

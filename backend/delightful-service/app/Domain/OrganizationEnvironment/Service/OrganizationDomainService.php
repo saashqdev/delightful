@@ -55,7 +55,7 @@ readonly class OrganizationDomainService
 
         if ($creatorId !== null && $savedOrganization->getType() !== 1) {
             // 个人organization不添加organization管理员
-            // 为create者添加organization管理员permission并标记为organizationcreate人
+            // 为create者添加organization管理员permission并mark为organizationcreate人
             try {
                 $dataIsolation = DataIsolation::simpleMake($savedOrganization->getDelightfulOrganizationCode(), (string) $creatorId);
                 $this->organizationAdminDomainService->grant(
@@ -63,7 +63,7 @@ readonly class OrganizationDomainService
                     (string) $creatorId,
                     (string) $creatorId, // 授予者也是create者自己
                     'organizationcreate者自动获得管理员permission',
-                    true // 标记为organizationcreate人
+                    true // mark为organizationcreate人
                 );
             } catch (Throwable $e) {
                 // 如果授予管理员permissionfail，recordlog但不影响organizationcreate

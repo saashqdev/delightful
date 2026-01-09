@@ -26,6 +26,6 @@ class MessageToolSet extends AbstractBuiltInToolSet
 
     public function getDescription(): string
     {
-        return '提供了发送message相关的tool，include发送给个人和群组';
+        return '提供了发送message相关的tool，include发送给个人和group';
     }
 }

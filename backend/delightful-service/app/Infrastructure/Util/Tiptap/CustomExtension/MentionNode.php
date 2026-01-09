@@ -13,7 +13,7 @@ use App\Interfaces\Agent\Assembler\MentionAssembler;
 use Hyperf\Codec\Json;
 
 /**
- * 富文本的@功能.
+ * rich text的@功能.
  */
 class MentionNode extends AbstractCustomNode
 {
@@ -46,7 +46,7 @@ class MentionNode extends AbstractCustomNode
     public function renderText($node): string
     {
         $nodeForArray = Json::decode(Json::encode($node));
-        // 可能引用 superAgent 的文件/mcp/flow等
+        // 可能quote superAgent 的file/mcp/flow等
         $superAgentMention = MentionAssembler::fromArray($nodeForArray);
         if ($superAgentMention instanceof MentionInterface) {
             return $superAgentMention->getMentionTextStruct();

@@ -44,7 +44,7 @@ class InstructionConfig extends AbstractEntity
     protected int $insertLocation = InstructionInsertLocation::Cursor->value;
 
     /**
-     * 指令type, 取value 1 为流程指令，取value 2 为对话指令，默认为 对话指令。
+     * 指令type, 取value 1 为process指令，取value 2 为conversation指令，默认为 conversation指令。
      */
     protected int $instructionType = InstructionType::Conversation->value;
 
@@ -76,7 +76,7 @@ class InstructionConfig extends AbstractEntity
     protected string $on = '';
 
     /**
-     * 开关关闭status的文本description.
+     * 开关closestatus的文本description.
      */
     protected string $off = '';
 
@@ -259,7 +259,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * get开关关闭status的文本description.
+     * get开关closestatus的文本description.
      */
     public function getOff(): string
     {
@@ -267,7 +267,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * set开关关闭status的文本description.
+     * set开关closestatus的文本description.
      * @param mixed $off
      */
     public function setOff($off): void

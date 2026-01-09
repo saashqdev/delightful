@@ -35,7 +35,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
 {
     use DataIsolationTrait;
 
-    // create群组
+    // creategroup
     public function createGroup(DelightfulGroupEntity $delightfulGroupDTO, DataIsolation $dataIsolation): DelightfulGroupEntity
     {
         $delightfulGroupDTO->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
@@ -116,14 +116,14 @@ class DelightfulGroupDomainService extends AbstractDomainService
     {
         $groupPageResponseDTO = $this->delightfulGroupRepository->getUserGroupList($pageToken, $dataIsolation->getCurrentUserId(), $pageSize);
         $groupDTOS = $groupPageResponseDTO->getItems();
-        // user在这些群聊中的sessionid
+        // user在这些group chat中的sessionid
         $groupIds = array_column($groupDTOS, 'id');
         $conversations = $this->delightfulConversationRepository->getConversationsByReceiveIds($dataIsolation->getCurrentUserId(), $groupIds);
         /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'receive_id');
         $groupList = [];
         foreach ($groupDTOS as $groupDTO) {
-            // return群聊对应的sessionid
+            // returngroup chat对应的sessionid
             $groupId = $groupDTO->getId();
             $groupDTO->setConversationId($conversations[$groupId]->getId() ?? null);
             $groupList[] = $groupDTO;
@@ -162,7 +162,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 // 这些user已经从群成员table中移除,但是他们还未收到被移除的message
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
                 if ($controlMessageType === ControlMessageType::GroupDisband) {
-                    // 解散群聊,所有人都是被移除的.这里减少流量消耗.
+                    // 解散group chat,所有人都是被移除的.这里减少流量消耗.
                     $content['user_ids'] = [];
                 }
             }
@@ -213,7 +213,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         if ($oldGroupOwner !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_ONLY_OWNER_CAN_TRANSFER);
         }
-        // check被转让的user是否在群聊中
+        // check被转让的user是否在group chat中
         $groupId = $groupEntity->getId();
         $newOwnerUserId = $delightfulGroupDTO->getGroupOwner();
         if (! $this->isUserInGroup($groupId, $newOwnerUserId)) {

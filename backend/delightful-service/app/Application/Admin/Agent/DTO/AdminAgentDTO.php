@@ -20,7 +20,7 @@ class AdminAgentDTO extends AbstractDTO
     // description
     protected string $agentDescription;
 
-    // 头像
+    // avatar
     protected string $agentAvatar;
 
     // status
@@ -41,7 +41,7 @@ class AdminAgentDTO extends AbstractDTO
     // 审核status
     protected ?int $reviewStatus = null;
 
-    // 审批status
+    // approvalstatus
     protected ?int $approvalStatus = null;
 
     public function getId(): string

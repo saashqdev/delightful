@@ -15,7 +15,7 @@ use function Hyperf\Translation\__;
 enum InstructGroupPosition: int
 {
     case TOOLBAR = 1;    // tool栏
-    case CHATBAR = 2;    // 对话栏
+    case CHATBAR = 2;    // conversation栏
 
     public const MAX_INSTRUCTS = 5;
 
@@ -29,7 +29,7 @@ enum InstructGroupPosition: int
     }
 
     /**
-     * get所有组type及其国际化标签.
+     * get所有组type及其国际化tag.
      * @return array<string, int> returntype名称和对应的值
      */
     public static function getTypeOptions(): array

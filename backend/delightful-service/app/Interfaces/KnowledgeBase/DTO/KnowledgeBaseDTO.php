@@ -49,7 +49,7 @@ class KnowledgeBaseDTO extends AbstractFlowDTO
     public int $expectedCount = 0;
 
     /**
-     * 已完成的片段数量.
+     * 已complete的片段数量.
      */
     public int $completedCount = 0;
 
@@ -61,7 +61,7 @@ class KnowledgeBaseDTO extends AbstractFlowDTO
     public int $expectedNum = 0;
 
     /**
-     * 业务维护的已完成的数量.
+     * 业务维护的已complete的数量.
      */
     public int $completedNum = 0;
 

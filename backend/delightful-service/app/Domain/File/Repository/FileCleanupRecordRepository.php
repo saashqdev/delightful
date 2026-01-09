@@ -15,7 +15,7 @@ use Hyperf\DbConnection\Db;
 class FileCleanupRecordRepository
 {
     /**
-     * create文件清理record.
+     * createfile清理record.
      */
     public function create(FileCleanupRecordEntity $entity): FileCleanupRecordEntity
     {
@@ -53,7 +53,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * according to文件key和organization编码查找record.
+     * according tofilekey和organization编码查找record.
      */
     public function findByFileKey(string $fileKey, string $organizationCode): ?FileCleanupRecordEntity
     {
@@ -159,14 +159,14 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 取消清理(如果文件需要保留).
+     * cancel清理(如果file需要保留).
      */
     public function cancelCleanup(string $fileKey, string $organizationCode): bool
     {
         return FileCleanupRecordModel::query()
             ->where('file_key', $fileKey)
             ->where('organization_code', $organizationCode)
-            ->where('status', 0) // 只能取消待清理status的record
+            ->where('status', 0) // 只能cancel待清理status的record
             ->delete() > 0;
     }
 

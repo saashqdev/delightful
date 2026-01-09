@@ -58,7 +58,7 @@ class ResponseMiddleware implements MiddlewareInterface
     {
         $path = $request->getUri()->getPath();
         if (! in_array($path, $this->ignoreUris, true)) {
-            // 提前记录请求日志、请求 url、请求头
+            // 提前记录请求log、请求 url、请求头
             $this->logger->info('请求跟踪开始', [
                 'url' => $request->getRequestTarget(),
                 'method' => $request->getMethod(),

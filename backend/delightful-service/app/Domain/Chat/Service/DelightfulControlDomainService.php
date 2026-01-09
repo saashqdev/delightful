@@ -40,7 +40,7 @@ class DelightfulControlDomainService extends AbstractDomainService
     public function handlerMQReceiptSeq(DelightfulSeqEntity $receiveDelightfulSeqEntity): void
     {
         $controlMessageType = $receiveDelightfulSeqEntity->getSeqType();
-        // according to已读回执的send方,parse出来messagesend方的信息
+        // according to已读回执的send方,parse出来messagesend方的info
         $receiveConversationId = $receiveDelightfulSeqEntity->getConversationId();
         $receiveConversationEntity = $this->delightfulConversationRepository->getConversationById($receiveConversationId);
         if ($receiveConversationEntity === null) {
@@ -51,7 +51,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             ));
             return;
         }
-        // 通过回执send者引用的messageid,找到send者的messageid. (不可直接usereceive者的 sender_message_id 字段,这是一个不好的design,随时取消)
+        // 通过回执send者quote的messageid,找到send者的messageid. (不可直接usereceive者的 sender_message_id 字段,这是一个不好的design,随时cancel)
         $senderMessageId = $this->delightfulSeqRepository->getSeqByMessageId($receiveDelightfulSeqEntity->getReferMessageId())?->getSenderMessageId();
         if ($senderMessageId === null) {
             $this->logger->error(sprintf(
@@ -104,10 +104,10 @@ class DelightfulControlDomainService extends AbstractDomainService
                 ));
                 return;
             }
-            // 没找到seq,或者message已被撤回
+            // 没找到seq,或者message已被withdraw
             if ($senderLatestSeq === null || $senderLatestSeq->getSeqType() === ControlMessageType::RevokeMessage) {
                 $this->logger->error(sprintf(
-                    'messageDispatch 回执message没找到 seq,或者message已被撤回 $senderLatestSeq:%s $delightfulSeqEntity:%s',
+                    'messageDispatch 回执message没找到 seq,或者message已被withdraw $senderLatestSeq:%s $delightfulSeqEntity:%s',
                     Json::encode($senderLatestSeq?->toArray()),
                     Json::encode($receiveDelightfulSeqEntity->toArray())
                 ));
@@ -175,7 +175,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                         }
                     });
 
-                    // 3. async推送给message的send方,有人已读了他发出的message
+                    // 3. asyncpush给message的send方,有人已读了他发出的message
                     $this->pushControlSequence($senderSeenSeqEntity);
                     break;
                 case ControlMessageType::ReadMessage:
@@ -189,13 +189,13 @@ class DelightfulControlDomainService extends AbstractDomainService
     }
 
     /**
-     * handle mq 中分发的撤回/编辑message. 这些message是操作user自己的seq.
+     * handle mq 中分发的withdraw/editmessage. 这些message是操作user自己的seq.
      * @throws Throwable
      */
     public function handlerMQUserSelfMessageChange(DelightfulSeqEntity $changeMessageStatusSeqEntity): void
     {
         $controlMessageType = $changeMessageStatusSeqEntity->getSeqType();
-        // 通过回执send者引用的messageid,找到send者的messageid. (不可直接usereceive者的 sender_message_id 字段,这是一个不好的design,随时取消)
+        // 通过回执send者quote的messageid,找到send者的messageid. (不可直接usereceive者的 sender_message_id 字段,这是一个不好的design,随时cancel)
         $needChangeSeqEntity = $this->delightfulSeqRepository->getSeqByMessageId($changeMessageStatusSeqEntity->getReferMessageId());
         if ($needChangeSeqEntity === null) {
             $this->logger->error(sprintf(
@@ -211,7 +211,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             if (! $this->redisLocker->mutexLock($spinLockKey, $revokeMessageId)) {
                 // 互斥fail
                 $this->logger->error(sprintf(
-                    'messageDispatch 撤回或者编辑messagefail $spinLockKey:%s $delightfulSeqEntity:%s',
+                    'messageDispatch withdraw或者editmessagefail $spinLockKey:%s $delightfulSeqEntity:%s',
                     $spinLockKey,
                     Json::encode($changeMessageStatusSeqEntity->toArray())
                 ));
@@ -231,7 +231,7 @@ class DelightfulControlDomainService extends AbstractDomainService
     }
 
     /**
-     * 分发群聊/私聊中的撤回或者编辑message.
+     * 分发group chat/private chat中的withdraw或者editmessage.
      * @return DelightfulSeqEntity[]
      */
     #[Transactional]
@@ -240,11 +240,11 @@ class DelightfulControlDomainService extends AbstractDomainService
         // 获取所有收件方的seq
         $receiveSeqList = $this->delightfulSeqRepository->getBothSeqListByDelightfulMessageId($needChangeSeqEntity->getDelightfulMessageId());
         $receiveSeqList = array_column($receiveSeqList, null, 'object_id');
-        // 去掉自己,因为需要及时响应,已经单独generate了seq并推送了
+        // 去掉自己,因为需要及时响应,已经单独generate了seq并push了
         unset($receiveSeqList[$needChangeSeqEntity->getObjectId()]);
         $seqListCreateDTO = [];
         foreach ($receiveSeqList as $receiveSeq) {
-            // 撤回的都是收件方自己conversation窗口中的messageid
+            // withdraw的都是收件方自己conversation窗口中的messageid
             $revokeMessageId = $receiveSeq['message_id'];
             $receiveSeq['status'] = DelightfulMessageStatus::Seen;
             $receiveSeq['seq_type'] = $controlMessageType->value;

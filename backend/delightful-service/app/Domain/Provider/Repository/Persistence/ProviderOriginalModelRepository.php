@@ -94,14 +94,14 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
             ->where('type', $systemType->value);
         $systemModels = Db::select($systemBuilder->toSql(), $systemBuilder->getBindings());
 
-        // 第二次query：getwhen前organization的自定义模型
+        // 第二次query：getwhen前organization的customize模型
         $organizationBuilder = $this->createProviderOriginalModelQuery($dataIsolation);
         $organizationModels = Db::select($organizationBuilder->toSql(), $organizationBuilder->getBindings());
 
         // 合并结果
         $allModels = array_merge($systemModels, $organizationModels);
 
-        // 按 id 降序排序
+        // 按 id 降序sort
         usort($allModels, static function (array $a, array $b) {
             return $b['id'] <=> $a['id'];
         });

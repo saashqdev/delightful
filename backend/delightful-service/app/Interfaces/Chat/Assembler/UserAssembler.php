@@ -173,7 +173,7 @@ class UserAssembler
 
                 if (! empty($departments)) {
                     if ($withDepartmentFullPath) {
-                        // 完整路径模式: 为每个department保存完整层级结构
+                        // 完整路径模式: 为每个departmentsave完整层级结构
                         $pathNodes = array_map(
                             fn (DelightfulDepartmentEntity $department) => self::assemblePathNodeByDepartmentInfo($department),
                             $departments

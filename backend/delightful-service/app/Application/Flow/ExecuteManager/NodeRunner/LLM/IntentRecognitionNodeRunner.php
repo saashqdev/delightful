@@ -104,7 +104,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
         }
 
         return <<<MARKDOWN
-'# 角色
+'# role
 你是一个意图识别节点，用于分析user的意图，你将得到一份user输入的content，帮我分析出user的意图和置信度。
 result需要在限定的意图范围中。
 
@@ -132,7 +132,7 @@ result需要在限定的意图范围中。
     "remark":""
 }    
 
-# 流程
+# process
 1. 你将得到一份user输入的content，帮我分析出user的意图和置信度。
 2. 推理user的意图，将推理过程放到 JSON 中的 推导过程 field，解释为什么会得出这些意图和置信度。
 3. 如果识别到了意图，请填写最佳匹配和匹配到的意图，是否识别为 true，最佳意图 一定是置信度最高的，其中 匹配到的意图有 field是according to 置信度 从大到小排列。

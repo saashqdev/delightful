@@ -114,7 +114,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // 如果是自定义重复，那么直接create调度task,同时关闭定时生成调度task
+        // 如果是customize重复，那么直接create调度task,同时close定时生成调度task
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -257,7 +257,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // 如果是自定义重复，那么直接create调度task,同时关闭定时生成调度task
+        // 如果是customize重复，那么直接create调度task,同时close定时生成调度task
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -445,7 +445,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     );
     //     $executionData->setTopicId($topicId);
     //     $executionData->setDebug($triggerConfig['debug']);
-    //     // 运行流程图，检测是否可以运行
+    //     // 运行process图，检测是否可以运行
     //     $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
     //     $executor->execute();
 
@@ -464,7 +464,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //                 $result['success'] = false;
     //             }
     //             if ($node->getNodeType() === NodeType::ReplyMessage) {
-    //                 // 如果是回复message节点，则将messagecontent添加到result中
+    //                 // 如果是replymessage节点，则将messagecontent添加到result中
     //                 $result['message'] = $node->getNodeDebugResult()->getOutput();
     //             }
     //         }

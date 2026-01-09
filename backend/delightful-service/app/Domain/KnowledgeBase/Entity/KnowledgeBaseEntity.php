@@ -69,7 +69,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     protected int $expectedNum = 0;
 
     /**
-     * 业务维护的已完成的数量.
+     * 业务维护的已complete的数量.
      */
     protected int $completedNum = 0;
 
@@ -91,7 +91,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     protected int $expectedCount = 0;
 
     /**
-     * 已完成的片段数量.
+     * 已complete的片段数量.
      */
     protected int $completedCount = 0;
 
@@ -192,7 +192,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
             $this->createdAt = new DateTime();
         }
         if ($this->completedNum > $this->expectedNum) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '已完成数量不能大于expect数量');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '已complete数量不能大于expect数量');
         }
         $delightfulFlowKnowledgeEntity->setExpectedNum($this->expectedNum);
         $delightfulFlowKnowledgeEntity->setCompletedNum($this->completedNum);

@@ -17,16 +17,16 @@ use Delightful\ApiResponse\Annotation\ApiResponse;
 class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
 {
     /**
-     * get官方重排序提供商列表.
+     * get官方重sort提供商列表.
      * @return array<ProviderConfigModelsDTO>
      */
     public function getOfficialRerankProviderList(): array
     {
         $dto = new ProviderConfigModelsDTO();
         $dto->setId('official_rerank');
-        $dto->setName('官方重排序服务商');
+        $dto->setName('官方重sort服务商');
         $dto->setProviderType(ProviderType::Official->value);
-        $dto->setDescription('官方提供的重排序服务');
+        $dto->setDescription('官方提供的重sort服务');
         $dto->setIcon('');
         $dto->setCategory('rerank');
         $dto->setStatus(1); // 1 表示启用
@@ -35,12 +35,12 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
         // setting模型列表
         $models = [];
 
-        // 基础重排序模型
+        // 基础重sort模型
         $baseModel = new ProviderModelDetailDTO();
         $baseModel->setId('official_rerank_model');
         $baseModel->setName('官方重排模型');
         $baseModel->setModelVersion('v1.0');
-        $baseModel->setDescription('基础重排序模型，适用于一般场景');
+        $baseModel->setDescription('基础重sort模型，适用于一般场景');
         $baseModel->setIcon('');
         $baseModel->setModelType(1);
         $baseModel->setCategory('rerank');

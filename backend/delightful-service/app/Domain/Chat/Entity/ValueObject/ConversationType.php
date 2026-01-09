@@ -12,13 +12,13 @@ namespace App\Domain\Chat\Entity\ValueObject;
  */
 enum ConversationType: int
 {
-    // 与ai的conversation(私聊)
+    // 与ai的conversation(private chat)
     case Ai = 0;
 
-    // 与人类的conversation(私聊)
+    // 与人类的conversation(private chat)
     case User = 1;
 
-    // 群聊
+    // group chat
     case Group = 2;
 
     // systemmessage

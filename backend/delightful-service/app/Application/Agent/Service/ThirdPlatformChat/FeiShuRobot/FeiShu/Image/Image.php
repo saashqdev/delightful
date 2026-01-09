@@ -29,7 +29,7 @@ class Image implements ProviderInterface
      */
     public function uploadByUrl(string $imageUrl, string $imageType = 'message'): string
     {
-        // 下载imagecontent
+        // downloadimagecontent
         $imageContent = file_get_contents($imageUrl);
         if ($imageContent === false) {
             return '';
@@ -66,10 +66,10 @@ class Image implements ProviderInterface
     }
 
     /**
-     * according toMIMEtypeget文件扩展名.
+     * according toMIMEtypegetfileextension名.
      *
      * @param string $mimeType MIMEtype
-     * @return string 文件扩展名
+     * @return string fileextension名
      */
     private function getExtensionFromMimeType(string $mimeType): string
     {

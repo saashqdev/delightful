@@ -180,7 +180,7 @@ class DelightfulAgentDomainService
 
         $agents = DelightfulAgentVersionFactory::toArrays($agents);
 
-        // 收集助理头像文件键
+        // 收集助理avatarfile键
         $fileKeys = array_column($agents, 'agent_avatar');
         // 移除空value
         $validFileKeys = array_filter($fileKeys, static fn ($fileKey) => ! empty($fileKey));
@@ -204,7 +204,7 @@ class DelightfulAgentDomainService
             $links = array_merge(...$links);
         }
 
-        // 替换每个助理的头像链接
+        // 替换每个助理的avatar链接
         foreach ($agents as &$agent) {
             $avatarKey = $agent['agent_avatar'];
             $fileLink = $links[$avatarKey] ?? null;
@@ -222,7 +222,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * 保存助理的交互指令.
+     * save助理的交互指令.
      */
     public function updateInstruct(string $organizationCode, string $agentId, array $instructs, string $userId = '', bool $valid = true): array
     {
@@ -233,7 +233,7 @@ class DelightfulAgentDomainService
             // 确保系统交互指令存在，如果缺少则补充
             $instructs = SystemInstructType::ensureSystemInstructs($instructs);
         }
-        // 保存
+        // save
         $this->agentRepository->updateInstruct($organizationCode, $agentId, $instructs, $userId);
         return $instructs;
     }

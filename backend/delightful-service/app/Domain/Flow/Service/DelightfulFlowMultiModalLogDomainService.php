@@ -19,7 +19,7 @@ class DelightfulFlowMultiModalLogDomainService extends AbstractDomainService
     }
 
     /**
-     * create多模态日志记录.
+     * create多模态log记录.
      */
     public function create(FlowDataIsolation $dataIsolation, DelightfulFlowMultiModalLogEntity $entity): DelightfulFlowMultiModalLogEntity
     {
@@ -28,7 +28,7 @@ class DelightfulFlowMultiModalLogDomainService extends AbstractDomainService
     }
 
     /**
-     * according toIDget多模态日志记录.
+     * according toIDget多模态log记录.
      */
     public function getById(FlowDataIsolation $dataIsolation, int $id): ?DelightfulFlowMultiModalLogEntity
     {
@@ -36,7 +36,7 @@ class DelightfulFlowMultiModalLogDomainService extends AbstractDomainService
     }
 
     /**
-     * according tomessageIDget多模态日志记录.
+     * according tomessageIDget多模态log记录.
      */
     public function getByMessageId(FlowDataIsolation $dataIsolation, string $messageId): ?DelightfulFlowMultiModalLogEntity
     {
@@ -44,7 +44,7 @@ class DelightfulFlowMultiModalLogDomainService extends AbstractDomainService
     }
 
     /**
-     * 批量get多个messageID对应的多模态日志记录.
+     * 批量get多个messageID对应的多模态log记录.
      *
      * @param array<string> $messageIds
      * @return array<DelightfulFlowMultiModalLogEntity>

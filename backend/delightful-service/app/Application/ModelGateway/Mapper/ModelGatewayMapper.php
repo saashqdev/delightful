@@ -40,7 +40,7 @@ use Throwable;
 class ModelGatewayMapper extends ModelMapper
 {
     /**
-     * 持久化的自定义数据.
+     * 持久化的customize数据.
      * @var array<string, OdinModelAttributes>
      */
     protected array $attributes = [];
@@ -274,7 +274,7 @@ class ModelGatewayMapper extends ModelMapper
     {
         $list = [];
 
-        // 获取已持久化的配置
+        // 获取已持久化的configuration
         $models = $this->getModels($modelType->isLLM() ? 'chat' : 'embedding');
         foreach ($models as $name => $model) {
             switch ($modelType) {
@@ -318,7 +318,7 @@ class ModelGatewayMapper extends ModelMapper
         }
         $providerConfigIds = array_unique($providerConfigIds);
 
-        // load 服务商配置
+        // load 服务商configuration
         $providerConfigs = $this->providerManager->getProviderConfigsByIds($providerDataIsolation, $providerConfigIds);
         $providerIds = [];
         foreach ($providerConfigs as $providerConfig) {
@@ -397,7 +397,7 @@ class ModelGatewayMapper extends ModelMapper
         $implementationConfig = $providerEntity->getProviderCode()->getImplementationConfig($providerConfigItem, $providerModelEntity->getModelVersion());
 
         if ($providerEntity->getProviderType()->isCustom()) {
-            // 自定义服务商统一显示别名，如果没有别名则显示“自定义服务商”（需要考虑多语言）
+            // customize服务商统一显示别名，如果没有别名则显示“customize服务商”（需要考虑多语言）
             $providerName = $providerConfigEntity->getLocalizedAlias($providerDataIsolation->getLanguage());
         } else {
             // 内置服务商的统一显示 服务商名称，不用显示别名（需要考虑多语言）
@@ -484,7 +484,7 @@ class ModelGatewayMapper extends ModelMapper
             return null;
         }
 
-        // 检查当前套餐是否有这个模型的use权限 - 目前只有 LLM 模型有这个限制
+        // 检查当前套餐是否有这个模型的usepermission - 目前只有 LLM 模型有这个限制
         if ($providerModelEntity->getModelType()->isLLM()) {
             if (! $dataIsolation->isOfficialOrganization() && ! $dataIsolation->getSubscriptionManager()->isValidModelAvailable($providerModelEntity->getModelId(), $modelType)) {
                 $this->logger->info('模型不在可用名单', ['model' => $providerModelEntity->getModelId(), 'model_type' => $modelType?->value]);
@@ -492,14 +492,14 @@ class ModelGatewayMapper extends ModelMapper
             }
         }
 
-        // 获取配置
+        // 获取configuration
         $providerConfigEntity = $this->providerManager->getProviderConfigsByIds($providerDataIsolation, [$providerModelEntity->getServiceProviderConfigId()])[$providerModelEntity->getServiceProviderConfigId()] ?? null;
         if (! $providerConfigEntity) {
-            $this->logger->info('服务商配置不存在', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
+            $this->logger->info('服务商configuration不存在', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
             return null;
         }
         if (! $dataIsolation->isOfficialOrganization() && ! $providerConfigEntity->getStatus()->isEnabled()) {
-            $this->logger->info('服务商配置被禁用', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
+            $this->logger->info('服务商configuration被禁用', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
             return null;
         }
 

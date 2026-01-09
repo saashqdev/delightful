@@ -37,7 +37,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * get节点configuration模板.
+     * get节点configurationtemplate.
      */
     public function getNodeTemplate(FlowDataIsolation $dataIsolation, Node $node): Node
     {
@@ -45,7 +45,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * get流程.
+     * getprocess.
      */
     public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowEntity
     {
@@ -53,7 +53,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * get流程.
+     * getprocess.
      * @return array<DelightfulFlowEntity>
      */
     public function getByCodes(FlowDataIsolation $dataIsolation, array $codes): array
@@ -62,7 +62,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * get流程.
+     * getprocess.
      */
     public function getByName(FlowDataIsolation $dataIsolation, string $name, Type $type): ?DelightfulFlowEntity
     {
@@ -87,7 +87,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * 保存流程，仅基础info.
+     * saveprocess，仅基础info.
      */
     public function save(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $savingDelightfulFlow): DelightfulFlowEntity
     {
@@ -110,7 +110,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * 保存节点，nodes、edges.
+     * save节点，nodes、edges.
      */
     public function saveNode(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $savingDelightfulFlow): DelightfulFlowEntity
     {
@@ -120,7 +120,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
         }
         $savingDelightfulFlow->prepareForSaveNode($delightfulFlow);
 
-        // todo 检测子流程循环call
+        // todo 检测子process循环call
 
         $this->delightfulFlowRepository->save($dataIsolation, $delightfulFlow);
 
@@ -129,7 +129,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * delete流程.
+     * deleteprocess.
      */
     public function destroy(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $deletingDelightfulFlow): void
     {
@@ -138,7 +138,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * query流程.
+     * queryprocess.
      * @return array{total: int, list: array<DelightfulFlowEntity>}
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowQuery $query, Page $page): array
@@ -147,7 +147,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * 修改流程status.
+     * 修改processstatus.
      */
     public function changeEnable(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, ?bool $enable = null): void
     {
@@ -185,7 +185,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
         $startNodeParamsConfig->validate();
         $routineConfigs = $startNodeParamsConfig->getRoutineConfigs();
 
-        // use流程的 code 作为外部 id
+        // useprocess的 code 作为外部 id
         $externalId = $delightfulFlow->getCode();
         $retryTimes = 2;
         $callbackMethod = [DelightfulFlowExecuteAppService::class, 'routine'];

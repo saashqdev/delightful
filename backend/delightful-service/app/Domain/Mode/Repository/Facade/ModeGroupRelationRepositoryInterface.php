@@ -30,7 +30,7 @@ interface ModeGroupRelationRepositoryInterface
     public function findByGroupId(ModeDataIsolation $dataIsolation, int|string $groupId): array;
 
     /**
-     * 保存关联关系.
+     * save关联关系.
      */
     public function save(ModeGroupRelationEntity $relationEntity): ModeGroupRelationEntity;
 

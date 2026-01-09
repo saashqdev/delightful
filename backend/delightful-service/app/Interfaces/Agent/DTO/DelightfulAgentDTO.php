@@ -24,7 +24,7 @@ class DelightfulAgentDTO extends AbstractDTO
     public ?array $instruct = null;
 
     /**
-     * 工作流 id.
+     * workflow id.
      */
     public string $flowCode;
 

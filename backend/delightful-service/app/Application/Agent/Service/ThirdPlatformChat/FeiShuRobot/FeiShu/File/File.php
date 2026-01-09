@@ -22,12 +22,12 @@ class File implements ProviderInterface
     }
 
     /**
-     * getIM文件.
+     * getIMfile.
      *
      * @param string $messageId messageID
-     * @param string $fileKey 文件Key
-     * @param string $type 文件type
-     * @return string 文件路径
+     * @param string $fileKey fileKey
+     * @param string $type filetype
+     * @return string file路径
      */
     public function getIMFile(string $messageId, string $fileKey, string $type = 'file'): string
     {
@@ -54,9 +54,9 @@ class File implements ProviderInterface
             }
             throw new TokenInvalidException('Token invalid');
         }
-        // 响应是one二进制文件，保存到本地
+        // 响应是one二进制file，save到本地
         $localFile = tempnam(sys_get_temp_dir(), 'feishu_file_');
-        // according to header 中的 content-type setting本地文件名和扩展名
+        // according to header 中的 content-type setting本地file名和extension名
         $contentType = $response->getHeader('Content-Type')[0] ?? '';
         $localFile = match ($contentType) {
             'image/jpeg', 'image/jpg' => $localFile . '.jpg',

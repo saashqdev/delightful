@@ -73,7 +73,7 @@ class TokenTextSplitterTest extends BaseTest
 
     public function testEncodingHandling()
     {
-        $text = mb_convert_encoding("这是测试文本。\n\n这是第二段。", 'GBK', 'UTF-8');
+        $text = mb_convert_encoding("这是test文本。\n\n这是第二段。", 'GBK', 'UTF-8');
         $chunks = $this->splitter->splitText($text);
 
         $this->assertIsArray($chunks);
@@ -83,7 +83,7 @@ class TokenTextSplitterTest extends BaseTest
 
     public function testLongTextSplitting()
     {
-        $text = str_repeat('这是一个测试句子。', 100);
+        $text = str_repeat('这是一个test句子。', 100);
         $chunks = $this->splitter->splitText($text);
 
         $this->assertIsArray($chunks);
@@ -217,9 +217,9 @@ EOT;
     public function testTaggedContentProtection()
     {
         $text = <<<'EOT'
-测试word
+testword
 <DelightfulCompressibleContent Type="Image">delightful_file_org/open/2c17c6393771ee3048ae34d6b380c5ec/682ea88b4a2b5.png</DelightfulCompressibleContent>
-测试缓存
+testcache
 EOT;
 
         $splitter = new TokenTextSplitter(
@@ -234,11 +234,11 @@ EOT;
         $this->assertIsArray($chunks);
         $this->assertNotEmpty($chunks);
 
-        // validate标签内容被完整保留
-        $this->assertStringContainsString('测试word', $chunks[0]);
+        // validatetag内容被完整保留
+        $this->assertStringContainsString('testword', $chunks[0]);
         $this->assertStringContainsString('<DelightfulCompressibleContent', $chunks[0]);
         $this->assertStringContainsString('</DelightfulCompressibleContent>', $chunks[0]);
-        $this->assertStringContainsString('测试缓存', $chunks[1]);
+        $this->assertStringContainsString('testcache', $chunks[1]);
     }
 
     public function testMultipleTaggedContent()
@@ -263,7 +263,7 @@ EOT;
         $this->assertIsArray($chunks);
         $this->assertNotEmpty($chunks);
 
-        // validate所有标签内容都被完整保留
+        // validate所有tag内容都被完整保留
         $this->assertStringContainsString('第一段文本', $chunks[0]);
         $this->assertStringContainsString('第二段文本', $chunks[1]);
         $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">image2.png</DelightfulCompressibleContent>', $chunks[1]);
@@ -273,9 +273,9 @@ EOT;
     public function testTaggedContentWithChinese()
     {
         $text = <<<'EOT'
-中文测试
-<DelightfulCompressibleContent Type="Image">中文路径/图片.png</DelightfulCompressibleContent>
-continue测试
+中文test
+<DelightfulCompressibleContent Type="Image">中文路径/image.png</DelightfulCompressibleContent>
+continuetest
 EOT;
 
         $splitter = new TokenTextSplitter(
@@ -292,8 +292,8 @@ EOT;
         $this->assertCount(2, $chunks);
 
         // validate中文内容被正确handle
-        $this->assertStringContainsString('中文测试', $chunks[0]);
-        $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">中文路径/图片.png</DelightfulCompressibleContent>', $chunks[0]);
-        $this->assertStringContainsString('continue测试', $chunks[1]);
+        $this->assertStringContainsString('中文test', $chunks[0]);
+        $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">中文路径/image.png</DelightfulCompressibleContent>', $chunks[0]);
+        $this->assertStringContainsString('continuetest', $chunks[1]);
     }
 }

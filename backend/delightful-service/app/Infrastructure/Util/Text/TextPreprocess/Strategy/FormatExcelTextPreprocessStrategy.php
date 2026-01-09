@@ -48,7 +48,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             // usefgetcsv的方式解析CSV行
             $row = str_getcsv($line);
 
-            // 如果是第一行且不是sheet标记，则作为标题行
+            // 如果是第一行且不是sheetmark，则作为标题行
             if (empty($headers) && ! empty($line)) {
                 $headers = $row;
                 continue;

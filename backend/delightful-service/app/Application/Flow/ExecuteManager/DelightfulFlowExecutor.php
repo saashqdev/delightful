@@ -148,7 +148,7 @@ class DelightfulFlowExecutor
             $this->addEdges();
             $this->checkCircularDependencies();
         } else {
-            // 具有 callback 的流程不参与重试与async
+            // 具有 callback 的process不参与重试与async
             $this->async = false;
         }
         if ($this->executionData->getExecutionType()->isDebug()) {
@@ -171,7 +171,7 @@ class DelightfulFlowExecutor
 
     protected function begin(array $args): void
     {
-        // 同时只能有一个流程id在执行
+        // 同时只能有一个processid在执行
         if (! $this->locker->mutexLock($this->getLockerKey(), $this->executorId)) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, "{$this->executorId} is running");
         }
@@ -199,7 +199,7 @@ class DelightfulFlowExecutor
             $this->delightfulFlowEntity->getCreator()
         );
 
-        // 为了在运行中，给有需要get当前流程的节点use
+        // 为了在运行中，给有需要get当前process的节点use
         ExecutionDataCollector::add($this->executionData);
     }
 
@@ -207,7 +207,7 @@ class DelightfulFlowExecutor
     {
         $nodeDebugResult = $node->getNodeDebugResult();
         if (! $nodeDebugResult->isSuccess()) {
-            // 只要有一个节点是fail的，那么流程就是fail
+            // 只要有一个节点是fail的，那么process就是fail
             $this->success = false;
         }
         $this->logger->info('HandledNode', [
@@ -283,7 +283,7 @@ class DelightfulFlowExecutor
             $this->updateStatus(ExecuteLogStatus::Failed, $result);
         }
 
-        // 将当前流程产生的 api 执行result传递给上一层的数据
+        // 将当前process产生的 api 执行result传递给上一层的数据
         if ($parentExecutionData = ExecutionDataCollector::get($this->executionData->getUniqueParentId())) {
             foreach ($this->executionData->getReplyMessages() as $replyMessage) {
                 $parentExecutionData->addReplyMessage($replyMessage);
@@ -321,7 +321,7 @@ class DelightfulFlowExecutor
         if ($this->executionData->getStreamStatus() !== FlowStreamStatus::Processing) {
             return;
         }
-        // 只有主流程才能结束（第零层）
+        // 只有主process才能结束（第零层）
         if ($this->executionData->getLevel() !== 0) {
             return;
         }
@@ -430,7 +430,7 @@ class DelightfulFlowExecutor
             try {
                 $node->validate();
             } catch (Throwable $throwable) {
-                // 有些是悬浮节点（即在流程运行中不会被use节点)，兜底会在执行时再次进行parameter验证
+                // 有些是悬浮节点（即在process运行中不会被use节点)，兜底会在执行时再次进行parameter验证
             }
 
             $job = function (array $frontResults) use ($node): VertexResult {
@@ -511,7 +511,7 @@ class DelightfulFlowExecutor
         if ($vertexResult->hasDebugLog('history_vertex_result')) {
             return;
         }
-        // 只有第一层的流程才会进行归档
+        // 只有第一层的process才会进行归档
         if (! $this->executionData->isTop() || $this->inLoop) {
             return;
         }
@@ -520,7 +520,7 @@ class DelightfulFlowExecutor
             Coroutine::create(function () use ($fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
 
-                // 利用自旋锁来控制只有一个在保存
+                // 利用自旋锁来控制只有一个在save
                 if (! $this->locker->spinLock($this->getLockerKey() . ':archive', $this->delightfulFlowExecuteLogEntity->getExecuteDataId(), 20)) {
                     ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'archive file failed');
                 }

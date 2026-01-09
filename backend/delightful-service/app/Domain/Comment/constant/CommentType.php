@@ -15,7 +15,7 @@ class CommentType
     public const TIMELINE = 1;
 
     /**
-     * 评论.
+     * comment.
      */
     public const COMMENT = 2;
 }

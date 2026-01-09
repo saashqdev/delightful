@@ -68,7 +68,7 @@ class MessageUtil
                     $chatAttachments[] = $chatAttachment;
 
                     if ($attachment instanceof ExternalAttachment) {
-                        // async下载外链文件并上传到本service oss
+                        // asyncdownload外链file并upload到本service oss
                         $imageUploadEvent = new ExternalAttachmentUploadEvent($attachment, $executionData->getDataIsolation()->getCurrentOrganizationCode());
                         AsyncEventUtil::dispatch($imageUploadEvent);
                     }
@@ -77,7 +77,7 @@ class MessageUtil
                 $message = new FilesMessage([]);
                 $linkDesc = $delightfulFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
                 if (is_string($linkDesc) && $linkDesc !== '') {
-                    // 如果具有description，那么应该是富文本形式
+                    // 如果具有description，那么应该是rich text形式
                     $message = new TextMessage([]);
                     $message->setContent($linkDesc);
                 }
@@ -90,13 +90,13 @@ class MessageUtil
                 return $message;
             case DelightfulFlowMessageType::File:
                 $chatAttachments = [];
-                // 这里的description是用来标记文件name
+                // 这里的description是用来markfilename
                 $linkDesc = $delightfulFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
                 foreach ($linkPaths as $linkPath) {
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
                         continue;
                     }
-                    // get文件name。如果 linkPaths 只有 1 个，并且 linkDesc 也是只有一个，那么可以直接use linkDesc 作为文件name
+                    // getfilename。如果 linkPaths 只有 1 个，并且 linkDesc 也是只有一个，那么可以直接use linkDesc 作为filename
                     if (count($linkPaths) === 1 && is_string($linkDesc) && $linkDesc !== '') {
                         $attachment->setName($linkDesc);
                     }
@@ -111,7 +111,7 @@ class MessageUtil
                     $chatAttachments[] = $chatAttachment;
 
                     if ($attachment instanceof ExternalAttachment) {
-                        // async下载外链文件并上传到本service oss
+                        // asyncdownload外链file并upload到本service oss
                         $imageUploadEvent = new ExternalAttachmentUploadEvent($attachment, $executionData->getDataIsolation()->getCurrentOrganizationCode());
                         AsyncEventUtil::dispatch($imageUploadEvent);
                     }
@@ -138,11 +138,11 @@ class MessageUtil
     }
 
     /**
-     * 上报文件.
+     * 上报file.
      */
     private static function report2ChatFile(AbstractAttachment $attachment, ExecutionData $executionData): DelightfulChatFileEntity
     {
-        // 这里应该是相当于 agent 上传了文件
+        // 这里应该是相当于 agent upload了file
         $dataIsolation = ContactDataIsolation::create(
             $executionData->getDataIsolation()->getCurrentOrganizationCode(),
             $executionData->getAgentUserId() ?: $executionData->getDataIsolation()->getCurrentUserId()

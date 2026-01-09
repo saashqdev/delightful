@@ -49,7 +49,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
     public function parseChatParam(array $params): ThirdPlatformChatMessage
     {
-        // 1 单聊 2 群聊
+        // 1 单聊 2 group chat
         if (empty($params['conversationType'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.empty', ['label' => 'conversationType']);
         }
@@ -81,7 +81,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
         $message = '';
         $attachments = [];
-        // 目前只解析 文本、图片、富文本
+        // 目前只解析 文本、image、rich text
         switch ($params['msgtype']) {
             case 'text':
                 $message = $params['text']['content'] ?? '';
@@ -109,7 +109,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
         $chatMessage->setMessage($message);
         $chatMessage->setAttachments($attachments);
 
-        // 加载user扩展info
+        // 加载userextensioninfo
         $this->setUserExtInfo($chatMessage);
 
         return $chatMessage;
@@ -134,7 +134,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendOneOnOneChatMessages($param);
             } catch (Throwable $throwable) {
-                // 钉钉 下载图片time较长，超过了3000ms，网关直接return了超时error。发送message此时跳过
+                // 钉钉 downloadimagetime较长，超过了3000ms，网关直接return了超时error。发送message此时跳过
                 simple_log('SendOneOnOneChatMessagesError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -152,7 +152,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendGroupMessage($param);
             } catch (Throwable $throwable) {
-                // 钉钉 下载图片time较长，超过了3000ms，网关直接return了超时error。发送message此时跳过
+                // 钉钉 downloadimagetime较长，超过了3000ms，网关直接return了超时error。发送message此时跳过
                 simple_log('SendGroupMessageError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -207,7 +207,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * create普通群组.
+     * create普通group.
      * @see https://oapi.dingtalk.com/chat/create
      */
     public function createGroup(ThirdPlatformCreateGroup $params): string

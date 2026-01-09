@@ -239,7 +239,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
             ExceptionBuilder::throw(AgentErrorCode::GET_THIRD_PLATFORM_USER_ID_FAILED, 'user.not_exist', ['delightful_ids' => $delightfulIds]);
         }
 
-        // create群聊
+        // creategroup chat
         $createGroupParams = new ThirdPlatformCreateGroup();
         $createGroupParams->setName($delightfulGroupDTO->getGroupName());
         $createGroupParams->setOwner($ownerThirdPlatformUserId);
@@ -256,7 +256,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
 
     private function clearMemory(string $conversationId): void
     {
-        // 清理 flow 的自身记忆，仅更改原session为备份session
+        // 清理 flow 的自身记忆，仅更改原session为backupsession
         di(DelightfulFlowMemoryHistoryDomainService::class)->removeByConversationId(
             FlowDataIsolation::create('', ''),
             $conversationId
@@ -279,7 +279,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         }
         $delightfulFlow->setAgentId((string) $bot->getId());
 
-        // use当前流程的organization编码
+        // use当前process的organization编码
         $dataIsolation->setCurrentOrganizationCode($delightfulFlow->getOrganizationCode());
         return $delightfulFlow;
     }

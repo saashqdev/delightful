@@ -19,7 +19,7 @@ class MCPUserSettingAdminApi extends AbstractMCPAdminApi
     protected MCPUserSettingAppService $mcpUserSettingAppService;
 
     /**
-     * 保存userMCP服务的required fields.
+     * saveuserMCP服务的required fields.
      */
     public function saveRequiredFields(string $code)
     {

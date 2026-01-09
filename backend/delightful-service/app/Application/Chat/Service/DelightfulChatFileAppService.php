@@ -14,7 +14,7 @@ use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\File\Service\FileDomainService;
 
 /**
- * 聊天文件应用service
+ * chatfile应用service
  * 提供给其他领域use的接口.
  */
 class DelightfulChatFileAppService extends AbstractAppService
@@ -26,38 +26,38 @@ class DelightfulChatFileAppService extends AbstractAppService
     }
 
     /**
-     * 通过file_key保存或update文件
-     * 如果文件已存在则update，不存在则create.
+     * 通过file_keysave或updatefile
+     * 如果file已存在则update，不存在则create.
      *
-     * @param string $fileKey 文件key
+     * @param string $fileKey filekey
      * @param DataIsolation $dataIsolation 数据隔离object
-     * @param array $fileData 文件数据
-     * @return array return包含文件info的array
+     * @param array $fileData file数据
+     * @return array return包含fileinfo的array
      */
     public function saveOrUpdateByFileKey(string $fileKey, DataIsolation $dataIsolation, array $fileData): array
     {
-        // 1. 准备文件实体
+        // 1. 准备file实体
         $fileEntity = new DelightfulChatFileEntity();
         $fileEntity->setFileKey($fileKey);
         $fileEntity->setFileExtension($fileData['file_extension'] ?? '');
         $fileEntity->setFileName($fileData['filename'] ?? '');
         $fileEntity->setFileSize($fileData['file_size'] ?? 0);
 
-        // 处理文件type
+        // 处理filetype
         $fileTypeValue = $fileData['file_type'] ?? FileType::File->value;
         $fileType = FileType::tryFrom($fileTypeValue) ?? FileType::File;
         $fileEntity->setFileType($fileType);
 
-        // 2. 保存或update文件
+        // 2. save或updatefile
         $savedFile = $this->delightfulChatFileDomainService->saveOrUpdateByFileKey($fileEntity, $dataIsolation);
 
-        // 3. get文件URL
+        // 3. getfileURL
         $fileUrl = $this->fileDomainService->getLink(
             $dataIsolation->getCurrentOrganizationCode(),
             $fileKey
         )?->getUrl() ?? '';
 
-        // 4. return文件info
+        // 4. returnfileinfo
         return [
             'file_id' => $savedFile->getFileId(),
             'file_key' => $savedFile->getFileKey(),
@@ -70,14 +70,14 @@ class DelightfulChatFileAppService extends AbstractAppService
     }
 
     /**
-     * get文件info.
+     * getfileinfo.
      *
-     * @param string $fileId 文件ID
-     * @return null|array 文件info
+     * @param string $fileId fileID
+     * @return null|array fileinfo
      */
     public function getFileInfo(string $fileId): ?array
     {
-        // 通过IDget文件实体
+        // 通过IDgetfile实体
         $fileEntities = $this->delightfulChatFileDomainService->getFileEntitiesByFileIds([$fileId], null, null, true);
         if (empty($fileEntities)) {
             return null;
@@ -85,7 +85,7 @@ class DelightfulChatFileAppService extends AbstractAppService
 
         $fileEntity = $fileEntities[0];
 
-        // return文件infoarray
+        // returnfileinfoarray
         return [
             'file_id' => $fileEntity->getFileId(),
             'file_key' => $fileEntity->getFileKey(),

@@ -61,7 +61,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             SmsSceneType::ACCOUNT_LOGIN_ACTIVE => SmsTypeEnum::VERIFICATION_WITH_EXPIRATION->value,
             default => ''
         };
-        // according to type 确定短信模板id
+        // according to type 确定短信templateid
         $templateId = $this->template->getTemplateIdByTypeAndLanguage($smsType, LanguageEnum::ZH_CN->value);
         $sms = new SmsStruct($stateCode . $phone, $variables, $sign, $templateId);
         $sendResult = $this->sms->send($sms);

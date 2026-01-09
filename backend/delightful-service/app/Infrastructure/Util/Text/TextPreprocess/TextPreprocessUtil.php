@@ -24,7 +24,7 @@ class TextPreprocessUtil
      */
     public static function preprocess(array $rules, string $text): string
     {
-        // 保护标签content
+        // 保护tagcontent
         $protectedContent = [];
         $text = preg_replace_callback(
             '/<DelightfulCompressibleContent[^>]*>.*?<\/DelightfulCompressibleContent>/s',
@@ -64,7 +64,7 @@ class TextPreprocessUtil
             $text = $strategy->preprocess($text);
         }
 
-        // 恢复标签content
+        // restoretagcontent
         foreach ($protectedContent as $key => $content) {
             $text = str_replace($key, $content, $text);
         }

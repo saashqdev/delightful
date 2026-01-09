@@ -64,7 +64,7 @@ class AccountEntity extends AbstractEntity
 
     protected ?string $createdAt = null;
 
-    // 为了追踪哪里create的账号，留下这个构造函数
+    // 为了trace哪里create的账号，留下这个构造函数
     public function __construct(array $data = [])
     {
         parent::__construct($data);

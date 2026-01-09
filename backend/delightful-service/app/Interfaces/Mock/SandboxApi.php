@@ -105,7 +105,7 @@ class SandboxApi
             'code' => 1000,
             'message' => 'success',
             'data' => [
-                'status' => WorkspaceStatus::READY, // initialize完成，工作区完全可用
+                'status' => WorkspaceStatus::READY, // initializecomplete，工作区完全可用
                 'sandbox_id' => $sandboxId,
                 'workspace_path' => '/workspace',
                 'is_ready' => true,
@@ -146,7 +146,7 @@ class SandboxApi
     }
 
     /**
-     * initialize沙箱（简化版，用于 ASR 等无聊天message场景）
+     * initialize沙箱（简化版，用于 ASR 等无chatmessage场景）
      * POST /api/v1/sandboxes/{sandboxId}/proxy/v1/messages/chat.
      *
      * 请求体示例：

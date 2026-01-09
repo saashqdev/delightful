@@ -407,7 +407,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 添加标签.
+     * 添加tag.
      */
     public function addTag(string $tag): void
     {
@@ -417,7 +417,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 移除标签.
+     * 移除tag.
      */
     public function removeTag(string $tag): void
     {

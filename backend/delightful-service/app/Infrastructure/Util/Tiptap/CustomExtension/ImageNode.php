@@ -11,7 +11,7 @@ use Hyperf\Codec\Json;
 use Tiptap\Core\Node;
 
 /**
- * 富文本的image功能.
+ * rich text的image功能.
  */
 class ImageNode extends Node
 {

@@ -41,7 +41,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
         $attributes = $this->prepareAttributes($documentEntity);
         $attributes['organization_code'] = $dataIsolation->getCurrentOrganizationCode();
 
-        // createmodel并保存
+        // createmodel并save
         $model = new KnowledgeBaseDocumentModel();
         $model->fill($attributes);
         $model->save();
@@ -77,7 +77,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
         $attributes = $this->prepareAttributes($documentEntity);
         $attributes['organization_code'] = $dataIsolation->getCurrentOrganizationCode();
 
-        // createmodel并保存
+        // createmodel并save
         $model = KnowledgeBaseDocumentModel::withTrashed()
             ->firstOrCreate(
                 [
@@ -86,7 +86,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
                 ],
                 $attributes
             );
-        // 如果是软delete的，则恢复
+        // 如果是软delete的，则restore
         if ($model->trashed()) {
             $model->restore();
             $model->fill($attributes)->save();
@@ -256,7 +256,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 重置文档syncstatus
+     * reset文档syncstatus
      */
     public function resetSyncStatus(KnowledgeBaseDataIsolation $dataIsolation, string $documentCode): void
     {

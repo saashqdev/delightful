@@ -37,29 +37,29 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $code;
 
     /**
-     * 流程name（助理name）.
+     * processname（助理name）.
      */
     protected string $name;
 
     /**
-     * 流程description （助理description）.
+     * processdescription （助理description）.
      */
     protected string $description;
 
     /**
-     * 流程图标（助理头像）.
+     * process图标（助理avatar）.
      */
     protected string $icon = '';
 
     /**
-     * 流程type.
+     * processtype.
      */
     protected Type $type;
 
     protected string $toolSetId = '';
 
     /**
-     * 仅前端需要，流程编排放到 node 节点configuration的 next_nodes 中.
+     * 仅前端需要，process编排放到 node 节点configuration的 next_nodes 中.
      */
     protected array $edges;
 
@@ -85,12 +85,12 @@ class DelightfulFlowEntity extends AbstractEntity
     private bool $isCollectingNodes = false;
 
     /**
-     * 流程的入口.
+     * process的入口.
      */
     private ?NodeInput $input = null;
 
     /**
-     * 流程的出口.
+     * process的出口.
      */
     private ?NodeOutput $output = null;
 
@@ -107,7 +107,7 @@ class DelightfulFlowEntity extends AbstractEntity
     private int $userOperation = 0;
 
     /**
-     * 流程的回调function，如果有该value，那么将直接执行该选择，而不是通过NodeRunner来执行.
+     * process的回调function，如果有该value，那么将直接执行该选择，而不是通过NodeRunner来执行.
      */
     private ?Closure $callback = null;
 
@@ -128,7 +128,7 @@ class DelightfulFlowEntity extends AbstractEntity
         // 试运行是要按照开启时计算
         $this->enabled = true;
 
-        // 流程试运行其实只需要 nodes
+        // process试运行其实只需要 nodes
         if (empty($this->nodes)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow.fields.nodes']);
         }
@@ -238,7 +238,7 @@ class DelightfulFlowEntity extends AbstractEntity
             }
 
             if ($node->isStart() && ! $node->getParentId()) {
-                // 如果已经有一个了，那么是error的流程，出现了多个开始节点
+                // 如果已经有一个了，那么是error的process，出现了多个开始节点
                 if ($this->startNode) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.only_one');
                 }

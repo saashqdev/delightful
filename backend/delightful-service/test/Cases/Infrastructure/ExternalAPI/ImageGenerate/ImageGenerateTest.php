@@ -42,7 +42,7 @@ class ImageGenerateTest extends BaseTest
         }
         $header = $data[0];
         $imageData = $data[1];
-        // check头部是否符合Base64编码图片的格式
+        // check头部是否符合Base64编码image的格式
         if (! preg_match('/^data:image\/(png|jpeg|jpg|gif);base64$/', $header)) {
             return false;
         }
@@ -58,7 +58,7 @@ class ImageGenerateTest extends BaseTest
         $uploadFile = new UploadFile($base64, $uploadDir, 'test');
 
         $fileDomainService = di(FileDomainService::class);
-        // 上传文件（指定不自动create目录）
+        // uploadfile（指定不自动create目录）
         $fileDomainService->uploadByCredential('DT001', $uploadFile);
 
         // 生成可访问的链接
@@ -140,7 +140,7 @@ class ImageGenerateTest extends BaseTest
         $gpt4oModelRequest->setPrompt('一只小金毛正在草原上欢快的奔跑');
         $gpt4oModelRequest->setGenerateNum(4);
 
-        // 生成图片
+        // 生成image
         $result = $gpt4oModel->generateImage($gpt4oModelRequest);
 
         // 验证result
@@ -166,12 +166,12 @@ class ImageGenerateTest extends BaseTest
         $gpt4oModelRequest->setPrompt('调整一群女巫手里捧着南瓜在膜拜一个人');
         $gpt4oModelRequest->setGenerateNum(1);
 
-        // set参考图片
+        // set参考image
         $gpt4oModelRequest->setReferImages([
             'https://cdn.ttapi.io/gpt/2025-04-01/0a4f0c65-c678-4e4d-a26c-ee7c50398f3f.png',
         ]);
 
-        // 生成图片
+        // 生成image
         $result = $gpt4oModel->generateImage($gpt4oModelRequest);
 
         // 验证result
@@ -208,7 +208,7 @@ class ImageGenerateTest extends BaseTest
         //        $qwenImageRequest->setGenerateNum(1);
         //        $qwenImageRequest->setModel('qwen-image');
         //
-        //        // 生成图片
+        //        // 生成image
         //        $result = $qwenImageModel->generateImage($qwenImageRequest);
         //
         //        // 验证result

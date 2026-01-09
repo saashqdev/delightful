@@ -13,7 +13,7 @@ use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 interface ProviderModelConfigVersionRepositoryInterface
 {
     /**
-     * 保存modelconfiguration版本（包含版本号递增和标记当前版本的完整逻辑）.
+     * savemodelconfiguration版本（包含版本号递增和mark当前版本的完整逻辑）.
      * use事务确保数据一致性.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object

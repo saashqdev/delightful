@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject\MessageType;
 
 /**
- * 聊天messagecontent的type.
+ * chatmessagecontent的type.
  */
 enum ControlMessageType: string
 {
-    // 队列等场景的心跳
+    // queue等场景的心跳
     case Ping = 'ping';
 
     // createsession窗口
@@ -33,10 +33,10 @@ enum ControlMessageType: string
     // 已查看message
     case ReadMessage = 'read_message';
 
-    // 撤回message
+    // withdrawmessage
     case RevokeMessage = 'revoke_message';
 
-    // 编辑message
+    // editmessage
     case EditMessage = 'edit_message';
 
     // 开始在session窗口输入
@@ -60,13 +60,13 @@ enum ControlMessageType: string
     // setsession的话题(set为空table示离开话题)
     case SetConversationTopic = 'set_conversation_topic';
 
-    // create群聊
+    // creategroup chat
     case GroupCreate = 'group_create';
 
-    // update群聊
+    // updategroup chat
     case GroupUpdate = 'group_update';
 
-    // 系统notify(xx加入/离开群聊,群温馨提醒等)
+    // 系统notify(xx加入/离开group chat,群温馨reminder等)
     case SystemNotice = 'system_notice';
 
     // 群成员变更
@@ -75,10 +75,10 @@ enum ControlMessageType: string
     // 群成员变更
     case GroupUsersRemove = 'group_users_remove';
 
-    // 解散群聊
+    // 解散group chat
     case GroupDisband = 'group_disband';
 
-    // 群成员角色变更(批量set管理员/普通成员)
+    // 群成员role变更(批量set管理员/普通成员)
     case GroupUserRoleChange = 'group_user_role_change';
 
     // 转让群主
@@ -115,8 +115,8 @@ enum ControlMessageType: string
      */
     public static function getMessageStatusChangeType(): array
     {
-        // 不包含编辑message的status变更!
-        // 编辑message不会改变message的status,只会改变message的content.
+        // 不包含editmessage的status变更!
+        // editmessage不会改变message的status,只会改变message的content.
         return [
             self::RevokeMessage,
             self::ReadMessage,

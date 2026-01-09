@@ -23,7 +23,7 @@ use Hyperf\Odin\Message\UserMessageContent;
 class LLMMemoryMessage
 {
     /**
-     * @var Role message角色
+     * @var Role messagerole
      */
     private Role $role;
 
@@ -40,7 +40,7 @@ class LLMMemoryMessage
     private string $mountId = '';
 
     /**
-     * @var AttachmentInterface[] 附件列表
+     * @var AttachmentInterface[] attachment列表
      */
     private array $attachments = [];
 
@@ -129,7 +129,7 @@ class LLMMemoryMessage
             $textContent = $messageContent->getTextContent();
         }
 
-        // get附件
+        // getattachment
         $attachments = AttachmentUtil::getByDelightfulMessageEntity($delightfulMessageEntity);
         if ($textContent === '' && empty($attachments)) {
             return null;
@@ -157,7 +157,7 @@ class LLMMemoryMessage
         // get文本content
         $textContent = $content['text']['content'] ?? '';
 
-        // create自定义message
+        // createcustomizemessage
         $customMessage = new LLMMemoryMessage($role, $textContent, $delightfulFlowMemoryHistoryEntity->getMessageId());
         $customMessage->setConversationId($delightfulFlowMemoryHistoryEntity->getConversationId());
         $customMessage->setOriginalContent($content);
@@ -165,7 +165,7 @@ class LLMMemoryMessage
         // settingmessagetype
         $customMessage->setMessageTypeString($content['type'] ?? '');
 
-        // 处理附件
+        // 处理attachment
         if (isset($content['flow_attachments']) && is_array($content['flow_attachments'])) {
             $attachments = [];
             foreach ($content['flow_attachments'] as $attachment) {

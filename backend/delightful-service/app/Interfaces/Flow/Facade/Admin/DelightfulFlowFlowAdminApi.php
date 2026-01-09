@@ -45,7 +45,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * get节点configuration模板.
+     * get节点configurationtemplate.
      */
     public function nodeTemplate()
     {
@@ -60,7 +60,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 节点单点调试.
+     * 节点单点debug.
      */
     public function singleDebugNode()
     {
@@ -76,7 +76,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 保存基础information.
+     * save基础information.
      */
     public function saveFlow()
     {

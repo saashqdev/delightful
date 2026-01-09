@@ -42,7 +42,7 @@ use Hyperf\Odin\Tool\Definition\ToolDefinition;
 class LLMChatNodeRunner extends AbstractLLMNodeRunner
 {
     /**
-     * 执行LLM聊天节点.
+     * 执行LLMchat节点.
      *
      * @param VertexResult $vertexResult 节点执行result
      * @param ExecutionData $executionData 执行数据
@@ -63,7 +63,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             $paramsConfig->getModelConfig()->setVisionModel($modelName);
         }
 
-        // 如果主动关闭视觉能力。或者 当前model支持，但是选择了别的model，也是相当于要关闭当前model的视觉能力
+        // 如果主动close视觉能力。或者 当前model支持，但是选择了别的model，也是相当于要close当前model的视觉能力
         if (! $paramsConfig->getModelConfig()->isVision() || ($model->getModelOptions()->isMultiModal() && $paramsConfig->getModelConfig()->getVisionModel() !== $modelName)) {
             $model->getModelOptions()->setMultiModal(false);
         }
@@ -104,10 +104,10 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                         $contentMessage = new UserMessage();
                         $contentMessage->setContent($userPrompt);
                         $contentMessage->setIdentifier($contentMessageId);
-                        // 仅仅添加附件
+                        // 仅仅添加attachment
                         $imageUrls = $executionData->getTriggerData()->getAttachmentImageUrls();
                         if ($imageUrls) {
-                            // 有content且有附件，添加文本和图片content
+                            // 有content且有attachment，添加文本和imagecontent
                             $contentMessage->addContent(UserMessageContent::text($userPrompt));
                             foreach ($imageUrls as $imageUrl) {
                                 $contentMessage->addContent(UserMessageContent::imageUrl($imageUrl));
@@ -147,7 +147,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 }
             }
 
-            // 永远处理当前节点的历史附件message
+            // 永远处理当前节点的历史attachmentmessage
             $delightfulMessageIds = [];
             foreach ($memoryManager->getMessages() as $message) {
                 $delightfulMessageIds[] = $message->getIdentifier();
@@ -263,7 +263,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
     private function handleStreamedResponse(Agent $agent, VertexResult $vertexResult, ExecutionData $executionData): array
     {
         $chatCompletionChoiceGenerator = $agent->chatStreamed();
-        // 内敛回复
+        // 内敛reply
         $frontResults['chat_completion_choice_generator'] = $chatCompletionChoiceGenerator;
         return $this->tryIntrovertedReplyMessageNode($vertexResult, $executionData, $frontResults);
     }
@@ -336,7 +336,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             return false;
         }
 
-        // 有且只有一个当前节点的table达式引用
+        // 有且只有一个当前节点的table达式quote
         $expressionItems = $contentValue->getAllFieldsExpressionItem() ?? [];
         if (count($expressionItems) !== 1) {
             return false;

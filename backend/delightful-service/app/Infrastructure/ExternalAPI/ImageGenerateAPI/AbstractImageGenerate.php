@@ -18,9 +18,9 @@ use Hyperf\Redis\Redis;
 use Psr\Log\LoggerInterface;
 
 /**
- * 图片生成统一抽象类
- * 集成水印处理和钉钉告警功能
- * 所有图片生成Provider都应该继承此类.
+ * image生成统一抽象类
+ * integration水印处理和钉钉alert功能
+ * 所有image生成Provider都应该继承此类.
  */
 abstract class AbstractImageGenerate implements ImageGenerate
 {
@@ -37,8 +37,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     protected RedisLocker $redisLocker;
 
     /**
-     * 统一的图片生成入口method
-     * 先call子类implement的原始图片生成，再统一添加水印.
+     * 统一的image生成入口method
+     * 先call子类implement的原始image生成，再统一添加水印.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -59,8 +59,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 子类implement的原始图片生成method
-     * 只负责call各自API生成图片，不用关心水印处理.
+     * 子类implement的原始image生成method
+     * 只负责call各自API生成image，不用关心水印处理.
      */
     abstract protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
@@ -120,7 +120,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * 统一的水印处理逻辑
-     * 支持URL和base64两种格式的图片水印处理.
+     * 支持URL和base64两种格式的image水印处理.
      */
     private function applyWatermark(ImageGenerateResponse $response, ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -130,20 +130,20 @@ abstract class AbstractImageGenerate implements ImageGenerate
         foreach ($data as $index => $imageData) {
             try {
                 if ($response->getImageGenerateType()->isBase64()) {
-                    // 处理base64格式图片
+                    // 处理base64格式image
                     $processedData[$index] = $this->watermarkProcessor->addWatermarkToBase64($imageData, $imageGenerateRequest);
                 } else {
-                    // 处理URL格式图片
+                    // 处理URL格式image
                     $processedData[$index] = $this->watermarkProcessor->addWatermarkToUrl($imageData, $imageGenerateRequest);
                 }
             } catch (Exception $e) {
-                // 水印处理fail时，recorderror但不影响图片return
-                $this->logger->error('图片水印处理fail', [
+                // 水印处理fail时，recorderror但不影响imagereturn
+                $this->logger->error('image水印处理fail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                     'imageType' => $response->getImageGenerateType()->value,
                 ]);
-                // return原始图片
+                // return原始image
                 $processedData[$index] = $imageData;
             }
         }

@@ -43,7 +43,7 @@ class RoleApiTest extends AbstractHttpTest
             $delightfulPermission->buildPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN->value, DelightfulOperationEnum::EDIT->value),
         ];
         $requestData = [
-            'name' => 'test子管理员角色',
+            'name' => 'test子管理员role',
             'status' => 1,
             'permissions' => $testPermissions,
             'user_ids' => ['usi_343adbdbe8a026226311c67bdea152ea', 'usi_71f7b56bec00b0cd9f9daba18caa7a4c'],
@@ -77,7 +77,7 @@ class RoleApiTest extends AbstractHttpTest
         ];
 
         $requestData = [
-            'name' => 'update的子管理员角色' . rand(100, 999),
+            'name' => 'update的子管理员role' . rand(100, 999),
             'status' => 0,
             'permissions' => $testPermissions,
             'user_ids' => ['usi_343adbdbe8a026226311c67bdea152ea'],
@@ -138,7 +138,7 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertIsArray($deleteResp);
         $this->assertEquals(1000, $deleteResp['code']);
 
-        // 再次query应当return角色不存在或空
+        // 再次query应当returnrole不存在或空
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
         // 预期这里会returnerror码，具体according to业务而定，只要非1000即可
         $this->assertNotEquals(1000, $detailResp['code'] ?? null);

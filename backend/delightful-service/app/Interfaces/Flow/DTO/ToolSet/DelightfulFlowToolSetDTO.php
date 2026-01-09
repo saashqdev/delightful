@@ -32,7 +32,7 @@ class DelightfulFlowToolSetDTO extends AbstractFlowDTO
     public array $tools = [];
 
     /**
-     * 引用数量.
+     * quote数量.
      * 被 n 个助理应用.
      */
     public int $agentUsedCount = 0;

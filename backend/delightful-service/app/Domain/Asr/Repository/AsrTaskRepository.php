@@ -29,7 +29,7 @@ readonly class AsrTaskRepository
     }
 
     /**
-     * 保存taskstatus到 Redis.
+     * savetaskstatus到 Redis.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus DTO
      * @param int $ttl 过期time（秒），默认 7 天
@@ -39,7 +39,7 @@ readonly class AsrTaskRepository
         try {
             $redisKey = $this->generateTaskKey($taskStatus->taskKey, $taskStatus->userId);
 
-            // 保存taskstatus数据
+            // savetaskstatus数据
             $this->redis->hMSet($redisKey, $taskStatus->toArray());
 
             // set过期time

@@ -14,7 +14,7 @@ use App\Infrastructure\Core\AbstractQuery;
  *
  * use示例：
  * $query = new SubAdminQuery([
- *     'name' => '角色名称',
+ *     'name' => 'role名称',
  *     'status' => 1,
  * ]);
  */

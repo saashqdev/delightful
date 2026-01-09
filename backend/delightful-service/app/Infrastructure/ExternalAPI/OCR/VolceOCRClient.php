@@ -81,13 +81,13 @@ class VolceOCRClient implements OCRClientInterface
 
         // check是否successget头部info
         if ($headers === false || ! isset($headers['Content-Type'])) {
-            return null; // 无法get文件type
+            return null; // 无法getfiletype
         }
 
         // 解析 Content-Type
         $contentType = is_array($headers['Content-Type']) ? $headers['Content-Type'][0] : $headers['Content-Type'];
 
-        // check文件type是否为 PDF 或图片
+        // checkfiletype是否为 PDF 或image
         if ($contentType === 'application/pdf') {
             return 'pdf';
         }
@@ -95,6 +95,6 @@ class VolceOCRClient implements OCRClientInterface
             return 'image';
         }
 
-        return null; // 既不是 PDF 也不是指定的图片格式
+        return null; // 既不是 PDF 也不是指定的image格式
     }
 }

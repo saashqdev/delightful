@@ -17,7 +17,7 @@ class LLMStreamCachedDTO extends AbstractEntity
     // 避免频繁操作data库，在内存中cache接收message的 receive_message_id
     protected string $receiveMessageId;
 
-    // 避免频繁操作data库，在内存中cache完整的流式messagecontent
+    // 避免频繁操作data库，在内存中cache完整的streammessagecontent
     protected ?string $reasoningContent;
 
     protected string $content;

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject;
 
 /**
- * 好友状态.
+ * 好友status.
  */
 enum FriendStatus: int
 {

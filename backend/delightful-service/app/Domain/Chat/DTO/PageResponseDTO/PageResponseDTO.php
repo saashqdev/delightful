@@ -10,12 +10,12 @@ namespace App\Domain\Chat\DTO\PageResponseDTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 分页响应DTO.
+ * pagination响应DTO.
  */
 class PageResponseDTO extends AbstractDTO
 {
     /**
-     * 响应的分页Token.
+     * 响应的paginationToken.
      */
     protected string $pageToken = '';
 

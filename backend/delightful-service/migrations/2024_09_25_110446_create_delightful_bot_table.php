@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::create('delightful_bots', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('bot_version_id')->comment('助理绑定的versionid');
-            $table->string('flow_code')->comment('工作流id');
+            $table->string('flow_code')->comment('workflowid');
             $table->json('instructs')->comment('交互instruction');
             $table->string('robot_name')->comment('assistant name');
             $table->string('robot_avatar')->comment('assistant avatar');

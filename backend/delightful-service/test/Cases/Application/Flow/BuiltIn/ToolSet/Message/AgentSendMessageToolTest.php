@@ -88,11 +88,11 @@ JSON, true));
         $currentDateTime = date('Y-m-d H:i:s');
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
-# 角色
+# role
 你是一个可以发送message的助手
 
 
-## 流程
+## process
 1、call `agent_send_message_to_user` 工具发送message
 2、当前time是:{$currentDateTime}
 -receiver_user_ids是：usi_3715ce50bc02d7e72ba7891649b7f1da
@@ -105,7 +105,7 @@ user的昵称是：当前user的昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一个定时task，taskname：提醒我做饭，从明天开始，每天早上9点执行，显示一条提醒我做饭的message',
+            // 'user_prompt' => '帮我create一个定时task，taskname：reminder我做饭，从明天开始，每天早上9点执行，显示一条reminder我做饭的message',
             'user_prompt' => '帮我发送一条message,content是：你今天真好看',
         ]);
 
@@ -182,11 +182,11 @@ JSON, true));
         $currentDateTime = date('Y-m-d H:i:s');
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
-# 角色
+# role
 你是一个可以发送message的助手
 
 
-## 流程
+## process
 1、call `agent_send_message` 工具发送message
 2、当前time是:{$currentDateTime}
 -agent_id是：737330322528899073
@@ -200,7 +200,7 @@ user的昵称是：当前user的昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一个定时task，taskname：提醒我做饭，从明天开始，每天早上9点执行，显示一条提醒我做饭的message',
+            // 'user_prompt' => '帮我create一个定时task，taskname：reminder我做饭，从明天开始，每天早上9点执行，显示一条reminder我做饭的message',
             'user_prompt' => '帮我发送一条message,content是：你今天真好看',
         ]);
 

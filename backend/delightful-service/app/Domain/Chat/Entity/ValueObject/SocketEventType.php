@@ -18,13 +18,13 @@ enum SocketEventType: string
     // login. 以后登录can投一条控制message,来implement上线notify等逻辑
     case Login = 'login';
 
-    // 聊天message
+    // chatmessage
     case Chat = 'chat';
 
     // 控制message
     case Control = 'control';
 
-    // 流式message
+    // streammessage
     case Stream = 'stream';
 
     /**

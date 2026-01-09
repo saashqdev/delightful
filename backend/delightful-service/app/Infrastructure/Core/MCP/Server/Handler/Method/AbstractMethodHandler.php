@@ -78,7 +78,7 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
     }
 
     /**
-     * set提示管理器.
+     * sethint管理器.
      */
     public function setPromptManager(MCPPromptManager $promptManager): self
     {
@@ -87,13 +87,13 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
     }
 
     /**
-     * get提示管理器.
-     * @throws InternalErrorException 当提示管理器未set时抛出
+     * gethint管理器.
+     * @throws InternalErrorException 当hint管理器未set时抛出
      */
     public function getPromptManager(): MCPPromptManager
     {
         if (! isset($this->promptManager)) {
-            throw new InternalErrorException('提示管理器(PromptManager)未set');
+            throw new InternalErrorException('hint管理器(PromptManager)未set');
         }
         return $this->promptManager;
     }

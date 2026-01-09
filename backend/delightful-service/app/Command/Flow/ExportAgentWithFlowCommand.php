@@ -58,7 +58,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
 
         $flowCode = $agent->getFlowCode();
         if (empty($flowCode)) {
-            $this->output->error('助理没有关联的流程');
+            $this->output->error('助理没有关联的process');
             return 1;
         }
 
@@ -69,27 +69,27 @@ class ExportAgentWithFlowCommand extends HyperfCommand
         // create数据隔离object
         $dataIsolation = new FlowDataIsolation($orgCode, $userId);
 
-        // 导出流程及助理info
+        // exportprocess及助理info
         $exportData = $this->exportImportService->exportFlowWithAgent($dataIsolation, $flowCode, $agent);
 
-        // 将数据保存为临时文件
+        // 将数据save为临时file
         $filename = "agent-export-{$agentId}-" . time() . '.json';
         $tempFile = tempnam(sys_get_temp_dir(), 'flow_export_');
         file_put_contents($tempFile, json_encode($exportData, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
         chmod($tempFile, 0644);
-        // 上传到OSS
+        // upload到OSS
         $uploadDir = $orgCode . '/open/' . md5(StorageBucketType::Public->value);
         $uploadFile = new UploadFile($tempFile, $uploadDir, $filename);
 
-        // use已有的文件service上传
+        // use已有的fileserviceupload
         try {
-            // 定义上传目录
+            // 定义upload目录
             $subDir = 'open';
 
-            // create上传文件object（不自动重命名）
+            // createuploadfileobject（不自动重命名）
             $uploadFile = new UploadFile($tempFile, $subDir, '', false);
 
-            // 上传文件（指定不自动create目录）
+            // uploadfile（指定不自动create目录）
             $this->fileDomainService->uploadByCredential($orgCode, $uploadFile);
 
             // 生成可访问的链接
@@ -100,17 +100,17 @@ class ExportAgentWithFlowCommand extends HyperfCommand
                 return 0;
             }
 
-            $this->output->error('生成文件链接fail');
+            $this->output->error('生成file链接fail');
             return 1;
         } catch (Throwable $e) {
-            $this->output->error("上传文件fail: {$e->getMessage()}");
+            $this->output->error("uploadfilefail: {$e->getMessage()}");
             return 1;
         } finally {
-            // delete临时文件
+            // delete临时file
             if (file_exists($tempFile)) {
                 unlink($tempFile);
             }
-            // 释放上传文件资源
+            // 释放uploadfile资源
             $uploadFile->release();
         }
     }

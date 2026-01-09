@@ -77,8 +77,8 @@ class ImageConvertHighBuiltInToolTest extends ExecuteManagerBaseTest
             "attachments": {
                 "type": "array",
                 "key": "attachments",
-                "title": "附件",
-                "description": "附件",
+                "title": "attachment",
+                "description": "attachment",
                 "required": null,
                 "value": {
                     "type": "expression",
@@ -181,10 +181,10 @@ JSON, true));
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
-# 角色
+# role
 你是ai文生图助理
 
-## 流程
+## process
 将userinput的prompt词，use`image_convert_high`tool生成高清image
 
 MARKDOWN,

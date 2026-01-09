@@ -22,14 +22,14 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 use Throwable;
 
-#[FlowNodeDefine(type: NodeType::Sub->value, code: NodeType::Sub->name, name: '子流程', paramsConfig: SubNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: true, needOutput: true)]
+#[FlowNodeDefine(type: NodeType::Sub->value, code: NodeType::Sub->name, name: '子process', paramsConfig: SubNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: true, needOutput: true)]
 class SubNodeRunner extends NodeRunner
 {
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
     {
         $subFlowId = $this->node->getParams()['sub_flow_id'] ?? '';
 
-        // 运行时才get子流程的data，这里should在运行时就加载好，这里为了方便先这样写
+        // 运行时才get子process的data，这里should在运行时就加载好，这里为了方便先这样写
         $subFlow = $this->delightfulFlowDomainService->getByCode($executionData->getDataIsolation(), $subFlowId);
         if (! $subFlow || $subFlow->getType() !== Type::Sub) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.sub.flow_not_found', ['flow_code' => $subFlowId]);

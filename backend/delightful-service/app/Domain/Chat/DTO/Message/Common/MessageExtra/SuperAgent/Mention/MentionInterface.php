@@ -10,12 +10,12 @@ namespace App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention;
 use JsonSerializable;
 
 /**
- * 通用 Mention 接口，所有提及object均需implement。
+ * 通用 Mention 接口，所有mentionobject均需implement。
  */
 interface MentionInterface extends JsonSerializable
 {
     /**
-     * 在message的 content 中 @了 文件/mcp/tool 等.
+     * 在message的 content 中 @了 file/mcp/tool 等.
      */
     public function getMentionTextStruct(): string;
 

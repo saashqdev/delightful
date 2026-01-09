@@ -19,10 +19,10 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('execute_data_id')->default('')->comment('执行dataID');
             $table->string('conversation_id')->default('')->comment('conversationID');
-            $table->string('flow_code')->default('')->comment('流程编码');
+            $table->string('flow_code')->default('')->comment('process编码');
             $table->string('flow_version_code')->default('')->comment('version编码');
-            $table->integer('status')->default(0)->comment('status 1 准备运行;2 运行中;3 完成;4 failed;5 取消')->index();
-            $table->json('ext_params')->nullable()->comment('扩展parameter');
+            $table->integer('status')->default(0)->comment('status 1 准备运行;2 运行中;3 complete;4 failed;5 cancel')->index();
+            $table->json('ext_params')->nullable()->comment('extensionparameter');
             $table->json('result')->nullable()->comment('结果');
             $table->timestamp('created_at')->nullable()->comment('creation time');
         });

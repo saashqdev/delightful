@@ -32,7 +32,7 @@ class SubAdminAssembler
     }
 
     /**
-     * build分页 DTO。
+     * buildpagination DTO。
      *
      * @param RoleEntity[] $list
      */
@@ -45,7 +45,7 @@ class SubAdminAssembler
     public static function assembleWithUserInfo(RoleEntity $entity, array $userInfoList, array $updatedUser = []): array
     {
         $data = self::toArray($entity);
-        $data['users'] = $userInfoList; // user详细信息列table
+        $data['users'] = $userInfoList; // user详细info列table
         $data['updated_user'] = $updatedUser;
         return $data;
     }

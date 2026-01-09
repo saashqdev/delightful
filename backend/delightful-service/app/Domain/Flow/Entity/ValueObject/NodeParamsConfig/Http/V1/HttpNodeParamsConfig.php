@@ -79,7 +79,7 @@ class HttpNodeParamsConfig extends NodeParamsConfig
             "type": "number",
             "key": "status_code",
             "sort": 1,
-            "title": "状态码",
+            "title": "status码",
             "description": "",
             "items": null,
             "properties": null,

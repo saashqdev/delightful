@@ -45,10 +45,10 @@ interface AiAbilityRepositoryInterface
     public function getById(ProviderDataIsolation $dataIsolation, int $id): ?AiAbilityEntity;
 
     /**
-     * 保存AI能力实体.
+     * saveAI能力实体.
      *
      * @param AiAbilityEntity $entity AI能力实体
-     * @return bool 是否保存success
+     * @return bool 是否savesuccess
      */
     public function save(AiAbilityEntity $entity): bool;
 

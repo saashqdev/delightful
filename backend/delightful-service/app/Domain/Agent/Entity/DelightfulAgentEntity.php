@@ -28,7 +28,7 @@ class DelightfulAgentEntity extends AbstractEntity
     protected ?array $instructs = [];
 
     /**
-     * 工作流 id.
+     * workflow id.
      */
     protected string $flowCode;
 

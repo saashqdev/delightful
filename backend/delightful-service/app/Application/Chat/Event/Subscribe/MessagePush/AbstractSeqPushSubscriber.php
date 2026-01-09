@@ -17,8 +17,8 @@ use PhpAmqpLib\Message\AMQPMessage;
 use Throwable;
 
 /**
- * message推送模块.
- * according to生成的seq以及它的优先级,用长连接推送给user.
+ * messagepush模块.
+ * according to生成的seq以及它的优先级,用长连接push给user.
  * 每个seq可能要推给user的1到几十个客户端.
  */
 abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
@@ -50,7 +50,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
         try {
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
-                // 用redis检测seq是否已经尝试多次,如果超过 n 次,则不再推送
+                // 用redis检测seq是否已经尝试多次,如果超过 n 次,则不再push
                 $seqRetryKey = sprintf('messagePush:seqRetry:%s', $seqId);
                 $seqRetryCount = $this->redis->get($seqRetryKey);
                 if ($seqRetryCount >= 3) {
@@ -58,7 +58,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                     return Result::ACK;
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
-                // recordseq尝试推送的次数,用于后续判断是否需要重试
+                // recordseq尝试push的次数,用于后续判断是否需要重试
                 $this->delightfulSeqAppService->pushSeq($seqId);
                 // 未报错,不再重推
                 $this->setSeqCanNotRetry($seqRetryKey);
@@ -71,7 +71,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessage质量保证模块,如果是service器压力大导致的fail,则放入延迟重试队列,并指数级延长重试time间隔
+            // todo callmessage质量保证模块,如果是service器stress大导致的fail,则放入延迟重试queue,并指数级延长重试time间隔
             return Result::REQUEUE;
         }
         return Result::ACK;

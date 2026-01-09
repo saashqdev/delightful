@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\LongTermMemory\Entity\ValueObject;
 
 /**
- * 记忆分类枚举.
+ * 记忆category枚举.
  */
 enum MemoryCategory: string
 {
@@ -23,7 +23,7 @@ enum MemoryCategory: string
     case GENERAL = 'general';
 
     /**
-     * get分类的中文名称.
+     * getcategory的中文名称.
      */
     public function getDisplayName(): string
     {
@@ -34,7 +34,7 @@ enum MemoryCategory: string
     }
 
     /**
-     * according to项目ID判断记忆分类.
+     * according to项目ID判断记忆category.
      */
     public static function fromProjectId(?string $projectId): self
     {
@@ -42,7 +42,7 @@ enum MemoryCategory: string
     }
 
     /**
-     * get该分类的启用数量限制.
+     * get该category的启用数量限制.
      */
     public function getEnabledLimit(): int
     {

@@ -10,7 +10,7 @@ namespace App\Application\Flow\ExecuteManager\Attachment;
 use App\Infrastructure\Util\FileType;
 
 /**
- * 这里的附件一定是已经在云服务端了.
+ * 这里的attachment一定是已经在云服务端了.
  */
 class Attachment extends AbstractAttachment
 {

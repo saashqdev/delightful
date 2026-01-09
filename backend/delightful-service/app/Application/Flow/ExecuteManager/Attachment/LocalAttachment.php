@@ -12,7 +12,7 @@ use App\Infrastructure\Util\FileType;
 use Delightful\CloudFile\Kernel\Struct\UploadFile;
 
 /**
- * 本地文件.
+ * 本地file.
  */
 class LocalAttachment extends AbstractAttachment
 {
@@ -32,7 +32,7 @@ class LocalAttachment extends AbstractAttachment
         if (isset($this->attachment)) {
             return $this->attachment;
         }
-        // upload文件
+        // uploadfile
         $uploadFile = new UploadFile($this->getOriginAttachment(), 'flow-execute/external/');
 
         $fileDomainService = di(FileDomainService::class);

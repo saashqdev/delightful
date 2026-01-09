@@ -34,7 +34,7 @@ enum TextColor: string
     }
 
     /**
-     * get所有颜色选项及其国际化标签.
+     * get所有颜色选项及其国际化tag.
      * @return array<string, string> return颜色名称和对应的值
      */
     public static function getColorOptions(): array

@@ -484,7 +484,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
                 ]);
             }
         } catch (Throwable $e) {
-            // Redis exception时recordlog，但不影响业务流程
+            // Redis exception时recordlog，但不影响业务process
             $this->logger->warning('calculateAndCacheAllDepartmentEmployeeSums Failed to cache department employee sums', [
                 'organization_code' => $organizationCode,
                 'error' => $e->getMessage(),

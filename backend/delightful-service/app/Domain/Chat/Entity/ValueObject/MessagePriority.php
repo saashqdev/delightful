@@ -10,7 +10,7 @@ namespace App\Domain\Chat\Entity\ValueObject;
 /**
  * message优先级.
  * 按照 rabbitmq 的建议,最大优先级不超过5
- * 不同优先级的message会被投递到对应的队列中.
+ * 不同优先级的message会被投递到对应的queue中.
  */
 enum MessagePriority: int
 {

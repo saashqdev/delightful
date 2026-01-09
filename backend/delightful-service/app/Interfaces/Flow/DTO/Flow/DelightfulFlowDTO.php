@@ -15,17 +15,17 @@ use Delightful\FlowExprEngine\Component;
 class DelightfulFlowDTO extends AbstractFlowDTO
 {
     /**
-     * 流程名称（助理名称）.
+     * process名称（助理名称）.
      */
     public string $name = '';
 
     /**
-     * 流程描述 （助理描述）.
+     * process描述 （助理描述）.
      */
     public string $description = '';
 
     /**
-     * 流程icon（助理头像）.
+     * processicon（助理avatar）.
      */
     public string $icon = '';
 

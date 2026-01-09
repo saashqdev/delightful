@@ -25,10 +25,10 @@ return new class extends Migration {
             $table->string('delightful_message_id', 64)->comment('messageid');
             // organization编码
             $table->string('organization_code', 64)->comment('organization编码');
-            // 文件key
-            $table->string('file_key', 256)->comment('文件key');
-            // 文件大小
-            $table->unsignedBigInteger('file_size')->comment('文件大小');
+            // filekey
+            $table->string('file_key', 256)->comment('filekey');
+            // file大小
+            $table->unsignedBigInteger('file_size')->comment('file大小');
             // messageid索引
             $table->index('delightful_message_id', 'idx_delightful_message_id');
             $table->timestamps();

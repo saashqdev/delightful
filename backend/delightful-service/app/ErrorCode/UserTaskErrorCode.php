@@ -18,31 +18,31 @@ enum UserTaskErrorCode: int
     #[ErrorMessage('task.invalid')]
     case PARAMETER_INVALID = 8001;
 
-    // 任务不存在
+    // task不存在
     #[ErrorMessage('task.not_found')]
     case TASK_NOT_FOUND = 8002;
 
-    // 任务已存在
+    // task已存在
     #[ErrorMessage('task.already_exists')]
     case TASK_ALREADY_EXISTS = 8003;
 
-    // 任务createfailed
+    // taskcreatefailed
     #[ErrorMessage('task.create_failed')]
     case TASK_CREATE_FAILED = 8004;
 
-    // 任务updatefailed
+    // taskupdatefailed
     #[ErrorMessage('task.update_failed')]
     case TASK_UPDATE_FAILED = 8005;
 
-    // 任务deletefailed
+    // taskdeletefailed
     #[ErrorMessage('task.delete_failed')]
     case TASK_DELETE_FAILED = 8006;
 
-    // 任务列表getfailed
+    // task列表getfailed
     #[ErrorMessage('task.list_failed')]
     case TASK_LIST_FAILED = 8007;
 
-    // 任务getfailed
+    // taskgetfailed
     #[ErrorMessage('task.get_failed')]
     case TASK_GET_FAILED = 8008;
 

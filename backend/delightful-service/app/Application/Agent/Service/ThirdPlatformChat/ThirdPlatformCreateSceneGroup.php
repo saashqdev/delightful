@@ -15,7 +15,7 @@ class ThirdPlatformCreateSceneGroup
     // 群所有者的userid
     private string $ownerUserId;
 
-    // 模板id
+    // templateid
     private string $templateId;
 
     // 成员list
@@ -27,7 +27,7 @@ class ThirdPlatformCreateSceneGroup
     // 新成员是否可查看历史message
     private int $showHistoryType;
 
-    // 是否可search群聊, 0（默认）：不可search 1 search
+    // 是否可searchgroup chat, 0（默认）：不可search 1 search
     private int $searchable = 0;
 
     // 入群是否需要验证：0（默认）：不验证 1：入群验证
@@ -42,7 +42,7 @@ class ThirdPlatformCreateSceneGroup
     // 是否开启群禁言：0（默认）：不禁言，1：全员禁言
     private int $chatBannedType;
 
-    // 群组唯一标识
+    // group唯一标识
     private string $uuid;
 
     public function setTitle(string $title): void

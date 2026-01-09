@@ -12,7 +12,7 @@ use Psr\SimpleCache\CacheInterface;
 class CompressibleContent
 {
     /**
-     * need处理的压缩标签.
+     * need处理的压缩tag.
      */
     private static array $tags = [
         ['<DelightfulCompressibleContent Type="Image">', '</DelightfulCompressibleContent>', '<DelightfulImage>', '</DelightfulImage>'],
@@ -84,7 +84,7 @@ class CompressibleContent
 
     private static function deCompressByCompatible(string $content): string
     {
-        // 解压时，可能少了标签，那么尝试对 cp_ 开头的content进行解压
+        // 解压时，可能少了tag，那么尝试对 cp_ 开头的content进行解压
         preg_match_all('/cp_[a-f0-9]{13}/', $content, $matches);
         foreach ($matches[0] as $match) {
             $id = $match;

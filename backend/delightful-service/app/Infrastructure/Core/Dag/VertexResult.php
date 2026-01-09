@@ -22,7 +22,7 @@ class VertexResult
 
     /**
      * 存储节点的备注information.
-     * 可用于一些日志记录之类的.
+     * 可用于一些log记录之类的.
      */
     protected mixed $remarkData = null;
 

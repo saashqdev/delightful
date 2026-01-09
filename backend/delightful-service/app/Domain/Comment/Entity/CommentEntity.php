@@ -17,32 +17,32 @@ class CommentEntity extends AbstractEntity
     protected int $id;
 
     /**
-     * type，for example评论、动态.
+     * type，for examplecomment、动态.
      */
     protected int $type;
 
     /**
-     * 评论的资源id，for example云documentid、sheet表id.
+     * comment的资源id，for example云documentid、sheet表id.
      */
     protected int $resourceId;
 
     /**
-     * 评论的资源type，for example云document、sheet表.
+     * comment的资源type，for example云document、sheet表.
      */
     protected int $resourceType;
 
     /**
-     * 父级评论的primary keyid.
+     * 父级comment的primary keyid.
      */
     protected int $parentId;
 
     /**
-     * 对评论的简短description，主要是给动态用的，for examplecreate待办、uploadimage等system动态.
+     * 对comment的简短description，主要是给动态用的，for examplecreate待办、uploadimage等system动态.
      */
     protected string $description = '';
 
     /**
-     * 评论的content.
+     * comment的content.
      */
     protected ?array $message = [];
 

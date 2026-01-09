@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_contact_users', static function (Blueprint $table) {
-            $table->text('avatar_url')->comment('头像 url')->change();
+            $table->text('avatar_url')->comment('avatar url')->change();
         });
     }
 

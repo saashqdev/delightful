@@ -34,7 +34,7 @@ readonly class DelightfulUserSettingDomainService
     }
 
     /**
-     * 保存全局configuration.
+     * save全局configuration.
      */
     public function saveGlobal(DelightfulUserSettingEntity $savingEntity): DelightfulUserSettingEntity
     {
@@ -69,7 +69,7 @@ readonly class DelightfulUserSettingDomainService
     }
 
     /**
-     * 通过 delightfulId 保存usersetting（跨organization）.
+     * 通过 delightfulId saveusersetting（跨organization）.
      */
     public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {

@@ -69,7 +69,7 @@ class AsrAssembler
         $fileKey = WorkDirectoryUtil::getFullFileKey($fullPrefix, $workDir, $relativePath);
         $fileKey = rtrim($fileKey, '/') . '/';
 
-        // 确定文件名：隐藏目录use basename，显示目录use完整路径
+        // 确定file名：隐藏目录use basename，显示目录use完整路径
         $fileName = $isHidden ? basename($relativePath) : $relativePath;
 
         return new TaskFileEntity([

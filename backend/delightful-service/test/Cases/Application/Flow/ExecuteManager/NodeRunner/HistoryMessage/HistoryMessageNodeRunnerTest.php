@@ -71,7 +71,7 @@ class HistoryMessageNodeRunnerTest extends ExecuteManagerBaseTest
                             "type": "string",
                             "key": "role",
                             "sort": 0,
-                            "title": "角色",
+                            "title": "role",
                             "description": "",
                             "required": null,
                             "value": null,

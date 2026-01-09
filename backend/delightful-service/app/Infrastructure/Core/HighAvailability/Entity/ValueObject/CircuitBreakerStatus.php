@@ -15,7 +15,7 @@ use InvalidArgumentException;
 enum CircuitBreakerStatus: string
 {
     /**
-     * 关闭status - 正常服务中.
+     * closestatus - 正常服务中.
      */
     case CLOSED = 'closed';
 
@@ -25,7 +25,7 @@ enum CircuitBreakerStatus: string
     case OPEN = 'open';
 
     /**
-     * 半开status - 尝试恢复中.
+     * 半开status - 尝试restore中.
      */
     case HALF_OPEN = 'half_open';
 

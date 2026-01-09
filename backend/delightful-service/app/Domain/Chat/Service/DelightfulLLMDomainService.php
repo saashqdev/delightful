@@ -188,7 +188,7 @@ class DelightfulLLMDomainService
       "导致M发生的主要原因是什么？", // 原因/机制类
       "什么是N？它的核心特征是什么？", // 定义/解释类
       "未来五年P领域的发展趋势是什么？", // 趋势/预测类
-      "针对Qquestion，有哪些可行的解决方案？" // 解决方案/建议类
+      "针对Qquestion，有哪些可行的resolve方案？" // resolve方案/建议类
     ]
     
     当前context摘要：
@@ -199,21 +199,21 @@ class DelightfulLLMDomainService
     PROMPT;
 
     private string $summarizePrompt = <<<'PROMPT'
-    # 任务
+    # task
     你需要based onuser的message，according to我提供的search结果，按照总分总的结构，输出高质量，结构化的详细回答，format为 markdown。
     
-    在我给你的search结果中，每个结果都是[webpage X begin]...[webpage X end]format的，X代表每篇文章的number索引。请在适当的情况下在句子末尾引用context。请按照引用编号[citation:X]的format在答案中对应部分引用context。如果一句话源自多个context，请列出所有相关的引用编号，for example[citation:3][citation:5]，切记不要将引用集中在最后return引用编号，而是在答案对应部分列出。
+    在我给你的search结果中，每个结果都是[webpage X begin]...[webpage X end]format的，X代表每篇文章的number索引。请在适当的情况下在句子末尾quotecontext。请按照quote编号[citation:X]的format在答案中对应部分quotecontext。如果一句话源自多个context，请列出所有相关的quote编号，for example[citation:3][citation:5]，切记不要将quote集中在最后returnquote编号，而是在答案对应部分列出。
     在回答时，请注意以下几点：
     - 今天是{date_now}。
     - 并非search结果的所有content都与user的question密切相关，你需要结合question，对search结果进行甄别、筛选。
     - 对于列举类的question（如列举所有航班information），尽量将答案控制在10个要点以内，并告诉user可以查看search来源、获得完整information。优先提供information完整、最相关的列举项；如非必要，不要主动告诉usersearch结果未提供的content。
-    - 对于创作类的question（如写论文），请务必在正文的段落中引用对应的参考编号，for example[citation:3][citation:5]，不能只在文章末尾引用。你需要解读并概括user的题目要求，选择合适的format，充分利用search结果并抽取重要information，generatematchuser要求、极具思想深度、富有创造力与专业性的答案。你的创作篇幅需要尽可能延长，对于每一个要点的论述要推测user的意图，给出尽可能多角度的回答要点，且务必information量大、论述详尽。
+    - 对于创作类的question（如写论文），请务必在正文的段落中quote对应的参考编号，for example[citation:3][citation:5]，不能只在文章末尾quote。你需要解读并概括user的题目要求，选择合适的format，充分利用search结果并抽取重要information，generatematchuser要求、极具思想深度、富有创造力与专业性的答案。你的创作篇幅需要尽可能延长，对于每一个要点的论述要推测user的意图，给出尽可能多角度的回答要点，且务必information量大、论述详尽。
     - 如果回答很长，请尽量结构化、分段落总结。如果需要分点作答，尽量控制在5个点以内，并merge相关的content。
     - 对于客观类的问答，如果question的答案非常简短，可以适当补充一到两句相关information，以丰富content。
     - 你需要according touser要求和回答content选择合适、美观的回答format，确保可读性强。
-    - 你的回答应该综合多个相关网页来回答，不能重复引用一个网页。
+    - 你的回答应该综合多个相关网页来回答，不能重复quote一个网页。
     - 除非user要求，否则你回答的语言需要和user提问的语言保持一致。
-    - 输出漂亮的markdown format，content中添加一些与主题相关的emoji表情符号。
+    - 输出漂亮的markdown format，content中添加一些与theme相关的emoji表情符号。
     
     ## usermessage为：
     {question}
@@ -228,22 +228,22 @@ class DelightfulLLMDomainService
     ## according touser的question，你需从user提供的searchcontent中整理相关事件，事件include事件名称、事件时间和事件概述。
     ### 注意事项：
     1. **事件名称format**：
-       - 在事件名称后添加search引用的编号，format为 `[[citation:x]]`，编号来源于searchcontent中的引用标记（如 `[[citation:1]]`）。
-       - 如果一个事件涉及多个引用，merge所有相关引用编号。
-       - 不要在 "description" 中添加引用。
+       - 在事件名称后添加searchquote的编号，format为 `[[citation:x]]`，编号来源于searchcontent中的quotemark（如 `[[citation:1]]`）。
+       - 如果一个事件涉及多个quote，merge所有相关quote编号。
+       - 不要在 "description" 中添加quote。
     2. **时间handle**：
        - 事件时间尽量精确到月份（如 "2023-05"），若searchcontent未提供具体月份，但有指出上半年或者下半年，可以use（"2023 上半年"），若没有则，use年份（如 "2023"）。
-       - 若同一事件在多个引用中出现，优先use最早的时间。
+       - 若同一事件在多个quote中出现，优先use最早的时间。
        - 若时间不明确，according tocontext推测最早可能的时间，并确保合理。
     3. **事件提取与筛选**：
-       - **事件定义**：事件是searchcontent中提及的、具有时间关联（明确或可推测）的独立事实、变化或活动，include但不限于create、publish、开业、更新、合作、活动等。
+       - **事件定义**：事件是searchcontent中mention的、具有时间关联（明确或可推测）的独立事实、变化或活动，include但不限于create、publish、开业、更新、合作、活动等。
        - according touserquestion，提取与之相关的事件，保持描述简洁，聚焦具体发生的事情。
        - **跳过无关content**：
          - 纯静态描述（如不变的property、背景介绍，无时间变化）。
          - 数据statistics或财务information（如营收、利润）。
-         - 主观评论、分析或推测（除非与事件直接相关）。
+         - 主观comment、分析或推测（除非与事件直接相关）。
          - 无时间关联且与question无关的细节。
-       - **保留原则**：只要content与时间相关且matchquestion主题，尽量保留为事件。
+       - **保留原则**：只要content与时间相关且matchquestiontheme，尽量保留为事件。
     4. **输出要求**：
        - 以 JSON formatreturn，事件按时间倒序排列（从晚到早）。
        - 每个事件contain "name"、"time"、"description" 三个字段。
@@ -265,11 +265,11 @@ class DelightfulLLMDomainService
     ]
     ```
     ## use说明
-    - user需提供searchcontent（contain引用标记如 [[citation:x]]）和具体question。
+    - user需提供searchcontent（containquotemark如 [[citation:x]]）和具体question。
     - according toquestion，从searchcontent中提取match事件定义的content，按要求generate输出。
     - 若question涉及当前时间，based on {date_now} 进行推算。
     
-    ## 引用
+    ## quote
     {citations}
     
     ## searchcontext详情:
@@ -283,7 +283,7 @@ class DelightfulLLMDomainService
     ## Current Time
     {date_now}
     
-    ## 任务
+    ## task
     return"search contexts"中与"search keywords"有关联性的 20 至 50 个 索引。
     
     ## 要求
@@ -345,9 +345,9 @@ class DelightfulLLMDomainService
             }
         } catch (Exception) {
         }
-        // 去除掉引用，避免思维导图中出现引用
+        // 去除掉quote，避免思维导图中出现quote
         $responseMessage = preg_replace('/\[\[citation:(\d+)]]/', '', $responseMessage);
-        // 观察到系统提示词variable串了，看看是不是没有复制一份的question
+        // 观察到系统hint词variable串了，看看是不是没有复制一份的question
         $systemPrompt = str_replace(
             ['{question}', '{content}', '{date_now}'],
             [$question, $responseMessage, date('Y年 m月 d日, H时 i分 s秒')],
@@ -576,7 +576,7 @@ class DelightfulLLMDomainService
         $searchKeywords = $queryVo->getSearchKeywords();
         $searchKeywords[] = $userMessage;
         $searchKeywords = Json::encode($searchKeywords, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        // 获取系统提示词
+        // 获取系统hint词
         $searchContextsString = '';
         // 清洗search结果
         foreach ($searchContexts as $index => $context) {
@@ -848,7 +848,7 @@ class DelightfulLLMDomainService
 
     public function searchWithGoogle(string $query): array
     {
-        // 以后可以从user配置中读取这些value
+        // 以后可以从userconfiguration中读取这些value
         $subscriptionKey = config('search.drivers.google.api_key');
         $cx = config('search.drivers.google.cx');
         $data = make(GoogleSearch::class)->search($query, $subscriptionKey, $cx);
@@ -966,7 +966,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * 从 KVStore 删除value。
+     * 从 KVStore deletevalue。
      * @throws RedisException
      */
     public function delete(string $key): void
@@ -1052,7 +1052,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * build总结系统提示词 - 公共method，用于复用代码
+     * build总结系统hint词 - 公共method，用于复用代码
      */
     private function buildSummarizeSystemPrompt(AISearchCommonQueryVo $queryVo): string
     {

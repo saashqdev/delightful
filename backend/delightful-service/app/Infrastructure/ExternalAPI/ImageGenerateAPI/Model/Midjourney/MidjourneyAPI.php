@@ -42,7 +42,7 @@ class MidjourneyAPI
     }
 
     /**
-     * 提交image生成任务
+     * submitimage生成task
      */
     public function submitTask(string $prompt, string $mode = 'fast'): array
     {
@@ -83,7 +83,7 @@ class MidjourneyAPI
     }
 
     /**
-     * query任务结果.
+     * querytask结果.
      */
     public function getTaskResult(string $jobId): array
     {
@@ -102,7 +102,7 @@ class MidjourneyAPI
     }
 
     /**
-     * get账户information.
+     * getaccountinformation.
      */
     public function getAccountInfo(): array
     {

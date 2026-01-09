@@ -19,7 +19,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
     protected bool $filterOrganizationCode = false;
 
     /**
-     * 保存modelconfiguration版本（在事务中完成版本号递增、标记旧版本、create新版本）.
+     * savemodelconfiguration版本（在事务中complete版本号递增、mark旧版本、create新版本）.
      */
     public function saveVersionWithTransaction(ProviderDataIsolation $dataIsolation, ProviderModelConfigVersionEntity $entity): void
     {
@@ -35,7 +35,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
 
             $newVersion = $latestVersion ? (int) $latestVersion + 1 : 1;
 
-            // 2. 将该model的所有旧版本标记为非当前版本
+            // 2. 将该model的所有旧版本mark为非当前版本
             $updateBuilder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $updateBuilder
                 ->where('service_provider_model_id', $serviceProviderModelId)

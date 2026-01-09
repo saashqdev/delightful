@@ -30,12 +30,12 @@ class FileParser
     }
 
     /**
-     * 解析文件content.
+     * 解析filecontent.
      *
-     * @param string $fileUrl 文件URL地址
+     * @param string $fileUrl fileURL地址
      * @param bool $textPreprocess 是否进行文本预处理
-     * @return string 解析后的文件content
-     * @throws Exception 当文件解析fail时
+     * @return string 解析后的filecontent
+     * @throws Exception 当file解析fail时
      */
     public function parse(string $fileUrl, bool $textPreprocess = false): string
     {
@@ -46,7 +46,7 @@ class FileParser
             return $this->cache->get($cacheKey, '');
         }
         try {
-            // / 检测文件安全性
+            // / 检测file安全性
             $safeUrl = SSRFUtil::getSafeUrl($fileUrl, replaceIp: false);
             $tempFile = tempnam(sys_get_temp_dir(), 'downloaded_');
 
@@ -55,7 +55,7 @@ class FileParser
             $extension = FileType::getType($fileUrl);
 
             $interface = match ($extension) {
-                // 更多的文件type支持
+                // 更多的filetype支持
                 'png', 'jpeg', 'jpg' => OcrFileParserDriverInterface::class,
                 'pdf' => PdfFileParserDriverInterface::class,
                 'xlsx', 'xls', 'xlsm' => ExcelFileParserDriverInterface::class,
@@ -72,7 +72,7 @@ class FileParser
             /** @var FileParserDriverInterface $driver */
             $driver = di($interface);
             $res = $driver->parse($tempFile, $fileUrl, $extension);
-            // 如果是csv、xlsx、xls文件，需要进行额外处理
+            // 如果是csv、xlsx、xlsfile，需要进行额外处理
             if ($textPreprocess && in_array($extension, ['csv', 'xlsx', 'xls'])) {
                 $res = TextPreprocessUtil::preprocess([TextPreprocessRule::FORMAT_EXCEL], $res);
             }
@@ -84,27 +84,27 @@ class FileParser
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, "[{$fileUrl}] fail to parse: {$throwable->getMessage()}");
         } finally {
             if (isset($tempFile) && file_exists($tempFile)) {
-                unlink($tempFile); // 确保临时文件被delete
+                unlink($tempFile); // 确保临时file被delete
             }
         }
     }
 
     /**
-     * 下载文件到临时位置.
+     * downloadfile到临时位置.
      *
-     * @param string $url 文件URL地址
-     * @param string $tempFile 临时文件路径
-     * @param int $maxSize 文件大小限制（字节），0table示不限制
-     * @throws Exception 当下载fail或文件超限时
+     * @param string $url fileURL地址
+     * @param string $tempFile 临时file路径
+     * @param int $maxSize file大小限制（字节），0table示不限制
+     * @throws Exception 当downloadfail或file超限时
      */
     private static function downloadFile(string $url, string $tempFile, int $maxSize = 0): void
     {
-        // 如果是本地文件路径，直接return
+        // 如果是本地file路径，直接return
         if (file_exists($url)) {
             return;
         }
 
-        // 如果url是本地文件协议，转换为实际路径
+        // 如果url是本地file协议，转换为实际路径
         if (str_starts_with($url, 'file://')) {
             $localPath = substr($url, 7);
             if (file_exists($localPath)) {
@@ -112,7 +112,7 @@ class FileParser
             }
         }
 
-        // 尝试预先check文件大小
+        // 尝试预先checkfile大小
         $sizeKnown = self::checkUrlFileSize($url, $maxSize);
 
         $context = stream_context_create([
@@ -125,14 +125,14 @@ class FileParser
         $localFile = fopen($tempFile, 'w');
 
         if (! $fileStream || ! $localFile) {
-            ExceptionBuilder::throw(FlowErrorCode::Error, message: '无法打开文件流');
+            ExceptionBuilder::throw(FlowErrorCode::Error, message: '无法打开file流');
         }
 
-        // 如果文件大小未知，需要在下载过程中控制大小
+        // 如果file大小未知，需要在download过程中控制大小
         if (! $sizeKnown && $maxSize > 0) {
             self::downloadWithSizeControl($fileStream, $localFile, $maxSize);
         } else {
-            // 文件大小已知或无需限制，直接复制
+            // file大小已知或无需限制，直接复制
             stream_copy_to_stream($fileStream, $localFile);
         }
 
@@ -141,12 +141,12 @@ class FileParser
     }
 
     /**
-     * 流式下载并控制文件大小.
+     * streamdownload并控制file大小.
      *
-     * @param resource $fileStream 远程文件流资源
-     * @param resource $localFile 本地文件流资源
-     * @param int $maxSize 文件大小限制（字节）
-     * @throws Exception 当文件大小超限或写入fail时
+     * @param resource $fileStream 远程file流资源
+     * @param resource $localFile 本地file流资源
+     * @param int $maxSize file大小限制（字节）
+     * @throws Exception 当file大小超限或写入fail时
      */
     private static function downloadWithSizeControl($fileStream, $localFile, int $maxSize): void
     {
@@ -164,35 +164,35 @@ class FileParser
 
             // Check if size limit exceeded
             if ($downloadedBytes > $maxSize) {
-                ExceptionBuilder::throw(FlowErrorCode::Error, message: '文件大小超过限制');
+                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'file大小超过限制');
             }
 
             // Write buffer to local file
             if (fwrite($localFile, $buffer) === false) {
-                ExceptionBuilder::throw(FlowErrorCode::Error, message: '写入临时文件fail');
+                ExceptionBuilder::throw(FlowErrorCode::Error, message: '写入临时filefail');
             }
         }
     }
 
     /**
-     * check文件大小是否超限.
+     * checkfile大小是否超限.
      *
-     * @param string $fileUrl 文件URL地址
-     * @param int $maxSize 文件大小限制（字节），0table示不限制
-     * @return bool truetable示已check大小且在限制内，falsetable示是chunked传输需要流式下载
-     * @throws Exception 当文件大小超过限制或文件大小未知且非chunked传输时
+     * @param string $fileUrl fileURL地址
+     * @param int $maxSize file大小限制（字节），0table示不限制
+     * @return bool truetable示已check大小且在限制内，falsetable示是chunked传输需要streamdownload
+     * @throws Exception 当file大小超过限制或file大小未知且非chunked传输时
      */
     private static function checkUrlFileSize(string $fileUrl, int $maxSize = 0): bool
     {
         if ($maxSize <= 0) {
             return true;
         }
-        // 下载之前，检测文件大小
+        // download之前，检测file大小
         $headers = get_headers($fileUrl, true);
         if (isset($headers['Content-Length'])) {
             $fileSize = (int) $headers['Content-Length'];
             if ($fileSize > $maxSize) {
-                ExceptionBuilder::throw(FlowErrorCode::Error, message: '文件大小超过限制');
+                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'file大小超过限制');
             }
             return true;
         }
@@ -204,11 +204,11 @@ class FileParser
         }
 
         if (strtolower(trim($transferEncoding)) === 'chunked') {
-            // chunked传输，允许流式下载
+            // chunked传输，允许streamdownload
             return false;
         }
 
-        // 既没有Content-Length，也不是chunked传输，拒绝下载
-        ExceptionBuilder::throw(FlowErrorCode::Error, message: '文件大小未知，禁止下载');
+        // 既没有Content-Length，也不是chunked传输，拒绝download
+        ExceptionBuilder::throw(FlowErrorCode::Error, message: 'file大小未知，禁止download');
     }
 }

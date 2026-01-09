@@ -38,11 +38,11 @@ class AgentAssembler
 
     public static function createChatModelAvailableList(Page $page, int $total, array $list, array $icons = []): PageDTO
     {
-        // 处理分页
+        // 处理pagination
         $offset = ($page->getPage() - 1) * $page->getPageNum();
         $pagedList = array_slice($list, $offset, $page->getPageNum());
 
-        // 直接returnarray数据，因为已经包含conversationID等信息
+        // 直接returnarray数据，因为已经包含conversationID等info
         return new PageDTO($page->getPage(), $total, $pagedList);
     }
 }

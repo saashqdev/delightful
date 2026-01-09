@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('organization_code')->default('')->comment('organization编码');
             $table->string('code', 50)->default('')->comment('API Key编码')->index();
-            $table->string('flow_code', 50)->default('')->comment('流程编码')->index();
+            $table->string('flow_code', 50)->default('')->comment('process编码')->index();
             $table->string('conversation_id', 50)->default('')->comment('conversationID');
             $table->integer('type')->default(0)->comment('type');
             $table->string('name')->default('')->comment('名称');

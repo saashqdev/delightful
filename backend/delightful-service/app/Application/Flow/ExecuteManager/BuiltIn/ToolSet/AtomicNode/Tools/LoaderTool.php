@@ -83,7 +83,7 @@ class LoaderTool extends AbstractBuiltInTool
         "files": {
             "type": "array",
             "key": "files",
-            "title": "文件",
+            "title": "file",
             "description": "",
             "required": null,
             "value": null,
@@ -93,7 +93,7 @@ class LoaderTool extends AbstractBuiltInTool
                 "type": "object",
                 "key": "file",
                 "sort": 0,
-                "title": "文件",
+                "title": "file",
                 "description": "",
                 "required": [
                     "file_url"
@@ -106,8 +106,8 @@ class LoaderTool extends AbstractBuiltInTool
                     "file_name": {
                         "type": "string",
                         "key": "file_name",
-                        "title": "文件名称",
-                        "description": "文件名称。没有时可use url 中的文件名",
+                        "title": "file名称",
+                        "description": "file名称。没有时可use url 中的file名",
                         "required": null,
                         "value": null,
                         "encryption": false,
@@ -118,8 +118,8 @@ class LoaderTool extends AbstractBuiltInTool
                     "file_url": {
                         "type": "string",
                         "key": "file_url",
-                        "title": "文件地址。远程文件地址",
-                        "description": "文件地址。远程文件地址",
+                        "title": "file地址。远程file地址",
+                        "description": "file地址。远程file地址",
                         "required": null,
                         "value": null,
                         "encryption": false,

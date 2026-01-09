@@ -18,12 +18,12 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected string $id = '';
 
     /**
-     * 工作流 id.
+     * workflow id.
      */
     protected string $flowCode;
 
     /**
-     * 工作流版本号.
+     * workflow版本号.
      */
     protected string $flowVersion;
 
@@ -45,7 +45,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected string $robotName;
 
     /**
-     * 助理头像.
+     * 助理avatar.
      */
     protected string $agentAvatar = '';
 
@@ -74,7 +74,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?int $releaseScope = 0;
 
     /**
-     * 审批status.
+     * approvalstatus.
      */
     protected ?int $approvalStatus;
 

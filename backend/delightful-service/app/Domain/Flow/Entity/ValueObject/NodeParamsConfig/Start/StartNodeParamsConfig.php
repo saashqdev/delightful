@@ -117,7 +117,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
 
                     $systemOutput = $this->getChatMessageOutputTemplate();
 
-                    // 支持自定义输出
+                    // 支持customize输出
                     $customSystemOutput = new NodeOutput();
                     $customSystemOutput->setForm(ComponentFactory::fastCreate($branch['custom_system_output']['form'] ?? []));
 

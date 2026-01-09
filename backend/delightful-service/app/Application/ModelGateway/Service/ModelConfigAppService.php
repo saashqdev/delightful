@@ -71,7 +71,7 @@ class ModelConfigAppService extends AbstractLLMAppService
     public function getChatModelTypeByFallbackChain(string $orgCode, string $userId, string $modelType = '', array $modelFallbackChain = []): string
     {
         $dataIsolation = ModelGatewayDataIsolation::createByOrganizationCodeWithoutSubscription($orgCode, $userId);
-        // 从organization可用的modellist中get所有可聊天的model
+        // 从organization可用的modellist中get所有可chat的model
         $odinModels = di(ModelGatewayMapper::class)->getChatModels($dataIsolation) ?? [];
         $chatModelsName = array_keys($odinModels);
         if (empty($chatModelsName)) {

@@ -14,7 +14,7 @@ interface SessionInterface
     /**
      * 麦吉对其他服务端发起的登录校验。if想复用已有的user体系,needimplement该接口.
      *
-     * implement流程：前端对非麦吉自建的账号体系进行登录请求,then再请求麦吉的登录校验接口。
+     * implementprocess：前端对非麦吉自建的账号体系进行登录请求,then再请求麦吉的登录校验接口。
      *
      * @param LoginCheckInterface $loginCheck 登录校验data
      * @param DelightfulEnvironmentEntity $delightfulEnvironmentEntity 要登录的环境

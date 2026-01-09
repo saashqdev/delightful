@@ -48,7 +48,7 @@ class LoaderNodeRunner extends NodeRunner
             }
             $fileName = $file['file_name'] ?? $fileUrl;
 
-            // according to链接get文件类型，这里只get后缀可能不准确
+            // according to链接getfile类型，这里只get后缀可能不准确
             $fileExtension = FileType::getType($fileUrl);
 
             $content = di(FileParser::class)->parse($fileUrl);

@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::create('admin_global_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('type')->comment('类型');
-            $table->unsignedTinyInteger('status')->default(0)->comment('状态');
+            $table->unsignedTinyInteger('status')->default(0)->comment('status');
             $table->json('extra')->nullable()->comment('额外configuration');
             $table->string('organization')->comment('organization编码');
             $table->unique(['type', 'organization'], 'unique_type_organization');

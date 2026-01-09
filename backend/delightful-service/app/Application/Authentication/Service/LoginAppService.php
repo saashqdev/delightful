@@ -37,7 +37,7 @@ readonly class LoginAppService
      */
     public function login(CheckLoginRequest $request): CheckLoginResponse
     {
-        // 验证账户info并get账户
+        // 验证accountinfo并getaccount
         $account = $this->verifyAndGetAccount($request);
 
         // 验证user在organization内是否存在
@@ -51,7 +51,7 @@ readonly class LoginAppService
     }
 
     /**
-     * according to登录type验证账户info并return账户实体.
+     * according to登录type验证accountinfo并returnaccount实体.
      */
     private function verifyAndGetAccount(CheckLoginRequest $request): AccountEntity
     {

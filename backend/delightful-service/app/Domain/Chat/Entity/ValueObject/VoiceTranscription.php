@@ -10,7 +10,7 @@ namespace App\Domain\Chat\Entity\ValueObject;
 use App\Infrastructure\Core\AbstractValueObject;
 
 /**
- * 语音转文字resultvalueobject
+ * voice转文字resultvalueobject
  * 支持多语言转录result存储.
  */
 class VoiceTranscription extends AbstractValueObject
@@ -174,7 +174,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * 清空所有转录result.
+     * clear所有转录result.
      */
     public function clear(): self
     {

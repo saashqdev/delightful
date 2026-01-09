@@ -114,12 +114,12 @@ class AdminAgentAppService extends AbstractKernelAppService
         $dataIsolation = DataIsolation::create($authorization->getOrganizationCode(), $authorization->getId());
         $userMap = $this->userDomainService->getByUserIds($dataIsolation, $agentCreators);
 
-        // 收集user头像key
+        // 收集useravatarkey
         $avatars = array_filter(array_map(function ($user) {
             return $user->getAvatarUrl();
         }, $userMap), fn ($avatar) => ! empty($avatar));
 
-        // get头像URL
+        // getavatarURL
         $fileLinks = $this->fileDomainService->getLinks($authorization->getOrganizationCode(), $avatars);
 
         $result = [];
@@ -175,7 +175,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         foreach ($delightfulAgentEntities as $agent) {
             $adminAgentDTO = AgentAssembler::entityToDTO($agent);
 
-            // set头像
+            // setavatar
             $avatar = $fileLinks[$agent->getAgentAvatar()] ?? null;
             $adminAgentDTO->setAgentAvatar($avatar?->getUrl() ?? '');
 
@@ -293,7 +293,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             return new GetPublishedAgentsResponseDTO();
         }
 
-        // get头像url
+        // getavatarurl
         $avatars = array_column($agentVersions, 'agent_avatar');
         $fileLinks = $this->fileDomainService->getLinks($organizationCode, $avatars);
 
@@ -346,7 +346,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             $departmentIds = array_merge($departmentIds, $userDepartmentIds);
         }
         $departments = $this->delightfulDepartmentDomainService->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
-        // get群组info
+        // getgroupinfo
         $groups = $this->delightfulGroupDomainService->getGroupsInfoByIds($groupIds, $contactDataIsolation, true);
         return OperationPermissionAssembler::createResourceAccessDTO(ResourceType::AgentCode, $agentId, $operationPermissionEntities, $users, $departments, $groups);
     }

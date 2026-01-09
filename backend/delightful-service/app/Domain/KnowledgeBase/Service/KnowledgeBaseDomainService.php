@@ -36,7 +36,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * 保存知识库 - 基本information.
+     * save知识库 - 基本information.
      * @param array<DocumentFileInterface> $files
      */
     public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $savingDelightfulFlowKnowledgeEntity, array $files = []): KnowledgeBaseEntity
@@ -73,7 +73,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * 保存知识库 - 向量进度.
+     * save知识库 - 向量进度.
      */
     public function saveProcess(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $savingKnowledgeEntity): KnowledgeBaseEntity
     {

@@ -69,7 +69,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
             $seqInfo['content'] = Json::encode($seqInfo['content']);
             $seqInfo['receive_list'] = Json::encode($seqInfo['receive_list']);
             $seqInfo['extra'] = $this->getSeqExtra($seqInfo['extra'] ?? null);
-            // seq 的topic_id实际保存在 topic_messages table中
+            // seq 的topic_id实际save在 topic_messages table中
             unset($seqInfo['topic_id']);
             $insertData[] = $seqInfo;
         }
@@ -315,7 +315,7 @@ sql;
     }
 
     /**
-     * getmessage的撤回 seq.
+     * getmessage的withdraw seq.
      */
     public function getMessageRevokedSeq(string $messageId, DelightfulUserEntity $userEntity, ControlMessageType $controlMessageType): ?DelightfulSeqEntity
     {
@@ -496,7 +496,7 @@ sql;
     private function getClientSequencesResponse(array $seqInfos): array
     {
         $delightfulMessageIds = [];
-        // 聊天message,查messagetablegetmessagecontent
+        // chatmessage,查messagetablegetmessagecontent
         foreach ($seqInfos as $seqInfo) {
             $seqType = MessageAssembler::getMessageType($seqInfo['seq_type']);
             if ($seqType instanceof ChatMessageType) {
@@ -507,7 +507,7 @@ sql;
         if (! empty($delightfulMessageIds)) {
             $messages = $this->delightfulMessageRepository->getMessages($delightfulMessageIds);
         }
-        // 将控制message/聊天message一起放入user的message流中
+        // 将控制message/chatmessage一起放入user的message流中
         return SeqAssembler::getClientSeqStructs($seqInfos, $messages);
     }
 

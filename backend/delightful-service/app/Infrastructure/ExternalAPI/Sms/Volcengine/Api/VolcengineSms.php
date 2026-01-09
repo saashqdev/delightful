@@ -48,10 +48,10 @@ class VolcengineSms extends VolcengineApi
         $sendResult = new SendResult();
         $signStr = SignEnum::format($sign, LanguageEnum::EN_US);
         if (empty($templateVariables)) {
-            return $sendResult->setResult(-1, '未匹配到对应的短信模板!');
+            return $sendResult->setResult(-1, '未匹配到对应的短信template!');
         }
         if (! in_array($signStr, Template::$signToMessageGroup, true)) {
-            return $sendResult->setResult(-1, '短信签名:' . $signStr . ' 不支持!');
+            return $sendResult->setResult(-1, '短信signature:' . $signStr . ' 不支持!');
         }
 
         $errCode = 0;
@@ -69,7 +69,7 @@ class VolcengineSms extends VolcengineApi
                 'PhoneNumbers' => $phone,
             ];
             $this->setBody($body);
-            // 如果是单元test,不发短信,只验证variable解析/短信content&&短信签名多语种适配/国际区号正确解析
+            // 如果是单元test,不发短信,只验证variable解析/短信content&&短信signature多语种适配/国际区号正确解析
             if (defined('IN_UNIT_TEST')) {
                 // 单元test,不真的发短信
                 return $sendResult->setResult($errCode, $msg);

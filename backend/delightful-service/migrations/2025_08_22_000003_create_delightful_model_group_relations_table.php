@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->bigInteger('group_id')->unsigned()->default(0)->comment('分组ID');
             $table->string('model_id')->default('')->comment('模型ID');
             $table->bigInteger('provider_model_id')->unsigned()->default(0)->comment('模型table主键 id');
-            $table->integer('sort')->default(0)->comment('排序权重');
+            $table->integer('sort')->default(0)->comment('sort权重');
             $table->string('organization_code', 32)->default('')->comment('organization代码');
             $table->timestamps();
             $table->softDeletes();

@@ -41,7 +41,7 @@ abstract class AbstractLLMNodeParamsConfig extends NodeParamsConfig
     protected bool $isLoadAgentPlugin = false;
 
     /**
-     * @var array<AgentPluginInterface> Agent 插件
+     * @var array<AgentPluginInterface> Agent plugin
      */
     protected array $agentPlugins = [];
 
@@ -55,13 +55,13 @@ abstract class AbstractLLMNodeParamsConfig extends NodeParamsConfig
         if (! $this->isLoadAgentPlugin) {
             return [];
         }
-        // 加载插件的配置
+        // 加载plugin的configuration
         $agentParams = [];
         foreach (AgentPluginCollector::list() as $plugin) {
             $agentPlugin = $plugin->createAgentPlugin();
-            // 解析插件parameter
+            // 解析pluginparameter
             $agentParams = array_merge($agentParams, $agentPlugin->parseParams($params));
-            // 注入本次运行时use的插件
+            // 注入本次运行时use的plugin
             $this->agentPlugins[] = $agentPlugin;
         }
         return $agentParams;

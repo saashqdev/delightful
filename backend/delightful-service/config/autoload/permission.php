@@ -11,6 +11,6 @@ $superWhitelists = parse_json_config(env('SUPER_WHITELISTS', '[]'));
 return [
     // 超级管理员
     'super_whitelists' => $superWhitelists,
-    // 由于暂时没有permissionsystem，env 配置organization的管理员
+    // 由于暂时没有permissionsystem，env configurationorganization的管理员
     'organization_whitelists' => $organizationWhitelists,
 ];

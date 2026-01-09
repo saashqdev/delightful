@@ -23,7 +23,7 @@ enum UserIdType: string
     case OpenId = 'open_id';
 
     /**
-     * 应用的createorganization下唯一(用于应用跨organization追踪用于).
+     * 应用的createorganization下唯一(用于应用跨organizationtrace用于).
      */
     case UnionId = 'union_id';
 

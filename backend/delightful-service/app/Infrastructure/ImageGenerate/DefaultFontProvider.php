@@ -17,8 +17,8 @@ use App\Domain\ImageGenerate\Contract\FontProviderInterface;
 class DefaultFontProvider implements FontProviderInterface
 {
     /**
-     * getTTF字体文件路径.
-     * 开源版本不提供TTF字体文件.
+     * getTTF字体file路径.
+     * 开源版本不提供TTF字体file.
      */
     public function getFontPath(): ?string
     {
@@ -59,7 +59,7 @@ class DefaultFontProvider implements FontProviderInterface
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // 采样check，避免check每个像素提高性能
+        // 采样check，避免check每个像素提高performance
         $sampleSize = min(50, $width, $height);
         $stepX = max(1, (int) ($width / $sampleSize));
         $stepY = max(1, (int) ($height / $sampleSize));

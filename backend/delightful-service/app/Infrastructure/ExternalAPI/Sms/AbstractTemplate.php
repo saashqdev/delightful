@@ -12,7 +12,7 @@ use App\Infrastructure\ExternalAPI\Sms\Enum\LanguageEnum;
 abstract class AbstractTemplate implements TemplateInterface
 {
     /**
-     * 短信type与模板id的映射关系.
+     * 短信type与templateid的映射关系.
      */
     protected array $typeToIdMap = [];
 
@@ -22,7 +22,7 @@ abstract class AbstractTemplate implements TemplateInterface
     protected array $typeContents = [];
 
     /**
-     * according to模板id,进行variable短信的适配,还原整条短信文本content.
+     * according totemplateid,进行variable短信的适配,还原整条短信文本content.
      */
     protected array $idContents = [];
 
@@ -61,7 +61,7 @@ abstract class AbstractTemplate implements TemplateInterface
             return $messages;
         }
         $variables = [];
-        // 模板$content中不存在 "${xxx}" 或者 {$xxx) type的字符.则按index顺序匹配
+        // template$content中不存在 "${xxx}" 或者 {$xxx) type的字符.则按index顺序匹配
         foreach ($matches[1] as $index => $variableKey) {
             if (isset($messages[$variableKey])) {
                 $variables[$variableKey] = $messages[$variableKey];
@@ -86,16 +86,16 @@ abstract class AbstractTemplate implements TemplateInterface
 
     public function formatSign(string $sign, ?LanguageEnum $language, ?LanguageEnum $defaultLanguage = LanguageEnum::ZH_CN): string
     {
-        // 签名type确定
+        // signaturetype确定
         if (empty($sign)) {
             $sign = $this->getTemplateDefaultSignType($sign);
         }
         if (empty($this->signMap[$sign])) {
-            // 签名type不存在,直接return
+            // signaturetype不存在,直接return
             return $sign;
         }
 
-        // 确定签名的语种,需要从 user指定语种,user指定兜底语种,系统默认的兜底语种 中确定出来一个value
+        // 确定signature的语种,需要从 user指定语种,user指定兜底语种,系统默认的兜底语种 中确定出来一个value
         $signLanguage = null;
         // 语种兜底的顺序
         $defaultLanguages = [$language, $defaultLanguage, LanguageEnum::EN_US, LanguageEnum::ZH_CN];
@@ -115,7 +115,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * 当传入的签名type不存在时,get短信的默认签名type.
+     * 当传入的signaturetype不存在时,get短信的默认signaturetype.
      */
     abstract protected function getTemplateDefaultSignType(string $sign): string;
 

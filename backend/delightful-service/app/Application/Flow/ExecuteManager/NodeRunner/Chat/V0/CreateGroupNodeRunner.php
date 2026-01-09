@@ -31,7 +31,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 #[FlowNodeDefine(
     type: NodeType::CreateGroup->value,
     code: NodeType::CreateGroup->name,
-    name: 'create群聊',
+    name: 'creategroup chat',
     paramsConfig: CreateGroupNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,
@@ -98,7 +98,7 @@ class CreateGroupNodeRunner extends NodeRunner
         $vertexResult->addDebugLog('group_members', $groupMemberIds);
         $vertexResult->addDebugLog('assistant_opening_speech', $assistantOpeningSpeech);
 
-        // 只有 IM 聊天才会create
+        // 只有 IM chat才会create
         if (! $executionData->getExecutionType()->isImChat()) {
             $delightfulGroup = [
                 'group_id' => 'test_group_id',
@@ -123,12 +123,12 @@ class CreateGroupNodeRunner extends NodeRunner
         $delightfulGroupDTO->setGroupType($groupType);
         $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
 
-        // 通过 conversationID get来源 和 助理 key，并create群聊
+        // 通过 conversationID get来源 和 助理 key，并creategroup chat
         $agentKey = $executionData->getTriggerData()->getAgentKey();
         $this->createChatGroup($agentKey, $groupMemberIds, $ownerAuthorization, $delightfulGroupDTO);
 
         if (! empty($assistantOpeningSpeech)) {
-            // 助手发送群聊message
+            // 助手发送group chatmessage
             $assistantMessage = new TextMessage(['content' => $assistantOpeningSpeech]);
             $appMessageId = IdGenerator::getUniqueId32();
             $receiveSeqDTO = new DelightfulSeqEntity();

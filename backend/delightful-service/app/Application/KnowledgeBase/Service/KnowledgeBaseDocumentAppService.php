@@ -31,7 +31,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * 保存知识库文档.
+     * save知识库文档.
      */
     public function save(Authenticatable $authorization, KnowledgeBaseDocumentEntity $documentEntity): KnowledgeBaseDocumentEntity
     {
@@ -45,7 +45,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         empty($knowledgeBaseEntity->getFragmentConfig()) && $documentEntity->setFragmentConfig($knowledgeBaseEntity->getFragmentConfig());
         empty($documentEntity->getRetrieveConfig()) && $documentEntity->setRetrieveConfig($knowledgeBaseEntity->getRetrieveConfig());
 
-        // 嵌入configuration不可编辑
+        // 嵌入configuration不可edit
         $documentEntity->setEmbeddingConfig($knowledgeBaseEntity->getEmbeddingConfig());
         // set默认的嵌入model和向量database
         $documentEntity->setEmbeddingModel($knowledgeBaseEntity->getModel());

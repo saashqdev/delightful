@@ -69,7 +69,7 @@ class CreateMemoryDTO extends AbstractDTO
     }
 
     /**
-     * setting记忆状态.
+     * setting记忆status.
      */
     public function setStatus(MemoryStatus|string $status): void
     {

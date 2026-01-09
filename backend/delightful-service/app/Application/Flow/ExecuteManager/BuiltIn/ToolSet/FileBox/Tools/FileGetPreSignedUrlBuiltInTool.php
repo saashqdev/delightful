@@ -35,7 +35,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'according to文件名get文件上传的预签名URL。仅能操作本流程产生的文件';
+        return 'according tofile名getfileupload的预signatureURL。仅能操作本process产生的file';
     }
 
     public function getCallback(): ?Closure
@@ -49,7 +49,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
             }
             $organizationCode = $executionData->getDataIsolation()->getCurrentOrganizationCode();
 
-            // permissionissue，目前仅允许操作本流程产生的文件。因为当前工具也是一个 flow，所以需要get父流程的 code
+            // permissionissue，目前仅允许操作本process产生的file。因为当前工具也是一个 flow，所以需要get父process的 code
             $name = $executionData->getParentFlowCode() . '/' . ltrim($name, '/');
 
             $fileDomain = di(FileDomainService::class);
@@ -87,8 +87,8 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
         "name": {
             "type": "string",
             "key": "name",
-            "title": "文件名",
-            "description": "文件name",
+            "title": "file名",
+            "description": "filename",
             "required": null,
             "value": null,
             "encryption": false,
@@ -129,7 +129,7 @@ JSON,
             "type": "string",
             "key": "url",
             "title": "URL",
-            "description": "文件上传的预签名URL",
+            "description": "fileupload的预signatureURL",
             "required": null,
             "value": null,
             "encryption": false,
@@ -141,7 +141,7 @@ JSON,
             "type": "object",
             "key": "headers",
             "title": "Headers",
-            "description": "文件上传的预签名URL的Headers",
+            "description": "fileupload的预signatureURL的Headers",
             "required": null,
             "value": null,
             "encryption": false,
@@ -153,7 +153,7 @@ JSON,
             "type": "number",
             "key": "expires",
             "title": "过期time",
-            "description": "文件上传的预签名URL的过期time",
+            "description": "fileupload的预signatureURL的过期time",
             "required": null,
             "value": null,
             "encryption": false,
@@ -165,7 +165,7 @@ JSON,
             "type": "string",
             "key": "key",
             "title": "key",
-            "description": "文件的完整Key",
+            "description": "file的完整Key",
             "required": null,
             "value": null,
             "encryption": false,
@@ -176,8 +176,8 @@ JSON,
         "name": {
             "type": "string",
             "key": "name",
-            "title": "文件名",
-            "description": "文件名",
+            "title": "file名",
+            "description": "file名",
             "required": null,
             "value": null,
             "encryption": false,

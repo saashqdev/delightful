@@ -83,7 +83,7 @@ class FileListBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '列出user当前session产生的文件';
+        return '列出user当前session产生的file';
     }
 
     public function getInput(): ?NodeInput
@@ -182,7 +182,7 @@ JSON,
             "type": "array",
             "key": "root",
             "sort": 5,
-            "title": "文件list",
+            "title": "filelist",
             "description": "",
             "required": null,
             "value": null,
@@ -192,7 +192,7 @@ JSON,
                 "type": "object",
                 "key": "files",
                 "sort": 0,
-                "title": "文件",
+                "title": "file",
                 "description": "",
                 "required": [
                     "file_name",
@@ -207,7 +207,7 @@ JSON,
                         "type": "string",
                         "key": "file_name",
                         "sort": 0,
-                        "title": "文件name",
+                        "title": "filename",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -220,7 +220,7 @@ JSON,
                         "type": "string",
                         "key": "file_url",
                         "sort": 1,
-                        "title": "文件地址",
+                        "title": "file地址",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -233,7 +233,7 @@ JSON,
                         "type": "string",
                         "key": "file_ext",
                         "sort": 2,
-                        "title": "文件后缀",
+                        "title": "file后缀",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -246,7 +246,7 @@ JSON,
                         "type": "number",
                         "key": "file_size",
                         "sort": 3,
-                        "title": "文件大小",
+                        "title": "file大小",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -285,7 +285,7 @@ JSON,
         if (! empty($endTime) && strtotime($endTime) !== false) {
             $memoryQuery->setEndTime(new DateTime($endTime));
         }
-        // 只get文件
+        // 只getfile
         $memoryQuery->setRangMessageTypes([
             ChatMessageType::Text,
             ChatMessageType::RichText,

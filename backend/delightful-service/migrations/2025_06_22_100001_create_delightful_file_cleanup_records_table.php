@@ -19,9 +19,9 @@ class CreateDelightfulFileCleanupRecordsTable extends Migration
         Schema::create('delightful_file_cleanup_records', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code', 50)->comment('organization编码');
-            $table->string('file_key', 500)->comment('文件存储key');
-            $table->string('file_name', 255)->comment('文件名称');
-            $table->unsignedBigInteger('file_size')->default(0)->comment('文件大小(字节)');
+            $table->string('file_key', 500)->comment('file存储key');
+            $table->string('file_name', 255)->comment('file名称');
+            $table->unsignedBigInteger('file_size')->default(0)->comment('file大小(字节)');
             $table->string('bucket_type', 20)->default('private')->comment('存储桶type');
             $table->string('source_type', 50)->comment('来源type(batch_compress,upload_temp等)');
             $table->string('source_id', 100)->nullable()->comment('来源ID(可选的业务标识)');

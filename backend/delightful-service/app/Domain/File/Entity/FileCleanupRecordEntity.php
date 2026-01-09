@@ -69,7 +69,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * get文件key.
+     * getfilekey.
      */
     public function getFileKey(): string
     {
@@ -77,7 +77,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * set文件key.
+     * setfilekey.
      */
     public function setFileKey(string $fileKey): self
     {
@@ -86,7 +86,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * get文件name.
+     * getfilename.
      */
     public function getFileName(): string
     {
@@ -94,7 +94,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * set文件name.
+     * setfilename.
      */
     public function setFileName(string $fileName): self
     {
@@ -103,7 +103,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * get文件大小.
+     * getfile大小.
      */
     public function getFileSize(): int
     {
@@ -111,7 +111,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * set文件大小.
+     * setfile大小.
      */
     public function setFileSize(int $fileSize): self
     {

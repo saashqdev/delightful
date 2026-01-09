@@ -198,12 +198,12 @@ class MessageAssembler
     }
 
     /**
-     * get聊天message的结构.
+     * getchatmessage的结构.
      */
     public static function getChatMessageStruct(ChatMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
         return match ($messageTypeEnum) {
-            # 聊天message
+            # chatmessage
             ChatMessageType::Text => new TextMessage($messageStructArray),
             ChatMessageType::RichText => new RichTextMessage($messageStructArray),
             ChatMessageType::Markdown => new MarkdownMessage($messageStructArray),
@@ -236,7 +236,7 @@ class MessageAssembler
             ControlMessageType::HideConversation => new ConversationHideMessage($messageStructArray),
             ControlMessageType::MuteConversation => new ConversationMuteMessage($messageStructArray),
             ControlMessageType::SeenMessages => new MessagesSeen($messageStructArray), // 已读
-            ControlMessageType::RevokeMessage => new MessageRevoked($messageStructArray), // 撤回
+            ControlMessageType::RevokeMessage => new MessageRevoked($messageStructArray), // withdraw
             ControlMessageType::CreateTopic => new TopicCreateMessage($messageStructArray),
             ControlMessageType::UpdateTopic => new TopicUpdateMessage($messageStructArray),
             ControlMessageType::DeleteTopic => new TopicDeleteMessage($messageStructArray),

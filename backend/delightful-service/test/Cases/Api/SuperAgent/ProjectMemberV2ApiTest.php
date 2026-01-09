@@ -109,11 +109,11 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->addTeamMembers($projectId);
 
-        // 4. 现在test2user成为成员，但权限不足 - 添加成员应该fail
+        // 4. 现在test2user成为成员，但permission不足 - 添加成员应该fail
         $this->switchUserTest2();
-        $this->addTeamMembers($projectId, 51202); // 仍然无权限，因为不是管理者
+        $this->addTeamMembers($projectId, 51202); // 仍然无permission，因为不是管理者
 
-        // 5. 给test2user管理权限
+        // 5. 给test2user管理permission
         $this->switchUserTest1();
         $this->updateMemberToManager($projectId, $this->testUserId2);
 
@@ -123,7 +123,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试协作设置管理.
+     * test协作setting管理.
      */
     public function testCollaborationSettings(): void
     {
@@ -131,7 +131,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->switchUserTest1();
 
-        // 1. 测试获取协作设置 - 默认关闭status
+        // 1. test获取协作setting - 默认closestatus
         $response = $this->getCollaborationSettings($projectId);
         $this->assertFalse($response['data']['is_collaboration_enabled']);
         $this->assertEquals(true, in_array($response['data']['default_join_permission'], ['viewer', 'editor']));
@@ -143,31 +143,31 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $response = $this->getCollaborationSettings($projectId);
         $this->assertTrue($response['data']['is_collaboration_enabled']);
 
-        // 4. 关闭协作功能
+        // 4. close协作功能
         $this->disableCollaboration($projectId);
 
-        // 5. validate协作已关闭
+        // 5. validate协作已close
         $response = $this->getCollaborationSettings($projectId);
         $this->assertFalse($response['data']['is_collaboration_enabled']);
     }
 
     /**
-     * 测试批量操作权限控制.
+     * test批量操作permission控制.
      */
     public function testBatchOperationsPermissionControl(): void
     {
         $projectId = $this->projectId;
 
-        // 1. 准备测试环境
+        // 1. 准备test环境
         $this->switchUserTest1();
         $this->enableCollaboration($projectId);
         $this->addTeamMembers($projectId);
 
-        // 2. 非管理者尝试批量更新权限 - 应该fail
+        // 2. 非管理者尝试批量更新permission - 应该fail
         $this->switchUserTest2();
         $this->batchUpdateMemberPermissions($projectId, 51202);
 
-        // 3. 非管理者尝试批量删除成员 - 应该fail
+        // 3. 非管理者尝试批量delete成员 - 应该fail
         $this->batchDeleteMembers($projectId, 51202);
 
         // 4. 管理者可以进行批量操作
@@ -177,7 +177,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试organization边界控制.
+     * testorganization边界控制.
      */
     public function testOrganizationBoundaryControl(): void
     {
@@ -208,7 +208,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试边界情况.
+     * test边界情况.
      */
     public function testEdgeCases(): void
     {
@@ -217,46 +217,46 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->enableCollaboration($projectId);
 
-        // 1. 测试添加null成员列表
+        // 1. test添加null成员列表
         $this->addEmptyMembersList($projectId, 5003);
 
-        // 2. 测试重复添加相同成员
+        // 2. test重复添加相同成员
         $this->addTeamMembers($projectId);
         //        $this->addTeamMembers($projectId); // 重复添加
 
-        // 3. 测试无效的权限级别
+        // 3. test无效的permission级别
         $this->addMembersWithInvalidPermission($projectId, 5003);
 
-        // 4. 测试不能删除自己
+        // 4. test不能delete自己
         $this->switchUserTest2();
         $this->cannotDeleteSelf($projectId);
 
         $this->switchUserTest1();
 
-        // 5. 测试协作关闭时不能添加成员
+        // 5. test协作close时不能添加成员
         $this->disableCollaboration($projectId);
-        $this->addTeamMembers($projectId, 51202); // 协作已关闭error
+        $this->addTeamMembers($projectId, 51202); // 协作已closeerror
     }
 
     /**
-     * 测试多语言errormessage.
+     * test多语言errormessage.
      */
     public function testMultiLanguageErrorMessages(): void
     {
         $projectId = $this->projectId;
 
-        // 1. 测试中文errormessage
-        $this->switchUserTest2(); // 无权限user
+        // 1. test中文errormessage
+        $this->switchUserTest2(); // 无permissionuser
         $response = $this->addTeamMembers($projectId, 51202);
-        $this->assertStringContainsString('权限', $response['message']);
+        $this->assertStringContainsString('permission', $response['message']);
 
-        // 2. 测试协作未开启error
+        // 2. test协作未开启error
         $this->switchUserTest1();
         $response = $this->addTeamMembers($projectId, 51202);
         $this->assertStringContainsString('协作', $response['message']);
     }
 
-    // ========== 辅助测试method ==========
+    // ========== 辅助testmethod ==========
 
     /**
      * 开启项目协作.
@@ -284,7 +284,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 关闭项目协作.
+     * close项目协作.
      */
     public function disableCollaboration(string $projectId, int $expectedCode = 1000): array
     {
@@ -303,7 +303,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 获取协作设置.
+     * 获取协作setting.
      */
     public function getCollaborationSettings(string $projectId, int $expectedCode = 1000): array
     {
@@ -363,7 +363,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 添加更多团队成员（测试管理者权限）.
+     * 添加更多团队成员（test管理者permission）.
      */
     public function addMoreTeamMembers(string $projectId, int $expectedCode = 1000): array
     {
@@ -409,7 +409,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 添加无效权限的成员.
+     * 添加无效permission的成员.
      */
     public function addMembersWithInvalidPermission(string $projectId, int $expectedCode = 51221): array
     {
@@ -436,7 +436,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 批量更新成员权限.
+     * 批量更新成员permission.
      */
     public function batchUpdateMemberPermissions(string $projectId, int $expectedCode = 1000): array
     {
@@ -469,7 +469,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 批量删除成员.
+     * 批量delete成员.
      */
     public function batchDeleteMembers(string $projectId, int $expectedCode = 1000): array
     {
@@ -526,14 +526,14 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试不能删除自己.
+     * test不能delete自己.
      */
     public function cannotDeleteSelf(string $projectId): void
     {
         // 先添加当前user为成员
         //        $this->addTeamMembers($projectId);
 
-        // 尝试删除自己
+        // 尝试delete自己
         $currentUserId = $this->testUserId2; // test2user
         $requestData = [
             'members' => [
@@ -550,7 +550,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        // 应该return不能删除自己的error
+        // 应该return不能delete自己的error
         $this->assertNotEquals(1000, $response['code']);
     }
 
@@ -592,7 +592,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * validate权限已更新.
+     * validatepermission已更新.
      */
     public function verifyPermissionsUpdated(string $projectId): void
     {
@@ -604,7 +604,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->assertEquals(1000, $response['code']);
 
-        // 查找指定user的权限
+        // 查找指定user的permission
         $members = $response['data']['members'];
         foreach ($members as $member) {
             if (isset($member['user_id']) && $member['user_id'] === $this->testUserId2) {
@@ -615,7 +615,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * validate成员已删除.
+     * validate成员已delete.
      */
     public function verifyMembersDeleted(string $projectId): void
     {
@@ -627,13 +627,13 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->assertEquals(1000, $response['code']);
 
-        // validate删除的成员不存在
+        // validatedelete的成员不存在
         $memberIds = array_column($response['data']['members'], 'user_id');
         $this->assertNotContains($this->testUserId2, array_filter($memberIds));
     }
 
     /**
-     * 清理项目成员数据（直接数据库删除）.
+     * 清理项目成员数据（直接数据库delete）.
      */
     private function cleanupProjectMembers(string $projectId): void
     {

@@ -117,7 +117,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $context);
             // call guard getuserinfo
             $userAuthorization = $this->getAuthorization();
-            // 将账号的所有设备加入同一个房间
+            // 将账号的所有设备加入同一个room
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return ['type' => 'user', 'user' => [
                 'delightful_id' => $userAuthorization->getDelightfulId(),
@@ -211,7 +211,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[Event('chat')]
     #[VerifyStructure]
     /**
-     * 聊天message.
+     * chatmessage.
      * @throws Throwable
      */
     public function onChatMessage(Socket $socket, array $params)
@@ -235,7 +235,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
             // according tomessagetype,分发到对应的处理模块
             $userAuthorization = $this->getAuthorization();
-            // 将账号的所有设备加入同一个房间
+            // 将账号的所有设备加入同一个room
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return $this->delightfulChatMessageAppService->onChatMessage($chatRequest, $userAuthorization);
         } catch (BusinessException $businessException) {
@@ -289,7 +289,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
             // according tomessagetype,分发到对应的处理模块
             $userAuthorization = $this->getAuthorization();
-            // 将账号的所有设备加入同一个房间
+            // 将账号的所有设备加入同一个room
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return $this->delightfulIntermediateMessageAppService->dispatchClientIntermediateMessage($chatRequest, $userAuthorization);
         } catch (BusinessException $businessException) {
@@ -333,14 +333,14 @@ class DelightfulChatWebSocketApi extends BaseNamespace
 
     private function relationAppMsgIdAndRequestId(?string $appMsgId): void
     {
-        // 直接用 appMsgId 作为 requestId会导致很多无效 log，难以追踪。
+        // 直接用 appMsgId 作为 requestId会导致很多无效 log，难以trace。
         $requestId = empty($appMsgId) ? (string) IdGenerator::getSnowId() : $appMsgId;
         CoContext::setRequestId($requestId);
         $this->logger->info('relationAppMsgIdAndRequestId requestId:' . $requestId . ' appMsgId: ' . $appMsgId);
     }
 
     /**
-     * publishsubscribe/多个message分发和推送的队列保活.
+     * publishsubscribe/多个message分发和push的queue保活.
      */
     private function keepSubscribeAlive(): void
     {
@@ -357,14 +357,14 @@ class DelightfulChatWebSocketApi extends BaseNamespace
                     SocketIOUtil::sendIntermediate(SocketEventType::Chat, 'delightful-im:subscribe:keepalive', ControlMessageType::Ping->value);
 
                     $producer = ApplicationContext::getContainer()->get(Producer::class);
-                    // 对所有队列投一条message,以保活链接/队列
+                    // 对所有queue投一条message,以保活链接/queue
                     $messagePriorities = MessagePriority::cases();
                     foreach ($messagePriorities as $priority) {
                         $seqCreatedEvent = new SeqCreatedEvent([ControlMessageType::Ping->value]);
                         $seqCreatedEvent->setPriority($priority);
                         // message分发. 一条seq可能会生成多条seq
                         $messageDispatch = new MessageDispatchPublisher($seqCreatedEvent);
-                        // message推送. 一条seq只会推送给一个user(的多个设备)
+                        // messagepush. 一条seq只会push给一个user(的多个设备)
                         $messagePush = new MessagePushPublisher($seqCreatedEvent);
                         $producer->produce($messageDispatch);
                         $producer->produce($messagePush);

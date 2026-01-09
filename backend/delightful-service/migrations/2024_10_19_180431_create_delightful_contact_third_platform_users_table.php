@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->string('third_employee_no', 64)->nullable()->default('')->comment('工号');
             $table->string('third_real_name', 64)->comment('员工姓名');
             $table->string('third_nick_name', 64)->nullable()->default('')->comment('员工昵称');
-            $table->text('third_avatar')->nullable()->comment('头像');
+            $table->text('third_avatar')->nullable()->comment('avatar');
             $table->tinyInteger('third_gender')->default(0)->comment('员工性别 0-未知 1-男 2-女');
             $table->string('third_email', 128)->nullable()->default('')->comment('邮箱');
             $table->string('third_mobile', 64)->nullable()->default('')->comment('第三方平台员工手机号');

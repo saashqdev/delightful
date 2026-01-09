@@ -14,7 +14,7 @@ namespace App\Domain\Asr\Constants;
 class AsrRedisKeys
 {
     /**
-     * 任务status Hash Key 格式
+     * taskstatus Hash Key 格式
      * 实际use时会 MD5(user_id:task_key).
      */
     public const TASK_HASH = 'asr:task:%s';
@@ -26,12 +26,12 @@ class AsrRedisKeys
     public const HEARTBEAT = 'asr:heartbeat:%s';
 
     /**
-     * 总结任务锁 Key 格式.
+     * 总结task锁 Key 格式.
      */
     public const SUMMARY_LOCK = 'asr:summary:task:%s';
 
     /**
-     * 任务status扫描mode.
+     * taskstatus扫描mode.
      */
     public const TASK_SCAN_PATTERN = 'asr:task:*';
 
@@ -41,7 +41,7 @@ class AsrRedisKeys
     public const HEARTBEAT_SCAN_PATTERN = 'asr:heartbeat:*';
 
     /**
-     * Mock 轮询计数 Key 格式（仅用于测试）.
+     * Mock 轮询计数 Key 格式（仅用于test）.
      */
     public const MOCK_FINISH_COUNT = 'mock:asr:task:%s:finish_count';
 }

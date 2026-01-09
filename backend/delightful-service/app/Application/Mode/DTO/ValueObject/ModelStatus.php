@@ -14,7 +14,7 @@ enum ModelStatus: string
     case Deleted = 'deleted';
 
     /**
-     * get状态描述.
+     * getstatus描述.
      */
     public function getDescription(): string
     {
@@ -26,7 +26,7 @@ enum ModelStatus: string
     }
 
     /**
-     * 检查是否为可用状态
+     * 检查是否为可用status
      */
     public function isAvailable(): bool
     {

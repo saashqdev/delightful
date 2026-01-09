@@ -85,7 +85,7 @@ class SSRFDefense
             $label = "[{$this->ip}]";
         }
 
-        // 黑名单优先
+        // blacklist优先
         if (in_array($this->ip, $this->options->getBlackList())) {
             throw new SSRFException("{$label} is in black list");
         }
@@ -162,7 +162,7 @@ class SSRFDefense
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_NOBODY, true);              // 只getHTTP头，不下载body
+        curl_setopt($ch, CURLOPT_NOBODY, true);              // 只getHTTP头，不downloadbody
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);

@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->json('name_i18n')->comment('能力名称（多语言JSON格式）');
             $table->json('description_i18n')->comment('能力description（多语言JSON格式）');
             $table->string('icon', 100)->nullable()->comment('图标标识');
-            $table->integer('sort_order')->default(0)->comment('排序');
+            $table->integer('sort_order')->default(0)->comment('sort');
             $table->tinyInteger('status')->default(1)->comment('status：0-禁用，1-启用');
             $table->json('config')->comment('configurationinformation（provider_code, access_point, api_key, model_id等）');
             $table->timestamps();

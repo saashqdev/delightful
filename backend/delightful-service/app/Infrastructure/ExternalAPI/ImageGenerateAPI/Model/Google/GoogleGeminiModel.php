@@ -31,7 +31,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         $apiUrl = $serviceProviderConfig['url'];
 
         if (empty($apiUrl)) {
-            throw new Exception('Google Gemini API URL 配置缺失');
+            throw new Exception('Google Gemini API URL configuration缺失');
         }
 
         $this->api = new GoogleGeminiAPI($serviceProviderConfig['api_key'], $apiUrl, $serviceProviderConfig['model_version']);
@@ -93,10 +93,10 @@ class GoogleGeminiModel extends AbstractImageGenerate
                     $result = $this->requestImageGeneration($imageGenerateRequest);
                     $this->validateGoogleGeminiResponse($result);
 
-                    // success：设置图片数据到响应object
+                    // success：settingimage数据到响应object
                     $this->addImageDataToResponseGemini($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：设置error信息到响应object（只设置第一个error）
+                    // fail：settingerrorinfo到响应object（只setting第一个error）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
@@ -115,7 +115,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         // 4. 记录最终结果
         $this->logger->info('GoogleGemini OpenAI格式生图：并发handlecomplete', [
             '总请求数' => $count,
-            'success图片数' => count($response->getData()),
+            'successimage数' => count($response->getData()),
             '是否有error' => $response->hasError(),
             'error码' => $response->getProviderErrorCode(),
             'errormessage' => $response->getProviderErrorMessage(),
@@ -141,7 +141,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         }
 
         if (empty($imageData)) {
-            $this->logger->error('Google Gemini文生图：所有图片generate均fail', ['rawResults' => $rawResults]);
+            $this->logger->error('Google Gemini文生图：所有imagegenerate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
@@ -172,15 +172,15 @@ class GoogleGeminiModel extends AbstractImageGenerate
         $modelId = $imageGenerateRequest->getModel();
         $referImages = $imageGenerateRequest->getReferImages();
 
-        // 如果请求中指定了模型，则动态设置
+        // 如果请求中指定了模型，则动态setting
         if (! empty($modelId)) {
             $this->api->setModelId($modelId);
         }
 
         try {
-            // 如果有参考图像，则execute图像编辑
+            // 如果有参考图像，则execute图像edit
             if (! empty($referImages)) {
-                // 取第一张参考图像进行编辑
+                // 取第一张参考图像进行edit
                 $referImage = $referImages[0];
                 $result = $this->processImageEdit($referImage, $prompt);
             } else {
@@ -193,7 +193,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
             return $result;
         } catch (Exception $e) {
-            $this->logger->warning('Google Gemini图片generate：call图片generate接口fail', ['error' => $e->getMessage()]);
+            $this->logger->warning('Google Geminiimagegenerate：callimagegenerate接口fail', ['error' => $e->getMessage()]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $e->getMessage());
         }
     }
@@ -214,21 +214,21 @@ class GoogleGeminiModel extends AbstractImageGenerate
             $response = $client->get($url);
 
             if ($response->getStatusCode() !== 200) {
-                throw new Exception("无法下载图像，HTTPstatus码: {$response->getStatusCode()}");
+                throw new Exception("无法download图像，HTTPstatus码: {$response->getStatusCode()}");
             }
 
             $imageContent = $response->getBody()->getContents();
             if (empty($imageContent)) {
-                throw new Exception('下载的图像内容为null');
+                throw new Exception('download的图像内容为null');
             }
 
             return base64_encode($imageContent);
         } catch (Exception $e) {
-            $this->logger->error('Google Gemini图生图：图像下载fail', [
+            $this->logger->error('Google Gemini图生图：图像downloadfail', [
                 'url' => $url,
                 'error' => $e->getMessage(),
             ]);
-            throw new Exception("下载图像fail: {$e->getMessage()}");
+            throw new Exception("download图像fail: {$e->getMessage()}");
         }
     }
 
@@ -273,7 +273,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                         'index' => $i,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('Google Gemini文生图：图片generatefail', [
+                    $this->logger->error('Google Gemini文生图：imagegeneratefail', [
                         'error' => $e->getMessage(),
                         'index' => $i,
                     ]);
@@ -298,7 +298,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('Google Gemini文生图：所有图片generate均fail', ['errors' => $errors]);
+            $this->logger->error('Google Gemini文生图：所有imagegenerate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 
@@ -324,7 +324,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             }
         }
 
-        throw new Exception('响应中未找到图片数据');
+        throw new Exception('响应中未找到image数据');
     }
 
     private function processGoogleGeminiRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
@@ -337,7 +337,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             try {
                 $result['imageData'] = $this->watermarkProcessor->addWatermarkToBase64($result['imageData'], $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('Google Gemini图片水印handlefail', [
+                $this->logger->error('Google Geminiimage水印handlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
@@ -374,7 +374,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
     }
 
     /**
-     * 将Google Gemini图片数据添加到OpenAI响应object中（convert为URL格式）.
+     * 将Google Geminiimage数据添加到OpenAI响应object中（convert为URL格式）.
      */
     private function addImageDataToResponseGemini(
         OpenAIFormatResponse $response,
@@ -395,7 +395,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToBase64($imageBase64, $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('GoogleGemini添加图片数据：水印handlefail', [
+                $this->logger->error('GoogleGemini添加image数据：水印handlefail', [
                     'error' => $e->getMessage(),
                 ]);
                 // 水印handlefail时use原始base64数据（但这通常不应该发生）
@@ -406,7 +406,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 'url' => $processedUrl,
             ];
 
-            // 累计usage信息 - 从usageMetadata中提取
+            // 累计usageinfo - 从usageMetadata中提取
             if (! empty($geminiResult['usageMetadata']) && is_array($geminiResult['usageMetadata'])) {
                 $usageMetadata = $geminiResult['usageMetadata'];
                 $currentUsage->addGeneratedImages(1);
@@ -414,7 +414,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 $currentUsage->completionTokens += $usageMetadata['candidatesTokenCount'] ?? 0;
                 $currentUsage->totalTokens += $usageMetadata['totalTokenCount'] ?? 0;
             } else {
-                // 如果没有usage信息，默认增加1张图片
+                // 如果没有usageinfo，默认增加1张image
                 $currentUsage->addGeneratedImages(1);
             }
 

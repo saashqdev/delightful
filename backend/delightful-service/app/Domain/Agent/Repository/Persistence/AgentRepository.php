@@ -43,7 +43,7 @@ class AgentRepository extends AbstractRepository implements AgentRepositoryInter
             $builder->where('robot_name', 'like', '%' . $agentQuery->getAgentName() . '%');
         }
 
-        // 分页query
+        // paginationquery
         $data = $this->getByPage($builder, $page, $agentQuery);
         $list = [];
         /** @var DelightfulAgentModel $agent */

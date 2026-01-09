@@ -64,7 +64,7 @@ class SeqAssembler
                 $messageInfo = $messageInfos[$seqInfo['delightful_message_id']] ?? [];
                 $messageEntity = MessageAssembler::getMessageEntity($messageInfo);
             } else {
-                // 控制message没有聊天message的status
+                // 控制message没有chatmessage的status
                 $messageEntity = null;
             }
             $seqStructs[$seqEntity->getSeqId()] = self::getClientSeqStruct($seqEntity, $messageEntity);
@@ -82,12 +82,12 @@ class SeqAssembler
         ?array $thisTimeStreamMessages = null
     ): ?ClientJsonStreamSequenceResponse {
         // todo 为了兼容旧版streammessage，需要将 content/reasoning_content/status/llm_response 字段放到最外层。
-        // todo 等前端上线后，就移除 content/reasoning_content/status/llm_response 的多余推送
+        // todo 等前端上线后，就移除 content/reasoning_content/status/llm_response 的多余push
         $response = (new ClientJsonStreamSequenceResponse())->setTargetSeqId($seqId);
         $content = $thisTimeStreamMessages['content'] ?? null;
         $reasoningContent = $thisTimeStreamMessages['reasoning_content'] ?? null;
         $llmResponse = $thisTimeStreamMessages['llm_response'] ?? null;
-        // 强行删除 $streamOptions 中的stream_app_message_id/stream字段
+        // 强行delete $streamOptions 中的stream_app_message_id/stream字段
         unset($thisTimeStreamMessages['stream_options']['stream_app_message_id'], $thisTimeStreamMessages['stream_options']['stream']);
         $streamOptions = $thisTimeStreamMessages['stream_options'] ?? null;
         // 0 会被当做 false handle，所以这里要判断是否为 null 或者 ''
@@ -98,7 +98,7 @@ class SeqAssembler
             $response->setLlmResponse($llmResponse);
         }
         if ($reasoningContent !== null && $reasoningContent !== '') {
-            // 以前的流程有 reasoning_content 时也会推送 content 为nullstring的数据
+            // 以前的process有 reasoning_content 时也会push content 为nullstring的数据
             $response->setReasoningContent($reasoningContent);
         }
         if (isset($streamOptions['status'])) {
@@ -125,18 +125,18 @@ class SeqAssembler
     }
 
     /**
-     * according to已经存在的seqEntity,generate已读/已查看/撤回/编辑等messagestatus变更type的回执message.
+     * according to已经存在的seqEntity,generate已读/已查看/withdraw/edit等messagestatus变更type的回执message.
      */
     public static function generateReceiveStatusChangeSeqEntity(DelightfulSeqEntity $originSeqEntity, ControlMessageType $messageType): DelightfulSeqEntity
     {
-        // 编辑/撤回/引用的回执,都是 refer 的是自己聊天的message id
+        // edit/withdraw/quote的回执,都是 refer 的是自己chat的message id
         if ($originSeqEntity->getSeqType() instanceof ChatMessageType) {
             $referMessageId = $originSeqEntity->getMessageId();
         } else {
             $referMessageId = $originSeqEntity->getReferMessageId();
         }
         $statusChangeSeqEntity = clone $originSeqEntity;
-        // message的receive方不需要记录收件人列表,清null该字段信息
+        // message的receive方不需要记录收件人列表,清null该字段info
         $statusChangeSeqEntity->setReceiveList(null);
         $statusChangeSeqEntity->setSeqType($messageType);
         $seqData = $statusChangeSeqEntity->toArray();
@@ -147,7 +147,7 @@ class SeqAssembler
             $seqData['content'] = Json::encode(['refer_message_ids' => [$referMessageId]], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
         if ($messageType === ControlMessageType::RevokeMessage) {
-            // 变更status为已撤回
+            // 变更status为已withdraw
             $seqData['status'] = DelightfulMessageStatus::Revoked->value;
             $seqData['content'] = Json::encode(['refer_message_id' => $referMessageId], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
@@ -155,14 +155,14 @@ class SeqAssembler
     }
 
     /**
-     * according to已经存在的seqEntity,generate已读/已查看/撤回/编辑等messagestatus变更type的回执message.
-     * @param string $referMessageId 支持指定引用的messageid,用于给receive方的其他设备推送回执,或者给发件方推送回执
+     * according to已经存在的seqEntity,generate已读/已查看/withdraw/edit等messagestatus变更type的回执message.
+     * @param string $referMessageId 支持指定quote的messageid,用于给receive方的其他设备push回执,或者给发件方push回执
      */
     public static function generateStatusChangeSeqEntity(array $seqData, string $referMessageId): DelightfulSeqEntity
     {
         $messageId = (string) IdGenerator::getSnowId();
         $time = date('Y-m-d H:i:s');
-        // 重置seq的相关id
+        // resetseq的相关id
         $seqData['id'] = $messageId;
         $seqData['message_id'] = $messageId;
         $seqData['seq_id'] = $messageId;
@@ -183,7 +183,7 @@ class SeqAssembler
         $seqData = $seqEntity->toArray();
         $messageId = (string) IdGenerator::getSnowId();
         $time = date('Y-m-d H:i:s');
-        // 重置seq的相关id
+        // resetseq的相关id
         $seqData['id'] = $messageId;
         // 序列所属user可能发生变更
         if ($receiveUserEntity !== null) {
@@ -214,7 +214,7 @@ class SeqAssembler
     {
         $messageTypeEnum = MessageAssembler::getMessageType($messageTypeString);
         if ($messageTypeEnum instanceof ChatMessageType) {
-            // 聊天message在seq表中不存储具体的message详情
+            // chatmessage在seq表中不存储具体的message详情
             return new EmptyMessage();
         }
         try {
@@ -255,7 +255,7 @@ class SeqAssembler
 
     private static function getClientSequence(DelightfulSeqEntity $seqEntity, ?DelightfulMessageEntity $messageEntity = null): ClientSequence
     {
-        // 由于编辑message可能更改messagetype，因此如果 $messageEntity 不为null，优先use $messageEntity 的messagetype
+        // 由于editmessage可能更改messagetype，因此如果 $messageEntity 不为null，优先use $messageEntity 的messagetype
         if ($messageEntity !== null) {
             $messageType = $messageEntity->getContent()->getMessageTypeEnum();
         } else {
@@ -263,15 +263,15 @@ class SeqAssembler
         }
         $messageTypeName = $messageType->getName();
         $messageStatus = $seqEntity->getStatus()?->getStatusName();
-        // 为了节约存储null间,控制message的具体内容存储在seqEntity中,聊天message的具体内容存储在messageEntity中
+        // 为了节约存储null间,控制message的具体内容存储在seqEntity中,chatmessage的具体内容存储在messageEntity中
         if ($messageType instanceof ControlMessageType) {
             // 如果是控制message,message的具体内容从seqEntity中获取
             $messageData = $seqEntity->getContent()->toArray();
         } else {
-            // 如果是聊天message,message的具体内容从messageEntity中获取
+            // 如果是chatmessage,message的具体内容从messageEntity中获取
             $messageData = $messageEntity?->getContent()->toArray();
         }
-        // 聊天statistics未读人数
+        // chatstatistics未读人数
         $receiveList = $seqEntity->getReceiveList();
         $unreadCount = $receiveList === null ? 0 : count($receiveList->getUnreadList());
         if (empty($messageData)) {
@@ -281,20 +281,20 @@ class SeqAssembler
         $messageTopicId = (string) $seqEntity->getExtra()?->getTopicId();
         // generate客户端message结构
         $clientMessageData = [
-            // 服务端generate的message唯一id，全局唯一。用于撤回、编辑message。
+            // 服务端generate的message唯一id，全局唯一。用于withdraw、editmessage。
             'delightful_message_id' => $seqEntity->getDelightfulMessageId(),
             // 客户端generate，需要ios/安卓/web三端共同确定一个generate算法。用于告知客户端，delightful_message_id的由来
             'app_message_id' => $seqEntity->getAppMessageId(),
             // send者
             'sender_id' => (string) $messageEntity?->getSenderId(),
             'topic_id' => $messageTopicId,
-            // message的小类。控制message的小类：已读回执；撤回；编辑；入群/退群；organization架构变动; 。 展示message：text,voice,img,file,video等
+            // message的小类。控制message的小类：已读回执；withdraw；edit；入群/退群；organization架构变动; 。 展示message：text,voice,img,file,video等
             'type' => $messageTypeName,
             // 回显未读人数,如果user点击了详情,再请求具体的message内容
             'unread_count' => $unreadCount,
-            // messagesend时间，与 delightful_message_id 一起，用于撤回、编辑message时的唯一性校验。
+            // messagesend时间，与 delightful_message_id 一起，用于withdraw、editmessage时的唯一性校验。
             'send_time' => $carbon->getTimestamp(),
-            // 聊天messagestatus:unread | seen | read |revoked  .对应中文释义：未读|已读|已查看（非纯文本的复杂typemessage，user点击了详情）  | 撤回
+            // chatmessagestatus:unread | seen | read |revoked  .对应中文释义：未读|已读|已查看（非纯文本的复杂typemessage，user点击了详情）  | withdraw
             'status' => $messageStatus ?: '',
             'content' => $messageData,
         ];
@@ -308,16 +308,16 @@ class SeqAssembler
             'seq_id' => $seqEntity->getSeqId(),
             // user的messageid，user下唯一。
             'message_id' => $seqEntity->getMessageId(),
-            // 本条message指向的delightful_message_id。 用于implement已读回执场景。存在引用关系时，send_msg_id字段不再return，因为send方的messageid没有改变。
+            // 本条message指向的delightful_message_id。 用于implement已读回执场景。存在quote关系时，send_msg_id字段不再return，因为send方的messageid没有改变。
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方的messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),
-            // message所属conversation窗口。 客户端可以according to此value确定message是否要提醒等。如果本地没有发现这个conversationid，主动向服务端queryconversation窗口详情
+            // message所属conversation窗口。 客户端可以according to此value确定message是否要reminder等。如果本地没有发现这个conversationid，主动向服务端queryconversation窗口详情
             'conversation_id' => $seqEntity->getConversationId(),
             // 本条message所属organization
             'organization_code' => $seqEntity->getOrganizationCode(),
             'message' => $clientSeqMessage,
-            // 编辑message的选项
+            // editmessage的选项
             MessageOptionsEnum::EDIT_MESSAGE_OPTIONS->value => $seqEntity->getExtra()?->getEditMessageOptions(),
         ];
         return new ClientSequence($clientSequenceData);

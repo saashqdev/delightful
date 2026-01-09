@@ -22,17 +22,17 @@ readonly class NoteDTO
     }
 
     /**
-     * 验证文件type是否有效.
+     * 验证filetype是否有效.
      */
     public function isValidFileType(): bool
     {
-        // 支持的文件type
+        // 支持的filetype
         $supportedTypes = ['txt', 'md', 'json'];
         return in_array(strtolower($this->fileExtension), $supportedTypes, true);
     }
 
     /**
-     * get文件扩展名.
+     * getfileextension名.
      */
     public function getFileExtension(): string
     {
@@ -40,7 +40,7 @@ readonly class NoteDTO
     }
 
     /**
-     * 生成文件名.
+     * 生成file名.
      *
      * @param null|string $generatedTitle 生成的标题，if提供则use {title}-笔记.{ext} 格式
      */

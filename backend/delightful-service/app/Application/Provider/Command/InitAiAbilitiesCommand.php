@@ -31,7 +31,7 @@ class InitAiAbilitiesCommand extends HyperfCommand
     public function configure(): void
     {
         parent::configure();
-        $this->setDescription('initializeAI能力data（从configuration文件同到data库）');
+        $this->setDescription('initializeAI能力data（从configurationfile同到data库）');
         $this->addArgument('organization_code', InputArgument::REQUIRED, 'organization编码');
     }
 
@@ -60,6 +60,6 @@ class InitAiAbilitiesCommand extends HyperfCommand
             return;
         }
 
-        $this->info('AI能力datainitialize完成');
+        $this->info('AI能力datainitializecomplete');
     }
 }

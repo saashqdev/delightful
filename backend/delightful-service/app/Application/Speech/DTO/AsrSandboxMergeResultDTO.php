@@ -41,7 +41,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * 检查合并是否完成.
+     * 检查合并是否complete.
      */
     public function isFinished(): bool
     {

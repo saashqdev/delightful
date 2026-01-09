@@ -22,7 +22,7 @@ class Template extends AbstractTemplate
     public const string DEFAULT_MESSAGE_GROUP_ID = '77a48cb1';
 
     /**
-     * message组支持的签名list.
+     * message组支持的signaturelist.
      */
     public static array $signToMessageGroup = ['灯塔引擎'];
 
@@ -33,11 +33,11 @@ class Template extends AbstractTemplate
     ];
 
     protected array $idContents = [
-        VolcengineTemplateIdEnum::ST_79E262F3->value => '您的验证码是：${verification_code}，有效期 ${timeout} 分钟。请在页面中输入验证码完成验证。如非本人操作，请忽略。',
+        VolcengineTemplateIdEnum::ST_79E262F3->value => '您的验证码是：${verification_code}，有效期 ${timeout} 分钟。请在页面中输入验证码complete验证。如非本人操作，请忽略。',
     ];
 
     /**
-     * 短message模板Id与message组的映射.
+     * 短messagetemplateId与message组的映射.
      */
     protected array $templateToGroupIdMap = [
         self::DEFAULT_MESSAGE_GROUP_ID => [
@@ -46,7 +46,7 @@ class Template extends AbstractTemplate
     ];
 
     /**
-     * 火山云短信的签名暂未支持国际化.
+     * 火山云短信的signature暂未支持国际化.
      */
     protected array $signMap = [
         '灯塔引擎' => [
@@ -75,24 +75,24 @@ class Template extends AbstractTemplate
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {
-        // 找到指定的模板variable正则解析规则. 如果没传模版id,循环正则匹配会降低匹配速度和准确度
+        // 找到指定的templatevariable正则解析规则. 如果没传模版id,循环正则匹配会降低匹配速度和准确度
         if ($templateId) {
-            // 判断模板是否存在
+            // 判断template是否存在
             if (! isset($this->idContents[$templateId])) {
-                throw new RuntimeException('未匹配到模板id:' . $templateId);
+                throw new RuntimeException('未匹配到templateid:' . $templateId);
             }
             $pregMatch = $this->variablePregAnalyse[$language][$templateId] ?? '';
-            // 如果according to短信content匹配到了模板id,就变更传入的模板id的value
+            // 如果according to短信content匹配到了templateid,就变更传入的templateid的value
             $pregMatch && [$templateId, $matchedVariables] = $this->variablePregMatch([$templateId => $pregMatch], $message);
         } elseif (isset($this->variablePregAnalyse[$language])) {
-            // 火山普通短信,且无法according totype + language 确定模板id,尝试according to短信文本content + language 确定模板id和variable
+            // 火山普通短信,且无法according totype + language 确定templateid,尝试according to短信文本content + language 确定templateid和variable
             [$templateId, $matchedVariables] = $this->variablePregMatch($this->variablePregAnalyse[$language], $message);
         }
         if (empty($templateId)) {
-            throw new RuntimeException('未匹配到模板id');
+            throw new RuntimeException('未匹配到templateid');
         }
         if (empty($matchedVariables)) {
-            throw new RuntimeException('短信的模板variable解析fail');
+            throw new RuntimeException('短信的templatevariable解析fail');
         }
         return [$templateId, $matchedVariables];
     }
@@ -103,7 +103,7 @@ class Template extends AbstractTemplate
     }
 
     /**
-     * @param array $pregVariableAnalyse ['模板id_xxx'=>'正则table达式']
+     * @param array $pregVariableAnalyse ['templateid_xxx'=>'正则table达式']
      */
     private function variablePregMatch(array $pregVariableAnalyse, string $message): array
     {

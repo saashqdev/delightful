@@ -15,7 +15,7 @@ enum SuperPermissionEnum: string
     // 全局管理员
     case GLOBAL_ADMIN = 'global_admin';
 
-    // 流程管理员,目前只有 queryToolSets 用到
+    // process管理员,目前只有 queryToolSets 用到
     case FLOW_ADMIN = 'flow_admin';
 
     // （第三方平台的）助理管理员

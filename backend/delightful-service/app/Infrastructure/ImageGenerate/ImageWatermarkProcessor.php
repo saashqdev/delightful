@@ -21,8 +21,8 @@ use Hyperf\Di\Annotation\Inject;
 use Psr\Log\LoggerInterface;
 
 /**
- * 图片水印handle器
- * 统一handle各种格式图片的水印添加.
+ * image水印handle器
+ * 统一handle各种格式image的水印添加.
  */
 class ImageWatermarkProcessor
 {
@@ -38,14 +38,14 @@ class ImageWatermarkProcessor
     protected ImageEnhancementProcessorInterface $imageEnhancementProcessor;
 
     /**
-     * 为base64格式图片添加水印.
+     * 为base64格式image添加水印.
      */
     public function addWatermarkToBase64(string $base64Image, ImageGenerateRequest $imageGenerateRequest): string
     {
         // 检测原始格式
         $originalFormat = $this->extractBase64Format($base64Image);
 
-        // 解码base64图片
+        // 解码base64image
         $imageData = $this->decodeBase64Image($base64Image);
 
         // 双重检测确保格式准确
@@ -64,13 +64,13 @@ class ImageWatermarkProcessor
             $implicitWatermark
         );
 
-        // 重新编码为base64并上传
+        // 重新编码为base64并upload
         $outputPrefix = $this->generateBase64Prefix($targetFormat);
         return $this->processBase64Images($outputPrefix . base64_encode($xmpWatermarkedData), $imageGenerateRequest);
     }
 
     /**
-     * 为URL格式图片添加水印
+     * 为URL格式image添加水印
      * 可选择return格式：URL 或 base64.
      */
     public function addWatermarkToUrl(string $imageUrl, ImageGenerateRequest $imageGenerateRequest): string
@@ -109,12 +109,12 @@ class ImageWatermarkProcessor
 
     protected function addWaterMarkHandler(string $imageData, ImageGenerateRequest $imageGenerateRequest, ?string $format = null): string
     {
-        // 检测图片格式，优先use传入的格式
+        // 检测image格式，优先use传入的格式
         $detectedFormat = $format ?? $this->detectImageFormat($imageData);
 
         $image = imagecreatefromstring($imageData);
         if ($image === false) {
-            throw new Exception('无法parseURL图片数据: ');
+            throw new Exception('无法parseURLimage数据: ');
         }
         $watermarkConfig = $imageGenerateRequest->getWatermarkConfig();
         // 添加视觉水印
@@ -133,7 +133,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 为图片资源添加水印.
+     * 为image资源添加水印.
      * @param mixed $image
      */
     private function addWatermarkToImageResource($image, WatermarkConfig $config)
@@ -141,7 +141,7 @@ class ImageWatermarkProcessor
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // create新图片资源以避免修改原图
+        // create新image资源以避免修改原图
         $watermarkedImage = imagecreatetruecolor($width, $height);
         imagecopy($watermarkedImage, $image, 0, 0, 0, 0, $width, $height);
 
@@ -199,7 +199,7 @@ class ImageWatermarkProcessor
      */
     private function calculateFontSize(int $width, int $height): int
     {
-        // according to图片大小动态调整字体大小
+        // according toimage大小动态调整字体大小
         $size = min($width, $height) / 20;
         return max(12, min(36, (int) $size));
     }
@@ -272,7 +272,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 解码base64图片数据.
+     * 解码base64image数据.
      */
     private function decodeBase64Image(string $base64Image): string
     {
@@ -283,14 +283,14 @@ class ImageWatermarkProcessor
 
         $imageData = base64_decode($base64Image);
         if ($imageData === false) {
-            throw new Exception('无效的base64图片数据');
+            throw new Exception('无效的base64image数据');
         }
 
         return $imageData;
     }
 
     /**
-     * 下载网络图片.
+     * download网络image.
      */
     private function downloadImage(string $url): string
     {
@@ -303,14 +303,14 @@ class ImageWatermarkProcessor
 
         $imageData = file_get_contents($url, false, $context);
         if ($imageData === false) {
-            throw new Exception('无法下载图片: ' . $url);
+            throw new Exception('无法downloadimage: ' . $url);
         }
 
         return $imageData;
     }
 
     /**
-     * 输出图片（无损版本）.
+     * 输出image（无损版本）.
      * @param mixed $image
      * @param string $format 目标格式 (png/jpeg/webp/gif)
      */
@@ -439,7 +439,7 @@ class ImageWatermarkProcessor
 
             $fileLink = $fileDomainService->getLink($organizationCode, $uploadFile->getKey(), StorageBucketType::Public);
 
-            // 设置object元数据作为备用方案
+            // settingobject元数据作为备用方案
             $validityPeriod = $imageGenerateRequest->getValidityPeriod();
             $metadataContent = [];
             if ($validityPeriod !== null) {

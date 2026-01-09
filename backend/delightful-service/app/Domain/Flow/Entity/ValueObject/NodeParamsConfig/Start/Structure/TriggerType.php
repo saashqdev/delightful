@@ -18,7 +18,7 @@ enum TriggerType: int
     // 新message时
     case ChatMessage = 1;
 
-    // 打开聊天窗口
+    // 打开chat窗口
     case OpenChatWindow = 2;
 
     // 定时
@@ -40,10 +40,10 @@ enum TriggerType: int
     {
         $triggerType = TriggerType::None;
         if ($seqType instanceof ChatMessageType) {
-            // 聊天触发
+            // chat触发
             $triggerType = TriggerType::ChatMessage;
         } elseif ($seqType === ControlMessageType::OpenConversation) {
-            // 打开聊天窗口触发
+            // 打开chat窗口触发
             $triggerType = TriggerType::OpenChatWindow;
         } elseif ($seqType === ControlMessageType::AddFriendSuccess) {
             // 添加好友触发

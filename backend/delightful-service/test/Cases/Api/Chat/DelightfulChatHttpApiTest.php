@@ -15,7 +15,7 @@ use HyperfTest\Cases\Api\AbstractHttpTest;
 class DelightfulChatHttpApiTest extends AbstractHttpTest
 {
     /**
-     * testsession窗口中的聊天补全功能.
+     * testsession窗口中的chat补全功能.
      */
     public function testConversationChatCompletions(): void
     {
@@ -78,7 +78,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
     }
 
     /**
-     * testsession窗口中的聊天补全功能 - parameter验证fail.
+     * testsession窗口中的chat补全功能 - parameter验证fail.
      */
     public function testConversationChatCompletionsWithInvalidParams(): void
     {
@@ -110,7 +110,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
     }
 
     /**
-     * testsession窗口中的聊天补全功能 - authorization验证fail.
+     * testsession窗口中的chat补全功能 - authorization验证fail.
      */
     public function testConversationChatCompletionsWithInvalidAuth(): void
     {

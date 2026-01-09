@@ -35,7 +35,7 @@ class FileGetLinkBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'according to文件 key get文件下载的签名URL。仅能get本流程产生的文件';
+        return 'according tofile key getfiledownload的signatureURL。仅能get本process产生的file';
     }
 
     public function getCallback(): ?Closure
@@ -84,8 +84,8 @@ class FileGetLinkBuiltInTool extends AbstractBuiltInTool
         "key": {
             "type": "string",
             "key": "key",
-            "title": "文件key",
-            "description": "文件key",
+            "title": "filekey",
+            "description": "filekey",
             "required": null,
             "value": null,
             "encryption": false,
@@ -121,8 +121,8 @@ JSON,
         "url": {
             "type": "string",
             "key": "url",
-            "title": "文件url",
-            "description": "文件可访问链接",
+            "title": "fileurl",
+            "description": "file可访问链接",
             "required": null,
             "value": null,
             "encryption": false,

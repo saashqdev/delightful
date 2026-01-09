@@ -41,7 +41,7 @@ class VisionTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '提供视觉能力。用于识别user对图片的意图，并return识别result';
+        return '提供视觉能力。用于识别user对image的意图，并return识别result';
     }
 
     /**
@@ -128,7 +128,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "string",
             "key": "intent",
             "title": "意图",
-            "description": "意图。user对图片的意图",
+            "description": "意图。user对image的意图",
             "required": null,
             "value": null,
             "encryption": false,
@@ -139,8 +139,8 @@ class VisionTool extends AbstractBuiltInTool
         "image_url": {
             "type": "string",
             "key": "image_url",
-            "title": "图片地址",
-            "description": "图片地址。远程图片地址",
+            "title": "image地址",
+            "description": "image地址。远程image地址",
             "required": null,
             "value": null,
             "encryption": false,
@@ -151,8 +151,8 @@ class VisionTool extends AbstractBuiltInTool
         "image_urls": {
             "type": "array",
             "key": "image_urls",
-            "title": "文件",
-            "description": "图片链接list。多个图片时use",
+            "title": "file",
+            "description": "image链接list。多个image时use",
             "required": null,
             "value": null,
             "encryption": false,
@@ -160,8 +160,8 @@ class VisionTool extends AbstractBuiltInTool
             "items": {
                 "type": "string",
                 "key": "image_urls",
-                "title": "图片地址",
-                "description": "图片地址。远程图片地址",
+                "title": "image地址",
+                "description": "image地址。远程image地址",
                 "required": null,
                 "value": null,
                 "encryption": false,
@@ -235,7 +235,7 @@ JSON, true)));
 
 1. 优先理解user的意图，始终use与user相同的语言回答
 2. 提供简洁明了的直接回答，直接满足user的主要issue
-3. 再对图片content进行多维度详细分析，include但不限于：
+3. 再对imagecontent进行多维度详细分析，include但不限于：
    - 主体content识别：人物、物体、场景、文字等
    - 视觉特征：颜色、构图、光线、质量等
    - 语义info：活动、情绪、关系、背景故事等
@@ -245,8 +245,8 @@ JSON, true)));
 4. 分析格式要求：
    - 对于重要分析result，use结构化JSON格式呈现，如：{"类别":"xx", "主体":"xx", "特征":["xx","xx"]}
    - 对于不确定content，明确table明推测性质，for example："可能是..."
-   - 如图片质量较低，指出限制因素并尽力分析
-   - 对于多图分析，分别标记图片序号进行解析，并总结其关联性
+   - 如image质量较低，指出限制因素并尽力分析
+   - 对于多图分析，分别markimage序号进行解析，并总结其关联性
    
 5. 注意事项：
    - 避免对敏感content做主观评判
@@ -312,7 +312,7 @@ JSON, true)));
                 "type": "string",
                 "key": "role",
                 "sort": 0,
-                "title": "角色",
+                "title": "role",
                 "description": "",
                 "required": null,
                 "value": null,

@@ -42,7 +42,7 @@ class FluxAPI
     }
 
     /**
-     * 提交image生成任务
+     * submitimage生成task
      */
     public function submitTask(string $prompt, string $size, string $mode = 'flux1-dev'): array
     {
@@ -63,7 +63,7 @@ class FluxAPI
     }
 
     /**
-     * query任务结果.
+     * querytask结果.
      */
     public function getTaskResult(string $jobId): array
     {
@@ -82,7 +82,7 @@ class FluxAPI
     }
 
     /**
-     * get账户information.
+     * getaccountinformation.
      */
     public function getAccountInfo(): array
     {

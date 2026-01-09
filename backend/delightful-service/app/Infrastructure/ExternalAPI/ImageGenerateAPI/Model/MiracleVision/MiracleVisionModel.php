@@ -74,13 +74,13 @@ class MiracleVisionModel extends AbstractImageGenerate
             $this->validateApiResponse($result);
 
             $taskId = $result['data']['result']['id'];
-            $this->logger->info('美图超清转换：task提交success', [
+            $this->logger->info('美图超清转换：tasksubmitsuccess', [
                 'task_id' => $taskId,
             ]);
 
             return $taskId;
         } catch (Exception $e) {
-            $this->logger->error('美图超清转换：task提交exception', [
+            $this->logger->error('美图超清转换：tasksubmitexception', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -173,7 +173,7 @@ class MiracleVisionModel extends AbstractImageGenerate
         switch ($status) {
             case self::STATUS_SUCCESS:
                 if (empty($result['data']['result']['urls'])) {
-                    $this->logger->error('美图超清转换：task完成但缺少resultURL', ['response' => $result]);
+                    $this->logger->error('美图超清转换：taskcomplete但缺少resultURL', ['response' => $result]);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
                 }
                 $response->setFinishStatus(true);
@@ -222,16 +222,16 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private function validateImageType(string $url): void
     {
-        $this->logger->info('美图超清转换：开始验证图片type', ['url' => $url]);
+        $this->logger->info('美图超清转换：开始验证imagetype', ['url' => $url]);
 
         $type = FileType::getType($url);
         if (empty($type)) {
-            $this->logger->error('美图超清转换：无法识别图片type', ['url' => $url]);
+            $this->logger->error('美图超清转换：无法识别imagetype', ['url' => $url]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
         if (! in_array(strtoupper($type), self::ALLOWED_IMAGE_TYPES, true)) {
-            $this->logger->error('美图超清转换：图片type不支持', [
+            $this->logger->error('美图超清转换：imagetype不支持', [
                 'url' => $url,
                 'type' => $type,
                 'allowed_types' => self::ALLOWED_IMAGE_TYPES,
@@ -239,7 +239,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::UNSUPPORTED_IMAGE_FORMAT);
         }
 
-        $this->logger->info('美图超清转换：图片type验证通过', ['type' => $type]);
+        $this->logger->info('美图超清转换：imagetype验证通过', ['type' => $type]);
     }
 
     private function validateApiResponse(array $result): void
@@ -263,7 +263,7 @@ class MiracleVisionModel extends AbstractImageGenerate
         $this->logger->info('美图API：响应数据验证通过');
     }
 
-    // todo xhy 目前只能强制return 26 ，因为无法对图片场景做匹配
+    // todo xhy 目前只能强制return 26 ，因为无法对image场景做匹配
     private function determineStyleId(array $styles): int
     {
         if (empty($styles['data']['style_list'])) {

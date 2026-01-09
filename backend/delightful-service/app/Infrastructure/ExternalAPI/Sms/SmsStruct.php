@@ -40,7 +40,7 @@ class SmsStruct
     public ?string $content = null;
 
     /**
-     * 短信签名.
+     * 短信signature.
      * @example 灯塔引擎
      */
     public SignEnum $sign;
@@ -51,12 +51,12 @@ class SmsStruct
     public ?string $language = null;
 
     /**
-     * 短信的默认语种,支持业务方自定义. 不传给默认valuezh_CN.
+     * 短信的默认语种,支持业务方customize. 不传给默认valuezh_CN.
      */
     public ?string $defaultLanguage = null;
 
     /**
-     * 短信variable的模板id.
+     * 短信variable的templateid.
      */
     public ?string $templateId = null;
 

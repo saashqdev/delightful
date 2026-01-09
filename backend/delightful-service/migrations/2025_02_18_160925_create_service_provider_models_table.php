@@ -24,11 +24,11 @@ return new class extends Migration {
             $table->string('name', 50)->comment('模型名称');
             $table->string('model_version', 50)->comment('模型在服务商下的名称');
             $table->string('model_id', 50)->comment('模型true实ID');
-            $table->string('category')->comment('模型分类：llm/vlm');
+            $table->string('category')->comment('模型category：llm/vlm');
             $table->tinyInteger('model_type')->comment('具体type,用于分组用');
             $table->json('config')->comment('模型的configurationinformation');
             $table->string('description', 255)->nullable()->comment('模型description');
-            $table->integer('sort')->default(0)->comment('排序');
+            $table->integer('sort')->default(0)->comment('sort');
             $table->string('icon')->default('')->comment('图标');
             $table->string('organization_code')->comment('organization编码');
             $table->tinyInteger('status')->default(0)->comment('status：0-未启用，1-启用');

@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('service_provider_configs', function (Blueprint $table) {
             if (! Schema::hasColumn('service_provider_configs', 'sort')) {
-                $table->integer('sort')->default(0)->comment('排序field，数值越大越靠前')->after('translate');
+                $table->integer('sort')->default(0)->comment('sortfield，数值越大越靠前')->after('translate');
             }
         });
     }

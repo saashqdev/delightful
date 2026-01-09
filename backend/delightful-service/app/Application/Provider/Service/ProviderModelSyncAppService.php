@@ -110,7 +110,7 @@ class ProviderModelSyncAppService
             // 6. syncmodel到database
             $this->syncModelsToDatabase($dataIsolation, $providerConfigEntity, $models, $language);
 
-            $this->logger->info('从外部APIsyncmodel完成', [
+            $this->logger->info('从外部APIsyncmodelcomplete', [
                 'config_id' => $providerConfigEntity->getId(),
                 'model_count' => count($models),
             ]);
@@ -286,7 +286,7 @@ class ProviderModelSyncAppService
     ): void {
         $saveDTO = $this->modelToReqDTO($dataIsolation, $modelData, $providerConfigEntity, $language);
 
-        // 保存model
+        // savemodel
         $this->providerModelDomainService->saveModel($dataIsolation, $saveDTO);
 
         $this->logger->info('create新model', [
@@ -310,7 +310,7 @@ class ProviderModelSyncAppService
         $saveDTO->setId($existingModel->getId());
         $saveDTO->setStatus($existingModel->getStatus()); // 保持原有status
 
-        // 保存model
+        // savemodel
         $this->providerModelDomainService->saveModel($dataIsolation, $saveDTO);
 
         $this->logger->debug('updatemodel', [
@@ -336,7 +336,7 @@ class ProviderModelSyncAppService
                 $iconUrl = $uploadFile->getKey();
             }
         } catch (Throwable $e) {
-            $this->logger->error('上传文件fail:' . $e->getMessage(), ['icon_url' => $iconUrl]);
+            $this->logger->error('uploadfilefail:' . $e->getMessage(), ['icon_url' => $iconUrl]);
         }
 
         $saveDTO = new SaveProviderModelDTO();

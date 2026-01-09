@@ -56,8 +56,8 @@ class FileGetPreSignedUrlBuiltInToolTest extends ExecuteManagerBaseTest
             "name": {
                 "type": "string",
                 "key": "name",
-                "title": "文件名",
-                "description": "文件名称",
+                "title": "file名",
+                "description": "file名称",
                 "required": null,
                 "value": {
                     "type": "const",

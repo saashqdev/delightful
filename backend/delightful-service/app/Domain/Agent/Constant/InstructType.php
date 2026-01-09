@@ -36,7 +36,7 @@ enum InstructType: int
     }
 
     /**
-     * get所有指令type及其国际化标签.
+     * get所有指令type及其国际化tag.
      * @return array<string, int> returntypename和对应的value
      */
     public static function getTypeOptions(): array
@@ -68,7 +68,7 @@ enum InstructType: int
      */
     public static function requiresContent(int $type, ?int $displayType = null, ?int $instructionType = null): bool
     {
-        // 如果是流程指令，则不可configuration指令content
+        // 如果是process指令，则不可configuration指令content
         if ($instructionType == InstructCategory::FLOW) {
             return false;
         }
@@ -121,7 +121,7 @@ enum InstructType: int
             }
         }
 
-        // 流程指令不可configuration 发送指令检测
+        // process指令不可configuration 发送指令检测
         if ($instructionType == InstructCategory::FLOW && isset($item['send_directly']) && $item['send_directly']) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.send_directly_only_allow_flow_instruction');
         }

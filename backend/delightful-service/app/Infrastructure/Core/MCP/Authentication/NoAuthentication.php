@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\MCP\Authentication;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * 无认证implement.
+ * 无authenticationimplement.
  * whensystemdesign要求有身份验证但不need实际验证时use.
  */
 class NoAuthentication implements AuthenticationInterface

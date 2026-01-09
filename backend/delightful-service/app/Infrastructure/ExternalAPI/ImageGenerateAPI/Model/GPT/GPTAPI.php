@@ -42,7 +42,7 @@ class GPTAPI
     }
 
     /**
-     * get账户information.
+     * getaccountinformation.
      */
     public function getAccountInfo(): array
     {
@@ -59,7 +59,7 @@ class GPTAPI
     }
 
     /**
-     * 提交GPT4oimage生成任务
+     * submitGPT4oimage生成task
      */
     public function submitGPT4oTask(string $prompt, array $referImages = [], ?string $hookUrl = null): array
     {
@@ -80,7 +80,7 @@ class GPTAPI
     }
 
     /**
-     * queryGPT4o任务结果.
+     * queryGPT4otask结果.
      */
     public function getGPT4oTaskResult(string $jobId): array
     {

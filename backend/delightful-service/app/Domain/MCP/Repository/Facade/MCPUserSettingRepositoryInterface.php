@@ -47,7 +47,7 @@ interface MCPUserSettingRepositoryInterface
     public function queries(MCPDataIsolation $dataIsolation, MCPUserSettingQuery $query, Page $page): array;
 
     /**
-     * 保存MCPusersetting.
+     * saveMCPusersetting.
      */
     public function save(MCPDataIsolation $dataIsolation, MCPUserSettingEntity $entity): MCPUserSettingEntity;
 

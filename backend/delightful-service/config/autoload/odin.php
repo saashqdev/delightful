@@ -12,7 +12,7 @@ use Hyperf\Odin\Model\OpenAIModel;
 
 use function Hyperf\Support\env;
 
-// 递归handle配置value中的环境variable
+// 递归handleconfigurationvalue中的环境variable
 function processConfigValue(&$value): void
 {
     if (is_string($value)) {
@@ -32,7 +32,7 @@ function processConfigValue(&$value): void
     // 其他type（如 int, bool 等）：保留原value，不进行parse
 }
 
-// handle配置中的环境variable
+// handleconfiguration中的环境variable
 function processModelConfig(&$modelItem, string $modelName): void
 {
     // handle模型value
@@ -47,7 +47,7 @@ function processModelConfig(&$modelItem, string $modelName): void
         $modelItem['model'] = $modelName;
     }
 
-    // handle配置value
+    // handleconfigurationvalue
     if (isset($modelItem['config']) && is_array($modelItem['config'])) {
         foreach ($modelItem['config'] as &$item) {
             processConfigValue($item);
@@ -205,16 +205,16 @@ if (env('AWS_CLAUDE_ENABLED', false)) {
     ];
 }
 
-// load默认模型配置（优先级最低）
+// load默认模型configuration（优先级最低）
 $models = [];
 
-// load默认模型配置
+// load默认模型configuration
 foreach ($envModelConfigs as $modelKey => $config) {
     processModelConfig($config, $modelKey);
     $models[$modelKey] = $config;
 }
 
-// load odin_models.json 配置（优先级更高，会override默认配置）
+// load odin_models.json configuration（优先级更高，会override默认configuration）
 if (file_exists(BASE_PATH . '/odin_models.json')) {
     $customModels = json_decode(file_get_contents(BASE_PATH . '/odin_models.json'), true);
     if (is_array($customModels)) {
@@ -247,13 +247,13 @@ return [
             ],
             'custom_error_mapping_rules' => [],
             'logging' => [
-                // 日志字段白名单配置
-                // 如果为nullarray或未配置，则打印所有字段
-                // 如果配置了字段列表，则只打印指定的字段
+                // log字段白名单configuration
+                // 如果为nullarray或未configuration，则打印所有字段
+                // 如果configuration了字段列表，则只打印指定的字段
                 // 支持嵌套字段，use点语法如 'args.messages'
                 // 注意：messages 和 tools 字段不在白名单中，不会被打印
                 'whitelist_fields' => [
-                    // 基本请求信息
+                    // 基本请求info
                     'request_id',                  // 请求ID
                     'model_id',                    // 模型ID
                     'model',                       // 模型名称
@@ -261,7 +261,7 @@ return [
                     'url',                         // 请求URL
                     'status_code',                 // 响应status码
 
-                    // options 信息
+                    // options info
                     'options.headers',
                     'options.json.model',
                     'options.json.temperature',
@@ -291,7 +291,7 @@ return [
                     'args.stop',                   // 停止词
                     'args.seed',                   // 随机种子
 
-                    // Token预估信息
+                    // Token预估info
                     'token_estimate',              // Token估算详情
                     'token_estimate.input_tokens', // 估算输入tokens
                     'token_estimate.output_tokens', // 估算输出tokens
@@ -300,7 +300,7 @@ return [
                     'choices.0.finish_reason',     // complete原因
                     'choices.0.index',             // 选择索引
 
-                    // error信息
+                    // errorinfo
                     'error',                       // error详情
                     'error.type',                  // errortype
                     'error.message',               // errormessage（不contain具体内容）
@@ -310,7 +310,7 @@ return [
                     'id',                         // 请求ID
                     'object',                     // objecttype
                     'system_fingerprint',         // 系统指纹
-                    'performance_flag',            // 性能标记（慢请求标识）
+                    'performance_flag',            // performancemark（慢请求标识）
 
                     // 注意：以下字段被排除，不会打印
                     // - args.messages (usermessage内容)
@@ -321,7 +321,7 @@ return [
                 ],
                 // 是否启用字段白名单filter，默认true（启用filter）
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
-                // 最大string长度限制，超过此长度的string将被替换为 [Long Text]，设置为 0 表示不限制
+                // 最大string长度限制，超过此长度的string将被替换为 [Long Text]，setting为 0 表示不限制
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),
             ],
             'network_retry_count' => 1,
@@ -330,8 +330,8 @@ return [
         // 全局模型 options，可被模型本身的 options override
         'model_options' => [
             'error_mapping_rules' => [
-                // 示例：自定义error映射
-                // '自定义error关键词' => \Hyperf\Odin\Exception\LLMException\LLMTimeoutError::class,
+                // 示例：customizeerror映射
+                // 'customizeerror关键词' => \Hyperf\Odin\Exception\LLMException\LLMTimeoutError::class,
             ],
         ],
         'model_fixed_temperature' => [

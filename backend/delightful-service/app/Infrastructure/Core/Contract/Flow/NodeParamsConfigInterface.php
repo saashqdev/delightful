@@ -17,7 +17,7 @@ interface NodeParamsConfigInterface
     public function validate(): array;
 
     /**
-     * get节点configuration模板.
+     * get节点configurationtemplate.
      */
     public function generateTemplate(): void;
 

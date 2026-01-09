@@ -21,11 +21,11 @@ class FileBoxToolSet extends AbstractBuiltInToolSet
 
     public function getName(): string
     {
-        return '文件盒子';
+        return 'file盒子';
     }
 
     public function getDescription(): string
     {
-        return '文件盒子based on合规和隐私保护统一存储和管理userupload的image、document、表格等常用文件';
+        return 'file盒子based on合规和隐私保护统一存储和管理userupload的image、document、表格等常用file';
     }
 }

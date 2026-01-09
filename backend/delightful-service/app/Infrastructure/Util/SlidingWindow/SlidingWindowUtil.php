@@ -45,7 +45,7 @@ class SlidingWindowUtil
         $latestRequestRedisKey = $debounceKey . ':last_req';
 
         try {
-            // 标记为最新请求
+            // mark为最新请求
             $this->redis->set($latestRequestRedisKey, $uniqueRequestId, ['EX' => $totalExpirationSeconds]);
 
             // 等待验证time

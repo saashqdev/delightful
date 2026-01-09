@@ -16,7 +16,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 interface OrganizationRepositoryInterface
 {
     /**
-     * 保存organization.
+     * saveorganization.
      */
     public function save(OrganizationEntity $organizationEntity): OrganizationEntity;
 

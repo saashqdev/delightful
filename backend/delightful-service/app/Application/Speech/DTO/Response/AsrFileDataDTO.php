@@ -10,8 +10,8 @@ namespace App\Application\Speech\DTO\Response;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 
 /**
- * ASR 文件data传输object
- * 用于在聊天message中引用文件.
+ * ASR filedata传输object
+ * 用于在chatmessage中quotefile.
  */
 readonly class AsrFileDataDTO
 {
@@ -28,7 +28,7 @@ readonly class AsrFileDataDTO
     /**
      * 从 TaskFileEntity create DTO.
      *
-     * @param TaskFileEntity $fileEntity 任务文件实体
+     * @param TaskFileEntity $fileEntity taskfile实体
      * @param string $workspaceRelativePath 工作区相对路径
      */
     public static function fromTaskFileEntity(TaskFileEntity $fileEntity, string $workspaceRelativePath): self
@@ -44,7 +44,7 @@ readonly class AsrFileDataDTO
     }
 
     /**
-     * 转换为array格式，用于聊天message.
+     * 转换为array格式，用于chatmessage.
      */
     public function toArray(): array
     {

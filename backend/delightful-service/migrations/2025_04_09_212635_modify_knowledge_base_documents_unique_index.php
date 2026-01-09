@@ -32,7 +32,7 @@ return new class extends Migration {
             // delete新的唯一索引
             $table->dropUnique('unique_code_version');
 
-            // 恢复旧的唯一索引
+            // restore旧的唯一索引
             $table->unique(['code', 'version'], 'unique_code_version');
         });
     }

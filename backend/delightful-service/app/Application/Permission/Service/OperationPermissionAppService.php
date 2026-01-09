@@ -93,7 +93,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
             $departmentIds = array_merge($departmentIds, $userDepartmentIds);
         }
         $departments = $this->delightfulDepartmentDomainService->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
-        // get群组information
+        // getgroupinformation
         $groups = $this->delightfulGroupDomainService->getGroupsInfoByIds($groupIds, $contactDataIsolation, true);
 
         return [
@@ -105,7 +105,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * 对资源进行授权.
+     * 对资源进行authorization.
      * @param array<OperationPermissionEntity> $operationPermissions
      */
     public function resourceAccess(Authenticatable $authorization, ResourceType $resourceType, string $resourceId, array $operationPermissions): void

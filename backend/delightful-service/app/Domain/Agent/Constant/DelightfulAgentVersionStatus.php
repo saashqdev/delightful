@@ -9,10 +9,10 @@ namespace App\Domain\Agent\Constant;
 
 enum DelightfulAgentVersionStatus: int
 {
-    // 审批流status
-    case APPROVAL_PENDING = 1; // 待审批
-    case APPROVAL_IN_PROGRESS = 2; // 审批中
-    case APPROVAL_PASSED = 3; // 审批通过
+    // approval流status
+    case APPROVAL_PENDING = 1; // 待approval
+    case APPROVAL_IN_PROGRESS = 2; // approval中
+    case APPROVAL_PASSED = 3; // approval通过
     case APPROVAL_REJECTED = 4; // 已驳回
 
     // AI Agentpublish (企业)

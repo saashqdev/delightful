@@ -54,10 +54,10 @@ class RoleApi extends AbstractPermissionApi
         // 转换为仓储filterarray
         $filters = $query->toFilters();
 
-        // query角色list
+        // queryrolelist
         $result = $this->roleAppService->queries($dataIsolation, $page, $filters);
 
-        // 批量getuser详情（每个角色仅取前5个userId）
+        // 批量getuser详情（每个role仅取前5个userId）
         $contactIsolation = ContactDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -110,10 +110,10 @@ class RoleApi extends AbstractPermissionApi
             $authorization->getId()
         );
 
-        // get角色详情
+        // getrole详情
         $roleEntity = $this->roleAppService->show($dataIsolation, $id);
 
-        // get角色关联的userinfo
+        // getrole关联的userinfo
         $contactIsolation = ContactDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -145,7 +145,7 @@ class RoleApi extends AbstractPermissionApi
             throw new InvalidArgumentException('请求parameter验证fail: ' . implode(', ', $errors));
         }
 
-        // create角色实体
+        // createrole实体
         $roleEntity = new RoleEntity();
         $roleEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $roleEntity->setCreatedUid($dataIsolation->getCurrentUserId());
@@ -174,7 +174,7 @@ class RoleApi extends AbstractPermissionApi
             $authorization->getId()
         );
 
-        // get角色ID
+        // getroleID
         $roleId = (int) $this->request->route('id');
 
         // create并验证请求DTO
@@ -188,7 +188,7 @@ class RoleApi extends AbstractPermissionApi
             throw new InvalidArgumentException('至少需要提供一个要update的field');
         }
 
-        // get现有角色
+        // get现有role
         $roleEntity = $this->roleAppService->show($dataIsolation, $roleId);
 
         $updateFields = $requestDTO->getUpdateFields();
@@ -222,7 +222,7 @@ class RoleApi extends AbstractPermissionApi
             $authorization->getId()
         );
 
-        // delete角色
+        // deleterole
         $this->roleAppService->destroy($dataIsolation, $id);
 
         // return空array以触发统一的 ApiResponse 封装

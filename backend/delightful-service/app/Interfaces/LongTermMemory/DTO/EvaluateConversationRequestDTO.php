@@ -11,12 +11,12 @@ use App\Domain\Chat\Entity\ValueObject\LLMModelEnum;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 评估对话内容请求DTO.
+ * 评估conversation内容请求DTO.
  */
 class EvaluateConversationRequestDTO extends AbstractDTO
 {
     /**
-     * 对话内容.
+     * conversation内容.
      */
     public string $conversationContent = '';
 

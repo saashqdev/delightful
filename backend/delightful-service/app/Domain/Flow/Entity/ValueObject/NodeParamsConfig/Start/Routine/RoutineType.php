@@ -40,7 +40,7 @@ enum RoutineType: string
     case WeekdayRepeat = 'weekday_repeat';
 
     /**
-     * 自定义重复.
+     * customize重复.
      */
     case CustomRepeat = 'custom_repeat';
 

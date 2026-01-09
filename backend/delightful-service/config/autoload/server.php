@@ -47,7 +47,7 @@ $servers = [
         ],
     ],
 ];
-// ！！！注意，开了定时任务的 pod 就不启动 websocket 服务了，只启动 http 服务
+// ！！！注意，开了定时task的 pod 就不启动 websocket 服务了，只启动 http 服务
 $enableCrontab = (bool) env('CRONTAB_ENABLE', true);
 $enableCrontab && $servers = [$servers[0]];
 return [

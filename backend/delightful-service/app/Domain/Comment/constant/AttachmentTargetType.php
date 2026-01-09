@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Comment\constant;
 
 /**
- * 附件来source.
+ * attachment来source.
  */
 class AttachmentTargetType
 {
@@ -23,7 +23,7 @@ class AttachmentTargetType
     public const TODO = 1;
 
     /**
-     * 评论.
+     * comment.
      */
     public const COMMENT = 2;
 }

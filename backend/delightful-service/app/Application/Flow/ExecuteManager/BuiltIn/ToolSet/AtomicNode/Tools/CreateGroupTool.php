@@ -36,7 +36,7 @@ class CreateGroupTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'create一个具有指定人员的群聊天';
+        return 'create一个具有指定人员的group chat天';
     }
 
     public function getCallback(): ?Closure
@@ -210,7 +210,7 @@ class CreateGroupTool extends AbstractBuiltInTool
             "type": "string",
             "key": "opening_speech",
             "title": "开场白",
-            "description": "已当前助理的身份发送一次群聊的开场白。默认不传该value，除非指定需要发送开场白。",
+            "description": "已当前助理的身份发送一次group chat的开场白。默认不传该value，除非指定需要发送开场白。",
             "required": null,
             "value": null,
             "encryption": false,

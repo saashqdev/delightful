@@ -86,13 +86,13 @@ class TokenTextSplitter extends TextSplitter
     {
         $text = $this->ensureUtf8Encoding($text);
 
-        // 保存原始文本，用于还原标签
+        // save原始文本，用于还原tag
         $originalText = $text;
 
         // 1. 先把原文中的0x00替换成0x000x00
         $text = str_replace("\x00", "\x00\x00", $text);
 
-        // 2. 把标签替换成0x00
+        // 2. 把tag替换成0x00
         $text = preg_replace('/<DelightfulCompressibleContent.*?<\/DelightfulCompressibleContent>/s', "\x00", $text);
 
         // 3. 分割文本
@@ -118,7 +118,7 @@ class TokenTextSplitter extends TextSplitter
         }
 
         // 4. 还原文本
-        // 先get所有标签
+        // 先get所有tag
         preg_match_all('/<DelightfulCompressibleContent.*?<\/DelightfulCompressibleContent>/s', $originalText, $matches);
         $tags = $matches[0];
         $tagIndex = 0;
@@ -126,7 +126,7 @@ class TokenTextSplitter extends TextSplitter
         return array_map(function ($chunk) use ($tags, &$tagIndex) {
             // 还原0x000x00为0x00
             $chunk = str_replace("\x00\x00", "\x00", $chunk);
-            // 还原标签
+            // 还原tag
             return preg_replace_callback('/\x00/', function () use ($tags, &$tagIndex) {
                 return $tags[$tagIndex++] ?? '';
             }, $chunk);
@@ -391,7 +391,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 检测文件content的编码
+     * 检测filecontent的编码
      */
     private function detectEncoding(string $content): string
     {

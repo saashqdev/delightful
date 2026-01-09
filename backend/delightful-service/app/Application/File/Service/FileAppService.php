@@ -122,7 +122,7 @@ class FileAppService extends AbstractAppService
 
         $keys = array_column($files, 'key');
 
-        // 按organization编码分组文件 keys，参考 ProviderAppService 做法
+        // 按organization编码分组file keys，参考 ProviderAppService 做法
         $keysByOrg = [];
         foreach ($keys as $key) {
             if (empty($key)) {
@@ -135,7 +135,7 @@ class FileAppService extends AbstractAppService
             $keysByOrg[$keyOrganizationCode][] = $key;
         }
 
-        // 批量get各organization的文件链接
+        // 批量get各organization的file链接
         $allFileLinks = [];
         foreach ($keysByOrg as $orgCode => $orgKeys) {
             $links = $this->fileDomainService->getLinks($orgCode, $orgKeys);
@@ -161,10 +161,10 @@ class FileAppService extends AbstractAppService
         $defaultFileBusinessType = DefaultFileBusinessType::from($businessType);
         $organizationCode = $authorization->getOrganizationCode();
 
-        // check文件是否已经存在于该业务type下
+        // checkfile是否已经存在于该业务type下
         $existingFile = $this->defaultFileDomainService->getByKeyAndBusinessType($fileKey, $businessType, $organizationCode);
         if ($existingFile) {
-            // 如果文件已存在，直接return文件链接
+            // 如果file已存在，直接returnfile链接
             return $this->fileDomainService->getLink($organizationCode, $fileKey)->getUrl();
         }
 
@@ -191,18 +191,18 @@ class FileAppService extends AbstractAppService
 
         $organizationCode = $authorization->getOrganizationCode();
 
-        // get文件info
+        // getfileinfo
         $fileEntity = $this->defaultFileDomainService->getByKey($fileKey);
         if (! $fileEntity) {
             return false;
         }
 
-        // check是否为默认文件
+        // check是否为默认file
         if ($fileEntity->getFileType() === DefaultFileType::DEFAULT->value) {
             return false;
         }
 
-        // delete文件record
+        // deletefilerecord
         return $this->defaultFileDomainService->deleteByKey($fileKey, $organizationCode);
     }
 
@@ -213,7 +213,7 @@ class FileAppService extends AbstractAppService
     public function getStsTemporaryCredential(Authenticatable $authorization, string $storage, string $dir = '', int $expires = 3600, bool $autoBucket = true): array
     {
         $organizationCode = $this->getOrganizationCode($authorization);
-        // call文件servicegetSTS Token
+        // callfileservicegetSTS Token
         $data = $this->fileDomainService->getStsTemporaryCredential(
             $organizationCode,
             StorageBucketType::from($storage),
@@ -240,7 +240,7 @@ class FileAppService extends AbstractAppService
 
     public function getStsTemporaryCredentialV2(string $organizationCode, string $storage, string $dir = '', int $expires = 3600, bool $autoBucket = true): array
     {
-        // call文件servicegetSTS Token
+        // callfileservicegetSTS Token
         $data = $this->fileDomainService->getStsTemporaryCredential(
             $organizationCode,
             StorageBucketType::from($storage),

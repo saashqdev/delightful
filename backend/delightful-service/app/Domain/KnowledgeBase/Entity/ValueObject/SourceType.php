@@ -10,7 +10,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 enum SourceType: int
 {
     /**
-     * 外部文件.
+     * 外部file.
      */
     case EXTERNAL_FILE = 1;
 }

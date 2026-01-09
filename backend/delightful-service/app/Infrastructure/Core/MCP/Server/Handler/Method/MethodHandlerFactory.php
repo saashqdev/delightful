@@ -75,7 +75,7 @@ class MethodHandlerFactory
     }
 
     /**
-     * 注册自定义method处理器.
+     * 注册customizemethod处理器.
      *
      * @param string $method method名
      * @param class-string<MethodHandlerInterface> $handlerClass 处理器类名

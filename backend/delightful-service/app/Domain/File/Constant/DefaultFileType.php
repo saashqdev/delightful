@@ -9,6 +9,6 @@ namespace App\Domain\File\Constant;
 
 enum DefaultFileType: int
 {
-    case DEFAULT = 0; // 默认的文件
+    case DEFAULT = 0; // 默认的file
     case NOT_DEFAULT = 1; // organizationupload的
 }

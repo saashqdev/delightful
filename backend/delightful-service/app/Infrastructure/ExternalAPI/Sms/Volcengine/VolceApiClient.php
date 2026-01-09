@@ -46,17 +46,17 @@ class VolceApiClient extends AbstractSms
     }
 
     /**
-     * 解析传入的variablevariable或者文本短信,得到模板短信variable的关联array.
+     * 解析传入的variablevariable或者文本短信,得到template短信variable的关联array.
      */
     private function parseVariables(SmsStruct $smsStruct): array
     {
         $variables = $smsStruct->variables;
         $smsStruct->language = $this->getContentLanguage($smsStruct);
-        // 火山短信只支持variable短信,according to完整的 $message 适配对应的 模板variable
+        // 火山短信只支持variable短信,according to完整的 $message 适配对应的 templatevariable
 
         // $variables 可能为索引array ["商品A","供应商A",10],火山短信需要还原成关联array
         if ($smsStruct->templateId && $this->array_is_list($variables)) {
-            // 1.get模板content,确定variable的key
+            // 1.gettemplatecontent,确定variable的key
             $templateContent = $this->template->getContentByTemplateId($smsStruct->getTemplateId()) ?? '';
             // 2.according tovariablekey,还原关联array
             $variables = $this->template->getTemplateVariables($templateContent, $variables);

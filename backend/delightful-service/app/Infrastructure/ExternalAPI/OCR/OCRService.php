@@ -70,7 +70,7 @@ readonly class OCRService
             ],
         ]);
 
-        // get远程文件的头info
+        // get远程file的头info
         $headers = get_headers($url, true, $context);
         if ($headers === false) {
             throw new RuntimeException("无法get头info: {$url}");

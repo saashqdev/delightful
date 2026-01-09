@@ -21,7 +21,7 @@ use Throwable;
 readonly class RoleDomainService
 {
     /**
-     * organization管理员角色名称constant.
+     * organization管理员role名称constant.
      */
     public const ORGANIZATION_ADMIN_ROLE_NAME = 'ORGANIZATION_ADMIN';
 
@@ -33,14 +33,14 @@ readonly class RoleDomainService
     }
 
     /**
-     * query角色列表.
+     * queryrole列表.
      * @return array{total: int, list: RoleEntity[]}
      */
     public function queries(PermissionDataIsolation $dataIsolation, Page $page, ?array $filters = null): array
     {
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // query角色列表
+        // queryrole列表
         $result = $this->roleRepository->queries($organizationCode, $page, $filters);
 
         // 批量queryuserID，避免 N+1 query
@@ -57,7 +57,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * save角色.
+     * saverole.
      */
     public function save(PermissionDataIsolation $dataIsolation, RoleEntity $savingRoleEntity): RoleEntity
     {
@@ -78,32 +78,32 @@ readonly class RoleDomainService
             }
         }
 
-        // 1. 校验权限键有效性
-        // 更新 permissionTag 信息：according to权限键提取二级模块标签，用于前端展示分类
+        // 1. 校验permission键有效性
+        // 更新 permissionTag info：according topermission键提取二级模块tag，用于前端展示category
         $permissionTags = [];
         foreach ($savingRoleEntity->getPermissions() as $permissionKey) {
-            // 校验权限键有效性
+            // 校验permission键有效性
             if (! $this->permission->isValidPermission($permissionKey)) {
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.invalid_permission_key', ['key' => $permissionKey]);
             }
 
-            // 跳过全局权限constant，无需参与标签提取
+            // 跳过全局permissionconstant，无需参与tag提取
             if ($permissionKey === DelightfulPermission::ALL_PERMISSIONS) {
                 continue;
             }
 
-            // parse权限键，获取资源并提取其二级模块标签
+            // parsepermission键，获取资源并提取其二级模块tag
             try {
                 $parsed = $this->permission->parsePermission($permissionKey);
                 $resource = $parsed['resource'];
                 $moduleLabel = $this->permission->getResourceModule($resource);
                 $permissionTags[$moduleLabel] = $moduleLabel; // use键value去重
             } catch (Throwable $e) {
-                // parsefail时忽略该权限的标签提取，校验已通过，不影响save
+                // parsefail时忽略该permission的tag提取，校验已通过，不影响save
             }
         }
 
-        // 将标签列表写入 RoleEntity
+        // 将tag列表写入 RoleEntity
         if (! empty($permissionTags)) {
             $savingRoleEntity->setPermissionTag(array_values($permissionTags));
         }
@@ -134,10 +134,10 @@ readonly class RoleDomainService
             $roleEntity = $savingRoleEntity;
         }
 
-        // save角色本身
+        // saverole本身
         $savedRoleEntity = $this->roleRepository->save($organizationCode, $roleEntity);
 
-        // 2. 维护角色与user的关联关系
+        // 2. 维护role与user的关联关系
         $userIds = $savedRoleEntity->getUserIds();
         if (! empty($userIds)) {
             $this->roleRepository->assignUsers(
@@ -152,7 +152,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * 获取角色详情.
+     * 获取role详情.
      */
     public function show(PermissionDataIsolation $dataIsolation, int $id): RoleEntity
     {
@@ -161,7 +161,7 @@ readonly class RoleDomainService
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.role_not_found', ['id' => $id]);
         }
 
-        // 补充角色关联的userID信息
+        // 补充role关联的userIDinfo
         $roleUsers = $this->roleRepository->getRoleUsers($dataIsolation->getCurrentOrganizationCode(), $id);
         $roleEntity->setUserIds($roleUsers);
 
@@ -169,13 +169,13 @@ readonly class RoleDomainService
     }
 
     /**
-     * according to名称获取角色.
+     * according to名称获取role.
      */
     public function getByName(PermissionDataIsolation $dataIsolation, string $name): ?RoleEntity
     {
         $roleEntity = $this->roleRepository->getByName($dataIsolation->getCurrentOrganizationCode(), $name);
 
-        // 补充角色关联的userID信息，避免call方获取不到 userIds
+        // 补充role关联的userIDinfo，避免call方获取不到 userIds
         if ($roleEntity !== null) {
             $userIds = $this->roleRepository->getRoleUsers($dataIsolation->getCurrentOrganizationCode(), $roleEntity->getId());
             $roleEntity->setUserIds($userIds);
@@ -185,16 +185,16 @@ readonly class RoleDomainService
     }
 
     /**
-     * 删除角色.
+     * deleterole.
      */
     public function destroy(PermissionDataIsolation $dataIsolation, RoleEntity $roleEntity): void
     {
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // 检查角色是否还有user关联
+        // 检查role是否还有user关联
         $roleUsers = $this->roleRepository->getRoleUsers($organizationCode, $roleEntity->getId());
         if (! empty($roleUsers)) {
-            // 先删除角色与user的关联关系
+            // 先deleterole与user的关联关系
             $this->roleRepository->removeUsers($organizationCode, $roleEntity->getId(), $roleUsers);
         }
 
@@ -202,7 +202,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * 获取user角色列表.
+     * 获取userrole列表.
      */
     public function getUserRoles(PermissionDataIsolation $dataIsolation, string $userId): array
     {
@@ -210,7 +210,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * 获取user所有权限.
+     * 获取user所有permission.
      */
     public function getUserPermissions(PermissionDataIsolation $dataIsolation, string $userId): array
     {
@@ -218,7 +218,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * 检查user是否拥有指定权限.
+     * 检查user是否拥有指定permission.
      */
     public function hasPermission(PermissionDataIsolation $dataIsolation, string $userId, string $permissionKey): bool
     {
@@ -232,7 +232,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * 获取权限资源树结构.
+     * 获取permission资源树结构.
      *
      * @param bool $isPlatformOrganization 是否平台organization
      */
@@ -243,27 +243,27 @@ readonly class RoleDomainService
     }
 
     /**
-     * 为指定usercreate或维护“organization管理员”角色（拥有全局权限）。
+     * 为指定usercreate或维护“organization管理员”role（拥有全局permission）。
      *
      * 逻辑：
-     * 1. according to当前organization查找是否已有同名角色；
-     * 2. 若不存在，则create新的角色并赋予 DelightfulPermission::ALL_PERMISSIONS；
+     * 1. according to当前organization查找是否已有同名role；
+     * 2. 若不存在，则create新的role并赋予 DelightfulPermission::ALL_PERMISSIONS；
      * 3. 若存在，则确保其contain ALL_PERMISSIONS；
-     * 4. 将user ID 列表加入角色关联user列表；
-     * 5. save角色。
+     * 4. 将user ID 列表加入role关联user列表；
+     * 5. saverole。
      *
-     * exception由call方自行handle，避免影响主流程。
+     * exception由call方自行handle，避免影响主process。
      */
     public function addOrganizationAdmin(PermissionDataIsolation $dataIsolation, array $userIds): RoleEntity
     {
         // 获取当前organization编码
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // 1. 尝试获取已存在的organization管理员角色
+        // 1. 尝试获取已存在的organization管理员role
         $roleEntity = $this->getByName($dataIsolation, self::ORGANIZATION_ADMIN_ROLE_NAME);
 
         if ($roleEntity === null) {
-            // create新角色
+            // create新role
             $roleEntity = new RoleEntity();
             $roleEntity->setName(self::ORGANIZATION_ADMIN_ROLE_NAME);
             $roleEntity->setOrganizationCode($organizationCode);
@@ -271,14 +271,14 @@ readonly class RoleDomainService
             $roleEntity->setIsDisplay(0);
         }
 
-        // 2. 确保拥有全局权限 ALL_PERMISSIONS
+        // 2. 确保拥有全局permission ALL_PERMISSIONS
         $permissions = $roleEntity->getPermissions();
         if (! in_array(DelightfulPermission::ALL_PERMISSIONS, $permissions, true)) {
             $permissions[] = DelightfulPermission::ALL_PERMISSIONS;
             $roleEntity->setPermissions($permissions);
         }
 
-        // 3. 将user列表加入角色user列表
+        // 3. 将user列表加入roleuser列表
         $existingUserIds = $roleEntity->getUserIds();
         // merge并去重
         $mergedUserIds = array_unique(array_merge($existingUserIds, $userIds));
@@ -289,27 +289,27 @@ readonly class RoleDomainService
     }
 
     /**
-     * 移除user的“organization管理员”角色。
+     * 移除user的“organization管理员”role。
      *
      * 逻辑：
-     * 1. 获取当前organization下名为 ORGANIZATION_ADMIN_ROLE_NAME 的角色；
+     * 1. 获取当前organization下名为 ORGANIZATION_ADMIN_ROLE_NAME 的role；
      * 2. 若不存在直接return；
-     * 3. call仓库移除user与该角色的关联关系；
-     * 4. 如果角色不再关联任何user，保持角色本身不变（如有需要，可考虑后续清理）。
+     * 3. call仓库移除user与该role的关联关系；
+     * 4. 如果role不再关联任何user，保持role本身不变（如有需要，可考虑后续清理）。
      */
     public function removeOrganizationAdmin(PermissionDataIsolation $dataIsolation, string $userId): void
     {
-        // 获取organization管理员角色
+        // 获取organization管理员role
         $roleEntity = $this->getByName($dataIsolation, self::ORGANIZATION_ADMIN_ROLE_NAME);
 
         if ($roleEntity === null) {
-            // 角色不存在，无需handle
+            // role不存在，无需handle
             return;
         }
 
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // use仓库移除user与角色的关联
+        // use仓库移除user与role的关联
         $this->roleRepository->removeUsers($organizationCode, $roleEntity->getId(), [$userId]);
     }
 }

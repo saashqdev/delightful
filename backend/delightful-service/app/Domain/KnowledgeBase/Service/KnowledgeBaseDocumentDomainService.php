@@ -38,7 +38,7 @@ readonly class KnowledgeBaseDocumentDomainService
     {
         $this->prepareForCreation($documentEntity);
         $entity = $this->knowledgeBaseDocumentRepository->create($dataIsolation, $documentEntity);
-        // 如果有文件，sync文件
+        // 如果有file，syncfile
         if ($documentEntity->getDocumentFile()) {
             $event = new KnowledgeBaseDocumentSavedEvent($dataIsolation, $knowledgeBaseEntity, $entity, true);
             AsyncEventUtil::dispatch($event);
@@ -129,7 +129,7 @@ readonly class KnowledgeBaseDocumentDomainService
             $document->setSyncTimes(0);
             $this->knowledgeBaseDocumentRepository->update($dataIsolation, $document);
 
-            // async触发重建（这里可以发送event或者加入队列）
+            // async触发重建（这里可以发送event或者加入queue）
             // TODO: 触发重建向量event
         }
     }
@@ -273,7 +273,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $documentEntity->setUpdatedAt($documentEntity->getCreatedAt());
         $documentEntity->setUpdatedUid($documentEntity->getCreatedUid());
         $documentEntity->setSyncStatus(0); // 0 table示未sync
-        // 以下property均从文档文件中get
+        // 以下property均从文档file中get
         $documentEntity->setDocType($documentFile?->getDocType() ?? DocType::TXT->value);
         $documentEntity->setThirdFileId($documentFile?->getThirdFileId());
         $documentEntity->setThirdPlatformType($documentFile?->getPlatformType());

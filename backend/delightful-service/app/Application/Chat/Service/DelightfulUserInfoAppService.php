@@ -16,7 +16,7 @@ use App\Domain\Contact\Service\DelightfulUserDomainService;
 /**
  * Delightfuluserinfo应用service.
  *
- * 聚合user的基本info、账户info和departmentinfo，提供完整的userinfo。
+ * 聚合user的基本info、accountinfo和departmentinfo，提供完整的userinfo。
  */
 class DelightfulUserInfoAppService extends AbstractAppService
 {
@@ -43,7 +43,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
             return $this->getEmptyUserInfo($userId);
         }
 
-        // get账户info
+        // getaccountinfo
         $accountEntity = null;
         if ($userEntity->getDelightfulId()) {
             $accountEntity = $this->accountDomainService->getAccountInfoByDelightfulId($userEntity->getDelightfulId());

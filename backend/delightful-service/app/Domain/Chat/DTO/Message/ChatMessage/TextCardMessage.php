@@ -10,7 +10,7 @@ namespace App\Domain\Chat\DTO\Message\ChatMessage;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * 文本卡片message.
+ * 文本cardmessage.
  */
 class TextCardMessage extends AbstractChatMessageStruct
 {

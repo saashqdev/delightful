@@ -55,7 +55,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * get文件type.
+     * getfiletype.
      */
     public function getFileType(): int
     {
@@ -63,7 +63,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * set文件type.
+     * setfiletype.
      */
     public function setFileType(int $fileType): self
     {
@@ -72,7 +72,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * get文件key.
+     * getfilekey.
      */
     public function getKey(): string
     {
@@ -80,7 +80,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * set文件key.
+     * setfilekey.
      */
     public function setKey(string $key): self
     {
@@ -89,7 +89,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * get文件大小.
+     * getfile大小.
      */
     public function getFileSize(): int
     {
@@ -97,7 +97,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * set文件大小.
+     * setfile大小.
      */
     public function setFileSize(int $fileSize): self
     {
@@ -123,7 +123,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * get文件后缀
+     * getfile后缀
      */
     public function getFileExtension(): string
     {
@@ -131,7 +131,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * set文件后缀
+     * setfile后缀
      */
     public function setFileExtension(string $fileExtension): self
     {
@@ -140,7 +140,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * get上传者ID.
+     * getupload者ID.
      */
     public function getUserId(): string
     {
@@ -148,7 +148,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * set上传者ID.
+     * setupload者ID.
      */
     public function setUserId(string $userId): self
     {

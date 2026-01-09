@@ -38,7 +38,7 @@ class DocumentFileStrategy
     {
         $driver = $this->getImplement($documentFile);
         $originContent = $driver?->parseContent($dataIsolation, $documentFile) ?? '';
-        // 替换图片
+        // 替换image
         return $this->replaceImages($originContent, $dataIsolation, $knowledgeBaseCode);
     }
 
@@ -61,7 +61,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 预处理文档文件，according to文档文件type，进行不同的处理.
+     * 预处理文档file，according to文档filetype，进行不同的处理.
      */
     public function preProcessDocumentFiles(KnowledgeBaseDataIsolation $dataIsolation, array $documentFiles): array
     {
@@ -91,16 +91,16 @@ class DocumentFileStrategy
     }
 
     /**
-     * 替换content中的图片为 DelightfulCompressibleContent 标签.
+     * 替换content中的image为 DelightfulCompressibleContent tag.
      */
     private function replaceImages(string $content, KnowledgeBaseDataIsolation $dataIsolation, ?string $knowledgeBaseCode = null): string
     {
-        // 匹配所有图片
+        // 匹配所有image
         $pattern = '/(!\[.*\]\((.*?)\))/';
         $matches = [];
         preg_match_all($pattern, $content, $matches);
-        $fullMatches = $matches[1] ?? [];  // 完整的markdown图片语法
-        $imageUrls = $matches[2] ?? [];  // 图片URL或base64
+        $fullMatches = $matches[1] ?? [];  // 完整的markdownimage语法
+        $imageUrls = $matches[2] ?? [];  // imageURL或base64
 
         foreach ($imageUrls as $index => $imageUrl) {
             try {
@@ -112,35 +112,35 @@ class DocumentFileStrategy
                 $fileKey = $this->cache->get($cacheKey);
 
                 if (! $fileKey) {
-                    // get图片content
+                    // getimagecontent
                     if ($isBase64) {
                         // 解析base64数据
                         $base64Data = explode(',', $imageUrl);
                         $imageContent = base64_decode($base64Data[1]);
                     } else {
-                        // 下载图片
+                        // downloadimage
                         $imageContent = file_get_contents($imageUrl);
                         if ($imageContent === false) {
                             throw new RuntimeException('Failed to download image from URL: ' . $imageUrl);
                         }
                     }
 
-                    // 保存临时文件
+                    // save临时file
                     $tempFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid();
                     file_put_contents($tempFile, $imageContent);
 
-                    // get文件扩展名
+                    // getfileextension名
                     $finfo = finfo_open(FILEINFO_MIME_TYPE);
                     $mimeType = finfo_file($finfo, $tempFile);
                     finfo_close($finfo);
                     $extension = $this->getExtensionFromMimeType($mimeType);
 
-                    // 重命名临时文件
+                    // 重命名临时file
                     $imageName = uniqid() . '.' . $extension;
                     $imagePath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $imageName;
                     rename($tempFile, $imagePath);
 
-                    // create上传文件object并上传
+                    // createuploadfileobject并upload
                     $uploadFile = new UploadFile($imagePath, 'knowledge-base/' . $knowledgeBaseCode, $imageName);
                     $this->fileDomainService->uploadByCredential(
                         $dataIsolation->getCurrentOrganizationCode(),
@@ -151,7 +151,7 @@ class DocumentFileStrategy
                     $this->cache->set($cacheKey, $fileKey, 3600);
                 }
 
-                // 替换图片链接
+                // 替换image链接
                 $content = str_replace($fullMatches[$index], '<DelightfulCompressibleContent Type="Image">![image](delightful_knowledge_base_file_' . $fileKey . ')</DelightfulCompressibleContent>', $content);
             } catch (Throwable $e) {
                 $this->logger->error('Failed to process image', [
@@ -159,7 +159,7 @@ class DocumentFileStrategy
                     'url' => $imageUrl,
                 ]);
             } finally {
-                // delete临时文件
+                // delete临时file
                 if (isset($imagePath) && file_exists($imagePath)) {
                     unlink($imagePath);
                 }
@@ -173,7 +173,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * according toMIMEtypeget文件扩展名.
+     * according toMIMEtypegetfileextension名.
      */
     private function getExtensionFromMimeType(string $mimeType): string
     {

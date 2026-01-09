@@ -12,7 +12,7 @@ use App\Domain\Contact\Entity\AbstractEntity;
 class UserUpdateDTO extends AbstractEntity
 {
     /**
-     * user头像URL.
+     * useravatarURL.
      */
     protected ?string $avatarUrl = null;
 

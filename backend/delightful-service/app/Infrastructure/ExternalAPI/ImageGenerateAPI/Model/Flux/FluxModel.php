@@ -91,16 +91,16 @@ class FluxModel extends AbstractImageGenerate
             $parallel->add(function () use ($imageGenerateRequest, $response, $fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
                 try {
-                    // 提交任务并轮询结果
+                    // submittask并轮询结果
                     $jobId = $this->requestImageGeneration($imageGenerateRequest);
                     $result = $this->pollTaskResultForRaw($jobId);
 
                     $this->validateFluxResponse($result);
 
-                    // success：设置图片数据到响应object
+                    // success：settingimage数据到响应object
                     $this->addImageDataToResponseFlux($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：设置error信息到响应object（只设置第一个error）
+                    // fail：settingerrorinfo到响应object（只setting第一个error）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
@@ -119,7 +119,7 @@ class FluxModel extends AbstractImageGenerate
         // 4. 记录最终结果
         $this->logger->info('Flux OpenAI格式生图：并发handlecomplete', [
             '总请求数' => $count,
-            'success图片数' => count($response->getData()),
+            'successimage数' => count($response->getData()),
             '是否有error' => $response->hasError(),
             'error码' => $response->getProviderErrorCode(),
             'errormessage' => $response->getProviderErrorMessage(),
@@ -137,7 +137,7 @@ class FluxModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // 从原生结果中提取图片URL
+        // 从原生结果中提取imageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             if (! empty($result['data']['imageUrl'])) {
@@ -145,9 +145,9 @@ class FluxModel extends AbstractImageGenerate
             }
         }
 
-        // 检查是否至少有一张图片generatesuccess
+        // 检查是否至少有一张imagegeneratesuccess
         if (empty($imageUrls)) {
-            $this->logger->error('Flux文生图：所有图片generate均fail', ['rawResults' => $rawResults]);
+            $this->logger->error('Flux文生图：所有imagegenerate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
@@ -164,7 +164,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * 请求generate图片并return任务ID.
+     * 请求generateimage并returntaskID.
      */
     #[RateLimit(create: 20, consume: 1, capacity: 0, key: self::IMAGE_GENERATE_KEY_PREFIX . self::IMAGE_GENERATE_SUBMIT_KEY_PREFIX . ImageGenerateModelType::Flux->value, waitTimeout: 60)]
     #[Retry(
@@ -192,22 +192,22 @@ class FluxModel extends AbstractImageGenerate
             }
 
             if (empty($result['data']['jobId'])) {
-                $this->logger->error('Flux文生图：缺少任务ID', ['response' => $result]);
+                $this->logger->error('Flux文生图：缺少taskID', ['response' => $result]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
             }
             $taskId = $result['data']['jobId'];
-            $this->logger->info('Flux文生图：提交任务success', [
+            $this->logger->info('Flux文生图：submittasksuccess', [
                 'taskId' => $taskId,
             ]);
             return $taskId;
         } catch (Exception $e) {
-            $this->logger->warning('Flux文生图：call图片generate接口fail', ['error' => $e->getMessage()]);
+            $this->logger->warning('Flux文生图：callimagegenerate接口fail', ['error' => $e->getMessage()]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
     }
 
     /**
-     * 轮询任务结果.
+     * 轮询task结果.
      */
     #[RateLimit(create: 40, consume: 1, capacity: 40, key: self::IMAGE_GENERATE_KEY_PREFIX . self::IMAGE_GENERATE_POLL_KEY_PREFIX . ImageGenerateModelType::Flux->value, waitTimeout: 60)]
     #[Retry(
@@ -222,12 +222,12 @@ class FluxModel extends AbstractImageGenerate
             return new ImageGenerateResponse(ImageGenerateType::URL, [$rawResult['data']['imageUrl']]);
         }
 
-        $this->logger->error('Flux文生图：未获取到图片URL', ['response' => $rawResult]);
+        $this->logger->error('Flux文生图：未获取到imageURL', ['response' => $rawResult]);
         ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
     }
 
     /**
-     * 轮询任务结果并return原生数据.
+     * 轮询task结果并return原生数据.
      */
     #[RateLimit(create: 40, consume: 1, capacity: 40, key: self::IMAGE_GENERATE_KEY_PREFIX . self::IMAGE_GENERATE_POLL_KEY_PREFIX . ImageGenerateModelType::Flux->value, waitTimeout: 60)]
     #[Retry(
@@ -248,24 +248,24 @@ class FluxModel extends AbstractImageGenerate
                 }
 
                 if ($result['status'] === 'FAILED') {
-                    $this->logger->error('Flux文生图：任务executefail', ['message' => $result['message'] ?? '未知error']);
+                    $this->logger->error('Flux文生图：taskexecutefail', ['message' => $result['message'] ?? '未知error']);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $result['message']);
                 }
 
                 ++$retryCount;
                 sleep(self::RETRY_INTERVAL);
             } catch (Exception $e) {
-                $this->logger->warning('Flux文生图：轮询任务结果fail', ['error' => $e->getMessage(), 'jobId' => $jobId]);
+                $this->logger->warning('Flux文生图：轮询task结果fail', ['error' => $e->getMessage(), 'jobId' => $jobId]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::POLLING_FAILED);
             }
         }
 
-        $this->logger->error('Flux文生图：任务execute超时', ['jobId' => $jobId]);
+        $this->logger->error('Flux文生图：taskexecute超时', ['jobId' => $jobId]);
         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT);
     }
 
     /**
-     * 检查账户余额.
+     * 检查account余额.
      * @return float 余额
      * @throws Exception
      */
@@ -285,7 +285,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * 获取告警message前缀
+     * 获取alertmessage前缀
      */
     protected function getAlertPrefix(): string
     {
@@ -321,7 +321,7 @@ class FluxModel extends AbstractImageGenerate
                         'index' => $i,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('Flux文生图：图片generatefail', [
+                    $this->logger->error('Flux文生图：imagegeneratefail', [
                         'error' => $e->getMessage(),
                         'index' => $i,
                     ]);
@@ -334,7 +334,7 @@ class FluxModel extends AbstractImageGenerate
             });
         }
 
-        // 获取所有并行任务的结果
+        // 获取所有并行task的结果
         $results = $parallel->wait();
 
         // handle结果，保持原生格式
@@ -346,10 +346,10 @@ class FluxModel extends AbstractImageGenerate
             }
         }
 
-        // 检查是否至少有一张图片generatesuccess
+        // 检查是否至少有一张imagegeneratesuccess
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('Flux文生图：所有图片generate均fail', ['errors' => $errors]);
+            $this->logger->error('Flux文生图：所有imagegenerate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 
@@ -369,15 +369,15 @@ class FluxModel extends AbstractImageGenerate
             }
 
             try {
-                // handle图片URL
+                // handleimageURL
                 $result['data']['imageUrl'] = $this->watermarkProcessor->addWatermarkToUrl($result['data']['imageUrl'], $imageGenerateRequest);
             } catch (Exception $e) {
-                // 水印handlefail时，记录error但不影响图片return
-                $this->logger->error('Flux图片水印handlefail', [
+                // 水印handlefail时，记录error但不影响imagereturn
+                $this->logger->error('Fluximage水印handlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandle下一张图片，当前图片保持原始status
+                // continuehandle下一张image，当前image保持原始status
             }
         }
 
@@ -399,7 +399,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * 将Flux图片数据添加到OpenAI响应object中.
+     * 将Fluximage数据添加到OpenAI响应object中.
      */
     private function addImageDataToResponseFlux(
         OpenAIFormatResponse $response,
@@ -424,7 +424,7 @@ class FluxModel extends AbstractImageGenerate
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($imageUrl, $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('Flux添加图片数据：水印handlefail', [
+                $this->logger->error('Flux添加image数据：水印handlefail', [
                     'error' => $e->getMessage(),
                     'url' => $imageUrl,
                 ]);
@@ -435,7 +435,7 @@ class FluxModel extends AbstractImageGenerate
                 'url' => $processedUrl,
             ];
 
-            // 累计usage信息
+            // 累计usageinfo
             $currentUsage->addGeneratedImages(1);
 
             // 更新响应object

@@ -14,7 +14,7 @@ class EasyFileTools
     public static function saveFile(string $path, string $stream): void
     {
         $file = fopen($path, 'wb');
-        // 把stream切割成1000kb的小块，每次写入文件
+        // 把stream切割成1000kb的小块，每次写入file
 
         fwrite($file, $stream);
         fclose($file);
@@ -22,13 +22,13 @@ class EasyFileTools
 
     public static function mergeWavFiles(string $file1, string $blob): void
     {
-        // if文件不存在，直接将 blob 写入为新的文件
+        // iffile不存在，直接将 blob 写入为新的file
         if (! file_exists($file1)) {
             self::saveFile($file1, $blob);
             return;
         }
 
-        // 打开 file1 文件以读写mode
+        // 打开 file1 file以读写mode
         $wav1 = fopen($file1, 'r+b');
         if (! $wav1) {
             throw new InvalidArgumentException('Failed to open the base file.');
@@ -36,21 +36,21 @@ class EasyFileTools
         // 去掉blob的头
         $blob = substr($blob, 44);
 
-        // 将新data追加到文件末尾
-        // get文件大小
+        // 将新data追加到file末尾
+        // getfile大小
         fseek($wav1, 0, SEEK_END);
         fwrite($wav1, $blob);
         $fileSize = ftell($wav1);
 
-        // 修正 RIFF 块大小（文件总大小 - 8）
+        // 修正 RIFF 块大小（file总大小 - 8）
         fseek($wav1, 4);
         fwrite($wav1, pack('V', $fileSize - 8));
 
-        // 修正 data 块大小（文件总大小 - 44）
+        // 修正 data 块大小（file总大小 - 44）
         fseek($wav1, 40);
         fwrite($wav1, pack('V', $fileSize - 44));
 
-        // 关闭文件
+        // closefile
         fclose($wav1);
     }
 

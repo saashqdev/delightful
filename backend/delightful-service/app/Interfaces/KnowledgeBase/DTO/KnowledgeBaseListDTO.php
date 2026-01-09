@@ -47,7 +47,7 @@ class KnowledgeBaseListDTO extends AbstractFlowDTO
     public int $expectedNum = 0;
 
     /**
-     * 业务维护的已完成的数量.
+     * 业务维护的已complete的数量.
      */
     public int $completedNum = 0;
 

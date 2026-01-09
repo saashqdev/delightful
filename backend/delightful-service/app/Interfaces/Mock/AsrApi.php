@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * ASR task Mock service
- * 模拟沙箱中的音频合并和 ASR task处理.
+ * 模拟沙箱中的audio合并和 ASR task处理.
  */
 class AsrApi
 {
@@ -63,7 +63,7 @@ class AsrApi
             'transcript_file_config' => $transcriptFileConfig,
         ]);
 
-        // initializetaskstatus（重置轮询计数）
+        // initializetaskstatus（reset轮询计数）
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $this->redis->del($countKey);
 
@@ -84,7 +84,7 @@ class AsrApi
     }
 
     /**
-     * 完成 ASR task（支持轮询）- V2 结构化版本
+     * complete ASR task（支持轮询）- V2 结构化版本
      * POST /api/v1/sandboxes/{sandboxId}/proxy/api/asr/task/finish.
      */
     public function finishTask(RequestInterface $request): array
@@ -140,7 +140,7 @@ class AsrApi
         // build新的目录名：智能标题 + time戳
         $renamedDir = $outputFilename . $timestamp;
 
-        // build音频文件info
+        // buildaudiofileinfo
         $audioFileName = $outputFilename . '.webm';
         $audioPath = rtrim($renamedDir, '/') . '/' . $audioFileName;
 
@@ -148,7 +148,7 @@ class AsrApi
         $responseData = [
             'status' => SandboxAsrStatusEnum::COMPLETED->value,
             'task_key' => $taskKey,
-            'intelligent_title' => $outputFilename, // use输出文件名作为智能标题
+            'intelligent_title' => $outputFilename, // use输出file名作为智能标题
             'error_message' => null,
             'files' => [
                 'audio_file' => [
@@ -159,7 +159,7 @@ class AsrApi
                     'action_performed' => 'merged_and_created',
                     'source_path' => null,
                 ],
-                'note_file' => null, // 默认为 null，table示笔记文件为空或不存在
+                'note_file' => null, // 默认为 null，table示笔记file为空或不存在
             ],
             'deleted_files' => [],
             'operations' => [
@@ -169,26 +169,26 @@ class AsrApi
             ],
         ];
 
-        // 如果有笔记文件configuration且文件大小 > 0，添加到return中（模拟真实沙箱的笔记文件contentcheck）
+        // 如果有笔记fileconfiguration且file大小 > 0，添加到return中（模拟真实沙箱的笔记filecontentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
-            // use请求中提供的 target_path，而不是硬编码文件名
-            // 这样可以正确支持国际化的文件名
+            // use请求中提供的 target_path，而不是硬编码file名
+            // 这样可以正确支持国际化的file名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
-            // 模拟真实沙箱行为：只有当笔记文件有content时才return详细info
-            // 这里简化处理，默认假设有content（真实沙箱会check文件content是否为空）
+            // 模拟真实沙箱行为：只有当笔记file有content时才return详细info
+            // 这里简化处理，默认假设有content（真实沙箱会checkfilecontent是否为空）
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
                 'path' => $noteFilePath, // use请求中的 target_path
-                'size' => 256, // 模拟有content的文件大小
+                'size' => 256, // 模拟有content的file大小
                 'duration' => null,
                 'action_performed' => 'renamed_and_moved',
                 'source_path' => $noteFileConfig['source_path'] ?? '',
             ];
         }
 
-        // 如果有流式识别文件configuration，recorddelete操作
+        // 如果有stream识别fileconfiguration，recorddelete操作
         if ($transcriptFileConfig !== null && isset($transcriptFileConfig['source_path'])) {
             $responseData['deleted_files'][] = [
                 'path' => $transcriptFileConfig['source_path'],
@@ -198,13 +198,13 @@ class AsrApi
 
         return [
             'code' => 1000,
-            'message' => '音频合并已完成',
+            'message' => 'audio合并已complete',
             'data' => $responseData,
         ];
     }
 
     /**
-     * 取消 ASR task
+     * cancel ASR task
      * POST /api/v1/sandboxes/{sandboxId}/proxy/api/asr/task/cancel.
      */
     public function cancelTask(RequestInterface $request): array

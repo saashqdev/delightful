@@ -31,11 +31,11 @@ class CreateDelightfulChatMessageTable extends Migration
             $table->string('receive_organization_code', 64)->comment('接收方organization编码,可能为空string')->default('');
             // message的相关id
             $table->string('app_message_id', 64)->comment('客户端生成的messageid,用于防客户端重复');
-            $table->string('delightful_message_id', 64)->comment('service端生成的唯一messageid,用于message撤回/编辑');
+            $table->string('delightful_message_id', 64)->comment('service端生成的唯一messageid,用于messagewithdraw/edit');
             # ## message结构
             // message优先级,由于系统稳定性管理
             $table->tinyInteger('priority')->default(0)->comment('message优先级,0~255,0最低,255最高');
-            $table->string('message_type', 32)->comment('messagetype:文本/table情/文件/markdown等');
+            $table->string('message_type', 32)->comment('messagetype:文本/table情/file/markdown等');
             $table->text('content')->comment('message详情');
             $table->timestamp('send_time')->comment('message发送time');
             $table->index(['sender_id', 'sender_type', 'sender_organization_code'], 'idx_sender_id_type');

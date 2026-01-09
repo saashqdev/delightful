@@ -466,7 +466,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * test并发调度且等待父节点完成.
+     * test并发调度且等待父节点complete.
      * root -> vertex2
      * root -> vertex3
      * vertex2 -> vertex5

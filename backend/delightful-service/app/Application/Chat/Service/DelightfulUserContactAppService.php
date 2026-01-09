@@ -176,19 +176,19 @@ class DelightfulUserContactAppService extends AbstractAppService
         // 获取当前user拥有的organization列表
         $userOrganizations = $this->userDomainService->getUserOrganizations($dataIsolation->getCurrentUserId());
 
-        // 基本user信息query - 传入user拥有的organization列表
+        // 基本userinfoquery - 传入user拥有的organization列表
         $usersDetailDTOList = $this->userDomainService->getUserDetailByUserIdsWithOrgCodes($userIds, $userOrganizations);
         // handleuseravatar
         $usersDetail = $this->getUsersAvatarCoordinator($usersDetailDTOList, $dataIsolation);
 
-        // handleuserassistant信息
+        // handleuserassistantinfo
         $this->addAgentInfoToUsers($authorization, $usersDetail);
 
         if ($queryType === UserQueryType::User) {
-            // 只查人员信息
+            // 只查人员info
             $users = $usersDetail;
         } else {
-            // querydepartment信息
+            // querydepartmentinfo
             $withDepartmentFullPath = $queryType === UserQueryType::UserAndDepartmentFullPath;
 
             // 获取user所属department
@@ -198,7 +198,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             // 获取department详情
             $departmentsInfo = $this->departmentChartDomainService->getDepartmentFullPathByIds($dataIsolation, $departmentIds);
 
-            // 组装user和department信息
+            // 组装user和departmentinfo
             $users = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfo, $withDepartmentFullPath);
         }
 
@@ -225,7 +225,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         foreach ($departmentsInfo as $departmentInfo) {
             $departmentsInfoWithFullPath[$departmentInfo->getDepartmentId()] = [$departmentInfo];
         }
-        // 获取user的真名/nickname/手机号/avatar等信息
+        // 获取user的真名/nickname/手机号/avatar等info
         $userIds = array_values(array_unique(array_column($departmentUsers, 'user_id')));
         $usersDetail = $this->userDomainService->getUserDetailByUserIds($userIds, $dataIsolation);
         $usersDetail = $this->getUsersAvatar($usersDetail, $dataIsolation);
@@ -233,7 +233,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $userDepartmentDetailDTOS = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfoWithFullPath);
         // 通讯录和search相关接口，filter隐藏department和隐藏user。
         $userDepartmentDetailDTOS = $this->filterDepartmentOrUserHidden($userDepartmentDetailDTOS);
-        // 由于 $usersPageResponseDTO 的 items 限制的parametertype，从代码规范的角度，再 new 一个通用的 PageResponseDTO， 按分页的结构return
+        // 由于 $usersPageResponseDTO 的 items 限制的parametertype，从代码规范的角度，再 new 一个通用的 PageResponseDTO， 按pagination的结构return
         // 另外，由于filter逻辑的存在，可能本次return的 items 数量少于 $limit,但是又有下一页。
         $pageResponseDTO = new PageResponseDTO();
         $pageResponseDTO->setPageToken($usersPageResponseDTO->getpageToken());
@@ -256,7 +256,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         // searchpositioncontainsearch词的人
         if ($queryDTO->isQueryByJobTitle()) {
             $departmentUsers = $this->departmentUserDomainService->searchDepartmentUsersByJobTitle($queryDTO->getQuery(), $dataIsolation);
-            // 获取user详细信息
+            // 获取user详细info
             $userIds = array_column($departmentUsers, 'user_id');
             $userEntities = $this->userDomainService->getUserDetailByUserIds($userIds, $dataIsolation);
             $usersForQueryJobTitle = array_map(static fn ($entity) => $entity->toArray(), $userEntities);
@@ -277,7 +277,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             $usersForQueryDepartmentPath = array_filter($usersForQueryDepartmentPath, static fn ($user) => $user['user_type'] !== UserType::Ai->value);
         }
 
-        // 设置userIDs用于query详细信息
+        // settinguserIDs用于query详细info
         $userIds = array_column($usersForQueryDepartmentPath, 'user_id');
         $queryDTO->setUserIds($userIds);
 
@@ -348,7 +348,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 是否允许更新user信息.
+     * 是否允许更新userinfo.
      */
     public function getUserUpdatePermission(DelightfulUserAuthorization $userAuthorization): array
     {
@@ -357,7 +357,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 更新user信息.
+     * 更新userinfo.
      */
     public function updateUserInfo(DelightfulUserAuthorization $userAuthorization, UserUpdateDTO $userUpdateDTO): DelightfulUserEntity
     {
@@ -368,13 +368,13 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 为user添加Agent信息(application层协调器).
+     * 为user添加Agentinfo(application层协调器).
      * @param array<UserDetailDTO> $usersDetailDTOList
      */
     public function addAgentInfoToUsers(Authenticatable $authorization, array $usersDetailDTOList): array
     {
         $aiCodes = [];
-        // 如果是 AI assistant，那么return AI assistant相关信息和对它的权限
+        // 如果是 AI assistant，那么return AI assistant相关info和对它的permission
         foreach ($usersDetailDTOList as $userDetailDTO) {
             if (! empty($userDetailDTO->getAiCode())) {
                 $aiCodes[] = $userDetailDTO->getAiCode();
@@ -389,7 +389,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $agentIds = array_keys($agents);
         $agentPermissions = [];
         if (! empty($agentIds)) {
-            // query user 对这些 agent 的权限
+            // query user 对这些 agent 的permission
             $permissionDataIsolation = $this->createPermissionDataIsolation($authorization);
             $agentPermissions = $this->operationPermissionDomainService->getResourceOperationByUserIds(
                 $permissionDataIsolation,
@@ -402,7 +402,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         foreach ($usersDetailDTOList as $userDetailDTO) {
             if (! empty($userDetailDTO->getAiCode())) {
                 $agentId = $flowCodeMapAgentId[$userDetailDTO->getAiCode()] ?? null;
-                // 设置 agent 信息
+                // setting agent info
                 $userDetailDTO->setAgentInfo(
                     new AgentInfoDTO([
                         'bot_id' => (string) $agentId,
@@ -429,7 +429,7 @@ class DelightfulUserContactAppService extends AbstractAppService
                 continue;
             }
             if ($userDepartmentDetail instanceof UserDetailDTO) {
-                // 不要检查user的department信息
+                // 不要检查user的departmentinfo
                 continue;
             }
             $userPathNodes = [];

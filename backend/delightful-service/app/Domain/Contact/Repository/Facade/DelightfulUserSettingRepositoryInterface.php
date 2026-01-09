@@ -29,7 +29,7 @@ interface DelightfulUserSettingRepositoryInterface
     public function getGlobal(string $key): ?DelightfulUserSettingEntity;
 
     /**
-     * 保存全局configuration。
+     * save全局configuration。
      */
     public function saveGlobal(DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity;
 

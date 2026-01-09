@@ -9,6 +9,6 @@ namespace App\Domain\Comment\constant;
 
 class CommentResourceType
 {
-    // 日程
+    // schedule
     public const SCHEDULE = 1;
 }

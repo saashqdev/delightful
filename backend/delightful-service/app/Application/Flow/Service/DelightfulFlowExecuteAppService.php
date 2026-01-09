@@ -100,7 +100,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             executionType: ExecutionType::IMChat,
         );
 
-        // 如果是 对话，强制开启 stream 模式
+        // 如果是 conversation，强制开启 stream 模式
         if ($triggerType === TriggerType::ChatMessage) {
             $executionData->setStream(true);
         }
@@ -374,7 +374,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }
 
-        // check是否具有该流程的permission
+        // check是否具有该process的permission
         $this->getFlow($flowDataIsolation, $log->getFlowCode(), operationValidate: 'read');
 
         return $log;
@@ -503,7 +503,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $executionData->setTopicId($topicId);
         $executionData->setAgentId($delightfulFlowEntity->getAgentId());
         $executionData->setDebug((bool) ($triggerConfig['debug'] ?? false));
-        // 运行流程图，检测是否可以运行
+        // 运行process图，检测是否可以运行
         $executor = new DelightfulFlowExecutor($delightfulFlowEntity, $executionData);
         $executor->execute();
 
@@ -540,7 +540,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
     }
 
     /**
-     * get流程info.
+     * getprocessinfo.
      *
      * @return array{flow: DelightfulFlowEntity, flow_version?: ?DelightfulFlowVersionEntity, agent?: ?DelightfulAgentEntity, agent_version?: ?DelightfulAgentVersionEntity}
      */

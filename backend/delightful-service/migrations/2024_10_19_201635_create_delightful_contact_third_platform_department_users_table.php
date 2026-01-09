@@ -32,7 +32,7 @@ return new class extends Migration {
             $table->string('third_join_time', 64)->comment('入职time。秒级time戳格式，table示从 1970 年 1 月 1 日开始所经过的秒数。');
             $table->string('third_employee_no', 32)->comment('工号')->default('');
             $table->tinyInteger('third_employee_type')->comment('员工type。1：正式员工2：实习生3：外包4：劳务 5：顾问')->default(1);
-            $table->text('third_custom_attrs')->comment('自定义field。');
+            $table->text('third_custom_attrs')->comment('customizefield。');
             $table->text('third_department_path')->comment('department路径。');
             $table->text('third_platform_department_users_extra')->comment('额外info');
             $table->comment('userservice的department与第三方平台userrecordtable.用于与第三方平台实时数据sync,激活record等');

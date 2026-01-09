@@ -43,7 +43,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * 获取organization下的 Delightful 服务商配置（不含模型详情）.
+     * 获取organization下的 Delightful 服务商configuration（不含模型详情）.
      */
     public function getDelightfulProvider(ProviderDataIsolation $dataIsolation, Category $category, ?Status $status = null): ?ProviderConfigDTO
     {
@@ -60,7 +60,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             return null;
         }
 
-        // 3. query当前organization是否已有该服务商的配置
+        // 3. query当前organization是否已有该服务商的configuration
         $configBuilder = $this->createConfigQuery()->where('organization_code', $organizationCode);
         $configBuilder->where('service_provider_id', $delightfulProvider->getId());
 
@@ -71,20 +71,20 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
 
         $configResult = Db::select($configBuilder->toSql(), $configBuilder->getBindings());
 
-        // 如果找到现有配置，直接return
+        // 如果找到现有configuration，直接return
         if (! empty($configResult)) {
-            // 批量query对应的 provider 信息
+            // 批量query对应的 provider info
             $providerMap = [$delightfulProvider->getId() => $delightfulProvider->toArray()];
             return ProviderConfigAssembler::toDTOWithProvider($configResult[0], $providerMap);
         }
 
-        // 4. 没有找到配置，build模板数据的 ProviderConfigDTO
-        // 如果指定了status且不是启用status，则不return模板数据
+        // 4. 没有找到configuration，buildtemplate数据的 ProviderConfigDTO
+        // 如果指定了status且不是启用status，则不returntemplate数据
         if ($status !== null && $status !== Status::Enabled) {
             return null;
         }
 
-        // according toCategorytype设置对应的organizationDelightful服务商模板配置ID
+        // according toCategorytypesetting对应的organizationDelightful服务商templateconfigurationID
         $templateId = ProviderConfigIdAssembler::generateProviderTemplate(ProviderCode::Official, $category);
 
         $templateData = [
@@ -114,7 +114,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
      * according toorganization编码和类别获取 Delightful 服务商启用中的模型列表.
      *
      * @param string $organizationCode organization编码
-     * @param null|Category $category 服务商类别，为null时return所有分类模型
+     * @param null|Category $category 服务商类别，为null时return所有category模型
      * @return array<ProviderModelEntity> Delightful 服务商模型实体array
      */
     public function getDelightfulEnableModels(string $organizationCode, ?Category $category = null): array
@@ -122,7 +122,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         if (OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
             return [];
         }
-        // 数据集 A：获取官方organization下所有启用的模型（contain配置filter）
+        // 数据集 A：获取官方organization下所有启用的模型（containconfigurationfilter）
         $officialModels = $this->getOfficialEnabledModels($category);
 
         // 如果没有官方模型，直接returnnullarray
@@ -140,7 +140,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $configBuilder = $this->createProviderModelQuery();
         $configBuilder->where('organization_code', $organizationCode)->whereIn('model_parent_id', $officialModelIds);
 
-        // 如果指定了分类，添加分类filtercondition
+        // 如果指定了category，添加categoryfiltercondition
         if ($category !== null) {
             $configBuilder->where('category', $category->value);
         }
@@ -148,7 +148,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $configResult = Db::select($configBuilder->toSql(), $configBuilder->getBindings());
         $modelEntities = ProviderModelAssembler::toEntities($configResult);
 
-        // create配置模型的映射表，以 model_parent_id 为 key
+        // createconfiguration模型的映射表，以 model_parent_id 为 key
         $modelMap = [];
         foreach ($modelEntities as $modelEntity) {
             if ($modelEntity->getModelParentId()) {
@@ -156,7 +156,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             }
         }
 
-        // 如果配置模型映射为null，直接return官方模型列表
+        // 如果configuration模型映射为null，直接return官方模型列表
         if (empty($modelMap)) {
             $finalModels = $officialModels;
         } else {
@@ -165,11 +165,11 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             foreach ($officialModels as $officialModel) {
                 $modelId = $officialModel->getId();
 
-                // 检查是否有普通organization的引用模型
+                // 检查是否有普通organization的quote模型
                 if (isset($modelMap[$modelId])) {
                     $organizationModel = $modelMap[$modelId];
 
-                    // 直接用配置模型的status替换官方模型的status
+                    // 直接用configuration模型的status替换官方模型的status
                     $officialModel->setStatus($organizationModel->getStatus());
                 }
                 $finalModels[] = $officialModel;
@@ -260,9 +260,9 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * 获取官方organization下所有启用的模型（contain配置filter）.
+     * 获取官方organization下所有启用的模型（containconfigurationfilter）.
      *
-     * @param null|Category $category 服务商类别，为null时return所有分类模型
+     * @param null|Category $category 服务商类别，为null时return所有category模型
      * @return array<ProviderModelEntity> filter后的官方模型列表
      */
     private function getOfficialEnabledModels(?Category $category = null): array
@@ -270,7 +270,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         // 获取官方organization编码
         $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
-        // 1. 先query官方organization下启用的服务商配置ID
+        // 1. 先query官方organization下启用的服务商configurationID
         $enabledConfigQuery = $this->createConfigQuery()
             ->where('organization_code', $officialOrganizationCode)
             ->where('status', Status::Enabled->value)
@@ -278,14 +278,14 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $enabledConfigIds = Db::select($enabledConfigQuery->toSql(), $enabledConfigQuery->getBindings());
         $enabledConfigIdArray = array_column($enabledConfigIds, 'id');
 
-        // 2. use启用的配置IDquery官方organization的启用模型
+        // 2. use启用的configurationIDquery官方organization的启用模型
         if (! empty($enabledConfigIdArray)) {
             $officialBuilder = $this->createProviderModelQuery()
                 ->where('organization_code', $officialOrganizationCode)
                 ->where('status', Status::Enabled->value)
                 ->whereIn('service_provider_config_id', $enabledConfigIdArray);
 
-            // 如果指定了分类，添加分类filtercondition
+            // 如果指定了category，添加categoryfiltercondition
             if ($category !== null) {
                 $officialBuilder->where('category', $category->value);
             }
@@ -314,13 +314,13 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $filteredModels = [];
         foreach ($models as $model) {
             $visiblePackages = $model->getVisiblePackages();
-            // 如果没有配置可见套餐，则对所有套餐可见
+            // 如果没有configuration可见套餐，则对所有套餐可见
             if (empty($visiblePackages)) {
                 $filteredModels[] = $model;
                 continue;
             }
 
-            // 如果配置了可见套餐，检查当前套餐是否在其中
+            // 如果configuration了可见套餐，检查当前套餐是否在其中
             if ($currentPackage && in_array($currentPackage, $visiblePackages)) {
                 $filteredModels[] = $model;
             }
@@ -338,7 +338,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * 准备移除软删相关功能，临时这样写。create带有软删除filter的 ProviderConfigModel querybuild器.
+     * 准备移除软删相关功能，临时这样写。create带有软deletefilter的 ProviderConfigModel querybuild器.
      */
     private function createConfigQuery(): Builder
     {
@@ -347,7 +347,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * 准备移除软删相关功能，临时这样写。create带有软删除filter的 ProviderModelModel querybuild器.
+     * 准备移除软删相关功能，临时这样写。create带有软deletefilter的 ProviderModelModel querybuild器.
      */
     private function createProviderModelQuery(): Builder
     {

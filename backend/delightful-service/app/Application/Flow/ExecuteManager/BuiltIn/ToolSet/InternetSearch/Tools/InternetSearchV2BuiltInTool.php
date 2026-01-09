@@ -24,7 +24,7 @@ use function di;
 
 #[BuiltInToolDefine]
 /**
- * 采用one seq 推送所有的search相关content，前端不再多个 seq 合并成one渲染.
+ * 采用one seq push所有的search相关content，前端不再多个 seq 合并成one渲染.
  */
 class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
 {

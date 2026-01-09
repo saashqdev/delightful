@@ -34,13 +34,13 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * 判断user的message中，是否包含本次他想下载的文件.
+     * 判断user的message中，是否包含本次他想download的file.
      * @param DelightfulChatFileEntity[] $fileDTOs
      * @return DelightfulChatFileEntity[]
      */
     public function checkAndGetFilePaths(array $fileDTOs, DataIsolation $dataIsolation): array
     {
-        // check message_id 是否有此文件
+        // check message_id 是否有此file
         $seqIds = array_column($fileDTOs, 'message_id');
         $seqList = $this->delightfulSeqRepository->batchGetSeqByMessageIds($seqIds);
         $delightfulMessageIdsMap = [];
@@ -73,7 +73,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
             }
         }
 
-        // 判断user的message中，是否包含本次他想下载的文件
+        // 判断user的message中，是否包含本次他想download的file
         $fileMaps = [];
         foreach ($fileDTOs as $fileDTO) {
             $delightfulMessageId = $fileDTO->getDelightfulMessageId();
@@ -98,7 +98,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
      */
     public function getFileEntitiesByFileIds(array $fileIds, ?string $order = null, ?int $limit = null, bool $withUrl = false): array
     {
-        // get文件路径
+        // getfile路径
         $entities = $this->delightfulFileRepository->getChatFileByIds($fileIds, $order, $limit);
         if (! $withUrl) {
             return $entities;
@@ -113,27 +113,27 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * 保存或update文件
-     * 如果file_key已存在，则update文件info
-     * 如果file_key不存在，则create新文件.
+     * save或updatefile
+     * 如果file_key已存在，则updatefileinfo
+     * 如果file_key不存在，则create新file.
      *
-     * @param DelightfulChatFileEntity $fileEntity 文件实体
+     * @param DelightfulChatFileEntity $fileEntity file实体
      * @param DataIsolation $dataIsolation 数据隔离
-     * @return DelightfulChatFileEntity 保存或update后的文件实体
+     * @return DelightfulChatFileEntity save或update后的file实体
      */
     public function saveOrUpdateByFileKey(DelightfulChatFileEntity $fileEntity, DataIsolation $dataIsolation): DelightfulChatFileEntity
     {
-        // 通过file_key查找文件是否存在
+        // 通过file_key查找file是否存在
         $existingFile = $this->delightfulFileRepository->getChatFileByFileKey($fileEntity->getFileKey());
 
-        // 如果文件存在，update文件info
+        // 如果file存在，updatefileinfo
         if ($existingFile) {
             $fileEntity->setFileId($existingFile->getFileId());
             $this->updateFile($fileEntity);
             return $fileEntity;
         }
 
-        // 如果文件不存在，create新文件
+        // 如果file不存在，create新file
         $time = date('Y-m-d H:i:s');
         $fileEntity->setUserId($dataIsolation->getCurrentUserId());
         $fileEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
@@ -145,7 +145,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * 判断user的message中的附件是不是他自己上传的.
+     * 判断user的message中的attachment是不是他自己upload的.
      * @param ChatAttachment[] $attachments
      * @return ChatAttachment[]
      */
@@ -154,7 +154,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
         $fileIds = array_column($attachments, 'file_id');
         $fileEntities = $this->getFileEntitiesByFileIds($fileIds);
         $fileEntities = array_column($fileEntities, null, 'file_id');
-        // todo 如果message中有文件:1.判断文件的所有者是否是当前user;2.判断user是否接收过这些文件。
+        // todo 如果message中有file:1.判断file的所有者是否是当前user;2.判断user是否接收过这些file。
         //        foreach ($fileEntities as $fileEntity) {
         //            if ($fileEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
         //                ExceptionBuilder::throw(ChatErrorCode::FILE_NOT_FOUND);

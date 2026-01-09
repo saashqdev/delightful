@@ -85,7 +85,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $this->assertTrue(true);
     }
 
-    // testcreate自定义重复task week 场景
+    // testcreatecustomize重复task week 场景
     public function testCreateCustomRepeatTaskWeek()
     {
         $service = make(DelightfulUserTaskAppService::class);
@@ -94,7 +94,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $userTask->setTopicId('749639569880518657');
         $userTask->setCreator('usi_3715ce50bc02d7e72ba7891649b7f1da');
         $userTask->setNickname('xxx');
-        $userTask->setName('自定义每两周重复task-2');
+        $userTask->setName('customize每两周重复task-2');
         $userTask->setAgentId('737330322528899073');
         $userTask->setDay('');
         $userTask->setTime('16:00');
@@ -110,7 +110,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $this->assertTrue(true);
     }
 
-    // testcreate自定义重复task month 场景
+    // testcreatecustomize重复task month 场景
     public function testCreateCustomRepeatTaskMonth()
     {
         $service = make(DelightfulUserTaskAppService::class);
@@ -119,7 +119,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $userTask->setTopicId('749639569880518657');
         $userTask->setCreator('usi_3715ce50bc02d7e72ba7891649b7f1da');
         $userTask->setNickname('xxx');
-        $userTask->setName('test自定义重复task-月');
+        $userTask->setName('testcustomize重复task-月');
         $userTask->setAgentId('737330322528899073');
         $userTask->setDay('');
         $userTask->setTime('22:00');
@@ -135,7 +135,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $this->assertTrue(true);
     }
 
-    // testcreate自定义重复task year 场景
+    // testcreatecustomize重复task year 场景
     public function testCreateCustomRepeatTaskYear()
     {
         $service = make(DelightfulUserTaskAppService::class);
@@ -145,7 +145,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $userTask->setTopicId('749639569880518657');
         $userTask->setCreator('usi_3715ce50bc02d7e72ba7891649b7f1da');
         $userTask->setNickname('xxx');
-        $userTask->setName('test自定义重复年task');
+        $userTask->setName('testcustomize重复年task');
         $userTask->setAgentId('737330322528899073');
         $userTask->setDay('2025-02-27');
         $userTask->setTime('13:00');

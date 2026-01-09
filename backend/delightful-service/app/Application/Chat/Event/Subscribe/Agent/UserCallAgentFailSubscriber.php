@@ -43,7 +43,7 @@ class UserCallAgentFailSubscriber implements ListenerInterface
         }
         try {
             $seqEntity = $event->seqEntity;
-            // 助理在自己的conversation窗口，发一条国际化的failed提醒
+            // 助理在自己的conversation窗口，发一条国际化的failedreminder
             $conversationId = $seqEntity->getConversationId();
             $messageStruct = [
                 'content' => __('chat.agent.user_call_agent_fail_notice'),
@@ -51,16 +51,16 @@ class UserCallAgentFailSubscriber implements ListenerInterface
             // message防重
             $appMessageId = 'system-' . IdGenerator::getUniqueId32();
             $seqDTO = new DelightfulSeqEntity();
-            // 表明引用关系
+            // 表明quote关系
             $seqDTO->setReferMessageId($seqEntity->getMessageId());
             $seqDTO->setConversationId($conversationId);
             $messageInterface = MessageAssembler::getMessageStructByArray(ChatMessageType::Text->getName(), $messageStruct);
             $seqDTO->setContent($messageInterface);
             $seqDTO->setSeqType($messageInterface->getMessageTypeEnum());
-            // 原样output扩展parameter
+            // 原样outputextensionparameter
             $seqDTO->setExtra($seqEntity->getExtra());
 
-            // 原样output扩展parameter,but要排除 编辑message选项
+            // 原样outputextensionparameter,but要排除 editmessage选项
             $seqExtra = $seqEntity->getExtra()?->getExtraCanCopyData();
             $seqDTO->setExtra($seqExtra);
             di(DelightfulChatMessageAppService::class)->aiSendMessage($seqDTO, $appMessageId, doNotParseReferMessageId: true);

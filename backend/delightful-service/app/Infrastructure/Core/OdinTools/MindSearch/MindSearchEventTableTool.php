@@ -36,7 +36,7 @@ class MindSearchEventTableTool
                         'related_citations' => [
                             'type' => 'array',
                             'items' => ['type' => 'string'],
-                            'description' => '关联事件引用的search结果',
+                            'description' => '关联事件quote的search结果',
                         ],
                     ],
                     'required' => ['event_name', 'event_time', 'event_description', 'related_citations'],

@@ -23,7 +23,7 @@ enum TargetType: int
     case DepartmentId = 2;
 
     /**
-     * 群聊.
+     * group chat.
      */
     case GroupId = 3;
 

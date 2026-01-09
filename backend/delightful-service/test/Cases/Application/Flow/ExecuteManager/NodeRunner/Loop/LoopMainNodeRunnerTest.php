@@ -52,7 +52,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
 {
     "id": 1,
     "code": "DELIGHTFUL-FLOW-66ab6425d066a7-xxx",
-    "name": "测试循环节点",
+    "name": "test循环节点",
     "description": "",
     "icon": "",
     "type": 1,

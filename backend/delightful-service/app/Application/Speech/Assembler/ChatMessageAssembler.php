@@ -16,8 +16,8 @@ use Hyperf\Codec\Json;
 use Hyperf\Contract\TranslatorInterface;
 
 /**
- * 聊天message装配器
- * 负责buildASR总结相关的聊天message.
+ * chatmessage装配器
+ * 负责buildASR总结相关的chatmessage.
  */
 readonly class ChatMessageAssembler
 {
@@ -26,12 +26,12 @@ readonly class ChatMessageAssembler
     }
 
     /**
-     * build聊天请求object用于总结task
+     * buildchat请求object用于总结task
      *
      * @param ProcessSummaryTaskDTO $dto 处理总结taskDTO
-     * @param AsrFileDataDTO $audioFileData 音频文件数据
-     * @param null|AsrFileDataDTO $noteFileData 笔记文件数据，可选
-     * @return ChatRequest 聊天请求object
+     * @param AsrFileDataDTO $audioFileData audiofile数据
+     * @param null|AsrFileDataDTO $noteFileData 笔记file数据，可选
+     * @return ChatRequest chat请求object
      */
     public function buildSummaryMessage(ProcessSummaryTaskDTO $dto, AsrFileDataDTO $audioFileData, ?AsrFileDataDTO $noteFileData = null): ChatRequest
     {
@@ -41,7 +41,7 @@ readonly class ChatMessageAssembler
         // buildmessagecontent
         $messageContent = $this->buildMessageContent($dto->modelId, $audioFileData, $noteFileData);
 
-        // build聊天请求数据
+        // buildchat请求数据
         $chatRequestData = [
             'context' => [
                 'language' => $translator->getLocale(),
@@ -64,8 +64,8 @@ readonly class ChatMessageAssembler
      * buildrich_textmessagecontent.
      *
      * @param string $modelId modelID
-     * @param AsrFileDataDTO $fileData 文件数据
-     * @param null|AsrFileDataDTO $noteData 笔记文件数据，可选
+     * @param AsrFileDataDTO $fileData file数据
+     * @param null|AsrFileDataDTO $noteData 笔记file数据，可选
      * @return array messagecontentarray
      */
     public function buildMessageContent(string $modelId, AsrFileDataDTO $fileData, ?AsrFileDataDTO $noteData = null): array
@@ -75,7 +75,7 @@ readonly class ChatMessageAssembler
         $translator->setLocale(CoContext::getLanguage());
         // buildmessagecontent
         if ($noteData !== null && ! empty($noteData->fileName) && ! empty($noteData->filePath)) {
-            // 有笔记时的messagecontent：同时提到录音文件和笔记文件
+            // 有笔记时的messagecontent：同时提到录音file和笔记file
 
             $messageContent = [
                 [
@@ -112,7 +112,7 @@ readonly class ChatMessageAssembler
                 ],
             ];
         } else {
-            // 无笔记时的messagecontent：只提到录音文件
+            // 无笔记时的messagecontent：只提到录音file
             $messageContent = [
                 [
                     'type' => 'text',

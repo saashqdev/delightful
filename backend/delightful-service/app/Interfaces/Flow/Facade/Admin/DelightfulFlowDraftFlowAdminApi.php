@@ -22,7 +22,7 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     protected DelightfulFlowDraftAppService $delightfulFlowDraftAppService;
 
     /**
-     * 保存草稿.
+     * save草稿.
      */
     public function save(string $flowId)
     {

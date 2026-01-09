@@ -18,7 +18,7 @@ enum ImageGenerateSourceEnum: string
     // tool
     case TOOL = 'tool';
 
-    // 流程节点
+    // process节点
     case FLOW_NODE = 'flow_node';
 
     // API

@@ -59,7 +59,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         }
     }
 
-    // create群聊
+    // creategroup chat
     public function createChatGroup(array $groupUserIds, array $inputDepartmentIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $delightfulGroupDTO): array
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
@@ -68,11 +68,11 @@ class DelightfulChatGroupAppService extends AbstractAppService
         $groupUserIds = array_values(array_unique($groupUserIds));
         $users = $this->getGroupAddUsers($groupUserIds, $dataIsolation, $inputDepartmentIds, $chatGroupUserNumLimit);
         $userIds = array_column($users, 'user_id');
-        // 确定群聊名称
+        // 确定group chat名称
         $groupName = $this->getGroupName($delightfulGroupDTO, $userIds, $dataIsolation);
         $delightfulGroupDTO->setGroupName($groupName);
         $delightfulGroupDTO->setMemberLimit($chatGroupUserNumLimit);
-        // create群聊
+        // creategroup chat
         Db::beginTransaction();
         try {
             $groupEntity = $this->delightfulGroupDomainService->createGroup($delightfulGroupDTO, $dataIsolation);
@@ -101,18 +101,18 @@ class DelightfulChatGroupAppService extends AbstractAppService
     }
 
     /**
-     * 群聊加人.
+     * group chat加人.
      */
     public function groupAddUsers(array $groupAddUserIds, array $inputDepartmentIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $delightfulGroupDTO): array
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // 检查群聊是否存在
+        // 检查group chat是否存在
         $groupId = $delightfulGroupDTO->getId();
         $groupEntity = $this->delightfulGroupDomainService->getGroupInfoById($groupId, $dataIsolation);
         if ($groupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        // 当前群聊人数
+        // 当前group chat人数
         $groupUserCount = $this->delightfulGroupDomainService->getGroupUserCount($groupId);
         // 最大人数限制减去当前人数
         $chatGroupUserNumLimit = GroupLimitEnum::NormalGroup->value;
@@ -120,9 +120,9 @@ class DelightfulChatGroupAppService extends AbstractAppService
         // 获取本次需要添加的群成员 (综合 指定的user_id + departmentid下的user)
         $wantJoinUsers = $this->getGroupAddUsers($groupAddUserIds, $dataIsolation, $inputDepartmentIds, $chatGroupUserNumLimit);
         $wantJoinUserIds = array_column($wantJoinUsers, 'user_id');
-        // 判断哪些user已经在群聊中
+        // 判断哪些user已经在group chat中
         $groupUsers = $this->delightfulGroupDomainService->getGroupUserList($groupId, '', $dataIsolation, ['user_id']);
-        // 已经存在于群聊中的userid
+        // 已经存在于group chat中的userid
         $existUserIds = array_column($groupUsers, 'user_id');
         $needAddGroupUserIds = array_diff($wantJoinUserIds, $existUserIds);
         if (empty($needAddGroupUserIds)) {
@@ -158,7 +158,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         ControlMessageType $controlMessageType
     ): array {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // 检查群聊是否存在
+        // 检查group chat是否存在
         $groupId = $delightfulGroupDTO->getId();
         $groupEntity = $this->delightfulGroupDomainService->getGroupInfoById($groupId, $dataIsolation);
         if ($groupEntity === null) {
@@ -180,27 +180,27 @@ class DelightfulChatGroupAppService extends AbstractAppService
         ControlMessageType $controlMessageType
     ): array {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // 检查群聊是否存在
+        // 检查group chat是否存在
         $groupId = $delightfulGroupDTO->getId();
         $groupEntity = $this->delightfulGroupDomainService->getGroupInfoById($groupId, $dataIsolation);
         if ($groupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        // 群主不能退出群聊,需要先转移群主身份
+        // 群主不能退出group chat,需要先转移群主身份
         $groupOwner = $groupEntity->getGroupOwner();
         if ($groupOwner === $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_TRANSFER_OWNER_BEFORE_LEAVE);
         }
-        // 幂等.检查user是否已离开群组
+        // 幂等.检查user是否已离开group
         $isInGroup = $this->delightfulGroupDomainService->isUserInGroup($groupId, $dataIsolation->getCurrentUserId());
         if (! $isInGroup) {
-            // returnuser上次离开群聊的 seq
+            // returnuser上次离开group chat的 seq
             $seqEntity = $this->delightfulGroupDomainService->getGroupControlSeq($groupEntity, $dataIsolation, ControlMessageType::GroupUsersRemove);
             if (isset($seqEntity)) {
                 return $this->noticeGroupChangeSeq($seqEntity);
             }
         }
-        // 退出群聊
+        // 退出group chat
         $userSeq = $this->groupRemoveUsers($dataIsolation, $groupEntity, $userIds, $controlMessageType);
         return $this->noticeGroupChangeSeq($userSeq);
     }
@@ -217,22 +217,22 @@ class DelightfulChatGroupAppService extends AbstractAppService
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $userIds = array_column($groupUsers, 'user_id');
         $controlMessageType = ControlMessageType::GroupDisband;
-        // 检查群聊是否存在
+        // 检查group chat是否存在
         $groupId = $delightfulGroupDTO->getId();
         $groupEntity = $this->delightfulGroupDomainService->getGroupInfoById($groupId, $dataIsolation);
         if ($groupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        // 检查群组是否已解散
+        // 检查group是否已解散
         if ($groupEntity->getGroupStatus() === GroupStatusEnum::Disband) {
-            // 找到该user的解散群组seq
+            // 找到该user的解散groupseq
             $seqEntity = $this->delightfulGroupDomainService->getGroupControlSeq($groupEntity, $dataIsolation, ControlMessageType::GroupDisband);
-            // 如果已经存在群聊解散的 seq,则直接return
+            // 如果已经存在group chat解散的 seq,则直接return
             if (isset($seqEntity)) {
                 return $this->noticeGroupChangeSeq($seqEntity);
             }
         }
-        // 只能群主解散群聊
+        // 只能群主解散group chat
         $groupOwner = $groupEntity->getGroupOwner();
         if ($groupOwner !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_ONLY_OWNER_CAN_DISBAND);
@@ -240,7 +240,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         Db::beginTransaction();
         try {
             $userSeq = $this->groupRemoveUsers($dataIsolation, $groupEntity, $userIds, $controlMessageType);
-            // 删除群聊
+            // deletegroup chat
             $this->delightfulGroupDomainService->deleteGroup($groupEntity);
             Db::commit();
         } catch (BusinessException $exception) {
@@ -262,7 +262,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR, 'chat.common.param_error', ['param' => 'group_name, group_avatar']);
         }
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // 检查群聊是否存在
+        // 检查group chat是否存在
         $groupId = $delightfulGroupDTO->getId();
         $groupEntity = $this->delightfulGroupDomainService->getGroupInfoById($groupId, $dataIsolation);
         if ($groupEntity === null) {
@@ -272,7 +272,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         $groupEntity->setGroupName($delightfulGroupDTO->getGroupName());
         Db::beginTransaction();
         try {
-            // 更新群信息
+            // 更新群info
             $groupEntity = $this->delightfulGroupDomainService->GroupUpdateInfo($delightfulGroupDTO, $dataIsolation);
             // generate群更新的 seq 并分发
             $seqContent = [
@@ -326,7 +326,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
 
     public function groupTransferOwner(DelightfulGroupEntity $delightfulGroupDTO, DelightfulUserAuthorization $userAuthorization): array
     {
-        // 检查群聊是否存在
+        // 检查group chat是否存在
         $groupId = $delightfulGroupDTO->getId();
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $groupEntity = $this->delightfulGroupDomainService->getGroupInfoById($groupId, $dataIsolation);
@@ -360,7 +360,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
     }
 
     /**
-     * 群聊减人.
+     * group chat减人.
      */
     protected function groupRemoveUsers(
         DataIsolation $dataIsolation,
@@ -368,17 +368,17 @@ class DelightfulChatGroupAppService extends AbstractAppService
         array $userIds,
         ControlMessageType $controlMessageType
     ): DelightfulSeqEntity {
-        // query群聊中的user
+        // querygroup chat中的user
         $groupUsers = $this->delightfulGroupDomainService->getGroupUserList($groupEntity->getId(), '', $dataIsolation, ['user_id']);
         $groupUsers = array_column($groupUsers, 'user_id');
-        // 判断要移除的user是否在群聊中
+        // 判断要移除的user是否在group chat中
         $removeUserIds = array_intersect($userIds, $groupUsers);
         if (empty($removeUserIds)) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NO_USER_TO_REMOVE);
         }
         Db::beginTransaction();
         try {
-            // 往群聊中减少user
+            // 往group chat中减少user
             $this->delightfulGroupDomainService->removeUsersFromGroup($groupEntity, $removeUserIds);
             // 移除这些user的conversation窗口
             $this->delightfulConversationDomainService->batchDeleteGroupConversationByUserIds($groupEntity, $removeUserIds);
@@ -428,7 +428,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
 
     private function getGroupName(DelightfulGroupEntity $delightfulGroupDTO, array $userIds, DataIsolation $dataIsolation): string
     {
-        // 如果群聊名称为null,获取群主 + 20 个群成员的nickname
+        // 如果group chat名称为null,获取群主 + 20 个群成员的nickname
         if (empty($delightfulGroupDTO->getGroupName())) {
             $someUserIds = array_slice($userIds, 0, 20);
             $someUserIds[] = $dataIsolation->getCurrentUserId();
@@ -456,7 +456,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         DataIsolation $dataIsolation,
         ControlMessageType $controlMessageType
     ): DelightfulSeqEntity {
-        // 往群聊中添加user
+        // 往group chat中添加user
         $this->delightfulGroupDomainService->addUsersToGroup($groupEntity, $userIds);
         // 为新增的成员createconversation窗口
         $this->delightfulConversationDomainService->batchCreateGroupConversationByUserIds($groupEntity, $userIds);

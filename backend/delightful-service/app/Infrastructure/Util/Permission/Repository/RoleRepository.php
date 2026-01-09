@@ -17,12 +17,12 @@ use DateTime;
 use function Hyperf\Support\now;
 
 /**
- * 角色仓库implement.
+ * role仓库implement.
  */
 class RoleRepository implements RoleRepositoryInterface
 {
     /**
-     * 保存角色.
+     * saverole.
      */
     public function save(string $organizationCode, RoleEntity $roleEntity): RoleEntity
     {
@@ -58,7 +58,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * according toIDget角色.
+     * according toIDgetrole.
      */
     public function getById(string $organizationCode, int $id): ?RoleEntity
     {
@@ -70,7 +70,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * according tonameget角色.
+     * according tonamegetrole.
      */
     public function getByName(string $organizationCode, string $name): ?RoleEntity
     {
@@ -82,12 +82,12 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * query角色list.
+     * queryrolelist.
      */
     public function queries(string $organizationCode, Page $page, ?array $filters = null): array
     {
         $query = $this->roleQuery($organizationCode);
-        // 默认只query需要展示的角色
+        // 默认只query需要展示的role
         $query->where('is_display', 1);
 
         // 应用filter条件
@@ -120,7 +120,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * delete角色.
+     * deleterole.
      */
     public function delete(string $organizationCode, RoleEntity $roleEntity): void
     {
@@ -134,7 +134,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 为角色分配user.
+     * 为role分配user.
      */
     public function assignUsers(string $organizationCode, int $roleId, array $userIds, ?string $assignedBy = null): void
     {
@@ -148,7 +148,7 @@ class RoleRepository implements RoleRepositoryInterface
         $toAdd = array_diff($userIds, $existingUserIds);
         $toRemove = array_diff($existingUserIds, $userIds);
 
-        // 移除不再属于该角色的user
+        // 移除不再属于该role的user
         if (! empty($toRemove)) {
             $this->roleUserQuery($organizationCode)
                 ->where('role_id', $roleId)
@@ -176,7 +176,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 移除角色user.
+     * 移除roleuser.
      */
     public function removeUsers(string $organizationCode, int $roleId, array $userIds): void
     {
@@ -187,7 +187,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * get角色的userlist.
+     * getrole的userlist.
      */
     public function getRoleUsers(string $organizationCode, int $roleId): array
     {
@@ -198,7 +198,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 批量get角色的userlist，return [roleId => userIds[]]。
+     * 批量getrole的userlist，return [roleId => userIds[]]。
      */
     public function getRoleUsersMap(string $organizationCode, array $roleIds): array
     {
@@ -226,7 +226,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * getuser的角色list.
+     * getuser的rolelist.
      */
     public function getUserRoles(string $organizationCode, string $userId): array
     {
@@ -241,7 +241,7 @@ class RoleRepository implements RoleRepositoryInterface
 
         $models = $this->roleQuery($organizationCode)
             ->whereIn('id', $roleIds)
-            ->where('status', RoleModel::STATUS_ENABLED) // 只return启用的角色
+            ->where('status', RoleModel::STATUS_ENABLED) // 只return启用的role
             ->get();
 
         $roles = [];
@@ -296,7 +296,7 @@ class RoleRepository implements RoleRepositoryInterface
         // 从modelgetpermissionarray
         $entity->setPermissions($model->getPermissions());
 
-        // getpermission标签
+        // getpermissiontag
         $entity->setPermissionTag($model->getPermissionTag());
 
         // is_display

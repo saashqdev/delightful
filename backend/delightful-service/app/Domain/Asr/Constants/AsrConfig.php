@@ -36,12 +36,12 @@ class AsrConfig
     public const int MOCK_POLLING_TTL = 600;
 
     /**
-     * 沙箱音频合并的最长等待time（秒）.
+     * 沙箱audio合并的最长等待time（秒）.
      */
     public const int SANDBOX_MERGE_TIMEOUT = 1200;
 
     /**
-     * 音频文件recordquery超时（秒）.
+     * audiofilerecordquery超时（秒）.
      */
     public const int FILE_RECORD_QUERY_TIMEOUT = 120;
 
@@ -77,17 +77,17 @@ class AsrConfig
     // ==================== logrecordconfiguration ====================
 
     /**
-     * 沙箱音频合并logrecord间隔（秒）.
+     * 沙箱audio合并logrecord间隔（秒）.
      */
     public const int SANDBOX_MERGE_LOG_INTERVAL = 10;
 
     /**
-     * 沙箱音频合并logrecord频率（每N次尝试record一次）.
+     * 沙箱audio合并logrecord频率（每N次尝试record一次）.
      */
     public const int SANDBOX_MERGE_LOG_FREQUENCY = 10;
 
     /**
-     * 音频文件recordquerylogrecord频率（每N次尝试record一次）.
+     * audiofilerecordquerylogrecord频率（每N次尝试record一次）.
      */
     public const int FILE_RECORD_QUERY_LOG_FREQUENCY = 3;
 
@@ -106,7 +106,7 @@ class AsrConfig
     // ==================== 定时taskconfiguration ====================
 
     /**
-     * 心跳监控定时task互斥锁过期time（秒）.
+     * 心跳monitor定时task互斥锁过期time（秒）.
      */
     public const int HEARTBEAT_MONITOR_MUTEX_EXPIRES = 60;
 }

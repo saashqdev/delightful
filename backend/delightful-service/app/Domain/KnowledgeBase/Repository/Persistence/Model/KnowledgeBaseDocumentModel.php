@@ -23,9 +23,9 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property bool $enabled 是否启用
  * @property int $doc_type 文档type
  * @property array $doc_metadata 文档元数据
- * @property DocumentFileInterface $document_file 文档文件info
+ * @property DocumentFileInterface $document_file 文档fileinfo
  * @property string $third_platform_type 第三方平台type
- * @property string $third_file_id 第三方文件ID
+ * @property string $third_file_id 第三方fileID
  * @property int $sync_status syncstatus
  * @property int $sync_times sync次数
  * @property string $sync_status_message syncstatusmessage

@@ -24,7 +24,7 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * ASR 录音心跳监控定时task.
+ * ASR 录音心跳monitor定时task.
  */
 #[Crontab(
     rule: '* * * * *',                    // 每分钟执行一次
@@ -49,12 +49,12 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * 执行心跳监控task.
+     * 执行心跳monitortask.
      */
     public function execute(): void
     {
         try {
-            $this->logger->info('开始执行 ASR 录音心跳监控task');
+            $this->logger->info('开始执行 ASR 录音心跳monitortask');
 
             // 扫描所有心跳 key（use RedisUtil::scanKeys 防止阻塞）
             $keys = RedisUtil::scanKeys(
@@ -77,11 +77,11 @@ class AsrHeartbeatMonitor
                 }
             }
 
-            $this->logger->info('ASR 录音心跳监控task执行完成', [
+            $this->logger->info('ASR 录音心跳monitortask执行complete', [
                 'timeout_count' => $timeoutCount,
             ]);
         } catch (Throwable $e) {
-            $this->logger->error('ASR 录音心跳监控task执行fail', [
+            $this->logger->error('ASR 录音心跳monitortask执行fail', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -174,7 +174,7 @@ class AsrHeartbeatMonitor
      */
     private function shouldTriggerAutoSummary(AsrTaskStatusDTO $taskStatus): bool
     {
-        // 如果已取消，不触发
+        // 如果已cancel，不触发
         if ($taskStatus->recordingStatus === AsrRecordingStatusEnum::CANCELED->value) {
             return false;
         }
@@ -211,9 +211,9 @@ class AsrHeartbeatMonitor
     private function triggerAutoSummary(AsrTaskStatusDTO $taskStatus): void
     {
         try {
-            // 幂等性check：如果task已完成，跳过处理
+            // 幂等性check：如果task已complete，跳过处理
             if ($taskStatus->isSummaryCompleted()) {
-                $this->logger->info('task已完成，跳过心跳超时处理', [
+                $this->logger->info('task已complete，跳过心跳超时处理', [
                     'task_key' => $taskStatus->taskKey,
                     'audio_file_id' => $taskStatus->audioFileId,
                     'status' => $taskStatus->status->value,

@@ -72,9 +72,9 @@ class WeChatRobotChat implements ThirdPlatformChatInterface
             return;
         }
         $content = $message->getContent();
-        // 由于微信不支持富文本or markdown 中支持image，所以need在这里将 markdown 中的image和视频直接移除，不need展示
+        // 由于微信不支持rich textor markdown 中支持image，所以need在这里将 markdown 中的image和video直接移除，不need展示
         $content = preg_replace('/!\[.*?\]\((.*?)\)/', '', $content);
-        $content = preg_replace('/\[这里有one视频]\((.*?)\)/', '', $content);
+        $content = preg_replace('/\[这里有onevideo]\((.*?)\)/', '', $content);
 
         $api = $this->workApplication->getClient();
         $options = [

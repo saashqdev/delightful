@@ -15,10 +15,10 @@ class ThirdPlatformDocumentFileDTO extends AbstractDocumentFileDTO
 
     public string $thirdFileId;
 
-    // 第third-party文件type，自定义字段，由第third-party平台setting
+    // 第third-partyfiletype，customize字段，由第third-party平台setting
     public ?string $thirdFileType = null;
 
-    // 第third-party文件扩展名，自定义字段，由第third-party平台setting
+    // 第third-partyfileextension名，customize字段，由第third-party平台setting
     public ?string $thirdFileExtensionName = null;
 
     public function getThirdFileId(): string

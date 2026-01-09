@@ -19,7 +19,7 @@ enum ToolSource: int
     case FlowTool = 1;
 
     /**
-     * get标签名称.
+     * get标signature称.
      */
     public function getLabel(): string
     {
